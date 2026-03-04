@@ -509,7 +509,7 @@ function startTimer(ms,onTick,onDone){
     timerVal-=50;
     if(timerVal<=0){timerVal=0;}
     var secs=Math.ceil(timerVal/1000);
-    if(secs!==_lastSec){_lastSec=secs;sesSayaç();}
+    if(secs!==_lastSec){_lastSec=secs;if(secs<=5)sesSayaç();}
     circle.textContent=secs;
     var pct=timerVal/timerMax;
     if(pct>0.5){circle.style.borderColor='#06d6a0';circle.style.color='#06d6a0';}
@@ -1356,8 +1356,8 @@ window.addEventListener('beforeunload',function(){SCORM.fin();});
 
 // ==================== INIT ====================
 SCORM.init();
-// Hash-based deep link (hub integration)
-(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=0&&n<=5)setTimeout(function(){startGame(n);},200);}})();
+// Hash-based deep link (hub integration) — sadece oyun kartını highlight eder, kurulum ekranı gösterilir
+(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);setTimeout(function(){document.querySelectorAll('.game-card').forEach(function(c){if(c.getAttribute('onclick')==='startGame('+n+')'){c.style.border='3px solid #06d6a0';c.style.boxShadow='0 0 20px rgba(6,214,160,0.5)';c.scrollIntoView({behavior:'smooth',block:'center'});}});},200);}})();
 </script>
 </body>
 </html>
