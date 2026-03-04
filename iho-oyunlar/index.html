@@ -41,6 +41,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,
 .group-hf .game-card:hover{border-top-color:#34d399}
 .group-sa .game-card{border-top:2px solid rgba(239,68,68,0.5)}
 .group-sa .game-card:hover{border-top-color:#f87171}
+.group-ar .game-card{border-top:2px solid rgba(245,158,11,0.5)}
+.group-ar .game-card:hover{border-top-color:#fbbf24}
 
 /* ── GAME OVERLAY ── */
 #overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;flex-direction:column}
@@ -70,7 +72,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,
   <div class="hub-badge">İHO · Arapça · 7. Sınıf</div>
   <div class="hub-title">İHO 7. Sınıf 1. Ünite Oyunlar</div>
   <div class="hub-subtitle">ألعاب اللغة العربية — الوحدة الأولى — الصف السابع</div>
-  <div class="hub-count">16 benzersiz oyun</div>
+  <div class="hub-count">21 benzersiz oyun</div>
 </div>
 
 <!-- SECTION 1: KELİME AVCISI -->
@@ -199,6 +201,47 @@ body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,
     <div class="card-name">مَنْ أنا؟</div>
     <div class="card-tr">Kim benim? Buzzer oyunu</div>
     <span class="card-badge badge-duo">2 Kişi</span>
+  </div>
+
+</div>
+
+<!-- SECTION 4: ARCADE OYUNLAR -->
+<div class="section-label">Arcade Oyunlar · Aksiyon & Macera</div>
+<div class="games-grid group-ar">
+
+  <div class="game-card" onclick="openGame('../arcade-oyunlar/index.html#g1','اضرب الخُلد')">
+    <span class="card-icon">🔨</span>
+    <div class="card-name">اضرب الخُلد</div>
+    <div class="card-tr">Köstebek vur — doğru kelimeyi ez</div>
+    <span class="card-badge badge-duo">Solo / 2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../arcade-oyunlar/index.html#g2','فرقعة البالونات')">
+    <span class="card-icon">🎈</span>
+    <div class="card-name">فرقعة البالونات</div>
+    <div class="card-tr">Balon patlatma — doğru kelimeyi yakala</div>
+    <span class="card-badge badge-duo">Solo / 2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../arcade-oyunlar/index.html#g3','الأفعى الجائعة')">
+    <span class="card-icon">🐍</span>
+    <div class="card-name">الأفعى الجائعة</div>
+    <div class="card-tr">Yılan oyunu — doğru kelimeyi ye</div>
+    <span class="card-badge badge-duo">Solo / 2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../arcade-oyunlar/index.html#g4','ركلات الترجيح')">
+    <span class="card-icon">⚽</span>
+    <div class="card-name">ركلات الترجيح</div>
+    <div class="card-tr">Penaltı atışları — bilgi yarışması</div>
+    <span class="card-badge badge-duo">Solo / 2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../arcade-oyunlar/index.html#g5','برج الكلمات')">
+    <span class="card-icon">🧱</span>
+    <div class="card-name">برج الكلمات</div>
+    <div class="card-tr">Kelime kulesi — doğru blokları yığ</div>
+    <span class="card-badge badge-duo">Solo / 2 Kişi</span>
   </div>
 
 </div>
