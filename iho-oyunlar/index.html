@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İHO 7. Sınıf 1. Ünite Oyunlar</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(135deg,#0f0c29,#1a1035,#0f1323);min-height:100vh;color:#fff;overflow-x:hidden}
+
+/* ── HEADER ── */
+.hub-header{text-align:center;padding:40px 20px 20px}
+.hub-badge{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:5px 18px;border-radius:100px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.hub-title{font-size:clamp(22px,4vw,40px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:8px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hub-subtitle{font-family:'Arakom',sans-serif;color:rgba(255,255,255,0.55);font-size:15px;margin-bottom:4px;direction:rtl}
+.hub-count{color:rgba(255,255,255,0.35);font-size:12px;margin-top:6px}
+
+/* ── SECTION LABELS ── */
+.section-label{max-width:1100px;margin:24px auto 8px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:10px}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.1)}
+
+/* ── GAME GRID ── */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;max-width:1100px;margin:0 auto;padding:0 16px 40px}
+
+/* ── GAME CARD ── */
+.game-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px 16px;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.game-card:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.25);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.4)}
+.game-card .card-icon{font-size:2.4em;margin-bottom:10px;display:block;line-height:1}
+.game-card .card-name{font-family:'Arakom',sans-serif;font-size:1.05em;font-weight:bold;margin-bottom:5px;direction:rtl;color:#fff;line-height:1.3}
+.game-card .card-tr{font-size:11px;color:rgba(255,255,255,0.45);margin-bottom:6px;line-height:1.4}
+.game-card .card-badge{display:inline-block;font-size:10px;padding:2px 10px;border-radius:100px;font-weight:600;letter-spacing:.04em}
+.badge-solo{background:rgba(99,102,241,0.2);color:#818cf8}
+.badge-duo{background:rgba(239,68,68,0.2);color:#f87171}
+
+/* color accent per group */
+.group-ka .game-card{border-top:2px solid rgba(99,102,241,0.5)}
+.group-ka .game-card:hover{border-top-color:#818cf8}
+.group-hf .game-card{border-top:2px solid rgba(16,185,129,0.5)}
+.group-hf .game-card:hover{border-top-color:#34d399}
+.group-sa .game-card{border-top:2px solid rgba(239,68,68,0.5)}
+.group-sa .game-card:hover{border-top-color:#f87171}
+
+/* ── GAME OVERLAY ── */
+#overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:#000;flex-direction:column}
+#overlay.active{display:flex}
+.overlay-bar{height:50px;background:#111;display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;border-bottom:1px solid #222}
+.overlay-back{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:7px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;transition:background .2s;white-space:nowrap}
+.overlay-back:hover{background:rgba(255,255,255,0.2)}
+.overlay-game-name{font-size:13px;color:rgba(255,255,255,0.55);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#gameFrame{flex:1;border:none;width:100%;background:#1a1a2e}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .games-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:0 10px 30px}
+  .game-card{padding:14px 10px}
+  .game-card .card-icon{font-size:2em}
+  .game-card .card-name{font-size:.95em}
+}
+@media(max-width:360px){
+  .games-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hub-header">
+  <div class="hub-badge">İHO · Arapça · 7. Sınıf</div>
+  <div class="hub-title">İHO 7. Sınıf 1. Ünite Oyunlar</div>
+  <div class="hub-subtitle">ألعاب اللغة العربية — الوحدة الأولى — الصف السابع</div>
+  <div class="hub-count">16 benzersiz oyun</div>
+</div>
+
+<!-- SECTION 1: KELİME AVCISI -->
+<div class="section-label">Kelime Avcısı · Alıştırma Oyunları</div>
+<div class="games-grid group-ka">
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g1','لعبة المفردات')">
+    <span class="card-icon">🎯</span>
+    <div class="card-name">لعبة المفردات</div>
+    <div class="card-tr">Kelime-resim eşleştirme</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g2','رتّب يومك')">
+    <span class="card-icon">📋</span>
+    <div class="card-name">رتّب يومك</div>
+    <div class="card-tr">Günlük aktiviteleri sırala</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g3','كم الساعة؟')">
+    <span class="card-icon">🕐</span>
+    <div class="card-name">كم الساعة؟</div>
+    <div class="card-tr">Saati oku</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g4','اختر الفعل الصحيح')">
+    <span class="card-icon">📝</span>
+    <div class="card-name">اختر الفعل الصحيح</div>
+    <div class="card-tr">Doğru fiili seç</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g5','أكمل الحوار')">
+    <span class="card-icon">💬</span>
+    <div class="card-name">أكمل الحوار</div>
+    <div class="card-tr">Diyalogu tamamla</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../kelime-avcisi/index.html#g6','لعبة الذاكرة')">
+    <span class="card-icon">🧠</span>
+    <div class="card-name">لعبة الذاكرة</div>
+    <div class="card-tr">Hafıza kartları</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+</div>
+
+<!-- SECTION 2: HARF FIRTINASI -->
+<div class="section-label">Harf Fırtınası · Kelime &amp; Cümle Oyunları</div>
+<div class="games-grid group-hf">
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g1','كلمات مقلوبة')">
+    <span class="card-icon">🔤</span>
+    <div class="card-name">كلمات مقلوبة</div>
+    <div class="card-tr">Harfleri sırala, kelime bul</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g2','صنِّف الطعام')">
+    <span class="card-icon">📂</span>
+    <div class="card-name">صنِّف الطعام</div>
+    <div class="card-tr">Yiyecekleri öğüne sınıfla</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g3','ابنِ الجملة')">
+    <span class="card-icon">🏗️</span>
+    <div class="card-name">ابنِ الجملة</div>
+    <div class="card-tr">Kelimelerden cümle kur</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g4','اقصف الخطأ')">
+    <span class="card-icon">🎯</span>
+    <div class="card-name">اقصف الخطأ</div>
+    <div class="card-tr">Gruba uymayan kelimeyi bul</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g5','الوقت يضغط')">
+    <span class="card-icon">⏱️</span>
+    <div class="card-name">الوقت يضغط</div>
+    <div class="card-tr">Hızlı cevap ver, puan kazan</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../harf-firtinasi/index.html#g6','رحلة اليوم')">
+    <span class="card-icon">🗺️</span>
+    <div class="card-name">رحلة اليوم</div>
+    <div class="card-tr">Fatih'in günü — soru-cevap</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </div>
+
+</div>
+
+<!-- SECTION 3: SINIF ARENASı -->
+<div class="section-label">Sınıf Arenası · 2 Oyunculu Yarışma</div>
+<div class="games-grid group-sa">
+
+  <div class="game-card" onclick="openGame('../sinif-arenasi/index.html#g0','سباق الإجابة')">
+    <span class="card-icon">🏎️</span>
+    <div class="card-name">سباق الإجابة</div>
+    <div class="card-tr">Çoktan seçmeli yarış</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../sinif-arenasi/index.html#g1','صح أم خطأ')">
+    <span class="card-icon">✅</span>
+    <div class="card-name">صح أم خطأ</div>
+    <div class="card-tr">Doğru / Yanlış yarışı</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../sinif-arenasi/index.html#g4','الكلمة الناقصة')">
+    <span class="card-icon">✏️</span>
+    <div class="card-name">الكلمة الناقصة</div>
+    <div class="card-tr">Cümleyi tamamla yarışı</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </div>
+
+  <div class="game-card" onclick="openGame('../sinif-arenasi/index.html#g5','مَنْ أنا؟')">
+    <span class="card-icon">🔔</span>
+    <div class="card-name">مَنْ أنا؟</div>
+    <div class="card-tr">Kim benim? Buzzer oyunu</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </div>
+
+</div>
+
+<!-- GAME OVERLAY -->
+<div id="overlay">
+  <div class="overlay-bar">
+    <button class="overlay-back" onclick="closeGame()">← Tüm Oyunlara Dön</button>
+    <span class="overlay-game-name" id="overlayGameName"></span>
+  </div>
+  <iframe id="gameFrame" title="Oyun" allowfullscreen></iframe>
+</div>
+
+<script>
+function openGame(url, name) {
+  document.getElementById('overlayGameName').textContent = name || '';
+  document.getElementById('gameFrame').src = url;
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGame() {
+  document.getElementById('overlay').classList.remove('active');
+  document.getElementById('gameFrame').src = 'about:blank';
+  document.body.style.overflow = '';
+}
+
+// ESC key closes overlay
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGame();
+});
+</script>
+</body>
+</html>

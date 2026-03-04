@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سباق الصف - وحدة ١: ماذا فعلت اليوم؟</title>
+<style>
+@font-face {
+  font-family: 'Arakom';
+  src: url('Arakom-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'Arakom';
+  src: url('Arakom-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{font-size:clamp(16px,1.8vw,26px);}body{width:100%;height:100%;overflow:hidden;background:#0f0e17;color:#fffffe;font-family:'Arakom',Arial,sans-serif;direction:rtl;}
+.screen{display:none;width:100%;height:100%;position:absolute;top:0;left:0;}
+.screen.active{display:flex;flex-direction:column;}
+
+/* SETUP SCREEN */
+#screen-setup{align-items:center;justify-content:flex-start;overflow-y:auto;padding:20px;}
+.setup-title{font-size:2rem;font-weight:bold;color:#fffffe;text-align:center;margin-bottom:8px;}
+.setup-subtitle{font-size:1rem;color:#a8a4c0;text-align:center;margin-bottom:20px;}
+.setup-section{width:100%;max-width:800px;margin-bottom:16px;}
+.setup-label{font-size:1rem;color:#a8a4c0;margin-bottom:8px;}
+.player-toggle{display:flex;gap:12px;justify-content:center;margin-bottom:16px;}
+.player-btn{padding:12px 32px;font-size:1.1rem;font-family:'Arakom',Arial,sans-serif;border:2px solid #4361ee;border-radius:12px;background:transparent;color:#fffffe;cursor:pointer;transition:all 0.2s;}
+.player-btn.active{background:#4361ee;color:#fff;}
+.player-btn:last-child{border-color:#ef233c;}
+.player-btn:last-child.active{background:#ef233c;}
+.names-row{display:flex;gap:12px;justify-content:center;margin-bottom:16px;}
+.name-input-wrap{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.name-input-wrap label{font-size:0.9rem;color:#a8a4c0;}
+.name-input{padding:10px 16px;font-size:1rem;font-family:'Arakom',Arial,sans-serif;border-radius:10px;border:2px solid #333;background:#1a1a2e;color:#fffffe;text-align:center;width:160px;}
+.name-input.p1{border-color:#4361ee;}
+.name-input.p2{border-color:#ef233c;}
+.name-input:focus{outline:none;}
+.games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%;max-width:800px;}
+.game-card{background:#1a1a2e;border:2px solid #333;border-radius:16px;padding:20px 14px;cursor:pointer;transition:all 0.2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:110px;justify-content:center;}
+.game-card:hover{border-color:#4361ee;background:#1e1e3a;transform:translateY(-2px);}
+.game-card .game-icon{font-size:2rem;}
+.game-card .game-name{font-size:1rem;font-weight:bold;color:#fffffe;}
+.game-card .game-desc{font-size:0.75rem;color:#a8a4c0;}
+
+/* GAME SCREEN */
+#screen-game{background:#0f0e17;}
+.scoreboard{display:flex;align-items:center;background:#1a1a2e;padding:10px 16px;gap:10px;flex-shrink:0;}
+.score-block{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.score-name{font-size:0.85rem;color:#a8a4c0;}
+.score-val{font-size:1.8rem;font-weight:bold;}
+.score-val.p1{color:#4361ee;}
+.score-val.p2{color:#ef233c;}
+.score-bar-wrap{width:100%;height:6px;background:#333;border-radius:3px;overflow:hidden;}
+.score-bar{height:100%;border-radius:3px;transition:width 0.4s;}
+.score-bar.p1{background:#4361ee;}
+.score-bar.p2{background:#ef233c;}
+.timer-block{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
+.timer-circle{width:60px;height:60px;border-radius:50%;border:4px solid #06d6a0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:bold;color:#06d6a0;transition:border-color 0.3s, color 0.3s;}
+.timer-label{font-size:0.7rem;color:#a8a4c0;}
+.game-body{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.question-area{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;}
+.q-progress{font-size:0.85rem;color:#a8a4c0;margin-bottom:8px;}
+.q-text{font-size:1.5rem;font-weight:bold;color:#fffffe;max-width:700px;line-height:1.5;}
+.q-category{font-size:0.9rem;color:#a8a4c0;margin-bottom:10px;}
+.answer-panels{display:flex;gap:0;flex-shrink:0;}
+.player-panel{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;}
+.player-panel.p1{background:#0d1b4b;}
+.player-panel.p2{background:#2d0a12;}
+.panel-label{font-size:0.8rem;font-weight:bold;text-align:center;padding:4px;border-radius:6px;}
+.panel-label.p1{color:#4361ee;}
+.panel-label.p2{color:#ef233c;}
+.opt-btn{width:100%;padding:12px 8px;font-size:1rem;font-family:'Arakom',Arial,sans-serif;border:2px solid #333;border-radius:10px;background:#1a1a2e;color:#fffffe;cursor:pointer;transition:all 0.15s;text-align:center;min-height:44px;}
+.opt-btn:hover:not(:disabled){background:#252540;border-color:#555;}
+.opt-btn.p1{border-color:#4361ee;}
+.opt-btn.p2{border-color:#ef233c;}
+.opt-btn:disabled{opacity:0.5;cursor:default;}
+.opt-btn.correct{background:#06d6a0;border-color:#06d6a0;color:#0f0e17;}
+.opt-btn.wrong{background:#ef233c;border-color:#ef233c;color:#fff;}
+.tf-btn{width:100%;padding:20px;font-size:2rem;border-radius:12px;border:none;cursor:pointer;font-family:'Arakom',Arial,sans-serif;min-height:70px;transition:all 0.15s;}
+.tf-btn.true-btn{background:#06d6a0;color:#0f0e17;}
+.tf-btn.false-btn{background:#ef233c;color:#fff;}
+.tf-btn:disabled{opacity:0.4;cursor:default;}
+
+/* BUZZER */
+.buzzer-btn{width:100%;padding:18px;font-size:1.2rem;font-weight:bold;background:#ffd60a;color:#0f0e17;border:none;border-radius:12px;cursor:pointer;font-family:'Arakom',Arial,sans-serif;min-height:60px;transition:all 0.15s;}
+.buzzer-btn:active{transform:scale(0.96);}
+.buzzer-btn:disabled{background:#555;color:#888;cursor:default;}
+.buzzer-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+
+/* LETTER RACE */
+.letter-area{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px;}
+.letter-slots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+.letter-slot{width:44px;height:44px;border:2px dashed #555;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:bold;background:#1a1a2e;cursor:pointer;transition:all 0.15s;}
+.letter-slot.filled{border-style:solid;}
+.letter-slot.p1filled{border-color:#4361ee;color:#4361ee;}
+.letter-slot.p2filled{border-color:#ef233c;color:#ef233c;}
+.letter-tiles{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:6px;}
+.letter-tile{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:bold;cursor:pointer;transition:all 0.15s;border:2px solid transparent;}
+.letter-tile.p1tile{background:#1e2d6b;border-color:#4361ee;color:#fffffe;}
+.letter-tile.p2tile{background:#3d1020;border-color:#ef233c;color:#fffffe;}
+.letter-tile.used{opacity:0.3;cursor:default;}
+.letter-tile:hover:not(.used){transform:scale(1.1);}
+.g3-panels{display:flex;gap:0;flex:1;}
+.g3-panel{flex:1;padding:10px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.g3-panel.p1{background:#0d1b4b;}
+.g3-panel.p2{background:#2d0a12;}
+.g3-done-badge{font-size:1.5rem;color:#06d6a0;font-weight:bold;}
+
+/* ROUND BANNER */
+#round-banner{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1a1a2e;border:3px solid #4361ee;border-radius:20px;padding:30px 50px;text-align:center;z-index:100;box-shadow:0 8px 40px rgba(0,0,0,0.7);}
+#round-banner.show{display:block;}
+#round-banner .banner-title{font-size:2rem;font-weight:bold;margin-bottom:8px;}
+#round-banner .banner-sub{font-size:1.1rem;color:#a8a4c0;}
+#round-banner .banner-ex{font-size:0.9rem;color:#ffd60a;margin-top:8px;}
+
+/* FEEDBACK OVERLAY */
+#feedback-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:90;pointer-events:none;align-items:center;justify-content:center;font-size:8rem;}
+#feedback-overlay.show{display:flex;}
+#feedback-overlay.correct-flash{background:rgba(6,214,160,0.15);}
+#feedback-overlay.wrong-flash{background:rgba(239,35,60,0.15);}
+
+/* RESULT SCREEN */
+#screen-result{align-items:center;justify-content:center;flex-direction:column;gap:24px;padding:30px;}
+.result-title{font-size:2.5rem;font-weight:bold;text-align:center;}
+.result-winner{font-size:3rem;font-weight:bold;text-align:center;margin:10px 0;}
+.result-scores{display:flex;gap:40px;justify-content:center;}
+.result-score-block{text-align:center;}
+.result-score-block .rs-name{font-size:1.1rem;color:#a8a4c0;}
+.result-score-block .rs-val{font-size:3rem;font-weight:bold;}
+.result-score-block.p1 .rs-val{color:#4361ee;}
+.result-score-block.p2 .rs-val{color:#ef233c;}
+.result-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+.result-btn{padding:14px 28px;font-size:1.1rem;font-family:'Arakom',Arial,sans-serif;border-radius:12px;border:none;cursor:pointer;font-weight:bold;}
+.result-btn.primary{background:#4361ee;color:#fff;}
+.result-btn.secondary{background:#333;color:#fffffe;}
+
+/* CLUE DISPLAY */
+.clue-display{display:flex;flex-direction:column;gap:8px;align-items:center;}
+.clue-item{font-size:1.1rem;padding:8px 20px;background:#1a1a2e;border-radius:10px;border-right:4px solid #ffd60a;}
+.clue-counter{font-size:0.85rem;color:#a8a4c0;}
+.next-clue-btn{padding:12px 28px;font-size:1rem;font-family:'Arakom',Arial,sans-serif;background:#ffd60a;color:#0f0e17;border:none;border-radius:10px;cursor:pointer;font-weight:bold;margin-top:8px;}
+
+/* MISC */
+.separator{width:2px;background:#333;flex-shrink:0;}
+.q-image-wrap{margin:10px 0;}
+.answered-mark{font-size:1.5rem;text-align:center;margin-top:6px;}
+@media(max-width:600px){
+  .games-grid{grid-template-columns:repeat(2,1fr);}
+  .q-text{font-size:1.1rem;}
+  .timer-circle{width:48px;height:48px;font-size:1.1rem;}
+  .score-val{font-size:1.3rem;}
+}
+</style>
+<script>
+// ── SES & KONUŞMA SİSTEMİ ──────────────────────────────────
+let _actx;
+function _ac() { if(!_actx) _actx = new (window.AudioContext||window.webkitAudioContext)(); return _actx; }
+
+function _tone(freq, dur, type='sine', vol=0.3, delay=0) {
+  try {
+    const c=_ac(), o=c.createOscillator(), g=c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.frequency.value=freq; o.type=type;
+    const t=c.currentTime+delay;
+    g.gain.setValueAtTime(vol,t);
+    g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+    o.start(t); o.stop(t+dur);
+  } catch(e){}
+}
+
+function sesDoğru() {
+  _tone(523,0.1,'sine',0.3,0);
+  _tone(659,0.1,'sine',0.3,0.1);
+  _tone(784,0.25,'sine',0.3,0.2);
+  konuş(['أحسنت','ممتاز','رائع','بارك الله فيك'][Math.floor(Math.random()*4)]);
+}
+
+function sesYanlış() {
+  _tone(180,0.15,'sawtooth',0.25,0);
+  _tone(150,0.2,'sawtooth',0.2,0.15);
+  konuş(['حاول مرة أخرى','خطأ، حاول ثانية','لا بأس'][Math.floor(Math.random()*3)]);
+}
+
+function sesTıkla() {
+  _tone(900,0.04,'sine',0.12);
+}
+
+function sesBitir() {
+  [523,659,784,1047,1319].forEach((f,i)=>_tone(f,0.18,'sine',0.28,i*0.12));
+  setTimeout(()=>konuş('تهانينا! أحسنت'),200);
+}
+
+function sesBuzzer() {
+  _tone(220,0.4,'square',0.3);
+}
+
+function sesSayaç() {
+  _tone(1000,0.05,'sine',0.15);
+}
+
+function sesOyunBaşla() {
+  _tone(440,0.1,'sine',0.2,0);
+  _tone(550,0.1,'sine',0.2,0.1);
+  _tone(660,0.15,'sine',0.25,0.2);
+}
+
+let _arSes=null;
+if(typeof speechSynthesis!=="undefined") speechSynthesis.onvoiceschanged=()=>{_arSes=null;};
+function _arSesAl(){
+  if(_arSes) return _arSes;
+  const v=speechSynthesis.getVoices();
+  _arSes=v.find(x=>x.lang==='ar-SA')||v.find(x=>x.lang.startsWith('ar-'))||v.find(x=>x.lang.startsWith('ar'))||null;
+  return _arSes;
+}
+function konuş(metin, hız=0.85) {
+  if(!('speechSynthesis' in window)) return;
+  const ses=_arSesAl();
+  if(!ses) return; // Kaliteli Arapça ses yoksa sessiz kal
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(metin);
+  u.voice=ses; u.lang='ar-SA'; u.rate=hız; u.pitch=1.0; u.volume=0.95;
+  speechSynthesis.speak(u);
+}
+// ────────────────────────────────────────────────────────────
+</script>
+</head>
+<body>
+
+<!-- SETUP SCREEN -->
+<div id="screen-setup" class="screen active">
+  <div class="setup-title">🏆 سباق الصف</div>
+  <div class="setup-subtitle">الوحدة ١ — ماذا فعلت اليوم؟ — الصف السابع</div>
+
+  <div class="setup-section" style="max-width:800px;margin:0 auto 12px;">
+    <div class="setup-label" style="text-align:center;">عدد اللاعبين</div>
+    <div class="player-toggle">
+      <button class="player-btn active" id="btn1p" onclick="setPlayers(1)">لاعب واحد</button>
+      <button class="player-btn" id="btn2p" onclick="setPlayers(2)">لاعبان</button>
+    </div>
+    <div class="names-row" id="names-row">
+      <div class="name-input-wrap">
+        <label>اسم اللاعب الأول (أزرق)</label>
+        <input class="name-input p1" id="inp-p1" type="text" value="لاعب ١" maxlength="20">
+      </div>
+      <div class="name-input-wrap" id="p2-name-wrap">
+        <label>اسم اللاعب الثاني (أحمر)</label>
+        <input class="name-input p2" id="inp-p2" type="text" value="لاعب ٢" maxlength="20">
+      </div>
+    </div>
+  </div>
+
+  <div class="setup-label" style="text-align:center;max-width:800px;margin:0 auto 10px;">اختر اللعبة</div>
+  <div class="games-grid" id="games-grid">
+    <div class="game-card" onclick="startGame(0)">
+      <div class="game-icon">🏎️</div>
+      <div class="game-name">سباق الإجابة</div>
+      <div class="game-desc">اختيار من متعدد · ١٥ سؤال</div>
+    </div>
+    <div class="game-card" onclick="startGame(1)">
+      <div class="game-icon">✅</div>
+      <div class="game-name">صح أم خطأ</div>
+      <div class="game-desc">١٥ عبارة · أسرع إجابة</div>
+    </div>
+    <div class="game-card" onclick="startGame(2)" style="display:none">
+      <div class="game-icon">🔤</div>
+      <div class="game-name">سباق الحروف</div>
+      <div class="game-desc">رتّب الحروف · ١٠ كلمات</div>
+    </div>
+    <div class="game-card" onclick="startGame(3)" style="display:none">
+      <div class="game-icon">🔍</div>
+      <div class="game-name">الكلمة الغريبة</div>
+      <div class="game-desc">الكلمة الدخيلة · ١٥ سؤال</div>
+    </div>
+    <div class="game-card" onclick="startGame(4)">
+      <div class="game-icon">✏️</div>
+      <div class="game-name">الكلمة الناقصة</div>
+      <div class="game-desc">أكمل الجملة · ١٢ سؤال</div>
+    </div>
+    <div class="game-card" onclick="startGame(5)">
+      <div class="game-icon">🔔</div>
+      <div class="game-name">مَنْ أنا؟</div>
+      <div class="game-desc">جرس الإجابة · ١٠ ألغاز</div>
+    </div>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="screen-game" class="screen">
+  <div class="scoreboard">
+    <div class="score-block">
+      <div class="score-name" id="p1-name-display">لاعب ١</div>
+      <div class="score-val p1" id="p1-score-display">0</div>
+      <div class="score-bar-wrap"><div class="score-bar p1" id="p1-bar" style="width:0%"></div></div>
+    </div>
+    <div class="timer-block">
+      <div class="timer-circle" id="timer-circle">-</div>
+      <div class="timer-label">ثانية</div>
+    </div>
+    <div class="score-block">
+      <div class="score-name" id="p2-name-display">لاعب ٢</div>
+      <div class="score-val p2" id="p2-score-display">0</div>
+      <div class="score-bar-wrap"><div class="score-bar p2" id="p2-bar" style="width:0%"></div></div>
+    </div>
+  </div>
+  <div class="game-body" id="game-body">
+    <!-- dynamic content -->
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="screen-result" class="screen">
+  <div class="result-title" id="result-title">انتهت اللعبة!</div>
+  <div class="result-winner" id="result-winner"></div>
+  <div class="result-scores" id="result-scores"></div>
+  <div class="result-btns">
+    <button class="result-btn primary" onclick="goSetup()">العودة للقائمة</button>
+    <button class="result-btn secondary" onclick="replayGame()">إعادة اللعبة</button>
+  </div>
+</div>
+
+<!-- ROUND BANNER -->
+<div id="round-banner">
+  <div class="banner-title" id="banner-title"></div>
+  <div class="banner-sub" id="banner-sub"></div>
+  <div class="banner-ex" id="banner-ex"></div>
+</div>
+
+<!-- FEEDBACK OVERLAY -->
+<div id="feedback-overlay"></div>
+
+<script>
+// ==================== SCORM ====================
+var SCORM=(function(){
+  var api=null,ini=false;
+  function find(w){var a=0;while(!w.API&&w.parent&&w.parent!==w&&a<500){a++;w=w.parent;}return w.API||null;}
+  return{
+    init:function(){try{api=find(window);if(api){api.LMSInitialize('');ini=true;api.LMSSetValue('cmi.core.lesson_status','incomplete');api.LMSSetValue('cmi.core.score.min','0');api.LMSSetValue('cmi.core.score.max','100');api.LMSCommit('');}}catch(e){}},
+    done:function(s){try{if(api&&ini){api.LMSSetValue('cmi.core.score.raw',String(Math.round(s)));api.LMSSetValue('cmi.core.lesson_status',s>=70?'passed':'failed');api.LMSCommit('');}}catch(e){}},
+    fin:function(){try{if(api&&ini){api.LMSFinish('');}}catch(e){}},
+  };
+})();
+
+// ==================== GAME DATA ====================
+var mcQs=[
+  {q:'ما معنى كلمة "يَسْتَيْقِظُ"؟',opts:['ينهض من النوم','يذهب للنوم','يأكل الطعام','يشرب الماء'],ans:0},
+  {q:'أيّ هذه الكلمات تدلّ على وجبة الصباح؟',opts:['الغداء','العشاء','الفطور','السحور'],ans:2},
+  {q:'"ذَهَبْتُ إلى المدرسة" — من فعل هذا؟',opts:['أنا','هو','هي','أنتَ'],ans:0},
+  {q:'أيّ هذه الأفعال يدلّ على تناول الطعام؟',opts:['نَامَ','ذَهَبَ','أَكَلَ','جَلَسَ'],ans:2},
+  {q:'ما معنى "الحليب"؟',opts:['ماء الفاكهة','مشروب أبيض من البقرة','شراب ساخن','مشروب غازي'],ans:1},
+  {q:'"فَعَلَ" — ما زمن هذا الفعل؟',opts:['المضارع','الأمر','الماضي','المستقبل'],ans:2},
+  {q:'ما معنى "يُصَلِّي"؟',opts:['يأكل','يدرس','يؤدّي الصلاة','ينام'],ans:2},
+  {q:'"هي ___ في الصباح." — أيّ فعل يناسب؟',opts:['تستيقظ','يستيقظ','نستيقظ','استيقظ'],ans:0},
+  {q:'"نَامَ الولدُ مُبَكِّراً." — ما معنى "مُبَكِّراً"؟',opts:['متأخراً','في الليل','باكراً','بعد العشاء'],ans:2},
+  {q:'أيّ هذه الجمل صحيحة؟',opts:['أنا ذهبتَ','هو ذهبتُ','نحن ذهبنا','هي ذهبتُم'],ans:2},
+  {q:'ما مضادّ كلمة "صَبَاح"؟',opts:['يوم','ليل','ظُهر','عصر'],ans:1},
+  {q:'ما معنى "العصير"؟',opts:['اللبن','الماء','الشاي','مشروب من الفاكهة'],ans:3},
+  {q:'"ذَهَبْتُمْ" — من يُقصد بهذا الضمير؟',opts:['أنا','أنتَ','أنتم','نحن'],ans:2},
+  {q:'أيّ هذه الكلمات تدلّ على فعل ماضٍ؟',opts:['يأكل','سيأكل','أكَلَ','اكتب'],ans:2},
+  {q:'ما معنى "الغداء"؟',opts:['وجبة الصباح','وجبة الظهر','وجبة الليل','شراب بارد'],ans:1},
+  {q:'ما مفرد كلمة "أكلات"؟',opts:['أكَلَ','أكْلَة','يأكل','آكِل'],ans:1},
+  {q:'"أَكَلْنَا" تعني أكل كم شخصاً؟',opts:['واحد','اثنان','أكثر من اثنين','عشرة'],ans:2},
+  {q:'أيّ هذه الأطعمة للفطور عادةً؟',opts:['اللحم المشوي','الأرز','الخبز والجبن','الدجاج'],ans:2},
+  {q:'"يَأكُلُ" — ما زمن هذا الفعل؟',opts:['الماضي','المضارع','الأمر','المستقبل'],ans:1},
+  {q:'ما معنى "المدرسة"؟',opts:['البيت','مكان التعليم','المسجد','المطعم'],ans:1}
+];
+
+var tfQs=[
+  {s:'الفطور هو وجبة الصباح.',ans:true},
+  {s:'الغداء هو وجبة الليل.',ans:false,ex:'الغداء وجبة الظهر، والعشاء وجبة الليل.'},
+  {s:'"ذَهَبَ" فعل ماضٍ.',ans:true},
+  {s:'"يأكلُ" يدلّ على زمن الماضي.',ans:false,ex:'"يأكلُ" فعل مضارع يدلّ على الحاضر.'},
+  {s:'الحليب مشروب أبيض.',ans:true},
+  {s:'"أَكَلْنَا" تعني أكل شخص واحد.',ans:false,ex:'"أكلنا" تعني أكلنا نحن — جمع.'},
+  {s:'"نَامَ" يعني ذهب للنوم.',ans:true},
+  {s:'"هي تستيقظُ" جملة صحيحة.',ans:true},
+  {s:'"هو تَذهبُ" جملة صحيحة.',ans:false,ex:'الصحيح: "هو يذهبُ".'},
+  {s:'"يُصَلِّي" فعل مضارع.',ans:true},
+  {s:'"فَعَلْتَ" تعني أنتِ فعلتِ.',ans:false,ex:'"فعلتَ" للمذكر، و"فعلتِ" للمؤنث.'},
+  {s:'الماء من المشروبات الصحية.',ans:true},
+  {s:'"ذَهَبْتُمْ" تعني نحن ذهبنا.',ans:false,ex:'"ذهبتم" تعني أنتم ذهبتم.'},
+  {s:'البيض من أطعمة الفطور.',ans:true},
+  {s:'"جَلَسَ" يعني وقف.',ans:false,ex:'"جلس" يعني قعد، وضدّه "قام أو وقف".'},
+  {s:'"نَحْنُ" ضمير المتكلم الجمع.',ans:true},
+  {s:'"الصباح" و"الليل" متضادّان.',ans:true},
+  {s:'العشاء وجبة الصباح.',ans:false,ex:'العشاء وجبة المساء/الليل.'},
+  {s:'الأرزّ والخبز من الحبوب.',ans:true},
+  {s:'"يستيقظ" و"ينام" فعلان متضادّان.',ans:true}
+];
+
+var g3Words=['خُبْز','لَحْم','جُبْن','بَيْض','حَلِيب','عَصِير','تُفَّاح','مَوْز','أَرُزّ','شَاي'];
+
+var oddQs=[
+  {cat:'أطعمة الفطور',opts:['خبز','جبن','بيض','أرزّ'],odd:3,ex:'الأرزّ للغداء عادةً'},
+  {cat:'أفعال الحركة',opts:['ذهب','جرى','مشى','نام'],odd:3,ex:'نام ليس فعل حركة'},
+  {cat:'مشروبات',opts:['حليب','عصير','شاي','خبز'],odd:3,ex:'الخبز طعام وليس مشروباً'},
+  {cat:'أوقات اليوم',opts:['صباح','ظهر','عصر','أكل'],odd:3,ex:'أكل فعل وليس وقتاً'},
+  {cat:'أطعمة الغداء',opts:['أرزّ','لحم','دجاج','شاي'],odd:3,ex:'الشاي مشروب'},
+  {cat:'ضمائر المتكلم',opts:['أنا','نحن','هو','نا'],odd:2,ex:'"هو" ضمير الغائب وليس المتكلم'},
+  {cat:'فواكه',opts:['تفاح','موز','برتقال','بيض'],odd:3,ex:'البيض ليس فاكهة'},
+  {cat:'أفعال ماضية',opts:['ذهب','أكل','نام','يمشي'],odd:3,ex:'"يمشي" فعل مضارع'},
+  {cat:'أدوات المدرسة',opts:['كتاب','قلم','حقيبة','ملعقة'],odd:3,ex:'الملعقة أداة مطبخ'},
+  {cat:'أطعمة من الحيوانات',opts:['لحم','بيض','حليب','خبز'],odd:3,ex:'الخبز من القمح'},
+  {cat:'أفعال في الصباح',opts:['استيقظ','صلّى','أفطر','نام'],odd:3,ex:'النوم يكون ليلاً'},
+  {cat:'أعضاء الجسم',opts:['يد','رأس','رجل','قلم'],odd:3,ex:'القلم أداة وليس عضو'},
+  {cat:'كلمات تدلّ على الجمع',opts:['طلاب','كتب','أقلام','ولد'],odd:3,ex:'"ولد" مفرد'},
+  {cat:'مواد دراسية',opts:['رياضيات','عربي','علوم','خبز'],odd:3,ex:'الخبز طعام'},
+  {cat:'كلمات تدلّ على وقت',opts:['صباحاً','ظهراً','مساءً','جلس'],odd:3,ex:'"جلس" فعل وليس وقتاً'}
+];
+
+var fillQs=[
+  {s:'أنا ___ في الصباح.',opts:['أستيقظُ','تستيقظُ','يستيقظُ','نستيقظُ'],ans:0},
+  {s:'هو ___ الفطورَ مع عائلته.',opts:['تأكلُ','يأكلُ','أكلتُ','نأكلُ'],ans:1},
+  {s:'نحن ___ إلى المدرسة كلّ يوم.',opts:['تذهبُ','يذهبُ','نذهبُ','أذهبُ'],ans:2},
+  {s:'الحليبُ ___ أبيض.',opts:['لونهُ','اسمهُ','طعمهُ','وزنهُ'],ans:0},
+  {s:'هي ___ الصلاةَ في الصباح.',opts:['يصلّي','تصلّي','صلّى','نصلّي'],ans:1},
+  {s:'أكلنا ___ في الظهر.',opts:['الفطور','العشاء','الغداء','الشاي'],ans:2},
+  {s:'الولدُ ___ مبكّراً كلّ ليلة.',opts:['يذهب','ينام','يأكل','يقرأ'],ans:1},
+  {s:'شربتُ كوبَ ___ في الصباح.',opts:['خبز','لحم','حليب','أرزّ'],ans:2},
+  {s:'التفاح والموز من ___.',opts:['الخضروات','اللحوم','الفواكه','المشروبات'],ans:2},
+  {s:'"___ صلّيتَ؟" — "في المسجد."',opts:['متى','أين','كيف','لماذا'],ans:1},
+  {s:'هم ___ الدرسَ بعد المدرسة.',opts:['تذاكر','يذاكرون','يذاكرُ','أذاكر'],ans:1},
+  {s:'"ذَهَبْتُمْ" — كم شخص يُقصد هنا؟',opts:['واحد','اثنان','جماعة','خمسة'],ans:2}
+];
+
+var buzzQs=[
+  {clues:['أنا أبيض اللون','يشربني الأطفال كلّ يوم','أخرج من البقرة'],opts:['ماء','حليب','عصير','شاي'],ans:1},
+  {clues:['أنا وجبة الصباح','بدوني لا تنطلق يومك','يُؤكل معي الخبز والبيض'],opts:['الغداء','العشاء','الفطور','السحور'],ans:2},
+  {clues:['أنا فعل','أفعله كلّ ليلة','ضدّي هو الاستيقاظ'],opts:['أكل','شرب','نام','ذهب'],ans:2},
+  {clues:['أنا مكان للتعليم','يذهب إليّ الطلاب كلّ يوم','المعلّم يعمل فيّ'],opts:['المسجد','الملعب','المنزل','المدرسة'],ans:3},
+  {clues:['أنا أصفر اللون','تنبت على الشجرة','القردة تحبّني'],opts:['تفاح','موز','برتقال','عنب'],ans:1},
+  {clues:['أنا من الألبان','لوني أبيض أو أصفر','يوضع على الخبز'],opts:['زبدة','لحم','جبن','بيض'],ans:2},
+  {clues:['أنا وقت من اليوم','الشمس في وسط السماء عندي','بعدي يأتي العصر'],opts:['الصباح','الليل','الظهر','المساء'],ans:2},
+  {clues:['أنا شراب ساخن','لونه أحمر أو أخضر','يُشرب في الصباح أو المساء'],opts:['قهوة','حليب','شاي','عصير'],ans:2},
+  {clues:['أنا وجبة الليل','آخر وجبة في اليوم','بعدي يذهب الناس للنوم'],opts:['الفطور','الغداء','الإفطار','العشاء'],ans:3},
+  {clues:['أنا من الحيوانات','أُؤكل مشوياً أو مطبوخاً','يُحضَّر منّي الكباب'],opts:['خبز','أرزّ','لحم','بيض'],ans:2}
+];
+
+// ==================== GLOBAL STATE ====================
+var numPlayers=1, playerNames=['لاعب ١','لاعب ٢'], scores=[0,0];
+var currentGame=-1, allTimers=[], gameActive=false;
+var answered=[false,false];
+var qIndex=0, qList=[], timerVal=0, timerMax=0;
+var timerInterval=null;
+
+// ==================== UTILITY ====================
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function pick(arr,n){return shuffle(arr).slice(0,n);}
+
+function splitArabic(word){
+  var re=/[\u0600-\u06FF][\u064B-\u065F\u0670]*/g;
+  var m,res=[];
+  while((m=re.exec(word))!==null){res.push(m[0]);}
+  return res;
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+}
+
+function updateScoreboard(){
+  document.getElementById('p1-score-display').textContent=scores[0];
+  document.getElementById('p2-score-display').textContent=scores[1];
+  var maxS=Math.max(scores[0],scores[1],1);
+  document.getElementById('p1-bar').style.width=(scores[0]/maxS*100)+'%';
+  document.getElementById('p2-bar').style.width=(scores[1]/maxS*100)+'%';
+}
+
+function flashFeedback(correct){
+  if(correct){sesDoğru();}else{sesYanlış();}
+  var el=document.getElementById('feedback-overlay');
+  el.textContent=correct?'✓':'✗';
+  el.className='show '+(correct?'correct-flash':'wrong-flash');
+  setTimeout(function(){el.className='';el.textContent='';},600);
+}
+
+function showBanner(title,sub,ex,duration,cb){
+  var b=document.getElementById('round-banner');
+  document.getElementById('banner-title').textContent=title;
+  document.getElementById('banner-sub').textContent=sub||'';
+  document.getElementById('banner-ex').textContent=ex?'💡 '+ex:'';
+  b.style.borderColor=title.includes('لاعب ١')||title.includes(playerNames[0])?'#4361ee':'#ef233c';
+  b.classList.add('show');
+  setTimeout(function(){
+    b.classList.remove('show');
+    if(cb)cb();
+  },duration||1800);
+}
+
+function clearAllTimers(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  allTimers.forEach(clearTimeout);
+  allTimers=[];
+}
+
+function startTimer(ms,onTick,onDone){
+  clearAllTimers();
+  timerVal=ms;timerMax=ms;
+  var circle=document.getElementById('timer-circle');
+  var _lastSec=Math.ceil(ms/1000);
+  timerInterval=setInterval(function(){
+    timerVal-=50;
+    if(timerVal<=0){timerVal=0;}
+    var secs=Math.ceil(timerVal/1000);
+    if(secs!==_lastSec){_lastSec=secs;sesSayaç();}
+    circle.textContent=secs;
+    var pct=timerVal/timerMax;
+    if(pct>0.5){circle.style.borderColor='#06d6a0';circle.style.color='#06d6a0';}
+    else if(pct>0.25){circle.style.borderColor='#ffd60a';circle.style.color='#ffd60a';}
+    else{circle.style.borderColor='#ef233c';circle.style.color='#ef233c';}
+    if(onTick)onTick(timerVal);
+    if(timerVal<=0){
+      clearInterval(timerInterval);timerInterval=null;
+      if(onDone)onDone();
+    }
+  },50);
+}
+
+function stopTimer(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  document.getElementById('timer-circle').textContent='-';
+  document.getElementById('timer-circle').style.borderColor='#06d6a0';
+  document.getElementById('timer-circle').style.color='#06d6a0';
+}
+
+// ==================== SETUP ====================
+function setPlayers(n){
+  numPlayers=n;
+  document.getElementById('btn1p').classList.toggle('active',n===1);
+  document.getElementById('btn2p').classList.toggle('active',n===2);
+  document.getElementById('p2-name-wrap').style.display=n===2?'flex':'none';
+}
+setPlayers(1);
+
+function startGame(idx){
+  sesOyunBaşla();
+  playerNames[0]=document.getElementById('inp-p1').value||'لاعب ١';
+  playerNames[1]=document.getElementById('inp-p2').value||'لاعب ٢';
+  scores=[0,0];
+  currentGame=idx;
+  answered=[false,false];
+  qIndex=0;
+  gameActive=true;
+  document.getElementById('p1-name-display').textContent=playerNames[0];
+  document.getElementById('p2-name-display').textContent=playerNames[1];
+  document.getElementById('p2-name-display').parentElement.style.display=numPlayers===2?'flex':'none';
+  document.getElementById('p2-bar').parentElement.parentElement.style.display=numPlayers===2?'flex':'none';
+  updateScoreboard();
+  showScreen('screen-game');
+  SCORM.init();
+  switch(idx){
+    case 0: initGame1(); break;
+    case 1: initGame2(); break;
+    case 2: initGame3(); break;
+    case 3: initGame4(); break;
+    case 4: initGame5(); break;
+    case 5: initGame6(); break;
+  }
+}
+
+function goSetup(){
+  clearAllTimers();
+  gameActive=false;
+  SCORM.fin();
+  showScreen('screen-setup');
+}
+
+function replayGame(){
+  clearAllTimers();
+  startGame(currentGame);
+}
+
+function endGame(){
+  clearAllTimers();
+  gameActive=false;
+  sesBitir();
+  var winner=-1;
+  if(numPlayers===1){
+    winner=0;
+  } else {
+    if(scores[0]>scores[1]) winner=0;
+    else if(scores[1]>scores[0]) winner=1;
+  }
+  var winScore=numPlayers===1?scores[0]:Math.max(scores[0],scores[1]);
+  var maxPossible=getMaxPossible();
+  var scaled=maxPossible>0?Math.round(winScore/maxPossible*100):0;
+  scaled=Math.min(100,Math.max(0,scaled));
+  SCORM.done(scaled);
+
+  var rtitle=document.getElementById('result-title');
+  var rwinner=document.getElementById('result-winner');
+  var rscores=document.getElementById('result-scores');
+
+  if(numPlayers===1){
+    rtitle.textContent='انتهت اللعبة!';
+    rwinner.textContent='النتيجة: '+scores[0]+' نقطة';
+    rwinner.style.color='#4361ee';
+    rscores.innerHTML='<div class="result-score-block p1"><div class="rs-name">'+playerNames[0]+'</div><div class="rs-val">'+scores[0]+'</div></div>';
+  } else {
+    if(winner===0){
+      rtitle.textContent='تهانينا!';
+      rwinner.textContent='🏆 '+playerNames[0]+' يفوز!';
+      rwinner.style.color='#4361ee';
+    } else if(winner===1){
+      rtitle.textContent='تهانينا!';
+      rwinner.textContent='🏆 '+playerNames[1]+' يفوز!';
+      rwinner.style.color='#ef233c';
+    } else {
+      rtitle.textContent='تعادل!';
+      rwinner.textContent='🤝 النتيجة متساوية!';
+      rwinner.style.color='#ffd60a';
+    }
+    rscores.innerHTML=
+      '<div class="result-score-block p1"><div class="rs-name">'+playerNames[0]+'</div><div class="rs-val">'+scores[0]+'</div></div>'+
+      '<div class="result-score-block p2"><div class="rs-name">'+playerNames[1]+'</div><div class="rs-val">'+scores[1]+'</div></div>';
+  }
+  showScreen('screen-result');
+}
+
+function getMaxPossible(){
+  switch(currentGame){
+    case 0: return 15*15;
+    case 1: return 15*15;
+    case 2: return 10*25;
+    case 3: return 15*15;
+    case 4: return 12*15;
+    case 5: return 10*20;
+    default: return 100;
+  }
+}
+
+// ==================== KEYBOARD SHORTCUTS ====================
+var buzzerLock=[false,false];
+document.addEventListener('keydown',function(e){
+  if(!gameActive) return;
+  var k=e.key.toLowerCase();
+  if(currentGame===0||currentGame===3||currentGame===4){
+    handleMCQKey(k);
+  } else if(currentGame===1){
+    handleTFKey(k);
+  } else if(currentGame===5){
+    handleBuzzKey(k);
+  }
+});
+
+function handleMCQKey(k){
+  var map1={'1':0,'2':1,'3':2,'4':3};
+  var map2={'7':0,'8':1,'9':2,'0':3};
+  if(map1[k]!==undefined && !answered[0]) submitMCQ(0,map1[k]);
+  if(map2[k]!==undefined && !answered[1] && numPlayers===2) submitMCQ(1,map2[k]);
+}
+
+function handleTFKey(k){
+  if(k==='1' && !answered[0]) submitTF(0,true);
+  if(k==='2' && !answered[0]) submitTF(0,false);
+  if(numPlayers===2){
+    if(k==='7' && !answered[1]) submitTF(1,true);
+    if(k==='0' && !answered[1]) submitTF(1,false);
+  }
+}
+
+function handleBuzzKey(k){
+  if(k==='q') triggerBuzzer(0);
+  if(k==='p' && numPlayers===2) triggerBuzzer(1);
+  var buzzMap1={'1':0,'2':1,'3':2,'4':3};
+  var buzzMap2={'7':0,'8':1,'9':2,'0':3};
+  if(buzzMap1[k]!==undefined) submitBuzzAnswer(0,buzzMap1[k]);
+  if(buzzMap2[k]!==undefined && numPlayers===2) submitBuzzAnswer(1,buzzMap2[k]);
+}
+// ==================== GAME 1: سباق الإجابة ====================
+function initGame1(){
+  qList=pick(mcQs,15);
+  qIndex=0;
+  showGame1Question();
+}
+
+function showGame1Question(){
+  if(qIndex>=qList.length){endGame();return;}
+  answered=[false,false];
+  var q=qList[qIndex];
+  var labels=['أ','ب','ج','د'];
+  var p1btns='',p2btns='';
+  q.opts.forEach(function(opt,i){
+    p1btns+='<button class="opt-btn p1" id="g1-p1-'+i+'" onclick="submitMCQ(0,'+i+')">'+(i+1)+'. '+opt+'</button>';
+    p2btns+='<button class="opt-btn p2" id="g1-p2-'+i+'" onclick="submitMCQ(1,'+i+')">'+(i===3?0:i+7)+'. '+opt+'</button>';
+  });
+  var p2panel=numPlayers===2?'<div class="separator"></div><div class="player-panel p2"><div class="panel-label p2">'+playerNames[1]+' (٧،٨،٩،٠)</div>'+p2btns+'</div>':'';
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area">'+
+    '<div class="q-progress">سؤال '+(qIndex+1)+' من '+qList.length+'</div>'+
+    '<div class="q-text">'+q.q+'</div>'+
+    '</div>'+
+    '<div class="answer-panels">'+
+    '<div class="player-panel p1"><div class="panel-label p1">'+playerNames[0]+' (١،٢،٣،٤)</div>'+p1btns+'</div>'+
+    p2panel+
+    '</div>';
+  startTimer(10000,null,function(){onMCQTimeout();});
+}
+
+function submitMCQ(player,optIdx){
+  if(!gameActive||answered[player]) return;
+  if(currentGame!==0 && currentGame!==3 && currentGame!==4) return;
+  answered[player]=true;
+  var q=qList[qIndex];
+  var correctIdx=q.ans!==undefined?q.ans:(q.odd!==undefined?q.odd:q.ans);
+  var isCorrect=(optIdx===correctIdx);
+  var firstBonus=(!answered[1-player]||!answered[1-player])?5:0;
+  if(isCorrect){
+    scores[player]+=10;
+    if(numPlayers===1||(!answered[1-player])){scores[player]+=5;}
+    flashFeedback(true);
+  } else {
+    flashFeedback(false);
+  }
+  markMCQButton(player,optIdx,isCorrect,correctIdx);
+  updateScoreboard();
+  var bothAnswered=(numPlayers===1)?true:(answered[0]&&answered[1]);
+  if(bothAnswered||numPlayers===1){
+    stopTimer();
+    disableAllMCQButtons();
+    showMCQResult(isCorrect,q);
+  }
+}
+
+function markMCQButton(player,chosen,correct,correctIdx){
+  var prefix='g1-p'+(player+1)+'-';
+  for(var i=0;i<4;i++){
+    var btn=document.getElementById(prefix+i);
+    if(!btn) continue;
+    if(i===correctIdx) btn.classList.add('correct');
+    else if(i===chosen && !correct) btn.classList.add('wrong');
+    btn.disabled=true;
+  }
+}
+
+function disableAllMCQButtons(){
+  document.querySelectorAll('.opt-btn').forEach(function(b){b.disabled=true;});
+}
+
+function showMCQResult(correct,q){
+  var title,sub;
+  if(numPlayers===1){
+    title=correct?'✓ إجابة صحيحة!':'✗ إجابة خاطئة!';
+    sub=correct?'+١٠ نقطة':'الإجابة الصحيحة: '+q.opts[q.ans];
+  } else {
+    var w0=answered[0]&&(0===q.ans),w1=answered[1]&&(1===q.ans);
+    title=correct?'✓ صحيح!':'✗ خطأ!';
+    sub='الإجابة الصحيحة: '+q.opts[q.ans];
+  }
+  allTimers.push(setTimeout(function(){
+    qIndex++;
+    showGame1Question();
+  },1800));
+}
+
+function onMCQTimeout(){
+  if(!gameActive) return;
+  disableAllMCQButtons();
+  var q=qList[qIndex];
+  var correctIdx=q.ans!==undefined?q.ans:(q.odd!==undefined?q.odd:q.ans);
+  document.querySelectorAll('.opt-btn').forEach(function(b,i){
+    if(parseInt(b.id.split('-').pop())===correctIdx) b.classList.add('correct');
+  });
+  allTimers.push(setTimeout(function(){qIndex++;showGame1Question();},1800));
+}
+
+// ==================== GAME 2: صح أم خطأ ====================
+function initGame2(){
+  qList=pick(tfQs,15);
+  qIndex=0;
+  showGame2Question();
+}
+
+function showGame2Question(){
+  if(qIndex>=qList.length){endGame();return;}
+  answered=[false,false];
+  var q=qList[qIndex];
+  var p1btns='<button class="tf-btn true-btn" id="tf-p1-t" onclick="submitTF(0,true)">✅ صح</button>'+
+             '<button class="tf-btn false-btn" id="tf-p1-f" onclick="submitTF(0,false)">❌ خطأ</button>';
+  var p2btns='<button class="tf-btn true-btn" id="tf-p2-t" onclick="submitTF(1,true)">✅ صح</button>'+
+             '<button class="tf-btn false-btn" id="tf-p2-f" onclick="submitTF(1,false)">❌ خطأ</button>';
+  var p2panel=numPlayers===2?'<div class="separator"></div><div class="player-panel p2" style="gap:10px;display:flex;flex-direction:column;padding:10px;"><div class="panel-label p2">'+playerNames[1]+' (٧=صح، ٠=خطأ)</div>'+p2btns+'</div>':'';
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area">'+
+    '<div class="q-progress">عبارة '+(qIndex+1)+' من '+qList.length+'</div>'+
+    '<div class="q-text">'+q.s+'</div>'+
+    '</div>'+
+    '<div class="answer-panels">'+
+    '<div class="player-panel p1" style="gap:10px;display:flex;flex-direction:column;padding:10px;"><div class="panel-label p1">'+playerNames[0]+' (١=صح، ٢=خطأ)</div>'+p1btns+'</div>'+
+    p2panel+
+    '</div>';
+  startTimer(6000,null,function(){onTFTimeout();});
+}
+
+function submitTF(player,val){
+  if(!gameActive||answered[player]) return;
+  if(currentGame!==1) return;
+  answered[player]=true;
+  var q=qList[qIndex];
+  var isCorrect=(val===q.ans);
+  if(isCorrect){
+    scores[player]+=10;
+    if(numPlayers===1||(numPlayers===2&&!answered[1-player])) scores[player]+=5;
+    flashFeedback(true);
+  } else {
+    flashFeedback(false);
+  }
+  var trueBtn=document.getElementById('tf-p'+(player+1)+'-t');
+  var falseBtn=document.getElementById('tf-p'+(player+1)+'-f');
+  if(trueBtn) trueBtn.disabled=true;
+  if(falseBtn) falseBtn.disabled=true;
+  if(isCorrect){
+    if(val&&trueBtn) trueBtn.style.opacity='1';
+    else if(!val&&falseBtn) falseBtn.style.opacity='1';
+  } else {
+    if(val&&trueBtn) trueBtn.classList.add('wrong');
+    else if(!val&&falseBtn) falseBtn.classList.add('wrong');
+    // show correct
+    if(q.ans&&trueBtn) trueBtn.style.background='#06d6a0';
+    else if(!q.ans&&falseBtn) falseBtn.style.background='#06d6a0';
+  }
+  updateScoreboard();
+  var both=(numPlayers===1)?true:(answered[0]&&answered[1]);
+  if(both){
+    stopTimer();
+    allTimers.push(setTimeout(function(){
+      if(q.ex){
+        showBanner(isCorrect?'✓ صحيح!':'✗ خطأ!','',q.ex,1800,function(){qIndex++;showGame2Question();});
+      } else {
+        qIndex++;showGame2Question();
+      }
+    },1200));
+  }
+}
+
+function onTFTimeout(){
+  if(!gameActive) return;
+  document.querySelectorAll('.tf-btn').forEach(function(b){b.disabled=true;});
+  var q=qList[qIndex];
+  allTimers.push(setTimeout(function(){
+    if(q.ex){
+      showBanner('انتهى الوقت!','الإجابة: '+(q.ans?'صح':'خطأ'),q.ex,1800,function(){qIndex++;showGame2Question();});
+    } else {
+      qIndex++;showGame2Question();
+    }
+  },500));
+}
+
+// ==================== GAME 3: سباق الحروف ====================
+var g3Words_list=[];
+var g3WordIndex=0;
+var g3State={0:{tiles:[],slots:[],filled:[],done:false},1:{tiles:[],slots:[],filled:[],done:false}};
+var g3FirstDone=-1;
+var g3CurrentWord='';
+var g3Letters=[];
+
+function initGame3(){
+  g3Words_list=shuffle(g3Words);
+  g3WordIndex=0;
+  showGame3Question();
+}
+
+function showGame3Question(){
+  if(g3WordIndex>=g3Words_list.length){endGame();return;}
+  g3CurrentWord=g3Words_list[g3WordIndex];
+  g3Letters=splitArabic(g3CurrentWord);
+  g3FirstDone=-1;
+  g3State={
+    0:{tiles:shuffle(g3Letters.slice()),slots:[],filled:[],done:false},
+    1:{tiles:shuffle(g3Letters.slice()),slots:[],filled:[],done:false}
+  };
+  g3State[0].filled=new Array(g3Letters.length).fill(null);
+  g3State[1].filled=new Array(g3Letters.length).fill(null);
+  g3State[0].slots=g3Letters.slice();
+  g3State[1].slots=g3Letters.slice();
+  renderGame3();
+  startTimer(20000,null,function(){onG3Timeout();});
+}
+
+function renderGame3(){
+  var n=g3Letters.length;
+  function makePanel(p){
+    var st=g3State[p];
+    var slotsHTML='<div class="letter-slots">';
+    for(var i=0;i<n;i++){
+      var val=st.filled[i];
+      var filledClass=val!==null?(p===0?'filled p1filled':'filled p2filled'):'';
+      slotsHTML+='<div class="letter-slot '+filledClass+'" id="g3-slot-'+p+'-'+i+'" onclick="clickSlot('+p+','+i+')">'+(val!==null?val:'')+'</div>';
+    }
+    slotsHTML+='</div>';
+    var tilesHTML='<div class="letter-tiles">';
+    st.tiles.forEach(function(t,ti){
+      var used=t===null;
+      tilesHTML+='<div class="letter-tile '+(p===0?'p1tile':'p2tile')+(used?' used':'')+'" id="g3-tile-'+p+'-'+ti+'" onclick="clickTile('+p+','+ti+')">'+(used?'':t)+'</div>';
+    });
+    tilesHTML+='</div>';
+    var doneHTML=st.done?'<div class="g3-done-badge">✓ مكتمل!</div>':'';
+    return '<div class="g3-panel '+(p===0?'p1':'p2')+'" id="g3-panel-'+p+'">'+
+      '<div class="panel-label '+(p===0?'p1':'p2')+'">'+playerNames[p]+'</div>'+
+      slotsHTML+tilesHTML+doneHTML+
+      '</div>';
+  }
+  var p2panel=numPlayers===2?'<div class="separator"></div>'+makePanel(1):'';
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area" style="flex:none;padding:12px;">'+
+    '<div class="q-progress">كلمة '+(g3WordIndex+1)+' من '+g3Words_list.length+'</div>'+
+    '<div class="q-text" style="font-size:1.1rem;color:#a8a4c0;">رتّب الحروف لتكوين الكلمة الصحيحة</div>'+
+    '</div>'+
+    '<div class="g3-panels">'+makePanel(0)+p2panel+'</div>';
+}
+
+var g3Selected=[null,null]; // selected tile index per player
+
+function clickTile(p,ti){
+  if(!gameActive||g3State[p].done) return;
+  if(g3State[p].tiles[ti]===null) return;
+  sesTıkla();
+  g3Selected[p]=ti;
+  // find first empty slot
+  var slot=-1;
+  for(var i=0;i<g3State[p].filled.length;i++){
+    if(g3State[p].filled[i]===null){slot=i;break;}
+  }
+  if(slot===-1) return;
+  placeInSlot(p,slot,ti);
+}
+
+function clickSlot(p,si){
+  if(!gameActive||g3State[p].done) return;
+  if(g3State[p].filled[si]!==null){
+    // remove from slot
+    var letter=g3State[p].filled[si];
+    g3State[p].filled[si]=null;
+    // find original tile
+    for(var ti=0;ti<g3State[p].tiles.length;ti++){
+      if(g3State[p].tiles[ti]===null){
+        g3State[p].tiles[ti]=letter;
+        break;
+      }
+    }
+    renderGame3();
+  }
+}
+
+function placeInSlot(p,slot,ti){
+  var letter=g3State[p].tiles[ti];
+  g3State[p].tiles[ti]=null;
+  g3State[p].filled[slot]=letter;
+  checkG3Completion(p);
+  renderGame3();
+}
+
+function checkG3Completion(p){
+  var filled=g3State[p].filled;
+  if(filled.indexOf(null)!==-1) return;
+  var word=filled.join('');
+  var correct=g3Letters.join('');
+  if(word===correct){
+    g3State[p].done=true;
+    if(g3FirstDone===-1){
+      g3FirstDone=p;
+      scores[p]+=15;
+      flashFeedback(true);
+    } else {
+      scores[p]+=10;
+    }
+    updateScoreboard();
+    var otherDone=(numPlayers===1)?true:g3State[1-p].done;
+    if(otherDone||numPlayers===1){
+      stopTimer();
+      allTimers.push(setTimeout(function(){
+        g3WordIndex++;
+        showGame3Question();
+      },1500));
+    }
+  }
+}
+
+function onG3Timeout(){
+  if(!gameActive) return;
+  allTimers.push(setTimeout(function(){
+    g3WordIndex++;
+    showGame3Question();
+  },1000));
+}
+
+// ==================== GAME 4: الكلمة الغريبة ====================
+function initGame4(){
+  qList=pick(oddQs,15);
+  qIndex=0;
+  showGame4Question();
+}
+
+function showGame4Question(){
+  if(qIndex>=qList.length){endGame();return;}
+  answered=[false,false];
+  var q=qList[qIndex];
+  var p1btns='',p2btns='';
+  q.opts.forEach(function(opt,i){
+    p1btns+='<button class="opt-btn p1" id="g4-p1-'+i+'" onclick="submitOdd(0,'+i+')">'+(i+1)+'. '+opt+'</button>';
+    p2btns+='<button class="opt-btn p2" id="g4-p2-'+i+'" onclick="submitOdd(1,'+i+')">'+(i===3?0:i+7)+'. '+opt+'</button>';
+  });
+  var p2panel=numPlayers===2?'<div class="separator"></div><div class="player-panel p2"><div class="panel-label p2">'+playerNames[1]+' (٧،٨،٩،٠)</div>'+p2btns+'</div>':'';
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area">'+
+    '<div class="q-progress">سؤال '+(qIndex+1)+' من '+qList.length+'</div>'+
+    '<div class="q-category">الفئة: '+q.cat+'</div>'+
+    '<div class="q-text">أيّ هذه الكلمات لا تنتمي للمجموعة؟</div>'+
+    '</div>'+
+    '<div class="answer-panels">'+
+    '<div class="player-panel p1"><div class="panel-label p1">'+playerNames[0]+' (١،٢،٣،٤)</div>'+p1btns+'</div>'+
+    p2panel+
+    '</div>';
+  startTimer(8000,null,function(){onMCQTimeout();});
+}
+
+function submitOdd(player,optIdx){
+  if(!gameActive||answered[player]) return;
+  answered[player]=true;
+  var q=qList[qIndex];
+  var isCorrect=(optIdx===q.odd);
+  if(isCorrect){
+    scores[player]+=10;
+    if(numPlayers===1||(numPlayers===2&&!answered[1-player])) scores[player]+=5;
+    flashFeedback(true);
+  } else {
+    flashFeedback(false);
+  }
+  // mark buttons
+  for(var i=0;i<4;i++){
+    var btn=document.getElementById('g4-p'+(player+1)+'-'+i);
+    if(!btn) continue;
+    if(i===q.odd) btn.classList.add('correct');
+    else if(i===optIdx&&!isCorrect) btn.classList.add('wrong');
+    btn.disabled=true;
+  }
+  updateScoreboard();
+  var both=(numPlayers===1)?true:(answered[0]&&answered[1]);
+  if(both){
+    stopTimer();
+    allTimers.push(setTimeout(function(){
+      if(q.ex){
+        showBanner(isCorrect?'✓ صحيح!':'✗ خطأ!','',q.ex,1800,function(){qIndex++;showGame4Question();});
+      } else {
+        qIndex++;showGame4Question();
+      }
+    },1200));
+  }
+}
+
+// ==================== GAME 5: الكلمة الناقصة ====================
+function initGame5(){
+  qList=fillQs.slice();
+  qIndex=0;
+  showGame5Question();
+}
+
+function showGame5Question(){
+  if(qIndex>=qList.length){endGame();return;}
+  answered=[false,false];
+  var q=qList[qIndex];
+  var p1btns='',p2btns='';
+  q.opts.forEach(function(opt,i){
+    p1btns+='<button class="opt-btn p1" id="g5-p1-'+i+'" onclick="submitFill(0,'+i+')">'+(i+1)+'. '+opt+'</button>';
+    p2btns+='<button class="opt-btn p2" id="g5-p2-'+i+'" onclick="submitFill(1,'+i+')">'+(i===3?0:i+7)+'. '+opt+'</button>';
+  });
+  var p2panel=numPlayers===2?'<div class="separator"></div><div class="player-panel p2"><div class="panel-label p2">'+playerNames[1]+' (٧،٨،٩،٠)</div>'+p2btns+'</div>':'';
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area">'+
+    '<div class="q-progress">سؤال '+(qIndex+1)+' من '+qList.length+'</div>'+
+    '<div class="q-text">'+q.s+'</div>'+
+    '</div>'+
+    '<div class="answer-panels">'+
+    '<div class="player-panel p1"><div class="panel-label p1">'+playerNames[0]+' (١،٢،٣،٤)</div>'+p1btns+'</div>'+
+    p2panel+
+    '</div>';
+  startTimer(10000,null,function(){onFillTimeout();});
+}
+
+function submitFill(player,optIdx){
+  if(!gameActive||answered[player]) return;
+  answered[player]=true;
+  var q=qList[qIndex];
+  var isCorrect=(optIdx===q.ans);
+  if(isCorrect){
+    scores[player]+=10;
+    if(numPlayers===1||(numPlayers===2&&!answered[1-player])) scores[player]+=5;
+    flashFeedback(true);
+  } else {
+    flashFeedback(false);
+  }
+  for(var i=0;i<4;i++){
+    var btn=document.getElementById('g5-p'+(player+1)+'-'+i);
+    if(!btn) continue;
+    if(i===q.ans) btn.classList.add('correct');
+    else if(i===optIdx&&!isCorrect) btn.classList.add('wrong');
+    btn.disabled=true;
+  }
+  updateScoreboard();
+  var both=(numPlayers===1)?true:(answered[0]&&answered[1]);
+  if(both){
+    stopTimer();
+    allTimers.push(setTimeout(function(){qIndex++;showGame5Question();},1500));
+  }
+}
+
+function onFillTimeout(){
+  if(!gameActive) return;
+  document.querySelectorAll('.opt-btn').forEach(function(b){b.disabled=true;});
+  var q=qList[qIndex];
+  var ans=q.ans!==undefined?q.ans:0;
+  for(var i=0;i<4;i++){
+    var bp1=document.getElementById('g5-p1-'+i);
+    var bp2=document.getElementById('g5-p2-'+i);
+    if(i===ans){if(bp1)bp1.classList.add('correct');if(bp2)bp2.classList.add('correct');}
+  }
+  allTimers.push(setTimeout(function(){qIndex++;showGame5Question();},1500));
+}
+// ==================== GAME 6: مَنْ أنا؟ ====================
+var g6State={
+  qIdx:0,
+  clueIdx:0,
+  buzzedPlayer:-1,
+  optsShown:false,
+  buzzLock:[false,false],
+  wrongAnswered:[false,false]
+};
+
+function initGame6(){
+  qList=buzzQs.slice();
+  g6State.qIdx=0;
+  showGame6Question();
+}
+
+function showGame6Question(){
+  if(g6State.qIdx>=qList.length){endGame();return;}
+  g6State.clueIdx=0;
+  g6State.buzzedPlayer=-1;
+  g6State.optsShown=false;
+  g6State.buzzLock=[false,false];
+  g6State.wrongAnswered=[false,false];
+  answered=[false,false];
+  renderGame6();
+  startTimer(30000,null,function(){onG6Timeout();});
+}
+
+function renderGame6(){
+  var q=qList[g6State.qIdx];
+  var cluesHTML='<div class="clue-display">';
+  for(var i=0;i<=Math.min(g6State.clueIdx,q.clues.length-1);i++){
+    cluesHTML+='<div class="clue-item">'+q.clues[i]+'</div>';
+  }
+  cluesHTML+='</div>';
+  var clueCountHTML='<div class="clue-counter">تلميح '+(g6State.clueIdx+1)+' من '+q.clues.length+(g6State.optsShown?' + خيارات':'')+'</div>';
+
+  var nextBtn='';
+  if(!g6State.optsShown && g6State.buzzedPlayer===-1){
+    if(g6State.clueIdx<q.clues.length-1){
+      nextBtn='<button class="next-clue-btn" onclick="nextClue()">التلميح التالي ◄</button>';
+    } else {
+      nextBtn='<button class="next-clue-btn" onclick="showBuzzOpts()">إظهار الخيارات ◄</button>';
+    }
+  }
+
+  var p1Panel=buildBuzzPanel(0,q);
+  var p2Panel=numPlayers===2?'<div class="separator"></div>'+buildBuzzPanel(1,q):'';
+
+  document.getElementById('game-body').innerHTML=
+    '<div class="question-area" style="flex:none;padding:16px;">'+
+    '<div class="q-progress">لغز '+(g6State.qIdx+1)+' من '+qList.length+'</div>'+
+    clueCountHTML+
+    cluesHTML+
+    nextBtn+
+    '</div>'+
+    '<div class="answer-panels" style="flex:1;">'+
+    p1Panel+p2Panel+
+    '</div>';
+}
+
+function buildBuzzPanel(p,q){
+  var cls=p===0?'p1':'p2';
+  var html='<div class="player-panel '+cls+'" id="buzz-panel-'+p+'" style="align-items:center;justify-content:center;display:flex;flex-direction:column;gap:10px;">';
+  html+='<div class="panel-label '+cls+'">'+playerNames[p]+(p===0?' (Q)':(numPlayers===2?' (P)':''))+'</div>';
+
+  if(g6State.buzzedPlayer===p){
+    // show options
+    html+='<div style="font-size:0.85rem;color:#ffd60a;margin-bottom:4px;">ما هي الإجابة؟ (٥ ثوانٍ)</div>';
+    html+='<div class="buzzer-opts">';
+    q.opts.forEach(function(opt,i){
+      html+='<button class="opt-btn '+cls+'" id="g6-opt-'+p+'-'+i+'" onclick="submitBuzzAnswer('+p+','+i+')">'+(i+1)+'. '+opt+'</button>';
+    });
+    html+='</div>';
+  } else if(g6State.buzzedPlayer!==-1){
+    // other player buzzed, this player waits
+    html+='<div style="color:#a8a4c0;font-size:0.9rem;">انتظر...</div>';
+    html+='<button class="buzzer-btn" disabled>🔔 الجرس</button>';
+  } else if(g6State.wrongAnswered[p]){
+    html+='<div style="color:#ef233c;font-size:0.9rem;">✗ أجبت خطأ</div>';
+    html+='<button class="buzzer-btn" disabled>🔔 الجرس</button>';
+  } else if(g6State.buzzLock[p]||answered[p]){
+    html+='<button class="buzzer-btn" disabled>🔔 الجرس</button>';
+  } else {
+    html+='<button class="buzzer-btn" id="buzz-btn-'+p+'" onclick="triggerBuzzer('+p+')">🔔 اضغط للإجابة!</button>';
+  }
+  html+='</div>';
+  return html;
+}
+
+function nextClue(){
+  if(!gameActive) return;
+  var q=qList[g6State.qIdx];
+  if(g6State.clueIdx<q.clues.length-1){
+    g6State.clueIdx++;
+    renderGame6();
+  } else {
+    showBuzzOpts();
+  }
+}
+
+function showBuzzOpts(){
+  g6State.optsShown=true;
+  renderGame6();
+}
+
+function getClueScore(){
+  if(g6State.optsShown) return 5;
+  switch(g6State.clueIdx){
+    case 0: return 20;
+    case 1: return 15;
+    case 2: return 10;
+    default: return 5;
+  }
+}
+
+var g6BuzzTimer=null;
+
+function triggerBuzzer(p){
+  if(!gameActive) return;
+  if(g6State.buzzedPlayer!==-1) return;
+  if(g6State.wrongAnswered[p]) return;
+  if(answered[p]) return;
+  sesBuzzer();
+  g6State.buzzedPlayer=p;
+  renderGame6();
+  // 5 second timeout for answer
+  if(g6BuzzTimer) clearTimeout(g6BuzzTimer);
+  g6BuzzTimer=setTimeout(function(){
+    if(g6State.buzzedPlayer===p){
+      // timed out - wrong, let other player try
+      g6State.wrongAnswered[p]=true;
+      g6State.buzzedPlayer=-1;
+      flashFeedback(false);
+      if(numPlayers===2 && !g6State.wrongAnswered[1-p] && !answered[1-p]){
+        renderGame6();
+      } else {
+        // both failed or single player
+        onG6AllFailed();
+      }
+    }
+  },5000);
+}
+
+function submitBuzzAnswer(p,optIdx){
+  if(!gameActive) return;
+  if(g6State.buzzedPlayer!==p) return;
+  if(g6BuzzTimer){clearTimeout(g6BuzzTimer);g6BuzzTimer=null;}
+  var q=qList[g6State.qIdx];
+  var isCorrect=(optIdx===q.ans);
+  if(isCorrect){
+    var pts=getClueScore();
+    scores[p]+=pts;
+    answered[p]=true;
+    updateScoreboard();
+    flashFeedback(true);
+    stopTimer();
+    showBanner('✓ إجابة صحيحة! +'+pts,playerNames[p],'',1800,function(){
+      g6State.qIdx++;
+      showGame6Question();
+    });
+  } else {
+    g6State.wrongAnswered[p]=true;
+    g6State.buzzedPlayer=-1;
+    flashFeedback(false);
+    if(numPlayers===2 && !g6State.wrongAnswered[1-p] && !answered[1-p]){
+      renderGame6();
+    } else {
+      onG6AllFailed();
+    }
+  }
+}
+
+function onG6AllFailed(){
+  if(!gameActive) return;
+  stopTimer();
+  var q=qList[g6State.qIdx];
+  allTimers.push(setTimeout(function(){
+    showBanner('انتهى الدور!','الإجابة: '+q.opts[q.ans],'',1800,function(){
+      g6State.qIdx++;
+      showGame6Question();
+    });
+  },400));
+}
+
+function onG6Timeout(){
+  if(!gameActive) return;
+  if(g6BuzzTimer){clearTimeout(g6BuzzTimer);g6BuzzTimer=null;}
+  onG6AllFailed();
+}
+
+// Fix: submitMCQ and submitOdd need to work properly when called from keyboard
+// Override submitMCQ to check game context
+var _origSubmitMCQ=submitMCQ;
+submitMCQ=function(player,optIdx){
+  if(currentGame===0) {
+    if(!gameActive||answered[player]) return;
+    answered[player]=true;
+    var q=qList[qIndex];
+    var isCorrect=(optIdx===q.ans);
+    if(isCorrect){
+      scores[player]+=10;
+      if(numPlayers===1||(numPlayers===2&&!answered[1-player])) scores[player]+=5;
+      flashFeedback(true);
+    } else {
+      flashFeedback(false);
+    }
+    // mark
+    for(var i=0;i<4;i++){
+      var btn=document.getElementById('g1-p'+(player+1)+'-'+i);
+      if(!btn) continue;
+      if(i===q.ans) btn.classList.add('correct');
+      else if(i===optIdx&&!isCorrect) btn.classList.add('wrong');
+      btn.disabled=true;
+    }
+    updateScoreboard();
+    var both=(numPlayers===1)?true:(answered[0]&&answered[1]);
+    if(both){
+      stopTimer();
+      allTimers.push(setTimeout(function(){qIndex++;showGame1Question();},1800));
+    }
+  } else if(currentGame===3){
+    submitOdd(player,optIdx);
+  } else if(currentGame===4){
+    submitFill(player,optIdx);
+  }
+};
+
+// ==================== WINDOW UNLOAD ====================
+window.addEventListener('beforeunload',function(){SCORM.fin();});
+
+// ==================== INIT ====================
+SCORM.init();
+// Hash-based deep link (hub integration)
+(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=0&&n<=5)setTimeout(function(){startGame(n);},200);}})();
+</script>
+</body>
+</html>

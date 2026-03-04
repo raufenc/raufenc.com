@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rauf Enç — Lab</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #18181f;
+      --border: #222230;
+      --text: #e8e8f0;
+      --muted: #44445a;
+      --muted2: #7777a0;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.1);
+      --accent-glow: rgba(99,102,241,0.25);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Arka plan gradient ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(99,102,241,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(139,92,246,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Animasyonlar ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes pulse    { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+    @keyframes shimmer  { from { background-position: -200% center; } to { background-position: 200% center; } }
+    @keyframes cardIn   { from { opacity:0; transform:translateY(16px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+
+    .fade-up  { animation: fadeUp  0.6s ease both; }
+    .fade-in  { animation: fadeIn  0.4s ease both; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* ── Header ── */
+    header { padding: 80px 0 52px; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted2); font-size: 11px; padding: 5px 14px;
+      border-radius: 100px; margin-bottom: 28px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      animation: fadeUp 0.5s 0.05s ease both;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; background: var(--accent);
+      border-radius: 50%; animation: pulse 2s infinite;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 1.05;
+      margin-bottom: 18px;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    h1 .accent {
+      color: transparent;
+      background: linear-gradient(135deg, #818cf8, #6366f1, #a78bfa);
+      -webkit-background-clip: text; background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--muted2); font-size: 15px;
+      max-width: 420px; line-height: 1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+
+    /* ── Stats ── */
+    .stats {
+      display: flex; gap: 24px; margin-top: 32px; flex-wrap: wrap;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .stat { display: flex; flex-direction: column; gap: 2px; }
+    .stat-val { font-size: 22px; font-weight: 700; color: var(--text); }
+    .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* ── Divider ── */
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 28px 0 0;
+      display: flex; flex-direction: column; gap: 16px;
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+
+    /* Arama */
+    .search-wrap {
+      position: relative;
+    }
+    .search-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); width: 16px; height: 16px; pointer-events: none;
+    }
+    #search {
+      width: 100%; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 11px 14px 11px 40px;
+      color: var(--text); font-size: 14px; font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    #search::placeholder { color: var(--muted); }
+    #search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* Kategori filtreleri */
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted2); font-size: 12px; font-weight: 600;
+      padding: 6px 14px; border-radius: 100px; cursor: pointer;
+      font-family: inherit; transition: all 0.18s ease;
+      letter-spacing: 0.03em;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active {
+      background: var(--accent); border-color: var(--accent);
+      color: white; box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* ── Sonuç satırı ── */
+    .results-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 24px 0 16px;
+    }
+    .results-count { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .clear-btn {
+      font-size: 11px; color: var(--muted2); background: none; border: none;
+      cursor: pointer; font-family: inherit; padding: 0;
+      text-decoration: underline; text-underline-offset: 3px;
+      display: none;
+    }
+    .clear-btn.visible { display: block; }
+    .clear-btn:hover { color: var(--text); }
+
+    /* ── Grid ── */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 14px;
+    }
+
+    /* ── Kart ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      animation: cardIn 0.35s ease both;
+    }
+
+    .card-glow {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top left, var(--accent-soft), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      background: var(--surface2);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(99,102,241,0.15);
+    }
+    .card:hover .card-glow { opacity: 1; }
+
+    .card-icon { font-size: 28px; line-height: 1; }
+
+    .card-title {
+      font-size: 15px; font-weight: 650; letter-spacing: -0.01em;
+    }
+
+    .card-desc {
+      font-size: 13px; color: var(--muted2); line-height: 1.6; flex: 1;
+    }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .tag-oyun      { background: rgba(16,185,129,0.1);  color: #34d399; }
+    .tag-uygulama  { background: rgba(99,102,241,0.12); color: #818cf8; }
+    .tag-yarışma   { background: rgba(245,158,11,0.12); color: #fbbf24; }
+    .tag-alıştırma { background: rgba(59,130,246,0.12); color: #60a5fa; }
+    .tag-sunum     { background: rgba(236,72,153,0.12); color: #f472b6; }
+    .tag-yazı      { background: rgba(251,191,36,0.12); color: #fcd34d; }
+    .tag-varsayılan{ background: var(--accent-soft);    color: var(--accent); }
+
+    .card-arrow {
+      color: var(--muted); width: 14px; height: 14px;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .card:hover .card-arrow { color: var(--accent); transform: translate(2px,-2px); }
+
+    /* ── Boş durum ── */
+    #empty {
+      display: none; grid-column: 1/-1;
+      text-align: center; padding: 60px 24px; color: var(--muted2);
+    }
+    #empty.show { display: block; }
+    #empty p:first-child { font-size: 36px; margin-bottom: 12px; }
+    #empty p:last-child { font-size: 14px; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 40px 24px;
+      color: var(--muted); font-size: 12px;
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+      margin-top: 40px;
+    }
+    footer a { color: var(--muted2); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 520px) {
+      header { padding: 52px 0 40px; }
+      #grid { grid-template-columns: 1fr; }
+      .stats { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="badge"><span class="badge-dot"></span> Lab</div>
+    <h1>Rauf <span class="accent">Enç</span></h1>
+    <p class="subtitle">Denemeler, oyunlar, uygulamalar ve fikirler.<br>Burada yaptığım şeyleri bulabilirsiniz.</p>
+    <div class="stats">
+      <div class="stat"><span class="stat-val" id="total-count">0</span><span class="stat-lbl">Proje</span></div>
+      <div class="stat"><span class="stat-val" id="cat-count">0</span><span class="stat-lbl">Kategori</span></div>
+    </div>
+  </header>
+</div>
+
+<hr class="divider" />
+
+<div class="wrap">
+  <div class="controls">
+    <div class="search-wrap">
+      <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 111 11a6 6 0 0116 0z"/>
+      </svg>
+      <input id="search" type="search" placeholder="Proje ara..." autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+
+  <div class="results-bar">
+    <span class="results-count" id="results-count"></span>
+    <button class="clear-btn" id="clear-btn" onclick="clearFilters()">Filtreyi temizle</button>
+  </div>
+
+  <div id="grid">
+    <div id="empty">
+      <p>🔍</p>
+      <p>Aramanla eşleşen proje bulunamadı.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="https://raufenc.com">raufenc.com</a>
+  &nbsp;·&nbsp;
+  Rauf Enç &copy; 2026
+</footer>
+
+<script>
+// ── PROJE VERİSİ ─────────────────────────────────────────────
+// Yeni proje eklemek için buraya bir nesne ekle:
+const PROJELER = [
+  {
+    emoji: '🧭',
+    title: 'Kalbinin Haritası',
+    desc: '17 farklı testte kalbine ayna tut. Kibir, sabır, ihlas... Yapay zeka destekli nefs muhasebesi.',
+    tag: 'Uygulama',
+    href: '/kalbinin-haritasi'
+  },
+  {
+    emoji: '🎮',
+    title: 'İHO 7. Sınıf 1. Ünite Oyunlar',
+    desc: '16 benzersiz Arapça oyun tek bir yerde: kelime, cümle, hafıza, saat, diyalog ve sınıf yarışması.',
+    tag: 'Oyun',
+    href: '/iho-oyunlar'
+  },
+  {
+    emoji: '🌙',
+    title: 'Namaz Vakitleri',
+    desc: 'Güneşin gökyüzündeki yolculuğu ve İslam\'ın beş vakit namazının astronomik sırları. Temkin, ta\'dîl-i zemân ve daha fazlası.',
+    tag: 'Uygulama',
+    href: '/namaz-vakitleri'
+  },
+];
+
+// ── DURUM ────────────────────────────────────────────────────
+let aktifTag = 'Tümü';
+let aramaMetni = '';
+
+// ── BAŞLAT ───────────────────────────────────────────────────
+function başlat() {
+  // Kategorileri topla
+  const tagSet = ['Tümü', ...new Set(PROJELER.map(p => p.tag))];
+
+  // Filtre butonları
+  const filtersEl = document.getElementById('filters');
+  tagSet.forEach(tag => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (tag === 'Tümü' ? ' active' : '');
+    btn.textContent = tag;
+    btn.onclick = () => setTag(tag);
+    btn.dataset.tag = tag;
+    filtersEl.appendChild(btn);
+  });
+
+  // Stats
+  document.getElementById('total-count').textContent = PROJELER.length;
+  document.getElementById('cat-count').textContent = tagSet.length - 1;
+
+  // Arama
+  document.getElementById('search').addEventListener('input', e => {
+    aramaMetni = e.target.value.trim();
+    renderCards();
+    updateClearBtn();
+  });
+
+  renderCards();
+}
+
+// ── FİLTRELE ─────────────────────────────────────────────────
+function filtrele() {
+  return PROJELER.filter(p => {
+    const tagOK = aktifTag === 'Tümü' || p.tag === aktifTag;
+    const aramaOK = !aramaMetni ||
+      p.title.toLowerCase().includes(aramaMetni.toLowerCase()) ||
+      p.desc.toLowerCase().includes(aramaMetni.toLowerCase()) ||
+      p.tag.toLowerCase().includes(aramaMetni.toLowerCase());
+    return tagOK && aramaOK;
+  });
+}
+
+// ── TAG SEÇ ──────────────────────────────────────────────────
+function setTag(tag) {
+  aktifTag = tag;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tag === tag);
+  });
+  renderCards();
+  updateClearBtn();
+}
+
+// ── TEMİZLE ──────────────────────────────────────────────────
+function clearFilters() {
+  aktifTag = 'Tümü';
+  aramaMetni = '';
+  document.getElementById('search').value = '';
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tag === 'Tümü');
+  });
+  renderCards();
+  updateClearBtn();
+}
+
+// ── CLEAR BTN ────────────────────────────────────────────────
+function updateClearBtn() {
+  const aktif = aktifTag !== 'Tümü' || aramaMetni !== '';
+  document.getElementById('clear-btn').classList.toggle('visible', aktif);
+}
+
+// ── TAG RENK SINIFI ──────────────────────────────────────────
+function tagClass(tag) {
+  const map = {
+    'Oyun': 'tag-oyun', 'Uygulama': 'tag-uygulama',
+    'Yarışma': 'tag-yarışma', 'Alıştırma': 'tag-alıştırma',
+    'Sunum': 'tag-sunum', 'Yazı': 'tag-yazı'
+  };
+  return map[tag] || 'tag-varsayılan';
+}
+
+// ── KARTLARI RENDER ET ────────────────────────────────────────
+function renderCards() {
+  const sonuclar = filtrele();
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const countEl = document.getElementById('results-count');
+
+  // Eski kartları temizle (empty'i koru)
+  grid.querySelectorAll('.card').forEach(c => c.remove());
+
+  // Sayaç
+  const total = PROJELER.length;
+  const shown = sonuclar.length;
+  countEl.textContent = aktifTag === 'Tümü' && !aramaMetni
+    ? `${total} proje`
+    : `${shown} / ${total} proje`;
+
+  if (sonuclar.length === 0) {
+    empty.classList.add('show');
+    return;
+  }
+  empty.classList.remove('show');
+
+  sonuclar.forEach((p, i) => {
+    const a = document.createElement('a');
+    a.className = 'card';
+    a.href = p.href;
+    a.style.animationDelay = `${i * 50}ms`;
+    a.innerHTML = `
+      <div class="card-glow"></div>
+      <div class="card-icon">${p.emoji}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div class="card-footer">
+        <span class="card-tag ${tagClass(p.tag)}">${p.tag}</span>
+        <svg class="card-arrow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/>
+        </svg>
+      </div>`;
+    grid.appendChild(a);
+  });
+}
+
+// ── SCROLL ANİMASYONU ─────────────────────────────────────────
+function scrollAnim() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.style.opacity = '1'; obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.card').forEach(c => obs.observe(c));
+}
+
+başlat();
+</script>
+</body>
+</html>
