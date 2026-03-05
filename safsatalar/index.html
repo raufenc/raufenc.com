@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safsata Dedektifi — Rauf Enç</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0905;
+      --surface: #141009;
+      --surface2: #1d170e;
+      --border: #2d2214;
+      --text: #f0e8d0;
+      --muted: #5a4a32;
+      --muted2: #8a7050;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245,158,11,0.10);
+      --accent-glow: rgba(245,158,11,0.28);
+      --danger: #ef4444;
+      --danger-soft: rgba(239,68,68,0.12);
+      --success: #22c55e;
+      --success-soft: rgba(34,197,94,0.12);
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 20% 10%, rgba(245,158,11,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(239,68,68,0.03) 0%, transparent 50%);
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes pulse    { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+    @keyframes dialogIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+    /* ── HERO ── */
+    .hero { text-align: center; padding: 72px 20px 60px; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--accent-soft); border: 1px solid rgba(245,158,11,0.25);
+      color: var(--accent); font-size: 12px; font-weight: 600;
+      padding: 6px 16px; border-radius: 100px; margin-bottom: 24px;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+    .hero h1 {
+      font-size: clamp(40px, 8vw, 82px); font-weight: 900;
+      letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 18px;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero-sub {
+      color: var(--muted2); font-size: 16px; max-width: 420px;
+      margin: 0 auto 36px; animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; animation: fadeUp 0.5s 0.3s ease both; }
+    .btn-primary {
+      background: var(--accent); color: #000; border: none;
+      padding: 13px 28px; border-radius: 10px; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.2s; letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { background: #fbbf24; transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .btn-secondary {
+      background: var(--surface2); color: var(--text); border: 1px solid var(--border);
+      padding: 13px 28px; border-radius: 10px; font-size: 14px; font-weight: 600;
+      cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── TABS ── */
+    .tabs-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11,9,5,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 0 20px;
+    }
+    .tabs-inner { max-width: 960px; margin: 0 auto; display: flex; }
+    .tab-btn {
+      background: none; border: none; color: var(--muted2); font-family: inherit;
+      font-size: 13px; font-weight: 600; padding: 16px 20px; cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all 0.2s; letter-spacing: 0.03em;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.3s ease; }
+
+    /* ── KEŞFet (SLIDE MODE) ── */
+    #s-kesf { padding: 36px 0 60px; }
+    .slide-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; overflow: hidden;
+      display: grid; grid-template-columns: 55% 45%;
+      min-height: 480px;
+    }
+    .slide-img-panel { position: relative; overflow: hidden; background: #000; }
+    .slide-img-panel img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: opacity 0.4s ease;
+    }
+    .slide-text-panel {
+      padding: 32px 28px; display: flex; flex-direction: column; gap: 14px;
+      overflow-y: auto; max-height: 540px;
+    }
+    .slide-counter { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
+    .slide-title { font-size: 22px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.2; }
+    .slide-en { font-size: 12px; color: var(--muted2); font-style: italic; margin-top: -8px; }
+    .slide-def {
+      font-size: 13px; color: var(--text); line-height: 1.7;
+      padding: 10px 14px; background: var(--accent-soft);
+      border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+    }
+    .section-label { font-size: 10px; font-weight: 700; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; }
+    .diyalog-box { display: flex; flex-direction: column; gap: 8px; }
+    .dialog-line { display: flex; gap: 10px; align-items: flex-start; animation: dialogIn 0.3s ease both; }
+    .dialog-kisi { font-size: 11px; font-weight: 800; color: var(--accent); min-width: 18px; padding-top: 4px; flex-shrink: 0; }
+    .dialog-metin {
+      font-size: 12px; color: var(--text); background: var(--surface2);
+      border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px;
+      line-height: 1.5; flex: 1;
+    }
+    .dialog-metin.safsata { border-color: var(--danger); background: var(--danger-soft); }
+    .safsata-badge {
+      display: inline-block; font-size: 9px; font-weight: 800;
+      background: var(--danger); color: white; padding: 2px 6px;
+      border-radius: 4px; margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .korunma-list { display: flex; flex-direction: column; gap: 5px; }
+    .korunma-item { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; color: var(--text); }
+    .korunma-item::before { content: '✓'; color: var(--success); font-weight: 700; flex-shrink: 0; }
+    .slide-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 20px; }
+    .nav-btn {
+      width: 42px; height: 42px; background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); border-radius: 50%; font-size: 16px; cursor: pointer;
+      transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+    }
+    .nav-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .nav-btn:disabled:hover { background: var(--surface); color: var(--text); border-color: var(--border); }
+    .slide-dots { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; max-width: 280px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all 0.2s; }
+    .dot.active { background: var(--accent); transform: scale(1.3); }
+    .dot.seen { background: var(--muted); }
+
+    /* ── DEDEKTİF OYUNU ── */
+    #s-oyun { padding: 36px 0 60px; }
+    .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+    .game-title { font-size: 22px; font-weight: 800; }
+    .score-box {
+      background: var(--accent-soft); border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 10px; padding: 10px 20px;
+    }
+    .score-label { font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.1em; }
+    .score-val { font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1.1; }
+    .scenario-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .scenario-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .scenario-title { font-size: 18px; font-weight: 800; margin-top: 4px; }
+    .scenario-hint { font-size: 12px; color: var(--muted2); font-style: italic; margin: 10px 0 16px; }
+    .scenario-text { font-size: 14px; line-height: 1.9; color: var(--text); }
+    .scenario-text .person { font-weight: 700; color: var(--accent); }
+    .sus {
+      background: rgba(245,158,11,0.12); border-bottom: 2px dashed var(--accent);
+      cursor: pointer; border-radius: 3px; padding: 1px 3px; transition: background 0.2s;
+    }
+    .sus:hover { background: rgba(245,158,11,0.22); }
+    .sus.revealed {
+      background: var(--success-soft); border-bottom: 2px solid var(--success);
+      cursor: default; border-radius: 3px; padding: 1px 3px;
+    }
+    .scenario-progress { margin-top: 14px; font-size: 12px; color: var(--muted2); }
+    .scenario-complete {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+      margin-top: 14px; background: var(--success-soft); border: 1px solid var(--success);
+      border-radius: 10px; padding: 12px 18px; font-size: 13px; font-weight: 600; color: var(--success);
+    }
+    .next-scenario-btn {
+      background: var(--success); color: #000; border: none;
+      padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+    }
+    .result-screen { text-align: center; padding: 60px 20px; animation: fadeUp 0.5s ease; }
+    .result-emoji { font-size: 72px; margin-bottom: 16px; }
+    .result-rank { font-size: 30px; font-weight: 900; color: var(--accent); margin-bottom: 8px; }
+    .result-score { font-size: 52px; font-weight: 900; margin-bottom: 8px; }
+    .result-msg { font-size: 15px; color: var(--muted2); margin-bottom: 32px; }
+    .result-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── PICKER MODAL ── */
+    .picker-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.72);
+      z-index: 1000; display: flex; align-items: center; justify-content: center;
+      padding: 20px; backdrop-filter: blur(4px); animation: fadeIn 0.2s ease;
+    }
+    .picker-modal {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 26px; max-width: 560px; width: 100%;
+      animation: fadeUp 0.25s ease; max-height: 90vh; overflow-y: auto;
+    }
+    .picker-q { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .picker-quote {
+      font-size: 13px; color: var(--muted2); font-style: italic;
+      padding: 8px 12px; background: var(--surface); border-radius: 8px;
+      border-left: 3px solid var(--accent); margin-bottom: 18px; line-height: 1.5;
+    }
+    .picker-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; margin-bottom: 14px; }
+    .picker-btn {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      padding: 9px 11px; border-radius: 8px; font-size: 11px; font-weight: 600;
+      cursor: pointer; font-family: inherit; text-align: left; transition: all 0.15s;
+    }
+    .picker-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+    .picker-btn:disabled { cursor: default; }
+    .picker-btn.correct { background: var(--success-soft); border-color: var(--success); color: var(--success); }
+    .picker-btn.wrong   { background: var(--danger-soft);  border-color: var(--danger);  color: var(--danger); }
+    .picker-feedback {
+      padding: 12px 14px; border-radius: 10px; font-size: 13px; margin-bottom: 10px;
+    }
+    .picker-feedback.ok  { background: var(--success-soft); border: 1px solid var(--success); }
+    .picker-feedback.err { background: var(--danger-soft);  border: 1px solid var(--danger); }
+    .picker-close {
+      width: 100%; background: none; border: 1px solid var(--border); color: var(--muted2);
+      padding: 9px; border-radius: 8px; cursor: pointer; font-family: inherit; font-size: 12px;
+      transition: all 0.15s;
+    }
+    .picker-close:hover { border-color: var(--muted2); color: var(--text); }
+
+    /* ── ÖZET ── */
+    #s-ozet { padding: 36px 0 60px; }
+    .ozet-intro { margin-bottom: 24px; }
+    .ozet-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 12px; }
+    .ozet-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0; cursor: pointer; overflow: hidden;
+      transition: all 0.2s;
+    }
+    .ozet-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(245,158,11,0.12); }
+    .ozet-card img { width: 100%; height: 80px; object-fit: cover; display: block; opacity: 0.85; transition: opacity 0.2s; }
+    .ozet-card:hover img { opacity: 1; }
+    .ozet-body { padding: 12px 14px; }
+    .ozet-num { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .ozet-name { font-size: 13px; font-weight: 700; margin: 3px 0 2px; }
+    .ozet-en { font-size: 11px; color: var(--muted2); font-style: italic; }
+    .ozet-goto { margin-top: 6px; font-size: 11px; color: var(--accent); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 36px 20px; color: var(--muted); font-size: 12px;
+      border-top: 1px solid var(--border); position: relative; z-index: 1; margin-top: 20px;
+    }
+    footer a { color: var(--muted2); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .slide-wrap { grid-template-columns: 1fr; }
+      .slide-img-panel { height: 210px; }
+      .slide-text-panel { padding: 22px 18px; max-height: none; }
+      .picker-grid { grid-template-columns: 1fr; }
+      .ozet-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero h1 { font-size: 46px; }
+      .tab-btn { padding: 14px 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span> Eleştirel Düşünme Rehberi</div>
+  <h1>Safsata <span class="accent">Dedektifi</span></h1>
+  <p class="hero-sub">13 mantıksal hata. Öğren, tanı, gerçek diyaloglarda yakala.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="setTab('kesf')">📖 Safsataları Keşfet</button>
+    <button class="btn-secondary" onclick="setTab('oyun')">🔍 Dedektif Moduna Geç</button>
+  </div>
+</section>
+
+<!-- TABS -->
+<nav class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn active" data-tab="kesf" onclick="setTab('kesf')">📖 Keşfet</button>
+    <button class="tab-btn" data-tab="oyun" onclick="setTab('oyun')">🕵️ Dedektif</button>
+    <button class="tab-btn" data-tab="ozet" onclick="setTab('ozet')">📋 Özet</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- KEŞFET -->
+  <section id="s-kesf" class="section active">
+    <div class="slide-wrap">
+      <div class="slide-img-panel">
+        <img id="slide-img" src="" alt="">
+      </div>
+      <div class="slide-text-panel" id="slide-text"></div>
+    </div>
+    <div class="slide-nav">
+      <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">&#8592;</button>
+      <div class="slide-dots" id="slide-dots"></div>
+      <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- DEDEKTİF -->
+  <section id="s-oyun" class="section">
+    <div class="game-header">
+      <div>
+        <h2 class="game-title">🕵️ Dedektif Modu</h2>
+        <p style="font-size:13px;color:var(--muted2);margin-top:4px">Sarı altı çizili ifadelere tıkla, hangi safsata olduğunu bul</p>
+      </div>
+      <div class="score-box">
+        <div class="score-label">Puan</div>
+        <div class="score-val" id="score-display">0</div>
+      </div>
+    </div>
+    <div id="game-container"></div>
+  </section>
+
+  <!-- ÖZET -->
+  <section id="s-ozet" class="section">
+    <div class="ozet-intro">
+      <h2 style="font-size:22px;font-weight:900;padding-top:36px;margin-bottom:8px">13 Safsata — Özet</h2>
+      <p style="font-size:13px;color:var(--muted2)">Bir karta tıklayarak Keşfet modunda detayına git</p>
+    </div>
+    <div class="ozet-grid" id="ozet-grid"></div>
+  </section>
+
+</div>
+
+<!-- PICKER MODAL -->
+<div id="picker-overlay" style="display:none">
+  <div class="picker-modal">
+    <div class="picker-q">Bu ifade hangi safsatayı içeriyor?</div>
+    <div class="picker-quote" id="picker-quote"></div>
+    <div class="picker-grid" id="picker-grid"></div>
+    <div id="picker-feedback" style="display:none" class="picker-feedback"></div>
+    <button class="picker-close" id="picker-close">Kapat</button>
+  </div>
+</div>
+
+<footer>
+  <a href="/index.html">← Lab'a Dön</a> &nbsp;·&nbsp; Rauf Enç &copy; 2026
+</footer>
+
+<script>
+// ============================================================
+// VERİ: 13 SAFSATA
+// ============================================================
+const SAFSATALAR = [
+  {
+    isim: 'Saman Adam Mantığı', en: 'Straw Man Fallacy', emoji: '🎭',
+    tanim: 'Rakibin fikrini çarpıtıp, onun hiç söylemediği zayıf bir iddiayı çürütmek.',
+    diyalog: [
+      {kisi:'A', metin:'Fabrikaların daha iyi denetlenmesi gerekiyor.', safsata:false},
+      {kisi:'B', metin:'Yani sanayiyi kapatmak ve ülkeyi batırmak mı istiyorsun?', safsata:true, etiket:'Argüman çarpıtıldı!'}
+    ],
+    korunma: ['Karşı tarafın tam olarak ne dediğine dikkat edin','"Ben öyle bir şey söylemedim" diyerek düzeltin','Gerçek argümana odaklanın, uydurma kuklaları değil'],
+    gorsel: 'images/image-3-1.jpeg'
+  },
+  {
+    isim: 'Otoriteye Başvurma', en: 'Appeal to Authority', emoji: '🏆',
+    tanim: 'Birinin ünvanı veya ünü olduğu için sözünü tek geçerli kanıt olarak kabul etmek.',
+    diyalog: [
+      {kisi:'?', metin:'Ünlü kalp cerrahı bu arabanın motorunun harika olduğunu söylüyor, hemen almalıyım.', safsata:true, etiket:'Uzmanlık alanı yanlış!'}
+    ],
+    korunma: ['"Kim söyledi?" yerine "Kanıtı ne?" diye sorun','Uzmanlık alanını kontrol edin: Konu gerçekten uzmanlık alanında mı?','Birden fazla kaynak araştırın'],
+    gorsel: 'images/image-5-1.jpeg'
+  },
+  {
+    isim: 'Yanlış İkilem', en: 'False Dilemma / All or Nothing', emoji: '⚖️',
+    tanim: 'Gerçekte pek çok seçenek varken durumu sadece iki seçenek gibi sunmak.',
+    diyalog: [
+      {kisi:'?', metin:'Ya beni tamamen desteklersin ya da düşmanımsın!', safsata:true, etiket:'Orta yollar yok sayılıyor!'}
+    ],
+    korunma: ['"Başka seçenekler neler?" diye sorun','İki uç arasında ara seçenekleri arayın','"Ya bu ya o" diyen kişinin amacını sorgulayın'],
+    gorsel: 'images/image-7-1.jpeg'
+  },
+  {
+    isim: 'Kişiye Saldırı', en: 'Ad Hominem', emoji: '👤',
+    tanim: 'Fikri değil, fikri ortaya koyan kişiyi hedef alarak kendini haklı çıkarmaya çalışmak.',
+    diyalog: [
+      {kisi:'A', metin:'Ekonomi politikamızı gözden geçirmeliyiz.', safsata:false},
+      {kisi:'B', metin:'Senin ekonomik önerini ciddiye alamayız çünkü geçen yıl boşandın!', safsata:true, etiket:'Kişiye saldırı!'}
+    ],
+    korunma: ['Mesajı incele, mesajcıyı değil','Kişisel saldırıları görmezden gel, argümana dön','Kanıtları değerlendir, konuşanı değil'],
+    gorsel: 'images/image-9-1.jpeg'
+  },
+  {
+    isim: 'Kaygan Zemin', en: 'Slippery Slope', emoji: '🌊',
+    tanim: 'Küçük bir adımın, kanıt olmadan, bir felaket zincirine yol açacağını iddia etmek.',
+    diyalog: [
+      {kisi:'?', metin:"Çocuğun saat 10'da eve gelmesine izin verirsen, yarın evden ayrılır ve ertesi gün suçlu olur!", safsata:true, etiket:'Kanıtsız felaket zinciri!'}
+    ],
+    korunma: ['Her adım gerçekten bir sonrakini garantiler mi?','Neden-sonuç bağlantısını kanıtlamasını isteyin','Fren mekanizmaları var mı?'],
+    gorsel: 'images/image-11-1.jpeg'
+  },
+  {
+    isim: 'Kale Direklerini Taşımak', en: 'Moving the Goalposts', emoji: '⚽',
+    tanim: 'Karşı taraf istenen kanıtı sunduğunda kriterleri değiştirerek sürekli yükseltmek.',
+    diyalog: [
+      {kisi:'A', metin:'UFO gördüm. Fotoğraf da getirdim.', safsata:false},
+      {kisi:'B', metin:'Fotoğraf yetmez, video getir.', safsata:false},
+      {kisi:'A', metin:'(Video getirir)', safsata:false},
+      {kisi:'B', metin:'Video yetmez, uzaylıyı canlı getir!', safsata:true, etiket:'Kriter değiştirildi!'}
+    ],
+    korunma: ['Tartışmanın başındaki kriteri netleştirin','Kriter karşılandığında kabul edin','Kriterler değişirse işaret edin'],
+    gorsel: 'images/image-13-1.jpeg'
+  },
+  {
+    isim: 'Seçici Kanıt', en: 'Cherry Picking', emoji: '🍒',
+    tanim: 'İddiayı destekleyen kanıtları seçmek, tersi kanıtları göz ardı etmek.',
+    diyalog: [
+      {kisi:'?', metin:'Bu diyet harika! Bak 3 kişi kilo verdi!', safsata:true, etiket:'97 kişi nerede?'}
+    ],
+    korunma: ['Sadece başarı hikayelerini mi gösteriyor? Başarısızlıkları sor','Büyük resmi iste: Tüm veri seti nerede?','Karşıt kanıtları araştır'],
+    gorsel: 'images/image-15-1.jpeg'
+  },
+  {
+    isim: 'Bandwagon Safsatası', en: 'Bandwagon Appeal', emoji: '🎺',
+    tanim: 'Bir fikrin popüler olması onu doğru yapmaz. Kalabalığa uymak ≠ Hakikat.',
+    diyalog: [
+      {kisi:'?', metin:'Bu uygulamayı herkes kullanıyor, ben de indirmeliyim!', safsata:true, etiket:'Popülerlik ≠ Doğruluk'}
+    ],
+    korunma: ['Kalabalıklar yanılabilir — tarih bunun örnekleriyle dolu','Popülarite değil, kanıt arayın','Kendi kritik düşünme süzgecinizden geçirin'],
+    gorsel: 'images/image-17-1.jpeg'
+  },
+  {
+    isim: "Kumarbaz Yanılgısı", en: "Gambler's Fallacy", emoji: '🎰',
+    tanim: 'Rastgele olaylarda geçmişteki sonuçların gelecekteki olasılığı etkileyeceğini düşünmek.',
+    diyalog: [
+      {kisi:'?', metin:'Rulette 5 kez siyah geldi, şimdi kesinlikle kırmızı gelme zamanı!', safsata:true, etiket:'Her dönüş bağımsız!'}
+    ],
+    korunma: ['Rastgele olayların hafızası yoktur','Her atış, her dönüş bağımsızdır','Geçmiş seriler gelecekteki olasılığı değiştirmez'],
+    gorsel: 'images/image-19-1.jpeg'
+  },
+  {
+    isim: 'Yanlış Analoji', en: 'False Analogy', emoji: '🔀',
+    tanim: 'Sadece yüzeysel benzerlikleri olan iki şeyi sanki her bakımdan özdeşmiş gibi karşılaştırmak.',
+    diyalog: [
+      {kisi:'?', metin:'Devlet yönetmek şirket yönetmeye benzer; nasıl şirket kâr etmek zorundaysa, devlet de öyle!', safsata:true, etiket:'Kritik farklar var!'}
+    ],
+    korunma: ['Elma ile armutu karşılaştırmayın','Kritik farklara odaklanın','Analoji aydınlatıcı olabilir ama kanıt değildir'],
+    gorsel: 'images/image-21-1.jpeg'
+  },
+  {
+    isim: 'Kuyuya Zehir Atma', en: 'Poisoning the Well', emoji: '☠️',
+    tanim: 'Rakip konuşmadan önce, onun hakkında olumsuz bilgiler vererek yargıyı etkilemek.',
+    diyalog: [
+      {kisi:'?', metin:'Rakibim birazdan konuşacak ama unutmayın, onun geçmişi şüpheli.', safsata:true, etiket:'Önyargı yaratılıyor!'}
+    ],
+    korunma: ['Ön yargı oluşturma girişimlerini fark edin','Kişinin söyleyeceklerini kendi sözleriyle değerlendirin','Geçmiş dedikodu değil, şimdiki argüman önemli'],
+    gorsel: 'images/image-23-1.jpeg'
+  },
+  {
+    isim: 'Sen De! Safsatası', en: 'Tu Quoque / You Too!', emoji: '👉',
+    tanim: "Bir eleştiriye 'Sen de yapıyorsun!' diyerek eleştiriyi geçersiz kılmaya çalışmak.",
+    diyalog: [
+      {kisi:'A', metin:'Sigarayı bırakmalısın, sağlığına zararlı.', safsata:false},
+      {kisi:'B', metin:'Bana sigara içmemi söylüyorsun ama sen de sağlıksız besleniyorsun!', safsata:true, etiket:'Karşı suçlama!'}
+    ],
+    korunma: ['İki yanlış bir doğru etmez','Karşı suçlama meseleyi çözmez','Her eleştiriyi kendi ayakları üzerinde değerlendirin'],
+    gorsel: 'images/image-25-1.jpeg'
+  },
+  {
+    isim: 'Özel Durum Talebi', en: 'Special Pleading', emoji: '👑',
+    tanim: 'Genel kuralı herkes için kabul etmek, ama kendi durumuna haksız bir ayrıcalık talep etmek.',
+    diyalog: [
+      {kisi:'?', metin:'Kırmızı ışıkta geçmek suçtur, ama ben acelem olduğu için geçtim!', safsata:true, etiket:'Herkesin acelesi olabilir!'}
+    ],
+    korunma: ['Çifte standarda düşmeyin','Kural herkese aynı şekilde uygulanmalı','"Ama ben…" gibi keyfi bahaneler kural değildir'],
+    gorsel: 'images/image-27-1.jpeg'
+  }
+];
+
+// ============================================================
+// VERİ: 5 SENARYO (tip:'sus' → data-sus counter ile işaretlenir)
+// ============================================================
+const SENARYOLAR = [
+  {
+    baslik: 'Okul Konseyi Toplantısı',
+    baglam: 'Teneffüs sürelerinin uzatılması tartışılıyor…',
+    satirlar: [
+      {kisi:'Ayşe', metin:'Teneffüslerin 10 dakika uzatılmasını öneriyorum. Araştırmalar kısa molaların beyin performansını artırdığını gösteriyor.'},
+      {kisi:'Okul Müdürü', parcalar:[
+        {tip:'text', v:'Değerlendirmeden önce şunu belirtmeliyim: '},
+        {tip:'sus', v:'Ayşe geçen dönem sınıfın en düşük notlarını aldı — böyle birinin eğitim önerisi ciddiye alınabilir mi?', dogru:3, ac:'Argümanı çürütmek yerine öneriyi yapan kişi hedef alınıyor. Notların düşük olması, önerinin geçersizliğini kanıtlamaz.'},
+        {tip:'text', v:''}
+      ]},
+      {kisi:'Öğretmen', parcalar:[
+        {tip:'text', v:'Sakın kabul etmeyin! '},
+        {tip:'sus', v:'Teneffüsler uzarsa dersler kısalır, başarılar düşer, okul puanı erir, iyi öğrenciler başka okullara geçer, okulumuz kapanır!', dogru:4, ac:'Her adımın bir sonrakini garantilediği kanıtlanmıyor. Küçük bir değişiklikten felakete uzanan zincir, gerçek neden-sonuç bağlantıları kurulmadan sunuluyor.'},
+        {tip:'text', v:''}
+      ]}
+    ]
+  },
+  {
+    baslik: 'Aile Yemek Masasında',
+    baglam: 'Zeynep haftada birkaç gün et yememe kararını açıklıyor…',
+    satirlar: [
+      {kisi:'Zeynep', metin:'Haftada 3 gün sebze ağırlıklı beslenebiliriz. Hem sağlık hem de çevre için iyi olur.'},
+      {kisi:'Baba', parcalar:[
+        {tip:'text', v:'Yani demek istiyorsun ki '},
+        {tip:'sus', v:'et tamamen yasaklansın, hiç et yemeyelim, mağara insanlarına mı dönelim?!', dogru:0, ac:'Zeynep "haftada 3 gün" dedi, baba bunu "tamamen et yok" şeklinde çarpıtıyor. Gerçek argüman değil, uydurulmuş daha zayıf bir versiyon çürütülüyor.'},
+        {tip:'text', v:' Olmaz öyle şey.'}
+      ]},
+      {kisi:'Anne', parcalar:[
+        {tip:'text', v:''},
+        {tip:'sus', v:'Mahallemizdeki herkes her gün et yiyor, dedem de 90 yıl böyle yaşadı. Bu kadar insan yanılıyor olamaz.', dogru:7, ac:'"Herkes yapıyor" argümanı, bir şeyin doğru ya da sağlıklı olduğunu kanıtlamaz. Kalabalıklar tarihte pek çok kez yanılmıştır.'},
+        {tip:'text', v:''}
+      ]}
+    ]
+  },
+  {
+    baslik: 'Pazarlama Toplantısı',
+    baglam: 'Şirkette yeni bir dijital strateji tartışılıyor…',
+    satirlar: [
+      {kisi:'Selin', metin:'Sosyal medya bütçemizi %30 artırmalıyız. Rakiplerimizin büyümesinin arkasında bu yatıyor.'},
+      {kisi:'Genel Müdür', parcalar:[
+        {tip:'text', v:"Selin'in önerisini değerlendirmeden önce şunu belirteyim: "},
+        {tip:'sus', v:'Bu arkadaşımız geçen yıl iki projeyi zamanında teslim edemedi.', dogru:10, ac:"Selin konuşmadan önce itibarı zedeleniyor. Projedeki gecikmeler, sosyal medya stratejisinin geçerliliğiyle ilgisizdir."},
+        {tip:'text', v:' Bunu aklınızda tutun.'}
+      ]},
+      {kisi:'CFO', parcalar:[
+        {tip:'text', v:''},
+        {tip:'sus', v:'Ya tam bu stratejiyi kabul edersiniz ya da şirket dijital rekabeti tamamen kaybeder — başka yol yok.', dogru:2, ac:'Durum sadece "tam kabul et" veya "tamamen kaybet" şeklinde sunuluyor. Bütçeyi değiştirmek, kademeli uygulamak, farklı kanallara odaklanmak gibi pek çok ara seçenek mevcut.'},
+        {tip:'text', v:''}
+      ]}
+    ]
+  },
+  {
+    baslik: 'Sosyal Medya Reklamı',
+    baglam: 'Yeni bir enerji takviyesi için reklam içerikleri paylaşılıyor…',
+    satirlar: [
+      {kisi:'Reklam', parcalar:[
+        {tip:'text', v:''},
+        {tip:'sus', v:'Dünyaca ünlü futbolcu Hakan da bu takviyeyi kullanıyor! Sporcu sağlığı konusunda en güvenilir tavsiye.', dogru:1, ac:'Futbolcu atletik performansta ünlü olabilir, ama takviyenin biyokimyası konusunda uzman değil. Ünvan, ilgisiz bir alanda kanıt sayılamaz.'},
+        {tip:'text', v:''}
+      ]},
+      {kisi:'Kullanıcı Yorumu', parcalar:[
+        {tip:'text', v:'Sayfalarında '},
+        {tip:'sus', v:"20 kişinin 'harika sonuç aldım' yorumu var — kesinlikle işe yarıyor!", dogru:6, ac:'Binlerce kullanıcının olumsuz deneyimi gösterilmiyor. Sadece olumlu sonuçların vitrine çıkarılması gerçek etkinliği göstermez.'},
+        {tip:'text', v:''}
+      ]}
+    ]
+  },
+  {
+    baslik: 'Canlı Tartışma Programı',
+    baglam: 'İki politikacı ekonomi politikaları üzerine tartışıyor…',
+    satirlar: [
+      {kisi:'Ahmet Bey', parcalar:[
+        {tip:'text', v:''},
+        {tip:'sus', v:'Devleti yönetmek şirket yönetmek gibidir; nasıl şirket kâr etmek zorundaysa, devlet de vatandaşına kâr etmeli!', dogru:9, ac:'Devlet ve şirket çok farklı amaçlara sahip: şirket kâr, devlet kamu yararı hedefler. Yüzeysel benzerlik, derin farklılıkları gizliyor.'},
+        {tip:'text', v:''}
+      ]},
+      {kisi:'Mehmet Bey', parcalar:[
+        {tip:'text', v:'Ekonomi politikamı eleştiriyorsun ama '},
+        {tip:'sus', v:'senin geçen dönemde borçlanma oranların rekor kırdı!', dogru:11, ac:"Mehmet Bey eleştiriyi yanıtlamak yerine karşı suçlama yapıyor. Geçmişteki borçlanma, Ahmet Bey'in bugünkü argümanının doğruluğunu etkilemiyor."},
+        {tip:'text', v:''}
+      ]}
+    ]
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentSlide = 0;
+const seen = new Set();
+let gameScore = 0;
+let currentScenario = 0;
+const scenarioDone = {}; // scenarioIdx → Set of solved sus indices
+let activeSus = null;
+
+// ============================================================
+// TABS
+// ============================================================
+function setTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('s-' + tab).classList.add('active');
+  document.querySelector('[data-tab="' + tab + '"]').classList.add('active');
+  if (tab === 'ozet') renderOzet();
+  window.scrollTo({top: document.querySelector('.tabs-bar').offsetTop - 10, behavior:'smooth'});
+}
+
+// ============================================================
+// KEŞFET
+// ============================================================
+function renderSlide() {
+  const s = SAFSATALAR[currentSlide];
+  seen.add(currentSlide);
+
+  const img = document.getElementById('slide-img');
+  img.style.opacity = '0';
+  img.src = s.gorsel;
+  img.alt = s.isim;
+  img.onload = () => { img.style.opacity = '1'; };
+
+  let diyalogHTML = '';
+  s.diyalog.forEach((d, i) => {
+    diyalogHTML += `<div class="dialog-line" style="animation-delay:${i*120}ms">
+      <div class="dialog-kisi">${d.kisi}</div>
+      <div>
+        <div class="dialog-metin${d.safsata?' safsata':''}">"${d.metin}"</div>
+        ${d.safsata ? `<div class="safsata-badge">⚠ ${d.etiket||'Safsata!'}</div>` : ''}
+      </div>
+    </div>`;
+  });
+
+  let korunmaHTML = s.korunma.map(k => `<div class="korunma-item">${k}</div>`).join('');
+
+  document.getElementById('slide-text').innerHTML = `
+    <div class="slide-counter">SAFSATA ${currentSlide+1} / ${SAFSATALAR.length}</div>
+    <div class="slide-title">${s.emoji} ${s.isim}</div>
+    <div class="slide-en">${s.en}</div>
+    <div class="slide-def">${s.tanim}</div>
+    <div class="section-label">💬 Örnek</div>
+    <div class="diyalog-box">${diyalogHTML}</div>
+    <div class="section-label" style="margin-top:4px">🛡️ Nasıl Korunursunuz?</div>
+    <div class="korunma-list">${korunmaHTML}</div>
+  `;
+
+  // Dots
+  const dots = document.getElementById('slide-dots');
+  dots.innerHTML = '';
+  SAFSATALAR.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i===currentSlide?' active':(seen.has(i)?' seen':''));
+    d.onclick = () => { currentSlide = i; renderSlide(); };
+    dots.appendChild(d);
+  });
+
+  document.getElementById('prev-btn').disabled = currentSlide === 0;
+  document.getElementById('next-btn').disabled = currentSlide === SAFSATALAR.length - 1;
+}
+
+function changeSlide(dir) {
+  const n = currentSlide + dir;
+  if (n < 0 || n >= SAFSATALAR.length) return;
+  currentSlide = n;
+  renderSlide();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('s-kesf').classList.contains('active')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+});
+
+// ============================================================
+// DEDEKTİF OYUNU
+// ============================================================
+function renderGame() {
+  if (currentScenario >= SENARYOLAR.length) { renderResult(); return; }
+
+  const s = SENARYOLAR[currentScenario];
+  if (!scenarioDone[currentScenario]) scenarioDone[currentScenario] = new Set();
+
+  let totalSus = 0;
+  s.satirlar.forEach(satir => {
+    if (satir.parcalar) satir.parcalar.forEach(p => { if(p.tip==='sus') totalSus++; });
+  });
+
+  let susCounter = 0;
+  let textHTML = '';
+
+  s.satirlar.forEach(satir => {
+    textHTML += `<p style="margin-bottom:14px"><span class="person">${satir.kisi}:</span> `;
+    if (satir.metin !== undefined) {
+      textHTML += `"${satir.metin}"`;
+    } else if (satir.parcalar) {
+      satir.parcalar.forEach(p => {
+        if (p.tip === 'text') {
+          textHTML += p.v;
+        } else if (p.tip === 'sus') {
+          const idx = susCounter++;
+          const solved = scenarioDone[currentScenario].has(idx);
+          if (solved) {
+            textHTML += `<span class="sus revealed">"${p.v}"</span>`;
+          } else {
+            textHTML += `<span class="sus"
+              data-idx="${idx}"
+              data-dogru="${p.dogru}"
+              data-ac="${encodeURIComponent(p.ac)}"
+            >"${p.v}"</span>`;
+          }
+        }
+      });
+    }
+    textHTML += '</p>';
+  });
+
+  const solvedCount = scenarioDone[currentScenario].size;
+  const complete = solvedCount >= totalSus;
+
+  let bottomHTML = '';
+  if (complete) {
+    const isLast = currentScenario >= SENARYOLAR.length - 1;
+    bottomHTML = `<div class="scenario-complete">
+      <span>✅ Tüm safsatalar tespit edildi!</span>
+      <button class="next-scenario-btn" onclick="nextScenario()">${isLast ? 'Sonuçları Gör →' : 'Sonraki Senaryo →'}</button>
+    </div>`;
+  } else {
+    bottomHTML = `<div class="scenario-progress">💡 ${totalSus - solvedCount} safsata daha bul</div>`;
+  }
+
+  document.getElementById('game-container').innerHTML = `
+    <div class="scenario-card">
+      <div class="scenario-num">Senaryo ${currentScenario+1} / ${SENARYOLAR.length}</div>
+      <div class="scenario-title">${s.baslik}</div>
+      <div class="scenario-hint">${s.baglam}</div>
+      <div class="scenario-text">${textHTML}</div>
+      ${bottomHTML}
+    </div>`;
+
+  document.querySelectorAll('.sus:not(.revealed)').forEach(el => {
+    el.addEventListener('click', () => clickSus(el));
+  });
+}
+
+function clickSus(el) {
+  const idx   = parseInt(el.dataset.idx);
+  const dogru = parseInt(el.dataset.dogru);
+  const ac    = decodeURIComponent(el.dataset.ac);
+  activeSus   = { el, idx, dogru, ac };
+  openPicker(el.textContent, dogru, ac);
+}
+
+function openPicker(quote, dogru, ac) {
+  document.getElementById('picker-quote').textContent = quote;
+
+  const grid = document.getElementById('picker-grid');
+  grid.innerHTML = '';
+  SAFSATALAR.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'picker-btn';
+    btn.textContent = `${i+1}. ${s.isim}`;
+    btn.onclick = () => selectFallacy(i, btn);
+    grid.appendChild(btn);
+  });
+
+  const fb = document.getElementById('picker-feedback');
+  fb.style.display = 'none';
+  fb.className = 'picker-feedback';
+
+  const closeBtn = document.getElementById('picker-close');
+  closeBtn.textContent = 'Kapat';
+  closeBtn.onclick = closePicker;
+
+  document.getElementById('picker-overlay').style.display = 'flex';
+}
+
+function selectFallacy(chosen, btn) {
+  const { el, idx, dogru, ac } = activeSus;
+  document.querySelectorAll('.picker-btn').forEach(b => b.disabled = true);
+
+  // Mark sus as solved regardless (give answer away on wrong too)
+  el.classList.add('revealed');
+  el.classList.remove('sus');
+  el.onclick = null;
+  if (!scenarioDone[currentScenario]) scenarioDone[currentScenario] = new Set();
+  scenarioDone[currentScenario].add(idx);
+
+  const fb = document.getElementById('picker-feedback');
+  const closeBtn = document.getElementById('picker-close');
+
+  if (chosen === dogru) {
+    btn.classList.add('correct');
+    gameScore += 10;
+    document.getElementById('score-display').textContent = gameScore;
+    fb.className = 'picker-feedback ok';
+    fb.innerHTML = `<strong style="color:var(--success)">✓ Doğru! +10 puan</strong><br><span style="font-size:12px;color:var(--muted2)">${ac}</span>`;
+    fb.style.display = 'block';
+    closeBtn.textContent = 'Devam →';
+    closeBtn.onclick = () => { closePicker(); renderGame(); };
+    setTimeout(() => { closePicker(); renderGame(); }, 2200);
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.picker-btn')[dogru].classList.add('correct');
+    fb.className = 'picker-feedback err';
+    fb.innerHTML = `<strong style="color:var(--danger)">✗ Yanlış. Doğrusu: ${SAFSATALAR[dogru].isim}</strong><br><span style="font-size:12px;color:var(--muted2)">${ac}</span>`;
+    fb.style.display = 'block';
+    closeBtn.textContent = 'Anladım, devam →';
+    closeBtn.onclick = () => { closePicker(); renderGame(); };
+  }
+}
+
+function closePicker() {
+  document.getElementById('picker-overlay').style.display = 'none';
+  activeSus = null;
+}
+
+// Close picker when clicking overlay background
+document.getElementById('picker-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closePicker();
+});
+
+function nextScenario() {
+  currentScenario++;
+  renderGame();
+}
+
+function renderResult() {
+  const maxScore = SENARYOLAR.reduce((acc, s) => {
+    s.satirlar.forEach(satir => {
+      if (satir.parcalar) satir.parcalar.forEach(p => { if(p.tip==='sus') acc += 10; });
+    });
+    return acc;
+  }, 0);
+
+  const pct = maxScore > 0 ? gameScore / maxScore : 0;
+  let rank, emoji;
+  if (pct >= 0.9)      { rank = 'Başkomiser';     emoji = '🏆'; }
+  else if (pct >= 0.6) { rank = 'Uzman Dedektif'; emoji = '🎯'; }
+  else if (pct >= 0.3) { rank = 'Dedektif';        emoji = '🕵️'; }
+  else                 { rank = 'Çaylak Dedektif'; emoji = '🔍'; }
+
+  document.getElementById('game-container').innerHTML = `
+    <div class="result-screen">
+      <div class="result-emoji">${emoji}</div>
+      <div class="result-rank">${rank}</div>
+      <div class="result-score">${gameScore} / ${maxScore}</div>
+      <div class="result-msg">Tüm senaryoları tamamladın! Mantıksal hataları artık çok daha iyi tanıyorsun.</div>
+      <div class="result-btns">
+        <button class="btn-primary" onclick="resetGame()">🔄 Tekrar Oyna</button>
+        <button class="btn-secondary" onclick="setTab('kesf')">📖 Keşfet Moduna Git</button>
+      </div>
+    </div>`;
+}
+
+function resetGame() {
+  gameScore = 0;
+  currentScenario = 0;
+  Object.keys(scenarioDone).forEach(k => delete scenarioDone[k]);
+  document.getElementById('score-display').textContent = '0';
+  renderGame();
+}
+
+// ============================================================
+// ÖZET GALERİSİ
+// ============================================================
+function renderOzet() {
+  const grid = document.getElementById('ozet-grid');
+  if (grid.children.length > 0) return;
+  SAFSATALAR.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'ozet-card';
+    card.onclick = () => { currentSlide = i; setTab('kesf'); renderSlide(); };
+    card.innerHTML = `
+      <img src="${s.gorsel}" alt="${s.isim}" loading="lazy">
+      <div class="ozet-body">
+        <div class="ozet-num">Safsata ${i+1}</div>
+        <div class="ozet-name">${s.emoji} ${s.isim}</div>
+        <div class="ozet-en">${s.en}</div>
+        <div class="ozet-goto">Detaya git →</div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ============================================================
+// BAŞLAT
+// ============================================================
+renderSlide();
+renderGame();
+</script>
+</body>
+</html>
