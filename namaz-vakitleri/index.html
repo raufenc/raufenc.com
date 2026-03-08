@@ -108,15 +108,6 @@ section{padding:80px 1.5rem;}
 .teq-label{color:var(--text3);min-width:140px;font-size:0.85rem;}
 .temkin-eq-result{padding-top:0.6rem;border-top:1px solid var(--border);margin-top:0.4rem;}
 .temkin-formula-card .tc-note{color:var(--text3);font-size:0.83rem;margin-top:1rem;font-style:italic;}
-.temkin-comparison{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;overflow:hidden;}
-.temkin-comparison h4{color:var(--accent);margin-bottom:1rem;font-size:1rem;}
-.temkin-comp-table-wrap{overflow-x:auto;margin:0 -0.5rem;}
-.temkin-comp-table{width:100%;border-collapse:collapse;font-size:0.82rem;font-variant-numeric:tabular-nums;}
-.temkin-comp-table th{color:var(--text3);font-weight:600;text-align:left;padding:0.5rem 0.6rem;border-bottom:1px solid var(--border);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.5px;}
-.temkin-comp-table td{padding:0.45rem 0.6rem;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text2);}
-.temkin-comp-table tr.tc-active{background:rgba(245,200,66,0.08);}
-.temkin-comp-table tr.tc-active td{color:var(--text);font-weight:600;}
-.temkin-comp-table tr:hover{background:rgba(255,255,255,0.03);}
 
 /* TADIL ZAMAN */
 #tadilzaman{background:var(--bg);}
@@ -513,18 +504,6 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem 1.5r
         </div>
       </div>
       <p class="tc-note">Sabah (imsak) vakti için temkin ÇIKARILIR; öğle, ikindi, akşam ve yatsı vakitlerinde EKLENIR.</p>
-    </div>
-
-    <div class="temkin-comparison">
-      <h4>Şehir Karşılaştırması <span style="color:var(--text3);font-weight:400;font-size:0.85em" id="temkin-comp-date"></span></h4>
-      <div class="temkin-comp-table-wrap">
-        <table class="temkin-comp-table" id="temkin-comp-table">
-          <thead>
-            <tr><th>Şehir</th><th>Yüks. (m)</th><th>İnhitât</th><th>Nısf-K.</th><th>Toplam</th><th>Temkin</th></tr>
-          </thead>
-          <tbody id="temkin-comp-tbody"></tbody>
-        </table>
-      </div>
     </div>
   </div>
 </section>
@@ -1926,24 +1905,6 @@ setTimeout(() => { drawSphere(720); updateFormula(720); updatePrayerResults(); }
     document.getElementById('teq-minutes').textContent = tmM+" dk "+String(tmS).padStart(2,'0')+" sn";
   };
 
-  // ─── Update comparison table ──────────────────────────
-  window.updateTemkinComparison = function(){
-    const tbody = document.getElementById('temkin-comp-tbody');
-    if(!tbody) return;
-    const rows = CITIES.map(city => {
-      const tc = calcTemkinComponents(selectedDate, city);
-      return { city, tc };
-    }).sort((a,b) => b.tc.temkinMin - a.tc.temkinMin);
-    const dateStr = selectedDate.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
-    const dateEl = document.getElementById('temkin-comp-date');
-    if(dateEl) dateEl.textContent = "— "+dateStr;
-    tbody.innerHTML = rows.map(r => {
-      const active = r.city.name === selectedCity.name ? ' class="tc-active"' : '';
-      const tm=r.tc.temkinMin, tM=Math.floor(tm), tS=Math.round((tm-tM)*60);
-      return `<tr${active}><td>${r.city.name}</td><td>${r.city.elev}</td><td>${arcminStr(r.tc.dipArcmin)}</td><td>${arcminStr(r.tc.semiDiamArcmin)}</td><td>${arcminStr(r.tc.totalArcmin)}</td><td><strong>${tM} dk ${String(tS).padStart(2,'0')} sn</strong></td></tr>`;
-    }).join('');
-  };
-
   // ─── Elevation slider ─────────────────────────────────
   elevSlider.addEventListener('input', ()=>{
     temkinElev = parseInt(elevSlider.value);
@@ -1988,7 +1949,6 @@ setTimeout(() => { drawSphere(720); updateFormula(720); updatePrayerResults(); }
     syncElev();
     resize();
     updateTemkinCards();
-    updateTemkinComparison();
   }
   // Expose for onGlobalChange
   const origDrawTemkin = window.drawTemkin;
@@ -1996,7 +1956,6 @@ setTimeout(() => { drawSphere(720); updateFormula(720); updatePrayerResults(); }
     syncElev();
     resize();
     updateTemkinCards();
-    updateTemkinComparison();
   };
   window.addEventListener('resize', resize);
   setTimeout(init, 250);
