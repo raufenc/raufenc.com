@@ -331,7 +331,6 @@ const TESTS = {
     },
 };
 
-const API_KEY = "AIzaSyBiY5Z6Wom7y4Lw6Nqc9oUpEwshuip_mZc";
 
 const ICONS = {
   kibir:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>`,
@@ -508,11 +507,11 @@ async function fetchGemini(scores){
   const otherKeys=Object.keys(TESTS).filter(k=>k!==S.testKey).join(', ');
   const prompt=`Sen bilge bir manevi rehbersin. Kullanıcı "${test.title}" testini tamamladı. Kavramlar: Tefrit=${test.concepts.tefrit}, Fazilet=${test.concepts.fazilet}, İfrat=${test.concepts.ifrat}. Sonuçlar: %${p.tefrit} Tefrit, %${p.fazilet} Fazilet, %${p.ifrat} İfrat.\n\nSadece JSON döndür:\n{"selamlama":"...","sonuclarinAynasi":"...","tefekkurKosesi":"...","ilahiRehberlik":"...","pratikAdimlar":"...","sonraki_test":{"key":"şu listeden biri: [${otherKeys}]","gerekce":"..."}}`;
   try{
-    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
+    const res=await fetch('/api/gemini',{
       method:'POST', headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{responseMimeType:'application/json'}})});
+      body:JSON.stringify({prompt})});
     const data=await res.json();
-    S.gemini=JSON.parse(data.candidates?.[0]?.content?.parts?.[0]?.text||'{}');
+    S.gemini=data;
     S.history[S.testKey]={percentages:scores,geminiData:S.gemini}; saveHistory();
   }catch(e){
     S.gemini={selamlama:'Değerli dostum,',sonuclarinAynasi:'Bir hata oluştu. Lütfen tekrar deneyin.',tefekkurKosesi:'',ilahiRehberlik:'',pratikAdimlar:'',sonraki_test:{key:'',gerekce:''}};
