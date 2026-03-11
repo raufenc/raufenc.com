@@ -435,7 +435,9 @@ function screenResult(){
   const gem=S.loadingGemini
     ?`<div class="flex flex-col items-center p-8"><div class="spinner"></div><p class="mt-4 text-gray-300">Kalbinizin sesi dinleniyor...</p></div>`
     :S.gemini
-    ?`<div class="text-gray-300 leading-relaxed" id="gemini-stream">${renderGeminiText(S.gemini.text||'')}${S.gemini.streaming?'<span class="inline-block w-0.5 h-4 bg-emerald-400 ml-0.5 align-middle animate-pulse"></span>':''}</div>`
+    ?S.gemini.streaming
+      ?`<div class="text-gray-300 leading-relaxed whitespace-pre-wrap" id="gemini-stream"><span class="stream-cursor inline-block w-0.5 h-4 bg-emerald-400 animate-pulse"></span></div>`
+      :`<div class="text-gray-300 leading-relaxed" id="gemini-stream">${renderGeminiText(S.gemini.text||'')}</div>`
     :'';
   const next=!S.gemini?.streaming&&S.gemini?.sonraki_test?.key&&TESTS[S.gemini.sonraki_test.key]
     ?`<div class="card mt-8"><h3 class="text-xl font-bold text-emerald-300 mb-3 text-center">Sıradaki Adım</h3>
@@ -508,9 +510,10 @@ async function fetchGemini(scores){
   S.loadingGemini=false; S.gemini={streaming:true,text:'',sonraki_test:{key:'',gerekce:''}}; render();
   const test=TESTS[S.testKey], p=pct(scores);
   const otherKeys=Object.keys(TESTS).filter(k=>k!==S.testKey).join(', ');
-  const prompt=`Sen derin bir irfan ve hikmet ehlisin; üslubun Osmanlı nesrinden mülhem, ağırbaşlı ve mütefekkir bir rehberinki gibidir. Eski Türkçe ve Arapça-Farsça kökenli kelimeleri (kalb, nefis, ruh, cehd, itidal, müteşekkir, mütevazı, saadet, hüzün, ihsan, muhabbet, irade, fıtrat, inkisar, azm, tevekkül, rıza, gaflet vb.) doğal biçimde kullan. Cümleler zengin, akıcı ve lirik olsun.\n\nKullanıcı "${test.title}" testini tamamladı.\nKavramlar: Tefrit=${test.concepts.tefrit}, Fazilet=${test.concepts.fazilet}, İfrat=${test.concepts.ifrat}.\nSonuçlar: %${p.tefrit} ${test.concepts.tefrit}, %${p.fazilet} ${test.concepts.fazilet}, %${p.ifrat} ${test.concepts.ifrat}.\n\nŞu başlıkları sırayla kullanarak yaz (başlıkları **başlık** formatında yaz):\n**Selamlama** (2-3 cümle samimi karşılama)\n**Sonuçların Bir Aynası** (en az 6 cümle derin tahlil)\n**Tefekkür Köşesi** (en az 5 cümle hikmet geleneği)\n**İlahi Rehberlik** (en az 5 cümle manevi yönlendirme)\n**Pratik Adımlar** (en az 5 cümle somut öneriler)\n\nEn son satıra yalnızca şunu yaz: SONRAKI_TEST:key|gerekce (key şu listeden biri olmalı: ${otherKeys})`;
+  const system=`Sen derin bir irfan ve hikmet ehlisin. Yazıların Osmanlı nesrinin letafetini taşır; her cümle mütefekkir, ağırbaşlı ve ruhani bir derinlikle yoğrulmuştur. Şu kelimeleri ve benzerlerini MUTLAKA kullan: kalb, nefis, ruh, cehd, itidal, ihsan, muhabbet, irade, fıtrat, inkisar, azm, tevekkül, rıza, gaflet, saadet, hüzün, müteşekkir, mütevazı, ledün, irfan, feyz, bâtın, zâhir, himmet, halvet, istikamet, mertebe, makam, kemal, zillet, izzet, nükte, letafet, hamiyet, hakikat, keşf, tecelli. Cümleler lirik, derin ve akıcı olsun. Klişe ve yüzeysel ifadelerden kaçın.`;
+  const prompt=`Kullanıcı "${test.title}" testini tamamladı.\nKavramlar: Tefrit (eksik uç)=${test.concepts.tefrit}, Fazilet (denge)=${test.concepts.fazilet}, İfrat (aşırı uç)=${test.concepts.ifrat}.\nSonuçlar: %${p.tefrit} ${test.concepts.tefrit}, %${p.fazilet} ${test.concepts.fazilet}, %${p.ifrat} ${test.concepts.ifrat}.\n\nŞu başlıkları sırayla kullanarak yaz (başlıkları **başlık** formatında yaz):\n**Selamlama** (2-3 cümle samimi karşılama)\n**Sonuçların Bir Aynası** (en az 6 cümle derin tahlil, sayısal sonuçları yorumla)\n**Tefekkür Köşesi** (en az 5 cümle hikmet geleneği)\n**İlahi Rehberlik** (en az 5 cümle manevi yönlendirme)\n**Pratik Adımlar** (en az 5 cümle somut öneriler)\n\nEn son satıra yalnızca şunu yaz: SONRAKI_TEST:key|gerekce (key şu listeden biri olmalı: ${otherKeys})`;
   try{
-    const res=await fetch('/api/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+    const res=await fetch('/api/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,prompt})});
     const reader=res.body.getReader(), decoder=new TextDecoder();
     let fullText='', buf='';
     while(true){
@@ -521,7 +524,7 @@ async function fetchGemini(scores){
         if(!line.startsWith('data: ')||line==='data: [DONE]') continue;
         try{
           const token=JSON.parse(line.slice(6)).choices?.[0]?.delta?.content||'';
-          if(token){ fullText+=token; S.gemini.text=fullText; const el=document.getElementById('gemini-stream'); if(el) el.innerHTML=renderGeminiText(fullText)+'<span class="inline-block w-0.5 h-4 bg-emerald-400 ml-0.5 align-middle animate-pulse"></span>'; }
+          if(token){ fullText+=token; S.gemini.text=fullText; const el=document.getElementById('gemini-stream'); if(el){ const cur=el.querySelector('.stream-cursor'); if(cur) cur.remove(); el.insertAdjacentText('beforeend',token); el.insertAdjacentHTML('beforeend','<span class="stream-cursor inline-block w-0.5 h-4 bg-emerald-400 animate-pulse"></span>'); } }
         }catch{}
       }
     }
