@@ -37,6 +37,15 @@
     }
     #globe-wrap canvas { display: block; }
 
+    /* ── Territory Canvas ── */
+    #territory-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     /* ── Sultan Kartı ── */
     #sultan-panel {
       position: fixed;
@@ -360,6 +369,8 @@
 
   <!-- Globe container -->
   <div id="globe-wrap"></div>
+  <!-- Territory overlay canvas -->
+  <canvas id="territory-canvas"></canvas>
 
   <!-- Sultan bilgi kartı -->
   <div id="sultan-panel">
@@ -432,6 +443,7 @@
   buildTicks();
   initChart();
   initGlobe();
+  initTerritoryCanvas();
   initControls();
 
   // ── TICK MARKS ─────────────────────────────────────────────
@@ -540,12 +552,6 @@
       .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
       .atmosphereAltitude(0.18)
       .atmosphereColor('rgba(100,180,255,0.15)')
-      // Toprak polygonları
-      .polygonsData([])
-      .polygonCapColor(() => 'rgba(34,197,94,0.48)')
-      .polygonSideColor(() => 'rgba(34,197,94,0.18)')
-      .polygonStrokeColor(() => '#22c55e')
-      .polygonAltitude(0.004)
       // Olay işaretçileri
       .htmlElementsData([])
       .htmlElement(d => createMarker(d))
@@ -647,13 +653,10 @@
 
     // Toprak verisi
     const territory = getNearestTerritory(year);
-    if (territory && S.globe) {
-      const features = multipolygonToFeatures(territory.geojson);
-      S.globe.polygonsData(features);
-
-      // Toprak badge
+    if (territory) {
       const mkm2 = (territory.toprak_km2 / 1_000_000).toFixed(2);
       document.getElementById('tb-value').textContent = mkm2;
+      drawTerritories();
     }
 
     // Sultan paneli
@@ -679,20 +682,83 @@
     S.chart && S.chart.update('none');
   }
 
-  // ── YARDIMCI FONKSİYONLAR ─────────────────────────────────
-  function multipolygonToFeatures(geom) {
-    return geom.coordinates.map(polygon => {
-      // GeoJSON dış ring CCW olmalı; veri.js'deki koordinatlar CW → ters çevir
-      const fixed = polygon.map((ring, i) =>
-        i === 0 ? [...ring].reverse() : ring
-      );
-      return {
-        type: 'Feature',
-        geometry: { type: 'Polygon', coordinates: fixed },
-        properties: {}
-      };
+  // ── CANVAS OVERLAY ─────────────────────────────────────────
+  function initTerritoryCanvas() {
+    const canvas = document.getElementById('territory-canvas');
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      drawTerritories();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // RAF loop: kamera hareket edince yeniden çiz
+    let lastCamStr = '';
+    function loop() {
+      requestAnimationFrame(loop);
+      if (!S.globe) return;
+      const cam = S.globe.camera().position;
+      const str = cam.x.toFixed(1) + ',' + cam.y.toFixed(1) + ',' + cam.z.toFixed(1);
+      if (str !== lastCamStr) {
+        lastCamStr = str;
+        drawTerritories();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+
+  function isPointVisible(lat, lng) {
+    if (!S.globe) return true;
+    const cam = S.globe.camera().position;
+    const latR = lat * Math.PI / 180;
+    const lngR = lng * Math.PI / 180;
+    // Globe.gl THREE.js koordinat sistemi
+    const px = Math.cos(latR) * Math.sin(lngR);
+    const py = Math.sin(latR);
+    const pz = Math.cos(latR) * Math.cos(lngR);
+    const camLen = Math.sqrt(cam.x*cam.x + cam.y*cam.y + cam.z*cam.z);
+    return (cam.x*px + cam.y*py + cam.z*pz) / camLen > 0;
+  }
+
+  function drawTerritories() {
+    const canvas = document.getElementById('territory-canvas');
+    if (!canvas || !S.globe) return;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const territory = getNearestTerritory(S.year);
+    if (!territory) return;
+
+    territory.geojson.coordinates.forEach(polygon => {
+      const ring = polygon[0]; // exterior ring: [[lon, lat], ...]
+
+      // Centroid görünürlük kontrolü
+      let sumLat = 0, sumLng = 0;
+      ring.forEach(([lng, lat]) => { sumLng += lng; sumLat += lat; });
+      const midLat = sumLat / ring.length;
+      const midLng = sumLng / ring.length;
+      if (!isPointVisible(midLat, midLng)) return;
+
+      const pts = ring.map(([lng, lat]) => S.globe.getScreenCoords(lat, lng, 0));
+
+      ctx.fillStyle = 'rgba(34,197,94,0.40)';
+      ctx.strokeStyle = '#22c55e';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      let first = true;
+      pts.forEach(pt => {
+        if (!pt) return;
+        if (first) { ctx.moveTo(pt.x, pt.y); first = false; }
+        else ctx.lineTo(pt.x, pt.y);
+      });
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
     });
   }
+
+  // ── YARDIMCI FONKSİYONLAR ─────────────────────────────────
 
   function getNearestTerritory(year) {
     let best = null;
