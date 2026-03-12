@@ -25,6 +25,7 @@
   --gold-glow: rgba(200,169,110,0.28);
   --gold-line: #d4b96a;
   --panel-w: 370px;
+  --tl-h: 52px;
 }
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; overflow: hidden; background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); }
@@ -46,11 +47,19 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
   transition: transform 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 0 48px;
+  padding: 0 0 72px;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
 #panel.open { transform: translateX(0); }
+
+/* Panel drag handle (mobile only) */
+.panel-handle {
+  display: none;
+  width: 36px; height: 4px;
+  background: var(--border); border-radius: 2px;
+  margin: 10px auto 0;
+}
 
 #panel-close {
   position: sticky; top: 12px; float: right;
@@ -250,15 +259,72 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
 
 /* ── LEGEND ──────────────────────────────── */
 #legend {
-  position: fixed; bottom: 24px; left: 24px; z-index: 10;
+  position: fixed; bottom: 64px; left: 20px; z-index: 10;
   background: rgba(10,10,15,0.90); backdrop-filter: blur(16px);
   border: 1px solid var(--border); border-radius: 10px;
-  padding: 10px 14px; font-size: 11px; color: var(--muted2);
-  display: flex; gap: 14px; align-items: center;
+  padding: 8px 12px; font-size: 10px; color: var(--muted2);
+  display: flex; gap: 12px; align-items: center;
 }
-.legend-line { display: flex; align-items: center; gap: 6px; }
-.legend-dash { width: 24px; height: 2px; background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 10px); opacity: 0.3; }
-.legend-solid { width: 24px; height: 2px; background: var(--gold-line); border-radius: 1px; }
+.legend-line { display: flex; align-items: center; gap: 5px; }
+.legend-dash { width: 20px; height: 1.5px; background: repeating-linear-gradient(90deg, var(--gold) 0 3px, transparent 3px 12px); opacity: 0.4; }
+.legend-solid { width: 20px; height: 2px; background: linear-gradient(90deg, var(--gold), #f0d899); border-radius: 1px; box-shadow: 0 0 5px var(--gold-soft); }
+
+/* ── TIMELINE ────────────────────────────── */
+#timeline {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: var(--tl-h); z-index: 15;
+  background: rgba(10,10,15,0.95); backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 16px;
+  user-select: none;
+}
+#tl-play {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--muted2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-right: 14px;
+  transition: all 0.18s; font-family: inherit; padding: 0;
+}
+#tl-play:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-soft); }
+#tl-track {
+  flex: 1; display: flex; align-items: center;
+  height: 100%; position: relative; cursor: pointer;
+}
+#tl-track::before {
+  content: ''; position: absolute;
+  left: 0; right: 0; top: 50%;
+  height: 1px; background: var(--muted); opacity: 0.18;
+  transform: translateY(-50%); pointer-events: none;
+}
+.tl-node {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  height: 100%; position: relative; z-index: 1;
+}
+.tl-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--muted); transition: all 0.2s; pointer-events: none;
+  flex-shrink: 0;
+}
+.tl-node.lit .tl-dot { background: var(--gold); opacity: 0.6; }
+.tl-node.active .tl-dot {
+  background: #f0d899; width: 9px; height: 9px;
+  box-shadow: 0 0 10px rgba(200,169,110,0.8), 0 0 3px var(--gold);
+  opacity: 1;
+}
+.tl-node:not(.active):hover .tl-dot { transform: scale(1.5); background: var(--muted2); }
+.tl-tooltip {
+  position: absolute; bottom: calc(100% + 5px);
+  background: rgba(10,10,15,0.97); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 5px 9px; font-size: 10px; white-space: nowrap;
+  pointer-events: none; opacity: 0; transition: opacity 0.15s;
+  transform: translateX(-50%); left: 50%; z-index: 30;
+  color: var(--text); letter-spacing: 0.01em;
+  max-width: 180px; overflow: hidden; text-overflow: ellipsis;
+}
+.tl-node:hover .tl-tooltip { opacity: 1; }
 
 /* ── ANIMATIONS ──────────────────────────── */
 @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -266,7 +332,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
 
 /* ── TOAST ───────────────────────────────── */
 #toast {
-  position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%);
+  position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%);
   background: rgba(10,10,15,0.92); backdrop-filter: blur(16px);
   border: 1px solid var(--gold); border-radius: 10px;
   padding: 8px 20px; font-size: 13px; font-weight: 600;
@@ -278,10 +344,29 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
 /* ── MOBILE ──────────────────────────────── */
 @media (max-width: 620px) {
   :root { --panel-w: 100vw; }
-  #panel { border-right: none; border-top: 1px solid var(--border); }
-  #map-controls { right: 8px; }
-  #search-wrap { width: 190px; }
+  /* Bottom sheet panel */
+  #panel {
+    top: auto; right: 0;
+    bottom: var(--tl-h);
+    height: 72vh;
+    width: 100%;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    transform: translateY(100%);
+  }
+  #panel.open { transform: translateY(0) !important; }
+  .panel-handle { display: block; }
+  .panel-portrait-wrap { padding: 24px 24px 12px; }
+  #map-controls { right: 8px; top: 12px; }
+  #search-wrap { width: 180px; }
+  #era-box { display: none; }
   #legend { display: none; }
+  #tl-play { display: none; }
+  .tl-tooltip { display: none; }
+  .tl-dot { width: 4px; height: 4px; }
+  .tl-node.active .tl-dot { width: 7px; height: 7px; }
+  #toast { bottom: 68px; }
 }
 </style>
 </head>
@@ -291,6 +376,7 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
 
 <!-- Info Panel -->
 <aside id="panel" aria-hidden="true">
+  <div class="panel-handle"></div>
   <button id="panel-close" aria-label="Kapat">✕</button>
   <div class="panel-portrait-wrap">
     <div class="panel-portrait-circle" id="portrait-circle">
@@ -343,6 +429,16 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
   <div class="legend-line"><div class="legend-solid"></div><span>Seçili yol</span></div>
 </div>
 
+<!-- Timeline -->
+<div id="timeline">
+  <button id="tl-play" title="Oynat / Tekrar oynat" aria-label="Oynat">
+    <svg width="8" height="10" viewBox="0 0 8 10" fill="currentColor"><path d="M0 0l8 5-8 5z"/></svg>
+  </button>
+  <div id="tl-track">
+    <!-- dots injected by JS -->
+  </div>
+</div>
+
 <!-- Intro Overlay -->
 <div id="intro">
   <div id="intro-card">
@@ -376,7 +472,6 @@ function applyJitter(silsile) {
     seen[key] = (seen[key] || 0) + 1;
     result.push({ ...s, _jitterIdx: seen[key] - 1, _jitterKey: key });
   });
-  // second pass: apply offset for duplicates
   const counts = {};
   result.forEach(s => { counts[s._jitterKey] = Math.max(counts[s._jitterKey] || 0, s._jitterIdx + 1); });
   return result.map(s => {
@@ -397,7 +492,7 @@ const DATA = applyJitter(SILSILE);
 // ── STATE ─────────────────────────────────────────────────────────
 const S = {
   map: null,
-  markers: [],       // { scholar, el }
+  markers: [],
   activeId: null,
   pathReady: false,
 };
@@ -419,6 +514,7 @@ function initMap() {
     addPaths();
     addMarkers();
     setupSearch();
+    buildTimeline();
   });
 }
 
@@ -437,15 +533,25 @@ function addPaths() {
     s._lat !== undefined ? s._lat : s.koordinat[0]
   ]);
 
+  // Ghost line: subtle dotted trail
   S.map.addSource('ghost', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: allCoords } } });
   S.map.addLayer({ id: 'ghost-line', type: 'line', source: 'ghost',
-    paint: { 'line-color': '#c8a96e', 'line-width': 1.2, 'line-opacity': 0.18, 'line-dasharray': [4, 6] },
+    paint: { 'line-color': '#c8a96e', 'line-width': 2.5, 'line-opacity': 0.28, 'line-dasharray': [1, 9] },
     layout: { 'line-cap': 'round', 'line-join': 'round' }
   });
 
+  // Hover: shared source for glow + core layers
   S.map.addSource('hover', { type: 'geojson', data: buildGeoJSON(-1) });
+
+  // Glow layer — wide, blurred for soft halo
+  S.map.addLayer({ id: 'hover-glow', type: 'line', source: 'hover',
+    paint: { 'line-color': '#e8c87a', 'line-width': 14, 'line-opacity': 0, 'line-blur': 7 },
+    layout: { 'line-cap': 'round', 'line-join': 'round' }
+  });
+
+  // Core line — bright, solid, drawn via dasharray animation
   S.map.addLayer({ id: 'hover-line', type: 'line', source: 'hover',
-    paint: { 'line-color': '#d4b96a', 'line-width': 2.8, 'line-opacity': 0.92, 'line-dasharray': [8, 4] },
+    paint: { 'line-color': '#f0d899', 'line-width': 2.5, 'line-opacity': 0.96, 'line-dasharray': [0, 4] },
     layout: { 'line-cap': 'round', 'line-join': 'round' }
   });
 
@@ -454,14 +560,20 @@ function addPaths() {
 
 function showPath(upTo) {
   if (!S.pathReady) return;
-  if (upTo < 1) { S.map.getSource('hover').setData(buildGeoJSON(-1)); return; }
+  if (upTo < 1) {
+    S.map.getSource('hover').setData(buildGeoJSON(-1));
+    try { S.map.setPaintProperty('hover-glow', 'line-opacity', 0); } catch(e) {}
+    return;
+  }
   const gj = buildGeoJSON(upTo);
   S.map.getSource('hover').setData(gj);
-  // animate dasharray for "drawing" feel
-  gsap.fromTo({ d: 0 }, { d: 400 }, {
-    duration: 0.55, ease: 'power2.out',
+  // Animate drawing (core) + glow fade-in
+  gsap.fromTo({ d: 0, g: 0 }, { d: 600, g: 0.18 }, {
+    duration: 0.52, ease: 'power2.out',
     onUpdate: function() {
-      try { S.map.setPaintProperty('hover-line', 'line-dasharray', [this.targets()[0].d, 4]); } catch(e) {}
+      const t = this.targets()[0];
+      try { S.map.setPaintProperty('hover-line', 'line-dasharray', [t.d, 4]); } catch(e) {}
+      try { S.map.setPaintProperty('hover-glow', 'line-opacity', t.g); } catch(e) {}
     }
   });
 }
@@ -469,6 +581,7 @@ function showPath(upTo) {
 function hidePath() {
   if (!S.pathReady) return;
   S.map.getSource('hover').setData(buildGeoJSON(-1));
+  try { S.map.setPaintProperty('hover-glow', 'line-opacity', 0); } catch(e) {}
 }
 
 // ── MARKERS ───────────────────────────────────────────────────────
@@ -487,7 +600,7 @@ function addMarkers() {
 
     el.addEventListener('mouseenter', () => onHover(scholar, i));
     el.addEventListener('mouseleave', onLeave);
-    el.addEventListener('click', (e) => { e.stopPropagation(); openPanel(scholar, i); });
+    el.addEventListener('click', (e) => { e.stopPropagation(); stopIntroAnimation(); openPanel(scholar, i); });
 
     const lng = scholar._lng !== undefined ? scholar._lng : scholar.koordinat[1];
     const lat = scholar._lat !== undefined ? scholar._lat : scholar.koordinat[0];
@@ -554,10 +667,12 @@ function openPanel(scholar, idx) {
   panel.setAttribute('aria-hidden', 'false');
   panel.scrollTop = 0;
 
-  // map fly
-  const lng = scholar._lng !== undefined ? scholar._lng : scholar.koordinat[1];
-  const lat = scholar._lat !== undefined ? scholar._lat : scholar.koordinat[0];
-  S.map.flyTo({ center: [lng, lat], zoom: Math.max(S.map.getZoom(), 5), duration: 1100, offset: [190, 0] });
+  // map fly (only when not scrubbing)
+  if (!_scrubbing) {
+    const lng = scholar._lng !== undefined ? scholar._lng : scholar.koordinat[1];
+    const lat = scholar._lat !== undefined ? scholar._lat : scholar.koordinat[0];
+    S.map.flyTo({ center: [lng, lat], zoom: Math.max(S.map.getZoom(), 5), duration: 1100, offset: [190, 0] });
+  }
 
   showPath(idx);
   S.markers.forEach((m, i) => {
@@ -565,10 +680,13 @@ function openPanel(scholar, idx) {
     m.el.classList.toggle('active', m.scholar.id === scholar.id);
   });
   document.getElementById('era-box').textContent = `${scholar.asir}  ·  ${scholar.ulke}`;
+  updateTimeline(idx);
 
-  // stagger panel content
-  gsap.fromTo('.panel-body > *',
-    { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out', delay: 0.15 });
+  // stagger panel content (only when not scrubbing)
+  if (!_scrubbing) {
+    gsap.fromTo('.panel-body > *',
+      { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.04, ease: 'power2.out', delay: 0.15 });
+  }
 }
 
 function closePanel() {
@@ -579,6 +697,7 @@ function closePanel() {
   hidePath();
   S.markers.forEach(m => m.el.classList.remove('lit', 'active'));
   document.getElementById('era-box').textContent = '—';
+  updateTimeline(-1);
 }
 
 document.getElementById('panel-close').addEventListener('click', closePanel);
@@ -607,7 +726,7 @@ function setupSearch() {
       const item = document.createElement('div');
       item.className = 'sres';
       item.innerHTML = `<span class="sres-num">${i + 1}</span><span>${sc.tam_ad}</span>`;
-      item.addEventListener('click', () => { inp.value = ''; drop.hidden = true; openPanel(sc, i); });
+      item.addEventListener('click', () => { inp.value = ''; drop.hidden = true; stopIntroAnimation(); openPanel(sc, i); });
       drop.appendChild(item);
     });
     drop.hidden = false;
@@ -625,6 +744,118 @@ function setMapLanguageTurkish() {
           ['coalesce', ['get', 'name:tr'], ['get', 'name:en'], ['get', 'name']]);
       } catch(e) {}
     }
+  });
+}
+
+// ── TIMELINE ──────────────────────────────────────────────────────
+let _scrubbing = false;
+let _scrubIdx = -1;
+
+function buildTimeline() {
+  const track = document.getElementById('tl-track');
+  track.innerHTML = '';
+  const n = DATA.length;
+
+  DATA.forEach((scholar, i) => {
+    const node = document.createElement('div');
+    node.className = 'tl-node';
+    node.dataset.idx = i;
+
+    const dot = document.createElement('div');
+    dot.className = 'tl-dot';
+
+    const tip = document.createElement('div');
+    tip.className = 'tl-tooltip';
+    tip.textContent = `${i + 1} · ${scholar.ad}`;
+
+    // Prevent tooltip overflow at edges
+    if (i < 3) { tip.style.left = '0'; tip.style.transform = 'none'; }
+    else if (i >= n - 3) { tip.style.left = 'auto'; tip.style.right = '0'; tip.style.transform = 'none'; }
+
+    node.appendChild(dot);
+    node.appendChild(tip);
+
+    node.addEventListener('click', () => {
+      stopIntroAnimation();
+      openPanel(scholar, i);
+    });
+
+    track.appendChild(node);
+  });
+
+  setupTimelineScrub();
+}
+
+function updateTimeline(activeIdx) {
+  const nodes = document.querySelectorAll('.tl-node');
+  nodes.forEach((node, i) => {
+    node.classList.toggle('active', i === activeIdx);
+    node.classList.toggle('lit', activeIdx >= 0 && i < activeIdx);
+  });
+}
+
+function setupTimelineScrub() {
+  const track = document.getElementById('tl-track');
+
+  function getIdxFromX(clientX) {
+    const rect = track.getBoundingClientRect();
+    const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
+    return Math.round((x / rect.width) * (DATA.length - 1));
+  }
+
+  function scrubMove(idx) {
+    if (idx === _scrubIdx) return;
+    _scrubIdx = idx;
+    updateTimeline(idx);
+    showPath(idx);
+    S.markers.forEach((m, mi) => {
+      m.el.classList.toggle('lit', mi <= idx);
+      m.el.classList.toggle('active', mi === idx);
+    });
+    const sc = DATA[idx];
+    document.getElementById('era-box').textContent = `${sc.asir}  ·  ${sc.ulke}`;
+  }
+
+  function scrubCommit(idx) {
+    _scrubbing = false;
+    _scrubIdx = -1;
+    openPanel(DATA[idx], idx);
+  }
+
+  // Mouse
+  track.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    stopIntroAnimation();
+    _scrubbing = true;
+    scrubMove(getIdxFromX(e.clientX));
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!_scrubbing) return;
+    scrubMove(getIdxFromX(e.clientX));
+  });
+  document.addEventListener('mouseup', e => {
+    if (!_scrubbing) return;
+    const idx = getIdxFromX(e.clientX);
+    scrubCommit(idx);
+  });
+
+  // Touch
+  track.addEventListener('touchstart', e => {
+    stopIntroAnimation();
+    _scrubbing = true;
+    scrubMove(getIdxFromX(e.touches[0].clientX));
+    e.preventDefault();
+  }, { passive: false });
+  document.addEventListener('touchmove', e => {
+    if (!_scrubbing) return;
+    scrubMove(getIdxFromX(e.touches[0].clientX));
+    e.preventDefault();
+  }, { passive: false });
+  document.addEventListener('touchend', e => {
+    if (!_scrubbing) return;
+    const idx = _scrubIdx >= 0 ? _scrubIdx : getIdxFromX(e.changedTouches[0].clientX);
+    scrubCommit(idx);
   });
 }
 
@@ -664,7 +895,7 @@ function animateDotTo(fromLng, fromLat, toLng, toLat, dur, cb) {
   function frame(now) {
     if (!_introActive) return;
     let p = Math.min((now - t0) / dur, 1);
-    p = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p; // ease-in-out
+    p = p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
     updateDotPos(fromLng + (toLng - fromLng) * p, fromLat + (toLat - fromLat) * p);
     if (p < 1) requestAnimationFrame(frame); else cb();
   }
@@ -699,6 +930,19 @@ function showToast(name, num) {
   toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 2200);
 }
 
+function stopIntroAnimation() {
+  if (!_introActive) return;
+  _introActive = false;
+  removeDotLayers();
+  S.markers.forEach(m => {
+    m.el.style.transition = 'opacity 0.3s';
+    m.el.style.opacity = '1';
+    m.el.style.pointerEvents = '';
+  });
+  const toast = document.getElementById('toast');
+  if (toast) toast.style.opacity = '0';
+}
+
 function endIntroAnimation() {
   _introActive = false;
   removeDotLayers();
@@ -712,6 +956,8 @@ function endIntroAnimation() {
       m.el.style.pointerEvents = '';
     }, i * 60);
   });
+  // Clear timeline after a moment
+  setTimeout(() => updateTimeline(-1), 1200);
 }
 
 function runDotJourney(idx) {
@@ -724,6 +970,7 @@ function runDotJourney(idx) {
     pulseDot();
     showPath(idx);
     showToast(sc.tam_ad, idx + 1);
+    updateTimeline(idx);
     S.markers.forEach((m, mi) => m.el.classList.toggle('lit', mi <= idx));
     if (idx + 1 < DATA.length) {
       const pause = idx === 0 ? 900 : 300;
@@ -750,14 +997,13 @@ function playIntro() {
     onComplete: () => overlay.remove()
   });
 
-  // Hide all markers (they stay geo-anchored, no flyTo)
   S.markers.forEach(m => {
     m.el.style.opacity = '0';
     m.el.style.pointerEvents = 'none';
   });
   hidePath();
+  updateTimeline(-1);
 
-  // Place dot at Medina and begin journey
   const first = DATA[0];
   addDotLayers(lngOf(first), latOf(first));
   _introActive = true;
@@ -775,7 +1021,27 @@ function skipIntroAnimation() {
     m.el.style.pointerEvents = '';
   });
   hidePath();
+  updateTimeline(-1);
 }
+
+// ── TIMELINE PLAY BUTTON ──────────────────────────────────────────
+document.getElementById('tl-play').addEventListener('click', () => {
+  if (_introActive) {
+    stopIntroAnimation();
+    hidePath();
+    updateTimeline(-1);
+  } else {
+    closePanel();
+    hidePath();
+    updateTimeline(-1);
+    S.markers.forEach(m => { m.el.style.opacity = '0'; m.el.style.pointerEvents = 'none'; });
+    removeDotLayers();
+    const first = DATA[0];
+    addDotLayers(lngOf(first), latOf(first));
+    _introActive = true;
+    runDotJourney(0);
+  }
+});
 
 document.getElementById('btn-oynat').addEventListener('click', playIntro);
 document.getElementById('btn-skip').addEventListener('click', skipIntroAnimation);
