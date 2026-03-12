@@ -7,12 +7,12 @@ const SILSILE = [
     id: 1,
     ad: "Hazret-i Muhammed Mustafâ",
     tam_ad: "Hazret-i Muhammed Mustafâ (sallallahu aleyhi ve sellem)",
-    lakap: "Hâtemü'l-Enbiyâ, Seyyidü'l-Mürselîn",
+    lakap: "Habîbullâh, Hâtemü'l-Enbiyâ, Seyyidü'l-Mürselîn, Rahmeten li'l-Âlemîn",
     asir: "VII. Yüzyıl",
     dogum: "571", vefat: "632",
     sehir: "Medîne-i Münevvere", ulke: "Hicaz", bolge: "Hicaz",
     koordinat: [24.4672, 39.6119],
-    biyografi: "Allah'ın son peygamberi, nebilerin efendisi ve Nakşibendiyye silsilesinin ilk halkasıdır. Mekke-i Mükerreme'de doğmuş, Medîne-i Münevvere'de vefat etmiştir. Ravza-i Mutahhara'da medfundur. Bu mübarek silsilenin bütün feyz ve nuru onun nûrundan kaynaklanmaktadır.",
+    biyografi: "Âlemlere rahmet olarak gönderilen Allahu Teâlâ'nın son peygamberi ve en sevgili kuludur. Her velînin velâyeti, her tarikatın silsilesi ve her mürşidin feyz ü nuru nihayetinde ona dayanır; o kapıya ulaşır. Nakşibendiyye'nin bu altın zinciri de onun mübarek kaynağından akar. Silsiledeki her isim, o nurü nesilden nesile taşıyan birer emânettir; her halka, onun sohbetinin ve nefesinin bir yansımasıdır. Mekke-i Mükerreme'de doğmuş, Medîne-i Münevvere'de Ravza-i Mutahhara'ya teşrif buyurmuştur. Ashâb-ı Kirâm'ın, Tâbiîn'in ve kıyamete dek gelecek bütün ümmetin kalpleri o kapıya bağlıdır.",
     portre: null
   },
   {

@@ -81,6 +81,15 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
   font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--gold);
 }
+.panel-halka.menba {
+  font-size: 11px; letter-spacing: 0.18em;
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+.panel-portrait-circle.menba {
+  width: 92px; height: 92px;
+  border-width: 2.5px;
+  box-shadow: 0 0 32px var(--gold-glow), 0 0 8px var(--gold-soft);
+}
 
 .panel-body { padding: 0 24px; }
 #panel-name {
@@ -217,6 +226,8 @@ html, body { height: 100%; overflow: hidden; background: var(--bg); font-family:
 .smarker { cursor: pointer; display: flex; flex-direction: column; align-items: center; transition: transform 0.18s ease; }
 .smarker:hover, .smarker.active { transform: scale(1.2) translateY(-5px); }
 .smarker.lit .mflag { border-color: var(--gold); box-shadow: 0 0 14px var(--gold-glow); background: rgba(200,169,110,0.13); }
+.smarker.menba .mflag { border-color: var(--gold); border-width: 2px; box-shadow: 0 0 20px var(--gold-glow); background: rgba(200,169,110,0.10); }
+.smarker.menba .mflag-num { color: #f0d899; font-size: 10px; letter-spacing: 0.08em; }
 .mflag {
   width: 50px; height: 58px;
   background: rgba(12,11,16,0.93); border: 1.5px solid rgba(200,169,110,0.4);
@@ -462,7 +473,7 @@ function hidePath() {
 function addMarkers() {
   DATA.forEach((scholar, i) => {
     const el = document.createElement('div');
-    el.className = 'smarker';
+    el.className = i === 0 ? 'smarker menba' : 'smarker';
     el.dataset.id = scholar.id;
     el.innerHTML = `
       <div class="mflag">
@@ -506,8 +517,13 @@ function openPanel(scholar, idx) {
   S.activeId = scholar.id;
 
   // portrait
-  document.getElementById('portrait-circle').innerHTML = PORTRAIT_SVG;
-  document.getElementById('panel-halka').textContent = `${idx + 1}. Halka`;
+  const isNabi = idx === 0;
+  const portraitEl = document.getElementById('portrait-circle');
+  portraitEl.innerHTML = PORTRAIT_SVG;
+  portraitEl.classList.toggle('menba', isNabi);
+  const halkaEl = document.getElementById('panel-halka');
+  halkaEl.textContent = isNabi ? 'Menba-ı Feyz · Silsilenin Nûru' : `${idx + 1}. Halka`;
+  halkaEl.classList.toggle('menba', isNabi);
   document.getElementById('panel-name').textContent = scholar.tam_ad;
   document.getElementById('panel-lakap').textContent = scholar.lakap || '';
   document.getElementById('panel-dates').textContent =
