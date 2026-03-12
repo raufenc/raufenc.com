@@ -556,9 +556,8 @@
     // İstanbul / Anadolu merkezine bak
     S.globe.pointOfView({ lat: 39, lng: 32, altitude: 2.2 }, 0);
 
-    // Otomatik döndürme
-    S.globe.controls().autoRotate = true;
-    S.globe.controls().autoRotateSpeed = 0.25;
+    // Otomatik döndürme kapalı (kullanıcı manuel döndürür)
+    S.globe.controls().autoRotate = false;
     S.globe.controls().enableDamping = true;
     S.globe.controls().dampingFactor = 0.1;
 
@@ -670,11 +669,17 @@
 
   // ── YARDIMCI FONKSİYONLAR ─────────────────────────────────
   function multipolygonToFeatures(geom) {
-    return geom.coordinates.map(ring => ({
-      type: 'Feature',
-      geometry: { type: 'Polygon', coordinates: ring },
-      properties: {}
-    }));
+    return geom.coordinates.map(polygon => {
+      // GeoJSON dış ring CCW olmalı; veri.js'deki koordinatlar CW → ters çevir
+      const fixed = polygon.map((ring, i) =>
+        i === 0 ? [...ring].reverse() : ring
+      );
+      return {
+        type: 'Feature',
+        geometry: { type: 'Polygon', coordinates: fixed },
+        properties: {}
+      };
+    });
   }
 
   function getNearestTerritory(year) {
@@ -709,7 +714,6 @@
     if (S.playing) return;
     S.playing = true;
     document.getElementById('btn-play').textContent = '⏸';
-    if (S.globe) S.globe.controls().autoRotate = false;
     if (S.year >= 1922) updateYear(1299);
 
     S.interval = setInterval(() => {
@@ -725,7 +729,6 @@
     clearInterval(S.interval);
     S.interval = null;
     document.getElementById('btn-play').textContent = '▶';
-    if (S.globe) S.globe.controls().autoRotate = true;
   }
 
   function togglePlay() {
