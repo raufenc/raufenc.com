@@ -644,9 +644,7 @@ function renderCards(donem) {
   feed.innerHTML = galeriFiltered.map(s => {
     return `<div class="kart-wrap" onclick="this.classList.toggle('flipped')">
       <div class="kart-inner">
-        <div class="kart-on"><img src="images/${s.id}.webp" alt="${s.ad}" loading="lazy">
-          <div class="kart-overlay"><div class="kart-ad">${s.ad}</div><div class="kart-yil">${s.saltanat}</div></div>
-        </div>
+        <div class="kart-on"><img src="images/${s.id}.webp" alt="${s.ad}" loading="lazy"></div>
         <div class="kart-arka"><img src="images/${s.id}-arka.webp" alt="${s.ad} arka" loading="lazy"></div>
       </div>
     </div>`;
@@ -683,7 +681,6 @@ function showSultanProfil(id) {
       <div class="profil-section"><h3>📊 İstatistikler</h3>
         <p>Saltanat süresi: <strong>${s.istatistik.saltanatYil} yıl</strong> · Fetihler: <strong>${s.istatistik.fetihler}</strong></p>
       </div>
-      <div class="profil-fun"><div class="fun-label">💡 Biliyor muydun?</div><p>${s.biliyorMuydun}</p></div>
     </div>
     <div class="profil-nav">
       ${prev ? `<button onclick="showSultanProfil('${prev.id}')">← ${prev.ad}</button>` : '<div></div>'}
