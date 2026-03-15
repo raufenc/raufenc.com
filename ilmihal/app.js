@@ -6,6 +6,13 @@ function sayfaLink(sayfa, label) {
   return `<a href="#" onclick="openSayfa(${sayfa});return false" class="sayfa-link" title="Kitabın bu sayfasını aç">${label}</a>`;
 }
 
+function sayfaLabel(madde) {
+  if (madde.sayfa_bitis && madde.sayfa_bitis !== madde.sayfa_no && madde.sayfa_bitis > madde.sayfa_no) {
+    return 'Sayfa ' + madde.sayfa_no + '-' + madde.sayfa_bitis;
+  }
+  return 'Sayfa ' + madde.sayfa_no;
+}
+
 // Madde detayı içindeki sayfa linki: PDF gösterir
 function sayfaLinkPdf(sayfa, label) {
   if (!label) label = 'Sayfa ' + sayfa;
@@ -40,7 +47,7 @@ function showPdfPage(sayfa) {
     </div>
     <iframe src="${PDF_URL}#page=${sayfa}" id="pdf-iframe"></iframe>
   `;
-  document.querySelector('.madde-detail-body')?.appendChild(viewer);
+  document.getElementById('madde-body')?.appendChild(viewer);
 }
 
 function changePdfPage(delta) {
@@ -223,7 +230,7 @@ async function openMadde(kisim, maddeNo) {
       <h3>${madde.baslik}</h3>
       <div class="madde-detail-meta">
         <span>${kisimLabels[madde.kisim]}, Madde ${madde.madde_no}</span>
-        <span>${sayfaLinkPdf(madde.sayfa_no, 'Sayfa ' + madde.sayfa_no + (madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''))}</span>
+        <span>${sayfaLinkPdf(madde.sayfa_no, sayfaLabel(madde))}</span>
         ${madde.mektup_ref ? `<span>Mektup: ${madde.mektup_ref}</span>` : ''}
       </div>
     </div>
@@ -244,7 +251,7 @@ async function openMadde(kisim, maddeNo) {
       <h3>${madde.baslik}</h3>
       <div class="madde-detail-meta">
         <span>${kisimLabels[madde.kisim]}, Madde ${madde.madde_no}</span>
-        <span>${sayfaLinkPdf(madde.sayfa_no, 'Sayfa ' + madde.sayfa_no + (madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''))}</span>
+        <span>${sayfaLinkPdf(madde.sayfa_no, sayfaLabel(madde))}</span>
         ${madde.mektup_ref ? `<span>Mektup: ${madde.mektup_ref}</span>` : ''}
       </div>
     </div>
