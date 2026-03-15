@@ -153,15 +153,19 @@ button{font-family:inherit;cursor:pointer;border:none}
   border-radius:2px}
 
 /* ── SOY AĞACI ─────────────────────────────────────────────── */
-.soyagaci-wrap{padding:16px;overflow:auto;-webkit-overflow-scrolling:touch}
-.soyagaci{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:800px;padding:20px}
-.soy-row{display:flex;gap:8px;flex-wrap:nowrap;justify-content:center}
-.soy-node{padding:6px 12px;border-radius:8px;font-size:.72rem;font-weight:600;text-align:center;
-  border:1px solid var(--border);background:var(--bg2);cursor:pointer;transition:all .15s;
-  white-space:nowrap;min-width:90px}
-.soy-node:hover{border-color:var(--gold);color:var(--gold)}
-.soy-node .soy-sira{font-size:.6rem;color:var(--text3);display:block}
-.soy-connector{width:1px;height:12px;background:var(--border2);margin:0 auto}
+.soyagaci-wrap{padding:8px 0;overflow:auto;-webkit-overflow-scrolling:touch}
+.soy-tree-container{position:relative;display:block;min-width:max-content;padding:8px 40px 40px}
+#soy-svg{position:absolute;top:0;left:0;pointer-events:none;overflow:visible}
+.soy-branch{display:flex;flex-direction:column;align-items:center}
+.soy-children{display:flex;gap:12px;align-items:flex-start;padding-top:32px}
+.soy-card{width:88px;padding:6px 4px 5px;border-radius:6px;background:var(--bg2);
+  border:1px solid var(--border2);cursor:pointer;text-align:center;
+  transition:background .15s;user-select:none;-webkit-user-select:none}
+.soy-card:hover,.soy-card:active{background:var(--bg3)}
+.soy-rel{font-size:.44rem;color:var(--gold);font-weight:700;letter-spacing:.05em;margin-bottom:1px}
+.soy-num{font-size:.52rem;color:var(--text3)}
+.soy-name{font-size:.58rem;font-weight:700;color:var(--text);line-height:1.25;margin:2px 0;word-break:break-word}
+.soy-yr{font-size:.49rem;color:var(--text2)}
 
 /* ── QUIZ ──────────────────────────────────────────────────── */
 .quiz-setup{padding:24px;max-width:500px;margin:0 auto;text-align:center}
@@ -712,28 +716,117 @@ function initTimeline() {
 // ── SOY AĞACI ─────────────────────────────────────────────────
 function initSoyAgaci() {
   const el = document.getElementById('soyagaci-content');
-  // Group by father
-  const tree = {};
+
+  const childMap = {};
   SULTANLAR.forEach(s => {
-    const father = s.baba || 'root';
-    if (!tree[father]) tree[father] = [];
-    tree[father].push(s);
+    const p = s.baba;
+    if (!childMap[p]) childMap[p] = [];
+    childMap[p].push(s.id);
   });
 
-  let html = '<div style="text-align:center;margin-bottom:16px"><h2 style="color:var(--gold);font-size:1.1rem">Osmanlı Soy Ağacı</h2><p style="color:var(--text2);font-size:.75rem">Padişahları tıklayarak detaylarına ulaşabilirsiniz</p></div>';
-  html += '<div class="soyagaci" style="min-width:auto">';
+  // Succession relationship labels
+  const relMap = {};
+  for (let i = 1; i < SULTANLAR.length; i++) {
+    const s = SULTANLAR[i], prev = SULTANLAR[i - 1];
+    if (s.baba === prev.id) { relMap[s.id] = 'OĞLU'; continue; }
+    if (s.baba && s.baba === prev.baba) { relMap[s.id] = 'KARDEŞİ'; continue; }
+    const sf = SULTANLAR.find(x => x.id === s.baba);
+    if (sf && prev.baba === sf.baba && prev.baba) { relMap[s.id] = 'YEĞENİ'; continue; }
+    const pf = SULTANLAR.find(x => x.id === prev.baba);
+    if (pf && s.baba === pf.baba && s.baba) { relMap[s.id] = 'AMCASI'; }
+  }
 
-  // Simple linear tree with branching shown
-  SULTANLAR.forEach(s => {
+  function shortAd(ad) { return ad.replace('Sultan ', '').replace(' Sultan', ''); }
+
+  function renderBranch(id) {
+    const s = SULTANLAR.find(x => x.id === id);
     const d = DONEMLER[s.donem];
-    html += `<div class="soy-connector"></div>`;
-    html += `<div class="soy-node" onclick="showSultanProfil('${s.id}')" style="border-color:${d.renk}40;border-left:3px solid ${d.renk}">
-      <span class="soy-sira">${s.sira}.</span> ${s.ad}
-      <span class="soy-sira">${s.saltanat}</span>
+    const kids = childMap[id] || [];
+    const rel = relMap[id];
+    return `<div class="soy-branch">
+      <div class="soy-card" data-id="${id}" onclick="showSultanProfil('${id}')"
+           style="border-bottom:2px solid ${d.renk}">
+        ${rel ? `<div class="soy-rel">${rel}</div>` : ''}
+        <div class="soy-num">${s.sira}.</div>
+        <div class="soy-name">${shortAd(s.ad)}</div>
+        <div class="soy-yr">${s.saltanat}</div>
+      </div>
+      ${kids.length ? `<div class="soy-children">${kids.map(k => renderBranch(k)).join('')}</div>` : ''}
     </div>`;
+  }
+
+  const root = SULTANLAR.find(s => !s.baba);
+  el.innerHTML = `
+    <div style="text-align:center;padding:12px 0 4px">
+      <h2 style="color:var(--gold);font-size:1rem;margin-bottom:4px">🌳 Osmanlı Soy Ağacı</h2>
+      <p style="color:var(--text2);font-size:.7rem">Karta dokun → detay &nbsp;·&nbsp; Yatay kaydır</p>
+    </div>
+    <div class="soy-tree-container" id="soy-tree-container">
+      <svg id="soy-svg"></svg>
+      ${renderBranch(root.id)}
+    </div>`;
+
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    drawSoyLines();
+    setTimeout(drawSoyLines, 300);
+  }));
+}
+
+function drawSoyLines() {
+  const svg = document.getElementById('soy-svg');
+  const container = document.getElementById('soy-tree-container');
+  if (!svg || !container) return;
+
+  const cr = container.getBoundingClientRect();
+  if (!cr.width) return; // screen not visible yet
+
+  const pos = {};
+  container.querySelectorAll('.soy-card[data-id]').forEach(c => {
+    const r = c.getBoundingClientRect();
+    pos[c.dataset.id] = {
+      cx: r.left - cr.left + r.width / 2,
+      top: r.top - cr.top,
+      bottom: r.bottom - cr.top,
+    };
   });
-  html += '</div>';
-  el.innerHTML = html;
+
+  const W = container.scrollWidth, H = container.scrollHeight;
+  svg.setAttribute('width', W); svg.setAttribute('height', H);
+  svg.style.width = W + 'px'; svg.style.height = H + 'px';
+
+  const childMap = {};
+  SULTANLAR.forEach(s => {
+    if (!s.baba) return;
+    if (!childMap[s.baba]) childMap[s.baba] = [];
+    childMap[s.baba].push(s.id);
+  });
+
+  let lines = '';
+  const col = 'rgba(212,175,55,.45)';
+  const sw = 1.5;
+
+  Object.entries(childMap).forEach(([pid, kids]) => {
+    if (!pos[pid]) return;
+    const valid = kids.filter(k => pos[k]);
+    if (!valid.length) return;
+
+    const px = pos[pid].cx, py = pos[pid].bottom;
+    const childTopY = Math.min(...valid.map(k => pos[k].top));
+    const midY = py + (childTopY - py) * 0.5;
+
+    lines += `<line x1="${px}" y1="${py}" x2="${px}" y2="${midY}" stroke="${col}" stroke-width="${sw}"/>`;
+
+    const xs = valid.map(k => pos[k].cx);
+    const minX = Math.min(...xs), maxX = Math.max(...xs);
+    if (minX < maxX)
+      lines += `<line x1="${minX}" y1="${midY}" x2="${maxX}" y2="${midY}" stroke="${col}" stroke-width="${sw}"/>`;
+
+    valid.forEach(k =>
+      lines += `<line x1="${pos[k].cx}" y1="${midY}" x2="${pos[k].cx}" y2="${pos[k].top}" stroke="${col}" stroke-width="${sw}"/>`
+    );
+  });
+
+  svg.innerHTML = lines;
 }
 
 // ── QUIZ ──────────────────────────────────────────────────────
