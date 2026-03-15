@@ -458,9 +458,9 @@ body {
 #page-tablolar .container { padding-top: 40px; padding-bottom: 60px; }
 
 .tablolar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .tablo-card {
@@ -1040,6 +1040,17 @@ body {
 .tablo-kategori-baslik.tablo-kat-aile { background: #6a3a6a; }
 .tablo-kategori-baslik.tablo-kat-tasavvuf { background: #4a5a8a; }
 .tablo-kategori-baslik.tablo-kat-genel { background: #5a5a5a; }
+
+/* Card header color per category */
+.tablo-card.tablo-kat-itikat .tablo-card-header { background: linear-gradient(135deg, #1e5268, #2c6e8a); }
+.tablo-card.tablo-kat-temizlik .tablo-card-header { background: linear-gradient(135deg, #2a6e5e, #3a8f7c); }
+.tablo-card.tablo-kat-namaz .tablo-card-header { background: linear-gradient(135deg, #0e4a35, #1a6b4e); }
+.tablo-card.tablo-kat-oruc .tablo-card-header { background: linear-gradient(135deg, #6a5420, #8a6d2c); }
+.tablo-card.tablo-kat-zekat .tablo-card-header { background: linear-gradient(135deg, #524410, #6b5a1a); }
+.tablo-card.tablo-kat-hac .tablo-card-header { background: linear-gradient(135deg, #5a3518, #7a4a2a); }
+.tablo-card.tablo-kat-aile .tablo-card-header { background: linear-gradient(135deg, #502850, #6a3a6a); }
+.tablo-card.tablo-kat-tasavvuf .tablo-card-header { background: linear-gradient(135deg, #364270, #4a5a8a); }
+.tablo-card.tablo-kat-genel .tablo-card-header { background: linear-gradient(135deg, #404040, #5a5a5a); }
 
 /* Card border-left accent per category */
 .tablo-card.tablo-kat-itikat { border-left: 4px solid #2c6e8a; }
