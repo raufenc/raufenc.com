@@ -1,4 +1,9 @@
 // ===== Se'âdet-i Ebediyye - İnteraktif İlmihâl =====
+const PDF_BASE = 'https://www.hakikatkitabevi.net/downloads/001.pdf';
+function sayfaLink(sayfa, label) {
+  if (!label) label = 's. ' + sayfa;
+  return `<a href="${PDF_BASE}#page=${sayfa}" target="_blank" class="sayfa-link" title="Kitabın bu sayfasını aç">${label}</a>`;
+}
 
 // Navigation
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -56,7 +61,7 @@ function loadIcerik(filterKisim, filterText) {
           <div class="madde-title">${m.baslik}</div>
           <div class="madde-meta">${kisimLabels[m.kisim]}${m.mektup_ref ? ' · Mektup: ' + m.mektup_ref : ''}</div>
         </div>
-        <div class="madde-sayfa">s. ${m.sayfa_no}</div>
+        <div class="madde-sayfa">${sayfaLink(m.sayfa_no)}</div>
       </div>
     `;
   });
@@ -130,7 +135,7 @@ function renderFilteredMaddeler(filtered) {
           <div class="madde-title">${m.baslik}</div>
           <div class="madde-meta">${kisimLabels[m.kisim]}${m.mektup_ref ? ' · Mektup: ' + m.mektup_ref : ''}</div>
         </div>
-        <div class="madde-sayfa">s. ${m.sayfa_no}</div>
+        <div class="madde-sayfa">${sayfaLink(m.sayfa_no)}</div>
       </div>
     `;
   });
@@ -170,7 +175,7 @@ async function openMadde(kisim, maddeNo) {
       <h3>${madde.baslik}</h3>
       <div class="madde-detail-meta">
         <span>${kisimLabels[madde.kisim]}, Madde ${madde.madde_no}</span>
-        <span>Sayfa ${madde.sayfa_no}${madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''}</span>
+        <span>${sayfaLink(madde.sayfa_no, 'Sayfa ' + madde.sayfa_no + (madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''))}</span>
         ${madde.mektup_ref ? `<span>Mektup: ${madde.mektup_ref}</span>` : ''}
       </div>
     </div>
@@ -191,7 +196,7 @@ async function openMadde(kisim, maddeNo) {
       <h3>${madde.baslik}</h3>
       <div class="madde-detail-meta">
         <span>${kisimLabels[madde.kisim]}, Madde ${madde.madde_no}</span>
-        <span>Sayfa ${madde.sayfa_no}${madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''}</span>
+        <span>${sayfaLink(madde.sayfa_no, 'Sayfa ' + madde.sayfa_no + (madde.sayfa_bitis ? '-' + madde.sayfa_bitis : ''))}</span>
         ${madde.mektup_ref ? `<span>Mektup: ${madde.mektup_ref}</span>` : ''}
       </div>
     </div>
@@ -287,8 +292,31 @@ function showTooltip(e) {
   tooltip.style.display = 'block';
 
   const rect = el.getBoundingClientRect();
-  tooltip.style.left = Math.min(rect.left + rect.width/2 - 100, window.innerWidth - 320) + 'px';
-  tooltip.style.top = (rect.top - 48) + 'px';
+  // Tooltip boyutunu ölç
+  tooltip.style.visibility = 'hidden';
+  tooltip.style.top = '0';
+  tooltip.style.left = '0';
+  const tipH = tooltip.offsetHeight;
+  const tipW = tooltip.offsetWidth;
+  tooltip.style.visibility = '';
+
+  // Yatay: kelimeyi ortala, ekrandan taşmasın
+  let left = rect.left + rect.width/2 - tipW/2;
+  left = Math.max(8, Math.min(left, window.innerWidth - tipW - 8));
+  tooltip.style.left = left + 'px';
+
+  // Dikey: yukarıda yer varsa yukarı, yoksa aşağı
+  const spaceAbove = rect.top;
+  const spaceBelow = window.innerHeight - rect.bottom;
+  if (spaceAbove > tipH + 8) {
+    tooltip.style.top = (rect.top - tipH - 6) + 'px';
+    tooltip.classList.remove('tooltip-below');
+    tooltip.classList.add('tooltip-above');
+  } else {
+    tooltip.style.top = (rect.bottom + 6) + 'px';
+    tooltip.classList.remove('tooltip-above');
+    tooltip.classList.add('tooltip-below');
+  }
 }
 
 function hideTooltip() {
@@ -360,7 +388,7 @@ function loadTablolar() {
       <div class="tablo-card">
         <div class="tablo-card-header">
           <h4>${tablo.baslik}</h4>
-          <div class="tablo-card-ref">Kaynak: ${tablo.kaynak_madde} · Sayfa ${tablo.sayfa_no}</div>
+          <div class="tablo-card-ref">Kaynak: ${tablo.kaynak_madde} · ${sayfaLink(tablo.sayfa_no, 'Sayfa ' + tablo.sayfa_no)}</div>
         </div>
         <div class="tablo-card-body">
           ${renderTabloBody(tablo)}
@@ -521,7 +549,7 @@ async function doFullSearch() {
       <div class="arama-result" onclick="openMadde(${m.kisim}, ${m.madde_no})">
         <h4>${m.baslik}</h4>
         <p>${highlighted || '(Başlıkta eşleşme)'}</p>
-        <div class="result-meta">${kisimLabels[m.kisim]}, Madde ${m.madde_no} · Sayfa ${m.sayfa_no}</div>
+        <div class="result-meta">${kisimLabels[m.kisim]}, Madde ${m.madde_no} · ${sayfaLink(m.sayfa_no, 'Sayfa ' + m.sayfa_no)}</div>
       </div>
     `;
   });

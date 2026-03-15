@@ -715,15 +715,28 @@ body {
 }
 
 /* ===== Sözlük Tooltip ===== */
+.sayfa-link {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--primary-light);
+  transition: color 0.2s;
+}
+.sayfa-link:hover {
+  color: var(--primary-dark);
+  border-bottom-style: solid;
+}
+.madde-sayfa .sayfa-link { color: var(--text-light); }
+.madde-sayfa .sayfa-link:hover { color: var(--primary); }
+
 .sozluk-tooltip {
   position: fixed;
   background: var(--primary-dark);
   color: #fff;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border-radius: 6px;
-  font-size: 0.82rem;
-  line-height: 1.5;
-  max-width: 280px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  max-width: 260px;
   z-index: 300;
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
   border: none;
@@ -732,16 +745,17 @@ body {
 
 .sozluk-tooltip .tooltip-osmanli {
   display: block;
-  font-size: 1.1rem;
+  font-size: 1rem;
   text-align: center;
-  margin-bottom: 4px;
-  padding-bottom: 4px;
+  margin-bottom: 3px;
+  padding-bottom: 3px;
   border-bottom: 1px solid rgba(255,255,255,0.2);
   direction: rtl;
   font-family: 'Traditional Arabic', 'Scheherazade', 'Amiri', serif;
 }
 
-.sozluk-tooltip::after {
+/* Ok: tooltip yukarıdayken aşağı ok */
+.sozluk-tooltip.tooltip-above::after {
   content: '';
   position: absolute;
   bottom: -5px;
@@ -750,7 +764,17 @@ body {
   width: 8px;
   height: 8px;
   background: var(--primary-dark);
-  border: none;
+}
+/* Ok: tooltip aşağıdayken yukarı ok */
+.sozluk-tooltip.tooltip-below::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: var(--primary-dark);
 }
 
 /* ===== Arama ===== */
