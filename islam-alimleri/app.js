@@ -287,9 +287,30 @@ function initMap() {
 
     markerCluster = L.markerClusterGroup({
         maxClusterRadius: 50,
-        spiderfyOnMaxZoom: true,
+        spiderfyOnMaxZoom: false,  // spiderfy kapalı — liste paneli kullanacağız
         showCoverageOnHover: false,
+        zoomToBoundsOnClick: false,  // cluster tıklamasını biz yöneteceğiz
     });
+
+    // Cluster tıklanınca: az ise zoom, çok ise liste paneli
+    markerCluster.on('clusterclick', function (e) {
+        const cluster = e.layer;
+        const childMarkers = cluster.getAllChildMarkers();
+        const bounds = cluster.getBounds();
+
+        // Tüm markerlar aynı noktada mı? (aynı şehir)
+        const samePoint = bounds.getNorth() === bounds.getSouth() &&
+                          bounds.getEast() === bounds.getWest();
+
+        if (samePoint || childMarkers.length <= 50) {
+            // Aynı noktadaysa veya azsa → liste paneli göster
+            showMapListPanel(childMarkers, e.latlng);
+        } else {
+            // Farklı noktalardaysa → zoom yap
+            map.fitBounds(bounds, { padding: [20, 20] });
+        }
+    });
+
     map.addLayer(markerCluster);
 
     updateMapMarkers();
@@ -301,6 +322,58 @@ function initMap() {
         label.textContent = val >= 15 ? 'Tümü' : `1 — ${val}. yüzyıl`;
         updateMapMarkers(val >= 15 ? null : val);
     });
+
+    // Haritaya tıklayınca paneli kapat
+    map.on('click', closeMapListPanel);
+}
+
+function showMapListPanel(markers, latlng) {
+    closeMapListPanel();
+
+    const panel = document.createElement('div');
+    panel.id = 'mapListPanel';
+    panel.className = 'map-list-panel';
+
+    // Başlık
+    const header = document.createElement('div');
+    header.className = 'map-list-header';
+    header.innerHTML = `
+        <span>${markers.length} âlim</span>
+        <button onclick="closeMapListPanel()" class="map-list-close">&times;</button>
+    `;
+    panel.appendChild(header);
+
+    // Liste
+    const list = document.createElement('div');
+    list.className = 'map-list-body';
+
+    // Tarihe göre sırala
+    const sorted = markers
+        .map(m => m.scholarData)
+        .filter(Boolean)
+        .sort((a, b) => (a.vefat_hicri || 9999) - (b.vefat_hicri || 9999));
+
+    sorted.forEach(s => {
+        const item = document.createElement('div');
+        item.className = 'map-list-item';
+        item.onclick = () => { closeMapListPanel(); showDetail(s.id); };
+        item.innerHTML = `
+            <div class="mli-name">${s.isim}</div>
+            <div class="mli-meta">
+                ${s.vefat_hicri ? `<span>v. h.${s.vefat_hicri} / m.${s.vefat_miladi}</span>` : ''}
+                <span>${s.alan.join(', ')}</span>
+            </div>
+        `;
+        list.appendChild(item);
+    });
+
+    panel.appendChild(list);
+    document.getElementById('page-map').appendChild(panel);
+}
+
+function closeMapListPanel() {
+    const existing = document.getElementById('mapListPanel');
+    if (existing) existing.remove();
 }
 
 function updateMapMarkers(maxCentury) {
@@ -312,6 +385,7 @@ function updateMapMarkers(maxCentury) {
 
     filtered.forEach(s => {
         const marker = L.marker([s.lat, s.lng]);
+        marker.scholarData = s;  // Liste paneli için
         marker.bindPopup(`
             <div class="popup-name">${s.isim}</div>
             <div class="popup-date">${s.vefat_hicri ? `v. h.${s.vefat_hicri} / m.${s.vefat_miladi}` : ''}</div>
