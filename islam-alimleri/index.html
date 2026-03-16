@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İslâm Âlimleri ve Evliyâlar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <h1 class="site-title" onclick="showPage('home')">
+                <span class="title-ornament">&#x2726;</span>
+                İslâm Âlimleri ve Evliyâlar
+                <span class="title-ornament">&#x2726;</span>
+            </h1>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-page="home" onclick="showPage('home')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                    Âlimler
+                </button>
+                <button class="nav-btn" data-page="map" onclick="showPage('map')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    Harita
+                </button>
+                <button class="nav-btn" data-page="timeline" onclick="showPage('timeline')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><circle cx="12" cy="6" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="18" r="2"/></svg>
+                    Zaman Çizelgesi
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <main id="page-home" class="page active">
+        <div class="search-section">
+            <div class="search-box">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="text" id="searchInput" placeholder="Âlim veya evliyâ adı arayın..." autocomplete="off">
+                <span id="searchCount" class="search-count"></span>
+            </div>
+            <div class="filters">
+                <div class="filter-group">
+                    <label>Yüzyıl (Hicrî)</label>
+                    <select id="filterCentury">
+                        <option value="">Tümü</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Alan</label>
+                    <select id="filterField">
+                        <option value="">Tümü</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Bölge</label>
+                    <select id="filterRegion">
+                        <option value="">Tümü</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alphabet Index -->
+        <div class="alpha-index" id="alphaIndex"></div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid" id="cardsGrid"></div>
+        <div class="load-more" id="loadMore">
+            <button onclick="loadMoreCards()">Daha Fazla Göster</button>
+        </div>
+    </main>
+
+    <!-- Detail Page -->
+    <main id="page-detail" class="page">
+        <button class="back-btn" onclick="showPage('home')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            Geri Dön
+        </button>
+        <div class="detail-container" id="detailContainer"></div>
+    </main>
+
+    <!-- Map Page -->
+    <main id="page-map" class="page">
+        <div class="map-controls">
+            <div class="filter-group">
+                <label>Yüzyıl Filtresi</label>
+                <input type="range" id="mapCenturySlider" min="1" max="15" value="15" step="1">
+                <span id="mapCenturyLabel">Tümü</span>
+            </div>
+        </div>
+        <div id="mapContainer"></div>
+    </main>
+
+    <!-- Timeline Page -->
+    <main id="page-timeline" class="page">
+        <div class="timeline-container" id="timelineContainer"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Kaynak: İslâm Âlimleri ve Evliyâlar Biyografisi (2023)</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+    <script src="app.js"></script>
+</body>
+</html>
