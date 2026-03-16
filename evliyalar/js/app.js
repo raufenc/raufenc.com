@@ -79,6 +79,20 @@ function t(scholar, field) {
   return scholar[`${field}_${currentLang}`] || scholar[`${field}_tr`] || '';
 }
 
+function formatText(text) {
+  if (!text) return '';
+  // Split by double newlines or single newlines for paragraphs
+  const paragraphs = text.split(/\n{2,}|\n/).filter(p => p.trim().length > 0);
+  return paragraphs.map(p => {
+    // Escape HTML
+    const safe = p.trim()
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    return `<p>${safe}</p>`;
+  }).join('');
+}
+
 function cityName(scholar) {
   return currentLang === 'tr' ? scholar.city_tr : scholar.city_uz;
 }
@@ -432,7 +446,7 @@ function showScholar(scholar) {
   const bio = t(scholar, 'bio');
   const bioEl = document.getElementById('modal-bio');
   if (bio && bio.length > 10) {
-    bioEl.textContent = bio;
+    bioEl.innerHTML = formatText(bio);
     bioEl.classList.remove('no-content');
   } else {
     bioEl.innerHTML = `<div class="no-content">${currentLang === 'tr' ? 'Biyografi bilgisi henüz eklenmedi.' : 'Biografiya ma\'lumoti hali qo\'shilmagan.'}</div>`;
@@ -442,7 +456,7 @@ function showScholar(scholar) {
   const miracles = t(scholar, 'miracles');
   const mirEl = document.getElementById('modal-miracles');
   if (miracles && miracles.length > 10) {
-    mirEl.textContent = miracles;
+    mirEl.innerHTML = formatText(miracles);
     mirEl.classList.remove('no-content');
   } else {
     const label = currentLang === 'tr' ? 'Kerâmet bilgisi bulunmamaktadır.' : 'Karomat ma\'lumoti mavjud emas.';
@@ -490,7 +504,7 @@ function initAbout() {
   const cleaned = text
     .replace(/^(ÖNSÖZ|SO'ZBOSHI|ZBOSHI)\s*/i, '')
     .trim();
-  aboutEl.textContent = cleaned;
+  aboutEl.innerHTML = formatText(cleaned);
 }
 
 // ========== SCROLL ANIMATIONS ==========

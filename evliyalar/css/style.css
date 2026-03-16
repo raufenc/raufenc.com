@@ -461,6 +461,13 @@ section { padding: 80px 24px; }
   max-height: 400px; overflow-y: auto;
   padding-right: 16px;
 }
+.about-text p {
+  margin-bottom: 0.8em;
+  text-indent: 1.5em;
+}
+.about-text p:first-child {
+  text-indent: 0;
+}
 
 .about-info { display: flex; flex-direction: column; gap: 16px; }
 
@@ -562,7 +569,13 @@ footer {
   font-family: var(--font-serif); font-size: 15px;
   line-height: 2; color: var(--text);
   text-align: justify;
-  white-space: pre-line;
+}
+.tab-content p {
+  margin-bottom: 0.8em;
+  text-indent: 1.5em;
+}
+.tab-content p:first-child {
+  text-indent: 0;
 }
 .tab-content.active { display: block; }
 
