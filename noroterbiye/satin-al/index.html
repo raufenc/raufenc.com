@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satın Al — NöroTerbiye</title>
+  <meta name="description" content="NöroTerbiye kitabını satın alabileceğiniz tüm mağazalar.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+    .store-card {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px 24px;
+      text-decoration: none; color: var(--text);
+      transition: all var(--transition-fast);
+      position: relative; overflow: hidden;
+    }
+    .store-card:hover {
+      border-color: var(--nt-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--nt-primary-glow);
+    }
+    .store-card::after {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 60px; height: 60px;
+      background: radial-gradient(circle at top right, var(--nt-primary-soft), transparent 70%);
+      pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    }
+    .store-card:hover::after { opacity: 1; }
+
+    .store-logo {
+      width: 48px; height: 48px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+      background: var(--surface2); border: 1px solid var(--border);
+    }
+    .store-info { flex: 1; min-width: 0; }
+    .store-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 2px; }
+    .store-desc { font-size: 0.78rem; color: var(--text-secondary); }
+    .store-arrow {
+      color: var(--muted); transition: all 0.2s; flex-shrink: 0;
+    }
+    .store-card:hover .store-arrow { color: var(--nt-primary); transform: translateX(3px); }
+
+    .book-hero {
+      display: flex; gap: 32px; align-items: center;
+      margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .book-hero img {
+      width: 160px; border-radius: var(--radius-md);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+    }
+    .book-hero-info { flex: 1; min-width: 240px; }
+    .book-hero-info h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+    .book-hero-info .author { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 8px; }
+    .book-hero-info .meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+    .book-hero-info .meta span { margin-right: 12px; }
+
+    .review-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 12px;
+    }
+    .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .review-author { font-weight: 700; font-size: 0.9rem; }
+    .review-meta { font-size: 0.72rem; color: var(--muted); }
+    .review-stars { color: #f59e0b; font-size: 0.9rem; letter-spacing: 1px; }
+    .review-text { font-size: 0.88rem; line-height: 1.7; color: var(--text-secondary); }
+    .review-source { font-size: 0.7rem; color: var(--muted); margin-top: 8px; }
+
+    @media (max-width: 640px) {
+      .book-hero { flex-direction: column; text-align: center; }
+      .book-hero img { width: 120px; }
+      .store-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap">
+
+      <!-- Kitap Bilgisi -->
+      <div class="book-hero nt-fade-in">
+        <img src="/images/noroterbiye.webp" alt="NöroTerbiye — Rauf Enç" />
+        <div class="book-hero-info">
+          <h2>NöroTerbiye</h2>
+          <p class="author">Rauf Enç</p>
+          <p style="font-size:0.92rem;color:var(--text-secondary);margin-bottom:6px">
+            İçindeki Düşmanı Dosta Çevirmek
+          </p>
+          <p class="meta">
+            <span>KTB Yayınları</span>
+            <span>2. Baskı</span>
+            <span>272 sayfa</span>
+            <span>ISBN: 978-625-6979-37-6</span>
+          </p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="nt-tag nt-tag-green">Psikoloji</span>
+            <span class="nt-tag nt-tag-primary">Nörobilim</span>
+            <span class="nt-tag nt-tag-purple">Nefs Terbiyesi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mağazalar -->
+      <h2 class="nt-section-title nt-fade-in" style="animation-delay:0.1s">
+        Nereden Alınır?
+      </h2>
+      <p class="nt-fade-in" style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:24px;animation-delay:0.15s">
+        Aşağıdaki mağazalarda satışta. Güncel fiyat için ilgili siteyi ziyaret edin.
+      </p>
+
+      <div class="store-grid nt-stagger" id="stores"></div>
+
+      <!-- Okuyucu Yorumları -->
+      <h2 class="nt-section-title nt-fade-in" style="margin-top:48px;animation-delay:0.3s">
+        Okuyucu Yorumları
+      </h2>
+      <p class="nt-fade-in" style="font-size:0.78rem;color:var(--muted);margin-bottom:20px;animation-delay:0.35s">
+        Kitapyurdu.com'dan alınan gerçek okuyucu yorumları
+      </p>
+
+      <div class="review-card nt-fade-in" style="animation-delay:0.4s">
+        <div class="review-header">
+          <span class="review-author">Kitapkurdu</span>
+          <span class="review-meta">04.03.2026 · Satın Alma Onaylı</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Beyin, nörobiyoloji, sindirim sistemi, sağlıklı beslenme, irade terbiyesi vs üzerine yazılmış toplam on tane kitap okumuşumdur. Bunları ve benzeri bilimsel kitapları, özümüze hitap eden Gazali, İmam Rabbani rahimullah gibi referans İslam âlimlerinin nefs ve terbiyesi konusuyla ilgili eserlerine harmanlayarak ortaya hap gibi bilgi ve çözüm sunan mükemmel bir kitap çıkarmış. Onlarca kitaba bedel bir hülasa olmuş. Şiddetle tavsiye edilir.</p>
+        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+      </div>
+
+      <div class="review-card nt-fade-in" style="animation-delay:0.45s">
+        <div class="review-header">
+          <span class="review-author">Fatih İlhan</span>
+          <span class="review-meta">26.01.2026</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Dili çok akıcı ve açıklayıcı. Kitap sadece nörobiyoloji bilgisi vermekle kalmıyor bunu ahlaki çerçevede inceliyor. Emeği geçenlerin yüreğine sağlık.</p>
+        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+      </div>
+
+      <div class="review-card nt-fade-in" style="animation-delay:0.5s">
+        <div class="review-header">
+          <span class="review-author">Üsküplüsehzade</span>
+          <span class="review-meta">26.01.2026</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Kitabı baştan sona okudum. Kendinizi (nefsimizi) tanımak adına mükemmel bir kitap. Keşke daha önce okusaydım.</p>
+        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+      </div>
+
+      <div class="review-card nt-fade-in" style="animation-delay:0.55s">
+        <div class="review-header">
+          <span class="review-author">Yasin Arı</span>
+          <span class="review-meta">04.03.2026</span>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Ufuk açan bir eser, tavsiye ile aldım iyi ki almışım.</p>
+        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    const STORES = [
+      { name: 'KTB Kitap', desc: 'Yayınevinin resmi mağazası', icon: '📚', url: 'https://www.ktbkitap.com/urun/noroterbiye-rauf-enc' },
+      { name: 'Kitapyurdu', desc: 'Türkiye\'nin en büyük kitap sitesi', icon: '📖', url: 'https://www.kitapyurdu.com/index.php?route=product/search&filter_name=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'D&R', desc: 'Kitap, müzik, film', icon: '🎵', url: 'https://www.dr.com.tr/search?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'BKM Kitap', desc: 'Uygun fiyatlı kitap mağazası', icon: '🏷️', url: 'https://www.bkmkitap.com/arama?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Trendyol', desc: 'Hızlı kargo, kampanyalı fiyatlar', icon: '🚀', url: 'https://www.trendyol.com/sr?q=n%C3%B6roterbiye+rauf+en%C3%A7&qt=n%C3%B6roterbiye' },
+      { name: 'Hepsiburada', desc: 'Aynı gün kargo seçeneği', icon: '📦', url: 'https://www.hepsiburada.com/ara?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Amazon.com.tr', desc: 'Prime üyelerine hızlı teslimat', icon: '🌐', url: 'https://www.amazon.com.tr/s?k=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'N11', desc: 'Farklı satıcılardan karşılaştırma', icon: '🔢', url: 'https://www.n11.com/arama?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Kidega', desc: 'Dijital ve basılı kitap', icon: '📱', url: 'https://kidega.com/arama?query=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Idefix', desc: 'Kapsamlı kitap kataloğu', icon: '🔍', url: 'https://www.idefix.com/search?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Pandora', desc: 'Akademik ve genel kitap mağazası', icon: '📕', url: 'https://www.pandora.com.tr/arama?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
+      { name: 'Kitapsec', desc: 'İndirimli kitap fırsatları', icon: '💰', url: 'https://www.kitapsec.com/Arama/?Ession=0&Ession2=0&AramaT=noroterbiye' },
+    ];
+
+    const storesEl = document.getElementById('stores');
+    STORES.forEach((s, i) => {
+      storesEl.innerHTML += `
+        <a href="${s.url}" target="_blank" rel="noopener" class="store-card" style="animation-delay:${i * 0.05}s">
+          <div class="store-logo">${s.icon}</div>
+          <div class="store-info">
+            <div class="store-name">${s.name}</div>
+            <div class="store-desc">${s.desc}</div>
+          </div>
+          <svg class="store-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      `;
+    });
+
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

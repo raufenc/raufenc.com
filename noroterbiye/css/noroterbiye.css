@@ -602,6 +602,8 @@ body::after {
 }
 .nt-nav a:hover { border-color: var(--border-hover); color: var(--text); }
 .nt-nav a.active { background: var(--nt-primary); color: #fff; border-color: var(--nt-primary); }
+.nt-nav a.nt-nav-highlight { background: var(--nt-green); color: #fff; border-color: var(--nt-green); font-weight: 700; }
+.nt-nav a.nt-nav-highlight:hover { background: #059669; border-color: #059669; }
 
 /* ── Footer ── */
 .nt-footer {

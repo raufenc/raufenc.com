@@ -11,6 +11,7 @@ const NT = {
     { href: '/noroterbiye/araclar/', label: 'Araçlar' },
     { href: '/noroterbiye/kitap-haritasi/', label: 'Kitap Haritası' },
     { href: '/noroterbiye/kitap/', label: 'Kitap' },
+    { href: '/noroterbiye/satin-al/', label: 'Satın Al', highlight: true },
   ],
 
   // Sayfa içi navigasyon oluştur
@@ -18,9 +19,10 @@ const NT = {
     const path = window.location.pathname.replace(/index\.html$/, '');
     const nav = document.createElement('nav');
     nav.className = 'nt-nav nt-wrap';
-    nav.innerHTML = this.navLinks.map(l =>
-      `<a href="${l.href}" class="${path === l.href ? 'active' : ''}">${l.label}</a>`
-    ).join('');
+    nav.innerHTML = this.navLinks.map(l => {
+      const cls = [path === l.href ? 'active' : '', l.highlight ? 'nt-nav-highlight' : ''].filter(Boolean).join(' ');
+      return `<a href="${l.href}" class="${cls}">${l.label}</a>`;
+    }).join('');
     if (container) container.prepend(nav);
     else document.body.insertBefore(nav, document.body.firstChild);
   },
