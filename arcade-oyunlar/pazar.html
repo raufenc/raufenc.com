@@ -1,0 +1,831 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>السوق العربي — Arap Pazarı</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100vh;overflow-x:hidden}
+body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;direction:rtl;user-select:none;-webkit-user-select:none}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px}
+
+.screen{display:none;min-height:100vh;padding:20px;position:relative}
+.screen.active{display:flex;flex-direction:column;align-items:center}
+
+/* BACK BTN */
+.back-btn{position:fixed;top:16px;right:16px;z-index:999;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:12px 28px;border-radius:100px;cursor:pointer;font-family:'Arakom',Arial,sans-serif;font-size:20px;transition:all .2s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none}
+.back-btn:hover{background:rgba(255,255,255,0.22);transform:scale(1.05)}
+
+/* START SCREEN */
+.start-content{max-width:600px;width:100%;text-align:center;margin-top:60px}
+.start-icon{font-size:80px;margin-bottom:10px;display:block;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.start-title{font-size:clamp(36px,7vw,64px);font-weight:bold;line-height:1.3;margin-bottom:6px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-subtitle{font-family:Arial,sans-serif;color:rgba(255,255,255,0.5);font-size:22px;margin-bottom:20px;direction:ltr}
+.start-desc{font-family:Arial,sans-serif;color:rgba(255,255,255,0.65);font-size:17px;line-height:1.7;margin-bottom:28px;direction:ltr;text-align:center;padding:0 10px}
+.start-desc strong{color:#ffd60a}
+
+/* PLAYER TOGGLE */
+.player-toggle{display:flex;justify-content:center;gap:12px;margin:0 auto 24px;max-width:420px;width:100%}
+.player-toggle button{flex:1;padding:14px 20px;border-radius:14px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-family:'Arakom',Arial,sans-serif;font-size:22px;cursor:pointer;transition:all .25s}
+.player-toggle button.active{border-color:#4361ee;background:rgba(67,97,238,0.2);color:#fff}
+.player-toggle button:hover{background:rgba(255,255,255,0.1)}
+
+.start-btn{background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e;border:none;padding:18px 48px;border-radius:16px;font-family:'Arakom',Arial,sans-serif;font-size:26px;font-weight:bold;cursor:pointer;transition:all .25s;box-shadow:0 6px 24px rgba(247,151,30,0.35)}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(247,151,30,0.5)}
+
+/* GAME SCREEN */
+.game-header{width:100%;max-width:1400px;text-align:center;margin-bottom:10px;padding-top:50px}
+.game-round-badge{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:6px 20px;border-radius:100px;font-size:16px;font-family:Arial,sans-serif;margin-bottom:6px}
+.game-title-sm{font-size:clamp(24px,4vw,36px);font-weight:bold;margin-bottom:4px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.game-hud{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:10px;font-size:20px}
+.game-hud span{background:rgba(255,255,255,0.08);padding:8px 18px;border-radius:12px;white-space:nowrap;font-family:Arial,sans-serif}
+.hud-score{color:#06d6a0;font-weight:bold}
+.hud-timer{color:#ffd60a;font-weight:bold}
+.hud-stars{color:#f72585;font-size:22px;letter-spacing:2px}
+.hud-mistakes{color:#ef233c}
+
+/* GAME LAYOUT */
+.game-layout{display:flex;gap:20px;width:100%;max-width:1400px;flex:1}
+.game-layout.split-mode{flex-direction:column}
+
+/* SHOPPING LIST PANEL */
+.list-panel{width:280px;min-width:280px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:18px;align-self:flex-start;position:sticky;top:80px}
+.list-title{font-family:Arial,sans-serif;font-size:20px;color:#ffd60a;text-align:center;margin-bottom:12px;direction:ltr}
+.list-title .cart-icon{font-size:28px;vertical-align:middle}
+.list-items{list-style:none}
+.list-items li{font-family:Arial,sans-serif;direction:ltr;text-align:left;padding:10px 12px;margin-bottom:6px;border-radius:10px;background:rgba(255,255,255,0.04);font-size:18px;display:flex;align-items:center;gap:10px;transition:all .3s}
+.list-items li .li-emoji{font-size:24px;flex-shrink:0}
+.list-items li .li-text{flex:1;color:rgba(255,255,255,0.85)}
+.list-items li .li-check{font-size:22px;opacity:0;transition:all .3s;flex-shrink:0}
+.list-items li.found{background:rgba(6,214,160,0.12);border:1px solid rgba(6,214,160,0.25)}
+.list-items li.found .li-text{text-decoration:line-through;color:rgba(255,255,255,0.35)}
+.list-items li.found .li-check{opacity:1;color:#06d6a0}
+
+/* MARKET GRID */
+.market-panel{flex:1;min-width:0}
+.market-label{font-family:Arial,sans-serif;font-size:18px;color:rgba(255,255,255,0.4);text-align:center;margin-bottom:10px;direction:ltr}
+.shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px}
+.shelf-card{background:linear-gradient(145deg,#3d2b1f,#5c3d2e);border:2px solid rgba(139,90,43,0.5);border-radius:14px;padding:18px 10px;text-align:center;cursor:pointer;transition:all .25s;position:relative;box-shadow:0 4px 16px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08);min-height:100px;display:flex;align-items:center;justify-content:center}
+.shelf-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(0,0,0,0.45);border-color:rgba(247,151,30,0.5);background:linear-gradient(145deg,#4a341f,#6b4530)}
+.shelf-card .shelf-ar{font-family:'Arakom',Arial,sans-serif;font-size:clamp(28px,4vw,38px);font-weight:bold;color:#fff;line-height:1.4;text-shadow:0 2px 4px rgba(0,0,0,0.4)}
+.shelf-card.found-card{opacity:0;transform:scale(0.5);pointer-events:none;transition:all .5s ease}
+.shelf-card.wrong-shake{animation:shakeCard .5s ease}
+.shelf-card.wrong-flash{border-color:#ef233c;box-shadow:0 0 20px rgba(239,35,60,0.4)}
+@keyframes shakeCard{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}
+
+/* FLY ANIMATION */
+.fly-item{position:fixed;z-index:1000;pointer-events:none;font-size:40px;transition:all .6s cubic-bezier(0.22,1,0.36,1)}
+
+/* SPLIT SCREEN 2-PLAYER */
+.split-container{display:flex;gap:16px;width:100%;max-width:1400px;flex:1}
+.split-half{flex:1;min-width:0;padding:14px;border-radius:16px;position:relative;display:flex;flex-direction:column}
+.split-half.p1{background:rgba(67,97,238,0.06);border:1px solid rgba(67,97,238,0.2)}
+.split-half.p2{background:rgba(239,35,60,0.06);border:1px solid rgba(239,35,60,0.2)}
+.split-player-label{text-align:center;font-size:20px;font-family:Arial,sans-serif;margin-bottom:8px;font-weight:bold}
+.split-half.p1 .split-player-label{color:#4895ef}
+.split-half.p2 .split-player-label{color:#ef233c}
+.split-list{list-style:none;margin-bottom:10px}
+.split-list li{font-family:Arial,sans-serif;direction:ltr;text-align:left;padding:6px 10px;margin-bottom:4px;border-radius:8px;background:rgba(255,255,255,0.04);font-size:15px;display:flex;align-items:center;gap:8px}
+.split-list li .li-emoji{font-size:18px}
+.split-list li .li-text{flex:1;color:rgba(255,255,255,0.8)}
+.split-list li .li-check{font-size:18px;opacity:0;transition:all .3s}
+.split-list li.found .li-text{text-decoration:line-through;color:rgba(255,255,255,0.3)}
+.split-list li.found .li-check{opacity:1;color:#06d6a0}
+.split-shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;flex:1}
+.split-shelf-grid .shelf-card{min-height:80px;padding:12px 8px}
+.split-shelf-grid .shelf-card .shelf-ar{font-size:clamp(22px,3vw,30px)}
+
+/* ROUND COMPLETE */
+.round-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:900;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.round-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:44px 36px;text-align:center;max-width:520px;width:90%;animation:popIn .3s ease}
+@keyframes popIn{0%{transform:scale(0.7);opacity:0}100%{transform:scale(1);opacity:1}}
+.round-box h2{font-family:Arial,sans-serif;font-size:28px;margin-bottom:10px;color:#ffd60a;direction:ltr}
+.round-stars{font-size:60px;margin:16px 0;letter-spacing:8px}
+.round-stars .star-on{color:#ffd60a;display:inline-block;animation:starPop .4s ease}
+.round-stars .star-off{color:rgba(255,255,255,0.15)}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg)}60%{transform:scale(1.3) rotate(10deg)}100%{transform:scale(1) rotate(0)}}
+.round-score{font-family:Arial,sans-serif;font-size:22px;color:#06d6a0;margin-bottom:6px;direction:ltr}
+.round-time{font-family:Arial,sans-serif;font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:20px;direction:ltr}
+.round-btn{background:linear-gradient(135deg,#f7971e,#ffd200);color:#1a1a2e;border:none;padding:16px 40px;border-radius:14px;font-family:'Arakom',Arial,sans-serif;font-size:22px;font-weight:bold;cursor:pointer;transition:all .2s;margin:6px}
+.round-btn:hover{transform:translateY(-2px)}
+.round-btn.secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.round-btn.secondary:hover{background:rgba(255,255,255,0.2)}
+
+/* FINAL SCREEN */
+.final-content{max-width:600px;width:100%;text-align:center;margin-top:60px}
+.final-title{font-size:clamp(30px,5vw,48px);font-weight:bold;margin-bottom:16px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.final-total-stars{font-size:48px;margin:16px 0;letter-spacing:6px}
+.final-total-stars .star-on{color:#ffd60a}
+.final-total-stars .star-off{color:rgba(255,255,255,0.15)}
+.final-score-num{font-family:Arial,sans-serif;font-size:56px;color:#06d6a0;font-weight:bold;margin:10px 0}
+.final-msg{font-family:Arial,sans-serif;font-size:20px;color:rgba(255,255,255,0.6);margin-bottom:24px;direction:ltr}
+.final-rounds{display:flex;justify-content:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.final-round-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:16px 20px;min-width:120px}
+.final-round-card .frc-label{font-family:Arial,sans-serif;font-size:14px;color:rgba(255,255,255,0.4);direction:ltr}
+.final-round-card .frc-stars{font-size:28px;margin:6px 0;letter-spacing:4px}
+.final-round-card .frc-score{font-family:Arial,sans-serif;font-size:16px;color:#06d6a0;direction:ltr}
+
+/* 2P FINAL */
+.final-2p{display:flex;gap:20px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.final-2p-card{background:rgba(255,255,255,0.06);border-radius:16px;padding:20px 28px;min-width:200px;text-align:center}
+.final-2p-card.winner{border:2px solid #ffd60a;box-shadow:0 0 30px rgba(255,214,10,0.2)}
+.final-2p-card .f2p-label{font-family:Arial,sans-serif;font-size:18px;margin-bottom:8px}
+.final-2p-card .f2p-score{font-size:42px;font-weight:bold;color:#06d6a0}
+.final-2p-card .f2p-stars{font-size:28px;margin-top:6px;letter-spacing:4px}
+.final-2p-card .f2p-crown{font-size:40px;margin-bottom:4px}
+
+/* WRONG FEEDBACK */
+.wrong-popup{position:fixed;z-index:1001;font-family:Arial,sans-serif;font-size:20px;color:#ef233c;background:rgba(239,35,60,0.15);border:1px solid rgba(239,35,60,0.4);padding:10px 24px;border-radius:12px;pointer-events:none;animation:popFade 1s ease forwards;direction:ltr;backdrop-filter:blur(4px)}
+@keyframes popFade{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-30px)}}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;width:8px;height:8px;z-index:999;pointer-events:none;animation:confettiFall 1.5s ease forwards}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+
+/* MOBILE */
+@media(max-width:768px){
+  .game-layout{flex-direction:column}
+  .list-panel{width:100%;min-width:unset;position:static;margin-bottom:10px}
+  .list-items{display:flex;flex-wrap:wrap;gap:4px}
+  .list-items li{flex:1;min-width:120px;padding:8px 10px;margin-bottom:0}
+  .shelf-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
+  .shelf-card{min-height:80px;padding:14px 8px}
+  .shelf-card .shelf-ar{font-size:clamp(24px,5vw,32px)}
+  .split-container{flex-direction:column}
+  .split-shelf-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px}
+  .game-header{padding-top:60px}
+}
+@media(max-width:480px){
+  .shelf-grid{grid-template-columns:repeat(2,1fr)}
+  .split-shelf-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- BACK BUTTON -->
+<a href="index.html" class="back-btn">العودة ←</a>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+<div class="start-content">
+  <span class="start-icon">🏪</span>
+  <div class="start-title">السوق العربي</div>
+  <div class="start-subtitle">Arap Pazari - Alisveris Oyunu</div>
+  <div class="start-desc">
+    Elinde bir <strong>alisveris listesi</strong> var!<br>
+    Raflarda sadece <strong>Arapca</strong> yaziyor.<br>
+    Dogru urunleri bulup sepete at!<br><br>
+    3 tur | Her turda daha zor | Yildiz topla!
+  </div>
+  <div class="player-toggle">
+    <button id="btnSolo" class="active" onclick="setMode(1)">Solo</button>
+    <button id="btnDuo" onclick="setMode(2)">2 Kisi</button>
+  </div>
+  <button class="start-btn" onclick="startGame()">Alisverise Basla!</button>
+</div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="screen">
+<div class="game-header">
+  <div class="game-round-badge" id="roundBadge"></div>
+  <div class="game-title-sm">السوق العربي</div>
+  <div class="game-hud">
+    <span>Puan: <span class="hud-score" id="hudScore">0</span></span>
+    <span>Sure: <span class="hud-timer" id="hudTimer">0</span>s</span>
+    <span class="hud-stars" id="hudStars"></span>
+    <span>Hata: <span class="hud-mistakes" id="hudMistakes">0</span></span>
+  </div>
+</div>
+<div id="soloLayout" class="game-layout">
+  <div class="list-panel" id="listPanel">
+    <div class="list-title"><span class="cart-icon">🛒</span> Alisveris Listesi</div>
+    <ul class="list-items" id="listItems"></ul>
+  </div>
+  <div class="market-panel">
+    <div class="market-label">Raflarda Arapca etiketleri oku ve dogru urunleri bul!</div>
+    <div class="shelf-grid" id="shelfGrid"></div>
+  </div>
+</div>
+<div id="splitLayout" class="split-container" style="display:none">
+  <div class="split-half p1">
+    <div class="split-player-label">Oyuncu 1</div>
+    <ul class="split-list" id="splitList1"></ul>
+    <div class="split-shelf-grid" id="splitGrid1"></div>
+  </div>
+  <div class="split-half p2">
+    <div class="split-player-label">Oyuncu 2</div>
+    <ul class="split-list" id="splitList2"></ul>
+    <div class="split-shelf-grid" id="splitGrid2"></div>
+  </div>
+</div>
+</div>
+
+<!-- ROUND COMPLETE OVERLAY -->
+<div id="roundOverlay" class="round-overlay" style="display:none">
+<div class="round-box">
+  <h2 id="roundCompleteTitle"></h2>
+  <div class="round-stars" id="roundStarsDisplay"></div>
+  <div class="round-score" id="roundScoreDisplay"></div>
+  <div class="round-time" id="roundTimeDisplay"></div>
+  <button class="round-btn" id="roundNextBtn" onclick="nextRound()"></button>
+</div>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="finalScreen" class="screen">
+<div class="final-content">
+  <span class="start-icon">🏆</span>
+  <div class="final-title" id="finalTitle"></div>
+  <div id="finalBody"></div>
+  <button class="round-btn" onclick="resetToStart()">Ana Menu</button>
+  <button class="round-btn secondary" onclick="startGame()">Tekrar Oyna</button>
+</div>
+</div>
+
+<script>
+// ======================== VOCAB ========================
+const VOCAB = {
+  foods: [
+    {ar:"\u062E\u064F\u0628\u0652\u0632",e:"\uD83C\uDF5E"},{ar:"\u062C\u064F\u0628\u0652\u0646",e:"\uD83E\uDDC0"},{ar:"\u0623\u064F\u0631\u064F\u0632",e:"\uD83C\uDF5A"},{ar:"\u0639\u064E\u0633\u064E\u0644",e:"\uD83C\uDF6F"},
+    {ar:"\u0634\u0627\u064A",e:"\uD83C\uDF75"},{ar:"\u062F\u064E\u062C\u0627\u062C",e:"\uD83C\uDF57"},{ar:"\u0644\u064E\u062D\u0652\u0645",e:"\uD83E\uDD69"},{ar:"\u0633\u064E\u0645\u064E\u0643",e:"\uD83D\uDC1F"},
+    {ar:"\u0628\u064E\u064A\u0652\u0636",e:"\uD83E\uDD5A"},{ar:"\u0632\u064F\u0628\u0652\u062F\u064E\u0629",e:"\uD83E\uDDC8"},{ar:"\u0643\u064F\u0641\u0652\u062A\u064E\u0629",e:"\uD83E\uDDC6"},{ar:"\u062D\u064E\u0633\u0627\u0621",e:"\uD83C\uDF72"},
+    {ar:"\u062D\u064E\u0644\u0650\u064A\u0628",e:"\uD83E\uDD5B"},{ar:"\u0642\u064E\u0647\u0652\u0648\u064E\u0629",e:"\u2615"},{ar:"\u0639\u064E\u0635\u0650\u064A\u0631",e:"\uD83E\uDDC3"},{ar:"\u0632\u064E\u064A\u0652\u062A\u0648\u0646",e:"\uD83E\uDED2"},
+    {ar:"\u062A\u064F\u0641\u0651\u064E\u0627\u062D",e:"\uD83C\uDF4E"},{ar:"\u0645\u064E\u0648\u0652\u0632",e:"\uD83C\uDF4C"}
+  ],
+  verbs: [
+    {ar:"\u064A\u064E\u0633\u0652\u062A\u064E\u064A\u0652\u0642\u0650\u0638",e:"\u23F0"},{ar:"\u064A\u064F\u0635\u064E\u0644\u0651\u0650\u064A",e:"\uD83D\uDD4C"},{ar:"\u064A\u064E\u062A\u064E\u0646\u0627\u0648\u064E\u0644",e:"\uD83C\uDF7D\uFE0F"},
+    {ar:"\u064A\u064E\u0644\u0652\u0628\u064E\u0633",e:"\uD83D\uDC54"},{ar:"\u064A\u064E\u0630\u0652\u0647\u064E\u0628",e:"\uD83D\uDEB6"},{ar:"\u064A\u064E\u0631\u0652\u062C\u0650\u0639",e:"\uD83D\uDD19"},
+    {ar:"\u064A\u064F\u0633\u0627\u0639\u0650\u062F",e:"\uD83E\uDD1D"},{ar:"\u064A\u064E\u062F\u0652\u0631\u064F\u0633",e:"\uD83D\uDCD6"},{ar:"\u064A\u064E\u0623\u0652\u0643\u064F\u0644",e:"\uD83C\uDF74"},
+    {ar:"\u064A\u064E\u0634\u0652\u0631\u064E\u0628",e:"\uD83E\uDD64"},{ar:"\u064A\u064E\u0646\u0627\u0645",e:"\uD83D\uDE34"},{ar:"\u064A\u064E\u062A\u064E\u0648\u064E\u0636\u0651\u064E\u0623",e:"\uD83D\uDCA7"}
+  ],
+  times: [
+    {ar:"\u0627\u0644\u0635\u0651\u064E\u0628\u0627\u062D",e:"\uD83C\uDF05"},{ar:"\u0627\u0644\u0638\u064F\u0647\u0631",e:"\u2600\uFE0F"},{ar:"\u0627\u0644\u0639\u0635\u0631",e:"\uD83C\uDF24\uFE0F"},
+    {ar:"\u0627\u0644\u0645\u0633\u0627\u0621",e:"\uD83C\uDF06"},{ar:"\u0627\u0644\u0644\u064A\u0644",e:"\uD83C\uDF19"},{ar:"\u0627\u0644\u0641\u064E\u062C\u0652\u0631",e:"\uD83C\uDF04"}
+  ]
+};
+const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR = {
+  '\u062E\u064F\u0628\u0652\u0632':'Ekmek','\u062C\u064F\u0628\u0652\u0646':'Peynir','\u0623\u064F\u0631\u064F\u0632':'Pirinc','\u0639\u064E\u0633\u064E\u0644':'Bal',
+  '\u0634\u0627\u064A':'Cay','\u062F\u064E\u062C\u0627\u062C':'Tavuk','\u0644\u064E\u062D\u0652\u0645':'Et','\u0633\u064E\u0645\u064E\u0643':'Balik',
+  '\u0628\u064E\u064A\u0652\u0636':'Yumurta','\u0632\u064F\u0628\u0652\u062F\u064E\u0629':'Tereyagi','\u0643\u064F\u0641\u0652\u062A\u064E\u0629':'Kofte','\u062D\u064E\u0633\u0627\u0621':'Corba',
+  '\u062D\u064E\u0644\u0650\u064A\u0628':'Sut','\u0642\u064E\u0647\u0652\u0648\u064E\u0629':'Kahve','\u0639\u064E\u0635\u0650\u064A\u0631':'Meyve Suyu','\u0632\u064E\u064A\u0652\u062A\u0648\u0646':'Zeytin',
+  '\u062A\u064F\u0641\u0651\u064E\u0627\u062D':'Elma','\u0645\u064E\u0648\u0652\u0632':'Muz',
+  '\u064A\u064E\u0633\u0652\u062A\u064E\u064A\u0652\u0642\u0650\u0638':'Uyanmak','\u064A\u064F\u0635\u064E\u0644\u0651\u0650\u064A':'Namaz Kilmak','\u064A\u064E\u062A\u064E\u0646\u0627\u0648\u064E\u0644':'Yemek Yemek',
+  '\u064A\u064E\u0644\u0652\u0628\u064E\u0633':'Giyinmek','\u064A\u064E\u0630\u0652\u0647\u064E\u0628':'Gitmek','\u064A\u064E\u0631\u0652\u062C\u0650\u0639':'Donmek',
+  '\u064A\u064F\u0633\u0627\u0639\u0650\u062F':'Yardim Etmek','\u064A\u064E\u062F\u0652\u0631\u064F\u0633':'Ders Calismak','\u064A\u064E\u0623\u0652\u0643\u064F\u0644':'Yemek',
+  '\u064A\u064E\u0634\u0652\u0631\u064E\u0628':'Icmek','\u064A\u064E\u0646\u0627\u0645':'Uyumak','\u064A\u064E\u062A\u064E\u0648\u064E\u0636\u0651\u064E\u0623':'Abdest Almak',
+  '\u0627\u0644\u0635\u0651\u064E\u0628\u0627\u062D':'Sabah','\u0627\u0644\u0638\u064F\u0647\u0631':'Ogle','\u0627\u0644\u0639\u0635\u0631':'Ikindi',
+  '\u0627\u0644\u0645\u0633\u0627\u0621':'Aksam','\u0627\u0644\u0644\u064A\u0644':'Gece','\u0627\u0644\u0641\u064E\u062C\u0652\u0631':'Fecir'
+};
+function getTr(w){ return VOCAB_TR[w.ar]||''; }
+
+// ======================== SOUND ========================
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesCorrect(){_tone(523,0.1,'sine',0.3,0);_tone(659,0.1,'sine',0.3,0.1);_tone(784,0.2,'sine',0.3,0.2);}
+function sesWrong(){_tone(180,0.15,'sawtooth',0.25,0);_tone(150,0.2,'sawtooth',0.2,0.15);}
+function sesKaching(){_tone(1200,0.06,'sine',0.3);_tone(1500,0.08,'sine',0.25,0.06);_tone(1800,0.1,'sine',0.2,0.12);}
+function sesCelebrate(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+
+// ======================== CONFETTI ========================
+function spawnConfetti(count){
+  const colors=['#ffd60a','#06d6a0','#ef233c','#4361ee','#f72585','#ff6b35'];
+  for(let i=0;i<(count||40);i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.left=Math.random()*100+'vw';
+    el.style.top='-10px';
+    el.style.background=colors[Math.floor(Math.random()*colors.length)];
+    el.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    el.style.width=(4+Math.random()*8)+'px';
+    el.style.height=(4+Math.random()*8)+'px';
+    el.style.animationDuration=(1+Math.random()*1.5)+'s';
+    el.style.animationDelay=(Math.random()*0.5)+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),3000);
+  }
+}
+
+// ======================== GAME STATE ========================
+let mode=1; // 1=solo, 2=duo
+let currentRound=0;
+let totalScore=0;
+let roundStars=[0,0,0];
+let timerInterval=null;
+let roundStartTime=0;
+let roundElapsed=0;
+let roundMistakes=0;
+let roundScore=0;
+let shoppingList=[];
+let shelfItems=[];
+let foundItems=new Set();
+
+// 2-Player state
+let p1Found=new Set();
+let p2Found=new Set();
+let p1Mistakes=0;
+let p2Mistakes=0;
+let p1Score=0;
+let p2Score=0;
+let p1ShelfItems=[];
+let p2ShelfItems=[];
+let p1Finished=false;
+let p2Finished=false;
+let p1Time=0;
+let p2Time=0;
+let totalP1Score=0;
+let totalP2Score=0;
+let p1RoundStars=[0,0,0];
+let p2RoundStars=[0,0,0];
+
+const ROUNDS=[
+  {listCount:4,shelfCount:8,pool:'foods',label:'Tur 1: Yiyecekler'},
+  {listCount:5,shelfCount:10,pool:'foodsVerbs',label:'Tur 2: Yiyecekler + Fiiller'},
+  {listCount:6,shelfCount:12,pool:'all',label:'Tur 3: Karisik'}
+];
+
+// ======================== HELPERS ========================
+function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+function setMode(m){
+  mode=m;
+  document.getElementById('btnSolo').classList.toggle('active',m===1);
+  document.getElementById('btnDuo').classList.toggle('active',m===2);
+}
+
+function getPool(poolName){
+  if(poolName==='foods') return [...VOCAB.foods];
+  if(poolName==='foodsVerbs') return [...VOCAB.foods,...VOCAB.verbs];
+  return [...ALL_WORDS];
+}
+
+function calcStars(mistakes){
+  if(mistakes===0) return 3;
+  if(mistakes<=2) return 2;
+  return 1;
+}
+
+function starsHTML(count,size){
+  size=size||'star-on';
+  let h='';
+  for(let i=0;i<3;i++){
+    if(i<count) h+='<span class="star-on" style="animation-delay:'+(i*0.15)+'s">&#9733;</span>';
+    else h+='<span class="star-off">&#9733;</span>';
+  }
+  return h;
+}
+
+function starsOf9(count){
+  let h='';
+  for(let i=0;i<9;i++){
+    if(i<count) h+='<span class="star-on" style="animation-delay:'+(i*0.08)+'s">&#9733;</span>';
+    else h+='<span class="star-off">&#9733;</span>';
+  }
+  return h;
+}
+
+function updateHudStars(){
+  const total=roundStars.reduce((a,b)=>a+b,0)+calcStars(roundMistakes);
+  let h='';
+  for(let i=0;i<9;i++){
+    h+=(i<roundStars.reduce((a,b)=>a+b,0))?'<span style="color:#ffd60a">&#9733;</span>':'<span style="color:rgba(255,255,255,0.15)">&#9733;</span>';
+  }
+  document.getElementById('hudStars').innerHTML=h;
+}
+
+// ======================== START GAME ========================
+function startGame(){
+  currentRound=0;
+  totalScore=0;
+  roundStars=[0,0,0];
+  totalP1Score=0;
+  totalP2Score=0;
+  p1RoundStars=[0,0,0];
+  p2RoundStars=[0,0,0];
+  startRound();
+}
+
+function startRound(){
+  const cfg=ROUNDS[currentRound];
+  showScreen('gameScreen');
+  document.getElementById('roundOverlay').style.display='none';
+  document.getElementById('roundBadge').textContent=cfg.label;
+
+  // Reset round state
+  roundMistakes=0;
+  roundScore=0;
+  foundItems=new Set();
+  roundStartTime=Date.now();
+  roundElapsed=0;
+
+  document.getElementById('hudScore').textContent=totalScore;
+  document.getElementById('hudMistakes').textContent='0';
+  updateHudStars();
+
+  if(mode===1) setupSoloRound(cfg);
+  else setupDuoRound(cfg);
+
+  // Start timer
+  clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    roundElapsed=Math.floor((Date.now()-roundStartTime)/1000);
+    document.getElementById('hudTimer').textContent=roundElapsed;
+  },200);
+}
+
+// ======================== SOLO MODE ========================
+function setupSoloRound(cfg){
+  document.getElementById('soloLayout').style.display='flex';
+  document.getElementById('splitLayout').style.display='none';
+
+  const pool=getPool(cfg.pool);
+  const shuffled=shuffle(pool);
+  shoppingList=shuffled.slice(0,cfg.listCount);
+  const distractors=shuffled.slice(cfg.listCount,cfg.listCount+(cfg.shelfCount-cfg.listCount));
+  shelfItems=shuffle([...shoppingList,...distractors]);
+
+  renderList(shoppingList,'listItems',foundItems);
+  renderShelf(shelfItems,'shelfGrid',null);
+}
+
+function renderList(list,containerId,foundSet){
+  const ul=document.getElementById(containerId);
+  ul.innerHTML='';
+  list.forEach((w,i)=>{
+    const li=document.createElement('li');
+    li.id=containerId+'_'+i;
+    if(foundSet.has(w.ar)) li.classList.add('found');
+    li.innerHTML='<span class="li-emoji">'+w.e+'</span><span class="li-text">'+getTr(w)+'</span><span class="li-check">&#10003;</span>';
+    ul.appendChild(li);
+  });
+}
+
+function renderShelf(items,containerId,playerNum){
+  const grid=document.getElementById(containerId);
+  grid.innerHTML='';
+  items.forEach((w,i)=>{
+    const card=document.createElement('div');
+    card.className='shelf-card';
+    card.id=containerId+'_card_'+i;
+    card.innerHTML='<span class="shelf-ar">'+w.ar+'</span>';
+    card.addEventListener('click',()=>{
+      if(card.classList.contains('found-card')) return;
+      if(playerNum===null) handleSoloPick(w,card,i);
+      else handleDuoPick(w,card,i,playerNum);
+    });
+    grid.appendChild(card);
+  });
+}
+
+function handleSoloPick(word,card,idx){
+  const isOnList=shoppingList.some(w=>w.ar===word.ar);
+  if(isOnList && !foundItems.has(word.ar)){
+    // CORRECT
+    foundItems.add(word.ar);
+    sesKaching();
+    sesCorrect();
+
+    // Fly animation
+    flyToCart(card,word.e);
+
+    // Mark found on list
+    const listIdx=shoppingList.findIndex(w=>w.ar===word.ar);
+    const li=document.getElementById('listItems_'+listIdx);
+    if(li) li.classList.add('found');
+
+    // Mark card
+    setTimeout(()=>card.classList.add('found-card'),400);
+
+    // Score
+    const timeBonus=Math.max(0,30-roundElapsed);
+    roundScore+=100+timeBonus;
+    totalScore+=100+timeBonus;
+    document.getElementById('hudScore').textContent=totalScore;
+
+    // Check round complete
+    if(foundItems.size===shoppingList.length){
+      setTimeout(()=>completeRound(),600);
+    }
+  } else if(foundItems.has(word.ar)){
+    // Already found - do nothing
+  } else {
+    // WRONG
+    sesWrong();
+    roundMistakes++;
+    document.getElementById('hudMistakes').textContent=roundMistakes;
+    card.classList.add('wrong-shake','wrong-flash');
+    showWrongPopup(card);
+    setTimeout(()=>card.classList.remove('wrong-shake','wrong-flash'),600);
+  }
+}
+
+function flyToCart(card,emoji){
+  const rect=card.getBoundingClientRect();
+  const fly=document.createElement('div');
+  fly.className='fly-item';
+  fly.textContent=emoji;
+  fly.style.left=rect.left+'px';
+  fly.style.top=rect.top+'px';
+  document.body.appendChild(fly);
+
+  const listPanel=document.querySelector('.list-panel')||document.querySelector('.split-list');
+  const target=listPanel?listPanel.getBoundingClientRect():{left:window.innerWidth/2,top:60};
+
+  requestAnimationFrame(()=>{
+    fly.style.left=target.left+'px';
+    fly.style.top=target.top+'px';
+    fly.style.opacity='0';
+    fly.style.transform='scale(0.3)';
+  });
+  setTimeout(()=>fly.remove(),700);
+}
+
+function showWrongPopup(card){
+  const rect=card.getBoundingClientRect();
+  const popup=document.createElement('div');
+  popup.className='wrong-popup';
+  popup.textContent='Bu degil! \u2716';
+  popup.style.left=(rect.left+rect.width/2-60)+'px';
+  popup.style.top=(rect.top-40)+'px';
+  document.body.appendChild(popup);
+  setTimeout(()=>popup.remove(),1100);
+}
+
+// ======================== 2-PLAYER MODE ========================
+function setupDuoRound(cfg){
+  document.getElementById('soloLayout').style.display='none';
+  document.getElementById('splitLayout').style.display='flex';
+
+  const pool=getPool(cfg.pool);
+  const shuffled=shuffle(pool);
+  shoppingList=shuffled.slice(0,cfg.listCount);
+
+  // Both players get same shopping list but different shelf arrangements
+  const distractorPool=shuffled.slice(cfg.listCount);
+  const d1=distractorPool.slice(0,cfg.shelfCount-cfg.listCount);
+  const d2=distractorPool.slice(cfg.shelfCount-cfg.listCount,2*(cfg.shelfCount-cfg.listCount));
+  // If not enough distractors, reuse pool
+  const extra=shuffle(pool.filter(w=>!shoppingList.some(s=>s.ar===w.ar)));
+  while(d2.length<cfg.shelfCount-cfg.listCount && extra.length>0) d2.push(extra.pop());
+
+  p1ShelfItems=shuffle([...shoppingList,...d1]);
+  p2ShelfItems=shuffle([...shoppingList,...d2]);
+  p1Found=new Set();
+  p2Found=new Set();
+  p1Mistakes=0;
+  p2Mistakes=0;
+  p1Score=0;
+  p2Score=0;
+  p1Finished=false;
+  p2Finished=false;
+  p1Time=0;
+  p2Time=0;
+
+  renderSplitList(shoppingList,'splitList1',p1Found);
+  renderSplitList(shoppingList,'splitList2',p2Found);
+  renderShelf(p1ShelfItems,'splitGrid1',1);
+  renderShelf(p2ShelfItems,'splitGrid2',2);
+}
+
+function renderSplitList(list,containerId,foundSet){
+  const ul=document.getElementById(containerId);
+  ul.innerHTML='';
+  list.forEach((w,i)=>{
+    const li=document.createElement('li');
+    li.id=containerId+'_'+i;
+    if(foundSet.has(w.ar)) li.classList.add('found');
+    li.innerHTML='<span class="li-emoji">'+w.e+'</span><span class="li-text">'+getTr(w)+'</span><span class="li-check">&#10003;</span>';
+    ul.appendChild(li);
+  });
+}
+
+function handleDuoPick(word,card,idx,player){
+  const pFound=player===1?p1Found:p2Found;
+  const isOnList=shoppingList.some(w=>w.ar===word.ar);
+
+  if((player===1&&p1Finished)||(player===2&&p2Finished)) return;
+
+  if(isOnList && !pFound.has(word.ar)){
+    pFound.add(word.ar);
+    sesKaching();
+    sesCorrect();
+
+    flyToCart(card,word.e);
+
+    const listId=player===1?'splitList1':'splitList2';
+    const listIdx=shoppingList.findIndex(w=>w.ar===word.ar);
+    const li=document.getElementById(listId+'_'+listIdx);
+    if(li) li.classList.add('found');
+
+    setTimeout(()=>card.classList.add('found-card'),400);
+
+    const timeBonus=Math.max(0,30-roundElapsed);
+    const pts=100+timeBonus;
+    if(player===1){p1Score+=pts;totalP1Score+=pts;}
+    else{p2Score+=pts;totalP2Score+=pts;}
+
+    if(pFound.size===shoppingList.length){
+      if(player===1){p1Finished=true;p1Time=roundElapsed;}
+      else{p2Finished=true;p2Time=roundElapsed;}
+      // Speed bonus
+      if(player===1&&!p2Finished){p1Score+=200;totalP1Score+=200;}
+      if(player===2&&!p1Finished){p2Score+=200;totalP2Score+=200;}
+
+      if(p1Finished&&p2Finished){
+        setTimeout(()=>completeDuoRound(),600);
+      }
+      // Auto-complete other player after 15s
+      if(!p1Finished||!p2Finished){
+        setTimeout(()=>{
+          if(!p1Finished||!p2Finished){
+            p1Finished=true;p2Finished=true;
+            if(!p1Time)p1Time=roundElapsed;
+            if(!p2Time)p2Time=roundElapsed;
+            completeDuoRound();
+          }
+        },15000);
+      }
+    }
+  } else if(pFound.has(word.ar)){
+    // already found
+  } else {
+    sesWrong();
+    if(player===1) p1Mistakes++;
+    else p2Mistakes++;
+    document.getElementById('hudMistakes').textContent=(player===1?p1Mistakes:p2Mistakes);
+    card.classList.add('wrong-shake','wrong-flash');
+    showWrongPopup(card);
+    setTimeout(()=>card.classList.remove('wrong-shake','wrong-flash'),600);
+  }
+}
+
+// ======================== ROUND COMPLETE ========================
+function completeRound(){
+  clearInterval(timerInterval);
+  const stars=calcStars(roundMistakes);
+  roundStars[currentRound]=stars;
+
+  if(stars===3) spawnConfetti(50);
+
+  const overlay=document.getElementById('roundOverlay');
+  overlay.style.display='flex';
+  document.getElementById('roundCompleteTitle').textContent='Alisveris Tamamlandi! \uD83D\uDED2';
+  document.getElementById('roundStarsDisplay').innerHTML=starsHTML(stars);
+  document.getElementById('roundScoreDisplay').textContent='Puan: +'+roundScore;
+  document.getElementById('roundTimeDisplay').textContent='Sure: '+roundElapsed+'s | Hata: '+roundMistakes;
+
+  sesCelebrate();
+
+  const btn=document.getElementById('roundNextBtn');
+  if(currentRound<2){
+    btn.textContent='Sonraki Tur \u2192';
+    btn.onclick=nextRound;
+  } else {
+    btn.textContent='Sonuclari Gor';
+    btn.onclick=showFinal;
+  }
+}
+
+function completeDuoRound(){
+  clearInterval(timerInterval);
+  const s1=calcStars(p1Mistakes);
+  const s2=calcStars(p2Mistakes);
+  p1RoundStars[currentRound]=s1;
+  p2RoundStars[currentRound]=s2;
+
+  if(s1===3||s2===3) spawnConfetti(50);
+
+  const overlay=document.getElementById('roundOverlay');
+  overlay.style.display='flex';
+
+  const winner=p1Score>p2Score?'Oyuncu 1':p2Score>p1Score?'Oyuncu 2':'Berabere';
+  document.getElementById('roundCompleteTitle').textContent='Tur Tamamlandi! '+winner+(winner!=='Berabere'?' Kazandi!':'!');
+  document.getElementById('roundStarsDisplay').innerHTML=
+    '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">Oyuncu 1</div>'+starsHTML(s1)+
+    '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">Oyuncu 2</div>'+starsHTML(s2);
+  document.getElementById('roundScoreDisplay').textContent='P1: +'+p1Score+' | P2: +'+p2Score;
+  document.getElementById('roundTimeDisplay').textContent='P1 Sure: '+p1Time+'s ('+p1Mistakes+' hata) | P2 Sure: '+p2Time+'s ('+p2Mistakes+' hata)';
+
+  sesCelebrate();
+
+  const btn=document.getElementById('roundNextBtn');
+  if(currentRound<2){
+    btn.textContent='Sonraki Tur \u2192';
+    btn.onclick=nextRound;
+  } else {
+    btn.textContent='Sonuclari Gor';
+    btn.onclick=showFinalDuo;
+  }
+}
+
+function nextRound(){
+  currentRound++;
+  document.getElementById('roundOverlay').style.display='none';
+  startRound();
+}
+
+// ======================== FINAL SCREENS ========================
+function showFinal(){
+  clearInterval(timerInterval);
+  document.getElementById('roundOverlay').style.display='none';
+  showScreen('finalScreen');
+
+  const totalStarsCount=roundStars.reduce((a,b)=>a+b,0);
+  let msg='';
+  if(totalStarsCount>=8) msg='Muhtesem! Arapca pazarlik ustasisin!';
+  else if(totalStarsCount>=5) msg='Harika! Arapca alisveriste cok iyisin!';
+  else msg='Iyi baslangic! Pratik yaptikca daha iyi olacak!';
+
+  document.getElementById('finalTitle').textContent='Alisveris Bitti!';
+
+  let html='';
+  let totalStarsHTML='';
+  for(let i=0;i<9;i++){
+    if(i<totalStarsCount) totalStarsHTML+='<span class="star-on" style="animation-delay:'+(i*0.08)+'s">&#9733;</span>';
+    else totalStarsHTML+='<span class="star-off">&#9733;</span>';
+  }
+  html+='<div class="final-total-stars">'+totalStarsHTML+'</div>';
+  // Show x/9
+  html+='<div style="font-family:Arial,sans-serif;font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:8px;direction:ltr">'+totalStarsCount+' / 9 Yildiz</div>';
+  html+='<div class="final-score-num">'+totalScore+'</div>';
+  html+='<div class="final-msg">'+msg+'</div>';
+  html+='<div class="final-rounds">';
+  for(let i=0;i<3;i++){
+    html+='<div class="final-round-card"><div class="frc-label">Tur '+(i+1)+'</div><div class="frc-stars">'+starsHTML(roundStars[i])+'</div></div>';
+  }
+  html+='</div>';
+
+  document.getElementById('finalBody').innerHTML=html;
+  if(totalStarsCount>=7) spawnConfetti(80);
+  sesCelebrate();
+}
+
+function showFinalDuo(){
+  clearInterval(timerInterval);
+  document.getElementById('roundOverlay').style.display='none';
+  showScreen('finalScreen');
+
+  const p1Total=p1RoundStars.reduce((a,b)=>a+b,0);
+  const p2Total=p2RoundStars.reduce((a,b)=>a+b,0);
+  const winner=totalP1Score>totalP2Score?1:totalP2Score>totalP1Score?2:0;
+
+  document.getElementById('finalTitle').textContent=winner===0?'Berabere!':('Oyuncu '+winner+' Kazandi!');
+
+  let html='<div class="final-2p">';
+  // P1
+  html+='<div class="final-2p-card'+(winner===1?' winner':'')+'">';
+  if(winner===1) html+='<div class="f2p-crown">&#128081;</div>';
+  html+='<div class="f2p-label" style="color:#4895ef">Oyuncu 1</div>';
+  html+='<div class="f2p-score">'+totalP1Score+'</div>';
+  html+='<div class="f2p-stars">'+starsOf9(p1Total)+'</div>';
+  html+='</div>';
+  // P2
+  html+='<div class="final-2p-card'+(winner===2?' winner':'')+'">';
+  if(winner===2) html+='<div class="f2p-crown">&#128081;</div>';
+  html+='<div class="f2p-label" style="color:#ef233c">Oyuncu 2</div>';
+  html+='<div class="f2p-score">'+totalP2Score+'</div>';
+  html+='<div class="f2p-stars">'+starsOf9(p2Total)+'</div>';
+  html+='</div>';
+  html+='</div>';
+
+  // Round breakdown
+  html+='<div class="final-rounds">';
+  for(let i=0;i<3;i++){
+    html+='<div class="final-round-card"><div class="frc-label">Tur '+(i+1)+'</div>';
+    html+='<div style="font-size:14px;color:#4895ef;font-family:Arial,sans-serif">P1: '+starsHTML(p1RoundStars[i])+'</div>';
+    html+='<div style="font-size:14px;color:#ef233c;font-family:Arial,sans-serif">P2: '+starsHTML(p2RoundStars[i])+'</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+
+  document.getElementById('finalBody').innerHTML=html;
+  spawnConfetti(80);
+  sesCelebrate();
+}
+
+function resetToStart(){
+  clearInterval(timerInterval);
+  showScreen('startScreen');
+}
+
+// Init
+showScreen('startScreen');
+</script>
+</body>
+</html>

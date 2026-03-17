@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>مغناطيس الكلمات — Kelime Mıknatısı</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom',sans-serif;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;min-height:100vh;min-height:100dvh;overflow:hidden;
+  user-select:none;-webkit-user-select:none;
+  position:relative;touch-action:none;
+}
+.tr-text{font-family:Arial,Helvetica,sans-serif;direction:ltr;unicode-bidi:isolate}
+
+/* Back button */
+#backBtn{
+  position:fixed;top:12px;left:12px;z-index:1000;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);
+  color:#fff;font-size:22px;width:42px;height:42px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:background 0.2s;
+}
+#backBtn:hover{background:rgba(255,255,255,0.25)}
+
+/* Screens */
+.screen{display:none;width:100%;height:100vh;height:100dvh;position:absolute;top:0;left:0}
+.screen.active{display:flex}
+
+/* MENU */
+#menuScreen{
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  text-align:center;padding:20px;
+}
+#menuScreen h1{font-size:clamp(26px,6vw,46px);margin-bottom:2px;text-shadow:0 0 25px rgba(100,200,255,0.5)}
+#menuScreen .subtitle{font-size:clamp(14px,3vw,20px);opacity:0.7;margin-bottom:12px}
+.menu-btn{
+  background:linear-gradient(135deg,#6c5ce7,#a855f7);
+  border:none;color:#fff;padding:16px 40px;border-radius:14px;
+  font-size:clamp(16px,3.5vw,22px);font-family:'Arakom',sans-serif;
+  cursor:pointer;min-width:240px;transition:transform 0.15s,box-shadow 0.15s;
+  box-shadow:0 4px 20px rgba(108,92,231,0.4);
+}
+.menu-btn:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(108,92,231,0.6)}
+.menu-btn.secondary{background:linear-gradient(135deg,#00b894,#00cec9);box-shadow:0 4px 20px rgba(0,184,148,0.4)}
+.menu-btn.secondary:hover{box-shadow:0 6px 30px rgba(0,184,148,0.6)}
+.menu-info{font-size:13px;opacity:0.5;margin-top:8px}
+.magnet-icon{font-size:clamp(48px,12vw,80px);margin-bottom:8px;animation:magnetFloat 2s ease-in-out infinite}
+@keyframes magnetFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+
+/* HUD */
+#hud{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 16px;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);
+  font-size:clamp(12px,2.5vw,16px);min-height:48px;
+}
+#hud .hud-section{display:flex;gap:10px;align-items:center;flex:1}
+#hud .hud-section.center{justify-content:center;text-align:center;flex:2}
+#hud .hud-section.right{justify-content:flex-end}
+#roundDisplay{color:#f9ca24;font-weight:bold}
+#scoreDisplay{color:#fff}
+#targetDisplay{font-size:clamp(14px,3vw,20px);font-weight:bold}
+.target-emoji{font-size:clamp(18px,4vw,28px)}
+.target-tr{color:#f9ca24}
+
+/* Timer bar */
+#timerBarWrap{
+  position:absolute;bottom:0;left:0;right:0;height:8px;z-index:100;
+  background:rgba(0,0,0,0.4);
+}
+#timerBar{
+  height:100%;width:100%;
+  background:linear-gradient(90deg,#00b894,#f9ca24,#e17055);
+  transition:width 0.25s linear;
+  border-radius:0 4px 4px 0;
+}
+
+/* GAME AREA */
+#gameScreen{flex-direction:column;position:relative}
+#gameArea{
+  position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;
+}
+
+/* Magnet zone */
+#magnetZone{
+  position:absolute;
+  width:clamp(100px,18vw,160px);height:clamp(100px,18vw,160px);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(100,200,255,0.15),rgba(100,200,255,0.03));
+  border:2px dashed rgba(100,200,255,0.35);
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(36px,8vw,60px);
+  z-index:10;
+  animation:magnetPulse 2s ease-in-out infinite;
+  pointer-events:none;
+}
+#magnetZone.attract{
+  animation:magnetAttract 0.4s ease-out;
+  border-color:rgba(0,255,150,0.8);
+  background:radial-gradient(circle,rgba(0,255,150,0.25),rgba(0,255,150,0.05));
+}
+#magnetZone.repel{
+  animation:magnetRepel 0.4s ease-out;
+  border-color:rgba(255,50,50,0.8);
+  background:radial-gradient(circle,rgba(255,50,50,0.25),rgba(255,50,50,0.05));
+}
+@keyframes magnetPulse{
+  0%,100%{box-shadow:0 0 20px rgba(100,200,255,0.2),0 0 60px rgba(100,200,255,0.1);transform:scale(1)}
+  50%{box-shadow:0 0 30px rgba(100,200,255,0.35),0 0 80px rgba(100,200,255,0.15);transform:scale(1.04)}
+}
+@keyframes magnetAttract{
+  0%{transform:scale(1)}40%{transform:scale(1.15)}100%{transform:scale(1)}
+}
+@keyframes magnetRepel{
+  0%{transform:scale(1)}20%{transform:scale(0.9)}50%{transform:scale(1.1)}100%{transform:scale(1)}
+}
+
+/* Bubbles */
+.bubble{
+  position:absolute;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  cursor:grab;
+  z-index:20;
+  transition:box-shadow 0.2s;
+  touch-action:none;
+  will-change:transform;
+  font-family:'Arakom',sans-serif;
+  font-weight:bold;
+  line-height:1.2;
+  padding:8px;
+}
+.bubble.dragging{
+  cursor:grabbing;
+  z-index:50;
+  transform:scale(1.15);
+  box-shadow:0 0 30px rgba(255,255,255,0.5),0 0 60px rgba(100,200,255,0.3);
+}
+.bubble.correct-snap{
+  animation:snapToMagnet 0.5s ease-in forwards;
+  z-index:55;
+}
+@keyframes snapToMagnet{
+  0%{opacity:1}
+  60%{transform:scale(1.3);opacity:0.8}
+  100%{transform:scale(0);opacity:0}
+}
+.bubble.repelled{
+  animation:repelBubble 0.5s ease-out;
+}
+@keyframes repelBubble{
+  0%{transform:scale(1)}
+  20%{transform:scale(1.2)}
+  40%{background:rgba(255,50,50,0.6)!important}
+  100%{transform:scale(1)}
+}
+.bubble.pop{
+  animation:popBubble 0.3s ease-out forwards;
+}
+@keyframes popBubble{
+  0%{transform:scale(1);opacity:1}
+  50%{transform:scale(1.4);opacity:0.5}
+  100%{transform:scale(0);opacity:0}
+}
+
+/* Feedback overlay */
+#feedback{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(32px,8vw,60px);z-index:200;pointer-events:none;
+  opacity:0;transition:opacity 0.3s;
+}
+#feedback.show{opacity:1;animation:feedbackPop 0.6s ease-out}
+@keyframes feedbackPop{0%{transform:translate(-50%,-50%) scale(0.5)}30%{transform:translate(-50%,-50%) scale(1.3)}100%{transform:translate(-50%,-50%) scale(1)}}
+
+/* Pause overlay */
+#pauseOverlay{
+  position:absolute;top:0;left:0;right:0;bottom:0;z-index:300;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  text-align:center;padding:20px;
+}
+#pauseOverlay.active{display:flex}
+#pauseOverlay h2{font-size:clamp(24px,5vw,38px);color:#f9ca24}
+#pauseOverlay p{font-size:clamp(14px,3vw,20px);opacity:0.8;max-width:400px}
+.pause-btn{
+  background:linear-gradient(135deg,#f9ca24,#e17055);
+  border:none;color:#fff;padding:14px 36px;border-radius:12px;
+  font-size:clamp(16px,3vw,22px);font-family:'Arakom',sans-serif;
+  cursor:pointer;min-width:200px;
+  box-shadow:0 4px 20px rgba(249,202,36,0.4);
+  transition:transform 0.15s;
+}
+.pause-btn:hover{transform:scale(1.05)}
+
+/* Results */
+#resultScreen{
+  flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  text-align:center;padding:20px;
+}
+#resultScreen h2{font-size:clamp(26px,6vw,44px);color:#f9ca24;text-shadow:0 0 20px rgba(249,202,36,0.5)}
+.result-stats{font-size:clamp(16px,3vw,24px);opacity:0.9;line-height:1.8}
+.result-stars{font-size:clamp(30px,8vw,50px);margin:8px 0}
+
+/* 2-Player split */
+.split-container{display:flex;width:100%;height:100%;position:absolute;top:0;left:0}
+.split-half{position:relative;flex:1;overflow:hidden}
+.split-half.left{border-left:2px solid rgba(255,255,255,0.15)}
+.split-half.right{border-right:2px solid rgba(255,255,255,0.15)}
+.split-label{
+  position:absolute;top:52px;width:100%;text-align:center;
+  font-size:clamp(11px,2vw,14px);color:rgba(255,255,255,0.5);z-index:60;
+  pointer-events:none;
+}
+.split-half .split-hud{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;align-items:center;gap:12px;
+  padding:6px 10px;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);
+  font-size:clamp(10px,2vw,14px);min-height:44px;flex-wrap:wrap;
+}
+.split-half .split-timer{
+  position:absolute;bottom:0;left:0;right:0;height:6px;z-index:100;
+  background:rgba(0,0,0,0.4);
+}
+.split-half .split-timer-fill{
+  height:100%;width:100%;
+  background:linear-gradient(90deg,#00b894,#f9ca24,#e17055);
+  transition:width 0.25s linear;
+}
+.split-half .magnet-zone-split{
+  position:absolute;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(100,200,255,0.15),rgba(100,200,255,0.03));
+  border:2px dashed rgba(100,200,255,0.35);
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;pointer-events:none;
+  animation:magnetPulse 2s ease-in-out infinite;
+}
+
+/* New target announcement */
+#newTargetAnnounce{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:250;pointer-events:none;
+  font-size:clamp(20px,5vw,36px);font-weight:bold;
+  text-align:center;
+  opacity:0;
+  text-shadow:0 0 20px rgba(0,0,0,0.8);
+}
+#newTargetAnnounce.show{
+  animation:announceIn 1s ease-out forwards;
+}
+@keyframes announceIn{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(0.5)}
+  20%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}
+  80%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(0.9)}
+}
+
+/* Particles */
+.particle{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:200;
+  animation:particleFly 0.6s ease-out forwards;
+}
+@keyframes particleFly{
+  0%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(0)}
+}
+</style>
+</head>
+<body>
+
+<a id="backBtn" href="index.html" title="Ana Menü">🔙</a>
+
+<!-- MENU SCREEN -->
+<div id="menuScreen" class="screen active">
+  <div class="magnet-icon">🧲</div>
+  <h1>مغناطيس الكلمات</h1>
+  <div class="subtitle tr-text">Kelime Miknatisi</div>
+  <p style="max-width:380px;opacity:0.7;font-size:clamp(12px,2.5vw,16px);line-height:1.6;margin-bottom:8px" class="tr-text">
+    Arapca kelimeleri oku, dogru baloncugu surekle ve miknatisa birak!
+  </p>
+  <button class="menu-btn" onclick="startGame(1)">🧲 <span class="tr-text">1 Oyuncu</span></button>
+  <button class="menu-btn secondary" onclick="startGame(2)">👥 <span class="tr-text">2 Oyuncu</span></button>
+  <div class="menu-info tr-text">IHO 7. Sinif Arapca</div>
+</div>
+
+<!-- GAME SCREEN (1-player) -->
+<div id="gameScreen" class="screen">
+  <div id="hud">
+    <div class="hud-section">
+      <span id="roundDisplay" class="tr-text"></span>
+      <span id="scoreDisplay" class="tr-text"></span>
+    </div>
+    <div class="hud-section center">
+      <span id="targetDisplay"></span>
+    </div>
+    <div class="hud-section right">
+      <span id="catchCount" class="tr-text" style="color:#00b894"></span>
+    </div>
+  </div>
+  <div id="gameArea">
+    <div id="magnetZone">🧲</div>
+  </div>
+  <div id="timerBarWrap"><div id="timerBar"></div></div>
+  <div id="feedback"></div>
+  <div id="newTargetAnnounce"></div>
+</div>
+
+<!-- GAME SCREEN (2-player) -->
+<div id="game2Screen" class="screen">
+  <div class="split-container">
+    <div class="split-half left" id="p1Half">
+      <div class="split-hud">
+        <span class="tr-text" style="color:#64b5f6">Oyuncu 1</span>
+        <span id="p1Score" class="tr-text" style="color:#fff">0</span>
+        <span id="p1Target"></span>
+        <span id="p1Catch" class="tr-text" style="color:#00b894"></span>
+      </div>
+      <div class="split-label"><span id="p1Round" class="tr-text"></span></div>
+      <div id="p1Area" style="position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden"></div>
+      <div class="split-timer"><div class="split-timer-fill" id="p1Timer"></div></div>
+    </div>
+    <div class="split-half right" id="p2Half">
+      <div class="split-hud">
+        <span class="tr-text" style="color:#f06292">Oyuncu 2</span>
+        <span id="p2Score" class="tr-text" style="color:#fff">0</span>
+        <span id="p2Target"></span>
+        <span id="p2Catch" class="tr-text" style="color:#00b894"></span>
+      </div>
+      <div class="split-label"><span id="p2Round" class="tr-text"></span></div>
+      <div id="p2Area" style="position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden"></div>
+      <div class="split-timer"><div class="split-timer-fill" id="p2Timer"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAUSE / ROUND TRANSITION OVERLAY -->
+<div id="pauseOverlay">
+  <h2 id="pauseTitle"></h2>
+  <p id="pauseMsg"></p>
+  <div id="pauseScore" class="tr-text" style="font-size:clamp(18px,4vw,28px);color:#00b894"></div>
+  <button class="pause-btn" id="pauseBtn" onclick="resumeFromPause()">▶️</button>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="resultScreen" class="screen">
+  <h2 id="resultTitle"></h2>
+  <div class="result-stars" id="resultStars"></div>
+  <div class="result-stats tr-text" id="resultStats"></div>
+  <button class="menu-btn" onclick="goMenu()" style="margin-top:16px">🏠 <span class="tr-text">Ana Menu</span></button>
+  <button class="menu-btn secondary" onclick="restartGame()" style="margin-top:8px">🔄 <span class="tr-text">Tekrar Oyna</span></button>
+</div>
+
+<script>
+// ===== VOCABULARY =====
+const VOCAB = {
+  foods: [
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs: [
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times: [
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR = {
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinc','عَسَل':'Bal',
+  'شاي':'Cay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balik',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyagi','كُفْتَة':'Kofte','حَساء':'Corba',
+  'حَلِيب':'Sut','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kilmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Donmek',
+  'يُساعِد':'Yardim Etmek','يَدْرُس':'Ders Calismak','يَأْكُل':'Yemek',
+  'يَشْرَب':'Icmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Ogle','العصر':'Ikindi',
+  'المساء':'Aksam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){ return VOCAB_TR[w.ar]||''; }
+
+// ===== SOUND SYSTEM =====
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesMagnet(){_tone(300,0.15,'sine',0.3);_tone(400,0.15,'sine',0.3,0.1);_tone(600,0.15,'sine',0.3,0.2);_tone(800,0.2,'sine',0.35,0.3);}
+function sesRepel(){_tone(400,0.1,'sawtooth',0.25);_tone(200,0.2,'sawtooth',0.2,0.1);}
+function sesCorrect(){_tone(523,0.1,'sine',0.3,0);_tone(659,0.1,'sine',0.3,0.1);_tone(784,0.2,'sine',0.3,0.2);}
+function sesPop(){_tone(1000,0.05,'sine',0.25);_tone(1500,0.03,'sine',0.15,0.03);}
+function sesCelebrate(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+
+// ===== GLOBALS =====
+const BUBBLE_COLORS = [
+  'rgba(108,92,231,0.55)','rgba(0,206,201,0.55)','rgba(253,121,168,0.55)',
+  'rgba(0,184,148,0.55)','rgba(255,159,67,0.55)','rgba(99,110,114,0.55)',
+  'rgba(9,132,227,0.55)','rgba(214,48,49,0.55)','rgba(253,203,110,0.55)',
+  'rgba(85,239,196,0.55)','rgba(162,155,254,0.55)','rgba(255,118,117,0.55)'
+];
+
+const ROUNDS = [
+  { targets:5, bubbleCount:8,  pool:'foods', time:30, speedMul:1.0, label:'Tur 1 — Yiyecekler' },
+  { targets:6, bubbleCount:10, pool:'verbs', time:25, speedMul:1.4, label:'Tur 2 — Fiiller' },
+  { targets:7, bubbleCount:12, pool:'mixed', time:20, speedMul:1.8, label:'Tur 3 — Karisik' }
+];
+
+let playerMode = 1;
+let currentRound = 0;
+let score = 0;
+let caught = 0;
+let totalCaught = 0;
+let totalMissed = 0;
+let roundTargets = [];
+let roundBubbleWords = [];
+let currentTargetIdx = 0;
+let bubbles = [];
+let animId = null;
+let timerInterval = null;
+let timeLeft = 0;
+let paused = false;
+let gameActive = false;
+let draggingBubble = null;
+let dragOffsetX = 0, dragOffsetY = 0;
+let lastRestartMode = 1;
+
+// 2-player state
+let p1 = null, p2 = null;
+
+// ===== HELPERS =====
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goMenu(){
+  stopGame();
+  showScreen('menuScreen');
+}
+function restartGame(){
+  stopGame();
+  startGame(lastRestartMode);
+}
+
+// ===== PARTICLES =====
+function spawnParticles(x,y,color,count){
+  for(let i=0;i<count;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const sz=Math.random()*8+4;
+    p.style.width=sz+'px';p.style.height=sz+'px';
+    p.style.background=color;
+    p.style.left=(x-sz/2)+'px';p.style.top=(y-sz/2)+'px';
+    const angle=Math.random()*Math.PI*2;
+    const dist=Math.random()*80+30;
+    const dx=Math.cos(angle)*dist;
+    const dy=Math.sin(angle)*dist;
+    p.style.setProperty('--dx',dx+'px');
+    p.style.setProperty('--dy',dy+'px');
+    p.animate([
+      {transform:'translate(0,0) scale(1)',opacity:1},
+      {transform:`translate(${dx}px,${dy}px) scale(0)`,opacity:0}
+    ],{duration:600,easing:'ease-out'});
+    document.getElementById(playerMode===1?'gameArea':'p1Area').appendChild(p);
+    setTimeout(()=>p.remove(),600);
+  }
+}
+
+// ===== 1-PLAYER GAME =====
+function startGame(mode){
+  playerMode = mode;
+  lastRestartMode = mode;
+  if(mode===2) return start2Player();
+  currentRound = 0;
+  score = 0;
+  totalCaught = 0;
+  totalMissed = 0;
+  showScreen('gameScreen');
+  startRound();
+}
+
+function startRound(){
+  const rd = ROUNDS[currentRound];
+  if(!rd) return endGame();
+
+  // Build word pool
+  let pool;
+  if(rd.pool==='foods') pool = shuffle(VOCAB.foods);
+  else if(rd.pool==='verbs') pool = shuffle(VOCAB.verbs);
+  else pool = shuffle(ALL_WORDS);
+
+  // Pick target words and distractors
+  roundBubbleWords = pool.slice(0, rd.bubbleCount);
+  roundTargets = shuffle(roundBubbleWords).slice(0, rd.targets);
+  currentTargetIdx = 0;
+  caught = 0;
+  timeLeft = rd.time;
+  paused = false;
+  gameActive = true;
+
+  updateHUD();
+  createBubbles();
+  positionMagnetZone();
+  showNewTarget(true);
+}
+
+function positionMagnetZone(){
+  const area = document.getElementById('gameArea');
+  const mz = document.getElementById('magnetZone');
+  const aw = area.clientWidth;
+  const ah = area.clientHeight;
+  const mzSize = mz.clientWidth;
+  mz.style.left = (aw/2 - mzSize/2) + 'px';
+  mz.style.top = (ah/2 - mzSize/2) + 'px';
+}
+
+function createBubbles(){
+  const area = document.getElementById('gameArea');
+  // Remove old bubbles
+  area.querySelectorAll('.bubble').forEach(b=>b.remove());
+  bubbles = [];
+  const rd = ROUNDS[currentRound];
+  const aw = area.clientWidth;
+  const ah = area.clientHeight;
+  const bubbleR = Math.max(32, Math.min(aw,ah)*0.065);
+  const fontSize = Math.max(16, bubbleR*0.55);
+
+  for(let i=0; i<roundBubbleWords.length; i++){
+    const w = roundBubbleWords[i];
+    const el = document.createElement('div');
+    el.className = 'bubble';
+    el.textContent = w.ar;
+    el.style.width = (bubbleR*2)+'px';
+    el.style.height = (bubbleR*2)+'px';
+    el.style.fontSize = fontSize+'px';
+    el.style.background = BUBBLE_COLORS[i % BUBBLE_COLORS.length];
+    el.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3), inset 0 -2px 8px rgba(0,0,0,0.15)';
+
+    // Position avoiding center magnet zone
+    let x,y,attempts=0;
+    do {
+      x = bubbleR + Math.random()*(aw - bubbleR*2);
+      y = 60 + bubbleR + Math.random()*(ah - 70 - bubbleR*2);
+      attempts++;
+    } while(attempts<50 && Math.hypot(x-aw/2, y-ah/2) < bubbleR*3+60);
+
+    const speed = rd.speedMul;
+    const vx = (Math.random()-0.5)*2*speed;
+    const vy = (Math.random()-0.5)*2*speed;
+
+    const b = {
+      el, x, y, vx, vy,
+      radius: bubbleR,
+      word: w,
+      dragging: false,
+      removed: false
+    };
+    el.style.left = (x-bubbleR)+'px';
+    el.style.top = (y-bubbleR)+'px';
+    area.appendChild(el);
+    bubbles.push(b);
+
+    // Pointer events
+    el.addEventListener('pointerdown', e=>onBubbleDown(e,b));
+  }
+
+  startPhysicsLoop();
+  startTimer();
+}
+
+function updateHUD(){
+  const rd = ROUNDS[currentRound];
+  document.getElementById('roundDisplay').textContent = rd.label;
+  document.getElementById('scoreDisplay').textContent = 'Puan: '+score;
+  document.getElementById('catchCount').textContent = caught+'/'+rd.targets;
+}
+
+function showNewTarget(firstOfRound){
+  if(currentTargetIdx >= roundTargets.length){
+    // All targets caught for this round
+    finishRound(true);
+    return;
+  }
+  const tgt = roundTargets[currentTargetIdx];
+  const tr = getTr(tgt);
+  document.getElementById('targetDisplay').innerHTML =
+    `<span class="target-emoji">${tgt.e}</span> <span class="target-tr tr-text">${tr}</span> <span style="opacity:0.6;font-size:0.8em" class="tr-text">— Bu kelimeyi bul!</span>`;
+
+  // Announce
+  if(!firstOfRound){
+    const ann = document.getElementById('newTargetAnnounce');
+    ann.innerHTML = `${tgt.e} <span class="tr-text">${tr}</span>`;
+    ann.className = '';
+    void ann.offsetWidth;
+    ann.className = 'show';
+  }
+}
+
+function startTimer(){
+  clearInterval(timerInterval);
+  const rd = ROUNDS[currentRound];
+  timeLeft = rd.time;
+  updateTimerBar();
+  timerInterval = setInterval(()=>{
+    if(paused || !gameActive) return;
+    timeLeft -= 0.25;
+    updateTimerBar();
+    if(timeLeft <= 0){
+      timeLeft = 0;
+      updateTimerBar();
+      finishRound(false);
+    }
+  }, 250);
+}
+
+function updateTimerBar(){
+  const rd = ROUNDS[currentRound];
+  const pct = Math.max(0, timeLeft/rd.time*100);
+  document.getElementById('timerBar').style.width = pct+'%';
+}
+
+// ===== PHYSICS LOOP =====
+function startPhysicsLoop(){
+  cancelAnimationFrame(animId);
+  function loop(){
+    if(!gameActive) return;
+    const area = document.getElementById(playerMode===1?'gameArea':(p1?'p1Area':'gameArea'));
+    const aw = area.clientWidth;
+    const ah = area.clientHeight;
+
+    for(const b of bubbles){
+      if(b.dragging || b.removed) continue;
+      b.x += b.vx;
+      b.y += b.vy;
+      // Bounce off edges
+      if(b.x - b.radius < 0){ b.x = b.radius; b.vx = Math.abs(b.vx); }
+      if(b.x + b.radius > aw){ b.x = aw - b.radius; b.vx = -Math.abs(b.vx); }
+      if(b.y - b.radius < 56){ b.y = 56 + b.radius; b.vy = Math.abs(b.vy); }
+      if(b.y + b.radius > ah - 10){ b.y = ah - 10 - b.radius; b.vy = -Math.abs(b.vy); }
+      // Simple collision avoidance
+      for(const o of bubbles){
+        if(o===b || o.dragging || o.removed) continue;
+        const dx = b.x-o.x, dy = b.y-o.y;
+        const dist = Math.hypot(dx,dy);
+        const minD = b.radius + o.radius + 4;
+        if(dist < minD && dist > 0){
+          const nx=dx/dist, ny=dy/dist;
+          const overlap = (minD-dist)/2;
+          b.x += nx*overlap; b.y += ny*overlap;
+          o.x -= nx*overlap; o.y -= ny*overlap;
+          // Swap velocity components along normal
+          const dvx = b.vx-o.vx, dvy = b.vy-o.vy;
+          const dot = dvx*nx + dvy*ny;
+          if(dot > 0){
+            b.vx -= dot*nx*0.5; b.vy -= dot*ny*0.5;
+            o.vx += dot*nx*0.5; o.vy += dot*ny*0.5;
+          }
+        }
+      }
+      // Add slight wobble
+      b.vx += (Math.random()-0.5)*0.04;
+      b.vy += (Math.random()-0.5)*0.04;
+      // Clamp speed
+      const spd = Math.hypot(b.vx,b.vy);
+      const maxSpd = ROUNDS[Math.min(currentRound,2)].speedMul * 2.5;
+      if(spd > maxSpd){
+        b.vx = b.vx/spd*maxSpd;
+        b.vy = b.vy/spd*maxSpd;
+      }
+      b.el.style.left = (b.x-b.radius)+'px';
+      b.el.style.top = (b.y-b.radius)+'px';
+    }
+    animId = requestAnimationFrame(loop);
+  }
+  animId = requestAnimationFrame(loop);
+}
+
+// ===== DRAG HANDLING =====
+function onBubbleDown(e, b){
+  if(!gameActive || paused || b.removed) return;
+  e.preventDefault();
+  e.stopPropagation();
+  b.dragging = true;
+  b.el.classList.add('dragging');
+  b.el.setPointerCapture(e.pointerId);
+  const rect = b.el.parentElement.getBoundingClientRect();
+  dragOffsetX = e.clientX - rect.left - b.x;
+  dragOffsetY = e.clientY - rect.top - b.y;
+  draggingBubble = b;
+
+  const moveHandler = ev => onBubbleMove(ev, b);
+  const upHandler = ev => {
+    onBubbleUp(ev, b);
+    b.el.removeEventListener('pointermove', moveHandler);
+    b.el.removeEventListener('pointerup', upHandler);
+    b.el.removeEventListener('pointercancel', upHandler);
+  };
+  b.el.addEventListener('pointermove', moveHandler);
+  b.el.addEventListener('pointerup', upHandler);
+  b.el.addEventListener('pointercancel', upHandler);
+}
+
+function onBubbleMove(e, b){
+  if(!b.dragging) return;
+  e.preventDefault();
+  const rect = b.el.parentElement.getBoundingClientRect();
+  b.x = e.clientX - rect.left - dragOffsetX;
+  b.y = e.clientY - rect.top - dragOffsetY;
+  // Clamp
+  b.x = Math.max(b.radius, Math.min(b.el.parentElement.clientWidth - b.radius, b.x));
+  b.y = Math.max(b.radius, Math.min(b.el.parentElement.clientHeight - b.radius, b.y));
+  b.el.style.left = (b.x-b.radius)+'px';
+  b.el.style.top = (b.y-b.radius)+'px';
+}
+
+function onBubbleUp(e, b){
+  if(!b.dragging) return;
+  b.dragging = false;
+  b.el.classList.remove('dragging');
+  draggingBubble = null;
+
+  // Check if near magnet zone
+  const area = b.el.parentElement;
+  const aw = area.clientWidth;
+  const ah = area.clientHeight;
+  const mzCx = aw/2;
+  const mzCy = ah/2;
+  const dist = Math.hypot(b.x - mzCx, b.y - mzCy);
+  const snapDist = Math.max(80, Math.min(aw,ah)*0.12);
+
+  if(dist < snapDist){
+    checkAnswer(b);
+  } else {
+    // Spring back with velocity
+    b.vx = (Math.random()-0.5)*3;
+    b.vy = (Math.random()-0.5)*3;
+  }
+}
+
+function checkAnswer(b){
+  const tgt = roundTargets[currentTargetIdx];
+  const mz = playerMode===1 ? document.getElementById('magnetZone') : null;
+
+  if(b.word.ar === tgt.ar){
+    // CORRECT
+    sesMagnet();
+    sesCorrect();
+    score += 10 + Math.ceil(timeLeft);
+    caught++;
+    totalCaught++;
+    b.removed = true;
+
+    // Snap animation
+    const area = b.el.parentElement;
+    const mzCx = area.clientWidth/2;
+    const mzCy = area.clientHeight/2;
+    b.el.style.left = (mzCx-b.radius)+'px';
+    b.el.style.top = (mzCy-b.radius)+'px';
+    b.el.classList.add('correct-snap');
+
+    if(mz){
+      mz.classList.remove('attract');
+      void mz.offsetWidth;
+      mz.classList.add('attract');
+      setTimeout(()=>mz.classList.remove('attract'),500);
+    }
+
+    // Particles
+    spawnParticles(mzCx, mzCy, '#00ff88', 12);
+
+    // Feedback
+    showFeedback('\u2705');
+
+    updateHUD();
+
+    setTimeout(()=>{
+      b.el.remove();
+      currentTargetIdx++;
+      if(currentTargetIdx < roundTargets.length){
+        showNewTarget(false);
+      } else {
+        finishRound(true);
+      }
+    }, 800);
+
+  } else {
+    // WRONG
+    sesRepel();
+    score = Math.max(0, score - 5);
+    totalMissed++;
+
+    b.el.classList.add('repelled');
+    if(mz){
+      mz.classList.remove('repel');
+      void mz.offsetWidth;
+      mz.classList.add('repel');
+      setTimeout(()=>mz.classList.remove('repel'),500);
+    }
+
+    // Fling away from center
+    const area = b.el.parentElement;
+    const mzCx = area.clientWidth/2;
+    const mzCy = area.clientHeight/2;
+    const dx = b.x - mzCx;
+    const dy = b.y - mzCy;
+    const d = Math.hypot(dx,dy)||1;
+    b.vx = (dx/d)*5;
+    b.vy = (dy/d)*5;
+
+    showFeedback('\u274C');
+    updateHUD();
+
+    setTimeout(()=>b.el.classList.remove('repelled'),500);
+  }
+}
+
+function showFeedback(text){
+  const fb = document.getElementById('feedback');
+  fb.textContent = text;
+  fb.className = '';
+  void fb.offsetWidth;
+  fb.className = 'show';
+  setTimeout(()=>fb.className='',700);
+}
+
+function finishRound(allCaught){
+  gameActive = false;
+  clearInterval(timerInterval);
+  cancelAnimationFrame(animId);
+
+  // Pop remaining bubbles
+  const area = document.getElementById('gameArea');
+  bubbles.forEach(b=>{
+    if(!b.removed){
+      b.el.classList.add('pop');
+      sesPop();
+    }
+  });
+  setTimeout(()=>{
+    area.querySelectorAll('.bubble').forEach(b=>b.remove());
+    bubbles = [];
+  },400);
+
+  if(currentRound < ROUNDS.length - 1){
+    // Show round transition
+    setTimeout(()=>{
+      showRoundTransition(allCaught);
+    },600);
+  } else {
+    setTimeout(()=>endGame(),600);
+  }
+}
+
+function showRoundTransition(allCaught){
+  const ov = document.getElementById('pauseOverlay');
+  const rd = ROUNDS[currentRound];
+  const next = ROUNDS[currentRound+1];
+  document.getElementById('pauseTitle').innerHTML = allCaught ? '\u2705 Tur Tamamlandi!' : '\u23F0 Sure Doldu!';
+  document.getElementById('pauseMsg').innerHTML = `<span class="tr-text">${caught}/${rd.targets} kelime yakalandi</span>`;
+  document.getElementById('pauseScore').textContent = 'Puan: '+score;
+  document.getElementById('pauseBtn').innerHTML = `\u25B6\uFE0F <span class="tr-text">${next.label}</span>`;
+  ov.classList.add('active');
+  paused = true;
+  sesCelebrate();
+}
+
+function resumeFromPause(){
+  document.getElementById('pauseOverlay').classList.remove('active');
+  paused = false;
+  currentRound++;
+  startRound();
+}
+
+function endGame(){
+  gameActive = false;
+  clearInterval(timerInterval);
+  cancelAnimationFrame(animId);
+  sesCelebrate();
+
+  showScreen('resultScreen');
+  const total = ROUNDS.reduce((s,r)=>s+r.targets,0);
+  const pct = totalCaught/total;
+  let stars = '\u2B50';
+  if(pct>=0.5) stars='\u2B50\u2B50';
+  if(pct>=0.75) stars='\u2B50\u2B50\u2B50';
+  if(pct>=0.95) stars='\u2B50\u2B50\u2B50\u2B50';
+
+  document.getElementById('resultTitle').textContent = pct>=0.75 ? 'Tebrikler!' : 'Oyun Bitti!';
+  document.getElementById('resultStars').textContent = stars;
+  document.getElementById('resultStats').innerHTML =
+    `Toplam Puan: ${score}<br>Yakalanan: ${totalCaught}/${total}<br>Yanlis: ${totalMissed}`;
+}
+
+function stopGame(){
+  gameActive = false;
+  paused = false;
+  clearInterval(timerInterval);
+  cancelAnimationFrame(animId);
+  document.getElementById('pauseOverlay').classList.remove('active');
+  // Clear bubbles
+  document.querySelectorAll('.bubble').forEach(b=>b.remove());
+  bubbles = [];
+  // Clear 2-player
+  if(p1) stop2Player();
+}
+
+// ===== 2-PLAYER MODE =====
+function start2Player(){
+  showScreen('game2Screen');
+  currentRound = 0;
+  p1 = create2PState('p1');
+  p2 = create2PState('p2');
+  start2PRound();
+}
+
+function create2PState(prefix){
+  return {
+    prefix,
+    score:0,
+    caught:0,
+    totalCaught:0,
+    totalMissed:0,
+    currentTargetIdx:0,
+    roundTargets:[],
+    roundBubbleWords:[],
+    bubbles:[],
+    timeLeft:0,
+    timerInterval:null,
+    animId:null,
+    gameActive:false,
+    draggingBubble:null
+  };
+}
+
+function start2PRound(){
+  const rd = ROUNDS[currentRound];
+  if(!rd) return end2PGame();
+
+  let pool;
+  if(rd.pool==='foods') pool = shuffle(VOCAB.foods);
+  else if(rd.pool==='verbs') pool = shuffle(VOCAB.verbs);
+  else pool = shuffle(ALL_WORDS);
+
+  const bubbleWords = pool.slice(0, rd.bubbleCount);
+  const targets = shuffle(bubbleWords).slice(0, rd.targets);
+
+  // Both players get same words & targets
+  [p1,p2].forEach(p=>{
+    p.roundBubbleWords = [...bubbleWords];
+    p.roundTargets = [...targets];
+    p.currentTargetIdx = 0;
+    p.caught = 0;
+    p.timeLeft = rd.time;
+    p.gameActive = true;
+  });
+
+  document.getElementById('p1Round').textContent = rd.label;
+  document.getElementById('p2Round').textContent = rd.label;
+
+  create2PBubbles(p1, 'p1Area');
+  create2PBubbles(p2, 'p2Area');
+  create2PMagnetZones();
+  update2PHUD(p1);
+  update2PHUD(p2);
+  show2PTarget(p1);
+  show2PTarget(p2);
+  start2PTimer(p1);
+  start2PTimer(p2);
+  start2PPhysics(p1, 'p1Area');
+  start2PPhysics(p2, 'p2Area');
+}
+
+function create2PMagnetZones(){
+  ['p1Area','p2Area'].forEach(id=>{
+    const area = document.getElementById(id);
+    let mz = area.querySelector('.magnet-zone-split');
+    if(!mz){
+      mz = document.createElement('div');
+      mz.className = 'magnet-zone-split';
+      mz.textContent = '\uD83E\uDDF2';
+      area.appendChild(mz);
+    }
+    const aw = area.clientWidth;
+    const ah = area.clientHeight;
+    const sz = Math.max(60, Math.min(aw,ah)*0.2);
+    mz.style.width = sz+'px'; mz.style.height = sz+'px';
+    mz.style.fontSize = (sz*0.45)+'px';
+    mz.style.left = (aw/2-sz/2)+'px';
+    mz.style.top = (ah/2-sz/2)+'px';
+  });
+}
+
+function create2PBubbles(pState, areaId){
+  const area = document.getElementById(areaId);
+  area.querySelectorAll('.bubble').forEach(b=>b.remove());
+  pState.bubbles = [];
+  const rd = ROUNDS[currentRound];
+  const aw = area.clientWidth;
+  const ah = area.clientHeight;
+  const bubbleR = Math.max(22, Math.min(aw,ah)*0.055);
+  const fontSize = Math.max(12, bubbleR*0.5);
+
+  for(let i=0; i<pState.roundBubbleWords.length; i++){
+    const w = pState.roundBubbleWords[i];
+    const el = document.createElement('div');
+    el.className = 'bubble';
+    el.textContent = w.ar;
+    el.style.width = (bubbleR*2)+'px';
+    el.style.height = (bubbleR*2)+'px';
+    el.style.fontSize = fontSize+'px';
+    el.style.background = BUBBLE_COLORS[i%BUBBLE_COLORS.length];
+    el.style.boxShadow = '0 3px 10px rgba(0,0,0,0.3), inset 0 -2px 6px rgba(0,0,0,0.15)';
+
+    let x,y,attempts=0;
+    do {
+      x = bubbleR + Math.random()*(aw-bubbleR*2);
+      y = 50 + bubbleR + Math.random()*(ah-60-bubbleR*2);
+      attempts++;
+    } while(attempts<40 && Math.hypot(x-aw/2,y-ah/2)<bubbleR*2+40);
+
+    const speed = rd.speedMul*0.8;
+    const b = {
+      el, x, y,
+      vx:(Math.random()-0.5)*2*speed,
+      vy:(Math.random()-0.5)*2*speed,
+      radius:bubbleR, word:w,
+      dragging:false, removed:false
+    };
+    el.style.left=(x-bubbleR)+'px';
+    el.style.top=(y-bubbleR)+'px';
+    area.appendChild(el);
+    pState.bubbles.push(b);
+
+    el.addEventListener('pointerdown',e=>on2PBubbleDown(e,b,pState,areaId));
+  }
+}
+
+function update2PHUD(p){
+  const rd = ROUNDS[currentRound];
+  document.getElementById(p.prefix+'Score').textContent = 'Puan: '+p.score;
+  document.getElementById(p.prefix+'Catch').textContent = p.caught+'/'+rd.targets;
+}
+
+function show2PTarget(p){
+  if(p.currentTargetIdx >= p.roundTargets.length){
+    finish2PRound(p);
+    return;
+  }
+  const tgt = p.roundTargets[p.currentTargetIdx];
+  const tr = getTr(tgt);
+  document.getElementById(p.prefix+'Target').innerHTML =
+    `<span style="font-size:1.2em">${tgt.e}</span> <span class="tr-text" style="color:#f9ca24">${tr}</span>`;
+}
+
+function start2PTimer(p){
+  clearInterval(p.timerInterval);
+  const rd = ROUNDS[currentRound];
+  p.timeLeft = rd.time;
+  update2PTimerBar(p);
+  p.timerInterval = setInterval(()=>{
+    if(!p.gameActive) return;
+    p.timeLeft -= 0.25;
+    update2PTimerBar(p);
+    if(p.timeLeft <= 0){
+      p.timeLeft = 0;
+      update2PTimerBar(p);
+      finish2PRound(p);
+    }
+  },250);
+}
+
+function update2PTimerBar(p){
+  const rd = ROUNDS[currentRound];
+  const pct = Math.max(0,p.timeLeft/rd.time*100);
+  document.getElementById(p.prefix+'Timer').style.width = pct+'%';
+}
+
+function start2PPhysics(pState, areaId){
+  cancelAnimationFrame(pState.animId);
+  function loop(){
+    if(!pState.gameActive) return;
+    const area = document.getElementById(areaId);
+    const aw = area.clientWidth;
+    const ah = area.clientHeight;
+    for(const b of pState.bubbles){
+      if(b.dragging||b.removed) continue;
+      b.x+=b.vx; b.y+=b.vy;
+      if(b.x-b.radius<0){b.x=b.radius;b.vx=Math.abs(b.vx);}
+      if(b.x+b.radius>aw){b.x=aw-b.radius;b.vx=-Math.abs(b.vx);}
+      if(b.y-b.radius<50){b.y=50+b.radius;b.vy=Math.abs(b.vy);}
+      if(b.y+b.radius>ah-8){b.y=ah-8-b.radius;b.vy=-Math.abs(b.vy);}
+      for(const o of pState.bubbles){
+        if(o===b||o.dragging||o.removed)continue;
+        const dx=b.x-o.x,dy=b.y-o.y;
+        const dist=Math.hypot(dx,dy);
+        const minD=b.radius+o.radius+2;
+        if(dist<minD&&dist>0){
+          const nx=dx/dist,ny=dy/dist;
+          const ov=(minD-dist)/2;
+          b.x+=nx*ov;b.y+=ny*ov;o.x-=nx*ov;o.y-=ny*ov;
+          const dvx=b.vx-o.vx,dvy=b.vy-o.vy;
+          const dot=dvx*nx+dvy*ny;
+          if(dot>0){b.vx-=dot*nx*0.5;b.vy-=dot*ny*0.5;o.vx+=dot*nx*0.5;o.vy+=dot*ny*0.5;}
+        }
+      }
+      b.vx+=(Math.random()-0.5)*0.03;
+      b.vy+=(Math.random()-0.5)*0.03;
+      const spd=Math.hypot(b.vx,b.vy);
+      const maxSpd=ROUNDS[Math.min(currentRound,2)].speedMul*2;
+      if(spd>maxSpd){b.vx=b.vx/spd*maxSpd;b.vy=b.vy/spd*maxSpd;}
+      b.el.style.left=(b.x-b.radius)+'px';
+      b.el.style.top=(b.y-b.radius)+'px';
+    }
+    pState.animId=requestAnimationFrame(loop);
+  }
+  pState.animId=requestAnimationFrame(loop);
+}
+
+function on2PBubbleDown(e,b,pState,areaId){
+  if(!pState.gameActive||b.removed) return;
+  e.preventDefault();e.stopPropagation();
+  b.dragging=true;
+  b.el.classList.add('dragging');
+  b.el.setPointerCapture(e.pointerId);
+  const rect=document.getElementById(areaId).getBoundingClientRect();
+  const offX=e.clientX-rect.left-b.x;
+  const offY=e.clientY-rect.top-b.y;
+
+  const moveH=ev=>{
+    if(!b.dragging)return;
+    ev.preventDefault();
+    const r2=document.getElementById(areaId).getBoundingClientRect();
+    b.x=ev.clientX-r2.left-offX;
+    b.y=ev.clientY-r2.top-offY;
+    b.x=Math.max(b.radius,Math.min(document.getElementById(areaId).clientWidth-b.radius,b.x));
+    b.y=Math.max(b.radius,Math.min(document.getElementById(areaId).clientHeight-b.radius,b.y));
+    b.el.style.left=(b.x-b.radius)+'px';
+    b.el.style.top=(b.y-b.radius)+'px';
+  };
+  const upH=ev=>{
+    if(!b.dragging)return;
+    b.dragging=false;
+    b.el.classList.remove('dragging');
+    b.el.removeEventListener('pointermove',moveH);
+    b.el.removeEventListener('pointerup',upH);
+    b.el.removeEventListener('pointercancel',upH);
+    // Check magnet zone
+    const area=document.getElementById(areaId);
+    const aw=area.clientWidth,ah=area.clientHeight;
+    const dist=Math.hypot(b.x-aw/2,b.y-ah/2);
+    const snapDist=Math.max(50,Math.min(aw,ah)*0.13);
+    if(dist<snapDist){
+      check2PAnswer(b,pState,areaId);
+    } else {
+      b.vx=(Math.random()-0.5)*3;
+      b.vy=(Math.random()-0.5)*3;
+    }
+  };
+  b.el.addEventListener('pointermove',moveH);
+  b.el.addEventListener('pointerup',upH);
+  b.el.addEventListener('pointercancel',upH);
+}
+
+function check2PAnswer(b,pState,areaId){
+  const tgt=pState.roundTargets[pState.currentTargetIdx];
+  if(b.word.ar===tgt.ar){
+    sesMagnet();sesCorrect();
+    pState.score+=10+Math.ceil(pState.timeLeft);
+    pState.caught++;pState.totalCaught++;
+    b.removed=true;
+    const area=document.getElementById(areaId);
+    b.el.style.left=(area.clientWidth/2-b.radius)+'px';
+    b.el.style.top=(area.clientHeight/2-b.radius)+'px';
+    b.el.classList.add('correct-snap');
+    update2PHUD(pState);
+    setTimeout(()=>{
+      b.el.remove();
+      pState.currentTargetIdx++;
+      if(pState.currentTargetIdx<pState.roundTargets.length){
+        show2PTarget(pState);
+      } else {
+        finish2PRound(pState);
+      }
+    },600);
+  } else {
+    sesRepel();
+    pState.score=Math.max(0,pState.score-5);
+    pState.totalMissed++;
+    b.el.classList.add('repelled');
+    const area=document.getElementById(areaId);
+    const dx=b.x-area.clientWidth/2,dy=b.y-area.clientHeight/2;
+    const d=Math.hypot(dx,dy)||1;
+    b.vx=(dx/d)*4;b.vy=(dy/d)*4;
+    update2PHUD(pState);
+    setTimeout(()=>b.el.classList.remove('repelled'),500);
+  }
+}
+
+function finish2PRound(pState){
+  pState.gameActive=false;
+  clearInterval(pState.timerInterval);
+  cancelAnimationFrame(pState.animId);
+  // Pop bubbles
+  const areaId=pState.prefix+'Area';
+  pState.bubbles.forEach(b=>{
+    if(!b.removed){b.el.classList.add('pop');sesPop();}
+  });
+  setTimeout(()=>{
+    document.getElementById(areaId).querySelectorAll('.bubble').forEach(b=>b.remove());
+    pState.bubbles=[];
+  },400);
+
+  // Check if both players finished this round
+  if(!p1.gameActive && !p2.gameActive){
+    if(currentRound < ROUNDS.length-1){
+      setTimeout(()=>{
+        // Show round transition using pause overlay
+        const ov=document.getElementById('pauseOverlay');
+        const rd=ROUNDS[currentRound];
+        const next=ROUNDS[currentRound+1];
+        document.getElementById('pauseTitle').innerHTML='\u2705 Tur Tamamlandi!';
+        document.getElementById('pauseMsg').innerHTML=
+          `<span class="tr-text">Oyuncu 1: ${p1.caught}/${rd.targets} | Oyuncu 2: ${p2.caught}/${rd.targets}</span>`;
+        document.getElementById('pauseScore').textContent=
+          `O1: ${p1.score} puan | O2: ${p2.score} puan`;
+        document.getElementById('pauseBtn').innerHTML=`\u25B6\uFE0F <span class="tr-text">${next.label}</span>`;
+        document.getElementById('pauseBtn').onclick=()=>{
+          ov.classList.remove('active');
+          currentRound++;
+          start2PRound();
+        };
+        ov.classList.add('active');
+        sesCelebrate();
+      },600);
+    } else {
+      setTimeout(()=>end2PGame(),600);
+    }
+  }
+}
+
+function end2PGame(){
+  stop2Player();
+  sesCelebrate();
+  showScreen('resultScreen');
+  const total=ROUNDS.reduce((s,r)=>s+r.targets,0);
+  const winner = p1.score>p2.score ? 'Oyuncu 1' : (p2.score>p1.score ? 'Oyuncu 2' : 'Berabere');
+  let stars='\u2B50';
+  const bestPct=Math.max(p1.totalCaught,p2.totalCaught)/total;
+  if(bestPct>=0.5)stars='\u2B50\u2B50';
+  if(bestPct>=0.75)stars='\u2B50\u2B50\u2B50';
+  if(bestPct>=0.95)stars='\u2B50\u2B50\u2B50\u2B50';
+
+  document.getElementById('resultTitle').textContent = winner==='Berabere'?'Berabere!':winner+' Kazandi!';
+  document.getElementById('resultStars').textContent=stars;
+  document.getElementById('resultStats').innerHTML=
+    `<b style="color:#64b5f6">Oyuncu 1:</b> ${p1.score} puan (${p1.totalCaught}/${total})<br>`+
+    `<b style="color:#f06292">Oyuncu 2:</b> ${p2.score} puan (${p2.totalCaught}/${total})`;
+}
+
+function stop2Player(){
+  if(p1){clearInterval(p1.timerInterval);cancelAnimationFrame(p1.animId);p1.gameActive=false;}
+  if(p2){clearInterval(p2.timerInterval);cancelAnimationFrame(p2.animId);p2.gameActive=false;}
+  document.querySelectorAll('#p1Area .bubble, #p2Area .bubble').forEach(b=>b.remove());
+  // Reset pause button handler
+  document.getElementById('pauseBtn').onclick = resumeFromPause;
+}
+
+// ===== RESIZE HANDLING =====
+window.addEventListener('resize',()=>{
+  if(playerMode===1 && gameActive){
+    positionMagnetZone();
+  }
+  if(playerMode===2){
+    create2PMagnetZones();
+  }
+});
+
+// Prevent context menu & double-tap zoom
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('dblclick',e=>e.preventDefault());
+
+// Init audio context on first interaction
+document.addEventListener('pointerdown',()=>{try{_ac();}catch(e){}},{once:true});
+</script>
+</body>
+</html>

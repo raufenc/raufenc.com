@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>مختبر الكلمات — Kelime Laboratuvarı</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom',sans-serif;
+  background:linear-gradient(135deg,#0a1628,#1a2a4a,#0d1f1d);
+  color:#fff;min-height:100vh;overflow:hidden;
+  user-select:none;-webkit-user-select:none;
+  position:relative;
+}
+.tr-text{font-family:Arial,Helvetica,sans-serif;direction:ltr;unicode-bidi:embed}
+
+/* Back button */
+#backBtn{
+  position:fixed;top:12px;left:12px;z-index:1000;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);
+  color:#fff;font-size:22px;width:42px;height:42px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:background 0.2s;
+}
+#backBtn:hover{background:rgba(255,255,255,0.25)}
+
+/* Screens */
+.screen{display:none;width:100%;min-height:100vh;position:absolute;top:0;left:0}
+.screen.active{display:flex}
+
+/* Particles */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.particle{
+  position:absolute;width:4px;height:4px;border-radius:50%;
+  background:rgba(0,255,180,0.3);animation:floatUp linear infinite;
+}
+@keyframes floatUp{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  10%{opacity:1}
+  90%{opacity:0.5}
+  100%{transform:translateY(-20px) scale(1);opacity:0}
+}
+
+/* MENU */
+#menuScreen{
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  text-align:center;padding:20px;z-index:1;
+}
+#menuScreen h1{
+  font-size:clamp(26px,6vw,46px);margin-bottom:2px;
+  text-shadow:0 0 30px rgba(0,255,150,0.4),0 0 60px rgba(0,200,255,0.2);
+}
+#menuScreen .subtitle{
+  font-size:clamp(14px,3vw,20px);opacity:0.7;margin-bottom:10px;
+}
+.lab-icon{font-size:clamp(50px,12vw,90px);margin-bottom:10px;filter:drop-shadow(0 0 20px rgba(0,255,150,0.5))}
+.menu-btn{
+  background:linear-gradient(135deg,#00b894,#00cec9);
+  border:none;color:#fff;padding:16px 40px;border-radius:14px;
+  font-size:clamp(16px,3.5vw,22px);font-family:'Arakom',sans-serif;
+  cursor:pointer;min-width:240px;transition:transform 0.15s,box-shadow 0.15s;
+  box-shadow:0 4px 20px rgba(0,184,148,0.4);
+}
+.menu-btn:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(0,184,148,0.6)}
+.menu-btn.two-player{background:linear-gradient(135deg,#6c5ce7,#a855f7);box-shadow:0 4px 20px rgba(108,92,231,0.4)}
+.menu-btn.two-player:hover{box-shadow:0 6px 30px rgba(108,92,231,0.6)}
+.menu-info{font-size:13px;opacity:0.5;margin-top:8px}
+.round-info{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin:10px 0;
+}
+.round-badge{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;padding:8px 14px;font-size:clamp(11px,2.2vw,14px);
+  text-align:center;min-width:120px;
+}
+.round-badge .rb-title{font-weight:bold;color:#00ffc8;margin-bottom:4px}
+
+/* GAME SCREEN */
+#gameScreen{
+  flex-direction:column;align-items:center;z-index:1;
+  padding:10px;overflow-y:auto;
+}
+.game-container{
+  width:100%;max-width:700px;display:flex;flex-direction:column;align-items:center;
+  gap:10px;padding-top:50px;
+}
+
+/* Top bar */
+.top-bar{
+  display:flex;justify-content:space-between;align-items:center;
+  width:100%;padding:6px 10px;gap:10px;flex-wrap:wrap;
+}
+.stat-box{
+  background:rgba(0,255,180,0.08);border:1px solid rgba(0,255,180,0.2);
+  border-radius:10px;padding:6px 12px;font-size:clamp(12px,2.5vw,16px);
+  text-align:center;white-space:nowrap;
+}
+.stat-label{font-size:10px;opacity:0.6;display:block}
+.stat-val{font-weight:bold;color:#00ffc8}
+
+/* Round indicator */
+.round-indicator{
+  font-size:clamp(13px,2.8vw,18px);color:#a0e8ff;
+  text-align:center;opacity:0.8;
+}
+
+/* Timer */
+.timer-bar-wrap{
+  width:100%;height:8px;background:rgba(255,255,255,0.1);border-radius:4px;
+  overflow:hidden;
+}
+.timer-bar{
+  height:100%;border-radius:4px;transition:width 0.3s linear;
+  background:linear-gradient(90deg,#00ffc8,#00b894);
+}
+.timer-bar.warn{background:linear-gradient(90deg,#fdcb6e,#e17055)}
+.timer-bar.danger{background:linear-gradient(90deg,#e17055,#d63031)}
+
+/* Formula area */
+.formula-area{
+  background:rgba(0,255,180,0.05);border:2px solid rgba(0,255,180,0.2);
+  border-radius:16px;padding:16px 24px;text-align:center;width:100%;
+  position:relative;overflow:hidden;
+}
+.formula-area::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(ellipse at center,rgba(0,255,150,0.05) 0%,transparent 70%);
+  animation:formulaGlow 4s ease-in-out infinite alternate;
+}
+@keyframes formulaGlow{0%{opacity:0.3}100%{opacity:0.8}}
+.formula-label{font-size:12px;opacity:0.5;margin-bottom:4px}
+.formula-emoji{font-size:clamp(36px,8vw,56px);margin-bottom:4px}
+.formula-turkish{
+  font-family:Arial,Helvetica,sans-serif;direction:ltr;
+  font-size:clamp(18px,4vw,28px);font-weight:bold;color:#00ffc8;
+}
+.formula-action{
+  font-family:Arial,Helvetica,sans-serif;direction:ltr;
+  font-size:clamp(12px,2.5vw,16px);color:#a0e8ff;opacity:0.8;margin-top:4px;
+}
+
+/* Mixer area */
+.mixer-area{
+  display:flex;flex-direction:row-reverse;justify-content:center;
+  gap:8px;padding:14px 10px;width:100%;flex-wrap:wrap;
+}
+.mixer-slot{
+  width:clamp(40px,10vw,55px);height:clamp(50px,12vw,65px);
+  border:2px dashed rgba(0,255,180,0.3);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(24px,6vw,34px);color:#fff;
+  background:rgba(0,255,180,0.03);transition:all 0.3s;
+  position:relative;
+}
+.mixer-slot.filled{
+  border-color:#00ffc8;background:rgba(0,255,180,0.1);
+  box-shadow:0 0 15px rgba(0,255,150,0.3);
+}
+.mixer-slot.correct-all{
+  border-color:#00ff88;background:rgba(0,255,100,0.2);
+  box-shadow:0 0 25px rgba(0,255,100,0.5);
+  animation:slotGlow 0.5s ease;
+}
+@keyframes slotGlow{
+  0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}
+}
+.mixer-slot .slot-num{
+  position:absolute;top:2px;right:4px;font-size:9px;opacity:0.3;
+}
+
+/* Test tubes area */
+.tubes-area{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(8px,2vw,14px);
+  padding:10px;width:100%;
+}
+.test-tube{
+  width:clamp(48px,11vw,62px);cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;position:relative;transition:transform 0.15s;
+}
+.test-tube:hover{transform:scale(1.05)}
+.test-tube:active{transform:scale(0.95)}
+.tube-glass{
+  width:100%;height:clamp(90px,22vw,120px);
+  border:2px solid rgba(150,220,255,0.3);
+  border-top:none;border-radius:0 0 16px 16px;
+  position:relative;overflow:hidden;
+  background:rgba(150,220,255,0.04);
+}
+.tube-top{
+  width:calc(100% + 8px);height:10px;margin-left:-4px;
+  background:rgba(150,220,255,0.15);border-radius:4px 4px 0 0;
+  border:2px solid rgba(150,220,255,0.3);border-bottom:none;
+}
+.tube-liquid{
+  position:absolute;bottom:0;left:0;width:100%;height:70%;
+  background:linear-gradient(to top,rgba(0,200,255,0.35),rgba(0,255,180,0.15));
+  border-radius:0 0 14px 14px;
+  transition:height 0.3s,background 0.3s;
+}
+.tube-bubbles{
+  position:absolute;bottom:0;left:0;width:100%;height:100%;
+  pointer-events:none;overflow:hidden;
+}
+.bubble{
+  position:absolute;border-radius:50%;background:rgba(255,255,255,0.25);
+  animation:bubbleUp ease-in infinite;
+}
+@keyframes bubbleUp{
+  0%{transform:translateY(0) scale(1);opacity:0.6}
+  100%{transform:translateY(-100px) scale(0.3);opacity:0}
+}
+.tube-letter{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(26px,6.5vw,36px);font-weight:bold;
+  color:#fff;text-shadow:0 0 10px rgba(0,255,200,0.5);
+  z-index:2;pointer-events:none;
+}
+.test-tube.used .tube-liquid{height:20%;opacity:0.3}
+.test-tube.used .tube-letter{opacity:0.2}
+.test-tube.used{pointer-events:none;opacity:0.5}
+.test-tube.explode .tube-glass{animation:explodeShake 0.4s ease}
+.test-tube.explode .tube-liquid{background:linear-gradient(to top,rgba(255,50,50,0.5),rgba(255,100,50,0.2))!important}
+@keyframes explodeShake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-6px) rotate(-3deg)}
+  40%{transform:translateX(6px) rotate(3deg)}
+  60%{transform:translateX(-4px) rotate(-2deg)}
+  80%{transform:translateX(4px) rotate(2deg)}
+}
+.test-tube.catalyst-glow .tube-liquid{
+  background:linear-gradient(to top,rgba(255,200,0,0.5),rgba(255,220,50,0.2))!important;
+  box-shadow:0 0 20px rgba(255,200,0,0.4);
+}
+.test-tube.catalyst-glow .tube-glass{
+  border-color:rgba(255,200,0,0.6);
+  box-shadow:0 0 15px rgba(255,200,0,0.3);
+  animation:catalystPulse 0.6s ease infinite alternate;
+}
+@keyframes catalystPulse{0%{box-shadow:0 0 10px rgba(255,200,0,0.2)}100%{box-shadow:0 0 25px rgba(255,200,0,0.6)}}
+
+/* Catalyst button */
+.catalyst-btn{
+  background:linear-gradient(135deg,#f9a825,#ff8f00);
+  border:none;color:#fff;padding:10px 20px;border-radius:12px;
+  font-size:clamp(14px,3vw,18px);font-family:'Arakom',sans-serif;
+  cursor:pointer;box-shadow:0 0 15px rgba(249,168,37,0.3);
+  transition:transform 0.15s,box-shadow 0.15s;
+  display:flex;align-items:center;gap:6px;
+}
+.catalyst-btn:hover{transform:scale(1.05);box-shadow:0 0 25px rgba(249,168,37,0.5)}
+.catalyst-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+.catalyst-count{
+  background:rgba(0,0,0,0.2);border-radius:50%;width:22px;height:22px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;
+}
+.bottom-bar{
+  display:flex;justify-content:center;align-items:center;gap:16px;
+  width:100%;padding:6px 0;flex-wrap:wrap;
+}
+
+/* Smoke effects */
+.smoke-container{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:50;overflow:hidden;
+}
+.smoke-puff{
+  position:absolute;border-radius:50%;
+  animation:smokePuff 0.8s ease-out forwards;
+}
+@keyframes smokePuff{
+  0%{transform:scale(0);opacity:0.8}
+  100%{transform:scale(3);opacity:0}
+}
+
+/* Success banner */
+.success-banner{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  background:linear-gradient(135deg,rgba(0,255,120,0.9),rgba(0,200,100,0.9));
+  color:#fff;font-size:clamp(20px,5vw,32px);font-weight:bold;
+  padding:20px 40px;border-radius:20px;z-index:100;
+  box-shadow:0 0 40px rgba(0,255,120,0.5);text-align:center;
+  animation:bannerPop 0.4s ease forwards;
+}
+@keyframes bannerPop{
+  0%{transform:translate(-50%,-50%) scale(0)}
+  60%{transform:translate(-50%,-50%) scale(1.1)}
+  100%{transform:translate(-50%,-50%) scale(1)}
+}
+
+/* Round summary */
+#summaryScreen{
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;text-align:center;padding:20px;z-index:1;
+}
+#summaryScreen h2{font-size:clamp(22px,5vw,36px);color:#00ffc8;text-shadow:0 0 20px rgba(0,255,180,0.4)}
+.summary-stats{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:10px 0;
+}
+.summary-stat{
+  background:rgba(0,255,180,0.08);border:1px solid rgba(0,255,180,0.2);
+  border-radius:12px;padding:12px 20px;min-width:100px;
+}
+.summary-stat .ss-val{font-size:clamp(24px,5vw,36px);font-weight:bold;color:#00ffc8}
+.summary-stat .ss-label{font-size:12px;opacity:0.6;margin-top:4px}
+
+/* Game over */
+#endScreen{
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;text-align:center;padding:20px;z-index:1;
+}
+#endScreen h2{font-size:clamp(24px,6vw,40px);text-shadow:0 0 30px rgba(0,255,180,0.5)}
+.end-trophy{font-size:clamp(60px,14vw,100px);margin-bottom:10px}
+
+/* 2-Player layout */
+.two-player-wrap{
+  display:flex;width:100%;height:100vh;overflow:hidden;
+}
+.player-panel{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:8px;overflow-y:auto;position:relative;
+  border-left:2px solid rgba(255,255,255,0.1);
+}
+.player-panel:first-child{border-left:none;border-right:2px solid rgba(255,255,255,0.1)}
+.player-label{
+  font-size:clamp(12px,2.5vw,16px);font-weight:bold;
+  padding:4px 14px;border-radius:8px;margin-bottom:6px;margin-top:46px;
+}
+.p1-label{background:rgba(0,200,255,0.2);color:#00d4ff}
+.p2-label{background:rgba(200,100,255,0.2);color:#c864ff}
+.player-panel .formula-area{padding:10px 14px}
+.player-panel .formula-emoji{font-size:clamp(24px,5vw,36px)}
+.player-panel .formula-turkish{font-size:clamp(14px,3vw,20px)}
+.player-panel .mixer-slot{
+  width:clamp(32px,7vw,42px);height:clamp(38px,9vw,50px);
+  font-size:clamp(18px,4.5vw,26px);
+}
+.player-panel .test-tube{width:clamp(36px,8vw,48px)}
+.player-panel .tube-glass{height:clamp(65px,16vw,85px)}
+.player-panel .tube-letter{font-size:clamp(20px,5vw,28px)}
+.player-panel .stat-box{font-size:clamp(10px,2vw,13px);padding:4px 8px}
+.player-panel .catalyst-btn{font-size:clamp(11px,2.2vw,14px);padding:6px 12px}
+
+/* Responsive */
+@media(max-width:500px){
+  .game-container{padding-top:45px}
+  .top-bar{gap:6px}
+  .stat-box{padding:4px 8px;font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<a id="backBtn" href="index.html">✕</a>
+<div id="particles"></div>
+<div id="smokeContainer" class="smoke-container"></div>
+
+<!-- MENU -->
+<div id="menuScreen" class="screen active">
+  <div class="lab-icon">🧪</div>
+  <h1>مختبر الكلمات</h1>
+  <div class="subtitle tr-text">Kelime Laboratuvarı</div>
+  <div class="round-info">
+    <div class="round-badge">
+      <div class="rb-title tr-text">1. Basit Moleküller</div>
+      <div class="tr-text" style="font-size:11px">3 harf &bull; 45sn &bull; 3 hak</div>
+    </div>
+    <div class="round-badge">
+      <div class="rb-title tr-text">2. Orta Bileşikler</div>
+      <div class="tr-text" style="font-size:11px">4-5 harf &bull; 40sn &bull; 3 hak</div>
+    </div>
+    <div class="round-badge">
+      <div class="rb-title tr-text">3. Kompleks Formüller</div>
+      <div class="tr-text" style="font-size:11px">5+ harf &bull; 35sn &bull; 2 hak</div>
+    </div>
+  </div>
+  <button class="menu-btn" onclick="startGame(1)"><span class="tr-text">Tek Oyuncu</span> 🔬</button>
+  <button class="menu-btn two-player" onclick="startGame(2)"><span class="tr-text">2 Oyuncu</span> 🔬🔬</button>
+  <div class="menu-info tr-text">İHO 7. Sınıf Arapça &bull; Kelime Sentezi</div>
+</div>
+
+<!-- SINGLE PLAYER GAME -->
+<div id="gameScreen" class="screen">
+  <div class="game-container" id="singleContainer">
+    <div class="round-indicator tr-text" id="roundLabel">1. Raund: Basit Moleküller</div>
+    <div class="top-bar">
+      <div class="stat-box"><span class="stat-label tr-text">Puan</span><span class="stat-val" id="scoreVal">0</span></div>
+      <div class="stat-box"><span class="stat-label tr-text">Kelime</span><span class="stat-val" id="wordNum">1/5</span></div>
+      <div class="stat-box"><span class="stat-label tr-text">Hak</span><span class="stat-val" id="attemptsVal">3</span></div>
+    </div>
+    <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+    <div class="formula-area" id="formulaArea">
+      <div class="formula-label tr-text">Formül</div>
+      <div class="formula-emoji" id="formulaEmoji">🍞</div>
+      <div class="formula-turkish tr-text" id="formulaTr">Ekmek</div>
+      <div class="formula-action tr-text" id="formulaAction">sentezle!</div>
+    </div>
+    <div class="mixer-area" id="mixerArea"></div>
+    <div class="tubes-area" id="tubesArea"></div>
+    <div class="bottom-bar">
+      <button class="catalyst-btn" id="catalystBtn" onclick="useCatalyst(0)">
+        ⚡ <span class="tr-text">Kataliz</span> <span class="catalyst-count" id="catalystCount">3</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 2-PLAYER GAME -->
+<div id="twoPlayerScreen" class="screen">
+  <div class="two-player-wrap">
+    <div class="player-panel" id="p1Panel">
+      <div class="player-label p1-label tr-text">Oyuncu 1</div>
+      <div class="round-indicator tr-text" id="p1RoundLabel">1. Raund</div>
+      <div class="top-bar">
+        <div class="stat-box"><span class="stat-label tr-text">Puan</span><span class="stat-val" id="p1Score">0</span></div>
+        <div class="stat-box"><span class="stat-label tr-text">Hak</span><span class="stat-val" id="p1Attempts">3</span></div>
+      </div>
+      <div class="timer-bar-wrap"><div class="timer-bar" id="p1Timer"></div></div>
+      <div class="formula-area" id="p1Formula">
+        <div class="formula-emoji" id="p1Emoji">🍞</div>
+        <div class="formula-turkish tr-text" id="p1Tr">Ekmek</div>
+      </div>
+      <div class="mixer-area" id="p1Mixer"></div>
+      <div class="tubes-area" id="p1Tubes"></div>
+      <div class="bottom-bar">
+        <button class="catalyst-btn" id="p1CatBtn" onclick="useCatalyst(1)">⚡ <span class="catalyst-count" id="p1CatCount">3</span></button>
+      </div>
+    </div>
+    <div class="player-panel" id="p2Panel">
+      <div class="player-label p2-label tr-text">Oyuncu 2</div>
+      <div class="round-indicator tr-text" id="p2RoundLabel">1. Raund</div>
+      <div class="top-bar">
+        <div class="stat-box"><span class="stat-label tr-text">Puan</span><span class="stat-val" id="p2Score">0</span></div>
+        <div class="stat-box"><span class="stat-label tr-text">Hak</span><span class="stat-val" id="p2Attempts">3</span></div>
+      </div>
+      <div class="timer-bar-wrap"><div class="timer-bar" id="p2Timer"></div></div>
+      <div class="formula-area" id="p2Formula">
+        <div class="formula-emoji" id="p2Emoji">🍞</div>
+        <div class="formula-turkish tr-text" id="p2Tr">Ekmek</div>
+      </div>
+      <div class="mixer-area" id="p2Mixer"></div>
+      <div class="tubes-area" id="p2Tubes"></div>
+      <div class="bottom-bar">
+        <button class="catalyst-btn" id="p2CatBtn" onclick="useCatalyst(2)">⚡ <span class="catalyst-count" id="p2CatCount">3</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div id="summaryScreen" class="screen">
+  <h2 id="summaryTitle">Raund Tamamlandı!</h2>
+  <div class="summary-stats" id="summaryStats"></div>
+  <button class="menu-btn" id="summaryNextBtn" onclick="nextRound()"><span class="tr-text">Sonraki Raund</span> ➡️</button>
+</div>
+
+<!-- END -->
+<div id="endScreen" class="screen">
+  <div class="end-trophy">🏆</div>
+  <h2 id="endTitle" class="tr-text">Deney Tamamlandı!</h2>
+  <div class="summary-stats" id="endStats"></div>
+  <button class="menu-btn" onclick="goMenu()"><span class="tr-text">Ana Menü</span></button>
+</div>
+
+<script>
+// ===== VOCABULARY =====
+const VOCAB={
+  foods:[
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs:[
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times:[
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+const ALL_WORDS=[...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR={
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
+  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
+  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
+  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
+  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
+  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){return VOCAB_TR[w.ar]||'';}
+
+function stripHarakat(str){return str.replace(/[\u064B-\u065F\u0670]/g,'');}
+function getLetters(ar){return[...stripHarakat(ar)];}
+
+// Categorize
+const SHORT_WORDS=ALL_WORDS.filter(w=>getLetters(w.ar).length<=3);
+const MED_WORDS=ALL_WORDS.filter(w=>getLetters(w.ar).length>=4&&getLetters(w.ar).length<=5);
+const LONG_WORDS=ALL_WORDS.filter(w=>getLetters(w.ar).length>=5);
+
+// ===== SOUND =====
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesBubble(){_tone(800,0.05,'sine',0.15);_tone(1000,0.05,'sine',0.1,0.03);}
+function sesPlace(){_tone(440,0.08,'triangle',0.25);_tone(660,0.06,'sine',0.2,0.06);}
+function sesExplode(){_tone(200,0.15,'sawtooth',0.3);_tone(100,0.25,'sawtooth',0.2,0.1);}
+function sesSynth(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+function sesCatalyst(){_tone(880,0.1,'sine',0.25);_tone(1100,0.08,'sine',0.2,0.08);}
+function sesWrong(){_tone(180,0.15,'sawtooth',0.25,0);_tone(150,0.2,'sawtooth',0.2,0.15);}
+function sesRoundEnd(){for(let i=0;i<5;i++)_tone(400+i*100,0.12,'sine',0.2,i*0.08);}
+function sesCountdown(){_tone(600,0.08,'square',0.15);}
+
+// ===== PARTICLES =====
+function initParticles(){
+  const c=document.getElementById('particles');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDuration=(6+Math.random()*8)+'s';
+    p.style.animationDelay=Math.random()*8+'s';
+    p.style.width=p.style.height=(2+Math.random()*4)+'px';
+    p.style.background=`rgba(${Math.random()>0.5?'0,255,180':'0,200,255'},${0.15+Math.random()*0.2})`;
+    c.appendChild(p);
+  }
+}
+
+// ===== SMOKE EFFECTS =====
+function spawnSmoke(x,y,color,count){
+  const c=document.getElementById('smokeContainer');
+  for(let i=0;i<(count||8);i++){
+    const s=document.createElement('div');
+    s.className='smoke-puff';
+    const size=20+Math.random()*30;
+    s.style.width=s.style.height=size+'px';
+    s.style.left=(x-size/2+Math.random()*40-20)+'px';
+    s.style.top=(y-size/2+Math.random()*40-20)+'px';
+    s.style.background=color;
+    s.style.animationDuration=(0.5+Math.random()*0.5)+'s';
+    c.appendChild(s);
+    setTimeout(()=>s.remove(),1000);
+  }
+}
+
+function showBanner(text,duration){
+  const b=document.createElement('div');
+  b.className='success-banner';
+  b.innerHTML=text;
+  document.body.appendChild(b);
+  setTimeout(()=>{b.style.opacity='0';b.style.transition='opacity 0.3s';},duration||1500);
+  setTimeout(()=>b.remove(),(duration||1500)+400);
+}
+
+// ===== HELPERS =====
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+// Arabic distractor letters
+const ARABIC_LETTERS='ابتثجحخدذرزسشصضطظعغفقكلمنهوي'.split('');
+
+function getDistractors(correctLetters,count){
+  const unique=new Set(correctLetters);
+  const pool=ARABIC_LETTERS.filter(l=>!unique.has(l));
+  const shuffled=shuffle(pool);
+  return shuffled.slice(0,count);
+}
+
+// ===== ROUND CONFIG =====
+const ROUNDS=[
+  {name:'Basit Moleküller',label:'1. Raund',pool:'short',time:45,attempts:3,words:5},
+  {name:'Orta Bileşikler',label:'2. Raund',pool:'med',time:40,attempts:3,words:5},
+  {name:'Kompleks Formüller',label:'3. Raund',pool:'long',time:35,attempts:2,words:5}
+];
+
+// ===== GAME STATE =====
+let mode=1; // 1 or 2 players
+let currentRound=0;
+let gameState=null; // single player state
+let p1State=null,p2State=null; // two player states
+
+function createPlayerState(){
+  return{
+    score:0,
+    roundScore:0,
+    words:[],
+    wordIndex:0,
+    currentWord:null,
+    letters:[],
+    placed:[],
+    attempts:0,
+    maxAttempts:3,
+    catalystLeft:3,
+    timerTotal:45,
+    timerLeft:45,
+    timerInterval:null,
+    inputLocked:false,
+    done:false,
+    tubeElements:[],
+    catalystActive:false
+  };
+}
+
+function getWordPool(poolName){
+  if(poolName==='short')return shuffle([...SHORT_WORDS]);
+  if(poolName==='med')return shuffle([...MED_WORDS]);
+  return shuffle([...LONG_WORDS]);
+}
+
+// ===== START GAME =====
+function startGame(playerMode){
+  mode=playerMode;
+  currentRound=0;
+  if(mode===1){
+    gameState=createPlayerState();
+    showScreen('gameScreen');
+    startRound(gameState,0);
+  }else{
+    p1State=createPlayerState();
+    p2State=createPlayerState();
+    showScreen('twoPlayerScreen');
+    startRound2P(0);
+  }
+}
+
+// ===== SINGLE PLAYER =====
+function startRound(state,roundIdx){
+  currentRound=roundIdx;
+  const rd=ROUNDS[roundIdx];
+  state.words=getWordPool(rd.pool).slice(0,rd.words);
+  // Ensure we have enough words
+  if(state.words.length<rd.words){
+    const extra=shuffle(ALL_WORDS.filter(w=>{
+      const len=getLetters(w.ar).length;
+      if(rd.pool==='short')return len<=4;
+      if(rd.pool==='med')return len>=3&&len<=6;
+      return len>=4;
+    }));
+    while(state.words.length<rd.words&&extra.length)state.words.push(extra.pop());
+  }
+  state.wordIndex=0;
+  state.roundScore=0;
+  state.catalystLeft=3;
+  state.maxAttempts=rd.attempts;
+  state.timerTotal=rd.time;
+  document.getElementById('roundLabel').textContent=rd.label+': '+rd.name;
+  loadWord(state);
+}
+
+function loadWord(state){
+  const rd=ROUNDS[currentRound];
+  const w=state.words[state.wordIndex];
+  state.currentWord=w;
+  state.letters=getLetters(w.ar);
+  state.placed=[];
+  state.attempts=state.maxAttempts;
+  state.inputLocked=false;
+  state.catalystActive=false;
+  state.done=false;
+
+  // Update UI
+  document.getElementById('formulaEmoji').textContent=w.e;
+  document.getElementById('formulaTr').textContent=getTr(w);
+  document.getElementById('formulaAction').textContent='sentezle!';
+  document.getElementById('scoreVal').textContent=state.score;
+  document.getElementById('wordNum').textContent=(state.wordIndex+1)+'/'+rd.words;
+  document.getElementById('attemptsVal').textContent=state.attempts;
+  document.getElementById('catalystCount').textContent=state.catalystLeft;
+  document.getElementById('catalystBtn').disabled=state.catalystLeft<=0;
+
+  buildMixer(state,'mixerArea');
+  buildTubes(state,'tubesArea',0);
+  startTimer(state,'timerBar');
+}
+
+function buildMixer(state,containerId){
+  const c=document.getElementById(containerId);
+  c.innerHTML='';
+  state.letters.forEach((l,i)=>{
+    const slot=document.createElement('div');
+    slot.className='mixer-slot';
+    slot.id=containerId+'_slot_'+i;
+    const num=document.createElement('span');
+    num.className='slot-num';
+    num.textContent=state.letters.length-i;
+    slot.appendChild(num);
+    c.appendChild(slot);
+  });
+}
+
+function buildTubes(state,containerId,playerNum){
+  const c=document.getElementById(containerId);
+  c.innerHTML='';
+  state.tubeElements=[];
+
+  const correctLetters=[...state.letters];
+  const distractorCount=Math.max(3,Math.min(5,8-correctLetters.length));
+  const distractors=getDistractors(correctLetters,distractorCount);
+  const allLetters=shuffle([...correctLetters,...distractors]);
+
+  allLetters.forEach((letter,i)=>{
+    const tube=document.createElement('div');
+    tube.className='test-tube';
+    tube.dataset.letter=letter;
+    tube.dataset.index=i;
+
+    const top=document.createElement('div');
+    top.className='tube-top';
+
+    const glass=document.createElement('div');
+    glass.className='tube-glass';
+
+    // Random liquid color
+    const hue=Math.floor(Math.random()*60)+150; // blue-green range
+    const liquid=document.createElement('div');
+    liquid.className='tube-liquid';
+    liquid.style.background=`linear-gradient(to top,hsla(${hue},80%,40%,0.45),hsla(${hue+30},70%,50%,0.15))`;
+
+    // Bubbles
+    const bubblesDiv=document.createElement('div');
+    bubblesDiv.className='tube-bubbles';
+    for(let b=0;b<3;b++){
+      const bub=document.createElement('div');
+      bub.className='bubble';
+      bub.style.width=bub.style.height=(3+Math.random()*5)+'px';
+      bub.style.left=(15+Math.random()*70)+'%';
+      bub.style.bottom=Math.random()*20+'%';
+      bub.style.animationDuration=(1.5+Math.random()*2)+'s';
+      bub.style.animationDelay=Math.random()*3+'s';
+      bubblesDiv.appendChild(bub);
+    }
+
+    const letterEl=document.createElement('div');
+    letterEl.className='tube-letter';
+    letterEl.textContent=letter;
+
+    glass.appendChild(liquid);
+    glass.appendChild(bubblesDiv);
+    glass.appendChild(letterEl);
+    tube.appendChild(top);
+    tube.appendChild(glass);
+
+    tube.addEventListener('click',()=>{
+      if(mode===1)handleTubeClick(state,tube,letter,0);
+      else handleTubeClick(playerNum===1?p1State:p2State,tube,letter,playerNum);
+    });
+
+    c.appendChild(tube);
+    state.tubeElements.push(tube);
+  });
+}
+
+function handleTubeClick(state,tube,letter,playerNum){
+  if(state.inputLocked||state.done||tube.classList.contains('used'))return;
+
+  const nextIndex=state.placed.length;
+  const expectedLetter=state.letters[nextIndex];
+
+  // Get element refs
+  const prefix=playerNum===0?'':(playerNum===1?'p1':'p2');
+  const mixerId=playerNum===0?'mixerArea':(playerNum===1?'p1Mixer':'p2Mixer');
+
+  if(letter===expectedLetter){
+    // Correct!
+    sesBubble();
+    sesPlace();
+    tube.classList.add('used');
+    state.placed.push(letter);
+
+    // Fill mixer slot
+    const slot=document.getElementById(mixerId+'_slot_'+nextIndex);
+    if(slot){
+      slot.textContent=letter;
+      slot.classList.add('filled');
+    }
+
+    // Remove catalyst glow from all tubes
+    state.tubeElements.forEach(t=>t.classList.remove('catalyst-glow'));
+    state.catalystActive=false;
+
+    // Check if word complete
+    if(state.placed.length===state.letters.length){
+      wordComplete(state,playerNum);
+    }
+  }else{
+    // Wrong!
+    sesExplode();
+    sesWrong();
+    state.attempts--;
+
+    // Explode animation
+    tube.classList.add('explode');
+    const rect=tube.getBoundingClientRect();
+    spawnSmoke(rect.left+rect.width/2,rect.top+rect.height/2,'rgba(255,60,60,0.6)',6);
+    setTimeout(()=>tube.classList.remove('explode'),500);
+
+    // Update attempts display
+    if(playerNum===0)document.getElementById('attemptsVal').textContent=state.attempts;
+    else if(playerNum===1)document.getElementById('p1Attempts').textContent=state.attempts;
+    else document.getElementById('p2Attempts').textContent=state.attempts;
+
+    if(state.attempts<=0){
+      wordFailed(state,playerNum);
+    }
+  }
+}
+
+function wordComplete(state,playerNum){
+  state.done=true;
+  state.inputLocked=true;
+  clearInterval(state.timerInterval);
+  sesSynth();
+
+  // Points: base + time bonus
+  const timeBonus=Math.floor(state.timerLeft*2);
+  const wordPoints=50+timeBonus;
+  state.score+=wordPoints;
+  state.roundScore+=wordPoints;
+
+  // Update score
+  if(playerNum===0)document.getElementById('scoreVal').textContent=state.score;
+  else if(playerNum===1)document.getElementById('p1Score').textContent=state.score;
+  else document.getElementById('p2Score').textContent=state.score;
+
+  // Green glow on all mixer slots
+  const mixerId=playerNum===0?'mixerArea':(playerNum===1?'p1Mixer':'p2Mixer');
+  document.querySelectorAll('#'+mixerId+' .mixer-slot').forEach(s=>s.classList.add('correct-all'));
+
+  // Green smoke from mixer
+  const mixerEl=document.getElementById(mixerId);
+  const mr=mixerEl.getBoundingClientRect();
+  spawnSmoke(mr.left+mr.width/2,mr.top+mr.height/2,'rgba(0,255,120,0.5)',10);
+
+  const bannerText='<span class="tr-text">Sentez başarılı! +'+wordPoints+'</span>';
+  showBanner(bannerText,1200);
+
+  // Two player speed bonus
+  if(mode===2){
+    const other=playerNum===1?p2State:p1State;
+    if(!other.done){
+      state.score+=20;
+      if(playerNum===1)document.getElementById('p1Score').textContent=state.score;
+      else document.getElementById('p2Score').textContent=state.score;
+      showBanner('<span class="tr-text">Hız bonusu! +20</span>',800);
+    }
+  }
+
+  setTimeout(()=>advanceWord(state,playerNum),1800);
+}
+
+function wordFailed(state,playerNum){
+  state.done=true;
+  state.inputLocked=true;
+  clearInterval(state.timerInterval);
+
+  const bannerText='<span class="tr-text" style="color:#ff6b6b">Sentez başarısız!</span>';
+  showBanner(bannerText,1200);
+
+  // Show correct word briefly in mixer
+  const mixerId=playerNum===0?'mixerArea':(playerNum===1?'p1Mixer':'p2Mixer');
+  state.letters.forEach((l,i)=>{
+    const slot=document.getElementById(mixerId+'_slot_'+i);
+    if(slot&&!slot.classList.contains('filled')){
+      slot.textContent=l;
+      slot.style.borderColor='rgba(255,100,100,0.5)';
+      slot.style.color='rgba(255,100,100,0.7)';
+    }
+  });
+
+  setTimeout(()=>advanceWord(state,playerNum),2000);
+}
+
+function advanceWord(state,playerNum){
+  state.wordIndex++;
+  const rd=ROUNDS[currentRound];
+  if(state.wordIndex>=rd.words){
+    if(mode===1){
+      showRoundSummary();
+    }else{
+      // In 2-player, check if both done
+      const other=playerNum===1?p2State:p1State;
+      if(other.wordIndex>=rd.words){
+        showRoundSummary2P();
+      }
+      // This player waits
+    }
+  }else{
+    if(mode===1){
+      loadWord(state);
+    }else{
+      load2PWord(state,playerNum);
+    }
+  }
+}
+
+// Timer
+function startTimer(state,barId){
+  clearInterval(state.timerInterval);
+  state.timerLeft=state.timerTotal;
+  const bar=document.getElementById(barId);
+  bar.style.width='100%';
+  bar.className='timer-bar';
+
+  state.timerInterval=setInterval(()=>{
+    if(state.done)return;
+    state.timerLeft-=0.1;
+    if(state.timerLeft<=0){
+      state.timerLeft=0;
+      clearInterval(state.timerInterval);
+      wordFailed(state,barId==='timerBar'?0:(barId==='p1Timer'?1:2));
+    }
+    const pct=(state.timerLeft/state.timerTotal)*100;
+    bar.style.width=pct+'%';
+    if(pct<25)bar.className='timer-bar danger';
+    else if(pct<50)bar.className='timer-bar warn';
+    else bar.className='timer-bar';
+
+    // Countdown beep
+    if(state.timerLeft<=5&&state.timerLeft>0&&Math.abs(state.timerLeft-Math.round(state.timerLeft))<0.08){
+      sesCountdown();
+    }
+  },100);
+}
+
+// Catalyst
+function useCatalyst(playerNum){
+  let state;
+  if(playerNum===0)state=gameState;
+  else if(playerNum===1)state=p1State;
+  else state=p2State;
+
+  if(!state||state.catalystLeft<=0||state.done||state.catalystActive)return;
+
+  state.catalystLeft--;
+  state.score=Math.max(0,state.score-10);
+  state.catalystActive=true;
+  sesCatalyst();
+
+  // Update UI
+  if(playerNum===0){
+    document.getElementById('catalystCount').textContent=state.catalystLeft;
+    document.getElementById('catalystBtn').disabled=state.catalystLeft<=0;
+    document.getElementById('scoreVal').textContent=state.score;
+  }else if(playerNum===1){
+    document.getElementById('p1CatCount').textContent=state.catalystLeft;
+    document.getElementById('p1CatBtn').disabled=state.catalystLeft<=0;
+    document.getElementById('p1Score').textContent=state.score;
+  }else{
+    document.getElementById('p2CatCount').textContent=state.catalystLeft;
+    document.getElementById('p2CatBtn').disabled=state.catalystLeft<=0;
+    document.getElementById('p2Score').textContent=state.score;
+  }
+
+  // Find next needed letter
+  const nextIdx=state.placed.length;
+  if(nextIdx>=state.letters.length)return;
+  const nextLetter=state.letters[nextIdx];
+
+  // Highlight matching tube
+  state.tubeElements.forEach(t=>{
+    if(t.dataset.letter===nextLetter&&!t.classList.contains('used')){
+      t.classList.add('catalyst-glow');
+    }
+  });
+
+  // Remove glow after 3 seconds
+  setTimeout(()=>{
+    state.tubeElements.forEach(t=>t.classList.remove('catalyst-glow'));
+    state.catalystActive=false;
+  },3000);
+}
+
+// Round summary (single)
+function showRoundSummary(){
+  showScreen('summaryScreen');
+  const rd=ROUNDS[currentRound];
+  document.getElementById('summaryTitle').innerHTML=
+    '<span class="tr-text">'+rd.label+' Tamamlandı!</span>';
+
+  const stats=document.getElementById('summaryStats');
+  stats.innerHTML=`
+    <div class="summary-stat"><div class="ss-val">${gameState.score}</div><div class="ss-label tr-text">Toplam Puan</div></div>
+    <div class="summary-stat"><div class="ss-val">${gameState.roundScore}</div><div class="ss-label tr-text">Raund Puanı</div></div>
+  `;
+  sesRoundEnd();
+
+  const btn=document.getElementById('summaryNextBtn');
+  if(currentRound>=2){
+    btn.innerHTML='<span class="tr-text">Sonuçları Gör</span> 🏆';
+    btn.onclick=()=>showEndScreen();
+  }else{
+    btn.innerHTML='<span class="tr-text">Sonraki Raund</span> ➡️';
+    btn.onclick=()=>nextRound();
+  }
+}
+
+function nextRound(){
+  currentRound++;
+  if(currentRound>2){showEndScreen();return;}
+  if(mode===1){
+    showScreen('gameScreen');
+    startRound(gameState,currentRound);
+  }else{
+    showScreen('twoPlayerScreen');
+    startRound2P(currentRound);
+  }
+}
+
+function showEndScreen(){
+  showScreen('endScreen');
+  const stats=document.getElementById('endStats');
+  if(mode===1){
+    stats.innerHTML=`
+      <div class="summary-stat"><div class="ss-val">${gameState.score}</div><div class="ss-label tr-text">Final Puanı</div></div>
+    `;
+    const title=document.getElementById('endTitle');
+    if(gameState.score>=500)title.textContent='Muhteşem Bilim İnsanı!';
+    else if(gameState.score>=300)title.textContent='Başarılı Deney!';
+    else title.textContent='Deney Tamamlandı!';
+  }else{
+    const winner=p1State.score>p2State.score?'Oyuncu 1':p2State.score>p1State.score?'Oyuncu 2':'Berabere';
+    stats.innerHTML=`
+      <div class="summary-stat"><div class="ss-val" style="color:#00d4ff">${p1State.score}</div><div class="ss-label tr-text">Oyuncu 1</div></div>
+      <div class="summary-stat"><div class="ss-val" style="color:#c864ff">${p2State.score}</div><div class="ss-label tr-text">Oyuncu 2</div></div>
+    `;
+    document.getElementById('endTitle').textContent=winner==='Berabere'?'Berabere!':winner+' Kazandı!';
+  }
+  sesRoundEnd();
+}
+
+function goMenu(){
+  if(gameState&&gameState.timerInterval)clearInterval(gameState.timerInterval);
+  if(p1State&&p1State.timerInterval)clearInterval(p1State.timerInterval);
+  if(p2State&&p2State.timerInterval)clearInterval(p2State.timerInterval);
+  gameState=null;p1State=null;p2State=null;
+  showScreen('menuScreen');
+}
+
+// ===== TWO PLAYER =====
+function startRound2P(roundIdx){
+  currentRound=roundIdx;
+  const rd=ROUNDS[roundIdx];
+  const pool=getWordPool(rd.pool);
+  const words=pool.slice(0,rd.words);
+  // Ensure enough
+  if(words.length<rd.words){
+    const extra=shuffle(ALL_WORDS);
+    while(words.length<rd.words&&extra.length)words.push(extra.pop());
+  }
+
+  p1State.words=[...words];
+  p2State.words=[...words];
+  p1State.wordIndex=0;
+  p2State.wordIndex=0;
+  p1State.roundScore=0;
+  p2State.roundScore=0;
+  p1State.catalystLeft=3;
+  p2State.catalystLeft=3;
+  p1State.maxAttempts=rd.attempts;
+  p2State.maxAttempts=rd.attempts;
+  p1State.timerTotal=rd.time;
+  p2State.timerTotal=rd.time;
+
+  document.getElementById('p1RoundLabel').textContent=rd.label+': '+rd.name;
+  document.getElementById('p2RoundLabel').textContent=rd.label+': '+rd.name;
+
+  load2PWord(p1State,1);
+  load2PWord(p2State,2);
+}
+
+function load2PWord(state,playerNum){
+  const rd=ROUNDS[currentRound];
+  const w=state.words[state.wordIndex];
+  state.currentWord=w;
+  state.letters=getLetters(w.ar);
+  state.placed=[];
+  state.attempts=state.maxAttempts;
+  state.inputLocked=false;
+  state.catalystActive=false;
+  state.done=false;
+
+  const pre=playerNum===1?'p1':'p2';
+
+  document.getElementById(pre+'Emoji').textContent=w.e;
+  document.getElementById(pre+'Tr').textContent=getTr(w);
+  document.getElementById(pre+'Score').textContent=state.score;
+  document.getElementById(pre+'Attempts').textContent=state.attempts;
+  document.getElementById(pre+'CatCount').textContent=state.catalystLeft;
+  document.getElementById(pre+'CatBtn').disabled=state.catalystLeft<=0;
+
+  buildMixer(state,pre+'Mixer');
+  buildTubes(state,pre+'Tubes',playerNum);
+  startTimer(state,pre+'Timer');
+}
+
+function showRoundSummary2P(){
+  clearInterval(p1State.timerInterval);
+  clearInterval(p2State.timerInterval);
+  showScreen('summaryScreen');
+  const rd=ROUNDS[currentRound];
+  document.getElementById('summaryTitle').innerHTML=
+    '<span class="tr-text">'+rd.label+' Tamamlandı!</span>';
+
+  const stats=document.getElementById('summaryStats');
+  stats.innerHTML=`
+    <div class="summary-stat"><div class="ss-val" style="color:#00d4ff">${p1State.score}</div><div class="ss-label tr-text">Oyuncu 1</div></div>
+    <div class="summary-stat"><div class="ss-val" style="color:#c864ff">${p2State.score}</div><div class="ss-label tr-text">Oyuncu 2</div></div>
+  `;
+  sesRoundEnd();
+
+  const btn=document.getElementById('summaryNextBtn');
+  if(currentRound>=2){
+    btn.innerHTML='<span class="tr-text">Sonuçları Gör</span> 🏆';
+    btn.onclick=()=>showEndScreen();
+  }else{
+    btn.innerHTML='<span class="tr-text">Sonraki Raund</span> ➡️';
+    btn.onclick=()=>nextRound();
+  }
+}
+
+// ===== INIT =====
+initParticles();
+</script>
+</body>
+</html>

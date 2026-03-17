@@ -1,0 +1,854 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>فارس المعرفة — Bilgi Şövalyesi</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom',sans-serif;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;min-height:100vh;overflow-x:hidden;
+  direction:rtl;user-select:none;
+}
+.tr{font-family:Arial,'Segoe UI',sans-serif;direction:ltr;unicode-bidi:bidi-override}
+.tr-inline{font-family:Arial,'Segoe UI',sans-serif}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:16px;width:100%;position:relative}
+.screen.active{display:flex}
+
+/* BACK BUTTON */
+.back-btn{position:fixed;top:12px;left:12px;z-index:999;background:rgba(255,255,255,0.12);
+  border:2px solid rgba(255,255,255,0.25);border-radius:12px;color:#fff;font-size:22px;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(8px);transition:all .2s}
+.back-btn:hover{background:rgba(255,255,255,0.25);transform:scale(1.1)}
+
+/* START SCREEN */
+.start-title{font-size:clamp(28px,6vw,52px);text-align:center;margin-bottom:8px;
+  text-shadow:0 0 30px rgba(255,215,0,0.5)}
+.start-sub{font-size:clamp(16px,3vw,24px);color:#aaa;margin-bottom:30px;text-align:center}
+.start-sub .tr-inline{color:#bbb}
+.start-desc{font-size:14px;color:#999;text-align:center;max-width:400px;margin-bottom:24px;line-height:1.8}
+.mode-toggle{display:flex;gap:0;margin-bottom:24px;border-radius:14px;overflow:hidden;
+  border:2px solid rgba(255,215,0,0.4)}
+.mode-btn{padding:12px 24px;font-size:16px;cursor:pointer;background:transparent;
+  color:#aaa;border:none;transition:all .3s;font-family:Arial,sans-serif}
+.mode-btn.active{background:linear-gradient(135deg,#f5af19,#f12711);color:#fff;font-weight:bold}
+.start-btn{
+  padding:16px 48px;font-size:22px;border:none;border-radius:16px;cursor:pointer;
+  background:linear-gradient(135deg,#11998e,#38ef7d);color:#fff;font-weight:bold;
+  font-family:Arial,sans-serif;box-shadow:0 8px 30px rgba(56,239,125,0.3);
+  transition:all .3s;position:relative;overflow:hidden}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(56,239,125,0.5)}
+.start-btn::after{content:'';position:absolute;top:-50%;left:-60%;width:200%;height:200%;
+  background:linear-gradient(transparent,rgba(255,255,255,0.15),transparent);
+  transform:rotate(30deg);animation:shimmer 3s infinite}
+@keyframes shimmer{0%{left:-60%}100%{left:160%}}
+
+/* GAME SCREEN */
+#gameScreen{justify-content:flex-start;padding-top:60px}
+
+/* HUD */
+.hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;
+  align-items:center;padding:10px 16px;z-index:100;background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(10px)}
+.hearts{display:flex;gap:4px;font-size:20px}
+.heart{transition:all .3s}
+.heart.lost{opacity:0.2;transform:scale(0.7);filter:grayscale(1)}
+.chapter-badge{padding:6px 14px;border-radius:20px;font-size:13px;font-weight:bold;
+  font-family:Arial,sans-serif;letter-spacing:1px}
+.chapter-forest .chapter-badge{background:linear-gradient(135deg,#11998e,#38ef7d)}
+.chapter-castle .chapter-badge{background:linear-gradient(135deg,#6a3093,#a044ff)}
+.chapter-dragon .chapter-badge{background:linear-gradient(135deg,#f12711,#f5af19)}
+
+/* PLAYER INDICATOR (2P) */
+.player-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:100;
+  padding:8px 20px;border-radius:20px;font-size:15px;font-weight:bold;
+  font-family:Arial,sans-serif;backdrop-filter:blur(8px);display:none;
+  border:2px solid rgba(255,255,255,0.3)}
+.player-indicator.p1{background:rgba(56,239,125,0.3);border-color:rgba(56,239,125,0.6);color:#38ef7d}
+.player-indicator.p2{background:rgba(100,149,237,0.3);border-color:rgba(100,149,237,0.6);color:#6495ed}
+.two-player .player-indicator{display:block}
+
+/* 2P hearts */
+.hud-2p{display:none;gap:8px;align-items:center}
+.two-player .hud-2p{display:flex}
+.two-player .hud-1p{display:none}
+.p-label{font-size:11px;font-family:Arial,sans-serif;opacity:0.7}
+
+/* MONSTER AREA */
+.monster-area{display:flex;flex-direction:column;align-items:center;margin-top:10px;margin-bottom:16px}
+.monster-name{font-size:clamp(16px,3vw,22px);color:#ffd700;margin-bottom:4px;
+  font-family:Arial,sans-serif;font-weight:bold;text-shadow:0 0 20px rgba(255,215,0,0.3)}
+.monster-hp-bar{width:clamp(180px,50vw,280px);height:14px;background:rgba(255,255,255,0.1);
+  border-radius:10px;overflow:hidden;margin-bottom:8px;border:1px solid rgba(255,255,255,0.2)}
+.monster-hp-fill{height:100%;border-radius:10px;transition:width 0.5s ease;
+  background:linear-gradient(90deg,#ff4444,#ff6b6b)}
+.monster-hp-fill.healthy{background:linear-gradient(90deg,#38ef7d,#11998e)}
+.monster-hp-fill.half{background:linear-gradient(90deg,#f5af19,#f12711)}
+.monster-emoji{font-size:clamp(80px,18vw,140px);animation:monsterIdle 2s ease-in-out infinite;
+  filter:drop-shadow(0 10px 30px rgba(0,0,0,0.5));transition:all .3s;position:relative}
+@keyframes monsterIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* MONSTER HIT */
+.monster-emoji.hit{animation:monsterHit 0.4s ease}
+@keyframes monsterHit{
+  0%{transform:translateX(0) scale(1)}
+  20%{transform:translateX(-20px) scale(0.9)}
+  40%{transform:translateX(20px) scale(1.1)}
+  60%{transform:translateX(-10px) scale(0.95)}
+  80%{transform:translateX(10px) scale(1.05)}
+  100%{transform:translateX(0) scale(1)}
+}
+.monster-emoji.defeated{animation:monsterDefeat 0.8s ease forwards}
+@keyframes monsterDefeat{
+  0%{transform:scale(1);opacity:1}
+  30%{transform:scale(1.3) rotate(10deg);opacity:0.8}
+  60%{transform:scale(0.5) rotate(-20deg);opacity:0.5}
+  100%{transform:scale(0) rotate(360deg);opacity:0}
+}
+
+/* SLASH EFFECT */
+.slash-fx{position:absolute;top:50%;left:50%;width:120px;height:120px;pointer-events:none;
+  transform:translate(-50%,-50%);opacity:0;z-index:50}
+.slash-fx.active{animation:slashAnim 0.5s ease forwards}
+@keyframes slashAnim{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(0.3) rotate(-45deg)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.2) rotate(0deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(15deg)}
+}
+.slash-fx svg{width:100%;height:100%}
+
+/* SCREEN SHAKE */
+.screen-shake{animation:shake 0.4s ease}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)}
+  80%{transform:translateX(5px)}
+}
+
+/* RED FLASH */
+.red-flash::before{content:'';position:fixed;inset:0;background:rgba(255,0,0,0.2);
+  z-index:200;pointer-events:none;animation:redFlash 0.4s ease forwards}
+@keyframes redFlash{0%{opacity:1}100%{opacity:0}}
+
+/* PROMPT */
+.prompt{text-align:center;margin:12px 0 20px;padding:12px 20px;
+  background:rgba(255,255,255,0.06);border-radius:16px;border:1px solid rgba(255,255,255,0.1)}
+.prompt-emoji{font-size:clamp(36px,8vw,56px);margin-bottom:4px}
+.prompt-text{font-size:clamp(16px,3.5vw,22px);font-family:Arial,sans-serif;color:#e0e0e0}
+.prompt-hint{font-size:12px;color:#888;font-family:Arial,sans-serif;margin-top:4px}
+
+/* ANSWER CARDS */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:480px;padding:0 8px}
+.card{
+  padding:20px 12px;border-radius:16px;text-align:center;cursor:pointer;
+  font-size:clamp(28px,5vw,38px);font-weight:bold;font-family:'Arakom',sans-serif;
+  background:rgba(255,255,255,0.08);border:2px solid rgba(255,255,255,0.15);
+  transition:all .2s;position:relative;overflow:hidden;min-height:80px;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1.4;
+}
+.card:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px);
+  border-color:rgba(255,255,255,0.3)}
+.card:active{transform:scale(0.96)}
+.card.correct{background:rgba(56,239,125,0.25);border-color:#38ef7d;
+  box-shadow:0 0 30px rgba(56,239,125,0.3)}
+.card.wrong{background:rgba(255,50,50,0.25);border-color:#ff3232;
+  box-shadow:0 0 30px rgba(255,50,50,0.3)}
+.card.disabled{pointer-events:none;opacity:0.5}
+
+/* CHAPTER TRANSITION */
+#chapterScreen{background:rgba(0,0,0,0.95)}
+.chapter-reveal{text-align:center}
+.chapter-reveal-emoji{font-size:clamp(80px,20vw,140px);animation:chapterPulse 1s ease-in-out infinite}
+@keyframes chapterPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.chapter-reveal-title{font-size:clamp(28px,6vw,48px);font-family:Arial,sans-serif;
+  font-weight:bold;margin:16px 0 8px;text-shadow:0 0 30px currentColor}
+.chapter-reveal-desc{font-size:16px;color:#aaa;font-family:Arial,sans-serif;margin-bottom:24px}
+.chapter-continue-btn{padding:14px 40px;font-size:18px;border:none;border-radius:14px;
+  cursor:pointer;color:#fff;font-weight:bold;font-family:Arial,sans-serif;transition:all .3s}
+
+/* VICTORY */
+.victory-emoji{font-size:clamp(80px,20vw,120px);animation:victoryBounce 0.8s ease infinite}
+@keyframes victoryBounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-20px) rotate(5deg)}}
+.victory-title{font-size:clamp(28px,6vw,48px);font-family:Arial,sans-serif;font-weight:bold;
+  background:linear-gradient(90deg,#ffd700,#ff6b6b,#38ef7d,#6495ed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:16px 0}
+.victory-stats{font-size:16px;color:#bbb;font-family:Arial,sans-serif;text-align:center;line-height:2}
+.restart-btn{margin-top:24px;padding:14px 40px;font-size:18px;border:none;border-radius:14px;
+  cursor:pointer;background:linear-gradient(135deg,#11998e,#38ef7d);color:#fff;font-weight:bold;
+  font-family:Arial,sans-serif;box-shadow:0 8px 30px rgba(56,239,125,0.3);transition:all .3s}
+.restart-btn:hover{transform:translateY(-2px)}
+
+/* GAME OVER */
+.gameover-emoji{font-size:100px;margin-bottom:16px}
+.gameover-title{font-size:clamp(24px,5vw,40px);font-family:Arial,sans-serif;font-weight:bold;
+  color:#ff4444;margin-bottom:8px}
+.gameover-sub{font-size:16px;color:#aaa;font-family:Arial,sans-serif;margin-bottom:24px}
+
+/* PARTICLES */
+.particle{position:fixed;pointer-events:none;z-index:300;font-size:20px;
+  animation:particleFly 1s ease forwards}
+@keyframes particleFly{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(-80px) scale(0.3)}
+}
+
+/* SPARKLE BG for victory */
+.sparkle-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.sparkle{position:absolute;width:4px;height:4px;background:#ffd700;border-radius:50%;
+  animation:sparkleAnim 2s ease-in-out infinite}
+@keyframes sparkleAnim{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+
+/* PROGRESS DOTS */
+.progress-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.15);
+  border:2px solid rgba(255,255,255,0.2);transition:all .3s}
+.dot.done{background:#38ef7d;border-color:#38ef7d;box-shadow:0 0 10px rgba(56,239,125,0.5)}
+.dot.current{border-color:#ffd700;background:rgba(255,215,0,0.3);box-shadow:0 0 10px rgba(255,215,0,0.5);
+  animation:dotPulse 1s ease infinite}
+@keyframes dotPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+.dot.boss{width:16px;height:16px}
+
+/* CHAPTER THEMES */
+.chapter-forest{--theme:#38ef7d;--theme-dark:#11998e}
+.chapter-castle{--theme:#a044ff;--theme-dark:#6a3093}
+.chapter-dragon{--theme:#f5af19;--theme-dark:#f12711}
+
+/* RESPONSIVE */
+@media(max-width:400px){
+  .cards{gap:8px}
+  .card{padding:16px 8px;font-size:26px;min-height:70px}
+  #gameScreen{padding-top:50px}
+  .hud{padding:6px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- BACK BUTTON -->
+<div class="back-btn" onclick="goBack()" title="Geri">✕</div>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+  <div class="start-title">🏰 فارس المعرفة</div>
+  <div class="start-sub"><span class="tr-inline">Bilgi Şövalyesi</span></div>
+  <div class="start-desc tr">
+    Canavarları yenmek için Arapça kelimeleri doğru oku!<br>
+    3 bölüm, 15 canavar, 1 şövalye.<br>
+    Her doğru cevap bir kılıç darbesi!
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode(1)" id="mode1Btn">Solo</button>
+    <button class="mode-btn" onclick="setMode(2)" id="mode2Btn">2 Kişi</button>
+  </div>
+  <button class="start-btn" onclick="startGame()">Başla ⚔️</button>
+</div>
+
+<!-- CHAPTER TRANSITION -->
+<div id="chapterScreen" class="screen">
+  <div class="chapter-reveal">
+    <div class="chapter-reveal-emoji" id="chapterEmoji"></div>
+    <div class="chapter-reveal-title" id="chapterTitle"></div>
+    <div class="chapter-reveal-desc tr" id="chapterDesc"></div>
+    <button class="chapter-continue-btn" id="chapterBtn" onclick="startChapter()">Hazırım! ⚔️</button>
+  </div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="screen">
+  <div class="hud">
+    <div class="hud-1p">
+      <div class="hearts" id="hearts1p"></div>
+    </div>
+    <div class="hud-2p">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px">
+        <div style="display:flex;align-items:center;gap:4px">
+          <span class="p-label" style="color:#38ef7d">P1</span>
+          <div class="hearts" id="heartsP1"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:4px">
+          <span class="p-label" style="color:#6495ed">P2</span>
+          <div class="hearts" id="heartsP2"></div>
+        </div>
+      </div>
+    </div>
+    <div class="chapter-badge" id="chapterBadge"></div>
+  </div>
+
+  <div class="monster-area">
+    <div class="monster-name tr" id="monsterName"></div>
+    <div class="monster-hp-bar"><div class="monster-hp-fill" id="monsterHpFill"></div></div>
+    <div style="position:relative;display:inline-block">
+      <div class="monster-emoji" id="monsterEmoji"></div>
+      <div class="slash-fx" id="slashFx">
+        <svg viewBox="0 0 100 100"><path d="M20,80 Q50,20 80,10 L85,15 Q55,25 25,85 Z" fill="#ffd700" opacity="0.9"/>
+        <path d="M15,70 Q45,15 85,5 L87,10 Q47,20 20,75 Z" fill="#fff" opacity="0.5"/></svg>
+      </div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+  </div>
+
+  <div class="prompt">
+    <div class="prompt-emoji" id="promptEmoji"></div>
+    <div class="prompt-text tr" id="promptText"></div>
+    <div class="prompt-hint tr" id="promptHint">Arapça karşılığını bul!</div>
+  </div>
+
+  <div class="cards" id="cards"></div>
+
+  <div class="player-indicator" id="playerIndicator"></div>
+</div>
+
+<!-- VICTORY SCREEN -->
+<div id="victoryScreen" class="screen">
+  <div class="sparkle-bg" id="sparkleBg"></div>
+  <div class="victory-emoji">🏆</div>
+  <div class="victory-title">Zafer!</div>
+  <div class="victory-stats tr" id="victoryStats"></div>
+  <button class="restart-btn" onclick="restartGame()">Tekrar Oyna 🔄</button>
+</div>
+
+<!-- GAME OVER SCREEN -->
+<div id="gameoverScreen" class="screen">
+  <div class="gameover-emoji">💀</div>
+  <div class="gameover-title tr">Yenildin!</div>
+  <div class="gameover-sub tr" id="gameoverSub"></div>
+  <button class="restart-btn" onclick="restartGame()">Tekrar Dene 🔄</button>
+</div>
+
+<script>
+// ======================== VOCAB DATA ========================
+const VOCAB = {
+  foods: [
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs: [
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times: [
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR = {
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
+  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
+  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
+  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
+  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
+  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){ return VOCAB_TR[w.ar]||''; }
+
+// ======================== SOUND SYSTEM ========================
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesCorrect(){_tone(523,0.1,'sine',0.3,0);_tone(659,0.1,'sine',0.3,0.1);_tone(784,0.2,'sine',0.3,0.2);}
+function sesWrong(){_tone(180,0.15,'sawtooth',0.25,0);_tone(150,0.2,'sawtooth',0.2,0.15);}
+function sesSword(){_tone(1200,0.05,'sawtooth',0.3);_tone(800,0.08,'sine',0.2,0.03);_tone(400,0.12,'sawtooth',0.15,0.08);}
+function sesMonsterHit(){_tone(150,0.2,'sawtooth',0.3);_tone(100,0.3,'square',0.2,0.1);}
+function sesBoss(){_tone(100,0.3,'sawtooth',0.4);_tone(80,0.4,'square',0.3,0.2);_tone(60,0.5,'sawtooth',0.2,0.4);}
+function sesVictory(){_tone(523,0.1,'sine',0.3);_tone(659,0.1,'sine',0.3,0.1);_tone(784,0.1,'sine',0.3,0.2);_tone(1047,0.2,'sine',0.35,0.3);}
+function sesChapter(){_tone(330,0.15,'sine',0.3);_tone(440,0.15,'sine',0.3,0.15);_tone(554,0.15,'sine',0.3,0.3);_tone(659,0.3,'sine',0.35,0.45);}
+function sesDefeat(){_tone(440,0.15,'sine',0.3);_tone(415,0.15,'sine',0.3,0.15);_tone(392,0.15,'sine',0.3,0.3);_tone(370,0.4,'sine',0.2,0.45);}
+function sesGameOver(){_tone(300,0.3,'sawtooth',0.3);_tone(200,0.4,'sawtooth',0.25,0.3);_tone(100,0.6,'sawtooth',0.2,0.6);}
+
+// ======================== UTILITIES ========================
+function shuffle(a){let arr=[...a];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function goBack(){try{window.parent.postMessage({type:'navigate',to:'back'},'*');}catch(e){}history.back();}
+
+function spawnParticle(emoji,x,y){
+  const p=document.createElement('div');p.className='particle';p.textContent=emoji;
+  p.style.left=x+'px';p.style.top=y+'px';document.body.appendChild(p);
+  setTimeout(()=>p.remove(),1000);
+}
+
+// ======================== GAME STATE ========================
+let mode = 1; // 1 or 2 players
+let playerHP = [5, 5]; // [P1, P2]
+let currentPlayer = 0; // 0 = P1, 1 = P2
+let chapterIdx = 0;
+let monsterIdx = 0;
+let monsterHP = 0;
+let monsterMaxHP = 0;
+let stats = { correct: 0, wrong: 0, totalTime: 0 };
+let startTime = 0;
+let locked = false;
+let usedWords = [];
+let chapterWords = [];
+
+const CHAPTERS = [
+  {
+    name: '🌲 Orman',
+    theme: 'forest',
+    desc: 'Ormandaki yiyecek canavarlarını yen!',
+    color: '#38ef7d',
+    btnColor: 'linear-gradient(135deg,#11998e,#38ef7d)',
+    pool: 'foods',
+    monsters: [
+      {name:'Orman Kurdu', emoji:'🐺', hp:1},
+      {name:'Zehirli Mantar', emoji:'🍄', hp:2},
+      {name:'Örümcek Kraliçesi', emoji:'🕷️', hp:2},
+      {name:'Ağaç Devi', emoji:'🌳', hp:3},
+      {name:'Orman Lordu', emoji:'👹', hp:3, boss:true}
+    ]
+  },
+  {
+    name: '🏰 Kale',
+    theme: 'castle',
+    desc: 'Kalenin karanlık koridorlarında fiiller seni bekliyor!',
+    color: '#a044ff',
+    btnColor: 'linear-gradient(135deg,#6a3093,#a044ff)',
+    pool: 'verbs',
+    monsters: [
+      {name:'Hayalet Asker', emoji:'👻', hp:1},
+      {name:'Karanlık Şövalye', emoji:'🗡️', hp:2},
+      {name:'Zırhlı İskelet', emoji:'💀', hp:2},
+      {name:'Büyücü', emoji:'🧙', hp:3},
+      {name:'Kale Kralı', emoji:'👑', hp:3, boss:true}
+    ]
+  },
+  {
+    name: '🐉 Ejderha',
+    theme: 'dragon',
+    desc: 'Son sınav! Tüm bilgini kullan!',
+    color: '#f5af19',
+    btnColor: 'linear-gradient(135deg,#f12711,#f5af19)',
+    pool: 'mixed',
+    monsters: [
+      {name:'Ateş Yarası', emoji:'🔥', hp:1},
+      {name:'Lav Golem', emoji:'🗿', hp:2},
+      {name:'Kanat Şeytanı', emoji:'🦇', hp:2},
+      {name:'Ejderha Yavrusu', emoji:'🐲', hp:3},
+      {name:'Kara Ejderha', emoji:'🐉', hp:3, boss:true}
+    ]
+  }
+];
+
+// ======================== MODE TOGGLE ========================
+function setMode(m){
+  mode = m;
+  document.getElementById('mode1Btn').classList.toggle('active', m===1);
+  document.getElementById('mode2Btn').classList.toggle('active', m===2);
+}
+
+// ======================== START GAME ========================
+function startGame(){
+  playerHP = [5, 5];
+  currentPlayer = 0;
+  chapterIdx = 0;
+  monsterIdx = 0;
+  stats = { correct:0, wrong:0 };
+  startTime = Date.now();
+  usedWords = [];
+
+  document.body.classList.toggle('two-player', mode===2);
+
+  showChapterTransition();
+}
+
+function restartGame(){
+  showScreen('startScreen');
+  document.body.classList.remove('two-player');
+}
+
+// ======================== CHAPTER TRANSITION ========================
+function showChapterTransition(){
+  const ch = CHAPTERS[chapterIdx];
+  const emoji = document.getElementById('chapterEmoji');
+  const title = document.getElementById('chapterTitle');
+  const desc = document.getElementById('chapterDesc');
+  const btn = document.getElementById('chapterBtn');
+
+  emoji.textContent = ch.name.split(' ')[0];
+  title.textContent = (chapterIdx+1) + '. Bölüm — ' + ch.name.split(' ').slice(1).join(' ');
+  title.style.color = ch.color;
+  desc.textContent = ch.desc;
+  btn.style.background = ch.btnColor;
+
+  showScreen('chapterScreen');
+  sesChapter();
+}
+
+function startChapter(){
+  const ch = CHAPTERS[chapterIdx];
+  monsterIdx = 0;
+
+  // Prepare chapter word pool
+  if(ch.pool === 'mixed'){
+    chapterWords = shuffle(ALL_WORDS);
+  } else {
+    chapterWords = shuffle(VOCAB[ch.pool]);
+  }
+
+  // Set theme class
+  document.getElementById('gameScreen').className = 'screen active chapter-' + ch.theme;
+
+  // Chapter badge
+  document.getElementById('chapterBadge').textContent = ch.name;
+
+  showScreen('gameScreen');
+  loadMonster();
+}
+
+// ======================== HEARTS RENDERING ========================
+function renderHearts(){
+  if(mode === 1){
+    const c = document.getElementById('hearts1p');
+    c.innerHTML = '';
+    for(let i=0;i<5;i++){
+      const s = document.createElement('span');
+      s.className = 'heart' + (i >= playerHP[0] ? ' lost' : '');
+      s.textContent = i < playerHP[0] ? '❤️' : '🖤';
+      c.appendChild(s);
+    }
+  } else {
+    ['P1','P2'].forEach((label,pi) => {
+      const c = document.getElementById('hearts'+label);
+      c.innerHTML = '';
+      for(let i=0;i<5;i++){
+        const s = document.createElement('span');
+        s.className = 'heart' + (i >= playerHP[pi] ? ' lost' : '');
+        s.textContent = i < playerHP[pi] ? '❤️' : '🖤';
+        c.appendChild(s);
+      }
+    });
+  }
+}
+
+function renderPlayerIndicator(){
+  const el = document.getElementById('playerIndicator');
+  if(mode === 1){ el.style.display='none'; return; }
+  el.style.display='block';
+  el.className = 'player-indicator ' + (currentPlayer===0 ? 'p1' : 'p2');
+  el.textContent = (currentPlayer===0 ? '⚔️ Oyuncu 1 Sırada' : '🛡️ Oyuncu 2 Sırada');
+}
+
+// ======================== PROGRESS DOTS ========================
+function renderProgressDots(){
+  const ch = CHAPTERS[chapterIdx];
+  const dots = document.getElementById('progressDots');
+  dots.innerHTML = '';
+  ch.monsters.forEach((m, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    if(m.boss) d.classList.add('boss');
+    if(i < monsterIdx) d.classList.add('done');
+    if(i === monsterIdx) d.classList.add('current');
+    dots.appendChild(d);
+  });
+}
+
+// ======================== LOAD MONSTER ========================
+function loadMonster(){
+  const ch = CHAPTERS[chapterIdx];
+  const mon = ch.monsters[monsterIdx];
+
+  monsterHP = mon.hp;
+  monsterMaxHP = mon.hp;
+
+  document.getElementById('monsterName').textContent =
+    (mon.boss ? '⭐ BOSS: ' : '') + mon.name;
+  document.getElementById('monsterEmoji').textContent = mon.emoji;
+  document.getElementById('monsterEmoji').className = 'monster-emoji';
+
+  updateMonsterHP();
+  renderHearts();
+  renderPlayerIndicator();
+  renderProgressDots();
+
+  if(mon.boss) sesBoss();
+
+  loadQuestion();
+}
+
+function updateMonsterHP(){
+  const fill = document.getElementById('monsterHpFill');
+  const pct = (monsterHP / monsterMaxHP) * 100;
+  fill.style.width = pct + '%';
+  fill.className = 'monster-hp-fill';
+  if(pct > 60) fill.classList.add('healthy');
+  else if(pct > 30) fill.classList.add('half');
+}
+
+// ======================== QUESTION LOGIC ========================
+function pickWord(){
+  // Pick a word not recently used
+  let pool = chapterWords.filter(w => !usedWords.includes(w.ar));
+  if(pool.length < 4){
+    usedWords = [];
+    pool = [...chapterWords];
+  }
+  const word = pool[Math.floor(Math.random() * pool.length)];
+  usedWords.push(word.ar);
+  return word;
+}
+
+function getDistractors(correct, count){
+  // Get wrong answers from same category or all words
+  let pool = ALL_WORDS.filter(w => w.ar !== correct.ar);
+  pool = shuffle(pool);
+  return pool.slice(0, count);
+}
+
+function loadQuestion(){
+  locked = false;
+
+  const word = pickWord();
+  const tr = getTr(word);
+
+  document.getElementById('promptEmoji').textContent = word.e;
+  document.getElementById('promptText').textContent = word.e + ' ' + tr + ' — Bu kelimeyi bul!';
+
+  // Build options
+  const distractors = getDistractors(word, 3);
+  let options = [word, ...distractors];
+  options = shuffle(options);
+
+  const cardsEl = document.getElementById('cards');
+  cardsEl.innerHTML = '';
+
+  options.forEach(opt => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.textContent = opt.ar;
+    card.dataset.ar = opt.ar;
+    card.addEventListener('click', () => handleAnswer(card, opt, word));
+    cardsEl.appendChild(card);
+  });
+}
+
+// ======================== ANSWER HANDLING ========================
+function handleAnswer(card, chosen, correct){
+  if(locked) return;
+  locked = true;
+
+  const allCards = document.querySelectorAll('.card');
+
+  if(chosen.ar === correct.ar){
+    // CORRECT
+    card.classList.add('correct');
+    allCards.forEach(c => c.classList.add('disabled'));
+    stats.correct++;
+    sesCorrect();
+
+    // Sword slash
+    setTimeout(() => {
+      sesSword();
+      const slash = document.getElementById('slashFx');
+      slash.classList.remove('active');
+      void slash.offsetWidth;
+      slash.classList.add('active');
+    }, 200);
+
+    // Monster takes damage
+    setTimeout(() => {
+      sesMonsterHit();
+      monsterHP--;
+      updateMonsterHP();
+
+      const me = document.getElementById('monsterEmoji');
+      me.classList.add('hit');
+      setTimeout(() => me.classList.remove('hit'), 500);
+
+      // Spawn particles
+      const rect = me.getBoundingClientRect();
+      for(let i=0;i<5;i++){
+        setTimeout(() => {
+          spawnParticle('⚡', rect.left + Math.random()*rect.width, rect.top + Math.random()*rect.height);
+        }, i*80);
+      }
+
+      if(monsterHP <= 0){
+        // Monster defeated!
+        setTimeout(() => monsterDefeated(), 400);
+      } else {
+        // Next question for same monster
+        if(mode === 2) switchPlayer();
+        setTimeout(() => loadQuestion(), 800);
+      }
+    }, 500);
+
+  } else {
+    // WRONG
+    card.classList.add('wrong');
+    stats.wrong++;
+    sesWrong();
+
+    // Highlight correct
+    allCards.forEach(c => {
+      if(c.dataset.ar === correct.ar) c.classList.add('correct');
+      c.classList.add('disabled');
+    });
+
+    // Monster attacks!
+    setTimeout(() => {
+      const gs = document.getElementById('gameScreen');
+      gs.classList.add('screen-shake');
+      document.body.classList.add('red-flash');
+
+      // Damage current player
+      const pIdx = (mode === 2) ? currentPlayer : 0;
+      playerHP[pIdx]--;
+      renderHearts();
+
+      // Spawn damage particles
+      const rect = gs.getBoundingClientRect();
+      for(let i=0;i<3;i++){
+        setTimeout(() => {
+          spawnParticle('💥', rect.width/2 + (Math.random()-0.5)*100, rect.height - 100);
+        }, i*100);
+      }
+
+      setTimeout(() => {
+        gs.classList.remove('screen-shake');
+        document.body.classList.remove('red-flash');
+      }, 500);
+
+      // Check game over
+      if(isGameOver()){
+        setTimeout(() => gameOver(), 600);
+        return;
+      }
+
+      if(mode === 2) switchPlayer();
+      setTimeout(() => loadQuestion(), 1200);
+    }, 400);
+  }
+}
+
+function switchPlayer(){
+  currentPlayer = currentPlayer === 0 ? 1 : 0;
+
+  // In 2P, if current player is dead, skip to other
+  if(playerHP[currentPlayer] <= 0){
+    currentPlayer = currentPlayer === 0 ? 1 : 0;
+  }
+  renderPlayerIndicator();
+}
+
+function isGameOver(){
+  if(mode === 1) return playerHP[0] <= 0;
+  return playerHP[0] <= 0 && playerHP[1] <= 0;
+}
+
+// ======================== MONSTER DEFEATED ========================
+function monsterDefeated(){
+  sesDefeat();
+  const me = document.getElementById('monsterEmoji');
+  me.classList.add('defeated');
+
+  // Particles burst
+  const rect = me.getBoundingClientRect();
+  const emojis = ['💫','⭐','✨','🌟','💥'];
+  for(let i=0;i<8;i++){
+    setTimeout(() => {
+      spawnParticle(emojis[i%emojis.length],
+        rect.left + Math.random()*rect.width,
+        rect.top + Math.random()*rect.height);
+    }, i*100);
+  }
+
+  setTimeout(() => {
+    monsterIdx++;
+    renderProgressDots();
+
+    if(monsterIdx >= CHAPTERS[chapterIdx].monsters.length){
+      // Chapter complete!
+      chapterIdx++;
+      if(chapterIdx >= CHAPTERS.length){
+        // ALL CHAPTERS COMPLETE - VICTORY!
+        setTimeout(() => victory(), 500);
+      } else {
+        setTimeout(() => showChapterTransition(), 500);
+      }
+    } else {
+      loadMonster();
+    }
+  }, 900);
+}
+
+// ======================== VICTORY ========================
+function victory(){
+  sesVictory();
+  showScreen('victoryScreen');
+
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const mins = Math.floor(elapsed / 60);
+  const secs = elapsed % 60;
+
+  let statsHTML = '🎯 Doğru: ' + stats.correct + '<br>';
+  statsHTML += '❌ Yanlış: ' + stats.wrong + '<br>';
+  statsHTML += '⏱️ Süre: ' + mins + ':' + (secs < 10 ? '0' : '') + secs + '<br>';
+  if(mode === 1){
+    statsHTML += '❤️ Kalan Can: ' + playerHP[0] + '/5';
+  } else {
+    statsHTML += '❤️ P1 Can: ' + playerHP[0] + '/5 | P2 Can: ' + playerHP[1] + '/5';
+  }
+  document.getElementById('victoryStats').innerHTML = statsHTML;
+
+  // Sparkles
+  const bg = document.getElementById('sparkleBg');
+  bg.innerHTML = '';
+  for(let i=0;i<40;i++){
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.style.left = Math.random()*100 + '%';
+    s.style.top = Math.random()*100 + '%';
+    s.style.animationDelay = Math.random()*3 + 's';
+    s.style.background = ['#ffd700','#ff6b6b','#38ef7d','#6495ed','#a044ff'][i%5];
+    bg.appendChild(s);
+  }
+
+  // Celebration particles
+  const cInterval = setInterval(() => {
+    const emojis = ['🎉','🎊','⭐','🏆','✨','🎖️'];
+    spawnParticle(emojis[Math.floor(Math.random()*emojis.length)],
+      Math.random()*window.innerWidth, window.innerHeight - 50);
+  }, 300);
+  setTimeout(() => clearInterval(cInterval), 5000);
+}
+
+// ======================== GAME OVER ========================
+function gameOver(){
+  sesGameOver();
+  showScreen('gameoverScreen');
+
+  const ch = CHAPTERS[chapterIdx];
+  document.getElementById('gameoverSub').textContent =
+    ch.name + ' bölümünde ' + (monsterIdx+1) + '. canavarda yenildin. ' +
+    'Doğru: ' + stats.correct + ' | Yanlış: ' + stats.wrong;
+}
+</script>
+</body>
+</html>

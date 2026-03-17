@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>إيقاع الكلمات — Kelime Ritmi</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom',sans-serif;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;min-height:100vh;overflow:hidden;
+  user-select:none;-webkit-user-select:none;
+  position:relative;
+}
+.tr-text{font-family:Arial,Helvetica,sans-serif;direction:ltr}
+
+/* Back button */
+#backBtn{
+  position:fixed;top:12px;left:12px;z-index:1000;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);
+  color:#fff;font-size:22px;width:42px;height:42px;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;transition:background 0.2s;
+}
+#backBtn:hover{background:rgba(255,255,255,0.25)}
+
+/* ---- SCREENS ---- */
+.screen{display:none;width:100%;height:100vh;position:absolute;top:0;left:0}
+.screen.active{display:flex}
+
+/* MENU */
+#menuScreen{
+  flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  text-align:center;padding:20px;
+}
+#menuScreen h1{font-size:clamp(28px,6vw,48px);margin-bottom:4px;text-shadow:0 0 20px rgba(255,200,50,0.5)}
+#menuScreen .subtitle{font-size:clamp(14px,3vw,20px);opacity:0.7;margin-bottom:20px}
+.menu-btn{
+  background:linear-gradient(135deg,#6c5ce7,#a855f7);
+  border:none;color:#fff;padding:16px 40px;border-radius:14px;
+  font-size:clamp(16px,3.5vw,22px);font-family:'Arakom',sans-serif;
+  cursor:pointer;min-width:240px;transition:transform 0.15s,box-shadow 0.15s;
+  box-shadow:0 4px 20px rgba(108,92,231,0.4);
+}
+.menu-btn:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(108,92,231,0.6)}
+.menu-btn.secondary{background:linear-gradient(135deg,#00b894,#00cec9)}
+.menu-info{font-size:13px;opacity:0.5;margin-top:10px}
+.menu-info.tr-text{direction:ltr}
+
+/* HUD */
+#hud{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 16px;background:rgba(0,0,0,0.5);backdrop-filter:blur(6px);
+  font-size:clamp(12px,2.5vw,16px);
+}
+#hud .hud-left,#hud .hud-right{display:flex;gap:12px;align-items:center}
+#hud .hud-center{text-align:center}
+#levelName{font-size:clamp(13px,2.8vw,18px);font-weight:bold;color:#f9ca24}
+#scoreDisplay{color:#fff}
+#comboDisplay{
+  color:#f9ca24;font-weight:bold;font-size:clamp(14px,3vw,20px);
+  transition:transform 0.15s;
+}
+#comboDisplay.pulse{animation:comboPulse 0.3s ease}
+@keyframes comboPulse{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+#progressBar{
+  position:absolute;bottom:0;left:0;height:3px;
+  background:linear-gradient(90deg,#f9ca24,#e17055);
+  transition:width 0.3s;
+}
+
+/* GAME AREA */
+#gameScreen{flex-direction:column;position:relative}
+#gameArea{
+  position:relative;flex:1;display:flex;overflow:hidden;
+  margin-top:50px; /* HUD space */
+}
+
+/* LANES */
+.player-area{flex:1;display:flex;position:relative}
+.player-area.two-player{max-width:50%}
+.player-divider{width:3px;background:rgba(255,255,255,0.15);flex-shrink:0}
+
+.lane{
+  flex:1;position:relative;
+  border-left:1px solid rgba(255,255,255,0.06);
+  border-right:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+}
+.lane:first-child{border-left:none}
+.lane:last-child{border-right:none}
+
+/* Lane neon glow bg */
+.lane::before{
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(108,92,231,0.08) 100%);
+  pointer-events:none;
+}
+
+/* Hit zone */
+.hit-zone{
+  position:absolute;bottom:60px;left:0;right:0;height:4px;
+  background:#f9ca24;
+  box-shadow:0 0 12px #f9ca24,0 0 30px rgba(249,202,36,0.4);
+  z-index:10;
+}
+.hit-zone-area{
+  position:absolute;bottom:20px;left:0;right:0;height:80px;
+  pointer-events:none;z-index:5;
+}
+
+/* Lane label at bottom */
+.lane-label{
+  position:absolute;bottom:0;left:0;right:0;height:56px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
+  z-index:20;padding:2px 4px;
+}
+.lane-label .emoji{font-size:18px;line-height:1}
+.lane-label .label-tr{
+  font-family:Arial,Helvetica,sans-serif;font-size:clamp(10px,2vw,14px);
+  color:rgba(255,255,255,0.85);direction:ltr;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:100%;
+}
+.lane-label .key-hint{
+  font-family:monospace;font-size:10px;color:rgba(255,255,255,0.35);
+  direction:ltr;
+}
+
+/* Lane tap overlay */
+.lane-tap{
+  position:absolute;top:0;left:0;right:0;bottom:0;z-index:30;
+  cursor:pointer;
+}
+.lane-tap:active{background:rgba(255,255,255,0.05)}
+
+/* Falling word block */
+.word-block{
+  position:absolute;z-index:15;
+  left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,rgba(108,92,231,0.85),rgba(168,85,247,0.85));
+  border:2px solid rgba(255,255,255,0.2);
+  border-radius:12px;padding:8px 14px;
+  font-family:'Arakom',sans-serif;font-weight:bold;
+  font-size:clamp(22px,4.5vw,34px);
+  color:#fff;text-align:center;white-space:nowrap;
+  text-shadow:0 2px 8px rgba(0,0,0,0.4);
+  box-shadow:0 4px 16px rgba(108,92,231,0.4);
+  pointer-events:none;
+  transition:opacity 0.2s;
+}
+
+/* Feedback float */
+.feedback{
+  position:absolute;z-index:50;
+  left:50%;transform:translateX(-50%);
+  font-size:clamp(18px,4vw,28px);font-weight:bold;
+  pointer-events:none;
+  animation:feedbackFloat 0.8s ease-out forwards;
+  text-shadow:0 2px 10px rgba(0,0,0,0.5);
+}
+@keyframes feedbackFloat{
+  0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+  100%{opacity:0;transform:translateX(-50%) translateY(-60px) scale(1.3)}
+}
+.feedback.perfect{color:#f9ca24}
+.feedback.great{color:#00b894}
+.feedback.ok{color:#74b9ff}
+.feedback.miss{color:#d63031}
+.feedback.wrong{color:#e17055}
+
+/* Lane flash */
+.lane.flash-gold{animation:flashGold 0.3s}
+.lane.flash-green{animation:flashGreen 0.3s}
+.lane.flash-blue{animation:flashBlue 0.3s}
+.lane.flash-red{animation:flashRed 0.3s}
+
+@keyframes flashGold{0%{background:rgba(249,202,36,0.3)}100%{background:transparent}}
+@keyframes flashGreen{0%{background:rgba(0,184,148,0.3)}100%{background:transparent}}
+@keyframes flashBlue{0%{background:rgba(116,185,255,0.3)}100%{background:transparent}}
+@keyframes flashRed{0%{background:rgba(214,48,49,0.3)}100%{background:transparent}}
+
+/* Animated bg lines */
+#bgCanvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;opacity:0.15;
+}
+
+/* Level transition / summary */
+#summaryScreen{
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;text-align:center;padding:20px;z-index:200;
+  background:linear-gradient(135deg,#0f0c29ee,#302b63ee,#24243eee);
+}
+#summaryScreen h2{font-size:clamp(22px,5vw,36px);color:#f9ca24;text-shadow:0 0 20px rgba(249,202,36,0.4)}
+.summary-stats{
+  display:flex;flex-direction:column;gap:8px;
+  font-size:clamp(14px,3vw,20px);
+}
+.summary-stats .stat{display:flex;gap:10px;justify-content:center;align-items:center}
+.summary-stats .stat-label{opacity:0.7}
+.summary-stats .stat-value{color:#f9ca24;font-weight:bold}
+
+/* 2P HUD */
+.player-hud{
+  position:absolute;top:50px;z-index:100;
+  padding:4px 10px;font-size:clamp(11px,2vw,14px);
+  background:rgba(0,0,0,0.5);border-radius:0 0 8px 8px;
+  display:none;
+}
+.player-hud.p1{left:0;border-left:3px solid #74b9ff}
+.player-hud.p2{right:0;border-right:3px solid #ff7675;text-align:left;direction:ltr}
+.player-hud .p-score{font-weight:bold}
+.player-hud .p-combo{color:#f9ca24;font-size:0.9em}
+
+/* Final screen */
+#finalScreen{
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;text-align:center;padding:20px;z-index:200;
+  background:linear-gradient(135deg,#0f0c29ee,#302b63ee,#24243eee);
+}
+#finalScreen h2{font-size:clamp(24px,5vw,40px);color:#f9ca24}
+.final-scores{display:flex;gap:30px;justify-content:center;flex-wrap:wrap}
+.final-player{
+  background:rgba(255,255,255,0.08);border-radius:16px;padding:20px 30px;
+  min-width:180px;
+}
+.final-player h3{font-size:clamp(16px,3vw,22px);margin-bottom:8px}
+.final-player .big-score{font-size:clamp(28px,6vw,48px);color:#f9ca24;font-weight:bold}
+.final-player .detail{font-size:clamp(12px,2.5vw,16px);opacity:0.7;margin-top:4px}
+
+/* Responsive */
+@media(max-width:500px){
+  .word-block{padding:6px 10px;font-size:clamp(20px,5vw,28px)}
+  .lane-label{height:50px}
+  .lane-label .emoji{font-size:16px}
+  .hit-zone{bottom:54px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<a id="backBtn" href="index.html" title="Geri">✕</a>
+
+<!-- MENU SCREEN -->
+<div id="menuScreen" class="screen active">
+  <h1>إيقاع الكلمات</h1>
+  <div class="subtitle tr-text">Kelime Ritmi — Arapça Ritim Oyunu</div>
+  <button class="menu-btn" onclick="startGame(1)">🎮 1 Oyuncu</button>
+  <button class="menu-btn secondary" onclick="startGame(2)">👥 2 Oyuncu</button>
+  <div class="menu-info tr-text">Masaüstü: 1-2-3 tuşları &nbsp;|&nbsp; Mobil: Şeritlere dokun</div>
+  <div class="menu-info tr-text" style="font-size:11px;margin-top:2px">İHO 7. Sınıf Arapça</div>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="screen">
+  <div id="hud">
+    <div class="hud-left">
+      <span id="scoreDisplay">0</span>
+    </div>
+    <div class="hud-center">
+      <div id="levelName"></div>
+    </div>
+    <div class="hud-right">
+      <span id="comboDisplay"></span>
+    </div>
+    <div id="progressBar" style="width:0%"></div>
+  </div>
+
+  <div class="player-hud p1" id="p1Hud">
+    <span style="color:#74b9ff">🔵 Oyuncu 1</span>
+    <span class="p-score" id="p1Score">0</span>
+    <span class="p-combo" id="p1Combo"></span>
+  </div>
+  <div class="player-hud p2" id="p2Hud">
+    <span style="color:#ff7675">🔴 Oyuncu 2</span>
+    <span class="p-score" id="p2Score">0</span>
+    <span class="p-combo" id="p2Combo"></span>
+  </div>
+
+  <div id="gameArea"></div>
+</div>
+
+<!-- SUMMARY SCREEN (between levels) -->
+<div id="summaryScreen" class="screen">
+  <h2 id="summaryTitle"></h2>
+  <div class="summary-stats" id="summaryStats"></div>
+  <button class="menu-btn" id="nextLevelBtn" onclick="nextLevel()">Sonraki Seviye ➜</button>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="finalScreen" class="screen">
+  <h2>!انتهت اللعبة</h2>
+  <div class="subtitle tr-text" style="margin-bottom:10px">Oyun Bitti!</div>
+  <div class="final-scores" id="finalScores"></div>
+  <button class="menu-btn" onclick="goMenu()" style="margin-top:16px">Ana Menü</button>
+</div>
+
+<script>
+// ==================== VOCABULARY ====================
+const VOCAB = {
+  foods: [
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs: [
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times: [
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR = {
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
+  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
+  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
+  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
+  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
+  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){return VOCAB_TR[w.ar]||'';}
+
+// ==================== SOUND SYSTEM ====================
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesPerfect(){_tone(880,0.08,'sine',0.35);_tone(1100,0.1,'sine',0.3,0.06);}
+function sesGreat(){_tone(660,0.08,'sine',0.3);_tone(880,0.08,'sine',0.25,0.06);}
+function sesOk(){_tone(440,0.1,'sine',0.25);}
+function sesMiss(){_tone(200,0.3,'sawtooth',0.2);}
+function sesCombo(){_tone(1047,0.05,'sine',0.3);_tone(1319,0.05,'sine',0.3,0.05);_tone(1568,0.08,'sine',0.35,0.1);}
+function sesCelebrate(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+
+// Background beat
+let beatInterval = null;
+let beatOn = false;
+function startBeat(bpm){
+  stopBeat();
+  beatOn = true;
+  const ms = 60000/bpm;
+  let tick = 0;
+  function doBeat(){
+    if(!beatOn) return;
+    const accent = tick%4===0;
+    _tone(accent?120:80, 0.06, 'triangle', accent?0.18:0.1);
+    if(tick%2===0) _tone(accent?200:160, 0.03, 'square', 0.05);
+    tick++;
+    beatInterval = setTimeout(doBeat, ms);
+  }
+  doBeat();
+}
+function stopBeat(){beatOn=false;if(beatInterval){clearTimeout(beatInterval);beatInterval=null;}}
+
+// ==================== GAME STATE ====================
+const LEVELS = [
+  {name:'يواش',nameTr:'Yavaş',category:'foods',speed:4,count:20,bpm:80},
+  {name:'متوسط',nameTr:'Orta',category:'verbs',speed:3,count:25,bpm:110},
+  {name:'سريع',nameTr:'Hızlı',category:'mixed',speed:2,count:30,bpm:140}
+];
+
+let numPlayers = 1;
+let currentLevel = 0;
+let gameRunning = false;
+let animId = null;
+
+// Per-player state
+let players = [];
+
+function createPlayerState(){
+  return {
+    score:0, combo:0, maxCombo:0,
+    perfects:0, greats:0, oks:0, misses:0,
+    lanes:[], targets:[], wordQueue:[], activeWords:[],
+    wordIndex:0, nextSpawnTime:0,
+    areaEl:null
+  };
+}
+
+// ==================== SCREENS ====================
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goMenu(){
+  stopBeat();
+  gameRunning=false;
+  if(animId){cancelAnimationFrame(animId);animId=null;}
+  showScreen('menuScreen');
+}
+
+// ==================== BACKGROUND CANVAS ====================
+const bgCanvas = document.getElementById('bgCanvas');
+const bgCtx = bgCanvas.getContext('2d');
+let bgLines = [];
+
+function initBg(){
+  bgCanvas.width = window.innerWidth;
+  bgCanvas.height = window.innerHeight;
+  bgLines = [];
+  for(let i=0;i<12;i++){
+    bgLines.push({
+      x: Math.random()*bgCanvas.width,
+      y: Math.random()*bgCanvas.height,
+      vx: (Math.random()-0.5)*0.5,
+      vy: Math.random()*0.8+0.3,
+      len: Math.random()*80+40,
+      alpha: Math.random()*0.3+0.1
+    });
+  }
+}
+function drawBg(){
+  bgCtx.clearRect(0,0,bgCanvas.width,bgCanvas.height);
+  for(const l of bgLines){
+    l.x += l.vx;
+    l.y += l.vy;
+    if(l.y > bgCanvas.height+l.len){l.y=-l.len;l.x=Math.random()*bgCanvas.width;}
+    if(l.x<0)l.x=bgCanvas.width;
+    if(l.x>bgCanvas.width)l.x=0;
+    bgCtx.beginPath();
+    bgCtx.moveTo(l.x, l.y);
+    bgCtx.lineTo(l.x, l.y - l.len);
+    bgCtx.strokeStyle = `rgba(168,85,247,${l.alpha})`;
+    bgCtx.lineWidth = 1.5;
+    bgCtx.stroke();
+  }
+}
+initBg();
+window.addEventListener('resize',initBg);
+
+// ==================== BUILD GAME AREA ====================
+function buildGameArea(){
+  const area = document.getElementById('gameArea');
+  area.innerHTML = '';
+
+  const p1Hud = document.getElementById('p1Hud');
+  const p2Hud = document.getElementById('p2Hud');
+
+  if(numPlayers===2){
+    p1Hud.style.display='block';
+    p2Hud.style.display='block';
+  } else {
+    p1Hud.style.display='none';
+    p2Hud.style.display='none';
+  }
+
+  players = [];
+
+  for(let p=0;p<numPlayers;p++){
+    const ps = createPlayerState();
+    const pArea = document.createElement('div');
+    pArea.className = 'player-area' + (numPlayers===2?' two-player':'');
+    ps.areaEl = pArea;
+
+    for(let i=0;i<3;i++){
+      const lane = document.createElement('div');
+      lane.className = 'lane';
+      lane.dataset.lane = i;
+      lane.dataset.player = p;
+
+      const hitZone = document.createElement('div');
+      hitZone.className = 'hit-zone';
+      lane.appendChild(hitZone);
+
+      const label = document.createElement('div');
+      label.className = 'lane-label';
+      label.innerHTML = `<span class="emoji"></span><span class="label-tr tr-text"></span><span class="key-hint tr-text"></span>`;
+      lane.appendChild(label);
+
+      const tap = document.createElement('div');
+      tap.className = 'lane-tap';
+      tap.dataset.lane = i;
+      tap.dataset.player = p;
+      tap.addEventListener('pointerdown', function(ev){
+        ev.preventDefault();
+        handleTap(parseInt(this.dataset.player), parseInt(this.dataset.lane));
+      });
+      lane.appendChild(tap);
+
+      pArea.appendChild(lane);
+      ps.lanes.push(lane);
+    }
+
+    area.appendChild(pArea);
+    players.push(ps);
+
+    if(p===0 && numPlayers===2){
+      const div = document.createElement('div');
+      div.className = 'player-divider';
+      area.appendChild(div);
+    }
+  }
+}
+
+// ==================== LEVEL SETUP ====================
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function setupLevel(){
+  const lvl = LEVELS[currentLevel];
+  let pool;
+  if(lvl.category==='mixed'){
+    pool = [...ALL_WORDS];
+  } else {
+    pool = [...VOCAB[lvl.category]];
+  }
+
+  // Pick 3 random targets for each player
+  for(const ps of players){
+    const shuffled = shuffle(pool);
+    ps.targets = shuffled.slice(0,3);
+    ps.activeWords = [];
+    ps.wordIndex = 0;
+    ps.nextSpawnTime = 0;
+
+    // Build word queue: distribute count words among 3 lanes roughly equally
+    const count = lvl.count;
+    const queue = [];
+    for(let i=0;i<count;i++){
+      const laneIdx = i % 3;
+      queue.push({
+        word: ps.targets[laneIdx],
+        correctLane: laneIdx
+      });
+    }
+    ps.wordQueue = shuffle(queue);
+
+    // Update lane labels
+    for(let i=0;i<3;i++){
+      const label = ps.lanes[i].querySelector('.lane-label');
+      const t = ps.targets[i];
+      label.querySelector('.emoji').textContent = t.e;
+      label.querySelector('.label-tr').textContent = getTr(t);
+      // Key hints for player 1 in single-player, or both in 2p
+      if(numPlayers===1){
+        label.querySelector('.key-hint').textContent = (i+1)+'';
+      } else if(ps===players[0]){
+        label.querySelector('.key-hint').textContent = ['Q','W','E'][i];
+      } else {
+        label.querySelector('.key-hint').textContent = ['7','8','9'][i];
+      }
+    }
+  }
+
+  // HUD
+  document.getElementById('levelName').textContent =
+    `${lvl.name} — ${lvl.nameTr} (${currentLevel+1}/3)`;
+  updateHud();
+}
+
+// ==================== HUD UPDATE ====================
+function updateHud(){
+  if(numPlayers===1){
+    const ps = players[0];
+    document.getElementById('scoreDisplay').textContent = ps.score;
+    const cd = document.getElementById('comboDisplay');
+    const mult = getMultiplier(ps.combo);
+    cd.textContent = ps.combo>0 ? `${ps.combo}🔥 ×${mult}` : '';
+    if(ps.combo>=5){cd.classList.add('pulse');setTimeout(()=>cd.classList.remove('pulse'),300);}
+  } else {
+    document.getElementById('scoreDisplay').textContent = '';
+    document.getElementById('comboDisplay').textContent = '';
+    for(let p=0;p<2;p++){
+      const ps=players[p];
+      const mult=getMultiplier(ps.combo);
+      document.getElementById(`p${p+1}Score`).textContent = ps.score;
+      document.getElementById(`p${p+1}Combo`).textContent =
+        ps.combo>0 ? `${ps.combo}🔥 ×${mult}` : '';
+    }
+  }
+  // Progress
+  const lvl = LEVELS[currentLevel];
+  const total = lvl.count;
+  // Average progress across players
+  let done = 0;
+  for(const ps of players) done += ps.wordIndex;
+  done /= players.length;
+  document.getElementById('progressBar').style.width = (done/total*100)+'%';
+}
+
+function getMultiplier(combo){
+  if(combo>=20) return 10;
+  if(combo>=15) return 5;
+  if(combo>=10) return 3;
+  if(combo>=5) return 2;
+  return 1;
+}
+
+// ==================== SPAWN WORDS ====================
+function spawnWord(ps, now){
+  if(ps.wordIndex >= ps.wordQueue.length) return;
+  const item = ps.wordQueue[ps.wordIndex];
+  ps.wordIndex++;
+
+  const block = document.createElement('div');
+  block.className = 'word-block';
+  block.textContent = item.word.ar;
+
+  const lane = ps.lanes[item.correctLane];
+  lane.appendChild(block);
+
+  const wordObj = {
+    el: block,
+    correctLane: item.correctLane,
+    word: item.word,
+    startTime: now,
+    hit: false,
+    missed: false,
+    y: -60 // start above
+  };
+  ps.activeWords.push(wordObj);
+}
+
+// ==================== HANDLE TAP ====================
+function handleTap(playerIdx, laneIdx){
+  if(!gameRunning) return;
+  const ps = players[playerIdx];
+  if(!ps) return;
+
+  // Find the lowest (closest to hit zone) un-hit word in ANY lane
+  let closest = null;
+  let closestDist = Infinity;
+  const laneEl = ps.lanes[laneIdx];
+  const laneRect = laneEl.getBoundingClientRect();
+  const hitY = laneRect.bottom - 62; // hit zone position from top of page
+
+  for(const w of ps.activeWords){
+    if(w.hit || w.missed) continue;
+    const blockRect = w.el.getBoundingClientRect();
+    const blockCenter = blockRect.top + blockRect.height/2;
+    const dist = Math.abs(blockCenter - hitY);
+    if(dist < closestDist){
+      closestDist = dist;
+      closest = w;
+    }
+  }
+
+  if(!closest) return;
+
+  const blockRect = closest.el.getBoundingClientRect();
+  const blockCenter = blockRect.top + blockRect.height/2;
+  const hitZoneY = laneRect.bottom - 62;
+  const dist = Math.abs(blockCenter - hitZoneY);
+  const laneHeight = laneRect.height - 56; // minus label
+
+  // Check if word is in scoring range (within 30% of lane height from hit zone)
+  const maxRange = laneHeight * 0.30;
+  if(dist > maxRange) return; // too far, ignore tap
+
+  // Check if correct lane
+  if(closest.correctLane !== laneIdx){
+    // Wrong lane
+    closest.hit = true;
+    closest.el.style.opacity = '0';
+    setTimeout(()=>{if(closest.el.parentNode)closest.el.parentNode.removeChild(closest.el);},200);
+    ps.combo = 0;
+    ps.misses++;
+    showFeedback(ps.lanes[laneIdx], '!خطأ', 'wrong');
+    flashLane(ps.lanes[laneIdx], 'red');
+    sesMiss();
+    updateHud();
+    return;
+  }
+
+  // Correct lane — determine timing
+  closest.hit = true;
+  closest.el.style.opacity = '0';
+  setTimeout(()=>{if(closest.el.parentNode)closest.el.parentNode.removeChild(closest.el);},200);
+
+  const perfectRange = laneHeight * 0.06;
+  const greatRange = laneHeight * 0.14;
+  // okRange is everything else up to maxRange
+
+  let points, label, cssClass, flashColor, soundFn;
+  if(dist <= perfectRange){
+    points=100;label='!مثالي';cssClass='perfect';flashColor='gold';soundFn=sesPerfect;
+    ps.perfects++;
+  } else if(dist <= greatRange){
+    points=75;label='!رائع';cssClass='great';flashColor='green';soundFn=sesGreat;
+    ps.greats++;
+  } else {
+    points=50;label='جيد';cssClass='ok';flashColor='blue';soundFn=sesOk;
+    ps.oks++;
+  }
+
+  ps.combo++;
+  if(ps.combo > ps.maxCombo) ps.maxCombo = ps.combo;
+  const mult = getMultiplier(ps.combo);
+  ps.score += points * mult;
+
+  soundFn();
+  if(ps.combo===5||ps.combo===10||ps.combo===15||ps.combo===20) sesCombo();
+
+  showFeedback(ps.lanes[laneIdx], label, cssClass);
+  flashLane(ps.lanes[laneIdx], flashColor);
+  updateHud();
+}
+
+function showFeedback(laneEl, text, cssClass){
+  const fb = document.createElement('div');
+  fb.className = 'feedback ' + cssClass;
+  fb.textContent = text;
+  fb.style.bottom = '90px';
+  laneEl.appendChild(fb);
+  setTimeout(()=>{if(fb.parentNode)fb.parentNode.removeChild(fb);},800);
+}
+
+function flashLane(laneEl, color){
+  laneEl.classList.remove('flash-gold','flash-green','flash-blue','flash-red');
+  void laneEl.offsetWidth; // force reflow
+  laneEl.classList.add('flash-'+color);
+  setTimeout(()=>laneEl.classList.remove('flash-'+color),300);
+}
+
+// ==================== GAME LOOP ====================
+let lastTime = 0;
+let gameStartTime = 0;
+
+function gameLoop(timestamp){
+  if(!gameRunning){return;}
+
+  drawBg();
+
+  const lvl = LEVELS[currentLevel];
+  const fallDuration = lvl.speed * 1000; // ms to traverse lane
+  const spawnInterval = fallDuration / 2.5; // stagger words
+
+  let allDone = true;
+
+  for(const ps of players){
+    // Spawn next word
+    if(ps.wordIndex < ps.wordQueue.length){
+      allDone = false;
+      if(timestamp >= ps.nextSpawnTime){
+        spawnWord(ps, timestamp);
+        ps.nextSpawnTime = timestamp + spawnInterval;
+      }
+    }
+
+    // Update active words
+    const toRemove = [];
+    for(let i=0;i<ps.activeWords.length;i++){
+      const w = ps.activeWords[i];
+      if(w.hit){toRemove.push(i);continue;}
+
+      const elapsed = timestamp - w.startTime;
+      const progress = elapsed / fallDuration;
+
+      const lane = ps.lanes[w.correctLane];
+      const laneHeight = lane.offsetHeight - 56; // minus label area
+
+      const y = -60 + progress * (laneHeight + 120);
+      w.el.style.top = y + 'px';
+
+      // Check if passed hit zone (missed)
+      if(y > laneHeight + 20 && !w.missed){
+        w.missed = true;
+        w.el.style.opacity = '0.3';
+        ps.combo = 0;
+        ps.misses++;
+        showFeedback(lane, 'Miss!', 'miss');
+        sesMiss();
+        updateHud();
+        setTimeout(()=>{if(w.el.parentNode)w.el.parentNode.removeChild(w.el);},300);
+        toRemove.push(i);
+      }
+
+      // Remove if way off screen
+      if(y > laneHeight + 200){
+        if(w.el.parentNode) w.el.parentNode.removeChild(w.el);
+        toRemove.push(i);
+      }
+    }
+
+    // Clean up
+    for(let i=toRemove.length-1;i>=0;i--){
+      ps.activeWords.splice(toRemove[i],1);
+    }
+
+    // Check if this player still has words
+    if(ps.wordIndex < ps.wordQueue.length || ps.activeWords.length > 0){
+      allDone = false;
+    }
+  }
+
+  if(allDone){
+    // Level complete
+    gameRunning = false;
+    stopBeat();
+    sesCelebrate();
+    if(currentLevel < LEVELS.length - 1){
+      showSummary();
+    } else {
+      showFinal();
+    }
+    return;
+  }
+
+  animId = requestAnimationFrame(gameLoop);
+}
+
+// ==================== START / NEXT / END ====================
+function startGame(np){
+  numPlayers = np;
+  currentLevel = 0;
+  // Init audio context on user gesture
+  try{_ac();}catch(e){}
+  buildGameArea();
+  setupLevel();
+  startLevel();
+}
+
+function startLevel(){
+  const lvl = LEVELS[currentLevel];
+  gameRunning = true;
+
+  // Reset spawn times
+  const now = performance.now();
+  for(const ps of players){
+    ps.nextSpawnTime = now + 1000; // 1s delay before first word
+  }
+
+  showScreen('gameScreen');
+  startBeat(lvl.bpm);
+  animId = requestAnimationFrame(gameLoop);
+}
+
+function showSummary(){
+  const lvl = LEVELS[currentLevel];
+  document.getElementById('summaryTitle').textContent =
+    `!${lvl.name} تم`;
+
+  let html = '';
+  for(let p=0;p<numPlayers;p++){
+    const ps = players[p];
+    const prefix = numPlayers===2 ?
+      `<div style="color:${p===0?'#74b9ff':'#ff7675'};font-weight:bold;margin-top:10px">${p===0?'🔵 Oyuncu 1':'🔴 Oyuncu 2'}</div>` : '';
+    html += prefix;
+    html += `
+      <div class="stat"><span class="stat-label tr-text">Puan:</span><span class="stat-value">${ps.score}</span></div>
+      <div class="stat"><span class="stat-label">مثالي</span><span class="stat-value">${ps.perfects}</span></div>
+      <div class="stat"><span class="stat-label">رائع</span><span class="stat-value">${ps.greats}</span></div>
+      <div class="stat"><span class="stat-label">جيد</span><span class="stat-value">${ps.oks}</span></div>
+      <div class="stat"><span class="stat-label">Miss</span><span class="stat-value">${ps.misses}</span></div>
+      <div class="stat"><span class="stat-label tr-text">Maks Kombo:</span><span class="stat-value">${ps.maxCombo}</span></div>
+    `;
+  }
+  document.getElementById('summaryStats').innerHTML = html;
+  showScreen('summaryScreen');
+}
+
+function nextLevel(){
+  currentLevel++;
+  if(currentLevel >= LEVELS.length){
+    showFinal();
+    return;
+  }
+  // Keep scores, reset per-level stats
+  for(const ps of players){
+    ps.perfects=0;ps.greats=0;ps.oks=0;ps.misses=0;
+    ps.combo=0;ps.activeWords=[];ps.wordIndex=0;
+    // Clear lane DOM
+    for(const lane of ps.lanes){
+      lane.querySelectorAll('.word-block,.feedback').forEach(el=>el.remove());
+    }
+  }
+  setupLevel();
+  startLevel();
+}
+
+function showFinal(){
+  sesCelebrate();
+  let html = '';
+  for(let p=0;p<numPlayers;p++){
+    const ps = players[p];
+    const label = numPlayers===2 ?
+      (p===0?'<span style="color:#74b9ff">🔵 Oyuncu 1</span>':'<span style="color:#ff7675">🔴 Oyuncu 2</span>') :
+      '<span>Sonuç</span>';
+    html += `
+      <div class="final-player">
+        <h3>${label}</h3>
+        <div class="big-score">${ps.score}</div>
+        <div class="detail tr-text">Maks Kombo: ${ps.maxCombo}</div>
+      </div>
+    `;
+  }
+  if(numPlayers===2){
+    const winner = players[0].score > players[1].score ? '🔵 Oyuncu 1' :
+                   players[1].score > players[0].score ? '🔴 Oyuncu 2' : 'Berabere!';
+    html += `<div style="margin-top:16px;font-size:clamp(18px,4vw,28px);color:#f9ca24">🏆 ${winner}</div>`;
+  }
+  document.getElementById('finalScores').innerHTML = html;
+  showScreen('finalScreen');
+}
+
+// ==================== KEYBOARD ====================
+document.addEventListener('keydown', function(e){
+  if(!gameRunning) return;
+
+  if(numPlayers===1){
+    if(e.key==='1') handleTap(0,0);
+    else if(e.key==='2') handleTap(0,1);
+    else if(e.key==='3') handleTap(0,2);
+  } else {
+    // Player 1: Q W E
+    if(e.key==='q'||e.key==='Q') handleTap(0,0);
+    else if(e.key==='w'||e.key==='W') handleTap(0,1);
+    else if(e.key==='e'||e.key==='E') handleTap(0,2);
+    // Player 2: 7 8 9 (numpad or top row)
+    else if(e.key==='7') handleTap(1,0);
+    else if(e.key==='8') handleTap(1,1);
+    else if(e.key==='9') handleTap(1,2);
+  }
+});
+
+// ==================== INITIAL BG ANIMATION ====================
+function bgLoop(){
+  drawBg();
+  if(!gameRunning) requestAnimationFrame(bgLoop);
+}
+bgLoop();
+</script>
+</body>
+</html>
