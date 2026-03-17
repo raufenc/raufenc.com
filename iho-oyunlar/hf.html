@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ألعاب جديدة - ماذا فعلت اليوم؟</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;font-size:clamp(16px,1.8vw,26px);background:#1a1a2e;min-height:100vh;color:#333}
+
+/* ===== MENU ===== */
+.menu-bg{background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);min-height:100vh;padding:20px}
+.menu-header{text-align:center;color:#fff;padding:30px 10px 20px}
+.menu-header h1{font-size:2.2em;margin-bottom:8px;background:linear-gradient(90deg,#00BCD4,#4CAF50);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.menu-header .unit-badge{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;padding:6px 20px;border-radius:20px;font-size:0.95em;margin-bottom:10px}
+.menu-header p{color:rgba(255,255,255,0.7);font-size:1em}
+.menu-stats{display:flex;justify-content:center;gap:20px;margin:15px 0;flex-wrap:wrap}
+.menu-stat{background:rgba(255,255,255,0.1);padding:10px 20px;border-radius:12px;text-align:center;color:#fff;min-width:100px}
+.menu-stat .val{font-size:1.5em;font-weight:bold;color:#ffd200}
+.menu-stat .lbl{font-size:0.8em;color:rgba(255,255,255,0.6)}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px;max-width:900px;margin:20px auto;padding:0 10px}
+.game-card{background:#fff;border-radius:20px;padding:25px 20px;text-align:center;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
+.game-card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.3)}
+.game-card .card-icon{font-size:3em;margin-bottom:10px}
+.game-card h3{font-size:1.2em;margin-bottom:5px}
+.game-card p{font-size:0.85em;color:#888;margin-bottom:10px}
+.game-card .card-score{font-size:0.85em;color:#999}
+.game-card .card-score .done{color:#4caf50;font-weight:bold}
+.game-card .card-bar{height:4px;background:#eee;border-radius:2px;margin-top:8px;overflow:hidden}
+.game-card .card-bar-fill{height:100%;border-radius:2px;transition:width 0.5s}
+.card1{border-top:4px solid #00BCD4}.card1 h3{color:#00838F}.card1 .card-bar-fill{background:#00BCD4}
+.card2{border-top:4px solid #FF6B35}.card2 h3{color:#C44B00}.card2 .card-bar-fill{background:#FF6B35}
+.card3{border-top:4px solid #3F51B5}.card3 h3{color:#1A237E}.card3 .card-bar-fill{background:#3F51B5}
+.card4{border-top:4px solid #E91E63}.card4 h3{color:#880E4F}.card4 .card-bar-fill{background:#E91E63}
+.card5{border-top:4px solid #4CAF50}.card5 h3{color:#1B5E20}.card5 .card-bar-fill{background:#4CAF50}
+.card6{border-top:4px solid #9C27B0}.card6 h3{color:#4A148C}.card6 .card-bar-fill{background:#9C27B0}
+
+
+/* hub entegrasyonu: iç menü gizli */
+#menuScreen{display:none!important}
+#backBtn{display:none!important}
+/* ===== GAME CONTAINER ===== */
+.game-screen{display:none !important;min-height:100vh;flex-direction:column;align-items:center}
+.game-screen.active{display:flex !important}
+.back-btn{position:fixed;top:15px;right:15px;z-index:1000;background:rgba(0,0,0,0.6);color:#fff;border:none;padding:10px 20px;border-radius:25px;font-size:1em;cursor:pointer;font-family:inherit;backdrop-filter:blur(10px);transition:all 0.3s}
+.back-btn:hover{background:rgba(0,0,0,0.8)}
+
+/* ===== GAME 1: SCRAMBLE ===== */
+.g1-bg{background:linear-gradient(135deg,#006064,#00BCD4);padding:10px;padding-top:60px}
+.g1-box{background:#fff;border-radius:20px;padding:20px;max-width:600px;width:100%}
+.g1-box h1{text-align:center;color:#00838F;font-size:1.8em;margin-bottom:5px}
+.g1-sub{text-align:center;color:#00ACC1;font-size:1em;margin-bottom:15px}
+.g1-topbar{display:flex;justify-content:space-between;align-items:center;background:#E0F7FA;border-radius:12px;padding:10px 15px;margin-bottom:15px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g1-topbar span{color:#00838F;font-weight:bold}
+.g1-timer-wrap{width:100%;height:10px;background:#e0e0e0;border-radius:5px;margin-bottom:15px;overflow:hidden}
+.g1-timer-bar{height:100%;background:#4CAF50;border-radius:5px;transition:width 0.1s linear,background 0.5s}
+.g1-hint{text-align:center;font-size:3.5em;margin:10px 0;min-height:70px;line-height:1}
+.g1-word-hint{text-align:center;color:#00838F;font-size:0.9em;margin-bottom:10px}
+.g1-slots{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:20px;min-height:60px}
+.g1-slot{min-width:52px;height:52px;border:3px dashed #80DEEA;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4em;background:#E0F7FA;cursor:pointer;transition:all 0.2s;position:relative}
+.g1-slot.filled{background:#B2EBF2;border-color:#00BCD4;border-style:solid;color:#004D40}
+.g1-slot.correct{background:#C8E6C9;border-color:#4CAF50;border-style:solid;color:#1B5E20}
+.g1-slot.wrong{background:#FFCDD2;border-color:#F44336;border-style:solid;animation:shake 0.5s}
+.g1-tiles{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;padding:15px;background:#E0F7FA;border-radius:15px;min-height:55px}
+.g1-tile{min-width:52px;height:52px;background:linear-gradient(135deg,#00BCD4,#006064);color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4em;cursor:pointer;transition:all 0.2s;user-select:none;font-weight:bold}
+.g1-tile:hover{transform:translateY(-3px);box-shadow:0 5px 15px rgba(0,188,212,0.4)}
+.g1-tile.used{opacity:0;pointer-events:none}
+.g1-tile.selected{background:linear-gradient(135deg,#FF9800,#F57C00);transform:scale(1.1)}
+.g1-hint-btn{background:none;border:2px solid #00BCD4;color:#00838F;border-radius:20px;padding:5px 15px;cursor:pointer;font-family:inherit;font-size:0.85em;transition:all 0.2s}
+.g1-hint-btn:hover{background:#E0F7FA}
+
+/* ===== GAME 2: CATEGORY SORT ===== */
+.g2-bg{background:linear-gradient(135deg,#BF360C,#FF6B35);padding:10px;padding-top:60px}
+.g2-box{background:#fff;border-radius:20px;padding:20px;max-width:800px;width:100%}
+.g2-box h1{text-align:center;color:#BF360C;font-size:1.8em;margin-bottom:5px}
+.g2-sub{text-align:center;color:#E64A19;font-size:1em;margin-bottom:15px}
+.g2-topbar{display:flex;justify-content:space-between;background:#FBE9E7;border-radius:12px;padding:10px 15px;margin-bottom:15px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g2-topbar span{color:#BF360C;font-weight:bold}
+.g2-combo{font-size:1.3em;color:#FF6B35;font-weight:bold;text-align:center;min-height:30px;margin-bottom:8px}
+.g2-stage{display:flex;justify-content:center;margin-bottom:15px;min-height:90px;align-items:center}
+.g2-item-card{background:linear-gradient(135deg,#FF6B35,#BF360C);color:#fff;border-radius:20px;padding:15px 25px;text-align:center;font-size:1.8em;cursor:grab;user-select:none;box-shadow:0 8px 25px rgba(255,107,53,0.4);transition:all 0.3s;touch-action:none}
+.g2-item-card:active{cursor:grabbing;transform:scale(0.95)}
+.g2-cats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:15px}
+.g2-cat{border-radius:15px;padding:12px;text-align:center;min-height:100px;border:3px dashed #ccc;transition:all 0.3s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.g2-cat.drag-over{transform:scale(1.05);border-style:solid}
+.g2-cat.correct-drop{border-color:#4CAF50;background:#E8F5E9}
+.g2-cat.wrong-drop{border-color:#F44336;background:#FFEBEE;animation:shake 0.5s}
+.g2-cat-title{font-size:1.1em;font-weight:bold;margin-bottom:5px}
+.g2-cat-items{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+.g2-cat-chip{background:rgba(255,107,53,0.15);border-radius:8px;padding:3px 8px;font-size:0.9em}
+.g2-cat-fajr{border-color:#FF8A65;background:#FFF3E0}.g2-cat-fajr .g2-cat-title{color:#E64A19}
+.g2-cat-ghada{border-color:#66BB6A;background:#F1F8E9}.g2-cat-ghada .g2-cat-title{color:#2E7D32}
+.g2-cat-asha{border-color:#5C6BC0;background:#EDE7F6}.g2-cat-asha .g2-cat-title{color:#283593}
+
+/* ===== GAME 3: SENTENCE BUILDER ===== */
+.g3-bg{background:linear-gradient(135deg,#1A237E,#3F51B5);padding:10px;padding-top:60px}
+.g3-box{background:#fff;border-radius:20px;padding:20px;max-width:700px;width:100%}
+.g3-box h1{text-align:center;color:#1A237E;font-size:1.8em;margin-bottom:5px}
+.g3-sub{text-align:center;color:#3F51B5;font-size:1em;margin-bottom:15px}
+.g3-topbar{display:flex;justify-content:space-between;background:#E8EAF6;border-radius:12px;padding:10px 15px;margin-bottom:15px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g3-topbar span{color:#1A237E;font-weight:bold}
+.g3-pbar{width:100%;height:8px;background:#e0e0e0;border-radius:4px;margin-bottom:15px;overflow:hidden}
+.g3-pfill{height:100%;background:linear-gradient(90deg,#3F51B5,#9C27B0);border-radius:4px;transition:width 0.5s}
+.g3-emoji{text-align:center;font-size:4em;margin:10px 0}
+.g3-question{text-align:center;color:#3F51B5;font-size:0.9em;margin-bottom:12px;font-style:italic}
+.g3-built{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;min-height:55px;background:#E8EAF6;border-radius:15px;padding:10px;margin-bottom:15px;border:2px dashed #9FA8DA}
+.g3-built.complete{border-color:#4CAF50;background:#E8F5E9;animation:glow 0.8s}
+.g3-built.wrong{border-color:#F44336;background:#FFEBEE;animation:shake 0.5s}
+.g3-built-chip{background:linear-gradient(135deg,#3F51B5,#1A237E);color:#fff;border-radius:10px;padding:8px 14px;font-size:1.05em;cursor:pointer;transition:all 0.2s;font-weight:bold}
+.g3-built-chip:hover{opacity:0.8;transform:translateY(-1px)}
+.g3-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px;background:#E8EAF6;border-radius:15px}
+.g3-chip{background:#fff;border:2px solid #7986CB;color:#1A237E;border-radius:10px;padding:8px 14px;font-size:1.05em;cursor:pointer;transition:all 0.2s;font-weight:bold}
+.g3-chip:hover{background:#E8EAF6;transform:translateY(-2px);box-shadow:0 4px 12px rgba(63,81,181,0.3)}
+.g3-chip.used{opacity:0.25;pointer-events:none}
+
+/* ===== GAME 4: ODD ONE OUT ===== */
+.g4-bg{background:linear-gradient(135deg,#880E4F,#E91E63);padding:10px;padding-top:60px}
+.g4-box{background:#fff;border-radius:20px;padding:20px;max-width:650px;width:100%}
+.g4-box h1{text-align:center;color:#880E4F;font-size:1.8em;margin-bottom:5px}
+.g4-sub{text-align:center;color:#AD1457;font-size:1em;margin-bottom:15px}
+.g4-topbar{display:flex;justify-content:space-between;background:#FCE4EC;border-radius:12px;padding:10px 15px;margin-bottom:10px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g4-topbar span{color:#880E4F;font-weight:bold}
+.g4-timer-wrap{width:100%;height:10px;background:#e0e0e0;border-radius:5px;margin-bottom:15px;overflow:hidden}
+.g4-timer-bar{height:100%;background:#4CAF50;border-radius:5px;transition:width 0.05s linear,background 0.5s}
+.g4-category{text-align:center;color:#880E4F;font-size:1em;margin-bottom:12px;padding:8px;background:#FCE4EC;border-radius:10px;font-weight:bold}
+.g4-qnum{text-align:center;color:#AD1457;font-size:0.9em;margin-bottom:10px}
+.g4-opts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px}
+.g4-opt{background:#FCE4EC;border:3px solid #F48FB1;border-radius:15px;padding:18px 12px;text-align:center;cursor:pointer;font-size:1.05em;transition:all 0.3s;line-height:1.4}
+.g4-opt:hover{border-color:#E91E63;background:#F8BBD9;transform:translateY(-2px)}
+.g4-opt.correct{border-color:#4CAF50;background:#E8F5E9;color:#1B5E20}
+.g4-opt.wrong{border-color:#F44336;background:#FFEBEE;animation:shake 0.5s}
+.g4-opt.disabled{pointer-events:none;opacity:0.7}
+.g4-explain{text-align:center;padding:8px;border-radius:10px;font-size:0.9em;margin-top:5px;min-height:30px}
+
+/* ===== GAME 5: SPEED QUIZ ===== */
+.g5-bg{background:linear-gradient(135deg,#1B5E20,#4CAF50);padding:10px;padding-top:60px}
+.g5-box{background:#fff;border-radius:20px;padding:20px;max-width:650px;width:100%}
+.g5-box h1{text-align:center;color:#1B5E20;font-size:1.8em;margin-bottom:5px}
+.g5-sub{text-align:center;color:#2E7D32;font-size:1em;margin-bottom:15px}
+.g5-topbar{display:flex;justify-content:space-between;align-items:center;background:#E8F5E9;border-radius:12px;padding:10px 15px;margin-bottom:10px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g5-topbar span{color:#1B5E20;font-weight:bold}
+.g5-streak{font-size:1em;color:#FF9800;font-weight:bold}
+.g5-timer-wrap{width:100%;height:14px;background:#e0e0e0;border-radius:7px;margin-bottom:15px;overflow:hidden}
+.g5-timer-bar{height:100%;background:#4CAF50;border-radius:7px;transition:width 0.05s linear}
+.g5-level-badge{text-align:center;margin-bottom:10px}
+.g5-level-badge span{display:inline-block;background:#4CAF50;color:#fff;padding:4px 16px;border-radius:20px;font-size:0.9em}
+.g5-qcard{background:#F1F8E9;border:2px solid #A5D6A7;border-radius:15px;padding:20px;margin-bottom:15px;text-align:center}
+.g5-qcard .emoji{font-size:3.5em;display:block;margin-bottom:10px}
+.g5-qcard .qtext{font-size:1.2em;color:#1B5E20;line-height:1.7}
+.g5-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
+.g5-opt{background:#E8F5E9;border:3px solid #A5D6A7;border-radius:15px;padding:14px;text-align:center;cursor:pointer;font-size:1.05em;transition:all 0.3s}
+.g5-opt:hover{border-color:#4CAF50;background:#C8E6C9;transform:translateY(-2px)}
+.g5-opt.correct{border-color:#4CAF50;background:#C8E6C9;color:#1B5E20}
+.g5-opt.wrong{border-color:#F44336;background:#FFEBEE;animation:shake 0.5s}
+.g5-opt.disabled{pointer-events:none;opacity:0.7}
+.g5-multiplier{text-align:center;font-size:2em;margin:5px 0;min-height:40px;transition:all 0.3s}
+
+/* ===== GAME 6: JOURNEY ===== */
+.g6-bg{background:linear-gradient(135deg,#4A148C,#9C27B0);padding:10px;padding-top:60px}
+.g6-box{background:#fff;border-radius:20px;padding:20px;max-width:700px;width:100%}
+.g6-box h1{text-align:center;color:#4A148C;font-size:1.8em;margin-bottom:5px}
+.g6-sub{text-align:center;color:#7B1FA2;font-size:1em;margin-bottom:15px}
+.g6-topbar{display:flex;justify-content:space-between;background:#F3E5F5;border-radius:12px;padding:10px 15px;margin-bottom:15px;font-size:0.95em;flex-wrap:wrap;gap:5px}
+.g6-topbar span{color:#4A148C;font-weight:bold}
+.g6-road{position:relative;height:85px;background:#F3E5F5;border-radius:15px;margin-bottom:15px;display:flex;align-items:center;padding:0 15px}
+.g6-road-line{position:absolute;top:50%;left:5%;right:5%;height:4px;background:linear-gradient(90deg,#CE93D8,#9C27B0);border-radius:2px;transform:translateY(-50%)}
+.g6-nodes{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;padding:0 15px}
+.g6-node{width:50px;height:50px;border-radius:50%;background:#E1BEE7;border:3px solid #CE93D8;display:flex;align-items:center;justify-content:center;font-size:1.4em;transition:all 0.4s;z-index:2;position:relative}
+.g6-node.active{background:linear-gradient(135deg,#AB47BC,#7B1FA2);border-color:#4A148C;transform:scale(1.2);box-shadow:0 0 15px rgba(156,39,176,0.5)}
+.g6-node.done{background:#C8E6C9;border-color:#4CAF50}
+.g6-char{position:absolute;top:5px;font-size:1.6em;transition:right 0.8s cubic-bezier(0.25,0.46,0.45,0.94);z-index:3}
+.g6-loc-card{border-radius:15px;padding:20px;margin-bottom:15px;transition:all 0.4s}
+.g6-loc-title{font-size:1.2em;font-weight:bold;margin-bottom:15px;text-align:center;padding:8px;border-radius:10px}
+.g6-question{font-size:1.1em;line-height:1.8;margin-bottom:15px;color:#333;text-align:center;padding:10px;background:rgba(255,255,255,0.7);border-radius:10px}
+.g6-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.g6-opt{border:3px solid #CE93D8;border-radius:15px;padding:14px;text-align:center;cursor:pointer;font-size:1em;transition:all 0.3s;background:#fff;line-height:1.4}
+.g6-opt:hover{border-color:#9C27B0;background:#F3E5F5;transform:translateY(-2px)}
+.g6-opt.correct{border-color:#4CAF50;background:#E8F5E9;color:#1B5E20}
+.g6-opt.wrong{border-color:#F44336;background:#FFEBEE;animation:shake 0.5s}
+.g6-opt.disabled{pointer-events:none;opacity:0.7}
+.g6-progress{text-align:center;color:#7B1FA2;font-size:0.9em;margin-bottom:10px}
+
+/* ===== COMMON ===== */
+.feedback{text-align:center;font-size:1.2em;margin:10px 0;min-height:30px;font-weight:bold}
+.btn{color:#fff;border:none;padding:12px 30px;border-radius:25px;font-size:1.1em;cursor:pointer;transition:all 0.3s;margin:5px;font-family:inherit}
+.btn:hover{transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+.btn-area{text-align:center;margin-top:15px}
+.result-box{text-align:center;padding:30px}
+.result-box h2{font-size:2em;margin-bottom:10px}
+.result-box .big-score{font-size:4em;font-weight:bold;margin:15px 0}
+.result-box .stars{font-size:3em;margin:10px 0}
+.hidden{display:none}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes pop{0%{transform:scale(0.8)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{box-shadow:none}50%{box-shadow:0 0 20px rgba(76,175,80,0.6)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:600px){
+.menu-header h1{font-size:1.6em}.games-grid{grid-template-columns:1fr 1fr}
+.game-card{padding:15px 10px}.game-card .card-icon{font-size:2em}.game-card h3{font-size:1em}
+.g2-cats{grid-template-columns:1fr}.g4-opts,.g5-opts,.g6-opts{grid-template-columns:1fr}
+.g1-tile,.g1-slot{min-width:44px;height:44px;font-size:1.2em}
+}
+@media(max-width:400px){.games-grid{grid-template-columns:1fr}}
+</style>
+<script>
+// ── SES & KONUŞMA SİSTEMİ ──────────────────────────────────
+let _actx;
+function _ac() { if(!_actx) _actx = new (window.AudioContext||window.webkitAudioContext)(); return _actx; }
+
+function _tone(freq, dur, type='sine', vol=0.3, delay=0) {
+  try {
+    const c=_ac(), o=c.createOscillator(), g=c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.frequency.value=freq; o.type=type;
+    const t=c.currentTime+delay;
+    g.gain.setValueAtTime(vol,t);
+    g.gain.exponentialRampToValueAtTime(0.001,t+dur);
+    o.start(t); o.stop(t+dur);
+  } catch(e){}
+}
+
+function sesDoğru() {
+  _tone(523,0.1,'sine',0.3,0);
+  _tone(659,0.1,'sine',0.3,0.1);
+  _tone(784,0.25,'sine',0.3,0.2);
+  konuş(['أحسنت','ممتاز','رائع','بارك الله فيك'][Math.floor(Math.random()*4)]);
+}
+
+function sesYanlış() {
+  _tone(180,0.15,'sawtooth',0.25,0);
+  _tone(150,0.2,'sawtooth',0.2,0.15);
+  konuş(['حاول مرة أخرى','خطأ، حاول ثانية','لا بأس'][Math.floor(Math.random()*3)]);
+}
+
+function sesTıkla() {
+  _tone(900,0.04,'sine',0.12);
+}
+
+function sesBitir() {
+  [523,659,784,1047,1319].forEach((f,i)=>_tone(f,0.18,'sine',0.28,i*0.12));
+  setTimeout(()=>konuş('تهانينا! أحسنت'),200);
+}
+
+function sesBuzzer() {
+  _tone(220,0.4,'square',0.3);
+}
+
+function sesSayaç() {
+  _tone(1000,0.05,'sine',0.15);
+}
+
+function sesOyunBaşla() {
+  _tone(440,0.1,'sine',0.2,0);
+  _tone(550,0.1,'sine',0.2,0.1);
+  _tone(660,0.15,'sine',0.25,0.2);
+}
+
+let _arSes=null;
+if(typeof speechSynthesis!=="undefined") speechSynthesis.onvoiceschanged=()=>{_arSes=null;};
+function _arSesAl(){
+  if(_arSes) return _arSes;
+  const v=speechSynthesis.getVoices();
+  _arSes=v.find(x=>x.lang==='ar-SA')||v.find(x=>x.lang.startsWith('ar-'))||v.find(x=>x.lang.startsWith('ar'))||null;
+  return _arSes;
+}
+function konuş(metin, hız=0.85) {
+  if(!('speechSynthesis' in window)) return;
+  const ses=_arSesAl();
+  if(!ses) return; // Kaliteli Arapça ses yoksa sessiz kal
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(metin);
+  u.voice=ses; u.lang='ar-SA'; u.rate=hız; u.pitch=1.0; u.volume=0.95;
+  speechSynthesis.speak(u);
+}
+// ────────────────────────────────────────────────────────────
+</script>
+  <script src="/nav.js"></script>
+</head>
+<body>
+
+<!-- ==================== MENU ==================== -->
+<div id="menuScreen" class="menu-bg">
+<div class="menu-header">
+<div class="unit-badge">الوحدة الأولى - الصفّ السابع - المجموعة الثانية</div>
+<h1>ماذا فعلتُ اليوم؟ 🎮</h1>
+<p>ألعاب تعليمية جديدة - اختر لعبة للبدء</p>
+</div>
+<div class="menu-stats">
+<div class="menu-stat"><div class="val" id="menuTotal">0%</div><div class="lbl">المعدّل العامّ</div></div>
+<div class="menu-stat"><div class="val" id="menuDone">0/6</div><div class="lbl">مكتمل</div></div>
+</div>
+<div class="games-grid">
+<div class="game-card card1" onclick="startGame(1)">
+<div class="card-icon">🔤</div><h3>كلمات مقلوبة</h3>
+<p>رتّب الحروف لتكوين الكلمة الصحيحة</p>
+<div class="card-score" id="card1score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card1bar" style="width:0%"></div></div>
+</div>
+<div class="game-card card2" onclick="startGame(2)">
+<div class="card-icon">📂</div><h3>صنِّف الطعام</h3>
+<p>ضع كلّ طعام في وجبته الصحيحة</p>
+<div class="card-score" id="card2score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card2bar" style="width:0%"></div></div>
+</div>
+<div class="game-card card3" onclick="startGame(3)">
+<div class="card-icon">🏗️</div><h3>ابنِ الجملة</h3>
+<p>رتّب الكلمات لتكوين جملة صحيحة</p>
+<div class="card-score" id="card3score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card3bar" style="width:0%"></div></div>
+</div>
+<div class="game-card card4" onclick="startGame(4)">
+<div class="card-icon">🎯</div><h3>اقصف الخطأ</h3>
+<p>اختر الكلمة التي لا تنتمي للمجموعة</p>
+<div class="card-score" id="card4score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card4bar" style="width:0%"></div></div>
+</div>
+<div class="game-card card5" onclick="startGame(5)">
+<div class="card-icon">⏱️</div><h3>الوقت يضغط</h3>
+<p>أجب بسرعة واجمع نقاطًا أكثر</p>
+<div class="card-score" id="card5score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card5bar" style="width:0%"></div></div>
+</div>
+<div class="game-card card6" onclick="startGame(6)">
+<div class="card-icon">🗺️</div><h3>رحلة اليوم</h3>
+<p>سافر مع فاتح في يومه وأجب عن الأسئلة</p>
+<div class="card-score" id="card6score"></div>
+<div class="card-bar"><div class="card-bar-fill" id="card6bar" style="width:0%"></div></div>
+</div>
+</div>
+</div>
+
+<button class="back-btn hidden" id="backBtn" onclick="goMenu()">→ القائمة الرئيسية</button>
+
+<!-- ==================== GAME 1: SCRAMBLE ==================== -->
+<div id="game1" class="game-screen g1-bg">
+<div class="g1-box">
+<h1>🔤 كلمات مقلوبة</h1>
+<div class="g1-sub">رتِّب الحروف لتكوين الكلمة الصحيحة</div>
+<div id="g1game">
+<div class="g1-topbar">
+<span>النتيجة: <span id="g1score">0</span></span>
+<span>الكلمة: <span id="g1wnum">1</span>/15</span>
+<span>الجولة: <span id="g1rnd">1</span>/3</span>
+</div>
+<div class="g1-timer-wrap"><div class="g1-timer-bar" id="g1tbar" style="width:100%"></div></div>
+<div class="g1-hint" id="g1emoji"></div>
+<div class="g1-word-hint" id="g1whint"></div>
+<div class="g1-slots" id="g1slots"></div>
+<div id="g1fb" class="feedback"></div>
+<div class="g1-tiles" id="g1tiles"></div>
+<div class="btn-area">
+<button class="g1-hint-btn" onclick="g1UseHint()">💡 مساعدة (-5 نقاط)</button>
+</div>
+</div>
+<div id="g1result" class="result-box hidden">
+<h2 style="color:#00838F">🎉 أحسنت!</h2>
+<div class="stars" id="g1stars"></div>
+<div class="big-score" style="color:#00BCD4" id="g1final"></div>
+<div style="color:#00838F;margin-bottom:20px" id="g1msg"></div>
+<button class="btn" style="background:#00BCD4" onclick="g1Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== GAME 2: CATEGORY SORT ==================== -->
+<div id="game2" class="game-screen g2-bg">
+<div class="g2-box">
+<h1>📂 صنِّف الطعام</h1>
+<div class="g2-sub">اسحب كلّ طعام إلى وجبته الصحيحة</div>
+<div id="g2game">
+<div class="g2-topbar">
+<span>النتيجة: <span id="g2score">0</span></span>
+<span>المتبقي: <span id="g2left">15</span></span>
+<span>الصحيح: <span id="g2cor">0</span>/15</span>
+</div>
+<div class="g2-combo" id="g2combo"></div>
+<div class="g2-stage" id="g2stage"></div>
+<div class="g2-cats">
+<div class="g2-cat g2-cat-fajr" id="g2cat0" data-cat="0" ondragover="g2DragOver(event,this)" ondrop="g2Drop(event,this)" ondragleave="g2DragLeave(this)">
+<div class="g2-cat-title">🌅 الفَطور</div>
+<div class="g2-cat-items" id="g2cat0items"></div>
+</div>
+<div class="g2-cat g2-cat-ghada" id="g2cat1" data-cat="1" ondragover="g2DragOver(event,this)" ondrop="g2Drop(event,this)" ondragleave="g2DragLeave(this)">
+<div class="g2-cat-title">☀️ الغَداء</div>
+<div class="g2-cat-items" id="g2cat1items"></div>
+</div>
+<div class="g2-cat g2-cat-asha" id="g2cat2" data-cat="2" ondragover="g2DragOver(event,this)" ondrop="g2Drop(event,this)" ondragleave="g2DragLeave(this)">
+<div class="g2-cat-title">🌙 العَشاء</div>
+<div class="g2-cat-items" id="g2cat2items"></div>
+</div>
+</div>
+<div id="g2fb" class="feedback"></div>
+</div>
+<div id="g2result" class="result-box hidden">
+<h2 style="color:#BF360C">🎉 انتهى التصنيف!</h2>
+<div class="stars" id="g2stars"></div>
+<div class="big-score" style="color:#FF6B35" id="g2final"></div>
+<div style="color:#E64A19;margin-bottom:20px" id="g2msg"></div>
+<button class="btn" style="background:#FF6B35" onclick="g2Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== GAME 3: SENTENCE BUILDER ==================== -->
+<div id="game3" class="game-screen g3-bg">
+<div class="g3-box">
+<h1>🏗️ ابنِ الجملة</h1>
+<div class="g3-sub">اضغط على الكلمات بالترتيب الصحيح لبناء الجملة</div>
+<div id="g3game">
+<div class="g3-topbar">
+<span>النتيجة: <span id="g3score">0</span></span>
+<span>السؤال: <span id="g3qnum">1</span>/12</span>
+</div>
+<div class="g3-pbar"><div class="g3-pfill" id="g3prog" style="width:0%"></div></div>
+<div class="g3-emoji" id="g3emoji"></div>
+<div class="g3-question" id="g3quest">رتِّب الكلمات لتكوين الجملة الصحيحة</div>
+<div class="g3-built" id="g3built"></div>
+<div id="g3fb" class="feedback"></div>
+<div class="g3-pool" id="g3pool"></div>
+<div class="btn-area">
+<button class="btn" style="background:#F44336" onclick="g3Clear()">مسح ✕</button>
+</div>
+</div>
+<div id="g3result" class="result-box hidden">
+<h2 style="color:#1A237E">🎉 أحسنت!</h2>
+<div class="stars" id="g3stars"></div>
+<div class="big-score" style="color:#3F51B5" id="g3final"></div>
+<div style="color:#3F51B5;margin-bottom:20px" id="g3msg"></div>
+<button class="btn" style="background:#3F51B5" onclick="g3Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== GAME 4: ODD ONE OUT ==================== -->
+<div id="game4" class="game-screen g4-bg">
+<div class="g4-box">
+<h1>🎯 اقصف الخطأ</h1>
+<div class="g4-sub">اختر الكلمة التي لا تنتمي للمجموعة قبل انتهاء الوقت</div>
+<div id="g4game">
+<div class="g4-topbar">
+<span>النتيجة: <span id="g4score">0</span></span>
+<span>السؤال: <span id="g4qnum">1</span>/15</span>
+</div>
+<div class="g4-timer-wrap"><div class="g4-timer-bar" id="g4tbar" style="width:100%"></div></div>
+<div class="g4-category" id="g4cat"></div>
+<div class="g4-opts" id="g4opts"></div>
+<div id="g4fb" class="feedback"></div>
+<div class="g4-explain" id="g4explain"></div>
+</div>
+<div id="g4result" class="result-box hidden">
+<h2 style="color:#880E4F">🎉 انتهت اللعبة!</h2>
+<div class="stars" id="g4stars"></div>
+<div class="big-score" style="color:#E91E63" id="g4final"></div>
+<div style="color:#AD1457;margin-bottom:20px" id="g4msg"></div>
+<button class="btn" style="background:#E91E63" onclick="g4Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== GAME 5: SPEED QUIZ ==================== -->
+<div id="game5" class="game-screen g5-bg">
+<div class="g5-box">
+<h1>⏱️ الوقت يضغط</h1>
+<div class="g5-sub">أجب بسرعة واجمع نقاطًا أكثر!</div>
+<div id="g5game">
+<div class="g5-topbar">
+<span>النتيجة: <span id="g5score">0</span></span>
+<span class="g5-streak" id="g5streak"></span>
+<span>السؤال: <span id="g5qnum">1</span>/15</span>
+</div>
+<div class="g5-timer-wrap"><div class="g5-timer-bar" id="g5tbar" style="width:100%"></div></div>
+<div class="g5-multiplier" id="g5multi"></div>
+<div class="g5-level-badge"><span id="g5level">المستوى الأول 🟢</span></div>
+<div class="g5-qcard" id="g5qcard"></div>
+<div id="g5fb" class="feedback"></div>
+<div class="g5-opts" id="g5opts"></div>
+</div>
+<div id="g5result" class="result-box hidden">
+<h2 style="color:#1B5E20">🎉 أحسنت!</h2>
+<div class="stars" id="g5stars"></div>
+<div class="big-score" style="color:#4CAF50" id="g5final"></div>
+<div style="color:#2E7D32;margin-bottom:20px" id="g5msg"></div>
+<button class="btn" style="background:#4CAF50" onclick="g5Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== GAME 6: JOURNEY ==================== -->
+<div id="game6" class="game-screen g6-bg">
+<div class="g6-box">
+<h1>🗺️ رحلة اليوم</h1>
+<div class="g6-sub">سافر مع فاتح وأجب عن الأسئلة في كلّ محطّة</div>
+<div id="g6game">
+<div class="g6-topbar">
+<span>النتيجة: <span id="g6score">0</span></span>
+<span>المحطّة: <span id="g6locnum">1</span>/5</span>
+<span>الصحيح: <span id="g6cor">0</span>/12</span>
+</div>
+<div class="g6-road" id="g6road">
+<div class="g6-road-line"></div>
+<div class="g6-nodes" id="g6nodes"></div>
+<div class="g6-char" id="g6char">👦</div>
+</div>
+<div id="g6loccard" class="g6-loc-card"></div>
+<div id="g6fb" class="feedback"></div>
+<div class="g6-progress" id="g6progress"></div>
+</div>
+<div id="g6result" class="result-box hidden">
+<h2 style="color:#4A148C">🎉 انتهت الرحلة!</h2>
+<div class="stars" id="g6stars"></div>
+<div class="big-score" style="color:#9C27B0" id="g6final"></div>
+<div style="color:#7B1FA2;margin-bottom:20px" id="g6msg"></div>
+<button class="btn" style="background:#9C27B0" onclick="g6Init()">إعادة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+</div>
+</div>
+</div>
+
+<script>
+/* ===== SCORM 1.2 ===== */
+var SCORM=(function(){
+var api=null,ini=false;
+function find(w){var a=0;if(w.opener&&w.opener!==w){var o=find(w.opener);if(o)return o}while(!w.API&&w.parent&&w.parent!==w&&a<500){a++;w=w.parent}return w.API||null}
+function get(){if(!api)api=find(window);return api}
+return{
+init:function(){var a=get();if(!a)return false;var r=a.LMSInitialize('');if(r==='true'||r===true){ini=true;a.LMSSetValue('cmi.core.lesson_status','incomplete');a.LMSCommit('');return true}return false},
+done:function(s){var a=get();if(!a||!ini)return;a.LMSSetValue('cmi.core.score.raw',String(s));a.LMSSetValue('cmi.core.score.min','0');a.LMSSetValue('cmi.core.score.max','100');a.LMSSetValue('cmi.core.lesson_status',s>=70?'passed':'failed');a.LMSCommit('')},
+fin:function(){var a=get();if(!a||!ini)return;a.LMSCommit('');a.LMSFinish('');ini=false}
+};
+})();
+SCORM.init();
+
+/* ===== GLOBAL ===== */
+var scores={1:null,2:null,3:null,4:null,5:null,6:null};
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function updateMenu(){
+var done=0,total=0;
+for(var k=1;k<=6;k++){var s=scores[k];var el=document.getElementById('card'+k+'score');var bar=document.getElementById('card'+k+'bar');
+if(s!==null){done++;total+=s;el.innerHTML='<span class="done">'+s+'%</span>';bar.style.width=s+'%'}else{el.textContent='';bar.style.width='0%'}}
+document.getElementById('menuDone').textContent=done+'/6';
+document.getElementById('menuTotal').textContent=done>0?Math.round(total/done)+'%':'0%';
+if(done===6)SCORM.done(Math.round(total/6));
+}
+function startGame(n){
+document.getElementById('menuScreen').style.display='none';
+document.getElementById('game'+n).classList.add('active');
+document.getElementById('backBtn').classList.remove('hidden');
+sesOyunBaşla();
+window['g'+n+'Init']();window.scrollTo(0,0);
+}
+function goMenu(){
+for(var i=1;i<=6;i++)document.getElementById('game'+i).classList.remove('active');
+document.getElementById('menuScreen').style.display='';
+document.getElementById('backBtn').classList.add('hidden');
+clearAllTimers();updateMenu();window.scrollTo(0,0);
+}
+function endGame(n,sc){scores[n]=sc}
+var allTimers=[];
+function safeInterval(fn,ms){var id=setInterval(fn,ms);allTimers.push(id);return id}
+function safeTimeout(fn,ms){var id=setTimeout(fn,ms);allTimers.push(id);return id}
+function clearAllTimers(){allTimers.forEach(function(id){clearInterval(id);clearTimeout(id)});allTimers=[]}
+function stars(s){return s>=90?'⭐⭐⭐':s>=70?'⭐⭐':'⭐'}
+function msg(s){return s>=90?'ممتاز! 🏆':s>=70?'جيد جدًّا! 👍':'حاول مرّة أخرى! 💪'}
+function splitArabic(word){var m=word.match(/[\u0600-\u06FF\u0621-\u063A\u0641-\u064A][\u064B-\u065F\u0670]*/g);return m||[]}
+
+/* ============================================================
+   GAME 1: WORD SCRAMBLE - كلمات مقلوبة
+   ============================================================ */
+var g1Data=[
+{w:'خُبْز',e:'🍞',hint:'طعام من القمح'},
+{w:'جُبْن',e:'🧀',hint:'طعام أبيض من الحليب'},
+{w:'أُرُز',e:'🍚',hint:'حبوب بيضاء'},
+{w:'عَسَل',e:'🍯',hint:'حلو من النحل'},
+{w:'شاي',e:'🍵',hint:'مشروب ساخن'},
+{w:'دَجاج',e:'🍗',hint:'لحم طائر'},
+{w:'لَحْم',e:'🥩',hint:'من البقر أو الغنم'},
+{w:'سَمَك',e:'🐟',hint:'حيوان من البحر'},
+{w:'بَيْض',e:'🥚',hint:'من الدجاجة'},
+{w:'زُبْدَة',e:'🧈',hint:'دهن أصفر من الحليب'},
+{w:'كُفْتَة',e:'🧆',hint:'طعام مشوي من اللحم المفروم'},
+{w:'حَساء',e:'🍲',hint:'طعام سائل ساخن'},
+{w:'حَلِيب',e:'🥛',hint:'مشروب أبيض من الأبقار'},
+{w:'قَهْوَة',e:'☕',hint:'مشروب بنّي ساخن'},
+{w:'عَصِير',e:'🧃',hint:'مشروب من الفواكه'}
+];
+var g1Sets,g1Cur,g1Sc,g1WNum,g1Timer,g1TimeLeft,g1MaxT=20000,g1Slots,g1Tiles,g1HintUsed;
+
+function g1Init(){
+document.getElementById('g1game').classList.remove('hidden');
+document.getElementById('g1result').classList.add('hidden');
+g1Sc=0;g1WNum=0;
+var sh=shuffle([].concat(g1Data));
+g1Sets=[sh.slice(0,5),sh.slice(5,10),sh.slice(10,15)];
+document.getElementById('g1score').textContent=0;
+g1LoadWord();
+}
+
+function g1LoadWord(){
+clearInterval(g1Timer);
+var setIdx=Math.floor(g1WNum/5);
+var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+document.getElementById('g1wnum').textContent=g1WNum+1;
+document.getElementById('g1rnd').textContent=setIdx+1;
+document.getElementById('g1emoji').textContent=item.e;
+document.getElementById('g1whint').textContent=item.hint;
+document.getElementById('g1fb').textContent='';
+g1HintUsed=false;
+// Split word into characters
+var chars=splitArabic(item.w);
+if(!chars||chars.length===0)chars=item.w.split('');
+g1Slots=new Array(chars.length).fill(null);
+g1Tiles=shuffle([].concat(chars));
+g1RenderSlots(chars.length);
+g1RenderTiles();
+// Timer
+g1TimeLeft=g1MaxT;
+var start=Date.now();
+g1Timer=safeInterval(function(){
+var el=Date.now()-start;
+g1TimeLeft=Math.max(0,g1MaxT-el);
+var pct=g1TimeLeft/g1MaxT*100;
+var bar=document.getElementById('g1tbar');
+bar.style.width=pct+'%';
+bar.style.background=pct>60?'#4CAF50':pct>30?'#FF9800':'#F44336';
+if(g1TimeLeft===0){clearInterval(g1Timer);g1NextWord(false)}
+},50);
+}
+
+function g1RenderSlots(n){
+var el=document.getElementById('g1slots');el.innerHTML='';
+for(var i=0;i<n;i++){
+var s=document.createElement('div');s.className='g1-slot';s.dataset.idx=i;
+s.textContent=g1Slots[i]||'';
+if(g1Slots[i])s.classList.add('filled');
+s.addEventListener('click',(function(idx){return function(){g1RemoveFromSlot(idx)}})(i));
+el.appendChild(s);
+}
+}
+
+function g1RenderTiles(){
+var el=document.getElementById('g1tiles');el.innerHTML='';
+var setIdx=Math.floor(g1WNum/5);var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('');
+g1Tiles.forEach(function(ch,i){
+var t=document.createElement('div');t.className='g1-tile';t.textContent=ch;t.dataset.tileidx=i;
+var usedCount=g1Slots.filter(function(s){return s===ch}).length;
+var charCount=chars.filter(function(c){return c===ch}).length;
+if(usedCount>=charCount)t.classList.add('used');
+t.addEventListener('click',function(){g1PlaceTile(ch,i)});
+el.appendChild(t);
+});
+}
+
+function g1PlaceTile(ch,tileIdx){
+sesTıkla();
+// Find first empty slot
+var firstEmpty=-1;
+for(var i=0;i<g1Slots.length;i++){if(g1Slots[i]===null){firstEmpty=i;break}}
+if(firstEmpty===-1)return;
+g1Slots[firstEmpty]=ch;
+var setIdx=Math.floor(g1WNum/5);var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('');
+g1RenderSlots(chars.length);
+g1RenderTiles();
+// Check if all slots filled
+if(g1Slots.indexOf(null)===-1)g1CheckWord();
+}
+
+function g1RemoveFromSlot(idx){
+if(g1Slots[idx]===null)return;
+g1Slots[idx]=null;
+var setIdx=Math.floor(g1WNum/5);var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('');
+g1RenderSlots(chars.length);
+g1RenderTiles();
+}
+
+function g1CheckWord(){
+var setIdx=Math.floor(g1WNum/5);var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('');
+var correct=g1Slots.every(function(ch,i){return ch===chars[i]});
+if(correct){
+clearInterval(g1Timer);
+sesDoğru();
+// Mark slots green
+var slotEls=document.getElementById('g1slots').querySelectorAll('.g1-slot');
+slotEls.forEach(function(s){s.classList.add('correct')});
+var bonus=Math.round(g1TimeLeft/g1MaxT*5);
+var pts=10+(g1HintUsed?0:bonus);
+g1Sc+=pts;
+document.getElementById('g1score').textContent=g1Sc;
+document.getElementById('g1fb').innerHTML='✅ صحيح! <span style="color:#FF9800">+'+pts+'</span>';
+safeTimeout(function(){g1NextWord(true)},900);
+}else{
+sesYanlış();
+var slotEls=document.getElementById('g1slots').querySelectorAll('.g1-slot');
+slotEls.forEach(function(s){s.classList.add('wrong')});
+document.getElementById('g1fb').textContent='❌ حاول مرّة أخرى';
+safeTimeout(function(){
+g1Slots=new Array(chars.length).fill(null);
+g1RenderSlots(chars.length);g1RenderTiles();
+slotEls.forEach(function(s){s.classList.remove('wrong')});
+document.getElementById('g1fb').textContent='';
+},700);
+}
+}
+
+function g1NextWord(won){
+g1WNum++;
+if(g1WNum>=15)g1End();
+else g1LoadWord();
+}
+
+function g1UseHint(){
+if(g1HintUsed)return;
+g1HintUsed=true;
+g1Sc=Math.max(0,g1Sc-5);
+document.getElementById('g1score').textContent=g1Sc;
+var setIdx=Math.floor(g1WNum/5);var wordIdx=g1WNum%5;
+var item=g1Sets[setIdx][wordIdx];
+var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('');
+// Place first char
+if(g1Slots[0]===null){
+g1Slots[0]=chars[0];
+g1RenderSlots(chars.length);g1RenderTiles();
+document.getElementById('g1fb').textContent='💡 أُعطيت الحرف الأوّل';
+}
+}
+
+function g1End(){
+clearInterval(g1Timer);
+sesBitir();
+var fs=Math.min(100,g1Sc);
+document.getElementById('g1game').classList.add('hidden');
+document.getElementById('g1result').classList.remove('hidden');
+document.getElementById('g1final').textContent=fs+'%';
+document.getElementById('g1stars').textContent=stars(fs);
+document.getElementById('g1msg').textContent=msg(fs);
+endGame(1,fs);
+}
+
+/* ============================================================
+   GAME 2: CATEGORY SORT - صنّف الطعام
+   ============================================================ */
+var g2Items=[
+{w:'خُبْز',e:'🍞',cat:0},{w:'جُبْن',e:'🧀',cat:0},{w:'زَيْتون',e:'🫒',cat:0},{w:'عَسَل',e:'🍯',cat:0},{w:'حَلِيب',e:'🥛',cat:0},
+{w:'أُرُز',e:'🍚',cat:1},{w:'دَجاج',e:'🍗',cat:1},{w:'لَحْم',e:'🥩',cat:1},{w:'كُفْتَة',e:'🧆',cat:1},{w:'حَساء',e:'🍲',cat:1},
+{w:'سَمَك',e:'🐟',cat:2},{w:'شاي',e:'🍵',cat:2},{w:'قَهْوَة',e:'☕',cat:2},{w:'عَصِير',e:'🧃',cat:2},{w:'زُبْدَة',e:'🧈',cat:2}
+];
+var g2Queue,g2CurIdx,g2Sc,g2Cor,g2Combo,g2DragItem;
+
+function g2Init(){
+document.getElementById('g2game').classList.remove('hidden');
+document.getElementById('g2result').classList.add('hidden');
+g2Sc=0;g2Cor=0;g2Combo=0;g2CurIdx=0;
+g2Queue=shuffle([].concat(g2Items));
+[0,1,2].forEach(function(i){document.getElementById('g2cat'+i+'items').innerHTML=''});
+document.getElementById('g2score').textContent=0;
+document.getElementById('g2cor').textContent=0;
+document.getElementById('g2combo').textContent='';
+document.getElementById('g2fb').textContent='';
+g2ShowNext();
+}
+
+function g2ShowNext(){
+document.getElementById('g2left').textContent=g2Queue.length-g2CurIdx;
+if(g2CurIdx>=g2Queue.length){g2End();return}
+var item=g2Queue[g2CurIdx];
+var stage=document.getElementById('g2stage');
+stage.innerHTML='';
+var card=document.createElement('div');
+card.className='g2-item-card';card.id='g2card';
+card.innerHTML='<div>'+item.e+'</div><div style="font-size:0.6em;margin-top:5px">'+item.w+'</div>';
+card.draggable=true;
+card.addEventListener('dragstart',function(e){e.dataTransfer.setData('text','current');g2DragItem=item});
+// Touch support
+var touchStartY,touchStartX;
+card.addEventListener('touchstart',function(e){var t=e.touches[0];touchStartX=t.clientX;touchStartY=t.clientY;g2DragItem=item},{passive:true});
+card.addEventListener('touchend',function(e){
+var t=e.changedTouches[0];
+var el=document.elementFromPoint(t.clientX,t.clientY);
+while(el&&!el.dataset.cat)el=el.parentElement;
+if(el&&el.dataset.cat!==undefined)g2HandleDrop(parseInt(el.dataset.cat),item);
+},{passive:true});
+stage.appendChild(card);
+}
+
+function g2DragOver(e,el){e.preventDefault();el.classList.add('drag-over')}
+function g2DragLeave(el){el.classList.remove('drag-over')}
+function g2Drop(e,el){e.preventDefault();el.classList.remove('drag-over');var cat=parseInt(el.dataset.cat);g2HandleDrop(cat,g2DragItem)}
+
+function g2HandleDrop(cat,item){
+if(!item)return;
+var correct=item.cat===cat;
+var catEl=document.getElementById('g2cat'+cat);
+if(correct){
+sesDoğru();
+g2Cor++;g2Combo++;
+var pts=g2Combo>=3?15:10;
+g2Sc+=pts;
+document.getElementById('g2score').textContent=g2Sc;
+document.getElementById('g2cor').textContent=g2Cor;
+catEl.classList.add('correct-drop');
+safeTimeout(function(){catEl.classList.remove('correct-drop')},600);
+if(g2Combo>=3)document.getElementById('g2combo').textContent='🔥 تتابع ×'+g2Combo+' +'+pts+'!';
+else document.getElementById('g2combo').textContent='';
+// Add chip to cat
+var chip=document.createElement('div');chip.className='g2-cat-chip';chip.textContent=item.e+item.w;
+document.getElementById('g2cat'+cat+'items').appendChild(chip);
+document.getElementById('g2fb').innerHTML='✅ صحيح!';
+document.getElementById('g2fb').style.color='#4CAF50';
+g2CurIdx++;
+safeTimeout(function(){document.getElementById('g2fb').textContent='';g2ShowNext()},700);
+}else{
+sesYanlış();
+g2Combo=0;document.getElementById('g2combo').textContent='';
+catEl.classList.add('wrong-drop');
+safeTimeout(function(){catEl.classList.remove('wrong-drop')},600);
+document.getElementById('g2fb').textContent='❌ حاول مرّة أخرى!';
+document.getElementById('g2fb').style.color='#F44336';
+safeTimeout(function(){document.getElementById('g2fb').textContent=''},1000);
+}
+g2DragItem=null;
+}
+
+function g2End(){
+sesBitir();
+var fs=Math.round(g2Cor/15*100);
+document.getElementById('g2game').classList.add('hidden');
+document.getElementById('g2result').classList.remove('hidden');
+document.getElementById('g2final').textContent=fs+'%';
+document.getElementById('g2stars').textContent=stars(fs);
+document.getElementById('g2msg').textContent=msg(fs);
+endGame(2,fs);
+}
+
+/* ============================================================
+   GAME 3: SENTENCE BUILDER - ابنِ الجملة
+   ============================================================ */
+var g3Qs=[
+{e:'⏰',q:'فعل أول شيء في الصباح',correct:['أَسْتَيْقِظُ','في','الصَّباحِ','مُبَكِّرًا'],extra:['مَساءً','أَنامُ']},
+{e:'🕌',q:'النشاط بعد الاستيقاظ',correct:['أَتَوَضَّأُ','ثُمَّ','أُصَلِّي','الفَجْرَ'],extra:['العِشاءَ','أَنامُ']},
+{e:'🍳',q:'تناوُل الفطور',correct:['أَتَناوَلُ','الفَطورَ','مَعَ','عائِلَتي'],extra:['وَحْدي','الغَداءَ']},
+{e:'👔',q:'الذهاب للمدرسة',correct:['أَلْبَسُ','مَلابِسي','وَأَذْهَبُ','إِلى','المَدْرَسَة'],extra:['البَيْت']},
+{e:'🏠',q:'العودة من المدرسة',correct:['أَرْجِعُ','إِلى','البَيْتِ','ظُهْرًا'],extra:['مَساءً','المَدْرَسَة']},
+{e:'🤝',q:'مساعدة الأم',correct:['أُساعِدُ','أُمِّي','في','البَيْت'],extra:['المَدْرَسَة','أَبي']},
+{e:'📚',q:'الدراسة في المساء',correct:['أَدْرُسُ','دُروسي','مَساءً'],extra:['صَباحًا','أَلعَبُ']},
+{e:'🌙',q:'نهاية اليوم',correct:['أُصَلِّي','العِشاءَ','ثُمَّ','أَنامُ','لَيْلًا'],extra:['صَباحًا']},
+{e:'🍽️',q:'وجبة الفطور',correct:['آكُلُ','العَسَلَ','وَالزُبْدَةَ','في','الفَطور'],extra:['العَشاء','السَمَك']},
+{e:'🍗',q:'وجبة فاتح',correct:['يَتَناوَلُ','فاتِح','الدَجاجَ','وَالأُرُزَ'],extra:['السَمَكَ','زَيْنَب']},
+{e:'👩',q:'هي في الصباح',correct:['هِيَ','تَسْتَيْقِظُ','مُبَكِّرًا','في','الصَباح'],extra:['لَيْلًا','هُوَ']},
+{e:'📖',q:'أنتِ في المساء',correct:['أَنْتِ','تَدْرُسِينَ','دُروسَكِ','مَساءً'],extra:['صَباحًا','تَدْرُسُ']}
+];
+var g3Cur,g3Sc,g3Built,g3Chips,g3Mistakes;
+
+function g3Init(){
+document.getElementById('g3game').classList.remove('hidden');
+document.getElementById('g3result').classList.add('hidden');
+g3Cur=0;g3Sc=0;g3Mistakes=0;
+document.getElementById('g3score').textContent=0;
+g3LoadQ();
+}
+
+function g3LoadQ(){
+var q=g3Qs[g3Cur];
+g3Built=[];
+g3Chips=shuffle([].concat(q.correct).concat(q.extra));
+document.getElementById('g3qnum').textContent=g3Cur+1;
+document.getElementById('g3prog').style.width=(g3Cur/12*100)+'%';
+document.getElementById('g3emoji').textContent=q.e;
+document.getElementById('g3quest').textContent=q.q;
+document.getElementById('g3fb').textContent='';
+g3RenderBuilt();g3RenderPool();
+}
+
+function g3RenderBuilt(){
+var el=document.getElementById('g3built');el.innerHTML='';
+el.className='g3-built';
+g3Built.forEach(function(w,i){
+var c=document.createElement('div');c.className='g3-built-chip';c.textContent=w;
+c.addEventListener('click',function(){g3RemoveWord(i)});
+el.appendChild(c);
+});
+}
+
+function g3RenderPool(){
+var el=document.getElementById('g3pool');el.innerHTML='';
+g3Chips.forEach(function(w,i){
+var c=document.createElement('div');c.className='g3-chip';c.textContent=w;c.dataset.idx=i;
+var inBuilt=g3Built.filter(function(b){return b===w}).length;
+var inChips=g3Chips.filter(function(ch){return ch===w}).length;
+if(inBuilt>=inChips)c.classList.add('used');
+c.addEventListener('click',function(){g3AddWord(w,i)});
+el.appendChild(c);
+});
+}
+
+function g3AddWord(w){
+g3Built.push(w);
+g3RenderBuilt();g3RenderPool();
+// Auto-check when built length matches correct length
+var q=g3Qs[g3Cur];
+if(g3Built.length===q.correct.length)safeTimeout(g3Check,300);
+}
+
+function g3RemoveWord(idx){
+g3Built.splice(idx,1);
+g3RenderBuilt();g3RenderPool();
+}
+
+function g3Clear(){g3Built=[];g3RenderBuilt();g3RenderPool()}
+
+function g3Check(){
+var q=g3Qs[g3Cur];
+var correct=g3Built.length===q.correct.length&&g3Built.every(function(w,i){return w===q.correct[i]});
+if(correct){
+sesDoğru();
+document.getElementById('g3built').classList.add('complete');
+var pts=g3Mistakes===0?10:g3Mistakes===1?7:5;
+g3Sc+=pts;
+document.getElementById('g3score').textContent=g3Sc;
+document.getElementById('g3fb').innerHTML='✅ ممتاز! +'+pts+' نقاط';
+document.getElementById('g3fb').style.color='#4CAF50';
+safeTimeout(function(){
+document.getElementById('g3built').classList.remove('complete');
+g3Cur++;g3Mistakes=0;
+if(g3Cur>=12)g3End();else g3LoadQ();
+},1000);
+}else{
+sesYanlış();
+g3Mistakes++;
+document.getElementById('g3built').classList.add('wrong');
+document.getElementById('g3fb').textContent='❌ الترتيب غير صحيح، حاول مرّة أخرى';
+document.getElementById('g3fb').style.color='#F44336';
+safeTimeout(function(){
+document.getElementById('g3built').classList.remove('wrong');
+g3Built=[];g3RenderBuilt();g3RenderPool();
+document.getElementById('g3fb').textContent='';
+},800);
+}
+}
+
+function g3End(){
+sesBitir();
+var fs=Math.min(100,Math.round(g3Sc/120*100));
+document.getElementById('g3game').classList.add('hidden');
+document.getElementById('g3result').classList.remove('hidden');
+document.getElementById('g3final').textContent=fs+'%';
+document.getElementById('g3stars').textContent=stars(fs);
+document.getElementById('g3msg').textContent=msg(fs);
+endGame(3,fs);
+}
+
+/* ============================================================
+   GAME 4: ODD ONE OUT - اقصف الخطأ
+   ============================================================ */
+var g4All=[
+{cat:'أطعمة الفطور',opts:['خُبْز','جُبْن','عَسَل','سَمَك'],odd:3,explain:'السمك طعام العشاء'},
+{cat:'أنشطة المساء',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَتَناوَلُ الفَطور'],odd:3,explain:'الفطور في الصباح'},
+{cat:'أفعال هُوَ',opts:['يَسْتَيْقِظُ','يُصَلِّي','يَذْهَبُ','تَسْتَيْقِظُ'],odd:3,explain:'تستيقظ = هِيَ / أنتَ'},
+{cat:'المشروبات',opts:['شاي','حَلِيب','عَصِير','دَجاج'],odd:3,explain:'الدجاج طعام وليس مشروبًا'},
+{cat:'أفعال أَنْتِ',opts:['تَدْرُسِينَ','تُساعِدِينَ','تَنامِينَ','تَذْهَبُ'],odd:3,explain:'تذهبُ = أنتَ، وليس أنتِ'},
+{cat:'أنشطة الصباح',opts:['أَسْتَيْقِظُ','أَتَوَضَّأُ','أَتَناوَلُ الفَطور','أَنامُ'],odd:3,explain:'النوم في الليل'},
+{cat:'أدوات المائدة',opts:['شَوْكَة','سِكِّين','مِلْعَقَة','حَلِيب'],odd:3,explain:'الحليب مشروب وليس أداة'},
+{cat:'أفعال هِيَ',opts:['تَسْتَيْقِظُ','تُصَلِّي','يَسْتَيْقِظُ','تَتَناوَلُ'],odd:2,explain:'يستيقظُ = هُوَ'},
+{cat:'أطعمة الغداء',opts:['أُرُز','دَجاج','كُفْتَة','خُبْز'],odd:3,explain:'الخبز طعام الفطور'},
+{cat:'أنشطة الليل',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَلْبَسُ مَلابِسي'],odd:3,explain:'لبس الملابس في الصباح'},
+{cat:'أفعال أَنْتَ',opts:['تَذْهَبُ','تَرْجِعُ','تُساعِدُ','تَدْرُسِينَ'],odd:3,explain:'تدرسين = أنتِ'},
+{cat:'الأطعمة',opts:['خُبْز','عَسَل','جُبْن','مِلْعَقَة'],odd:3,explain:'الملعقة أداة وليست طعامًا'},
+{cat:'ظروف الزمان',opts:['صَباحًا','مُبَكِّرًا','في الصَباح','لَيْلًا'],odd:3,explain:'ليلًا عكس الصباح'},
+{cat:'أفعال يَشرَب',opts:['يَشْرَبُ','تَشْرَبُ','تَشْرَبِينَ','يَأكُلُ'],odd:3,explain:'يأكل = فعل مختلف'},
+{cat:'تصريف "يذهب"',opts:['يَذْهَبُ','تَذْهَبُ','تَذْهَبِينَ','أَذْهَبُ'],odd:3,explain:'أذهب = أنا، وليس غائبًا'}
+];
+var g4Qs,g4Cur,g4Sc,g4Timer4;
+var G4_TIME=8000;
+
+function g4Init(){
+document.getElementById('g4game').classList.remove('hidden');
+document.getElementById('g4result').classList.add('hidden');
+g4Sc=0;g4Cur=0;
+g4Qs=shuffle([].concat(g4All)).slice(0,15);
+document.getElementById('g4score').textContent=0;
+g4LoadQ();
+}
+
+function g4LoadQ(){
+clearInterval(g4Timer4);
+var q=g4Qs[g4Cur];
+document.getElementById('g4qnum').textContent=g4Cur+1;
+document.getElementById('g4cat').textContent='المجموعة: '+q.cat;
+document.getElementById('g4fb').textContent='';
+document.getElementById('g4explain').textContent='';
+var optsEl=document.getElementById('g4opts');optsEl.innerHTML='';
+q.opts.forEach(function(o,i){
+var b=document.createElement('div');b.className='g4-opt';b.textContent=o;
+b.addEventListener('click',function(){g4Answer(i,b)});
+optsEl.appendChild(b);
+});
+// Timer
+var start=Date.now();
+g4Timer4=safeInterval(function(){
+var el=Date.now()-start;
+var left=Math.max(0,G4_TIME-el);
+var pct=left/G4_TIME*100;
+var bar=document.getElementById('g4tbar');
+bar.style.width=pct+'%';
+bar.style.background=pct>60?'#4CAF50':pct>30?'#FF9800':'#F44336';
+if(left===0){clearInterval(g4Timer4);g4Answer(-1,null)}
+},50);
+}
+
+function g4Answer(idx,btn){
+clearInterval(g4Timer4);
+var q=g4Qs[g4Cur];
+document.querySelectorAll('.g4-opt').forEach(function(b){b.classList.add('disabled')});
+document.getElementById('g4tbar').style.width='0%';
+if(idx===q.odd){
+sesDoğru();
+if(btn)btn.classList.add('correct');
+var timeLeft=parseInt(document.getElementById('g4tbar').style.width||'0');
+g4Sc+=10;
+document.getElementById('g4score').textContent=g4Sc;
+document.getElementById('g4fb').textContent='✅ صحيح!';
+document.getElementById('g4fb').style.color='#4CAF50';
+}else{
+sesYanlış();
+if(btn)btn.classList.add('wrong');
+var correctBtn=document.querySelectorAll('.g4-opt')[q.odd];
+if(correctBtn)correctBtn.classList.add('correct');
+document.getElementById('g4fb').textContent=idx===-1?'⏰ انتهى الوقت':'❌ خطأ';
+document.getElementById('g4fb').style.color='#F44336';
+document.getElementById('g4explain').textContent='💡 '+q.explain;
+document.getElementById('g4explain').style.color='#880E4F';
+}
+g4Cur++;
+if(g4Cur<15)safeTimeout(g4LoadQ,1800);
+else safeTimeout(g4End,1800);
+}
+
+function g4End(){
+sesBitir();
+var fs=Math.round(g4Sc/150*100);
+document.getElementById('g4game').classList.add('hidden');
+document.getElementById('g4result').classList.remove('hidden');
+document.getElementById('g4final').textContent=fs+'%';
+document.getElementById('g4stars').textContent=stars(fs);
+document.getElementById('g4msg').textContent=msg(fs);
+endGame(4,fs);
+}
+
+/* ============================================================
+   GAME 5: SPEED QUIZ - الوقت يضغط
+   ============================================================ */
+var g5Levels=[
+{label:'المستوى الأول 🟢',time:10000,qs:[
+{type:'vocab',emoji:'🍞',q:'ما هذا الطعام؟',opts:['خُبْز','جُبْن','شاي','أُرُز'],ans:0},
+{type:'vocab',emoji:'🧀',q:'ما هذا؟',opts:['جُبْن','خُبْز','سَمَك','بَيْض'],ans:0},
+{type:'vocab',emoji:'🍯',q:'ما هذا؟',opts:['عَسَل','زُبْدَة','حَساء','كُفْتَة'],ans:0},
+{type:'vocab',emoji:'🍗',q:'ما هذا؟',opts:['دَجاج','لَحْم','سَمَك','أُرُز'],ans:0},
+{type:'vocab',emoji:'🥛',q:'ما هذا المشروب؟',opts:['حَلِيب','شاي','عَصِير','قَهْوَة'],ans:0}
+]},
+{label:'المستوى الثاني 🟡',time:8000,qs:[
+{type:'grammar',q:'هُوَ _____ في الصَباح مُبَكِّرًا.',opts:['يَسْتَيْقِظُ','تَسْتَيْقِظُ','أَسْتَيْقِظُ','تَسْتَيْقِظِينَ'],ans:0},
+{type:'grammar',q:'هِيَ _____ الفَطورَ مَعَ عائِلَتِها.',opts:['تَتَناوَلُ','يَتَناوَلُ','أَتَناوَلُ','تَتَناوَلِينَ'],ans:0},
+{type:'grammar',q:'أَنْتِ _____ إِلى المَدْرَسَة.',opts:['تَذْهَبِينَ','تَذْهَبُ','يَذْهَبُ','أَذْهَبُ'],ans:0},
+{type:'grammar',q:'أَنْتَ _____ دُروسَك مَساءً.',opts:['تَدْرُسُ','يَدْرُسُ','تَدْرُسِينَ','أَدْرُسُ'],ans:0},
+{type:'grammar',q:'هُوَ _____ أُمَّهُ في البَيْت.',opts:['يُساعِدُ','تُساعِدُ','أُساعِدُ','تُساعِدِينَ'],ans:0}
+]},
+{label:'المستوى الثالث 🔴',time:6000,qs:[
+{type:'fill',q:'أَتَناوَلُ الفَطورَ _____ عائِلَتي.',opts:['مَعَ','في','مِن','إِلى'],ans:0},
+{type:'fill',q:'أَذْهَبُ إِلى المَدْرَسَة في السّاعة _____.',opts:['الثّامِنَة','الواحِدَة','الحادِيَة عَشْرَة','السّادِسَة'],ans:0},
+{type:'fill',q:'آكُلُ _____ وَالأُرُزَ في الغَداء.',opts:['الدَجاجَ','السَمَكَ','العَسَلَ','الجُبْنَ'],ans:0},
+{type:'fill',q:'أَنامُ في السّاعة الحادِيَة عَشْرَة _____.',opts:['لَيْلًا','صَباحًا','ظُهْرًا','مَساءً'],ans:0},
+{type:'fill',q:'ماذا _____ مِنَ المَشروبات؟',opts:['تُريدُ','تَأكُلُ','تَلبَسُ','تَذهَبُ'],ans:0}
+]}
+];
+var g5AllQs,g5Cur,g5Sc,g5Streak,g5Correct,g5Timer5;
+
+function g5Init(){
+document.getElementById('g5game').classList.remove('hidden');
+document.getElementById('g5result').classList.add('hidden');
+g5Sc=0;g5Cur=0;g5Streak=0;g5Correct=0;
+g5AllQs=[];
+g5Levels.forEach(function(lv){lv.qs.forEach(function(q){g5AllQs.push({q:q,time:lv.time,label:lv.label})})});
+document.getElementById('g5score').textContent=0;
+document.getElementById('g5streak').textContent='';
+document.getElementById('g5multi').textContent='';
+g5LoadQ();
+}
+
+function g5LoadQ(){
+clearInterval(g5Timer5);
+if(g5Cur>=g5AllQs.length){g5End();return}
+var item=g5AllQs[g5Cur];var q=item.q;
+document.getElementById('g5qnum').textContent=g5Cur+1;
+document.getElementById('g5level').textContent=item.label;
+document.getElementById('g5fb').textContent='';
+// Render question
+var card=document.getElementById('g5qcard');card.innerHTML='';
+if(q.emoji){var em=document.createElement('span');em.className='emoji';em.textContent=q.emoji;card.appendChild(em)}
+var qt=document.createElement('div');qt.className='qtext';qt.textContent=q.q;card.appendChild(qt);
+// Shuffle options keeping track of correct
+var optIdxs=shuffle([0,1,2,3]);
+var correctNew=optIdxs.indexOf(q.ans);
+var optsEl=document.getElementById('g5opts');optsEl.innerHTML='';
+optIdxs.forEach(function(origIdx,newIdx){
+var b=document.createElement('div');b.className='g5-opt';b.textContent=q.opts[origIdx];
+b.addEventListener('click',(function(ni){return function(){g5Answer(ni===correctNew,b)}})(newIdx));
+optsEl.appendChild(b);
+});
+// Update multiplier display
+var mult=g5Streak>=6?3:g5Streak>=3?2:1;
+document.getElementById('g5multi').textContent=mult>1?'🔥 ×'+mult+' مضاعف!':'';
+// Timer
+var start=Date.now();var timeEl=document.getElementById('g5tbar');
+g5Timer5=safeInterval(function(){
+var el=Date.now()-start;var left=Math.max(0,item.time-el);
+var pct=left/item.time*100;
+timeEl.style.width=pct+'%';
+timeEl.style.background=pct>60?'#4CAF50':pct>30?'#FF9800':'#F44336';
+if(left===0){clearInterval(g5Timer5);g5Answer(false,null)}
+},50);
+}
+
+function g5Answer(isCorrect,btn){
+clearInterval(g5Timer5);
+document.querySelectorAll('.g5-opt').forEach(function(b){b.classList.add('disabled')});
+if(isCorrect){
+sesDoğru();
+if(btn)btn.classList.add('correct');
+g5Streak++;g5Correct++;
+var mult=g5Streak>=6?3:g5Streak>=3?2:1;
+var pts=10*mult;g5Sc+=pts;
+document.getElementById('g5score').textContent=g5Sc;
+document.getElementById('g5streak').textContent='🔥'+g5Streak;
+document.getElementById('g5fb').textContent='✅ صحيح! +'+pts;
+document.getElementById('g5fb').style.color='#4CAF50';
+}else{
+sesYanlış();
+if(btn)btn.classList.add('wrong');
+g5Streak=0;
+document.getElementById('g5streak').textContent='';
+document.getElementById('g5multi').textContent='';
+document.getElementById('g5fb').textContent=btn?'❌ خطأ':'⏰ انتهى الوقت';
+document.getElementById('g5fb').style.color='#F44336';
+}
+g5Cur++;safeTimeout(g5LoadQ,1500);
+}
+
+function g5End(){
+sesBitir();
+var fs=Math.round(g5Correct/15*100);
+document.getElementById('g5game').classList.add('hidden');
+document.getElementById('g5result').classList.remove('hidden');
+document.getElementById('g5final').textContent=fs+'%';
+document.getElementById('g5stars').textContent=stars(fs);
+document.getElementById('g5msg').textContent=msg(fs)+(g5Streak>0?' أفضل تتابع: '+g5Streak:'');
+endGame(5,fs);
+}
+
+/* ============================================================
+   GAME 6: JOURNEY - رحلة اليوم
+   ============================================================ */
+var g6Locs=[
+{emoji:'🏠',title:'البَيت - الصَباح',color:'#E8F5E9',titleBg:'#C8E6C9',titleColor:'#1B5E20',qs:[
+{q:'ما أوَّل شيء يَفعَلُهُ فاتِح في الصَباح؟',opts:['يَسْتَيْقِظُ مُبَكِّرًا','يَنامُ','يَذْهَبُ للمَدرَسَة','يَتَناوَلُ الغَداء'],ans:0},
+{q:'ماذا يَتَناوَلُ فاتِح في الفَطور؟',opts:['العَسَلَ وَالزُبْدَةَ','السَمَكَ وَالأُرُزَ','الكُفتَةَ فَقَط','الدَجاجَ'],ans:0}
+]},
+{emoji:'🕌',title:'المَسجِد',color:'#E3F2FD',titleBg:'#BBDEFB',titleColor:'#0D47A1',qs:[
+{q:'في أي وَقتٍ يُصَلِّي فاتِح الفَجرَ؟',opts:['في الصَباح مُبَكِّرًا','في المَساء','عِندَ الظُهر','في اللَيل'],ans:0},
+{q:'أَتَوَضَّأُ، ثُمَّ أُصَلِّي الفَجرَ، ثُمَّ _____.',opts:['أَتَناوَلُ الفَطور','أَنامُ','أَذهَبُ للمَدرَسَة مُباشَرَةً','أَلبَسُ مَلابِسي'],ans:0}
+]},
+{emoji:'🏫',title:'المَدرَسَة',color:'#FFF9C4',titleBg:'#FFF176',titleColor:'#F57F17',qs:[
+{q:'في أي ساعة يَذهَبُ فاتِح إِلى المَدرَسَة؟',opts:['الثّامِنَة','السّابِعَة','التّاسِعَة','السّادِسَة'],ans:0},
+{q:'مَتى يَرجِعُ فاتِح إِلى البَيت؟',opts:['ظُهرًا','صَباحًا','مَساءً','لَيلًا'],ans:0},
+{q:'ماذا يَعمَلُ فاتِح بَعدَ الرُجوع؟',opts:['يُساعِدُ أُمَّهُ في البَيت','يَنامُ مُباشَرَةً','يَلعَبُ خارِجَ البَيت','يَذهَبُ للمَطعَم'],ans:0}
+]},
+{emoji:'🍽️',title:'المَطعَم',color:'#FCE4EC',titleBg:'#F8BBD9',titleColor:'#880E4F',qs:[
+{q:'ماذا يُريدُ فاتِح مِنَ المَأكولات في المَطعَم؟',opts:['الكُفتَةَ وَالأُرُزَ','السَمَكَ فَقَط','العَسَلَ','الجُبنَ وَالزَيتون'],ans:0},
+{q:'هَل يُحِبُّ فاتِح الكُفتَة؟',opts:['نَعَم، يُحِبُّها كَثيرًا','لا، لا يُحِبُّها أَبَدًا','نَعَم، قَليلًا','لا يَعرِف'],ans:0}
+]},
+{emoji:'🌙',title:'البَيت - المَساء',color:'#EDE7F6',titleBg:'#CE93D8',titleColor:'#4A148C',qs:[
+{q:'ماذا يَعمَلُ فاتِح في المَساء؟',opts:['يَدرُسُ دُروسَهُ','يَلعَبُ فَقَط','يَذهَبُ للمَطعَم','يَسبَحُ'],ans:0},
+{q:'ما آخِرُ شيء يَفعَلُهُ فاتِح قَبلَ النَوم؟',opts:['يُصَلِّي العِشاء','يَدرُسُ','يَتَناوَلُ العَشاء','يُساعِدُ أُمَّهُ'],ans:0},
+{q:'في أي ساعة يَنامُ فاتِح؟',opts:['الحادِيَة عَشرَة لَيلًا','الثّامِنَة','السّابِعَة','التّاسِعَة'],ans:0}
+]}
+];
+var g6CurLoc,g6CurQ,g6Cor,g6TotalQ,g6NodePositions;
+
+function g6Init(){
+document.getElementById('g6game').classList.remove('hidden');
+document.getElementById('g6result').classList.add('hidden');
+g6CurLoc=0;g6CurQ=0;g6Cor=0;g6TotalQ=12;
+document.getElementById('g6score').textContent=0;
+document.getElementById('g6cor').textContent=0;
+document.getElementById('g6fb').textContent='';
+g6BuildRoad();
+g6LoadLocation();
+}
+
+function g6BuildRoad(){
+var nodesEl=document.getElementById('g6nodes');nodesEl.innerHTML='';
+g6NodePositions=[];
+g6Locs.forEach(function(loc,i){
+var n=document.createElement('div');n.className='g6-node';n.id='g6node'+i;n.textContent=loc.emoji;
+nodesEl.appendChild(n);
+});
+// Get node positions after render
+safeTimeout(function(){
+var road=document.getElementById('g6road');var rw=road.offsetWidth;
+var nodes=road.querySelectorAll('.g6-node');
+nodes.forEach(function(n,i){
+var rect=n.getBoundingClientRect();var roadRect=road.getBoundingClientRect();
+var centerPct=((rect.left-roadRect.left+rect.width/2)/rw)*100;
+g6NodePositions[i]=centerPct;
+});
+g6MoveChar(0);
+},100);
+}
+
+function g6MoveChar(locIdx){
+var road=document.getElementById('g6road');var rw=road.offsetWidth;
+var char=document.getElementById('g6char');
+if(g6NodePositions[locIdx]!==undefined){
+// Convert % to right (RTL): right = 100 - pct
+var rightPct=100-g6NodePositions[locIdx];
+char.style.right=rightPct+'%';
+}
+}
+
+function g6LoadLocation(){
+// Update node styles
+for(var i=0;i<5;i++){
+var n=document.getElementById('g6node'+i);
+n.className='g6-node';
+if(i<g6CurLoc)n.classList.add('done');
+if(i===g6CurLoc)n.classList.add('active');
+}
+g6MoveChar(g6CurLoc);
+document.getElementById('g6locnum').textContent=g6CurLoc+1;
+g6CurQ=0;
+g6LoadQ();
+}
+
+function g6LoadQ(){
+var loc=g6Locs[g6CurLoc];var q=loc.qs[g6CurQ];
+var totalInLoc=loc.qs.length;
+document.getElementById('g6progress').textContent='السؤال '+(g6CurQ+1)+' من '+totalInLoc+' في هذه المحطّة';
+document.getElementById('g6fb').textContent='';
+var card=document.getElementById('g6loccard');
+card.style.background=loc.color;
+card.innerHTML='<div class="g6-loc-title" style="background:'+loc.titleBg+';color:'+loc.titleColor+'">'+loc.emoji+' '+loc.title+'</div>';
+var qEl=document.createElement('div');qEl.className='g6-question';qEl.textContent=q.q;card.appendChild(qEl);
+var optsEl=document.createElement('div');optsEl.className='g6-opts';
+var optIdxs=shuffle([0,1,2,3]);var correctNew=optIdxs.indexOf(q.ans);
+optIdxs.forEach(function(origIdx,newIdx){
+var b=document.createElement('div');b.className='g6-opt';b.textContent=q.opts[origIdx];
+b.addEventListener('click',(function(ni,oi){return function(){g6Answer(ni===correctNew,b,oi===q.ans)}})(newIdx,origIdx));
+optsEl.appendChild(b);
+});
+card.appendChild(optsEl);
+}
+
+function g6Answer(isCorrect,btn,isAns){
+document.querySelectorAll('.g6-opt').forEach(function(b){b.classList.add('disabled')});
+if(isCorrect){
+sesDoğru();
+btn.classList.add('correct');g6Cor++;
+document.getElementById('g6cor').textContent=g6Cor;
+var sc=Math.round(g6Cor/g6TotalQ*100);
+document.getElementById('g6score').textContent=sc;
+document.getElementById('g6fb').textContent='✅ صحيح!';
+document.getElementById('g6fb').style.color='#4CAF50';
+safeTimeout(function(){
+document.getElementById('g6fb').textContent='';
+g6CurQ++;
+var loc=g6Locs[g6CurLoc];
+if(g6CurQ>=loc.qs.length){
+g6CurLoc++;
+if(g6CurLoc>=5)g6End();
+else{
+// Brief transition
+document.getElementById('g6fb').textContent='✈️ انتقلنا إلى المحطة التالية!';
+document.getElementById('g6fb').style.color='#9C27B0';
+safeTimeout(function(){document.getElementById('g6fb').textContent='';g6LoadLocation()},1200);
+}
+}else g6LoadQ();
+},900);
+}else{
+sesYanlış();
+btn.classList.add('wrong');
+document.getElementById('g6fb').textContent='❌ حاول مرّة أخرى!';
+document.getElementById('g6fb').style.color='#F44336';
+safeTimeout(function(){
+document.querySelectorAll('.g6-opt').forEach(function(b){b.classList.remove('disabled','wrong','correct')});
+document.getElementById('g6fb').textContent='';
+g6LoadQ();
+},1000);
+}
+}
+
+function g6End(){
+sesBitir();
+for(var i=0;i<5;i++){var n=document.getElementById('g6node'+i);if(n)n.className='g6-node done'}
+var fs=Math.round(g6Cor/g6TotalQ*100);
+document.getElementById('g6game').classList.add('hidden');
+document.getElementById('g6result').classList.remove('hidden');
+document.getElementById('g6final').textContent=fs+'%';
+document.getElementById('g6stars').textContent=stars(fs);
+document.getElementById('g6msg').textContent='أنهيتَ رحلة اليوم مع فاتح! '+msg(fs);
+endGame(6,fs);
+}
+
+window.onbeforeunload=function(){SCORM.fin()};
+updateMenu();
+// Hash-based deep link (hub integration)
+(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=1&&n<=6)setTimeout(function(){startGame(n);},200);}})();
+</script>
+</body>
+</html>

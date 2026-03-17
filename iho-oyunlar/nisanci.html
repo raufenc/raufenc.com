@@ -1,0 +1,766 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>القنّاص — Nişancı</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom',sans-serif;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:#fff;min-height:100vh;overflow:hidden;
+  direction:rtl;user-select:none;
+}
+.tr{font-family:Arial,'Segoe UI',sans-serif;direction:ltr;unicode-bidi:bidi-override}
+.tr-inline{font-family:Arial,'Segoe UI',sans-serif}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;padding:16px;width:100%;position:relative}
+.screen.active{display:flex}
+
+/* BACK BUTTON */
+.back-btn{position:fixed;top:12px;right:12px;z-index:999;background:rgba(255,255,255,0.12);
+  border:2px solid rgba(255,255,255,0.25);border-radius:12px;color:#fff;font-size:22px;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;backdrop-filter:blur(8px);transition:all .2s}
+.back-btn:hover{background:rgba(255,255,255,0.25);transform:scale(1.1)}
+
+/* START SCREEN */
+.start-title{font-size:clamp(28px,6vw,52px);text-align:center;margin-bottom:8px;
+  text-shadow:0 0 30px rgba(255,100,50,0.5)}
+.start-sub{font-size:clamp(16px,3vw,24px);color:#aaa;margin-bottom:30px;text-align:center}
+.start-desc{font-size:14px;color:#999;text-align:center;max-width:420px;margin-bottom:24px;line-height:1.8}
+.mode-toggle{display:flex;gap:0;margin-bottom:24px;border-radius:14px;overflow:hidden;
+  border:2px solid rgba(255,100,50,0.4)}
+.mode-btn{padding:12px 24px;font-size:16px;cursor:pointer;background:transparent;
+  color:#aaa;border:none;transition:all .3s;font-family:Arial,sans-serif}
+.mode-btn.active{background:linear-gradient(135deg,#f5af19,#f12711);color:#fff;font-weight:bold}
+.start-btn{
+  padding:16px 48px;font-size:22px;border:none;border-radius:16px;cursor:pointer;
+  background:linear-gradient(135deg,#f12711,#f5af19);color:#fff;font-weight:bold;
+  font-family:Arial,sans-serif;box-shadow:0 8px 30px rgba(245,175,25,0.3);
+  transition:all .3s;position:relative;overflow:hidden}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(245,175,25,0.5)}
+.start-btn::after{content:'';position:absolute;top:-50%;left:-60%;width:200%;height:200%;
+  background:linear-gradient(transparent,rgba(255,255,255,0.15),transparent);
+  transform:rotate(30deg);animation:shimmer 3s infinite}
+@keyframes shimmer{0%{left:-60%}100%{left:160%}}
+
+/* HUD */
+.hud{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;
+  align-items:center;padding:8px 12px;z-index:100;background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(10px);flex-wrap:wrap;gap:4px}
+.hud-mission{font-size:clamp(13px,2.8vw,18px);text-align:center;flex:1 1 100%;order:-1;
+  padding:4px 0;font-family:Arial,'Segoe UI',sans-serif;color:#ffd700;font-weight:bold;
+  text-shadow:0 0 10px rgba(255,215,0,0.4)}
+.hud-left,.hud-right{display:flex;gap:12px;align-items:center;font-size:14px;font-family:Arial,sans-serif}
+.hud-score{color:#38ef7d;font-weight:bold;font-size:16px}
+.hud-ammo{color:#ff6b6b;font-size:14px;letter-spacing:1px}
+.hud-round{padding:4px 12px;border-radius:12px;font-size:12px;font-weight:bold;
+  font-family:Arial,sans-serif;letter-spacing:1px}
+.round1 .hud-round{background:linear-gradient(135deg,#11998e,#38ef7d)}
+.round2 .hud-round{background:linear-gradient(135deg,#6a3093,#a044ff)}
+.round3 .hud-round{background:linear-gradient(135deg,#f12711,#f5af19)}
+
+/* PLAYER INDICATOR */
+.player-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:100;
+  padding:8px 20px;border-radius:20px;font-size:15px;font-weight:bold;
+  font-family:Arial,sans-serif;backdrop-filter:blur(8px);display:none;
+  border:2px solid rgba(255,255,255,0.3);transition:all .3s}
+.player-indicator.p1{background:rgba(70,130,230,0.3);border-color:rgba(70,130,230,0.6);color:#6af}
+.player-indicator.p2{background:rgba(255,80,80,0.3);border-color:rgba(255,80,80,0.6);color:#f66}
+.two-player .player-indicator{display:block}
+
+/* 2P SCORES in HUD */
+.hud-2p-scores{display:none;gap:12px;align-items:center;font-family:Arial,sans-serif;font-size:14px}
+.two-player .hud-2p-scores{display:flex}
+.two-player .hud-score-single{display:none}
+.p1score{color:#6af}.p2score{color:#f66}
+
+/* GAME STAGE */
+#gameScreen{justify-content:flex-start;padding:0;cursor:none}
+#gameScreen.mobile-mode{cursor:crosshair}
+.stage{position:fixed;top:0;left:0;right:0;bottom:0;overflow:hidden}
+
+/* CROSSHAIR */
+.crosshair{position:fixed;pointer-events:none;z-index:200;display:none}
+.crosshair-h,.crosshair-v{position:absolute;background:rgba(255,50,50,0.8)}
+.crosshair-h{width:30px;height:2px;top:14px;left:0}
+.crosshair-v{width:2px;height:30px;top:0;left:14px}
+.crosshair-dot{position:absolute;width:4px;height:4px;border-radius:50%;
+  background:#ff3333;top:13px;left:13px}
+.crosshair-ring{position:absolute;width:20px;height:20px;border:1.5px solid rgba(255,50,50,0.6);
+  border-radius:50%;top:5px;left:5px}
+.desktop-mode .crosshair{display:block}
+
+/* TARGETS */
+.target{position:absolute;display:flex;align-items:center;justify-content:center;
+  border-radius:12px;cursor:none;transition:none;
+  background:linear-gradient(180deg,#5a3a1a 0%,#3e2712 100%);
+  border:3px solid #8b6914;
+  box-shadow:0 4px 15px rgba(0,0,0,0.5),inset 0 2px 4px rgba(255,255,255,0.1);
+  text-align:center;padding:8px;z-index:10}
+.target .ar-text{font-family:'Arakom',sans-serif;color:#fff;font-weight:bold;
+  text-shadow:0 2px 8px rgba(0,0,0,0.6);white-space:nowrap;line-height:1.2}
+.target.gold{
+  background:linear-gradient(180deg,#ffd700 0%,#b8860b 100%);
+  border-color:#fff;
+  box-shadow:0 0 20px rgba(255,215,0,0.6),0 4px 15px rgba(0,0,0,0.5);
+  animation:goldShimmer 0.8s ease-in-out infinite alternate}
+.target.gold .ar-text{color:#1a0a00;text-shadow:0 1px 3px rgba(255,255,255,0.4)}
+@keyframes goldShimmer{
+  0%{box-shadow:0 0 20px rgba(255,215,0,0.4),0 4px 15px rgba(0,0,0,0.5)}
+  100%{box-shadow:0 0 35px rgba(255,215,0,0.8),0 4px 15px rgba(0,0,0,0.5)}
+}
+
+/* EFFECTS */
+.muzzle-flash{position:fixed;pointer-events:none;z-index:150;
+  width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle,#fff 0%,#ff0 40%,#f80 70%,transparent 100%);
+  animation:flashAnim 0.12s ease-out forwards}
+@keyframes flashAnim{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(2)}}
+
+.bullet-trace{position:fixed;pointer-events:none;z-index:140;
+  height:2px;background:linear-gradient(90deg,transparent,#ff0,#fff);
+  transform-origin:left center;animation:traceAnim 0.15s ease-out forwards}
+@keyframes traceAnim{0%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(0)}}
+
+.bullet-hole{position:fixed;pointer-events:none;z-index:5;
+  width:10px;height:10px;border-radius:50%;
+  background:radial-gradient(circle,#111 40%,#333 70%,transparent 100%);
+  border:1px solid #555;animation:holeAnim 0.3s ease-out forwards}
+@keyframes holeAnim{0%{opacity:0;transform:scale(0)}100%{opacity:0.7;transform:scale(1)}}
+
+.hit-particle{position:fixed;pointer-events:none;z-index:160;
+  width:6px;height:6px;border-radius:50%;animation:particleAnim 0.6s ease-out forwards}
+@keyframes particleAnim{0%{opacity:1;transform:translate(0,0) scale(1)}
+  100%{opacity:0;transform:translate(var(--px),var(--py)) scale(0)}}
+
+.wrong-x{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:48px;color:#ff0000;font-weight:bold;pointer-events:none;z-index:20;
+  animation:wrongAnim 0.5s ease-out forwards;text-shadow:0 0 10px #f00}
+@keyframes wrongAnim{0%{opacity:1;transform:translate(-50%,-50%) scale(0.5)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+
+@keyframes shakeTarget{
+  0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* SPOTLIGHT BG */
+.spotlight{position:fixed;pointer-events:none;border-radius:50%;z-index:0;
+  background:radial-gradient(circle,rgba(255,255,255,0.03) 0%,transparent 70%)}
+
+/* ROUND TRANSITION */
+.round-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:300;
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0.85);backdrop-filter:blur(10px)}
+.round-overlay.active{display:flex}
+.round-overlay h2{font-size:clamp(24px,5vw,40px);margin-bottom:16px;
+  text-shadow:0 0 20px rgba(255,215,0,0.5)}
+.round-overlay .summary{font-family:Arial,sans-serif;font-size:18px;color:#ccc;
+  margin-bottom:8px;text-align:center;line-height:1.8}
+.round-overlay .next-btn{
+  margin-top:20px;padding:14px 40px;font-size:20px;border:none;border-radius:14px;
+  cursor:pointer;background:linear-gradient(135deg,#f12711,#f5af19);color:#fff;
+  font-weight:bold;font-family:Arial,sans-serif;
+  box-shadow:0 6px 20px rgba(245,175,25,0.4);transition:all .3s}
+.round-overlay .next-btn:hover{transform:translateY(-2px)}
+
+/* END SCREEN */
+.end-title{font-size:clamp(24px,5vw,44px);margin-bottom:16px;
+  text-shadow:0 0 30px rgba(255,215,0,0.5)}
+.end-score{font-size:clamp(20px,4vw,32px);color:#ffd700;margin-bottom:8px;
+  font-family:Arial,sans-serif}
+.end-detail{font-size:16px;color:#aaa;margin-bottom:6px;font-family:Arial,sans-serif}
+.end-stars{font-size:40px;margin:16px 0;letter-spacing:8px}
+.end-btn{margin-top:20px;padding:14px 40px;font-size:20px;border:none;border-radius:14px;
+  cursor:pointer;background:linear-gradient(135deg,#f12711,#f5af19);color:#fff;
+  font-weight:bold;font-family:Arial,sans-serif;transition:all .3s}
+.end-btn:hover{transform:translateY(-2px)}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .hud{padding:6px 8px}
+  .hud-mission{font-size:13px}
+  .hud-left,.hud-right{font-size:12px;gap:8px}
+}
+</style>
+</head>
+<body>
+<a class="back-btn" href="index.html" title="Geri">&#8592;</a>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+  <div class="start-title">القنّاص</div>
+  <div class="start-sub"><span class="tr-inline">Nişancı</span></div>
+  <div class="start-desc tr-inline">
+    Hedeflerde Arapça kelimeler hareket ediyor.<br>
+    Görevde verilen Türkçe kelimenin Arapçasını bul ve vur!<br>
+    Dikkatli ol — mermin sınırlı!<br>
+    <span style="color:#ffd700">Altın hedef = 2x puan!</span>
+  </div>
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode(1)">1 Oyuncu</button>
+    <button class="mode-btn" onclick="setMode(2)">2 Oyuncu</button>
+  </div>
+  <button class="start-btn" onclick="startGame()">Başla!</button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="gameScreen" class="screen">
+  <div class="hud">
+    <div class="hud-left">
+      <span class="hud-score-single">&#11088; <span id="hudScore">0</span></span>
+      <div class="hud-2p-scores">
+        <span class="p1score">&#128309; <span id="hudP1">0</span></span>
+        <span class="p2score">&#128308; <span id="hudP2">0</span></span>
+      </div>
+    </div>
+    <div class="hud-mission" id="hudMission"></div>
+    <div class="hud-right">
+      <span class="hud-ammo" id="hudAmmo"></span>
+      <span class="hud-round" id="hudRound"></span>
+    </div>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div class="crosshair" id="crosshair">
+    <div class="crosshair-ring"></div>
+    <div class="crosshair-h"></div>
+    <div class="crosshair-v"></div>
+    <div class="crosshair-dot"></div>
+  </div>
+  <div class="player-indicator" id="playerInd"></div>
+</div>
+
+<!-- ROUND OVERLAY -->
+<div class="round-overlay" id="roundOverlay">
+  <h2 id="roTitle"></h2>
+  <div class="summary" id="roSummary"></div>
+  <button class="next-btn" id="roBtn" onclick="nextRound()">Sonraki Tur</button>
+</div>
+
+<!-- END SCREEN -->
+<div id="endScreen" class="screen">
+  <div class="end-title">القنّاص</div>
+  <div class="end-stars" id="endStars"></div>
+  <div class="end-score" id="endScore"></div>
+  <div class="end-detail" id="endDetail"></div>
+  <div class="end-detail" id="endDetail2"></div>
+  <button class="end-btn" onclick="resetGame()" style="margin-bottom:10px">Tekrar Oyna</button>
+  <button class="end-btn" onclick="location.href='index.html'" style="background:linear-gradient(135deg,#667,#556)">Ana Sayfa</button>
+</div>
+
+<script>
+/* ===== VOCAB ===== */
+const VOCAB={
+  foods:[
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs:[
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times:[
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+const ALL_WORDS=[...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+const VOCAB_TR={
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
+  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
+  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
+  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
+  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
+  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){return VOCAB_TR[w.ar]||'';}
+
+/* ===== SOUND ===== */
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesShoot(){_tone(1500,0.03,'square',0.3);_tone(800,0.05,'sawtooth',0.2,0.02);}
+function sesHit(){_tone(600,0.08,'sine',0.3);_tone(800,0.06,'sine',0.25,0.06);_tone(1000,0.1,'sine',0.3,0.12);}
+function sesMiss(){_tone(200,0.2,'sawtooth',0.2);}
+function sesExplode(){_tone(200,0.15,'sawtooth',0.3);_tone(100,0.25,'sawtooth',0.2,0.1);}
+function sesGold(){_tone(880,0.08,'sine',0.35);_tone(1100,0.08,'sine',0.3,0.06);_tone(1320,0.1,'sine',0.35,0.12);}
+function sesCelebrate(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+
+/* ===== GLOBALS ===== */
+let mode=1; // 1 or 2 players
+let round=0; // 0,1,2
+let ammo=10;
+let scores=[0,0];
+let currentPlayer=0; // 0 or 1
+let missionsLeft=0;
+let totalHits=[0,0];
+let totalMisses=[0,0];
+let targets=[];
+let currentMission=null; // {ar, e, tr}
+let animId=null;
+let paused=false;
+let isMobile=false;
+let stageW,stageH;
+let bulletHoles=[];
+const ROUND_CONFIG=[
+  {name:'Kolay',pool:'foods',count:8,size:120,speed:1,missions:6,fontSize:28},
+  {name:'Orta',pool:'verbs',count:6,size:100,speed:1.8,missions:5,fontSize:26},
+  {name:'Zor',pool:'mixed',count:8,size:80,speed:2.8,missions:6,fontSize:22}
+];
+
+/* ===== DOM ===== */
+const $=id=>document.getElementById(id);
+const startScreen=$('startScreen');
+const gameScreen=$('gameScreen');
+const endScreen=$('endScreen');
+const stage=$('stage');
+const crosshair=$('crosshair');
+const roundOverlay=$('roundOverlay');
+const playerInd=$('playerInd');
+
+/* ===== SPOTLIGHTS ===== */
+function createSpotlights(){
+  const colors=['rgba(255,100,50,0.04)','rgba(50,100,255,0.03)','rgba(255,215,0,0.03)'];
+  for(let i=0;i<4;i++){
+    const s=document.createElement('div');
+    s.className='spotlight';
+    const sz=200+Math.random()*300;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:radial-gradient(circle,${colors[i%3]} 0%,transparent 70%)`;
+    stage.appendChild(s);
+  }
+}
+
+/* ===== MODE ===== */
+function setMode(m){
+  mode=m;
+  document.querySelectorAll('.mode-btn').forEach((b,i)=>b.classList.toggle('active',i===m-1));
+}
+
+/* ===== SHOW SCREEN ===== */
+function showScreen(scr){
+  [startScreen,gameScreen,endScreen].forEach(s=>s.classList.remove('active'));
+  scr.classList.add('active');
+  document.body.classList.toggle('two-player',mode===2);
+}
+
+/* ===== DETECT MOBILE ===== */
+function detectMobile(){
+  isMobile='ontouchstart' in window||navigator.maxTouchPoints>0;
+  gameScreen.classList.toggle('mobile-mode',isMobile);
+  gameScreen.classList.toggle('desktop-mode',!isMobile);
+}
+
+/* ===== START GAME ===== */
+function startGame(){
+  detectMobile();
+  scores=[0,0];totalHits=[0,0];totalMisses=[0,0];
+  currentPlayer=0;round=0;
+  showScreen(gameScreen);
+  createSpotlights();
+  startRound();
+}
+
+/* ===== RESET ===== */
+function resetGame(){
+  cancelAnimationFrame(animId);
+  stage.innerHTML='';targets=[];bulletHoles=[];
+  showScreen(startScreen);
+}
+
+/* ===== START ROUND ===== */
+function startRound(){
+  const cfg=ROUND_CONFIG[round];
+  ammo=10;
+  missionsLeft=cfg.missions;
+  paused=false;
+  bulletHoles=[];
+  // clear previous target elements & effects
+  stage.querySelectorAll('.target,.bullet-hole,.muzzle-flash,.bullet-trace,.hit-particle').forEach(e=>e.remove());
+  targets=[];
+
+  // set round class for HUD color
+  gameScreen.className='screen active'+(isMobile?' mobile-mode':' desktop-mode');
+  document.body.classList.toggle('two-player',mode===2);
+  gameScreen.classList.add('round'+(round+1));
+
+  updateHUD();
+  spawnMission();
+  startLoop();
+}
+
+/* ===== GET POOL ===== */
+function getPool(){
+  const cfg=ROUND_CONFIG[round];
+  if(cfg.pool==='foods') return VOCAB.foods;
+  if(cfg.pool==='verbs') return VOCAB.verbs;
+  return ALL_WORDS;
+}
+
+/* ===== SHUFFLE ===== */
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+
+/* ===== SPAWN MISSION ===== */
+function spawnMission(){
+  stageW=window.innerWidth;
+  stageH=window.innerHeight;
+  const cfg=ROUND_CONFIG[round];
+  const pool=getPool();
+
+  // pick correct word
+  const correctWord=pool[Math.floor(Math.random()*pool.length)];
+  currentMission={ar:correctWord.ar,e:correctWord.e,tr:getTr(correctWord)};
+
+  // pick distractors
+  let others=pool.filter(w=>w.ar!==correctWord.ar);
+  others=shuffle(others).slice(0,cfg.count-1);
+
+  // build target set
+  let words=[correctWord,...others];
+  words=shuffle(words);
+
+  // maybe add gold target (20% chance, can be ANY target including correct one)
+  let goldIdx=-1;
+  if(Math.random()<0.2&&words.length>1){
+    goldIdx=Math.floor(Math.random()*words.length);
+  }
+
+  // remove old targets
+  stage.querySelectorAll('.target').forEach(e=>e.remove());
+  targets=[];
+
+  const topMargin=70; // below HUD
+  const patterns=['linear','sine','zigzag'];
+  const usableH=stageH-topMargin-cfg.size-20;
+
+  words.forEach((w,i)=>{
+    const t={};
+    t.word=w;
+    t.isCorrect=(w.ar===correctWord.ar);
+    t.isGold=(i===goldIdx);
+    t.size=cfg.size+(Math.random()*20-10);
+    t.x=Math.random()*(stageW-t.size);
+    t.y=topMargin+20+Math.random()*Math.max(usableH,100);
+    const sp=cfg.speed*(0.6+Math.random()*0.8);
+    t.vx=(Math.random()<0.5?1:-1)*sp;
+    t.vy=0;
+    t.pattern=patterns[Math.floor(Math.random()*patterns.length)];
+    t.phase=Math.random()*Math.PI*2;
+    t.amplitude=20+Math.random()*30;
+    t.baseY=t.y;
+    t.alive=true;
+    t.fontSize=cfg.fontSize;
+
+    // gold is faster
+    if(t.isGold){t.vx*=1.8;t.size*=0.85;}
+
+    // DOM element
+    const el=document.createElement('div');
+    el.className='target'+(t.isGold?' gold':'');
+    el.style.width=t.size+'px';
+    el.style.height=t.size+'px';
+    el.innerHTML=`<span class="ar-text" style="font-size:${t.fontSize}px">${w.ar}</span>`;
+    stage.appendChild(el);
+    t.el=el;
+    targets.push(t);
+  });
+
+  updateHUD();
+}
+
+/* ===== UPDATE HUD ===== */
+function updateHUD(){
+  const cfg=ROUND_CONFIG[round];
+  if(currentMission){
+    $('hudMission').innerHTML=`${currentMission.e} ${currentMission.tr} — <span style="font-size:12px;color:#ffaa00">Bu kelimeyi vur!</span>`;
+  }
+  // ammo — bullet display
+  let ammoStr='';
+  for(let i=0;i<ammo;i++) ammoStr+='\u{1F7E0}';
+  for(let i=ammo;i<10;i++) ammoStr+='\u26AB';
+  $('hudAmmo').textContent=ammoStr;
+
+  // score
+  if(mode===1){
+    $('hudScore').textContent=scores[0];
+  } else {
+    $('hudP1').textContent=scores[0];
+    $('hudP2').textContent=scores[1];
+  }
+
+  // round
+  $('hudRound').textContent=['TUR 1 — Kolay','TUR 2 — Orta','TUR 3 — Zor'][round];
+
+  // player indicator
+  if(mode===2){
+    playerInd.className='player-indicator p'+(currentPlayer+1);
+    playerInd.textContent=(currentPlayer===0?'🔵 Oyuncu 1':'🔴 Oyuncu 2')+' — Sıra sende!';
+  }
+}
+
+/* ===== GAME LOOP ===== */
+function startLoop(){
+  cancelAnimationFrame(animId);
+  function tick(){
+    if(paused){animId=requestAnimationFrame(tick);return;}
+    stageW=window.innerWidth;
+    stageH=window.innerHeight;
+    const topMargin=70;
+    const now=performance.now()/1000;
+    targets.forEach(t=>{
+      if(!t.alive) return;
+      // movement
+      t.x+=t.vx;
+      // pattern
+      if(t.pattern==='sine'){
+        t.y=t.baseY+Math.sin(now*2+t.phase)*t.amplitude;
+      } else if(t.pattern==='zigzag'){
+        t.y=t.baseY+((Math.abs(((now+t.phase)%2)-1)*2-1))*t.amplitude;
+      }
+      // wrap horizontal
+      if(t.vx>0&&t.x>stageW+10) t.x=-t.size-10;
+      if(t.vx<0&&t.x<-t.size-10) t.x=stageW+10;
+      // clamp y
+      t.y=Math.max(topMargin+10,Math.min(stageH-t.size-10,t.y));
+
+      // update DOM
+      t.el.style.left=t.x+'px';
+      t.el.style.top=t.y+'px';
+    });
+    animId=requestAnimationFrame(tick);
+  }
+  animId=requestAnimationFrame(tick);
+}
+
+/* ===== SHOOT HANDLING ===== */
+function handleShoot(cx,cy){
+  if(paused||ammo<=0) return;
+
+  sesShoot();
+  spawnMuzzleFlash(cx,cy);
+
+  // check target hit
+  let hitTarget=null;
+  // check from top z-index (last rendered) to first
+  for(let i=targets.length-1;i>=0;i--){
+    const t=targets[i];
+    if(!t.alive) continue;
+    const tx=t.x,ty=t.y,ts=t.size;
+    if(cx>=tx&&cx<=tx+ts&&cy>=ty&&cy<=ty+ts){
+      hitTarget=t;
+      break;
+    }
+  }
+
+  if(hitTarget){
+    ammo--;
+    if(hitTarget.isCorrect){
+      // CORRECT HIT — gold gives 2x points
+      const pts=hitTarget.isGold?20:10;
+      scores[currentPlayer]+=pts;
+      totalHits[currentPlayer]++;
+      if(hitTarget.isGold) sesGold();
+      sesHit();
+      sesExplode();
+      spawnExplosion(hitTarget);
+      hitTarget.alive=false;
+      hitTarget.el.style.display='none';
+      missionsLeft--;
+
+      updateHUD();
+
+      if(mode===2){
+        currentPlayer=1-currentPlayer;
+        updateHUD();
+      }
+
+      // new mission or end round
+      if(missionsLeft<=0||ammo<=0){
+        endRound();
+      } else {
+        paused=true;
+        setTimeout(()=>{
+          paused=false;
+          spawnMission();
+        },800);
+      }
+    } else {
+      // WRONG TARGET (including gold distractors)
+      totalMisses[currentPlayer]++;
+      spawnWrongX(hitTarget);
+      sesMiss();
+      updateHUD();
+      if(mode===2){currentPlayer=1-currentPlayer;updateHUD();}
+      if(ammo<=0) endRound();
+    }
+  } else {
+    // MISS — empty space
+    ammo--;
+    spawnBulletHole(cx,cy);
+    sesMiss();
+    updateHUD();
+    if(mode===2){currentPlayer=1-currentPlayer;updateHUD();}
+    if(ammo<=0) endRound();
+  }
+}
+
+/* ===== EFFECTS ===== */
+function spawnMuzzleFlash(x,y){
+  const el=document.createElement('div');
+  el.className='muzzle-flash';
+  el.style.left=(x-15)+'px';el.style.top=(y-15)+'px';
+  stage.appendChild(el);
+  setTimeout(()=>el.remove(),150);
+}
+
+function spawnBulletHole(x,y){
+  const el=document.createElement('div');
+  el.className='bullet-hole';
+  el.style.left=(x-5)+'px';el.style.top=(y-5)+'px';
+  stage.appendChild(el);
+  bulletHoles.push(el);
+  if(bulletHoles.length>20){bulletHoles.shift().remove();}
+}
+
+function spawnExplosion(t){
+  const cx=t.x+t.size/2;
+  const cy=t.y+t.size/2;
+  const colors=['#ff0','#f80','#f00','#ff6','#fff','#ffd700'];
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');
+    p.className='hit-particle';
+    p.style.left=cx+'px';p.style.top=cy+'px';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    const angle=Math.random()*Math.PI*2;
+    const dist=40+Math.random()*80;
+    p.style.setProperty('--px',Math.cos(angle)*dist+'px');
+    p.style.setProperty('--py',Math.sin(angle)*dist+'px');
+    stage.appendChild(p);
+    setTimeout(()=>p.remove(),700);
+  }
+}
+
+function spawnWrongX(t){
+  const x=document.createElement('div');
+  x.className='wrong-x';
+  x.textContent='✕';
+  t.el.appendChild(x);
+  t.el.style.animation='shakeTarget 0.3s ease';
+  setTimeout(()=>{
+    x.remove();
+    t.el.style.animation='';
+    if(t.isGold) t.el.style.animation='goldShimmer 0.8s ease-in-out infinite alternate';
+  },500);
+}
+
+/* ===== END ROUND ===== */
+function endRound(){
+  paused=true;
+  cancelAnimationFrame(animId);
+
+  const cfg=ROUND_CONFIG[round];
+  const isLast=(round>=2);
+
+  if(isLast){
+    // end game
+    setTimeout(showEndScreen,600);
+    return;
+  }
+
+  // show round summary
+  $('roTitle').textContent='Tur '+(round+1)+' Tamamlandı!';
+  let summary='';
+  if(mode===1){
+    summary=`Puan: ${scores[0]}<br>İsabet: ${totalHits[0]} | Iskalama: ${totalMisses[0]}`;
+  } else {
+    summary=`🔵 Oyuncu 1: ${scores[0]} puan<br>🔴 Oyuncu 2: ${scores[1]} puan`;
+  }
+  const nextName=ROUND_CONFIG[round+1].name;
+  summary+=`<br><br>Sonraki: <span style="color:#ffd700">Tur ${round+2} — ${nextName}</span>`;
+  $('roSummary').innerHTML=summary;
+  $('roBtn').textContent='Sonraki Tur';
+  roundOverlay.classList.add('active');
+}
+
+function nextRound(){
+  roundOverlay.classList.remove('active');
+  round++;
+  currentPlayer=0;
+  startRound();
+}
+
+/* ===== END SCREEN ===== */
+function showEndScreen(){
+  showScreen(endScreen);
+  const total=scores[0]+scores[1];
+  const maxPossible=(6+5+6)*10; // rough max
+
+  if(mode===1){
+    $('endScore').textContent='Toplam Puan: '+scores[0];
+    $('endDetail').textContent='İsabet: '+totalHits[0]+' | Iskalama: '+totalMisses[0];
+    $('endDetail2').textContent='';
+    const pct=scores[0]/maxPossible;
+    $('endStars').textContent=pct>0.8?'⭐⭐⭐':pct>0.5?'⭐⭐':'⭐';
+  } else {
+    const winner=scores[0]>scores[1]?'🔵 Oyuncu 1':scores[1]>scores[0]?'🔴 Oyuncu 2':'Berabere!';
+    $('endScore').textContent=winner+(scores[0]===scores[1]?'':' Kazandı!');
+    $('endDetail').textContent='🔵 Oyuncu 1: '+scores[0]+' puan (İsabet: '+totalHits[0]+')';
+    $('endDetail2').textContent='🔴 Oyuncu 2: '+scores[1]+' puan (İsabet: '+totalHits[1]+')';
+    $('endStars').textContent='🏆';
+  }
+  sesCelebrate();
+}
+
+/* ===== INPUT HANDLING ===== */
+// Desktop: crosshair follows mouse
+document.addEventListener('mousemove',e=>{
+  crosshair.style.left=(e.clientX-15)+'px';
+  crosshair.style.top=(e.clientY-15)+'px';
+});
+
+// Click/tap on stage
+stage.addEventListener('mousedown',e=>{
+  if(isMobile) return;
+  e.preventDefault();
+  handleShoot(e.clientX,e.clientY);
+});
+stage.addEventListener('touchstart',e=>{
+  e.preventDefault();
+  const touch=e.touches[0];
+  handleShoot(touch.clientX,touch.clientY);
+},{passive:false});
+
+// Prevent context menu on stage
+stage.addEventListener('contextmenu',e=>e.preventDefault());
+
+/* ===== RESIZE ===== */
+window.addEventListener('resize',()=>{
+  stageW=window.innerWidth;
+  stageH=window.innerHeight;
+});
+
+/* ===== INIT ===== */
+detectMobile();
+</script>
+</body>
+</html>

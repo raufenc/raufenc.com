@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ألعاب الآركيد — ماذا فعلت اليوم؟</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100vh;overflow-x:hidden}
+body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;direction:rtl;user-select:none;-webkit-user-select:none}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:3px}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh;padding:20px;position:relative}
+.screen.active{display:block}
+
+/* BACK BTN */
+.back-btn{position:fixed;top:16px;right:16px;z-index:999;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:12px 28px;border-radius:100px;cursor:pointer;font-family:'Arakom',Arial,sans-serif;font-size:20px;transition:all .2s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.back-btn:hover{background:rgba(255,255,255,0.22);transform:scale(1.05)}
+
+/* MENU */
+.menu-header{text-align:center;padding:30px 20px 10px}
+.menu-badge{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:8px 24px;border-radius:100px;font-size:18px;letter-spacing:.08em;margin-bottom:14px;font-family:Arial,sans-serif}
+.menu-title{font-size:clamp(36px,6vw,64px);font-weight:bold;line-height:1.2;margin-bottom:8px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.menu-subtitle{color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:8px;direction:rtl}
+.menu-info{color:rgba(255,255,255,0.3);font-size:18px;font-family:Arial,sans-serif}
+
+/* PLAYER TOGGLE */
+.player-toggle{display:flex;justify-content:center;gap:12px;margin:20px auto 24px;max-width:420px}
+.player-toggle button{flex:1;padding:14px 20px;border-radius:14px;border:2px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.5);font-family:'Arakom',Arial,sans-serif;font-size:22px;cursor:pointer;transition:all .25s}
+.player-toggle button.active{border-color:#4361ee;background:rgba(67,97,238,0.2);color:#fff}
+.player-toggle button:hover{background:rgba(255,255,255,0.1)}
+
+/* GAME CARDS */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;max-width:1200px;margin:0 auto;padding:0 20px 40px}
+.game-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.game-card:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.25);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.4)}
+.game-card .gc-icon{font-size:3.5em;margin-bottom:12px;display:block;line-height:1}
+.game-card .gc-name{font-size:1.6em;font-weight:bold;margin-bottom:6px;color:#fff;line-height:1.3}
+.game-card .gc-tr{font-size:18px;color:rgba(255,255,255,0.45);margin-bottom:6px;line-height:1.4;font-family:Arial,sans-serif;direction:ltr}
+
+/* GAME COMMON */
+.game-title{text-align:center;font-size:clamp(32px,5vw,52px);font-weight:bold;margin:12px 0;line-height:1.3}
+.game-prompt{text-align:center;font-size:clamp(26px,4vw,40px);color:#ffd60a;margin-bottom:14px}
+.game-hud{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px;font-size:24px}
+.game-hud span{background:rgba(255,255,255,0.08);padding:10px 22px;border-radius:12px;white-space:nowrap}
+.score-val{color:#06d6a0;font-weight:bold}
+.timer-val{color:#ffd60a;font-weight:bold}
+.combo-val{color:#f72585;font-weight:bold}
+.hearts{color:#ef233c;font-size:30px;letter-spacing:3px}
+.round-info{text-align:center;color:rgba(255,255,255,0.5);font-size:20px;margin-bottom:10px;font-family:Arial,sans-serif}
+
+/* GAME OVER */
+.game-over-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:900;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.game-over-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:44px 36px;text-align:center;max-width:520px;width:90%;animation:popIn .3s ease}
+.game-over-box h2{font-size:40px;margin-bottom:14px}
+.game-over-box .final-score{font-size:64px;color:#06d6a0;font-weight:bold;margin:12px 0}
+.game-over-box .p2-score{font-size:48px;color:#4361ee;margin:8px 0}
+.game-over-box button{margin:8px;padding:16px 36px;border-radius:14px;border:none;font-family:'Arakom',Arial,sans-serif;font-size:22px;cursor:pointer;transition:all .2s}
+.go-btn-restart{background:#4361ee;color:#fff}
+.go-btn-restart:hover{background:#5a78f0}
+.go-btn-menu{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.go-btn-menu:hover{background:rgba(255,255,255,0.2)}
+
+/* SPLIT SCREEN */
+.split-container{display:flex;gap:12px;width:100%;max-width:1400px;margin:0 auto}
+.split-half{flex:1;min-width:0;padding:12px;border-radius:14px;position:relative}
+.split-half:first-child{background:rgba(67,97,238,0.08);border:1px solid rgba(67,97,238,0.2)}
+.split-half:last-child{background:rgba(239,35,60,0.08);border:1px solid rgba(239,35,60,0.2)}
+.split-label{text-align:center;font-size:22px;color:rgba(255,255,255,0.6);margin-bottom:8px;font-family:Arial,sans-serif}
+
+/* CONFETTI */
+.confetti-piece{position:fixed;width:8px;height:8px;z-index:999;pointer-events:none;animation:confettiFall 1.5s ease forwards}
+
+/* ============ GAME 1: SPACE DEFENSE ============ */
+.space-area{position:relative;width:100%;max-width:700px;height:420px;overflow:hidden;border-radius:14px;background:radial-gradient(ellipse at 50% 0%,#1a1a3e,#0a0a1a 70%);margin:0 auto;border:1px solid rgba(255,255,255,0.1)}
+.space-area::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(1px 1px at 10% 20%,#fff,transparent),radial-gradient(1px 1px at 30% 60%,#fff,transparent),radial-gradient(1px 1px at 50% 10%,#fff,transparent),radial-gradient(1px 1px at 70% 80%,#fff,transparent),radial-gradient(1px 1px at 90% 40%,#fff,transparent),radial-gradient(1px 1px at 15% 85%,#fff,transparent),radial-gradient(1px 1px at 45% 45%,#fff,transparent),radial-gradient(1px 1px at 80% 15%,#fff,transparent),radial-gradient(1px 1px at 60% 70%,#fff,transparent),radial-gradient(1px 1px at 25% 35%,#fff,transparent);opacity:0.4;pointer-events:none}
+.target-banner{text-align:center;padding:14px 24px;margin:0 auto 10px;max-width:500px;border-radius:14px;background:rgba(255,215,0,0.08);border:2px solid rgba(255,215,0,0.35);font-size:32px;color:#ffd60a;direction:ltr}
+.asteroid{position:absolute;background:linear-gradient(135deg,#8d6e63,#5d4037,#3e2723);border-radius:14px;padding:10px 16px;min-width:100px;text-align:center;cursor:pointer;transition:transform 0.1s;z-index:5}
+.asteroid:hover{transform:scale(1.05)}
+.asteroid-word{font-size:28px;color:#fff;font-weight:bold;direction:rtl;white-space:nowrap}
+.asteroid.exploding{animation:asteroidExplode 0.35s ease forwards;pointer-events:none}
+.asteroid.wrong-flash{animation:shake 0.4s ease;border:2px solid #ef233c}
+.shield-bar{width:100%;height:4px;background:linear-gradient(90deg,#4361ee,#06d6a0,#4361ee);border-radius:2px;margin-top:6px;max-width:700px;margin-left:auto;margin-right:auto;opacity:0.6}
+
+/* ============ GAME 2: MASTER CHEF ============ */
+.recipe-card{max-width:700px;margin:0 auto 12px;padding:18px 24px;border-radius:16px;background:rgba(255,165,0,0.06);border:2px solid rgba(255,165,0,0.3);text-align:center}
+.recipe-title{font-size:28px;color:#ffa500;margin-bottom:10px;direction:ltr}
+.recipe-items{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.recipe-item{padding:8px 18px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);font-size:24px;direction:ltr;transition:all 0.3s}
+.recipe-item.found{background:rgba(6,214,160,0.2);border-color:#06d6a0;text-decoration:line-through;opacity:0.5}
+.kitchen-area{max-width:700px;margin:0 auto}
+.pot-area{text-align:center;font-size:64px;margin:10px 0}
+.counter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:700px;margin:0 auto}
+.ingredient-box{padding:20px 12px;border-radius:14px;background:rgba(255,255,255,0.07);border:2px solid rgba(255,255,255,0.12);text-align:center;cursor:pointer;transition:all 0.2s}
+.ingredient-box:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.25);transform:scale(1.03)}
+.ingredient-box .ing-ar{font-size:30px;font-weight:bold;color:#fff;direction:rtl}
+.ingredient-box.correct{animation:flashGreen 0.5s ease;pointer-events:none;opacity:0.4}
+.ingredient-box.wrong{animation:shake 0.4s ease;border-color:#ef233c}
+
+/* ============ GAME 3: LETTER RAIN ============ */
+.rain-area{position:relative;width:100%;max-width:700px;height:340px;overflow:hidden;border-radius:14px;background:linear-gradient(180deg,#1a0a2e,#2d1b69,#1a0a2e);margin:0 auto;border:1px solid rgba(255,255,255,0.1)}
+.target-display{text-align:center;padding:14px 24px;margin:0 auto 10px;max-width:560px;border-radius:14px;background:rgba(147,51,234,0.1);border:2px solid rgba(147,51,234,0.35);font-size:30px;color:#c084fc;direction:ltr}
+.falling-letter{position:absolute;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;cursor:pointer;z-index:5;transition:transform 0.1s}
+.falling-letter:hover{transform:scale(1.15)}
+.falling-letter.grabbed{animation:letterGrab 0.3s ease forwards;pointer-events:none}
+.falling-letter.wrong-letter{animation:shake 0.4s ease;border-color:#ef233c;background:rgba(239,35,60,0.2)}
+.word-builder{display:flex;justify-content:center;gap:6px;margin:12px auto;max-width:700px;flex-wrap:wrap;direction:rtl}
+.letter-slot{width:48px;height:56px;border:2px dashed rgba(255,255,255,0.25);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;font-weight:bold;transition:all 0.2s}
+.letter-slot.filled{border:2px solid #06d6a0;background:rgba(6,214,160,0.15)}
+.letter-slot.next{border-color:#ffd60a;background:rgba(255,214,10,0.08);box-shadow:0 0 12px rgba(255,214,10,0.3)}
+
+/* ANIMATIONS */
+@keyframes popIn{from{transform:scale(0.7);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg)}100%{opacity:0;transform:translateY(300px) rotate(720deg)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes asteroidExplode{0%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:0.5}100%{transform:scale(0);opacity:0}}
+@keyframes letterGrab{0%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:0.6}100%{transform:scale(0);opacity:0}}
+@keyframes flashGreen{0%,100%{box-shadow:none}50%{box-shadow:0 0 24px #06d6a0}}
+
+/* LANDSCAPE */
+@media(min-width:1024px){
+  .screen{padding:16px 40px}
+  .space-area{max-width:900px;height:460px}
+  .rain-area{max-width:900px;height:380px}
+  .counter-grid{grid-template-columns:repeat(4,1fr)}
+  .games-grid{grid-template-columns:repeat(3,1fr)}
+  .falling-letter{width:58px;height:58px;font-size:32px}
+  .letter-slot{width:54px;height:62px;font-size:32px}
+}
+
+@media(max-width:700px){
+  .split-container{flex-direction:column}
+  .games-grid{grid-template-columns:1fr}
+  .game-title{font-size:clamp(26px,5vw,40px)}
+  .game-prompt{font-size:clamp(20px,4vw,30px)}
+  .space-area{height:360px}
+  .rain-area{height:300px}
+  .counter-grid{grid-template-columns:repeat(2,1fr)}
+  .falling-letter{width:44px;height:44px;font-size:24px}
+  .letter-slot{width:40px;height:48px;font-size:24px}
+}
+
+@media(max-width:400px){
+  .games-grid{grid-template-columns:1fr}
+  .space-area{height:320px}
+  .rain-area{height:260px}
+}
+
+/* hub entegrasyonu: iç menü gizli */
+#screen-menu{display:none!important}
+.menu-header{display:none!important}
+.player-toggle{display:none!important}
+.games-grid{display:none!important}
+</style>
+  <script src="/nav.js"></script>
+</head>
+<body>
+
+<!-- ============ MENU SCREEN ============ -->
+<div id="menuScreen" class="screen active">
+  <div class="menu-header">
+    <div class="menu-badge">ARCADE · 7. SINIF · 1. ÜNİTE</div>
+    <div class="menu-title">ألعاب الآركيد</div>
+    <div class="menu-subtitle">ماذا فعلت اليوم؟ — Arcade Oyunlar</div>
+    <div class="menu-info">3 oyun · Solo & 2 Kişilik</div>
+  </div>
+  <div class="player-toggle">
+    <button id="btnSolo" class="active" onclick="setPlayers(1)">🎮 Solo</button>
+    <button id="btn2P" onclick="setPlayers(2)">👥 2 Kişi</button>
+  </div>
+  <div class="games-grid" id="menuGrid"></div>
+</div>
+
+<!-- ============ GAME 1: SPACE DEFENSE ============ -->
+<div id="g1Screen" class="screen">
+  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <div class="game-title">🚀 الدفاع الفضائي</div>
+  <div class="round-info" id="g1RoundInfo"></div>
+  <div class="game-hud" id="g1Hud"></div>
+  <div id="g1Area"></div>
+</div>
+
+<!-- ============ GAME 2: MASTER CHEF ============ -->
+<div id="g2Screen" class="screen">
+  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <div class="game-title">🍳 الطبّاخ الماهر</div>
+  <div class="round-info" id="g2RoundInfo"></div>
+  <div class="game-hud" id="g2Hud"></div>
+  <div id="g2Area"></div>
+</div>
+
+<!-- ============ GAME 3: LETTER RAIN ============ -->
+<div id="g3Screen" class="screen">
+  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <div class="game-title">🧩 مطر الحروف</div>
+  <div class="round-info" id="g3RoundInfo"></div>
+  <div class="game-hud" id="g3Hud"></div>
+  <div id="g3Area"></div>
+</div>
+
+<script>
+/* ================================================================
+   SHARED VOCABULARY DATA
+   ================================================================ */
+const VOCAB = {
+  foods: [
+    {ar:"خُبْز",e:"🍞"},{ar:"جُبْن",e:"🧀"},{ar:"أُرُز",e:"🍚"},{ar:"عَسَل",e:"🍯"},
+    {ar:"شاي",e:"🍵"},{ar:"دَجاج",e:"🍗"},{ar:"لَحْم",e:"🥩"},{ar:"سَمَك",e:"🐟"},
+    {ar:"بَيْض",e:"🥚"},{ar:"زُبْدَة",e:"🧈"},{ar:"كُفْتَة",e:"🧆"},{ar:"حَساء",e:"🍲"},
+    {ar:"حَلِيب",e:"🥛"},{ar:"قَهْوَة",e:"☕"},{ar:"عَصِير",e:"🧃"},{ar:"زَيْتون",e:"🫒"},
+    {ar:"تُفَّاح",e:"🍎"},{ar:"مَوْز",e:"🍌"}
+  ],
+  verbs: [
+    {ar:"يَسْتَيْقِظ",e:"⏰"},{ar:"يُصَلِّي",e:"🕌"},{ar:"يَتَناوَل",e:"🍽️"},
+    {ar:"يَلْبَس",e:"👔"},{ar:"يَذْهَب",e:"🚶"},{ar:"يَرْجِع",e:"🔙"},
+    {ar:"يُساعِد",e:"🤝"},{ar:"يَدْرُس",e:"📖"},{ar:"يَأْكُل",e:"🍴"},
+    {ar:"يَشْرَب",e:"🥤"},{ar:"يَنام",e:"😴"},{ar:"يَتَوَضَّأ",e:"💧"}
+  ],
+  times: [
+    {ar:"الصَّباح",e:"🌅"},{ar:"الظُهر",e:"☀️"},{ar:"العصر",e:"🌤️"},
+    {ar:"المساء",e:"🌆"},{ar:"الليل",e:"🌙"},{ar:"الفَجْر",e:"🌄"}
+  ]
+};
+
+const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+
+/* ================================================================
+   TURKISH TRANSLATIONS
+   ================================================================ */
+const VOCAB_TR = {
+  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
+  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
+  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
+  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
+  'تُفَّاح':'Elma','مَوْز':'Muz',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
+  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
+  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
+  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+};
+function getTr(w){ return VOCAB_TR[w.ar]||''; }
+
+/* ================================================================
+   HARAKAT HELPERS
+   ================================================================ */
+function stripHarakat(str){
+  return str.replace(/[\u064B-\u065F\u0670]/g,'');
+}
+function getLetters(ar){
+  return [...stripHarakat(ar)];
+}
+
+/* ================================================================
+   SOUND SYSTEM (Web Audio API)
+   ================================================================ */
+let _actx;
+function _ac(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx;}
+function _tone(freq,dur,type,vol,delay){
+  type=type||'sine';vol=vol||0.3;delay=delay||0;
+  try{const c=_ac(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=freq;o.type=type;
+  const t=c.currentTime+delay;g.gain.setValueAtTime(vol,t);
+  g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.start(t);o.stop(t+dur);}catch(e){}
+}
+function sesCorrect(){_tone(523,0.1,'sine',0.3,0);_tone(659,0.1,'sine',0.3,0.1);_tone(784,0.2,'sine',0.3,0.2);}
+function sesWrong(){_tone(180,0.15,'sawtooth',0.25,0);_tone(150,0.2,'sawtooth',0.2,0.15);}
+function sesMiss(){_tone(200,0.3,'sawtooth',0.2);_tone(160,0.4,'sawtooth',0.15,0.2);}
+function sesCountdown(){_tone(880,0.08,'sine',0.2);}
+function sesLaser(){_tone(900,0.06,'square',0.25);_tone(1200,0.08,'sine',0.2,0.04);}
+function sesExplode(){_tone(200,0.15,'sawtooth',0.3);_tone(100,0.25,'sawtooth',0.2,0.1);}
+function sesSizzle(){_tone(600,0.1,'sawtooth',0.15);_tone(800,0.06,'sine',0.1,0.05);_tone(400,0.08,'sawtooth',0.1,0.1);}
+function sesPlace(){_tone(440,0.08,'triangle',0.25);_tone(660,0.06,'sine',0.2,0.06);}
+function sesCelebrate(){_tone(523,0.08,'sine',0.3);_tone(659,0.08,'sine',0.3,0.08);_tone(784,0.08,'sine',0.3,0.16);_tone(1047,0.15,'sine',0.35,0.24);}
+
+/* ================================================================
+   GLOBAL STATE
+   ================================================================ */
+let playerCount = 1;
+let currentGame = null;
+let activeIntervals = [];
+let activeRAFs = [];
+let activeTimeouts = [];
+
+function setPlayers(n){
+  playerCount=n;
+  document.getElementById('btnSolo').classList.toggle('active',n===1);
+  document.getElementById('btn2P').classList.toggle('active',n===2);
+}
+
+/* Utility */
+function shuffle(arr){let a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function randInt(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function clamp(v,mn,mx){return Math.max(mn,Math.min(mx,v));}
+function isFood(w){return VOCAB.foods.some(f=>f.ar===w.ar);}
+function isVerb(w){return VOCAB.verbs.some(v=>v.ar===w.ar);}
+function isTime(w){return VOCAB.times.some(t=>t.ar===w.ar);}
+
+function clearAllTimers(){
+  activeIntervals.forEach(id=>clearInterval(id));
+  activeRAFs.forEach(id=>cancelAnimationFrame(id));
+  activeTimeouts.forEach(id=>clearTimeout(id));
+  activeIntervals=[];activeRAFs=[];activeTimeouts=[];
+}
+
+function safeInterval(fn,ms){const id=setInterval(fn,ms);activeIntervals.push(id);return id;}
+function safeTimeout(fn,ms){const id=setTimeout(fn,ms);activeTimeouts.push(id);return id;}
+function safeRAF(fn){const id=requestAnimationFrame(fn);activeRAFs.push(id);return id;}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function goMenu(){
+  clearAllTimers();
+  currentGame=null;
+  window.location.hash='';
+  showScreen('menuScreen');
+  document.querySelectorAll('.game-over-overlay').forEach(el=>el.remove());
+}
+
+function showGameOver(scores,restartFn){
+  const ov=document.createElement('div');
+  ov.className='game-over-overlay';
+  let html='<div class="game-over-box"><h2>انتهت اللعبة!</h2>';
+  if(playerCount===1){
+    html+='<div class="final-score">'+scores[0]+' نقطة</div>';
+  } else {
+    html+='<div style="font-size:28px;margin:10px 0">اللاعب ١</div><div class="final-score">'+scores[0]+'</div>';
+    html+='<div style="font-size:28px;margin:10px 0">اللاعب ٢</div><div class="p2-score">'+scores[1]+'</div>';
+    if(scores[0]>scores[1]) html+='<div style="color:#06d6a0;font-size:30px;margin:10px 0">فاز اللاعب ١!</div>';
+    else if(scores[1]>scores[0]) html+='<div style="color:#4361ee;font-size:30px;margin:10px 0">فاز اللاعب ٢!</div>';
+    else html+='<div style="color:#ffd60a;font-size:30px;margin:10px 0">تعادُل!</div>';
+  }
+  html+='<button class="go-btn-restart" onclick="this.closest(\'.game-over-overlay\').remove();('+restartFn.name+')()">أعد اللعب</button> ';
+  html+='<button class="go-btn-menu" onclick="this.closest(\'.game-over-overlay\').remove();goMenu()">القائمة</button>';
+  html+='</div>';
+  ov.innerHTML=html;
+  document.body.appendChild(ov);
+}
+
+function spawnConfetti(x,y,count){
+  const colors=['#06d6a0','#ef233c','#4361ee','#ffd60a','#f72585','#4cc9f0'];
+  for(let i=0;i<(count||12);i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=(x+randInt(-30,30))+'px';
+    p.style.top=(y+randInt(-20,0))+'px';
+    p.style.background=pick(colors);
+    p.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    p.style.width=randInt(5,10)+'px';
+    p.style.height=randInt(5,10)+'px';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1600);
+  }
+}
+
+/* Unlock AudioContext on first touch */
+document.addEventListener('click',function unlock(){
+  try{_ac();if(_actx&&_actx.state==='suspended')_actx.resume();}catch(e){}
+  document.removeEventListener('click',unlock);
+},{once:true});
+
+/* ================================================================
+   MENU
+   ================================================================ */
+const GAMES=[
+  {id:'g1',icon:'🚀',ar:'الدفاع الفضائي',tr:'Uzay Savunması'},
+  {id:'g2',icon:'🍳',ar:'الطبّاخ الماهر',tr:'Aşçıbaşı'},
+  {id:'g3',icon:'🧩',ar:'مطر الحروف',tr:'Harf Yağmuru'}
+];
+
+function buildMenu(){
+  const g=document.getElementById('menuGrid');
+  g.innerHTML='';
+  GAMES.forEach(gm=>{
+    const c=document.createElement('div');
+    c.className='game-card';
+    c.innerHTML='<span class="gc-icon">'+gm.icon+'</span><div class="gc-name">'+gm.ar+'</div><div class="gc-tr">'+gm.tr+'</div>';
+    c.onclick=()=>startGame(gm.id);
+    g.appendChild(c);
+  });
+}
+buildMenu();
+
+function startGame(id){
+  window.location.hash=id;
+  currentGame=id;
+  showScreen(id+'Screen');
+  switch(id){
+    case 'g1': initSpaceDefense(); break;
+    case 'g2': initMasterChef(); break;
+    case 'g3': initLetterRain(); break;
+  }
+}
+
+/* Hash routing */
+window.addEventListener('hashchange',function(){
+  const h=window.location.hash.replace('#','');
+  if(!h){goMenu();return;}
+  if(['g1','g2','g3'].includes(h) && currentGame!==h){
+    startGame(h);
+  }
+});
+window.addEventListener('load',function(){
+  const h=window.location.hash.replace('#','');
+  if(['g1','g2','g3'].includes(h)){startGame(h);}
+});
+
+/* ================================================================
+   GAME 1: SPACE DEFENSE  🚀 الدفاع الفضائي
+   ================================================================ */
+function initSpaceDefense(){
+  clearAllTimers();
+  document.querySelectorAll('.game-over-overlay').forEach(el=>el.remove());
+
+  const rounds=[
+    {cat:'foods',dur:45,speed:1.0,spawnMs:1800},
+    {cat:'verbs',dur:45,speed:1.3,spawnMs:1500},
+    {cat:'mixed',dur:45,speed:1.6,spawnMs:1200}
+  ];
+
+  const is2P=(playerCount===2);
+  const state={round:0,p1:{score:0,hearts:3},p2:{score:0,hearts:3}};
+
+  function getPool(cat){
+    if(cat==='foods') return VOCAB.foods;
+    if(cat==='verbs') return VOCAB.verbs;
+    return [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
+  }
+
+  function pickTarget(cat){
+    const pool=getPool(cat);
+    return pool[Math.floor(Math.random()*pool.length)];
+  }
+
+  function buildPlayerArea(containerId,ps,label){
+    const wrap=document.createElement('div');
+    wrap.id=containerId;
+
+    if(label){
+      const lbl=document.createElement('div');
+      lbl.className='split-label';
+      lbl.innerHTML=label+' — <span class="score-val" id="'+containerId+'Score">0</span> · <span class="hearts" id="'+containerId+'Hearts">❤❤❤</span>';
+      wrap.appendChild(lbl);
+    }
+
+    const banner=document.createElement('div');
+    banner.className='target-banner';
+    banner.id=containerId+'Banner';
+    wrap.appendChild(banner);
+
+    const area=document.createElement('div');
+    area.className='space-area';
+    area.id=containerId+'Space';
+    wrap.appendChild(area);
+
+    const shield=document.createElement('div');
+    shield.className='shield-bar';
+    wrap.appendChild(shield);
+
+    return wrap;
+  }
+
+  function runRound(rd){
+    const r=rounds[rd];
+    state.p1.hearts=3;state.p2.hearts=3;
+    let roundDone=false;
+
+    document.getElementById('g1RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+
+    let timeLeft=r.dur;
+    const area=document.getElementById('g1Area');
+    area.innerHTML='';
+
+    const hudHTML='<span>⏰ <span class="timer-val" id="g1Timer">'+timeLeft+'</span></span>'+
+      (is2P?'':'<span>نقاط <span class="score-val" id="g1Score">0</span></span>'+
+      '<span class="hearts" id="g1Hearts">❤❤❤</span>');
+    document.getElementById('g1Hud').innerHTML=hudHTML;
+
+    const players=[];
+
+    if(is2P){
+      const split=document.createElement('div');
+      split.className='split-container';
+      const p1w=buildPlayerArea('g1P1',state.p1,'Oyuncu 1');
+      const p2w=buildPlayerArea('g1P2',state.p2,'Oyuncu 2');
+      split.appendChild(p1w);split.appendChild(p2w);
+      area.appendChild(split);
+      players.push({id:'g1P1',ps:state.p1,target:null,asteroids:[]});
+      players.push({id:'g1P2',ps:state.p2,target:null,asteroids:[]});
+    } else {
+      const pw=buildPlayerArea('g1Solo',state.p1,null);
+      area.appendChild(pw);
+      players.push({id:'g1Solo',ps:state.p1,target:null,asteroids:[]});
+    }
+
+    function updateHud(){
+      if(is2P){
+        players.forEach(p=>{
+          const sc=document.getElementById(p.id+'Score');
+          const ht=document.getElementById(p.id+'Hearts');
+          if(sc)sc.textContent=p.ps.score;
+          if(ht)ht.textContent='❤'.repeat(Math.max(0,p.ps.hearts));
+        });
+      } else {
+        const sc=document.getElementById('g1Score');
+        const ht=document.getElementById('g1Hearts');
+        if(sc)sc.textContent=state.p1.score;
+        if(ht)ht.textContent='❤'.repeat(Math.max(0,state.p1.hearts));
+      }
+    }
+
+    function setTarget(p){
+      p.target=pickTarget(r.cat);
+      const banner=document.getElementById(p.id+'Banner');
+      if(banner) banner.textContent=p.target.e+' '+getTr(p.target);
+    }
+
+    function endRound(){
+      if(roundDone)return;
+      roundDone=true;
+      clearAllTimers();
+      if(rd<rounds.length-1){
+        safeTimeout(()=>runRound(rd+1),1200);
+      } else {
+        safeTimeout(()=>{
+          if(is2P) showGameOver([state.p1.score,state.p2.score],initSpaceDefense);
+          else showGameOver([state.p1.score],initSpaceDefense);
+        },600);
+      }
+    }
+
+    function checkHeartsOut(){
+      if(is2P){
+        if(players.every(p=>p.ps.hearts<=0)) endRound();
+      } else {
+        if(state.p1.hearts<=0) endRound();
+      }
+    }
+
+    function spawnAsteroid(p){
+      if(roundDone||p.ps.hearts<=0) return;
+      const spaceEl=document.getElementById(p.id+'Space');
+      if(!spaceEl) return;
+
+      const pool=getPool(r.cat);
+      const isCorrect=Math.random()<0.35;
+      const word=isCorrect?p.target:pool[Math.floor(Math.random()*pool.length)];
+
+      const ast=document.createElement('div');
+      ast.className='asteroid';
+      const wordEl=document.createElement('div');
+      wordEl.className='asteroid-word';
+      wordEl.textContent=word.ar;
+      ast.appendChild(wordEl);
+
+      const spaceW=spaceEl.offsetWidth;
+      const leftPos=randInt(10,Math.max(10,spaceW-130));
+      ast.style.left=leftPos+'px';
+      ast.style.top='-60px';
+
+      spaceEl.appendChild(ast);
+
+      const aObj={el:ast,word:word,y:-60,alive:true};
+      p.asteroids.push(aObj);
+
+      ast.onclick=function(){
+        if(!aObj.alive||roundDone) return;
+        aObj.alive=false;
+        if(word.ar===p.target.ar){
+          sesExplode();
+          ast.classList.add('exploding');
+          p.ps.score+=15;
+          const rect=ast.getBoundingClientRect();
+          spawnConfetti(rect.left+rect.width/2,rect.top,8);
+          setTarget(p);
+          safeTimeout(()=>ast.remove(),400);
+        } else {
+          sesWrong();
+          ast.classList.add('wrong-flash');
+          p.ps.hearts--;
+          updateHud();
+          safeTimeout(()=>{ast.classList.remove('wrong-flash');aObj.alive=true;},500);
+          checkHeartsOut();
+          return;
+        }
+        updateHud();
+      };
+    }
+
+    function animateAsteroids(){
+      if(roundDone) return;
+      players.forEach(p=>{
+        const spaceEl=document.getElementById(p.id+'Space');
+        if(!spaceEl) return;
+        const spaceH=spaceEl.offsetHeight;
+        p.asteroids=p.asteroids.filter(a=>{
+          if(!a.alive){return a.el.parentNode!==null;}
+          a.y+=r.speed*1.8;
+          a.el.style.top=a.y+'px';
+          if(a.y>spaceH){
+            if(a.word.ar===p.target.ar){
+              sesMiss();
+              p.ps.hearts--;
+              updateHud();
+              checkHeartsOut();
+            }
+            a.el.remove();
+            return false;
+          }
+          return true;
+        });
+      });
+      if(!roundDone) safeRAF(animateAsteroids);
+    }
+
+    players.forEach(p=>setTarget(p));
+    updateHud();
+
+    players.forEach(p=>{
+      safeInterval(()=>spawnAsteroid(p),r.spawnMs);
+    });
+
+    safeRAF(animateAsteroids);
+
+    safeInterval(()=>{
+      if(roundDone) return;
+      timeLeft--;
+      const te=document.getElementById('g1Timer');
+      if(te) te.textContent=timeLeft;
+      if(timeLeft<=5&&timeLeft>0) sesCountdown();
+      if(timeLeft<=0) endRound();
+    },1000);
+  }
+
+  state.p1.score=0;state.p1.hearts=3;state.p2.score=0;state.p2.hearts=3;
+  runRound(0);
+}
+
+/* ================================================================
+   GAME 2: MASTER CHEF  🍳 الطبّاخ الماهر
+   ================================================================ */
+function initMasterChef(){
+  clearAllTimers();
+  document.querySelectorAll('.game-over-overlay').forEach(el=>el.remove());
+
+  const rounds=[
+    {needed:3,total:6,dur:60},
+    {needed:4,total:7,dur:60},
+    {needed:4,total:8,dur:60}
+  ];
+
+  const is2P=(playerCount===2);
+  const state={round:0,p1:{score:0},p2:{score:0}};
+
+  /* Themed recipe sets — ingredients that go together */
+  const RECIPE_SETS=[
+    {name:'🍳 Kahvaltı Tabağı', items:['خُبْز','جُبْن','بَيْض','عَسَل','زُبْدَة','زَيْتون','شاي','حَلِيب']},
+    {name:'🥩 Et Yemeği', items:['لَحْم','أُرُز','حَساء','زَيْتون','خُبْز','عَصِير']},
+    {name:'🍗 Tavuk Yemeği', items:['دَجاج','أُرُز','حَساء','خُبْز','زَيْتون','عَصِير']},
+    {name:'🐟 Balık Tabağı', items:['سَمَك','أُرُز','زَيْتون','حَساء','خُبْز','عَصِير']},
+    {name:'🧆 Köfte Tabağı', items:['كُفْتَة','أُرُز','خُبْز','حَساء','زَيْتون','عَصِير']},
+    {name:'🍎 Meyve & İçecek', items:['تُفَّاح','مَوْز','عَصِير','حَلِيب','عَسَل','قَهْوَة']},
+    {name:'🧀 Peynir Tabağı', items:['جُبْن','خُبْز','زَيْتون','شاي','عَسَل','زُبْدَة']},
+    {name:'🍲 Çorba Sofrası', items:['حَساء','خُبْز','زَيْتون','لَحْم','شاي','زُبْدَة']}
+  ];
+
+  function findWord(ar){ return VOCAB.foods.find(f=>f.ar===ar); }
+
+  function buildChefUI(containerId,ps,label){
+    const wrap=document.createElement('div');
+    wrap.id=containerId;
+
+    if(label){
+      const lbl=document.createElement('div');
+      lbl.className='split-label';
+      lbl.innerHTML=label+' — <span class="score-val" id="'+containerId+'Score">0</span>';
+      wrap.appendChild(lbl);
+    }
+
+    const card=document.createElement('div');
+    card.className='recipe-card';
+    card.id=containerId+'Recipe';
+    card.innerHTML='<div class="recipe-title">🍳 Tarif Malzemeleri</div><div class="recipe-items" id="'+containerId+'Items"></div>';
+    wrap.appendChild(card);
+
+    const pot=document.createElement('div');
+    pot.className='pot-area';
+    pot.textContent='🍲';
+    wrap.appendChild(pot);
+
+    const grid=document.createElement('div');
+    grid.className='counter-grid';
+    grid.id=containerId+'Grid';
+    wrap.appendChild(grid);
+
+    return wrap;
+  }
+
+  function runRound(rd){
+    const r=rounds[rd];
+    let roundDone=false;
+    let timeLeft=r.dur;
+
+    document.getElementById('g2RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+
+    const area=document.getElementById('g2Area');
+    area.innerHTML='';
+
+    const hudHTML='<span>⏰ <span class="timer-val" id="g2Timer">'+timeLeft+'</span></span>'+
+      (is2P?'':'<span>نقاط <span class="score-val" id="g2ScoreMain">0</span></span>');
+    document.getElementById('g2Hud').innerHTML=hudHTML;
+
+    const players=[];
+
+    if(is2P){
+      const split=document.createElement('div');
+      split.className='split-container';
+      split.appendChild(buildChefUI('g2P1',state.p1,'Oyuncu 1'));
+      split.appendChild(buildChefUI('g2P2',state.p2,'Oyuncu 2'));
+      area.appendChild(split);
+      players.push({id:'g2P1',ps:state.p1,recipe:null,found:0});
+      players.push({id:'g2P2',ps:state.p2,recipe:null,found:0});
+    } else {
+      area.appendChild(buildChefUI('g2Solo',state.p1,null));
+      players.push({id:'g2Solo',ps:state.p1,recipe:null,found:0});
+    }
+
+    function updateHud(){
+      if(is2P){
+        players.forEach(p=>{
+          const sc=document.getElementById(p.id+'Score');
+          if(sc)sc.textContent=p.ps.score;
+        });
+      } else {
+        const sc=document.getElementById('g2ScoreMain');
+        if(sc)sc.textContent=state.p1.score;
+      }
+    }
+
+    function loadRecipe(p){
+      p.found=0;
+      /* Pick a themed recipe set */
+      const recipe=pick(RECIPE_SETS.filter(rs=>rs.items.length>=r.needed));
+      const setItems=shuffle(recipe.items).map(ar=>findWord(ar)).filter(Boolean);
+      const needed=setItems.slice(0,r.needed);
+      /* Distractors: foods NOT in this recipe set */
+      const distractorPool=shuffle(VOCAB.foods.filter(f=>!recipe.items.includes(f.ar)));
+      const extras=distractorPool.slice(0,r.total-r.needed);
+      const allChoices=shuffle([...needed,...extras]);
+      p.recipe=needed;
+      /* Update recipe card title */
+      const cardEl=document.getElementById(p.id+'Recipe');
+      if(cardEl){
+        const titleEl=cardEl.querySelector('.recipe-title');
+        if(titleEl) titleEl.textContent=recipe.name;
+      }
+
+      const itemsEl=document.getElementById(p.id+'Items');
+      if(itemsEl){
+        itemsEl.innerHTML='';
+        needed.forEach((w,i)=>{
+          const it=document.createElement('span');
+          it.className='recipe-item';
+          it.id=p.id+'Ri'+i;
+          it.textContent=w.e+' '+getTr(w);
+          itemsEl.appendChild(it);
+        });
+      }
+
+      const gridEl=document.getElementById(p.id+'Grid');
+      if(gridEl){
+        gridEl.innerHTML='';
+        allChoices.forEach(w=>{
+          const box=document.createElement('div');
+          box.className='ingredient-box';
+          box.innerHTML='<div class="ing-ar">'+w.ar+'</div>';
+          box.onclick=function(){
+            if(box.classList.contains('correct')||roundDone) return;
+            const isNeeded=p.recipe.some(rw=>rw.ar===w.ar);
+            const alreadyFound=box.classList.contains('correct');
+            if(isNeeded&&!alreadyFound){
+              sesSizzle();
+              box.classList.add('correct');
+              p.ps.score+=20;
+              p.found++;
+              /* mark recipe item */
+              p.recipe.forEach((rw,ri)=>{
+                if(rw.ar===w.ar){
+                  const ri_el=document.getElementById(p.id+'Ri'+ri);
+                  if(ri_el) ri_el.classList.add('found');
+                }
+              });
+              const rect=box.getBoundingClientRect();
+              spawnConfetti(rect.left+rect.width/2,rect.top,6);
+              updateHud();
+              /* check if recipe complete */
+              if(p.found>=r.needed){
+                sesCelebrate();
+                p.ps.score+=30;
+                updateHud();
+                safeTimeout(()=>{if(!roundDone)loadRecipe(p);},800);
+              }
+            } else if(!isNeeded){
+              sesWrong();
+              box.classList.add('wrong');
+              p.ps.score=Math.max(0,p.ps.score-5);
+              updateHud();
+              safeTimeout(()=>box.classList.remove('wrong'),500);
+            }
+          };
+          gridEl.appendChild(box);
+        });
+      }
+    }
+
+    function endRound(){
+      if(roundDone)return;
+      roundDone=true;
+      clearAllTimers();
+      if(rd<rounds.length-1){
+        safeTimeout(()=>runRound(rd+1),1200);
+      } else {
+        safeTimeout(()=>{
+          if(is2P) showGameOver([state.p1.score,state.p2.score],initMasterChef);
+          else showGameOver([state.p1.score],initMasterChef);
+        },600);
+      }
+    }
+
+    players.forEach(p=>loadRecipe(p));
+    updateHud();
+
+    safeInterval(()=>{
+      if(roundDone) return;
+      timeLeft--;
+      const te=document.getElementById('g2Timer');
+      if(te) te.textContent=timeLeft;
+      if(timeLeft<=5&&timeLeft>0) sesCountdown();
+      if(timeLeft<=0) endRound();
+    },1000);
+  }
+
+  state.p1.score=0;state.p2.score=0;
+  runRound(0);
+}
+
+/* ================================================================
+   GAME 3: LETTER RAIN  🧩 مطر الحروف
+   ================================================================ */
+function initLetterRain(){
+  clearAllTimers();
+  document.querySelectorAll('.game-over-overlay').forEach(el=>el.remove());
+
+  const LETTER_POOL='ا أ إ ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن ه و ي ة ى ء'.split(' ');
+
+  const is2P=(playerCount===2);
+  const state={round:0,p1:{score:0},p2:{score:0}};
+
+  /* Sort words by stripped letter count */
+  const allSorted=ALL_WORDS.map(w=>({w:w,len:getLetters(w.ar).length}));
+  const shortWords=allSorted.filter(x=>x.len>=3&&x.len<=4).map(x=>x.w);
+  const medWords=allSorted.filter(x=>x.len>=4&&x.len<=5).map(x=>x.w);
+  const longWords=allSorted.filter(x=>x.len>=5).map(x=>x.w);
+  /* Fallback: if a pool is too small, add from all */
+  function ensurePool(pool,minLen){
+    if(pool.length>=minLen) return pool;
+    const extra=allSorted.filter(x=>x.len>=3).map(x=>x.w);
+    return shuffle([...pool,...extra]).slice(0,Math.max(minLen,pool.length));
+  }
+
+  const rounds=[
+    {pool:ensurePool(shortWords,8),count:8},
+    {pool:ensurePool(medWords,8),count:8},
+    {pool:ensurePool(longWords,8),count:8}
+  ];
+
+  function buildRainUI(containerId,ps,label){
+    const wrap=document.createElement('div');
+    wrap.id=containerId;
+
+    if(label){
+      const lbl=document.createElement('div');
+      lbl.className='split-label';
+      lbl.innerHTML=label+' — <span class="score-val" id="'+containerId+'Score">0</span>';
+      wrap.appendChild(lbl);
+    }
+
+    const disp=document.createElement('div');
+    disp.className='target-display';
+    disp.id=containerId+'Display';
+    wrap.appendChild(disp);
+
+    const rainArea=document.createElement('div');
+    rainArea.className='rain-area';
+    rainArea.id=containerId+'Rain';
+    wrap.appendChild(rainArea);
+
+    const builder=document.createElement('div');
+    builder.className='word-builder';
+    builder.id=containerId+'Builder';
+    wrap.appendChild(builder);
+
+    return wrap;
+  }
+
+  function runRound(rd){
+    const r=rounds[rd];
+    let roundDone=false;
+
+    document.getElementById('g3RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+    const area=document.getElementById('g3Area');
+    area.innerHTML='';
+
+    const hudHTML=(is2P?'':'<span>نقاط <span class="score-val" id="g3ScoreMain">0</span></span>');
+    document.getElementById('g3Hud').innerHTML=hudHTML;
+
+    const players=[];
+
+    if(is2P){
+      const split=document.createElement('div');
+      split.className='split-container';
+      split.appendChild(buildRainUI('g3P1',state.p1,'Oyuncu 1'));
+      split.appendChild(buildRainUI('g3P2',state.p2,'Oyuncu 2'));
+      area.appendChild(split);
+      players.push({id:'g3P1',ps:state.p1});
+      players.push({id:'g3P2',ps:state.p2});
+    } else {
+      area.appendChild(buildRainUI('g3Solo',state.p1,null));
+      players.push({id:'g3Solo',ps:state.p1});
+    }
+
+    /* Shared word list for round */
+    const wordList=shuffle(r.pool).slice(0,r.count);
+
+    players.forEach(p=>{
+      p.wordIdx=0;
+      p.letters=[];
+      p.nextLetterIdx=0;
+      p.wrongCount=0;
+      p.fallingLetters=[];
+      p.completed=0;
+    });
+
+    function updateHud(){
+      if(is2P){
+        players.forEach(p=>{
+          const sc=document.getElementById(p.id+'Score');
+          if(sc)sc.textContent=p.ps.score;
+        });
+      } else {
+        const sc=document.getElementById('g3ScoreMain');
+        if(sc)sc.textContent=state.p1.score;
+      }
+    }
+
+    function loadWord(p){
+      if(p.wordIdx>=wordList.length){
+        p.completed=wordList.length;
+        checkAllDone();
+        return;
+      }
+      const w=wordList[p.wordIdx];
+      p.letters=getLetters(w.ar);
+      p.nextLetterIdx=0;
+      p.wrongCount=0;
+
+      const disp=document.getElementById(p.id+'Display');
+      if(disp) disp.textContent=w.e+' '+getTr(w)+' — '+p.letters.length+' harf';
+
+      const builder=document.getElementById(p.id+'Builder');
+      if(builder){
+        builder.innerHTML='';
+        p.letters.forEach((lt,i)=>{
+          const slot=document.createElement('div');
+          slot.className='letter-slot'+(i===0?' next':'');
+          slot.id=p.id+'Slot'+i;
+          builder.appendChild(slot);
+        });
+      }
+    }
+
+    function highlightNext(p){
+      p.letters.forEach((lt,i)=>{
+        const slot=document.getElementById(p.id+'Slot'+i);
+        if(!slot) return;
+        slot.classList.remove('next');
+        if(i===p.nextLetterIdx) slot.classList.add('next');
+      });
+    }
+
+    function checkAllDone(){
+      if(players.every(pl=>pl.completed>=wordList.length)){
+        if(roundDone) return;
+        roundDone=true;
+        clearAllTimers();
+        if(rd<rounds.length-1){
+          safeTimeout(()=>runRound(rd+1),1200);
+        } else {
+          safeTimeout(()=>{
+            if(is2P) showGameOver([state.p1.score,state.p2.score],initLetterRain);
+            else showGameOver([state.p1.score],initLetterRain);
+          },600);
+        }
+      }
+    }
+
+    function spawnLetter(p){
+      if(roundDone||p.wordIdx>=wordList.length) return;
+      const rainEl=document.getElementById(p.id+'Rain');
+      if(!rainEl) return;
+
+      const neededLetter=p.letters[p.nextLetterIdx];
+      const isCorrect=Math.random()<0.4;
+      const letter=isCorrect?neededLetter:pick(LETTER_POOL);
+
+      const el=document.createElement('div');
+      el.className='falling-letter';
+      el.textContent=letter;
+
+      const rainW=rainEl.offsetWidth;
+      const leftPos=randInt(10,Math.max(10,rainW-62));
+      el.style.left=leftPos+'px';
+      el.style.top='-56px';
+      rainEl.appendChild(el);
+
+      const fObj={el:el,letter:letter,y:-56,alive:true};
+      p.fallingLetters.push(fObj);
+
+      el.onclick=function(){
+        if(!fObj.alive||roundDone) return;
+        fObj.alive=false;
+        if(letter===p.letters[p.nextLetterIdx]){
+          sesPlace();
+          el.classList.add('grabbed');
+          const slot=document.getElementById(p.id+'Slot'+p.nextLetterIdx);
+          if(slot){
+            slot.textContent=letter;
+            slot.classList.add('filled');
+            slot.classList.remove('next');
+          }
+          p.nextLetterIdx++;
+          if(p.nextLetterIdx>=p.letters.length){
+            /* Word complete */
+            sesCelebrate();
+            const bonus=Math.max(0,25-p.wrongCount*2);
+            p.ps.score+=bonus;
+            updateHud();
+            const rect=rainEl.getBoundingClientRect();
+            spawnConfetti(rect.left+rect.width/2,rect.top+rect.height/2,10);
+            p.wordIdx++;
+            p.completed=p.wordIdx;
+            safeTimeout(()=>{if(!roundDone)loadWord(p);},700);
+          } else {
+            highlightNext(p);
+          }
+          updateHud();
+          safeTimeout(()=>el.remove(),350);
+        } else {
+          sesWrong();
+          el.classList.add('wrong-letter');
+          p.wrongCount++;
+          if(p.wrongCount>=3){
+            p.ps.score=Math.max(0,p.ps.score-5);
+            p.wrongCount=0;
+            updateHud();
+          }
+          safeTimeout(()=>{el.classList.remove('wrong-letter');fObj.alive=true;},500);
+        }
+      };
+    }
+
+    function animateLetters(){
+      if(roundDone) return;
+      players.forEach(p=>{
+        const rainEl=document.getElementById(p.id+'Rain');
+        if(!rainEl) return;
+        const rainH=rainEl.offsetHeight;
+        p.fallingLetters=p.fallingLetters.filter(f=>{
+          if(!f.alive&&!f.el.parentNode) return false;
+          if(!f.alive) return true;
+          f.y+=1.2;
+          f.el.style.top=f.y+'px';
+          if(f.y>rainH){
+            f.el.remove();
+            return false;
+          }
+          return true;
+        });
+      });
+      if(!roundDone) safeRAF(animateLetters);
+    }
+
+    players.forEach(p=>loadWord(p));
+    updateHud();
+
+    players.forEach(p=>{
+      safeInterval(()=>spawnLetter(p),900);
+    });
+
+    safeRAF(animateLetters);
+  }
+
+  state.p1.score=0;state.p2.score=0;
+  runRound(0);
+}
+</script>
+</body>
+</html>
