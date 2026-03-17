@@ -3,15 +3,10 @@
    Tema renkleri her projede :root override ile değiştirilir.
    ============================================================ */
 
+@import url('../base.css');
+
 /* -- Default theme (yeşil / Arapça) -- */
 :root {
-  --bg: #0a0a0f;
-  --surface: #111118;
-  --surface2: #18181f;
-  --border: #222230;
-  --text: #e8e8f0;
-  --muted: #44445a;
-  --muted2: #7777a0;
   --accent: #10b981;
   --accent-soft: rgba(16,185,129,0.1);
   --accent-glow: rgba(16,185,129,0.25);
@@ -19,7 +14,6 @@
   --bg-gradient1: rgba(16,185,129,0.06);
   --bg-gradient2: rgba(5,150,105,0.04);
   --h1-gradient: linear-gradient(135deg, #10b981, #34d399, #059669);
-  --radius: 12px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
