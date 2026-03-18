@@ -150,5 +150,13 @@ const ARACLAR_DATA = [
   "amac": "Kısa ve yapılabilir challenge serileri üretmek",
   "tema": "Bugün odaklı dönüşüm",
   "mekanik": "Hedef alanı, süre, zorluk"
+ },
+ {
+  "id": "AP19",
+  "ad": "İlham Günlüğü",
+  "kitle": "Genel",
+  "amac": "Her hafta bir rol model tanıyıp hayatına uygulamak",
+  "tema": "Rol modeller / ilham / çevre",
+  "mekanik": "Rol model ismi, çıkarılan ders, haftalık uygulama adımı"
  }
 ];

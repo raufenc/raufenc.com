@@ -174,5 +174,16 @@ const TESTLER_DATA = [
   "soruSayisi": "Hızlı dopamin / derin anlam / bağ / başarı ekseni",
   "sure": "Hızlı ödül ağırlıklı / Karışık / Derinlik ağırlıklı",
   "slug": "test-15"
+ },
+ {
+  "id": "TS16",
+  "ad": "Rol Model Farkındalık Testi",
+  "kitle": "Genel",
+  "amac": "Hayatındaki rol model farkındalığını ve ilham ağını ölçmek",
+  "tema": "Rol modeller / çevre / ilham",
+  "mekanik": "10",
+  "soruSayisi": "Peygamber, sahabi, âlim, bilim farkındalık skoru",
+  "sure": "Güçlü İlham Ağı / Gelişen / Boş Alan / Acil Keşif",
+  "slug": "test-16"
  }
 ];

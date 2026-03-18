@@ -2,7 +2,7 @@ const BESLI_SECIMLER_DATA = [
  {
   "tema": "Başlangıç 5'lisi",
   "isimler": [
-   "Hz. Muhammed (s.a.v.)",
+   "Hz. Muhammed sallallahu aleyhi ve sellem",
    "Hz. Ebu Bekir",
    "Hz. Ömer",
    "İmam Gazali",

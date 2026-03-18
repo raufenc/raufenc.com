@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rol Model Farkındalık Testi — NöroTerbiye</title>
+  <meta name="description" content="Hayatında gerçek rol modellerin var mı? Çevrenden aldığın ilham gücünü ölç.">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap nt-narrow">
+      <p class="nt-label nt-fade-in" style="margin-bottom:8px">NöroTerbiye Testi</p>
+      <h1 class="nt-title nt-fade-in" style="font-size:1.8rem;margin-bottom:8px;animation-delay:0.05s">🌟 Rol Model Farkındalık Testi</h1>
+      <p class="nt-subtitle nt-fade-in" style="animation-delay:0.1s;margin-bottom:32px">
+        Hayatında gerçek ilham kaynakları var mı? 10 soru, 3 dakika.
+      </p>
+      <div id="test-area" class="nt-card nt-fade-in" style="padding:32px;animation-delay:0.2s"></div>
+    </div>
+  </section>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script src="/noroterbiye/js/test-engine.js"></script>
+  <script>
+    TestEngine.init({
+      containerId: 'test-area',
+      title: 'Rol Model Farkındalık Testi',
+      slug: 'rol-model-farkindalik',
+      questions: [
+        {
+          soru: 'Hayatında bilinçli olarak örnek aldığın bir kişi var mı?',
+          secenekler: [
+            { text: 'Hiç düşünmedim, kimin peşinden gittiğimi bilmiyorum', puan: 4 },
+            { text: 'Sosyal medyada takip ettiğim ünlüler var', puan: 3 },
+            { text: 'Birkaç kişi var ama çok bilinçli değilim', puan: 2 },
+            { text: 'Evet, hayatıma yön veren örnek şahsiyetler var', puan: 0 },
+          ],
+          aciklama: 'Ayna nöronlar bilinçsiz de çalışır. Kimi izlediğini bilmezsen, nefsin seçimi sana yapar.'
+        },
+        {
+          soru: 'İslam tarihinden kaç kişinin hayat hikâyesini bilirsin?',
+          secenekler: [
+            { text: 'Neredeyse hiç bilmem', puan: 4 },
+            { text: 'Sadece birkaç peygamber kıssası', puan: 3 },
+            { text: 'Peygamberler ve bazı sahabiler', puan: 1 },
+            { text: 'Peygamberler, sahabiler, âlimler ve daha fazlası', puan: 0 },
+          ]
+        },
+        {
+          soru: 'Zor bir anında "falanca kişi olsa ne yapardı?" diye düşünür müsün?',
+          secenekler: [
+            { text: 'Hiç böyle düşünmem', puan: 4 },
+            { text: 'Nadiren, belki dizi/film karakterleriyle', puan: 3 },
+            { text: 'Bazen aklıma gelir', puan: 1 },
+            { text: 'Evet, sık sık büyüklerin tavrını düşünürüm', puan: 0 },
+          ],
+          aciklama: 'Zihinde bir rol model canlandırmak, prefrontal korteksi aktive eder ve dürtüsel tepkiyi frenler.'
+        },
+        {
+          soru: 'Çocuğuna veya bir gence "şu kişiyi tanı" diyebileceğin isimler var mı?',
+          secenekler: [
+            { text: 'Aklıma hiç kimse gelmiyor', puan: 4 },
+            { text: 'Belki bir iki isim söyleyebilirim', puan: 3 },
+            { text: 'Birkaç isim sayabilirim', puan: 1 },
+            { text: 'Her kategori için önerebileceğim isimler var', puan: 0 },
+          ]
+        },
+        {
+          soru: 'Sabır konusunda aklına gelen ilk rol model kim?',
+          secenekler: [
+            { text: 'Hiç kimse gelmiyor aklıma', puan: 4 },
+            { text: 'Genel bir fikrim var ama somut isim yok', puan: 3 },
+            { text: 'Bir iki isim sayabilirim', puan: 1 },
+            { text: 'Hz. Eyyub aleyhisselam, Hz. Yakub aleyhisselam gibi örnekleri hemen sayarım', puan: 0 },
+          ],
+          aciklama: 'Sabır soyut kalınca zor gelir. Somut bir örnek, soyut kavramı yaşanabilir kılar.'
+        },
+        {
+          soru: 'Adalet denince aklına gelen İslam büyüğü var mı?',
+          secenekler: [
+            { text: 'Hiç düşünmedim', puan: 4 },
+            { text: 'Belki Hz. Ömer radıyallahu anh ama detayını bilmem', puan: 2 },
+            { text: 'Hz. Ömer radıyallahu anh ve birkaç kişi', puan: 1 },
+            { text: 'Hz. Ömer radıyallahu anh, Ömer b. Abdülaziz, Selahaddin Eyyubi...', puan: 0 },
+          ]
+        },
+        {
+          soru: 'İlim ve bilim alanında İslam medeniyetinden kaç isim sayabilirsin?',
+          secenekler: [
+            { text: 'Hiç bilmiyorum', puan: 4 },
+            { text: 'Belki İbn Sina duydum', puan: 3 },
+            { text: 'Birkaç isim sayabilirim', puan: 1 },
+            { text: 'Harezmi, İbnü\'l-Heysem, Cezeri, Biruni gibi çok isim bilirim', puan: 0 },
+          ],
+          aciklama: 'İslam medeniyetinin bilim mirasını bilmek, özgüven ve aidiyet duygusunu güçlendirir.'
+        },
+        {
+          soru: 'Hayatındaki kadın rol modellerin kimler?',
+          secenekler: [
+            { text: 'Hiç düşünmedim', puan: 4 },
+            { text: 'Sadece modern ünlüler', puan: 3 },
+            { text: 'Hz. Hatice radıyallahu anha veya Hz. Aişe radıyallahu anha gibi isimler var', puan: 1 },
+            { text: 'Hz. Hatice radıyallahu anha, Hz. Fatıma radıyallahu anha, Nesibe bint Kab radıyallahu anha gibi çok örnek var', puan: 0 },
+          ]
+        },
+        {
+          soru: 'Son bir ayda bir rol modelin hayatından bir şey okudun mu?',
+          secenekler: [
+            { text: 'Hayır, hiç okumadım', puan: 4 },
+            { text: 'Sosyal medyada bir şeyler gördüm', puan: 3 },
+            { text: 'Bir kitap veya makale okudum', puan: 1 },
+            { text: 'Düzenli olarak büyüklerin hayatlarını okuyorum', puan: 0 },
+          ]
+        },
+        {
+          soru: 'Nefs terbiyesinde çevrenin etkisini düşündüğünde, rol modellerin yeri ne?',
+          secenekler: [
+            { text: 'Hiç bağlantı kurmadım', puan: 4 },
+            { text: 'Mantıklı ama pratikte uygulamıyorum', puan: 3 },
+            { text: 'Bazen ilham alıyorum', puan: 1 },
+            { text: 'Rol modeller terbiye yolculuğumun temel taşı', puan: 0 },
+          ],
+          aciklama: 'Çevre yalnızca fiziksel değildir. Zihinsel çevre — kimi okuduğun, kimi düşündüğün — en az fiziksel çevre kadar etkilidir.'
+        },
+      ],
+      resultRanges: [
+        { min: 0, max: 20, label: 'Güçlü İlham Ağı', text: 'Hayatında sağlam rol modeller var. Bu büyük bir nimet. İlham Verenler sayfasıyla ufkunu daha da genişlet.', emoji: '🌟' },
+        { min: 21, max: 45, label: 'Gelişen Farkındalık', text: 'Bazı rol modellerin var ama daha çok tanımaya ihtiyacın var. İlham Verenler kataloğuna göz at, yeni isimler keşfet.', emoji: '📖' },
+        { min: 46, max: 70, label: 'Boş Alan Var', text: 'Rol model dünyanda ciddi boşluklar var. Bu boşluğu modern medya dolduruyor olabilir. Bilinçli bir keşif yolculuğuna çık.', emoji: '🔍' },
+        { min: 71, max: 100, label: 'Acil Keşif Gerekli', text: 'Neredeyse hiç rol model farkındalığın yok. Bu, nefsin en güçlü olduğu alandır. İlham Verenler sayfasından başla!', emoji: '🚨' },
+      ]
+    });
+
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

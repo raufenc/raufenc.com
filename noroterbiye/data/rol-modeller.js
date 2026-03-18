@@ -3,7 +3,7 @@ const ROL_MODELLER_DATA = [
   "id": 1,
   "kategori": "Peygamber",
   "altKategori": "Ulü'l-Azm / Son Peygamber",
-  "isim": "Hz. Muhammed (s.a.v.)",
+  "isim": "Hz. Muhammed sallallahu aleyhi ve sellem",
   "donem": "570-632",
   "cografya": "Mekke-Medine / Hicaz",
   "temalar": "tebliğ, merhamet, adalet, sabır, liderlik",

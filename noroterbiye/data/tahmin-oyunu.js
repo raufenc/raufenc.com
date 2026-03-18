@@ -17,7 +17,7 @@ const TAHMIN_OYUNU_DATA = [
     "cevap": "Evet."
    }
   ],
-  "dogruCevap": "Hz. Muhammed (s.a.v.)"
+  "dogruCevap": "Hz. Muhammed sallallahu aleyhi ve sellem"
  },
  {
   "id": 2,

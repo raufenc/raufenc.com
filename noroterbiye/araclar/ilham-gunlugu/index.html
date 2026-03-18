@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlham Günlüğü — NöroTerbiye</title>
+  <meta name="description" content="Her hafta bir rol model seç, hayatından ders çıkar, kendi hayatına uygula. Kişisel ilham takip aracı.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .entry-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: var(--text); }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg); color: var(--text); font-size: 0.9rem; font-family: inherit; }
+    .form-group textarea { min-height: 80px; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--nt-primary); }
+    .entry-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 12px; transition: all 0.2s; }
+    .entry-card:hover { border-color: var(--nt-primary); }
+    .entry-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+    .entry-name { font-size: 1.05rem; font-weight: 700; }
+    .entry-date { font-size: 0.75rem; color: var(--muted); }
+    .entry-lesson { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
+    .entry-action { font-size: 0.82rem; color: var(--nt-primary); font-weight: 600; padding: 8px 12px; background: var(--nt-primary-soft); border-radius: var(--radius-md); }
+    .entry-delete { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; padding: 4px 8px; }
+    .entry-delete:hover { color: var(--nt-red); }
+    .stats-row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stat-card { flex: 1; min-width: 100px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; text-align: center; }
+    .stat-num { font-size: 1.5rem; font-weight: 800; color: var(--nt-primary); }
+    .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 4px; }
+    .suggest-btn { padding: 6px 12px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); color: var(--text-secondary); font-size: 0.78rem; cursor: pointer; margin: 3px; display: inline-block; }
+    .suggest-btn:hover { border-color: var(--nt-primary); background: var(--nt-primary-soft); }
+    .empty-state { text-align: center; padding: 40px; color: var(--muted); }
+    .empty-state p { font-size: 0.9rem; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap nt-narrow">
+      <h1 class="nt-title nt-fade-in">🌟 İlham Günlüğü</h1>
+      <p class="nt-subtitle nt-fade-in">Her hafta bir rol model tanı, ders çıkar, hayatına uygula.</p>
+
+      <!-- İstatistikler -->
+      <div class="stats-row nt-fade-in" id="stats"></div>
+
+      <!-- Yeni Kayıt Formu -->
+      <div class="entry-form nt-fade-in">
+        <h3 style="margin-bottom:16px">Yeni İlham Kaydı</h3>
+
+        <div style="margin-bottom:12px">
+          <label style="font-size:0.8rem;color:var(--muted);margin-bottom:8px;display:block">Hızlı seçim:</label>
+          <div id="suggestions"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Rol Model</label>
+          <input type="text" id="inp-name" placeholder="Örn: Hz. Ömer, İmam Gazali, Mimar Sinan...">
+        </div>
+        <div class="form-group">
+          <label>Ondan Ne Öğrendim?</label>
+          <textarea id="inp-lesson" placeholder="Bu kişinin hayatından çıkardığın en önemli ders nedir?"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Bu Hafta Uygulayacağım Adım</label>
+          <input type="text" id="inp-action" placeholder="Örn: Her gece 5 dk muhasebe yapacağım">
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="nt-btn nt-btn-primary" onclick="addEntry()">Kaydet</button>
+        </div>
+      </div>
+
+      <!-- Kayıtlar -->
+      <h3 style="margin-bottom:12px" class="nt-fade-in">Geçmiş Kayıtlar</h3>
+      <div id="entries-list"></div>
+
+      <div style="text-align:center;margin-top:20px">
+        <button class="nt-btn nt-btn-secondary" onclick="NT.downloadPDF('entries-list','İlham-Günlüğü.pdf')">📄 PDF İndir</button>
+        <a href="/noroterbiye/ilham-verenler/" class="nt-btn nt-btn-secondary">🌟 İlham Verenler</a>
+      </div>
+    </div>
+  </section>
+
+  <script src="/noroterbiye/data/rol-modeller.js"></script>
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    let entries = NT.load('ilham-gunlugu', []);
+
+    // Hızlı öneri butonları — rastgele 8 isim
+    (function() {
+      const shuffled = [...ROL_MODELLER_DATA].sort(() => Math.random() - 0.5).slice(0, 8);
+      const container = document.getElementById('suggestions');
+      shuffled.forEach(r => {
+        const btn = document.createElement('button');
+        btn.className = 'suggest-btn';
+        btn.textContent = r.isim;
+        btn.onclick = () => {
+          document.getElementById('inp-name').value = r.isim;
+          document.getElementById('inp-lesson').placeholder = r.nedenRolModel;
+        };
+        container.appendChild(btn);
+      });
+    })();
+
+    function addEntry() {
+      const name = document.getElementById('inp-name').value.trim();
+      const lesson = document.getElementById('inp-lesson').value.trim();
+      const action = document.getElementById('inp-action').value.trim();
+      if (!name) { NT.toast('Rol model ismi gerekli'); return; }
+      if (!lesson) { NT.toast('Ders alanını doldur'); return; }
+
+      entries.unshift({
+        id: Date.now(),
+        name: name,
+        lesson: lesson,
+        action: action || '—',
+        date: new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }),
+        week: getWeekNumber()
+      });
+
+      NT.save('ilham-gunlugu', entries);
+      document.getElementById('inp-name').value = '';
+      document.getElementById('inp-lesson').value = '';
+      document.getElementById('inp-action').value = '';
+      render();
+      NT.toast('Kayıt eklendi!');
+    }
+
+    function deleteEntry(id) {
+      entries = entries.filter(e => e.id !== id);
+      NT.save('ilham-gunlugu', entries);
+      render();
+    }
+
+    function getWeekNumber() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      return Math.ceil(((now - start) / 86400000 + start.getDay() + 1) / 7);
+    }
+
+    function render() {
+      // İstatistikler
+      const uniqueNames = new Set(entries.map(e => e.name));
+      const uniqueWeeks = new Set(entries.map(e => e.week));
+      const cats = new Set();
+      entries.forEach(e => {
+        const m = ROL_MODELLER_DATA.find(r => r.isim === e.name);
+        if (m) cats.add(m.kategori);
+      });
+
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="stat-num">${entries.length}</div><div class="stat-label">Toplam Kayıt</div></div>
+        <div class="stat-card"><div class="stat-num">${uniqueNames.size}</div><div class="stat-label">Farklı Rol Model</div></div>
+        <div class="stat-card"><div class="stat-num">${uniqueWeeks.size}</div><div class="stat-label">Aktif Hafta</div></div>
+        <div class="stat-card"><div class="stat-num">${cats.size}/6</div><div class="stat-label">Kategori</div></div>
+      `;
+
+      // Kayıtlar
+      const list = document.getElementById('entries-list');
+      if (entries.length === 0) {
+        list.innerHTML = '<div class="empty-state"><div style="font-size:3rem">🌟</div><p>Henüz kayıt yok. İlk ilham kaydını oluştur!</p></div>';
+        return;
+      }
+
+      list.innerHTML = entries.map(e => `
+        <div class="entry-card">
+          <div class="entry-header">
+            <div>
+              <div class="entry-name">${escapeHtml(e.name)}</div>
+              <div class="entry-date">${e.date}</div>
+            </div>
+            <button class="entry-delete" onclick="deleteEntry(${e.id})" title="Sil">🗑️</button>
+          </div>
+          <div class="entry-lesson">${escapeHtml(e.lesson)}</div>
+          <div class="entry-action">🎯 ${escapeHtml(e.action)}</div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    render();
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

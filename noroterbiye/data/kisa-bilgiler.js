@@ -646,5 +646,45 @@ const KISA_BILGILER_DATA = [
   "kisaBilgi": "İyi bir site, kullanıcıyı yalnız bilgilendirmez; bir sonraki adımı da kurar.",
   "aciklama": "Bu kitap için dijital son durak mutlaka yapılacaklar listesi olmalı.",
   "ilgiliKavram": "Yapılacaklar Listesi"
+ },
+ {
+  "id": "K081",
+  "tema": "Çevre",
+  "baslik": "Rol model ayna nöronların en güçlü girdisidir",
+  "kisaBilgi": "Beyin, gözlemlediği davranışları otomatik olarak simüle eder. Kimi izlersen ona benzemeye başlarsın.",
+  "aciklama": "Ayna nöronlar yalnızca canlı kişileri değil, okunan hayat hikâyelerini de işler. Bu yüzden büyüklerin hayatını okumak bizzat terbiyeye dönüşür.",
+  "ilgiliKavram": "Ayna Nöronlar"
+ },
+ {
+  "id": "K082",
+  "tema": "Çevre",
+  "baslik": "Sabır öğretmenlerinin en büyüğü: Hz. Eyyub aleyhisselam",
+  "kisaBilgi": "Hz. Eyyub aleyhisselam yıllarca süren hastalığa rağmen şükrü bırakmadı. Sabrın sınırı yok, diye öğretti.",
+  "aciklama": "Nöroterbiyede sabrın nörokimyası anlatılır; Hz. Eyyub aleyhisselam bunun en somut örneğidir. Zorluk uzadıkça irade zayıflar, ama teslimiyet güçlendirir.",
+  "ilgiliKavram": "Sabır"
+ },
+ {
+  "id": "K083",
+  "tema": "Terbiye",
+  "baslik": "İmam Gazali: Nefsi tanımanın ilk adımı muhasebedir",
+  "kisaBilgi": "Gazali, İhya'sında nefsi tanımanın yolunun her gece kendini hesaba çekmekten geçtiğini söyler.",
+  "aciklama": "Günlük muhasebe, prefrontal korteksi güçlendirir. Farkındalık olmadan değişim başlamaz — bu hem sinirbilimin hem tasavvufun ortak dersidir.",
+  "ilgiliKavram": "Muhasebe"
+ },
+ {
+  "id": "K084",
+  "tema": "Çevre",
+  "baslik": "Hz. Ömer radıyallahu anh adaleti, nefse hâkim olmakla kurdu",
+  "kisaBilgi": "Hz. Ömer radıyallahu anh kendi nefsine en sert davranan liderdi. Gece sokakları dolaşır, milletinin halini kontrol ederdi.",
+  "aciklama": "Liderlik ve adalet, önce kişinin kendi nefsini terbiye etmesiyle başlar. Gadab kontrolü olmadan adalet olmaz.",
+  "ilgiliKavram": "Gadab"
+ },
+ {
+  "id": "K085",
+  "tema": "Terbiye",
+  "baslik": "Harezmi: Sistemli düşünmek nefse karşı en güçlü silahtır",
+  "kisaBilgi": "Cebirin kurucusu Harezmi, karmaşık problemleri adımlara bölerek çözmeyi öğretti.",
+  "aciklama": "Nefis terbiyesinde de aynı mantık geçerli: büyük hedefi küçük adımlara böl, her adımı ölçülebilir kıl. Kaos nefsin, düzen aklın dostudur.",
+  "ilgiliKavram": "Sistem Düşüncesi"
  }
 ];
