@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5'li Seçimler — NöroTerbiye</title>
+  <meta name="description" content="9 farklı temada kendi 5'li rol model ekibini oluştur. Sabır, cesaret, ilim...">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤲</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .tema-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; transition: all 0.3s; }
+    .tema-card.active { border-color: var(--nt-primary); }
+    .tema-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
+    .tema-ders { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px; }
+    .slots { display: flex; gap: 10px; flex-wrap: wrap; }
+    .slot { flex: 1; min-width: 120px; padding: 14px 10px; border: 2px dashed var(--border); border-radius: var(--radius-md); text-align: center; font-size: 0.85rem; color: var(--muted); cursor: pointer; transition: all 0.2s; position: relative; }
+    .slot.filled { border-style: solid; border-color: var(--nt-green); background: var(--nt-green-soft); color: var(--text); font-weight: 600; }
+    .slot.highlight { border-color: var(--nt-primary); background: var(--nt-primary-soft); }
+    .slot .remove-btn { position: absolute; top: -8px; right: -8px; width: 20px; height: 20px; border-radius: 50%; background: var(--nt-red); color: #fff; border: none; font-size: 0.7rem; cursor: pointer; display: none; align-items: center; justify-content: center; }
+    .slot.filled .remove-btn { display: flex; }
+    .model-pool { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin-top: 20px; }
+    .pool-item { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); cursor: pointer; font-size: 0.82rem; text-align: center; transition: all 0.2s; }
+    .pool-item:hover { border-color: var(--nt-primary); background: var(--nt-primary-soft); }
+    .pool-item.used { opacity: 0.3; pointer-events: none; }
+    .pool-item .pool-cat { font-size: 0.65rem; color: var(--muted); display: block; margin-top: 2px; }
+    .compare-section { background: var(--surface); border: 2px solid var(--nt-primary); border-radius: var(--radius-lg); padding: 24px; margin-top: 24px; }
+    .compare-title { font-size: 1rem; font-weight: 700; margin-bottom: 12px; text-align: center; }
+    .compare-row { display: flex; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-num { width: 24px; text-align: center; font-weight: 700; color: var(--nt-primary); }
+    .compare-you { flex: 1; font-weight: 600; }
+    .compare-ref { flex: 1; color: var(--text-secondary); }
+    .filter-cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .fcat { padding: 4px 10px; border: 1px solid var(--border); border-radius: 16px; font-size: 0.72rem; cursor: pointer; background: var(--surface); color: var(--text-secondary); }
+    .fcat.active { background: var(--nt-primary); color: #fff; border-color: var(--nt-primary); }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap nt-narrow">
+
+      <h1 class="nt-title nt-fade-in">🤲 5'li Seçimler</h1>
+      <p class="nt-subtitle nt-fade-in">Her temada kendi 5 rol modelini seç, rehberin cevaplarıyla karşılaştır.</p>
+
+      <div id="tema-list" class="nt-fade-in"></div>
+
+      <div id="pool-section" style="display:none" class="nt-card">
+        <h3 style="margin-bottom:8px" id="pool-title">Rol model seç:</h3>
+        <div class="filter-cats" id="pool-filters"></div>
+        <div class="model-pool" id="model-pool"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/noroterbiye/data/besli-secimler.js"></script>
+  <script src="/noroterbiye/data/rol-modeller.js"></script>
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    let activeTema = null, activeSlot = null, poolFilter = 'Hepsi';
+    const selections = {};
+    BESLI_SECIMLER_DATA.forEach((b, i) => selections[i] = [null, null, null, null, null]);
+
+    const KAT_EMOJI = { 'Peygamber':'🕊️','Sahabi / Ehl-i Beyt':'⭐','Âlim / İmam':'📚','Evliya / Mürşid':'💚','Sultan / Komutan':'⚔️','Bilim / Mucit':'🔬' };
+
+    function renderTemas() {
+      const container = document.getElementById('tema-list');
+      container.innerHTML = '';
+      BESLI_SECIMLER_DATA.forEach((tema, ti) => {
+        const div = document.createElement('div');
+        div.className = 'tema-card' + (activeTema === ti ? ' active' : '');
+        div.innerHTML = `
+          <div class="tema-title">${tema.tema}</div>
+          <div class="tema-ders">${tema.ders}</div>
+          <div class="slots" id="slots-${ti}">
+            ${[0,1,2,3,4].map(si => {
+              const name = selections[ti][si];
+              return `<div class="slot ${name ? 'filled' : ''} ${activeTema === ti && activeSlot === si ? 'highlight' : ''}"
+                onclick="selectSlot(${ti},${si})">
+                ${name ? `<button class="remove-btn" onclick="event.stopPropagation();removeSelection(${ti},${si})">✕</button>${name}` : `${si+1}`}
+              </div>`;
+            }).join('')}
+          </div>
+          ${isComplete(ti) ? renderCompare(ti) : ''}
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function isComplete(ti) { return selections[ti].every(s => s !== null); }
+
+    function renderCompare(ti) {
+      const ref = BESLI_SECIMLER_DATA[ti].isimler;
+      const mine = selections[ti];
+      const matches = mine.filter(m => ref.includes(m)).length;
+      return `
+        <div class="compare-section">
+          <div class="compare-title">Senin seçimin vs Rehberin önerisi (${matches}/5 eşleşme)</div>
+          ${[0,1,2,3,4].map(i => `
+            <div class="compare-row">
+              <div class="compare-num">${i+1}</div>
+              <div class="compare-you">${mine[i]}</div>
+              <div style="color:var(--muted);font-size:0.8rem">↔</div>
+              <div class="compare-ref">${ref[i]}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectSlot(ti, si) {
+      activeTema = ti; activeSlot = si;
+      renderTemas();
+      showPool();
+    }
+
+    function removeSelection(ti, si) {
+      selections[ti][si] = null;
+      renderTemas();
+    }
+
+    function showPool() {
+      const section = document.getElementById('pool-section');
+      section.style.display = 'block';
+      document.getElementById('pool-title').textContent = `${BESLI_SECIMLER_DATA[activeTema].tema} — ${activeSlot + 1}. seçim:`;
+      renderPoolFilters();
+      renderPool();
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function renderPoolFilters() {
+      const cats = ['Hepsi', ...new Set(ROL_MODELLER_DATA.map(r => r.kategori))];
+      const container = document.getElementById('pool-filters');
+      container.innerHTML = cats.map(c =>
+        `<button class="fcat ${poolFilter === c ? 'active' : ''}" onclick="poolFilter='${c}';renderPoolFilters();renderPool()">
+          ${KAT_EMOJI[c] || '🎯'} ${c}
+        </button>`
+      ).join('');
+    }
+
+    function renderPool() {
+      const used = new Set();
+      Object.values(selections).forEach(arr => arr.forEach(s => { if (s) used.add(s); }));
+
+      let pool = poolFilter === 'Hepsi' ? ROL_MODELLER_DATA : ROL_MODELLER_DATA.filter(r => r.kategori === poolFilter);
+      const container = document.getElementById('model-pool');
+      container.innerHTML = pool.map(r => `
+        <div class="pool-item ${used.has(r.isim) ? 'used' : ''}" onclick="pickModel('${r.isim.replace(/'/g, "\\'")}')">
+          ${r.isim}
+          <span class="pool-cat">${KAT_EMOJI[r.kategori] || ''} ${r.kategori}</span>
+        </div>
+      `).join('');
+    }
+
+    function pickModel(name) {
+      if (activeTema === null || activeSlot === null) return;
+      selections[activeTema][activeSlot] = name;
+
+      // Sonraki boş slot'a geç
+      const nextEmpty = selections[activeTema].findIndex((s, i) => i > activeSlot && s === null);
+      if (nextEmpty !== -1) { activeSlot = nextEmpty; }
+      else {
+        const firstEmpty = selections[activeTema].findIndex(s => s === null);
+        if (firstEmpty !== -1) activeSlot = firstEmpty;
+        else { activeTema = null; activeSlot = null; document.getElementById('pool-section').style.display = 'none'; }
+      }
+
+      renderTemas();
+      if (activeTema !== null) { renderPool(); }
+
+      // Kaydet
+      NT.save('besli-secimler', selections);
+    }
+
+    // Kayıtlı veriyi yükle
+    const saved = NT.load('besli-secimler', null);
+    if (saved) Object.keys(saved).forEach(k => { if (selections[k]) selections[k] = saved[k]; });
+
+    renderTemas();
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

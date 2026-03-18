@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İlham Verenler — NöroTerbiye</title>
+  <meta name="description" content="100 Ehli Sünnet rol model: peygamberler, sahabiler, âlimler, evliyalar, sultanlar ve bilim insanları.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+    .filter-btn { padding: 8px 16px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-secondary); font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active { background: var(--nt-primary); color: #fff; border-color: var(--nt-primary); }
+    .filter-btn .count { font-size: 0.7rem; opacity: 0.7; margin-left: 4px; }
+    .model-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; transition: all 0.3s; }
+    .model-card:hover { border-color: var(--nt-primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .model-header { display: flex; gap: 12px; align-items: start; margin-bottom: 12px; }
+    .model-emoji { font-size: 2rem; flex-shrink: 0; }
+    .model-name { font-size: 1.1rem; font-weight: 700; }
+    .model-meta { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+    .model-tags { display: flex; gap: 5px; flex-wrap: wrap; margin: 8px 0; }
+    .model-why { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+    .model-eser { font-size: 0.78rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+    .search-box { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-size: 1rem; margin-bottom: 16px; }
+    .search-box:focus { outline: none; border-color: var(--nt-primary); }
+    .results-count { text-align: center; font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+    .zorluk-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
+    .game-links { display: flex; gap: 10px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap">
+
+      <h1 class="nt-title nt-fade-in" style="font-size:2rem;margin-bottom:8px">🌟 İlham Verenler</h1>
+      <p class="nt-subtitle nt-fade-in">100 Ehli Sünnet rol model — peygamberlerden bilim insanlarına.</p>
+
+      <div class="game-links nt-fade-in">
+        <a href="/noroterbiye/oyunlar/rol-model-tahmini/" class="nt-btn nt-btn-primary">🏅 Tahmin Oyunu</a>
+        <a href="/noroterbiye/oyunlar/besli-secimler/" class="nt-btn nt-btn-secondary">🤲 5'li Seçimler</a>
+      </div>
+
+      <input type="text" class="search-box nt-fade-in" id="search" placeholder="İsim, tema veya dönem ara..." oninput="filterCards()">
+      <div class="filter-bar nt-fade-in" id="filters"></div>
+      <div class="results-count" id="results-count"></div>
+
+      <div class="nt-grid nt-grid-2 nt-stagger" id="cards"></div>
+
+    </div>
+  </section>
+
+  <script src="/noroterbiye/data/rol-modeller.js"></script>
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    let activeFilter = 'Hepsi';
+
+    const KAT_EMOJI = {
+      'Peygamber':'🕊️','Sahabi / Ehl-i Beyt':'⭐','Âlim / İmam':'📚',
+      'Evliya / Mürşid':'💚','Sultan / Komutan':'⚔️','Bilim / Mucit':'🔬'
+    };
+    const KAT_RENK = {
+      'Peygamber':'cyan','Sahabi / Ehl-i Beyt':'green','Âlim / İmam':'purple',
+      'Evliya / Mürşid':'amber','Sultan / Komutan':'red','Bilim / Mucit':'primary'
+    };
+    const ZORLUK_RENK = { 'Kolay':'var(--nt-green)', 'Orta':'var(--nt-amber)', 'Zor':'var(--nt-red)' };
+
+    // Filtre butonları
+    (function() {
+      const cats = ['Hepsi', ...new Set(ROL_MODELLER_DATA.map(r => r.kategori))];
+      const counts = {};
+      ROL_MODELLER_DATA.forEach(r => counts[r.kategori] = (counts[r.kategori] || 0) + 1);
+      counts['Hepsi'] = ROL_MODELLER_DATA.length;
+
+      const bar = document.getElementById('filters');
+      cats.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (c === 'Hepsi' ? ' active' : '');
+        btn.innerHTML = `${KAT_EMOJI[c] || '🎯'} ${c} <span class="count">(${counts[c]})</span>`;
+        btn.onclick = () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = c;
+          filterCards();
+        };
+        bar.appendChild(btn);
+      });
+    })();
+
+    function filterCards() {
+      const q = document.getElementById('search').value.toLowerCase().trim();
+      let data = activeFilter === 'Hepsi' ? ROL_MODELLER_DATA : ROL_MODELLER_DATA.filter(r => r.kategori === activeFilter);
+      if (q) {
+        data = data.filter(r =>
+          r.isim.toLowerCase().includes(q) ||
+          r.temalar.toLowerCase().includes(q) ||
+          r.donem.toLowerCase().includes(q) ||
+          r.cografya.toLowerCase().includes(q) ||
+          r.altKategori.toLowerCase().includes(q) ||
+          r.nedenRolModel.toLowerCase().includes(q)
+        );
+      }
+      renderCards(data);
+    }
+
+    function renderCards(data) {
+      const container = document.getElementById('cards');
+      document.getElementById('results-count').textContent = `${data.length} rol model`;
+      container.innerHTML = data.map(r => `
+        <div class="model-card">
+          <div class="model-header">
+            <div class="model-emoji">${KAT_EMOJI[r.kategori] || '🌟'}</div>
+            <div style="flex:1">
+              <div class="model-name">${r.isim}</div>
+              <div class="model-meta">${r.altKategori} · ${r.donem} · ${r.cografya}</div>
+            </div>
+            <span class="zorluk-dot" style="background:${ZORLUK_RENK[r.zorluk] || 'var(--muted)'}" title="${r.zorluk}"></span>
+          </div>
+          <div class="model-tags">
+            <span class="nt-tag nt-tag-${KAT_RENK[r.kategori] || 'primary'}">${r.kategori}</span>
+            ${r.temalar.split(',').slice(0, 3).map(t => `<span class="nt-tag">${t.trim()}</span>`).join('')}
+          </div>
+          <div class="model-why">${r.nedenRolModel}</div>
+          <div class="model-eser">📖 ${r.oneCikan}</div>
+        </div>
+      `).join('');
+    }
+
+    filterCards();
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

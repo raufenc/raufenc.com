@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rol Model Tahmini — NöroTerbiye</title>
+  <meta name="description" content="3 ipucuyla Ehli Sünnet büyüklerini tanıyabilir misin? 100 rol model, 6 kategori.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏅</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .clue-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; text-align: center; }
+    .clue-num { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .clue-text { font-size: 1.15rem; font-weight: 600; line-height: 1.6; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+    .clue-answer { font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px; font-style: italic; }
+    .guess-input { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+    .guess-input input { flex: 1; min-width: 200px; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-size: 1rem; }
+    .guess-input input:focus { outline: none; border-color: var(--nt-primary); }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .option-btn { padding: 14px 16px; border: 2px solid var(--border); border-radius: var(--radius-md); background: var(--surface); color: var(--text); font-size: 0.95rem; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .option-btn:hover { border-color: var(--nt-primary); background: var(--nt-primary-soft); }
+    .option-btn.correct { border-color: var(--nt-green); background: var(--nt-green-soft); }
+    .option-btn.wrong { border-color: var(--nt-red); background: var(--nt-red-soft); opacity: 0.6; }
+    .option-btn.disabled { pointer-events: none; }
+    .kategori-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 12px; }
+    .zorluk-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; margin-left: 6px; }
+    .reveal-card { background: var(--nt-green-soft); border: 2px solid var(--nt-green); border-radius: var(--radius-lg); padding: 24px; text-align: center; margin-top: 16px; }
+    .reveal-card.wrong-reveal { background: var(--nt-red-soft); border-color: var(--nt-red); }
+    .reveal-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+    .filter-btn { padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px; background: var(--surface); color: var(--text-secondary); font-size: 0.78rem; cursor: pointer; transition: all 0.2s; }
+    .filter-btn.active { background: var(--nt-primary); color: #fff; border-color: var(--nt-primary); }
+    .stats-bar { display: flex; justify-content: center; gap: 24px; margin: 16px 0; font-size: 0.85rem; color: var(--text-secondary); }
+    .stats-bar span { display: flex; align-items: center; gap: 4px; }
+    @media (max-width: 640px) { .options-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap nt-narrow">
+
+      <!-- INTRO -->
+      <div id="intro" class="nt-fade-in">
+        <h1 class="nt-title">🏅 Rol Model Tahmini</h1>
+        <p class="nt-subtitle">3 ipucuyla Ehli Sünnet büyüklerini tanıyabilir misin?</p>
+        <div class="nt-card" style="margin:20px 0">
+          <h3>Nasıl Oynanır?</h3>
+          <ul style="margin:12px 0;padding-left:20px;line-height:2">
+            <li>Her turda bir rol model hakkında 3 ipucu verilir</li>
+            <li>Her ipucundan sonra tahmin şansın var</li>
+            <li>Erken bilirsen daha çok puan kazanırsın (3→2→1)</li>
+            <li>Kategori ve zorluk filtresiyle oyna</li>
+          </ul>
+        </div>
+
+        <div class="filter-bar" id="filters"></div>
+
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+          <button class="nt-btn nt-btn-primary nt-btn-lg" onclick="startGame(10)">10 Soru</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-lg" onclick="startGame(25)">25 Soru</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-lg" onclick="startGame(0)">Hepsi</button>
+        </div>
+      </div>
+
+      <!-- GAME -->
+      <div id="game" style="display:none">
+        <div class="nt-quiz-progress"><div class="nt-quiz-progress-bar" id="progress"></div></div>
+        <div class="stats-bar">
+          <span>📊 <span id="counter">1/10</span></span>
+          <span>⭐ <span id="score">0</span> puan</span>
+          <span id="streak-display">🔥 0</span>
+        </div>
+
+        <div id="question-area"></div>
+      </div>
+
+      <!-- RESULT -->
+      <div id="result" style="display:none">
+        <div class="nt-card nt-result" id="result-card">
+          <div class="nt-result-score" id="final-score"></div>
+          <div class="nt-result-label" id="final-label"></div>
+          <div class="nt-result-text" id="final-text"></div>
+          <div style="margin-top:20px">
+            <div id="final-stats"></div>
+          </div>
+          <div class="nt-result-actions" style="margin-top:20px">
+            <button class="nt-btn nt-btn-primary" onclick="location.reload()">Tekrar Oyna</button>
+            <a href="/noroterbiye/ilham-verenler/" class="nt-btn nt-btn-secondary">İlham Verenler</a>
+            <a href="/noroterbiye/oyunlar/" class="nt-btn nt-btn-secondary">Diğer Oyunlar</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="/noroterbiye/data/tahmin-oyunu.js"></script>
+  <script src="/noroterbiye/data/rol-modeller.js"></script>
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    let questions = [], current = 0, score = 0, streak = 0, maxStreak = 0, clueStep = 0;
+    let activeFilter = 'Hepsi';
+
+    const KAT_RENK = {
+      'Peygamber': '--nt-cyan', 'Sahabi / Ehl-i Beyt': '--nt-green',
+      'Âlim / İmam': '--nt-purple', 'Evliya / Mürşid': '--nt-amber',
+      'Sultan / Komutan': '--nt-red', 'Bilim / Mucit': '--nt-primary'
+    };
+    const KAT_EMOJI = {
+      'Peygamber': '🕊️', 'Sahabi / Ehl-i Beyt': '⭐', 'Âlim / İmam': '📚',
+      'Evliya / Mürşid': '💚', 'Sultan / Komutan': '⚔️', 'Bilim / Mucit': '🔬'
+    };
+
+    // Filtre butonları
+    (function() {
+      const cats = ['Hepsi', ...new Set(TAHMIN_OYUNU_DATA.map(t => t.kategori))];
+      const bar = document.getElementById('filters');
+      cats.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (c === 'Hepsi' ? ' active' : '');
+        btn.textContent = (KAT_EMOJI[c] || '🎯') + ' ' + c;
+        btn.onclick = () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeFilter = c;
+        };
+        bar.appendChild(btn);
+      });
+    })();
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+      return a;
+    }
+
+    function startGame(count) {
+      let pool = activeFilter === 'Hepsi' ? [...TAHMIN_OYUNU_DATA] : TAHMIN_OYUNU_DATA.filter(t => t.kategori === activeFilter);
+      pool = shuffle(pool);
+      questions = count > 0 ? pool.slice(0, count) : pool;
+      current = 0; score = 0; streak = 0; maxStreak = 0; clueStep = 0;
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('game').style.display = 'block';
+      showQuestion();
+    }
+
+    function getDecoys(correct, kategori) {
+      const pool = TAHMIN_OYUNU_DATA.filter(t => t.dogruCevap !== correct);
+      const sameCat = pool.filter(t => t.kategori === kategori);
+      const others = pool.filter(t => t.kategori !== kategori);
+      const decoys = shuffle(sameCat).slice(0, 2);
+      while (decoys.length < 3) {
+        const pick = others[Math.floor(Math.random() * others.length)];
+        if (pick && !decoys.find(d => d.dogruCevap === pick.dogruCevap)) decoys.push(pick);
+      }
+      return decoys.map(d => d.dogruCevap);
+    }
+
+    function showQuestion() {
+      if (current >= questions.length) return endGame();
+      const q = questions[current];
+      clueStep = 0;
+      updateStats();
+
+      const decoys = getDecoys(q.dogruCevap, q.kategori);
+      const options = shuffle([q.dogruCevap, ...decoys.slice(0, 3)]);
+
+      const area = document.getElementById('question-area');
+      area.innerHTML = `
+        <div style="text-align:center;margin-bottom:8px">
+          <span class="kategori-badge" style="background:var(${KAT_RENK[q.kategori] || '--nt-primary'});color:#fff">
+            ${KAT_EMOJI[q.kategori] || '🎯'} ${q.kategori}
+          </span>
+          <span class="zorluk-badge" style="background:var(--surface);border:1px solid var(--border)">${q.zorluk}</span>
+        </div>
+        <div class="clue-card" id="clue-card">
+          <div class="clue-num" id="clue-num">İpucu 1/3</div>
+          <div class="clue-text" id="clue-text">${q.sorular[0].soru}</div>
+          <div class="clue-answer" id="clue-answer">${q.sorular[0].cevap}</div>
+        </div>
+        <div class="options-grid" id="options">
+          ${options.map(o => `<button class="option-btn" onclick="guess(this,'${o.replace(/'/g, "\\'")}')">${o}</button>`).join('')}
+        </div>
+        <div style="text-align:center;margin-top:12px">
+          <button class="nt-btn nt-btn-secondary" id="next-clue-btn" onclick="nextClue()">Sonraki İpucu →</button>
+        </div>
+      `;
+    }
+
+    function nextClue() {
+      const q = questions[current];
+      clueStep++;
+      if (clueStep >= 3) return;
+      document.getElementById('clue-num').textContent = `İpucu ${clueStep + 1}/3`;
+      document.getElementById('clue-text').textContent = q.sorular[clueStep].soru;
+      document.getElementById('clue-answer').textContent = q.sorular[clueStep].cevap;
+      if (clueStep >= 2) document.getElementById('next-clue-btn').style.display = 'none';
+    }
+
+    function guess(btn, answer) {
+      const q = questions[current];
+      const correct = answer === q.dogruCevap;
+      const points = correct ? (3 - clueStep) : 0;
+      score += points;
+
+      if (correct) { streak++; if (streak > maxStreak) maxStreak = streak; }
+      else streak = 0;
+
+      // Mark buttons
+      document.querySelectorAll('.option-btn').forEach(b => {
+        b.classList.add('disabled');
+        if (b.textContent === q.dogruCevap) b.classList.add('correct');
+        else if (b === btn && !correct) b.classList.add('wrong');
+      });
+
+      // Hide next clue button
+      const ncb = document.getElementById('next-clue-btn');
+      if (ncb) ncb.style.display = 'none';
+
+      // Show reveal card with info from ROL_MODELLER_DATA
+      const model = ROL_MODELLER_DATA.find(m => m.isim === q.dogruCevap);
+      const info = model ? `<div style="font-size:0.85rem;color:var(--text-secondary);margin-top:8px;line-height:1.6">${model.nedenRolModel}</div>` : '';
+      const eser = model ? `<div style="font-size:0.8rem;color:var(--muted);margin-top:6px">📖 ${model.oneCikan}</div>` : '';
+
+      const reveal = document.createElement('div');
+      reveal.className = correct ? 'reveal-card' : 'reveal-card wrong-reveal';
+      reveal.innerHTML = `
+        <div style="font-size:1.2rem;margin-bottom:4px">${correct ? '✅ Doğru!' : '❌ Yanlış'} ${correct ? `(+${points} puan)` : ''}</div>
+        <div class="reveal-name">${q.dogruCevap}</div>
+        ${info}${eser}
+        <button class="nt-btn nt-btn-primary" style="margin-top:16px" onclick="current++;showQuestion()">Devam →</button>
+      `;
+      document.getElementById('question-area').appendChild(reveal);
+      updateStats();
+    }
+
+    function updateStats() {
+      document.getElementById('counter').textContent = `${current + 1}/${questions.length}`;
+      document.getElementById('score').textContent = score;
+      document.getElementById('streak-display').textContent = `🔥 ${streak}`;
+      document.getElementById('progress').style.width = `${((current) / questions.length) * 100}%`;
+    }
+
+    function endGame() {
+      document.getElementById('game').style.display = 'none';
+      document.getElementById('result').style.display = 'block';
+      const max = questions.length * 3;
+      const pct = Math.round((score / max) * 100);
+      document.getElementById('final-score').textContent = `${score}/${max}`;
+      let label, text;
+      if (pct >= 90) { label = '🏆 Muhteşem!'; text = 'Ehli Sünnet büyüklerini çok iyi tanıyorsun!'; }
+      else if (pct >= 70) { label = '⭐ Çok İyi!'; text = 'Güçlü bir bilgi birikimin var.'; }
+      else if (pct >= 50) { label = '👍 İyi!'; text = 'Temel bilgin sağlam, detaylarda gelişebilirsin.'; }
+      else if (pct >= 30) { label = '📖 Gelişiyor'; text = 'İlham Verenler sayfasından tanımaya devam et!'; }
+      else { label = '🌱 Başlangıç'; text = 'Her büyük yolculuk bir adımla başlar. İlham Verenler sayfasına göz at!'; }
+      document.getElementById('final-label').textContent = label;
+      document.getElementById('final-text').textContent = text;
+      document.getElementById('final-stats').innerHTML = `
+        <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;font-size:0.85rem;color:var(--text-secondary)">
+          <span>🎯 ${questions.length} soru</span>
+          <span>🔥 En uzun seri: ${maxStreak}</span>
+          <span>📊 Başarı: %${pct}</span>
+        </div>
+      `;
+      NT.save('rol-model-tahmini', { score, max, pct, maxStreak, date: new Date().toISOString() });
+    }
+
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>

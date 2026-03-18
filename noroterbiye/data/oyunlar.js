@@ -118,5 +118,25 @@ const OYUNLAR_DATA = [
   "mekanik": "Anlatı tabanlı mikro oyun",
   "sure": "5-6 dk",
   "slug": "Kişisel yol haritası oluştur"
+ },
+ {
+  "id": "GM13",
+  "ad": "Rol Model Tahmini",
+  "kitle": "Okumayan + Okuyan",
+  "amac": "3 ipucuyla Ehli Sünnet büyüklerini tanımak",
+  "tema": "Rol modeller / ilham",
+  "mekanik": "İpucu tabanlı tahmin oyunu",
+  "sure": "5-15 dk",
+  "slug": "İlham verenler sayfasına git"
+ },
+ {
+  "id": "GM14",
+  "ad": "5'li Seçimler",
+  "kitle": "Okuyan + Aile",
+  "amac": "Tema bazlı kendi rol model ekibini oluşturmak",
+  "tema": "Rol modeller / değerler",
+  "mekanik": "Seçim ve karşılaştırma oyunu",
+  "sure": "10-20 dk",
+  "slug": "Rehberin önerileriyle karşılaştır"
  }
 ];

@@ -190,6 +190,11 @@
           <div style="font-weight:700;margin-bottom:4px">Bölüm Özetleri</div>
           <div style="font-size:0.82rem;color:var(--text-secondary)">Hızlı tekrar alanı</div>
         </a>
+        <a href="/noroterbiye/ilham-verenler/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
+          <div style="font-size:1.8rem;margin-bottom:8px">🌟</div>
+          <div style="font-weight:700;margin-bottom:4px">İlham Verenler</div>
+          <div style="font-size:0.82rem;color:var(--text-secondary)">100 Ehli Sünnet rol model</div>
+        </a>
         <a href="/noroterbiye/ebeveyn/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
           <div style="font-size:1.8rem;margin-bottom:8px">👨‍👩‍👧</div>
           <div style="font-weight:700;margin-bottom:4px">Ebeveyn Merkezi</div>
@@ -296,12 +301,12 @@
     // ── Oyunlar Önizleme ──
     (function() {
       const container = document.getElementById('oyun-preview');
-      const ikonlar = { 'GM01':'🔍','GM02':'🕵️','GM03':'⚡','GM04':'⚖️','GM05':'🪞','GM06':'🔄','GM07':'🏃','GM08':'🏰','GM09':'🎯','GM10':'🌙','GM12':'⛵' };
+      const ikonlar = { 'GM01':'🔍','GM02':'🕵️','GM03':'⚡','GM04':'⚖️','GM05':'🪞','GM06':'🔄','GM07':'🏃','GM08':'🏰','GM09':'🎯','GM10':'🌙','GM12':'⛵','GM13':'🏅','GM14':'🤲' };
       const slugMap = {
         'GM01':'dopamin-dedektifi','GM02':'hile-avcisi','GM03':'odul-mu-beklenti-mi',
         'GM04':'ssg-dengesi','GM05':'ayna-noron-aynasi','GM06':'alternatifini-ikame-et',
         'GM07':'savsaklama-kacisi','GM08':'cevre-kalesi','GM09':'dogrudan-mi-dolayli-mi',
-        'GM10':'ramazan-ritmi','GM12':'nefs-gemisi'
+        'GM10':'ramazan-ritmi','GM12':'nefs-gemisi','GM13':'rol-model-tahmini','GM14':'besli-secimler'
       };
       OYUNLAR_DATA.filter(o => o.id !== 'ID').slice(0, 4).forEach(o => {
         const slug = slugMap[o.id] || o.id.toLowerCase();
