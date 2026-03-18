@@ -49,7 +49,10 @@
           <label class="nt-form-label">Düşünceni yaz</label>
           <textarea class="nt-textarea" id="f-reflection" placeholder="Bu soru sana ne düşündürdü?"></textarea>
         </div>
-        <button class="nt-btn nt-btn-primary" onclick="saveReflection()">💾 Kaydet</button>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="nt-btn nt-btn-primary" onclick="saveReflection()">💾 Kaydet</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('history-list','Tefekkür-Geçmişi.pdf')">📄 PDF İndir</button>
+        </div>
       </div>
 
       <!-- History -->

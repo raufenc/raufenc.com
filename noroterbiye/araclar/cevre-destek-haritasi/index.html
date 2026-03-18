@@ -54,7 +54,10 @@
             </select>
           </div>
         </div>
-        <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="addPerson()">Ekle</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="addPerson()">Ekle</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('map-container','Çevre-Destek-Haritası.pdf')">📄 PDF İndir</button>
+        </div>
       </div>
 
       <!-- Visual map -->

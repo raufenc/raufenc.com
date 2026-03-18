@@ -61,7 +61,10 @@
           <textarea class="nt-textarea" id="f-note" placeholder="Ne oldu? Ne hissettin? Ne yaptın?" style="min-height:80px"></textarea>
         </div>
 
-        <button class="nt-btn nt-btn-primary" onclick="saveEntry()">Günü Kaydet</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="nt-btn nt-btn-primary" onclick="saveEntry()">Günü Kaydet</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('weekly-chart','Nefs-Günlüğü.pdf')">📄 PDF İndir</button>
+        </div>
       </div>
 
       <!-- Weekly Chart -->

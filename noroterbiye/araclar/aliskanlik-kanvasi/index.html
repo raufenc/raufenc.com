@@ -36,7 +36,7 @@
         </select>
       </div>
 
-      <div class="canvas-grid nt-fade-in" style="animation-delay:0.15s">
+      <div class="canvas-grid nt-fade-in" id="canvas-grid" style="animation-delay:0.15s">
         <div class="canvas-col" id="col-tetik">
           <div class="color-bar" style="background:var(--nt-red)"></div>
           <h3>🎯 Tetikleyici</h3>
@@ -65,7 +65,7 @@
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveCanvas()">💾 Kaydet</button>
-        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="window.print()">🖨️ Yazdır</button>
+        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('canvas-grid','Alışkanlık-Kanvası.pdf')">📄 PDF İndir</button>
         <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="clearCanvas()">Temizle</button>
       </div>
 

@@ -126,6 +126,51 @@ const NT = {
     } catch(e) { return fallback; }
   },
 
+  // PDF indirme — kayıtlı veriyi PDF olarak indir
+  downloadPDF(elementId, filename) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    const fn = filename || document.title.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ\s-]/g, '') + '.pdf';
+
+    // html2pdf.js CDN'den yükle (ilk kullanımda)
+    if (typeof html2pdf === 'undefined') {
+      const s = document.createElement('script');
+      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js';
+      s.onload = () => this._generatePDF(el, fn);
+      document.head.appendChild(s);
+    } else {
+      this._generatePDF(el, fn);
+    }
+  },
+
+  _generatePDF(el, filename) {
+    this.toast('PDF hazırlanıyor...');
+    const opt = {
+      margin: [10, 10, 10, 10],
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.95 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    };
+
+    // Geçici olarak light renkleri uygula (PDF için)
+    el.style.cssText = 'background:#fff;color:#1a1a2e;padding:24px;border-radius:0';
+    el.querySelectorAll('*').forEach(c => {
+      const cs = getComputedStyle(c);
+      if (cs.color === 'rgba(0, 0, 0, 0)' || cs.opacity === '0') return;
+    });
+
+    html2pdf().set(opt).from(el).save().then(() => {
+      el.style.cssText = '';
+      this.toast('PDF indirildi!');
+    }).catch(() => {
+      el.style.cssText = '';
+      // Fallback: tarayıcı print diyaloğu
+      window.print();
+    });
+  },
+
   // Sonuç hesaplama (test puanları için)
   calcScore(answers, total) {
     const pct = Math.round((answers / total) * 100);

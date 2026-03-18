@@ -67,7 +67,10 @@
           <label class="nt-form-label">Ne yaptın?</label>
           <input class="nt-input" id="f-tepki" placeholder="Örn: Telefona sarıldım / Yürüyüşe çıktım">
         </div>
-        <button class="nt-btn nt-btn-primary" onclick="saveRecord()">Kaydet</button>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="nt-btn nt-btn-primary" onclick="saveRecord()">Kaydet</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('calendar','Tetikleyici-Kaydı.pdf')">📄 PDF İndir</button>
+        </div>
       </div>
 
       <!-- Calendar -->
