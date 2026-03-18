@@ -66,64 +66,68 @@
     .source-note { text-align:center; font-size:12px; color:var(--muted); padding:12px; border-top:1px solid var(--border); margin-top:8px; }
 
     /* ── LEARN ── */
-    .learn-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .learn-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
     .progress-bar-sm { flex:1; height:6px; background:var(--surface2); border-radius:100px; margin:0 14px; overflow:hidden; }
     .progress-bar-fill { height:100%; background:var(--accent); border-radius:100px; transition:width .4s; }
-
-    .card-scene { perspective:1200px; margin:6px 0 16px; cursor:pointer; user-select:none; }
-    .card-3d { position:relative; height:380px; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.4,0,.2,1); }
-    .card-3d.flipped { transform:rotateY(180deg); }
-    .card-face { position:absolute; inset:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:24px; backface-visibility:hidden; display:flex; flex-direction:column; }
-
-    /* Front */
-    .cf-cat { display:flex; align-items:center; gap:8px; margin-bottom:20px; }
-    .cf-cat-badge { font-size:11px; font-weight:700; padding:4px 12px; border-radius:var(--radius-full); letter-spacing:.05em; }
-    .cf-main { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-    .cf-virtue-name { font-size: clamp(36px,8vw,54px); font-weight:900; letter-spacing:-.04em; margin-bottom:10px; }
-    .cf-virtue-def { font-size:15px; color:var(--muted2); line-height:1.7; max-width:280px; }
-    .cf-spectrum { display:flex; align-items:center; gap:8px; margin-top:20px; width:100%; }
-    .cf-spec-label { font-size:11px; font-weight:600; flex-shrink:0; }
-    .cf-spec-bar { flex:1; height:6px; border-radius:100px; background:linear-gradient(to right, var(--tc), var(--fc), var(--ic)); position:relative; }
-    .cf-spec-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:white; border-radius:50%; border:2px solid var(--fc); box-shadow:0 0 8px var(--fc); }
-    .cf-hint { font-size:12px; color:var(--muted); text-align:center; margin-top:auto; display:flex; align-items:center; justify-content:center; gap:5px; }
-
-    /* Back */
-    .card-back { transform:rotateY(180deg); padding:18px; overflow-y:auto; }
-    .cb-title { font-size:13px; font-weight:700; color:var(--accent); margin-bottom:14px; text-align:center; }
-    .pole-row { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
-    .pole-row:last-child { border-bottom:none; }
-    .pole-dot { width:11px; height:11px; border-radius:50%; margin-top:4px; flex-shrink:0; }
-    .pole-dot.t { background:var(--tc); }
-    .pole-dot.f { background:var(--fc); }
-    .pole-dot.i { background:var(--ic); }
-    .pole-content { flex:1; }
-    .pole-name { font-size:14px; font-weight:700; margin-bottom:2px; }
-    .pole-name.t { color:var(--tc); }
-    .pole-name.f { color:var(--fc); }
-    .pole-name.i { color:var(--ic); }
-    .pole-def { font-size:12px; color:var(--muted2); line-height:1.5; }
-    .pole-ex { font-size:11px; color:var(--muted); margin-top:3px; font-style:italic; line-height:1.4; }
-
-    .learn-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
+    .learn-stepper { display:flex; align-items:center; justify-content:center; margin:0 0 6px; }
+    .lsd { width:10px; height:10px; border-radius:50%; background:var(--border); transition:all .35s; flex-shrink:0; }
+    .lsd.active { background:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); transform:scale(1.3); }
+    .lsd.done { background:var(--accent); opacity:.5; }
+    .lsd-line { flex:1; max-width:40px; height:2px; background:var(--border); transition:background .35s; }
+    .lsd-line.done { background:var(--accent); opacity:.5; }
+    .ls-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); text-align:center; margin-bottom:16px; }
+    .ls-content { animation:fadeUp .35s ease both; min-height:280px; }
+    .learn-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .learn-act-btn { padding:13px; border-radius:var(--radius-md); border:2px solid var(--border); background:var(--surface); cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
     .learn-act-btn.tekrar:hover { border-color:#f59e0b; color:#f59e0b; }
     .learn-act-btn.anladi:hover { border-color:var(--fc); color:var(--fc); }
     .learn-act-btn.anladi.done { background:var(--accent-soft); border-color:var(--fc); color:var(--fc); }
-
-    /* ── LEARN QUIZ ── */
-    .learn-quiz { margin:12px 0 8px; display:none; animation:fadeUp .35s ease both; }
-    .learn-quiz.show { display:block; }
-    .lq-title { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; text-align:center; }
-    .lq-text { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:14px 16px; font-size:14px; line-height:1.7; margin-bottom:12px; }
-    .lq-opts { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
-    .lq-opt { background:var(--surface); border:2px solid var(--border); border-radius:var(--radius-md); padding:12px 16px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; text-align:left; color:var(--text); }
-    .lq-opt:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
-    .lq-opt:disabled { cursor:default; }
-    .lq-opt.correct { border-color:var(--fc)!important; background:rgba(34,197,94,.1)!important; color:#86efac!important; }
-    .lq-opt.wrong { border-color:#ef4444!important; background:rgba(239,68,68,.08)!important; color:#fca5a5!important; }
-    .lq-fb { font-size:13px; font-weight:600; padding:10px 14px; border-radius:var(--radius-md); display:none; line-height:1.5; animation:fadeUp .3s ease both; }
-    .lq-fb.ok { background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); color:#86efac; display:block; }
-    .lq-fb.no { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.25); color:#fca5a5; display:block; }
+    /* Step 0 */
+    .ls0-wrap { text-align:center; padding:8px 0 12px; }
+    .ls0-badge { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; padding:5px 14px; border-radius:var(--radius-full); margin-bottom:18px; }
+    .ls0-name { font-size:clamp(46px,12vw,72px); font-weight:900; letter-spacing:-.04em; line-height:1; margin-bottom:14px; }
+    .ls0-def { font-size:16px; color:var(--muted2); line-height:1.75; max-width:300px; margin:0 auto 24px; }
+    .ls0-spectrum { display:flex; align-items:center; gap:8px; }
+    .ls0-t { font-size:10px; font-weight:600; color:var(--tc); flex-shrink:0; max-width:72px; text-align:left; line-height:1.3; }
+    .ls0-i { font-size:10px; font-weight:600; color:var(--ic); flex-shrink:0; max-width:72px; text-align:right; line-height:1.3; }
+    .ls0-bar { flex:1; height:6px; border-radius:100px; background:linear-gradient(to right,var(--tc),var(--fc),var(--ic)); position:relative; }
+    .ls0-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:white; border-radius:50%; border:2px solid var(--fc); box-shadow:0 0 8px var(--fc); }
+    /* Step 1 */
+    .ls1-poles { display:flex; flex-direction:column; gap:10px; }
+    .ls1-pole { background:var(--surface); border:1.5px solid var(--border); border-radius:var(--radius-lg); padding:14px 16px; }
+    .ls1-pole.feat { border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.04); }
+    .ls1-ph { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+    .ls1-pdot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .ls1-pdot.t{background:var(--tc);} .ls1-pdot.f{background:var(--fc);} .ls1-pdot.i{background:var(--ic);}
+    .ls1-pname { font-size:14px; font-weight:800; flex:1; }
+    .ls1-pname.t{color:var(--tc);} .ls1-pname.f{color:var(--fc);} .ls1-pname.i{color:var(--ic);}
+    .ls1-ptag { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.05em; padding:2px 8px; background:var(--surface2); border-radius:var(--radius-full); }
+    .ls1-ptag.ft { background:rgba(34,197,94,.12); color:var(--fc); }
+    .ls1-pdef { font-size:13px; line-height:1.6; margin-bottom:5px; }
+    .ls1-pex { font-size:12px; color:var(--muted2); font-style:italic; line-height:1.4; }
+    /* Steps 2-3 Quiz */
+    .lsq-prompt { font-size:12px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.1em; text-align:center; margin-bottom:12px; }
+    .lsq-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-xl); padding:20px 18px; margin-bottom:16px; }
+    .lsq-type { font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+    .lsq-text { font-size:16px; line-height:1.75; }
+    .lsq-erdem { font-size:11px; color:var(--accent); font-weight:700; margin-top:10px; }
+    .lsq-choices { display:flex; flex-direction:column; gap:9px; }
+    .lsq-btn { background:var(--surface); border:2px solid var(--border); border-radius:var(--radius-md); padding:14px 18px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; text-align:left; color:var(--text); }
+    .lsq-btn:hover:not(:disabled) { transform:translateX(5px); border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
+    .lsq-btn:disabled { cursor:default; transform:none; }
+    .lsq-btn.correct { border-color:var(--fc)!important; background:rgba(34,197,94,.1)!important; color:#86efac!important; }
+    .lsq-btn.wrong { border-color:#ef4444!important; background:rgba(239,68,68,.08)!important; color:#fca5a5!important; }
+    .lsq-fb { font-size:13px; font-weight:600; padding:12px 16px; border-radius:var(--radius-md); line-height:1.55; margin-top:12px; animation:fadeUp .3s ease both; }
+    .lsq-fb.ok { background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); color:#86efac; }
+    .lsq-fb.no { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.25); color:#fca5a5; }
+    /* Step 4 Niyet */
+    .ls4-wrap { text-align:center; padding:8px 0 4px; }
+    .ls4-icon { font-size:52px; margin-bottom:14px; }
+    .ls4-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--accent); margin-bottom:18px; }
+    .ls4-card { background:var(--surface); border:1px solid var(--border); border-left:3px solid var(--fc); border-radius:var(--radius-xl); padding:20px 22px; text-align:left; margin-bottom:16px; }
+    .ls4-vname { font-size:11px; font-weight:700; color:var(--fc); margin-bottom:10px; text-transform:uppercase; letter-spacing:.08em; }
+    .ls4-text { font-size:15px; line-height:1.8; color:var(--muted2); font-style:italic; }
+    .ls4-nudge { font-size:13px; color:var(--muted); line-height:1.6; }
 
     /* ── İBRE GAME ── */
     .game-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
@@ -274,7 +278,7 @@
       <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
     </div>
     <div class="modes-grid">
-      <button class="mode-btn" onclick="startLearn()"><div class="mode-icon">📚</div><div class="mode-title">Öğren</div><div class="mode-desc">35 erdem — çevir, soruya cevap ver, işaretle</div><span class="mode-badge">FLASHCARD + QUIZ</span></button>
+      <button class="mode-btn" onclick="startLearn()"><div class="mode-icon">📚</div><div class="mode-title">Öğren</div><div class="mode-desc">35 erdem — tanı, kutuplar, test, niyet</div><span class="mode-badge">5 ADIM</span></button>
       <button class="mode-btn" onclick="startIbreGame()"><div class="mode-icon">⚖️</div><div class="mode-title">İbre Oyunu</div><div class="mode-desc">Davranışı ibreye yerleştir</div><span class="mode-badge">OYUN</span></button>
       <button class="mode-btn" onclick="startEslestir()"><div class="mode-icon">🔗</div><div class="mode-title">Eşleştir</div><div class="mode-desc">Erdem adını tanımıyla eşleştir</div><span class="mode-badge">OYUN</span></button>
       <button class="mode-btn" onclick="startKutupGame()"><div class="mode-icon">🎯</div><div class="mode-title">Hangi Kutup?</div><div class="mode-desc">Tanımı doğru kutba yerleştir</div><span class="mode-badge">QUIZ</span></button>
@@ -292,44 +296,21 @@
       <div class="progress-bar-sm"><div class="progress-bar-fill" id="learn-pfill" style="width:0%"></div></div>
       <span class="muted" id="learn-cnt">1/35</span>
     </div>
-    <div class="label" id="learn-cat" style="text-align:center;margin-bottom:10px"></div>
-    <div class="card-scene" id="card-scene" onclick="flipCard()">
-      <div class="card-3d" id="flashcard">
-        <div class="card-face">
-          <div class="cf-cat">
-            <span class="cf-cat-badge" id="cf-cat-badge"></span>
-          </div>
-          <div class="cf-main">
-            <div class="cf-virtue-name" id="cf-name">İlim</div>
-            <div class="cf-virtue-def" id="cf-def">Doğru ve faydalı bilgi edinmek.</div>
-          </div>
-          <div class="cf-spectrum">
-            <span class="cf-spec-label" style="color:var(--tc);font-size:10px" id="cf-tname">Cehâlet</span>
-            <div class="cf-spec-bar"><div class="cf-spec-dot"></div></div>
-            <span class="cf-spec-label" style="color:var(--ic);font-size:10px;text-align:right" id="cf-iname">Ukalâlık</span>
-          </div>
-          <div class="cf-hint">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            Detaylar için çevir
-          </div>
-        </div>
-        <div class="card-face card-back">
-          <div class="cb-title" id="cb-title">İlim — Erdem Ailesi</div>
-          <div id="cb-poles"></div>
-        </div>
-      </div>
+    <div class="learn-stepper" id="learn-stepper">
+      <div class="lsd" id="lsd-0"></div>
+      <div class="lsd-line" id="lsdl-0"></div>
+      <div class="lsd" id="lsd-1"></div>
+      <div class="lsd-line" id="lsdl-1"></div>
+      <div class="lsd" id="lsd-2"></div>
+      <div class="lsd-line" id="lsdl-2"></div>
+      <div class="lsd" id="lsd-3"></div>
+      <div class="lsd-line" id="lsdl-3"></div>
+      <div class="lsd" id="lsd-4"></div>
     </div>
-    <div class="learn-quiz" id="learn-quiz">
-      <div class="lq-title">📝 Peki bu tanım hangisi?</div>
-      <div class="lq-text" id="lq-text"></div>
-      <div class="lq-opts" id="lq-opts"></div>
-      <div class="lq-fb" id="lq-fb"></div>
-    </div>
-    <div class="learn-actions">
-      <button class="learn-act-btn tekrar" onclick="learnTekrar()">🔁 Tekrar Gör</button>
-      <button class="learn-act-btn anladi" id="learn-anladi-btn" onclick="learnAnladi()">✓ Anladım</button>
-    </div>
-    <p class="muted" style="text-align:center;margin-top:10px;font-size:11px">← → tuşları veya kaydırma ile geçiş yapabilirsin</p>
+    <div class="ls-label" id="ls-label"></div>
+    <div class="ls-content" id="ls-content"></div>
+    <div id="ls-action" style="margin-top:12px"></div>
+    <p class="muted" style="text-align:center;margin-top:10px;font-size:11px" id="learn-kb">← → tuşları veya kaydırma ile geçiş yapabilirsin</p>
   </div>
 </div>
 
@@ -720,145 +701,149 @@ function renderHome() {
 }
 
 /* ══════════════════════════════════════════════
-   LEARN
+   LEARN — 5-step pedagogical flow
 ══════════════════════════════════════════════ */
-let learnIdx = 0, cardFlipped = false;
-let touchStartX = 0;
+let learnIdx=0, learnStep=0, lqAnswered=false, learnQs=[];
+let touchStartX=0;
+const LS_LABELS=['TANI','KUTUPLAR','TEST 1','TEST 2','NİYET'];
 
-function startLearn() {
-  learnIdx = S.learnIdx || 0;
-  cardFlipped = false;
-  renderLearn();
-  show('learn');
+function startLearn(){
+  learnIdx=S.learnIdx||0; learnStep=0; initLearnQs(); renderLearnStep(); show('learn');
 }
 
-function renderLearn() {
-  const e = E[learnIdx], total = E.length;
-  document.getElementById('learn-pfill').style.width = ((learnIdx+1)/total*100)+'%';
-  document.getElementById('learn-cnt').textContent = (learnIdx+1)+'/'+total;
-  const kat = KAT[e.k];
-  document.getElementById('learn-cat').textContent = kat.emoji+' '+kat.ad;
-
-  const badge = document.getElementById('cf-cat-badge');
-  badge.textContent = kat.emoji+' '+kat.ad;
-  badge.style.background = kat.renk+'22';
-  badge.style.color = kat.renk;
-
-  const nameEl = document.getElementById('cf-name');
-  nameEl.textContent = e.f.n;
-  nameEl.style.color = kat.renk;
-  document.getElementById('cf-def').textContent = e.f.d;
-  document.getElementById('cf-tname').textContent = e.t.n;
-  document.getElementById('cf-iname').textContent = e.i.n;
-
-  document.getElementById('cb-title').textContent = e.f.n+' — Erdem Ailesi';
-  document.getElementById('cb-poles').innerHTML = `
-    <div class="pole-row"><div class="pole-dot t"></div><div class="pole-content"><div class="pole-name t">${e.t.n}</div><div class="pole-def">${e.t.d}</div><div class="pole-ex">"${e.t.o}"</div></div></div>
-    <div class="pole-row"><div class="pole-dot f"></div><div class="pole-content"><div class="pole-name f">${e.f.n}</div><div class="pole-def">${e.f.d}</div><div class="pole-ex">"${e.f.o}"</div></div></div>
-    <div class="pole-row"><div class="pole-dot i"></div><div class="pole-content"><div class="pole-name i">${e.i.n}</div><div class="pole-def">${e.i.d}</div><div class="pole-ex">"${e.i.o}"</div></div></div>
-  `;
-
-  cardFlipped = false;
-  lqAnswered = false;
-  document.getElementById('flashcard').classList.remove('flipped');
-  document.getElementById('learn-quiz').classList.remove('show');
-  const anladi = document.getElementById('learn-anladi-btn');
-  const done = S.learned.includes(e.id);
-  anladi.textContent = done ? '✓ Öğrenildi' : '✓ Anladım';
-  anladi.classList.toggle('done', done);
+function initLearnQs(){
+  const poles=['t','f','i'].sort(()=>Math.random()-.5);
+  learnQs=[{type:'def',pole:poles[0]},{type:'ex',pole:poles[1]}];
 }
 
-function flipCard() {
-  sndFlip();
-  cardFlipped = !cardFlipped;
-  document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
-  if (cardFlipped) renderLearnQuiz();
-  else {
-    const qz = document.getElementById('learn-quiz');
-    qz.classList.remove('show');
+function renderLearnStep(){
+  const e=E[learnIdx], total=E.length, kat=KAT[e.k];
+  document.getElementById('learn-pfill').style.width=((learnIdx+1)/total*100)+'%';
+  document.getElementById('learn-cnt').textContent=(learnIdx+1)+'/'+total;
+  for(let i=0;i<5;i++){
+    document.getElementById('lsd-'+i).className='lsd'+(i===learnStep?' active':i<learnStep?' done':'');
+    if(i<4) document.getElementById('lsdl-'+i).className='lsd-line'+(i<learnStep?' done':'');
   }
+  document.getElementById('ls-label').textContent=LS_LABELS[learnStep];
+  const content=document.getElementById('ls-content');
+  content.style.animation='none'; content.offsetHeight; content.style.animation='';
+  if(learnStep===0) renderLS0(e,kat,content);
+  else if(learnStep===1) renderLS1(e,kat,content);
+  else if(learnStep===2||learnStep===3) renderLSQ(e,kat,content,learnStep-2);
+  else renderLS4(e,kat,content);
+  const action=document.getElementById('ls-action');
+  if(learnStep===0||learnStep===1){
+    action.innerHTML='<button class="btn btn-primary btn-full" onclick="learnNext()">Devam →</button>';
+    document.getElementById('learn-kb').style.display='';
+  } else if(learnStep===4){
+    const done=S.learned.includes(e.id);
+    action.innerHTML=`<div class="learn-actions"><button class="learn-act-btn tekrar" onclick="learnTekrar()">🔁 Tekrar Gör</button><button class="learn-act-btn anladi${done?' done':''}" id="learn-anladi-btn" onclick="learnAnladi()">${done?'✓ Öğrenildi':'✓ Anladım'}</button></div>`;
+    document.getElementById('learn-kb').style.display='';
+  } else {
+    action.innerHTML=''; document.getElementById('learn-kb').style.display='none';
+  }
+  window.scrollTo(0,0);
 }
 
-let lqAnswered = false;
-
-function renderLearnQuiz() {
-  const e = E[learnIdx];
-  lqAnswered = false;
-  const poles = ['t','f','i'];
-  const qPole = poles[Math.floor(Math.random()*3)];
-  const q = e[qPole];
-  document.getElementById('lq-text').textContent = '"' + q.d + '"';
-
-  const opts = document.getElementById('lq-opts');
-  opts.innerHTML = '';
-  const fb = document.getElementById('lq-fb');
-  fb.className = 'lq-fb';
-  fb.textContent = '';
-
-  const options = [
-    {pole:'t', label:'⚫ ' + e.t.n},
-    {pole:'f', label:'🟢 ' + e.f.n},
-    {pole:'i', label:'🔴 ' + e.i.n},
-  ].sort(()=>Math.random()-.5);
-
-  options.forEach(opt => {
-    const b = document.createElement('button');
-    b.className = 'lq-opt';
-    b.textContent = opt.label;
-    b.dataset.pole = opt.pole;
-    b.onclick = () => answerLearnQuiz(opt.pole, qPole, e, b);
-    opts.appendChild(b);
-  });
-
-  document.getElementById('learn-quiz').classList.add('show');
+function renderLS0(e,kat,el){
+  el.innerHTML=`<div class="ls0-wrap">
+    <div class="ls0-badge" style="background:${kat.renk}22;color:${kat.renk}">${kat.emoji} ${kat.ad}</div>
+    <div class="ls0-name" style="color:${kat.renk}">${e.f.n}</div>
+    <div class="ls0-def">${e.f.d}</div>
+    <div class="ls0-spectrum">
+      <span class="ls0-t">${e.t.n}</span>
+      <div class="ls0-bar"><div class="ls0-dot"></div></div>
+      <span class="ls0-i">${e.i.n}</span>
+    </div></div>`;
 }
 
-function answerLearnQuiz(chosen, correct, e, btn) {
-  if (lqAnswered) return;
-  lqAnswered = true;
-  document.querySelectorAll('.lq-opt').forEach(b => b.disabled = true);
-  const fb = document.getElementById('lq-fb');
-  if (chosen === correct) {
+function renderLS1(e,kat,el){
+  el.innerHTML=`<div class="ls1-poles">
+    <div class="ls1-pole">
+      <div class="ls1-ph"><span class="ls1-pdot t"></span><span class="ls1-pname t">${e.t.n}</span><span class="ls1-ptag">Tefrit · Eksiklik</span></div>
+      <div class="ls1-pdef">${e.t.d}</div><div class="ls1-pex">"${e.t.o}"</div>
+    </div>
+    <div class="ls1-pole feat">
+      <div class="ls1-ph"><span class="ls1-pdot f"></span><span class="ls1-pname f">${e.f.n}</span><span class="ls1-ptag ft">⚖️ Denge</span></div>
+      <div class="ls1-pdef">${e.f.d}</div><div class="ls1-pex">"${e.f.o}"</div>
+    </div>
+    <div class="ls1-pole">
+      <div class="ls1-ph"><span class="ls1-pdot i"></span><span class="ls1-pname i">${e.i.n}</span><span class="ls1-ptag">İfrat · Aşırılık</span></div>
+      <div class="ls1-pdef">${e.i.d}</div><div class="ls1-pex">"${e.i.o}"</div>
+    </div></div>`;
+}
+
+function renderLSQ(e,kat,el,qIdx){
+  lqAnswered=false;
+  const q=learnQs[qIdx], isEx=q.type==='ex';
+  const raw=e[q.pole][isEx?'o':'d'];
+  const text=isEx?'"'+raw+'"':raw;
+  const prompt=isEx?'Bu davranış hangi kutbu gösteriyor?':'Bu tanım hangi kutba ait?';
+  const typeTag=isEx?'SENARYO':'TANIM';
+  const choices=[{p:'t',l:'⚫ '+e.t.n},{p:'f',l:'🟢 '+e.f.n},{p:'i',l:'🔴 '+e.i.n}].sort(()=>Math.random()-.5);
+  el.innerHTML=`
+    <div class="lsq-prompt">${prompt}</div>
+    <div class="lsq-card">
+      <div class="lsq-type">${typeTag}</div>
+      <div class="lsq-text">${text}</div>
+      <div class="lsq-erdem">${kat.emoji} ${kat.ad} — ${e.f.n} ailesi</div>
+    </div>
+    <div class="lsq-choices">${choices.map(c=>`<button class="lsq-btn" data-p="${c.p}" onclick="answerLSQ('${c.p}','${q.pole}',this)">${c.l}</button>`).join('')}</div>
+    <div id="lsq-fb"></div>
+    <button class="btn btn-primary btn-full" id="lsq-next" onclick="learnNext()" style="display:none;margin-top:12px">Devam →</button>`;
+}
+
+function answerLSQ(chosen,correct,btn){
+  if(lqAnswered)return; lqAnswered=true;
+  const e=E[learnIdx];
+  document.querySelectorAll('.lsq-btn').forEach(b=>b.disabled=true);
+  const fb=document.getElementById('lsq-fb');
+  if(chosen===correct){
     btn.classList.add('correct');
-    fb.className = 'lq-fb ok';
-    fb.textContent = '✅ Doğru! ' + e[correct].n + ' — ' + e[correct].d;
-    sndCorrect(); addXP(5);
+    fb.className='lsq-fb ok'; fb.textContent='✅ Doğru! '+e[correct].n+' — '+e[correct].d;
+    sndCorrect(); addXP(8);
   } else {
     btn.classList.add('wrong');
-    document.querySelectorAll('.lq-opt').forEach(b => { if (b.dataset.pole === correct) b.classList.add('correct'); });
-    fb.className = 'lq-fb no';
-    fb.textContent = '❌ Doğrusu: ' + e[correct].n + ' — ' + e[correct].d;
+    document.querySelector(`.lsq-btn[data-p="${correct}"]`)?.classList.add('correct');
+    fb.className='lsq-fb no'; fb.textContent='❌ Doğrusu: '+e[correct].n+' — '+e[correct].d;
     sndWrong();
   }
+  document.getElementById('lsq-next').style.display='block';
 }
 
-function learnTekrar() {
-  learnIdx = (learnIdx+1)%E.length;
-  S.learnIdx = learnIdx; saveS(); renderLearn();
+function renderLS4(e,kat,el){
+  el.innerHTML=`<div class="ls4-wrap">
+    <div class="ls4-icon">🌱</div>
+    <div class="ls4-title">Bugünkü Niyet</div>
+    <div class="ls4-card">
+      <div class="ls4-vname">✦ ${e.f.n}</div>
+      <div class="ls4-text">${e.f.o}</div>
+    </div>
+    <div class="ls4-nudge">Bu erdemi bugün en az bir durumda bilinçli olarak uygula.</div>
+  </div>`;
 }
-function learnAnladi() {
-  const e = E[learnIdx];
-  if (!S.learned.includes(e.id)) { S.learned.push(e.id); saveS(); addXP(5); sndMatch(); }
+
+function learnNext(){ learnStep++; if(learnStep>4){learnNextCard();return;} renderLearnStep(); }
+function learnNextCard(){ learnIdx=(learnIdx+1)%E.length; learnStep=0; S.learnIdx=learnIdx; saveS(); initLearnQs(); renderLearnStep(); }
+function learnTekrar(){ learnStep=0; initLearnQs(); renderLearnStep(); }
+function learnAnladi(){
+  const e=E[learnIdx];
+  if(!S.learned.includes(e.id)){S.learned.push(e.id);saveS();addXP(5);sndMatch();}
   else sndFlip();
-  learnIdx = (learnIdx+1)%E.length;
-  S.learnIdx = learnIdx; saveS();
-  setTimeout(renderLearn, 120);
+  learnNextCard();
 }
 
-// Keyboard & touch
-document.addEventListener('keydown', e => {
-  if (document.getElementById('screen-learn').classList.contains('active')) {
-    if (e.key === 'ArrowRight' || e.key === ' ') learnAnladi();
-    if (e.key === 'ArrowLeft') learnTekrar();
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') flipCard();
-  }
+document.addEventListener('keydown',ev=>{
+  if(!document.getElementById('screen-learn').classList.contains('active'))return;
+  if(ev.key==='ArrowRight'||ev.key===' '){if(learnStep===0||learnStep===1||learnStep===4)learnNext();}
+  if(ev.key==='ArrowLeft')learnTekrar();
 });
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-document.addEventListener('touchend', e => {
-  if (!document.getElementById('screen-learn').classList.contains('active')) return;
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 60) { if (dx > 0) learnTekrar(); else learnAnladi(); }
-}, {passive:true});
+document.addEventListener('touchstart',ev=>{touchStartX=ev.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',ev=>{
+  if(!document.getElementById('screen-learn').classList.contains('active'))return;
+  const dx=ev.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)>60){if(dx>0)learnTekrar();else if(learnStep===0||learnStep===1||learnStep===4)learnNext();}
+},{passive:true});
 
 /* ══════════════════════════════════════════════
    İBRE GAME
