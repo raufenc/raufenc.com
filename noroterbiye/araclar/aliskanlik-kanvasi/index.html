@@ -185,26 +185,55 @@
 
     function buildPrintHTML() {
       const colInfo = [
-        { id: 'col-tetik', title: 'Tetikleyici', color: '#ef4444' },
-        { id: 'col-arzu', title: 'Temel Arzu', color: '#f59e0b' },
-        { id: 'col-yanlis', title: 'Yanlış Davranış', color: '#f43f5e' },
-        { id: 'col-alt', title: 'Alternatif', color: '#22c55e' },
+        { id: 'col-tetik', title: '🎯 Tetikleyici', color: '#ef4444' },
+        { id: 'col-arzu', title: '💎 Temel Arzu', color: '#f59e0b' },
+        { id: 'col-yanlis', title: '❌ Yanlış Davranış', color: '#f43f5e' },
+        { id: 'col-alt', title: '✅ Alternatif', color: '#22c55e' },
       ];
-      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Alışkanlık Dönüştürme Kanvası</h1>';
-      html += '<table style="width:100%;border-collapse:collapse">';
-      html += '<tr>' + colInfo.map(c =>
-        '<th style="border:1px solid #ddd;padding:10px;text-align:center;font-size:13px;border-top:3px solid ' + c.color + '">' + c.title + '</th>'
-      ).join('') + '</tr>';
-      const maxRows = Math.max(...colInfo.map(c => cols[c.id].length), 1);
-      for (let i = 0; i < maxRows; i++) {
-        html += '<tr>' + colInfo.map(c => {
-          const item = cols[c.id][i] || '';
-          return '<td style="border:1px solid #ddd;padding:8px;font-size:12px;vertical-align:top">' + item + '</td>';
-        }).join('') + '</tr>';
-      }
-      html += '</table>';
       const total = Object.values(cols).flat().length;
-      html += '<p style="font-size:11px;color:#888;margin-top:12px">Toplam ' + total + ' madde</p>';
+      let html = '';
+
+      // Aktif kanvas
+      if (total > 0) {
+        html += '<h3 style="margin-bottom:12px">Aktif Kanvas</h3>';
+        html += '<table style="width:100%;border-collapse:collapse;margin-bottom:24px">';
+        html += '<tr>' + colInfo.map(c =>
+          '<th style="border:1px solid #ddd;padding:10px;text-align:center;font-size:13px;background:#f8f8f8;border-top:3px solid ' + c.color + '">' + c.title + '</th>'
+        ).join('') + '</tr>';
+        const maxRows = Math.max(...colInfo.map(c => cols[c.id].length));
+        for (let i = 0; i < maxRows; i++) {
+          html += '<tr>' + colInfo.map(c => {
+            const item = cols[c.id][i] || '';
+            return '<td style="border:1px solid #ddd;padding:8px;font-size:12px;vertical-align:top">' + item + '</td>';
+          }).join('') + '</tr>';
+        }
+        html += '</table>';
+      }
+
+      // Kaydedilmiş kanvaslar
+      if (savedCanvases.length > 0) {
+        savedCanvases.forEach((c, idx) => {
+          html += '<h3 style="margin:16px 0 8px;padding-top:12px;border-top:1px solid #ddd">📁 Kayıt ' + (idx+1) + ' — ' + c.tarih + '</h3>';
+          html += '<table style="width:100%;border-collapse:collapse;margin-bottom:16px">';
+          html += '<tr>' + colInfo.map(ci =>
+            '<th style="border:1px solid #ddd;padding:8px;text-align:center;font-size:12px;background:#f8f8f8;border-top:3px solid ' + ci.color + '">' + ci.title + '</th>'
+          ).join('') + '</tr>';
+          const keys = ['col-tetik','col-arzu','col-yanlis','col-alt'];
+          const maxR = Math.max(...keys.map(k => (c.data[k]||[]).length), 1);
+          for (let i = 0; i < maxR; i++) {
+            html += '<tr>' + keys.map(k => {
+              const item = (c.data[k]||[])[i] || '';
+              return '<td style="border:1px solid #ddd;padding:6px;font-size:11px;vertical-align:top">' + item + '</td>';
+            }).join('') + '</tr>';
+          }
+          html += '</table>';
+        });
+      }
+
+      if (total === 0 && savedCanvases.length === 0) {
+        html += '<p style="color:#888;font-style:italic">Henüz kanvas verisi yok. Önce maddeler ekleyin.</p>';
+      }
+
       return html;
     }
 
