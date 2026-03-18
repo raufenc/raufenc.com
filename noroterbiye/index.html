@@ -256,8 +256,12 @@
       const populer = ['TS01','TS02','TS03','TS05','TS10','TS04'];
       const container = document.getElementById('populer-testler');
       const ikonlar = { 'TS01': '🎯', 'TS02': '🍔', 'TS03': '📱', 'TS05': '👥', 'TS10': '⚖️', 'TS04': '⏳' };
+      const slugMap = {
+        'TS01':'hile-risk-radari','TS02':'hedonik-aclik','TS03':'ekran-baskisi',
+        'TS04':'savsaklama-profili','TS05':'cevre-etkisi','TS10':'ssg-checkup'
+      };
       TESTLER_DATA.filter(t => populer.includes(t.id)).slice(0, 6).forEach(t => {
-        const slug = t.ad.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9ğüşıöç-]/g,'');
+        const slug = slugMap[t.id] || t.id.toLowerCase();
         container.innerHTML += `
           <a href="/noroterbiye/testler/${slug}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
             <div style="font-size:2rem;margin-bottom:10px">${ikonlar[t.id] || '📋'}</div>
@@ -275,7 +279,7 @@
     (function() {
       const container = document.getElementById('kisa-preview');
       const temaRenkler = { 'Biyoloji': 'green', 'Modern Tuzak': 'red', 'Nefs Türleri': 'purple', 'Terbiye': 'cyan', 'Çevre': 'amber' };
-      KISA_BILGILER_DATA.slice(0, 6).forEach(k => {
+      KISA_BILGILER_DATA.filter(k => k.id !== 'ID').slice(0, 6).forEach(k => {
         const renk = temaRenkler[k.tema] || 'primary';
         container.innerHTML += `
           <div class="nt-info-card" style="--nt-card-accent:var(--nt-${renk})">
@@ -293,9 +297,16 @@
     (function() {
       const container = document.getElementById('oyun-preview');
       const ikonlar = { 'GM01':'🔍','GM02':'🕵️','GM03':'⚡','GM04':'⚖️','GM05':'🪞','GM06':'🔄','GM07':'🏃','GM08':'🏰','GM09':'🎯','GM10':'🌙','GM11':'🃏','GM12':'⛵' };
-      OYUNLAR_DATA.slice(0, 4).forEach(o => {
+      const slugMap = {
+        'GM01':'dopamin-dedektifi','GM02':'hile-avcisi','GM03':'odul-mu-beklenti-mi',
+        'GM04':'ssg-dengesi','GM05':'ayna-noron-aynasi','GM06':'alternatifini-ikame-et',
+        'GM07':'savsaklama-kacisi','GM08':'cevre-kalesi','GM09':'dogrudan-mi-dolayli-mi',
+        'GM10':'ramazan-ritmi','GM11':'kahraman-kartlari','GM12':'nefs-gemisi'
+      };
+      OYUNLAR_DATA.filter(o => o.id !== 'ID').slice(0, 4).forEach(o => {
+        const slug = slugMap[o.id] || o.id.toLowerCase();
         container.innerHTML += `
-          <a href="/noroterbiye/oyunlar/${o.slug || o.id.toLowerCase()}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center">
+          <a href="/noroterbiye/oyunlar/${slug}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center">
             <div style="font-size:2.5rem;margin-bottom:8px">${ikonlar[o.id] || '🎮'}</div>
             <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:4px">${o.ad}</h3>
             <p style="font-size:0.75rem;color:var(--text-secondary)">${o.tema}</p>
@@ -308,10 +319,16 @@
     (function() {
       const container = document.getElementById('arac-preview');
       const ikonlar = { 'AP01':'📝','AP02':'🔄','AP03':'⏰','AP04':'🤝','AP05':'📓','AP06':'🎯','AP07':'🗺️','AP08':'💭','AP09':'📖' };
-      ARACLAR_DATA.slice(0, 3).forEach(a => {
-        const slug = a.ad.toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9ğüşıöç-]/g,'');
+      const slugMap = {
+        'AP01':'yapilacaklar-listesi','AP02':'aliskanlik-kanvasi','AP03':'guclu-zaman-planlayici',
+        'AP04':'caydirici-anlasma','AP05':'nefs-gunlugu','AP06':'tetikleyici-kaydi',
+        'AP07':'cevre-destek-haritasi','AP08':'mikro-tefekkur','AP11':'beslenme-zihin-checklist',
+        'AP13':'ekran-suresi-sozlesmesi','AP14':'dipten-donus','AP15':'bir-yanlis-bir-dogru',
+        'AP17':'ssg-haftalik-rapor'
+      };
+      ARACLAR_DATA.filter(a => a.id !== 'ID' && slugMap[a.id]).slice(0, 3).forEach(a => {
         container.innerHTML += `
-          <a href="/noroterbiye/araclar/${slug}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
+          <a href="/noroterbiye/araclar/${slugMap[a.id]}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
             <div style="font-size:2rem;margin-bottom:10px">${ikonlar[a.id] || '🛠️'}</div>
             <h3 style="font-size:1rem;font-weight:700;margin-bottom:6px">${a.ad}</h3>
             <p style="font-size:0.82rem;color:var(--text-secondary);line-height:1.5">${a.amac}</p>

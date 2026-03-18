@@ -63,7 +63,7 @@
     };
 
     const container = document.getElementById('test-list');
-    TESTLER_DATA.forEach(t => {
+    TESTLER_DATA.filter(t => t.id !== 'ID').forEach(t => {
       const slug = slugMap[t.id] || t.id.toLowerCase();
       container.innerHTML += `
         <a href="/noroterbiye/testler/${slug}/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text)">
