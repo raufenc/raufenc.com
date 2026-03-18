@@ -33,7 +33,24 @@
     </div>
   </section>
 
+  <!-- ROL MODELLER -->
+  <section class="nt-section" id="rol-modeller">
+    <div class="nt-wrap">
+      <h2 class="nt-title nt-fade-in" style="font-size:1.5rem;margin-bottom:8px">🌟 Rol Modeller</h2>
+      <p class="nt-subtitle nt-fade-in" style="margin-bottom:16px">Peygamberlerden bilim insanlarına — 100 rol model. Tanı, öğren, ilham al.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px" class="nt-fade-in">
+        <a href="/noroterbiye/oyunlar/rol-model-tahmini/" class="nt-btn nt-btn-primary nt-btn-sm">🏅 Tahmin Oyunu</a>
+        <a href="/noroterbiye/oyunlar/besli-secimler/" class="nt-btn nt-btn-secondary nt-btn-sm">🤲 5'li Seçimler</a>
+      </div>
+      <input type="text" class="nt-input nt-fade-in" id="rm-search" placeholder="İsim, tema veya dönem ara..." oninput="renderRM()" style="width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--text);font-size:1rem;margin-bottom:12px">
+      <div id="rm-filters" class="nt-filters nt-fade-in" style="margin-bottom:12px"></div>
+      <p id="rm-count" class="nt-label" style="margin-bottom:16px"></p>
+      <div class="nt-grid nt-grid-2" id="rm-cards"></div>
+    </div>
+  </section>
+
   <script src="/noroterbiye/data/kisa-bilgiler.js"></script>
+  <script src="/noroterbiye/data/rol-modeller.js"></script>
   <script src="/noroterbiye/js/common.js"></script>
   <script>
     let activeFilter = 'Tümü';
@@ -83,6 +100,63 @@
 
     document.getElementById('search').addEventListener('input', render);
     render();
+
+    // ── Rol Modeller ──
+    let rmFilter = 'Hepsi';
+    const KAT_EMOJI = { 'Peygamber':'🕊️','Sahabi / Ehl-i Beyt':'⭐','Âlim / İmam':'📚','Evliya / Mürşid':'💚','Sultan / Komutan':'⚔️','Bilim / Mucit':'🔬' };
+    const KAT_RENK = { 'Peygamber':'cyan','Sahabi / Ehl-i Beyt':'green','Âlim / İmam':'purple','Evliya / Mürşid':'amber','Sultan / Komutan':'red','Bilim / Mucit':'primary' };
+
+    (function() {
+      const cats = ['Hepsi', ...new Set(ROL_MODELLER_DATA.map(r => r.kategori))];
+      const counts = {};
+      ROL_MODELLER_DATA.forEach(r => counts[r.kategori] = (counts[r.kategori] || 0) + 1);
+      counts['Hepsi'] = ROL_MODELLER_DATA.length;
+      const bar = document.getElementById('rm-filters');
+      cats.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'nt-filter-btn' + (c === 'Hepsi' ? ' active' : '');
+        btn.innerHTML = (KAT_EMOJI[c] || '🎯') + ' ' + c + ' <span style="font-size:0.7rem;opacity:0.7">(' + counts[c] + ')</span>';
+        btn.onclick = () => {
+          bar.querySelectorAll('.nt-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          rmFilter = c;
+          renderRM();
+        };
+        bar.appendChild(btn);
+      });
+    })();
+
+    function renderRM() {
+      const q = document.getElementById('rm-search').value.toLowerCase().trim();
+      let data = rmFilter === 'Hepsi' ? ROL_MODELLER_DATA : ROL_MODELLER_DATA.filter(r => r.kategori === rmFilter);
+      if (q) {
+        data = data.filter(r =>
+          r.isim.toLowerCase().includes(q) || r.temalar.toLowerCase().includes(q) ||
+          r.donem.toLowerCase().includes(q) || r.cografya.toLowerCase().includes(q) ||
+          r.altKategori.toLowerCase().includes(q) || r.nedenRolModel.toLowerCase().includes(q)
+        );
+      }
+      document.getElementById('rm-count').textContent = data.length + ' rol model';
+      document.getElementById('rm-cards').innerHTML = data.map(r => `
+        <div class="nt-card" style="padding:16px">
+          <div style="display:flex;gap:12px;align-items:start;margin-bottom:10px">
+            <div style="font-size:1.8rem;flex-shrink:0">${KAT_EMOJI[r.kategori] || '🌟'}</div>
+            <div style="flex:1">
+              <div style="font-size:1rem;font-weight:700">${r.isim}</div>
+              <div style="font-size:0.72rem;color:var(--muted);margin-top:2px">${r.altKategori} · ${r.donem} · ${r.cografya}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">
+            <span class="nt-tag nt-tag-${KAT_RENK[r.kategori] || 'primary'}">${r.kategori}</span>
+            ${r.temalar.split(',').slice(0, 3).map(t => '<span class="nt-tag">' + t.trim() + '</span>').join('')}
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.6">${r.nedenRolModel}</div>
+          <div style="font-size:0.75rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">📖 ${r.oneCikan}</div>
+        </div>
+      `).join('');
+    }
+    renderRM();
+
     NT.renderNav();
     NT.renderFooter();
   </script>
