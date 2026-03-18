@@ -9,6 +9,7 @@ const NT = {
     { href: '/noroterbiye/testler/', label: 'Testler' },
     { href: '/noroterbiye/oyunlar/', label: 'Oyunlar' },
     { href: '/noroterbiye/araclar/', label: 'Araçlar' },
+    { href: '/noroterbiye/profilim/', label: 'Profilim' },
     { href: '/noroterbiye/kitap-haritasi/', label: 'Kitap Haritası' },
     { href: '/noroterbiye/kitap/', label: 'Kitap' },
     { href: '/noroterbiye/satin-al/', label: 'Satın Al', highlight: true },

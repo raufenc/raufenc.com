@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profilim — NöroTerbiye</title>
+  <meta name="description" content="Test sonuçların, oyun skorların ve araç verilerin tek sayfada.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👤</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .stat-grid { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+    .stat-box { flex: 1; min-width: 120px; text-align: center; padding: 20px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .stat-num { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--text-secondary); margin-top: 4px; }
+    .profile-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; transition: all 0.2s; }
+    .profile-card:hover { border-color: var(--nt-primary); transform: translateY(-1px); }
+    .score-bar { height: 6px; background: var(--border); border-radius: 3px; margin-top: 8px; overflow: hidden; }
+    .score-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+    .empty-msg { text-align: center; padding: 32px 16px; color: var(--muted); font-size: 0.9rem; }
+    .data-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:80px">
+    <div class="nt-wrap">
+      <h1 class="nt-title nt-fade-in" style="font-size:2rem;margin-bottom:8px">👤 Profilim</h1>
+      <p class="nt-subtitle nt-fade-in">Tüm test sonuçların, oyun skorların ve araç verilerin burada.</p>
+
+      <!-- ÖZET -->
+      <div class="stat-grid nt-fade-in" id="stats"></div>
+
+      <!-- TEST SONUÇLARIM -->
+      <h2 class="nt-section-title nt-fade-in" style="margin-top:40px">📋 Test Sonuçlarım</h2>
+      <div class="nt-grid nt-grid-3 nt-stagger" id="tests-grid"></div>
+
+      <!-- OYUN SKORLARIM -->
+      <h2 class="nt-section-title nt-fade-in" style="margin-top:40px">🎮 Oyun Skorlarım</h2>
+      <div class="nt-grid nt-grid-3 nt-stagger" id="games-grid"></div>
+
+      <!-- ARAÇ VERİLERİM -->
+      <h2 class="nt-section-title nt-fade-in" style="margin-top:40px">🛠️ Araç Verilerim</h2>
+      <div class="nt-grid nt-grid-3 nt-stagger" id="tools-grid"></div>
+
+      <!-- VERİ YÖNETİMİ -->
+      <div class="nt-card nt-fade-in" style="margin-top:48px;text-align:center;padding:24px">
+        <h3 style="margin-bottom:12px">⚙️ Veri Yönetimi</h3>
+        <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:16px">
+          Tüm NöroTerbiye verilerini yedekle, geri yükle veya sil.
+        </p>
+        <div class="data-actions">
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="exportData()">📥 JSON İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="importData()">📤 JSON Yükle</button>
+          <button class="nt-btn nt-btn-ghost nt-btn-sm" style="color:var(--nt-red)" onclick="clearAll()">🗑️ Tüm Verileri Sil</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    // ── Key Registry ──
+    const TESTS = [
+      { key: 'test_hile-risk-radari', name: 'Modern Hile Risk Radarı', slug: 'hile-risk-radari', icon: '🎯' },
+      { key: 'test_hedonik-aclik', name: 'Hedonik Açlık Testi', slug: 'hedonik-aclik', icon: '🍔' },
+      { key: 'test_ekran-baskisi', name: 'Ekran Baskısı Testi', slug: 'ekran-baskisi', icon: '📱' },
+      { key: 'test_savsaklama-profili', name: 'Savsaklama Profili', slug: 'savsaklama-profili', icon: '⏳' },
+      { key: 'test_cevre-etkisi', name: 'Çevre Etkisi Skoru', slug: 'cevre-etkisi', icon: '👥' },
+      { key: 'test_mizac-kimya', name: 'Mizaç Kimyası', slug: 'mizac-kimya', icon: '🧬' },
+      { key: 'test_ssg-checkup', name: 'ŞSG Check-up', slug: 'ssg-checkup', icon: '⚖️' },
+      { key: 'test_bireyci-kolektivist', name: 'Bireyci-Kolektivist', slug: 'bireyci-kolektivist', icon: '🤝' },
+      { key: 'test_ebeveynlik-tarzi', name: 'Ebeveynlik Tarzı', slug: 'ebeveynlik-tarzi', icon: '👨‍👩‍👧' },
+      { key: 'test_genc-risk-radari', name: 'Genç Risk Radarı', slug: 'genc-risk-radari', icon: '⚡' },
+      { key: 'test_okuma-oncesi-sonrasi', name: 'Okuma Öncesi/Sonrası', slug: 'okuma-oncesi-sonrasi', icon: '📖' },
+      { key: 'test_ramazan-surdurulebilirlik', name: 'Ramazan Sürdürülebilirlik', slug: 'ramazan-surdurulebilirlik', icon: '🌙' },
+      { key: 'test_dopamin-kaynak-haritasi', name: 'Dopamin Kaynak Haritası', slug: 'dopamin-kaynak-haritasi', icon: '💎' },
+      { key: 'test_rol-model-farkindalik', name: 'Rol Model Farkındalık', slug: 'rol-model-farkindalik', icon: '🌟' },
+    ];
+
+    const GAMES = [
+      { key: 'dopamin_dedektifi', name: 'Dopamin Dedektifi', slug: 'dopamin-dedektifi', icon: '🔍', scoreKey: 'pct' },
+      { key: 'hile_avcisi', name: 'Hile Avcısı', slug: 'hile-avcisi', icon: '🕵️', scoreKey: 'pct' },
+      { key: 'odul_beklenti', name: 'Ödül mü Beklenti mi?', slug: 'odul-mu-beklenti-mi', icon: '⚡', scoreKey: 'pct' },
+      { key: 'ssg_dengesi', name: 'ŞSG Dengesi', slug: 'ssg-dengesi', icon: '⚖️', scoreKey: 'survived', label: 'Tur' },
+      { key: 'ayna_noron', name: 'Ayna Nöron Aynası', slug: 'ayna-noron-aynasi', icon: '🪞', scoreKey: 'pct' },
+      { key: 'alternatif_ikame', name: 'Alternatifini İkame Et', slug: 'alternatifini-ikame-et', icon: '🔄', scoreKey: 'efficiency', label: 'Verim' },
+      { key: 'savsaklama', name: 'Savsaklama Kaçışı', slug: 'savsaklama-kacisi', icon: '🏃', scoreKey: 'score', label: 'Puan' },
+      { key: 'cevre_kalesi', name: 'Çevre Kalesi', slug: 'cevre-kalesi', icon: '🏰', scoreKey: 'strength', label: 'Güç' },
+      { key: 'dogrudan_dolayli', name: 'Doğrudan mı Dolaylı mı?', slug: 'dogrudan-mi-dolayli-mi', icon: '🎯', scoreKey: 'pct' },
+      { key: 'ramazan_ritmi', name: 'Ramazan Ritmi', slug: 'ramazan-ritmi', icon: '🌙', scoreKey: 'pct' },
+      { key: 'nefs_gemisi', name: 'Nefs Gemisi', slug: 'nefs-gemisi', icon: '⛵', scoreKey: 'reached', label: 'Seviye' },
+      { key: 'rol-model-tahmini', name: 'Rol Model Tahmini', slug: 'rol-model-tahmini', icon: '🏅', scoreKey: 'pct' },
+    ];
+
+    const TOOLS = [
+      { key: 'yapilacaklar', name: 'Yapılacaklar Listesi', slug: 'yapilacaklar-listesi', icon: '📝' },
+      { key: 'kanvaslar', name: 'Alışkanlık Kanvası', slug: 'aliskanlik-kanvasi', icon: '🔄' },
+      { key: 'guclu_zaman', name: 'Güçlü Zaman Planlayıcı', slug: 'guclu-zaman-planlayici', icon: '⏰' },
+      { key: 'anlasmalar', name: 'Caydırıcı Anlaşma', slug: 'caydirici-anlasma', icon: '🤝' },
+      { key: 'nefs_gunlugu', name: 'Nefs Günlüğü', slug: 'nefs-gunlugu', icon: '📓' },
+      { key: 'tetikleyici_kaydi', name: 'Tetikleyici Kaydı', slug: 'tetikleyici-kaydi', icon: '🎯' },
+      { key: 'cevre_haritasi', name: 'Çevre Destek Haritası', slug: 'cevre-destek-haritasi', icon: '🗺️' },
+      { key: 'tefekkurler', name: 'Mikro Tefekkür', slug: 'mikro-tefekkur', icon: '💭' },
+      { key: 'ekran_sozlesmeleri', name: 'Ekran Süresi Sözleşmesi', slug: 'ekran-suresi-sozlesmesi', icon: '📖' },
+      { key: 'beslenme_history', name: 'Beslenme-Zihin Checklist', slug: 'beslenme-zihin-checklist', icon: '🥗' },
+      { key: 'ssg_history', name: 'ŞSG Haftalık Rapor', slug: 'ssg-haftalik-rapor', icon: '📊' },
+      { key: 'ilham-gunlugu', name: 'İlham Günlüğü', slug: 'ilham-gunlugu', icon: '✨' },
+      { key: 'dipten_donus', name: 'Dipten Dönüş', slug: 'dipten-donus', icon: '🔥' },
+    ];
+
+    // ── Helpers ──
+    function fmtDate(d) {
+      if (!d) return '—';
+      try { return new Date(d).toLocaleDateString('tr-TR'); } catch { return '—'; }
+    }
+
+    function scoreColor(pct) {
+      if (pct >= 70) return 'green';
+      if (pct >= 40) return 'amber';
+      return 'red';
+    }
+
+    function countEntries(data) {
+      if (Array.isArray(data)) return data.length;
+      if (data && typeof data === 'object') return 1;
+      return 0;
+    }
+
+    // ── Render ──
+    function renderAll() {
+      renderStats();
+      renderTests();
+      renderGames();
+      renderTools();
+    }
+
+    function renderStats() {
+      const testCount = TESTS.filter(t => NT.load(t.key)).length;
+      const gameCount = GAMES.filter(g => NT.load(g.key)).length;
+      const toolCount = TOOLS.filter(t => { const d = NT.load(t.key); return d && (Array.isArray(d) ? d.length > 0 : true); }).length;
+      let totalEntries = 0;
+      TOOLS.forEach(t => { const d = NT.load(t.key); totalEntries += countEntries(d); });
+
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--nt-primary)">${testCount}</div>
+          <div class="stat-label">Test Çözüldü</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--nt-purple)">${gameCount}</div>
+          <div class="stat-label">Oyun Oynandı</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--nt-green)">${toolCount}</div>
+          <div class="stat-label">Araç Kullanıldı</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" style="color:var(--nt-amber)">${totalEntries}</div>
+          <div class="stat-label">Toplam Kayıt</div>
+        </div>
+      `;
+    }
+
+    function renderTests() {
+      const grid = document.getElementById('tests-grid');
+      const results = TESTS.map(t => ({ ...t, data: NT.load(t.key) })).filter(t => t.data);
+
+      if (results.length === 0) {
+        grid.innerHTML = '<div class="empty-msg" style="grid-column:1/-1">Henüz test çözmemişsin.<br><a href="/noroterbiye/testler/" class="nt-btn nt-btn-secondary nt-btn-sm" style="margin-top:12px">Testlere Göz At</a></div>';
+        return;
+      }
+
+      grid.innerHTML = results.map(t => {
+        const pct = t.data.pct || 0;
+        const color = scoreColor(pct);
+        return `
+          <div class="profile-card">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
+              <span style="font-size:1.5rem">${t.icon}</span>
+              <span style="font-size:1.8rem;font-weight:800;color:var(--nt-${color})">${pct}%</span>
+            </div>
+            <div style="font-weight:700;font-size:0.9rem;margin-bottom:4px">${t.name}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="nt-tag nt-tag-${color}" style="font-size:0.7rem">${t.data.label || '—'}</span>
+              <span style="font-size:0.7rem;color:var(--muted)">${fmtDate(t.data.date)}</span>
+            </div>
+            <div class="score-bar"><div class="score-fill" style="width:${pct}%;background:var(--nt-${color})"></div></div>
+            <a href="/noroterbiye/testler/${t.slug}/" style="display:block;text-align:center;margin-top:10px;font-size:0.75rem;color:var(--nt-primary);text-decoration:none">Tekrar Çöz →</a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderGames() {
+      const grid = document.getElementById('games-grid');
+      const results = GAMES.map(g => ({ ...g, data: NT.load(g.key) })).filter(g => g.data);
+
+      if (results.length === 0) {
+        grid.innerHTML = '<div class="empty-msg" style="grid-column:1/-1">Henüz oyun oynamamışsın.<br><a href="/noroterbiye/oyunlar/" class="nt-btn nt-btn-secondary nt-btn-sm" style="margin-top:12px">Oyunlara Göz At</a></div>';
+        return;
+      }
+
+      grid.innerHTML = results.map(g => {
+        const val = g.data[g.scoreKey];
+        const isPct = g.scoreKey === 'pct';
+        const display = isPct ? val + '%' : val;
+        const lbl = g.label || '%';
+        const color = isPct ? scoreColor(val) : 'primary';
+        return `
+          <div class="profile-card">
+            <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px">
+              <span style="font-size:1.5rem">${g.icon}</span>
+              <div style="text-align:right">
+                <div style="font-size:1.6rem;font-weight:800;color:var(--nt-${color})">${display}</div>
+                ${!isPct ? `<div style="font-size:0.65rem;color:var(--muted)">${lbl}</div>` : ''}
+              </div>
+            </div>
+            <div style="font-weight:700;font-size:0.9rem;margin-bottom:4px">${g.name}</div>
+            <div style="font-size:0.7rem;color:var(--muted)">${fmtDate(g.data.date)}</div>
+            ${isPct ? `<div class="score-bar"><div class="score-fill" style="width:${val}%;background:var(--nt-${color})"></div></div>` : ''}
+            <a href="/noroterbiye/oyunlar/${g.slug}/" style="display:block;text-align:center;margin-top:10px;font-size:0.75rem;color:var(--nt-primary);text-decoration:none">Tekrar Oyna →</a>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderTools() {
+      const grid = document.getElementById('tools-grid');
+      const results = TOOLS.map(t => {
+        const d = NT.load(t.key);
+        const count = countEntries(d);
+        return { ...t, data: d, count };
+      }).filter(t => t.count > 0);
+
+      if (results.length === 0) {
+        grid.innerHTML = '<div class="empty-msg" style="grid-column:1/-1">Henüz araç kullanmamışsın.<br><a href="/noroterbiye/araclar/" class="nt-btn nt-btn-secondary nt-btn-sm" style="margin-top:12px">Araçlara Göz At</a></div>';
+        return;
+      }
+
+      grid.innerHTML = results.map(t => `
+        <a href="/noroterbiye/araclar/${t.slug}/" class="profile-card" style="text-decoration:none;color:var(--text);display:block">
+          <div style="display:flex;gap:12px;align-items:center">
+            <span style="font-size:1.8rem">${t.icon}</span>
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:0.9rem">${t.name}</div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);margin-top:2px">${t.count} kayıt</div>
+            </div>
+            <span style="font-size:0.8rem;color:var(--nt-primary)">→</span>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    // ── Veri Yönetimi ──
+    function exportData() {
+      const data = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('nt_')) {
+          try { data[key] = JSON.parse(localStorage.getItem(key)); }
+          catch { data[key] = localStorage.getItem(key); }
+        }
+      }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'noroterbiye-verilerim-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      NT.toast('Veriler indirildi!');
+    }
+
+    function importData() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const data = JSON.parse(ev.target.result);
+            let count = 0;
+            for (const [key, val] of Object.entries(data)) {
+              if (key.startsWith('nt_')) {
+                localStorage.setItem(key, JSON.stringify(val));
+                count++;
+              }
+            }
+            NT.toast(count + ' kayıt yüklendi!');
+            renderAll();
+          } catch {
+            NT.toast('Dosya okunamadı!');
+          }
+        };
+        reader.readAsText(file);
+      };
+      input.click();
+    }
+
+    function clearAll() {
+      if (!confirm('Tüm NöroTerbiye verilerini silmek istediğine emin misin?')) return;
+      if (!confirm('Bu işlem geri alınamaz! Son kez onaylıyor musun?')) return;
+      const keys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k.startsWith('nt_')) keys.push(k);
+      }
+      keys.forEach(k => localStorage.removeItem(k));
+      NT.toast('Tüm veriler silindi.');
+      renderAll();
+    }
+
+    // ── Init ──
+    renderAll();
+    NT.renderNav();
+    NT.renderFooter();
+  </script>
+</body>
+</html>
