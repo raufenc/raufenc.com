@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mizan — İslam Ahlakı</title>
+  <meta name="description" content="İslam ahlakının 30 temel erdemi. İbre oyunu, flashcard ve interaktif testlerle öğren." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
+  <link rel="stylesheet" href="/lib/design-system/tokens.css" />
+  <style>
+    :root {
+      --accent:      #22c55e;
+      --accent-soft: rgba(34,197,94,0.12);
+      --accent-glow: rgba(34,197,94,0.25);
+      --tefrit-c:    #94a3b8;
+      --fazilet-c:   #22c55e;
+      --ifrat-c:     #ef4444;
+      --gold:        #f59e0b;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── App wrapper ── */
+    #app { min-height: 100vh; }
+
+    /* ── Screen system ── */
+    .screen { display: none; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    .page {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 72px 20px 40px;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* ── Typography ── */
+    h1 { font-size: clamp(28px, 6vw, 40px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+    h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+    h3 { font-size: 16px; font-weight: 650; }
+
+    .label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--accent);
+    }
+    .muted { color: var(--muted2); font-size: 14px; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 24px; border-radius: var(--radius-full);
+      font-size: 14px; font-weight: 700; font-family: inherit;
+      cursor: pointer; border: none; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0f0a;
+    }
+    .btn-primary:hover { box-shadow: 0 4px 20px var(--accent-glow); transform: translateY(-1px); }
+    .btn-ghost {
+      background: var(--surface); color: var(--muted2);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
+    .btn-sm { padding: 8px 16px; font-size: 13px; }
+    .btn-full { width: 100%; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+    }
+    .card:hover { border-color: var(--border-hover); }
+
+    /* ── HOME SCREEN ── */
+    .home-header {
+      text-align: center;
+      padding: 16px 0 32px;
+    }
+    .home-logo {
+      font-size: 56px;
+      margin-bottom: 12px;
+    }
+    .home-title {
+      font-size: clamp(32px, 7vw, 48px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent) 0%, #86efac 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .home-sub {
+      color: var(--muted2);
+      font-size: 15px;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .stat-icon { font-size: 22px; margin-bottom: 4px; }
+    .stat-val { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+    .stat-lbl { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    /* XP bar */
+    .xp-bar-wrap {
+      margin: 0 0 28px;
+    }
+    .xp-bar-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px;
+    }
+    .xp-bar-bg {
+      height: 8px; background: var(--surface2);
+      border-radius: 100px; overflow: hidden;
+    }
+    .xp-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #86efac);
+      border-radius: 100px;
+      transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    /* Mode buttons */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .mode-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 16px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .mode-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, var(--accent-soft), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .mode-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
+    .mode-btn:hover::before { opacity: 1; }
+    .mode-icon { font-size: 32px; margin-bottom: 10px; }
+    .mode-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .mode-desc { font-size: 12px; color: var(--muted2); line-height: 1.4; }
+    .mode-badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: var(--radius-full);
+      background: var(--accent-soft); color: var(--accent);
+      margin-top: 6px; letter-spacing: 0.05em;
+    }
+
+    /* Source note */
+    .source-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    /* ── LEARN (FLASHCARD) SCREEN ── */
+    .learn-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .progress-bar-sm {
+      flex: 1; height: 6px;
+      background: var(--surface2);
+      border-radius: 100px;
+      margin: 0 16px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 100px;
+      transition: width 0.4s ease;
+    }
+
+    /* Flashcard */
+    .card-scene {
+      perspective: 1200px;
+      margin: 8px 0 20px;
+      cursor: pointer;
+    }
+    .card-3d {
+      position: relative;
+      height: 360px;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-3d.flipped { transform: rotateY(180deg); }
+    .card-face {
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-back { transform: rotateY(180deg); justify-content: flex-start; padding: 24px; }
+
+    .card-virtue-name {
+      font-size: clamp(32px, 8vw, 52px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .card-virtue-def {
+      font-size: 15px;
+      color: var(--muted2);
+      text-align: center;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+    .card-flip-hint {
+      font-size: 12px; color: var(--muted);
+      margin-top: auto; display: flex; align-items: center; gap: 6px;
+    }
+
+    /* Back of card */
+    .card-poles { width: 100%; }
+    .pole-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .pole-row:last-child { border-bottom: none; }
+    .pole-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .pole-dot.tefrit { background: var(--tefrit-c); }
+    .pole-dot.fazilet { background: var(--fazilet-c); }
+    .pole-dot.ifrat { background: var(--ifrat-c); }
+    .pole-content { flex: 1; }
+    .pole-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .pole-def { font-size: 12px; color: var(--muted2); line-height: 1.5; }
+    .pole-ex { font-size: 11px; color: var(--muted); margin-top: 4px; font-style: italic; line-height: 1.4; }
+
+    .pole-name.tefrit-text { color: var(--tefrit-c); }
+    .pole-name.fazilet-text { color: var(--fazilet-c); }
+    .pole-name.ifrat-text { color: var(--ifrat-c); }
+
+    .card-nav-row {
+      display: flex; gap: 10px; align-items: center; justify-content: center;
+      margin-top: 8px;
+    }
+
+    /* ── İBRE GAME SCREEN ── */
+    .game-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .hearts-display { display: flex; gap: 4px; }
+    .heart { font-size: 20px; transition: all 0.3s; }
+    .heart.lost { opacity: 0.2; filter: grayscale(1); transform: scale(0.8); }
+
+    .question-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      margin-bottom: 24px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .question-erdem-tag {
+      font-size: 11px; font-weight: 700;
+      color: var(--muted2); text-transform: uppercase;
+      letter-spacing: 0.1em; margin-bottom: 10px;
+    }
+    .question-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    /* The Gauge */
+    .gauge-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto 24px;
+    }
+    .gauge-svg { width: 100%; height: auto; display: block; }
+
+    .gauge-zone {
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .gauge-zone:hover { opacity: 0.85; }
+    .gauge-zone.correct { filter: brightness(1.3); }
+    .gauge-zone.wrong { opacity: 0.4; }
+
+    /* Gauge needle */
+    #gauge-needle {
+      transform-origin: 150px 150px;
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #gauge-needle.shake {
+      animation: needleShake 0.5s ease;
+    }
+    @keyframes needleShake {
+      0%,100% { transform: rotate(var(--needle-angle, 0deg)); }
+      20% { transform: rotate(calc(var(--needle-angle, 0deg) - 15deg)); }
+      40% { transform: rotate(calc(var(--needle-angle, 0deg) + 20deg)); }
+      60% { transform: rotate(calc(var(--needle-angle, 0deg) - 10deg)); }
+      80% { transform: rotate(calc(var(--needle-angle, 0deg) + 5deg)); }
+    }
+
+    /* Gauge labels */
+    .gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      padding: 0 4px;
+    }
+    .gauge-label-item {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      flex: 1;
+    }
+    .gauge-label-item:first-child { text-align: left; color: var(--tefrit-c); }
+    .gauge-label-item:nth-child(2) { color: var(--fazilet-c); }
+    .gauge-label-item:last-child { text-align: right; color: var(--ifrat-c); }
+
+    /* Choice buttons */
+    .choice-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .choice-btn {
+      padding: 14px 8px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .choice-btn.tefrit-btn { color: var(--tefrit-c); }
+    .choice-btn.fazilet-btn { color: var(--fazilet-c); }
+    .choice-btn.ifrat-btn { color: var(--ifrat-c); }
+    .choice-btn:hover { transform: translateY(-2px); border-color: currentColor; }
+    .choice-btn:disabled { cursor: default; transform: none; }
+    .choice-btn.correct { border-color: var(--fazilet-c); background: rgba(34,197,94,0.1); }
+    .choice-btn.wrong { border-color: #ef4444; background: rgba(239,68,68,0.1); }
+
+    /* Feedback overlay */
+    .feedback-bar {
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: none;
+      line-height: 1.5;
+      animation: fadeUp 0.3s ease both;
+    }
+    .feedback-bar.correct { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+    .feedback-bar.wrong { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5; }
+    .feedback-bar.show { display: block; }
+
+    /* XP popup */
+    .xp-popup {
+      position: fixed;
+      top: 80px; right: 20px;
+      background: var(--accent);
+      color: #0a0f0a;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(0);
+      transition: opacity 0.3s, transform 0.5s;
+      z-index: 100;
+    }
+    .xp-popup.show {
+      opacity: 1;
+      transform: translateY(-20px);
+    }
+
+    /* ── KUTUP GAME SCREEN ── */
+    .kutup-def-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 28px 24px;
+      text-align: center;
+      margin-bottom: 24px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .kutup-def-text {
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .kutup-choice-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .kutup-btn {
+      padding: 18px 10px;
+      border-radius: var(--radius-md);
+      border: 2px solid var(--border);
+      background: var(--surface);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.2s;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .kutup-btn .k-icon { font-size: 24px; }
+    .kutup-btn .k-name { font-size: 11px; color: var(--muted2); }
+    .kutup-btn:hover { transform: translateY(-2px); }
+    .kutup-btn:disabled { cursor: default; transform: none; }
+    .kutup-btn.tefrit-btn:hover, .kutup-btn.tefrit-btn.selected { border-color: var(--tefrit-c); color: var(--tefrit-c); }
+    .kutup-btn.fazilet-btn:hover, .kutup-btn.fazilet-btn.selected { border-color: var(--fazilet-c); color: var(--fazilet-c); }
+    .kutup-btn.ifrat-btn:hover, .kutup-btn.ifrat-btn.selected { border-color: var(--ifrat-c); color: var(--ifrat-c); }
+    .kutup-btn.correct { background: rgba(34,197,94,0.1); border-color: var(--fazilet-c); }
+    .kutup-btn.wrong { background: rgba(239,68,68,0.1); border-color: #ef4444; }
+
+    /* ── PROGRESS SCREEN ── */
+    .progress-header {
+      text-align: center;
+      padding: 0 0 28px;
+    }
+    .progress-title { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+
+    .progress-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .progress-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      text-align: center;
+    }
+    .progress-stat-icon { font-size: 28px; margin-bottom: 8px; }
+    .progress-stat-val { font-size: 32px; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); }
+    .progress-stat-lbl { font-size: 12px; color: var(--muted2); margin-top: 4px; }
+
+    /* Category progress */
+    .cat-progress { margin-bottom: 24px; }
+    .cat-progress-title { font-size: 13px; font-weight: 700; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+    .cat-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cat-icon { font-size: 18px; width: 28px; text-align: center; }
+    .cat-name { font-size: 13px; font-weight: 600; width: 130px; flex-shrink: 0; }
+    .cat-bar-bg { flex: 1; height: 8px; background: var(--surface2); border-radius: 100px; overflow: hidden; }
+    .cat-bar-fill { height: 100%; border-radius: 100px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
+    .cat-count { font-size: 12px; color: var(--muted2); width: 36px; text-align: right; }
+
+    /* Virtue grid in progress */
+    .virtue-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .virtue-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex; align-items: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .virtue-chip.learned { border-color: var(--accent-soft); background: var(--accent-soft); color: var(--accent); }
+    .virtue-chip .chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .virtue-chip.learned .chip-dot { background: var(--accent); }
+
+    /* ── RESULT SCREEN ── */
+    .result-page {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+    }
+    .result-emoji { font-size: 72px; margin-bottom: 16px; animation: bounceIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both; }
+    @keyframes bounceIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .result-title { font-size: 32px; font-weight: 900; margin-bottom: 8px; }
+    .result-sub { color: var(--muted2); font-size: 16px; margin-bottom: 32px; line-height: 1.6; }
+    .result-xp {
+      font-size: 48px; font-weight: 900;
+      color: var(--accent);
+      margin-bottom: 8px;
+      letter-spacing: -0.03em;
+    }
+    .result-xp-label { color: var(--muted2); font-size: 13px; margin-bottom: 32px; }
+    .result-btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── Badges ── */
+    .badges-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .badge.earned { border-color: var(--gold); background: rgba(245,158,11,0.08); color: var(--gold); }
+    .badge-icon { font-size: 16px; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.4s ease both; }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .modes-grid { grid-template-columns: 1fr; }
+      .stats-row { gap: 6px; }
+      .stat-val { font-size: 18px; }
+      .choice-row { gap: 6px; }
+      .choice-btn { padding: 12px 4px; font-size: 12px; }
+      .kutup-choice-row { gap: 8px; }
+      .kutup-btn { padding: 14px 6px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- XP Popup -->
+<div class="xp-popup" id="xp-popup">+10 XP ⭐</div>
+
+<!-- ═══════════════════════════════════════════
+     HOME SCREEN
+════════════════════════════════════════════ -->
+<div id="screen-home" class="screen">
+  <div class="page fade-up">
+
+    <div class="home-header">
+      <div class="home-logo">⚖️</div>
+      <h1 class="home-title">Mizan</h1>
+      <p class="home-sub">İslam ahlakının temel erdemlerini öğren,<br>dengeni bul, karakterini inşa et.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-val" id="home-streak">0</div>
+        <div class="stat-lbl">Gün Serisi</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-val" id="home-xp">0</div>
+        <div class="stat-lbl">Toplam XP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-val" id="home-learned">0</div>
+        <div class="stat-lbl">Erdem</div>
+      </div>
+    </div>
+
+    <!-- XP Bar -->
+    <div class="xp-bar-wrap">
+      <div class="xp-bar-top">
+        <span class="muted" id="xp-level-label">Seviye 1</span>
+        <span class="muted" id="xp-bar-label">0 / 100 XP</span>
+      </div>
+      <div class="xp-bar-bg">
+        <div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Mode buttons -->
+    <div class="modes-grid">
+      <button class="mode-btn" onclick="startLearn()">
+        <div class="mode-icon">📚</div>
+        <div class="mode-title">Öğren</div>
+        <div class="mode-desc">35 erdem kartı — çevir ve öğren</div>
+        <span class="mode-badge">FLASHCARD</span>
+      </button>
+      <button class="mode-btn" onclick="startIbreGame()">
+        <div class="mode-icon">⚖️</div>
+        <div class="mode-title">İbre Oyunu</div>
+        <div class="mode-desc">Davranışı ibreye yerleştir</div>
+        <span class="mode-badge">OYUN</span>
+      </button>
+      <button class="mode-btn" onclick="startKutupGame()">
+        <div class="mode-icon">🎯</div>
+        <div class="mode-title">Hangi Kutup?</div>
+        <div class="mode-desc">Tanımı doğru kutba eşleştir</div>
+        <span class="mode-badge">QUIZ</span>
+      </button>
+      <button class="mode-btn" onclick="showProgress()">
+        <div class="mode-icon">📊</div>
+        <div class="mode-title">İlerleme</div>
+        <div class="mode-desc">Kazandıkların ve rozetlerin</div>
+        <span class="mode-badge">HARITA</span>
+      </button>
+    </div>
+
+    <div class="source-note">
+      Tüm içerik kaynağı: <em>İslâm Ahlâkı</em> kitabı
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     LEARN SCREEN (FLASHCARDS)
+════════════════════════════════════════════ -->
+<div id="screen-learn" class="screen">
+  <div class="page">
+
+    <div class="learn-header">
+      <button class="btn btn-ghost btn-sm" onclick="goHome()">← Geri</button>
+      <div class="progress-bar-sm">
+        <div class="progress-bar-fill" id="learn-progress-fill" style="width:0%"></div>
+      </div>
+      <span class="muted" id="learn-counter">1 / 30</span>
+    </div>
+
+    <div class="label" id="learn-cat-label" style="text-align:center; margin-bottom:12px"></div>
+
+    <div class="card-scene" onclick="flipCard()">
+      <div class="card-3d" id="flashcard">
+
+        <!-- Front -->
+        <div class="card-face card-front">
+          <div class="card-virtue-name" id="fc-virtue-name">İlim</div>
+          <div class="card-virtue-def" id="fc-virtue-def">Doğru ve faydalı bilgi edinmek.</div>
+          <div class="card-flip-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Çevir
+          </div>
+        </div>
+
+        <!-- Back -->
+        <div class="card-face card-back">
+          <div class="card-poles" id="fc-poles"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-nav-row">
+      <button class="btn btn-ghost" onclick="prevCard()">‹ Önceki</button>
+      <button class="btn btn-primary" onclick="markLearned()" id="learn-mark-btn">✓ Öğrendim</button>
+      <button class="btn btn-ghost" onclick="nextCard()">Sonraki ›</button>
+    </div>
+
+    <p class="muted" style="text-align:center; margin-top:16px; font-size:12px;">
+      Karta tıklayarak detayları gör · Öğrendiğin kartları işaretle
+    </p>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     İBRE GAME SCREEN
+════════════════════════════════════════════ -->
+<div id="screen-ibre" class="screen">
+  <div class="page">
+
+    <div class="game-header">
+      <button class="btn btn-ghost btn-sm" onclick="goHome()">✕</button>
+      <span class="muted" id="ibre-counter">1 / 10</span>
+      <div class="hearts-display" id="ibre-hearts">
+        <span class="heart">❤️</span>
+        <span class="heart">❤️</span>
+        <span class="heart">❤️</span>
+      </div>
+    </div>
+
+    <!-- Question -->
+    <div class="question-card">
+      <div class="question-erdem-tag" id="ibre-erdem-tag">ERDEM AİLESİ</div>
+      <div class="question-text" id="ibre-question-text">...</div>
+    </div>
+
+    <!-- The Gauge -->
+    <div class="gauge-wrap">
+      <svg class="gauge-svg" viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+        <!-- Tefrit segment (180° → 120°) -->
+        <path class="gauge-zone" id="gz-tefrit"
+          d="M20,150 A130,130 0 0,1 85,37.4 L110,80.7 A80,80 0 0,0 70,150 Z"
+          fill="#475569" fill-opacity="0.6" stroke="none"
+          onclick="submitAnswer('t')" />
+        <!-- Fazilet segment (120° → 60°) -->
+        <path class="gauge-zone" id="gz-fazilet"
+          d="M85,37.4 A130,130 0 0,1 215,37.4 L190,80.7 A80,80 0 0,0 110,80.7 Z"
+          fill="#22c55e" fill-opacity="0.55" stroke="none"
+          onclick="submitAnswer('f')" />
+        <!-- İfrat segment (60° → 0°) -->
+        <path class="gauge-zone" id="gz-ifrat"
+          d="M215,37.4 A130,130 0 0,1 280,150 L230,150 A80,80 0 0,0 190,80.7 Z"
+          fill="#ef4444" fill-opacity="0.55" stroke="none"
+          onclick="submitAnswer('i')" />
+        <!-- Divider lines -->
+        <line x1="110" y1="80.7" x2="85" y2="37.4" stroke="var(--bg)" stroke-width="2"/>
+        <line x1="190" y1="80.7" x2="215" y2="37.4" stroke="var(--bg)" stroke-width="2"/>
+        <!-- Inner circle cover -->
+        <circle cx="150" cy="150" r="78" fill="var(--bg)" />
+        <!-- Needle -->
+        <g id="gauge-needle" style="transform: rotate(0deg); transform-origin: 150px 150px;">
+          <line x1="150" y1="148" x2="150" y2="42"
+            stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="150" cy="40" r="5" fill="var(--accent)"/>
+        </g>
+        <!-- Pivot -->
+        <circle cx="150" cy="150" r="10" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
+        <circle cx="150" cy="150" r="4" fill="var(--text)"/>
+      </svg>
+
+      <div class="gauge-labels">
+        <span class="gauge-label-item">⚫ Tefrit</span>
+        <span class="gauge-label-item">🟢 Fazilet</span>
+        <span class="gauge-label-item">🔴 İfrat</span>
+      </div>
+    </div>
+
+    <!-- Choice buttons (alternative to clicking gauge) -->
+    <div class="choice-row">
+      <button class="choice-btn tefrit-btn" onclick="submitAnswer('t')" id="cb-tefrit">⚫ Tefrit</button>
+      <button class="choice-btn fazilet-btn" onclick="submitAnswer('f')" id="cb-fazilet">🟢 Fazilet</button>
+      <button class="choice-btn ifrat-btn" onclick="submitAnswer('i')" id="cb-ifrat">🔴 İfrat</button>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback-bar" id="ibre-feedback"></div>
+
+    <!-- Next button (shown after answer) -->
+    <button class="btn btn-primary btn-full" id="ibre-next-btn" onclick="nextIbreQuestion()" style="display:none">
+      Devam →
+    </button>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     KUTUP GAME SCREEN
+════════════════════════════════════════════ -->
+<div id="screen-kutup" class="screen">
+  <div class="page">
+
+    <div class="game-header">
+      <button class="btn btn-ghost btn-sm" onclick="goHome()">✕</button>
+      <span class="muted" id="kutup-counter">1 / 10</span>
+      <div class="hearts-display" id="kutup-hearts">
+        <span class="heart">❤️</span>
+        <span class="heart">❤️</span>
+        <span class="heart">❤️</span>
+      </div>
+    </div>
+
+    <p class="muted" style="text-align:center; margin-bottom:16px; font-size:13px;">
+      Bu tanım hangi kutba ait?
+    </p>
+
+    <div class="kutup-def-card">
+      <div class="question-erdem-tag" id="kutup-erdem-tag"></div>
+      <div class="kutup-def-text" id="kutup-def-text">...</div>
+      <div class="muted" id="kutup-ex-text" style="font-size:12px; margin-top:10px; font-style:italic;"></div>
+    </div>
+
+    <div class="kutup-choice-row">
+      <button class="kutup-btn tefrit-btn" onclick="submitKutup('t')" id="kb-tefrit">
+        <span class="k-icon">⚫</span>
+        <strong id="kb-tefrit-name">Tefrit</strong>
+        <span class="k-name">Eksiklik</span>
+      </button>
+      <button class="kutup-btn fazilet-btn" onclick="submitKutup('f')" id="kb-fazilet">
+        <span class="k-icon">🟢</span>
+        <strong id="kb-fazilet-name">Fazilet</strong>
+        <span class="k-name">Denge</span>
+      </button>
+      <button class="kutup-btn ifrat-btn" onclick="submitKutup('i')" id="kb-ifrat">
+        <span class="k-icon">🔴</span>
+        <strong id="kb-ifrat-name">İfrat</strong>
+        <span class="k-name">Aşırılık</span>
+      </button>
+    </div>
+
+    <div class="feedback-bar" id="kutup-feedback"></div>
+
+    <button class="btn btn-primary btn-full" id="kutup-next-btn" onclick="nextKutupQuestion()" style="display:none">
+      Devam →
+    </button>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROGRESS SCREEN
+════════════════════════════════════════════ -->
+<div id="screen-progress" class="screen">
+  <div class="page">
+
+    <div class="learn-header">
+      <button class="btn btn-ghost btn-sm" onclick="goHome()">← Geri</button>
+      <h2 style="flex:1; text-align:center;">İlerleme</h2>
+      <div style="width:72px"></div>
+    </div>
+
+    <div class="progress-stats-grid" style="margin-top:20px">
+      <div class="progress-stat">
+        <div class="progress-stat-icon">⭐</div>
+        <div class="progress-stat-val" id="prog-xp">0</div>
+        <div class="progress-stat-lbl">Toplam XP</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-icon">🔥</div>
+        <div class="progress-stat-val" id="prog-streak">0</div>
+        <div class="progress-stat-lbl">Gün Serisi</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-icon">📚</div>
+        <div class="progress-stat-val" id="prog-learned">0</div>
+        <div class="progress-stat-lbl">Erdem Öğrenildi</div>
+      </div>
+      <div class="progress-stat">
+        <div class="progress-stat-icon">🎯</div>
+        <div class="progress-stat-val" id="prog-games">0</div>
+        <div class="progress-stat-lbl">Oyun Tamamlandı</div>
+      </div>
+    </div>
+
+    <!-- Category progress -->
+    <div class="cat-progress">
+      <div class="cat-progress-title">Kategorilere Göre</div>
+      <div id="cat-progress-rows"></div>
+    </div>
+
+    <!-- Badges -->
+    <div class="label" style="margin-bottom:12px">Rozetler</div>
+    <div class="badges-row" id="badges-row"></div>
+
+    <!-- Virtue chips -->
+    <div class="label" style="margin-bottom:12px">Tüm Erdemler</div>
+    <div class="virtue-grid" id="virtue-grid"></div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     RESULT SCREEN
+════════════════════════════════════════════ -->
+<div id="screen-result" class="screen">
+  <div class="page">
+    <div class="result-page">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <h1 class="result-title" id="result-title">Harika!</h1>
+      <p class="result-sub" id="result-sub">10/10 doğru · Mükemmel performans</p>
+      <div class="result-xp" id="result-xp">+100</div>
+      <div class="result-xp-label">XP kazandın</div>
+      <div class="result-btn-row">
+        <button class="btn btn-primary" id="result-replay-btn" onclick="goHome()">Tekrar Oyna</button>
+        <button class="btn btn-ghost" onclick="goHome()">Ana Sayfa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/nav.js"></script>
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════
+   DATA — 30 temel erdem (İslam Ahlakı kitabı)
+══════════════════════════════════════════════ */
+const KAT = {
+  iman:     { emoji: '🌙', ad: 'İman & Akîde',   renk: '#818cf8' },
+  ilim:     { emoji: '📚', ad: 'İlim & Akıl',    renk: '#60a5fa' },
+  karakter: { emoji: '💎', ad: 'Karakter',        renk: '#34d399' },
+  sosyal:   { emoji: '🤝', ad: 'Sosyal',          renk: '#fb923c' },
+  islah:    { emoji: '⚡', ad: 'Islah & İbadet',  renk: '#c084fc' },
+};
+
+const ERDEMLER = [
+  { id:1, kat:'ilim',
+    f:{ad:'İlim', tanim:'Doğru ve faydalı bilgi edinmek.', ornek:'Ali, her gün kitap okuyarak bilgisini artırıyor.'},
+    t:{ad:'Cehâlet', tanim:'Bilgisizlik ve öğrenme isteksizliği.', ornek:'Mehmet, derslere çalışmayıp hiçbir şey öğrenmiyor.'},
+    i:{ad:'Ukalâlık', tanim:'Her şeyi bildiğini sanmak.', ornek:'Ahmet, her konuda haklı olduğunu düşünüp kimseyi dinlemiyor.'}},
+  { id:2, kat:'karakter',
+    f:{ad:'Kanaat', tanim:'Elindekine razı olup şükretmek.', ornek:'Ayşe, lüks eşyaları olmasa da elindekilerle mutlu olup şükrediyor.'},
+    t:{ad:'Atâlet', tanim:'Hiç gayret göstermeyip boş durmak.', ornek:'Ali, ders çalışmak yerine bütün gün boş boş oturuyor.'},
+    i:{ad:'Mal-Mevkî Hırsı', tanim:'Zenginlik ve mevki için açgözlülük.', ornek:'Ahmet, çok para ve makam için her şeyi yapmayı göze alıyor.'}},
+  { id:3, kat:'karakter',
+    f:{ad:'Cesaret', tanim:'Korksa bile doğruyu yapmak.', ornek:'Zeynep, herkes çekinse bile haksızlığa uğrayan arkadaşını cesurca savundu.'},
+    t:{ad:'Korkaklık', tanim:'Başkaları ayıplar diye doğruyu yapmamak.', ornek:'Mehmet, arkadaşları dalga geçer diye bildiği doğruyu söyleyemiyor.'},
+    i:{ad:'Pervasız Cüret', tanim:'Düşünmeden tehlikeye atılmak.', ornek:'Mert, dikkat etmeden tehlikeli oyunlara atlıyor ve yaralanıyor.'}},
+  { id:4, kat:'iman',
+    f:{ad:'İhlâs', tanim:'İyiliği yalnız Allah için yapmak.', ornek:'Zeynep, kimse görmese de gizlice sadaka veriyor çünkü bunu Allah için yapıyor.'},
+    t:{ad:'Mahviyet', tanim:'Kendini hep değersiz görmek.', ornek:'Ali, herkes onu övse de "Ben hiçbir işe yaramam" diyerek kendini küçümsüyor.'},
+    i:{ad:'Övülmeyi Sevmek', tanim:'Herkes tarafından övülmek istemek.', ornek:'Ahmet, iyi bir şey yaptığında sürekli alkış ve övgü bekliyor.'}},
+  { id:5, kat:'iman',
+    f:{ad:'Sahih Akîde', tanim:'Kur\'an ve Sünnete uygun iman.', ornek:'Ali, Peygamberimizin öğrettiği şekilde Allah\'a inanıyor ve dinini doğru öğreniyor.'},
+    t:{ad:'Lakayt İnanç', tanim:'İnancını önemsemeyip ilgisiz olmak.', ornek:'Ayşe, Müslümanım diyor ama dinini öğrenmeye hiç ilgi göstermiyor.'},
+    i:{ad:'Bid\'at İtikâdı', tanim:'Dinden olmayan yanlış inançlar.', ornek:'Mehmet, aslı olmayan batıl inanışlara kapılıyor ve bunları din sanıyor.'}},
+  { id:6, kat:'iman',
+    f:{ad:'Takvâ', tanim:'Allah\'a saygıyla haramlardan kaçınmak.', ornek:'Mehmet, günah işlemekten çekinir ve Allah\'ı her an hatırlar.'},
+    t:{ad:'Ruhbâniyet', tanim:'Dünya nimetlerini tamamen terk etmek.', ornek:'Ali, helal olan şeyleri bile kendine yasaklayarak yaşıyor.'},
+    i:{ad:'Hevâ-yı Nefs', tanim:'Nefsine göre yaşayıp ölçü tanımamak.', ornek:'Ahmet, canı ne isterse doğru mu yanlış mı demeden yapıyor.'}},
+  { id:7, kat:'iman',
+    f:{ad:'Tahkik', tanim:'Bilerek ve anlayarak inanmak.', ornek:'Ayşe, iman konularını okuyup öğrenerek bilinçli şekilde inanıyor.'},
+    t:{ad:'Taklîd ile İman', tanim:'Araştırmadan körü körüne inanmak.', ornek:'Mehmet, ailesi Müslüman diye hiç anlamadan öylece inanıyor.'},
+    i:{ad:'Şekk', tanim:'İman konusunda sürekli şüphe etmek.', ornek:'Mert, kalbine gelen vesveseler yüzünden Allah\'ın varlığından hep şüphe ediyor.'}},
+  { id:8, kat:'iman',
+    f:{ad:'Recâ', tanim:'Allah\'a güvenle umut etmek.', ornek:'Merve, zor zamanlarda bile Allah\'ın yardım edeceğine inanıyor.'},
+    t:{ad:'Ye\'s', tanim:'Hiç umut kalmaması, karamsarlık.', ornek:'Ali, bir kere başarısız olunca asla başaramayacağını düşünüp ümidini yitiriyor.'},
+    i:{ad:'Tûl-i Emel', tanim:'Aşırı uzun, boş hayaller kurmak.', ornek:'Ahmet, "nasıl olsa çok vaktim var" deyip sorumluluklarını sürekli erteliyor.'}},
+  { id:9, kat:'karakter',
+    f:{ad:'Tevâzu', tanim:'Kendini asla üstün görmemek.', ornek:'Ahmet, başarılı olsa da övünmeyip mütevazı davranıyor.'},
+    t:{ad:'Tezellül', tanim:'Kendini aşırı derecede küçük düşürmek.', ornek:'Ayşe, beğenilmek uğruna herkesin her dediğine boyun eğip onurunu hiçe sayıyor.'},
+    i:{ad:'Kibr', tanim:'Kendini herkesten üstün görmek.', ornek:'Mehmet, biraz başarı kazanınca arkadaşlarını küçümsemeye başladı.'}},
+  { id:10, kat:'sosyal',
+    f:{ad:'Hürmet', tanim:'Saygı ve değer göstermek.', ornek:'Ayşe, anne-babasına ve öğretmenlerine karşı her zaman saygılı davranıyor.'},
+    t:{ad:'Kıymet Bilmezlik', tanim:'Bilgili büyüklere saygı göstermemek.', ornek:'Ali, kendisine ders öğreten öğretmenini küçümsüyor ve sözünü dinlemiyor.'},
+    i:{ad:'Takdis', tanim:'Aşırı yüceltme ve kutsama.', ornek:'Mehmet, sevdiği hocasını hatasız sanıp onu neredeyse kutsal biri gibi görüyor.'}},
+  { id:11, kat:'sosyal',
+    f:{ad:'Gıpta', tanim:'İyiliklere imrenip benzemek istemek.', ornek:'Fatma, arkadaşının başarısına imrenip o da çok çalışmaya karar verdi.'},
+    t:{ad:'Duyarsızlık', tanim:'Başkalarının başarısına ilgisiz kalmak.', ornek:'Ali, arkadaşının başarısı karşısında hiç tepki vermiyor, umursamıyor.'},
+    i:{ad:'Hased', tanim:'Başkalarının iyiliğini kıskanmak.', ornek:'Ayşe, arkadaşının yüksek notunu kıskanıp onun başarısına sevinemiyor.'}},
+  { id:12, kat:'karakter',
+    f:{ad:'Hilm', tanim:'Öfkelense de yumuşak davranmak.', ornek:'Ahmet, kardeşi ona kızsa bile sakinliğini bozmadı, yumuşak davrandı.'},
+    t:{ad:'Kayıtsızlık', tanim:'Haksızlığa karşı bile duyarsız olmak.', ornek:'Mehmet, yakın arkadaşı incinse bile hiçbir şey olmamış gibi davranıyor.'},
+    i:{ad:'Hıkd', tanim:'Kalbinde kin biriktirmek.', ornek:'Ayşe, kendisini üzen arkadaşını hiç affetmedi ve içinde kin tuttu.'}},
+  { id:13, kat:'sosyal',
+    f:{ad:'Şefkat', tanim:'Merhamet ve sevgi göstermek.', ornek:'Fatma, ağlayan küçük kardeşini görünce hemen sarılıp teselli etti.'},
+    t:{ad:'Soğukluk', tanim:'Kimsenin duygusunu hiç umursamamak.', ornek:'Mehmet, arkadaşı üzülürken onu teselli etmiyor, hiç oralı olmuyor.'},
+    i:{ad:'Şemâtet', tanim:'Başkasının acısına gizlice sevinmek.', ornek:'Ali, rakibi sınavda kötü not alınca içten içe sevindi.'}},
+  { id:14, kat:'sosyal',
+    f:{ad:'Ülfet', tanim:'Sevgi ve anlayışla dostluk kurmak.', ornek:'Ahmet, sınıfa yeni gelen çocukla sohbet edip hemen arkadaş oldu.'},
+    t:{ad:'Hicr', tanim:'Dostluğu kesip küskün kalmak.', ornek:'Ali, küçük bir tartışmadan sonra arkadaşına küstü ve konuşmayı tamamen bıraktı.'},
+    i:{ad:'Yapışkanlık', tanim:'Her an peşini bırakmamak.', ornek:'Merve, en yakın arkadaşının sürekli yanında olup ona hiç yalnız kalma fırsatı vermiyor.'}},
+  { id:15, kat:'karakter',
+    f:{ad:'Şecâat', tanim:'Korksa da akıllıca cesur davranmak.', ornek:'Zeynep, tehlikeye rağmen yangındaki kediyi kurtarmaya cesaret etti.'},
+    t:{ad:'Cübn', tanim:'Tehlike karşısında cesaretsiz kalmak.', ornek:'Ayşe, en ufak bir zorlukta hemen geri çekiliyor ve cesaret edemiyor.'},
+    i:{ad:'Tehevvür', tanim:'Sonunu düşünmeden kendini riske atmak.', ornek:'Mehmet, alkış toplamak için düşünmeden çok tehlikeli hareketler yapıyor.'}},
+  { id:16, kat:'sosyal',
+    f:{ad:'Vefâ', tanim:'Sözünde durmak ve dostluğu korumak.', ornek:'Ahmet, en zor gününde bile arkadaşının yanından ayrılmadı, vefalı davrandı.'},
+    t:{ad:'Saflık', tanim:'Herkesi masum sanıp çabucak inanmak.', ornek:'Zeynep, tanıştığı herkesi hemen iyi sanıp onlara güveniyor.'},
+    i:{ad:'Gadr', tanim:'Dostunu yarı yolda bırakmak.', ornek:'Mert, işi bitince yakın arkadaşını yüzüstü bıraktı.'}},
+  { id:17, kat:'sosyal',
+    f:{ad:'Emanet', tanim:'Emaneti koruyup sözünde durmak.', ornek:'Ali, arkadaşının sırrını kimseye söylemeyerek emanete sadık kaldı.'},
+    t:{ad:'Safdillik', tanim:'Her söze hemen inanıp kolay aldanmak.', ornek:'Mehmet, internette okuduğu yalan haberlere bile hemen inanacak kadar safdil.'},
+    i:{ad:'Hıyânet', tanim:'Emanete ihanet edip güveni yıkmak.', ornek:'Ahmet, ona emanet edilen parayı izinsiz harcayıp güveni boşa çıkardı.'}},
+  { id:18, kat:'sosyal',
+    f:{ad:'Sadakat', tanim:'Verdiği sözde durup bağlı kalmak.', ornek:'Zeynep, en zor durumda bile söz verdiği arkadaşını yarı yolda bırakmadı.'},
+    t:{ad:'Suskunluk', tanim:'Gereken yerde sessiz kalmak.', ornek:'Ali, arkadaşına iftira atıldığında doğruyu bildiği halde suskun kaldı.'},
+    i:{ad:'Va\'dini Bozmak', tanim:'Söz verip tutmamak, güveni sarsmak.', ornek:'Ayşe, kardeşine birlikte oynayacağına söz verip sonra sözünü tutmadı.'}},
+  { id:19, kat:'sosyal',
+    f:{ad:'Hüsn-ü Zan', tanim:'Delil yokken kötü düşünmemek.', ornek:'Ayşe, arkadaşı aramayınca hemen kötü düşünmedi; belki işi vardır diye iyimser oldu.'},
+    t:{ad:'Saflık', tanim:'İyi kötü demeden herkese inanmak.', ornek:'Merve, yalan söyleyen birini bile hemen iyi sanıp ona inanıyor.'},
+    i:{ad:'Sû-i Zan', tanim:'Kanıt yokken bile kötü zannetmek.', ornek:'Ali, komşusu halini sormayınca "bana kızgın" diye düşünüp suizan etti.'}},
+  { id:20, kat:'ilim',
+    f:{ad:'Azim', tanim:'Kararlı ve sabırlı şekilde çalışmak.', ornek:'Zeynep, hedefine ulaşmak için pes etmeden her gün düzenli çalışıyor.'},
+    t:{ad:'Tesvîf', tanim:'Hayırlı işleri sürekli ertelemek.', ornek:'Ahmet, bugün yapması gereken işi "yarın yaparım" diyerek sürekli erteliyor.'},
+    i:{ad:'Telaş', tanim:'Panikle acele etmek, düşünmeden koşturmak.', ornek:'Ali, ödevini son güne bırakıp telaşla yaptığı için birçok hata yaptı.'}},
+  { id:21, kat:'islah',
+    f:{ad:'Müdârâ', tanim:'Kırmadan, güzelce doğruyu göstermek.', ornek:'Mehmet, hatalı arkadaşına kızmak yerine nazikçe doğrusunu anlattı.'},
+    t:{ad:'Katılık', tanim:'Çok sert ve anlayışsız olmak.', ornek:'Ali, ufak hatalarda bile arkadaşlarına çok katı davranıp kalplerini kırıyor.'},
+    i:{ad:'Müdâhene', tanim:'Doğrulardan ödün verip yaranmaya çalışmak.', ornek:'Ayşe, menfaat için arkadaşlarının yanlışlarına göz yumup onlara hak veriyor.'}},
+  { id:22, kat:'islah',
+    f:{ad:'Islâh', tanim:'Kötüyü düzeltip iyiye çevirmek.', ornek:'Fatma, bozulan arkadaşları barıştırmak için araya girdi.'},
+    t:{ad:'Pasiflik', tanim:'Sorunları görüp harekete geçmemek.', ornek:'Mehmet, haksızlık olsa bile "bana ne" diyerek hiçbir şeye karışmıyor.'},
+    i:{ad:'Fitne', tanim:'Ortamı karıştırıp düşmanlık yaratmak.', ornek:'Merve, arkadaş grubu içinde yalanlar söyleyerek kavga çıkmasına sebep oluyor.'}},
+  { id:23, kat:'ilim',
+    f:{ad:'Müzâkere', tanim:'Karşılıklı saygıyla fikrini paylaşmak.', ornek:'Zeynep, anlaşmazlık olduğunda herkesle sakince konuşup ortak çözüm arıyor.'},
+    t:{ad:'Uysallık', tanim:'Kendi fikrini hiç savunmamak.', ornek:'Ali, fikri olsa bile tartışmalarda hep susup herkese "peki" diyor.'},
+    i:{ad:'İnat & Mükâbere', tanim:'Haksız olsa da inatla diretmek.', ornek:'Ahmet, yanlış olduğunu bilse de sadece inattan özür dilemiyor.'}},
+  { id:24, kat:'islah',
+    f:{ad:'Sıdk', tanim:'Dürüst olmak, yalan söylememek.', ornek:'Mehmet, başı derde girse bile daima dürüst davranıyor ve yalan söylemiyor.'},
+    t:{ad:'Nifâk', tanim:'İki yüzlü davranmak, göründüğü gibi olmamak.', ornek:'Ali, öğretmeninin yanında uslu duruyor ama arkasından kuralları çiğniyor.'},
+    i:{ad:'Patavatsızlık', tanim:'Sözünü hiç tartmadan söylemek.', ornek:'Ayşe, arkadaşına düşünmeden sözler söyledi ve onu incitti.'}},
+  { id:25, kat:'iman',
+    f:{ad:'Tevbe', tanim:'İşlediği günahtan pişman olup dönmek.', ornek:'Ahmet, yaptığı hatayı fark edince hemen pişman olup Allah\'tan af diledi.'},
+    t:{ad:'Harâmda Isrâr', tanim:'Günahında inatla devam etmek.', ornek:'Ali, yanlış olduğunu bildiği halde yalan söylemeye devam ediyor.'},
+    i:{ad:'Vesvese', tanim:'Her konuda asılsız kuruntu yapmak.', ornek:'Mehmet, abdest aldığı halde "acaba almadım mı" diye tekrar tekrar düşünüyor.'}},
+  { id:26, kat:'iman',
+    f:{ad:'Dua', tanim:'Allah\'a yalvararak iyilik istemek.', ornek:'Zeynep, her gece ailesi için Allah\'tan sağlık ve iyilik diliyor.'},
+    t:{ad:'Müslümâna Bedduâ', tanim:'Bir mümine kötülük istemek.', ornek:'Mehmet, öfkeyle arkadaşına "başına kötü şey gelsin" diyerek beddua etti.'},
+    i:{ad:'Aşırı Övgü', tanim:'Yüze karşı abartılı şekilde övmek.', ornek:'Ayşe, çıkar için arkadaşlarını gereğinden fazla övüp onları şımartıyor.'}},
+  { id:27, kat:'ilim',
+    f:{ad:'Hikmetli Beyan', tanim:'Yerinde ve faydalı söz söylemek.', ornek:'Ali, kavga eden arkadaşlarına öyle bir öğüt verdi ki hepsi sakinleşti.'},
+    t:{ad:'Gıybet', tanim:'Başkalarının kusurlarını arkasından konuşmak.', ornek:'Merve, arkadaşının kötü yönlerini onun yokluğunda anlattı.'},
+    i:{ad:'Sükût-u Hakk', tanim:'Hakkı söyleyeceği yerde susmak.', ornek:'Ahmet, bir haksızlığa şahit olduğu halde korkusundan hiç ses çıkarmadı.'}},
+  { id:28, kat:'ilim',
+    f:{ad:'Tefekkür', tanim:'Allah\'ın yarattıklarını derin düşünmek.', ornek:'"Ne güzel yaratılmış" deyerek çiçeğe bakıp şükretmektir.'},
+    t:{ad:'Gaflet', tanim:'Allah\'ı unutarak boş yaşamak.', ornek:'Gün boyu oyun oynayıp hiç Allah\'ı anmamaktır.'},
+    i:{ad:'Vesvese', tanim:'Her şeyi "ya kötüyse?" diye kurcalamak.', ornek:'"Ya kötüyse?" diye sürekli endişe içinde olmaktır.'}},
+  { id:29, kat:'islah',
+    f:{ad:'Af', tanim:'"Pardon" diyeni kalpten bağışlamak.', ornek:'Zeynep, üzen arkadaşını içtenlikle affetti ve dargınlığı bıraktı.'},
+    t:{ad:'Kırgınlıkta Kalmak', tanim:'Özre rağmen asla affetmemek.', ornek:'"Asla affetmem" diyerek kini uzun süre taşımaktır.'},
+    i:{ad:'Kolay Affetmek', tanim:'Her şeyi hesapsız, ölçüsüzce affetmek.', ornek:'Defalarca zararlı davranan birine düşüncesizce güvenmek.'}},
+  { id:30, kat:'iman',
+    f:{ad:'İhlâs (Riyâ\'dan)', tanim:'İyiliği gösteriş olmadan yapmak.', ornek:'Namazını kimseye göstermeden, yalnız Allah için kılmaktır.'},
+    t:{ad:'Gaflet', tanim:'Allah\'ı unutarak ibadetleri aksatmak.', ornek:'Namaz vakitlerini oyunla geçirip fark etmemektir.'},
+    i:{ad:'Riyâ', tanim:'Gösteriş için ibadet yapmak.', ornek:'Yardım kutusuna para atıp fotoğraf çekmektir.'}},
+];
+
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+let S = {
+  xp: 0,
+  streak: 0,
+  lastDate: null,
+  learned: [],
+  gamesPlayed: 0,
+  currentLearnIdx: 0,
+};
+
+function saveS() {
+  localStorage.setItem('mizan_v1', JSON.stringify(S));
+}
+function loadS() {
+  const raw = localStorage.getItem('mizan_v1');
+  if (raw) {
+    try {
+      const parsed = JSON.parse(raw);
+      S = Object.assign(S, parsed);
+    } catch(e) {}
+  }
+  // Streak update
+  const today = new Date().toDateString();
+  if (S.lastDate) {
+    const last = new Date(S.lastDate);
+    const now = new Date();
+    const diff = Math.floor((now - last) / 86400000);
+    if (diff === 0) { /* same day, keep streak */ }
+    else if (diff === 1) { S.streak++; }
+    else { S.streak = 1; }
+  } else {
+    S.streak = 1;
+  }
+  S.lastDate = today;
+  saveS();
+}
+
+function addXP(amount) {
+  S.xp += amount;
+  saveS();
+  const popup = document.getElementById('xp-popup');
+  popup.textContent = '+' + amount + ' XP ⭐';
+  popup.classList.add('show');
+  setTimeout(() => popup.classList.remove('show'), 1400);
+}
+
+/* ══════════════════════════════════════════════
+   SCREEN ROUTER
+══════════════════════════════════════════════ */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function goHome() {
+  renderHome();
+  showScreen('home');
+}
+
+/* ══════════════════════════════════════════════
+   HOME
+══════════════════════════════════════════════ */
+function renderHome() {
+  document.getElementById('home-streak').textContent = S.streak;
+  document.getElementById('home-xp').textContent = S.xp;
+  document.getElementById('home-learned').textContent = S.learned.length;
+
+  // XP bar (100 XP per level)
+  const level = Math.floor(S.xp / 100) + 1;
+  const xpInLevel = S.xp % 100;
+  document.getElementById('xp-level-label').textContent = 'Seviye ' + level;
+  document.getElementById('xp-bar-label').textContent = xpInLevel + ' / 100 XP';
+  document.getElementById('xp-bar-fill').style.width = xpInLevel + '%';
+}
+
+/* ══════════════════════════════════════════════
+   LEARN MODE (FLASHCARDS)
+══════════════════════════════════════════════ */
+let learnIdx = 0;
+let cardFlipped = false;
+
+function startLearn() {
+  learnIdx = S.currentLearnIdx || 0;
+  cardFlipped = false;
+  renderLearnCard();
+  showScreen('learn');
+}
+
+function renderLearnCard() {
+  const e = ERDEMLER[learnIdx];
+  const total = ERDEMLER.length;
+  const pct = ((learnIdx + 1) / total * 100).toFixed(0);
+
+  document.getElementById('learn-counter').textContent = (learnIdx + 1) + ' / ' + total;
+  document.getElementById('learn-progress-fill').style.width = pct + '%';
+  document.getElementById('learn-cat-label').textContent = KAT[e.kat].emoji + '  ' + KAT[e.kat].ad;
+
+  // Front
+  document.getElementById('fc-virtue-name').textContent = e.f.ad;
+  document.getElementById('fc-virtue-def').textContent = e.f.tanim;
+
+  // Back
+  document.getElementById('fc-poles').innerHTML = `
+    <div class="pole-row">
+      <div class="pole-dot tefrit"></div>
+      <div class="pole-content">
+        <div class="pole-name tefrit-text">${e.t.ad}</div>
+        <div class="pole-def">${e.t.tanim}</div>
+        <div class="pole-ex">"${e.t.ornek}"</div>
+      </div>
+    </div>
+    <div class="pole-row">
+      <div class="pole-dot fazilet"></div>
+      <div class="pole-content">
+        <div class="pole-name fazilet-text">${e.f.ad}</div>
+        <div class="pole-def">${e.f.tanim}</div>
+        <div class="pole-ex">"${e.f.ornek}"</div>
+      </div>
+    </div>
+    <div class="pole-row">
+      <div class="pole-dot ifrat"></div>
+      <div class="pole-content">
+        <div class="pole-name ifrat-text">${e.i.ad}</div>
+        <div class="pole-def">${e.i.tanim}</div>
+        <div class="pole-ex">"${e.i.ornek}"</div>
+      </div>
+    </div>
+  `;
+
+  // Reset flip
+  cardFlipped = false;
+  document.getElementById('flashcard').classList.remove('flipped');
+
+  // Mark button
+  const learned = S.learned.includes(e.id);
+  const btn = document.getElementById('learn-mark-btn');
+  btn.textContent = learned ? '✓ Öğrenildi' : '✓ Öğrendim';
+  btn.style.background = learned ? 'var(--surface2)' : '';
+  btn.style.color = learned ? 'var(--muted2)' : '';
+}
+
+function flipCard() {
+  cardFlipped = !cardFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', cardFlipped);
+}
+
+function nextCard() {
+  learnIdx = (learnIdx + 1) % ERDEMLER.length;
+  S.currentLearnIdx = learnIdx;
+  saveS();
+  renderLearnCard();
+}
+
+function prevCard() {
+  learnIdx = (learnIdx - 1 + ERDEMLER.length) % ERDEMLER.length;
+  S.currentLearnIdx = learnIdx;
+  saveS();
+  renderLearnCard();
+}
+
+function markLearned() {
+  const e = ERDEMLER[learnIdx];
+  if (!S.learned.includes(e.id)) {
+    S.learned.push(e.id);
+    saveS();
+    addXP(5);
+  }
+  renderLearnCard();
+  setTimeout(() => nextCard(), 400);
+}
+
+/* ══════════════════════════════════════════════
+   İBRE GAME
+══════════════════════════════════════════════ */
+let ibreGame = { questions: [], idx: 0, correct: 0, hearts: 3, answered: false };
+
+function generateIbreQuestions() {
+  const shuffled = [...ERDEMLER].sort(() => Math.random() - 0.5).slice(0, 10);
+  return shuffled.map(e => {
+    const poles = ['t', 'f', 'i'];
+    const pole = poles[Math.floor(Math.random() * 3)];
+    return {
+      erdemAd: e.f.ad,
+      metin: e[pole].ornek,
+      dogru: pole,
+      tefritAd: e.t.ad,
+      faziletAd: e.f.ad,
+      ifratAd: e.i.ad,
+      tefritDef: e.t.tanim,
+      faziletDef: e.f.tanim,
+      ifratDef: e.i.tanim,
+    };
+  });
+}
+
+function startIbreGame() {
+  ibreGame = {
+    questions: generateIbreQuestions(),
+    idx: 0, correct: 0, hearts: 3, answered: false
+  };
+  renderIbreQuestion();
+  showScreen('ibre');
+}
+
+const NEEDLE_ANGLES = { t: -72, f: 0, i: 72 };
+
+function setNeedle(pole, delay) {
+  const angle = NEEDLE_ANGLES[pole] || 0;
+  const needle = document.getElementById('gauge-needle');
+  needle.style.setProperty('--needle-angle', angle + 'deg');
+  setTimeout(() => {
+    needle.style.transform = 'rotate(' + angle + 'deg)';
+  }, delay || 0);
+}
+
+function renderIbreQuestion() {
+  const q = ibreGame.questions[ibreGame.idx];
+  ibreGame.answered = false;
+
+  document.getElementById('ibre-counter').textContent = (ibreGame.idx + 1) + ' / ' + ibreGame.questions.length;
+  document.getElementById('ibre-erdem-tag').textContent = q.erdemAd + ' erdem ailesi';
+  document.getElementById('ibre-question-text').textContent = '"' + q.metin + '"';
+
+  // Reset gauge
+  setNeedle('f', 0);
+  const needle = document.getElementById('gauge-needle');
+  needle.style.transform = 'rotate(0deg)';
+
+  // Reset zones
+  ['tefrit','fazilet','ifrat'].forEach(z => {
+    const el = document.getElementById('gz-' + z);
+    el.classList.remove('correct','wrong');
+    el.style.pointerEvents = '';
+  });
+
+  // Reset buttons
+  const btns = { t: 'cb-tefrit', f: 'cb-fazilet', i: 'cb-ifrat' };
+  Object.keys(btns).forEach(k => {
+    const btn = document.getElementById(btns[k]);
+    btn.disabled = false;
+    btn.classList.remove('correct','wrong');
+    btn.textContent = k === 't' ? '⚫ ' + q.tefritAd : k === 'f' ? '🟢 ' + q.faziletAd : '🔴 ' + q.ifratAd;
+  });
+
+  // Hide feedback and next
+  document.getElementById('ibre-feedback').classList.remove('show','correct','wrong');
+  document.getElementById('ibre-next-btn').style.display = 'none';
+
+  // Hearts
+  renderHearts('ibre-hearts', ibreGame.hearts);
+}
+
+function submitAnswer(choice) {
+  if (ibreGame.answered) return;
+  ibreGame.answered = true;
+
+  const q = ibreGame.questions[ibreGame.idx];
+  const correct = choice === q.dogru;
+
+  // Animate needle to choice first
+  setNeedle(choice, 0);
+
+  const fb = document.getElementById('ibre-feedback');
+  const zoneIds = { t: 'gz-tefrit', f: 'gz-fazilet', i: 'gz-ifrat' };
+  const btnIds = { t: 'cb-tefrit', f: 'cb-fazilet', i: 'cb-ifrat' };
+  const poleNames = { t: q.tefritAd, f: q.faziletAd, i: q.ifratAd };
+  const poleDefs = { t: q.tefritDef, f: q.faziletDef, i: q.ifratDef };
+
+  // Disable all buttons
+  ['t','f','i'].forEach(k => {
+    document.getElementById(btnIds[k]).disabled = true;
+  });
+  // Disable gauge zones
+  ['tefrit','fazilet','ifrat'].forEach(z => {
+    document.getElementById('gz-' + z).style.pointerEvents = 'none';
+  });
+
+  if (correct) {
+    ibreGame.correct++;
+    document.getElementById(btnIds[choice]).classList.add('correct');
+    document.getElementById(zoneIds[choice]).classList.add('correct');
+    fb.className = 'feedback-bar correct show';
+    fb.innerHTML = '✅ <strong>' + poleNames[q.dogru] + '</strong> — ' + poleDefs[q.dogru];
+    addXP(10);
+  } else {
+    ibreGame.hearts--;
+    renderHearts('ibre-hearts', ibreGame.hearts);
+
+    // Shake needle, then go to correct
+    const needle = document.getElementById('gauge-needle');
+    needle.classList.add('shake');
+    setTimeout(() => {
+      needle.classList.remove('shake');
+      setNeedle(q.dogru, 0);
+      needle.style.transform = 'rotate(' + NEEDLE_ANGLES[q.dogru] + 'deg)';
+    }, 600);
+
+    document.getElementById(btnIds[choice]).classList.add('wrong');
+    document.getElementById(btnIds[q.dogru]).classList.add('correct');
+    document.getElementById(zoneIds[q.dogru]).classList.add('correct');
+    fb.className = 'feedback-bar wrong show';
+    fb.innerHTML = '❌ Doğrusu: <strong>' + poleNames[q.dogru] + '</strong> — ' + poleDefs[q.dogru];
+  }
+
+  document.getElementById('ibre-next-btn').style.display = 'block';
+
+  // Game over if no hearts
+  if (ibreGame.hearts <= 0) {
+    setTimeout(() => finishGame('ibre', ibreGame.correct, ibreGame.questions.length), 1000);
+  }
+}
+
+function nextIbreQuestion() {
+  ibreGame.idx++;
+  if (ibreGame.idx >= ibreGame.questions.length || ibreGame.hearts <= 0) {
+    finishGame('ibre', ibreGame.correct, ibreGame.questions.length);
+  } else {
+    renderIbreQuestion();
+  }
+}
+
+/* ══════════════════════════════════════════════
+   KUTUP GAME
+══════════════════════════════════════════════ */
+let kutupGame = { questions: [], idx: 0, correct: 0, hearts: 3, answered: false };
+
+function generateKutupQuestions() {
+  const all = [];
+  ERDEMLER.forEach(e => {
+    all.push({ erdemAd: e.f.ad, dogru: 't', ad: e.t.ad, tanim: e.t.tanim, ornek: e.t.ornek, tefritAd: e.t.ad, faziletAd: e.f.ad, ifratAd: e.i.ad });
+    all.push({ erdemAd: e.f.ad, dogru: 'f', ad: e.f.ad, tanim: e.f.tanim, ornek: e.f.ornek, tefritAd: e.t.ad, faziletAd: e.f.ad, ifratAd: e.i.ad });
+    all.push({ erdemAd: e.f.ad, dogru: 'i', ad: e.i.ad, tanim: e.i.tanim, ornek: e.i.ornek, tefritAd: e.t.ad, faziletAd: e.f.ad, ifratAd: e.i.ad });
+  });
+  return all.sort(() => Math.random() - 0.5).slice(0, 10);
+}
+
+function startKutupGame() {
+  kutupGame = {
+    questions: generateKutupQuestions(),
+    idx: 0, correct: 0, hearts: 3, answered: false
+  };
+  renderKutupQuestion();
+  showScreen('kutup');
+}
+
+function renderKutupQuestion() {
+  const q = kutupGame.questions[kutupGame.idx];
+  kutupGame.answered = false;
+
+  document.getElementById('kutup-counter').textContent = (kutupGame.idx + 1) + ' / ' + kutupGame.questions.length;
+  document.getElementById('kutup-erdem-tag').textContent = q.erdemAd + ' erdem ailesi';
+  document.getElementById('kutup-def-text').textContent = q.tanim;
+  document.getElementById('kutup-ex-text').textContent = '"' + q.ornek + '"';
+
+  // Update button names
+  document.getElementById('kb-tefrit-name').textContent = q.tefritAd;
+  document.getElementById('kb-fazilet-name').textContent = q.faziletAd;
+  document.getElementById('kb-ifrat-name').textContent = q.ifratAd;
+
+  // Reset buttons
+  ['t','f','i'].forEach(k => {
+    const id = k === 't' ? 'kb-tefrit' : k === 'f' ? 'kb-fazilet' : 'kb-ifrat';
+    const btn = document.getElementById(id);
+    btn.disabled = false;
+    btn.classList.remove('correct','wrong','selected');
+  });
+
+  document.getElementById('kutup-feedback').classList.remove('show','correct','wrong');
+  document.getElementById('kutup-next-btn').style.display = 'none';
+  renderHearts('kutup-hearts', kutupGame.hearts);
+}
+
+function submitKutup(choice) {
+  if (kutupGame.answered) return;
+  kutupGame.answered = true;
+
+  const q = kutupGame.questions[kutupGame.idx];
+  const correct = choice === q.dogru;
+  const btnIds = { t: 'kb-tefrit', f: 'kb-fazilet', i: 'kb-ifrat' };
+  const poleNames = { t: q.tefritAd, f: q.faziletAd, i: q.ifratAd };
+
+  ['t','f','i'].forEach(k => {
+    document.getElementById(btnIds[k]).disabled = true;
+  });
+
+  if (correct) {
+    kutupGame.correct++;
+    document.getElementById(btnIds[choice]).classList.add('correct');
+    const fb = document.getElementById('kutup-feedback');
+    fb.className = 'feedback-bar correct show';
+    fb.textContent = '✅ Doğru! ' + poleNames[q.dogru] + ' — ' + q.tanim;
+    addXP(10);
+  } else {
+    kutupGame.hearts--;
+    renderHearts('kutup-hearts', kutupGame.hearts);
+    document.getElementById(btnIds[choice]).classList.add('wrong');
+    document.getElementById(btnIds[q.dogru]).classList.add('correct');
+    const fb = document.getElementById('kutup-feedback');
+    fb.className = 'feedback-bar wrong show';
+    fb.textContent = '❌ Doğrusu: ' + poleNames[q.dogru];
+  }
+
+  document.getElementById('kutup-next-btn').style.display = 'block';
+
+  if (kutupGame.hearts <= 0) {
+    setTimeout(() => finishGame('kutup', kutupGame.correct, kutupGame.questions.length), 1000);
+  }
+}
+
+function nextKutupQuestion() {
+  kutupGame.idx++;
+  if (kutupGame.idx >= kutupGame.questions.length || kutupGame.hearts <= 0) {
+    finishGame('kutup', kutupGame.correct, kutupGame.questions.length);
+  } else {
+    renderKutupQuestion();
+  }
+}
+
+/* ══════════════════════════════════════════════
+   HEARTS
+══════════════════════════════════════════════ */
+function renderHearts(containerId, count) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    const span = document.createElement('span');
+    span.className = 'heart' + (i >= count ? ' lost' : '');
+    span.textContent = '❤️';
+    el.appendChild(span);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   GAME FINISH
+══════════════════════════════════════════════ */
+function finishGame(type, correct, total) {
+  S.gamesPlayed++;
+  saveS();
+
+  const ratio = correct / total;
+  let emoji, title, sub;
+  if (ratio === 1)       { emoji = '🏆'; title = 'Mükemmel!'; sub = 'Tüm soruları doğru yanıtladın!'; }
+  else if (ratio >= 0.7) { emoji = '🌟'; title = 'Harika!'; sub = correct + '/' + total + ' doğru — çok iyi!'; }
+  else if (ratio >= 0.5) { emoji = '💪'; title = 'Güzel!'; sub = correct + '/' + total + ' doğru — devam et!'; }
+  else                   { emoji = '📚'; title = 'Pratik Gerekli'; sub = correct + '/' + total + ' doğru — tekrar dene!'; }
+
+  const earned = correct * 10;
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-sub').textContent = sub;
+  document.getElementById('result-xp').textContent = '+' + earned;
+
+  const replayBtn = document.getElementById('result-replay-btn');
+  replayBtn.onclick = () => type === 'ibre' ? startIbreGame() : startKutupGame();
+  replayBtn.textContent = type === 'ibre' ? 'Tekrar İbre Oyna' : 'Tekrar Kutup Oyna';
+
+  showScreen('result');
+}
+
+/* ══════════════════════════════════════════════
+   PROGRESS
+══════════════════════════════════════════════ */
+function showProgress() {
+  document.getElementById('prog-xp').textContent = S.xp;
+  document.getElementById('prog-streak').textContent = S.streak;
+  document.getElementById('prog-learned').textContent = S.learned.length;
+  document.getElementById('prog-games').textContent = S.gamesPlayed;
+
+  // Category rows
+  const catRows = document.getElementById('cat-progress-rows');
+  catRows.innerHTML = '';
+  const catCounts = {};
+  const catTotal = {};
+  ERDEMLER.forEach(e => {
+    catTotal[e.kat] = (catTotal[e.kat] || 0) + 1;
+    if (S.learned.includes(e.id)) {
+      catCounts[e.kat] = (catCounts[e.kat] || 0) + 1;
+    }
+  });
+  Object.keys(KAT).forEach(k => {
+    const total = catTotal[k] || 0;
+    const done = catCounts[k] || 0;
+    const pct = total > 0 ? (done / total * 100).toFixed(0) : 0;
+    const row = document.createElement('div');
+    row.className = 'cat-row';
+    row.innerHTML = `
+      <span class="cat-icon">${KAT[k].emoji}</span>
+      <span class="cat-name">${KAT[k].ad}</span>
+      <div class="cat-bar-bg">
+        <div class="cat-bar-fill" style="width:${pct}%; background:${KAT[k].renk}"></div>
+      </div>
+      <span class="cat-count">${done}/${total}</span>
+    `;
+    catRows.appendChild(row);
+  });
+
+  // Badges
+  const badgesEl = document.getElementById('badges-row');
+  badgesEl.innerHTML = '';
+  const allBadges = [
+    { id:'first', icon:'🌱', name:'İlk Adım', desc:'İlk erdemi öğren', earned: S.learned.length >= 1 },
+    { id:'five', icon:'⭐', name:'5 Erdem', desc:'5 erdem öğren', earned: S.learned.length >= 5 },
+    { id:'ten', icon:'🌟', name:'10 Erdem', desc:'10 erdem öğren', earned: S.learned.length >= 10 },
+    { id:'all', icon:'🏆', name:'Erdem Ustası', desc:'Tüm 30 erdemi öğren', earned: S.learned.length >= 30 },
+    { id:'xp100', icon:'💎', name:'100 XP', desc:'100 XP kazan', earned: S.xp >= 100 },
+    { id:'streak3', icon:'🔥', name:'3 Gün Serisi', desc:'3 gün üst üste oyna', earned: S.streak >= 3 },
+    { id:'game5', icon:'🎮', name:'5 Oyun', desc:'5 oyun tamamla', earned: S.gamesPlayed >= 5 },
+  ];
+  allBadges.forEach(b => {
+    const el = document.createElement('div');
+    el.className = 'badge' + (b.earned ? ' earned' : '');
+    el.innerHTML = `<span class="badge-icon">${b.icon}</span> ${b.name}`;
+    el.title = b.desc;
+    badgesEl.appendChild(el);
+  });
+
+  // Virtue chips
+  const grid = document.getElementById('virtue-grid');
+  grid.innerHTML = '';
+  ERDEMLER.forEach(e => {
+    const learned = S.learned.includes(e.id);
+    const chip = document.createElement('div');
+    chip.className = 'virtue-chip' + (learned ? ' learned' : '');
+    chip.innerHTML = `<div class="chip-dot"></div>${e.f.ad}`;
+    grid.appendChild(chip);
+  });
+
+  showScreen('progress');
+}
+
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
+loadS();
+renderHome();
+showScreen('home');
+</script>
+
+</body>
+</html>
