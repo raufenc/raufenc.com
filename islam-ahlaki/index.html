@@ -4,237 +4,250 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mizan — İslam Ahlakı</title>
-  <meta name="description" content="İslam ahlakının 35 temel erdemi. İbre oyunu, eşleştir, flashcard ile öğren." />
+  <meta name="description" content="İslam ahlakının 121 dersi. 5 alan: BEN, BEN ve SEN, BİZ, TABİAT, MANEVİYAT. Fazilet ve adab dersleri." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>" />
   <link rel="stylesheet" href="/lib/design-system/tokens.css" />
   <style>
     :root {
-      --accent:      #22c55e;
-      --accent-soft: rgba(34,197,94,0.12);
-      --accent-glow: rgba(34,197,94,0.25);
-      --tc: #94a3b8;
-      --fc: #22c55e;
-      --ic: #ef4444;
+      --acc:      #22c55e;
+      --acc-soft: rgba(34,197,94,.12);
+      --acc-glow: rgba(34,197,94,.25);
+      --tc: #94a3b8; --fc: #22c55e; --ic: #ef4444;
       --gold: #f59e0b;
+      /* Domain rengi (JS ile güncellenir) */
+      --dom: #22c55e; --dom-soft: rgba(34,197,94,.12); --dom-glow: rgba(34,197,94,.25);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font-sans); min-height: 100vh; overflow-x: hidden; }
-    #app { min-height: 100vh; }
-    .screen { display: none; }
-    .screen.active { display: flex; flex-direction: column; }
-    .page { max-width: 600px; margin: 0 auto; padding: 68px 18px 40px; width: 100%; flex: 1; }
-    .label { font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); }
-    .muted { color: var(--muted2); font-size: 14px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-sans);min-height:100vh;overflow-x:hidden}
+    #app{min-height:100vh}
+    .screen{display:none}
+    .screen.active{display:flex;flex-direction:column}
+    .page{max-width:600px;margin:0 auto;padding:68px 18px 40px;width:100%;flex:1}
+    .lbl{font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--acc)}
+    .muted{color:var(--muted2);font-size:14px}
 
-    /* ── Buttons ── */
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-full); font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; border: none; transition: all .2s; text-decoration: none; }
-    .btn-primary { background: var(--accent); color: #081208; }
-    .btn-primary:hover { box-shadow: 0 4px 20px var(--accent-glow); transform: translateY(-1px); }
-    .btn-ghost { background: var(--surface); color: var(--muted2); border: 1px solid var(--border); }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--text); }
-    .btn-sm { padding: 8px 16px; font-size: 13px; }
-    .btn-full { width: 100%; }
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--radius-full);font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+    .btn-primary{background:var(--dom);color:#fff}
+    .btn-primary:hover{box-shadow:0 4px 20px var(--dom-glow);transform:translateY(-1px)}
+    .btn-ghost{background:var(--surface);color:var(--muted2);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:var(--dom);color:var(--text)}
+    .btn-sm{padding:8px 16px;font-size:13px}
+    .btn-full{width:100%}
 
-    /* ── HOME ── */
-    .home-header { text-align: center; padding: 16px 0 28px; }
-    .home-logo { font-size: 52px; margin-bottom: 10px; }
-    .home-title {
-      font-size: clamp(34px, 8vw, 52px); font-weight: 900; letter-spacing: -.04em;
-      background: linear-gradient(135deg, var(--accent) 0%, #86efac 50%, var(--gold) 100%);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .home-sub { color: var(--muted2); font-size: 15px; margin-top: 8px; line-height: 1.6; }
-    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 20px 0; }
-    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 10px; text-align: center; }
-    .stat-icon { font-size: 20px; margin-bottom: 4px; }
-    .stat-val { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
-    .stat-lbl { font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: .08em; margin-top: 2px; }
-    .xp-bar-wrap { margin: 0 0 24px; }
-    .xp-bar-top { display: flex; justify-content: space-between; margin-bottom: 6px; }
-    .xp-bar-bg { height: 8px; background: var(--surface2); border-radius: 100px; overflow: hidden; }
-    .xp-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #86efac); border-radius: 100px; transition: width .6s cubic-bezier(.34,1.56,.64,1); }
-    .modes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-    .mode-btn { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 16px; cursor: pointer; text-align: left; font-family: inherit; transition: all .2s; position: relative; overflow: hidden; }
-    .mode-btn::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 20% 20%, var(--accent-soft), transparent 70%); opacity:0; transition:opacity .3s; }
-    .mode-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow); }
-    .mode-btn:hover::before { opacity:1; }
-    .mode-icon { font-size: 30px; margin-bottom: 8px; }
-    .mode-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .mode-desc { font-size: 12px; color: var(--muted2); line-height: 1.4; }
-    .mode-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:var(--radius-full); background:var(--accent-soft); color:var(--accent); margin-top:6px; letter-spacing:.05em; }
-    .source-note { text-align:center; font-size:12px; color:var(--muted); padding:12px; border-top:1px solid var(--border); margin-top:8px; }
+    /* HOME */
+    .home-header{text-align:center;padding:16px 0 24px}
+    .home-logo{font-size:52px;margin-bottom:10px}
+    .home-title{font-size:clamp(34px,8vw,52px);font-weight:900;letter-spacing:-.04em;background:linear-gradient(135deg,#22c55e 0%,#86efac 50%,#f59e0b 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .home-sub{color:var(--muted2);font-size:15px;margin-top:8px;line-height:1.6}
+    .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+    .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 10px;text-align:center}
+    .stat-icon{font-size:20px;margin-bottom:4px}
+    .stat-val{font-size:22px;font-weight:800;letter-spacing:-.02em}
+    .stat-lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+    .xp-bar-wrap{margin:0 0 20px}
+    .xp-bar-top{display:flex;justify-content:space-between;margin-bottom:6px}
+    .xp-bar-bg{height:8px;background:var(--surface2);border-radius:100px;overflow:hidden}
+    .xp-bar-fill{height:100%;background:linear-gradient(90deg,#22c55e,#86efac);border-radius:100px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
 
-    /* ── LEARN ── */
-    .learn-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
-    .progress-bar-sm { flex:1; height:6px; background:var(--surface2); border-radius:100px; margin:0 14px; overflow:hidden; }
-    .progress-bar-fill { height:100%; background:var(--accent); border-radius:100px; transition:width .4s; }
+    /* Domain cards */
+    .domain-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+    .domain-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 14px;cursor:pointer;text-align:left;font-family:inherit;transition:all .2s;position:relative;overflow:hidden}
+    .domain-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 10%,var(--dc-soft),transparent 70%);opacity:0;transition:opacity .3s}
+    .domain-card:hover{border-color:var(--dc);transform:translateY(-2px);box-shadow:0 8px 24px var(--dc-glow)}
+    .domain-card:hover::before{opacity:1}
+    .dc-icon{font-size:28px;margin-bottom:8px}
+    .dc-lbl{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+    .dc-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+    .dc-sub{font-size:11px;color:var(--muted2);line-height:1.4;margin-bottom:8px}
+    .dc-prog{height:4px;background:var(--surface2);border-radius:100px;overflow:hidden}
+    .dc-prog-fill{height:100%;border-radius:100px;transition:width .6s}
+    .dc-cnt{font-size:10px;color:var(--muted2);margin-top:4px}
 
-    .card-scene { perspective:1200px; margin:6px 0 16px; cursor:pointer; user-select:none; }
-    .card-3d { position:relative; height:380px; transform-style:preserve-3d; transition:transform .55s cubic-bezier(.4,0,.2,1); }
-    .card-3d.flipped { transform:rotateY(180deg); }
-    .card-face { position:absolute; inset:0; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl); padding:24px; backface-visibility:hidden; display:flex; flex-direction:column; }
+    /* Quick games row */
+    .games-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+    .game-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 8px;cursor:pointer;font-family:inherit;text-align:center;transition:all .2s}
+    .game-card:hover{border-color:var(--acc);transform:translateY(-1px)}
+    .gc-icon{font-size:22px;margin-bottom:4px}
+    .gc-title{font-size:12px;font-weight:700;color:var(--text)}
+    .gc-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:var(--radius-full);background:var(--acc-soft);color:var(--acc);margin-top:4px;display:inline-block;letter-spacing:.05em}
+    .source-note{text-align:center;font-size:12px;color:var(--muted);padding:12px;border-top:1px solid var(--border);margin-top:8px}
 
-    /* Front */
-    .cf-cat { display:flex; align-items:center; gap:8px; margin-bottom:20px; }
-    .cf-cat-badge { font-size:11px; font-weight:700; padding:4px 12px; border-radius:var(--radius-full); letter-spacing:.05em; }
-    .cf-main { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-    .cf-virtue-name { font-size: clamp(36px,8vw,54px); font-weight:900; letter-spacing:-.04em; margin-bottom:10px; }
-    .cf-virtue-def { font-size:15px; color:var(--muted2); line-height:1.7; max-width:280px; }
-    .cf-spectrum { display:flex; align-items:center; gap:8px; margin-top:20px; width:100%; }
-    .cf-spec-label { font-size:11px; font-weight:600; flex-shrink:0; }
-    .cf-spec-bar { flex:1; height:6px; border-radius:100px; background:linear-gradient(to right, var(--tc), var(--fc), var(--ic)); position:relative; }
-    .cf-spec-dot { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:14px; height:14px; background:white; border-radius:50%; border:2px solid var(--fc); box-shadow:0 0 8px var(--fc); }
-    .cf-hint { font-size:12px; color:var(--muted); text-align:center; margin-top:auto; display:flex; align-items:center; justify-content:center; gap:5px; }
+    /* DOMAIN SCREEN */
+    .domain-header{padding:16px 0 20px;border-bottom:1px solid var(--border);margin-bottom:20px}
+    .domain-h-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .domain-h-icon{font-size:36px}
+    .domain-h-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+    .domain-h-title{font-size:20px;font-weight:800;margin-top:2px}
+    .domain-h-sub{font-size:12px;color:var(--muted2);margin-top:2px}
+    .domain-prog-row{display:flex;align-items:center;gap:10px}
+    .domain-prog-bg{flex:1;height:6px;background:var(--surface2);border-radius:100px;overflow:hidden}
+    .domain-prog-fill{height:100%;border-radius:100px;transition:width .6s}
+    .domain-sec-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted2);margin:18px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+    .lesson-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:7px;cursor:pointer;transition:all .2s;font-family:inherit;text-align:left;width:100%}
+    .lesson-item:hover{border-color:var(--dom);background:var(--surface2)}
+    .lesson-item.done{opacity:.6}
+    .li-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px}
+    .lesson-item.done .li-check{background:var(--dom);border-color:var(--dom);color:#fff}
+    .li-name{font-size:14px;font-weight:600;flex:1}
+    .li-type{font-size:10px;font-weight:700;padding:2px 8px;border-radius:var(--radius-full)}
+    .li-type.f{background:var(--dom-soft);color:var(--dom)}
+    .li-type.a{background:rgba(245,158,11,.1);color:#f59e0b}
 
-    /* Back */
-    .card-back { transform:rotateY(180deg); padding:18px; overflow-y:auto; }
-    .cb-title { font-size:13px; font-weight:700; color:var(--accent); margin-bottom:14px; text-align:center; }
-    .pole-row { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid var(--border); }
-    .pole-row:last-child { border-bottom:none; }
-    .pole-dot { width:11px; height:11px; border-radius:50%; margin-top:4px; flex-shrink:0; }
-    .pole-dot.t { background:var(--tc); }
-    .pole-dot.f { background:var(--fc); }
-    .pole-dot.i { background:var(--ic); }
-    .pole-content { flex:1; }
-    .pole-name { font-size:14px; font-weight:700; margin-bottom:2px; }
-    .pole-name.t { color:var(--tc); }
-    .pole-name.f { color:var(--fc); }
-    .pole-name.i { color:var(--ic); }
-    .pole-def { font-size:12px; color:var(--muted2); line-height:1.5; }
-    .pole-ex { font-size:11px; color:var(--muted); margin-top:3px; font-style:italic; line-height:1.4; }
+    /* LESSON SCREEN */
+    .lesson-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .lesson-steps-row{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+    .step-dot{width:28px;height:5px;border-radius:100px;background:var(--surface2);transition:background .3s}
+    .step-dot.active{background:var(--dom)}
+    .step-dot.done{background:var(--dom);opacity:.5}
 
-    .learn-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px; }
-    .learn-act-btn { padding:13px; border-radius:var(--radius-md); border:2px solid var(--border); background:var(--surface); cursor:pointer; font-family:inherit; font-weight:700; font-size:13px; transition:all .2s; }
-    .learn-act-btn.tekrar:hover { border-color:#f59e0b; color:#f59e0b; }
-    .learn-act-btn.anladi:hover { border-color:var(--fc); color:var(--fc); }
-    .learn-act-btn.anladi.done { background:var(--accent-soft); border-color:var(--fc); color:var(--fc); }
+    /* Card flip */
+    .card-scene{perspective:1200px;margin:6px 0 16px;cursor:pointer;user-select:none}
+    .card-3d{position:relative;height:360px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1)}
+    .card-3d.flipped{transform:rotateY(180deg)}
+    .card-face{position:absolute;inset:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;backface-visibility:hidden;display:flex;flex-direction:column}
+    .cf-dom{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+    .cf-dom-badge{font-size:10px;font-weight:800;padding:4px 12px;border-radius:var(--radius-full);letter-spacing:.08em;text-transform:uppercase}
+    .cf-type-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:var(--radius-full);background:var(--surface2);color:var(--muted2)}
+    .cf-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .cf-name{font-size:clamp(30px,7vw,46px);font-weight:900;letter-spacing:-.04em;margin-bottom:10px;color:var(--dom)}
+    .cf-def{font-size:15px;color:var(--muted2);line-height:1.7;max-width:300px}
+    .cf-spectrum{display:flex;align-items:center;gap:8px;margin-top:18px;width:100%}
+    .cf-spec-label{font-size:10px;font-weight:600;flex-shrink:0}
+    .cf-spec-bar{flex:1;height:6px;border-radius:100px;background:linear-gradient(to right,var(--tc),var(--fc),var(--ic));position:relative}
+    .cf-spec-dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;background:white;border-radius:50%;border:2px solid var(--dom);box-shadow:0 0 8px var(--dom)}
+    .cf-hint{font-size:12px;color:var(--muted);text-align:center;margin-top:auto;display:flex;align-items:center;justify-content:center;gap:5px}
+    /* Card back */
+    .card-back{transform:rotateY(180deg);padding:18px;overflow-y:auto}
+    .cb-title{font-size:13px;font-weight:700;color:var(--dom);margin-bottom:14px;text-align:center}
+    .pole-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+    .pole-row:last-child{border-bottom:none}
+    .pole-dot{width:11px;height:11px;border-radius:50%;margin-top:4px;flex-shrink:0}
+    .pole-dot.t{background:var(--tc)}.pole-dot.f{background:var(--dom)}.pole-dot.i{background:var(--ic)}
+    .pole-content{flex:1}
+    .pole-name{font-size:14px;font-weight:700;margin-bottom:2px}
+    .pole-name.t{color:var(--tc)}.pole-name.f{color:var(--dom)}.pole-name.i{color:var(--ic)}
+    .pole-def{font-size:12px;color:var(--muted2);line-height:1.5}
 
-    /* ── İBRE GAME ── */
-    .game-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
-    .hearts-row { display:flex; gap:3px; }
-    .heart { font-size:20px; transition:all .3s; }
-    .heart.lost { opacity:.2; filter:grayscale(1); transform:scale(.8); }
+    /* Quiz */
+    .quiz-q{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:20px;margin-bottom:18px}
+    .quiz-q-text{font-size:15px;line-height:1.7;font-weight:600}
+    .quiz-opts{display:flex;flex-direction:column;gap:8px}
+    .quiz-opt{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-md);padding:13px 16px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-align:left;color:var(--text)}
+    .quiz-opt:hover:not(:disabled){border-color:var(--dom);background:var(--dom-soft);color:var(--dom)}
+    .quiz-opt:disabled{cursor:default}
+    .quiz-opt.correct{border-color:var(--fc)!important;background:rgba(34,197,94,.1)!important;color:#86efac!important}
+    .quiz-opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.08)!important;color:#fca5a5!important}
+    .quiz-fb{border-radius:var(--radius-md);padding:12px 16px;font-size:14px;font-weight:600;margin-top:12px;display:none;line-height:1.5;animation:fadeUp .3s ease both}
+    .quiz-fb.ok{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac}
+    .quiz-fb.no{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#fca5a5}
+    .quiz-fb.show{display:block}
 
-    /* Score/combo */
-    .ibre-score-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-    .combo-badge { display:none; background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#000; font-size:12px; font-weight:800; padding:4px 12px; border-radius:var(--radius-full); letter-spacing:.05em; }
-    .combo-badge.show { display:block; animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both; }
-    @keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
+    /* Niyet step */
+    .niyet-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-xl);padding:24px;margin-bottom:20px}
+    .niyet-icon{font-size:40px;text-align:center;margin-bottom:14px}
+    .niyet-title{font-size:13px;font-weight:700;color:var(--dom);text-align:center;margin-bottom:12px;text-transform:uppercase;letter-spacing:.08em}
+    .niyet-text{font-size:16px;line-height:1.8;text-align:center;font-weight:600}
 
-    .q-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-xl); padding:22px 20px; margin-bottom:20px; min-height:110px; display:flex; flex-direction:column; justify-content:center; }
-    .q-tag { font-size:11px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
-    .q-text { font-size:16px; line-height:1.7; }
+    /* İbre game */
+    .game-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+    .hearts-row{display:flex;gap:3px}
+    .heart{font-size:20px;transition:all .3s}
+    .heart.lost{opacity:.2;filter:grayscale(1);transform:scale(.8)}
+    .ibre-score-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .combo-badge{display:none;background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#000;font-size:12px;font-weight:800;padding:4px 12px;border-radius:var(--radius-full);letter-spacing:.05em}
+    .combo-badge.show{display:block;animation:popIn .3s cubic-bezier(.34,1.56,.64,1) both}
+    @keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+    .q-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:22px 20px;margin-bottom:20px;min-height:110px;display:flex;flex-direction:column;justify-content:center}
+    .q-tag{font-size:11px;font-weight:700;color:var(--acc);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+    .q-text{font-size:16px;line-height:1.7}
+    .gauge-wrap{position:relative;width:100%;max-width:380px;margin:0 auto 20px}
+    .gauge-svg{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,.4))}
+    .gauge-zone{cursor:pointer;transition:filter .2s}
+    .gauge-zone:hover{filter:brightness(1.3)}
+    .gauge-zone.correct{filter:brightness(1.5) drop-shadow(0 0 8px currentColor)}
+    .gauge-zone.wrong{opacity:.35}
+    #gauge-needle{transform-origin:150px 150px;transition:transform .9s cubic-bezier(.34,1.56,.64,1)}
+    @keyframes needleShake{0%,100%{transform:rotate(var(--na,0deg))}20%{transform:rotate(calc(var(--na,0deg) - 18deg))}40%{transform:rotate(calc(var(--na,0deg) + 22deg))}60%{transform:rotate(calc(var(--na,0deg) - 12deg))}80%{transform:rotate(calc(var(--na,0deg) + 6deg))}}
+    #gauge-needle.shake{animation:needleShake .55s ease}
+    .gauge-labels{display:flex;justify-content:space-between;margin-top:4px;padding:0 4px}
+    .gl{font-size:12px;font-weight:700;letter-spacing:.04em;flex:1}
+    .gl:first-child{text-align:left;color:var(--tc)}
+    .gl:nth-child(2){text-align:center;color:var(--fc)}
+    .gl:last-child{text-align:right;color:var(--ic)}
+    .choice-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+    .choice-btn{padding:13px 6px;border-radius:var(--radius-md);border:2px solid var(--border);background:var(--surface);cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:all .2s;text-align:center}
+    .choice-btn.tb{color:var(--tc)}.choice-btn.fb{color:var(--fc)}.choice-btn.ib{color:var(--ic)}
+    .choice-btn:hover:not(:disabled){transform:translateY(-2px);border-color:currentColor;background:var(--surface2)}
+    .choice-btn:disabled{cursor:default;transform:none}
+    .choice-btn.correct{border-color:var(--fc)!important;background:rgba(34,197,94,.12)!important}
+    .choice-btn.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.1)!important}
+    .fb-bar{border-radius:var(--radius-md);padding:13px 16px;font-size:14px;font-weight:600;margin-bottom:14px;display:none;line-height:1.5;animation:fadeUp .3s ease both}
+    .fb-bar.correct{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:#86efac}
+    .fb-bar.wrong{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);color:#fca5a5}
+    .fb-bar.show{display:block}
 
-    /* Big gauge */
-    .gauge-wrap { position:relative; width:100%; max-width:380px; margin:0 auto 20px; }
-    .gauge-svg { width:100%; height:auto; display:block; filter:drop-shadow(0 8px 24px rgba(0,0,0,.4)); }
-    .gauge-zone { cursor:pointer; transition:filter .2s; }
-    .gauge-zone:hover { filter:brightness(1.3); }
-    .gauge-zone.correct { filter:brightness(1.5) drop-shadow(0 0 8px currentColor); }
-    .gauge-zone.wrong { opacity:.35; }
+    /* Eşleştir */
+    .eslestir-info{text-align:center;margin-bottom:14px}
+    .eslestir-round{font-size:13px;font-weight:700;color:var(--acc)}
+    .eslestir-board{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .eslestir-col{display:flex;flex-direction:column;gap:8px}
+    .ec-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px;text-align:center}
+    .e-btn{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-md);padding:13px 10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;color:var(--text);min-height:58px;display:flex;align-items:center;justify-content:center;line-height:1.3}
+    .e-btn:hover:not(:disabled){border-color:var(--acc);background:var(--acc-soft);color:var(--acc)}
+    .e-btn.sel{border-color:var(--acc);background:var(--acc-soft);color:var(--acc);transform:scale(1.02)}
+    .e-btn.matched{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.08);color:var(--acc);opacity:.5;transform:scale(.97);pointer-events:none}
+    .e-btn.wrong-flash{border-color:#ef4444;background:rgba(239,68,68,.1);animation:shakeH .4s ease}
+    @keyframes shakeH{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+    .eslestir-prog-bar{height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-top:14px}
+    .eslestir-prog-fill{height:100%;background:var(--acc);border-radius:100px;transition:width .4s}
 
-    #gauge-needle { transform-origin:150px 150px; transition:transform .9s cubic-bezier(.34,1.56,.64,1); }
-    @keyframes needleShake {
-      0%,100%{transform:rotate(var(--na,0deg))}
-      20%{transform:rotate(calc(var(--na,0deg) - 18deg))}
-      40%{transform:rotate(calc(var(--na,0deg) + 22deg))}
-      60%{transform:rotate(calc(var(--na,0deg) - 12deg))}
-      80%{transform:rotate(calc(var(--na,0deg) + 6deg))}
-    }
-    #gauge-needle.shake { animation:needleShake .55s ease; }
+    /* Kutup */
+    .kutup-def-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-xl);padding:28px 22px;text-align:center;margin-bottom:22px;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .kutup-def-text{font-size:18px;font-weight:600;line-height:1.6}
+    .kutup-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+    .kutup-btn{padding:16px 8px;border-radius:var(--radius-md);border:2px solid var(--border);background:var(--surface);cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:5px}
+    .kutup-btn:hover:not(:disabled){transform:translateY(-2px)}
+    .kutup-btn:disabled{cursor:default;transform:none}
+    .k-icon{font-size:22px}.k-sub{font-size:11px;color:var(--muted2)}
+    .kutup-btn.tb:hover,.kutup-btn.tb.sel{border-color:var(--tc);color:var(--tc)}
+    .kutup-btn.fb:hover,.kutup-btn.fb.sel{border-color:var(--fc);color:var(--fc)}
+    .kutup-btn.ib:hover,.kutup-btn.ib.sel{border-color:var(--ic);color:var(--ic)}
+    .kutup-btn.correct{background:rgba(34,197,94,.1);border-color:var(--fc)}
+    .kutup-btn.wrong{background:rgba(239,68,68,.1);border-color:#ef4444}
 
-    .gauge-labels { display:flex; justify-content:space-between; margin-top:4px; padding:0 4px; }
-    .gl { font-size:12px; font-weight:700; letter-spacing:.04em; flex:1; }
-    .gl:first-child { text-align:left; color:var(--tc); }
-    .gl:nth-child(2) { text-align:center; color:var(--fc); }
-    .gl:last-child { text-align:right; color:var(--ic); }
+    /* Progress */
+    .prog-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+    .prog-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;text-align:center}
+    .prog-stat-icon{font-size:26px;margin-bottom:6px}
+    .prog-stat-val{font-size:30px;font-weight:900;letter-spacing:-.03em;color:var(--acc)}
+    .prog-stat-lbl{font-size:12px;color:var(--muted2);margin-top:3px}
+    .dom-prog-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+    .dpr-icon{font-size:18px;width:26px;text-align:center}
+    .dpr-name{font-size:12px;font-weight:700;width:90px;flex-shrink:0}
+    .dpr-bg{flex:1;height:7px;background:var(--surface2);border-radius:100px;overflow:hidden}
+    .dpr-fill{height:100%;border-radius:100px;transition:width .8s}
+    .dpr-cnt{font-size:11px;color:var(--muted2);width:40px;text-align:right}
 
-    .choice-row { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:14px; }
-    .choice-btn { padding:13px 6px; border-radius:var(--radius-md); border:2px solid var(--border); background:var(--surface); cursor:pointer; font-family:inherit; font-size:13px; font-weight:700; transition:all .2s; text-align:center; }
-    .choice-btn.tb { color:var(--tc); }
-    .choice-btn.fb { color:var(--fc); }
-    .choice-btn.ib { color:var(--ic); }
-    .choice-btn:hover:not(:disabled) { transform:translateY(-2px); border-color:currentColor; background:var(--surface2); }
-    .choice-btn:disabled { cursor:default; transform:none; }
-    .choice-btn.correct { border-color:var(--fc)!important; background:rgba(34,197,94,.12)!important; }
-    .choice-btn.wrong { border-color:#ef4444!important; background:rgba(239,68,68,.1)!important; }
+    /* Result */
+    .result-page{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh}
+    .result-emoji{font-size:72px;margin-bottom:14px;animation:bounceIn .6s cubic-bezier(.34,1.56,.64,1) both}
+    @keyframes bounceIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+    .result-title{font-size:30px;font-weight:900;margin-bottom:6px}
+    .result-sub{color:var(--muted2);font-size:15px;margin-bottom:28px;line-height:1.6}
+    .result-xp{font-size:52px;font-weight:900;color:var(--acc);letter-spacing:-.03em}
+    .result-xp-lbl{color:var(--muted2);font-size:13px;margin-bottom:28px}
+    .result-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 
-    .fb-bar { border-radius:var(--radius-md); padding:13px 16px; font-size:14px; font-weight:600; margin-bottom:14px; display:none; line-height:1.5; animation:fadeUp .3s ease both; }
-    .fb-bar.correct { background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.3); color:#86efac; }
-    .fb-bar.wrong { background:rgba(239,68,68,.08); border:1px solid rgba(239,68,68,.25); color:#fca5a5; }
-    .fb-bar.show { display:block; }
+    /* XP Popup */
+    .xp-popup{position:fixed;top:76px;right:16px;background:var(--acc);color:#081208;font-size:17px;font-weight:900;padding:9px 16px;border-radius:var(--radius-full);pointer-events:none;opacity:0;transform:translateY(0);transition:opacity .3s,transform .5s;z-index:200}
+    .xp-popup.show{opacity:1;transform:translateY(-22px)}
 
-    /* ── KUTUP GAME ── */
-    .kutup-def-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-xl); padding:28px 22px; text-align:center; margin-bottom:22px; min-height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-    .kutup-def-text { font-size:18px; font-weight:600; line-height:1.6; }
-    .kutup-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
-    .kutup-btn { padding:16px 8px; border-radius:var(--radius-md); border:2px solid var(--border); background:var(--surface); cursor:pointer; font-family:inherit; font-size:12px; font-weight:700; transition:all .2s; display:flex; flex-direction:column; align-items:center; gap:5px; }
-    .kutup-btn:hover:not(:disabled) { transform:translateY(-2px); }
-    .kutup-btn:disabled { cursor:default; transform:none; }
-    .k-icon { font-size:22px; }
-    .k-sub { font-size:11px; color:var(--muted2); }
-    .kutup-btn.tb:hover,.kutup-btn.tb.sel { border-color:var(--tc); color:var(--tc); }
-    .kutup-btn.fb:hover,.kutup-btn.fb.sel { border-color:var(--fc); color:var(--fc); }
-    .kutup-btn.ib:hover,.kutup-btn.ib.sel { border-color:var(--ic); color:var(--ic); }
-    .kutup-btn.correct { background:rgba(34,197,94,.1); border-color:var(--fc); }
-    .kutup-btn.wrong { background:rgba(239,68,68,.1); border-color:#ef4444; }
-
-    /* ── EŞLEŞTİR GAME ── */
-    .eslestir-info { text-align:center; margin-bottom:14px; }
-    .eslestir-round { font-size:13px; font-weight:700; color:var(--accent); }
-    .eslestir-board { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .eslestir-col { display:flex; flex-direction:column; gap:8px; }
-    .ec-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px; text-align:center; }
-    .e-btn { background:var(--surface); border:2px solid var(--border); border-radius:var(--radius-md); padding:13px 10px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; text-align:center; color:var(--text); min-height:58px; display:flex; align-items:center; justify-content:center; line-height:1.3; }
-    .e-btn:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
-    .e-btn.sel { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); transform:scale(1.02); }
-    .e-btn.matched { border-color:rgba(34,197,94,.3); background:rgba(34,197,94,.08); color:var(--accent); opacity:.5; transform:scale(.97); pointer-events:none; }
-    .e-btn.wrong-flash { border-color:#ef4444; background:rgba(239,68,68,.1); animation:shakeH .4s ease; }
-    @keyframes shakeH { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-    .eslestir-progress { margin-top:14px; }
-    .eslestir-prog-bar { height:6px; background:var(--surface2); border-radius:100px; overflow:hidden; }
-    .eslestir-prog-fill { height:100%; background:var(--accent); border-radius:100px; transition:width .4s; }
-
-    /* ── PROGRESS ── */
-    .prog-stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px; }
-    .prog-stat { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px; text-align:center; }
-    .prog-stat-icon { font-size:26px; margin-bottom:6px; }
-    .prog-stat-val { font-size:30px; font-weight:900; letter-spacing:-.03em; color:var(--accent); }
-    .prog-stat-lbl { font-size:12px; color:var(--muted2); margin-top:3px; }
-    .cat-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-    .cat-icon { font-size:16px; width:24px; text-align:center; }
-    .cat-name { font-size:12px; font-weight:600; width:120px; flex-shrink:0; }
-    .cat-bg { flex:1; height:7px; background:var(--surface2); border-radius:100px; overflow:hidden; }
-    .cat-fill { height:100%; border-radius:100px; transition:width .8s; }
-    .cat-cnt { font-size:11px; color:var(--muted2); width:34px; text-align:right; }
-    .virtue-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:7px; margin-top:14px; }
-    .vchip { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:9px 10px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:7px; }
-    .vchip.done { border-color:var(--accent-soft); background:var(--accent-soft); color:var(--accent); }
-    .vdot { width:7px; height:7px; border-radius:50%; background:var(--border); flex-shrink:0; }
-    .vchip.done .vdot { background:var(--accent); }
-    .badges-wrap { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
-    .badge { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:9px 12px; font-size:12px; font-weight:600; display:flex; align-items:center; gap:5px; }
-    .badge.earn { border-color:var(--gold); background:rgba(245,158,11,.08); color:var(--gold); }
-
-    /* ── RESULT ── */
-    .result-page { text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh; }
-    .result-emoji { font-size:72px; margin-bottom:14px; animation:bounceIn .6s cubic-bezier(.34,1.56,.64,1) both; }
-    @keyframes bounceIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
-    .result-title { font-size:30px; font-weight:900; margin-bottom:6px; }
-    .result-sub { color:var(--muted2); font-size:15px; margin-bottom:28px; line-height:1.6; }
-    .result-xp { font-size:52px; font-weight:900; color:var(--accent); letter-spacing:-.03em; }
-    .result-xp-lbl { color:var(--muted2); font-size:13px; margin-bottom:28px; }
-    .result-btns { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
-
-    /* ── XP Popup ── */
-    .xp-popup { position:fixed; top:76px; right:16px; background:var(--accent); color:#081208; font-size:17px; font-weight:900; padding:9px 16px; border-radius:var(--radius-full); pointer-events:none; opacity:0; transform:translateY(0); transition:opacity .3s,transform .5s; z-index:200; }
-    .xp-popup.show { opacity:1; transform:translateY(-22px); }
-
-    /* ── Shared ── */
-    @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-    .fade-up { animation:fadeUp .4s ease both; }
-    @media(max-width:480px) { .modes-grid{grid-template-columns:1fr} .choice-row{gap:6px} .choice-btn{padding:11px 4px;font-size:12px} .kutup-row{gap:6px} }
+    /* Shared */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+    .fade-up{animation:fadeUp .4s ease both}
+    @media(max-width:480px){.domain-grid{grid-template-columns:1fr}.games-row{grid-template-columns:repeat(3,1fr)}.choice-row{gap:6px}.choice-btn{padding:11px 4px;font-size:12px}.kutup-row{gap:6px}}
   </style>
 </head>
 <body>
@@ -247,68 +260,102 @@
     <div class="home-header">
       <div class="home-logo">⚖️</div>
       <h1 class="home-title">Mizan</h1>
-      <p class="home-sub">35 temel İslam erdemi — dengeni bul,<br>karakterini inşa et.</p>
+      <p class="home-sub">121 ders · 5 alan · İslam ahlakı<br>dengeni bul, karakterini inşa et.</p>
     </div>
     <div class="stats-row">
       <div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-val" id="home-streak">0</div><div class="stat-lbl">Gün Serisi</div></div>
       <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-val" id="home-xp">0</div><div class="stat-lbl">Toplam XP</div></div>
-      <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-val" id="home-learned">0</div><div class="stat-lbl">Erdem</div></div>
+      <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-val" id="home-learned">0</div><div class="stat-lbl">Tamamlanan</div></div>
     </div>
     <div class="xp-bar-wrap">
       <div class="xp-bar-top"><span class="muted" id="xp-lv-lbl">Seviye 1</span><span class="muted" id="xp-bar-lbl">0 / 100 XP</span></div>
       <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
     </div>
-    <div class="modes-grid">
-      <button class="mode-btn" onclick="startLearn()"><div class="mode-icon">📚</div><div class="mode-title">Öğren</div><div class="mode-desc">35 erdem — çevir, incele, işaretle</div><span class="mode-badge">FLASHCARD</span></button>
-      <button class="mode-btn" onclick="startIbreGame()"><div class="mode-icon">⚖️</div><div class="mode-title">İbre Oyunu</div><div class="mode-desc">Davranışı ibreye yerleştir</div><span class="mode-badge">OYUN</span></button>
-      <button class="mode-btn" onclick="startEslestir()"><div class="mode-icon">🔗</div><div class="mode-title">Eşleştir</div><div class="mode-desc">Erdem adını tanımıyla eşleştir</div><span class="mode-badge">OYUN</span></button>
-      <button class="mode-btn" onclick="startKutupGame()"><div class="mode-icon">🎯</div><div class="mode-title">Hangi Kutup?</div><div class="mode-desc">Tanımı doğru kutba yerleştir</div><span class="mode-badge">QUIZ</span></button>
+    <div class="domain-grid" id="domain-grid"></div>
+    <div class="lbl" style="margin-bottom:10px">Hızlı Oyunlar</div>
+    <div class="games-row">
+      <div class="game-card" onclick="startIbreGame()"><div class="gc-icon">⚖️</div><div class="gc-title">İbre</div><span class="gc-badge">OYUN</span></div>
+      <div class="game-card" onclick="startEslestir()"><div class="gc-icon">🔗</div><div class="gc-title">Eşleştir</div><span class="gc-badge">OYUN</span></div>
+      <div class="game-card" onclick="startKutupGame()"><div class="gc-icon">🎯</div><div class="gc-title">Hangi Kutup?</div><span class="gc-badge">QUIZ</span></div>
     </div>
-    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="showProgress()">📊 İlerleme ve Rozetler</button>
+    <button class="btn btn-ghost btn-full" style="margin-bottom:12px" onclick="showProgress()">📊 İlerleme</button>
     <div class="source-note">Kaynak: <em>İslâm Ahlâkı</em> kitabı</div>
   </div>
 </div>
 
-<!-- ═══ LEARN ═══ -->
-<div id="screen-learn" class="screen">
+<!-- ═══ DOMAIN ═══ -->
+<div id="screen-domain" class="screen">
   <div class="page">
-    <div class="learn-header">
+    <div style="margin-bottom:14px">
       <button class="btn btn-ghost btn-sm" onclick="goHome()">← Geri</button>
-      <div class="progress-bar-sm"><div class="progress-bar-fill" id="learn-pfill" style="width:0%"></div></div>
-      <span class="muted" id="learn-cnt">1/35</span>
     </div>
-    <div class="label" id="learn-cat" style="text-align:center;margin-bottom:10px"></div>
-    <div class="card-scene" id="card-scene" onclick="flipCard()">
-      <div class="card-3d" id="flashcard">
-        <div class="card-face">
-          <div class="cf-cat">
-            <span class="cf-cat-badge" id="cf-cat-badge"></span>
+    <div class="domain-header" id="domain-header"></div>
+    <div id="domain-lessons"></div>
+  </div>
+</div>
+
+<!-- ═══ LESSON ═══ -->
+<div id="screen-lesson" class="screen">
+  <div class="page">
+    <div class="lesson-header">
+      <button class="btn btn-ghost btn-sm" id="lesson-back" onclick="lessonBack()">← Geri</button>
+      <div class="lesson-steps-row">
+        <div class="step-dot" id="sd0"></div>
+        <div class="step-dot" id="sd1"></div>
+        <div class="step-dot" id="sd2"></div>
+      </div>
+      <div style="width:72px"></div>
+    </div>
+
+    <!-- Step 0: Kart -->
+    <div id="ls-card">
+      <div class="card-scene" onclick="flipCard()">
+        <div class="card-3d" id="flashcard">
+          <div class="card-face">
+            <div class="cf-dom">
+              <span class="cf-dom-badge" id="cf-dom-badge"></span>
+              <span class="cf-type-badge" id="cf-type-badge"></span>
+            </div>
+            <div class="cf-main">
+              <div class="cf-name" id="cf-name">—</div>
+              <div class="cf-def" id="cf-def">—</div>
+            </div>
+            <div class="cf-spectrum">
+              <span class="cf-spec-label" style="color:var(--tc);font-size:10px" id="cf-tname">—</span>
+              <div class="cf-spec-bar"><div class="cf-spec-dot"></div></div>
+              <span class="cf-spec-label" style="color:var(--ic);font-size:10px;text-align:right" id="cf-iname">—</span>
+            </div>
+            <div class="cf-hint">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Kutuplar için çevir
+            </div>
           </div>
-          <div class="cf-main">
-            <div class="cf-virtue-name" id="cf-name">İlim</div>
-            <div class="cf-virtue-def" id="cf-def">Doğru ve faydalı bilgi edinmek.</div>
+          <div class="card-face card-back" style="transform:rotateY(180deg);padding:18px;overflow-y:auto">
+            <div class="cb-title" id="cb-title"></div>
+            <div id="cb-poles"></div>
           </div>
-          <div class="cf-spectrum">
-            <span class="cf-spec-label" style="color:var(--tc);font-size:10px" id="cf-tname">Cehâlet</span>
-            <div class="cf-spec-bar"><div class="cf-spec-dot"></div></div>
-            <span class="cf-spec-label" style="color:var(--ic);font-size:10px;text-align:right" id="cf-iname">Ukalâlık</span>
-          </div>
-          <div class="cf-hint">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-            Detaylar için çevir
-          </div>
-        </div>
-        <div class="card-face card-back">
-          <div class="cb-title" id="cb-title">İlim — Erdem Ailesi</div>
-          <div id="cb-poles"></div>
         </div>
       </div>
+      <button class="btn btn-primary btn-full" onclick="lessonNextStep()" style="margin-top:6px" id="ls-card-btn">Devam →</button>
     </div>
-    <div class="learn-actions">
-      <button class="learn-act-btn tekrar" onclick="learnTekrar()">🔁 Tekrar Gör</button>
-      <button class="learn-act-btn anladi" id="learn-anladi-btn" onclick="learnAnladi()">✓ Anladım</button>
+
+    <!-- Step 1: Quiz -->
+    <div id="ls-quiz" style="display:none">
+      <div class="quiz-q"><div class="quiz-q-text" id="quiz-q-text"></div></div>
+      <div class="quiz-opts" id="quiz-opts"></div>
+      <div class="quiz-fb" id="quiz-fb"></div>
+      <button class="btn btn-primary btn-full" id="quiz-next-btn" onclick="lessonNextStep()" style="display:none;margin-top:10px">Devam →</button>
     </div>
-    <p class="muted" style="text-align:center;margin-top:10px;font-size:11px">← → tuşları veya kaydırma ile geçiş yapabilirsin</p>
+
+    <!-- Step 2: Günlük Niyet -->
+    <div id="ls-niyet" style="display:none">
+      <div class="niyet-card">
+        <div class="niyet-icon">🌱</div>
+        <div class="niyet-title">Günlük Niyet</div>
+        <div class="niyet-text" id="niyet-text"></div>
+      </div>
+      <button class="btn btn-primary btn-full" onclick="lessonComplete()">✓ Anladım — Devam</button>
+    </div>
   </div>
 </div>
 
@@ -335,26 +382,18 @@
           <radialGradient id="gf" cx="50%" cy="100%" r="70%"><stop offset="0%" stop-color="#22c55e" stop-opacity="0.9"/><stop offset="100%" stop-color="#16a34a" stop-opacity="0.5"/></radialGradient>
           <radialGradient id="gi" cx="50%" cy="100%" r="70%"><stop offset="0%" stop-color="#ef4444" stop-opacity="0.9"/><stop offset="100%" stop-color="#dc2626" stop-opacity="0.5"/></radialGradient>
         </defs>
-        <!-- Tefrit: 180°→120° -->
         <path class="gauge-zone" id="gz-t" d="M20,150 A130,130 0 0,1 85,37.4 L110,80.7 A80,80 0 0,0 70,150 Z" fill="url(#gt)" onclick="submitIbre('t')"/>
-        <!-- Fazilet: 120°→60° -->
         <path class="gauge-zone" id="gz-f" d="M85,37.4 A130,130 0 0,1 215,37.4 L190,80.7 A80,80 0 0,0 110,80.7 Z" fill="url(#gf)" onclick="submitIbre('f')"/>
-        <!-- İfrat: 60°→0° -->
         <path class="gauge-zone" id="gz-i" d="M215,37.4 A130,130 0 0,1 280,150 L230,150 A80,80 0 0,0 190,80.7 Z" fill="url(#gi)" onclick="submitIbre('i')"/>
-        <!-- Dividers -->
         <line x1="110" y1="80.7" x2="85" y2="37.4" stroke="var(--bg)" stroke-width="2.5"/>
         <line x1="190" y1="80.7" x2="215" y2="37.4" stroke="var(--bg)" stroke-width="2.5"/>
-        <!-- Inner cover -->
         <circle cx="150" cy="150" r="78" fill="var(--bg)"/>
-        <!-- Outer ring -->
         <path d="M20,150 A130,130 0 0,1 280,150" fill="none" stroke="var(--border)" stroke-width="1"/>
-        <!-- Needle -->
         <g id="gauge-needle" style="transform:rotate(0deg);transform-origin:150px 150px">
           <line x1="150" y1="146" x2="150" y2="38" stroke="var(--text)" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="150" cy="36" r="6" fill="var(--accent)"/>
-          <circle cx="150" cy="36" r="10" fill="var(--accent)" opacity=".25"/>
+          <circle cx="150" cy="36" r="6" fill="#22c55e"/>
+          <circle cx="150" cy="36" r="10" fill="#22c55e" opacity=".25"/>
         </g>
-        <!-- Pivot -->
         <circle cx="150" cy="150" r="11" fill="var(--surface2)" stroke="var(--border)" stroke-width="2"/>
         <circle cx="150" cy="150" r="4.5" fill="var(--text)"/>
       </svg>
@@ -387,18 +426,10 @@
       <p class="muted" style="font-size:12px;margin-top:4px">Erdem adını tanımıyla eşleştir</p>
     </div>
     <div class="eslestir-board">
-      <div class="eslestir-col">
-        <div class="ec-label">Erdem Adı</div>
-        <div id="esl-left"></div>
-      </div>
-      <div class="eslestir-col">
-        <div class="ec-label">Tanımı</div>
-        <div id="esl-right"></div>
-      </div>
+      <div class="eslestir-col"><div class="ec-label">Erdem Adı</div><div id="esl-left"></div></div>
+      <div class="eslestir-col"><div class="ec-label">Tanımı</div><div id="esl-right"></div></div>
     </div>
-    <div class="eslestir-progress" style="margin-top:16px">
-      <div class="eslestir-prog-bar"><div class="eslestir-prog-fill" id="esl-prog" style="width:0%"></div></div>
-    </div>
+    <div class="eslestir-prog-bar"><div class="eslestir-prog-fill" id="esl-prog" style="width:0%"></div></div>
   </div>
 </div>
 
@@ -414,7 +445,6 @@
     <div class="kutup-def-card">
       <div class="q-tag" id="kutup-tag"></div>
       <div class="kutup-def-text" id="kutup-def">...</div>
-      <div class="muted" id="kutup-ex" style="font-size:12px;margin-top:8px;font-style:italic"></div>
     </div>
     <div class="kutup-row">
       <button class="kutup-btn tb" onclick="submitKutup('t')" id="kb-t"><span class="k-icon">⚫</span><strong id="kb-tn">Tefrit</strong><span class="k-sub">Eksiklik</span></button>
@@ -429,23 +459,21 @@
 <!-- ═══ PROGRESS ═══ -->
 <div id="screen-progress" class="screen">
   <div class="page">
-    <div class="learn-header">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
       <button class="btn btn-ghost btn-sm" onclick="goHome()">← Geri</button>
       <h2 style="flex:1;text-align:center">İlerleme</h2>
       <div style="width:72px"></div>
     </div>
-    <div class="prog-stats" style="margin-top:18px">
+    <div class="prog-stats">
       <div class="prog-stat"><div class="prog-stat-icon">⭐</div><div class="prog-stat-val" id="pg-xp">0</div><div class="prog-stat-lbl">Toplam XP</div></div>
       <div class="prog-stat"><div class="prog-stat-icon">🔥</div><div class="prog-stat-val" id="pg-str">0</div><div class="prog-stat-lbl">Gün Serisi</div></div>
       <div class="prog-stat"><div class="prog-stat-icon">📚</div><div class="prog-stat-val" id="pg-lrn">0</div><div class="prog-stat-lbl">Erdem Öğrenildi</div></div>
       <div class="prog-stat"><div class="prog-stat-icon">🎮</div><div class="prog-stat-val" id="pg-gms">0</div><div class="prog-stat-lbl">Oyun Tamamlandı</div></div>
     </div>
-    <div class="label" style="margin-bottom:12px">Kategoriler</div>
-    <div id="cat-rows" style="margin-bottom:24px"></div>
-    <div class="label" style="margin-bottom:12px">Rozetler</div>
-    <div class="badges-wrap" id="badges-wrap"></div>
-    <div class="label" style="margin-bottom:12px">Tüm Erdemler (35)</div>
-    <div class="virtue-grid" id="virtue-grid"></div>
+    <div class="lbl" style="margin-bottom:14px">Alan Bazlı İlerleme</div>
+    <div id="dom-prog-rows" style="margin-bottom:28px"></div>
+    <div class="lbl" style="margin-bottom:12px">Tüm Dersler (121)</div>
+    <div id="all-lessons-prog" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px"></div>
   </div>
 </div>
 
@@ -455,7 +483,7 @@
     <div class="result-page">
       <div class="result-emoji" id="res-emoji">🎉</div>
       <div class="result-title" id="res-title">Harika!</div>
-      <div class="result-sub" id="res-sub">10/10 doğru</div>
+      <div class="result-sub" id="res-sub"></div>
       <div class="result-xp" id="res-xp">+100</div>
       <div class="result-xp-lbl">XP kazandın</div>
       <div class="result-btns">
@@ -470,616 +498,582 @@
 <script>
 'use strict';
 
-/* ══════════════════════════════════════════════
-   AUDIO — Web Audio API (no external files)
-══════════════════════════════════════════════ */
-let _actx = null;
-function actx() {
-  if (!_actx) _actx = new (window.AudioContext || window.webkitAudioContext)();
-  return _actx;
-}
-function tone(freq, dur, type, vol) {
-  try {
-    const c = actx(), o = c.createOscillator(), g = c.createGain();
-    o.type = type || 'sine'; o.frequency.value = freq;
-    g.gain.setValueAtTime(vol || 0.25, c.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
-    o.connect(g); g.connect(c.destination);
-    o.start(); o.stop(c.currentTime + dur);
-  } catch(e) {}
-}
-function sndCorrect() { tone(523,.12); setTimeout(()=>tone(659,.12),90); setTimeout(()=>tone(784,.2),180); }
-function sndWrong()   { tone(220,.15,'sawtooth',.18); setTimeout(()=>tone(165,.25,'sawtooth',.12),120); }
-function sndFlip()    { tone(660,.07,'triangle',.12); }
-function sndMatch()   { [523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.2,'sine',.22),i*70)); }
-function sndLevelUp() { [523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>tone(f,.28,'triangle',.28),i*90)); }
-function sndComplete(){ [523,659,784,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.2,'sine',.25),i*100)); }
+/* ─── AUDIO ─── */
+let _actx=null;
+function actx(){if(!_actx)_actx=new(window.AudioContext||window.webkitAudioContext)();return _actx}
+function tone(freq,dur,type,vol){try{const c=actx(),o=c.createOscillator(),g=c.createGain();o.type=type||'sine';o.frequency.value=freq;g.gain.setValueAtTime(vol||.25,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur)}catch(e){}}
+function sndCorrect(){tone(523,.12);setTimeout(()=>tone(659,.12),90);setTimeout(()=>tone(784,.2),180)}
+function sndWrong(){tone(220,.15,'sawtooth',.18);setTimeout(()=>tone(165,.25,'sawtooth',.12),120)}
+function sndFlip(){tone(660,.07,'triangle',.12)}
+function sndMatch(){[523,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.2,'sine',.22),i*70))}
+function sndLevelUp(){[523,659,784,1047,1319].forEach((f,i)=>setTimeout(()=>tone(f,.28,'triangle',.28),i*90))}
+function sndComplete(){[523,659,784,659,784,1047].forEach((f,i)=>setTimeout(()=>tone(f,.2,'sine',.25),i*100))}
 
-/* ══════════════════════════════════════════════
-   DATA — 35 erdem
-══════════════════════════════════════════════ */
-const KAT = {
-  iman:     {emoji:'🌙', ad:'İman & Akîde',  renk:'#818cf8'},
-  ilim:     {emoji:'📚', ad:'İlim & Akıl',   renk:'#60a5fa'},
-  karakter: {emoji:'💎', ad:'Karakter',       renk:'#34d399'},
-  sosyal:   {emoji:'🤝', ad:'Sosyal',         renk:'#fb923c'},
-  islah:    {emoji:'⚡', ad:'Islah & İbadet', renk:'#c084fc'},
-};
-
-const E = [
-  {id:1,k:'ilim',
-   f:{n:'İlim',d:'Doğru ve faydalı bilgi edinmek.',o:'Ali, her gün kitap okuyarak bilgisini artırıyor.'},
-   t:{n:'Cehâlet',d:'Bilgisizlik ve öğrenme isteksizliği.',o:'Mehmet, derslere çalışmayıp hiçbir şey öğrenmiyor.'},
-   i:{n:'Ukalâlık',d:'Her şeyi bildiğini sanmak.',o:'Ahmet, her konuda haklı olduğunu düşünüp kimseyi dinlemiyor.'}},
-  {id:2,k:'karakter',
-   f:{n:'Kanaat',d:'Elindekine razı olup şükretmek.',o:'Ayşe, lüks eşyaları olmasa da elindekilerle mutlu olup şükrediyor.'},
-   t:{n:'Atâlet',d:'Hiç gayret göstermeyip boş durmak.',o:'Ali, ders çalışmak yerine bütün gün boş boş oturuyor.'},
-   i:{n:'Mal-Mevkî Hırsı',d:'Zenginlik ve mevki için açgözlülük.',o:'Ahmet, çok para ve makam için her şeyi yapmayı göze alıyor.'}},
-  {id:3,k:'karakter',
-   f:{n:'Cesaret',d:'Korksa bile doğruyu yapmak.',o:'Zeynep, herkes çekinse bile haksızlığa uğrayan arkadaşını cesurca savundu.'},
-   t:{n:'Korkaklık',d:'Başkaları ayıplar diye doğruyu yapmamak.',o:'Mehmet, arkadaşları dalga geçer diye bildiği doğruyu söyleyemiyor.'},
-   i:{n:'Pervasız Cüret',d:'Düşünmeden tehlikeye atılmak.',o:'Mert, dikkat etmeden tehlikeli oyunlara atlıyor ve yaralanıyor.'}},
-  {id:4,k:'iman',
-   f:{n:'İhlâs',d:'İyiliği yalnız Allah için yapmak.',o:'Zeynep, kimse görmese de gizlice sadaka veriyor, bunu Allah için yapıyor.'},
-   t:{n:'Mahviyet',d:'Kendini hep değersiz görmek.',o:'Ali, herkes onu övse de "Ben hiçbir işe yaramam" diyerek kendini küçümsüyor.'},
-   i:{n:'Riyâ',d:'Herkes tarafından övülmek, gösteriş için yapmak.',o:'Ahmet, iyi bir şey yaptığında sürekli alkış ve fotoğraf peşinde.'}},
-  {id:5,k:'iman',
-   f:{n:'Sahih Akîde',d:"Kur'an ve Sünnete uygun iman.",o:"Ali, Peygamberimizin öğrettiği şekilde Allah'a inanıyor."},
-   t:{n:'Lakayt İnanç',d:'İnancını önemsemeyip ilgisiz olmak.',o:'Ayşe, Müslümanım diyor ama dinini öğrenmeye hiç ilgi göstermiyor.'},
-   i:{n:"Bid'at İtikâdı",d:'Dinden olmayan yanlış inançlar.',o:'Mehmet, aslı olmayan batıl inanışlara kapılıyor ve bunları din sanıyor.'}},
-  {id:6,k:'iman',
-   f:{n:'Takvâ',d:"Allah'a saygıyla haramlardan kaçınmak.",o:'Mehmet, günah işlemekten çekinir ve her an Allah\'ı hatırlar.'},
-   t:{n:'Ruhbâniyet',d:'Dünya nimetlerini tamamen terk etmek.',o:'Ali, helal olan şeyleri bile kendine yasaklayarak yaşıyor.'},
-   i:{n:'Hevâ-yı Nefs',d:'Nefsine göre yaşayıp ölçü tanımamak.',o:'Ahmet, canı ne isterse doğru mu yanlış mı demeden yapıyor.'}},
-  {id:7,k:'iman',
-   f:{n:'Tahkik',d:'Bilerek ve anlayarak inanmak.',o:'Ayşe, iman konularını okuyup öğrenerek bilinçli şekilde inanıyor.'},
-   t:{n:'Taklîd ile İman',d:'Araştırmadan körü körüne inanmak.',o:'Mehmet, ailesi Müslüman diye hiç anlamadan öylece inanıyor.'},
-   i:{n:'Şekk',d:'İman konusunda sürekli şüphe etmek.',o:"Mert, kalbine gelen vesveseler yüzünden Allah'ın varlığından hep şüphe ediyor."}},
-  {id:8,k:'iman',
-   f:{n:'Recâ',d:"Allah'a güvenle umut etmek.",o:"Merve, zor zamanlarda bile Allah'ın yardım edeceğine inanıyor."},
-   t:{n:"Ye's",d:'Hiç umut kalmaması, karamsarlık.',o:'Ali, bir kere başarısız olunca asla başaramayacağını düşünüp ümidini yitiriyor.'},
-   i:{n:'Tûl-i Emel',d:'Aşırı uzun, boş hayaller kurmak.',o:'Ahmet, "nasıl olsa çok vaktim var" deyip sorumluluklarını sürekli erteliyor.'}},
-  {id:9,k:'karakter',
-   f:{n:'Tevâzu',d:'Kendini asla üstün görmemek.',o:'Ahmet, başarılı olsa da övünmeyip mütevazı davranıyor.'},
-   t:{n:'Tezellül',d:'Kendini aşırı derecede küçük düşürmek.',o:'Ayşe, beğenilmek uğruna herkesin her dediğine boyun eğip onurunu hiçe sayıyor.'},
-   i:{n:'Kibr',d:'Kendini herkesten üstün görmek.',o:'Mehmet, biraz başarı kazanınca arkadaşlarını küçümsemeye başladı.'}},
-  {id:10,k:'sosyal',
-   f:{n:'Hürmet',d:'Saygı ve değer göstermek.',o:'Ayşe, anne-babasına ve öğretmenlerine karşı her zaman saygılı davranıyor.'},
-   t:{n:'Kıymet Bilmezlik',d:'Bilgili büyüklere saygı göstermemek.',o:'Ali, kendisine ders öğreten öğretmenini küçümsüyor ve sözünü dinlemiyor.'},
-   i:{n:'Takdis',d:'Aşırı yüceltme ve kutsama.',o:'Mehmet, sevdiği hocasını hatasız sanıp onu neredeyse kutsal biri gibi görüyor.'}},
-  {id:11,k:'sosyal',
-   f:{n:'Gıpta',d:'İyiliklere imrenip benzemek istemek.',o:'Fatma, arkadaşının başarısına imrenip o da çok çalışmaya karar verdi.'},
-   t:{n:'Duyarsızlık',d:"Başkalarının başarısına ilgisiz kalmak.",o:'Ali, arkadaşının başarısı karşısında hiç tepki vermiyor, umursamıyor.'},
-   i:{n:'Hased',d:"Başkalarının iyiliğini kıskanmak.",o:'Ayşe, arkadaşının yüksek notunu kıskanıp onun başarısına sevinemiyor.'}},
-  {id:12,k:'karakter',
-   f:{n:'Hilm',d:'Öfkelense de yumuşak davranmak.',o:'Ahmet, kardeşi ona kızsa bile sakinliğini bozmadı, yumuşak davrandı.'},
-   t:{n:'Kayıtsızlık',d:'Haksızlığa karşı bile duyarsız olmak.',o:'Mehmet, yakın arkadaşı incinse bile hiçbir şey olmamış gibi davranıyor.'},
-   i:{n:'Hıkd',d:'Kalbinde kin biriktirmek.',o:'Ayşe, kendisini üzen arkadaşını hiç affetmedi ve içinde kin tuttu.'}},
-  {id:13,k:'sosyal',
-   f:{n:'Şefkat',d:'Merhamet ve sevgi göstermek.',o:'Fatma, ağlayan küçük kardeşini görünce hemen sarılıp teselli etti.'},
-   t:{n:'Soğukluk',d:"Kimsenin duygusunu hiç umursamamak.",o:'Mehmet, arkadaşı üzülürken onu teselli etmiyor, hiç oralı olmuyor.'},
-   i:{n:'Şemâtet',d:"Başkasının acısına gizlice sevinmek.",o:'Ali, rakibi sınavda kötü not alınca içten içe sevindi.'}},
-  {id:14,k:'sosyal',
-   f:{n:'Ülfet',d:'Sevgi ve anlayışla dostluk kurmak.',o:'Ahmet, sınıfa yeni gelen çocukla sohbet edip hemen arkadaş oldu.'},
-   t:{n:'Hicr',d:'Dostluğu kesip küskün kalmak.',o:'Ali, küçük bir tartışmadan sonra arkadaşına küstü ve konuşmayı tamamen bıraktı.'},
-   i:{n:'Yapışkanlık',d:'Her an peşini bırakmamak.',o:'Merve, en yakın arkadaşının sürekli yanında olup ona hiç yalnız kalma fırsatı vermiyor.'}},
-  {id:15,k:'karakter',
-   f:{n:'Şecâat',d:'Korksa da akıllıca cesur davranmak.',o:'Zeynep, tehlikeye rağmen yangındaki kediyi kurtarmaya cesaret etti.'},
-   t:{n:'Cübn',d:'Tehlike karşısında cesaretsiz kalmak.',o:'Ayşe, en ufak bir zorlukta hemen geri çekiliyor ve cesaret edemiyor.'},
-   i:{n:'Tehevvür',d:'Sonunu düşünmeden kendini riske atmak.',o:'Mehmet, alkış toplamak için düşünmeden çok tehlikeli hareketler yapıyor.'}},
-  {id:16,k:'sosyal',
-   f:{n:'Vefâ',d:'Sözünde durmak ve dostluğu korumak.',o:'Ahmet, en zor gününde bile arkadaşının yanından ayrılmadı, vefalı davrandı.'},
-   t:{n:'Saflık',d:'Herkesi masum sanıp çabucak inanmak.',o:'Zeynep, tanıştığı herkesi hemen iyi sanıp onlara güveniyor.'},
-   i:{n:'Gadr',d:'Dostunu yarı yolda bırakmak.',o:'Mert, işi bitince yakın arkadaşını yüzüstü bıraktı.'}},
-  {id:17,k:'sosyal',
-   f:{n:'Emanet',d:'Emaneti koruyup sözünde durmak.',o:"Ali, arkadaşının sırrını kimseye söylemeyerek emanete sadık kaldı."},
-   t:{n:'Safdillik',d:'Her söze hemen inanıp kolay aldanmak.',o:'Mehmet, internette okuduğu yalan haberlere bile hemen inanacak kadar safdil.'},
-   i:{n:'Hıyânet',d:'Emanete ihanet edip güveni yıkmak.',o:'Ahmet, ona emanet edilen parayı izinsiz harcayıp güveni boşa çıkardı.'}},
-  {id:18,k:'sosyal',
-   f:{n:'Sadakat',d:'Verdiği sözde durup bağlı kalmak.',o:'Zeynep, en zor durumda bile söz verdiği arkadaşını yarı yolda bırakmadı.'},
-   t:{n:'Suskunluk',d:'Gereken yerde sessiz kalmak.',o:'Ali, arkadaşına iftira atıldığında doğruyu bildiği halde suskun kaldı.'},
-   i:{n:"Va'dini Bozmak",d:'Söz verip tutmamak, güveni sarsmak.',o:'Ayşe, kardeşine birlikte oynayacağına söz verip sonra sözünü tutmadı.'}},
-  {id:19,k:'sosyal',
-   f:{n:'Hüsn-ü Zan',d:'Delil yokken kötü düşünmemek.',o:'Ayşe, arkadaşı aramayınca hemen kötü düşünmedi; belki işi vardır diye iyimser oldu.'},
-   t:{n:'Saflık',d:'İyi kötü demeden herkese inanmak.',o:'Merve, yalan söyleyen birini bile hemen iyi sanıp ona inanıyor.'},
-   i:{n:"Sû-i Zan",d:'Kanıt yokken bile kötü zannetmek.',o:'Ali, komşusu halini sormayınca "bana kızgın" diye düşünüp suizan etti.'}},
-  {id:20,k:'ilim',
-   f:{n:'Azim',d:'Kararlı ve sabırlı şekilde çalışmak.',o:'Zeynep, hedefine ulaşmak için pes etmeden her gün düzenli çalışıyor.'},
-   t:{n:'Tesvîf',d:'Hayırlı işleri sürekli ertelemek.',o:'Ahmet, bugün yapması gereken işi "yarın yaparım" diyerek sürekli erteliyor.'},
-   i:{n:'Telaş',d:'Panikle acele etmek, düşünmeden koşturmak.',o:'Ali, ödevini son güne bırakıp telaşla yaptığı için birçok hata yaptı.'}},
-  {id:21,k:'islah',
-   f:{n:'Müdârâ',d:'Kırmadan, güzelce doğruyu göstermek.',o:'Mehmet, hatalı arkadaşına kızmak yerine nazikçe doğrusunu anlattı.'},
-   t:{n:'Katılık',d:'Çok sert ve anlayışsız olmak.',o:'Ali, ufak hatalarda bile arkadaşlarına çok katı davranıp kalplerini kırıyor.'},
-   i:{n:'Müdâhene',d:"Doğrulardan ödün verip yaranmaya çalışmak.",o:'Ayşe, menfaat için arkadaşlarının yanlışlarına göz yumup onlara hak veriyor.'}},
-  {id:22,k:'islah',
-   f:{n:'Islâh',d:'Kötüyü düzeltip iyiye çevirmek.',o:'Fatma, bozulan arkadaşları barıştırmak için araya girdi.'},
-   t:{n:'Pasiflik',d:'Sorunları görüp harekete geçmemek.',o:'Mehmet, haksızlık olsa bile "bana ne" diyerek hiçbir şeye karışmıyor.'},
-   i:{n:'Fitne',d:'Ortamı karıştırıp düşmanlık yaratmak.',o:'Merve, arkadaş grubu içinde yalanlar söyleyerek kavga çıkmasına sebep oluyor.'}},
-  {id:23,k:'ilim',
-   f:{n:'Müzâkere',d:'Karşılıklı saygıyla fikrini paylaşmak.',o:'Zeynep, anlaşmazlık olduğunda herkesle sakince konuşup ortak çözüm arıyor.'},
-   t:{n:'Uysallık',d:'Kendi fikrini hiç savunmamak.',o:'Ali, fikri olsa bile tartışmalarda hep susup herkese "peki" diyor.'},
-   i:{n:'İnat & Mükâbere',d:'Haksız olsa da inatla diretmek.',o:'Ahmet, yanlış olduğunu bilse de sadece inattan özür dilemiyor.'}},
-  {id:24,k:'islah',
-   f:{n:'Sıdk',d:'Dürüst olmak, yalan söylememek.',o:'Mehmet, başı derde girse bile daima dürüst davranıyor ve yalan söylemiyor.'},
-   t:{n:'Nifâk',d:'İki yüzlü davranmak, göründüğü gibi olmamak.',o:'Ali, öğretmeninin yanında uslu duruyor ama arkasından kuralları çiğniyor.'},
-   i:{n:'Patavatsızlık',d:'Sözünü hiç tartmadan söylemek.',o:'Ayşe, arkadaşına düşünmeden sözler söyledi ve onu incitti.'}},
-  {id:25,k:'iman',
-   f:{n:'Tevbe',d:'İşlediği günahtan pişman olup dönmek.',o:"Ahmet, yaptığı hatayı fark edince hemen pişman olup Allah'tan af diledi."},
-   t:{n:'Harâmda Isrâr',d:'Günahında inatla devam etmek.',o:'Ali, yanlış olduğunu bildiği halde yalan söylemeye devam ediyor.'},
-   i:{n:'Vesvese',d:'Her konuda asılsız kuruntu yapmak.',o:'Mehmet, abdest aldığı halde "acaba almadım mı" diye tekrar tekrar düşünüyor.'}},
-  {id:26,k:'iman',
-   f:{n:'Dua',d:"Allah'a yalvararak iyilik istemek.",o:"Zeynep, her gece ailesi için Allah'tan sağlık ve iyilik diliyor."},
-   t:{n:'Müslümâna Bedduâ',d:'Bir mümine kötülük istemek.',o:'Mehmet, öfkeyle arkadaşına "başına kötü şey gelsin" diyerek beddua etti.'},
-   i:{n:'Aşırı Övgü',d:'Yüze karşı abartılı şekilde övmek.',o:'Ayşe, çıkar için arkadaşlarını gereğinden fazla övüp onları şımartıyor.'}},
-  {id:27,k:'ilim',
-   f:{n:'Hikmetli Beyan',d:'Yerinde ve faydalı söz söylemek.',o:'Ali, kavga eden arkadaşlarına öyle bir öğüt verdi ki hepsi sakinleşti.'},
-   t:{n:'Gıybet',d:"Başkalarının kusurlarını arkasından konuşmak.",o:'Merve, arkadaşının kötü yönlerini onun yokluğunda anlattı.'},
-   i:{n:'Sükût-u Hakk',d:'Hakkı söyleyeceği yerde susmak.',o:'Ahmet, bir haksızlığa şahit olduğu halde korkusundan hiç ses çıkarmadı.'}},
-  {id:28,k:'ilim',
-   f:{n:'Tefekkür',d:"Allah'ın yarattıklarını derin düşünmek.",o:'"Ne güzel yaratılmış" deyip çiçeğe bakarak şükretmek.'},
-   t:{n:'Gaflet',d:"Allah'ı unutarak boş yaşamak.",o:'Gün boyu oyun oynayıp hiç Allah\'ı anlamamaktır.'},
-   i:{n:'Vesvese',d:'Her şeyi "ya kötüyse?" diye kurcalamak.',o:'"Ya kötüyse?" diye sürekli endişe içinde olmaktır.'}},
-  {id:29,k:'islah',
-   f:{n:'Af',d:'"Pardon" diyeni kalpten bağışlamak.',o:'Zeynep, üzen arkadaşını içtenlikle affetti ve dargınlığı bıraktı.'},
-   t:{n:'Özrü Reddetmek',d:'Özre rağmen asla affetmemek.',o:'"Asla affetmem" diyerek kini uzun süre taşımaktır.'},
-   i:{n:'Körü Körüne Güven',d:'Her suçluyu sorgulamadan affetmek.',o:'Defalarca zararlı davranan birine düşüncesizce güvenmek.'}},
-  {id:30,k:'islah',
-   f:{n:'Doğru Tefsir',d:"Kur'an ayetlerini hocadan öğrenerek anlamak.",o:"Fatma, bir ayeti önce hocasına sorarak doğru anlamını öğreniyor."},
-   t:{n:"Kur'an'dan Uzaklık",d:"Kur'an ayetlerini hiç okuyup anlamamak.",o:"Ahmet, ayetleri hiç açıp okumadan yaşıyor."},
-   i:{n:"Yanlış Tefsir",d:"Kur'an ayetlerini çıkarına göre çarpıtmak.",o:"Mert, ayetin gerçek anlamına bakmadan kendi düşüncesine uyduruyor."}},
-  {id:31,k:'iman',
-   f:{n:'Hubbu Fillah',d:"Allah için sevmek, Allah için uzak durmak.",o:"Zeynep, iyi arkadaşlarını Allah için seviyor, kötülüğe düşkünlerden ise uzak duruyor."},
-   t:{n:'Tecrid',d:'Herkesten uzaklaşıp toplumdan kaçmak.',o:'Ali, insanlarla ilişkiyi kesip tamamen yalnızlaştı.'},
-   i:{n:'Fasıkları Sevmek',d:"Allah'a isyan edeni, isyanı için sevmek.",o:'Ahmet, günah işlediği için kötü birini takdir ediyor ve ona hayran oluyor.'}},
-  {id:32,k:'karakter',
-   f:{n:'Özgüven',d:'Kendini olduğu gibi kabul edip değer vermek.',o:'Merve, hatalarını görse de kendine saygı duyuyor ve gelişmeye çalışıyor.'},
-   t:{n:'Aşağılık Kompleksi',d:"Kendini hep yetersiz ve değersiz görmek.",o:'"Ben hiçbir işe yaramam" deyip her şeyden geri çekilmektir.'},
-   i:{n:'Ucb',d:"Hiçbir temeli olmadan kendini üstün görmek.",o:"Ahmet, tek bir başarı sonrası 'Ben herkesten iyiyim' havasına giriyor."}},
-  {id:33,k:'islah',
-   f:{n:'Güzel Hitap',d:'Nazik, doğru ve yerinde söz söylemek.',o:'Mehmet, sınıftaki kavgayı güzel bir sözle sakinleştirdi.'},
-   t:{n:'Çekingen Susma',d:'Söylemesi gereken doğruyu söylememek.',o:'Ali, kopya çeken birini görüp sessiz kaldı.'},
-   i:{n:'Kötü Lakap',d:'Alaya alarak, inciterek hitap etmek.',o:'Mert, arkadaşını sürekli "şişko" ve "tırtıl" diye çağırıyor.'}},
-  {id:34,k:'iman',
-   f:{n:'Şükür',d:"Allah'ın verdiği nimetleri görüp minnet duymak.",o:"Fatma, sağlığına ve ailesine sahip olduğu için her gün Allah'a şükrediyor."},
-   t:{n:'Nankörlük',d:"Allah'ın nimetlerini görmezden gelmek.",o:'Ali, sahip olduklarını değil, olmayan şeyleri düşünüp sürekli şikâyet ediyor.'},
-   i:{n:'Aşırı Tatmin',d:"Sahip olduklarıyla gururlanıp çabalamayı bırakmak.",o:"Ahmet, şimdiki haline o kadar razı ki hiç gelişmeye çalışmıyor."}},
-  {id:35,k:'karakter',
-   f:{n:'Sabır',d:'Zorluklara şikâyetsizce katlanıp devam etmek.',o:"Zeynep, sınavda zorlandığı halde vazgeçmeyip sabırla çalışmaya devam etti."},
-   t:{n:'Sabırsızlık',d:'Küçük zorluklarda hemen yılmak.',o:'Mehmet, ilk hata sonrasında pes ediyor ve devam etmek istemiyor.'},
-   i:{n:'Uyuşukluk',d:'Her şeyi kabullenip hiç çaba göstermemek.',o:'Ali, hiç tepki vermeden her zorluğu kayıtsızca karşılıyor.'}},
+/* ─── DOMAINS ─── */
+const DOMAINS=[
+  {k:'ben', lbl:'BEN', icon:'🧭', title:'Kişisel Faziletler', sub:'Kişi · Kendi Nefsi', color:'#2363EB', soft:'rgba(35,99,235,.12)', glow:'rgba(35,99,235,.25)'},
+  {k:'bs',  lbl:'BEN ve SEN', icon:'🤝', title:'İkili İlişki', sub:'Kişi · Diğer İnsanlar', color:'#C96A17', soft:'rgba(201,106,23,.12)', glow:'rgba(201,106,23,.25)'},
+  {k:'biz', lbl:'BİZ', icon:'🏛️', title:'Toplumsal Faziletler', sub:'Kişi · Cemiyet', color:'#0F8A5F', soft:'rgba(15,138,95,.12)', glow:'rgba(15,138,95,.25)'},
+  {k:'tab', lbl:'TABİAT', icon:'🌿', title:'Çevre ve Hayat', sub:'Kişi · Tabiat', color:'#2B9348', soft:'rgba(43,147,72,.12)', glow:'rgba(43,147,72,.25)'},
+  {k:'man', lbl:'MANEVİYAT', icon:'✨', title:'Manevî Faziletler', sub:'Kişi · Yaratan', color:'#7C4DFF', soft:'rgba(124,77,255,.12)', glow:'rgba(124,77,255,.25)'},
 ];
 
-/* ══════════════════════════════════════════════
-   STATE
-══════════════════════════════════════════════ */
-let S = {xp:0, streak:0, lastDate:null, learned:[], gamesPlayed:0, learnIdx:0};
+/* ─── CURRICULUM DATA ─── */
+const E=[{"id":1,"k":"ben","tip":"f","ad":"Nezâfet‑Düzen","t":"Dağınıklık","e":"Nezâfet‑Düzen","i":"Temizlik/Düzen Takıntısı","oz":"Eşyasını toplamayı öğrenir; aşırı titizliğe kaçmaz.","niyet":"Bugün nezâfet‑düzen ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Nezâfet‑Düzen' çizgisine en yakındır?","s":["Eşyasını toplamayı öğrenir; aşırı titizliğe kaçmaz.","Dağınıklık davranışını alışkanlık haline getirmek.","Temizlik/Düzen Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Eşyasını toplamayı öğrenir; aşırı titizliğe kaçmaz.' davranışı hangi noktaya daha yakındır?"},{"id":2,"k":"ben","tip":"f","ad":"Öz‑Disiplin‑İtidal","t":"Savrukluk","e":"Öz‑Disiplin‑İtidal","i":"Aşırı Kendini Baskılama","oz":"Canı istese de ölçülü davranır, kendini boğmaz.","niyet":"Bugün öz‑disiplin‑i̇tidal ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Öz‑Disiplin‑İtidal' çizgisine en yakındır?","s":["Canı istese de ölçülü davranır, kendini boğmaz.","Savrukluk davranışını alışkanlık haline getirmek.","Aşırı Kendini Baskılama noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Canı istese de ölçülü davranır, kendini boğmaz.' davranışı hangi noktaya daha yakındır?"},{"id":3,"k":"ben","tip":"f","ad":"Sağlık Bilinci","t":"Sağlığı İhmal","e":"Sağlık Bilinci","i":"Sağlık Takıntısı","oz":"Bedenine özen gösterir, hastalık korkusuna saplanmaz.","niyet":"Bugün sağlık bilinci ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sağlık Bilinci' çizgisine en yakındır?","s":["Bedenine özen gösterir, hastalık korkusuna saplanmaz.","Sağlığı İhmal davranışını alışkanlık haline getirmek.","Sağlık Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Bedenine özen gösterir, hastalık korkusuna saplanmaz.' davranışı hangi noktaya daha yakındır?"},{"id":4,"k":"ben","tip":"f","ad":"Öz‑Tasarruf","t":"Savurganlık","e":"Öz‑Tasarruf","i":"Pintilik","oz":"Harçlığını dengeli kullanır; kendini mahrum etmez.","niyet":"Bugün öz‑tasarruf ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Öz‑Tasarruf' çizgisine en yakındır?","s":["Harçlığını dengeli kullanır; kendini mahrum etmez.","Savurganlık davranışını alışkanlık haline getirmek.","Pintilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Harçlığını dengeli kullanır; kendini mahrum etmez.' davranışı hangi noktaya daha yakındır?"},{"id":5,"k":"ben","tip":"f","ad":"Neşe & Zarif Mizah","t":"Somurtkanlık","e":"Neşe & Zarif Mizah","i":"Taşkın Şamata","oz":"Güler yüzlüdür, kimseyle alay etmez.","niyet":"Bugün neşe & zarif mizah ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Neşe & Zarif Mizah' çizgisine en yakındır?","s":["Güler yüzlüdür, kimseyle alay etmez.","Somurtkanlık davranışını alışkanlık haline getirmek.","Taşkın Şamata noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Güler yüzlüdür, kimseyle alay etmez.' davranışı hangi noktaya daha yakındır?"},{"id":6,"k":"ben","tip":"f","ad":"Azim & Sebat","t":"Gevşeklik","e":"Azim & Sebat","i":"İnatçı Hırs","oz":"Zor işi bırakmaz; hırsla kendini tüketmez.","niyet":"Bugün azim & sebat ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Azim & Sebat' çizgisine en yakındır?","s":["Zor işi bırakmaz; hırsla kendini tüketmez.","Gevşeklik davranışını alışkanlık haline getirmek.","İnatçı Hırs noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Zor işi bırakmaz; hırsla kendini tüketmez.' davranışı hangi noktaya daha yakındır?"},{"id":7,"k":"ben","tip":"f","ad":"Cesaret & Öz‑Güven","t":"Korkaklık","e":"Cesaret & Öz‑Güven","i":"Gözü Karalık","oz":"Doğruyu yapar; riskleri körcesine almaz.","niyet":"Bugün cesaret & öz‑güven ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Cesaret & Öz‑Güven' çizgisine en yakındır?","s":["Doğruyu yapar; riskleri körcesine almaz.","Korkaklık davranışını alışkanlık haline getirmek.","Gözü Karalık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Doğruyu yapar; riskleri körcesine almaz.' davranışı hangi noktaya daha yakındır?"},{"id":8,"k":"ben","tip":"f","ad":"İbtikâr / Yenilik Üretme","t":"Taklitçilik","e":"İbtikâr / Yenilik Üretme","i":"Kuralsız Fantezicilik","oz":"Kendi fikrini üretir; gerçeklikten kopmaz.","niyet":"Bugün i̇btikâr / yenilik üretme ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İbtikâr / Yenilik Üretme' çizgisine en yakındır?","s":["Kendi fikrini üretir; gerçeklikten kopmaz.","Taklitçilik davranışını alışkanlık haline getirmek.","Kuralsız Fantezicilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kendi fikrini üretir; gerçeklikten kopmaz.' davranışı hangi noktaya daha yakındır?"},{"id":9,"k":"ben","tip":"f","ad":"Merak & Öğrenme","t":"İlgisizlik","e":"Merak & Öğrenme","i":"Dağıtıcı Merak","oz":"Soru sorar; dikkati dağınık hale getirmez.","niyet":"Bugün merak & öğrenme ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Merak & Öğrenme' çizgisine en yakındır?","s":["Soru sorar; dikkati dağınık hale getirmez.","İlgisizlik davranışını alışkanlık haline getirmek.","Dağıtıcı Merak noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Soru sorar; dikkati dağınık hale getirmez.' davranışı hangi noktaya daha yakındır?"},{"id":10,"k":"ben","tip":"f","ad":"Planlama & Zaman","t":"Plansızlık","e":"Planlama & Zaman","i":"Aşırı Programcılık","oz":"Gününü düzenler; esnekliğini korur.","niyet":"Bugün planlama & zaman ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Planlama & Zaman' çizgisine en yakındır?","s":["Gününü düzenler; esnekliğini korur.","Plansızlık davranışını alışkanlık haline getirmek.","Aşırı Programcılık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Gününü düzenler; esnekliğini korur.' davranışı hangi noktaya daha yakındır?"},{"id":11,"k":"ben","tip":"f","ad":"Para‑Enerji Yönetimi","t":"Kaynak İsrafı","e":"Para‑Enerji Yönetimi","i":"Aşırı Tasarruf Takıntısı","oz":"Harcar, fakat israf etmez.","niyet":"Bugün para‑enerji yönetimi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Para‑Enerji Yönetimi' çizgisine en yakındır?","s":["Harcar, fakat israf etmez.","Kaynak İsrafı davranışını alışkanlık haline getirmek.","Aşırı Tasarruf Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Harcar, fakat israf etmez.' davranışı hangi noktaya daha yakındır?"},{"id":12,"k":"ben","tip":"f","ad":"Sürûr (İç Sevinç)","t":"Karamsarlık","e":"Sürûr (İç Sevinç)","i":"Taşkın Coşku","oz":"Mutludur; taşkınlık yapmaz.","niyet":"Bugün sürûr (i̇ç sevinç) ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sürûr (İç Sevinç)' çizgisine en yakındır?","s":["Mutludur; taşkınlık yapmaz.","Karamsarlık davranışını alışkanlık haline getirmek.","Taşkın Coşku noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Mutludur; taşkınlık yapmaz.' davranışı hangi noktaya daha yakındır?"},{"id":13,"k":"ben","tip":"f","ad":"Öz‑Şefkat","t":"Öz‑Acımasızlık","e":"Öz‑Şefkat","i":"Kendini Kayırma","oz":"Hata yaptığında kendini affeder, bahane üretmez.","niyet":"Bugün öz‑şefkat ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Öz‑Şefkat' çizgisine en yakındır?","s":["Hata yaptığında kendini affeder, bahane üretmez.","Öz‑Acımasızlık davranışını alışkanlık haline getirmek.","Kendini Kayırma noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hata yaptığında kendini affeder, bahane üretmez.' davranışı hangi noktaya daha yakındır?"},{"id":14,"k":"ben","tip":"f","ad":"Haya & Tevâzu","t":"Tezellül","e":"Haya & Tevâzu","i":"Kibir","oz":"Başarıyı sessizce paylaşır, kendini ezmez.","niyet":"Bugün haya & tevâzu ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Haya & Tevâzu' çizgisine en yakındır?","s":["Başarıyı sessizce paylaşır, kendini ezmez.","Kibir davranışını alışkanlık haline getirmek.","Tezellül noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Başarıyı sessizce paylaşır, kendini ezmez.' davranışı hangi noktaya daha yakındır?"},{"id":15,"k":"ben","tip":"f","ad":"Şükür & Kanaat","t":"Nankörlük","e":"Şükür & Kanaat","i":"Gösterişli Övünme","oz":"Sahip olduklarına hamd eder, hava atmaz.","niyet":"Bugün şükür & kanaat ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Şükür & Kanaat' çizgisine en yakındır?","s":["Sahip olduklarına hamd eder, hava atmaz.","Nankörlük davranışını alışkanlık haline getirmek.","Gösterişli Övünme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Sahip olduklarına hamd eder, hava atmaz.' davranışı hangi noktaya daha yakındır?"},{"id":16,"k":"ben","tip":"f","ad":"Reca / Ümit","t":"Umutsuzluk","e":"Reca / Ümit","i":"Kör İyimserlik","oz":"Zorlukta ümitlidir; gerçekleri görmezden gelmez.","niyet":"Bugün reca / ümit ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Reca / Ümit' çizgisine en yakındır?","s":["Zorlukta ümitlidir; gerçekleri görmezden gelmez.","Umutsuzluk davranışını alışkanlık haline getirmek.","Kör İyimserlik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Zorlukta ümitlidir; gerçekleri görmezden gelmez.' davranışı hangi noktaya daha yakındır?"},{"id":17,"k":"ben","tip":"f","ad":"Hikmet & Basîret","t":"Gaflet","e":"Hikmet & Basîret","i":"Aşırı Şüphe","oz":"Düşünerek karar verir; paranoya yapmaz.","niyet":"Bugün hikmet & basîret ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Hikmet & Basîret' çizgisine en yakındır?","s":["Düşünerek karar verir; paranoya yapmaz.","Gaflet davranışını alışkanlık haline getirmek.","Aşırı Şüphe noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Düşünerek karar verir; paranoya yapmaz.' davranışı hangi noktaya daha yakındır?"},{"id":18,"k":"ben","tip":"f","ad":"Tedbir","t":"Tedbirsizlik","e":"Tedbir","i":"Korku Takıntısı","oz":"Önlem alır; hareketsiz kalmaz.","niyet":"Bugün prudence (tedbir) ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Prudence (Tedbir)' çizgisine en yakındır?","s":["Önlem alır; hareketsiz kalmaz.","Tedbirsizlik davranışını alışkanlık haline getirmek.","Korku Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Önlem alır; hareketsiz kalmaz.' davranışı hangi noktaya daha yakındır?"},{"id":19,"k":"ben","tip":"f","ad":"Muhasebe / Tefekkür","t":"Hesapsızlık","e":"Muhasebe / Tefekkür","i":"Aşırı İç Gözlem","oz":"Günü değerlendirir; takılı kalmaz.","niyet":"Bugün muhasebe / tefekkür ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Muhasebe / Tefekkür' çizgisine en yakındır?","s":["Günü değerlendirir; takılı kalmaz.","Hesapsızlık davranışını alışkanlık haline getirmek.","Aşırı İç Gözlem noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Günü değerlendirir; takılı kalmaz.' davranışı hangi noktaya daha yakındır?"},{"id":20,"k":"ben","tip":"f","ad":"Vakar‑ı Nefs","t":"Öz‑Güvensizlik","e":"Vakar‑ı Nefs","i":"Benmerkezcilik","oz":"Kendine güvenir; böbürlenmez.","niyet":"Bugün vakar‑ı nefs ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Vakar‑ı Nefs' çizgisine en yakındır?","s":["Kendine güvenir; böbürlenmez.","Öz‑Güvensizlik davranışını alışkanlık haline getirmek.","Benmerkezcilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kendine güvenir; böbürlenmez.' davranışı hangi noktaya daha yakındır?"},{"id":21,"k":"ben","tip":"f","ad":"Gayret & Üretkenlik","t":"Tembellik","e":"Gayret & Üretkenlik","i":"İşkoliklik","oz":"Çalışır; dinlenmeyi unutmadan.","niyet":"Bugün gayret & üretkenlik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Gayret & Üretkenlik' çizgisine en yakındır?","s":["Çalışır; dinlenmeyi unutmadan.","Tembellik davranışını alışkanlık haline getirmek.","İşkoliklik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Çalışır; dinlenmeyi unutmadan.' davranışı hangi noktaya daha yakındır?"},{"id":22,"k":"ben","tip":"f","ad":"İffet & Mahremiyet","t":"Sınır Tanımazlık","e":"İffet & Mahremiyet","i":"Aşırı Utangaçlık","oz":"Sınırını korur; utanıp susmaz.","niyet":"Bugün i̇ffet & mahremiyet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İffet & Mahremiyet' çizgisine en yakındır?","s":["Sınırını korur; utanıp susmaz.","Sınır Tanımazlık davranışını alışkanlık haline getirmek.","Aşırı Utangaçlık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Sınırını korur; utanıp susmaz.' davranışı hangi noktaya daha yakındır?"},{"id":23,"k":"ben","tip":"f","ad":"Fıtrat Bilinci","t":"Kimliksizlik","e":"Fıtrat Bilinci","i":"Katı Etiketçilik","oz":"Güçlü yönlerini bilir; kendini kalıba hapsetmez.","niyet":"Bugün fıtrat bilinci ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Fıtrat Bilinci' çizgisine en yakındır?","s":["Güçlü yönlerini bilir; kendini kalıba hapsetmez.","Kimliksizlik davranışını alışkanlık haline getirmek.","Katı Etiketçilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Güçlü yönlerini bilir; kendini kalıba hapsetmez.' davranışı hangi noktaya daha yakındır?"},{"id":24,"k":"bs","tip":"f","ad":"Nezaket & Saygı","t":"Kabalık","e":"Nezaket & Saygı","i":"Yapay Pohpoh","oz":"Nazik davranır; dalkavukluk yapmaz.","niyet":"Bugün nezaket & saygı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Nezaket & Saygı' çizgisine en yakındır?","s":["Nazik davranır; dalkavukluk yapmaz.","Kabalık davranışını alışkanlık haline getirmek.","Yapay Pohpoh noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Nazik davranır; dalkavukluk yapmaz.' davranışı hangi noktaya daha yakındır?"},{"id":25,"k":"bs","tip":"f","ad":"Etkin Dinleme","t":"Dinlememe","e":"Etkin Dinleme","i":"Aşırı Sessizlik","oz":"Dikkatle dinler; pasif kalmaz.","niyet":"Bugün etkin dinleme ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Etkin Dinleme' çizgisine en yakındır?","s":["Dikkatle dinler; pasif kalmaz.","Dinlememe davranışını alışkanlık haline getirmek.","Aşırı Sessizlik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Dikkatle dinler; pasif kalmaz.' davranışı hangi noktaya daha yakındır?"},{"id":26,"k":"bs","tip":"f","ad":"Açık İletişim","t":"Ketumluk","e":"Açık İletişim","i":"Düşüncesiz Gevezelik","oz":"Kendini ifade eder; sırları saçmaz.","niyet":"Bugün açık i̇letişim ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Açık İletişim' çizgisine en yakındır?","s":["Kendini ifade eder; sırları saçmaz.","Ketumluk davranışını alışkanlık haline getirmek.","Düşüncesiz Gevezelik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kendini ifade eder; sırları saçmaz.' davranışı hangi noktaya daha yakındır?"},{"id":27,"k":"bs","tip":"f","ad":"Dürüstlük (Sıdk)","t":"Yalancılık","e":"Dürüstlük (Sıdk)","i":"Acımasız Doğruculuk","oz":"Gerçeği söyler; kalp kırmaz.","niyet":"Bugün dürüstlük (sıdk) ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Dürüstlük (Sıdk)' çizgisine en yakındır?","s":["Gerçeği söyler; kalp kırmaz.","Yalancılık davranışını alışkanlık haline getirmek.","Acımasız Doğruculuk noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Gerçeği söyler; kalp kırmaz.' davranışı hangi noktaya daha yakındır?"},{"id":28,"k":"bs","tip":"f","ad":"Empati & Merhamet","t":"Bencillik","e":"Empati & Merhamet","i":"Duygusal Taşkınlık","oz":"Karşıdakini anlar; kendini kaybetmez.","niyet":"Bugün empati & merhamet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Empati & Merhamet' çizgisine en yakındır?","s":["Karşıdakini anlar; kendini kaybetmez.","Bencillik davranışını alışkanlık haline getirmek.","Duygusal Taşkınlık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Karşıdakini anlar; kendini kaybetmez.' davranışı hangi noktaya daha yakındır?"},{"id":29,"k":"bs","tip":"f","ad":"Cömertlik & Paylaşma","t":"Cimrilik","e":"Cömertlik & Paylaşma","i":"Savurgan Bağış","oz":"Paylaşır; kendini zora sokmaz.","niyet":"Bugün cömertlik & paylaşma ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Cömertlik & Paylaşma' çizgisine en yakındır?","s":["Paylaşır; kendini zora sokmaz.","Cimrilik davranışını alışkanlık haline getirmek.","Savurgan Bağış noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Paylaşır; kendini zora sokmaz.' davranışı hangi noktaya daha yakındır?"},{"id":30,"k":"bs","tip":"f","ad":"Affedicilik","t":"Kin","e":"Affedicilik","i":"Haksız Hoşgörü","oz":"Küslüğü bitirir; kötülüğü ödüllendirmez.","niyet":"Bugün affedicilik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Affedicilik' çizgisine en yakındır?","s":["Küslüğü bitirir; kötülüğü ödüllendirmez.","Kin davranışını alışkanlık haline getirmek.","Haksız Hoşgörü noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Küslüğü bitirir; kötülüğü ödüllendirmez.' davranışı hangi noktaya daha yakındır?"},{"id":31,"k":"bs","tip":"f","ad":"Sadâkat & Dostluk","t":"İhanet","e":"Sadâkat & Dostluk","i":"Kör Bağlılık","oz":"Dostuna sadıktır; yanlışı savunmaz.","niyet":"Bugün sadâkat & dostluk ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sadâkat & Dostluk' çizgisine en yakındır?","s":["Dostuna sadıktır; yanlışı savunmaz.","İhanet davranışını alışkanlık haline getirmek.","Kör Bağlılık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Dostuna sadıktır; yanlışı savunmaz.' davranışı hangi noktaya daha yakındır?"},{"id":32,"k":"bs","tip":"f","ad":"Mikro‑Adalet","t":"Kayırmacılık","e":"Mikro‑Adalet","i":"Katı Eşitçilik","oz":"Yakınını kayırmaz; özel ihtiyacı da göz ardı etmez.","niyet":"Bugün mikro‑adalet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Mikro‑Adalet' çizgisine en yakındır?","s":["Yakınını kayırmaz; özel ihtiyacı da göz ardı etmez.","Kayırmacılık davranışını alışkanlık haline getirmek.","Katı Eşitçilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Yakınını kayırmaz; özel ihtiyacı da göz ardı etmez.' davranışı hangi noktaya daha yakındır?"},{"id":33,"k":"bs","tip":"f","ad":"Güvenilirlik","t":"Söze Sadık Olmama","e":"Güvenilirlik","i":"Kör Saflık","oz":"Sözünde durur; hesapsız güvenmez.","niyet":"Bugün güvenilirlik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Güvenilirlik' çizgisine en yakındır?","s":["Sözünde durur; hesapsız güvenmez.","Söze Sadık Olmama davranışını alışkanlık haline getirmek.","Kör Saflık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Sözünde durur; hesapsız güvenmez.' davranışı hangi noktaya daha yakındır?"},{"id":34,"k":"bs","tip":"f","ad":"İşbirliği","t":"Bireycilik","e":"İşbirliği","i":"Sürü Psikolojisi","oz":"Takımda çalışır; düşünmeden uymaz.","niyet":"Bugün i̇şbirliği ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İşbirliği' çizgisine en yakındır?","s":["Takımda çalışır; düşünmeden uymaz.","Bireycilik davranışını alışkanlık haline getirmek.","Sürü Psikolojisi noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Takımda çalışır; düşünmeden uymaz.' davranışı hangi noktaya daha yakındır?"},{"id":35,"k":"bs","tip":"f","ad":"Koruyuculuk","t":"Zorbalık","e":"Koruyuculuk","i":"Aşırı Korumacılık","oz":"Zayıfı korur; yerine konuşmaz.","niyet":"Bugün koruyuculuk ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Koruyuculuk' çizgisine en yakındır?","s":["Zayıfı korur; yerine konuşmaz.","Zorbalık davranışını alışkanlık haline getirmek.","Aşırı Korumacılık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Zayıfı korur; yerine konuşmaz.' davranışı hangi noktaya daha yakındır?"},{"id":36,"k":"bs","tip":"f","ad":"Yapıcı Geri Bildirim","t":"Eleştiriye Kapalı","e":"Yapıcı Geri Bildirim","i":"Aşırı Eleştirel","oz":"Nazikçe uyarır; kusur avcısı olmaz.","niyet":"Bugün yapıcı geri bildirim ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Yapıcı Geri Bildirim' çizgisine en yakındır?","s":["Nazikçe uyarır; kusur avcısı olmaz.","Eleştiriye Kapalı davranışını alışkanlık haline getirmek.","Aşırı Eleştirel noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Nazikçe uyarır; kusur avcısı olmaz.' davranışı hangi noktaya daha yakındır?"},{"id":37,"k":"bs","tip":"f","ad":"Pozitif Dil","t":"Negatif Dil","e":"Pozitif Dil","i":"Yapay Motivasyon","oz":"Cesaret verir; gerçekleri saklamaz.","niyet":"Bugün pozitif dil ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Pozitif Dil' çizgisine en yakındır?","s":["Cesaret verir; gerçekleri saklamaz.","Negatif Dil davranışını alışkanlık haline getirmek.","Yapay Motivasyon noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Cesaret verir; gerçekleri saklamaz.' davranışı hangi noktaya daha yakındır?"},{"id":38,"k":"bs","tip":"f","ad":"Hüsn‑i Zan","t":"Sû‑i Zan","e":"Hüsn‑i Zan","i":"Aşırı Safdillik","oz":"İyi niyetlidir; kandırılmaz.","niyet":"Bugün hüsn‑i zan ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Hüsn‑i Zan' çizgisine en yakındır?","s":["İyi niyetlidir; kandırılmaz.","Sû‑i Zan davranışını alışkanlık haline getirmek.","Aşırı Safdillik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'İyi niyetlidir; kandırılmaz.' davranışı hangi noktaya daha yakındır?"},{"id":39,"k":"bs","tip":"f","ad":"Ahde Vefâ","t":"Ahde Vefâsızlık","e":"Ahde Vefâ","i":"Söz Takıntısı","oz":"Sözünü tutar; şart değişince çözüm arar.","niyet":"Bugün ahde vefâ ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Ahde Vefâ' çizgisine en yakındır?","s":["Sözünü tutar; şart değişince çözüm arar.","Ahde Vefâsızlık davranışını alışkanlık haline getirmek.","Söz Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Sözünü tutar; şart değişince çözüm arar.' davranışı hangi noktaya daha yakındır?"},{"id":40,"k":"bs","tip":"f","ad":"Derin Dostluk","t":"Yalnızlık","e":"Derin Dostluk","i":"Bağımlı Yapışıklık","oz":"Arkadaşıyla bağ kurar; yapışmaz.","niyet":"Bugün derin dostluk ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Derin Dostluk' çizgisine en yakındır?","s":["Arkadaşıyla bağ kurar; yapışmaz.","Yalnızlık davranışını alışkanlık haline getirmek.","Bağımlı Yapışıklık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Arkadaşıyla bağ kurar; yapışmaz.' davranışı hangi noktaya daha yakındır?"},{"id":41,"k":"biz","tip":"f","ad":"Kamu Malı Hassasiyeti","t":"Vandalizm","e":"Kamu Malı Hassasiyeti","i":"Aşırı Sahiplenme","oz":"Ortak eşyayı korur; başkasını kısıtlamaz.","niyet":"Bugün kamu malı hassasiyeti ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Kamu Malı Hassasiyeti' çizgisine en yakındır?","s":["Ortak eşyayı korur; başkasını kısıtlamaz.","Vandalizm davranışını alışkanlık haline getirmek.","Aşırı Sahiplenme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Ortak eşyayı korur; başkasını kısıtlamaz.' davranışı hangi noktaya daha yakındır?"},{"id":42,"k":"biz","tip":"f","ad":"Çalışma Ahlâkı","t":"İhmal","e":"Çalışma Ahlâkı","i":"İşkolik Zorbalık","oz":"Görevini yapar; herkesi zorlamaz.","niyet":"Bugün çalışma ahlâkı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Çalışma Ahlâkı' çizgisine en yakındır?","s":["Görevini yapar; herkesi zorlamaz.","İhmal davranışını alışkanlık haline getirmek.","İşkolik Zorbalık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Görevini yapar; herkesi zorlamaz.' davranışı hangi noktaya daha yakındır?"},{"id":43,"k":"biz","tip":"f","ad":"Afet Dayanıklılığı","t":"Gevşek Kriz","e":"Afet Dayanıklılığı","i":"Panik","oz":"Hazırlıklı olur; korku saçmaz.","niyet":"Bugün afet dayanıklılığı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Afet Dayanıklılığı' çizgisine en yakındır?","s":["Hazırlıklı olur; korku saçmaz.","Gevşek Kriz davranışını alışkanlık haline getirmek.","Panik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hazırlıklı olur; korku saçmaz.' davranışı hangi noktaya daha yakındır?"},{"id":44,"k":"biz","tip":"f","ad":"Makro‑Adalet","t":"Zulüm","e":"Makro‑Adalet","i":"Kanun Putçuluğu","oz":"Hakkı gözetir; kuralı putlaştırmaz.","niyet":"Bugün makro‑adalet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Makro‑Adalet' çizgisine en yakındır?","s":["Hakkı gözetir; kuralı putlaştırmaz.","Zulüm davranışını alışkanlık haline getirmek.","Kanun Putçuluğu noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hakkı gözetir; kuralı putlaştırmaz.' davranışı hangi noktaya daha yakındır?"},{"id":45,"k":"biz","tip":"f","ad":"Katılım & İstişare","t":"Pasiflik","e":"Katılım & İstişare","i":"Dayatmacı Aktivizm","oz":"Fikrini söyler; zorlamaz.","niyet":"Bugün katılım & i̇stişare ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Katılım & İstişare' çizgisine en yakındır?","s":["Fikrini söyler; zorlamaz.","Pasiflik davranışını alışkanlık haline getirmek.","Dayatmacı Aktivizm noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Fikrini söyler; zorlamaz.' davranışı hangi noktaya daha yakındır?"},{"id":46,"k":"biz","tip":"f","ad":"Dayanışma","t":"İlgisizlik","e":"Dayanışma","i":"Aşırı Müdahale","oz":"Yardım eder; işin başkasını ezmez.","niyet":"Bugün dayanışma ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Dayanışma' çizgisine en yakındır?","s":["Yardım eder; işin başkasını ezmez.","İlgisizlik davranışını alışkanlık haline getirmek.","Aşırı Müdahale noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Yardım eder; işin başkasını ezmez.' davranışı hangi noktaya daha yakındır?"},{"id":47,"k":"biz","tip":"f","ad":"Sulh & Hoşgörü","t":"Kavga","e":"Sulh & Hoşgörü","i":"Ödüncü Barış","oz":"Barışı savunur; haksızlığa boyun eğmez.","niyet":"Bugün sulh & hoşgörü ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sulh & Hoşgörü' çizgisine en yakındır?","s":["Barışı savunur; haksızlığa boyun eğmez.","Kavga davranışını alışkanlık haline getirmek.","Ödüncü Barış noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Barışı savunur; haksızlığa boyun eğmez.' davranışı hangi noktaya daha yakındır?"},{"id":48,"k":"biz","tip":"f","ad":"Toplumsal Cesaret","t":"Çekingenlik","e":"Toplumsal Cesaret","i":"Popülist Kahramanlık","oz":"Haksıza dur der; şov peşinde koşmaz.","niyet":"Bugün toplumsal cesaret ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Toplumsal Cesaret' çizgisine en yakındır?","s":["Haksıza dur der; şov peşinde koşmaz.","Çekingenlik davranışını alışkanlık haline getirmek.","Popülist Kahramanlık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Haksıza dur der; şov peşinde koşmaz.' davranışı hangi noktaya daha yakındır?"},{"id":49,"k":"biz","tip":"f","ad":"Sorumlu Liderlik","t":"Lidersizlik","e":"Sorumlu Liderlik","i":"Despotizm","oz":"Yönlendirir; baskı kurmaz.","niyet":"Bugün sorumlu liderlik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sorumlu Liderlik' çizgisine en yakındır?","s":["Yönlendirir; baskı kurmaz.","Lidersizlik davranışını alışkanlık haline getirmek.","Despotizm noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Yönlendirir; baskı kurmaz.' davranışı hangi noktaya daha yakındır?"},{"id":50,"k":"biz","tip":"f","ad":"Toplumsal Güven","t":"Güvensizlik","e":"Toplumsal Güven","i":"Kör Güven","oz":"Tedbir alır; herkesi suçlamaz.","niyet":"Bugün toplumsal güven ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Toplumsal Güven' çizgisine en yakındır?","s":["Tedbir alır; herkesi suçlamaz.","Güvensizlik davranışını alışkanlık haline getirmek.","Kör Güven noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Tedbir alır; herkesi suçlamaz.' davranışı hangi noktaya daha yakındır?"},{"id":51,"k":"biz","tip":"f","ad":"Bilim‑Yenilikçilik","t":"Cehalet","e":"Bilim‑Yenilikçilik","i":"Teknoloji Tapıcılığı","oz":"Araştırır; değersizleştirmez.","niyet":"Bugün bilim‑yenilikçilik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Bilim‑Yenilikçilik' çizgisine en yakındır?","s":["Araştırır; değersizleştirmez.","Cehalet davranışını alışkanlık haline getirmek.","Teknoloji Tapıcılığı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Araştırır; değersizleştirmez.' davranışı hangi noktaya daha yakındır?"},{"id":52,"k":"biz","tip":"f","ad":"Sanat‑Kültür Katılımı","t":"Kültürsüzlük","e":"Sanat‑Kültür Katılımı","i":"Elitizm","oz":"Kültür üretir; kimseyi hor görmez.","niyet":"Bugün sanat‑kültür katılımı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sanat‑Kültür Katılımı' çizgisine en yakındır?","s":["Kültür üretir; kimseyi hor görmez.","Kültürsüzlük davranışını alışkanlık haline getirmek.","Elitizm noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kültür üretir; kimseyi hor görmez.' davranışı hangi noktaya daha yakındır?"},{"id":53,"k":"biz","tip":"f","ad":"Fırsat Eşitliği","t":"Ayrımcılık","e":"Fırsat Eşitliği","i":"Zorunlu Kotacılık","oz":"Şansa saygı duyar; liyakati yok saymaz.","niyet":"Bugün fırsat eşitliği ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Fırsat Eşitliği' çizgisine en yakındır?","s":["Şansa saygı duyar; liyakati yok saymaz.","Ayrımcılık davranışını alışkanlık haline getirmek.","Zorunlu Kotacılık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Şansa saygı duyar; liyakati yok saymaz.' davranışı hangi noktaya daha yakındır?"},{"id":54,"k":"biz","tip":"f","ad":"Hukuk Bilinci","t":"Anarşi","e":"Hukuk Bilinci","i":"Aşırı Bürokrasi","oz":"Kurala uyar; adaletsiz kuralı eleştirir.","niyet":"Bugün hukuk bilinci ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Hukuk Bilinci' çizgisine en yakındır?","s":["Kurala uyar; adaletsiz kuralı eleştirir.","Anarşi davranışını alışkanlık haline getirmek.","Aşırı Bürokrasi noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kurala uyar; adaletsiz kuralı eleştirir.' davranışı hangi noktaya daha yakındır?"},{"id":55,"k":"biz","tip":"f","ad":"Adil Paylaşım","t":"Adaletsiz Dağıtım","e":"Adil Paylaşım","i":"Zorla Eşitleme","oz":"Hakkaniyetli bölüşür; herkesi eşitlemeye saplanmaz.","niyet":"Bugün adil paylaşım ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Adil Paylaşım' çizgisine en yakındır?","s":["Hakkaniyetli bölüşür; herkesi eşitlemeye saplanmaz.","Adaletsiz Dağıtım davranışını alışkanlık haline getirmek.","Zorla Eşitleme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hakkaniyetli bölüşür; herkesi eşitlemeye saplanmaz.' davranışı hangi noktaya daha yakındır?"},{"id":56,"k":"biz","tip":"f","ad":"Sürdürülebilirlik","t":"Tüketim Çılgınlığı","e":"Sürdürülebilirlik","i":"Aşırı Kısıtlama","oz":"Kaynağı korur; gelişimi durdurmaz.","niyet":"Bugün sürdürülebilirlik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sürdürülebilirlik' çizgisine en yakındır?","s":["Kaynağı korur; gelişimi durdurmaz.","Tüketim Çılgınlığı davranışını alışkanlık haline getirmek.","Aşırı Kısıtlama noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kaynağı korur; gelişimi durdurmaz.' davranışı hangi noktaya daha yakındır?"},{"id":57,"k":"biz","tip":"f","ad":"Miras Bilinci","t":"Tarihî Kopukluk","e":"Miras Bilinci","i":"Geçmişe Saplanma","oz":"Tarihten ibret alır; ilerlemeyi durdurmaz.","niyet":"Bugün miras bilinci ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Miras Bilinci' çizgisine en yakındır?","s":["Tarihten ibret alır; ilerlemeyi durdurmaz.","Tarihî Kopukluk davranışını alışkanlık haline getirmek.","Geçmişe Saplanma noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Tarihten ibret alır; ilerlemeyi durdurmaz.' davranışı hangi noktaya daha yakındır?"},{"id":58,"k":"biz","tip":"f","ad":"Helâl Kazanç & Şeffaflık","t":"Yolsuzluk","e":"Helâl Kazanç & Şeffaflık","i":"Paranoyak Şüphe","oz":"Dürüst ticaret yapar; herkesi hırsız sanmaz.","niyet":"Bugün helâl kazanç & şeffaflık ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Helâl Kazanç & Şeffaflık' çizgisine en yakındır?","s":["Dürüst ticaret yapar; herkesi hırsız sanmaz.","Yolsuzluk davranışını alışkanlık haline getirmek.","Paranoyak Şüphe noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Dürüst ticaret yapar; herkesi hırsız sanmaz.' davranışı hangi noktaya daha yakındır?"},{"id":59,"k":"biz","tip":"f","ad":"Doğru Bilgi Paylaşımı","t":"Enformasyon Kirliliği","e":"Doğru Bilgi Paylaşımı","i":"Sansürcülük","oz":"Gerçeği yayar; susturmaz.","niyet":"Bugün doğru bilgi paylaşımı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Doğru Bilgi Paylaşımı' çizgisine en yakındır?","s":["Gerçeği yayar; susturmaz.","Enformasyon Kirliliği davranışını alışkanlık haline getirmek.","Sansürcülük noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Gerçeği yayar; susturmaz.' davranışı hangi noktaya daha yakındır?"},{"id":60,"k":"biz","tip":"f","ad":"Kriz Liderliği","t":"Kaotik Yönetim","e":"Kriz Liderliği","i":"Korku Propagandası","oz":"Soğukkanlı yönetir; panik yaymaz.","niyet":"Bugün kriz liderliği ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Kriz Liderliği' çizgisine en yakındır?","s":["Soğukkanlı yönetir; panik yaymaz.","Kaotik Yönetim davranışını alışkanlık haline getirmek.","Korku Propagandası noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Soğukkanlı yönetir; panik yaymaz.' davranışı hangi noktaya daha yakındır?"},{"id":61,"k":"biz","tip":"f","ad":"Şehir Estetiği","t":"Estetik Körlük","e":"Şehir Estetiği","i":"Steril Takıntı","oz":"Kamusal alanı güzelleştirir; gereksiz yasak koymaz.","niyet":"Bugün şehir estetiği ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Şehir Estetiği' çizgisine en yakındır?","s":["Kamusal alanı güzelleştirir; gereksiz yasak koymaz.","Estetik Körlük davranışını alışkanlık haline getirmek.","Steril Takıntı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kamusal alanı güzelleştirir; gereksiz yasak koymaz.' davranışı hangi noktaya daha yakındır?"},{"id":62,"k":"tab","tip":"f","ad":"Temizlik‑Çevre Düzeni","t":"Çöp Savurma","e":"Temizlik‑Çevre Düzeni","i":"Sterilizme Takıntı","oz":"Çöplerini toplar; mikroptan korkmaz.","niyet":"Bugün temizlik‑çevre düzeni ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Temizlik‑Çevre Düzeni' çizgisine en yakındır?","s":["Çöplerini toplar; mikroptan korkmaz.","Çöp Savurma davranışını alışkanlık haline getirmek.","Sterilizme Takıntı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Çöplerini toplar; mikroptan korkmaz.' davranışı hangi noktaya daha yakındır?"},{"id":63,"k":"tab","tip":"f","ad":"Hayvan Şefkati","t":"Hayvana Zorbalık","e":"Hayvan Şefkati","i":"İnsan Karşıtlığı","oz":"Hayvanı korur; insanı düşman görmez.","niyet":"Bugün hayvan şefkati ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Hayvan Şefkati' çizgisine en yakındır?","s":["Hayvanı korur; insanı düşman görmez.","Hayvana Zorbalık davranışını alışkanlık haline getirmek.","İnsan Karşıtlığı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hayvanı korur; insanı düşman görmez.' davranışı hangi noktaya daha yakındır?"},{"id":64,"k":"tab","tip":"f","ad":"Çevre Koruma","t":"Doğa İstismarı","e":"Çevre Koruma","i":"Doğa Putçuluğu","oz":"Doğayı korur; insan ihtiyaçlarını yok saymaz.","niyet":"Bugün çevre koruma ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Çevre Koruma' çizgisine en yakındır?","s":["Doğayı korur; insan ihtiyaçlarını yok saymaz.","Doğa İstismarı davranışını alışkanlık haline getirmek.","Doğa Putçuluğu noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Doğayı korur; insan ihtiyaçlarını yok saymaz.' davranışı hangi noktaya daha yakındır?"},{"id":65,"k":"tab","tip":"f","ad":"Tasarruf","t":"Enerji‑Su İsrafı","e":"Tasarruf","i":"Aşırı Kısıtlama","oz":"Musluğu kapatır; susuz kalmaz.","niyet":"Bugün tasarruf ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Tasarruf' çizgisine en yakındır?","s":["Musluğu kapatır; susuz kalmaz.","Enerji‑Su İsrafı davranışını alışkanlık haline getirmek.","Aşırı Kısıtlama noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Musluğu kapatır; susuz kalmaz.' davranışı hangi noktaya daha yakındır?"},{"id":66,"k":"tab","tip":"f","ad":"Sağlıklı‑Helâl Gıda","t":"Gıda İsrafı","e":"Sağlıklı‑Helâl Gıda","i":"Diyet Takıntısı","oz":"Yemeği ziyan etmez; aç kalmaz.","niyet":"Bugün sağlıklı‑helâl gıda ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sağlıklı‑Helâl Gıda' çizgisine en yakındır?","s":["Yemeği ziyan etmez; aç kalmaz.","Gıda İsrafı davranışını alışkanlık haline getirmek.","Diyet Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Yemeği ziyan etmez; aç kalmaz.' davranışı hangi noktaya daha yakındır?"},{"id":67,"k":"tab","tip":"f","ad":"Yeşil Ulaşım","t":"Fosil Yakıt Bağımlı","e":"Yeşil Ulaşım","i":"Seyahat Kısıtlaması","oz":"Yürür; eve kapanmaz.","niyet":"Bugün yeşil ulaşım ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Yeşil Ulaşım' çizgisine en yakındır?","s":["Yürür; eve kapanmaz.","Fosil Yakıt Bağımlı davranışını alışkanlık haline getirmek.","Seyahat Kısıtlaması noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Yürür; eve kapanmaz.' davranışı hangi noktaya daha yakındır?"},{"id":68,"k":"tab","tip":"f","ad":"Döngüsel Ekonomi","t":"Atık Yakma","e":"Döngüsel Ekonomi","i":"Aşırı Ayırma","oz":"Geri dönüştürür; yorucu takıntı yapmaz.","niyet":"Bugün döngüsel ekonomi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Döngüsel Ekonomi' çizgisine en yakındır?","s":["Geri dönüştürür; yorucu takıntı yapmaz.","Atık Yakma davranışını alışkanlık haline getirmek.","Aşırı Ayırma noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Geri dönüştürür; yorucu takıntı yapmaz.' davranışı hangi noktaya daha yakındır?"},{"id":69,"k":"tab","tip":"f","ad":"Doğa Sevgisi","t":"Doğa Duyarsız","e":"Doğa Sevgisi","i":"Ağaç Tapıcılığı","oz":"Fidan diker; her şeyi ağaç sanmaz.","niyet":"Bugün doğa sevgisi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Doğa Sevgisi' çizgisine en yakındır?","s":["Fidan diker; her şeyi ağaç sanmaz.","Doğa Duyarsız davranışını alışkanlık haline getirmek.","Ağaç Tapıcılığı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Fidan diker; her şeyi ağaç sanmaz.' davranışı hangi noktaya daha yakındır?"},{"id":70,"k":"tab","tip":"f","ad":"Estetik Duyarlılık","t":"Estetik Körlük","e":"Estetik Duyarlılık","i":"Kusur Avcılığı","oz":"Güzeli fark eder; eleştiri hastası olmaz.","niyet":"Bugün estetik duyarlılık ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Estetik Duyarlılık' çizgisine en yakındır?","s":["Güzeli fark eder; eleştiri hastası olmaz.","Estetik Körlük davranışını alışkanlık haline getirmek.","Kusur Avcılığı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Güzeli fark eder; eleştiri hastası olmaz.' davranışı hangi noktaya daha yakındır?"},{"id":71,"k":"tab","tip":"f","ad":"Ses‑Işık Dengesi","t":"Gürültü Kirliliği","e":"Ses‑Işık Dengesi","i":"Mutlak Sessizlik","oz":"Ses seviyesine dikkat eder; kimseyi susturmaz.","niyet":"Bugün ses‑işık dengesi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Ses‑Işık Dengesi' çizgisine en yakındır?","s":["Ses seviyesine dikkat eder; kimseyi susturmaz.","Gürültü Kirliliği davranışını alışkanlık haline getirmek.","Mutlak Sessizlik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Ses seviyesine dikkat eder; kimseyi susturmaz.' davranışı hangi noktaya daha yakındır?"},{"id":72,"k":"tab","tip":"f","ad":"İklim Hassasiyeti","t":"İklim İnkarı","e":"İklim Hassasiyeti","i":"İklim Depresyonu","oz":"Adım atar; umutsuz olmaz.","niyet":"Bugün i̇klim hassasiyeti ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İklim Hassasiyeti' çizgisine en yakındır?","s":["Adım atar; umutsuz olmaz.","İklim İnkarı davranışını alışkanlık haline getirmek.","İklim Depresyonu noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Adım atar; umutsuz olmaz.' davranışı hangi noktaya daha yakındır?"},{"id":73,"k":"tab","tip":"f","ad":"Afet Hazırlığı","t":"Afet Umursamazlığı","e":"Afet Hazırlığı","i":"Felaket Bekleyicilik","oz":"Plan yapar; korku yaymaz.","niyet":"Bugün afet hazırlığı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Afet Hazırlığı' çizgisine en yakındır?","s":["Plan yapar; korku yaymaz.","Afet Umursamazlığı davranışını alışkanlık haline getirmek.","Felaket Bekleyicilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Plan yapar; korku yaymaz.' davranışı hangi noktaya daha yakındır?"},{"id":74,"k":"tab","tip":"f","ad":"Biyoçeşitlilik Saygısı","t":"Soy Tüketme","e":"Biyoçeşitlilik Saygısı","i":"Aşırı Müdahale","oz":"Türleri korur; ekosistemi bozmaz.","niyet":"Bugün biyoçeşitlilik saygısı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Biyoçeşitlilik Saygısı' çizgisine en yakındır?","s":["Türleri korur; ekosistemi bozmaz.","Soy Tüketme davranışını alışkanlık haline getirmek.","Aşırı Müdahale noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Türleri korur; ekosistemi bozmaz.' davranışı hangi noktaya daha yakındır?"},{"id":75,"k":"man","tip":"f","ad":"İhlâs","t":"Riya","e":"İhlâs","i":"Ketumiyet Takıntısı","oz":"Gösterişsiz iyidir; gerçeği gizlemez.","niyet":"Bugün i̇hlâs ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İhlâs' çizgisine en yakındır?","s":["Gösterişsiz iyidir; gerçeği gizlemez.","Riya davranışını alışkanlık haline getirmek.","Ketumiyet Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Gösterişsiz iyidir; gerçeği gizlemez.' davranışı hangi noktaya daha yakındır?"},{"id":76,"k":"man","tip":"f","ad":"Şükür","t":"Nankörlük","e":"Şükür","i":"Gösterişli Övünme","oz":"Nimete hamd eder; hava atmaz.","niyet":"Bugün şükür ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Şükür' çizgisine en yakındır?","s":["Nimete hamd eder; hava atmaz.","Nankörlük davranışını alışkanlık haline getirmek.","Gösterişli Övünme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Nimete hamd eder; hava atmaz.' davranışı hangi noktaya daha yakındır?"},{"id":77,"k":"man","tip":"f","ad":"Sabır","t":"Tahammülsüzlük","e":"Sabır","i":"Pasif Teslimiyet","oz":"Zorlukta dayanır; gayreti bırakmaz.","niyet":"Bugün sabır ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Sabır' çizgisine en yakındır?","s":["Zorlukta dayanır; gayreti bırakmaz.","Tahammülsüzlük davranışını alışkanlık haline getirmek.","Pasif Teslimiyet noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Zorlukta dayanır; gayreti bırakmaz.' davranışı hangi noktaya daha yakındır?"},{"id":78,"k":"man","tip":"f","ad":"Tevekkül","t":"Vesvese","e":"Tevekkül","i":"Kör Kadercilik","oz":"Çabalar; sonucu Allahü Teâlâ’ya bırakır.","niyet":"Bugün tevekkül ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Tevekkül' çizgisine en yakındır?","s":["Çabalar; sonucu Allahü Teâlâ’ya bırakır.","Vesvese davranışını alışkanlık haline getirmek.","Kör Kadercilik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Çabalar; sonucu Allahü Teâlâ’ya bırakır.' davranışı hangi noktaya daha yakındır?"},{"id":79,"k":"man","tip":"f","ad":"Tevbe‑Islah","t":"Günaha Devam","e":"Tevbe‑Islah","i":"Vesveseli Suçluluk","oz":"Hatasını bırakır; umutsuz olmaz.","niyet":"Bugün tevbe‑islah ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Tevbe‑Islah' çizgisine en yakındır?","s":["Hatasını bırakır; umutsuz olmaz.","Günaha Devam davranışını alışkanlık haline getirmek.","Vesveseli Suçluluk noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Hatasını bırakır; umutsuz olmaz.' davranışı hangi noktaya daha yakındır?"},{"id":80,"k":"man","tip":"f","ad":"İhsan","t":"Savruk İbadet","e":"İhsan","i":"Riyâkâr Gösteriş","oz":"İşini en güzel yapar; kibirlenmez.","niyet":"Bugün i̇hsan ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İhsan' çizgisine en yakındır?","s":["İşini en güzel yapar; kibirlenmez.","Savruk İbadet davranışını alışkanlık haline getirmek.","Riyâkâr Gösteriş noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'İşini en güzel yapar; kibirlenmez.' davranışı hangi noktaya daha yakındır?"},{"id":81,"k":"man","tip":"f","ad":"Reca & Hüsn‑i Zan","t":"Sû‑i Zan","e":"Reca & Hüsn‑i Zan","i":"Aşırı Safdillik","oz":"Rahmete güvenir; kandırılmaz.","niyet":"Bugün reca & hüsn‑i zan ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Reca & Hüsn‑i Zan' çizgisine en yakındır?","s":["Rahmete güvenir; kandırılmaz.","Sû‑i Zan davranışını alışkanlık haline getirmek.","Aşırı Safdillik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Rahmete güvenir; kandırılmaz.' davranışı hangi noktaya daha yakındır?"},{"id":82,"k":"man","tip":"f","ad":"İsar","t":"Cimrilik","e":"İsar","i":"Kendini Tüketme","oz":"Paylaşır; kendini bitirmez.","niyet":"Bugün i̇sar ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'İsar' çizgisine en yakındır?","s":["Paylaşır; kendini bitirmez.","Cimrilik davranışını alışkanlık haline getirmek.","Kendini Tüketme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Paylaşır; kendini bitirmez.' davranışı hangi noktaya daha yakındır?"},{"id":83,"k":"man","tip":"f","ad":"Hikmet‑İlim","t":"Cehalet","e":"Hikmet‑İlim","i":"Kibirli Bilgi","oz":"Öğrenir; hor görmez.","niyet":"Bugün hikmet‑i̇lim ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Hikmet‑İlim' çizgisine en yakındır?","s":["Öğrenir; hor görmez.","Cehalet davranışını alışkanlık haline getirmek.","Kibirli Bilgi noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Öğrenir; hor görmez.' davranışı hangi noktaya daha yakındır?"},{"id":84,"k":"man","tip":"f","ad":"Lütuflu Dil","t":"Sert Hitap","e":"Lütuflu Dil","i":"Aşırı Yumuşaklık","oz":"Tatlı söyler; taviz vermez.","niyet":"Bugün lütuflu dil ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Lütuflu Dil' çizgisine en yakındır?","s":["Tatlı söyler; taviz vermez.","Sert Hitap davranışını alışkanlık haline getirmek.","Aşırı Yumuşaklık noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Tatlı söyler; taviz vermez.' davranışı hangi noktaya daha yakındır?"},{"id":85,"k":"man","tip":"f","ad":"Tefekkür","t":"Yüzeysellik","e":"Tefekkür","i":"Şüphe Dehlizi","oz":"Derin düşünür; inkâra sapmaz.","niyet":"Bugün tefekkür ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Tefekkür' çizgisine en yakındır?","s":["Derin düşünür; inkâra sapmaz.","Yüzeysellik davranışını alışkanlık haline getirmek.","Şüphe Dehlizi noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Derin düşünür; inkâra sapmaz.' davranışı hangi noktaya daha yakındır?"},{"id":86,"k":"man","tip":"f","ad":"Vukûf‑i Kalb","t":"Dalgınlık","e":"Vukûf‑i Kalb","i":"Aşırı İç Kapanma","oz":"Kalbini yoklar; hayattan kopmaz.","niyet":"Bugün vukûf‑i kalb ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Vukûf‑i Kalb' çizgisine en yakındır?","s":["Kalbini yoklar; hayattan kopmaz.","Dalgınlık davranışını alışkanlık haline getirmek.","Aşırı İç Kapanma noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Kalbini yoklar; hayattan kopmaz.' davranışı hangi noktaya daha yakındır?"},{"id":87,"k":"man","tip":"f","ad":"Rıza","t":"Hoşnutsuzluk","e":"Rıza","i":"Gayretsiz Teslimiyet","oz":"Sonuçla barışır; çalışmayı bırakmaz.","niyet":"Bugün rıza ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Rıza' çizgisine en yakındır?","s":["Sonuçla barışır; çalışmayı bırakmaz.","Hoşnutsuzluk davranışını alışkanlık haline getirmek.","Gayretsiz Teslimiyet noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Sonuçla barışır; çalışmayı bırakmaz.' davranışı hangi noktaya daha yakındır?"},{"id":88,"k":"man","tip":"f","ad":"Yakîn","t":"Şüphecilik","e":"Yakîn","i":"Fanatik Kesinlik","oz":"İnanır; hataya kapalı olmaz.","niyet":"Bugün yakîn ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Yakîn' çizgisine en yakındır?","s":["İnanır; hataya kapalı olmaz.","Şüphecilik davranışını alışkanlık haline getirmek.","Fanatik Kesinlik noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'İnanır; hataya kapalı olmaz.' davranışı hangi noktaya daha yakındır?"},{"id":89,"k":"man","tip":"f","ad":"Huşû & Kalbî Tevazu","t":"Huşû Eksikliği","e":"Huşû & Kalbî Tevazu","i":"Aşırı Ezilme","oz":"Saygıyla ibadet eder; kendini değersizleştirmez.","niyet":"Bugün huşû & kalbî tevazu ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Huşû & Kalbî Tevazu' çizgisine en yakındır?","s":["Saygıyla ibadet eder; kendini değersizleştirmez.","Huşû Eksikliği davranışını alışkanlık haline getirmek.","Aşırı Ezilme noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'Saygıyla ibadet eder; kendini değersizleştirmez.' davranışı hangi noktaya daha yakındır?"},{"id":90,"k":"man","tip":"f","ad":"Ritüel Dengesi","t":"İbadet İhmali","e":"Ritüel Dengesi","i":"Aşırı Titizlik (Vesvese)","oz":"İbadetini vaktiyle yapar; obsesifleşmez.","niyet":"Bugün ritüel dengesi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"Aşağıdaki açıklamalardan hangisi 'Ritüel Dengesi' çizgisine en yakındır?","s":["İbadetini vaktiyle yapar; obsesifleşmez.","İbadet İhmali davranışını alışkanlık haline getirmek.","Ritüel Takıntısı noktasına savrulmak.","Ne yapacağını sürekli ertelemek."],"d":0},"cl":"'İbadetini vaktiyle yapar; obsesifleşmez.' davranışı hangi noktaya daha yakındır?"},{"id":91,"k":"ben","tip":"a","ad":"Sofra Adabı","t":"Besmele çekmemek, israf","e":"Besmele, sağ elle, orta yolu tutmak","i":"Gösteriş sofraları, oburluk","oz":"Mütedil yol 'Besmele, sağ elle, orta yolu tutmak' iken, 'Besmele çekmemek, israf' tefrit, 'Gösteriş sofraları, oburluk' ise ifrat ucudur.","niyet":"Bugün besmele, sağ elle, orta yolu tutmak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Sofra Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Besmele, sağ elle, orta yolu tutmak","Besmele çekmemek, israf","Gösteriş sofraları, oburluk","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Besmele, sağ elle, orta yolu tutmak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":92,"k":"ben","tip":"a","ad":"Giyim ve Sadelik","t":"Düzensiz, kirli, câlib-i dikkat","e":"Temiz, sade, helâl kazançlı","i":"İsraf, aşırı moda takıntısı","oz":"Mütedil yol 'Temiz, sade, helâl kazançlı' iken, 'Düzensiz, kirli, câlib-i dikkat' tefrit, 'İsraf, aşırı moda takıntısı' ise ifrat ucudur.","niyet":"Bugün temiz, sade, helâl kazançlı ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Giyim ve Sadelik' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Temiz, sade, helâl kazançlı","Düzensiz, kirli, câlib-i dikkat","İsraf, aşırı moda takıntısı","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Temiz, sade, helâl kazançlı' ifadesi bu derste hangi noktayı temsil eder?"},{"id":93,"k":"ben","tip":"a","ad":"Ticarette Şeffaflık","t":"Aldatmak, fahiş kâr","e":"Helâl mal, şeffaflık","i":"Zararına satışla düzen bozmak","oz":"Mütedil yol 'Helâl mal, şeffaflık' iken, 'Aldatmak, fahiş kâr' tefrit, 'Zararına satışla düzen bozmak' ise ifrat ucudur.","niyet":"Bugün helâl mal, şeffaflık ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Ticarette Şeffaflık' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Helâl mal, şeffaflık","Aldatmak, fahiş kâr","Zararına satışla düzen bozmak","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Helâl mal, şeffaflık' ifadesi bu derste hangi noktayı temsil eder?"},{"id":94,"k":"ben","tip":"a","ad":"Arama ve Mesaj Adabı","t":"Gece rahatsız etmek","e":"Uygun vakit, kısa ve net","i":"İkide bir arayıp meşgul etmek","oz":"Mütedil yol 'Uygun vakit, kısa ve net' iken, 'Gece rahatsız etmek' tefrit, 'İkide bir arayıp meşgul etmek' ise ifrat ucudur.","niyet":"Bugün uygun vakit, kısa ve net ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Arama ve Mesaj Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Uygun vakit, kısa ve net","Gece rahatsız etmek","İkide bir arayıp meşgul etmek","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Uygun vakit, kısa ve net' ifadesi bu derste hangi noktayı temsil eder?"},{"id":95,"k":"ben","tip":"a","ad":"Tuvalet Temizliği","t":"Duâ okumamak, pis bırakmak","e":"Sol ayakla girip temizlik","i":"Takıntılı uzun kalmak","oz":"Mütedil yol 'Sol ayakla girip temizlik' iken, 'Duâ okumamak, pis bırakmak' tefrit, 'Takıntılı uzun kalmak' ise ifrat ucudur.","niyet":"Bugün sol ayakla girip temizlik ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Tuvalet Temizliği' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Sol ayakla girip temizlik","Duâ okumamak, pis bırakmak","Takıntılı uzun kalmak","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Sol ayakla girip temizlik' ifadesi bu derste hangi noktayı temsil eder?"},{"id":96,"k":"ben","tip":"a","ad":"Ders ve Meclis Adabı","t":"Soru sormamak, saygısızlık","e":"Not almak, edep","i":"Soru yağmuruyla meclisi aksatmak","oz":"Mütedil yol 'Not almak, edep' iken, 'Soru sormamak, saygısızlık' tefrit, 'Soru yağmuruyla meclisi aksatmak' ise ifrat ucudur.","niyet":"Bugün not almak, edep ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Ders ve Meclis Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Not almak, edep","Soru sormamak, saygısızlık","Soru yağmuruyla meclisi aksatmak","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Not almak, edep' ifadesi bu derste hangi noktayı temsil eder?"},{"id":97,"k":"ben","tip":"a","ad":"Sosyal Medya Ölçüsü","t":"Gıybet, mahrem ifşâ","e":"Faydalı paylaşım, vakit kontrolü","i":"Aşırı içerik, israf-ı zaman","oz":"Mütedil yol 'Faydalı paylaşım, vakit kontrolü' iken, 'Gıybet, mahrem ifşâ' tefrit, 'Aşırı içerik, israf-ı zaman' ise ifrat ucudur.","niyet":"Bugün faydalı paylaşım, vakit kontrolü ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Sosyal Medya Ölçüsü' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Faydalı paylaşım, vakit kontrolü","Gıybet, mahrem ifşâ","Aşırı içerik, israf-ı zaman","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Faydalı paylaşım, vakit kontrolü' ifadesi bu derste hangi noktayı temsil eder?"},{"id":98,"k":"bs","tip":"a","ad":"Selamlaşma","t":"Selâmı terk, soğuk duruş","e":"Münâsib “Esselâmü aleyküm” deyip tebessüm etmek","i":"Gösteriş/riya ile abartılı selâm","oz":"Mütedil yol 'Münâsib “Esselâmü aleyküm” deyip tebessüm etmek' iken, 'Selâmı terk, soğuk duruş' tefrit, 'Gösteriş/riya ile abartılı selâm' ise ifrat ucudur.","niyet":"Bugün münâsib “esselâmü aleyküm” deyip tebessüm etmek ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Selamlaşma' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Münâsib “Esselâmü aleyküm” deyip tebessüm etmek","Selâmı terk, soğuk duruş","Gösteriş/riya ile abartılı selâm","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Münâsib “Esselâmü aleyküm” deyip tebessüm etmek' ifadesi bu derste hangi noktayı temsil eder?"},{"id":99,"k":"bs","tip":"a","ad":"Su İkramı","t":"Susuz bırakmak veya suyu itip kakmak","e":"Soğutup iki-üç yudumda sunmak","i":"Aşırı kibarlıkla ısrar, tiksindirme","oz":"Mütedil yol 'Soğutup iki-üç yudumda sunmak' iken, 'Susuz bırakmak veya suyu itip kakmak' tefrit, 'Aşırı kibarlıkla ısrar, tiksindirme' ise ifrat ucudur.","niyet":"Bugün soğutup iki-üç yudumda sunmak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Su İkramı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Soğutup iki-üç yudumda sunmak","Susuz bırakmak veya suyu itip kakmak","Aşırı kibarlıkla ısrar, tiksindirme","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Soğutup iki-üç yudumda sunmak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":100,"k":"bs","tip":"a","ad":"Misafir Karşılama","t":"İlgi göstermemek, geciktirmek","e":"“Merhabanâ” deyip yer gösterme","i":"Aşırı iltifat, rahatsız edici ısrar","oz":"Mütedil yol '“Merhabanâ” deyip yer gösterme' iken, 'İlgi göstermemek, geciktirmek' tefrit, 'Aşırı iltifat, rahatsız edici ısrar' ise ifrat ucudur.","niyet":"Bugün “merhabanâ” deyip yer gösterme ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Misafir Karşılama' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["“Merhabanâ” deyip yer gösterme","İlgi göstermemek, geciktirmek","Aşırı iltifat, rahatsız edici ısrar","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'“Merhabanâ” deyip yer gösterme' ifadesi bu derste hangi noktayı temsil eder?"},{"id":101,"k":"bs","tip":"a","ad":"Misafirliğe Gitme","t":"Habersiz gitmek, uzun oturmak","e":"Bildirip vakarlı oturmak","i":"Ev sahibini meşgul edecek uzunluk","oz":"Mütedil yol 'Bildirip vakarlı oturmak' iken, 'Habersiz gitmek, uzun oturmak' tefrit, 'Ev sahibini meşgul edecek uzunluk' ise ifrat ucudur.","niyet":"Bugün bildirip vakarlı oturmak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Misafirliğe Gitme' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Bildirip vakarlı oturmak","Habersiz gitmek, uzun oturmak","Ev sahibini meşgul edecek uzunluk","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Bildirip vakarlı oturmak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":102,"k":"bs","tip":"a","ad":"Misafirlikte Sofra","t":"Yemeğe saldırmak, seçicilik","e":"Ev sahibinin düzenine uymak","i":"Aşırı övgü, ev sahibini zora sokma","oz":"Mütedil yol 'Ev sahibinin düzenine uymak' iken, 'Yemeğe saldırmak, seçicilik' tefrit, 'Aşırı övgü, ev sahibini zora sokma' ise ifrat ucudur.","niyet":"Bugün ev sahibinin düzenine uymak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Misafirlikte Sofra' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Ev sahibinin düzenine uymak","Yemeğe saldırmak, seçicilik","Aşırı övgü, ev sahibini zora sokma","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Ev sahibinin düzenine uymak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":103,"k":"bs","tip":"a","ad":"Konuşma Adabı","t":"Kırıcı, yalan, lâubâli","e":"Doğru, yumuşak, yerinde söz","i":"Gereksiz uzun, yapmacık nutuk","oz":"Mütedil yol 'Doğru, yumuşak, yerinde söz' iken, 'Kırıcı, yalan, lâubâli' tefrit, 'Gereksiz uzun, yapmacık nutuk' ise ifrat ucudur.","niyet":"Bugün doğru, yumuşak, yerinde söz ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Konuşma Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Doğru, yumuşak, yerinde söz","Kırıcı, yalan, lâubâli","Gereksiz uzun, yapmacık nutuk","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Doğru, yumuşak, yerinde söz' ifadesi bu derste hangi noktayı temsil eder?"},{"id":104,"k":"bs","tip":"a","ad":"Dinleme Adabı","t":"Telefonla oynamak, kesmek","e":"Göze bakıp dikkatle dinlemek","i":"Aşırı sessizlikle sohbeti bozmak","oz":"Mütedil yol 'Göze bakıp dikkatle dinlemek' iken, 'Telefonla oynamak, kesmek' tefrit, 'Aşırı sessizlikle sohbeti bozmak' ise ifrat ucudur.","niyet":"Bugün göze bakıp dikkatle dinlemek ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Dinleme Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Göze bakıp dikkatle dinlemek","Telefonla oynamak, kesmek","Aşırı sessizlikle sohbeti bozmak","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Göze bakıp dikkatle dinlemek' ifadesi bu derste hangi noktayı temsil eder?"},{"id":105,"k":"bs","tip":"a","ad":"Sır Saklama","t":"Sır saçmak","e":"Sır saklamak","i":"Gereksiz aşırı gizlilik (paranoya)","oz":"Mütedil yol 'Sır saklamak' iken, 'Sır saçmak' tefrit, 'Gereksiz aşırı gizlilik (paranoya)' ise ifrat ucudur.","niyet":"Bugün sır saklamak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Sır Saklama' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Sır saklamak","Sır saçmak","Gereksiz aşırı gizlilik (paranoya)","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Sır saklamak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":106,"k":"bs","tip":"a","ad":"Misafire İhtimam","t":"İlgisiz, gürültülü","e":"Selâm, ikram, ihtiyaç sorma","i":"Sürekli kapıyı çalmak, müdahale","oz":"Mütedil yol 'Selâm, ikram, ihtiyaç sorma' iken, 'İlgisiz, gürültülü' tefrit, 'Sürekli kapıyı çalmak, müdahale' ise ifrat ucudur.","niyet":"Bugün selâm, ikram, ihtiyaç sorma ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Misafire İhtimam' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Selâm, ikram, ihtiyaç sorma","İlgisiz, gürültülü","Sürekli kapıyı çalmak, müdahale","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Selâm, ikram, ihtiyaç sorma' ifadesi bu derste hangi noktayı temsil eder?"},{"id":107,"k":"bs","tip":"a","ad":"Hediyeleşme","t":"Hediye vermemek","e":"Gönüllü, imkânınca hediye","i":"Gösteriş amaçlı pahalı hediyeler","oz":"Mütedil yol 'Gönüllü, imkânınca hediye' iken, 'Hediye vermemek' tefrit, 'Gösteriş amaçlı pahalı hediyeler' ise ifrat ucudur.","niyet":"Bugün gönüllü, imkânınca hediye ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Hediyeleşme' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Gönüllü, imkânınca hediye","Hediye vermemek","Gösteriş amaçlı pahalı hediyeler","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Gönüllü, imkânınca hediye' ifadesi bu derste hangi noktayı temsil eder?"},{"id":108,"k":"bs","tip":"a","ad":"Hasta Ziyareti","t":"İzinsiz, uzun ziyaret","e":"Kısa, morâl verici ziyaret","i":"Hastayı yoran aşırı tavsiye","oz":"Mütedil yol 'Kısa, morâl verici ziyaret' iken, 'İzinsiz, uzun ziyaret' tefrit, 'Hastayı yoran aşırı tavsiye' ise ifrat ucudur.","niyet":"Bugün kısa, morâl verici ziyaret ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Hasta Ziyareti' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Kısa, morâl verici ziyaret","İzinsiz, uzun ziyaret","Hastayı yoran aşırı tavsiye","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Kısa, morâl verici ziyaret' ifadesi bu derste hangi noktayı temsil eder?"},{"id":109,"k":"bs","tip":"a","ad":"Taziye ve Teselli","t":"İlgilenmemek","e":"Hazret-i Peygamber aleyhisselâm’ın sünnetine uygun tesellî","i":"Gösterişli, yerli yersiz ağlama","oz":"Mütedil yol 'Hazret-i Peygamber aleyhisselâm’ın sünnetine uygun tesellî' iken, 'İlgilenmemek' tefrit, 'Gösterişli, yerli yersiz ağlama' ise ifrat ucudur.","niyet":"Bugün hazret-i peygamber aleyhisselâm’ın sünnetine uygun tesellî ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Taziye ve Teselli' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Hazret-i Peygamber aleyhisselâm’ın sünnetine uygun tesellî","İlgilenmemek","Gösterişli, yerli yersiz ağlama","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Hazret-i Peygamber aleyhisselâm’ın sünnetine uygun tesellî' ifadesi bu derste hangi noktayı temsil eder?"},{"id":110,"k":"bs","tip":"a","ad":"Çocuk Terbiyesi","t":"İhmal, şiddet","e":"Sevgi, tâlim-terbiye","i":"Aşırı şımartma","oz":"Mütedil yol 'Sevgi, tâlim-terbiye' iken, 'İhmal, şiddet' tefrit, 'Aşırı şımartma' ise ifrat ucudur.","niyet":"Bugün sevgi, tâlim-terbiye ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Çocuk Terbiyesi' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Sevgi, tâlim-terbiye","İhmal, şiddet","Aşırı şımartma","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Sevgi, tâlim-terbiye' ifadesi bu derste hangi noktayı temsil eder?"},{"id":111,"k":"bs","tip":"a","ad":"Anne-Babaya Hürmet","t":"İtaatsizlik","e":"Hürmet, duâ, hizmet","i":"İfrat itaatle harama mecbur kalma","oz":"Mütedil yol 'Hürmet, duâ, hizmet' iken, 'İtaatsizlik' tefrit, 'İfrat itaatle harama mecbur kalma' ise ifrat ucudur.","niyet":"Bugün hürmet, duâ, hizmet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Anne-Babaya Hürmet' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Hürmet, duâ, hizmet","İtaatsizlik","İfrat itaatle harama mecbur kalma","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Hürmet, duâ, hizmet' ifadesi bu derste hangi noktayı temsil eder?"},{"id":112,"k":"bs","tip":"a","ad":"Eşler Arası Saygı","t":"İhmal, kaba davranış","e":"Karşılıklı saygı-sevgi","i":"Aşırı kıskançlık, boğucu ilgi","oz":"Mütedil yol 'Karşılıklı saygı-sevgi' iken, 'İhmal, kaba davranış' tefrit, 'Aşırı kıskançlık, boğucu ilgi' ise ifrat ucudur.","niyet":"Bugün karşılıklı saygı-sevgi ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Eşler Arası Saygı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Karşılıklı saygı-sevgi","İhmal, kaba davranış","Aşırı kıskançlık, boğucu ilgi","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Karşılıklı saygı-sevgi' ifadesi bu derste hangi noktayı temsil eder?"},{"id":113,"k":"bs","tip":"a","ad":"Kapı ve Mahremiyet","t":"Lâubâli giriş-çıkış","e":"Selâm verip izin istemek","i":"Aşırı resmiyetle ortamı germe","oz":"Mütedil yol 'Selâm verip izin istemek' iken, 'Lâubâli giriş-çıkış' tefrit, 'Aşırı resmiyetle ortamı germe' ise ifrat ucudur.","niyet":"Bugün selâm verip izin istemek ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Kapı ve Mahremiyet' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Selâm verip izin istemek","Lâubâli giriş-çıkış","Aşırı resmiyetle ortamı germe","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Selâm verip izin istemek' ifadesi bu derste hangi noktayı temsil eder?"},{"id":114,"k":"biz","tip":"a","ad":"Borç ve Emanet","t":"Ödemeyi geciktirme","e":"Vaktinde ödeme, belgeleme","i":"Aşırı titizlikle borç takibi","oz":"Mütedil yol 'Vaktinde ödeme, belgeleme' iken, 'Ödemeyi geciktirme' tefrit, 'Aşırı titizlikle borç takibi' ise ifrat ucudur.","niyet":"Bugün vaktinde ödeme, belgeleme ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Borç ve Emanet' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Vaktinde ödeme, belgeleme","Ödemeyi geciktirme","Aşırı titizlikle borç takibi","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Vaktinde ödeme, belgeleme' ifadesi bu derste hangi noktayı temsil eder?"},{"id":115,"k":"biz","tip":"a","ad":"Merasimde Sadelik","t":"Daveti es geçmek","e":"Sâde, haramsız merasim","i":"İsraf, haram eğlenceler","oz":"Mütedil yol 'Sâde, haramsız merasim' iken, 'Daveti es geçmek' tefrit, 'İsraf, haram eğlenceler' ise ifrat ucudur.","niyet":"Bugün sâde, haramsız merasim ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Merasimde Sadelik' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Sâde, haramsız merasim","Daveti es geçmek","İsraf, haram eğlenceler","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Sâde, haramsız merasim' ifadesi bu derste hangi noktayı temsil eder?"},{"id":116,"k":"tab","tip":"a","ad":"Su Kullanımında İtidal","t":"İsraf, çevre kirletme","e":"İhtiyârı kadar su","i":"Aşırı cimrilik, gereğinden az","oz":"Mütedil yol 'İhtiyârı kadar su' iken, 'İsraf, çevre kirletme' tefrit, 'Aşırı cimrilik, gereğinden az' ise ifrat ucudur.","niyet":"Bugün i̇htiyârı kadar su ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Su Kullanımında İtidal' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["İhtiyârı kadar su","İsraf, çevre kirletme","Aşırı cimrilik, gereğinden az","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'İhtiyârı kadar su' ifadesi bu derste hangi noktayı temsil eder?"},{"id":117,"k":"tab","tip":"a","ad":"Hayvanlara Merhamet","t":"Çöp atmak, eziyet","e":"Temizlik, merhamet","i":"Hayvanlara insanı mağdur edecek boyutta düşkünlük","oz":"Mütedil yol 'Temizlik, merhamet' iken, 'Çöp atmak, eziyet' tefrit, 'Hayvanlara insanı mağdur edecek boyutta düşkünlük' ise ifrat ucudur.","niyet":"Bugün temizlik, merhamet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Hayvanlara Merhamet' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Temizlik, merhamet","Çöp atmak, eziyet","Hayvanlara insanı mağdur edecek boyutta düşkünlük","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Temizlik, merhamet' ifadesi bu derste hangi noktayı temsil eder?"},{"id":118,"k":"man","tip":"a","ad":"Uyku ve Sabah Rutini","t":"Duâsız yatmak, geç kalkmak","e":"Abdestle yatıp erken kalkmak","i":"Aşırı uykusuzluk (zarar)","oz":"Mütedil yol 'Abdestle yatıp erken kalkmak' iken, 'Duâsız yatmak, geç kalkmak' tefrit, 'Aşırı uykusuzluk (zarar)' ise ifrat ucudur.","niyet":"Bugün abdestle yatıp erken kalkmak ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Uyku ve Sabah Rutini' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Abdestle yatıp erken kalkmak","Duâsız yatmak, geç kalkmak","Aşırı uykusuzluk (zarar)","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Abdestle yatıp erken kalkmak' ifadesi bu derste hangi noktayı temsil eder?"},{"id":119,"k":"man","tip":"a","ad":"Sefer Adabı","t":"Hazırlıksız çıkmak","e":"İstihâre, sefer duâsı, emniyet","i":"Gereksiz lüks yolculuk","oz":"Mütedil yol 'İstihâre, sefer duâsı, emniyet' iken, 'Hazırlıksız çıkmak' tefrit, 'Gereksiz lüks yolculuk' ise ifrat ucudur.","niyet":"Bugün i̇stihâre, sefer duâsı, emniyet ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Sefer Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["İstihâre, sefer duâsı, emniyet","Hazırlıksız çıkmak","Gereksiz lüks yolculuk","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'İstihâre, sefer duâsı, emniyet' ifadesi bu derste hangi noktayı temsil eder?"},{"id":120,"k":"man","tip":"a","ad":"Cuma Adabı","t":"Geç kalmak, yersiz konuşmak","e":"Erken gidip hutbeyi dinlemek","i":"Caminin düzenini bozacak acele","oz":"Mütedil yol 'Erken gidip hutbeyi dinlemek' iken, 'Geç kalmak, yersiz konuşmak' tefrit, 'Caminin düzenini bozacak acele' ise ifrat ucudur.","niyet":"Bugün erken gidip hutbeyi dinlemek ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Cuma Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Erken gidip hutbeyi dinlemek","Geç kalmak, yersiz konuşmak","Caminin düzenini bozacak acele","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Erken gidip hutbeyi dinlemek' ifadesi bu derste hangi noktayı temsil eder?"},{"id":121,"k":"man","tip":"a","ad":"Kur’an Tilaveti Adabı","t":"Abdestsiz, dalgın okumak","e":"Abdestli, tecvidli, huşû ile","i":"Aşırı ses, riyâ için tilâvet","oz":"Mütedil yol 'Abdestli, tecvidli, huşû ile' iken, 'Abdestsiz, dalgın okumak' tefrit, 'Aşırı ses, riyâ için tilâvet' ise ifrat ucudur.","niyet":"Bugün abdestli, tecvidli, huşû ile ile ilgili tek bir küçük davranış seç ve gün bitmeden uygula.","q":{"p":"'Kur’an Tilaveti Adabı' dersinde orta yolu en iyi anlatan seçenek hangisidir?","s":["Abdestli, tecvidli, huşû ile","Abdestsiz, dalgın okumak","Aşırı ses, riyâ için tilâvet","Kararsız kalıp ortamı akışına bırakmak"],"d":0},"cl":"'Abdestli, tecvidli, huşû ile' ifadesi bu derste hangi noktayı temsil eder?"}];
 
-function saveS() { localStorage.setItem('mizan_v2', JSON.stringify(S)); }
-function loadS() {
-  try { const r = localStorage.getItem('mizan_v2'); if (r) Object.assign(S, JSON.parse(r)); } catch(e){}
-  const today = new Date().toDateString();
-  if (S.lastDate) {
-    const diff = Math.floor((new Date() - new Date(S.lastDate)) / 86400000);
-    if (diff === 1) S.streak++;
-    else if (diff > 1) S.streak = 1;
-  } else { S.streak = 1; }
-  S.lastDate = today; saveS();
-}
-function addXP(n) {
-  const prev = Math.floor(S.xp / 100);
-  S.xp += n; saveS();
-  const popup = document.getElementById('xp-popup');
-  popup.textContent = '+' + n + ' XP ⭐';
-  popup.classList.add('show');
-  setTimeout(()=>popup.classList.remove('show'), 1300);
-  if (Math.floor(S.xp / 100) > prev) sndLevelUp();
-}
+/* ─── STATE ─── */
+const SK='mizan_v3';
+function defState(){return{xp:0,streak:1,lastDate:today(),learned:[],gamesPlayed:0,curDomain:null}}
+function today(){return new Date().toISOString().slice(0,10)}
+let S=JSON.parse(localStorage.getItem(SK)||'null')||defState();
+function save(){localStorage.setItem(SK,JSON.stringify(S))}
+function checkStreak(){const t=today(),y=new Date(Date.now()-864e5).toISOString().slice(0,10);if(S.lastDate===t)return;if(S.lastDate===y)S.streak++;else S.streak=1;S.lastDate=t;save()}
 
-/* ══════════════════════════════════════════════
-   ROUTER
-══════════════════════════════════════════════ */
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screen-'+id).classList.add('active');
-  window.scrollTo(0,0);
+/* ─── XP ─── */
+const XP_PER_LV=100;
+function addXP(n){
+  const was=Math.floor(S.xp/XP_PER_LV);
+  S.xp+=n;save();
+  if(Math.floor(S.xp/XP_PER_LV)>was)sndLevelUp();
+  showXPPopup(n);updateHomeStats();
 }
-function goHome() { renderHome(); show('home'); }
+function showXPPopup(n){const p=document.getElementById('xp-popup');p.textContent='+'+n+' XP ⭐';p.classList.add('show');setTimeout(()=>p.classList.remove('show'),1500)}
 
-/* ══════════════════════════════════════════════
-   HOME
-══════════════════════════════════════════════ */
-function renderHome() {
-  document.getElementById('home-streak').textContent = S.streak;
-  document.getElementById('home-xp').textContent = S.xp;
-  document.getElementById('home-learned').textContent = S.learned.length;
-  const lv = Math.floor(S.xp/100)+1, xpIn = S.xp%100;
-  document.getElementById('xp-lv-lbl').textContent = 'Seviye '+lv;
-  document.getElementById('xp-bar-lbl').textContent = xpIn+' / 100 XP';
-  document.getElementById('xp-bar-fill').style.width = xpIn+'%';
+/* ─── DOMAIN COLOR ─── */
+function setDomColor(k){
+  const d=DOMAINS.find(x=>x.k===k)||DOMAINS[0];
+  const r=document.documentElement.style;
+  r.setProperty('--dom',d.color);
+  r.setProperty('--dom-soft',d.soft);
+  r.setProperty('--dom-glow',d.glow);
 }
 
-/* ══════════════════════════════════════════════
-   LEARN
-══════════════════════════════════════════════ */
-let learnIdx = 0, cardFlipped = false;
-let touchStartX = 0;
+/* ─── SCREENS ─── */
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active')}
+function goHome(){setDomColor('ben');showScreen('home');updateHomeStats()}
+function showProgress(){renderProgress();showScreen('progress')}
 
-function startLearn() {
-  learnIdx = S.learnIdx || 0;
-  cardFlipped = false;
-  renderLearn();
-  show('learn');
+/* ─── HOME ─── */
+function updateHomeStats(){
+  checkStreak();
+  document.getElementById('home-streak').textContent=S.streak;
+  document.getElementById('home-xp').textContent=S.xp;
+  document.getElementById('home-learned').textContent=S.learned.length;
+  const lv=Math.floor(S.xp/XP_PER_LV)+1,prog=S.xp%XP_PER_LV;
+  document.getElementById('xp-lv-lbl').textContent='Seviye '+lv;
+  document.getElementById('xp-bar-lbl').textContent=prog+' / '+XP_PER_LV+' XP';
+  document.getElementById('xp-bar-fill').style.width=(prog/XP_PER_LV*100)+'%';
+  renderDomainCards();
 }
 
-function renderLearn() {
-  const e = E[learnIdx], total = E.length;
-  document.getElementById('learn-pfill').style.width = ((learnIdx+1)/total*100)+'%';
-  document.getElementById('learn-cnt').textContent = (learnIdx+1)+'/'+total;
-  const kat = KAT[e.k];
-  document.getElementById('learn-cat').textContent = kat.emoji+' '+kat.ad;
-
-  const badge = document.getElementById('cf-cat-badge');
-  badge.textContent = kat.emoji+' '+kat.ad;
-  badge.style.background = kat.renk+'22';
-  badge.style.color = kat.renk;
-
-  const nameEl = document.getElementById('cf-name');
-  nameEl.textContent = e.f.n;
-  nameEl.style.color = kat.renk;
-  document.getElementById('cf-def').textContent = e.f.d;
-  document.getElementById('cf-tname').textContent = e.t.n;
-  document.getElementById('cf-iname').textContent = e.i.n;
-
-  document.getElementById('cb-title').textContent = e.f.n+' — Erdem Ailesi';
-  document.getElementById('cb-poles').innerHTML = `
-    <div class="pole-row"><div class="pole-dot t"></div><div class="pole-content"><div class="pole-name t">${e.t.n}</div><div class="pole-def">${e.t.d}</div><div class="pole-ex">"${e.t.o}"</div></div></div>
-    <div class="pole-row"><div class="pole-dot f"></div><div class="pole-content"><div class="pole-name f">${e.f.n}</div><div class="pole-def">${e.f.d}</div><div class="pole-ex">"${e.f.o}"</div></div></div>
-    <div class="pole-row"><div class="pole-dot i"></div><div class="pole-content"><div class="pole-name i">${e.i.n}</div><div class="pole-def">${e.i.d}</div><div class="pole-ex">"${e.i.o}"</div></div></div>
-  `;
-
-  cardFlipped = false;
-  document.getElementById('flashcard').classList.remove('flipped');
-  const anladi = document.getElementById('learn-anladi-btn');
-  const done = S.learned.includes(e.id);
-  anladi.textContent = done ? '✓ Öğrenildi' : '✓ Anladım';
-  anladi.classList.toggle('done', done);
-}
-
-function flipCard() { sndFlip(); cardFlipped=!cardFlipped; document.getElementById('flashcard').classList.toggle('flipped',cardFlipped); }
-
-function learnTekrar() {
-  learnIdx = (learnIdx+1)%E.length;
-  S.learnIdx = learnIdx; saveS(); renderLearn();
-}
-function learnAnladi() {
-  const e = E[learnIdx];
-  if (!S.learned.includes(e.id)) { S.learned.push(e.id); saveS(); addXP(5); sndMatch(); }
-  else sndFlip();
-  learnIdx = (learnIdx+1)%E.length;
-  S.learnIdx = learnIdx; saveS();
-  setTimeout(renderLearn, 120);
-}
-
-// Keyboard & touch
-document.addEventListener('keydown', e => {
-  if (document.getElementById('screen-learn').classList.contains('active')) {
-    if (e.key === 'ArrowRight' || e.key === ' ') learnAnladi();
-    if (e.key === 'ArrowLeft') learnTekrar();
-    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') flipCard();
-  }
-});
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-document.addEventListener('touchend', e => {
-  if (!document.getElementById('screen-learn').classList.contains('active')) return;
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 60) { if (dx > 0) learnTekrar(); else learnAnladi(); }
-}, {passive:true});
-
-/* ══════════════════════════════════════════════
-   İBRE GAME
-══════════════════════════════════════════════ */
-let IG = {qs:[],idx:0,correct:0,hearts:3,answered:false,combo:0};
-const NA = {t:-72, f:0, i:72};
-
-function startIbreGame() {
-  const pool = [...E].sort(()=>Math.random()-.5).slice(0,10);
-  IG = {qs: pool.map(e=>{
-    const p=['t','f','i'][Math.floor(Math.random()*3)];
-    return {eAd:e.f.n, metin:e[p].o, dogru:p, t:e.t.n, f:e.f.n, i:e.i.n, td:e.t.d, fd:e.f.d, id2:e.i.d};
-  }), idx:0, correct:0, hearts:3, answered:false, combo:0};
-  renderIbre(); show('ibre');
-}
-
-function setNeedle(pole, delay) {
-  const a = NA[pole]||0;
-  const el = document.getElementById('gauge-needle');
-  el.style.setProperty('--na', a+'deg');
-  setTimeout(()=>{ el.style.transform='rotate('+a+'deg)'; }, delay||0);
-}
-
-function renderIbre() {
-  const q = IG.qs[IG.idx]; IG.answered = false;
-  document.getElementById('ibre-cnt').textContent = (IG.idx+1)+'/'+IG.qs.length;
-  document.getElementById('ibre-tag').textContent = q.eAd+' erdem ailesi';
-  document.getElementById('ibre-q').textContent = '"'+q.metin+'"';
-  document.getElementById('ibre-score-lbl').textContent = IG.correct+' doğru';
-
-  const combo = document.getElementById('combo-badge');
-  if (IG.combo >= 2) { combo.textContent = '🔥 COMBO x'+IG.combo; combo.classList.add('show'); }
-  else combo.classList.remove('show');
-
-  const el = document.getElementById('gauge-needle');
-  el.style.transition = 'none';
-  el.style.transform = 'rotate(0deg)';
-  setTimeout(()=>{ el.style.transition = 'transform .9s cubic-bezier(.34,1.56,.64,1)'; }, 50);
-
-  ['t','f','i'].forEach(k=>{
-    const gz = document.getElementById('gz-'+k), cb = document.getElementById('cb-'+k);
-    gz.classList.remove('correct','wrong'); gz.style.pointerEvents='';
-    cb.disabled=false; cb.classList.remove('correct','wrong');
-    cb.textContent = k==='t'?'⚫ '+q.t : k==='f'?'🟢 '+q.f : '🔴 '+q.i;
+function renderDomainCards(){
+  const g=document.getElementById('domain-grid');
+  g.innerHTML='';
+  DOMAINS.forEach(d=>{
+    const lessons=E.filter(l=>l.k===d.k);
+    const done=lessons.filter(l=>S.learned.includes(l.id)).length;
+    const pct=lessons.length?Math.round(done/lessons.length*100):0;
+    const card=document.createElement('button');
+    card.className='domain-card';
+    card.style.setProperty('--dc',d.color);
+    card.style.setProperty('--dc-soft',d.soft);
+    card.style.setProperty('--dc-glow',d.glow);
+    card.innerHTML=
+      '<div class="dc-icon">'+d.icon+'</div>'+
+      '<div class="dc-lbl" style="color:'+d.color+'">'+d.lbl+'</div>'+
+      '<div class="dc-title">'+d.title+'</div>'+
+      '<div class="dc-sub">'+d.sub+'</div>'+
+      '<div class="dc-prog"><div class="dc-prog-fill" style="width:'+pct+'%;background:'+d.color+'"></div></div>'+
+      '<div class="dc-cnt" style="color:'+d.color+'">'+done+' / '+lessons.length+'</div>';
+    card.onclick=()=>openDomain(d.k);
+    g.appendChild(card);
   });
-
-  document.getElementById('ibre-fb').classList.remove('show','correct','wrong');
-  document.getElementById('ibre-next').style.display='none';
-  renderHearts('ibre-hearts', IG.hearts);
 }
 
-function submitIbre(choice) {
-  if (IG.answered) return; IG.answered = true;
-  const q = IG.qs[IG.idx], ok = choice===q.dogru;
-  setNeedle(choice, 0);
-  const pn = {t:q.t, f:q.f, i:q.i}, pd = {t:q.td, f:q.fd, i:q.id2};
-  ['t','f','i'].forEach(k=>{ document.getElementById('cb-'+k).disabled=true; document.getElementById('gz-'+k).style.pointerEvents='none'; });
+/* ─── DOMAIN SCREEN ─── */
+function openDomain(k){
+  S.curDomain=k;
+  const d=DOMAINS.find(x=>x.k===k);
+  setDomColor(k);
+  const lessons=E.filter(l=>l.k===k);
+  const done=lessons.filter(l=>S.learned.includes(l.id)).length;
+  const pct=lessons.length?Math.round(done/lessons.length*100):0;
 
-  if (ok) {
-    IG.correct++; IG.combo++;
-    document.getElementById('cb-'+choice).classList.add('correct');
-    document.getElementById('gz-'+choice).classList.add('correct');
-    const fb=document.getElementById('ibre-fb');
-    fb.className='fb-bar correct show';
-    fb.innerHTML='✅ <strong>'+pn[q.dogru]+'</strong> — '+pd[q.dogru];
-    sndCorrect(); addXP(IG.combo>=3?15:10);
+  document.getElementById('domain-header').innerHTML=
+    '<div class="domain-h-top">'+
+    '  <div class="domain-h-icon">'+d.icon+'</div>'+
+    '  <div>'+
+    '    <div class="domain-h-lbl" style="color:'+d.color+'">'+d.lbl+'</div>'+
+    '    <div class="domain-h-title">'+d.title+'</div>'+
+    '    <div class="domain-h-sub">'+d.sub+'</div>'+
+    '  </div>'+
+    '</div>'+
+    '<div class="domain-prog-row">'+
+    '  <div class="domain-prog-bg"><div class="domain-prog-fill" style="width:'+pct+'%;background:'+d.color+'"></div></div>'+
+    '  <span class="muted" style="white-space:nowrap">'+done+' / '+lessons.length+'</span>'+
+    '</div>';
+
+  const fazilets=lessons.filter(l=>l.tip==='f');
+  const adabs=lessons.filter(l=>l.tip==='a');
+  const cont=document.getElementById('domain-lessons');
+  cont.innerHTML='';
+  if(fazilets.length){
+    cont.innerHTML+='<div class="domain-sec-title">Faziletler ('+fazilets.length+')</div>';
+    fazilets.forEach(l=>cont.appendChild(makeLessonItem(l,d)));
+  }
+  if(adabs.length){
+    cont.innerHTML+='<div class="domain-sec-title">Adab Dersleri ('+adabs.length+')</div>';
+    adabs.forEach(l=>cont.appendChild(makeLessonItem(l,d)));
+  }
+  showScreen('domain');
+}
+
+function makeLessonItem(l,d){
+  const isDone=S.learned.includes(l.id);
+  const btn=document.createElement('button');
+  btn.className='lesson-item'+(isDone?' done':'');
+  btn.innerHTML=
+    '<div class="li-check">'+(isDone?'✓':'')+'</div>'+
+    '<div class="li-name">'+l.ad+'</div>'+
+    '<span class="li-type '+(l.tip==='f'?'f':'a')+'">'+(l.tip==='f'?'Fazilet':'Adab')+'</span>';
+  btn.onclick=()=>startLesson(l.id);
+  return btn;
+}
+
+/* ─── LESSON ─── */
+let LS={lesson:null,step:0,flipped:false,quizDone:false,fromDomain:null};
+
+function startLesson(id){
+  const l=E.find(x=>x.id===id);
+  if(!l)return;
+  LS={lesson:l,step:0,flipped:false,quizDone:false,fromDomain:S.curDomain};
+  setDomColor(l.k);
+  renderLessonStep(0);
+  showScreen('lesson');
+}
+
+function lessonBack(){
+  if(LS.step>0){lessonNextStep(-1);return}
+  if(LS.fromDomain){openDomain(LS.fromDomain)}else{goHome()}
+}
+
+function renderLessonStep(step){
+  LS.step=step;
+  ['ls-card','ls-quiz','ls-niyet'].forEach((id,i)=>{
+    document.getElementById(id).style.display=i===step?'':'none';
+  });
+  for(let i=0;i<3;i++){
+    const d=document.getElementById('sd'+i);
+    d.classList.remove('active','done');
+    if(i<step)d.classList.add('done');
+    else if(i===step)d.classList.add('active');
+  }
+  const l=LS.lesson;
+  const d=DOMAINS.find(x=>x.k===l.k)||DOMAINS[0];
+
+  if(step===0){
+    // Reset card
+    LS.flipped=false;
+    const fc=document.getElementById('flashcard');
+    if(fc)fc.classList.remove('flipped');
+    document.getElementById('cf-dom-badge').textContent=d.lbl;
+    document.getElementById('cf-dom-badge').style.cssText='background:'+d.soft+';color:'+d.color;
+    document.getElementById('cf-type-badge').textContent=l.tip==='f'?'Fazilet':'Adab';
+    document.getElementById('cf-name').textContent=l.ad;
+    document.getElementById('cf-def').textContent=l.oz||'';
+    document.getElementById('cf-tname').textContent=l.t;
+    document.getElementById('cf-iname').textContent=l.i;
+    document.getElementById('cb-title').textContent=l.ad+' — Üç Kutup';
+    document.getElementById('cb-poles').innerHTML=
+      '<div class="pole-row"><div class="pole-dot t"></div><div class="pole-content"><div class="pole-name t">⚫ Tefrit: '+l.t+'</div></div></div>'+
+      '<div class="pole-row"><div class="pole-dot f"></div><div class="pole-content"><div class="pole-name f">🟢 Fazilet: '+l.e+'</div><div class="pole-def">'+l.oz+'</div></div></div>'+
+      '<div class="pole-row"><div class="pole-dot i"></div><div class="pole-content"><div class="pole-name i">🔴 İfrat: '+l.i+'</div></div></div>';
+  }
+  else if(step===1){
+    renderQuiz(l);
+  }
+  else if(step===2){
+    document.getElementById('niyet-text').textContent=l.niyet||('Bugün '+l.ad.toLowerCase()+' konusunda bir adım atmayı niyet et.');
+  }
+}
+
+function flipCard(){
+  LS.flipped=!LS.flipped;
+  document.getElementById('flashcard').classList.toggle('flipped',LS.flipped);
+  sndFlip();
+}
+
+function renderQuiz(l){
+  if(!l.q){lessonNextStep();return}
+  const qf=document.getElementById('quiz-fb');qf.className='quiz-fb';qf.textContent='';
+  document.getElementById('quiz-next-btn').style.display='none';
+  LS.quizDone=false;
+  document.getElementById('quiz-q-text').textContent=l.q.p;
+  const opts=document.getElementById('quiz-opts');
+  opts.innerHTML='';
+  l.q.s.forEach((txt,i)=>{
+    const b=document.createElement('button');
+    b.className='quiz-opt';b.textContent=txt;
+    b.onclick=()=>answerQuiz(i,l.q.d);
+    opts.appendChild(b);
+  });
+}
+
+function answerQuiz(idx,correct){
+  if(LS.quizDone)return;
+  LS.quizDone=true;
+  const opts=document.querySelectorAll('.quiz-opt');
+  opts.forEach(b=>b.disabled=true);
+  opts[correct].classList.add('correct');
+  const qf=document.getElementById('quiz-fb');
+  if(idx===correct){
+    if(idx!==correct){}else{opts[idx].classList.add('correct')}
+    sndCorrect();
+    qf.textContent='✓ Doğru!';qf.className='quiz-fb ok show';
   } else {
-    IG.combo=0; IG.hearts--;
-    renderHearts('ibre-hearts', IG.hearts);
-    const el=document.getElementById('gauge-needle');
-    el.classList.add('shake');
-    setTimeout(()=>{ el.classList.remove('shake'); setNeedle(q.dogru,0); el.style.transform='rotate('+NA[q.dogru]+'deg)'; },650);
-    document.getElementById('cb-'+choice).classList.add('wrong');
-    document.getElementById('cb-'+q.dogru).classList.add('correct');
-    document.getElementById('gz-'+q.dogru).classList.add('correct');
-    const fb=document.getElementById('ibre-fb');
-    fb.className='fb-bar wrong show';
-    fb.innerHTML='❌ Doğrusu: <strong>'+pn[q.dogru]+'</strong> — '+pd[q.dogru];
+    opts[idx].classList.add('wrong');
     sndWrong();
+    qf.textContent='✗ Doğru cevap: "'+LS.lesson.q.s[correct]+'"';qf.className='quiz-fb no show';
   }
-
-  const combo=document.getElementById('combo-badge');
-  if (IG.combo>=2) { combo.textContent='🔥 COMBO x'+IG.combo; combo.classList.add('show'); }
-  else combo.classList.remove('show');
-
-  document.getElementById('ibre-next').style.display='block';
-  if (IG.hearts<=0) setTimeout(()=>finishGame('ibre',IG.correct,IG.qs.length),900);
+  document.getElementById('quiz-next-btn').style.display='';
 }
 
-function nextIbre() {
-  IG.idx++;
-  if (IG.idx>=IG.qs.length || IG.hearts<=0) finishGame('ibre',IG.correct,IG.qs.length);
-  else renderIbre();
+function lessonNextStep(dir){
+  const next=LS.step+(dir||1);
+  if(next<0){lessonBack();return}
+  if(next>=3){lessonComplete();return}
+  renderLessonStep(next);
 }
 
-/* ══════════════════════════════════════════════
-   EŞLEŞTİR GAME
-══════════════════════════════════════════════ */
-let EG = {pool:[],round:1,totalRounds:3,selL:null,selR:null,matched:0,correct:0,wrong:0,hearts:3};
-
-function startEslestir() {
-  EG = {pool:[...E].sort(()=>Math.random()-.5), round:1, totalRounds:3, selL:null, selR:null, matched:0, correct:0, wrong:0, hearts:3};
-  loadEslestirRound(); show('eslestir');
-}
-
-function loadEslestirRound() {
-  EG.selL=null; EG.selR=null; EG.matched=0;
-  const batch = EG.pool.slice((EG.round-1)*6, EG.round*6);
-  const lOrder = [...batch].sort(()=>Math.random()-.5);
-  const rOrder = [...batch].sort(()=>Math.random()-.5);
-
-  document.getElementById('esl-cnt').textContent = 'Tur '+EG.round+'/'+EG.totalRounds;
-  document.getElementById('esl-matched').textContent = '0 / '+batch.length+' eşleşti';
-
-  const lEl = document.getElementById('esl-left'), rEl = document.getElementById('esl-right');
-  lEl.innerHTML=''; rEl.innerHTML='';
-
-  lOrder.forEach(e=>{
-    const b = document.createElement('button');
-    b.className='e-btn'; b.dataset.id=e.id; b.textContent=e.f.n;
-    b.onclick=()=>eslSelL(e.id);
-    lEl.appendChild(b);
-  });
-  rOrder.forEach(e=>{
-    const b = document.createElement('button');
-    b.className='e-btn'; b.dataset.id=e.id; b.textContent=e.f.d;
-    b.onclick=()=>eslSelR(e.id);
-    rEl.appendChild(b);
-  });
-
-  document.getElementById('esl-prog').style.width='0%';
-  renderHearts('esl-hearts', EG.hearts);
-}
-
-function eslSelL(id) {
-  EG.selL = EG.selL===id ? null : id;
-  document.querySelectorAll('#esl-left .e-btn').forEach(b=>b.classList.toggle('sel', b.dataset.id==EG.selL));
-  if (EG.selL && EG.selR) tryEslestir();
-}
-function eslSelR(id) {
-  EG.selR = EG.selR===id ? null : id;
-  document.querySelectorAll('#esl-right .e-btn').forEach(b=>b.classList.toggle('sel', b.dataset.id==EG.selR));
-  if (EG.selL && EG.selR) tryEslestir();
-}
-
-function tryEslestir() {
-  const lId=EG.selL, rId=EG.selR;
-  const lBtn=document.querySelector('#esl-left .e-btn[data-id="'+lId+'"]');
-  const rBtn=document.querySelector('#esl-right .e-btn[data-id="'+rId+'"]');
-
-  if (lId==rId) {
-    EG.correct++; EG.matched++;
-    lBtn.classList.remove('sel'); lBtn.classList.add('matched'); lBtn.disabled=true;
-    rBtn.classList.remove('sel'); rBtn.classList.add('matched'); rBtn.disabled=true;
-    sndMatch(); addXP(10);
-    EG.selL=null; EG.selR=null;
-    const batch=EG.pool.slice((EG.round-1)*6, EG.round*6);
-    document.getElementById('esl-matched').textContent = EG.matched+' / '+batch.length+' eşleşti';
-    document.getElementById('esl-prog').style.width = (EG.matched/batch.length*100)+'%';
-    if (EG.matched>=batch.length) {
-      sndComplete();
-      setTimeout(()=>{
-        if (EG.round<EG.totalRounds) { EG.round++; loadEslestirRound(); }
-        else finishGame('eslestir', EG.correct, EG.correct+EG.wrong);
-      }, 700);
+function lessonComplete(){
+  const l=LS.lesson;
+  const isNew=!S.learned.includes(l.id);
+  if(isNew){S.learned.push(l.id);addXP(15);}
+  else{addXP(5);}
+  S.gamesPlayed++;save();
+  sndComplete();
+  if(LS.fromDomain){
+    // Sonraki dersi bul
+    const domLessons=E.filter(x=>x.k===l.k);
+    const idx=domLessons.findIndex(x=>x.id===l.id);
+    const next=domLessons[idx+1];
+    if(next&&isNew){
+      setTimeout(()=>startLesson(next.id),400);
+    } else {
+      openDomain(LS.fromDomain);
     }
   } else {
-    EG.wrong++; EG.hearts--;
-    lBtn.classList.remove('sel'); lBtn.classList.add('wrong-flash');
-    rBtn.classList.remove('sel'); rBtn.classList.add('wrong-flash');
-    sndWrong();
-    setTimeout(()=>{
-      lBtn.classList.remove('wrong-flash');
-      rBtn.classList.remove('wrong-flash');
-      EG.selL=null; EG.selR=null;
-    }, 550);
-    renderHearts('esl-hearts', EG.hearts);
-    if (EG.hearts<=0) setTimeout(()=>finishGame('eslestir',EG.correct,EG.correct+EG.wrong), 700);
+    goHome();
   }
 }
 
-/* ══════════════════════════════════════════════
-   KUTUP GAME
-══════════════════════════════════════════════ */
-let KG = {qs:[],idx:0,correct:0,hearts:3,answered:false};
+/* ─── İBRE GAME ─── */
+const NA={t:-72,f:0,i:72};
+let IG={pool:[],idx:0,hearts:3,score:0,combo:0,answered:false};
 
-function startKutupGame() {
-  const all=[];
-  E.forEach(e=>{ ['t','f','i'].forEach(p=>all.push({eAd:e.f.n, dogru:p, ad:e[p].n, def:e[p].d, ex:e[p].o, tn:e.t.n, fn:e.f.n, in:e.i.n})); });
-  KG = {qs:all.sort(()=>Math.random()-.5).slice(0,10), idx:0, correct:0, hearts:3, answered:false};
-  renderKutup(); show('kutup');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function rnd(arr,n){return shuffle([...arr]).slice(0,n)}
+
+function startIbreGame(){
+  setDomColor('man');
+  const pool=shuffle([...E]).slice(0,10);
+  const questions=[];
+  pool.forEach(l=>{
+    const picks=['t','f','i'];
+    const pick=picks[Math.floor(Math.random()*3)];
+    const text=pick==='t'?l.t:pick==='f'?l.e:l.i;
+    questions.push({lesson:l,answer:pick,text,label:l.ad});
+  });
+  IG={pool:questions,idx:0,hearts:3,score:0,combo:0,answered:false};
+  renderIbreHearts();
+  showScreen('ibre');
+  loadIbre();
 }
 
-function renderKutup() {
-  const q=KG.qs[KG.idx]; KG.answered=false;
-  document.getElementById('kutup-cnt').textContent = (KG.idx+1)+'/'+KG.qs.length;
-  document.getElementById('kutup-tag').textContent = q.eAd+' erdem ailesi';
-  document.getElementById('kutup-def').textContent = q.def;
-  document.getElementById('kutup-ex').textContent = '"'+q.ex+'"';
-  document.getElementById('kb-tn').textContent=q.tn;
-  document.getElementById('kb-fn').textContent=q.fn;
-  document.getElementById('kb-in').textContent=q.in;
-  ['t','f','i'].forEach(k=>{ const b=document.getElementById('kb-'+k); b.disabled=false; b.classList.remove('correct','wrong','sel'); });
-  document.getElementById('kutup-fb').classList.remove('show','correct','wrong');
-  document.getElementById('kutup-next').style.display='none';
-  renderHearts('kutup-hearts', KG.hearts);
+function renderIbreHearts(){
+  const h=document.getElementById('ibre-hearts');
+  h.innerHTML='';
+  for(let i=0;i<3;i++){const s=document.createElement('span');s.className='heart'+(i>=IG.hearts?' lost':'');s.textContent='❤️';h.appendChild(s)}
 }
 
-function submitKutup(choice) {
-  if (KG.answered) return; KG.answered=true;
-  const q=KG.qs[KG.idx], ok=choice===q.dogru;
-  const pn={t:q.tn, f:q.fn, i:q.in};
-  ['t','f','i'].forEach(k=>document.getElementById('kb-'+k).disabled=true);
-  if (ok) {
-    KG.correct++;
-    document.getElementById('kb-'+choice).classList.add('correct');
-    const fb=document.getElementById('kutup-fb'); fb.className='fb-bar correct show';
-    fb.textContent='✅ Doğru! '+pn[q.dogru]+' — '+q.def;
-    sndCorrect(); addXP(10);
+function loadIbre(){
+  const q=IG.pool[IG.idx];
+  document.getElementById('ibre-cnt').textContent=(IG.idx+1)+'/'+IG.pool.length;
+  document.getElementById('ibre-score-lbl').textContent=IG.score+' doğru';
+  document.getElementById('ibre-tag').textContent=q.label;
+  document.getElementById('ibre-q').textContent=q.text;
+  const nb=document.getElementById('gauge-needle');
+  nb.style.cssText='';nb.classList.remove('shake');
+  void nb.offsetWidth;
+  nb.style.transform='rotate(0deg)';
+  document.getElementById('ibre-fb').className='fb-bar';
+  document.getElementById('ibre-next').style.display='none';
+  ['gz-t','gz-f','gz-i'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('correct','wrong')});
+  ['cb-t','cb-f','cb-i'].forEach(id=>{const el=document.getElementById(id);el.classList.remove('correct','wrong');el.disabled=false});
+  const combo=document.getElementById('combo-badge');
+  combo.classList.toggle('show',IG.combo>=2);
+  if(IG.combo>=2)combo.textContent='🔥 COMBO x'+IG.combo;
+  IG.answered=false;
+}
+
+function submitIbre(choice){
+  if(IG.answered)return;
+  IG.answered=true;
+  const q=IG.pool[IG.idx];
+  const correct=q.answer;
+  const needle=document.getElementById('gauge-needle');
+  needle.style.setProperty('--na',NA[correct]+'deg');
+  needle.style.transform='rotate('+NA[correct]+'deg)';
+  ['t','f','i'].forEach(p=>{
+    document.getElementById('cb-'+p).disabled=true;
+    document.getElementById('gz-'+p).classList.add(p===correct?'correct':'wrong');
+    document.getElementById('cb-'+p).classList.add(p===correct?'correct':'wrong');
+  });
+  const fb=document.getElementById('ibre-fb');
+  if(choice===correct){
+    IG.score++;IG.combo++;
+    const bonus=IG.combo>=3?15:10;
+    addXP(bonus);
+    fb.className='fb-bar correct show';
+    fb.textContent='✓ Doğru! '+(IG.combo>=3?'🔥 COMBO +'+bonus+' XP':'+'+bonus+' XP');
+    sndCorrect();
   } else {
-    KG.hearts--; renderHearts('kutup-hearts',KG.hearts);
-    document.getElementById('kb-'+choice).classList.add('wrong');
-    document.getElementById('kb-'+q.dogru).classList.add('correct');
-    const fb=document.getElementById('kutup-fb'); fb.className='fb-bar wrong show';
-    fb.textContent='❌ Doğrusu: '+pn[q.dogru];
+    IG.combo=0;IG.hearts--;
+    renderIbreHearts();
+    needle.classList.add('shake');
+    const names={t:'⚫ Tefrit',f:'🟢 Fazilet',i:'🔴 İfrat'};
+    fb.className='fb-bar wrong show';
+    fb.textContent='✗ Doğru cevap: '+names[correct]+' ('+q.label+')';
     sndWrong();
   }
-  document.getElementById('kutup-next').style.display='block';
-  if (KG.hearts<=0) setTimeout(()=>finishGame('kutup',KG.correct,KG.qs.length),800);
+  document.getElementById('ibre-next').style.display='';
 }
 
-function nextKutup() {
+function nextIbre(){
+  IG.idx++;
+  if(IG.idx>=IG.pool.length||IG.hearts<=0){
+    S.gamesPlayed++;save();
+    showResult('İbre Oyunu',IG.score,IG.pool.length,IG.score*10,'startIbreGame');
+  } else {
+    loadIbre();
+  }
+}
+
+/* ─── EŞLEŞTİR GAME ─── */
+let EG={rounds:[],rIdx:0,pairs:[],matched:0,selL:null,hearts:3,totalMatched:0};
+
+function startEslestir(){
+  setDomColor('bs');
+  const fazilets=E.filter(l=>l.tip==='f'&&l.oz);
+  const rounds=[rnd(fazilets,6),rnd(fazilets,6),rnd(fazilets,6)];
+  EG={rounds,rIdx:0,pairs:[],matched:0,selL:null,hearts:3,totalMatched:0};
+  renderEslHearts();
+  document.getElementById('esl-cnt').textContent='Tur 1/3';
+  showScreen('eslestir');
+  loadEslRound();
+}
+
+function renderEslHearts(){
+  const h=document.getElementById('esl-hearts');
+  h.innerHTML='';
+  for(let i=0;i<3;i++){const s=document.createElement('span');s.className='heart'+(i>=EG.hearts?' lost':'');s.textContent='❤️';h.appendChild(s)}
+}
+
+function loadEslRound(){
+  const items=EG.rounds[EG.rIdx];
+  EG.pairs=items;EG.matched=0;EG.selL=null;
+  document.getElementById('esl-cnt').textContent='Tur '+(EG.rIdx+1)+'/3';
+  document.getElementById('esl-matched').textContent='0 / 6 eşleşti';
+  document.getElementById('esl-prog').style.width='0%';
+  const shuffled=shuffle([...items]);
+  const left=document.getElementById('esl-left');
+  const right=document.getElementById('esl-right');
+  left.innerHTML='';right.innerHTML='';
+  items.forEach(l=>{
+    const b=document.createElement('button');
+    b.className='e-btn';b.dataset.id=l.id;b.dataset.side='l';
+    b.textContent=l.ad;
+    b.onclick=()=>eslClick(l.id,'l',b);
+    left.appendChild(b);
+  });
+  shuffled.forEach(l=>{
+    const b=document.createElement('button');
+    b.className='e-btn';b.dataset.id=l.id;b.dataset.side='r';
+    b.textContent=l.oz;
+    b.onclick=()=>eslClick(l.id,'r',b);
+    right.appendChild(b);
+  });
+}
+
+function eslClick(id,side,btn){
+  if(btn.classList.contains('matched'))return;
+  if(side==='l'){
+    document.querySelectorAll('#esl-left .e-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');EG.selL=id;
+  } else {
+    if(!EG.selL)return;
+    if(EG.selL===id){
+      // Match!
+      sndMatch();
+      document.querySelectorAll('#esl-left .e-btn, #esl-right .e-btn').forEach(b=>{
+        if(+b.dataset.id===id)b.classList.add('matched');
+      });
+      EG.matched++;EG.totalMatched++;EG.selL=null;
+      addXP(10);
+      document.getElementById('esl-matched').textContent=EG.matched+' / 6 eşleşti';
+      document.getElementById('esl-prog').style.width=(EG.matched/6*100)+'%';
+      if(EG.matched>=6){
+        setTimeout(()=>{
+          EG.rIdx++;
+          if(EG.rIdx>=3){
+            S.gamesPlayed++;save();
+            showResult('Eşleştir',EG.totalMatched,18,EG.totalMatched*10,'startEslestir');
+          } else {
+            loadEslRound();
+          }
+        },600);
+      }
+    } else {
+      // Wrong
+      sndWrong();
+      EG.hearts--;renderEslHearts();
+      btn.classList.add('wrong-flash');
+      document.querySelectorAll('#esl-left .e-btn.sel').forEach(b=>{b.classList.add('wrong-flash')});
+      setTimeout(()=>{
+        document.querySelectorAll('.e-btn.wrong-flash, .e-btn.sel').forEach(b=>b.classList.remove('wrong-flash','sel'));
+      },500);
+      EG.selL=null;
+      if(EG.hearts<=0){
+        S.gamesPlayed++;save();
+        showResult('Eşleştir',EG.totalMatched,18,EG.totalMatched*8,'startEslestir');
+      }
+    }
+  }
+}
+
+/* ─── KUTUP GAME ─── */
+let KG={pool:[],idx:0,hearts:3,score:0,answered:false};
+
+function startKutupGame(){
+  setDomColor('biz');
+  const pool=[];
+  shuffle([...E]).slice(0,10).forEach(l=>{
+    const picks=['t','f','i'];
+    const pick=picks[Math.floor(Math.random()*3)];
+    const text=pick==='t'?l.t:pick==='f'?l.e:l.i;
+    pool.push({lesson:l,answer:pick,text});
+  });
+  KG={pool,idx:0,hearts:3,score:0,answered:false};
+  renderKutupHearts();
+  showScreen('kutup');
+  loadKutup();
+}
+
+function renderKutupHearts(){
+  const h=document.getElementById('kutup-hearts');
+  h.innerHTML='';
+  for(let i=0;i<3;i++){const s=document.createElement('span');s.className='heart'+(i>=KG.hearts?' lost':'');s.textContent='❤️';h.appendChild(s)}
+}
+
+function loadKutup(){
+  const q=KG.pool[KG.idx];
+  document.getElementById('kutup-cnt').textContent=(KG.idx+1)+'/'+KG.pool.length;
+  document.getElementById('kutup-tag').textContent=q.lesson.ad;
+  document.getElementById('kutup-def').textContent=q.text;
+  document.getElementById('kutup-fb').className='fb-bar';
+  document.getElementById('kutup-next').style.display='none';
+  document.getElementById('kb-tn').textContent=q.lesson.t;
+  document.getElementById('kb-fn').textContent=q.lesson.e;
+  document.getElementById('kb-in').textContent=q.lesson.i;
+  ['kb-t','kb-f','kb-i'].forEach(id=>{const b=document.getElementById(id);b.classList.remove('correct','wrong','sel');b.disabled=false});
+  KG.answered=false;
+}
+
+function submitKutup(choice){
+  if(KG.answered)return;
+  KG.answered=true;
+  const q=KG.pool[KG.idx];
+  const correct=q.answer;
+  ['t','f','i'].forEach(p=>document.getElementById('kb-'+p).disabled=true);
+  document.getElementById('kb-'+correct).classList.add('correct');
+  const fb=document.getElementById('kutup-fb');
+  if(choice===correct){
+    KG.score++;addXP(10);
+    fb.className='fb-bar correct show';fb.textContent='✓ Doğru!';
+    sndCorrect();
+    if(choice!==correct)document.getElementById('kb-'+choice).classList.add('wrong');
+  } else {
+    KG.hearts--;renderKutupHearts();
+    document.getElementById('kb-'+choice).classList.add('wrong');
+    fb.className='fb-bar wrong show';fb.textContent='✗ Doğru: '+{t:'Tefrit',f:'Fazilet',i:'İfrat'}[correct];
+    sndWrong();
+  }
+  document.getElementById('kutup-next').style.display='';
+}
+
+function nextKutup(){
   KG.idx++;
-  if (KG.idx>=KG.qs.length||KG.hearts<=0) finishGame('kutup',KG.correct,KG.qs.length);
-  else renderKutup();
+  if(KG.idx>=KG.pool.length||KG.hearts<=0){
+    S.gamesPlayed++;save();
+    showResult('Hangi Kutup?',KG.score,KG.pool.length,KG.score*10,'startKutupGame');
+  } else {
+    loadKutup();
+  }
 }
 
-/* ══════════════════════════════════════════════
-   SHARED
-══════════════════════════════════════════════ */
-function renderHearts(id, n) {
-  const el=document.getElementById(id); if(!el)return;
-  el.innerHTML='';
-  for(let i=0;i<3;i++){const s=document.createElement('span');s.className='heart'+(i>=n?' lost':'');s.textContent='❤️';el.appendChild(s);}
-}
-
-function finishGame(type, correct, total) {
-  S.gamesPlayed++; saveS();
-  const r=correct/total;
-  const emoji = r===1?'🏆':r>=.7?'🌟':r>=.5?'💪':'📚';
-  const title = r===1?'Mükemmel!':r>=.7?'Harika!':r>=.5?'İyi!':'Pratik Gerekli';
-  const sub = correct+'/'+total+' doğru cevap';
-  const earned = correct*10;
-  document.getElementById('res-emoji').textContent=emoji;
-  document.getElementById('res-title').textContent=title;
-  document.getElementById('res-sub').textContent=sub;
-  document.getElementById('res-xp').textContent='+'+earned;
-  const replay=document.getElementById('res-replay');
-  replay.onclick=()=>type==='ibre'?startIbreGame():type==='eslestir'?startEslestir():startKutupGame();
-  replay.textContent=type==='ibre'?'Tekrar İbre':type==='eslestir'?'Tekrar Eşleştir':'Tekrar Quiz';
-  if (r===1) sndComplete(); else if(r>=.7) sndLevelUp();
-  show('result');
-}
-
-/* ══════════════════════════════════════════════
-   PROGRESS
-══════════════════════════════════════════════ */
-function showProgress() {
+/* ─── PROGRESS ─── */
+function renderProgress(){
   document.getElementById('pg-xp').textContent=S.xp;
   document.getElementById('pg-str').textContent=S.streak;
   document.getElementById('pg-lrn').textContent=S.learned.length;
   document.getElementById('pg-gms').textContent=S.gamesPlayed;
 
-  const catTotal={},catDone={};
-  E.forEach(e=>{ catTotal[e.k]=(catTotal[e.k]||0)+1; if(S.learned.includes(e.id)) catDone[e.k]=(catDone[e.k]||0)+1; });
-  const rows=document.getElementById('cat-rows'); rows.innerHTML='';
-  Object.keys(KAT).forEach(k=>{
-    const tot=catTotal[k]||0, done=catDone[k]||0, pct=tot>0?(done/tot*100).toFixed(0):0;
-    rows.innerHTML+=`<div class="cat-row"><span class="cat-icon">${KAT[k].emoji}</span><span class="cat-name">${KAT[k].ad}</span><div class="cat-bg"><div class="cat-fill" style="width:${pct}%;background:${KAT[k].renk}"></div></div><span class="cat-cnt">${done}/${tot}</span></div>`;
+  const rows=document.getElementById('dom-prog-rows');
+  rows.innerHTML='';
+  DOMAINS.forEach(d=>{
+    const lessons=E.filter(l=>l.k===d.k);
+    const done=lessons.filter(l=>S.learned.includes(l.id)).length;
+    const pct=lessons.length?Math.round(done/lessons.length*100):0;
+    rows.innerHTML+=
+      '<div class="dom-prog-row">'+
+      '<div class="dpr-icon">'+d.icon+'</div>'+
+      '<div class="dpr-name">'+d.lbl+'</div>'+
+      '<div class="dpr-bg"><div class="dpr-fill" style="width:'+pct+'%;background:'+d.color+'"></div></div>'+
+      '<div class="dpr-cnt">'+done+'/'+lessons.length+'</div>'+
+      '</div>';
   });
 
-  const BADGES=[
-    {icon:'🌱',name:'İlk Adım',earn:S.learned.length>=1},
-    {icon:'⭐',name:'5 Erdem',earn:S.learned.length>=5},
-    {icon:'🌟',name:'10 Erdem',earn:S.learned.length>=10},
-    {icon:'💎',name:'20 Erdem',earn:S.learned.length>=20},
-    {icon:'🏆',name:'35 Erdem Ustası',earn:S.learned.length>=35},
-    {icon:'💰',name:'100 XP',earn:S.xp>=100},
-    {icon:'💸',name:'500 XP',earn:S.xp>=500},
-    {icon:'🔥',name:'3 Gün Serisi',earn:S.streak>=3},
-    {icon:'🎮',name:'5 Oyun',earn:S.gamesPlayed>=5},
-    {icon:'🎯',name:'10 Oyun',earn:S.gamesPlayed>=10},
-  ];
-  const bw=document.getElementById('badges-wrap'); bw.innerHTML='';
-  BADGES.forEach(b=>bw.innerHTML+=`<div class="badge${b.earn?' earn':''}"><span>${b.icon}</span>${b.name}</div>`);
-
-  const vg=document.getElementById('virtue-grid'); vg.innerHTML='';
-  E.forEach(e=>vg.innerHTML+=`<div class="vchip${S.learned.includes(e.id)?' done':''}"><div class="vdot"></div>${e.f.n}</div>`);
-
-  show('progress');
+  const allProg=document.getElementById('all-lessons-prog');
+  allProg.innerHTML='';
+  E.forEach(l=>{
+    const done=S.learned.includes(l.id);
+    const d=DOMAINS.find(x=>x.k===l.k)||DOMAINS[0];
+    const chip=document.createElement('div');
+    chip.style.cssText='background:var(--surface);border:1px solid '+(done?d.color:'var(--border)')+';border-radius:var(--radius-sm);padding:7px 9px;font-size:11px;font-weight:600;display:flex;align-items:center;gap:6px;cursor:pointer';
+    chip.innerHTML='<div style="width:7px;height:7px;border-radius:50%;background:'+(done?d.color:'var(--border)')+';flex-shrink:0"></div>'+l.ad;
+    chip.onclick=()=>startLesson(l.id);
+    allProg.appendChild(chip);
+  });
 }
 
-/* ══════════════════════════════════════════════
-   INIT
-══════════════════════════════════════════════ */
-loadS(); renderHome(); show('home');
+/* ─── RESULT ─── */
+function showResult(game,score,total,xpEarned,replayFn){
+  const pct=Math.round(score/total*100);
+  const emoji=pct>=80?'🏆':pct>=50?'👍':'💪';
+  document.getElementById('res-emoji').textContent=emoji;
+  document.getElementById('res-title').textContent=pct>=80?'Mükemmel!':pct>=50?'İyi iş!':'Tekrar dene!';
+  document.getElementById('res-sub').textContent=game+' — '+score+'/'+total+' doğru';
+  document.getElementById('res-xp').textContent='+'+xpEarned;
+  addXP(xpEarned);
+  document.getElementById('res-replay').onclick=window[replayFn];
+  showScreen('result');
+}
+
+/* ─── INIT ─── */
+checkStreak();
+renderDomainCards();
+updateHomeStats();
+showScreen('home');
 </script>
 </body>
 </html>
