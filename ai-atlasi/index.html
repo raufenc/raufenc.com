@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yapay Zekâ Araç Atlası — Rauf Enç</title>
+  <meta name="description" content="Gençler için üretken yapay zekâ araçları atlası. Resim, video, ses, sunum, ders çalışma, web sitesi ve otomasyon araçları — artıları, eksileri, fiyatları ve kayıt linkleriyle.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/lib/design-system/animations.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="/lib/design-system/theme.js" defer></script>
+  <script src="/nav.js" defer></script>
+</head>
+<body>
+
+  <!-- NAV (nav.js tarafından oluşturulur) -->
+  <div id="nav-placeholder"></div>
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="hero" id="top">
+      <div class="hero-bg">
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+        <div class="hero-glow hero-glow-3"></div>
+      </div>
+      <div class="wrap hero-inner">
+        <div class="hero-kicker">Rauf Enç Lab — Atölye Kaynağı</div>
+        <h1 class="hero-title">
+          Üretken Yapay Zekâ<br>
+          <span class="hero-accent">Araç Atlası</span>
+        </h1>
+        <p class="hero-desc">
+          Resim, video, ses, sunum, ders çalışma, web sitesi ve otomasyon.<br>
+          Her araç artıları, eksileri, fiyatı ve kayıt linki ile.
+        </p>
+        <div class="hero-stats" id="heroStats"></div>
+        <div class="hero-actions">
+          <a href="#katalog" class="btn btn-accent">Araçları Keşfet</a>
+          <a href="#atolye" class="btn btn-ghost">Atölye Akışı</a>
+          <a href="raufenc_yapay_zeka_araclari_kitabi.xlsx" download class="btn btn-ghost">Excel'i İndir</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── KATEGORİLER ── -->
+    <section class="section" id="kategoriler">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Kategoriler</div>
+          <h2 class="section-title">Ne yapmak istiyorsun?</h2>
+          <p class="section-desc">Bir kategori seç, o alana özel araçları gör.</p>
+        </div>
+        <div class="cat-grid" id="catGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── ARAÇ KATALOĞU ── -->
+    <section class="section alt-section" id="katalog">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Katalog</div>
+          <h2 class="section-title">Tüm Araçlar</h2>
+        </div>
+
+        <div class="toolbar" id="toolbar">
+          <label class="search-field">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input type="search" id="searchInput" placeholder="Araç adı, kategori, kullanım..." autocomplete="off">
+          </label>
+
+          <select id="sortSelect" class="sort-select">
+            <option value="value-desc">Değer Puanı ↓</option>
+            <option value="fp-desc">Fiyat/Performans ↓</option>
+            <option value="price-asc">Fiyat ↑</option>
+            <option value="price-desc">Fiyat ↓</option>
+            <option value="name-asc">A → Z</option>
+          </select>
+
+          <label class="toggle-label">
+            <input type="checkbox" id="freeToggle">
+            <span class="toggle-pill"></span>
+            <span class="toggle-text">Sadece ücretsiz</span>
+          </label>
+        </div>
+
+        <div class="cat-chips" id="catChips"></div>
+        <div class="results-info" id="resultsInfo"></div>
+        <div class="cards-grid" id="toolGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── BAŞLANGIÇ SETLERİ ── -->
+    <section class="section" id="setler">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Hızlı Başlangıç</div>
+          <h2 class="section-title">İlk denenecek setler</h2>
+          <p class="section-desc">Göreve göre en işlevsel 3 araçlık kombinasyonlar.</p>
+        </div>
+        <div class="stacks-grid" id="stacksGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── ATÖLYE AKIŞI ── -->
+    <section class="section alt-section" id="atolye">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Atölye Taslağı</div>
+          <h2 class="section-title">Modüler Atölye Akışı</h2>
+          <p class="section-desc">Katılımcıların sırasıyla deneyimleyeceği modüller.</p>
+        </div>
+        <div class="timeline" id="timeline"></div>
+      </div>
+    </section>
+
+    <!-- ── KAYNAKLAR ── -->
+    <section class="section" id="kaynaklar">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Güvenilir Kaynaklar</div>
+          <h2 class="section-title">Öğrenme & Sorumlu Kullanım</h2>
+          <p class="section-desc">UNESCO, Common Sense Media ve platform rehberleri.</p>
+        </div>
+        <div class="resource-grid" id="resourceGrid"></div>
+      </div>
+    </section>
+
+    <!-- ── YAYINLAMA ── -->
+    <section class="section alt-section" id="yayinlama">
+      <div class="wrap">
+        <div class="section-header">
+          <div class="section-label">Yayınlama</div>
+          <h2 class="section-title">Canlı linke en hızlı yol</h2>
+          <p class="section-desc">Build gerektirmeyen, dakikalar içinde canlı olan platformlar.</p>
+        </div>
+        <div class="deploy-grid" id="deployGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <span class="brand-r">rauf</span><span class="brand-enc">enç</span>
+        <span class="footer-sep">/</span>
+        <span class="footer-sub">Yapay Zekâ Araç Atlası</span>
+      </div>
+      <div class="footer-meta">Son güncelleme: 18 Mart 2026</div>
+      <div class="footer-links">
+        <a href="raufenc_yapay_zeka_araclari_kitabi.xlsx" download>Excel Kitabı</a>
+        <a href="/">raufenc.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
