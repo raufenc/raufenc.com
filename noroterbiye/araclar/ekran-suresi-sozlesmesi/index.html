@@ -124,7 +124,7 @@
         </div>
         <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveContract()">💾 Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('contract-card','Ekran-Sözleşmesi.pdf')">📄 PDF İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Ekran-Sözleşmesi.pdf')">📄 PDF İndir</button>
           <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="editContract()">✏️ Düzenle</button>
         </div>
       </div>
@@ -213,6 +213,47 @@
     }
 
     renderRules();
+
+    function buildPrintHTML() {
+      const genc = document.getElementById('f-genc').value.trim() || 'Genç';
+      const ebeveyn = document.getElementById('f-ebeveyn').value.trim() || 'Ebeveyn';
+      const today = new Date().toLocaleDateString('tr-TR');
+      let html = '<div style="max-width:520px;margin:0 auto;border:2px solid #06b6d4;border-radius:16px;padding:40px 32px">';
+      html += '<p style="text-align:center;font-size:10px;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">NöroTerbiye Ekran Süresi Sözleşmesi</p>';
+      html += '<h2 style="text-align:center;font-size:20px;margin-bottom:24px">Ekran Anlaşması</h2>';
+      const rows = [
+        ['Tarih', today, ''],
+        ['Hafta içi limit', document.getElementById('f-hafta-ici').value, ''],
+        ['Hafta sonu limit', document.getElementById('f-hafta-sonu').value, ''],
+        ['Ekrandan uzak saatler', document.getElementById('f-uzak').value || '—', ''],
+        ['Yasaklı', document.getElementById('f-yasak').value || '—', 'color:#ef4444;'],
+        ['İzin verilen', document.getElementById('f-izin').value || '—', 'color:#22c55e;'],
+      ];
+      rows.forEach(([label, value, style]) => {
+        html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px">';
+        html += '<span style="color:#666">' + label + '</span>';
+        html += '<span style="font-weight:600;' + style + '">' + value + '</span></div>';
+      });
+      if (rules.length > 0) {
+        html += '<div style="margin:16px 0"><p style="font-size:13px;font-weight:700;margin-bottom:8px">Kurallar:</p>';
+        html += '<ul style="padding-left:20px;font-size:12px;line-height:1.8">' + rules.map(r => '<li>' + r + '</li>').join('') + '</ul></div>';
+      }
+      const istisna = document.getElementById('f-istisna').value;
+      if (istisna) {
+        html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">İstisnalar</span><span style="font-size:12px">' + istisna + '</span></div>';
+      }
+      const ceza = document.getElementById('f-ceza').value || '—';
+      const odul = document.getElementById('f-odul').value || '—';
+      html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">Kurala uymazsa</span><span style="font-weight:600;color:#ef4444">' + ceza + '</span></div>';
+      html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">Kurala uyarsa</span><span style="font-weight:600;color:#22c55e">' + odul + '</span></div>';
+      html += '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px"><span style="color:#666">Kontrol</span><span style="font-weight:600">' + document.getElementById('f-kontrol').value + '</span></div>';
+      html += '<div style="display:flex;gap:24px;margin-top:32px;padding-top:24px;border-top:1px dashed #ccc">';
+      html += '<div style="flex:1;text-align:center"><div style="border-bottom:1px solid #333;min-height:30px;margin-bottom:6px"></div><div style="font-size:11px;color:#999">' + genc + '</div></div>';
+      html += '<div style="flex:1;text-align:center"><div style="border-bottom:1px solid #333;min-height:30px;margin-bottom:6px"></div><div style="font-size:11px;color:#999">' + ebeveyn + '</div></div>';
+      html += '</div></div>';
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

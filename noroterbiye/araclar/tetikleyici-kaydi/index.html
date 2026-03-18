@@ -69,7 +69,7 @@
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary" onclick="saveRecord()">Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('calendar','Tetikleyici-Kaydı.pdf')">📄 PDF İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Tetikleyici-Kaydı.pdf')">📄 PDF İndir</button>
         </div>
       </div>
 
@@ -213,6 +213,34 @@
     }
 
     renderCalendar();
+
+    function buildPrintHTML() {
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Tetikleyici Kaydı</h1>';
+      if (records.length === 0) return html + '<p>Henüz kayıt yok.</p>';
+      html += '<p style="font-size:12px;color:#888;margin-bottom:16px">Toplam ' + records.length + ' kayıt</p>';
+      html += '<table style="width:100%;border-collapse:collapse">';
+      html += '<tr><th style="border:1px solid #ddd;padding:8px;font-size:11px">Tarih</th><th style="border:1px solid #ddd;padding:8px;font-size:11px">Saat</th><th style="border:1px solid #ddd;padding:8px;font-size:11px">Ortam</th><th style="border:1px solid #ddd;padding:8px;font-size:11px">Tetikleyici</th><th style="border:1px solid #ddd;padding:8px;font-size:11px">Duygular</th><th style="border:1px solid #ddd;padding:8px;font-size:11px">Tepki</th></tr>';
+      [...records].reverse().slice(0, 30).forEach(r => {
+        html += '<tr>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + r.tarih + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + r.saat + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + r.ortam + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + r.olay + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + r.duygular.join(', ') + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:11px">' + (r.tepki || '') + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+      // Top feelings summary
+      const feelCount = {};
+      records.forEach(r => r.duygular.forEach(d => { feelCount[d] = (feelCount[d] || 0) + 1; }));
+      const topFeels = Object.entries(feelCount).sort((a,b) => b[1] - a[1]).slice(0, 5);
+      if (topFeels.length > 0) {
+        html += '<p style="font-size:12px;color:#888;margin-top:12px">En sık duygular: ' + topFeels.map(([f,c]) => f + ' (' + c + ')').join(', ') + '</p>';
+      }
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

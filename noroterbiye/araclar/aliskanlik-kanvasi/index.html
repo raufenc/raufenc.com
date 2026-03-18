@@ -65,7 +65,7 @@
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveCanvas()">💾 Kaydet</button>
-        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('canvas-grid','Alışkanlık-Kanvası.pdf')">📄 PDF İndir</button>
+        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Alışkanlık-Kanvası.pdf')">📄 PDF İndir</button>
         <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="clearCanvas()">Temizle</button>
       </div>
 
@@ -182,6 +182,32 @@
 
     renderCols();
     renderSaved();
+
+    function buildPrintHTML() {
+      const colInfo = [
+        { id: 'col-tetik', title: 'Tetikleyici', color: '#ef4444' },
+        { id: 'col-arzu', title: 'Temel Arzu', color: '#f59e0b' },
+        { id: 'col-yanlis', title: 'Yanlış Davranış', color: '#f43f5e' },
+        { id: 'col-alt', title: 'Alternatif', color: '#22c55e' },
+      ];
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Alışkanlık Dönüştürme Kanvası</h1>';
+      html += '<table style="width:100%;border-collapse:collapse">';
+      html += '<tr>' + colInfo.map(c =>
+        '<th style="border:1px solid #ddd;padding:10px;text-align:center;font-size:13px;border-top:3px solid ' + c.color + '">' + c.title + '</th>'
+      ).join('') + '</tr>';
+      const maxRows = Math.max(...colInfo.map(c => cols[c.id].length), 1);
+      for (let i = 0; i < maxRows; i++) {
+        html += '<tr>' + colInfo.map(c => {
+          const item = cols[c.id][i] || '';
+          return '<td style="border:1px solid #ddd;padding:8px;font-size:12px;vertical-align:top">' + item + '</td>';
+        }).join('') + '</tr>';
+      }
+      html += '</table>';
+      const total = Object.values(cols).flat().length;
+      html += '<p style="font-size:11px;color:#888;margin-top:12px">Toplam ' + total + ' madde</p>';
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

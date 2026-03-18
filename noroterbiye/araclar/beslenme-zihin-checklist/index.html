@@ -57,7 +57,7 @@
       <!-- Save & History -->
       <div style="margin-top:24px;display:flex;gap:10px;flex-wrap:wrap">
         <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveDay()">💾 Günü Kaydet</button>
-        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('checklist','Beslenme-Checklist.pdf')">📄 PDF İndir</button>
+        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Beslenme-Checklist.pdf')">📄 PDF İndir</button>
         <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="resetDay()">Sıfırla</button>
       </div>
 
@@ -190,6 +190,37 @@
 
     renderChecklist();
     renderHistory();
+
+    function buildPrintHTML() {
+      const total = items.length;
+      const done = items.filter(i => todayData[i.id]).length;
+      const pct = Math.round((done / total) * 100);
+      let html = '<h1 style="font-size:20px;margin-bottom:4px">NöroTerbiye — Beslenme-Zihin Checklist</h1>';
+      html += '<p style="font-size:12px;color:#888;margin-bottom:16px">' + today + ' — ' + done + '/' + total + ' tamamlandı (%' + pct + ')</p>';
+      let currentCat = '';
+      items.forEach(item => {
+        if (item.cat !== currentCat) {
+          currentCat = item.cat;
+          html += '<h3 style="font-size:13px;font-weight:700;margin:16px 0 8px">' + currentCat + '</h3>';
+        }
+        const checked = todayData[item.id];
+        html += '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid #eee;' + (checked ? 'opacity:0.6;' : '') + '">';
+        html += '<span style="font-size:14px">' + (checked ? '✅' : '⬜') + '</span>';
+        html += '<span style="font-size:12px;font-weight:600">' + item.title + '</span>';
+        html += '<span style="font-size:10px;color:#888;margin-left:auto">' + item.desc + '</span>';
+        html += '</div>';
+      });
+      if (history.length > 0) {
+        html += '<h3 style="font-size:13px;font-weight:700;margin:20px 0 8px">Son 7 Gün</h3>';
+        const last7 = [...history].sort((a,b) => b.ts - a.ts).slice(0, 7);
+        last7.forEach(h => {
+          const color = h.pct >= 80 ? '#22c55e' : h.pct >= 50 ? '#f59e0b' : '#ef4444';
+          html += '<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:12px"><span>' + h.tarih + '</span><span style="font-weight:700;color:' + color + '">' + h.done + '/' + h.total + ' (%' + h.pct + ')</span></div>';
+        });
+      }
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

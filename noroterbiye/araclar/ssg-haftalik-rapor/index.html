@@ -45,7 +45,7 @@
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
         <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveWeek()">💾 Haftayı Kaydet</button>
-        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('week-grid','SSG-Haftalık-Rapor.pdf')">📄 PDF İndir</button>
+        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'SSG-Haftalık-Rapor.pdf')">📄 PDF İndir</button>
         <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="resetWeek()">Sıfırla</button>
       </div>
 
@@ -215,6 +215,37 @@
     renderChart();
     renderAverages();
     renderHistory();
+
+    function buildPrintHTML() {
+      const dayNames = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+      const catColors = { sehvet: '#f97316', sohret: '#a855f7', gadab: '#ef4444' };
+      const catLabels = { sehvet: 'Şehvet', sohret: 'Şöhret', gadab: 'Gadab' };
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — ŞŞG Haftalık Rapor</h1>';
+      html += '<table style="width:100%;border-collapse:collapse;margin-bottom:20px">';
+      html += '<tr><th style="border:1px solid #ddd;padding:8px;font-size:11px"></th>' + dayNames.map(d => '<th style="border:1px solid #ddd;padding:8px;font-size:11px">' + d + '</th>').join('') + '<th style="border:1px solid #ddd;padding:8px;font-size:11px">Ort.</th></tr>';
+      cats.forEach(cat => {
+        const vals = weekData[cat.key];
+        const filled = vals.filter(v => v > 0);
+        const avg = filled.length > 0 ? (filled.reduce((a,b) => a+b, 0) / filled.length).toFixed(1) : '—';
+        html += '<tr>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;font-weight:600;color:' + catColors[cat.key] + '">' + catLabels[cat.key] + '</td>';
+        vals.forEach(v => {
+          html += '<td style="border:1px solid #ddd;padding:6px;font-size:12px;text-align:center">' + (v || '—') + '</td>';
+        });
+        html += '<td style="border:1px solid #ddd;padding:6px;font-size:12px;text-align:center;font-weight:700;color:' + catColors[cat.key] + '">' + avg + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+      // Overall average
+      const allVals = cats.flatMap(c => weekData[c.key].filter(v => v > 0));
+      if (allVals.length > 0) {
+        const overallAvg = (allVals.reduce((a,b) => a+b, 0) / allVals.length).toFixed(1);
+        const color = overallAvg <= 2 ? '#22c55e' : overallAvg <= 3 ? '#f59e0b' : '#ef4444';
+        html += '<p style="font-size:14px;text-align:center;margin-top:16px">Genel Ortalama: <span style="font-weight:800;color:' + color + ';font-size:20px">' + overallAvg + '</span>/5</p>';
+      }
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

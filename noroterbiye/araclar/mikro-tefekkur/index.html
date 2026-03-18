@@ -51,7 +51,7 @@
         </div>
         <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary" onclick="saveReflection()">💾 Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('history-list','Tefekkür-Geçmişi.pdf')">📄 PDF İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Tefekkür-Geçmişi.pdf')">📄 PDF İndir</button>
         </div>
       </div>
 
@@ -186,6 +186,27 @@
     // Init
     newPrompt();
     renderHistory();
+
+    function buildPrintHTML() {
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Mikro Tefekkür Geçmişi</h1>';
+      if (reflections.length === 0) return html + '<p>Henüz kayıt yok.</p>';
+      html += '<p style="font-size:12px;color:#888;margin-bottom:16px">Toplam ' + reflections.length + ' tefekkür</p>';
+      const sorted = [...reflections].reverse();
+      sorted.forEach(r => {
+        html += '<div style="border:1px solid #ddd;border-radius:8px;padding:14px 18px;margin-bottom:10px">';
+        html += '<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
+        html += '<span style="font-size:11px;color:#888">' + r.tarih + ' ' + r.saat + '</span>';
+        html += '<span style="font-size:10px;color:#6366f1;font-weight:600">' + r.cat + '</span>';
+        html += '</div>';
+        if (r.prompt) {
+          html += '<p style="font-size:11px;color:#666;font-style:italic;margin-bottom:6px">"' + r.prompt + '"</p>';
+        }
+        html += '<p style="font-size:12px;line-height:1.6">' + r.text + '</p>';
+        html += '</div>';
+      });
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

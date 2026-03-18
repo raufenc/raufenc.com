@@ -127,59 +127,66 @@ const NT = {
     } catch(e) { return fallback; }
   },
 
-  // PDF indirme — kayıtlı veriyi PDF olarak indir
+  // PDF indirme — print-friendly HTML oluşturup PDF'e çevir
   _pdfLoading: false,
-  downloadPDF(elementId, filename) {
-    const el = document.getElementById(elementId);
-    if (!el || this._pdfLoading) return;
+  downloadPDF(contentOrId, filename) {
+    if (this._pdfLoading) return;
     const fn = filename || document.title.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ\s-]/g, '') + '.pdf';
+
+    // contentOrId: string (element ID) veya function (HTML döndüren callback)
+    let html;
+    if (typeof contentOrId === 'function') {
+      html = contentOrId();
+    } else {
+      // Basit fallback: elementin textContent'ini düz metin olarak al
+      const el = document.getElementById(contentOrId);
+      if (!el) return;
+      html = el.innerText;
+    }
+
+    // Print-ready wrapper
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'font-family:system-ui,-apple-system,sans-serif;color:#1a1a2e;background:#fff;padding:32px;line-height:1.6';
+    wrapper.innerHTML = `
+      <div style="text-align:center;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #e0e0e0">
+        <div style="font-size:1.5rem;font-weight:800;margin-bottom:4px">${document.title.replace(' — NöroTerbiye','')}</div>
+        <div style="font-size:0.8rem;color:#888">NöroTerbiye · ${new Date().toLocaleDateString('tr-TR')}</div>
+      </div>
+      ${typeof contentOrId === 'function' ? html : `<pre style="white-space:pre-wrap;font-family:inherit;font-size:0.9rem">${html}</pre>`}
+      <div style="margin-top:32px;padding-top:12px;border-top:1px solid #e0e0e0;text-align:center;font-size:0.7rem;color:#aaa">
+        raufenc.com/noroterbiye · Bu belge teşhis koymaz, farkındalık oluşturur.
+      </div>
+    `;
+    document.body.appendChild(wrapper);
+
+    const generate = () => {
+      this.toast('PDF hazırlanıyor...');
+      html2pdf().set({
+        margin: [10, 10, 10, 10], filename: fn,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      }).from(wrapper).save().then(() => {
+        wrapper.remove();
+        this.toast('PDF indirildi!');
+      }).catch(() => {
+        wrapper.remove();
+        window.print();
+      });
+    };
 
     if (typeof html2pdf === 'undefined') {
       this._pdfLoading = true;
       this.toast('PDF kütüphanesi yükleniyor...');
       const s = document.createElement('script');
       s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js';
-      s.onload = () => { this._pdfLoading = false; this._generatePDF(el, fn); };
-      s.onerror = () => { this._pdfLoading = false; this.toast('PDF yüklenemedi, yazdırma açılıyor...'); window.print(); };
+      s.onload = () => { this._pdfLoading = false; generate(); };
+      s.onerror = () => { this._pdfLoading = false; wrapper.remove(); this.toast('PDF yüklenemedi'); window.print(); };
       document.head.appendChild(s);
     } else {
-      this._generatePDF(el, fn);
+      generate();
     }
-  },
-
-  _generatePDF(el, filename) {
-    this.toast('PDF hazırlanıyor...');
-    const opt = {
-      margin: [10, 10, 10, 10],
-      filename: filename,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    };
-
-    // Dark mode'da tüm elementleri geçici olarak light yapma
-    const origStyles = new Map();
-    const forceLight = (node) => {
-      origStyles.set(node, node.style.cssText);
-      node.style.backgroundColor = '';
-      node.style.color = '#1a1a2e';
-    };
-    origStyles.set(el, el.style.cssText);
-    el.style.cssText = 'background:#fff;color:#1a1a2e;padding:24px;border-radius:0';
-    el.querySelectorAll('*').forEach(forceLight);
-
-    const restore = () => {
-      origStyles.forEach((css, node) => { node.style.cssText = css; });
-    };
-
-    html2pdf().set(opt).from(el).save().then(() => {
-      restore();
-      this.toast('PDF indirildi!');
-    }).catch(() => {
-      restore();
-      window.print();
-    });
   },
 
   // Sonuç hesaplama (test puanları için)

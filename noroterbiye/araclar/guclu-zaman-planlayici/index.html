@@ -49,7 +49,7 @@
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px">
         <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="savePlan()">💾 Kaydet</button>
-        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('time-grid','Güçlü-Zaman-Planı.pdf')">📄 PDF İndir</button>
+        <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Güçlü-Zaman-Planı.pdf')">📄 PDF İndir</button>
         <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="resetGrid()">Sıfırla</button>
       </div>
 
@@ -135,6 +135,28 @@
     }
 
     renderGrid();
+
+    function buildPrintHTML() {
+      const levelColors = { high: '#22c55e', medium: '#f59e0b', low: '#ef4444' };
+      const levelNames = { high: 'Yüksek', medium: 'Orta', low: 'Düşük', '': '—' };
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Güçlü Zaman Planı</h1>';
+      html += '<table style="width:100%;border-collapse:collapse">';
+      html += '<tr><th style="border:1px solid #ddd;padding:8px;font-size:12px">Saat</th><th style="border:1px solid #ddd;padding:8px;font-size:12px">İrade</th><th style="border:1px solid #ddd;padding:8px;font-size:12px">Görev</th><th style="border:1px solid #ddd;padding:8px;font-size:12px">Not</th></tr>';
+      gridData.forEach(row => {
+        const color = levelColors[row.level] || '#888';
+        html += '<tr>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;font-weight:600">' + row.hour + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;text-align:center;color:' + color + ';font-weight:600">' + levelNames[row.level] + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px">' + (row.task || '') + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:11px;color:#666">' + (row.note || '') + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+      const filled = gridData.filter(r => r.level).length;
+      html += '<p style="font-size:11px;color:#888;margin-top:12px">' + filled + '/' + gridData.length + ' saat planlandı</p>';
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>

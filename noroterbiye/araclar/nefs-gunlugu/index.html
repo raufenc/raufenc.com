@@ -63,7 +63,7 @@
 
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary" onclick="saveEntry()">Günü Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF('weekly-chart','Nefs-Günlüğü.pdf')">📄 PDF İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Nefs-Günlüğü.pdf')">📄 PDF İndir</button>
         </div>
       </div>
 
@@ -189,6 +189,31 @@
     renderAllRatings();
     renderChart();
     renderHistory();
+
+    function buildPrintHTML() {
+      let html = '<h1 style="font-size:20px;margin-bottom:16px">NöroTerbiye — Nefs Günlüğü</h1>';
+      if (entries.length === 0) return html + '<p>Henüz kayıt yok.</p>';
+      const last7 = entries.slice(-7);
+      html += '<h3 style="font-size:14px;margin-bottom:10px">Son ' + last7.length + ' Gün</h3>';
+      html += '<table style="width:100%;border-collapse:collapse;margin-bottom:20px">';
+      html += '<tr><th style="border:1px solid #ddd;padding:8px;font-size:12px">Tarih</th><th style="border:1px solid #ddd;padding:8px;font-size:12px;color:#f97316">Şehvet</th><th style="border:1px solid #ddd;padding:8px;font-size:12px;color:#a855f7">Şöhret</th><th style="border:1px solid #ddd;padding:8px;font-size:12px;color:#ef4444">Gadab</th><th style="border:1px solid #ddd;padding:8px;font-size:12px">Not</th></tr>';
+      last7.forEach(e => {
+        html += '<tr>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;font-weight:600">' + e.tarih + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;text-align:center">' + e.sehvet + '/5</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;text-align:center">' + e.sohret + '/5</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;text-align:center">' + e.gadab + '/5</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:11px;color:#666">' + (e.not || '') + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+      const avgS = (last7.reduce((a,e) => a+e.sehvet, 0) / last7.length).toFixed(1);
+      const avgSo = (last7.reduce((a,e) => a+e.sohret, 0) / last7.length).toFixed(1);
+      const avgG = (last7.reduce((a,e) => a+e.gadab, 0) / last7.length).toFixed(1);
+      html += '<p style="font-size:12px;color:#888">Ortalamalar — Şehvet: ' + avgS + ' | Şöhret: ' + avgSo + ' | Gadab: ' + avgG + '</p>';
+      return html;
+    }
+
     NT.renderNav();
     NT.renderFooter();
   </script>
