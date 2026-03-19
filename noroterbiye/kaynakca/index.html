@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaynakça — NöroTerbiye</title>
+  <meta name="description" content="NöroTerbiye kitabında atıf yapılan 96 tekil kaynağın tam listesi. Dipnot numarası, kitap sayfası ve erişim linkleriyle birlikte.">
+  <meta property="og:title" content="Kaynakça — NöroTerbiye">
+  <meta property="og:description" content="NöroTerbiye kitabında atıf yapılan kaynakların tam listesi.">
+  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .k-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+    .k-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 20px;text-align:center;flex:1;min-width:100px}
+    .k-stat-num{font-size:1.6rem;font-weight:800;color:var(--nt-primary);line-height:1}
+    .k-stat-label{font-size:0.7rem;color:var(--text-secondary);margin-top:2px}
+
+    .k-view-toggle{display:flex;gap:4px;margin-bottom:20px}
+    .k-view-btn{padding:7px 16px;border-radius:var(--radius-full);background:var(--surface);border:1px solid var(--border);color:var(--text-secondary);font-size:0.8rem;font-weight:500;cursor:pointer;font-family:var(--font-sans);transition:all var(--transition-fast)}
+    .k-view-btn:hover{border-color:var(--border-hover);color:var(--text)}
+    .k-view-btn.active{background:var(--nt-primary);color:#fff;border-color:var(--nt-primary)}
+
+    .k-sort{display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+    .k-sort-label{font-size:0.75rem;color:var(--muted);font-weight:500}
+
+    .k-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:12px;transition:border-color var(--transition-fast),box-shadow var(--transition-fast)}
+    .k-item:hover{border-color:var(--border-hover);box-shadow:var(--shadow-sm)}
+    .k-item-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+    .k-fn-badge{background:var(--nt-primary-soft);color:var(--nt-primary);font-size:0.72rem;font-weight:700;padding:3px 10px;border-radius:var(--radius-full);white-space:nowrap}
+    .k-page-badge{background:var(--surface2);color:var(--text-secondary);font-size:0.72rem;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);white-space:nowrap}
+    .k-type-badge{font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:var(--radius-full);white-space:nowrap;border:none}
+    .k-type-makale{background:var(--nt-cyan-soft);color:var(--nt-cyan)}
+    .k-type-kitap{background:var(--nt-purple-soft);color:var(--nt-purple)}
+    .k-type-hadis{background:var(--nt-amber-soft);color:var(--nt-amber)}
+    .k-type-tez{background:var(--nt-green-soft);color:var(--nt-green)}
+    .k-type-bildiri{background:var(--nt-orange-soft);color:var(--nt-orange)}
+    .k-type-haber{background:var(--nt-red-soft);color:var(--nt-red)}
+
+    .k-kunye{font-size:0.9rem;line-height:1.6;color:var(--text);font-weight:500;margin-bottom:8px}
+    .k-ozet{font-size:0.82rem;color:var(--text-secondary);line-height:1.5;margin-bottom:10px}
+    .k-baglam{font-size:0.8rem;color:var(--muted);line-height:1.5;padding:10px 14px;background:var(--surface2);border-radius:var(--radius-md);border-left:3px solid var(--border);margin-bottom:10px;font-style:italic}
+    .k-baglam-toggle{font-size:0.75rem;color:var(--nt-primary);cursor:pointer;background:none;border:none;font-family:var(--font-sans);font-weight:500;padding:0;margin-bottom:8px}
+    .k-baglam-toggle:hover{text-decoration:underline}
+    .k-links{display:flex;gap:8px;flex-wrap:wrap}
+    .k-link{font-size:0.78rem;color:var(--nt-primary);text-decoration:none;padding:4px 12px;border-radius:var(--radius-full);border:1px solid var(--nt-primary-soft);transition:all var(--transition-fast);display:inline-flex;align-items:center;gap:4px}
+    .k-link:hover{background:var(--nt-primary-soft);border-color:var(--nt-primary)}
+    .k-link-alt{color:var(--text-secondary);border-color:var(--border)}
+    .k-link-alt:hover{background:var(--surface2);border-color:var(--border-hover)}
+
+    .k-repeat-note{font-size:0.7rem;color:var(--muted);font-style:italic;margin-top:4px}
+    .k-empty{text-align:center;padding:48px 20px;color:var(--muted)}
+    .k-count{font-size:0.8rem;color:var(--muted);margin-bottom:16px}
+
+    .k-aciklama{border-left:3px solid var(--nt-amber)}
+    .k-aciklama .k-kunye{font-style:italic;font-weight:400;color:var(--text-secondary)}
+
+    @media(max-width:640px){
+      .k-item{padding:16px}
+      .k-item-header{gap:6px}
+      .k-stats{gap:8px}
+      .k-stat{padding:10px 14px;min-width:80px}
+      .k-stat-num{font-size:1.3rem}
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <section class="nt-section" style="padding-top:20px">
+    <div class="nt-wrap">
+      <p class="nt-label nt-fade-in" style="margin-bottom:8px">NöroTerbiye Kitabı</p>
+      <h1 class="nt-section-title nt-fade-in" style="font-size:1.8rem;margin-bottom:8px">Kaynakça</h1>
+      <p class="nt-fade-in" style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:28px;max-width:640px;line-height:1.6">
+        Kitaptaki 94 dipnotta atıf yapılan tüm kaynaklar; dipnot numarası, kitap sayfası ve erişim bağlantılarıyla birlikte.
+      </p>
+
+      <div class="k-stats nt-fade-in" id="stats"></div>
+
+      <!-- Arama -->
+      <div class="nt-search nt-fade-in">
+        <span class="nt-search-icon">&#128269;</span>
+        <input type="text" id="search" placeholder="Yazar, başlık, konu veya sayfa numarası ara...">
+      </div>
+
+      <!-- Görünüm + Filtreler -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:12px" class="nt-fade-in">
+        <div class="k-view-toggle" id="viewToggle">
+          <button class="k-view-btn active" data-view="dipnot">Dipnot Sırası</button>
+          <button class="k-view-btn" data-view="tekil">Tekil Kaynaklar</button>
+        </div>
+        <div class="k-sort">
+          <span class="k-sort-label">Sıralama:</span>
+          <div id="sortToggle" class="k-view-toggle">
+            <button class="k-view-btn active" data-sort="fn">Dipnot No</button>
+            <button class="k-view-btn" data-sort="page">Sayfa</button>
+            <button class="k-view-btn" data-sort="type">Tür</button>
+            <button class="k-view-btn" data-sort="author">Yazar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tür Filtreleri -->
+      <div class="nt-filters nt-fade-in" id="typeFilters"></div>
+
+      <!-- Sonuç sayısı -->
+      <div class="k-count" id="resultCount"></div>
+
+      <!-- Kaynak listesi -->
+      <div id="list"></div>
+    </div>
+  </section>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+  NT.renderNav();
+  NT.renderFooter();
+
+  (async function(){
+    const res = await fetch('/noroterbiye/data/kaynakca.json');
+    const data = await res.json();
+    const {sources, tekil, aciklama} = data;
+
+    // Stats
+    const types = {};
+    tekil.forEach(t => { types[t.type] = (types[t.type]||0)+1; });
+    document.getElementById('stats').innerHTML = `
+      <div class="k-stat"><div class="k-stat-num">94</div><div class="k-stat-label">Dipnot</div></div>
+      <div class="k-stat"><div class="k-stat-num">${tekil.length}</div><div class="k-stat-label">Tekil Kaynak</div></div>
+      <div class="k-stat"><div class="k-stat-num">${types['Makale']||0}</div><div class="k-stat-label">Makale</div></div>
+      <div class="k-stat"><div class="k-stat-num">${types['Kitap']||0}</div><div class="k-stat-label">Kitap</div></div>
+      <div class="k-stat"><div class="k-stat-num">${types['Hadis/Klasik kaynak']||0}</div><div class="k-stat-label">Hadis/Klasik</div></div>
+    `;
+
+    // Type filters
+    const allTypes = ['Tümü','Makale','Kitap','Hadis/Klasik kaynak','Tez/Monografi','Bildiri/Kongre','Haber/Kurum sayfası'];
+    document.getElementById('typeFilters').innerHTML = allTypes.map(t =>
+      `<button class="nt-filter-btn${t==='Tümü'?' active':''}" data-type="${t}">${t==='Tümü'?'Tümü':t}</button>`
+    ).join('');
+
+    let currentView = 'dipnot';
+    let currentSort = 'fn';
+    let currentType = 'Tümü';
+    let searchQuery = '';
+
+    function typeClass(type){
+      const map = {'Makale':'makale','Kitap':'kitap','Hadis/Klasik kaynak':'hadis','Tez/Monografi':'tez','Bildiri/Kongre':'bildiri','Haber/Kurum sayfası':'haber'};
+      return map[type]||'makale';
+    }
+
+    function escHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function highlightMatch(text, q){
+      if(!q||!text) return escHtml(text);
+      const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      return escHtml(text).replace(new RegExp(`(${escaped})`,'gi'),'<mark style="background:var(--nt-amber-soft);color:var(--nt-amber);padding:0 2px;border-radius:2px">$1</mark>');
+    }
+
+    function renderDipnotView(items){
+      // merge aciklama dipnotları
+      const all = [...items];
+      if(currentType==='Tümü' && !searchQuery){
+        aciklama.forEach(a => {
+          all.push({fn:a.fn, page:a.page, type:'Açıklama', kunye:a.metin, ozet:'', baglam:a.baglam, link:'', altLink:'', isAciklama:true});
+        });
+      }
+
+      // sort
+      all.sort((a,b) => {
+        if(currentSort==='fn') return a.fn-b.fn;
+        if(currentSort==='page') return a.page-b.page;
+        if(currentSort==='type') return a.type.localeCompare(b.type,'tr');
+        if(currentSort==='author') return a.kunye.localeCompare(b.kunye,'tr');
+        return 0;
+      });
+
+      return all.map(s => {
+        const isAciklama = s.isAciklama;
+        const cls = isAciklama ? 'k-item k-aciklama' : 'k-item';
+        let html = `<div class="${cls}">`;
+        html += `<div class="k-item-header">`;
+        html += `<span class="k-fn-badge">Dipnot ${s.fn}</span>`;
+        html += `<span class="k-page-badge">s. ${s.page}</span>`;
+        if(!isAciklama) html += `<span class="k-type-badge k-type-${typeClass(s.type)}">${s.type}</span>`;
+        else html += `<span class="k-type-badge" style="background:var(--nt-amber-soft);color:var(--nt-amber)">Yazarın Notu</span>`;
+        if(s.repeat) html += `<span class="k-type-badge" style="background:var(--surface2);color:var(--muted);font-style:italic">tekrar</span>`;
+        html += `</div>`;
+        html += `<div class="k-kunye">${highlightMatch(s.kunye, searchQuery)}</div>`;
+        if(s.ozet) html += `<div class="k-ozet">${highlightMatch(s.ozet, searchQuery)}</div>`;
+        if(s.baglam){
+          const id = 'bg-'+s.fn+'-'+(s.fnId||'a');
+          html += `<button class="k-baglam-toggle" onclick="var el=document.getElementById('${id}');el.style.display=el.style.display==='none'?'block':'none';this.textContent=el.style.display==='none'?'Kitaptaki bağlamı göster ▾':'Gizle ▴'">Kitaptaki bağlamı göster ▾</button>`;
+          html += `<div class="k-baglam" id="${id}" style="display:none">"…${highlightMatch(s.baglam, searchQuery)}…"</div>`;
+        }
+        if(s.link || s.altLink){
+          html += `<div class="k-links">`;
+          if(s.link) html += `<a href="${escHtml(s.link)}" target="_blank" rel="noopener" class="k-link">&#128279; ${s.linkType||'Kaynak'}</a>`;
+          if(s.altLink) html += `<a href="${escHtml(s.altLink)}" target="_blank" rel="noopener" class="k-link k-link-alt">&#128269; Alternatif</a>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+        return html;
+      }).join('');
+    }
+
+    function renderTekilView(items){
+      const list = items.slice();
+      list.sort((a,b) => {
+        if(currentSort==='fn') return a.srcId.localeCompare(b.srcId);
+        if(currentSort==='page') return (parseInt(a.sayfalar)||0) - (parseInt(b.sayfalar)||0);
+        if(currentSort==='type') return a.type.localeCompare(b.type,'tr');
+        if(currentSort==='author') return (a.yazar||'').localeCompare(b.yazar||'','tr');
+        return 0;
+      });
+
+      return list.map(t => {
+        let html = `<div class="k-item">`;
+        html += `<div class="k-item-header">`;
+        const fns = t.fnNo ? t.fnNo.split(',').map(n=>n.trim()) : [];
+        fns.forEach(fn => { html += `<span class="k-fn-badge">Dipnot ${fn}</span>`; });
+        if(t.sayfalar) html += `<span class="k-page-badge">s. ${t.sayfalar}</span>`;
+        html += `<span class="k-type-badge k-type-${typeClass(t.type)}">${t.type}</span>`;
+        if(t.tekrar > 1) html += `<span class="k-type-badge" style="background:var(--surface2);color:var(--muted)">${t.tekrar}x atıf</span>`;
+        html += `</div>`;
+        html += `<div class="k-kunye">${highlightMatch(t.kunye, searchQuery)}</div>`;
+        if(t.ozet) html += `<div class="k-ozet">${highlightMatch(t.ozet, searchQuery)}</div>`;
+        if(t.link || t.altLink){
+          html += `<div class="k-links">`;
+          if(t.link) html += `<a href="${escHtml(t.link)}" target="_blank" rel="noopener" class="k-link">&#128279; ${t.linkType||'Kaynak'}</a>`;
+          if(t.altLink) html += `<a href="${escHtml(t.altLink)}" target="_blank" rel="noopener" class="k-link k-link-alt">&#128269; Alternatif</a>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+        return html;
+      }).join('');
+    }
+
+    function render(){
+      const listEl = document.getElementById('list');
+      const countEl = document.getElementById('resultCount');
+      const q = searchQuery.toLowerCase();
+
+      if(currentView === 'dipnot'){
+        let filtered = sources;
+        if(currentType !== 'Tümü') filtered = filtered.filter(s => s.type === currentType);
+        if(q){
+          filtered = filtered.filter(s =>
+            s.kunye.toLowerCase().includes(q) ||
+            s.ozet.toLowerCase().includes(q) ||
+            s.baglam.toLowerCase().includes(q) ||
+            String(s.fn).includes(q) ||
+            String(s.page).includes(q) ||
+            s.type.toLowerCase().includes(q)
+          );
+        }
+        countEl.textContent = `${filtered.length} kaynak satırı gösteriliyor`;
+        const html = renderDipnotView(filtered);
+        listEl.innerHTML = html || '<div class="k-empty">Aramanızla eşleşen kaynak bulunamadı.</div>';
+      } else {
+        let filtered = tekil;
+        if(currentType !== 'Tümü') filtered = filtered.filter(t => t.type === currentType);
+        if(q){
+          filtered = filtered.filter(t =>
+            t.kunye.toLowerCase().includes(q) ||
+            t.baslik.toLowerCase().includes(q) ||
+            t.ozet.toLowerCase().includes(q) ||
+            t.yazar.toLowerCase().includes(q) ||
+            String(t.fnNo).includes(q) ||
+            String(t.sayfalar).includes(q) ||
+            t.type.toLowerCase().includes(q)
+          );
+        }
+        countEl.textContent = `${filtered.length} tekil kaynak gösteriliyor`;
+        const html = renderTekilView(filtered);
+        listEl.innerHTML = html || '<div class="k-empty">Aramanızla eşleşen kaynak bulunamadı.</div>';
+      }
+    }
+
+    // Event listeners
+    document.getElementById('search').addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
+      render();
+    });
+
+    document.getElementById('viewToggle').addEventListener('click', e => {
+      const btn = e.target.closest('.k-view-btn');
+      if(!btn) return;
+      document.querySelectorAll('#viewToggle .k-view-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentView = btn.dataset.view;
+      render();
+    });
+
+    document.getElementById('sortToggle').addEventListener('click', e => {
+      const btn = e.target.closest('.k-view-btn');
+      if(!btn) return;
+      document.querySelectorAll('#sortToggle .k-view-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSort = btn.dataset.sort;
+      render();
+    });
+
+    document.getElementById('typeFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.nt-filter-btn');
+      if(!btn) return;
+      document.querySelectorAll('#typeFilters .nt-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentType = btn.dataset.type;
+      render();
+    });
+
+    // URL hash ile doğrudan dipnot'a gitme
+    function checkHash(){
+      const hash = window.location.hash;
+      if(hash && hash.startsWith('#fn')){
+        const fn = hash.replace('#fn','');
+        document.getElementById('search').value = fn;
+        searchQuery = fn;
+        render();
+      }
+    }
+
+    render();
+    checkHash();
+    window.addEventListener('hashchange', checkHash);
+  })();
+  </script>
+</body>
+</html>
