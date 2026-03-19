@@ -3,608 +3,861 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Beyin &harr; Yapay Zeka &bull; 50 Paralel Kesif</title>
-<meta name="description" content="Beyin bilimi ve yapay zeka arasindaki 50 paralel kesif">
+<title>Beyin ↔ Yapay Zekâ · 50 Paralel Keşif</title>
+<meta name="description" content="Beyin bilimi ve yapay zekâ arasındaki 50 paralel keşfi keşfedin. İnteraktif karşılaştırma, kronoloji ve görsel diyagramlar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#050510;--bg1:#0a0a1a;--bg2:#0f0f22;--bg3:#161630;--bg4:#1e1e40;
-  --sf:rgba(255,255,255,.03);--sf2:rgba(255,255,255,.05);--sf3:rgba(255,255,255,.08);
-  --t:#f0f0f8;--t2:#a8a8c0;--t3:#68688a;
-  --br:#ff6b9d;--br2:#ff6b9d33;--br3:#ff6b9d18;
-  --ai:#4ecdc4;--ai2:#4ecdc433;--ai3:#4ecdc418;
-  --ac:#7c5cfc;--ac2:#a78bfa;
-  --gd:#fbbf24;--gn:#34d399;
-  --bd:rgba(255,255,255,.06);--bd2:rgba(255,255,255,.12);
-  --f:'Inter',system-ui,sans-serif;
+  --bg:#060612;--bg1:#0c0c1e;--bg2:#12122a;--bg3:#1a1a3a;--bg4:#24244a;
+  --sf:rgba(255,255,255,.03);--sf2:rgba(255,255,255,.06);--sf3:rgba(255,255,255,.10);
+  --t:#f0f0f8;--t2:#aab;--t3:#778;
+  --br:#ff6b9d;--br2:rgba(255,107,157,.25);--br3:rgba(255,107,157,.08);
+  --ai:#4ecdc4;--ai2:rgba(78,205,196,.25);--ai3:rgba(78,205,196,.08);
+  --ac:#7c5cfc;--ac2:#a78bfa;--ac3:rgba(124,92,252,.15);
+  --gd:#fbbf24;--gn:#34d399;--rd:#f87171;
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.14);
+  --f:'Inter',system-ui,-apple-system,sans-serif;
   --m:'JetBrains Mono',monospace;
+  --r:16px;
 }
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
 body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:10px}
 
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(5,5,16,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);display:flex;align-items:center;height:52px;padding:0 20px;gap:4px}
-.nav-logo{font-weight:800;font-size:.9rem;margin-right:auto;white-space:nowrap;background:linear-gradient(135deg,var(--br),var(--ac),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer}
-.nav a{padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:500;color:var(--t2);transition:all .2s;white-space:nowrap;text-decoration:none}
-.nav a:hover,.nav a.on{color:#fff;background:var(--sf3)}
-@media(max-width:900px){.nav{overflow-x:auto}.nav a{font-size:.7rem;padding:5px 8px}}
+/* ═══ NAV ═══ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(6,6,18,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);height:54px;display:flex;align-items:center;padding:0 20px;gap:4px}
+.nav-logo{font-weight:900;font-size:.85rem;margin-right:auto;white-space:nowrap;background:linear-gradient(135deg,var(--br),var(--ac),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;text-decoration:none}
+.nav-links{display:flex;gap:2px;overflow-x:auto}
+.nav-links a{padding:7px 14px;border-radius:10px;font-size:.75rem;font-weight:600;color:var(--t2);transition:all .25s;white-space:nowrap;text-decoration:none}
+.nav-links a:hover,.nav-links a.on{color:#fff;background:var(--sf3)}
+@media(max-width:700px){.nav-links a{font-size:.68rem;padding:5px 8px}}
 
-/* HERO */
+/* ═══ HERO ═══ */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden}
-.hero canvas{position:absolute;inset:0;z-index:0}
-.hero>*:not(canvas){position:relative;z-index:1}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:99px;background:var(--sf2);border:1px solid var(--bd2);font-size:.78rem;color:var(--t2);margin-bottom:2rem}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:orbFloat 15s ease-in-out infinite}
+.orb-1{width:500px;height:500px;background:var(--br);top:-20%;left:-10%;animation-delay:0s}
+.orb-2{width:400px;height:400px;background:var(--ai);bottom:-15%;right:-5%;animation-delay:5s}
+.orb-3{width:300px;height:300px;background:var(--ac);top:30%;right:20%;animation-delay:10s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}33%{transform:translate(30px,-20px)}66%{transform:translate(-20px,30px)}}
+.hero>*:not(.hero-bg){position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:99px;background:var(--sf2);border:1px solid var(--bd2);font-size:.78rem;color:var(--t2);margin-bottom:2rem}
 .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--gn);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.3;transform:scale(.7)}}
-.hero h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;letter-spacing:-.03em;line-height:1.1}
+.hero h1{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:900;letter-spacing:-.035em;line-height:1.08}
 .hero h1 .b{color:var(--br)}.hero h1 .a{color:var(--ai)}
-.hero h1 .arr{display:inline-block;margin:0 .1em;background:linear-gradient(135deg,var(--br),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:clamp(.95rem,2vw,1.2rem);color:var(--t2);max-width:580px;margin:1.5rem auto 2.5rem}
-.metrics{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap}
-.metric .v{font-size:2.2rem;font-weight:900;line-height:1}
-.metric .l{font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.12em;margin-top:3px}
-.c1{color:var(--br)}.c2{color:var(--ai)}.c3{color:var(--ac)}.c4{color:var(--gd)}
+.hero h1 .arr{display:inline-block;margin:0 .06em;background:linear-gradient(135deg,var(--br),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--t2);max-width:580px;margin:1.5rem auto 2.5rem}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap}
+.hero-stat .v{font-size:2.4rem;font-weight:900;line-height:1}
+.hero-stat .l{font-size:.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:.12em;margin-top:4px}
 
-/* SECTIONS */
-.sec{padding:80px 20px;max-width:1280px;margin:0 auto}
+/* ═══ SECTIONS ═══ */
+.sec{padding:80px 20px;max-width:1300px;margin:0 auto}
 .sh{margin-bottom:40px}
-.sh .ln{width:40px;height:3px;border-radius:2px;margin-bottom:14px}
-.ln1{background:var(--br)}.ln2{background:var(--ai)}.ln3{background:var(--ac)}.ln4{background:var(--gd)}
-.sh h2{font-size:clamp(1.5rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
-.sh p{color:var(--t2);font-size:.95rem;max-width:520px}
+.sh .ln{width:44px;height:3px;border-radius:2px;margin-bottom:14px}
+.sh h2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-.025em;margin-bottom:8px}
+.sh p{color:var(--t2);font-size:.92rem;max-width:560px}
 
-/* STATS ROW */
-.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:32px}
-.sbox{background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:20px;text-align:center}
-.sbox .v{font-size:2rem;font-weight:900;line-height:1}
-.sbox .l{font-size:.73rem;color:var(--t2);margin-top:4px}
+/* ═══ GENEL İSTATİSTİK KUTULARI ═══ */
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:32px}
+.stat-box{background:var(--bg1);border:1px solid var(--bd);border-radius:var(--r);padding:22px;text-align:center;transition:border-color .3s}
+.stat-box:hover{border-color:var(--bd2)}
+.stat-box .v{font-size:2.2rem;font-weight:900;line-height:1}
+.stat-box .l{font-size:.73rem;color:var(--t2);margin-top:5px}
 
-/* DIAGRAM BOXES */
-.dbox{background:var(--bg1);border:1px solid var(--bd);border-radius:20px;padding:36px;margin-bottom:24px;overflow:hidden}
-.dbox h3{font-size:1.2rem;font-weight:700;margin-bottom:24px;text-align:center}
-.dgrid{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:center}
-.dside{padding:24px;border-radius:14px}
-.dside.bio{background:var(--br3);border:1px solid var(--br2)}
-.dside.art{background:var(--ai3);border:1px solid var(--ai2)}
-.dside h4{font-size:1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.dside.bio h4{color:var(--br)}.dside.art h4{color:var(--ai)}
-.dstep{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
-.dstep .n{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
-.bio .dstep .n{background:var(--br2);color:var(--br)}
-.art .dstep .n{background:var(--ai2);color:var(--ai)}
-.dstep .tt{font-size:.85rem;font-weight:600;margin-bottom:1px}
-.dstep .dd{font-size:.76rem;color:var(--t2)}
-.darrow{font-size:2.2rem;font-weight:900;text-align:center;background:linear-gradient(180deg,var(--br),var(--ac),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.dformula{text-align:center;margin-top:20px;padding:14px;border-radius:10px;background:var(--sf);font-family:var(--m);font-size:.8rem;color:var(--t2)}
-@media(max-width:768px){.dgrid{grid-template-columns:1fr;gap:12px}.darrow{transform:rotate(90deg);padding:6px}}
+/* ═══ SVG DİYAGRAMLAR ═══ */
+.diagram-card{background:var(--bg1);border:1px solid var(--bd);border-radius:20px;padding:32px;margin-bottom:24px;overflow:hidden}
+.diagram-card h3{font-size:1.15rem;font-weight:700;margin-bottom:20px;text-align:center}
+.diagram-card svg{display:block;margin:0 auto;max-width:100%;height:auto}
 
-/* SVG DIAGRAMS */
-.svg-wrap{max-width:100%;overflow-x:auto;margin:16px 0}
-.svg-wrap svg{display:block;margin:0 auto}
+/* ═══ İKİLİ KARŞILAŞTIRMA DİYAGRAM ═══ */
+.compare-grid{display:grid;grid-template-columns:1fr 60px 1fr;gap:16px;align-items:stretch}
+.compare-side{padding:24px;border-radius:14px;display:flex;flex-direction:column;gap:12px}
+.compare-side.bio{background:var(--br3);border:1px solid var(--br2)}
+.compare-side.art{background:var(--ai3);border:1px solid var(--ai2)}
+.compare-side h4{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.compare-side.bio h4{color:var(--br)}.compare-side.art h4{color:var(--ai)}
+.compare-step{display:flex;gap:10px;align-items:flex-start}
+.compare-step .num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.bio .compare-step .num{background:var(--br2);color:var(--br)}
+.art .compare-step .num{background:var(--ai2);color:var(--ai)}
+.compare-step .tt{font-size:.82rem;font-weight:600;margin-bottom:1px}
+.compare-step .dd{font-size:.74rem;color:var(--t2)}
+.compare-arrow{display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:900;background:linear-gradient(180deg,var(--br),var(--ac),var(--ai));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.formula-box{text-align:center;margin-top:18px;padding:14px;border-radius:10px;background:var(--sf);font-family:var(--m);font-size:.8rem;color:var(--t2)}
+@media(max-width:768px){.compare-grid{grid-template-columns:1fr;gap:10px}.compare-arrow{transform:rotate(90deg);padding:4px}}
 
-/* CARDS */
-.cbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
-.csearch{flex:1;min-width:180px;max-width:340px;position:relative}
-.csearch input{width:100%;padding:9px 14px 9px 36px;border-radius:10px;background:var(--sf2);border:1px solid var(--bd);color:var(--t);font-size:.85rem;font-family:var(--f);outline:none}
-.csearch input:focus{border-color:var(--ac)}
-.csearch input::placeholder{color:var(--t3)}
-.csearch svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t3)}
-.fbtn{padding:7px 14px;border-radius:9px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:.75rem;font-weight:500;cursor:pointer;transition:all .2s;font-family:var(--f);white-space:nowrap}
-.fbtn:hover,.fbtn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
-.fbtn-toggle{background:var(--bg3);border-color:var(--bd2);color:var(--t)}
-.fbtn-toggle:hover{background:var(--ac);color:#fff}
-.rinfo{font-size:.75rem;color:var(--t3);width:100%;margin-top:2px}
+/* ═══ KEŞİF KARTLARI (ACCORDION) ═══ */
+.cards-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.cards-toolbar .search-wrap{flex:1;min-width:200px;max-width:380px;position:relative}
+.cards-toolbar input{width:100%;padding:10px 14px 10px 38px;border-radius:12px;background:var(--sf2);border:1px solid var(--bd);color:var(--t);font-size:.85rem;font-family:var(--f);outline:none;transition:border-color .2s}
+.cards-toolbar input:focus{border-color:var(--ac)}
+.cards-toolbar input::placeholder{color:var(--t3)}
+.cards-toolbar .si{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--t3);pointer-events:none}
+.filt-btn{padding:8px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:.74rem;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--f);white-space:nowrap}
+.filt-btn:hover,.filt-btn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.toggle-all{background:var(--bg3);border-color:var(--bd2);color:var(--t);font-size:.74rem}
+.toggle-all:hover{background:var(--ac2);color:#fff}
 
-.card{background:var(--bg1);border:1px solid var(--bd);border-radius:16px;margin-bottom:14px;overflow:hidden;transition:border-color .3s}
-.card:hover{border-color:var(--bd2)}
-.card.hid{display:none}
-.card-top{display:flex;align-items:center;gap:10px;padding:16px 20px;cursor:pointer;user-select:none}
-.card-n{font-size:.7rem;font-weight:700;padding:4px 11px;border-radius:7px;background:var(--ac);color:#fff;flex-shrink:0}
-.card-title{flex:1;min-width:0}
-.card-title .tr{font-size:.98rem;font-weight:700}
-.card-title .en{font-size:.72rem;color:var(--t3);font-weight:400;margin-left:6px}
-.card-badges{display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0}
-.bg{font-size:.62rem;font-weight:600;padding:3px 9px;border-radius:5px;text-transform:uppercase;letter-spacing:.03em}
-.bg3{background:rgba(255,107,157,.12);color:var(--br);border:1px solid var(--br2)}
-.bg2{background:rgba(124,92,252,.1);color:var(--ac2);border:1px solid rgba(124,92,252,.2)}
-.bg1{background:rgba(251,191,36,.08);color:var(--gd);border:1px solid rgba(251,191,36,.15)}
-.bgr{background:var(--sf2);color:var(--t2);border:1px solid var(--bd)}
-.card-chev{color:var(--t3);transition:transform .3s;flex-shrink:0}
-.card.open .card-chev{transform:rotate(180deg)}
-.card-body{display:none;padding:0 20px 20px}
-.card.open .card-body{display:block}
-.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:14px;overflow:hidden;margin:12px 0}
-.vside{padding:20px}
-.vb{background:linear-gradient(135deg,rgba(255,107,157,.06),rgba(255,107,157,.02));border-right:1px solid var(--bd)}
-.va{background:linear-gradient(135deg,rgba(78,205,196,.02),rgba(78,205,196,.06))}
-.vtag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
-.vb .vtag{color:var(--br)}.va .vtag{color:var(--ai)}
-.vside h4{font-size:1rem;font-weight:700;margin-bottom:6px}
-.vb h4{color:var(--br)}.va h4{color:var(--ai)}
-.vtxt{font-size:.83rem;color:var(--t2);line-height:1.6;margin-bottom:10px}
-.vmeta{font-size:.76rem;color:var(--t3)}
-.vmeta strong{color:var(--t2)}
-.vyear{display:inline-flex;padding:3px 10px;border-radius:5px;font-size:.72rem;font-weight:600;margin-top:6px}
-.vb .vyear{background:var(--br2);color:var(--br)}
-.va .vyear{background:var(--ai2);color:var(--ai)}
-.cfooter{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 18px;background:var(--sf);border-radius:10px}
-.cfooter label{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);display:block;margin-bottom:2px}
-.cfooter .fv{font-size:.83rem}
-.cinsight{margin-top:14px;padding:14px 18px;border-radius:10px;background:rgba(124,92,252,.05);border-left:3px solid var(--ac);font-size:.82rem;color:var(--t2);line-height:1.55}
-@media(max-width:768px){.vs{grid-template-columns:1fr}.vb{border-right:none;border-bottom:1px solid var(--bd)}.cfooter{grid-template-columns:1fr}.card-badges{display:none}}
+/* Card item */
+.card-item{margin-bottom:8px;border-radius:14px;border:1px solid var(--bd);background:var(--bg1);overflow:hidden;transition:border-color .3s}
+.card-item:hover{border-color:var(--bd2)}
+.card-item.open{border-color:var(--ac)}
+.card-head{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;user-select:none;transition:background .2s}
+.card-head:hover{background:var(--sf)}
+.card-no{font-size:.8rem;font-weight:700;color:var(--t3);min-width:36px}
+.card-title{flex:1;font-weight:700;font-size:.95rem}
+.card-title small{font-weight:400;color:var(--t3);font-size:.78rem;margin-left:6px}
+.card-badges{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.badge{padding:3px 10px;border-radius:6px;font-size:.65rem;font-weight:600;white-space:nowrap}
+.badge-bio{background:var(--br3);color:var(--br);border:1px solid var(--br2)}
+.badge-ai{background:var(--ai3);color:var(--ai);border:1px solid var(--ai2)}
+.badge-impact{padding:3px 8px;border-radius:6px;font-size:.6rem;font-weight:700}
+.badge-impact[data-level="Çok Yüksek"]{background:rgba(251,191,36,.15);color:var(--gd);border:1px solid rgba(251,191,36,.3)}
+.badge-impact[data-level="Yüksek"]{background:rgba(52,211,153,.12);color:var(--gn);border:1px solid rgba(52,211,153,.25)}
+.badge-impact[data-level="Orta"]{background:rgba(124,92,252,.12);color:var(--ac2);border:1px solid rgba(124,92,252,.25)}
+.card-chevron{transition:transform .3s;color:var(--t3);flex-shrink:0}
+.card-item.open .card-chevron{transform:rotate(180deg);color:var(--ac)}
+@media(max-width:600px){.card-badges{display:none}}
 
-/* PRINCIPLES */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.pcard{background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:22px;display:flex;gap:14px;transition:border-color .3s}
-.pcard:hover{border-color:var(--ac)}
-.pcard .pn{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--ac);color:#fff;font-weight:800;font-size:.9rem;flex-shrink:0}
-.pcard h4{font-size:.9rem;font-weight:700;margin-bottom:4px;color:var(--ac2)}
-.pcard p{font-size:.78rem;color:var(--t2)}
+/* Card body */
+.card-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.card-item.open .card-body{max-height:800px}
+.card-inner{padding:0 20px 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.card-inner{grid-template-columns:1fr}}
+.card-col{padding:16px;border-radius:12px}
+.card-col.bio-col{background:var(--br3);border:1px solid var(--br2)}
+.card-col.ai-col{background:var(--ai3);border:1px solid var(--ai2)}
+.card-col h5{font-size:.78rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card-col.bio-col h5{color:var(--br)}.card-col.ai-col h5{color:var(--ai)}
+.card-field{margin-bottom:8px}
+.card-field .lbl{font-size:.65rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.card-field .val{font-size:.82rem;color:var(--t)}
+.card-principle{padding:12px 16px;border-radius:10px;background:var(--ac3);border:1px solid rgba(124,92,252,.2);margin-top:8px;grid-column:1/-1}
+.card-principle .lbl{font-size:.65rem;color:var(--ac2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.card-principle .val{font-size:.85rem;color:var(--t);font-weight:500}
+.card-current{padding:12px 16px;border-radius:10px;background:var(--sf);border:1px solid var(--bd);grid-column:1/-1}
+.card-current .lbl{font-size:.65rem;color:var(--gd);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.card-current .val{font-size:.8rem;color:var(--t2)}
 
-/* FAMILIES */
-.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.fcard{background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:20px}
-.fcard h4{font-size:.9rem;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.ftags{display:flex;flex-wrap:wrap;gap:5px}
-.ftag{font-size:.7rem;padding:4px 10px;border-radius:7px;background:var(--sf2);border:1px solid var(--bd);color:var(--t2)}
+/* ═══ FARK KARTLARI ═══ */
+.diff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:20px}
+.diff-card{background:var(--bg1);border:1px solid var(--bd);border-radius:var(--r);padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .2s}
+.diff-card:hover{border-color:var(--bd2);transform:translateY(-2px)}
+.diff-card .icon{font-size:2rem;margin-bottom:12px}
+.diff-card h4{font-size:1rem;font-weight:700;margin-bottom:8px}
+.diff-card p{font-size:.84rem;color:var(--t2);line-height:1.55}
+.diff-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.diff-card.d1::after{background:var(--br)}.diff-card.d2::after{background:var(--ai)}.diff-card.d3::after{background:var(--ac)}.diff-card.d4::after{background:var(--gd)}.diff-card.d5::after{background:var(--gn)}.diff-card.d6::after{background:var(--rd)}
 
-/* CHARTS */
-.chbox{background:var(--bg1);border:1px solid var(--bd);border-radius:16px;padding:28px;margin-bottom:18px}
-.chbox h3{font-size:1.05rem;font-weight:700;margin-bottom:20px}
-.brow{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.blbl{width:155px;font-size:.78rem;color:var(--t2);text-align:right;flex-shrink:0}
-.btrk{flex:1;height:30px;background:var(--sf);border-radius:7px;overflow:hidden}
-.bfill{height:100%;border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:.72rem;font-weight:600;color:#fff;transition:width 1s ease}
-.b1{background:linear-gradient(90deg,#c0305a,var(--br))}.b2{background:linear-gradient(90deg,#2a9d8f,var(--ai))}.b3{background:linear-gradient(90deg,#5b3fc0,var(--ac))}.b4{background:linear-gradient(90deg,#b8860b,var(--gd))}.b5{background:linear-gradient(90deg,#059669,var(--gn))}
-.drow{display:flex;align-items:center;gap:6px;margin-bottom:4px}
-.dnm{width:165px;font-size:.7rem;color:var(--t2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dtrk{flex:1;height:18px;background:var(--sf);border-radius:3px;overflow:hidden}
-.dfill{height:100%;border-radius:3px;display:flex;align-items:center;justify-content:flex-end;padding:0 5px;font-size:.6rem;font-weight:600;color:#fff}
-.dval{width:32px;font-size:.68rem;color:var(--t3);flex-shrink:0}
-@media(max-width:600px){.blbl,.dnm{width:90px;font-size:.65rem}}
+/* ═══ KRONOLOJİ ═══ */
+.timeline-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tl-btn{padding:7px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:.74rem;font-weight:600;cursor:pointer;transition:all .25s;font-family:var(--f)}
+.tl-btn:hover,.tl-btn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
 
-/* TIMELINE */
-.tl{position:relative;padding:0 0 0 36px}
-.tl::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--br),var(--ac),var(--ai),var(--ac),var(--br))}
-.tl-era{position:relative;padding:16px 0 8px}
-.tl-era span{display:inline-flex;padding:5px 14px;border-radius:7px;background:var(--bg3);border:1px solid var(--bd2);font-size:.78rem;font-weight:700;color:var(--ac2)}
-.tl-i{position:relative;margin-bottom:8px;padding:12px 16px;border-radius:12px;background:var(--bg1);border:1px solid var(--bd);transition:border-color .2s}
-.tl-i:hover{border-color:var(--bd2)}
-.tl-i::before{content:'';position:absolute;left:-25px;top:18px;width:10px;height:10px;border-radius:50%;border:2px solid var(--bg)}
-.tl-i.tb::before{background:var(--br)}.tl-i.ta::before{background:var(--ai)}
-.tl-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.tl-y{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:5px}
-.tb .tl-y{background:var(--br2);color:var(--br)}.ta .tl-y{background:var(--ai2);color:var(--ai)}
-.tl-t{font-size:.85rem;font-weight:600}
-.tl-tag{font-size:.62rem;color:var(--t3);margin-left:auto}
-.tl-d{font-size:.76rem;color:var(--t2);margin-top:3px}
+.timeline{position:relative;padding:20px 0}
+.timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--br),var(--ac),var(--ai));border-radius:2px}
+@media(min-width:769px){.timeline::before{left:50%;transform:translateX(-50%)}}
+.tl-item{position:relative;margin-bottom:12px;display:flex;align-items:flex-start}
+.tl-dot{position:absolute;left:17px;top:16px;width:16px;height:16px;border-radius:50%;border:3px solid var(--bg);z-index:2;flex-shrink:0}
+.tl-dot.bio-dot{background:var(--br)}.tl-dot.ai-dot{background:var(--ai)}
+.tl-content{margin-left:48px;background:var(--bg1);border:1px solid var(--bd);border-radius:12px;padding:14px 18px;flex:1;transition:border-color .3s}
+.tl-content:hover{border-color:var(--bd2)}
+.tl-year{font-size:.7rem;font-weight:700;font-family:var(--m);margin-bottom:3px}
+.tl-year.bio-yr{color:var(--br)}.tl-year.ai-yr{color:var(--ai)}
+.tl-name{font-size:.88rem;font-weight:700;margin-bottom:2px}
+.tl-desc{font-size:.76rem;color:var(--t2)}
+.tl-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.6rem;font-weight:600;margin-top:4px}
+.tl-tag.bio-tag{background:var(--br3);color:var(--br)}.tl-tag.ai-tag{background:var(--ai3);color:var(--ai)}
 
-/* FOOTER */
-footer{text-align:center;padding:48px 20px;border-top:1px solid var(--bd);color:var(--t3);font-size:.8rem}
-footer .fl{font-size:1rem;font-weight:800;margin-bottom:6px;color:var(--t2)}
+@media(min-width:769px){
+  .tl-item{justify-content:flex-end}
+  .tl-item:nth-child(odd){justify-content:flex-start}
+  .tl-item:nth-child(odd) .tl-content{margin-left:0;margin-right:48px;text-align:right}
+  .tl-item:nth-child(even) .tl-content{margin-left:48px}
+  .tl-dot{left:50%;transform:translateX(-50%)}
+  .tl-item .tl-content{max-width:45%}
+}
 
-.fade{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}.fade.vis{opacity:1;transform:none}
-.btt{position:fixed;bottom:20px;right:20px;width:40px;height:40px;border-radius:10px;background:var(--ac);color:#fff;border:none;cursor:pointer;font-size:1rem;display:none;align-items:center;justify-content:center;z-index:90}
-.btt.show{display:flex}
+/* ═══ AİLE GRUPLARI (Kategoriler) ═══ */
+.family-group{margin-bottom:16px}
+.family-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:14px;background:var(--bg2);border:1px solid var(--bd);cursor:pointer;user-select:none;transition:all .3s}
+.family-head:hover{background:var(--bg3);border-color:var(--bd2)}
+.family-head.open{background:var(--bg3);border-color:var(--ac);border-bottom-left-radius:0;border-bottom-right-radius:0}
+.family-icon{font-size:1.6rem;flex-shrink:0}
+.family-info{flex:1}
+.family-info h3{font-size:1rem;font-weight:700}
+.family-info span{font-size:.75rem;color:var(--t2)}
+.family-count{padding:4px 10px;border-radius:8px;background:var(--sf2);font-size:.72rem;font-weight:700;color:var(--t2)}
+.family-chevron{transition:transform .3s;color:var(--t3)}
+.family-head.open .family-chevron{transform:rotate(180deg);color:var(--ac)}
+.family-body{max-height:0;overflow:hidden;transition:max-height .5s ease;background:var(--bg1);border:1px solid var(--bd);border-top:0;border-bottom-left-radius:14px;border-bottom-right-radius:14px}
+.family-group.open .family-body{max-height:5000px;border-color:var(--ac)}
+
+/* ═══ FOOTER ═══ */
+.footer{text-align:center;padding:60px 20px;color:var(--t3);font-size:.8rem;border-top:1px solid var(--bd)}
+.footer a{color:var(--ac2);text-decoration:none}
+
+/* ═══ ANIM ═══ */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.fade-up.vis{opacity:1;transform:translateY(0)}
 </style>
 </head>
 <body>
 
-<nav class="nav" id="navbar">
-  <div class="nav-logo" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">Beyin &harr; YZ</div>
-  <a href="#" onclick="event.preventDefault();document.getElementById('genel').scrollIntoView({behavior:'smooth'})">Genel</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('diyagramlar').scrollIntoView({behavior:'smooth'})">Diyagramlar</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('kesifler').scrollIntoView({behavior:'smooth'})">50 Kesif</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('prensipler').scrollIntoView({behavior:'smooth'})">Prensipler</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('aileler').scrollIntoView({behavior:'smooth'})">Aileler</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('istatistikler').scrollIntoView({behavior:'smooth'})">Istatistikler</a>
-  <a href="#" onclick="event.preventDefault();document.getElementById('kronoloji').scrollIntoView({behavior:'smooth'})">Kronoloji</a>
+<!-- NAV -->
+<nav class="nav">
+  <a href="#hero" class="nav-logo">🧠 Beyin ↔ YZ</a>
+  <div class="nav-links">
+    <a href="#genel-bakis">Genel Bakış</a>
+    <a href="#diyagramlar">Diyagramlar</a>
+    <a href="#kesifler">50 Keşif</a>
+    <a href="#aileler">Aileler</a>
+    <a href="#farklar">Temel Farklar</a>
+    <a href="#kronoloji">Kronoloji</a>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="top">
-  <canvas id="bgC"></canvas>
-  <div class="pill"><span class="dot"></span>Interaktif Arastirma</div>
-  <h1><span class="b">Beyin</span> <span class="arr">&harr;</span> <span class="a">Yapay Zeka</span></h1>
-  <p class="hero-sub">120 yillik bilimsel yolculukta beyin ve yapay zekanin 50 paralel kesfini interaktif olarak inceleyin.</p>
-  <div class="metrics">
-    <div class="metric"><div class="v c1">50</div><div class="l">Paralel Kesif</div></div>
-    <div class="metric"><div class="v c2">120</div><div class="l">Yil Aralik</div></div>
-    <div class="metric"><div class="v c3">10</div><div class="l">Kategori</div></div>
-    <div class="metric"><div class="v c4">29.8</div><div class="l">Ort. Gecikme</div></div>
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+  <div class="pill"><span class="dot"></span> Araştırma · Karşılaştırma · Farkındalık</div>
+  <h1><span class="b">Beyin</span> <span class="arr">↔</span> <span class="a">Yapay Zekâ</span></h1>
+  <p class="hero-sub">120 yıllık beyin bilimi ile yapay zekâ arasındaki 50 paralel keşfi keşfedin. İlham, taklit ve yakınsama hikâyesi.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="v" style="color:var(--br)">50</div><div class="l">Paralel Keşif</div></div>
+    <div class="hero-stat"><div class="v" style="color:var(--ai)">120</div><div class="l">Yıllık Tarih</div></div>
+    <div class="hero-stat"><div class="v" style="color:var(--ac)">9</div><div class="l">Kategori</div></div>
+    <div class="hero-stat"><div class="v" style="color:var(--gd)">33</div><div class="l">Ort. Gecikme (Yıl)</div></div>
   </div>
 </section>
 
-<!-- OVERVIEW -->
-<section class="sec fade" id="genel">
-  <div class="sh"><div class="ln ln3"></div><h2>Genel Bakis</h2><p>Buyuk resim: beyin ve yapay zeka nasil kesisiyor?</p></div>
-  <div class="srow">
-    <div class="sbox"><div class="v c1">50</div><div class="l">Toplam Kesif</div></div>
-    <div class="sbox"><div class="v c2">120 yil</div><div class="l">Zaman Araligi</div></div>
-    <div class="sbox"><div class="v c4">29.8</div><div class="l">Ort. Gecikme (Yil)</div></div>
-    <div class="sbox"><div class="v c1">16</div><div class="l">Dogrudan Tarihsel</div></div>
-    <div class="sbox"><div class="v c2">8</div><div class="l">Formal Esdegerlik</div></div>
-    <div class="sbox"><div class="v c3">18</div><div class="l">Cok Yuksek Etki</div></div>
+<!-- GENEL BAKIŞ -->
+<section class="sec" id="genel-bakis">
+  <div class="sh fade-up"><div class="ln" style="background:var(--ac)"></div><h2>Genel Bakış</h2><p>Beyin bilimi keşifleri ile yapay zekâ gelişmelerinin büyük resmi</p></div>
+  <div class="stat-row fade-up">
+    <div class="stat-box"><div class="v" style="color:var(--br)">1861</div><div class="l">İlk Beyin Keşfi<br>(Broca Alanı)</div></div>
+    <div class="stat-box"><div class="v" style="color:var(--ai)">1943</div><div class="l">İlk YZ Modeli<br>(McCulloch-Pitts)</div></div>
+    <div class="stat-box"><div class="v" style="color:var(--gd)">20</div><div class="l">Doğrudan Tarihsel<br>İlham</div></div>
+    <div class="stat-box"><div class="v" style="color:var(--gn)">14</div><div class="l">Paralel Keşif</div></div>
+    <div class="stat-box"><div class="v" style="color:var(--ac)">7</div><div class="l">Formal Eşdeğerlik</div></div>
+  </div>
+
+  <!-- Alan Dağılımı -->
+  <div class="diagram-card fade-up">
+    <h3>📊 Alan Dağılımı</h3>
+    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gBr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff6b9d"/><stop offset="100%" stop-color="#ff6b9d" stop-opacity=".5"/></linearGradient>
+        <linearGradient id="gAi" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#4ecdc4"/><stop offset="100%" stop-color="#4ecdc4" stop-opacity=".5"/></linearGradient>
+        <linearGradient id="gAc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c5cfc"/><stop offset="100%" stop-color="#7c5cfc" stop-opacity=".5"/></linearGradient>
+        <linearGradient id="gGd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#fbbf24" stop-opacity=".5"/></linearGradient>
+      </defs>
+      <!-- Nörobilim: 32 -->
+      <rect x="60" y="20" width="160" height="140" rx="10" fill="url(#gBr)" opacity=".85"/>
+      <text x="140" y="80" text-anchor="middle" fill="#fff" font-size="32" font-weight="900" font-family="Inter,sans-serif">32</text>
+      <text x="140" y="105" text-anchor="middle" fill="#fff" font-size="11" font-weight="600" font-family="Inter,sans-serif">Nörobilim</text>
+      <text x="140" y="120" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="10" font-family="Inter,sans-serif">%64</text>
+      <!-- Bilişsel Psikoloji: 7 -->
+      <rect x="240" y="70" width="110" height="90" rx="10" fill="url(#gAi)" opacity=".85"/>
+      <text x="295" y="110" text-anchor="middle" fill="#fff" font-size="28" font-weight="900" font-family="Inter,sans-serif">7</text>
+      <text x="295" y="132" text-anchor="middle" fill="#fff" font-size="10" font-weight="600" font-family="Inter,sans-serif">Bilişsel Psik.</text>
+      <text x="295" y="145" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="9" font-family="Inter,sans-serif">%14</text>
+      <!-- Matematik: 6 -->
+      <rect x="370" y="80" width="100" height="80" rx="10" fill="url(#gAc)" opacity=".85"/>
+      <text x="420" y="116" text-anchor="middle" fill="#fff" font-size="26" font-weight="900" font-family="Inter,sans-serif">6</text>
+      <text x="420" y="137" text-anchor="middle" fill="#fff" font-size="10" font-weight="600" font-family="Inter,sans-serif">Matematik</text>
+      <text x="420" y="149" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="9" font-family="Inter,sans-serif">%12</text>
+      <!-- Dilbilim: 3 -->
+      <rect x="490" y="100" width="80" height="60" rx="10" fill="url(#gGd)" opacity=".85"/>
+      <text x="530" y="130" text-anchor="middle" fill="#fff" font-size="22" font-weight="900" font-family="Inter,sans-serif">3</text>
+      <text x="530" y="148" text-anchor="middle" fill="#fff" font-size="9" font-weight="600" font-family="Inter,sans-serif">Dilbilim</text>
+      <!-- Bağlayan ok -->
+      <text x="610" y="100" fill="rgba(255,255,255,.3)" font-size="10" font-family="Inter,sans-serif" text-anchor="middle">Toplam</text>
+      <text x="610" y="130" fill="var(--t)" font-size="28" font-weight="900" font-family="Inter,sans-serif" text-anchor="middle">50</text>
+    </svg>
   </div>
 </section>
 
-<!-- DIAGRAMS -->
-<section class="sec fade" id="diyagramlar">
-  <div class="sh"><div class="ln ln1"></div><h2>Gorsel Diyagramlar</h2><p>Beyin ve yapay zekanin temel mekanizmalari gorsel olarak</p></div>
+<!-- DİYAGRAMLAR -->
+<section class="sec" id="diyagramlar">
+  <div class="sh fade-up"><div class="ln" style="background:var(--br)"></div><h2>Görsel Diyagramlar</h2><p>Beyin ve yapay zekâ mekanizmalarının görsel karşılaştırması</p></div>
 
-  <!-- 1. Neuron comparison -->
-  <div class="dbox">
-    <h3>&#129504; Biyolojik Noron &harr; &#129302; Yapay Noron</h3>
-    <div class="dgrid">
-      <div class="dside bio">
-        <h4>&#129504; Biyolojik Noron</h4>
-        <div class="dstep"><div class="n">1</div><div><div class="tt">Dendritler (Girisler)</div><div class="dd">Diger noronlardan sinyalleri toplar</div></div></div>
-        <div class="dstep"><div class="n">2</div><div><div class="tt">Sinaptik Agirliklar</div><div class="dd">Her baglantinin gucu farklidir</div></div></div>
-        <div class="dstep"><div class="n">3</div><div><div class="tt">Soma (Toplama)</div><div class="dd">Sinyaller hucre govdesinde toplanir</div></div></div>
-        <div class="dstep"><div class="n">4</div><div><div class="tt">Esik &amp; Atesleme</div><div class="dd">Toplam esigi asarsa noron atesler</div></div></div>
-        <div class="dstep"><div class="n">5</div><div><div class="tt">Akson (Cikti)</div><div class="dd">Sinyal sonraki norona iletilir</div></div></div>
+  <!-- Nöron vs Yapay Nöron -->
+  <div class="diagram-card fade-up">
+    <h3>🧬 Biyolojik Nöron ↔ Yapay Nöron</h3>
+    <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sol: Biyolojik Nöron -->
+      <text x="200" y="24" text-anchor="middle" fill="#ff6b9d" font-size="13" font-weight="700" font-family="Inter,sans-serif">Biyolojik Nöron</text>
+      <!-- Hücre gövdesi (soma) -->
+      <ellipse cx="200" cy="170" rx="55" ry="45" fill="none" stroke="#ff6b9d" stroke-width="2.5" opacity=".7"/>
+      <text x="200" y="165" text-anchor="middle" fill="#ff6b9d" font-size="10" font-weight="600" font-family="Inter,sans-serif">Soma</text>
+      <text x="200" y="180" text-anchor="middle" fill="rgba(255,255,255,.5)" font-size="8" font-family="Inter,sans-serif">(Hücre Gövdesi)</text>
+      <!-- Çekirdek -->
+      <circle cx="200" cy="155" r="10" fill="#ff6b9d" opacity=".2" stroke="#ff6b9d" stroke-width="1"/>
+      <!-- Dendritler (girişler) -->
+      <path d="M145,170 Q100,140 60,110" stroke="#ff6b9d" stroke-width="1.5" fill="none" opacity=".5"/>
+      <path d="M145,155 Q110,120 75,90" stroke="#ff6b9d" stroke-width="1.5" fill="none" opacity=".5"/>
+      <path d="M145,185 Q100,200 55,220" stroke="#ff6b9d" stroke-width="1.5" fill="none" opacity=".5"/>
+      <path d="M160,130 Q140,90 120,60" stroke="#ff6b9d" stroke-width="1.5" fill="none" opacity=".5"/>
+      <path d="M165,210 Q145,240 120,265" stroke="#ff6b9d" stroke-width="1.5" fill="none" opacity=".5"/>
+      <!-- Dallanma uçları -->
+      <circle cx="60" cy="110" r="4" fill="#ff6b9d" opacity=".4"/>
+      <circle cx="75" cy="90" r="3" fill="#ff6b9d" opacity=".4"/>
+      <circle cx="55" cy="220" r="4" fill="#ff6b9d" opacity=".4"/>
+      <circle cx="120" cy="60" r="3" fill="#ff6b9d" opacity=".4"/>
+      <circle cx="120" cy="265" r="3" fill="#ff6b9d" opacity=".4"/>
+      <text x="40" y="155" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">Dendritler</text>
+      <text x="40" y="167" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="7" font-family="Inter,sans-serif">(Girişler)</text>
+      <!-- Akson (çıkış) -->
+      <line x1="255" y1="170" x2="370" y2="170" stroke="#ff6b9d" stroke-width="2.5" opacity=".6"/>
+      <text x="312" y="160" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">Akson</text>
+      <!-- Miyelin kılıf segmentleri -->
+      <rect x="268" y="162" width="20" height="16" rx="6" fill="none" stroke="#ff6b9d" stroke-width="1" opacity=".3"/>
+      <rect x="298" y="162" width="20" height="16" rx="6" fill="none" stroke="#ff6b9d" stroke-width="1" opacity=".3"/>
+      <rect x="328" y="162" width="20" height="16" rx="6" fill="none" stroke="#ff6b9d" stroke-width="1" opacity=".3"/>
+      <!-- Sinaptik terminal -->
+      <circle cx="375" cy="170" r="8" fill="#ff6b9d" opacity=".3" stroke="#ff6b9d" stroke-width="1.5"/>
+      <circle cx="375" cy="162" r="2" fill="#fbbf24" opacity=".6"/>
+      <circle cx="372" cy="173" r="2" fill="#fbbf24" opacity=".6"/>
+      <circle cx="378" cy="175" r="2" fill="#fbbf24" opacity=".6"/>
+      <text x="375" y="200" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8" font-family="Inter,sans-serif">Sinaptik</text>
+      <text x="375" y="210" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8" font-family="Inter,sans-serif">Terminal</text>
+      <!-- Eşik -->
+      <text x="200" y="235" text-anchor="middle" fill="#ff6b9d" font-size="8" font-weight="600" font-family="Inter,sans-serif">Eşik aşılınca ateşler</text>
+      <text x="200" y="248" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="8" font-family="Inter,sans-serif">(All-or-None)</text>
+
+      <!-- Ok: ortada -->
+      <text x="420" y="170" fill="rgba(255,255,255,.15)" font-size="30" font-weight="900" font-family="Inter,sans-serif">⇌</text>
+
+      <!-- Sağ: Yapay Nöron -->
+      <text x="610" y="24" text-anchor="middle" fill="#4ecdc4" font-size="13" font-weight="700" font-family="Inter,sans-serif">Yapay Nöron (Perceptron)</text>
+      <!-- Girişler -->
+      <circle cx="480" cy="80" r="18" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity=".5"/>
+      <text x="480" y="84" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="Inter,sans-serif">x₁</text>
+      <circle cx="480" cy="150" r="18" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity=".5"/>
+      <text x="480" y="154" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="Inter,sans-serif">x₂</text>
+      <circle cx="480" cy="220" r="18" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity=".5"/>
+      <text x="480" y="224" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="Inter,sans-serif">x₃</text>
+      <text x="480" y="270" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="8" font-family="Inter,sans-serif">Girişler</text>
+      <!-- Ağırlıklar oklar üzerinde -->
+      <line x1="498" y1="80" x2="580" y2="150" stroke="#4ecdc4" stroke-width="1.5" opacity=".4"/>
+      <line x1="498" y1="150" x2="580" y2="150" stroke="#4ecdc4" stroke-width="1.5" opacity=".4"/>
+      <line x1="498" y1="220" x2="580" y2="150" stroke="#4ecdc4" stroke-width="1.5" opacity=".4"/>
+      <text x="536" y="106" fill="#fbbf24" font-size="8" font-weight="600" font-family="Inter,sans-serif">w₁</text>
+      <text x="540" y="142" fill="#fbbf24" font-size="8" font-weight="600" font-family="Inter,sans-serif">w₂</text>
+      <text x="536" y="198" fill="#fbbf24" font-size="8" font-weight="600" font-family="Inter,sans-serif">w₃</text>
+      <!-- Toplama + Aktivasyon -->
+      <circle cx="610" cy="150" r="32" fill="none" stroke="#4ecdc4" stroke-width="2.5" opacity=".7"/>
+      <text x="610" y="143" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="700" font-family="Inter,sans-serif">Σ</text>
+      <text x="610" y="160" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="7" font-family="Inter,sans-serif">+ f(x)</text>
+      <!-- Çıkış -->
+      <line x1="642" y1="150" x2="720" y2="150" stroke="#4ecdc4" stroke-width="2.5" opacity=".6"/>
+      <circle cx="730" cy="150" r="16" fill="#4ecdc4" opacity=".15" stroke="#4ecdc4" stroke-width="1.5"/>
+      <text x="730" y="154" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="Inter,sans-serif">ŷ</text>
+      <text x="730" y="180" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="8" font-family="Inter,sans-serif">Çıkış</text>
+      <!-- Formül -->
+      <text x="610" y="210" text-anchor="middle" fill="#4ecdc4" font-size="8" font-weight="600" font-family="JetBrains Mono,monospace">ŷ = f(Σwᵢxᵢ + b)</text>
+      <!-- Bias -->
+      <text x="610" y="100" text-anchor="middle" fill="#fbbf24" font-size="8" font-weight="600" font-family="Inter,sans-serif">bias (b)</text>
+      <line x1="610" y1="106" x2="610" y2="118" stroke="#fbbf24" stroke-width="1" opacity=".4" stroke-dasharray="3"/>
+
+      <!-- Alt etiketler -->
+      <rect x="100" y="290" width="220" height="24" rx="6" fill="rgba(255,107,157,.08)" stroke="rgba(255,107,157,.2)" stroke-width="1"/>
+      <text x="210" y="306" text-anchor="middle" fill="#ff6b9d" font-size="9" font-weight="600" font-family="Inter,sans-serif">Santiago Ramón y Cajal, 1906</text>
+      <rect x="480" y="290" width="220" height="24" rx="6" fill="rgba(78,205,196,.08)" stroke="rgba(78,205,196,.2)" stroke-width="1"/>
+      <text x="590" y="306" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="Inter,sans-serif">McCulloch & Pitts, 1943</text>
+    </svg>
+  </div>
+
+  <!-- Hebbian Learning vs Backprop -->
+  <div class="diagram-card fade-up">
+    <h3>⚡ Hebb Kuralı ↔ Geri Yayılım (Backpropagation)</h3>
+    <div class="compare-grid">
+      <div class="compare-side bio">
+        <h4>🧠 Hebb Kuralı (1949)</h4>
+        <div class="compare-step"><div class="num">1</div><div><div class="tt">Birlikte Ateşleme</div><div class="dd">İki nöron aynı anda aktif olur</div></div></div>
+        <div class="compare-step"><div class="num">2</div><div><div class="tt">Sinaptik Güçlenme</div><div class="dd">Bağlantı güçlenir (LTP)</div></div></div>
+        <div class="compare-step"><div class="num">3</div><div><div class="tt">Yerel Kural</div><div class="dd">Sadece komşu nöronlar arası</div></div></div>
+        <div class="compare-step"><div class="num">4</div><div><div class="tt">Öğrenme</div><div class="dd">Tekrar → kalıcı hafıza</div></div></div>
       </div>
-      <div class="darrow">&harr;</div>
-      <div class="dside art">
-        <h4>&#129302; Yapay Noron</h4>
-        <div class="dstep"><div class="n">1</div><div><div class="tt">Giris Degerleri (x)</div><div class="dd">Veri veya onceki katmandan</div></div></div>
-        <div class="dstep"><div class="n">2</div><div><div class="tt">Agirliklar (w)</div><div class="dd">Her girisa carpilan ogrenilebilir parametre</div></div></div>
-        <div class="dstep"><div class="n">3</div><div><div class="tt">Toplam (&sum;wi&middot;xi + b)</div><div class="dd">Agirlikli toplam + bias</div></div></div>
-        <div class="dstep"><div class="n">4</div><div><div class="tt">Aktivasyon f(x)</div><div class="dd">ReLU, Sigmoid gibi nonlineer donusum</div></div></div>
-        <div class="dstep"><div class="n">5</div><div><div class="tt">Cikti (y)</div><div class="dd">Sonraki katmana iletilir</div></div></div>
+      <div class="compare-arrow">⇌</div>
+      <div class="compare-side art">
+        <h4>🤖 Backpropagation (1986)</h4>
+        <div class="compare-step"><div class="num">1</div><div><div class="tt">İleri Yayılım</div><div class="dd">Giriş → katmanlar → çıkış</div></div></div>
+        <div class="compare-step"><div class="num">2</div><div><div class="tt">Hata Hesaplama</div><div class="dd">Beklenen vs gerçek fark</div></div></div>
+        <div class="compare-step"><div class="num">3</div><div><div class="tt">Geri Yayılım</div><div class="dd">Hata tüm katmanlara dağılır</div></div></div>
+        <div class="compare-step"><div class="num">4</div><div><div class="tt">Ağırlık Güncelleme</div><div class="dd">Δw = η · δ · a (gradient descent)</div></div></div>
       </div>
     </div>
-    <div class="dformula">Her iki sistem: <strong>Agirlikli Toplam &rarr; Nonlineer Donusum &rarr; Cikti</strong></div>
+    <div class="formula-box">Ortak İlke: Birlikte aktivasyon → bağlantı güçlenmesi = Öğrenme</div>
   </div>
 
-  <!-- 2. Hebb Rule -->
-  <div class="dbox">
-    <h3>Hebb Yasasi &harr; Backpropagation</h3>
-    <div class="dgrid">
-      <div class="dside bio">
-        <h4>&#129504; Hebb Yasasi (1949)</h4>
-        <div class="dstep"><div class="n">A</div><div><div class="tt">Noron A atesler</div><div class="dd">Presinaptik noron sinyal gonderir</div></div></div>
-        <div class="dstep"><div class="n">B</div><div><div class="tt">Noron B de atesler</div><div class="dd">Postsinaptik noron ayni anda aktif</div></div></div>
-        <div class="dstep"><div class="n">&uarr;</div><div><div class="tt">Bag Guclenir</div><div class="dd">"Birlikte ateslenen noronlar baglanir"</div></div></div>
+  <!-- Dikkat Mekanizması -->
+  <div class="diagram-card fade-up">
+    <h3>🎯 Dikkat Mekanizması: Beyin ↔ Transformer</h3>
+    <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sol: Beyin Dikkat -->
+      <text x="190" y="24" text-anchor="middle" fill="#ff6b9d" font-size="12" font-weight="700" font-family="Inter,sans-serif">Beyin: Seçici Dikkat (Posner, 1985)</text>
+      <!-- Beyin çerçevesi -->
+      <ellipse cx="190" cy="130" rx="140" ry="80" fill="none" stroke="rgba(255,107,157,.15)" stroke-width="1.5"/>
+      <!-- Dikkat spotlight -->
+      <ellipse cx="190" cy="120" rx="50" ry="35" fill="rgba(255,107,157,.1)" stroke="#ff6b9d" stroke-width="2" stroke-dasharray="4"/>
+      <text x="190" y="115" text-anchor="middle" fill="#ff6b9d" font-size="9" font-weight="600" font-family="Inter,sans-serif">Dikkat</text>
+      <text x="190" y="128" text-anchor="middle" fill="#ff6b9d" font-size="8" font-family="Inter,sans-serif">Spotlight</text>
+      <!-- Dağınık noktalar (işlenmeyen bilgi) -->
+      <circle cx="100" cy="100" r="5" fill="rgba(255,255,255,.1)"/>
+      <circle cx="130" cy="170" r="5" fill="rgba(255,255,255,.1)"/>
+      <circle cx="280" cy="130" r="5" fill="rgba(255,255,255,.1)"/>
+      <circle cx="260" cy="90" r="5" fill="rgba(255,255,255,.1)"/>
+      <!-- Odaklanılan noktalar -->
+      <circle cx="175" cy="110" r="6" fill="#ff6b9d" opacity=".6"/>
+      <circle cx="200" cy="125" r="6" fill="#ff6b9d" opacity=".6"/>
+      <circle cx="185" cy="135" r="4" fill="#ff6b9d" opacity=".4"/>
+      <text x="190" y="220" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">200-300ms seçici odaklanma</text>
+
+      <!-- Ok -->
+      <text x="400" y="130" fill="rgba(255,255,255,.15)" font-size="28" font-weight="900" font-family="Inter,sans-serif">⇌</text>
+
+      <!-- Sağ: Transformer Attention -->
+      <text x="610" y="24" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="700" font-family="Inter,sans-serif">Transformer: Self-Attention (2017)</text>
+      <!-- Q K V kutuları -->
+      <rect x="500" y="50" width="50" height="30" rx="6" fill="rgba(78,205,196,.15)" stroke="#4ecdc4" stroke-width="1.5"/>
+      <text x="525" y="70" text-anchor="middle" fill="#4ecdc4" font-size="10" font-weight="700" font-family="Inter,sans-serif">Q</text>
+      <rect x="570" y="50" width="50" height="30" rx="6" fill="rgba(251,191,36,.12)" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="595" y="70" text-anchor="middle" fill="#fbbf24" font-size="10" font-weight="700" font-family="Inter,sans-serif">K</text>
+      <rect x="640" y="50" width="50" height="30" rx="6" fill="rgba(124,92,252,.15)" stroke="#7c5cfc" stroke-width="1.5"/>
+      <text x="665" y="70" text-anchor="middle" fill="#7c5cfc" font-size="10" font-weight="700" font-family="Inter,sans-serif">V</text>
+      <!-- Oklar aşağı -->
+      <line x1="525" y1="80" x2="570" y2="110" stroke="#4ecdc4" stroke-width="1" opacity=".4"/>
+      <line x1="595" y1="80" x2="570" y2="110" stroke="#fbbf24" stroke-width="1" opacity=".4"/>
+      <!-- Çarpım -->
+      <rect x="545" y="105" width="50" height="25" rx="6" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+      <text x="570" y="122" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="8" font-weight="600" font-family="JetBrains Mono,monospace">QK^T</text>
+      <!-- Softmax -->
+      <line x1="570" y1="130" x2="570" y2="150" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+      <rect x="535" y="148" width="70" height="25" rx="6" fill="rgba(78,205,196,.1)" stroke="#4ecdc4" stroke-width="1.5"/>
+      <text x="570" y="165" text-anchor="middle" fill="#4ecdc4" font-size="8" font-weight="600" font-family="JetBrains Mono,monospace">softmax</text>
+      <!-- V ile çarpım -->
+      <line x1="570" y1="173" x2="570" y2="190" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+      <line x1="665" y1="80" x2="665" y2="195" stroke="#7c5cfc" stroke-width="1" opacity=".3" stroke-dasharray="3"/>
+      <line x1="665" y1="195" x2="590" y2="195" stroke="#7c5cfc" stroke-width="1" opacity=".3"/>
+      <rect x="530" y="188" width="80" height="25" rx="6" fill="rgba(52,211,153,.1)" stroke="#34d399" stroke-width="1.5"/>
+      <text x="570" y="205" text-anchor="middle" fill="#34d399" font-size="8" font-weight="600" font-family="JetBrains Mono,monospace">Attention(Q,K,V)</text>
+      <!-- Etiketler -->
+      <text x="500" y="70" text-anchor="end" fill="rgba(255,255,255,.3)" font-size="7" font-family="Inter,sans-serif">Query</text>
+      <text x="620" y="44" text-anchor="start" fill="rgba(255,255,255,.3)" font-size="7" font-family="Inter,sans-serif">Key</text>
+      <text x="695" y="70" text-anchor="start" fill="rgba(255,255,255,.3)" font-size="7" font-family="Inter,sans-serif">Value</text>
+    </svg>
+    <div class="formula-box">Attention(Q,K,V) = softmax(QKᵀ / √dₖ) · V &nbsp; ≈ &nbsp; Seçici odaklanma → dinamik ağırlıklandırma</div>
+  </div>
+
+  <!-- Hipokampus vs Experience Replay -->
+  <div class="diagram-card fade-up">
+    <h3>💾 Hipokampus Hafızası ↔ Experience Replay</h3>
+    <div class="compare-grid">
+      <div class="compare-side bio">
+        <h4>🧠 Hipokampus (1957)</h4>
+        <div class="compare-step"><div class="num">1</div><div><div class="tt">Olay Kaydı</div><div class="dd">Hipokampus olayı hızla depolar</div></div></div>
+        <div class="compare-step"><div class="num">2</div><div><div class="tt">Uyku Tekrarı</div><div class="dd">REM uykusunda deneyim tekrar edilir</div></div></div>
+        <div class="compare-step"><div class="num">3</div><div><div class="tt">Konsolidasyon</div><div class="dd">Neokortekse kalıcı aktarım</div></div></div>
       </div>
-      <div class="darrow">&harr;</div>
-      <div class="dside art">
-        <h4>&#129302; Backpropagation (1986)</h4>
-        <div class="dstep"><div class="n">1</div><div><div class="tt">Ileri Gecis</div><div class="dd">Veri agdan gecer, tahmin uretilir</div></div></div>
-        <div class="dstep"><div class="n">2</div><div><div class="tt">Hata Hesapla</div><div class="dd">Tahmin vs gercek arasindaki fark</div></div></div>
-        <div class="dstep"><div class="n">3</div><div><div class="tt">Geri Yayilim</div><div class="dd">Hata geriye dogru her katmana dagitilir</div></div></div>
-        <div class="dstep"><div class="n">&uarr;</div><div><div class="tt">Agirliklar Guncellenir</div><div class="dd">&Delta;w = &eta; &middot; hata &middot; aktivasyon</div></div></div>
+      <div class="compare-arrow">⇌</div>
+      <div class="compare-side art">
+        <h4>🤖 Experience Replay (2015)</h4>
+        <div class="compare-step"><div class="num">1</div><div><div class="tt">Buffer Kayıt</div><div class="dd">Deneyim (s,a,r,s') buffer'a yazılır</div></div></div>
+        <div class="compare-step"><div class="num">2</div><div><div class="tt">Rastgele Örnekleme</div><div class="dd">Mini-batch halinde yeniden öğrenme</div></div></div>
+        <div class="compare-step"><div class="num">3</div><div><div class="tt">Ağ Güncelleme</div><div class="dd">Katastrofik unutma önlenir</div></div></div>
       </div>
     </div>
-    <div class="dformula">Ortak: <strong>Aktivasyon korelasyonu &rarr; Baglanti guclenmesi = Ogrenme</strong></div>
+    <div class="formula-box">Hızlı episodik depolama + yavaş kortikal konsolidasyon = Katastrofik unutmayı önleme</div>
   </div>
 
-  <!-- 3. Memory Systems -->
-  <div class="dbox">
-    <h3>Hafiza Sistemleri: Hipokampus &harr; Experience Replay</h3>
-    <div class="dgrid">
-      <div class="dside bio">
-        <h4>&#129504; Beyin Hafizasi</h4>
-        <div class="dstep"><div class="n">1</div><div><div class="tt">Hipokampus (Hizli)</div><div class="dd">Olaylari aninda kaydeder</div></div></div>
-        <div class="dstep"><div class="n">2</div><div><div class="tt">Uyku / Tekrar</div><div class="dd">Uyku sirasinda anilari yeniden oynatir</div></div></div>
-        <div class="dstep"><div class="n">3</div><div><div class="tt">Neokorteks (Yavas)</div><div class="dd">Bilgi kalici hafizaya aktarilir</div></div></div>
-      </div>
-      <div class="darrow">&harr;</div>
-      <div class="dside art">
-        <h4>&#129302; Experience Replay</h4>
-        <div class="dstep"><div class="n">1</div><div><div class="tt">Replay Buffer (Hizli)</div><div class="dd">Deneyimler bellekte saklanir</div></div></div>
-        <div class="dstep"><div class="n">2</div><div><div class="tt">Rastgele Ornekleme</div><div class="dd">Mini-batch'lerle yeniden ogrenme</div></div></div>
-        <div class="dstep"><div class="n">3</div><div><div class="tt">Ag Agirliklari (Yavas)</div><div class="dd">Bilgi kalici olarak agirliklara yazilir</div></div></div>
-      </div>
+  <!-- Dopamin RPE -->
+  <div class="diagram-card fade-up">
+    <h3>🎰 Dopamin Ödül Tahmini ↔ Pekiştirmeli Öğrenme</h3>
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sol: Dopamin -->
+      <text x="200" y="24" text-anchor="middle" fill="#ff6b9d" font-size="12" font-weight="700" font-family="Inter,sans-serif">Dopamin RPE (Schultz, 1998)</text>
+      <!-- VTA -->
+      <rect x="120" y="50" width="160" height="100" rx="14" fill="rgba(255,107,157,.06)" stroke="rgba(255,107,157,.2)" stroke-width="1.5"/>
+      <text x="200" y="72" text-anchor="middle" fill="#ff6b9d" font-size="10" font-weight="700" font-family="Inter,sans-serif">VTA Dopamin Nöronları</text>
+      <!-- Beklenen vs Gerçek -->
+      <rect x="135" y="85" width="60" height="24" rx="6" fill="rgba(255,107,157,.15)" stroke="rgba(255,107,157,.3)" stroke-width="1"/>
+      <text x="165" y="101" text-anchor="middle" fill="#ff6b9d" font-size="8" font-weight="600" font-family="Inter,sans-serif">Beklenen</text>
+      <text x="215" y="101" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="14" font-family="Inter,sans-serif">−</text>
+      <rect x="225" y="85" width="50" height="24" rx="6" fill="rgba(52,211,153,.12)" stroke="rgba(52,211,153,.25)" stroke-width="1"/>
+      <text x="250" y="101" text-anchor="middle" fill="#34d399" font-size="8" font-weight="600" font-family="Inter,sans-serif">Gerçek</text>
+      <!-- Sonuç -->
+      <text x="200" y="135" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="700" font-family="Inter,sans-serif">= Tahmin Hatası (RPE)</text>
+      <text x="200" y="175" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">Ödül &gt; Beklenen → Dopamin ↑</text>
+      <text x="200" y="190" text-anchor="middle" fill="rgba(255,255,255,.3)" font-size="9" font-family="Inter,sans-serif">Ödül &lt; Beklenen → Dopamin ↓</text>
+
+      <text x="400" y="105" fill="rgba(255,255,255,.15)" font-size="28" font-weight="900" font-family="Inter,sans-serif">⇌</text>
+
+      <!-- Sağ: TD Learning -->
+      <text x="600" y="24" text-anchor="middle" fill="#4ecdc4" font-size="12" font-weight="700" font-family="Inter,sans-serif">TD Learning / RLHF</text>
+      <rect x="500" y="50" width="200" height="100" rx="14" fill="rgba(78,205,196,.06)" stroke="rgba(78,205,196,.2)" stroke-width="1.5"/>
+      <text x="600" y="74" text-anchor="middle" fill="#4ecdc4" font-size="9" font-weight="600" font-family="JetBrains Mono,monospace">δ = r + γV(s') − V(s)</text>
+      <text x="600" y="100" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">r = anlık ödül</text>
+      <text x="600" y="115" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">γV(s') = gelecek değer tahmini</text>
+      <text x="600" y="130" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">V(s) = mevcut değer tahmini</text>
+      <text x="600" y="175" text-anchor="middle" fill="#fbbf24" font-size="9" font-weight="600" font-family="Inter,sans-serif">δ &gt; 0 → Ağırlıkları güçlendir</text>
+      <text x="600" y="190" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="9" font-family="Inter,sans-serif">δ &lt; 0 → Ağırlıkları zayıflat</text>
+    </svg>
+    <div class="formula-box">Prediction error → learning signal = RL temel mekanizması (AlphaZero, ChatGPT RLHF)</div>
+  </div>
+</section>
+
+<!-- 50 KEŞİF -->
+<section class="sec" id="kesifler">
+  <div class="sh fade-up"><div class="ln" style="background:var(--ai)"></div><h2>50 Paralel Keşif</h2><p>Her bir keşfi tıklayarak detaylarını inceleyin</p></div>
+
+  <div class="cards-toolbar fade-up">
+    <div class="search-wrap">
+      <svg class="si" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Keşif ara... (ör: nöron, dikkat, dopamin)">
     </div>
-    <div class="dformula">Ortak: <strong>Hizli Kayit &rarr; Tekrar Oynatma &rarr; Kalici Ogrenme</strong></div>
+    <button class="filt-btn on" data-filter="all" onclick="filterCards('all',this)">Tümü</button>
+    <button class="filt-btn" data-filter="Dogrudan Tarihsel Ilham" onclick="filterCards('Dogrudan Tarihsel Ilham',this)">Tarihsel İlham</button>
+    <button class="filt-btn" data-filter="Paralel Kesif" onclick="filterCards('Paralel Kesif',this)">Paralel Keşif</button>
+    <button class="filt-btn" data-filter="Formal Esdegerlik" onclick="filterCards('Formal Esdegerlik',this)">Formal Eşdeğerlik</button>
+    <button class="filt-btn toggle-all" onclick="toggleAllCards()">📂 Tümünü Aç / Kapat</button>
   </div>
 
-  <!-- 4. Attention -->
-  <div class="dbox">
-    <h3>Dikkat Mekanizmasi: Posner &harr; Transformer</h3>
-    <div class="dgrid">
-      <div class="dside bio">
-        <h4>&#129504; Posner Dikkat Modeli (1985)</h4>
-        <div class="dstep"><div class="n">&#128065;</div><div><div class="tt">Dikkat Isigi (Spotlight)</div><div class="dd">Belirli bir bilgiye odaklanir</div></div></div>
-        <div class="dstep"><div class="n">&#10060;</div><div><div class="tt">Diger Bilgi Bastirılır</div><div class="dd">Alakasiz uyaranlar zayiflatilir</div></div></div>
-        <div class="dstep"><div class="n">&#127919;</div><div><div class="tt">Secici Isleme</div><div class="dd">Sinirli kapasite = oncelik sirasi</div></div></div>
-      </div>
-      <div class="darrow">&harr;</div>
-      <div class="dside art">
-        <h4>&#129302; Self-Attention (2017)</h4>
-        <div class="dstep"><div class="n">Q</div><div><div class="tt">Query (Soru)</div><div class="dd">"Neye dikkat etmeliyim?"</div></div></div>
-        <div class="dstep"><div class="n">K</div><div><div class="tt">Key (Anahtar)</div><div class="dd">"Ben ne iceriyorum?"</div></div></div>
-        <div class="dstep"><div class="n">V</div><div><div class="tt">Value (Deger)</div><div class="dd">softmax(QK&sup1;/&radic;d) &middot; V = agirlikli dikkat</div></div></div>
-      </div>
+  <div id="cardsContainer"></div>
+</section>
+
+<!-- AİLELER (KATEGORİLER) -->
+<section class="sec" id="aileler">
+  <div class="sh fade-up"><div class="ln" style="background:var(--gd)"></div><h2>Keşif Aileleri</h2><p>Keşiflerin kategorik grupları — tıklayarak ailelerine göz atın</p></div>
+  <div class="fade-up">
+    <button class="filt-btn toggle-all" onclick="toggleAllFamilies()" style="margin-bottom:16px">📂 Tüm Aileleri Aç / Kapat</button>
+  </div>
+  <div id="familiesContainer" class="fade-up"></div>
+</section>
+
+<!-- TEMEL FARKLAR -->
+<section class="sec" id="farklar">
+  <div class="sh fade-up"><div class="ln" style="background:var(--rd)"></div><h2>Temel Farklar</h2><p>Beyin ve yapay zekâ arasındaki köklü farklılıklar</p></div>
+  <div class="diff-grid fade-up">
+    <div class="diff-card d1">
+      <div class="icon">⚡</div>
+      <h4>Enerji Tüketimi</h4>
+      <p>Beyin sadece ~20W enerji tüketirken, GPT-4 eğitimi tahmini ~50 milyon kWh harcamıştır. Beyin milyonlarca kat daha verimlidir.</p>
     </div>
-    <div class="dformula">Ortak: <strong>Secici Odaklanma &rarr; Dinamik Agirliklandirma &rarr; Onemli Bilgiyi One Cikarma</strong></div>
-  </div>
-
-  <!-- 5. Reward System -->
-  <div class="dbox">
-    <h3>Odul Sistemi: Dopamin &harr; Pekistirmeli Ogrenme</h3>
-    <div class="dgrid">
-      <div class="dside bio">
-        <h4>&#129504; Dopamin RPE (1998)</h4>
-        <div class="dstep"><div class="n">&#127871;</div><div><div class="tt">Beklenti</div><div class="dd">Beyin odul bekler (beklenen deger)</div></div></div>
-        <div class="dstep"><div class="n">&#10067;</div><div><div class="tt">Gercek Sonuc</div><div class="dd">Gercek odul gelir (veya gelmez)</div></div></div>
-        <div class="dstep"><div class="n">&#9889;</div><div><div class="tt">Tahmin Hatasi (RPE)</div><div class="dd">Fark = dopamin sinyali: + saskinlik, - hayal kiriklig</div></div></div>
-        <div class="dstep"><div class="n">&#128218;</div><div><div class="tt">Ogrenme</div><div class="dd">Gelecekte beklentiler guncellenir</div></div></div>
-      </div>
-      <div class="darrow">&harr;</div>
-      <div class="dside art">
-        <h4>&#129302; TD Learning / RLHF</h4>
-        <div class="dstep"><div class="n">V</div><div><div class="tt">Deger Tahmini V(s)</div><div class="dd">Mevcut durumun beklenen degeri</div></div></div>
-        <div class="dstep"><div class="n">R</div><div><div class="tt">Gercek Odul r</div><div class="dd">Ortamdan alinan geri bildirim</div></div></div>
-        <div class="dstep"><div class="n">&delta;</div><div><div class="tt">TD Hatasi</div><div class="dd">&delta; = r + &gamma;V(s') - V(s)</div></div></div>
-        <div class="dstep"><div class="n">&#8593;</div><div><div class="tt">Guncelleme</div><div class="dd">Politika ve deger fonksiyonu duzeltilir</div></div></div>
-      </div>
+    <div class="diff-card d2">
+      <div class="icon">🧬</div>
+      <h4>Öğrenme Biçimi</h4>
+      <p>Beyin çok az örnekle (few-shot) öğrenirken, yapay zekâ milyarlarca veri noktasına ihtiyaç duyar. Beyin bağlamı doğal olarak anlar.</p>
     </div>
-    <div class="dformula">Ortak: <strong>Beklenti - Gercek = Hata Sinyali &rarr; Ogrenme Rehberi</strong></div>
+    <div class="diff-card d3">
+      <div class="icon">🌊</div>
+      <h4>Plastiklik</h4>
+      <p>Beyin sürekli kendini yeniden yapılandırır (nöroplastisite). Yapay ağlar eğitim sonrası büyük ölçüde sabitlenir (catastrophic forgetting).</p>
+    </div>
+    <div class="diff-card d4">
+      <div class="icon">💭</div>
+      <h4>Bilinç & Deneyim</h4>
+      <p>Beyin sübjektif deneyim (qualia) üretir. Yapay zekâda ne bilinç ne de öznel deneyim henüz mevcut değildir.</p>
+    </div>
+    <div class="diff-card d5">
+      <div class="icon">🔄</div>
+      <h4>Paralel İşleme</h4>
+      <p>Beyin masif paralel (86 milyar nöron aynı anda), YZ ise büyük ölçüde sıralıdır. Beyin gerçek zamanlı multimodal işler.</p>
+    </div>
+    <div class="diff-card d6">
+      <div class="icon">🎭</div>
+      <h4>Temellendirme</h4>
+      <p>Beyin anlam ve kavramları bedensel deneyimle temellendirir (embodied cognition). YZ sembolik/istatistiksel kalıplarla çalışır.</p>
+    </div>
   </div>
 </section>
 
-<!-- 50 COMPARISONS -->
-<section class="sec fade" id="kesifler">
-  <div class="sh"><div class="ln ln2"></div><h2>50 Paralel Kesif</h2><p>Her bir kesfi acarak detayli inceleyin</p></div>
-  <div class="cbar" id="filters"></div>
-  <div id="cards"></div>
+<!-- KRONOLOJİ -->
+<section class="sec" id="kronoloji">
+  <div class="sh fade-up"><div class="ln" style="background:var(--gn)"></div><h2>Kronoloji</h2><p>120 yıllık beyin bilimi ve yapay zekâ keşiflerinin zaman çizelgesi</p></div>
+  <div class="timeline-controls fade-up">
+    <button class="tl-btn on" data-tf="all" onclick="filterTimeline('all',this)">Tümü (100)</button>
+    <button class="tl-btn" data-tf="bio" onclick="filterTimeline('bio',this)">🧠 Beyin</button>
+    <button class="tl-btn" data-tf="ai" onclick="filterTimeline('ai',this)">🤖 Yapay Zekâ</button>
+  </div>
+  <div id="timelineContainer" class="timeline fade-up"></div>
 </section>
 
-<!-- PRINCIPLES -->
-<section class="sec fade" id="prensipler">
-  <div class="sh"><div class="ln ln3"></div><h2>9 Ortak Prensip</h2><p>Beyin ve yapay zekanin paylastigi temel ilkeler</p></div>
-  <div class="pgrid" id="princ"></div>
-</section>
+<footer class="footer">
+  <p>Beyin ↔ Yapay Zekâ · 50 Paralel Keşif · <a href="/">raufenc.com</a></p>
+  <p style="margin-top:6px;font-size:.72rem">Kaynak: Beyin_YZ_Karsilastirma_v3.xlsx · 2024-2026</p>
+</footer>
 
-<!-- FAMILIES -->
-<section class="sec fade" id="aileler">
-  <div class="sh"><div class="ln ln4"></div><h2>Esleme Aileleri</h2><p>Kesiflerin kavramsal kumeleri</p></div>
-  <div class="fgrid" id="fams"></div>
-</section>
-
-<!-- STATS -->
-<section class="sec fade" id="istatistikler">
-  <div class="sh"><div class="ln ln1"></div><h2>Istatistikler</h2><p>Verilerin gorsel analizi</p></div>
-  <div id="stats"></div>
-</section>
-
-<!-- TIMELINE -->
-<section class="sec fade" id="kronoloji">
-  <div class="sh"><div class="ln ln2"></div><h2>Tam Kronoloji</h2><p>1861'den 2026'ya tum 50 kesif ve YZ karsiliklari</p></div>
-  <div class="tl" id="tl"></div>
-</section>
-
-<footer><div class="fl">Beyin &harr; Yapay Zeka</div><p>50 Paralel Kesif &bull; Kaynak: Beyin_YZ_Karsilastirma_v3</p></footer>
-<button class="btt" id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">&uarr;</button>
-
-<script src="/nav.js"></script>
 <script>
-const D=[
-{n:1,a:"Norobilim",c:"TEMEL MIMARI",tr:"Noron Doktrini",en:"Neuron Doctrine",y:1906,r:"Santiago Ramon y Cajal",b:"Sinirler ayrik hucre birimleridir; sinaptik iletimle birbirine bagli",yz:"McCulloch-Pitts Modeli",yy:1943,g:"McCulloch, Pitts",m:"Boolean logic gate'leri ile sinir hesaplamasi",o:"Diskret, bagli birimlerin evrensel hesaplama yetisi",d:37,e:3,t:"Dogrudan Tarihsel",u:"Temel kurami modern noro-uyumlu sinirlendirmede korunmus"},
-{n:2,a:"Norobilim",c:"TEMEL MIMARI",tr:"Sinaptik Plastisite",en:"Synaptic Plasticity / Hebb's Rule",y:1949,r:"Donald Hebb",b:"Birlikte ateslenen noronlar baglanir (Hebbian learning)",yz:"Gradient Descent / Backpropagation",yy:1986,g:"Rumelhart, Hinton, Williams",m:"Hata sinyali ile sinaptik agirliklari guncelleme",o:"Birlikte aktivasyon = baglanti guclenmesi",d:37,e:3,t:"Dogrudan Tarihsel",u:"Hebb yasasi modern derin ogrenmenin temelini olusturdu"},
-{n:3,a:"Norobilim",c:"TEMEL MIMARI",tr:"Sinaptik Denge Regulasyonu",en:"Homeostatic Synaptic Scaling",y:2003,r:"Gina Turrigiano",b:"Sinaptik baglantilarin dinamik olarak dengelenmesi",yz:"Batch Normalization",yy:2015,g:"Ioffe, Szegedy",m:"Her katman aktivasyonunu ortalama 0, varyans 1'de tutar",o:"Dinamik denge = ogrenme kararliligi",d:12,e:2,t:"Paralel Kesif",u:"Sinir aglarinda enerji verimliligi ve dinamik denge"},
-{n:4,a:"Bilissel Psikoloji",c:"TEMEL MIMARI",tr:"Dagitilmis Temsil",en:"Distributed Representation",y:1986,r:"Rumelhart, McClelland",b:"Bilgi bircok noron arasinda paralel olarak kodlanir",yz:"Word2Vec / BERT Gommeleri",yy:2013,g:"Bengio, Mikolov, Devlin",m:"Yuksek boyutlu vektorlerde dagitilan semantik temsiller",o:"Yerel kodlamadan dagitilmis kodlamaya gecis",d:27,e:3,t:"Dogrudan Tarihsel",u:"Modern dogal dil islemenin temel mimarisi"},
-{n:5,a:"Matematik",c:"TEMEL MIMARI",tr:"Sinir Aktivasyonu",en:"Neural Activation / All-or-None",y:1943,r:"McCulloch, Pitts",b:"Noronlarin esik degerini asinca ates etmesi",yz:"ReLU, Sigmoid Aktivasyonu",yy:1998,g:"LeCun, Bengio",m:"Nonlineer aktivasyon fonksiyonlari: ReLU = max(0,x)",o:"Esik hesaplama = dogrusal olmayan donusum = evrensel yakinlastirma",d:55,e:3,t:"Dogrudan Tarihsel",u:"McCulloch-Pitts ile backpropagation arasindaki baglanti tartisiliyor"},
-{n:6,a:"Matematik",c:"TEMEL MIMARI",tr:"Retikuler Aktivasyon Sistemi",en:"Reticular Activating System",y:1949,r:"Moruzzi, Magoun",b:"Beyin sapinda uyarilabilirligi kontrol eden sistem",yz:"Dikkat Mekanizmalari",yy:2014,g:"Bahdanau, Cho, Bengio",m:"Query-Key-Value ile dinamik agirliklandirma",o:"Secici aktivasyon = onemli bilgiye odaklanma",d:65,e:2,t:"Paralel Kesif",u:"Her iki sistemde dinamik filtreleme ve secicilik"},
-{n:7,a:"Norobilim",c:"GORSEL ISLEME",tr:"Yanal Engelleme",en:"Lateral Inhibition",y:1965,r:"Hartline, Wagner",b:"Sinirler yan komsularini engelleyerek kontrasti artirir",yz:"Yerel Yanit Normalizasyonu",yy:2012,g:"Krizhevsky, Sutskever, Hinton",m:"Ciktilari komsu aktivasyonlarla normalize etme",o:"Rekabetci ayristirma = ozellik netligi",d:47,e:2,t:"Dogrudan Tarihsel",u:"LRN dogrudan yanal engelleme mekanizmasindan turetildi"},
-{n:8,a:"Norobilim",c:"GORSEL ISLEME",tr:"Cift-Akis Gorsel Isleme",en:"Ventral/Dorsal Two-Stream",y:1992,r:"Mishkin, Ungerleider",b:"Ventral: ne oldugu (what), Dorsal: nerede (where/how)",yz:"Cift-Akis Mimarileri",yy:2014,g:"Simonyan, Zisserman",m:"Mekansal + Ozellik isleme akislarinin ayrilmasi",o:"Islevsel dallanma = paralel ozellestirilmis akislar",d:22,e:2,t:"Dogrudan Tarihsel",u:"Modern cift-akis modelleri dorsal-ventral ayrimindan ilham almis"},
-{n:9,a:"Norobilim",c:"DUYUSAL",tr:"Tonotopik Harita",en:"Tonotopic Map (Auditory)",y:1940,r:"Georg von Bekesy",b:"Isitme korteksinde frekanslara gore dizilmis haritalar",yz:"Spektrogram Kodlama / DeepSpeech",yy:2014,g:"Hannun et al.",m:"Spektrogram ozelliklerini hiyerarsik olarak ogrenme",o:"Duyusal tonotopi = frekans kodlamasi",d:74,e:1,t:"Paralel Kesif",u:"DeepSpeech'te frekans haritalari kendilginden ortaya cikiyor"},
-{n:10,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Dopamin Odul Tahmin Hatasi",en:"Dopamine Reward Prediction Error",y:1998,r:"Schultz, Dayan, Montague",b:"Dopamin noronlari beklenen ile gercek odul arasindaki farki kodlar",yz:"TD Ogrenme / RLHF / PPO",yy:2015,g:"Schulman (PPO), OpenAI",m:"TD hatasi: &delta; = r + &gamma;V(s') - V(s)",o:"Tahmin hatasi = ogrenme sinyali",d:27,e:3,t:"Dogrudan Tarihsel",u:"AlphaZero, MuZero, PPO/RLHF'in temeli"},
-{n:11,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Uzun Sureli Guclenme",en:"Long-Term Potentiation (LTP)",y:1973,r:"Bliss, Lomo",b:"Tekrarli uyari sonrasi sinaptik baglanti kalici olarak guclenir",yz:"Ag Agirlik Guncellemeleri",yy:1986,g:"Rumelhart, Hinton, Williams",m:"&Delta;w = &eta; &middot; hata &middot; aktivasyon",o:"Tekrar = baglanti guclenmesi = ogrenme",d:0,e:3,t:"Kuvvetli Analoji",u:"Biyolojik karsiligi tartismali: agirlik tasima problemi"},
-{n:12,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Olaysal Bellek",en:"Episodic Memory (Hippocampus)",y:1957,r:"Scoville, Milner",b:"Hipokampus olaylari gecici depolar; neokorteks kalicilastirir",yz:"Deneyim Tekrari",yy:2015,g:"Lin (1992), Mnih (DQN 2015)",m:"Gecmis deneyimlerin rastgele mini-batch'lerle yeniden ogrenilmesi",o:"Hizli kayit + yavas konsolidasyon",d:58,e:3,t:"Dogrudan Tarihsel",u:"Deneyim tekrari felaket unutmasini onler"},
-{n:13,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Bolunmus Beyin Sendromu",en:"Split-Brain / Callosotomy",y:1960,r:"Sperry, Gazzaniga",b:"Beyin yarimlari ayrildiginda bagimsiz isleme gosterir",yz:"Uzmanlar Karisimi",yy:2020,g:"Lepikhin, Shazeer",m:"Her uzman farkli alanda ogrenir; yonlendirici secer",o:"Norolojik modulerlik = hesaplamasal modulerlik",d:60,e:2,t:"Paralel Kesif",u:"Switch Transformer'lar moduler mimari ile verimlilik saglar"},
-{n:14,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Beyincik Hesaplamasi",en:"Cerebellar Computation",y:1969,r:"Marr, Albus",b:"Beyincik ileri/ters motor modeli ogrenir",yz:"Ileri Modeller / Tahminsel Kontrol",yy:2018,g:"Wolpert, Miall, Kawato",m:"Gecmis durumlardan gelecegi tahmin etme",o:"Ic model hipotezi = tahminsel ogrenme",d:49,e:2,t:"Dogrudan Tarihsel",u:"Ileri/ters model ciftleri formalize edildi"},
-{n:15,a:"Dilbilim",c:"DIL VE SEMANTIK",tr:"Broca ve Wernicke Alanlari",en:"Broca's & Wernicke's Areas",y:1861,r:"Paul Broca, Carl Wernicke",b:"Broca: dil uretimi, Wernicke: dil anlamasi - ayri dil merkezleri",yz:"Kodlayici-Cozucu Mimarisi",yy:2016,g:"Vaswani et al. (Transformer)",m:"Anlam ve soz dizimi ayri dikkat baslariyla islenebilir",o:"Islevsel modulerlik = mimarik ayrilma",d:155,e:1,t:"Pedagojik Analoji",u:"Modern norobilim dil agini daha dagitik ele aliyor"},
-{n:16,a:"Norobilim",c:"DIL VE SEMANTIK",tr:"Bedensel Bilis",en:"Embodied Cognition / Grounding",y:1980,r:"George Lakoff, Mark Johnson",b:"Kavramlar bedensel deneyimle temellenir",yz:"CLIP / Cok-Modlu Gommeler",yy:2021,g:"Radford et al., Alayrac (Flamingo)",m:"Goruntu + metin ortak gomme uzayi",o:"Duyusal-motor deneyim = anlam = cok-modlu ogrenme",d:41,e:2,t:"Paralel Kesif",u:"CLIP ve Flamingo bedensel bilis prensibini uygular"},
-{n:17,a:"Norobilim",c:"DIKKAT VE KARAR",tr:"Dikkat Isigi",en:"Spotlight of Attention",y:1985,r:"Michael Posner",b:"Dikkat bilgiye 200-300ms'de secici olarak odaklanir",yz:"Transformer Oz-Dikkat",yy:2017,g:"Vaswani et al.",m:"Query-Key softmax ile ilgili parcalara odaklanma",o:"Secici odaklanma = dinamik agirliklandirma",d:32,e:3,t:"Paralel Kesif",u:"Oz-dikkat Posner'in dikkat mekanizmasini hesaplamasal modele donusturdu"},
-{n:18,a:"Bilissel Psikoloji",c:"DIKKAT VE KARAR",tr:"Degisim Korlugu",en:"Change Blindness",y:1997,r:"Simons, Chabris",b:"Dikkat odaklanmadiginda buyuk degisimler fark edilmez",yz:"Seyrek / Sert Dikkat",yy:2015,g:"Mnih, Ba (RAM)",m:"Aktif secim ile isleme darbogazligi",o:"Sinirli islem kapasitesi = secici dikkat",d:18,e:1,t:"Paralel Kesif",u:"Dikkat mekanizmasinin sert ve yumusak versiyonlari"},
-{n:19,a:"Bilissel Psikoloji",c:"DIKKAT VE KARAR",tr:"Stroop Etkisi",en:"Stroop Effect",y:1935,r:"John Ridley Stroop",b:"Celiskili bilgi tepki suresini artirir",yz:"Catisma Izleme / Uyarlanir Kontrol",yy:2010,g:"Cohen, Botvinick",m:"Kayip artisinda ogrenme hizi ve kesif artar",o:"Celiski algilama = uyarlanabilir kontrol",d:75,e:1,t:"Paralel Kesif",u:"On-alindaki korteks catisma algilamasinda sinyal verir"},
-{n:20,a:"Norobilim",c:"UZAMSAL",tr:"Varsayilan Mod Agi",en:"Default Mode Network (DMN)",y:2001,r:"Marcus Raichle",b:"DMN istirahat halinde aktif; gorev sirasinda kapanir",yz:"Buyuk Dil Modeli Ic Simulasyonu",yy:2020,g:"OpenAI (GPT-3), Anthropic",m:"Baglamsal temsillerle ic simulasyon",o:"Beyin-ici simulasyon = ongorucu tahmin",d:20,e:1,t:"Spekulatif Analoji",u:"DMN-BDM baglantisi henuz spekulatif benzerliktir"},
-{n:21,a:"Bilissel Psikoloji",c:"UZAMSAL",tr:"Izgara ve Yer Hucreleri",en:"Grid Cells & Place Cells",y:2005,r:"May-Britt & Edvard Moser",b:"Entorhinal korteks (izgara) + hipokampus (yer) = mekan kodlama",yz:"Ardincilik Temsili",yy:2017,g:"Stachenfeld, Gershman, Dayan",m:"Gelecek durum beklenti kodlamasi",o:"Mekan on-temsili = ongorulu hareket planlama",d:12,e:2,t:"Dogrudan Tarihsel",u:"Ardincilik temsili izgara hucresi spektrumunu acikliyor"},
-{n:22,a:"Dilbilim",c:"UZAMSAL",tr:"Dilsel Gorelilik",en:"Linguistic Relativity (Sapir-Whorf)",y:1929,r:"Benjamin Whorf",b:"Dil mekan ve zaman algisini sekillendiri",yz:"Dil Modelleri + Mekansal Akil Yurutme",yy:2022,g:"Brown et al. (GPT-3)",m:"Dile bagli mekansal jetonlar",o:"Dil = dusunce kodu = mekan temsili",d:93,e:1,t:"Spekulatif Analoji",u:"Dil modelleri mekansal akil yurutme ogrenebilir"},
-{n:23,a:"Norobilim",c:"ENERJI",tr:"Seyrek Kodlama",en:"Sparse Coding (V1)",y:1996,r:"Field, Olshausen",b:"V1 noronlari az sayida temel ogeyle goruntu temsil eder",yz:"Seyrek Otokodlayicilar / L1",yy:2008,g:"Andrew Ng",m:"Kayip = OKH + &lambda;||w||&sub1;",o:"Seyrek temsil = enerji ve bilgi verimliligi",d:12,e:2,t:"Dogrudan Tarihsel",u:"Seyrek kodlama V1'den cikarilan ilke olarak derin aglara uygulanmistir"},
-{n:24,a:"Matematik",c:"ENERJI",tr:"Senkronizasyon ve Salinimlari",en:"Synchronization & Oscillations",y:1999,r:"Wolf Singer, Christof Koch",b:"Noronlar koordinasyon icin salinim yapar (gamma 40-100Hz)",yz:"Zamansal Tutarlilik / RNN Faz Kilidi",yy:2019,g:"Pascanu, Grangier, Bengio",m:"Faz hizalama ve frekans eslestirme",o:"Zamansal senkronizasyon = zamansal baglama",d:27,e:1,t:"Paralel Kesif",u:"RNN zamansal dinamikleri noral salinimlara paralel"},
-{n:25,a:"Norobilim",c:"ENERJI",tr:"Dagitik Kodlama",en:"Distributed Code",y:1986,r:"Rumelhart, McClelland",b:"'Buyukanne noronu' yok, temsiller dagitiktir",yz:"Gommeler / Dagitik Temsiller",yy:2013,g:"Bengio, Mikolov (Word2Vec)",m:"Yuksek boyutlu vektorlerde dagitilan anlam",o:"Yerel kodlama verimsiz = dagitilmis kodlama",d:27,e:3,t:"Dogrudan Tarihsel",u:"Temsil dagitiktir; ancak kavram hucreleri de gozlenmistir"},
-{n:26,a:"Norobilim",c:"ENERJI",tr:"Zamansal Iskontolama",en:"Temporal Discounting",y:1990,r:"George Ainslie",b:"Beyin yakin odulleri ustel olarak daha degerli gorur",yz:"RL'de Iskonto Faktoru &gamma;",yy:2013,g:"Mnih et al. (DQN)",m:"Q(s,a) = E[&sum; &gamma;&#7511; R]; &gamma; < 1",o:"Zaman = odul degerleme azalmasi",d:23,e:2,t:"Dogrudan Tarihsel",u:"RL iskonto faktoru insan zaman tercihini modelleyebilir"},
-{n:27,a:"Norobilim",c:"SOSYAL VE MOTOR",tr:"Ayna Noronlar",en:"Mirror Neurons",y:1992,r:"Giacomo Rizzolatti",b:"Motor noronlar gozlemlenen eylemi gordugunde de atesler",yz:"Taklit Yoluyla Ogrenme",yy:2004,g:"Pomerleau, Schaal, Abbeel",m:"Uzman gosterimlerinden politika ogrenme",o:"Gozlem = eylem cogaltma = empati",d:12,e:2,t:"Paralel Kesif",u:"Taklit ogrenme ayna noron kavramini bilgisayara uygulamistir"},
-{n:28,a:"Norobilim",c:"SOSYAL VE MOTOR",tr:"Beyincik Kosullandirmasi",en:"Cerebellar Conditioning",y:1969,r:"Marr, Albus",b:"Purkinje hucreleri hata sinyaliyle kosullu tepki olusturur",yz:"TD Ogrenme (Kayip Minimizasyonu)",yy:1989,g:"Sutton, Barto",m:"V(s) &larr; V(s) + &alpha;[r + &gamma;V(s') - V(s)]",o:"Hata gudumlu ogrenme = uyarlanir tahmin",d:20,e:2,t:"Dogrudan Tarihsel",u:"TD ogrenme beyincik kosullandirma mekanizmasini formalize etti"},
-{n:29,a:"Norobilim",c:"SOSYAL VE MOTOR",tr:"Motor Korteks Populasyon Kodlamasi",en:"Motor Cortex Population Coding",y:1976,r:"Apostolos Georgopoulos",b:"Motor korteks noronlari ideal hareket yonunde ayarlanir",yz:"Populasyon Vektor Cozumlemesi",yy:2020,g:"Modern hesaplamasal norobilim",m:"Cikis = &sum;w&#7522;&middot;n&#7522;; dogrusal okuma",o:"Noral populasyon = vektorel kombinasyon",d:44,e:2,t:"Formal Esdegerlik",u:"Dogrusal okuma = populasyon vektor cozumlemesi"},
-{n:30,a:"Norobilim",c:"KOGNITIF KONTROL",tr:"Yarikure Uzmanlasmasi",en:"Hemisphere Specialization",y:1960,r:"Roger Sperry",b:"Sol: analitik, detay; Sag: butunsel, mekansal",yz:"Model Toplulugu / Cift Yol",yy:2015,g:"Cesitli mimariler",m:"Ozellestirilmis islemciler paralel calisir",o:"Islevsel asimetri = mimarik asimetri",d:65,e:1,t:"Paralel Kesif",u:"Yarikure asimetrisi kuramsal model; gercekte daha karisik"},
-{n:31,a:"Norobilim",c:"KOGNITIF KONTROL",tr:"On-Alin Korteksi",en:"Prefrontal Cortex (Cognitive Control)",y:1951,r:"Alexander Luria",b:"PFC catismayi tespit eder ve ogrenmeyi kontrol eder",yz:"Ust-Ogrenme (MAML)",yy:2017,g:"Finn, Abbeel, Levine",m:"Az ornekle gradyan tabanli ust-ogrenme",o:"Kontrol mekanizmasi = ust-ogrenme algoritmasi",d:66,e:2,t:"Paralel Kesif",u:"Ust-ogrenme PFC kontrol sinyallerini modelleyebilir"},
-{n:32,a:"Matematik",c:"KOGNITIF KONTROL",tr:"Kaos Dinamikleri",en:"Chaotic Dynamics (Resting Activity)",y:2004,r:"Markram, Izhikevich",b:"Beyin korteks spontan aktivitesi kaotik",yz:"Kaotik YSA'lar",yy:2018,g:"Sussillo, Abbott",m:"YSA gizli durumlari kaotik boyutlarda evrilir",o:"Kaotik dinamikler = bilissel esneklik",d:14,e:1,t:"Paralel Kesif",u:"Kaotik YSA'lar beyin kaotik dinamiklerine paralel"},
-{n:33,a:"Bilissel Psikoloji",c:"KOGNITIF KONTROL",tr:"Cift Surecli Kuram",en:"Dual Process Theory (System 1 & 2)",y:2011,r:"Daniel Kahneman",b:"Sistem 1: hizli, otomatik; Sistem 2: yavas, mantiksal",yz:"Dusunce Zinciri Yonlendirmesi",yy:2022,g:"Wei et al. (Google)",m:"Ara adimlarla akil yurutme, sonra cevap",o:"Iki asamali karar verme",d:11,e:1,t:"Pedagojik Analoji",u:"Dusunce Zinciri ile Sistem 1/2 arasinda pedagojik benzerlik"},
-{n:34,a:"Norobilim",c:"KOGNITIF KONTROL",tr:"Deger Kodlamasi",en:"Value Encoding (vmPFC)",y:2006,r:"Schoenbaum, Dolan",b:"vmPFC farkli modalitelerdeki odul degerini kodlar",yz:"Evrensel Deger Islevi / Coklu-Odul PO",yy:2015,g:"Barreto, Dabney",m:"Tek cikti = beklenen iskontolu getiri",o:"Modalite-agnostik deger = transfer ogrenme",d:9,e:2,t:"Dogrudan Tarihsel",u:"vmPFC deger kodlamasi PO deger islevlerinin biyolojik karsiligi"},
-{n:35,a:"Norobilim",c:"KOGNITIF KONTROL",tr:"Calisan Bellek",en:"Working Memory (dlPFC)",y:1974,r:"Patricia Goldman-Rakic",b:"dlPFC gorev sirasinda bilgiyi aktif tutar",yz:"Tekrarlamali Sinir Agi / LSTM",yy:1997,g:"Hochreiter, Schmidhuber",m:"Gizli durum hucreleri zamansal baglam tutar",o:"Zamansal bilgi kaliciligi",d:23,e:3,t:"Paralel Kesif",u:"TSA gizli durumlari calisan bellek tampon bolgesi gibi davranir"},
-{n:36,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Duruma Bagli Noromodulasyon",en:"State-Dependent Neuromodulation",y:1994,r:"David Thelen",b:"Norotransmitterler ogrenme hizini module eder",yz:"Adam Iyilestirici (Uyarlanir OH)",yy:2014,g:"Kingma, Ba",m:"Ogrenme hizi ve momentum dinamik ayarlanir",o:"Biyolojik modulasyon = optimizasyon parametreleri",d:20,e:2,t:"Paralel Kesif",u:"Uyarlanir iyilestiriciler noromodulasyona benzer"},
-{n:37,a:"Norobilim",c:"OGRENME VE HAFIZA",tr:"Kodlayici-Cozucu Devreleri",en:"Encoder-Decoder Circuitry",y:1969,r:"Masao Ito",b:"Beyincik ters model ogrenir (duyu girisi -> motor cikis)",yz:"Diziden Diziye (Seq2Seq)",yy:2014,g:"Sutskever, Cho",m:"Kodlayici giris -> gizli; cozucu gizli -> cikis",o:"Giris/cikis ayrilmasi = darbogazli temsil",d:45,e:2,t:"Paralel Kesif",u:"Beyincik-korteks ciftleri kodlayici-cozucu ile paralel"},
-{n:38,a:"Norobilim",c:"ENERJI",tr:"Helmholtz Makinesi",en:"Helmholtz Machine (Generative)",y:1995,r:"Peter Dayan, Geoffrey Hinton",b:"Kortekste hiyerarsik uretici isleme",yz:"Derin Inanc Aglari",yy:2006,g:"Hinton, LeCun",m:"Cok olcekli uretici hiyerarsi",o:"Hiyerarsik uretici model = temsil ogrenme",d:11,e:2,t:"Dogrudan Tarihsel",u:"Helmholtz makinesi Derin Inanc Aglarinin temelini olusturdu"},
-{n:39,a:"Matematik",c:"MODERN YAKINSAMALAR",tr:"Hopfield Aglari = Transformer Dikkat",en:"Modern Hopfield = Transformer Attention",y:1982,r:"John Hopfield; Ramsauer (2020)",b:"Cagrisimsal bellek / Hopfield aglari",yz:"Transformer Oz-Dikkat",yy:2017,g:"Vaswani et al.",m:"Dikkat = softmax(QK&#7488;/&radic;d&#7096;) = Hopfield guncelleme kurali",o:"Cagrisimsal depolamadan icerik-adresli erisime",d:38,e:3,t:"Formal Esdegerlik",u:"Matematiksel olarak dikkat = modern Hopfield guncelleme kuralidir"},
-{n:40,a:"Matematik",c:"MODERN YAKINSAMALAR",tr:"Oja Kurali = Temel Bilesen Analizi",en:"Oja's Rule = PCA",y:1982,r:"Erkki Oja",b:"Hebb ogrenme + sinaptik normalizasyon",yz:"Temel Bilesen Analizi (TBA)",yy:1991,g:"Oja; Turk & Pentland",m:"&Delta;w = &alpha;(xy - y&sup2;w); tek noron ilk temel bilesene yakinsar",o:"Gozetimsiz ozellik cikarimi = optimal varyans yonu",d:9,e:2,t:"Formal Esdegerlik",u:"Oja kurali TBA yakinsaklik garantisi saglar"},
-{n:41,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Tamamlayici Ogrenme Sistemleri",en:"Complementary Learning Systems",y:1995,r:"McClelland, McNaughton, O'Reilly",b:"Hipokampus (hizli) + Neokorteks (yavas) ikili sistem",yz:"Deneyim Tekrari + Surekli Ogrenme",yy:2020,g:"Ramasesh et al., OpenAI, Anthropic",m:"Ikili bellek: hizli olaysal + yavas anlamsal",o:"Ogrenme hizi asimetrisi = felaket unutmasini onleme",d:25,e:3,t:"Dogrudan Tarihsel",u:"TOS mimarisi deneyim tekrari yazininin temelini olusturdu"},
-{n:42,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Atim Zamanlamali Plastisite",en:"Spike-Timing-Dependent Plasticity",y:1998,r:"Henry Markram, Bi & Poo",b:"Atim zamanlamasina bagli sinaptik plastisite",yz:"Atimli Sinir Aglari (ASA)",yy:2018,g:"Markram; Bellec et al. (e-prop)",m:"&Delta;W &prop; pre(t) &times; post(t-&delta;); zamansal Hebb",o:"Zamansal nedensellik = olay gudumlu ogrenme",d:27,e:2,t:"Dogrudan Tarihsel",u:"STDP dogrudan ASA ogrenme kurallarini ilham etti"},
-{n:43,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Ardincilik Temsili",en:"Successor Representation",y:2017,r:"Stachenfeld, Gershman, Dayan",b:"Hipokampal tahmin haritasi",yz:"Ardincilik Ozellikleri / Model-Tabanli PO",yy:2018,g:"Barreto, Precup et al.",m:"M = (I - &gamma;P)&sup-1; beklenen gelecek durum agirligi",o:"Mekan = ongorulu temsil = verimli deger hesabi",d:1,e:2,t:"Formal Esdegerlik",u:"Ardincilik matrisi yer/izgara hucresi spektrumunu acikliyor"},
-{n:44,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Dale Ilkesi",en:"Dale's Principle / Dale-compliant ANNs",y:1935,r:"Henry Dale; Bhatt, Bhalla",b:"Norotransmitter turleri: Glutamat (uyarici), GABA (engelleyici)",yz:"Dale-Uyumlu Yapay Sinir Aglari",yy:2022,g:"Bhatt, Bhalla, Suarez",m:"w &ge; 0 (uyarici) veya w &le; 0 (engelleyici)",o:"Biyolojik sadakat kisiti = tumevarimsal yonelim",d:91,e:1,t:"Biyolojik Sadakat",u:"DUYA'lar Dale ilkesinin biyolojik kisitlamasini uygular"},
-{n:45,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Yetiskin Norojenezi",en:"Adult Hippocampal Neurogenesis",y:1998,r:"Elizabeth Gould, Fred Gage",b:"Yetiskin hipokampusunda yeni noron olusumu",yz:"Sinir Agi Mimarisi Arama (NAS)",yy:2017,g:"Zoph, Le (NASNet)",m:"Calisma zamaninda dinamik ag topolojisi olusturma",o:"Dinamik sinir olusturma = dinamik bilissel yetenekler",d:19,e:1,t:"Paralel Kesif",u:"Yetiskin norojenezi 2024-25 calismalariyla guclendi"},
-{n:46,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Uretici Celisimsel Aglar",en:"GAN - Generative Adversarial Networks",y:2014,r:"Ian Goodfellow",b:"Beyin antagonistik sistemler, korteks-ici rekabet",yz:"GAN'lar",yy:2014,g:"Goodfellow, Poulin, Mirza",m:"Uretici vs Ayirt Edici; min-maks oyun",o:"Celiski = temsil iyilestirmesi",d:0,e:3,t:"Spekulatif Analoji",u:"GAN dogrudan beyinden ilham almamis; spekulatif baglanti"},
-{n:47,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Izgara Hucresi Altigen Simetrisi",en:"Grid Cell Hexagonal Symmetry",y:2005,r:"May-Britt & Edvard Moser",b:"Entorhinal korteks altigen izgara deseni",yz:"Altigen Gommeler",yy:2020,g:"Whittington, Muller et al.",m:"Ogrenen temsiller altigen simetri gosteriyor",o:"Geometrik temsil = verimli mekansal indeksleme",d:15,e:2,t:"Formal Esdegerlik",u:"Izgara hucresi altigen kodlamasi derin aglarda kendilginden ortaya cikiyor"},
-{n:48,a:"Bilissel Psikoloji",c:"MODERN YAKINSAMALAR",tr:"Felaket Unutmasi ve EAK",en:"Catastrophic Forgetting & EWC",y:2018,r:"Surekli ogrenme toplulugu",b:"Degisen kosullarda sinif sinirlari kayar",yz:"Elastik Agirlik Konsolidasyonu",yy:2017,g:"Kirkpatrick et al.",m:"Fisher bilgi matrisi ile eski agirliklari koruma",o:"Eski gorev hafizasi = yeni gorev dengesi",d:1,e:2,t:"Dogrudan Tarihsel",u:"EAK hipokampal konsolidasyonun matematiksel modelidir"},
-{n:49,a:"Matematik",c:"MODERN YAKINSAMALAR",tr:"Bayesci Beyin Hipotezi",en:"Bayesian Brain Hypothesis",y:2003,r:"Friston, Dayan",b:"Beyin olasilik dagilimlari uzerinden sonsal cikarim yapar",yz:"Bayesci Derin Ogrenme",yy:2015,g:"Gal, Ghahramani; Blundell",m:"Q(w) &asymp; P(w|veri); belirsizlik olcumleme",o:"Sonsal cikarim = olasiliksal ogrenme",d:12,e:2,t:"Formal Esdegerlik",u:"Bayesci beyin modern belirsizlik-duyarli derin ogrenmenin temeli"},
-{n:50,a:"Norobilim",c:"MODERN YAKINSAMALAR",tr:"Ongorucu Isleme / Serbest Enerji",en:"Predictive Processing / Free Energy",y:2005,r:"Andy Clark, Karl Friston",b:"Beyin tahmin hatasini minimize eder; yukari/asagi ayrimi",yz:"Gurultusuzlastirma Yayilim Modelleri",yy:2020,g:"Ho, Jain; LeCun",m:"Gurultusuzlastirma puan eslestirme = serbest enerji minimizasyonu",o:"Tahmin hatasi = ogrenme sinyali",d:15,e:2,t:"Formal Esdegerlik",u:"Yayilim modelleri Friston'in serbest enerji minimizasyonunu uyguluyor"}
+// ═══════════════════════════════════════════════
+// DATA (50 kayıt - Excel'den)
+// ═══════════════════════════════════════════════
+const DATA=[
+{no:1,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Nörobilim",tr:"Nöron Doktrini",en:"Neuron Doctrine",yil:1906,ara:"Santiago Ramón y Cajal",bm:"Sinirler ayrık hücre birimleridir (sinaptik iletim ile bağlı)",yzk:"McCulloch-Pitts Modeli",yzy:1943,gel:"McCulloch, Pitts",yzm:"Boolean logic gates ile sinir hesaplaması",oi:"Diskret, bağlı birimlerin evrensel hesaplama",gec:37,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Temel kuramı modern nöro-uyumlu sinirlendirmede (Dale ilkesi) korunmuş"},
+{no:2,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Nörobilim",tr:"Sinaptik Plastisite",en:"Synaptic Plasticity (Hebbian)",yil:1949,ara:"Donald Hebb",bm:"Birlikte ateşleyen nöronlar bağlanır (Hebbian learning)",yzk:"Gradient Descent / Backpropagation",yzy:1986,gel:"Rumelhart, Hinton, Williams",yzm:"Hata ile sinaptik ağırlıkları güncelleme",oi:"Birlikte aktivasyon → bağlantı güçlenmesi",gec:37,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Hebb yasası modern derin öğrenmenin temelini oluşturdu"},
+{no:3,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Nörobilim",tr:"Sinaptik Bağlantı Homostatik",en:"Homeostatic Synaptic Scaling",yil:2003,ara:"Gina Turrigiano",bm:"Sinaptik bağlantıların homeostaz ile regülasyonu",yzk:"Batch Normalization",yzy:2015,gel:"Ioffe, Szegedy",yzm:"Her katman aktivasyonunu ortalaması 0, varyansı 1 tutma",oi:"Dinamik denge → öğrenme stabilizasyonu",gec:12,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Sinir ağlarında enerji verimliliği ve dinamik denge"},
+{no:4,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Bilişsel Psikoloji",tr:"Dağıtılmış Temsil",en:"Distributed Representation",yil:1986,ara:"Rumelhart, McClelland",bm:"Bilgi birçok nöron arasında paralel olarak kodlanır",yzk:"Distributed Embeddings / Word2Vec / BERT",yzy:2013,gel:"Bengio, Mikolov / Devlin",yzm:"Yüksek boyutlu vektörlere dağıtılan semantik temsiller",oi:"Lokal kodlamadan dağıtılmış kodlamaya geçiş",gec:27,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Modern NLP'nin temel mimarisi"},
+{no:5,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Matematik",tr:"Sinir Aktivasyonu",en:"Neural Activation (All-or-None)",yil:1943,ara:"McCulloch, Pitts",bm:"Nöronların eşik üzerine çıkınca ateş etmesi (all-or-none)",yzk:"ReLU, Sigmoid Aktivasyonu",yzy:1998,gel:"Yann LeCun, Yoshua Bengio",yzm:"Nonlinear aktivasyon fonksiyonları (ReLU: max(0,x))",oi:"Threshold-based hesaplama → nonlinearite",gec:55,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"McCulloch-Pitts ve backpropagation arasında eksik bağlantı tartışılıyor"},
+{no:6,kat:"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ",alan:"Matematik",tr:"Retiküler Aktivasyon Sistemi",en:"Reticular Activation System",yil:1949,ara:"Moruzzi, Magoun",bm:"Beyin sapında uyarılabilirliği kontrol eden sistem",yzk:"Attention Mechanisms",yzy:2014,gel:"Bahdanau, Cho, Bengio",yzm:"Query-Key-Value ile dinamik ağırlıklandırma",oi:"Seçici aktivasyon → önemli bilgiye odaklanma",gec:65,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Her iki sistemde de dinamik filtreleme ve seçicilik mekanizması"},
+{no:7,kat:"GÖRSEL İŞLEME VE HİYERARŞİK TANIMLAMA",alan:"Nörobilim",tr:"Lateral İnhibisyon",en:"Lateral Inhibition",yil:1965,ara:"Hartline, Wagner",bm:"Sinirler yan komşularını inhibe ederek kontrastı artırır",yzk:"Local Response Normalization (LRN)",yzy:2012,gel:"Krizhevsky, Sutskever, Hinton",yzm:"Çıkışları komşu aktivasyonlar ile normalize etme",oi:"Kompetitif ayırıştırma → özellik netliği",gec:47,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"LRN doğrudan lateral inhibisyondan geldi"},
+{no:8,kat:"GÖRSEL İŞLEME VE HİYERARŞİK TANIMLAMA",alan:"Nörobilim",tr:"Ventral/Dorsal Akış",en:"Two-Stream Hypothesis",yil:1992,ara:"Mishkin, Ungerleider",bm:"Ventral: NE (ne), Dorsal: PPC (nerede/nasıl)",yzk:"Dual-Stream Architectures",yzy:2014,gel:"Simonyan, Zisserman",yzm:"Spatial + Feature akışlarının ayrılması",oi:"Fonksiyonel bifurkasyon → paralel akışlar",gec:22,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Modern dual-stream vision modelleri dorsal-ventral ayrımından ilham almış"},
+{no:9,kat:"DUYUSAL SİSTEMLER",alan:"Nörobilim",tr:"Tonotopik Harita",en:"Tonotopic Map (Auditory)",yil:1940,ara:"Georg von Békésy",bm:"İşitme korteksinde frekans tutulan haritalar",yzk:"Spectrogram-based Encoding / DeepSpeech",yzy:2014,gel:"Hannun et al.",yzm:"Spektrogram özelliklerini hiyerarşik öğrenme ile kodlama",oi:"Sensory tonotopy → frekans kodlaması",gec:74,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"DeepSpeech mimarisinde frekans haritaları doğal ortaya çıkıyor"},
+{no:10,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Dopamin Ödül Tahmin Hatası",en:"Dopamine Reward Prediction Error",yil:1998,ara:"Schultz, Dayan, Montague",bm:"Dopamin nöronları beklenen vs. gerçek ödül farkını ateşler",yzk:"Policy Gradient & TD Learning / RLHF",yzy:2015,gel:"Schulman (PPO), OpenAI (RLHF)",yzm:"TD error: δ = r + γV(s') - V(s)",oi:"Prediction error → learning signal",gec:27,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"AlphaZero, MuZero, AlphaProof, PPO/RLHF"},
+{no:11,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Uzun Süreli Potansiyelleşme",en:"Long-Term Potentiation (LTP)",yil:1973,ara:"Bliss, Lømo",bm:"Tekrarlı uyarı sonrası sinaptik bağlantı kalıcı olarak güçlenir",yzk:"Weight Updates in Neural Networks",yzy:1986,gel:"Rumelhart, Hinton, Williams",yzm:"Δw ∝ ηδ·a (hata × aktivasyon × learning rate)",oi:"Tekrar → bağlantı güçlenmesi = öğrenme",gec:0,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel (tartışmalı)",it:"Kuvvetli Analoji (tartismali)",gun:"Biyolojik karşılığı tartışmalı: weight transport problemi"},
+{no:12,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Episodik Hafıza",en:"Episodic Memory (Hippocampus)",yil:1957,ara:"Scoville, Milner",bm:"Hipokampus olay temelli hatıraları geçici depolar",yzk:"Experience Replay",yzy:2015,gel:"Lin (1992), Mnih (DQN 2015)",yzm:"Geçmiş deneyimler mini-batch'lerde rastgele yeniden öğrenme",oi:"Hızlı episodik depolama + yavaş kortikal konsolidasyon",gec:58,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Experience replay katastrofik unutmayı önler"},
+{no:13,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Bölünmüş Beyin Sendromu",en:"Callosotomy (Split-Brain)",yil:1960,ara:"Sperry, Gazzaniga",bm:"Beyin yarımları ayrıldığında bağımsız işleme gösterir",yzk:"Mixture of Experts (MoE)",yzy:2020,gel:"Lepikhin, Shazeer",yzm:"Her expert farklı özellik uzayında öğrenir",oi:"Nörolojik modülarite → hesaplasal modülarite",gec:60,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Modüler mimariler beyin hemisferlerinin ayrılmasına benzer"},
+{no:14,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Serebellum Hesaplaması",en:"Cerebellar Computation",yil:1969,ara:"Marr, Albus",bm:"Serebellum forward/inverse motor modeli öğrenir",yzk:"Forward Models / Predictive Control",yzy:2018,gel:"Wolpert, Miall, Kawato",yzm:"Geçmiş durumlardan gelecek durumları tahmin etme",oi:"Internal model hypothesis → predictive learning",gec:49,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Forward/inverse model çiftleri formalize edildi"},
+{no:15,kat:"DİL, ANLAM VE SEMANTİK TEMSİL",alan:"Dilbilim",tr:"Broca/Wernicke Alanları",en:"Broca/Wernicke Areas",yil:1861,ara:"Paul Broca, Carl Wernicke",bm:"Broca (ifade) + Wernicke (anlama) - ayrı dil merkezleri",yzk:"Encoder-Decoder Architecture",yzy:2016,gel:"Vaswani et al. (Transformer)",yzm:"Semantik ve sentaks ayrı attention başları tarafından işlenir",oi:"Fonksiyonel modülarite → mimarik ayrılma",gec:155,etki:"Orta",iy:"Pedagojik Analoji",it:"Pedagojik Analoji",gun:"Modern nörobilim dil ağını daha dağıtık olarak ele alıyor"},
+{no:16,kat:"DİL, ANLAM VE SEMANTİK TEMSİL",alan:"Nörobilim",tr:"Temellendirme Problemi",en:"Grounding Problem (Embodied Cognition)",yil:1980,ara:"George Lakoff, Mark Johnson",bm:"Kavramlar beden tecrübesi ile temellendirilir",yzk:"Multimodal Embeddings / CLIP",yzy:2021,gel:"Radford et al. (CLIP), Alayrac (Flamingo)",yzm:"Image + Text joint embedding space",oi:"Sensorimotor tecrübe → anlam = multimodal öğrenme",gec:41,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"CLIP ve Flamingo gibi vision-language modelleri embodiment uygular"},
+{no:17,kat:"DİKKAT, BİLİŞ VE KARAR VERME",alan:"Nörobilim",tr:"Dikkat Işığı",en:"Spotlight of Attention",yil:1985,ara:"Michael Posner",bm:"Dikkat bilgiye 200-300ms'de seçici odaklanır",yzk:"Transformer Self-Attention",yzy:2017,gel:"Vaswani et al.",yzm:"Query-Key softmax ile sequence'in ilgili parçalarına odaklanma",oi:"Seçici odaklanma → dinamik ağırlıklandırma",gec:32,etki:"Çok Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Self-attention Posner'ın dikkat mekanizmalarını hesaplamaya dönüştürdü"},
+{no:18,kat:"DİKKAT, BİLİŞ VE KARAR VERME",alan:"Bilişsel Psikoloji",tr:"Değişim Körlüğü",en:"Change Blindness",yil:1997,ara:"Daniel Simons, Christopher Chabris",bm:"Dikkat odaklanmadığında dramatik değişimler fark edilmez",yzk:"Sparse/Hard Attention",yzy:2015,gel:"Mnih, Ba (RAM)",yzm:"Aktif seçim → işlem bottleneck",oi:"Sınırlı hesaplama → seçici dikkat",gec:18,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Hard ve soft dikkat versiyonları destekleniyor"},
+{no:19,kat:"DİKKAT, BİLİŞ VE KARAR VERME",alan:"Bilişsel Psikoloji",tr:"Stroop Etkisi",en:"Stroop Effect (Cognitive Control)",yil:1935,ara:"John Ridley Stroop",bm:"Çelişkili bilgi tepki süresini artırır",yzk:"Conflict Monitoring / Adaptive Control",yzy:2010,gel:"Cohen, Botvinick",yzm:"Loss surge sırasında learning rate ve exploration artar",oi:"Çelişki deteksiyonu → uyarlanabilir kontrol",gec:75,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Prefrontal cortex çelişki deteksiyonu optimal kontrol sinyali verir"},
+{no:20,kat:"UZAMSAL TEMSİL VE NAVİGASYON",alan:"Nörobilim",tr:"Varsayılan Mod Ağı",en:"Default Mode Network (DMN)",yil:2001,ara:"Marcus Raichle",bm:"DMN: istirahat halinde aktif, görev sırasında deaktif",yzk:"Language Models (Internal Simulation)",yzy:2020,gel:"OpenAI (GPT-3), Anthropic (Claude)",yzm:"Beyin ağırlıklı attention, contextual representations",oi:"Beyin-içi simülasyon → önceden tahmini",gec:20,etki:"Orta",iy:"Spekülatif Analoji",it:"Spekulatif Analoji",gun:"DMN→LLM bağlantısı henüz spekülatif benzerliktir"},
+{no:21,kat:"UZAMSAL TEMSİL VE NAVİGASYON",alan:"Bilişsel Psikoloji",tr:"Grid & Place Hücreleri",en:"Grid Cells & Place Cells",yil:2005,ara:"May-Britt Moser, Edvard Moser",bm:"Entorhinal cortex (grid) + hipokampus (place) = mekân kodlama",yzk:"Successor Representation / Spatial Embeddings",yzy:2017,gel:"Stachenfeld, Gershman, Dayan",yzm:"Future state expectation coding",oi:"Mekân öntemsili → öngörülü hareket planlama",gec:12,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Successor representation grid cell spektrumunu açıklıyor"},
+{no:22,kat:"UZAMSAL TEMSİL VE NAVİGASYON",alan:"Dilbilim",tr:"Dilsel Görelilik",en:"Linguistic Relativity (Sapir-Whorf)",yil:1929,ara:"Benjamin Whorf",bm:"Dil mekân ve zaman algısını şekillendirir",yzk:"Language Models + Spatial Reasoning",yzy:2022,gel:"Brown et al. (GPT-3 Few-shot)",yzm:"Dile bağlı spatial tokens vs. universal representations",oi:"Dil → düşünce kodu → mekân temsili",gec:93,etki:"Orta",iy:"Spekülatif Analoji",it:"Spekulatif Analoji",gun:"Dil modelleri mekânsal akıl yürütmeyi öğrenebilir ama doğrudan ilham değil"},
+{no:23,kat:"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ",alan:"Nörobilim",tr:"Seyrek Kodlama",en:"Sparse Coding (V1)",yil:1996,ara:"David Field, Bruno Olshausen",bm:"V1 nöronları az sayıda temel öğeden kombinasyon ile temsil eder",yzk:"Sparse Autoencoders / L1 Regularization",yzy:2008,gel:"Andrew Ng, Honglun Le",yzm:"Loss = MSE + λ||w||₁",oi:"Seyrek temsil → enerji/bilgi verimliliği",gec:12,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Sparse coding V1'den çıkarılan ilke derin ağlara uygulandı"},
+{no:24,kat:"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ",alan:"Matematik",tr:"Senkronizasyon ve Osilasyonlar",en:"Synchronization and Oscillations",yil:1999,ara:"Wolf Singer, Christof Koch",bm:"Dağıtılmış nöronlar koordinasyon için oscillate eder (gamma 40-100Hz)",yzk:"Temporal Coherence / Phase Locking in RNNs",yzy:2019,gel:"Pascanu, Grangier, Bengio",yzm:"Phase alignment ve frequency match",oi:"Zamansal senkronizasyon → temporal binding",gec:27,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"RNN'lerdeki zamansal dinamikler nöral osilasyonlarla paralel"},
+{no:25,kat:"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ",alan:"Nörobilim",tr:"Dağıtık Temsil (Dağıtık Kod)",en:"Distributed Code",yil:1986,ara:"Rumelhart, McClelland",bm:"Temsiller dağıtılmıştır; 'büyükanne nöronu' yok",yzk:"Embeddings / Distributed Representations",yzy:2013,gel:"Bengio, Mikolov (Word2Vec)",yzm:"Yüksek boyutlu vektörlerde dağıtılan anlam",oi:"Lokal kodlama → dağıtılmış kodlama",gec:27,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Medial temporal lobda seçici kavram hücreleri de gözlenmiştir"},
+{no:26,kat:"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ",alan:"Nörobilim",tr:"Zamansal İndirgeme",en:"Temporal Discounting (Hyperbolic)",yil:1990,ara:"George Ainslie",bm:"Beyin yakın gelecek ödülleri üstel olarak daha değerli görür",yzk:"Discount Factor γ in RL",yzy:2013,gel:"Mnih et al. (DQN)",yzm:"Q(s,a) = E[Σ γᵗ R(s,a)]; γ < 1",oi:"Zaman → ödül değerlemesi exponansiyel decay",gec:23,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"RL discount factor doğrudan insan zaman tercihini modelleyebilir"},
+{no:27,kat:"SOSYAL ÖĞRENME VE MOTOR KONTROL",alan:"Nörobilim",tr:"Ayna Nöronları",en:"Mirror Neurons",yil:1992,ara:"Giacomo Rizzolatti",bm:"Motor plan yapan nöronlar gözlemlenen eylemi gördüğünde de ateş eder",yzk:"Imitation Learning / Behavioral Cloning",yzy:2004,gel:"Pomerleau, Schaal, Abbeel, Ng",yzm:"Expert demolarından politika öğrenme",oi:"Gözlem → eylem reprodüksiyonu → empati",gec:12,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Imitation learning ayna nöron konseptini bilgisayara uyguladı"},
+{no:28,kat:"SOSYAL ÖĞRENME VE MOTOR KONTROL",alan:"Nörobilim",tr:"Serebellum Koşullandırma",en:"Cerebellar Conditioning",yil:1969,ara:"Marr, Albus",bm:"Purkinje hücreleri hata sinyali ile koşul oluşturur",yzk:"Classical Conditioning as Loss Minimization",yzy:1989,gel:"Sutton, Barto (TD Learning)",yzm:"V(s) ← V(s) + α[r + γV(s') - V(s)]",oi:"Error-driven öğrenme → adaptive prediction",gec:20,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"TD learning serebellum koşullandırma mekanizmasını formalize etti"},
+{no:29,kat:"SOSYAL ÖĞRENME VE MOTOR KONTROL",alan:"Nörobilim",tr:"Motor Korteks Popülasyon Kodlaması",en:"Motor Cortex Population Coding",yil:1976,ara:"Apostolos Georgopoulos",bm:"Motor korteks nöronları ideal hareket yönü etrafında tuning gösterir",yzk:"Population Vector Decoding / Linear Readout",yzy:2020,gel:"Modern computational neuroscience + ML",yzm:"Çıkış = Σ wᵢ nᵢ; dekoder motor planı çıkarır",oi:"Nöral popülasyon → davranış vektörel kombinasyon",gec:44,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Linear readout = population vector decoding"},
+{no:30,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Nörobilim",tr:"Hemisfer Uzmanlaşması",en:"Hemisphere Specialization",yil:1960,ara:"Roger Sperry",bm:"Sol hemisfer: analitik; sağ hemisfer: bütünsel, spatial",yzk:"Model Ensembles / Dual-Pathway",yzy:2015,gel:"Diverse model architectures",yzm:"Özelleştirilmiş processor ağlar paralel işler",oi:"Fonksiyonel asimetri → mimarik asimetri",gec:65,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Hemisfer asimetrisi kuramsal model; gerçek bölünme daha karmaşık"},
+{no:31,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Nörobilim",tr:"Prefrontal Korteks (Bilişsel Kontrol)",en:"Prefrontal Cortex (Cognitive Control)",yil:1951,ara:"Alexander Luria",bm:"PFC çatışmayı tespit eder ve öğrenmeyi kontrol eder",yzk:"Meta-Learning / Learning to Learn",yzy:2017,gel:"Finn, Abbeel, Levine (MAML)",yzm:"Few-shot learner: gradient-based meta-learning",oi:"Kontrol mekanizması → meta-öğrenme algoritması",gec:66,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Meta-learning PFC kontrol sinyallerini yaklaşık olarak modelleyebilir"},
+{no:32,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Matematik",tr:"Kaos Dinamikleri",en:"Chaotic Dynamics (Resting Activity)",yil:2004,ara:"Henry Markram, Eugene Izhikevich",bm:"Beyin korteks spontan aktivitesi kaotik; deterministik ama tahmin edilemez",yzk:"Chaotic RNNs / Complex Dynamics",yzy:2018,gel:"Sussillo, Abbott",yzm:"RNN gizli durumları kaotik boyutlarda evrim halinde",oi:"Kaotik dinamikler → esnek bilişsel akışkanlık",gec:14,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Chaotic RNN'ler beyin kaotik dinamiklerini modelliyor"},
+{no:33,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Bilişsel Psikoloji",tr:"İkili Süreç Teorisi",en:"Dual Process Theory (System 1 & 2)",yil:2011,ara:"Daniel Kahneman",bm:"Sistem 1: hızlı, otomatik; Sistem 2: yavaş, kontrollü, mantıksal",yzk:"Chain-of-Thought (CoT) Prompting",yzy:2022,gel:"Wei et al. (Google), Kojima et al.",yzm:"Önce ara adımları akıl yürütme, sonra final cevap",oi:"Zamansal akıl yürütme → iki-aşamalı karar",gec:11,etki:"Orta",iy:"Pedagojik Analoji",it:"Pedagojik Analoji",gun:"CoT Kahneman'ın Sistem 1/2'si ile pedagojik benzerliktir"},
+{no:34,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Nörobilim",tr:"Değer Kodlama (vmPFC)",en:"Value Encoding (Ventromedial PFC)",yil:2006,ara:"Schoenbaum, Dolan",bm:"vmPFC genelleştirilmiş ödül değerini kodlar",yzk:"Universal Value Function / Multi-Reward RL",yzy:2015,gel:"Barreto, Dabney (Distributional RL)",yzm:"Single output = expected discounted return",oi:"Modalite-agnostik değer → transfer learning",gec:9,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"vmPFC value encoding RL value functions'ın biyolojik karşılığı olabilir"},
+{no:35,kat:"KOGNİTİF KONTROL VE KARAR VERME",alan:"Nörobilim",tr:"Çalışan Bellek (dlPFC)",en:"Working Memory (Lateral PFC)",yil:1974,ara:"Patricia Goldman-Rakic",bm:"dlPFC çalışan bellek görevleri sırasında bilgiyi tutar",yzk:"Recurrent Neural Networks / LSTM",yzy:1997,gel:"Hochreiter, Schmidhuber",yzm:"Gizli durum hücreleri zamansal bağlam tutar",oi:"Zamansal tutuş → bilgi persistensi",gec:23,etki:"Çok Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"RNN gizli durumları çalışan bellek buffer'ı gibi davranır"},
+{no:36,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Duruma Bağlı Nöromodülasyon",en:"State-Dependent Neuromodulation",yil:1994,ara:"David Thelen",bm:"Nörotransmitterler öğrenme hızlarını modüle eder",yzk:"Hyperparameter Adaptation / Adam Optimizer",yzy:2014,gel:"Kingma, Ba",yzm:"Learning rate, momentum dinamik ayarlanır",oi:"Biyolojik modülasyon → optimizasyon hiperparametreleri",gec:20,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Adaptive optimizer'lar nöromodülasyona benzer şekilde çalışır"},
+{no:37,kat:"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ",alan:"Nörobilim",tr:"Kodlayıcı-Çözücü Devre",en:"Encoder-Decoder Circuitry",yil:1969,ara:"Masao Ito",bm:"Serebellum inverse model öğrenir; korteks forward model",yzk:"Encoder-Decoder / Seq2Seq",yzy:2014,gel:"Sutskever, Cho (Seq2Seq)",yzm:"Encoder giriş → latent; decoder latent → çıkış",oi:"Input/output bölünmesi → bottleneck temsili",gec:45,etki:"Yüksek",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Serebellum-korteks çiftleri encoder-decoder mimarisiyle paralel"},
+{no:38,kat:"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ",alan:"Nörobilim",tr:"Derin Boltzmann Makineleri",en:"Deep Boltzmann Machines (Helmholtz)",yil:1995,ara:"Peter Dayan, Geoffrey Hinton",bm:"Kortekste hiyerarşik generatif işleme (Helmholtz Makinesi)",yzk:"Deep Belief Networks / Generative Models",yzy:2006,gel:"Geoffrey Hinton, Yann LeCun",yzm:"Multi-scale generative hiyerarşi",oi:"Hiyerarşik generatif model → hiyerarşik temsil öğrenme",gec:11,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"Helmholtz makinesi konsepti DBN'lerin beyin uyumlu temelini oluşturdu"},
+{no:39,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Matematik",tr:"Modern Hopfield Ağları ↔ Transformer",en:"Modern Hopfield Networks ↔ Transformer Attention",yil:1982,ara:"John Hopfield → Ramsauer, Huber (2020)",bm:"Asosiyatif Bellek / Hopfield Ağları",yzk:"Transformer Self-Attention",yzy:2017,gel:"Vaswani et al.",yzm:"Attention weights = softmax(QKᵀ/√dₖ) = Hopfield update",oi:"Asosiyatif depolamadan content-addressable retrieval",gec:38,etki:"Çok Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Ramsauer et al. 2020 attention'un Hopfield update kuralı olduğunu kanıtladı"},
+{no:40,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Matematik",tr:"Oja Kuralı ↔ PCA",en:"Oja's Rule ↔ PCA",yil:1982,ara:"Erkki Oja",bm:"Hebbian Öğrenme + Sinaptik Normalizasyon",yzk:"Temel Bileşen Analizi (PCA)",yzy:1991,gel:"Oja; Turk & Pentland (Eigenfaces)",yzm:"Δw = α(xy - y²w); tek nöron principal component'e yakınsar",oi:"Unsupervised özellik çıkarımı → optimal varyans yönü",gec:9,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Oja kuralı tek başına PCA convergence garantisi sağlar"},
+{no:41,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Tamamlayıcı Öğrenme Sistemleri",en:"Complementary Learning Systems",yil:1995,ara:"McClelland, McNaughton, O'Reilly",bm:"Hipokampus (hızlı) + Neokorteks (yavaş)",yzk:"Experience Replay + Continual Learning + RAG",yzy:2020,gel:"OpenAI (RAG), Anthropic",yzm:"Dual memory: fast episodic + slow semantic consolidation",oi:"Öğrenme hızları asimetrisi → catastrophic forgetting önleme",gec:25,etki:"Çok Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"CLS mimarisi experience replay ve continual learning temelini oluşturdu"},
+{no:42,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Spike-Timing-Dependent Plasticity",en:"STDP ↔ SNN Learning",yil:1998,ara:"Henry Markram, Bi & Poo",bm:"Spike-Timing-Dependent Plasticity",yzk:"Spiking Neural Networks (SNN)",yzy:2018,gel:"Markram, Bi, Poo; Bellec et al.",yzm:"ΔW ∝ pre(t) × post(t-δ); temporal Hebbian learning",oi:"Zamansal nedensellik → sinaptik değişim",gec:27,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"STDP doğrudan SNN learning rule'larını ilham aldı"},
+{no:43,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Ardınçlık Temsili",en:"Successor Representation",yil:2017,ara:"Stachenfeld, Gershman, Dayan",bm:"Hipokampal Tahmin Haritası",yzk:"Successor Features / Model-Based RL",yzy:2018,gel:"Barreto, Precup et al.",yzm:"M = (I - γP)⁻¹; expected future state weighting",oi:"Mekân → öngörülü temsil = verimli değer hesaplama",gec:1,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Successor matrix grid cell spektrumunun eigendecomposition'unu açıklıyor"},
+{no:44,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Dale İlkesi (Biyolojik Sınır)",en:"Dale's Principle ↔ Dale-compliant ANNs",yil:1935,ara:"Henry Dale → Bhatt, Bhalla",bm:"Nörotransmitter türleri: Glutamat=uyarıcı, GABA=engelleyici",yzk:"Dale-uyumlu Yapay Sinir Ağları (DANN)",yzy:2022,gel:"Bhatt, Bhalla, Suarez et al.",yzm:"ANN ağırlıkları: w ≥ 0 (uyarıcı) veya w ≤ 0 (engelleyici)",oi:"Biyolojik sadakat kısıtı → interpretable networks",gec:91,etki:"Orta",iy:"Biyolojik Sadakat Kısıtlaması",it:"Biyolojik Sadakat Kisitlamasi",gun:"DANN'lar Dale ilkesinin biyolojik sadakat gereksinimi uygular"},
+{no:45,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Yetişkin Nörojenezi",en:"Adult Hippocampal Neurogenesis",yil:1998,ara:"Elizabeth Gould, Fred Gage",bm:"Yetişkin insan hipokampal nörojenezi",yzk:"Neural Architecture Search (NAS)",yzy:2017,gel:"Zoph, Le (NASNet)",yzm:"Dinamik olarak network topolojisi oluşturma",oi:"Dinamik sinir oluşturma → dinamik bilişsel yetenekler",gec:19,etki:"Orta",iy:"Paralel Keşif",it:"Paralel Kesif",gun:"Yetişkin nörojenezi onaylandı ancak kapsamı tartışmalı"},
+{no:46,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Üretici Çekişmeli Ağlar",en:"Generative Adversarial Networks (GAN)",yil:2014,ara:"Ian Goodfellow",bm:"Beyin antagonistik sistemler (intra-cortical competition)",yzk:"GAN'lar",yzy:2014,gel:"Goodfellow, Poulin, Mirza et al.",yzm:"Generator vs. Discriminator; min-max game",oi:"Çelişki → represantasyon iyileştirmesi",gec:0,etki:"Çok Yüksek",iy:"Spekülatif Analoji",it:"Spekulatif Analoji",gun:"GAN doğrudan beyin çelişki kontrolünden ilham almamış; spekülatif bağlantı"},
+{no:47,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Grid Hücreleri ve Altıgen Simetri",en:"Grid Cells & Hexagonal Symmetry",yil:2005,ara:"May-Britt, Edvard Moser",bm:"Entorhinal korteks altıgen grid deseni",yzk:"Hexagonal Embeddings / 6-fold Symmetry",yzy:2020,gel:"Whittington, Muller et al.",yzm:"Öğrenilen temsiller altıgen simetri gösteriyor",oi:"Geometrik temsil → verimli spatial indeksleme",gec:15,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Grid cell altıgen kodlama derin ağlarda spontan ortaya çıkıyor"},
+{no:48,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Bilişsel Psikoloji",tr:"Kavram Kayması ve Katastrofik Unutma",en:"Concept Drift & Catastrophic Forgetting",yil:2018,ara:"Continual Learning Community",bm:"Durağan olmayan ortamda sınıf sınırları kayar",yzk:"Continual Learning / EWC",yzy:2017,gel:"Kirkpatrick et al.",yzm:"F = Fisher information matrix penaltı",oi:"Eski görev hatırası → yeni görev öğrenirken dengeleme",gec:1,etki:"Yüksek",iy:"Doğrudan Tarihsel",it:"Dogrudan Tarihsel Ilham",gun:"EWC hipokampal consolidation matematiksel modelidir"},
+{no:49,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Matematik",tr:"Bayesçi Beyin Hipotezi",en:"Bayesian Brain Hypothesis",yil:2003,ara:"Friston, Dayan",bm:"Beyin olasılık dağılımları posteriori çıkarımı yapar",yzk:"Bayesian Deep Learning / Variational Inference",yzy:2015,gel:"Gal, Ghahramani; Blundell et al.",yzm:"Q(w) ≈ P(w|data); belirsizlik ölçümü",oi:"Posterior inference → olasılıksal öğrenme",gec:12,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Bayesian brain modern uncertainty-aware DL'nin teorik temeli"},
+{no:50,kat:"MODERN YAKINSAMALAR VE SON GELİŞMELER",alan:"Nörobilim",tr:"Tahminsel İşleme / Serbest Enerji",en:"Predictive Processing / Free Energy",yil:2005,ara:"Andy Clark, Karl Friston",bm:"Beyin tahmin hatası minimize eder; bottom-up/top-down ayrımı",yzk:"Denoising Diffusion / Energy-Based Models",yzy:2020,gel:"Ho, Jain (Diffusion); LeCun (EBM)",yzm:"Denoising: ∇ₓ log p(x) ≈ -∇ₓ E(x); score matching",oi:"Prediction error → learning signal = free energy principle",gec:15,etki:"Yüksek",iy:"Formal Eşdeğerlik",it:"Formal Esdegerlik",gun:"Diffusion modeller Friston'ın free energy minimization'ı implement ediyor"}
 ];
 
-const CATS=[...new Set(D.map(x=>x.c))];
-const EL={3:"Cok Yuksek",2:"Yuksek",1:"Orta"};
-const EC={3:"bg3",2:"bg2",1:"bg1"};
+// Kategori ikonları ve renkleri
+const KAT_META={
+"TEMEL MİMARİ VE HESAPLAMA BİRİMLERİ":{icon:"🧱",color:"#ff6b9d"},
+"GÖRSEL İŞLEME VE HİYERARŞİK TANIMLAMA":{icon:"👁️",color:"#4ecdc4"},
+"DUYUSAL SİSTEMLER":{icon:"👂",color:"#fbbf24"},
+"ÖĞRENME, HAFIZA VE ÖDÜL SİSTEMLERİ":{icon:"💾",color:"#34d399"},
+"DİL, ANLAM VE SEMANTİK TEMSİL":{icon:"💬",color:"#a78bfa"},
+"DİKKAT, BİLİŞ VE KARAR VERME":{icon:"🎯",color:"#f87171"},
+"UZAMSAL TEMSİL VE NAVİGASYON":{icon:"🗺️",color:"#38bdf8"},
+"ENERJİ VERİMLİLİĞİ VE HESAPLAMA PRENSİPLERİ":{icon:"⚡",color:"#fb923c"},
+"SOSYAL ÖĞRENME VE MOTOR KONTROL":{icon:"🤝",color:"#e879f9"},
+"KOGNİTİF KONTROL VE KARAR VERME":{icon:"🧩",color:"#22d3ee"},
+"MODERN YAKINSAMALAR VE SON GELİŞMELER":{icon:"🚀",color:"#7c5cfc"}
+};
 
-// Filters
-(function(){
-  const f=document.getElementById('filters');
-  let h=`<div class="csearch"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="si" placeholder="Ara... (noron, dikkat, hafiza, dopamin...)"></div>`;
-  h+=`<button class="fbtn on" data-c="ALL">Tumu (50)</button>`;
-  CATS.forEach(c=>{const n=D.filter(x=>x.c===c).length;h+=`<button class="fbtn" data-c="${c}">${c} (${n})</button>`});
-  h+=`<button class="fbtn fbtn-toggle" id="toggleAll">&#9660; Tumunu Ac</button>`;
-  h+=`<div class="rinfo" id="ri"></div>`;
-  f.innerHTML=h;
-  f.querySelectorAll('.fbtn[data-c]').forEach(b=>b.onclick=()=>{f.querySelectorAll('.fbtn[data-c]').forEach(x=>x.classList.remove('on'));b.classList.add('on');af()});
-  document.getElementById('si').oninput=af;
-  document.getElementById('toggleAll').onclick=toggleAll;
-})();
-
-let allOpen=false;
-function toggleAll(){
-  allOpen=!allOpen;
-  document.querySelectorAll('.card').forEach(c=>{if(!c.classList.contains('hid'))c.classList.toggle('open',allOpen)});
-  document.getElementById('toggleAll').innerHTML=allOpen?'&#9650; Tumunu Kapat':'&#9660; Tumunu Ac';
+// ═══ KART RENDER ═══
+function renderCards(items){
+  const c=document.getElementById('cardsContainer');
+  c.innerHTML=items.map(d=>{
+    const km=KAT_META[d.kat]||{icon:"📌",color:"#888"};
+    return `<div class="card-item" data-no="${d.no}" data-type="${d.it}" data-kat="${d.kat}">
+      <div class="card-head" onclick="toggleCard(this)">
+        <span class="card-no">#${d.no}</span>
+        <span class="card-title">${d.tr} <small>(${d.en})</small></span>
+        <div class="card-badges">
+          <span class="badge badge-bio">${d.yil}</span>
+          <span class="badge badge-ai">${d.yzy}</span>
+          <span class="badge-impact" data-level="${d.etki}">${d.etki}</span>
+        </div>
+        <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="card-body"><div class="card-inner">
+        <div class="card-col bio-col">
+          <h5>🧠 Beyin Bilimi</h5>
+          <div class="card-field"><div class="lbl">Keşif / Teori</div><div class="val">${d.tr} (${d.yil})</div></div>
+          <div class="card-field"><div class="lbl">Araştırmacılar</div><div class="val">${d.ara}</div></div>
+          <div class="card-field"><div class="lbl">Mekanizma</div><div class="val">${d.bm}</div></div>
+        </div>
+        <div class="card-col ai-col">
+          <h5>🤖 Yapay Zekâ</h5>
+          <div class="card-field"><div class="lbl">YZ Karşılığı</div><div class="val">${d.yzk} (${d.yzy})</div></div>
+          <div class="card-field"><div class="lbl">Geliştiriciler</div><div class="val">${d.gel}</div></div>
+          <div class="card-field"><div class="lbl">Mekanizma</div><div class="val">${d.yzm}</div></div>
+        </div>
+        <div class="card-principle"><div class="lbl">🔗 Ortak İlke</div><div class="val">${d.oi}</div></div>
+        <div class="card-current"><div class="lbl">📡 Güncel Durum (2024-2026)</div><div class="val">${d.gun}</div></div>
+      </div></div>
+    </div>`;
+  }).join('');
 }
 
-function af(){
-  const cat=document.querySelector('.fbtn.on[data-c]').dataset.c;
-  const q=document.getElementById('si').value.toLowerCase().trim();
-  let cnt=0;
-  document.querySelectorAll('.card').forEach(c=>{
-    const cm=cat==='ALL'||c.dataset.c===cat;
-    const sm=!q||c.dataset.s.includes(q);
-    if(cm&&sm){c.classList.remove('hid');cnt++}else{c.classList.add('hid')}
-  });
-  document.getElementById('ri').textContent=cnt<50?cnt+' sonuc':'';
+function toggleCard(el){
+  el.closest('.card-item').classList.toggle('open');
 }
 
-// Cards
-document.getElementById('cards').innerHTML=D.map(d=>`
-<div class="card" data-c="${d.c}" data-s="${(d.tr+' '+d.en+' '+d.b+' '+d.yz+' '+d.m+' '+d.o+' '+d.u+' '+d.r+' '+d.g+' '+d.a+' '+d.c).toLowerCase()}">
-  <div class="card-top" onclick="this.parentElement.classList.toggle('open')">
-    <span class="card-n">#${d.n}</span>
-    <div class="card-title"><span class="tr">${d.tr}</span><span class="en">(${d.en})</span></div>
-    <div class="card-badges"><span class="bg ${EC[d.e]}">${EL[d.e]}</span><span class="bg bgr">${d.t}</span></div>
-    <span class="card-chev"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></span>
-  </div>
-  <div class="card-body">
-    <div class="vs">
-      <div class="vside vb">
-        <div class="vtag">&#129504; Beyin Mekanizmasi</div>
-        <h4>${d.tr}</h4>
-        <div class="vtxt">${d.b}</div>
-        <div class="vmeta"><strong>Arastirmacilar:</strong> ${d.r}</div>
-        <div class="vyear">${d.y}</div>
-      </div>
-      <div class="vside va">
-        <div class="vtag">&#129302; Yapay Zeka Karsiligi</div>
-        <h4>${d.yz}</h4>
-        <div class="vtxt">${d.m}</div>
-        <div class="vmeta"><strong>Gelistiriciler:</strong> ${d.g}</div>
-        <div class="vyear">${d.yy}</div>
-      </div>
-    </div>
-    <div class="cfooter">
-      <div><label>Ortak Ilke</label><div class="fv">${d.o}</div></div>
-      <div><label>Gecikme</label><div class="fv">${d.d} yil (${d.y} &rarr; ${d.yy})</div></div>
-    </div>
-    <div class="cinsight">${d.u}</div>
-  </div>
-</div>`).join('');
-
-// Principles
-document.getElementById('princ').innerHTML=[
-  {n:1,t:"Hiyerarsik Isleme",d:"Basit ozelliklerden karmasik temsiller. Beyin: V1-V2-IT. YZ: CNN katmanlari."},
-  {n:2,t:"Paralel Isleme",d:"Birden fazla akis ayni anda. Beyin: dorsal/ventral. YZ: cok-basli dikkat."},
-  {n:3,t:"Seyrek Temsil",d:"Az aktif birimle kodlama. Beyin: V1 seyrek kodlama. YZ: ReLU."},
-  {n:4,t:"Geri Bildirim",d:"Ust seviyeden alta ayarlama. Beyin: geri baglantilar. YZ: geri yayilim."},
-  {n:5,t:"Zamansal Dinamikler",d:"Zamansal baglam tutma. Beyin: calisan bellek. YZ: TSA/LSTM/Transformer."},
-  {n:6,t:"Odule Dayali Ogrenme",d:"Odul sinyalleri rehber. Beyin: dopamin. YZ: pekistirmeli ogrenme."},
-  {n:7,t:"Noromodulasyon",d:"Dinamik ayarlama. Beyin: norotransmitterler. YZ: uyarlanir iyilestiriciler."},
-  {n:8,t:"Ornek Ogrenme",d:"Az ornekle uyum. Beyin: olaysal hafiza. YZ: ust-ogrenme/az-atisli."},
-  {n:9,t:"Enerji Optimizasyonu",d:"Verimlilik. Beyin: vucut enerjisinin %20'si. YZ: seyrek aktivasyonlar."},
-].map(p=>`<div class="pcard"><div class="pn">${p.n}</div><div><h4>${p.t}</h4><p>${p.d}</p></div></div>`).join('');
-
-// Families
-document.getElementById('fams').innerHTML=[
-  {n:"Gorsel Hiyerarsi",e:"&#128065;",m:["#1 Noron Doktrini","#3 Homostatik","#8 Cift-Akis"]},
-  {n:"Ogrenme ve Plastisite",e:"&#129516;",m:["#2 Hebb","#11 LTP","#42 STDP","#40 Oja"]},
-  {n:"Hafiza Sistemleri",e:"&#129504;",m:["#12 Olaysal Bellek","#41 TOS","#35 Calisan Bellek"]},
-  {n:"Odul ve Karar",e:"&#127919;",m:["#10 Dopamin RPE","#34 Deger Kodlama"]},
-  {n:"Dikkat ve Gecitleme",e:"&#128269;",m:["#7 Yanal Engelleme","#17 Dikkat Isigi","#6 Retikuler"]},
-  {n:"Mekansal Temsil",e:"&#128506;",m:["#21 Izgara/Yer","#43 Ardincilik","#9 Tonotopik"]},
-  {n:"Motor Kontrol",e:"&#128170;",m:["#27 Ayna Noronlar","#14 Ileri Modeller","#29 Pop. Kodlama"]},
-  {n:"Uretici Modeller",e:"&#127912;",m:["#38 Helmholtz","#46 GAN","#50 Yayilim"]},
-  {n:"Kuramsal Kopruler",e:"&#127753;",m:["#39 Hopfield=Dikkat","#49 Bayesci","#50 Serbest Enerji"]},
-  {n:"Biyolojik Kisitlar",e:"&#128300;",m:["#44 Dale","#23 Seyrek Kod","#24-26 Enerji"]},
-].map(f=>`<div class="fcard"><h4><span>${f.e}</span> ${f.n}</h4><div class="ftags">${f.m.map(x=>`<span class="ftag">${x}</span>`).join('')}</div></div>`).join('');
-
-// Stats
-(function(){
-  const s=document.getElementById('stats');
-  function ch(t,data,mx){
-    const cl=['b1','b2','b3','b4','b5','b1','b2','b3','b4','b5','b1'];
-    return`<div class="chbox"><h3>${t}</h3>${data.map((r,i)=>`<div class="brow"><div class="blbl">${r[0]}</div><div class="btrk"><div class="bfill ${cl[i%cl.length]}" style="width:${r[1]/mx*100}%">${r[1]}</div></div></div>`).join('')}</div>`;
-  }
-  let h='';
-  h+=ch("Iliski Turu Dagilimi",[["Dogrudan Tarihsel",16],["Paralel Kesif",12],["Formal Esdegerlik",8],["Spekulatif Analoji",4],["Pedagojik Analoji",3],["Diger",7]],16);
-  h+=ch("Etki Duzeyi",[["Cok Yuksek",18],["Yuksek",22],["Orta",10]],22);
-  h+=ch("Kategori Dagilimi",[["Ogrenme & Hafiza",10],["Modern Yakinsamalar",9],["Temel Mimari",6],["Kognitif Kontrol",6],["Enerji",6],["Gorsel Isleme",4],["Dikkat & Karar",4],["Sosyal & Motor",4],["Uzamsal",3],["Dil & Semantik",3],["Duyusal",1]],10);
-  h+=ch("Kaynak Alanlari",[["Norobilim",24],["Muhendislik",9],["Psikoloji",8],["Matematik",6],["Dilbilim",3]],24);
-  // Delay
-  const sd=[...D].sort((a,b)=>b.d-a.d),mx=Math.max(...D.map(x=>x.d));
-  h+=`<div class="chbox"><h3>Beyin Kesfi &rarr; YZ Uygulamasi Gecikme (Yil)</h3>${sd.map(x=>{
-    const p=x.d/mx*100,hu=180-x.d/mx*140;
-    return`<div class="drow"><div class="dnm">#${x.n} ${x.tr.substring(0,26)}</div><div class="dtrk"><div class="dfill" style="width:${p}%;background:hsl(${hu},65%,50%)">${x.d>5?x.d:''}</div></div><div class="dval">${x.d}y</div></div>`;
-  }).join('')}</div>`;
-  s.innerHTML=h;
-})();
-
-// Timeline - ALL events
-(function(){
-  const tl=document.getElementById('tl');
-  let ev=[];
-  D.forEach(d=>{
-    ev.push({y:d.y,tp:'b',t:d.tr,en:d.en,desc:d.b.substring(0,90),w:d.r,n:d.n});
-    ev.push({y:d.yy,tp:'a',t:d.yz,desc:d.m.substring(0,90),w:d.g,n:d.n,ref:d.tr});
+let allCardsOpen=false;
+function toggleAllCards(){
+  allCardsOpen=!allCardsOpen;
+  document.querySelectorAll('.card-item').forEach(c=>{
+    if(allCardsOpen)c.classList.add('open');else c.classList.remove('open');
   });
-  ev.sort((a,b)=>a.y-b.y||(a.tp==='b'?-1:1));
-  function era(y){return y<1950?'Onculer (1861-1949)':y<1980?'Temeller (1950-1979)':y<2000?'Yukselis (1980-1999)':y<2015?'Devrim (2000-2014)':'Modern Cag (2015-2026)'}
-  let h='',le='';
-  ev.forEach(e=>{
-    const er=era(e.y);
-    if(er!==le){h+=`<div class="tl-era"><span>${er}</span></div>`;le=er}
-    const tl=e.tp==='b'?'&#129504; Beyin':'&#129302; YZ';
-    const rf=e.ref?` <span style="color:var(--t3);font-size:.7rem">(&larr; ${e.ref})</span>`:'';
-    const en=e.en?` <span style="color:var(--t3);font-size:.7rem">(${e.en})</span>`:'';
-    h+=`<div class="tl-i t${e.tp}"><div class="tl-h"><span class="tl-y">${e.y}</span><span class="tl-t">${e.t}${en}${rf}</span><span class="tl-tag">#${e.n} ${tl}</span></div><div class="tl-d">${e.desc} &mdash; <em>${e.w.split(',')[0]}</em></div></div>`;
-  });
-  tl.innerHTML=h;
-})();
+}
 
-// Canvas
-(function(){
-  const c=document.getElementById('bgC'),x=c.getContext('2d');let w,h,ps=[];
-  function rs(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight}
-  rs();addEventListener('resize',rs);
-  class P{constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.vx=(Math.random()-.5)*.35;this.vy=(Math.random()-.5)*.35;this.r=Math.random()*1.5+.5}
-  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>w)this.vx*=-1;if(this.y<0||this.y>h)this.vy*=-1}
-  draw(){x.beginPath();x.arc(this.x,this.y,this.r,0,6.28);x.fillStyle='rgba(124,92,252,.22)';x.fill()}}
-  for(let i=0;i<45;i++)ps.push(new P());
-  (function lp(){x.clearRect(0,0,w,h);ps.forEach(p=>{p.update();p.draw()});
-  for(let i=0;i<ps.length;i++)for(let j=i+1;j<ps.length;j++){const dx=ps[i].x-ps[j].x,dy=ps[i].y-ps[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){x.beginPath();x.moveTo(ps[i].x,ps[i].y);x.lineTo(ps[j].x,ps[j].y);x.strokeStyle=`rgba(124,92,252,${(1-d/120)*.05})`;x.lineWidth=.5;x.stroke()}}
-  requestAnimationFrame(lp)})();
-})();
+function filterCards(type,btn){
+  document.querySelectorAll('.cards-toolbar .filt-btn:not(.toggle-all)').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const items=type==='all'?DATA:DATA.filter(d=>d.it===type);
+  renderCards(items);
+}
 
-// Scroll
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')}),{threshold:.06});
-document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
-const secIds=['genel','diyagramlar','kesifler','prensipler','aileler','istatistikler','kronoloji'];
-addEventListener('scroll',()=>{
-  document.getElementById('btt').classList.toggle('show',scrollY>400);
-  const links=document.querySelectorAll('.nav a');
-  let cur=-1;
-  secIds.forEach((id,i)=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<200)cur=i});
-  links.forEach((l,i)=>l.classList.toggle('on',i===cur));
+// Arama
+document.getElementById('searchInput').addEventListener('input',function(){
+  const q=this.value.toLowerCase().trim();
+  if(!q){renderCards(DATA);return;}
+  const items=DATA.filter(d=>
+    d.tr.toLowerCase().includes(q)||d.en.toLowerCase().includes(q)||
+    d.bm.toLowerCase().includes(q)||d.yzk.toLowerCase().includes(q)||
+    d.yzm.toLowerCase().includes(q)||d.ara.toLowerCase().includes(q)||
+    d.oi.toLowerCase().includes(q)||d.gun.toLowerCase().includes(q)||
+    d.alan.toLowerCase().includes(q)||d.kat.toLowerCase().includes(q)
+  );
+  renderCards(items);
 });
+
+// İlk render
+renderCards(DATA);
+
+// ═══ AİLELER ═══
+function renderFamilies(){
+  const groups={};
+  DATA.forEach(d=>{
+    if(!groups[d.kat])groups[d.kat]=[];
+    groups[d.kat].push(d);
+  });
+  const fc=document.getElementById('familiesContainer');
+  fc.innerHTML=Object.keys(groups).map(kat=>{
+    const km=KAT_META[kat]||{icon:"📌",color:"#888"};
+    const items=groups[kat];
+    return `<div class="family-group">
+      <div class="family-head" onclick="toggleFamily(this)">
+        <span class="family-icon">${km.icon}</span>
+        <div class="family-info"><h3>${kat}</h3><span>${items.map(d=>d.tr).join(' · ')}</span></div>
+        <span class="family-count">${items.length}</span>
+        <svg class="family-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="family-body"><div style="padding:16px">
+        ${items.map(d=>`<div class="card-item" data-no="${d.no}">
+          <div class="card-head" onclick="toggleCard(this)">
+            <span class="card-no">#${d.no}</span>
+            <span class="card-title">${d.tr} <small>(${d.en})</small></span>
+            <div class="card-badges">
+              <span class="badge badge-bio">${d.yil}</span>
+              <span class="badge badge-ai">${d.yzy}</span>
+              <span class="badge-impact" data-level="${d.etki}">${d.etki}</span>
+            </div>
+            <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="card-body"><div class="card-inner">
+            <div class="card-col bio-col">
+              <h5>🧠 Beyin</h5>
+              <div class="card-field"><div class="lbl">Keşif</div><div class="val">${d.tr} (${d.yil})</div></div>
+              <div class="card-field"><div class="lbl">Araştırmacılar</div><div class="val">${d.ara}</div></div>
+              <div class="card-field"><div class="lbl">Mekanizma</div><div class="val">${d.bm}</div></div>
+            </div>
+            <div class="card-col ai-col">
+              <h5>🤖 YZ</h5>
+              <div class="card-field"><div class="lbl">Karşılığı</div><div class="val">${d.yzk} (${d.yzy})</div></div>
+              <div class="card-field"><div class="lbl">Geliştiriciler</div><div class="val">${d.gel}</div></div>
+              <div class="card-field"><div class="lbl">Mekanizma</div><div class="val">${d.yzm}</div></div>
+            </div>
+            <div class="card-principle"><div class="lbl">🔗 Ortak İlke</div><div class="val">${d.oi}</div></div>
+            <div class="card-current"><div class="lbl">📡 Güncel</div><div class="val">${d.gun}</div></div>
+          </div></div>
+        </div>`).join('')}
+      </div></div>
+    </div>`;
+  }).join('');
+}
+function toggleFamily(el){
+  const g=el.closest('.family-group');
+  g.classList.toggle('open');
+  el.classList.toggle('open');
+}
+let allFamiliesOpen=false;
+function toggleAllFamilies(){
+  allFamiliesOpen=!allFamiliesOpen;
+  document.querySelectorAll('.family-group').forEach(g=>{
+    if(allFamiliesOpen){g.classList.add('open');g.querySelector('.family-head').classList.add('open');}
+    else{g.classList.remove('open');g.querySelector('.family-head').classList.remove('open');}
+  });
+}
+renderFamilies();
+
+// ═══ KRONOLOJİ ═══
+function renderTimeline(filter){
+  const events=[];
+  DATA.forEach(d=>{
+    events.push({year:d.yil,name:d.tr,en:d.en,desc:d.ara,type:'bio',no:d.no});
+    events.push({year:d.yzy,name:d.yzk,en:'',desc:d.gel,type:'ai',no:d.no});
+  });
+  events.sort((a,b)=>a.year-b.year||a.type.localeCompare(b.type));
+  const filtered=filter==='all'?events:events.filter(e=>e.type===filter);
+  const tc=document.getElementById('timelineContainer');
+  tc.innerHTML=filtered.map(e=>`
+    <div class="tl-item" data-type="${e.type}">
+      <div class="tl-dot ${e.type}-dot"></div>
+      <div class="tl-content">
+        <div class="tl-year ${e.type}-yr">${e.year}</div>
+        <div class="tl-name">${e.name}</div>
+        <div class="tl-desc">${e.desc}</div>
+        <span class="tl-tag ${e.type}-tag">${e.type==='bio'?'🧠 Beyin #'+e.no:'🤖 YZ #'+e.no}</span>
+      </div>
+    </div>
+  `).join('');
+}
+function filterTimeline(f,btn){
+  document.querySelectorAll('.tl-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderTimeline(f);
+}
+renderTimeline('all');
+
+// ═══ NAV SCROLL ═══
+const sections=document.querySelectorAll('.sec, .hero');
+const navLinks=document.querySelectorAll('.nav-links a');
+function updateNav(){
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-100)cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.remove('on');
+    if(a.getAttribute('href')==='#'+cur)a.classList.add('on');
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+
+// ═══ FADE-UP ═══
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.1});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
