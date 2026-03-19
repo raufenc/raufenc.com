@@ -141,57 +141,84 @@ const TestEngine = {
 
   downloadResultCard() {
     const data = NT.load(`test_${this.config.slug || 'test'}`);
-    if (!data) return;
-    const c = document.createElement('canvas');
-    c.width = 600; c.height = 400;
-    const ctx = c.getContext('2d');
-    // Arka plan
-    const grad = ctx.createLinearGradient(0, 0, 600, 400);
-    grad.addColorStop(0, '#0a0a1a');
-    grad.addColorStop(1, '#1a1a3e');
-    ctx.fillStyle = grad;
-    ctx.roundRect(0, 0, 600, 400, 16);
-    ctx.fill();
-    // Üst dekoratif çizgi
-    ctx.fillStyle = '#6c5ce7';
-    ctx.fillRect(0, 0, 600, 4);
-    // Başlık
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(this.config.title || 'NöroTerbiye Test', 300, 50);
-    // Skor
-    const pct = data.pct || 0;
-    const color = pct >= 70 ? '#22c55e' : pct >= 40 ? '#f59e0b' : '#ef4444';
-    ctx.fillStyle = color;
-    ctx.font = 'bold 72px system-ui, -apple-system, sans-serif';
-    ctx.fillText(pct + '%', 300, 160);
-    // Etiket
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
-    ctx.fillText(data.label || '', 300, 210);
-    // Tarih
-    ctx.fillStyle = '#888888';
-    ctx.font = '14px system-ui, -apple-system, sans-serif';
-    const dateStr = data.date ? new Date(data.date).toLocaleDateString('tr-TR') : '';
-    ctx.fillText(dateStr, 300, 250);
-    // Alt bar
-    ctx.fillStyle = '#1e1e3a';
-    ctx.fillRect(50, 290, 500, 8);
-    ctx.fillStyle = color;
-    ctx.roundRect(50, 290, pct * 5, 8, 4);
-    ctx.fill();
-    // Footer
-    ctx.fillStyle = '#555555';
-    ctx.font = '12px system-ui, -apple-system, sans-serif';
-    ctx.fillText('NöroTerbiye · raufenc.com/noroterbiye', 300, 350);
-    ctx.fillText('Bu test teşhis koymaz; farkındalık oluşturur.', 300, 370);
-    // İndir
-    const link = document.createElement('a');
-    link.download = (this.config.title || 'NöroTerbiye') + '-Sonuç.png';
-    link.href = c.toDataURL('image/png');
-    link.click();
-    NT.toast('Sonuç kartı indirildi!');
+    if (!data) { NT.toast('Sonuç bulunamadı'); return; }
+    const title = this.config.title || 'NöroTerbiye Test';
+
+    NT.downloadImage(() => {
+      const c = document.createElement('canvas');
+      c.width = 600; c.height = 400;
+      const ctx = c.getContext('2d');
+
+      // roundRect polyfill (eski tarayıcılar için)
+      function roundedRect(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.lineTo(x + w - r, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+        ctx.lineTo(x + w, y + h - r);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        ctx.lineTo(x + r, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+        ctx.lineTo(x, y + r);
+        ctx.quadraticCurveTo(x, y, x + r, y);
+        ctx.closePath();
+      }
+
+      // Arka plan
+      const grad = ctx.createLinearGradient(0, 0, 600, 400);
+      grad.addColorStop(0, '#0a0a1a');
+      grad.addColorStop(1, '#1a1a3e');
+      ctx.fillStyle = grad;
+      roundedRect(0, 0, 600, 400, 16);
+      ctx.fill();
+
+      // Üst dekoratif çizgi
+      ctx.fillStyle = '#6c5ce7';
+      ctx.fillRect(0, 0, 600, 4);
+
+      // Başlık
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px system-ui, -apple-system, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(title, 300, 50);
+
+      // Skor
+      const pct = data.pct || 0;
+      const color = pct >= 70 ? '#22c55e' : pct >= 40 ? '#f59e0b' : '#ef4444';
+      ctx.fillStyle = color;
+      ctx.font = 'bold 72px system-ui, -apple-system, sans-serif';
+      ctx.fillText(pct + '%', 300, 160);
+
+      // Etiket
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px system-ui, -apple-system, sans-serif';
+      ctx.fillText(data.label || '', 300, 210);
+
+      // Tarih
+      ctx.fillStyle = '#888888';
+      ctx.font = '14px system-ui, -apple-system, sans-serif';
+      const dateStr = data.date ? new Date(data.date).toLocaleDateString('tr-TR') : '';
+      ctx.fillText(dateStr, 300, 250);
+
+      // Alt bar (arka plan)
+      ctx.fillStyle = '#1e1e3a';
+      roundedRect(50, 290, 500, 8, 4);
+      ctx.fill();
+      // Alt bar (dolgu)
+      if (pct > 0) {
+        ctx.fillStyle = color;
+        roundedRect(50, 290, Math.max(pct * 5, 8), 8, 4);
+        ctx.fill();
+      }
+
+      // Footer
+      ctx.fillStyle = '#555555';
+      ctx.font = '12px system-ui, -apple-system, sans-serif';
+      ctx.fillText('NöroTerbiye · raufenc.com/noroterbiye', 300, 350);
+      ctx.fillText('Bu test teşhis koymaz; farkındalık oluşturur.', 300, 370);
+
+      return c;
+    }, title + '-Sonuç');
   }
 };
 

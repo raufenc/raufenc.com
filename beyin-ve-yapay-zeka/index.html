@@ -1392,7 +1392,7 @@ function selectMatch(el){
       const bonus=matchSeconds<60?20:matchSeconds<120?10:5;
       addScore(bonus,'Eşleştirme tamamlandı');
       showScorePopup('Eşleştirme Tamam!',matchCorrectCount*5+bonus,`${matchSeconds} saniyede tamamladın! Hız bonusu: +${bonus}`);
-      if(matchSeconds<60&&!achievements.has('speedster')){unlockAchievement('speedster','⚡','Hız Şeytanı','Eşleştirmeyi 1 dakikada tamamladın!');}
+      if(matchSeconds<60&&!achievements.has('speedster')){unlockAchievement('speedster','⚡','Işık Hızı','Eşleştirmeyi 1 dakikada tamamladın!');}
     }
   }else{
     el.classList.add('wrong-match');
@@ -1739,7 +1739,7 @@ const ALL_BADGES=[
   {id:'halfexplorer',icon:'📚',name:'Yarı Yolda',desc:'25 keşif incele'},
   {id:'allexplorer',icon:'🎓',name:'Tüm Keşifler',desc:'50 keşfi incele'},
   {id:'perfect',icon:'💎',name:'Mükemmeliyetçi',desc:'Quiz %100'},
-  {id:'speedster',icon:'⚡',name:'Hız Şeytanı',desc:'Eşleştirme <60sn'},
+  {id:'speedster',icon:'⚡',name:'Işık Hızı',desc:'Eşleştirme <60sn'},
   {id:'flipmaster',icon:'🃏',name:'Kart Ustası',desc:'12 kartı çevir'},
   {id:'jepmaster',icon:'👑',name:'Jeopardy Şampiyonu',desc:'5000+ puan'},
   {id:'comparator',icon:'⚖️',name:'Karşılaştırıcı',desc:'5 karşılaştırma yap'},

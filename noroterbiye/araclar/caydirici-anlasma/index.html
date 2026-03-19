@@ -41,6 +41,10 @@
       <div class="wizard-steps nt-fade-in" style="animation-delay:0.12s" id="steps-bar"></div>
 
       <div class="nt-card nt-fade-in" style="padding:32px;animation-delay:0.15s" id="wizard-area"></div>
+
+      <!-- Geçmiş Anlaşmalar -->
+      <h2 class="nt-section-title" style="margin-top:48px">📁 Geçmiş Anlaşmalar</h2>
+      <div id="history-list"></div>
     </div>
   </section>
 
@@ -137,7 +141,7 @@
         </div>
         <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveAgreement()">💾 Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Caydırıcı-Anlaşma.pdf')">📄 PDF İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Caydırıcı-Anlaşma.pdf')">📄 Rapor İndir</button>
           <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="restart()">Yeniden Başla</button>
         </div>
       `;
@@ -146,6 +150,7 @@
     function saveAgreement() {
       agreements.push({ ...data, id: Date.now(), tarih: new Date().toLocaleDateString('tr-TR') });
       NT.save('anlasmalar', agreements);
+      renderHistory();
       NT.toast('Anlaşma kaydedildi!');
     }
 
@@ -155,7 +160,40 @@
       renderStep();
     }
 
+    function deleteAgreement(id) {
+      agreements = agreements.filter(a => a.id !== id);
+      NT.save('anlasmalar', agreements);
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (agreements.length === 0) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:0.85rem">Henüz kaydedilmiş anlaşma yok.</p>';
+        return;
+      }
+      list.innerHTML = [...agreements].reverse().map(a => `
+        <div class="nt-card" style="margin-bottom:12px;padding:20px">
+          <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
+            <div>
+              <div style="font-weight:700;font-size:0.95rem">${a.aliskanlik || '—'}</div>
+              <div style="font-size:0.75rem;color:var(--muted);margin-top:2px">${a.tarih} · ${a.sure}</div>
+            </div>
+            <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="deleteAgreement(${a.id})" style="color:var(--nt-red);padding:4px 8px">×</button>
+          </div>
+          <div style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:6px"><strong>Taahhüt:</strong> ${a.taahhut || '—'}</div>
+          <div style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:6px"><strong>Sebep:</strong> ${a.neden || '—'}</div>
+          <div style="display:flex;gap:16px;font-size:0.78rem;margin-top:8px">
+            <span style="color:var(--nt-red)">Ceza: ${a.ceza || '—'}</span>
+            <span style="color:var(--nt-green)">Ödül: ${a.odul || '—'}</span>
+            <span style="color:var(--text-secondary)">Takipçi: ${a.takipci || '—'}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
     renderStep();
+    renderHistory();
 
     function buildPrintHTML() {
       const today = new Date().toLocaleDateString('tr-TR');

@@ -115,77 +115,112 @@ const NT = {
     }, duration);
   },
 
-  // localStorage yardımcıları
+  // localStorage yardımcıları (hata yönetimli)
   save(key, data) {
-    try { localStorage.setItem('nt_' + key, JSON.stringify(data)); } catch(e) {}
+    try {
+      localStorage.setItem('nt_' + key, JSON.stringify(data));
+      return true;
+    } catch(e) {
+      // Quota aşımı veya diğer hatalar
+      if (e.name === 'QuotaExceededError' || e.code === 22) {
+        this.toast('Depolama alanı dolu! Eski verileri silmeyi dene.');
+      } else {
+        this.toast('Kayıt sırasında hata oluştu.');
+      }
+      console.error('NT.save error:', e);
+      return false;
+    }
   },
 
   load(key, fallback = null) {
     try {
       const d = localStorage.getItem('nt_' + key);
       return d ? JSON.parse(d) : fallback;
-    } catch(e) { return fallback; }
+    } catch(e) {
+      console.error('NT.load error:', e);
+      return fallback;
+    }
   },
 
-  // PDF indirme — print-friendly HTML oluşturup PDF'e çevir
-  _pdfLoading: false,
-  downloadPDF(contentOrId, filename) {
-    if (this._pdfLoading) return;
-    const fn = filename || document.title.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ\s-]/g, '') + '.pdf';
+  // ── Kayıt İndirme Sistemi ──
+  // html2pdf.js kaldırıldı — %100 yerli, sıfır bağımlılık
 
-    // contentOrId: string (element ID) veya function (HTML döndüren callback)
+  // Self-contained HTML dosyası olarak indir (her yerde açılır, PDF'e basılabilir)
+  downloadPDF(contentOrId, filename) {
+    const fn = (filename || document.title.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ\s-]/g, '')).replace(/\.pdf$/i, '') + '.html';
+    const title = document.title.replace(' — NöroTerbiye', '');
+    const date = new Date().toLocaleDateString('tr-TR');
+
     let html;
     if (typeof contentOrId === 'function') {
       html = contentOrId();
     } else {
-      // Basit fallback: elementin textContent'ini düz metin olarak al
       const el = document.getElementById(contentOrId);
-      if (!el) return;
-      html = el.innerText;
+      if (!el) { this.toast('İçerik bulunamadı'); return; }
+      html = el.innerHTML;
     }
 
-    // Print-ready wrapper
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'font-family:system-ui,-apple-system,sans-serif;color:#1a1a2e;background:#fff;padding:32px;line-height:1.6';
-    wrapper.innerHTML = `
-      <div style="text-align:center;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid #e0e0e0">
-        <div style="font-size:1.5rem;font-weight:800;margin-bottom:4px">${document.title.replace(' — NöroTerbiye','')}</div>
-        <div style="font-size:0.8rem;color:#888">NöroTerbiye · ${new Date().toLocaleDateString('tr-TR')}</div>
-      </div>
-      ${typeof contentOrId === 'function' ? html : `<pre style="white-space:pre-wrap;font-family:inherit;font-size:0.9rem">${html}</pre>`}
-      <div style="margin-top:32px;padding-top:12px;border-top:1px solid #e0e0e0;text-align:center;font-size:0.7rem;color:#aaa">
-        raufenc.com/noroterbiye · Bu belge teşhis koymaz, farkındalık oluşturur.
-      </div>
-    `;
-    document.body.appendChild(wrapper);
+    const fullHTML = `<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${title} — NöroTerbiye</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:#1a1a2e;background:#fff;padding:40px 32px;line-height:1.7;max-width:800px;margin:0 auto}
+h1{font-size:1.4rem;font-weight:800;margin-bottom:4px}
+h3{font-size:1rem;font-weight:700;margin:20px 0 8px}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{border:1px solid #d1d5db;padding:8px 10px;font-size:0.85rem;text-align:center}
+th{background:#f3f4f6;font-weight:700;font-size:0.78rem;color:#374151}
+.header{text-align:center;margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid #e5e7eb}
+.date{font-size:0.8rem;color:#9ca3af;margin-top:4px}
+.footer{margin-top:36px;padding-top:14px;border-top:1px solid #e5e7eb;text-align:center;font-size:0.72rem;color:#9ca3af}
+.print-btn{display:block;margin:24px auto 0;padding:10px 32px;background:#6366f1;color:#fff;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;font-family:inherit}
+.print-btn:hover{background:#4f46e5}
+p{margin:6px 0;font-size:0.9rem}
+@media print{.print-btn{display:none!important}.footer{position:fixed;bottom:20px;left:0;right:0}}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>${title}</h1>
+<div class="date">NöroTerbiye · ${date}</div>
+</div>
+${html}
+<div class="footer">raufenc.com/noroterbiye · Bu belge teşhis koymaz, farkındalık oluşturur.</div>
+<button class="print-btn" onclick="window.print()">🖨️ Yazdır / PDF Kaydet</button>
+</body>
+</html>`;
 
-    const generate = () => {
-      this.toast('PDF hazırlanıyor...');
-      html2pdf().set({
-        margin: [10, 10, 10, 10], filename: fn,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      }).from(wrapper).save().then(() => {
-        wrapper.remove();
-        this.toast('PDF indirildi!');
-      }).catch(() => {
-        wrapper.remove();
-        window.print();
-      });
-    };
+    const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = fn;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    this.toast('Rapor indirildi!');
+  },
 
-    if (typeof html2pdf === 'undefined') {
-      this._pdfLoading = true;
-      this.toast('PDF kütüphanesi yükleniyor...');
-      const s = document.createElement('script');
-      s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js';
-      s.onload = () => { this._pdfLoading = false; generate(); };
-      s.onerror = () => { this._pdfLoading = false; wrapper.remove(); this.toast('PDF yüklenemedi'); window.print(); };
-      document.head.appendChild(s);
-    } else {
-      generate();
+  // Yazdır butonu — @media print stilleriyle doğrudan tarayıcı print dialog'u
+  printReport() {
+    window.print();
+  },
+
+  // Canvas tabanlı görsel kaydetme (test sonuç kartları vs.)
+  downloadImage(canvasCallback, filename) {
+    try {
+      const canvas = canvasCallback();
+      if (!canvas) { this.toast('Görsel oluşturulamadı'); return; }
+      const link = document.createElement('a');
+      link.download = (filename || 'NöroTerbiye-Sonuç') + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      this.toast('Görsel indirildi!');
+    } catch(e) {
+      console.error('downloadImage error:', e);
+      this.toast('Görsel indirilemedi');
     }
   },
 
