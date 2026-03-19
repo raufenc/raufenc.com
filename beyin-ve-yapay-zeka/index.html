@@ -44,7 +44,8 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
 .orb-2{width:400px;height:400px;background:var(--ai);bottom:-15%;right:-5%;animation-delay:5s}
 .orb-3{width:300px;height:300px;background:var(--ac);top:30%;right:20%;animation-delay:10s}
 @keyframes orbFloat{0%,100%{transform:translate(0,0)}33%{transform:translate(30px,-20px)}66%{transform:translate(-20px,30px)}}
-.hero>*:not(.hero-bg){position:relative;z-index:1}
+.hero canvas#neuralCanvas{position:absolute;inset:0;z-index:0}
+.hero>*:not(.hero-bg):not(canvas){position:relative;z-index:1}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:99px;background:var(--sf2);border:1px solid var(--bd2);font-size:.78rem;color:var(--t2);margin-bottom:2rem}
 .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--gn);animation:pulse 2s infinite}
 @keyframes pulse{50%{opacity:.3;transform:scale(.7)}}
@@ -301,6 +302,87 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
 .ach-icon{font-size:1.8rem}
 .ach-info h4{font-size:.82rem;font-weight:700;color:var(--gd)}
 .ach-info p{font-size:.7rem;color:var(--t2)}
+
+/* ═══ DETAY MODAL ═══ */
+.modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--bg1);border:1px solid var(--bd2);border-radius:20px;max-width:800px;width:100%;max-height:85vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:10px;background:var(--sf2);border:1px solid var(--bd);color:var(--t2);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;transition:all .2s}
+.modal-close:hover{background:var(--rd);color:#fff;border-color:var(--rd)}
+.modal-header{padding:28px 28px 0;border-bottom:1px solid var(--bd);padding-bottom:20px}
+.modal-header .mh-no{font-size:.7rem;color:var(--t3);font-weight:700;margin-bottom:4px}
+.modal-header h2{font-size:1.4rem;font-weight:800;margin-bottom:2px}
+.modal-header h2 small{font-weight:400;color:var(--t3);font-size:.85rem}
+.modal-header .mh-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.modal-body{padding:24px 28px}
+.modal-section{margin-bottom:24px}
+.modal-section h3{font-size:.9rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.modal-two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.modal-two{grid-template-columns:1fr}}
+.modal-box{padding:18px;border-radius:14px}
+.modal-box.bio-box{background:var(--br3);border:1px solid var(--br2)}
+.modal-box.ai-box{background:var(--ai3);border:1px solid var(--ai2)}
+.modal-box h4{font-size:.82rem;font-weight:700;margin-bottom:10px}
+.modal-box.bio-box h4{color:var(--br)}.modal-box.ai-box h4{color:var(--ai)}
+.modal-row{margin-bottom:8px}
+.modal-row .mr-l{font-size:.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em}
+.modal-row .mr-v{font-size:.82rem}
+.modal-principle{padding:16px;border-radius:12px;background:var(--ac3);border:1px solid rgba(124,92,252,.2)}
+.modal-principle h3{color:var(--ac2)}
+.modal-researcher{display:flex;gap:14px;padding:14px;border-radius:12px;background:var(--sf);border:1px solid var(--bd);margin-bottom:8px}
+.modal-researcher .mr-avatar{width:44px;height:44px;border-radius:50%;background:var(--sf2);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.modal-researcher .mr-name{font-size:.85rem;font-weight:700}
+.modal-researcher .mr-role{font-size:.72rem;color:var(--t2)}
+.modal-share{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.modal-share button{padding:8px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--sf);color:var(--t);font-size:.78rem;font-weight:600;cursor:pointer;font-family:var(--f);transition:all .2s;display:flex;align-items:center;gap:6px}
+.modal-share button:hover{background:var(--ac);color:#fff;border-color:var(--ac)}
+
+/* ═══ JEOPARDY ═══ */
+.jeopardy-board{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:16px}
+@media(max-width:700px){.jeopardy-board{grid-template-columns:repeat(3,1fr)}}
+.jep-cat{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:10px;text-align:center;font-size:.7rem;font-weight:700;color:var(--ac2)}
+.jep-cell{background:var(--bg1);border:1px solid var(--bd);border-radius:10px;padding:16px 8px;text-align:center;font-size:1.2rem;font-weight:900;color:var(--gd);cursor:pointer;transition:all .2s;min-height:60px;display:flex;align-items:center;justify-content:center}
+.jep-cell:hover{background:var(--bg3);border-color:var(--gd);transform:scale(1.03)}
+.jep-cell.used{opacity:.25;pointer-events:none;color:var(--t3)}
+.jep-question{background:var(--bg1);border:1px solid var(--bd2);border-radius:16px;padding:28px;margin-top:16px;text-align:center;display:none}
+.jep-question.show{display:block}
+.jep-question .jq-pts{font-size:.7rem;color:var(--gd);font-weight:700;margin-bottom:8px}
+.jep-question .jq-text{font-size:1.1rem;font-weight:700;margin-bottom:16px;line-height:1.5}
+.jep-question .jq-opts{display:grid;gap:8px;max-width:500px;margin:0 auto}
+.jep-scorebar{display:flex;justify-content:center;gap:24px;padding:16px;background:var(--bg1);border-radius:12px;border:1px solid var(--bd);margin-top:16px}
+.jep-scorebar .js-item{text-align:center}
+.jep-scorebar .js-v{font-size:1.6rem;font-weight:900}
+.jep-scorebar .js-l{font-size:.65rem;color:var(--t3);text-transform:uppercase}
+
+/* ═══ ROZET GALERİSİ ═══ */
+.badge-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:16px}
+.badge-card{background:var(--bg1);border:1px solid var(--bd);border-radius:14px;padding:16px;text-align:center;transition:all .3s;position:relative;overflow:hidden}
+.badge-card.unlocked{border-color:var(--gd);box-shadow:0 0 20px rgba(251,191,36,.1)}
+.badge-card.locked{opacity:.4;filter:grayscale(1)}
+.badge-card .bc-icon{font-size:2rem;margin-bottom:6px}
+.badge-card .bc-name{font-size:.75rem;font-weight:700}
+.badge-card .bc-desc{font-size:.6rem;color:var(--t3);margin-top:2px}
+.badge-card.unlocked::after{content:'✓';position:absolute;top:6px;right:8px;font-size:.65rem;color:var(--gn);font-weight:900}
+
+/* ═══ KARŞILAŞTIRMA ARACI ═══ */
+.compare-tool{background:var(--bg1);border:1px solid var(--bd);border-radius:16px;padding:24px;margin-top:20px}
+.compare-selects{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.compare-selects select{flex:1;min-width:200px;padding:10px 14px;border-radius:10px;background:var(--bg2);border:1px solid var(--bd);color:var(--t);font-size:.85rem;font-family:var(--f);outline:none;cursor:pointer}
+.compare-selects select:focus{border-color:var(--ac)}
+.compare-selects option{background:var(--bg1);color:var(--t)}
+.compare-result{display:none}
+.compare-result.show{display:block}
+.compare-vs{display:grid;grid-template-columns:1fr 60px 1fr;gap:12px;align-items:start}
+@media(max-width:600px){.compare-vs{grid-template-columns:1fr}}
+.compare-vs-mid{text-align:center;font-size:1.8rem;font-weight:900;color:var(--t3);align-self:center}
+.cv-card{padding:18px;border-radius:14px}
+.cv-card.cv1{background:var(--br3);border:1px solid var(--br2)}
+.cv-card.cv2{background:var(--ai3);border:1px solid var(--ai2)}
+.cv-card h4{font-size:1rem;font-weight:700;margin-bottom:10px}
+.cv-row{margin-bottom:6px}
+.cv-row .cvl{font-size:.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:.06em}
+.cv-row .cvv{font-size:.82rem}
 </style>
 </head>
 <body>
@@ -315,7 +397,9 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
     <a href="#aileler">Aileler</a>
     <a href="#farklar">Temel Farklar</a>
     <a href="#kronoloji">Kronoloji</a>
+    <a href="#karsilastir">⚖️ Karşılaştır</a>
     <a href="#oyun">🎮 Oyun</a>
+    <a href="#rozetler">🏅 Rozetler</a>
   </div>
 </nav>
 
@@ -331,6 +415,7 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <canvas id="neuralCanvas"></canvas>
   <div class="hero-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -700,6 +785,18 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
   <div id="timelineContainer" class="timeline"></div>
 </section>
 
+<!-- KARŞILAŞTIRMA ARACI -->
+<section class="sec" id="karsilastir">
+  <div class="sh fade-up"><div class="ln" style="background:var(--ac2)"></div><h2>⚖️ Karşılaştırma Aracı</h2><p>İki keşfi yan yana karşılaştır</p></div>
+  <div class="compare-tool fade-up">
+    <div class="compare-selects">
+      <select id="cmpA" onchange="runCompare()"><option value="">— Birinci keşfi seç —</option></select>
+      <select id="cmpB" onchange="runCompare()"><option value="">— İkinci keşfi seç —</option></select>
+    </div>
+    <div class="compare-result" id="cmpResult"></div>
+  </div>
+</section>
+
 <!-- OYUN BÖLÜMÜ -->
 <section class="sec" id="oyun">
   <div class="sh fade-up"><div class="ln" style="background:linear-gradient(90deg,var(--br),var(--ai))"></div><h2>🎮 Bilgini Test Et</h2><p>Quiz, eşleştirme oyunu ve bilgi kartları ile öğrendiklerini pekiştir</p></div>
@@ -708,6 +805,7 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
     <button class="game-tab on" onclick="switchGame('quiz',this)">🧠 Quiz (10 Soru)</button>
     <button class="game-tab" onclick="switchGame('match',this)">🔗 Eşleştirme</button>
     <button class="game-tab" onclick="switchGame('flip',this)">🃏 Bilgi Kartları</button>
+    <button class="game-tab" onclick="switchGame('jeopardy',this)">🏆 Jeopardy</button>
   </div>
 
   <!-- QUIZ -->
@@ -727,12 +825,35 @@ body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.65;o
     </div>
   </div>
 
+  <!-- JEOPARDY -->
+  <div class="game-panel" id="game-jeopardy">
+    <div class="jep-scorebar">
+      <div class="js-item"><div class="js-v" style="color:var(--gd)" id="jepScore">0</div><div class="js-l">Puan</div></div>
+      <div class="js-item"><div class="js-v" style="color:var(--gn)" id="jepCorrect">0</div><div class="js-l">Doğru</div></div>
+      <div class="js-item"><div class="js-v" style="color:var(--rd)" id="jepWrong">0</div><div class="js-l">Yanlış</div></div>
+    </div>
+    <div id="jepBoard" class="jeopardy-board"></div>
+    <div id="jepQuestion" class="jep-question"></div>
+    <div class="match-controls" style="margin-top:12px"><button class="match-btn primary" onclick="initJeopardy()">🔄 Yeni Oyun</button></div>
+  </div>
+
   <!-- FLIP KARTLAR -->
   <div class="game-panel" id="game-flip">
     <p style="color:var(--t2);font-size:.85rem;margin-bottom:16px">Kartlara tıklayarak arkasındaki bilgiyi öğren! Her kart +2 puan.</p>
     <div class="flip-grid" id="flipGrid"></div>
   </div>
 </section>
+
+<!-- ROZET GALERİSİ -->
+<section class="sec" id="rozetler">
+  <div class="sh fade-up"><div class="ln" style="background:var(--gd)"></div><h2>🏅 Rozet Koleksiyonu</h2><p>Keşifler yaparak, quiz çözerek ve oyunlar oynayarak rozetleri topla!</p></div>
+  <div class="badge-gallery fade-up" id="badgeGallery"></div>
+</section>
+
+<!-- DETAY MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalContent"></div>
+</div>
 
 <!-- Score Popup -->
 <div class="score-popup" id="scorePopup">
@@ -856,6 +977,11 @@ function renderCards(items){
         </div>
         <div class="card-principle"><div class="lbl">🔗 Ortak İlke</div><div class="val">${d.oi}</div></div>
         <div class="card-current"><div class="lbl">📡 Güncel Durum (2024-2026)</div><div class="val">${d.gun}</div></div>
+        <div class="modal-share" style="grid-column:1/-1">
+          <button onclick="event.stopPropagation();openModal(${d.no})">🔍 Detay</button>
+          <button onclick="event.stopPropagation();shareCard(${d.no})">📤 Paylaş</button>
+          <button onclick="event.stopPropagation();copyCardText(${d.no})">📋 Kopyala</button>
+        </div>
       </div></div>
     </div>`;
   }).join('');
@@ -1317,6 +1443,334 @@ function flipCard(el,no){
   }
 }
 renderFlipCards();
+
+// ═══════════════════════════════════════════════
+// ANİMASYONLU NÖRON AĞI (Canvas)
+// ═══════════════════════════════════════════════
+(function(){
+  const c=document.getElementById('neuralCanvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let w,h;
+  function resize(){w=c.width=c.offsetWidth;h=c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  const nodes=[];
+  const N=50;
+  for(let i=0;i<N;i++){
+    nodes.push({
+      x:Math.random()*w,y:Math.random()*h,
+      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
+      r:Math.random()*3+1.5,
+      col:Math.random()>.5?'rgba(255,107,157,':'rgba(78,205,196,',
+      pulse:Math.random()*Math.PI*2
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    const t=Date.now()*.001;
+    // Connections
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<150){
+          const alpha=(1-dist/150)*.15;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x,nodes[i].y);
+          ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.strokeStyle='rgba(124,92,252,'+alpha+')';
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+    // Nodes
+    for(let i=0;i<N;i++){
+      const n=nodes[i];
+      const glow=.3+.2*Math.sin(t*2+n.pulse);
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r+1,0,Math.PI*2);
+      ctx.fillStyle=n.col+glow*.3+')';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=n.col+glow+')';
+      ctx.fill();
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<0||n.x>w)n.vx*=-1;
+      if(n.y<0||n.y>h)n.vy*=-1;
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ═══════════════════════════════════════════════
+// DETAY MODAL
+// ═══════════════════════════════════════════════
+function openModal(no){
+  const d=DATA.find(x=>x.no===no);
+  if(!d)return;
+  const km=KAT_META[d.kat]||{icon:"📌"};
+  document.getElementById('modalContent').innerHTML=`
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="mh-no">#${d.no} · ${d.kat}</div>
+      <h2>${d.tr} <small>(${d.en})</small></h2>
+      <div class="mh-tags">
+        <span class="badge badge-bio">${d.yil}</span>
+        <span class="badge badge-ai">${d.yzy}</span>
+        <span class="badge-impact" data-level="${d.etki}">${d.etki}</span>
+        <span class="badge" style="background:var(--sf);border:1px solid var(--bd);color:var(--t2)">${d.iy}</span>
+        <span class="badge" style="background:var(--sf);border:1px solid var(--bd);color:var(--t2)">${d.alan}</span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h3>👤 Araştırmacılar</h3>
+        <div class="modal-researcher">
+          <div class="mr-avatar">🧠</div>
+          <div><div class="mr-name">${d.ara}</div><div class="mr-role">Beyin Bilimi · ${d.yil}</div></div>
+        </div>
+        <div class="modal-researcher">
+          <div class="mr-avatar">🤖</div>
+          <div><div class="mr-name">${d.gel}</div><div class="mr-role">Yapay Zekâ · ${d.yzy}</div></div>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h3>🔬 Mekanizmalar</h3>
+        <div class="modal-two">
+          <div class="modal-box bio-box">
+            <h4>🧠 Beyin Mekanizması</h4>
+            <p style="font-size:.85rem">${d.bm}</p>
+          </div>
+          <div class="modal-box ai-box">
+            <h4>🤖 YZ Mekanizması</h4>
+            <p style="font-size:.85rem;margin-bottom:6px">${d.yzk}</p>
+            <p style="font-size:.8rem;color:var(--t2)">${d.yzm}</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-section modal-principle">
+        <h3>🔗 Ortak İlke</h3>
+        <p style="font-size:.92rem;font-weight:500">${d.oi}</p>
+      </div>
+      <div class="modal-section" style="padding:16px;border-radius:12px;background:var(--sf);border:1px solid var(--bd)">
+        <h3>📡 Güncel Durum (2024-2026)</h3>
+        <p style="font-size:.85rem;color:var(--t2)">${d.gun}</p>
+      </div>
+      <div class="modal-section" style="padding:16px;border-radius:12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15)">
+        <h3>📊 İstatistikler</h3>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:8px">
+          <div><span style="font-size:1.4rem;font-weight:900;color:var(--gd)">${d.gec}</span><br><span style="font-size:.68rem;color:var(--t3)">Yıl Gecikme</span></div>
+          <div><span style="font-size:1.4rem;font-weight:900;color:var(--br)">${d.yil}</span><br><span style="font-size:.68rem;color:var(--t3)">Beyin Keşfi</span></div>
+          <div><span style="font-size:1.4rem;font-weight:900;color:var(--ai)">${d.yzy}</span><br><span style="font-size:.68rem;color:var(--t3)">YZ Karşılığı</span></div>
+        </div>
+      </div>
+      <div class="modal-share">
+        <button onclick="shareCard(${d.no})">📤 Paylaş</button>
+        <button onclick="copyCardText(${d.no})">📋 Metni Kopyala</button>
+      </div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow='hidden';
+  if(!exploredCards.has(String(no))){exploredCards.add(String(no));addScore(3,'Modal detay incelendi');}
+}
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ═══════════════════════════════════════════════
+// PAYLAŞIM
+// ═══════════════════════════════════════════════
+function shareCard(no){
+  const d=DATA.find(x=>x.no===no);
+  if(!d)return;
+  const text=`🧠↔🤖 #${d.no} ${d.tr} (${d.en})\n\nBeyin: ${d.bm}\nYZ: ${d.yzk}\n\n🔗 ${d.oi}\n\n🌐 raufenc.com/beyin-ve-yapay-zeka/`;
+  if(navigator.share){
+    navigator.share({title:d.tr+' — Beyin ↔ YZ',text:text,url:'https://raufenc.com/beyin-ve-yapay-zeka/'}).catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(text).then(()=>{showScorePopup('Paylaşıldı!',0,'Metin panoya kopyalandı');});
+  }
+}
+function copyCardText(no){
+  const d=DATA.find(x=>x.no===no);
+  if(!d)return;
+  const text=`#${d.no} ${d.tr} (${d.en})\nBeyin (${d.yil}): ${d.bm}\nYZ (${d.yzy}): ${d.yzk} — ${d.yzm}\nOrtak İlke: ${d.oi}\nGüncel: ${d.gun}`;
+  navigator.clipboard.writeText(text).then(()=>{showScorePopup('Kopyalandı!',0,'Keşif metni panoya kopyalandı');});
+}
+
+// ═══════════════════════════════════════════════
+// KARŞILAŞTIRMA ARACI
+// ═══════════════════════════════════════════════
+(function(){
+  const sA=document.getElementById('cmpA'),sB=document.getElementById('cmpB');
+  DATA.forEach(d=>{
+    const opt=`<option value="${d.no}">#${d.no} ${d.tr}</option>`;
+    sA.innerHTML+=opt;sB.innerHTML+=opt;
+  });
+})();
+function runCompare(){
+  const a=DATA.find(x=>x.no===+document.getElementById('cmpA').value);
+  const b=DATA.find(x=>x.no===+document.getElementById('cmpB').value);
+  const r=document.getElementById('cmpResult');
+  if(!a||!b){r.classList.remove('show');return;}
+  r.classList.add('show');
+  r.innerHTML=`<div class="compare-vs">
+    <div class="cv-card cv1">
+      <h4>#${a.no} ${a.tr}</h4>
+      <div class="cv-row"><div class="cvl">Beyin (${a.yil})</div><div class="cvv">${a.bm}</div></div>
+      <div class="cv-row"><div class="cvl">YZ (${a.yzy})</div><div class="cvv">${a.yzk}</div></div>
+      <div class="cv-row"><div class="cvl">Gecikme</div><div class="cvv" style="font-weight:700;color:var(--gd)">${a.gec} yıl</div></div>
+      <div class="cv-row"><div class="cvl">Etki</div><div class="cvv">${a.etki}</div></div>
+      <div class="cv-row"><div class="cvl">İlişki</div><div class="cvv">${a.iy}</div></div>
+    </div>
+    <div class="compare-vs-mid">⚖️</div>
+    <div class="cv-card cv2">
+      <h4>#${b.no} ${b.tr}</h4>
+      <div class="cv-row"><div class="cvl">Beyin (${b.yil})</div><div class="cvv">${b.bm}</div></div>
+      <div class="cv-row"><div class="cvl">YZ (${b.yzy})</div><div class="cvv">${b.yzk}</div></div>
+      <div class="cv-row"><div class="cvl">Gecikme</div><div class="cvv" style="font-weight:700;color:var(--gd)">${b.gec} yıl</div></div>
+      <div class="cv-row"><div class="cvl">Etki</div><div class="cvv">${b.etki}</div></div>
+      <div class="cv-row"><div class="cvl">İlişki</div><div class="cvv">${b.iy}</div></div>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:14px;border-radius:12px;background:var(--ac3);border:1px solid rgba(124,92,252,.2)">
+    <div style="font-size:.65rem;color:var(--ac2);text-transform:uppercase;margin-bottom:4px">Ortak İlke Karşılaştırması</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:.82rem">
+      <div><strong style="color:var(--br)">#${a.no}:</strong> ${a.oi}</div>
+      <div><strong style="color:var(--ai)">#${b.no}:</strong> ${b.oi}</div>
+    </div>
+  </div>`;
+  addScore(2,'Karşılaştırma yapıldı');
+}
+
+// ═══════════════════════════════════════════════
+// JEOPARDY
+// ═══════════════════════════════════════════════
+const JEP_CATS=['Temel Mimari','Öğrenme & Hafıza','Dikkat & Karar','Görsel & Duyusal','Modern Gelişmeler'];
+const JEP_POINTS=[100,200,300,400,500];
+let jepData=[],jepScore2=0,jepCorrect2=0,jepWrong2=0;
+
+function initJeopardy(){
+  jepScore2=0;jepCorrect2=0;jepWrong2=0;
+  document.getElementById('jepScore').textContent='0';
+  document.getElementById('jepCorrect').textContent='0';
+  document.getElementById('jepWrong').textContent='0';
+  document.getElementById('jepQuestion').classList.remove('show');
+  jepData=[];
+  const catData={
+    'Temel Mimari':DATA.filter(d=>d.kat.includes('MİMARİ')||d.kat.includes('HESAPLAMA BİRİM')),
+    'Öğrenme & Hafıza':DATA.filter(d=>d.kat.includes('ÖĞRENME')||d.kat.includes('HAFIZA')),
+    'Dikkat & Karar':DATA.filter(d=>d.kat.includes('DİKKAT')||d.kat.includes('KOGNİTİF')||d.kat.includes('KARAR')),
+    'Görsel & Duyusal':DATA.filter(d=>d.kat.includes('GÖRSEL')||d.kat.includes('DUYUSAL')||d.kat.includes('UZAMSAL')),
+    'Modern Gelişmeler':DATA.filter(d=>d.kat.includes('MODERN')||d.kat.includes('ENERJİ')||d.kat.includes('SOSYAL'))
+  };
+  JEP_CATS.forEach((cat,ci)=>{
+    const pool=catData[cat]||[...DATA].sort(()=>Math.random()-.5);
+    JEP_POINTS.forEach((pts,pi)=>{
+      const d=pool[pi%pool.length];
+      jepData.push({cat,pts,d,used:false,id:ci*5+pi});
+    });
+  });
+  renderJepBoard();
+}
+function renderJepBoard(){
+  const b=document.getElementById('jepBoard');
+  let html=JEP_CATS.map(c=>`<div class="jep-cat">${c}</div>`).join('');
+  jepData.forEach(j=>{
+    html+=`<div class="jep-cell${j.used?' used':''}" onclick="openJepQ(${j.id})">${j.used?'—':j.pts}</div>`;
+  });
+  b.innerHTML=html;
+}
+function openJepQ(id){
+  const j=jepData[id];if(!j||j.used)return;
+  const d=j.d;
+  const wrongs=[...DATA].filter(x=>x.no!==d.no).sort(()=>Math.random()-.5).slice(0,3);
+  const opts=[{text:d.yzk,correct:true},...wrongs.map(w=>({text:w.yzk,correct:false}))].sort(()=>Math.random()-.5);
+  const qDiv=document.getElementById('jepQuestion');
+  qDiv.classList.add('show');
+  qDiv.innerHTML=`
+    <div class="jq-pts">${j.cat} — ${j.pts} Puan</div>
+    <div class="jq-text">"${d.tr}" (${d.en}) keşfinin<br>yapay zekâdaki karşılığı nedir?</div>
+    <div class="jq-opts">${opts.map((o,i)=>`<button class="quiz-opt" onclick="answerJep(${id},${o.correct},this)"><span class="okey">${String.fromCharCode(65+i)}</span>${o.text}</button>`).join('')}</div>
+    <div class="quiz-explain" id="jepExplain">${d.bm} → ${d.yzk}. ${d.oi}</div>`;
+}
+function answerJep(id,correct,btn){
+  const j=jepData[id];j.used=true;
+  document.querySelectorAll('#jepQuestion .quiz-opt').forEach(o=>o.style.pointerEvents='none');
+  if(correct){
+    btn.classList.add('correct');
+    jepScore2+=j.pts;jepCorrect2++;streak++;
+    addScore(j.pts/10,'Jeopardy doğru');
+  }else{
+    btn.classList.add('wrong');
+    document.querySelectorAll('#jepQuestion .quiz-opt').forEach(o=>{if(!o.classList.contains('wrong'))o.style.opacity='.5';});
+    jepWrong2++;streak=0;updateProgressFloat();
+  }
+  document.getElementById('jepExplain').classList.add('show');
+  document.getElementById('jepScore').textContent=jepScore2;
+  document.getElementById('jepCorrect').textContent=jepCorrect2;
+  document.getElementById('jepWrong').textContent=jepWrong2;
+  setTimeout(()=>{
+    document.getElementById('jepQuestion').classList.remove('show');
+    renderJepBoard();
+    if(jepData.every(j=>j.used)){
+      if(jepScore2>=5000&&!achievements.has('jepmaster')){unlockAchievement('jepmaster','👑','Jeopardy Şampiyonu','5000+ puan kazandın!');}
+      showScorePopup('Jeopardy Bitti!',Math.round(jepScore2/10),`${jepCorrect2} doğru, ${jepWrong2} yanlış. Toplam: ${jepScore2}`);
+    }
+  },2000);
+}
+initJeopardy();
+
+// ═══════════════════════════════════════════════
+// ROZET GALERİSİ
+// ═══════════════════════════════════════════════
+const ALL_BADGES=[
+  {id:'starter',icon:'🌟',name:'İlk Adım',desc:'50 puan kazan'},
+  {id:'explorer',icon:'🔬',name:'Araştırmacı',desc:'100 puan kazan'},
+  {id:'expert',icon:'🧪',name:'Uzman',desc:'150 puan kazan'},
+  {id:'master',icon:'🏆',name:'Bilim İnsanı',desc:'200 puan kazan'},
+  {id:'streak3',icon:'🔥',name:'Seri Katil',desc:'3 üst üste doğru'},
+  {id:'streak5',icon:'💥',name:'Durdurulamaz',desc:'5 üst üste doğru'},
+  {id:'curious',icon:'🔍',name:'Meraklı',desc:'10 keşif incele'},
+  {id:'halfexplorer',icon:'📚',name:'Yarı Yolda',desc:'25 keşif incele'},
+  {id:'allexplorer',icon:'🎓',name:'Tüm Keşifler',desc:'50 keşfi incele'},
+  {id:'perfect',icon:'💎',name:'Mükemmeliyetçi',desc:'Quiz %100'},
+  {id:'speedster',icon:'⚡',name:'Hız Şeytanı',desc:'Eşleştirme <60sn'},
+  {id:'flipmaster',icon:'🃏',name:'Kart Ustası',desc:'12 kartı çevir'},
+  {id:'jepmaster',icon:'👑',name:'Jeopardy Şampiyonu',desc:'5000+ puan'},
+  {id:'comparator',icon:'⚖️',name:'Karşılaştırıcı',desc:'5 karşılaştırma yap'},
+];
+function renderBadges(){
+  const g=document.getElementById('badgeGallery');
+  g.innerHTML=ALL_BADGES.map(b=>{
+    const unlocked=achievements.has(b.id);
+    return `<div class="badge-card ${unlocked?'unlocked':'locked'}">
+      <div class="bc-icon">${b.icon}</div>
+      <div class="bc-name">${b.name}</div>
+      <div class="bc-desc">${b.desc}</div>
+    </div>`;
+  }).join('');
+}
+// Re-render badges when achievement unlocked
+const origUnlock=unlockAchievement;
+unlockAchievement=function(id,icon,title,desc){
+  origUnlock(id,icon,title,desc);
+  renderBadges();
+};
+renderBadges();
+
+// Comparator achievement counter
+let compareCount=0;
+const origRunCompare=runCompare;
+runCompare=function(){
+  origRunCompare();
+  compareCount++;
+  if(compareCount>=5&&!achievements.has('comparator')){unlockAchievement('comparator','⚖️','Karşılaştırıcı','5 karşılaştırma yaptın!');}
+};
 
 // ═══ FADE-UP ═══ (re-observe for new elements)
 document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
