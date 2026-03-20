@@ -52,17 +52,14 @@ function fromFirestoreDoc(doc) {
 }
 
 async function fsSet(collection, docId, data) {
-  const token = await getToken();
   const fields = {};
   for (const [k, v] of Object.entries(data)) {
     fields[k] = toFirestoreValue(v);
   }
   const url = `${FIRESTORE_BASE}/${collection}/${docId}?key=${API_KEY}`;
-  const headers = { 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(url, {
     method: 'PATCH',
-    headers,
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields })
   });
   if (!res.ok) {
@@ -73,17 +70,14 @@ async function fsSet(collection, docId, data) {
 }
 
 async function fsAdd(collection, data) {
-  const token = await getToken();
   const fields = {};
   for (const [k, v] of Object.entries(data)) {
     fields[k] = toFirestoreValue(v);
   }
   const url = `${FIRESTORE_BASE}/${collection}?key=${API_KEY}`;
-  const headers = { 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(url, {
     method: 'POST',
-    headers,
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ fields })
   });
   if (!res.ok) {
@@ -94,11 +88,8 @@ async function fsAdd(collection, data) {
 }
 
 async function fsGetAll(collection) {
-  const token = await getToken();
   const url = `${FIRESTORE_BASE}/${collection}?key=${API_KEY}`;
-  const headers = {};
-  if (token) headers['Authorization'] = `Bearer ${token}`;
-  const res = await fetch(url, { headers });
+  const res = await fetch(url);
   if (!res.ok) {
     const errText = await res.text();
     throw new Error(`Firestore getAll error (${res.status}): ${errText}`);
