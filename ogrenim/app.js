@@ -5,6 +5,7 @@ let userRole = null;
 
 const FIRESTORE_DB_ID = 'ai-studio-ac5d1b43-b908-42e1-8974-579e8d9328bb';
 const FIRESTORE_BASE = `https://firestore.googleapis.com/v1/projects/${FIREBASE_CONFIG.projectId}/databases/${FIRESTORE_DB_ID}/documents`;
+const API_KEY = FIREBASE_CONFIG.apiKey;
 
 function initFirebase() {
   firebase.initializeApp(FIREBASE_CONFIG);
@@ -56,10 +57,12 @@ async function fsSet(collection, docId, data) {
   for (const [k, v] of Object.entries(data)) {
     fields[k] = toFirestoreValue(v);
   }
-  const url = `${FIRESTORE_BASE}/${collection}/${docId}`;
+  const url = `${FIRESTORE_BASE}/${collection}/${docId}?key=${API_KEY}`;
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(url, {
     method: 'PATCH',
-    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ fields })
   });
   if (!res.ok) {
@@ -75,10 +78,12 @@ async function fsAdd(collection, data) {
   for (const [k, v] of Object.entries(data)) {
     fields[k] = toFirestoreValue(v);
   }
-  const url = `${FIRESTORE_BASE}/${collection}`;
+  const url = `${FIRESTORE_BASE}/${collection}?key=${API_KEY}`;
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({ fields })
   });
   if (!res.ok) {
@@ -90,10 +95,10 @@ async function fsAdd(collection, data) {
 
 async function fsGetAll(collection) {
   const token = await getToken();
-  const url = `${FIRESTORE_BASE}/${collection}`;
-  const res = await fetch(url, {
-    headers: { 'Authorization': `Bearer ${token}` }
-  });
+  const url = `${FIRESTORE_BASE}/${collection}?key=${API_KEY}`;
+  const headers = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const res = await fetch(url, { headers });
   if (!res.ok) {
     const errText = await res.text();
     throw new Error(`Firestore getAll error (${res.status}): ${errText}`);
