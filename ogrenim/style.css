@@ -1,7 +1,7 @@
 :root {
-  --bg: #f0f4f0;
+  --bg: #f5f7f5;
   --card: #ffffff;
-  --border: #e2e8e2;
+  --border: #d5ddd5;
   --primary: #1a6b4a;
   --primary-hover: #145a3d;
   --primary-light: #e8f5ee;
@@ -14,9 +14,9 @@
   --green-border: #a3d9b8;
   --amber: #b8860b;
   --amber-light: #fdf8ed;
-  --text: #1a2e1a;
-  --text-secondary: #4a6a4a;
-  --text-muted: #7a9a7a;
+  --text: #111;
+  --text-secondary: #444;
+  --text-muted: #777;
   --shadow: 0 1px 3px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
@@ -365,12 +365,12 @@ body {
   font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 12px;
-  color: var(--text);
+  color: #111;
 }
 
 .intro-desc {
   font-size: 16px;
-  color: var(--text-secondary);
+  color: #333;
   line-height: 1.6;
   margin-bottom: 36px;
 }
@@ -538,7 +538,7 @@ body {
 .content-header h2 {
   font-size: 22px;
   font-weight: 700;
-  color: var(--text);
+  color: #111;
 }
 
 .content-body {
@@ -587,7 +587,7 @@ body {
 .content-text {
   margin-top: 20px;
   font-size: 16px;
-  color: var(--text-secondary);
+  color: #333;
   line-height: 1.7;
 }
 

@@ -308,15 +308,26 @@ async function finishLesson() {
   const preScore = calcScore(preTestAnswers, currentLesson.preTest);
   const postScore = calcScore(postTestAnswers, currentLesson.postTest);
 
-  // Save to Firestore (non-blocking)
+  // Save to Firestore
   if (currentUser) {
-    db.collection('progress').add({
-      userId: currentUser.uid,
-      lessonId: currentLesson.id,
-      preTestScore: preScore,
-      postTestScore: postScore,
-      completedAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).catch(e => console.error('Save error:', e));
+    try {
+      await db.collection('progress').add({
+        userId: currentUser.uid,
+        lessonId: currentLesson.id,
+        preTestScore: preScore,
+        postTestScore: postScore,
+        completedAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      console.log('Progress saved successfully');
+    } catch (e) {
+      console.error('Save error:', e);
+      // Show error to user
+      const errDiv = document.createElement('div');
+      errDiv.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#c0392b;color:#fff;padding:12px 24px;border-radius:8px;z-index:9999;font-size:14px';
+      errDiv.textContent = 'Sonuç kaydedilemedi: ' + (e.message || e.code);
+      document.body.appendChild(errDiv);
+      setTimeout(() => errDiv.remove(), 8000);
+    }
   }
 }
 
@@ -450,7 +461,7 @@ function init() {
       currentPage = 'dashboard';
       render();
 
-      // Save user doc in background (non-blocking)
+      // Save user doc in background
       const userRef = db.collection('users').doc(user.uid);
       userRef.set({
         uid: user.uid,
@@ -458,7 +469,16 @@ function init() {
         displayName: user.displayName,
         role: userRole,
         lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true }).catch(e => console.error('User doc error:', e));
+      }, { merge: true }).then(() => {
+        console.log('User doc saved OK');
+      }).catch(e => {
+        console.error('User doc error:', e);
+        const errDiv = document.createElement('div');
+        errDiv.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#c0392b;color:#fff;padding:12px 24px;border-radius:8px;z-index:9999;font-size:14px';
+        errDiv.textContent = 'Firestore hatası: ' + (e.message || e.code);
+        document.body.appendChild(errDiv);
+        setTimeout(() => errDiv.remove(), 8000);
+      });
     } else {
       userRole = null;
       currentPage = 'login';
