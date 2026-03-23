@@ -80,6 +80,7 @@
           <div class="nt-result-text" id="final-text"></div>
           <div style="margin:20px auto;max-width:400px;text-align:left" id="summary"></div>
           <div class="nt-result-actions">
+            <button class="nt-btn nt-btn-primary" onclick="NT.share('Savsaklama Kaçışı Sonucum', '🧠 Savsaklama Kaçışı\n📊 Sonuç: ' + score + ' puan (' + decisions.filter(d => d.action === \'done\').length + '/' + shuffled.length + ' görev yapıldı)', window.location.href)">Sonucumu Paylaş</button>
             <button class="nt-btn nt-btn-primary" onclick="location.reload()">Tekrar Oyna</button>
             <a href="/noroterbiye/oyunlar/" class="nt-btn nt-btn-secondary">Diğer Oyunlar</a>
           </div>

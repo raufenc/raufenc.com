@@ -59,10 +59,16 @@
           </div>
         </div>
 
-        <div style="margin-top:24px;text-align:center">
+        <div style="margin-top:24px;text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveEntry()">💾 Kaydet</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Bir-Yanlis-Bir-Dogru.html')">📄 Rapor İndir</button>
           <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="reset()">🔄 Başka bir davranış seç</button>
         </div>
       </div>
+
+      <!-- Geçmiş Kayıtlar -->
+      <h2 class="nt-section-title" style="margin-top:48px">📜 Geçmiş Kayıtlar</h2>
+      <div id="history-list"></div>
     </div>
   </section>
 
@@ -220,6 +226,70 @@
       currentItem = null;
       currentAlts = [];
     }
+
+    let savedEntries = NT.load('bir_yanlis_bir_dogru', []);
+
+    function saveEntry() {
+      if (!currentItem) { NT.toast('Önce bir davranış seç'); return; }
+      const selectedAlt = document.querySelector('.swap-card.right .swap-text');
+      const altText = selectedAlt ? selectedAlt.textContent.trim() : currentAlts[0];
+      savedEntries.unshift({
+        id: Date.now(),
+        tarih: new Date().toLocaleDateString('tr-TR'),
+        yanlis: currentItem.yanlis,
+        icon: currentItem.icon,
+        dogru: altText
+      });
+      NT.save('bir_yanlis_bir_dogru', savedEntries);
+      renderHistory();
+      NT.toast('Kayıt kaydedildi!');
+    }
+
+    function deleteEntry(id) {
+      savedEntries = savedEntries.filter(e => e.id !== id);
+      NT.save('bir_yanlis_bir_dogru', savedEntries);
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('history-list');
+      if (savedEntries.length === 0) {
+        list.innerHTML = '<p style="color:var(--muted);font-size:0.85rem">Henüz kayıt yok.</p>';
+        return;
+      }
+      list.innerHTML = savedEntries.map(e => `
+        <div class="nt-card" style="margin-bottom:8px;padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div style="flex:1">
+              <div style="font-size:0.75rem;color:var(--muted);margin-bottom:4px">${e.tarih}</div>
+              <div style="font-size:0.88rem;margin-bottom:4px"><span style="color:var(--nt-red);font-weight:600">${e.icon} ${e.yanlis}</span> → <span style="color:var(--nt-green);font-weight:600">✅ ${e.dogru}</span></div>
+            </div>
+            <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="deleteEntry(${e.id})" style="color:var(--nt-red);padding:4px 8px">×</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function buildPrintHTML() {
+      let html = '<h2 style="font-size:16px;margin-bottom:16px">Bir Yanlış Bir Doğru — Kayıtlarım</h2>';
+      if (savedEntries.length === 0) {
+        html += '<p style="font-size:13px;color:#999">Henüz kayıt yok.</p>';
+        return html;
+      }
+      html += '<table style="width:100%;border-collapse:collapse">';
+      html += '<tr><th style="border:1px solid #ddd;padding:8px;font-size:11px;text-align:left">Tarih</th><th style="border:1px solid #ddd;padding:8px;font-size:11px;text-align:left">Yanlış</th><th style="border:1px solid #ddd;padding:8px;font-size:11px;text-align:left">Doğru</th></tr>';
+      savedEntries.forEach(e => {
+        html += '<tr>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px">' + e.tarih + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;color:#ef4444">' + e.yanlis + '</td>';
+        html += '<td style="border:1px solid #ddd;padding:6px 8px;font-size:12px;color:#22c55e">' + e.dogru + '</td>';
+        html += '</tr>';
+      });
+      html += '</table>';
+      return html;
+    }
+
+    renderHistory();
 
     NT.renderNav();
     NT.renderFooter();

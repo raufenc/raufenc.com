@@ -184,10 +184,11 @@
       const s = steps[step];
       if (s.hasInput) {
         const val = document.getElementById('flow-input').value.trim();
-        if (!val) { NT.toast('Bir şey yaz'); return; }
+        if (!val) { NT.toast('Bu alanı doldurman gerekiyor'); return; }
         flowData[s.inputKey] = val;
       }
       if (s.hasButtons) {
+        if (selectedFeelings.length === 0) { NT.toast('En az bir duygu seç'); return; }
         flowData.hisler = [...selectedFeelings];
       }
 

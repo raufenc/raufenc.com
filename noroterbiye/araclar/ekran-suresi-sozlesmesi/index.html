@@ -58,13 +58,13 @@
             <div class="nt-form-group">
               <label class="nt-form-label">Hafta içi günlük limit</label>
               <select class="nt-select" id="f-hafta-ici">
-                <option>30 dakika</option><option>1 saat</option><option selected>1.5 saat</option><option>2 saat</option><option>2.5 saat</option><option>3 saat</option>
+                <option value="30 dakika">30 dakika</option><option value="1 saat">1 saat</option><option value="1.5 saat" selected>1.5 saat</option><option value="2 saat">2 saat</option><option value="2.5 saat">2.5 saat</option><option value="3 saat">3 saat</option>
               </select>
             </div>
             <div class="nt-form-group">
               <label class="nt-form-label">Hafta sonu günlük limit</label>
               <select class="nt-select" id="f-hafta-sonu">
-                <option>1 saat</option><option>1.5 saat</option><option selected>2 saat</option><option>2.5 saat</option><option>3 saat</option><option>4 saat</option>
+                <option value="1 saat">1 saat</option><option value="1.5 saat">1.5 saat</option><option value="2 saat" selected>2 saat</option><option value="2.5 saat">2.5 saat</option><option value="3 saat">3 saat</option><option value="4 saat">4 saat</option>
               </select>
             </div>
           </div>
@@ -112,7 +112,7 @@
           <div class="nt-form-group">
             <label class="nt-form-label">Kontrol sıklığı</label>
             <select class="nt-select" id="f-kontrol">
-              <option>Her gün</option><option selected>Haftada bir</option><option>2 haftada bir</option>
+              <option value="Her gün">Her gün</option><option value="Haftada bir" selected>Haftada bir</option><option value="2 haftada bir">2 haftada bir</option>
             </select>
           </div>
 
@@ -129,7 +129,7 @@
         </div>
         <div style="display:flex;gap:10px;justify-content:center;margin-top:24px;flex-wrap:wrap">
           <button class="nt-btn nt-btn-primary nt-btn-sm" onclick="saveContract()">💾 Kaydet</button>
-          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Ekran-Sözleşmesi.pdf')">📄 Rapor İndir</button>
+          <button class="nt-btn nt-btn-secondary nt-btn-sm" onclick="NT.downloadPDF(buildPrintHTML,'Ekran-Sözleşmesi.html')">📄 Rapor İndir</button>
           <button class="nt-btn nt-btn-ghost nt-btn-sm" onclick="editContract()">✏️ Düzenle</button>
         </div>
       </div>
@@ -172,9 +172,29 @@
       renderRules();
     }
 
+    // Cache form values so they're available for buildPrintHTML even if form is hidden/reset
+    let cachedValues = {};
+
+    function readFormValues() {
+      return {
+        genc: document.getElementById('f-genc').value.trim() || 'Genç',
+        ebeveyn: document.getElementById('f-ebeveyn').value.trim() || 'Ebeveyn',
+        haftaIci: document.getElementById('f-hafta-ici').value,
+        haftaSonu: document.getElementById('f-hafta-sonu').value,
+        uzak: document.getElementById('f-uzak').value,
+        yasak: document.getElementById('f-yasak').value,
+        izin: document.getElementById('f-izin').value,
+        istisna: document.getElementById('f-istisna').value,
+        ceza: document.getElementById('f-ceza').value,
+        odul: document.getElementById('f-odul').value,
+        kontrol: document.getElementById('f-kontrol').value
+      };
+    }
+
     function generateContract() {
-      const genc = document.getElementById('f-genc').value.trim() || 'Genç';
-      const ebeveyn = document.getElementById('f-ebeveyn').value.trim() || 'Ebeveyn';
+      cachedValues = readFormValues();
+      const genc = cachedValues.genc;
+      const ebeveyn = cachedValues.ebeveyn;
       const today = new Date().toLocaleDateString('tr-TR');
 
       const body = document.getElementById('contract-body');
@@ -274,19 +294,20 @@
     renderHistory();
 
     function buildPrintHTML() {
-      const genc = document.getElementById('f-genc').value.trim() || 'Genç';
-      const ebeveyn = document.getElementById('f-ebeveyn').value.trim() || 'Ebeveyn';
+      const v = Object.keys(cachedValues).length > 0 ? cachedValues : readFormValues();
+      const genc = v.genc;
+      const ebeveyn = v.ebeveyn;
       const today = new Date().toLocaleDateString('tr-TR');
       let html = '<div style="max-width:520px;margin:0 auto;border:2px solid #06b6d4;border-radius:16px;padding:40px 32px">';
       html += '<p style="text-align:center;font-size:10px;color:#999;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:8px">NöroTerbiye Ekran Süresi Sözleşmesi</p>';
       html += '<h2 style="text-align:center;font-size:20px;margin-bottom:24px">Ekran Anlaşması</h2>';
       const rows = [
         ['Tarih', today, ''],
-        ['Hafta içi limit', document.getElementById('f-hafta-ici').value, ''],
-        ['Hafta sonu limit', document.getElementById('f-hafta-sonu').value, ''],
-        ['Ekrandan uzak saatler', document.getElementById('f-uzak').value || '—', ''],
-        ['Yasaklı', document.getElementById('f-yasak').value || '—', 'color:#ef4444;'],
-        ['İzin verilen', document.getElementById('f-izin').value || '—', 'color:#22c55e;'],
+        ['Hafta içi limit', v.haftaIci, ''],
+        ['Hafta sonu limit', v.haftaSonu, ''],
+        ['Ekrandan uzak saatler', v.uzak || '—', ''],
+        ['Yasaklı', v.yasak || '—', 'color:#ef4444;'],
+        ['İzin verilen', v.izin || '—', 'color:#22c55e;'],
       ];
       rows.forEach(([label, value, style]) => {
         html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px">';
@@ -297,15 +318,14 @@
         html += '<div style="margin:16px 0"><p style="font-size:13px;font-weight:700;margin-bottom:8px">Kurallar:</p>';
         html += '<ul style="padding-left:20px;font-size:12px;line-height:1.8">' + rules.map(r => '<li>' + r + '</li>').join('') + '</ul></div>';
       }
-      const istisna = document.getElementById('f-istisna').value;
-      if (istisna) {
-        html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">İstisnalar</span><span style="font-size:12px">' + istisna + '</span></div>';
+      if (v.istisna) {
+        html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">İstisnalar</span><span style="font-size:12px">' + v.istisna + '</span></div>';
       }
-      const ceza = document.getElementById('f-ceza').value || '—';
-      const odul = document.getElementById('f-odul').value || '—';
+      const ceza = v.ceza || '—';
+      const odul = v.odul || '—';
       html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">Kurala uymazsa</span><span style="font-weight:600;color:#ef4444">' + ceza + '</span></div>';
       html += '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px"><span style="color:#666">Kurala uyarsa</span><span style="font-weight:600;color:#22c55e">' + odul + '</span></div>';
-      html += '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px"><span style="color:#666">Kontrol</span><span style="font-weight:600">' + document.getElementById('f-kontrol').value + '</span></div>';
+      html += '<div style="display:flex;justify-content:space-between;padding:8px 0;font-size:13px"><span style="color:#666">Kontrol</span><span style="font-weight:600">' + v.kontrol + '</span></div>';
       html += '<div style="display:flex;gap:24px;margin-top:32px;padding-top:24px;border-top:1px dashed #ccc">';
       html += '<div style="flex:1;text-align:center"><div style="border-bottom:1px solid #333;min-height:30px;margin-bottom:6px"></div><div style="font-size:11px;color:#999">' + genc + '</div></div>';
       html += '<div style="flex:1;text-align:center"><div style="border-bottom:1px solid #333;min-height:30px;margin-bottom:6px"></div><div style="font-size:11px;color:#999">' + ebeveyn + '</div></div>';

@@ -81,6 +81,7 @@
           <div class="nt-result-label" id="final-label"></div>
           <div class="nt-result-text" id="final-text"></div>
           <div class="nt-result-actions">
+            <button class="nt-btn nt-btn-primary" onclick="NT.share('Dopamin Dedektifi Sonucum', '🧠 Dopamin Dedektifi\n📊 Sonuç: ' + score + '/' + shuffled.length + ' doğru (%' + NT.calcScore(score, shuffled.length).pct + ')', window.location.href)">Sonucumu Paylaş</button>
             <button class="nt-btn nt-btn-primary" onclick="location.reload()">Tekrar Oyna</button>
             <a href="/noroterbiye/oyunlar/" class="nt-btn nt-btn-secondary">Diğer Oyunlar</a>
           </div>

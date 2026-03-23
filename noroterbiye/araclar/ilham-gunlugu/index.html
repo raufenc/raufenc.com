@@ -81,7 +81,7 @@
       <div id="entries-list"></div>
 
       <div style="text-align:center;margin-top:20px">
-        <button class="nt-btn nt-btn-secondary" onclick="NT.downloadPDF('entries-list','İlham-Günlüğü.pdf')">📄 Rapor İndir</button>
+        <button class="nt-btn nt-btn-secondary" onclick="NT.downloadPDF('entries-list','İlham-Günlüğü.html')">📄 Rapor İndir</button>
         <a href="/noroterbiye/oyunlar/rol-model-tahmini/" class="nt-btn nt-btn-secondary">🏅 Rol Modeller</a>
       </div>
     </div>
@@ -101,8 +101,17 @@
         btn.className = 'suggest-btn';
         btn.textContent = r.isim;
         btn.onclick = () => {
-          document.getElementById('inp-name').value = r.isim;
+          // Clear active state from all chips
+          container.querySelectorAll('.suggest-btn').forEach(b => b.style.borderColor = '');
+          btn.style.borderColor = 'var(--nt-primary)';
+          // Set input value and dispatch events
+          const nameInput = document.getElementById('inp-name');
+          nameInput.value = r.isim;
+          nameInput.dispatchEvent(new Event('input', { bubbles: true }));
+          nameInput.dispatchEvent(new Event('change', { bubbles: true }));
+          // Pre-fill lesson placeholder and focus
           document.getElementById('inp-lesson').placeholder = r.nedenRolModel;
+          document.getElementById('inp-lesson').focus();
         };
         container.appendChild(btn);
       });

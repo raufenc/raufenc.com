@@ -410,7 +410,8 @@ const KavramQuiz = {
           <div class="nt-meter-fill" style="width:${result.pct}%;background:var(--nt-${result.pct >= 60 ? 'green' : result.pct >= 40 ? 'amber' : 'red'})"></div>
         </div>
         <div class="nt-result-actions">
-          <button class="nt-btn nt-btn-primary" onclick="KavramQuiz.init(SORU_BANKASI_DATA)">Tekrar Dene</button>
+          <button class="nt-btn nt-btn-primary" onclick="NT.share('Kavram Quizi Sonucum', '🧠 Kavram Quizi\\n📊 Sonuç: ${correct}/${total} — ${result.label}', window.location.href)">Sonucumu Paylaş</button>
+          <button class="nt-btn nt-btn-secondary" onclick="KavramQuiz.init(SORU_BANKASI_DATA)">Tekrar Dene</button>
           <a href="/noroterbiye/sozluk/" class="nt-btn nt-btn-secondary">Sözlüğe Git</a>
           <a href="/noroterbiye/testler/" class="nt-btn nt-btn-ghost">Diğer Testler</a>
         </div>

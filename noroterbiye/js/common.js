@@ -131,14 +131,27 @@ const NT = {
     );
   },
 
-  // Paylaşım fonksiyonu
+  // Paylaşım fonksiyonu (B1+B6 fix: desktop fallback + clipboard hata)
   share(title, text, url) {
+    const link = url || window.location.href;
+    const copyFallback = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link)
+          .then(() => this.toast('Link kopyalandı!'))
+          .catch(() => this.toast('Paylaşım desteklenmiyor. Linki manuel kopyala.'));
+      } else {
+        // Son çare: prompt ile göster
+        prompt('Linki kopyala:', link);
+      }
+    };
+
     if (navigator.share) {
-      navigator.share({ title, text, url }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(url || window.location.href).then(() => {
-        this.toast('Link kopyalandı!');
+      navigator.share({ title, text, url: link }).catch(err => {
+        // AbortError = kullanıcı iptal etti, sorun yok
+        if (err.name !== 'AbortError') copyFallback();
       });
+    } else {
+      copyFallback();
     }
   },
 
