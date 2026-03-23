@@ -14,167 +14,144 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: var(--space-8) var(--space-4);
+      padding: var(--space-8, 2rem) var(--space-4, 1rem);
       padding-top: 100px;
     }
 
     .section-block {
       width: 100%;
-      max-width: 900px;
-      margin: 0 auto var(--space-16);
+      max-width: 920px;
+      margin: 0 auto var(--space-16, 4rem);
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-8, 2rem);
     }
 
     .section-title {
-      font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+      font-size: clamp(1.5rem, 4.5vw, 2.3rem);
       font-weight: 800;
       background: var(--nt-grad-text, linear-gradient(135deg, #818cf8, #c084fc));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: var(--space-2);
+      margin-bottom: var(--space-2, 0.5rem);
       line-height: 1.3;
     }
 
     .section-subtitle {
       color: var(--text-secondary, #94a3b8);
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
       font-style: italic;
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
+      line-height: 1.5;
     }
 
-    /* ── Section 1: Bar Chart ── */
-    .chart-container {
-      position: relative;
-      width: 100%;
-      padding: var(--space-6) var(--space-4);
+    /* ── Shared glass card ── */
+    .glass-card {
       background: rgba(15, 23, 42, 0.6);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 16px;
       backdrop-filter: blur(12px);
-      overflow: hidden;
     }
 
-    .chart-legend {
-      display: flex;
-      gap: var(--space-6);
-      justify-content: center;
-      margin-bottom: var(--space-6);
-      flex-wrap: wrap;
+    /* ── References block ── */
+    .references {
+      margin-top: var(--space-6, 1.5rem);
+      padding: var(--space-4, 1rem) var(--space-5, 1.25rem);
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.06);
+      border-radius: 12px;
     }
 
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: 0.85rem;
-      color: var(--text-secondary, #94a3b8);
-    }
-
-    .legend-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-    }
-
-    .legend-dot.natural { background: #10b981; }
-    .legend-dot.artificial { background: linear-gradient(90deg, #f59e0b, #ef4444); }
-
-    .bars-wrapper {
-      position: relative;
-      padding-top: 36px;
-    }
-
-    /* Baseline & danger zone */
-    .chart-baseline {
-      position: absolute;
-      top: 36px;
-      bottom: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .chart-baseline::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 2px;
-      border-left: 2px dashed rgba(16, 185, 129, 0.5);
-    }
-
-    .baseline-tag {
-      position: absolute;
-      top: -28px;
-      left: 0;
-      transform: translateX(-50%);
-      font-size: 0.7rem;
-      color: #10b981;
-      white-space: nowrap;
-      font-weight: 600;
-    }
-
-    .danger-zone {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      background: rgba(239, 68, 68, 0.04);
-      border-radius: 0 8px 8px 0;
-    }
-
-    .danger-tag {
-      position: absolute;
-      top: -28px;
-      right: 10%;
-      font-size: 0.7rem;
-      color: #ef4444;
+    .references-title {
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
-      animation: dangerPulse 2s ease-in-out infinite;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary, #94a3b8);
+      margin-bottom: var(--space-2, 0.5rem);
     }
 
-    @keyframes dangerPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+    .references ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .references li {
+      font-size: 0.72rem;
+      color: rgba(148, 163, 184, 0.7);
+      line-height: 1.6;
+      margin-bottom: 4px;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .references li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: rgba(148, 163, 184, 0.4);
+    }
+
+    /* ═══════════════════════════════════════════
+       Section 1: Dual Bar Charts
+       ═══════════════════════════════════════════ */
+    .chart-group-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-3, 0.75rem);
+      padding-bottom: var(--space-2, 0.5rem);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .chart-group-label.natural-label { color: #10b981; }
+    .chart-group-label.artificial-label { color: #ef4444; }
+
+    .chart-container {
+      padding: var(--space-6, 1.5rem) var(--space-5, 1.25rem);
+      margin-bottom: var(--space-4, 1rem);
+    }
+
+    .chart-scale-note {
+      text-align: right;
+      font-size: 0.7rem;
+      color: rgba(148, 163, 184, 0.5);
+      margin-bottom: var(--space-3, 0.75rem);
+      font-style: italic;
     }
 
     .bar-row {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      margin-bottom: var(--space-3);
+      gap: var(--space-3, 0.75rem);
+      margin-bottom: var(--space-3, 0.75rem);
       position: relative;
     }
 
     .bar-label {
-      min-width: 170px;
+      min-width: 120px;
       text-align: right;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-primary, #e2e8f0);
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: var(--space-2);
+      gap: var(--space-2, 0.5rem);
       white-space: nowrap;
       flex-shrink: 0;
     }
 
-    .bar-label .emoji {
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
+    .bar-label .emoji { font-size: 1.15rem; flex-shrink: 0; }
 
     .bar-track {
       flex: 1;
-      height: 34px;
+      height: 32px;
       background: rgba(30, 41, 59, 0.5);
       border-radius: 6px;
       position: relative;
@@ -187,149 +164,112 @@
       width: 0;
       transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative;
-      display: flex;
-      align-items: center;
       min-width: 0;
     }
 
-    .bar-fill.type-natural {
+    .bar-fill.natural {
       background: linear-gradient(90deg, #065f46, #10b981);
-      box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
     }
 
-    .bar-fill.type-yapay-1 {
+    .bar-fill.yapay-low {
       background: linear-gradient(90deg, #92400e, #f59e0b);
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
     }
 
-    .bar-fill.type-yapay-2 {
+    .bar-fill.yapay-mid {
       background: linear-gradient(90deg, #b45309, #ef4444);
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.25);
     }
 
-    .bar-fill.type-yapay-3 {
+    .bar-fill.yapay-high {
       background: linear-gradient(90deg, #991b1b, #dc2626);
-      box-shadow: 0 0 14px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 0 14px rgba(220, 38, 38, 0.35);
     }
 
     .bar-value {
       position: absolute;
-      right: -46px;
+      right: -52px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 700;
       color: var(--text-primary, #e2e8f0);
       white-space: nowrap;
     }
 
-    /* ── Section 2: Tolerance Steps ── */
+    .bar-row .bar-tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.68rem;
+      color: rgba(148, 163, 184, 0.8);
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .bar-row:hover .bar-tooltip { display: block; }
+
+    /* Comparison callout between the two charts */
+    .scale-callout {
+      text-align: center;
+      padding: var(--space-4, 1rem) var(--space-3, 0.75rem);
+      margin: var(--space-2, 0.5rem) 0;
+    }
+
+    .scale-callout-inner {
+      display: inline-block;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+      border-radius: 10px;
+      padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+      font-size: 0.88rem;
+      color: var(--text-secondary, #94a3b8);
+      line-height: 1.5;
+    }
+
+    .scale-callout-inner strong {
+      color: #ef4444;
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════════
+       Section 2: Tolerance Cards
+       ═══════════════════════════════════════════ */
     .tolerance-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-4);
+      gap: var(--space-4, 1rem);
     }
 
     .tolerance-card {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      padding: var(--space-5);
+      padding: var(--space-5, 1.25rem);
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-2);
+      gap: var(--space-2, 0.5rem);
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.6s ease, transform 0.6s ease;
+      border-top: 3px solid transparent;
     }
 
-    .tolerance-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .tolerance-card.visible { opacity: 1; transform: translateY(0); }
 
-    .tolerance-card:nth-child(1) { transition-delay: 0s; }
-    .tolerance-card:nth-child(2) { transition-delay: 0.15s; }
-    .tolerance-card:nth-child(3) { transition-delay: 0.3s; }
-    .tolerance-card:nth-child(4) { transition-delay: 0.45s; }
+    .tolerance-card:nth-child(1) { border-top-color: #10b981; transition-delay: 0s; }
+    .tolerance-card:nth-child(2) { border-top-color: #f59e0b; transition-delay: 0.15s; }
+    .tolerance-card:nth-child(3) { border-top-color: #ef4444; transition-delay: 0.3s; }
+    .tolerance-card:nth-child(4) { border-top-color: #7f1d1d; transition-delay: 0.45s; }
 
-    .tol-step-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary, #94a3b8);
-    }
-
-    .tol-emoji {
-      font-size: 2.2rem;
-      margin: var(--space-1) 0;
-    }
-
-    .tol-bar-container {
-      width: 48px;
-      height: 100px;
-      background: rgba(30, 41, 59, 0.4);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: stretch;
-      overflow: visible;
-      position: relative;
-      margin: var(--space-2) 0;
-    }
-
-    /* Zero line for the negative bar */
-    .tol-bar-container.has-negative {
-      justify-content: center;
-    }
-
-    .tol-bar-container.has-negative::after {
-      content: '';
-      position: absolute;
-      left: -4px;
-      right: -4px;
-      top: 50%;
-      height: 1px;
-      background: rgba(148, 163, 184, 0.3);
-    }
-
-    .tol-bar {
-      border-radius: 6px;
-      width: 100%;
-      transition: height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .tol-bar.green {
-      background: linear-gradient(0deg, #065f46, #10b981);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
-      height: 0;
-    }
-
-    .tol-bar.amber {
-      background: linear-gradient(0deg, #92400e, #f59e0b);
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-      height: 0;
-    }
-
-    .tol-bar.red {
-      background: linear-gradient(0deg, #991b1b, #ef4444);
-      box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
-      height: 0;
-    }
-
-    .tol-bar.negative {
-      background: linear-gradient(180deg, #7f1d1d, #dc2626);
-      box-shadow: 0 -4px 10px rgba(220, 38, 38, 0.3);
-      height: 0;
-      align-self: flex-start;
-      margin-top: 50%;
-      border-radius: 0 0 6px 6px;
-    }
+    .tol-emoji { font-size: 2.2rem; margin: var(--space-1, 0.25rem) 0; }
 
     .tol-title {
       font-size: 0.95rem;
@@ -340,10 +280,22 @@
     .tol-desc {
       font-size: 0.82rem;
       color: var(--text-secondary, #94a3b8);
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    /* ── Section 3: Detox Path ── */
+    .tolerance-note {
+      text-align: center;
+      font-size: 0.82rem;
+      font-style: italic;
+      color: rgba(148, 163, 184, 0.7);
+      max-width: 700px;
+      margin: var(--space-6, 1.5rem) auto 0;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════
+       Section 3: Detox Cards with Arrows
+       ═══════════════════════════════════════════ */
     .detox-path {
       display: flex;
       flex-direction: column;
@@ -352,13 +304,9 @@
     }
 
     .detox-card {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.12);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      padding: var(--space-6);
+      padding: var(--space-6, 1.5rem);
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       text-align: center;
       opacity: 0;
       transform: translateY(30px);
@@ -366,42 +314,23 @@
       border-top: 3px solid transparent;
     }
 
-    .detox-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .detox-card.visible { opacity: 1; transform: translateY(0); }
 
-    .detox-card:hover {
-      border-color: rgba(129, 140, 248, 0.3);
-    }
+    .detox-card:nth-child(1) { border-top-color: #ef4444; transition-delay: 0.1s; }
+    .detox-card:nth-child(3) { border-top-color: #f59e0b; transition-delay: 0.3s; }
+    .detox-card:nth-child(5) { border-top-color: #10b981; transition-delay: 0.5s; }
 
-    .detox-card:nth-child(1) { transition-delay: 0.1s; }
-    .detox-card:nth-child(3) { transition-delay: 0.3s; }
-    .detox-card:nth-child(5) { transition-delay: 0.5s; }
-
-    .detox-card.step-1 { border-top-color: #ef4444; }
-    .detox-card.step-2 { border-top-color: #f59e0b; }
-    .detox-card.step-3 { border-top-color: #10b981; }
-
-    .detox-card.step-1.visible { border-color: rgba(239, 68, 68, 0.25); border-top-color: #ef4444; }
-    .detox-card.step-2.visible { border-color: rgba(245, 158, 11, 0.25); border-top-color: #f59e0b; }
-    .detox-card.step-3.visible { border-color: rgba(16, 185, 129, 0.25); border-top-color: #10b981; }
-
-    .detox-icon {
-      font-size: 2.5rem;
-      margin-bottom: var(--space-3);
-      display: block;
-    }
+    .detox-icon { font-size: 2.4rem; margin-bottom: var(--space-3, 0.75rem); display: block; }
 
     .detox-card h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-primary, #e2e8f0);
-      margin-bottom: var(--space-2);
+      margin-bottom: var(--space-2, 0.5rem);
     }
 
     .detox-card p {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: var(--text-secondary, #94a3b8);
       line-height: 1.6;
     }
@@ -416,10 +345,7 @@
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .detox-arrow.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .detox-arrow.visible { opacity: 1; transform: translateY(0); }
 
     .detox-arrow svg {
       width: 24px;
@@ -427,53 +353,41 @@
       color: rgba(129, 140, 248, 0.5);
     }
 
-    /* ── Responsive ── */
+    .detox-ref {
+      text-align: center;
+      margin-top: var(--space-5, 1.25rem);
+      font-size: 0.72rem;
+      color: rgba(148, 163, 184, 0.6);
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════
+       Responsive
+       ═══════════════════════════════════════════ */
     @media (max-width: 768px) {
-      .tolerance-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .tolerance-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 640px) {
       .bar-label {
-        min-width: 110px;
+        min-width: 95px;
         font-size: 0.78rem;
       }
-
-      .bar-track { height: 28px; }
-
-      .bar-value {
-        font-size: 0.65rem;
-        right: -40px;
-      }
-
-      .section-block {
-        margin-bottom: var(--space-10);
-      }
-
-      .chart-container {
-        padding: var(--space-4) var(--space-3);
-      }
-
-      .detox-card {
-        padding: var(--space-4);
-      }
-
-      .tolerance-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-3);
-      }
+      .bar-track { height: 26px; }
+      .bar-value { font-size: 0.65rem; right: -44px; }
+      .section-block { margin-bottom: var(--space-10, 2.5rem); }
+      .chart-container { padding: var(--space-4, 1rem) var(--space-3, 0.75rem); }
+      .tolerance-grid { gap: var(--space-3, 0.75rem); }
+      .detox-card { padding: var(--space-4, 1rem); }
     }
 
     @media (max-width: 420px) {
       .bar-label {
-        min-width: 90px;
+        min-width: 80px;
         font-size: 0.72rem;
       }
-
       .bar-label .emoji { display: none; }
-
-      .bar-value { right: -36px; }
+      .bar-value { right: -38px; }
     }
   </style>
 </head>
@@ -488,91 +402,101 @@
     <section class="section-block" id="karsilastirma">
       <div class="section-header">
         <h1 class="section-title">🧪 Dopamin: Doğal vs Yapay</h1>
-        <p class="section-subtitle">Beyin aynı kimyasalı üretir &mdash; ama dozaj ve hız farklı.</p>
+        <p class="section-subtitle">Aynı kimyasal, farklı dozaj. Araştırmalar ne diyor?</p>
       </div>
 
-      <div class="chart-container" id="barChart">
-        <div class="chart-legend">
-          <div class="legend-item">
-            <span class="legend-dot natural"></span>
-            <span>Doğal</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-dot artificial"></span>
-            <span>Yapay</span>
-          </div>
+      <!-- Chart A: Doğal Ödüller (0–200%) -->
+      <div class="chart-container glass-card" id="chartNatural">
+        <div class="chart-group-label natural-label">Doğal Ödüller</div>
+        <div class="chart-scale-note">Ölçek: %0 – %200 (bazal dopamin seviyesine göre artış)</div>
+        <div class="bars-wrapper" id="barsNatural">
+          <!-- JS renders -->
         </div>
+      </div>
 
-        <div class="bars-wrapper" id="barsWrapper">
-          <!-- Bars rendered by JS -->
+      <!-- Callout -->
+      <div class="scale-callout">
+        <div class="scale-callout-inner">
+          ⚠️ Dikkat: Aşağıdaki grafik <strong>5 kat daha büyük</strong> bir ölçek kullanıyor.<br>
+          Yapay uyaranlar, doğal ödüllerin <strong>10-20 katı</strong> dopamin salgılatabilir.
         </div>
+      </div>
+
+      <!-- Chart B: Yapay Uyaranlar (0–1200%) -->
+      <div class="chart-container glass-card" id="chartArtificial">
+        <div class="chart-group-label artificial-label">Yapay Uyaranlar</div>
+        <div class="chart-scale-note">Ölçek: %0 – %1200 (bazal dopamin seviyesine göre artış)</div>
+        <div class="bars-wrapper" id="barsArtificial">
+          <!-- JS renders -->
+        </div>
+      </div>
+
+      <!-- References -->
+      <div class="references">
+        <div class="references-title">Kaynaklar</div>
+        <ul>
+          <li>Di Chiara, G., &amp; Imperato, A. (1988). Drugs abused by humans preferentially increase synaptic dopamine concentrations. <em>PNAS</em>, 85(14), 5274–5278.</li>
+          <li>Salimpoor, V. N., et al. (2011). Anatomically distinct dopamine release during anticipation and experience of peak emotion to music. <em>Nature Neuroscience</em>, 14, 257–262.</li>
+          <li>Volkow, N. D., et al. (1997). Relationship between subjective effects of cocaine and dopamine transporter occupancy. <em>Nature</em>, 386, 827–830.</li>
+          <li>Hernandez, L., &amp; Hoebel, B. G. (1988). Food reward and cocaine increase extracellular dopamine in the nucleus accumbens. <em>Life Sciences</em>, 42(18), 1705–1712.</li>
+        </ul>
       </div>
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- Bölüm 2: Tolerans                          -->
+    <!-- Bölüm 2: Tolerans Mekanizması               -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="section-block" id="tolerans">
       <div class="section-header">
-        <h2 class="section-title">📉 Tolerans: Beyin Nasıl Alışıyor?</h2>
+        <h2 class="section-title">📉 Tolerans: Beyin Neden Alışıyor?</h2>
+        <p class="section-subtitle">Tekrarlanan yapay uyaranlar, reseptör sayısını düşürür.</p>
       </div>
 
       <div class="tolerance-grid" id="toleranceGrid">
-        <div class="tolerance-card" data-bar-h="85" data-bar-color="green">
-          <span class="tol-step-label">1. Aşama</span>
-          <span class="tol-emoji">😊</span>
-          <div class="tol-bar-container">
-            <div class="tol-bar green" data-target-h="85"></div>
-          </div>
-          <div class="tol-title">İlk Deneyim</div>
-          <div class="tol-desc">Dopamin patlar. Büyük haz.</div>
+        <div class="tolerance-card glass-card">
+          <span class="tol-emoji">🟢</span>
+          <div class="tol-title">İlk Maruz Kalma</div>
+          <div class="tol-desc">Yapay uyaran güçlü dopamin salgılatır. Beyin aşırı uyarılır.</div>
         </div>
 
-        <div class="tolerance-card" data-bar-h="50" data-bar-color="amber">
-          <span class="tol-step-label">2. Aşama</span>
-          <span class="tol-emoji">😐</span>
-          <div class="tol-bar-container">
-            <div class="tol-bar amber" data-target-h="50"></div>
-          </div>
-          <div class="tol-title">Tekrar</div>
-          <div class="tol-desc">Aynı uyaran, daha az etki.</div>
+        <div class="tolerance-card glass-card">
+          <span class="tol-emoji">🟡</span>
+          <div class="tol-title">Adaptasyon</div>
+          <div class="tol-desc">Beyin D2 reseptör sayısını azaltır. Aynı uyaran daha az etki eder.</div>
         </div>
 
-        <div class="tolerance-card" data-bar-h="20" data-bar-color="red">
-          <span class="tol-step-label">3. Aşama</span>
-          <span class="tol-emoji">😕</span>
-          <div class="tol-bar-container">
-            <div class="tol-bar red" data-target-h="20"></div>
-          </div>
-          <div class="tol-title">Alışkanlık</div>
-          <div class="tol-desc">Artık zar zor hisseder.</div>
+        <div class="tolerance-card glass-card">
+          <span class="tol-emoji">🔴</span>
+          <div class="tol-title">Tolerans</div>
+          <div class="tol-desc">Daha fazla doz veya süre gerekir. Doğal ödüller artık tatmin etmez.</div>
         </div>
 
-        <div class="tolerance-card" data-bar-h="35" data-bar-color="negative">
-          <span class="tol-step-label">4. Aşama</span>
-          <span class="tol-emoji">😰</span>
-          <div class="tol-bar-container has-negative">
-            <div class="tol-bar negative" data-target-h="35"></div>
-          </div>
-          <div class="tol-title">Bağımlılık</div>
-          <div class="tol-desc">Uyaran olmadan mutsuzluk.</div>
+        <div class="tolerance-card glass-card">
+          <span class="tol-emoji">⚫</span>
+          <div class="tol-title">Çekilme</div>
+          <div class="tol-desc">Uyaran olmadan dopamin bazal seviyenin altına düşer. Mutsuzluk, huzursuzluk.</div>
         </div>
       </div>
+
+      <p class="tolerance-note">
+        Volkow ve ark. (2001) PET taramaları, kronik kokain kullanıcılarında striatal D2 reseptör yoğunluğunun %15-20 azaldığını göstermiştir.
+      </p>
     </section>
 
     <!-- ═══════════════════════════════════════════ -->
-    <!-- Bölüm 3: Dopamin Detoksu                   -->
+    <!-- Bölüm 3: Dopamin Detoksu                    -->
     <!-- ═══════════════════════════════════════════ -->
     <section class="section-block" id="detoks">
       <div class="section-header">
-        <h2 class="section-title">🌱 Çıkış Yolu: Dopamin Detoksu</h2>
+        <h2 class="section-title">🌱 Toparlanma: Dopamin Dengesini Yeniden Kur</h2>
+        <p class="section-subtitle">Araştırmalar 30 günlük detoksun reseptör dengesini başlattığını gösteriyor.</p>
       </div>
 
       <div class="detox-path" id="detoxPath">
-        <div class="detox-card step-1">
+        <div class="detox-card glass-card">
           <span class="detox-icon">🔍</span>
           <h3>Fark Et</h3>
-          <p>Hangi yapay kaynaklar beynini hackliyor? Listele.</p>
+          <p>Yapay dopamin kaynaklarını belirle: ekran süresi, şekerli yiyecekler, sosyal medya.</p>
         </div>
 
         <div class="detox-arrow">
@@ -581,10 +505,10 @@
           </svg>
         </div>
 
-        <div class="detox-card step-2">
+        <div class="detox-card glass-card">
           <span class="detox-icon">📉</span>
-          <h3>Azalt</h3>
-          <p>Yapay ödülleri kademeli olarak azalt. Soğuk değil, ılık geçiş.</p>
+          <h3>30 Gün Kuralı</h3>
+          <p>Dr. Anna Lembke'nin (Stanford) önerisi: en az 30 gün yapay uyarandan uzak dur. Bu süre reseptör dengelemesi için minimum.</p>
         </div>
 
         <div class="detox-arrow">
@@ -593,12 +517,16 @@
           </svg>
         </div>
 
-        <div class="detox-card step-3">
+        <div class="detox-card glass-card">
           <span class="detox-icon">🌿</span>
-          <h3>Doğala Dön</h3>
-          <p>Yürüyüş, spor, doğa, sohbet, ibadet — doğal ödül kaynaklarını yeniden keşfet.</p>
+          <h3>Doğal Kaynaklara Dön</h3>
+          <p>Egzersiz (%50-75 dopamin artışı), doğa yürüyüşü, sosyal bağ, ibadet — sürdürülebilir ödül kaynakları.</p>
         </div>
       </div>
+
+      <p class="detox-ref">
+        Lembke, A. (2021). <em>Dopamine Nation: Finding Balance in the Age of Indulgence.</em> Dutton.
+      </p>
     </section>
 
   </main>
@@ -609,86 +537,58 @@
     NT.renderFooter();
 
     /* ═══════════════════════════════════════════
-       Bölüm 1: Yatay Çubuk Grafik
+       Section 1: Dual Bar Charts
        ═══════════════════════════════════════════ */
-    const barData = [
-      { label: 'Yürüyüş',            emoji: '🚶', value: 50,  type: 'natural' },
-      { label: 'Yemek',              emoji: '🍽️', value: 50,  type: 'natural' },
-      { label: 'Müzik',              emoji: '🎵', value: 75,  type: 'natural' },
-      { label: 'Oyun',               emoji: '🎮', value: 100, type: 'yapay-1' },
-      { label: 'Sosyal Medya',       emoji: '📱', value: 150, type: 'yapay-2' },
-      { label: 'Şeker / Fast-food',  emoji: '🍬', value: 150, type: 'yapay-2' },
-      { label: 'Sigara',             emoji: '🚬', value: 200, type: 'yapay-2' },
-      { label: 'Kumar',              emoji: '🎰', value: 300, type: 'yapay-3' },
+
+    var naturalData = [
+      { label: 'Müzik',     emoji: '🎵', value: 9,   display: '~%9',      ref: 'Salimpoor et al., 2011 (Nature Neuroscience)' },
+      { label: 'Çikolata',  emoji: '🍫', value: 50,  display: '~%50',     ref: 'Di Chiara & Imperato, 1988' },
+      { label: 'Yemek',     emoji: '🍽️', value: 100, display: '%50–150',  ref: 'Hernandez & Hoebel, 1988' }
     ];
 
-    const maxVal = 300;
-    const wrapper = document.getElementById('barsWrapper');
+    var artificialData = [
+      { label: 'Nikotin',    emoji: '🚬', value: 150,  display: '~%150',      cls: 'yapay-low',  ref: 'Di Chiara & Imperato, 1988' },
+      { label: 'Alkol',      emoji: '🍺', value: 150,  display: '~%150',      cls: 'yapay-low',  ref: 'Di Chiara & Imperato, 1988' },
+      { label: 'Kokain',     emoji: '💊', value: 700,  display: '%400–1000',  cls: 'yapay-mid',  ref: 'Volkow et al., 1997 (Nature)' },
+      { label: 'Amfetamin',  emoji: '⚡', value: 1000, display: '~%1000',     cls: 'yapay-high', ref: 'Di Chiara & Imperato, 1988' }
+    ];
 
-    barData.forEach((d, i) => {
-      const row = document.createElement('div');
-      row.className = 'bar-row';
-      const widthPct = (d.value / maxVal) * 100;
+    function renderBars(data, containerId, maxScale) {
+      var container = document.getElementById(containerId);
+      data.forEach(function(d, i) {
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        var widthPct = Math.max((d.value / maxScale) * 100, 2);
+        var barClass = d.cls || 'natural';
 
-      row.innerHTML =
-        '<div class="bar-label">' +
-          '<span class="emoji">' + d.emoji + '</span>' +
-          '<span>' + d.label + '</span>' +
-        '</div>' +
-        '<div class="bar-track">' +
-          '<div class="bar-fill type-' + d.type + '" data-width="' + widthPct + '" style="transition-delay: ' + (i * 0.1) + 's">' +
-            '<span class="bar-value">%' + d.value + '</span>' +
+        row.innerHTML =
+          '<div class="bar-label">' +
+            '<span class="emoji">' + d.emoji + '</span>' +
+            '<span>' + d.label + '</span>' +
           '</div>' +
-        '</div>';
-      wrapper.appendChild(row);
-    });
+          '<div class="bar-track">' +
+            '<div class="bar-fill ' + barClass + '" data-width="' + widthPct + '" style="transition-delay: ' + (i * 0.12) + 's">' +
+              '<span class="bar-value">' + d.display + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="bar-tooltip">' + d.ref + '</div>';
 
-    // Position baseline & danger zone overlay
-    // Baseline is at 50/300 of bar-track width
-    function positionOverlays() {
-      var existing = wrapper.querySelector('.chart-baseline');
-      if (existing) existing.remove();
-      var existingDanger = wrapper.querySelector('.danger-zone');
-      if (existingDanger) existingDanger.remove();
-
-      var firstTrack = wrapper.querySelector('.bar-track');
-      if (!firstTrack) return;
-
-      var trackRect = firstTrack.getBoundingClientRect();
-      var wrapperRect = wrapper.getBoundingClientRect();
-      var trackLeft = trackRect.left - wrapperRect.left;
-      var trackWidth = trackRect.width;
-      var baselineOffset = trackLeft + (50 / maxVal) * trackWidth;
-
-      var baseline = document.createElement('div');
-      baseline.className = 'chart-baseline';
-      baseline.style.left = baselineOffset + 'px';
-      baseline.innerHTML = '<span class="baseline-tag">Doğal Seviye (%50)</span>';
-      wrapper.appendChild(baseline);
-
-      var danger = document.createElement('div');
-      danger.className = 'danger-zone';
-      danger.style.left = (baselineOffset + 2) + 'px';
-      danger.style.width = (trackLeft + trackWidth - baselineOffset) + 'px';
-      danger.innerHTML = '<span class="danger-tag">Tehlike Bölgesi</span>';
-      wrapper.appendChild(danger);
+        container.appendChild(row);
+      });
     }
 
-    // Run after layout
-    requestAnimationFrame(function() {
-      requestAnimationFrame(positionOverlays);
-    });
-    window.addEventListener('resize', positionOverlays);
+    renderBars(naturalData, 'barsNatural', 200);
+    renderBars(artificialData, 'barsArtificial', 1200);
 
     /* ═══════════════════════════════════════════
-       IntersectionObserver — Kaydırma Animasyonları
+       IntersectionObserver — Scroll Animations
        ═══════════════════════════════════════════ */
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (!entry.isIntersecting) return;
         var id = entry.target.id;
 
-        if (id === 'barChart') {
+        if (id === 'chartNatural' || id === 'chartArtificial') {
           entry.target.querySelectorAll('.bar-fill').forEach(function(bar) {
             bar.style.width = bar.dataset.width + '%';
           });
@@ -699,12 +599,6 @@
           entry.target.querySelectorAll('.tolerance-card').forEach(function(card) {
             card.classList.add('visible');
           });
-          // Animate bars inside cards
-          setTimeout(function() {
-            entry.target.querySelectorAll('.tol-bar').forEach(function(bar) {
-              bar.style.height = bar.dataset.targetH + '%';
-            });
-          }, 400);
           observer.unobserve(entry.target);
         }
 
@@ -717,7 +611,8 @@
       });
     }, { threshold: 0.15 });
 
-    observer.observe(document.getElementById('barChart'));
+    observer.observe(document.getElementById('chartNatural'));
+    observer.observe(document.getElementById('chartArtificial'));
     observer.observe(document.getElementById('toleranceGrid'));
     observer.observe(document.getElementById('detoxPath'));
   </script>
