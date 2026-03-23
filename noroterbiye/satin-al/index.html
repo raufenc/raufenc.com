@@ -254,117 +254,13 @@
         Kitapyurdu, Trendyol ve Hepsiburada'dan alınan gerçek okuyucu yorumları
       </p>
 
-      <!-- Rating Summary -->
-      <div class="rating-summary nt-fade-in" style="animation-delay:0.37s">
-        <span style="font-size:1.4rem">⭐</span>
-        <span class="rating-big">5.0</span>
-        <span style="color:var(--text-secondary)">/ 5.0</span>
-        <span class="rating-count">· 10 değerlendirme</span>
-      </div>
+      <!-- Rating Summary (dynamically updated) -->
+      <div class="rating-summary nt-fade-in" style="animation-delay:0.37s" id="rating-summary"></div>
 
-      <div id="reviews-container">
-        <div class="review-card nt-fade-in" style="animation-delay:0.4s">
-          <div class="review-header">
-            <span class="review-author">Kitapkurdu</span>
-            <span class="review-meta">04.03.2026 · Satın Alma Onaylı</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Beyin, nörobiyoloji, sindirim sistemi, sağlıklı beslenme, irade terbiyesi vs üzerine yazılmış toplam on tane kitap okumuşumdur. Bunları ve benzeri bilimsel kitapları, özümüze hitap eden Gazali, İmam Rabbani rahimullah gibi referans İslam âlimlerinin nefs ve terbiyesi konusuyla ilgili eserlerine harmanlayarak ortaya hap gibi bilgi ve çözüm sunan mükemmel bir kitap çıkarmış. Onlarca kitaba bedel bir hülasa olmuş. Şiddetle tavsiye edilir.</p>
-          <div class="review-source">Kaynak: Kitapyurdu.com</div>
-        </div>
+      <!-- Reviews (dynamically loaded from yorumlar.js) -->
+      <div id="reviews-container"></div>
 
-        <div class="review-card nt-fade-in" style="animation-delay:0.45s">
-          <div class="review-header">
-            <span class="review-author">Fatih İlhan</span>
-            <span class="review-meta">26.01.2026</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Dili çok akıcı ve açıklayıcı. Kitap sadece nörobiyoloji bilgisi vermekle kalmıyor bunu ahlaki çerçevede inceliyor. Emeği geçenlerin yüreğine sağlık.</p>
-          <div class="review-source">Kaynak: Kitapyurdu.com</div>
-        </div>
-
-        <div class="review-card nt-fade-in" style="animation-delay:0.5s">
-          <div class="review-header">
-            <span class="review-author">Üsküplüsehzade</span>
-            <span class="review-meta">26.01.2026</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Kitabı baştan sona okudum. Kendinizi (nefsimizi) tanımak adına mükemmel bir kitap. Keşke daha önce okusaydım.</p>
-          <div class="review-source">Kaynak: Kitapyurdu.com</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.55s">
-          <div class="review-header">
-            <span class="review-author">Yasin Arı</span>
-            <span class="review-meta">04.03.2026</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Ufuk açan bir eser, tavsiye ile aldım iyi ki almışım.</p>
-          <div class="review-source">Kaynak: Kitapyurdu.com</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.6s">
-          <div class="review-header">
-            <span class="review-author">Trendyol Alıcısı</span>
-            <span class="review-meta">23.07.2025</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Tam ihtiyacım olan bilgiler çok güzel bir rehber. Herkes okumalı. Yılların tecrübesiyle kaleme alınmış, her satırı yaşanarak yazılmış. Yazara başarıların devamını dilerim, artık sürekli takipçisiyim.</p>
-          <div class="review-source">Kaynak: Trendyol</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.65s">
-          <div class="review-header">
-            <span class="review-author">E** A**</span>
-            <span class="review-meta">21.04.2025</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Tam aradığım kitap, nefs terbiyesi üzerinde durulmuş akıcı bir dilde yazılmış.</p>
-          <div class="review-source">Kaynak: Trendyol</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.7s">
-          <div class="review-header">
-            <span class="review-author">Trendyol Alıcısı</span>
-            <span class="review-meta">24.04.2025</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Kitap çok tavsiye edildi. Emeği geçenlere sonsuz teşekkürler.</p>
-          <div class="review-source">Kaynak: Trendyol</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.75s">
-          <div class="review-header">
-            <span class="review-author">Trendyol Alıcısı</span>
-            <span class="review-meta">10.05.2025</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Böyle kitaplar artmalı.</p>
-          <div class="review-source">Kaynak: Trendyol</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.8s">
-          <div class="review-header">
-            <span class="review-author">B**** Ç****</span>
-            <span class="review-meta">12.03.2026 · Onaylı Alıcı</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Okunması hayata bakışını değiştirir. İnsanı okumuş oluyorsunuz.</p>
-          <div class="review-source">Kaynak: Hepsiburada</div>
-        </div>
-
-        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.85s">
-          <div class="review-header">
-            <span class="review-author">Ö**** Ö****</span>
-            <span class="review-meta">29.10.2025 · Onaylı Alıcı</span>
-          </div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">Bilim ve ilimi bir arada yürütmeye çalışan, çok faydalı bir kitap. Özellikle eğitimcilerin, anne babaların okuması faydalıdır.</p>
-          <div class="review-source">Kaynak: Hepsiburada</div>
-        </div>
-      </div>
-
-      <button class="btn-show-reviews nt-fade-in" id="btn-toggle-reviews" style="animation-delay:0.55s" onclick="toggleReviews()">
+      <button class="btn-show-reviews nt-fade-in" id="btn-toggle-reviews" style="animation-delay:0.55s;display:none" onclick="toggleReviews()">
         <span id="btn-reviews-text">Tüm Yorumları Gör</span>
         <svg id="btn-reviews-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6"/></svg>
       </button>
@@ -379,8 +275,48 @@
     </a>
   </div>
 
+  <script src="/noroterbiye/data/yorumlar.js"></script>
   <script src="/noroterbiye/js/common.js"></script>
   <script>
+    // ── Yorumları yorumlar.js'den render et ──
+    (function() {
+      const container = document.getElementById('reviews-container');
+      const summary = document.getElementById('rating-summary');
+      const btn = document.getElementById('btn-toggle-reviews');
+      const SHOW_FIRST = 3;
+
+      if (typeof YORUMLAR_DATA !== 'undefined' && YORUMLAR_DATA.length > 0) {
+        const avg = (YORUMLAR_DATA.reduce((s, y) => s + y.puan, 0) / YORUMLAR_DATA.length).toFixed(1);
+        summary.innerHTML = `
+          <span style="font-size:1.4rem">⭐</span>
+          <span class="rating-big">${avg}</span>
+          <span style="color:var(--text-secondary)">/ 5.0</span>
+          <span class="rating-count">· ${YORUMLAR_DATA.length} değerlendirme</span>
+        `;
+
+        YORUMLAR_DATA.forEach((y, i) => {
+          const stars = '★'.repeat(y.puan) + '☆'.repeat(5 - y.puan);
+          const meta = y.tarih + (y.onayli ? ' · Onaylı Alıcı' : '');
+          const hidden = i >= SHOW_FIRST ? ' hidden-review' : '';
+          container.innerHTML += `
+            <div class="review-card${hidden} nt-fade-in" style="animation-delay:${0.4 + i * 0.05}s">
+              <div class="review-header">
+                <span class="review-author">${y.yazar}</span>
+                <span class="review-meta">${meta}</span>
+              </div>
+              <div class="review-stars">${stars}</div>
+              <p class="review-text">${y.metin}</p>
+              <div class="review-source">Kaynak: ${y.kaynak}</div>
+            </div>
+          `;
+        });
+
+        if (YORUMLAR_DATA.length > SHOW_FIRST) {
+          btn.style.display = 'inline-flex';
+        }
+      }
+    })();
+
     const STORES = [
       { name: 'KTB Kitap', desc: 'Yayınevinin resmi mağazası', icon: '📚', url: 'https://www.ktbkitap.com/urun/noroterbiye-rauf-enc', highlight: true },
       { name: 'Kitapyurdu', desc: 'Türkiye\'nin en büyük kitap sitesi', icon: '📖', url: 'https://www.kitapyurdu.com/index.php?route=product/search&filter_name=n%C3%B6roterbiye+rauf+en%C3%A7' },
