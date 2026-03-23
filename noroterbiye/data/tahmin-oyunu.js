@@ -1085,7 +1085,7 @@ const TAHMIN_OYUNU_DATA = [
   "zorluk": "Orta",
   "sorular": [
    {
-    "soru": "Kütüb-i Sitte müelliflerinden biri miyim?",
+    "soru": "Rivayet seçimindeki hassasiyetim ve hadis ilmindeki titizliğimle tanınır mıyım?",
     "cevap": "Evet."
    },
    {
@@ -1109,7 +1109,7 @@ const TAHMIN_OYUNU_DATA = [
     "cevap": "Evet."
    },
    {
-    "soru": "Kütüb-i Sitte içinde yer alan bir müellif miyim?",
+    "soru": "Kütüb-i Sitte'nin en son derlenen eseri benim midir?",
     "cevap": "Evet."
    },
    {

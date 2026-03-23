@@ -175,6 +175,36 @@
       return decoys.map(d => d.dogruCevap);
     }
 
+    function formatClue(s) {
+      // "...miyim?" + "Evet." → düz ifade: "...müelliflerinden biriyim."
+      // "...miyim?" + "Hayır." → "...müelliflerinden biri değilim."
+      const soru = s.soru.trim();
+      const cevap = (s.cevap || '').trim().toLowerCase().replace(/\./g, '');
+      const evet = cevap.startsWith('evet');
+
+      // "...miyim?" → "...yım." / "...değilim."
+      let ifade = soru;
+      if (soru.endsWith('?')) ifade = ifade.slice(0, -1);
+
+      // miyim → yım, mıyım → yım, müyüm → yüm, muyum → yum
+      if (evet) {
+        ifade = ifade.replace(/\s+mi(y[iı]m|yüm|yum)$/i, 'im')
+                     .replace(/\s+mı(y[iı]m)$/i, 'ım')
+                     .replace(/\s+mü(yüm)$/i, 'üm')
+                     .replace(/\s+mu(yum)$/i, 'um');
+        // Fallback: just remove the question suffix
+        if (ifade === soru.slice(0,-1)) ifade = ifade.replace(/\s+mi\w*$/i, '');
+        return `✓ ${ifade}.`;
+      } else {
+        ifade = ifade.replace(/\s+mi(y[iı]m|yüm|yum)\s*$/i, ' <u>değilim</u>')
+                     .replace(/\s+mı(y[iı]m)\s*$/i, ' <u>değilim</u>')
+                     .replace(/\s+mü(yüm)\s*$/i, ' <u>değilim</u>')
+                     .replace(/\s+mu(yum)\s*$/i, ' <u>değilim</u>');
+        if (!ifade.includes('değilim')) ifade += ' <u>değil</u>';
+        return `✗ ${ifade}.`;
+      }
+    }
+
     function showQuestion() {
       if (current >= questions.length) return endGame();
       const q = questions[current];
@@ -194,8 +224,7 @@
         </div>
         <div class="clue-card" id="clue-card">
           <div class="clue-num" id="clue-num">İpucu 1/3</div>
-          <div class="clue-text" id="clue-text">${q.sorular[0].soru}</div>
-          <div class="clue-answer" id="clue-answer">${q.sorular[0].cevap}</div>
+          <div class="clue-text" id="clue-text">${formatClue(q.sorular[0])}</div>
         </div>
         <div class="options-grid" id="options">
           ${options.map(o => `<button class="option-btn" onclick="guess(this,'${o.replace(/'/g, "\\'")}')">${o}</button>`).join('')}
@@ -211,8 +240,7 @@
       clueStep++;
       if (clueStep >= 3) return;
       document.getElementById('clue-num').textContent = `İpucu ${clueStep + 1}/3`;
-      document.getElementById('clue-text').textContent = q.sorular[clueStep].soru;
-      document.getElementById('clue-answer').textContent = q.sorular[clueStep].cevap;
+      document.getElementById('clue-text').innerHTML = formatClue(q.sorular[clueStep]);
       if (clueStep >= 2) document.getElementById('next-clue-btn').style.display = 'none';
     }
 
