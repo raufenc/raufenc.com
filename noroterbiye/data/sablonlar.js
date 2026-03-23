@@ -78,7 +78,7 @@ const SABLONLAR_DATA = [
  },
  {
   "id": "YT07",
-  "hedef": "Müzik dozunu dengelemek",
+  "hedef": "Müzik bağımlılığından kurtulmak",
   "tetikleyici": "Sessizlikten kaçmak",
   "temelArzu": "Sürekli tanıdık haz isteme",
   "yanlisDavranis": "Saatlerce kulaklıkla kalmak",
