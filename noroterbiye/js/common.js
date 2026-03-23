@@ -16,15 +16,57 @@ const NT = {
     { href: '/noroterbiye/satin-al/', label: 'Satın Al', highlight: true },
   ],
 
-  // Sayfa içi navigasyon oluştur
+  // Hamburger menü navigasyonu
   renderNav(container) {
     const path = window.location.pathname.replace(/index\.html$/, '');
     const nav = document.createElement('nav');
-    nav.className = 'nt-nav nt-wrap';
-    nav.innerHTML = this.navLinks.map(l => {
-      const cls = [path === l.href ? 'active' : '', l.highlight ? 'nt-nav-highlight' : ''].filter(Boolean).join(' ');
-      return `<a href="${l.href}" class="${cls}">${l.label}</a>`;
-    }).join('');
+    nav.className = 'nt-nav';
+    nav.innerHTML = `
+      <button class="nt-nav-toggle" aria-label="Menüyü aç" aria-expanded="false">
+        <span class="nt-nav-hamburger">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="nt-nav-toggle-label">Menü</span>
+      </button>
+      <div class="nt-nav-overlay"></div>
+      <div class="nt-nav-panel">
+        <div class="nt-nav-panel-header">
+          <span class="nt-nav-brand">🧠 NöroTerbiye</span>
+          <button class="nt-nav-close" aria-label="Menüyü kapat">&times;</button>
+        </div>
+        <div class="nt-nav-links">
+          ${this.navLinks.map(l => {
+            const cls = [path === l.href ? 'active' : '', l.highlight ? 'nt-nav-highlight' : ''].filter(Boolean).join(' ');
+            return `<a href="${l.href}" class="${cls}">${l.label}</a>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
+
+    // Toggle logic
+    const toggle = nav.querySelector('.nt-nav-toggle');
+    const panel = nav.querySelector('.nt-nav-panel');
+    const overlay = nav.querySelector('.nt-nav-overlay');
+    const close = nav.querySelector('.nt-nav-close');
+
+    function open() {
+      panel.classList.add('open');
+      overlay.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function shut() {
+      panel.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', open);
+    close.addEventListener('click', shut);
+    overlay.addEventListener('click', shut);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+
     if (container) container.prepend(nav);
     else document.body.insertBefore(nav, document.body.firstChild);
   },
