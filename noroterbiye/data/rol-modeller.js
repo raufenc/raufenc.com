@@ -1081,7 +1081,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 91,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Matematik",
   "isim": "Harizmi",
   "donem": "780-850 civarı",
@@ -1093,7 +1093,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 92,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Optik / Bilimsel Yöntem",
   "isim": "İbnü'l-Heysem",
   "donem": "965-1040",
@@ -1105,7 +1105,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 93,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Mekanik / Otomat",
   "isim": "Cezeri",
   "donem": "1136-1206",
@@ -1117,7 +1117,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 94,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Astronomi / Coğrafya",
   "isim": "Biruni",
   "donem": "973-1050",
@@ -1129,7 +1129,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 95,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Tıp / Cerrahi",
   "isim": "Zehravi",
   "donem": "936-1013",
@@ -1141,7 +1141,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 96,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Tıp",
   "isim": "İbnü'n-Nefis",
   "donem": "1213-1288",
@@ -1153,7 +1153,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 97,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Astronomi / Matematik",
   "isim": "Ali Kuşçu",
   "donem": "1403-1474",
@@ -1165,7 +1165,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 98,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Astronomi / Mühendislik",
   "isim": "Takiyyüddin er-Rasıd",
   "donem": "1526-1585",
@@ -1177,7 +1177,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 99,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Haritacılık / Denizcilik",
   "isim": "Piri Reis",
   "donem": "1465-1553",
@@ -1189,7 +1189,7 @@ const ROL_MODELLER_DATA = [
  },
  {
   "id": 100,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "altKategori": "Mimari / Sanatkârlık",
   "isim": "Mimar Sinan",
   "donem": "1488-1588",

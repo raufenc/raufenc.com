@@ -1801,7 +1801,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 91,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Kolay",
   "sorular": [
    {
@@ -1821,7 +1821,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 92,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Orta",
   "sorular": [
    {
@@ -1841,11 +1841,11 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 93,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Kolay",
   "sorular": [
    {
-    "soru": "Su makineleri ve otomatlarla meşhur bir mucit miyim?",
+    "soru": "Su makineleri ve otomatlarla meşhur bir âlim miyim?",
     "cevap": "Evet."
    },
    {
@@ -1861,7 +1861,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 94,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Zor",
   "sorular": [
    {
@@ -1881,7 +1881,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 95,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Orta",
   "sorular": [
    {
@@ -1901,7 +1901,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 96,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Orta",
   "sorular": [
    {
@@ -1921,7 +1921,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 97,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Orta",
   "sorular": [
    {
@@ -1941,7 +1941,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 98,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Zor",
   "sorular": [
    {
@@ -1961,7 +1961,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 99,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Kolay",
   "sorular": [
    {
@@ -1981,7 +1981,7 @@ const TAHMIN_OYUNU_DATA = [
  },
  {
   "id": 100,
-  "kategori": "Bilim / Mucit",
+  "kategori": "Bilim",
   "zorluk": "Kolay",
   "sorular": [
    {

@@ -123,11 +123,11 @@
     const KAT_RENK = {
       'Peygamber': '--nt-cyan', 'Sahabi / Ehl-i Beyt': '--nt-green',
       'Âlim / İmam': '--nt-purple', 'Evliya / Mürşid': '--nt-amber',
-      'Sultan / Komutan': '--nt-red', 'Bilim / Mucit': '--nt-primary'
+      'Sultan / Komutan': '--nt-red', 'Bilim': '--nt-primary'
     };
     const KAT_EMOJI = {
       'Peygamber': '🕊️', 'Sahabi / Ehl-i Beyt': '⭐', 'Âlim / İmam': '📚',
-      'Evliya / Mürşid': '💚', 'Sultan / Komutan': '⚔️', 'Bilim / Mucit': '🔬'
+      'Evliya / Mürşid': '💚', 'Sultan / Komutan': '⚔️', 'Bilim': '🔬'
     };
 
     // Filtre butonları
@@ -322,7 +322,7 @@
     }
 
     function renderKatalog(data) {
-      const KAT_RENK_TAG = { 'Peygamber':'cyan','Sahabi / Ehl-i Beyt':'green','Âlim / İmam':'purple','Evliya / Mürşid':'amber','Sultan / Komutan':'red','Bilim / Mucit':'primary' };
+      const KAT_RENK_TAG = { 'Peygamber':'cyan','Sahabi / Ehl-i Beyt':'green','Âlim / İmam':'purple','Evliya / Mürşid':'amber','Sultan / Komutan':'red','Bilim':'primary' };
       document.getElementById('katalog-count').textContent = `${data.length} rol model`;
       document.getElementById('katalog-cards').innerHTML = data.map(r => `
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;transition:all 0.3s">
