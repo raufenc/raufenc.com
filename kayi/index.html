@@ -812,6 +812,52 @@ body {
   font-family: 'Noto Sans', sans-serif;
   font-size: 0.75rem;
   color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+.timeline-location:hover {
+  color: var(--gold);
+  text-decoration: underline;
+}
+.timeline-battle {
+  border-left: 3px solid #c0392b;
+  padding-left: 1.2rem;
+}
+.timeline-map-btn {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.8rem;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0e6cc, #e8d8b0);
+  color: #5a3e1b;
+  border: 1.5px solid #8b6914;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.timeline-map-btn:hover {
+  background: linear-gradient(135deg, #e8d8b0, #d4c5a0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+}
+
+/* Place cards hover */
+.place-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.place-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.15);
+}
+
+/* Timeline items hover */
+.timeline-item {
+  transition: background 0.2s ease;
+  cursor: default;
+}
+.timeline-item:hover {
+  background: rgba(201,168,76,0.04);
 }
 
 /* ============================================
@@ -1626,10 +1672,10 @@ body {
   </div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#rulers">Padişahlar</a></li>
+    <li><a href="#places">Harita</a></li>
     <li><a href="#timeline">Zaman Çizelgesi</a></li>
     <li><a href="#persons">Kişiler</a></li>
     <li><a href="#dynasty">Hanedan Ağacı</a></li>
-    <li><a href="#places">Coğrafya</a></li>
     <li><a href="#concepts">Kavramlar</a></li>
     <li><a href="#explorer">Bölümler</a></li>
     <li><a href="#bibliography">Kaynakça</a></li>
@@ -1697,6 +1743,56 @@ body {
 </section>
 
 <!-- ============================================
+     PLACES / HARİTA SECTION
+     ============================================ -->
+<div class="divider"></div>
+<section class="section" id="places">
+  <div class="section-header reveal">
+    <p class="section-label">Harita</p>
+    <h2 class="section-title">Fetih Mekânları ve Savaşlar</h2>
+    <p class="section-desc">Söğüt'ten Edirne'ye, Niğbolu'dan Semerkand'a — 40 mekân, 13 muharebe</p>
+  </div>
+  <div style="position:relative;">
+    <div class="map-container" id="mapContainer"></div>
+    <div class="map-cartouche">
+      <div class="map-cartouche-title">Memâlik-i Osmâniyye</div>
+      <div class="map-cartouche-subtitle">Kuruluştan Çelebi Mehmed'e — 1299‑1421</div>
+    </div>
+    <svg class="map-compass" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,50)">
+        <circle r="46" fill="none" stroke="#8b6914" stroke-width="1.5" opacity="0.6"/>
+        <circle r="42" fill="none" stroke="#8b6914" stroke-width="0.5" opacity="0.4"/>
+        <polygon points="0,-40 4,-10 -4,-10" fill="#8b6914" opacity="0.8"/>
+        <polygon points="0,40 4,10 -4,10" fill="#c9a84c" opacity="0.5"/>
+        <polygon points="-40,0 -10,4 -10,-4" fill="#c9a84c" opacity="0.5"/>
+        <polygon points="40,0 10,4 10,-4" fill="#c9a84c" opacity="0.5"/>
+        <polygon points="-28,-28 -6,-8 -8,-6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="28,-28 6,-8 8,-6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="-28,28 -6,8 -8,6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="28,28 6,8 8,6" fill="#c9a84c" opacity="0.3"/>
+        <circle r="3" fill="#8b6914"/>
+        <text y="-32" text-anchor="middle" font-family="Playfair Display,serif" font-size="8" font-weight="700" fill="#5a3e1b">N</text>
+      </g>
+    </svg>
+    <div class="map-legend">
+      <div class="map-legend-item">
+        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.2"/><circle cx="8" cy="8" r="2" fill="#5a3e1b"/></svg>
+        <span>Şehir / Yerleşim</span>
+      </div>
+      <div class="map-legend-item">
+        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#8b6914" stroke-width="1.2"/><circle cx="8" cy="8" r="4" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1"/><circle cx="8" cy="8" r="1.5" fill="#5a3e1b"/></svg>
+        <span>Başkent / Merkez</span>
+      </div>
+      <div class="map-legend-item">
+        <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" fill="#c0392b" stroke="#4a0e0e" stroke-width="0.8"/></svg>
+        <span>Savaş / Kuşatma</span>
+      </div>
+    </div>
+  </div>
+  <div class="places-grid" id="placesGrid"></div>
+</section>
+
+<!-- ============================================
      TIMELINE SECTION
      ============================================ -->
 <div class="divider"></div>
@@ -1743,64 +1839,6 @@ body {
 
   <div class="timeline-controls" id="relControls"></div>
   <div class="rel-grid" id="relGrid"></div>
-</section>
-
-<!-- ============================================
-     PLACES SECTION
-     ============================================ -->
-<div class="divider"></div>
-<section class="section" id="places">
-  <div class="section-header reveal">
-    <p class="section-label">Coğrafya</p>
-    <h2 class="section-title">Fetih Mekânları</h2>
-    <p class="section-desc">Söğüt'ten Edirne'ye, Niğbolu'dan Semerkand'a — 40 önemli mekân</p>
-  </div>
-  <div style="position:relative;">
-    <div class="map-container" id="mapContainer"></div>
-    <!-- Kartuş başlık -->
-    <div class="map-cartouche">
-      <div class="map-cartouche-title">Memâlik-i Osmâniyye</div>
-      <div class="map-cartouche-subtitle">Kuruluştan Çelebi Mehmed'e — 1299‑1421</div>
-    </div>
-    <!-- Pusula gülü (SVG) -->
-    <svg class="map-compass" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <g transform="translate(50,50)">
-        <!-- Dış daire -->
-        <circle r="46" fill="none" stroke="#8b6914" stroke-width="1.5" opacity="0.6"/>
-        <circle r="42" fill="none" stroke="#8b6914" stroke-width="0.5" opacity="0.4"/>
-        <!-- Ana yönler -->
-        <polygon points="0,-40 4,-10 -4,-10" fill="#8b6914" opacity="0.8"/>
-        <polygon points="0,40 4,10 -4,10" fill="#c9a84c" opacity="0.5"/>
-        <polygon points="-40,0 -10,4 -10,-4" fill="#c9a84c" opacity="0.5"/>
-        <polygon points="40,0 10,4 10,-4" fill="#c9a84c" opacity="0.5"/>
-        <!-- Çapraz yönler -->
-        <polygon points="-28,-28 -6,-8 -8,-6" fill="#c9a84c" opacity="0.3"/>
-        <polygon points="28,-28 6,-8 8,-6" fill="#c9a84c" opacity="0.3"/>
-        <polygon points="-28,28 -6,8 -8,6" fill="#c9a84c" opacity="0.3"/>
-        <polygon points="28,28 6,8 8,6" fill="#c9a84c" opacity="0.3"/>
-        <!-- Merkez -->
-        <circle r="3" fill="#8b6914"/>
-        <!-- Yön harfleri -->
-        <text y="-32" text-anchor="middle" font-family="Playfair Display,serif" font-size="8" font-weight="700" fill="#5a3e1b">N</text>
-      </g>
-    </svg>
-    <!-- Harita efsanesi -->
-    <div class="map-legend">
-      <div class="map-legend-item">
-        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.2"/><circle cx="8" cy="8" r="2" fill="#5a3e1b"/></svg>
-        <span>Şehir / Yerleşim</span>
-      </div>
-      <div class="map-legend-item">
-        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#8b6914" stroke-width="1.2"/><circle cx="8" cy="8" r="4" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1"/><circle cx="8" cy="8" r="1.5" fill="#5a3e1b"/></svg>
-        <span>Başkent / Merkez</span>
-      </div>
-      <div class="map-legend-item">
-        <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" fill="#c0392b" stroke="#4a0e0e" stroke-width="0.8"/></svg>
-        <span>Savaş / Kuşatma</span>
-      </div>
-    </div>
-  </div>
-  <div class="places-grid" id="placesGrid"></div>
 </section>
 
 <!-- ============================================
@@ -2283,15 +2321,20 @@ function renderTimelineItems(filterRuler) {
   let events = [...TIMELINE_EVENTS].sort((a,b) => (a.year||0) - (b.year||0));
   if (filterRuler) events = events.filter(e => e.ruler === filterRuler);
 
-  document.getElementById('timelineContainer').innerHTML = events.map(e => `
-    <div class="timeline-item" data-type="${e.type}">
+  document.getElementById('timelineContainer').innerHTML = events.map(e => {
+    const isBattle = e.type === 'battle' || e.type === 'siege';
+    const mapLink = isBattle ? `<button class="timeline-map-btn" onclick="event.stopPropagation(); flyToBattle('${e.id}')" title="Haritada göster">🗺 Haritada Göster</button>` : '';
+    return `
+    <div class="timeline-item ${isBattle ? 'timeline-battle' : ''}" data-type="${e.type}">
       <div class="timeline-date">${e.date}</div>
       <div class="timeline-ruler-tag">${e.ruler}</div>
-      <div class="timeline-title">${e.name}</div>
+      <div class="timeline-title">${isBattle ? '⚔ ' : ''}${e.name}</div>
       <div class="timeline-summary">${e.summary}</div>
-      ${e.location ? `<div class="timeline-location">&#9673; ${e.location}</div>` : ''}
+      ${e.location ? `<div class="timeline-location" style="cursor:pointer;" onclick="event.stopPropagation(); flyToLocation('${e.location.replace(/'/g,"\\'")}')">&#9673; ${e.location}</div>` : ''}
+      ${mapLink}
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function renderPersons() {
@@ -2568,21 +2611,18 @@ function renderMap() {
 
   // === KATMAN 2: SAVAŞLAR / KUŞATMALAR ===
   const battleEvents = TIMELINE_EVENTS.filter(e => e.type === 'battle' || e.type === 'siege');
-  const usedCoords = {}; // Aynı konumdaki savaşları offset'lemek için
+  const usedCoords = {};
 
   battleEvents.forEach(e => {
     const coords = getBattleCoords(e.location);
     if (!coords) return;
 
-    // Aynı koordinatta birden fazla savaş varsa offset uygula
+    // Aynı koordinatta birden fazla savaş varsa offset uygula — şehirden sola-yukarı kaydır
     const key = `${coords.lat.toFixed(1)}_${coords.lng.toFixed(1)}`;
     if (!usedCoords[key]) usedCoords[key] = 0;
-    const offsetIndex = usedCoords[key]++;
-    const offsetLat = offsetIndex * 0.15;
-    const offsetLng = offsetIndex * -0.2;
-
-    const lat = coords.lat + offsetLat;
-    const lng = coords.lng + offsetLng;
+    const idx = usedCoords[key]++;
+    const lat = coords.lat + 0.12 + (idx * 0.18);
+    const lng = coords.lng - 0.15 - (idx * 0.12);
 
     const isMajor = majorBattles.includes(e.id);
     const icon = isMajor ? battleIconLarge : battleIconSmall;
@@ -2590,7 +2630,7 @@ function renderMap() {
     const marker = L.marker([lat, lng], { icon: icon, zIndexOffset: 500 }).addTo(map);
 
     // Savaş etiketi
-    const shortName = e.name.length > 25 ? e.name.substring(0, 22) + '…' : e.name;
+    const shortName = e.name.length > 30 ? e.name.substring(0, 27) + '…' : e.name;
     const labelIcon = L.divIcon({
       className: 'map-label-battle',
       html: `<span>${shortName}</span>`,
@@ -2607,6 +2647,33 @@ function renderMap() {
     marker.bindPopup(popupContent, { maxWidth: 300 });
     mapMarkers[e.id] = marker;
   });
+}
+
+// Savaş olayına haritada uç
+function flyToBattle(eventId) {
+  if (!map) renderMap();
+  const marker = mapMarkers[eventId];
+  if (!marker) return;
+
+  document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => {
+    map.flyTo(marker.getLatLng(), 7, { duration: 1.0 });
+    setTimeout(() => marker.openPopup(), 1100);
+  }, 500);
+}
+
+// Herhangi bir yer adına göre haritada konuma uç
+function flyToLocation(locationStr) {
+  if (!map) renderMap();
+  // Önce PLACES'te ara
+  const place = PLACES.find(p => locationStr.includes(p.name) && p.lat);
+  if (place) { flyToPlace(place.id); return; }
+  // BATTLE_COORDS'ta ara
+  const coords = getBattleCoords(locationStr);
+  if (coords) {
+    document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => map.flyTo([coords.lat, coords.lng], 8, { duration: 1.0 }), 500);
+  }
 }
 
 function flyToPlace(id) {
@@ -2918,7 +2985,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Active nav link highlighting
 window.addEventListener('scroll', () => {
-  const sections = ['rulers','timeline','persons','dynasty','places','concepts','explorer','bibliography','index-search'];
+  const sections = ['rulers','places','timeline','persons','dynasty','concepts','explorer','bibliography','index-search'];
   let current = '';
 
   sections.forEach(id => {
