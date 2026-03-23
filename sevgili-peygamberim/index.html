@@ -117,43 +117,70 @@ nav.scrolled{background:rgba(10,46,34,.96);backdrop-filter:blur(12px);border-bot
 
 /* MAP */
 .map-wrapper{position:relative;margin:1rem 2rem}
-.map-wrapper::before,.map-wrapper::after{content:'';position:absolute;z-index:500;pointer-events:none}
-.map-wrapper::before{inset:-6px;border:2px solid var(--gold);border-radius:calc(var(--rl) + 4px)}
-.map-wrapper::after{inset:-12px;border:1px solid rgba(201,168,76,.25);border-radius:calc(var(--rl) + 8px)}
-.map-corner{position:absolute;z-index:501;pointer-events:none;width:28px;height:28px}
-.map-corner svg{width:100%;height:100%}
-.map-corner.tl{top:-14px;left:-14px}.map-corner.tr{top:-14px;right:-14px;transform:rotate(90deg)}.map-corner.bl{bottom:-14px;left:-14px;transform:rotate(-90deg)}.map-corner.br{bottom:-14px;right:-14px;transform:rotate(180deg)}
-#map-c{height:550px;border-radius:var(--rl);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.12)}
-#map-c .leaflet-tile-pane{filter:sepia(.4) saturate(.7) brightness(1.05) contrast(.95)}
+.map-wrapper::before{content:'';position:absolute;inset:-4px;border:2px solid var(--gold);border-radius:calc(var(--rl) + 2px);z-index:500;pointer-events:none}
+#map-c{height:600px;border-radius:var(--rl);overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.15),0 0 0 1px rgba(201,168,76,.15)}
+#map-c .leaflet-tile-pane{filter:sepia(.35) saturate(.65) brightness(1.08) contrast(.92)}
 #map-c.fullscreen{position:fixed!important;inset:0!important;z-index:3000!important;height:100vh!important;border-radius:0!important;margin:0!important}
-#map-c.fullscreen~.map-corner,#map-c.fullscreen~.map-wrapper::before,#map-c.fullscreen~.map-wrapper::after{display:none}
-
-/* MAP LEGEND */
-.map-legend{position:absolute;bottom:30px;left:10px;z-index:800;background:rgba(250,246,238,.92);backdrop-filter:blur(6px);border:1px solid rgba(201,168,76,.3);border-radius:var(--r);padding:.6rem .8rem;font-size:.68rem;color:var(--tx2);box-shadow:0 2px 10px rgba(0,0,0,.1)}
-.map-legend h4{font-family:'Amiri',serif;font-size:.78rem;color:var(--g2);margin-bottom:.3rem;border-bottom:1px solid rgba(201,168,76,.2);padding-bottom:.2rem}
-.map-legend-item{display:flex;align-items:center;gap:.4rem;margin:.2rem 0;white-space:nowrap}
-.map-legend-item svg{flex-shrink:0}
+/* Vignette overlay */
+.map-vignette{position:absolute;inset:0;z-index:400;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(10,30,20,.15) 100%);border-radius:var(--rl)}
 
 /* MAP CONTROLS BAR */
 .map-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.8rem auto 0;max-width:900px;padding:0 2rem}
-.map-ctrl-btn{padding:.35rem .8rem;border-radius:18px;border:1px solid var(--sand);background:var(--w);color:var(--tx2);font-size:.72rem;cursor:pointer;transition:all .2s;font-weight:500}
-.map-ctrl-btn:hover{border-color:var(--gold);color:var(--g2)}
-.map-ctrl-btn.active{background:var(--g2);color:var(--gold);border-color:var(--g2)}
-.map-ctrl-btn.era{border-left:3px solid var(--gold)}
-.map-ctrl-btn.era-battle{border-left:3px solid var(--red)}
-.map-fs-btn{position:absolute;top:10px;right:10px;z-index:800;width:34px;height:34px;border-radius:var(--r);background:rgba(250,246,238,.92);backdrop-filter:blur(6px);border:1px solid rgba(201,168,76,.3);color:var(--g2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.map-fs-btn:hover{background:var(--gold);color:var(--w)}
-.map-layer-btn{position:absolute;top:50px;right:10px;z-index:800;width:34px;height:34px;border-radius:var(--r);background:rgba(250,246,238,.92);backdrop-filter:blur(6px);border:1px solid rgba(201,168,76,.3);color:var(--g2);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.map-layer-btn:hover{background:var(--gold);color:var(--w)}
+.map-ctrl-btn{padding:.35rem .9rem;border-radius:18px;border:1px solid var(--sand);background:var(--w);color:var(--tx2);font-size:.72rem;cursor:pointer;transition:all .25s;font-weight:600;letter-spacing:.3px}
+.map-ctrl-btn:hover{border-color:var(--gold);color:var(--g2);transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.06)}
+.map-ctrl-btn.active{background:var(--g2);color:var(--gold);border-color:var(--g2);box-shadow:0 3px 12px rgba(10,30,20,.2)}
+
+/* Map floating buttons */
+.map-float-btn{position:absolute;z-index:800;width:36px;height:36px;border-radius:50%;background:rgba(250,246,238,.95);backdrop-filter:blur(8px);border:1.5px solid rgba(201,168,76,.35);color:var(--g2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 3px 12px rgba(0,0,0,.12)}
+.map-float-btn:hover{background:var(--gold);color:var(--w);transform:scale(1.1);box-shadow:0 4px 16px rgba(201,168,76,.3)}
+.map-fs-btn{top:10px;right:10px;font-size:1.05rem}
+.map-layer-btn{top:52px;right:10px;font-size:.95rem}
+
+/* MAP LEGEND — collapsed by default, click to expand */
+.map-legend{position:absolute;bottom:28px;left:10px;z-index:800;background:rgba(250,246,238,.95);backdrop-filter:blur(8px);border:1.5px solid rgba(201,168,76,.3);border-radius:12px;font-size:.68rem;color:var(--tx2);box-shadow:0 4px 16px rgba(0,0,0,.1);overflow:hidden;transition:all .3s}
+.map-legend.collapsed{padding:.45rem .6rem;cursor:pointer}
+.map-legend.expanded{padding:.6rem .8rem}
+.map-legend-toggle{font-family:'Amiri',serif;font-size:.78rem;color:var(--g2);font-weight:700;display:flex;align-items:center;gap:.3rem;cursor:pointer}
+.map-legend-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.map-legend.expanded .map-legend-body{max-height:200px;margin-top:.3rem;border-top:1px solid rgba(201,168,76,.2);padding-top:.3rem}
+.map-legend-item{display:flex;align-items:center;gap:.4rem;margin:.15rem 0;white-space:nowrap}
+.map-legend-item svg{flex-shrink:0}
+
+/* Pulse animation for holy sites */
+@keyframes holyPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}50%{box-shadow:0 0 0 12px rgba(201,168,76,0)}}
+@keyframes holyGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(201,168,76,.6))}50%{filter:drop-shadow(0 0 10px rgba(201,168,76,.8))}}
+.marker-holy-pulse{animation:holyGlow 3s ease-in-out infinite}
+.marker-mekke .pulse-ring,.marker-medine .pulse-ring{animation:holyPulse 2.5s ease-out infinite}
+
+/* Animated route dashes */
+@keyframes routeFlow{to{stroke-dashoffset:-30}}
+@keyframes routeFlowGold{to{stroke-dashoffset:-40}}
+.map-route-animated{animation:routeFlow 2s linear infinite}
+.map-route-gold{animation:routeFlowGold 3s linear infinite}
+
+/* Battle cluster marker */
+.battle-cluster{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,rgba(192,82,43,.85),rgba(139,26,26,.9));border:2px solid rgba(255,255,255,.6);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(139,26,26,.35);cursor:pointer;transition:all .25s}
+.battle-cluster:hover{transform:scale(1.15);box-shadow:0 5px 16px rgba(139,26,26,.5)}
+
+/* Labels — cleaner with pill background */
+.map-label{font-size:.62rem;font-weight:600;color:var(--g2);white-space:nowrap;pointer-events:none}
+.map-label span{background:rgba(250,246,238,.85);padding:.1rem .35rem;border-radius:8px;backdrop-filter:blur(3px)}
+.map-label-battle{font-size:.58rem;font-weight:700;color:#8B1A1A;white-space:nowrap;pointer-events:none}
+.map-label-battle span{background:rgba(250,246,238,.85);padding:.1rem .35rem;border-radius:8px}
+.map-label-holy{font-size:.78rem;font-weight:700;color:var(--g1);white-space:nowrap;pointer-events:none}
+.map-label-holy span{background:rgba(201,168,76,.15);padding:.15rem .5rem;border-radius:10px;border:1px solid rgba(201,168,76,.3);backdrop-filter:blur(3px)}
+
+/* Hide minor labels at low zoom, show at higher zoom */
+.map-label-minor{opacity:0;transition:opacity .3s}
+.zoom-detail .map-label-minor{opacity:1}
+
+/* Popup styling */
 .map-popup-title{font-family:'Amiri',serif;font-size:1.1rem;color:var(--g2);font-weight:700;margin-bottom:.15rem}
 .map-popup-type{font-size:.68rem;color:var(--gd);font-weight:600;text-transform:uppercase;letter-spacing:1px}
 .map-popup-date{font-size:.75rem;color:var(--gd);font-style:italic}
 .map-popup-desc{font-size:.82rem;color:var(--tx2);line-height:1.5;margin:.3rem 0}
 .map-popup-btn{background:var(--g2);color:var(--gold);border:none;padding:.35rem .9rem;border-radius:15px;cursor:pointer;font-size:.75rem;font-weight:600;margin-top:.3rem;transition:all .2s}
 .map-popup-btn:hover{background:var(--g1);transform:scale(1.02)}
-.map-label{font-size:.65rem;font-weight:600;color:var(--g2);text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff,1px -1px 2px #fff,-1px 1px 2px #fff;white-space:nowrap;pointer-events:none}
-.map-label-battle{font-size:.6rem;font-weight:700;color:#8B1A1A;text-shadow:1px 1px 2px #fff,-1px -1px 2px #fff;white-space:nowrap;pointer-events:none}
-.map-label-holy{font-size:.72rem;font-weight:700;color:var(--gd);text-shadow:1px 1px 3px #fff,-1px -1px 3px #fff;white-space:nowrap;pointer-events:none}
 
 /* CHAPTER MAP LINK */
 .ch-map-link{display:inline-block;font-size:.72rem;color:var(--gold);cursor:pointer;margin-top:.4rem;padding:.2rem .7rem;border:1px solid rgba(201,168,76,.3);border-radius:15px;transition:all .2s;opacity:.8}
@@ -303,11 +330,8 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
 <!-- MAP -->
 <div class="sh" id="harita"><h2>Etkileşimli Harita</h2><div class="gl"></div><p>Peygamber Efendimiz sallallahü aleyhi ve sellemin hayatındaki mekânlar, gazâlar ve güzergâhlar</p></div>
 <div class="map-wrapper">
-  <div class="map-corner tl"><svg viewBox="0 0 28 28"><path d="M2 26 L2 8 Q2 2 8 2 L26 2" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="2" cy="26" r="2" fill="#C9A84C"/><circle cx="26" cy="2" r="2" fill="#C9A84C"/></svg></div>
-  <div class="map-corner tr"><svg viewBox="0 0 28 28"><path d="M2 26 L2 8 Q2 2 8 2 L26 2" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="2" cy="26" r="2" fill="#C9A84C"/><circle cx="26" cy="2" r="2" fill="#C9A84C"/></svg></div>
-  <div class="map-corner bl"><svg viewBox="0 0 28 28"><path d="M2 26 L2 8 Q2 2 8 2 L26 2" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="2" cy="26" r="2" fill="#C9A84C"/><circle cx="26" cy="2" r="2" fill="#C9A84C"/></svg></div>
-  <div class="map-corner br"><svg viewBox="0 0 28 28"><path d="M2 26 L2 8 Q2 2 8 2 L26 2" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="2" cy="26" r="2" fill="#C9A84C"/><circle cx="26" cy="2" r="2" fill="#C9A84C"/></svg></div>
   <div id="map-c"></div>
+  <div class="map-vignette"></div>
 </div>
 <div class="map-controls">
   <button class="map-ctrl-btn active" onclick="filterMapEra('all',this)">Tümü</button>
@@ -513,117 +537,237 @@ window.addEventListener('scroll',()=>{
 
 // ===== MAP SETUP =====
 let mapObj=null, mapMarkers={}, mapLabels={}, mapRoutes=[], allMapLayers=[];
-let currentTileMode='light'; // 'light' veya 'satellite'
+let currentTileMode='light';
 let baseTileLayer=null, labelTileLayer=null, satTileLayer=null;
+let currentEra='all';
 
-// ===== MAP ICONS =====
-const holyIcon=L.divIcon({className:'custom-marker',html:`<svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="#C9A84C" stroke="#8B6914" stroke-width="1.5"/><path d="M11 5 L12.5 9.5 L17 9.5 L13.5 12.5 L15 17 L11 14 L7 17 L8.5 12.5 L5 9.5 L9.5 9.5 Z" fill="#fff" opacity=".9"/></svg>`,iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-14]});
-const caveIcon=L.divIcon({className:'custom-marker',html:`<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6" fill="#2A7A62" stroke="#1A5C48" stroke-width="1.5"/><circle cx="9" cy="9" r="2.5" fill="#fff"/></svg>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-12]});
-const placeIcon=L.divIcon({className:'custom-marker',html:`<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="#2B5F8E" stroke="#1A3F5E" stroke-width="1.5"/><circle cx="8" cy="8" r="2" fill="#fff"/></svg>`,iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-10]});
-
-// Kronolojik renkler: erken dönem açık → geç dönem koyu
-const battleColors=['#E07040','#D06030','#C05028','#B04020','#9A3018','#8B1A1A','#7A1515','#6B1010','#5C0A0A','#4D0505','#3E0303','#300000','#250000'];
-function makeBattleIcon(color,big){
-  const s=big?24:18,r=big?4.5:3,sw=big?3:2.5,ir=big?2:0;
-  return L.divIcon({className:'custom-marker',html:`<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><line x1="${s*.22}" y1="${s*.22}" x2="${s*.78}" y2="${s*.78}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round"/><line x1="${s*.78}" y1="${s*.22}" x2="${s*.22}" y2="${s*.78}" stroke="${color}" stroke-width="${sw}" stroke-linecap="round"/><circle cx="${s/2}" cy="${s/2}" r="${r}" fill="${color}" stroke="${color}" stroke-width="1"/>${ir?`<circle cx="${s/2}" cy="${s/2}" r="${ir}" fill="#fff"/>`:''}  </svg>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-2]});
+// === ICONS ===
+// Kutsal — altın yıldız, büyük ve parlak
+function makeHolyIcon(id){
+  const isMajor=id==='mekke'||id==='medine'||id==='kudus';
+  const s=isMajor?30:22;
+  const cls=isMajor?'marker-holy-pulse marker-'+id:'marker-holy-pulse';
+  return L.divIcon({className:`custom-marker ${cls}`,html:`<svg width="${s}" height="${s}" viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#C9A84C" stroke="#8B6914" stroke-width="1.5" opacity=".9"/><path d="M15 6 L17.5 12.5 L24 12.5 L18.5 16.5 L21 23 L15 19 L9 23 L11.5 16.5 L6 12.5 L12.5 12.5 Z" fill="#fff" opacity=".95"/></svg>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-2]});
 }
-function getPlaceIcon(type){return type==='holy'?holyIcon:type==='cave'?caveIcon:placeIcon}
+const caveIcon=L.divIcon({className:'custom-marker',html:`<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6.5" fill="#2A7A62" stroke="#1A5C48" stroke-width="1.5" opacity=".85"/><path d="M6 10 Q9 5 12 10" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-12]});
+const placeIcon=L.divIcon({className:'custom-marker',html:`<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="#2B5F8E" stroke="#1A3F5E" stroke-width="1" opacity=".8"/><circle cx="7" cy="7" r="1.5" fill="#fff"/></svg>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-9]});
+
+// Savaş — kılıç ikonu
+function makeBattleIcon(major){
+  const s=major?22:16;
+  return L.divIcon({className:'custom-marker',html:`<svg width="${s}" height="${s}" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="#8B1A1A" stroke="#5C0A0A" stroke-width="1" opacity=".85"/><line x1="7" y1="7" x2="15" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="7" x2="7" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-2]});
+}
 
 // Dönem eşleştirmesi
 const MEKKE_IDS=new Set(['mekke','hira','sevr','taif','busra','habesistan','ebva','akabe','darulerkam','benisad','hudeybiye','kudus','mina','arafat']);
-const MEDINE_IDS=new Set(['medine','hayber','tebuk']);
+// Hangi marker'lar büyük zoom'da gösterilsin (ana mekânlar her zoom'da)
+const MAJOR_PLACE_IDS=new Set(['mekke','medine','kudus','habesistan','busra']);
 
 // ===== RENDER MAP =====
 function initMap(){
   if(mapObj)return;
-  mapObj=L.map('map-c',{scrollWheelZoom:false,zoomControl:true,attributionControl:false}).setView([24,38],5);
+  mapObj=L.map('map-c',{scrollWheelZoom:false,zoomControl:false,attributionControl:false}).setView([22.5,38.5],5);
+
+  // Zoom control sağ üst yerine sol alt
+  L.control.zoom({position:'topleft'}).addTo(mapObj);
   L.control.attribution({position:'bottomright',prefix:false}).addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>').addTo(mapObj);
 
   // Tile katmanları
-  baseTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:14}).addTo(mapObj);
-  labelTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',{maxZoom:14,opacity:.4}).addTo(mapObj);
-  satTileLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:14});
+  baseTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:16}).addTo(mapObj);
+  labelTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',{maxZoom:16,opacity:.35}).addTo(mapObj);
+  satTileLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:16});
 
-  // Popup kapanınca bekleyen scroll'u çalıştır
   mapObj.on('popupclose',()=>setTimeout(_execPendingScroll,100));
+
+  // === Zoom seviyesine göre detay göster/gizle ===
+  mapObj.on('zoomend',updateZoomVisibility);
 
   // === MEKANLAR ===
   PLACES.forEach(p=>{
-    const icon=getPlaceIcon(p.type);
-    const marker=L.marker([p.lat,p.lng],{icon}).addTo(mapObj);
+    const isHoly=p.type==='holy';
+    const isCave=p.type==='cave';
+    const icon=isHoly?makeHolyIcon(p.id):isCave?caveIcon:placeIcon;
+    const isMajor=MAJOR_PLACE_IDS.has(p.id);
+    const marker=L.marker([p.lat,p.lng],{icon,zIndexOffset:isHoly?(isMajor?800:300):0});
     marker._era=MEKKE_IDS.has(p.id)?'mekke':'medine';
     marker._kind='place';
-    const lblClass=p.type==='holy'?'map-label-holy':'map-label';
-    const lbl=L.marker([p.lat,p.lng],{icon:L.divIcon({className:lblClass,html:`<span>${p.name}</span>`,iconSize:[0,0],iconAnchor:[-14,5]}),interactive:false}).addTo(mapObj);
+    marker._isMajor=isMajor;
+
+    // Label — holy labels offset daha fazla (büyük ikon)
+    const lblClass=isHoly?'map-label-holy':(isMajor?'map-label':'map-label map-label-minor');
+    const lblOffset=isHoly?(isMajor?[-18,6]:[-14,5]):(isMajor?[-12,4]:[-10,4]);
+    const lbl=L.marker([p.lat,p.lng],{icon:L.divIcon({className:lblClass,html:`<span>${p.name}</span>`,iconSize:[0,0],iconAnchor:lblOffset}),interactive:false});
 
     const chLinks=p.chapters.slice(0,4).map(ci=>`<button class="map-popup-btn" onclick="scrollToChapter(${ci})">📖 ${BOOK[ci]?BOOK[ci].title.substring(0,30):''}</button>`).join('');
     const moreCount=p.chapters.length>4?`<span style="font-size:.65rem;color:var(--tx3)">+${p.chapters.length-4} bölüm daha</span>`:'';
-    marker.bindPopup(`<div class="map-popup-title">${p.icon} ${p.name}</div><div class="map-popup-type">${p.type==='holy'?'Kutsal Mekân':p.type==='cave'?'Mağara':'Mekân'}</div><div class="map-popup-desc">${p.desc}</div><div style="display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem">${chLinks}${moreCount}</div>`,{maxWidth:280});
+    marker.bindPopup(`<div class="map-popup-title">${p.icon} ${p.name}</div><div class="map-popup-type">${isHoly?'Kutsal Mekân':isCave?'Mağara':'Mekân'}</div><div class="map-popup-desc">${p.desc}</div><div style="display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem">${chLinks}${moreCount}</div>`,{maxWidth:280});
     mapMarkers[p.id]=marker;
     mapLabels[p.id]=lbl;
-    allMapLayers.push({marker,label:lbl,era:marker._era,kind:'place'});
+    allMapLayers.push({marker,label:lbl,era:marker._era,kind:'place',isMajor,id:p.id});
   });
 
-  // === SAVAŞLAR (kronolojik renkler) ===
-  BATTLES.forEach((b,i)=>{
-    const color=battleColors[Math.min(i,battleColors.length-1)];
-    const icon=makeBattleIcon(color,!!b.major);
-    const marker=L.marker([b.lat,b.lng],{icon,zIndexOffset:500}).addTo(mapObj);
+  // === SAVAŞLAR ===
+  // Medine civarındaki savaşları cluster olarak göster (zoom<7)
+  const medineBattleIds=new Set();
+  const MEDINE_CENTER=[24.47,39.61];
+  BATTLES.forEach(b=>{
+    const dist=Math.sqrt(Math.pow(b.lat-MEDINE_CENTER[0],2)+Math.pow(b.lng-MEDINE_CENTER[1],2));
+    if(dist<2)medineBattleIds.add(b.id);
+  });
+
+  // Cluster marker for Medine battles
+  const clusterCount=medineBattleIds.size;
+  const clusterPos=[25.20,38.70]; // Medîne'nin kuzey-batısında, çakışmaz
+  const clusterMarker=L.marker(clusterPos,{icon:L.divIcon({className:'',html:`<div class="battle-cluster">⚔ ${clusterCount}</div>`,iconSize:[38,38],iconAnchor:[19,19],popupAnchor:[0,-22]}),zIndexOffset:600});
+  clusterMarker._kind='cluster';
+  clusterMarker.bindPopup(`<div class="map-popup-title" style="color:#8B1A1A">⚔ ${clusterCount} Gazâ</div><div class="map-popup-desc">Medîne çevresindeki savaşlar.<br>Yakınlaştırarak detayları görün.</div>`,{maxWidth:250});
+  clusterMarker.on('click',()=>{mapObj.flyTo(MEDINE_CENTER,8,{duration:.8})});
+
+  BATTLES.forEach(b=>{
+    const icon=makeBattleIcon(!!b.major);
+    const marker=L.marker([b.lat,b.lng],{icon,zIndexOffset:500});
     marker._era='gaza';
     marker._kind='battle';
-    const lbl=L.marker([b.lat,b.lng],{icon:L.divIcon({className:'map-label-battle',html:`<span>${b.name}</span>`,iconSize:[0,0],iconAnchor:[-16,5]}),interactive:false}).addTo(mapObj);
+    marker._isMedineCluster=medineBattleIds.has(b.id);
+    marker._isMajor=!!b.major;
+    const lbl=L.marker([b.lat,b.lng],{icon:L.divIcon({className:'map-label-battle map-label-minor',html:`<span>${b.name}</span>`,iconSize:[0,0],iconAnchor:[-16,5]}),interactive:false});
 
-    marker.bindPopup(`<div class="map-popup-title" style="color:${color}">⚔ ${b.name}</div><div class="map-popup-date">${b.date}</div><div class="map-popup-desc">${b.summary}</div><button class="map-popup-btn" onclick="scrollToChapter(${b.chapter})">📖 Bölüme Git</button>`,{maxWidth:300});
+    marker.bindPopup(`<div class="map-popup-title" style="color:#8B1A1A">⚔ ${b.name}</div><div class="map-popup-date">${b.date}</div><div class="map-popup-desc">${b.summary}</div><button class="map-popup-btn" onclick="scrollToChapter(${b.chapter})">📖 Bölüme Git</button>`,{maxWidth:300});
     mapMarkers[b.id]=marker;
     mapLabels[b.id]=lbl;
-    allMapLayers.push({marker,label:lbl,era:'gaza',kind:'battle'});
+    allMapLayers.push({marker,label:lbl,era:'gaza',kind:'battle',isMajor:!!b.major,isCluster:medineBattleIds.has(b.id),id:b.id});
   });
+  allMapLayers._clusterMarker=clusterMarker;
 
-  // === GÜZERGAHLAR (hover efektli) ===
+  // === GÜZERGAHLAR ===
   function addRoute(coords,opts,popupText,era){
-    const line=L.polyline(coords,{...opts,className:'map-route'}).addTo(mapObj);
+    const line=L.polyline(coords,{...opts,className:era==='mekke'?'map-route-gold':'map-route-animated'});
     line.bindPopup(popupText);
     line._era=era;
-    line.on('mouseover',function(){this.setStyle({weight:opts.weight+2,opacity:1})});
+    line._baseWeight=opts.weight;
+    line._baseOpacity=opts.opacity;
+    line.on('mouseover',function(){this.setStyle({weight:opts.weight+3,opacity:1})});
     line.on('mouseout',function(){this.setStyle({weight:opts.weight,opacity:opts.opacity})});
     mapRoutes.push(line);
   }
-  addRoute([[21.42,39.82],[21.38,39.83],[24.47,39.61]],{color:'#C9A84C',weight:3,dashArray:'10,8',opacity:.7},'<b style="color:#C9A84C">Hicret Güzergâhı</b><br>Mekke → Sevr → Medîne','mekke');
-  addRoute([[21.42,39.82],[14.13,38.72]],{color:'#2B5F8E',weight:2,dashArray:'8,6',opacity:.5},'<b style="color:#2B5F8E">Habeşistan Hicreti</b><br>Mekke → Aksum','mekke');
-  addRoute([[21.42,39.82],[32.52,36.48]],{color:'#2B5F8E',weight:2,dashArray:'8,6',opacity:.4},'<b style="color:#2B5F8E">Ticaret Yolu</b><br>Mekke → Busrâ','mekke');
-  addRoute([[24.47,39.61],[23.73,38.78]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.5},'Bedr Güzergâhı','gaza');
-  addRoute([[24.47,39.61],[25.70,39.30]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.5},'Hayber Güzergâhı','gaza');
-  addRoute([[24.47,39.61],[28.38,36.56]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.5},'<b style="color:#C0522B">Tebük Seferi</b>','gaza');
-  addRoute([[24.47,39.61],[31.08,35.70]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.5},'<b style="color:#C0522B">Mûte Seferi</b>','gaza');
-  addRoute([[24.47,39.61],[21.43,39.83]],{color:'#C9A84C',weight:3,dashArray:'12,6',opacity:.6},'<b style="color:#C9A84C">Mekke\'nin Fethi</b>','gaza');
+  addRoute([[21.42,39.82],[21.38,39.83],[24.47,39.61]],{color:'#C9A84C',weight:3,dashArray:'12,8',opacity:.75},'<b style="color:#C9A84C">Hicret Güzergâhı</b><br>Mekke → Sevr Mağarası → Medîne','mekke');
+  addRoute([[21.42,39.82],[14.13,38.72]],{color:'#5B8FB9',weight:2.5,dashArray:'10,7',opacity:.55},'<b style="color:#5B8FB9">Habeşistan Hicreti</b><br>Mekke → Aksum','mekke');
+  addRoute([[21.42,39.82],[32.52,36.48]],{color:'#7BA5C4',weight:2,dashArray:'8,6',opacity:.4},'<b style="color:#7BA5C4">Ticaret Yolu</b><br>Mekke → Busrâ (Şam)','mekke');
+  addRoute([[24.47,39.61],[23.73,38.78]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Bedr Gazâsı</b>','gaza');
+  addRoute([[24.47,39.61],[25.70,39.30]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Hayber Seferi</b>','gaza');
+  addRoute([[24.47,39.61],[28.38,36.56]],{color:'#C0522B',weight:2.5,dashArray:'8,5',opacity:.55},'<b style="color:#C0522B">Tebük Seferi</b>','gaza');
+  addRoute([[24.47,39.61],[31.08,35.70]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Mûte Seferi</b>','gaza');
+  addRoute([[24.47,39.61],[21.43,39.83]],{color:'#C9A84C',weight:3,dashArray:'12,6',opacity:.65},'<b style="color:#C9A84C">Mekke\'nin Fethi</b>','gaza');
 
-  // === LEJANT ===
+  // === LEJANT (collapsible) ===
   const legendDiv=document.createElement('div');
-  legendDiv.className='map-legend';
-  legendDiv.innerHTML=`<h4>Lejant</h4>
-    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#C9A84C" stroke="#8B6914" stroke-width="1"/><path d="M11 6.5 L12 9 L15 9 L12.5 11 L13.5 14 L11 12 L8.5 14 L9.5 11 L7 9 L10 9 Z" fill="#fff" opacity=".9"/></svg> Kutsal Mekân</div>
-    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="#2A7A62" stroke="#1A5C48" stroke-width="1"/><circle cx="9" cy="9" r="2" fill="#fff"/></svg> Mağara</div>
-    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4" fill="#2B5F8E" stroke="#1A3F5E" stroke-width="1"/><circle cx="8" cy="8" r="1.5" fill="#fff"/></svg> Mekân</div>
-    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 18 18"><line x1="4" y1="4" x2="14" y2="14" stroke="#8B1A1A" stroke-width="2"/><line x1="14" y1="4" x2="4" y2="14" stroke="#8B1A1A" stroke-width="2"/><circle cx="9" cy="9" r="2.5" fill="#C0522B"/></svg> Gazâ / Savaş</div>
+  legendDiv.className='map-legend collapsed';
+  legendDiv.innerHTML=`<div class="map-legend-toggle" onclick="this.closest('.map-legend').classList.toggle('collapsed');this.closest('.map-legend').classList.toggle('expanded')">☰ Lejant</div>
+    <div class="map-legend-body">
+    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 30 30"><circle cx="15" cy="15" r="8" fill="#C9A84C" stroke="#8B6914" stroke-width="1"/><path d="M15 8 L16.5 12.5 L21 12.5 L17.5 15 L19 19 L15 16.5 L11 19 L12.5 15 L9 12.5 L13.5 12.5 Z" fill="#fff"/></svg> Kutsal Mekân</div>
+    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 18 18"><circle cx="9" cy="9" r="5" fill="#2A7A62"/><path d="M6 10 Q9 6 12 10" fill="none" stroke="#fff" stroke-width="1.2"/></svg> Mağara</div>
+    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4" fill="#2B5F8E"/><circle cx="7" cy="7" r="1.5" fill="#fff"/></svg> Mekân</div>
+    <div class="map-legend-item"><svg width="14" height="14" viewBox="0 0 22 22"><circle cx="11" cy="11" r="6" fill="#8B1A1A"/><line x1="8" y1="8" x2="14" y2="14" stroke="#fff" stroke-width="1.5"/><line x1="14" y1="8" x2="8" y2="14" stroke="#fff" stroke-width="1.5"/></svg> Gazâ / Savaş</div>
     <div class="map-legend-item"><svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#C9A84C" stroke-width="2" stroke-dasharray="4,3"/></svg> Hicret / Fetih</div>
-    <div class="map-legend-item"><svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#C0522B" stroke-width="2" stroke-dasharray="4,3"/></svg> Gazâ Seferi</div>`;
+    <div class="map-legend-item"><svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#C0522B" stroke-width="2" stroke-dasharray="4,3"/></svg> Sefer Güzergâhı</div>
+    </div>`;
   document.getElementById('map-c').appendChild(legendDiv);
 
-  // === FULLSCREEN BUTONU ===
+  // === BUTTONS ===
   const fsBtn=document.createElement('button');
-  fsBtn.className='map-fs-btn';
+  fsBtn.className='map-float-btn map-fs-btn';
   fsBtn.innerHTML='⛶';
   fsBtn.title='Tam Ekran';
   fsBtn.onclick=toggleFullscreen;
   document.getElementById('map-c').appendChild(fsBtn);
 
-  // === SATELLITE KATMAN BUTONU ===
   const layerBtn=document.createElement('button');
-  layerBtn.className='map-layer-btn';
+  layerBtn.className='map-float-btn map-layer-btn';
   layerBtn.innerHTML='🛰';
   layerBtn.title='Uydu / Harita';
   layerBtn.onclick=toggleSatellite;
   document.getElementById('map-c').appendChild(layerBtn);
+
+  // Initial visibility
+  updateZoomVisibility();
+}
+
+// === ZOOM VISIBILITY — temiz harita, detay zoom'da ===
+function updateZoomVisibility(){
+  if(!mapObj)return;
+  const z=mapObj.getZoom();
+  const showDetail=z>=7;
+  const mc=document.getElementById('map-c');
+  if(showDetail)mc.classList.add('zoom-detail');
+  else mc.classList.remove('zoom-detail');
+
+  allMapLayers.forEach(item=>{
+    // Era filter first
+    let eraOk=currentEra==='all';
+    if(currentEra==='mekke')eraOk=item.era==='mekke';
+    if(currentEra==='medine')eraOk=item.era==='medine'||item.era==='gaza';
+    if(currentEra==='gaza')eraOk=item.kind==='battle';
+
+    if(!eraOk){
+      if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
+      if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
+      return;
+    }
+
+    // Zoom-based: battles in medine cluster shown only on detail
+    if(item.kind==='battle'&&item.isCluster){
+      if(showDetail){
+        if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
+        if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
+      }else{
+        if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
+        if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
+      }
+      return;
+    }
+
+    // Major places: always show; minor: only on detail zoom
+    if(item.kind==='place'&&!item.isMajor){
+      if(showDetail){
+        if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
+        if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
+      }else{
+        if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
+        if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
+      }
+      return;
+    }
+
+    // Major battles (Bedr, Uhud, etc) not in cluster — show always
+    if(item.kind==='battle'&&!item.isCluster){
+      if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
+      if(showDetail){if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj)}
+      else{if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label)}
+      return;
+    }
+
+    // Default: show
+    if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
+    if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
+  });
+
+  // Battle cluster marker
+  const cm=allMapLayers._clusterMarker;
+  if(cm){
+    const showCluster=!showDetail&&(currentEra==='all'||currentEra==='medine'||currentEra==='gaza');
+    if(showCluster){if(!mapObj.hasLayer(cm))cm.addTo(mapObj)}
+    else{if(mapObj.hasLayer(cm))mapObj.removeLayer(cm)}
+  }
+
+  // Routes
+  mapRoutes.forEach(r=>{
+    let rOk=currentEra==='all';
+    if(currentEra==='mekke')rOk=r._era==='mekke';
+    if(currentEra==='medine')rOk=true;
+    if(currentEra==='gaza')rOk=r._era==='gaza';
+    if(rOk){if(!mapObj.hasLayer(r))r.addTo(mapObj)}
+    else{if(mapObj.hasLayer(r))mapObj.removeLayer(r)}
+  });
 }
 
 // === FULLSCREEN ===
@@ -631,7 +775,6 @@ function toggleFullscreen(){
   const mc=document.getElementById('map-c');
   mc.classList.toggle('fullscreen');
   if(mapObj)setTimeout(()=>mapObj.invalidateSize(),300);
-  // ESC ile çık
   if(mc.classList.contains('fullscreen')){
     document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){mc.classList.remove('fullscreen');mapObj.invalidateSize();document.removeEventListener('keydown',esc)}});
   }
@@ -650,7 +793,7 @@ function toggleSatellite(){
     mapObj.removeLayer(satTileLayer);
     baseTileLayer.addTo(mapObj);
     labelTileLayer.addTo(mapObj);
-    mc.querySelector('.leaflet-tile-pane').style.filter='sepia(.4) saturate(.7) brightness(1.05) contrast(.95)';
+    mc.querySelector('.leaflet-tile-pane').style.filter='sepia(.35) saturate(.65) brightness(1.08) contrast(.92)';
     currentTileMode='light';
   }
 }
@@ -659,29 +802,9 @@ function toggleSatellite(){
 function filterMapEra(era,btn){
   document.querySelectorAll('.map-ctrl-btn').forEach(b=>b.classList.remove('active'));
   if(btn)btn.classList.add('active');
+  currentEra=era;
   if(!mapObj)return;
-
-  allMapLayers.forEach(({marker,label,era:mEra,kind})=>{
-    let show=era==='all';
-    if(era==='mekke')show=mEra==='mekke';
-    if(era==='medine')show=mEra==='medine'||mEra==='gaza'; // Medine devri gazâları da göster
-    if(era==='gaza')show=kind==='battle';
-    if(show){
-      if(!mapObj.hasLayer(marker))marker.addTo(mapObj);
-      if(!mapObj.hasLayer(label))label.addTo(mapObj);
-    }else{
-      if(mapObj.hasLayer(marker))mapObj.removeLayer(marker);
-      if(mapObj.hasLayer(label))mapObj.removeLayer(label);
-    }
-  });
-  mapRoutes.forEach(r=>{
-    let show=era==='all';
-    if(era==='mekke')show=r._era==='mekke';
-    if(era==='medine')show=true;
-    if(era==='gaza')show=r._era==='gaza';
-    if(show){if(!mapObj.hasLayer(r))r.addTo(mapObj)}
-    else{if(mapObj.hasLayer(r))mapObj.removeLayer(r)}
-  });
+  updateZoomVisibility();
 }
 
 // Harita görünür olunca lazy init
