@@ -188,11 +188,11 @@ const NT = {
   // ── Kayıt İndirme Sistemi ──
   // html2pdf.js kaldırıldı — %100 yerli, sıfır bağımlılık
 
-  // Self-contained HTML dosyası olarak indir (her yerde açılır, PDF'e basılabilir)
+  // Self-contained HTML raporu indir (her yerde açılır, PDF'e basılabilir)
   downloadPDF(contentOrId, filename) {
     const fn = (filename || document.title.replace(/[^a-zA-Z0-9ğüşıöçĞÜŞİÖÇ\s-]/g, '')).replace(/\.pdf$/i, '') + '.html';
     const title = document.title.replace(' — NöroTerbiye', '');
-    const date = new Date().toLocaleDateString('tr-TR');
+    const date = new Date().toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
 
     let html;
     if (typeof contentOrId === 'function') {
