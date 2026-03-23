@@ -1606,6 +1606,29 @@ body {
   margin-bottom: 0.4rem;
 }
 .battle-marker { z-index: 600 !important; }
+.map-back-btn {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.7rem;
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f0e6cc, #e8d8b0);
+  color: #5a3e1b;
+  border: 1.5px solid #8b6914;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+}
+.map-back-btn:hover {
+  background: linear-gradient(135deg, #e8d8b0, #d4c5a0);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.timeline-highlight {
+  background: rgba(201,168,76,0.12) !important;
+  box-shadow: inset 3px 0 0 var(--gold);
+  transition: background 0.3s ease;
+}
 
 /* Harita üzeri yer adı etiketleri — tarihi harita stili */
 .map-label span, .map-label-capital span, .map-label-battle span {
@@ -2323,9 +2346,9 @@ function renderTimelineItems(filterRuler) {
 
   document.getElementById('timelineContainer').innerHTML = events.map(e => {
     const isBattle = e.type === 'battle' || e.type === 'siege';
-    const mapLink = isBattle ? `<button class="timeline-map-btn" onclick="event.stopPropagation(); flyToBattle('${e.id}')" title="Haritada göster">🗺 Haritada Göster</button>` : '';
+    const mapLink = isBattle ? `<button class="timeline-map-btn" onclick="flyToBattle('${e.id}')" title="Haritada göster">🗺 Haritada Göster</button>` : '';
     return `
-    <div class="timeline-item ${isBattle ? 'timeline-battle' : ''}" data-type="${e.type}">
+    <div class="timeline-item ${isBattle ? 'timeline-battle' : ''}" data-type="${e.type}" id="tl-${e.id}">
       <div class="timeline-date">${e.date}</div>
       <div class="timeline-ruler-tag">${e.ruler}</div>
       <div class="timeline-title">${isBattle ? '⚔ ' : ''}${e.name}</div>
@@ -2543,6 +2566,9 @@ function renderMap() {
 
   map.tileLayer = L.tileLayer(tileUrl, { maxZoom: 15 }).addTo(map);
 
+  // Popup kapanınca bekleyen timeline scroll'u çalıştır
+  map.on('popupclose', () => setTimeout(_executePendingScroll, 100));
+
   // === MARKER İKONLARI ===
 
   // Şehir/yerleşim (altın daire)
@@ -2643,10 +2669,28 @@ function renderMap() {
       <div class="map-popup-date">${e.date} (${e.year})</div>
       <div class="map-popup-ruler">${e.ruler}</div>
       <div class="map-popup-desc">${e.summary}</div>
+      <button class="map-back-btn" onclick="scrollToTimelineEvent('${e.id}')">↩ Kronolojiye Dön</button>
     `;
     marker.bindPopup(popupContent, { maxWidth: 300 });
     mapMarkers[e.id] = marker;
   });
+}
+
+// Kronolojideki olaya geri dön
+let _pendingTimelineScroll = null;
+function scrollToTimelineEvent(eventId) {
+  _pendingTimelineScroll = 'tl-' + eventId;
+  if (map) map.closePopup();
+}
+// Popup kapanınca scroll et (Leaflet popup DOM kaldırılmadan önce onclick çalışmıyor)
+function _executePendingScroll() {
+  if (!_pendingTimelineScroll) return;
+  const el = document.getElementById(_pendingTimelineScroll);
+  _pendingTimelineScroll = null;
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.add('timeline-highlight');
+  setTimeout(() => el.classList.remove('timeline-highlight'), 2500);
 }
 
 // Savaş olayına haritada uç
@@ -2655,11 +2699,16 @@ function flyToBattle(eventId) {
   const marker = mapMarkers[eventId];
   if (!marker) return;
 
-  document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const mapEl = document.getElementById('mapContainer');
+  const rect = mapEl.getBoundingClientRect();
+  const targetY = window.pageYOffset + rect.top - 80;
+  window.scrollTo({ top: targetY, behavior: 'smooth' });
+
   setTimeout(() => {
+    map.invalidateSize();
     map.flyTo(marker.getLatLng(), 7, { duration: 1.0 });
     setTimeout(() => marker.openPopup(), 1100);
-  }, 500);
+  }, 800);
 }
 
 // Herhangi bir yer adına göre haritada konuma uç
@@ -2680,15 +2729,18 @@ function flyToPlace(id) {
   const p = PLACES.find(x => x.id === id);
   if (!p || !p.lat || !p.lng || !map) return;
 
-  // Scroll to map first
-  document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const mapEl = document.getElementById('mapContainer');
+  const rect = mapEl.getBoundingClientRect();
+  const targetY = window.pageYOffset + rect.top - 80;
+  window.scrollTo({ top: targetY, behavior: 'smooth' });
 
   setTimeout(() => {
+    map.invalidateSize();
     map.flyTo([p.lat, p.lng], 8, { duration: 1.2 });
     setTimeout(() => {
       if (mapMarkers[id]) mapMarkers[id].openPopup();
     }, 1300);
-  }, 500);
+  }, 800);
 }
 
 function updateMapTiles() {
