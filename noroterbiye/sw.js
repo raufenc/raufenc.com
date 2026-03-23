@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noroterbiye-v2';
+const CACHE_NAME = 'noroterbiye-v3';
 const STATIC_ASSETS = [
   '/noroterbiye/',
   '/noroterbiye/js/common.js',

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beynin Haritası — NöroTerbiye</title>
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    /* ── Page Layout ── */
+    .brain-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-8) var(--space-4);
+      padding-top: 100px;
+    }
+
+    .brain-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+    }
+
+    .brain-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      background: var(--nt-grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-2);
+      line-height: 1.2;
+    }
+
+    .brain-subtitle {
+      color: var(--text-secondary);
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      font-style: italic;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── Brain Container ── */
+    .brain-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      aspect-ratio: 4 / 3;
+      margin: 0 auto var(--space-12);
+    }
+
+    .brain-svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 40px rgba(99,102,241,0.15));
+    }
+
+    /* ── Brain Outline ── */
+    .brain-outline {
+      fill: url(#brainGrad);
+      stroke: url(#brainStroke);
+      stroke-width: 1.5;
+      opacity: 0.9;
+      filter: url(#brainGlow);
+    }
+
+    .brain-detail {
+      fill: none;
+      stroke: rgba(99,102,241,0.15);
+      stroke-width: 0.8;
+    }
+
+    /* ── Region Markers ── */
+    .region-group {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .region-group:hover {
+      transform: scale(1.08);
+    }
+
+    .region-dot {
+      transition: all 0.3s ease;
+    }
+
+    .region-dot-outer {
+      opacity: 0.2;
+      transition: opacity 0.4s ease, r 0.4s ease;
+    }
+
+    .region-group:hover .region-dot-outer,
+    .region-group.active .region-dot-outer {
+      opacity: 0.5;
+      animation: pulseRing 2s ease-in-out infinite;
+    }
+
+    .region-group:hover .region-dot,
+    .region-group.active .region-dot {
+      filter: url(#dotGlow);
+    }
+
+    .region-label {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 600;
+      fill: var(--text);
+      pointer-events: none;
+      opacity: 0.85;
+      text-anchor: middle;
+      transition: opacity 0.3s ease;
+    }
+
+    .region-group:hover .region-label,
+    .region-group.active .region-label {
+      opacity: 1;
+    }
+
+    .region-connector {
+      stroke-width: 1;
+      stroke-dasharray: 3 3;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+
+    .region-group:hover .region-connector,
+    .region-group.active .region-connector {
+      opacity: 0.8;
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { opacity: 0.3; transform-origin: center; }
+      50% { opacity: 0.6; }
+    }
+
+    /* ── Info Panel ── */
+    .info-panel {
+      position: fixed;
+      bottom: -400px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(500px, 92vw);
+      background: rgba(17,17,24,0.92);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid var(--nt-glass-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      z-index: 100;
+      transition: bottom 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.5), 0 0 80px rgba(99,102,241,0.08);
+    }
+
+    html.light .info-panel {
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.12), 0 0 60px rgba(99,102,241,0.06);
+    }
+
+    .info-panel.visible {
+      bottom: 24px;
+    }
+
+    .info-panel-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      line-height: 1;
+    }
+
+    .info-panel-close:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    .info-panel-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: var(--space-3);
+      flex-shrink: 0;
+    }
+
+    .info-panel-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: var(--space-1);
+      background: var(--nt-grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .info-panel-func {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: var(--space-3);
+      line-height: 1.5;
+    }
+
+    .info-panel-context {
+      position: relative;
+      padding: var(--space-4);
+      background: var(--nt-glass);
+      border: 1px solid var(--nt-glass-border);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .info-panel-context::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      border-radius: 3px;
+    }
+
+    .info-panel-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      margin-top: var(--space-3);
+      opacity: 0.9;
+    }
+
+    /* ── Region Legend ── */
+    .brain-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: center;
+      max-width: 800px;
+      margin: 0 auto var(--space-8);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      background: var(--nt-glass);
+      border: 1px solid var(--nt-glass-border);
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+
+    .legend-item:hover {
+      background: var(--nt-glass-hover);
+      color: var(--text);
+    }
+
+    .legend-item.active {
+      border-color: var(--legend-color);
+      color: var(--text);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Ambient particles ── */
+    .brain-particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(99,102,241,0.3);
+      pointer-events: none;
+      animation: floatParticle 8s ease-in-out infinite;
+    }
+
+    @keyframes floatParticle {
+      0%, 100% { transform: translate(0,0); opacity: 0; }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.4; }
+      100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      .brain-page { padding-top: 80px; }
+      .info-panel { padding: var(--space-4) var(--space-5); }
+      .brain-legend { gap: var(--space-2); }
+      .legend-item { font-size: 0.72rem; padding: var(--space-1) var(--space-2); }
+      .region-label { font-size: 7px; }
+    }
+
+    /* ── Instruction hint ── */
+    .brain-hint {
+      text-align: center;
+      color: var(--muted2);
+      font-size: 0.85rem;
+      margin-bottom: var(--space-6);
+      animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Synaptic connections ── */
+    .synapse-line {
+      stroke: rgba(99,102,241,0.06);
+      stroke-width: 0.7;
+      fill: none;
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <main class="brain-page">
+    <header class="brain-header">
+      <h1 class="brain-title">Beynin Haritası</h1>
+      <p class="brain-subtitle">Tıkla, keşfet — her bölge bir hikâye anlatır.</p>
+    </header>
+
+    <p class="brain-hint">Bir bölgeye tıkla veya dokun</p>
+
+    <div class="brain-container" id="brainContainer">
+      <svg class="brain-svg" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Brain gradient fill -->
+          <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(99,102,241,0.12)"/>
+            <stop offset="50%" stop-color="rgba(6,182,212,0.08)"/>
+            <stop offset="100%" stop-color="rgba(168,85,247,0.10)"/>
+          </linearGradient>
+
+          <!-- Brain stroke gradient -->
+          <linearGradient id="brainStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(99,102,241,0.5)"/>
+            <stop offset="50%" stop-color="rgba(6,182,212,0.4)"/>
+            <stop offset="100%" stop-color="rgba(168,85,247,0.5)"/>
+          </linearGradient>
+
+          <!-- Glow filters -->
+          <filter id="brainGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+
+          <filter id="dotGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+
+          <!-- Neuron-like pattern -->
+          <pattern id="neuronPattern" width="60" height="60" patternUnits="userSpaceOnUse">
+            <circle cx="30" cy="30" r="0.8" fill="rgba(99,102,241,0.15)"/>
+            <line x1="30" y1="30" x2="55" y2="15" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
+            <line x1="30" y1="30" x2="10" y2="50" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
+            <line x1="30" y1="30" x2="50" y2="48" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
+          </pattern>
+        </defs>
+
+        <!-- Neuron background pattern -->
+        <rect width="600" height="450" fill="url(#neuronPattern)" opacity="0.4"/>
+
+        <!-- Brain silhouette (sagittal view — left side) -->
+        <!-- Main cerebrum outline -->
+        <path class="brain-outline" d="
+          M 160,310
+          C 130,300 100,280 85,250
+          C 70,220 65,190 70,160
+          C 75,130 85,100 105,80
+          C 125,60 155,45 190,38
+          C 225,31 265,30 300,33
+          C 335,36 370,42 400,55
+          C 430,68 455,85 470,110
+          C 485,135 490,165 485,195
+          C 480,225 468,248 450,265
+          C 440,275 435,282 430,290
+          C 425,300 418,310 405,318
+          C 390,328 370,332 350,330
+          C 340,328 332,322 325,315
+          C 320,310 315,308 310,310
+          C 300,315 288,325 275,330
+          C 260,335 245,332 230,325
+          C 215,318 200,315 190,312
+          Z
+        "/>
+
+        <!-- Cerebellum (back-bottom) -->
+        <path class="brain-outline" d="
+          M 405,318
+          C 420,325 440,335 452,345
+          C 460,352 462,362 458,372
+          C 454,382 442,388 428,390
+          C 414,392 398,388 385,380
+          C 375,372 365,360 358,348
+          C 352,336 350,330 350,330
+        "/>
+
+        <!-- Brain stem -->
+        <path class="brain-outline" d="
+          M 350,330
+          C 345,340 340,355 338,370
+          C 336,385 338,398 342,408
+          C 346,415 352,420 358,418
+          C 364,416 368,408 370,395
+          C 372,382 375,370 380,360
+          C 385,350 390,340 395,332
+        " style="fill: url(#brainGrad); stroke: url(#brainStroke); stroke-width: 1.2;"/>
+
+        <!-- Internal detail lines (sulci/folds) -->
+        <path class="brain-detail" d="M 140,200 C 170,170 210,155 260,150"/>
+        <path class="brain-detail" d="M 180,130 C 220,110 270,100 320,105"/>
+        <path class="brain-detail" d="M 250,60 C 280,80 310,95 340,100"/>
+        <path class="brain-detail" d="M 130,240 C 170,230 210,225 250,228"/>
+        <path class="brain-detail" d="M 350,120 C 390,140 420,170 440,200"/>
+        <path class="brain-detail" d="M 300,150 C 330,170 350,195 360,225"/>
+        <path class="brain-detail" d="M 200,180 C 230,200 260,210 290,215"/>
+        <path class="brain-detail" d="M 400,250 C 420,240 440,225 455,205"/>
+
+        <!-- Synaptic connection lines between regions -->
+        <line class="synapse-line" x1="175" y1="115" x2="290" y2="95"/>
+        <line class="synapse-line" x1="290" y1="95" x2="300" y2="220"/>
+        <line class="synapse-line" x1="300" y1="220" x2="340" y2="255"/>
+        <line class="synapse-line" x1="340" y1="255" x2="355" y2="355"/>
+        <line class="synapse-line" x1="300" y1="220" x2="255" y2="205"/>
+        <line class="synapse-line" x1="175" y1="115" x2="255" y2="205"/>
+        <line class="synapse-line" x1="290" y1="95" x2="255" y2="205"/>
+        <path class="synapse-line" d="M 300,220 Q 270,260 225,250"/>
+
+        <!-- ═══ Region markers ═══ -->
+
+        <!-- 1. Prefrontal Korteks (front-top) -->
+        <g class="region-group" data-region="prefrontal" tabindex="0" role="button" aria-label="Prefrontal Korteks">
+          <line class="region-connector" x1="155" y1="120" x2="175" y2="115" stroke="#06b6d4"/>
+          <circle class="region-dot-outer" cx="175" cy="115" r="22" fill="#06b6d4"/>
+          <circle class="region-dot" cx="175" cy="115" r="8" fill="#06b6d4" opacity="0.9"/>
+          <circle cx="175" cy="115" r="3.5" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="145" y="90">Prefrontal</text>
+          <text class="region-label" x="145" y="100">Korteks</text>
+        </g>
+
+        <!-- 2. Anterior Singulat Korteks (top center) -->
+        <g class="region-group" data-region="acc" tabindex="0" role="button" aria-label="Anterior Singulat Korteks">
+          <line class="region-connector" x1="290" y1="95" x2="290" y2="75" stroke="#a855f7"/>
+          <circle class="region-dot-outer" cx="290" cy="95" r="18" fill="#a855f7"/>
+          <circle class="region-dot" cx="290" cy="95" r="7" fill="#a855f7" opacity="0.9"/>
+          <circle cx="290" cy="95" r="3" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="290" y="72">Anterior Singulat</text>
+        </g>
+
+        <!-- 3. Insula (side, slightly behind center) -->
+        <g class="region-group" data-region="insula" tabindex="0" role="button" aria-label="İnsüla">
+          <line class="region-connector" x1="255" y1="205" x2="230" y2="195" stroke="#10b981"/>
+          <circle class="region-dot-outer" cx="255" cy="205" r="17" fill="#10b981"/>
+          <circle class="region-dot" cx="255" cy="205" r="7" fill="#10b981" opacity="0.9"/>
+          <circle cx="255" cy="205" r="3" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="225" y="188">İnsüla</text>
+        </g>
+
+        <!-- 4. Nucleus Accumbens (center, ventral) -->
+        <g class="region-group" data-region="nac" tabindex="0" role="button" aria-label="Nucleus Accumbens">
+          <line class="region-connector" x1="300" y1="220" x2="275" y2="235" stroke="#f59e0b"/>
+          <circle class="region-dot-outer" cx="300" cy="220" r="17" fill="#f59e0b"/>
+          <circle class="region-dot" cx="300" cy="220" r="7" fill="#f59e0b" opacity="0.9"/>
+          <circle cx="300" cy="220" r="3" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="270" y="245">N. Accumbens</text>
+        </g>
+
+        <!-- 5. Amigdala (center deep, slightly lower) -->
+        <g class="region-group" data-region="amigdala" tabindex="0" role="button" aria-label="Amigdala">
+          <line class="region-connector" x1="325" y1="255" x2="310" y2="275" stroke="#ef4444"/>
+          <circle class="region-dot-outer" cx="325" cy="255" r="17" fill="#ef4444"/>
+          <circle class="region-dot" cx="325" cy="255" r="7" fill="#ef4444" opacity="0.9"/>
+          <circle cx="325" cy="255" r="3" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="305" y="282">Amigdala</text>
+        </g>
+
+        <!-- 6. Hipokampus (center-back, behind amigdala) -->
+        <g class="region-group" data-region="hipokampus" tabindex="0" role="button" aria-label="Hipokampüs">
+          <line class="region-connector" x1="370" y1="260" x2="395" y2="260" stroke="#f97316"/>
+          <circle class="region-dot-outer" cx="370" cy="260" r="17" fill="#f97316"/>
+          <circle class="region-dot" cx="370" cy="260" r="7" fill="#f97316" opacity="0.9"/>
+          <circle cx="370" cy="260" r="3" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="400" y="258">Hipokampüs</text>
+        </g>
+
+        <!-- 7. VTA (brain stem area) -->
+        <g class="region-group" data-region="vta" tabindex="0" role="button" aria-label="Ventral Tegmental Alan">
+          <line class="region-connector" x1="355" y1="355" x2="385" y2="365" stroke="#f43f5e"/>
+          <circle class="region-dot-outer" cx="355" cy="355" r="16" fill="#f43f5e"/>
+          <circle class="region-dot" cx="355" cy="355" r="6.5" fill="#f43f5e" opacity="0.9"/>
+          <circle cx="355" cy="355" r="2.8" fill="#fff" opacity="0.7"/>
+          <text class="region-label" x="393" y="372">VTA</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- Legend -->
+    <div class="brain-legend" id="brainLegend"></div>
+
+    <!-- Info Panel -->
+    <div class="info-panel" id="infoPanel">
+      <button class="info-panel-close" id="infoPanelClose" aria-label="Kapat">&times;</button>
+      <div class="info-panel-icon" id="infoPanelIcon"></div>
+      <div class="info-panel-name" id="infoPanelName"></div>
+      <div class="info-panel-func" id="infoPanelFunc"></div>
+      <div class="info-panel-context" id="infoPanelContext"></div>
+      <div class="info-panel-tag" id="infoPanelTag"></div>
+    </div>
+  </main>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    NT.renderNav();
+    NT.renderFooter();
+
+    // ── Region Data ──
+    const regions = {
+      prefrontal: {
+        name: 'Prefrontal Korteks',
+        icon: '\u{1F9E0}',
+        func: 'Karar verme, planlama, dürtü kontrolü. Beynin "CEO"su.',
+        context: 'Aklın merkezi \u2014 nefse karşı en güçlü silahın.',
+        color: '#06b6d4',
+        tag: 'Kontrol Merkezi',
+        category: 'kontrol'
+      },
+      amigdala: {
+        name: 'Amigdala',
+        icon: '\u{1F525}',
+        func: 'Korku, tehdit algılama, duygusal tepki. "Savaş ya da kaç" yanıtını tetikler.',
+        context: 'Gadab\u2019ın (öfke) tetikleyicisi. Stres anında devreye girer.',
+        color: '#ef4444',
+        tag: 'Alarm Sistemi',
+        category: 'duygu'
+      },
+      nac: {
+        name: 'Nucleus Accumbens',
+        icon: '\u{2728}',
+        func: 'Ödül sistemi, haz merkezi. Motivasyonu ve bağımlılık döngüsünü yönetir.',
+        context: 'Şehvet\u2019in karargâhı. Dopamin burada patlar.',
+        color: '#f59e0b',
+        tag: 'Ödül Merkezi',
+        category: 'odul'
+      },
+      hipokampus: {
+        name: 'Hipokampüs',
+        icon: '\u{1F4DA}',
+        func: 'Hafıza, öğrenme. Yeni anıların uzun süreli hafızaya aktarılmasını sağlar.',
+        context: 'Alışkanlık kalıplarını burada saklar. Terbiye burada kök salar.',
+        color: '#f97316',
+        tag: 'Hafıza Deposu',
+        category: 'ogrenme'
+      },
+      vta: {
+        name: 'Ventral Tegmental Alan (VTA)',
+        icon: '\u{26A1}',
+        func: 'Dopamin üretim merkezi. Ödüllenme yolunun başlangıç noktası.',
+        context: 'Dopaminin fabrikası. Her ödül sinyali buradan başlar.',
+        color: '#f43f5e',
+        tag: 'Dopamin Fabrikası',
+        category: 'odul'
+      },
+      insula: {
+        name: 'İnsüla (Ada Korteks)',
+        icon: '\u{1F52E}',
+        func: 'İç farkındalık, empati. Beden sinyallerini yorumlar.',
+        context: 'Vicdan ve farkındalık merkezi. Tefekkürün nörolojik karşılığı.',
+        color: '#10b981',
+        tag: 'Farkındalık Merkezi',
+        category: 'farkindalik'
+      },
+      acc: {
+        name: 'Anterior Singulat Korteks',
+        icon: '\u{2696}\u{FE0F}',
+        func: 'Çatışma çözme, hata tespiti. Duygusal ve bilişsel süreçleri birbirine bağlar.',
+        context: 'Nefs ile akıl arasındaki hakemin oturduğu yer.',
+        color: '#a855f7',
+        tag: 'Hakem Merkezi',
+        category: 'kontrol'
+      }
+    };
+
+    // ── Build Legend ──
+    const legend = document.getElementById('brainLegend');
+    Object.entries(regions).forEach(([key, r]) => {
+      const item = document.createElement('div');
+      item.className = 'legend-item';
+      item.style.setProperty('--legend-color', r.color);
+      item.innerHTML = `<span class="legend-dot" style="background:${r.color}"></span>${r.name}`;
+      item.addEventListener('click', () => activateRegion(key));
+      item.dataset.region = key;
+      legend.appendChild(item);
+    });
+
+    // ── Info Panel Logic ──
+    const panel = document.getElementById('infoPanel');
+    const panelClose = document.getElementById('infoPanelClose');
+    let activeRegion = null;
+
+    function activateRegion(key) {
+      const r = regions[key];
+      if (!r) return;
+
+      // Deactivate previous
+      document.querySelectorAll('.region-group.active').forEach(g => g.classList.remove('active'));
+      document.querySelectorAll('.legend-item.active').forEach(l => l.classList.remove('active'));
+
+      // Activate new
+      const group = document.querySelector(`.region-group[data-region="${key}"]`);
+      if (group) group.classList.add('active');
+
+      const legendItem = document.querySelector(`.legend-item[data-region="${key}"]`);
+      if (legendItem) legendItem.classList.add('active');
+
+      // Fill panel
+      document.getElementById('infoPanelIcon').style.background = r.color + '22';
+      document.getElementById('infoPanelIcon').textContent = r.icon;
+      document.getElementById('infoPanelName').textContent = r.name;
+      document.getElementById('infoPanelFunc').textContent = r.func;
+      document.getElementById('infoPanelContext').textContent = r.context;
+      document.getElementById('infoPanelContext').style.setProperty('--region-color', r.color);
+      document.getElementById('infoPanelContext').style.borderLeftColor = r.color;
+      const tag = document.getElementById('infoPanelTag');
+      tag.textContent = r.tag;
+      tag.style.background = r.color + '20';
+      tag.style.color = r.color;
+
+      panel.classList.add('visible');
+      activeRegion = key;
+
+      // Scroll marker into view on mobile
+      if (group && window.innerWidth < 640) {
+        group.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function closePanel() {
+      panel.classList.remove('visible');
+      document.querySelectorAll('.region-group.active').forEach(g => g.classList.remove('active'));
+      document.querySelectorAll('.legend-item.active').forEach(l => l.classList.remove('active'));
+      activeRegion = null;
+    }
+
+    panelClose.addEventListener('click', closePanel);
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.region-group') &&
+          !e.target.closest('.legend-item') &&
+          !e.target.closest('.info-panel')) {
+        closePanel();
+      }
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePanel();
+    });
+
+    // SVG region clicks
+    document.querySelectorAll('.region-group').forEach(group => {
+      group.addEventListener('click', (e) => {
+        e.stopPropagation();
+        activateRegion(group.dataset.region);
+      });
+      group.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateRegion(group.dataset.region);
+        }
+      });
+    });
+
+    // ── Ambient Particles ──
+    const container = document.getElementById('brainContainer');
+    for (let i = 0; i < 12; i++) {
+      const p = document.createElement('div');
+      p.className = 'brain-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = Math.random() * 100 + '%';
+      p.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+      p.style.setProperty('--dy', (Math.random() * 80 - 40) + 'px');
+      p.style.animationDelay = Math.random() * 8 + 's';
+      p.style.animationDuration = (6 + Math.random() * 6) + 's';
+      const colors = ['rgba(99,102,241,0.3)', 'rgba(6,182,212,0.3)', 'rgba(168,85,247,0.25)'];
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      container.appendChild(p);
+    }
+  </script>
+</body>
+</html>

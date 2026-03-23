@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ŞŞG Üçgeni — NöroTerbiye</title>
+<link rel="stylesheet" href="/lib/design-system/tokens.css">
+<link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+<script src="/lib/design-system/theme.js"></script>
+<style>
+/* ── Page ── */
+.ssg-page {
+  min-height: 100vh;
+  padding: 60px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(ellipse at 50% 20%, rgba(99,102,241,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(245,158,11,0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(239,68,68,0.04) 0%, transparent 50%);
+}
+
+.ssg-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #f59e0b, #a855f7, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ssg-subtitle {
+  font-size: 0.95rem;
+  color: var(--nt-glass-border, rgba(255,255,255,0.45));
+  text-align: center;
+  margin-bottom: 36px;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+/* ── Triangle Container ── */
+.triangle-wrap {
+  position: relative;
+  width: min(600px, 90vw);
+  height: min(560px, 85vw);
+  margin: 0 auto 40px;
+}
+
+.triangle-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+}
+
+/* ── Glow filters ── */
+.glow-amber { filter: drop-shadow(0 0 18px rgba(245,158,11,0.5)); }
+.glow-purple { filter: drop-shadow(0 0 18px rgba(168,85,247,0.5)); }
+.glow-red { filter: drop-shadow(0 0 18px rgba(239,68,68,0.5)); }
+
+/* ── Vertex circles ── */
+.vertex-group { cursor: pointer; }
+.vertex-group:hover .vertex-ring { opacity: 1; }
+.vertex-group:hover .vertex-icon { transform: scale(1.12); }
+
+.vertex-ring {
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.vertex-icon {
+  transition: transform 0.3s;
+}
+
+.vertex-label {
+  font-size: 15px;
+  font-weight: 700;
+  fill: #e2e8f0;
+  text-anchor: middle;
+}
+
+.vertex-neuro {
+  font-size: 10.5px;
+  fill: rgba(255,255,255,0.45);
+  text-anchor: middle;
+  font-style: italic;
+}
+
+/* ── Nefs label ── */
+.nefs-label {
+  font-size: 20px;
+  font-weight: 800;
+  fill: rgba(255,255,255,0.18);
+  text-anchor: middle;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+/* ── Pulse lines on edges ── */
+@keyframes dashFlow {
+  to { stroke-dashoffset: -40; }
+}
+
+.edge-pulse {
+  stroke-dasharray: 8 12;
+  animation: dashFlow 2s linear infinite;
+}
+
+/* ── Info Panel ── */
+.info-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: min(440px, 88vw);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: rgba(15,15,30,0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 32px 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s, transform 0.35s;
+  z-index: 100;
+}
+
+.info-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.info-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 99;
+}
+
+.info-panel-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.info-panel-icon {
+  font-size: 2.4rem;
+  margin-bottom: 8px;
+}
+
+.info-panel-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.info-panel-neuro {
+  font-size: 0.82rem;
+  opacity: 0.55;
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+.info-panel-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 18px;
+}
+
+.info-panel-traps-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.5;
+  margin-bottom: 10px;
+}
+
+.info-panel-traps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.info-panel-trap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+}
+
+.info-panel-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.info-panel-close:hover {
+  color: #fff;
+}
+
+/* ── Modern Tuzaklar Section ── */
+.traps-section {
+  width: min(650px, 90vw);
+  margin-top: 12px;
+}
+
+.traps-heading {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.traps-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.trap-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 16px 10px;
+  border-radius: 16px;
+  background: var(--nt-glass);
+  border: 1px solid var(--nt-glass-border);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.3s, box-shadow 0.3s;
+  min-width: 80px;
+  color: #e2e8f0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.trap-btn:hover {
+  transform: translateY(-3px);
+}
+
+.trap-btn.active-amber {
+  border-color: rgba(245,158,11,0.5);
+  box-shadow: 0 0 20px rgba(245,158,11,0.15);
+}
+
+.trap-btn.active-purple {
+  border-color: rgba(168,85,247,0.5);
+  box-shadow: 0 0 20px rgba(168,85,247,0.15);
+}
+
+.trap-btn.active-red {
+  border-color: rgba(239,68,68,0.5);
+  box-shadow: 0 0 20px rgba(239,68,68,0.15);
+}
+
+.trap-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.trap-label {
+  opacity: 0.6;
+}
+
+/* ── Connection line from trap to vertex ── */
+.trap-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ── Legend ── */
+.ssg-legend {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: var(--nt-glass);
+  border: 1px solid var(--nt-glass-border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ── Animated connection line (SVG overlay) ── */
+.connection-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes connectionDraw {
+  0% { stroke-dashoffset: 300; opacity: 0; }
+  15% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+.connection-line {
+  stroke-dasharray: 300;
+  animation: connectionDraw 1.2s ease-out forwards;
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .ssg-page { padding: 50px 12px 30px; }
+  .vertex-label { font-size: 12px; }
+  .vertex-neuro { font-size: 9px; }
+  .nefs-label { font-size: 16px; }
+  .info-panel { padding: 24px 20px; }
+  .trap-btn { min-width: 68px; padding: 10px 12px 8px; }
+  .trap-icon { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="ssg-page">
+  <h1 class="ssg-title">ŞŞG Üçgeni</h1>
+  <p class="ssg-subtitle">İnsan davranışını şekillendiren üç temel dürtü: Şehvet, Şöhret ve Gadab. Her biri farklı bir nörotransmitter tarafından yönetilir.</p>
+
+  <!-- Triangle -->
+  <div class="triangle-wrap" id="triangleWrap">
+    <svg class="triangle-svg" viewBox="0 0 600 560" id="triangleSvg">
+      <defs>
+        <!-- Gradients for edges -->
+        <linearGradient id="grad-amber-purple" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#a855f7" stop-opacity="0.7"/>
+        </linearGradient>
+        <linearGradient id="grad-purple-red" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0.7"/>
+        </linearGradient>
+        <linearGradient id="grad-red-amber" x1="100%" y1="0%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#ef4444" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.7"/>
+        </linearGradient>
+
+        <!-- Glow filters -->
+        <filter id="glowAmber" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feFlood flood-color="#f59e0b" flood-opacity="0.6"/>
+          <feComposite in2="blur" operator="in"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feFlood flood-color="#a855f7" flood-opacity="0.6"/>
+          <feComposite in2="blur" operator="in"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="glowRed" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feFlood flood-color="#ef4444" flood-opacity="0.6"/>
+          <feComposite in2="blur" operator="in"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+
+        <!-- Subtle inner triangle fill -->
+        <linearGradient id="triFill" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.03"/>
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="0.04"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0.03"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Triangle vertices: top-center, bottom-left, bottom-right -->
+      <!-- Sehvet=top(300,65), Sohret=bottom-left(95,480), Gadab=bottom-right(505,480) -->
+
+      <!-- Triangle fill -->
+      <polygon points="300,80 95,480 505,480" fill="url(#triFill)" stroke="none"/>
+
+      <!-- Edges with pulse animation -->
+      <line x1="300" y1="80" x2="95" y2="480" stroke="url(#grad-amber-purple)" stroke-width="1.8" class="edge-pulse" opacity="0.6"/>
+      <line x1="95" y1="480" x2="505" y2="480" stroke="url(#grad-red-amber)" stroke-width="1.8" class="edge-pulse" style="animation-delay:-0.7s" opacity="0.6"/>
+      <line x1="505" y1="480" x2="300" y2="80" stroke="url(#grad-purple-red)" stroke-width="1.8" class="edge-pulse" style="animation-delay:-1.4s" opacity="0.6"/>
+
+      <!-- Nefs label at center -->
+      <text x="300" y="355" class="nefs-label">NEFS</text>
+
+      <!-- Vertex: Sehvet (top) -->
+      <g class="vertex-group" data-vertex="sehvet" id="vertexSehvet">
+        <circle cx="300" cy="80" r="44" fill="rgba(245,158,11,0.08)" stroke="#f59e0b" stroke-width="1.5" class="vertex-ring"/>
+        <circle cx="300" cy="80" r="30" fill="rgba(245,158,11,0.15)" stroke="#f59e0b" stroke-width="2"/>
+        <text x="300" y="72" text-anchor="middle" font-size="28" class="vertex-icon" fill="#f59e0b">🔥</text>
+        <text x="300" y="30" class="vertex-label" fill="#f59e0b">ŞEHVET</text>
+        <text x="300" y="140" class="vertex-neuro">Dopamin</text>
+      </g>
+
+      <!-- Vertex: Sohret (bottom-left) -->
+      <g class="vertex-group" data-vertex="sohret" id="vertexSohret">
+        <circle cx="95" cy="480" r="44" fill="rgba(168,85,247,0.08)" stroke="#a855f7" stroke-width="1.5" class="vertex-ring"/>
+        <circle cx="95" cy="480" r="30" fill="rgba(168,85,247,0.15)" stroke="#a855f7" stroke-width="2"/>
+        <text x="95" y="472" text-anchor="middle" font-size="28" class="vertex-icon" fill="#a855f7">👑</text>
+        <text x="95" y="540" class="vertex-label" fill="#a855f7">ŞÖHRET</text>
+        <text x="95" y="556" class="vertex-neuro">Serotonin</text>
+      </g>
+
+      <!-- Vertex: Gadab (bottom-right) -->
+      <g class="vertex-group" data-vertex="gadab" id="vertexGadab">
+        <circle cx="505" cy="480" r="44" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1.5" class="vertex-ring"/>
+        <circle cx="505" cy="480" r="30" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="2"/>
+        <text x="505" y="472" text-anchor="middle" font-size="28" class="vertex-icon" fill="#ef4444">⚡</text>
+        <text x="505" y="540" class="vertex-label" fill="#ef4444">GADAB</text>
+        <text x="505" y="556" class="vertex-neuro">Kortizol</text>
+      </g>
+
+      <!-- Animated particle on edges (orbiting dots) -->
+      <circle r="3" fill="#f59e0b" opacity="0.8">
+        <animateMotion dur="4s" repeatCount="indefinite" path="M300,80 L95,480"/>
+      </circle>
+      <circle r="3" fill="#a855f7" opacity="0.8">
+        <animateMotion dur="4s" repeatCount="indefinite" path="M95,480 L505,480"/>
+      </circle>
+      <circle r="3" fill="#ef4444" opacity="0.8">
+        <animateMotion dur="4s" repeatCount="indefinite" path="M505,480 L300,80"/>
+      </circle>
+
+      <!-- Connection lines from traps (drawn dynamically) -->
+      <g id="connectionGroup"></g>
+    </svg>
+  </div>
+
+  <!-- Modern Tuzaklar -->
+  <div class="traps-section">
+    <div class="traps-heading">Modern Tuzaklar</div>
+    <div class="traps-grid" id="trapsGrid">
+      <!-- Sehvet traps -->
+      <button class="trap-btn" data-target="sehvet" data-name="Fast Food">
+        <span class="trap-icon">🍔</span>
+        <span class="trap-label">Fast Food</span>
+      </button>
+      <button class="trap-btn" data-target="sehvet" data-name="Oyunlar">
+        <span class="trap-icon">🎮</span>
+        <span class="trap-label">Oyunlar</span>
+      </button>
+      <button class="trap-btn" data-target="sehvet" data-name="Alışveriş">
+        <span class="trap-icon">💰</span>
+        <span class="trap-label">Alışveriş</span>
+      </button>
+      <button class="trap-btn" data-target="sehvet" data-name="Şeker">
+        <span class="trap-icon">🍬</span>
+        <span class="trap-label">Şeker</span>
+      </button>
+      <!-- Sohret traps -->
+      <button class="trap-btn" data-target="sohret" data-name="Sosyal Medya">
+        <span class="trap-icon">📱</span>
+        <span class="trap-label">Sosyal Medya</span>
+      </button>
+      <button class="trap-btn" data-target="sohret" data-name="Beğeni">
+        <span class="trap-icon">❤️</span>
+        <span class="trap-label">Beğeni</span>
+      </button>
+      <button class="trap-btn" data-target="sohret" data-name="Moda">
+        <span class="trap-icon">👗</span>
+        <span class="trap-label">Moda</span>
+      </button>
+      <button class="trap-btn" data-target="sohret" data-name="Selfie">
+        <span class="trap-icon">🤳</span>
+        <span class="trap-label">Selfie</span>
+      </button>
+      <!-- Gadab traps -->
+      <button class="trap-btn" data-target="gadab" data-name="Trolleme">
+        <span class="trap-icon">🤬</span>
+        <span class="trap-label">Trolleme</span>
+      </button>
+      <button class="trap-btn" data-target="gadab" data-name="Haberler">
+        <span class="trap-icon">📺</span>
+        <span class="trap-label">Haberler</span>
+      </button>
+      <button class="trap-btn" data-target="gadab" data-name="Road Rage">
+        <span class="trap-icon">🚗</span>
+        <span class="trap-label">Trafik Öfke</span>
+      </button>
+      <button class="trap-btn" data-target="gadab" data-name="Tartışma">
+        <span class="trap-icon">💢</span>
+        <span class="trap-label">Tartışma</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="ssg-legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span> Şehvet — Dopamin</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#a855f7"></span> Şöhret — Serotonin</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#ef4444"></span> Gadab — Kortizol</div>
+  </div>
+</div>
+
+<!-- Info Panel -->
+<div class="info-panel-overlay" id="panelOverlay"></div>
+<div class="info-panel" id="infoPanel">
+  <button class="info-panel-close" id="panelClose">&times;</button>
+  <div class="info-panel-icon" id="panelIcon"></div>
+  <div class="info-panel-title" id="panelTitle"></div>
+  <div class="info-panel-neuro" id="panelNeuro"></div>
+  <div class="info-panel-desc" id="panelDesc"></div>
+  <div class="info-panel-traps-title">Modern Tuzaklar</div>
+  <div class="info-panel-traps" id="panelTraps"></div>
+</div>
+
+<script src="/noroterbiye/js/common.js"></script>
+<script>
+NT.renderNav();
+NT.renderFooter();
+
+// ── Data ──
+const vertexData = {
+  sehvet: {
+    icon: '🔥',
+    title: 'Şehvet',
+    subtitle: 'Haz ve Arzu Dürtüsü',
+    neuro: 'Nörotransmitter: Dopamin',
+    color: '#f59e0b',
+    colorClass: 'amber',
+    cx: 300, cy: 80,
+    desc: 'Haz peşinde koşma dürtüsü. Yeme, içme, cinsellik, maddi istek ve her türlü bedensel zevk bu dürtünün kontrolündedir. Beyin bu davranışları dopamin salgılayarak ödüllendirir ve tekrarını ister. Modern dünyada bu dürtü, sonsuz uyaranla karşılaşarak kontrolden çıkmaya çok müsaittir.',
+    traps: [
+      { icon: '🍔', label: 'Fast Food' },
+      { icon: '🍬', label: 'Şeker' },
+      { icon: '🎮', label: 'Oyunlar' },
+      { icon: '💰', label: 'Alışveriş' },
+      { icon: '📺', label: 'Binge-watch' },
+      { icon: '🎰', label: 'Kumar' },
+    ]
+  },
+  sohret: {
+    icon: '👑',
+    title: 'Şöhret',
+    subtitle: 'Statü ve Ego Dürtüsü',
+    neuro: 'Nörotransmitter: Serotonin',
+    color: '#a855f7',
+    colorClass: 'purple',
+    cx: 95, cy: 480,
+    desc: 'Görünür olma, beğenilme ve statü kazanma dürtüsü. İnsanın toplum içinde değerli hissetme ihtiyacı bu dürtüyle karşılanır. Serotonin, sosyal hiyerarşide üst sıralarda hissedildiğinde salgılanır. Sosyal medya çağında bu dürtü, dijital onay mekanizmalarıyla sürekli tetiklenmektedir.',
+    traps: [
+      { icon: '📱', label: 'Sosyal Medya' },
+      { icon: '❤️', label: 'Beğeni' },
+      { icon: '👗', label: 'Moda' },
+      { icon: '🤳', label: 'Selfie' },
+      { icon: '🏆', label: 'Takipçi' },
+      { icon: '💎', label: 'Marka' },
+    ]
+  },
+  gadab: {
+    icon: '⚡',
+    title: 'Gadab',
+    subtitle: 'Öfke ve Savunma Dürtüsü',
+    neuro: 'Nörotransmitter: Kortizol (Stres Hormonu)',
+    color: '#ef4444',
+    colorClass: 'red',
+    cx: 505, cy: 480,
+    desc: 'Öfke, stres, kavga ve rekabet dürtüsü. Tehdit algılandığında savaş-ya-da-kaç tepkisi olarak devreye girer. Kortizol salgılanır, kan basıncı yükselir, mantık devre dışı kalır. Modern dünyada fiziksel tehdit azalmış olsa da bu dürtü, haberlerdeki kışkırtıcı içerikler ve sosyal medya tartışmalarıyla sürekli aktif tutulmaktadır.',
+    traps: [
+      { icon: '🤬', label: 'Trolleme' },
+      { icon: '📺', label: 'Haberler' },
+      { icon: '🚗', label: 'Trafik Öfke' },
+      { icon: '💢', label: 'Tartışma' },
+      { icon: '⚔️', label: 'Rekabet' },
+      { icon: '😤', label: 'Dedikodu' },
+    ]
+  }
+};
+
+// ── Panel ──
+const panel = document.getElementById('infoPanel');
+const overlay = document.getElementById('panelOverlay');
+const panelClose = document.getElementById('panelClose');
+
+function openPanel(key) {
+  const d = vertexData[key];
+  document.getElementById('panelIcon').textContent = d.icon;
+  document.getElementById('panelTitle').textContent = d.title;
+  document.getElementById('panelTitle').style.color = d.color;
+  document.getElementById('panelNeuro').textContent = d.neuro;
+  document.getElementById('panelDesc').textContent = d.desc;
+
+  const trapsEl = document.getElementById('panelTraps');
+  trapsEl.innerHTML = d.traps.map(t =>
+    `<span class="info-panel-trap" style="border-color:${d.color}30">${t.icon} ${t.label}</span>`
+  ).join('');
+
+  panel.classList.add('open');
+  overlay.classList.add('open');
+}
+
+function closePanel() {
+  panel.classList.remove('open');
+  overlay.classList.remove('open');
+  clearActiveTraps();
+  clearVertexGlow();
+}
+
+panelClose.addEventListener('click', closePanel);
+overlay.addEventListener('click', closePanel);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePanel(); });
+
+// ── Vertex clicks ──
+document.querySelectorAll('.vertex-group').forEach(g => {
+  g.addEventListener('click', () => {
+    const key = g.dataset.vertex;
+    highlightVertex(key);
+    openPanel(key);
+  });
+});
+
+function highlightVertex(key) {
+  clearVertexGlow();
+  const d = vertexData[key];
+  const el = document.getElementById('vertex' + key.charAt(0).toUpperCase() + key.slice(1));
+  if (el) el.setAttribute('filter', 'url(#glow' + d.colorClass.charAt(0).toUpperCase() + d.colorClass.slice(1) + ')');
+}
+
+function clearVertexGlow() {
+  document.querySelectorAll('.vertex-group').forEach(g => g.removeAttribute('filter'));
+}
+
+// ── Trap buttons ──
+function clearActiveTraps() {
+  document.querySelectorAll('.trap-btn').forEach(b => {
+    b.classList.remove('active-amber', 'active-purple', 'active-red');
+  });
+  // Clear connection lines
+  document.getElementById('connectionGroup').innerHTML = '';
+}
+
+document.querySelectorAll('.trap-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    const d = vertexData[target];
+
+    clearActiveTraps();
+    btn.classList.add('active-' + d.colorClass);
+    highlightVertex(target);
+    openPanel(target);
+
+    // Draw animated connection line from button center to vertex
+    drawConnection(btn, d);
+  });
+});
+
+function drawConnection(btn, d) {
+  const svg = document.getElementById('triangleSvg');
+  const group = document.getElementById('connectionGroup');
+  group.innerHTML = '';
+
+  // Get button center in SVG coordinates
+  const wrap = document.getElementById('triangleWrap');
+  const wrapRect = wrap.getBoundingClientRect();
+  const btnRect = btn.getBoundingClientRect();
+
+  const svgWidth = 600;
+  const svgHeight = 560;
+
+  const scaleX = svgWidth / wrapRect.width;
+  const scaleY = svgHeight / wrapRect.height;
+
+  const bx = (btnRect.left + btnRect.width / 2 - wrapRect.left) * scaleX;
+  const by = (btnRect.top + btnRect.height / 2 - wrapRect.top) * scaleY;
+
+  const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+  line.setAttribute('x1', bx);
+  line.setAttribute('y1', by);
+  line.setAttribute('x2', d.cx);
+  line.setAttribute('y2', d.cy);
+  line.setAttribute('stroke', d.color);
+  line.setAttribute('stroke-width', '2');
+  line.setAttribute('stroke-dasharray', '300');
+  line.setAttribute('opacity', '0.7');
+  line.classList.add('connection-line');
+  group.appendChild(line);
+
+  // Particle along the line
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('r', '4');
+  circle.setAttribute('fill', d.color);
+  circle.setAttribute('opacity', '0.9');
+  const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+  anim.setAttribute('dur', '1s');
+  anim.setAttribute('repeatCount', '1');
+  anim.setAttribute('fill', 'freeze');
+  anim.setAttribute('path', `M${bx},${by} L${d.cx},${d.cy}`);
+  circle.appendChild(anim);
+  group.appendChild(circle);
+
+  // Clean up after animation
+  setTimeout(() => { group.innerHTML = ''; }, 1500);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alışkanlık Döngüsü — NöroTerbiye</title>
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    /* ── Page Layout ── */
+    .loop-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--space-8) var(--space-4);
+      padding-top: 100px;
+    }
+
+    .loop-header {
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+
+    .loop-title {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #f59e0b, #a855f7, #ef4444, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--space-2);
+      line-height: 1.2;
+    }
+
+    .loop-subtitle {
+      color: var(--text-secondary);
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      font-style: italic;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── SVG Loop Container ── */
+    .loop-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      aspect-ratio: 1;
+      margin: 0 auto var(--space-10);
+    }
+
+    .loop-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    /* ── Nodes ── */
+    .node-group {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .node-group:hover .node-circle {
+      filter: brightness(1.3);
+    }
+
+    .node-group:hover {
+      transform: scale(1.08);
+    }
+
+    .node-circle {
+      transition: filter 0.3s ease, stroke-width 0.3s ease;
+    }
+
+    .node-icon {
+      font-size: 28px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .node-label {
+      font-size: 14px;
+      font-weight: 700;
+      fill: var(--text);
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    .node-sublabel {
+      font-size: 10px;
+      fill: var(--text-secondary);
+      text-anchor: middle;
+      pointer-events: none;
+    }
+
+    /* Active node */
+    .node-group.active .node-circle {
+      stroke-width: 4;
+      filter: brightness(1.4) drop-shadow(0 0 20px currentColor);
+    }
+
+    /* ── Center Text ── */
+    .center-text {
+      font-size: 18px;
+      font-weight: 800;
+      fill: var(--text-secondary);
+      text-anchor: middle;
+      letter-spacing: 4px;
+      opacity: 0.5;
+    }
+
+    @keyframes centerPulse {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 0.65; }
+    }
+
+    .center-text {
+      animation: centerPulse 3s ease-in-out infinite;
+    }
+
+    /* ── Info Panel ── */
+    .info-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      padding: var(--space-5);
+      background: rgba(15, 15, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .info-panel.visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .info-panel-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .info-panel-desc {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-3);
+    }
+
+    .info-panel-brain {
+      font-size: 0.8rem;
+      line-height: 1.5;
+      padding: var(--space-3);
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-md);
+      border-left: 3px solid;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .info-panel-brain::before {
+      content: '🧠 ';
+    }
+
+    .info-panel-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    /* ── Examples Section ── */
+    .examples-section {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .examples-title {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      text-align: center;
+      color: var(--text);
+      margin-bottom: var(--space-6);
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-4);
+    }
+
+    .example-card {
+      position: relative;
+      padding: var(--space-5);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .example-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .example-card:hover {
+      border-color: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+
+    .example-card:hover::before {
+      opacity: 1;
+    }
+
+    .example-card.active {
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 0 30px rgba(99,102,241,0.15);
+    }
+
+    .example-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .example-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: var(--space-3);
+    }
+
+    .example-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .example-step {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .example-step-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* ── Animation step text on nodes ── */
+    .step-text {
+      font-size: 11px;
+      fill: var(--text);
+      text-anchor: middle;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+      font-weight: 600;
+    }
+
+    .step-text.visible {
+      opacity: 1;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .loop-container {
+        max-width: 340px;
+      }
+      .info-panel {
+        width: 220px;
+        padding: var(--space-4);
+      }
+      .node-icon {
+        font-size: 22px;
+      }
+      .node-label {
+        font-size: 12px;
+      }
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <main class="loop-page">
+    <header class="loop-header">
+      <h1 class="loop-title">Alışkanlık Döngüsü</h1>
+      <p class="loop-subtitle">Her alışkanlık dört adımda oluşur — tetik, istek, davranış, ödül. Döngüyü anlamak onu kırmanın ilk adımıdır.</p>
+    </header>
+
+    <div class="loop-container" id="loopContainer">
+      <svg class="loop-svg" viewBox="0 0 500 500" id="loopSvg">
+        <defs>
+          <!-- Glow filters for each node -->
+          <filter id="glowAmber" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#f59e0b" flood-opacity="0.4"/>
+            <feComposite in2="blur" operator="in"/>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#a855f7" flood-opacity="0.4"/>
+            <feComposite in2="blur" operator="in"/>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glowRed" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#ef4444" flood-opacity="0.4"/>
+            <feComposite in2="blur" operator="in"/>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feFlood flood-color="#10b981" flood-opacity="0.4"/>
+            <feComposite in2="blur" operator="in"/>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+
+          <!-- Arrow marker -->
+          <marker id="arrowMarker" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L8,3 L0,6" fill="rgba(255,255,255,0.25)" />
+          </marker>
+
+          <!-- Gradient for the loop path -->
+          <linearGradient id="loopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.5"/>
+            <stop offset="25%" stop-color="#a855f7" stop-opacity="0.5"/>
+            <stop offset="50%" stop-color="#ef4444" stop-opacity="0.5"/>
+            <stop offset="75%" stop-color="#10b981" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.5"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Circular path (arcs between nodes) -->
+        <circle cx="250" cy="250" r="150" fill="none" stroke="url(#loopGrad)" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.4" />
+
+        <!-- Animated traveling particle -->
+        <circle r="5" fill="#fff" opacity="0.8" id="travelParticle">
+          <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#orbitPath"/>
+          </animateMotion>
+        </circle>
+        <circle r="10" fill="#fff" opacity="0.2" id="travelGlow">
+          <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#orbitPath"/>
+          </animateMotion>
+        </circle>
+
+        <!-- Hidden path for motion -->
+        <path id="orbitPath" d="M250,100 A150,150 0 0,1 400,250 A150,150 0 0,1 250,400 A150,150 0 0,1 100,250 A150,150 0 0,1 250,100 Z" fill="none" stroke="none" />
+
+        <!-- Directional arrows on the path -->
+        <path d="M310,110 A150,150 0 0,1 395,200" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2" marker-end="url(#arrowMarker)"/>
+        <path d="M395,310 A150,150 0 0,1 310,395" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2" marker-end="url(#arrowMarker)"/>
+        <path d="M190,395 A150,150 0 0,1 108,310" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2" marker-end="url(#arrowMarker)"/>
+        <path d="M108,190 A150,150 0 0,1 190,108" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="2" marker-end="url(#arrowMarker)"/>
+
+        <!-- Pulse ring animation -->
+        <circle cx="250" cy="250" r="150" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1">
+          <animate attributeName="r" values="148;158;148" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.08;0.02;0.08" dur="3s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- Center text -->
+        <text x="250" y="246" class="center-text">DÖNGÜ</text>
+        <text x="250" y="266" font-size="10" fill="var(--text-secondary)" text-anchor="middle" opacity="0.3" font-style="italic">Habit Loop</text>
+
+        <!-- NODE 1: Tetik (12 o'clock = top) -->
+        <g class="node-group" data-node="tetik" tabindex="0" role="button" aria-label="Tetik">
+          <circle cx="250" cy="100" r="38" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="2.5" class="node-circle" filter="url(#glowAmber)"/>
+          <text x="250" y="107" class="node-icon" text-anchor="middle" dominant-baseline="central" style="font-size:26px">&#9889;</text>
+          <text x="250" y="56" class="node-label" style="fill:#f59e0b">Tetik</text>
+          <text x="250" y="70" class="node-sublabel">Trigger / Cue</text>
+          <!-- Step text for example animation -->
+          <text x="250" y="152" class="step-text" data-step="tetik" style="fill:#f59e0b"></text>
+        </g>
+
+        <!-- NODE 2: İstek (3 o'clock = right) -->
+        <g class="node-group" data-node="istek" tabindex="0" role="button" aria-label="İstek">
+          <circle cx="400" cy="250" r="38" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2.5" class="node-circle" filter="url(#glowPurple)"/>
+          <text x="400" y="257" class="node-icon" text-anchor="middle" dominant-baseline="central" style="font-size:26px">&#129522;</text>
+          <text x="400" y="206" class="node-label" style="fill:#a855f7">İstek</text>
+          <text x="400" y="220" class="node-sublabel">Craving</text>
+          <text x="400" y="302" class="step-text" data-step="istek" style="fill:#a855f7"></text>
+        </g>
+
+        <!-- NODE 3: Davranış (6 o'clock = bottom) -->
+        <g class="node-group" data-node="davranis" tabindex="0" role="button" aria-label="Davranış">
+          <circle cx="250" cy="400" r="38" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2.5" class="node-circle" filter="url(#glowRed)"/>
+          <text x="250" y="407" class="node-icon" text-anchor="middle" dominant-baseline="central" style="font-size:26px">&#127916;</text>
+          <text x="250" y="450" class="node-label" style="fill:#ef4444">Davranış</text>
+          <text x="250" y="464" class="node-sublabel">Response</text>
+          <text x="250" y="355" class="step-text" data-step="davranis" style="fill:#ef4444"></text>
+        </g>
+
+        <!-- NODE 4: Ödül (9 o'clock = left) -->
+        <g class="node-group" data-node="odul" tabindex="0" role="button" aria-label="Ödül">
+          <circle cx="100" cy="250" r="38" fill="rgba(16,185,129,0.12)" stroke="#10b981" stroke-width="2.5" class="node-circle" filter="url(#glowGreen)"/>
+          <text x="100" y="257" class="node-icon" text-anchor="middle" dominant-baseline="central" style="font-size:26px">&#127873;</text>
+          <text x="100" y="206" class="node-label" style="fill:#10b981">Ödül</text>
+          <text x="100" y="220" class="node-sublabel">Reward</text>
+          <text x="100" y="302" class="step-text" data-step="odul" style="fill:#10b981"></text>
+        </g>
+      </svg>
+
+      <!-- Info Panel -->
+      <div class="info-panel" id="infoPanel">
+        <button class="info-panel-close" id="infoPanelClose" aria-label="Kapat">&times;</button>
+        <div class="info-panel-title" id="infoPanelTitle"></div>
+        <div class="info-panel-desc" id="infoPanelDesc"></div>
+        <div class="info-panel-brain" id="infoPanelBrain"></div>
+      </div>
+    </div>
+
+    <!-- Examples Section -->
+    <section class="examples-section">
+      <h2 class="examples-title">Günlük Örnekler</h2>
+      <div class="examples-grid" id="examplesGrid"></div>
+    </section>
+  </main>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script>
+    NT.renderNav();
+    NT.renderFooter();
+
+    // ── Data ──
+    const stages = {
+      tetik: {
+        title: '⚡ Tetik',
+        color: '#f59e0b',
+        desc: 'Bir uyaran beyni harekete geçirir — bildirim sesi, stres, can sıkıntısı.',
+        brain: 'Bazal ganglionlar tetik algılar'
+      },
+      istek: {
+        title: '🧲 İstek',
+        color: '#a855f7',
+        desc: 'Beyin ödül bekler — dopamin yükselir, "şunu yapmalıyım" hissi başlar.',
+        brain: 'Nucleus accumbens dopamin sinyali verir'
+      },
+      davranis: {
+        title: '🎬 Davranış',
+        color: '#ef4444',
+        desc: 'Eylem gerçekleşir — telefonu açarsın, atıştırırsın, sosyal medyaya girersin.',
+        brain: 'Motor korteks devreye girer'
+      },
+      odul: {
+        title: '🎁 Ödül',
+        color: '#10b981',
+        desc: 'Beyin tatmin olur — kısa süreli haz, döngü pekişir.',
+        brain: 'Opioid sistemi haz verir, hipokampüs kaydeder'
+      }
+    };
+
+    const examples = [
+      {
+        icon: '📱',
+        name: 'Sosyal Medya',
+        steps: {
+          tetik: 'Bildirim sesi',
+          istek: '"Kim yazmış?"',
+          davranis: 'Telefonu aç',
+          odul: 'Beğeni dopamini'
+        }
+      },
+      {
+        icon: '🍫',
+        name: 'Atıştırma',
+        steps: {
+          tetik: 'Stres',
+          istek: '"Tatlı bir şey yesem"',
+          davranis: 'Çikolata ye',
+          odul: 'Şeker dopamini'
+        }
+      },
+      {
+        icon: '🎮',
+        name: 'Oyun',
+        steps: {
+          tetik: 'Can sıkıntısı',
+          istek: '"Bir el oynasam"',
+          davranis: 'Oyunu aç',
+          odul: 'Başarı hissi'
+        }
+      },
+      {
+        icon: '📺',
+        name: 'Dizi',
+        steps: {
+          tetik: 'Yorgunluk',
+          istek: '"Bir bölüm izlesem"',
+          davranis: 'Netflix aç',
+          odul: 'Kaçış hissi'
+        }
+      }
+    ];
+
+    const stageOrder = ['tetik', 'istek', 'davranis', 'odul'];
+    const stageColors = { tetik: '#f59e0b', istek: '#a855f7', davranis: '#ef4444', odul: '#10b981' };
+
+    // ── Info Panel ──
+    const infoPanel = document.getElementById('infoPanel');
+    const infoPanelTitle = document.getElementById('infoPanelTitle');
+    const infoPanelDesc = document.getElementById('infoPanelDesc');
+    const infoPanelBrain = document.getElementById('infoPanelBrain');
+    const infoPanelClose = document.getElementById('infoPanelClose');
+
+    let activeNode = null;
+
+    function showInfo(key) {
+      const s = stages[key];
+      if (activeNode === key) {
+        hideInfo();
+        return;
+      }
+      activeNode = key;
+
+      // Update active class
+      document.querySelectorAll('.node-group').forEach(g => g.classList.remove('active'));
+      document.querySelector(`[data-node="${key}"]`).classList.add('active');
+
+      infoPanelTitle.innerHTML = s.title;
+      infoPanelTitle.style.color = s.color;
+      infoPanelDesc.textContent = s.desc;
+      infoPanelBrain.textContent = s.brain;
+      infoPanelBrain.style.borderLeftColor = s.color;
+      infoPanel.classList.add('visible');
+    }
+
+    function hideInfo() {
+      activeNode = null;
+      infoPanel.classList.remove('visible');
+      document.querySelectorAll('.node-group').forEach(g => g.classList.remove('active'));
+    }
+
+    document.querySelectorAll('.node-group').forEach(g => {
+      g.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showInfo(g.dataset.node);
+      });
+      g.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          showInfo(g.dataset.node);
+        }
+      });
+    });
+
+    infoPanelClose.addEventListener('click', hideInfo);
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.node-group') && !e.target.closest('.info-panel')) {
+        hideInfo();
+      }
+    });
+
+    // ── Build Example Cards ──
+    const grid = document.getElementById('examplesGrid');
+
+    examples.forEach((ex, idx) => {
+      const card = document.createElement('div');
+      card.className = 'example-card';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.dataset.index = idx;
+
+      let stepsHtml = '';
+      stageOrder.forEach(key => {
+        stepsHtml += `<div class="example-step">
+          <span class="example-step-dot" style="background:${stageColors[key]}"></span>
+          <span>${ex.steps[key]}</span>
+        </div>`;
+      });
+
+      card.innerHTML = `
+        <div class="example-icon">${ex.icon}</div>
+        <div class="example-name">${ex.name}</div>
+        <div class="example-steps">${stepsHtml}</div>
+      `;
+
+      card.addEventListener('click', () => animateExample(idx));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          animateExample(idx);
+        }
+      });
+
+      grid.appendChild(card);
+    });
+
+    // ── Animate Example through loop ──
+    let animating = false;
+
+    function animateExample(idx) {
+      if (animating) return;
+      animating = true;
+
+      const ex = examples[idx];
+
+      // Mark card active
+      document.querySelectorAll('.example-card').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.example-card')[idx].classList.add('active');
+
+      // Hide info panel
+      hideInfo();
+
+      // Clear previous step texts
+      document.querySelectorAll('.step-text').forEach(t => {
+        t.textContent = '';
+        t.classList.remove('visible');
+      });
+
+      // Animate each stage sequentially
+      let i = 0;
+      function nextStage() {
+        if (i >= stageOrder.length) {
+          // After all stages, pause then reset
+          setTimeout(() => {
+            document.querySelectorAll('.node-group').forEach(g => g.classList.remove('active'));
+            document.querySelectorAll('.step-text').forEach(t => {
+              t.classList.remove('visible');
+              setTimeout(() => { t.textContent = ''; }, 400);
+            });
+            animating = false;
+          }, 1500);
+          return;
+        }
+
+        const key = stageOrder[i];
+        const nodeGroup = document.querySelector(`[data-node="${key}"]`);
+        const stepText = document.querySelector(`[data-step="${key}"]`);
+
+        // Activate node
+        nodeGroup.classList.add('active');
+
+        // Show step text
+        stepText.textContent = ex.steps[key];
+        requestAnimationFrame(() => {
+          stepText.classList.add('visible');
+        });
+
+        i++;
+        setTimeout(nextStage, 900);
+      }
+
+      // Deactivate all first
+      document.querySelectorAll('.node-group').forEach(g => g.classList.remove('active'));
+      nextStage();
+    }
+  </script>
+</body>
+</html>
