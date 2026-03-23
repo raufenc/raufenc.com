@@ -1,5 +1,4 @@
 {
-  "trailingSlash": true,
   "redirects": [
     {
       "source": "/:path*",
@@ -10,7 +9,15 @@
   ],
   "rewrites": [
     {
-      "source": "/iyilikakademi/:path*",
+      "source": "/iyilikakademi",
+      "destination": "/iyilikakademi/index.html"
+    },
+    {
+      "source": "/iyilikakademi/",
+      "destination": "/iyilikakademi/index.html"
+    },
+    {
+      "source": "/iyilikakademi/:path((?!assets/).*)",
       "destination": "/iyilikakademi/index.html"
     }
   ]
