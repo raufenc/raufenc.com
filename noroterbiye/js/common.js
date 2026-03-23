@@ -237,6 +237,28 @@ ${html}
   }
 };
 
+// Scroll Reveal (IntersectionObserver)
+// Only reveals elements that have .nt-reveal class in HTML — no auto-adding
+(function() {
+  function initReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    document.querySelectorAll('.nt-reveal').forEach(el => observer.observe(el));
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+})();
+
 // PWA: Service Worker + Manifest
 (function() {
   if (!document.querySelector('link[rel="manifest"]')) {

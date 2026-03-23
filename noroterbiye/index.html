@@ -20,17 +20,16 @@
   <!-- Hero -->
   <section class="nt-hero">
     <div class="nt-hero-glow"></div>
+    <div class="nt-hero-orb-1"></div>
+    <div class="nt-hero-orb-2"></div>
 
     <!-- Kitap Kapağı -->
-    <div class="nt-fade-in" style="margin-bottom:28px">
-      <img src="/images/noroterbiye.webp" alt="NöroTerbiye — Rauf Enç" width="200"
-           style="border-radius:var(--radius-md);box-shadow:0 16px 48px rgba(0,0,0,0.4);border:1px solid var(--border);transition:transform 0.4s ease,box-shadow 0.4s ease"
-           onmouseover="this.style.transform='translateY(-6px) rotate(-1deg)';this.style.boxShadow='0 24px 56px rgba(99,102,241,0.25)'"
-           onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.4)'" />
+    <div class="nt-fade-in nt-book-cover" style="margin-bottom:28px">
+      <img src="/images/noroterbiye.webp" alt="NöroTerbiye — Rauf Enç" width="200" />
     </div>
 
     <p class="nt-label nt-fade-in" style="margin-bottom:16px;animation-delay:0.1s">Rauf Enç — NöroTerbiye</p>
-    <h1 class="nt-title nt-fade-in" style="animation-delay:0.15s">
+    <h1 class="nt-title nt-title-gradient nt-fade-in" style="animation-delay:0.15s">
       İçindeki düşmanı tanımadan<br>onu terbiye etmek zor.
     </h1>
     <p class="nt-subtitle nt-fade-in" style="animation-delay:0.25s">
@@ -91,7 +90,7 @@
   </section>
 
   <!-- 60 Saniyede NöroTerbiye -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap nt-narrow">
       <h2 class="nt-section-title"><span class="nt-icon">⏱️</span> 60 Saniyede NöroTerbiye</h2>
       <div id="sixty-seconds" class="nt-card" style="padding:32px">
@@ -106,7 +105,7 @@
   </section>
 
   <!-- Günün Kavramı -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap nt-narrow">
       <h2 class="nt-section-title"><span class="nt-icon">💡</span> Günün Kavramı</h2>
       <div id="gunun-kavrami" class="nt-card" style="padding:28px"></div>
@@ -114,7 +113,7 @@
   </section>
 
   <!-- Popüler Testler -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">📋</span> Popüler Testler</h2>
       <div class="nt-grid nt-grid-3 nt-stagger" id="populer-testler"></div>
@@ -125,7 +124,7 @@
   </section>
 
   <!-- Kısa Bilgiler Önizleme -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">🃏</span> Kısa Kısa Bilgiler</h2>
       <div class="nt-grid nt-grid-3 nt-stagger" id="kisa-preview"></div>
@@ -136,7 +135,7 @@
   </section>
 
   <!-- Oyunlar Önizleme -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">🎮</span> Oyunlar</h2>
       <div class="nt-grid nt-grid-4 nt-stagger" id="oyun-preview"></div>
@@ -147,7 +146,7 @@
   </section>
 
   <!-- Araçlar Önizleme -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">🛠️</span> Uygulamalar & Araçlar</h2>
       <div class="nt-grid nt-grid-3 nt-stagger" id="arac-preview"></div>
@@ -158,24 +157,24 @@
   </section>
 
   <!-- Kitap Bandı -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap nt-narrow">
-      <div class="nt-card" style="text-align:center;padding:48px 32px;border-color:var(--nt-primary);border-width:1px">
-        <p class="nt-label" style="margin-bottom:12px">Rauf Enç</p>
-        <h2 style="font-size:1.6rem;font-weight:800;margin-bottom:12px">NöroTerbiye</h2>
-        <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:8px">İçindeki Düşmanı Dosta Çevirmek</p>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px">KTB Yayınları · 2. Baskı · 272 sayfa</p>
-        <p style="color:var(--text-secondary);font-size:0.9rem;max-width:500px;margin:0 auto 28px;line-height:1.6">
+      <div class="nt-promo">
+        <p class="nt-label" style="margin-bottom:12px;position:relative">Rauf Enç</p>
+        <h2 class="nt-title-gradient" style="font-size:1.6rem;font-weight:800;margin-bottom:12px;display:inline-block;position:relative">NöroTerbiye</h2>
+        <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:8px;position:relative">İçindeki Düşmanı Dosta Çevirmek</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;position:relative">KTB Yayınları · 2. Baskı · 272 sayfa</p>
+        <p style="color:var(--text-secondary);font-size:0.9rem;max-width:500px;margin:0 auto 28px;line-height:1.6;position:relative">
           Modern sinirbilim dili ile nefs terbiyesini birleştiren, biyolojiden modern tuzaklara,
           farklı nefslerden terbiye usullerine uzanan kapsamlı bir rehber.
         </p>
-        <a href="/noroterbiye/satin-al/" class="nt-btn nt-btn-primary">Satın Al</a>
+        <a href="/noroterbiye/satin-al/" class="nt-btn nt-btn-primary" style="position:relative">Satın Al</a>
       </div>
     </div>
   </section>
 
   <!-- Alt Navigasyon -->
-  <section class="nt-section">
+  <section class="nt-section nt-reveal">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">🗺️</span> Keşfet</h2>
       <div class="nt-grid nt-grid-4 nt-stagger">
