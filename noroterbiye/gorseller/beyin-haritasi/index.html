@@ -20,7 +20,7 @@
 
     .brain-header {
       text-align: center;
-      margin-bottom: var(--space-10);
+      margin-bottom: var(--space-8);
     }
 
     .brain-title {
@@ -31,108 +31,158 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: var(--space-2);
-      line-height: 1.2;
+      line-height: 1.3;
     }
 
     .brain-subtitle {
       color: var(--text-secondary);
       font-size: clamp(0.9rem, 2.5vw, 1.1rem);
       font-style: italic;
-      max-width: 500px;
+      max-width: 520px;
       margin: 0 auto;
+      line-height: 1.6;
     }
 
     /* ── Brain Container ── */
     .brain-container {
       position: relative;
       width: 100%;
-      max-width: 800px;
-      aspect-ratio: 4 / 3;
-      margin: 0 auto var(--space-12);
+      max-width: 820px;
+      margin: 0 auto var(--space-8);
     }
 
     .brain-svg {
       width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 0 40px rgba(99,102,241,0.15));
+      height: auto;
+      filter: drop-shadow(0 0 60px rgba(99,102,241,0.1));
     }
 
     /* ── Brain Outline ── */
-    .brain-outline {
-      fill: url(#brainGrad);
+    .brain-outline-main {
+      fill: url(#brainFill);
       stroke: url(#brainStroke);
-      stroke-width: 1.5;
-      opacity: 0.9;
-      filter: url(#brainGlow);
+      stroke-width: 2;
+      stroke-linejoin: round;
     }
 
-    .brain-detail {
+    .brain-outline-cerebellum {
+      fill: url(#cerebellumFill);
+      stroke: url(#brainStroke);
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+    }
+
+    .brain-outline-stem {
+      fill: url(#stemFill);
+      stroke: url(#brainStroke);
+      stroke-width: 1.5;
+      stroke-linejoin: round;
+    }
+
+    .sulcus {
       fill: none;
-      stroke: rgba(99,102,241,0.15);
+      stroke: rgba(99,102,241,0.1);
+      stroke-width: 1;
+      stroke-linecap: round;
+    }
+
+    .sulcus-deep {
+      stroke: rgba(99,102,241,0.16);
+      stroke-width: 1.2;
+    }
+
+    .cerebellum-line {
+      fill: none;
+      stroke: rgba(99,102,241,0.12);
       stroke-width: 0.8;
+      stroke-linecap: round;
+    }
+
+    .lobe-divider {
+      fill: none;
+      stroke: rgba(99,102,241,0.2);
+      stroke-width: 1.2;
+      stroke-dasharray: 6 4;
+      stroke-linecap: round;
     }
 
     /* ── Region Markers ── */
     .region-group {
       cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .region-group:hover {
-      transform: scale(1.08);
-    }
-
-    .region-dot {
-      transition: all 0.3s ease;
     }
 
     .region-dot-outer {
-      opacity: 0.2;
-      transition: opacity 0.4s ease, r 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .region-dot-core {
+      transition: all 0.3s ease;
+    }
+
+    .region-dot-center {
+      transition: all 0.3s ease;
     }
 
     .region-group:hover .region-dot-outer,
     .region-group.active .region-dot-outer {
-      opacity: 0.5;
-      animation: pulseRing 2s ease-in-out infinite;
+      opacity: 0.35;
+      animation: pulseGlow 2.5s ease-in-out infinite;
     }
 
-    .region-group:hover .region-dot,
-    .region-group.active .region-dot {
-      filter: url(#dotGlow);
+    .region-group:hover .region-dot-core,
+    .region-group.active .region-dot-core {
+      filter: url(#markerGlow);
     }
 
-    .region-label {
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ── Leader Lines ── */
+    .leader-line {
+      fill: none;
+      stroke-width: 1;
+      stroke-dasharray: 4 3;
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+
+    .region-group:hover .leader-line,
+    .region-group.active .leader-line {
+      opacity: 0.7;
+      stroke-dasharray: none;
+    }
+
+    /* ── Region Labels ── */
+    .region-label-bg {
+      fill: rgba(0,0,0,0.6);
+      rx: 4;
+      ry: 4;
+      transition: all 0.3s ease;
+    }
+
+    html.light .region-label-bg {
+      fill: rgba(255,255,255,0.8);
+    }
+
+    .region-label-text {
       font-family: var(--font-sans);
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 600;
       fill: var(--text);
       pointer-events: none;
-      opacity: 0.85;
-      text-anchor: middle;
-      transition: opacity 0.3s ease;
     }
 
-    .region-group:hover .region-label,
-    .region-group.active .region-label {
-      opacity: 1;
+    .region-group:hover .region-label-bg,
+    .region-group.active .region-label-bg {
+      fill: rgba(0,0,0,0.8);
     }
 
-    .region-connector {
-      stroke-width: 1;
-      stroke-dasharray: 3 3;
-      opacity: 0.4;
-      transition: opacity 0.3s ease;
-    }
-
-    .region-group:hover .region-connector,
-    .region-group.active .region-connector {
-      opacity: 0.8;
-    }
-
-    @keyframes pulseRing {
-      0%, 100% { opacity: 0.3; transform-origin: center; }
-      50% { opacity: 0.6; }
+    html.light .region-group:hover .region-label-bg,
+    html.light .region-group.active .region-label-bg {
+      fill: rgba(255,255,255,0.95);
     }
 
     /* ── Info Panel ── */
@@ -141,21 +191,21 @@
       bottom: -400px;
       left: 50%;
       transform: translateX(-50%);
-      width: min(500px, 92vw);
-      background: rgba(17,17,24,0.92);
-      backdrop-filter: blur(24px) saturate(1.4);
-      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      width: min(520px, 92vw);
+      background: rgba(15,15,25,0.94);
+      backdrop-filter: blur(28px) saturate(1.5);
+      -webkit-backdrop-filter: blur(28px) saturate(1.5);
       border: 1px solid var(--nt-glass-border);
       border-radius: var(--radius-lg);
       padding: var(--space-6) var(--space-8);
       z-index: 100;
-      transition: bottom 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.5), 0 0 80px rgba(99,102,241,0.08);
+      transition: bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 -10px 50px rgba(0,0,0,0.5), 0 0 80px rgba(99,102,241,0.06);
     }
 
     html.light .info-panel {
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 -8px 40px rgba(0,0,0,0.12), 0 0 60px rgba(99,102,241,0.06);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 -10px 50px rgba(0,0,0,0.1), 0 0 60px rgba(99,102,241,0.05);
     }
 
     .info-panel.visible {
@@ -182,33 +232,34 @@
       color: var(--text);
     }
 
-    .info-panel-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    .info-panel-header {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: var(--space-3);
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .info-panel-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
       flex-shrink: 0;
+      box-shadow: 0 0 12px currentColor;
     }
 
     .info-panel-name {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      margin-bottom: var(--space-1);
-      background: var(--nt-grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text);
     }
 
     .info-panel-func {
       color: var(--text-secondary);
       font-size: 0.92rem;
-      margin-bottom: var(--space-3);
-      line-height: 1.5;
+      margin-bottom: var(--space-4);
+      line-height: 1.6;
+      padding-left: var(--space-2);
+      border-left: 2px solid var(--border);
     }
 
     .info-panel-context {
@@ -217,7 +268,7 @@
       background: var(--nt-glass);
       border: 1px solid var(--nt-glass-border);
       border-radius: var(--radius-md);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       line-height: 1.65;
       color: var(--text);
       font-style: italic;
@@ -242,10 +293,9 @@
       padding: 3px 10px;
       border-radius: var(--radius-full);
       margin-top: var(--space-3);
-      opacity: 0.9;
     }
 
-    /* ── Region Legend ── */
+    /* ── Legend ── */
     .brain-legend {
       display: flex;
       flex-wrap: wrap;
@@ -263,7 +313,7 @@
       background: var(--nt-glass);
       border: 1px solid var(--nt-glass-border);
       border-radius: var(--radius-full);
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-secondary);
       cursor: pointer;
       transition: all var(--transition-fast);
@@ -287,22 +337,19 @@
       flex-shrink: 0;
     }
 
-    /* ── Ambient particles ── */
-    .brain-particle {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      border-radius: 50%;
-      background: rgba(99,102,241,0.3);
-      pointer-events: none;
-      animation: floatParticle 8s ease-in-out infinite;
+    /* ── Hint ── */
+    .brain-hint {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: var(--space-6);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
     }
 
-    @keyframes floatParticle {
-      0%, 100% { transform: translate(0,0); opacity: 0; }
-      20% { opacity: 0.6; }
-      80% { opacity: 0.4; }
-      100% { transform: translate(var(--dx), var(--dy)); opacity: 0; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 0.7; transform: translateY(0); }
     }
 
     /* ── Mobile ── */
@@ -311,28 +358,7 @@
       .info-panel { padding: var(--space-4) var(--space-5); }
       .brain-legend { gap: var(--space-2); }
       .legend-item { font-size: 0.72rem; padding: var(--space-1) var(--space-2); }
-      .region-label { font-size: 7px; }
-    }
-
-    /* ── Instruction hint ── */
-    .brain-hint {
-      text-align: center;
-      color: var(--muted2);
-      font-size: 0.85rem;
-      margin-bottom: var(--space-6);
-      animation: fadeInUp 1s ease 0.5s both;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── Synaptic connections ── */
-    .synapse-line {
-      stroke: rgba(99,102,241,0.06);
-      stroke-width: 0.7;
-      fill: none;
+      .region-label-text { font-size: 8px; }
     }
   </style>
 </head>
@@ -342,182 +368,243 @@
   <main class="brain-page">
     <header class="brain-header">
       <h1 class="brain-title">Beynin Haritası</h1>
-      <p class="brain-subtitle">Tıkla, keşfet — her bölge bir hikâye anlatır.</p>
+      <p class="brain-subtitle">Nefsin biyolojik temelleri — her bölge bir hikâye anlatır.</p>
     </header>
 
     <p class="brain-hint">Bir bölgeye tıkla veya dokun</p>
 
-    <div class="brain-container" id="brainContainer">
-      <svg class="brain-svg" viewBox="0 0 600 450" xmlns="http://www.w3.org/2000/svg">
+    <div class="brain-container">
+      <svg class="brain-svg" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Brain gradient fill -->
-          <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(99,102,241,0.12)"/>
-            <stop offset="50%" stop-color="rgba(6,182,212,0.08)"/>
-            <stop offset="100%" stop-color="rgba(168,85,247,0.10)"/>
-          </linearGradient>
+          <!-- Brain fill gradient (very subtle dark) -->
+          <radialGradient id="brainFill" cx="40%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="rgba(99,102,241,0.1)"/>
+            <stop offset="50%" stop-color="rgba(59,62,141,0.07)"/>
+            <stop offset="100%" stop-color="rgba(30,30,60,0.05)"/>
+          </radialGradient>
 
-          <!-- Brain stroke gradient -->
+          <radialGradient id="cerebellumFill" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="rgba(99,102,241,0.08)"/>
+            <stop offset="100%" stop-color="rgba(30,30,60,0.04)"/>
+          </radialGradient>
+
+          <radialGradient id="stemFill" cx="50%" cy="30%" r="70%">
+            <stop offset="0%" stop-color="rgba(99,102,241,0.06)"/>
+            <stop offset="100%" stop-color="rgba(30,30,60,0.03)"/>
+          </radialGradient>
+
+          <!-- Stroke gradient (indigo to cyan) -->
           <linearGradient id="brainStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(99,102,241,0.5)"/>
-            <stop offset="50%" stop-color="rgba(6,182,212,0.4)"/>
-            <stop offset="100%" stop-color="rgba(168,85,247,0.5)"/>
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="50%" stop-color="#06b6d4"/>
+            <stop offset="100%" stop-color="#818cf8"/>
           </linearGradient>
 
-          <!-- Glow filters -->
-          <filter id="brainGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
+          <!-- Marker glow -->
+          <filter id="markerGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="5" result="blur"/>
             <feComposite in="SourceGraphic" in2="blur" operator="over"/>
           </filter>
 
-          <filter id="dotGlow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="4" result="blur"/>
-            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          <!-- Outer glow for brain -->
+          <filter id="brainAmbient" x="-10%" y="-10%" width="120%" height="120%">
+            <feGaussianBlur stdDeviation="12" result="blur"/>
+            <feFlood flood-color="#6366f1" flood-opacity="0.08"/>
+            <feComposite in2="blur" operator="in" result="glow"/>
+            <feComposite in="SourceGraphic" in2="glow" operator="over"/>
           </filter>
-
-          <!-- Neuron-like pattern -->
-          <pattern id="neuronPattern" width="60" height="60" patternUnits="userSpaceOnUse">
-            <circle cx="30" cy="30" r="0.8" fill="rgba(99,102,241,0.15)"/>
-            <line x1="30" y1="30" x2="55" y2="15" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
-            <line x1="30" y1="30" x2="10" y2="50" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
-            <line x1="30" y1="30" x2="50" y2="48" stroke="rgba(99,102,241,0.06)" stroke-width="0.4"/>
-          </pattern>
         </defs>
 
-        <!-- Neuron background pattern -->
-        <rect width="600" height="450" fill="url(#neuronPattern)" opacity="0.4"/>
+        <!-- ═══════════════════════════════════════ -->
+        <!-- BRAIN SILHOUETTE — Sagittal (side) view -->
+        <!-- ═══════════════════════════════════════ -->
 
-        <!-- Brain silhouette (sagittal view — left side) -->
-        <!-- Main cerebrum outline -->
-        <path class="brain-outline" d="
-          M 160,310
-          C 130,300 100,280 85,250
-          C 70,220 65,190 70,160
-          C 75,130 85,100 105,80
-          C 125,60 155,45 190,38
-          C 225,31 265,30 300,33
-          C 335,36 370,42 400,55
-          C 430,68 455,85 470,110
-          C 485,135 490,165 485,195
-          C 480,225 468,248 450,265
-          C 440,275 435,282 430,290
-          C 425,300 418,310 405,318
-          C 390,328 370,332 350,330
-          C 340,328 332,322 325,315
-          C 320,310 315,308 310,310
-          C 300,315 288,325 275,330
-          C 260,335 245,332 230,325
-          C 215,318 200,315 190,312
+        <!-- Main cerebrum (realistic sagittal profile) -->
+        <!-- Front (forehead) is on the LEFT, back (occipital) is on the RIGHT -->
+        <path class="brain-outline-main" d="
+          M 155,290
+          C 140,275 120,258 108,235
+          C 95,210 88,185 86,162
+          C 84,140 86,118 95,98
+          C 105,78 120,62 142,50
+          C 158,42 178,36 200,32
+          C 222,28 248,27 275,28
+          C 302,29 328,32 352,37
+          C 375,42 396,50 415,62
+          C 432,73 448,88 460,106
+          C 472,124 480,144 484,166
+          C 488,188 486,208 480,226
+          C 474,244 464,258 450,268
+          C 438,278 428,284 420,290
+          C 412,296 406,300 400,305
+          C 392,312 382,316 370,318
+          C 358,320 348,318 340,314
+          C 332,310 326,304 320,298
+          C 314,292 306,288 296,286
+          C 286,284 274,284 262,286
+          C 248,288 234,292 222,296
+          C 208,300 194,300 180,296
+          C 168,292 160,290 155,290
           Z
+        " filter="url(#brainAmbient)"/>
+
+        <!-- Cerebellum (back-bottom, smaller rounded structure) -->
+        <path class="brain-outline-cerebellum" d="
+          M 400,305
+          C 408,312 418,320 430,328
+          C 442,336 454,342 462,350
+          C 470,358 474,368 472,378
+          C 470,388 462,396 450,400
+          C 438,404 424,404 410,400
+          C 396,396 384,388 374,378
+          C 366,368 360,356 356,344
+          C 352,332 350,322 350,318
         "/>
 
-        <!-- Cerebellum (back-bottom) -->
-        <path class="brain-outline" d="
-          M 405,318
-          C 420,325 440,335 452,345
-          C 460,352 462,362 458,372
-          C 454,382 442,388 428,390
-          C 414,392 398,388 385,380
-          C 375,372 365,360 358,348
-          C 352,336 350,330 350,330
+        <!-- Brain stem (descending from mid-bottom) -->
+        <path class="brain-outline-stem" d="
+          M 350,318
+          C 346,328 340,342 336,358
+          C 332,374 330,390 332,404
+          C 334,418 338,430 344,438
+          C 350,446 358,448 366,444
+          C 374,440 378,432 380,420
+          C 382,408 382,394 384,380
+          C 386,366 390,352 396,340
+          C 398,336 400,330 400,326
         "/>
 
-        <!-- Brain stem -->
-        <path class="brain-outline" d="
-          M 350,330
-          C 345,340 340,355 338,370
-          C 336,385 338,398 342,408
-          C 346,415 352,420 358,418
-          C 364,416 368,408 370,395
-          C 372,382 375,370 380,360
-          C 385,350 390,340 395,332
-        " style="fill: url(#brainGrad); stroke: url(#brainStroke); stroke-width: 1.2;"/>
+        <!-- ═══════════════════════ -->
+        <!-- SULCI (brain folds)    -->
+        <!-- ═══════════════════════ -->
 
-        <!-- Internal detail lines (sulci/folds) -->
-        <path class="brain-detail" d="M 140,200 C 170,170 210,155 260,150"/>
-        <path class="brain-detail" d="M 180,130 C 220,110 270,100 320,105"/>
-        <path class="brain-detail" d="M 250,60 C 280,80 310,95 340,100"/>
-        <path class="brain-detail" d="M 130,240 C 170,230 210,225 250,228"/>
-        <path class="brain-detail" d="M 350,120 C 390,140 420,170 440,200"/>
-        <path class="brain-detail" d="M 300,150 C 330,170 350,195 360,225"/>
-        <path class="brain-detail" d="M 200,180 C 230,200 260,210 290,215"/>
-        <path class="brain-detail" d="M 400,250 C 420,240 440,225 455,205"/>
+        <!-- Central sulcus (major divider between frontal & parietal) -->
+        <path class="sulcus sulcus-deep" d="M 310,50 C 305,80 298,120 295,160 C 292,190 290,220 288,248"/>
 
-        <!-- Synaptic connection lines between regions -->
-        <line class="synapse-line" x1="175" y1="115" x2="290" y2="95"/>
-        <line class="synapse-line" x1="290" y1="95" x2="300" y2="220"/>
-        <line class="synapse-line" x1="300" y1="220" x2="340" y2="255"/>
-        <line class="synapse-line" x1="340" y1="255" x2="355" y2="355"/>
-        <line class="synapse-line" x1="300" y1="220" x2="255" y2="205"/>
-        <line class="synapse-line" x1="175" y1="115" x2="255" y2="205"/>
-        <line class="synapse-line" x1="290" y1="95" x2="255" y2="205"/>
-        <path class="synapse-line" d="M 300,220 Q 270,260 225,250"/>
+        <!-- Lateral (Sylvian) fissure -->
+        <path class="sulcus sulcus-deep" d="M 200,230 C 230,222 260,218 290,220 C 320,222 345,228 365,240"/>
 
-        <!-- ═══ Region markers ═══ -->
+        <!-- Precentral sulcus -->
+        <path class="sulcus" d="M 270,55 C 268,85 264,115 260,148 C 258,170 256,195 255,215"/>
 
-        <!-- 1. Prefrontal Korteks (front-top) -->
+        <!-- Postcentral sulcus -->
+        <path class="sulcus" d="M 345,52 C 342,82 338,115 335,150 C 333,175 332,200 334,222"/>
+
+        <!-- Superior frontal sulcus -->
+        <path class="sulcus" d="M 135,125 C 160,115 188,108 215,105 C 238,103 258,104 270,108"/>
+
+        <!-- Inferior frontal sulcus -->
+        <path class="sulcus" d="M 128,180 C 155,172 182,167 210,165 C 232,164 252,166 268,172"/>
+
+        <!-- Frontal orbital folds -->
+        <path class="sulcus" d="M 115,220 C 138,212 162,208 186,210 C 205,212 220,216 232,224"/>
+
+        <!-- Intraparietal sulcus -->
+        <path class="sulcus" d="M 345,100 C 370,108 395,122 415,140 C 430,155 440,172 445,190"/>
+
+        <!-- Parieto-occipital sulcus -->
+        <path class="sulcus sulcus-deep" d="M 420,70 C 425,100 430,135 435,170 C 438,195 438,218 435,238"/>
+
+        <!-- Superior temporal sulcus -->
+        <path class="sulcus" d="M 218,260 C 248,255 278,253 308,256 C 335,258 358,264 375,272"/>
+
+        <!-- Calcarine sulcus (in occipital) -->
+        <path class="sulcus" d="M 450,200 C 460,210 468,222 472,238 C 474,250 472,260 466,268"/>
+
+        <!-- Minor cortical folds -->
+        <path class="sulcus" d="M 150,150 C 172,144 195,140 218,140"/>
+        <path class="sulcus" d="M 380,85 C 398,95 412,108 422,124"/>
+        <path class="sulcus" d="M 160,250 C 178,244 196,240 214,240"/>
+        <path class="sulcus" d="M 442,150 C 458,162 468,178 474,196"/>
+        <path class="sulcus" d="M 192,80 C 212,72 234,68 256,68"/>
+        <path class="sulcus" d="M 350,260 C 368,255 384,254 398,258"/>
+
+        <!-- Cerebellum folia (horizontal lines) -->
+        <path class="cerebellum-line" d="M 370,340 C 390,336 410,335 430,338 C 445,340 458,345 465,352"/>
+        <path class="cerebellum-line" d="M 365,355 C 385,350 408,348 430,352 C 448,355 460,362 466,370"/>
+        <path class="cerebellum-line" d="M 368,370 C 388,365 410,363 432,367 C 448,370 458,376 462,384"/>
+        <path class="cerebellum-line" d="M 378,384 C 398,380 418,380 435,384 C 448,387 456,392 458,396"/>
+
+        <!-- ═══════════════════════════ -->
+        <!-- LOBE DIVIDERS (dashed)     -->
+        <!-- ═══════════════════════════ -->
+
+        <!-- Frontal / Parietal divide (central sulcus region) -->
+        <path class="lobe-divider" d="M 305,42 C 302,75 298,120 295,165 C 292,200 290,230 288,255"/>
+
+        <!-- Parietal / Occipital divide -->
+        <path class="lobe-divider" d="M 425,65 C 428,100 432,145 436,190 C 438,220 436,248 432,268"/>
+
+        <!-- Temporal divide (Sylvian fissure) -->
+        <path class="lobe-divider" d="M 195,238 C 225,228 260,222 295,224 C 330,226 355,234 375,248"/>
+
+
+        <!-- ═══════════════════════════════════ -->
+        <!-- REGION MARKERS                     -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- 1. Prefrontal Korteks — front-top of the brain -->
         <g class="region-group" data-region="prefrontal" tabindex="0" role="button" aria-label="Prefrontal Korteks">
-          <line class="region-connector" x1="155" y1="120" x2="175" y2="115" stroke="#06b6d4"/>
-          <circle class="region-dot-outer" cx="175" cy="115" r="22" fill="#06b6d4"/>
-          <circle class="region-dot" cx="175" cy="115" r="8" fill="#06b6d4" opacity="0.9"/>
-          <circle cx="175" cy="115" r="3.5" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="145" y="90">Prefrontal</text>
-          <text class="region-label" x="145" y="100">Korteks</text>
+          <!-- Leader line from dot to label -->
+          <path class="leader-line" stroke="#06b6d4" d="M 185,115 L 95,80"/>
+          <!-- Outer glow ring -->
+          <circle class="region-dot-outer" cx="185" cy="115" r="24" fill="#06b6d4"/>
+          <!-- Core dot -->
+          <circle class="region-dot-core" cx="185" cy="115" r="9" fill="#06b6d4" opacity="0.9"/>
+          <!-- Center highlight -->
+          <circle class="region-dot-center" cx="185" cy="115" r="3.5" fill="#fff" opacity="0.8"/>
+          <!-- Label -->
+          <rect class="region-label-bg" x="28" y="67" width="98" height="22"/>
+          <text class="region-label-text" x="77" y="82" text-anchor="middle">Prefrontal Korteks</text>
         </g>
 
-        <!-- 2. Anterior Singulat Korteks (top center) -->
-        <g class="region-group" data-region="acc" tabindex="0" role="button" aria-label="Anterior Singulat Korteks">
-          <line class="region-connector" x1="290" y1="95" x2="290" y2="75" stroke="#a855f7"/>
-          <circle class="region-dot-outer" cx="290" cy="95" r="18" fill="#a855f7"/>
-          <circle class="region-dot" cx="290" cy="95" r="7" fill="#a855f7" opacity="0.9"/>
-          <circle cx="290" cy="95" r="3" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="290" y="72">Anterior Singulat</text>
-        </g>
-
-        <!-- 3. Insula (side, slightly behind center) -->
-        <g class="region-group" data-region="insula" tabindex="0" role="button" aria-label="İnsüla">
-          <line class="region-connector" x1="255" y1="205" x2="230" y2="195" stroke="#10b981"/>
-          <circle class="region-dot-outer" cx="255" cy="205" r="17" fill="#10b981"/>
-          <circle class="region-dot" cx="255" cy="205" r="7" fill="#10b981" opacity="0.9"/>
-          <circle cx="255" cy="205" r="3" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="225" y="188">İnsüla</text>
-        </g>
-
-        <!-- 4. Nucleus Accumbens (center, ventral) -->
-        <g class="region-group" data-region="nac" tabindex="0" role="button" aria-label="Nucleus Accumbens">
-          <line class="region-connector" x1="300" y1="220" x2="275" y2="235" stroke="#f59e0b"/>
-          <circle class="region-dot-outer" cx="300" cy="220" r="17" fill="#f59e0b"/>
-          <circle class="region-dot" cx="300" cy="220" r="7" fill="#f59e0b" opacity="0.9"/>
-          <circle cx="300" cy="220" r="3" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="270" y="245">N. Accumbens</text>
-        </g>
-
-        <!-- 5. Amigdala (center deep, slightly lower) -->
+        <!-- 2. Amigdala — deep center, toward front-bottom -->
         <g class="region-group" data-region="amigdala" tabindex="0" role="button" aria-label="Amigdala">
-          <line class="region-connector" x1="325" y1="255" x2="310" y2="275" stroke="#ef4444"/>
-          <circle class="region-dot-outer" cx="325" cy="255" r="17" fill="#ef4444"/>
-          <circle class="region-dot" cx="325" cy="255" r="7" fill="#ef4444" opacity="0.9"/>
-          <circle cx="325" cy="255" r="3" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="305" y="282">Amigdala</text>
+          <path class="leader-line" stroke="#ef4444" d="M 268,240 L 200,280"/>
+          <circle class="region-dot-outer" cx="268" cy="240" r="20" fill="#ef4444"/>
+          <circle class="region-dot-core" cx="268" cy="240" r="8" fill="#ef4444" opacity="0.9"/>
+          <circle class="region-dot-center" cx="268" cy="240" r="3" fill="#fff" opacity="0.8"/>
+          <rect class="region-label-bg" x="158" y="272" width="62" height="20"/>
+          <text class="region-label-text" x="189" y="286" text-anchor="middle">Amigdala</text>
         </g>
 
-        <!-- 6. Hipokampus (center-back, behind amigdala) -->
-        <g class="region-group" data-region="hipokampus" tabindex="0" role="button" aria-label="Hipokampüs">
-          <line class="region-connector" x1="370" y1="260" x2="395" y2="260" stroke="#f97316"/>
-          <circle class="region-dot-outer" cx="370" cy="260" r="17" fill="#f97316"/>
-          <circle class="region-dot" cx="370" cy="260" r="7" fill="#f97316" opacity="0.9"/>
-          <circle cx="370" cy="260" r="3" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="400" y="258">Hipokampüs</text>
+        <!-- 3. Nucleus Accumbens — deep center, below prefrontal -->
+        <g class="region-group" data-region="nac" tabindex="0" role="button" aria-label="Nucleus Accumbens">
+          <path class="leader-line" stroke="#f59e0b" d="M 230,195 L 120,210"/>
+          <circle class="region-dot-outer" cx="230" cy="195" r="18" fill="#f59e0b"/>
+          <circle class="region-dot-core" cx="230" cy="195" r="7.5" fill="#f59e0b" opacity="0.9"/>
+          <circle class="region-dot-center" cx="230" cy="195" r="3" fill="#fff" opacity="0.8"/>
+          <rect class="region-label-bg" x="32" y="202" width="108" height="20"/>
+          <text class="region-label-text" x="86" y="216" text-anchor="middle">Nucleus Accumbens</text>
         </g>
 
-        <!-- 7. VTA (brain stem area) -->
+        <!-- 4. Hipokampus — center, near amigdala but more toward back -->
+        <g class="region-group" data-region="hipokampus" tabindex="0" role="button" aria-label="Hipokampus">
+          <path class="leader-line" stroke="#a855f7" d="M 330,250 L 410,300"/>
+          <circle class="region-dot-outer" cx="330" cy="250" r="20" fill="#a855f7"/>
+          <circle class="region-dot-core" cx="330" cy="250" r="8" fill="#a855f7" opacity="0.9"/>
+          <circle class="region-dot-center" cx="330" cy="250" r="3" fill="#fff" opacity="0.8"/>
+          <rect class="region-label-bg" x="370" y="292" width="82" height="20"/>
+          <text class="region-label-text" x="411" y="306" text-anchor="middle">Hipokampus</text>
+        </g>
+
+        <!-- 5. VTA — brain stem area, low center -->
         <g class="region-group" data-region="vta" tabindex="0" role="button" aria-label="Ventral Tegmental Alan">
-          <line class="region-connector" x1="355" y1="355" x2="385" y2="365" stroke="#f43f5e"/>
-          <circle class="region-dot-outer" cx="355" cy="355" r="16" fill="#f43f5e"/>
-          <circle class="region-dot" cx="355" cy="355" r="6.5" fill="#f43f5e" opacity="0.9"/>
-          <circle cx="355" cy="355" r="2.8" fill="#fff" opacity="0.7"/>
-          <text class="region-label" x="393" y="372">VTA</text>
+          <path class="leader-line" stroke="#f97316" d="M 356,380 L 290,420"/>
+          <circle class="region-dot-outer" cx="356" cy="380" r="17" fill="#f97316"/>
+          <circle class="region-dot-core" cx="356" cy="380" r="7" fill="#f97316" opacity="0.9"/>
+          <circle class="region-dot-center" cx="356" cy="380" r="2.8" fill="#fff" opacity="0.8"/>
+          <rect class="region-label-bg" x="244" y="412" width="72" height="20"/>
+          <text class="region-label-text" x="280" y="426" text-anchor="middle">VTA</text>
         </g>
+
+        <!-- Lobe labels (very subtle, for orientation) -->
+        <text x="185" y="165" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Frontal</text>
+        <text x="370" y="140" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Parietal</text>
+        <text x="462" y="200" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Oksipital</text>
+        <text x="290" y="275" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Temporal</text>
+        <text x="445" y="370" font-family="var(--font-sans)" font-size="9" fill="rgba(99,102,241,0.18)" font-weight="600" text-anchor="middle" font-style="italic">Serebellum</text>
+        <text x="355" y="450" font-family="var(--font-sans)" font-size="9" fill="rgba(99,102,241,0.18)" font-weight="600" text-anchor="middle" font-style="italic">Beyin Sapi</text>
 
       </svg>
     </div>
@@ -528,8 +615,10 @@
     <!-- Info Panel -->
     <div class="info-panel" id="infoPanel">
       <button class="info-panel-close" id="infoPanelClose" aria-label="Kapat">&times;</button>
-      <div class="info-panel-icon" id="infoPanelIcon"></div>
-      <div class="info-panel-name" id="infoPanelName"></div>
+      <div class="info-panel-header">
+        <div class="info-panel-dot" id="infoPanelDot"></div>
+        <div class="info-panel-name" id="infoPanelName"></div>
+      </div>
       <div class="info-panel-func" id="infoPanelFunc"></div>
       <div class="info-panel-context" id="infoPanelContext"></div>
       <div class="info-panel-tag" id="infoPanelTag"></div>
@@ -545,66 +634,38 @@
     const regions = {
       prefrontal: {
         name: 'Prefrontal Korteks',
-        icon: '\u{1F9E0}',
-        func: 'Karar verme, planlama, dürtü kontrolü. Beynin "CEO"su.',
-        context: 'Aklın merkezi \u2014 nefse karşı en güçlü silahın.',
+        func: 'Karar verme, planlama, d\u00FCrt\u00FC kontrol\u00FC. Beynin \u201CCEO\u201Dsu \u2014 t\u00FCm \u00FCst d\u00FCzey bili\u015Fsel s\u00FCrecleri y\u00F6netir.',
+        context: 'Akl\u0131n merkezi \u2014 nefse kar\u015F\u0131 en g\u00FC\u00E7l\u00FC silah\u0131n.',
         color: '#06b6d4',
-        tag: 'Kontrol Merkezi',
-        category: 'kontrol'
+        tag: 'Kontrol Merkezi'
       },
       amigdala: {
         name: 'Amigdala',
-        icon: '\u{1F525}',
-        func: 'Korku, tehdit algılama, duygusal tepki. "Savaş ya da kaç" yanıtını tetikler.',
-        context: 'Gadab\u2019ın (öfke) tetikleyicisi. Stres anında devreye girer.',
+        func: 'Korku, tehdit alg\u0131lama, duygusal tepki. \u201CSava\u015F ya da ka\u00E7\u201D yan\u0131t\u0131n\u0131 tetikler.',
+        context: 'Gadab\u2019\u0131n tetikleyicisi. Stres an\u0131nda devreye girer.',
         color: '#ef4444',
-        tag: 'Alarm Sistemi',
-        category: 'duygu'
+        tag: 'Alarm Sistemi'
       },
       nac: {
         name: 'Nucleus Accumbens',
-        icon: '\u{2728}',
-        func: 'Ödül sistemi, haz merkezi. Motivasyonu ve bağımlılık döngüsünü yönetir.',
-        context: 'Şehvet\u2019in karargâhı. Dopamin burada patlar.',
+        func: '\u00D6d\u00FCl sistemi, haz merkezi. Motivasyonu ve ba\u011F\u0131ml\u0131l\u0131k d\u00F6ng\u00FCs\u00FCn\u00FC y\u00F6netir.',
+        context: '\u015Eehvet\u2019in kararg\u00E2h\u0131. Dopamin burada patlar.',
         color: '#f59e0b',
-        tag: 'Ödül Merkezi',
-        category: 'odul'
+        tag: '\u00D6d\u00FCl Merkezi'
       },
       hipokampus: {
-        name: 'Hipokampüs',
-        icon: '\u{1F4DA}',
-        func: 'Hafıza, öğrenme. Yeni anıların uzun süreli hafızaya aktarılmasını sağlar.',
-        context: 'Alışkanlık kalıplarını burada saklar. Terbiye burada kök salar.',
-        color: '#f97316',
-        tag: 'Hafıza Deposu',
-        category: 'ogrenme'
+        name: 'Hipokamp\u00FCs',
+        func: 'Haf\u0131za ve \u00F6\u011Frenme. Yeni an\u0131lar\u0131n uzun s\u00FCreli haf\u0131zaya aktar\u0131lmas\u0131n\u0131 sa\u011Flar.',
+        context: 'Al\u0131\u015Fkanl\u0131k kal\u0131plar\u0131n\u0131 burada saklar.',
+        color: '#a855f7',
+        tag: 'Haf\u0131za Deposu'
       },
       vta: {
         name: 'Ventral Tegmental Alan (VTA)',
-        icon: '\u{26A1}',
-        func: 'Dopamin üretim merkezi. Ödüllenme yolunun başlangıç noktası.',
-        context: 'Dopaminin fabrikası. Her ödül sinyali buradan başlar.',
-        color: '#f43f5e',
-        tag: 'Dopamin Fabrikası',
-        category: 'odul'
-      },
-      insula: {
-        name: 'İnsüla (Ada Korteks)',
-        icon: '\u{1F52E}',
-        func: 'İç farkındalık, empati. Beden sinyallerini yorumlar.',
-        context: 'Vicdan ve farkındalık merkezi. Tefekkürün nörolojik karşılığı.',
-        color: '#10b981',
-        tag: 'Farkındalık Merkezi',
-        category: 'farkindalik'
-      },
-      acc: {
-        name: 'Anterior Singulat Korteks',
-        icon: '\u{2696}\u{FE0F}',
-        func: 'Çatışma çözme, hata tespiti. Duygusal ve bilişsel süreçleri birbirine bağlar.',
-        context: 'Nefs ile akıl arasındaki hakemin oturduğu yer.',
-        color: '#a855f7',
-        tag: 'Hakem Merkezi',
-        category: 'kontrol'
+        func: 'Dopamin \u00FCretim merkezi. \u00D6d\u00FCllenme yolunun ba\u015Flang\u0131\u00E7 noktas\u0131.',
+        context: 'Dopaminin fabrikas\u0131. Her \u00F6d\u00FCl sinyali buradan ba\u015Flar.',
+        color: '#f97316',
+        tag: 'Dopamin Fabrikas\u0131'
       }
     };
 
@@ -614,7 +675,7 @@
       const item = document.createElement('div');
       item.className = 'legend-item';
       item.style.setProperty('--legend-color', r.color);
-      item.innerHTML = `<span class="legend-dot" style="background:${r.color}"></span>${r.name}`;
+      item.innerHTML = '<span class="legend-dot" style="background:' + r.color + '"></span>' + r.name;
       item.addEventListener('click', () => activateRegion(key));
       item.dataset.region = key;
       legend.appendChild(item);
@@ -629,25 +690,26 @@
       const r = regions[key];
       if (!r) return;
 
-      // Deactivate previous
       document.querySelectorAll('.region-group.active').forEach(g => g.classList.remove('active'));
       document.querySelectorAll('.legend-item.active').forEach(l => l.classList.remove('active'));
 
-      // Activate new
-      const group = document.querySelector(`.region-group[data-region="${key}"]`);
+      const group = document.querySelector('.region-group[data-region="' + key + '"]');
       if (group) group.classList.add('active');
 
-      const legendItem = document.querySelector(`.legend-item[data-region="${key}"]`);
+      const legendItem = document.querySelector('.legend-item[data-region="' + key + '"]');
       if (legendItem) legendItem.classList.add('active');
 
-      // Fill panel
-      document.getElementById('infoPanelIcon').style.background = r.color + '22';
-      document.getElementById('infoPanelIcon').textContent = r.icon;
+      document.getElementById('infoPanelDot').style.background = r.color;
+      document.getElementById('infoPanelDot').style.color = r.color;
       document.getElementById('infoPanelName').textContent = r.name;
       document.getElementById('infoPanelFunc').textContent = r.func;
-      document.getElementById('infoPanelContext').textContent = r.context;
-      document.getElementById('infoPanelContext').style.setProperty('--region-color', r.color);
-      document.getElementById('infoPanelContext').style.borderLeftColor = r.color;
+      document.getElementById('infoPanelFunc').style.borderLeftColor = r.color;
+
+      const ctx = document.getElementById('infoPanelContext');
+      ctx.textContent = r.context;
+      ctx.style.borderLeftColor = r.color;
+      ctx.querySelector && (ctx.style.setProperty('--region-color', r.color));
+
       const tag = document.getElementById('infoPanelTag');
       tag.textContent = r.tag;
       tag.style.background = r.color + '20';
@@ -655,11 +717,6 @@
 
       panel.classList.add('visible');
       activeRegion = key;
-
-      // Scroll marker into view on mobile
-      if (group && window.innerWidth < 640) {
-        group.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
     }
 
     function closePanel() {
@@ -671,7 +728,6 @@
 
     panelClose.addEventListener('click', closePanel);
 
-    // Click outside to close
     document.addEventListener('click', (e) => {
       if (!e.target.closest('.region-group') &&
           !e.target.closest('.legend-item') &&
@@ -680,12 +736,10 @@
       }
     });
 
-    // Keyboard support
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePanel();
     });
 
-    // SVG region clicks
     document.querySelectorAll('.region-group').forEach(group => {
       group.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -698,22 +752,6 @@
         }
       });
     });
-
-    // ── Ambient Particles ──
-    const container = document.getElementById('brainContainer');
-    for (let i = 0; i < 12; i++) {
-      const p = document.createElement('div');
-      p.className = 'brain-particle';
-      p.style.left = Math.random() * 100 + '%';
-      p.style.top = Math.random() * 100 + '%';
-      p.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
-      p.style.setProperty('--dy', (Math.random() * 80 - 40) + 'px');
-      p.style.animationDelay = Math.random() * 8 + 's';
-      p.style.animationDuration = (6 + Math.random() * 6) + 's';
-      const colors = ['rgba(99,102,241,0.3)', 'rgba(6,182,212,0.3)', 'rgba(168,85,247,0.25)'];
-      p.style.background = colors[Math.floor(Math.random() * colors.length)];
-      container.appendChild(p);
-    }
   </script>
 </body>
 </html>
