@@ -7,5 +7,11 @@
       "destination": "https://raufenc.com/:path*",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/iyilikakademi/:path*",
+      "destination": "/iyilikakademi/index.html"
+    }
   ]
 }
