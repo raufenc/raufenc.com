@@ -1545,6 +1545,21 @@ body {
   font-size: 0.7rem;
   color: #888;
 }
+.map-popup-date {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #5a3e1b;
+  margin-bottom: 0.2rem;
+}
+.map-popup-ruler {
+  font-family: 'Noto Serif', serif;
+  font-size: 0.7rem;
+  font-style: italic;
+  color: #6b1d2a;
+  margin-bottom: 0.4rem;
+}
+.battle-marker { z-index: 600 !important; }
 
 /* Harita üzeri yer adı etiketleri — tarihi harita stili */
 .map-label span, .map-label-capital span, .map-label-battle span {
@@ -1772,12 +1787,16 @@ body {
     <!-- Harita efsanesi -->
     <div class="map-legend">
       <div class="map-legend-item">
-        <div class="map-legend-dot" style="background:#c9a84c;"></div>
+        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="5" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.2"/><circle cx="8" cy="8" r="2" fill="#5a3e1b"/></svg>
         <span>Şehir / Yerleşim</span>
       </div>
       <div class="map-legend-item">
-        <div class="map-legend-dot" style="background:#8b1a1a;"></div>
-        <span>Savaş / Muharebe</span>
+        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#8b6914" stroke-width="1.2"/><circle cx="8" cy="8" r="4" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1"/><circle cx="8" cy="8" r="1.5" fill="#5a3e1b"/></svg>
+        <span>Başkent / Merkez</span>
+      </div>
+      <div class="map-legend-item">
+        <svg width="16" height="16" viewBox="0 0 16 16"><line x1="3" y1="3" x2="13" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><line x1="13" y1="3" x2="3" y2="13" stroke="#6b1d1d" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" fill="#c0392b" stroke="#4a0e0e" stroke-width="0.8"/></svg>
+        <span>Savaş / Kuşatma</span>
       </div>
     </div>
   </div>
@@ -2438,10 +2457,33 @@ function renderPlaces() {
 let map = null;
 let mapMarkers = {};
 
+// Savaş olayları için koordinat tablosu (PLACES'te olmayan yerler)
+const BATTLE_COORDS = {
+  'İnegöl çevresi': {lat:40.08,lng:29.51},
+  'Koyunhisar': {lat:40.20,lng:29.30},
+  'Dinboz': {lat:40.15,lng:29.25},
+  'Pelekanon': {lat:40.72,lng:29.35},
+  'Meriç kıyısı': {lat:41.68,lng:26.36},
+  'Konya ovası': {lat:37.87,lng:32.49},
+  'Ploşnik Boğazı': {lat:43.22,lng:21.95},
+  'Kosova': {lat:42.57,lng:21.00},
+  'İstanbul': {lat:41.01,lng:28.98},
+  'Niğbolu': {lat:43.69,lng:24.89},
+  'Çubukova / Ankara': {lat:39.93,lng:32.86},
+  'Çamurlu Derbend / Edirne': {lat:41.30,lng:27.50}
+};
+
+function getBattleCoords(location) {
+  if (BATTLE_COORDS[location]) return BATTLE_COORDS[location];
+  // PLACES'ten eşleştir
+  const place = PLACES.find(p => location.includes(p.name) && p.lat);
+  if (place) return {lat: place.lat, lng: place.lng};
+  return null;
+}
+
 function renderMap() {
   if (map) return;
 
-  // Vintage / tarihi harita tile'ları — sepia filtresi CSS'te uygulanıyor
   const tileUrl = 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
 
   map = L.map('mapContainer', {
@@ -2452,71 +2494,65 @@ function renderMap() {
     attributionControl: false
   });
 
-  // Attribution'ı özelleştirilmiş konumda göster
   L.control.attribution({ position: 'bottomright', prefix: false })
     .addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>')
     .addTo(map);
 
-  map.tileLayer = L.tileLayer(tileUrl, {
-    maxZoom: 15
-  }).addTo(map);
+  map.tileLayer = L.tileLayer(tileUrl, { maxZoom: 15 }).addTo(map);
 
-  // Tarihi harita stili marker — şehir/yerleşim (altın yıldız)
+  // === MARKER İKONLARI ===
+
+  // Şehir/yerleşim (altın daire)
   const goldIcon = L.divIcon({
     className: 'custom-marker',
-    html: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="10" cy="10" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/>
-      <circle cx="10" cy="10" r="2.5" fill="#5a3e1b"/>
-    </svg>`,
-    iconSize: [20, 20],
-    iconAnchor: [10, 10],
-    popupAnchor: [0, -12]
+    html: `<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="10" cy="10" r="2.5" fill="#5a3e1b"/></svg>`,
+    iconSize: [20, 20], iconAnchor: [10, 10], popupAnchor: [0, -12]
   });
 
-  // Savaş alanı marker (kırmızı çarpı kılıç)
-  const battleIcon = L.divIcon({
-    className: 'custom-marker',
-    html: `<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
-      <line x1="4" y1="4" x2="18" y2="18" stroke="#8b1a1a" stroke-width="2.5" stroke-linecap="round"/>
-      <line x1="18" y1="4" x2="4" y2="18" stroke="#8b1a1a" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="11" cy="11" r="3" fill="#c0392b" stroke="#5a1010" stroke-width="1"/>
-    </svg>`,
-    iconSize: [22, 22],
-    iconAnchor: [11, 11],
-    popupAnchor: [0, -14]
-  });
-
-  // Büyük şehir marker (çift halka, taçlı)
+  // Başkent (çift halka)
   const capitalIcon = L.divIcon({
     className: 'custom-marker',
-    html: `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="#8b6914" stroke-width="1.5"/>
-      <circle cx="12" cy="12" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/>
-      <circle cx="12" cy="12" r="2.5" fill="#5a3e1b"/>
-    </svg>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -14]
+    html: `<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#8b6914" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="#5a3e1b"/></svg>`,
+    iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -14]
   });
 
-  const capitalCities = ['Bursa', 'Edirne', 'İstanbul', 'Konya', 'Söğüt'];
+  // Savaş/muharebe — çapraz kılıçlar (küçük)
+  function makeBattleIcon(size) {
+    const s = size;
+    const h = s / 2;
+    const p = Math.round(s * 0.18);
+    const q = s - p;
+    return L.divIcon({
+      className: 'custom-marker battle-marker',
+      html: `<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}" xmlns="http://www.w3.org/2000/svg">
+        <line x1="${p}" y1="${p}" x2="${q}" y2="${q}" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/>
+        <line x1="${q}" y1="${p}" x2="${p}" y2="${q}" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="${h}" cy="${h}" r="${Math.round(s*0.16)}" fill="#c0392b" stroke="#4a0e0e" stroke-width="1"/>
+        <line x1="${p-1}" y1="${p-1}" x2="${p+2}" y2="${p+2}" stroke="#8b6914" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="${q+1}" y1="${p-1}" x2="${q-2}" y2="${p+2}" stroke="#8b6914" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>`,
+      iconSize: [s, s], iconAnchor: [h, h], popupAnchor: [0, -h - 2]
+    });
+  }
 
+  const battleIconSmall = makeBattleIcon(20);
+  const battleIconLarge = makeBattleIcon(26);
+
+  const capitalCities = ['Bursa', 'Edirne', 'İstanbul', 'Konya', 'Söğüt'];
+  const majorBattles = ['E028', 'E034', 'E037', 'E022', 'E030']; // Kosova, Niğbolu, Ankara, Sırpsındığı, İstanbul kuşatmaları
+
+  // === KATMAN 1: ŞEHİRLER / YERLEŞİMLER ===
   PLACES.forEach(p => {
     if (!p.lat || !p.lng) return;
-
-    const isBattle = p.type.includes('savaş') || p.type.includes('geçit');
     const isCapital = capitalCities.includes(p.name);
-    const icon = isBattle ? battleIcon : (isCapital ? capitalIcon : goldIcon);
-
+    const icon = isCapital ? capitalIcon : goldIcon;
     const marker = L.marker([p.lat, p.lng], { icon: icon }).addTo(map);
 
-    // Yer adı etiketi (tarihi harita stili)
-    const labelClass = isBattle ? 'map-label-battle' : (isCapital ? 'map-label-capital' : 'map-label');
+    const labelClass = isCapital ? 'map-label-capital' : 'map-label';
     const labelIcon = L.divIcon({
       className: labelClass,
       html: `<span>${p.name}</span>`,
-      iconSize: [0, 0],
-      iconAnchor: [-14, 5]
+      iconSize: [0, 0], iconAnchor: [-14, 5]
     });
     L.marker([p.lat, p.lng], { icon: labelIcon, interactive: false }).addTo(map);
 
@@ -2526,9 +2562,50 @@ function renderMap() {
       <div class="map-popup-desc">${p.desc}</div>
       <div class="map-popup-pages">Sayfa: ${p.pages}</div>
     `;
-
     marker.bindPopup(popupContent, { maxWidth: 280 });
     mapMarkers[p.id] = marker;
+  });
+
+  // === KATMAN 2: SAVAŞLAR / KUŞATMALAR ===
+  const battleEvents = TIMELINE_EVENTS.filter(e => e.type === 'battle' || e.type === 'siege');
+  const usedCoords = {}; // Aynı konumdaki savaşları offset'lemek için
+
+  battleEvents.forEach(e => {
+    const coords = getBattleCoords(e.location);
+    if (!coords) return;
+
+    // Aynı koordinatta birden fazla savaş varsa offset uygula
+    const key = `${coords.lat.toFixed(1)}_${coords.lng.toFixed(1)}`;
+    if (!usedCoords[key]) usedCoords[key] = 0;
+    const offsetIndex = usedCoords[key]++;
+    const offsetLat = offsetIndex * 0.15;
+    const offsetLng = offsetIndex * -0.2;
+
+    const lat = coords.lat + offsetLat;
+    const lng = coords.lng + offsetLng;
+
+    const isMajor = majorBattles.includes(e.id);
+    const icon = isMajor ? battleIconLarge : battleIconSmall;
+
+    const marker = L.marker([lat, lng], { icon: icon, zIndexOffset: 500 }).addTo(map);
+
+    // Savaş etiketi
+    const shortName = e.name.length > 25 ? e.name.substring(0, 22) + '…' : e.name;
+    const labelIcon = L.divIcon({
+      className: 'map-label-battle',
+      html: `<span>${shortName}</span>`,
+      iconSize: [0, 0], iconAnchor: [-16, 5]
+    });
+    L.marker([lat, lng], { icon: labelIcon, interactive: false }).addTo(map);
+
+    const popupContent = `
+      <div class="map-popup-title" style="color:#6b1d1d;">⚔ ${e.name}</div>
+      <div class="map-popup-date">${e.date} (${e.year})</div>
+      <div class="map-popup-ruler">${e.ruler}</div>
+      <div class="map-popup-desc">${e.summary}</div>
+    `;
+    marker.bindPopup(popupContent, { maxWidth: 300 });
+    mapMarkers[e.id] = marker;
   });
 }
 
