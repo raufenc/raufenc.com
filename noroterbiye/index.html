@@ -17,8 +17,9 @@
 <body>
   <script src="/nav.js"></script>
 
-  <!-- Hero -->
-  <section class="nt-hero">
+  <!-- Hero with Neural Canvas -->
+  <section class="nt-hero" id="hero">
+    <canvas id="neural-canvas"></canvas>
     <div class="nt-hero-glow"></div>
     <div class="nt-hero-orb-1"></div>
     <div class="nt-hero-orb-2"></div>
@@ -41,24 +42,30 @@
       <a href="/noroterbiye/satin-al/" class="nt-btn nt-btn-ghost nt-btn-lg">Kitabı Edin</a>
     </div>
 
-    <!-- Stats -->
+    <!-- Stats with countUp -->
     <div class="nt-stats nt-fade-in" style="animation-delay:0.45s">
       <div class="nt-stat">
-        <div class="nt-stat-num">131</div>
+        <div class="nt-stat-num" data-count="131">0</div>
         <div class="nt-stat-label">Kavram</div>
       </div>
       <div class="nt-stat">
-        <div class="nt-stat-num">15</div>
+        <div class="nt-stat-num" data-count="15">0</div>
         <div class="nt-stat-label">Test</div>
       </div>
       <div class="nt-stat">
-        <div class="nt-stat-num">12</div>
+        <div class="nt-stat-num" data-count="12">0</div>
         <div class="nt-stat-label">Oyun</div>
       </div>
       <div class="nt-stat">
-        <div class="nt-stat-num">18</div>
+        <div class="nt-stat-num" data-count="18">0</div>
         <div class="nt-stat-label">Araç</div>
       </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="nt-scroll-hint nt-fade-in" style="animation-delay:0.6s">
+      <span>Keşfet</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </section>
 
@@ -89,16 +96,21 @@
     </div>
   </section>
 
-  <!-- 60 Saniyede NöroTerbiye -->
+  <!-- 60 Saniyede NöroTerbiye — Timeline Stepper -->
   <section class="nt-section nt-reveal">
     <div class="nt-wrap nt-narrow">
       <h2 class="nt-section-title"><span class="nt-icon">⏱️</span> 60 Saniyede NöroTerbiye</h2>
-      <div id="sixty-seconds" class="nt-card" style="padding:32px">
-        <div id="ss-content"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px">
-          <button id="ss-prev" class="nt-btn nt-btn-ghost nt-btn-sm" onclick="ssPrev()">← Önceki</button>
-          <span id="ss-counter" class="nt-label"></span>
-          <button id="ss-next" class="nt-btn nt-btn-secondary nt-btn-sm" onclick="ssNext()">Sonraki →</button>
+      <div class="nt-timeline" id="sixty-seconds">
+        <div class="nt-timeline-track">
+          <div class="nt-timeline-progress" id="ss-progress"></div>
+        </div>
+        <div class="nt-timeline-steps" id="ss-steps"></div>
+        <div class="nt-timeline-content">
+          <div id="ss-content" class="nt-card" style="padding:32px;min-height:160px"></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+            <button id="ss-prev" class="nt-btn nt-btn-ghost nt-btn-sm" onclick="ssPrev()">← Önceki</button>
+            <button id="ss-next" class="nt-btn nt-btn-primary nt-btn-sm" onclick="ssNext()">Sonraki →</button>
+          </div>
         </div>
       </div>
     </div>
@@ -156,19 +168,35 @@
     </div>
   </section>
 
-  <!-- Kitap Bandı -->
+  <!-- Kitap Bandı — Cinematic -->
   <section class="nt-section nt-reveal">
-    <div class="nt-wrap nt-narrow">
-      <div class="nt-promo">
-        <p class="nt-label" style="margin-bottom:12px;position:relative">Rauf Enç</p>
-        <h2 class="nt-title-gradient" style="font-size:1.6rem;font-weight:800;margin-bottom:12px;display:inline-block;position:relative">NöroTerbiye</h2>
-        <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:8px;position:relative">İçindeki Düşmanı Dosta Çevirmek</p>
-        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:24px;position:relative">KTB Yayınları · 2. Baskı · 272 sayfa</p>
-        <p style="color:var(--text-secondary);font-size:0.9rem;max-width:500px;margin:0 auto 28px;line-height:1.6;position:relative">
-          Modern sinirbilim dili ile nefs terbiyesini birleştiren, biyolojiden modern tuzaklara,
-          farklı nefslerden terbiye usullerine uzanan kapsamlı bir rehber.
-        </p>
-        <a href="/noroterbiye/satin-al/" class="nt-btn nt-btn-primary" style="position:relative">Satın Al</a>
+    <div class="nt-wrap">
+      <div class="nt-cinematic-cta">
+        <div class="nt-cinematic-bg"></div>
+        <div class="nt-cinematic-inner">
+          <div class="nt-cinematic-left">
+            <img src="/images/noroterbiye.webp" alt="NöroTerbiye" width="180" class="nt-cinematic-book" />
+          </div>
+          <div class="nt-cinematic-right">
+            <p class="nt-label" style="margin-bottom:8px;color:var(--muted2)">Rauf Enç · KTB Yayınları · 2. Baskı</p>
+            <h2 class="nt-title-gradient" style="font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;margin-bottom:16px;display:inline-block">NöroTerbiye</h2>
+            <p style="font-size:1.1rem;color:var(--text-secondary);margin-bottom:20px">İçindeki Düşmanı Dosta Çevirmek</p>
+            <div class="nt-cinematic-features">
+              <div class="nt-cinematic-feat"><span>🧬</span> Biyoloji & Sinirbilim</div>
+              <div class="nt-cinematic-feat"><span>📱</span> Modern Tuzaklar</div>
+              <div class="nt-cinematic-feat"><span>🧘</span> Nefs Terbiyesi</div>
+              <div class="nt-cinematic-feat"><span>🧭</span> Pratik Rehber</div>
+            </div>
+            <p style="color:var(--text-secondary);font-size:0.88rem;line-height:1.7;margin-bottom:28px;max-width:440px">
+              272 sayfada, nefsin biyolojik temelleri ile İslam'ın terbiye usullerini buluşturan,
+              gençten ebeveyne herkesin anlayacağı dilde yazılmış kapsamlı bir eser.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="/noroterbiye/satin-al/" class="nt-btn nt-btn-primary nt-btn-lg">Satın Al</a>
+              <a href="/noroterbiye/kitap-haritasi/" class="nt-btn nt-btn-secondary">Kitap Haritası →</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -215,24 +243,173 @@
   <script src="/noroterbiye/data/araclar.js"></script>
   <script src="/noroterbiye/js/common.js"></script>
   <script>
-    // ── 60 Saniyede NöroTerbiye ──
+    // ══════════════════════════════════════════════
+    // Neural Network Canvas Animation
+    // ══════════════════════════════════════════════
+    (function() {
+      const canvas = document.getElementById('neural-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [], mouse = { x: -1000, y: -1000 };
+      const PARTICLE_COUNT = 60;
+      const CONNECTION_DIST = 150;
+      const MOUSE_DIST = 200;
+
+      function resize() {
+        w = canvas.width = canvas.offsetWidth;
+        h = canvas.height = canvas.offsetHeight;
+      }
+
+      function createParticles() {
+        particles = [];
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+          particles.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4,
+            r: Math.random() * 2 + 1,
+            pulse: Math.random() * Math.PI * 2,
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        // Connections
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < CONNECTION_DIST) {
+              const alpha = (1 - d / CONNECTION_DIST) * 0.15;
+              ctx.strokeStyle = `rgba(99,102,241,${alpha})`;
+              ctx.lineWidth = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.stroke();
+            }
+          }
+
+          // Mouse connections
+          const mdx = particles[i].x - mouse.x;
+          const mdy = particles[i].y - mouse.y;
+          const md = Math.sqrt(mdx * mdx + mdy * mdy);
+          if (md < MOUSE_DIST) {
+            const alpha = (1 - md / MOUSE_DIST) * 0.3;
+            ctx.strokeStyle = `rgba(6,182,212,${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+
+        // Particles (neurons)
+        const t = Date.now() * 0.002;
+        particles.forEach(p => {
+          const glow = 0.4 + Math.sin(t + p.pulse) * 0.3;
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+          gradient.addColorStop(0, `rgba(129,140,248,${glow})`);
+          gradient.addColorStop(1, 'rgba(129,140,248,0)');
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = `rgba(129,140,248,${glow + 0.2})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          // Move
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      resize();
+      createParticles();
+      draw();
+
+      window.addEventListener('resize', () => { resize(); createParticles(); });
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+      canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+    })();
+
+    // ══════════════════════════════════════════════
+    // CountUp Animation
+    // ══════════════════════════════════════════════
+    (function() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.querySelectorAll('[data-count]').forEach(el => {
+              const target = parseInt(el.dataset.count);
+              const duration = 1500;
+              const start = performance.now();
+              function tick(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+                el.textContent = Math.round(target * eased);
+                if (progress < 1) requestAnimationFrame(tick);
+              }
+              requestAnimationFrame(tick);
+            });
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.nt-stats').forEach(el => observer.observe(el));
+    })();
+
+    // ══════════════════════════════════════════════
+    // 60 Saniyede NöroTerbiye — Timeline Stepper
+    // ══════════════════════════════════════════════
     const ssSlides = [
-      { title: 'İnsanda iki ses var', text: 'Bir taraf hemen ister — haz, ödül, kısa yol. Diğer taraf düşünür — gelecek, değer, uzun vade. Bu ikisi sürekli çatışır.' },
-      { title: 'Bu çatışmanın adı: Nefs vs. Akıl', text: 'Nefs, beynin ödül sistemini kullanır. Akıl, prefrontal kortekste oturur. Biri hızlı ama kör, diğeri yavaş ama görür.' },
-      { title: '3 ana dürtü her şeyi açıklar', text: '<b>Şehvet</b> (dopamin) — haz peşinde koşma. <b>Şöhret</b> (serotonin) — görünür olma arzusu. <b>Gadab</b> (kortizol) — stres ve öfke.' },
-      { title: 'Modern dünya bu sistemi hackliyor', text: 'Yemek, ekran, oyun, para, müzik, sosyal medya... Hepsi beynin ödül sistemine kısa yoldan ulaşır ve dengeyi bozar.' },
-      { title: 'Ama çare var', text: 'Nöroterbiye: Zihin, beden ve çevre üzerinden nefsi anla, tanı ve terbiye et. Bilimsel bilgiyle, pratik adımlarla.' },
-      { title: 'Hazır mısın?', text: 'Kendini test et, kavramları öğren, planını kur. Bir alışkanlığı tek günde değil, doğru sistemle dönüştürürsün.' },
+      { icon: '🧠', title: 'İnsanda iki ses var', text: 'Bir taraf hemen ister — haz, ödül, kısa yol. Diğer taraf düşünür — gelecek, değer, uzun vade. Bu ikisi sürekli çatışır.' },
+      { icon: '⚔️', title: 'Bu çatışmanın adı: Nefs vs. Akıl', text: 'Nefs, beynin ödül sistemini kullanır. Akıl, prefrontal kortekste oturur. Biri hızlı ama kör, diğeri yavaş ama görür.' },
+      { icon: '🧬', title: '3 ana dürtü çok şeyi açıklar', text: '<b>Şehvet</b> (dopamin) — haz peşinde koşma. <b>Şöhret</b> (serotonin) — görünür olma arzusu. <b>Gadab</b> (kortizol) — stres ve öfke.' },
+      { icon: '📱', title: 'Modern dünya bu sistemi hackliyor', text: 'Yemek, ekran, oyun, para, müzik, sosyal medya... Hepsi beynin ödül sistemine kısa yoldan ulaşır ve dengeyi bozar.' },
+      { icon: '💪', title: 'Ama çare var', text: 'Nöroterbiye: Zihin, beden ve çevre üzerinden nefsi anla, tanı ve terbiye et. Bilimsel bilgiyle, pratik adımlarla.' },
+      { icon: '🚀', title: 'Hazır mısın?', text: 'Kendini test et, kavramları öğren, planını kur. Bir alışkanlığı tek günde değil, doğru sistemle dönüştürürsün.' },
     ];
     let ssIdx = 0;
+
+    // Build step dots
+    (function() {
+      const steps = document.getElementById('ss-steps');
+      ssSlides.forEach((s, i) => {
+        steps.innerHTML += `<button class="nt-timeline-step ${i === 0 ? 'active' : ''}" onclick="ssGo(${i})" title="${s.title}">
+          <span class="nt-timeline-dot">${s.icon}</span>
+        </button>`;
+      });
+    })();
 
     function ssRender() {
       const s = ssSlides[ssIdx];
       document.getElementById('ss-content').innerHTML = `
-        <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:12px">${s.title}</h3>
+        <div style="font-size:2rem;margin-bottom:12px">${s.icon}</div>
+        <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:12px;color:var(--text)">${s.title}</h3>
         <p style="color:var(--text-secondary);line-height:1.7;font-size:0.95rem">${s.text}</p>
       `;
-      document.getElementById('ss-counter').textContent = `${ssIdx + 1} / ${ssSlides.length}`;
+      document.getElementById('ss-progress').style.width = `${((ssIdx) / (ssSlides.length - 1)) * 100}%`;
+      document.querySelectorAll('.nt-timeline-step').forEach((el, i) => {
+        el.classList.toggle('active', i <= ssIdx);
+      });
       document.getElementById('ss-prev').style.visibility = ssIdx === 0 ? 'hidden' : 'visible';
       document.getElementById('ss-next').textContent = ssIdx === ssSlides.length - 1 ? 'Teste Başla →' : 'Sonraki →';
     }
@@ -242,6 +419,7 @@
       else { window.location.href = '/noroterbiye/testler/'; }
     }
     function ssPrev() { if (ssIdx > 0) { ssIdx--; ssRender(); } }
+    function ssGo(i) { ssIdx = i; ssRender(); }
     ssRender();
 
     // ── Günün Kavramı ──
