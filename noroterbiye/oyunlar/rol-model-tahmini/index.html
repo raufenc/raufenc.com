@@ -176,31 +176,36 @@
     }
 
     function formatClue(s) {
-      // "...miyim?" + "Evet." → düz ifade: "...müelliflerinden biriyim."
-      // "...miyim?" + "Hayır." → "...müelliflerinden biri değilim."
       const soru = s.soru.trim();
       const cevap = (s.cevap || '').trim().toLowerCase().replace(/\./g, '');
       const evet = cevap.startsWith('evet');
 
-      // "...miyim?" → "...yım." / "...değilim."
       let ifade = soru;
       if (soru.endsWith('?')) ifade = ifade.slice(0, -1);
 
-      // miyim → yım, mıyım → yım, müyüm → yüm, muyum → yum
+      // Soru eki dönüşümleri: " miyim" → "yım", " mıyım" → "yım" vb.
+      // Anahtar: boşluk + soru eki tamamen kaldırılıp doğru ek ekleniyor
       if (evet) {
-        ifade = ifade.replace(/\s+mi(y[iı]m|yüm|yum)$/i, 'im')
-                     .replace(/\s+mı(y[iı]m)$/i, 'ım')
-                     .replace(/\s+mü(yüm)$/i, 'üm')
-                     .replace(/\s+mu(yum)$/i, 'um');
-        // Fallback: just remove the question suffix
-        if (ifade === soru.slice(0,-1)) ifade = ifade.replace(/\s+mi\w*$/i, '');
+        ifade = ifade
+          .replace(/\s+miyim$/i, 'yim')
+          .replace(/\s+mıyım$/i, 'yım')
+          .replace(/\s+müyüm$/i, 'yüm')
+          .replace(/\s+muyum$/i, 'yum')
+          .replace(/\s+midir$/i, 'dir')
+          .replace(/\s+mıdır$/i, 'dır')
+          .replace(/\s+mı$/i, '')
+          .replace(/\s+mi$/i, '');
         return `✓ ${ifade}.`;
       } else {
-        ifade = ifade.replace(/\s+mi(y[iı]m|yüm|yum)\s*$/i, ' <u>değilim</u>')
-                     .replace(/\s+mı(y[iı]m)\s*$/i, ' <u>değilim</u>')
-                     .replace(/\s+mü(yüm)\s*$/i, ' <u>değilim</u>')
-                     .replace(/\s+mu(yum)\s*$/i, ' <u>değilim</u>');
-        if (!ifade.includes('değilim')) ifade += ' <u>değil</u>';
+        ifade = ifade
+          .replace(/\s+miyim$/i, ' değilim')
+          .replace(/\s+mıyım$/i, ' değilim')
+          .replace(/\s+müyüm$/i, ' değilim')
+          .replace(/\s+muyum$/i, ' değilim')
+          .replace(/\s+midir$/i, ' değildir')
+          .replace(/\s+mıdır$/i, ' değildir')
+          .replace(/\s+mı$/i, ' değil')
+          .replace(/\s+mi$/i, ' değil');
         return `✗ ${ifade}.`;
       }
     }
