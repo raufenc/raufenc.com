@@ -916,14 +916,43 @@ html.light .nt-nav-panel {
 
 /* ── Responsive ── */
 @media (max-width: 640px) {
-  .nt-hero { min-height: 80vh; padding: 100px 16px 40px; }
+  .nt-hero { min-height: 70vh; padding: 80px 16px 40px; }
+  .nt-hero .nt-book-cover img { max-width: 150px; }
+  .nt-title { font-size: clamp(1.4rem, 5vw, 2rem); }
   .nt-section { padding: 40px 0; }
-  .nt-card { padding: 18px; }
+  .nt-card { padding: 14px; font-size: 0.9rem; }
   .nt-gates { grid-template-columns: 1fr; }
-  .nt-stats { flex-direction: column; align-items: center; }
+  .nt-stats {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-bottom: 8px;
+  }
+  .nt-stat { min-width: 110px; flex-shrink: 0; padding: 14px 16px; }
+  .nt-stat-num { font-size: 1.5rem; }
   .nt-result-score { font-size: 3rem; }
   .nt-grid-3 { grid-template-columns: 1fr; }
+  .nt-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .nt-nav-toggle-label { display: none; }
+  .nt-scroll-hint { display: none; }
+}
+
+@media (max-width: 380px) {
+  .nt-hero { min-height: 60vh; padding: 64px 12px 32px; }
+  .nt-hero .nt-book-cover img { max-width: 120px; }
+  .nt-title { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+  .nt-section { padding: 28px 0; }
+  .nt-wrap { padding: 0 12px; }
+  .nt-card { padding: 10px; font-size: 0.85rem; }
+  .nt-stat { min-width: 95px; padding: 10px 12px; }
+  .nt-stat-num { font-size: 1.3rem; }
+  .nt-btn { padding: 10px 20px; font-size: 0.82rem; }
+  .nt-gate { padding: 20px 16px; }
+  .nt-gate-icon { font-size: 2rem; }
+  .nt-cinematic-inner { padding: 24px 14px; gap: 16px; }
 }
 
 /* ── Animations ── */
@@ -1055,6 +1084,10 @@ html.light .nt-nav-panel {
   height: 100%;
   z-index: 0;
   pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  #neural-canvas { display: none; }
 }
 
 .nt-hero > *:not(#neural-canvas):not(.nt-hero-glow):not(.nt-hero-orb-1):not(.nt-hero-orb-2) {
@@ -1224,8 +1257,8 @@ html.light .nt-nav-panel {
   }
   .nt-cinematic-right { display: flex; flex-direction: column; align-items: center; }
   .nt-cinematic-right p { text-align: center; }
-  .nt-timeline-dot { width: 28px; height: 28px; font-size: 0.7rem; }
-  .nt-scroll-hint { display: none; }
+  .nt-cinematic-cta:hover .nt-cinematic-book { transform: none; }
+  .nt-timeline-dot { width: 24px; height: 24px; font-size: 0.65rem; }
 }
 
 /* ── Print Styles ── */

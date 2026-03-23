@@ -5,10 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Satın Al — NöroTerbiye</title>
   <meta name="description" content="NöroTerbiye kitabını satın alabileceğiniz tüm mağazalar.">
-  <meta property="og:title" content="Satın Al">
-  <meta property="og:description" content="NöroTerbiye kitabını satın alabileceğiniz tüm mağazalar.">
+  <meta property="og:title" content="NöroTerbiye — Satın Al">
+  <meta property="og:description" content="İçindeki düşmanı dosta çevirmek. Rauf Enç'in NöroTerbiye kitabını satın al.">
   <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
   <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NöroTerbiye — Satın Al">
+  <meta name="twitter:description" content="İçindeki düşmanı dosta çevirmek. Rauf Enç'in NöroTerbiye kitabını satın al.">
+  <meta name="twitter:image" content="https://raufenc.com/images/noroterbiye.webp">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
   <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
@@ -18,16 +22,25 @@
 
     .store-card {
       display: flex; align-items: center; gap: 16px;
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--nt-glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--nt-glass-border);
+      border-left: 3px solid var(--nt-primary);
       border-radius: var(--radius-lg); padding: 20px 24px;
       text-decoration: none; color: var(--text);
       transition: all var(--transition-fast);
       position: relative; overflow: hidden;
     }
+    .store-card:nth-child(2) { border-left-color: var(--nt-cyan); }
+    .store-card:nth-child(3) { border-left-color: var(--nt-orange); }
+    .store-card:nth-child(4) { border-left-color: var(--nt-green); }
+    .store-card:nth-child(5) { border-left-color: var(--nt-purple); }
     .store-card:hover {
       border-color: var(--nt-primary);
+      border-left-width: 3px;
       transform: translateY(-2px);
       box-shadow: 0 8px 24px var(--nt-primary-glow);
+      background: var(--nt-glass-hover);
     }
     .store-card::after {
       content: ''; position: absolute; top: 0; right: 0;
@@ -36,6 +49,19 @@
       pointer-events: none; opacity: 0; transition: opacity 0.3s;
     }
     .store-card:hover::after { opacity: 1; }
+
+    /* Highlighted first store */
+    .store-card--highlight {
+      border-left-color: var(--nt-primary) !important;
+      box-shadow: 0 0 20px var(--nt-primary-glow);
+    }
+    .store-badge {
+      position: absolute; top: 0; right: 0;
+      background: var(--nt-grad);
+      color: #fff; font-size: 0.65rem; font-weight: 700;
+      padding: 3px 12px 3px 10px; border-radius: 0 var(--radius-lg) 0 var(--radius-md);
+      letter-spacing: 0.5px; text-transform: uppercase;
+    }
 
     .store-logo {
       width: 48px; height: 48px; border-radius: var(--radius-md);
@@ -51,14 +77,43 @@
     }
     .store-card:hover .store-arrow { color: var(--nt-primary); transform: translateX(3px); }
 
+    /* ── Book Hero ── */
     .book-hero {
       display: flex; gap: 32px; align-items: center;
       margin-bottom: 40px; flex-wrap: wrap;
+      background: var(--nt-glass);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--nt-glass-border);
+      border-left: 4px solid transparent;
+      border-image: linear-gradient(to bottom, #6366f1, #06b6d4) 1;
+      border-image-slice: 1;
+      border-radius: 0;
+      padding: 32px;
+      position: relative;
+    }
+    /* Rounded corners workaround since border-image breaks border-radius */
+    .book-hero-wrap {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .book-hero { margin-bottom: 0; }
+
+    .book-cover-glow {
+      position: relative; flex-shrink: 0;
+    }
+    .book-cover-glow::before {
+      content: '';
+      position: absolute; inset: -20px;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.25), rgba(6,182,212,0.15), transparent 70%);
+      filter: blur(20px);
+      z-index: 0; border-radius: 50%;
     }
     .book-hero img {
       width: 160px; border-radius: var(--radius-md);
       box-shadow: 0 12px 40px rgba(0,0,0,0.3);
       border: 1px solid var(--border);
+      position: relative; z-index: 1;
     }
     .book-hero-info { flex: 1; min-width: 240px; }
     .book-hero-info h2 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
@@ -66,10 +121,15 @@
     .book-hero-info .meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
     .book-hero-info .meta span { margin-right: 12px; }
 
+    /* ── Reviews ── */
     .review-card {
-      background: var(--surface); border: 1px solid var(--border);
+      background: var(--nt-glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--nt-glass-border);
       border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 12px;
+      transition: background 0.2s;
     }
+    .review-card:hover { background: var(--nt-glass-hover); }
     .review-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .review-author { font-weight: 700; font-size: 0.9rem; }
     .review-meta { font-size: 0.72rem; color: var(--muted); }
@@ -77,9 +137,68 @@
     .review-text { font-size: 0.88rem; line-height: 1.7; color: var(--text-secondary); }
     .review-source { font-size: 0.7rem; color: var(--muted); margin-top: 8px; }
 
+    .rating-summary {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--nt-glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--nt-glass-border);
+      border-radius: var(--radius-lg); padding: 14px 20px;
+      margin-bottom: 20px; font-size: 0.95rem; font-weight: 600;
+    }
+    .rating-summary .rating-big { font-size: 1.3rem; font-weight: 800; }
+    .rating-summary .rating-count { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+
+    .review-card.hidden-review { display: none; }
+
+    .btn-show-reviews {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--nt-glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--nt-glass-border);
+      border-radius: var(--radius-md); padding: 10px 20px;
+      color: var(--nt-primary); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-top: 8px;
+    }
+    .btn-show-reviews:hover {
+      background: var(--nt-primary-soft); border-color: var(--nt-primary);
+    }
+
+    /* ── Sticky mobile CTA ── */
+    .mobile-cta {
+      display: none;
+    }
     @media (max-width: 640px) {
-      .book-hero { flex-direction: column; text-align: center; }
+      .mobile-cta {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+        background: var(--nt-glass);
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--nt-glass-border);
+        padding: 12px 20px;
+        animation: slideUp 0.4s ease-out;
+      }
+      .mobile-cta a {
+        flex: 1; text-align: center;
+        background: var(--nt-grad); color: #fff;
+        font-weight: 700; font-size: 0.95rem;
+        padding: 12px 24px; border-radius: var(--radius-md);
+        text-decoration: none;
+        box-shadow: 0 4px 16px var(--nt-primary-glow);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .mobile-cta a:active {
+        transform: scale(0.97);
+      }
+      @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+      }
+      /* Extra bottom padding so content isn't hidden behind the sticky bar */
+      .nt-section { padding-bottom: 80px !important; }
+
+      .book-hero { flex-direction: column; text-align: center; padding: 24px; }
       .book-hero img { width: 120px; }
+      .book-cover-glow::before { inset: -12px; }
       .store-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -91,24 +210,28 @@
     <div class="nt-wrap">
 
       <!-- Kitap Bilgisi -->
-      <div class="book-hero nt-fade-in">
-        <img src="/images/noroterbiye.webp" alt="NöroTerbiye — Rauf Enç" />
-        <div class="book-hero-info">
-          <h2>NöroTerbiye</h2>
-          <p class="author">Rauf Enç</p>
-          <p style="font-size:0.92rem;color:var(--text-secondary);margin-bottom:6px">
-            İçindeki Düşmanı Dosta Çevirmek
-          </p>
-          <p class="meta">
-            <span>KTB Yayınları</span>
-            <span>2. Baskı</span>
-            <span>272 sayfa</span>
-            <span>ISBN: 978-625-6979-37-6</span>
-          </p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <span class="nt-tag nt-tag-green">Psikoloji</span>
-            <span class="nt-tag nt-tag-primary">Nörobilim</span>
-            <span class="nt-tag nt-tag-purple">Nefs Terbiyesi</span>
+      <div class="book-hero-wrap nt-fade-in">
+        <div class="book-hero">
+          <div class="book-cover-glow">
+            <img src="/images/noroterbiye.webp" alt="NöroTerbiye — Rauf Enç" />
+          </div>
+          <div class="book-hero-info">
+            <h2 class="nt-title-gradient">NöroTerbiye</h2>
+            <p class="author">Rauf Enç</p>
+            <p style="font-size:0.92rem;color:var(--text-secondary);margin-bottom:6px">
+              İçindeki Düşmanı Dosta Çevirmek
+            </p>
+            <p class="meta">
+              <span>KTB Yayınları</span>
+              <span>2. Baskı</span>
+              <span>272 sayfa</span>
+              <span>ISBN: 978-625-6979-37-6</span>
+            </p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span class="nt-tag nt-tag-green">Psikoloji</span>
+              <span class="nt-tag nt-tag-primary">Nörobilim</span>
+              <span class="nt-tag nt-tag-purple">Nefs Terbiyesi</span>
+            </div>
           </div>
         </div>
       </div>
@@ -131,113 +254,135 @@
         Kitapyurdu, Trendyol ve Hepsiburada'dan alınan gerçek okuyucu yorumları
       </p>
 
-      <div class="review-card nt-fade-in" style="animation-delay:0.4s">
-        <div class="review-header">
-          <span class="review-author">Kitapkurdu</span>
-          <span class="review-meta">04.03.2026 · Satın Alma Onaylı</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Beyin, nörobiyoloji, sindirim sistemi, sağlıklı beslenme, irade terbiyesi vs üzerine yazılmış toplam on tane kitap okumuşumdur. Bunları ve benzeri bilimsel kitapları, özümüze hitap eden Gazali, İmam Rabbani rahimullah gibi referans İslam âlimlerinin nefs ve terbiyesi konusuyla ilgili eserlerine harmanlayarak ortaya hap gibi bilgi ve çözüm sunan mükemmel bir kitap çıkarmış. Onlarca kitaba bedel bir hülasa olmuş. Şiddetle tavsiye edilir.</p>
-        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+      <!-- Rating Summary -->
+      <div class="rating-summary nt-fade-in" style="animation-delay:0.37s">
+        <span style="font-size:1.4rem">⭐</span>
+        <span class="rating-big">5.0</span>
+        <span style="color:var(--text-secondary)">/ 5.0</span>
+        <span class="rating-count">· 10 değerlendirme</span>
       </div>
 
-      <div class="review-card nt-fade-in" style="animation-delay:0.45s">
-        <div class="review-header">
-          <span class="review-author">Fatih İlhan</span>
-          <span class="review-meta">26.01.2026</span>
+      <div id="reviews-container">
+        <div class="review-card nt-fade-in" style="animation-delay:0.4s">
+          <div class="review-header">
+            <span class="review-author">Kitapkurdu</span>
+            <span class="review-meta">04.03.2026 · Satın Alma Onaylı</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Beyin, nörobiyoloji, sindirim sistemi, sağlıklı beslenme, irade terbiyesi vs üzerine yazılmış toplam on tane kitap okumuşumdur. Bunları ve benzeri bilimsel kitapları, özümüze hitap eden Gazali, İmam Rabbani rahimullah gibi referans İslam âlimlerinin nefs ve terbiyesi konusuyla ilgili eserlerine harmanlayarak ortaya hap gibi bilgi ve çözüm sunan mükemmel bir kitap çıkarmış. Onlarca kitaba bedel bir hülasa olmuş. Şiddetle tavsiye edilir.</p>
+          <div class="review-source">Kaynak: Kitapyurdu.com</div>
         </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Dili çok akıcı ve açıklayıcı. Kitap sadece nörobiyoloji bilgisi vermekle kalmıyor bunu ahlaki çerçevede inceliyor. Emeği geçenlerin yüreğine sağlık.</p>
-        <div class="review-source">Kaynak: Kitapyurdu.com</div>
+
+        <div class="review-card nt-fade-in" style="animation-delay:0.45s">
+          <div class="review-header">
+            <span class="review-author">Fatih İlhan</span>
+            <span class="review-meta">26.01.2026</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Dili çok akıcı ve açıklayıcı. Kitap sadece nörobiyoloji bilgisi vermekle kalmıyor bunu ahlaki çerçevede inceliyor. Emeği geçenlerin yüreğine sağlık.</p>
+          <div class="review-source">Kaynak: Kitapyurdu.com</div>
+        </div>
+
+        <div class="review-card nt-fade-in" style="animation-delay:0.5s">
+          <div class="review-header">
+            <span class="review-author">Üsküplüsehzade</span>
+            <span class="review-meta">26.01.2026</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Kitabı baştan sona okudum. Kendinizi (nefsimizi) tanımak adına mükemmel bir kitap. Keşke daha önce okusaydım.</p>
+          <div class="review-source">Kaynak: Kitapyurdu.com</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.55s">
+          <div class="review-header">
+            <span class="review-author">Yasin Arı</span>
+            <span class="review-meta">04.03.2026</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Ufuk açan bir eser, tavsiye ile aldım iyi ki almışım.</p>
+          <div class="review-source">Kaynak: Kitapyurdu.com</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.6s">
+          <div class="review-header">
+            <span class="review-author">Trendyol Alıcısı</span>
+            <span class="review-meta">23.07.2025</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Tam ihtiyacım olan bilgiler çok güzel bir rehber. Herkes okumalı. Yılların tecrübesiyle kaleme alınmış, her satırı yaşanarak yazılmış. Yazara başarıların devamını dilerim, artık sürekli takipçisiyim.</p>
+          <div class="review-source">Kaynak: Trendyol</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.65s">
+          <div class="review-header">
+            <span class="review-author">E** A**</span>
+            <span class="review-meta">21.04.2025</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Tam aradığım kitap, nefs terbiyesi üzerinde durulmuş akıcı bir dilde yazılmış.</p>
+          <div class="review-source">Kaynak: Trendyol</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.7s">
+          <div class="review-header">
+            <span class="review-author">Trendyol Alıcısı</span>
+            <span class="review-meta">24.04.2025</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Kitap çok tavsiye edildi. Emeği geçenlere sonsuz teşekkürler.</p>
+          <div class="review-source">Kaynak: Trendyol</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.75s">
+          <div class="review-header">
+            <span class="review-author">Trendyol Alıcısı</span>
+            <span class="review-meta">10.05.2025</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Böyle kitaplar artmalı.</p>
+          <div class="review-source">Kaynak: Trendyol</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.8s">
+          <div class="review-header">
+            <span class="review-author">B**** Ç****</span>
+            <span class="review-meta">12.03.2026 · Onaylı Alıcı</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Okunması hayata bakışını değiştirir. İnsanı okumuş oluyorsunuz.</p>
+          <div class="review-source">Kaynak: Hepsiburada</div>
+        </div>
+
+        <div class="review-card hidden-review nt-fade-in" style="animation-delay:0.85s">
+          <div class="review-header">
+            <span class="review-author">Ö**** Ö****</span>
+            <span class="review-meta">29.10.2025 · Onaylı Alıcı</span>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Bilim ve ilimi bir arada yürütmeye çalışan, çok faydalı bir kitap. Özellikle eğitimcilerin, anne babaların okuması faydalıdır.</p>
+          <div class="review-source">Kaynak: Hepsiburada</div>
+        </div>
       </div>
 
-      <div class="review-card nt-fade-in" style="animation-delay:0.5s">
-        <div class="review-header">
-          <span class="review-author">Üsküplüsehzade</span>
-          <span class="review-meta">26.01.2026</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Kitabı baştan sona okudum. Kendinizi (nefsimizi) tanımak adına mükemmel bir kitap. Keşke daha önce okusaydım.</p>
-        <div class="review-source">Kaynak: Kitapyurdu.com</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.55s">
-        <div class="review-header">
-          <span class="review-author">Yasin Arı</span>
-          <span class="review-meta">04.03.2026</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Ufuk açan bir eser, tavsiye ile aldım iyi ki almışım.</p>
-        <div class="review-source">Kaynak: Kitapyurdu.com</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.6s">
-        <div class="review-header">
-          <span class="review-author">Trendyol Alıcısı</span>
-          <span class="review-meta">23.07.2025</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Tam ihtiyacım olan bilgiler çok güzel bir rehber. Herkes okumalı. Yılların tecrübesiyle kaleme alınmış, her satırı yaşanarak yazılmış. Yazara başarıların devamını dilerim, artık sürekli takipçisiyim.</p>
-        <div class="review-source">Kaynak: Trendyol</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.65s">
-        <div class="review-header">
-          <span class="review-author">E** A**</span>
-          <span class="review-meta">21.04.2025</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Tam aradığım kitap, nefs terbiyesi üzerinde durulmuş akıcı bir dilde yazılmış.</p>
-        <div class="review-source">Kaynak: Trendyol</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.7s">
-        <div class="review-header">
-          <span class="review-author">Trendyol Alıcısı</span>
-          <span class="review-meta">24.04.2025</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Kitap çok tavsiye edildi. Emeği geçenlere sonsuz teşekkürler.</p>
-        <div class="review-source">Kaynak: Trendyol</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.75s">
-        <div class="review-header">
-          <span class="review-author">Trendyol Alıcısı</span>
-          <span class="review-meta">10.05.2025</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Böyle kitaplar artmalı.</p>
-        <div class="review-source">Kaynak: Trendyol</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.8s">
-        <div class="review-header">
-          <span class="review-author">B**** Ç****</span>
-          <span class="review-meta">12.03.2026 · Onaylı Alıcı</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Okunması hayata bakışını değiştirir. İnsanı okumuş oluyorsunuz.</p>
-        <div class="review-source">Kaynak: Hepsiburada</div>
-      </div>
-
-      <div class="review-card nt-fade-in" style="animation-delay:0.85s">
-        <div class="review-header">
-          <span class="review-author">Ö**** Ö****</span>
-          <span class="review-meta">29.10.2025 · Onaylı Alıcı</span>
-        </div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Bilim ve ilimi bir arada yürütmeye çalışan, çok faydalı bir kitap. Özellikle eğitimcilerin, anne babaların okuması faydalıdır.</p>
-        <div class="review-source">Kaynak: Hepsiburada</div>
-      </div>
+      <button class="btn-show-reviews nt-fade-in" id="btn-toggle-reviews" style="animation-delay:0.55s" onclick="toggleReviews()">
+        <span id="btn-reviews-text">Tüm Yorumları Gör</span>
+        <svg id="btn-reviews-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition:transform 0.2s"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
 
     </div>
   </section>
 
+  <!-- Sticky mobile CTA -->
+  <div class="mobile-cta">
+    <a href="https://www.ktbkitap.com/urun/noroterbiye-rauf-enc" target="_blank" rel="noopener">
+      Satın Al
+    </a>
+  </div>
+
   <script src="/noroterbiye/js/common.js"></script>
   <script>
     const STORES = [
-      { name: 'KTB Kitap', desc: 'Yayınevinin resmi mağazası', icon: '📚', url: 'https://www.ktbkitap.com/urun/noroterbiye-rauf-enc' },
+      { name: 'KTB Kitap', desc: 'Yayınevinin resmi mağazası', icon: '📚', url: 'https://www.ktbkitap.com/urun/noroterbiye-rauf-enc', highlight: true },
       { name: 'Kitapyurdu', desc: 'Türkiye\'nin en büyük kitap sitesi', icon: '📖', url: 'https://www.kitapyurdu.com/index.php?route=product/search&filter_name=n%C3%B6roterbiye+rauf+en%C3%A7' },
       { name: 'Trendyol', desc: 'Hızlı kargo, kampanyalı fiyatlar', icon: '🚀', url: 'https://www.trendyol.com/sr?q=n%C3%B6roterbiye+rauf+en%C3%A7&qt=n%C3%B6roterbiye' },
       { name: 'Hepsiburada', desc: 'Aynı gün kargo seçeneği', icon: '📦', url: 'https://www.hepsiburada.com/ara?q=n%C3%B6roterbiye+rauf+en%C3%A7' },
@@ -246,8 +391,11 @@
 
     const storesEl = document.getElementById('stores');
     STORES.forEach((s, i) => {
+      const highlightClass = s.highlight ? ' store-card--highlight' : '';
+      const badge = s.highlight ? '<span class="store-badge">Yayınevi</span>' : '';
       storesEl.innerHTML += `
-        <a href="${s.url}" target="_blank" rel="noopener" class="store-card" style="animation-delay:${i * 0.05}s">
+        <a href="${s.url}" target="_blank" rel="noopener" class="store-card${highlightClass}" style="animation-delay:${i * 0.05}s">
+          ${badge}
           <div class="store-logo">${s.icon}</div>
           <div class="store-info">
             <div class="store-name">${s.name}</div>
@@ -257,6 +405,17 @@
         </a>
       `;
     });
+
+    // Review toggle
+    let reviewsExpanded = false;
+    function toggleReviews() {
+      reviewsExpanded = !reviewsExpanded;
+      document.querySelectorAll('.hidden-review').forEach(el => {
+        el.style.display = reviewsExpanded ? 'block' : 'none';
+      });
+      document.getElementById('btn-reviews-text').textContent = reviewsExpanded ? 'Yorumları Gizle' : 'Tüm Yorumları Gör';
+      document.getElementById('btn-reviews-arrow').style.transform = reviewsExpanded ? 'rotate(180deg)' : 'rotate(0)';
+    }
 
     NT.renderNav();
     NT.renderFooter();
