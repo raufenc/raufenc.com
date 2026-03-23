@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birlikte İyilik Akademisi — Değerler Eğitimi Serisi</title>
+<meta name="description" content="Sevgili Peygamberim kitabından 40 ders. Değerler eğitimi için kapsamlı materyal seti.">
+<link rel="icon" href="images/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C8102E;
+  --red-dark: #9B0D23;
+  --red-light: #E8354D;
+  --pink: #FFF0F0;
+  --pink-deep: #FFE0E0;
+  --cream: #FFFAF5;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --gray-light: #999;
+  --white: #fff;
+  --gold: #D4A843;
+  --shadow: 0 4px 24px rgba(200,16,46,0.08);
+  --shadow-lg: 0 12px 48px rgba(200,16,46,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200,16,46,0.08);
+  transition: var(--transition);
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.nav-logo img { height: 36px; }
+.nav-logo span { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--red); font-size: 14px; }
+.nav-links { display: flex; gap: 8px; list-style: none; }
+.nav-links a {
+  text-decoration: none; color: var(--gray); font-size: 13px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px; transition: var(--transition);
+}
+.nav-links a:hover, .nav-links a.active { color: var(--red); background: var(--pink); }
+.nav-progress { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--red); transition: width 0.15s; width: 0; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--dark); margin: 5px 0; transition: var(--transition); border-radius: 2px; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(165deg, var(--red) 0%, var(--red-dark) 50%, #6B0616 100%);
+  position: relative; overflow: hidden;
+  padding: 100px 24px 60px;
+  text-align: center;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(255,255,255,0.04) 0%, transparent 40%);
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-badge {
+  display: inline-block; background: rgba(255,255,255,0.15); color: white;
+  padding: 6px 20px; border-radius: 30px; font-size: 13px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
+  backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4rem);
+  color: white; font-weight: 700; line-height: 1.15; margin-bottom: 16px;
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: rgba(255,255,255,0.85); font-weight: 400; font-style: italic; margin-bottom: 12px;
+}
+.hero .tagline {
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: rgba(255,255,255,0.7); margin-bottom: 48px; font-weight: 300;
+}
+.hero-stats {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat .number {
+  font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700;
+  color: white; line-height: 1;
+}
+.hero-stat .label {
+  font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase;
+  letter-spacing: 1px; margin-top: 4px;
+}
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: white; color: var(--red); padding: 16px 36px;
+  border-radius: 50px; font-weight: 600; font-size: 1rem;
+  text-decoration: none; transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.hero-cta:hover {
+  transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  background: var(--pink);
+}
+.hero-cta svg { width: 20px; height: 20px; }
+
+/* ===== SECTION COMMON ===== */
+.section {
+  max-width: 1280px; margin: 0 auto; padding: 80px 24px;
+}
+.section-header {
+  text-align: center; margin-bottom: 48px;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--dark); margin-bottom: 12px;
+}
+.section-header p {
+  font-size: 1.05rem; color: var(--gray); max-width: 600px; margin: 0 auto;
+}
+
+/* ===== SEARCH & FILTER ===== */
+.filter-bar {
+  max-width: 700px; margin: 0 auto 48px; display: flex; flex-direction: column; gap: 16px;
+}
+.search-box {
+  position: relative;
+}
+.search-box input {
+  width: 100%; padding: 14px 20px 14px 48px;
+  border: 2px solid rgba(200,16,46,0.12); border-radius: 50px;
+  font-size: 0.95rem; font-family: 'Inter', sans-serif;
+  background: white; color: var(--dark); transition: var(--transition);
+  outline: none;
+}
+.search-box input:focus { border-color: var(--red); box-shadow: 0 0 0 4px rgba(200,16,46,0.08); }
+.search-box input::placeholder { color: var(--gray-light); }
+.search-box svg {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  width: 20px; height: 20px; color: var(--gray-light);
+}
+.search-count {
+  text-align: center; font-size: 0.85rem; color: var(--gray-light); display: none;
+}
+
+/* ===== PERIOD GROUPS ===== */
+.period-group { margin-bottom: 56px; }
+.period-header {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 24px;
+  cursor: pointer; user-select: none;
+}
+.period-header:hover .period-title { color: var(--red); }
+.period-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 1.2rem; flex-shrink: 0;
+}
+.period-title {
+  font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700;
+  color: var(--dark); transition: var(--transition);
+}
+.period-subtitle {
+  font-size: 0.85rem; color: var(--gray); margin-top: 2px;
+}
+.period-toggle {
+  margin-left: auto; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--pink); display: flex; align-items: center; justify-content: center;
+  transition: var(--transition); flex-shrink: 0;
+}
+.period-toggle svg { width: 16px; height: 16px; color: var(--red); transition: var(--transition); }
+.period-group.collapsed .period-toggle svg { transform: rotate(-90deg); }
+.period-group.collapsed .lessons-grid { display: none; }
+
+/* ===== LESSONS GRID ===== */
+.lessons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* ===== LESSON CARD ===== */
+.lesson-card {
+  background: white; border-radius: var(--radius);
+  box-shadow: var(--shadow); transition: var(--transition);
+  overflow: hidden; position: relative;
+  opacity: 0; transform: translateY(30px);
+  animation: fadeInCard 0.8s ease forwards;
+}
+@keyframes fadeInCard {
+  to { opacity: 1; transform: translateY(0); }
+}
+.lesson-card.visible {
+  opacity: 1; transform: translateY(0);
+}
+.lesson-card:hover {
+  box-shadow: var(--shadow-lg); transform: translateY(-4px);
+}
+.lesson-card.visible:hover { transform: translateY(-4px); }
+.card-top {
+  padding: 24px 24px 0; display: flex; align-items: flex-start; justify-content: space-between;
+}
+.card-number {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--red), var(--red-dark));
+  color: white; font-weight: 700; font-size: 0.95rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.card-theme {
+  display: inline-block; background: var(--pink); color: var(--red);
+  padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  max-width: 160px; text-align: right; line-height: 1.3;
+}
+.card-body { padding: 16px 24px; }
+.card-body h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.15rem;
+  font-weight: 700; color: var(--dark); margin-bottom: 8px;
+  line-height: 1.35;
+}
+.card-body .subtitle {
+  font-size: 0.85rem; color: var(--gray); line-height: 1.5;
+  margin-bottom: 12px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.card-book {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; color: var(--gray-light);
+  padding-bottom: 16px;
+}
+.card-book svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* Download toggle */
+.card-download-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px; background: var(--pink);
+  cursor: pointer; transition: var(--transition); border-top: 1px solid rgba(200,16,46,0.06);
+  user-select: none;
+}
+.card-download-toggle:hover { background: var(--pink-deep); }
+.card-download-toggle .dl-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; font-weight: 600; color: var(--red);
+}
+.card-download-toggle .dl-label svg { width: 16px; height: 16px; }
+.card-download-toggle .dl-arrow { transition: var(--transition); color: var(--red); }
+.card-download-toggle .dl-arrow svg { width: 16px; height: 16px; }
+.lesson-card.expanded .card-download-toggle .dl-arrow { transform: rotate(180deg); }
+
+/* Download panel */
+.card-downloads {
+  max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
+  background: var(--pink);
+}
+.lesson-card.expanded .card-downloads { max-height: 500px; }
+.downloads-list {
+  padding: 0 24px 20px; display: flex; flex-direction: column; gap: 6px;
+}
+.dl-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; border-radius: var(--radius-sm);
+  background: white; text-decoration: none; color: var(--dark);
+  font-size: 0.82rem; font-weight: 500; transition: var(--transition);
+}
+.dl-item:hover { background: var(--pink-deep); color: var(--red); transform: translateX(4px); }
+.dl-icon {
+  width: 28px; height: 28px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 700; color: white; flex-shrink: 0;
+}
+.dl-icon.docx { background: #2B5797; }
+.dl-icon.pptx { background: #D04423; }
+.dl-icon.pdf { background: #E03C31; }
+.dl-item .dl-name { flex: 1; }
+.dl-item .dl-ext { font-size: 0.7rem; color: var(--gray-light); text-transform: uppercase; }
+
+/* ===== ABOUT ===== */
+.about-section {
+  background: white;
+}
+.about-inner {
+  max-width: 800px; margin: 0 auto; text-align: center;
+}
+.about-inner h2 {
+  font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--dark); margin-bottom: 24px;
+}
+.about-inner p {
+  font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 16px;
+}
+.about-inner .book-ref {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--pink); padding: 16px 28px; border-radius: var(--radius);
+  margin-top: 16px; font-weight: 600; color: var(--red-dark); font-size: 0.95rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--dark); color: rgba(255,255,255,0.5);
+  padding: 48px 24px; text-align: center;
+}
+footer .footer-brand {
+  font-family: 'Playfair Display', serif; font-size: 1.3rem;
+  font-weight: 700; color: white; margin-bottom: 8px;
+}
+footer .footer-tagline {
+  font-size: 0.85rem; margin-bottom: 24px;
+}
+footer .footer-links {
+  display: flex; gap: 24px; justify-content: center; list-style: none;
+  margin-bottom: 24px;
+}
+footer .footer-links a {
+  color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem;
+  transition: var(--transition);
+}
+footer .footer-links a:hover { color: white; }
+footer .footer-copy { font-size: 0.75rem; }
+
+/* ===== NO RESULTS ===== */
+.no-results {
+  text-align: center; padding: 60px 20px; display: none;
+}
+.no-results svg { width: 64px; height: 64px; color: var(--gray-light); margin-bottom: 16px; }
+.no-results h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gray); margin-bottom: 8px; }
+.no-results p { font-size: 0.9rem; color: var(--gray-light); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; position: fixed; top: 62px; left: 0; right: 0;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+    flex-direction: column; padding: 20px; gap: 4px;
+    border-bottom: 1px solid rgba(200,16,46,0.08);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 16px; font-size: 0.95rem; }
+  .hamburger { display: block; }
+  .hero-stats { gap: 20px; }
+  .hero-stat .number { font-size: 2.2rem; }
+  .lessons-grid { grid-template-columns: 1fr; }
+  .period-header { gap: 12px; }
+  .period-title { font-size: 1.2rem; }
+  .period-icon { width: 40px; height: 40px; font-size: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .hero { padding: 80px 16px 48px; }
+  .hero h1 { font-size: 2rem; }
+  .hero-stats { gap: 16px; }
+  .hero-stat .number { font-size: 1.8rem; }
+  .section { padding: 60px 16px; }
+  .card-top { padding: 20px 20px 0; }
+  .card-body { padding: 12px 20px; }
+  .card-download-toggle { padding: 12px 20px; }
+  .downloads-list { padding: 0 20px 16px; }
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.fade-up {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  animation: fadeInCard 0.8s ease forwards;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="images/logo.png" alt="Birlikte İyilik">
+      <span>Birlikte İyilik</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active">Ana Sayfa</a></li>
+      <li><a href="#dersler">Dersler</a></li>
+      <li><a href="#hakkinda">Hakkında</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-progress" id="progressBar"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Değerler Eğitimi Serisi</div>
+    <h1>Birlikte İyilik<br>Akademisi</h1>
+    <h2>Değerler Eğitimi Serisi</h2>
+    <p class="tagline">Sevgili Peygamberim kitabından 40 ders</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="number">40</div>
+        <div class="label">Ders</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">400</div>
+        <div class="label">Materyal</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">10</div>
+        <div class="label">Dosya / Ders</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">40</div>
+        <div class="label">Dakika / Ders</div>
+      </div>
+    </div>
+    <a href="#dersler" class="hero-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Dersleri Keşfet
+    </a>
+  </div>
+</section>
+
+<!-- LESSONS CATALOG -->
+<section class="section" id="dersler">
+  <div class="section-header fade-up">
+    <h2>Ders Kataloğu</h2>
+    <p>Sevgili Peygamberim kitabından hazırlanmış 40 kapsamlı değerler eğitimi dersi</p>
+  </div>
+
+  <div class="filter-bar fade-up">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="searchInput" placeholder="Ders ara... (başlık, tema veya konu)">
+    </div>
+    <div class="search-count" id="searchCount"></div>
+  </div>
+
+  <div id="lessonsContainer">
+
+    <!-- MEKKE DÖNEMİ -->
+    <div class="period-group" data-period="mekke">
+      <div class="period-header" onclick="togglePeriod(this)">
+        <div class="period-icon">&#9770;</div>
+        <div>
+          <div class="period-title">Mekke Dönemi</div>
+          <div class="period-subtitle">Ders 1-13 &middot; Nübüvvetten Hicrete</div>
+        </div>
+        <div class="period-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="lessons-grid" id="grid-mekke"></div>
+    </div>
+
+    <!-- MEDİNE DÖNEMİ -->
+    <div class="period-group" data-period="medine">
+      <div class="period-header" onclick="togglePeriod(this)">
+        <div class="period-icon">&#9784;</div>
+        <div>
+          <div class="period-title">Medine Dönemi</div>
+          <div class="period-subtitle">Ders 14-24 &middot; Hicretten Mekke'nin Fethine</div>
+        </div>
+        <div class="period-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="lessons-grid" id="grid-medine"></div>
+    </div>
+
+    <!-- SİYER VE AHLÂK -->
+    <div class="period-group" data-period="siyer">
+      <div class="period-header" onclick="togglePeriod(this)">
+        <div class="period-icon">&#10084;</div>
+        <div>
+          <div class="period-title">Siyer ve Ahlak</div>
+          <div class="period-subtitle">Ders 25-36 &middot; Karakter, Faziletler, Aile</div>
+        </div>
+        <div class="period-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="lessons-grid" id="grid-siyer"></div>
+    </div>
+
+    <!-- İSLÂM BİLGİLERİ -->
+    <div class="period-group" data-period="islam">
+      <div class="period-header" onclick="togglePeriod(this)">
+        <div class="period-icon">&#9733;</div>
+        <div>
+          <div class="period-title">İslam Bilgileri</div>
+          <div class="period-subtitle">Ders 37-40 &middot; İman, İbadet, Uygulama</div>
+        </div>
+        <div class="period-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+      </div>
+      <div class="lessons-grid" id="grid-islam"></div>
+    </div>
+
+  </div>
+
+  <div class="no-results" id="noResults">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    <h3>Sonuç Bulunamadı</h3>
+    <p>Arama terimlerinizi değiştirmeyi deneyin.</p>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="hakkinda">
+  <div class="section" style="padding-top: 80px; padding-bottom: 80px;">
+    <div class="about-inner fade-up">
+      <h2>Hakkında</h2>
+      <p>
+        <strong>Birlikte İyilik Akademisi</strong>, Peygamber Efendimiz sallallahu aleyhi ve sellem'in hayatından ilham alan
+        kapsamlı bir değerler eğitimi programıdır. Hüseyin Hilmi Işık rahmetullahi aleyh'in
+        <em>Sevgili Peygamberim</em> kitabından derlenen 40 ders ile çocuklara ve gençlere
+        sevgi, saygı, cesaret, adalet, merhamet gibi temel insani değerleri kazandırmayı hedefler.
+      </p>
+      <p>
+        Her ders; ogrenci kitapcigi, ogretmen kilavuzu, sinif sunumu, online sunum,
+        ontest-sontest, davranis rubrigi, yansitici gunluk, aile ders kartlari,
+        aile geribildirim rubrigi ve ev iklimi mini proje olmak uzere
+        <strong>10 farkli materyal</strong> icermektedir.
+      </p>
+      <div class="book-ref">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Kaynak: Sevgili Peygamberim &mdash; Hüseyin Hilmi Işık (rahmetullahi aleyh)
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Birlikte İyilik Akademisi</div>
+  <div class="footer-tagline">Değerler Eğitimi Serisi</div>
+  <ul class="footer-links">
+    <li><a href="#">Ana Sayfa</a></li>
+    <li><a href="#dersler">Dersler</a></li>
+    <li><a href="#hakkinda">Hakkında</a></li>
+  </ul>
+  <div class="footer-copy">&copy; 2025 Birlikte İyilik Akademisi. Tüm hakları saklıdır.</div>
+</footer>
+
+<script>
+// ===== LESSON DATA =====
+const lessons = [
+  {id:"ders-01",num:1,title:"Sevgi ve Saygı",theme:"Sevgi ve Saygı",subtitle:"Peygamber Efendimiz sallallahu aleyhi ve sellem'in nûrunun yaratılması ve O'na duyulan derin sevgi",bookChapter:"KÂİNATIN SULTÂNI PEYGAMBER EFENDİMİZ",bookPage:9,period:"mekke"},
+  {id:"ders-02",num:2,title:"Umut ve Müjde",theme:"Umut ve Müjde",subtitle:"Peygamber Efendimiz sallallahu aleyhi ve sellem'in gelişini müjdeleyen haberler ve işaretler",bookChapter:"MÜJDE HABERLERİ",bookPage:23,period:"mekke"},
+  {id:"ders-03",num:3,title:"Şükür ve Sevinç",theme:"Şükür ve Sevinç",subtitle:"Peygamber Efendimiz sallallahu aleyhi ve sellem'in dünyaya teşrifleri ve yaşanan mucizevi hâdiseler",bookChapter:"MEKKE-İ MÜKERREME DEVRİ — DÜNYÂYI TEŞRÎFLERİ",bookPage:29,period:"mekke"},
+  {id:"ders-04",num:4,title:"Güvenilirlik ve Doğruluk",theme:"Güvenilirlik",subtitle:"Peygamber Efendimiz sallallahu aleyhi ve sellem'in çocukluk yıllarındaki güvenilirliği ve sütannelik dönemi",bookChapter:"ÇOCUKLUĞU",bookPage:39,period:"mekke"},
+  {id:"ders-05",num:5,title:"Dürüstlük ve Emanet",theme:"Dürüstlük ve Emanet",subtitle:"Peygamber Efendimiz sallallahu aleyhi ve sellem'in 'Muhammedü'l-Emîn' sıfatı, ticaret ahlâkı ve Hz. Hatice vâlidemizle evliliği",bookChapter:"GENÇLİĞİ VE EVLENMESİ",bookPage:51,period:"mekke"},
+  {id:"ders-06",num:6,title:"Cesaret ve Hakikat",theme:"Cesaret ve Hakikat",subtitle:"Vahyin gelişi, Hira mağarası ve Peygamber Efendimiz sallallahu aleyhi ve sellem'in cesurca İslâm'a daveti",bookChapter:"Bİ'SETİ VE DÂVETİ",bookPage:61,period:"mekke"},
+  {id:"ders-07",num:7,title:"Sabır ve Metanet",theme:"Sabır ve Metanet",subtitle:"İlk Müslümanlara yapılan eziyetler, Hz. Bilal radıyallahu anh'ın sabrı ve Taif yolculuğu",bookChapter:"EZİYET, İŞKENCE VE ZULÜM",bookPage:73,period:"mekke"},
+  {id:"ders-08",num:8,title:"Dayanışma ve Sığınma",theme:"Dayanışma ve Sığınma",subtitle:"İlk hicret, Necâşî'nin adaleti ve Hz. Ca'fer radıyallahu anh'ın tarihi konuşması",bookChapter:"HABEŞİSTAN'A HİCRET",bookPage:99,period:"mekke"},
+  {id:"ders-09",num:9,title:"Birlik ve Dayanışma Gücü",theme:"Birlik",subtitle:"Zorluklara karşı birlikte durmanın gücü",bookChapter:"MUHÂSARA",bookPage:115,period:"mekke"},
+  {id:"ders-10",num:10,title:"Empati ve Teselli",theme:"Empati ve Teselli",subtitle:"Acıları paylaşmak ve birbirimize teselli vermek",bookChapter:"HÜZÜN SENESİ",bookPage:123,period:"mekke"},
+  {id:"ders-11",num:11,title:"İman ve Maneviyat",theme:"İman ve Maneviyat",subtitle:"İsrâ ve Mîrâc mucizesi ile namazın hediye edilmesi",bookChapter:"MÎRÂC",bookPage:135,period:"mekke"},
+  {id:"ders-12",num:12,title:"Söz Vermek ve Sadakat",theme:"Söz Vermek ve Sadakat",subtitle:"Verilen söze bağlılığın önemi",bookChapter:"AKABE BÎ'ATLARI",bookPage:151,period:"mekke"},
+  {id:"ders-13",num:13,title:"Fedakârlık ve Tevekkül",theme:"Fedakârlık ve Tevekkül",subtitle:"Büyük hedefler için fedakârlık ve Allah'a güven",bookChapter:"HİCRET",bookPage:157,period:"mekke"},
+  {id:"ders-14",num:14,title:"Kardeşlik ve Paylaşma",theme:"Kardeşlik ve Paylaşma",subtitle:"Ensâr ve Muhâcir kardeşliğinin gücü",bookChapter:"MEDÎNE-İ MÜNEVVERE DEVRİ",bookPage:169,period:"medine"},
+  {id:"ders-15",num:15,title:"İlim ve Eğitim",theme:"İlim ve Eğitim",subtitle:"İlim öğrenmenin önemi ve Peygamber Efendimiz'in eğitim metodu",bookChapter:"ESHÂB-I KİRÂMIN EĞİTİMİ",bookPage:175,period:"medine"},
+  {id:"ders-16",num:16,title:"Cesaret ve İman",theme:"Cesaret ve İman",subtitle:"İman gücüyle zorluklara karşı cesaretle durmak",bookChapter:"BEDR GAZÂSI",bookPage:205,period:"medine"},
+  {id:"ders-17",num:17,title:"Sebat ve Ders Alma",theme:"Sebat ve Ders Alma",subtitle:"Uhud'dan Alınan Dersler",bookChapter:"UHUD GAZÂSI",bookPage:241,period:"medine"},
+  {id:"ders-18",num:18,title:"Takım Çalışması ve Strateji",theme:"Takım Çalışması",subtitle:"Hendek Kazarak Zafere Ulaşmak",bookChapter:"HENDEK GAZÂSI",bookPage:285,period:"medine"},
+  {id:"ders-19",num:19,title:"Sabır ve Diplomasi",theme:"Sabır ve Diplomasi",subtitle:"Görünmeyen Zafer",bookChapter:"HUDEYBİYE VAK'ASI",bookPage:312,period:"medine"},
+  {id:"ders-20",num:20,title:"Saygılı İletişim",theme:"Saygılı İletişim",subtitle:"Devlet Başkanlarına Mektuplar",bookChapter:"DÂVET MEKTUPLARI",bookPage:325,period:"medine"},
+  {id:"ders-21",num:21,title:"Adalet ve Hak",theme:"Adalet",subtitle:"Fetihten Sonra Adaletle Muamele",bookChapter:"HAYBER'İN FETHİ",bookPage:341,period:"medine"},
+  {id:"ders-22",num:22,title:"Kahramanlık ve Liderlik",theme:"Kahramanlık ve Liderlik",subtitle:"Mûte'de Üç Komutan ve Bir Dahi",bookChapter:"MÛTE HARBİ",bookPage:360,period:"medine"},
+  {id:"ders-23",num:23,title:"Af ve Merhamet",theme:"Af ve Merhamet",subtitle:"En Büyük Zafer, En Büyük Af",bookChapter:"MEKKE'NİN FETHİ",bookPage:371,period:"medine"},
+  {id:"ders-24",num:24,title:"Samimiyet ve İhlas",theme:"Samimiyet ve İhlas",subtitle:"Ka'b bin Mâlik'in Tövbesi",bookChapter:"TEBÜK GAZÂSI",bookPage:391,period:"medine"},
+  {id:"ders-25",num:25,title:"İnsan Hakları ve Eşitlik",theme:"İnsan Hakları ve Eşitlik",subtitle:"Vedâ Hutbesi'ndeki Evrensel Mesajlar",bookChapter:"VEDÂ HUTBESİ",bookPage:407,period:"siyer"},
+  {id:"ders-26",num:26,title:"Vefa ve Miras",theme:"Vefa ve Miras",subtitle:"Son Günler, Son Vasiyetler ve Ebedî Miras",bookChapter:"PEYGAMBER EFENDİMİZİN VEFÂTI",bookPage:411,period:"siyer"},
+  {id:"ders-27",num:27,title:"Kimlik ve Anlam",theme:"Kimlik ve Anlam",subtitle:"İsimlerin Hikmeti ve Kişiliğin Yansıması",bookChapter:"PEYGAMBER EFENDİMİZİN MÜBÂREK İSİMLERİ",bookPage:465,period:"siyer"},
+  {id:"ders-28",num:28,title:"Sevgi ve Muhabbet",theme:"Sevgi ve Muhabbet",subtitle:"Peygamber Efendimiz'i Tanımak ve Sevmek",bookChapter:"HİLYE-İ SAÂDET",bookPage:469,period:"siyer"},
+  {id:"ders-29",num:29,title:"Güzel Ahlâk",theme:"Güzel Ahlâk",subtitle:"Günlük Hayatta Ahlâk Güzelliği",bookChapter:"PEYGAMBER EFENDİMİZİN YÜKSEK AHLÂKI",bookPage:478,period:"siyer"},
+  {id:"ders-30",num:30,title:"Erdem ve Üstünlük",theme:"Erdem",subtitle:"Peygamber Efendimiz'in Üstün Fazîletleri",bookChapter:"PEYGAMBER EFENDİMİZİN FAZÎLETLERİ",bookPage:487,period:"siyer"},
+  {id:"ders-31",num:31,title:"Tevazu ve Tövbe",theme:"Tevazu",subtitle:"Günahsız Bir Peygamberin İstiğfar Dersi",bookChapter:"PEYGAMBER EFENDİMİZİN İSTİĞFÂRI",bookPage:495,period:"siyer"},
+  {id:"ders-32",num:32,title:"Merhamet ve Şefkat",theme:"Merhamet ve Şefkat",subtitle:"Ümmetim, Ümmetim!",bookChapter:"PEYGAMBER EFENDİMİZİN ŞEFÂATİ",bookPage:497,period:"siyer"},
+  {id:"ders-33",num:33,title:"İman ve Güven",theme:"İman ve Güven",subtitle:"Mucizeler ve Sarsılmaz İman",bookChapter:"PEYGAMBER EFENDİMİZİN MÛCİZELERİ",bookPage:503,period:"siyer"},
+  {id:"ders-34",num:34,title:"Aile Değerleri",theme:"Aile Sevgisi",subtitle:"Peygamber Ailesinin Sevgi Dolu Dünyası",bookChapter:"PEYGAMBER EFENDİMİZİN EHL-İ BEYTİ",bookPage:515,period:"siyer"},
+  {id:"ders-35",num:35,title:"Dostluk ve Sadakat",theme:"Dostluk ve Sadakat",subtitle:"Sahâbe-i Kirâmın Eşsiz Vefası",bookChapter:"PEYGAMBER EFENDİMİZİN ESHÂBI",bookPage:529,period:"siyer"},
+  {id:"ders-36",num:36,title:"Sünnet ve Günlük Hayat",theme:"Sünnet Bilinci",subtitle:"Her Anda Peygamber Efendimiz'in İzinde",bookChapter:"PEYGAMBER EFENDİMİZİN BÂZI ZEVÂİD SÜNNETLERİ",bookPage:533,period:"siyer"},
+  {id:"ders-37",num:37,title:"İnanç Temelleri",theme:"İman",subtitle:"Âmentü'nün Altı Temel Esası",bookChapter:"ÎMÂNIN ŞARTLARI",bookPage:591,period:"islam"},
+  {id:"ders-38",num:38,title:"İbadet Bilinci",theme:"İbadet Bilinci",subtitle:"Namazın Mîrâc Hediyesi",bookChapter:"İSLÂMIN ŞARTLARI / NAMAZ KILMAK",bookPage:607,period:"islam"},
+  {id:"ders-39",num:39,title:"Cömertlik ve Paylaşma",theme:"Cömertlik",subtitle:"Veren El Alan Elden Üstündür",bookChapter:"ZEKÂT VERMEK",bookPage:639,period:"islam"},
+  {id:"ders-40",num:40,title:"Sabır ve Nefis Terbiyesi",theme:"Sabır ve Nefis Terbiyesi",subtitle:"Oruç ile İradeyi Güçlendirmek",bookChapter:"ORUÇ TUTMAK",bookPage:641,period:"islam"}
+];
+
+const materials = [
+  {name:"Öğrenci Kitapçığı", file:"ogrenci-kitapcigi.docx", ext:"docx"},
+  {name:"Öğretmen Kılavuzu", file:"ogretmen-kilavuzu.docx", ext:"docx"},
+  {name:"Sınıf Sunumu (16:9)", file:"sinif-sunumu-16-9.pptx", ext:"pptx"},
+  {name:"Online Sunum (9:16)", file:"online-sunum-9-16.pptx", ext:"pptx"},
+  {name:"Öntest-Sontest", file:"ontest-sontest.docx", ext:"docx"},
+  {name:"Davranış Rubriği", file:"davranis-rubrigi.docx", ext:"docx"},
+  {name:"Yansıtıcı Günlük", file:"yansitici-gunluk.docx", ext:"docx"},
+  {name:"Aile Ders Kartları", file:"aile-ders-kartlari.pdf", ext:"pdf"},
+  {name:"Aile Geribildirim Rubriği", file:"aile-geribildirim-rubrigi.docx", ext:"docx"},
+  {name:"Ev İklimi Mini Proje", file:"ev-iklimi-mini-proje.pdf", ext:"pdf"}
+];
+
+// ===== RENDER CARDS =====
+function createCard(lesson) {
+  const numStr = String(lesson.num).padStart(2, '0');
+  let dlItems = materials.map(m => {
+    const isPdf = m.ext === 'pdf';
+    const iconClass = m.ext;
+    const extLabel = m.ext.toUpperCase();
+    const attrs = isPdf ? 'target="_blank"' : 'download';
+    return `<a href="materyaller/${lesson.id}/${m.file}" ${attrs} class="dl-item">
+      <div class="dl-icon ${iconClass}">${extLabel}</div>
+      <span class="dl-name">${m.name}</span>
+      <span class="dl-ext">.${m.ext}</span>
+    </a>`;
+  }).join('');
+
+  return `<div class="lesson-card" data-title="${lesson.title.toLowerCase()}" data-theme="${lesson.theme.toLowerCase()}" data-subtitle="${lesson.subtitle.toLowerCase()}" data-num="${lesson.num}">
+    <div class="card-top">
+      <div class="card-number">${numStr}</div>
+      <div class="card-theme">${lesson.theme}</div>
+    </div>
+    <div class="card-body">
+      <h3>${lesson.title}</h3>
+      <div class="subtitle">${lesson.subtitle}</div>
+      <div class="card-book">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        ${lesson.bookChapter} (s. ${lesson.bookPage})
+      </div>
+    </div>
+    <div class="card-download-toggle" onclick="toggleDownloads(this)">
+      <div class="dl-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        10 Materyal
+      </div>
+      <div class="dl-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+    </div>
+    <div class="card-downloads">
+      <div class="downloads-list">${dlItems}</div>
+    </div>
+  </div>`;
+}
+
+// Populate grids
+const grids = { mekke: document.getElementById('grid-mekke'), medine: document.getElementById('grid-medine'), siyer: document.getElementById('grid-siyer'), islam: document.getElementById('grid-islam') };
+lessons.forEach(l => {
+  if (grids[l.period]) grids[l.period].insertAdjacentHTML('beforeend', createCard(l));
+});
+
+// ===== TOGGLE DOWNLOADS =====
+function toggleDownloads(el) {
+  const card = el.closest('.lesson-card');
+  card.classList.toggle('expanded');
+}
+
+// ===== TOGGLE PERIOD =====
+function togglePeriod(el) {
+  const group = el.closest('.period-group');
+  group.classList.toggle('collapsed');
+}
+
+// ===== SEARCH =====
+const searchInput = document.getElementById('searchInput');
+const searchCount = document.getElementById('searchCount');
+const noResults = document.getElementById('noResults');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.lesson-card');
+  const periodGroups = document.querySelectorAll('.period-group');
+  let visible = 0;
+
+  if (!q) {
+    cards.forEach(c => c.style.display = '');
+    periodGroups.forEach(g => g.style.display = '');
+    searchCount.style.display = 'none';
+    noResults.style.display = 'none';
+    return;
+  }
+
+  cards.forEach(c => {
+    const match = c.dataset.title.includes(q) || c.dataset.theme.includes(q) || c.dataset.subtitle.includes(q);
+    c.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+
+  // Hide period groups with no visible cards
+  periodGroups.forEach(g => {
+    const grid = g.querySelector('.lessons-grid');
+    const visibleCards = grid.querySelectorAll('.lesson-card:not([style*="display: none"])');
+    g.style.display = visibleCards.length ? '' : 'none';
+    // Expand groups during search
+    g.classList.remove('collapsed');
+  });
+
+  searchCount.textContent = `${visible} ders bulundu`;
+  searchCount.style.display = 'block';
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+});
+
+// ===== NAVIGATION =====
+const navbar = document.getElementById('navbar');
+const progressBar = document.getElementById('progressBar');
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+
+// Scroll effects
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  navbar.classList.toggle('scrolled', scrollY > 50);
+
+  // Progress bar
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+  progressBar.style.width = progress + '%';
+});
+
+// Hamburger
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+
+// Close mobile menu on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ===== INTERSECTION OBSERVER (scroll animations) =====
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // Stagger animation for cards
+      const delay = entry.target.classList.contains('lesson-card')
+        ? (parseInt(entry.target.dataset.num) % 4) * 80
+        : 0;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.lesson-card, .fade-up').forEach(el => observer.observe(el));
+
+// ===== ACTIVE NAV LINK =====
+const sections = document.querySelectorAll('section[id], .about-section');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.offsetTop - 120;
+    if (window.scrollY >= top) current = s.id || s.querySelector('[id]')?.id || '';
+  });
+  navAnchors.forEach(a => {
+    a.classList.remove('active');
+    if (current && a.getAttribute('href') === '#' + current) a.classList.add('active');
+    else if (!current && a.getAttribute('href') === '#') a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

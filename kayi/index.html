@@ -1396,21 +1396,125 @@ body {
 
 .map-container {
   width: 100%;
-  height: 500px;
-  border-radius: var(--radius);
-  border: 1px solid rgba(201,168,76,0.2);
+  height: 600px;
+  border-radius: 4px;
   margin-bottom: 2rem;
   overflow: hidden;
   position: relative;
+  /* Parşömen çerçeve */
+  border: 3px solid #8b6914;
+  box-shadow: inset 0 0 60px rgba(139,105,20,0.15), 0 4px 20px rgba(0,0,0,0.4);
+  background: #d4c5a0;
+}
+.map-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 1px solid rgba(139,105,20,0.3);
+  margin: 6px;
+  pointer-events: none;
+  z-index: 1000;
+}
+/* Harita tile'larına vintage filtre */
+.map-container .leaflet-tile-pane {
+  filter: sepia(0.45) saturate(0.6) brightness(0.95) contrast(1.05);
+}
+.map-container .leaflet-control-zoom {
+  border: 2px solid #8b6914 !important;
+  border-radius: 2px !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+}
+.map-container .leaflet-control-zoom a {
+  background: #f0e6cc !important;
+  color: #5a3e1b !important;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 700 !important;
+  border-color: #8b6914 !important;
+}
+.map-container .leaflet-control-zoom a:hover {
+  background: #e8d8b0 !important;
 }
 
-[data-theme="light"] .map-container { border-color: rgba(139,105,20,0.2); }
+[data-theme="light"] .map-container { border-color: #6b5010; }
+
+/* Tarihi harita başlık kartushi */
+.map-cartouche {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: linear-gradient(135deg, #f0e6cc 0%, #e8d8b0 50%, #f0e6cc 100%);
+  border: 2px solid #8b6914;
+  border-radius: 3px;
+  padding: 6px 20px 4px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+.map-cartouche-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #5a3e1b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+.map-cartouche-subtitle {
+  font-family: 'Noto Serif', serif;
+  font-size: 0.65rem;
+  color: #7a6840;
+  font-style: italic;
+}
+
+/* Pusula gülü */
+.map-compass {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1000;
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Harita efsanesi */
+.map-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 1000;
+  background: linear-gradient(135deg, #f0e6cc, #e8d8b0);
+  border: 1.5px solid #8b6914;
+  border-radius: 3px;
+  padding: 8px 12px;
+  font-family: 'Noto Serif', serif;
+  font-size: 0.7rem;
+  color: #5a3e1b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+.map-legend-item:last-child { margin-bottom: 0; }
+.map-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #5a3e1b;
+  flex-shrink: 0;
+}
 
 .map-popup-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.05rem;
   font-weight: 700;
-  color: #8b6914;
+  color: #5a3e1b;
   margin-bottom: 0.3rem;
 }
 
@@ -1421,8 +1525,8 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #2a5a3a;
-  background: rgba(42,90,58,0.1);
+  color: #5a3e1b;
+  background: rgba(139,105,20,0.12);
   padding: 0.1rem 0.5rem;
   border-radius: 8px;
   margin-bottom: 0.5rem;
@@ -1442,8 +1546,41 @@ body {
   color: #888;
 }
 
+/* Harita üzeri yer adı etiketleri — tarihi harita stili */
+.map-label span, .map-label-capital span, .map-label-battle span {
+  white-space: nowrap;
+  font-family: 'Playfair Display', serif;
+  text-shadow: 1px 1px 2px rgba(240,230,204,0.9), -1px -1px 2px rgba(240,230,204,0.9),
+               1px -1px 2px rgba(240,230,204,0.9), -1px 1px 2px rgba(240,230,204,0.9);
+  pointer-events: none;
+}
+.map-label span {
+  font-size: 10px;
+  font-weight: 400;
+  color: #5a3e1b;
+  font-style: italic;
+}
+.map-label-capital span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3a2510;
+  letter-spacing: 1px;
+}
+.map-label-battle span {
+  font-size: 9px;
+  font-weight: 400;
+  color: #6b1d1d;
+  font-style: italic;
+}
+
 .leaflet-popup-content { max-width: 280px; }
-.leaflet-popup-content-wrapper { border-radius: 10px !important; box-shadow: 0 8px 30px rgba(0,0,0,0.2) !important; }
+.leaflet-popup-content-wrapper {
+  border-radius: 4px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3) !important;
+  background: linear-gradient(135deg, #faf4e8, #f0e6cc) !important;
+  border: 1.5px solid #8b6914 !important;
+}
+.leaflet-popup-tip { background: #f0e6cc !important; }
 
 /* ============================================
    RESPONSIVE ADJUSTMENTS
@@ -1603,7 +1740,47 @@ body {
     <h2 class="section-title">Fetih Mekânları</h2>
     <p class="section-desc">Söğüt'ten Edirne'ye, Niğbolu'dan Semerkand'a — 40 önemli mekân</p>
   </div>
-  <div class="map-container" id="mapContainer"></div>
+  <div style="position:relative;">
+    <div class="map-container" id="mapContainer"></div>
+    <!-- Kartuş başlık -->
+    <div class="map-cartouche">
+      <div class="map-cartouche-title">Memâlik-i Osmâniyye</div>
+      <div class="map-cartouche-subtitle">Kuruluştan Çelebi Mehmed'e — 1299‑1421</div>
+    </div>
+    <!-- Pusula gülü (SVG) -->
+    <svg class="map-compass" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(50,50)">
+        <!-- Dış daire -->
+        <circle r="46" fill="none" stroke="#8b6914" stroke-width="1.5" opacity="0.6"/>
+        <circle r="42" fill="none" stroke="#8b6914" stroke-width="0.5" opacity="0.4"/>
+        <!-- Ana yönler -->
+        <polygon points="0,-40 4,-10 -4,-10" fill="#8b6914" opacity="0.8"/>
+        <polygon points="0,40 4,10 -4,10" fill="#c9a84c" opacity="0.5"/>
+        <polygon points="-40,0 -10,4 -10,-4" fill="#c9a84c" opacity="0.5"/>
+        <polygon points="40,0 10,4 10,-4" fill="#c9a84c" opacity="0.5"/>
+        <!-- Çapraz yönler -->
+        <polygon points="-28,-28 -6,-8 -8,-6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="28,-28 6,-8 8,-6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="-28,28 -6,8 -8,6" fill="#c9a84c" opacity="0.3"/>
+        <polygon points="28,28 6,8 8,6" fill="#c9a84c" opacity="0.3"/>
+        <!-- Merkez -->
+        <circle r="3" fill="#8b6914"/>
+        <!-- Yön harfleri -->
+        <text y="-32" text-anchor="middle" font-family="Playfair Display,serif" font-size="8" font-weight="700" fill="#5a3e1b">N</text>
+      </g>
+    </svg>
+    <!-- Harita efsanesi -->
+    <div class="map-legend">
+      <div class="map-legend-item">
+        <div class="map-legend-dot" style="background:#c9a84c;"></div>
+        <span>Şehir / Yerleşim</span>
+      </div>
+      <div class="map-legend-item">
+        <div class="map-legend-dot" style="background:#8b1a1a;"></div>
+        <span>Savaş / Muharebe</span>
+      </div>
+    </div>
+  </div>
   <div class="places-grid" id="placesGrid"></div>
 </section>
 
@@ -1694,60 +1871,60 @@ body {
 const RULERS = [
   {id:"R1",name:"Osman Gazi",chapter:1,birth:"1258, Söğüt",accession:"1281, 23 yaşında aşiret başı",rule:"45 yıl hüküm sürdü",death:"Bursa'nın fethi sırasında vefat etti",parentage:"Baba: Ertuğrul Bey; Anne: Hayme Hatun",pages:"15-50",summary:"Kuruluş devrinin merkez şahsiyeti olarak aşireti beyliğe dönüştürür; adalet, gaza ve manevî rehberlik temaları üzerinden sunulur."},
   {id:"R2",name:"Orhan Gazi",chapter:2,birth:"1281",accession:"1326",rule:"37 yıl saltanat sürdü",death:"Bursa'da vefat etti",parentage:"Baba: Osman Gazi; Anne: Bala Hatun",pages:"53-79",summary:"Beyliği kurumsallaştırır; İznik-İzmit hattını alır, Rumeli'ye geçişi başlatır ve askerî-idarî yenilikler devreye girer."},
-  {id:"R3",name:"Murad-ı Hüdavendigar",chapter:3,birth:"1326",accession:"1362",rule:"27 sene süren hükümdarlık",death:"1389, Kosova sonrası şehadet",parentage:"Baba: Orhan Gazi; Anne: Nilüfer Hatun",pages:"81-113",summary:"Rumeli'de Osmanlı hâkimiyetini kalıcılaştırır; Sırpsındığı ve Kosova gibi savaşlarla devlet ölçeğini büyütür, yeniçeri sistemi anlatıda merkezî yer tutar."},
-  {id:"R4",name:"Yıldırım Bayezid Han",chapter:4,birth:"1360, Bursa",accession:"1389, Kosova sonrası",rule:"Anadolu birliği ve Balkan cephesinde yoğun fetih dönemi",death:"8 Şubat 1403, Akşehir",parentage:"Baba: Murad-ı Hüdavendigar; Anne: Gülçiçek Hatun",pages:"115-161",summary:"Süratli fetihlerle Anadolu beyliklerini ve Balkan cephelerini toparlar; Niğbolu zaferi ile doruğa, Ankara bozgunu ile büyük kırılmaya ulaşır."},
-  {id:"R5",name:"Sultan Çelebi Mehmed",chapter:5,birth:"Çocuk yaşta Ankara sonrası sahneye çıkar",accession:"1413, bütün Osmanlı ülkesinin tek hükümdarı",rule:"Fetret devrini kapatan toparlayıcı iktidar",death:"1421, Edirne/Bursa geçişi öncesi",parentage:"Baba: Yıldırım Bayezid",pages:"163-202",summary:"Ankara bozgunu sonrası parçalanmış yapıyı yeniden toparlar; kardeş mücadelelerini, iç isyanları ve sınır sorunlarını aşarak devleti yeniden birleştirir."}
+  {id:"R3",name:"Sultan Murad-ı Hüdâvendigâr Han",chapter:3,birth:"1326",accession:"1362",rule:"27 sene süren hükümdarlık",death:"1389, Kosova sonrası şehâdet",parentage:"Baba: Orhan Gazi; Anne: Nilüfer Hatun",pages:"81-113",summary:"Rumeli'de Osmanlı hâkimiyetini kalıcılaştırır; Sırpsındığı ve Kosova gibi savaşlarla devlet ölçeğini büyütür, yeniçeri sistemi anlatıda merkezî yer tutar."},
+  {id:"R4",name:"Sultan Yıldırım Bayezid Han",chapter:4,birth:"1360, Bursa",accession:"1389, Kosova sonrası",rule:"Anadolu birliği ve Balkan cephesinde yoğun fetih dönemi",death:"8 Şubat 1403, Akşehir",parentage:"Baba: Sultan Murad-ı Hüdâvendigâr Han; Anne: Gülçiçek Hatun",pages:"115-161",summary:"Süratli fetihlerle Anadolu beyliklerini ve Balkan cephelerini toparlar; Niğbolu zaferi ile doruğa, Ankara bozgunu ile büyük kırılmaya ulaşır."},
+  {id:"R5",name:"Sultan Çelebi Mehmed Han",chapter:5,birth:"Çocuk yaşta Ankara sonrası sahneye çıkar",accession:"1413, bütün Osmanlı ülkesinin tek hükümdarı",rule:"Fetret devrini kapatan toparlayıcı iktidar",death:"1421, Edirne/Bursa geçişi öncesi",parentage:"Baba: Sultan Yıldırım Bayezid Han",pages:"163-202",summary:"Ankara bozgunu sonrası parçalanmış yapıyı yeniden toparlar; kardeş mücadelelerini, iç isyanları ve sınır sorunlarını aşarak devleti yeniden birleştirir."}
 ];
 
 const TIMELINE_EVENTS = [
-  {id:"E001",name:"Kayıların Anadolu içlerine yönelmesi",ruler:"Ertuğrul Gazi",date:"1230 dolayları",year:1230,location:"Söğüt öncesi güzergâh",type:"migration_conflict",summary:"Ertuğrul idaresindeki Kayılar Selçuklu kuvvetlerine yardım eder; Söğüt ve Domaniç çevresine yerleşme zemini oluşur."},
-  {id:"E002",name:"Osman Gazi'nin doğumu ve müjde rüyası",ruler:"Osman Gazi",date:"Doğum anlatısı",year:1258,location:"Söğüt",type:"dynasty_sign",summary:"Osman'ın doğumu büyük şenliklerle anlatılır; Ertuğrul'un rüyası soyun büyüklüğüne işaret sayılır."},
-  {id:"E003",name:"Osman ile Edebali ailesi arasında evlilik",ruler:"Osman Gazi",date:"Gençlik dönemi",year:1280,location:"Bilecik/Söğüt",type:"marriage",summary:"Osman, Edebali'nin kızıyla evlenir; bu evlilik manevî meşruiyet anlatısının parçası olur."},
-  {id:"E004",name:"Osman Gazi'nin aşiret başına geçişi",ruler:"Osman Gazi",date:"Ertuğrul sonrası",year:1281,location:"Söğüt",type:"succession",summary:"Ertuğrul'un vefatı üzerine Osman'ın liderliği kabul görür ve Edebali'nin nasihati öne çıkar."},
-  {id:"E005",name:"Ermeni Derbendi çatışması ve Bayhoca'nın şehadeti",ruler:"Osman Gazi",date:"684 / 1285-86",year:1285,location:"İnegöl çevresi",type:"battle",summary:"İnegöl tekfuruyla ilk büyük hesaplaşma safhasında Bayhoca şehit düşer."},
-  {id:"E006",name:"İkizce çatışması ve Karacahisar'ın fethi",ruler:"Osman Gazi",date:"686-687 / 1287-88",year:1287,location:"Domaniç-İkizce / Karacahisar",type:"conquest",summary:"Osman Bey müttefik tekfurları yener ve Karacahisar'ı zapt eder."},
-  {id:"E007",name:"Aşiretten devlete geçiş işaretleri",ruler:"Osman Gazi",date:"1299",year:1299,location:"Karacahisar / Yenişehir",type:"state_formation",summary:"Hutbe, kadı tayini ve toprak dağıtımıyla Osmanlı siyasal yapılanması devlet karakteri kazanır."},
-  {id:"E008",name:"Koyunhisar (Bapheus) zaferi",ruler:"Osman Gazi",date:"27 Temmuz 1301",year:1301,location:"Koyunhisar",type:"battle",summary:"Bizans ve müttefik kuvvetler yenilir; Marmara hattı Osmanlı fetih sahasına açılır."},
-  {id:"E009",name:"Dinboz zaferi",ruler:"Osman Gazi",date:"26 Ağustos 1302",year:1302,location:"Dinboz",type:"battle",summary:"Tekfurlar birliği bozguna uğratılır; Bursa-İznik-İzmit havzası için yeni zemin oluşur."},
-  {id:"E010",name:"Köse Mihal'in Müslüman oluşu",ruler:"Osman Gazi",date:"1313",year:1313,location:"Harmankaya",type:"conversion_alliance",summary:"Köse Mihal İslam'ı kabul edip Osmanlı hizmetine girer."},
-  {id:"E011",name:"Mudanya'nın fethi ve Bursa ablukası",ruler:"Osman Gazi",date:"1321",year:1321,location:"Mudanya / Bursa",type:"conquest",summary:"Mudanya zapt edilerek Bursa'nın dış bağlantısı daha da kısıtlanır."},
-  {id:"E012",name:"Orhan'ın tahta geçişi",ruler:"Orhan Gazi",date:"1326",year:1326,location:"Bursa",type:"succession",summary:"Osman'ın ardından Orhan ve Alaaddin ülkeyi bölüşmeyip tek hâkimiyet ilkesini sürdürür."},
-  {id:"E013",name:"Aydos'un fethi",ruler:"Orhan Gazi",date:"Orhan devri",year:1328,location:"Aydos",type:"conquest",summary:"Aydos, Abdurrahman Gazi ve diğer gazilerin öncülüğünde alınır."},
-  {id:"E014",name:"Pelekanon muharebesi",ruler:"Orhan Gazi",date:"Orhan devri",year:1329,location:"Pelekanon",type:"battle",summary:"Bizans imparatorunun sevk ettiği ordu yenilir; İznik üzerindeki baskı artar."},
-  {id:"E015",name:"İznik'in teslimi",ruler:"Orhan Gazi",date:"Pelekanon sonrası",year:1331,location:"İznik",type:"conquest",summary:"Yardım umudu kırılan İznik teslim olur; Osmanlı idaresi şehirde kurumsallaşır."},
-  {id:"E016",name:"İzmit'in fethi",ruler:"Orhan Gazi",date:"1337",year:1337,location:"İzmit",type:"conquest",summary:"İzmit'in alınmasıyla Marmara havzasında Osmanlı hâkimiyeti güçlenir."},
-  {id:"E017",name:"İlk düzenli askerî ve malî reformlar",ruler:"Orhan Gazi",date:"Orhan devri",year:1335,location:"Bursa / Osmanlı merkezi",type:"institutional_reform",summary:"Akçe, yaya-müsellem teşkilatı ve kıyafet düzeniyle yeni devlet mekanizması kurulur."},
-  {id:"E018",name:"Rumeli'ye geçiş ve Çimpe'nin alınması",ruler:"Orhan Gazi",date:"1352",year:1352,location:"Çimpe / Gelibolu",type:"conquest",summary:"Süleyman Paşa ve gaziler karşı kıyıya geçerek Osmanlıların Rumeli'de kalıcı yer tutmasının ilk adımını atar."},
-  {id:"E019",name:"Gelibolu ve Rumeli fetih zinciri",ruler:"Orhan Gazi",date:"1350'ler",year:1354,location:"Gelibolu, Bolayır, Malkara",type:"conquest",summary:"Süleyman Paşa ve uç beyleri Rumeli içlerine doğru genişler."},
-  {id:"E020",name:"Süleyman Paşa'nın ölümü",ruler:"Orhan Gazi",date:"Rumeli fetihleri sırasında",year:1357,location:"Bolayır",type:"death",summary:"Şehzade Süleyman Paşa av esnasındaki kazayla ölür; bu olay anlatıda büyük keder kaynağıdır."},
-  {id:"E021",name:"Edirne'nin fethi",ruler:"Orhan Gazi / Murad",date:"Murad'ın Rumeli başbuğluğu",year:1361,location:"Edirne",type:"conquest",summary:"Murad Bey, Edirne'yi teslim alarak Osmanlıların Rumeli'deki ana merkezini kurar."},
-  {id:"E022",name:"Sırpsındığı zaferi",ruler:"Murad I",date:"1364",year:1364,location:"Meriç kıyısı",type:"battle",summary:"Lala Şahin Paşa komutasındaki Osmanlı kuvvetleri büyük Balkan-Haçlı topluluğunu baskınla bozguna uğratır."},
-  {id:"E023",name:"Yeniçeri sisteminin kuruluşu",ruler:"Murad I",date:"Murad devri",year:1365,location:"Osmanlı merkezi",type:"institutional_reform",summary:"Esirlerin beşte biri ve devşirme mantığı üzerinden yeniçeri ve Acemi Ocağı sistemi şekillenir."},
-  {id:"E024",name:"Bayezid-Devlet Hatun düğünü",ruler:"Murad I",date:"1381",year:1381,location:"Bursa / Kütahya",type:"marriage",summary:"Germiyan bağlantısı Osmanlıların Anadolu içlerinde toprak kazanmasına imkân verir."},
-  {id:"E025",name:"Karaman seferi (gaza-i ekber)",ruler:"Murad I",date:"1380'ler",year:1386,location:"Konya ovası",type:"battle",summary:"Murad, iç düzeni sağlamak için Karaman üzerine yürür ve zafer kazanır."},
-  {id:"E026",name:"Ploşnik bozgunu",ruler:"Murad I",date:"1387",year:1387,location:"Ploşnik Boğazı",type:"battle",summary:"Timurtaş Paşa kuvvetleri pusuya düşer; bu yenilgi büyük Balkan ittifakını cesaretlendirir."},
-  {id:"E027",name:"Kosova seferi ve savaş hazırlığı",ruler:"Murad I",date:"1389",year:1389,location:"Kosova",type:"battle",summary:"Murad, Balkan ittifakına karşı Kosova sahrasında düzenli ve meşveretli bir sefer hazırlar."},
-  {id:"E028",name:"I. Kosova zaferi ve Murad'ın şehadeti",ruler:"Murad I",date:"1389",year:1389,location:"Kosova",type:"battle",summary:"Osmanlılar savaşı kazanır; Murad, savaş sonrasında bir Sırp asilzadesinin saldırısıyla şehit olur."},
-  {id:"E029",name:"Bayezid'in Anadolu beyliklerini ilhakı",ruler:"Yıldırım Bayezid",date:"1389-1390",year:1389,location:"Batı Anadolu",type:"conquest",summary:"Bayezid tahta geçer geçmez Batı Anadolu'daki beylikleri Osmanlı eyaleti içine alır."},
-  {id:"E030",name:"İstanbul kuşatmaları dizisi",ruler:"Yıldırım Bayezid",date:"1391-1400",year:1391,location:"İstanbul",type:"siege",summary:"Bayezid, İstanbul'u dört kez kuşatır; siyasal tavizler alsa da kesin fetih başka cepheler yüzünden ertelenir."},
-  {id:"E031",name:"Eflak ve Bulgaristan hamleleri",ruler:"Yıldırım Bayezid",date:"1391-1393",year:1391,location:"Eflak / Tırnova / Niğbolu",type:"conquest",summary:"Mirçe seferi ve Bulgaristan'ın tümden Osmanlı hâkimiyetine alınışı anlatılır."},
-  {id:"E032",name:"Hundi Sultan ile Emir Sultan evliliği",ruler:"Yıldırım Bayezid",date:"Bayezid devri",year:1394,location:"Bursa",type:"marriage",summary:"Rüya ve keramet motifiyle anlatılan bu evlilik, Ulu Cami hikâyesine bağlanır."},
-  {id:"E033",name:"Büyük Haçlı ordusunun toplanması",ruler:"Yıldırım Bayezid",date:"1396",year:1396,location:"Budapeşte / Tuna hattı",type:"coalition",summary:"Papa ve Avrupa sarayları Bayezid'e karşı büyük bir Haçlı ordusu kurar."},
-  {id:"E034",name:"Niğbolu zaferi",ruler:"Yıldırım Bayezid",date:"25 Eylül 1396",year:1396,location:"Niğbolu",type:"battle",summary:"Bayezid, büyük Haçlı ittifakını Niğbolu'da bozguna uğratır."},
-  {id:"E035",name:"Ulu Cami açılışı",ruler:"Yıldırım Bayezid",date:"1400",year:1400,location:"Bursa",type:"religious_foundation",summary:"Emir Sultan'ın işaretiyle başlayan inşa, Somuncu Baba'nın hutbesiyle sembolleşir."},
-  {id:"E036",name:"Timur ile diplomatik gerilimin savaşa dönüşmesi",ruler:"Yıldırım Bayezid",date:"Ankara öncesi yıllar",year:1400,location:"Karabağ / Sivas / Erzincan",type:"diplomatic_breakdown",summary:"Sığınmacılar, tahtını kaybeden beyler ve karşılıklı mektuplar savaşın zeminini hazırlar."},
-  {id:"E037",name:"Ankara Savaşı",ruler:"Yıldırım Bayezid",date:"20 Temmuz 1402",year:1402,location:"Çubukova / Ankara",type:"battle",summary:"Timur ile Bayezid orduları savaşır; ihanetler ve çözülmeler sonunda Osmanlı tarafı yenilir."},
-  {id:"E038",name:"Bayezid'in esareti",ruler:"Yıldırım Bayezid",date:"1402 sonrası",year:1402,location:"Timur ordugâhı",type:"captivity",summary:"Savaş sonrasında iki hükümdar arasında nispeten yumuşak bir görüşme zemini oluşur."},
-  {id:"E039",name:"Bayezid'in ölümü",ruler:"Yıldırım Bayezid",date:"8 Şubat 1403",year:1403,location:"Akşehir",type:"death",summary:"Bayezid, esaret ve ülke felaketinin ağırlığı altında vefat eder."},
-  {id:"E040",name:"Timur'un Anadolu düzenlemesi ve çekilişi",ruler:"Çelebi Mehmed",date:"1403",year:1403,location:"Bursa / Kütahya",type:"repartition",summary:"Timur Anadolu beylerini yeniden yerleştirir ve Semerkand'a dönmek üzere çekilir."},
-  {id:"E041",name:"Çelebi Mehmed'in Amasya'da toparlanması",ruler:"Çelebi Mehmed",date:"1402-1404",year:1402,location:"Amasya-Tokat-Sivas",type:"consolidation",summary:"Mehmed, fırsatçı beyleri bastırarak Anadolu'nun orta kesiminde toparlanma merkezi kurar."},
-  {id:"E043",name:"Fetret Devri kardeş mücadeleleri",ruler:"Çelebi Mehmed",date:"1404-1413",year:1404,location:"Bursa, Edirne, Rumeli",type:"civil_war",summary:"İsa, Süleyman ve Musa ile yapılan mücadeleler Osmanlı birliğinin yeniden kurulacağı zemini oluşturur."},
-  {id:"E044",name:"Çamurlu Derbend zaferi ve tek hükümdarlık",ruler:"Çelebi Mehmed",date:"5 Temmuz 1413",year:1413,location:"Çamurlu Derbend / Edirne",type:"battle",summary:"Musa Çelebi yenilir; Mehmed bütün Osmanlı ülkesinin tek hükümdarı olur."},
-  {id:"E045",name:"İzmir seferi ve Cüneyd Bey meselesi",ruler:"Çelebi Mehmed",date:"1414",year:1414,location:"İzmir / Ayasuluğ",type:"conquest",summary:"Cüneyd Bey'in isyanı bastırılır; İzmir çevresinde merkezî otorite yeniden kurulur."},
-  {id:"E047",name:"Vakıf siyaseti ve surre geleneği",ruler:"Çelebi Mehmed",date:"Çelebi Mehmed devri",year:1415,location:"Osmanlı şehirleri / Haremeyn",type:"institutional_reform",summary:"Merhamet siyaseti, vakıf medeniyeti ve surre uygulaması toplumsal düzenin ana unsurları olarak tanımlanır."},
-  {id:"E048",name:"Eflak ve Kastamonu-Samsun seferleri",ruler:"Çelebi Mehmed",date:"1416-1418",year:1416,location:"Eflak, Kastamonu, Samsun",type:"conquest",summary:"Mehmed hem Eflak sorununu çözer hem de Candaroğulları çevresindeki dengeyi yeniden kurar."},
-  {id:"E050",name:"Bedreddin-Börklüce-Torlak isyanı",ruler:"Çelebi Mehmed",date:"1420",year:1420,location:"Aydın, Manisa, Deliorman",type:"revolt",summary:"Osmanlı tarihinin ilk büyük iç isyanı bastırılır; Bedreddin idam edilir."},
-  {id:"E051",name:"Çelebi Mehmed'in ölümü ve Murad'a geçiş",ruler:"Çelebi Mehmed",date:"1421",year:1421,location:"Edirne / Bursa",type:"succession",summary:"Mehmed, ölmeden önce Murad'a haber salınmasını ister; ölüm haberi geçici olarak gizlenir."}
+  {id:"E001",name:"Kayıların Anadolu içlerine yönelmesi",ruler:"Ertuğrul Gazi hazretleri",date:"1230 dolayları",year:1230,location:"Söğüt öncesi güzergâh",type:"migration_conflict",summary:"Ertuğrul idaresindeki Kayılar Selçuklu kuvvetlerine yardım eder; Söğüt ve Domaniç çevresine yerleşme zemini oluşur."},
+  {id:"E002",name:"Osman Gazi'nin doğumu ve müjde rüyası",ruler:"Osman Gazi hazretleri",date:"Doğum anlatısı",year:1258,location:"Söğüt",type:"dynasty_sign",summary:"Osman'ın doğumu büyük şenliklerle anlatılır; Ertuğrul'un rüyası soyun büyüklüğüne işaret sayılır."},
+  {id:"E003",name:"Osman ile Edebali ailesi arasında evlilik",ruler:"Osman Gazi hazretleri",date:"Gençlik dönemi",year:1280,location:"Bilecik/Söğüt",type:"marriage",summary:"Osman, Edebali'nin kızıyla evlenir; bu evlilik manevî meşruiyet anlatısının parçası olur."},
+  {id:"E004",name:"Osman Gazi'nin aşiret başına geçişi",ruler:"Osman Gazi hazretleri",date:"Ertuğrul sonrası",year:1281,location:"Söğüt",type:"succession",summary:"Ertuğrul'un vefatı üzerine Osman'ın liderliği kabul görür ve Edebali'nin nasihati öne çıkar."},
+  {id:"E005",name:"Ermeni Derbendi çatışması ve Bayhoca'nın şehadeti",ruler:"Osman Gazi hazretleri",date:"684 / 1285-86",year:1285,location:"İnegöl çevresi",type:"battle",summary:"İnegöl tekfuruyla ilk büyük hesaplaşma safhasında Bayhoca şehit düşer."},
+  {id:"E006",name:"İkizce çatışması ve Karacahisar'ın fethi",ruler:"Osman Gazi hazretleri",date:"686-687 / 1287-88",year:1287,location:"Domaniç-İkizce / Karacahisar",type:"conquest",summary:"Osman Bey müttefik tekfurları yener ve Karacahisar'ı zapt eder."},
+  {id:"E007",name:"Aşiretten devlete geçiş işaretleri",ruler:"Osman Gazi hazretleri",date:"1299",year:1299,location:"Karacahisar / Yenişehir",type:"state_formation",summary:"Hutbe, kadı tayini ve toprak dağıtımıyla Osmanlı siyasal yapılanması devlet karakteri kazanır."},
+  {id:"E008",name:"Koyunhisar (Bapheus) zaferi",ruler:"Osman Gazi hazretleri",date:"27 Temmuz 1301",year:1301,location:"Koyunhisar",type:"battle",summary:"Bizans ve müttefik kuvvetler yenilir; Marmara hattı Osmanlı fetih sahasına açılır."},
+  {id:"E009",name:"Dinboz zaferi",ruler:"Osman Gazi hazretleri",date:"26 Ağustos 1302",year:1302,location:"Dinboz",type:"battle",summary:"Tekfurlar birliği bozguna uğratılır; Bursa-İznik-İzmit havzası için yeni zemin oluşur."},
+  {id:"E010",name:"Köse Mihal'in Müslüman oluşu",ruler:"Osman Gazi hazretleri",date:"1313",year:1313,location:"Harmankaya",type:"conversion_alliance",summary:"Köse Mihal İslam'ı kabul edip Osmanlı hizmetine girer."},
+  {id:"E011",name:"Mudanya'nın fethi ve Bursa ablukası",ruler:"Osman Gazi hazretleri",date:"1321",year:1321,location:"Mudanya / Bursa",type:"conquest",summary:"Mudanya zapt edilerek Bursa'nın dış bağlantısı daha da kısıtlanır."},
+  {id:"E012",name:"Orhan'ın tahta geçişi",ruler:"Orhan Gazi hazretleri",date:"1326",year:1326,location:"Bursa",type:"succession",summary:"Osman'ın ardından Orhan ve Alaaddin ülkeyi bölüşmeyip tek hâkimiyet ilkesini sürdürür."},
+  {id:"E013",name:"Aydos'un fethi",ruler:"Orhan Gazi hazretleri",date:"Orhan Gazi hazretleri devri",year:1328,location:"Aydos",type:"conquest",summary:"Aydos, Abdurrahman Gazi ve diğer gazilerin öncülüğünde alınır."},
+  {id:"E014",name:"Pelekanon muharebesi",ruler:"Orhan Gazi hazretleri",date:"Orhan Gazi hazretleri devri",year:1329,location:"Pelekanon",type:"battle",summary:"Bizans imparatorunun sevk ettiği ordu yenilir; İznik üzerindeki baskı artar."},
+  {id:"E015",name:"İznik'in teslimi",ruler:"Orhan Gazi hazretleri",date:"Pelekanon sonrası",year:1331,location:"İznik",type:"conquest",summary:"Yardım umudu kırılan İznik teslim olur; Osmanlı idaresi şehirde kurumsallaşır."},
+  {id:"E016",name:"İzmit'in fethi",ruler:"Orhan Gazi hazretleri",date:"1337",year:1337,location:"İzmit",type:"conquest",summary:"İzmit'in alınmasıyla Marmara havzasında Osmanlı hâkimiyeti güçlenir."},
+  {id:"E017",name:"İlk düzenli askerî ve malî reformlar",ruler:"Orhan Gazi hazretleri",date:"Orhan Gazi hazretleri devri",year:1335,location:"Bursa / Osmanlı merkezi",type:"institutional_reform",summary:"Akçe, yaya-müsellem teşkilatı ve kıyafet düzeniyle yeni devlet mekanizması kurulur."},
+  {id:"E018",name:"Rumeli'ye geçiş ve Çimpe'nin alınması",ruler:"Orhan Gazi hazretleri",date:"1352",year:1352,location:"Çimpe / Gelibolu",type:"conquest",summary:"Süleyman Paşa ve gaziler karşı kıyıya geçerek Osmanlıların Rumeli'de kalıcı yer tutmasının ilk adımını atar."},
+  {id:"E019",name:"Gelibolu ve Rumeli fetih zinciri",ruler:"Orhan Gazi hazretleri",date:"1350'ler",year:1354,location:"Gelibolu, Bolayır, Malkara",type:"conquest",summary:"Süleyman Paşa ve uç beyleri Rumeli içlerine doğru genişler."},
+  {id:"E020",name:"Süleyman Paşa'nın ölümü",ruler:"Orhan Gazi hazretleri",date:"Rumeli fetihleri sırasında",year:1357,location:"Bolayır",type:"death",summary:"Şehzade Süleyman Paşa av esnasındaki kazayla ölür; bu olay anlatıda büyük keder kaynağıdır."},
+  {id:"E021",name:"Edirne'nin fethi",ruler:"Orhan Gazi hazretleri / Sultan Murad-ı Hüdâvendigâr Han",date:"Sultan Murad-ı Hüdâvendigâr Han'ın Rumeli başbuğluğu",year:1361,location:"Edirne",type:"conquest",summary:"Sultan Murad-ı Hüdâvendigâr Han, Edirne'yi teslim alarak Osmanlıların Rumeli'deki ana merkezini kurar."},
+  {id:"E022",name:"Sırpsındığı zaferi",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1364",year:1364,location:"Meriç kıyısı",type:"battle",summary:"Lala Şahin Paşa komutasındaki Osmanlı kuvvetleri büyük Balkan-Haçlı topluluğunu baskınla bozguna uğratır."},
+  {id:"E023",name:"Yeniçeri sisteminin kuruluşu",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"Sultan Murad-ı Hüdâvendigâr Han devri",year:1365,location:"Osmanlı merkezi",type:"institutional_reform",summary:"Esirlerin beşte biri ve devşirme mantığı üzerinden yeniçeri ve Acemi Ocağı sistemi şekillenir."},
+  {id:"E024",name:"Bayezid-Devlet Hatun düğünü",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1381",year:1381,location:"Bursa / Kütahya",type:"marriage",summary:"Germiyan bağlantısı Osmanlıların Anadolu içlerinde toprak kazanmasına imkân verir."},
+  {id:"E025",name:"Karaman seferi (gaza-i ekber)",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1380'ler",year:1386,location:"Konya ovası",type:"battle",summary:"Sultan Murad-ı Hüdâvendigâr Han, iç düzeni sağlamak için Karaman üzerine yürür ve zafer kazanır."},
+  {id:"E026",name:"Ploşnik bozgunu",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1387",year:1387,location:"Ploşnik Boğazı",type:"battle",summary:"Timurtaş Paşa kuvvetleri pusuya düşer; bu yenilgi büyük Balkan ittifakını cesaretlendirir."},
+  {id:"E027",name:"Kosova seferi ve savaş hazırlığı",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1389",year:1389,location:"Kosova",type:"battle",summary:"Sultan Murad-ı Hüdâvendigâr Han, Balkan ittifakına karşı Kosova sahrasında düzenli ve meşveretli bir sefer hazırlar."},
+  {id:"E028",name:"I. Kosova zaferi ve Sultan Murad-ı Hüdâvendigâr Han'ın şehâdeti",ruler:"Sultan Murad-ı Hüdâvendigâr Han",date:"1389",year:1389,location:"Kosova",type:"battle",summary:"Osmanlılar savaşı kazanır; Sultan Murad-ı Hüdâvendigâr Han, savaş sonrasında bir Sırp asilzadesinin saldırısıyla şehit olur."},
+  {id:"E029",name:"Sultan Yıldırım Bayezid Han'ın Anadolu beyliklerini ilhakı",ruler:"Sultan Yıldırım Bayezid Han",date:"1389-1390",year:1389,location:"Batı Anadolu",type:"conquest",summary:"Sultan Yıldırım Bayezid Han tahta geçer geçmez Batı Anadolu'daki beylikleri Osmanlı eyaleti içine alır."},
+  {id:"E030",name:"İstanbul kuşatmaları dizisi",ruler:"Sultan Yıldırım Bayezid Han",date:"1391-1400",year:1391,location:"İstanbul",type:"siege",summary:"Sultan Yıldırım Bayezid Han, İstanbul'u dört kez kuşatır; siyasal tavizler alsa da kesin fetih başka cepheler yüzünden ertelenir."},
+  {id:"E031",name:"Eflak ve Bulgaristan hamleleri",ruler:"Sultan Yıldırım Bayezid Han",date:"1391-1393",year:1391,location:"Eflak / Tırnova / Niğbolu",type:"conquest",summary:"Mirçe seferi ve Bulgaristan'ın tümden Osmanlı hâkimiyetine alınışı anlatılır."},
+  {id:"E032",name:"Hundi Sultan ile Emir Sultan evliliği",ruler:"Sultan Yıldırım Bayezid Han",date:"Sultan Yıldırım Bayezid Han devri",year:1394,location:"Bursa",type:"marriage",summary:"Rüya ve keramet motifiyle anlatılan bu evlilik, Ulu Cami hikâyesine bağlanır."},
+  {id:"E033",name:"Büyük Haçlı ordusunun toplanması",ruler:"Sultan Yıldırım Bayezid Han",date:"1396",year:1396,location:"Budapeşte / Tuna hattı",type:"coalition",summary:"Papa ve Avrupa sarayları Sultan Yıldırım Bayezid Han'a karşı büyük bir Haçlı ordusu kurar."},
+  {id:"E034",name:"Niğbolu zaferi",ruler:"Sultan Yıldırım Bayezid Han",date:"25 Eylül 1396",year:1396,location:"Niğbolu",type:"battle",summary:"Sultan Yıldırım Bayezid Han, büyük Haçlı ittifakını Niğbolu'da bozguna uğratır."},
+  {id:"E035",name:"Ulu Cami açılışı",ruler:"Sultan Yıldırım Bayezid Han",date:"1400",year:1400,location:"Bursa",type:"religious_foundation",summary:"Emir Sultan'ın işaretiyle başlayan inşa, Somuncu Baba'nın hutbesiyle sembolleşir."},
+  {id:"E036",name:"Timur ile diplomatik gerilimin savaşa dönüşmesi",ruler:"Sultan Yıldırım Bayezid Han",date:"Ankara öncesi yıllar",year:1400,location:"Karabağ / Sivas / Erzincan",type:"diplomatic_breakdown",summary:"Sığınmacılar, tahtını kaybeden beyler ve karşılıklı mektuplar savaşın zeminini hazırlar."},
+  {id:"E037",name:"Ankara Savaşı",ruler:"Sultan Yıldırım Bayezid Han",date:"20 Temmuz 1402",year:1402,location:"Çubukova / Ankara",type:"battle",summary:"Timur ile Sultan Yıldırım Bayezid Han orduları savaşır; ihanetler ve çözülmeler sonunda Osmanlı tarafı yenilir."},
+  {id:"E038",name:"Sultan Yıldırım Bayezid Han'ın esareti",ruler:"Sultan Yıldırım Bayezid Han",date:"1402 sonrası",year:1402,location:"Timur ordugâhı",type:"captivity",summary:"Savaş sonrasında iki hükümdar arasında nispeten yumuşak bir görüşme zemini oluşur."},
+  {id:"E039",name:"Sultan Yıldırım Bayezid Han'ın vefatı",ruler:"Sultan Yıldırım Bayezid Han",date:"8 Şubat 1403",year:1403,location:"Akşehir",type:"death",summary:"Sultan Yıldırım Bayezid Han, esaret ve ülke felaketinin ağırlığı altında vefat eder."},
+  {id:"E040",name:"Timur'un Anadolu düzenlemesi ve çekilişi",ruler:"Sultan Çelebi Mehmed Han",date:"1403",year:1403,location:"Bursa / Kütahya",type:"repartition",summary:"Timur Anadolu beylerini yeniden yerleştirir ve Semerkand'a dönmek üzere çekilir."},
+  {id:"E041",name:"Sultan Çelebi Mehmed Han'ın Amasya'da toparlanması",ruler:"Sultan Çelebi Mehmed Han",date:"1402-1404",year:1402,location:"Amasya-Tokat-Sivas",type:"consolidation",summary:"Sultan Çelebi Mehmed Han, fırsatçı beyleri bastırarak Anadolu'nun orta kesiminde toparlanma merkezi kurar."},
+  {id:"E043",name:"Fetret Devri kardeş mücadeleleri",ruler:"Sultan Çelebi Mehmed Han",date:"1404-1413",year:1404,location:"Bursa, Edirne, Rumeli",type:"civil_war",summary:"İsa, Süleyman ve Musa ile yapılan mücadeleler Osmanlı birliğinin yeniden kurulacağı zemini oluşturur."},
+  {id:"E044",name:"Çamurlu Derbend zaferi ve tek hükümdarlık",ruler:"Sultan Çelebi Mehmed Han",date:"5 Temmuz 1413",year:1413,location:"Çamurlu Derbend / Edirne",type:"battle",summary:"Musa Çelebi yenilir; Sultan Çelebi Mehmed Han bütün Osmanlı ülkesinin tek hükümdarı olur."},
+  {id:"E045",name:"İzmir seferi ve Cüneyd Bey meselesi",ruler:"Sultan Çelebi Mehmed Han",date:"1414",year:1414,location:"İzmir / Ayasuluğ",type:"conquest",summary:"Cüneyd Bey'in isyanı bastırılır; İzmir çevresinde merkezî otorite yeniden kurulur."},
+  {id:"E047",name:"Vakıf siyaseti ve surre geleneği",ruler:"Sultan Çelebi Mehmed Han",date:"Sultan Çelebi Mehmed Han devri",year:1415,location:"Osmanlı şehirleri / Haremeyn",type:"institutional_reform",summary:"Merhamet siyaseti, vakıf medeniyeti ve surre uygulaması toplumsal düzenin ana unsurları olarak tanımlanır."},
+  {id:"E048",name:"Eflak ve Kastamonu-Samsun seferleri",ruler:"Sultan Çelebi Mehmed Han",date:"1416-1418",year:1416,location:"Eflak, Kastamonu, Samsun",type:"conquest",summary:"Sultan Çelebi Mehmed Han hem Eflak sorununu çözer hem de Candaroğulları çevresindeki dengeyi yeniden kurar."},
+  {id:"E050",name:"Bedreddin-Börklüce-Torlak isyanı",ruler:"Sultan Çelebi Mehmed Han",date:"1420",year:1420,location:"Aydın, Manisa, Deliorman",type:"revolt",summary:"Osmanlı tarihinin ilk büyük iç isyanı bastırılır; Bedreddin idam edilir."},
+  {id:"E051",name:"Sultan Çelebi Mehmed Han'ın vefatı ve Sultan II. Murad Han'a geçiş",ruler:"Sultan Çelebi Mehmed Han",date:"1421",year:1421,location:"Edirne / Bursa",type:"succession",summary:"Sultan Çelebi Mehmed Han, vefatından önce Sultan II. Murad Han'a haber salınmasını ister; ölüm haberi geçici olarak gizlenir."}
 ];
 
 const PERSONS = [
@@ -1767,34 +1944,34 @@ const PERSONS = [
   {id:"P018",name:"Nilüfer Hatun",aliases:"Holofira",role:"Orhan Gazi'nin eşi",context:"Orhan Gazi",desc:"Bilecik-Yarhisar hadisesinin ardından Orhan'la evlenen ve hayır eserleriyle anılan kişidir.",pages:"32-33, 78"},
   {id:"P019",name:"Geyikli Baba",role:"Derviş",context:"Orhan Gazi",desc:"Orhan Gazi'nin hürmet gösterdiği erenlerden biri olarak anlatılır.",pages:"62-64"},
   {id:"P020",name:"Süleyman Paşa",role:"Şehzade ve Rumeli fatihi",context:"Orhan Gazi",desc:"Rumeli'ye geçiş ve Gelibolu hattındaki fetihlerle öne çıkan Orhan Gazi oğludur.",pages:"64-73"},
-  {id:"P021",name:"Murad-ı Hüdavendigar",aliases:"I. Murad",role:"Üçüncü Osmanlı hükümdarı",context:"Murad I",desc:"Rumeli'de kalıcı genişleme sağlayan, Sırpsındığı ve Kosova ile özdeşleşen hükümdardır.",pages:"81-113"},
-  {id:"P022",name:"Lala Şahin Paşa",role:"Komutan",context:"Murad I",desc:"Sırpsındığı ve Filibe-Zağra hattındaki fetihlerin önde gelen kumandanıdır.",pages:"82-84, 96"},
-  {id:"P023",name:"Evrenos Bey",role:"Akıncı beyi",context:"Murad I / Orhan",desc:"Rumeli fetihlerinde sürekli öne çıkan tecrübeli uç kumandanıdır.",pages:"66, 68, 82, 102-108, 128"},
-  {id:"P024",name:"Hacı İlbeyi",role:"Akıncı beyi",context:"Murad I / Orhan",desc:"Rumeli fetih zincirinde ve Süleyman Paşa döneminde rol alan kumandandır.",pages:"66-69, 71"},
-  {id:"P027",name:"Devlet Hatun",role:"Bayezid'in eşi",context:"Murad I / Bayezid",desc:"Germiyan beyi Süleyman Şah'ın kızı olarak Bayezid'le evlenen kişidir.",pages:"93-95, 123"},
-  {id:"P029",name:"Yıldırım Bayezid",role:"Dördüncü Osmanlı hükümdarı",context:"Yıldırım Bayezid",desc:"Süratli fetihleri, Niğbolu zaferi, İstanbul kuşatmaları ve Ankara bozgunuyla anlatının merkezindedir.",pages:"115-161"},
-  {id:"P030",name:"Hundi Sultan",role:"Bayezid'in kızı",context:"Yıldırım Bayezid",desc:"Emir Sultan ile evliliği ve buna bağlı menkıbevî anlatılarla öne çıkar.",pages:"122-124"},
-  {id:"P031",name:"Emir Sultan",aliases:"Muhammed Buhari",role:"Alim ve damat",context:"Yıldırım Bayezid",desc:"Bayezid'in damadı ve Bursa'nın manevî hayatında önemli bir figür olarak anlatılır.",pages:"123-125, 153"},
-  {id:"P032",name:"Somuncu Baba",aliases:"Hamid-i Aksarayi",role:"Veli / alim",context:"Yıldırım Bayezid",desc:"Ulu Cami'nin açılışındaki hutbesi ve sonrasında gizlenişiyle meşhur manevî şahsiyettir.",pages:"133-134"},
-  {id:"P033",name:"Sigismund",role:"Macar kralı",context:"Yıldırım Bayezid",desc:"Niğbolu öncesi büyük Haçlı ittifakının baş aktörlerinden biridir.",pages:"125-131, 188-189"},
-  {id:"P034",name:"Korkusuz Jan",role:"Fransız asilzade",context:"Yıldırım Bayezid",desc:"Niğbolu seferindeki öne çıkan Haçlı kumandanı olarak anılır.",pages:"126, 129, 131"},
-  {id:"P035",name:"Doğan Bey",role:"Kale kumandanı",context:"Yıldırım Bayezid",desc:"Niğbolu Kalesi'nin savunmasında öne çıkar; Bayezid'in gece seslenişiyle meşhur olur.",pages:"127-129"},
-  {id:"P036",name:"Timur Han",role:"Doğu hükümdarı",context:"Yıldırım Bayezid",desc:"Bayezid'in en büyük rakibi olarak biyografisi, kudreti ve Anadolu siyaseti geniş biçimde verilir.",pages:"134-155"},
-  {id:"P041",name:"Çelebi Mehmed",aliases:"Sultan Mehmed I",role:"Beşinci Osmanlı hükümdarı",context:"Çelebi Mehmed",desc:"Fetret devrinde devleti yeniden birleştiren, toparlayıcı ve düzen kurucu hükümdardır.",pages:"163-202"},
-  {id:"P042",name:"Bayezid Paşa",role:"Vezir ve komutan",context:"Çelebi Mehmed",desc:"Mehmed'in en önemli askerî ve idarî yardımcılarından biri olarak çeşitli seferlerde öne çıkar.",pages:"183-185, 177"},
-  {id:"P044",name:"Cüneyd Bey",role:"Aydınoğlu beyi",context:"Çelebi Mehmed",desc:"Çelebi Mehmed dönemindeki isyan ve ittifak siyasetinin önemli aktörlerinden biridir.",pages:"176, 179-181"},
-  {id:"P045",name:"İsfendiyar Bey",role:"Candaroğlu hükümdarı",context:"Çelebi Mehmed",desc:"Kastamonu-Samsun hattında Osmanlılarla kimi zaman karşı karşıya gelen güçlü beydir.",pages:"165, 176, 189-191"},
-  {id:"P048",name:"Şeyh Bedreddin",role:"Alim / isyan önderi",context:"Çelebi Mehmed",desc:"İlmi geçmişi güçlü, fakat sonrasında siyasî-fikrî bir isyanın merkezine oturan şahsiyettir.",pages:"191-196"},
-  {id:"P049",name:"Börklüce Mustafa",aliases:"Dede Sultan",role:"İsyan önderi / halife",context:"Çelebi Mehmed",desc:"Bedreddin'in en meşhur takipçilerinden biri olarak Aydın çevresindeki isyanla anılır.",pages:"193-196"},
-  {id:"P051",name:"Musa Çelebi",role:"Rakip şehzade",context:"Çelebi Mehmed",desc:"Fetret Devri boyunca Mehmed'in en çetin rakiplerinden biri olarak Edirne'de hüküm sürer.",pages:"152, 174-177"},
-  {id:"P053",name:"Emir Süleyman",aliases:"Süleyman Çelebi",role:"Rakip şehzade",context:"Çelebi Mehmed",desc:"Rumeli'de hüküm sürerek Fetret Devri'nin belirleyici figürlerinden biri olur.",pages:"154, 175-176"},
-  {id:"P054",name:"II. Murad",aliases:"Murad Han",role:"Mehmed'in halefi",context:"Çelebi Mehmed",desc:"Mehmed'in vefatı üzerine haberdar edilmesi gereken varis olarak son bölümde belirir.",pages:"197-199"},
-  {id:"P055",name:"Mirçe",role:"Eflak prensi",context:"Bayezid / Mehmed",desc:"Osmanlılarla hem Bayezid hem Mehmed dönemlerinde ilişkisi olan Eflak voyvodasıdır.",pages:"120, 188-189"},
-  {id:"P056",name:"Lazar",role:"Sırp despotu",context:"Murad I",desc:"Kosova öncesi büyük Balkan ittifakının başındaki hükümdardır.",pages:"100-108"},
-  {id:"P057",name:"Tvartko",role:"Bosna kralı",context:"Murad I",desc:"Ploşnik ve sonraki ittifak bağlamında Osmanlı karşıtı güçlerin önde gelenlerindendir.",pages:"100-108"},
-  {id:"P038",name:"Mutahharten",aliases:"Taharten",role:"Erzincan emiri",context:"Yıldırım Bayezid",desc:"Bayezid-Timur gerilimini tırmandıran sınır aktörlerinden biridir.",pages:"137-139"},
-  {id:"P039",name:"Kara Yusuf",role:"Karakoyunlu hükümdarı",context:"Yıldırım Bayezid",desc:"Timur'un düşmanı olarak Bayezid'e sığınan ve diplomatik krizde adı geçen kişidir.",pages:"138-139"},
-  {id:"P050",name:"Torlak Kemal",role:"İsyan önderi / halife",context:"Çelebi Mehmed",desc:"Bedreddin çevresinde öne çıkan ve Kütahya-Manisa hattında etkili olan isimdir.",pages:"193-196"}
+  {id:"P021",name:"Sultan Murad-ı Hüdâvendigâr Han",aliases:"I. Murad",role:"Üçüncü Osmanlı hükümdarı",context:"Sultan Murad-ı Hüdâvendigâr Han",desc:"Rumeli'de kalıcı genişleme sağlayan, Sırpsındığı ve Kosova ile özdeşleşen hükümdardır.",pages:"81-113"},
+  {id:"P022",name:"Lala Şahin Paşa",role:"Komutan",context:"Sultan Murad-ı Hüdâvendigâr Han",desc:"Sırpsındığı ve Filibe-Zağra hattındaki fetihlerin önde gelen kumandanıdır.",pages:"82-84, 96"},
+  {id:"P023",name:"Evrenos Bey",role:"Akıncı beyi",context:"Sultan Murad-ı Hüdâvendigâr Han / Orhan Gazi hazretleri",desc:"Rumeli fetihlerinde sürekli öne çıkan tecrübeli uç kumandanıdır.",pages:"66, 68, 82, 102-108, 128"},
+  {id:"P024",name:"Hacı İlbeyi",role:"Akıncı beyi",context:"Sultan Murad-ı Hüdâvendigâr Han / Orhan Gazi hazretleri",desc:"Rumeli fetih zincirinde ve Süleyman Paşa döneminde rol alan kumandandır.",pages:"66-69, 71"},
+  {id:"P027",name:"Devlet Hatun",role:"Sultan Yıldırım Bayezid Han'ın eşi",context:"Sultan Murad-ı Hüdâvendigâr Han / Sultan Yıldırım Bayezid Han",desc:"Germiyan beyi Süleyman Şah'ın kızı olarak Sultan Yıldırım Bayezid Han ile evlenen kişidir.",pages:"93-95, 123"},
+  {id:"P029",name:"Sultan Yıldırım Bayezid Han",role:"Dördüncü Osmanlı hükümdarı",context:"Sultan Yıldırım Bayezid Han",desc:"Süratli fetihleri, Niğbolu zaferi, İstanbul kuşatmaları ve Ankara bozgunuyla anlatının merkezindedir.",pages:"115-161"},
+  {id:"P030",name:"Hundi Sultan",role:"Sultan Yıldırım Bayezid Han'ın kızı",context:"Sultan Yıldırım Bayezid Han",desc:"Emir Sultan ile evliliği ve buna bağlı menkıbevî anlatılarla öne çıkar.",pages:"122-124"},
+  {id:"P031",name:"Emir Sultan",aliases:"Muhammed Buhari",role:"Alim ve damat",context:"Sultan Yıldırım Bayezid Han",desc:"Sultan Yıldırım Bayezid Han'ın damadı ve Bursa'nın manevî hayatında önemli bir figür olarak anlatılır.",pages:"123-125, 153"},
+  {id:"P032",name:"Somuncu Baba",aliases:"Hamid-i Aksarayi",role:"Veli / alim",context:"Sultan Yıldırım Bayezid Han",desc:"Ulu Cami'nin açılışındaki hutbesi ve sonrasında gizlenişiyle meşhur manevî şahsiyettir.",pages:"133-134"},
+  {id:"P033",name:"Sigismund",role:"Macar kralı",context:"Sultan Yıldırım Bayezid Han",desc:"Niğbolu öncesi büyük Haçlı ittifakının baş aktörlerinden biridir.",pages:"125-131, 188-189"},
+  {id:"P034",name:"Korkusuz Jan",role:"Fransız asilzade",context:"Sultan Yıldırım Bayezid Han",desc:"Niğbolu seferindeki öne çıkan Haçlı kumandanı olarak anılır.",pages:"126, 129, 131"},
+  {id:"P035",name:"Doğan Bey",role:"Kale kumandanı",context:"Sultan Yıldırım Bayezid Han",desc:"Niğbolu Kalesi'nin savunmasında öne çıkar; Sultan Yıldırım Bayezid Han'ın gece seslenişiyle meşhur olur.",pages:"127-129"},
+  {id:"P036",name:"Timur Han",role:"Doğu hükümdarı",context:"Sultan Yıldırım Bayezid Han",desc:"Sultan Yıldırım Bayezid Han'ın en büyük rakibi olarak biyografisi, kudreti ve Anadolu siyaseti geniş biçimde verilir.",pages:"134-155"},
+  {id:"P041",name:"Sultan Çelebi Mehmed Han",aliases:"Sultan Mehmed I",role:"Beşinci Osmanlı hükümdarı",context:"Sultan Çelebi Mehmed Han",desc:"Fetret devrinde devleti yeniden birleştiren, toparlayıcı ve düzen kurucu hükümdardır.",pages:"163-202"},
+  {id:"P042",name:"Bayezid Paşa",role:"Vezir ve komutan",context:"Sultan Çelebi Mehmed Han",desc:"Sultan Çelebi Mehmed Han'ın en önemli askerî ve idarî yardımcılarından biri olarak çeşitli seferlerde öne çıkar.",pages:"183-185, 177"},
+  {id:"P044",name:"Cüneyd Bey",role:"Aydınoğlu beyi",context:"Sultan Çelebi Mehmed Han",desc:"Çelebi Mehmed dönemindeki isyan ve ittifak siyasetinin önemli aktörlerinden biridir.",pages:"176, 179-181"},
+  {id:"P045",name:"İsfendiyar Bey",role:"Candaroğlu hükümdarı",context:"Sultan Çelebi Mehmed Han",desc:"Kastamonu-Samsun hattında Osmanlılarla kimi zaman karşı karşıya gelen güçlü beydir.",pages:"165, 176, 189-191"},
+  {id:"P048",name:"Şeyh Bedreddin",role:"Alim / isyan önderi",context:"Sultan Çelebi Mehmed Han",desc:"İlmi geçmişi güçlü, fakat sonrasında siyasî-fikrî bir isyanın merkezine oturan şahsiyettir.",pages:"191-196"},
+  {id:"P049",name:"Börklüce Mustafa",aliases:"Dede Sultan",role:"İsyan önderi / halife",context:"Sultan Çelebi Mehmed Han",desc:"Bedreddin'in en meşhur takipçilerinden biri olarak Aydın çevresindeki isyanla anılır.",pages:"193-196"},
+  {id:"P051",name:"Musa Çelebi",role:"Rakip şehzade",context:"Sultan Çelebi Mehmed Han",desc:"Fetret Devri boyunca Mehmed'in en çetin rakiplerinden biri olarak Edirne'de hüküm sürer.",pages:"152, 174-177"},
+  {id:"P053",name:"Emir Süleyman",aliases:"Süleyman Çelebi",role:"Rakip şehzade",context:"Sultan Çelebi Mehmed Han",desc:"Rumeli'de hüküm sürerek Fetret Devri'nin belirleyici figürlerinden biri olur.",pages:"154, 175-176"},
+  {id:"P054",name:"Sultan II. Murad Han",aliases:"Murad Han",role:"Sultan Çelebi Mehmed Han'ın halefi",context:"Sultan Çelebi Mehmed Han",desc:"Sultan Çelebi Mehmed Han'ın vefatı üzerine haberdar edilmesi gereken varis olarak son bölümde belirir.",pages:"197-199"},
+  {id:"P055",name:"Mirçe",role:"Eflak prensi",context:"Sultan Yıldırım Bayezid Han / Sultan Çelebi Mehmed Han",desc:"Osmanlılarla hem Bayezid hem Mehmed dönemlerinde ilişkisi olan Eflak voyvodasıdır.",pages:"120, 188-189"},
+  {id:"P056",name:"Lazar",role:"Sırp despotu",context:"Sultan Murad-ı Hüdâvendigâr Han",desc:"Kosova öncesi büyük Balkan ittifakının başındaki hükümdardır.",pages:"100-108"},
+  {id:"P057",name:"Tvartko",role:"Bosna kralı",context:"Sultan Murad-ı Hüdâvendigâr Han",desc:"Ploşnik ve sonraki ittifak bağlamında Osmanlı karşıtı güçlerin önde gelenlerindendir.",pages:"100-108"},
+  {id:"P038",name:"Mutahharten",aliases:"Taharten",role:"Erzincan emiri",context:"Sultan Yıldırım Bayezid Han",desc:"Sultan Yıldırım Bayezid Han ile Timur arasındaki gerilimi tırmandıran sınır aktörlerinden biridir.",pages:"137-139"},
+  {id:"P039",name:"Kara Yusuf",role:"Karakoyunlu hükümdarı",context:"Sultan Yıldırım Bayezid Han",desc:"Timur'un düşmanı olarak Sultan Yıldırım Bayezid Han'a sığınan ve diplomatik krizde adı geçen kişidir.",pages:"138-139"},
+  {id:"P050",name:"Torlak Kemal",role:"İsyan önderi / halife",context:"Sultan Çelebi Mehmed Han",desc:"Bedreddin çevresinde öne çıkan ve Kütahya-Manisa hattında etkili olan isimdir.",pages:"193-196"}
 ];
 
 const PLACES = [
@@ -1808,38 +1985,38 @@ const PLACES = [
   {id:"L011",name:"İzmit",type:"şehir",desc:"İznik'ten sonra fethedilen ve Marmara hâkimiyetini tamamlayan önemli merkezdir.",pages:"39, 58-61",lat:40.77,lng:29.94},
   {id:"L015",name:"Çimpe",type:"kale",desc:"Rumeli'ye ilk kalıcı geçişin sembolik ve stratejik noktasıdır.",pages:"66, 78",lat:40.38,lng:26.67},
   {id:"L016",name:"Gelibolu",type:"şehir / yarımada",desc:"Rumeli fetih zincirinin ana kapısı ve stratejik geçit noktasıdır.",pages:"67-69, 177",lat:40.41,lng:26.67},
-  {id:"L017",name:"Edirne",type:"şehir",desc:"Murad devrinde fethedilen ve Osmanlı Rumeli siyasetinin merkezine dönüşen şehirdir.",pages:"74-76, 83-84, 111, 177, 197-199",lat:41.68,lng:26.56},
-  {id:"L020",name:"Kosova",type:"ova / savaş alanı",desc:"Murad'ın duası, harp meclisi ve şehadetiyle birleşen büyük savaş mekânıdır.",pages:"101-110",lat:42.57,lng:21.00},
+  {id:"L017",name:"Edirne",type:"şehir",desc:"Sultan Murad-ı Hüdâvendigâr Han devrinde fethedilen ve Osmanlı Rumeli siyasetinin merkezine dönüşen şehirdir.",pages:"74-76, 83-84, 111, 177, 197-199",lat:41.68,lng:26.56},
+  {id:"L020",name:"Kosova",type:"ova / savaş alanı",desc:"Sultan Murad-ı Hüdâvendigâr Han'ın duası, harp meclisi ve şehâdetiyle birleşen büyük savaş mekânıdır.",pages:"101-110",lat:42.57,lng:21.00},
   {id:"L021",name:"Konya",type:"şehir",desc:"Karaman seferlerinin ve Mehmed dönemindeki siyasî hesaplaşmaların ana merkezidir.",pages:"96-100, 116-117, 183-185",lat:37.87,lng:32.49},
   {id:"L023",name:"Niğbolu",type:"kale / şehir",desc:"Haçlı seferinin odaklandığı, 1396 büyük zaferine adını veren merkezdir.",pages:"91, 125-132",lat:43.69,lng:24.89},
   {id:"L024",name:"İstanbul",type:"şehir",desc:"Fetih ideali, kuşatmalar, Türk mahallesi ve Bizans diplomasisiyle anlatının ana hedeflerinden biridir.",pages:"45-46, 118-120, 176, 198",lat:41.01,lng:28.98},
-  {id:"L025",name:"Ankara",type:"şehir / ova",desc:"Bayezid-Timur savaşının adıyla özdeşleşen merkez ve sonrasında Mehmed çevresinde süren mücadelelerin düğüm noktasıdır.",pages:"82, 120, 143-148, 176, 180-182",lat:39.93,lng:32.86},
+  {id:"L025",name:"Ankara",type:"şehir / ova",desc:"Sultan Yıldırım Bayezid Han ile Timur arasındaki savaşın adıyla özdeşleşen merkez ve sonrasında Sultan Çelebi Mehmed Han çevresinde süren mücadelelerin düğüm noktasıdır.",pages:"82, 120, 143-148, 176, 180-182",lat:39.93,lng:32.86},
   {id:"L027",name:"Semerkand",type:"şehir",desc:"Timur hanedanının merkezidir; Bayezid için ileri sürülen sevk hedefi olarak da anılır.",pages:"134, 151, 154-155",lat:39.65,lng:66.96},
-  {id:"L028",name:"Amasya",type:"şehir",desc:"Çelebi Mehmed'in Ankara sonrası toparlanma merkezi ve siyasi karargâhıdır.",pages:"164-175, 197",lat:40.65,lng:35.83},
+  {id:"L028",name:"Amasya",type:"şehir",desc:"Sultan Çelebi Mehmed Han'ın Ankara sonrası toparlanma merkezi ve siyasi karargâhıdır.",pages:"164-175, 197",lat:40.65,lng:35.83},
   {id:"L030",name:"Sivas",type:"şehir",desc:"Orta Anadolu mücadelesi, Mutahharten meselesi ve Mehmed'in hâkimiyet alanı içinde önemlidir.",pages:"138-143, 165-170",lat:39.75,lng:37.02},
-  {id:"L031",name:"Samsun",type:"şehir / kale",desc:"Çelebi Mehmed'in son fetihleri ve Candaroğlu dengeleri içinde belirleyici yer tutar.",pages:"188-191",lat:41.29,lng:36.33},
-  {id:"L034",name:"Eflak",type:"voyvodalık / bölge",desc:"Hem Bayezid hem Mehmed devrinde Osmanlı-Macar rekabetinin kuzey cephesidir.",pages:"120, 188-189",lat:44.43,lng:26.10},
+  {id:"L031",name:"Samsun",type:"şehir / kale",desc:"Sultan Çelebi Mehmed Han'ın son fetihleri ve Candaroğlu dengeleri içinde belirleyici yer tutar.",pages:"188-191",lat:41.29,lng:36.33},
+  {id:"L034",name:"Eflak",type:"voyvodalık / bölge",desc:"Hem Sultan Yıldırım Bayezid Han hem Sultan Çelebi Mehmed Han devrinde Osmanlı-Macar rekabetinin kuzey cephesidir.",pages:"120, 188-189",lat:44.43,lng:26.10},
   {id:"L035",name:"Filibe",type:"şehir",desc:"Rumelideki kalıcı genişlemenin önemli şehirlerinden biri olarak anlatılır.",pages:"82-83",lat:42.15,lng:24.75},
   {id:"L040",name:"Bolayır",type:"yerleşim",desc:"Süleyman Paşa'nın konağı, mezarı ve Rumeli'ye geçiş döneminin simgesel merkezidir.",pages:"66, 71-72",lat:40.49,lng:26.73},
   {id:"L032",name:"Kastamonu",type:"şehir / bölge",desc:"Candaroğlu-Osmanlı ilişkileri ve Kasım Bey meselesi bağlamında öne çıkar.",pages:"189-190",lat:41.39,lng:33.78},
-  {id:"L022",name:"Kütahya",type:"şehir",desc:"Germiyan bağlantısı, Anadolu eyaleti ve Bayezid'in gençlik valiliği açısından önemlidir.",pages:"93-95, 116, 136",lat:39.42,lng:29.98},
+  {id:"L022",name:"Kütahya",type:"şehir",desc:"Germiyan bağlantısı, Anadolu eyaleti ve Sultan Yıldırım Bayezid Han'ın gençlik valiliği açısından önemlidir.",pages:"93-95, 116, 136",lat:39.42,lng:29.98},
   {id:"L036",name:"Halep",type:"şehir",desc:"Timur'un yükseliş anlatısında Memlükler karşısındaki seferleri içinde geçer.",pages:"139",lat:36.20,lng:37.16},
   {id:"L037",name:"Şam",type:"şehir",desc:"Timur'un Ortadoğu seferleri ve surre anlatısında geçen merkezlerden biridir.",pages:"139, 188",lat:33.51,lng:36.29},
   {id:"L038",name:"Bağdat",type:"şehir",desc:"Ahmed Celayir ve Timur anlatısında belirir.",pages:"138-139",lat:33.31,lng:44.37},
-  {id:"L039",name:"Çamurlu Derbend",type:"geçit / savaş alanı",desc:"Mehmed'in Musa karşısındaki son zaferinin geçtiği yerdir.",pages:"177",lat:41.30,lng:27.50},
+  {id:"L039",name:"Çamurlu Derbend",type:"geçit / savaş alanı",desc:"Sultan Çelebi Mehmed Han'ın Musa Çelebi karşısındaki son zaferinin geçtiği yerdir.",pages:"177",lat:41.30,lng:27.50},
   {id:"L018",name:"Zağra",type:"şehir",desc:"Lala Şahin'in fetihleri içinde geçen ilk Rumeli merkezlerinden biridir.",pages:"82-83",lat:42.43,lng:25.63},
   {id:"L019",name:"Ploşnik",type:"geçit / savaş alanı",desc:"Timurtaş Paşa kuvvetlerinin pusuya düştüğü yer.",pages:"100",lat:43.22,lng:21.95},
   {id:"L012",name:"Sakarya Vadisi",type:"bölge",desc:"Osman Gazi'nin 1292 hareketleri ve uç faaliyetleriyle bağlantılıdır.",pages:"30, 50",lat:40.39,lng:30.40},
   {id:"L013",name:"Aydos",type:"kale",desc:"Rüya ve teslim anlatısıyla öne çıkan Orhan devri fethidir.",pages:"56-57",lat:40.94,lng:29.28},
-  {id:"L021b",name:"Akşehir",type:"şehir",desc:"Bayezid'in vefat ettiği yer olarak anılır.",pages:"151, 152, 154",lat:38.36,lng:31.42}
+  {id:"L021b",name:"Akşehir",type:"şehir",desc:"Sultan Yıldırım Bayezid Han'ın vefat ettiği yer olarak anılır.",pages:"151, 152, 154",lat:38.36,lng:31.42}
 ];
 
 const CONCEPTS = [
   {id:"C001",name:"Ahi Teşkilatı",type:"kurum",desc:"Şeyh Edebali'nin çevresiyle bağlantılı olarak ahilik, sosyal ve manevi örgütlenmenin bir unsuru şeklinde sunulur.",pages:"21, 63"},
   {id:"C002",name:"Dergah Kültürü",type:"kavram",desc:"Osmanlı kuruluşunda savaşçı terbiyesi ile manevî eğitimi birleştiren zemin olarak anlatılır.",pages:"20-21"},
-  {id:"C003",name:"Gaza / Cihat",type:"kavram",desc:"Kuruluş anlatısından Murad ve Bayezid devrine kadar devlet meşruiyetinin ana dili olarak işlenir.",pages:"15, 43, 47-49, 69-71, 95, 136"},
+  {id:"C003",name:"Gaza / Cihat",type:"kavram",desc:"Kuruluş anlatısından Sultan Murad-ı Hüdâvendigâr Han ve Sultan Yıldırım Bayezid Han devrine kadar devlet meşruiyetinin ana dili olarak işlenir.",pages:"15, 43, 47-49, 69-71, 95, 136"},
   {id:"C004",name:"Hutbe",type:"siyasi-dini işaret",desc:"Osman adına hutbe okunması, beylikten devlete geçişin önemli işaretlerinden biri kabul edilir.",pages:"34-35, 119"},
-  {id:"C005",name:"Sikke",type:"siyasi-mali işaret",desc:"Bayezid ve Orhan kısımlarında sikke basımı, bağımsızlık ve kurumsallaşmanın alameti olarak geçer.",pages:"35-36, 61-62"},
+  {id:"C005",name:"Sikke",type:"siyasi-mali işaret",desc:"Sultan Yıldırım Bayezid Han ve Orhan Gazi hazretleri kısımlarında sikke basımı, bağımsızlık ve kurumsallaşmanın alameti olarak geçer.",pages:"35-36, 61-62"},
   {id:"C006",name:"Timar",type:"idarî-askerî sistem",desc:"Osman Gazi'nin pazar ve dirlik düzeni anlatılarında erken prensipleri verilir.",pages:"37"},
   {id:"C007",name:"Yaya ve Müsellem",type:"askerî teşkilat",desc:"Orhan devrinde daimi piyade ve atlı birlikler olarak teşkil edilip vergi muafiyetiyle tanımlanırlar.",pages:"61-62"},
   {id:"C008",name:"Devşirme",type:"insan kaynağı sistemi",desc:"Yeniçeri ve saray için çocuk toplanması ve seçimi ayrıntılı şekilde anlatılır.",pages:"84-88"},
@@ -1864,25 +2041,25 @@ const RELATIONSHIPS = [
   {id:"REL009",source:"Osman Gazi",type:"parent_of",target:"Orhan Gazi",note:"Hanedan silsilesi"},
   {id:"REL011",source:"Orhan Gazi",type:"spouse_of",target:"Nilüfer Hatun",note:"Holofira/Nilüfer evliliği"},
   {id:"REL012",source:"Orhan Gazi",type:"parent_of",target:"Süleyman Paşa",note:"Hanedan silsilesi"},
-  {id:"REL013",source:"Orhan Gazi",type:"parent_of",target:"Murad-ı Hüdavendigar",note:"Hanedan silsilesi"},
+  {id:"REL013",source:"Orhan Gazi",type:"parent_of",target:"Sultan Murad-ı Hüdâvendigâr Han",note:"Hanedan silsilesi"},
   {id:"REL014",source:"Alaaddin Paşa",type:"advisor_of",target:"Orhan Gazi",note:"Sikke ve askerî düzen tavsiyesi"},
   {id:"REL016",source:"Süleyman Paşa",type:"campaigns_in",target:"Rumeli",note:"Rumeli fatihi olarak anlatılır"},
-  {id:"REL017",source:"Murad-ı Hüdavendigar",type:"parent_of",target:"Yıldırım Bayezid",note:"Şehzade-baba ilişkisi ve vasiyet"},
-  {id:"REL021",source:"Yıldırım Bayezid",type:"spouse_of",target:"Devlet Hatun",note:"Germiyan akrabalığı"},
+  {id:"REL017",source:"Sultan Murad-ı Hüdâvendigâr Han",type:"parent_of",target:"Sultan Yıldırım Bayezid Han",note:"Şehzade-baba ilişkisi ve vasiyet"},
+  {id:"REL021",source:"Sultan Yıldırım Bayezid Han",type:"spouse_of",target:"Devlet Hatun",note:"Germiyan akrabalığı"},
   {id:"REL024",source:"Hundi Sultan",type:"spouse_of",target:"Emir Sultan",note:"Menkıbevî ve siyasi evlilik"},
-  {id:"REL026",source:"Yıldırım Bayezid",type:"adversary_of",target:"Sigismund",note:"Haçlı cephesi"},
-  {id:"REL028",source:"Yıldırım Bayezid",type:"adversary_of",target:"Timur Han",note:"Ankara'ya giden temel karşıtlık"},
-  {id:"REL032",source:"Çelebi Mehmed",type:"parent_of",target:"II. Murad",note:"Ölüm döşeğindeki veraset ilişkisi"},
-  {id:"REL033",source:"Çelebi Mehmed",type:"sibling_rivalry",target:"İsa Çelebi",note:"Fetret Devri"},
-  {id:"REL034",source:"Çelebi Mehmed",type:"sibling_rivalry",target:"Emir Süleyman",note:"Fetret Devri"},
-  {id:"REL035",source:"Çelebi Mehmed",type:"sibling_rivalry",target:"Musa Çelebi",note:"Fetret Devri"},
+  {id:"REL026",source:"Sultan Yıldırım Bayezid Han",type:"adversary_of",target:"Sigismund",note:"Haçlı cephesi"},
+  {id:"REL028",source:"Sultan Yıldırım Bayezid Han",type:"adversary_of",target:"Timur Han",note:"Ankara'ya giden temel karşıtlık"},
+  {id:"REL032",source:"Sultan Çelebi Mehmed Han",type:"parent_of",target:"II. Murad",note:"Ölüm döşeğindeki veraset ilişkisi"},
+  {id:"REL033",source:"Sultan Çelebi Mehmed Han",type:"sibling_rivalry",target:"İsa Çelebi",note:"Fetret Devri"},
+  {id:"REL034",source:"Sultan Çelebi Mehmed Han",type:"sibling_rivalry",target:"Emir Süleyman",note:"Fetret Devri"},
+  {id:"REL035",source:"Sultan Çelebi Mehmed Han",type:"sibling_rivalry",target:"Musa Çelebi",note:"Fetret Devri"},
   {id:"REL042",source:"Şeyh Bedreddin",type:"followed_by",target:"Börklüce Mustafa",note:"İsyan ağı"},
   {id:"REL043",source:"Şeyh Bedreddin",type:"followed_by",target:"Torlak Kemal",note:"İsyan ağı"},
-  {id:"REL046",source:"Lazar",type:"adversary_of",target:"Murad-ı Hüdavendigar",note:"Kosova öncesi ve sırasında"},
-  {id:"REL019",source:"Lala Şahin Paşa",type:"serves",target:"Murad-ı Hüdavendigar",note:"Rumeli fetihlerinin başlıca kumandanı"},
-  {id:"REL020",source:"Evrenos Bey",type:"serves",target:"Murad-ı Hüdavendigar",note:"Akıncı lideri ve danışman"},
-  {id:"REL036",source:"Bayezid Paşa",type:"serves",target:"Çelebi Mehmed",note:"Başlıca komutan ve vezir"},
-  {id:"REL038",source:"Cüneyd Bey",type:"rebels_against",target:"Çelebi Mehmed",note:"İzmir merkezli isyan"},
+  {id:"REL046",source:"Lazar",type:"adversary_of",target:"Sultan Murad-ı Hüdâvendigâr Han",note:"Kosova öncesi ve sırasında"},
+  {id:"REL019",source:"Lala Şahin Paşa",type:"serves",target:"Sultan Murad-ı Hüdâvendigâr Han",note:"Rumeli fetihlerinin başlıca kumandanı"},
+  {id:"REL020",source:"Evrenos Bey",type:"serves",target:"Sultan Murad-ı Hüdâvendigâr Han",note:"Akıncı lideri ve danışman"},
+  {id:"REL036",source:"Bayezid Paşa",type:"serves",target:"Sultan Çelebi Mehmed Han",note:"Başlıca komutan ve vezir"},
+  {id:"REL038",source:"Cüneyd Bey",type:"rebels_against",target:"Sultan Çelebi Mehmed Han",note:"İzmir merkezli isyan"},
   {id:"REL031",source:"Mutahharten",type:"supports",target:"Timur Han",note:"Erzincan hattındaki destekçi"}
 ];
 
@@ -1890,87 +2067,87 @@ const SECTIONS = [
   {id:"S001",ch:null,chName:null,ruler:null,title:"İÇİNDEKİLER",start:5,end:8,type:"front_matter",summary:"İçindekiler sayfaları kitabın bölüm, alt bölüm ve ek düzenini sayfa numaralarıyla verir."},
   {id:"S002",ch:null,chName:null,ruler:null,title:"TAKDİM",start:9,end:10,type:"front_matter",summary:"Takdim, tarihin ibret verici ve eğitici değerini vurgular; KAYI serisinin Osmanlıyı ideolojik sapmalardan uzak ve ilmi ölçülerle anlatma iddiasını açıklar."},
   {id:"S003",ch:null,chName:null,ruler:null,title:"ÖNSÖZ",start:11,end:14,type:"front_matter",summary:"Önsöz, Osmanlı tarihinin sıkça çarpıtıldığını savunur; eserin kaynaklara dayalı bir yaklaşım izleyeceğini belirtir."},
-  {id:"S004",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"OSMAN GAZİ",start:15,end:15,type:"chapter_heading",summary:"Bölüm açılışı."},
-  {id:"S005",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"KAYI YİĞİTLERİ SÖĞÜT YOLUNDA",start:16,end:16,type:"section",summary:"Ertuğrul Gazi idaresindeki Kayıların Selçuklulara yardım ederek Söğüt çevresine yerleşmesi."},
-  {id:"S006",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"KAYI BOYU VE OSMANLI AİLESİ",start:17,end:18,type:"section",summary:"Osmanlı ailesinin Kayı boyuna nisbeti, Kayı damgası ve Anadolu'ya geliş güzergâhları."},
-  {id:"S007",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"SÖĞÜTTE BAYRAM",start:19,end:19,type:"section",summary:"Osman'ın doğumu vesilesiyle yapılan şenlikler ve Ertuğrul'un rüyası."},
-  {id:"S008",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"DERGAH KÜLTÜRÜ",start:20,end:20,type:"section",summary:"Savaşçılık terbiyesi ile Şeyh Edebali çevresindeki manevî eğitim."},
-  {id:"S009",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"İLK AŞK",start:21,end:22,type:"section",summary:"Osman'ın Şeyh Edebali'nin kızını istemesi, talebin ertelenmesi."},
-  {id:"S010",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"İLAHİ İŞARETLER",start:23,end:25,type:"section",summary:"Osman'ın Kur'an'a hürmeti ve meşhur rüyası."},
-  {id:"S011",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"EDEBALİ",start:26,end:27,type:"section",summary:"Şeyh Edebali'nin hayatı, ilmi ve Osman üzerindeki etkisi."},
-  {id:"S012",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"İLK FETİHLER",start:28,end:29,type:"section",summary:"İnegöl, Kulacahisar ve Karacahisar çevresindeki ilk fetih hamleleri."},
-  {id:"S013",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"AVA GİDEN AVLANIR",start:30,end:32,type:"section",summary:"Bilecik ve Yarhisar tekfurlarının düğün tuzağının tersine çevrilmesi."},
-  {id:"S014",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"DEVLETE GİDEN YOL",start:33,end:35,type:"section",summary:"Hutbe, kadı tayini, toprak dağıtımı ile devlete geçiş işaretleri."},
-  {id:"S015",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"KAZANANDAN AL!",start:36,end:37,type:"section",summary:"Osman Gazi'nin pazar adaleti ve timar benzeri ilk hukukî prensipleri."},
-  {id:"S016",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"BİZANS ACİZ KALIYOR",start:38,end:39,type:"section",summary:"Koyunhisar ve Dinboz zaferleri sonrasında Bizans'ın çaresizliği."},
-  {id:"S017",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"KÖSE MİHAL, GAZİ MİHAL OLUYOR",start:40,end:42,type:"section",summary:"Köse Mihal'in Osmanlılarla yakınlaşarak Müslüman oluşu."},
-  {id:"S018",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"CİHAT KOLLARI",start:43,end:44,type:"section",summary:"Bursa, İznik çevresindeki kuşatma ve fetih faaliyetleri."},
-  {id:"S019",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"İSTANBUL'U AÇ GÜLZAR YAP!",start:45,end:46,type:"section",summary:"İstanbul ideali ve Oğuz-Kayı soyu vurgusu."},
-  {id:"S020",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"NASİHAT MI, ANAYASA MI?",start:47,end:48,type:"section",summary:"Osman Gazi'nin Orhan'a bıraktığı vasiyet."},
-  {id:"S021",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi",title:"OSMAN GAZİ'NİN ŞAHSİYETİ",start:49,end:52,type:"section",summary:"Osman Gazi'nin ailesi, karakteri ve devlet kuruculuğu."},
-  {id:"S022",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"ORHAN GAZİ",start:53,end:53,type:"chapter_heading",summary:"Bölüm açılışı."},
-  {id:"S023",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"BABAMIZIN DUASI SENİNLEDİR",start:54,end:55,type:"section",summary:"Orhan ile Alaaddin arasında ülkenin bölüşülmemesi kararı."},
-  {id:"S024",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"AYDOS'UN FETHİ",start:56,end:57,type:"section",summary:"Samandıra ve Aydos çevresindeki fetihler."},
-  {id:"S025",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"PELEKANON SAVAŞI",start:58,end:58,type:"section",summary:"İznik ve İzmit yolunu açan Pelekanon muharebesi."},
-  {id:"S026",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"BUNLAR BİZE BEY OLAYDI!",start:59,end:60,type:"section",summary:"İznik halkının Osmanlı idaresini benimsemesi."},
-  {id:"S027",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"ALAADDİN PAŞA'NIN TAVSİYELERİ",start:61,end:61,type:"section",summary:"Sikke basımı, yaya-müsellem teşkilatı."},
-  {id:"S028",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"İNCİTME GEL DERVİŞLERİ",start:62,end:63,type:"section",summary:"Geyikli Baba ve dervişlere gösterilen saygı."},
-  {id:"S029",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"SUYA SECCADE SALANLAR!",start:64,end:66,type:"section",summary:"Çimpe Kalesi'nin ele geçirilmesi ve Rumeli'ye geçiş."},
-  {id:"S030",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"GAZİ SÜLEYMAN PAŞA'NIN FETİHLERİ",start:67,end:68,type:"section",summary:"Süleyman Paşa'nın Gelibolu çevresindeki fetihleri."},
-  {id:"S031",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"YAŞAMAKTAN MAKSAT NE?",start:69,end:70,type:"section",summary:"Süleyman Paşa'nın ibretli sözleri."},
-  {id:"S032",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"HAYAT EMANET BİR ELBİSEDİR!",start:71,end:73,type:"section",summary:"Süleyman Paşa'nın ani ölümü."},
-  {id:"S033",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"RUMELİ'NİN YENİ BAŞBUĞU",start:74,end:75,type:"section",summary:"Murad'ın yükselişi ve Edirne'nin fethi."},
-  {id:"S034",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"OĞUL! BİZ YOLUN SONUNA GELDİK",start:76,end:76,type:"section",summary:"Orhan Gazi'nin Murad'a son nasihatleri."},
-  {id:"S035",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi",title:"ORHAN GAZİ'NİN ŞAHSİYETİ",start:77,end:80,type:"section",summary:"Orhan Gazi'nin mizacı, fetihleri ve hayır eserleri."},
-  {id:"S036",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"MURAD-I HÜDAVENDİGAR",start:81,end:81,type:"chapter_heading",summary:"Bölüm açılışı."},
-  {id:"S037",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"FETİHLER VE SIRPSINDIĞI",start:82,end:83,type:"section",summary:"Murad devrinin ilk Balkan fetihleri ve Sırpsındığı zaferi."},
-  {id:"S038",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"YENİÇERİLER",start:84,end:92,type:"section",summary:"Devşirme, Acemi Ocağı, yeniçeri talimi, disiplini ve savaş düzeni."},
-  {id:"S039",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"DÜĞÜN",start:93,end:94,type:"section",summary:"Bayezid ile Devlet Hatun'un düğünü."},
-  {id:"S040",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"GAZA-İ EKBER",start:95,end:98,type:"section",summary:"Karaman seferi ve dinî-siyasi meşruiyet."},
-  {id:"S041",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"İHSAN VE ADALET ÖRNEKLERİ",start:99,end:99,type:"section",summary:"Murad'ın disiplin, merhamet ve adalet örnekleri."},
-  {id:"S042",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"CENK NASIL OLUR GÖRSÜN!",start:100,end:102,type:"section",summary:"Ploşnik bozgunu ve büyük Balkan ittifakı."},
-  {id:"S043",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"MEŞVERET SÜNNET-İ RESUL'DÜR",start:103,end:104,type:"section",summary:"Kosova öncesi harp meclisi ve meşveret kültürü."},
-  {id:"S044",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"AŞKINLA AĞLAYAN GÖZLER HÜRMETİNE",start:105,end:107,type:"section",summary:"Murad'ın Kosova arifesinde yaptığı dua."},
-  {id:"S045",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"GAZİ-İ MUTLAK İDİ, ŞEHİT-İ MUHAKKAK OLDU",start:108,end:109,type:"section",summary:"Kosova zaferi ve Murad'ın şehadeti."},
-  {id:"S046",ch:3,chName:"Murad-ı Hüdavendigar",ruler:"Murad I",title:"MURAD-I HÜDAVENDİGAR'IN ŞAHSİYETİ",start:110,end:114,type:"section",summary:"Murad'ın fetihleri, kişiliği, hayır eserleri."},
-  {id:"S047",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"YILDIRIM BAYEZİD HAN",start:115,end:115,type:"chapter_heading",summary:"Bölüm açılışı."},
-  {id:"S048",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"ANADOLU'DA BİRLİK MÜCADELESİ",start:116,end:117,type:"section",summary:"Bayezid'in Batı Anadolu beyliklerini ilhakı."},
-  {id:"S049",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"İSTANBUL KUŞATMALARI",start:118,end:119,type:"section",summary:"Bayezid'in İstanbul kuşatma siyaseti."},
-  {id:"S050",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"ŞANLI FETİHLER",start:120,end:121,type:"section",summary:"Eflak, Karaman ve Bulgaristan genişlemesi."},
-  {id:"S051",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"HUNDİ SULTAN",start:122,end:124,type:"section",summary:"Hundi Sultan ile Emir Sultan evliliği."},
-  {id:"S052",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"BÜYÜK HAÇLI İTTİFAKI",start:125,end:127,type:"section",summary:"Niğbolu öncesinde Haçlı ordusu oluşumu."},
-  {id:"S053",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"BRE DOĞAN!",start:128,end:129,type:"section",summary:"Bayezid'in Doğan Bey'e seslenişi."},
-  {id:"S054",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"NİĞBOLU SAVAŞI",start:130,end:130,type:"section",summary:"1396 Niğbolu Muharebesi."},
-  {id:"S055",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"YEMİNİNİ İADE EDİYORUM!",start:131,end:131,type:"section",summary:"Bayezid'in esir düşen asilzadelere söylediği söz."},
-  {id:"S056",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"ULU CAMİ'NİN AÇILIŞI",start:132,end:133,type:"section",summary:"Bursa Ulu Cami'nin açılışı ve Somuncu Baba."},
-  {id:"S057",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"YAKLAŞAN TEHLİKE: TİMUR",start:134,end:135,type:"section",summary:"Timur'un kökeni ve siyasî yükselişi."},
-  {id:"S058",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"VE YILDIRIM",start:136,end:136,type:"section",summary:"Bayezid'in cihatçı hükümdarlık profili."},
-  {id:"S059",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"SAVAŞ KIŞKIRTICILARI",start:137,end:139,type:"section",summary:"Bayezid-Timur geriliminin tırmanması."},
-  {id:"S060",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"ALİMLERİN GAYRETİ",start:140,end:142,type:"section",summary:"Savaşı önleme çabaları."},
-  {id:"S061",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"ANKARA SAVAŞI",start:143,end:147,type:"section",summary:"Ankara Muharebesi ve Bayezid'in esareti."},
-  {id:"S062",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"İKİ HAKAN BİR SEDİRDE",start:148,end:149,type:"section",summary:"Timur ile Bayezid arasındaki temaslar."},
-  {id:"S063",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"CİHANA VEDA KILDI",start:150,end:151,type:"section",summary:"Bayezid'in esaret altındaki kederi ve ölümü."},
-  {id:"S064",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"TİMUR ANADOLU'DA",start:152,end:154,type:"section",summary:"Timur'un Anadolu beylerini yeniden düzenleyişi."},
-  {id:"S065",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"DÜZME HABERLER!",start:155,end:157,type:"section",summary:"Demir kafes ve intihar rivayetlerinin reddi."},
-  {id:"S066",ch:4,chName:"Yıldırım Bayezid Han",ruler:"Yıldırım Bayezid",title:"YILDIRIM BAYEZİD HAN'IN ŞAHSİYETİ",start:158,end:162,type:"section",summary:"Bayezid'in eğitimi, karakteri ve eserleri."},
-  {id:"S067",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"SULTAN ÇELEBİ MEHMED",start:163,end:163,type:"chapter_heading",summary:"Bölüm açılışı."},
-  {id:"S068",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"AMASYA YOLUNDA",start:164,end:164,type:"section",summary:"Ankara bozgunundan çıkan Mehmed'in Amasya'ya yönelişi."},
-  {id:"S069",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"FIRSAT DÜŞKÜNLERİ",start:165,end:169,type:"section",summary:"Fırsatçıların bastırılması ve bölgesel otorite."},
-  {id:"S070",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"TİMUR HAN'IN ENDİŞESİ",start:170,end:171,type:"section",summary:"Timur'un Mehmed'den duyduğu tedirginlik."},
-  {id:"S071",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"ACI HABER",start:172,end:172,type:"section",summary:"Bayezid Han'ın ölüm haberi."},
-  {id:"S072",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"TACI TAHTI TERK EDELİM!",start:173,end:174,type:"section",summary:"Mehmed'in kardeş kanından kaçınmak istemesi."},
-  {id:"S073",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"KARDEŞLER MÜCADELESİ",start:175,end:176,type:"section",summary:"Fetret Devri kardeş mücadeleleri."},
-  {id:"S074",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"YA DİRİSİ GELSEYDİ!",start:177,end:178,type:"section",summary:"Karamanoğlu'nun Bursa kuşatması."},
-  {id:"S075",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"BİR İSYAN VE BİR İHANET!",start:179,end:182,type:"section",summary:"Cüneyd Bey isyanı ve İzmir seferi."},
-  {id:"S076",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"YEMİNİNİ BOZMANIN SONU!",start:183,end:185,type:"section",summary:"Karaman cephesi ve Karamanoğlu'nun sözünden dönmesi."},
-  {id:"S077",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"VAKIF MEDENİYETİNE DOĞRU",start:186,end:187,type:"section",summary:"Vakıf medeniyetinin sosyal güvenlik ve hayır boyutu."},
-  {id:"S078",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"BAZI FETİHLER",start:188,end:189,type:"section",summary:"Eflak, Macar ve Candaroğulları çevresindeki gelişmeler."},
-  {id:"S079",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"OSMANLI VEREN ELDİR",start:190,end:190,type:"section",summary:"Osmanlıların cömertlik ve himaye siyaseti."},
-  {id:"S080",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"SİMAVNA KADISI OĞLU ŞEYH BEDREDDİN",start:191,end:192,type:"section",summary:"Şeyh Bedreddin'in kökeni ve fikrî nüfuzu."},
-  {id:"S081",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"İLK BÜYÜK İÇ İSYAN",start:193,end:196,type:"section",summary:"Bedreddin-Börklüce-Torlak isyanı."},
-  {id:"S082",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"MURAD'IMA HABER SALIN",start:197,end:197,type:"section",summary:"Mehmed'in son hastalığı ve ölümü."},
-  {id:"S083",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"SULTAN ÇELEBİ MEHMED'İN ŞAHSİYETİ",start:198,end:199,type:"section",summary:"Çelebi Mehmed'in portresi."},
-  {id:"S084",ch:5,chName:"Sultan Çelebi Mehmed",ruler:"Çelebi Mehmed",title:"HAKKINDA NE DEDİLER",start:200,end:202,type:"section",summary:"Tarihçilerin değerlendirmeleri."}
+  {id:"S004",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"OSMAN GAZİ",start:15,end:15,type:"chapter_heading",summary:"Bölüm açılışı."},
+  {id:"S005",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"KAYI YİĞİTLERİ SÖĞÜT YOLUNDA",start:16,end:16,type:"section",summary:"Ertuğrul Gazi idaresindeki Kayıların Selçuklulara yardım ederek Söğüt çevresine yerleşmesi."},
+  {id:"S006",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"KAYI BOYU VE OSMANLI AİLESİ",start:17,end:18,type:"section",summary:"Osmanlı ailesinin Kayı boyuna nisbeti, Kayı damgası ve Anadolu'ya geliş güzergâhları."},
+  {id:"S007",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"SÖĞÜTTE BAYRAM",start:19,end:19,type:"section",summary:"Osman'ın doğumu vesilesiyle yapılan şenlikler ve Ertuğrul'un rüyası."},
+  {id:"S008",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"DERGAH KÜLTÜRÜ",start:20,end:20,type:"section",summary:"Savaşçılık terbiyesi ile Şeyh Edebali çevresindeki manevî eğitim."},
+  {id:"S009",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"İLK AŞK",start:21,end:22,type:"section",summary:"Osman'ın Şeyh Edebali'nin kızını istemesi, talebin ertelenmesi."},
+  {id:"S010",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"İLAHİ İŞARETLER",start:23,end:25,type:"section",summary:"Osman'ın Kur'an'a hürmeti ve meşhur rüyası."},
+  {id:"S011",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"EDEBALİ",start:26,end:27,type:"section",summary:"Şeyh Edebali'nin hayatı, ilmi ve Osman üzerindeki etkisi."},
+  {id:"S012",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"İLK FETİHLER",start:28,end:29,type:"section",summary:"İnegöl, Kulacahisar ve Karacahisar çevresindeki ilk fetih hamleleri."},
+  {id:"S013",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"AVA GİDEN AVLANIR",start:30,end:32,type:"section",summary:"Bilecik ve Yarhisar tekfurlarının düğün tuzağının tersine çevrilmesi."},
+  {id:"S014",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"DEVLETE GİDEN YOL",start:33,end:35,type:"section",summary:"Hutbe, kadı tayini, toprak dağıtımı ile devlete geçiş işaretleri."},
+  {id:"S015",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"KAZANANDAN AL!",start:36,end:37,type:"section",summary:"Osman Gazi'nin pazar adaleti ve timar benzeri ilk hukukî prensipleri."},
+  {id:"S016",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"BİZANS ACİZ KALIYOR",start:38,end:39,type:"section",summary:"Koyunhisar ve Dinboz zaferleri sonrasında Bizans'ın çaresizliği."},
+  {id:"S017",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"KÖSE MİHAL, GAZİ MİHAL OLUYOR",start:40,end:42,type:"section",summary:"Köse Mihal'in Osmanlılarla yakınlaşarak Müslüman oluşu."},
+  {id:"S018",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"CİHAT KOLLARI",start:43,end:44,type:"section",summary:"Bursa, İznik çevresindeki kuşatma ve fetih faaliyetleri."},
+  {id:"S019",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"İSTANBUL'U AÇ GÜLZAR YAP!",start:45,end:46,type:"section",summary:"İstanbul ideali ve Oğuz-Kayı soyu vurgusu."},
+  {id:"S020",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"NASİHAT MI, ANAYASA MI?",start:47,end:48,type:"section",summary:"Osman Gazi'nin Orhan'a bıraktığı vasiyet."},
+  {id:"S021",ch:1,chName:"Osman Gazi",ruler:"Osman Gazi hazretleri",title:"OSMAN GAZİ'NİN ŞAHSİYETİ",start:49,end:52,type:"section",summary:"Osman Gazi'nin ailesi, karakteri ve devlet kuruculuğu."},
+  {id:"S022",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"ORHAN GAZİ",start:53,end:53,type:"chapter_heading",summary:"Bölüm açılışı."},
+  {id:"S023",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"BABAMIZIN DUASI SENİNLEDİR",start:54,end:55,type:"section",summary:"Orhan ile Alaaddin arasında ülkenin bölüşülmemesi kararı."},
+  {id:"S024",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"AYDOS'UN FETHİ",start:56,end:57,type:"section",summary:"Samandıra ve Aydos çevresindeki fetihler."},
+  {id:"S025",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"PELEKANON SAVAŞI",start:58,end:58,type:"section",summary:"İznik ve İzmit yolunu açan Pelekanon muharebesi."},
+  {id:"S026",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"BUNLAR BİZE BEY OLAYDI!",start:59,end:60,type:"section",summary:"İznik halkının Osmanlı idaresini benimsemesi."},
+  {id:"S027",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"ALAADDİN PAŞA'NIN TAVSİYELERİ",start:61,end:61,type:"section",summary:"Sikke basımı, yaya-müsellem teşkilatı."},
+  {id:"S028",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"İNCİTME GEL DERVİŞLERİ",start:62,end:63,type:"section",summary:"Geyikli Baba ve dervişlere gösterilen saygı."},
+  {id:"S029",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"SUYA SECCADE SALANLAR!",start:64,end:66,type:"section",summary:"Çimpe Kalesi'nin ele geçirilmesi ve Rumeli'ye geçiş."},
+  {id:"S030",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"GAZİ SÜLEYMAN PAŞA'NIN FETİHLERİ",start:67,end:68,type:"section",summary:"Süleyman Paşa'nın Gelibolu çevresindeki fetihleri."},
+  {id:"S031",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"YAŞAMAKTAN MAKSAT NE?",start:69,end:70,type:"section",summary:"Süleyman Paşa'nın ibretli sözleri."},
+  {id:"S032",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"HAYAT EMANET BİR ELBİSEDİR!",start:71,end:73,type:"section",summary:"Süleyman Paşa'nın ani ölümü."},
+  {id:"S033",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"RUMELİ'NİN YENİ BAŞBUĞU",start:74,end:75,type:"section",summary:"Sultan Murad-ı Hüdâvendigâr Han'ın yükselişi ve Edirne'nin fethi."},
+  {id:"S034",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"OĞUL! BİZ YOLUN SONUNA GELDİK",start:76,end:76,type:"section",summary:"Orhan Gazi hazretlerinin Sultan Murad-ı Hüdâvendigâr Han'a son nasihatleri."},
+  {id:"S035",ch:2,chName:"Orhan Gazi",ruler:"Orhan Gazi hazretleri",title:"ORHAN GAZİ'NİN ŞAHSİYETİ",start:77,end:80,type:"section",summary:"Orhan Gazi'nin mizacı, fetihleri ve hayır eserleri."},
+  {id:"S036",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"MURAD-I HÜDAVENDİGAR",start:81,end:81,type:"chapter_heading",summary:"Bölüm açılışı."},
+  {id:"S037",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"FETİHLER VE SIRPSINDIĞI",start:82,end:83,type:"section",summary:"Sultan Murad-ı Hüdâvendigâr Han devrinin ilk Balkan fetihleri ve Sırpsındığı zaferi."},
+  {id:"S038",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"YENİÇERİLER",start:84,end:92,type:"section",summary:"Devşirme, Acemi Ocağı, yeniçeri talimi, disiplini ve savaş düzeni."},
+  {id:"S039",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"DÜĞÜN",start:93,end:94,type:"section",summary:"Sultan Yıldırım Bayezid Han ile Devlet Hatun'un düğünü."},
+  {id:"S040",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"GAZA-İ EKBER",start:95,end:98,type:"section",summary:"Karaman seferi ve dinî-siyasi meşruiyet."},
+  {id:"S041",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"İHSAN VE ADALET ÖRNEKLERİ",start:99,end:99,type:"section",summary:"Sultan Murad-ı Hüdâvendigâr Han'ın disiplin, merhamet ve adalet örnekleri."},
+  {id:"S042",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"CENK NASIL OLUR GÖRSÜN!",start:100,end:102,type:"section",summary:"Ploşnik bozgunu ve büyük Balkan ittifakı."},
+  {id:"S043",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"MEŞVERET SÜNNET-İ RESUL'DÜR",start:103,end:104,type:"section",summary:"Kosova öncesi harp meclisi ve meşveret kültürü."},
+  {id:"S044",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"AŞKINLA AĞLAYAN GÖZLER HÜRMETİNE",start:105,end:107,type:"section",summary:"Sultan Murad-ı Hüdâvendigâr Han'ın Kosova arifesinde yaptığı dua."},
+  {id:"S045",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"GAZİ-İ MUTLAK İDİ, ŞEHİT-İ MUHAKKAK OLDU",start:108,end:109,type:"section",summary:"Kosova zaferi ve Sultan Murad-ı Hüdâvendigâr Han'ın şehâdeti."},
+  {id:"S046",ch:3,chName:"Sultan Murad-ı Hüdâvendigâr Han",ruler:"Sultan Murad-ı Hüdâvendigâr Han",title:"MURAD-I HÜDAVENDİGAR'IN ŞAHSİYETİ",start:110,end:114,type:"section",summary:"Sultan Murad-ı Hüdâvendigâr Han'ın fetihleri, kişiliği, hayır eserleri."},
+  {id:"S047",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"YILDIRIM BAYEZİD HAN",start:115,end:115,type:"chapter_heading",summary:"Bölüm açılışı."},
+  {id:"S048",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"ANADOLU'DA BİRLİK MÜCADELESİ",start:116,end:117,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın Batı Anadolu beyliklerini ilhakı."},
+  {id:"S049",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"İSTANBUL KUŞATMALARI",start:118,end:119,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın İstanbul kuşatma siyaseti."},
+  {id:"S050",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"ŞANLI FETİHLER",start:120,end:121,type:"section",summary:"Eflak, Karaman ve Bulgaristan genişlemesi."},
+  {id:"S051",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"HUNDİ SULTAN",start:122,end:124,type:"section",summary:"Hundi Sultan ile Emir Sultan evliliği."},
+  {id:"S052",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"BÜYÜK HAÇLI İTTİFAKI",start:125,end:127,type:"section",summary:"Niğbolu öncesinde Haçlı ordusu oluşumu."},
+  {id:"S053",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"BRE DOĞAN!",start:128,end:129,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın Doğan Bey'e seslenişi."},
+  {id:"S054",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"NİĞBOLU SAVAŞI",start:130,end:130,type:"section",summary:"1396 Niğbolu Muharebesi."},
+  {id:"S055",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"YEMİNİNİ İADE EDİYORUM!",start:131,end:131,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın esir düşen asilzadelere söylediği söz."},
+  {id:"S056",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"ULU CAMİ'NİN AÇILIŞI",start:132,end:133,type:"section",summary:"Bursa Ulu Cami'nin açılışı ve Somuncu Baba."},
+  {id:"S057",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"YAKLAŞAN TEHLİKE: TİMUR",start:134,end:135,type:"section",summary:"Timur'un kökeni ve siyasî yükselişi."},
+  {id:"S058",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"VE YILDIRIM",start:136,end:136,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın cihatçı hükümdarlık profili."},
+  {id:"S059",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"SAVAŞ KIŞKIRTICILARI",start:137,end:139,type:"section",summary:"Bayezid-Timur geriliminin tırmanması."},
+  {id:"S060",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"ALİMLERİN GAYRETİ",start:140,end:142,type:"section",summary:"Savaşı önleme çabaları."},
+  {id:"S061",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"ANKARA SAVAŞI",start:143,end:147,type:"section",summary:"Ankara Muharebesi ve Sultan Yıldırım Bayezid Han'ın esareti."},
+  {id:"S062",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"İKİ HAKAN BİR SEDİRDE",start:148,end:149,type:"section",summary:"Timur ile Bayezid arasındaki temaslar."},
+  {id:"S063",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"CİHANA VEDA KILDI",start:150,end:151,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın esaret altındaki kederi ve vefatı."},
+  {id:"S064",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"TİMUR ANADOLU'DA",start:152,end:154,type:"section",summary:"Timur'un Anadolu beylerini yeniden düzenleyişi."},
+  {id:"S065",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"DÜZME HABERLER!",start:155,end:157,type:"section",summary:"Demir kafes ve intihar rivayetlerinin reddi."},
+  {id:"S066",ch:4,chName:"Sultan Yıldırım Bayezid Han",ruler:"Sultan Yıldırım Bayezid Han",title:"YILDIRIM BAYEZİD HAN'IN ŞAHSİYETİ",start:158,end:162,type:"section",summary:"Sultan Yıldırım Bayezid Han'ın eğitimi, karakteri ve eserleri."},
+  {id:"S067",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"SULTAN ÇELEBİ MEHMED",start:163,end:163,type:"chapter_heading",summary:"Bölüm açılışı."},
+  {id:"S068",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"AMASYA YOLUNDA",start:164,end:164,type:"section",summary:"Ankara bozgunundan çıkan Sultan Çelebi Mehmed Han'ın Amasya'ya yönelişi."},
+  {id:"S069",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"FIRSAT DÜŞKÜNLERİ",start:165,end:169,type:"section",summary:"Fırsatçıların bastırılması ve bölgesel otorite."},
+  {id:"S070",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"TİMUR HAN'IN ENDİŞESİ",start:170,end:171,type:"section",summary:"Timur'un Sultan Çelebi Mehmed Han'dan duyduğu tedirginlik."},
+  {id:"S071",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"ACI HABER",start:172,end:172,type:"section",summary:"Bayezid Han'ın ölüm haberi."},
+  {id:"S072",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"TACI TAHTI TERK EDELİM!",start:173,end:174,type:"section",summary:"Sultan Çelebi Mehmed Han'ın kardeş kanından kaçınmak istemesi."},
+  {id:"S073",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"KARDEŞLER MÜCADELESİ",start:175,end:176,type:"section",summary:"Fetret Devri kardeş mücadeleleri."},
+  {id:"S074",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"YA DİRİSİ GELSEYDİ!",start:177,end:178,type:"section",summary:"Karamanoğlu'nun Bursa kuşatması."},
+  {id:"S075",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"BİR İSYAN VE BİR İHANET!",start:179,end:182,type:"section",summary:"Cüneyd Bey isyanı ve İzmir seferi."},
+  {id:"S076",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"YEMİNİNİ BOZMANIN SONU!",start:183,end:185,type:"section",summary:"Karaman cephesi ve Karamanoğlu'nun sözünden dönmesi."},
+  {id:"S077",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"VAKIF MEDENİYETİNE DOĞRU",start:186,end:187,type:"section",summary:"Vakıf medeniyetinin sosyal güvenlik ve hayır boyutu."},
+  {id:"S078",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"BAZI FETİHLER",start:188,end:189,type:"section",summary:"Eflak, Macar ve Candaroğulları çevresindeki gelişmeler."},
+  {id:"S079",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"OSMANLI VEREN ELDİR",start:190,end:190,type:"section",summary:"Osmanlıların cömertlik ve himaye siyaseti."},
+  {id:"S080",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"SİMAVNA KADISI OĞLU ŞEYH BEDREDDİN",start:191,end:192,type:"section",summary:"Şeyh Bedreddin'in kökeni ve fikrî nüfuzu."},
+  {id:"S081",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"İLK BÜYÜK İÇ İSYAN",start:193,end:196,type:"section",summary:"Bedreddin-Börklüce-Torlak isyanı."},
+  {id:"S082",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"MURAD'IMA HABER SALIN",start:197,end:197,type:"section",summary:"Sultan Çelebi Mehmed Han'ın son hastalığı ve vefatı."},
+  {id:"S083",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"SULTAN ÇELEBİ MEHMED'İN ŞAHSİYETİ",start:198,end:199,type:"section",summary:"Sultan Çelebi Mehmed Han'ın portresi."},
+  {id:"S084",ch:5,chName:"Sultan Çelebi Mehmed Han",ruler:"Sultan Çelebi Mehmed Han",title:"HAKKINDA NE DEDİLER",start:200,end:202,type:"section",summary:"Tarihçilerin değerlendirmeleri."}
 ];
 
 const BIBLIOGRAPHY = [
@@ -2264,47 +2441,84 @@ let mapMarkers = {};
 function renderMap() {
   if (map) return;
 
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  // Vintage / tarihi harita tile'ları — sepia filtresi CSS'te uygulanıyor
+  const tileUrl = 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
 
   map = L.map('mapContainer', {
-    center: [40.0, 32.0],
-    zoom: 5,
+    center: [40.0, 30.0],
+    zoom: 6,
     scrollWheelZoom: false,
-    zoomControl: true
+    zoomControl: true,
+    attributionControl: false
   });
 
+  // Attribution'ı özelleştirilmiş konumda göster
+  L.control.attribution({ position: 'bottomright', prefix: false })
+    .addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>')
+    .addTo(map);
+
   map.tileLayer = L.tileLayer(tileUrl, {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
     maxZoom: 15
   }).addTo(map);
 
-  // Custom gold marker icon
+  // Tarihi harita stili marker — şehir/yerleşim (altın yıldız)
   const goldIcon = L.divIcon({
     className: 'custom-marker',
-    html: '<div style="width:14px;height:14px;background:linear-gradient(135deg,#c9a84c,#8b6914);border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-    popupAnchor: [0, -10]
+    html: `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="10" cy="10" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/>
+      <circle cx="10" cy="10" r="2.5" fill="#5a3e1b"/>
+    </svg>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -12]
   });
 
+  // Savaş alanı marker (kırmızı çarpı kılıç)
   const battleIcon = L.divIcon({
     className: 'custom-marker',
-    html: '<div style="width:14px;height:14px;background:linear-gradient(135deg,#c0392b,#8b1a1a);border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,0.4);"></div>',
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-    popupAnchor: [0, -10]
+    html: `<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+      <line x1="4" y1="4" x2="18" y2="18" stroke="#8b1a1a" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="4" x2="4" y2="18" stroke="#8b1a1a" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="11" cy="11" r="3" fill="#c0392b" stroke="#5a1010" stroke-width="1"/>
+    </svg>`,
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
+    popupAnchor: [0, -14]
   });
+
+  // Büyük şehir marker (çift halka, taçlı)
+  const capitalIcon = L.divIcon({
+    className: 'custom-marker',
+    html: `<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="#8b6914" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/>
+      <circle cx="12" cy="12" r="2.5" fill="#5a3e1b"/>
+    </svg>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -14]
+  });
+
+  const capitalCities = ['Bursa', 'Edirne', 'İstanbul', 'Konya', 'Söğüt'];
 
   PLACES.forEach(p => {
     if (!p.lat || !p.lng) return;
 
     const isBattle = p.type.includes('savaş') || p.type.includes('geçit');
-    const icon = isBattle ? battleIcon : goldIcon;
+    const isCapital = capitalCities.includes(p.name);
+    const icon = isBattle ? battleIcon : (isCapital ? capitalIcon : goldIcon);
 
     const marker = L.marker([p.lat, p.lng], { icon: icon }).addTo(map);
+
+    // Yer adı etiketi (tarihi harita stili)
+    const labelClass = isBattle ? 'map-label-battle' : (isCapital ? 'map-label-capital' : 'map-label');
+    const labelIcon = L.divIcon({
+      className: labelClass,
+      html: `<span>${p.name}</span>`,
+      iconSize: [0, 0],
+      iconAnchor: [-14, 5]
+    });
+    L.marker([p.lat, p.lng], { icon: labelIcon, interactive: false }).addTo(map);
 
     const popupContent = `
       <div class="map-popup-title">${p.name}</div>
@@ -2334,20 +2548,8 @@ function flyToPlace(id) {
 }
 
 function updateMapTiles() {
+  // Tarihi harita stili — tema değişiminden bağımsız, her zaman aynı vintage tile
   if (!map) return;
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-
-  map.eachLayer(layer => {
-    if (layer instanceof L.TileLayer) map.removeLayer(layer);
-  });
-
-  L.tileLayer(tileUrl, {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    maxZoom: 15
-  }).addTo(map);
 }
 
 // Theme toggle
