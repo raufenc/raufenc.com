@@ -117,11 +117,11 @@ const TestEngine = {
         <div class="nt-result-text">${result.text}</div>
         <p style="font-size:0.78rem;color:var(--muted);margin-bottom:24px">Bu test teşhis koymaz; farkındalık oluşturur.</p>
         <div class="nt-result-actions">
-          <button class="nt-btn nt-btn-primary" onclick="NT.share('${this.config.title} Sonucum', 'Sonuç: ${result.label} (%${pct})', window.location.href)">
+          <button class="nt-btn nt-btn-primary" onclick="TestEngine.shareResult()">
             Sonucumu Paylaş
           </button>
           <button class="nt-btn nt-btn-secondary" onclick="TestEngine.downloadResultCard()">
-            📸 Sonuç Kartı İndir
+            Sonuç Kartı İndir
           </button>
           <button class="nt-btn nt-btn-secondary" onclick="TestEngine.init(TestEngine.config)">
             Tekrar Dene
@@ -139,12 +139,51 @@ const TestEngine = {
     if (this.config.onComplete) this.config.onComplete({ pct, label: result.label, answers });
   },
 
+  shareResult() {
+    const data = NT.load(`test_${this.config.slug || 'test'}`);
+    if (!data) { NT.share(this.config.title, '', window.location.href); return; }
+    const title = this.config.title || 'NöroTerbiye Test';
+    const text = `🧠 ${title}\n\n📊 Sonuç: %${data.pct} — ${data.label}\n\n`;
+
+    // Önce sonuç kartı PNG'sini oluştur, sonra Web Share API ile paylaş (resim destekliyorsa)
+    try {
+      this._createResultCanvas().then(canvas => {
+        canvas.toBlob(blob => {
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], 'sonuc.png', { type: 'image/png' })] })) {
+            navigator.share({
+              title: title + ' Sonucum',
+              text: text,
+              url: window.location.href,
+              files: [new File([blob], title + '-Sonuç.png', { type: 'image/png' })]
+            }).catch(() => {});
+          } else {
+            // Fallback: sadece metin paylaş
+            NT.share(title + ' Sonucum', text, window.location.href);
+          }
+        }, 'image/png');
+      });
+    } catch(e) {
+      NT.share(title + ' Sonucum', text, window.location.href);
+    }
+  },
+
+  _createResultCanvas() {
+    return new Promise(resolve => {
+      const data = NT.load(`test_${this.config.slug || 'test'}`);
+      const title = this.config.title || 'NöroTerbiye Test';
+      const canvas = this._drawResultCard(data, title);
+      resolve(canvas);
+    });
+  },
+
   downloadResultCard() {
     const data = NT.load(`test_${this.config.slug || 'test'}`);
     if (!data) { NT.toast('Sonuç bulunamadı'); return; }
     const title = this.config.title || 'NöroTerbiye Test';
+    NT.downloadImage(() => this._drawResultCard(data, title), title + '-Sonuç');
+  },
 
-    NT.downloadImage(() => {
+  _drawResultCard(data, title) {
       const W = 800, H = 500;
       const c = document.createElement('canvas');
       c.width = W; c.height = H;
@@ -153,7 +192,17 @@ const TestEngine = {
       const color = pct >= 70 ? '#10b981' : pct >= 40 ? '#f59e0b' : '#ef4444';
       const colorSoft = pct >= 70 ? 'rgba(16,185,129,0.15)' : pct >= 40 ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)';
 
-      // ── Arka plan: koyu gradient ──
+      // roundRect polyfill
+      function rRect(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
+        ctx.quadraticCurveTo(x+w, y, x+w, y+r); ctx.lineTo(x+w, y+h-r);
+        ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h); ctx.lineTo(x+r, y+h);
+        ctx.quadraticCurveTo(x, y+h, x, y+h-r); ctx.lineTo(x, y+r);
+        ctx.quadraticCurveTo(x, y, x+r, y); ctx.closePath();
+      }
+
+      // ── Arka plan ──
       const bg = ctx.createLinearGradient(0, 0, W, H);
       bg.addColorStop(0, '#080818');
       bg.addColorStop(0.5, '#0e0e28');
@@ -161,14 +210,14 @@ const TestEngine = {
       ctx.fillStyle = bg;
       ctx.fillRect(0, 0, W, H);
 
-      // ── Ambient glow (skor renginde) ──
+      // ── Ambient glow ──
       const glow = ctx.createRadialGradient(W/2, 200, 0, W/2, 200, 250);
       glow.addColorStop(0, colorSoft);
       glow.addColorStop(1, 'transparent');
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);
 
-      // ── İndigo ambient (sol üst) ──
+      // ── İndigo ambient ──
       const glow2 = ctx.createRadialGradient(100, 50, 0, 100, 50, 300);
       glow2.addColorStop(0, 'rgba(99,102,241,0.08)');
       glow2.addColorStop(1, 'transparent');
@@ -183,20 +232,11 @@ const TestEngine = {
       ctx.fillStyle = topLine;
       ctx.fillRect(0, 0, W, 3);
 
-      // ── Beyin emoji (büyük, soluk) ──
-      ctx.globalAlpha = 0.06;
-      ctx.font = '180px serif';
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#fff';
-      ctx.fillText('🧠', W/2, 280);
-      ctx.globalAlpha = 1;
-
-      // ── Marka: NöroTerbiye ──
+      // ── Marka ──
       ctx.fillStyle = '#555580';
       ctx.font = '600 11px system-ui, -apple-system, sans-serif';
       ctx.textAlign = 'center';
-      ctx.letterSpacing = '2px';
-      ctx.fillText('N Ö R O T E R B İ Y E', W/2, 36);
+      ctx.fillText('N \u00d6 R O T E R B \u0130 Y E', W/2, 36);
 
       // ── Test başlığı ──
       ctx.fillStyle = '#c8c8e0';
@@ -204,89 +244,85 @@ const TestEngine = {
       ctx.fillText(title, W/2, 70);
 
       // ── Ayırıcı çizgi ──
-      ctx.strokeStyle = 'rgba(99,102,241,0.15)';
+      ctx.strokeStyle = 'rgba(99,102,241,0.2)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.moveTo(W/2 - 100, 85);
-      ctx.lineTo(W/2 + 100, 85);
+      ctx.moveTo(W/2 - 120, 85);
+      ctx.lineTo(W/2 + 120, 85);
       ctx.stroke();
 
-      // ── SKOR (büyük, gradient) ──
-      ctx.font = '800 96px system-ui, -apple-system, sans-serif';
-      ctx.fillStyle = color;
-      ctx.fillText('%' + pct, W/2, 200);
-
-      // ── Skor halkası (arc) ──
+      // ── Skor halkası (arka) ──
       ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-      ctx.lineWidth = 6;
+      ctx.lineWidth = 8;
       ctx.beginPath();
-      ctx.arc(W/2, 170, 130, 0, Math.PI * 2);
+      ctx.arc(W/2, 190, 90, 0, Math.PI * 2);
       ctx.stroke();
-      // Dolgu arc
+
+      // ── Skor halkası (dolgu) ──
       ctx.strokeStyle = color;
-      ctx.lineWidth = 6;
+      ctx.lineWidth = 8;
       ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.arc(W/2, 170, 130, -Math.PI/2, -Math.PI/2 + (pct/100) * Math.PI * 2);
+      ctx.arc(W/2, 190, 90, -Math.PI/2, -Math.PI/2 + (pct/100) * Math.PI * 2);
       ctx.stroke();
+
+      // ── SKOR (halka içinde) ──
+      ctx.font = '800 52px system-ui, -apple-system, sans-serif';
+      ctx.fillStyle = color;
+      ctx.fillText('%' + pct, W/2, 205);
 
       // ── Label ──
       ctx.fillStyle = '#e8e8f0';
-      ctx.font = '700 26px system-ui, -apple-system, sans-serif';
-      ctx.fillText(data.label || '', W/2, 260);
+      ctx.font = '700 24px system-ui, -apple-system, sans-serif';
+      ctx.fillText(data.label || '', W/2, 310);
 
       // ── Tarih ──
       ctx.fillStyle = '#666690';
       ctx.font = '13px system-ui, -apple-system, sans-serif';
       const dateStr = data.date ? new Date(data.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-      ctx.fillText(dateStr, W/2, 295);
+      ctx.fillText(dateStr, W/2, 340);
 
       // ── Progress bar ──
-      const barX = 100, barY = 330, barW = W - 200, barH = 10, barR = 5;
-      // Arka plan
+      const barX = 100, barY = 370, barW = W - 200, barH = 10;
       ctx.fillStyle = 'rgba(255,255,255,0.06)';
-      ctx.beginPath();
-      ctx.roundRect(barX, barY, barW, barH, barR);
+      rRect(barX, barY, barW, barH, 5);
       ctx.fill();
-      // Dolgu
       if (pct > 0) {
         const barGrad = ctx.createLinearGradient(barX, 0, barX + barW * (pct/100), 0);
         barGrad.addColorStop(0, '#6366f1');
         barGrad.addColorStop(1, color);
         ctx.fillStyle = barGrad;
-        ctx.beginPath();
-        ctx.roundRect(barX, barY, Math.max(barW * (pct/100), barH), barH, barR);
+        rRect(barX, barY, Math.max(barW * (pct/100), barH), barH, 5);
         ctx.fill();
       }
 
-      // ── Alt bölüm: ince çizgi ──
+      // ── Alt çizgi ──
       ctx.strokeStyle = 'rgba(255,255,255,0.06)';
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.moveTo(60, 380);
-      ctx.lineTo(W - 60, 380);
+      ctx.moveTo(60, 410);
+      ctx.lineTo(W - 60, 410);
       ctx.stroke();
 
       // ── Footer ──
       ctx.fillStyle = '#444468';
       ctx.font = '12px system-ui, -apple-system, sans-serif';
-      ctx.fillText('raufenc.com/noroterbiye', W/2, 420);
+      ctx.fillText('raufenc.com/noroterbiye', W/2, 440);
       ctx.fillStyle = '#333350';
       ctx.font = '10px system-ui, -apple-system, sans-serif';
-      ctx.fillText('Bu test teşhis koymaz; farkındalık oluşturur.', W/2, 445);
+      ctx.fillText('Bu test te\u015fhis koymaz; fark\u0131ndal\u0131k olu\u015fturur.', W/2, 460);
 
-      // ── Sol alt: kitap adı ──
+      // ── Sol alt ──
       ctx.textAlign = 'left';
       ctx.fillStyle = '#333350';
       ctx.font = '10px system-ui, -apple-system, sans-serif';
-      ctx.fillText('NöroTerbiye — İçindeki Düşmanı Dosta Çevirmek', 30, H - 15);
+      ctx.fillText('N\u00f6roTerbiye \u2014 \u0130\u00e7indeki D\u00fc\u015fman\u0131 Dosta \u00c7evirmek', 30, H - 15);
 
-      // ── Sağ alt: Rauf Enç ──
+      // ── Sağ alt ──
       ctx.textAlign = 'right';
-      ctx.fillText('Rauf Enç · KTB Yayınları', W - 30, H - 15);
+      ctx.fillText('Rauf En\u00e7 \u00b7 KTB Yay\u0131nlar\u0131', W - 30, H - 15);
 
       return c;
-    }, title + '-Sonuç');
   }
 };
 
