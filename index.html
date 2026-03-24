@@ -891,15 +891,23 @@
 
   // ── SCROLL REVEAL ──
   var reveals = document.querySelectorAll('.reveal');
-  var revealObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(function(el) { revealObserver.observe(el); });
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { revealObserver.observe(el); });
+  } else {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  }
+  // Fallback: garanti görünürlük
+  setTimeout(function() {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  }, 2000);
 
   // ── TEMA TOGGLE ──
   var themeBtn = document.getElementById('theme-toggle');
