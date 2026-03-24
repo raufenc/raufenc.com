@@ -809,11 +809,11 @@
           <span class="skill-tag"><span class="skill-icon">🧠</span> Nörobilim</span>
           <span class="skill-tag"><span class="skill-icon">🕌</span> İslam Bilimleri</span>
           <span class="skill-tag"><span class="skill-icon">💻</span> EdTech</span>
-          <span class="skill-tag"><span class="skill-icon">🎮</span> Oyun Tasarımı</span>
+          <span class="skill-tag"><span class="skill-icon">✍️</span> Yazarlık</span>
           <span class="skill-tag"><span class="skill-icon">🤖</span> Yapay Zeka</span>
           <span class="skill-tag"><span class="skill-icon">📚</span> Dil Eğitimi</span>
           <span class="skill-tag"><span class="skill-icon">🎨</span> İnteraktif İçerik</span>
-          <span class="skill-tag"><span class="skill-icon">⚖️</span> Ahlak Felsefesi</span>
+          <span class="skill-tag"><span class="skill-icon">📐</span> Eğitim Tasarımı</span>
         </div>
       </div>
     </div>
@@ -898,7 +898,7 @@
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- MOTTO -->
-<div class="motto-section reveal">
+<div class="motto-section">
   <p class="motto-quote">"İnsanın en büyük zaferi kendisiyle olan savaşıdır. Çünkü asıl düşman içeridedir."</p>
   <span class="motto-attr">— Nöroterbiye'den</span>
 </div>
@@ -906,7 +906,7 @@
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- iLETiSiM -->
-<section id="iletisim" class="social-section reveal">
+<section id="iletisim" class="social-section">
   <div class="wrap">
     <span class="section-label">İletişim</span>
     <h2 class="section-title">Beraber Yürüyelim</h2>
@@ -1126,23 +1126,30 @@
   baslat();
 
   // ── SAYAÇ ANİMASYONU ──
+  function formatNum(n) {
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   function animateCounters() {
     var counters = document.querySelectorAll('.stat-number[data-target]');
     counters.forEach(function(el) {
       var target = parseInt(el.dataset.target);
-      var duration = 1500;
-      var start = 0;
+      var duration = 2000;
       var startTime = null;
+      el.textContent = '0+';
 
       function step(timestamp) {
         if (!startTime) startTime = timestamp;
-        var progress = Math.min((timestamp - startTime) / duration, 1);
-        // ease-out
+        var elapsed = timestamp - startTime;
+        var progress = Math.min(elapsed / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        var current = Math.floor(eased * target);
-        el.textContent = current.toLocaleString('tr-TR') + (target >= 100 ? '+' : '+');
-        if (progress < 1) requestAnimationFrame(step);
-        else el.textContent = target.toLocaleString('tr-TR') + '+';
+        var current = Math.round(eased * target);
+        el.textContent = formatNum(current) + '+';
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = formatNum(target) + '+';
+        }
       }
       requestAnimationFrame(step);
     });
@@ -1150,15 +1157,21 @@
 
   // Sayaçları görünür olduğunda başlat
   var statsBar = document.querySelector('.stats-bar');
-  var statsObserver = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        animateCounters();
-        statsObserver.unobserve(entry.target);
-      }
+  if (statsBar) {
+    // Başlangıçta hedef değerleri göster (animasyon öncesi)
+    document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
+      el.textContent = formatNum(parseInt(el.dataset.target)) + '+';
     });
-  }, { threshold: 0.3 });
-  statsObserver.observe(statsBar);
+    var statsObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          animateCounters();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    statsObserver.observe(statsBar);
+  }
 
   // ── NEURAL CANVAS ──
   var canvas = document.getElementById('neural-canvas');
