@@ -8,7 +8,10 @@
 <title>İslam Bilim Yıldızları</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -190,6 +193,24 @@ section.active{display:block}
 
 /* Map */
 #map-container{width:100%;height:500px;border-radius:16px;overflow:hidden;border:1px solid var(--border2);margin-bottom:16px}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{
+  background:rgba(200,164,110,.2)!important;border:2px solid var(--gold)!important;
+  backdrop-filter:blur(8px);
+}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
+  background:linear-gradient(135deg,rgba(200,164,110,.7),rgba(200,164,110,.5))!important;
+  color:#1a1a2e!important;font-weight:800!important;font-family:'Inter',sans-serif!important;font-size:13px!important;
+}
+.marker-cluster-medium{background:rgba(200,164,110,.3)!important}
+.marker-cluster-medium div{font-size:14px!important}
+.marker-cluster-large{background:rgba(200,164,110,.4)!important;border-width:3px!important}
+.marker-cluster-large div{font-size:16px!important}
+html.light .marker-cluster-small,html.light .marker-cluster-medium,html.light .marker-cluster-large{
+  background:rgba(180,140,80,.15)!important;border-color:rgba(180,140,80,.6)!important;
+}
+html.light .marker-cluster-small div,html.light .marker-cluster-medium div,html.light .marker-cluster-large div{
+  background:linear-gradient(135deg,rgba(180,140,80,.8),rgba(180,140,80,.6))!important;color:#fff!important;
+}
 .leaflet-popup-content-wrapper{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border2)!important;border-radius:12px!important;box-shadow:0 8px 30px rgba(0,0,0,.4)!important}
 .leaflet-popup-tip{background:var(--surface)!important}
 .leaflet-popup-content{font-family:'Inter',sans-serif!important;font-size:13px!important;margin:12px 16px!important}
@@ -576,7 +597,7 @@ function kapModal(){document.getElementById('modal-detay').classList.remove('ope
 function modalDis(e){if(e.target===e.currentTarget)kapModal()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')kapModal()});
 
-// MAP (Leaflet)
+// MAP (Leaflet + MarkerCluster)
 function initMap(){
   const isDark=!document.documentElement.classList.contains('light');
   const tileUrl=isDark
@@ -586,20 +607,33 @@ function initMap(){
   leafletMap=L.map('map-container',{zoomControl:true,scrollWheelZoom:true}).setView([33,40],4);
   L.tileLayer(tileUrl,{attribution:'© OpenStreetMap, © CARTO',maxZoom:18,subdomains:'abcd'}).addTo(leafletMap);
 
-  // Stats
   const bk=Object.keys(BOLGELER).sort((a,b)=>BOLGELER[b].length-BOLGELER[a].length);
   document.getElementById('map-stats').innerHTML=bk.slice(0,6).map(b=>`<div class="map-stat">${BOLGE_EMOJI[b]||'🌍'} <strong>${BOLGELER[b].length}</strong> ${b}</div>`).join('');
 
-  // Markers
+  const cluster=L.markerClusterGroup({
+    maxClusterRadius:45,
+    spiderfyOnMaxZoom:true,
+    showCoverageOnHover:false,
+    zoomToBoundsOnClick:true,
+    disableClusteringAtZoom:8,
+    iconCreateFunction:function(c){
+      const cnt=c.getChildCount();
+      let sz='small',dim=36;
+      if(cnt>=10){sz='medium';dim=44}
+      if(cnt>=20){sz='large';dim=52}
+      return L.divIcon({html:'<div><span>'+cnt+'</span></div>',className:'marker-cluster marker-cluster-'+sz,iconSize:L.point(dim,dim)});
+    }
+  });
+
   BILGINLER.forEach(b=>{
     const c=KOORDINATLAR[b.id];if(!c)return;
     const renk=alanRenk(b.alanBirincil);
     const icon=L.divIcon({
       className:'',
-      html:`<div style="width:14px;height:14px;border-radius:50%;background:${renk};border:2px solid rgba(255,255,255,.4);box-shadow:0 0 10px ${renk}80;cursor:pointer"></div>`,
+      html:`<div style="width:14px;height:14px;border-radius:50%;background:${renk};border:2px solid rgba(255,255,255,.4);box-shadow:0 0 10px ${renk}80;cursor:pointer;transition:transform .2s"></div>`,
       iconSize:[14,14],iconAnchor:[7,7]
     });
-    const marker=L.marker(c,{icon}).addTo(leafletMap);
+    const marker=L.marker(c,{icon});
     const tags=b.alanlar.slice(0,2).map(a=>`<span style="display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;font-weight:700;background:${alanRenk(a)}20;color:${alanRenk(a)};border:1px solid ${alanRenk(a)}30">${a}</span>`).join(' ');
     marker.bindPopup(`
       <div class="map-popup-name">${b.isim}</div>
@@ -607,7 +641,9 @@ function initMap(){
       <div class="map-popup-tags">${tags}</div>
       <a class="map-popup-link" onclick="kapModal();acModal(${b.id})">Detay →</a>
     `,{maxWidth:250});
+    cluster.addLayer(marker);
   });
+  leafletMap.addLayer(cluster);
   mapInit=true;
 }
 
