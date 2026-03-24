@@ -839,11 +839,19 @@
       }
     }
 
-    requestAnimationFrame(drawCanvas);
+    if (canvasVisible) requestAnimationFrame(drawCanvas);
   }
 
   resizeCanvas();
   initNodes();
+
+  var canvasVisible = true;
+  var canvasObserver = new IntersectionObserver(function(entries) {
+    canvasVisible = entries[0].isIntersecting;
+    if (canvasVisible) drawCanvas();
+  }, { threshold: 0 });
+  canvasObserver.observe(canvas.parentElement);
+
   drawCanvas();
   window.addEventListener('resize', function() { resizeCanvas(); initNodes(); });
 
@@ -890,7 +898,7 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(function(el) { revealObserver.observe(el); });
 
   // ── TEMA TOGGLE ──
