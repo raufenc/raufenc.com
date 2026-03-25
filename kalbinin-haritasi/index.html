@@ -1164,11 +1164,15 @@ function calcAndShow(){
 async function shareImg(){
   const card=document.getElementById('result-card'); if(!card) return;
   try{
-    // Animasyonları durdur (html2canvas uyumu)
+    // html2canvas uyumu: animasyonları ve sorunlu elementleri durdur
     const pulseEls=card.querySelectorAll('.led-pulse');
     pulseEls.forEach(el=>el.style.animation='none');
     const cursorEls=card.querySelectorAll('.stream-cursor');
     cursorEls.forEach(el=>el.style.display='none');
+    const segEls=card.querySelectorAll('.led-segments');
+    segEls.forEach(el=>el.style.display='none');
+    const glowEls=card.querySelectorAll('.led-bar-glow');
+    glowEls.forEach(el=>el.style.display='none');
 
     const canvas=await html2canvas(card,{
       scale:2,
@@ -1179,9 +1183,11 @@ async function shareImg(){
       removeContainer:true
     });
 
-    // Animasyonları geri aç
+    // Geri aç
     pulseEls.forEach(el=>el.style.animation='');
     cursorEls.forEach(el=>el.style.display='');
+    segEls.forEach(el=>el.style.display='');
+    glowEls.forEach(el=>el.style.display='');
 
     const blob=await new Promise(r=>canvas.toBlob(r,'image/png',1.0));
     const fname=`${TESTS[S.testKey]?.concepts.fazilet||'sonuc'}-karti.png`;

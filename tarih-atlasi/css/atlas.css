@@ -304,9 +304,7 @@ html:not(.dark):not(.light) .moon-icon { display: none; }
   z-index: 200;
 }
 .panel.hidden {
-  transform: translateX(100%);
-  opacity: 0; pointer-events: none;
-  position: absolute; right: 0; top: 0; height: 100%;
+  display: none;
 }
 .panel-close-btn {
   position: sticky; top: 8px; right: 8px; float: right;
@@ -451,7 +449,7 @@ html.light #story-body { background: linear-gradient(0deg, var(--surface) 0%, rg
   display: flex; align-items: center; justify-content: center;
   transition: opacity 0.3s;
 }
-.modal.hidden { opacity: 0; pointer-events: none; }
+.modal.hidden { display: none; }
 .modal-content {
   background: var(--surface);
   border: 1px solid var(--border);
