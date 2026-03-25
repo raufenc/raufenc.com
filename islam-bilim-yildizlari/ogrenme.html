@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Öğrenme — İslam Bilim Yıldızları</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap">
+  <div class="sec-header" style="padding-top:24px">
+    <h2>📚 Öğrenme Yolları</h2>
+    <p>6 tematik yolda adım adım ilerle, quiz'lerle öğren.</p>
+  </div>
+
+  <!-- XP Bar -->
+  <div class="xp-bar" id="xp-bar"></div>
+
+  <!-- Path Hub (shown by default) -->
+  <div id="path-hub">
+    <div class="yollar-grid" id="yollar-grid"></div>
+  </div>
+
+  <!-- Single Path View (hidden by default) -->
+  <div id="path-view" style="display:none">
+    <button class="btn-secondary" onclick="showHub()" style="margin-bottom:16px">← Tüm Yollar</button>
+    <div id="path-header"></div>
+    <div class="yol-adimlar" id="path-steps"></div>
+  </div>
+
+  <!-- Quiz Modal -->
+  <div class="modal-overlay" id="quiz-modal" onclick="if(event.target===this)closeQuiz()">
+    <div class="modal-box" style="max-width:540px">
+      <button class="modal-close" onclick="closeQuiz()">✕</button>
+      <div class="modal-header" style="padding-bottom:16px">
+        <div class="modal-header-bar"></div>
+        <div id="quiz-title" style="font-size:18px;font-weight:900;margin-top:8px"></div>
+      </div>
+      <div class="modal-body" id="quiz-body"></div>
+    </div>
+  </div>
+</div>
+
+<script src="data/bilginler.js"></script>
+<script src="data/ogrenme-yollari.js"></script>
+<script src="data/basarimlar.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/ogrenme.js"></script>
+</body>
+</html>

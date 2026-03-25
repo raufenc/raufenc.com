@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Baglantilar — Islam Bilim Yildizlari</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap">
+  <div class="sec-header" style="padding-top:24px">
+    <h2>&#x1f578;&#xfe0f; Baglantilar</h2>
+    <p>Alimler arasi etki agi ve kronolojik dagilim.</p>
+  </div>
+
+  <!-- Mode toggle -->
+  <div style="display:flex;gap:6px;margin-bottom:16px">
+    <button class="tab-btn active" id="btn-ag" onclick="setMode('ag')">&#x1f578;&#xfe0f; Iliski Agi</button>
+    <button class="tab-btn" id="btn-zaman" onclick="setMode('zaman')">&#x23f3; Zaman Cizelgesi</button>
+  </div>
+
+  <!-- Network Graph -->
+  <div id="sec-ag">
+    <div class="ag-controls">
+      <select class="ag-select" id="ag-alan-filter"><option value="">Tum Alanlar</option></select>
+    </div>
+    <canvas id="ag-canvas"></canvas>
+    <div class="ag-legend" id="ag-legend"></div>
+  </div>
+
+  <!-- Timeline -->
+  <div id="sec-zaman" style="display:none">
+    <div class="ag-controls">
+      <select class="ag-select" id="zc-alan-filter"><option value="">Tum Alanlar</option></select>
+    </div>
+    <div class="zc-container">
+      <div class="zc-track" id="zc-track"></div>
+    </div>
+  </div>
+</div>
+
+<div class="ag-tooltip" id="ag-tooltip"></div>
+
+<script src="data/bilginler.js"></script>
+<script src="data/iliskiler.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/baglanti.js"></script>
+</body>
+</html>

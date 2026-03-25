@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Harita — İslam Bilim Yıldızları</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+</head>
+<body>
+<div id="stars"></div>
+<div class="wrap">
+  <div class="sec-header" style="padding-top:24px">
+    <h2>🗺️ Harita</h2>
+    <p>Alimlerin coğrafi dağılımı — Endülüs'ten Orta Asya'ya.</p>
+  </div>
+  <div class="map-stats" id="map-stats"></div>
+  <div id="map-container"></div>
+</div>
+
+<script src="data/bilginler.js"></script>
+<script src="data/koordinatlar.js"></script>
+<script src="data/bolgeler.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/harita.js"></script>
+</body>
+</html>

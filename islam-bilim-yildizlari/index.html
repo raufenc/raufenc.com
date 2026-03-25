@@ -7,729 +7,127 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>İslam Bilim Yıldızları</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --surface3:#1a1a2e;--border2:#2a2a40;
-  --gold:#c8a46e;--gold2:#e8c070;
-  --gold-soft:rgba(200,164,110,.1);--gold-glow:rgba(200,164,110,.22);
-  --indigo:#6366f1;--indigo-soft:rgba(99,102,241,.1);
-  --green:#34d399;--green-soft:rgba(52,211,153,.1);
-  --red:#f87171;--red-soft:rgba(248,113,113,.1);
-  --glass:rgba(20,20,40,.55);--glass-border:rgba(255,255,255,.06);
-}
-html.light{
-  --surface3:#e8e8f0;--border2:#c8c8d4;
-  --gold-soft:rgba(180,140,80,.1);--gold-glow:rgba(180,140,80,.18);
-  --indigo-soft:rgba(99,102,241,.08);
-  --glass:rgba(240,240,255,.65);--glass-border:rgba(0,0,0,.06);
-}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden}
-
-/* Stars */
-#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) var(--delay,0s) ease-in-out infinite alternate}
-@keyframes twinkle{from{opacity:var(--min,.1)}to{opacity:var(--max,.8)}}
-
-body::before{content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse 70% 50% at 15% 0%,rgba(99,102,241,.07) 0%,transparent 60%),
-  radial-gradient(ellipse 50% 40% at 85% 90%,rgba(200,164,110,.05) 0%,transparent 55%),
-  radial-gradient(ellipse 40% 30% at 50% 50%,rgba(99,102,241,.03) 0%,transparent 60%);
-  pointer-events:none;z-index:0}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes cardIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-@keyframes popIn{from{transform:scale(.88);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(200,164,110,.15)}50%{box-shadow:0 0 40px rgba(200,164,110,.3)}}
-
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
-
-/* Hero */
-.hero{text-align:center;padding:80px 0 32px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:7px;
-  background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-border);
-  color:var(--gold);font-size:11px;padding:6px 16px;border-radius:100px;margin-bottom:22px;
-  letter-spacing:.12em;text-transform:uppercase;animation:fadeUp .5s .05s ease both;
-}
-.hero-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
-.hero h1{font-size:clamp(32px,6vw,60px);font-weight:900;letter-spacing:-.04em;line-height:1.05;margin-bottom:14px;animation:fadeUp .5s .1s ease both}
-.hero h1 .g{background:linear-gradient(135deg,var(--gold2) 0%,var(--gold) 40%,#a07040 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{color:var(--muted2);font-size:clamp(13px,2vw,16px);max-width:560px;margin:0 auto 24px;animation:fadeUp .5s .15s ease both}
-
-.hero-stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;animation:fadeUp .5s .18s ease both}
-.hero-stat{
-  text-align:center;padding:12px 20px;border-radius:14px;min-width:85px;
-  background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);
-}
-.hero-stat-val{font-size:26px;font-weight:900;color:var(--gold);line-height:1.2}
-.hero-stat-lbl{font-size:9px;color:var(--muted2);text-transform:uppercase;letter-spacing:.1em}
-
-/* Tabs */
-.tabs{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;animation:fadeUp .5s .2s ease both}
-.tab-btn{
-  display:flex;align-items:center;gap:5px;padding:8px 16px;border-radius:10px;
-  border:1px solid var(--border2);background:var(--glass);backdrop-filter:blur(8px);
-  color:var(--muted2);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;
-}
-.tab-btn:hover{border-color:var(--gold);color:var(--gold)}
-.tab-btn.active{background:linear-gradient(135deg,rgba(200,164,110,.15),rgba(200,164,110,.05));border-color:var(--gold);color:var(--gold);box-shadow:0 4px 20px rgba(200,164,110,.1)}
-
-section{display:none;padding:0 0 60px}
-section.active{display:block}
-.sec-header{margin-bottom:20px}
-.sec-header h2{font-size:24px;font-weight:900;margin-bottom:4px}
-.sec-header p{color:var(--muted2);font-size:13px}
-
-/* Controls */
-.controls{position:sticky;top:0;z-index:20;background:var(--nav-bg);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 0;margin-bottom:20px}
-.controls-inner{display:flex;flex-direction:column;gap:8px}
-.controls-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.search-box{
-  flex:1;min-width:180px;background:var(--glass);backdrop-filter:blur(8px);
-  border:1px solid var(--glass-border);color:var(--text);padding:9px 16px;border-radius:12px;
-  font-size:13px;outline:none;transition:all .2s;
-}
-.search-box::placeholder{color:var(--muted)}
-.search-box:focus{border-color:var(--gold);box-shadow:0 0 20px rgba(200,164,110,.1)}
-.filter-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);min-width:42px}
-.filter-btn{
-  padding:4px 10px;border-radius:8px;border:1px solid var(--border2);
-  background:var(--glass);backdrop-filter:blur(6px);color:var(--muted2);
-  font-size:10px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;
-}
-.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
-.filter-btn.active{background:linear-gradient(135deg,rgba(200,164,110,.18),rgba(200,164,110,.06));border-color:var(--gold);color:var(--gold)}
-.results-count{font-size:11px;color:var(--muted);margin-bottom:6px}
-
-/* Cards */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.bilgin-card{
-  background:var(--glass);backdrop-filter:blur(12px);
-  border:1px solid var(--glass-border);border-radius:16px;padding:22px;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:all .25s ease;animation:cardIn .4s ease both;
-}
-.bilgin-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--card-color,var(--gold)),transparent);opacity:0;transition:opacity .3s}
-.bilgin-card:hover{border-color:var(--card-color,var(--gold));transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3),0 0 30px var(--card-glow,rgba(200,164,110,.12))}
-.bilgin-card:hover::before{opacity:1}
-.card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px}
-.card-avatar{
-  width:48px;height:48px;border-radius:12px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  font-size:20px;font-weight:900;
-  background:linear-gradient(135deg,var(--card-color,var(--gold))22,transparent);
-  color:var(--card-color,var(--gold));border:1px solid var(--card-color,var(--gold))33;
-}
-.card-info{flex:1;min-width:0}
-.card-name{font-size:15px;font-weight:800;line-height:1.25;margin-bottom:2px}
-.card-meta{font-size:11px;color:var(--muted2)}
-.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
-.tag{padding:2px 8px;border-radius:6px;font-size:9px;font-weight:700;letter-spacing:.03em;
-  background:var(--tag-bg,rgba(200,164,110,.1));color:var(--tag-color,var(--gold));border:1px solid var(--tag-border,rgba(200,164,110,.2))}
-.card-hook{font-size:12px;color:var(--muted2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* Modal */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.65);backdrop-filter:blur(10px);justify-content:center;align-items:flex-start;padding:40px 20px;overflow-y:auto}
-.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
-.modal-box{
-  background:var(--surface);border:1px solid var(--border2);
-  border-radius:20px;width:100%;max-width:720px;padding:0;position:relative;animation:slideUp .3s ease;overflow:hidden;
-}
-.modal-header{padding:28px 32px 0;position:relative}
-.modal-header-bar{height:4px;background:linear-gradient(90deg,var(--gold),var(--indigo),var(--gold));border-radius:0 0 2px 2px;position:absolute;top:0;left:0;right:0}
-.modal-close{
-  position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:10px;
-  background:var(--glass);border:1px solid var(--glass-border);
-  color:var(--muted2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s;z-index:2;
-}
-.modal-close:hover{color:var(--text);border-color:var(--gold)}
-.modal-name{font-size:26px;font-weight:900;margin-bottom:4px}
-.modal-meta-row{font-size:12px;color:var(--muted2);margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px}
-.modal-meta-item{display:flex;align-items:center;gap:4px}
-.modal-body{padding:0 32px 28px}
-.modal-bio{font-size:14px;line-height:1.8;margin-bottom:20px}
-.modal-section{margin-bottom:20px}
-.modal-section-title{
-  font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px;
-}
-.modal-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
-.modal-list{list-style:none}
-.modal-list li{padding:7px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.5;display:flex;gap:8px;align-items:flex-start}
-.modal-list li:last-child{border-bottom:none}
-.modal-list li .li-icon{color:var(--gold);flex-shrink:0;width:16px;text-align:center}
-.modal-relations{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.modal-rel-col h4{font-size:10px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;letter-spacing:.08em}
-.modal-rel-item{
-  display:inline-block;padding:4px 10px;margin:2px;border-radius:8px;font-size:11px;font-weight:600;
-  background:var(--indigo-soft);border:1px solid rgba(99,102,241,.15);cursor:pointer;transition:all .15s;
-}
-.modal-rel-item:hover{background:var(--gold-soft);border-color:var(--gold);color:var(--gold)}
-.modal-rel-ext{opacity:.6;cursor:default;font-style:italic}
-.modal-rel-ext:hover{background:var(--indigo-soft);border-color:rgba(99,102,241,.15);color:inherit}
-.fact-pill{
-  display:block;background:linear-gradient(135deg,rgba(200,164,110,.08),rgba(200,164,110,.02));
-  border:1px solid rgba(200,164,110,.2);border-radius:12px;padding:12px 16px;
-  font-size:13px;line-height:1.6;margin-bottom:16px;position:relative;overflow:hidden;
-}
-.fact-pill::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);border-radius:3px 0 0 3px}
-.test-btn{
-  width:100%;padding:14px;
-  background:linear-gradient(135deg,rgba(200,164,110,.2),rgba(200,164,110,.06));
-  border:1px solid var(--gold);color:var(--gold);font-size:14px;font-weight:700;
-  border-radius:14px;cursor:pointer;transition:all .2s;margin-top:8px;
-}
-.test-btn:hover{box-shadow:0 6px 30px var(--gold-glow);transform:translateY(-1px)}
-
-/* Map */
-#map-container{width:100%;height:500px;border-radius:16px;overflow:hidden;border:1px solid var(--border2);margin-bottom:16px}
-.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{
-  background:rgba(200,164,110,.2)!important;border:2px solid var(--gold)!important;
-  backdrop-filter:blur(8px);
-}
-.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{
-  background:linear-gradient(135deg,rgba(200,164,110,.7),rgba(200,164,110,.5))!important;
-  color:#1a1a2e!important;font-weight:800!important;font-family:'Inter',sans-serif!important;font-size:13px!important;
-}
-.marker-cluster-medium{background:rgba(200,164,110,.3)!important}
-.marker-cluster-medium div{font-size:14px!important}
-.marker-cluster-large{background:rgba(200,164,110,.4)!important;border-width:3px!important}
-.marker-cluster-large div{font-size:16px!important}
-html.light .marker-cluster-small,html.light .marker-cluster-medium,html.light .marker-cluster-large{
-  background:rgba(180,140,80,.15)!important;border-color:rgba(180,140,80,.6)!important;
-}
-html.light .marker-cluster-small div,html.light .marker-cluster-medium div,html.light .marker-cluster-large div{
-  background:linear-gradient(135deg,rgba(180,140,80,.8),rgba(180,140,80,.6))!important;color:#fff!important;
-}
-.leaflet-popup-content-wrapper{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border2)!important;border-radius:12px!important;box-shadow:0 8px 30px rgba(0,0,0,.4)!important}
-.leaflet-popup-tip{background:var(--surface)!important}
-.leaflet-popup-content{font-family:'Inter',sans-serif!important;font-size:13px!important;margin:12px 16px!important}
-.map-popup-name{font-weight:800;font-size:14px;margin-bottom:2px}
-.map-popup-meta{font-size:11px;color:var(--muted2);margin-bottom:4px}
-.map-popup-tags{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:6px}
-.map-popup-link{color:var(--gold);cursor:pointer;font-size:12px;font-weight:700;text-decoration:none}
-.map-popup-link:hover{text-decoration:underline}
-.map-stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.map-stat{
-  background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--glass-border);
-  border-radius:10px;padding:8px 14px;font-size:12px;color:var(--muted2);
-}
-.map-stat strong{color:var(--gold);font-weight:800}
-
-/* Graph */
-#ag-canvas{width:100%;height:500px;background:var(--surface);border:1px solid var(--border2);border-radius:16px;cursor:crosshair}
-.ag-controls{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
-.ag-select{background:var(--glass);border:1px solid var(--glass-border);color:var(--text);padding:7px 14px;border-radius:10px;font-size:12px;outline:none}
-.ag-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.ag-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted2)}
-.ag-legend-dot{width:8px;height:8px;border-radius:50%}
-.ag-tooltip{position:fixed;display:none;background:var(--surface);border:1px solid var(--gold);border-radius:12px;padding:12px 16px;pointer-events:none;z-index:50;font-size:12px;max-width:240px;box-shadow:0 12px 40px rgba(0,0,0,.5)}
-
-/* Timeline */
-.zc-container{overflow-x:auto;overflow-y:hidden;padding:20px 0;-webkit-overflow-scrolling:touch;position:relative}
-.zc-track{position:relative;min-width:2600px;height:400px}
-.zc-line{position:absolute;top:190px;left:20px;right:20px;height:2px;background:linear-gradient(90deg,transparent,var(--border2) 5%,var(--border2) 95%,transparent)}
-.zc-century{position:absolute;top:170px;font-size:10px;font-weight:800;color:var(--gold);text-align:center;width:50px;margin-left:-25px;letter-spacing:.05em}
-.zc-century::after{content:'';position:absolute;bottom:-8px;left:50%;width:2px;height:16px;background:var(--gold);opacity:.3;border-radius:1px}
-.zc-dot{position:absolute;width:12px;height:12px;border-radius:50%;cursor:pointer;transition:all .2s;border:2px solid;box-shadow:0 0 8px rgba(0,0,0,.3)}
-.zc-dot:hover{transform:scale(2);z-index:10;box-shadow:0 0 20px var(--dot-color,var(--gold))}
-.zc-label{position:absolute;font-size:9px;white-space:nowrap;color:var(--muted2);max-width:80px;overflow:hidden;text-overflow:ellipsis}
-
-/* Learning Paths */
-.yollar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:24px}
-.yol-card{
-  background:var(--glass);backdrop-filter:blur(12px);
-  border:1px solid var(--glass-border);border-radius:18px;padding:28px;
-  cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
-}
-.yol-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);opacity:0;transition:opacity .3s}
-.yol-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.yol-card:hover::before{opacity:1}
-.yol-icon{font-size:36px;margin-bottom:12px}
-.yol-title{font-size:18px;font-weight:900;margin-bottom:4px}
-.yol-desc{font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.5}
-.progress-bar{height:4px;background:var(--border2);border-radius:2px;overflow:hidden;margin-top:6px}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;transition:width .3s}
-.yol-adimlar{display:flex;flex-direction:column;padding-left:20px}
-.yol-adim{position:relative;padding:14px 0 14px 24px;border-left:2px solid var(--border2)}
-.yol-adim:last-child{border-left-color:transparent}
-.yol-adim::before{content:'';position:absolute;left:-7px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--border2);transition:all .3s}
-.yol-adim.done::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 10px rgba(200,164,110,.3)}
-.yol-adim.done{border-left-color:var(--gold)}
-
-/* Geography */
-.cog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.bolge-card{
-  background:var(--glass);backdrop-filter:blur(12px);
-  border:1px solid var(--glass-border);border-radius:16px;padding:24px;
-  cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
-}
-.bolge-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.25)}
-.bolge-emoji{font-size:36px;margin-bottom:8px}
-.bolge-isim{font-size:17px;font-weight:900;margin-bottom:2px}
-.bolge-sayi{font-size:13px;color:var(--gold);font-weight:700;margin-bottom:6px}
-.bolge-preview{font-size:11px;color:var(--muted2);line-height:1.4}
-
-/* Games */
-.game-select{text-align:center;padding:32px 0}
-.game-select h2{font-size:24px;font-weight:900;margin-bottom:6px}
-.game-select p{color:var(--muted2);margin-bottom:24px;font-size:13px}
-.game-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:760px;margin:0 auto}
-.game-card{
-  background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--glass-border);
-  border-radius:16px;padding:24px 20px;cursor:pointer;transition:all .25s;text-align:left;
-}
-.game-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.25)}
-.game-card-icon{font-size:32px;margin-bottom:10px}
-.game-card-title{font-size:16px;font-weight:800;margin-bottom:4px}
-.game-card-desc{font-size:12px;color:var(--muted2);line-height:1.5;margin-bottom:10px}
-.game-card-badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:700;background:var(--gold-soft);color:var(--gold);border:1px solid rgba(200,164,110,.2)}
-.hs-bar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
-.hs-item{text-align:center;background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--glass-border);border-radius:12px;padding:10px 18px;min-width:100px}
-.hs-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:2px}
-.hs-val{font-size:22px;font-weight:900;color:var(--gold)}
-.oyun-alan{display:none;max-width:640px;margin:0 auto}
-.oyun-alan.active{display:block;animation:fadeUp .4s ease}
-.oyun-hud{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.hud-item{background:var(--glass);backdrop-filter:blur(8px);border:1px solid var(--glass-border);border-radius:10px;padding:8px 14px;flex:1;text-align:center}
-.hud-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.hud-val{font-size:18px;font-weight:900;color:var(--gold)}
-.clue-cards{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
-.clue-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:12px 16px;font-size:13px;display:none}
-.clue-card.visible{display:flex;gap:10px;align-items:center;animation:popIn .3s ease}
-.clue-num{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.reveal-btn{padding:8px 18px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-border);color:var(--muted2);cursor:pointer;font-size:12px;font-weight:600;transition:all .2s;margin-bottom:14px}
-.reveal-btn:hover{border-color:var(--gold);color:var(--gold)}
-.reveal-btn:disabled{opacity:.4;cursor:not-allowed}
-.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.option-btn{padding:12px 16px;border-radius:12px;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;text-align:left}
-.option-btn:hover:not(:disabled){border-color:var(--gold);background:var(--gold-soft)}
-.option-btn.correct{background:var(--green-soft);border-color:var(--green);color:var(--green)}
-.option-btn.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);animation:shake .3s}
-.option-btn:disabled{cursor:default}
-.eslestir-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.eslestir-col{display:flex;flex-direction:column;gap:6px}
-.eslestir-card{padding:10px 12px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;line-height:1.4}
-.eslestir-card:hover:not(.matched){border-color:var(--gold)}
-.eslestir-card.selected{border-color:var(--indigo);background:var(--indigo-soft)}
-.eslestir-card.matched{border-color:var(--green);background:var(--green-soft);color:var(--green);cursor:default}
-.eslestir-card.wrong{animation:shake .3s;border-color:var(--red);background:var(--red-soft)}
-.zaman-instruct{font-size:13px;color:var(--muted2);margin-bottom:12px}
-.zaman-pool{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;min-height:36px}
-.zaman-pool-card{padding:6px 12px;border-radius:8px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
-.zaman-pool-card:hover{border-color:var(--gold)}
-.zaman-slot-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
-.zaman-slot{display:flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:8px 12px;min-height:40px}
-.zaman-slot-num{width:22px;height:22px;border-radius:50%;background:var(--surface3);border:1px solid var(--border2);color:var(--muted2);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.zaman-slot-name{flex:1;font-size:12px;font-weight:600;color:var(--muted2);font-style:italic}
-.zaman-slot-name.filled{color:var(--text);font-style:normal}
-.zaman-slot-remove{color:var(--muted);cursor:pointer;font-size:14px;padding:2px 4px;background:none;border:none;transition:color .15s}
-.zaman-slot-remove:hover{color:var(--red)}
-.zaman-slot.correct{border-color:var(--green);background:var(--green-soft)}
-.zaman-slot.wrong{border-color:var(--red);background:var(--red-soft)}
-.zaman-reveal{background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:14px;margin-bottom:14px;display:none}
-.zaman-reveal.show{display:block;animation:fadeIn .4s}
-.zaman-timeline{display:flex;flex-direction:column;gap:5px}
-.zt-item{display:flex;align-items:center;gap:8px;font-size:12px}
-.zt-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
-.zt-year{color:var(--gold);font-weight:700;font-size:11px;min-width:50px}
-.sonuc{display:none;text-align:center;padding:28px 16px}
-.sonuc.show{display:block;animation:fadeUp .4s ease}
-.sonuc-skor{font-size:56px;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
-.sonuc-rozet{font-size:44px;margin-bottom:8px}
-.sonuc-unvan{font-size:20px;font-weight:800;margin-bottom:4px}
-.sonuc-mesaj{color:var(--muted2);margin-bottom:20px;font-size:13px}
-.sonuc-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.btn-primary{padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(200,164,110,.2),rgba(200,164,110,.06));border:1px solid var(--gold);color:var(--gold);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
-.btn-primary:hover{box-shadow:0 6px 24px var(--gold-glow);transform:translateY(-1px)}
-.btn-secondary{padding:10px 20px;border-radius:12px;background:var(--glass);border:1px solid var(--glass-border);color:var(--muted2);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
-.empty{text-align:center;padding:48px 16px;color:var(--muted2)}
-footer{text-align:center;padding:20px 0 36px;color:var(--muted);font-size:11px;position:relative;z-index:1}
-
-@media(max-width:700px){
-  .tabs{gap:3px}.tab-btn{padding:6px 10px;font-size:10px;gap:3px}
-  .options-grid,.eslestir-grid{grid-template-columns:1fr}
-  .modal-header,.modal-body{padding-left:20px;padding-right:20px}
-  .modal-relations{grid-template-columns:1fr}
-  .hero h1{font-size:28px}
-  #ag-canvas,#map-container{height:320px}
-  .cards-grid{grid-template-columns:1fr}
-  .hero-stats{gap:6px}.hero-stat{padding:8px 12px;min-width:70px}
-  .hero-stat-val{font-size:20px}
-}
-</style>
+<link rel="stylesheet" href="css/main.css"/>
 </head>
 <body>
 <div id="stars"></div>
+
 <div class="wrap">
-  <header class="hero">
+  <!-- Hero -->
+  <div class="hero">
     <div class="hero-badge"><span class="hero-badge-dot"></span> İlim Kartları Platformu</div>
-    <h1>İslam <span class="g">Bilim Yıldızları</span></h1>
-    <p class="hero-sub">85 Sünni alimin hayatını keşfet, haritada gör, ilişkilerini incele, oyunlarla öğren!</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-val" id="stat-bilgin">0</div><div class="hero-stat-lbl">Bilgin</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="stat-eser">0</div><div class="hero-stat-lbl">Eser</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="stat-katki">0</div><div class="hero-stat-lbl">Katkı</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" id="stat-yuzyil">0</div><div class="hero-stat-lbl">Yüzyıl</div></div>
-    </div>
-    <div class="tabs" id="tabs"></div>
-  </header>
+    <h1><span class="g">İslam Bilim Yıldızları</span></h1>
+    <p class="hero-sub">Endülüs'ten Orta Asya'ya — 85 âlim, 248 eser, 225 katkı, 13 yüzyıl</p>
+    <div class="hero-stats" id="hero-stats"></div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="dash-actions">
+    <a href="alimler.html" class="dash-card" style="text-decoration:none;color:inherit">
+      <div class="dash-card-icon">🔭</div>
+      <div class="dash-card-title">Alimleri Keşfet</div>
+      <div class="dash-card-desc">85 İslam alimini filtrele, ara ve tanı</div>
+    </a>
+    <a href="ogrenme.html" class="dash-card" style="text-decoration:none;color:inherit">
+      <div class="dash-card-icon">📚</div>
+      <div class="dash-card-title">Öğrenme Yoluna Başla</div>
+      <div class="dash-card-desc">6 tematik yolda adım adım ilerle</div>
+    </a>
+    <a href="sinav.html" class="dash-card" style="text-decoration:none;color:inherit">
+      <div class="dash-card-icon">⚡</div>
+      <div class="dash-card-title">Bilgini Test Et</div>
+      <div class="dash-card-desc">Oyunlar ve sınavlarla öğren</div>
+    </a>
+  </div>
+
+  <!-- Scholar of the Day -->
+  <div class="scholar-of-day" id="scholar-of-day"></div>
+
+  <!-- Progress Summary -->
+  <h2 style="font-size:18px;font-weight:900;margin-bottom:12px">📊 İlerleme</h2>
+  <div class="progress-summary" id="progress-summary"></div>
+
+  <!-- Explore more links -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px">
+    <a href="harita.html" class="dash-card" style="text-decoration:none;color:inherit;padding:20px">
+      <div class="dash-card-icon" style="font-size:28px">🗺️</div>
+      <div class="dash-card-title" style="font-size:15px">Harita</div>
+      <div class="dash-card-desc">Alimlerin coğrafi dağılımı</div>
+    </a>
+    <a href="baglanti.html" class="dash-card" style="text-decoration:none;color:inherit;padding:20px">
+      <div class="dash-card-icon" style="font-size:28px">🕸️</div>
+      <div class="dash-card-title" style="font-size:15px">Bağlantılar</div>
+      <div class="dash-card-desc">İlişki ağı ve zaman çizelgesi</div>
+    </a>
+  </div>
 </div>
-<!-- KESFET -->
-<section id="sec-kesfet" class="active">
-  <div class="controls"><div class="wrap"><div class="controls-inner">
-    <div class="controls-row"><input class="search-box" id="search" placeholder="🔍 Bilgin, eser veya katkı ara..." oninput="render()"></div>
-    <div class="controls-row" id="filter-alan"></div>
-    <div class="controls-row" id="filter-donem"></div>
-    <div class="controls-row" id="filter-bolge"></div>
-  </div></div></div>
-  <div class="wrap">
-    <div class="results-count" id="results-count"></div>
-    <div class="cards-grid" id="grid"></div>
-    <div class="empty" id="empty" style="display:none"><p>🌌</p><p>Sonuç bulunamadı.</p></div>
-  </div>
-</section>
-<!-- HARITA -->
-<section id="sec-harita">
-  <div class="wrap">
-    <div class="sec-header"><h2>🗺️ Harita</h2><p>Alimlerin coğrafi dağılımı — Endülüs'ten Orta Asya'ya.</p></div>
-    <div class="map-stats" id="map-stats"></div>
-    <div id="map-container"></div>
-  </div>
-</section>
-<!-- AG -->
-<section id="sec-ag">
-  <div class="wrap">
-    <div class="sec-header"><h2>🕸️ İlişki Ağı</h2><p>Bilginler arası etkileşim ağı. Düğüme tıkla, detay gör.</p></div>
-    <div class="ag-controls">
-      <select class="ag-select" id="ag-filter" onchange="drawAg()"><option value="">Tüm Alanlar</option></select>
-      <span style="font-size:10px;color:var(--muted)">ℹ️ Ok yönü: etkileme</span>
-    </div>
-    <canvas id="ag-canvas"></canvas>
-    <div class="ag-legend" id="ag-legend"></div>
-    <div class="ag-tooltip" id="ag-tooltip"></div>
-  </div>
-</section>
-<!-- ZAMAN -->
-<section id="sec-zaman">
-  <div class="wrap">
-    <div class="sec-header"><h2>⏳ Zaman Çizelgesi</h2><p>7. yüzyıldan 19. yüzyıla alimlerin kronolojik dağılımı.</p></div>
-    <div class="ag-controls"><select class="ag-select" id="zc-filter" onchange="renderZC()"><option value="">Tüm Alanlar</option></select></div>
-    <div class="zc-container" id="zc-container"></div>
-  </div>
-</section>
-<!-- YOLLAR -->
-<section id="sec-yollar">
-  <div class="wrap">
-    <div class="sec-header"><h2>📚 Öğrenme Yolları</h2><p>Konu bazlı rehberli öğrenme rotaları.</p></div>
-    <div class="yollar-grid" id="yollar-grid"></div>
-    <div id="yol-detay" style="display:none"></div>
-  </div>
-</section>
-<!-- YARIS -->
-<section id="sec-yaris">
-  <div class="wrap">
-    <div class="hs-bar" id="hs-bar"></div>
-    <div class="game-select" id="game-select">
-      <h2>⚡ Yarış Modları</h2>
-      <p>Bilgini sınayacağın oyunu seç!</p>
-      <div class="game-cards">
-        <div class="game-card" onclick="baslatOyun('bu-kim')"><div class="game-card-icon">🤔</div><div class="game-card-title">Bu Kim?</div><div class="game-card-desc">İpuçlarıyla bilgini tahmin et. Az ipucu = çok puan!</div><span class="game-card-badge">10 Tur</span></div>
-        <div class="game-card" onclick="baslatOyun('eslestir')"><div class="game-card-icon">🔗</div><div class="game-card-title">Keşfini Eşleştir</div><div class="game-card-desc">Katkıları doğru bilginle eşleştir. Zamana karşı yarış!</div><span class="game-card-badge">60 Saniye</span></div>
-        <div class="game-card" onclick="baslatOyun('zaman')"><div class="game-card-icon">⏳</div><div class="game-card-title">Zaman Tüneli</div><div class="game-card-desc">Bilginleri kronolojik sıraya diz!</div><span class="game-card-badge">3 Tur</span></div>
-      </div>
-    </div>
-    <div class="oyun-alan" id="oyun-bu-kim">
-      <div class="oyun-hud"><div class="hud-item"><div class="hud-label">Tur</div><div class="hud-val" id="bk-tur">1/10</div></div><div class="hud-item"><div class="hud-label">Puan</div><div class="hud-val" id="bk-puan">0</div></div><div class="hud-item"><div class="hud-label">Doğru</div><div class="hud-val" id="bk-dogru">0</div></div></div>
-      <div class="clue-cards" id="bk-clues"></div>
-      <button class="reveal-btn" id="bk-reveal-btn" onclick="acIpucu()">+ Sonraki İpucunu Göster</button>
-      <div class="options-grid" id="bk-options"></div>
-      <div id="bk-feedback" style="margin-bottom:12px;display:none"></div>
-      <button class="btn-primary" id="bk-next-btn" style="display:none;width:100%" onclick="sonrakiTur()">Sonraki Tur →</button>
-      <div class="sonuc" id="bk-sonuc"><div class="sonuc-rozet" id="bk-rozet"></div><div class="sonuc-skor" id="bk-skor-val"></div><div class="sonuc-unvan" id="bk-unvan"></div><div class="sonuc-mesaj" id="bk-mesaj"></div><div class="sonuc-btns"><button class="btn-primary" onclick="baslatOyun('bu-kim')">🔄 Tekrar Oyna</button><button class="btn-secondary" onclick="geriMenu()">← Oyunlar</button></div></div>
-    </div>
-    <div class="oyun-alan" id="oyun-eslestir">
-      <div class="oyun-hud"><div class="hud-item"><div class="hud-label">Süre</div><div class="hud-val" id="es-sure">60</div></div><div class="hud-item"><div class="hud-label">Puan</div><div class="hud-val" id="es-puan">0</div></div><div class="hud-item"><div class="hud-label">Kalan</div><div class="hud-val" id="es-kalan">6</div></div></div>
-      <div class="eslestir-grid"><div class="eslestir-col" id="es-kesifler"></div><div class="eslestir-col" id="es-bilginler"></div></div>
-      <div class="sonuc" id="es-sonuc"><div class="sonuc-rozet" id="es-rozet"></div><div class="sonuc-skor" id="es-skor-val"></div><div class="sonuc-unvan" id="es-unvan"></div><div class="sonuc-mesaj" id="es-mesaj"></div><div class="sonuc-btns"><button class="btn-primary" onclick="baslatOyun('eslestir')">🔄 Tekrar Oyna</button><button class="btn-secondary" onclick="geriMenu()">← Oyunlar</button></div></div>
-    </div>
-    <div class="oyun-alan" id="oyun-zaman">
-      <div class="oyun-hud"><div class="hud-item"><div class="hud-label">Tur</div><div class="hud-val" id="zt-tur">1/3</div></div><div class="hud-item"><div class="hud-label">Puan</div><div class="hud-val" id="zt-puan">0</div></div></div>
-      <p class="zaman-instruct">Bilginleri <strong>eskiden yeniye</strong> sırala.</p>
-      <div class="zaman-pool" id="zt-pool"></div>
-      <div class="zaman-slot-row" id="zt-slots"></div>
-      <div style="display:flex;gap:8px;margin-bottom:14px"><button class="btn-primary" style="flex:1" onclick="dogrulaZaman()">✓ Doğrula</button><button class="btn-secondary" onclick="sifirlaZaman()">↺ Sıfırla</button></div>
-      <div class="zaman-reveal" id="zt-reveal"><p style="font-size:12px;font-weight:700;margin-bottom:8px;color:var(--gold)">⏳ Doğru Sıralama:</p><div class="zaman-timeline" id="zt-timeline"></div></div>
-      <button class="btn-primary" id="zt-next-btn" style="display:none;width:100%;margin-bottom:12px" onclick="sonrakiZamanTur()">Sonraki Tur →</button>
-      <div class="sonuc" id="zt-sonuc"><div class="sonuc-rozet" id="zt-rozet"></div><div class="sonuc-skor" id="zt-skor-val"></div><div class="sonuc-unvan" id="zt-unvan"></div><div class="sonuc-mesaj" id="zt-mesaj"></div><div class="sonuc-btns"><button class="btn-primary" onclick="baslatOyun('zaman')">🔄 Tekrar Oyna</button><button class="btn-secondary" onclick="geriMenu()">← Oyunlar</button></div></div>
-    </div>
-  </div>
-</section>
-<div class="modal-overlay" id="modal-detay" onclick="modalDis(event)"><div class="modal-box" id="modal-icerik"></div></div>
-<footer class="wrap"><p>© 2025 Rauf Enç — <a href="https://raufenc.com" style="color:var(--muted2);text-decoration:none">raufenc.com</a></p></footer>
-<script src="/nav.js"></script>
+
+<script src="data/bilginler.js"></script>
+<script src="data/basarimlar.js"></script>
+<script src="js/shared.js"></script>
 <script>
+initPage('ana');
 
-const BILGINLER=[{"id":728,"slug":"abbas-ibn-firnas","isim":"Abbâs İbn Firnâs","ozet":"Endülüslü çok yönlü bilgin; cam, saat ve uçuş denemeleriyle anılır.","hook":"Cam işleme, usturlap benzeri aletler ve planör/kanatlı uçuş deneyi anlatılarıyla meşhur oldu.","dogum":null,"vefat":887,"yer":"Kurtuba / Endülüs","donem":"9. yy","alanlar":["Mühendislik Deneyleri","Astronomi","mekanik","müzik"],"alanBirincil":"Mühendislik Deneyleri","mezhep":"Mâlikî (muhtemel)","eserler":["Risale ve şiirler (çoğu günümüze sınırlı yansır)"],"katkilar":["Cam işleme, usturlap benzeri aletler ve planör/kanatlı uçuş deneyi anlatılarıyla meşhur oldu."],"etkiledi":[],"etkilenen":[],"etkilediText":["İbn Battuta öncesi Endülüs bilim hafızası","modern havacılık tarihinin popüler anlatıları"],"etkilenenText":["Endülüs teknik merakı","astronomi aletçiligi"],"zorluk":2,"ipuclari":["9. yy döneminde yaşayan bu bilgin, Kurtuba / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Risale ve şiirler (çoğu günümüze sınırlı yansır)\" bulunur.","Cam işleme, usturlap benzeri aletler ve planör/kanatlı uçuş deneyi anlatılarıyla meşhur oldu."]},{"id":735,"slug":"ali-b-vali-b-hamza-el-magribi","isim":"Ali b. Vâlî b. Hamza el-Mağribî","ozet":"Cezayir asıllı Osmanlı matematikçisi; hesap ve sayılar teorisine dair tartışmalarla tanındı.","hook":"Aritmetik düzenler ve sayı örüntüleri üzerinde çalıştı","dogum":null,"vefat":null,"yer":"Cezayir; İstanbul; Mekke","donem":"16-17. yy","alanlar":["Matematik","hesap","Cebir"],"alanBirincil":"Matematik","mezhep":"Hanefî (muhtemel)","eserler":["Tuhfetü’l-A‘dâd li-Zevi’r-Rüşd ve’s-Sedâd"],"katkilar":["Aritmetik düzenler ve sayı örüntüleri üzerinde çalıştı","logaritma fikrini önceden sezdiği yönünde yorumlar yapılır."],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Osmanlı hesap risaleleri"],"etkilenenText":["Osmanlı matematikçiligi","Harezmî sonrası cebir geleneği"],"zorluk":1,"ipuclari":["16-17. yy döneminde yaşayan bu bilgin, Cezayir; İstanbul; Mekke bölgesinde çalıştı.","Başlıca eserleri arasında \"Tuhfetü’l-A‘dâd li-Zevi’r-Rüşd ve’s-Sedâd\" bulunur.","Aritmetik düzenler ve sayı örüntüleri üzerinde çalıştı"]},{"id":465,"slug":"altuncuzade","isim":"Altuncuzâde","ozet":"Fatih devri Osmanlı hekimlerinden; mesane ve idrar yolları hastalıklarıyla meşgul oldu.","hook":"Bitkisel ilaçlar ve idrar yolu hastalıkları tedavisinde ün kazandı","dogum":null,"vefat":null,"yer":"İstanbul / Osmanlı","donem":"15. yy","alanlar":["Tıp","Üroloji","İlaç yapımı"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Mücerrebât/risaleler (çeşitli nispetler)"],"katkilar":["Bitkisel ilaçlar ve idrar yolu hastalıkları tedavisinde ün kazandı","Ahi Çelebi'nin hocalarındandır"],"etkiledi":[],"etkilenen":[],"etkilediText":["Ahi Çelebi ve Osmanlı tababeti"],"etkilenenText":["Fatih devri tıp geleneği"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Mücerrebât/risaleler (çeşitli nispetler)\" bulunur.","Bitkisel ilaçlar ve idrar yolu hastalıkları tedavisinde ün kazandı"]},{"id":670,"slug":"hezarfen-ahmed-celebi","isim":"Hezârfen Ahmed Çelebi","ozet":"Uçuş deneyiyle tanınan Osmanlı bilgini/deneycisi.","hook":"Galata'dan Üsküdar'a kanatlı uçuş deneyi rivayetiyle meşhurdur","dogum":null,"vefat":null,"yer":"İstanbul / Osmanlı","donem":"17. yy","alanlar":["Havacılık Deneyi","mekanik","gözlem"],"alanBirincil":"Havacılık Deneyi","mezhep":"Hanefî","eserler":["Eser bırakmadığı bilinir"],"katkilar":["Galata'dan Üsküdar'a kanatlı uçuş deneyi rivayetiyle meşhurdur"],"etkiledi":[],"etkilenen":[],"etkilediText":["Lagârî Hasan ve popüler bilim hafızası"],"etkilenenText":["Osmanlı teknik merakı"],"zorluk":2,"ipuclari":["17. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Eser bırakmadığı bilinir\" bulunur.","Galata'dan Üsküdar'a kanatlı uçuş deneyi rivayetiyle meşhurdur"]},{"id":509,"slug":"jabir-ibn-aflah","isim":"Jâbir ibn Aflah","ozet":"Endülüslü astronom ve matematikçi; Batlamyus eleştirileriyle tanındı.","hook":"Küresel trigonometriyi geliştirdi","dogum":null,"vefat":null,"yer":"Sevilla / Endülüs","donem":"12. yy","alanlar":["Astronomi","Matematik","trigonometri"],"alanBirincil":"Astronomi","mezhep":"Mâlikî","eserler":["Islâhü'l-Mecistî"],"katkilar":["Küresel trigonometriyi geliştirdi","gözlemsel astronomi ve model eleştirileri yaptı"],"etkiledi":[],"etkilenen":[],"etkilediText":["İbn Rüşd sonrası Endülüs ve Latin astronomisi"],"etkilenenText":["Batlamyus"],"zorluk":1,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Sevilla / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Islâhü'l-Mecistî\" bulunur.","Küresel trigonometriyi geliştirdi"]},{"id":897,"slug":"lagari-hasan-celebi","isim":"Lagârî Hasan Çelebi","ozet":"Evliya Çelebi’nin anlattığı roketli uçuş deneyiyle meşhur Osmanlı şahsiyeti.","hook":"Barutla çalışan düzenekle dikey yükseliş yaptığı rivayeti teknik hayal gücünün sembolü haline gelmiştir.","dogum":null,"vefat":17,"yer":"İstanbul / Osmanlı","donem":"17. yy","alanlar":["Roket Deneyi","mekanik","askerî teknoloji"],"alanBirincil":"Roket Deneyi","mezhep":"Hanefî","eserler":["Müstakil eseri bilinmiyor"],"katkilar":["Barutla çalışan düzenekle dikey yükseliş yaptığı rivayeti teknik hayal gücünün sembolü haline gelmiştir."],"etkiledi":[],"etkilenen":[],"etkilediText":["Popüler bilim tarihi anlatıları"],"etkilenenText":["Askerî teknoloji ve şenlik mühendisliği"],"zorluk":2,"ipuclari":["17. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Müstakil eseri bilinmiyor\" bulunur.","Barutla çalışan düzenekle dikey yükseliş yaptığı rivayeti teknik hayal gücünün sembolü haline gelmiştir."]},{"id":683,"slug":"muhammed-b-ahmed-el-iraki-es-semavi","isim":"Muhammed b. Ahmed el-Irâkî es-Semâvî","ozet":"Irakta yetişen kimya/simya âlimi; metaller, mineraller ve laboratuvar işlemleri üzerine eserler verdi.","hook":"Kimyevî işlemler, alaşımlar ve maddelerin tasnifi üzerine uygulamalı bilgiler aktardı.","dogum":null,"vefat":1184,"yer":"Irak","donem":"12. yy","alanlar":["Kimya","Simya","laboratuvar süreçleri"],"alanBirincil":"Kimya","mezhep":"Belirsiz","eserler":["el-Mâ'ü'l-Verakî ve'l-Ard en-Necmiyye","kimya risaleleri"],"katkilar":["Kimyevî işlemler, alaşımlar ve maddelerin tasnifi üzerine uygulamalı bilgiler aktardı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç ortaçağ kimya literatürü"],"etkilenenText":["Câbirî gelenek","erken simyacılar"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Irak bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Mâ'ü'l-Verakî ve'l-Ard en-Necmiyye\" bulunur.","Kimyevî işlemler, alaşımlar ve maddelerin tasnifi üzerine uygulamalı bilgiler aktardı."]},{"id":854,"slug":"muhammed-b-fadil-el-miskini-el-kadi-es-semerkandi","isim":"Muhammed b. Fâdıl el-Miskînî el-Kâdı es-Semerkandî","ozet":"Semerkand geleneğinde yetişen ve Hümâyun Şah çevresiyle ilişkilendirilen ansiklopedist âlim.","hook":"Çeşitli ilimleri bir araya getiren ansiklopedik eser kaleme aldı","dogum":null,"vefat":null,"yer":"Semerkand; Babürlü Hindistan","donem":"16. yy","alanlar":["Ansiklopedik İlimler","Astronomi","Matematik","Edebiyat"],"alanBirincil":"Ansiklopedik İlimler","mezhep":"Belirsiz","eserler":["Cevâhir-i Ulûm-i Hümâyûnî"],"katkilar":["Çeşitli ilimleri bir araya getiren ansiklopedik eser kaleme aldı","Semerkand ilim geleneğini Hindistan’a taşıdı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Babürlü saray çevresinde ilim meclisleri"],"etkilenenText":["Uluğ Bey okulu"],"zorluk":2,"ipuclari":["16. yy döneminde yaşayan bu bilgin, Semerkand; Babürlü Hindistan bölgesinde çalıştı.","Başlıca eserleri arasında \"Cevâhir-i Ulûm-i Hümâyûnî\" bulunur.","Çeşitli ilimleri bir araya getiren ansiklopedik eser kaleme aldı"]},{"id":630,"slug":"muhammed-el-gafiki","isim":"Muhammed el-Gâfikî","ozet":"Endülüslü göz hekimi ve bitki bilgini.","hook":"Oftalmoloji ve ilaçlı tedavi yöntemleri geliştirdi","dogum":null,"vefat":1165,"yer":"Endülüs","donem":"12. yy","alanlar":["Göz hekimliği","eczacılık","botanik"],"alanBirincil":"Göz hekimliği","mezhep":"Mâlikî","eserler":["el-Mürşid fi'l-Kuhl"],"katkilar":["Oftalmoloji ve ilaçlı tedavi yöntemleri geliştirdi"],"etkiledi":[],"etkilenen":[],"etkilediText":["İbn Zühr ve Endülüs tıbbı"],"etkilenenText":["Ali b. İsa","Endülüs hekimleri"],"zorluk":1,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Mürşid fi'l-Kuhl\" bulunur.","Oftalmoloji ve ilaçlı tedavi yöntemleri geliştirdi"]},{"id":929,"slug":"muhyiddin-el-magribi","isim":"Muhyiddin el-Mağribî","ozet":"Endülüs asıllı astronom; Merâga Rasathanesi çevresinde çalıştı.","hook":"Merâga okulunun gözlem ve hesap faaliyetlerine katıldı","dogum":null,"vefat":null,"yer":"Endülüs; Suriye; Merâga","donem":"13. yy","alanlar":["Astronomi","Matematik"],"alanBirincil":"Astronomi","mezhep":"Belirsiz","eserler":["Astronomi ve trigonometrik hesap risaleleri"],"katkilar":["Merâga okulunun gözlem ve hesap faaliyetlerine katıldı","astronomik tablolar üzerinde çalıştı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Merâga sonrası rasat geleneği"],"etkilenenText":["Endülüs astronomisi"],"zorluk":2,"ipuclari":["13. yy döneminde yaşayan bu bilgin, Endülüs; Suriye; Merâga bölgesinde çalıştı.","Başlıca eserleri arasında \"Astronomi ve trigonometrik hesap risaleleri\" bulunur.","Merâga okulunun gözlem ve hesap faaliyetlerine katıldı"]},{"id":472,"slug":"nur-al-din-al-bitruji-alpetragius","isim":"Nur al-Din al-Bitruji (Alpetragius)","ozet":"Endülüslü astronom; Batlamyus modeline alternatif kozmoloji geliştirdi.","hook":"Eşmerkezli küreler modeliyle gezegen hareketlerini açıklamaya çalıştı","dogum":null,"vefat":1204,"yer":"Endülüs","donem":"12-13. yy","alanlar":["Astronomi","Doğa felsefesi"],"alanBirincil":"Astronomi","mezhep":"Mâlikî","eserler":["Kitâbü'l-Hey'e"],"katkilar":["Eşmerkezli küreler modeliyle gezegen hareketlerini açıklamaya çalıştı","Latin Ortaçağına etki etti"],"etkiledi":[],"etkilenen":[{"id":810,"isim":"İbn Tufeyl"}],"etkilediText":["Latin skolastik astronomi"],"etkilenenText":["Aristoteles"],"zorluk":1,"ipuclari":["12-13. yy döneminde yaşayan bu bilgin, Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâbü'l-Hey'e\" bulunur.","Eşmerkezli küreler modeliyle gezegen hareketlerini açıklamaya çalıştı"]},{"id":476,"slug":"sibt-el-mardini","isim":"Sıbt el-Mardînî","ozet":"Mardin asıllı astronom ve muvakkit; ömrünün sonlarında Ezher çevresinde çalıştı.","hook":"Namaz vakitleri ve astronomik hesaplar üzerine eserler verdi","dogum":null,"vefat":1498,"yer":"Mardin/Kahire","donem":"15. yy","alanlar":["Astronomi","Matematik","muvakkitlik"],"alanBirincil":"Astronomi","mezhep":"Belirsiz","eserler":["Zîcler ve takvim risaleleri"],"katkilar":["Namaz vakitleri ve astronomik hesaplar üzerine eserler verdi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Mısır astronomları"],"etkilenenText":["Mısır-Suriye muvakkitlik geleneği"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Mardin/Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"Zîcler ve takvim risaleleri\" bulunur.","Namaz vakitleri ve astronomik hesaplar üzerine eserler verdi"]},{"id":743,"slug":"ibn-havkal","isim":"İbn Havkal","ozet":"Uzun seyahatleri ve coğrafya kitabıyla tanınan Müslüman seyyah-coğrafyacı.","hook":"İslam dünyasının bölgelerini, ekonomisini ve yollarını harita ve metinle anlattı.","dogum":null,"vefat":978,"yer":"Bağdat; Kuzey Afrika; İspanya; İran","donem":"10. yy","alanlar":["Coğrafya","Haritacılık","seyahat"],"alanBirincil":"Coğrafya","mezhep":"Belirsiz","eserler":["Sûretü’l-Arz"],"katkilar":["İslam dünyasının bölgelerini, ekonomisini ve yollarını harita ve metinle anlattı."],"etkiledi":[{"id":485,"isim":"Ebu Ubeyd el-Bekrî"},{"id":834,"isim":"eş-Şerîf el-İdrîsî"}],"etkilenen":[{"id":845,"isim":"İstahrî"}],"etkilediText":["İslam coğrafya yazıcılığı"],"etkilenenText":["Belhî coğrafya geleneği"],"zorluk":2,"ipuclari":["10. yy döneminde yaşayan bu bilgin, Bağdat; Kuzey Afrika; İspanya; İran bölgesinde çalıştı.","Başlıca eserleri arasında \"Sûretü’l-Arz\" bulunur.","İslam dünyasının bölgelerini, ekonomisini ve yollarını harita ve metinle anlattı."]},{"id":693,"slug":"ibn-al-awwam","isim":"İbn al-Awwâm","ozet":"Endülüslü ziraat bilgini; tarım teknikleri ve bitki yetiştiriciliği üzerine en kapsamlı klasik eserlerden birini yazdı.","hook":"Sulama, gübreleme, aşı, toprak sınıflaması ve bahçecilik uygulamalarını sistemli biçimde derledi.","dogum":null,"vefat":null,"yer":"Sevilla / Endülüs","donem":"12. yy","alanlar":["Ziraat","botanik","toprak bilgisi"],"alanBirincil":"Ziraat","mezhep":"Mâlikî","eserler":["Kitâbü’l-Filâha"],"katkilar":["Sulama, gübreleme, aşı, toprak sınıflaması ve bahçecilik uygulamalarını sistemli biçimde derledi."],"etkiledi":[],"etkilenen":[],"etkilediText":["Akdeniz tarım yazıcılığı","modern tarım tarihçiliği"],"etkilenenText":["İbn Vâfid","İbn Bassâl","Endülüs botanikçiligi"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Sevilla / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâbü’l-Filâha\" bulunur.","Sulama, gübreleme, aşı, toprak sınıflaması ve bahçecilik uygulamalarını sistemli biçimde derledi."]},{"id":845,"slug":"istahri","isim":"İstahrî","ozet":"Belhî coğrafya okulunun önemli temsilcisi; bölgeleri haritalarla birlikte tasvir etti.","hook":"Yollar, ülkeler ve bölgeler için şematik ama etkili haritalar hazırladı.","dogum":null,"vefat":10,"yer":"İran; İslam dünyası seyahat güzergâhları","donem":"10. yy","alanlar":["Coğrafya","Haritacılık"],"alanBirincil":"Coğrafya","mezhep":"Belirsiz","eserler":["Mesâlikü’l-Memâlik"],"katkilar":["Yollar, ülkeler ve bölgeler için şematik ama etkili haritalar hazırladı."],"etkiledi":[{"id":743,"isim":"İbn Havkal"},{"id":834,"isim":"eş-Şerîf el-İdrîsî"}],"etkilenen":[],"etkilediText":["İslam coğrafya geleneği"],"etkilenenText":["Belhî ekolü"],"zorluk":2,"ipuclari":["10. yy döneminde yaşayan bu bilgin, İran; İslam dünyası seyahat güzergâhları bölgesinde çalıştı.","Başlıca eserleri arasında \"Mesâlikü’l-Memâlik\" bulunur.","Yollar, ülkeler ve bölgeler için şematik ama etkili haritalar hazırladı."]},{"id":987,"slug":"semseddin-el-halili","isim":"Şemseddin el-Halîlî","ozet":"Vakit cetvelleri ve astronomik hesaplarla meşhur muvakkit-astronom.","hook":"Namaz vakitleri ve kıble için çok sayıda şehir adına pratik tablolar hazırladı.","dogum":null,"vefat":1397,"yer":"Şam/Halil hattı","donem":"14. yy","alanlar":["Astronomi","Mikat","vakit hesapları","kıble tayini"],"alanBirincil":"Astronomi","mezhep":"Şâfiî (muhtemel)","eserler":["Vakit ve kıble cetvelleri","mikat risaleleri"],"katkilar":["Namaz vakitleri ve kıble için çok sayıda şehir adına pratik tablolar hazırladı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Muvakkitler","Osmanlı mikat geleneği"],"etkilenenText":["Şam rasat geleneği"],"zorluk":1,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Şam/Halil hattı bölgesinde çalıştı.","Başlıca eserleri arasında \"Vakit ve kıble cetvelleri\" bulunur.","Namaz vakitleri ve kıble için çok sayıda şehir adına pratik tablolar hazırladı."]},{"id":916,"slug":"mimar-davud-aga","isim":"Mimar Dâvud Ağa","ozet":"Mimar Sinan’ın halefi olarak başmimarlık yapan Osmanlı mimarı.","hook":"Klasik Osmanlı mimarisini Sinan sonrası dönemde sürdürdü","dogum":16,"vefat":1598,"yer":"İstanbul / Osmanlı","donem":"16. yy","alanlar":["Mimarlık","Mühendislik","yapı teknolojisi"],"alanBirincil":"Mimarlık","mezhep":"Hanefî","eserler":["Yeni Cami ilk tasarımı","Cerrahpaşa Külliyesi","çeşitli cami ve su yapıları"],"katkilar":["Klasik Osmanlı mimarisini Sinan sonrası dönemde sürdürdü","büyük külliye projelerini yönetti."],"etkiledi":[],"etkilenen":[{"id":922,"isim":"Mimar Sinan"}],"etkilediText":["17. yy Osmanlı mimarları"],"etkilenenText":[],"zorluk":1,"ipuclari":["16. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Yeni Cami ilk tasarımı\" bulunur.","Klasik Osmanlı mimarisini Sinan sonrası dönemde sürdürdü"]},{"id":657,"slug":"halid-b-yezid","isim":"Hâlid b. Yezîd","ozet":"Simya ve tercüme hareketiyle anılan Emevî prensi.","hook":"Yunanca/Kıptîce kimya metinlerinin Arapçaya aktarımıyla ilişkilendirilir","dogum":668,"vefat":704,"yer":"Şam / Emevîler","donem":"7-8. yy","alanlar":["Kimya","Tercüme faaliyeti"],"alanBirincil":"Kimya","mezhep":"Belirsiz","eserler":["Simya risaleleri (nispet edilen)"],"katkilar":["Yunanca/Kıptîce kimya metinlerinin Arapçaya aktarımıyla ilişkilendirilir"],"etkiledi":[],"etkilenen":[],"etkilediText":["Câbirî gelenek (dolaylı)"],"etkilenenText":["Helenistik simya"],"zorluk":2,"ipuclari":["7-8. yy döneminde yaşayan bu bilgin, Şam / Emevîler bölgesinde çalıştı.","Başlıca eserleri arasında \"Simya risaleleri (nispet edilen)\" bulunur.","Yunanca/Kıptîce kimya metinlerinin Arapçaya aktarımıyla ilişkilendirilir"]},{"id":602,"slug":"el-asmai","isim":"el-Asmaî","ozet":"Dil, şiir ve tabiat gözlemleriyle tanınan büyük Basralı âlim.","hook":"Hayvanlar ve bitkiler üzerine filolojik-doğa gözlemlerini sistemleştirdi","dogum":740,"vefat":828,"yer":"Basra","donem":"8-9. yy","alanlar":["Filoloji","botanik","Zooloji","Arap kültürü"],"alanBirincil":"Filoloji","mezhep":"Belirsiz","eserler":["Kitâbü'l-Hayl","Kitâbü'l-İbil","Kitâbü'n-Nebât"],"katkilar":["Hayvanlar ve bitkiler üzerine filolojik-doğa gözlemlerini sistemleştirdi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Arap dilciliği","hayvan-botanik yazıcılığı"],"etkilenenText":["Basra dili ve bedevî rivayetleri"],"zorluk":1,"ipuclari":["8-9. yy döneminde yaşayan bu bilgin, Basra bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâbü'l-Hayl\" bulunur.","Hayvanlar ve bitkiler üzerine filolojik-doğa gözlemlerini sistemleştirdi"]},{"id":937,"slug":"nadr-b-sumeyl","isim":"Nadr b. Şümeyl","ozet":"Dil ve rivayet âlimi; hayvanlar ve bitkiler üzerine tanımlayıcı metinler yazdı.","hook":"Arap dil malzemesiyle tabiat bilgisini birleştirdi","dogum":742,"vefat":818,"yer":"Basra; Merv","donem":"8-9. yy","alanlar":["Filoloji","botanik","Zooloji","sistematik"],"alanBirincil":"Filoloji","mezhep":"Belirsiz","eserler":["Hayvanlar ve bitkiler üzerine risaleler","lugat çalışmaları"],"katkilar":["Arap dil malzemesiyle tabiat bilgisini birleştirdi","zooloji ve botanik tasvirlerine katkıda bulundu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Asmaî","doğal tarih yazıcılığı"],"etkilenenText":["Basra dili","bedevî gözlem malzemesi"],"zorluk":2,"ipuclari":["8-9. yy döneminde yaşayan bu bilgin, Basra; Merv bölgesinde çalıştı.","Başlıca eserleri arasında \"Hayvanlar ve bitkiler üzerine risaleler\" bulunur.","Arap dil malzemesiyle tabiat bilgisini birleştirdi"]},{"id":568,"slug":"ebu-maser-el-belhi","isim":"Ebû Ma'şer el-Belhî","ozet":"Başta hadisle meşgul iken astronomi-astrolojiye yönelen büyük müellif.","hook":"Gezegen çevrimleri ve tarih tasavvurlarıyla Latin Ortaçağına güçlü etki yaptı","dogum":787,"vefat":886,"yer":"Belh/Bağdat","donem":"8-9. yy","alanlar":["Astronomi-Astroloji","Matematik","felsefe tarihi"],"alanBirincil":"Astronomi-Astroloji","mezhep":"Belirsiz","eserler":["el-Medhalü'l-Kebîr","Kitâbü'l-Ulûf","Kitâbü'l-Milal ve'd-Düvel"],"katkilar":["Gezegen çevrimleri ve tarih tasavvurlarıyla Latin Ortaçağına güçlü etki yaptı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Latin astroloji ve kozmoloji"],"etkilenenText":["el-Kindî çevresi","Helenistik astroloji"],"zorluk":1,"ipuclari":["8-9. yy döneminde yaşayan bu bilgin, Belh/Bağdat bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Medhalü'l-Kebîr\" bulunur.","Gezegen çevrimleri ve tarih tasavvurlarıyla Latin Ortaçağına güçlü etki yaptı"]},{"id":885,"slug":"el-kindi","isim":"el-Kindî","ozet":"“Arap filozofu” olarak bilinen çok yönlü Abbâsî bilgini.","hook":"Yunan felsefesini İslam dünyasına uyarladı","dogum":801,"vefat":873,"yer":"Kûfe; Bağdat","donem":"9. yy","alanlar":["Felsefe","Tıp","Matematik","Optik","kriptoloji"],"alanBirincil":"Felsefe","mezhep":"Belirsiz","eserler":["Felsefe, optik, müzik ve sayı teorisi risaleleri","kriptoloji metinleri"],"katkilar":["Yunan felsefesini İslam dünyasına uyarladı","optik ve ilaç dozajı","frekans analiziyle şifre çözümünde öncü metinler verdi."],"etkiledi":[],"etkilenen":[],"etkilediText":["Ebû Ma‘şer","İslam felsefesi ve kriptoloji tarihi"],"etkilenenText":["Aristoteles","Yeni-Platonculuk","Beytülhikme"],"zorluk":3,"ipuclari":["9. yy döneminde yaşayan bu bilgin, Kûfe; Bağdat bölgesinde çalıştı.","Başlıca eserleri arasında \"Felsefe, optik, müzik ve sayı teorisi risaleleri\" bulunur.","Yunan felsefesini İslam dünyasına uyarladı"]},{"id":779,"slug":"ibnul-munzir-en-nisaburi","isim":"İbnü’l-Münzir en-Nîsâbûrî","ozet":"Müctehid fakih ve hadis âlimi; mezhepler arası ihtilafı sistematik biçimde derleyen önemli isimdir.","hook":"İcmâ ve ihtilaf konularını titizlikle kayda geçirdi","dogum":855,"vefat":930,"yer":"Nîşâbur; Mekke","donem":"9-10. yy","alanlar":["Fıkıh","hadis","ihtilaf literatürü"],"alanBirincil":"Fıkıh","mezhep":"Müctehid / bağımsız çizgi","eserler":["el-İşrâf","el-İcmâ‘","el-Evsat"],"katkilar":["İcmâ ve ihtilaf konularını titizlikle kayda geçirdi","fıkıh usulü ve karşılaştırmalı hukuk için temel kaynaklar sundu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Nevevî","İbn Kudâme","karşılaştırmalı fıkıh geleneği"],"etkilenenText":["Şâfiî","Ahmed b. Hanbel","hadis ehli"],"zorluk":2,"ipuclari":["9-10. yy döneminde yaşayan bu bilgin, Nîşâbur; Mekke bölgesinde çalıştı.","Başlıca eserleri arasında \"el-İşrâf\" bulunur.","İcmâ ve ihtilaf konularını titizlikle kayda geçirdi"]},{"id":715,"slug":"ibn-al-cezzar","isim":"İbn al-Cezzâr","ozet":"Kayrevanlı hekim; pratik tıp ve halk sağlığına dönük eserleriyle tanındı.","hook":"Yolculuk hekimliği ve çocuk sağlığı üzerine sistematik eserler verdi","dogum":898,"vefat":980,"yer":"Kayrevan / Kuzey Afrika","donem":"10. yy","alanlar":["Tıp","Pediatri","seyahat sağlığı"],"alanBirincil":"Tıp","mezhep":"Mâlikî","eserler":["Zâdü’l-Müsâfir ve Kutü’l-Hâzır","Siyasetü’s-Sıbyân"],"katkilar":["Yolculuk hekimliği ve çocuk sağlığı üzerine sistematik eserler verdi","Latin tıbbına etkili oldu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Konstantin Afrikalı","Salerno tıp okulu","İslam pediatri tarihi"],"etkilenenText":["Galenik tıp","İshak b. İmrân"],"zorluk":2,"ipuclari":["10. yy döneminde yaşayan bu bilgin, Kayrevan / Kuzey Afrika bölgesinde çalıştı.","Başlıca eserleri arasında \"Zâdü’l-Müsâfir ve Kutü’l-Hâzır\" bulunur.","Yolculuk hekimliği ve çocuk sağlığı üzerine sistematik eserler verdi"]},{"id":1002,"slug":"ebulkasim-ez-zehravi-abulcasis","isim":"Ebülkâsım ez-Zehrâvî (Abulcasis)","ozet":"Endülüs’ün büyük cerrahı; cerrahiyi bağımsız bir uzmanlık alanı olarak öne çıkardı.","hook":"Yüzlerce cerrahî aleti tarif etti","dogum":936,"vefat":1013,"yer":"Kurtuba / Endülüs","donem":"10-11. yy","alanlar":["Cerrahi","Tıp","alet tasarımı"],"alanBirincil":"Cerrahi","mezhep":"Mâlikî","eserler":["et-Tasrîf limen Aceze ani’t-Te’lîf"],"katkilar":["Yüzlerce cerrahî aleti tarif etti","doğum, diş hekimliği, kırıklar ve ameliyat tekniklerinde standartlar geliştirdi."],"etkiledi":[{"id":820,"isim":"İbn Zuhr (Avenzoar)"}],"etkilenen":[],"etkilediText":["Latin cerrahi geleneği","Guy de Chauliac"],"etkilenenText":["Antik tıp","klinik tecrübe"],"zorluk":2,"ipuclari":["10-11. yy döneminde yaşayan bu bilgin, Kurtuba / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"et-Tasrîf limen Aceze ani’t-Te’lîf\" bulunur.","Yüzlerce cerrahî aleti tarif etti"]},{"id":906,"slug":"mesleme-el-mecriti","isim":"Mesleme el-Mecrîtî","ozet":"Endülüs’ün erken dönem büyük astronom ve matematikçilerinden.","hook":"Harezmî’nin zîcini Endülüs şartlarına uyarladı","dogum":950,"vefat":1007,"yer":"Madrid; Kurtuba / Endülüs","donem":"10-11. yy","alanlar":["Astronomi","Matematik","Kimya"],"alanBirincil":"Astronomi","mezhep":"Mâlikî","eserler":["Zîc tashihleri","matematik ve kimya risaleleri"],"katkilar":["Harezmî’nin zîcini Endülüs şartlarına uyarladı","astronomik hesaplarda yenilik yaptı."],"etkiledi":[{"id":1006,"isim":"ez-Zerkâlî (Arzachel)"}],"etkilenen":[],"etkilediText":["Endülüs rasat geleneği"],"etkilenenText":["doğu İslam astronomisi"],"zorluk":2,"ipuclari":["10-11. yy döneminde yaşayan bu bilgin, Madrid; Kurtuba / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Zîc tashihleri\" bulunur.","Harezmî’nin zîcini Endülüs şartlarına uyarladı"]},{"id":752,"slug":"ibnul-heysem-alhazen","isim":"İbnü’l-Heysem (Alhazen)","ozet":"Deneysel optiğin en büyük isimlerinden; ışık, görme ve yansıma-kırılma üzerine çığır açtı.","hook":"Görmenin gözden çıkan ışınlarla değil, cisimden göze gelen ışıkla gerçekleştiğini sistemli deneylerle temellendirdi","dogum":965,"vefat":1040,"yer":"Basra; Kahire","donem":"10-11. yy","alanlar":["Optik","Astronomi","Matematik","Fizik"],"alanBirincil":"Optik","mezhep":"Belirsiz","eserler":["Kitâbü’l-Menâzır","optik ve matematik risaleleri"],"katkilar":["Görmenin gözden çıkan ışınlarla değil, cisimden göze gelen ışıkla gerçekleştiğini sistemli deneylerle temellendirdi","camera obscura açıklamaları yaptı."],"etkiledi":[{"id":623,"isim":"Kemâleddîn el-Fârisî"}],"etkilenen":[],"etkilediText":["Roger Bacon","Kepler","optik tarihi"],"etkilenenText":["Batlamyus","Öklid","Galen"],"zorluk":2,"ipuclari":["10-11. yy döneminde yaşayan bu bilgin, Basra; Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâbü’l-Menâzır\" bulunur.","Görmenin gözden çıkan ışınlarla değil, cisimden göze gelen ışıkla gerçekleştiğini sistemli deneylerle temellendirdi"]},{"id":746,"slug":"ibn-hazm","isim":"İbn Hazm","ozet":"Zâhirî mezhebinin en büyük temsilcilerinden; hukuk, hadis, mezhepler ve ahlak alanlarında güçlü eserler verdi.","hook":"Zâhirî hukuk metodunu sistemleştirdi","dogum":994,"vefat":1064,"yer":"Kurtuba / Endülüs","donem":"11. yy","alanlar":["Fıkıh","kelam","Mantık","dinler tarihi"],"alanBirincil":"Fıkıh","mezhep":"Zâhirî","eserler":["el-Muhallâ","el-Fasl fi’l-Milel ve’l-Ehvâ ve’n-Nihal","Tavku’l-Hamâme"],"katkilar":["Zâhirî hukuk metodunu sistemleştirdi","dinler ve mezhepler tarihine geniş malzeme sundu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Zâhirî gelenek","modern hukuk ve düşünce tarihçiligi"],"etkilenenText":["Dâvûd ez-Zâhirî","Endülüs hukuk çevresi"],"zorluk":2,"ipuclari":["11. yy döneminde yaşayan bu bilgin, Kurtuba / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Muhallâ\" bulunur.","Zâhirî hukuk metodunu sistemleştirdi"]},{"id":485,"slug":"ebu-ubeyd-el-bekri","isim":"Ebu Ubeyd el-Bekrî","ozet":"Endülüslü coğrafyacı ve edip; seyahat etmeden geniş kaynak derlemeleri yaptı.","hook":"Batı Afrika ve Endülüs coğrafyasını derledi","dogum":1014,"vefat":1094,"yer":"Endülüs","donem":"11. yy","alanlar":["Coğrafya","Edebiyat","tarih","botanik"],"alanBirincil":"Coğrafya","mezhep":"Mâlikî","eserler":["el-Mesâlik ve'l-Memâlik","Mu'cem ma'sta'cem"],"katkilar":["Batı Afrika ve Endülüs coğrafyasını derledi","yer adları sözlüğü hazırladı"],"etkiledi":[],"etkilenen":[],"etkilediText":["İdrisî ve Ortaçağ coğrafyacıları"],"etkilenenText":["İbn Hayyân ve Endülüs tarihçileri"],"zorluk":1,"ipuclari":["11. yy döneminde yaşayan bu bilgin, Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Mesâlik ve'l-Memâlik\" bulunur.","Batı Afrika ve Endülüs coğrafyasını derledi"]},{"id":1006,"slug":"ez-zerkali-arzachel","isim":"ez-Zerkâlî (Arzachel)","ozet":"Endülüs’ün büyük gözlemci astronomu ve alet ustası.","hook":"Güneş apojesi hareketini belirledi","dogum":1029,"vefat":1087,"yer":"Toledo; Kurtuba / Endülüs","donem":"11. yy","alanlar":["Astronomi","Matematik","alet yapımı"],"alanBirincil":"Astronomi","mezhep":"Mâlikî","eserler":["Toledo Cetvelleri","usturlap ve safîha risaleleri"],"katkilar":["Güneş apojesi hareketini belirledi","safîha adlı gelişmiş usturlap türünü tasarladı."],"etkiledi":[],"etkilenen":[{"id":906,"isim":"Mesleme el-Mecrîtî"}],"etkilediText":["Toledo okulu","Avrupa astronomi cetvelleri"],"etkilenenText":["doğu astronomi mirası"],"zorluk":2,"ipuclari":["11. yy döneminde yaşayan bu bilgin, Toledo; Kurtuba / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Toledo Cetvelleri\" bulunur.","Güneş apojesi hareketini belirledi"]},{"id":558,"slug":"ebu-hamid-el-girnati","isim":"Ebû Hâmid el-Gırnâtî","ozet":"Endülüslü seyyah ve coğrafyacı; Kuzey Afrika, Rusya ve Macar diyarlarına kadar dolaştı.","hook":"Gözleme dayalı seyahat-coğrafya malzemesi sağladı","dogum":1080,"vefat":1170,"yer":"Granada/Kuzey Afrika/Doğu Avrupa","donem":"12. yy","alanlar":["Coğrafya","Seyahatname","etnografi"],"alanBirincil":"Coğrafya","mezhep":"Mâlikî","eserler":["Tuhfetü'l-Elbâb","el-Mu'rib an Ba'di Acâibi'l-Mağrib"],"katkilar":["Gözleme dayalı seyahat-coğrafya malzemesi sağladı","etnografik notlarıyla öne çıktı"],"etkiledi":[],"etkilenen":[],"etkilediText":["İdrisî ve İslam coğrafya yazıcılığı"],"etkilenenText":["Endülüs seyahat geleneği"],"zorluk":1,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Granada/Kuzey Afrika/Doğu Avrupa bölgesinde çalıştı.","Başlıca eserleri arasında \"Tuhfetü'l-Elbâb\" bulunur.","Gözleme dayalı seyahat-coğrafya malzemesi sağladı"]},{"id":696,"slug":"ibn-bacce-avempace","isim":"İbn Bâcce (Avempace)","ozet":"Endülüslü filozof, hekim ve devlet adamı; Meşşâî geleneğin İslam Batısındaki öncülerindendir.","hook":"Akıl, nefs ve siyasî yalnızlık kavramlarını felsefî biçimde işledi","dogum":1085,"vefat":1138,"yer":"Saragossa/Fez / Endülüs-Mağrib","donem":"12. yy","alanlar":["Felsefe","Tıp","Astronomi","müzik"],"alanBirincil":"Felsefe","mezhep":"Belirsiz","eserler":["Tedbîrü’l-Mütevahhid","Risâletü’l-Vedâ’","tabiat ve astronomi risaleleri"],"katkilar":["Akıl, nefs ve siyasî yalnızlık kavramlarını felsefî biçimde işledi","Endülüs felsefesini İbn Tufeyl ve İbn Rüşd’e hazırladı."],"etkiledi":[{"id":810,"isim":"İbn Tufeyl"},{"id":790,"isim":"İbn Rüşd (Averroes)"}],"etkilenen":[],"etkilediText":["Endülüs felsefesi"],"etkilenenText":["Aristotelesçi gelenek"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Saragossa/Fez / Endülüs-Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"Tedbîrü’l-Mütevahhid\" bulunur.","Akıl, nefs ve siyasî yalnızlık kavramlarını felsefî biçimde işledi"]},{"id":820,"slug":"ibn-zuhr-avenzoar","isim":"İbn Zuhr (Avenzoar)","ozet":"Endülüs’ün büyük klinik hekimi; teoriden çok pratik gözleme dayalı tıbba ağırlık verdi.","hook":"Klinik tarifler, beslenme tedavisi ve bazı cerrahî/deneysel gözlemlerle tanındı","dogum":1091,"vefat":1162,"yer":"Sevilla / Endülüs","donem":"12. yy","alanlar":["Tıp","Cerrahi","Klinik deneyim"],"alanBirincil":"Tıp","mezhep":"Mâlikî","eserler":["et-Teysîr fi’l-Müdâvât ve’t-Tedbîr"],"katkilar":["Klinik tarifler, beslenme tedavisi ve bazı cerrahî/deneysel gözlemlerle tanındı","trakeotomi ve hayvan deneyi anlatılarıyla anılır."],"etkiledi":[{"id":790,"isim":"İbn Rüşd (Averroes)"},{"id":739,"isim":"İbn Hâtime el-Ensârî"}],"etkilenen":[],"etkilediText":["Latin tıp literatürü"],"etkilenenText":["Endülüs hekimliği"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Sevilla / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"et-Teysîr fi’l-Müdâvât ve’t-Tedbîr\" bulunur.","Klinik tarifler, beslenme tedavisi ve bazı cerrahî/deneysel gözlemlerle tanındı"]},{"id":834,"slug":"es-serif-el-idrisi","isim":"eş-Şerîf el-İdrîsî","ozet":"Norman Sicilyası’nda çalışan büyük coğrafyacı; dünya haritası ve coğrafya kitabıyla tanındı.","hook":"Ortaçağın en gelişmiş dünya haritalarından birini hazırladı","dogum":1100,"vefat":1165,"yer":"Sicilya; Endülüs-Mağrib kökeni","donem":"12. yy","alanlar":["Coğrafya","botanik","Haritacılık"],"alanBirincil":"Coğrafya","mezhep":"Belirsiz","eserler":["Nüzhetü’l-Müştâk fî İhtirâkı’l-Âfâk (Tabula Rogeriana)"],"katkilar":["Ortaçağın en gelişmiş dünya haritalarından birini hazırladı","bölgesel coğrafyayı sistemleştirdi."],"etkiledi":[{"id":586,"isim":"Ebü'l-Fidâ İsmail"}],"etkilenen":[{"id":743,"isim":"İbn Havkal"},{"id":845,"isim":"İstahrî"}],"etkilediText":["Avrupa kartografyası"],"etkilenenText":["ticaret ve seyahat ağları"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Sicilya; Endülüs-Mağrib kökeni bölgesinde çalıştı.","Başlıca eserleri arasında \"Nüzhetü’l-Müştâk fî İhtirâkı’l-Âfâk (Tabula Rogeriana)\" bulunur.","Ortaçağın en gelişmiş dünya haritalarından birini hazırladı"]},{"id":810,"slug":"ibn-tufeyl","isim":"İbn Tufeyl","ozet":"Filozof, hekim ve saray mensubu; Hayy b. Yakzân ile meşhur oldu.","hook":"Bilginin deneyim, akıl ve iç tecrübe ile edinilişini alegorik biçimde anlattı","dogum":1105,"vefat":1185,"yer":"Guadix; Marakeş / Endülüs-Mağrib","donem":"12. yy","alanlar":["Felsefe","Tıp","Astronomi","siyaset"],"alanBirincil":"Felsefe","mezhep":"Mâlikî","eserler":["Hayy b. Yakzân"],"katkilar":["Bilginin deneyim, akıl ve iç tecrübe ile edinilişini alegorik biçimde anlattı","İbn Rüşd’ün hamisi oldu."],"etkiledi":[{"id":790,"isim":"İbn Rüşd (Averroes)"}],"etkilenen":[{"id":696,"isim":"İbn Bâcce (Avempace)"}],"etkilediText":["Avrupa felsefî roman geleneği"],"etkilenenText":[],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Guadix; Marakeş / Endülüs-Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"Hayy b. Yakzân\" bulunur.","Bilginin deneyim, akıl ve iç tecrübe ile edinilişini alegorik biçimde anlattı"]},{"id":790,"slug":"ibn-rusd-averroes","isim":"İbn Rüşd (Averroes)","ozet":"Endülüslü filozof, kadı ve hekim; Aristoteles şârihi olarak dünya düşünce tarihini etkiledi.","hook":"Felsefe-hukuk-tıp alanlarını birleştirdi","dogum":1126,"vefat":1198,"yer":"Kurtuba; Marakeş / Endülüs-Mağrib","donem":"12. yy","alanlar":["Felsefe","Tıp","Astronomi","Fıkıh"],"alanBirincil":"Felsefe","mezhep":"Mâlikî","eserler":["Tehâfütü’t-Tehâfüt","Aristoteles şerhleri","el-Külliyyât fi’t-Tıbb","Bidâyetü’l-Müctehid"],"katkilar":["Felsefe-hukuk-tıp alanlarını birleştirdi","Aristoteles yorumları Latin skolastiğini etkiledi."],"etkiledi":[],"etkilenen":[{"id":696,"isim":"İbn Bâcce (Avempace)"},{"id":810,"isim":"İbn Tufeyl"}],"etkilediText":["Latin averroizmi","Maimonides","İslam ve Avrupa felsefesi"],"etkilenenText":["Aristoteles"],"zorluk":2,"ipuclari":["12. yy döneminde yaşayan bu bilgin, Kurtuba; Marakeş / Endülüs-Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"Tehâfütü’t-Tehâfüt\" bulunur.","Felsefe-hukuk-tıp alanlarını birleştirdi"]},{"id":610,"slug":"fakhr-al-din-al-razi","isim":"Fakhr al-Din al-Razi","ozet":"Eş'arî kelamının en etkili isimlerinden; felsefe ve tabiat ilimleriyle yakından ilgilendi.","hook":"Kelam, felsefe ve doğa araştırmalarını birlikte tartıştı","dogum":1149,"vefat":1209,"yer":"Rey/Herat","donem":"12-13. yy","alanlar":["kelam","Tıp","Felsefe","Tefsir","tabiat ilimleri"],"alanBirincil":"kelam","mezhep":"Şâfiî","eserler":["Mefâtîhu'l-Gayb","el-Mebâhisü'l-Meşrikiyye","tıp risaleleri"],"katkilar":["Kelam, felsefe ve doğa araştırmalarını birlikte tartıştı","çok sayıda sonraki âlimi etkiledi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Sonraki Sünnî kelam","tefsir","Osmanlı medreseleri"],"etkilenenText":["Gazzâlî","Cüveynî çizgisi"],"zorluk":2,"ipuclari":["12-13. yy döneminde yaşayan bu bilgin, Rey/Herat bölgesinde çalıştı.","Başlıca eserleri arasında \"Mefâtîhu'l-Gayb\" bulunur.","Kelam, felsefe ve doğa araştırmalarını birlikte tartıştı"]},{"id":573,"slug":"abdullatif-el-bagdadi","isim":"Abdüllatîf el-Bağdâdî","ozet":"Musullu aileden gelen Bağdatlı hekim ve seyyah; anatomi gözlemleriyle tanındı.","hook":"Galen'i eleştiren anatomik gözlemler","dogum":1162,"vefat":1231,"yer":"Bağdat/Mısır/Şam","donem":"12-13. yy","alanlar":["Tıp","Coğrafya","botanik","Anatomi"],"alanBirincil":"Tıp","mezhep":"Belirsiz","eserler":["el-İfâde ve'l-İ'tibâr","çok sayıda tıp ve felsefe risalesi"],"katkilar":["Galen'i eleştiren anatomik gözlemler","Mısır toprağı ve toplumuna dair saha gözlemleri"],"etkiledi":[],"etkilenen":[],"etkilediText":["Tıp tarihi ve seyahat yazıcılığı"],"etkilenenText":["Galen","Bağdat uleması"],"zorluk":2,"ipuclari":["12-13. yy döneminde yaşayan bu bilgin, Bağdat/Mısır/Şam bölgesinde çalıştı.","Başlıca eserleri arasında \"el-İfâde ve'l-İ'tibâr\" bulunur.","Galen'i eleştiren anatomik gözlemler"]},{"id":687,"slug":"muhyiddin-ibn-arabi","isim":"Muhyiddin İbn Arabi","ozet":"Ekberî tasavvufun kurucu ismi; İslam düşünce tarihinde en etkili mutasavvıflardan biridir.","hook":"Vahdet-i vücûd etrafında şekillenen metafizik dili sistemleştirdi","dogum":1165,"vefat":1240,"yer":"Mürsiye/Endülüs; Mekke; Konya; Şam","donem":"12-13. yy","alanlar":["Tasavvuf","Felsefe","Tefsir","metafizik"],"alanBirincil":"Tasavvuf","mezhep":"Zâhirî etkiler / mezhep aidiyeti tartışmalı","eserler":["el-Fütûhâtü’l-Mekkiyye","Fusûsu’l-Hikem","Tercümânü’l-Eşvâk"],"katkilar":["Vahdet-i vücûd etrafında şekillenen metafizik dili sistemleştirdi","tasavvuf, felsefe ve yorum geleneğini derinden etkiledi."],"etkiledi":[{"id":546,"isim":"Dâvûd el-Kayserî"}],"etkilenen":[],"etkilediText":["Sadreddin Konevî","Molla Fenârî","Osmanlı tasavvuf ve metafizik geleneği"],"etkilenenText":["İbn Meserre","Endülüs sûfîleri","İbn Rüşd ile temas","tasavvuf geleneği"],"zorluk":2,"ipuclari":["12-13. yy döneminde yaşayan bu bilgin, Mürsiye/Endülüs; Mekke; Konya; Şam bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Fütûhâtü’l-Mekkiyye\" bulunur.","Vahdet-i vücûd etrafında şekillenen metafizik dili sistemleştirdi"]},{"id":705,"slug":"ibn-al-baytar","isim":"İbn al-Baytâr","ozet":"Endülüslü botanikçi ve eczacı; bitkiler ve ilaç maddeleri konusunda klasik dönemin en büyük derleyicilerinden.","hook":"1400’den fazla bitkisel, hayvansal ve madensel ilacı derledi","dogum":1197,"vefat":1248,"yer":"Málaga/Endülüs; Şam","donem":"13. yy","alanlar":["botanik","eczacılık","Farmakoloji"],"alanBirincil":"botanik","mezhep":"Mâlikî","eserler":["el-Câmi‘ li-Müfredâti’l-Edviye ve’l-Ağziye","el-Muğnî fi’l-Edviye"],"katkilar":["1400’den fazla bitkisel, hayvansal ve madensel ilacı derledi","saha gözlemini kitap bilgisiyle birleştirdi."],"etkiledi":[],"etkilenen":[{"id":630,"isim":"Muhammed el-Gâfikî"}],"etkilediText":["Farmakoloji tarihi","Osmanlı tıp ve eczacılık literatürü"],"etkilenenText":["İbn Vâfid","Dioskorides geleneği"],"zorluk":2,"ipuclari":["13. yy döneminde yaşayan bu bilgin, Málaga/Endülüs; Şam bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Câmi‘ li-Müfredâti’l-Edviye ve’l-Ağziye\" bulunur.","1400’den fazla bitkisel, hayvansal ve madensel ilacı derledi"]},{"id":877,"slug":"zekeriyya-el-kazvini","isim":"Zekeriyyâ el-Kazvînî","ozet":"Kozmografya ve acâib literatürünün en meşhur isimlerinden; kadılık da yaptı.","hook":"Tabiat, gökler, hayvanlar ve memleketler hakkında ansiklopedik bilgiler derledi.","dogum":1203,"vefat":1283,"yer":"Kazvin; Bağdat; Irak","donem":"13. yy","alanlar":["Coğrafya","Kozmografya","tabiat tarihi"],"alanBirincil":"Coğrafya","mezhep":"Şâfiî","eserler":["Âsârü’l-Bilâd","Acâibü’l-Mahlûkât"],"katkilar":["Tabiat, gökler, hayvanlar ve memleketler hakkında ansiklopedik bilgiler derledi."],"etkiledi":[],"etkilenen":[{"id":834,"isim":"eş-Şerîf el-İdrîsî"}],"etkilediText":["İslam ve Osmanlı acâib/kozmografya literatürü"],"etkilenenText":["coğrafya ve acâib geleneği"],"zorluk":2,"ipuclari":["13. yy döneminde yaşayan bu bilgin, Kazvin; Bağdat; Irak bölgesinde çalıştı.","Başlıca eserleri arasında \"Âsârü’l-Bilâd\" bulunur.","Tabiat, gökler, hayvanlar ve memleketler hakkında ansiklopedik bilgiler derledi."]},{"id":724,"slug":"ibn-ebi-usaybia","isim":"İbn Ebî Usaybi‘a","ozet":"Şamlı hekim ve tabakat yazarı; hekimler tarihi üzerine klasik başvuru eserini yazdı.","hook":"Antik çağdan kendi zamanına kadar hekimlerin biyografilerini topladı","dogum":1203,"vefat":1270,"yer":"Şam; Mısır","donem":"13. yy","alanlar":["Tıp Tarihi","Biyografi","hekimlik"],"alanBirincil":"Tıp Tarihi","mezhep":"Belirsiz","eserler":["Uyûnü’l-Enbâ fî Tabakâti’l-Etıbbâ"],"katkilar":["Antik çağdan kendi zamanına kadar hekimlerin biyografilerini topladı","tıp tarihi için vazgeçilmez kaynak oluşturdu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Modern tıp tarihçiligi","biyografi literatürü"],"etkilenenText":["Tıp biyografi yazıcılığı","Şam-Mısır tıp çevresi"],"zorluk":2,"ipuclari":["13. yy döneminde yaşayan bu bilgin, Şam; Mısır bölgesinde çalıştı.","Başlıca eserleri arasında \"Uyûnü’l-Enbâ fî Tabakâti’l-Etıbbâ\" bulunur.","Antik çağdan kendi zamanına kadar hekimlerin biyografilerini topladı"]},{"id":785,"slug":"ibnun-nefis","isim":"İbnü’n-Nefîs","ozet":"Büyük hekim ve Şâfiî fakihi; küçük kan dolaşımını doğru tarif etmesiyle meşhurdur.","hook":"Akciğer dolaşımını Galen ve İbn Sînâ’ya karşı düzeltti","dogum":1210,"vefat":1288,"yer":"Dımaşk; Kahire","donem":"13. yy","alanlar":["Tıp","Fıkıh","Anatomi","hadis"],"alanBirincil":"Tıp","mezhep":"Şâfiî","eserler":["Şerhu Teşrîhi’l-Kânûn","eş-Şâmil fi’s-Sınâa et-Tıbbiyye"],"katkilar":["Akciğer dolaşımını Galen ve İbn Sînâ’ya karşı düzeltti","anatomi ve klinik tıpta önemli yorumlar yaptı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Memlûk tıbbı","modern tıp tarihi"],"etkilenenText":["Şam tıp çevresi"],"zorluk":2,"ipuclari":["13. yy döneminde yaşayan bu bilgin, Dımaşk; Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"Şerhu Teşrîhi’l-Kânûn\" bulunur.","Akciğer dolaşımını Galen ve İbn Sînâ’ya karşı düzeltti"]},{"id":891,"slug":"kutbuddin-sirazi","isim":"Kutbüddin Şîrâzî","ozet":"Merâga okulunun önde gelen düşünür ve astronomlarından; aynı zamanda hekim ve filozoftur.","hook":"Merâga astronomisini geliştirdi","dogum":1236,"vefat":1311,"yer":"Şiraz; Merâga; Tebriz","donem":"13-14. yy","alanlar":["Astronomi","Tıp","Felsefe","Optik"],"alanBirincil":"Astronomi","mezhep":"Şâfiî (muhtemel)","eserler":["Nihâyetü’l-İdrâk fi Dirâyeti’l-Eflâk","Tuhfetü’ş-Şâhiyye","İlmü’l-Menâzır çalışmaları"],"katkilar":["Merâga astronomisini geliştirdi","gökkuşağı ve optik üzerine yorumları Kemâleddin el-Fârisî’ye zemin hazırladı."],"etkiledi":[{"id":623,"isim":"Kemâleddîn el-Fârisî"}],"etkilenen":[{"id":752,"isim":"İbnü’l-Heysem (Alhazen)"}],"etkilediText":["sonraki astronomlar"],"etkilenenText":[],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Şiraz; Merâga; Tebriz bölgesinde çalıştı.","Başlıca eserleri arasında \"Nihâyetü’l-İdrâk fi Dirâyeti’l-Eflâk\" bulunur.","Merâga astronomisini geliştirdi"]},{"id":969,"slug":"residuddin-fazlullah-et-tabib","isim":"Reşîdüddin Fazlullah et-Tabîb","ozet":"İlhanlı veziri, hekim ve tarihçi; geniş bir ilmî himaye ağı kurdu.","hook":"Evrensel tarih yazımını geniş coğrafyaları kapsayacak biçimde örgütledi","dogum":1247,"vefat":1318,"yer":"Hemedan; Tebriz / İlhanlı","donem":"13-14. yy","alanlar":["tarih","Tıp","devlet yönetimi"],"alanBirincil":"tarih","mezhep":"Belirsiz","eserler":["Câmi‘u’t-Tevârîh"],"katkilar":["Evrensel tarih yazımını geniş coğrafyaları kapsayacak biçimde örgütledi","ilmî merkezleri destekledi."],"etkiledi":[],"etkilenen":[],"etkilediText":["Tarih yazıcılığı","minyatürlü tarih geleneği"],"etkilenenText":["İlhanlı bürokrasisi","İran tarihçiligi"],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Hemedan; Tebriz / İlhanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Câmi‘u’t-Tevârîh\" bulunur.","Evrensel tarih yazımını geniş coğrafyaları kapsayacak biçimde örgütledi"]},{"id":710,"slug":"ibn-al-benna-el-merrakusi","isim":"İbn al-Bennâ el-Merrâküşî","ozet":"Mağribli matematikçi; hesap ve cebir eğitiminde etkili metinler kaleme aldı.","hook":"Aritmetik işlemleri ve cebir öğretimini sadeleştirdi","dogum":1256,"vefat":1321,"yer":"Marakeş / Mağrib","donem":"13-14. yy","alanlar":["Matematik","Astronomi","hesap","Cebir"],"alanBirincil":"Matematik","mezhep":"Mâlikî","eserler":["Telhîs A‘mâli’l-Hisâb","astronomi ve cebir risaleleri"],"katkilar":["Aritmetik işlemleri ve cebir öğretimini sadeleştirdi","Mağrib matematik okulunu şekillendirdi."],"etkiledi":[{"id":757,"isim":"İbn Kunfuz el-Kasantînî"}],"etkilenen":[],"etkilediText":["Mağrib-Endülüs matematikçiligi"],"etkilenenText":["Mağrib hesap geleneği"],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Marakeş / Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"Telhîs A‘mâli’l-Hisâb\" bulunur.","Aritmetik işlemleri ve cebir öğretimini sadeleştirdi"]},{"id":984,"slug":"semseddin-ed-dimaski","isim":"Şemseddin ed-Dımaşkî","ozet":"Coğrafya ve kozmografya yazarı; tabiat ve memleketler hakkında ansiklopedik bilgiler derledi.","hook":"Memleketler, iklimler, denizler ve canlılar hakkında derli toplu bilgiler sundu.","dogum":1256,"vefat":1327,"yer":"Şam","donem":"13-14. yy","alanlar":["Coğrafya","botanik","Kozmografya","tabiat tarihi"],"alanBirincil":"Coğrafya","mezhep":"Belirsiz","eserler":["Nuhbetü’d-Dehr fî Acâibi’l-Berr ve’l-Bahr"],"katkilar":["Memleketler, iklimler, denizler ve canlılar hakkında derli toplu bilgiler sundu."],"etkiledi":[],"etkilenen":[{"id":877,"isim":"Zekeriyyâ el-Kazvînî"},{"id":834,"isim":"eş-Şerîf el-İdrîsî"}],"etkilediText":["Geç ortaçağ coğrafya derlemeleri"],"etkilenenText":["coğrafya literatürü"],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Şam bölgesinde çalıştı.","Başlıca eserleri arasında \"Nuhbetü’d-Dehr fî Acâibi’l-Berr ve’l-Bahr\" bulunur.","Memleketler, iklimler, denizler ve canlılar hakkında derli toplu bilgiler sundu."]},{"id":546,"slug":"davud-el-kayseri","isim":"Dâvûd el-Kayserî","ozet":"İlk Osmanlı müderrislerinden; İbn Arabî çizgisinin güçlü yorumcularındandır.","hook":"Osmanlı entelektüel hayatına Ekberî metafiziği taşıdı","dogum":1262,"vefat":1350,"yer":"Kayseri/İznik","donem":"13-14. yy","alanlar":["Felsefe","Tasavvuf","kelam"],"alanBirincil":"Felsefe","mezhep":"Hanefî (muhtemel)","eserler":["Matla'u Husûsi'l-Kilem","Fusûs şerhi"],"katkilar":["Osmanlı entelektüel hayatına Ekberî metafiziği taşıdı"],"etkiledi":[],"etkilenen":[{"id":687,"isim":"Muhyiddin İbn Arabi"}],"etkilediText":["Erken Osmanlı medresesi ve tasavvuf düşüncesi"],"etkilenenText":["Sadreddin Konevî","Abdürrezzâk Kâşânî"],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Kayseri/İznik bölgesinde çalıştı.","Başlıca eserleri arasında \"Matla'u Husûsi'l-Kilem\" bulunur.","Osmanlı entelektüel hayatına Ekberî metafiziği taşıdı"]},{"id":623,"slug":"kemaleddin-el-farisi","isim":"Kemâleddîn el-Fârisî","ozet":"İbnü'l-Heysem geleneğinin önemli optikçisi.","hook":"Gökkuşağını damlacık içi kırılma ve yansımayla açıklayan klasik çalışma","dogum":1267,"vefat":1319,"yer":"Tebriz/Şiraz","donem":"13-14. yy","alanlar":["Fizik","Matematik","Optik"],"alanBirincil":"Fizik","mezhep":"Şâfiî (muhtemel)","eserler":["Tenkîhu'l-Menâzır"],"katkilar":["Gökkuşağını damlacık içi kırılma ve yansımayla açıklayan klasik çalışma"],"etkiledi":[],"etkilenen":[{"id":891,"isim":"Kutbüddin Şîrâzî"},{"id":752,"isim":"İbnü’l-Heysem (Alhazen)"}],"etkilediText":["Optik tarihi"],"etkilenenText":[],"zorluk":1,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Tebriz/Şiraz bölgesinde çalıştı.","Başlıca eserleri arasında \"Tenkîhu'l-Menâzır\" bulunur.","Gökkuşağını damlacık içi kırılma ve yansımayla açıklayan klasik çalışma"]},{"id":586,"slug":"ebul-fida-ismail","isim":"Ebü'l-Fidâ İsmail","ozet":"Eyyûbî emiri, tarihçi ve coğrafyacı.","hook":"Koordinatlı coğrafya derlemeleriyle İslam ve Avrupa kartografyasını etkiledi","dogum":1273,"vefat":1331,"yer":"Hama / Suriye","donem":"13-14. yy","alanlar":["Coğrafya","tarih","siyaset"],"alanBirincil":"Coğrafya","mezhep":"Şâfiî (muhtemel)","eserler":["Takvîmü'l-Büldân","el-Muhtasar fi Ahbâri'l-Beşer"],"katkilar":["Koordinatlı coğrafya derlemeleriyle İslam ve Avrupa kartografyasını etkiledi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı ve Avrupa coğrafya literatürü"],"etkilenenText":["İdrisî ve önceki coğrafyacılar"],"zorluk":1,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Hama / Suriye bölgesinde çalıştı.","Başlıca eserleri arasında \"Takvîmü'l-Büldân\" bulunur.","Koordinatlı coğrafya derlemeleriyle İslam ve Avrupa kartografyasını etkiledi"]},{"id":848,"slug":"adududdin-el-ici","isim":"Adudüddin el-Îcî","ozet":"Eş‘arî kelamının klasik metinlerini yazan büyük âlim; aynı zamanda mantık ve heyetle meşgul oldu.","hook":"Kelam ve mantık eğitimini standartlaştıran metinler verdi","dogum":1281,"vefat":1355,"yer":"Îc/Fars; Şiraz","donem":"13-14. yy","alanlar":["kelam","Mantık","usul","astronomi/heyet"],"alanBirincil":"kelam","mezhep":"Şâfiî","eserler":["el-Mevâkıf","Cevâhirü’l-Kelâm","heyet risaleleri"],"katkilar":["Kelam ve mantık eğitimini standartlaştıran metinler verdi","medrese müfredatında kalıcı yer edindi."],"etkiledi":[{"id":978,"isim":"Seyyid Şerif Cürcânî"}],"etkilenen":[],"etkilediText":["Teftâzânî","Osmanlı medreseleri"],"etkilenenText":["Fahreddin Râzî sonrası gelenek"],"zorluk":2,"ipuclari":["13-14. yy döneminde yaşayan bu bilgin, Îc/Fars; Şiraz bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Mevâkıf\" bulunur.","Kelam ve mantık eğitimini standartlaştıran metinler verdi"]},{"id":702,"slug":"ibn-battuta","isim":"İbn Battûta","ozet":"Faslı seyyah; yaklaşık otuz yıl süren yolculuklarıyla İslam dünyası ve ötesi hakkında eşsiz bilgiler bıraktı.","hook":"Afrika, Ortadoğu, Anadolu, Orta Asya, Hindistan ve Çin’e dair birinci elden gözlemler sundu.","dogum":1304,"vefat":1368,"yer":"Tanca / Mağrib; Afrika; Asya","donem":"14. yy","alanlar":["Seyahatname","tarih","Coğrafya","etnografi"],"alanBirincil":"Seyahatname","mezhep":"Mâlikî","eserler":["er-Rihle (Tuhfetü’n-Nüzzâr fî Garâibi’l-Emsâr)"],"katkilar":["Afrika, Ortadoğu, Anadolu, Orta Asya, Hindistan ve Çin’e dair birinci elden gözlemler sundu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Coğrafya ve seyahat tarihi","İslam medeniyeti araştırmaları"],"etkilenenText":["Hac ve rihle geleneği","Mağrib ilim çevresi"],"zorluk":2,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Tanca / Mağrib; Afrika; Asya bölgesinde çalıştı.","Başlıca eserleri arasında \"er-Rihle (Tuhfetü’n-Nüzzâr fî Garâibi’l-Emsâr)\" bulunur.","Afrika, Ortadoğu, Anadolu, Orta Asya, Hindistan ve Çin’e dair birinci elden gözlemler sundu."]},{"id":805,"slug":"ibn-al-satir","isim":"İbn al-Şâtır","ozet":"Şam Emeviyye Camii muvakkiti; Batlamyusçu astronomiye matematiksel alternatifler geliştirdi.","hook":"Gezegen modellerini epicycle-tahrik düzenleriyle yeniledi","dogum":1304,"vefat":1375,"yer":"Şam","donem":"14. yy","alanlar":["Astronomi","muvakkitlik","Mekanik aletler"],"alanBirincil":"Astronomi","mezhep":"Şâfiî (muhtemel)","eserler":["Nihâyetü’s-Sûl","zîcler ve alet risaleleri"],"katkilar":["Gezegen modellerini epicycle-tahrik düzenleriyle yeniledi","bazı modelleri Kopernik öncesi büyük önem taşır."],"etkiledi":[{"id":766,"isim":"İbnü’l-Mecdî"}],"etkilenen":[],"etkilediText":["geç İslam astronomisi","Kopernik tartışmaları"],"etkilenenText":["Merâga okulu"],"zorluk":2,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Şam bölgesinde çalıştı.","Başlıca eserleri arasında \"Nihâyetü’s-Sûl\" bulunur.","Gezegen modellerini epicycle-tahrik düzenleriyle yeniledi"]},{"id":720,"slug":"tacuddin-ibn-dureyhim","isim":"Tâcüddin İbn Düreyhim","ozet":"Zooloji ve hayvanlar üzerine derlemeleriyle bilinen âlim; aynı zamanda fıkıh ve edebiyatla da meşgul oldu.","hook":"Hayvan bilgisi ve tanımlayıcı zooloji geleneğine katkı sağladı.","dogum":1312,"vefat":1360,"yer":"Musul; Mısır; Habeşistan yolculuk hattı","donem":"14. yy","alanlar":["Zooloji","Edebiyat","dil","Fıkıh"],"alanBirincil":"Zooloji","mezhep":"Şâfiî (muhtemel)","eserler":["Hayvanlar ve tabiat üzerine risaleler","şiir ve fıkıh çalışmaları"],"katkilar":["Hayvan bilgisi ve tanımlayıcı zooloji geleneğine katkı sağladı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Hayvan ansiklopedileri ve fıkıh-edebiyat çevreleri"],"etkilenenText":["Demîrî öncesi zooloji literatürü"],"zorluk":2,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Musul; Mısır; Habeşistan yolculuk hattı bölgesinde çalıştı.","Başlıca eserleri arasında \"Hayvanlar ve tabiat üzerine risaleler\" bulunur.","Hayvan bilgisi ve tanımlayıcı zooloji geleneğine katkı sağladı."]},{"id":900,"slug":"lisanuddin-ibnul-hatib","isim":"Lisânüddin İbnü’l-Hatîb","ozet":"Gırnata sarayında vezirlik yapan âlim-edip; tarih, tıp ve salgın hastalıklar üzerine yazdı.","hook":"Salgınların bulaşıcı niteliği hakkında dikkat çekici ifadeler kullandı","dogum":1313,"vefat":1374,"yer":"Granada; Fas / Endülüs-Mağrib","donem":"14. yy","alanlar":["tarih","Tıp","Edebiyat","siyaset"],"alanBirincil":"tarih","mezhep":"Mâlikî","eserler":["el-İhâta fî Ahbâri Gırnata","veba risaleleri","edebî eserler"],"katkilar":["Salgınların bulaşıcı niteliği hakkında dikkat çekici ifadeler kullandı","Endülüs tarihini ayrıntılı kaydetti."],"etkiledi":[],"etkilenen":[{"id":739,"isim":"İbn Hâtime el-Ensârî"}],"etkilediText":["Salgın tarihi ve Endülüs araştırmaları"],"etkilenenText":["Endülüs tarihçiligi"],"zorluk":1,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Granada; Fas / Endülüs-Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"el-İhâta fî Ahbâri Gırnata\" bulunur.","Salgınların bulaşıcı niteliği hakkında dikkat çekici ifadeler kullandı"]},{"id":739,"slug":"ibn-hatime-el-ensari","isim":"İbn Hâtime el-Ensârî","ozet":"Endülüslü hekim ve edip; özellikle veba üzerine gözlemleriyle tanınır.","hook":"Kara Ölüm döneminde salgının seyri ve tedbirleri hakkında erken klinik gözlemler sundu.","dogum":1324,"vefat":1369,"yer":"Almeria / Endülüs","donem":"14. yy","alanlar":["Tıp","Edebiyat","tarih"],"alanBirincil":"Tıp","mezhep":"Mâlikî","eserler":["Veba risaleleri","tarihî ve edebî metinler"],"katkilar":["Kara Ölüm döneminde salgının seyri ve tedbirleri hakkında erken klinik gözlemler sundu."],"etkiledi":[],"etkilenen":[{"id":820,"isim":"İbn Zuhr (Avenzoar)"}],"etkilediText":["Salgın tarihi yazıcılığı"],"etkilenenText":["Endülüs hekimliği"],"zorluk":1,"ipuclari":["14. yy döneminde yaşayan bu bilgin, Almeria / Endülüs bölgesinde çalıştı.","Başlıca eserleri arasında \"Veba risaleleri\" bulunur.","Kara Ölüm döneminde salgının seyri ve tedbirleri hakkında erken klinik gözlemler sundu."]},{"id":731,"slug":"ibn-haldun","isim":"İbn Haldun","ozet":"Tarih felsefesi ve toplum teorisiyle modern çağda yeniden keşfedilen büyük Kuzey Afrikalı düşünür.","hook":"Asabiyet, devlet döngüsü, emek ve üretim gibi kavramlarla tarih-toplum analizine yeni bir çerçeve sundu.","dogum":1332,"vefat":1406,"yer":"Tunus; Kuzey Afrika; Kahire","donem":"14-15. yy","alanlar":["tarih","siyaset teorisi","Sosyoloji","iktisat düşüncesi"],"alanBirincil":"tarih","mezhep":"Mâlikî","eserler":["el-Mukaddime","Kitâbü’l-İber"],"katkilar":["Asabiyet, devlet döngüsü, emek ve üretim gibi kavramlarla tarih-toplum analizine yeni bir çerçeve sundu."],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı tarihçiligi","modern sosyoloji","iktisat ve tarih teorisi"],"etkilenenText":["Mâverdî","tarihçiler","Mağrib-Endülüs siyasî tecrübesi"],"zorluk":2,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Tunus; Kuzey Afrika; Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"el-Mukaddime\" bulunur.","Asabiyet, devlet döngüsü, emek ve üretim gibi kavramlarla tarih-toplum analizine yeni bir çerçeve sundu."]},{"id":435,"slug":"ahmedi-taceddin-ibrahim","isim":"Ahmedî (Taceddin İbrahim)","ozet":"Şair ve müellif; eserlerinde astronomi, tıp, ahlak ve tarih bilgilerini manzum biçimde aktardı.","hook":"Bilimsel-kültürel bilgiyi Türkçe mesnevi geleneğine taşıdı","dogum":1334,"vefat":1413,"yer":"Anadolu / Germiyan-Osmanlı","donem":"14-15. yy","alanlar":["Edebiyat","Ansiklopedik şiir","tarih","tıp-kültür aktarımı"],"alanBirincil":"Edebiyat","mezhep":"Belirsiz","eserler":["İskendernâme","Cemşîd ü Hurşîd","Dîvân"],"katkilar":["Bilimsel-kültürel bilgiyi Türkçe mesnevi geleneğine taşıdı","ansiklopedik öğretici şiirin güçlü temsilcisi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Erken Osmanlı-Türkçe didaktik edebiyat"],"etkilenenText":["Nizâmî","Fars edebiyatı"],"zorluk":1,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Anadolu / Germiyan-Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"İskendernâme\" bulunur.","Bilimsel-kültürel bilgiyi Türkçe mesnevi geleneğine taşıdı"]},{"id":649,"slug":"haci-pasa-celaluddin-hizir","isim":"Hacı Paşa (Celâlüddin Hızır)","ozet":"Osmanlı hekimi ve müderris; tıp eserlerini Türkçe ve Arapça yazdı.","hook":"Tıp bilgisini Anadolu'da Türkçe eserlerle yaygınlaştırdı","dogum":1335,"vefat":1417,"yer":"Aydın/Osmanlı","donem":"14-15. yy","alanlar":["Tıp","Tasavvuf","kelam","eğitim"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Şifâü'l-Eskâm","Müntehab-ı Şifâ"],"katkilar":["Tıp bilgisini Anadolu'da Türkçe eserlerle yaygınlaştırdı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Erken Osmanlı tıbbı"],"etkilenenText":["Mısır-Şam tıp çevreleri"],"zorluk":1,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Aydın/Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Şifâü'l-Eskâm\" bulunur.","Tıp bilgisini Anadolu'da Türkçe eserlerle yaygınlaştırdı"]},{"id":978,"slug":"seyyid-serif-curcani","isim":"Seyyid Şerif Cürcânî","ozet":"Klasik medrese geleneğinin en etkili şârihlerinden; çok sayıda temel esere haşiye ve şerh yazdı.","hook":"Kelam, mantık ve dil ilimlerinin kavramsal çerçevesini berraklaştırdı","dogum":1339,"vefat":1413,"yer":"Cürcan; Şiraz; Semerkand","donem":"14-15. yy","alanlar":["kelam","Astronomi","dil","Felsefe","Mantık"],"alanBirincil":"kelam","mezhep":"Şâfiî (muhtemel)","eserler":["Şerhu’l-Mevâkıf","et-Ta‘rîfât","çeşitli haşiyeler"],"katkilar":["Kelam, mantık ve dil ilimlerinin kavramsal çerçevesini berraklaştırdı","medrese terminolojisini şekillendirdi."],"etkiledi":[],"etkilenen":[{"id":848,"isim":"Adudüddin el-Îcî"}],"etkilediText":["Osmanlı medreseleri","Teftâzânî-Cürcânî şerh geleneği"],"etkilenenText":["Fahreddin Râzî sonrası gelenek"],"zorluk":2,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Cürcan; Şiraz; Semerkand bölgesinde çalıştı.","Başlıca eserleri arasında \"Şerhu’l-Mevâkıf\" bulunur.","Kelam, mantık ve dil ilimlerinin kavramsal çerçevesini berraklaştırdı"]},{"id":757,"slug":"ibn-kunfuz-el-kasantini","isim":"İbn Kunfuz el-Kasantînî","ozet":"Mağribli kadı ve âlim; matematik ve astronomi üzerine öğretici metinler kaleme aldı.","hook":"Mağrib hesap öğretimini sürdürdü","dogum":1339,"vefat":1407,"yer":"Konstantin / Mağrib","donem":"14-15. yy","alanlar":["Matematik","Astronomi","Fıkıh","hadis"],"alanBirincil":"Matematik","mezhep":"Mâlikî","eserler":["Hisab ve felek risaleleri","tabakat ve biyografi eserleri"],"katkilar":["Mağrib hesap öğretimini sürdürdü","astronomik hesaplar ve eğitim metinleriyle öne çıktı."],"etkiledi":[],"etkilenen":[{"id":710,"isim":"İbn al-Bennâ el-Merrâküşî"}],"etkilediText":["Kalsâdî ve bölgesel hesap geleneği"],"etkilenenText":["Mağrib matematikçiligi"],"zorluk":1,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Konstantin / Mağrib bölgesinde çalıştı.","Başlıca eserleri arasında \"Hisab ve felek risaleleri\" bulunur.","Mağrib hesap öğretimini sürdürdü"]},{"id":550,"slug":"ed-demiri","isim":"ed-Demîrî","ozet":"Hayvanlar ansiklopedisiyle tanınan Mısırlı âlim.","hook":"Zoolojik, filolojik ve folklorik bilgiyi ansiklopedik biçimde topladı","dogum":1341,"vefat":1405,"yer":"Kahire","donem":"14-15. yy","alanlar":["Zooloji","Edebiyat","Fıkıh"],"alanBirincil":"Zooloji","mezhep":"Şâfiî","eserler":["Hayâtü'l-Hayevân el-Kübrâ"],"katkilar":["Zoolojik, filolojik ve folklorik bilgiyi ansiklopedik biçimde topladı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Zooloji ve ansiklopedi literatürü"],"etkilenenText":["Şâfiî hadis-fıkıh geleneği"],"zorluk":1,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"Hayâtü'l-Hayevân el-Kübrâ\" bulunur.","Zoolojik, filolojik ve folklorik bilgiyi ansiklopedik biçimde topladı"]},{"id":858,"slug":"kadizade-i-rumi","isim":"Kadızâde-i Rûmî","ozet":"Semerkant okulunun büyük matematikçisi; Uluğ Bey çevresindeki çalışmaların teorik omurgasını kurdu.","hook":"Geometri ve astronomi eğitimini sistemleştirdi","dogum":1364,"vefat":1436,"yer":"Bursa; Semerkand","donem":"14-15. yy","alanlar":["Matematik","Astronomi"],"alanBirincil":"Matematik","mezhep":"Hanefî","eserler":["Şerhu Eşkâli’t-Te’sîs","Şerh-i Mulahhas fi’l-Hey’e","Zîc çalışmaları"],"katkilar":["Geometri ve astronomi eğitimini sistemleştirdi","Semerkant rasathanesinin ilmî hazırlığında etkili oldu.","Matematiksel astronomi geleneğini güçlendirdi","Semerkand okulunu biçimlendirdi."],"etkiledi":[{"id":459,"isim":"Ali Qushji"},{"id":998,"isim":"Uluğ Bey"},{"id":638,"isim":"Gıyâseddin Cemşid el-Kâşî"},{"id":459,"isim":"Ali Qushji"},{"id":998,"isim":"Uluğ Bey"}],"etkilenen":[],"etkilediText":["Osmanlı-Semerkand matematikçiligi"],"etkilenenText":["Bursa medrese geleneği","Cemşid Kâşî ile ortak çevre","Bursa ve İran matematik mirası"],"zorluk":3,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Bursa; Semerkand bölgesinde çalıştı.","Başlıca eserleri arasında \"Şerhu Eşkâli’t-Te’sîs\" bulunur.","Geometri ve astronomi eğitimini sistemleştirdi"]},{"id":766,"slug":"ibnul-mecdi","isim":"İbnü’l-Mecdî","ozet":"Memlûk dönemi astronom ve muvakkit; namaz vakitleri ve rasat hesaplarıyla tanındı.","hook":"Takvim, kıble ve vakit hesaplarını düzenleyen eserler kaleme aldı.","dogum":1366,"vefat":1447,"yer":"Kahire / Memlûk","donem":"14-15. yy","alanlar":["Astronomi","Matematik","Fıkıh","nahiv"],"alanBirincil":"Astronomi","mezhep":"Şâfiî","eserler":["Mikat ve astronomi risaleleri","cetveller"],"katkilar":["Takvim, kıble ve vakit hesaplarını düzenleyen eserler kaleme aldı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Memlûk ve Osmanlı muvakkitleri"],"etkilenenText":["İbn Şâtır","Mısır-Suriye astronomi çevresi"],"zorluk":1,"ipuclari":["14-15. yy döneminde yaşayan bu bilgin, Kahire / Memlûk bölgesinde çalıştı.","Başlıca eserleri arasında \"Mikat ve astronomi risaleleri\" bulunur.","Takvim, kıble ve vakit hesaplarını düzenleyen eserler kaleme aldı."]},{"id":638,"slug":"giyaseddin-cemsid-el-kasi","isim":"Gıyâseddin Cemşid el-Kâşî","ozet":"Semerkant okulunun en parlak matematikçilerinden.","hook":"Ondalık kesirleri geliştirdi","dogum":1380,"vefat":1429,"yer":"Kâşan/Semerkant","donem":"15. yy","alanlar":["Matematik","Astronomi"],"alanBirincil":"Matematik","mezhep":"Belirsiz","eserler":["Miftâhu'l-Hisâb","Zîc-i Hâkânî","Risâletü'l-Muhîtiyye"],"katkilar":["Ondalık kesirleri geliştirdi","pi sayısını çok hassas hesapladı","astronomik hesapları ilerletti"],"etkiledi":[{"id":459,"isim":"Ali Qushji"}],"etkilenen":[],"etkilediText":["Uluğ Bey rasathanesi"],"etkilenenText":["Semerkant çevresi","Kadızâde-i Rûmî"],"zorluk":3,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Kâşan/Semerkant bölgesinde çalıştı.","Başlıca eserleri arasında \"Miftâhu'l-Hisâb\" bulunur.","Ondalık kesirleri geliştirdi"]},{"id":441,"slug":"aksemseddin","isim":"Akşemseddin","ozet":"Hekim, mutasavvıf ve Fatih Sultan Mehmed'in hocası; hastalıkların bulaşıcılığı üzerine dikkat çekti.","hook":"Bulaşıcı hastalıkların görünmeyen etkenlerle yayıldığına dair erken görüşler","dogum":1389,"vefat":1459,"yer":"Şam/Amasya/İstanbul / Osmanlı","donem":"15. yy","alanlar":["Tıp","Tasavvuf","kelam"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Maddetü'l-Hayât","Risâletü'n-Nûriyye","Def'u Metâini's-Sûfiyye"],"katkilar":["Bulaşıcı hastalıkların görünmeyen etkenlerle yayıldığına dair erken görüşler","Osmanlı entelektüel ve manevî hayatında derin etki"],"etkiledi":[],"etkilenen":[],"etkilediText":["Fatih Sultan Mehmed","Bayramiyye","Osmanlı tıp/tasavvuf geleneği"],"etkilenenText":["Hacı Bayram-ı Velî"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Şam/Amasya/İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Maddetü'l-Hayât\" bulunur.","Bulaşıcı hastalıkların görünmeyen etkenlerle yayıldığına dair erken görüşler"]},{"id":998,"slug":"ulug-bey","isim":"Uluğ Bey","ozet":"Timurlu hükümdarı ve büyük astronom; Semerkand Rasathanesi’ni kurup devrinin en önemli gözlem faaliyetini yönetti.","hook":"Yıldız kataloğu ve hassas astronomik ölçüler","dogum":1394,"vefat":1449,"yer":"Semerkand","donem":"15. yy","alanlar":["Astronomi","Matematik","hükümdarlık"],"alanBirincil":"Astronomi","mezhep":"Hanefî","eserler":["Zîc-i Uluğ Bey"],"katkilar":["Yıldız kataloğu ve hassas astronomik ölçüler","Semerkand bilim okulunun himayesi"],"etkiledi":[{"id":459,"isim":"Ali Qushji"}],"etkilenen":[{"id":638,"isim":"Gıyâseddin Cemşid el-Kâşî"}],"etkilediText":["Osmanlı astronomisi","zîc geleneği"],"etkilenenText":["Kadızâde-i Rûmî"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Semerkand bölgesinde çalıştı.","Başlıca eserleri arasında \"Zîc-i Uluğ Bey\" bulunur.","Yıldız kataloğu ve hassas astronomik ölçüler"]},{"id":459,"slug":"ali-qushji","isim":"Ali Qushji","ozet":"Timurlu ve Osmanlı saraylarında çalışan büyük astronom ve matematikçi.","hook":"Semerkant astronomi okulunu İstanbul'a taşıdı","dogum":1403,"vefat":1474,"yer":"Semerkant/Herat/İstanbul","donem":"15. yy","alanlar":["Astronomi","Matematik","dil"],"alanBirincil":"Astronomi","mezhep":"Hanefî","eserler":["Fethiyye","Muhammediyye","Şerhu Zîc-i Uluğ Bey"],"katkilar":["Semerkant astronomi okulunu İstanbul'a taşıdı","gökbilimde Aristocu fiziğe bağımsız yaklaşım geliştirdi"],"etkiledi":[],"etkilenen":[{"id":998,"isim":"Uluğ Bey"}],"etkilediText":["Osmanlı astronomları","Molla Lütfî","İstanbul medreseleri"],"etkilenenText":["Kadızâde-i Rûmî","Gıyâseddin Kâşî"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Semerkant/Herat/İstanbul bölgesinde çalıştı.","Başlıca eserleri arasında \"Fethiyye\" bulunur.","Semerkant astronomi okulunu İstanbul'a taşıdı"]},{"id":866,"slug":"el-kalsadi","isim":"el-Kalsâdî","ozet":"Endülüs-Mağrib matematikçisi; cebirsel notasyonda işaret kullanımıyla tanınır.","hook":"Aritmetik ve cebirde sembolik kısaltmalar kullandı","dogum":1412,"vefat":1486,"yer":"Baza/Granada; Tunus","donem":"15. yy","alanlar":["Matematik","Cebir","ferâiz","hesap sembolleri"],"alanBirincil":"Matematik","mezhep":"Mâlikî","eserler":["Keşfü’l-Esrâr","cebir ve ferâiz risaleleri"],"katkilar":["Aritmetik ve cebirde sembolik kısaltmalar kullandı","hesap öğretimini kolaylaştırdı."],"etkiledi":[],"etkilenen":[{"id":710,"isim":"İbn al-Bennâ el-Merrâküşî"}],"etkilediText":["Mağrib aritmetik öğretimi","sembolik cebir tarihi"],"etkilenenText":["Mağrib matematikçiligi"],"zorluk":2,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Baza/Granada; Tunus bölgesinde çalıştı.","Başlıca eserleri arasında \"Keşfü’l-Esrâr\" bulunur.","Aritmetik ve cebirde sembolik kısaltmalar kullandı"]},{"id":425,"slug":"ahi-ahmed-celebi","isim":"Ahi Ahmed Çelebi","ozet":"Osmanlı başhekimi; Fatih, II. Bayezid ve Yavuz devri tabiplerinden.","hook":"Böbrek ve mesane taşları üzerine uzmanlık","dogum":1432,"vefat":1524,"yer":"Kastamonu/İstanbul/Mısır","donem":"15-16. yy","alanlar":["Tıp","Üroloji","saray hekimliği"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Risâle-i Hasatü'l-Kilye ve'l-Mesâne","el-Mûcez tercümesi"],"katkilar":["Böbrek ve mesane taşları üzerine uzmanlık","Osmanlı saray tıbbında etkili uygulamalar"],"etkiledi":[],"etkilenen":[{"id":465,"isim":"Altuncuzâde"},{"id":785,"isim":"İbnü’n-Nefîs"}],"etkilediText":["Osmanlı tababeti","öğrencileri"],"etkilenenText":["Kutbüddin"],"zorluk":2,"ipuclari":["15-16. yy döneminde yaşayan bu bilgin, Kastamonu/İstanbul/Mısır bölgesinde çalıştı.","Başlıca eserleri arasında \"Risâle-i Hasatü'l-Kilye ve'l-Mesâne\" bulunur.","Böbrek ve mesane taşları üzerine uzmanlık"]},{"id":762,"slug":"ahmed-b-macid","isim":"Ahmed b. Mâcid","ozet":"Arap denizciliğinin en meşhur isimlerinden; Hint Okyanusu seyrüseferini şiir ve kılavuz metinlerle anlattı.","hook":"Rüzgârlar, akıntılar, yıldızlarla yön bulma ve rota tayini konusunda yüksek teknik bilgi verdi.","dogum":1435,"vefat":1501,"yer":"Umman; Hint Okyanusu","donem":"15. yy","alanlar":["Denizcilik","Astronomi","Coğrafya"],"alanBirincil":"Denizcilik","mezhep":"Şâfiî (muhtemel)","eserler":["Kitâbü’l-Fevâid fî Usûli İlmi’l-Bahr ve’l-Kavâid","denizcilik urcûzeleri"],"katkilar":["Rüzgârlar, akıntılar, yıldızlarla yön bulma ve rota tayini konusunda yüksek teknik bilgi verdi."],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı ve Arap denizcilik literatürü"],"etkilenenText":["Aile denizcilik geleneği","Arap denizcileri"],"zorluk":1,"ipuclari":["15. yy döneminde yaşayan bu bilgin, Umman; Hint Okyanusu bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâbü’l-Fevâid fî Usûli İlmi’l-Bahr ve’l-Kavâid\" bulunur.","Rüzgârlar, akıntılar, yıldızlarla yön bulma ve rota tayini konusunda yüksek teknik bilgi verdi."]},{"id":956,"slug":"piri-reis","isim":"Pîrî Reis","ozet":"Osmanlı denizcisi ve kartografı; dünya haritaları ve deniz kılavuzlarıyla meşhur.","hook":"Akdeniz kıyılarını sistemli biçimde anlattı","dogum":1470,"vefat":1553,"yer":"Gelibolu; Akdeniz; Basra Körfezi / Osmanlı","donem":"15-16. yy","alanlar":["Haritacılık","Coğrafya","Denizcilik"],"alanBirincil":"Haritacılık","mezhep":"Hanefî","eserler":["Kitâb-ı Bahriye","1513 ve 1528 dünya haritaları"],"katkilar":["Akdeniz kıyılarını sistemli biçimde anlattı","erken dünya haritalarıyla dikkat çekti."],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı denizcileri","haritacılık tarihi"],"etkilenenText":["Kemal Reis","Portolan haritalar","denizcilik tecrübesi"],"zorluk":2,"ipuclari":["15-16. yy döneminde yaşayan bu bilgin, Gelibolu; Akdeniz; Basra Körfezi / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Kitâb-ı Bahriye\" bulunur.","Akdeniz kıyılarını sistemli biçimde anlattı"]},{"id":922,"slug":"mimar-sinan","isim":"Mimar Sinan","ozet":"Osmanlı klasik mimarisinin zirve ismi; başmimar olarak yüzlerce yapı tasarladı.","hook":"Kubbe, statik, mekân ve şehir ölçeğinde sentez kurdu","dogum":1490,"vefat":1588,"yer":"Kayseri; İstanbul / Osmanlı","donem":"16. yy","alanlar":["Mimarlık","Mühendislik","şehircilik","su yapıları"],"alanBirincil":"Mimarlık","mezhep":"Hanefî","eserler":["Süleymaniye Camii","Selimiye Camii","Şehzade Camii","köprüler ve su kemerleri"],"katkilar":["Kubbe, statik, mekân ve şehir ölçeğinde sentez kurdu","yapı teknolojisini ileri taşıdı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Dâvud Ağa","Dalgıç Ahmed","tüm Osmanlı mimarlık tarihi"],"etkilenenText":["Osmanlı ve Bizans yapı tecrübesi","Acem Ali"],"zorluk":2,"ipuclari":["16. yy döneminde yaşayan bu bilgin, Kayseri; İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Süleymaniye Camii\" bulunur.","Kubbe, statik, mekân ve şehir ölçeğinde sentez kurdu"]},{"id":542,"slug":"davud-el-antaki","isim":"Dâvûd el-Antâkî","ozet":"Görme engelli hekim ve farmakolog; geç İslam tıp literatürünün önemli ismidir.","hook":"Farmakoloji ve terapötik bilgiyi derledi","dogum":1522,"vefat":1600,"yer":"Antakya/Mekke/Kahire","donem":"16. yy","alanlar":["Tıp","eczacılık"],"alanBirincil":"Tıp","mezhep":"Belirsiz","eserler":["Tezkiretü Üli'l-Elbâb ve'l-Câmi' li'l-Aceb el-Ucâb"],"katkilar":["Farmakoloji ve terapötik bilgiyi derledi","uzun süre Osmanlı coğrafyasında kullanıldı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı tıp çevresi"],"etkilenenText":["İbn Sînâ ve eczacılık literatürü"],"zorluk":1,"ipuclari":["16. yy döneminde yaşayan bu bilgin, Antakya/Mekke/Kahire bölgesinde çalıştı.","Başlıca eserleri arasında \"Tezkiretü Üli'l-Elbâb ve'l-Câmi' li'l-Aceb el-Ucâb\" bulunur.","Farmakoloji ve terapötik bilgiyi derledi"]},{"id":991,"slug":"takiyyuddin-er-rasid","isim":"Takiyyüddin er-Râsıd","ozet":"İstanbul Rasathanesi’nin kurucusu; Osmanlı bilim tarihinin en parlak astronomlarından.","hook":"Rasathane kurdu","dogum":1526,"vefat":1585,"yer":"Şam; Kahire; İstanbul / Osmanlı","donem":"16. yy","alanlar":["Astronomi","Matematik","Optik","mekanik saatler"],"alanBirincil":"Astronomi","mezhep":"Hanefî","eserler":["Sidretü’l-Müntehâ","Cerîdetü’d-Dürer","en-Nûrü’l-Hadîk fi’l-Basr ve’l-Hadîka"],"katkilar":["Rasathane kurdu","mekanik saatleri gözlemde kullandı","ondalık kesirli trigonometrik hesaplar geliştirdi."],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Osmanlı astronomları","bilim tarihi"],"etkilenenText":["Merâga-Semerkand astronomisi","Memlûk-Osmanlı hesap geleneği"],"zorluk":3,"ipuclari":["16. yy döneminde yaşayan bu bilgin, Şam; Kahire; İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Sidretü’l-Müntehâ\" bulunur.","Rasathane kurdu"]},{"id":871,"slug":"katip-celebi","isim":"Kâtip Çelebi","ozet":"Osmanlı bibliyografı, tarihçi ve coğrafyacısı; ansiklopedik bir zihin yapısına sahiptir.","hook":"Kitaplar ve ilimler bibliyografyasını düzenledi","dogum":1609,"vefat":1657,"yer":"İstanbul / Osmanlı","donem":"17. yy","alanlar":["Bibliyografya","tarih","Coğrafya","ansiklopedi"],"alanBirincil":"Bibliyografya","mezhep":"Hanefî","eserler":["Keşfü’z-Zunûn","Cihannümâ","Mîzânü’l-Hak"],"katkilar":["Kitaplar ve ilimler bibliyografyasını düzenledi","modern coğrafya bilgilerini Osmanlı’ya taşıdı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı bilgi tasnifi","Naîmâ ve sonraki tarihçiler"],"etkilenenText":["Osmanlı tarihçiligi","Avrupa coğrafyası","medrese kültürü"],"zorluk":2,"ipuclari":["17. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Keşfü’z-Zunûn\" bulunur.","Kitaplar ve ilimler bibliyografyasını düzenledi"]},{"id":607,"slug":"evliya-celebi","isim":"Evliya Çelebi","ozet":"Osmanlı dünyasının en meşhur seyyahı; on ciltlik seyahatnâmesiyle tanınır.","hook":"Şehirler, kurumlar, halklar ve coğrafya hakkında eşsiz veri bıraktı","dogum":1611,"vefat":1682,"yer":"İstanbul / Osmanlı","donem":"17. yy","alanlar":["Coğrafya","tarih","Seyahatname","etnografi"],"alanBirincil":"Coğrafya","mezhep":"Hanefî","eserler":["Seyahatnâme"],"katkilar":["Şehirler, kurumlar, halklar ve coğrafya hakkında eşsiz veri bıraktı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı tarih, coğrafya ve folklor araştırmaları"],"etkilenenText":["Saray çevresi","gezgin anlatılar"],"zorluk":1,"ipuclari":["17. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Seyahatnâme\" bulunur.","Şehirler, kurumlar, halklar ve coğrafya hakkında eşsiz veri bıraktı"]},{"id":829,"slug":"ibrahim-muteferrika","isim":"İbrahim Müteferrika","ozet":"Osmanlı’da Türkçe matbaanın kurucusu ve devlet adamı.","hook":"Matbaayı kurumsallaştırdı","dogum":1674,"vefat":1745,"yer":"Kolozsvár; İstanbul / Osmanlı","donem":"18. yy","alanlar":["Matbaacılık","Coğrafya","diplomasi","fikir tarihi"],"alanBirincil":"Matbaacılık","mezhep":"Hanefî (muhtemel)","eserler":["Usûlü’l-Hikem fî Nizâmi’l-Ümem","matbu eserler ve haritalar"],"katkilar":["Matbaayı kurumsallaştırdı","coğrafya ve askerî-siyasî düşünce metinleri yayımladı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Osmanlı basım-yayın tarihi","haritacılık ve kültür aktarımı"],"etkilenenText":["Avrupa matbaacılığı","Osmanlı bürokrasisi"],"zorluk":2,"ipuclari":["18. yy döneminde yaşayan bu bilgin, Kolozsvár; İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Usûlü’l-Hikem fî Nizâmi’l-Ümem\" bulunur.","Matbaayı kurumsallaştırdı"]},{"id":412,"slug":"abbas-vesim-efendi","isim":"Abbas Vesim Efendi","ozet":"Osmanlı hekimi ve astronomu; İstanbul'da hekimlik yaptı, klasik ve Avrupa tıbbını karşılaştırdı.","hook":"Verem ve bulaşıcı hastalıklar üzerine erken gözlemler","dogum":1689,"vefat":1760,"yer":"İstanbul / Osmanlı","donem":"18. yy","alanlar":["Tıp","Astronomi","eczacılık"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Düstûrü'l-Vesîm fi't-Tıbb","Tıbb-ı Cedîd-i Kimyevî","Nehcü'l-Bülûğ fî Şerh-i Zîc-i Uluğ"],"katkilar":["Verem ve bulaşıcı hastalıklar üzerine erken gözlemler","Uluğ Bey Zîci şerhi","Osmanlı tıp-astronomi sentezi"],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Osmanlı hekimleri","muvakkitler"],"etkilenenText":["Ömer Şifâî","Yanyalı Esad Efendi","Ahmed Mısrî","Mehmed Emin Tokadî"],"zorluk":3,"ipuclari":["18. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Düstûrü'l-Vesîm fi't-Tıbb\" bulunur.","Verem ve bulaşıcı hastalıklar üzerine erken gözlemler"]},{"id":824,"slug":"ibrahim-hakki-erzurumi","isim":"İbrahim Hakkı Erzurûmî","ozet":"Osmanlı mutasavvıf-müellifi; marifetnâme geleneğinin en meşhur ismidir.","hook":"Astronomi, anatomi, coğrafya, ahlak ve dinî bilgileri ansiklopedik bir çerçevede Türkçe topladı.","dogum":1703,"vefat":1780,"yer":"Hasankale/Erzurum; Siirt","donem":"18. yy","alanlar":["Tasavvuf","Astronomi","Matematik","ahlak","halk bilimi"],"alanBirincil":"Tasavvuf","mezhep":"Hanefî","eserler":["Marifetnâme","Divan","tasavvuf risaleleri"],"katkilar":["Astronomi, anatomi, coğrafya, ahlak ve dinî bilgileri ansiklopedik bir çerçevede Türkçe topladı."],"etkiledi":[],"etkilenen":[],"etkilediText":["Anadolu halk kültürü","medrese dışı dinî-bilimsel okuma geleneği"],"etkilenenText":["İsmail Fakirullah","Osmanlı irfan geleneği"],"zorluk":2,"ipuclari":["18. yy döneminde yaşayan bu bilgin, Hasankale/Erzurum; Siirt bölgesinde çalıştı.","Başlıca eserleri arasında \"Marifetnâme\" bulunur.","Astronomi, anatomi, coğrafya, ahlak ve dinî bilgileri ansiklopedik bir çerçevede Türkçe topladı."]},{"id":633,"slug":"ismail-gelenbevi","isim":"İsmail Gelenbevî","ozet":"Osmanlı matematik ve mantık âlimi; medrese ile askerî hesap dünyası arasında köprü oldu.","hook":"Cebir, logaritma ve hesap öğretiminde etkili oldu","dogum":1730,"vefat":1791,"yer":"Gelenbe/İstanbul / Osmanlı","donem":"18. yy","alanlar":["Matematik","Astronomi","Mantık"],"alanBirincil":"Matematik","mezhep":"Hanefî","eserler":["Hesap ve hendese risaleleri","mantık şerhleri"],"katkilar":["Cebir, logaritma ve hesap öğretiminde etkili oldu","humbara balistiğiyle de anılır"],"etkiledi":[],"etkilenen":[],"etkilediText":["Mühendishâne ve geç Osmanlı eğitim çevresi"],"etkilenenText":["Klasik Osmanlı matematikçiligi"],"zorluk":1,"ipuclari":["18. yy döneminde yaşayan bu bilgin, Gelenbe/İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Hesap ve hendese risaleleri\" bulunur.","Cebir, logaritma ve hesap öğretiminde etkili oldu"]},{"id":842,"slug":"hoca-ishak-efendi","isim":"Hoca İshak Efendi","ozet":"Mühendishâne başhocası; modern fen terimlerini Osmanlı Türkçesine taşıyan öncü eğitimcidir.","hook":"Matematik, fizik, astronomi ve kimya alanlarında Avrupa kaynaklarını derleyip yeni terminoloji üretti.","dogum":1774,"vefat":1835,"yer":"Narta/Yanya; İstanbul / Osmanlı","donem":"18-19. yy","alanlar":["Matematik","Kimya","Fizik","askerî eğitim","çeviri"],"alanBirincil":"Matematik","mezhep":"Hanefî","eserler":["Mecmûa-i Ulûm-i Riyâziyye"],"katkilar":["Matematik, fizik, astronomi ve kimya alanlarında Avrupa kaynaklarını derleyip yeni terminoloji üretti."],"etkiledi":[],"etkilenen":[],"etkilediText":["Tanzimat öncesi modern fen eğitimi","Osmanlı teknik terimleri"],"etkilenenText":["Mühendishâne","Avrupa bilim metinleri"],"zorluk":2,"ipuclari":["18-19. yy döneminde yaşayan bu bilgin, Narta/Yanya; İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Mecmûa-i Ulûm-i Riyâziyye\" bulunur.","Matematik, fizik, astronomi ve kimya alanlarında Avrupa kaynaklarını derleyip yeni terminoloji üretti."]},{"id":933,"slug":"mustafa-behcet-efendi","isim":"Mustafa Behçet Efendi","ozet":"Osmanlı hekimi ve reformcusu; modern tıp eğitiminin kurumsallaşmasında rol oynadı.","hook":"Tıbhâne-i Âmire’nin kuruluşuna ve tıp eğitiminde yenileşmeye katkı verdi.","dogum":1774,"vefat":1834,"yer":"İstanbul / Osmanlı","donem":"18-19. yy","alanlar":["Tıp","Anatomi","Eğitim reformu","askerî hekimlik"],"alanBirincil":"Tıp","mezhep":"Hanefî","eserler":["Tıp tercümeleri ve takrirleri","Tıbhane düzenlemeleri"],"katkilar":["Tıbhâne-i Âmire’nin kuruluşuna ve tıp eğitiminde yenileşmeye katkı verdi."],"etkiledi":[],"etkilenen":[],"etkilediText":["II. Mahmud dönemi tıp eğitimi","askerî tıp kurumları"],"etkilenenText":["Klasik Osmanlı hekimliği","Avrupa tıp kurumları"],"zorluk":2,"ipuclari":["18-19. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Tıp tercümeleri ve takrirleri\" bulunur.","Tıbhâne-i Âmire’nin kuruluşuna ve tıp eğitiminde yenileşmeye katkı verdi."]},{"id":430,"slug":"seyyid-ahmed-tevhid-efendi","isim":"Seyyid Ahmed Tevhid Efendi","ozet":"Klasik gelenekle modernleşme arasında çalışan Osmanlı matematik ve hesap âlimi.","hook":"Osmanlı hesap literatürünü Türkçe eserlerle sistemleştirdi","dogum":1802,"vefat":1869,"yer":"İstanbul / Osmanlı","donem":"19. yy","alanlar":["Matematik","Astronomi","hesap","devlet hizmeti"],"alanBirincil":"Matematik","mezhep":"Hanefî","eserler":["Nuhbetü'l-Hüssâb","hesap risaleleri"],"katkilar":["Osmanlı hesap literatürünü Türkçe eserlerle sistemleştirdi","medrese hesap öğretimini sürdürdü"],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Osmanlı hesap eğitimi"],"etkilenenText":["Kethüdâzâde Mehmed Ârif Efendi"],"zorluk":1,"ipuclari":["19. yy döneminde yaşayan bu bilgin, İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Nuhbetü'l-Hüssâb\" bulunur.","Osmanlı hesap literatürünü Türkçe eserlerle sistemleştirdi"]},{"id":534,"slug":"ahmed-cevdet-pasa","isim":"Ahmed Cevdet Paşa","ozet":"Osmanlı tarihçisi, hukukçusu ve devlet adamı; Mecelle komisyonunun önde gelen ismidir.","hook":"Tarih yazıcılığı, hukuk kodifikasyonu ve eğitim reformlarında belirleyici rol oynadı","dogum":1822,"vefat":1895,"yer":"Lofça/İstanbul / Osmanlı","donem":"19. yy","alanlar":["tarih","Hukuk","devlet","eğitim"],"alanBirincil":"tarih","mezhep":"Hanefî","eserler":["Tarih-i Cevdet","Kısas-ı Enbiyâ","Mecelle katkıları"],"katkilar":["Tarih yazıcılığı, hukuk kodifikasyonu ve eğitim reformlarında belirleyici rol oynadı"],"etkiledi":[],"etkilenen":[],"etkilediText":["Geç Osmanlı hukuk ve tarihçiligi"],"etkilenenText":["Osmanlı medrese geleneği","Mustafa Reşid Paşa çevresi"],"zorluk":1,"ipuclari":["19. yy döneminde yaşayan bu bilgin, Lofça/İstanbul / Osmanlı bölgesinde çalıştı.","Başlıca eserleri arasında \"Tarih-i Cevdet\" bulunur.","Tarih yazıcılığı, hukuk kodifikasyonu ve eğitim reformlarında belirleyici rol oynadı"]}];
+// Hero stats
+const eserSay = BILGINLER.reduce((s,b) => s + (b.eserler?.length||0), 0);
+const katkiSay = BILGINLER.reduce((s,b) => s + (b.katkilar?.length||0), 0);
+const stats = [
+  { val: BILGINLER.length, lbl: 'Bilgin' },
+  { val: eserSay, lbl: 'Eser' },
+  { val: katkiSay, lbl: 'Katkı' },
+  { val: '7-19', lbl: 'Yüzyıl' }
+];
+document.getElementById('hero-stats').innerHTML = stats.map(s =>
+  `<div class="hero-stat"><div class="hero-stat-val">${s.val}</div><div class="hero-stat-lbl">${s.lbl}</div></div>`
+).join('');
 
-const ALANLAR=["Anatomi", "Ansiklopedik İlimler", "Ansiklopedik şiir", "Arap kültürü", "Astronomi", "Astronomi-Astroloji", "Bibliyografya", "Biyografi", "Cebir", "Cerrahi", "Coğrafya", "Denizcilik", "Doğa felsefesi", "Edebiyat", "Eğitim reformu", "Farmakoloji", "Felsefe", "Filoloji", "Fizik", "Fıkıh", "Göz hekimliği", "Haritacılık", "Havacılık Deneyi", "Hukuk", "Kimya", "Klinik deneyim", "Kozmografya", "Mantık", "Matbaacılık", "Matematik", "Mekanik aletler", "Mikat", "Mimarlık", "Mühendislik", "Mühendislik Deneyleri", "Optik", "Pediatri", "Roket Deneyi", "Seyahatname", "Simya", "Sosyoloji", "Tasavvuf", "Tefsir", "Tercüme faaliyeti", "Tıp", "Tıp Tarihi", "Ziraat", "Zooloji", "ahlak", "alet tasarımı", "alet yapımı", "ansiklopedi", "askerî eğitim", "askerî hekimlik", "askerî teknoloji", "astronomi/heyet", "botanik", "devlet", "devlet hizmeti", "devlet yönetimi", "dil", "dinler tarihi", "diplomasi", "eczacılık", "etnografi", "eğitim", "felsefe tarihi", "ferâiz", "fikir tarihi", "gözlem", "hadis", "halk bilimi", "hekimlik", "hesap", "hesap sembolleri", "hükümdarlık", "ihtilaf literatürü", "iktisat düşüncesi", "kelam", "kriptoloji", "kıble tayini", "laboratuvar süreçleri", "mekanik", "mekanik saatler", "metafizik", "muvakkitlik", "müzik", "nahiv", "saray hekimliği", "seyahat", "seyahat sağlığı", "sistematik", "siyaset", "siyaset teorisi", "su yapıları", "tabiat ilimleri", "tabiat tarihi", "tarih", "toprak bilgisi", "trigonometri", "tıp-kültür aktarımı", "usul", "vakit hesapları", "yapı teknolojisi", "Üroloji", "çeviri", "İlaç yapımı", "şehircilik"];
+// Scholar of the day (date-seeded)
+const today = new Date();
+const seed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+const sotd = BILGINLER[seed % BILGINLER.length];
+const renk = alanRenk(sotd.alanBirincil);
+document.getElementById('scholar-of-day').innerHTML = `
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+    <span style="font-size:20px">⭐</span>
+    <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold)">Günün Âlimi</span>
+  </div>
+  <h3 style="font-size:22px;font-weight:900;margin-bottom:4px">${sotd.isim}</h3>
+  <p style="font-size:12px;color:var(--muted2);margin-bottom:8px">📅 ${sotd.dogum||'?'}–${sotd.vefat||'?'} · 📍 ${sotd.yer} · ${sotd.donem}</p>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px">
+    ${sotd.alanlar.slice(0,3).map(a => `<span class="tag" style="--tag-bg:${alanRenk(a)}15;--tag-color:${alanRenk(a)};--tag-border:${alanRenk(a)}30">${a}</span>`).join('')}
+  </div>
+  <p style="font-size:13px;line-height:1.7;margin-bottom:12px">${sotd.hook}</p>
+  <a href="alim.html?id=${sotd.id}" class="btn-primary" style="text-decoration:none;display:inline-block">Detay →</a>
+`;
 
-const BOLGELER={"Endülüs": [728, 509, 630, 929, 472, 693, 1002, 906, 746, 485, 1006, 558, 696, 820, 834, 810, 790, 687, 705, 900, 739, 866], "Irak / Bağdat": [683, 743, 602, 937, 568, 885, 752, 573, 877, 956], "Osmanlı / Anadolu": [735, 465, 670, 897, 916, 546, 435, 649, 858, 441, 459, 425, 922, 991, 871, 607, 829, 412, 633, 842, 933, 430, 534], "Suriye / Şam": [987, 657, 724, 785, 984, 586, 805], "Mısır": [476, 720, 731, 550, 766, 542], "Orta Asya": [854, 610, 978, 998], "İran / Horasan": [845, 891, 969, 623, 848], "Kuzey Afrika": [715, 710, 757], "Hicaz / Arabistan": [779], "Diğer": [702, 638, 762, 824]};
-
-const OGRENME_YOLLARI=[{"id": 1, "slug": "path-astronomi-matematik", "baslik": "Astronomi ve Matematik Hattı", "aciklama": "Astronomi, matematik ve hesap geleneğini izleyen öğrenme yolu.", "adimlar": [735, 509, 929, 472, 476, 987, 568, 906, 1006, 891, 710, 805, 757, 858, 766, 638, 998, 459, 866, 956, 991, 633, 842, 430]}, {"id": 2, "slug": "path-tip-doga", "baslik": "Tıp ve Doğa Bilimleri Hattı", "aciklama": "Tıp, cerrahi, eczacılık ve doğa araştırmaları için öğrenme yolu.", "adimlar": [465, 683, 630, 657, 715, 1002, 820, 573, 785, 623, 720, 739, 649, 550, 441, 425, 542, 412, 933]}, {"id": 3, "slug": "path-fikih-kelam", "baslik": "Fıkıh, Hadis ve Kelam Hattı", "aciklama": "Fıkıh, hadis, kelam ve dinî ilimler için öğrenme yolu.", "adimlar": [779, 746]}];
-
-const ILISKILER=[{"k": 638, "h": 459}, {"k": 687, "h": 546}, {"k": 696, "h": 810}, {"k": 696, "h": 790}, {"k": 710, "h": 757}, {"k": 743, "h": 485}, {"k": 743, "h": 834}, {"k": 752, "h": 623}, {"k": 805, "h": 766}, {"k": 810, "h": 790}, {"k": 820, "h": 790}, {"k": 820, "h": 739}, {"k": 834, "h": 586}, {"k": 845, "h": 743}, {"k": 845, "h": 834}, {"k": 848, "h": 978}, {"k": 858, "h": 459}, {"k": 858, "h": 998}, {"k": 858, "h": 638}, {"k": 891, "h": 623}, {"k": 906, "h": 1006}, {"k": 998, "h": 459}, {"k": 1002, "h": 820}];
-const KOORDINATLAR={"534":[41.09365607907473,28.6950064531336],"542":[29.90501759102147,31.07392644288929],"546":[38.871882728498406,35.59601969245375],"550":[30.275307740622907,30.992163299577648],"558":[37.12315309181116,-3.8821216683371578],"568":[33.14118278488216,44.373213172862016],"573":[33.02592158181032,44.189302590411984],"586":[35.219930662667714,36.77696488836193],"602":[30.34226437322442,47.86355941032555],"607":[41.195658274006696,28.683899255806836],"610":[34.53349155109969,62.318883636992936],"623":[29.494150309910793,52.373287699887065],"630":[37.774327843324066,-4.098043272932424],"633":[40.76564750602809,28.738029826100078],"638":[34.38997746538984,44.414904125467565],"649":[40.53425654654876,33.30946357338764],"657":[33.53173685487282,36.57386945838762],"670":[40.93712062632501,29.011224378763938],"683":[33.96880932850599,44.60703950472849],"687":[38.087024140186465,32.526411287154055],"693":[37.51274310172896,-6.262505369806603],"696":[37.33673896539093,-4.126367221838736],"702":[31.31916790769451,42.93116354544412],"705":[33.27060085764584,36.15678416186606],"710":[31.71141066655864,-8.09110069261795],"715":[35.60210858027013,9.925704218462892],"720":[29.573955644098227,32.11330917542499],"724":[33.59882123114795,36.35547860340019],"728":[37.68268318891886,-4.63252392122979],"731":[29.838041496257155,31.16767326505459],"735":[41.30371401038195,29.063999855912456],"739":[36.87416984626479,-2.349231449406075],"743":[33.51571115211389,44.535599946927746],"746":[37.71742884317847,-5.050739853657577],"752":[30.399271828835452,47.67064452558542],"757":[36.19658970615179,6.875745828601033],"762":[34.50547050589068,43.25871152319391],"766":[30.133263199176927,31.177379140636397],"779":[21.66872855384433,39.805311111552435],"785":[33.36892809989883,36.13797650461639],"790":[37.916820880497895,-4.912355034886239],"805":[33.560751594134125,36.528693730161486],"810":[31.56964030308424,-8.17840754450563],"820":[37.68852256389707,-5.984284223794122],"824":[31.363637648695175,42.188465501698936],"829":[40.77578947821039,29.056467625021856],"834":[37.77524761861778,13.97329598007981],"842":[40.748116623691175,28.908971571903923],"845":[36.68224276048019,51.44822869019828],"848":[29.87264702656817,52.7964678213407],"854":[39.356888613165694,67.09243309161612],"858":[40.289026221415945,29.082182198245278],"866":[37.03009511397153,-3.5154229208521155],"871":[40.77693130415752,28.940859150401465],"877":[33.28223422379752,44.642289556512644],"885":[33.53551176422692,44.22803343045065],"891":[29.59035166783018,52.38719112831808],"897":[41.25757670360689,29.20231114190206],"900":[37.04906687486918,-3.516630303080397],"906":[37.9453821268629,-4.978296438870219],"916":[41.16750648004509,29.003627418071776],"922":[41.177175887178336,28.998212203317106],"412":[40.710343137676766,28.874493634202803],"929":[37.2116860454315,-3.74254083024123],"933":[41.23723312669391,29.178999317616707],"425":[40.894508475241594,28.714755099896514],"937":[30.736805759522426,48.0781696671788],"430":[40.76139207124073,28.97159427798997],"435":[39.05842503693677,33.371204330514466],"441":[41.16950065758419,28.75703487869986],"956":[30.495169426859242,47.83988215609697],"969":[37.93903397736403,46.51345982465115],"459":[40.96388276412053,28.807078923265248],"465":[41.03357765326767,29.117958641453985],"978":[39.470690638033815,66.84702977478054],"472":[37.79708961399653,-3.910073165416328],"984":[33.4728600503487,36.300545504621354],"987":[33.28260251752096,36.124818402218935],"476":[29.942851337288474,31.29298523107434],"991":[40.848068839557946,28.812130430670937],"485":[37.24259585160542,-3.9213382256379408],"998":[39.48736507028669,67.20325200780367],"1002":[38.09578124015225,-5.027485590066807],"1006":[37.7228027806214,-4.668613333022231],"509":[37.21854208442226,-6.210612890764986]};
-
-
-const BM={};BILGINLER.forEach(b=>BM[b.id]=b);
-const ALAN_RENK={'Astronomi':'#818cf8','Matematik':'#22d3ee','Tıp':'#f87171','Coğrafya':'#4ade80','Fizik':'#fbbf24','Optik':'#f472b6','Kimya':'#a78bfa','Felsefe':'#c084fc','Mühendislik':'#fb923c','Cerrahi':'#ef4444','Farmakoloji':'#14b8a6','Tarih':'#78716c','Sosyoloji':'#d946ef','Haritacılık':'#2dd4bf','Botanik':'#22c55e','Zooloji':'#84cc16','Mimarlık':'#f97316','Fıkıh':'#06b6d4','Kelam':'#8b5cf6','Tasavvuf':'#e879f9','Edebiyat':'#fb7185','Mantık':'#64748b','Simya':'#eab308','Hukuk':'#0ea5e9','Cebir':'#38bdf8','Hadis':'#a3e635','Tefsir':'#34d399','Denizcilik':'#0891b2'};
-function alanRenk(a){return ALAN_RENK[a]||'#c8a46e'}
-const BOLGE_EMOJI={'Endülüs':'🏰','Irak / Bağdat':'🕌','Osmanlı / Anadolu':'🌙','Suriye / Şam':'🏛️','Mısır':'🔺','Orta Asya':'🐎','İran / Horasan':'🌸','Kuzey Afrika':'🏜️','Hicaz / Arabistan':'🕋','Diğer':'🌍'};
-const DONEMLER=[...new Set(BILGINLER.map(b=>b.donem).filter(Boolean))].sort();
-const TABS=[{id:'kesfet',icon:'🔭',label:'Keşfet'},{id:'harita',icon:'🗺️',label:'Harita'},{id:'ag',icon:'🕸️',label:'Ağ'},{id:'zaman',icon:'⏳',label:'Zaman'},{id:'yollar',icon:'📚',label:'Yollar'},{id:'yaris',icon:'⚡',label:'Yarış'}];
-let filters={alan:'',donem:'',bolge:''};
-let agInit=false,zcInit=false,yolInit=false,mapInit=false;
-let agNodes=[],agEdges=[],leafletMap=null;
-
-function init(){
-  const sd=document.getElementById('stars');
-  for(let i=0;i<120;i++){const s=document.createElement('div');s.className='star';const sz=.4+Math.random()*2;Object.assign(s.style,{width:sz+'px',height:sz+'px',left:Math.random()*100+'%',top:Math.random()*100+'%','--d':(2+Math.random()*4)+'s','--delay':(Math.random()*3)+'s','--min':(.05+Math.random()*.15).toFixed(2),'--max':(.4+Math.random()*.5).toFixed(2)});sd.appendChild(s)}
-  document.getElementById('stat-bilgin').textContent=BILGINLER.length;
-  document.getElementById('stat-eser').textContent=BILGINLER.reduce((s,b)=>s+b.eserler.length,0);
-  document.getElementById('stat-katki').textContent=BILGINLER.reduce((s,b)=>s+b.katkilar.length,0);
-  document.getElementById('stat-yuzyil').textContent=new Set(BILGINLER.map(b=>b.donem).filter(Boolean)).size;
-  document.getElementById('tabs').innerHTML=TABS.map(t=>`<button class="tab-btn ${t.id==='kesfet'?'active':''}" onclick="setTab('${t.id}',this)">${t.icon} ${t.label}</button>`).join('');
-  initFilters();render();renderHs();
-}
-
-function setTab(name,btn){
-  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  const sec=document.getElementById('sec-'+name);if(sec)sec.classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(name==='harita'&&!mapInit)initMap();
-  if(name==='ag'&&!agInit)initAg();
-  if(name==='zaman'&&!zcInit)initZC();
-  if(name==='yollar'&&!yolInit)initYollar();
-  if(name==='harita'&&leafletMap)setTimeout(()=>leafletMap.invalidateSize(),100);
-}
-
-function initFilters(){
-  const fc={};BILGINLER.forEach(b=>b.alanlar.forEach(a=>fc[a]=(fc[a]||0)+1));
-  const topF=Object.entries(fc).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]);
-  document.getElementById('filter-alan').innerHTML='<span class="filter-label">Alan</span><button class="filter-btn active" onclick="setFilter(\'alan\',\'\',this)">Tümü</button>'+topF.map(f=>`<button class="filter-btn" onclick="setFilter('alan','${f}',this)">${f}</button>`).join('');
-  document.getElementById('filter-donem').innerHTML='<span class="filter-label">Dönem</span><button class="filter-btn active" onclick="setFilter(\'donem\',\'\',this)">Tümü</button>'+DONEMLER.map(d=>`<button class="filter-btn" onclick="setFilter('donem','${d}',this)">${d}</button>`).join('');
-  const bk=Object.keys(BOLGELER).sort((a,b)=>BOLGELER[b].length-BOLGELER[a].length);
-  document.getElementById('filter-bolge').innerHTML='<span class="filter-label">Bölge</span><button class="filter-btn active" onclick="setFilter(\'bolge\',\'\',this)">Tümü</button>'+bk.map(b=>`<button class="filter-btn" onclick="setFilter('bolge','${b}',this)">${b}</button>`).join('');
-  ['ag-filter','zc-filter'].forEach(id=>{const sel=document.getElementById(id);if(sel)topF.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;sel.appendChild(o)})});
-}
-function setFilter(t,v,btn){filters[t]=v;btn.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
-function render(){
-  const q=document.getElementById('search').value.toLowerCase().trim();
-  let list=BILGINLER.filter(b=>{
-    if(filters.alan&&!b.alanlar.includes(filters.alan))return false;
-    if(filters.donem&&b.donem!==filters.donem)return false;
-    if(filters.bolge&&!BOLGELER[filters.bolge]?.includes(b.id))return false;
-    if(q){const h=[b.isim,b.ozet,b.hook,...b.eserler,...b.katkilar,b.yer,b.donem,...b.alanlar].join(' ').toLowerCase();return h.includes(q)}
-    return true;
-  });
-  document.getElementById('results-count').textContent=list.length+' bilgin bulundu';
-  const grid=document.getElementById('grid'),empty=document.getElementById('empty');
-  if(!list.length){grid.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  grid.innerHTML=list.map((b,i)=>{
-    const r=alanRenk(b.alanBirincil),ini=b.isim.split(' ').pop().charAt(0);
-    const tags=b.alanlar.slice(0,3).map(a=>`<span class="tag" style="--tag-bg:${alanRenk(a)}18;--tag-color:${alanRenk(a)};--tag-border:${alanRenk(a)}30">${a}</span>`).join('');
-    const d=Math.min(i*.025,.5);
-    return `<div class="bilgin-card" style="animation-delay:${d}s;--card-color:${r};--card-glow:${r}15" onclick="acModal(${b.id})">
-      <div class="card-top"><div class="card-avatar" style="background:linear-gradient(135deg,${r}22,transparent);color:${r};border-color:${r}33">${ini}</div>
-      <div class="card-info"><div class="card-name">${b.isim}</div><div class="card-meta">📅 ${b.dogum||'?'}–${b.vefat||'?'} · 📍 ${b.yer||'?'}</div></div></div>
-      <div class="card-tags">${tags}</div>
-      ${b.hook?`<div class="card-hook">${b.hook}</div>`:''}
-    </div>`}).join('');
-}
-
-// MODAL
-function acModal(id){
-  const b=BM[id];if(!b)return;
-  const r=alanRenk(b.alanBirincil);
-  const tags=b.alanlar.map(a=>`<span class="tag" style="--tag-bg:${alanRenk(a)}18;--tag-color:${alanRenk(a)};--tag-border:${alanRenk(a)}30">${a}</span>`).join('');
-  let eH='';if(b.eserler.length)eH='<div class="modal-section"><div class="modal-section-title">📚 Eserleri</div><ul class="modal-list">'+b.eserler.map(e=>`<li><span class="li-icon">📖</span>${e}</li>`).join('')+'</ul></div>';
-  let kH='';if(b.katkilar.length)kH='<div class="modal-section"><div class="modal-section-title">⚡ Katkıları</div><ul class="modal-list">'+b.katkilar.map(k=>`<li><span class="li-icon">•</span>${k}</li>`).join('')+'</ul></div>';
-  let rH='';const hr=b.etkiledi.length||b.etkilenen.length||b.etkilediText.length||b.etkilenenText.length;
-  if(hr){
-    const ed=[...b.etkiledi.map(r=>`<span class="modal-rel-item" onclick="acModal(${r.id})">${r.isim}</span>`),...b.etkilediText.map(t=>`<span class="modal-rel-item modal-rel-ext">${t}</span>`)].join('')||'<span style="color:var(--muted);font-size:11px">—</span>';
-    const en=[...b.etkilenen.map(r=>`<span class="modal-rel-item" onclick="acModal(${r.id})">${r.isim}</span>`),...b.etkilenenText.map(t=>`<span class="modal-rel-item modal-rel-ext">${t}</span>`)].join('')||'<span style="color:var(--muted);font-size:11px">—</span>';
-    rH=`<div class="modal-section"><div class="modal-section-title">🔗 İlişkiler</div><div class="modal-relations"><div class="modal-rel-col"><h4>→ Etkiledikleri</h4>${ed}</div><div class="modal-rel-col"><h4>← Etkilendikleri</h4>${en}</div></div></div>`;
-  }
-  const z='⭐'.repeat(b.zorluk||1)+'☆'.repeat(3-(b.zorluk||1));
-  document.getElementById('modal-icerik').innerHTML=`
-    <div class="modal-header"><div class="modal-header-bar"></div><button class="modal-close" onclick="kapModal()">✕</button>
-    <div class="modal-name">${b.isim}</div>
-    <div class="modal-meta-row">
-      <span class="modal-meta-item">📅 ${b.dogum||'?'}–${b.vefat||'?'}</span>
-      <span class="modal-meta-item">📍 ${b.yer}</span>
-      <span class="modal-meta-item">🕌 ${b.mezhep||'—'}</span>
-      <span class="modal-meta-item">${z}</span>
-    </div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:16px">${tags}</div></div>
-    <div class="modal-body">
-    ${b.hook?`<div class="fact-pill">✨ ${b.hook}</div>`:''}
-    <div class="modal-bio">${b.ozet}</div>
-    ${eH}${kH}${rH}
-    <button class="test-btn" onclick="kapModal();setTab('yaris');setTimeout(()=>baslatOyun('bu-kim'),200)">⚡ Bilgini Test Et →</button>
-    </div>`;
-  document.getElementById('modal-detay').classList.add('open');document.body.style.overflow='hidden';
-}
-function kapModal(){document.getElementById('modal-detay').classList.remove('open');document.body.style.overflow=''}
-function modalDis(e){if(e.target===e.currentTarget)kapModal()}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')kapModal()});
-
-// MAP (Leaflet + MarkerCluster)
-function initMap(){
-  const isDark=!document.documentElement.classList.contains('light');
-  const tileUrl=isDark
-    ?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    :'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-
-  leafletMap=L.map('map-container',{zoomControl:true,scrollWheelZoom:true}).setView([33,40],4);
-  L.tileLayer(tileUrl,{attribution:'© OpenStreetMap, © CARTO',maxZoom:18,subdomains:'abcd'}).addTo(leafletMap);
-
-  const bk=Object.keys(BOLGELER).sort((a,b)=>BOLGELER[b].length-BOLGELER[a].length);
-  document.getElementById('map-stats').innerHTML=bk.slice(0,6).map(b=>`<div class="map-stat">${BOLGE_EMOJI[b]||'🌍'} <strong>${BOLGELER[b].length}</strong> ${b}</div>`).join('');
-
-  const cluster=L.markerClusterGroup({
-    maxClusterRadius:45,
-    spiderfyOnMaxZoom:true,
-    showCoverageOnHover:false,
-    zoomToBoundsOnClick:true,
-    disableClusteringAtZoom:8,
-    iconCreateFunction:function(c){
-      const cnt=c.getChildCount();
-      let sz='small',dim=36;
-      if(cnt>=10){sz='medium';dim=44}
-      if(cnt>=20){sz='large';dim=52}
-      return L.divIcon({html:'<div><span>'+cnt+'</span></div>',className:'marker-cluster marker-cluster-'+sz,iconSize:L.point(dim,dim)});
-    }
-  });
-
-  BILGINLER.forEach(b=>{
-    const c=KOORDINATLAR[b.id];if(!c)return;
-    const renk=alanRenk(b.alanBirincil);
-    const icon=L.divIcon({
-      className:'',
-      html:`<div style="width:14px;height:14px;border-radius:50%;background:${renk};border:2px solid rgba(255,255,255,.4);box-shadow:0 0 10px ${renk}80;cursor:pointer;transition:transform .2s"></div>`,
-      iconSize:[14,14],iconAnchor:[7,7]
-    });
-    const marker=L.marker(c,{icon});
-    const tags=b.alanlar.slice(0,2).map(a=>`<span style="display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;font-weight:700;background:${alanRenk(a)}20;color:${alanRenk(a)};border:1px solid ${alanRenk(a)}30">${a}</span>`).join(' ');
-    marker.bindPopup(`
-      <div class="map-popup-name">${b.isim}</div>
-      <div class="map-popup-meta">📅 ${b.dogum||'?'}–${b.vefat||'?'} · ${b.donem}</div>
-      <div class="map-popup-tags">${tags}</div>
-      <a class="map-popup-link" onclick="kapModal();acModal(${b.id})">Detay →</a>
-    `,{maxWidth:250});
-    cluster.addLayer(marker);
-  });
-  leafletMap.addLayer(cluster);
-  mapInit=true;
-}
-
-// GRAPH
-function initAg(){
-  const rI=new Set();ILISKILER.forEach(r=>{rI.add(r.k);rI.add(r.h)});
-  const nodes=[...rI].map((id,i)=>{const b=BM[id];if(!b)return null;const a=(2*Math.PI*i)/rI.size;return{id,x:480+180*Math.cos(a),y:260+160*Math.sin(a),vx:0,vy:0,isim:b.isim,alan:b.alanBirincil,renk:alanRenk(b.alanBirincil)}}).filter(Boolean);
-  const ni={};nodes.forEach((n,i)=>ni[n.id]=i);
-  const edges=ILISKILER.filter(r=>ni[r.k]!==undefined&&ni[r.h]!==undefined).map(r=>({s:ni[r.k],t:ni[r.h]}));
-  const k=90;for(let it=0;it<250;it++){const tp=8*(1-it/250);for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){let dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy)||1,f=k*k/d*tp/10;nodes[i].vx+=dx/d*f;nodes[i].vy+=dy/d*f;nodes[j].vx-=dx/d*f;nodes[j].vy-=dy/d*f}for(const e of edges){let dx=nodes[e.t].x-nodes[e.s].x,dy=nodes[e.t].y-nodes[e.s].y,d=Math.sqrt(dx*dx+dy*dy)||1,f=d/k*tp/10;nodes[e.s].vx+=dx/d*f;nodes[e.s].vy+=dy/d*f;nodes[e.t].vx-=dx/d*f;nodes[e.t].vy-=dy/d*f}for(const n of nodes){n.x+=Math.max(-tp,Math.min(tp,n.vx));n.y+=Math.max(-tp,Math.min(tp,n.vy));n.vx*=.85;n.vy*=.85;n.x=Math.max(50,Math.min(910,n.x));n.y=Math.max(50,Math.min(470,n.y))}}
-  agNodes=nodes;agEdges=edges;
-  document.getElementById('ag-legend').innerHTML=[...new Set(nodes.map(n=>n.alan))].sort().map(f=>`<span class="ag-legend-item"><span class="ag-legend-dot" style="background:${alanRenk(f)}"></span>${f}</span>`).join('');
-  const cv=document.getElementById('ag-canvas');cv.addEventListener('mousemove',agHover);cv.addEventListener('click',agClick);cv.addEventListener('mouseleave',()=>{document.getElementById('ag-tooltip').style.display='none'});
-  drawAg();agInit=true;
-}
-function drawAg(){
-  const cv=document.getElementById('ag-canvas'),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
-  cv.width=cv.clientWidth*dpr;cv.height=cv.clientHeight*dpr;ctx.scale(dpr,dpr);
-  const w=cv.clientWidth,h=cv.clientHeight;ctx.clearRect(0,0,w,h);
-  const fi=document.getElementById('ag-filter').value,vis=new Set();
-  if(fi){agNodes.forEach(n=>{if(n.alan===fi)vis.add(n.id)});agEdges.forEach(e=>{if(vis.has(agNodes[e.s].id))vis.add(agNodes[e.t].id);if(vis.has(agNodes[e.t].id))vis.add(agNodes[e.s].id)})}
-  const sx=w/960,sy=h/520;
-  for(const e of agEdges){const ns=agNodes[e.s],nt=agNodes[e.t];if(fi&&!vis.has(ns.id)&&!vis.has(nt.id))continue;ctx.beginPath();ctx.moveTo(ns.x*sx,ns.y*sy);ctx.lineTo(nt.x*sx,nt.y*sy);ctx.strokeStyle=fi&&(!vis.has(ns.id)||!vis.has(nt.id))?'rgba(200,164,110,.05)':'rgba(200,164,110,.18)';ctx.lineWidth=1;ctx.stroke();const dx=nt.x*sx-ns.x*sx,dy=nt.y*sy-ns.y*sy,ln=Math.sqrt(dx*dx+dy*dy);if(ln>20){const mx=ns.x*sx+dx*.65,my=ns.y*sy+dy*.65,ag=Math.atan2(dy,dx);ctx.beginPath();ctx.moveTo(mx,my);ctx.lineTo(mx-6*Math.cos(ag-.4),my-6*Math.sin(ag-.4));ctx.moveTo(mx,my);ctx.lineTo(mx-6*Math.cos(ag+.4),my-6*Math.sin(ag+.4));ctx.stroke()}}
-  for(const n of agNodes){const dm=fi&&!vis.has(n.id);ctx.beginPath();ctx.arc(n.x*sx,n.y*sy,dm?4:7,0,Math.PI*2);ctx.fillStyle=dm?'rgba(100,100,100,.25)':n.renk;ctx.fill();if(!dm){ctx.strokeStyle='rgba(255,255,255,.15)';ctx.lineWidth=1.5;ctx.stroke();ctx.shadowColor=n.renk;ctx.shadowBlur=8;ctx.beginPath();ctx.arc(n.x*sx,n.y*sy,7,0,Math.PI*2);ctx.fill();ctx.shadowBlur=0}if(!dm){ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--muted2').trim()||'#888';ctx.font='9px Inter,sans-serif';ctx.textAlign='center';ctx.fillText(n.isim.split(' ').pop(),n.x*sx,n.y*sy-12)}}
-}
-function agHover(e){const cv=document.getElementById('ag-canvas'),rect=cv.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,sx=cv.clientWidth/960,sy=cv.clientHeight/520;let cl=null,md=20;for(const n of agNodes){const dx=n.x*sx-mx,dy=n.y*sy-my,d=Math.sqrt(dx*dx+dy*dy);if(d<md){md=d;cl=n}}const tip=document.getElementById('ag-tooltip');if(cl){const b=BM[cl.id],cn=agEdges.filter(e=>agNodes[e.s].id===cl.id||agNodes[e.t].id===cl.id).length;tip.innerHTML=`<strong>${cl.isim}</strong><br>${b?.dogum||'?'}–${b?.vefat||'?'}<br>${cl.alan}<br>Bağlantı: ${cn}`;tip.style.display='block';tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY+12)+'px';cv.style.cursor='pointer'}else{tip.style.display='none';cv.style.cursor='crosshair'}}
-function agClick(e){const cv=document.getElementById('ag-canvas'),rect=cv.getBoundingClientRect(),mx=e.clientX-rect.left,my=e.clientY-rect.top,sx=cv.clientWidth/960,sy=cv.clientHeight/520;for(const n of agNodes){const dx=n.x*sx-mx,dy=n.y*sy-my;if(Math.sqrt(dx*dx+dy*dy)<18){acModal(n.id);return}}}
-
-// TIMELINE
-function initZC(){renderZC();zcInit=true}
-function renderZC(){
-  const fi=document.getElementById('zc-filter').value;let list=BILGINLER.filter(b=>b.dogum);if(fi)list=list.filter(b=>b.alanlar.includes(fi));list.sort((a,b)=>a.dogum-b.dogum);
-  const minY=600,maxY=1850,tw=Math.max(2600,list.length*35),ppY=tw/(maxY-minY);
-  let h=`<div class="zc-track" style="width:${tw}px"><div class="zc-line"></div>`;
-  for(let c=7;c<=19;c++){const x=20+(c*100-minY)*ppY;h+=`<div class="zc-century" style="left:${x}px">${c}. yy</div>`}
-  let lx=-100,row=0;
-  for(const b of list){const x=20+(b.dogum-minY)*ppY;if(Math.abs(x-lx)<25)row=(row+1)%8;else row=0;lx=x;const top=row<4?(50+row*30):(210+(row-4)*30);const lt=top<190?top-14:top+16;const r=alanRenk(b.alanBirincil);h+=`<div class="zc-dot" style="left:${x}px;top:${top}px;background:${r};border-color:${r};--dot-color:${r}" onclick="acModal(${b.id})" title="${b.isim} (${b.dogum}–${b.vefat||'?'})"></div><div class="zc-label" style="left:${x+9}px;top:${lt}px;color:${r}">${b.isim.split(' ').pop()}</div>`}
-  h+='</div>';document.getElementById('zc-container').innerHTML=h;
-}
-
-// LEARNING PATHS
-function initYollar(){
-  const icons=['🔭','🔬','📖'];
-  document.getElementById('yollar-grid').innerHTML=OGRENME_YOLLARI.map((y,i)=>{
-    const p=getYP(y.id),d=p.filter(Boolean).length,t=y.adimlar.length;
-    return `<div class="yol-card" onclick="acYol(${y.id})"><div class="yol-icon">${icons[i]||'📚'}</div><div class="yol-title">${y.baslik}</div><div class="yol-desc">${y.aciklama}</div><div style="font-size:12px;color:var(--gold);font-weight:700">${d}/${t} tamamlandı</div><div class="progress-bar"><div class="progress-fill" style="width:${t?d/t*100:0}%"></div></div></div>`
-  }).join('');yolInit=true;
-}
-function acYol(pid){const y=OGRENME_YOLLARI.find(p=>p.id===pid);if(!y)return;const p=getYP(pid);document.getElementById('yollar-grid').style.display='none';const d=document.getElementById('yol-detay');d.style.display='block';d.innerHTML=`<button class="btn-secondary" onclick="geriYollar()" style="margin-bottom:14px">← Yollara Dön</button><h3 style="font-size:20px;font-weight:900;margin-bottom:4px">${y.baslik}</h3><p style="color:var(--muted2);font-size:13px;margin-bottom:18px">${y.aciklama}</p><div class="yol-adimlar">${y.adimlar.map((id,i)=>{const b=BM[id];if(!b)return'';const dn=p[i];return`<div class="yol-adim ${dn?'done':''}"><div style="font-weight:700;font-size:14px">${i+1}. ${b.isim}</div><div style="font-size:11px;color:var(--muted2)">${b.dogum||'?'}–${b.vefat||'?'} · ${b.alanBirincil}</div><div style="font-size:12px;color:var(--muted2);margin-top:3px">${b.hook||b.ozet?.substring(0,80)||''}</div><div style="display:flex;gap:6px;margin-top:6px"><button class="btn-secondary" style="padding:5px 12px;font-size:11px" onclick="acModal(${b.id})">Detay →</button>${!dn?`<button class="btn-primary" style="padding:5px 12px;font-size:11px" onclick="tamamlaAdim(${pid},${i})">✓ Tamamla</button>`:'<span style="color:var(--green);font-size:11px;font-weight:700">✓ Tamamlandı</span>'}</div></div>`}).join('')}</div>`}
-function geriYollar(){document.getElementById('yol-detay').style.display='none';document.getElementById('yollar-grid').style.display='';initYollar()}
-function getYP(id){return JSON.parse(localStorage.getItem('iby-yol-'+id)||'[]')}
-function tamamlaAdim(pid,i){const p=getYP(pid);p[i]=true;localStorage.setItem('iby-yol-'+pid,JSON.stringify(p));acYol(pid)}
-
-// GAMES
-function karistir(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-function rozet(p,m){const r=m?p/m:0;if(r>=.9)return{e:'🌟',t:'Üstün Başarı',m:'Mükemmel!'};if(r>=.7)return{e:'🏅',t:'Harika',m:'Çok iyi!'};if(r>=.5)return{e:'📚',t:'İyi',m:'Devam et!'};if(r>=.3)return{e:'🎓',t:'Öğrenci',m:'Biraz daha çalış.'};return{e:'🌱',t:'Başlangıç',m:'Öğrenmeye devam!'}}
-function kaydetHs(k,v){const o=parseInt(localStorage.getItem(k)||'0');if(v>o)localStorage.setItem(k,v)}
-function getHs(k){return parseInt(localStorage.getItem(k)||'0')}
-function renderHs(){document.getElementById('hs-bar').innerHTML=[{l:'Bu Kim?',k:'iby-hs-bk'},{l:'Eşleştir',k:'iby-hs-es'},{l:'Zaman',k:'iby-hs-zt'}].map(h=>`<div class="hs-item"><div class="hs-label">${h.l}</div><div class="hs-val">${getHs(h.k)}</div></div>`).join('')}
-function geriMenu(){clearInterval(window._esTimer);document.querySelectorAll('.oyun-alan').forEach(o=>o.classList.remove('active'));document.getElementById('game-select').style.display='';renderHs()}
-function showSonuc(oid,puan,maks){const r=rozet(puan,maks);document.getElementById(oid+'-rozet').textContent=r.e;document.getElementById(oid+'-skor-val').textContent=puan;document.getElementById(oid+'-unvan').textContent=r.t;document.getElementById(oid+'-mesaj').textContent=r.m+' (Maks: '+maks+')';document.getElementById(oid+'-sonuc').classList.add('show')}
-function baslatOyun(mod){document.getElementById('game-select').style.display='none';document.querySelectorAll('.oyun-alan').forEach(o=>o.classList.remove('active'));document.querySelectorAll('.sonuc').forEach(s=>s.classList.remove('show'));clearInterval(window._esTimer);if(mod==='bu-kim'){document.getElementById('oyun-bu-kim').classList.add('active');initBuKim()}if(mod==='eslestir'){document.getElementById('oyun-eslestir').classList.add('active');initEslestir()}if(mod==='zaman'){document.getElementById('oyun-zaman').classList.add('active');initZaman()}}
-
-let bk={};
-function initBuKim(){const pool=karistir(BILGINLER.filter(b=>b.ipuclari.length>=2)).slice(0,10);bk={pool,idx:0,puan:0,dogru:0,ipG:0};renderBuKim()}
-function renderBuKim(){const b=bk.pool[bk.idx];if(!b)return;bk.ipG=0;document.getElementById('bk-tur').textContent=(bk.idx+1)+'/10';document.getElementById('bk-puan').textContent=bk.puan;document.getElementById('bk-dogru').textContent=bk.dogru;document.getElementById('bk-feedback').style.display='none';document.getElementById('bk-next-btn').style.display='none';const rv=document.getElementById('bk-reveal-btn');rv.disabled=false;rv.style.display='';document.getElementById('bk-clues').innerHTML=(b.ipuclari||[]).map((c,i)=>`<div class="clue-card ${i===0?'visible':''}" id="clue-${i}"><span class="clue-num">${i+1}</span><span>${c}</span></div>`).join('');const opts=karistir([b,...karistir(BILGINLER.filter(x=>x.id!==b.id)).slice(0,3)]);document.getElementById('bk-options').innerHTML=opts.map(o=>`<button class="option-btn" onclick="cevaplaBk(${o.id})">${o.isim}</button>`).join('')}
-function acIpucu(){bk.ipG++;const c=document.getElementById('clue-'+bk.ipG);if(c)c.classList.add('visible');if(bk.ipG>=(bk.pool[bk.idx]?.ipuclari?.length||3)-1)document.getElementById('bk-reveal-btn').disabled=true}
-function cevaplaBk(sid){const b=bk.pool[bk.idx];document.querySelectorAll('#bk-options .option-btn').forEach(btn=>{btn.disabled=true;if(btn.textContent===b.isim)btn.classList.add('correct')});const fb=document.getElementById('bk-feedback');if(sid===b.id){const p=bk.ipG===0?300:bk.ipG===1?200:100;bk.puan+=p;bk.dogru++;fb.innerHTML=`<div style="color:var(--green);font-weight:700">✓ Doğru! +${p} puan</div>`}else{fb.innerHTML=`<div style="color:var(--red);font-weight:700">✗ Yanlış! Doğru: ${b.isim}</div>`;document.querySelectorAll('#bk-options .option-btn').forEach(btn=>{if(btn.textContent===BM[sid]?.isim)btn.classList.add('wrong')})}fb.style.display='block';document.getElementById('bk-reveal-btn').style.display='none';document.getElementById('bk-puan').textContent=bk.puan;document.getElementById('bk-dogru').textContent=bk.dogru;if(bk.idx<9)document.getElementById('bk-next-btn').style.display='';else{kaydetHs('iby-hs-bk',bk.puan);setTimeout(()=>showSonuc('bk',bk.puan,3000),600)}}
-function sonrakiTur(){bk.idx++;renderBuKim()}
-
-let es={};
-function initEslestir(){const pool=karistir(BILGINLER.filter(b=>b.katkilar.length>0||b.hook)).slice(0,6);const pairs=pool.map(b=>({id:b.id,isim:b.isim,kesif:b.hook||b.katkilar[0]}));es={pairs,secK:null,puan:0,eslesilen:new Set(),sure:60};renderEslestir();clearInterval(window._esTimer);window._esTimer=setInterval(()=>{es.sure--;document.getElementById('es-sure').textContent=es.sure;if(es.sure<=0){clearInterval(window._esTimer);kaydetHs('iby-hs-es',es.puan);showSonuc('es',es.puan,60)}},1000)}
-function renderEslestir(){const kl=karistir(es.pairs),bl=karistir(es.pairs);document.getElementById('es-puan').textContent=es.puan;document.getElementById('es-kalan').textContent=6-es.eslesilen.size;document.getElementById('es-sure').textContent=es.sure;document.getElementById('es-kesifler').innerHTML=kl.map(p=>`<div class="eslestir-card ${es.eslesilen.has(p.id)?'matched':''}" data-kid="${p.id}" onclick="secKesif(${p.id})">🔍 ${p.kesif.substring(0,55)}${p.kesif.length>55?'…':''}</div>`).join('');document.getElementById('es-bilginler').innerHTML=bl.map(p=>`<div class="eslestir-card ${es.eslesilen.has(p.id)?'matched':''}" data-bid="${p.id}" onclick="secBilgin(${p.id})">${p.isim}</div>`).join('');if(es.secK)document.querySelector(`[data-kid="${es.secK}"]`)?.classList.add('selected')}
-function secKesif(id){if(es.eslesilen.has(id))return;es.secK=id;renderEslestir()}
-function secBilgin(id){if(!es.secK||es.eslesilen.has(id))return;if(es.secK===id){es.puan+=10;es.eslesilen.add(id);if(es.eslesilen.size===6){clearInterval(window._esTimer);kaydetHs('iby-hs-es',es.puan);setTimeout(()=>showSonuc('es',es.puan,60),400)}}else{const el=document.querySelector(`[data-bid="${id}"]`);if(el){el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),600)}}es.secK=null;renderEslestir()}
-
-let zt={};
-function initZaman(){const pool=karistir(BILGINLER.filter(b=>b.dogum)).slice(0,15);zt={turlar:[],idx:0,puan:0,slots:Array(5).fill(null)};for(let i=0;i<3;i++)zt.turlar.push(karistir(pool.slice(i*5,(i+1)*5)));renderZaman()}
-function renderZaman(){const tur=zt.turlar[zt.idx];if(!tur)return;document.getElementById('zt-tur').textContent=(zt.idx+1)+'/3';document.getElementById('zt-puan').textContent=zt.puan;document.getElementById('zt-reveal').classList.remove('show');document.getElementById('zt-next-btn').style.display='none';const used=new Set(zt.slots.filter(Boolean).map(b=>b.id));document.getElementById('zt-pool').innerHTML=tur.filter(b=>!used.has(b.id)).map(b=>`<div class="zaman-pool-card" onclick="zamanSec(${b.id})">${b.isim}</div>`).join('');document.getElementById('zt-slots').innerHTML=zt.slots.map((s,i)=>`<div class="zaman-slot" id="zs-${i}"><span class="zaman-slot-num">${i+1}</span><span class="zaman-slot-name ${s?'filled':''}">${s?s.isim:'Boş'}</span>${s?`<button class="zaman-slot-remove" onclick="zamanKaldir(${i})">✕</button>`:''}</div>`).join('')}
-function zamanSec(id){const b=BM[id];if(!b)return;const idx=zt.slots.indexOf(null);if(idx===-1)return;zt.slots[idx]=b;renderZaman()}
-function zamanKaldir(i){zt.slots[i]=null;renderZaman()}
-function sifirlaZaman(){zt.slots=Array(5).fill(null);renderZaman()}
-function dogrulaZaman(){const tur=zt.turlar[zt.idx],dogru=[...tur].sort((a,b)=>a.dogum-b.dogum);let tp=0;zt.slots.forEach((s,i)=>{const el=document.getElementById('zs-'+i);if(s&&s.id===dogru[i].id){el.classList.add('correct');tp+=20}else el.classList.add('wrong')});zt.puan+=tp;document.getElementById('zt-puan').textContent=zt.puan;document.getElementById('zt-timeline').innerHTML=dogru.map(b=>`<div class="zt-item"><span class="zt-dot"></span><span class="zt-year">${b.dogum}–${b.vefat||'?'}</span><span>${b.isim}</span></div>`).join('');document.getElementById('zt-reveal').classList.add('show');document.querySelectorAll('.zaman-pool-card,.zaman-slot-remove').forEach(e=>e.style.display='none');if(zt.idx<2)document.getElementById('zt-next-btn').style.display='';else{kaydetHs('iby-hs-zt',zt.puan);setTimeout(()=>showSonuc('zt',zt.puan,300),600)}}
-function sonrakiZamanTur(){zt.idx++;zt.slots=Array(5).fill(null);renderZaman()}
-
-init();
+// Progress summary
+const visited = Store.getVisited();
+const completedPaths = Store.getCompletedPaths();
+const quizzes = Store._get('iby-quiz-history', []);
+const rank = Store.getRank();
+const xp = Store.getTotalXP();
+document.getElementById('progress-summary').innerHTML = `
+  <div class="progress-item">
+    <div class="progress-val">${rank.icon}</div>
+    <div class="progress-lbl">${rank.title}</div>
+  </div>
+  <div class="progress-item">
+    <div class="progress-val">${xp}</div>
+    <div class="progress-lbl">Toplam XP</div>
+  </div>
+  <div class="progress-item">
+    <div class="progress-val">${visited.length}</div>
+    <div class="progress-lbl">Alim Ziyareti</div>
+  </div>
+  <div class="progress-item">
+    <div class="progress-val">${completedPaths}</div>
+    <div class="progress-lbl">Yol Tamamlandı</div>
+  </div>
+  <div class="progress-item">
+    <div class="progress-val">${quizzes.length}</div>
+    <div class="progress-lbl">Quiz Çözüldü</div>
+  </div>
+`;
 </script>
 </body>
 </html>
