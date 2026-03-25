@@ -2039,7 +2039,7 @@ function renderAna(){
 
     <!-- CTA buton — premium -->
     <button class="hero-cta" onclick="navigate({screen:'poz'})"
-      style="background:linear-gradient(135deg,${rr.ana},${rr.koyu});border:none;border-radius:50px;padding:16px 48px;color:#fff;font-size:16px;font-weight:600;letter-spacing:.03em;box-shadow:0 12px 40px ${rr.ana}35,inset 0 1px 0 rgba(255,255,255,.18);transition:all .35s cubic-bezier(.16,1,.3,1);cursor:pointer;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .35s both;position:relative;overflow:hidden"
+      style="background:linear-gradient(135deg,${rr.ana},${rr.koyu});border:none;border-radius:50px;padding:clamp(16px,2.5vw,24px) clamp(48px,8vw,72px);color:#fff;font-size:clamp(16px,2.5vw,20px);font-weight:600;letter-spacing:.03em;box-shadow:0 12px 40px ${rr.ana}35,inset 0 1px 0 rgba(255,255,255,.18);transition:all .35s cubic-bezier(.16,1,.3,1);cursor:pointer;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .35s both;position:relative;overflow:hidden"
       onmouseover="this.style.transform='translateY(-4px) scale(1.03)';this.style.boxShadow='0 20px 56px ${rr.ana}45,inset 0 1px 0 rgba(255,255,255,.2)'"
       onmouseout="this.style.transform='';this.style.boxShadow='0 12px 40px ${rr.ana}35,inset 0 1px 0 rgba(255,255,255,.18)'">
       Mektupları Keşfet →
@@ -2122,8 +2122,8 @@ function renderPoz(){
       <div style="display:flex;align-items:center;gap:13px;position:relative">
         <div class="poz-icon" style="width:clamp(48px,8vw,72px);height:clamp(48px,8vw,72px);border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,${r.ana}22,${r.koyu}30);border:1px solid ${r.ana}28;display:flex;align-items:center;justify-content:center;font-size:clamp(22px,3.5vw,32px);color:${r.parlak}">${P.ikon}</div>
         <div style="flex:1">
-          <div class="poz-name" style="font-size:17px;font-weight:600;color:${c.met};margin-bottom:4px">${P.label}</div>
-          <div class="poz-desc" style="font-size:14px;color:${c.soluk};font-weight:300;line-height:1.5">${pid==="ateist"?"Madde ve tesadüf her şeyi açıklar mı?":pid==="deist"?"Yaratıcı var, ama neden sessiz kalsın?":"'Bilmiyorum' bir pozisyon mu, yoksa kaçış mı?"}</div>
+          <div class="poz-name" style="font-size:clamp(18px,3vw,24px);font-weight:600;color:${c.met};margin-bottom:6px">${P.label}</div>
+          <div class="poz-desc" style="font-size:clamp(14px,2.2vw,17px);color:${c.soluk};font-weight:300;line-height:1.6">${pid==="ateist"?"Madde ve tesadüf her şeyi açıklar mı?":pid==="deist"?"Yaratıcı var, ama neden sessiz kalsın?":"'Bilmiyorum' bir pozisyon mu, yoksa kaçış mı?"}</div>
         </div>
         <span style="font-size:18px;color:${r.parlak};opacity:.4">›</span>
       </div>
@@ -2141,7 +2141,7 @@ function renderListe(){
   <button class="btn-back" onclick="navigate({screen:'poz'})" style="color:${c.soluk}">← Geri</button>
   <div style="display:flex;align-items:center;gap:11px;margin-bottom:7px">
     <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,${r.ana}22,${r.koyu}30);border:1px solid ${r.ana}28;display:flex;align-items:center;justify-content:center;font-size:18px;color:${r.parlak}">${P.ikon}</div>
-    <h2 class="liste-baslik" style="font-family:'Crimson Pro',serif;font-size:clamp(26px,7vw,38px);font-weight:300;color:${c.met}">${P.label}</h2>
+    <h2 class="liste-baslik" style="font-family:'Crimson Pro',serif;font-size:clamp(30px,8vw,48px);font-weight:300;color:${c.met}">${P.label}</h2>
   </div>
   <p style="font-size:13px;color:${c.soluk};margin-bottom:22px;font-weight:300;line-height:1.6">
     ${state.poz==="ateist"?"Materyalist-natüralist dünya görüşünün cevaplamakta zorlandığı sorular.":state.poz==="deist"?"Sessiz Yaratıcı fikrinin içindeki felsefi gerilimleri ortaya koyan sorular.":"Belirsizliği konfor alanı olarak kullananlar için dürüst sorular."}
@@ -2154,8 +2154,8 @@ function renderListe(){
   <div class="meslek-row ${m.tam?'':'hazir-yok'}" style="background:${m.tam?c.kart:c.yuz};border-color:${c.cerç};color:${c.met}"
     ${m.tam?`onclick="navigate({screen:'mektup',mektupId:'${mid}'})" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform=''"`:""}>
     <div>
-      <span class="meslek-name" style="font-size:16px;font-weight:500">${m.meslek}</span>
-      <span class="meslek-ozet" style="font-size:13px;color:${c.soluk};margin-left:10px;font-weight:300">${m.ozet.substring(0,45)}…</span>
+      <span class="meslek-name" style="font-size:clamp(17px,2.8vw,22px);font-weight:500">${m.meslek}</span>
+      <span class="meslek-ozet" style="font-size:clamp(13px,2vw,16px);color:${c.soluk};margin-left:12px;font-weight:300">${m.ozet.substring(0,45)}…</span>
       ${!m.tam?`<span style="font-size:10px;color:${c.cs};margin-left:6px">Taslak</span>`:""}
     </div>
     ${m.tam?`<span style="font-size:14px;color:${r.parlak};opacity:.5">›</span>`:`<span style="font-size:9px;color:${c.cs}">✏️</span>`}
