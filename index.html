@@ -259,6 +259,11 @@
       position: absolute; right: 0; top: 20%; height: 60%;
       width: 1px; background: var(--border);
     }
+    .stat-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
     .stat-number {
       font-size: clamp(28px, 4vw, 40px);
       font-weight: 800;
@@ -292,15 +297,69 @@
       background: linear-gradient(to right, transparent, var(--border), transparent);
     }
 
-    /* ── HAKKINDA ── */
-    .about-grid {
+    /* ── ALT BG BÖLÜMLER ── */
+    .alt-bg {
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── HAKKINDA — YOLCULUK ── */
+    .journey-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       align-items: start;
     }
-    .about-text {
+    .journey-story {
       font-size: 15px; color: var(--muted2); line-height: 2;
+    }
+    .journey-timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .journey-timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px; top: 4px; bottom: 4px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--warm), var(--accent), var(--warm));
+      border-radius: 2px;
+    }
+    .journey-step {
+      position: relative;
+      padding: 0 0 28px 20px;
+    }
+    .journey-step:last-child { padding-bottom: 0; }
+    .journey-step::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--warm);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--warm);
+    }
+    .journey-step-label {
+      font-size: 10px; font-weight: 700;
+      color: var(--warm);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .journey-step-title {
+      font-size: 15px; font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .journey-step-desc {
+      font-size: 13px; color: var(--muted2);
+      line-height: 1.6;
+    }
+
+    .about-areas {
+      margin-top: 32px;
     }
     .about-areas h3 {
       font-size: 14px; font-weight: 700;
@@ -329,22 +388,8 @@
     }
     .skill-tag .skill-icon { font-size: 14px; }
 
-    .education-list {
-      margin-top: 24px;
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .edu-item {
-      display: flex; gap: 12px; align-items: flex-start;
-      font-size: 13px; color: var(--muted2);
-    }
-    .edu-icon {
-      font-size: 16px; flex-shrink: 0; margin-top: 2px;
-    }
-    .edu-item strong {
-      color: var(--text); font-weight: 600;
-    }
-
     /* ── KİTAP ── */
+    .book-section { overflow: hidden; }
     .book-grid {
       display: grid; grid-template-columns: 220px 1fr;
       gap: 48px; align-items: center;
@@ -370,6 +415,30 @@
     .book-info p {
       font-size: 14px; color: var(--muted2);
       line-height: 1.8; margin-bottom: 24px;
+    }
+    .book-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .book-highlight {
+      text-align: center;
+      padding: 16px 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+    }
+    .book-highlight-num {
+      font-size: 24px; font-weight: 800;
+      color: var(--warm); line-height: 1.2;
+    }
+    .book-highlight-label {
+      font-size: 10px; color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+      font-weight: 600;
     }
 
     /* ── ÖNE ÇIKAN PROJELER ── */
@@ -408,7 +477,16 @@
       box-shadow: 0 16px 40px var(--accent-glow);
     }
     .featured-card:hover::before { opacity: 1; }
-    .featured-emoji { font-size: 36px; }
+    .featured-emoji-wrap {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 12px;
+      font-size: 24px;
+    }
+    .featured-emoji-wrap.bg-indigo { background: rgba(99,102,241,0.12); }
+    .featured-emoji-wrap.bg-amber { background: rgba(245,158,11,0.12); }
+    .featured-emoji-wrap.bg-emerald { background: rgba(16,185,129,0.12); }
+    .featured-emoji-wrap.bg-purple { background: rgba(168,85,247,0.12); }
     .featured-title {
       font-size: 18px; font-weight: 700;
       letter-spacing: -0.01em;
@@ -471,6 +549,7 @@
     .projects-sub {
       font-size: 15px; color: var(--muted2); text-align: center;
       margin-bottom: 40px;
+      font-style: italic;
     }
 
     /* Kontroller */
@@ -560,7 +639,14 @@
       box-shadow: 0 12px 32px var(--accent-glow);
     }
     .card:hover .card-glow { opacity: 1; }
-    .card-icon { font-size: 28px; line-height: 1; }
+    .card-icon-wrap {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      font-size: 20px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
     .card-title { font-size: 15px; font-weight: 650; letter-spacing: -0.01em; }
     .card-desc { font-size: 13px; color: var(--muted2); line-height: 1.6; flex: 1; }
     .card-footer {
@@ -636,7 +722,31 @@
     .social-section {
       text-align: center;
     }
-    .social-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+      text-align: left;
+    }
+    .contact-info h3 {
+      font-size: 16px; font-weight: 700;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .contact-info p {
+      font-size: 14px; color: var(--muted2);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--warm); font-size: 14px; font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .contact-email:hover { opacity: 0.8; }
+    .contact-email svg { width: 16px; height: 16px; }
+
+    .social-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-start; }
     .social-link {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--surface);
@@ -674,6 +784,7 @@
     .footer-tagline {
       font-size: 13px; color: var(--muted2);
       margin-bottom: 20px;
+      font-style: italic;
     }
     .footer-links {
       display: flex; gap: 20px; justify-content: center;
@@ -708,20 +819,24 @@
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .stat-item:nth-child(2)::after { display: none; }
       .stat-item { padding: 24px 12px; }
-      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .journey-grid { grid-template-columns: 1fr; gap: 32px; }
       .book-grid {
         grid-template-columns: 1fr;
         text-align: center; gap: 32px;
       }
       .book-cover { max-width: 180px; margin: 0 auto; }
       .book-info .btn { margin: 0 auto; }
+      .book-highlights { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .featured-grid { grid-template-columns: 1fr; }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 32px; text-align: center;
+      }
       .social-row {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
-        max-width: 320px;
-        margin: 0 auto;
+        justify-content: center;
       }
       .social-link {
         justify-content: center;
@@ -734,6 +849,7 @@
     @media (max-width: 520px) {
       #grid, #classroom-grid { grid-template-columns: 1fr; }
       .nav-links { gap: 12px; }
+      .book-highlights { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 400px) {
       .nav-links a { font-size: 11px; }
@@ -797,18 +913,22 @@
   <div class="wrap">
     <div class="stats-inner">
       <div class="stat-item">
+        <div class="stat-icon">📦</div>
         <div class="stat-number" data-target="18">0</div>
         <div class="stat-label">Proje</div>
       </div>
       <div class="stat-item">
+        <div class="stat-icon">🃏</div>
         <div class="stat-number" data-target="2661">0</div>
         <div class="stat-label">Eğitim Kartı</div>
       </div>
       <div class="stat-item">
+        <div class="stat-icon">🎮</div>
         <div class="stat-number" data-target="50">0</div>
         <div class="stat-label">Oyun & Quiz</div>
       </div>
       <div class="stat-item">
+        <div class="stat-icon">📄</div>
         <div class="stat-number" data-target="1000">0</div>
         <div class="stat-label">Sayfa İçerik</div>
       </div>
@@ -820,34 +940,46 @@
 <section id="hakkinda" class="reveal">
   <div class="wrap">
     <span class="section-label">Hakkında</span>
-    <h2 class="section-title">Disiplinler arası bir seyyah</h2>
-    <div class="about-grid">
+    <h2 class="section-title">Bir Yolculuk Hikâyesi</h2>
+    <div class="journey-grid">
       <div>
-        <p class="about-text">
+        <p class="journey-story">
           Elektronik mühendisliğinden İlahiyat'a uzanan bir yolculuk. Modern bilimin keşifleriyle İslam âlimlerinin nasihatlerini birlikte sunmaya gayret eden bir talebe. Öğrendiklerini dijital projeler, interaktif uygulamalar ve kitaplarla paylaşan bir muallim.
         </p>
-        <div class="education-list">
-          <div class="edu-item">
-            <span class="edu-icon">🎓</span>
-            <span><strong>Yıldız Teknik Üniversitesi</strong> — Elektronik ve Haberleşme Mühendisliği</span>
-          </div>
-          <div class="edu-item">
-            <span class="edu-icon">📖</span>
-            <span><strong>Ankara Üniversitesi</strong> — İlahiyat Fakültesi</span>
+        <div class="about-areas" style="margin-top: 32px;">
+          <h3>İlgi Alanları</h3>
+          <div class="skill-tags">
+            <span class="skill-tag"><span class="skill-icon">🧠</span> Nörobilim</span>
+            <span class="skill-tag"><span class="skill-icon">🕌</span> İslam Bilimleri</span>
+            <span class="skill-tag"><span class="skill-icon">💻</span> EdTech</span>
+            <span class="skill-tag"><span class="skill-icon">✍️</span> Yazarlık</span>
+            <span class="skill-tag"><span class="skill-icon">🤖</span> Yapay Zeka</span>
+            <span class="skill-tag"><span class="skill-icon">📚</span> Dil Eğitimi</span>
+            <span class="skill-tag"><span class="skill-icon">🎨</span> İnteraktif İçerik</span>
+            <span class="skill-tag"><span class="skill-icon">📐</span> Eğitim Tasarımı</span>
           </div>
         </div>
       </div>
-      <div class="about-areas">
-        <h3>İlgi Alanları</h3>
-        <div class="skill-tags">
-          <span class="skill-tag"><span class="skill-icon">🧠</span> Nörobilim</span>
-          <span class="skill-tag"><span class="skill-icon">🕌</span> İslam Bilimleri</span>
-          <span class="skill-tag"><span class="skill-icon">💻</span> EdTech</span>
-          <span class="skill-tag"><span class="skill-icon">✍️</span> Yazarlık</span>
-          <span class="skill-tag"><span class="skill-icon">🤖</span> Yapay Zeka</span>
-          <span class="skill-tag"><span class="skill-icon">📚</span> Dil Eğitimi</span>
-          <span class="skill-tag"><span class="skill-icon">🎨</span> İnteraktif İçerik</span>
-          <span class="skill-tag"><span class="skill-icon">📐</span> Eğitim Tasarımı</span>
+      <div class="journey-timeline">
+        <div class="journey-step">
+          <div class="journey-step-label">Temel</div>
+          <div class="journey-step-title">Elektronik ve Haberleşme Mühendisliği</div>
+          <div class="journey-step-desc">Yıldız Teknik Üniversitesi — analitik düşünce ve problem çözme altyapısı</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-step-label">Dönüşüm</div>
+          <div class="journey-step-title">İlahiyat Fakültesi</div>
+          <div class="journey-step-desc">Ankara Üniversitesi — İslam bilimleri, ahlak felsefesi ve eğitim</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-step-label">Uygulama</div>
+          <div class="journey-step-title">Eğitimci & Yazar</div>
+          <div class="journey-step-desc">20+ dijital proje, interaktif uygulamalar ve Nöroterbiye kitabı</div>
+        </div>
+        <div class="journey-step">
+          <div class="journey-step-label">Misyon</div>
+          <div class="journey-step-title">Öğrenmek ve Öğretmek</div>
+          <div class="journey-step-desc">Teknolojiyi eğitimin hizmetine sunarak faydalı içerikler üretmek</div>
         </div>
       </div>
     </div>
@@ -871,6 +1003,20 @@
         <p>
           "Bunu neden yaptım?" diye pişmanlık duyduğun anlar ne kadar sık? Belki sabah "artık telefonumu azaltacağım" deyip akşamın nasıl geldiğini bile fark etmiyorsun. Nöroterbiye işte tam da bu döngüye ayna tutuyor.
         </p>
+        <div class="book-highlights">
+          <div class="book-highlight">
+            <div class="book-highlight-num">131</div>
+            <div class="book-highlight-label">Kavram</div>
+          </div>
+          <div class="book-highlight">
+            <div class="book-highlight-num">15</div>
+            <div class="book-highlight-label">Test</div>
+          </div>
+          <div class="book-highlight">
+            <div class="book-highlight-num">12</div>
+            <div class="book-highlight-label">Oyun</div>
+          </div>
+        </div>
         <a href="/noroterbiye/" class="btn btn-warm">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
           Kitabı İncele
@@ -943,24 +1089,37 @@
 <section id="iletisim" class="social-section reveal">
   <div class="wrap">
     <span class="section-label">İletişim</span>
-    <h2 class="section-title">Takip Edin</h2>
-    <div class="social-row">
-      <a href="https://www.youtube.com/@raufenc" target="_blank" rel="noopener" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
-      <a href="https://www.instagram.com/raufenc/" target="_blank" rel="noopener" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        Instagram
-      </a>
-      <a href="https://www.facebook.com/raufenc" target="_blank" rel="noopener" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
-      <a href="https://x.com/raufenc" target="_blank" rel="noopener" class="social-link">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X
-      </a>
+    <h2 class="section-title">Bağlantıda Kalın</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Bir mesaj bırakın</h3>
+        <p>Projelerle ilgili görüşleriniz, önerileriniz veya iş birliği teklifleriniz için yazabilirsiniz.</p>
+        <a href="mailto:raufenc@gmail.com" class="contact-email">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          raufenc@gmail.com
+        </a>
+      </div>
+      <div>
+        <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;">Sosyal Medya</h3>
+        <div class="social-row">
+          <a href="https://www.youtube.com/@raufenc" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+          </a>
+          <a href="https://www.instagram.com/raufenc/" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.facebook.com/raufenc" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://x.com/raufenc" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -968,7 +1127,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">rauf<span>enç</span></div>
-  <p class="footer-tagline">Öğrenmek ve öğretmek için</p>
+  <p class="footer-tagline">"Öğrenmek ve öğretmek için"</p>
   <div class="footer-links">
     <a href="#hakkinda">Hakkında</a>
     <a href="#kitap">Kitap</a>
@@ -983,6 +1142,14 @@
   'use strict';
 
   // ── PROJE VERiSi ──
+  var TAG_BG = {
+    'Uygulama': 'bg-indigo',
+    'Ansiklopedi': 'bg-purple',
+    'Oyun': 'bg-emerald',
+    'Sunum': 'bg-amber',
+    'Rehber': 'bg-purple'
+  };
+
   var PROJELER = [
     { emoji: '🧠', title: 'NöroTerbiye', desc: 'Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.', tag: 'Uygulama', href: '/noroterbiye/', featured: true },
     { emoji: '📚', title: 'MUALLİMO — Resim Kartları', desc: 'Çocuğunuza bir kitap okutun, 2.199 görsel kartla pekiştirsin. 24 kitap, 6 seri — her yaşa göre.', tag: 'Uygulama', href: '/muallimo/', featured: true },
@@ -1015,11 +1182,12 @@
     var grid = document.getElementById('featured-grid');
     var featured = PROJELER.filter(function(p) { return p.featured; });
     featured.forEach(function(p) {
+      var bgClass = TAG_BG[p.tag] || 'bg-indigo';
       var a = document.createElement('a');
       a.className = 'featured-card';
       a.href = p.href;
       a.innerHTML =
-        '<span class="featured-emoji">' + p.emoji + '</span>' +
+        '<div class="featured-emoji-wrap ' + bgClass + '">' + p.emoji + '</div>' +
         '<div class="featured-title">' + p.title + '</div>' +
         '<div class="featured-desc">' + p.desc + '</div>' +
         '<span class="featured-tag ' + tagClass(p.tag) + '">' + p.tag + '</span>' +
@@ -1113,6 +1281,17 @@
     return map[tag] || 'tag-varsayılan';
   }
 
+  function tagBgClass(tag) {
+    var map = {
+      'Uygulama': 'background:rgba(99,102,241,0.1)',
+      'Ansiklopedi': 'background:rgba(168,85,247,0.1)',
+      'Oyun': 'background:rgba(16,185,129,0.1)',
+      'Sunum': 'background:rgba(236,72,153,0.1)',
+      'Rehber': 'background:rgba(139,92,246,0.1)'
+    };
+    return map[tag] || 'background:var(--surface2)';
+  }
+
   function createCard(p, i) {
     var a = document.createElement('a');
     a.className = 'card';
@@ -1120,7 +1299,7 @@
     a.style.animationDelay = (i * 50) + 'ms';
     a.innerHTML =
       '<div class="card-glow"></div>' +
-      '<div class="card-icon">' + p.emoji + '</div>' +
+      '<div class="card-icon-wrap" style="' + tagBgClass(p.tag) + '">' + p.emoji + '</div>' +
       '<div class="card-title">' + p.title + '</div>' +
       '<div class="card-desc">' + p.desc + '</div>' +
       '<div class="card-footer">' +
@@ -1197,7 +1376,6 @@
   // Sayaçları görünür olduğunda başlat
   var statsBar = document.querySelector('.stats-bar');
   if (statsBar) {
-    // Başlangıçta hedef değerleri göster (animasyon öncesi)
     document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
       el.textContent = formatNum(parseInt(el.dataset.target)) + '+';
     });
