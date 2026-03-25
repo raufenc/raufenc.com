@@ -20,7 +20,12 @@
   <div class="controls">
     <div class="controls-inner">
       <div class="controls-row">
-        <input type="text" class="search-box" id="search" placeholder="🔍 Alim, eser veya katki ara..."/>
+        <div class="autocomplete-wrap">
+          <input type="text" class="search-box" id="search" placeholder="🔍 Alim, eser veya katkı ara..." autocomplete="off"/>
+          <div class="autocomplete-dropdown" id="ac-dropdown"></div>
+        </div>
+        <button class="fav-filter-btn" id="fav-filter" onclick="toggleFavFilter()">❤️ Favorilerim</button>
+        <button class="filter-btn" id="compare-toggle" onclick="toggleCompareMode()">⚖️ Karşılaştır</button>
       </div>
       <div class="controls-row" id="filter-alan-row">
         <span class="filter-label">Alan:</span>
@@ -36,6 +41,20 @@
 
   <div class="results-count" id="results-count"></div>
   <div class="cards-grid" id="cards-grid"></div>
+
+  <div class="compare-bar" id="compare-bar" style="display:none">
+    <span id="compare-count">0</span> alim seçildi
+    <button class="btn-primary" style="padding:6px 14px;font-size:11px" onclick="showCompare()">Karşılaştır</button>
+    <button class="btn-secondary" style="padding:6px 10px;font-size:11px" onclick="clearCompare()">Temizle</button>
+  </div>
+
+  <div class="modal-overlay" id="compare-modal" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="modal-box" style="max-width:900px">
+      <button class="modal-close" onclick="document.getElementById('compare-modal').classList.remove('open')">✕</button>
+      <div class="modal-header"><div class="modal-header-bar"></div><h3 style="font-size:18px;font-weight:900;margin-top:8px">⚖️ Karşılaştırma</h3></div>
+      <div class="modal-body" id="compare-body"></div>
+    </div>
+  </div>
 </div>
 
 <script src="data/bilginler.js"></script>

@@ -169,6 +169,26 @@ const Store = {
     if (xp >= 150) return { title: '\u00C2lim Aday\u0131', icon: '\u{1F4D6}' };
     if (xp >= 50) return { title: '\u00D6\u011frenci', icon: '\u270F\uFE0F' };
     return { title: 'Talebe', icon: '\u{1F331}' };
+  },
+
+  // Favorites
+  getFavorites() { return this._get('iby-favorites', []); },
+  toggleFavorite(id) {
+    const favs = this.getFavorites();
+    const idx = favs.indexOf(id);
+    if (idx === -1) { favs.push(id); } else { favs.splice(idx, 1); }
+    this._set('iby-favorites', favs);
+    return idx === -1; // returns true if added, false if removed
+  },
+  isFavorite(id) { return this.getFavorites().includes(id); },
+
+  // Recent viewed (last 10)
+  getRecent() { return this._get('iby-recent', []); },
+  addRecent(id) {
+    let r = this.getRecent().filter(x => x !== id);
+    r.unshift(id);
+    if (r.length > 10) r = r.slice(0, 10);
+    this._set('iby-recent', r);
   }
 };
 
@@ -215,6 +235,50 @@ function showToast(message, type) {
     toast.classList.add('hide');
     setTimeout(() => toast.remove(), 300);
   }, 3000);
+}
+
+// ========== SHARE ==========
+function shareScholar(scholar) {
+  const url = `${window.location.origin}/islam-bilim-yildizlari/alim.html?id=${scholar.id}`;
+  const text = `${scholar.isim} — ${scholar.hook}`;
+
+  if (navigator.share) {
+    navigator.share({ title: scholar.isim, text: text, url: url }).catch(() => {});
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(`${text}\n${url}`).then(() => {
+      showToast('\u{1F4CB} Link kopyaland\u0131!');
+    }).catch(() => {
+      // Final fallback
+      prompt('Linki kopyala:', url);
+    });
+  }
+}
+
+// ========== COUNTER ANIMATION ==========
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const isText = isNaN(target);
+    if (isText) { el.textContent = el.dataset.count; return; }
+    let current = 0;
+    const step = Math.ceil(target / 40);
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(interval); }
+      el.textContent = current;
+    }, 30);
+  });
+}
+
+// ========== FAVORITE TOGGLE UI ==========
+function toggleFavUI(id, btnEl) {
+  const added = Store.toggleFavorite(id);
+  if (btnEl) {
+    btnEl.classList.toggle('active', added);
+    btnEl.textContent = added ? '\u2764\uFE0F' : '\u{1F90D}';
+  }
+  showToast(added ? '\u2764\uFE0F Favorilere eklendi' : '\u{1F494} Favorilerden \u00E7\u0131kar\u0131ld\u0131');
 }
 
 // ========== COLOR UTILITY ==========

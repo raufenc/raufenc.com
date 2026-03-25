@@ -47,6 +47,18 @@
   <h2 style="font-size:18px;font-weight:900;margin-bottom:12px">📊 İlerleme</h2>
   <div class="progress-summary" id="progress-summary"></div>
 
+  <!-- Recent Viewed -->
+  <div id="recent-section" style="display:none;margin-bottom:32px">
+    <h2 style="font-size:18px;font-weight:900;margin-bottom:12px">🕐 Son Görüntülenen</h2>
+    <div class="scholar-strip" id="recent-strip"></div>
+  </div>
+
+  <!-- Favorites -->
+  <div id="favs-section" style="display:none;margin-bottom:32px">
+    <h2 style="font-size:18px;font-weight:900;margin-bottom:12px">❤️ Favorilerin</h2>
+    <div class="scholar-strip" id="favs-strip"></div>
+  </div>
+
   <!-- Explore more links -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px">
     <a href="harita.html" class="dash-card" style="text-decoration:none;color:inherit;padding:20px">
@@ -68,7 +80,7 @@
 <script>
 initPage('ana');
 
-// Hero stats
+// Hero stats with counter animation
 const eserSay = BILGINLER.reduce((s,b) => s + (b.eserler?.length||0), 0);
 const katkiSay = BILGINLER.reduce((s,b) => s + (b.katkilar?.length||0), 0);
 const stats = [
@@ -78,8 +90,9 @@ const stats = [
   { val: '7-19', lbl: 'Yüzyıl' }
 ];
 document.getElementById('hero-stats').innerHTML = stats.map(s =>
-  `<div class="hero-stat"><div class="hero-stat-val">${s.val}</div><div class="hero-stat-lbl">${s.lbl}</div></div>`
+  `<div class="hero-stat"><div class="hero-stat-val" data-count="${s.val}">0</div><div class="hero-stat-lbl">${s.lbl}</div></div>`
 ).join('');
+animateCounters();
 
 // Scholar of the day (date-seeded)
 const today = new Date();
@@ -128,6 +141,34 @@ document.getElementById('progress-summary').innerHTML = `
     <div class="progress-lbl">Quiz Çözüldü</div>
   </div>
 `;
+
+// Recent viewed scholars
+const recent = Store.getRecent();
+if (recent.length > 0) {
+  document.getElementById('recent-section').style.display = '';
+  document.getElementById('recent-strip').innerHTML = recent.slice(0,5).map(id => {
+    const s = BM[id]; if (!s) return '';
+    const r = alanRenk(s.alanBirincil);
+    return `<a href="alim.html?id=${s.id}" class="strip-card">
+      <div class="strip-name" style="color:${r}">${s.isim}</div>
+      <div class="strip-meta">${s.alanBirincil} · ${s.donem}</div>
+    </a>`;
+  }).join('');
+}
+
+// Favorites strip
+const favs = Store.getFavorites();
+if (favs.length > 0) {
+  document.getElementById('favs-section').style.display = '';
+  document.getElementById('favs-strip').innerHTML = favs.map(id => {
+    const s = BM[id]; if (!s) return '';
+    const r = alanRenk(s.alanBirincil);
+    return `<a href="alim.html?id=${s.id}" class="strip-card">
+      <div class="strip-name" style="color:${r}">❤️ ${s.isim}</div>
+      <div class="strip-meta">${s.alanBirincil} · ${s.donem}</div>
+    </a>`;
+  }).join('');
+}
 </script>
 </body>
 </html>
