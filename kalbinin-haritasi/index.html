@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kalbinin Haritası — Ahlak Pusulası</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -953,7 +953,7 @@ function screenResult(){
 
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
         <button class="btn btn-gold" data-action="share"${!S.gemini?' disabled':''}>
-          ✦ Sonucu Paylaş
+          ✦ PDF İndir
         </button>
         <button class="btn btn-subtle" data-action="goStart">Yeni Test Seç</button>
       </div>
@@ -1036,7 +1036,14 @@ async function fetchGemini(scores){
   if(gemBox) gemBox.innerHTML='<div class="leading-relaxed whitespace-pre-wrap" style="color:var(--text-secondary)" id="gemini-stream"><span class="stream-cursor"></span></div>';
   const test=TESTS[S.testKey], p=pct(scores);
   const otherKeys=Object.keys(TESTS).filter(k=>k!==S.testKey).join(', ');
-  const system=`Sen derin bir irfan ve hikmet ehlisin. Yazıların Osmanlı nesrinin letafetini taşır; her cümle mütefekkir, ağırbaşlı ve ruhani bir derinlikle yoğrulmuştur. Şu kelimeleri ve benzerlerini MUTLAKA kullan: kalb, nefis, ruh, cehd, itidal, ihsan, muhabbet, irade, fıtrat, inkisar, azm, tevekkül, rıza, gaflet, saadet, hüzün, müteşekkir, mütevazı, ledün, irfan, feyz, bâtın, zâhir, himmet, halvet, istikamet, mertebe, makam, kemal, zillet, izzet, nükte, letafet, hamiyet, hakikat, keşf, tecelli. Cümleler lirik, derin ve akıcı olsun. Klişe ve yüzeysel ifadelerden kaçın.`;
+  const system=`Sen derin bir irfan ve hikmet ehlisin. Yazıların Osmanlı nesrinin letafetini taşır; her cümle mütefekkir, ağırbaşlı ve ruhani bir derinlikle yoğrulmuştur. Şu kelimeleri ve benzerlerini MUTLAKA kullan: kalb, nefis, ruh, cehd, itidal, ihsan, muhabbet, irade, fıtrat, inkisar, azm, tevekkül, rıza, gaflet, saadet, hüzün, müteşekkir, mütevazı, ledün, irfan, feyz, bâtın, zâhir, himmet, halvet, istikamet, mertebe, makam, kemal, zillet, izzet, nükte, letafet, hamiyet, hakikat, keşf, tecelli. Cümleler lirik, derin ve akıcı olsun. Klişe ve yüzeysel ifadelerden kaçın.
+
+ÇOK ÖNEMLİ İSLAMİ HASSASİYET KURALLARI:
+- Müslümanlara yazıyorsun. "Yaratmak", "yaratıcılık", "yaratıcı güç" gibi kelimeleri ASLA kullanma. Yaratmak yalnızca Allahu Teala'ya mahsustur.
+- Bunların yerine "halk etmek", "var etmek", "ikram etmek", "ihsan etmek", "nasip etmek", "lütfetmek" kullan.
+- "Tanrı" deme, "Allahu Teala", "Cenab-ı Hak", "Rabbimiz", "Mevla" de.
+- "Evren", "doğa", "kader" gibi kelimeleri İslami çerçevede kullan: "Allahu Teala'nın takdiri", "Cenab-ı Hakk'ın hikmeti" gibi.
+- Ayet ve hadis numarası verme, sadece genel manevi mesajlar ver.`;
   const prompt=`Kullanıcı "${test.title}" testini tamamladı.\nKavramlar: Tefrit (eksik uç)=${test.concepts.tefrit}, Fazilet (denge)=${test.concepts.fazilet}, İfrat (aşırı uç)=${test.concepts.ifrat}.\nSonuçlar: %${p.tefrit} ${test.concepts.tefrit}, %${p.fazilet} ${test.concepts.fazilet}, %${p.ifrat} ${test.concepts.ifrat}.\n\nŞu başlıkları sırayla kullanarak yaz (başlıkları **başlık** formatında yaz):\n**Selamlama** (2-3 cümle samimi karşılama)\n**Sonuçların Bir Aynası** (en az 6 cümle derin tahlil, sayısal sonuçları yorumla)\n**Tefekkür Köşesi** (en az 5 cümle hikmet geleneği)\n**İlahi Rehberlik** (en az 5 cümle manevi yönlendirme)\n**Pratik Adımlar** (en az 5 cümle somut öneriler)\n\nEn son satıra yalnızca şunu yaz: SONRAKI_TEST:key|gerekce (key şu listeden biri olmalı: ${otherKeys})`;
   try{
     const res=await fetch('/api/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system,prompt})});
@@ -1162,52 +1169,112 @@ function calcAndShow(){
 }
 
 async function shareImg(){
-  const card=document.getElementById('result-card'); if(!card) return;
-  try{
-    // html2canvas uyumu: animasyonları ve sorunlu elementleri durdur
-    const pulseEls=card.querySelectorAll('.led-pulse');
-    pulseEls.forEach(el=>el.style.animation='none');
-    const cursorEls=card.querySelectorAll('.stream-cursor');
-    cursorEls.forEach(el=>el.style.display='none');
-    const segEls=card.querySelectorAll('.led-segments');
-    segEls.forEach(el=>el.style.display='none');
-    const glowEls=card.querySelectorAll('.led-bar-glow');
-    glowEls.forEach(el=>el.style.display='none');
+  if(!S.gemini||S.gemini.streaming) return;
+  const test=TESTS[S.testKey], p=pct(S.scores);
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const W=210, mg=20, cw=W-2*mg;
 
-    const canvas=await html2canvas(card,{
-      scale:2,
-      backgroundColor:'#0a0f1e',
-      useCORS:true,
-      logging:false,
-      allowTaint:true,
-      removeContainer:true
-    });
+  // Arka plan
+  doc.setFillColor(10,15,30);
+  doc.rect(0,0,W,297,'F');
 
-    // Geri aç
-    pulseEls.forEach(el=>el.style.animation='');
-    cursorEls.forEach(el=>el.style.display='');
-    segEls.forEach(el=>el.style.display='');
-    glowEls.forEach(el=>el.style.display='');
+  // Üst dekoratif çizgi
+  doc.setDrawColor(212,175,55);
+  doc.setLineWidth(0.8);
+  doc.line(mg,15,W-mg,15);
 
-    const blob=await new Promise(r=>canvas.toBlob(r,'image/png',1.0));
-    const fname=`${TESTS[S.testKey]?.concepts.fazilet||'sonuc'}-karti.png`;
+  // Başlık
+  doc.setTextColor(212,175,55);
+  doc.setFontSize(10);
+  doc.text('AHLAK PUSULASI SONUÇ KARTI',W/2,24,{align:'center'});
 
-    if(navigator.canShare&&navigator.canShare({files:[new File([blob],fname,{type:'image/png'})]})){
-      await navigator.share({
-        title:'Ahlak Pusulası Sonucum',
-        files:[new File([blob],fname,{type:'image/png'})]
-      });
-    } else {
-      const a=document.createElement('a');
-      a.href=URL.createObjectURL(blob);
-      a.download=fname;
-      a.click();
-      URL.revokeObjectURL(a.href);
+  doc.setFontSize(22);
+  doc.setTextColor(212,175,55);
+  doc.text(test.concepts.fazilet,W/2,35,{align:'center'});
+
+  doc.setFontSize(9);
+  doc.setTextColor(160,160,170);
+  doc.text(test.title,W/2,42,{align:'center'});
+
+  // Çizgi
+  doc.setDrawColor(212,175,55);
+  doc.setLineWidth(0.3);
+  doc.line(mg,47,W-mg,47);
+
+  // Üç bar - yatay
+  let by=55;
+  const bars=[
+    {label:test.concepts.tefrit,val:p.tefrit,r:251,g:191,b:36},
+    {label:test.concepts.fazilet,val:p.fazilet,r:52,g:211,b:153},
+    {label:test.concepts.ifrat,val:p.ifrat,r:248,g:113,b:113}
+  ];
+
+  bars.forEach(b=>{
+    // Label
+    doc.setFontSize(9);
+    doc.setTextColor(b.r,b.g,b.b);
+    doc.text(b.label,mg,by);
+
+    // Yüzde
+    doc.setFontSize(16);
+    doc.setTextColor(255,255,255);
+    doc.text('%'+b.val,W-mg,by,{align:'right'});
+
+    // Bar arka plan
+    doc.setFillColor(30,35,50);
+    doc.roundedRect(mg,by+2,cw,6,3,3,'F');
+
+    // Bar dolgu
+    const fillW=Math.max((b.val/100)*cw,2);
+    doc.setFillColor(b.r,b.g,b.b);
+    doc.roundedRect(mg,by+2,fillW,6,3,3,'F');
+
+    by+=20;
+  });
+
+  // Çizgi
+  doc.setDrawColor(212,175,55);
+  doc.setLineWidth(0.3);
+  doc.line(mg,by,W-mg,by);
+  by+=8;
+
+  // AI Değerlendirme
+  doc.setFontSize(12);
+  doc.setTextColor(212,175,55);
+  doc.text('Size Özel Değerlendirmeniz',W/2,by,{align:'center'});
+  by+=8;
+
+  // Metin
+  const rawText=(S.gemini.text||'').replace(/\*\*/g,'').replace(/SONRAKI_TEST:.*/,'').trim();
+  doc.setFontSize(9);
+  doc.setTextColor(200,200,210);
+  const lines=doc.splitTextToSize(rawText,cw);
+
+  for(let i=0;i<lines.length;i++){
+    if(by>275){
+      // Yeni sayfa
+      doc.addPage();
+      doc.setFillColor(10,15,30);
+      doc.rect(0,0,W,297,'F');
+      by=20;
     }
-  }catch(e){
-    console.error('Share error:',e);
-    alert('Resim oluşturulamadı: '+e.message);
+    doc.text(lines[i],mg,by);
+    by+=4.5;
   }
+
+  // Alt çizgi
+  doc.setDrawColor(212,175,55);
+  doc.setLineWidth(0.3);
+  const lastY=Math.min(by+5,290);
+  doc.line(mg,lastY,W-mg,lastY);
+
+  doc.setFontSize(7);
+  doc.setTextColor(120,120,130);
+  doc.text('raufenc.com/kalbinin-haritasi',W/2,lastY+5,{align:'center'});
+
+  // İndir
+  doc.save(`${test.concepts.fazilet}-Sonuc-Karti.pdf`);
 }
 
 render();
