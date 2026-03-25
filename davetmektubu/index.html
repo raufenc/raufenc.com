@@ -67,8 +67,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .btn-pri{border:none;border-radius:50px;padding:14px 40px;color:#fff;font-size:15px;font-weight:600;transition:all .3s var(--e)}
 .btn-pri:hover{transform:translateY(-3px)}
 .btn-pri:active{transform:scale(.97)}
-.btn-tema{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .25s var(--e)}
-.btn-tema:hover{transform:scale(1.15) rotate(15deg)}
+.btn-tema{height:34px;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:500;padding:0 14px;transition:all .3s var(--e);border:1px solid}
+.btn-tema:hover{transform:scale(1.05)}
 
 /* ── Glow Border Animation ── */
 @keyframes borderGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
@@ -340,9 +340,11 @@ function applyTheme(){
   document.getElementById("dots").style.display=dk?"block":"none";
   const nav=document.getElementById("nav");
   nav.style.background=c.nav;nav.style.borderColor=c.cerç;
-  const icons={siyah:"☀",sepya:"◐",beyaz:"☽"};
-  document.getElementById("tBtn").textContent=icons[readMode]||"☀";
-  document.getElementById("tBtn").style.color=c.soluk;
+  const tBtn=document.getElementById("tBtn");
+  const modes={siyah:{icon:"☀",label:"Açık",bg:c.yuz,border:c.cerç,color:c.soluk},sepya:{icon:"◐",label:"Sepya",bg:"rgba(160,120,48,.1)",border:"rgba(160,120,48,.25)",color:"#A07830"},beyaz:{icon:"☽",label:"Koyu",bg:c.yuz,border:c.cerç,color:c.soluk}};
+  const m=modes[readMode]||modes.siyah;
+  tBtn.innerHTML=m.icon+'<span style="font-size:11px">'+m.label+'</span>';
+  tBtn.style.background=m.bg;tBtn.style.borderColor=m.border;tBtn.style.color=m.color;
   document.getElementById("nlTxt").style.color=c.met;
   updateNavBtns();
 }
