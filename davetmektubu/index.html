@@ -154,6 +154,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .weekly-banner{border-radius:14px;padding:18px;margin-bottom:16px;border:1px solid;cursor:pointer;transition:all .25s var(--e);position:relative;overflow:hidden}
 .weekly-banner:hover{transform:translateY(-2px)}
 
+/* ── Reading Modes ── */
+.read-mode-bar{display:flex;gap:6px;align-items:center}
+.read-mode-btn{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .2s var(--e);position:relative}
+.read-mode-btn:hover{transform:scale(1.15)}
+.read-mode-btn.active{border-color:var(--accent,#C8963E);box-shadow:0 0 8px rgba(200,150,62,.3)}
+.read-mode-btn[data-mode="beyaz"]{background:#F8F6F2}
+.read-mode-btn[data-mode="sepya"]{background:#E8D5B5}
+.read-mode-btn[data-mode="siyah"]{background:#1A1510}
+/* Reading mode overrides on .pg wrapper */
+.pg.rm-beyaz{background:#F8F6F2;border-radius:0;margin:-32px -20px -72px;padding:32px 20px 72px}
+.pg.rm-beyaz .m-h2,.pg.rm-beyaz .m-giris,.pg.rm-beyaz .m-p,.pg.rm-beyaz .m-alinti,.pg.rm-beyaz .m-gecis,.pg.rm-beyaz .m-kapatis,.pg.rm-beyaz h1,.pg.rm-beyaz h3{color:#1A1510!important}
+.pg.rm-beyaz .m-p,.pg.rm-beyaz .m-gecis{color:#3A3530!important}
+.pg.rm-beyaz .m-giris{color:#5A5550!important;border-color:#D0C8B8!important}
+.pg.rm-beyaz .m-alinti{border-color:#C8963E!important;background:rgba(200,150,62,.06)!important;color:#2A2520!important}
+.pg.rm-beyaz .m-gecis{border-color:#D0C8B8!important;background:rgba(200,150,62,.05)!important}
+.pg.rm-beyaz .m-kapatis{color:#2A2520!important;border-color:#D0C8B8!important}
+.pg.rm-beyaz .m-header{background:rgba(200,150,62,.06)!important;border-color:#D0C8B8!important}
+.pg.rm-beyaz .baglar{border-color:#D0C8B8!important}
+
+.pg.rm-sepya{background:#F0E4CC;border-radius:0;margin:-32px -20px -72px;padding:32px 20px 72px}
+.pg.rm-sepya .m-h2,.pg.rm-sepya .m-giris,.pg.rm-sepya .m-p,.pg.rm-sepya .m-alinti,.pg.rm-sepya .m-gecis,.pg.rm-sepya .m-kapatis,.pg.rm-sepya h1,.pg.rm-sepya h3{color:#2C1E0E!important}
+.pg.rm-sepya .m-p,.pg.rm-sepya .m-gecis{color:#4A3828!important}
+.pg.rm-sepya .m-giris{color:#6A5A48!important;border-color:#C8B898!important}
+.pg.rm-sepya .m-alinti{border-color:#A07830!important;background:rgba(160,120,48,.08)!important;color:#3A2A18!important}
+.pg.rm-sepya .m-gecis{border-color:#C8B898!important;background:rgba(160,120,48,.06)!important}
+.pg.rm-sepya .m-kapatis{color:#3A2A18!important;border-color:#C8B898!important}
+.pg.rm-sepya .m-header{background:rgba(160,120,48,.08)!important;border-color:#C8B898!important}
+.pg.rm-sepya .baglar{border-color:#C8B898!important}
+
+/* siyah = default dark mode, no override needed */
+
 /* ── Tiny (≤380px) ── */
 @media(max-width:380px){
   .steps{grid-template-columns:1fr}
@@ -178,6 +209,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
   .steps{gap:16px}
   .step{padding:24px 20px;border-radius:18px}
   /* Mektup okuma */
+  .pg.rm-beyaz,.pg.rm-sepya{margin:-48px -32px -100px;padding:48px 32px 100px;border-radius:0}
   .m-badge{font-size:12px;letter-spacing:.3em}
   .m-header{border-radius:22px;padding:32px;margin-bottom:40px}
   .m-giris{font-size:20px;line-height:1.95;margin-bottom:40px;padding-bottom:36px}
@@ -209,6 +241,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
   .tab{padding:14px 32px;font-size:17px}
   .kat-chip{padding:10px 22px;font-size:15px}
   .soru-kart{border-radius:28px;padding:48px 40px;min-height:280px}
+  .pg.rm-beyaz,.pg.rm-sepya{margin:-64px 0 -120px;padding:64px 0 120px}
   /* Mektup okuma */
   .m-header{border-radius:24px;padding:40px;margin-bottom:52px}
   .m-giris{font-size:22px;line-height:2;margin-bottom:48px;padding-bottom:40px}
@@ -308,6 +341,8 @@ function updateNavBtns(){
 // STATE & ROUTING
 // ═══════════════════════════════════════════════════════
 let state={screen:"ana",poz:null,mektupId:null,kat:null,soruI:0,soruDir:1};
+let readMode=localStorage.getItem("dm_readMode")||"siyah";
+function setReadMode(m){readMode=m;localStorage.setItem("dm_readMode",m);render();}
 let touchX=null;
 
 function navigate(s,fn){
@@ -2135,15 +2170,23 @@ function renderMektup(){
     <div style="font-size:11px;color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:18px;margin-bottom:10px">Aynı meslek, farklı bakış açısı</div>
     <div class="bag-grid">${ayniMeslek.map(bagKartHTML).join("")}</div>
   `;
-  return`<div class="pg">
-  <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${c.soluk}">← Mektuplara Dön</button>
+  const rmClass=readMode!=='siyah'?' rm-'+readMode:'';
+  return`<div class="pg${rmClass}">
+  <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${rmClass?'#5A5045':c.soluk}">← Mektuplara Dön</button>
   ${!m.tam?`<div class="m-skeleton-info" style="background:${r.bg};border-color:${r.ana}30;color:${c.soluk}">✏️ Bu mektup taslak aşamasında. Bağlantı yapısı ve temel argümanlar hazır, içerik yakında genişleyecek.</div>`:""}
   <div class="m-header glow-card${m.poz==='deist'?' glow-deist':m.poz==='agnostik'?' glow-agnostik':''}" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18">
     <div class="m-badge" style="color:${r.parlak}">${m.poz.toUpperCase()} · ${m.meslek.toUpperCase()}</div>
     <h1 style="font-family:'Crimson Pro',serif;font-size:24px;font-weight:400;color:${c.met};line-height:1.2">${baslik}</h1>
     <div style="font-size:13px;color:${c.soluk};margin-top:10px;font-weight:300;line-height:1.6">${m.ozet}</div>
-    <div style="display:flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:${r.parlak};opacity:.6;font-weight:500">
-      <span style="font-size:13px">◔</span> ~${okumaDk} dk · ${kelimeSayisi} kelime
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
+      <div style="font-size:12px;color:${r.parlak};opacity:.6;font-weight:500;display:flex;align-items:center;gap:6px">
+        <span style="font-size:13px">◔</span> ~${okumaDk} dk · ${kelimeSayisi} kelime
+      </div>
+      <div class="read-mode-bar">
+        <button class="read-mode-btn${readMode==='beyaz'?' active':''}" data-mode="beyaz" onclick="setReadMode('beyaz')" title="Açık"></button>
+        <button class="read-mode-btn${readMode==='sepya'?' active':''}" data-mode="sepya" onclick="setReadMode('sepya')" title="Sepya"></button>
+        <button class="read-mode-btn${readMode==='siyah'?' active':''}" data-mode="siyah" onclick="setReadMode('siyah')" title="Koyu"></button>
+      </div>
     </div>
   </div>
   ${icerikHTML}
