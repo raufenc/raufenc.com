@@ -1,364 +1,99 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<script src="/lib/design-system/theme.js"></script>
+  <link rel="stylesheet" href="/lib/design-system/tokens.css" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kalbinin Haritası — Ahlak Pusulası</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* ── Project-specific variables (dark default) ── */
     :root {
-      --gold: #d4af37;
-      --gold-light: #f0d878;
-      --gold-dark: #b8960c;
-      --emerald: #059669;
-      --emerald-light: #34d399;
-      --teal: #0d9488;
-      --bg-deep: #0a0f1e;
-      --bg-card: rgba(15, 23, 42, 0.75);
-      --bg-card-hover: rgba(20, 30, 55, 0.85);
-      --border-gold: rgba(212, 175, 55, 0.25);
-      --border-gold-hover: rgba(212, 175, 55, 0.5);
-      --text-primary: #f1e8d0;
-      --text-secondary: #9ca3af;
-      --text-muted: #6b7280;
-      --glow-gold: 0 0 30px rgba(212, 175, 55, 0.15);
-      --glow-gold-hover: 0 0 40px rgba(212, 175, 55, 0.25), 0 0 80px rgba(212, 175, 55, 0.1);
-      --glow-emerald: 0 0 30px rgba(5, 150, 105, 0.2);
+      --accent-green: #059669;
+      --accent-green-hover: #10b981;
+      --accent-green-light: #6ee7b7;
+      --card-bg: rgba(31,41,55,0.85);
+      --card-border: rgba(75,85,99,0.6);
+      --card-hover-shadow: rgba(6,78,59,0.4);
+      --option-border: #4b5563;
+      --option-hover-bg: rgba(55,65,81,0.5);
+      --option-selected-bg: rgba(16,185,129,0.2);
+      --progress-bg: rgba(55,65,81,0.5);
+      --btn-disabled-bg: #4b5563;
+      --btn-gray-bg: #374151;
+      --btn-gray-hover: #4b5563;
+      --body-bg: #111827;
+      --body-gradient-1: rgba(6,78,59,0.5);
+      --body-gradient-2: rgba(16,185,129,0.4);
+      --body-color: #f9fafb;
+      --gemini-panel-bg: rgba(17,24,39,0.5);
+      --hr-color: #374151;
+    }
+    html.light {
+      --card-bg: rgba(255,255,255,0.85);
+      --card-border: rgba(200,200,215,0.6);
+      --card-hover-shadow: rgba(6,78,59,0.15);
+      --option-border: #c8c8d4;
+      --option-hover-bg: rgba(220,230,225,0.5);
+      --option-selected-bg: rgba(16,185,129,0.12);
+      --progress-bg: rgba(200,200,215,0.4);
+      --btn-disabled-bg: #b0b0c0;
+      --btn-gray-bg: #d4d4dc;
+      --btn-gray-hover: #c0c0cc;
+      --body-bg: #f5f5fa;
+      --body-gradient-1: rgba(6,78,59,0.12);
+      --body-gradient-2: rgba(16,185,129,0.1);
+      --body-color: #1a1a2e;
+      --gemini-panel-bg: rgba(240,240,245,0.7);
+      --hr-color: #dddde5;
     }
 
-    * { box-sizing: border-box; }
+    body { font-family: "Inter", sans-serif; background-color: var(--body-bg);
+      background-image: radial-gradient(circle at 1% 1%, var(--body-gradient-1) 0%, transparent 40%),
+        radial-gradient(circle at 99% 99%, var(--body-gradient-2) 0%, transparent 35%);
+      min-height: 100vh; color: var(--body-color); }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .fade-in { animation: fadeIn 0.4s ease both; }
+    .card { background:var(--card-bg); backdrop-filter:blur(8px); border:1px solid var(--card-border); border-radius:0.75rem; padding:1.5rem; transition:all 0.3s ease; }
+    .card.clickable:hover { transform:translateY(-4px); box-shadow:0 20px 40px var(--card-hover-shadow); cursor:pointer; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; background:var(--accent-green); color:white; font-weight:700; padding:0.75rem 2rem; border-radius:0.5rem; border:none; cursor:pointer; transition:all 0.2s ease; font-size:1rem; font-family:inherit; }
+    .btn:hover { background:var(--accent-green-hover); transform:scale(1.05); }
+    .btn:active { transform:scale(0.97); }
+    .btn:disabled { background:var(--btn-disabled-bg); cursor:not-allowed; transform:none; }
+    .btn-gray { background:var(--btn-gray-bg); } .btn-gray:hover { background:var(--btn-gray-hover); transform:scale(1.02); }
+    .btn-indigo { background:#4f46e5; } .btn-indigo:hover { background:#6366f1; }
+    .btn-blue { background:#2563eb; } .btn-blue:hover { background:#3b82f6; }
+    .option-label { display:block; padding:1rem; border-radius:0.5rem; cursor:pointer; border:2px solid var(--option-border); transition:all 0.2s; margin-bottom:0.75rem; }
+    .option-label:hover { border-color:var(--accent-green-hover); background:var(--option-hover-bg); }
+    .option-label.selected { background:var(--option-selected-bg); border-color:var(--accent-green-hover); box-shadow:0 0 0 2px var(--accent-green-light); transform:scale(1.02); }
+    .progress-wrap { background:var(--progress-bg); border-radius:9999px; height:8px; overflow:hidden; margin-bottom:1.5rem; }
+    .progress-fill { height:100%; background:var(--accent-green-hover); border-radius:9999px; transition:width 0.5s ease; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .spinner { width:3rem; height:3rem; border:3px solid transparent; border-bottom-color:var(--accent-green-hover); border-radius:50%; animation:spin 0.8s linear infinite; }
 
-    body {
-      font-family: "Inter", sans-serif;
-      background-color: var(--bg-deep);
-      background-image:
-        radial-gradient(ellipse at 10% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 90% 90%, rgba(5, 150, 105, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 50%, rgba(13, 148, 136, 0.04) 0%, transparent 60%);
-      min-height: 100vh;
-      color: var(--text-primary);
-      overflow-x: hidden;
-    }
-
-    /* Islamic geometric pattern overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-image:
-        repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg 30deg, rgba(212,175,55,0.015) 30deg 60deg);
-      background-size: 120px 120px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    #app { position: relative; z-index: 1; }
-
-    /* Typography */
-    .font-display { font-family: "Playfair Display", serif; }
-    .font-arabic { font-family: "Amiri", serif; }
-
-    /* Animations */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes pulse-gold {
-      0%, 100% { box-shadow: 0 0 20px rgba(212,175,55,0.1); }
-      50% { box-shadow: 0 0 40px rgba(212,175,55,0.25); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    @keyframes countUp {
-      from { opacity: 0; transform: scale(0.5); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    @keyframes borderGlow {
-      0%, 100% { border-color: rgba(212,175,55,0.2); }
-      50% { border-color: rgba(212,175,55,0.5); }
-    }
-    @keyframes starTwinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    .fade-in { animation: fadeInUp 0.5s ease both; }
-    .fade-in-delay-1 { animation: fadeInUp 0.5s ease 0.1s both; }
-    .fade-in-delay-2 { animation: fadeInUp 0.5s ease 0.2s both; }
-    .fade-in-delay-3 { animation: fadeInUp 0.5s ease 0.3s both; }
-
-    /* Premium Card */
-    .card {
-      background: var(--bg-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--border-gold);
-      border-radius: 1rem;
-      padding: 1.75rem;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0.4;
-    }
-    .card.clickable:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-gold-hover);
-      box-shadow: var(--glow-gold-hover);
-      background: var(--bg-card-hover);
-    }
-    .card.clickable { cursor: pointer; }
-
-    /* Decorative corner */
-    .card-decorated::after {
-      content: '✦';
-      position: absolute;
-      top: 8px; right: 12px;
-      color: var(--gold);
-      opacity: 0.3;
-      font-size: 0.75rem;
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      padding: 0.875rem 2.5rem;
-      border-radius: 0.75rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 1rem;
-      font-family: "Inter", sans-serif;
-      letter-spacing: 0.025em;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-      color: #0a0f1e;
-      box-shadow: 0 4px 20px rgba(212,175,55,0.3);
-    }
-    .btn-gold:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 30px rgba(212,175,55,0.4);
-    }
-    .btn-gold:active { transform: scale(0.97); }
-
-    .btn-emerald {
-      background: linear-gradient(135deg, #047857, var(--emerald), var(--emerald-light));
-      color: white;
-      box-shadow: 0 4px 20px rgba(5,150,105,0.3);
-    }
-    .btn-emerald:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 30px rgba(5,150,105,0.4);
-    }
-    .btn-emerald:active { transform: scale(0.97); }
-
-    .btn-ghost {
-      background: rgba(212,175,55,0.08);
-      color: var(--gold-light);
-      border: 1px solid var(--border-gold);
-    }
-    .btn-ghost:hover {
-      background: rgba(212,175,55,0.15);
-      border-color: var(--border-gold-hover);
-      transform: scale(1.03);
-    }
-
-    .btn-subtle {
-      background: rgba(255,255,255,0.05);
-      color: var(--text-secondary);
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .btn-subtle:hover {
-      background: rgba(255,255,255,0.1);
-      color: var(--text-primary);
-    }
-
-    .btn:disabled {
-      background: rgba(75,85,99,0.3);
-      color: rgba(255,255,255,0.3);
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    /* Options */
-    .option-label {
-      display: block;
-      padding: 1.125rem 1.25rem;
-      border-radius: 0.75rem;
-      cursor: pointer;
-      border: 1.5px solid rgba(212,175,55,0.12);
-      transition: all 0.3s ease;
-      margin-bottom: 0.75rem;
-      background: rgba(15,23,42,0.4);
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-    .option-label:hover {
-      border-color: var(--border-gold-hover);
-      background: rgba(212,175,55,0.06);
-      transform: translateX(4px);
-    }
-    .option-label.selected {
-      background: rgba(212,175,55,0.1);
-      border-color: var(--gold);
-      box-shadow: 0 0 20px rgba(212,175,55,0.1), inset 0 0 20px rgba(212,175,55,0.03);
-      transform: translateX(6px);
-    }
-
-    /* Progress Bar */
-    .progress-wrap {
-      background: rgba(212,175,55,0.08);
-      border-radius: 9999px;
-      height: 6px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(212,175,55,0.1);
-    }
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
-      border-radius: 9999px;
-      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-    .progress-fill::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      background-size: 200% 100%;
-      animation: shimmer 2s linear infinite;
-    }
-
-    /* Spinner */
-    .spinner {
-      width: 3rem; height: 3rem;
-      border: 3px solid rgba(212,175,55,0.15);
-      border-bottom-color: var(--gold);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    /* Decorative divider */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .divider::before, .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
-    }
-    .divider-icon {
-      color: var(--gold);
-      opacity: 0.5;
-      font-size: 0.75rem;
-    }
-
-    /* Completed badge */
-    .badge-completed {
-      position: absolute;
-      top: 12px; right: 12px;
-      width: 24px; height: 24px;
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: #0a0f1e;
-      box-shadow: 0 2px 8px rgba(212,175,55,0.3);
-    }
-
-    /* Result colors */
-    .text-tefrit { color: #fbbf24; }
-    .text-fazilet { color: var(--emerald-light); }
-    .text-ifrat { color: #f87171; }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(212,175,55,0.4); }
-
-    /* Welcome decorative stars */
-    .star {
-      position: absolute;
-      color: var(--gold);
-      opacity: 0.3;
-      animation: starTwinkle 3s ease-in-out infinite;
-    }
-
-    /* Radar chart canvas */
-    #radarChart { max-width: 280px; margin: 0 auto; }
-
-    /* Stream cursor */
-    .stream-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      background: var(--gold);
-      animation: pulse-gold 1s ease-in-out infinite;
-      vertical-align: text-bottom;
-      margin-left: 2px;
-    }
-
-    /* Question number badge */
-    .q-number {
-      width: 40px; height: 40px;
-      background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
-      border: 1px solid var(--border-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      color: var(--gold);
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-
-    /* Responsive */
-    @media (max-width: 640px) {
-      .card { padding: 1.25rem; }
-      .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
-    }
+    /* ── Tailwind overrides for light theme ── */
+    html.light .text-gray-100 { color: #1a1a2e !important; }
+    html.light .text-gray-200 { color: #2a2a40 !important; }
+    html.light .text-gray-300 { color: #333350 !important; }
+    html.light .text-gray-400 { color: #555570 !important; }
+    html.light .text-gray-500 { color: #666680 !important; }
+    html.light .text-white { color: #1a1a2e !important; }
+    html.light .bg-gray-900\/50,
+    html.light .bg-gray-900\/70 { background-color: var(--gemini-panel-bg) !important; }
+    html.light .border-gray-700 { border-color: var(--hr-color) !important; }
+    html.light hr.border-gray-700 { border-color: var(--hr-color) !important; }
+    html.light .btn-gray { color: #333350; }
   </style>
+  <script src="/nav.js"></script>
 </head>
 <body>
-  <main id="app" class="container mx-auto max-w-4xl p-4 sm:p-6 py-8"></main>
+  <main id="app" class="container mx-auto max-w-3xl p-4 sm:p-6 py-10"></main>
 <script>
+
 
 const TESTS = {
     kibir: {
@@ -654,23 +389,23 @@ const TESTS = {
 
 
 const ICONS = {
-  kibir: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="20" stroke-opacity="0.3"/><path d="M12 32c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke-linecap="round"/><circle cx="24" cy="16" r="4"/></svg>`,
-  cesaret: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4l5.5 11.5L42 17.5l-9 9 2 12.5L24 33l-11 6 2-12.5-9-9 12.5-2z" stroke-linejoin="round"/></svg>`,
-  comertlik: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 42s-16-9.5-16-20c0-6 4.5-10 9-10 3 0 5.5 1.5 7 4 1.5-2.5 4-4 7-4 4.5 0 9 4 9 10 0 10.5-16 20-16 20z"/></svg>`,
-  zan: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M24 14v12M20 22h8" stroke-linecap="round"/><circle cx="24" cy="34" r="1.5" fill="currentColor"/></svg>`,
-  hirs: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 36l8-12 6 8 8-16 10 20" stroke-linecap="round" stroke-linejoin="round"/><path d="M38 16v8h-8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  vesvese: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 6l18 32H6z" stroke-linejoin="round"/><path d="M24 20v8" stroke-linecap="round"/><circle cx="24" cy="34" r="1.5" fill="currentColor"/></svg>`,
-  adalet: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 6v36M16 42h16M10 18l14-6 14 6" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 18c0 4 3 7 7 7s7-3 7-7M24 18c0 4 3 7 7 7s7-3 7-7" stroke-linecap="round"/></svg>`,
-  hikmet: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="18" r="12"/><path d="M18 30v6a6 6 0 0012 0v-6" stroke-linecap="round"/><path d="M20 38h8" stroke-linecap="round"/><path d="M24 6v-2M36 10l1.5-1.5M40 22h2M12 10l-1.5-1.5M6 22H4" stroke-linecap="round" opacity="0.5"/></svg>`,
-  iffet: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4C16 4 10 12 10 20v8c0 8 6 16 14 16s14-8 14-16v-8c0-8-6-16-14-16z"/><path d="M18 22a6 6 0 0012 0" stroke-linecap="round"/></svg>`,
-  ihlas: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 42s-15-8-15-20c0-7 5-12 10-12 3.5 0 5 2 5 2s1.5-2 5-2c5 0 10 5 10 12 0 12-15 20-15 20z"/><path d="M24 18v12M18 24h12" stroke-linecap="round" opacity="0.5"/></svg>`,
-  hased: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M16 20c0-2.2 1.8-4 4-4s4 1.8 4 4M24 20c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke-linecap="round"/><path d="M16 30c2 3 5 5 8 5s6-2 8-5" stroke-linecap="round"/></svg>`,
-  sabir: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M24 14v12l8 4" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  hilm: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M16 28c2 3 5 5 8 5s6-2 8-5" stroke-linecap="round"/><circle cx="18" cy="20" r="1.5" fill="currentColor"/><circle cx="30" cy="20" r="1.5" fill="currentColor"/></svg>`,
-  kanaat: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="14" width="32" height="24" rx="3"/><path d="M8 22h32M20 14V8M28 14V8" stroke-linecap="round"/><path d="M18 30h12" stroke-linecap="round" opacity="0.5"/></svg>`,
-  sukur: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M24 4v8M38 10l-6 6M44 24h-8M38 38l-6-6M24 44v-8M10 38l6-6M4 24h8M10 10l6 6" stroke-linecap="round"/><circle cx="24" cy="24" r="6"/></svg>`,
-  tevekkul: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 36c-4-2-8-8-8-14a18 18 0 0136 0c0 6-4 12-8 14" stroke-linecap="round"/><path d="M20 28l4-4 4 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 24v14" stroke-linecap="round"/></svg>`,
-  haya: `<svg viewBox="0 0 48 48" class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M18 22c0-1.1.9-2 2-2s2 .9 2 2M26 22c0-1.1.9-2 2-2s2 .9 2 2" stroke-linecap="round"/><path d="M20 32h8" stroke-linecap="round"/><path d="M16 28c0 0 2 1 4 1M28 29c2 0 4-1 4-1" stroke-linecap="round" opacity="0.4"/></svg>`,
+  kibir:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>`,
+  cesaret:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h3.75"/></svg>`,
+  comertlik:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`,
+  zan:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639l4.433-4.433a.93.93 0 011.316 0l4.433 4.433c.39.39.39 1.026 0 1.416l-4.433 4.433a.93.93 0 01-1.316 0l-4.433-4.433z"/></svg>`,
+  hirs:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-3.976 5.197m-4.26-4.26l-6.174 6.175"/></svg>`,
+  vesvese:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>`,
+  adalet:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.153.24c-1.355 0-2.693-.44-3.797-1.242L7.334 4.97"/></svg>`,
+  hikmet:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v5.592A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-5.998V14"/></svg>`,
+  iffet:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4M5 9h14l1 12H4L5 9z"/></svg>`,
+  ihlas:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>`,
+  hased:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 21.75h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H3.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/></svg>`,
+  sabir:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
+  hilm:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9 9.75h.008v.008H9V9.75zm6 0h.008v.008H15V9.75z"/></svg>`,
+  kanaat:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a2.25 2.25 0 01-2.25 2.25H5.25a2.25 2.25 0 01-2.25-2.25v-8.25M12 15v-7.5M12 7.5h-4.5m4.5 0h4.5M3 11.25h18"/></svg>`,
+  sukur:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zm-7.518-.267A8.25 8.25 0 1120.25 10.5"/></svg>`,
+  tevekkul:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"/></svg>`,
+  haya:`<svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v3.75m10.5 0a2.25 2.25 0 012.25 2.25v3.75a2.25 2.25 0 01-2.25 2.25h-1.5a2.25 2.25 0 01-2.25-2.25V12a2.25 2.25 0 012.25-2.25m-6 0a2.25 2.25 0 00-2.25 2.25v3.75a2.25 2.25 0 002.25 2.25h1.5A2.25 2.25 0 009 12V9a2.25 2.25 0 00-2.25-2.25M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
 };
 
 let S = {
@@ -689,363 +424,144 @@ function pct(s){
   return {tefrit:a, fazilet:b, ifrat:Math.max(0,100-a-b)};
 }
 
-function completedCount(){
-  return Object.keys(S.history).filter(k=>TESTS[k]).length;
-}
-
 function render(){
   const app=document.getElementById('app');
-  app.className='container mx-auto max-w-4xl p-4 sm:p-6 py-8 fade-in';
+  app.className='container mx-auto max-w-3xl p-4 sm:p-6 py-10 fade-in';
   const screens={welcome:screenWelcome,start:screenStart,quiz:screenQuiz,result:screenResult,history:screenHistory};
   app.innerHTML=(screens[S.screen]||screenWelcome)();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo(0,0);
 }
 
-/* ═══════════════════════════════════════════════
-   WELCOME SCREEN
-   ═══════════════════════════════════════════════ */
-function screenWelcome(){
-  const done = completedCount();
-  const progressText = done > 0 ? `<p class="text-sm mt-6 fade-in-delay-3" style="color:var(--gold);opacity:0.6">${done}/17 test tamamlandı</p>` : '';
-  return `
-  <div class="flex flex-col items-center justify-center min-h-[90vh] text-center relative">
-    <span class="star text-2xl" style="top:10%;left:15%;animation-delay:0s">✦</span>
-    <span class="star text-sm" style="top:20%;right:20%;animation-delay:1s">✦</span>
-    <span class="star text-lg" style="bottom:25%;left:10%;animation-delay:2s">✦</span>
-    <span class="star text-xs" style="top:40%;right:10%;animation-delay:0.5s">✦</span>
-    <span class="star text-sm" style="bottom:15%;right:25%;animation-delay:1.5s">✦</span>
+function screenWelcome(){return `
+  <div class="flex flex-col items-center justify-center min-h-[85vh] text-center">
+    <h1 class="text-5xl md:text-7xl font-bold text-emerald-400 mb-4">Kalbinin Haritası</h1>
+    <h2 class="text-3xl md:text-5xl font-semibold text-gray-200 mb-6">Ahlak Pusulası</h2>
+    <p class="text-lg text-gray-400 max-w-2xl mb-10">İçindeki uçurumlar ve doruklar... 17 farklı testte kalbine ayna tut!</p>
+    <button class="btn py-4 px-10 text-xl" data-action="goStart">Hemen Başla</button>
+  </div>`;}
 
-    <div class="fade-in">
-      <p class="font-arabic text-2xl sm:text-3xl mb-4" style="color:var(--gold);opacity:0.7">بسم الله الرحمن الرحيم</p>
-    </div>
-
-    <h1 class="font-display text-5xl sm:text-7xl md:text-8xl font-bold mb-3 fade-in-delay-1" style="background:linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Kalbinin Haritası</h1>
-
-    <div class="divider max-w-xs mx-auto fade-in-delay-2">
-      <span class="divider-icon">✦</span>
-    </div>
-
-    <h2 class="font-display text-2xl sm:text-4xl font-semibold mb-6 fade-in-delay-2" style="color:var(--text-primary);opacity:0.85">Ahlak Pusulası</h2>
-
-    <p class="text-base sm:text-lg max-w-xl mb-10 leading-relaxed fade-in-delay-3" style="color:var(--text-secondary)">
-      İçindeki uçurumlar ve doruklar... 17 farklı testte kalbine ayna tut, nefsini tanı, hakikate yürü.
-    </p>
-
-    <button class="btn btn-gold text-lg py-4 px-12 fade-in-delay-3" data-action="goStart">
-      Yolculuğa Başla
-    </button>
-    ${progressText}
-  </div>`;
-}
-
-/* ═══════════════════════════════════════════════
-   TEST SELECT SCREEN
-   ═══════════════════════════════════════════════ */
 function screenStart(){
-  const done = completedCount();
-  const total = Object.keys(TESTS).length;
-  const pctDone = Math.round((done/total)*100);
-
-  const cards=Object.entries(TESTS).map(([key,test])=>{
-    const isDone = !!S.history[key];
-    const hist = isDone ? pct(S.history[key].percentages) : null;
-    return `
-    <div class="card card-decorated clickable fade-in" data-action="startTest" data-key="${key}" style="position:relative">
-      ${isDone ? '<div class="badge-completed">✓</div>' : ''}
-      <div class="flex justify-center mb-3 ${isDone ? 'opacity-80' : ''}" style="color:var(--gold)">${ICONS[key]||''}</div>
-      <h2 class="font-display text-xl font-bold text-center mb-1.5" style="color:var(--gold-light)">${test.concepts.fazilet}</h2>
-      <p class="text-center text-xs mb-4 leading-relaxed" style="color:var(--text-muted);min-height:32px">${test.title}</p>
-      <div class="flex justify-between items-center text-xs font-semibold">
-        <span class="text-tefrit">${test.concepts.tefrit}</span>
-        <span style="color:var(--border-gold)">⟷</span>
-        <span class="text-ifrat">${test.concepts.ifrat}</span>
+  const cards=Object.entries(TESTS).map(([key,test])=>`
+    <div class="card clickable" data-action="startTest" data-key="${key}">
+      <div class="flex justify-center mb-4">${ICONS[key]||''}</div>
+      <h2 class="text-2xl font-bold text-emerald-400 text-center mb-2">${test.concepts.fazilet}</h2>
+      <p class="text-gray-400 text-sm text-center mb-6 min-h-[40px]">${test.title}</p>
+      <div class="flex justify-between items-center font-semibold">
+        <span class="text-yellow-500 text-sm">${test.concepts.tefrit}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <span class="text-red-400 text-sm">${test.concepts.ifrat}</span>
       </div>
-      ${isDone ? `<div class="mt-3 pt-3 flex justify-around text-center text-xs" style="border-top:1px solid var(--border-gold)">
-        <span class="text-tefrit">${hist.tefrit}%</span>
-        <span class="text-fazilet font-bold">${hist.fazilet}%</span>
-        <span class="text-ifrat">${hist.ifrat}%</span>
-      </div>` : ''}
-    </div>`}).join('');
-
+    </div>`).join('');
   return `
-    <div class="text-center mb-10">
-      <h1 class="font-display text-4xl sm:text-5xl font-bold mb-3" style="color:var(--gold)">Ahlak Pusulası</h1>
-      <p class="text-base mb-6" style="color:var(--text-secondary)">17 fazilet testinde kalbinin haritasını çıkar</p>
-
-      <div class="max-w-md mx-auto mb-6">
-        <div class="flex justify-between text-xs mb-1.5" style="color:var(--text-muted)">
-          <span>${done}/${total} test tamamlandı</span>
-          <span>${pctDone}%</span>
-        </div>
-        <div class="progress-wrap">
-          <div class="progress-fill" style="width:${pctDone}%"></div>
-        </div>
-      </div>
-
-      <button class="btn btn-ghost text-sm" data-action="goHistory">
-        <span class="mr-2">✦</span> Ahlak Haritamı Görüntüle
-      </button>
+    <div class="text-center mb-8">
+      <h1 class="text-5xl font-bold text-emerald-400 mb-3">Ahlak Pusulası</h1>
+      <p class="text-xl text-gray-400 mb-6">17 farklı testte kalbine ayna tut!</p>
+      <button class="btn btn-indigo" data-action="goHistory">Ahlak Haritamı Görüntüle</button>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">${cards}</div>
-    <div class="text-center mt-8">
-      <button class="text-sm transition-colors" style="color:var(--text-muted)" data-action="goWelcome">← Ana Sayfa</button>
-    </div>`;
-}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">${cards}</div>`;}
 
-/* ═══════════════════════════════════════════════
-   QUIZ SCREEN
-   ═══════════════════════════════════════════════ */
 function screenQuiz(){
   const test=TESTS[S.testKey], q=test.questions[S.qi];
   const progress=((S.qi+1)/test.questions.length)*100;
   const opts=q.options.map(opt=>`
     <div class="option-label${S.answers[S.qi]===opt.puan?' selected':''}" data-action="answer" data-score="${opt.puan}">${opt.text}</div>`).join('');
-
   return `
     <div>
       <div class="progress-wrap"><div class="progress-fill" style="width:${progress}%"></div></div>
-
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h1 class="font-display text-2xl sm:text-3xl font-bold" style="color:var(--gold)">${test.concepts.fazilet}</h1>
-          <p class="text-sm mt-1" style="color:var(--text-muted)">${test.title}</p>
-        </div>
-        <div class="q-number">${S.qi+1}</div>
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-emerald-400 mb-2">${test.concepts.fazilet}</h1>
+        <p class="text-lg text-gray-400">${test.title}</p>
+        <p class="text-gray-500 mt-2">Soru ${S.qi+1} / ${test.questions.length}</p>
       </div>
-
-      <p class="text-xs mb-6" style="color:var(--text-muted)">Soru ${S.qi+1} / ${test.questions.length}</p>
-
       <div class="card mb-6">
-        <p class="text-lg leading-relaxed mb-6" style="color:var(--text-primary)">${q.soru}</p>
+        <p class="text-xl mb-6 leading-relaxed">${q.soru}</p>
         <div>${opts}</div>
       </div>
-
       <div class="flex justify-between gap-4">
-        <button class="btn btn-subtle" data-action="prev"${S.qi===0?' disabled':''}>
-          ← Geri
-        </button>
-        ${S.qi<test.questions.length-1
-          ?`<button class="btn btn-gold" data-action="next"${S.answers[S.qi]===undefined?' disabled':''}>İleri →</button>`
-          :''}
+        <button class="btn btn-gray" data-action="prev"${S.qi===0?' disabled':''}>Geri</button>
+        ${S.qi<test.questions.length-1?`<button class="btn" data-action="next"${S.answers[S.qi]===undefined?' disabled':''}>İleri</button>`:''}
       </div>
-
       <div class="text-center mt-6">
-        <button class="text-sm transition-colors" style="color:var(--text-muted)" data-action="goStart">Test Seçimine Geri Dön</button>
+        <button class="text-gray-400 hover:text-emerald-400 transition-colors" data-action="goStart">Test Seçimine Geri Dön</button>
       </div>
-    </div>`;
-}
+    </div>`;}
 
-/* ═══════════════════════════════════════════════
-   RESULT SCREEN
-   ═══════════════════════════════════════════════ */
 function screenResult(){
   const test=TESTS[S.testKey], p=pct(S.scores);
   const gem=S.loadingGemini
-    ?`<div class="flex flex-col items-center p-8"><div class="spinner"></div><p class="mt-4" style="color:var(--text-secondary)">Kalbinizin sesi dinleniyor...</p></div>`
+    ?`<div class="flex flex-col items-center p-8"><div class="spinner"></div><p class="mt-4 text-gray-300">Kalbinizin sesi dinleniyor...</p></div>`
     :S.gemini
     ?S.gemini.streaming
-      ?`<div class="leading-relaxed whitespace-pre-wrap" style="color:var(--text-secondary)" id="gemini-stream"><span class="stream-cursor"></span></div>`
-      :`<div class="leading-relaxed" style="color:var(--text-secondary)" id="gemini-stream">${renderGeminiText(S.gemini.text||'')}</div>`
+      ?`<div class="text-gray-300 leading-relaxed whitespace-pre-wrap" id="gemini-stream"><span class="stream-cursor inline-block w-0.5 h-4 bg-emerald-400 animate-pulse"></span></div>`
+      :`<div class="text-gray-300 leading-relaxed" id="gemini-stream">${renderGeminiText(S.gemini.text||'')}</div>`
     :'';
-
   const next=!S.gemini?.streaming&&S.gemini?.sonraki_test?.key&&TESTS[S.gemini.sonraki_test.key]
-    ?`<div class="card mt-8 text-center">
-       <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sıradaki Adım</p>
-       <h3 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">${TESTS[S.gemini.sonraki_test.key].concepts.fazilet}</h3>
-       <p class="text-sm mb-4" style="color:var(--text-muted)">${S.gemini.sonraki_test.gerekce}</p>
-       <button class="btn btn-emerald" data-action="startTest" data-key="${S.gemini.sonraki_test.key}">Teste Başla</button>
+    ?`<div class="card mt-8"><h3 class="text-xl font-bold text-emerald-300 mb-3 text-center">Sıradaki Adım</h3>
+       <p class="text-center text-gray-400 mb-4">${S.gemini.sonraki_test.gerekce}</p>
+       <div class="flex justify-center"><button class="btn btn-indigo" data-action="startTest" data-key="${S.gemini.sonraki_test.key}">Başla: ${TESTS[S.gemini.sonraki_test.key].concepts.fazilet} Testi</button></div>
      </div>`:'';
-
   return `
     <div>
       <div class="card" id="result-card">
         <div class="text-center pb-6">
-          <p class="text-xs uppercase tracking-widest mb-4" style="color:var(--gold);opacity:0.6">Ahlak Pusulası Sonuç Kartı</p>
-          <h1 class="font-display text-3xl sm:text-4xl font-bold mb-2" style="color:var(--gold)">${test.concepts.fazilet}</h1>
-          <p class="text-sm mb-8" style="color:var(--text-muted)">${test.title}</p>
-
-          <canvas id="radarChart" width="280" height="280"></canvas>
-
-          <div class="flex justify-around text-center my-6">
-            <div>
-              <p class="text-tefrit text-xs font-semibold uppercase tracking-wider">${test.concepts.tefrit}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pt">0%</p>
-            </div>
-            <div>
-              <p class="text-fazilet text-xs font-semibold uppercase tracking-wider">${test.concepts.fazilet}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pf">0%</p>
-            </div>
-            <div>
-              <p class="text-ifrat text-xs font-semibold uppercase tracking-wider">${test.concepts.ifrat}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pi">0%</p>
-            </div>
+          <p class="font-semibold text-emerald-500 mb-4">Ahlak Pusulası Sonuç Kartı</p>
+          <h1 class="text-4xl font-bold text-emerald-400 mb-2">${test.concepts.fazilet}</h1>
+          <p class="text-lg text-gray-400 mb-8">${test.title}</p>
+          <div class="flex justify-around text-center my-4">
+            <div><p class="text-yellow-400 font-bold">${test.concepts.tefrit}</p><p class="text-6xl font-bold text-gray-100 tracking-tighter mt-1" id="pt">0%</p></div>
+            <div><p class="text-emerald-400 font-bold">${test.concepts.fazilet}</p><p class="text-6xl font-bold text-gray-100 tracking-tighter mt-1" id="pf">0%</p></div>
+            <div><p class="text-red-400 font-bold">${test.concepts.ifrat}</p><p class="text-6xl font-bold text-gray-100 tracking-tighter mt-1" id="pi">0%</p></div>
           </div>
         </div>
-
-        <div class="divider"><span class="divider-icon">✦</span></div>
-
-        <h2 class="font-display text-xl sm:text-2xl font-bold text-center mb-4" style="color:var(--gold)">Size Özel Değerlendirmeniz</h2>
-        <div class="p-4 rounded-xl min-h-[120px]" style="background:rgba(212,175,55,0.03);border:1px solid var(--border-gold)">${gem}</div>
+        <hr class="border-gray-700 mb-6"/>
+        <h2 class="text-2xl font-bold text-emerald-400 text-center mb-4">Size Özel Değerlendirmeniz</h2>
+        <div class="bg-gray-900/50 rounded-lg p-4 min-h-[120px]">${gem}</div>
       </div>
-
       ${next}
-
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <button class="btn btn-gold" data-action="share"${!S.gemini?' disabled':''}>
-          ✦ Sonucu Paylaş
-        </button>
-        <button class="btn btn-subtle" data-action="goStart">Yeni Test Seç</button>
+        <button class="btn btn-blue" data-action="share"${!S.gemini?' disabled':''}>Sonucu Paylaş</button>
+        <button class="btn btn-gray" data-action="goStart">Yeni Test Seç</button>
       </div>
-    </div>`;
-}
+    </div>`;}
 
-/* ═══════════════════════════════════════════════
-   HISTORY SCREEN
-   ═══════════════════════════════════════════════ */
 function screenHistory(){
   const keys=Object.keys(S.history);
-  const done = keys.filter(k=>TESTS[k]).length;
-  const total = Object.keys(TESTS).length;
-
   const content=!keys.length
-    ?`<div class="card text-center p-10"><p style="color:var(--text-muted)" class="text-lg">Henüz hiç test tamamlamadın. Yolculuğa başla!</p></div>`
+    ?`<div class="card text-center p-10"><p class="text-gray-400 text-lg">Henüz hiç test tamamlamadın!</p></div>`
     :keys.map(key=>{
       const test=TESTS[key]; if(!test) return '';
       const p=pct(S.history[key].percentages), isExp=S.expandedHistory===key, gd=S.history[key].geminiData;
       return `<div>
-        <div class="card clickable" data-action="toggleHistory" data-key="${key}"${isExp?' style="border-radius:1rem 1rem 0 0;border-bottom-color:transparent"':''}>
+        <div class="card clickable" data-action="toggleHistory" data-key="${key}"${isExp?' style="border-radius:0.75rem 0.75rem 0 0"':''}>
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-              <div style="color:var(--gold)">${ICONS[key]||''}</div>
-              <div>
-                <h2 class="font-display text-xl font-bold" style="color:var(--gold-light)">${test.concepts.fazilet}</h2>
-                <p class="text-xs" style="color:var(--text-muted)">${test.title}</p>
-              </div>
-            </div>
-            <div class="flex gap-5 font-semibold text-center">
-              <div class="w-16"><p class="text-tefrit text-xs">${test.concepts.tefrit}</p><p class="text-xl">${p.tefrit}%</p></div>
-              <div class="w-16"><p class="text-fazilet text-xs">${test.concepts.fazilet}</p><p class="text-xl">${p.fazilet}%</p></div>
-              <div class="w-16"><p class="text-ifrat text-xs">${test.concepts.ifrat}</p><p class="text-xl">${p.ifrat}%</p></div>
+            <div class="flex items-center gap-4">${ICONS[key]||''}<div><h2 class="text-2xl font-bold text-emerald-400">${test.concepts.fazilet}</h2><p class="text-gray-400 text-sm">${test.title}</p></div></div>
+            <div class="flex gap-4 font-semibold text-center">
+              <div class="w-20"><p class="text-yellow-500 text-xs">${test.concepts.tefrit}</p><p class="text-2xl">${p.tefrit}%</p></div>
+              <div class="w-20"><p class="text-emerald-500 text-xs">${test.concepts.fazilet}</p><p class="text-2xl">${p.fazilet}%</p></div>
+              <div class="w-20"><p class="text-red-400 text-xs">${test.concepts.ifrat}</p><p class="text-2xl">${p.ifrat}%</p></div>
             </div>
           </div>
         </div>
-        ${isExp&&gd?`<div class="p-6 fade-in" style="background:rgba(10,15,30,0.7);border:1px solid var(--border-gold);border-top:none;border-radius:0 0 1rem 1rem">
-          <div class="leading-relaxed" style="color:var(--text-secondary)">${renderGeminiText(gd.text||gd.sonuclarinAynasi||'')}</div>
+        ${isExp&&gd?`<div class="p-6 bg-gray-900/70 border border-t-0 border-gray-700 rounded-b-xl fade-in">
+          <div class="text-gray-300 leading-relaxed">${renderGeminiText(gd.text||gd.sonuclarinAynasi||'')}</div>
         </div>`:''}
       </div>`;}).join('');
-
   return `
     <div>
       <div class="mb-10">
-        <h1 class="font-display text-4xl sm:text-5xl font-bold mb-3" style="color:var(--gold)">Ahlak Haritam</h1>
-        <p class="text-base mb-4" style="color:var(--text-secondary)">Tamamladığın testler ve manevi yolculuğunun izleri.</p>
-        <div class="max-w-sm">
-          <div class="flex justify-between text-xs mb-1" style="color:var(--text-muted)">
-            <span>${done}/${total} test</span>
-            <span>${Math.round((done/total)*100)}%</span>
-          </div>
-          <div class="progress-wrap"><div class="progress-fill" style="width:${Math.round((done/total)*100)}%"></div></div>
-        </div>
+        <h1 class="text-5xl font-bold text-emerald-400 mb-3">Ahlak Haritam</h1>
+        <p class="text-xl text-gray-400">Tamamladığın testler ve manevi yolculuğunun izleri.</p>
       </div>
       <div class="space-y-4">${content}</div>
-      <div class="text-center mt-10">
-        <button class="btn btn-ghost" data-action="goStart">← Test Seçimine Geri Dön</button>
-      </div>
-    </div>`;
-}
+      <div class="text-center mt-10"><button class="btn" data-action="goStart">Test Seçimine Geri Dön</button></div>
+    </div>`;}
 
-/* ═══════════════════════════════════════════════
-   UTILITIES
-   ═══════════════════════════════════════════════ */
 function renderGeminiText(text){
   return text
-    .replace(/\*\*(.+?)\*\*/g,'<strong class="font-display text-lg block mt-5 mb-1" style="color:var(--gold)">$1</strong>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong class="text-emerald-300 text-lg block mt-5 mb-1">$1</strong>')
     .replace(/\n/g,'<br>');
 }
 
-/* Radar Chart */
-function drawRadar(p){
-  const canvas = document.getElementById('radarChart');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2, R = 110;
-
-  ctx.clearRect(0,0,W,H);
-
-  // Labels & angles: 3 vertices (top, bottom-left, bottom-right)
-  const labels = [
-    { name: 'Tefrit', val: p.tefrit, color: '#fbbf24', angle: -Math.PI/2 },
-    { name: 'Fazilet', val: p.fazilet, color: '#34d399', angle: Math.PI/6 + Math.PI/2 },
-    { name: 'İfrat', val: p.ifrat, color: '#f87171', angle: -Math.PI/6 + Math.PI/2 + Math.PI }
-  ];
-
-  // Grid circles
-  for(let i=1;i<=4;i++){
-    const r = R*(i/4);
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI*2);
-    ctx.strokeStyle = 'rgba(212,175,55,0.08)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  // Axes
-  labels.forEach(l=>{
-    const x = cx + R * Math.cos(l.angle);
-    const y = cy + R * Math.sin(l.angle);
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = 'rgba(212,175,55,0.12)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  });
-
-  // Data polygon
-  ctx.beginPath();
-  labels.forEach((l,i)=>{
-    const r = R * (l.val/100);
-    const x = cx + r * Math.cos(l.angle);
-    const y = cy + r * Math.sin(l.angle);
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(212,175,55,0.12)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Data points
-  labels.forEach(l=>{
-    const r = R * (l.val/100);
-    const x = cx + r * Math.cos(l.angle);
-    const y = cy + r * Math.sin(l.angle);
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI*2);
-    ctx.fillStyle = l.color;
-    ctx.fill();
-    ctx.strokeStyle = '#0a0f1e';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-  });
-
-  // Labels
-  ctx.font = '12px Inter, sans-serif';
-  ctx.textAlign = 'center';
-  labels.forEach(l=>{
-    const lr = R + 22;
-    const x = cx + lr * Math.cos(l.angle);
-    const y = cy + lr * Math.sin(l.angle);
-    ctx.fillStyle = l.color;
-    ctx.fillText(l.name, x, y + 4);
-  });
-}
-
-/* ═══════════════════════════════════════════════
-   API
-   ═══════════════════════════════════════════════ */
 async function fetchGemini(scores){
   S.loadingGemini=false; S.gemini={streaming:true,text:'',sonraki_test:{key:'',gerekce:''}}; render();
   const test=TESTS[S.testKey], p=pct(scores);
@@ -1064,25 +580,15 @@ async function fetchGemini(scores){
         if(!line.startsWith('data: ')||line==='data: [DONE]') continue;
         try{
           const token=JSON.parse(line.slice(6)).choices?.[0]?.delta?.content||'';
-          if(token){
-            fullText+=token;
-            S.gemini.text=fullText;
-            const el=document.getElementById('gemini-stream');
-            if(el){
-              const cur=el.querySelector('.stream-cursor');
-              if(cur) cur.remove();
-              el.insertAdjacentText('beforeend',token);
-              el.insertAdjacentHTML('beforeend','<span class="stream-cursor"></span>');
-            }
-          }
+          if(token){ fullText+=token; S.gemini.text=fullText; const el=document.getElementById('gemini-stream'); if(el){ const cur=el.querySelector('.stream-cursor'); if(cur) cur.remove(); el.insertAdjacentText('beforeend',token); el.insertAdjacentHTML('beforeend','<span class="stream-cursor inline-block w-0.5 h-4 bg-emerald-400 animate-pulse"></span>'); } }
         }catch{}
       }
     }
-    const flines=fullText.split('\n'), last=flines[flines.length-1].trim();
+    const lines=fullText.split('\n'), last=lines[lines.length-1].trim();
     if(last.startsWith('SONRAKI_TEST:')){
       const[k,g]=last.slice(13).split('|');
       S.gemini.sonraki_test={key:(k||'').trim(),gerekce:(g||'').trim()};
-      fullText=flines.slice(0,-1).join('\n').trim();
+      fullText=lines.slice(0,-1).join('\n').trim();
     }
     S.gemini={streaming:false,text:fullText,sonraki_test:S.gemini.sonraki_test};
     S.history[S.testKey]={percentages:scores,geminiData:S.gemini}; saveHistory();
@@ -1093,44 +599,25 @@ async function fetchGemini(scores){
   }
 }
 
-/* ═══════════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════════ */
 function animNums(){
   if(S.screen!=='result'||!S.scores) return;
   const p=pct(S.scores);
-
-  // Animate numbers
   [['pt',p.tefrit],['pf',p.fazilet],['pi',p.ifrat]].forEach(([id,target])=>{
     const el=document.getElementById(id); if(!el) return;
-    const t0=performance.now(), dur=1400;
+    const t0=performance.now(), dur=1200;
     function step(now){
-      const pr=Math.min((now-t0)/dur,1), ease=1-Math.pow(1-pr,3);
+      const pr=Math.min((now-t0)/dur,1), ease=pr*(2-pr);
       el.textContent=Math.round(ease*target)+'%';
       if(pr<1) requestAnimationFrame(step);
     } requestAnimationFrame(step);
   });
-
-  // Animate radar chart
-  const t0=performance.now(), dur=1200;
-  function animRadar(now){
-    const pr=Math.min((now-t0)/dur,1), ease=1-Math.pow(1-pr,3);
-    const ap = {tefrit:Math.round(ease*p.tefrit), fazilet:Math.round(ease*p.fazilet), ifrat:Math.round(ease*p.ifrat)};
-    drawRadar(ap);
-    if(pr<1) requestAnimationFrame(animRadar);
-  }
-  requestAnimationFrame(animRadar);
 }
 
-/* ═══════════════════════════════════════════════
-   EVENTS
-   ═══════════════════════════════════════════════ */
 function attachEvents(){
   document.getElementById('app').addEventListener('click',e=>{
     const el=e.target.closest('[data-action]'); if(!el||el.disabled) return;
     const {action,key,score}=el.dataset;
-    if(action==='goWelcome'){S.screen='welcome';render();}
-    else if(action==='goStart'){S.screen='start';render();}
+    if(action==='goStart'){S.screen='start';render();}
     else if(action==='goHistory'){S.screen='history';render();}
     else if(action==='startTest'){S.testKey=key;S.answers={};S.qi=0;S.scores=null;S.gemini=null;S.loadingGemini=false;S.screen='quiz';render();}
     else if(action==='answer'){
@@ -1159,7 +646,7 @@ function calcAndShow(){
 async function shareImg(){
   const card=document.getElementById('result-card'); if(!card) return;
   try{
-    const canvas=await html2canvas(card,{scale:2.5,backgroundColor:'#0a0f1e',useCORS:true});
+    const canvas=await html2canvas(card,{scale:2.5,backgroundColor:'#1f2937',useCORS:true});
     const a=document.createElement('a');
     a.href=canvas.toDataURL('image/png',1.0);
     a.download=`${TESTS[S.testKey]?.concepts.fazilet||'sonuc'}-karti.png`;
