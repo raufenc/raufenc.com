@@ -1919,54 +1919,38 @@ function renderAna(){
     {id:"agnostik",ikon:"∿",renk:PR.agnostik.ana,label:"Agnostik",kisa:"Bilmiyorum mu, kaçış mı?"},
   ];
   return`<div style="width:100%;padding:0">
-  <div style="text-align:center;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(24px,4vw,48px) clamp(20px,5vw,80px);position:relative">
+  <div style="text-align:center;padding:clamp(40px,6vw,80px) clamp(20px,5vw,80px) clamp(24px,3vw,40px);position:relative">
 
-    <!-- Badge -->
-    <div style="display:inline-flex;align-items:center;gap:8px;background:${rr.ana}0C;border:1px solid ${rr.ana}1A;border-radius:28px;padding:clamp(6px,1vw,10px) clamp(16px,2.5vw,24px);margin-bottom:clamp(24px,4vw,40px);animation:fadeUp .7s var(--ease) both;backdrop-filter:blur(12px)">
-      <span style="width:7px;height:7px;border-radius:50%;background:${rr.ana};animation:pulse 2.5s ease-in-out infinite"></span>
-      <span style="font-size:clamp(11px,1.5vw,13px);font-weight:600;color:${rr.parlak};letter-spacing:.12em;text-transform:uppercase">Davet Mektubu</span>
-    </div>
-
-    <!-- Title -->
-    <h1 style="font-family:'Crimson Pro',serif;font-size:clamp(48px,13vw,112px);font-weight:300;line-height:1.02;color:${c.met};margin-bottom:clamp(20px,3vw,32px);letter-spacing:-.03em;animation:fadeUp .7s var(--ease) .08s both">
-      Arkadaşın<br>
-      <span style="font-style:italic;background:linear-gradient(135deg,${rr.ana} 0%,${rr.parlak} 50%,${rr.ana} 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite">büyük soruyu</span><br>
-      soruyor.
+    <!-- Title — compact -->
+    <h1 style="font-family:'Crimson Pro',serif;font-size:clamp(36px,8vw,72px);font-weight:300;line-height:1.1;color:${c.met};margin-bottom:clamp(14px,2vw,22px);letter-spacing:-.02em;animation:fadeUp .6s var(--ease) both">
+      Arkadaşın <span style="font-style:italic;background:linear-gradient(135deg,${rr.ana} 0%,${rr.parlak} 50%,${rr.ana} 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite">büyük soruyu</span> soruyor.
     </h1>
 
     <!-- Subtitle -->
-    <p style="font-family:'Crimson Pro',serif;font-size:clamp(18px,3.5vw,28px);color:${c.soluk};line-height:1.65;max-width:680px;margin:0 auto clamp(12px,2vw,20px);font-weight:300;font-style:italic;animation:fadeUp .7s var(--ease) .16s both">
-      "Tanrı var mı?" diye sorduğunda<br>ona layık bir cevap vermek istiyorsun.
-    </p>
-    <p style="font-size:clamp(14px,2vw,17px);color:${c.cs};max-width:560px;margin:0 auto clamp(32px,5vw,52px);line-height:1.7;font-weight:300;animation:fadeUp .7s var(--ease) .22s both">
-      Akademik kaynaklı mektuplar ve düşündürücü sorular.<br>Mesleğine özel. Pozisyonuna göre.
+    <p style="font-family:'Crimson Pro',serif;font-size:clamp(16px,2.8vw,22px);color:${c.soluk};line-height:1.6;max-width:600px;margin:0 auto clamp(24px,3vw,36px);font-weight:300;font-style:italic;animation:fadeUp .6s var(--ease) .08s both">
+      Akademik kaynaklı mektuplar ve düşündürücü sorular. Mesleğine özel. Pozisyonuna göre.
     </p>
 
-    <!-- CTA -->
-    <button onclick="navigate({screen:'poz'})"
-      style="background:linear-gradient(135deg,${rr.ana},${rr.koyu});border:none;border-radius:60px;padding:clamp(18px,2.5vw,26px) clamp(52px,9vw,80px);color:#fff;font-size:clamp(16px,2.2vw,20px);font-weight:600;letter-spacing:.02em;box-shadow:0 16px 48px ${rr.ana}30;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .7s var(--ease) .28s both"
-      onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 24px 64px ${rr.ana}40'"
-      onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px ${rr.ana}30'">
-      Mektupları Keşfet →
-    </button>
-
-    <!-- Stats -->
-    <div style="display:flex;justify-content:center;align-items:center;gap:clamp(24px,5vw,56px);margin-top:clamp(32px,5vw,56px);animation:fadeUp .7s var(--ease) .36s both">
+    <!-- Stats inline -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:clamp(16px,3vw,36px);margin-bottom:clamp(24px,3.5vw,40px);animation:fadeUp .6s var(--ease) .14s both">
       ${[{n:"82",l:"Mektup"},{n:"27",l:"Meslek"},{n:"3",l:"Perspektif"}].map((s,i)=>`
-      ${i>0?`<div style="width:1px;height:clamp(28px,4vw,44px);background:linear-gradient(to bottom,transparent,${c.cerç},transparent)"></div>`:""}
+      ${i>0?`<div style="width:1px;height:clamp(20px,3vw,32px);background:${c.cerç}"></div>`:""}
       <div style="text-align:center">
-        <div style="font-family:'Crimson Pro',serif;font-size:clamp(32px,7vw,56px);font-weight:700;color:${c.met};line-height:1">${s.n}</div>
-        <div style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};text-transform:uppercase;letter-spacing:.15em;margin-top:clamp(4px,.6vw,8px);font-weight:500">${s.l}</div>
+        <div style="font-family:'Crimson Pro',serif;font-size:clamp(24px,5vw,40px);font-weight:700;color:${c.met};line-height:1">${s.n}</div>
+        <div style="font-size:clamp(9px,1.2vw,12px);color:${c.cs};text-transform:uppercase;letter-spacing:.12em;margin-top:3px;font-weight:500">${s.l}</div>
       </div>`).join("")}
     </div>
   </div>
 
-  <!-- Pozisyon kartları -->
-  <div style="max-width:var(--max-content);margin:0 auto;padding:0 clamp(20px,4vw,64px) clamp(32px,5vw,48px)">
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-bottom:clamp(48px,6vw,80px)">
+  <!-- Pozisyon kartları — hemen görünür -->
+  <div style="max-width:var(--max-content);margin:0 auto;padding:0 clamp(20px,4vw,64px)">
+    <div style="text-align:center;margin-bottom:clamp(16px,2.5vw,28px);animation:fadeUp .6s var(--ease) .2s both">
+      <span style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};letter-spacing:.15em;text-transform:uppercase;font-weight:500">Pozisyon Seç</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-bottom:clamp(48px,6vw,72px)">
       ${pozlar.map((p,i)=>`
       <button onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
-        style="background:${c.kart};border:1px solid ${c.cerç};border-top:3px solid ${p.renk}60;border-radius:clamp(16px,2.5vw,24px);padding:clamp(20px,3vw,36px);text-align:left;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .6s var(--ease) ${.5+i*.08}s both;position:relative;overflow:hidden"
+        style="background:${c.kart};border:1px solid ${c.cerç};border-top:3px solid ${p.renk}60;border-radius:clamp(16px,2.5vw,24px);padding:clamp(20px,3vw,36px);text-align:left;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .6s var(--ease) ${.24+i*.06}s both;position:relative;overflow:hidden"
         onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px ${p.renk}20';this.style.borderTopColor='${p.renk}'"
         onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderTopColor='${p.renk}60'">
         <div style="font-size:clamp(28px,5vw,44px);margin-bottom:clamp(12px,2vw,20px)">${p.ikon}</div>
