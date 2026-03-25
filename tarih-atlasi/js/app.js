@@ -725,10 +725,20 @@
         .text(disc.name.split('/')[0].split(' ')[0]);
     });
 
-    // Data shape
-    const maxVal = Math.max(...Object.values(disciplines), 1);
+    // Grid percentage labels
+    [0.2, 0.4, 0.6, 0.8, 1].forEach(level => {
+      const a = -Math.PI / 2;
+      gridG.append('text')
+        .attr('x', cx + r * level * Math.cos(a) + 4)
+        .attr('y', cy + r * level * Math.sin(a) + 2)
+        .attr('font-size', 7).attr('fill', 'var(--muted)')
+        .text(Math.round(level * 45) + '%');
+    });
+
+    // Data shape — fixed scale 0-45 for fair comparison
+    const maxVal = 45;
     const pts = keys.map((key, i) => {
-      const val = (disciplines[key] || 0) / maxVal;
+      const val = Math.min((disciplines[key] || 0) / maxVal, 1);
       const a = i * angleStep - Math.PI / 2;
       return [cx + r * val * Math.cos(a), cy + r * val * Math.sin(a)];
     });
@@ -748,13 +758,17 @@
         .attr('stroke', 'var(--surface)').attr('stroke-width', 1.5);
     });
 
-    // Value labels
+    // Value labels — only show >= 8% to avoid clutter
     pts.forEach((pt, i) => {
       const val = disciplines[keys[i]] || 0;
-      if (val > 0) {
+      if (val >= 8) {
+        const a = i * angleStep - Math.PI / 2;
+        const offsetX = Math.cos(a) * 12;
+        const offsetY = Math.sin(a) * 12;
         svg.append('text')
-          .attr('x', pt[0]).attr('y', pt[1] - 8)
+          .attr('x', pt[0] + offsetX).attr('y', pt[1] + offsetY - 2)
           .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'central')
           .attr('font-size', 9).attr('font-weight', 600)
           .attr('fill', 'var(--text)')
           .text(val + '%');
