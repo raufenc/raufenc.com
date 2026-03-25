@@ -69,8 +69,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .btn-tema{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .25s var(--e)}
 .btn-tema:hover{transform:scale(1.15) rotate(15deg)}
 
+/* ── Glow Border Animation ── */
+@keyframes borderGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.glow-card{position:relative;border:none!important;overflow:visible}
+.glow-card::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(90deg,rgba(200,150,62,.08),rgba(200,150,62,.35),rgba(240,184,74,.5),rgba(200,150,62,.35),rgba(200,150,62,.08));background-size:300% 100%;animation:borderGlow 4s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:1}
+.glow-card:hover::before{background:linear-gradient(90deg,rgba(200,150,62,.15),rgba(200,150,62,.5),rgba(240,184,74,.7),rgba(200,150,62,.5),rgba(200,150,62,.15))}
+.glow-deist::before{background:linear-gradient(90deg,rgba(91,168,138,.08),rgba(91,168,138,.35),rgba(126,203,168,.5),rgba(91,168,138,.35),rgba(91,168,138,.08));background-size:300% 100%;animation:borderGlow 4s linear infinite}
+.glow-deist:hover::before{background:linear-gradient(90deg,rgba(91,168,138,.15),rgba(91,168,138,.5),rgba(126,203,168,.7),rgba(91,168,138,.5),rgba(91,168,138,.15))}
+.glow-agnostik::before{background:linear-gradient(90deg,rgba(155,123,196,.08),rgba(155,123,196,.35),rgba(196,168,232,.5),rgba(155,123,196,.35),rgba(155,123,196,.08));background-size:300% 100%;animation:borderGlow 4s linear infinite}
+.glow-agnostik:hover::before{background:linear-gradient(90deg,rgba(155,123,196,.15),rgba(155,123,196,.5),rgba(196,168,232,.7),rgba(155,123,196,.5),rgba(155,123,196,.15))}
+
 /* ── Position Cards ── */
-.poz-card{width:100%;text-align:left;border-radius:16px;padding:22px;position:relative;overflow:hidden;border:1px solid;transition:all .3s var(--e);box-shadow:0 0 0 1px rgba(200,150,62,.06),0 2px 8px rgba(0,0,0,.1)}
+.poz-card{width:100%;text-align:left;border-radius:16px;padding:22px;position:relative;overflow:hidden;border:1px solid;transition:all .3s var(--e);box-shadow:0 2px 8px rgba(0,0,0,.1)}
 .poz-card:hover{transform:translateY(-4px)}
 .poz-card:active{transform:scale(.98)}
 
@@ -1974,10 +1984,10 @@ function renderAna(){
   </div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px">
     ${pozlar.map((p,i)=>`
-    <button onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
-      style="background:${c.kart};border:1px solid ${c.cerç};border-top:3px solid ${p.renk}50;border-radius:16px;padding:24px 20px;text-align:center;transition:all .3s var(--e);cursor:pointer;animation:fadeUp .5s var(--e) ${.22+i*.05}s both"
-      onmouseover="this.style.transform='translateY(-4px)';this.style.borderTopColor='${p.renk}';this.style.boxShadow='0 12px 36px ${p.renk}15'"
-      onmouseout="this.style.transform='';this.style.borderTopColor='${p.renk}50';this.style.boxShadow=''">
+    <button class="glow-card${p.id==='deist'?' glow-deist':p.id==='agnostik'?' glow-agnostik':''}" onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
+      style="background:${c.kart};border:1px solid ${c.cerç};border-radius:16px;padding:24px 20px;text-align:center;transition:all .3s var(--e);cursor:pointer;animation:fadeUp .5s var(--e) ${.22+i*.05}s both"
+      onmouseover="this.style.transform='translateY(-4px)'"
+      onmouseout="this.style.transform=''">
       <div style="width:44px;height:44px;border-radius:50%;background:${p.renk}10;border:1px solid ${p.renk}18;display:inline-flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px">${p.ikon}</div>
       <div style="font-family:'Crimson Pro',serif;font-size:18px;font-weight:600;color:${c.met};margin-bottom:6px">${p.label}</div>
       <div style="font-size:13px;color:${c.soluk};line-height:1.5;font-weight:300">${p.kisa}</div>
@@ -2022,8 +2032,8 @@ function renderPoz(){
     ${Object.keys(SORULAR).map(pid=>{const P=SORULAR[pid],r=P.r;
     const cnt=Object.values(MEKTUPLAR).filter(m=>m.poz===pid).length;
     return`
-    <button class="poz-card" style="background:${c.kart};border-color:${c.cerç};border-top:3px solid ${r.ana}50" onclick="navigate({screen:'liste',poz:'${pid}',kat:null,soruI:0})"
-      onmouseover="this.style.transform='translateY(-4px)';this.style.borderTopColor='${r.ana}';this.style.boxShadow='0 12px 36px ${r.ana}15'" onmouseout="this.style.transform='';this.style.borderTopColor='${r.ana}50';this.style.boxShadow=''">
+    <button class="poz-card glow-card${pid==='deist'?' glow-deist':pid==='agnostik'?' glow-agnostik':''}" style="background:${c.kart};border-color:${c.cerç}" onclick="navigate({screen:'liste',poz:'${pid}',kat:null,soruI:0})"
+      onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform=''">
       <div style="display:flex;align-items:center;gap:14px">
         <div style="width:52px;height:52px;border-radius:14px;flex-shrink:0;background:${r.ana}12;border:1px solid ${r.ana}18;display:flex;align-items:center;justify-content:center;font-size:22px;color:${r.parlak}">${P.ikon}</div>
         <div style="flex:1">
@@ -2061,7 +2071,7 @@ function renderListe(){
     const wc=m.icerik?m.icerik.reduce((t,b)=>t+(b.m?b.m.split(/\\s+/).length:0),0):0;
     const dk=Math.max(1,Math.round(wc/200));
     return`
-  <div class="meslek-row ${m.tam?'':'hazir-yok'}" style="background:${m.tam?c.kart:c.yuz};border-color:${c.cerç};color:${c.met}"
+  <div class="meslek-row glow-card${state.poz==='deist'?' glow-deist':state.poz==='agnostik'?' glow-agnostik':''} ${m.tam?'':'hazir-yok'}" style="background:${m.tam?c.kart:c.yuz};border-color:${c.cerç};color:${c.met}"
     ${m.tam?`onclick="navigate({screen:'mektup',mektupId:'${mid}'})"`:""}>
     <div style="display:flex;align-items:center;justify-content:space-between">
       <span style="font-size:16px;font-weight:600;color:${c.met}">${m.meslek}</span>
@@ -2110,7 +2120,7 @@ function renderMektup(){
     if(!bm)return"";
     const br=PR[bm.poz]||PR.ateist;
     const btitle=`${bm.poz.charAt(0).toUpperCase()+bm.poz.slice(1)} · ${bm.meslek}`;
-    return`<div class="bag-kart" style="background:${br.bg};border-color:${br.ana}25;backdrop-filter:blur(4px)"
+    return`<div class="bag-kart glow-card${bm.poz==='deist'?' glow-deist':bm.poz==='agnostik'?' glow-agnostik':''}" style="background:${br.bg};border-color:${br.ana}25;backdrop-filter:blur(4px)"
       onclick="navigate({screen:'mektup',mektupId:'${b.id}',poz:'${bm.poz}'})"
       onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 28px ${br.ana}15'" onmouseout="this.style.transform='';this.style.boxShadow='none'">
       <div style="font-size:11px;color:${br.parlak};font-weight:600;margin-bottom:6px;opacity:.8;letter-spacing:.04em">${btitle}</div>
@@ -2128,7 +2138,7 @@ function renderMektup(){
   return`<div class="pg">
   <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${c.soluk}">← Mektuplara Dön</button>
   ${!m.tam?`<div class="m-skeleton-info" style="background:${r.bg};border-color:${r.ana}30;color:${c.soluk}">✏️ Bu mektup taslak aşamasında. Bağlantı yapısı ve temel argümanlar hazır, içerik yakında genişleyecek.</div>`:""}
-  <div class="m-header" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18;box-shadow:0 4px 24px ${r.ana}08">
+  <div class="m-header glow-card${m.poz==='deist'?' glow-deist':m.poz==='agnostik'?' glow-agnostik':''}" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18">
     <div class="m-badge" style="color:${r.parlak}">${m.poz.toUpperCase()} · ${m.meslek.toUpperCase()}</div>
     <h1 style="font-family:'Crimson Pro',serif;font-size:24px;font-weight:400;color:${c.met};line-height:1.2">${baslik}</h1>
     <div style="font-size:13px;color:${c.soluk};margin-top:10px;font-weight:300;line-height:1.6">${m.ozet}</div>
