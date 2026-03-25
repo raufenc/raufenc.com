@@ -30,8 +30,8 @@ a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(128,128,128,.18);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:rgba(128,128,128,.35)}
-.dk{background:#07070F;color:#EDE8E0}
-.ak{background:#F5F1EB;color:#1A1510}
+.dk{background:#0C0A08;color:#EDE8E0}
+.ak{background:#F0EBE3;color:#1A1510}
 
 /* ═══ KEYFRAMES ═══ */
 @keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -229,17 +229,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 // ═══════════════════════════════════════════════════════
 let dk=true;
 const C=()=>dk?{
-  bg:"#07070F",kart:"rgba(255,255,255,.05)",cerç:"rgba(255,255,255,.09)",
-  met:"#EDE8E0",soluk:"rgba(237,232,224,.45)",cs:"rgba(237,232,224,.18)",
-  yuz:"rgba(255,255,255,.06)",gölge:"0 24px 60px rgba(0,0,0,.58)",
-  kartG:"linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02))",
-  nav:"rgba(7,7,15,.9)",alt:"rgba(255,255,255,.04)"
+  bg:"#0C0A08",kart:"rgba(255,255,255,.04)",cerç:"rgba(255,255,255,.08)",
+  met:"#EDE8E0",soluk:"rgba(237,232,224,.5)",cs:"rgba(237,232,224,.2)",
+  yuz:"rgba(255,255,255,.05)",gölge:"0 24px 60px rgba(0,0,0,.58)",
+  kartG:"linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02))",
+  nav:"rgba(12,10,8,.92)",alt:"rgba(255,255,255,.04)",
+  kagit:"rgba(237,232,224,.03)"
 }:{
-  bg:"#F5F1EB",kart:"rgba(255,255,255,.88)",cerç:"rgba(0,0,0,.08)",
-  met:"#1A1510",soluk:"rgba(26,21,16,.5)",cs:"rgba(26,21,16,.22)",
-  yuz:"rgba(0,0,0,.04)",gölge:"0 16px 44px rgba(0,0,0,.1)",
-  kartG:"linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.75))",
-  nav:"rgba(243,239,233,.93)",alt:"rgba(0,0,0,.03)"
+  bg:"#F0EBE3",kart:"rgba(255,255,255,.85)",cerç:"rgba(120,100,70,.12)",
+  met:"#2A2018",soluk:"rgba(42,32,24,.55)",cs:"rgba(42,32,24,.25)",
+  yuz:"rgba(120,100,70,.05)",gölge:"0 16px 44px rgba(0,0,0,.08)",
+  kartG:"linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,250,240,.7))",
+  nav:"rgba(240,235,227,.94)",alt:"rgba(120,100,70,.04)",
+  kagit:"rgba(120,100,70,.04)"
 };
 const PR={ateist:{ana:"#C8963E",koyu:"#7A4F10",parlak:"#F0B84A",bg:"rgba(200,150,62,.11)"},deist:{ana:"#5BA88A",koyu:"#1E5C45",parlak:"#7ECBA8",bg:"rgba(91,168,138,.11)"},agnostik:{ana:"#9B7BC4",koyu:"#4A2680",parlak:"#C4A8E8",bg:"rgba(155,123,196,.11)"}};
 function rr(pid){return PR[pid]||PR.ateist;}
@@ -1919,43 +1921,50 @@ function renderAna(){
     {id:"agnostik",ikon:"∿",renk:PR.agnostik.ana,label:"Agnostik",kisa:"Bilmiyorum mu, kaçış mı?"},
   ];
   return`<div style="width:100%;padding:0">
-  <div style="text-align:center;padding:clamp(40px,6vw,80px) clamp(20px,5vw,80px) clamp(24px,3vw,40px);position:relative">
 
-    <!-- Title — compact -->
-    <h1 style="font-family:'Crimson Pro',serif;font-size:clamp(36px,8vw,72px);font-weight:300;line-height:1.1;color:${c.met};margin-bottom:clamp(14px,2vw,22px);letter-spacing:-.02em;animation:fadeUp .6s var(--ease) both">
-      Arkadaşın <span style="font-style:italic;background:linear-gradient(135deg,${rr.ana} 0%,${rr.parlak} 50%,${rr.ana} 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite">büyük soruyu</span> soruyor.
+  <!-- HERO — Mektup Zarfı Hissi -->
+  <div style="text-align:center;padding:clamp(48px,8vw,100px) clamp(20px,5vw,80px) clamp(32px,4vw,56px);position:relative">
+
+    <!-- Mühür / Wax Seal -->
+    <div style="margin-bottom:clamp(20px,3vw,32px);animation:fadeUp .6s var(--ease) both">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:clamp(56px,10vw,80px);height:clamp(56px,10vw,80px);border-radius:50%;background:linear-gradient(145deg,${rr.ana}30,${rr.koyu}50);border:2px solid ${rr.ana}40;box-shadow:0 8px 32px ${rr.ana}20,inset 0 2px 4px rgba(255,255,255,.15);position:relative">
+        <span style="font-size:clamp(24px,4vw,36px)">✉</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h1 style="font-family:'Crimson Pro',serif;font-size:clamp(32px,7vw,64px);font-weight:300;line-height:1.15;color:${c.met};margin-bottom:clamp(16px,2.5vw,24px);letter-spacing:-.01em;animation:fadeUp .6s var(--ease) .06s both">
+      Arkadaşın <span style="font-style:italic;color:${rr.parlak}">büyük soruyu</span> soruyor.
     </h1>
 
     <!-- Subtitle -->
-    <p style="font-family:'Crimson Pro',serif;font-size:clamp(16px,2.8vw,22px);color:${c.soluk};line-height:1.6;max-width:600px;margin:0 auto clamp(24px,3vw,36px);font-weight:300;font-style:italic;animation:fadeUp .6s var(--ease) .08s both">
-      Akademik kaynaklı mektuplar ve düşündürücü sorular. Mesleğine özel. Pozisyonuna göre.
+    <p style="font-family:'Crimson Pro',serif;font-size:clamp(15px,2.5vw,20px);color:${c.soluk};line-height:1.7;max-width:520px;margin:0 auto clamp(20px,3vw,32px);font-weight:300;font-style:italic;animation:fadeUp .6s var(--ease) .12s both">
+      Mesleğine özel, akademik kaynaklı mektuplar ve düşündürücü sorular.
     </p>
 
-    <!-- Stats inline -->
-    <div style="display:flex;justify-content:center;align-items:center;gap:clamp(16px,3vw,36px);margin-bottom:clamp(24px,3.5vw,40px);animation:fadeUp .6s var(--ease) .14s both">
-      ${[{n:"82",l:"Mektup"},{n:"27",l:"Meslek"},{n:"3",l:"Perspektif"}].map((s,i)=>`
-      ${i>0?`<div style="width:1px;height:clamp(20px,3vw,32px);background:${c.cerç}"></div>`:""}
-      <div style="text-align:center">
-        <div style="font-family:'Crimson Pro',serif;font-size:clamp(24px,5vw,40px);font-weight:700;color:${c.met};line-height:1">${s.n}</div>
-        <div style="font-size:clamp(9px,1.2vw,12px);color:${c.cs};text-transform:uppercase;letter-spacing:.12em;margin-top:3px;font-weight:500">${s.l}</div>
-      </div>`).join("")}
+    <!-- Dekoratif çizgi -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:clamp(6px,1vw,12px);animation:fadeUp .6s var(--ease) .16s both">
+      <div style="width:clamp(40px,8vw,80px);height:1px;background:linear-gradient(90deg,transparent,${c.cerç})"></div>
+      <span style="font-size:clamp(10px,1.3vw,12px);color:${c.cs};letter-spacing:.15em;text-transform:uppercase;font-weight:500">82 mektup · 27 meslek · 3 perspektif</span>
+      <div style="width:clamp(40px,8vw,80px);height:1px;background:linear-gradient(90deg,${c.cerç},transparent)"></div>
     </div>
   </div>
 
-  <!-- Pozisyon kartları — hemen görünür -->
+  <!-- Pozisyon Kartları — Zarf açılıyor -->
   <div style="max-width:var(--max-content);margin:0 auto;padding:0 clamp(20px,4vw,64px)">
-    <div style="text-align:center;margin-bottom:clamp(16px,2.5vw,28px);animation:fadeUp .6s var(--ease) .2s both">
-      <span style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};letter-spacing:.15em;text-transform:uppercase;font-weight:500">Pozisyon Seç</span>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-bottom:clamp(48px,6vw,72px)">
+    <p style="text-align:center;font-family:'Crimson Pro',serif;font-size:clamp(18px,3vw,26px);color:${c.met};font-weight:400;margin-bottom:clamp(6px,1vw,10px);animation:fadeUp .6s var(--ease) .2s both">Arkadaşın hangi pozisyonda?</p>
+    <p style="text-align:center;font-size:clamp(12px,1.6vw,15px);color:${c.cs};margin-bottom:clamp(20px,3vw,32px);font-weight:300;animation:fadeUp .6s var(--ease) .24s both">Bir pozisyon seç, mesleğine uygun mektubu bul.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,20px);margin-bottom:clamp(48px,6vw,72px)">
       ${pozlar.map((p,i)=>`
       <button onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
-        style="background:${c.kart};border:1px solid ${c.cerç};border-top:3px solid ${p.renk}60;border-radius:clamp(16px,2.5vw,24px);padding:clamp(20px,3vw,36px);text-align:left;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .6s var(--ease) ${.24+i*.06}s both;position:relative;overflow:hidden"
-        onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px ${p.renk}20';this.style.borderTopColor='${p.renk}'"
-        onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderTopColor='${p.renk}60'">
-        <div style="font-size:clamp(28px,5vw,44px);margin-bottom:clamp(12px,2vw,20px)">${p.ikon}</div>
-        <div style="font-size:clamp(17px,2.5vw,22px);font-weight:600;color:${c.met};margin-bottom:clamp(6px,1vw,10px)">${p.label}</div>
-        <div style="font-size:clamp(13px,1.8vw,16px);color:${c.soluk};line-height:1.6;font-weight:300">${p.kisa}</div>
+        style="background:${c.kart};border:1px solid ${c.cerç};border-radius:clamp(14px,2vw,20px);padding:clamp(20px,3vw,32px);text-align:center;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .5s var(--ease) ${.28+i*.06}s both;position:relative"
+        onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 40px ${p.renk}18';this.style.borderColor='${p.renk}40'"
+        onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='${dk?'rgba(255,255,255,.08)':'rgba(120,100,70,.12)'}'"">
+        <div style="display:inline-flex;align-items:center;justify-content:center;width:clamp(44px,7vw,64px);height:clamp(44px,7vw,64px);border-radius:50%;background:${p.renk}12;border:1px solid ${p.renk}20;margin-bottom:clamp(12px,2vw,18px)">
+          <span style="font-size:clamp(20px,3.5vw,28px)">${p.ikon}</span>
+        </div>
+        <div style="font-family:'Crimson Pro',serif;font-size:clamp(18px,2.8vw,24px);font-weight:600;color:${c.met};margin-bottom:clamp(6px,.8vw,10px)">${p.label}</div>
+        <div style="font-size:clamp(12px,1.6vw,15px);color:${c.soluk};line-height:1.55;font-weight:300">${p.kisa}</div>
       </button>`).join("")}
     </div>
 
