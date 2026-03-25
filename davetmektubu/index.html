@@ -2004,10 +2004,10 @@ function renderAna(){
     {id:"deist",ikon:"✦",renk:PR.deist.ana,label:"Deist","kisa":"Yaratıcı neden sessiz kalsın?"},
     {id:"agnostik",ikon:"∿",renk:PR.agnostik.ana,label:"Agnostik",kisa:"Bilmiyorum mu, kaçış mı?"},
   ];
-  return`<div class="pg-lg" style="padding-top:20px">
+  return`<div style="width:100%;padding:0">
 
   <!-- HERO -->
-  <div class="hero-wrap" style="text-align:center;padding:36px 12px 0;position:relative">
+  <div class="hero-wrap" style="text-align:center;padding:clamp(36px,6vw,100px) clamp(20px,5vw,80px) 0;position:relative;width:100%">
 
     <!-- Zarf ikonu — premium -->
     <div class="hero-icon-wrap" style="position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:28px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both">
@@ -2064,7 +2064,7 @@ function renderAna(){
     </div>
 
     <!-- Pozisyon önizleme kartları — premium glassmorphism -->
-    <div class="poz-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:36px;text-align:left">
+    <div class="poz-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-top:clamp(36px,5vw,64px);text-align:left;max-width:960px;margin-left:auto;margin-right:auto;padding:0 clamp(8px,3vw,40px)">
       ${pozlar.map((p,i)=>`
       <button class="poz-mini" onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
         style="background:linear-gradient(145deg,${p.renk}12,${p.renk}04);border:1px solid ${p.renk}22;border-radius:16px;padding:16px 14px;text-align:left;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) ${.55+i*.08}s both;backdrop-filter:blur(8px);position:relative;overflow:hidden"
@@ -2085,7 +2085,7 @@ function renderAna(){
     </div>
 
     <!-- Adımlar — premium -->
-    <div class="steps" style="margin-top:0">
+    <div class="steps" style="margin-top:0;max-width:960px;margin-left:auto;margin-right:auto;padding:0 clamp(8px,3vw,40px)">
       ${[
         {n:"1",ikon:"🎯",b:"Pozisyonu seç",a:"Arkadaşın ateist mi, deist mi, agnostik mi?"},
         {n:"2",ikon:"✉",b:"Mektubu oku",a:"Mesleğine özel, argümanlı, itirazları dürüstçe işleyen."},
@@ -2110,11 +2110,11 @@ function renderAna(){
 // POZİSYON
 function renderPoz(){
   const c=C();
-  return`<div class="pg">
+  return`<div class="pg-lg">
   <button class="btn-back" onclick="goAna()" style="color:${c.soluk}">← Geri</button>
   <h2 class="poz-baslik" style="font-family:'Crimson Pro',serif;font-size:clamp(34px,9vw,52px);font-weight:300;color:${c.met};line-height:1.15;margin-bottom:8px">Arkadaşın hangi</h2>
   <p class="poz-alt" style="font-family:'Crimson Pro',serif;font-size:clamp(22px,6vw,32px);font-style:italic;color:${c.soluk};margin-bottom:36px">pozisyonda?</p>
-  <div style="display:flex;flex-direction:column;gap:11px">
+  <div style="display:flex;flex-direction:column;gap:clamp(12px,2vw,20px)">
     ${Object.keys(SORULAR).map(pid=>{const P=SORULAR[pid],r=P.r;return`
     <button class="poz-card" style="background:${c.kart};border-color:${c.cerç}" onclick="navigate({screen:'liste',poz:'${pid}',kat:null,soruI:0})"
       onmouseover="this.style.transform='translateY(-3px) scale(1.01)'" onmouseout="this.style.transform=''">
@@ -2137,13 +2137,13 @@ function renderListe(){
   if(!state.poz)return"";
   const c=C(),P=SORULAR[state.poz],r=P.r;
   const mektupListesi=Object.entries(MEKTUPLAR).filter(([id,m])=>m.poz===state.poz);
-  return`<div class="pg">
+  return`<div class="pg-lg">
   <button class="btn-back" onclick="navigate({screen:'poz'})" style="color:${c.soluk}">← Geri</button>
-  <div style="display:flex;align-items:center;gap:11px;margin-bottom:7px">
-    <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,${r.ana}22,${r.koyu}30);border:1px solid ${r.ana}28;display:flex;align-items:center;justify-content:center;font-size:18px;color:${r.parlak}">${P.ikon}</div>
+  <div style="display:flex;align-items:center;gap:clamp(11px,2vw,18px);margin-bottom:10px">
+    <div style="width:clamp(40px,6vw,64px);height:clamp(40px,6vw,64px);border-radius:16px;background:linear-gradient(135deg,${r.ana}22,${r.koyu}30);border:1px solid ${r.ana}28;display:flex;align-items:center;justify-content:center;font-size:clamp(20px,3vw,30px);color:${r.parlak}">${P.ikon}</div>
     <h2 class="liste-baslik" style="font-family:'Crimson Pro',serif;font-size:clamp(30px,8vw,48px);font-weight:300;color:${c.met}">${P.label}</h2>
   </div>
-  <p style="font-size:13px;color:${c.soluk};margin-bottom:22px;font-weight:300;line-height:1.6">
+  <p style="font-size:clamp(14px,2.2vw,18px);color:${c.soluk};margin-bottom:28px;font-weight:300;line-height:1.7">
     ${state.poz==="ateist"?"Materyalist-natüralist dünya görüşünün cevaplamakta zorlandığı sorular.":state.poz==="deist"?"Sessiz Yaratıcı fikrinin içindeki felsefi gerilimleri ortaya koyan sorular.":"Belirsizliği konfor alanı olarak kullananlar için dürüst sorular."}
   </p>
   <div class="tabs">
@@ -2202,16 +2202,16 @@ function renderMektup(){
     return`<div class="bag-kart" style="background:${br.bg};border-color:${br.ana}25;backdrop-filter:blur(4px)"
       onclick="navigate({screen:'mektup',mektupId:'${b.id}',poz:'${bm.poz}'})"
       onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 28px ${br.ana}15'" onmouseout="this.style.transform='';this.style.boxShadow='none'">
-      <div style="font-size:10px;color:${br.parlak};font-weight:600;margin-bottom:6px;opacity:.85;letter-spacing:.04em">${btitle}</div>
-      <div style="font-size:13px;font-weight:500;color:${c.met};margin-bottom:5px">${bm.meslek} Mektubu</div>
-      <div style="font-size:11px;color:${c.soluk};font-weight:300;line-height:1.5">${b.neden}</div>
-      <div style="font-size:15px;margin-top:10px;opacity:.4">${b.ikon}</div>
+      <div style="font-size:clamp(11px,1.5vw,14px);color:${br.parlak};font-weight:600;margin-bottom:8px;opacity:.85;letter-spacing:.04em">${btitle}</div>
+      <div style="font-size:clamp(15px,2.2vw,20px);font-weight:500;color:${c.met};margin-bottom:6px">${bm.meslek} Mektubu</div>
+      <div style="font-size:clamp(12px,1.8vw,16px);color:${c.soluk};font-weight:300;line-height:1.6">${b.neden}</div>
+      <div style="font-size:clamp(16px,2vw,22px);margin-top:12px;opacity:.4">${b.ikon}</div>
     </div>`;
   }
   const baglarHTML=`
-    <div class="bag-section-label" style="font-size:11px;color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Aynı bakış açısı, farklı meslek</div>
+    <div class="bag-section-label" style="font-size:clamp(11px,1.5vw,15px);color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">Aynı bakış açısı, farklı meslek</div>
     <div class="bag-grid">${ayniGorus.map(bagKartHTML).join("")}</div>
-    <div class="bag-section-label" style="font-size:11px;color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:18px;margin-bottom:8px">Aynı meslek, farklı bakış açısı</div>
+    <div class="bag-section-label" style="font-size:clamp(11px,1.5vw,15px);color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:22px;margin-bottom:10px">Aynı meslek, farklı bakış açısı</div>
     <div class="bag-grid">${ayniMeslek.map(bagKartHTML).join("")}</div>
   `;
   return`<div class="pg-lg">
@@ -2219,23 +2219,23 @@ function renderMektup(){
   ${!m.tam?`<div class="m-skeleton-info" style="background:${r.bg};border-color:${r.ana}30;color:${c.soluk}">✏️ Bu mektup taslak aşamasında. Bağlantı yapısı ve temel argümanlar hazır, içerik yakında genişleyecek.</div>`:""}
   <div class="m-header" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18;box-shadow:0 4px 24px ${r.ana}08">
     <div class="m-badge" style="color:${r.parlak}">${m.poz.toUpperCase()} · ${m.meslek.toUpperCase()}</div>
-    <h1 class="m-title" style="font-family:'Crimson Pro',serif;font-size:clamp(22px,5vw,36px);font-weight:400;color:${c.met};line-height:1.25">${baslik}</h1>
-    <div style="font-size:12px;color:${c.soluk};margin-top:10px;font-weight:300;line-height:1.6">${m.ozet}</div>
-    <div class="m-reading-time" style="display:flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;color:${r.parlak};opacity:.7">
-      <span style="font-size:13px">◔</span> ~${okumaDk} dk okuma
+    <h1 class="m-title" style="font-family:'Crimson Pro',serif;font-size:clamp(26px,6vw,52px);font-weight:400;color:${c.met};line-height:1.25">${baslik}</h1>
+    <div style="font-size:clamp(13px,2vw,18px);color:${c.soluk};margin-top:12px;font-weight:300;line-height:1.7">${m.ozet}</div>
+    <div class="m-reading-time" style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:clamp(12px,1.8vw,16px);color:${r.parlak};opacity:.7">
+      <span style="font-size:clamp(14px,2vw,18px)">◔</span> ~${okumaDk} dk okuma
     </div>
   </div>
   ${icerikHTML}
   <div class="baglar" style="border-color:${c.cerç}">
-    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:${r.parlak};opacity:.75;margin-bottom:4px">Devam Et</div>
-    <h3 style="font-family:'Crimson Pro',serif;font-size:19px;font-weight:400;color:${c.met};margin-bottom:4px">Bağlantılı Mektuplar</h3>
-    <p style="font-size:12px;color:${c.soluk};font-weight:300;margin-bottom:0">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
+    <div style="font-size:clamp(11px,1.5vw,14px);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:${r.parlak};opacity:.75;margin-bottom:6px">Devam Et</div>
+    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(20px,3.5vw,32px);font-weight:400;color:${c.met};margin-bottom:6px">Bağlantılı Mektuplar</h3>
+    <p style="font-size:clamp(13px,2vw,17px);color:${c.soluk};font-weight:300;margin-bottom:0">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
     <div class="bag-grid">${baglarHTML}</div>
   </div>
   <div style="margin-top:28px;padding:20px;background:linear-gradient(135deg,${r.ana}10,${r.ana}04);border:1px solid ${r.ana}22;border-radius:16px;text-align:center">
-    <div style="font-size:17px;margin-bottom:8px">💬</div>
-    <h3 style="font-family:'Crimson Pro',serif;font-size:17px;font-weight:400;color:${c.met};margin-bottom:7px">Bu mektupla birlikte bir soru da gönder</h3>
-    <button onclick="navigate({screen:'sorular',soruI:0,kat:null})" style="background:linear-gradient(135deg,${r.ana},${r.koyu});border:none;border-radius:10px;padding:10px 24px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Soruları Gör →</button>
+    <div style="font-size:clamp(20px,3vw,28px);margin-bottom:12px">💬</div>
+    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(18px,3vw,26px);font-weight:400;color:${c.met};margin-bottom:10px">Bu mektupla birlikte bir soru da gönder</h3>
+    <button onclick="navigate({screen:'sorular',soruI:0,kat:null})" style="background:linear-gradient(135deg,${r.ana},${r.koyu});border:none;border-radius:12px;padding:clamp(12px,2vw,18px) clamp(28px,4vw,40px);color:#fff;font-size:clamp(14px,2vw,18px);font-weight:600;cursor:pointer;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Soruları Gör →</button>
   </div>
   <!-- Mektup paylaş -->
   <div style="display:flex;gap:7px;margin-top:16px">
