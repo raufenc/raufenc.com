@@ -401,10 +401,17 @@
       flex-shrink: 0;
     }
 
+    /* Quiz compact */
+    .quiz-question { font-size: 1rem; }
+    .quiz-card { padding: 1.25rem; }
+
     /* Responsive */
     @media (max-width: 640px) {
       .card { padding: 1.25rem; }
       .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
+      .quiz-card { padding: 0.875rem; }
+      .quiz-question { font-size: 0.9rem; margin-bottom: 0.75rem !important; }
+      .option-label { padding: 0.75rem 0.875rem; font-size: 0.82rem; margin-bottom: 0.5rem; line-height: 1.45; }
     }
   </style>
 </head>
@@ -855,34 +862,15 @@ function screenQuiz(){
 
   return `
     <div>
-      <div class="progress-wrap"><div class="progress-fill" style="width:${progress}%"></div></div>
-
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h1 class="font-display text-2xl sm:text-3xl font-bold" style="color:var(--gold)">${test.concepts.fazilet}</h1>
-          <p class="text-sm mt-1" style="color:var(--text-muted)">${test.title}</p>
-        </div>
-        <div class="q-number">${S.qi+1}</div>
+      <div class="progress-wrap mb-2"><div class="progress-fill" style="width:${progress}%"></div></div>
+      <div class="flex items-center justify-between mb-3">
+        <p class="text-xs" style="color:var(--text-muted)">${test.concepts.fazilet} — Soru ${S.qi+1}/${test.questions.length}</p>
+        <button class="text-xs" style="color:var(--text-muted)" data-action="goStart">✕</button>
       </div>
 
-      <p class="text-xs mb-6" style="color:var(--text-muted)">Soru ${S.qi+1} / ${test.questions.length}</p>
-
-      <div class="card mb-6">
-        <p class="text-lg leading-relaxed mb-6" style="color:var(--text-primary)">${q.soru}</p>
+      <div class="card quiz-card mb-3">
+        <p class="quiz-question leading-relaxed mb-4" style="color:var(--text-primary)">${q.soru}</p>
         <div>${opts}</div>
-      </div>
-
-      <div class="flex justify-between gap-4">
-        <button class="btn btn-subtle" data-action="prev"${S.qi===0?' disabled':''}>
-          ← Geri
-        </button>
-        ${S.qi<test.questions.length-1
-          ?`<button class="btn btn-gold" data-action="next"${S.answers[S.qi]===undefined?' disabled':''}>İleri →</button>`
-          :''}
-      </div>
-
-      <div class="text-center mt-6">
-        <button class="text-sm transition-colors" style="color:var(--text-muted)" data-action="goStart">Test Seçimine Geri Dön</button>
       </div>
     </div>`;
 }
