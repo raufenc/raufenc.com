@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kalbinin Haritası — Ahlak Pusulası</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -1171,110 +1172,76 @@ function calcAndShow(){
 async function shareImg(){
   if(!S.gemini||S.gemini.streaming) return;
   const test=TESTS[S.testKey], p=pct(S.scores);
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  const W=210, mg=20, cw=W-2*mg;
+  const rawText=(S.gemini.text||'').replace(/SONRAKI_TEST:.*/,'').trim();
 
-  // Arka plan
-  doc.setFillColor(10,15,30);
-  doc.rect(0,0,W,297,'F');
-
-  // Üst dekoratif çizgi
-  doc.setDrawColor(212,175,55);
-  doc.setLineWidth(0.8);
-  doc.line(mg,15,W-mg,15);
-
-  // Başlık
-  doc.setTextColor(212,175,55);
-  doc.setFontSize(10);
-  doc.text('AHLAK PUSULASI SONUÇ KARTI',W/2,24,{align:'center'});
-
-  doc.setFontSize(22);
-  doc.setTextColor(212,175,55);
-  doc.text(test.concepts.fazilet,W/2,35,{align:'center'});
-
-  doc.setFontSize(9);
-  doc.setTextColor(160,160,170);
-  doc.text(test.title,W/2,42,{align:'center'});
-
-  // Çizgi
-  doc.setDrawColor(212,175,55);
-  doc.setLineWidth(0.3);
-  doc.line(mg,47,W-mg,47);
-
-  // Üç bar - yatay
-  let by=55;
-  const bars=[
-    {label:test.concepts.tefrit,val:p.tefrit,r:251,g:191,b:36},
-    {label:test.concepts.fazilet,val:p.fazilet,r:52,g:211,b:153},
-    {label:test.concepts.ifrat,val:p.ifrat,r:248,g:113,b:113}
-  ];
-
-  bars.forEach(b=>{
-    // Label
-    doc.setFontSize(9);
-    doc.setTextColor(b.r,b.g,b.b);
-    doc.text(b.label,mg,by);
-
-    // Yüzde
-    doc.setFontSize(16);
-    doc.setTextColor(255,255,255);
-    doc.text('%'+b.val,W-mg,by,{align:'right'});
-
-    // Bar arka plan
-    doc.setFillColor(30,35,50);
-    doc.roundedRect(mg,by+2,cw,6,3,3,'F');
-
-    // Bar dolgu
-    const fillW=Math.max((b.val/100)*cw,2);
-    doc.setFillColor(b.r,b.g,b.b);
-    doc.roundedRect(mg,by+2,fillW,6,3,3,'F');
-
-    by+=20;
-  });
-
-  // Çizgi
-  doc.setDrawColor(212,175,55);
-  doc.setLineWidth(0.3);
-  doc.line(mg,by,W-mg,by);
-  by+=8;
-
-  // AI Değerlendirme
-  doc.setFontSize(12);
-  doc.setTextColor(212,175,55);
-  doc.text('Size Özel Değerlendirmeniz',W/2,by,{align:'center'});
-  by+=8;
-
-  // Metin
-  const rawText=(S.gemini.text||'').replace(/\*\*/g,'').replace(/SONRAKI_TEST:.*/,'').trim();
-  doc.setFontSize(9);
-  doc.setTextColor(200,200,210);
-  const lines=doc.splitTextToSize(rawText,cw);
-
-  for(let i=0;i<lines.length;i++){
-    if(by>275){
-      // Yeni sayfa
-      doc.addPage();
-      doc.setFillColor(10,15,30);
-      doc.rect(0,0,W,297,'F');
-      by=20;
-    }
-    doc.text(lines[i],mg,by);
-    by+=4.5;
+  // Metni başlıklara göre parse et
+  const sections=[];
+  const parts=rawText.split(/\*\*(.+?)\*\*/g);
+  for(let i=0;i<parts.length;i++){
+    const txt=parts[i].trim();
+    if(!txt) continue;
+    if(i%2===1) sections.push({title:txt,body:''});
+    else if(sections.length>0) sections[sections.length-1].body=txt;
+    else sections.push({title:'',body:txt});
   }
 
-  // Alt çizgi
-  doc.setDrawColor(212,175,55);
-  doc.setLineWidth(0.3);
-  const lastY=Math.min(by+5,290);
-  doc.line(mg,lastY,W-mg,lastY);
+  const gold='#d4af37', bg='#0a0f1e', textCol='#c8c8d2', mutedCol='#a0a0aa';
 
-  doc.setFontSize(7);
-  doc.setTextColor(120,120,130);
-  doc.text('raufenc.com/kalbinin-haritasi',W/2,lastY+5,{align:'center'});
+  // Bar canvas fonksiyonu
+  function makeBar(label, val, color){
+    return {
+      columns:[
+        {text:label, fontSize:10, color:color, width:80, margin:[0,4,0,0]},
+        {canvas:[
+          {type:'rect',x:0,y:0,w:330,h:14,r:7,color:'#1e2332'},
+          {type:'rect',x:0,y:0,w:Math.max((val/100)*330,4),h:14,r:7,color:color}
+        ], width:'*', margin:[0,2,0,0]},
+        {text:'%'+val, fontSize:14, bold:true, color:'#ffffff', width:50, alignment:'right', margin:[0,1,0,0]}
+      ],
+      margin:[0,6,0,6]
+    };
+  }
 
-  // İndir
-  doc.save(`${test.concepts.fazilet}-Sonuc-Karti.pdf`);
+  const content=[
+    // Üst çizgi
+    {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:2,lineColor:gold}],margin:[0,0,0,12]},
+    // Başlık
+    {text:'AHLAK PUSULASI SONUÇ KARTI',alignment:'center',fontSize:10,color:gold,letterSpacing:3,margin:[0,0,0,6]},
+    {text:test.concepts.fazilet,alignment:'center',fontSize:26,bold:true,color:gold,margin:[0,0,0,4]},
+    {text:test.title,alignment:'center',fontSize:10,color:mutedCol,margin:[0,0,0,16]},
+    // Çizgi
+    {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,0,0,16]},
+    // Barlar
+    makeBar(test.concepts.tefrit, p.tefrit, '#fbbf24'),
+    makeBar(test.concepts.fazilet, p.fazilet, '#34d399'),
+    makeBar(test.concepts.ifrat, p.ifrat, '#f87171'),
+    // Çizgi
+    {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,12,0,16]},
+    // Değerlendirme başlığı
+    {text:'Size Özel Değerlendirmeniz',alignment:'center',fontSize:14,bold:true,color:gold,margin:[0,0,0,14]},
+  ];
+
+  // Bölümler
+  sections.forEach(s=>{
+    if(s.title) content.push({text:s.title,fontSize:12,bold:true,color:gold,margin:[0,10,0,4]});
+    if(s.body) content.push({text:s.body,fontSize:9.5,color:textCol,lineHeight:1.5,margin:[0,0,0,4]});
+  });
+
+  // Alt çizgi + footer
+  content.push({canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,16,0,8]});
+  content.push({text:'raufenc.com/kalbinin-haritasi',alignment:'center',fontSize:7,color:'#787880'});
+
+  const docDef={
+    pageSize:'A4',
+    pageMargins:[40,40,40,40],
+    background:function(){
+      return {canvas:[{type:'rect',x:0,y:0,w:595.28,h:841.89,color:bg}]};
+    },
+    content:content,
+    defaultStyle:{font:'Roboto',color:textCol}
+  };
+
+  pdfMake.createPdf(docDef).download(test.concepts.fazilet+'-Sonuc-Karti.pdf');
 }
 
 render();
