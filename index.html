@@ -232,7 +232,7 @@
       font-weight: 800; line-height: 1.1;
       letter-spacing: -0.03em;
       margin-bottom: 20px;
-      background: linear-gradient(135deg, var(--text) 0%, var(--warm) 100%);
+      background: linear-gradient(135deg, var(--text) 30%, var(--warm) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -1634,7 +1634,7 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.01, rootMargin: '0px 0px 50px 0px' });
   reveals.forEach(function(el) { revealObserver.observe(el); });
 
   // ── TEMA TOGGLE ──
