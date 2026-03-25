@@ -946,10 +946,10 @@ function screenResult(){
         <div class="divider"><span class="divider-icon">✦</span></div>
 
         <h2 class="font-display text-xl sm:text-2xl font-bold text-center mb-4" style="color:var(--gold)">Size Özel Değerlendirmeniz</h2>
-        <div class="p-4 rounded-xl min-h-[120px]" style="background:rgba(212,175,55,0.03);border:1px solid var(--border-gold)">${gem}</div>
+        <div id="gemini-box" class="p-4 rounded-xl min-h-[120px]" style="background:rgba(212,175,55,0.03);border:1px solid var(--border-gold)">${gem}</div>
       </div>
 
-      ${next}
+      <div id="next-test-slot">${next}</div>
 
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
         <button class="btn btn-gold" data-action="share"${!S.gemini?' disabled':''}>
@@ -1030,7 +1030,10 @@ function renderGeminiText(text){
    API
    ═══════════════════════════════════════════════ */
 async function fetchGemini(scores){
-  S.loadingGemini=false; S.gemini={streaming:true,text:'',sonraki_test:{key:'',gerekce:''}}; render();
+  S.loadingGemini=false; S.gemini={streaming:true,text:'',sonraki_test:{key:'',gerekce:''}};
+  // render() çağırmıyoruz — barları sıfırlamamak için sadece değerlendirme alanını güncelliyoruz
+  const gemBox=document.getElementById('gemini-box');
+  if(gemBox) gemBox.innerHTML='<div class="leading-relaxed whitespace-pre-wrap" style="color:var(--text-secondary)" id="gemini-stream"><span class="stream-cursor"></span></div>';
   const test=TESTS[S.testKey], p=pct(scores);
   const otherKeys=Object.keys(TESTS).filter(k=>k!==S.testKey).join(', ');
   const system=`Sen derin bir irfan ve hikmet ehlisin. Yazıların Osmanlı nesrinin letafetini taşır; her cümle mütefekkir, ağırbaşlı ve ruhani bir derinlikle yoğrulmuştur. Şu kelimeleri ve benzerlerini MUTLAKA kullan: kalb, nefis, ruh, cehd, itidal, ihsan, muhabbet, irade, fıtrat, inkisar, azm, tevekkül, rıza, gaflet, saadet, hüzün, müteşekkir, mütevazı, ledün, irfan, feyz, bâtın, zâhir, himmet, halvet, istikamet, mertebe, makam, kemal, zillet, izzet, nükte, letafet, hamiyet, hakikat, keşf, tecelli. Cümleler lirik, derin ve akıcı olsun. Klişe ve yüzeysel ifadelerden kaçın.`;
@@ -1069,10 +1072,27 @@ async function fetchGemini(scores){
     }
     S.gemini={streaming:false,text:fullText,sonraki_test:S.gemini.sonraki_test};
     S.history[S.testKey]={percentages:scores,geminiData:S.gemini}; saveHistory();
-    render(); animNums();
+    // Barları sıfırlamamak için render yerine sadece gerekli alanları güncelle
+    const gemBox2=document.getElementById('gemini-box');
+    if(gemBox2) gemBox2.innerHTML=renderGeminiText(fullText);
+    // Paylaş butonunu etkinleştir
+    const shareBtn=document.querySelector('[data-action="share"]');
+    if(shareBtn) shareBtn.disabled=false;
+    // Sonraki test kartını ekle
+    if(S.gemini.sonraki_test?.key&&TESTS[S.gemini.sonraki_test.key]){
+      const nTest=TESTS[S.gemini.sonraki_test.key];
+      const nextCard=document.getElementById('next-test-slot');
+      if(nextCard) nextCard.innerHTML=`<div class="card mt-8 text-center">
+        <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sıradaki Adım</p>
+        <h3 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">${nTest.concepts.fazilet}</h3>
+        <p class="text-sm mb-4" style="color:var(--text-muted)">${S.gemini.sonraki_test.gerekce}</p>
+        <button class="btn btn-emerald" data-action="startTest" data-key="${S.gemini.sonraki_test.key}">Teste Başla</button>
+      </div>`;
+    }
   }catch(e){
     S.gemini={streaming:false,text:'Bir hata oluştu. Lütfen tekrar deneyin.',sonraki_test:{key:'',gerekce:''}};
-    render();
+    const gemBox3=document.getElementById('gemini-box');
+    if(gemBox3) gemBox3.innerHTML='<p style="color:#f87171">Bir hata oluştu. Lütfen tekrar deneyin.</p>';
   }
 }
 
