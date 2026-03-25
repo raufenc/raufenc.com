@@ -130,12 +130,11 @@ function showCompare() {
   if (compareList.length < 2) { showToast('En az 2 alim seçin'); return; }
   const scholars = compareList.map(id => BM[id]).filter(Boolean);
 
-  const fields = ['Dönem', 'Yer', 'Mezhep', 'Birincil Alan', 'Eser Sayısı', 'Katkı Sayısı', 'Zorluk'];
+  const fields = ['Dönem', 'Yer', 'Birincil Alan', 'Eser Sayısı', 'Katkı Sayısı', 'Zorluk'];
   const getVal = (b, f) => {
     switch(f) {
       case 'Dönem': return b.donem;
       case 'Yer': return b.yer;
-      case 'Mezhep': return b.mezhep || '—';
       case 'Birincil Alan': return b.alanBirincil;
       case 'Eser Sayısı': return b.eserler?.length || 0;
       case 'Katkı Sayısı': return b.katkilar?.length || 0;
@@ -215,7 +214,6 @@ function render() {
         </div>
         <div class="card-tags">${tags}</div>
         <div class="card-hook">${b.hook}</div>
-        ${b.mezhep ? `<div class="card-mezhep">🕌 ${b.mezhep}</div>` : ''}
         ${compareMode ? `<div style="margin-top:8px;font-size:10px;color:${isCompared?'var(--gold)':'var(--muted)'};font-weight:700">${isCompared?'✓ Seçildi':'Seçmek için tıkla'}</div>` : ''}
       </div>
     `;

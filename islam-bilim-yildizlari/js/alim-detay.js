@@ -159,7 +159,6 @@ if (!b) {
       <div class="alim-name">${b.isim}</div>
       <div class="alim-meta">
         \uD83D\uDCC5 ${b.dogum||'?'}\u2013${b.vefat||'?'} \u00B7 \uD83D\uDCCD ${b.yer} \u00B7 ${b.donem} \u00B7
-        ${b.mezhep ? '\uD83D\uDD4C '+b.mezhep+' \u00B7 ' : ''}
         <span style="color:var(--gold)">${stars}</span>
       </div>
       ${timelineBar}
@@ -194,7 +193,7 @@ if (!b) {
             <div>\u26B0\uFE0F <strong>Vefat:</strong> ${b.vefat || 'Bilinmiyor'}</div>
             <div>\uD83D\uDCCD <strong>Yer:</strong> ${b.yer}</div>
             <div>\uD83D\uDD70\uFE0F <strong>Dönem:</strong> ${b.donem}</div>
-            ${b.mezhep ? `<div>\uD83D\uDD4C <strong>Mezhep:</strong> ${b.mezhep}</div>` : ''}
+
             <div>\uD83D\uDCDA <strong>Eser sayısı:</strong> ${b.eserler?.length || 0}</div>
             <div>\uD83D\uDCA1 <strong>Katkı sayısı:</strong> ${b.katkilar?.length || 0}</div>
           </div>
