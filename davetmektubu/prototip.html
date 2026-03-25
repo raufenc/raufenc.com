@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Davet Mektubu — Prototip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ── Design Tokens ── */
+:root {
+  --bg: #0D0B09;
+  --surface: #161310;
+  --surface-2: #1E1A16;
+  --border: rgba(205,185,155,.1);
+  --border-hover: rgba(205,185,155,.2);
+  --text: #E8E0D4;
+  --text-secondary: rgba(232,224,212,.55);
+  --text-tertiary: rgba(232,224,212,.3);
+  --accent: #C8963E;
+  --accent-glow: rgba(200,150,62,.12);
+
+  --font-serif: 'Crimson Pro', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --nav-h: 56px;
+  --page-px: 20px;
+  --content-max: 1120px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Nav ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 var(--page-px);
+  background: rgba(13,11,9,.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--text);
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-logo span { opacity: .5; }
+
+/* ── Page ── */
+.page {
+  padding-top: var(--nav-h);
+  min-height: 100vh;
+}
+
+/* ── Hero ── */
+.hero {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 64px var(--page-px) 40px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.hero-text {
+  max-width: 640px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(200,150,62,.15);
+  margin-bottom: 24px;
+}
+.hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.hero-badge-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 480px;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+.hero-meta-item {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.hero-meta-num {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+.hero-meta-sep {
+  width: 1px; height: 20px;
+  background: var(--border);
+}
+
+/* ── Cards ── */
+.cards-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-px) 80px;
+}
+
+.cards-label {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.cards-desc {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 24px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.16,1,.3,1);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent));
+  opacity: .5;
+  transition: opacity .3s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 48px rgba(0,0,0,.3);
+}
+.card:hover::before { opacity: 1; }
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  background: var(--accent-glow);
+  border: 1px solid rgba(200,150,62,.1);
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.card-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+.card-arrow {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  transition: transform .2s, color .2s;
+}
+.card:hover .card-arrow {
+  transform: translateX(3px);
+  color: var(--accent);
+}
+
+/* ── Steps ── */
+.steps-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-px) 80px;
+}
+.steps-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 32px;
+}
+.steps-divider-line {
+  flex: 1; height: 1px;
+  background: var(--border);
+}
+.steps-divider-text {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 20px;
+}
+.step-icon {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+.step-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.step-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 300;
+}
+
+/* ── Footer note ── */
+.footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 0 var(--page-px) 48px;
+}
+
+/* ── Deist card color ── */
+.card-deist { --card-accent: #5BA88A; }
+.card-deist .card-icon { background: rgba(91,168,138,.12); border-color: rgba(91,168,138,.15); }
+
+/* ── Agnostik card color ── */
+.card-agnostik { --card-accent: #9B7BC4; }
+.card-agnostik .card-icon { background: rgba(155,123,196,.12); border-color: rgba(155,123,196,.15); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero { padding: 40px var(--page-px) 32px; gap: 36px; }
+  .hero-title { font-size: 32px; }
+  .hero-subtitle { font-size: 15px; }
+  .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+  .steps-grid { grid-template-columns: 1fr; gap: 12px; }
+  .hero-meta { gap: 14px; }
+  .hero-meta-num { font-size: 18px; }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .hero-title { font-size: 38px; }
+}
+
+@media (min-width: 1024px) {
+  :root { --page-px: 48px; --nav-h: 60px; }
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 80px var(--page-px) 64px;
+    gap: 64px;
+  }
+  .hero-title { font-size: 48px; }
+  .hero-subtitle { font-size: 18px; }
+  .hero-meta-num { font-size: 26px; }
+  .card { padding: 32px 28px; }
+  .card-title { font-size: 22px; }
+  .card-desc { font-size: 15px; }
+  .nav { padding: 0 48px; }
+  .nav-logo { font-size: 16px; }
+}
+
+@media (min-width: 1280px) {
+  :root { --page-px: 64px; }
+  .hero-title { font-size: 54px; }
+  .cards-grid { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span>✉</span> Davet Mektubu
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button style="border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-secondary);border:1px solid var(--border);background:none;cursor:pointer">☀</button>
+  </div>
+</nav>
+
+<div class="page">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span class="hero-badge-text">82 Mektup</span>
+      </div>
+
+      <h1 class="hero-title">
+        Arkadaşın <em>büyük soruyu</em> soruyor.
+      </h1>
+
+      <p class="hero-subtitle">
+        "Tanrı var mı?" diye sorduğunda ona layık bir cevap vermek istiyorsun.
+        Mesleğine özel, akademik kaynaklı mektuplar ve düşündürücü sorular.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-num">82</span>
+          <span>mektup</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-num">27</span>
+          <span>meslek</span>
+        </div>
+        <div class="hero-meta-sep"></div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-num">3</span>
+          <span>perspektif</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sağ taraf: kartlar desktop'ta buraya gelecek -->
+    <div class="cards-preview" style="display:none"></div>
+  </section>
+
+  <section class="cards-section">
+    <h2 class="cards-label">Arkadaşının pozisyonunu seç</h2>
+    <p class="cards-desc">Her pozisyon için mesleğe özel mektuplar hazır.</p>
+
+    <div class="cards-grid">
+      <!-- Ateist -->
+      <div class="card">
+        <div class="card-icon">⚛</div>
+        <div class="card-title">Ateist</div>
+        <div class="card-desc">Madde ve tesadüf her şeyi açıklar mı? Materyalist dünya görüşünün zorlandığı sorular.</div>
+        <div class="card-footer">
+          <span class="card-count">28 mektup</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- Deist -->
+      <div class="card card-deist">
+        <div class="card-icon">✦</div>
+        <div class="card-title">Deist</div>
+        <div class="card-desc">Yaratıcı var ama neden sessiz kalsın? Vahyin imkânı ve İslam'a köprü.</div>
+        <div class="card-footer">
+          <span class="card-count">27 mektup</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- Agnostik -->
+      <div class="card card-agnostik">
+        <div class="card-icon">∿</div>
+        <div class="card-title">Agnostik</div>
+        <div class="card-desc">"Bilmiyorum" bir pozisyon mu, yoksa kaçış mı? Belirsizliğin sınırları.</div>
+        <div class="card-footer">
+          <span class="card-count">27 mektup</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps-section">
+    <div class="steps-divider">
+      <div class="steps-divider-line"></div>
+      <span class="steps-divider-text">Nasıl çalışıyor?</span>
+      <div class="steps-divider-line"></div>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-icon">🎯</div>
+        <div class="step-title">Pozisyonu seç</div>
+        <div class="step-desc">Arkadaşın ateist mi, deist mi, agnostik mi?</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">✉</div>
+        <div class="step-title">Mektubu oku</div>
+        <div class="step-desc">Mesleğine özel, argümanlı, itirazları dürüstçe işleyen.</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">📲</div>
+        <div class="step-title">Paylaş</div>
+        <div class="step-desc">Görsel kart olarak paylaş. WhatsApp'a tek dokunuş.</div>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer-note">Akademik kaynaklı · Ehl-i Sünnet çerçevesinde</p>
+</div>
+
+</body>
+</html>
