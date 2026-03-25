@@ -70,12 +70,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .btn-tema:hover{transform:scale(1.15) rotate(15deg)}
 
 /* ── Position Cards ── */
-.poz-card{width:100%;text-align:left;border-radius:16px;padding:22px;position:relative;overflow:hidden;border:1px solid;transition:all .3s var(--e)}
+.poz-card{width:100%;text-align:left;border-radius:16px;padding:22px;position:relative;overflow:hidden;border:1px solid;transition:all .3s var(--e);box-shadow:0 0 0 1px rgba(200,150,62,.06),0 2px 8px rgba(0,0,0,.1)}
 .poz-card:hover{transform:translateY(-4px)}
 .poz-card:active{transform:scale(.98)}
 
 /* ── Letter List ── */
-.meslek-row{display:flex;flex-direction:column;border-radius:14px;padding:18px 20px;margin-bottom:10px;transition:all .25s var(--e);border:1px solid;cursor:pointer}
+.meslek-row{display:flex;flex-direction:column;border-radius:14px;padding:18px 20px;margin-bottom:10px;transition:all .25s var(--e);border:1px solid;cursor:pointer;box-shadow:0 0 0 1px rgba(200,150,62,.04),0 1px 4px rgba(0,0,0,.06)}
 .meslek-row:hover{transform:translateX(4px)}
 .meslek-row.hazir-yok{opacity:.4;cursor:default}
 .meslek-row.hazir-yok:hover{transform:none}
@@ -96,7 +96,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .prog-s:hover{transform:scaleY(3)}
 
 /* ── Question Card ── */
-.soru-kart{border-radius:20px;padding:28px 22px;min-height:200px;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;margin-bottom:16px;transition:box-shadow .4s}
+.soru-kart{border-radius:20px;padding:28px 22px;min-height:200px;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;margin-bottom:16px;transition:box-shadow .4s;box-shadow:0 0 0 1px rgba(200,150,62,.06),0 4px 16px rgba(0,0,0,.12)}
 
 /* ── Modal ── */
 .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;animation:fu .2s ease both}
@@ -105,7 +105,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 
 /* ── Letter Reading ── */
 .m-badge{font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;opacity:.7;margin-bottom:14px}
-.m-header{border-radius:18px;padding:24px;margin-bottom:32px;border:1px solid}
+.m-header{border-radius:18px;padding:24px;margin-bottom:32px;border:1px solid;box-shadow:0 0 0 1px rgba(200,150,62,.06),0 2px 12px rgba(0,0,0,.08)}
 .m-giris{font-family:'Crimson Pro',serif;font-size:18px;font-style:italic;font-weight:300;line-height:1.9;margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid}
 .m-h2{font-family:'Crimson Pro',serif;font-size:24px;font-weight:400;line-height:1.2;margin-top:40px;margin-bottom:14px}
 .m-p{font-family:'Crimson Pro',serif;font-size:18px;line-height:1.9;font-weight:300;margin-bottom:16px}
@@ -117,13 +117,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 
 /* ── Related Letters ── */
 .baglar{margin-top:40px;padding-top:28px;border-top:1px solid}
-.bag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
-.bag-kart{border-radius:14px;padding:18px;border:1px solid;cursor:pointer;transition:all .3s var(--e);display:block;text-align:left}
-.bag-kart:hover{transform:translateY(-4px)}
+.bag-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.bag-kart{border-radius:14px;padding:18px;border:1px solid;cursor:pointer;transition:all .3s var(--e);display:block;text-align:left;box-shadow:0 0 0 1px rgba(200,150,62,.06),0 2px 8px rgba(0,0,0,.08)}
+.bag-kart:hover{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(200,150,62,.12),0 8px 24px rgba(0,0,0,.15)}
 
 /* ── Steps ── */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.step{border-radius:14px;padding:18px 16px;border:1px solid;text-align:left}
+.step{border-radius:14px;padding:18px 16px;border:1px solid;text-align:left;box-shadow:0 0 0 1px rgba(200,150,62,.04),0 1px 4px rgba(0,0,0,.06)}
 
 /* ── Misc ── */
 .badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
@@ -2141,7 +2141,7 @@ function renderMektup(){
     <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:${r.parlak};opacity:.6;margin-bottom:6px">Devam Et</div>
     <h3 style="font-family:'Crimson Pro',serif;font-size:20px;font-weight:400;color:${c.met};margin-bottom:6px">Bağlantılı Mektuplar</h3>
     <p style="font-size:13px;color:${c.soluk};font-weight:300">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
-    <div class="bag-grid">${baglarHTML}</div>
+    ${baglarHTML}
   </div>
   <div style="margin-top:32px;padding:24px;background:${r.ana}08;border:1px solid ${r.ana}15;border-radius:16px;text-align:center">
     <div style="font-size:20px;margin-bottom:10px">💬</div>
