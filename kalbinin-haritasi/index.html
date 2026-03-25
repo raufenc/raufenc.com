@@ -58,9 +58,18 @@
     [data-theme="light"] .led-bar-fill.fazilet { box-shadow: 0 0 10px rgba(52,211,153,0.3); }
     [data-theme="light"] .led-bar-fill.ifrat { box-shadow: 0 0 10px rgba(248,113,113,0.3); }
     [data-theme="light"] .led-bar-pct { text-shadow: none; }
-    [data-theme="light"] .text-tefrit { color: #b8860b; }
+    [data-theme="light"] .text-tefrit { color: #92700c; }
     [data-theme="light"] .text-fazilet { color: #047857; }
-    [data-theme="light"] .text-ifrat { color: #dc2626; }
+    [data-theme="light"] .text-ifrat { color: #b91c1c; }
+    [data-theme="light"] .font-display, [data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3 { -webkit-text-fill-color: initial; background: none; }
+    [data-theme="light"] [style*="color:var(--gold)"] { color: #7a5c00 !important; }
+    [data-theme="light"] [style*="color:var(--gold-light)"] { color: #6b4f00 !important; }
+    [data-theme="light"] .card { border-color: rgba(139,105,20,0.15); }
+    [data-theme="light"] .progress-wrap { background: rgba(0,0,0,0.06); }
+    [data-theme="light"] .progress-fill { background: linear-gradient(90deg, #8B6914, #b8960c); }
+    [data-theme="light"] .badge-completed { background: #047857; }
+    [data-theme="light"] .divider::before, [data-theme="light"] .divider::after { background: linear-gradient(90deg, transparent, rgba(139,105,20,0.2), transparent); }
+    [data-theme="light"] .star { color: #b8960c; opacity: 0.2; }
 
     * { box-sizing: border-box; }
 
@@ -432,12 +441,6 @@
       font-size: 0.9rem;
       flex-shrink: 0;
     }
-
-    /* Quiz slide animations */
-    @keyframes slideOutLeft { from{transform:translateX(0);opacity:1} to{transform:translateX(-80px);opacity:0} }
-    @keyframes slideInRight { from{transform:translateX(60px);opacity:0} to{transform:translateX(0);opacity:1} }
-    .slide-out-left { animation:slideOutLeft 0.25s ease forwards; }
-    .slide-in-right { animation:slideInRight 0.3s ease both; }
 
     /* Quiz compact */
     .quiz-question { font-size: 1rem; }
@@ -923,7 +926,7 @@ function screenQuiz(){
         <button class="text-xs" style="color:var(--text-muted)" data-action="goStart">✕</button>
       </div>
 
-      <div class="card quiz-card mb-3 slide-in-right">
+      <div class="card quiz-card mb-3">
         <p class="quiz-question leading-relaxed mb-4" style="color:var(--text-primary)">${q.soru}</p>
         <div>${opts}</div>
       </div>
@@ -1199,15 +1202,8 @@ function attachEvents(){
     else if(action==='answer'){
       S.answers[S.qi]=parseInt(score); render();
       const test=TESTS[S.testKey];
-      const isLast=S.qi>=test.questions.length-1;
-      setTimeout(()=>{
-        const qCard=document.querySelector('.quiz-card');
-        if(qCard) qCard.classList.add('slide-out-left');
-        setTimeout(()=>{
-          if(isLast) calcAndShow();
-          else{S.qi++;render();}
-        },250);
-      },350);
+      if(S.qi<test.questions.length-1) setTimeout(()=>{S.qi++;render();},350);
+      else setTimeout(()=>calcAndShow(),350);
     }
     else if(action==='next'&&S.answers[S.qi]!==undefined){S.qi++;render();}
     else if(action==='prev'&&S.qi>0){S.qi--;render();}
