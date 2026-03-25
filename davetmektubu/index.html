@@ -33,7 +33,8 @@ a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(128,128,128,.18);border-radius:4px}
 .dk{background:#0C0A08;color:#EDE8E0}
-.ak{background:#F0EBE3;color:#1A1510}
+.ak{background:#F8F6F2;color:#1A1510}
+.sepya{background:#F0E4CC;color:#2C1E0E}
 
 /* ── Animations ── */
 @keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
@@ -299,31 +300,48 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 // TEMA
 // ═══════════════════════════════════════════════════════
 let dk=true;
-const C=()=>dk?{
-  bg:"#0C0A08",kart:"rgba(255,255,255,.04)",cerç:"rgba(255,255,255,.08)",
-  met:"#EDE8E0",soluk:"rgba(237,232,224,.5)",cs:"rgba(237,232,224,.2)",
-  yuz:"rgba(255,255,255,.05)",gölge:"0 24px 60px rgba(0,0,0,.58)",
-  kartG:"linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02))",
-  nav:"rgba(12,10,8,.92)",alt:"rgba(255,255,255,.04)",
-  kagit:"rgba(237,232,224,.03)"
-}:{
-  bg:"#F0EBE3",kart:"rgba(255,255,255,.85)",cerç:"rgba(120,100,70,.12)",
-  met:"#2A2018",soluk:"rgba(42,32,24,.55)",cs:"rgba(42,32,24,.25)",
-  yuz:"rgba(120,100,70,.05)",gölge:"0 16px 44px rgba(0,0,0,.08)",
-  kartG:"linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,250,240,.7))",
-  nav:"rgba(240,235,227,.94)",alt:"rgba(120,100,70,.04)",
-  kagit:"rgba(120,100,70,.04)"
+const C=()=>{
+  if(readMode==="sepya") return{
+    bg:"#F0E4CC",kart:"rgba(255,245,225,.7)",cerç:"rgba(120,90,40,.15)",
+    met:"#2C1E0E",soluk:"rgba(44,30,14,.55)",cs:"rgba(44,30,14,.25)",
+    yuz:"rgba(120,90,40,.06)",gölge:"0 16px 44px rgba(0,0,0,.08)",
+    kartG:"linear-gradient(145deg,rgba(255,245,225,.8),rgba(240,228,204,.6))",
+    nav:"rgba(240,228,204,.94)",alt:"rgba(120,90,40,.04)"
+  };
+  if(readMode==="beyaz"||!dk) return{
+    bg:"#F8F6F2",kart:"rgba(255,255,255,.85)",cerç:"rgba(120,100,70,.1)",
+    met:"#1A1510",soluk:"rgba(26,21,16,.5)",cs:"rgba(26,21,16,.22)",
+    yuz:"rgba(120,100,70,.04)",gölge:"0 16px 44px rgba(0,0,0,.06)",
+    kartG:"linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,252,248,.7))",
+    nav:"rgba(248,246,242,.94)",alt:"rgba(120,100,70,.03)"
+  };
+  return{
+    bg:"#0C0A08",kart:"rgba(255,255,255,.04)",cerç:"rgba(255,255,255,.08)",
+    met:"#EDE8E0",soluk:"rgba(237,232,224,.5)",cs:"rgba(237,232,224,.2)",
+    yuz:"rgba(255,255,255,.05)",gölge:"0 24px 60px rgba(0,0,0,.58)",
+    kartG:"linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.02))",
+    nav:"rgba(12,10,8,.92)",alt:"rgba(255,255,255,.04)"
+  };
 };
 const PR={ateist:{ana:"#C8963E",koyu:"#7A4F10",parlak:"#F0B84A",bg:"rgba(200,150,62,.11)"},deist:{ana:"#5BA88A",koyu:"#1E5C45",parlak:"#7ECBA8",bg:"rgba(91,168,138,.11)"},agnostik:{ana:"#9B7BC4",koyu:"#4A2680",parlak:"#C4A8E8",bg:"rgba(155,123,196,.11)"}};
 function rr(pid){return PR[pid]||PR.ateist;}
-function temaToggle(){dk=!dk;applyTheme();render();}
+function temaToggle(){
+  // 3 aşama: siyah → sepya → beyaz → siyah
+  if(readMode==="siyah"){readMode="sepya";dk=false;}
+  else if(readMode==="sepya"){readMode="beyaz";dk=false;}
+  else{readMode="siyah";dk=true;}
+  localStorage.setItem("dm_readMode",readMode);
+  applyTheme();render();
+}
+function setReadMode(m){readMode=m;dk=(m==="siyah");localStorage.setItem("dm_readMode",m);applyTheme();render();}
 function applyTheme(){
   const c=C();
-  document.body.className=dk?"dk":"ak";
+  document.body.className=readMode==="siyah"?"dk":readMode==="sepya"?"sepya":"ak";
   document.getElementById("dots").style.display=dk?"block":"none";
   const nav=document.getElementById("nav");
   nav.style.background=c.nav;nav.style.borderColor=c.cerç;
-  document.getElementById("tBtn").textContent=dk?"☀":"◐";
+  const icons={siyah:"☀",sepya:"◐",beyaz:"☽"};
+  document.getElementById("tBtn").textContent=icons[readMode]||"☀";
   document.getElementById("tBtn").style.color=c.soluk;
   document.getElementById("nlTxt").style.color=c.met;
   updateNavBtns();
@@ -2170,23 +2188,15 @@ function renderMektup(){
     <div style="font-size:11px;color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:18px;margin-bottom:10px">Aynı meslek, farklı bakış açısı</div>
     <div class="bag-grid">${ayniMeslek.map(bagKartHTML).join("")}</div>
   `;
-  const rmClass=readMode!=='siyah'?' rm-'+readMode:'';
-  return`<div class="pg${rmClass}">
-  <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${rmClass?'#5A5045':c.soluk}">← Mektuplara Dön</button>
+  return`<div class="pg">
+  <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${c.soluk}">← Mektuplara Dön</button>
   ${!m.tam?`<div class="m-skeleton-info" style="background:${r.bg};border-color:${r.ana}30;color:${c.soluk}">✏️ Bu mektup taslak aşamasında. Bağlantı yapısı ve temel argümanlar hazır, içerik yakında genişleyecek.</div>`:""}
   <div class="m-header glow-card${m.poz==='deist'?' glow-deist':m.poz==='agnostik'?' glow-agnostik':''}" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18">
     <div class="m-badge" style="color:${r.parlak}">${m.poz.toUpperCase()} · ${m.meslek.toUpperCase()}</div>
     <h1 style="font-family:'Crimson Pro',serif;font-size:24px;font-weight:400;color:${c.met};line-height:1.2">${baslik}</h1>
     <div style="font-size:13px;color:${c.soluk};margin-top:10px;font-weight:300;line-height:1.6">${m.ozet}</div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px">
-      <div style="font-size:12px;color:${r.parlak};opacity:.6;font-weight:500;display:flex;align-items:center;gap:6px">
-        <span style="font-size:13px">◔</span> ~${okumaDk} dk · ${kelimeSayisi} kelime
-      </div>
-      <div class="read-mode-bar">
-        <button class="read-mode-btn${readMode==='beyaz'?' active':''}" data-mode="beyaz" onclick="setReadMode('beyaz')" title="Açık"></button>
-        <button class="read-mode-btn${readMode==='sepya'?' active':''}" data-mode="sepya" onclick="setReadMode('sepya')" title="Sepya"></button>
-        <button class="read-mode-btn${readMode==='siyah'?' active':''}" data-mode="siyah" onclick="setReadMode('siyah')" title="Koyu"></button>
-      </div>
+    <div style="font-size:12px;color:${r.parlak};opacity:.6;font-weight:500;display:flex;align-items:center;gap:6px;margin-top:12px">
+      <span style="font-size:13px">◔</span> ~${okumaDk} dk · ${kelimeSayisi} kelime
     </div>
   </div>
   ${icerikHTML}
@@ -2786,9 +2796,9 @@ b2.style.background=`radial-gradient(circle,${PR.ateist.parlak}09 0%,transparent
 // TEMA PERSISTENCE
 // ═══════════════════════════════════════════════════════
 (function(){
-  const saved=localStorage.getItem("dm_tema");
-  if(saved!==null){dk=saved==="dk";}
-  else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme:light)").matches){dk=false;}
+  const savedRM=localStorage.getItem("dm_readMode");
+  if(savedRM){readMode=savedRM;dk=(savedRM==="siyah");}
+  else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme:light)").matches){readMode="beyaz";dk=false;}
 })();
 
 // ═══════════════════════════════════════════════════════
@@ -2845,9 +2855,7 @@ function updateSEO(){
   }
 }
 
-// Tema toggle'ı kaydet
-const origTemaToggle=temaToggle;
-temaToggle=function(){origTemaToggle();localStorage.setItem("dm_tema",dk?"dk":"ak");};
+// readMode artık temaToggle içinde localStorage'a kaydediliyor
 
 // Deep link'ten başla
 readHash();
