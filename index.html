@@ -647,29 +647,52 @@
       color: var(--text);
       font-size: 14px; font-weight: 600;
       transition: all 0.2s;
+      min-width: 0;
     }
     .social-link:hover {
       border-color: var(--warm);
       transform: translateY(-2px);
       box-shadow: var(--shadow-md);
     }
-    .social-link svg { width: 20px; height: 20px; color: var(--muted2); }
+    .social-link svg { width: 20px; height: 20px; color: var(--muted2); flex-shrink: 0; }
     .social-link:hover svg { color: var(--warm); }
 
     /* ── FOOTER ── */
     footer {
-      text-align: center; padding: 40px 24px;
+      text-align: center; padding: 48px 24px 32px;
       color: var(--muted); font-size: 12px;
       border-top: 1px solid var(--border);
       position: relative; z-index: 1;
       margin-top: 40px;
     }
-    footer a {
-      color: var(--muted2);
-      text-decoration: none;
+    .footer-logo {
+      font-size: 20px; font-weight: 800;
+      color: var(--text); letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .footer-logo span { color: var(--warm); }
+    .footer-tagline {
+      font-size: 13px; color: var(--muted2);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex; gap: 20px; justify-content: center;
+      margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--muted2); text-decoration: none;
+      font-size: 12px; font-weight: 500;
       transition: color 0.2s;
     }
-    footer a:hover { color: var(--warm); }
+    .footer-links a:hover { color: var(--warm); }
+    footer .copyright {
+      font-size: 11px; color: var(--muted);
+    }
+    footer .copyright a {
+      color: var(--muted2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer .copyright a:hover { color: var(--warm); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
@@ -694,14 +717,16 @@
       .book-info .btn { margin: 0 auto; }
       .featured-grid { grid-template-columns: 1fr; }
       .social-row {
-        flex-direction: column;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        max-width: 320px;
+        margin: 0 auto;
       }
       .social-link {
-        width: 100%;
-        max-width: 280px;
         justify-content: center;
+        padding: 12px 16px;
+        font-size: 13px;
       }
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 12px; }
@@ -746,7 +771,7 @@
       <div class="hero-text">
         <span class="hero-label">Eğitimci · Yazar</span>
         <h1>Rauf Enç</h1>
-        <p class="hero-desc">Kendini tanımak için çıktığı yolda, içindeki düşmanla yüzleşip şaşkınlık yaşayan bir yolcu. Öğrendiklerini paylaşmak için kaleme sarılan bir yazar.</p>
+        <p class="hero-desc">Modern bilimi İslam ahlakıyla buluşturan, öğrendiklerini dijital projeler ve kitaplarla paylaşan bir eğitimci. 20'den fazla interaktif proje, binlerce eğitim kartı ve bir kitap — hepsi tek bir misyonla: öğrenmek ve öğretmek.</p>
         <div class="hero-cta">
           <a href="/noroterbiye/" class="btn btn-warm">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
@@ -776,15 +801,15 @@
         <div class="stat-label">Proje</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number" data-target="2199">0</div>
+        <div class="stat-number" data-target="2661">0</div>
         <div class="stat-label">Eğitim Kartı</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number" data-target="29">0</div>
-        <div class="stat-label">Oyun</div>
+        <div class="stat-number" data-target="50">0</div>
+        <div class="stat-label">Oyun & Quiz</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number" data-target="705">0</div>
+        <div class="stat-number" data-target="1000">0</div>
         <div class="stat-label">Sayfa İçerik</div>
       </div>
     </div>
@@ -792,14 +817,14 @@
 </div>
 
 <!-- HAKKINDA -->
-<section id="hakkinda">
+<section id="hakkinda" class="reveal">
   <div class="wrap">
     <span class="section-label">Hakkında</span>
     <h2 class="section-title">Disiplinler arası bir seyyah</h2>
     <div class="about-grid">
       <div>
         <p class="about-text">
-          Modern bilimin keşifleriyle İslam alimlerinin nasihatlerini birlikte sunmaya gayret eden bir talebe. Kendi kusurlarını gözetmeye çalışan ve herkesi önce kendine hocalık etmeye çağıran bir muallim.
+          Elektronik mühendisliğinden İlahiyat'a uzanan bir yolculuk. Modern bilimin keşifleriyle İslam âlimlerinin nasihatlerini birlikte sunmaya gayret eden bir talebe. Öğrendiklerini dijital projeler, interaktif uygulamalar ve kitaplarla paylaşan bir muallim.
         </p>
         <div class="education-list">
           <div class="edu-item">
@@ -832,7 +857,7 @@
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- KiTAP -->
-<section id="kitap" class="">
+<section id="kitap" class="reveal">
   <div class="wrap">
     <span class="section-label">Kitap</span>
     <h2 class="section-title">Nöroterbiye</h2>
@@ -848,7 +873,7 @@
         </p>
         <a href="/noroterbiye/" class="btn btn-warm">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-          Keşfet
+          Kitabı İncele
         </a>
       </div>
     </div>
@@ -858,13 +883,13 @@
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- PROJELER -->
-<section id="projeler" class="">
+<section id="projeler" class="reveal">
   <div class="wrap">
     <div class="projects-header">
       <span class="section-label">Projeler</span>
-      <h2 class="section-title">Dijital Denemeler</h2>
+      <h2 class="section-title">Dijital Atölye</h2>
     </div>
-    <p class="projects-sub">İnteraktif sunumlar, dil araçları, oyunlar ve eğitim uygulamaları</p>
+    <p class="projects-sub">Her biri bir ihtiyaçtan doğdu. Öğrencilerime, çocuklarıma, okuyucularıma — ve en çok kendime.</p>
 
     <!-- Öne Çıkan Projeler -->
     <div class="featured-grid" id="featured-grid"></div>
@@ -907,18 +932,18 @@
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- MOTTO -->
-<div class="motto-section">
-  <p class="motto-quote">"İnsanın en büyük zaferi kendisiyle olan savaşıdır. Çünkü asıl düşman içeridedir."</p>
-  <span class="motto-attr">— Nöroterbiye'den</span>
+<div class="motto-section reveal">
+  <p class="motto-quote">"Kendini bilen Rabbini bilir."</p>
+  <span class="motto-attr">— Hadîs-i şerîf</span>
 </div>
 
 <div class="wrap"><div class="divider"></div></div>
 
 <!-- iLETiSiM -->
-<section id="iletisim" class="social-section">
+<section id="iletisim" class="social-section reveal">
   <div class="wrap">
     <span class="section-label">İletişim</span>
-    <h2 class="section-title">Beraber Yürüyelim</h2>
+    <h2 class="section-title">Takip Edin</h2>
     <div class="social-row">
       <a href="https://www.youtube.com/@raufenc" target="_blank" rel="noopener" class="social-link">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
@@ -942,7 +967,15 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>Rauf Enç &copy; 2026 &nbsp;·&nbsp; <a href="mailto:raufenc@gmail.com">raufenc@gmail.com</a></p>
+  <div class="footer-logo">rauf<span>enç</span></div>
+  <p class="footer-tagline">Öğrenmek ve öğretmek için</p>
+  <div class="footer-links">
+    <a href="#hakkinda">Hakkında</a>
+    <a href="#kitap">Kitap</a>
+    <a href="#projeler">Projeler</a>
+    <a href="#iletisim">İletişim</a>
+  </div>
+  <p class="copyright">Rauf Enç &copy; 2026 &nbsp;·&nbsp; <a href="mailto:raufenc@gmail.com">raufenc@gmail.com</a></p>
 </footer>
 
 <script>
