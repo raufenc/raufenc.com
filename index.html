@@ -1061,7 +1061,7 @@
   </div>
 </section>
 
-<div class="wrap"><div class="divider"></div></div>
+<div class="wrap"><div class="divider" aria-hidden="true"></div></div>
 
 <!-- KiTAP -->
 <section id="kitap" class="reveal">
@@ -1101,7 +1101,7 @@
   </div>
 </section>
 
-<div class="wrap"><div class="divider"></div></div>
+<div class="wrap"><div class="divider" aria-hidden="true"></div></div>
 
 <!-- PROJELER -->
 <section id="projeler" class="reveal">
@@ -1150,7 +1150,7 @@
   </div>
 </section>
 
-<div class="wrap"><div class="divider"></div></div>
+<div class="wrap"><div class="divider" aria-hidden="true"></div></div>
 
 <!-- MOTTO -->
 <div class="motto-section reveal">
@@ -1158,7 +1158,7 @@
   <span class="motto-attr">— Hadîs-i şerîf</span>
 </div>
 
-<div class="wrap"><div class="divider"></div></div>
+<div class="wrap"><div class="divider" aria-hidden="true"></div></div>
 
 <!-- iLETiSiM -->
 <section id="iletisim" class="social-section reveal">
@@ -1634,7 +1634,7 @@
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.01, rootMargin: '0px 0px 50px 0px' });
+  }, { threshold: 0, rootMargin: '0px 0px 100px 0px' });
   reveals.forEach(function(el) { revealObserver.observe(el); });
 
   // ── TEMA TOGGLE ──
