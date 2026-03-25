@@ -319,8 +319,59 @@
       animation: starTwinkle 3s ease-in-out infinite;
     }
 
-    /* Radar chart canvas */
-    #radarChart { max-width: 280px; margin: 0 auto; }
+    /* 3D LED Bars */
+    .led-bars-container { display: flex; justify-content: center; gap: 2rem; padding: 2rem 0; }
+    .led-bar-wrapper { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; flex: 1; max-width: 160px; }
+    .led-bar-track {
+      width: 100%; height: 200px; border-radius: 12px; position: relative; overflow: hidden;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .led-bar-fill {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 0%;
+      border-radius: 0 0 11px 11px;
+      transition: height 1.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .led-bar-fill.tefrit {
+      background: linear-gradient(0deg, #f59e0b, #fbbf24, #fde68a);
+      box-shadow: 0 0 20px rgba(251,191,36,0.5), 0 0 60px rgba(251,191,36,0.2), inset 0 0 30px rgba(255,255,255,0.15);
+    }
+    .led-bar-fill.fazilet {
+      background: linear-gradient(0deg, #059669, #34d399, #6ee7b7);
+      box-shadow: 0 0 20px rgba(52,211,153,0.5), 0 0 60px rgba(52,211,153,0.2), inset 0 0 30px rgba(255,255,255,0.15);
+    }
+    .led-bar-fill.ifrat {
+      background: linear-gradient(0deg, #dc2626, #f87171, #fca5a5);
+      box-shadow: 0 0 20px rgba(248,113,113,0.5), 0 0 60px rgba(248,113,113,0.2), inset 0 0 30px rgba(255,255,255,0.15);
+    }
+    .led-bar-fill::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.25), transparent);
+      border-radius: 0;
+    }
+    .led-bar-glow {
+      position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+      width: 120%; height: 20px; border-radius: 50%; filter: blur(12px); opacity: 0;
+      transition: opacity 1.8s ease;
+    }
+    .led-bar-glow.tefrit { background: #fbbf24; }
+    .led-bar-glow.fazilet { background: #34d399; }
+    .led-bar-glow.ifrat { background: #f87171; }
+    .led-bar-pct {
+      font-size: 2rem; font-weight: 800; letter-spacing: -1px;
+      text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
+    }
+    .led-bar-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; }
+    .led-bar-fill .led-segments {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.12) 8px, rgba(0,0,0,0.12) 10px);
+    }
+    .led-pulse { animation: ledPulse 2s ease-in-out infinite; }
+    @keyframes ledPulse {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.15); }
+    }
 
     /* Stream cursor */
     .stream-cursor {
@@ -864,20 +915,30 @@ function screenResult(){
           <h1 class="font-display text-3xl sm:text-4xl font-bold mb-2" style="color:var(--gold)">${test.concepts.fazilet}</h1>
           <p class="text-sm mb-8" style="color:var(--text-muted)">${test.title}</p>
 
-          <canvas id="radarChart" width="280" height="280"></canvas>
-
-          <div class="flex justify-around text-center my-6">
-            <div>
-              <p class="text-tefrit text-xs font-semibold uppercase tracking-wider">${test.concepts.tefrit}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pt">0%</p>
+          <div class="led-bars-container">
+            <div class="led-bar-wrapper">
+              <div class="led-bar-track">
+                <div class="led-bar-fill tefrit led-pulse" id="bar-tefrit" style="height:0%"><div class="led-segments"></div></div>
+                <div class="led-bar-glow tefrit" id="glow-tefrit"></div>
+              </div>
+              <p class="led-bar-pct" style="color:#fbbf24" id="pt">0%</p>
+              <p class="led-bar-label text-tefrit">${test.concepts.tefrit}</p>
             </div>
-            <div>
-              <p class="text-fazilet text-xs font-semibold uppercase tracking-wider">${test.concepts.fazilet}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pf">0%</p>
+            <div class="led-bar-wrapper">
+              <div class="led-bar-track">
+                <div class="led-bar-fill fazilet led-pulse" id="bar-fazilet" style="height:0%"><div class="led-segments"></div></div>
+                <div class="led-bar-glow fazilet" id="glow-fazilet"></div>
+              </div>
+              <p class="led-bar-pct" style="color:#34d399" id="pf">0%</p>
+              <p class="led-bar-label text-fazilet">${test.concepts.fazilet}</p>
             </div>
-            <div>
-              <p class="text-ifrat text-xs font-semibold uppercase tracking-wider">${test.concepts.ifrat}</p>
-              <p class="text-4xl sm:text-5xl font-bold mt-1" style="color:var(--text-primary)" id="pi">0%</p>
+            <div class="led-bar-wrapper">
+              <div class="led-bar-track">
+                <div class="led-bar-fill ifrat led-pulse" id="bar-ifrat" style="height:0%"><div class="led-segments"></div></div>
+                <div class="led-bar-glow ifrat" id="glow-ifrat"></div>
+              </div>
+              <p class="led-bar-pct" style="color:#f87171" id="pi">0%</p>
+              <p class="led-bar-label text-ifrat">${test.concepts.ifrat}</p>
             </div>
           </div>
         </div>
@@ -963,85 +1024,7 @@ function renderGeminiText(text){
     .replace(/\n/g,'<br>');
 }
 
-/* Radar Chart */
-function drawRadar(p){
-  const canvas = document.getElementById('radarChart');
-  if(!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2, R = 110;
-
-  ctx.clearRect(0,0,W,H);
-
-  // Labels & angles: 3 vertices (top, bottom-left, bottom-right)
-  const labels = [
-    { name: 'Tefrit', val: p.tefrit, color: '#fbbf24', angle: -Math.PI/2 },
-    { name: 'Fazilet', val: p.fazilet, color: '#34d399', angle: Math.PI/6 + Math.PI/2 },
-    { name: 'İfrat', val: p.ifrat, color: '#f87171', angle: -Math.PI/6 + Math.PI/2 + Math.PI }
-  ];
-
-  // Grid circles
-  for(let i=1;i<=4;i++){
-    const r = R*(i/4);
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, 0, Math.PI*2);
-    ctx.strokeStyle = 'rgba(212,175,55,0.08)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  // Axes
-  labels.forEach(l=>{
-    const x = cx + R * Math.cos(l.angle);
-    const y = cy + R * Math.sin(l.angle);
-    ctx.beginPath();
-    ctx.moveTo(cx, cy);
-    ctx.lineTo(x, y);
-    ctx.strokeStyle = 'rgba(212,175,55,0.12)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  });
-
-  // Data polygon
-  ctx.beginPath();
-  labels.forEach((l,i)=>{
-    const r = R * (l.val/100);
-    const x = cx + r * Math.cos(l.angle);
-    const y = cy + r * Math.sin(l.angle);
-    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-  });
-  ctx.closePath();
-  ctx.fillStyle = 'rgba(212,175,55,0.12)';
-  ctx.fill();
-  ctx.strokeStyle = 'rgba(212,175,55,0.6)';
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Data points
-  labels.forEach(l=>{
-    const r = R * (l.val/100);
-    const x = cx + r * Math.cos(l.angle);
-    const y = cy + r * Math.sin(l.angle);
-    ctx.beginPath();
-    ctx.arc(x, y, 5, 0, Math.PI*2);
-    ctx.fillStyle = l.color;
-    ctx.fill();
-    ctx.strokeStyle = '#0a0f1e';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-  });
-
-  // Labels
-  ctx.font = '12px Inter, sans-serif';
-  ctx.textAlign = 'center';
-  labels.forEach(l=>{
-    const lr = R + 22;
-    const x = cx + lr * Math.cos(l.angle);
-    const y = cy + lr * Math.sin(l.angle);
-    ctx.fillStyle = l.color;
-    ctx.fillText(l.name, x, y + 4);
-  });
-}
+/* LED Bar animation handled in animNums */
 
 /* ═══════════════════════════════════════════════
    API
@@ -1111,15 +1094,15 @@ function animNums(){
     } requestAnimationFrame(step);
   });
 
-  // Animate radar chart
-  const t0=performance.now(), dur=1200;
-  function animRadar(now){
-    const pr=Math.min((now-t0)/dur,1), ease=1-Math.pow(1-pr,3);
-    const ap = {tefrit:Math.round(ease*p.tefrit), fazilet:Math.round(ease*p.fazilet), ifrat:Math.round(ease*p.ifrat)};
-    drawRadar(ap);
-    if(pr<1) requestAnimationFrame(animRadar);
-  }
-  requestAnimationFrame(animRadar);
+  // Animate LED bars
+  setTimeout(()=>{
+    ['tefrit','fazilet','ifrat'].forEach(k=>{
+      const bar=document.getElementById('bar-'+k);
+      const glow=document.getElementById('glow-'+k);
+      if(bar){ bar.style.height=Math.max(p[k],3)+'%'; }
+      if(glow){ glow.style.opacity=p[k]>5?'0.6':'0'; }
+    });
+  },100);
 }
 
 /* ═══════════════════════════════════════════════
@@ -1153,7 +1136,9 @@ function calcAndShow(){
     if(s===1)scores.tefrit+=2; else if(s===2)scores.tefrit+=1;
     else if(s===3)scores.fazilet+=2; else if(s===4)scores.ifrat+=1; else scores.ifrat+=2;
   });
-  S.scores=scores; S.screen='result'; render(); animNums(); fetchGemini(scores);
+  S.scores=scores; S.screen='result'; S.gemini=null; S.loadingGemini=false; render(); animNums();
+  // Önce sonuçlar animate olsun, sonra AI değerlendirmesi başlasın
+  setTimeout(()=>fetchGemini(scores), 2200);
 }
 
 async function shareImg(){
