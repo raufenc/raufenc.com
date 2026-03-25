@@ -30,6 +30,38 @@
       --glow-emerald: 0 0 30px rgba(5, 150, 105, 0.2);
     }
 
+    /* Light Theme */
+    [data-theme="light"] {
+      --bg-deep: #f5f0e6;
+      --bg-card: rgba(255, 248, 235, 0.85);
+      --bg-card-hover: rgba(255, 245, 225, 0.95);
+      --border-gold: rgba(139, 105, 20, 0.2);
+      --border-gold-hover: rgba(139, 105, 20, 0.4);
+      --text-primary: #1a1a2e;
+      --text-secondary: #4a4a5e;
+      --text-muted: #7a7a8e;
+      --glow-gold: 0 0 20px rgba(212,175,55,0.08);
+      --glow-gold-hover: 0 0 30px rgba(212,175,55,0.15);
+      --glow-emerald: 0 0 20px rgba(5,150,105,0.1);
+    }
+    [data-theme="light"] body {
+      background-color: var(--bg-deep);
+      background-image:
+        radial-gradient(ellipse at 10% 10%, rgba(212,175,55,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 90%, rgba(5,150,105,0.04) 0%, transparent 50%);
+    }
+    [data-theme="light"] body::before { opacity: 0.3; }
+    [data-theme="light"] .option-label { background: rgba(255,248,235,0.6); }
+    [data-theme="light"] .btn-subtle { background: rgba(0,0,0,0.04); border-color: rgba(139,105,20,0.2); color: var(--text-primary); }
+    [data-theme="light"] .led-bar-track { background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.08)); }
+    [data-theme="light"] .led-bar-fill.tefrit { box-shadow: 0 0 10px rgba(251,191,36,0.3); }
+    [data-theme="light"] .led-bar-fill.fazilet { box-shadow: 0 0 10px rgba(52,211,153,0.3); }
+    [data-theme="light"] .led-bar-fill.ifrat { box-shadow: 0 0 10px rgba(248,113,113,0.3); }
+    [data-theme="light"] .led-bar-pct { text-shadow: none; }
+    [data-theme="light"] .text-tefrit { color: #b8860b; }
+    [data-theme="light"] .text-fazilet { color: #047857; }
+    [data-theme="light"] .text-ifrat { color: #dc2626; }
+
     * { box-sizing: border-box; }
 
     body {
@@ -401,6 +433,12 @@
       flex-shrink: 0;
     }
 
+    /* Quiz slide animations */
+    @keyframes slideOutLeft { from{transform:translateX(0);opacity:1} to{transform:translateX(-80px);opacity:0} }
+    @keyframes slideInRight { from{transform:translateX(60px);opacity:0} to{transform:translateX(0);opacity:1} }
+    .slide-out-left { animation:slideOutLeft 0.25s ease forwards; }
+    .slide-in-right { animation:slideInRight 0.3s ease both; }
+
     /* Quiz compact */
     .quiz-question { font-size: 1rem; }
     .quiz-card { padding: 1.25rem; }
@@ -416,8 +454,24 @@
   </style>
 </head>
 <body>
+  <button id="theme-toggle" onclick="toggleTheme()" style="position:fixed;top:12px;right:12px;z-index:50;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-gold);background:var(--bg-card);color:var(--gold);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.3s" title="Tema Değiştir">☀️</button>
   <main id="app" class="container mx-auto max-w-4xl p-4 sm:p-6 py-8"></main>
 <script>
+/* Theme */
+function toggleTheme(){
+  const h=document.documentElement, cur=h.getAttribute('data-theme');
+  if(cur==='light'){h.removeAttribute('data-theme');localStorage.setItem('themePreference','dark');}
+  else{h.setAttribute('data-theme','light');localStorage.setItem('themePreference','light');}
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  const btn=document.getElementById('theme-toggle');
+  if(btn) btn.textContent=document.documentElement.getAttribute('data-theme')==='light'?'🌙':'☀️';
+}
+(function(){
+  if(localStorage.getItem('themePreference')==='light') document.documentElement.setAttribute('data-theme','light');
+  updateThemeIcon();
+})();
 
 const TESTS = {
     kibir: {
@@ -736,7 +790,8 @@ let S = {
   screen:'welcome', testKey:null, answers:{}, qi:0,
   scores:null, gemini:null, loadingGemini:false,
   history:JSON.parse(localStorage.getItem('ahlakHistory')||'{}'),
-  expandedHistory:null
+  expandedHistory:null,
+  previousScores:null
 };
 
 function saveHistory(){ localStorage.setItem('ahlakHistory', JSON.stringify(S.history)); }
@@ -868,7 +923,7 @@ function screenQuiz(){
         <button class="text-xs" style="color:var(--text-muted)" data-action="goStart">✕</button>
       </div>
 
-      <div class="card quiz-card mb-3">
+      <div class="card quiz-card mb-3 slide-in-right">
         <p class="quiz-question leading-relaxed mb-4" style="color:var(--text-primary)">${q.soru}</p>
         <div>${opts}</div>
       </div>
@@ -880,6 +935,7 @@ function screenQuiz(){
    ═══════════════════════════════════════════════ */
 function screenResult(){
   const test=TESTS[S.testKey], p=pct(S.scores);
+  const prev=S.previousScores?pct(S.previousScores):null;
   const gem=S.loadingGemini
     ?`<div class="flex flex-col items-center p-8"><div class="spinner"></div><p class="mt-4" style="color:var(--text-secondary)">Kalbinizin sesi dinleniyor...</p></div>`
     :S.gemini
@@ -912,6 +968,7 @@ function screenResult(){
               </div>
               <p class="led-bar-pct" style="color:#fbbf24" id="pt">0%</p>
               <p class="led-bar-label text-tefrit">${test.concepts.tefrit}</p>
+              ${prev?`<p class="text-xs mt-0.5">Önceki: ${compArrow('tefrit',prev.tefrit,p.tefrit)}</p>`:''}
             </div>
             <div class="led-bar-wrapper">
               <div class="led-bar-track">
@@ -920,6 +977,7 @@ function screenResult(){
               </div>
               <p class="led-bar-pct" style="color:#34d399" id="pf">0%</p>
               <p class="led-bar-label text-fazilet">${test.concepts.fazilet}</p>
+              ${prev?`<p class="text-xs mt-0.5">Önceki: ${compArrow('fazilet',prev.fazilet,p.fazilet)}</p>`:''}
             </div>
             <div class="led-bar-wrapper">
               <div class="led-bar-track">
@@ -928,6 +986,7 @@ function screenResult(){
               </div>
               <p class="led-bar-pct" style="color:#f87171" id="pi">0%</p>
               <p class="led-bar-label text-ifrat">${test.concepts.ifrat}</p>
+              ${prev?`<p class="text-xs mt-0.5">Önceki: ${compArrow('ifrat',prev.ifrat,p.ifrat)}</p>`:''}
             </div>
           </div>
         </div>
@@ -940,10 +999,10 @@ function screenResult(){
 
       <div id="next-test-slot">${next}</div>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <button class="btn btn-gold" data-action="share"${!S.gemini?' disabled':''}>
-          ✦ PDF İndir
-        </button>
+      <div class="flex flex-wrap justify-center gap-3 mt-8">
+        <button class="btn btn-gold" data-action="share"${!S.gemini?' disabled':''}>✦ PDF İndir</button>
+        <button class="btn btn-emerald" data-action="shareWhatsapp">WhatsApp</button>
+        <button class="btn btn-ghost" data-action="copyResult">Kopyala</button>
         <button class="btn btn-subtle" data-action="goStart">Yeni Test Seç</button>
       </div>
     </div>`;
@@ -979,8 +1038,13 @@ function screenHistory(){
             </div>
           </div>
         </div>
-        ${isExp&&gd?`<div class="p-6 fade-in" style="background:rgba(10,15,30,0.7);border:1px solid var(--border-gold);border-top:none;border-radius:0 0 1rem 1rem">
+        ${isExp&&gd?`<div class="p-6 fade-in" style="background:var(--bg-card);border:1px solid var(--border-gold);border-top:none;border-radius:0 0 1rem 1rem">
           <div class="leading-relaxed" style="color:var(--text-secondary)">${renderGeminiText(gd.text||gd.sonuclarinAynasi||'')}</div>
+          <div class="flex flex-wrap gap-2 mt-4 pt-4" style="border-top:1px solid var(--border-gold)">
+            <button class="btn btn-gold text-xs py-1.5 px-4" data-action="historyPdf" data-key="${key}">✦ PDF İndir</button>
+            <button class="btn btn-emerald text-xs py-1.5 px-4" data-action="shareWhatsapp" data-key="${key}">WhatsApp</button>
+            <button class="btn btn-ghost text-xs py-1.5 px-4" data-action="copyResult" data-key="${key}">Kopyala</button>
+          </div>
         </div>`:''}
       </div>`;}).join('');
 
@@ -1067,7 +1131,7 @@ async function fetchGemini(scores){
       fullText=flines.slice(0,-1).join('\n').trim();
     }
     S.gemini={streaming:false,text:fullText,sonraki_test:S.gemini.sonraki_test};
-    S.history[S.testKey]={percentages:scores,geminiData:S.gemini}; saveHistory();
+    S.history[S.testKey]={percentages:scores,geminiData:S.gemini,previousPercentages:S.previousScores}; saveHistory();
     // Barları sıfırlamamak için render yerine sadece gerekli alanları güncelle
     const gemBox2=document.getElementById('gemini-box');
     if(gemBox2) gemBox2.innerHTML=renderGeminiText(fullText);
@@ -1135,13 +1199,31 @@ function attachEvents(){
     else if(action==='answer'){
       S.answers[S.qi]=parseInt(score); render();
       const test=TESTS[S.testKey];
-      if(S.qi<test.questions.length-1) setTimeout(()=>{S.qi++;render();},350);
-      else setTimeout(()=>calcAndShow(),350);
+      const isLast=S.qi>=test.questions.length-1;
+      setTimeout(()=>{
+        const qCard=document.querySelector('.quiz-card');
+        if(qCard) qCard.classList.add('slide-out-left');
+        setTimeout(()=>{
+          if(isLast) calcAndShow();
+          else{S.qi++;render();}
+        },250);
+      },350);
     }
     else if(action==='next'&&S.answers[S.qi]!==undefined){S.qi++;render();}
     else if(action==='prev'&&S.qi>0){S.qi--;render();}
     else if(action==='share') shareImg();
     else if(action==='toggleHistory'){S.expandedHistory=S.expandedHistory===key?null:key;render();}
+    else if(action==='historyPdf'){generatePdfFromHistory(key);}
+    else if(action==='shareWhatsapp'){
+      const tk=key||S.testKey, sc=key?S.history[key].percentages:S.scores;
+      window.open('https://wa.me/?text='+encodeURIComponent(buildShareText(tk,sc)),'_blank');
+    }
+    else if(action==='copyResult'){
+      const tk=key||S.testKey, sc=key?S.history[key].percentages:S.scores;
+      navigator.clipboard.writeText(buildShareText(tk,sc)).then(()=>{
+        el.textContent='Kopyalandı!'; setTimeout(()=>{el.textContent='Kopyala';},2000);
+      });
+    }
   });
   if(S.screen==='result') setTimeout(animNums,100);
 }
@@ -1152,15 +1234,23 @@ function calcAndShow(){
     if(s===1)scores.tefrit+=2; else if(s===2)scores.tefrit+=1;
     else if(s===3)scores.fazilet+=2; else if(s===4)scores.ifrat+=1; else scores.ifrat+=2;
   });
+  // Önceki sonucu kaydet (karşılaştırma için)
+  S.previousScores=S.history[S.testKey]?{...S.history[S.testKey].percentages}:null;
   S.scores=scores; S.screen='result'; S.gemini=null; S.loadingGemini=false; render(); animNums();
-  // Önce sonuçlar animate olsun, sonra AI değerlendirmesi başlasın
   setTimeout(()=>fetchGemini(scores), 2200);
 }
 
-async function shareImg(){
-  if(!S.gemini||S.gemini.streaming) return;
-  const test=TESTS[S.testKey], p=pct(S.scores);
-  const rawText=(S.gemini.text||'').replace(/SONRAKI_TEST:.*/,'').trim();
+function compArrow(type,prev,curr){
+  if(prev===curr) return '<span style="color:var(--text-muted)">→ %'+prev+'</span>';
+  const isGood=type==='fazilet'?curr>prev:curr<prev;
+  const arrow=curr>prev?'↑':'↓';
+  const color=isGood?'var(--emerald)':'#f87171';
+  return '<span style="color:'+color+'">'+arrow+' %'+prev+'</span>';
+}
+
+function buildPdf(testKey, scores, geminiText){
+  const test=TESTS[testKey], p=pct(scores);
+  const rawText=(geminiText||'').replace(/SONRAKI_TEST:.*/,'').trim();
 
   // Metni başlıklara göre parse et
   const sections=[];
@@ -1227,6 +1317,26 @@ async function shareImg(){
   };
 
   pdfMake.createPdf(docDef).download(test.concepts.fazilet+'-Sonuc-Karti.pdf');
+}
+
+function buildShareText(testKey, scores){
+  const test=TESTS[testKey], p=pct(scores);
+  return `Kalbinin Haritası — ${test.concepts.fazilet}\n\n`+
+    `${test.concepts.tefrit}: %${p.tefrit}\n`+
+    `${test.concepts.fazilet}: %${p.fazilet}\n`+
+    `${test.concepts.ifrat}: %${p.ifrat}\n\n`+
+    `Sen de kalbinin haritasını çıkar:\nhttps://raufenc.com/kalbinin-haritasi/`;
+}
+
+function shareImg(){
+  if(!S.gemini||S.gemini.streaming) return;
+  buildPdf(S.testKey, S.scores, S.gemini.text);
+}
+
+function generatePdfFromHistory(key){
+  const h=S.history[key];
+  if(!h||!h.geminiData||!h.geminiData.text) return;
+  buildPdf(key, h.percentages, h.geminiData.text);
 }
 
 render();
