@@ -235,7 +235,7 @@ const C=()=>dk?{
   kartG:"linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02))",
   nav:"rgba(7,7,15,.9)",alt:"rgba(255,255,255,.04)"
 }:{
-  bg:"#F3EFE9",kart:"rgba(255,255,255,.82)",cerç:"rgba(0,0,0,.09)",
+  bg:"#F5F1EB",kart:"rgba(255,255,255,.88)",cerç:"rgba(0,0,0,.08)",
   met:"#1A1510",soluk:"rgba(26,21,16,.5)",cs:"rgba(26,21,16,.22)",
   yuz:"rgba(0,0,0,.04)",gölge:"0 16px 44px rgba(0,0,0,.1)",
   kartG:"linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.75))",
@@ -2088,7 +2088,7 @@ function renderMektup(){
     if(b.t==="giris") return`<p class="m-giris" style="color:${c.soluk};border-color:${c.cerç}">${b.m}</p>`;
     if(b.t==="h2") return`<h2 class="m-h2 reveal" style="color:${c.met}">${b.m}</h2>`;
     if(b.t==="p") return`<p class="m-p reveal" style="color:${c.soluk}">${b.m}</p>`;
-    if(b.t==="alinti") return`<blockquote class="m-alinti reveal" style="border-color:${r.ana};color:${c.met}">${b.m}</blockquote>`;
+    if(b.t==="alinti") return`<blockquote class="m-alinti reveal" style="border-color:${r.ana};color:${c.met};background:linear-gradient(135deg,${r.ana}08,transparent)">${b.m}</blockquote>`;
     if(b.t==="gecis") return`<div class="m-gecis reveal" style="background:linear-gradient(135deg,${r.ana}08,${r.ana}03);border-color:${r.ana}18;color:${c.soluk}">${b.m}</div>`;
     if(b.t==="kapatis") return`<p class="m-kapatis reveal" style="color:${c.met};border-color:${c.cerç}">${b.m}</p>`;
     return"";
@@ -2116,28 +2116,28 @@ function renderMektup(){
     <div class="bag-section-label" style="font-size:clamp(11px,1.5vw,15px);color:${c.cs};font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:22px;margin-bottom:10px">Aynı meslek, farklı bakış açısı</div>
     <div class="bag-grid">${ayniMeslek.map(bagKartHTML).join("")}</div>
   `;
-  return`<div class="pg-lg">
+  return`<div class="pg">
   <button class="btn-back" onclick="navigate({screen:'liste',poz:'${m.poz}'})" style="color:${c.soluk}">← Mektuplara Dön</button>
   ${!m.tam?`<div class="m-skeleton-info" style="background:${r.bg};border-color:${r.ana}30;color:${c.soluk}">✏️ Bu mektup taslak aşamasında. Bağlantı yapısı ve temel argümanlar hazır, içerik yakında genişleyecek.</div>`:""}
   <div class="m-header" style="background:linear-gradient(135deg,${r.ana}12,${r.ana}04);border-color:${r.ana}18;box-shadow:0 4px 24px ${r.ana}08">
     <div class="m-badge" style="color:${r.parlak}">${m.poz.toUpperCase()} · ${m.meslek.toUpperCase()}</div>
-    <h1 class="m-title" style="font-family:'Crimson Pro',serif;font-size:clamp(26px,6vw,52px);font-weight:400;color:${c.met};line-height:1.25">${baslik}</h1>
-    <div style="font-size:clamp(13px,2vw,18px);color:${c.soluk};margin-top:12px;font-weight:300;line-height:1.7">${m.ozet}</div>
-    <div class="m-reading-time" style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:clamp(12px,1.8vw,16px);color:${r.parlak};opacity:.7">
-      <span style="font-size:clamp(14px,2vw,18px)">◔</span> ~${okumaDk} dk okuma
+    <h1 class="m-title" style="font-family:'Crimson Pro',serif;font-size:clamp(28px,6vw,48px);font-weight:400;color:${c.met};line-height:1.2;letter-spacing:-.01em">${baslik}</h1>
+    <div style="font-size:clamp(14px,2vw,17px);color:${c.soluk};margin-top:clamp(10px,1.5vw,16px);font-weight:300;line-height:1.7">${m.ozet}</div>
+    <div style="display:flex;align-items:center;gap:clamp(6px,1vw,10px);margin-top:clamp(12px,2vw,18px);font-size:clamp(12px,1.5vw,15px);color:${r.parlak};opacity:.65;font-weight:500">
+      <span style="font-size:clamp(13px,1.8vw,17px)">◔</span> ~${okumaDk} dk · ${kelimeSayisi} kelime
     </div>
   </div>
   ${icerikHTML}
   <div class="baglar" style="border-color:${c.cerç}">
-    <div style="font-size:clamp(11px,1.5vw,14px);font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:${r.parlak};opacity:.75;margin-bottom:6px">Devam Et</div>
-    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(20px,3.5vw,32px);font-weight:400;color:${c.met};margin-bottom:6px">Bağlantılı Mektuplar</h3>
-    <p style="font-size:clamp(13px,2vw,17px);color:${c.soluk};font-weight:300;margin-bottom:0">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
+    <div style="font-size:clamp(10px,1.3vw,13px);font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:${r.parlak};opacity:.6;margin-bottom:clamp(6px,1vw,10px)">Devam Et</div>
+    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(22px,4vw,34px);font-weight:400;color:${c.met};margin-bottom:clamp(6px,1vw,10px)">Bağlantılı Mektuplar</h3>
+    <p style="font-size:clamp(13px,1.8vw,16px);color:${c.soluk};font-weight:300">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
     <div class="bag-grid">${baglarHTML}</div>
   </div>
-  <div style="margin-top:28px;padding:20px;background:linear-gradient(135deg,${r.ana}10,${r.ana}04);border:1px solid ${r.ana}22;border-radius:16px;text-align:center">
-    <div style="font-size:clamp(20px,3vw,28px);margin-bottom:12px">💬</div>
-    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(18px,3vw,26px);font-weight:400;color:${c.met};margin-bottom:10px">Bu mektupla birlikte bir soru da gönder</h3>
-    <button onclick="navigate({screen:'sorular',soruI:0,kat:null})" style="background:linear-gradient(135deg,${r.ana},${r.koyu});border:none;border-radius:12px;padding:clamp(12px,2vw,18px) clamp(28px,4vw,40px);color:#fff;font-size:clamp(14px,2vw,18px);font-weight:600;cursor:pointer;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Soruları Gör →</button>
+  <div style="margin-top:clamp(32px,4vw,48px);padding:clamp(24px,3.5vw,40px);background:linear-gradient(135deg,${r.ana}0A,${r.ana}04);border:1px solid ${r.ana}18;border-radius:clamp(16px,2.5vw,24px);text-align:center">
+    <div style="font-size:clamp(22px,3vw,30px);margin-bottom:clamp(10px,1.5vw,16px)">💬</div>
+    <h3 style="font-family:'Crimson Pro',serif;font-size:clamp(18px,3vw,26px);font-weight:400;color:${c.met};margin-bottom:clamp(10px,1.5vw,16px)">Bu mektupla birlikte bir soru da gönder</h3>
+    <button onclick="navigate({screen:'sorular',soruI:0,kat:null})" style="background:linear-gradient(135deg,${r.ana},${r.koyu});border:none;border-radius:14px;padding:clamp(12px,2vw,18px) clamp(28px,4vw,40px);color:#fff;font-size:clamp(14px,2vw,17px);font-weight:600;cursor:pointer;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Soruları Gör →</button>
   </div>
   <!-- Mektup paylaş -->
   <div style="display:flex;gap:7px;margin-top:16px">
