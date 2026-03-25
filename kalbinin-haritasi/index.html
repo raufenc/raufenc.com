@@ -1185,7 +1185,7 @@ async function shareImg(){
     else sections.push({title:'',body:txt});
   }
 
-  const gold='#d4af37', bg='#0a0f1e', textCol='#c8c8d2', mutedCol='#a0a0aa';
+  const gold='#8B6914', textCol='#1a1a2e', mutedCol='#555566';
 
   // Bar canvas fonksiyonu
   function makeBar(label, val, color){
@@ -1193,10 +1193,10 @@ async function shareImg(){
       columns:[
         {text:label, fontSize:10, color:color, width:80, margin:[0,4,0,0]},
         {canvas:[
-          {type:'rect',x:0,y:0,w:330,h:14,r:7,color:'#1e2332'},
+          {type:'rect',x:0,y:0,w:330,h:14,r:7,color:'#e8e8ee'},
           {type:'rect',x:0,y:0,w:Math.max((val/100)*330,4),h:14,r:7,color:color}
         ], width:'*', margin:[0,2,0,0]},
-        {text:'%'+val, fontSize:14, bold:true, color:'#ffffff', width:50, alignment:'right', margin:[0,1,0,0]}
+        {text:'%'+val, fontSize:14, bold:true, color:'#1a1a2e', width:50, alignment:'right', margin:[0,1,0,0]}
       ],
       margin:[0,6,0,6]
     };
@@ -1212,9 +1212,9 @@ async function shareImg(){
     // Çizgi
     {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,0,0,16]},
     // Barlar
-    makeBar(test.concepts.tefrit, p.tefrit, '#fbbf24'),
-    makeBar(test.concepts.fazilet, p.fazilet, '#34d399'),
-    makeBar(test.concepts.ifrat, p.ifrat, '#f87171'),
+    makeBar(test.concepts.tefrit, p.tefrit, '#b8860b'),
+    makeBar(test.concepts.fazilet, p.fazilet, '#0d9668'),
+    makeBar(test.concepts.ifrat, p.ifrat, '#c0392b'),
     // Çizgi
     {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,12,0,16]},
     // Değerlendirme başlığı
@@ -1229,14 +1229,11 @@ async function shareImg(){
 
   // Alt çizgi + footer
   content.push({canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:0.5,lineColor:gold}],margin:[0,16,0,8]});
-  content.push({text:'raufenc.com/kalbinin-haritasi',alignment:'center',fontSize:7,color:'#787880'});
+  content.push({text:'raufenc.com/kalbinin-haritasi',alignment:'center',fontSize:7,color:'#999999'});
 
   const docDef={
     pageSize:'A4',
     pageMargins:[40,40,40,40],
-    background:function(){
-      return {canvas:[{type:'rect',x:0,y:0,w:595.28,h:841.89,color:bg}]};
-    },
     content:content,
     defaultStyle:{font:'Roboto',color:textCol}
   };
