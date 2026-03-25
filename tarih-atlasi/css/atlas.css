@@ -381,11 +381,8 @@ html:not(.dark):not(.light) .moon-icon { display: none; }
   position: fixed; inset: 0; z-index: 2000;
   background: transparent;
   display: flex; flex-direction: column;
-  transition: opacity 0.3s;
-  pointer-events: none;
 }
-#story-overlay > * { pointer-events: auto; }
-#story-overlay.hidden { opacity: 0; pointer-events: none; }
+#story-overlay.hidden { display: none; }
 
 #story-header {
   display: flex; align-items: center; gap: 12px;

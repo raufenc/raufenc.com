@@ -1164,12 +1164,44 @@ function calcAndShow(){
 async function shareImg(){
   const card=document.getElementById('result-card'); if(!card) return;
   try{
-    const canvas=await html2canvas(card,{scale:2.5,backgroundColor:'#0a0f1e',useCORS:true});
-    const a=document.createElement('a');
-    a.href=canvas.toDataURL('image/png',1.0);
-    a.download=`${TESTS[S.testKey]?.concepts.fazilet||'sonuc'}-karti.png`;
-    a.click();
-  }catch(e){alert('Resim oluşturulamadı.');}
+    // Animasyonları durdur (html2canvas uyumu)
+    const pulseEls=card.querySelectorAll('.led-pulse');
+    pulseEls.forEach(el=>el.style.animation='none');
+    const cursorEls=card.querySelectorAll('.stream-cursor');
+    cursorEls.forEach(el=>el.style.display='none');
+
+    const canvas=await html2canvas(card,{
+      scale:2,
+      backgroundColor:'#0a0f1e',
+      useCORS:true,
+      logging:false,
+      allowTaint:true,
+      removeContainer:true
+    });
+
+    // Animasyonları geri aç
+    pulseEls.forEach(el=>el.style.animation='');
+    cursorEls.forEach(el=>el.style.display='');
+
+    const blob=await new Promise(r=>canvas.toBlob(r,'image/png',1.0));
+    const fname=`${TESTS[S.testKey]?.concepts.fazilet||'sonuc'}-karti.png`;
+
+    if(navigator.canShare&&navigator.canShare({files:[new File([blob],fname,{type:'image/png'})]})){
+      await navigator.share({
+        title:'Ahlak Pusulası Sonucum',
+        files:[new File([blob],fname,{type:'image/png'})]
+      });
+    } else {
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);
+      a.download=fname;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+  }catch(e){
+    console.error('Share error:',e);
+    alert('Resim oluşturulamadı: '+e.message);
+  }
 }
 
 render();
