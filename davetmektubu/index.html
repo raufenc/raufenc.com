@@ -17,275 +17,189 @@
 <title>Davet Mektubu</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
+/* ═══ DAVET MEKTUBU — PREMIUM REDESIGN ═══ */
+:root{--ease:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--max-read:72ch;--max-content:1080px;--max-wide:1320px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;min-height:100vh;transition:background .4s,color .4s;overflow-x:hidden}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;transition:background .4s,color .4s;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
-a{text-decoration:none}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:rgba(128,128,128,.2);border-radius:2px}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(128,128,128,.18);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:rgba(128,128,128,.35)}
 .dk{background:#07070F;color:#EDE8E0}
-.ak{background:#F3EFE9;color:#1A1510}
-@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fd{from{opacity:1}to{opacity:0;transform:translateY(-10px)}}
+.ak{background:#F5F1EB;color:#1A1510}
+
+/* ═══ KEYFRAMES ═══ */
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fd{from{opacity:1}to{opacity:0;transform:translateY(-8px)}}
 @keyframes sr{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:translateX(0)}}
 @keyframes sl{from{opacity:0;transform:translateX(-22px)}to{opacity:1;transform:translateX(0)}}
 @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes blob{0%,100%{transform:translate(0,0)}35%{transform:translate(18px,-12px)}70%{transform:translate(-8px,16px)}}
-#b1,#b2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:blob 20s ease-in-out infinite;transition:background .8s}
-#b2{animation-duration:25s;animation-direction:reverse}
-#dots{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22;background-image:radial-gradient(circle,rgba(255,255,255,.09) 1px,transparent 1px);background-size:42px 42px;display:none}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;transition:background .4s,border-color .4s}
-#app{position:relative;z-index:1;padding-top:52px;min-height:100vh}
-.pg{max-width:100%;margin:0 auto;padding:32px 24px 80px}
-.pg-lg{max-width:100%;margin:0 auto;padding:32px 24px 80px}
-/* BUTONLAR */
-.btn-back{display:flex;align-items:center;gap:6px;font-size:15px;margin-bottom:24px;opacity:1;transition:opacity .18s}
-.btn-back:hover{opacity:.6}
-.btn-pri{border:none;border-radius:16px;padding:16px 42px;color:#fff;font-size:16px;font-weight:600;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.btn-pri:hover{transform:translateY(-3px)}
-.btn-sec{border-radius:11px;padding:11px 8px;font-size:12px;font-weight:500;border:1px solid;transition:all .18s;flex:1}
-.btn-sec:hover:not(:disabled){transform:translateY(-2px)}
-.btn-sec:disabled{opacity:.18;cursor:not-allowed}
-.btn-tema{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;transition:transform .25s}
-.btn-tema:hover{transform:scale(1.2) rotate(20deg)}
-/* KARTLAR */
-.poz-card{width:100%;text-align:left;border-radius:18px;padding:20px;position:relative;overflow:hidden;border:1px solid;transition:all .28s cubic-bezier(.16,1,.3,1)}
-.poz-card:hover{transform:translateY(-3px) scale(1.01)}
-.poz-card:active{transform:scale(.985)}
-.meslek-row{display:flex;align-items:center;justify-content:space-between;border-radius:16px;padding:18px 20px;margin-bottom:12px;transition:all .22s;border:1px solid;cursor:pointer}
-.meslek-row:hover{transform:translateX(5px)}
-.meslek-row.hazir-yok{opacity:.45;cursor:default}
-.meslek-row.hazir-yok:hover{transform:none}
-/* TABS */
-.tabs{display:flex;gap:7px;margin-bottom:24px}
-.tab{padding:10px 20px;border-radius:30px;font-size:15px;font-weight:500;border:1px solid;cursor:pointer;transition:all .18s}
-/* KATEGORİ */
-.kat-scroll{display:flex;gap:5px;margin-bottom:18px;overflow-x:auto;padding-bottom:3px;-ms-overflow-style:none;scrollbar-width:none}
-.kat-scroll::-webkit-scrollbar{display:none}
-.kat-chip{padding:5px 12px;border-radius:30px;font-size:11px;white-space:nowrap;border:1px solid;cursor:pointer;transition:all .18s}
-/* PROGRESS */
-.prog{display:flex;gap:2.5px;margin-bottom:20px}
-.prog-s{height:3px;flex:1;border-radius:3px;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1)}
-.prog-s:hover{transform:scaleY(2.5)}
-/* SORU KARTI */
-.soru-kart{border-radius:24px;padding:34px 28px;min-height:220px;position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;margin-bottom:20px;transition:box-shadow .4s}
-/* PAYLAŞ MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;animation:fu .2s ease both}
-.modal-box{width:100%;max-width:460px;border-radius:20px 20px 0 0;padding:24px 20px 36px;animation:fu .28s cubic-bezier(.16,1,.3,1) both}
-.modal-preview{border-radius:14px;overflow:hidden;margin-bottom:16px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-/* MEKTUP */
-.m-badge{font-size:12px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;opacity:.8;margin-bottom:14px}
-.m-header{border-radius:20px;padding:28px 24px;margin-bottom:36px;border:1px solid}
-.m-giris{font-family:'Crimson Pro',serif;font-size:21px;font-style:italic;font-weight:300;line-height:1.95;margin-bottom:36px;padding-bottom:32px;border-bottom:1px solid}
-.m-h2{font-family:'Crimson Pro',serif;font-size:clamp(26px,7vw,42px);font-weight:400;line-height:1.25;margin-top:44px;margin-bottom:18px}
-.m-p{font-family:'Crimson Pro',serif;font-size:20px;line-height:2;font-weight:300;margin-bottom:18px}
-.m-alinti{padding-left:24px;margin:28px 0;font-family:'Crimson Pro',serif;font-size:21px;font-style:italic;line-height:1.85;font-weight:400;border-left:4px solid;position:relative}
-.m-alinti::before{content:'\201C';position:absolute;top:-8px;left:-4px;font-size:48px;font-family:'Crimson Pro',serif;opacity:.15;line-height:1}
-.m-gecis{border-radius:16px;padding:24px 22px;margin:32px 0;font-family:'Crimson Pro',serif;font-size:19px;line-height:1.85;font-weight:300;border:1px solid}
-.m-kapatis{font-family:'Crimson Pro',serif;font-size:21px;font-style:italic;font-weight:400;margin-top:44px;padding-top:32px;line-height:1.95;border-top:1px solid}
-.m-skeleton-info{border-radius:16px;padding:22px 24px;margin:28px 0;font-size:17px;font-weight:300;line-height:1.75;border:1px dashed}
-/* BAĞLANTI KUTULARI */
-.baglar{margin-top:40px;padding-top:24px;border-top:1px solid}
-.bag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
-.bag-kart{border-radius:18px;padding:22px;border:1px solid;cursor:pointer;transition:all .22s;display:block;text-align:left}
-.bag-kart:hover{transform:translateY(-3px)}
-/* ANA */
-.hero{text-align:center;padding:36px 20px 0}
-.hero-ring{position:relative;display:inline-flex;justify-content:center;align-items:center;margin-bottom:26px}
-.hero-icon{display:flex;align-items:center;justify-content:center;border-radius:20px;border:1px solid;position:relative;z-index:1}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:40px}
-.step{border-radius:13px;padding:14px 12px;border:1px solid;text-align:left;transition:background .4s,border-color .4s}
-.step-no{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-bottom:8px;border:1px solid}
-/* BADGE */
-.badge{display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid}
-/* NAV SAYAç */
-.sayac{display:flex;justify-content:center;align-items:center;gap:7px;margin-bottom:12px;font-size:10px}
-@media(max-width:380px){.steps{grid-template-columns:1fr}.hero-title{font-size:clamp(28px,8vw,44px)!important}}
-/* ═══ PREMIUM ANIMATIONS ═══ */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
 @keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 20px var(--glow,rgba(200,150,62,.15))}50%{box-shadow:0 0 40px var(--glow,rgba(200,150,62,.25))}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes heartbeat{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+
+/* ═══ AMBIENT ═══ */
+#b1,#b2{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:blob 20s ease-in-out infinite;transition:background .8s}
+#b2{animation-duration:25s;animation-direction:reverse}
+#dots{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px;display:none}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+#app{position:relative;z-index:1;padding-top:56px;min-height:100vh}
+
+/* ═══ CONTAINERS ═══ */
+.pg{max-width:100%;margin:0 auto;padding:36px 24px 80px}
+.pg-lg{max-width:100%;margin:0 auto;padding:36px 24px 80px}
+
+/* ═══ BUTTONS ═══ */
+.btn-back{display:inline-flex;align-items:center;gap:8px;font-size:clamp(14px,2vw,17px);margin-bottom:clamp(24px,4vw,44px);opacity:.7;transition:all .25s var(--ease);font-weight:400}
+.btn-back:hover{opacity:1;transform:translateX(-4px)}
+.btn-pri{border:none;border-radius:60px;padding:clamp(16px,2.5vw,24px) clamp(44px,8vw,72px);color:#fff;font-size:clamp(16px,2.5vw,20px);font-weight:600;transition:all .35s var(--ease);letter-spacing:.02em}
+.btn-pri:hover{transform:translateY(-4px)}
+.btn-pri:active{transform:scale(.97);transition-duration:.1s}
+.btn-sec{border-radius:14px;padding:12px 10px;font-size:clamp(12px,1.8vw,15px);font-weight:500;border:1px solid;transition:all .2s var(--ease);flex:1}
+.btn-sec:hover:not(:disabled){transform:translateY(-2px)}
+.btn-sec:disabled{opacity:.18;cursor:not-allowed}
+.btn-tema{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .3s var(--ease)}
+.btn-tema:hover{transform:scale(1.15) rotate(15deg);opacity:.8}
+
+/* ═══ POSITION CARDS ═══ */
+.poz-card{width:100%;text-align:left;border-radius:clamp(18px,3vw,28px);padding:clamp(22px,3.5vw,40px);position:relative;overflow:hidden;border:1px solid;transition:all .35s var(--ease)}
+.poz-card:hover{transform:translateY(-6px) scale(1.01)}
+.poz-card:active{transform:scale(.98);transition-duration:.1s}
+
+/* ═══ LETTER LIST ROWS ═══ */
+.meslek-row{display:flex;align-items:center;justify-content:space-between;border-radius:clamp(14px,2vw,22px);padding:clamp(18px,2.5vw,28px) clamp(20px,3vw,34px);margin-bottom:clamp(10px,1.5vw,16px);transition:all .25s var(--ease);border:1px solid;cursor:pointer}
+.meslek-row:hover{transform:translateX(8px)}
+.meslek-row.hazir-yok{opacity:.4;cursor:default}
+.meslek-row.hazir-yok:hover{transform:none}
+
+/* ═══ TABS ═══ */
+.tabs{display:flex;gap:clamp(8px,1.5vw,12px);margin-bottom:clamp(24px,3.5vw,36px)}
+.tab{padding:clamp(10px,1.8vw,16px) clamp(22px,3.5vw,40px);border-radius:40px;font-size:clamp(14px,2vw,18px);font-weight:500;border:1px solid;cursor:pointer;transition:all .2s var(--ease)}
+
+/* ═══ CATEGORY CHIPS ═══ */
+.kat-scroll{display:flex;gap:clamp(6px,1vw,10px);margin-bottom:clamp(18px,3vw,28px);overflow-x:auto;padding-bottom:4px;-ms-overflow-style:none;scrollbar-width:none}
+.kat-scroll::-webkit-scrollbar{display:none}
+.kat-chip{padding:clamp(7px,1.2vw,12px) clamp(14px,2.2vw,24px);border-radius:40px;font-size:clamp(12px,1.8vw,16px);white-space:nowrap;border:1px solid;cursor:pointer;transition:all .2s var(--ease)}
+
+/* ═══ PROGRESS DOTS ═══ */
+.prog{display:flex;gap:3px;margin-bottom:clamp(20px,3vw,28px)}
+.prog-s{height:clamp(3px,.4vw,5px);flex:1;border-radius:4px;cursor:pointer;transition:all .3s var(--ease)}
+.prog-s:hover{transform:scaleY(3)}
+
+/* ═══ QUESTION CARD ═══ */
+.soru-kart{border-radius:clamp(22px,3.5vw,32px);padding:clamp(32px,5vw,60px) clamp(26px,4vw,52px);min-height:clamp(220px,35vh,360px);position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;margin-bottom:clamp(18px,3vw,24px);transition:box-shadow .4s}
+
+/* ═══ SHARE MODAL ═══ */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:flex-end;justify-content:center;animation:fu .2s ease both}
+.modal-box{width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:clamp(24px,4vw,48px) clamp(20px,3.5vw,44px) clamp(36px,5vw,60px);animation:fu .28s var(--ease) both}
+.modal-preview{border-radius:16px;overflow:hidden;margin-bottom:18px;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+
+/* ═══ LETTER READING ═══ */
+.m-badge{font-size:clamp(11px,1.5vw,14px);letter-spacing:.3em;text-transform:uppercase;font-weight:600;opacity:.75;margin-bottom:clamp(14px,2vw,20px)}
+.m-header{border-radius:clamp(20px,3vw,32px);padding:clamp(28px,4vw,52px);margin-bottom:clamp(36px,5vw,64px);border:1px solid}
+.m-giris{font-family:'Crimson Pro',serif;font-size:clamp(19px,3.2vw,24px);font-style:italic;font-weight:300;line-height:1.9;margin-bottom:clamp(36px,5vw,60px);padding-bottom:clamp(28px,4vw,48px);border-bottom:1px solid}
+.m-h2{font-family:'Crimson Pro',serif;font-size:clamp(24px,5vw,36px);font-weight:400;line-height:1.2;margin-top:clamp(44px,6vw,80px);margin-bottom:clamp(16px,2.5vw,28px);letter-spacing:-.01em}
+.m-p{font-family:'Crimson Pro',serif;font-size:clamp(18px,2.8vw,23px);line-height:1.95;font-weight:300;margin-bottom:clamp(18px,2.5vw,28px);letter-spacing:.005em}
+.m-alinti{padding:clamp(20px,3vw,36px) clamp(20px,3vw,36px) clamp(20px,3vw,36px) clamp(24px,3.5vw,40px);margin:clamp(28px,4vw,48px) 0;font-family:'Crimson Pro',serif;font-size:clamp(19px,3vw,24px);font-style:italic;line-height:1.85;font-weight:400;border-left:clamp(4px,.5vw,6px) solid;position:relative;border-radius:0 clamp(12px,2vw,20px) clamp(12px,2vw,20px) 0}
+.m-alinti::before{content:'\201C';position:absolute;top:clamp(-4px,-.5vw,-8px);left:clamp(-2px,-.3vw,-6px);font-size:clamp(44px,6vw,72px);font-family:'Crimson Pro',serif;opacity:.12;line-height:1}
+.m-gecis{border-radius:clamp(16px,2.5vw,24px);padding:clamp(24px,3.5vw,40px);margin:clamp(32px,5vw,52px) 0;font-family:'Crimson Pro',serif;font-size:clamp(17px,2.5vw,22px);line-height:1.85;font-weight:300;border:1px solid}
+.m-kapatis{font-family:'Crimson Pro',serif;font-size:clamp(19px,3.2vw,24px);font-style:italic;font-weight:400;margin-top:clamp(44px,6vw,80px);padding-top:clamp(32px,4.5vw,56px);line-height:1.9;border-top:1px solid}
+.m-skeleton-info{border-radius:clamp(14px,2vw,22px);padding:clamp(20px,3vw,34px);margin:clamp(24px,3.5vw,36px) 0;font-size:clamp(15px,2vw,19px);font-weight:300;line-height:1.7;border:1px dashed}
+
+/* ═══ RELATED LETTERS ═══ */
+.baglar{margin-top:clamp(44px,6vw,88px);padding-top:clamp(28px,4vw,60px);border-top:1px solid}
+.bag-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,2vw,24px);margin-top:clamp(14px,2vw,24px)}
+.bag-kart{border-radius:clamp(16px,2.5vw,24px);padding:clamp(20px,3vw,34px);border:1px solid;cursor:pointer;transition:all .3s var(--ease);display:block;text-align:left}
+.bag-kart:hover{transform:translateY(-5px)}
+
+/* ═══ HERO ═══ */
+.hero{text-align:center;padding:clamp(32px,5vw,48px) 20px 0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.8vw,24px);margin-top:clamp(24px,4vw,48px)}
+.step{border-radius:clamp(14px,2vw,24px);padding:clamp(16px,2.5vw,36px) clamp(14px,2vw,30px);border:1px solid;text-align:left;transition:all .3s var(--ease)}
+
+/* ═══ MISC ═══ */
+.badge{display:inline-flex;align-items:center;padding:clamp(5px,.8vw,8px) clamp(12px,2vw,18px);border-radius:24px;font-size:clamp(11px,1.5vw,14px);font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:1px solid}
+.sayac{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:14px;font-size:clamp(11px,1.5vw,15px)}
+
+/* ═══ SCROLL REVEAL ═══ */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.reveal.visible{opacity:1;transform:translateY(0)}
+
 /* ═══ READING PROGRESS ═══ */
-#readProgress{position:fixed;top:0;left:0;height:3px;z-index:200;transition:width .1s linear;border-radius:0 2px 2px 0;pointer-events:none;opacity:0;transition:width .1s linear,opacity .3s}
+#readProgress{position:fixed;top:0;left:0;height:4px;z-index:200;transition:width .1s linear;border-radius:0 3px 3px 0;pointer-events:none;opacity:0;transition:width .1s linear,opacity .3s}
 #readProgress.active{opacity:1}
-/* ═══ TABLET ═══ */
+
+/* ═══ FAVORITES ═══ */
+.fav-btn{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;transition:transform .2s var(--ease);border:none;background:transparent;cursor:pointer}
+.fav-btn:hover{transform:scale(1.25)}
+.fav-btn.aktif{animation:heartbeat .3s ease}
+
+/* ═══ SEARCH ═══ */
+.search-wrap{position:relative;margin-bottom:clamp(16px,2.5vw,24px)}
+.search-input{width:100%;border-radius:clamp(14px,2vw,22px);padding:clamp(13px,2vw,22px) clamp(44px,6vw,60px) clamp(13px,2vw,22px) clamp(18px,3vw,32px);font-size:clamp(15px,2.2vw,19px);font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s}
+.search-icon{position:absolute;right:clamp(14px,2vw,20px);top:50%;transform:translateY(-50%);font-size:clamp(14px,2vw,18px);pointer-events:none;opacity:.35}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:clamp(20px,3vw,32px);left:50%;transform:translateX(-50%) translateY(80px);border-radius:16px;padding:clamp(12px,2vw,18px) clamp(22px,3vw,32px);font-size:clamp(13px,1.8vw,16px);font-weight:500;z-index:999;transition:transform .3s var(--ease);pointer-events:none;white-space:nowrap;background:#1a1a2e;color:#EDE8E0;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ═══ SHARE BUTTON ═══ */
+.mektup-share-btn{flex:1;padding:clamp(12px,2vw,20px) clamp(10px,1.5vw,16px);border-radius:clamp(12px,2vw,18px);font-size:clamp(13px,1.8vw,17px);font-weight:500;border:1px solid;cursor:pointer;transition:all .2s var(--ease);text-align:center;background:transparent}
+.mektup-share-btn:hover{transform:translateY(-3px)}
+
+/* ═══ WEEKLY BANNER ═══ */
+.weekly-banner{border-radius:clamp(16px,2.5vw,24px);padding:clamp(18px,3vw,32px);margin-bottom:clamp(18px,3vw,24px);border:1px solid;cursor:pointer;transition:all .25s var(--ease);position:relative;overflow:hidden}
+.weekly-banner:hover{transform:translateY(-3px)}
+
+/* ═══ MEKTUP GRID (NEW) ═══ */
+.mektup-grid{display:grid;grid-template-columns:1fr;gap:clamp(10px,1.5vw,16px)}
+
+/* ═══ TINY SCREENS ═══ */
+@media(max-width:380px){.steps{grid-template-columns:1fr}.hero-title{font-size:clamp(32px,10vw,48px)!important}.mektup-grid{gap:8px}}
+
+/* ═══ TABLET (768px+) ═══ */
 @media(min-width:768px){
-  .pg{max-width:90%;padding:56px 48px 120px}
-  .pg-lg{max-width:95%;padding:56px 48px 120px}
-  nav{height:68px;padding:0 48px;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-  #app{padding-top:68px}
-  .hero-wrap{padding:72px 32px 0!important}
-  .hero-icon-wrap{margin-bottom:40px!important}
-  .hero-icon-outer{width:120px!important;height:120px!important}
-  .hero-icon-inner{width:92px!important;height:92px!important;border-radius:26px!important;font-size:38px!important}
-  .hero-badge{font-size:14px!important;padding:10px 24px!important}
-  .hero-title{font-size:72px!important}
-  .hero-subtitle{font-size:26px!important;max-width:600px!important}
-  .hero-desc{font-size:17px!important;max-width:520px!important}
-  .hero-cta{padding:22px 60px!important;font-size:19px!important}
-  .hero-stats{margin-top:48px!important;gap:44px!important}
-  .hero-stats .stat-num{font-size:40px!important}
-  .hero-stats .stat-label{font-size:13px!important}
-  .hero-stats-divider{height:32px!important}
-  .poz-grid{gap:20px!important;margin-top:52px!important}
-  .poz-mini{padding:28px 24px!important;border-radius:22px!important}
-  .poz-mini-icon{font-size:34px!important;margin-bottom:16px!important}
-  .poz-mini-title{font-size:20px!important}
-  .poz-mini-desc{font-size:15px!important}
-  .steps{gap:20px}
-  .step{padding:28px 24px;border-radius:22px}
-  .step-icon{font-size:30px!important;margin-bottom:14px!important}
-  .step-title{font-size:17px!important}
-  .step-desc{font-size:15px!important}
-  .poz-card{padding:32px;border-radius:26px;box-shadow:0 4px 24px rgba(0,0,0,.08)}
-  .poz-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 16px 48px rgba(0,0,0,.18)}
-  .poz-card .poz-icon{width:60px!important;height:60px!important;font-size:26px!important;border-radius:18px!important}
-  .poz-card .poz-name{font-size:20px!important}
-  .poz-card .poz-desc{font-size:15px!important}
-  .meslek-row{padding:22px 28px;border-radius:20px;margin-bottom:14px}
-  .meslek-row:hover{transform:translateX(8px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
-  .meslek-row .meslek-name{font-size:20px!important}
-  .meslek-row .meslek-ozet{font-size:15px!important}
-  .tab{padding:14px 30px;font-size:17px;border-radius:34px}
-  .kat-chip{padding:10px 22px;font-size:15px}
-  .m-badge{font-size:13px;letter-spacing:.3em}
-  .m-header{border-radius:26px;padding:40px 38px;margin-bottom:52px;box-shadow:0 4px 28px rgba(0,0,0,.06)}
-  .m-title{font-size:40px!important}
-  .m-reading-time{font-size:15px!important}
-  .m-giris{font-size:25px;line-height:2.05;margin-bottom:48px;padding-bottom:44px}
-  .m-h2{font-size:34px;margin-top:60px;margin-bottom:24px}
-  .m-p{font-size:24px;line-height:2.05;margin-bottom:24px}
-  .m-alinti{font-size:25px;padding-left:34px;margin:36px 0;border-left-width:5px}
-  .m-alinti::before{font-size:60px!important;top:-10px!important;left:-6px!important}
-  .m-gecis{border-radius:20px;padding:32px 34px;margin:40px 0;font-size:22px;line-height:1.9}
-  .m-kapatis{font-size:25px;margin-top:60px;padding-top:44px;line-height:2.05}
-  .m-skeleton-info{padding:28px 32px;font-size:19px;border-radius:20px}
-  .baglar{margin-top:72px;padding-top:48px}
-  .bag-grid{grid-template-columns:repeat(2,1fr);gap:20px;margin-top:20px}
-  .bag-kart{border-radius:22px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,.04)}
-  .bag-kart:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.12)}
-  .bag-section-label{font-size:14px!important;margin-bottom:12px!important}
-  .btn-back{font-size:17px;margin-bottom:40px}
-  .btn-pri{padding:22px 56px;font-size:19px;border-radius:50px}
-  .search-input{padding:20px 56px 20px 28px;font-size:18px;border-radius:20px}
-  .soru-kart{border-radius:28px;padding:48px 42px;min-height:280px;box-shadow:0 8px 40px rgba(0,0,0,.08)}
-  .modal-box{max-width:600px;border-radius:28px 28px 0 0;padding:44px 40px 56px}
-  .weekly-banner{padding:30px 28px;border-radius:24px}
-  .mektup-share-btn{padding:18px 22px;font-size:17px;border-radius:16px}
-  .liste-baslik{font-size:36px!important}
-  .liste-alt{font-size:26px!important}
-  .liste-aciklama{font-size:16px!important}
-  .poz-baslik{font-size:40px!important}
-  .poz-alt{font-size:26px!important}
-}
-/* ═══ DESKTOP ═══ */
-@media(min-width:1100px){
-  .pg{max-width:780px;padding:72px 0 140px;margin:0 auto}
-  .pg-lg{max-width:1200px;padding:72px 80px 140px}
-  nav{height:72px;padding:0 64px}
-  #app{padding-top:72px}
-  .hero-wrap{padding:100px 40px 0!important}
-  .hero-title{font-size:92px!important;letter-spacing:-.03em!important}
-  .hero-subtitle{font-size:28px!important;max-width:620px!important}
-  .hero-desc{font-size:18px!important;max-width:540px!important}
-  .hero-cta{padding:24px 72px!important;font-size:20px!important}
-  .hero-stats .stat-num{font-size:48px!important}
-  .hero-stats .stat-label{font-size:14px!important}
-  .hero-stats{gap:56px!important}
-  .hero-stats-divider{height:36px!important}
-  .poz-grid{gap:24px!important}
-  .poz-mini{padding:36px 30px!important;border-radius:24px!important}
-  .poz-mini-icon{font-size:40px!important;margin-bottom:18px!important}
-  .poz-mini-title{font-size:22px!important}
-  .poz-mini-desc{font-size:16px!important;line-height:1.7!important}
-  .steps{gap:24px}
-  .step{padding:36px 30px;border-radius:24px}
-  .step-icon{font-size:36px!important;margin-bottom:16px!important}
-  .step-title{font-size:20px!important}
-  .step-desc{font-size:16px!important}
-  .poz-card{padding:36px;border-radius:28px}
-  .poz-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 56px rgba(0,0,0,.2)}
-  .poz-card .poz-icon{width:72px!important;height:72px!important;font-size:32px!important;border-radius:20px!important}
-  .poz-card .poz-name{font-size:22px!important}
-  .poz-card .poz-desc{font-size:16px!important}
-  .meslek-row{padding:26px 34px;border-radius:22px;margin-bottom:16px}
-  .meslek-row:hover{transform:translateX(10px);box-shadow:0 8px 32px rgba(0,0,0,.1)}
-  .meslek-row .meslek-name{font-size:22px!important}
-  .meslek-row .meslek-ozet{font-size:16px!important;margin-left:14px!important}
-  .tab{padding:16px 36px;font-size:18px}
-  .kat-chip{padding:11px 24px;font-size:16px}
-  /* Mektup okuma — geniş ve büyük */
-  .m-header{border-radius:28px;padding:48px 48px;margin-bottom:60px;box-shadow:0 6px 36px rgba(0,0,0,.08)}
-  .m-title{font-size:48px!important}
-  .m-badge{font-size:14px;letter-spacing:.35em}
-  .m-reading-time{font-size:16px!important}
-  .m-giris{font-size:28px;line-height:2.1;margin-bottom:56px;padding-bottom:48px}
-  .m-h2{font-size:38px;margin-top:72px;margin-bottom:28px}
-  .m-p{font-size:26px;line-height:2.1;margin-bottom:28px}
-  .m-alinti{font-size:28px;padding-left:40px;margin:44px 0;border-left-width:6px}
-  .m-alinti::before{font-size:72px!important;top:-16px!important;left:-10px!important}
-  .m-gecis{border-radius:22px;padding:38px 40px;margin:48px 0;font-size:24px;line-height:1.95}
-  .m-kapatis{font-size:28px;margin-top:72px;padding-top:52px;line-height:2.1}
-  .m-skeleton-info{padding:32px 36px;font-size:20px;border-radius:22px}
-  .baglar{margin-top:80px;padding-top:56px}
-  .bag-grid{grid-template-columns:repeat(2,1fr);gap:24px;margin-top:24px}
-  .bag-kart{border-radius:24px;padding:34px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
-  .bag-kart:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.14)}
-  .bag-section-label{font-size:15px!important;margin-bottom:14px!important}
-  .btn-back{font-size:18px;margin-bottom:44px}
-  .btn-pri{padding:24px 64px;font-size:20px;border-radius:52px}
-  .search-input{padding:22px 60px 22px 32px;font-size:19px;border-radius:22px}
-  .soru-kart{border-radius:30px;padding:56px 48px;min-height:320px;box-shadow:0 12px 48px rgba(0,0,0,.1)}
-  .modal-box{max-width:640px;border-radius:32px 32px 0 0;padding:48px 44px 60px}
-  .weekly-banner{padding:34px 32px;border-radius:26px}
-  .mektup-share-btn{padding:20px 26px;font-size:18px;border-radius:18px}
-  .liste-baslik{font-size:42px!important}
-  .liste-alt{font-size:28px!important}
-  .liste-aciklama{font-size:17px!important}
-  .poz-baslik{font-size:48px!important}
-  .poz-alt{font-size:28px!important}
-}
-/* ═══ ULTRA WIDE ═══ */
-@media(min-width:1400px){
-  .pg{max-width:860px}
-  .pg-lg{max-width:1320px;padding:80px 100px 160px}
-  .hero-title{font-size:104px!important}
-  .hero-subtitle{font-size:30px!important}
-  .m-p{font-size:28px;line-height:2.15}
-  .m-h2{font-size:42px}
-  .m-giris{font-size:30px}
-  .m-alinti{font-size:30px}
-  .m-kapatis{font-size:30px}
-  .m-gecis{font-size:26px}
-  .m-title{font-size:52px!important}
+  .pg{max-width:var(--max-read);padding:56px 40px 120px}
+  .pg-lg{max-width:var(--max-content);padding:56px 48px 120px}
+  nav{height:64px;padding:0 40px}
+  #app{padding-top:64px}
+  .mektup-grid{grid-template-columns:repeat(2,1fr)}
+  .poz-card{box-shadow:0 2px 16px rgba(0,0,0,.06)}
+  .poz-card:hover{box-shadow:0 16px 48px rgba(0,0,0,.16)}
+  .meslek-row:hover{box-shadow:0 6px 24px rgba(0,0,0,.08)}
+  .m-header{box-shadow:0 4px 28px rgba(0,0,0,.06)}
+  .bag-kart{box-shadow:0 2px 12px rgba(0,0,0,.04)}
+  .bag-kart:hover{box-shadow:0 12px 40px rgba(0,0,0,.12)}
+  .soru-kart{box-shadow:0 8px 36px rgba(0,0,0,.08)}
 }
 
-/* FAVORİLER */
-.fav-btn{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .2s;border:none;background:transparent;cursor:pointer}
-.fav-btn:hover{transform:scale(1.3)}
-.fav-btn.aktif{animation:heartbeat .3s ease}
-@keyframes heartbeat{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
-/* ARAMA */
-.search-wrap{position:relative;margin-bottom:16px}
-.search-input{width:100%;border-radius:12px;padding:11px 42px 11px 16px;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
-.search-icon{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;opacity:.4}
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);border-radius:12px;padding:12px 22px;font-size:13px;font-weight:500;z-index:999;transition:transform .3s cubic-bezier(.16,1,.3,1);pointer-events:none;white-space:nowrap;background:#1a1a2e;color:#EDE8E0;box-shadow:0 8px 32px rgba(0,0,0,.4)}
-.toast.show{transform:translateX(-50%) translateY(0)}
-/* MEKTUP PAYLAŞ */
-.mektup-share-btn{flex:1;padding:10px 8px;border-radius:10px;font-size:12px;font-weight:500;border:1px solid;cursor:pointer;transition:all .18s;text-align:center;background:transparent}
-.mektup-share-btn:hover{transform:translateY(-2px)}
-/* HAFTALIK */
-.weekly-banner{border-radius:16px;padding:18px 16px;margin-bottom:20px;border:1px solid;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.weekly-banner:hover{transform:translateY(-2px)}
+/* ═══ DESKTOP (1100px+) ═══ */
+@media(min-width:1100px){
+  .pg{max-width:var(--max-read);padding:72px 0 140px}
+  .pg-lg{max-width:var(--max-content);padding:72px 64px 140px}
+  nav{height:64px;padding:0 56px}
+  #app{padding-top:64px}
+  .poz-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 56px rgba(0,0,0,.2)}
+  .meslek-row:hover{transform:translateX(10px);box-shadow:0 8px 32px rgba(0,0,0,.1)}
+  .soru-kart{box-shadow:0 12px 48px rgba(0,0,0,.1)}
+}
+
+/* ═══ ULTRA WIDE (1400px+) ═══ */
+@media(min-width:1400px){
+  .pg-lg{max-width:var(--max-wide);padding:80px 80px 160px}
+}
 </style>
 </head>
 <body class="dk">
@@ -2005,103 +1919,84 @@ function renderAna(){
     {id:"agnostik",ikon:"∿",renk:PR.agnostik.ana,label:"Agnostik",kisa:"Bilmiyorum mu, kaçış mı?"},
   ];
   return`<div style="width:100%;padding:0">
+  <div style="text-align:center;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(24px,4vw,48px) clamp(20px,5vw,80px);position:relative">
 
-  <!-- HERO -->
-  <div class="hero-wrap" style="text-align:center;padding:clamp(36px,6vw,100px) clamp(20px,5vw,80px) 0;position:relative;width:100%">
-
-    <!-- Zarf ikonu — premium -->
-    <div class="hero-icon-wrap" style="position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:28px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) both">
-      <div class="hero-icon-outer" style="position:absolute;width:88px;height:88px;border-radius:50%;border:1px dashed ${rr.ana}35;animation:spin 28s linear infinite"></div>
-      <div style="position:absolute;width:66px;height:66px;border-radius:50%;border:1px dashed ${rr.ana}18;animation:spin 18s linear infinite reverse"></div>
-      <div class="hero-icon-inner" style="width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,${rr.ana}28,${rr.ana}08);border:1px solid ${rr.ana}35;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 16px 48px ${rr.ana}28,inset 0 1px 0 rgba(255,255,255,.12);position:relative;animation:glowPulse 4s ease-in-out infinite;--glow:${rr.ana}20">✉</div>
+    <!-- Badge -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:${rr.ana}0C;border:1px solid ${rr.ana}1A;border-radius:28px;padding:clamp(6px,1vw,10px) clamp(16px,2.5vw,24px);margin-bottom:clamp(24px,4vw,40px);animation:fadeUp .7s var(--ease) both;backdrop-filter:blur(12px)">
+      <span style="width:7px;height:7px;border-radius:50%;background:${rr.ana};animation:pulse 2.5s ease-in-out infinite"></span>
+      <span style="font-size:clamp(11px,1.5vw,13px);font-weight:600;color:${rr.parlak};letter-spacing:.12em;text-transform:uppercase">Davet Mektubu</span>
     </div>
 
-    <!-- Etiket -->
-    <div class="hero-badge" style="display:inline-flex;align-items:center;gap:7px;background:${rr.ana}10;border:1px solid ${rr.ana}20;border-radius:24px;padding:6px 16px;margin-bottom:22px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .1s both;backdrop-filter:blur(8px)">
-      <span style="width:6px;height:6px;border-radius:50%;background:${rr.ana};display:inline-block;animation:pulse 2s ease-in-out infinite"></span>
-      <span style="font-size:clamp(11px,2vw,14px);font-weight:600;color:${rr.parlak};letter-spacing:.1em;text-transform:uppercase">Davet Mektubu</span>
-    </div>
-
-    <!-- Ana başlık — premium tipografi -->
-    <h1 class="hero-title" style="font-family:'Crimson Pro',serif;font-size:clamp(44px,12vw,104px);font-weight:300;line-height:1.06;color:${c.met};margin-bottom:24px;letter-spacing:-.02em;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .15s both">
+    <!-- Title -->
+    <h1 style="font-family:'Crimson Pro',serif;font-size:clamp(48px,13vw,112px);font-weight:300;line-height:1.02;color:${c.met};margin-bottom:clamp(20px,3vw,32px);letter-spacing:-.03em;animation:fadeUp .7s var(--ease) .08s both">
       Arkadaşın<br>
-      <span style="font-style:italic;background:linear-gradient(135deg,${rr.ana} 0%,${rr.parlak} 50%,${rr.ana} 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite">büyük soruyu</span><br>
+      <span style="font-style:italic;background:linear-gradient(135deg,${rr.ana} 0%,${rr.parlak} 50%,${rr.ana} 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 6s linear infinite">büyük soruyu</span><br>
       soruyor.
     </h1>
 
-    <!-- Alt başlık -->
-    <p class="hero-subtitle" style="font-family:'Crimson Pro',serif;font-size:clamp(18px,4.5vw,30px);color:${c.soluk};line-height:1.7;max-width:620px;margin:0 auto 16px;font-weight:300;font-style:italic;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .25s both">
+    <!-- Subtitle -->
+    <p style="font-family:'Crimson Pro',serif;font-size:clamp(18px,3.5vw,28px);color:${c.soluk};line-height:1.65;max-width:680px;margin:0 auto clamp(12px,2vw,20px);font-weight:300;font-style:italic;animation:fadeUp .7s var(--ease) .16s both">
       "Tanrı var mı?" diye sorduğunda<br>ona layık bir cevap vermek istiyorsun.
     </p>
-    <p class="hero-desc" style="font-size:clamp(14px,2.5vw,18px);color:${c.cs};max-width:540px;margin:0 auto 44px;line-height:1.7;font-weight:300;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .3s both">
+    <p style="font-size:clamp(14px,2vw,17px);color:${c.cs};max-width:560px;margin:0 auto clamp(32px,5vw,52px);line-height:1.7;font-weight:300;animation:fadeUp .7s var(--ease) .22s both">
       Akademik kaynaklı mektuplar ve düşündürücü sorular.<br>Mesleğine özel. Pozisyonuna göre.
     </p>
 
-    <!-- CTA buton — premium -->
-    <button class="hero-cta" onclick="navigate({screen:'poz'})"
-      style="background:linear-gradient(135deg,${rr.ana},${rr.koyu});border:none;border-radius:50px;padding:clamp(16px,2.5vw,24px) clamp(48px,8vw,72px);color:#fff;font-size:clamp(16px,2.5vw,20px);font-weight:600;letter-spacing:.03em;box-shadow:0 12px 40px ${rr.ana}35,inset 0 1px 0 rgba(255,255,255,.18);transition:all .35s cubic-bezier(.16,1,.3,1);cursor:pointer;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .35s both;position:relative;overflow:hidden"
-      onmouseover="this.style.transform='translateY(-4px) scale(1.03)';this.style.boxShadow='0 20px 56px ${rr.ana}45,inset 0 1px 0 rgba(255,255,255,.2)'"
-      onmouseout="this.style.transform='';this.style.boxShadow='0 12px 40px ${rr.ana}35,inset 0 1px 0 rgba(255,255,255,.18)'">
+    <!-- CTA -->
+    <button onclick="navigate({screen:'poz'})"
+      style="background:linear-gradient(135deg,${rr.ana},${rr.koyu});border:none;border-radius:60px;padding:clamp(18px,2.5vw,26px) clamp(52px,9vw,80px);color:#fff;font-size:clamp(16px,2.2vw,20px);font-weight:600;letter-spacing:.02em;box-shadow:0 16px 48px ${rr.ana}30;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .7s var(--ease) .28s both"
+      onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 24px 64px ${rr.ana}40'"
+      onmouseout="this.style.transform='';this.style.boxShadow='0 16px 48px ${rr.ana}30'">
       Mektupları Keşfet →
     </button>
 
-    <!-- İstatistikler — premium sayaç -->
-    <div class="hero-stats" style="display:flex;justify-content:center;align-items:center;gap:20px;margin-top:28px;animation:fadeUp .8s cubic-bezier(.16,1,.3,1) .45s both">
+    <!-- Stats -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:clamp(24px,5vw,56px);margin-top:clamp(32px,5vw,56px);animation:fadeUp .7s var(--ease) .36s both">
+      ${[{n:"82",l:"Mektup"},{n:"27",l:"Meslek"},{n:"3",l:"Perspektif"}].map((s,i)=>`
+      ${i>0?`<div style="width:1px;height:clamp(28px,4vw,44px);background:linear-gradient(to bottom,transparent,${c.cerç},transparent)"></div>`:""}
       <div style="text-align:center">
-        <div class="stat-num" style="font-family:'Crimson Pro',serif;font-size:clamp(28px,6vw,48px);font-weight:600;color:${c.met};line-height:1">82</div>
-        <div class="stat-label" style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};text-transform:uppercase;letter-spacing:.08em;margin-top:6px">Mektup</div>
-      </div>
-      <div class="hero-stats-divider" style="width:1px;height:28px;background:${c.cerç}"></div>
-      <div style="text-align:center">
-        <div class="stat-num" style="font-family:'Crimson Pro',serif;font-size:clamp(28px,6vw,48px);font-weight:600;color:${c.met};line-height:1">27</div>
-        <div class="stat-label" style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};text-transform:uppercase;letter-spacing:.08em;margin-top:6px">Meslek</div>
-      </div>
-      <div class="hero-stats-divider" style="width:1px;height:28px;background:${c.cerç}"></div>
-      <div style="text-align:center">
-        <div class="stat-num" style="font-family:'Crimson Pro',serif;font-size:clamp(28px,6vw,48px);font-weight:600;color:${c.met};line-height:1">3</div>
-        <div class="stat-label" style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};text-transform:uppercase;letter-spacing:.08em;margin-top:6px">Perspektif</div>
-      </div>
+        <div style="font-family:'Crimson Pro',serif;font-size:clamp(32px,7vw,56px);font-weight:700;color:${c.met};line-height:1">${s.n}</div>
+        <div style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};text-transform:uppercase;letter-spacing:.15em;margin-top:clamp(4px,.6vw,8px);font-weight:500">${s.l}</div>
+      </div>`).join("")}
     </div>
+  </div>
 
-    <!-- Pozisyon önizleme kartları — premium glassmorphism -->
-    <div class="poz-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-top:clamp(36px,5vw,64px);text-align:left;max-width:960px;margin-left:auto;margin-right:auto;padding:0 clamp(8px,3vw,40px)">
+  <!-- Pozisyon kartları -->
+  <div style="max-width:var(--max-content);margin:0 auto;padding:0 clamp(20px,4vw,64px) clamp(32px,5vw,48px)">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,2vw,24px);margin-bottom:clamp(48px,6vw,80px)">
       ${pozlar.map((p,i)=>`
-      <button class="poz-mini" onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
-        style="background:linear-gradient(145deg,${p.renk}12,${p.renk}04);border:1px solid ${p.renk}22;border-radius:16px;padding:16px 14px;text-align:left;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:pointer;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) ${.55+i*.08}s both;backdrop-filter:blur(8px);position:relative;overflow:hidden"
-        onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='${p.renk}55';this.style.boxShadow='0 12px 36px ${p.renk}18'"
-        onmouseout="this.style.transform='';this.style.borderColor='${p.renk}22';this.style.boxShadow='none'">
-        <div style="position:absolute;top:-20px;right:-20px;width:60px;height:60px;border-radius:50%;background:${p.renk}08;pointer-events:none"></div>
-        <div class="poz-mini-icon" style="font-size:clamp(24px,4vw,40px);margin-bottom:12px">${p.ikon}</div>
-        <div class="poz-mini-title" style="font-size:clamp(15px,2.5vw,22px);font-weight:600;color:${c.met};margin-bottom:6px">${p.label}</div>
-        <div class="poz-mini-desc" style="font-size:clamp(12px,2vw,16px);color:${c.soluk};line-height:1.6;font-weight:300">${p.kisa}</div>
+      <button onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
+        style="background:${c.kart};border:1px solid ${c.cerç};border-top:3px solid ${p.renk}60;border-radius:clamp(16px,2.5vw,24px);padding:clamp(20px,3vw,36px);text-align:left;transition:all .35s var(--ease);cursor:pointer;animation:fadeUp .6s var(--ease) ${.5+i*.08}s both;position:relative;overflow:hidden"
+        onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px ${p.renk}20';this.style.borderTopColor='${p.renk}'"
+        onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderTopColor='${p.renk}60'">
+        <div style="font-size:clamp(28px,5vw,44px);margin-bottom:clamp(12px,2vw,20px)">${p.ikon}</div>
+        <div style="font-size:clamp(17px,2.5vw,22px);font-weight:600;color:${c.met};margin-bottom:clamp(6px,1vw,10px)">${p.label}</div>
+        <div style="font-size:clamp(13px,1.8vw,16px);color:${c.soluk};line-height:1.6;font-weight:300">${p.kisa}</div>
       </button>`).join("")}
     </div>
 
-    <!-- Ayırıcı — premium -->
-    <div style="display:flex;align-items:center;gap:14px;margin:40px 0 24px;animation:fadeIn 1s ease .8s both">
+    <!-- Nasıl çalışıyor -->
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:clamp(24px,3.5vw,36px);animation:fadeIn 1s ease .8s both">
       <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,${c.cerç})"></div>
-      <span style="font-size:clamp(11px,1.8vw,15px);color:${c.cs};letter-spacing:.12em;text-transform:uppercase;font-weight:500">Nasıl Çalışıyor?</span>
+      <span style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};letter-spacing:.15em;text-transform:uppercase;font-weight:500">Nasıl Çalışıyor?</span>
       <div style="flex:1;height:1px;background:linear-gradient(90deg,${c.cerç},transparent)"></div>
     </div>
 
-    <!-- Adımlar — premium -->
-    <div class="steps" style="margin-top:0;max-width:960px;margin-left:auto;margin-right:auto;padding:0 clamp(8px,3vw,40px)">
+    <div class="steps">
       ${[
-        {n:"1",ikon:"🎯",b:"Pozisyonu seç",a:"Arkadaşın ateist mi, deist mi, agnostik mi?"},
-        {n:"2",ikon:"✉",b:"Mektubu oku",a:"Mesleğine özel, argümanlı, itirazları dürüstçe işleyen."},
-        {n:"3",ikon:"📲",b:"Soru gönder",a:"Görsel kart olarak paylaş. WhatsApp'a tek dokunuş."}
+        {ikon:"🎯",b:"Pozisyonu seç",a:"Arkadaşın ateist mi, deist mi, agnostik mi?"},
+        {ikon:"✉",b:"Mektubu oku",a:"Mesleğine özel, argümanlı, itirazları dürüstçe işleyen."},
+        {ikon:"📲",b:"Soru gönder",a:"Görsel kart olarak paylaş. WhatsApp'a tek dokunuş."}
       ].map((x,i)=>`
-      <div class="step" style="background:${c.kart};border-color:${c.cerç};text-align:left;animation:fadeUp .6s cubic-bezier(.16,1,.3,1) ${.9+i*.1}s both;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;right:0;width:40px;height:40px;background:linear-gradient(135deg,${rr.ana}06,transparent);border-radius:0 0 0 40px;pointer-events:none"></div>
-        <div class="step-icon" style="font-size:clamp(24px,4vw,36px);margin-bottom:12px">${x.ikon}</div>
-        <div class="step-title" style="font-size:clamp(14px,2.2vw,20px);font-weight:600;color:${c.met};margin-bottom:8px">${x.b}</div>
-        <div class="step-desc" style="font-size:clamp(12px,2vw,16px);color:${c.soluk};line-height:1.65;font-weight:300">${x.a}</div>
+      <div class="step" style="background:${c.kart};border-color:${c.cerç};animation:fadeUp .6s var(--ease) ${.9+i*.1}s both">
+        <div style="font-size:clamp(26px,4vw,36px);margin-bottom:clamp(10px,1.5vw,16px)">${x.ikon}</div>
+        <div style="font-size:clamp(15px,2.2vw,20px);font-weight:600;color:${c.met};margin-bottom:clamp(6px,1vw,10px)">${x.b}</div>
+        <div style="font-size:clamp(13px,1.8vw,16px);color:${c.soluk};line-height:1.65;font-weight:300">${x.a}</div>
       </div>`).join("")}
     </div>
 
-    <!-- Footer notu — premium -->
-    <p style="font-size:clamp(12px,1.8vw,15px);color:${c.cs};margin-top:40px;line-height:1.7;animation:fadeIn 1s ease 1.2s both">
-      <span style="opacity:.7">Akademik kaynaklı · Ehl-i Sünnet çerçevesinde</span>
+    <p style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};margin-top:clamp(32px,4vw,48px);text-align:center;opacity:.6;animation:fadeIn 1s ease 1.2s both">
+      Akademik kaynaklı · Ehl-i Sünnet çerçevesinde
     </p>
   </div>
 </div>`;
@@ -2114,18 +2009,20 @@ function renderPoz(){
   <button class="btn-back" onclick="goAna()" style="color:${c.soluk}">← Geri</button>
   <h2 class="poz-baslik" style="font-family:'Crimson Pro',serif;font-size:clamp(34px,9vw,52px);font-weight:300;color:${c.met};line-height:1.15;margin-bottom:8px">Arkadaşın hangi</h2>
   <p class="poz-alt" style="font-family:'Crimson Pro',serif;font-size:clamp(22px,6vw,32px);font-style:italic;color:${c.soluk};margin-bottom:36px">pozisyonda?</p>
-  <div style="display:flex;flex-direction:column;gap:clamp(12px,2vw,20px)">
-    ${Object.keys(SORULAR).map(pid=>{const P=SORULAR[pid],r=P.r;return`
-    <button class="poz-card" style="background:${c.kart};border-color:${c.cerç}" onclick="navigate({screen:'liste',poz:'${pid}',kat:null,soruI:0})"
-      onmouseover="this.style.transform='translateY(-3px) scale(1.01)'" onmouseout="this.style.transform=''">
-      <div style="position:absolute;top:0;right:0;bottom:0;width:35%;background:linear-gradient(135deg,transparent,${r.ana}10);border-radius:0 16px 16px 0;pointer-events:none"></div>
-      <div style="display:flex;align-items:center;gap:13px;position:relative">
-        <div class="poz-icon" style="width:clamp(48px,8vw,72px);height:clamp(48px,8vw,72px);border-radius:16px;flex-shrink:0;background:linear-gradient(135deg,${r.ana}22,${r.koyu}30);border:1px solid ${r.ana}28;display:flex;align-items:center;justify-content:center;font-size:clamp(22px,3.5vw,32px);color:${r.parlak}">${P.ikon}</div>
+  <div style="display:grid;grid-template-columns:1fr;gap:clamp(12px,2vw,20px)">
+    ${Object.keys(SORULAR).map(pid=>{const P=SORULAR[pid],r=P.r;
+    const cnt=Object.values(MEKTUPLAR).filter(m=>m.poz===pid).length;
+    return`
+    <button class="poz-card" style="background:${c.kart};border-color:${c.cerç};border-top:3px solid ${r.ana}50" onclick="navigate({screen:'liste',poz:'${pid}',kat:null,soruI:0})"
+      onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 48px ${r.ana}18';this.style.borderTopColor='${r.ana}'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderTopColor='${r.ana}50'">
+      <div style="display:flex;align-items:center;gap:clamp(14px,2.5vw,20px);position:relative">
+        <div style="width:clamp(52px,9vw,80px);height:clamp(52px,9vw,80px);border-radius:clamp(14px,2vw,20px);flex-shrink:0;background:linear-gradient(135deg,${r.ana}18,${r.koyu}25);border:1px solid ${r.ana}22;display:flex;align-items:center;justify-content:center;font-size:clamp(24px,4vw,36px);color:${r.parlak}">${P.ikon}</div>
         <div style="flex:1">
-          <div class="poz-name" style="font-size:clamp(18px,3vw,24px);font-weight:600;color:${c.met};margin-bottom:6px">${P.label}</div>
-          <div class="poz-desc" style="font-size:clamp(14px,2.2vw,17px);color:${c.soluk};font-weight:300;line-height:1.6">${pid==="ateist"?"Madde ve tesadüf her şeyi açıklar mı?":pid==="deist"?"Yaratıcı var, ama neden sessiz kalsın?":"'Bilmiyorum' bir pozisyon mu, yoksa kaçış mı?"}</div>
+          <div style="font-size:clamp(20px,3.5vw,28px);font-weight:600;color:${c.met};margin-bottom:clamp(4px,.6vw,8px)">${P.label}</div>
+          <div style="font-size:clamp(14px,2vw,17px);color:${c.soluk};font-weight:300;line-height:1.6">${pid==="ateist"?"Madde ve tesadüf her şeyi açıklar mı?":pid==="deist"?"Yaratıcı var, ama neden sessiz kalsın?":"'Bilmiyorum' bir pozisyon mu, yoksa kaçış mı?"}</div>
+          <div style="font-size:clamp(11px,1.3vw,13px);color:${r.parlak};opacity:.65;margin-top:clamp(6px,1vw,10px);font-weight:500">${cnt} mektup</div>
         </div>
-        <span style="font-size:18px;color:${r.parlak};opacity:.4">›</span>
+        <span style="font-size:clamp(20px,3vw,28px);color:${r.parlak};opacity:.3">›</span>
       </div>
     </button>`}).join("")}
   </div>
@@ -2150,16 +2047,21 @@ function renderListe(){
     <div class="tab" style="background:${r.bg};border-color:${r.ana}40;color:${r.parlak}">Mektuplar</div>
     <button class="tab" style="background:transparent;border-color:${c.cerç};color:${c.soluk}" onclick="navigate({screen:'sorular',soruI:0,kat:null})">Sorular</button>
   </div>
-  ${mektupListesi.map(([mid,m])=>`
-  <div class="meslek-row ${m.tam?'':'hazir-yok'}" style="background:${m.tam?c.kart:c.yuz};border-color:${c.cerç};color:${c.met}"
-    ${m.tam?`onclick="navigate({screen:'mektup',mektupId:'${mid}'})" onmouseover="this.style.transform='translateX(5px)'" onmouseout="this.style.transform=''"`:""}>
-    <div>
-      <span class="meslek-name" style="font-size:clamp(17px,2.8vw,22px);font-weight:500">${m.meslek}</span>
-      <span class="meslek-ozet" style="font-size:clamp(13px,2vw,16px);color:${c.soluk};margin-left:12px;font-weight:300">${m.ozet.substring(0,45)}…</span>
-      ${!m.tam?`<span style="font-size:10px;color:${c.cs};margin-left:6px">Taslak</span>`:""}
+  <div class="mektup-grid">
+  ${mektupListesi.map(([mid,m])=>{
+    const wc=m.icerik?m.icerik.reduce((t,b)=>t+(b.m?b.m.split(/\\s+/).length:0),0):0;
+    const dk=Math.max(1,Math.round(wc/200));
+    return`
+  <div class="meslek-row ${m.tam?'':'hazir-yok'}" style="background:${m.tam?c.kart:c.yuz};border-color:${c.cerç};color:${c.met};flex-direction:column;align-items:stretch"
+    ${m.tam?`onclick="navigate({screen:'mektup',mektupId:'${mid}'})"`:""}>
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:clamp(17px,2.5vw,22px);font-weight:600;color:${c.met}">${m.meslek}</span>
+      ${m.tam?`<span style="font-size:clamp(16px,2vw,22px);color:${r.parlak};opacity:.35">›</span>`:`<span style="font-size:clamp(10px,1.2vw,12px);color:${c.cs}">Taslak</span>`}
     </div>
-    ${m.tam?`<span style="font-size:14px;color:${r.parlak};opacity:.5">›</span>`:`<span style="font-size:9px;color:${c.cs}">✏️</span>`}
-  </div>`).join("")}
+    <div style="font-size:clamp(13px,1.8vw,15px);color:${c.soluk};font-weight:300;line-height:1.55;margin-top:clamp(6px,1vw,10px)">${m.ozet.substring(0,75)}${m.ozet.length>75?"…":""}</div>
+    ${m.tam?`<div style="font-size:clamp(10px,1.2vw,12px);color:${c.cs};margin-top:clamp(8px,1.2vw,12px);font-weight:500">~${dk} dk okuma</div>`:""}
+  </div>`}).join("")}
+  </div>
   <div style="margin-top:12px">
     ${mektupListesi.filter(([_,m])=>!m.tam).length>0?`
     <div style="text-align:center;padding:16px;border:1px dashed ${c.cerç};border-radius:12px">
