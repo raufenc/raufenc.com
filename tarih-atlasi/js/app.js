@@ -837,6 +837,10 @@
   /* ════════════════════════════════════════
      STORIES (Guided Tour)
      ════════════════════════════════════════ */
+  let storyMarker = null;
+  let storyPath = null;
+  let storyVisitedCoords = [];
+
   function initStories() {
     el('btn-stories').addEventListener('click', openStoryPicker);
     el('story-close').addEventListener('click', closeStory);
@@ -856,6 +860,45 @@
       if (!card) return;
       startStory(card.dataset.storyId);
     });
+
+    // Inject spotlight marker CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      .story-spotlight {
+        width: 40px !important; height: 40px !important;
+        margin-left: -20px !important; margin-top: -20px !important;
+      }
+      .story-spotlight-inner {
+        width: 40px; height: 40px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(200,164,110,0.9) 0%, rgba(200,164,110,0.3) 50%, transparent 70%);
+        animation: storyPulse 2s ease-in-out infinite;
+        position: relative;
+      }
+      .story-spotlight-inner::after {
+        content: ''; position: absolute; inset: 8px;
+        border-radius: 50%; background: var(--atlas-gold);
+        box-shadow: 0 0 20px var(--atlas-gold), 0 0 40px rgba(200,164,110,0.5);
+      }
+      .story-spotlight-label {
+        position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+        white-space: nowrap; font-size: 13px; font-weight: 700;
+        color: var(--atlas-gold); text-shadow: 0 0 8px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6);
+        font-family: var(--font-serif);
+      }
+      @keyframes storyPulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.4); opacity: 1; }
+      }
+      .story-mode #sidebar-left { display: none !important; }
+      .story-mode #map-legend { display: none !important; }
+      .story-mode #panel-right { display: none !important; }
+      .story-mode #timeline-container { height: 0 !important; min-height: 0 !important; overflow: hidden; border: none; }
+      .story-mode #atlas-header { display: none !important; }
+      .story-mode #atlas-main { height: 100vh; }
+      .story-mode #mobile-menu-toggle { display: none !important; }
+      .story-path { stroke: var(--atlas-gold); stroke-width: 2; stroke-dasharray: 8 4; fill: none; opacity: 0.6; }
+    `;
+    document.head.appendChild(style);
   }
 
   function openStoryPicker() {
@@ -869,15 +912,26 @@
 
   function closeStory() {
     el('story-overlay').classList.add('hidden');
+    document.body.classList.remove('story-mode');
     currentStory = null;
+    // Remove spotlight marker and path
+    if (storyMarker) { map.removeLayer(storyMarker); storyMarker = null; }
+    if (storyPath) { map.removeLayer(storyPath); storyPath = null; }
+    storyVisitedCoords = [];
+    map.invalidateSize();
+    renderNodes();
   }
 
   function startStory(storyId) {
     currentStory = D.stories.find(s => s.id === storyId);
     if (!currentStory) return;
     storyStep = 0;
+    storyVisitedCoords = [];
     el('story-picker').classList.add('hidden');
     el('story-body').style.display = '';
+    // Enter story mode — hide sidebar, legend, timeline
+    document.body.classList.add('story-mode');
+    setTimeout(() => map.invalidateSize(), 100);
     renderStoryStep();
   }
 
@@ -896,28 +950,69 @@
 
     el('story-title').textContent = currentStory.title;
     el('story-counter').textContent = `${storyStep + 1} / ${currentStory.steps.length}`;
-    el('story-text').innerHTML = `<strong>${node ? node.title : ''}</strong> <span style="color:var(--text-secondary);font-size:12px">(${step.year})</span><br>${step.text}`;
 
-    // Fly to node
+    // Rich story text
+    const disc = node ? getDiscipline(node.discipline) : null;
+    const discBadge = disc ? `<span style="display:inline-block;padding:2px 8px;border-radius:100px;background:${disc.color}20;color:${disc.color};font-size:11px;font-weight:500;margin-left:8px;">${disc.name}</span>` : '';
+    el('story-text').innerHTML = `
+      <div style="font-size:20px;font-weight:700;font-family:var(--font-serif);margin-bottom:4px;">
+        ${node ? node.title : ''} ${discBadge}
+      </div>
+      <div style="font-size:12px;color:var(--atlas-gold);margin-bottom:8px;">${step.year < 0 ? formatYear(step.year) : step.year}</div>
+      <div style="font-size:14px;line-height:1.7;">${step.text}</div>
+    `;
+
+    // Fly to node with spotlight
     if (node) {
-      map.flyTo([node.lat, node.lon], node.zoom || 6, { duration: 1.5 });
+      // Remove old spotlight
+      if (storyMarker) map.removeLayer(storyMarker);
 
-      // Update timeline
-      el('timeline-slider').value = step.year;
-      updateSliderLabel();
-      renderNodes();
-      updatePeriodBadge();
-      updateStreamgraphCursor();
+      // Create spotlight marker
+      const spotlightIcon = L.divIcon({
+        className: 'story-spotlight',
+        html: `<div class="story-spotlight-inner"></div><div class="story-spotlight-label">${node.title}</div>`,
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
+      });
+      storyMarker = L.marker([node.lat, node.lon], { icon: spotlightIcon, zIndexOffset: 1000 });
+      storyMarker.addTo(map);
+
+      // Add to visited coords and draw path
+      storyVisitedCoords.push([node.lat, node.lon]);
+      if (storyPath) map.removeLayer(storyPath);
+      if (storyVisitedCoords.length > 1) {
+        storyPath = L.polyline(storyVisitedCoords, {
+          color: '#c8a46e', weight: 2, dashArray: '8 4', opacity: 0.6
+        }).addTo(map);
+      }
+
+      // Fly to with good zoom
+      map.flyTo([node.lat, node.lon], 7, { duration: 1.8 });
     }
+
+    // Progress dots
+    const dotsHtml = currentStory.steps.map((_, i) =>
+      `<span style="display:inline-block;width:${i === storyStep ? 10 : 6}px;height:${i === storyStep ? 10 : 6}px;border-radius:50%;background:${i <= storyStep ? 'var(--atlas-gold)' : 'var(--border)'};margin:0 3px;transition:all 0.3s;"></span>`
+    ).join('');
 
     // Button states
     el('story-prev').style.visibility = storyStep === 0 ? 'hidden' : 'visible';
-    el('story-next').textContent = storyStep === currentStory.steps.length - 1 ? 'Bitir' : '';
-    el('story-next').innerHTML = storyStep === currentStory.steps.length - 1
+    const isLast = storyStep === currentStory.steps.length - 1;
+    el('story-next').innerHTML = isLast
       ? 'Bitir'
       : 'Sonraki <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
 
-    if (storyStep === currentStory.steps.length - 1) {
+    // Insert progress dots between nav buttons
+    let dotsEl = document.getElementById('story-dots');
+    if (!dotsEl) {
+      dotsEl = document.createElement('div');
+      dotsEl.id = 'story-dots';
+      dotsEl.style.cssText = 'display:flex;align-items:center;justify-content:center;';
+      el('story-nav').insertBefore(dotsEl, el('story-next'));
+    }
+    dotsEl.innerHTML = dotsHtml;
+
+    if (isLast) {
       el('story-next').onclick = closeStory;
     } else {
       el('story-next').onclick = () => navigateStory(1);
