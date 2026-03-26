@@ -1923,6 +1923,184 @@ body {
 [data-theme="light"] .book-series { background: rgba(42,90,58,0.05); border-color: rgba(42,90,58,0.15); }
 
 /* ============================================
+   SEFER MODU (Campaign Mode)
+   ============================================ */
+.campaign-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.campaign-btn {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.55rem 1.3rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--gold);
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(8px);
+  color: var(--gold);
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.campaign-btn:hover { background: rgba(201,168,76,0.25); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+.campaign-btn.active {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+  box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+}
+.campaign-btn.pause {
+  background: rgba(13,13,13,0.85);
+  border-color: var(--burgundy-light);
+  color: var(--burgundy-light);
+  backdrop-filter: blur(8px);
+}
+.campaign-btn.pause:hover { background: rgba(139,45,58,0.25); }
+[data-theme="light"] .campaign-btn { background: rgba(255,255,255,0.9); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+[data-theme="light"] .campaign-btn:hover { background: rgba(139,105,20,0.15); }
+[data-theme="light"] .campaign-btn.active { background: var(--gold); color: #fff; }
+.campaign-speed {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.campaign-speed button {
+  width: 26px; height: 26px;
+  border-radius: 4px;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: transparent;
+  color: var(--gold);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.campaign-speed button:hover { background: rgba(201,168,76,0.1); }
+.campaign-speed button.active-speed { background: rgba(201,168,76,0.2); border-color: var(--gold); }
+
+/* Campaign info card on map */
+.campaign-card {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  max-width: 480px;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  z-index: 1000;
+  display: none;
+  animation: slideUp 0.4s ease;
+}
+.campaign-card.visible { display: block; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.campaign-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+.campaign-card-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.campaign-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.campaign-card-meta {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.campaign-card-meta span { margin-right: 0.8rem; }
+.campaign-card-summary {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+.campaign-card-ruler {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-family: 'Noto Sans', sans-serif;
+  padding: 2px 8px;
+  background: rgba(201,168,76,0.15);
+  border-radius: 3px;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Campaign progress bar */
+.campaign-progress {
+  position: absolute;
+  bottom: 90px;
+  left: 20px;
+  right: 20px;
+  max-width: 480px;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+.campaign-progress.visible { display: flex; }
+.campaign-progress-bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(201,168,76,0.15);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.campaign-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+.campaign-progress-label {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Light mode */
+[data-theme="light"] .campaign-card { background: rgba(255,255,255,0.95); border-color: rgba(139,105,20,0.3); }
+[data-theme="light"] .campaign-card-summary { color: #1a1a1a; }
+[data-theme="light"] .campaign-btn { background: rgba(139,105,20,0.08); border-color: rgba(139,105,20,0.3); }
+[data-theme="light"] .campaign-btn.active { background: var(--gold); color: #fff; }
+
+/* ============================================
    GLOBAL SEARCH (Ctrl+K)
    ============================================ */
 .search-overlay {
@@ -2347,7 +2525,44 @@ body {
         <span>Savaş / Kuşatma</span>
       </div>
     </div>
+
+    <!-- Sefer Modu Controls (inside map wrapper) -->
+    <div class="campaign-controls">
+      <button class="campaign-btn" id="campaignStartBtn" onclick="toggleCampaignMode()">&#9876; Sefer Modu</button>
+      <button class="campaign-btn pause" id="campaignPauseBtn" onclick="pauseCampaign()" style="display:none;">&#10074;&#10074; Duraklat</button>
+      <div class="campaign-speed" id="campaignSpeedCtrl" style="display:none;">
+        <span>Hız:</span>
+        <button onclick="setCampaignSpeed(5000)" id="speed1" class="active-speed">1x</button>
+        <button onclick="setCampaignSpeed(3000)" id="speed2">2x</button>
+        <button onclick="setCampaignSpeed(1500)" id="speed3">3x</button>
+      </div>
+    </div>
+
+    <!-- Campaign progress bar -->
+    <div class="campaign-progress" id="campaignProgress">
+      <div class="campaign-progress-bar" onclick="seekCampaign(event)">
+        <div class="campaign-progress-fill" id="campaignProgressFill"></div>
+      </div>
+      <div class="campaign-progress-label" id="campaignProgressLabel">0 / 0</div>
+    </div>
+
+    <!-- Campaign Card (appears during Sefer Modu) -->
+    <div class="campaign-card" id="campaignCard">
+      <div class="campaign-card-header">
+        <div class="campaign-card-num" id="campaignNum">1</div>
+        <div>
+          <div class="campaign-card-title" id="campaignTitle"></div>
+          <div class="campaign-card-meta">
+            <span id="campaignDate"></span>
+            <span id="campaignLocation"></span>
+            <span class="campaign-card-ruler" id="campaignRuler"></span>
+          </div>
+        </div>
+      </div>
+      <div class="campaign-card-summary" id="campaignSummary"></div>
+    </div>
   </div>
+
   <div class="places-grid" id="placesGrid"></div>
 </section>
 
@@ -3618,6 +3833,183 @@ function animateCounters() {
       }
     }, 30);
   });
+}
+
+// ============================================
+// SEFER MODU (Campaign Mode)
+// ============================================
+
+let campaignActive = false;
+let campaignPaused = false;
+let campaignTimer = null;
+let campaignIndex = 0;
+let campaignSpeed = 5000;
+let campaignBattles = [];
+let campaignTrailLine = null;
+let campaignTrailCoords = [];
+
+function getCampaignBattles() {
+  return TIMELINE_EVENTS
+    .filter(e => e.type === 'battle' || e.type === 'siege' || e.type === 'conquest' || e.type === 'naval')
+    .sort((a, b) => (a.year || 0) - (b.year || 0))
+    .map(e => {
+      const place = PLACES.find(p => e.location && (e.location.includes(p.name) || p.name.includes(e.location)));
+      const coords = place ? { lat: place.lat, lng: place.lng } : getBattleCoords(e.location);
+      return { ...e, coords };
+    })
+    .filter(e => e.coords);
+}
+
+function toggleCampaignMode() {
+  if (campaignActive) {
+    stopCampaign();
+  } else {
+    startCampaign();
+  }
+}
+
+function startCampaign() {
+  campaignBattles = getCampaignBattles();
+  if (campaignBattles.length === 0) return;
+
+  campaignActive = true;
+  campaignPaused = false;
+  campaignIndex = 0;
+  campaignTrailCoords = [];
+
+  // Remove old trail
+  if (campaignTrailLine && map.hasLayer(campaignTrailLine)) {
+    map.removeLayer(campaignTrailLine);
+  }
+  campaignTrailLine = L.polyline([], {
+    color: '#c9a84c',
+    weight: 2,
+    opacity: 0.5,
+    dashArray: '6,8'
+  }).addTo(map);
+
+  // UI
+  document.getElementById('campaignStartBtn').textContent = '\u2716 Seferi Bitir';
+  document.getElementById('campaignStartBtn').classList.add('active');
+  document.getElementById('campaignPauseBtn').style.display = '';
+  document.getElementById('campaignSpeedCtrl').style.display = '';
+  document.getElementById('campaignProgress').classList.add('visible');
+
+  // Scroll map into view
+  document.getElementById('places').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  setTimeout(() => showCampaignStep(), 800);
+}
+
+function stopCampaign() {
+  campaignActive = false;
+  campaignPaused = false;
+  clearTimeout(campaignTimer);
+
+  // Remove trail
+  if (campaignTrailLine && map.hasLayer(campaignTrailLine)) {
+    map.removeLayer(campaignTrailLine);
+  }
+  campaignTrailLine = null;
+  campaignTrailCoords = [];
+
+  // Hide card
+  document.getElementById('campaignCard').classList.remove('visible');
+  document.getElementById('campaignProgress').classList.remove('visible');
+
+  // UI
+  document.getElementById('campaignStartBtn').textContent = '\u2694 Sefer Modu';
+  document.getElementById('campaignStartBtn').classList.remove('active');
+  document.getElementById('campaignPauseBtn').style.display = 'none';
+  document.getElementById('campaignPauseBtn').textContent = '\u2758\u2758 Duraklat';
+  document.getElementById('campaignSpeedCtrl').style.display = 'none';
+
+  // Reset map view
+  map.flyTo([40.0, 30.0], 6, { duration: 1 });
+}
+
+function pauseCampaign() {
+  if (campaignPaused) {
+    campaignPaused = false;
+    document.getElementById('campaignPauseBtn').textContent = '\u2758\u2758 Duraklat';
+    document.getElementById('campaignPauseBtn').classList.add('pause');
+    showCampaignStep();
+  } else {
+    campaignPaused = true;
+    clearTimeout(campaignTimer);
+    document.getElementById('campaignPauseBtn').textContent = '\u25B6 Devam';
+    document.getElementById('campaignPauseBtn').classList.remove('pause');
+  }
+}
+
+function setCampaignSpeed(ms) {
+  campaignSpeed = ms;
+  document.querySelectorAll('.campaign-speed button').forEach(b => b.classList.remove('active-speed'));
+  if (ms === 5000) document.getElementById('speed1').classList.add('active-speed');
+  else if (ms === 3000) document.getElementById('speed2').classList.add('active-speed');
+  else document.getElementById('speed3').classList.add('active-speed');
+}
+
+function showCampaignStep() {
+  if (!campaignActive || campaignPaused) return;
+  if (campaignIndex >= campaignBattles.length) {
+    // Loop back or stop
+    campaignIndex = 0;
+    campaignTrailCoords = [];
+    if (campaignTrailLine) campaignTrailLine.setLatLngs([]);
+    stopCampaign();
+    return;
+  }
+
+  const battle = campaignBattles[campaignIndex];
+  const coords = [battle.coords.lat, battle.coords.lng];
+
+  // Add to trail
+  campaignTrailCoords.push(coords);
+  if (campaignTrailLine) {
+    campaignTrailLine.setLatLngs(campaignTrailCoords);
+  }
+
+  // Fly to location
+  map.flyTo(coords, 8, { duration: 1.2 });
+
+  // Update card
+  const card = document.getElementById('campaignCard');
+  document.getElementById('campaignNum').textContent = campaignIndex + 1;
+  document.getElementById('campaignTitle').textContent = battle.name;
+  document.getElementById('campaignDate').textContent = battle.date;
+  document.getElementById('campaignLocation').textContent = battle.location ? '\u{1F4CD} ' + battle.location : '';
+  document.getElementById('campaignRuler').textContent = battle.ruler;
+  document.getElementById('campaignSummary').textContent = battle.summary;
+
+  // Show card with animation
+  card.classList.remove('visible');
+  setTimeout(() => card.classList.add('visible'), 200);
+
+  // Update progress
+  const total = campaignBattles.length;
+  document.getElementById('campaignProgressFill').style.width = ((campaignIndex + 1) / total * 100) + '%';
+  document.getElementById('campaignProgressLabel').textContent = (campaignIndex + 1) + ' / ' + total;
+
+  // Next step
+  campaignIndex++;
+  campaignTimer = setTimeout(() => showCampaignStep(), campaignSpeed);
+}
+
+function seekCampaign(e) {
+  if (!campaignActive || campaignBattles.length === 0) return;
+  const bar = e.currentTarget;
+  const rect = bar.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  const idx = Math.floor(pct * campaignBattles.length);
+  campaignIndex = Math.max(0, Math.min(idx, campaignBattles.length - 1));
+
+  // Rebuild trail up to this point
+  campaignTrailCoords = campaignBattles.slice(0, campaignIndex).map(b => [b.coords.lat, b.coords.lng]);
+  if (campaignTrailLine) campaignTrailLine.setLatLngs(campaignTrailCoords);
+
+  clearTimeout(campaignTimer);
+  showCampaignStep();
 }
 
 // ============================================
