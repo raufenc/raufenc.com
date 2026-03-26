@@ -1,0 +1,3159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#1B7A4D">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>التسوق - الوحدة الثانية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1B7A4D;
+  --primary-light: #2a9d63;
+  --primary-dark: #145a39;
+  --accent: #F4A623;
+  --accent-light: #ffc04d;
+  --bg: #FFF8F0;
+  --bg-card: #FFFFFF;
+  --text: #2D2D2D;
+  --text-light: #6B6B6B;
+  --error: #E74C3C;
+  --success: #27AE60;
+  --info: #3498DB;
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --font-heading: 'Amiri', serif;
+  --font-body: 'Noto Sans Arabic', sans-serif;
+  --topbar-h: 56px;
+  --transition: .3s cubic-bezier(.4,0,.2,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 3px; }
+
+/* ---- Top Bar ---- */
+.topbar {
+  position: fixed; top: 0; right: 0; left: 0; z-index: 100;
+  height: var(--topbar-h);
+  background: var(--primary);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-title {
+  font-family: var(--font-heading);
+  font-size: 22px; color: #fff; font-weight: 700;
+  cursor: pointer;
+}
+.topbar-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  border: none; color: #fff; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: var(--transition);
+}
+.topbar-btn:active { transform: scale(.9); background: rgba(255,255,255,.3); }
+.star-badge {
+  display: flex; align-items: center; gap: 4px;
+  background: var(--accent);
+  color: #fff; font-weight: 700; font-size: 14px;
+  padding: 4px 12px; border-radius: 20px;
+}
+.star-badge .star-icon { font-size: 16px; }
+
+/* ---- Main Container ---- */
+#app {
+  margin-top: var(--topbar-h);
+  min-height: calc(100vh - var(--topbar-h));
+  position: relative;
+  overflow-x: hidden;
+}
+.screen {
+  display: none;
+  animation: fadeSlideIn .35s ease;
+  padding: 16px;
+  padding-bottom: 80px;
+}
+.screen.active { display: block; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- Hero Section ---- */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, #0d3d25 100%);
+  border-radius: var(--radius);
+  padding: 32px 20px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -40px; left: -40px;
+  width: 150px; height: 150px;
+  background: rgba(255,255,255,.05);
+  border-radius: 50%;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: rgba(244,166,35,.1);
+  border-radius: 50%;
+}
+.hero-emoji {
+  font-size: 56px;
+  margin-bottom: 8px;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+.hero h2 {
+  font-size: 20px;
+  font-weight: 400;
+  opacity: .85;
+}
+.hero .tr-sub {
+  font-size: 14px;
+  opacity: .6;
+  margin-top: 4px;
+}
+
+/* ---- Market decorations ---- */
+.market-deco {
+  display: flex; justify-content: center; gap: 12px;
+  margin-top: 16px; font-size: 28px;
+}
+.market-deco span { animation: float 3s ease-in-out infinite; }
+.market-deco span:nth-child(2) { animation-delay: .5s; }
+.market-deco span:nth-child(3) { animation-delay: 1s; }
+.market-deco span:nth-child(4) { animation-delay: 1.5s; }
+.market-deco span:nth-child(5) { animation-delay: 2s; }
+
+/* ---- Module Grid ---- */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 768px) { .module-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.module-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+.module-card:active { transform: scale(.96); }
+.module-card.unlocked { border-color: var(--primary-light); }
+.module-card.locked {
+  opacity: .55;
+  filter: grayscale(.5);
+  pointer-events: none;
+}
+.module-card .mod-num {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  color: var(--primary);
+  font-weight: 700;
+}
+.module-card .mod-title {
+  font-size: 13px;
+  color: var(--text-light);
+  margin: 8px 0;
+  line-height: 1.5;
+  min-height: 40px;
+}
+.module-card .mod-stars {
+  display: flex; justify-content: center; gap: 2px;
+  font-size: 18px;
+}
+.module-card .lock-icon {
+  position: absolute; top: 8px; left: 8px;
+  font-size: 20px; opacity: .6;
+}
+/* Progress ring */
+.progress-ring {
+  width: 48px; height: 48px;
+  margin: 0 auto 8px;
+  position: relative;
+}
+.progress-ring svg { transform: rotate(-90deg); }
+.progress-ring circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.progress-ring .ring-bg { stroke: #e0e0e0; }
+.progress-ring .ring-fg {
+  stroke: var(--primary);
+  transition: stroke-dashoffset .6s ease;
+}
+.progress-ring .ring-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px; font-weight: 700;
+  color: var(--primary);
+}
+
+/* ---- Section Headers ---- */
+.section-header {
+  display: flex; align-items: center; gap: 8px;
+  margin: 20px 0 12px;
+}
+.section-header h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--primary-dark);
+}
+.section-header .line {
+  flex: 1; height: 2px;
+  background: linear-gradient(to left, transparent, var(--primary-light));
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px;
+  border: none; border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 16px; font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn:active { transform: scale(.95); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-light); }
+.btn-accent { background: var(--accent); color: #fff; }
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-sm { padding: 8px 16px; font-size: 14px; }
+.btn-block { width: 100%; }
+.btn-icon {
+  width: 44px; height: 44px; padding: 0;
+  border-radius: 50%;
+}
+
+/* ---- Back Button ---- */
+.back-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 600;
+}
+.back-row:active { opacity: .7; }
+
+/* ---- Tabs ---- */
+.tabs {
+  display: flex; gap: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.tab {
+  flex: 1;
+  padding: 12px 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  transition: var(--transition);
+  font-family: var(--font-body);
+}
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ---- Cards ---- */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+.card:active { transform: scale(.98); }
+
+/* ---- Game Card ---- */
+.game-card {
+  display: flex; align-items: center; gap: 12px;
+  cursor: pointer;
+}
+.game-card .game-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.game-card .game-info { flex: 1; }
+.game-card .game-title { font-weight: 600; font-size: 15px; }
+.game-card .game-desc { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.game-card .game-stars { font-size: 16px; }
+.game-card.locked { opacity: .4; pointer-events: none; }
+
+/* ---- Vocab Card ---- */
+.vocab-card-large {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+.vocab-card-inner {
+  transition: transform .6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.vocab-card-large.flipped .vocab-card-inner {
+  transform: rotateY(180deg);
+}
+.vocab-card-front, .vocab-card-back {
+  backface-visibility: hidden;
+}
+.vocab-card-back {
+  position: absolute; top: 0; left: 0; right: 0;
+  transform: rotateY(180deg);
+}
+.vocab-ar {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  color: var(--primary-dark);
+  margin: 16px 0;
+}
+.vocab-tr {
+  font-size: 18px;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+.vocab-example {
+  font-size: 16px;
+  color: var(--text);
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  line-height: 1.8;
+}
+.vocab-img {
+  width: 120px; height: 120px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin: 12px auto;
+  display: block;
+  border: 3px solid var(--bg);
+  box-shadow: var(--shadow);
+}
+.vocab-nav {
+  display: flex; justify-content: center; gap: 16px;
+  margin-top: 20px;
+}
+
+/* ---- Vocab List ---- */
+.vocab-list-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+}
+.vocab-list-item .vl-ar {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  color: var(--primary-dark);
+  min-width: 100px;
+}
+.vocab-list-item .vl-tr {
+  font-size: 14px;
+  color: var(--text-light);
+}
+.vocab-list-item .vl-img {
+  width: 40px; height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ---- Dialogue Chat ---- */
+.dialogue-container { max-width: 500px; margin: 0 auto; }
+.chat-bubble {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  position: relative;
+  animation: bubbleIn .3s ease;
+  cursor: pointer;
+  line-height: 1.7;
+}
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(10px) scale(.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.chat-bubble.seller {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  margin-left: auto;
+  border-bottom-left-radius: 4px;
+}
+.chat-bubble.buyer {
+  background: linear-gradient(135deg, #d6eaf8, #aed6f1);
+  margin-right: auto;
+  border-bottom-right-radius: 4px;
+}
+.chat-speaker {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 4px;
+}
+.chat-text-ar {
+  font-family: var(--font-heading);
+  font-size: 18px;
+}
+.chat-text-tr {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+.pattern-highlight {
+  background: rgba(244,166,35,.3);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* ---- Game Screen ---- */
+.game-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px;
+}
+.game-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  color: var(--primary-dark);
+}
+.game-score {
+  display: flex; align-items: center; gap: 4px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.game-progress-bar {
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.game-progress-fill {
+  height: 100%;
+  background: linear-gradient(to left, var(--accent), var(--primary));
+  border-radius: 3px;
+  transition: width .4s ease;
+}
+.game-area {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ---- MCQ Options ---- */
+.mcq-options { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.mcq-option {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 2px solid #e0e0e0;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 18px;
+  cursor: pointer;
+  text-align: right;
+  transition: var(--transition);
+}
+.mcq-option:active { transform: scale(.97); }
+.mcq-option.correct {
+  border-color: var(--success);
+  background: #d4edda;
+  animation: pulse .3s;
+}
+.mcq-option.wrong {
+  border-color: var(--error);
+  background: #f8d7da;
+  animation: shake .4s;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* ---- Match Grid ---- */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+.match-cell {
+  aspect-ratio: 1;
+  background: var(--primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #fff;
+  transition: var(--transition);
+  perspective: 600px;
+  user-select: none;
+}
+.match-cell.revealed {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 2px solid var(--primary-light);
+  font-family: var(--font-heading);
+  font-size: 16px;
+}
+.match-cell.matched {
+  background: var(--success);
+  color: #fff;
+  pointer-events: none;
+  animation: pulse .3s;
+}
+.match-cell .cell-content { text-align: center; padding: 4px; word-break: break-word; }
+
+/* ---- Drag Drop ---- */
+.drag-zone {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+  min-height: 60px;
+  padding: 12px;
+  border: 2px dashed #ccc;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+.drag-item {
+  padding: 10px 16px;
+  background: var(--primary-light);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  cursor: grab;
+  font-size: 16px;
+  user-select: none;
+  touch-action: none;
+  transition: var(--transition);
+}
+.drag-item:active { cursor: grabbing; opacity: .8; }
+.drag-item.dragging {
+  opacity: .5;
+  transform: scale(1.05);
+}
+.drop-zone {
+  min-height: 80px;
+  border: 2px dashed var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+.drop-zone.drag-over {
+  background: rgba(27,122,77,.1);
+  border-color: var(--success);
+}
+.drop-zone-label {
+  font-size: 14px;
+  color: var(--text-light);
+  text-align: center;
+  width: 100%;
+}
+
+/* ---- Classify Bins ---- */
+.classify-bins {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+.classify-bin {
+  min-height: 120px;
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  transition: var(--transition);
+}
+.classify-bin.drag-over { background: rgba(27,122,77,.1); border-style: solid; }
+.classify-bin .bin-title {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+.classify-bin .bin-items { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+
+/* ---- Fill Blank ---- */
+.fill-sentence {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  text-align: center;
+  line-height: 2;
+  margin: 20px 0;
+}
+.fill-blank {
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 3px solid var(--accent);
+  padding: 0 8px;
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+.word-bank {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+  padding: 12px;
+}
+.word-chip {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 2px solid var(--primary-light);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: var(--transition);
+}
+.word-chip:active { transform: scale(.95); }
+.word-chip.selected {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.word-chip.used {
+  opacity: .3;
+  pointer-events: none;
+}
+
+/* ---- Compare Engine ---- */
+.compare-area {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+.compare-item {
+  text-align: center;
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.compare-item img {
+  width: 80px; height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+.compare-item .item-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--primary-dark);
+}
+.compare-item .item-price {
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-top: 4px;
+}
+.compare-vs {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+}
+/* Balance scale */
+.balance-scale {
+  width: 200px; height: 140px;
+  position: relative;
+  margin: 0 auto;
+}
+.scale-beam {
+  width: 180px; height: 4px;
+  background: var(--primary-dark);
+  position: absolute;
+  top: 40px; left: 10px;
+  transform-origin: center;
+  transition: transform .6s ease;
+  border-radius: 2px;
+}
+.scale-pivot {
+  width: 12px; height: 50px;
+  background: var(--primary);
+  position: absolute;
+  top: 40px; left: 94px;
+  border-radius: 0 0 4px 4px;
+}
+.scale-base {
+  width: 80px; height: 6px;
+  background: var(--primary-dark);
+  position: absolute;
+  bottom: 10px; left: 60px;
+  border-radius: 3px;
+}
+.scale-pan {
+  width: 50px; height: 8px;
+  background: var(--accent);
+  border-radius: 0 0 8px 8px;
+  position: absolute; top: 44px;
+  transition: top .6s ease;
+}
+.scale-pan.left { left: 8px; }
+.scale-pan.right { right: 8px; }
+
+/* ---- Write Engine ---- */
+.write-model {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  text-align: center;
+  padding: 16px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  line-height: 2;
+  color: var(--text-light);
+}
+.write-input {
+  width: 100%;
+  padding: 16px;
+  font-family: var(--font-heading);
+  font-size: 22px;
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius-sm);
+  text-align: right;
+  direction: rtl;
+  line-height: 2;
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: var(--transition);
+}
+.write-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27,122,77,.15); }
+
+/* ---- Word Search ---- */
+.ws-grid {
+  display: inline-grid;
+  gap: 2px;
+  direction: ltr;
+  margin: 0 auto;
+}
+.ws-cell {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  background: var(--bg-card);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+  border: 1px solid #eee;
+}
+.ws-cell.selected { background: var(--accent-light); color: #fff; }
+.ws-cell.found { background: var(--success); color: #fff; }
+.ws-word-list {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.ws-word {
+  padding: 6px 12px;
+  background: var(--bg-card);
+  border-radius: 20px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+.ws-word.found {
+  text-decoration: line-through;
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+}
+
+/* ---- Market Engine ---- */
+.market-shelf {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px;
+  background: linear-gradient(180deg, #f5e6d3 0%, #e8d5c4 100%);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+.shelf-item {
+  text-align: center;
+  padding: 8px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.shelf-item img { width: 50px; height: 50px; object-fit: cover; border-radius: 6px; }
+.shelf-item .shelf-name {
+  font-size: 12px;
+  margin-top: 4px;
+  font-family: var(--font-heading);
+}
+.shelf-item .shelf-price {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.market-dialogue {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ---- Table Engine ---- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: 14px;
+}
+.data-table th {
+  background: var(--primary);
+  color: #fff;
+  padding: 10px;
+  font-weight: 600;
+}
+.data-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+.data-table tr:nth-child(even) { background: var(--bg); }
+
+/* ---- Concept Map ---- */
+.concept-map {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center;
+  padding: 20px;
+}
+.concept-node {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 3px solid var(--primary-light);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+.concept-node:active { transform: scale(.95); }
+.concept-node.visited { border-color: var(--success); background: #d4edda; }
+.concept-node .node-text {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  text-align: center;
+  padding: 4px;
+}
+
+/* ---- Confetti ---- */
+.confetti-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+.confetti-piece {
+  position: absolute;
+  width: 10px; height: 10px;
+  top: -10px;
+  animation: confettiFall 1.5s ease-out forwards;
+}
+@keyframes confettiFall {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg) scale(0); opacity: 0; }
+}
+
+/* ---- Star Fly Animation ---- */
+.star-fly {
+  position: fixed;
+  font-size: 32px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: starFlyUp 1s ease-out forwards;
+}
+@keyframes starFlyUp {
+  0% { transform: scale(0) rotate(0); opacity: 0; }
+  30% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg) translateY(-200px); opacity: 0; }
+}
+
+/* ---- Results Screen ---- */
+.result-screen {
+  text-align: center;
+  padding: 32px 16px;
+}
+.result-stars {
+  font-size: 56px;
+  margin: 20px 0;
+  animation: pulse .5s ease;
+}
+.result-score {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+.result-label {
+  font-size: 18px;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+.result-msg {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  color: var(--primary-dark);
+  margin: 16px 0;
+}
+
+/* ---- Profile ---- */
+.profile-stat {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+}
+.profile-stat .stat-icon { font-size: 32px; }
+.profile-stat .stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.profile-stat .stat-label {
+  font-size: 13px;
+  color: var(--text-light);
+}
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.badge-item {
+  text-align: center;
+  padding: 16px 8px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.badge-item.locked { opacity: .3; filter: grayscale(1); }
+.badge-item .badge-icon { font-size: 36px; margin-bottom: 4px; }
+.badge-item .badge-name { font-size: 12px; color: var(--text-light); }
+
+/* ---- Review Queue ---- */
+.review-badge {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  z-index: 50;
+  animation: float 2s ease-in-out infinite;
+}
+
+/* ---- Loading ---- */
+.loading-spinner {
+  width: 40px; height: 40px;
+  border: 4px solid #e0e0e0;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+  margin: 40px auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Toast ---- */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%; transform: translateX(-50%);
+  background: var(--text);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  z-index: 200;
+  animation: toastIn .3s ease, toastOut .3s ease 2s forwards;
+  pointer-events: none;
+}
+@keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+@keyframes toastOut { to { opacity: 0; transform: translateX(-50%) translateY(20px); } }
+
+/* ---- Lock Break ---- */
+@keyframes lockBreak {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.3) rotate(-10deg); }
+  60% { transform: scale(1.5) rotate(10deg); }
+  100% { transform: scale(0) rotate(30deg); opacity: 0; }
+}
+.lock-breaking { animation: lockBreak .6s ease forwards; }
+
+/* ---- Responsive ---- */
+@media (min-width: 768px) {
+  .screen { padding: 24px 32px; max-width: 800px; margin-left: auto; margin-right: auto; }
+  .hero h1 { font-size: 54px; }
+  .vocab-ar { font-size: 56px; }
+}
+@media (max-width: 374px) {
+  .module-grid { grid-template-columns: 1fr; }
+  .match-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---- Transition Override for TR ---- */
+body.show-tr .tr-only { display: block !important; }
+body:not(.show-tr) .tr-only { display: none !important; }
+.tr-text {
+  font-size: 13px;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* ---- Number animation ---- */
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.num-anim { display: inline-block; animation: slideUp .3s ease; }
+
+/* ---- Checklist ---- */
+.checklist-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.checklist-item .check-box {
+  width: 28px; height: 28px;
+  border: 2px solid var(--primary);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.checklist-item.checked .check-box {
+  background: var(--success);
+  border-color: var(--success);
+  color: #fff;
+}
+.checklist-item .check-text { font-size: 16px; flex: 1; }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-right">
+    <span class="topbar-title" onclick="navigate('home')">التسوق</span>
+  </div>
+  <div class="topbar-left">
+    <div class="star-badge" id="totalStarsBadge">
+      <span class="star-icon">&#x2B50;</span>
+      <span id="totalStarsNum">٠</span>
+    </div>
+    <button class="topbar-btn" id="langToggle" title="Toggle Turkish">&#x1F310;</button>
+    <button class="topbar-btn" id="soundToggle" title="Sound">&#x1F50A;</button>
+  </div>
+</div>
+
+<!-- App Container -->
+<div id="app"></div>
+
+<!-- Confetti container -->
+<div class="confetti-container" id="confettiBox"></div>
+
+<script src="data.js"></script>
+<script>
+'use strict';
+
+/* ===================================================
+   UTILITY HELPERS
+   =================================================== */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const toAr = n => String(n).replace(/\d/g, d => '\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669'[d]);
+const shuffle = a => { const b=[...a]; for(let i=b.length-1;i>0;i--){const j=Math.random()*i+1|0;[b[i],b[j]]=[b[j],b[i]];} return b; };
+const pick = (a, n) => shuffle(a).slice(0, n);
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const el = (tag, attrs={}, children=[]) => {
+  const e = document.createElement(tag);
+  for (const [k,v] of Object.entries(attrs)) {
+    if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else if (k === 'text') e.textContent = v;
+    else if (k === 'style' && typeof v === 'object') Object.assign(e.style, v);
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v);
+  }
+  for (const c of children) { if (typeof c === 'string') e.appendChild(document.createTextNode(c)); else if (c) e.appendChild(c); }
+  return e;
+};
+
+/* ===================================================
+   LANGUAGE STRINGS
+   =================================================== */
+const LANG = {
+  home: 'الرئيسية',
+  modules: 'الوحدات',
+  vocabulary: 'المفردات',
+  activities: 'الأنشطة',
+  assessment: 'التقييم',
+  review: 'المراجعة',
+  profile: 'الملف الشخصي',
+  start: 'ابدأ',
+  next: 'التالي',
+  previous: 'السابق',
+  check: 'تحقق',
+  correct: 'صحيح!',
+  wrong: 'حاول مرة أخرى',
+  stars: 'نجوم',
+  locked: 'مقفل',
+  score: 'النتيجة',
+  finish: 'إنهاء',
+  back: 'رجوع',
+  retry: 'إعادة',
+  listen: 'استمع',
+  speak: 'تحدث',
+  tap_to_hear: 'اضغط للاستماع',
+  well_done: 'أحسنت!',
+  try_again: 'حاول مرة أخرى',
+  excellent: 'ممتاز!',
+  good: 'جيد',
+  keep_going: 'استمر!',
+  question: 'سؤال',
+  of: 'من',
+  reset: 'إعادة تعيين',
+  confirm_reset: 'هل أنت متأكد من إعادة تعيين جميع التقدم؟',
+  yes: 'نعم',
+  no: 'لا',
+  review_items: 'عناصر للمراجعة',
+  no_review: 'لا توجد عناصر للمراجعة',
+  total_stars: 'مجموع النجوم',
+  badges_title: 'الأوسمة',
+  difficult_words: 'الكلمات الصعبة',
+  module_progress: 'تقدم الوحدات'
+};
+const LANG_TR = {
+  home: 'Ana Sayfa', modules: 'Modüller', vocabulary: 'Kelimeler', activities: 'Etkinlikler',
+  assessment: 'Değerlendirme', review: 'Tekrar', profile: 'Profil', start: 'Başla',
+  next: 'Sonraki', previous: 'Önceki', check: 'Kontrol Et', correct: 'Doğru!',
+  wrong: 'Tekrar Dene', stars: 'Yıldız', locked: 'Kilitli', score: 'Puan',
+  finish: 'Bitir', back: 'Geri', retry: 'Tekrar', listen: 'Dinle',
+  well_done: 'Aferin!', try_again: 'Tekrar dene', excellent: 'Mükemmel!',
+  good: 'İyi', keep_going: 'Devam et!', reset: 'Sıfırla',
+  total_stars: 'Toplam Yıldız', badges_title: 'Rozetler',
+  difficult_words: 'Zor Kelimeler', module_progress: 'Modül İlerleme'
+};
+
+/* Arabic module titles & objectives (data only has Turkish) */
+const MODULE_AR = {
+  M01: { title: 'مقدمة الوحدة والتقييم الأولي', objectives: ['يتعرف على الموضوع الرئيسي والمفردات الأساسية للوحدة.', 'يميّز بين البقالة والسوق والتعبيرات الخدمية الأساسية.', 'يتنبأ بمحتوى النص قبل الاستماع.'] },
+  M02: { title: 'الاحتياج والطلب وقائمة التسوق', objectives: ['يستخدم أنماط "أنا بحاجة إلى / أريد / أطلب" مع المنتجات.', 'يفهم حوار الأم والابن ويعيد بناءه.', 'يطابق منتجات السوق الأساسية بمنطق السلة والرف.'] },
+  M03: { title: 'الكميات ووحدات العبوات', objectives: ['يستخدم أنماط علبة / كيلوغرام والجمع مع الأعداد.', 'يجيب عن أسئلة كم علبة / كم كيلو إجابات صحيحة.', 'يعالج السعر والكمية في المشهد نفسه.'] },
+  M04: { title: 'سوق الخضراوات والفواكه', objectives: ['يتعرف على أسماء الخضراوات والفواكه ويصنّفها.', 'يتابع حوارات البائع والمشتري.', 'يقرأ أسئلة الأسعار وسياق السوق.'] },
+  M05: { title: 'الأسعار والمقارنة والصفات', objectives: ['يستخدم أنماط أغلى / أرخص / أكبر / أصغر / أثقل / أخف.', 'يقارن بين شيئين أو منتجين بناءً على الصورة.', 'يميّز بين مقارنات السعر والخصائص الفيزيائية.'] },
+  M06: { title: 'المحادثة ولعب الأدوار', objectives: ['يقلّد الحوارات النموذجية ويحوّلها.', 'يدير تدفق طلب السعر وطلب المنتج والشكر.', 'يبني سؤالاً وجواباً حراً من الصورة والجدول.'] },
+  M07: { title: 'الكتابة والإملاء والإنتاج المستقل', objectives: ['ينقل الجمل النموذجية والفقرات القصيرة كتابياً.', 'يطبّق الإملاء وترتيب الكلمات.', 'ينتج قائمة تسوقه الخاصة وفقرة تسوق قصيرة.'] },
+  M08: { title: 'المراجعة الشاملة والإتقان', objectives: ['يستدعي مفردات الوحدة وأنماطها بشكل عشوائي.', 'ينجح في أنواع مختلفة من الأسئلة.', 'يحدد نقاط قوته وضعفه بالتقييم الذاتي.'] }
+};
+
+/* Arabic game titles */
+const GAME_AR = {
+  concept_map_intro: 'خريطة المفاهيم', diagnostic_quick_check: 'اختبار سريع', scene_observation: 'لاحظ وقل', audio_choice: 'استمع واختر',
+  dialogue_sequence: 'رتّب الحوار', audio_image_match: 'استمع واختر الصورة', shopping_list_builder: 'أنشئ قائمة التسوق', basket_compare: 'قارن السلال',
+  pronoun_match: 'طابق الضمائر', sentence_to_image: 'من الجملة إلى الصورة', quantity_match: 'طابق الكميات', list_completion: 'أكمل القائمة',
+  qa_flashcards: 'بطاقات سؤال وجواب', question_answer_match: 'طابق السؤال بالجواب', picture_prompt_qna: 'سؤال وجواب من الصورة',
+  dialogue_reader: 'قارئ الحوار', fruit_veg_sort: 'صنّف الخضر والفواكه', word_picture_match: 'طابق الكلمة بالصورة', guided_reading: 'القراءة الموجّهة',
+  true_false: 'صح أم خطأ', table_reading: 'اقرأ الجدول', visual_compare_intro: 'مقدمة المقارنة البصرية', comparative_choice: 'اختر المقارنة',
+  compare_cards: 'بطاقات المقارنة', antonym_match: 'طابق الأضداد', write_compare: 'اكتب المقارنة', seller_compare_table: 'جدول مقارنة البائعين',
+  weight_balance_game: 'لعبة الميزان', adjective_fill: 'أكمل بالصفة', conversation_reader: 'قارئ المحادثة', guided_roleplay: 'لعب الأدوار الموجّه',
+  pair_prompt: 'تمرين الأزواج', shelf_price_simulator: 'محاكي أسعار الرف', class_market_game: 'لعبة السوق الصفي', trace_to_text: 'من الرسم إلى النص',
+  copywork: 'نسخ النص', dictation_typing: 'إملاء وكتابة', sentence_reorder: 'رتّب الجملة', shopping_list_form: 'نموذج قائمة التسوق',
+  price_text_generator: 'منشئ نص الأسعار', chat_completion: 'أكمل المحادثة', listening_mcq: 'استماع متعدد الخيارات', word_choice: 'اختر الكلمة',
+  story_check: 'تحقق من القصة', checklist_scan: 'مسح القائمة', odd_one_out: 'الشاذ من المجموعة', word_search: 'ابحث عن الكلمة',
+  self_checklist: 'التقييم الذاتي', mastery_exam: 'اختبار الإتقان'
+};
+
+function modTitle(mod) {
+  const ar = MODULE_AR[mod.id];
+  if (state.lang === 'tr') return ar ? ar.title + '\n' + mod.title_tr : mod.title_tr;
+  return ar ? ar.title : mod.title_tr;
+}
+function modObjectives(mod) {
+  const ar = MODULE_AR[mod.id];
+  if (state.lang === 'tr' && ar) return ar.objectives.map((o,i) => o + (mod.objectives_tr[i] ? '\n' + mod.objectives_tr[i] : ''));
+  if (ar) return ar.objectives;
+  return mod.objectives_tr;
+}
+function gameTitle(game) {
+  const ar = GAME_AR[game.id];
+  if (state.lang === 'tr') return ar ? ar + '\n' + game.title_tr : game.title_tr;
+  return ar || game.title_tr;
+}
+
+const ASSESS_AR = {
+  A01_diagnostic: 'التقييم التشخيصي الأولي', A02_formative_module_checks: 'اختبار نهاية الوحدة',
+  A03_skill_check_listening_reading: 'اختبار الاستماع والقراءة', A04_roleplay_rubric: 'تقييم المحادثة ولعب الأدوار',
+  A05_writing_rubric: 'تقييم الكتابة', A06_mastery: 'اختبار الإتقان النهائي', A07_self_assessment: 'التقييم الذاتي'
+};
+const DLG_AR = {
+  dlg_p05_mother_list: 'قائمة التسوق مع الأم', dlg_p13_maryam_market: 'مريم في سوق الخضراوات',
+  dlg_p16_market_price_compare: 'مقارنة الأسعار في السوق', dlg_p25_grocery_apricot: 'في البقالة',
+  dlg_p27_prompt_response: 'السؤال والجواب', dlg_p28_price_yesno: 'السعر: نعم أم لا', dlg_p37_two_sellers: 'بائعان اثنان'
+};
+
+function assessTitle(a) {
+  const ar = ASSESS_AR[a.id];
+  if (state.lang === 'tr') return ar ? ar + '\n' + a.title_tr : a.title_tr;
+  return ar || a.title_tr;
+}
+function dlgTitle(d) {
+  const ar = DLG_AR[d.id];
+  if (state.lang === 'tr') return ar ? ar + '\n' + d.title_tr : d.title_tr;
+  return ar || d.title_tr;
+}
+
+function t(key) {
+  const ar = LANG[key] || key;
+  if (state.lang === 'tr' && LANG_TR[key]) return ar + '\n' + LANG_TR[key];
+  return ar;
+}
+
+/* ===================================================
+   STATE MANAGEMENT
+   =================================================== */
+const STORAGE_KEY = 'tasawwuq_v1';
+let state;
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) { state = JSON.parse(raw); return; }
+  } catch(e) {}
+  state = {
+    lang: 'ar',
+    soundOn: true,
+    unlockedModules: ['M01'],
+    gameStars: {},
+    vocabSeen: [],
+    completedGames: [],
+    reviewQueue: [],
+    mistakeBucket: [],
+    badges: [],
+    totalStudyTime: 0,
+    firstVisit: Date.now()
+  };
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+loadState();
+
+function getTotalStars() {
+  return Object.values(state.gameStars).reduce((s,v) => s+v, 0);
+}
+function getMaxStars() {
+  return DATA.games.length * 3;
+}
+function getModuleStars(modId) {
+  const mod = DATA.modules.find(m => m.id === modId);
+  if (!mod) return {earned:0, max:0};
+  const games = mod.core_games;
+  const earned = games.reduce((s,gid) => s + (state.gameStars[gid]||0), 0);
+  return {earned, max: games.length * 3};
+}
+function isModuleUnlocked(modId) {
+  return state.unlockedModules.includes(modId);
+}
+function getModuleProgress(modId) {
+  const mod = DATA.modules.find(m => m.id === modId);
+  if (!mod) return 0;
+  const total = mod.core_games.length;
+  if (total === 0) return 0;
+  const done = mod.core_games.filter(gid => state.completedGames.includes(gid)).length;
+  return Math.round(done / total * 100);
+}
+function completeGame(gameId, stars) {
+  const prev = state.gameStars[gameId] || 0;
+  state.gameStars[gameId] = Math.max(prev, stars);
+  if (!state.completedGames.includes(gameId)) state.completedGames.push(gameId);
+  // Check module unlock
+  DATA.modules.forEach((mod, i) => {
+    if (i === 0) return;
+    const prevMod = DATA.modules[i-1];
+    const prevProgress = getModuleProgress(prevMod.id);
+    if (prevProgress >= 70 && !state.unlockedModules.includes(mod.id)) {
+      state.unlockedModules.push(mod.id);
+      showToast('تم فتح: ' + (MODULE_AR[mod.id]?.title || mod.title_tr));
+    }
+  });
+  checkBadges();
+  saveState();
+  updateTopBar();
+}
+function addToReview(id, type) {
+  if (!state.reviewQueue.find(r => r.id === id && r.type === type)) {
+    state.reviewQueue.push({id, type, nextReview: Date.now() + 3600000});
+  }
+  if (!state.mistakeBucket.find(r => r.id === id)) {
+    state.mistakeBucket.push({id, type, count: 1});
+  } else {
+    state.mistakeBucket.find(r => r.id === id).count++;
+  }
+  saveState();
+}
+
+/* ===================================================
+   BADGES
+   =================================================== */
+const BADGE_DEFS = [
+  {id:'first_game', icon:'🎮', name_ar:'اللاعب الأول', name_tr:'İlk Oyun', check: () => state.completedGames.length >= 1},
+  {id:'five_games', icon:'🏆', name_ar:'خمس ألعاب', name_tr:'5 Oyun', check: () => state.completedGames.length >= 5},
+  {id:'ten_games', icon:'🌟', name_ar:'عشر ألعاب', name_tr:'10 Oyun', check: () => state.completedGames.length >= 10},
+  {id:'all_vocab', icon:'📚', name_ar:'كل المفردات', name_tr:'Tüm Kelimeler', check: () => state.vocabSeen.length >= 50},
+  {id:'first_module', icon:'🔓', name_ar:'الوحدة الأولى', name_tr:'İlk Modül', check: () => getModuleProgress('M01') >= 100},
+  {id:'three_stars', icon:'⭐', name_ar:'ثلاث نجوم', name_tr:'3 Yıldız', check: () => Object.values(state.gameStars).some(s => s === 3)},
+  {id:'star_collector', icon:'💫', name_ar:'جامع النجوم', name_tr:'Yıldız Koleksiyoncusu', check: () => getTotalStars() >= 30},
+  {id:'perfect_run', icon:'🎯', name_ar:'أداء مثالي', name_tr:'Mükemmel Performans', check: () => Object.values(state.gameStars).filter(s => s === 3).length >= 10},
+  {id:'reviewer', icon:'🔄', name_ar:'المراجع', name_tr:'Tekrarcı', check: () => state.reviewQueue.length > 0 && state.completedGames.length > 5},
+  {id:'master', icon:'👑', name_ar:'أستاذ التسوق', name_tr:'Alışveriş Ustası', check: () => getTotalStars() >= 100},
+];
+function checkBadges() {
+  BADGE_DEFS.forEach(b => {
+    if (!state.badges.includes(b.id) && b.check()) {
+      state.badges.push(b.id);
+      showToast(b.icon + ' ' + b.name_ar);
+    }
+  });
+}
+
+/* ===================================================
+   AUDIO
+   =================================================== */
+class AudioPlayer {
+  constructor() {
+    this.audio = new Audio();
+    this.synth = window.speechSynthesis;
+  }
+  playAudio(src) {
+    if (!state.soundOn) return;
+    this.audio.src = src;
+    this.audio.play().catch(()=>{});
+  }
+  speakArabic(text) {
+    if (!state.soundOn || !this.synth) return;
+    this.synth.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ar-SA';
+    u.rate = 0.85;
+    const voices = this.synth.getVoices();
+    const arVoice = voices.find(v => v.lang.startsWith('ar'));
+    if (arVoice) u.voice = arVoice;
+    this.synth.speak(u);
+  }
+  playForPage(unitPage) {
+    const files = DATA.audioMap[String(unitPage)];
+    if (files && files.length) {
+      this.playAudio('assets/audio/' + files[0]);
+    }
+  }
+  playWord(arabicText) {
+    this.speakArabic(arabicText);
+  }
+}
+const audio = new AudioPlayer();
+
+/* ===================================================
+   VOCAB ASSET HELPER
+   =================================================== */
+function getVocabImage(vocabId) {
+  if (!DATA.vocabAssets) return null;
+  const entry = DATA.vocabAssets.find(v => v.vocab_id === vocabId);
+  if (!entry || !entry.candidates || !entry.candidates.length) return null;
+  // Prefer object images
+  const obj = entry.candidates.find(c => c.asset_kind === 'object');
+  if (obj) return 'assets/images/' + obj.unique_image_file;
+  return 'assets/images/' + entry.candidates[0].unique_image_file;
+}
+function getVocabById(id) {
+  return DATA.vocabulary.find(v => v.id === id);
+}
+function getGameById(id) {
+  return DATA.games.find(g => g.id === id);
+}
+function getModuleById(id) {
+  return DATA.modules.find(m => m.id === id);
+}
+function getDialogueById(id) {
+  return DATA.dialogues.find(d => d.id === id);
+}
+function getPatternById(id) {
+  return DATA.patterns.find(p => p.id === id);
+}
+
+// Get vocab items relevant to a module
+function getModuleVocab(modId) {
+  const mod = getModuleById(modId);
+  if (!mod) return [];
+  const ids = new Set(mod.content_ids || []);
+  return DATA.vocabulary.filter(v => ids.has(v.id) || (v.source_pages && v.source_pages.some(p => mod.pages.includes(p))));
+}
+
+// Get relevant vocab for a game based on book pages
+function getGameVocab(gameId) {
+  const game = getGameById(gameId);
+  if (!game) return [];
+  const pages = game.book_pages || [];
+  return DATA.vocabulary.filter(v => v.source_pages && v.source_pages.some(p => pages.includes(p)));
+}
+
+// Get patterns relevant to pages
+function getPatternsForPages(pages) {
+  return DATA.patterns.filter(p => p.source_pages && p.source_pages.some(pg => pages.includes(pg)));
+}
+
+/* ===================================================
+   GAME ENGINE MAPPING
+   =================================================== */
+const ENGINE_MAP = {
+  concept_map_intro: 'CONCEPT',
+  diagnostic_quick_check: 'EXAM',
+  scene_observation: 'CONCEPT',
+  audio_choice: 'MCQ',
+  dialogue_sequence: 'DRAGDROP',
+  audio_image_match: 'MATCH',
+  shopping_list_builder: 'DRAGDROP',
+  basket_compare: 'CLASSIFY',
+  drag_to_shelf: 'DRAGDROP',
+  pronoun_match: 'FILLBLANK',
+  sentence_to_image: 'FILLBLANK',
+  cloze_choice: 'FILLBLANK',
+  quantity_match: 'MATCH',
+  fruit_veg_sort: 'CLASSIFY',
+  word_picture_match: 'MATCH',
+  guided_reading: 'MARKET',
+  true_false: 'MCQ',
+  table_reading: 'TABLE',
+  qa_flashcards: 'TABLE',
+  question_answer_match: 'MATCH',
+  visual_compare_intro: 'COMPARE',
+  comparative_choice: 'COMPARE',
+  compare_cards: 'FILLBLANK',
+  antonym_match: 'MATCH',
+  conversation_reader: 'MARKET',
+  guided_roleplay: 'MARKET',
+  pair_prompt: 'MARKET',
+  shelf_price_simulator: 'MARKET',
+  class_market_game: 'MARKET',
+  trace_to_text: 'WRITE',
+  copywork: 'WRITE',
+  dictation_typing: 'WRITE',
+  sentence_reorder: 'DRAGDROP',
+  write_compare: 'WRITE',
+  shopping_list_form: 'WRITE',
+  listening_mcq: 'MCQ',
+  word_choice: 'MCQ',
+  story_check: 'MCQ',
+  price_text_generator: 'WRITE',
+  chat_completion: 'WRITE',
+  seller_compare_table: 'COMPARE',
+  weight_balance_game: 'COMPARE',
+  category_baskets: 'CLASSIFY',
+  checklist_scan: 'SEARCH',
+  odd_one_out: 'CLASSIFY',
+  adjective_fill: 'FILLBLANK',
+  market_speaking_prompt: 'MARKET',
+  word_search: 'SEARCH',
+  self_checklist: 'SEARCH',
+  mastery_exam: 'EXAM',
+  list_completion: 'DRAGDROP',
+  picture_prompt_qna: 'TABLE'
+};
+
+const GAME_ICONS = {
+  MCQ: '❓', MATCH: '🃏', DRAGDROP: '✋', CLASSIFY: '📦', FILLBLANK: '✏️',
+  COMPARE: '⚖️', MARKET: '🏪', WRITE: '📝', CONCEPT: '🗺️', TABLE: '📊',
+  SEARCH: '🔍', EXAM: '📋'
+};
+
+/* ===================================================
+   ROUTER
+   =================================================== */
+function navigate(route) {
+  if (route.startsWith('#')) route = route.slice(1);
+  window.location.hash = route || 'home';
+}
+function getRoute() {
+  const h = window.location.hash.slice(1) || 'home';
+  const parts = h.split('/');
+  return { page: parts[0], id: parts[1], sub: parts[2] };
+}
+window.addEventListener('hashchange', render);
+
+/* ===================================================
+   RENDER
+   =================================================== */
+function render() {
+  const route = getRoute();
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  updateTopBar();
+
+  switch(route.page) {
+    case 'home': renderHome(app); break;
+    case 'module': renderModule(app, route.id); break;
+    case 'vocab': renderVocab(app, route.id); break;
+    case 'vocab-list': renderVocabList(app, route.id); break;
+    case 'pattern': renderPattern(app, route.id); break;
+    case 'dialogue': renderDialogue(app, route.id); break;
+    case 'game': renderGame(app, route.id); break;
+    case 'assess': renderAssessment(app, route.id); break;
+    case 'review': renderReview(app); break;
+    case 'profile': renderProfile(app); break;
+    default: renderHome(app);
+  }
+}
+
+function updateTopBar() {
+  const stars = getTotalStars();
+  document.getElementById('totalStarsNum').textContent = toAr(stars);
+}
+
+/* ===================================================
+   HOME SCREEN
+   =================================================== */
+function renderHome(container) {
+  const screen = el('div', {class:'screen active'});
+
+  // Hero
+  const hero = el('div', {class:'hero'});
+  hero.innerHTML = `
+    <div class="hero-emoji">🛒</div>
+    <h1>التسوق</h1>
+    <h2>الوحدة الثانية</h2>
+    ${state.lang === 'tr' ? '<div class="tr-sub">Alışveriş - Ünite 2</div>' : ''}
+    <div class="market-deco">
+      <span>🍎</span><span>🧀</span><span>🥖</span><span>🍯</span><span>🥛</span>
+    </div>
+  `;
+  screen.appendChild(hero);
+
+  // Section header
+  const sh = el('div', {class:'section-header'});
+  sh.innerHTML = `<h3>${LANG.modules}</h3><div class="line"></div>`;
+  screen.appendChild(sh);
+
+  // Module grid
+  const grid = el('div', {class:'module-grid'});
+  DATA.modules.forEach((mod, i) => {
+    const unlocked = isModuleUnlocked(mod.id);
+    const progress = getModuleProgress(mod.id);
+    const ms = getModuleStars(mod.id);
+    const card = el('div', {
+      class: 'module-card ' + (unlocked ? 'unlocked' : 'locked'),
+      onclick: () => { if (unlocked) navigate('module/' + mod.id); }
+    });
+
+    // Progress ring
+    const circumference = 2 * Math.PI * 20;
+    const offset = circumference - (progress / 100) * circumference;
+
+    card.innerHTML = `
+      ${!unlocked ? '<div class="lock-icon">🔒</div>' : ''}
+      <div class="progress-ring">
+        <svg width="48" height="48" viewBox="0 0 48 48">
+          <circle class="ring-bg" cx="24" cy="24" r="20"/>
+          <circle class="ring-fg" cx="24" cy="24" r="20" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="ring-text">${toAr(progress)}%</div>
+      </div>
+      <div class="mod-num">${toAr(i + 1)}</div>
+      <div class="mod-title">${modTitle(mod)}</div>
+      <div class="mod-stars">${renderStarsHTML(ms.earned, ms.max)}</div>
+    `;
+    grid.appendChild(card);
+  });
+  screen.appendChild(grid);
+
+  // Bottom nav buttons
+  const nav = el('div', {style:{display:'flex', gap:'8px', marginTop:'24px', justifyContent:'center', flexWrap:'wrap'}});
+  nav.appendChild(el('button', {class:'btn btn-outline btn-sm', text: '🔄 ' + LANG.review, onclick: () => navigate('review')}));
+  nav.appendChild(el('button', {class:'btn btn-outline btn-sm', text: '👤 ' + LANG.profile, onclick: () => navigate('profile')}));
+  screen.appendChild(nav);
+
+  // Review badge
+  const due = state.reviewQueue.filter(r => r.nextReview <= Date.now()).length;
+  if (due > 0) {
+    const badge = el('div', {class:'review-badge', text: toAr(due) + ' ' + LANG.review_items, onclick: () => navigate('review')});
+    screen.appendChild(badge);
+  }
+
+  container.appendChild(screen);
+}
+
+function renderStarsHTML(earned, max) {
+  const full = Math.min(earned, max);
+  const gameCount = Math.ceil(max / 3);
+  // Show star per game simplified
+  let html = '';
+  for (let i = 0; i < Math.min(gameCount, 6); i++) {
+    const gs = Math.min(3, earned - i * 3);
+    if (gs >= 3) html += '⭐';
+    else if (gs >= 1) html += '🌟';
+    else html += '☆';
+  }
+  return html;
+}
+
+/* ===================================================
+   MODULE SCREEN
+   =================================================== */
+function renderModule(container, modId) {
+  const mod = getModuleById(modId);
+  if (!mod) { renderHome(container); return; }
+
+  const screen = el('div', {class:'screen active'});
+
+  // Back
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => navigate('home')}));
+
+  // Header
+  const hdr = el('div', {class:'card', style:{marginBottom:'16px'}});
+  const ms = getModuleStars(mod.id);
+  hdr.innerHTML = `
+    <h2 style="font-family:var(--font-heading);color:var(--primary-dark);font-size:24px;margin-bottom:8px;">
+      ${LANG.modules} ${toAr(DATA.modules.indexOf(mod) + 1)}
+    </h2>
+    <p style="color:var(--text-light);font-size:14px;margin-bottom:8px;">${modTitle(mod)}</p>
+    <div style="font-size:18px;">${renderStarsHTML(ms.earned, ms.max)} <span style="font-size:14px;color:var(--text-light);">${toAr(ms.earned)}/${toAr(ms.max)}</span></div>
+  `;
+  {
+    const objs = modObjectives(mod);
+    if (objs && objs.length) {
+      const ul = el('ul', {style:{marginTop:'12px', paddingRight:'20px', fontSize:'13px', color:'var(--text-light)', lineHeight:'1.8'}});
+      objs.forEach(o => ul.appendChild(el('li', {text: o})));
+      hdr.appendChild(ul);
+    }
+  }
+  screen.appendChild(hdr);
+
+  // Tabs
+  let activeTab = 'vocab';
+  const tabBar = el('div', {class:'tabs'});
+  const tabContent = el('div');
+
+  function renderTabContent() {
+    tabContent.innerHTML = '';
+    tabBar.innerHTML = '';
+    [{key:'vocab', label: LANG.vocabulary},{key:'games', label: LANG.activities},{key:'assess', label: LANG.assessment}].forEach(tb => {
+      const btn = el('button', {class:'tab' + (activeTab === tb.key ? ' active' : ''), text: tb.label, onclick: () => { activeTab = tb.key; renderTabContent(); }});
+      tabBar.appendChild(btn);
+    });
+
+    if (activeTab === 'vocab') {
+      const vocabs = getModuleVocab(modId);
+      const listBtn = el('button', {class:'btn btn-primary btn-block btn-sm', style:{marginBottom:'12px'}, text: LANG.vocabulary + ' (' + toAr(vocabs.length) + ')', onclick: () => navigate('vocab-list/' + modId)});
+      tabContent.appendChild(listBtn);
+      vocabs.slice(0, 12).forEach(v => {
+        const img = getVocabImage(v.id);
+        const item = el('div', {class:'card vocab-list-item', onclick: () => navigate('vocab/' + v.id)});
+        item.innerHTML = `
+          ${img ? '<img class="vl-img" src="'+img+'" alt="" onerror="this.style.display=\'none\'">' : ''}
+          <span class="vl-ar">${v.ar}</span>
+          <span class="vl-tr tr-only">${v.tr}</span>
+        `;
+        tabContent.appendChild(item);
+      });
+    } else if (activeTab === 'games') {
+      mod.core_games.forEach(gid => {
+        const game = getGameById(gid);
+        if (!game) return;
+        const stars = state.gameStars[gid] || 0;
+        const engine = ENGINE_MAP[gid] || 'MCQ';
+        const icon = GAME_ICONS[engine] || '🎮';
+        const card = el('div', {class:'card game-card', onclick: () => navigate('game/' + gid)});
+        card.innerHTML = `
+          <div class="game-icon">${icon}</div>
+          <div class="game-info">
+            <div class="game-title">${gameTitle(game)}</div>
+            <div class="game-desc">${state.lang === 'tr' && game.objective_tr ? game.objective_tr.substring(0, 60) + '...' : ''}</div>
+          </div>
+          <div class="game-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+        `;
+        tabContent.appendChild(card);
+      });
+    } else {
+      // Assessment
+      const relevantAssess = DATA.assessments.filter((a, i) => {
+        const modIdx = DATA.modules.indexOf(mod);
+        if (i === 0 && modIdx === 0) return true;
+        if (i === 1) return true; // formative for all
+        if (i === modIdx + 2) return true;
+        return false;
+      });
+      if (relevantAssess.length === 0) {
+        tabContent.appendChild(el('p', {text: 'لا يوجد تقييم لهذه الوحدة حالياً', style:{textAlign:'center', color:'var(--text-light)', padding:'32px'}}));
+      }
+      relevantAssess.forEach(a => {
+        const card = el('div', {class:'card', style:{cursor:'pointer'}, onclick: () => navigate('assess/' + a.id)});
+        card.innerHTML = `
+          <h4 style="font-family:var(--font-heading);color:var(--primary-dark);font-size:18px;">${a.title_tr}</h4>
+          <p style="font-size:13px;color:var(--text-light);margin-top:4px;">${a.components_tr ? a.components_tr[0] : ''}</p>
+        `;
+        tabContent.appendChild(card);
+      });
+    }
+  }
+
+  screen.appendChild(tabBar);
+  screen.appendChild(tabContent);
+  renderTabContent();
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   VOCAB CARD SCREEN
+   =================================================== */
+function renderVocab(container, vocabId) {
+  const vocab = getVocabById(vocabId);
+  if (!vocab) { navigate('home'); return; }
+  if (!state.vocabSeen.includes(vocabId)) { state.vocabSeen.push(vocabId); saveState(); }
+
+  const idx = DATA.vocabulary.indexOf(vocab);
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
+
+  const card = el('div', {class:'vocab-card-large', onclick: function() { this.classList.toggle('flipped'); }});
+  const img = getVocabImage(vocabId);
+  const inner = el('div', {class:'vocab-card-inner'});
+
+  const front = el('div', {class:'vocab-card-front'});
+  front.innerHTML = `
+    ${img ? '<img class="vocab-img" src="'+img+'" alt="" onerror="this.style.display=\'none\'">' : ''}
+    <div class="vocab-ar">${vocab.ar}</div>
+    <button class="btn btn-accent btn-icon" style="margin:8px auto;" onclick="event.stopPropagation();audio.playWord('${vocab.ar}')">🔊</button>
+    ${vocab.example ? '<div class="vocab-example">' + vocab.example + '</div>' : ''}
+    <div class="tr-only vocab-tr" style="margin-top:12px">${vocab.tr}</div>
+    <p style="font-size:12px;color:var(--text-light);margin-top:16px;">اضغط على البطاقة لقلبها</p>
+  `;
+  inner.appendChild(front);
+
+  const back = el('div', {class:'vocab-card-back'});
+  back.innerHTML = `
+    <div style="padding:40px 16px;text-align:center;">
+      <div style="font-size:32px;margin-bottom:16px;">${vocab.tr}</div>
+      <div style="font-size:14px;color:var(--text-light);">${vocab.category} - ${vocab.subcategory || ''}</div>
+      ${vocab.notes ? '<div style="font-size:13px;color:var(--text-light);margin-top:12px;">'+vocab.notes+'</div>' : ''}
+    </div>
+  `;
+  inner.appendChild(back);
+  card.appendChild(inner);
+  screen.appendChild(card);
+
+  // Navigation
+  const nav = el('div', {class:'vocab-nav'});
+  if (idx > 0) {
+    nav.appendChild(el('button', {class:'btn btn-outline btn-sm', text: LANG.previous + ' →', onclick: () => navigate('vocab/' + DATA.vocabulary[idx-1].id)}));
+  }
+  if (idx < DATA.vocabulary.length - 1) {
+    nav.appendChild(el('button', {class:'btn btn-primary btn-sm', text: '← ' + LANG.next, onclick: () => navigate('vocab/' + DATA.vocabulary[idx+1].id)}));
+  }
+  screen.appendChild(nav);
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   VOCAB LIST SCREEN
+   =================================================== */
+function renderVocabList(container, modId) {
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => navigate('module/' + modId)}));
+
+  const sh = el('div', {class:'section-header'});
+  sh.innerHTML = `<h3>${LANG.vocabulary}</h3><div class="line"></div>`;
+  screen.appendChild(sh);
+
+  const vocabs = modId ? getModuleVocab(modId) : DATA.vocabulary;
+  vocabs.forEach(v => {
+    const img = getVocabImage(v.id);
+    const item = el('div', {class:'card vocab-list-item', onclick: () => navigate('vocab/' + v.id)});
+    item.innerHTML = `
+      ${img ? '<img class="vl-img" src="'+img+'" alt="" onerror="this.style.display=\'none\'">' : ''}
+      <span class="vl-ar">${v.ar}</span>
+      <span class="vl-tr tr-only">${v.tr}</span>
+      <button class="btn btn-icon btn-sm" style="background:var(--primary-light);color:#fff;width:32px;height:32px;font-size:14px;" onclick="event.stopPropagation();audio.playWord('${v.ar}')">🔊</button>
+    `;
+    screen.appendChild(item);
+  });
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   PATTERN SCREEN
+   =================================================== */
+function renderPattern(container, patId) {
+  const pat = getPatternById(patId);
+  if (!pat) { navigate('home'); return; }
+
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
+
+  const card = el('div', {class:'card', style:{textAlign:'center'}});
+  card.innerHTML = `
+    <div style="font-family:var(--font-heading);font-size:28px;color:var(--primary-dark);margin:16px 0;line-height:2;">
+      ${pat.pattern_ar}
+    </div>
+    <div class="tr-only" style="font-size:16px;color:var(--text-light);margin-bottom:12px;">${pat.tr}</div>
+    <div style="font-size:14px;color:var(--text-light);margin-top:8px;">
+      ${pat.example || ''}
+    </div>
+    <button class="btn btn-accent btn-sm" style="margin-top:16px;" onclick="audio.playWord('${pat.example || pat.pattern_ar}')">🔊 ${LANG.listen}</button>
+  `;
+  screen.appendChild(card);
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   DIALOGUE SCREEN
+   =================================================== */
+function renderDialogue(container, dlgId) {
+  const dlg = getDialogueById(dlgId);
+  if (!dlg) { navigate('home'); return; }
+
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
+  screen.appendChild(el('h3', {style:{fontFamily:'var(--font-heading)', fontSize:'22px', color:'var(--primary-dark)', marginBottom:'16px', textAlign:'center'}, text: dlgTitle(dlg)}));
+
+  const chatBox = el('div', {class:'dialogue-container'});
+  (dlg.turns || []).forEach((turn, i) => {
+    const isSeller = (turn.speaker_ar || '').includes('بائع') || (turn.speaker_ar || '').includes('البقال');
+    const bubble = el('div', {
+      class: 'chat-bubble ' + (isSeller ? 'seller' : 'buyer'),
+      style: {animationDelay: (i * 0.15) + 's'},
+      onclick: () => audio.playWord(turn.text_ar)
+    });
+    bubble.innerHTML = `
+      <div class="chat-speaker">${turn.speaker_ar || ''}${state.lang === 'tr' && turn.speaker_tr ? ' - '+turn.speaker_tr : ''}</div>
+      <div class="chat-text-ar">${turn.text_ar || ''}</div>
+      <div class="chat-text-tr tr-only">${turn.text_tr || ''}</div>
+    `;
+    chatBox.appendChild(bubble);
+  });
+  screen.appendChild(chatBox);
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   GAME SCREEN - Master Router
+   =================================================== */
+function renderGame(container, gameId) {
+  const game = getGameById(gameId);
+  if (!game) { navigate('home'); return; }
+
+  const engine = ENGINE_MAP[gameId] || 'MCQ';
+  const screen = el('div', {class:'screen active'});
+
+  // Back button
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
+
+  // Game header
+  const header = el('div', {class:'game-header'});
+  header.innerHTML = `
+    <div class="game-title">${GAME_ICONS[engine] || '🎮'} ${gameTitle(game)}</div>
+    <div class="game-score" id="gameScore">⭐ <span id="scoreNum">٠</span></div>
+  `;
+  screen.appendChild(header);
+
+  // Progress bar
+  screen.appendChild(el('div', {class:'game-progress-bar', html:'<div class="game-progress-fill" id="gameProg" style="width:0%"></div>'}));
+
+  // Game area
+  const area = el('div', {class:'game-area', id:'gameArea'});
+  screen.appendChild(area);
+  container.appendChild(screen);
+
+  // Launch engine
+  const vocab = getGameVocab(gameId);
+  const patterns = getPatternsForPages(game.book_pages || []);
+
+  switch(engine) {
+    case 'MCQ': runMCQEngine(area, game, vocab, patterns); break;
+    case 'MATCH': runMatchEngine(area, game, vocab); break;
+    case 'DRAGDROP': runDragDropEngine(area, game, vocab, patterns); break;
+    case 'CLASSIFY': runClassifyEngine(area, game, vocab); break;
+    case 'FILLBLANK': runFillBlankEngine(area, game, vocab, patterns); break;
+    case 'COMPARE': runCompareEngine(area, game, vocab); break;
+    case 'MARKET': runMarketEngine(area, game, vocab, patterns); break;
+    case 'WRITE': runWriteEngine(area, game, vocab, patterns); break;
+    case 'CONCEPT': runConceptEngine(area, game, vocab); break;
+    case 'TABLE': runTableEngine(area, game, vocab, patterns); break;
+    case 'SEARCH': runSearchEngine(area, game, vocab); break;
+    case 'EXAM': runExamEngine(area, game, vocab, patterns); break;
+    default: runMCQEngine(area, game, vocab, patterns);
+  }
+}
+
+/* ===================================================
+   GAME RESULT HELPER
+   =================================================== */
+function showGameResult(area, gameId, correct, total) {
+  const pct = total > 0 ? correct / total : 0;
+  const stars = pct >= 0.9 ? 3 : pct >= 0.7 ? 2 : pct >= 0.4 ? 1 : 0;
+  completeGame(gameId, stars);
+  if (stars >= 2) fireConfetti();
+
+  area.innerHTML = '';
+  const result = el('div', {class:'result-screen'});
+  const msg = stars === 3 ? LANG.excellent : stars === 2 ? LANG.well_done : stars === 1 ? LANG.good : LANG.try_again;
+  result.innerHTML = `
+    <div class="result-msg">${msg}</div>
+    <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
+    <div class="result-score">${toAr(correct)}/${toAr(total)}</div>
+    <div class="result-label">${LANG.score}</div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+      <button class="btn btn-outline" onclick="navigate('game/${gameId}')">${LANG.retry}</button>
+      <button class="btn btn-primary" onclick="history.back()">${LANG.back}</button>
+    </div>
+  `;
+  area.appendChild(result);
+}
+
+function updateProgress(current, total) {
+  const prog = document.getElementById('gameProg');
+  if (prog) prog.style.width = (current / total * 100) + '%';
+}
+
+function updateScore(score) {
+  const num = document.getElementById('scoreNum');
+  if (num) {
+    num.textContent = toAr(score);
+    num.classList.remove('num-anim');
+    void num.offsetWidth;
+    num.classList.add('num-anim');
+  }
+}
+
+/* ===================================================
+   MCQ ENGINE
+   =================================================== */
+function runMCQEngine(area, game, vocab, patterns) {
+  const items = vocab.length >= 4 ? vocab : DATA.vocabulary.slice(0, 20);
+  const questions = [];
+  const qCount = Math.min(8, items.length);
+
+  // Generate questions
+  const selected = pick(items, qCount);
+  selected.forEach(v => {
+    const others = items.filter(x => x.id !== v.id);
+    const distractors = pick(others, 3).map(x => x.ar);
+    const options = shuffle([v.ar, ...distractors]);
+    questions.push({
+      question: game.id.includes('true_false') ?
+        `"${v.ar}" = "${v.tr}" ؟` :
+        `ما معنى "${v.tr}" بالعربية؟`,
+      answer: v.ar,
+      options,
+      vocabId: v.id
+    });
+  });
+
+  let qi = 0, score = 0, attempts = 0;
+
+  function showQuestion() {
+    if (qi >= questions.length) {
+      showGameResult(area, game.id, score, questions.length);
+      return;
+    }
+    area.innerHTML = '';
+    updateProgress(qi, questions.length);
+    const q = questions[qi];
+
+    const qDiv = el('div', {style:{width:'100%', textAlign:'center', marginBottom:'16px'}});
+    qDiv.innerHTML = `<div style="font-size:13px;color:var(--text-light);margin-bottom:8px;">${LANG.question} ${toAr(qi+1)} ${LANG.of} ${toAr(questions.length)}</div>`;
+    qDiv.appendChild(el('div', {style:{fontFamily:'var(--font-heading)', fontSize:'22px', color:'var(--primary-dark)', lineHeight:'2'}, text: q.question}));
+    area.appendChild(qDiv);
+
+    const optDiv = el('div', {class:'mcq-options'});
+    q.options.forEach(opt => {
+      const btn = el('button', {class:'mcq-option', text: opt});
+      btn.onclick = async () => {
+        optDiv.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
+        if (opt === q.answer) {
+          btn.classList.add('correct');
+          score++;
+          updateScore(score);
+          audio.playWord(opt);
+          flyStarFrom(btn);
+        } else {
+          btn.classList.add('wrong');
+          optDiv.querySelector(`.mcq-option:nth-child(${q.options.indexOf(q.answer)+1})`).classList.add('correct');
+          addToReview(q.vocabId, 'vocab');
+        }
+        attempts++;
+        await sleep(1200);
+        qi++;
+        showQuestion();
+      };
+      optDiv.appendChild(btn);
+    });
+    area.appendChild(optDiv);
+  }
+  showQuestion();
+}
+
+/* ===================================================
+   MATCH ENGINE (Memory Game)
+   =================================================== */
+function runMatchEngine(area, game, vocab) {
+  const items = vocab.length >= 6 ? vocab.slice(0, 6) : DATA.vocabulary.slice(0, 6);
+  // Create pairs: Arabic word <-> Turkish meaning
+  const pairs = items.map(v => [
+    {id: v.id + '_ar', pair: v.id, text: v.ar, type: 'ar'},
+    {id: v.id + '_tr', pair: v.id, text: v.tr, type: 'tr'}
+  ]).flat();
+  const cards = shuffle(pairs);
+
+  let flipped = [], matched = new Set(), moves = 0, score = 0;
+
+  function renderGrid() {
+    area.innerHTML = '';
+    const info = el('div', {style:{textAlign:'center', marginBottom:'12px', fontSize:'14px', color:'var(--text-light)'}});
+    info.textContent = toAr(moves) + ' حركة | ' + toAr(matched.size/2) + '/' + toAr(items.length);
+    area.appendChild(info);
+
+    const cols = cards.length <= 12 ? 4 : 4;
+    const grid = el('div', {class:'match-grid', style:{gridTemplateColumns: `repeat(${cols}, 1fr)`}});
+    cards.forEach((card, i) => {
+      const isFlipped = flipped.includes(i) || matched.has(card.pair);
+      const cell = el('div', {
+        class: 'match-cell' + (isFlipped ? ' revealed' : '') + (matched.has(card.pair) ? ' matched' : ''),
+      });
+      if (isFlipped) {
+        cell.innerHTML = `<div class="cell-content" style="${card.type === 'ar' ? 'font-family:var(--font-heading);font-size:16px;' : 'font-size:12px;'}">${card.text}</div>`;
+      } else {
+        cell.textContent = '؟';
+        cell.onclick = () => flipCard(i);
+      }
+      grid.appendChild(cell);
+    });
+    area.appendChild(grid);
+  }
+
+  async function flipCard(idx) {
+    if (flipped.length >= 2) return;
+    if (flipped.includes(idx)) return;
+    if (matched.has(cards[idx].pair)) return;
+
+    flipped.push(idx);
+    renderGrid();
+
+    if (flipped.length === 2) {
+      moves++;
+      const [a, b] = flipped;
+      if (cards[a].pair === cards[b].pair && a !== b) {
+        matched.add(cards[a].pair);
+        score++;
+        updateScore(score);
+        await sleep(500);
+        flipped = [];
+        renderGrid();
+        if (matched.size === items.length) {
+          const stars = moves <= items.length * 2 ? 3 : moves <= items.length * 3 ? 2 : 1;
+          await sleep(500);
+          showGameResult(area, game.id, score, items.length);
+        }
+      } else {
+        await sleep(800);
+        flipped = [];
+        renderGrid();
+      }
+    }
+  }
+  renderGrid();
+}
+
+/* ===================================================
+   DRAGDROP ENGINE
+   =================================================== */
+function runDragDropEngine(area, game, vocab, patterns) {
+  // Build items to order
+  let items = [];
+  if (game.id.includes('dialogue') || game.id.includes('sentence_reorder')) {
+    // Use dialogue turns or pattern examples
+    const dlg = DATA.dialogues.find(d => d.turns && d.turns.length > 0);
+    if (dlg && dlg.turns.length > 2) {
+      items = dlg.turns.slice(0, 6).map((t, i) => ({id: i, text: t.text_ar, order: i}));
+    } else {
+      items = patterns.slice(0, 5).map((p, i) => ({id: i, text: p.example || p.pattern_ar, order: i}));
+    }
+  } else {
+    // Shopping list or generic
+    items = vocab.slice(0, 6).map((v, i) => ({id: i, text: v.ar, order: i}));
+  }
+
+  if (items.length < 3) {
+    items = DATA.vocabulary.slice(0, 5).map((v, i) => ({id: i, text: v.ar, order: i}));
+  }
+
+  const correctOrder = items.map(it => it.id);
+  let currentOrder = shuffle([...items]);
+  let score = 0;
+
+  function renderDragDrop() {
+    area.innerHTML = '';
+    area.appendChild(el('p', {text: 'رتب العناصر بالترتيب الصحيح', style:{textAlign:'center', color:'var(--text-light)', marginBottom:'12px'}}));
+
+    const zone = el('div', {class:'drop-zone', style:{flexDirection:'column', gap:'8px', width:'100%'}});
+
+    currentOrder.forEach((item, i) => {
+      const dragItem = el('div', {class:'drag-item', text: item.text, 'data-idx': String(i), style:{width:'100%', textAlign:'center'}});
+      // Simple tap-swap mechanic for mobile
+      dragItem.onclick = () => {
+        const selected = zone.querySelector('.drag-item.selected');
+        if (selected) {
+          selected.classList.remove('selected');
+          const si = parseInt(selected.getAttribute('data-idx'));
+          // Swap
+          [currentOrder[si], currentOrder[i]] = [currentOrder[i], currentOrder[si]];
+          renderDragDrop();
+        } else {
+          dragItem.classList.add('selected');
+          dragItem.style.background = 'var(--accent)';
+        }
+      };
+      zone.appendChild(dragItem);
+    });
+    area.appendChild(zone);
+
+    const checkBtn = el('button', {class:'btn btn-primary btn-block', text: LANG.check, style:{marginTop:'16px'}});
+    checkBtn.onclick = () => {
+      let correct = 0;
+      currentOrder.forEach((item, i) => {
+        if (item.id === correctOrder[i]) correct++;
+      });
+      score = correct;
+      updateScore(score);
+      showGameResult(area, game.id, correct, items.length);
+    };
+    area.appendChild(checkBtn);
+  }
+  renderDragDrop();
+}
+
+/* ===================================================
+   CLASSIFY ENGINE
+   =================================================== */
+function runClassifyEngine(area, game, vocab) {
+  // Determine categories
+  let bins = {};
+  if (game.id.includes('fruit_veg')) {
+    const fruits = vocab.filter(v => v.subcategory === 'food_item' && v.id.match(/tuffah|mawz|burtuqal|anab|kaysi|inab|karaz|fawakih/i));
+    const vegs = vocab.filter(v => v.subcategory === 'food_item' && v.id.match(/khiyar|tamatim|basal|khudar|batatis|baqdunis/i));
+    bins = {'فواكه': fruits.map(v=>v.ar), 'خضراوات': vegs.map(v=>v.ar)};
+    // If not enough, fill from all vocab
+    if (Object.values(bins).flat().length < 4) {
+      const foodVocab = DATA.vocabulary.filter(v => v.subcategory === 'food_item');
+      bins = {'فواكه': foodVocab.slice(0,4).map(v=>v.ar), 'خضراوات': foodVocab.slice(4,8).map(v=>v.ar)};
+    }
+  } else if (game.id.includes('odd_one_out')) {
+    // Odd one out: 3 same category + 1 different
+    const cats = {};
+    vocab.forEach(v => { const c = v.subcategory||v.category; if(!cats[c])cats[c]=[]; cats[c].push(v); });
+    const catKeys = Object.keys(cats).filter(k => cats[k].length >= 3);
+    if (catKeys.length >= 2) {
+      const mainCat = catKeys[0];
+      const oddCat = catKeys[1];
+      bins = {[mainCat]: cats[mainCat].slice(0,3).map(v=>v.ar), 'الدخيل': [cats[oddCat][0].ar]};
+    } else {
+      bins = {'المجموعة ١': vocab.slice(0,3).map(v=>v.ar), 'الدخيل': [vocab[3]?.ar || 'كلمة'].filter(Boolean)};
+    }
+  } else {
+    // Generic classify
+    const cats = {};
+    vocab.forEach(v => { const c = v.subcategory||v.category; if(!cats[c])cats[c]=[]; cats[c].push(v); });
+    const catKeys = Object.keys(cats).slice(0, 2);
+    catKeys.forEach(k => { bins[k] = cats[k].slice(0,4).map(v=>v.ar); });
+  }
+
+  const allItems = [];
+  const correctBin = {};
+  Object.entries(bins).forEach(([binName, words]) => {
+    words.forEach(w => { allItems.push(w); correctBin[w] = binName; });
+  });
+  const shuffledItems = shuffle(allItems);
+  const placed = {};
+  let score = 0;
+
+  function renderClassify() {
+    area.innerHTML = '';
+    // Unplaced items
+    const itemZone = el('div', {class:'drag-zone', style:{width:'100%'}});
+    shuffledItems.forEach(word => {
+      if (placed[word]) return;
+      const chip = el('div', {class:'drag-item', text: word, style:{fontFamily:'var(--font-heading)', fontSize:'16px'}});
+      chip.onclick = () => {
+        // Show bin selection
+        chip.classList.toggle('selected');
+        const prev = itemZone.querySelector('.drag-item.selected:not([data-w="'+word+'"])');
+        // Actually we select then tap bin
+        area.querySelectorAll('.classify-bin').forEach(bin => {
+          bin.style.cursor = 'pointer';
+          bin.onclick = () => {
+            const binName = bin.getAttribute('data-bin');
+            placed[word] = binName;
+            if (correctBin[word] === binName) { score++; updateScore(score); }
+            else { addToReview(word, 'classify'); }
+            renderClassify();
+            // Check if done
+            if (Object.keys(placed).length === allItems.length) {
+              setTimeout(() => showGameResult(area, game.id, score, allItems.length), 500);
+            }
+          };
+        });
+      };
+      itemZone.appendChild(chip);
+    });
+    if (shuffledItems.filter(w => !placed[w]).length > 0) {
+      area.appendChild(el('p', {text: 'اختر الكلمة ثم اضغط على السلة المناسبة', style:{fontSize:'13px', color:'var(--text-light)', textAlign:'center', marginBottom:'8px'}}));
+      area.appendChild(itemZone);
+    }
+
+    // Bins
+    const binGrid = el('div', {class:'classify-bins'});
+    Object.keys(bins).forEach(binName => {
+      const bin = el('div', {class:'classify-bin', 'data-bin': binName});
+      bin.innerHTML = `<div class="bin-title">${binName}</div>`;
+      const binItems = el('div', {class:'bin-items'});
+      Object.entries(placed).forEach(([w, b]) => {
+        if (b === binName) {
+          const isCorrect = correctBin[w] === binName;
+          binItems.appendChild(el('span', {
+            text: w,
+            style: {padding:'4px 10px', borderRadius:'12px', fontSize:'14px', fontFamily:'var(--font-heading)',
+              background: isCorrect ? 'var(--success)' : 'var(--error)', color:'#fff'}
+          }));
+        }
+      });
+      bin.appendChild(binItems);
+      binGrid.appendChild(bin);
+    });
+    area.appendChild(binGrid);
+  }
+  renderClassify();
+}
+
+/* ===================================================
+   FILLBLANK ENGINE
+   =================================================== */
+function runFillBlankEngine(area, game, vocab, patterns) {
+  const usablePatterns = patterns.filter(p => p.example);
+  const items = usablePatterns.length >= 3 ? usablePatterns : DATA.patterns.filter(p => p.example).slice(0, 6);
+  const questions = items.slice(0, 6).map(p => {
+    // Pick a word to blank out from the example
+    const words = p.example.split(/\s+/).filter(w => w.length > 2);
+    const blankIdx = Math.floor(Math.random() * words.length);
+    const answer = words[blankIdx];
+    const sentence = words.map((w, i) => i === blankIdx ? '___' : w).join(' ');
+    // Distractors from vocab
+    const distractors = pick(DATA.vocabulary, 3).map(v => v.ar);
+    const bank = shuffle([answer, ...distractors]);
+    return {sentence, answer, bank, patId: p.id};
+  });
+
+  let qi = 0, score = 0, selected = null;
+
+  function showQ() {
+    if (qi >= questions.length) { showGameResult(area, game.id, score, questions.length); return; }
+    area.innerHTML = '';
+    updateProgress(qi, questions.length);
+    const q = questions[qi];
+
+    area.appendChild(el('div', {class:'fill-sentence', html: q.sentence.replace('___', '<span class="fill-blank" id="theBlank">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>')}));
+
+    const bank = el('div', {class:'word-bank'});
+    q.bank.forEach(w => {
+      const chip = el('button', {class:'word-chip', text: w});
+      chip.onclick = () => {
+        bank.querySelectorAll('.word-chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        selected = w;
+        const blank = document.getElementById('theBlank');
+        if (blank) blank.textContent = w;
+      };
+      bank.appendChild(chip);
+    });
+    area.appendChild(bank);
+
+    area.appendChild(el('button', {class:'btn btn-primary btn-block', text: LANG.check, style:{marginTop:'16px'}, onclick: async () => {
+      if (!selected) return;
+      if (selected === q.answer) {
+        score++;
+        updateScore(score);
+        const blank = document.getElementById('theBlank');
+        if (blank) blank.style.color = 'var(--success)';
+        flyStarFrom(area);
+      } else {
+        addToReview(q.patId, 'pattern');
+        const blank = document.getElementById('theBlank');
+        if (blank) { blank.style.color = 'var(--error)'; blank.textContent = q.answer; }
+      }
+      await sleep(1000);
+      qi++; selected = null;
+      showQ();
+    }}));
+  }
+  showQ();
+}
+
+/* ===================================================
+   COMPARE ENGINE
+   =================================================== */
+function runCompareEngine(area, game, vocab) {
+  // Get items that have price/size/weight attributes
+  const sizeVocab = DATA.vocabulary.filter(v => v.subcategory === 'size' || v.subcategory === 'weight' || v.subcategory === 'price');
+  const foodVocab = DATA.vocabulary.filter(v => v.subcategory === 'food_item').slice(0, 10);
+  const compPatterns = DATA.patterns.filter(p => p.category && p.category.startsWith('comparison'));
+
+  const comparisons = [
+    {a: 'التفاح', b: 'البرتقال', attr: 'أغلى', correct: 'a', attr_type: 'price'},
+    {a: 'البطيخ', b: 'الكرز', attr: 'أكبر', correct: 'a', attr_type: 'size'},
+    {a: 'الريشة', b: 'البطيخ', attr: 'أخف', correct: 'a', attr_type: 'weight'},
+    {a: 'الليمون', b: 'البرتقال', attr: 'أصغر', correct: 'a', attr_type: 'size'},
+    {a: 'العسل', b: 'الماء', attr: 'أغلى', correct: 'a', attr_type: 'price'},
+  ];
+
+  let qi = 0, score = 0;
+
+  function showComp() {
+    if (qi >= comparisons.length) { showGameResult(area, game.id, score, comparisons.length); return; }
+    area.innerHTML = '';
+    updateProgress(qi, comparisons.length);
+    const c = comparisons[qi];
+
+    const compArea = el('div', {class:'compare-area', style:{width:'100%'}});
+    const itemA = el('div', {class:'compare-item'});
+    itemA.innerHTML = `<div class="item-name">${c.a}</div>`;
+    const vs = el('div', {class:'compare-vs', text:'⚖️'});
+    const itemB = el('div', {class:'compare-item'});
+    itemB.innerHTML = `<div class="item-name">${c.b}</div>`;
+    compArea.appendChild(itemA);
+    compArea.appendChild(vs);
+    compArea.appendChild(itemB);
+    area.appendChild(compArea);
+
+    area.appendChild(el('p', {style:{textAlign:'center', fontSize:'20px', fontFamily:'var(--font-heading)', margin:'16px 0', color:'var(--primary-dark)'}, text: `أيهما ${c.attr}؟`}));
+
+    const opts = el('div', {style:{display:'flex', gap:'12px', justifyContent:'center'}});
+    opts.appendChild(el('button', {class:'btn btn-outline', text: c.a, onclick: () => answer('a')}));
+    opts.appendChild(el('button', {class:'btn btn-outline', text: c.b, onclick: () => answer('b')}));
+    area.appendChild(opts);
+
+    async function answer(choice) {
+      opts.querySelectorAll('.btn').forEach(b => b.style.pointerEvents = 'none');
+      if (choice === c.correct) {
+        score++;
+        updateScore(score);
+        opts.children[choice === 'a' ? 0 : 1].classList.replace('btn-outline', 'btn-primary');
+        flyStarFrom(area);
+      } else {
+        opts.children[choice === 'a' ? 0 : 1].style.background = 'var(--error)';
+        opts.children[choice === 'a' ? 0 : 1].style.color = '#fff';
+        opts.children[c.correct === 'a' ? 0 : 1].classList.replace('btn-outline', 'btn-primary');
+      }
+      await sleep(1200);
+      qi++;
+      showComp();
+    }
+  }
+  showComp();
+}
+
+/* ===================================================
+   MARKET ENGINE
+   =================================================== */
+function runMarketEngine(area, game, vocab, patterns) {
+  // Simple market simulation
+  const products = DATA.vocabulary.filter(v => v.subcategory === 'food_item').slice(0, 6);
+  const greetings = DATA.patterns.filter(p => p.category === 'service' || p.category === 'courtesy');
+
+  let step = 0;
+  const steps = [
+    {speaker: 'البائع', text: greetings.find(p => p.id === 'pat_welcome')?.example || 'أهلاً وسهلاً!', response: null},
+    {speaker: 'المشتري', text: 'أنا بحاجة إلى ' + (products[0]?.ar || 'السكر'), response: null},
+    {speaker: 'البائع', text: 'تفضل، بكم تريد؟', response: null},
+    {speaker: 'المشتري', text: 'كيلوغرام واحد من فضلك', response: null},
+    {speaker: 'البائع', text: 'هذا خمس ليرات.', response: null},
+    {speaker: 'المشتري', text: 'شكراً!', response: null},
+  ];
+
+  // MCQ-style market interaction
+  let score = 0;
+  const questions = [];
+
+  // Generate questions from dialogue
+  steps.forEach((s, i) => {
+    if (i % 2 === 1 && i > 0) {
+      const others = shuffle(steps.filter((_,j) => j !== i)).slice(0,3).map(x => x.text);
+      questions.push({
+        prompt: steps[i-1].text,
+        promptSpeaker: steps[i-1].speaker,
+        answer: s.text,
+        options: shuffle([s.text, ...others]),
+        speaker: s.speaker
+      });
+    }
+  });
+
+  let qi = 0;
+  function showStep() {
+    if (qi >= questions.length) { showGameResult(area, game.id, score, questions.length); return; }
+    area.innerHTML = '';
+    updateProgress(qi, questions.length);
+    const q = questions[qi];
+
+    // Show market shelf
+    const shelf = el('div', {class:'market-shelf'});
+    products.slice(0, 3).forEach(p => {
+      const item = el('div', {class:'shelf-item'});
+      const img = getVocabImage(p.id);
+      item.innerHTML = `${img ? '<img src="'+img+'" alt="" onerror="this.style.display=\'none\'">' : '<div style="font-size:28px">🛒</div>'}
+        <div class="shelf-name">${p.ar}</div>`;
+      shelf.appendChild(item);
+    });
+    area.appendChild(shelf);
+
+    // Show the prompt bubble
+    const bubble = el('div', {class:'chat-bubble seller', style:{maxWidth:'100%', marginBottom:'16px'}});
+    bubble.innerHTML = `<div class="chat-speaker">${q.promptSpeaker}</div><div class="chat-text-ar">${q.prompt}</div>`;
+    area.appendChild(bubble);
+
+    area.appendChild(el('p', {text: 'ماذا يقول ' + q.speaker + '؟', style:{textAlign:'center', fontSize:'16px', color:'var(--primary-dark)', marginBottom:'12px'}}));
+
+    // Options
+    const opts = el('div', {class:'mcq-options'});
+    q.options.forEach(opt => {
+      const btn = el('button', {class:'mcq-option', text: opt});
+      btn.onclick = async () => {
+        opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
+        if (opt === q.answer) {
+          btn.classList.add('correct');
+          score++;
+          updateScore(score);
+        } else {
+          btn.classList.add('wrong');
+        }
+        await sleep(1000);
+        qi++;
+        showStep();
+      };
+      opts.appendChild(btn);
+    });
+    area.appendChild(opts);
+  }
+  showStep();
+}
+
+/* ===================================================
+   WRITE ENGINE
+   =================================================== */
+function runWriteEngine(area, game, vocab, patterns) {
+  const items = vocab.length >= 3 ? vocab : DATA.vocabulary.slice(0, 5);
+  const targets = items.slice(0, 5);
+  let qi = 0, score = 0;
+
+  function showWrite() {
+    if (qi >= targets.length) { showGameResult(area, game.id, score, targets.length); return; }
+    area.innerHTML = '';
+    updateProgress(qi, targets.length);
+    const v = targets[qi];
+
+    if (game.id.includes('dictation')) {
+      area.appendChild(el('p', {text: LANG.listen + ' ثم اكتب', style:{textAlign:'center', marginBottom:'12px', color:'var(--text-light)'}}));
+      area.appendChild(el('button', {class:'btn btn-accent btn-block', text: '🔊 ' + LANG.listen, style:{marginBottom:'16px'}, onclick: () => audio.playWord(v.ar)}));
+    } else {
+      area.appendChild(el('div', {class:'write-model', text: v.ar}));
+      area.appendChild(el('p', {text: 'اكتب الكلمة أدناه:', style:{textAlign:'center', marginBottom:'8px', color:'var(--text-light)', fontSize:'14px'}}));
+    }
+
+    const input = el('textarea', {class:'write-input', placeholder: 'اكتب هنا...', rows: '2'});
+    area.appendChild(input);
+
+    area.appendChild(el('button', {class:'btn btn-primary btn-block', text: LANG.check, style:{marginTop:'16px'}, onclick: async () => {
+      const val = input.value.trim();
+      const target = v.ar.replace(/[\u064B-\u065F]/g, '').trim(); // Remove tashkeel for comparison
+      const clean = val.replace(/[\u064B-\u065F]/g, '').trim();
+      if (clean === target || val === v.ar) {
+        score++;
+        updateScore(score);
+        input.style.borderColor = 'var(--success)';
+        flyStarFrom(area);
+      } else {
+        input.style.borderColor = 'var(--error)';
+        addToReview(v.id, 'vocab');
+        // Show correct answer
+        area.appendChild(el('p', {text: v.ar, style:{textAlign:'center', fontFamily:'var(--font-heading)', fontSize:'24px', color:'var(--success)', marginTop:'8px'}}));
+      }
+      await sleep(1500);
+      qi++;
+      showWrite();
+    }}));
+
+    setTimeout(() => input.focus(), 300);
+  }
+  showWrite();
+}
+
+/* ===================================================
+   CONCEPT ENGINE
+   =================================================== */
+function runConceptEngine(area, game, vocab) {
+  const items = vocab.length >= 5 ? vocab.slice(0, 10) : DATA.vocabulary.slice(0, 10);
+  const visited = new Set();
+
+  function renderMap() {
+    area.innerHTML = '';
+    area.appendChild(el('p', {text: 'اضغط على كل بالون لاستكشاف المفردات', style:{textAlign:'center', color:'var(--text-light)', marginBottom:'16px', fontSize:'14px'}}));
+
+    const map = el('div', {class:'concept-map'});
+    items.forEach(v => {
+      const node = el('div', {
+        class: 'concept-node' + (visited.has(v.id) ? ' visited' : ''),
+        onclick: () => {
+          visited.add(v.id);
+          if (!state.vocabSeen.includes(v.id)) { state.vocabSeen.push(v.id); saveState(); }
+          showDetail(v);
+        }
+      });
+      node.innerHTML = `<div class="node-text">${v.ar}</div>`;
+      map.appendChild(node);
+    });
+    area.appendChild(map);
+
+    // Progress
+    const prog = el('p', {style:{textAlign:'center', fontSize:'14px', color:'var(--primary)', marginTop:'16px'}});
+    prog.textContent = toAr(visited.size) + ' / ' + toAr(items.length);
+    area.appendChild(prog);
+
+    if (visited.size === items.length) {
+      area.appendChild(el('button', {class:'btn btn-primary btn-block', text: LANG.finish, style:{marginTop:'16px'}, onclick: () => {
+        completeGame(game.id, 3);
+        fireConfetti();
+        showGameResult(area, game.id, items.length, items.length);
+      }}));
+    }
+  }
+
+  function showDetail(v) {
+    area.innerHTML = '';
+    const card = el('div', {class:'card', style:{textAlign:'center', padding:'24px'}});
+    const img = getVocabImage(v.id);
+    card.innerHTML = `
+      ${img ? '<img src="'+img+'" style="width:100px;height:100px;object-fit:cover;border-radius:12px;margin-bottom:12px;" onerror="this.style.display=\'none\'">' : ''}
+      <div style="font-family:var(--font-heading);font-size:36px;color:var(--primary-dark);margin-bottom:8px;">${v.ar}</div>
+      <div class="tr-only" style="font-size:18px;color:var(--text-light);margin-bottom:8px;">${v.tr}</div>
+      ${v.example ? '<div style="font-size:16px;padding:12px;background:var(--bg);border-radius:8px;line-height:1.8;">'+v.example+'</div>' : ''}
+    `;
+    card.appendChild(el('button', {class:'btn btn-accent btn-sm', text:'🔊', style:{marginTop:'12px'}, onclick: () => audio.playWord(v.ar)}));
+    area.appendChild(card);
+    area.appendChild(el('button', {class:'btn btn-outline btn-block', text: LANG.back, style:{marginTop:'16px'}, onclick: renderMap}));
+  }
+  renderMap();
+}
+
+/* ===================================================
+   TABLE ENGINE
+   =================================================== */
+function runTableEngine(area, game, vocab, patterns) {
+  const foodItems = DATA.vocabulary.filter(v => v.subcategory === 'food_item').slice(0, 6);
+  const prices = ['٣', '٥', '٧', '١٠', '١٢', '١٥'];
+
+  // Build data table
+  area.innerHTML = '';
+  const table = el('table', {class:'data-table'});
+  table.innerHTML = `<thead><tr><th>المنتج</th><th>السعر (₺)</th><th>الكمية</th></tr></thead>`;
+  const tbody = el('tbody');
+  foodItems.forEach((v, i) => {
+    const tr = el('tr');
+    tr.innerHTML = `<td style="font-family:var(--font-heading)">${v.ar}</td><td>${prices[i] || '٥'}</td><td>${toAr(i + 1)}</td>`;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  area.appendChild(table);
+
+  // Questions about the table
+  const questions = [
+    {q: `ما سعر ${foodItems[0]?.ar || 'السكر'}؟`, answer: prices[0] || '٣', options: shuffle([prices[0]||'٣', prices[1]||'٥', prices[2]||'٧', prices[3]||'١٠'])},
+    {q: `أي منتج هو الأغلى؟`, answer: foodItems[foodItems.length-1]?.ar || 'الخبز', options: shuffle(foodItems.slice(-4).map(v=>v.ar))},
+    {q: `كم عدد المنتجات في الجدول؟`, answer: toAr(foodItems.length), options: shuffle([toAr(foodItems.length), toAr(3), toAr(8), toAr(10)])},
+  ];
+
+  let qi = 0, score = 0;
+  const qArea = el('div', {style:{marginTop:'20px', width:'100%'}});
+  area.appendChild(qArea);
+
+  function showTableQ() {
+    if (qi >= questions.length) { showGameResult(area, game.id, score, questions.length); return; }
+    qArea.innerHTML = '';
+    const q = questions[qi];
+    qArea.appendChild(el('p', {text: q.q, style:{fontFamily:'var(--font-heading)', fontSize:'20px', textAlign:'center', marginBottom:'12px', color:'var(--primary-dark)'}}));
+    const opts = el('div', {class:'mcq-options'});
+    q.options.forEach(opt => {
+      const btn = el('button', {class:'mcq-option', text: opt});
+      btn.onclick = async () => {
+        opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
+        if (opt === q.answer) { btn.classList.add('correct'); score++; updateScore(score); }
+        else { btn.classList.add('wrong'); }
+        await sleep(1000);
+        qi++;
+        showTableQ();
+      };
+      opts.appendChild(btn);
+    });
+    qArea.appendChild(opts);
+  }
+  showTableQ();
+}
+
+/* ===================================================
+   SEARCH ENGINE (Word Search)
+   =================================================== */
+function runSearchEngine(area, game, vocab) {
+  if (game.id === 'self_checklist' || game.id === 'checklist_scan') {
+    runChecklistEngine(area, game, vocab);
+    return;
+  }
+
+  // Word Search grid
+  const words = (vocab.length >= 4 ? vocab : DATA.vocabulary).slice(0, 5).map(v => v.ar.replace(/ال/,''));
+  const gridSize = 8;
+  const grid = Array.from({length: gridSize}, () => Array(gridSize).fill(''));
+  const arabicLetters = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'.split('');
+
+  // Place words horizontally (RTL grid)
+  const placedWords = [];
+  words.forEach(word => {
+    const chars = word.split('');
+    if (chars.length > gridSize) return;
+    for (let attempt = 0; attempt < 20; attempt++) {
+      const row = Math.floor(Math.random() * gridSize);
+      const col = Math.floor(Math.random() * (gridSize - chars.length + 1));
+      let fits = true;
+      for (let i = 0; i < chars.length; i++) {
+        if (grid[row][col+i] !== '' && grid[row][col+i] !== chars[i]) { fits = false; break; }
+      }
+      if (fits) {
+        for (let i = 0; i < chars.length; i++) grid[row][col+i] = chars[i];
+        placedWords.push({word, row, col, len: chars.length});
+        break;
+      }
+    }
+  });
+
+  // Fill blanks
+  for (let r = 0; r < gridSize; r++)
+    for (let c = 0; c < gridSize; c++)
+      if (!grid[r][c]) grid[r][c] = arabicLetters[Math.floor(Math.random()*arabicLetters.length)];
+
+  const found = new Set();
+  let selecting = false, selStart = null, selected = new Set();
+
+  function renderWS() {
+    area.innerHTML = '';
+    area.appendChild(el('p', {text: 'ابحث عن الكلمات المخفية في الشبكة', style:{textAlign:'center', fontSize:'14px', color:'var(--text-light)', marginBottom:'12px'}}));
+
+    const wsGrid = el('div', {class:'ws-grid', style:{gridTemplateColumns: `repeat(${gridSize}, 1fr)`}});
+    for (let r = 0; r < gridSize; r++) {
+      for (let c = 0; c < gridSize; c++) {
+        const key = r + ',' + c;
+        const isFound = found.has(key);
+        const isSel = selected.has(key);
+        const cell = el('div', {class:'ws-cell' + (isFound ? ' found' : '') + (isSel ? ' selected' : ''), text: grid[r][c], 'data-r': String(r), 'data-c': String(c)});
+        cell.onclick = () => {
+          if (isFound) return;
+          if (selected.has(key)) selected.delete(key); else selected.add(key);
+          renderWS();
+          // Check if selection matches any word
+          checkSelection();
+        };
+        wsGrid.appendChild(cell);
+      }
+    }
+    area.appendChild(wsGrid);
+
+    // Word list
+    const wl = el('div', {class:'ws-word-list'});
+    placedWords.forEach(pw => {
+      const isFound = found.has(pw.row + ',' + pw.col);
+      wl.appendChild(el('span', {class:'ws-word' + (isWordFound(pw) ? ' found' : ''), text: pw.word}));
+    });
+    area.appendChild(wl);
+
+    // Check btn
+    area.appendChild(el('button', {class:'btn btn-primary btn-sm', text: 'مسح التحديد', style:{marginTop:'12px'}, onclick: () => { selected.clear(); renderWS(); }}));
+  }
+
+  function isWordFound(pw) {
+    for (let i = 0; i < pw.len; i++) {
+      if (!found.has(pw.row + ',' + (pw.col + i))) return false;
+    }
+    return true;
+  }
+
+  function checkSelection() {
+    placedWords.forEach(pw => {
+      const wordCells = [];
+      for (let i = 0; i < pw.len; i++) wordCells.push(pw.row + ',' + (pw.col + i));
+      if (wordCells.every(k => selected.has(k))) {
+        wordCells.forEach(k => found.add(k));
+        selected.clear();
+        updateScore(found.size);
+        renderWS();
+        if (placedWords.every(pw2 => isWordFound(pw2))) {
+          setTimeout(() => showGameResult(area, game.id, placedWords.length, placedWords.length), 600);
+        }
+      }
+    });
+  }
+  renderWS();
+}
+
+function runChecklistEngine(area, game, vocab) {
+  // Self-checklist: checkboxes
+  const items = game.objective_tr ? game.objective_tr.split(/[،,]/).map(s => s.trim()).filter(Boolean) :
+    vocab.slice(0, 6).map(v => v.ar + ' - ' + v.tr);
+  const checked = new Set();
+
+  function renderChecklist() {
+    area.innerHTML = '';
+    area.appendChild(el('p', {text: game.title_tr, style:{fontFamily:'var(--font-heading)', fontSize:'20px', textAlign:'center', color:'var(--primary-dark)', marginBottom:'16px'}}));
+
+    items.forEach((item, i) => {
+      const row = el('div', {class:'checklist-item' + (checked.has(i) ? ' checked' : ''), onclick: () => {
+        if (checked.has(i)) checked.delete(i); else checked.add(i);
+        renderChecklist();
+      }});
+      row.innerHTML = `<div class="check-box">${checked.has(i) ? '✓' : ''}</div><div class="check-text">${item}</div>`;
+      area.appendChild(row);
+    });
+
+    if (checked.size === items.length) {
+      area.appendChild(el('button', {class:'btn btn-primary btn-block', text: LANG.finish, style:{marginTop:'16px'}, onclick: () => {
+        completeGame(game.id, 3);
+        showGameResult(area, game.id, items.length, items.length);
+      }}));
+    }
+  }
+  renderChecklist();
+}
+
+/* ===================================================
+   EXAM ENGINE
+   =================================================== */
+function runExamEngine(area, game, vocab, patterns) {
+  // Mixed question types
+  const allVocab = vocab.length >= 8 ? vocab : DATA.vocabulary.slice(0, 15);
+  const questions = [];
+  const qCount = 10;
+
+  for (let i = 0; i < qCount; i++) {
+    const v = allVocab[i % allVocab.length];
+    const others = allVocab.filter(x => x.id !== v.id);
+    if (i % 3 === 0) {
+      // MCQ: Arabic -> Turkish
+      const distractors = pick(others, 3).map(x => x.tr);
+      questions.push({type:'mcq', question: 'ما معنى "' + v.ar + '"؟', answer: v.tr, options: shuffle([v.tr, ...distractors]), vocabId: v.id});
+    } else if (i % 3 === 1) {
+      // MCQ: Turkish -> Arabic
+      const distractors = pick(others, 3).map(x => x.ar);
+      questions.push({type:'mcq', question: '"' + v.tr + '" بالعربية:', answer: v.ar, options: shuffle([v.ar, ...distractors]), vocabId: v.id});
+    } else {
+      // True/False
+      const isTrue = Math.random() > 0.5;
+      const shownTr = isTrue ? v.tr : (pick(others, 1)[0]?.tr || 'خطأ');
+      questions.push({type:'tf', question: `"${v.ar}" = "${shownTr}"`, answer: isTrue ? 'صحيح' : 'خطأ', options: ['صحيح', 'خطأ'], vocabId: v.id});
+    }
+  }
+
+  let qi = 0, score = 0;
+  function showExamQ() {
+    if (qi >= questions.length) { showGameResult(area, game.id, score, questions.length); return; }
+    area.innerHTML = '';
+    updateProgress(qi, questions.length);
+    const q = questions[qi];
+
+    area.appendChild(el('div', {style:{textAlign:'center', marginBottom:'16px'}},
+      [el('span', {text: LANG.question + ' ' + toAr(qi+1) + ' ' + LANG.of + ' ' + toAr(questions.length), style:{fontSize:'13px', color:'var(--text-light)'}})]
+    ));
+    area.appendChild(el('div', {text: q.question, style:{fontFamily:'var(--font-heading)', fontSize:'22px', textAlign:'center', color:'var(--primary-dark)', lineHeight:'2', marginBottom:'16px'}}));
+
+    const opts = el('div', {class:'mcq-options'});
+    q.options.forEach(opt => {
+      const btn = el('button', {class:'mcq-option', text: opt});
+      btn.onclick = async () => {
+        opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
+        if (opt === q.answer) {
+          btn.classList.add('correct');
+          score++;
+          updateScore(score);
+        } else {
+          btn.classList.add('wrong');
+          addToReview(q.vocabId, 'vocab');
+        }
+        await sleep(1000);
+        qi++;
+        showExamQ();
+      };
+      opts.appendChild(btn);
+    });
+    area.appendChild(opts);
+  }
+  showExamQ();
+}
+
+/* ===================================================
+   ASSESSMENT SCREEN
+   =================================================== */
+function renderAssessment(container, assessId) {
+  const assess = DATA.assessments.find(a => a.id === assessId);
+  if (!assess) { navigate('home'); return; }
+
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
+
+  const card = el('div', {class:'card', style:{textAlign:'center', padding:'24px'}});
+  card.innerHTML = `
+    <h3 style="font-family:var(--font-heading);font-size:24px;color:var(--primary-dark);margin-bottom:12px;">${assessTitle(assess)}</h3>
+    <p style="color:var(--text-light);font-size:14px;margin-bottom:16px;">${assess.components_tr ? assess.components_tr.join(' | ') : ''}</p>
+    <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">${assess.success_criteria_tr || ''}</p>
+  `;
+  card.appendChild(el('button', {class:'btn btn-primary btn-block', text: LANG.start, onclick: () => {
+    // Use exam engine for assessment
+    const game = {id: assessId, title_tr: assessTitle(assess), book_pages: [1,2,3,4,5,6,7,8,9,10]};
+    const assessScreen = el('div', {class:'screen active'});
+    assessScreen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => navigate('home')}));
+    assessScreen.appendChild(el('div', {class:'game-header', html: `<div class="game-title">📋 ${assessTitle(assess)}</div><div class="game-score">⭐ <span id="scoreNum">٠</span></div>`}));
+    assessScreen.appendChild(el('div', {class:'game-progress-bar', html:'<div class="game-progress-fill" id="gameProg" style="width:0%"></div>'}));
+    const gameArea = el('div', {class:'game-area', id:'gameArea'});
+    assessScreen.appendChild(gameArea);
+    container.innerHTML = '';
+    container.appendChild(assessScreen);
+    runExamEngine(gameArea, game, DATA.vocabulary.slice(0, 20), DATA.patterns);
+  }}));
+  screen.appendChild(card);
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   REVIEW SCREEN
+   =================================================== */
+function renderReview(container) {
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => navigate('home')}));
+
+  const sh = el('div', {class:'section-header'});
+  sh.innerHTML = `<h3>🔄 ${LANG.review}</h3><div class="line"></div>`;
+  screen.appendChild(sh);
+
+  if (state.mistakeBucket.length === 0) {
+    screen.appendChild(el('div', {style:{textAlign:'center', padding:'48px', color:'var(--text-light)'}}, [
+      el('div', {text:'🎉', style:{fontSize:'48px', marginBottom:'12px'}}),
+      el('p', {text: LANG.no_review})
+    ]));
+  } else {
+    // Show review cards
+    const items = state.mistakeBucket.slice(0, 10);
+    items.forEach(item => {
+      const v = getVocabById(item.id);
+      if (!v) return;
+      const card = el('div', {class:'card vocab-list-item', onclick: () => navigate('vocab/' + v.id)});
+      card.innerHTML = `
+        <span class="vl-ar">${v.ar}</span>
+        <span style="font-size:12px;color:var(--error);margin-right:8px;">×${toAr(item.count)}</span>
+        <span class="vl-tr tr-only">${v.tr}</span>
+      `;
+      screen.appendChild(card);
+    });
+
+    // Quick review game
+    screen.appendChild(el('button', {class:'btn btn-primary btn-block', text: '⚡ مراجعة سريعة', style:{marginTop:'16px'}, onclick: () => {
+      const reviewVocab = state.mistakeBucket.map(m => getVocabById(m.id)).filter(Boolean);
+      if (reviewVocab.length < 4) { showToast('تحتاج إلى ٤ كلمات على الأقل'); return; }
+      navigate('game/diagnostic_quick_check');
+    }}));
+  }
+
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   PROFILE SCREEN
+   =================================================== */
+function renderProfile(container) {
+  const screen = el('div', {class:'screen active'});
+  screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => navigate('home')}));
+
+  const sh = el('div', {class:'section-header'});
+  sh.innerHTML = `<h3>👤 ${LANG.profile}</h3><div class="line"></div>`;
+  screen.appendChild(sh);
+
+  // Stats
+  const statsCard = el('div', {class:'card'});
+  const totalStars = getTotalStars();
+  const maxStars = getMaxStars();
+  statsCard.innerHTML = `
+    <div class="profile-stat">
+      <div class="stat-icon">⭐</div>
+      <div>
+        <div class="stat-value">${toAr(totalStars)} / ${toAr(maxStars)}</div>
+        <div class="stat-label">${LANG.total_stars}</div>
+      </div>
+    </div>
+    <div class="profile-stat">
+      <div class="stat-icon">🎮</div>
+      <div>
+        <div class="stat-value">${toAr(state.completedGames.length)} / ${toAr(DATA.games.length)}</div>
+        <div class="stat-label">${LANG.activities}</div>
+      </div>
+    </div>
+    <div class="profile-stat">
+      <div class="stat-icon">📚</div>
+      <div>
+        <div class="stat-value">${toAr(state.vocabSeen.length)} / ${toAr(DATA.vocabulary.length)}</div>
+        <div class="stat-label">${LANG.vocabulary}</div>
+      </div>
+    </div>
+  `;
+  screen.appendChild(statsCard);
+
+  // Module progress
+  const progSh = el('div', {class:'section-header'});
+  progSh.innerHTML = `<h3>${LANG.module_progress}</h3><div class="line"></div>`;
+  screen.appendChild(progSh);
+
+  DATA.modules.forEach((mod, i) => {
+    const prog = getModuleProgress(mod.id);
+    const bar = el('div', {class:'card', style:{padding:'12px'}});
+    bar.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:14px;font-weight:600;">${toAr(i+1)}. ${(MODULE_AR[mod.id]?.title || mod.title_tr).substring(0, 30)}</span>
+        <span style="font-size:13px;color:var(--primary);font-weight:700;">${toAr(prog)}%</span>
+      </div>
+      <div style="height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden;">
+        <div style="height:100%;width:${prog}%;background:linear-gradient(to left,var(--accent),var(--primary));border-radius:4px;transition:width .4s;"></div>
+      </div>
+    `;
+    screen.appendChild(bar);
+  });
+
+  // Badges
+  const badgeSh = el('div', {class:'section-header'});
+  badgeSh.innerHTML = `<h3>${LANG.badges_title}</h3><div class="line"></div>`;
+  screen.appendChild(badgeSh);
+
+  const badgeGrid = el('div', {class:'badge-grid'});
+  BADGE_DEFS.forEach(b => {
+    const earned = state.badges.includes(b.id);
+    const item = el('div', {class:'badge-item' + (earned ? '' : ' locked')});
+    item.innerHTML = `
+      <div class="badge-icon">${b.icon}</div>
+      <div class="badge-name">${b.name_ar}</div>
+      ${state.lang === 'tr' ? '<div style="font-size:10px;color:var(--text-light);">'+b.name_tr+'</div>' : ''}
+    `;
+    badgeGrid.appendChild(item);
+  });
+  screen.appendChild(badgeGrid);
+
+  // Difficult words
+  if (state.mistakeBucket.length > 0) {
+    const diffSh = el('div', {class:'section-header'});
+    diffSh.innerHTML = `<h3>${LANG.difficult_words}</h3><div class="line"></div>`;
+    screen.appendChild(diffSh);
+
+    const sorted = [...state.mistakeBucket].sort((a,b) => b.count - a.count).slice(0, 5);
+    sorted.forEach(m => {
+      const v = getVocabById(m.id);
+      if (!v) return;
+      screen.appendChild(el('div', {class:'card', style:{padding:'12px', display:'flex', justifyContent:'space-between', alignItems:'center'}}, [
+        el('span', {text: v.ar, style:{fontFamily:'var(--font-heading)', fontSize:'20px'}}),
+        el('span', {text: '×' + toAr(m.count), style:{color:'var(--error)', fontSize:'14px', fontWeight:'700'}})
+      ]));
+    });
+  }
+
+  // Reset
+  screen.appendChild(el('button', {class:'btn btn-outline btn-block', text: '🗑️ ' + LANG.reset, style:{marginTop:'32px', borderColor:'var(--error)', color:'var(--error)'}, onclick: () => {
+    if (confirm(LANG.confirm_reset || 'Reset all progress?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      loadState();
+      saveState();
+      navigate('home');
+    }
+  }}));
+
+  container.appendChild(screen);
+}
+
+/* ===================================================
+   EFFECTS: Confetti, Star Fly, Toast
+   =================================================== */
+function fireConfetti() {
+  const box = document.getElementById('confettiBox');
+  const colors = ['#F4A623','#E74C3C','#27AE60','#3498DB','#9B59B6','#1B7A4D'];
+  for (let i = 0; i < 30; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.width = (6 + Math.random()*8) + 'px';
+    piece.style.height = (6 + Math.random()*8) + 'px';
+    box.appendChild(piece);
+  }
+  setTimeout(() => { box.innerHTML = ''; }, 2000);
+}
+
+function flyStarFrom(element) {
+  const star = document.createElement('div');
+  star.className = 'star-fly';
+  star.textContent = '⭐';
+  const rect = element.getBoundingClientRect ? element.getBoundingClientRect() : {left: window.innerWidth/2, top: window.innerHeight/2};
+  star.style.left = rect.left + rect.width/2 + 'px';
+  star.style.top = (rect.top || 200) + 'px';
+  document.body.appendChild(star);
+  setTimeout(() => star.remove(), 1100);
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+/* ===================================================
+   TOP BAR EVENT HANDLERS
+   =================================================== */
+document.getElementById('langToggle').addEventListener('click', () => {
+  state.lang = state.lang === 'ar' ? 'tr' : 'ar';
+  document.body.classList.toggle('show-tr', state.lang === 'tr');
+  saveState();
+  render();
+});
+
+document.getElementById('soundToggle').addEventListener('click', () => {
+  state.soundOn = !state.soundOn;
+  document.getElementById('soundToggle').textContent = state.soundOn ? '🔊' : '🔇';
+  saveState();
+});
+
+// Init lang display
+if (state.lang === 'tr') document.body.classList.add('show-tr');
+
+/* ===================================================
+   SERVICE WORKER REGISTRATION
+   =================================================== */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+/* ===================================================
+   INITIAL RENDER
+   =================================================== */
+render();
+
+// Speech synthesis voices load async
+if (window.speechSynthesis) {
+  speechSynthesis.onvoiceschanged = () => {};
+}
+</script>
+</body>
+</html>
