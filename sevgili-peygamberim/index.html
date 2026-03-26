@@ -4,286 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sevgili Peygamberim ﷺ — Kitabı Keşfet</title>
-<meta name="description" content="Sevgili Peygamberim kitabını interaktif keşfedin. 72 bölüm, 336 alt konu, 20 quiz, kişi kartları ve haritalarla Peygamber Efendimiz'in hayatı.">
+<meta name="description" content="Sevgili Peygamberim kitabını interaktif keşfedin. 72 bölüm, 336 alt konu, 20 quiz, kişi kartları, zaman çizelgesi ve haritalarla Peygamber Efendimiz sallallahü aleyhi ve sellemin hayatı.">
 <link rel="canonical" href="https://raufenc.com/sevgili-peygamberim/" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Sevgili Peygamberim ﷺ — Kitabı Keşfet">
+<meta property="og:description" content="Prof. Dr. Ramazan Ayvallı'nın 705 sayfalık eserini interaktif olarak keşfedin. 72 bölüm, harita, quiz ve daha fazlası.">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://raufenc.com/sevgili-peygamberim/">
+<meta property="og:locale" content="tr_TR">
+
+<!-- JSON-LD Book Schema -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Sevgili Peygamberim ﷺ — Kitabı Keşfet",
+  "description":"Prof. Dr. Ramazan Ayvallı'nın Sevgili Peygamberim kitabının interaktif keşif platformu.",
+  "about":{
+    "@type":"Book",
+    "name":"Sevgili Peygamberim",
+    "author":{"@type":"Person","name":"Prof. Dr. Ramazan Ayvallı"},
+    "numberOfPages":705,
+    "bookEdition":"3. Baskı",
+    "datePublished":"2021",
+    "inLanguage":"tr"
+  }
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<style>
-:root{--g1:#0A2E22;--g2:#0D3B2E;--g3:#1A5C48;--g4:#2A7A62;--gold:#C9A84C;--gl:#E8D48B;--gd:#A08030;--iv:#FAF6EE;--sand:#E8DFD0;--sd:#C8B89A;--tx:#1A1A18;--tx2:#4A4A42;--tx3:#8A8A7A;--w:#FFF;--red:#C0522B;--blue:#2B5F8E;--r:12px;--rl:20px}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--iv);color:var(--tx);line-height:1.8;overflow-x:hidden}
-
-.progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--g4));z-index:9999;width:0%;transition:width .15s}
-nav{position:fixed;top:3px;left:0;right:0;z-index:1000;padding:0 1rem;transition:all .3s}
-nav.scrolled{background:rgba(10,46,34,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,.2)}
-.nav-in{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px}
-.logo{font-family:'Amiri',serif;color:var(--gold);font-size:1.1rem;font-weight:700;text-decoration:none}
-.nav-ch{font-family:'Amiri',serif;color:var(--gl);font-size:.82rem;font-style:italic;opacity:0;transition:opacity .3s;flex:1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 1rem}
-.nav-ch.show{opacity:1}
-.nav-r{display:flex;gap:.3rem}
-.nav-r a{color:var(--sd);text-decoration:none;font-size:.72rem;font-weight:500;padding:.3rem .5rem;border-radius:6px;transition:all .2s;white-space:nowrap}
-.nav-r a:hover,.nav-r a.active{color:var(--gold);background:rgba(201,168,76,.1)}
-.hamburger{display:none;background:none;border:none;color:var(--gold);font-size:1.3rem;cursor:pointer}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,var(--g1),#071E17);color:var(--iv);padding:5rem 2rem;position:relative}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(201,168,76,.06) 0%,transparent 70%)}
-.hero>*{position:relative;z-index:1}
-.hero .bis{font-family:'Amiri',serif;font-size:clamp(1.1rem,2.2vw,1.5rem);color:var(--gl);opacity:.7;margin-bottom:1.5rem;letter-spacing:2px}
-.hero h1{font-family:'Amiri',serif;font-size:clamp(2.2rem,5.5vw,4rem);color:var(--gold);margin-bottom:.3rem;line-height:1.2}
-.hero .sal{font-family:'Amiri',serif;font-size:clamp(.9rem,1.8vw,1.2rem);color:var(--gl);font-style:italic;margin-bottom:1.5rem}
-.hero .sub{font-size:.92rem;color:var(--sand);max-width:580px;margin:0 auto 1.5rem;line-height:1.9}
-.hero .stats{display:flex;gap:2rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0}
-.hero .stat{text-align:center}
-.hero .stat b{display:block;font-family:'Amiri',serif;font-size:1.8rem;color:var(--gold)}
-.hero .stat span{font-size:.72rem;color:var(--sd)}
-.hero .auth{font-size:.78rem;color:var(--sd);margin:1rem 0}
-.scroll-h{animation:bounce 2s infinite;color:var(--gold);font-size:1.5rem;margin-top:1.5rem;opacity:.5}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-
-/* QUICK NAV */
-.qnav{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;max-width:900px;margin:2rem auto 0;padding:0 1rem}
-.qnav a{display:flex;flex-direction:column;align-items:center;gap:.3rem;background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.15);border-radius:var(--r);padding:.8rem .6rem;font-size:.7rem;color:var(--sand);text-decoration:none;transition:all .2s;min-width:80px;text-align:center}
-.qnav a:hover{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
-.qnav a .qi{font-size:1.4rem;display:block}
-
-/* SECTION */
-.sec{padding:0;position:relative}
-.ch-head{padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .3s;position:relative}
-.ch-head.dark{background:var(--g1);color:var(--iv)}
-.ch-head.gold{background:linear-gradient(135deg,#2A1F0A,#1A150A);color:var(--gold)}
-.ch-head.muted{background:#1A1A18;color:var(--sand)}
-.ch-head.dawn{background:linear-gradient(135deg,#1A2A1F,var(--g2));color:var(--iv)}
-.ch-head.blue{background:linear-gradient(135deg,#0A1E2E,#0D2B3B);color:var(--iv)}
-.ch-head .ch-n{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;opacity:.7}
-.ch-head h2{font-family:'Amiri',serif;font-size:clamp(1.5rem,3.5vw,2.5rem);margin-bottom:.3rem;line-height:1.3}
-.ch-head .ch-s{font-size:.88rem;opacity:.7;max-width:500px;margin:0 auto}
-.ch-head .ch-p{font-size:.72rem;color:var(--gd);margin-top:.4rem}
-
-/* REVEAL */
-.rv{opacity:0;transform:translateY(25px);transition:opacity .6s,transform .6s}.rv.vis{opacity:1;transform:none}
-
-/* CHAPTER CONTENT AREA */
-.ch-body{max-width:850px;margin:0 auto;padding:2rem 2rem 3rem}
-
-/* SUB ENTRY (expandable) */
-.sub-entry{border:1px solid var(--sand);border-radius:var(--r);margin-bottom:.8rem;background:var(--w);overflow:hidden;transition:all .3s}
-.sub-entry:hover{border-color:var(--gold);box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.sub-entry.open{border-color:var(--gold);box-shadow:0 4px 20px rgba(0,0,0,.08)}
-.se-header{display:flex;align-items:flex-start;gap:1rem;padding:1rem 1.2rem;cursor:pointer;transition:background .2s}
-.se-header:hover{background:rgba(201,168,76,.03)}
-.se-arrow{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--gold);transition:transform .3s;flex-shrink:0;margin-top:.15rem}
-.sub-entry.open .se-arrow{transform:rotate(90deg)}
-.se-info{flex:1;min-width:0}
-.se-title{font-family:'Crimson Text',serif;font-size:1.05rem;font-weight:700;color:var(--g2);margin-bottom:.15rem}
-.se-summary{font-size:.85rem;color:var(--tx2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.se-page{font-size:.68rem;color:var(--gd);font-weight:500;margin-top:.3rem}
-.se-body{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 1.2rem}
-.sub-entry.open .se-body{max-height:none;padding:0 1.2rem 1.2rem}
-.sub-entry.open .se-summary{display:none}
-.se-full{font-size:.9rem;color:var(--tx2);line-height:1.8;white-space:pre-line;border-top:1px solid var(--sand);padding-top:1rem;margin-top:.5rem}
-
-/* MAIN CHAPTER INTRO */
-.ch-intro{font-size:.95rem;color:var(--tx2);line-height:1.8;margin-bottom:1.5rem;text-align:justify}
-.ch-intro::first-letter{font-family:'Amiri',serif;font-size:3rem;float:left;line-height:.85;margin-right:.4rem;color:var(--g2);font-weight:700}
-
-/* QUOTE */
-.qb{max-width:750px;margin:1.5rem auto;padding:1.2rem 1.5rem;border-left:4px solid var(--gold);background:var(--w);border-radius:0 var(--r) var(--r) 0;position:relative}
-.qb::before{content:'\\201C';font-family:'Amiri',serif;font-size:4rem;color:var(--gold);opacity:.15;position:absolute;top:-.5rem;left:.3rem;line-height:1}
-.qb .qt{font-family:'Crimson Text',serif;font-size:1.05rem;color:var(--g2);font-style:italic;line-height:1.7}
-.qb .qs{font-size:.8rem;color:var(--tx2);font-weight:600;margin-top:.4rem}
-.qb .qr{font-size:.68rem;color:var(--gd);margin-top:.2rem}
-
-/* HADITH */
-.hd{max-width:750px;margin:1.5rem auto;padding:1.2rem 1.5rem;background:linear-gradient(135deg,var(--g1),var(--g2));border-radius:var(--r);color:var(--iv);text-align:center;border:1px solid rgba(201,168,76,.15)}
-.hd .ht{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gl);line-height:1.7;font-style:italic}
-.hd .hs{font-size:.78rem;color:var(--sd);margin-top:.3rem}
-.hd .hr{font-size:.68rem;color:var(--gd);margin-top:.2rem}
-
-/* STICKY TOC SIDEBAR */
-.toc-toggle{position:fixed;left:1rem;bottom:5rem;width:44px;height:44px;border-radius:50%;background:var(--g1);color:var(--gold);border:2px solid var(--gold);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;transition:all .3s;box-shadow:0 2px 10px rgba(0,0,0,.2)}
-.toc-toggle.show{opacity:1}
-.toc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1999}
-.toc-overlay.open{display:block}
-.toc-panel{position:fixed;left:0;top:0;bottom:0;width:320px;background:var(--w);z-index:2000;transform:translateX(-100%);transition:transform .3s;box-shadow:4px 0 20px rgba(0,0,0,.15);overflow-y:auto;padding:1rem}
-.toc-panel.open{transform:translateX(0)}
-.toc-panel h3{font-family:'Amiri',serif;font-size:1.2rem;color:var(--g2);margin-bottom:1rem;padding:.5rem 0;border-bottom:2px solid var(--gold)}
-.toc-panel .tp-close{position:absolute;top:.8rem;right:.8rem;width:28px;height:28px;border-radius:50%;border:none;background:var(--sand);color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem}
-.toc-list a{display:block;padding:.3rem .5rem;font-size:.78rem;color:var(--tx2);text-decoration:none;border-radius:6px;transition:all .15s;line-height:1.4;margin-bottom:.1rem}
-.toc-list a:hover,.toc-list a.active{background:rgba(201,168,76,.1);color:var(--g2)}
-.toc-list a.main{font-weight:700;color:var(--g2);font-size:.82rem;margin-top:.5rem;padding:.4rem .5rem}
-.toc-list a.sub{padding-left:1.5rem;font-size:.75rem}
-
-/* MAP */
-.map-wrapper{position:relative;margin:1rem 2rem}
-.map-wrapper::before{content:'';position:absolute;inset:-4px;border:2px solid var(--gold);border-radius:calc(var(--rl) + 2px);z-index:500;pointer-events:none}
-#map-c{height:600px;border-radius:var(--rl);overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.15),0 0 0 1px rgba(201,168,76,.15)}
-#map-c .leaflet-tile-pane{filter:sepia(.35) saturate(.65) brightness(1.08) contrast(.92)}
-#map-c.fullscreen{position:fixed!important;inset:0!important;z-index:3000!important;height:100vh!important;border-radius:0!important;margin:0!important}
-/* Vignette overlay */
-.map-vignette{position:absolute;inset:0;z-index:400;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(10,30,20,.15) 100%);border-radius:var(--rl)}
-
-/* MAP CONTROLS BAR */
-.map-controls{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin:.8rem auto 0;max-width:900px;padding:0 2rem}
-.map-ctrl-btn{padding:.35rem .9rem;border-radius:18px;border:1px solid var(--sand);background:var(--w);color:var(--tx2);font-size:.72rem;cursor:pointer;transition:all .25s;font-weight:600;letter-spacing:.3px}
-.map-ctrl-btn:hover{border-color:var(--gold);color:var(--g2);transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.06)}
-.map-ctrl-btn.active{background:var(--g2);color:var(--gold);border-color:var(--g2);box-shadow:0 3px 12px rgba(10,30,20,.2)}
-
-/* Map floating buttons */
-.map-float-btn{position:absolute;z-index:800;width:36px;height:36px;border-radius:50%;background:rgba(250,246,238,.95);backdrop-filter:blur(8px);border:1.5px solid rgba(201,168,76,.35);color:var(--g2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 3px 12px rgba(0,0,0,.12)}
-.map-float-btn:hover{background:var(--gold);color:var(--w);transform:scale(1.1);box-shadow:0 4px 16px rgba(201,168,76,.3)}
-.map-fs-btn{top:10px;right:10px;font-size:1.05rem}
-.map-layer-btn{top:52px;right:10px;font-size:.95rem}
-
-/* MAP LEGEND — collapsed by default, click to expand */
-.map-legend{position:absolute;bottom:28px;left:10px;z-index:800;background:rgba(250,246,238,.95);backdrop-filter:blur(8px);border:1.5px solid rgba(201,168,76,.3);border-radius:12px;font-size:.68rem;color:var(--tx2);box-shadow:0 4px 16px rgba(0,0,0,.1);overflow:hidden;transition:all .3s}
-.map-legend.collapsed{padding:.45rem .6rem;cursor:pointer}
-.map-legend.expanded{padding:.6rem .8rem}
-.map-legend-toggle{font-family:'Amiri',serif;font-size:.78rem;color:var(--g2);font-weight:700;display:flex;align-items:center;gap:.3rem;cursor:pointer}
-.map-legend-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.map-legend.expanded .map-legend-body{max-height:200px;margin-top:.3rem;border-top:1px solid rgba(201,168,76,.2);padding-top:.3rem}
-.map-legend-item{display:flex;align-items:center;gap:.4rem;margin:.15rem 0;white-space:nowrap}
-.map-legend-item svg{flex-shrink:0}
-
-/* Pulse animation for holy sites */
-@keyframes holyPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.5)}50%{box-shadow:0 0 0 12px rgba(201,168,76,0)}}
-@keyframes holyGlow{0%,100%{filter:drop-shadow(0 0 4px rgba(201,168,76,.6))}50%{filter:drop-shadow(0 0 10px rgba(201,168,76,.8))}}
-.marker-holy-pulse{animation:holyGlow 3s ease-in-out infinite}
-.marker-mekke .pulse-ring,.marker-medine .pulse-ring{animation:holyPulse 2.5s ease-out infinite}
-
-/* Animated route dashes */
-@keyframes routeFlow{to{stroke-dashoffset:-30}}
-@keyframes routeFlowGold{to{stroke-dashoffset:-40}}
-.map-route-animated{animation:routeFlow 2s linear infinite}
-.map-route-gold{animation:routeFlowGold 3s linear infinite}
-
-/* Battle cluster marker */
-.battle-cluster{width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,rgba(192,82,43,.85),rgba(139,26,26,.9));border:2px solid rgba(255,255,255,.6);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(139,26,26,.35);cursor:pointer;transition:all .25s}
-.battle-cluster:hover{transform:scale(1.15);box-shadow:0 5px 16px rgba(139,26,26,.5)}
-
-/* Labels — cleaner with pill background */
-.map-label{font-size:.62rem;font-weight:600;color:var(--g2);white-space:nowrap;pointer-events:none}
-.map-label span{background:rgba(250,246,238,.85);padding:.1rem .35rem;border-radius:8px;backdrop-filter:blur(3px)}
-.map-label-battle{font-size:.58rem;font-weight:700;color:#8B1A1A;white-space:nowrap;pointer-events:none}
-.map-label-battle span{background:rgba(250,246,238,.85);padding:.1rem .35rem;border-radius:8px}
-.map-label-holy{font-size:.78rem;font-weight:700;color:var(--g1);white-space:nowrap;pointer-events:none}
-.map-label-holy span{background:rgba(201,168,76,.15);padding:.15rem .5rem;border-radius:10px;border:1px solid rgba(201,168,76,.3);backdrop-filter:blur(3px)}
-
-/* Hide minor labels at low zoom, show at higher zoom */
-.map-label-minor{opacity:0;transition:opacity .3s}
-.zoom-detail .map-label-minor{opacity:1}
-
-/* Popup styling */
-.map-popup-title{font-family:'Amiri',serif;font-size:1.1rem;color:var(--g2);font-weight:700;margin-bottom:.15rem}
-.map-popup-type{font-size:.68rem;color:var(--gd);font-weight:600;text-transform:uppercase;letter-spacing:1px}
-.map-popup-date{font-size:.75rem;color:var(--gd);font-style:italic}
-.map-popup-desc{font-size:.82rem;color:var(--tx2);line-height:1.5;margin:.3rem 0}
-.map-popup-btn{background:var(--g2);color:var(--gold);border:none;padding:.35rem .9rem;border-radius:15px;cursor:pointer;font-size:.75rem;font-weight:600;margin-top:.3rem;transition:all .2s}
-.map-popup-btn:hover{background:var(--g1);transform:scale(1.02)}
-
-/* CHAPTER MAP LINK */
-.ch-map-link{display:inline-block;font-size:.72rem;color:var(--gold);cursor:pointer;margin-top:.4rem;padding:.2rem .7rem;border:1px solid rgba(201,168,76,.3);border-radius:15px;transition:all .2s;opacity:.8}
-.ch-map-link:hover{opacity:1;background:rgba(201,168,76,.12);border-color:var(--gold)}
-.ch-highlight{animation:chFlash 2s ease}
-@keyframes chFlash{0%,100%{box-shadow:none}30%{box-shadow:inset 0 0 40px rgba(201,168,76,.25)}60%{box-shadow:inset 0 0 20px rgba(201,168,76,.15)}}
-
-/* PLACE & BATTLE CARDS */
-.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.8rem;max-width:1100px;margin:1rem auto;padding:0 2rem}
-.place-card{background:var(--w);border:1px solid var(--sand);border-radius:var(--r);padding:1rem;cursor:pointer;transition:all .3s;text-align:center}
-.place-card:hover{border-color:var(--gold);box-shadow:0 6px 25px rgba(0,0,0,.07);transform:translateY(-2px)}
-.place-card .pc-icon{font-size:1.5rem;margin-bottom:.3rem}
-.place-card .pc-name{font-family:'Crimson Text',serif;font-size:.95rem;font-weight:700;color:var(--g2)}
-.place-card .pc-type{font-size:.65rem;color:var(--gd);text-transform:uppercase;letter-spacing:1px;margin:.1rem 0 .3rem}
-.place-card .pc-desc{font-size:.78rem;color:var(--tx2);line-height:1.4}
-.place-card .pc-date{font-size:.72rem;color:var(--red);font-weight:600;margin-top:.2rem}
-.place-card.battle{border-left:3px solid var(--red)}
-.place-card.holy{border-left:3px solid var(--gold)}
-.place-tabs{display:flex;justify-content:center;gap:.5rem;margin-bottom:1rem}
-.place-tab{padding:.4rem 1rem;border-radius:20px;border:1px solid var(--sand);background:none;color:var(--tx2);font-size:.78rem;cursor:pointer;transition:all .2s}
-.place-tab.active,.place-tab:hover{background:var(--g2);color:var(--gold);border-color:var(--g2)}
-
-/* PERSON GRID */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;max-width:1100px;margin:1.5rem auto;padding:0 2rem}
-.pc{background:var(--w);border:1px solid var(--sand);border-radius:var(--r);padding:1.2rem;transition:all .3s;cursor:pointer;text-align:center}
-.pc:hover{border-color:var(--gold);box-shadow:0 6px 25px rgba(0,0,0,.07);transform:translateY(-2px)}
-.pc .pa{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--g1),var(--g3));display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;font-size:1.2rem;color:var(--gold);border:2px solid var(--gold)}
-.pc .pn{font-family:'Crimson Text',serif;font-size:1rem;font-weight:700;color:var(--g2)}
-.pc .pr{font-size:.72rem;color:var(--gd);font-weight:600;margin:.15rem 0 .4rem}
-.pc .pd{font-size:.82rem;color:var(--tx2);line-height:1.5}
-.pc .pp{font-size:.68rem;color:var(--tx3);margin-top:.4rem}
-
-/* GLOSSARY */
-.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;max-width:1100px;margin:0 auto;padding:0 2rem}
-.gc{background:var(--w);border:1px solid var(--sand);border-radius:var(--r);padding:1rem;transition:all .2s}
-.gc:hover{border-color:var(--gold)}
-.gc .gt{font-family:'Amiri',serif;font-size:1.05rem;font-weight:700;color:var(--g2)}
-.gc .gd{font-size:.82rem;color:var(--tx2);line-height:1.5;margin-top:.15rem}
-.gc .gp{font-size:.68rem;color:var(--gd);margin-top:.2rem}
-
-/* SEARCH */
-.sbox{max-width:400px;margin:0 auto 1.5rem;position:relative}
-.sbox input{width:100%;padding:.6rem .8rem .6rem 2.2rem;border:2px solid var(--sand);border-radius:25px;font-size:.9rem;background:var(--w);transition:all .3s;font-family:'Inter',sans-serif}
-.sbox input:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px rgba(201,168,76,.12)}
-.sbox::before{content:'\\1F50D';position:absolute;left:.7rem;top:50%;transform:translateY(-50%);font-size:.9rem}
-
-/* QUIZ */
-.quiz-sec{background:linear-gradient(135deg,var(--g1),#071E17);border-radius:var(--rl);padding:2.5rem 2rem;margin:2rem auto;max-width:900px;color:var(--iv)}
-.qa{max-width:620px;margin:0 auto}
-.qprog{display:flex;gap:.2rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
-.qd{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.12);transition:all .3s}
-.qd.done{background:var(--gold)}.qd.cur{background:var(--gold);box-shadow:0 0 6px var(--gold);transform:scale(1.3)}
-.qq{font-family:'Crimson Text',serif;font-size:1.3rem;text-align:center;margin-bottom:1.2rem;color:var(--gl);line-height:1.5}
-.qos{display:grid;gap:.5rem}
-.qo{background:rgba(255,255,255,.05);border:2px solid rgba(201,168,76,.18);border-radius:var(--r);padding:.8rem 1rem;font-size:.9rem;color:var(--sand);cursor:pointer;transition:all .25s;text-align:left}
-.qo:hover{background:rgba(201,168,76,.08);border-color:var(--gold);color:var(--w)}
-.qo.correct{background:rgba(42,122,98,.35);border-color:var(--g4);color:var(--w)}
-.qo.wrong{background:rgba(192,82,43,.25);border-color:var(--red)}
-.qo.dis{pointer-events:none}
-.qf{text-align:center;margin-top:1rem;min-height:2.5rem;font-size:.85rem}
-.qnv{display:flex;justify-content:center;gap:.6rem;margin-top:1.2rem}
-.qnv button{padding:.4rem 1rem;border-radius:20px;border:2px solid var(--gold);background:none;color:var(--gold);font-weight:600;cursor:pointer;transition:all .2s;font-size:.8rem}
-.qnv button:hover{background:var(--gold);color:var(--g1)}
-.qsc{text-align:center;font-family:'Amiri',serif;font-size:1.6rem;color:var(--gold);display:none}
-
-/* SEC HEADER */
-.sh{text-align:center;padding:2.5rem 2rem 1.5rem}
-.sh h2{font-family:'Amiri',serif;font-size:clamp(1.5rem,3vw,2rem);color:var(--g2)}
-.sh p{color:var(--tx2);font-size:.85rem;max-width:500px;margin:.4rem auto 0}
-.gl{width:45px;height:3px;background:var(--gold);margin:.6rem auto;border-radius:2px}
-
-/* MODAL */
-.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
-.mbg.show{display:flex}
-.mdl{background:var(--w);border-radius:var(--rl);max-width:620px;width:100%;max-height:80vh;overflow-y:auto;padding:2rem;position:relative;animation:mIn .25s}
-@keyframes mIn{from{opacity:0;transform:scale(.96) translateY(15px)}to{opacity:1;transform:none}}
-.mx{position:absolute;top:.8rem;right:.8rem;width:30px;height:30px;border-radius:50%;border:none;background:var(--sand);color:var(--tx);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.mx:hover{background:var(--red);color:var(--w)}
-.mdl h3{font-family:'Amiri',serif;font-size:1.4rem;color:var(--g2);margin-bottom:.4rem}
-.mdl p{font-size:.88rem;color:var(--tx2);line-height:1.7;margin-bottom:.5rem}
-
-/* FOOTER */
-footer{background:var(--g1);color:var(--sand);text-align:center;padding:2.5rem 2rem}
-footer .ft{font-family:'Amiri',serif;color:var(--gold);font-size:1.1rem;margin-bottom:.4rem}
-footer .fs{font-size:.78rem}
-footer .fn{font-size:.72rem;color:var(--sd);max-width:550px;margin:.4rem auto 0}
-footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-top:1.2rem}
-
-.to-top{position:fixed;bottom:1.5rem;right:1.5rem;width:42px;height:42px;border-radius:50%;background:var(--g1);color:var(--gold);border:2px solid var(--gold);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:all .3s;z-index:500}
-.to-top.show{opacity:1}
-
-@media(max-width:768px){
-  .nav-r{display:none}.nav-r.open{display:flex;flex-direction:column;position:absolute;top:52px;left:0;right:0;background:var(--g1);padding:.8rem;border-bottom:1px solid var(--gold);z-index:1001}
-  .hamburger{display:block}
-  .pgrid,.ggrid{grid-template-columns:1fr}
-  .qnav{gap:.4rem}.qnav a{min-width:70px;padding:.6rem .4rem}
-  .toc-panel{width:85vw}
-}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<!-- Skip to Content -->
+<a href="#kitap" class="skip-link">Ana içeriğe atla</a>
 
 <div class="progress" id="prog"></div>
 
@@ -292,11 +51,43 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
   <a href="#" class="logo">Sevgili Peygamberim ﷺ</a>
   <span class="nav-ch" id="navCh"></span>
   <div class="nav-r" id="navR">
-    <a href="#harita">Harita</a><a href="#kitap">Kitap</a><a href="#kisiler">Kişiler</a><a href="#sozluk">Sözlük</a><a href="#quiz-s">Quiz</a>
+    <a href="#zaman-cizelgesi">Zaman Çizelgesi</a>
+    <a href="#harita">Harita</a>
+    <a href="#kitap">Kitap</a>
+    <a href="#kisiler">Kişiler</a>
+    <a href="#sozluk">Sözlük</a>
+    <a href="#quiz-s">Quiz</a>
+    <div class="search-shortcut" onclick="openSearch()" role="button" aria-label="Arama aç">🔍 Ara <kbd>Ctrl+K</kbd></div>
   </div>
-  <button class="hamburger" onclick="document.getElementById('navR').classList.toggle('open')">☰</button>
+  <div class="nav-tools">
+    <button class="nav-tool-btn" onclick="openSearch()" aria-label="Kitap içi arama" title="Ara (Ctrl+K)">🔍</button>
+    <button class="nav-tool-btn" id="fontDown" onclick="changeFontSize(-1)" aria-label="Yazı küçült" title="Yazı küçült">A-</button>
+    <button class="nav-tool-btn" id="fontUp" onclick="changeFontSize(1)" aria-label="Yazı büyüt" title="Yazı büyüt">A+</button>
+    <div style="position:relative">
+      <button class="nav-tool-btn" id="themeBtn" onclick="toggleThemeDropdown()" aria-label="Tema değiştir" title="Tema">🎨</button>
+      <div class="theme-dropdown" id="themeDrop">
+        <button class="theme-opt" data-theme="" onclick="setTheme('')">☀️ Açık</button>
+        <button class="theme-opt" data-theme="dark" onclick="setTheme('dark')">🌙 Karanlık</button>
+        <button class="theme-opt" data-theme="sepia" onclick="setTheme('sepia')">📜 Sepya</button>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navR').classList.toggle('open')" aria-label="Menü">☰</button>
 </div>
 </nav>
+
+<!-- GLOBAL ARAMA -->
+<div class="global-search" id="globalSearch" role="dialog" aria-label="Kitap içi arama">
+  <div class="gs-box">
+    <button class="gs-close" onclick="closeSearch()" aria-label="Aramayı kapat">✕</button>
+    <div class="gs-input-wrap">
+      <input class="gs-input" id="gsInput" type="search" placeholder="Kitap içinde ara... (bölüm, konu, kişi, kavram)" autocomplete="off" oninput="doSearch()">
+    </div>
+    <div class="gs-results" id="gsResults">
+      <div class="gs-hint">Aramak için yazmaya başlayın. Bölümler, alt konular, kişiler ve kavramlar arasında arama yapar.</div>
+    </div>
+  </div>
+</div>
 
 <!-- TOC SIDEBAR -->
 <button class="toc-toggle" id="tocBtn" aria-label="İçindekiler" onclick="openToc()">☰</button>
@@ -304,6 +95,10 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
 <div class="toc-panel" id="tocPanel" role="navigation" aria-label="İçindekiler">
   <button class="tp-close" aria-label="Kapat" onclick="closeToc()">✕</button>
   <h3>İçindekiler</h3>
+  <div class="toc-bookmarks" id="tocBookmarks" style="display:none">
+    <h4>🔖 Yer İmleriniz</h4>
+    <div id="tocBmList"></div>
+  </div>
   <div class="toc-list" id="tocList"></div>
 </div>
 
@@ -318,8 +113,15 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
     <div class="stat"><b>705</b><span>Sayfa</span></div>
     <div class="stat"><b>20</b><span>Quiz Sorusu</span></div>
   </div>
-  <p class="auth rv">Kaynak: Prof. Dr. Ramazan Ayvallı — <em>Sevgili Peygamberim</em>, </p>
+  <!-- Okuma İlerlemesi -->
+  <div class="reading-progress rv" id="readingProgress" style="display:none">
+    <div class="rp-bar"><div class="rp-fill" id="rpFill"></div></div>
+    <div class="rp-text" id="rpText">%0 okundu</div>
+  </div>
+  <a href="#" class="rp-resume rv" id="rpResume" style="display:none" onclick="resumeReading(event)">📖 Kaldığınız yerden devam edin</a>
+  <p class="auth rv">Kaynak: Prof. Dr. Ramazan Ayvallı — <em>Sevgili Peygamberim</em>, 3. Baskı, 2021</p>
   <div class="qnav rv">
+    <a href="#zaman-cizelgesi"><span class="qi">📅</span>Zaman Çizelgesi</a>
     <a href="#harita"><span class="qi">🗺️</span>Harita</a>
     <a href="#kitap"><span class="qi">📖</span>Kitabı Keşfet</a>
     <a href="#kisiler"><span class="qi">👤</span>Kişiler</a>
@@ -328,6 +130,12 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
   </div>
   <div class="scroll-h">▼</div>
 </section>
+
+<!-- ZAMAN ÇİZELGESİ -->
+<div class="sh" id="zaman-cizelgesi"><h2>Kronolojik Zaman Çizelgesi</h2><div class="gl"></div><p>Peygamber Efendimiz sallallahü aleyhi ve sellemin hayatındaki önemli olaylar tarih sırasıyla</p></div>
+<div class="timeline-sec">
+  <div class="timeline" id="timeline"></div>
+</div>
 
 <!-- MAP -->
 <div class="sh" id="harita"><h2>Etkileşimli Harita</h2><div class="gl"></div><p>Peygamber Efendimiz sallallahü aleyhi ve sellemin hayatındaki mekânlar, gazâlar ve güzergâhlar</p></div>
@@ -378,7 +186,7 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
 
 <div class="mbg" id="mBg" onclick="if(event.target===this)cM()"><div class="mdl"><button class="mx" onclick="cM()">✕</button><div id="mC"></div></div></div>
 
-<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+<button class="to-top" id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Başa dön">▲</button>
 
 <footer>
   <div class="ft">Sevgili Peygamberim ﷺ — Kitabı Keşfet</div>
@@ -389,24 +197,257 @@ footer .fsal{font-family:'Amiri',serif;color:var(--gold);font-size:1rem;margin-t
 
 <script src="book-data.js"></script>
 <script>
-// ===== MAP DATA (declared early for render loop) =====
+// ===== TEMA & FONT YÖNETİMİ =====
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('sp-theme',t);
+  document.querySelectorAll('.theme-opt').forEach(b=>b.classList.toggle('active',b.dataset.theme===t));
+  document.getElementById('themeDrop').classList.remove('show');
+}
+function toggleThemeDropdown(){document.getElementById('themeDrop').classList.toggle('show')}
+document.addEventListener('click',e=>{if(!e.target.closest('#themeBtn')&&!e.target.closest('#themeDrop'))document.getElementById('themeDrop').classList.remove('show')});
+
+// Başlangıç teması
+(function(){const t=localStorage.getItem('sp-theme');if(t)setTheme(t)})();
+
+// Font boyutu
+let fontLevel=parseInt(localStorage.getItem('sp-font')||'0');
+function changeFontSize(d){
+  fontLevel=Math.max(-3,Math.min(3,fontLevel+d));
+  document.documentElement.style.setProperty('--font-scale',1+fontLevel*0.08);
+  localStorage.setItem('sp-font',fontLevel);
+}
+if(fontLevel!==0)document.documentElement.style.setProperty('--font-scale',1+fontLevel*0.08);
+
+// ===== GLOBAL ARAMA =====
+let searchTimeout;
+function openSearch(){document.getElementById('globalSearch').classList.add('open');document.getElementById('gsInput').focus();document.body.style.overflow='hidden'}
+function closeSearch(){document.getElementById('globalSearch').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch()}
+  if(e.key==='Escape'){closeSearch();cM();closeToc()}
+});
+
+function doSearch(){
+  clearTimeout(searchTimeout);
+  searchTimeout=setTimeout(_runSearch,200);
+}
+function _runSearch(){
+  const q=document.getElementById('gsInput').value.trim().toLowerCase();
+  const res=document.getElementById('gsResults');
+  if(q.length<2){res.innerHTML='<div class="gs-hint">En az 2 karakter yazın.</div>';return}
+  let results=[];
+  // Kitap bölümleri ve alt başlıklar
+  if(typeof BOOK!=='undefined'){
+    BOOK.forEach((ch,ci)=>{
+      if(ch.title.toLowerCase().includes(q)){
+        results.push({type:'chapter',title:ch.title,ch:ci,page:ch.page,snippet:ch.subs.length?ch.subs.length+' alt başlık':''});
+      }
+      ch.subs.forEach((s,si)=>{
+        const inTitle=s.title.toLowerCase().includes(q);
+        const inText=s.full_text&&s.full_text.toLowerCase().includes(q);
+        const inSummary=s.summary&&s.summary.toLowerCase().includes(q);
+        if(inTitle||inText||inSummary){
+          let snippet='';
+          const src=inText?s.full_text:(inSummary?s.summary:s.title);
+          const idx=src.toLowerCase().indexOf(q);
+          if(idx>=0){
+            const start=Math.max(0,idx-40);
+            const end=Math.min(src.length,idx+q.length+60);
+            snippet=(start>0?'...':'')+src.substring(start,end).replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')+(end<src.length?'...':'');
+          }
+          results.push({type:'sub',title:s.title,ch:ci,chTitle:ch.title,page:s.page,snippet});
+        }
+      });
+    });
+  }
+  // Kişiler
+  PPL.forEach((p,i)=>{
+    if(p.n.toLowerCase().includes(q)||p.d.toLowerCase().includes(q)||p.r.toLowerCase().includes(q)){
+      results.push({type:'person',title:p.n,snippet:p.r+' — '+p.d.substring(0,80)+'...',idx:i});
+    }
+  });
+  // Kavramlar
+  TRM.forEach(t=>{
+    if(t.k.toLowerCase().includes(q)||t.d.toLowerCase().includes(q)){
+      results.push({type:'term',title:t.k,snippet:t.d,page:t.s});
+    }
+  });
+
+  if(!results.length){res.innerHTML='<div class="gs-empty">Sonuç bulunamadı.</div>';return}
+  res.innerHTML=results.slice(0,30).map(r=>{
+    const typeLabel=r.type==='chapter'?'Bölüm':r.type==='sub'?'Alt Konu':r.type==='person'?'Kişi':'Kavram';
+    const chInfo=r.chTitle?`<div class="gs-item-ch">${typeLabel} · ${r.chTitle} · s.${r.page}</div>`:`<div class="gs-item-ch">${typeLabel}${r.page?' · s.'+r.page:''}</div>`;
+    return `<div class="gs-item" onclick="goSearchResult('${r.type}',${r.ch||0},${r.idx||0})">${chInfo}<div class="gs-item-title">${escHtml(r.title)}</div><div class="gs-item-snippet">${r.snippet||''}</div></div>`;
+  }).join('');
+}
+function goSearchResult(type,ch,idx){
+  closeSearch();
+  if(type==='chapter'||type==='sub'){scrollToChapter(ch)}
+  else if(type==='person'){sP(idx)}
+  else{document.getElementById('sozluk').scrollIntoView({behavior:'smooth'})}
+}
+
+// ===== OKUMA İLERLEMESİ =====
+let readChapters=new Set();
+try{const s=JSON.parse(localStorage.getItem('sp-read'));if(s)readChapters=new Set(s)}catch(e){}
+let lastChapter=localStorage.getItem('sp-lastCh')||null;
+
+function markChapterRead(ci){
+  readChapters.add(ci);
+  localStorage.setItem('sp-read',JSON.stringify([...readChapters]));
+  localStorage.setItem('sp-lastCh',ci);
+  lastChapter=ci;
+  updateReadingProgress();
+  updateTocReadMarks();
+}
+function updateReadingProgress(){
+  const total=typeof BOOK!=='undefined'?BOOK.length:72;
+  const pct=Math.round(readChapters.size/total*100);
+  const el=document.getElementById('readingProgress');
+  if(readChapters.size>0){
+    el.style.display='flex';
+    document.getElementById('rpFill').style.width=pct+'%';
+    document.getElementById('rpText').textContent='%'+pct+' okundu ('+readChapters.size+'/'+total+')';
+  }
+  // Devam et butonu
+  if(lastChapter!==null){
+    const resume=document.getElementById('rpResume');
+    resume.style.display='inline-block';
+    const ch=typeof BOOK!=='undefined'?BOOK[lastChapter]:null;
+    if(ch)resume.textContent='📖 Devam et: '+ch.title;
+  }
+}
+function resumeReading(e){
+  e.preventDefault();
+  if(lastChapter!==null)scrollToChapter(parseInt(lastChapter));
+}
+function updateTocReadMarks(){
+  document.querySelectorAll('.toc-list a.main').forEach(a=>{
+    const ci=a.dataset.ci;
+    const check=a.querySelector('.toc-read-check');
+    if(ci&&readChapters.has(parseInt(ci))){
+      if(!check){const sp=document.createElement('span');sp.className='toc-read-check';sp.textContent='✓';a.appendChild(sp)}
+    }
+  });
+}
+
+// ===== YER İMLERİ =====
+let bookmarks=new Set();
+try{const s=JSON.parse(localStorage.getItem('sp-bm'));if(s)bookmarks=new Set(s)}catch(e){}
+
+function toggleBookmark(key,title){
+  if(bookmarks.has(key))bookmarks.delete(key);
+  else bookmarks.add(key);
+  localStorage.setItem('sp-bm',JSON.stringify([...bookmarks]));
+  // Buton güncelle
+  document.querySelectorAll(`.se-tool[data-bm="${key}"]`).forEach(b=>{
+    b.classList.toggle('bookmarked',bookmarks.has(key));
+    b.textContent=bookmarks.has(key)?'🔖 Kaydedildi':'🔖 Kaydet';
+  });
+  renderBookmarkList();
+}
+function renderBookmarkList(){
+  const el=document.getElementById('tocBookmarks');
+  const list=document.getElementById('tocBmList');
+  if(bookmarks.size===0){el.style.display='none';return}
+  el.style.display='block';
+  let html='';
+  bookmarks.forEach(key=>{
+    const [ci,si]=key.split('-').map(Number);
+    const ch=BOOK[ci];
+    const sub=ch&&ch.subs&&ch.subs[si];
+    if(sub){
+      html+=`<div class="toc-bm-item" onclick="closeToc();scrollToChapter(${ci})">📖 ${escHtml(sub.title)} <span class="toc-bm-remove" onclick="event.stopPropagation();toggleBookmark('${key}')">✕</span></div>`;
+    }
+  });
+  list.innerHTML=html;
+}
+
+// ===== NOTLAR =====
+let notes={};
+try{const s=JSON.parse(localStorage.getItem('sp-notes'));if(s)notes=s}catch(e){}
+
+function toggleNote(key){
+  const area=document.querySelector(`.se-note-area[data-note="${key}"]`);
+  if(area)area.classList.toggle('show');
+}
+function saveNote(key){
+  const ta=document.querySelector(`.se-note-area[data-note="${key}"] textarea`);
+  if(ta){
+    if(ta.value.trim())notes[key]=ta.value.trim();
+    else delete notes[key];
+    localStorage.setItem('sp-notes',JSON.stringify(notes));
+  }
+}
+function copyNote(key){
+  if(notes[key]){navigator.clipboard.writeText(notes[key]).then(()=>alert('Not kopyalandı!'))}
+}
+
+// ===== ZAMAN ÇİZELGESİ =====
+const TIMELINE_EVENTS=[
+  {year:"M.Ö. 571",title:"Fil Vak'ası",desc:"Ebrehe'nin Kâbe'yi yıkmaya çalışması ve helâki.",era:"mekke",ch:2,major:true},
+  {year:"571",title:"Doğum",desc:"Rebîu'l-evvel 12, Pazartesi gecesi Mekke'de doğdu.",era:"mekke",ch:3,major:true},
+  {year:"575",title:"Sütanneye Verilmesi",desc:"Halîme Hâtun'a verildi. Bereket ve mucizeler başladı.",era:"mekke",ch:4},
+  {year:"576",title:"Annesinin Vefâtı",desc:"Âmine Hâtun Ebvâ'da vefât etti.",era:"mekke",ch:4},
+  {year:"578",title:"Dedesinin Vefâtı",desc:"Abdülmuttalib vefât etti. Amcası Ebû Tâlib'e emanet.",era:"mekke",ch:4},
+  {year:"583",title:"Şam Seferi",desc:"Râhib Bahîra O'nu tanıdı.",era:"mekke",ch:4},
+  {year:"595",title:"Hz. Hadîce ile Evliliği",desc:"25 yaşında evlendi.",era:"mekke",ch:5,major:true},
+  {year:"610",title:"İlk Vahiy — Bi'set",desc:"Hirâ Mağarası'nda 'İkra!' emri geldi.",era:"mekke",ch:6,major:true},
+  {year:"613",title:"Açık Davet",desc:"Safâ tepesinde halka ilk açık davet.",era:"mekke",ch:7},
+  {year:"615",title:"Habeşistan Hicreti",desc:"İlk müslüman muhâcirlerin Habeşistan'a sığınması.",era:"mekke",ch:8},
+  {year:"619",title:"Hüzün Yılı",desc:"Hz. Hadîce ve Ebû Tâlib'in vefâtı.",era:"mekke",ch:10},
+  {year:"620",title:"Mîrâc",desc:"İsrâ ve Mîrâc. Beş vakit namaz emredildi.",era:"mekke",ch:11,major:true},
+  {year:"621",title:"Akabe Bî'atları",desc:"Medîneliler îmân etti. Hicretin yolu açıldı.",era:"mekke",ch:12},
+  {year:"622",title:"Hicret",desc:"Mekke'den Medîne'ye göç. İslâm takviminin başlangıcı.",era:"medine",ch:13,major:true},
+  {year:"622",title:"Mescid-i Nebevî",desc:"İlk mescidin inşâsı.",era:"medine",ch:15},
+  {year:"624",title:"Bedr Gazâsı",desc:"313 sahâbî ile ilk büyük zafer.",era:"gaza",ch:17,major:true},
+  {year:"625",title:"Uhud Gazâsı",desc:"Hz. Hamza şehîd düştü.",era:"gaza",ch:18,major:true},
+  {year:"627",title:"Hendek Gazâsı",desc:"10.000 kişilik ordu hendekle durduruldu.",era:"gaza",ch:23,major:true},
+  {year:"628",title:"Hudeybiye Sulhü",desc:"Müşriklerle barış. Fethin mukaddimesi.",era:"medine",ch:25,major:true},
+  {year:"628",title:"Hayber'in Fethi",desc:"Yahudi kalelerinin fethi.",era:"gaza",ch:27},
+  {year:"629",title:"Mûte Harbi",desc:"Bizans'a karşı ilk büyük savaş.",era:"gaza",ch:29},
+  {year:"630",title:"Mekke'nin Fethi",desc:"10.000 kişilik orduyla kansız fetih.",era:"gaza",ch:30,major:true},
+  {year:"630",title:"Huneyn Gazâsı",desc:"Fetih sonrası Hevâzin ve Sakîf ile savaş.",era:"gaza",ch:31},
+  {year:"630",title:"Tebük Seferi",desc:"Son büyük sefer. 30.000 kişilik ordu.",era:"gaza",ch:32},
+  {year:"632",title:"Vedâ Haccı",desc:"Vedâ Hutbesi okundu. İslâm'ın tamamlanması.",era:"medine",ch:34,major:true},
+  {year:"632",title:"Vefât",desc:"Rebîu'l-evvel 12. Medîne-i Münevvere'de vefât.",era:"medine",ch:36,major:true},
+];
+function renderTimeline(){
+  const el=document.getElementById('timeline');
+  el.innerHTML=TIMELINE_EVENTS.map(e=>{
+    const majorClass=e.major?'major':'';
+    return `<div class="tl-item rv">
+      <div class="tl-content" onclick="scrollToChapter(${e.ch})">
+        <div class="tl-date">${e.year}</div>
+        <div class="tl-title">${e.title}</div>
+        <div class="tl-desc">${e.desc}</div>
+        <span class="tl-era ${e.era}">${e.era==='mekke'?'Mekke Devri':e.era==='medine'?'Medîne Devri':'Gazâ'}</span>
+      </div>
+      <div class="tl-dot ${majorClass}"></div>
+    </div>`;
+  }).join('');
+}
+renderTimeline();
+
+// ===== MAP DATA =====
 const PLACES=[
   {id:"mekke",name:"Mekke-i Mükerreme",type:"holy",desc:"Peygamber Efendimiz sallallahü aleyhi ve sellemin doğduğu, bi'setin başladığı ve fethedilen mübârek şehir.",lat:21.4225,lng:39.8262,chapters:[1,3,4,5,6,7,9,10,30],icon:"🕋"},
   {id:"medine",name:"Medîne-i Münevvere",type:"holy",desc:"Hicret yurdu, Mescid-i Nebevî'nin bulunduğu, İslâm devletinin kurulduğu şehir.",lat:24.4672,lng:39.6112,chapters:[13,14,15,16,36],icon:"🕌"},
   {id:"kudus",name:"Kudüs-i Şerîf",type:"holy",desc:"İsrâ ve Mîrâc'ın başladığı mübârek mekân. Mescid-i Aksâ.",lat:31.7761,lng:35.2358,chapters:[11],icon:"🌙"},
   {id:"hira",name:"Hirâ Mağarası",type:"cave",desc:"İlk vahyin geldiği yer. Cebrâil aleyhisselâm 'İkra!' buyurdu.",lat:21.4573,lng:39.8583,chapters:[6],icon:"⛰"},
-  {id:"sevr",name:"Sevr Mağarası",type:"cave",desc:"Hicret sırasında üç gün sığınılan mağara. 'Üzülme, Allah bizimle beraberdir.'",lat:21.3762,lng:39.831,chapters:[13],icon:"⛰"},
-  {id:"taif",name:"Tâif",type:"place",desc:"Peygamber Efendimizin taşlandığı yer. Dağ meleğinin teklifini reddetti.",lat:21.2703,lng:40.4159,chapters:[10],icon:"📍"},
+  {id:"sevr",name:"Sevr Mağarası",type:"cave",desc:"Hicret sırasında üç gün sığınılan mağara.",lat:21.3762,lng:39.831,chapters:[13],icon:"⛰"},
+  {id:"taif",name:"Tâif",type:"place",desc:"Peygamber Efendimizin taşlandığı yer.",lat:21.2703,lng:40.4159,chapters:[10],icon:"📍"},
   {id:"busra",name:"Busrâ",type:"place",desc:"Râhip Bahîra'nın Peygamber Efendimizi tanıdığı Suriye şehri.",lat:32.5178,lng:36.4815,chapters:[4],icon:"📍"},
   {id:"habesistan",name:"Habeşistan (Aksum)",type:"place",desc:"İlk hicret yeri. Necâşî'nin himâyesinde müslümanların sığınağı.",lat:14.13,lng:38.72,chapters:[8],icon:"🕊"},
   {id:"ebva",name:"Ebvâ",type:"place",desc:"Peygamber Efendimizin annesi Âmine Hâtun'un vefât ettiği yer.",lat:23.2,lng:39.2,chapters:[4],icon:"📍"},
-  {id:"hudeybiye",name:"Hudeybiye",type:"place",desc:"Müşriklerle yapılan sulh antlaşması. Fetih'in mukaddimesi.",lat:21.4419,lng:39.6049,chapters:[25],icon:"📜"},
+  {id:"hudeybiye",name:"Hudeybiye",type:"place",desc:"Müşriklerle yapılan sulh antlaşması.",lat:21.4419,lng:39.6049,chapters:[25],icon:"📜"},
   {id:"akabe",name:"Akabe",type:"place",desc:"Birinci ve İkinci Akabe Bî'atlarının yapıldığı yer.",lat:21.4273,lng:39.8118,chapters:[12],icon:"🤝"},
   {id:"darulerkam",name:"Dâr-ül-Erkâm",type:"place",desc:"İslâm'ın gizli döneminde ilk toplanma ve öğretim evi.",lat:21.4230,lng:39.8265,chapters:[7],icon:"🏠"},
-  {id:"benisad",name:"Benî Sa'd Yurdu",type:"place",desc:"Sütanne Halîme Hâtun'un kabilesi. Çocukluk yılları burada geçti.",lat:21.65,lng:40.50,chapters:[4],icon:"🏕"},
-  {id:"mina",name:"Minâ",type:"holy",desc:"Hac ibâdetinin önemli mekânlarından. Şeytan taşlama yeri.",lat:21.4133,lng:39.8933,chapters:[33,34],icon:"🕋"},
-  {id:"arafat",name:"Arafat",type:"holy",desc:"Vedâ Hutbesi'nin okunduğu, Haccın rüknü olan mübârek yer.",lat:21.3549,lng:39.9842,chapters:[34,35],icon:"🕋"},
-  {id:"hayber",name:"Hayber",type:"place",desc:"Yahudi kalelerinin fethedildiği yer. Hayber'in Fethi.",lat:25.6967,lng:39.2975,chapters:[27],icon:"🏰"},
+  {id:"benisad",name:"Benî Sa'd Yurdu",type:"place",desc:"Sütanne Halîme Hâtun'un kabilesi.",lat:21.65,lng:40.50,chapters:[4],icon:"🏕"},
+  {id:"mina",name:"Minâ",type:"holy",desc:"Hac ibâdetinin önemli mekânlarından.",lat:21.4133,lng:39.8933,chapters:[33,34],icon:"🕋"},
+  {id:"arafat",name:"Arafat",type:"holy",desc:"Vedâ Hutbesi'nin okunduğu mübârek yer.",lat:21.3549,lng:39.9842,chapters:[34,35],icon:"🕋"},
+  {id:"hayber",name:"Hayber",type:"place",desc:"Yahudi kalelerinin fethedildiği yer.",lat:25.6967,lng:39.2975,chapters:[27],icon:"🏰"},
   {id:"tebuk",name:"Tebük",type:"place",desc:"Son büyük seferin yapıldığı Bizans sınırındaki bölge.",lat:28.3838,lng:36.5550,chapters:[32],icon:"📍"},
 ];
 const BATTLES=[
@@ -417,10 +458,10 @@ const BATTLES=[
   {id:"hendek",name:"Hendek Gazâsı",date:"H.5 / M.627",lat:24.49,lng:39.59,chapter:23,summary:"Selmân-ı Fârisî'nin teklifiyle hendek kazıldı. 10.000 kişilik ordu geri döndü.",major:true},
   {id:"beni-kureyza",name:"Benî Kureyzâ Gazâsı",date:"H.5 / M.627",lat:24.44,lng:39.63,chapter:24,summary:"Hendek'te ihânet eden Benî Kureyzâ kabîlesine karşı."},
   {id:"hayber-g",name:"Hayber'in Fethi",date:"H.7 / M.628",lat:25.70,lng:39.30,chapter:27,summary:"Yahudi kalelerinin fethi. Hazret-i Ali kapıyı söktü.",major:true},
-  {id:"mute",name:"Mûte Harbi",date:"H.8 / M.629",lat:31.08,lng:35.70,chapter:29,summary:"Bizans'a karşı ilk büyük savaş. Üç komutan şehîd oldu. Hâlid bin Velîd orduyu kurtardı.",major:true},
-  {id:"mekke-fethi",name:"Mekke'nin Fethi",date:"H.8 / M.630",lat:21.43,lng:39.83,chapter:30,summary:"10.000 kişilik orduyla kansız fetih. Kâbe putlardan temizlendi.",major:true},
-  {id:"huneyn",name:"Huneyn Gazâsı",date:"H.8 / M.630",lat:21.35,lng:40.25,chapter:31,summary:"Mekke fethinden hemen sonra. Hevâzin ve Sakîf kabîlelerine karşı."},
-  {id:"tebuk-g",name:"Tebük Gazâsı",date:"H.9 / M.630",lat:28.40,lng:36.56,chapter:32,summary:"Son büyük sefer. 30.000 kişilik ordu. Bizans savaşmadan geri çekildi.",major:true},
+  {id:"mute",name:"Mûte Harbi",date:"H.8 / M.629",lat:31.08,lng:35.70,chapter:29,summary:"Bizans'a karşı ilk büyük savaş. Üç komutan şehîd oldu.",major:true},
+  {id:"mekke-fethi",name:"Mekke'nin Fethi",date:"H.8 / M.630",lat:21.43,lng:39.83,chapter:30,summary:"10.000 kişilik orduyla kansız fetih.",major:true},
+  {id:"huneyn",name:"Huneyn Gazâsı",date:"H.8 / M.630",lat:21.35,lng:40.25,chapter:31,summary:"Fetih sonrası Hevâzin ve Sakîf ile savaş."},
+  {id:"tebuk-g",name:"Tebük Gazâsı",date:"H.9 / M.630",lat:28.40,lng:36.56,chapter:32,summary:"Son büyük sefer. 30.000 kişilik ordu.",major:true},
   {id:"reci",name:"Recî' Vak'ası",date:"H.4 / M.625",lat:22.8,lng:39.5,chapter:19,summary:"Müslüman muallimlerinin pusuya düşürülmesi."},
   {id:"bir-maune",name:"Bi'r-i Maûne Vak'ası",date:"H.4 / M.625",lat:24.2,lng:39.9,chapter:20,summary:"70 hâfız sahâbînin şehîd edilmesi."},
 ];
@@ -442,22 +483,24 @@ let tocHtml='';
 BOOK.forEach((ch,ci)=>{
   const theme=themes[ci%themes.length];
   const chId='ch-'+ci;
-
-  // Chapter header — CHAPTER_MAP ile harita linki
   const mapLink=CHAPTER_MAP[ci];
   const mapLinkHtml=mapLink?`<div class="ch-map-link rv" onclick="event.stopPropagation();${BATTLES.find(b=>b.id===mapLink)?`flyToBattle('${mapLink}')`:`flyToPlace('${mapLink}')`}">📍 Haritada Gör</div>`:'';
+  const readBadge=readChapters.has(ci)?'<span class="ch-read-badge">✓ Okundu</span>':'';
+
   let html=`<div class="ch-head ${theme}" id="${chId}">
     <div class="ch-n rv">Sayfa ${ch.page}</div>
-    <h2 class="rv">${ch.title}</h2>
+    <h2 class="rv">${ch.title} ${readBadge}</h2>
     <div class="ch-p rv">${ch.subs.length?ch.subs.length+' alt başlık':''} — 📖 Sayfa ${ch.page}</div>
     ${mapLinkHtml}
   </div>`;
 
-  // Chapter body with sub entries only (no duplicate main text)
   html+=`<div class="ch-body">`;
 
   ch.subs.forEach((s,si)=>{
-    const hasText = s.full_text && s.full_text.length > 50;
+    const hasText=s.full_text&&s.full_text.length>50;
+    const bmKey=ci+'-'+si;
+    const isBm=bookmarks.has(bmKey);
+    const noteVal=notes[bmKey]||'';
     html+=`<div class="sub-entry rv" data-idx="${ci}-${si}">
       <div class="se-header" role="button" aria-expanded="false" tabindex="0" onclick="toggleSub(this)" onkeydown="if(event.key==='Enter')toggleSub(this)">
         <div class="se-arrow">▸</div>
@@ -467,30 +510,61 @@ BOOK.forEach((ch,ci)=>{
           <div class="se-page">📖 Sayfa ${s.page}</div>
         </div>
       </div>
-      ${hasText?'<div class="se-body"><div class="se-full"></div></div>':''}
+      ${hasText?`<div class="se-body">
+        <div class="se-full"></div>
+        <div class="se-toolbar">
+          <button class="se-tool ${isBm?'bookmarked':''}" data-bm="${bmKey}" onclick="event.stopPropagation();toggleBookmark('${bmKey}','${escHtml(s.title)}')">${isBm?'🔖 Kaydedildi':'🔖 Kaydet'}</button>
+          <button class="se-tool" onclick="event.stopPropagation();toggleNote('${bmKey}')">📝 Not</button>
+          <button class="se-tool" onclick="event.stopPropagation();shareEntry(${ci},'${escHtml(s.title)}')">🔗 Paylaş</button>
+        </div>
+        <div class="se-note-area ${noteVal?'show':''}" data-note="${bmKey}">
+          <textarea placeholder="Notunuzu yazın...">${escHtml(noteVal)}</textarea>
+          <div class="note-actions">
+            <button class="note-btn" onclick="saveNote('${bmKey}')">Kaydet</button>
+            <button class="note-btn" onclick="copyNote('${bmKey}')">Kopyala</button>
+          </div>
+        </div>
+      </div>`:''}
     </div>`;
   });
 
-  // If no subs but chapter has text, show it directly
-  if(!ch.subs.length && ch.intro){
+  if(!ch.subs.length&&ch.intro){
     html+=`<div class="ch-intro rv">${escHtml(ch.intro)}</div>`;
   }
+
+  // Bölümler arası navigasyon
+  const prevCh=ci>0?BOOK[ci-1]:null;
+  const nextCh=ci<BOOK.length-1?BOOK[ci+1]:null;
+  html+=`<div class="ch-nav">`;
+  if(prevCh)html+=`<button class="ch-nav-btn" onclick="scrollToChapter(${ci-1})">◂ <span>${escHtml(prevCh.title)}</span></button>`;
+  else html+=`<div></div>`;
+  if(nextCh)html+=`<button class="ch-nav-btn" onclick="scrollToChapter(${ci+1})"><span>${escHtml(nextCh.title)}</span> ▸</button>`;
+  else html+=`<div></div>`;
+  html+=`</div>`;
 
   html+=`</div>`;
   kitapEl.insertAdjacentHTML('beforeend',html);
 
   // TOC
-  tocHtml+=`<a href="#${chId}" class="main" onclick="closeToc()">${ch.title} <span style="color:var(--gd);font-size:.65rem">s.${ch.page}</span></a>`;
+  tocHtml+=`<a href="#${chId}" class="main" data-ci="${ci}" onclick="closeToc()">${ch.title} <span style="color:var(--gd);font-size:.65rem">s.${ch.page}</span></a>`;
   ch.subs.forEach(s=>{
     tocHtml+=`<a href="#${chId}" class="sub" onclick="closeToc()">${s.title}</a>`;
   });
 });
 
 document.getElementById('tocList').innerHTML=tocHtml;
+updateReadingProgress();
+updateTocReadMarks();
+renderBookmarkList();
 
 function escHtml(t){
   if(!t)return '';
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function shareEntry(ci,title){
+  const url=window.location.origin+window.location.pathname+'#ch-'+ci;
+  navigator.clipboard.writeText(url).then(()=>alert('Bağlantı kopyalandı: '+url)).catch(()=>{});
 }
 
 function openToc(){document.getElementById('tocPanel').classList.add('open');document.getElementById('tocOv').classList.add('open')}
@@ -500,8 +574,7 @@ function toggleSub(header){
   const entry=header.parentElement;
   const isOpen=entry.classList.toggle('open');
   header.setAttribute('aria-expanded',isOpen);
-  // Lazy load: if first open, populate body from data
-  if(isOpen && entry.dataset.loaded!=='1'){
+  if(isOpen&&entry.dataset.loaded!=='1'){
     const idx=entry.dataset.idx;
     if(idx){
       const [ci,si]=idx.split('-').map(Number);
@@ -514,6 +587,8 @@ function toggleSub(header){
         }
       }
       entry.dataset.loaded='1';
+      // Bölümü okundu olarak işaretle
+      markChapterRead(ci);
     }
   }
 }
@@ -530,7 +605,6 @@ window.addEventListener('scroll',()=>{
   document.getElementById('toTop').classList.toggle('show',window.scrollY>400);
   document.getElementById('tocBtn').classList.toggle('show',window.scrollY>400);
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60);
-  // Chapter name
   let cur='';
   document.querySelectorAll('.ch-head').forEach(el=>{if(el.offsetTop<=window.scrollY+150)cur=el.querySelector('h2').textContent});
   const nc=document.getElementById('navCh');
@@ -538,13 +612,11 @@ window.addEventListener('scroll',()=>{
 });
 
 // ===== MAP SETUP =====
-let mapObj=null, mapMarkers={}, mapLabels={}, mapRoutes=[], allMapLayers=[];
+let mapObj=null,mapMarkers={},mapLabels={},mapRoutes=[],allMapLayers=[];
 let currentTileMode='light';
-let baseTileLayer=null, labelTileLayer=null, satTileLayer=null;
+let baseTileLayer=null,labelTileLayer=null,satTileLayer=null;
 let currentEra='all';
 
-// === ICONS ===
-// Kutsal — altın yıldız, büyük ve parlak
 function makeHolyIcon(id){
   const isMajor=id==='mekke'||id==='medine'||id==='kudus';
   const s=isMajor?30:22;
@@ -554,114 +626,75 @@ function makeHolyIcon(id){
 const caveIcon=L.divIcon({className:'custom-marker',html:`<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="6.5" fill="#2A7A62" stroke="#1A5C48" stroke-width="1.5" opacity=".85"/><path d="M6 10 Q9 5 12 10" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-12]});
 const placeIcon=L.divIcon({className:'custom-marker',html:`<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="#2B5F8E" stroke="#1A3F5E" stroke-width="1" opacity=".8"/><circle cx="7" cy="7" r="1.5" fill="#fff"/></svg>`,iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-9]});
 
-// Savaş — kılıç ikonu
 function makeBattleIcon(major){
   const s=major?22:16;
   return L.divIcon({className:'custom-marker',html:`<svg width="${s}" height="${s}" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="#8B1A1A" stroke="#5C0A0A" stroke-width="1" opacity=".85"/><line x1="7" y1="7" x2="15" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="7" x2="7" y2="15" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-2]});
 }
 
-// Dönem eşleştirmesi
 const MEKKE_IDS=new Set(['mekke','hira','sevr','taif','busra','habesistan','ebva','akabe','darulerkam','benisad','hudeybiye','kudus','mina','arafat']);
-// Hangi marker'lar büyük zoom'da gösterilsin (ana mekânlar her zoom'da)
 const MAJOR_PLACE_IDS=new Set(['mekke','medine','kudus','habesistan','busra']);
 
-// ===== RENDER MAP =====
 function initMap(){
   if(mapObj)return;
   mapObj=L.map('map-c',{scrollWheelZoom:false,zoomControl:false,attributionControl:false}).setView([22.5,38.5],5);
-
-  // Zoom control sağ üst yerine sol alt
   L.control.zoom({position:'topleft'}).addTo(mapObj);
   L.control.attribution({position:'bottomright',prefix:false}).addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>').addTo(mapObj);
-
-  // Tile katmanları
   baseTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:16}).addTo(mapObj);
   labelTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',{maxZoom:16,opacity:.35}).addTo(mapObj);
   satTileLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:16});
 
   mapObj.on('popupclose',()=>setTimeout(_execPendingScroll,100));
-
-  // === Zoom seviyesine göre detay göster/gizle ===
   mapObj.on('zoomend',updateZoomVisibility);
 
-  // === MEKANLAR ===
   PLACES.forEach(p=>{
-    const isHoly=p.type==='holy';
-    const isCave=p.type==='cave';
+    const isHoly=p.type==='holy';const isCave=p.type==='cave';
     const icon=isHoly?makeHolyIcon(p.id):isCave?caveIcon:placeIcon;
     const isMajor=MAJOR_PLACE_IDS.has(p.id);
     const marker=L.marker([p.lat,p.lng],{icon,zIndexOffset:isHoly?(isMajor?800:300):0});
-    marker._era=MEKKE_IDS.has(p.id)?'mekke':'medine';
-    marker._kind='place';
-    marker._isMajor=isMajor;
-
-    // Label — holy labels offset daha fazla (büyük ikon)
+    marker._era=MEKKE_IDS.has(p.id)?'mekke':'medine';marker._kind='place';marker._isMajor=isMajor;
     const lblClass=isHoly?'map-label-holy':(isMajor?'map-label':'map-label map-label-minor');
     const lblOffset=isHoly?(isMajor?[-18,6]:[-14,5]):(isMajor?[-12,4]:[-10,4]);
     const lbl=L.marker([p.lat,p.lng],{icon:L.divIcon({className:lblClass,html:`<span>${p.name}</span>`,iconSize:[0,0],iconAnchor:lblOffset}),interactive:false});
-
     const chLinks=p.chapters.slice(0,4).map(ci=>`<button class="map-popup-btn" onclick="scrollToChapter(${ci})">📖 ${BOOK[ci]?BOOK[ci].title.substring(0,30):''}</button>`).join('');
-    const moreCount=p.chapters.length>4?`<span style="font-size:.65rem;color:var(--tx3)">+${p.chapters.length-4} bölüm daha</span>`:'';
-    marker.bindPopup(`<div class="map-popup-title">${p.icon} ${p.name}</div><div class="map-popup-type">${isHoly?'Kutsal Mekân':isCave?'Mağara':'Mekân'}</div><div class="map-popup-desc">${p.desc}</div><div style="display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem">${chLinks}${moreCount}</div>`,{maxWidth:280});
-    mapMarkers[p.id]=marker;
-    mapLabels[p.id]=lbl;
+    marker.bindPopup(`<div class="map-popup-title">${p.icon} ${p.name}</div><div class="map-popup-type">${isHoly?'Kutsal Mekân':isCave?'Mağara':'Mekân'}</div><div class="map-popup-desc">${p.desc}</div><div style="display:flex;flex-direction:column;gap:.25rem;margin-top:.4rem">${chLinks}</div>`,{maxWidth:280});
+    mapMarkers[p.id]=marker;mapLabels[p.id]=lbl;
     allMapLayers.push({marker,label:lbl,era:marker._era,kind:'place',isMajor,id:p.id});
   });
 
-  // === SAVAŞLAR ===
-  // Medine civarındaki savaşları cluster olarak göster (zoom<7)
-  const medineBattleIds=new Set();
-  const MEDINE_CENTER=[24.47,39.61];
-  BATTLES.forEach(b=>{
-    const dist=Math.sqrt(Math.pow(b.lat-MEDINE_CENTER[0],2)+Math.pow(b.lng-MEDINE_CENTER[1],2));
-    if(dist<2)medineBattleIds.add(b.id);
-  });
-
-  // Cluster marker for Medine battles
-  const clusterCount=medineBattleIds.size;
-  const clusterPos=[25.20,38.70]; // Medîne'nin kuzey-batısında, çakışmaz
+  const medineBattleIds=new Set();const MEDINE_CENTER=[24.47,39.61];
+  BATTLES.forEach(b=>{const dist=Math.sqrt(Math.pow(b.lat-MEDINE_CENTER[0],2)+Math.pow(b.lng-MEDINE_CENTER[1],2));if(dist<2)medineBattleIds.add(b.id)});
+  const clusterCount=medineBattleIds.size;const clusterPos=[25.20,38.70];
   const clusterMarker=L.marker(clusterPos,{icon:L.divIcon({className:'',html:`<div class="battle-cluster">⚔ ${clusterCount}</div>`,iconSize:[38,38],iconAnchor:[19,19],popupAnchor:[0,-22]}),zIndexOffset:600});
   clusterMarker._kind='cluster';
   clusterMarker.bindPopup(`<div class="map-popup-title" style="color:#8B1A1A">⚔ ${clusterCount} Gazâ</div><div class="map-popup-desc">Medîne çevresindeki savaşlar.<br>Yakınlaştırarak detayları görün.</div>`,{maxWidth:250});
   clusterMarker.on('click',()=>{mapObj.flyTo(MEDINE_CENTER,8,{duration:.8})});
 
   BATTLES.forEach(b=>{
-    const icon=makeBattleIcon(!!b.major);
-    const marker=L.marker([b.lat,b.lng],{icon,zIndexOffset:500});
-    marker._era='gaza';
-    marker._kind='battle';
-    marker._isMedineCluster=medineBattleIds.has(b.id);
-    marker._isMajor=!!b.major;
+    const icon=makeBattleIcon(!!b.major);const marker=L.marker([b.lat,b.lng],{icon,zIndexOffset:500});
+    marker._era='gaza';marker._kind='battle';marker._isMedineCluster=medineBattleIds.has(b.id);marker._isMajor=!!b.major;
     const lbl=L.marker([b.lat,b.lng],{icon:L.divIcon({className:'map-label-battle map-label-minor',html:`<span>${b.name}</span>`,iconSize:[0,0],iconAnchor:[-16,5]}),interactive:false});
-
     marker.bindPopup(`<div class="map-popup-title" style="color:#8B1A1A">⚔ ${b.name}</div><div class="map-popup-date">${b.date}</div><div class="map-popup-desc">${b.summary}</div><button class="map-popup-btn" onclick="scrollToChapter(${b.chapter})">📖 Bölüme Git</button>`,{maxWidth:300});
-    mapMarkers[b.id]=marker;
-    mapLabels[b.id]=lbl;
+    mapMarkers[b.id]=marker;mapLabels[b.id]=lbl;
     allMapLayers.push({marker,label:lbl,era:'gaza',kind:'battle',isMajor:!!b.major,isCluster:medineBattleIds.has(b.id),id:b.id});
   });
   allMapLayers._clusterMarker=clusterMarker;
 
-  // === GÜZERGAHLAR ===
   function addRoute(coords,opts,popupText,era){
     const line=L.polyline(coords,{...opts,className:era==='mekke'?'map-route-gold':'map-route-animated'});
-    line.bindPopup(popupText);
-    line._era=era;
-    line._baseWeight=opts.weight;
-    line._baseOpacity=opts.opacity;
+    line.bindPopup(popupText);line._era=era;line._baseWeight=opts.weight;line._baseOpacity=opts.opacity;
     line.on('mouseover',function(){this.setStyle({weight:opts.weight+3,opacity:1})});
     line.on('mouseout',function(){this.setStyle({weight:opts.weight,opacity:opts.opacity})});
     mapRoutes.push(line);
   }
   addRoute([[21.42,39.82],[21.38,39.83],[24.47,39.61]],{color:'#C9A84C',weight:3,dashArray:'12,8',opacity:.75},'<b style="color:#C9A84C">Hicret Güzergâhı</b><br>Mekke → Sevr Mağarası → Medîne','mekke');
   addRoute([[21.42,39.82],[14.13,38.72]],{color:'#5B8FB9',weight:2.5,dashArray:'10,7',opacity:.55},'<b style="color:#5B8FB9">Habeşistan Hicreti</b><br>Mekke → Aksum','mekke');
-  addRoute([[21.42,39.82],[32.52,36.48]],{color:'#7BA5C4',weight:2,dashArray:'8,6',opacity:.4},'<b style="color:#7BA5C4">Ticaret Yolu</b><br>Mekke → Busrâ (Şam)','mekke');
+  addRoute([[21.42,39.82],[32.52,36.48]],{color:'#7BA5C4',weight:2,dashArray:'8,6',opacity:.4},'<b style="color:#7BA5C4">Ticaret Yolu</b><br>Mekke → Busrâ','mekke');
   addRoute([[24.47,39.61],[23.73,38.78]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Bedr Gazâsı</b>','gaza');
   addRoute([[24.47,39.61],[25.70,39.30]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Hayber Seferi</b>','gaza');
   addRoute([[24.47,39.61],[28.38,36.56]],{color:'#C0522B',weight:2.5,dashArray:'8,5',opacity:.55},'<b style="color:#C0522B">Tebük Seferi</b>','gaza');
   addRoute([[24.47,39.61],[31.08,35.70]],{color:'#C0522B',weight:2,dashArray:'6,5',opacity:.55},'<b style="color:#C0522B">Mûte Seferi</b>','gaza');
   addRoute([[24.47,39.61],[21.43,39.83]],{color:'#C9A84C',weight:3,dashArray:'12,6',opacity:.65},'<b style="color:#C9A84C">Mekke\'nin Fethi</b>','gaza');
 
-  // === LEJANT (collapsible) ===
   const legendDiv=document.createElement('div');
   legendDiv.className='map-legend collapsed';
   legendDiv.innerHTML=`<div class="map-legend-toggle" onclick="this.closest('.map-legend').classList.toggle('collapsed');this.closest('.map-legend').classList.toggle('expanded')">☰ Lejant</div>
@@ -675,183 +708,74 @@ function initMap(){
     </div>`;
   document.getElementById('map-c').appendChild(legendDiv);
 
-  // === BUTTONS ===
-  const fsBtn=document.createElement('button');
-  fsBtn.className='map-float-btn map-fs-btn';
-  fsBtn.innerHTML='⛶';
-  fsBtn.title='Tam Ekran';
-  fsBtn.onclick=toggleFullscreen;
-  document.getElementById('map-c').appendChild(fsBtn);
-
-  const layerBtn=document.createElement('button');
-  layerBtn.className='map-float-btn map-layer-btn';
-  layerBtn.innerHTML='🛰';
-  layerBtn.title='Uydu / Harita';
-  layerBtn.onclick=toggleSatellite;
-  document.getElementById('map-c').appendChild(layerBtn);
-
-  // Initial visibility
+  const fsBtn=document.createElement('button');fsBtn.className='map-float-btn map-fs-btn';fsBtn.innerHTML='⛶';fsBtn.title='Tam Ekran';fsBtn.setAttribute('aria-label','Tam ekran harita');fsBtn.onclick=toggleFullscreen;document.getElementById('map-c').appendChild(fsBtn);
+  const layerBtn=document.createElement('button');layerBtn.className='map-float-btn map-layer-btn';layerBtn.innerHTML='🛰';layerBtn.title='Uydu / Harita';layerBtn.setAttribute('aria-label','Uydu görünümü');layerBtn.onclick=toggleSatellite;document.getElementById('map-c').appendChild(layerBtn);
   updateZoomVisibility();
 }
 
-// === ZOOM VISIBILITY — temiz harita, detay zoom'da ===
 function updateZoomVisibility(){
   if(!mapObj)return;
-  const z=mapObj.getZoom();
-  const showDetail=z>=7;
-  const mc=document.getElementById('map-c');
-  if(showDetail)mc.classList.add('zoom-detail');
-  else mc.classList.remove('zoom-detail');
-
+  const z=mapObj.getZoom();const showDetail=z>=7;const mc=document.getElementById('map-c');
+  if(showDetail)mc.classList.add('zoom-detail');else mc.classList.remove('zoom-detail');
   allMapLayers.forEach(item=>{
-    // Era filter first
     let eraOk=currentEra==='all';
     if(currentEra==='mekke')eraOk=item.era==='mekke';
     if(currentEra==='medine')eraOk=item.era==='medine'||item.era==='gaza';
     if(currentEra==='gaza')eraOk=item.kind==='battle';
-
-    if(!eraOk){
-      if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
-      if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
-      return;
-    }
-
-    // Zoom-based: battles in medine cluster shown only on detail
+    if(!eraOk){if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);return}
     if(item.kind==='battle'&&item.isCluster){
-      if(showDetail){
-        if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
-        if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
-      }else{
-        if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
-        if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
-      }
-      return;
-    }
-
-    // Major places: always show; minor: only on detail zoom
+      if(showDetail){if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj)}
+      else{if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label)}return}
     if(item.kind==='place'&&!item.isMajor){
-      if(showDetail){
-        if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
-        if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
-      }else{
-        if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);
-        if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label);
-      }
-      return;
-    }
-
-    // Major battles (Bedr, Uhud, etc) not in cluster — show always
+      if(showDetail){if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj)}
+      else{if(mapObj.hasLayer(item.marker))mapObj.removeLayer(item.marker);if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label)}return}
     if(item.kind==='battle'&&!item.isCluster){
       if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
-      if(showDetail){if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj)}
-      else{if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label)}
-      return;
-    }
-
-    // Default: show
-    if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);
-    if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
+      if(showDetail){if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj)}else{if(mapObj.hasLayer(item.label))mapObj.removeLayer(item.label)}return}
+    if(!mapObj.hasLayer(item.marker))item.marker.addTo(mapObj);if(!mapObj.hasLayer(item.label))item.label.addTo(mapObj);
   });
-
-  // Battle cluster marker
   const cm=allMapLayers._clusterMarker;
   if(cm){
     const showCluster=!showDetail&&(currentEra==='all'||currentEra==='medine'||currentEra==='gaza');
-    if(showCluster){if(!mapObj.hasLayer(cm))cm.addTo(mapObj)}
-    else{if(mapObj.hasLayer(cm))mapObj.removeLayer(cm)}
+    if(showCluster){if(!mapObj.hasLayer(cm))cm.addTo(mapObj)}else{if(mapObj.hasLayer(cm))mapObj.removeLayer(cm)}
   }
-
-  // Routes
   mapRoutes.forEach(r=>{
     let rOk=currentEra==='all';
-    if(currentEra==='mekke')rOk=r._era==='mekke';
-    if(currentEra==='medine')rOk=true;
-    if(currentEra==='gaza')rOk=r._era==='gaza';
-    if(rOk){if(!mapObj.hasLayer(r))r.addTo(mapObj)}
-    else{if(mapObj.hasLayer(r))mapObj.removeLayer(r)}
+    if(currentEra==='mekke')rOk=r._era==='mekke';if(currentEra==='medine')rOk=true;if(currentEra==='gaza')rOk=r._era==='gaza';
+    if(rOk){if(!mapObj.hasLayer(r))r.addTo(mapObj)}else{if(mapObj.hasLayer(r))mapObj.removeLayer(r)}
   });
 }
 
-// === FULLSCREEN ===
 function toggleFullscreen(){
-  const mc=document.getElementById('map-c');
-  mc.classList.toggle('fullscreen');
+  const mc=document.getElementById('map-c');mc.classList.toggle('fullscreen');
   if(mapObj)setTimeout(()=>mapObj.invalidateSize(),300);
-  if(mc.classList.contains('fullscreen')){
-    document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){mc.classList.remove('fullscreen');mapObj.invalidateSize();document.removeEventListener('keydown',esc)}});
-  }
+  if(mc.classList.contains('fullscreen'))document.addEventListener('keydown',function esc(e){if(e.key==='Escape'){mc.classList.remove('fullscreen');mapObj.invalidateSize();document.removeEventListener('keydown',esc)}});
 }
-
-// === SATELLITE TOGGLE ===
 function toggleSatellite(){
   const mc=document.getElementById('map-c');
-  if(currentTileMode==='light'){
-    mapObj.removeLayer(baseTileLayer);
-    mapObj.removeLayer(labelTileLayer);
-    satTileLayer.addTo(mapObj);
-    mc.querySelector('.leaflet-tile-pane').style.filter='none';
-    currentTileMode='satellite';
-  }else{
-    mapObj.removeLayer(satTileLayer);
-    baseTileLayer.addTo(mapObj);
-    labelTileLayer.addTo(mapObj);
-    mc.querySelector('.leaflet-tile-pane').style.filter='sepia(.35) saturate(.65) brightness(1.08) contrast(.92)';
-    currentTileMode='light';
-  }
+  if(currentTileMode==='light'){mapObj.removeLayer(baseTileLayer);mapObj.removeLayer(labelTileLayer);satTileLayer.addTo(mapObj);mc.querySelector('.leaflet-tile-pane').style.filter='none';currentTileMode='satellite'}
+  else{mapObj.removeLayer(satTileLayer);baseTileLayer.addTo(mapObj);labelTileLayer.addTo(mapObj);mc.querySelector('.leaflet-tile-pane').style.filter='sepia(.35) saturate(.65) brightness(1.08) contrast(.92)';currentTileMode='light'}
 }
-
-// === DÖNEM FİLTRESİ ===
 function filterMapEra(era,btn){
-  document.querySelectorAll('.map-ctrl-btn').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  currentEra=era;
-  if(!mapObj)return;
-  updateZoomVisibility();
+  document.querySelectorAll('.map-ctrl-btn').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');currentEra=era;if(!mapObj)return;updateZoomVisibility();
 }
 
-// Harita görünür olunca lazy init
 const mapObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){initMap();mapObs.unobserve(e.target)}})},{threshold:0,rootMargin:'200px'});
 mapObs.observe(document.getElementById('map-c'));
 if(window.location.hash==='#harita')setTimeout(initMap,500);
 
-// ===== NAVIGATION FUNCTIONS =====
+// ===== NAVİGASYON =====
 let _pendingScroll=null;
-function _execPendingScroll(){
-  if(!_pendingScroll)return;
-  const el=document.getElementById(_pendingScroll);
-  _pendingScroll=null;
-  if(!el)return;
-  el.scrollIntoView({behavior:'smooth',block:'center'});
-  el.classList.add('ch-highlight');
-  setTimeout(()=>el.classList.remove('ch-highlight'),2500);
-}
-
+function _execPendingScroll(){if(!_pendingScroll)return;const el=document.getElementById(_pendingScroll);_pendingScroll=null;if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('ch-highlight');setTimeout(()=>el.classList.remove('ch-highlight'),2500)}
 function scrollToChapter(idx){
-  const targetId='ch-'+idx;
-  if(mapObj)mapObj.closePopup();
-  // Kısa gecikme ile scroll (popup kapandıktan sonra)
-  setTimeout(()=>{
-    const el=document.getElementById(targetId);
-    if(!el)return;
-    el.scrollIntoView({behavior:'smooth',block:'center'});
-    el.classList.add('ch-highlight');
-    setTimeout(()=>el.classList.remove('ch-highlight'),2500);
-  },200);
+  const targetId='ch-'+idx;if(mapObj)mapObj.closePopup();
+  setTimeout(()=>{const el=document.getElementById(targetId);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('ch-highlight');setTimeout(()=>el.classList.remove('ch-highlight'),2500)},200);
 }
-
 function flyToPlace(id){
-  if(!mapObj)initMap();
-  const marker=mapMarkers[id];
-  if(!marker)return;
-  const el=document.getElementById('map-c');
-  el.scrollIntoView({behavior:'smooth',block:'center'});
-  setTimeout(()=>{
-    mapObj.invalidateSize();
-    mapObj.flyTo(marker.getLatLng(),8,{duration:1.2});
-    setTimeout(()=>marker.openPopup(),1300);
-  },600);
+  if(!mapObj)initMap();const marker=mapMarkers[id];if(!marker)return;
+  document.getElementById('map-c').scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>{mapObj.invalidateSize();mapObj.flyTo(marker.getLatLng(),8,{duration:1.2});setTimeout(()=>marker.openPopup(),1300)},600);
 }
-
 function flyToBattle(id){flyToPlace(id)}
 
 // ===== PLACE CARDS =====
@@ -863,34 +787,26 @@ function renderPlaceCards(filter){
     });
   }
   if(filter==='all'||filter==='battle'){
-    BATTLES.forEach(b=>{
-      html+=`<div class="place-card battle rv" onclick="flyToBattle('${b.id}')"><div class="pc-icon">⚔</div><div class="pc-name">${b.name}</div><div class="pc-date">${b.date}</div><div class="pc-desc">${b.summary}</div></div>`;
-    });
+    BATTLES.forEach(b=>{html+=`<div class="place-card battle rv" onclick="flyToBattle('${b.id}')"><div class="pc-icon">⚔</div><div class="pc-name">${b.name}</div><div class="pc-date">${b.date}</div><div class="pc-desc">${b.summary}</div></div>`});
   }
   if(filter==='place'){
-    PLACES.filter(p=>p.type!=='holy').forEach(p=>{
-      html+=`<div class="place-card rv" onclick="flyToPlace('${p.id}')"><div class="pc-icon">${p.icon}</div><div class="pc-name">${p.name}</div><div class="pc-type">${p.type==='cave'?'Mağara':'Mekân'}</div><div class="pc-desc">${p.desc}</div></div>`;
-    });
+    PLACES.filter(p=>p.type!=='holy').forEach(p=>{html+=`<div class="place-card rv" onclick="flyToPlace('${p.id}')"><div class="pc-icon">${p.icon}</div><div class="pc-name">${p.name}</div><div class="pc-type">${p.type==='cave'?'Mağara':'Mekân'}</div><div class="pc-desc">${p.desc}</div></div>`});
   }
   document.getElementById('placeGrid').innerHTML=html;
   document.querySelectorAll('#placeGrid .rv').forEach(el=>obs.observe(el));
 }
-function filterPlaces(f,btn){
-  document.querySelectorAll('.place-tab').forEach(t=>t.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  renderPlaceCards(f);
-}
+function filterPlaces(f,btn){document.querySelectorAll('.place-tab').forEach(t=>t.classList.remove('active'));if(btn)btn.classList.add('active');renderPlaceCards(f)}
 renderPlaceCards('all');
 
 // ===== PEOPLE =====
 const PPL=[
   {n:"Muhammed aleyhisselâm",r:"Son Peygamber ﷺ",d:"Allahü teâlânın habîbi, yaratılmışların en üstünü. Rebîu'l-evvel 12, Mekke-i Mükerreme'de doğdu, 63 yaşında Medîne-i Münevvere'de vefât etti.",s:"9, 29",ic:"ﷺ"},
-  {n:"Hazret-i Hadîce",r:"İlk müslüman / Zevce",d:"İlk îmân eden. Tüm malını İslâm'a verdi. Rüyâsında ayın koynuna girdiğini görmüştü.",s:"53-57",ic:"🌙"},
-  {n:"Hazret-i Ebû Bekr",r:"Sıddîk / İlk Halîfe",d:"Mîrâc'ı tereddütsüz tasdik etti. Hicret yoldaşı. Bilâl'i âzâd etti.",s:"64-67",ic:"⭐"},
-  {n:"Hazret-i Ali",r:"İlk genç müslüman",d:"Hicret gecesi yatağa yattı. Kâbe hakemliğinde bulundu.",s:"67-70",ic:"⚔"},
+  {n:"Hazret-i Hadîce",r:"İlk müslüman / Zevce",d:"İlk îmân eden. Tüm malını İslâm'a verdi.",s:"53-57",ic:"🌙"},
+  {n:"Hazret-i Ebû Bekr",r:"Sıddîk / İlk Halîfe",d:"Mîrâc'ı tereddütsüz tasdik etti. Hicret yoldaşı.",s:"64-67",ic:"⭐"},
+  {n:"Hazret-i Ali",r:"İlk genç müslüman",d:"Hicret gecesi yatağa yattı.",s:"67-70",ic:"⚔"},
   {n:"Hazret-i Bilâl",r:"Müezzin",d:"Kızgın kumda 'Ehad!' haykırdı. Kâbe üstünden ezan okudu.",s:"79-80",ic:"🌟"},
   {n:"Hazret-i Hamza",r:"Şehîdlerin efendisi",d:"Bi'setin 6. yılında İslâm'ı kabul etti. Uhud'da şehîd oldu.",s:"101-102",ic:"⚔"},
-  {n:"Hazret-i Ömer",r:"İkinci Halîfe",d:"İslâm'ı yok etmek isterken îmân etti. Ömer'le İslâm güçlendi.",s:"103-107",ic:"⚔"},
+  {n:"Hazret-i Ömer",r:"İkinci Halîfe",d:"İslâm'ı yok etmek isterken îmân etti.",s:"103-107",ic:"⚔"},
   {n:"Abdülmuttalib",r:"Dede",d:"Zemzem'i kazdı. Ebrehe'ye 'Kâbe'nin sahibi vardır' dedi.",s:"13-17",ic:"👤"},
   {n:"Halîme Hâtun",r:"Sütanne",d:"O'nu alınca kuraklıkta bereket başladı.",s:"39-44",ic:"👤"},
   {n:"Hazret-i Sümeyye",r:"İlk şehîd",d:"İslâm'ın ilk kadın şehîdi.",s:"84",ic:"🌹"},
@@ -904,7 +820,6 @@ document.getElementById('pGrid').innerHTML=PPL.map((p,i)=>`<div class="pc rv" on
 document.querySelectorAll('.pgrid .rv').forEach(el=>obs.observe(el));
 function sP(i){const p=PPL[i];document.getElementById('mC').innerHTML=`<div style="text-align:center;font-size:2.5rem;margin-bottom:.5rem">${p.ic}</div><h3>${p.n}</h3><div style="display:inline-block;background:var(--g2);color:var(--gold);font-size:.72rem;padding:.12rem .7rem;border-radius:8px;margin-bottom:.8rem">${p.r}</div><p>${p.d}</p><p style="font-size:.8rem;color:var(--gd);font-weight:600">📖 Sayfa ${p.s}</p>`;document.getElementById('mBg').classList.add('show')}
 function cM(){document.getElementById('mBg').classList.remove('show')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){cM();closeToc()}});
 
 // ===== GLOSSARY =====
 const TRM=[
@@ -944,7 +859,7 @@ renderG();
 // ===== QUIZ =====
 const QZ=[
   {q:"Peygamber Efendimiz sallallahü aleyhi ve sellem hangi şehirde doğdu?",o:["Medîne","Mekke-i Mükerreme","Tâif","Kudüs"],a:1,s:"29",x:"Rebîu'l-evvel 12, Pazartesi gecesi doğdu."},
-  {q:"Sütannesi kimdir?",o:["Süveybe","Halîme Hâtun","Âmine","Şifâ Hâtun"],a:1,s:"39",x:"Benî Sa'd kabîlesinden. O'nu alınca bereket başladı."},
+  {q:"Sütannesi kimdir?",o:["Süveybe","Halîme Hâtun","Âmine","Şifâ Hâtun"],a:1,s:"39",x:"Benî Sa'd kabîlesinden."},
   {q:"İlk vahiy hangi mağarada geldi?",o:["Sevr","Hirâ","Uhud","Tâif"],a:1,s:"62",x:"Cebrâil aleyhisselâm 'İkra!' dedi."},
   {q:"İslâm'ın ilk şehîdi kimdir?",o:["Hz. Hamza","Hz. Bilâl","Hz. Sümeyye","Hz. Habbâb"],a:2,s:"84",x:"Ebû Cehil'in zulmüyle şehîd oldu."},
   {q:"Fil vak'asında Kâbe'yi yıkmak isteyen kim?",o:["Ebû Cehil","Ebû Leheb","Ebrehe","Necâşî"],a:2,s:"21",x:"Allahü teâlâ Ebâbil kuşlarını gönderdi."},
@@ -959,12 +874,11 @@ const QZ=[
   {q:"Mîrâc'da kaç vakit namaz emredildi?",o:["3","5","7","10"],a:1,s:"135",x:"Başta 50, Mûsâ aleyhisselâmın tavsiyesiyle 5'e indi."},
   {q:"Dâr-ül-Erkâm nedir?",o:["Dağ","Mağara","İlk toplanma evi","Savaş alanı"],a:2,s:"83",x:"Gizli toplanma ve öğretim mekânı."},
   {q:"Doğum gecesi neler oldu?",o:["Hiçbir şey","360 put yıkıldı","Zelzele","Güneş tutulması"],a:1,s:"35",x:"Putlar düştü, Kisrâ sarayı çöktü, ateşgede söndü."},
-  {q:"Tâif'te dağ meleği ne teklif etti?",o:["Savaş","İki dağı kapatmak","Sel","Deprem"],a:1,s:"128",x:"Peygamber Efendimiz reddetti: 'Belki îmân edenler çıkar.'"},
+  {q:"Tâif'te dağ meleği ne teklif etti?",o:["Savaş","İki dağı kapatmak","Sel","Deprem"],a:1,s:"128",x:"Peygamber Efendimiz reddetti."},
   {q:"Mekke fethinde Kâbe'den ezan okuyan kim?",o:["Hz. Ali","Hz. Ömer","Hz. Bilâl","Hz. Hamza"],a:2,s:"371",x:"Yıllar önce 'Ehad!' diyen ses Kâbe'den yankılandı."},
   {q:"Abdülmuttalib Ebrehe'ye ne dedi?",o:["Geri dön!","Kâbe'nin sahibi vardır","Savaşacağız!","Yaklaşma!"],a:1,s:"21",x:"'Ben develerin sahibiyim. Kâbe'yi O korur.'"},
   {q:"Kaç yaşında evlendi?",o:["20","25","30","35"],a:1,s:"56",x:"Hazret-i Hadîce vâlidemiz ile."},
 ];
-// Quiz state with localStorage persistence
 let qi=0,qs=0,qa=new Array(QZ.length).fill(false);
 try{const saved=JSON.parse(localStorage.getItem('spQuiz'));if(saved){qi=saved.qi||0;qs=saved.qs||0;qa=saved.qa||qa}}catch(e){}
 function saveQuiz(){try{localStorage.setItem('spQuiz',JSON.stringify({qi,qs,qa}))}catch(e){}}
@@ -976,14 +890,14 @@ function rQ(){qi=0;qs=0;qa=new Array(QZ.length).fill(false);saveQuiz();rQz()}
 rQz();
 </script>
 <div style="max-width:720px;margin:24px auto;padding:0 20px;text-align:right;">
-  <span style="font-size:11px;color:var(--muted2,var(--muted,#6b7280));letter-spacing:0.05em;">Son güncelleme: Mart 2026</span>
+  <span style="font-size:11px;color:var(--tx3);letter-spacing:0.05em;">Son güncelleme: Mart 2026</span>
 </div>
 <div style="max-width:720px;margin:24px auto;padding:0 20px;">
   <div style="display:flex;gap:10px;flex-wrap:wrap;">
-    <a href="/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">&larr; Ana Sayfa</a>
-    <a href="/noroterbiye/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">NöroTerbiye</a>
-    <a href="/islam-bilim-yildizlari/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">İslam Bilim Yıldızları</a>
-    <a href="/osmanlica/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">Osmanlıca Lügat</a>
+    <a href="/" style="font-size:12px;color:var(--tx3);text-decoration:none;padding:6px 14px;border:1px solid var(--border-clr);border-radius:20px;transition:all 0.2s;">&larr; Ana Sayfa</a>
+    <a href="/noroterbiye/" style="font-size:12px;color:var(--tx3);text-decoration:none;padding:6px 14px;border:1px solid var(--border-clr);border-radius:20px;transition:all 0.2s;">NöroTerbiye</a>
+    <a href="/islam-bilim-yildizlari/" style="font-size:12px;color:var(--tx3);text-decoration:none;padding:6px 14px;border:1px solid var(--border-clr);border-radius:20px;transition:all 0.2s;">İslam Bilim Yıldızları</a>
+    <a href="/osmanlica/" style="font-size:12px;color:var(--tx3);text-decoration:none;padding:6px 14px;border:1px solid var(--border-clr);border-radius:20px;transition:all 0.2s;">Osmanlıca Lügat</a>
   </div>
 </div>
 </body>
