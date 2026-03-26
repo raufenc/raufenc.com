@@ -28,23 +28,11 @@
     // Zoom control right side
     L.control.zoom({ position: 'topright' }).addTo(map);
 
-    // Tile layers
-    const osmLight = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap',
+    // Tile layer — OpenStreetMap (no API key needed)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a>',
       maxZoom: 19
-    });
-
-    const terrain = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; Stamen/Stadia',
-      maxZoom: 18
-    });
-
-    // Default to terrain for historical feel, fallback to OSM
-    terrain.addTo(map);
-    terrain.on('tileerror', function() {
-      map.removeLayer(terrain);
-      osmLight.addTo(map);
-    });
+    }).addTo(map);
 
     // Marker cluster
     markerCluster = L.markerClusterGroup({
