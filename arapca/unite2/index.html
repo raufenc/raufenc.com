@@ -1131,6 +1131,175 @@ body:not(.show-tr) .tr-only { display: none !important; }
   color: #fff;
 }
 .checklist-item .check-text { font-size: 16px; flex: 1; }
+
+/* ---- Combo popup ---- */
+.combo-popup {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  z-index: 9999; animation: comboPopIn 1.5s ease-out forwards;
+  pointer-events: none;
+}
+.combo-emoji { font-size: 64px; }
+.combo-text { font-family: var(--font-heading); font-size: 36px; color: var(--accent); text-shadow: 2px 2px 0 var(--primary-dark); }
+.combo-count { font-size: 24px; color: var(--primary); font-weight: 800; }
+@keyframes comboPopIn {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  20% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+  40% { transform: translate(-50%, -50%) scale(1); }
+  100% { transform: translate(-50%, -80%) scale(0.5); opacity: 0; }
+}
+
+/* ---- Combo display in game header ---- */
+#comboDisplay {
+  display: none; align-items: center; gap: 4px;
+  font-size: 20px; font-weight: 800;
+  animation: none;
+}
+.combo-pulse { animation: pulse 0.3s; }
+
+/* ---- Level up overlay ---- */
+.level-up-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10000; animation: fadeIn .3s;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.level-up-content { text-align: center; animation: bounceIn .6s; }
+.level-up-emoji { font-size: 96px; animation: float 2s infinite; }
+.level-up-text { font-family: var(--font-heading); font-size: 36px; color: var(--accent); margin: 16px 0 8px; }
+.level-up-name { font-family: var(--font-heading); font-size: 48px; color: white; }
+@keyframes bounceIn {
+  0% { transform: scale(0); } 50% { transform: scale(1.2); } 100% { transform: scale(1); }
+}
+
+/* ---- Daily mission card ---- */
+.mission-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius); padding: 16px; color: white; margin-bottom: 16px;
+}
+.mission-card h4 { font-family: var(--font-heading); font-size: 18px; margin-bottom: 12px; }
+.mission-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+}
+.mission-item:last-child { border: none; }
+.mission-icon { font-size: 20px; }
+.mission-text { flex: 1; font-size: 14px; }
+.mission-progress-bar {
+  width: 60px; height: 6px; background: rgba(255,255,255,.3); border-radius: 3px; overflow: hidden;
+}
+.mission-progress-fill {
+  height: 100%; background: var(--accent); border-radius: 3px; transition: width .4s;
+}
+.mission-check { font-size: 16px; }
+
+/* ---- Streak badge ---- */
+.streak-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, #FF6B35, #F7931E);
+  color: white; padding: 8px 16px; border-radius: 24px;
+  font-weight: 700; font-size: 18px;
+  box-shadow: 0 4px 12px rgba(255,107,53,.3);
+  animation: pulse 2s infinite;
+}
+
+/* ---- XP bar ---- */
+.xp-bar-container {
+  background: rgba(0,0,0,.1); border-radius: 12px; height: 20px;
+  overflow: hidden; position: relative; margin: 8px 0;
+}
+.xp-bar-fill {
+  height: 100%; background: linear-gradient(to left, var(--accent), var(--accent-light));
+  border-radius: 12px; transition: width .6s; position: relative;
+}
+.xp-bar-text {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--text);
+}
+
+/* ---- Timer bar ---- */
+.timer-bar {
+  height: 6px; background: #e0e0e0; border-radius: 3px; margin: 8px 0; overflow: hidden;
+}
+.timer-bar-fill {
+  height: 100%; background: var(--success); border-radius: 3px;
+  transition: width .1s linear;
+}
+.timer-bar-fill.warning { background: var(--accent); }
+.timer-bar-fill.danger { background: var(--error); animation: pulse .5s infinite; }
+
+/* ---- Button press effect ---- */
+.btn, .module-card, .vocab-row, .game-card, .option-btn, .drag-item, .classify-bin {
+  transition: transform .1s, box-shadow .1s;
+}
+.btn:active, .module-card:active, .option-btn:active {
+  transform: scale(0.95) !important;
+}
+
+/* ---- Card hover lift ---- */
+.module-card:hover, .game-card:hover, .vocab-list-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- Glow effect for correct answers ---- */
+@keyframes correctGlow {
+  0% { box-shadow: 0 0 0 rgba(39,174,96,0); }
+  50% { box-shadow: 0 0 20px rgba(39,174,96,.5); }
+  100% { box-shadow: 0 0 0 rgba(39,174,96,0); }
+}
+.correct-glow { animation: correctGlow .6s; }
+
+/* ---- Wrong shake enhanced ---- */
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px) rotate(-2deg); }
+  40% { transform: translateX(8px) rotate(2deg); }
+  60% { transform: translateX(-6px) rotate(-1deg); }
+  80% { transform: translateX(6px) rotate(1deg); }
+}
+.wrong-shake { animation: wrongShake .5s; }
+
+/* ---- Result screen animations ---- */
+.result-star {
+  font-size: 48px; display: inline-block; opacity: 0;
+  transform: scale(0); transition: all .4s;
+}
+.result-star.revealed {
+  opacity: 1; transform: scale(1);
+  animation: starReveal .5s cubic-bezier(.68,-.55,.265,1.55);
+}
+@keyframes starReveal {
+  0% { transform: scale(0) rotate(-180deg); }
+  70% { transform: scale(1.3) rotate(10deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.result-message {
+  font-family: var(--font-heading); font-size: 32px;
+  color: var(--primary-dark); opacity: 0;
+  transform: translateY(20px);
+  transition: all .5s;
+}
+.result-message.show {
+  opacity: 1; transform: translateY(0);
+}
+
+/* ---- XP level card ---- */
+.xp-level-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+}
+.xp-level-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.xp-level-info { display: flex; align-items: center; gap: 8px; }
+.xp-level-emoji { font-size: 28px; }
+.xp-level-name { font-family: var(--font-heading); font-size: 18px; color: var(--primary-dark); }
+.xp-level-xp { font-size: 13px; color: var(--text-light); font-weight: 600; }
 </style>
 </head>
 <body>
@@ -1141,7 +1310,11 @@ body:not(.show-tr) .tr-only { display: none !important; }
     <span class="topbar-title" onclick="navigate('home')">التسوق</span>
   </div>
   <div class="topbar-left">
-    <div class="star-badge" id="totalStarsBadge">
+    <div class="star-badge" id="totalStarsBadge" style="background:#9B59B6;font-size:12px;padding:4px 10px;" title="XP">
+      <span>⚡</span>
+      <span id="totalXPNum">٠</span>
+    </div>
+    <div class="star-badge" id="totalStarsBadge2">
       <span class="star-icon">&#x2B50;</span>
       <span id="totalStarsNum">٠</span>
     </div>
@@ -1335,7 +1508,9 @@ function loadState() {
     mistakeBucket: [],
     badges: [],
     totalStudyTime: 0,
-    firstVisit: Date.now()
+    firstVisit: Date.now(),
+    combo: 0, maxCombo: 0, xp: 0, level: 0, streak: 0, lastPlayDate: null,
+    dailyMissions: [], dailyMissionsDate: null
   };
 }
 function saveState() {
@@ -1371,6 +1546,10 @@ function completeGame(gameId, stars) {
   const prev = state.gameStars[gameId] || 0;
   state.gameStars[gameId] = Math.max(prev, stars);
   if (!state.completedGames.includes(gameId)) state.completedGames.push(gameId);
+  // Track max combo
+  if (currentCombo > (state.maxCombo || 0)) state.maxCombo = currentCombo;
+  if (currentCombo >= 3) updateMission('combo_3', 1);
+  updateMission('play_games', 1);
   // Check module unlock
   DATA.modules.forEach((mod, i) => {
     if (i === 0) return;
@@ -1378,7 +1557,8 @@ function completeGame(gameId, stars) {
     const prevProgress = getModuleProgress(prevMod.id);
     if (prevProgress >= 70 && !state.unlockedModules.includes(mod.id)) {
       state.unlockedModules.push(mod.id);
-      showToast('تم فتح: ' + (MODULE_AR[mod.id]?.title || mod.title_tr));
+      sfx.play('unlock');
+      showToast('🔓 تم فتح: ' + (MODULE_AR[mod.id]?.title || mod.title_tr));
     }
   });
   checkBadges();
@@ -1404,6 +1584,7 @@ const BADGE_DEFS = [
   {id:'first_game', icon:'🎮', name_ar:'اللاعب الأول', name_tr:'İlk Oyun', check: () => state.completedGames.length >= 1},
   {id:'five_games', icon:'🏆', name_ar:'خمس ألعاب', name_tr:'5 Oyun', check: () => state.completedGames.length >= 5},
   {id:'ten_games', icon:'🌟', name_ar:'عشر ألعاب', name_tr:'10 Oyun', check: () => state.completedGames.length >= 10},
+  {id:'twenty_games', icon:'💎', name_ar:'عشرون لعبة', name_tr:'20 Oyun', check: () => state.completedGames.length >= 20},
   {id:'all_vocab', icon:'📚', name_ar:'كل المفردات', name_tr:'Tüm Kelimeler', check: () => state.vocabSeen.length >= 50},
   {id:'first_module', icon:'🔓', name_ar:'الوحدة الأولى', name_tr:'İlk Modül', check: () => getModuleProgress('M01') >= 100},
   {id:'three_stars', icon:'⭐', name_ar:'ثلاث نجوم', name_tr:'3 Yıldız', check: () => Object.values(state.gameStars).some(s => s === 3)},
@@ -1411,6 +1592,15 @@ const BADGE_DEFS = [
   {id:'perfect_run', icon:'🎯', name_ar:'أداء مثالي', name_tr:'Mükemmel Performans', check: () => Object.values(state.gameStars).filter(s => s === 3).length >= 10},
   {id:'reviewer', icon:'🔄', name_ar:'المراجع', name_tr:'Tekrarcı', check: () => state.reviewQueue.length > 0 && state.completedGames.length > 5},
   {id:'master', icon:'👑', name_ar:'أستاذ التسوق', name_tr:'Alışveriş Ustası', check: () => getTotalStars() >= 100},
+  {id:'streak_3', icon:'🔥', name_ar:'٣ أيام متتالية', name_tr:'3 Gün Seri', check: () => (state.streak || 0) >= 3},
+  {id:'streak_7', icon:'🔥', name_ar:'أسبوع كامل', name_tr:'7 Gün Seri', check: () => (state.streak || 0) >= 7},
+  {id:'streak_30', icon:'🌋', name_ar:'شهر كامل', name_tr:'30 Gün Seri', check: () => (state.streak || 0) >= 30},
+  {id:'combo_5', icon:'⚡', name_ar:'كومبو ٥', name_tr:'Kombo 5', check: () => (state.maxCombo || 0) >= 5},
+  {id:'combo_10', icon:'💥', name_ar:'كومبو ١٠', name_tr:'Kombo 10', check: () => (state.maxCombo || 0) >= 10},
+  {id:'xp_500', icon:'📈', name_ar:'٥٠٠ نقطة خبرة', name_tr:'500 XP', check: () => (state.xp || 0) >= 500},
+  {id:'xp_3000', icon:'🚀', name_ar:'٣٠٠٠ نقطة خبرة', name_tr:'3000 XP', check: () => (state.xp || 0) >= 3000},
+  {id:'mission_complete', icon:'🎯', name_ar:'أنجز المهام اليومية', name_tr:'Günlük Görevler', check: () => state.dailyMissions && state.dailyMissions.every(m => m.completed)},
+  {id:'all_modules', icon:'🏅', name_ar:'فتح كل الوحدات', name_tr:'Tüm Modüller', check: () => (state.unlockedModules || []).length >= 8},
 ];
 function checkBadges() {
   BADGE_DEFS.forEach(b => {
@@ -1456,6 +1646,257 @@ class AudioPlayer {
   }
 }
 const audio = new AudioPlayer();
+
+/* ===================================================
+   SOUND EFFECTS (Web Audio API)
+   =================================================== */
+class SoundFX {
+  constructor() { this.ctx = null; }
+  init() { if (!this.ctx) this.ctx = new (window.AudioContext || window.webkitAudioContext)(); }
+  play(type) {
+    if (!state.soundOn) return;
+    this.init();
+    const c = this.ctx;
+    switch(type) {
+      case 'correct': this._tone(c, [523, 659, 784], 0.12, 'sine'); break;
+      case 'wrong': this._tone(c, [300, 200], 0.15, 'sawtooth'); break;
+      case 'combo3': this._tone(c, [523, 659, 784, 1047], 0.1, 'sine'); break;
+      case 'combo5': this._tone(c, [523, 659, 784, 1047, 1319], 0.08, 'sine'); break;
+      case 'combo10': this._tone(c, [523, 587, 659, 698, 784, 880, 988, 1047], 0.06, 'sine'); break;
+      case 'complete': this._tone(c, [523, 659, 784, 1047, 1319], 0.15, 'sine'); break;
+      case 'star': this._tone(c, [880, 1109], 0.12, 'sine'); break;
+      case 'pop': this._tone(c, [600], 0.05, 'sine'); break;
+      case 'unlock': this._tone(c, [262, 330, 392, 523, 659, 784], 0.12, 'sine'); break;
+      case 'levelup': this._tone(c, [523, 659, 784, 1047, 1319, 1568], 0.1, 'triangle'); break;
+      case 'snap': this._tone(c, [800, 1000], 0.04, 'square'); break;
+      case 'flip': this._tone(c, [400, 600], 0.06, 'sine'); break;
+      case 'drop': this._tone(c, [500, 300], 0.08, 'sine'); break;
+    }
+  }
+  _tone(ctx, freqs, dur, type) {
+    freqs.forEach((f, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0.15, ctx.currentTime + i * dur);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * dur + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(ctx.currentTime + i * dur);
+      osc.stop(ctx.currentTime + i * dur + dur + 0.05);
+    });
+  }
+}
+const sfx = new SoundFX();
+
+/* ===================================================
+   COMBO / XP / LEVEL / STREAK / MISSIONS
+   =================================================== */
+let currentCombo = 0;
+
+const LEVELS = [
+  { xp: 0, name_ar: 'مبتدئ', emoji: '🌱' },
+  { xp: 100, name_ar: 'متعلم', emoji: '📚' },
+  { xp: 500, name_ar: 'متوسط', emoji: '⭐' },
+  { xp: 1500, name_ar: 'خبير', emoji: '🏆' },
+  { xp: 3000, name_ar: 'بطل التسوق', emoji: '👑' }
+];
+
+function getLevel(xp) {
+  let lvl = 0;
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (xp >= LEVELS[i].xp) { lvl = i; break; }
+  }
+  return lvl;
+}
+
+function getLevelProgress(xp) {
+  const lvl = getLevel(xp);
+  const cur = LEVELS[lvl].xp;
+  const next = LEVELS[lvl + 1] ? LEVELS[lvl + 1].xp : LEVELS[lvl].xp + 1000;
+  return Math.min(100, ((xp - cur) / (next - cur)) * 100);
+}
+
+function checkLevelUp() {
+  const newLevel = getLevel(state.xp || 0);
+  if (newLevel > (state.level || 0)) {
+    state.level = newLevel;
+    sfx.play('levelup');
+    showLevelUpOverlay(LEVELS[newLevel]);
+  }
+}
+
+function showLevelUpOverlay(level) {
+  const overlay = document.createElement('div');
+  overlay.className = 'level-up-overlay';
+  overlay.innerHTML = `
+    <div class="level-up-content">
+      <div class="level-up-emoji">${level.emoji}</div>
+      <div class="level-up-text">!ارتقيت</div>
+      <div class="level-up-name">${level.name_ar}</div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  burstConfetti(80);
+  setTimeout(() => overlay.remove(), 3000);
+}
+
+function burstConfetti(count) {
+  const box = document.getElementById('confettiBox');
+  const colors = ['#F4A623','#E74C3C','#27AE60','#3498DB','#9B59B6','#1B7A4D','#FF6B35','#00BCD4'];
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animationDelay = Math.random() * 0.5 + 's';
+    piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    piece.style.width = (6 + Math.random()*8) + 'px';
+    piece.style.height = (6 + Math.random()*8) + 'px';
+    box.appendChild(piece);
+  }
+  setTimeout(() => { box.innerHTML = ''; }, 2000);
+}
+
+function onCorrectAnswer(element) {
+  currentCombo++;
+  sfx.play('correct');
+  state.xp = (state.xp || 0) + 10 + (currentCombo * 5);
+
+  if (currentCombo >= 10) {
+    sfx.play('combo10');
+    showComboMessage('!بطل', '👑', currentCombo);
+    burstConfetti(50);
+  } else if (currentCombo >= 5) {
+    sfx.play('combo5');
+    showComboMessage('!ممتاز', '🔥', currentCombo);
+  } else if (currentCombo >= 3) {
+    sfx.play('combo3');
+    showComboMessage('!رائع', '⚡', currentCombo);
+  }
+
+  checkLevelUp();
+  flyStarFrom(element);
+  updateComboDisplay();
+  updateMission('earn_stars', 1);
+  saveState();
+}
+
+function onWrongAnswer() {
+  currentCombo = 0;
+  sfx.play('wrong');
+  updateComboDisplay();
+}
+
+function showComboMessage(text, emoji, count) {
+  const div = document.createElement('div');
+  div.className = 'combo-popup';
+  div.innerHTML = `<span class="combo-emoji">${emoji}</span><span class="combo-text">${text}</span><span class="combo-count">×${toAr(count)}</span>`;
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 1500);
+}
+
+function updateComboDisplay() {
+  const el2 = document.getElementById('comboDisplay');
+  if (!el2) return;
+  if (currentCombo >= 2) {
+    el2.style.display = 'flex';
+    el2.innerHTML = `🔥 <span style="color:var(--accent);font-weight:800;">${toAr(currentCombo)}</span>`;
+    el2.classList.add('combo-pulse');
+    setTimeout(() => el2.classList.remove('combo-pulse'), 300);
+  } else {
+    el2.style.display = 'none';
+  }
+}
+
+/* Streak System */
+function updateStreak() {
+  const today = new Date().toDateString();
+  if (state.lastPlayDate === today) return;
+
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+  if (state.lastPlayDate === yesterday) {
+    state.streak = (state.streak || 0) + 1;
+  } else if (state.lastPlayDate !== today) {
+    state.streak = 1;
+  }
+  state.lastPlayDate = today;
+  saveState();
+}
+
+/* Daily Missions */
+const MISSION_TEMPLATES = [
+  { type: 'play_games', count: 3, text_ar: 'العب ٣ ألعاب', icon: '🎮' },
+  { type: 'learn_words', count: 10, text_ar: 'تعلّم ١٠ كلمات', icon: '📖' },
+  { type: 'complete_dialogue', count: 1, text_ar: 'أكمل حواراً', icon: '💬' },
+  { type: 'earn_stars', count: 5, text_ar: 'اربح ٥ نجوم', icon: '⭐' },
+  { type: 'play_match', count: 1, text_ar: 'العب لعبة مطابقة', icon: '🃏' },
+  { type: 'combo_3', count: 1, text_ar: 'حقق كومبو ٣', icon: '🔥' },
+];
+
+function generateDailyMissions() {
+  const today = new Date().toDateString();
+  if (state.dailyMissionsDate === today && state.dailyMissions?.length) return;
+
+  const shuffled = [...MISSION_TEMPLATES].sort(() => Math.random() - 0.5);
+  state.dailyMissions = shuffled.slice(0, 3).map(m => ({...m, progress: 0, completed: false}));
+  state.dailyMissionsDate = today;
+  saveState();
+}
+
+function updateMission(type, amount) {
+  amount = amount || 1;
+  if (!state.dailyMissions) return;
+  state.dailyMissions.forEach(m => {
+    if (m.type === type && !m.completed) {
+      m.progress = Math.min(m.count, (m.progress || 0) + amount);
+      if (m.progress >= m.count) {
+        m.completed = true;
+        state.xp = (state.xp || 0) + 50;
+        sfx.play('complete');
+        showToast('🎯 ' + m.text_ar + ' ✓');
+      }
+    }
+  });
+  if (state.dailyMissions.every(m => m.completed)) {
+    updateStreak();
+  }
+  saveState();
+}
+
+/* Game Timer */
+let gameTimer = null;
+let gameTimerSeconds = 0;
+let gameTimerMax = 0;
+
+function startGameTimer(seconds, onTimeUp) {
+  gameTimerMax = seconds;
+  gameTimerSeconds = seconds;
+  const timerBar = document.getElementById('timerBar');
+  if (!timerBar) return;
+  timerBar.style.display = 'block';
+
+  if (gameTimer) clearInterval(gameTimer);
+  gameTimer = setInterval(() => {
+    gameTimerSeconds--;
+    const pct = (gameTimerSeconds / gameTimerMax) * 100;
+    const fill = timerBar.querySelector('.timer-bar-fill');
+    if (fill) {
+      fill.style.width = pct + '%';
+      fill.className = 'timer-bar-fill' + (pct < 20 ? ' danger' : pct < 40 ? ' warning' : '');
+    }
+    if (gameTimerSeconds <= 0) {
+      clearInterval(gameTimer);
+      gameTimer = null;
+      if (onTimeUp) onTimeUp();
+    }
+  }, 1000);
+}
+
+function stopGameTimer() {
+  if (gameTimer) { clearInterval(gameTimer); gameTimer = null; }
+}
 
 /* ===================================================
    VOCAB ASSET HELPER
@@ -1611,6 +2052,8 @@ function render() {
 function updateTopBar() {
   const stars = getTotalStars();
   document.getElementById('totalStarsNum').textContent = toAr(stars);
+  const xpEl = document.getElementById('totalXPNum');
+  if (xpEl) xpEl.textContent = toAr(state.xp || 0);
 }
 
 /* ===================================================
@@ -1631,6 +2074,55 @@ function renderHome(container) {
     </div>
   `;
   screen.appendChild(hero);
+
+  // Generate daily missions
+  generateDailyMissions();
+
+  // Streak badge
+  if ((state.streak || 0) > 0) {
+    const streakDiv = el('div', {style:{textAlign:'center', marginBottom:'16px'}});
+    streakDiv.innerHTML = `<div class="streak-badge">🔥 ${toAr(state.streak)} يوم متتالي</div>`;
+    screen.appendChild(streakDiv);
+  }
+
+  // XP / Level card
+  const lvl = getLevel(state.xp || 0);
+  const lvlData = LEVELS[lvl];
+  const lvlProg = getLevelProgress(state.xp || 0);
+  const nextLvl = LEVELS[lvl + 1];
+  const xpCard = el('div', {class:'xp-level-card'});
+  xpCard.innerHTML = `
+    <div class="xp-level-header">
+      <div class="xp-level-info">
+        <span class="xp-level-emoji">${lvlData.emoji}</span>
+        <span class="xp-level-name">${lvlData.name_ar}</span>
+      </div>
+      <span class="xp-level-xp">${toAr(state.xp || 0)} XP</span>
+    </div>
+    <div class="xp-bar-container">
+      <div class="xp-bar-fill" style="width:${lvlProg}%"></div>
+      <div class="xp-bar-text">${nextLvl ? lvlData.name_ar + ' → ' + nextLvl.name_ar : '🏆 ' + lvlData.name_ar}</div>
+    </div>
+  `;
+  screen.appendChild(xpCard);
+
+  // Daily Missions card
+  if (state.dailyMissions && state.dailyMissions.length > 0) {
+    const missionCard = el('div', {class:'mission-card'});
+    missionCard.innerHTML = `<h4>🎯 المهام اليومية</h4>`;
+    state.dailyMissions.forEach(m => {
+      const pct = m.count > 0 ? Math.min(100, (m.progress || 0) / m.count * 100) : 0;
+      const mItem = el('div', {class:'mission-item'});
+      mItem.innerHTML = `
+        <span class="mission-icon">${m.icon}</span>
+        <span class="mission-text">${m.text_ar}</span>
+        <div class="mission-progress-bar"><div class="mission-progress-fill" style="width:${pct}%"></div></div>
+        <span class="mission-check">${m.completed ? '✅' : toAr(m.progress || 0) + '/' + toAr(m.count)}</span>
+      `;
+      missionCard.appendChild(mItem);
+    });
+    screen.appendChild(missionCard);
+  }
 
   // Section header
   const sh = el('div', {class:'section-header'});
@@ -1811,13 +2303,13 @@ function renderModule(container, modId) {
 function renderVocab(container, vocabId) {
   const vocab = getVocabById(vocabId);
   if (!vocab) { navigate('home'); return; }
-  if (!state.vocabSeen.includes(vocabId)) { state.vocabSeen.push(vocabId); saveState(); }
+  if (!state.vocabSeen.includes(vocabId)) { state.vocabSeen.push(vocabId); updateMission('learn_words', 1); saveState(); }
 
   const idx = DATA.vocabulary.indexOf(vocab);
   const screen = el('div', {class:'screen active'});
   screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
 
-  const card = el('div', {class:'vocab-card-large', onclick: function() { this.classList.toggle('flipped'); }});
+  const card = el('div', {class:'vocab-card-large', onclick: function() { this.classList.toggle('flipped'); sfx.play('flip'); }});
   const img = getVocabImage(vocabId);
   const inner = el('div', {class:'vocab-card-inner'});
 
@@ -1950,16 +2442,25 @@ function renderGame(container, gameId) {
   // Back button
   screen.appendChild(el('div', {class:'back-row', html: '→ ' + LANG.back, onclick: () => history.back()}));
 
+  // Reset combo at game start
+  currentCombo = 0;
+
   // Game header
   const header = el('div', {class:'game-header'});
   header.innerHTML = `
     <div class="game-title">${GAME_ICONS[engine] || '🎮'} ${gameTitle(game)}</div>
-    <div class="game-score" id="gameScore">⭐ <span id="scoreNum">٠</span></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="comboDisplay"></div>
+      <div class="game-score" id="gameScore">⭐ <span id="scoreNum">٠</span></div>
+    </div>
   `;
   screen.appendChild(header);
 
   // Progress bar
   screen.appendChild(el('div', {class:'game-progress-bar', html:'<div class="game-progress-fill" id="gameProg" style="width:0%"></div>'}));
+
+  // Timer bar (hidden by default, engines can activate it)
+  screen.appendChild(el('div', {class:'timer-bar', id:'timerBar', style:{display:'none'}, html:'<div class="timer-bar-fill" style="width:100%"></div>'}));
 
   // Game area
   const area = el('div', {class:'game-area', id:'gameArea'});
@@ -1991,25 +2492,75 @@ function renderGame(container, gameId) {
    GAME RESULT HELPER
    =================================================== */
 function showGameResult(area, gameId, correct, total) {
+  stopGameTimer();
   const pct = total > 0 ? correct / total : 0;
   const stars = pct >= 0.9 ? 3 : pct >= 0.7 ? 2 : pct >= 0.4 ? 1 : 0;
   completeGame(gameId, stars);
-  if (stars >= 2) fireConfetti();
+
+  const xpEarned = correct * 10 + stars * 25;
+  state.xp = (state.xp || 0) + xpEarned;
+  saveState();
 
   area.innerHTML = '';
   const result = el('div', {class:'result-screen'});
-  const msg = stars === 3 ? LANG.excellent : stars === 2 ? LANG.well_done : stars === 1 ? LANG.good : LANG.try_again;
+
+  // Message (hidden initially)
+  const msgs = {
+    3: {text: '!ممتاز', emoji: '🎉'},
+    2: {text: '!أحسنت', emoji: '👏'},
+    1: {text: 'جيد', emoji: '👍'},
+    0: {text: 'حاول مرة أخرى', emoji: '💪'}
+  };
+  const m = msgs[stars];
+
   result.innerHTML = `
-    <div class="result-msg">${msg}</div>
-    <div class="result-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}</div>
-    <div class="result-score">${toAr(correct)}/${toAr(total)}</div>
-    <div class="result-label">${LANG.score}</div>
-    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
-      <button class="btn btn-outline" onclick="navigate('game/${gameId}')">${LANG.retry}</button>
-      <button class="btn btn-primary" onclick="history.back()">${LANG.back}</button>
+    <div class="result-message" id="resultMsg">${m.emoji} ${m.text}</div>
+    <div style="margin:20px 0;min-height:60px;">
+      <span class="result-star" id="star1">${stars >= 1 ? '⭐' : '☆'}</span>
+      <span class="result-star" id="star2">${stars >= 2 ? '⭐' : '☆'}</span>
+      <span class="result-star" id="star3">${stars >= 3 ? '⭐' : '☆'}</span>
+    </div>
+    <div class="result-score" style="opacity:0;transition:opacity .5s;" id="resultScore">${toAr(correct)}/${toAr(total)}</div>
+    <div class="result-label" style="opacity:0;transition:opacity .5s;" id="resultLabel">${LANG.score}</div>
+    <div style="margin-top:8px;opacity:0;transition:opacity .5s;" id="resultXP">
+      <span style="color:var(--accent);font-weight:700;font-size:18px;">+${toAr(xpEarned)} XP</span>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;opacity:0;transition:opacity .5s;" id="resultBtns">
+      <button class="btn btn-outline" onclick="navigate('game/${gameId}')">${LANG.retry} 🔄</button>
+      <button class="btn btn-primary" onclick="history.back()">→ ${LANG.back}</button>
     </div>
   `;
   area.appendChild(result);
+
+  // Animate stars one by one
+  setTimeout(() => {
+    const s1 = document.getElementById('star1');
+    if (s1) { s1.classList.add('revealed'); if (stars >= 1) sfx.play('star'); }
+  }, 400);
+  setTimeout(() => {
+    const s2 = document.getElementById('star2');
+    if (s2) { s2.classList.add('revealed'); if (stars >= 2) sfx.play('star'); }
+  }, 900);
+  setTimeout(() => {
+    const s3 = document.getElementById('star3');
+    if (s3) { s3.classList.add('revealed'); if (stars >= 3) sfx.play('star'); }
+  }, 1400);
+
+  // Show message
+  setTimeout(() => {
+    const msg = document.getElementById('resultMsg');
+    if (msg) msg.classList.add('show');
+  }, 1800);
+
+  // Show score and buttons
+  setTimeout(() => {
+    ['resultScore','resultLabel','resultXP','resultBtns'].forEach(id => {
+      const e = document.getElementById(id);
+      if (e) e.style.opacity = '1';
+    });
+    if (stars >= 2) burstConfetti(stars * 20);
+    if (stars === 3) sfx.play('complete');
+  }, 2200);
 }
 
 function updateProgress(current, total) {
@@ -2053,6 +2604,11 @@ function runMCQEngine(area, game, vocab, patterns) {
 
   let qi = 0, score = 0, attempts = 0;
 
+  // Start timer (60 seconds for MCQ)
+  startGameTimer(60, () => {
+    showGameResult(area, game.id, score, questions.length);
+  });
+
   function showQuestion() {
     if (qi >= questions.length) {
       showGameResult(area, game.id, score, questions.length);
@@ -2074,14 +2630,18 @@ function runMCQEngine(area, game, vocab, patterns) {
         optDiv.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
         if (opt === q.answer) {
           btn.classList.add('correct');
+          btn.classList.add('correct-glow');
           score++;
           updateScore(score);
           audio.playWord(opt);
-          flyStarFrom(btn);
+          onCorrectAnswer(btn);
+          updateMission('learn_words', 1);
         } else {
           btn.classList.add('wrong');
+          btn.classList.add('wrong-shake');
           optDiv.querySelector(`.mcq-option:nth-child(${q.options.indexOf(q.answer)+1})`).classList.add('correct');
           addToReview(q.vocabId, 'vocab');
+          onWrongAnswer();
         }
         attempts++;
         await sleep(1200);
@@ -2148,6 +2708,8 @@ function runMatchEngine(area, game, vocab) {
         matched.add(cards[a].pair);
         score++;
         updateScore(score);
+        onCorrectAnswer(area);
+        updateMission('play_match', 1);
         await sleep(500);
         flipped = [];
         renderGrid();
@@ -2157,6 +2719,7 @@ function runMatchEngine(area, game, vocab) {
           showGameResult(area, game.id, score, items.length);
         }
       } else {
+        onWrongAnswer();
         await sleep(800);
         flipped = [];
         renderGrid();
@@ -2227,6 +2790,7 @@ function runDragDropEngine(area, game, vocab, patterns) {
       });
       score = correct;
       updateScore(score);
+      if (correct === items.length) { onCorrectAnswer(checkBtn); } else if (correct > 0) { sfx.play('correct'); } else { onWrongAnswer(); }
       showGameResult(area, game.id, correct, items.length);
     };
     area.appendChild(checkBtn);
@@ -2295,8 +2859,8 @@ function runClassifyEngine(area, game, vocab) {
           bin.onclick = () => {
             const binName = bin.getAttribute('data-bin');
             placed[word] = binName;
-            if (correctBin[word] === binName) { score++; updateScore(score); }
-            else { addToReview(word, 'classify'); }
+            if (correctBin[word] === binName) { score++; updateScore(score); onCorrectAnswer(bin); }
+            else { addToReview(word, 'classify'); onWrongAnswer(); }
             renderClassify();
             // Check if done
             if (Object.keys(placed).length === allItems.length) {
@@ -2384,12 +2948,13 @@ function runFillBlankEngine(area, game, vocab, patterns) {
         score++;
         updateScore(score);
         const blank = document.getElementById('theBlank');
-        if (blank) blank.style.color = 'var(--success)';
-        flyStarFrom(area);
+        if (blank) { blank.style.color = 'var(--success)'; blank.classList.add('correct-glow'); }
+        onCorrectAnswer(area);
       } else {
         addToReview(q.patId, 'pattern');
         const blank = document.getElementById('theBlank');
         if (blank) { blank.style.color = 'var(--error)'; blank.textContent = q.answer; }
+        onWrongAnswer();
       }
       await sleep(1000);
       qi++; selected = null;
@@ -2448,11 +3013,12 @@ function runCompareEngine(area, game, vocab) {
         score++;
         updateScore(score);
         opts.children[choice === 'a' ? 0 : 1].classList.replace('btn-outline', 'btn-primary');
-        flyStarFrom(area);
+        onCorrectAnswer(opts.children[choice === 'a' ? 0 : 1]);
       } else {
         opts.children[choice === 'a' ? 0 : 1].style.background = 'var(--error)';
         opts.children[choice === 'a' ? 0 : 1].style.color = '#fff';
         opts.children[c.correct === 'a' ? 0 : 1].classList.replace('btn-outline', 'btn-primary');
+        onWrongAnswer();
       }
       await sleep(1200);
       qi++;
@@ -2531,10 +3097,15 @@ function runMarketEngine(area, game, vocab, patterns) {
         opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
         if (opt === q.answer) {
           btn.classList.add('correct');
+          btn.classList.add('correct-glow');
           score++;
           updateScore(score);
+          onCorrectAnswer(btn);
+          updateMission('complete_dialogue', 1);
         } else {
           btn.classList.add('wrong');
+          btn.classList.add('wrong-shake');
+          onWrongAnswer();
         }
         await sleep(1000);
         qi++;
@@ -2580,10 +3151,12 @@ function runWriteEngine(area, game, vocab, patterns) {
         score++;
         updateScore(score);
         input.style.borderColor = 'var(--success)';
-        flyStarFrom(area);
+        input.classList.add('correct-glow');
+        onCorrectAnswer(input);
       } else {
         input.style.borderColor = 'var(--error)';
         addToReview(v.id, 'vocab');
+        onWrongAnswer();
         // Show correct answer
         area.appendChild(el('p', {text: v.ar, style:{textAlign:'center', fontFamily:'var(--font-heading)', fontSize:'24px', color:'var(--success)', marginTop:'8px'}}));
       }
@@ -2614,6 +3187,8 @@ function runConceptEngine(area, game, vocab) {
         class: 'concept-node' + (visited.has(v.id) ? ' visited' : ''),
         onclick: () => {
           visited.add(v.id);
+          sfx.play('pop');
+          updateMission('learn_words', 1);
           if (!state.vocabSeen.includes(v.id)) { state.vocabSeen.push(v.id); saveState(); }
           showDetail(v);
         }
@@ -2695,8 +3270,8 @@ function runTableEngine(area, game, vocab, patterns) {
       const btn = el('button', {class:'mcq-option', text: opt});
       btn.onclick = async () => {
         opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
-        if (opt === q.answer) { btn.classList.add('correct'); score++; updateScore(score); }
-        else { btn.classList.add('wrong'); }
+        if (opt === q.answer) { btn.classList.add('correct'); btn.classList.add('correct-glow'); score++; updateScore(score); onCorrectAnswer(btn); }
+        else { btn.classList.add('wrong'); btn.classList.add('wrong-shake'); onWrongAnswer(); }
         await sleep(1000);
         qi++;
         showTableQ();
@@ -2801,6 +3376,7 @@ function runSearchEngine(area, game, vocab) {
         wordCells.forEach(k => found.add(k));
         selected.clear();
         updateScore(found.size);
+        onCorrectAnswer(area);
         renderWS();
         if (placedWords.every(pw2 => isWordFound(pw2))) {
           setTimeout(() => showGameResult(area, game.id, placedWords.length, placedWords.length), 600);
@@ -2869,6 +3445,12 @@ function runExamEngine(area, game, vocab, patterns) {
   }
 
   let qi = 0, score = 0;
+
+  // Start timer (90 seconds for exam)
+  startGameTimer(90, () => {
+    showGameResult(area, game.id, score, questions.length);
+  });
+
   function showExamQ() {
     if (qi >= questions.length) { showGameResult(area, game.id, score, questions.length); return; }
     area.innerHTML = '';
@@ -2887,11 +3469,15 @@ function runExamEngine(area, game, vocab, patterns) {
         opts.querySelectorAll('.mcq-option').forEach(b => b.style.pointerEvents = 'none');
         if (opt === q.answer) {
           btn.classList.add('correct');
+          btn.classList.add('correct-glow');
           score++;
           updateScore(score);
+          onCorrectAnswer(btn);
         } else {
           btn.classList.add('wrong');
+          btn.classList.add('wrong-shake');
           addToReview(q.vocabId, 'vocab');
+          onWrongAnswer();
         }
         await sleep(1000);
         qi++;
@@ -2994,7 +3580,23 @@ function renderProfile(container) {
   const statsCard = el('div', {class:'card'});
   const totalStars = getTotalStars();
   const maxStars = getMaxStars();
+  const pLvl = getLevel(state.xp || 0);
+  const pLvlData = LEVELS[pLvl];
   statsCard.innerHTML = `
+    <div class="profile-stat">
+      <div class="stat-icon">${pLvlData.emoji}</div>
+      <div>
+        <div class="stat-value">${pLvlData.name_ar}</div>
+        <div class="stat-label">${toAr(state.xp || 0)} XP</div>
+      </div>
+    </div>
+    <div class="profile-stat">
+      <div class="stat-icon">🔥</div>
+      <div>
+        <div class="stat-value">${toAr(state.streak || 0)}</div>
+        <div class="stat-label">أيام متتالية</div>
+      </div>
+    </div>
     <div class="profile-stat">
       <div class="stat-icon">⭐</div>
       <div>
@@ -3014,6 +3616,13 @@ function renderProfile(container) {
       <div>
         <div class="stat-value">${toAr(state.vocabSeen.length)} / ${toAr(DATA.vocabulary.length)}</div>
         <div class="stat-label">${LANG.vocabulary}</div>
+      </div>
+    </div>
+    <div class="profile-stat">
+      <div class="stat-icon">⚡</div>
+      <div>
+        <div class="stat-value">${toAr(state.maxCombo || 0)}</div>
+        <div class="stat-label">أعلى كومبو</div>
       </div>
     </div>
   `;
