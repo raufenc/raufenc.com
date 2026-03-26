@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayı Tarih Atlası — Osmanlı Kuruluş Dönemi</title>
+  <meta name="description" content="Osmanlı İmparatorluğu'nun kuruluş dönemi (1258–1421) interaktif tarih atlası. 134 konum, 7 muharebe, göç güzergahları ve sınır değişimleri.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+
+  <!-- Atlas CSS -->
+  <link rel="stylesheet" href="css/atlas.css">
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+</head>
+<body>
+
+  <!-- ═══════ HEADER ═══════ -->
+  <header id="atlas-header">
+    <div class="header-left">
+      <a href="/kayi/" class="back-link" title="Kayı Ana Sayfa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <div class="header-title">
+        <h1 data-i18n="site.title">Kayı Tarih Atlası</h1>
+        <span class="header-subtitle" data-i18n="site.subtitle">Osmanlı Kuruluş Dönemi (1258–1421)</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <!-- Search -->
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" data-i18n-placeholder="search.placeholder" placeholder="Konum ara...">
+        <div id="search-results" class="search-results hidden"></div>
+      </div>
+      <!-- Stats -->
+      <div class="header-stats">
+        <span class="stat"><strong>134</strong> <span data-i18n="stats.locations">Konum</span></span>
+        <span class="stat"><strong>7</strong> <span data-i18n="stats.battles">Muharebe</span></span>
+        <span class="stat"><strong>163</strong> <span data-i18n="stats.years">Yıl</span></span>
+      </div>
+      <!-- Lang Toggle -->
+      <button id="lang-toggle" class="header-btn" title="Switch Language">
+        <span data-i18n="lang.switch">English</span>
+      </button>
+      <!-- Theme Toggle -->
+      <button id="theme-toggle" class="header-btn" title="Tema Değiştir">
+        <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════ MAIN LAYOUT ═══════ -->
+  <main id="atlas-main">
+
+    <!-- ── LEFT SIDEBAR ── -->
+    <aside id="sidebar" class="sidebar">
+      <!-- Period Filter -->
+      <div class="sidebar-section">
+        <h3 data-i18n="filter.period">Dönem</h3>
+        <div id="period-filter" class="filter-list"></div>
+      </div>
+      <!-- Category Filter -->
+      <div class="sidebar-section">
+        <h3 data-i18n="filter.category">Kategori</h3>
+        <div id="category-filter" class="filter-chips"></div>
+      </div>
+      <!-- Layers -->
+      <div class="sidebar-section">
+        <h3 data-i18n="filter.layers">Katmanlar</h3>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-cities" checked>
+          <span data-i18n="layer.cities">Şehirler</span>
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-battles" checked>
+          <span data-i18n="layer.battles">Savaşlar</span>
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-routes" checked>
+          <span data-i18n="layer.routes">Güzergâhlar</span>
+        </label>
+        <label class="layer-toggle">
+          <input type="checkbox" id="layer-boundaries" checked>
+          <span data-i18n="layer.boundaries">Sınırlar</span>
+        </label>
+      </div>
+      <!-- Sultan info -->
+      <div class="sidebar-section" id="sultan-info">
+        <h3 data-i18n="sultans.title">Padişahlar</h3>
+        <div id="sultan-cards"></div>
+      </div>
+    </aside>
+
+    <!-- ── MAP + TIMELINE ── -->
+    <div id="center-column">
+      <div id="map-container">
+        <div id="map"></div>
+        <!-- Legend -->
+        <div id="map-legend"></div>
+      </div>
+
+      <!-- Timeline -->
+      <div id="timeline-container">
+        <!-- Period color band -->
+        <div id="period-band"></div>
+        <div id="timeline-controls">
+          <button id="btn-play" class="timeline-btn" title="Oynat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
+          <div id="timeline-slider-wrap">
+            <input type="range" id="timeline-slider" min="1258" max="1421" value="1421" step="1">
+            <div id="slider-year-label">1421</div>
+          </div>
+          <button id="btn-reset" class="timeline-btn" title="Sıfırla">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RIGHT PANEL ── -->
+    <aside id="detail-panel" class="panel hidden">
+      <button id="panel-close" class="panel-close-btn" title="Kapat">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div id="panel-content"></div>
+    </aside>
+  </main>
+
+  <!-- ═══════ MOBILE SIDEBAR TOGGLE ═══════ -->
+  <button id="mobile-sidebar-toggle" title="Filtreler">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+  </button>
+
+  <!-- ═══════ SCRIPTS ═══════ -->
+  <script src="js/i18n.js"></script>
+  <script src="js/locations.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/boundaries.js"></script>
+  <script src="data/routes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
