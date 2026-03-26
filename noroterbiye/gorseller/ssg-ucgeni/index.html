@@ -400,7 +400,7 @@
 
     <!-- LEFT: Triangle -->
     <div class="tri-canvas">
-      <svg viewBox="0 0 500 500" id="triSvg">
+      <svg viewBox="0 0 500 500" id="triSvg" role="img" aria-label="ŞŞG Üçgeni: Şehvet (dopamin), Şöhret (serotonin) ve Gadab (kortizol) dürtülerini üçgen modelle gösteren interaktif diyagram">
         <defs>
           <!-- Radial glows -->
           <radialGradient id="rgAmber" cx="50%" cy="10%" r="35%">
@@ -495,7 +495,7 @@
         <text x="250" y="320" class="nefs-txt">NEFS</text>
 
         <!-- ── Vertex: Şehvet (top) ── -->
-        <g class="vtx" data-key="sehvet" id="vSehvet">
+        <g class="vtx" data-key="sehvet" id="vSehvet" tabindex="0" role="button" aria-label="Şehvet — Dopamin">
           <circle cx="250" cy="72" r="44" fill="rgba(245,158,11,0.06)" stroke="#f59e0b" stroke-width="1" opacity="0.4" class="vtx-outer"/>
           <circle cx="250" cy="72" r="30" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="2" class="vtx-inner"/>
           <text x="250" y="80" text-anchor="middle" font-size="28" fill="#f59e0b">🔥</text>
@@ -504,7 +504,7 @@
         </g>
 
         <!-- ── Vertex: Şöhret (bottom-left) ── -->
-        <g class="vtx" data-key="sohret" id="vSohret">
+        <g class="vtx" data-key="sohret" id="vSohret" tabindex="0" role="button" aria-label="Şöhret — Serotonin">
           <circle cx="80" cy="430" r="44" fill="rgba(168,85,247,0.06)" stroke="#a855f7" stroke-width="1" opacity="0.4" class="vtx-outer"/>
           <circle cx="80" cy="430" r="30" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2" class="vtx-inner"/>
           <text x="80" y="438" text-anchor="middle" font-size="28" fill="#a855f7">👑</text>
@@ -513,7 +513,7 @@
         </g>
 
         <!-- ── Vertex: Gadab (bottom-right) ── -->
-        <g class="vtx" data-key="gadab" id="vGadab">
+        <g class="vtx" data-key="gadab" id="vGadab" tabindex="0" role="button" aria-label="Gadab — Kortizol">
           <circle cx="420" cy="430" r="44" fill="rgba(239,68,68,0.06)" stroke="#ef4444" stroke-width="1" opacity="0.4" class="vtx-outer"/>
           <circle cx="420" cy="430" r="30" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2" class="vtx-inner"/>
           <text x="420" y="438" text-anchor="middle" font-size="28" fill="#ef4444">⚡</text>
@@ -521,6 +521,9 @@
           <text x="420" y="500" class="vtx-neuro">Kortizol</text>
         </g>
       </svg>
+      <noscript>
+        <p style="text-align:center;color:rgba(255,255,255,0.5);padding:1rem;">Bu interaktif ŞŞG Üçgeni JavaScript gerektirir. Üçgen modeli; Şehvet (dopamin — haz dürtüsü), Şöhret (serotonin — statü dürtüsü) ve Gadab (kortizol — öfke dürtüsü) olmak üzere üç temel nefs tuzağını göstermektedir.</p>
+      </noscript>
     </div>
 
     <!-- RIGHT: Info Panel -->
@@ -699,9 +702,15 @@ function activateVertex(key) {
   requestAnimationFrame(() => ic.classList.add('visible'));
 }
 
-// Vertex click handlers
+// Vertex click & keyboard handlers
 document.querySelectorAll('.vtx').forEach(g => {
   g.addEventListener('click', () => activateVertex(g.dataset.key));
+  g.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      activateVertex(g.dataset.key);
+    }
+  });
 });
 
 /* ══════════════════════════════════

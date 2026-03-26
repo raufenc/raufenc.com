@@ -334,7 +334,7 @@
     </header>
 
     <div class="loop-container" id="loopContainer">
-      <svg class="loop-svg" viewBox="0 0 500 500" id="loopSvg">
+      <svg class="loop-svg" viewBox="0 0 500 500" id="loopSvg" role="img" aria-label="Alışkanlık Döngüsü: Tetik, İstek, Davranış ve Ödül adımlarını dairesel döngü olarak gösteren interaktif diyagram">
         <defs>
           <!-- Glow filters for each node -->
           <filter id="glowAmber" x="-50%" y="-50%" width="200%" height="200%">
@@ -448,6 +448,10 @@
           <text x="100" y="302" class="step-text" data-step="odul" style="fill:#10b981"></text>
         </g>
       </svg>
+
+      <noscript>
+        <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif alışkanlık döngüsü JavaScript gerektirir. Döngü dört adımdan oluşur: 1) Tetik — bir uyaran beyni harekete geçirir, 2) İstek — beyin ödül bekler, 3) Davranış — eylem gerçekleşir, 4) Ödül — beyin tatmin olur ve döngü pekişir.</p>
+      </noscript>
 
       <!-- Info Panel -->
       <div class="info-panel" id="infoPanel">

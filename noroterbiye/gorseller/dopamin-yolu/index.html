@@ -411,8 +411,12 @@
         <p class="section-subtitle">Aynı kimyasal, farklı dozaj. Araştırmalar ne diyor?</p>
       </div>
 
+      <noscript>
+        <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu sayfa interaktif grafikler içermektedir ve JavaScript gerektirir. Doğal ödüller (yürüyüş, çikolata, yemek) bazal dopamin seviyesini %50-150 artırırken, yapay uyaranlar (nikotin, alkol, kokain, amfetamin) %150-1000 artış sağlar.</p>
+      </noscript>
+
       <!-- Chart A: Doğal Ödüller (0–200%) -->
-      <div class="chart-container glass-card" id="chartNatural">
+      <div class="chart-container glass-card" id="chartNatural" role="img" aria-label="Doğal ödüllerin dopamin artış oranlarını gösteren çubuk grafik: Yürüyüş %50, Çikolata %50, Yemek %50-150">
         <div class="chart-group-label natural-label">Doğal Ödüller</div>
         <div class="chart-scale-note">Ölçek: %0 – %200 (bazal dopamin seviyesine göre artış)</div>
         <div class="bars-wrapper" id="barsNatural">
@@ -429,7 +433,7 @@
       </div>
 
       <!-- Chart B: Yapay Uyaranlar (0–1200%) -->
-      <div class="chart-container glass-card" id="chartArtificial">
+      <div class="chart-container glass-card" id="chartArtificial" role="img" aria-label="Yapay uyaranların dopamin artış oranlarını gösteren çubuk grafik: Nikotin %150, Alkol %150, Kokain %400-1000, Amfetamin %1000">
         <div class="chart-group-label artificial-label">Yapay Uyaranlar</div>
         <div class="chart-scale-note">Ölçek: %0 – %1200 (bazal dopamin seviyesine göre artış)</div>
         <div class="bars-wrapper" id="barsArtificial">

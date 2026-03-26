@@ -69,6 +69,12 @@
   --nav-hover:  rgba(255,255,255,0.1);
 }
 
+/* ── Accessibility — Focus styles ── */
+:focus-visible {
+  outline: 2px solid var(--warm, #c8a46e);
+  outline-offset: 2px;
+}
+
 /* ── Light Theme ── */
 html.light {
   --bg:           #f5f5fa;
