@@ -5,6 +5,56 @@
       "has": [{ "type": "host", "value": "lab.raufenc.com" }],
       "destination": "https://raufenc.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/hakkinda",
+      "destination": "/#hakkinda",
+      "permanent": true
+    },
+    {
+      "source": "/hakkinda/",
+      "destination": "/#hakkinda",
+      "permanent": true
+    },
+    {
+      "source": "/projeler",
+      "destination": "/#projeler",
+      "permanent": true
+    },
+    {
+      "source": "/projeler/",
+      "destination": "/#projeler",
+      "permanent": true
+    },
+    {
+      "source": "/osmanlica-lugat",
+      "destination": "/osmanlica/",
+      "permanent": true
+    },
+    {
+      "source": "/osmanlica-lugat/",
+      "destination": "/osmanlica/",
+      "permanent": true
+    },
+    {
+      "source": "/ingilizce-app",
+      "destination": "/ingilizce-kelime/",
+      "permanent": true
+    },
+    {
+      "source": "/ingilizce-app/",
+      "destination": "/ingilizce-kelime/",
+      "permanent": true
+    },
+    {
+      "source": "/ingilizc-lugat",
+      "destination": "/ingilizce-kelime/",
+      "permanent": true
+    },
+    {
+      "source": "/ingilizc-lugat/",
+      "destination": "/ingilizce-kelime/",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sayfa Bulunamadı — Rauf Enç</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/lib/design-system/tokens.css" />
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      text-align: center;
+      max-width: 520px;
+    }
+    .error-code {
+      font-size: clamp(72px, 15vw, 120px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--text) 30%, var(--warm) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-warm {
+      background: var(--warm);
+      color: #0a0a0f;
+    }
+    .btn-warm:hover {
+      box-shadow: 0 4px 20px var(--warm-glow);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted2);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--warm);
+      color: var(--text);
+    }
+    .projects {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .projects h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--warm);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .project-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .project-links a {
+      font-size: 13px;
+      color: var(--muted2);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      transition: all 0.2s;
+    }
+    .project-links a:hover {
+      border-color: var(--warm);
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="error-code">404</div>
+    <h1>Sayfa Bulunamadı</h1>
+    <p>Aradığınız sayfa taşınmış, kaldırılmış ya da hiç var olmamış olabilir. Aşağıdaki bağlantılardan devam edebilirsiniz.</p>
+    <div class="links">
+      <a href="/" class="btn btn-warm">Ana Sayfa</a>
+      <a href="/#projeler" class="btn btn-ghost">Projeler</a>
+      <a href="/noroterbiye/" class="btn btn-ghost">NöroTerbiye</a>
+    </div>
+    <div class="projects">
+      <h2>Popüler Projeler</h2>
+      <div class="project-links">
+        <a href="/noroterbiye/">NöroTerbiye</a>
+        <a href="/sevgili-peygamberim/">Sevgili Peygamberim</a>
+        <a href="/osmanlica/">Osmanlıca Lügat</a>
+        <a href="/ai-atlasi/">AI Atlası</a>
+        <a href="/kalbinin-haritasi/">Kalbinin Haritası</a>
+        <a href="/muallimo/">MUALLİMO</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
