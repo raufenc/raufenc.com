@@ -287,23 +287,32 @@
     .slide-text-panel { transition: opacity 0.15s ease, transform 0.15s ease; }
     .slide-text-panel.transitioning { opacity: 0; transform: translateX(12px); }
 
-    /* ── PRESENTATION MODE ── */
+    /* ── PRESENTATION MODE (shared) ── */
     body.pres-mode { overflow: hidden; }
     body.pres-mode .hero,
     body.pres-mode .tabs-bar,
     body.pres-mode footer,
     body.pres-mode .slide-nav,
-    body.pres-mode .slide-progress { display: none; }
-    body.pres-mode .wrap { max-width: 100%; padding: 0; }
-    body.pres-mode #s-kesf { padding: 0; }
+    body.pres-mode .slide-progress,
+    body.pres-mode #picker-overlay,
+    body.pres-mode #s-oyun,
+    body.pres-mode #s-ozet { display: none !important; }
+    body.pres-mode .wrap { max-width: 100%; padding: 0; height: 100vh; }
+    body.pres-mode #s-kesf { padding: 0; height: 100vh; }
     body.pres-mode .slide-wrap {
-      border-radius: 0; border: none; min-height: 100vh;
+      border-radius: 0; border: none; height: 100vh;
       grid-template-columns: 55% 45%;
     }
-    body.pres-mode .slide-img-panel { min-height: 100vh; }
+    body.pres-mode .slide-img-panel::before { display: none; }
+    body.pres-mode .slide-img-panel { height: 100vh; }
+    body.pres-mode .slide-img-panel img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: contain;
+    }
     body.pres-mode .slide-text-panel {
-      padding: 48px 44px; max-height: 100vh;
+      padding: 48px 44px; max-height: 100vh; height: 100vh;
       display: flex; flex-direction: column; justify-content: center; gap: 20px;
+      overflow-y: auto;
     }
     body.pres-mode .slide-counter { font-size: 13px; }
     body.pres-mode .slide-title { font-size: 32px; }
@@ -315,21 +324,33 @@
     body.pres-mode .safsata-badge { font-size: 10px; }
     body.pres-mode .korunma-item { font-size: 14px; }
 
-    /* Pres mode nav hint */
+    /* ── IMAGE-ONLY VIEW (V tuşu) ── */
+    body.pres-mode.pres-img-only .slide-wrap {
+      grid-template-columns: 1fr;
+    }
+    body.pres-mode.pres-img-only .slide-text-panel { display: none; }
+    body.pres-mode.pres-img-only .slide-img-panel {
+      height: 100vh; width: 100vw;
+    }
+    body.pres-mode.pres-img-only .slide-img-panel img {
+      object-fit: contain;
+    }
+
+    /* Pres mode overlays */
     .pres-hint {
       position: fixed; bottom: 16px; right: 20px; z-index: 200;
-      background: rgba(0,0,0,0.7); color: #fff; font-size: 11px;
-      padding: 6px 14px; border-radius: 8px; opacity: 0.5;
-      transition: opacity 0.3s; pointer-events: none;
+      background: rgba(0,0,0,0.75); color: #fff; font-size: 11px;
+      padding: 8px 16px; border-radius: 8px; opacity: 0;
+      transition: opacity 0.4s; pointer-events: none;
     }
+    body.pres-mode .pres-hint { opacity: 0.45; }
+    body.pres-mode .pres-hint.fade-out { opacity: 0; }
     body:not(.pres-mode) .pres-hint { display: none; }
-    .pres-hint:hover { opacity: 1; }
 
-    /* Pres mode slide counter overlay */
     .pres-counter {
       position: fixed; bottom: 16px; left: 20px; z-index: 200;
-      background: rgba(0,0,0,0.7); color: var(--accent); font-size: 14px;
-      font-weight: 800; padding: 6px 14px; border-radius: 8px;
+      background: rgba(0,0,0,0.75); color: var(--accent); font-size: 14px;
+      font-weight: 800; padding: 8px 16px; border-radius: 8px;
     }
     body:not(.pres-mode) .pres-counter { display: none; }
 
@@ -350,9 +371,9 @@
       .ozet-grid { grid-template-columns: repeat(2, 1fr); }
       .hero h1 { font-size: 46px; }
       .tab-btn { padding: 14px 12px; font-size: 12px; }
-      body.pres-mode .slide-wrap { grid-template-columns: 1fr; }
-      body.pres-mode .slide-text-panel { padding: 28px 22px; max-height: none; min-height: auto; }
-      body.pres-mode .slide-img-panel { min-height: auto; }
+      body.pres-mode .slide-wrap { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      body.pres-mode .slide-text-panel { padding: 28px 22px; max-height: none; height: auto; }
+      body.pres-mode .slide-img-panel { height: 50vh; }
     }
   
 .tab-nav-links { display:flex; align-items:center; gap:4px; margin-right:8px; }
@@ -448,7 +469,7 @@
 </div>
 
 <!-- PRESENTATION MODE OVERLAYS -->
-<div class="pres-hint" id="pres-hint">← → tuşları ile ilerle &nbsp;·&nbsp; ESC çık &nbsp;·&nbsp; F tam ekran</div>
+<div class="pres-hint" id="pres-hint">← → ilerle &nbsp;·&nbsp; V görünüm değiştir &nbsp;·&nbsp; ESC çık</div>
 <div class="pres-counter" id="pres-counter"></div>
 
 <footer>
@@ -779,6 +800,7 @@ function changeSlide(dir) {
   if (n < 0 || n >= SAFSATALAR.length) return;
   currentSlide = n;
   renderSlide();
+  if (presMode) showPresHint();
 }
 
 document.addEventListener('keydown', e => {
@@ -788,6 +810,11 @@ document.addEventListener('keydown', e => {
   // F key toggles presentation mode (when not in input)
   if (e.key === 'f' && !e.ctrlKey && !e.metaKey && e.target === document.body) {
     togglePresMode(); return;
+  }
+
+  // V key toggles image-only vs split view in pres mode
+  if (e.key === 'v' && presMode && e.target === document.body) {
+    togglePresView(); return;
   }
 
   if (!document.getElementById('s-kesf').classList.contains('active')) return;
@@ -810,9 +837,12 @@ document.addEventListener('keydown', e => {
 // ============================================================
 // PRESENTATION MODE
 // ============================================================
+let presHintTimer = null;
+
 function togglePresMode() {
   presMode = !presMode;
   document.body.classList.toggle('pres-mode', presMode);
+  document.body.classList.remove('pres-img-only');
   if (presMode) {
     setTab('kesf');
     renderSlide();
@@ -820,6 +850,8 @@ function togglePresMode() {
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
     }
+    // Show hint then fade
+    showPresHint();
   } else {
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
@@ -827,11 +859,23 @@ function togglePresMode() {
   }
 }
 
+function togglePresView() {
+  if (!presMode) return;
+  document.body.classList.toggle('pres-img-only');
+}
+
+function showPresHint() {
+  const hint = document.getElementById('pres-hint');
+  hint.classList.remove('fade-out');
+  clearTimeout(presHintTimer);
+  presHintTimer = setTimeout(() => hint.classList.add('fade-out'), 3000);
+}
+
 // Exit pres mode when leaving fullscreen
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement && presMode) {
     presMode = false;
-    document.body.classList.remove('pres-mode');
+    document.body.classList.remove('pres-mode', 'pres-img-only');
   }
 });
 
