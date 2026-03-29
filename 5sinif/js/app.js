@@ -385,23 +385,22 @@ function createPlayer(playlistId) {
   const container = document.getElementById('ytPlayerContainer');
   if (!container) return;
 
-  // Create iframe manually with nocookie domain, then attach YT API
-  container.innerHTML = `<iframe id="ytIframe"
-    src="https://www.youtube.com/embed/videoseries?list=${playlistId}&enablejsapi=1&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}"
-    style="width:100%;height:100%;border:0;border-radius:10px"
-    allow="autoplay; encrypted-media; picture-in-picture"
-    allowfullscreen></iframe>`;
-
-  // Wait for iframe to load, then attach YT API
-  const iframe = document.getElementById('ytIframe');
-  iframe.onload = () => {
-    _ytPlayer = new YT.Player('ytIframe', {
-      events: {
-        onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange
-      }
-    });
-  };
+  _ytPlayer = new YT.Player('ytPlayerContainer', {
+    width: '100%',
+    height: '100%',
+    playerVars: {
+      list: playlistId,
+      listType: 'playlist',
+      enablejsapi: 1,
+      rel: 0,
+      modestbranding: 1,
+      origin: window.location.origin
+    },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
 }
 
 function onPlayerReady(event) {
