@@ -10,9 +10,11 @@ let db = null; // Firebase ref
 let allImages = [];
 let filteredImages = [];
 let reviews = {};
+let unitMeta = {}; // { "04": { units: {U1: "Günlük Hayattaki..."}, chapters: {U1_B0: {baslik, odak, unite_baslik}} } }
 let currentFilter = { grade: 'all', status: 'all' };
 let currentModalIndex = -1;
 let useFirebase = false;
+let actionBusy = false; // debounce for keyboard rapid-fire
 
 // ===== INIT =====
 export async function init() {
@@ -31,10 +33,23 @@ export async function init() {
         if (localReviews) reviews = JSON.parse(localReviews);
     }
 
-    await loadAllImages();
+    await Promise.all([loadAllImages(), loadUnitMeta()]);
+
+    // Enrich images with unit/chapter info
+    allImages.forEach(img => {
+        const meta = unitMeta[img.sinif];
+        if (meta && img.bolum_id) {
+            const ch = meta.chapters[img.bolum_id];
+            if (ch) {
+                img._unite_baslik = ch.unite_baslik || '';
+                img._bolum_baslik = ch.baslik || '';
+                img._bolum_odak = ch.odak || '';
+            }
+        }
+    });
 
     if (allImages.length === 0) {
-        document.getElementById('app').innerHTML = '<div class="empty-state"><div class="icon">📂</div><h3>Görsel verisi bulunamadı</h3><p>data/ klasöründe gorsel_uretim_listesi.json dosyaları mevcut değil.</p></div>';
+        document.getElementById('main-app').innerHTML = '<div class="empty-state"><div class="icon">📂</div><h3>Görsel verisi bulunamadı</h3><p>data/ klasöründe gorsel_uretim_listesi.json dosyaları mevcut değil.</p></div>';
         return;
     }
 
@@ -52,7 +67,6 @@ async function initFirebase(config) {
     db = firebase.database();
     useFirebase = true;
 
-    // Load existing reviews from Firebase
     const snap = await db.ref('reviews').once('value');
     if (snap.val()) reviews = snap.val();
 }
@@ -96,6 +110,36 @@ async function loadAllImages() {
     });
     const results = await Promise.all(promises);
     allImages = results.flat();
+}
+
+async function loadUnitMeta() {
+    const promises = GRADES.map(async (g) => {
+        try {
+            const [uniteResp, bolumResp] = await Promise.all([
+                fetch(`data/${g}/02_yapi/unite_listesi.json`),
+                fetch(`data/${g}/02_yapi/bolum_listesi.json`)
+            ]);
+            if (!uniteResp.ok || !bolumResp.ok) return;
+
+            const uniteList = await uniteResp.json();
+            const bolumList = await bolumResp.json();
+
+            const units = {};
+            uniteList.forEach(u => { units[u.unite_id] = u.baslik; });
+
+            const chapters = {};
+            bolumList.forEach(b => {
+                chapters[b.bolum_id] = {
+                    baslik: b.baslik,
+                    odak: b.odak || '',
+                    unite_baslik: units[b.unite_id] || ''
+                };
+            });
+
+            unitMeta[g] = { units, chapters };
+        } catch { /* skip */ }
+    });
+    await Promise.all(promises);
 }
 
 // ===== REVIEW OPERATIONS =====
@@ -160,8 +204,9 @@ function renderGrid() {
 
     grid.innerHTML = filteredImages.map((img, idx) => {
         const status = getStatus(img.gorsel_id);
-        const review = getReview(img.gorsel_id);
         const badgeIcon = status === 'uygun' ? '✓' : status === 'uygun_degil' ? '✗' : '?';
+        const uniteBaslik = img._unite_baslik || '';
+        const bolumBaslik = img._bolum_baslik || '';
 
         return `
         <div class="image-card status-${status}" data-idx="${idx}" data-id="${img.gorsel_id}">
@@ -173,6 +218,8 @@ function renderGrid() {
             </div>
             <div class="card-info">
                 <div class="card-id">${GRADE_LABELS[img.sinif]} · ${img.gorsel_id}</div>
+                ${uniteBaslik ? `<div class="card-unite">${uniteBaslik}</div>` : ''}
+                ${bolumBaslik ? `<div class="card-bolum">${bolumBaslik}</div>` : ''}
                 <div class="card-desc">${img.sahne_aciklamasi_tr || ''}</div>
                 <span class="card-type">${img.tur || 'sahne'}</span>
             </div>
@@ -219,7 +266,6 @@ function updateStats() {
     const bar = el('progress-fill');
     if (bar) bar.style.width = total ? (incelenen / total * 100) + '%' : '0%';
 
-    // Update filter pill counts
     setText('count-all', total);
     setText('count-beklemede', beklemede);
     setText('count-uygun', uygun);
@@ -249,6 +295,16 @@ function openModal(idx) {
     document.getElementById('modal-sinif').textContent = GRADE_LABELS[img.sinif];
     document.getElementById('modal-tur').textContent = img.tur || 'sahne';
     document.getElementById('modal-bolum').textContent = img.bolum_id || '-';
+
+    // Unit & chapter info
+    const uniteEl = document.getElementById('modal-unite');
+    const bolumEl = document.getElementById('modal-bolum-baslik');
+    const odakEl = document.getElementById('modal-odak');
+
+    if (uniteEl) uniteEl.textContent = img._unite_baslik || '-';
+    if (bolumEl) bolumEl.textContent = img._bolum_baslik || '-';
+    if (odakEl) odakEl.textContent = img._bolum_odak || '-';
+
     document.getElementById('modal-desc').textContent = img.sahne_aciklamasi_tr || '-';
     document.getElementById('modal-prompt').textContent = img.prompt_en || '-';
     document.getElementById('modal-note').value = review?.not || '';
@@ -275,7 +331,9 @@ function navigateModal(dir) {
 }
 
 async function modalAction(durum) {
-    if (currentModalIndex < 0) return;
+    if (currentModalIndex < 0 || actionBusy) return;
+    actionBusy = true;
+
     const img = filteredImages[currentModalIndex];
     const not = document.getElementById('modal-note').value;
     await setReview(img.gorsel_id, durum, not);
@@ -287,12 +345,28 @@ async function modalAction(durum) {
     } else {
         closeModal();
     }
+
+    // Release after short delay to prevent key-repeat rapid-fire
+    setTimeout(() => { actionBusy = false; }, 300);
 }
 
 // ===== QUICK ACTIONS =====
 async function quickAction(gorselId, durum) {
     await setReview(gorselId, durum, '');
     showToast(durum === 'uygun' ? '✓ Uygun' : '✗ Red');
+}
+
+// ===== RESET =====
+function resetAll() {
+    if (!confirm('Tüm inceleme verileri sıfırlansın mı? Bu işlem geri alınamaz.')) return;
+    reviews = {};
+    if (useFirebase && db) {
+        db.ref('reviews').remove();
+    } else {
+        localStorage.removeItem('dkab_reviews');
+    }
+    applyFilter();
+    showToast('Tüm incelemeler sıfırlandı');
 }
 
 // ===== EXPORT =====
@@ -310,6 +384,8 @@ function exportJSON() {
                 gorsel_id: img.gorsel_id,
                 sinif: parseInt(img.sinif),
                 bolum_id: img.bolum_id,
+                unite_baslik: img._unite_baslik || '',
+                bolum_baslik: img._bolum_baslik || '',
                 dosya_yolu: img.dosya_yolu,
                 tur: img.tur,
                 prompt_en: img.prompt_en,
@@ -409,9 +485,10 @@ function bindEvents() {
     document.getElementById('modal-approve')?.addEventListener('click', () => modalAction('uygun'));
     document.getElementById('modal-reject')?.addEventListener('click', () => modalAction('uygun_degil'));
 
-    // Export
+    // Export & Reset
     document.getElementById('btn-export')?.addEventListener('click', exportJSON);
     document.getElementById('btn-copy')?.addEventListener('click', copyExport);
+    document.getElementById('btn-reset')?.addEventListener('click', resetAll);
 
     // Firebase setup
     document.getElementById('btn-firebase')?.addEventListener('click', connectFirebase);
@@ -423,9 +500,10 @@ function bindEvents() {
         localStorage.setItem('dkab_reviewer_name', e.target.value);
     });
 
-    // Keyboard shortcuts
+    // Keyboard shortcuts (with debounce via actionBusy flag)
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.repeat) return; // BLOCK key-repeat to prevent rapid-fire
 
         if (currentModalIndex >= 0) {
             switch (e.key) {
@@ -444,4 +522,4 @@ function bindEvents() {
 }
 
 // ===== PUBLIC API =====
-window.reviewApp = { quickAction, exportJSON, copyExport };
+window.reviewApp = { quickAction, exportJSON, copyExport, resetAll };

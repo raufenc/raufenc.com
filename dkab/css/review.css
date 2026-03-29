@@ -286,6 +286,26 @@ body {
     margin-bottom: 4px;
 }
 
+.card-unite {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-bolum {
+    font-size: 0.73rem;
+    color: var(--secondary);
+    font-weight: 600;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card-desc {
     font-size: 0.82rem;
     color: var(--text-primary);
@@ -427,6 +447,13 @@ body {
     font-weight: 600;
     background: #f0f5ed;
     color: var(--primary);
+}
+
+.modal-context-box {
+    background: #f5f9f3;
+    border-left: 3px solid var(--primary);
+    padding: 8px 12px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .modal-field {

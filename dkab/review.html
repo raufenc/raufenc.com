@@ -46,6 +46,7 @@
                 <input type="text" id="reviewer-name" class="reviewer-input" placeholder="İnceleyici adı">
                 <button id="btn-copy">Kopyala</button>
                 <button id="btn-export" class="btn-export">JSON Export</button>
+                <button id="btn-reset" title="Tüm incelemeleri sıfırla">Sıfırla</button>
                 <button id="btn-settings" title="Firebase ayarları">Ayarlar</button>
             </div>
         </div>
@@ -117,6 +118,18 @@
                 <span class="tag" id="modal-id"></span>
                 <span class="tag" id="modal-tur"></span>
                 <span class="tag" id="modal-bolum"></span>
+            </div>
+            <div class="modal-field modal-context-box">
+                <div class="modal-field-label">Ünite</div>
+                <div class="modal-field-value" id="modal-unite" style="font-weight:600;"></div>
+            </div>
+            <div class="modal-field modal-context-box">
+                <div class="modal-field-label">Bölüm</div>
+                <div class="modal-field-value" id="modal-bolum-baslik" style="font-weight:600;"></div>
+            </div>
+            <div class="modal-field modal-context-box">
+                <div class="modal-field-label">Bölüm Odağı</div>
+                <div class="modal-field-value" id="modal-odak" style="font-size:0.85rem; color:#555;"></div>
             </div>
             <div class="modal-field">
                 <div class="modal-field-label">Sahne Açıklaması (TR)</div>
