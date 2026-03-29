@@ -75,10 +75,10 @@
     </div>
     <div class="filter-count" id="filter-count">19 / 19 lokasyon</div>
     <div class="journey-controls">
-      <button class="jc-btn" id="j-play" title="Yolculuğu İzle">▶ <span>Yolculuğu İzle</span></button>
+      <button class="jc-btn" id="j-play" title="Seyahati İzle">▶ <span>Seyahati İzle</span></button>
       <button class="jc-btn hidden" id="j-pause" title="Duraklat">⏸</button>
       <button class="jc-btn hidden" id="j-reset" title="Sıfırla">↻</button>
-      <select class="jc-speed hidden" id="j-speed"><option value="1">1x</option><option value="2" selected>2x</option><option value="4">4x</option></select>
+      <select class="jc-speed hidden" id="j-speed"><option value="1" selected>1x</option><option value="2">2x</option><option value="4">4x</option></select>
     </div>
   </div>
 
@@ -330,7 +330,7 @@ function setupJourney(){
   resetBtn.addEventListener('click',()=>{
     state.playing=false;state.paused=false;clearTimeout(state.timer);resetVisuals();
     routeLayers.forEach(rl=>{if(activePeriod==='all'||rl.routeData.period===activePeriod)rl.addTo(map);});
-    playBtn.classList.remove('hidden');playBtn.innerHTML='▶ <span>Yolculuğu İzle</span>';
+    playBtn.classList.remove('hidden');playBtn.innerHTML='▶ <span>Seyahati İzle</span>';
     pauseBtn.classList.add('hidden');resetBtn.classList.add('hidden');speedSel.classList.add('hidden');panel.classList.remove('show');
   });
 
