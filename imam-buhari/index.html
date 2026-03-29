@@ -41,7 +41,7 @@
   <div class="hero-badge">194 — 256 H &nbsp;/&nbsp; 810 — 870 M</div>
   <h1>İmam-ı Buharî</h1>
   <p class="hero-name">Muhammed bin İsmâîl bin İbrâhîm el-Buhârî <em>rahmetullâhi aleyh</em></p>
-  <p class="sub">Hadîs âlimlerinin en büyüğü. Kur'ân-ı Kerîm'den sonra dünyânın en kıymetli kitabı olan Sahîh-i Buhârî'nin müellifi. 46 yıl boyunca İslâm coğrafyasını dolaşarak 1.080'den fazla hocadan 600.000 hadîs-i şerîf topladı.</p>
+  <p class="sub">Hadîs âlimlerinin en büyüğü. Kur'ân-ı Kerîm'den sonra dünyânın en kıymetli kitabı olan Sahîh-i Buhârî'nin müellifi. İslâm coğrafyasını dolaşarak binden fazla hocadan 600.000 hadîs-i şerîf topladı.</p>
 
   <div class="hero-stats" id="hero-stats">
     <div class="stat"><div class="stat-num" data-target="19">0</div><div class="stat-label">Şehir</div></div>
@@ -187,20 +187,20 @@ function renderMarkers(){
     }).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
     m.on('click',()=>m.openPopup());
-    m.on('popupopen',()=>{
-      const popup=m.getPopup();if(!popup)return;
-      const el=popup.getElement();if(!el)return;
-      el.querySelectorAll('[data-action]').forEach(btn=>{
-        btn.addEventListener('click',(e)=>{
-          e.preventDefault();e.stopPropagation();
-          const action=btn.dataset.action,id=btn.dataset.id;
-          if(action==='detail')window._openDetail(id);
-          if(action==='timeline'){map.closePopup();setTimeout(()=>window._scrollToTimeline(id),300);}
-        });
-      });
-    });
     m.locData=loc;
     markers[loc.id]=m;
+  });
+  // Map-level popupopen — btn.onclick ataması çakışmayı önler
+  map.on('popupopen',function(e){
+    const el=e.popup.getElement();if(!el)return;
+    el.querySelectorAll('[data-action]').forEach(function(btn){
+      btn.onclick=function(ev){
+        ev.stopPropagation();
+        const action=btn.dataset.action,id=btn.dataset.id;
+        if(action==='detail')window._openDetail(id);
+        if(action==='timeline'){map.closePopup();setTimeout(function(){window._scrollToTimeline(id);},300);}
+      };
+    });
   });
 }
 

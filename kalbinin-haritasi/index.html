@@ -7,7 +7,9 @@
   <meta name="description" content="17 farklı ahlâk testinde kendini tanı. Finansal risk analizinden ilham alan deterministik skorlama ile erdemlerini ölç, gelişimini takip et. İslâmî ahlâk eğitiminde yenilikçi sosyal model.">
   <link rel="canonical" href="https://raufenc.com/kalbinin-haritasi/" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -530,7 +532,8 @@ function render(){
   app.className='container mx-auto max-w-4xl p-4 sm:p-6 py-8 fade-in';
   const screens={welcome:screenWelcome,start:screenStart,quiz:screenQuiz,result:screenResult,history:screenHistory,about:screenAbout,
     profile:typeof screenProfile==='function'?screenProfile:screenWelcome,
-    classDetail:typeof screenClassDetail==='function'?screenClassDetail:screenWelcome};
+    classDetail:typeof screenClassDetail==='function'?screenClassDetail:screenWelcome,
+    admin:typeof screenAdmin==='function'?screenAdmin:screenWelcome};
   app.innerHTML=(screens[S.screen]||screenWelcome)();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -1022,6 +1025,7 @@ function attachEvents(){
     else if(action==='createClass'){const n=document.getElementById('new-class-name');if(n?.value.trim()){createClass(n.value.trim()).then(()=>{n.value='';loadTeacherClasses();});}}
     else if(action==='joinClass'){const c=document.getElementById('join-code-input'),m=document.getElementById('join-msg');if(c?.value.trim()){joinClass(c.value.trim()).then(r=>{m.textContent=r.error||('Katıldın: '+r.data.name);m.style.color=r.error?'#f87171':'var(--emerald-light)';c.value='';loadStudentClasses();});}}
     else if(action==='viewClass'){S.classId=el.dataset.id;S.screen='classDetail';render();setTimeout(()=>loadClassDetail(S.classId),100);}
+    else if(action==='goAdmin'){S.screen='admin';render();setTimeout(loadAdminPanel,100);}
     else if(action==='startTest'){S.testKey=key;S.answers={};S.qi=0;S.scores=null;S.gemini=null;S.loadingGemini=false;S.screen='quiz';render();}
     else if(action==='answer'){
       S.answers[S.qi]=parseInt(score); render();
@@ -2587,8 +2591,8 @@ Object.assign(TESTS, TESTS_PART3);
 render();
 attachEvents();
 </script>
-<script src="supabase-app.js"></script>
-<script>if(typeof initSupabase==='function') initSupabase();</script>
+<script src="firebase-app.js"></script>
+<script>if(typeof initFirebase==='function') initFirebase();</script>
 <div style="max-width:720px;margin:24px auto;padding:0 20px;text-align:right;">
   <span style="font-size:11px;color:var(--muted2,var(--muted,#6b7280));letter-spacing:0.05em;">Son güncelleme: Mart 2026</span>
 </div>
