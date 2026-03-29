@@ -46,7 +46,10 @@ function cleanup() {
 }
 
 window.addEventListener('hashchange', router);
-window.addEventListener('DOMContentLoaded', router);
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.FirebaseService) FirebaseService.init();
+  router();
+});
 
 // ========== HELPERS ==========
 function requireLogin() {
@@ -54,6 +57,13 @@ function requireLogin() {
   Store.recordActivity();
   return false;
 }
+
+window.appLogout = async function() {
+  if (!confirm('Çıkış yapmak istediğine emin misin?')) return;
+  if (window.FirebaseService) await FirebaseService.signOut();
+  else Store.logout();
+  navigate('#/');
+};
 
 function updateNavXP() {
   const el = document.getElementById('navXP');
@@ -75,7 +85,9 @@ function topNavHTML(showBack = false, title = '') {
         ${loggedIn ? `
           <span class="nav-xp">⭐ <span id="navXP">${Store.getXP()} XP</span></span>
           <span class="nav-streak">🔥 <span id="navStreak">${Store.getStreak()}</span></span>
+          ${window.FirebaseService?.getCurrentUser() ? '<span class="nav-sync" title="Bulut senkronize">☁️</span>' : ''}
           <button class="btn-icon" onclick="navigate('#/anasayfa')">🏠</button>
+          <button class="btn-icon nav-logout" title="Çıkış" onclick="appLogout()">⏻</button>
         ` : ''}
       </div>
     </nav>`;
@@ -133,29 +145,151 @@ function renderLanding() {
 // ========== GİRİŞ ==========
 function renderGiris() {
   if (Store.isLoggedIn()) { navigate('#/anasayfa'); return; }
+
+  const fbConfigured = window.FirebaseService && window.FirebaseService.isConfigured();
+
   app.innerHTML = `
     ${topNavHTML(true, 'Giriş')}
     <div class="page-center">
       <div class="card card-form">
         <div class="form-mascot">🦉</div>
         <h2>Hoş Geldin!</h2>
-        <p>Hadi seni tanıyalım</p>
+
+        ${fbConfigured ? `
+          <!-- Firebase Auth Sekmeler -->
+          <div class="auth-tabs" id="authTabs">
+            <button class="auth-tab active" id="tabLogin" onclick="girisToggleTab('login')">Giriş Yap</button>
+            <button class="auth-tab" id="tabRegister" onclick="girisToggleTab('register')">Kayıt Ol</button>
+          </div>
+
+          <!-- Rol Seçimi -->
+          <div class="role-selector" id="roleSelector">
+            <button class="role-btn active" id="roleOgrenci" onclick="girisToggleRole('ogrenci')">👤 Öğrenci</button>
+            <button class="role-btn" id="roleVeli" onclick="girisToggleRole('veli')">👨‍👩‍👧 Veli</button>
+          </div>
+
+          <!-- Firebase Giriş Formu -->
+          <form id="fbForm">
+            <div class="form-group" id="nameGroup" style="display:none">
+              <label>Ad Soyad</label>
+              <input type="text" id="fbName" placeholder="Adın ve soyadın" maxlength="40">
+            </div>
+            <div class="form-group">
+              <label>E-posta</label>
+              <input type="email" id="fbEmail" placeholder="eposta@ornek.com" required>
+            </div>
+            <div class="form-group">
+              <label>Şifre</label>
+              <input type="password" id="fbPass" placeholder="En az 6 karakter" required minlength="6">
+            </div>
+            <div id="fbError" class="form-error hidden"></div>
+            <button type="submit" id="fbSubmit" class="btn btn-primary btn-lg btn-full">Giriş Yap</button>
+          </form>
+
+          <div class="divider"><span>veya</span></div>
+        ` : ''}
+
+        <!-- Çevrimdışı / Hızlı Başlangıç -->
         <form id="girisForm">
-          <div class="form-group"><label>Öğrenci Adı</label><input type="text" id="ogrenciAdi" placeholder="Adını yaz..." required maxlength="30"></div>
-          <div class="form-group"><label>Veli Adı (isteğe bağlı)</label><input type="text" id="veliAdi" placeholder="Anne/Baba adı" maxlength="30"></div>
-          <button type="submit" class="btn btn-primary btn-lg btn-full">Başlayalım! 🎉</button>
+          ${fbConfigured ? '<p class="offline-label">Hesap açmadan hızlı başla</p>' : '<p>Hadi seni tanıyalım</p>'}
+          <div class="form-group">
+            <label>Öğrenci Adı</label>
+            <input type="text" id="ogrenciAdi" placeholder="Adını yaz..." required maxlength="30">
+          </div>
+          ${!fbConfigured ? `<div class="form-group"><label>Veli Adı (isteğe bağlı)</label><input type="text" id="veliAdi" placeholder="Anne/Baba adı" maxlength="30"></div>` : ''}
+          <button type="submit" class="btn ${fbConfigured ? 'btn-outline' : 'btn-primary'} btn-lg btn-full">
+            ${fbConfigured ? '⚡ Hızlı Başla' : 'Başlayalım! 🎉'}
+          </button>
         </form>
       </div>
     </div>
   `;
+
+  // Çevrimdışı form
   document.getElementById('girisForm').onsubmit = (e) => {
     e.preventDefault();
     const ad = document.getElementById('ogrenciAdi').value.trim();
     if (!ad) return;
-    Store.setProfile({ name: ad, parentName: document.getElementById('veliAdi').value.trim() });
+    const veliEl = document.getElementById('veliAdi');
+    Store.setProfile({ name: ad, parentName: veliEl ? veliEl.value.trim() : '', role: 'ogrenci' });
     Store.startSession();
     navigate('#/mod-sec');
   };
+
+  // Firebase form (sadece config varsa)
+  if (fbConfigured) {
+    let _role = 'ogrenci';
+    let _tab = 'login';
+
+    window.girisToggleRole = (role) => {
+      _role = role;
+      document.getElementById('roleOgrenci').classList.toggle('active', role === 'ogrenci');
+      document.getElementById('roleVeli').classList.toggle('active', role === 'veli');
+    };
+
+    window.girisToggleTab = (tab) => {
+      _tab = tab;
+      document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+      document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+      document.getElementById('nameGroup').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('fbSubmit').textContent = tab === 'register' ? 'Kayıt Ol 🎉' : 'Giriş Yap';
+    };
+
+    document.getElementById('fbForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('fbEmail').value.trim();
+      const pass  = document.getElementById('fbPass').value;
+      const name  = document.getElementById('fbName')?.value.trim() || '';
+      const errEl = document.getElementById('fbError');
+      const btn   = document.getElementById('fbSubmit');
+
+      errEl.classList.add('hidden');
+      btn.disabled = true;
+      btn.textContent = 'Lütfen bekle...';
+
+      try {
+        let cred;
+        if (_tab === 'register') {
+          cred = await FirebaseService.signUpEmail(email, pass, name);
+          Store.setProfile({ name: name || email.split('@')[0], email, role: _role, uid: cred.user.uid });
+        } else {
+          cred = await FirebaseService.signInEmail(email, pass);
+          // Profile will be loaded from Firestore by _onFirebaseSignIn
+        }
+        Store.startSession();
+        // Navigation handled by _onFirebaseSignIn callback after data pull
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = _tab === 'register' ? 'Kayıt Ol 🎉' : 'Giriş Yap';
+        errEl.textContent = _fbErrorMessage(err.code);
+        errEl.classList.remove('hidden');
+      }
+    };
+
+    // Firebase sign-in callback
+    window._onFirebaseSignIn = (user) => {
+      const profile = Store.getProfile();
+      if (!profile) {
+        // İlk giriş — profil oluştur
+        Store.setProfile({ name: user.displayName || user.email.split('@')[0], email: user.email, role: 'ogrenci', uid: user.uid });
+      }
+      Store.startSession();
+      navigate(Store.getProfile()?.role === 'veli' ? '#/veli' : '#/mod-sec');
+    };
+  }
+}
+
+function _fbErrorMessage(code) {
+  const msgs = {
+    'auth/user-not-found': 'Bu e-posta ile kayıtlı hesap bulunamadı.',
+    'auth/wrong-password': 'Şifre hatalı.',
+    'auth/email-already-in-use': 'Bu e-posta zaten kullanımda.',
+    'auth/weak-password': 'Şifre en az 6 karakter olmalı.',
+    'auth/invalid-email': 'Geçersiz e-posta adresi.',
+    'auth/too-many-requests': 'Çok fazla deneme. Lütfen biraz bekleyin.',
+    'auth/network-request-failed': 'İnternet bağlantısı yok.',
+  };
+  return msgs[code] || 'Bir hata oluştu. Tekrar deneyin.';
 }
 
 // ========== MOD SEÇİMİ ==========
@@ -426,6 +560,9 @@ function onPlayerStateChange(event) {
   if (event.data === 1) { // PLAYING
     hidePlayOverlay();
     startCheckpointMonitor();
+  } else if (event.data === 0) { // ENDED
+    stopCheckpointMonitor();
+    fireFinCheckpoint();
   } else if (event.data === 2) { // PAUSED (not by checkpoint)
     if (!window._quizState?.quizActive) {
       stopCheckpointMonitor();
@@ -486,7 +623,21 @@ function checkForCheckpoint() {
 
   for (let i = 0; i < state.checkpoints.length; i++) {
     const cp = state.checkpoints[i];
+    if (cp.saniye === 'fin') continue; // 'fin' sorusu sadece video bitince tetiklenir
     if (!_firedCheckpoints.has(i) && currentTime >= cp.saniye && currentTime <= cp.saniye + 3) {
+      _firedCheckpoints.add(i);
+      state.currentCheckpoint = i;
+      triggerCheckpoint(i);
+      break;
+    }
+  }
+}
+
+function fireFinCheckpoint() {
+  const state = window._quizState;
+  if (!state || state.quizActive) return;
+  for (let i = 0; i < state.checkpoints.length; i++) {
+    if (!_firedCheckpoints.has(i) && state.checkpoints[i].saniye === 'fin') {
       _firedCheckpoints.add(i);
       state.currentCheckpoint = i;
       triggerCheckpoint(i);

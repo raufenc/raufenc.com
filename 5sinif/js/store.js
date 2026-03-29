@@ -10,6 +10,7 @@ const Store = {
 
   _save(data) {
     localStorage.setItem(this._key, JSON.stringify(data));
+    if (window.FirebaseService) window.FirebaseService.scheduleSync();
   },
 
   get(path) {

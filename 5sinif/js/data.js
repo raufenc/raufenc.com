@@ -60,6 +60,37 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Birler basamağındaki rakamın basamak değeri 1×rakam = rakamın kendisidir.'
+          },
+          {
+            saniye: 420,
+            soru: '5.307.024 sayısında "3" rakamının basamak değeri kaçtır?',
+            secenekler: ['3.000', '30.000', '300.000', '3.000.000'],
+            dogru: 2,
+            ipucu: '5.307.024 sayısında 3 yüz binler basamağındadır: 3 × 100.000 = 300.000.'
+          },
+          {
+            saniye: 480,
+            soru: '4.020.608 sayısının çözümlemesinde hangi basamak değerleri yazılmaz?',
+            secenekler: [
+              'Milyonlar ve yüzler',
+              'On binler, binler ve onlar basamakları (sıfır içerdiklerinden)',
+              'Birler ve yüz binler',
+              'Hiçbiri; tüm basamaklar yazılır.'
+            ],
+            dogru: 1,
+            ipucu: '0 rakamının basamak değeri 0 olur; çözümlemede 0 olan basamaklar atlanır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Aşağıdakilerden hangisi "basamak değeri" ve "sayı değeri" kavramlarını doğru şekilde özetler?',
+            secenekler: [
+              'Sayı değeri rakamın kendisi; basamak değeri rakamın bulunduğu basamakla çarpımıdır.',
+              'İkisi de her zaman aynı değeri verir.',
+              'Basamak değeri rakamın kendisi; sayı değeri bulunduğu basamakla çarpımıdır.',
+              'Sayı değeri yalnızca birler basamağında anlam taşır.'
+            ],
+            dogru: 0,
+            ipucu: 'Basamak değeri = rakam × basamağın değeri. Sayı değeri = rakamın kendisi.'
           }
         ]
       },
@@ -106,6 +137,32 @@ const DERSLER = [
             secenekler: ['3/7', '11/12', '3/12', '8/12'],
             dogru: 1,
             ipucu: 'Paydaları farklı kesirlerde ortak payda buluruz: 2/3=8/12, 1/4=3/12, toplam=11/12.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdakilerden hangisi basit (tam sayılı değil) bir kesirdir?',
+            secenekler: ['3 1/4', '7/5', '3/8', '2 2/3'],
+            dogru: 2,
+            ipucu: 'Basit kesirde pay paydasından küçüktür: 3/8 → 3 < 8 ✓'
+          },
+          {
+            saniye: 480,
+            soru: '9/4 kesrini tam sayılı kesir olarak nasıl yazarsın?',
+            secenekler: ['1 1/4', '2 1/4', '2 3/4', '3 1/4'],
+            dogru: 1,
+            ipucu: '9 ÷ 4 = 2 kalan 1 → tam sayılı kesir: 2 ve 1/4 yani 2 1/4.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Birim kesir, basit kesir ve bileşik kesir arasındaki farkı en iyi hangisi açıklar?',
+            secenekler: [
+              'Birim kesirde pay=1; basit kesirde pay<payda; bileşik kesirde pay>payda.',
+              'Hepsinde pay 1\'dir; fark paydadadır.',
+              'Bileşik kesirde pay paydadan küçüktür.',
+              'Birim kesirde pay paydasına eşittir.'
+            ],
+            dogru: 0,
+            ipucu: '1/5 birim; 3/5 basit; 7/5 bileşik — pay-payda ilişkisine bak.'
           }
         ]
       },
@@ -147,6 +204,32 @@ const DERSLER = [
             secenekler: ['308', '408', '418', '508'],
             dogru: 1,
             ipucu: 'Bölme işlemini basamak basamak yaparak kontrol ederiz.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir fabrika günde 348 araba üretmektedir. 15 günde kaç araba üretir?',
+            secenekler: ['4.220', '5.220', '5.020', '4.520'],
+            dogru: 1,
+            ipucu: '348 × 15 = 348 × 10 + 348 × 5 = 3480 + 1740 = 5220.'
+          },
+          {
+            saniye: 480,
+            soru: 'Toplam 1.248 öğrenci 8 eşit sınıfa bölünüyor. Her sınıfta kaç öğrenci olur?',
+            secenekler: ['146', '156', '148', '166'],
+            dogru: 1,
+            ipucu: '1.248 ÷ 8 = ? Basamak basamak böl: 12÷8=1 kalan 4 → 48÷8=6 → 156.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Çarpma ve bölme problemlerini çözerken hangi strateji en doğrudur?',
+            secenekler: [
+              'Problemdeki tüm sayıları topla.',
+              'Adım adım işlem yap; önce ne bilindiğini, ne sorulduğunu belirle.',
+              'Her zaman önce bölme, sonra çarpma işlemi yap.',
+              'Yalnızca büyük sayıyı küçük sayıyla çarp.'
+            ],
+            dogru: 1,
+            ipucu: 'Problem çözme: verilenler → istenilen → işlem sırası. Kontrol için ters işlem kullan.'
           }
         ]
       },
@@ -188,6 +271,32 @@ const DERSLER = [
             secenekler: ['6 cm', '9 cm', '12 cm', '18 cm'],
             dogru: 1,
             ipucu: 'Karenin 4 kenarı eşit; çevreyi 4\'e böleriz: 36 ÷ 4 = ?'
+          },
+          {
+            saniye: 420,
+            soru: 'Alanı 48 cm² ve genişliği 6 cm olan dikdörtgenin uzunluğu kaç cm\'dir?',
+            secenekler: ['6 cm', '8 cm', '9 cm', '12 cm'],
+            dogru: 1,
+            ipucu: 'Alan = uzunluk × genişlik → uzunluk = 48 ÷ 6 = 8 cm.'
+          },
+          {
+            saniye: 480,
+            soru: 'Kenar uzunluğu 9 cm olan karenin çevresi kaç cm\'dir?',
+            secenekler: ['18 cm', '27 cm', '36 cm', '81 cm'],
+            dogru: 2,
+            ipucu: 'Karenin çevresi = 4 × kenar = 4 × 9 = 36 cm.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Alan ve çevre hesaplamalarında en önemli fark nedir?',
+            secenekler: [
+              'Alan, şeklin içini kaplar (cm²); çevre, dış sınırının uzunluğudur (cm).',
+              'Alan ile çevre her zaman aynı sayısal değeri verir.',
+              'Çevre kenarların çarpımı; alan kenarların toplamıdır.',
+              'Alan yalnızca kareler için, çevre yalnızca dikdörtgenler için hesaplanır.'
+            ],
+            dogru: 0,
+            ipucu: 'Alan = kısa × uzun (cm²); çevre = 2×(kısa+uzun) (cm). Birimlerine dikkat!'
           }
         ]
       },
@@ -234,6 +343,32 @@ const DERSLER = [
             secenekler: ['987.654', '1.000.001', '999.999', '456.789'],
             dogru: 1,
             ipucu: 'Milyonlar bölüğü en az 7 basamaklı sayılarda yer alır.'
+          },
+          {
+            saniye: 420,
+            soru: '12.345.678 sayısında binler bölüğü hangi rakamlardan oluşur?',
+            secenekler: ['1 ve 2', '3, 4 ve 5', '6, 7 ve 8', '1, 2 ve 3'],
+            dogru: 1,
+            ipucu: 'Binler bölüğü: yüz binler (3), on binler (4) ve binler (5) basamaklarından oluşur.'
+          },
+          {
+            saniye: 480,
+            soru: '9 milyar 40 milyon 7 bin 15 sayısını rakamlarla nasıl yazarsın?',
+            secenekler: ['9.040.007.015', '9.400.070.015', '9.040.700.015', '9.004.007.015'],
+            dogru: 0,
+            ipucu: '9 milyar → 9.000.000.000; 40 milyon → 40.000.000; 7 bin → 7.000; 15 → 15.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Büyük sayıları bölüklere ayırmanın temel kuralı hangisidir?',
+            secenekler: [
+              'Sağdan başlayarak her 3 basamakta bir gruplama yapılır: birler, binler, milyonlar, milyarlar.',
+              'Soldan başlayarak her 2 basamakta bir gruplama yapılır.',
+              'Yalnızca 6 basamaklı sayılar bölüklere ayrılır.',
+              'Bölükler her zaman eşit sayıda rakam içerir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sağdan: ilk 3 → birler, sonraki 3 → binler, sonraki 3 → milyonlar, son 3 → milyarlar.'
           }
         ]
       },
@@ -275,6 +410,32 @@ const DERSLER = [
             secenekler: ['3 saat 50 dakika', '4 saat 10 dakika', '4 saat 30 dakika', '3 saat 70 dakika'],
             dogru: 1,
             ipucu: '250 ÷ 60 = 4 saat kalan 10 dakika.'
+          },
+          {
+            saniye: 420,
+            soru: '2 yıl 3 ay kaç aydır?',
+            secenekler: ['23 ay', '27 ay', '24 ay', '36 ay'],
+            dogru: 1,
+            ipucu: '1 yıl = 12 ay → 2 yıl = 24 ay; 24 + 3 = 27 ay.'
+          },
+          {
+            saniye: 480,
+            soru: 'Saat 09:45\'te başlayan etkinlik 1 saat 30 dakika sürüyor. Kaçta biter?',
+            secenekler: ['10:45', '11:00', '11:15', '11:30'],
+            dogru: 2,
+            ipucu: '09:45 + 1 saat = 10:45; 10:45 + 30 dakika = 11:15.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Zaman birimlerinin büyükten küçüğe doğru sırası ve dönüşüm katsayıları hangisinde doğrudur?',
+            secenekler: [
+              'Yıl → ay (÷12) → hafta (÷4) → gün (÷7) → saat (÷24) → dakika (÷60)',
+              'Yıl → ay (×12) → hafta (×4) → gün (×7) → saat (×24) → dakika (×60)',
+              'Yıl (12 ay), ay (30 gün), gün (24 saat), saat (60 dakika), dakika (60 saniye).',
+              'Yıl (10 ay), ay (28 gün), gün (12 saat).'
+            ],
+            dogru: 2,
+            ipucu: '1 yıl=12 ay, 1 ay=30 gün, 1 gün=24 saat, 1 saat=60 dakika, 1 dakika=60 saniye.'
           }
         ]
       }
@@ -349,6 +510,42 @@ const DERSLER = [
             secenekler: ['Ay', 'Dünya', 'Güneş', 'Mars'],
             dogru: 2,
             ipucu: 'Güneş bir yıldızdır ve enerjiyi nükleer füzyon yoluyla kendisi üretir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Ay yüzeyinde astronotların ayak izleri neden çok uzun süre silinmez?',
+            secenekler: [
+              'Ay\'da rüzgâr ve hava olmadığı için izleri silen erozyon gerçekleşmez.',
+              'Ay yüzeyi çok ıslak olduğu için iz kalıcıdır.',
+              'Ay\'da yerçekimi olmadığı için toz havada asılı kalır.',
+              'Ay yüzeyi camdan yapılmıştır.'
+            ],
+            dogru: 0,
+            ipucu: 'Atmosfer olmadığında rüzgâr, yağmur ve aşınma yoktur; izler kalıcı olur.'
+          },
+          {
+            saniye: 480,
+            soru: 'Ay\'ın hangi özelliği, Dünya\'dan her zaman aynı yüzünü görmemize neden olur?',
+            secenekler: [
+              'Kendi ekseni etrafındaki dönüş süresi ile Dünya\'nın çevresindeki dolanım süresinin eşit olması.',
+              'Ay\'ın çok yavaş dönmesi.',
+              'Ay\'ın yalnızca gece görünmesi.',
+              'Güneş ışığının Ay\'ı tek taraflı aydınlatması.'
+            ],
+            dogru: 0,
+            ipucu: 'Her iki süre de yaklaşık 27-28 gün olduğundan Ay hep aynı yüzünü bize döner.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Ay hakkında öğrendiklerimizden hangisi doğrudur?',
+            secenekler: [
+              'Ay\'ın kendi ışığı vardır, atmosferi kalındır ve sıcaklık farkı azdır.',
+              'Ay kendi ışığını üretmez; atmosferi neredeyse yoktur; bu yüzden hem kraterleri hem de büyük sıcaklık farkları vardır.',
+              'Ay Güneş\'in etrafında döner ve sıcaklığı her yerde eşittir.',
+              'Ay\'ın yüzeyinde su bulunmaktadır ve düzenli yağış görülür.'
+            ],
+            dogru: 1,
+            ipucu: 'Ay: kendi ışığı yok, atmosfer yok → kraterler + −172/+100°C sıcaklık farkı.'
           }
         ]
       },
@@ -405,6 +602,37 @@ const DERSLER = [
             secenekler: ['Azalır', 'Değişmez', 'Artar', 'Önce artar sonra azalır'],
             dogru: 2,
             ipucu: 'Yaya uygulanan kuvvet ile uzama miktarı arasında doğru orantı vardır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kuvvet hangi birimle ölçülür?',
+            secenekler: ['Kilogram', 'Newton', 'Metre', 'Joule'],
+            dogru: 1,
+            ipucu: 'Kuvvetin birimi Newton\'dur (N); bilim insanı Isaac Newton\'ın adından gelir.'
+          },
+          {
+            saniye: 480,
+            soru: 'Aşağıdakilerden hangisi esnek olmayan (plastik) bir cismin özelliğidir?',
+            secenekler: [
+              'Kuvvet kalktıktan sonra eski şekline döner.',
+              'Kuvvet uygulandığında şekli değişmez.',
+              'Kuvvet kalktıktan sonra şeklini korur, eski haline dönmez.',
+              'Kuvvet altında parçalanır ve kaybolur.'
+            ],
+            dogru: 2,
+            ipucu: 'Oyun hamuruna bastırınca şekil değişir; bırakınca eski haline dönmez — bu plastik (esnek olmayan) davranıştır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kuvvet ve esnek cisimler konusunu özetleyen hangisidir?',
+            secenekler: [
+              'Kuvvet yalnızca cisimleri harekete geçirir; esnek cisimler her zaman parçalanır.',
+              'Kuvvet: hareket, duruş, şekil/hız/yön değişikliğine yol açar; esnek cisimler kuvvet kalktığında eski haline dönerken esnek olmayanlar dönmez.',
+              'Tüm cisimler eşit esnekliğe sahiptir; fark yoktur.',
+              'Kuvvet yalnızca itme ya da çekme biçiminde olabilir; başka etkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Kuvvetin 4 etkisi: harekete geçirme, durdurma, şekil değiştirme, hız/yön değiştirme.'
           }
         ]
       },
@@ -456,6 +684,37 @@ const DERSLER = [
             secenekler: ['Terazi', 'Dinamometre', 'Termometre', 'Cetvel'],
             dogru: 1,
             ipucu: 'Ağırlık Newton birimiyle ölçülür; dinamometre bu işe yarar.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kütle hangi alet ile ölçülür?',
+            secenekler: ['Dinamometre', 'Termometre', 'Terazi', 'Barometre'],
+            dogru: 2,
+            ipucu: 'Kütle kilogram birimiyle ölçülür; terazi (hassas veya kefeli) bu işe yarar.'
+          },
+          {
+            saniye: 480,
+            soru: 'Uzayda (yerçekimsiz ortamda) astronotun kütlesi ve ağırlığı nasıl değişir?',
+            secenekler: [
+              'Her ikisi de sıfır olur.',
+              'Kütle değişmez; ağırlık sıfır olur (yerçekimi yok).',
+              'Kütle artar; ağırlık azalır.',
+              'İkisi de yerde olduğu gibi kalır.'
+            ],
+            dogru: 1,
+            ipucu: 'Kütle miktara bağlıdır, değişmez. Ağırlık = kütle × yerçekimi; yerçekimi sıfırsa ağırlık sıfır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kütle, ağırlık ve yerçekimi arasındaki ilişkiyi en iyi hangisi özetler?',
+            secenekler: [
+              'Kütle her yerde aynıdır (kg); ağırlık, yerçekimine bağlı olarak değişir (N); yerçekimi merkezden uzaklaştıkça azalır.',
+              'Kütle ve ağırlık her zaman birbirine eşittir.',
+              'Ağırlık her yerde sabittir; kütle değişir.',
+              'Yerçekimi Ay\'da Dünya\'dan daha fazladır.'
+            ],
+            dogru: 0,
+            ipucu: 'Kütle → terazi, kg; Ağırlık → dinamometre, N. Ay\'da kütle aynı, ağırlık 1/6 olur.'
           }
         ]
       },
@@ -502,6 +761,37 @@ const DERSLER = [
             secenekler: ['Mitokondri', 'Kloroplast', 'Ribozom', 'Çekirdek'],
             dogru: 1,
             ipucu: 'Kloroplast içindeki klorofil, ışık enerjisini kullanarak besin üretir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Mikroskop kullanırken önce hangi objektifle başlamak doğrudur?',
+            secenekler: ['En yüksek büyütmeli objektifle', 'En düşük büyütmeli objektifle', 'Herhangi biriyle başlanabilir', 'Okülerle'],
+            dogru: 1,
+            ipucu: 'Önce küçük büyütmeyle genel görüntü elde edilir; ardından yüksek büyütmeye geçilir.'
+          },
+          {
+            saniye: 480,
+            soru: 'Hayvan hücrelerinde bulunmayan ama bitki hücrelerinde bulunan yapılar hangileridir?',
+            secenekler: [
+              'Hücre zarı ve çekirdek',
+              'Hücre duvarı, kloroplast ve büyük koful',
+              'Mitokondri ve ribozom',
+              'Hücre zarı ve mitokondri'
+            ],
+            dogru: 1,
+            ipucu: 'Bitki hücresine özgü yapılar: hücre duvarı, kloroplast, büyük koful (merkezi vacuole).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Hücre ve mikroskop konusunu özetleyen hangisidir?',
+            secenekler: [
+              'Hücreler gözle görülebilir; mikroskop yalnızca taşları incelemek için kullanılır.',
+              'Hücre, canlıların temel yapı birimidir; mikroskopla incelenir; bitki ve hayvan hücrelerinin bazı yapıları farklıdır.',
+              'Tüm hücreler aynı yapıya sahiptir; fark yoktur.',
+              'Mikroskop büyütmesi oküler ve objektif büyütmelerinin toplamıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Hücre = temel birim. Bitki: hücre duvarı + kloroplast + büyük koful. Hayvan: bunlar yok.'
           }
         ]
       },
@@ -548,6 +838,37 @@ const DERSLER = [
             secenekler: ['Erime', 'Donma', 'Buharlaşma', 'Süblimleşme'],
             dogru: 3,
             ipucu: 'Naftalin ve kuru buz gibi maddeler sıvı hâle geçmeden doğrudan gaz olur; buna süblimleşme denir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Erime sırasında madde ısı alır mı yoksa verir mi?',
+            secenekler: ['Ortama ısı verir.', 'Ortamdan ısı alır.', 'Hiçbir ısı alışverişi olmaz.', 'Önce alır sonra verir.'],
+            dogru: 1,
+            ipucu: 'Erimek için enerji gerekir; madde çevresinden ısı alarak erir (endotermik).'
+          },
+          {
+            saniye: 480,
+            soru: 'Buharlaşma ile kaynamanın farkı nedir?',
+            secenekler: [
+              'Buharlaşma yalnızca yüzeyden gerçekleşir ve her sıcaklıkta olur; kaynama belirli bir sıcaklıkta tüm sıvıdan gerçekleşir.',
+              'İkisi tamamen aynı olaydır.',
+              'Kaynama yüzeyden, buharlaşma iç kısımdan gerçekleşir.',
+              'Buharlaşma sadece soğukta, kaynama sıcakta olur.'
+            ],
+            dogru: 0,
+            ipucu: 'Buharlaşma: yüzeyden, her T\'de. Kaynama: belirli kaynama noktasında, tüm sıvıdan.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Maddenin hal değişimlerini doğru özetleyen seçenek hangisidir?',
+            secenekler: [
+              'Erime (katı→sıvı, ısı alır), Donma (sıvı→katı, ısı verir), Buharlaşma (sıvı→gaz, ısı alır), Yoğuşma (gaz→sıvı, ısı verir), Süblimleşme (katı→gaz).',
+              'Erime ısı verir; donma ısı alır.',
+              'Tüm hal değişimleri ısı vermekle gerçekleşir.',
+              'Süblimleşmede madde önce sıvıya, sonra gaza dönüşür.'
+            ],
+            dogru: 0,
+            ipucu: 'Isı alan değişimler: erime, buharlaşma, süblimleşme. Isı veren: donma, yoğuşma.'
           }
         ]
       },
@@ -609,6 +930,37 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Isı her zaman sıcak cisimden soğuk cisme doğru akar; bunun için iki cisim arasında sıcaklık farkı olmalıdır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kışın kalın yünlü kıyafet giyilmesinin ısı yalıtımıyla ilişkisi nedir?',
+            secenekler: [
+              'Yün ısı üretir ve vücudu ısıtır.',
+              'Yün gözenekli yapısıyla havayı hapsettiğinden vücut ısısının dışarı kaçmasını engeller.',
+              'Yün hava geçirmez olduğundan dışarıdaki soğuğu içeri almaz.',
+              'Yünün ısı iletimle ilişkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Yün gözenekli → içinde hava hapseder → hava ısı yalıtkanı → vücut ısısı korunur.'
+          },
+          {
+            saniye: 480,
+            soru: 'Aşağıdakilerden hangisi ısı yalıtkanı olarak kullanılır?',
+            secenekler: ['Alüminyum folyo', 'Demir çubuk', 'Cam yünü', 'Bakır tel'],
+            dogru: 2,
+            ipucu: 'Cam yünü gözenekli yapısıyla binalarda yaygın kullanılan bir ısı yalıtkan malzemesidir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Isı iletimi ve yalıtım konusunu en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Metaller yalıtkan, gözenekli maddeler iletkendir.',
+              'Isı soğuk cisimden sıcak cisme akar; metal cisimler iyi iletken, gözenekli maddeler iyi yalıtkandır.',
+              'Isı yalnızca sıvılar aracılığıyla iletilir.',
+              'Isı her yönde eşit miktarda akar; sıcaklık farkı önemli değildir.'
+            ],
+            dogru: 1,
+            ipucu: 'Isı: sıcaktan soğuğa akar. İletken: metal. Yalıtkan: tahta, plastik, yün, hava, cam yünü.'
           }
         ]
       }
@@ -687,6 +1039,42 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Eş sesli "kır": renk (ak/gri), açık alan ve kırmak (fiil) anlamlarında kullanılır.'
+          },
+          {
+            saniye: 420,
+            soru: '"Gül" sözcüğü aşağıdaki cümlelerden hangisinde fiil olarak kullanılmıştır?',
+            secenekler: [
+              'Bahçedeki güller açmış.',
+              'Neden gülmüyorsun?',
+              'Kırmızı gülü sana verdim.',
+              'Gül kokusu her yere yayıldı.'
+            ],
+            dogru: 1,
+            ipucu: '"Gül" hem çiçek adı (isim) hem de gülmek fiilinin emir kipidir.'
+          },
+          {
+            saniye: 480,
+            soru: '"Dil" sözcüğünün kaç farklı anlamı vardır?',
+            secenekler: [
+              'Yalnızca 1: konuşma organı.',
+              'En az 2: konuşma organı ve iletişim sistemi (Türk dili).',
+              'Yalnızca coğrafi anlamı (yarımada) vardır.',
+              'Hiçbir eş sesli anlamı yoktur.'
+            ],
+            dogru: 1,
+            ipucu: '"Dil" → organ (dili yutmuş gibi), dil → iletişim sistemi, dil → coğrafyada çıkıntılı kara parçası.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Eş sesli sözcüklerin temel özelliği hangisidir?',
+            secenekler: [
+              'Yazılışları aynı, okunuşları aynı, anlamları farklı; bağlama göre hangisi olduğu anlaşılır.',
+              'Yazılışları farklı ama anlamları aynıdır.',
+              'Hem yazılışları hem anlamları aynıdır.',
+              'Yalnızca iki farklı sözcük türünde kullanılırlar.'
+            ],
+            dogru: 0,
+            ipucu: '"Yüz, gül, kır, dal, bor, bar…" — hepsi aynı yazılır; anlam cümleden çıkarılır.'
           }
         ]
       },
@@ -728,6 +1116,32 @@ const DERSLER = [
             secenekler: ['Sergi', 'Dinleti', 'Gösteri', 'Tiyatro'],
             dogru: 1,
             ipucu: 'Sanatçının müzik icra ettiği etkinliğin Türkçe karşılığı "dinleti"dir.'
+          },
+          {
+            saniye: 420,
+            soru: '"Fuar" sözcüğünün Türkçe karşılığı hangisidir?',
+            secenekler: ['Sergi', 'Festival', 'Panayır', 'Tiyatro'],
+            dogru: 2,
+            ipucu: 'Fuar Fransızcadan gelir; Türkçe karşılığı "panayır" veya "sergi" olarak kullanılır.'
+          },
+          {
+            saniye: 480,
+            soru: '"Ambülans" sözcüğünün Türkçe karşılığı nedir?',
+            secenekler: ['Kurtarma arabası', 'Cankurtaran', 'İtfaiye', 'Polis arabası'],
+            dogru: 1,
+            ipucu: '"Ambülans" yerine "cankurtaran" sözcüğü Türkçe karşılık olarak kullanılır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Yabancı sözcükler yerine Türkçe karşılıklarını kullanmanın önemi nedir?',
+            secenekler: [
+              'Türkçeyi yabancı dillerden üstün kılar.',
+              'Dilimizi yabancı etkilerden korur, zenginleştirir ve anlaşılırlığı artırır.',
+              'Yabancı sözcükler kullanmak tamamen yasaktır.',
+              'Türkçe karşılıklar her zaman daha kısadır.'
+            ],
+            dogru: 1,
+            ipucu: 'Türkçe karşılıklar: dili canlı tutar, anlaşılırlığı artırır, kültürel kimliği korur.'
           }
         ]
       },
@@ -794,6 +1208,37 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: '"Kolay" gibi değerlendirmeler kişiden kişiye değişir; bu öznel cümle yapar.'
+          },
+          {
+            saniye: 420,
+            soru: '"Keşke o konsere gitseydim." cümlesi hangi duyguyu ifade eder?',
+            secenekler: ['Pişmanlık', 'Hayıflanma', 'Sevinç', 'Öfke'],
+            dogru: 1,
+            ipucu: '"Keşke gideyeydim" = gitmedim ama keşke gitseydim → hayıflanma (gerçekleşmeyen eylem için üzüntü).'
+          },
+          {
+            saniye: 480,
+            soru: '"Keşke o parayı harcamasaydım." cümlesi hayıflanma mı, pişmanlık mı ifade eder?',
+            secenekler: [
+              'Hayıflanma — para harcanmadı ama keşke harcansaydı.',
+              'Pişmanlık — para harcandı ve bundan üzüntü duyuluyor.',
+              'Ne hayıflanma ne de pişmanlık.',
+              'Öznel bir yargı bildiriyor.'
+            ],
+            dogru: 1,
+            ipucu: '"Harcamasaydım" → para harcandı (gerçekleşti); olumsuzluk pişmanlığı gösterir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Öznel-nesnel cümle ile hayıflanma-pişmanlık kavramlarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Nesnel cümleler kanıtlanamaz; öznel cümleler herkese göre aynıdır.',
+              'Nesnel cümleler kanıtlanabilir; öznel cümleler kişisel yargı içerir. Hayıflanma yapılmayan eylem için, pişmanlık yapılan eylem için duyulan üzüntüdür.',
+              'Hayıflanma ve pişmanlık aynı kavramlardır.',
+              'Nesnel cümleler yalnızca bilimsel konularda kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Nesnel: kanıtlanabilir. Öznel: kişisel. Hayıflanma: yapmadım keşke yapsaydım. Pişmanlık: yaptım keşke yapmасаydım.'
           }
         ]
       },
@@ -855,6 +1300,37 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Özne ile yüklem arasına açıklayıcı bilgi eklendiğinde virgül kullanılır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Soru cümlesinin sonuna hangi noktalama işareti konur?',
+            secenekler: ['.', '!', '?', '…'],
+            dogru: 2,
+            ipucu: '"Bugün hava nasıl?" — soru bildiren cümlelerin sonuna soru işareti konur.'
+          },
+          {
+            saniye: 480,
+            soru: '"Kitaplar, defterler ve kalemler çantada." cümlesinde virgüllerin işlevi nedir?',
+            secenekler: [
+              'Açıklama virgülü',
+              'Sıralama virgülü',
+              'Soru virgülü',
+              'Alıntı virgülü'
+            ],
+            dogru: 1,
+            ipucu: 'Sıralanan öğeler arasına konulan virgül sıralama virgülüdür; son öğeden önce "ve" varsa virgül gelmez.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Noktalama işaretlerinin temel amacı nedir?',
+            secenekler: [
+              'Cümleleri güzel göstermek için kullanılır.',
+              'Anlamı belirginleştirmek, okuma doğruluğunu sağlamak ve yazıda durakları göstermek için kullanılır.',
+              'Yalnızca yazarların tercihine bağlıdır.',
+              'Noktalama işaretleri isteğe bağlıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Nokta, virgül, soru, ünlem, iki nokta, üç nokta… — hepsi anlam ve ritim için zorunludur.'
           }
         ]
       },
@@ -906,6 +1382,32 @@ const DERSLER = [
             secenekler: ['Uyuyan', 'Uyku', 'Uyuyor', 'Uyutmak'],
             dogru: 1,
             ipucu: '"Uyku" sözcüğü "uyumak" fiilinden türetilmiş bir isimdir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdakilerden hangisi fiildir?',
+            secenekler: ['Okul', 'Güzel', 'Yazmak', 'Hızlı'],
+            dogru: 2,
+            ipucu: '"Yazmak" -mak ekiyle anlamlı olur; fiil = iş/oluş/durum bildiren sözcük.'
+          },
+          {
+            saniye: 480,
+            soru: '"Sevgi" sözcüğü hangi sözcük türüdür?',
+            secenekler: ['Fiil', 'Sıfat', 'İsim', 'Zarf'],
+            dogru: 2,
+            ipucu: '"Sevgi" bir duygu adı; soyut isimdir. "Sevmek" fiilinden türetilmiştir ama kendisi isimdir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'İsim ve fiil arasındaki temel fark nedir?',
+            secenekler: [
+              'İsimler varlık ve kavramları karşılar; fiiller iş, oluş ve durum bildirir. "-mak/-mek" ekiyle fiil test edilebilir.',
+              'İsimler her zaman kısadır; fiiller uzundur.',
+              'İsimler yalnızca somut varlıkları karşılar.',
+              'Fiiller cümlede özne, isimler yüklem görevindedir.'
+            ],
+            dogru: 0,
+            ipucu: 'İsim: kalem, sevgi, okul. Fiil: yazmak, sevmek, gitmek. Test: "-mak ekiyle anlamlı mı?"'
           }
         ]
       },
@@ -972,6 +1474,32 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: 'Kitap, dergi ve gazete adları tırnak içine alınır ve her sözcüğünün ilk harfi büyük yazılır.'
+          },
+          {
+            saniye: 420,
+            soru: '"türkiye\'nin başkenti ankara\'dır." cümlesinde kaç yazım yanlışı vardır?',
+            secenekler: ['1', '2', '3', 'Hiç yok'],
+            dogru: 1,
+            ipucu: '"Türkiye" ülke adı, "Ankara" şehir adı — her ikisi de büyük harfle başlamalı. 2 hata.'
+          },
+          {
+            saniye: 480,
+            soru: 'Hangi sözcük büyük harfle başlamaz?',
+            secenekler: ['Atatürk', 'Ocak', 'Kış', 'Marmara'],
+            dogru: 2,
+            ipucu: 'Mevsim adları (kış, ilkbahar, yaz, sonbahar) özel ad değildir; küçük harfle yazılır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Büyük harf kullanımının temel kurallarını özetleyen hangisidir?',
+            secenekler: [
+              'Yalnızca cümle başları büyük harfle başlar.',
+              'Cümle başları, özel adlar (kişi, ülke, şehir, ay), unvanlar ve eser adlarının her sözcüğü büyük harfle başlar; mevsim ve gün adları küçük yazılır.',
+              'Her sözcük büyük harfle başlar.',
+              'Büyük harf yalnızca resmî belgelerde kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Büyük: cümle başı, özel ad, unvan, ay adı. Küçük: mevsim, renk, gün adı (ama ay adı büyük!).'
           }
         ]
       }
@@ -1046,6 +1574,37 @@ const DERSLER = [
             secenekler: ['Kocatepe Camii', 'Kapadokya', 'Atatürk Havalimanı', 'İstanbul Boğaz Köprüsü'],
             dogru: 1,
             ipucu: 'Kapadokya, eşsiz peribacaları ve yeraltı şehirleriyle UNESCO listesinde yer alır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kültür kavramı nesilden nesile nasıl aktarılır?',
+            secenekler: [
+              'Yalnızca okullar aracılığıyla.',
+              'Aile, toplum, dil, sanat ve gelenekler aracılığıyla.',
+              'Sadece kitaplar aracılığıyla.',
+              'Kültür nesiller arasında aktarılamaz.'
+            ],
+            dogru: 1,
+            ipucu: 'Kültür, aile yaşamı, sözlü gelenek, okul, sanat eserleri ve günlük yaşam yoluyla aktarılır.'
+          },
+          {
+            saniye: 480,
+            soru: 'Farklı kültürlerin bir arada yaşamasına ne ad verilir?',
+            secenekler: ['Kültürel çatışma', 'Kültürel yalnızlaşma', 'Kültürel çoğulculuk / mozaik', 'Kültürel tekçilik'],
+            dogru: 2,
+            ipucu: 'Farklı kültürlerin bir arada, saygı içinde yaşaması kültürel çoğulculuktur; Türkiye bu açıdan zengin bir mozaiğe sahiptir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kültürel zenginlikler konusunu özetleyen hangisidir?',
+            secenekler: [
+              'Kültür yalnızca yemek ve kıyafetten oluşur; diğer unsurlar önemsizdir.',
+              'Kültür; dil, din, gelenek, sanat, yemek gibi unsurları kapsar; çeşitlilik toplumu zenginleştirir ve korunması gelecek nesillere aktarım için önemlidir.',
+              'Kültür statiktir ve hiçbir zaman değişmez.',
+              'Kültürel zenginliğin korumaya ihtiyacı yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Kültür = çok boyutlu. Çeşitlilik = güç. Koruma = kimlik aktarımı. UNESCO = evrensel değer.'
           }
         ]
       },
@@ -1112,6 +1671,42 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Ortak kültürel miras, bir toplumun bağlarını güçlendiren ve birliği pekiştiren temel unsurdur.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kültürel alışveriş (kültürlerarası etkileşim) ne anlama gelir?',
+            secenekler: [
+              'Bir kültürün diğerini tamamen yok etmesi.',
+              'Farklı kültürlerin birbirinden etkilenerek yeni unsurlar kazanması.',
+              'Kültürlerin hiç değişmeden kalması.',
+              'Yalnızca ticaret yoluyla gerçekleşen değişim.'
+            ],
+            dogru: 1,
+            ipucu: 'Kültürler ticaret, göç, sanat ve iletişim yoluyla birbirini etkiler ve zenginleşir.'
+          },
+          {
+            saniye: 480,
+            soru: 'Yerel festival ve şenliklerin kültürel önemi nedir?',
+            secenekler: [
+              'Yalnızca eğlence amaçlıdır; kültürel değeri yoktur.',
+              'Gelenekleri yaşatır, toplumsal dayanışmayı güçlendirir ve turistlere kültür tanıtır.',
+              'Ekonomik zararlar yaratır.',
+              'Yabancı kültürlerin yayılmasını sağlar.'
+            ],
+            dogru: 1,
+            ipucu: 'Festivaller: gelenek yaşatır, kimlik pekiştirir, turizm katkısı sağlar, dayanışmayı artırır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kültürel zenginliklerin birlikte yaşamaya katkısını özetleyen hangisidir?',
+            secenekler: [
+              'Farklı kültürler her zaman çatışmaya neden olur.',
+              'Kültürel çeşitlilik saygı, hoşgörü ve dayanışmayı artırarak toplumun birlikte yaşamasına zemin hazırlar.',
+              'Kültürel zenginlikler yalnızca ekonomik değer taşır.',
+              'Tek tip kültür toplumsal barışı sağlar.'
+            ],
+            dogru: 1,
+            ipucu: 'Çeşitlilik → zenginlik. Ortak değerler + saygı → birlikte yaşam. Farklılık = tehdit değil, kaynak.'
           }
         ]
       },
@@ -1163,6 +1758,37 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: 'Her bireyin çevreye duyarlı davranışları doğanın korunmasına katkı sağlar.'
+          },
+          {
+            saniye: 420,
+            soru: 'Şehirleşme doğal çevreyi nasıl etkiler?',
+            secenekler: [
+              'Şehirleşmenin doğal çevreye etkisi yoktur.',
+              'Orman ve tarım alanları azalır, hava-su kirliliği artar.',
+              'Şehirleşme doğayı her zaman olumlu etkiler.',
+              'Yalnızca deniz canlılarını olumsuz etkiler.'
+            ],
+            dogru: 1,
+            ipucu: 'Şehirleşme: beton artışı → yeşil alan kaybı, sanayi → hava ve su kirliliği.'
+          },
+          {
+            saniye: 480,
+            soru: 'Aşağıdakilerden hangisi doğal bir çevre değişimine örnek değildir?',
+            secenekler: ['Deprem', 'Sel', 'Fabrika kurma', 'Yanardağ patlaması'],
+            dogru: 2,
+            ipucu: 'Fabrika kurmak insan eliyle gerçekleşir; deprem, sel ve yanardağ doğal süreçlerdir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Doğal ve beşeri çevre konusunu en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Doğal çevre insan yapısı unsurları da kapsar.',
+              'Doğal çevre (dağ, nehir, orman) ile beşeri çevre (yol, köprü, fabrika) birbirini etkiler; insan müdahalesi doğal çevreyi dönüştürür.',
+              'Beşeri çevre yalnızca doğal değişimlerle oluşur.',
+              'İnsan faaliyetlerinin çevreye hiçbir olumsuz etkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Doğal = Tanrı\'nın yarattığı. Beşeri = insanın yaptığı. İkisi sürekli etkileşim halindedir.'
           }
         ]
       },
@@ -1219,6 +1845,37 @@ const DERSLER = [
             secenekler: ['Çin Seddi', 'Mısır Piramitleri', 'Efes Antik Kenti', 'Eiffel Kulesi'],
             dogru: 2,
             ipucu: 'Efes, Türkiye\'deki önemli antik kentlerden biri olup Anadolu\'nun zengin kültürel mirasını yansıtır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Lidyalıların insanlığa en önemli katkısı nedir?',
+            secenekler: ['Yazıyı icat ettiler.', 'Parayı (madeni para) icat ettiler.', 'İlk anayasayı yazdılar.', 'Tekerleği icat ettiler.'],
+            dogru: 1,
+            ipucu: 'Lidyalılar MÖ 7. yüzyılda madeni parayı icat ederek ticaret tarihini değiştirdiler.'
+          },
+          {
+            saniye: 480,
+            soru: 'Anadolu\'daki Hitit uygarlığı hangi alanda öne çıkmıştır?',
+            secenekler: [
+              'Denizcilik ve sömürgecilik',
+              'Demir işçiliği ve yazılı antlaşmalar',
+              'Piramit inşaatı',
+              'Matbaayı icat etmeleri'
+            ],
+            dogru: 1,
+            ipucu: 'Hititler demiri işlemiş ve tarihte bilinen ilk yazılı barış antlaşmasını (Kadeş) imzalamışlardır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Anadolu\'nun kültürel mirasa katkısını özetleyen hangisidir?',
+            secenekler: [
+              'Anadolu yalnızca Osmanlı döneminde önemli bir medeniyet merkezi olmuştur.',
+              'Anadolu; Göbeklitepe, Çatalhöyük, Efes, Hitit, Lidya ve daha pek çok medeniyetle insanlık tarihine önemli katkılar sunmuştur.',
+              'Anadolu\'nun kültürel mirasa katkısı yoktur.',
+              'Anadolu\'da yalnızca bir uygarlık yaşamıştır.'
+            ],
+            dogru: 1,
+            ipucu: '"Medeniyetler beşiği": Göbeklitepe (tapınak), Çatalhöyük (kentleşme), Hititler (demir/antlaşma), Lidya (para).'
           }
         ]
       },
@@ -1280,6 +1937,42 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Sivil toplum kuruluşları, toplumun ihtiyaçlarını karşılamak için gönüllülük esasıyla çalışır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Etkin vatandaş vergi ödemek, seçimlere katılmak gibi sorumluluklarını yerine getirmezse ne olur?',
+            secenekler: [
+              'Devlet hizmetleri aksayabilir ve demokratik düzen zayıflar.',
+              'Hiçbir şey olmaz; bireyler isteğe göre karar verir.',
+              'Bu sorumluluklar zaten zorunlu değildir.',
+              'Diğer vatandaşların hakları genişler.'
+            ],
+            dogru: 0,
+            ipucu: 'Etkin vatandaşlık: hem hak kullanmak hem de sorumluluğu yerine getirmek gerektirir.'
+          },
+          {
+            saniye: 480,
+            soru: 'Bir öğrencinin okul temizliğine katılması hangi etkin vatandaşlık davranışına örnektir?',
+            secenekler: [
+              'Kişisel çıkar gözetmek',
+              'Toplumsal sorumluluk ve ortak alana sahip çıkmak',
+              'Yasal zorunluluk yerine getirmek',
+              'Oy kullanma hakkını kullanmak'
+            ],
+            dogru: 1,
+            ipucu: 'Etkin vatandaş yalnızca hak talep etmez; çevresine, okuluna ve ülkesine de katkı sağlar.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Etkin vatandaşlık kavramını en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Yalnızca oy kullanan kişidir.',
+              'Haklarını bilen, sorumluluklarını yerine getiren, toplumsal sorunlara duyarlı ve demokratik yollarla çözüm arayan bireydir.',
+              'Devletin tüm kararlarına körce uyan kişidir.',
+              'Yalnızca kendi çıkarını düşünen kişidir.'
+            ],
+            dogru: 1,
+            ipucu: 'Etkin vatandaş: Hak + Sorumluluk + Duyarlılık + Demokratik tutum = 4 temel unsur.'
           }
         ]
       },
@@ -1336,6 +2029,42 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: 'Cumhuriyetin temel özelliği: devlet başkanının halk tarafından seçilmesidir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Demokrasilerde azınlık haklarının korunması neden önemlidir?',
+            secenekler: [
+              'Çünkü azınlıklar her seçimi kazanır.',
+              'Çünkü çoğunluk yönetimi herkes için adil olmayabilir; herkesin temel hakları güvence altında olmalıdır.',
+              'Çünkü azınlık hakları anayasada yer almaz.',
+              'Azınlık haklarının demokrasiyle ilişkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Gerçek demokrasi: çoğunluğun yönetimi + azınlığın haklarının güvencesi.'
+          },
+          {
+            saniye: 480,
+            soru: 'Türkiye Cumhuriyeti\'nin "laik" olması ne anlama gelir?',
+            secenekler: [
+              'Dini kurumların devleti yönetmesi.',
+              'Din ve devlet işlerinin birbirinden ayrılması; herkesin inanç özgürlüğüne sahip olması.',
+              'Yalnızca bir dinin tanınması.',
+              'Din eğitiminin tamamen yasaklanması.'
+            ],
+            dogru: 1,
+            ipucu: 'Laiklik: devlet dini tarafsız yönetir; bireyler inanç özgürlüğüne sahiptir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Demokrasi ve Cumhuriyet konusunu özetleyen hangisidir?',
+            secenekler: [
+              'Demokrasi yalnızca seçimlerden ibarettir; Cumhuriyet saltanatın devamıdır.',
+              'Demokrasi; egemenliğin halka ait olduğu yönetim biçimidir. Türkiye Cumhuriyeti 1923\'te kurulmuş, laik, demokratik bir cumhuriyettir.',
+              'Cumhuriyet yönetiminde halkın seçme hakkı yoktur.',
+              'Demokrasi ve Cumhuriyet aynı anlama gelir; fark yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Demokrasi = halk egemenliği. Cumhuriyet = halkın seçtiği yönetim. TC: 29 Ekim 1923.'
           }
         ]
       }
@@ -1400,6 +2129,32 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: '"I am from + ülke adı" veya "I am + milliyet sıfatı" doğru kalıplardır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Which country has French as its official language?',
+            secenekler: ['Brazil', 'Germany', 'France', 'Japan'],
+            dogru: 2,
+            ipucu: 'France → French. Brazil → Portuguese. Germany → German. Japan → Japanese.'
+          },
+          {
+            saniye: 480,
+            soru: 'Complete: "She is from Japan. She is ___."',
+            secenekler: ['Japanish', 'Japaner', 'Japanese', 'Japanian'],
+            dogru: 2,
+            ipucu: 'Japan → Japanese. The nationality adjective for Japan is "Japanese".'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence correctly describes countries and nationalities?',
+            secenekler: [
+              '"Turkish" means only the Turkish language.',
+              'Country names and nationality adjectives are always the same word.',
+              'We say "I am from Turkey" (country) or "I am Turkish" (nationality); nationality words can describe a person, a language, or an adjective.',
+              'Nationality adjectives are never used in English.'
+            ],
+            dogru: 2,
+            ipucu: 'Country = Turkey; Nationality = Turkish (person, language, adjective). "I am from + country" or "I am + nationality".'
           }
         ]
       },
@@ -1463,6 +2218,37 @@ const DERSLER = [
             secenekler: ['Düz git.', 'Sola dön.', 'Geri dön.', 'Dur.'],
             dogru: 0,
             ipucu: '"Go straight on / Go straight ahead" = düz devam et.'
+          },
+          {
+            saniye: 420,
+            soru: 'Which preposition correctly completes: "The bank is ___ the post office"? (banka postane ile karşılıklı)',
+            secenekler: ['next to', 'opposite', 'behind', 'between'],
+            dogru: 1,
+            ipucu: '"Opposite" = karşısında. "Next to" = yanında. "Behind" = arkasında. "Between" = arasında.'
+          },
+          {
+            saniye: 480,
+            soru: '"The school is between the park and the library." Bu cümleye göre okul nerededir?',
+            secenekler: [
+              'Park\'ın karşısında.',
+              'Kütüphanenin arkasında.',
+              'Park ile kütüphanenin arasında.',
+              'Park\'ın yanında.'
+            ],
+            dogru: 2,
+            ipucu: '"Between A and B" = A ile B\'nin arasında.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence best summarises prepositions of place for giving directions?',
+            secenekler: [
+              'Prepositions of place are not used for directions.',
+              'Near, next to, opposite, between, behind, in front of describe locations; "turn left/right", "go straight on" are direction commands.',
+              'Only "in" and "on" are used for place.',
+              'Direction words and place prepositions mean the same thing.'
+            ],
+            dogru: 1,
+            ipucu: 'Location: near, next to, opposite, between. Directions: turn left/right, go straight on, take the first/second left.'
           }
         ]
       },
@@ -1521,6 +2307,42 @@ const DERSLER = [
             secenekler: ['Nadiren', 'Sık sık', 'Her zaman', 'Hiçbir zaman'],
             dogru: 0,
             ipucu: '"Rarely" = nadiren, çok az sıklıkla. Rarely ≈ %10-15 sıklık.'
+          },
+          {
+            saniye: 420,
+            soru: 'Which sentence has the adverb of frequency in the correct position?',
+            secenekler: [
+              'He plays always football.',
+              'Always he plays football.',
+              'He always plays football.',
+              'He plays football always.'
+            ],
+            dogru: 2,
+            ipucu: 'Adverb of frequency goes BEFORE the main verb: "He always plays." After "to be": "He is always late."'
+          },
+          {
+            saniye: 480,
+            soru: 'Sıklık zarflarını azdan çoğa doğru doğru sıralayan hangisidir?',
+            secenekler: [
+              'Never → rarely → sometimes → usually → always',
+              'Always → usually → sometimes → rarely → never',
+              'Sometimes → never → usually → rarely → always',
+              'Usually → always → sometimes → never → rarely'
+            ],
+            dogru: 0,
+            ipucu: 'Never (%0) → rarely (~%10) → sometimes (~%50) → usually (~%80) → always (%100).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence best summarises adverbs of frequency?',
+            secenekler: [
+              'Adverbs of frequency show how often something happens; they go before main verbs and after "to be"; the scale is: never → rarely → sometimes → usually → always.',
+              'Adverbs of frequency always go at the end of the sentence.',
+              'There are only two adverbs of frequency: always and never.',
+              'Adverbs of frequency describe how something is done, not how often.'
+            ],
+            dogru: 0,
+            ipucu: 'Key facts: position (before main verb / after to be) + scale (never 0% → always 100%).'
           }
         ]
       },
@@ -1594,6 +2416,32 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Zaman edatları: AT + saat/gece; IN + sabah/öğleden sonra/akşam/ay/yıl; ON + gün/tarih.'
+          },
+          {
+            saniye: 420,
+            soru: 'Which time expression correctly completes: "I have breakfast ___ seven o\'clock"?',
+            secenekler: ['in', 'on', 'at', 'by'],
+            dogru: 2,
+            ipucu: '"At" is used with specific times: at 7 o\'clock, at noon, at midnight.'
+          },
+          {
+            saniye: 480,
+            soru: '"She usually does her homework ___ the afternoon."',
+            secenekler: ['at', 'on', 'in', 'by'],
+            dogru: 2,
+            ipucu: '"In" is used with parts of the day: in the morning, in the afternoon, in the evening.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence best summarises daily routine and time expressions?',
+            secenekler: [
+              'Time prepositions are: AT for specific times (at 7), IN for periods (in the morning/month/year), ON for days and dates (on Monday, on 5th May).',
+              '"In", "on", and "at" can all be used with any time expression.',
+              'Simple Present is only used for future actions.',
+              'Daily routine verbs never use the -s/-es ending.'
+            ],
+            dogru: 0,
+            ipucu: 'AT (exact time) + IN (morning/month/year) + ON (day/date). Simple Present: he/she/it → +s/es.'
           }
         ]
       },
@@ -1662,6 +2510,32 @@ const DERSLER = [
             secenekler: ['Ateş', 'Öksürük', 'Baş ağrısı', 'Mide bulantısı'],
             dogru: 0,
             ipucu: '"Fever" = ateş — I have a fever = Ateşim var.'
+          },
+          {
+            saniye: 420,
+            soru: 'How do you say "Kulağım ağrıyor" in English?',
+            secenekler: ['I have a toothache.', 'I have an earache.', 'I have a backache.', 'I have a stomachache.'],
+            dogru: 1,
+            ipucu: '"Ear" = kulak; "earache" = kulak ağrısı. Pattern: body part + ache.'
+          },
+          {
+            saniye: 480,
+            soru: '"I have a cold." ne anlama gelir?',
+            secenekler: ['Üşüdüm / Soğuk aldım (nezle oldum).', 'Karnım ağrıyor.', 'Ateşim var.', 'Boğazım ağrıyor.'],
+            dogru: 0,
+            ipucu: '"A cold" = soğuk algınlığı / nezle. "I have a cold" = Nezle oldum.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence best summarises health complaints in English?',
+            secenekler: [
+              'Health complaints are expressed with "I have + article + body part + ache" or "I have + illness name"; "What\'s the matter?" is a common question to ask about problems.',
+              'We always say "I am + body part + ache" for health problems.',
+              '"Does your head hurt?" is answered with "Yes, I do."',
+              'Health vocabulary is not needed in English communication.'
+            ],
+            dogru: 0,
+            ipucu: '"I have a headache / stomachache / fever / cold." "What\'s the matter?" → "I have a sore throat."'
           }
         ]
       },
@@ -1740,6 +2614,32 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Should = tavsiye (You should rest.); Must = zorunluluk (You must wear a mask.)'
+          },
+          {
+            saniye: 420,
+            soru: 'Which is the correct negative form of "should"?',
+            secenekler: ['should not', 'shouldn\'t', 'Both "should not" and "shouldn\'t" are correct.', 'don\'t should'],
+            dogru: 2,
+            ipucu: '"Should not" and "shouldn\'t" are both correct — they are full and contracted forms.'
+          },
+          {
+            saniye: 480,
+            soru: '"You ___ eat too much sugar." (Çok fazla şeker yememelisin.) Boşluğa ne gelir?',
+            secenekler: ['should', 'shouldn\'t', 'must', 'can'],
+            dogru: 1,
+            ipucu: '"Shouldn\'t" = tavsiye etmeme (yapmamalısın). "Should" = tavsiye etme (yapmalısın).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which sentence best summarises "should" and "shouldn\'t" for health?',
+            secenekler: [
+              '"Should" and "shouldn\'t" express obligation, like "must".',
+              '"Should" gives positive advice (you should rest, drink water, sleep early); "shouldn\'t" gives negative advice (you shouldn\'t eat junk food); the base verb follows both.',
+              '"Should" is only used in questions.',
+              '"Shouldn\'t" means "cannot" in English.'
+            ],
+            dogru: 1,
+            ipucu: 'Should + base verb = advice. Shouldn\'t + base verb = advice against. No -s, no "to", no -ing after should.'
           }
         ]
       }
