@@ -860,7 +860,7 @@ function renderCauseEffectGame(container, game, data, app) {
                     ${userOrder.map((card, i) => `
                         <div class="ordering-item card" style="border-left: 4px solid ${i === 0 ? 'var(--primary)' : 'var(--secondary)'};" data-index="${i}">
                             <span class="ordering-num" style="background: ${i === 0 ? 'var(--primary)' : 'var(--secondary)'}; color:white;">${i + 1}</span>
-                            <span class="ordering-text">${card.metin}</span>
+                            <span class="ordering-text">${card.metin || card.baslik || card.olay || ''}</span>
                             <div class="ordering-btns">
                                 <button class="btn btn-sm btn-secondary order-up" data-index="${i}" ${i === 0 ? 'disabled' : ''}>&#9650;</button>
                                 <button class="btn btn-sm btn-secondary order-down" data-index="${i}" ${i === userOrder.length - 1 ? 'disabled' : ''}>&#9660;</button>
@@ -887,7 +887,7 @@ function renderCauseEffectGame(container, game, data, app) {
 
         container.querySelector('#check-chain')?.addEventListener('click', () => {
             let correct = 0;
-            userOrder.forEach((c, i) => { if (c.id === cards[i].id) correct++; });
+            userOrder.forEach((c, i) => { if (JSON.stringify(c) === JSON.stringify(cards[i])) correct++; });
             const stars = correct === cards.length ? 3 : correct >= cards.length * 0.7 ? 2 : 1;
             const xp = correct * 5;
             store.completeChapter(data.grade, data.unitId, data.chapterId, xp, stars);
@@ -925,7 +925,7 @@ function renderTimelineGame(container, game, data, app) {
                         <div class="timeline-item card" data-index="${i}" style="position:relative; padding:1rem 1rem 1rem 4rem; border-left:3px solid var(--primary);">
                             <div style="position:absolute; left:-12px; top:50%; transform:translateY(-50%); width:22px; height:22px; border-radius:50%; background:var(--primary); color:white; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700;">${i + 1}</div>
                             <div style="font-weight:600; color:var(--secondary); font-size:0.85rem; margin-bottom:0.25rem;">${evt.tarih || ''}</div>
-                            <div style="font-weight:600;">${evt.baslik}</div>
+                            <div style="font-weight:600;">${evt.baslik || evt.olay || ''}</div>
                             ${evt.aciklama ? `<div class="text-muted" style="font-size:0.85rem; margin-top:0.25rem;">${evt.aciklama}</div>` : ''}
                             <div class="ordering-btns" style="position:absolute; right:0.75rem; top:50%; transform:translateY(-50%);">
                                 <button class="btn btn-sm btn-secondary order-up" data-index="${i}" ${i === 0 ? 'disabled' : ''}>&#9650;</button>
@@ -953,7 +953,7 @@ function renderTimelineGame(container, game, data, app) {
         container.querySelector('#check-timeline')?.addEventListener('click', () => {
             let correct = 0;
             userOrder.forEach((evt, i) => {
-                if (evt.baslik === events[i].baslik && evt.tarih === events[i].tarih) correct++;
+                if (JSON.stringify(evt) === JSON.stringify(events[i])) correct++;
             });
             const stars = correct === events.length ? 3 : correct >= events.length * 0.7 ? 2 : 1;
             const xp = correct * 5;
@@ -1022,7 +1022,7 @@ function renderCharacterRoleGame(container, game, data, app) {
                         ${chars.map((c, i) => `
                             <button class="matching-item term-item ${matched.has(i) ? 'matched' : ''} ${selectedChar === i ? 'selected' : ''}"
                                     data-index="${i}" ${matched.has(i) ? 'disabled' : ''}>
-                                <strong>${c.isim}</strong>
+                                <strong>${c.isim || c.karakter || c.ad || ''}</strong>
                                 <span style="display:block; font-size:0.8rem; color:var(--text-secondary); margin-top:0.25rem;">${c.ozellik || ''}</span>
                             </button>
                         `).join('')}
@@ -1032,7 +1032,7 @@ function renderCharacterRoleGame(container, game, data, app) {
                         ${shuffledRoles.map((c, i) => `
                             <button class="matching-item def-item ${matched.has(chars.indexOf(c)) ? 'matched' : ''}"
                                     data-orig-index="${chars.indexOf(c)}" ${matched.has(chars.indexOf(c)) ? 'disabled' : ''}>
-                                ${c.rol}
+                                ${c.rol || c.gorev || ''}
                             </button>
                         `).join('')}
                     </div>
@@ -1180,13 +1180,13 @@ function renderComparisonGame(container, game, data, app) {
                 <p class="text-muted mt-lg mb-md text-center">Bu ifade kime / neye ait?</p>
                 <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
                     <button class="btn btn-lg compare-btn" style="flex:1; min-width:100px; padding:1rem; border:2px solid #4A90D9; background:#edf4fc; color:#2c5ea0; font-weight:600;" data-zone="farkli_a">
-                        ${veri.kavram_a}
+                        ${veri.kavram_a || 'A'}
                     </button>
                     <button class="btn btn-lg compare-btn" style="flex:1; min-width:100px; padding:1rem; border:2px solid var(--primary); background:#e8f5e9; color:var(--primary); font-weight:600;" data-zone="ortak">
                         Ortak
                     </button>
                     <button class="btn btn-lg compare-btn" style="flex:1; min-width:100px; padding:1rem; border:2px solid var(--secondary); background:#fff8e1; color:#8B6914; font-weight:600;" data-zone="farkli_b">
-                        ${veri.kavram_b}
+                        ${veri.kavram_b || 'B'}
                     </button>
                 </div>
             </div>`;
@@ -1359,8 +1359,8 @@ function renderPerformanceTask(container, game, data, app) {
                     <h4 class="mb-md">&#128203; Degerlendirme Olcutleri</h4>
                     ${rubric.map(r => `
                         <div style="padding:0.5rem 0; border-bottom:1px solid var(--border);">
-                            <p style="font-weight:600;">${r.olcut}</p>
-                            <p class="text-muted" style="font-size:0.85rem;">${r.aciklama}</p>
+                            <p style="font-weight:600;">${r.olcut || r.kriter || ''}</p>
+                            <p class="text-muted" style="font-size:0.85rem;">${r.aciklama || r.puan || ''}</p>
                         </div>
                     `).join('')}
                 </div>
