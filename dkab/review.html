@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DKAB Görsel İnceleme Sistemi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/review.css">
+</head>
+<body>
+
+<!-- ===== SETUP SCREEN ===== -->
+<div id="setup-screen" class="setup-screen" style="display:none">
+    <h1>DKAB Görsel İnceleme</h1>
+    <p>
+        Firebase bağlantısı için aşağıya Firebase config JSON'unuzu yapıştırın.
+        Veya Firebase olmadan localStorage ile çalışabilirsiniz.
+    </p>
+    <textarea id="firebase-config" placeholder='{
+  "apiKey": "...",
+  "authDomain": "...",
+  "databaseURL": "https://....firebasedatabase.app",
+  "projectId": "...",
+  "storageBucket": "...",
+  "messagingSenderId": "...",
+  "appId": "..."
+}'></textarea>
+    <div>
+        <button id="btn-firebase">Firebase ile Bağlan</button>
+        <button id="btn-local" class="btn-local">Yerel Mod</button>
+    </div>
+    <div id="setup-error" class="setup-error"></div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="main-app">
+
+    <!-- Header -->
+    <header class="review-header">
+        <div class="header-top">
+            <div class="header-title">
+                <span>DKAB Görsel İnceleme</span>
+            </div>
+            <div class="header-actions">
+                <input type="text" id="reviewer-name" class="reviewer-input" placeholder="İnceleyici adı">
+                <button id="btn-copy">Kopyala</button>
+                <button id="btn-export" class="btn-export">JSON Export</button>
+                <button id="btn-settings" title="Firebase ayarları">Ayarlar</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filters -->
+    <div class="filters-bar">
+        <div class="filter-group">
+            <label>Sınıf:</label>
+            <select id="grade-filter">
+                <option value="all">Tüm Sınıflar</option>
+                <option value="04">4. Sınıf</option>
+                <option value="05">5. Sınıf</option>
+                <option value="06">6. Sınıf</option>
+                <option value="07">7. Sınıf</option>
+                <option value="08">8. Sınıf</option>
+                <option value="09">9. Sınıf</option>
+                <option value="10">10. Sınıf</option>
+                <option value="11">11. Sınıf</option>
+                <option value="12">12. Sınıf</option>
+            </select>
+        </div>
+        <div class="filter-pills">
+            <button class="filter-pill active" data-status="all">Tümü <span class="count" id="count-all">0</span></button>
+            <button class="filter-pill" data-status="beklemede">Beklemede <span class="count" id="count-beklemede">0</span></button>
+            <button class="filter-pill" data-status="uygun">Uygun <span class="count" id="count-uygun">0</span></button>
+            <button class="filter-pill" data-status="uygun_degil">Red <span class="count" id="count-uygun-degil">0</span></button>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-dot beklemede"></span>
+            Beklemede: <span class="stat-value" id="stat-beklemede">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot uygun"></span>
+            Uygun: <span class="stat-value" id="stat-uygun">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot uygun_degil"></span>
+            Uygun Değil: <span class="stat-value" id="stat-uygun-degil">0</span>
+        </div>
+        <div class="stat-item" style="margin-left:auto">
+            İncelenen: <span class="stat-value" id="stat-incelenen">0</span> / <span id="stat-toplam">0</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- Image Grid -->
+    <div id="image-grid" class="image-grid"></div>
+
+</div>
+
+<!-- ===== MODAL ===== -->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <button id="modal-close" class="modal-close">&times;</button>
+        <div class="modal-image-container">
+            <img id="modal-image" src="" alt="Görsel">
+            <div id="modal-placeholder" class="placeholder" style="display:none">🖼</div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-meta">
+                <span class="tag" id="modal-sinif"></span>
+                <span class="tag" id="modal-id"></span>
+                <span class="tag" id="modal-tur"></span>
+                <span class="tag" id="modal-bolum"></span>
+            </div>
+            <div class="modal-field">
+                <div class="modal-field-label">Sahne Açıklaması (TR)</div>
+                <div class="modal-field-value" id="modal-desc"></div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-field-label">Prompt (EN)</div>
+                <div class="modal-field-value" id="modal-prompt" style="font-size:0.82rem; color:#666;"></div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-field-label">İnceleme Notu</div>
+                <textarea id="modal-note" class="modal-note-input" placeholder="Uygun değilse nedenini yazın..."></textarea>
+            </div>
+            <div class="modal-actions">
+                <button id="modal-approve" class="modal-btn-approve">✓ Uygun (A)</button>
+                <button id="modal-reject" class="modal-btn-reject">✗ Uygun Değil (R)</button>
+            </div>
+        </div>
+        <div class="modal-nav">
+            <button id="modal-prev">← Önceki</button>
+            <span class="nav-counter" id="modal-counter"></span>
+            <button id="modal-next">Sonraki →</button>
+        </div>
+    </div>
+</div>
+
+<!-- Keyboard Hints -->
+<div class="keyboard-hints">
+    <span class="kbd">A</span> Uygun &nbsp;
+    <span class="kbd">R</span> Red &nbsp;
+    <span class="kbd">N</span> Not &nbsp;
+    <span class="kbd">←→</span> Gezin &nbsp;
+    <span class="kbd">Esc</span> Kapat
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+<!-- Firebase SDK (optional - loaded from CDN) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script type="module">
+    import { init } from './js/review-app.js';
+    init();
+</script>
+
+</body>
+</html>
