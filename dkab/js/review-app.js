@@ -16,7 +16,7 @@ const FIREBASE_CONFIG = {
     appId: "1:664426174738:web:d0cdd4fcd0f097aa22fbcb"
 };
 
-const DATA_VERSION = 'v2'; // bump to clear stale localStorage
+const DATA_VERSION = 'v3'; // bump to clear stale localStorage
 
 let db = null; // Firebase ref
 let allImages = [];
@@ -39,8 +39,10 @@ export async function init() {
     // Auto-connect to Firebase with hard-coded config
     try {
         await initFirebase(FIREBASE_CONFIG);
+        showFirebaseStatus(true);
     } catch (e) {
-        console.warn('Firebase bağlantı hatası, localStorage kullanılacak:', e);
+        console.error('Firebase bağlantı hatası:', e);
+        showFirebaseStatus(false, e.message);
         useFirebase = false;
     }
 
@@ -85,6 +87,29 @@ async function initFirebase(config) {
 
     const snap = await db.ref('reviews').once('value');
     if (snap.val()) reviews = snap.val();
+}
+
+function showFirebaseStatus(connected, errorMsg) {
+    // Add status badge to header
+    const header = document.querySelector('.header-title');
+    if (!header) return;
+    let badge = document.getElementById('fb-status');
+    if (!badge) {
+        badge = document.createElement('span');
+        badge.id = 'fb-status';
+        badge.style.cssText = 'font-size:0.7rem; padding:2px 8px; border-radius:10px; margin-left:10px; font-weight:600;';
+        header.appendChild(badge);
+    }
+    if (connected) {
+        badge.textContent = 'Firebase';
+        badge.style.background = '#d4edda';
+        badge.style.color = '#155724';
+    } else {
+        badge.textContent = 'Yerel Mod';
+        badge.style.background = '#fff3cd';
+        badge.style.color = '#856404';
+        badge.title = errorMsg || 'Firebase bağlantısı kurulamadı';
+    }
 }
 
 export function showSetup() {
@@ -355,15 +380,15 @@ async function modalAction(durum) {
     await setReview(img.gorsel_id, durum, not);
     showToast(durum === 'uygun' ? '✓ Uygun olarak işaretlendi' : '✗ Uygun değil olarak işaretlendi');
 
-    // Auto-advance to next
-    if (currentModalIndex < filteredImages.length - 1) {
-        navigateModal(1);
-    } else {
-        closeModal();
+    // Update modal badge visually (stay on same image, no auto-advance)
+    const badge = document.querySelector(`[data-id="${img.gorsel_id}"] .card-badge`);
+    if (badge) {
+        badge.className = `card-badge ${durum}`;
+        badge.textContent = durum === 'uygun' ? '✓' : '✗';
     }
 
-    // Release after short delay to prevent key-repeat rapid-fire
-    setTimeout(() => { actionBusy = false; }, 300);
+    // Release after 500ms to prevent any rapid-fire
+    setTimeout(() => { actionBusy = false; }, 500);
 }
 
 // ===== QUICK ACTIONS =====
