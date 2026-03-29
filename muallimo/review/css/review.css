@@ -394,6 +394,58 @@ body {
 
 .modal-close:hover { background: rgba(0,0,0,0.12); }
 
+/* ===== SWIPE GESTURE FEEDBACK ===== */
+.modal-content {
+    --swipe-opacity: 0;
+    will-change: transform;
+}
+
+.modal-content::before {
+    content: '✓ UYGUN';
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    background: #22c55e;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 3px solid white;
+    opacity: 0;
+    transform: rotate(-15deg);
+    z-index: 20;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+}
+
+.modal-content::after {
+    content: '✗ RED';
+    position: absolute;
+    top: 24px;
+    right: 20px;
+    background: #ef4444;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: 3px solid white;
+    opacity: 0;
+    transform: rotate(15deg);
+    z-index: 20;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+}
+
+.modal-content[data-swipe="uygun"]::before {
+    opacity: var(--swipe-opacity);
+}
+
+.modal-content[data-swipe="red"]::after {
+    opacity: var(--swipe-opacity);
+}
+
 .modal-image-container {
     width: 100%;
     background: #1a1a2e;

@@ -328,6 +328,13 @@ function openModal(idx) {
 
     document.getElementById('modal-overlay').classList.add('active');
     document.body.style.overflow = 'hidden';
+
+    // Swipe hint'i sifirla
+    const content = document.querySelector('.modal-content');
+    if (content) {
+        content.style.transform = '';
+        content.removeAttribute('data-swipe');
+    }
 }
 
 function closeModal() {
@@ -569,6 +576,8 @@ function bindEvents() {
         localStorage.setItem('reviewer_name', e.target.value);
     });
 
+    bindSwipeGestures();
+
     document.addEventListener('keydown', e => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
         const key = e.key.toLowerCase();
@@ -590,6 +599,90 @@ function bindEvents() {
         keysHeld.delete(e.key.toLowerCase());
         actionBusy = false;
     });
+}
+
+// ===== SWIPE GESTURES =====
+function bindSwipeGestures() {
+    const overlay = document.getElementById('modal-overlay');
+    if (!overlay) return;
+
+    let startX = 0, startY = 0, isDragging = false;
+    const THRESHOLD = 80;  // px - aksiyonu tetiklemek icin minimum swipe mesafesi
+    const MAX_ROTATE = 12; // derece - maksimum egim
+
+    overlay.addEventListener('touchstart', e => {
+        if (currentModalIndex < 0) return;
+        // Textarea veya buton icerisinde swipe baslamamali
+        if (e.target.closest('textarea, button, select')) return;
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = true;
+    }, { passive: true });
+
+    overlay.addEventListener('touchmove', e => {
+        if (!isDragging || currentModalIndex < 0) return;
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+
+        // Dikey scroll mi? Birakalim
+        if (Math.abs(dy) > Math.abs(dx) && Math.abs(dx) < 10) {
+            isDragging = false;
+            return;
+        }
+
+        const content = document.querySelector('.modal-content');
+        if (!content) return;
+
+        const rotate = (dx / 300) * MAX_ROTATE;
+        content.style.transform = `translateX(${dx}px) rotate(${rotate}deg)`;
+        content.style.transition = 'none';
+
+        // Renk hint
+        const ratio = Math.min(Math.abs(dx) / THRESHOLD, 1);
+        if (dx > 10) {
+            content.setAttribute('data-swipe', 'uygun');
+            content.style.setProperty('--swipe-opacity', ratio);
+        } else if (dx < -10) {
+            content.setAttribute('data-swipe', 'red');
+            content.style.setProperty('--swipe-opacity', ratio);
+        } else {
+            content.removeAttribute('data-swipe');
+            content.style.setProperty('--swipe-opacity', '0');
+        }
+    }, { passive: true });
+
+    overlay.addEventListener('touchend', e => {
+        if (!isDragging || currentModalIndex < 0) return;
+        isDragging = false;
+
+        const dx = e.changedTouches[0].clientX - startX;
+        const content = document.querySelector('.modal-content');
+        if (!content) return;
+
+        content.style.transition = 'transform 0.3s ease';
+
+        if (dx > THRESHOLD) {
+            // Saga swipe → Uygun
+            content.style.transform = `translateX(120%) rotate(${MAX_ROTATE}deg)`;
+            setTimeout(() => {
+                modalAction(CONFIG.actions[0].key);
+                content.style.transform = '';
+                content.removeAttribute('data-swipe');
+            }, 300);
+        } else if (dx < -THRESHOLD) {
+            // Sola swipe → Red
+            content.style.transform = `translateX(-120%) rotate(${-MAX_ROTATE}deg)`;
+            setTimeout(() => {
+                modalAction(CONFIG.actions[1].key);
+                content.style.transform = '';
+                content.removeAttribute('data-swipe');
+            }, 300);
+        } else {
+            // Yeterli mesafe yok — geri don
+            content.style.transform = '';
+            content.removeAttribute('data-swipe');
+        }
+    }, { passive: true });
 }
 
 window.reviewApp = { quickAction, exportJSON, exportCSV, resetAll, openDashboard };
