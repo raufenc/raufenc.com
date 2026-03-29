@@ -34,6 +34,8 @@ function initFirebase() {
         await loadOrCreateProfile();
         await syncFromCloud();
         updateAuthUI();
+        const m = document.getElementById('auth-modal');
+        if (m) m.remove();
       } else {
         currentUser = null;
         userProfile = null;
