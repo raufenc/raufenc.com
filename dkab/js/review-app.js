@@ -6,11 +6,23 @@
 const GRADES = ['04','05','06','07','08','09','10','11','12'];
 const GRADE_LABELS = { '04':'4. Sınıf','05':'5. Sınıf','06':'6. Sınıf','07':'7. Sınıf','08':'8. Sınıf','09':'9. Sınıf','10':'10. Sınıf','11':'11. Sınıf','12':'12. Sınıf' };
 
+const FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAhbpVIeFlzc8VM-KcJL-BUiklH7u2st9Q",
+    authDomain: "dkab-review-f8552.firebaseapp.com",
+    databaseURL: "https://dkab-review-f8552-default-rtdb.firebaseio.com",
+    projectId: "dkab-review-f8552",
+    storageBucket: "dkab-review-f8552.firebasestorage.app",
+    messagingSenderId: "664426174738",
+    appId: "1:664426174738:web:d0cdd4fcd0f097aa22fbcb"
+};
+
+const DATA_VERSION = 'v2'; // bump to clear stale localStorage
+
 let db = null; // Firebase ref
 let allImages = [];
 let filteredImages = [];
 let reviews = {};
-let unitMeta = {}; // { "04": { units: {U1: "Günlük Hayattaki..."}, chapters: {U1_B0: {baslik, odak, unite_baslik}} } }
+let unitMeta = {};
 let currentFilter = { grade: 'all', status: 'all' };
 let currentModalIndex = -1;
 let useFirebase = false;
@@ -18,14 +30,18 @@ let actionBusy = false; // debounce for keyboard rapid-fire
 
 // ===== INIT =====
 export async function init() {
-    const saved = localStorage.getItem('dkab_review_firebase_config');
-    if (saved) {
-        try {
-            await initFirebase(JSON.parse(saved));
-        } catch (e) {
-            console.warn('Firebase bağlantı hatası, localStorage kullanılacak:', e);
-            useFirebase = false;
-        }
+    // Clear stale localStorage data from previous buggy sessions
+    if (localStorage.getItem('dkab_data_version') !== DATA_VERSION) {
+        localStorage.removeItem('dkab_reviews');
+        localStorage.setItem('dkab_data_version', DATA_VERSION);
+    }
+
+    // Auto-connect to Firebase with hard-coded config
+    try {
+        await initFirebase(FIREBASE_CONFIG);
+    } catch (e) {
+        console.warn('Firebase bağlantı hatası, localStorage kullanılacak:', e);
+        useFirebase = false;
     }
 
     if (!useFirebase) {

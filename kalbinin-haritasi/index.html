@@ -815,7 +815,7 @@ function completedCount(){
 function render(){
   const app=document.getElementById('app');
   app.className='container mx-auto max-w-4xl p-4 sm:p-6 py-8 fade-in';
-  const screens={welcome:screenWelcome,start:screenStart,quiz:screenQuiz,result:screenResult,history:screenHistory};
+  const screens={welcome:screenWelcome,start:screenStart,quiz:screenQuiz,result:screenResult,history:screenHistory,about:screenAbout};
   app.innerHTML=(screens[S.screen]||screenWelcome)();
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -846,14 +846,117 @@ function screenWelcome(){
 
     <h2 class="font-display text-2xl sm:text-4xl font-semibold mb-6 fade-in-delay-2" style="color:var(--text-primary);opacity:0.85">Ahlak Pusulası</h2>
 
-    <p class="text-base sm:text-lg max-w-xl mb-10 leading-relaxed fade-in-delay-3" style="color:var(--text-secondary)">
+    <p class="text-base sm:text-lg max-w-xl mb-6 leading-relaxed fade-in-delay-3" style="color:var(--text-secondary)">
       İçindeki uçurumlar ve doruklar... 17 farklı testte kalbine ayna tut, nefsini tanı, hakikate yürü.
     </p>
+
+    <div class="card max-w-lg mx-auto mb-8 fade-in-delay-3" style="padding:1.25rem 1.5rem;text-align:left">
+      <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sosyal Model</p>
+      <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">
+        Finansal risk analizi tablolarından ilham alan bu model, ahlâkî eğilimleri <strong style="color:var(--gold-light)">ölçülebilir</strong> hâle getirir. Her erdem üç eksende — eksiklik, denge ve aşırılık — puanlanır. Deterministik skorlama sayesinde zaman içindeki değişimini takip eder, sana <strong style="color:var(--gold-light)">içgörü</strong> sağlar.
+      </p>
+      <button class="text-xs mt-2 transition-colors" style="color:var(--gold);opacity:0.7" data-action="goAbout">Model Hakkında →</button>
+    </div>
 
     <button class="btn btn-gold text-lg py-4 px-12 fade-in-delay-3" data-action="goStart">
       Yolculuğa Başla
     </button>
     ${progressText}
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════════
+   MODEL HAKKINDA SCREEN
+   ═══════════════════════════════════════════════ */
+function screenAbout(){
+  return `
+  <div class="fade-in">
+    <div class="mb-8">
+      <button class="text-sm transition-colors" style="color:var(--text-muted)" data-action="goWelcome">← Ana Sayfa</button>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Sosyal Model Tanımı</p>
+      <h1 class="font-display text-3xl sm:text-4xl font-bold mb-4" style="color:var(--gold)">Kalbinin Haritası — Ahlâk Pusulası</h1>
+      <p class="text-sm leading-relaxed mb-4" style="color:var(--text-secondary)">
+        İslâm ahlâk geleneğinde her erdem, iki uç arasındaki <strong style="color:var(--gold-light)">denge noktası</strong> (fazilet) olarak tanımlanır. Cesaretin eksikliği korkaklık, aşırısı ise saldırganlıktır. Bu üçlü yapı — tefrit, fazilet, ifrat — yüzyıllardır bilinen bir çerçevedir; ancak onu <strong style="color:var(--gold-light)">ölçülebilir</strong> kılan bir araç yoktu.
+      </p>
+      <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">
+        Kalbinin Haritası, finansal piyasalardaki <strong style="color:var(--gold-light)">risk analizi tablolarından</strong> ilham alarak bu boşluğu doldurur: tıpkı bir yatırımcının portföy riskini üç eksenli göstergelerle takip etmesi gibi, kullanıcı da 17 ahlâkî erdemde kendi konumunu görür ve zaman içindeki değişimini izler.
+      </p>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Problem</p>
+      <h2 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">Ahlâk Eğitiminde Ölçüm Eksikliği</h2>
+      <ul class="space-y-3 text-sm" style="color:var(--text-secondary)">
+        <li class="flex gap-2"><span style="color:var(--gold)">•</span> Geleneksel ahlâk eğitimi tek yönlü anlatıma dayanır; kişi kendi durumunu nesnel olarak göremez.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">•</span> Batılı kişilik testleri (MBTI, Big Five) İslâmî erdem çerçevesiyle uyuşmaz.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">•</span> Gençler dijital araçlarla öğrenmeye yatkın, ancak bu alanda Türkçe ve İslâmî içerikli interaktif araç neredeyse yok.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">•</span> İlerleme takibi olmadan motivasyon düşer; "ahlâkî gelişim" soyut kalır.</li>
+      </ul>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Çözüm Modeli</p>
+      <h2 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">Deterministik Skorlama ile İçgörü</h2>
+      <ul class="space-y-3 text-sm" style="color:var(--text-secondary)">
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>17 erdem testi</strong> — her biri senaryo bazlı sorularla ölçüm yapar.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>Üç eksenli puanlama</strong> — Tefrit (eksiklik), Fazilet (denge), İfrat (aşırılık) yüzdeleri.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>Tamamen deterministik</strong> — skorlar matematiksel formülle hesaplanır, sübjektif yorum içermez.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>Zaman serisi takibi</strong> — önceki sonuçlarla karşılaştırma, gelişimi somutlaştırır.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>İsteğe bağlı AI değerlendirme</strong> — test sonrası opsiyonel olarak yapay zekâ destekli kişiselleştirilmiş yorum sunulur. Ana değer skorlardadır; AI yorumu tamamlayıcı bir katmandır.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">✓</span> <strong>Paylaşım ve dışa aktarım</strong> — PDF rapor, WhatsApp paylaşımı ile yaygınlaştırma.</li>
+      </ul>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Hedef Kitle ve Etki</p>
+      <h2 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">Kimler İçin?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm" style="color:var(--text-secondary)">
+        <div class="p-3 rounded-lg" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
+          <p class="font-bold mb-1" style="color:var(--gold-light)">Lise & Üniversite Öğrencileri</p>
+          <p>Kişilik gelişim çağında öz farkındalık aracı olarak.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
+          <p class="font-bold mb-1" style="color:var(--gold-light)">Aileler</p>
+          <p>Çocuklarıyla birlikte ahlâkî gelişimi takip etmek için.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
+          <p class="font-bold mb-1" style="color:var(--gold-light)">Eğitim Kurumları</p>
+          <p>Din kültürü ve ahlâk dersleri için tamamlayıcı dijital araç.</p>
+        </div>
+        <div class="p-3 rounded-lg" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
+          <p class="font-bold mb-1" style="color:var(--gold-light)">STK'lar ve Camiler</p>
+          <p>Gençlik programlarında nefis terbiyesi atölyeleri için.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Sürdürülebilirlik</p>
+      <h2 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">Yaygınlaştırma Planı</h2>
+      <ul class="space-y-3 text-sm" style="color:var(--text-secondary)">
+        <li class="flex gap-2"><span style="color:var(--gold)">1.</span> <strong>Açık erişim:</strong> Ücretsiz web uygulaması — internet olan her yerden erişilebilir, kurulum gerektirmez.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">2.</span> <strong>Okul entegrasyonu:</strong> Öğretmenler için toplu rapor özelliği ile sınıf bazlı kullanım.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">3.</span> <strong>Çok dilli destek:</strong> Türk Dünyası ülkeleri için Azerbaycan Türkçesi ve Arapça çeviri.</li>
+        <li class="flex gap-2"><span style="color:var(--gold)">4.</span> <strong>Topluluk etkisi:</strong> WhatsApp ve sosyal medya paylaşım özelliği ile organik yayılım.</li>
+      </ul>
+    </div>
+
+    <div class="card mb-6">
+      <p class="text-xs uppercase tracking-widest mb-3" style="color:var(--gold);opacity:0.6">Teknik Altyapı</p>
+      <h2 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">Nasıl Çalışır?</h2>
+      <ul class="space-y-3 text-sm" style="color:var(--text-secondary)">
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">⚙</span> <strong>Skorlama:</strong> Her cevap 1-5 puan alır → Puan 1-2: Tefrit, Puan 3: Fazilet, Puan 4-5: İfrat. Yüzdeler toplam puandan hesaplanır. Tamamen deterministik, sübjektif yorum yok.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">⚙</span> <strong>Veri saklama:</strong> Tüm veriler kullanıcının kendi cihazında (localStorage) tutulur. Sunucuya kişisel veri gönderilmez — gizlilik öncelikli.</li>
+        <li class="flex gap-2"><span style="color:var(--emerald-light)">⚙</span> <strong>AI katmanı (opsiyonel):</strong> Test sonrası, kullanıcının skorları üzerinden kişiselleştirilmiş bir yorum oluşturulur. Bu tamamen tamamlayıcıdır; uygulamanın temel değeri deterministik puanlamadadır.</li>
+      </ul>
+    </div>
+
+    <div class="text-center mt-8">
+      <button class="btn btn-gold" data-action="goStart">Testlere Başla</button>
+    </div>
   </div>`;
 }
 
@@ -998,7 +1101,8 @@ function screenResult(){
 
         <div class="divider"><span class="divider-icon">✦</span></div>
 
-        <h2 class="font-display text-xl sm:text-2xl font-bold text-center mb-4" style="color:var(--gold)">Size Özel Değerlendirmeniz</h2>
+        <h2 class="font-display text-xl sm:text-2xl font-bold text-center mb-1" style="color:var(--gold)">Size Özel Değerlendirme</h2>
+        <p class="text-xs text-center mb-4" style="color:var(--text-muted)">Yapay zekâ destekli opsiyonel yorum — Temel değer yukarıdaki deterministik skorlardadır</p>
         <div id="gemini-box" class="p-4 rounded-xl min-h-[120px]" style="background:rgba(212,175,55,0.03);border:1px solid var(--border-gold)">${gem}</div>
       </div>
 
@@ -1199,6 +1303,7 @@ function attachEvents(){
     const {action,key,score}=el.dataset;
     if(action==='goWelcome'){S.screen='welcome';render();}
     else if(action==='goStart'){S.screen='start';render();}
+    else if(action==='goAbout'){S.screen='about';render();}
     else if(action==='goHistory'){S.screen='history';render();}
     else if(action==='startTest'){S.testKey=key;S.answers={};S.qi=0;S.scores=null;S.gemini=null;S.loadingGemini=false;S.screen='quiz';render();}
     else if(action==='answer'){
