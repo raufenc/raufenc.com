@@ -456,6 +456,9 @@ input { font-family: inherit; }
   .consent-banner { flex-direction: column; text-align: center; }
 }
 
+/* === UNMUTE BUTTON === */
+.unmute-btn { animation: pulse 1.5s infinite; font-size: 0.85rem; padding: 6px 14px; }
+
 /* === CHECKPOINT STATUS === */
 .checkpoint-status { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
 .cp-dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--text-light); transition: var(--transition); }

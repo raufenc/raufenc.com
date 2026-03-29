@@ -392,6 +392,7 @@ function createPlayer(playlistId) {
       list: playlistId,
       listType: 'playlist',
       autoplay: 1,
+      mute: 1,
       playsinline: 1,
       enablejsapi: 1,
       rel: 0,
@@ -407,16 +408,31 @@ function createPlayer(playlistId) {
 
 function onPlayerReady(event) {
   console.log('YT Player ready');
+  event.target.playVideo();
   startCheckpointMonitor();
+  // Show unmute button since autoplay requires muted start
+  showUnmutePrompt();
 }
 
 function onPlayerStateChange(event) {
-  // YT.PlayerState.PLAYING = 1, PAUSED = 2
-  if (event.data === 1) {
+  if (event.data === 1) { // PLAYING
     startCheckpointMonitor();
-  } else {
+  } else if (event.data === 2) { // PAUSED (not by us)
     stopCheckpointMonitor();
   }
+}
+
+function showUnmutePrompt() {
+  const controls = document.querySelector('.player-controls');
+  if (!controls) return;
+  const btn = document.createElement('button');
+  btn.className = 'btn btn-primary unmute-btn';
+  btn.innerHTML = '🔊 Sesi Aç';
+  btn.onclick = () => {
+    if (_ytPlayer && _ytPlayer.unMute) { _ytPlayer.unMute(); _ytPlayer.setVolume(100); }
+    btn.remove();
+  };
+  controls.prepend(btn);
 }
 
 function startCheckpointMonitor() {
