@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muallimo — Kart İnceleme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/review.css">
+</head>
+<body>
+
+<!-- ===== MAIN APP ===== -->
+<div id="main-app">
+
+    <header class="review-header">
+        <div class="header-top">
+            <div class="header-title">
+                <span class="app-title">Muallimo — Kart İnceleme</span>
+            </div>
+            <div class="header-actions">
+                <input type="text" id="reviewer-name" class="reviewer-input" placeholder="İnceleyici adı">
+                <button id="btn-dashboard" class="btn-dashboard">Tablo</button>
+                <button id="btn-export" class="btn-export">JSON Export</button>
+                <button id="btn-reset" title="Tüm incelemeleri sıfırla">Sıfırla</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="filters-bar">
+        <div class="filter-group">
+            <label>Seri:</label>
+            <select id="group-filter"></select>
+        </div>
+        <div class="filter-pills">
+            <button class="filter-pill active" data-status="all">Tümü <span class="count" id="count-all">0</span></button>
+            <button class="filter-pill" data-status="beklemede">Beklemede <span class="count" id="count-pending">0</span></button>
+            <button class="filter-pill" data-status="uygun">Uygun <span class="count" id="count-uygun">0</span></button>
+            <button class="filter-pill" data-status="uygun_degil">Red <span class="count" id="count-uygun_degil">0</span></button>
+        </div>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-dot beklemede"></span>
+            Beklemede: <span class="stat-value" id="stat-pending">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot uygun"></span>
+            Uygun: <span class="stat-value" id="stat-uygun">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot uygun_degil"></span>
+            Red: <span class="stat-value" id="stat-uygun_degil">0</span>
+        </div>
+        <div class="stat-item" style="margin-left:auto">
+            İncelenen: <span class="stat-value" id="stat-done">0</span> / <span id="stat-total">0</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <div id="item-grid" class="image-grid"></div>
+
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard-overlay" class="dashboard-overlay">
+    <div class="dashboard-panel">
+        <div class="dashboard-header">
+            <h2>Muallimo — İnceleme Özeti</h2>
+            <button id="dashboard-close" class="modal-close">&times;</button>
+        </div>
+        <div class="dashboard-summary" id="dashboard-summary"></div>
+        <div class="dashboard-filters">
+            <select id="dash-group-filter">
+                <option value="all">Tüm Seriler</option>
+            </select>
+            <select id="dash-status-filter">
+                <option value="all">Tüm Durumlar</option>
+                <option value="uygun">Uygun</option>
+                <option value="uygun_degil">Red</option>
+                <option value="beklemede">Beklemede</option>
+            </select>
+            <button id="dash-export-csv" class="btn-export">CSV İndir</button>
+        </div>
+        <div class="dashboard-table-wrap">
+            <table class="dashboard-table" id="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Seri</th><th>ID</th><th>Başlık</th>
+                        <th>Cilt</th><th>Durum</th><th>Not</th><th>İnceleyici</th><th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboard-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MODAL ===== -->
+<div id="modal-overlay" class="modal-overlay">
+    <div class="modal-content">
+        <button id="modal-close" class="modal-close">&times;</button>
+        <div class="modal-image-container">
+            <img id="modal-image" src="" alt="Görsel">
+            <div id="modal-placeholder" class="placeholder" style="display:none">🖼</div>
+        </div>
+        <div class="modal-body">
+            <div class="modal-meta">
+                <span class="tag" id="modal-group"></span>
+                <span class="tag" id="modal-id"></span>
+                <span class="tag" id="modal-tag"></span>
+            </div>
+            <div class="modal-field">
+                <div class="modal-field-label">Başlık</div>
+                <div class="modal-field-value" id="modal-title" style="font-weight:600;"></div>
+            </div>
+            <div id="modal-meta-fields"></div>
+            <div class="modal-field">
+                <div class="modal-field-label">Açıklama</div>
+                <div class="modal-field-value" id="modal-desc"></div>
+            </div>
+            <div class="modal-field">
+                <div class="modal-field-label">İnceleme Notu</div>
+                <textarea id="modal-note" class="modal-note-input" placeholder="Not ekleyin..."></textarea>
+            </div>
+            <div class="modal-actions" id="modal-actions"></div>
+        </div>
+        <div class="modal-nav">
+            <button id="modal-prev">← Önceki</button>
+            <span class="nav-counter" id="modal-counter"></span>
+            <button id="modal-next">Sonraki →</button>
+        </div>
+    </div>
+</div>
+
+<div class="keyboard-hints">
+    <span class="kbd">A</span> Uygun &nbsp;
+    <span class="kbd">R</span> Red &nbsp;
+    <span class="kbd">N</span> Not &nbsp;
+    <span class="kbd">←→</span> Gezin &nbsp;
+    <span class="kbd">Esc</span> Kapat
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module">
+    import { init } from './js/review-app.js';
+    init();
+</script>
+
+</body>
+</html>

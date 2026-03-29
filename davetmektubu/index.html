@@ -9,6 +9,13 @@
 <meta property="og:description" content="82 mektup, 3 pozisyon, 27 meslek. Akademik kaynaklı sorular. WhatsApp'a gönder.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://davetmektubu.com">
+<meta property="og:image" content="https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_majestic_cosmic_scene_viewed_from_deep_space_cou_0e5db1a0-6253-4649-8dc9-71eab932333e_3-1024x574.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="574">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Davet Mektubu — Arkadaşın büyük soruyu soruyor">
+<meta name="twitter:description" content="82 mektup, 3 pozisyon, 27 meslek. Akademik kaynaklı sorular.">
+<meta name="twitter:image" content="https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_majestic_cosmic_scene_viewed_from_deep_space_cou_0e5db1a0-6253-4649-8dc9-71eab932333e_3-1024x574.png">
 <meta name="theme-color" content="#07070F">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -26,6 +33,12 @@
 :root{--e:cubic-bezier(.16,1,.3,1)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+/* ── Skip link ── */
+.skip-link{position:absolute;top:-60px;left:12px;padding:8px 16px;background:#C8963E;color:#fff;border-radius:0 0 8px 8px;font-size:13px;font-weight:600;z-index:9999;transition:top .2s;text-decoration:none}
+.skip-link:focus{top:0}
+/* ── Focus styles ── */
+:focus-visible{outline:2px solid #C8963E;outline-offset:3px;border-radius:4px}
+button:focus-visible,a:focus-visible{outline:2px solid #C8963E;outline-offset:3px}
 body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;transition:background .4s,color .4s;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 a{text-decoration:none;color:inherit}
@@ -126,6 +139,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .m-kapatis{font-family:'Crimson Pro',serif;font-size:18px;font-style:italic;font-weight:400;margin-top:40px;padding-top:28px;line-height:1.9;border-top:1px solid}
 .m-skeleton-info{border-radius:14px;padding:20px;margin:24px 0;font-size:14px;font-weight:300;line-height:1.7;border:1px dashed}
 
+/* ── Letter Images ── */
+.m-img{margin:28px 0;border-radius:16px;overflow:hidden;position:relative;box-shadow:0 4px 24px rgba(0,0,0,.15)}
+.m-img img{width:100%;height:auto;display:block;transition:transform .6s var(--e),filter .4s}
+.m-img:hover img{transform:scale(1.02)}
+.m-img-caption{font-family:'Crimson Pro',serif;font-size:14px;font-style:italic;padding:12px 16px;text-align:center;font-weight:300;line-height:1.5}
+.dk .m-img{box-shadow:0 4px 24px rgba(0,0,0,.4)}
+.dk .m-img-caption{color:#A09888}
+.ak .m-img-caption{color:#8A8070}
+.sepya .m-img-caption{color:#7A6A58}
+
 /* ── Related Letters ── */
 .baglar{margin-top:40px;padding-top:28px;border-top:1px solid}
 .bag-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
@@ -173,6 +196,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .pg.rm-beyaz .m-kapatis{color:#2A2520!important;border-color:#D0C8B8!important}
 .pg.rm-beyaz .m-header{background:rgba(200,150,62,.06)!important;border-color:#D0C8B8!important}
 .pg.rm-beyaz .baglar{border-color:#D0C8B8!important}
+.pg.rm-beyaz .m-img{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.pg.rm-beyaz .m-img-caption{color:#6A6050!important}
 
 .pg.rm-sepya{background:#F0E4CC;border-radius:0;margin:-32px -20px -72px;padding:32px 20px 72px}
 .pg.rm-sepya .m-h2,.pg.rm-sepya .m-giris,.pg.rm-sepya .m-p,.pg.rm-sepya .m-alinti,.pg.rm-sepya .m-gecis,.pg.rm-sepya .m-kapatis,.pg.rm-sepya h1,.pg.rm-sepya h3{color:#2C1E0E!important}
@@ -183,6 +208,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 .pg.rm-sepya .m-kapatis{color:#3A2A18!important;border-color:#C8B898!important}
 .pg.rm-sepya .m-header{background:rgba(160,120,48,.08)!important;border-color:#C8B898!important}
 .pg.rm-sepya .baglar{border-color:#C8B898!important}
+.pg.rm-sepya .m-img{box-shadow:0 4px 20px rgba(0,0,0,.1)}
+.pg.rm-sepya .m-img-caption{color:#6A5A48!important}
 
 /* siyah = default dark mode, no override needed */
 
@@ -276,22 +303,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 </head>
 <body class="dk">
 
+<a href="#app" class="skip-link">İçeriğe geç</a>
+
 <div id="b1" style="width:520px;height:520px;top:-13%;left:-17%"></div>
 <div id="b2" style="width:400px;height:400px;bottom:-9%;right:-9%"></div>
 <div id="dots"></div>
 
-<nav id="nav">
-  <button id="nl" onclick="goAna()" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:opacity .18s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
-    <span style="font-size:17px">✉</span><span id="nlTxt">Davet Mektubu</span>
+<nav id="nav" role="navigation" aria-label="Ana navigasyon">
+  <button id="nl" onclick="goAna()" aria-label="Ana sayfaya git" style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;letter-spacing:.02em;transition:opacity .18s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+    <span style="font-size:17px" aria-hidden="true">✉</span><span id="nlTxt">Davet Mektubu</span>
   </button>
   <div style="display:flex;gap:7px;align-items:center">
-    <button id="navSorBtn" style="display:none;border-radius:18px;padding:5px 13px;font-size:12px;font-weight:500;border:1px solid" onclick="goSorular()">Sorular</button>
-    <button class="btn-tema" id="tBtn" onclick="temaToggle()">☀</button>
+    <button id="navSorBtn" style="display:none;border-radius:18px;padding:5px 13px;font-size:12px;font-weight:500;border:1px solid" onclick="goSorular()" aria-label="Sorular sayfasına git">Sorular</button>
+    <button class="btn-tema" id="tBtn" onclick="temaToggle()" aria-label="Tema değiştir">☀</button>
   </div>
 </nav>
 
 <div id="readProgress"></div>
-<div id="app"></div>
+<main id="app" role="main" aria-live="polite" aria-atomic="false"></main>
 <div id="modal"></div>
 <canvas id="shareCanvas" style="display:none"></canvas>
 
@@ -362,7 +391,6 @@ function updateNavBtns(){
 // ═══════════════════════════════════════════════════════
 let state={screen:"ana",poz:null,mektupId:null,kat:null,soruI:0,soruDir:1};
 let readMode=localStorage.getItem("dm_readMode")||"siyah";
-function setReadMode(m){readMode=m;localStorage.setItem("dm_readMode",m);render();}
 let touchX=null;
 
 function navigate(s,fn){
@@ -423,6 +451,7 @@ const MEKTUPLAR = {
   ozet:"İnce ayar, bilinç problemi ve matematiğin etkinliği üzerine.",
   icerik:[
     {t:"giris",m:"Seninle konuşmadan önce bir şeyi açıkça söylemek istiyorum: Bu mektubu seni 'yakalamak' için yazmadım. Fizikçi olduğunu biliyorum — yani her iddiayı test ederek, her argümanı sorgulayarak yaşıyorsun. Ben de öyle düşünmeni istiyorum. Sadece şunu istiyorum: Bu soruların kenarına birlikte yaklaşalım."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_majestic_cosmic_scene_viewed_from_deep_space_cou_0e5db1a0-6253-4649-8dc9-71eab932333e_3-1024x574.png",alt:"Derin uzaydan görülen muhteşem bir kozmik sahne"},
     {t:"h2",m:"Sayılar Neden Bu Kadar \"Tam\"?"},
     {t:"p",m:"Mesleğin gereği fiziğin temel sabitlerini biliyorsun. Gravitasyonel sabit, ince yapı sabiti, Planck sabiti, kozmolojik sabit… Bu sayıların bugünkü değerlerinden çok küçük bir sapma, evreni yaşanmaz hale getirmeye yetiyor."},
     {t:"p",m:"Kozmolojik sabit bugünkü değerinden astronomik ölçüde büyük olsaydı evren dağılırdı. Güçlü nükleer kuvvet birkaç yüzde daha zayıf olsaydı döteryum oluşamaz, yıldızlar yakıtını bulamazdı. Proton-elektron kütlesi oranı biraz farklı olsaydı kimyasal bağ kurulmazdı — sen ve ben yine yoktuk."},
@@ -432,6 +461,7 @@ const MEKTUPLAR = {
     {t:"alinti",m:"Evrenin hayata elverişli parametreler içinde olması, neden bu parametreler içinde olduğu sorusunun cevabı değil."},
     {t:"h2",m:"Peki Ya Sonsuz Evrenler?"},
     {t:"p",m:"'Eğer sonsuz sayıda evren varsa, bir tanesinin bu değerlere sahip olması kaçınılmaz.' Bu hipotezi ciddiye alıyorum. Ama beraberinde şu soru var: Bu sonsuz evren üreten mekanizmanın kendisinin de parametreleri, yasaları var. 'Peki bu meta-mekanizma nereden geliyor?' sorusu yine önümüzde duruyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_prism_splitting_white_light_into_a_spectrum_agai_41a209fd-d0c5-4071-a020-d640df2afb79_2-1024x574.png",alt:"Bir prizma beyaz ışığı spektruma ayırıyor"},
     {t:"h2",m:"Matematik Neden Evreni \"Konuşuyor\"?"},
     {t:"p",m:"Riemann geometrisi 19. yüzyılda saf matematik olarak ortaya çıktı. Einstein, genel görelilik için tam olarak o aracı aradığını keşfetti. Nobel fizikçisi Eugene Wigner bunu 'matematiğin makul olmayan etkinliği' olarak tanımladı. İnsan zihni soyut yapılar üretiyor; evren sanki o yapılara göre kurulmuş gibi davranıyor."},
     {t:"h2",m:"Madde Neden \"Görüyor\"?"},
@@ -439,6 +469,7 @@ const MEKTUPLAR = {
     {t:"alinti",m:"Bu soru — felsefede 'zor bilinç problemi' — fiziğin bugün en çok zorlandığı sorulardan biri. Ve dürüst olan her fizikçi bunu biliyor."},
     {t:"h2",m:"\"Peki Ya Tanrı'yı Kim Yarattı?\""},
     {t:"p",m:"Nedensellik zinciri, zaman ve madde içinde var olan şeyler için geçerli. Eğer zaman ve madde bir başlangıç noktasında ortaya çıktıysa, o başlangıcın kaynağı bu zincirin içinde olamaz. 'Big Bang'den önce ne vardı?' sorusu, 'Kuzey Kutbu'nun kuzeyinde ne var?' sorusu gibi anlamsızlaşıyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_physicist_in_a_quiet_laboratory_leaning_on_a_cha_c1b9f759-58a9-41a9-a30a-ab17fb8ee377_3-1024x574.png",alt:"Sessiz bir laboratuvarda düşünen fizikçi"},
     {t:"gecis",m:"Bu mektup seni 'belki bir Yaratıcı var' noktasına taşıdıysa, asıl soru şimdi başlıyor: Neden sessiz kalsın? Neden İslam? Bu soruların peşinden gitmek istersen, Deist Fizikçiye yazdığım mektup tam oradan devam ediyor."},
     {t:"kapatis",m:"Senden inanmanı istemiyorum. Sormanı istiyorum. Fizikçi aklın seni evrenin kökenine, ince ayarın açıklamasına, matematiğin gizemli etkinliğine götürüyor — ve bu sorulara tatmin edici bir cevap bulamıyorsan, belki bu tatminsizlik bir yanılsama değil, bir iz."},
   ],
@@ -450,10 +481,12 @@ const MEKTUPLAR = {
   ozet:"Özgür irade paradoksu, ahlakın nesnel temeli ve epistemoloji üzerine.",
   icerik:[
     {t:"giris",m:"Felsefe bana göre, soruları çözüme kavuşturmak değil — onların gerçek derinliğini görünür kılmak için vardır. Senin mesleğin bu yüzden en dürüst mesleklerden biri: 'bilmiyorum' diyebilmek, felsefi bir yetkinlik sayılıyor. Ben de aynı dürüstlükle yazıyorum. Bu mektupta argüman kazanmak değil, birlikte düşünmek istiyorum."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_An_ancient_library_with_scrolls_and_geometric_diag_1625ba11-89cc-4e25-826c-2f32de69c466_3-1024x574.png",alt:"Parşömenler ve geometrik çizimlerle dolu antik bir kütüphane"},
     {t:"h2",m:"Özgür İrade Yoksa Bu Tartışma Neden Önemli?"},
     {t:"p",m:"Natüralizm — maddenin her şey olduğu görüş — bir şeyi kabul etmek zorunda: eğer zihin tamamen beyne indirgenilebiliyorsa, her düşünce önceki fiziksel durumların deterministik ya da rastlantısal bir sonucudur. Ama o zaman 'Ateizm doğrudur' kararın da bir kimyasal zorunluluk. Onu seçmedin — nöronların akacak yeri orası olduğu için oraya aktı."},
     {t:"p",m:"Şimdi ciddi bir gerilim ortaya çıkıyor: Rasyonel tartışma, gerekçeler vermeyi ve bu gerekçelere dayanarak kanaatleri değiştirmeyi içeriyor. Ama salt fiziksel bir dünyada 'gerekçe' ile 'neden' aynı şey — sadece fiziksel tetikleyiciler. Biri seni argümanıyla ikna etmedi; beynindeki elektrokimyasal denge biraz değişti. Felsefi tartışmanın bu çerçevede ne anlam taşıdığını natüralist düşünürler hâlâ tartışıyor."},
     {t:"alinti",m:"'Ben karar verdim' cümlesi, indirgemeci bir çerçevede gerçek bir açıklama mı, yoksa sadece kullanışlı bir kısaltma mı?"},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_lone_thinker_at_a_cliffs_edge_under_a_starry_sky_b90da18a-c194-4971-9b34-9218d1027121_2-1024x574.png",alt:"Yıldızlı gökyüzü altında uçurumun kenarında yalnız düşünür"},
     {t:"h2",m:"Ahlakın Nesnel Temeli: Hume'un Giyotini"},
     {t:"p",m:"Felsefi eğitimin varsa şunu iyi biliyorsun: Hume, betimleyici olgulardan normatif sonuçlar çıkarmanın mantıksal olarak geçersiz olduğunu gösterdi. Bu 'is-ought problem', ahlak felsefesinin en sağlam tespitlerinden biri."},
     {t:"p",m:"Natüralizm bu sorunla yüz yüze. Evrim bize hayatta kalmak için gelişen içgüdüler verebilir; toplum bize normatif beklentiler yükleyebilir. Ama bunların hiçbiri 'işkence gerçekten kötüdür' önermesini nesnel bir hakikat yapmaz — sadece biyolojik veya kültürel bir eğilim yapar. Ve eğer ahlak yalnızca bu eğilimlerden ibaretse, 'soykırım iyidir' diyen güçlü bir topluma nesnel olarak itiraz edemezsin."},
@@ -463,6 +496,7 @@ const MEKTUPLAR = {
     {t:"p",m:"Alvin Plantinga bu argümanı detaylı biçimde işledi. Natüralizmin doğru olduğunu bilmek için, aklın hakikate erişebildiğini varsaymak gerekiyor. Ama natüralizm, bu varsayımın sağlam olduğunu garanti edemiyor. Bu döngüsel bir problem."},
     {t:"h2",m:"Soyut Nesneler: Materyalizmin Sessiz Çatlağı"},
     {t:"p",m:"Sayılar, mantık yasaları, ahlaki zorunluluklar fiziksel değil. Onlara dokunamazsın, ölçemezsin. Ama var oldukları inkâr edilemiyor — çünkü onları inkâr etmek de mantığı kullanmayı gerektiriyor. Materyalizm bu nesneleri ya 'beyin ürünleri' ya da 'faydalı kurgular' saymak zorunda. İkinci seçenek, mantık yasalarının 'sadece faydalı kurgu' olduğunu söylemek demek — bu da onlara dayanan tüm tartışmaları boşaltıyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_sociologist_at_a_desk_notebooks_and_charts_nearb_310beeb6-ad2e-4a63-a449-77e5e8df0a40_1-1024x574.png",alt:"Masasında defterler ve çizelgelerle düşünen akademisyen"},
     {t:"gecis",m:"Bu sorular seni 'ahlak ve mantık nesnel bir zemine ihtiyaç duyuyor' noktasına taşıdıysa, bu zemini nerede arayacağız sorusu açılıyor. Fizikçiye yazdığım mektup evrenin yapısından gelen argümanları ele alıyor. Hukukçuya yazdığım mektup adalet ve doğal hukuk ilişkisini işliyor. Deist Felsefeciye yazdığım mektup ise bu zemini İslam'la nasıl ilişkilendireceğimizi soruyor."},
     {t:"kapatis",m:"Senden inanmanı istemiyorum. Ama bu soruların — özgür irade, ahlakın temeli, aklın güvenilirliği — tatmin edici natüralist cevabı bulunana kadar askıda bırakılmaması gerektiğini düşünüyorum. Belki bu gerilimler bir eksikliğin değil, bir yönün işareti."},
   ],
@@ -474,6 +508,7 @@ const MEKTUPLAR = {
   ozet:"DNA'nın bilgi sistemi, yaşamın kökeni ve biyolojik indirgemenin sınırları üzerine.",
   icerik:[
     {t:"giris",m:"Hayatı en yakından inceleyen meslek belki seninki. Her gün, inanılmaz koordinasyon içindeki sistemlerle çalışıyorsun. Bu yüzden seninle konuşmak hem en zorlu hem de en zengin ihtimal. Sana kabul etmeni istemediğim bir şey söylemiyorum — sadece kendi mesleğinin ortasında duran bazı soruları birlikte sormak istiyorum."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_luminous_DNA_double_helix_suspended_in_a_soft_gr_48f83462-47bc-4ad3-a2d2-70c51156cc50_0-1024x574.png",alt:"Yumuşak bir ışıkta süzülen parlak DNA çift sarmalı"},
     {t:"h2",m:"DNA'nın İçindeki Kitaplık"},
     {t:"p",m:"Tek bir insan hücresinin DNA'sı yaklaşık 3,2 milyar nükleotid bazı içeriyor. Bu sadece bir kimyasal molekül değil — anlamlı, işlevsel, organize bir bilgi sistemi. Her harf önemli; sıralaması rastlantısal değil. Replikasyon sırasında hata düzeltme mekanizmaları çalışıyor; ribozomlar kodu okuyup protein üretiyor."},
     {t:"p",m:"Bilgi teorisi açısından bakıldığında bu yapı, kaynağı sorulmayı hak ediyor. Bilgi, fiziksel bir nesne değil — bir düzenleme, bir anlam, bir işlev. Madde kendi kendine bilgi üretir mi? Bunu 'evet' diyenler var, ama 'nasıl?' sorusu hâlâ açık."},
@@ -481,11 +516,13 @@ const MEKTUPLAR = {
     {t:"h2",m:"Evrim Teorisinin Kapsamı ve Sınırı"},
     {t:"p",m:"Burada net olmak istiyorum: Biyolojide kabul gören evrim teorisi, var olan canlıların çeşitliliğini ve değişimini açıklamak için geliştirildi. Bu çerçeve içinde değerli bulgular sunuyor. Ama bu çerçeve yaşamın kaynağını değil, var olan yaşamın değişimini ele alıyor. 'İlk hücre nasıl ortaya çıktı?' sorusu bu çerçevenin dışında — ve kimya ile fizik bu soruya henüz tatmin edici bir cevap veremiyor."},
     {t:"p",m:"Miller-Urey deneyi amino asitlerin abiyotik ortamda oluşabildiğini gösterdi — bu anlamlı bir bulgu. Ama amino asitlerden proteine, proteinlerden kendini kopyalayan bir sisteme geçiş, her adımda astronomik bir olasılık meselesi olmaya devam ediyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_cellular_landscape_seen_at_microscopic_scale_org_acbb4b0f-1c39-4e80-9f53-24e1fe9a042d_1-1024x574.png",alt:"Mikroskobik ölçekte görülen hücresel manzara"},
     {t:"h2",m:"İndirgemenin Sınırları"},
     {t:"p",m:"Modern biyoloji indirgemecidir: organizmayı hücrelerine, hücreyi moleküllerine indirge ve açıklamış olursun. Bu yöntem inanılmaz başarılar getirdi. Ama bir noktada açıklama zinciri kırılıyor: neden bu karmaşık sistemlerin içinden bilinç çıkıyor? Neden bir biyokimyasal süreç 'Kırmızıyı görüyorum' deneyimiyle birlikte geliyor?"},
     {t:"p",m:"Felsefede 'zor bilinç problemi' adı verilen bu mesele, biyolojik indirgemenin gerçekten her şeyi açıklayıp açıklayamayacağı sorusunu açık bırakıyor. Mekanizmayı tarif ediyoruz; ama deneyimin neden var olduğunu hâlâ bilmiyoruz."},
     {t:"h2",m:"Hayatın Düzeni"},
     {t:"p",m:"Bir enzimin substrate'ına binlerce olası şekil arasından tam oturması, gelişimin koordinasyonu, bağışıklık sisteminin kendinden yabancıyı ayırt etmesi — bunların hepsinde olağanüstü bir 'uyum' var. Bu uyumu 'sadece kimya' diye özetlemek mümkün. Ama 'neden bu kadar uyumlu bir kimya?' sorusu başka bir yerde duruyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_biologist_at_a_microscope_station_studying_sampl_0f58bff1-3400-4c66-8e48-6050341bdd05_1-1024x574.png",alt:"Mikroskop başında numune inceleyen biyolog"},
     {t:"gecis",m:"Bu sorular seni 'belki hayat sadece kimya değil, belki arkasında bir akıl var' noktasına taşıdıysa, Fizikçiye yazdığım mektup ince ayar argümanını çok daha geniş bir tabloda işliyor. Kimyagere yazdığım mektup moleküler hassasiyeti ele alıyor. Oradan 'neden İslam?' sorusuna Deist bölümü cevap arıyor."},
     {t:"kapatis",m:"Senden inanmanı istemiyorum. Sadece şunu istiyorum: kendi alanının sorularını, cevabı biliyormuş gibi geçiştirme. Abiogenezin açıklanmamış olması, bilincin indirgeme dışında kalması, DNA'nın bilgi yapısı — bunlar gerçek sorular. Ve gerçek sorular, dürüst zihinlerde açık kalır."},
   ],
@@ -497,6 +534,7 @@ const MEKTUPLAR = {
   ozet:"Soyut gerçeklik, matematiğin etkinliği ve Platon'un dünyası üzerine.",
   icerik:[
     {t:"giris",m:"Matematiğin keşfedildiğine mi, üretildiğine mi inanıyorsun? Bu soruya verdiğin cevap, belki de Tanrı sorusuna sandığından daha yakın. Seninle bu meseleyi konuşmak istiyorum — çünkü matematik felsefesinin derin suları, natüralizmin en sessiz açmazlarından birine çıkıyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_statistical_graph_turning_into_a_symmetrical_des_55285bde-8b29-4166-b74e-3271c83391dd_0-1024x574.png",alt:"Simetrik bir desene dönüşen istatistiksel grafik"},
     {t:"h2",m:"Wigner'ın Sorusu"},
     {t:"p",m:"Eugene Wigner 1960'ta 'matematiğin doğa bilimlerindeki makul olmayan etkinliği'nden söz etti. Riemann geometrisi 19. yüzyılda fizik hesabı olmaksızın, saf zihinsel bir yapı olarak kuruldu. Yüz yıl sonra Einstein genel göreli̇liği açıklamak için tam bunu buldu. Elektromanyetizma teorisi karmaşık sayıları kullanıyor. Kuantum mekaniği Hilbert uzaylarına yaslanıyor. Bu uyum nasıl açıklanacak?"},
     {t:"p",m:"'Rastlantı' demek çok kolay — ama her rastlantıyı bu gerekçeyle kapamak, açıklamadan vazgeçmek demek. 'Matematik zihinden doğduğu için evrenle uyumlu' demek ise zihnin neden evrenle uyumlu olduğu sorusunu cevapsız bırakıyor."},
@@ -504,8 +542,10 @@ const MEKTUPLAR = {
     {t:"h2",m:"Soyut Nesneler: Var mı, Yok mu?"},
     {t:"p",m:"Sayılar fiziksel değil. Kümeler dokunulamaz. Pi sayısı evrenin herhangi bir köşesinde maddi olarak bulunmuyor. Ama pi hakkındaki önermeler zorunlu ve evrensel olarak doğru. Farklı bir evrende pi başka bir değer alamaz."},
     {t:"p",m:"Materyalizm bu nesneleri üç seçenekle açıklamaya çalışıyor: ya beyindeki yapılara indirgeyecek (ama o zaman matematiğin evrensel zorunluluğu nasıl açıklanır?), ya faydalı kurgular sayacak (ama o zaman '2+2=4'ün evrensel doğruluğu nasıl korunur?), ya da sessizce geçecek. Üçüncü yolu çoğu natüralist filozofun seçtiğini görüyoruz."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_Data_points_forming_an_unexpectedly_elegant_patter_fb284137-e4ef-4585-9437-eb89f6e65981_0-1024x574.png",alt:"Beklenmedik zarif desen oluşturan veri noktaları"},
     {t:"h2",m:"Mantık Yasaları: Zorunlu mu, Rastlantısal mı?"},
     {t:"p",m:"Mantıkta çelişmezlik ilkesi, aynı anda hem doğru hem yanlış bir önerme olamayacağını söylüyor. Bu ilke evrenin fiziksel yapısından bağımsız. Farklı bir evren tasavvur etsen, mantık yasaları orada da geçerli. Peki bu zorunluluğun kaynağı ne? Fiziksel dünya bu zorunluluğu üretmiyor — çünkü fiziksel dünya mantık yasalarına tabi, onları üretmiyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_mathematician_in_a_quiet_office_stacks_of_papers_4eead211-93d8-4a14-b54a-777d5387b04d_1-1024x574.png",alt:"Sessiz ofisinde kağıt yığınlarıyla çalışan matematikçi"},
     {t:"gecis",m:"Bu sorular 'Platonizm' denen soyut nesneler gerçekçiliğine yaklaştırıyor insanı. Ve Platonizm, aşkın bir zihin düşüncesiyle çok daha rahat örtüşüyor. Fizikçiye yazdığım mektup ince ayarı işliyor. Felsefeciye yazdığım mektup bu zemini felsefi açıdan tartışıyor. Deist Felsefeciye yazdığım mektup buradan İslam'a köprü kuruyor."},
     {t:"kapatis",m:"Matematik, belki de en sessiz ama en derin tanıklıklardan birini taşıyor: evrende bir düzen var, bu düzen sayısal ve soyut yapılarla ifade edilebiliyor, ve insan zihni bu yapılara erişebiliyor. Bu üçlü uyumu 'tesadüf' demek, matematikçinin konforuna terk etmek gibi hissettiriyor bana."},
   ],
@@ -517,6 +557,7 @@ const MEKTUPLAR = {
   ozet:"Bilinç, anlam arayışı, vicdan ve kimliğin sürekliliği üzerine.",
   icerik:[
     {t:"giris",m:"İnsanı anlamak için en çok emek harcayan mesleğin sahiplerinden birisin. Her gün insanların neye ihtiyaç duyduğunu, neden acı çektiğini, neyi aradığını gözlemliyorsun. Bu yüzden seninle konuşmak değerli — çünkü senin mesleğin, materyalizmin en zorladığı sorularla her gün buluşuyor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_human_head_silhouette_with_subtle_neural_pattern_fe9f319e-f03d-4685-a1f8-c50c279f1091_0-1024x574.png",alt:"Nöral desenlerle bezenmiş insan kafası silüeti"},
     {t:"h2",m:"Bilinç: Fonksiyonun Ötesi"},
     {t:"p",m:"Psikoloji, zihinsel süreçlerin nasıl işlediğini açıklıyor. Biliş, davranış, duygu, bellek — bunları mekanistik modeller içinde incelemek mümkün. Ama David Chalmers'ın 'zor bilinç problemi' dediği şey başka: neden bu işlevsel süreçlerin herhangi bir iç deneyimi var? Neden 'acı sinyali' ile 'acı hissediyorum' birlikte geliyor?"},
     {t:"p",m:"Bir robot düşün: acı sinyaline tepki veren, bu sinyali işleyen, davranışını değiştiren bir sistem. Bu sisteme 'acı duyuyor musun?' diye sorsan, belki 'evet' der. Ama gerçekten bir şey hissediyor mu? İşlevsel açıklama bu soruyu yanıtlamıyor."},
@@ -524,10 +565,12 @@ const MEKTUPLAR = {
     {t:"h2",m:"Anlam Arayışı: Bir Yanılsama mı?"},
     {t:"p",m:"Viktor Frankl, anlam arayışını insanın en temel motivasyonu olarak tanımladı. Bu gözlem psikolojide geniş çapta kabul görüyor. Ama şunu sormak gerekiyor: eğer evren amaçsızsa, anlam arayışı da anlamsız bir yanılsama mı? Eğer öyleyse, psikoterapi de bu yanılsamayı sürdürmeye mi yardım ediyor?"},
     {t:"p",m:"Natüralist psikolog genellikle bu gerilimi 'öznel anlam yeterli' diyerek kapatmaya çalışıyor. Ama öznel anlam ile gerçek anlam arasındaki farkı koruyan bir natüralist argüman bulmak çok zor."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_calm_figure_in_meditation_surrounded_by_gentle_a_c1cd7d3e-af4b-4459-b4d9-25886250e91e_1-1024x574.png",alt:"Hafif bir aurayla çevrili meditasyon yapan sakin figür"},
     {t:"h2",m:"Vicdan: Evrimsel mi, Aşkın mı?"},
     {t:"p",m:"Hiç tanımadığın birine haksızlık edildiğinde içinden bir şey sıkılıyor. Bu tepki sana evrimsel avantaj sağlamıyor — aksine bazen hayatta kalmayı zorlaştırıyor. Natüralist çerçeve bunu 'grup seçilimi' veya 'karşılıklı özgecilik' ile açıklamaya çalışıyor. Bu açıklamalar kısmi bir tablo sunuyor; ama evrensel adalet duygumuzu ve yabancılar için duyulan derin acımayı tam karşılamıyor."},
     {t:"h2",m:"Benliğin Sürekliliği"},
     {t:"p",m:"Sen bugün on yıl önceki 'sen' misin? Beynindeki nöronların büyük çoğunluğu değişti. Hücreler yenilendi. Ama 'ben' aynı kaldı — ya da öyle hissediyorsun. Bu sürekliliği hangi fiziksel mekanizma sağlıyor? Materyalist açıklamalar genellikle bellek ağlarına işaret ediyor; ama bellek de sürekli değişiyor. Psikolog olarak bu soruyu mutlaka düşünmüşsündür."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_psychologist_in_a_quiet_office_armchair_and_file_2fe4ef5a-1d8d-4fc4-ae54-8b10f805bc5c_3-1024x574.png",alt:"Sessiz ofisinde koltuk ve dosyalarıyla düşünen psikolog"},
     {t:"gecis",m:"Bu sorular seni 'belki bilinç ve benlik sadece madde değil' noktasına taşıdıysa, Felsefeciye yazdığım mektup bilinç felsefesinin derinliklerine giriyor. Oradan Deist Psikologа yazdığım mektup fıtrat kavramı üzerinden İslam'la köprü kuruyor."},
     {t:"kapatis",m:"Psikoloji insanı anlatan en güçlü araçlardan biri. Ama insan, bu araçların sınırlarını sürekli aşıyor: anlam arıyor, vicdan duyuyor, ölüm gerçeğiyle hesaplaşıyor. Bu aşma noktaları, belki de en dürüst gözlem yerleri."},
   ],
@@ -971,16 +1014,20 @@ const MEKTUPLAR = {
   ozet:"Sessiz Yaratıcı paradoksu, vahyin imkânı ve neden İslam sorusu.",
   icerik:[
     {t:"giris",m:"Yaratıcının varlığını kabul ediyorsun — bu küçük bir şey değil. Materyalizmin en güçlü itirazlarını aştın ve kozmosun arkasında bir akıl olduğunu görüyorsun. Ama şimdi başka bir soru var: Bu Yaratıcı neden sessiz kalsın? Ve eğer konuşmuyorsa, bu tutarlı mı?"},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_vast_cosmic_landscape_with_galaxies_and_nebulae__7b247424-fc1b-4cd5-9c29-61930dfa197d_0-1024x574.png",alt:"Galaksiler ve bulutsuların yer aldığı geniş kozmik manzara"},
     {t:"h2",m:"Sessiz Mühendis Analojisi"},
     {t:"p",m:"Bir mühendis inanılmaz bir makine tasarlıyor. Mükemmel parametreler, hassas denge, işlevsel sistem. Ama kullanım kılavuzu vermiyor; bakım talimatı yok; amaç tanımlanmamış. Bu mühendise 'hikmetli' denir mi?"},
     {t:"p",m:"Deizm Yaratıcıya 'hikmetli' sıfatını veriyor — ince ayarı, biyolojik karmaşıklığı, bilinçli varlıkları gören bir deist bunu kabul ediyor. Ama hikmetli bir Yaratıcı, yarattığı sorgulayan varlıklara neden hiç rehberlik etmesin? Bu, hikmetle çelişmiyor mu?"},
     {t:"alinti",m:"Evrenin temel sabitlerini ayarlayan bir Yaratıcı, insan zihnini tanımıyor mu? Yarattığı aklın nereye yöneleceğini bilmiyor mu?"},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_Close-up_of_fundamental_physical_constants_symboli_aa9b9822-ca88-47fe-959a-affbde7343cc_0-1024x574.png",alt:"Temel fiziksel sabitlerin sembolik yakın çekimi"},
     {t:"h2",m:"Adalet Sıfatı ve Ahiret Zorunluluğu"},
     {t:"p",m:"Tarih boyunca sayısız masum acı çekerek öldü. Zalimler cezasız yaşadı. Güçlü zayıfı ezdi. Eğer Yaratıcı adaletli ise, bu hesap nerede görülecek? Bu dünyada görülmedi. Ahiret olmadan adalet sıfatı fiilen boşalıyor. Ve ahiret fikri, Yaratıcının yalnızca 'yaratan' değil 'ilgilenen' biri olduğunu gerektiriyor."},
     {t:"h2",m:"Müdahalesizlik ile Hikmet Çelişkisi"},
     {t:"p",m:"Deizm 'Tanrı müdahale etmez' diyor. Ama bunu iki farklı şekilde okuyabiliriz: 'müdahale edemez' ya da 'müdahale etmeyi seçmiyor'. İlki güç sıfatıyla çelişiyor. İkincisi hikmet sıfatıyla çelişiyor. Zira hikmetli bir varlık, yarattığı sorgulayan akla rehberlik etmemeyi seçmez."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_A_delicate_balance_scale_placed_in_a_vacuum_of_spa_6ed7aea0-891e-4d33-b5e7-aa0e17fd10c9_1-1024x574.png",alt:"Uzay boşluğuna yerleştirilmiş hassas terazi"},
     {t:"h2",m:"Neden İslam?"},
     {t:"p",m:"Vahyin mümkün olduğunu kabul ettiğimizde, hangi vahiy sorusu açılıyor. İslam bu soruya şunları söylüyor: Hazret-i Muhammed aleyhisselâm'ın 23 yıllık dönüşümü, Kur'ân-ı Kerîm'in metin güvenilirliği, ve belki en önemlisi — Kur'ân-ı Kerîm'in epistemik teklifi: kör iman değil, akla çağrı. 'Düşünmüyor musunuz?' sorusu Kur'ân-ı Kerîm'in en sık tekrarlanan ifadelerinden biri."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/halatmedya_In_a_quiet_study_filled_with_physics_books_and_a_c_d48556da-467b-4093-9afd-c3f1c092c3c1_2-1024x574.png",alt:"Fizik kitaplarıyla dolu sessiz çalışma odası"},
     {t:"gecis",m:"Felsefi boyutu derinlemesine işlemek için Deist Felsefeciye yazdığım mektup devam ediyor. Tarihsel kanıtlar için Deist Tarihçiye yazdığım mektuba bakabilirsin."},
     {t:"kapatis",m:"Deizm bir köprü. Ama köprünün üzerinde sonsuza kadar durulamaz. Bu köprü, bir yöne doğru gidiyor. O yönü keşfetmek için devam et."},
   ],
@@ -992,6 +1039,7 @@ const MEKTUPLAR = {
   ozet:"Vahyin imkânı, aklın sınırları ve 'neden İslam' sorusunun felsefi temeli.",
   icerik:[
     {t:"giris",m:"Akıl yeterli olsaydı, tarih boyunca bu kadar zeki insan aynı metafizik sonuçlara ulaşırdı. Ama ulaşmadı. Teizm de panteizm de deizm de politeizm de akıl yürüten insanlarca savunuldu. Bu durum, aklın tek başına yeterli olmadığını göstermiyor mu?"},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/DALL%C2%B7E-2024-12-20-23.04.21-A-breathtaking-depiction-of-a-vast-ancient-library-filled-with-illuminated-manuscripts.-Each-manuscript-glows-softly-as-if-infused-with-metaphysical-1024x585.jpg",alt:"Aydınlatılmış el yazmalarıyla dolu devasa antik kütüphane"},
     {t:"h2",m:"Aklın Yeterliliği Problemi"},
     {t:"p",m:"İnsan aklı Tanrı'nın varlığını kavrayabiliyorsa, Tanrı'nın insanla konuşmasının imkânını niçin kavrayamasın? Yani aklın teizme kapı açması, vahyi dışlaması için yeterli gerekçe oluşturmuyor. Aklın Tanrı'yı bulması ama vahyi reddetmesi, hangi tutarlı ilkeye dayanıyor?"},
     {t:"p",m:"Daha derin bir soru: Doğal teoloji bize Tanrı hakkında ne söylüyor? İnce ayar bize güçlü bir aklı işaret ediyor. Ama bu aklın bizimle iletişim kurup kurmayacağı, bunun üzerinden çıkmıyor."},
@@ -1003,6 +1051,7 @@ const MEKTUPLAR = {
     {t:"p",m:"Vahyi imkânsız saymak için iki seçenek var: ya Tanrı'nın kapasitesi yok, ya da seçmiyor. Birincisi, sonsuz güç sıfatıyla çelişiyor. İkincisi ise hikmet sıfatıyla — sorgulayan akla rehberlik etmemek, hikmetle bağdaşmıyor. Demek ki vahyin imkânsız olduğu argümanları ya güç sıfatını ya da hikmet sıfatını sınırlıyor."},
     {t:"h2",m:"Hazret-i Muhammed aleyhisselâm'ın Felsefi Karakteri"},
     {t:"p",m:"Felsefeci gözüyle bakıldığında Hazret-i Muhammed aleyhisselâm'ın getirdiği mesajın içeriği dikkat çekici: Tevhid fikri (birlik ilkesi), evrensel ahlak, ahiret hesabı, adalet. Bunların tutarlı bir dünya görüşü oluşturduğu ve 7. yüzyıl Arabistan'ın felsefi birikimiyle açıklanamayacak kadar yetkin olduğu gözlemlenebilir."},
+    {t:"img",src:"https://davetmektubu.com/wp-content/uploads/2025/02/DALL%C2%B7E-2024-12-20-23.04.20-An-artistic-scene-of-a-quiet-study-featuring-an-ornate-intricate-mirror-on-a-central-desk.-The-mirror-reflects-not-just-the-room-but-abstract-glowin-1024x585.jpg",alt:"Süslü bir aynanın soyut felsefi kavramları yansıttığı çalışma odası"},
     {t:"gecis",m:"Tarihsel kanıtlar için Deist Tarihçiye yazdığım mektup devam ediyor. Agnostik hâlâ şüphedeyse Agnostik Felsefeciye yazdığım mektup sorgulayan bir zihin için kapı açıyor."},
     {t:"kapatis",m:"Felsefe soru sormakla başlar, ama cevap aramakla devam eder. Bu mektup sadece sormak değil — cevap aramaya davet ediyor."},
   ],
@@ -1482,6 +1531,7 @@ const MEKTUPLAR = {
   ozet:"İnce ayar karşısında 'bilmiyorum' ve dürüst araştırma.",
   icerik:[
     {t:"giris",m:"Fizikçi olarak ince ayar verilerini biliyorsun. Kozmolojik sabit, temel sabitler, başlangıç koşulları — bunların nasıl yorumlanacağı konusunda 'bilmiyorum' diyorsun. Bu entelektüel alçakgönüllülük değerli. Ama bu 'bilmiyorum', araştırmanın başı olmalı — sonu değil."},
+    {t:"img",src:"https://www.davetmektubu.com/wp-content/uploads/2025/02/DALL%C2%B7E-2024-12-29-00.26.51-A-visually-striking-wide-format-landscape-digital-painting-of-a-serene-cosmic-scene-depicting-the-vastness-of-the-universe.-The-artwork-includes-v-1024x585.jpg.webp",alt:"Evrenin enginliğini betimleyen huzurlu kozmik sahne"},
     {t:"h2",m:"Veri Yorumda Tarafsızlık"},
     {t:"p",m:"Bilimde veriyi toplarken tarafsızsın; yorumlarken de tarafsız olabilmek önemli. İnce ayar verisi üç yorumu mümkün kılıyor: şans, çoklu evren, tasarım. Üçünü de dürüstçe değerlendirdin mi? Çoklu evren tercih ediyorsan — bağımsız kanıtı var mı?"},
     {t:"alinti",m:"Fizikçinin görevi veriyi takip etmek. Veri bazı yönlere işaret ediyorsa, o yönleri görmezden gelmek bilimsel tutum değil."},
@@ -2165,6 +2215,7 @@ function renderMektup(){
     if(b.t==="alinti") return`<blockquote class="m-alinti reveal" style="border-color:${r.ana};color:${c.met};background:linear-gradient(135deg,${r.ana}08,transparent)">${b.m}</blockquote>`;
     if(b.t==="gecis") return`<div class="m-gecis reveal" style="background:linear-gradient(135deg,${r.ana}08,${r.ana}03);border-color:${r.ana}18;color:${c.soluk}">${b.m}</div>`;
     if(b.t==="kapatis") return`<p class="m-kapatis reveal" style="color:${c.met};border-color:${c.cerç}">${b.m}</p>`;
+    if(b.t==="img") return`<figure class="m-img reveal"><img src="${b.src}" alt="${b.alt||''}" loading="lazy">${b.cap?`<figcaption class="m-img-caption" style="background:${r.ana}06;color:${c.soluk}">${b.cap}</figcaption>`:''}</figure>`;
     return"";
   }).join("");
   // baglar: [0,1]=aynı meslek farklı görüş, [2,3]=aynı görüş farklı meslek
@@ -2745,20 +2796,6 @@ function goFavs(){
   },210);
 }
 
-function switchFormat(fmt){
-  shareFormat=fmt;
-  const s=getSoruForState();if(!s)return;
-  const P=SORULAR[state.poz];
-  const canvas=fmt==="story"?generateStoryCanvas(s,P.label,s.katLabel):generateCanvas(s,P.label,s.katLabel);
-  const img=document.getElementById("previewImg");
-  if(img)img.src=canvas.toDataURL("image/png");
-  const sq=document.getElementById("fmtSq"),st=document.getElementById("fmtSt");
-  const r=PR[state.poz]||PR.ateist;const c=C();
-  if(sq&&st){
-    if(fmt==="square"){sq.style.background=r.bg;sq.style.borderColor=r.ana+"40";sq.style.color=r.parlak;st.style.background=c.yuz;st.style.borderColor=c.cerç;st.style.color=c.soluk;}
-    else{st.style.background=r.bg;st.style.borderColor=r.ana+"40";st.style.color=r.parlak;sq.style.background=c.yuz;sq.style.borderColor=c.cerç;sq.style.color=c.soluk;}
-  }
-}
 
 function shareWithAPI(encodedText){
   const text=decodeURIComponent(encodedText);
