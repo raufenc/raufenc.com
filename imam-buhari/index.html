@@ -187,6 +187,18 @@ function renderMarkers(){
     }).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
     m.on('click',()=>m.openPopup());
+    m.on('popupopen',()=>{
+      const popup=m.getPopup();if(!popup)return;
+      const el=popup.getElement();if(!el)return;
+      el.querySelectorAll('[data-action]').forEach(btn=>{
+        btn.addEventListener('click',(e)=>{
+          e.preventDefault();e.stopPropagation();
+          const action=btn.dataset.action,id=btn.dataset.id;
+          if(action==='detail')window._openDetail(id);
+          if(action==='timeline'){map.closePopup();setTimeout(()=>window._scrollToTimeline(id),300);}
+        });
+      });
+    });
     m.locData=loc;
     markers[loc.id]=m;
   });
@@ -202,8 +214,8 @@ function makePopup(loc){
     <span style="display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;background:${c}20;color:${c}">${p?p.label:''}</span>
     ${ev}
     <div class="popup-links">
-      <a onclick="window._openDetail('${loc.id}')">Detay</a>
-      <a onclick="window._scrollToTimeline('${loc.id}')">Kronolojide Göster</a>
+      <a data-action="detail" data-id="${loc.id}">Detay</a>
+      <a data-action="timeline" data-id="${loc.id}">Kronolojide Göster</a>
     </div>`;
 }
 
@@ -211,7 +223,7 @@ function renderRoutes(){
   if(!MAP_DATA.routes)return;
   MAP_DATA.routes.forEach(r=>{
     const c=PERIOD_COLORS[r.period]||'#d4a853';
-    const line=L.polyline(r.waypoints,{color:c,weight:2,opacity:.35,dashArray:'6,4'}).addTo(map);
+    const line=L.polyline(r.waypoints,{color:c,weight:1.5,opacity:.25,dashArray:'4,6'}).addTo(map);
     line.routeData=r;
     routeLayers.push(line);
   });
@@ -294,8 +306,11 @@ function setupDetailPanel(){
     const loc=MAP_DATA.locations.find(l=>l.id===id);
     if(loc){map.flyTo([loc.lat,loc.lon],8,{duration:1});document.getElementById('detail-panel').classList.remove('open');document.getElementById('overlay').classList.remove('open');setTimeout(()=>{if(markers[id])markers[id].openPopup();},1100);}
   };
-  window._scrollToTimeline=function(locId){
+  window._goToTimeline=function(locId){
     map.closePopup();
+    setTimeout(()=>window._scrollToTimeline(locId),300);
+  };
+  window._scrollToTimeline=function(locId){
     const items=document.querySelectorAll('.tl-item[data-loc="'+locId+'"]');
     if(items.length){
       items[0].scrollIntoView({behavior:'smooth',block:'center'});
@@ -330,50 +345,62 @@ function setupJourney(){
 
   function resetVisuals(){state.drawn.forEach(l=>map.removeLayer(l));state.drawn=[];if(state.movMarker){map.removeLayer(state.movMarker);state.movMarker=null;}}
 
+  // Rota detay bilgileri
+  const ROUTE_DETAILS={
+    'Hacca Çıkış':'Annesi ve ağabeyi Ahmed ile birlikte Buhârâ\'dan hacca çıktı. Hac farîzasını yaptıktan sonra ailesi Buhârâ\'ya döndü, kendisi Mekke\'de kalıp hadîs-i şerîf toplamaya başladı.',
+    'Medîne\'ye Geçiş':'Mekke\'den Medîne-i Münevvere\'ye geçti. Peygamber Efendimiz sallallâhü aleyhi ve sellemin kabr-i şerîfi başında, geceleri ay ışığında Târîhü\'l-Kebîr\'i yazdı.',
+    'Irak Seyahati':'Hadîs ilminin en önemli merkezlerinden Bağdat\'a gitti. Burada 100 hadîs âliminin karıştırdığı isnâdları tek tek düzelterek eşsiz hâfızasını ispatladı.',
+    'Basra\'ya':'Basra\'da 1.000 kişilik ilim meclisinde hadîs-i şerîf yazdırdı. Basralı râvîlerin rivâyet zincirlerini tek tek saydı.',
+    'Kûfe\'ye':'Hz. Ali radıyallâhü anh döneminden beri önemli bir ilim merkezi olan Kûfe\'de hadîs meclislerine katıldı.',
+    'Vâsıt\'a':'Bağdat ile Basra arasındaki önemli konaklama noktası. Hadîs âlimleriyle görüştü.',
+    'Mısır\'a İlk Seyahat':'Hadîs tahsîli için Mısır\'a ilk seyahatini yaptı. Saîd bin Ebû Meryem ve Abdullah bin Sâlih\'ten hadîs aldı.',
+    'Filistin\'e':'Akdeniz kıyısındaki Askalân\'da Filistin bölgesinin hadîs râvîlerinden rivâyet topladı.',
+    'Şam\'a':'Emevîler döneminden beri İslâm dünyâsının en önemli ilim merkezlerinden Dımaşk\'ta hadîs tahsîl etti.',
+    'Humus\'a':'Sahâbe-i kirâmdan pek çok zâtın yerleştiği Humus şehrinde hadîs âlimleriyle görüştü.',
+    'Horasan\'a Dönüş':'Uzun seyahatlerinden sonra doğduğu bölge olan Horasan\'a döndü. Ahmed bin Hanbel: "Horasan onun gibisini çıkarmamıştır."',
+    'Nîşâbur\'a':'Nîşâbur\'a geldiğinde 4.000 kişi tarafından karşılandı. İmâm-ı Müslim alnından öpüp "Ey üstâtların üstâdı!" dedi.',
+    'Merv\'e':'İpek Yolu\'nun en önemli duraklarından Merv\'de hadîs meclislerine katıldı.',
+    'Belh\'e':'İslâm medeniyetinin doğu sınırındaki en önemli ilim merkezlerinden Belh\'te hadîs meclisi kurdu.',
+    'Rey\'e':'Günümüzde Tahran\'ın bir mahallesi olan Rey, o dönemde bağımsız ve önemli bir ilim merkeziydi.',
+    'Sürgün Sonrası':'Vâli Hâlid bin Ahmed\'in özel ders talebini reddetti: "İlmi sultânın kapısına götürüp zelîl etmem." Buhârâ\'dan sürgün edildi.',
+    'Hartenk\'e Yerleşme':'Semerkantlılar dâvet etti ama farklı görüşler olduğunu öğrenince Hartenk\'te akrabâlarının yanına yerleşti.'
+  };
+
   function animateStep(){
     if(!state.playing||state.paused)return;
     const routes=MAP_DATA.routes;
     if(state.step>=routes.length){
-      yearEl.textContent='256 H / 870 M';routeEl.innerHTML='Yolculuk Tamamlandı';descEl.textContent='Ramazan bayramı gecesi Hartenk\'te vefât etti.';
+      yearEl.textContent='256 H / 870 M';routeEl.innerHTML='Yolculuk Tamamlandı';
+      descEl.textContent='Ramazan bayramı gecesi, 62 yaşında Hartenk köyünde Hakk\'ın rahmetine kavuştu. Kabr-i şerîfinden günlerce misk kokusu yayıldı.';
       progEl.style.width='100%';state.playing=false;pauseBtn.classList.add('hidden');playBtn.classList.add('hidden');return;
     }
     const route=routes[state.step];const color=PERIOD_COLORS[route.period]||'#d4a853';
-    const speed=parseInt(speedSel.value)||2;const dur=2000/speed;
+    const speed=parseInt(speedSel.value)||2;const dur=2500/speed;
     const fromLoc=MAP_DATA.locations.find(l=>l.id===route.from);
     const toLoc=MAP_DATA.locations.find(l=>l.id===route.to);
 
-    // Bilgi paneli güncelle
+    // Bilgi paneli güncelle — detay bilgi dahil
     yearEl.textContent=route.ah_year+' H';
     routeEl.innerHTML=`${fromLoc?fromLoc.name:'?'} <span class="arrow">→</span> ${toLoc?toLoc.name:'?'}`;
-    descEl.textContent=route.label;
+    descEl.textContent=ROUTE_DETAILS[route.label]||route.label;
     progEl.style.width=Math.round((state.step+1)/routes.length*100)+'%';
 
-    // Rota çiz
-    const wp=route.waypoints;let wi=0;
-    const line=L.polyline([],{color:color,weight:3,opacity:.8}).addTo(map);
+    // Rotayı ANINDA çiz (çizme efekti yok)
+    const wp=route.waypoints;
+    const line=L.polyline(wp,{color:color,weight:2.5,opacity:.7}).addTo(map);
     state.drawn.push(line);
 
+    // Hareketli marker varış noktasına koy
     if(state.movMarker)map.removeLayer(state.movMarker);
-    state.movMarker=L.circleMarker(wp[0],{radius:6,fillColor:'#d4a853',fillOpacity:1,color:'#fff',weight:2}).addTo(map);
+    const dest=wp[wp.length-1];
+    state.movMarker=L.circleMarker(dest,{radius:6,fillColor:'#d4a853',fillOpacity:1,color:'#fff',weight:2}).addTo(map);
 
-    // Harita takip
-    const mid=wp[Math.floor(wp.length/2)];
-    map.flyTo(mid,state.step<3?5:5,{duration:.8});
+    // Harita varış noktasına uç
+    map.flyTo(dest,5,{duration:1});
 
-    function drawSeg(){
-      if(!state.playing||state.paused)return;
-      if(wi>=wp.length){
-        // Durakta bekle
-        state.step++;
-        state.timer=setTimeout(animateStep,dur*.5);
-        return;
-      }
-      line.addLatLng(wp[wi]);
-      state.movMarker.setLatLng(wp[wi]);
-      wi++;
-      state.timer=setTimeout(drawSeg,dur/wp.length);
-    }
-    drawSeg();
+    // Sonraki adıma geç
+    state.step++;
+    state.timer=setTimeout(animateStep,dur);
   }
 }
 
