@@ -146,32 +146,41 @@ async function syncToCloud(testKey, scores) {
 
 async function syncFromCloud() {
   if (!db || !currentUser) return;
-  const snap = await db.collection('test_results')
-    .where('userId', '==', currentUser.uid)
-    .orderBy('completedAt', 'desc')
-    .get();
+  try {
+    const snap = await db.collection('test_results')
+      .where('userId', '==', currentUser.uid)
+      .get();
 
-  if (snap.empty) {
-    await pushLocalToCloud();
-    return;
+    if (snap.empty) {
+      await pushLocalToCloud();
+      return;
+    }
+
+    // En yeni sonucu almak için completedAt'e göre sırala
+    const docs = snap.docs.map(d => d.data()).sort((a, b) => {
+      const ta = a.completedAt?.toMillis?.() || 0;
+      const tb = b.completedAt?.toMillis?.() || 0;
+      return tb - ta;
+    });
+
+    const history = {};
+    const seen = {};
+    for (const d of docs) {
+      if (seen[d.testKey]) continue;
+      seen[d.testKey] = true;
+      history[d.testKey] = {
+        percentages: { tefrit: d.tefrit, fazilet: d.fazilet, ifrat: d.ifrat },
+        geminiData: null
+      };
+    }
+
+    const local = JSON.parse(localStorage.getItem('ahlakHistory') || '{}');
+    const merged = { ...local, ...history };
+    localStorage.setItem('ahlakHistory', JSON.stringify(merged));
+    if (typeof S !== 'undefined') S.history = merged;
+  } catch (e) {
+    console.warn('syncFromCloud hatası:', e);
   }
-
-  const history = {};
-  const seen = {};
-  snap.forEach(doc => {
-    const d = doc.data();
-    if (seen[d.testKey]) return;
-    seen[d.testKey] = true;
-    history[d.testKey] = {
-      percentages: { tefrit: d.tefrit, fazilet: d.fazilet, ifrat: d.ifrat },
-      geminiData: null
-    };
-  });
-
-  const local = JSON.parse(localStorage.getItem('ahlakHistory') || '{}');
-  const merged = { ...local, ...history };
-  localStorage.setItem('ahlakHistory', JSON.stringify(merged));
-  if (typeof S !== 'undefined') S.history = merged;
 }
 
 async function pushLocalToCloud() {
@@ -273,9 +282,15 @@ async function getClassResults(classId) {
   const results = [];
   for (let i = 0; i < userIds.length; i += 30) {
     const batch = userIds.slice(i, i + 30);
-    const snap = await db.collection('test_results').where('userId', 'in', batch).orderBy('completedAt', 'desc').get();
+    const snap = await db.collection('test_results').where('userId', 'in', batch).get();
     snap.forEach(doc => results.push(doc.data()));
   }
+  // En yenisi önce (composite index gerektirmeden JS'te sırala)
+  results.sort((a, b) => {
+    const ta = a.completedAt?.toMillis?.() || 0;
+    const tb = b.completedAt?.toMillis?.() || 0;
+    return tb - ta;
+  });
   return results;
 }
 

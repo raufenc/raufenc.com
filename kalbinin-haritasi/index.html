@@ -1021,7 +1021,7 @@ function attachEvents(){
     else if(action==='goStart'){S.screen='start';render();}
     else if(action==='goAbout'){S.screen='about';render();}
     else if(action==='goHistory'){S.screen='history';render();}
-    else if(action==='goProfile'){S.screen='profile';render();setTimeout(()=>{if(userProfile?.role==='teacher')loadTeacherClasses();else loadStudentClasses();},100);}
+    else if(action==='goProfile'){S.screen='profile';render();setTimeout(()=>{if(typeof isTeacher==='function'&&isTeacher())loadTeacherClasses();else loadStudentClasses();},100);}
     else if(action==='createClass'){const n=document.getElementById('new-class-name');if(n?.value.trim()){createClass(n.value.trim()).then(()=>{n.value='';loadTeacherClasses();});}}
     else if(action==='joinClass'){const c=document.getElementById('join-code-input'),m=document.getElementById('join-msg');if(c?.value.trim()){joinClass(c.value.trim()).then(r=>{m.textContent=r.error||('Katıldın: '+r.data.name);m.style.color=r.error?'#f87171':'var(--emerald-light)';c.value='';loadStudentClasses();});}}
     else if(action==='viewClass'){S.classId=el.dataset.id;S.screen='classDetail';render();setTimeout(()=>loadClassDetail(S.classId),100);}
