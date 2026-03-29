@@ -37,9 +37,13 @@ const CONFIG = {
             }
         }
         // Fen bilimleri icin ozel yol duzeltmesi
+        // VERİ'deki yol: "fen-bilimleri/kimya/kimya_0000.webp"
+        // Gercek dosya: /muallimo/fen-bilimleri/kimya/kimya_0000.webp
+        // review/ klasorunden: ../fen-bilimleri/kimya/kimya_0000.webp
         items.forEach(item => {
             if (item.group === 'fen-bilimleri') {
-                item.imageUrl = '../fen-bilimleri/' + item.imageUrl.split('WEBP_Final/')[1];
+                // "../WEBP_Final/fen-bilimleri/X" -> "../fen-bilimleri/X"
+                item.imageUrl = item.imageUrl.replace('../WEBP_Final/fen-bilimleri/', '../fen-bilimleri/');
             }
         });
         return items;
