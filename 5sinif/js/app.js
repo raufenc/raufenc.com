@@ -391,6 +391,8 @@ function createPlayer(playlistId) {
     playerVars: {
       list: playlistId,
       listType: 'playlist',
+      autoplay: 1,
+      playsinline: 1,
       enablejsapi: 1,
       rel: 0,
       modestbranding: 1,
