@@ -449,10 +449,23 @@ function hidePlayOverlay() {
 }
 
 window.startVideo = function() {
+  hidePlayOverlay();
   if (_ytPlayer && _ytPlayer.playVideo) {
     _ytPlayer.playVideo();
-    hidePlayOverlay();
   }
+  // If video doesn't start within 3s, show a hint
+  setTimeout(() => {
+    if (_ytPlayer && _ytPlayer.getPlayerState && _ytPlayer.getPlayerState() !== 1) {
+      const controls = document.querySelector('.player-controls');
+      if (controls && !document.getElementById('playHint')) {
+        const hint = document.createElement('span');
+        hint.id = 'playHint';
+        hint.className = 'play-hint';
+        hint.textContent = '👆 Video başlamadıysa yukarıdaki ▶ butonuna tıklayın';
+        controls.appendChild(hint);
+      }
+    }
+  }, 3000);
 };
 
 function startCheckpointMonitor() {

@@ -471,6 +471,7 @@ input { font-family: inherit; }
   animation: pulse 2s infinite;
 }
 .play-overlay-btn:hover { transform: scale(1.1); background: #3A7BC8; }
+.play-hint { color: var(--text-light); font-size: 0.8rem; font-style: italic; }
 
 /* === CHECKPOINT STATUS === */
 .checkpoint-status { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
