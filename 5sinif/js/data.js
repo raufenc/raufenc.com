@@ -8,52 +8,54 @@ const DERSLER = [
     colorLight: '#E8F0FE',
     uniteler: [
       {
-        slug: 'dogal-sayilar', name: 'Doğal Sayılar', hedef: 'Doğal sayılarla işlemler yapabilme',
+        slug: 'dogal-sayilar', name: 'Doğal Sayıları Okuma ve Yazma', hedef: 'Büyük doğal sayıları okuyup yazabilme',
+        videoId: 'I108YUUtwmU',
+        checkpoints: [
+          { saniye: 60, soru: '47.358 sayısını doğru okuyan hangisidir?', secenekler: ['Dört yüz yetmiş üç bin elli sekiz', 'Kırk yedi bin üç yüz elli sekiz', 'Dört yedi üç beş sekiz', 'Kırk yedi milyon üç yüz elli sekiz'], dogru: 1, ipucu: 'Basamak değerlerine dikkat et: on binler, binler, yüzler, onlar, birler.' },
+          { saniye: 120, soru: 'Bir milyon sayısı rakamla nasıl yazılır?', secenekler: ['10.000', '100.000', '1.000.000', '10.000.000'], dogru: 2, ipucu: 'Milyon, 6 sıfır içerir.' },
+          { saniye: 180, soru: '250.000\'in 10\'da biri kaçtır?', secenekler: ['2.500', '25.000', '250', '2.500.000'], dogru: 1, ipucu: '10\'da biri bulmak için 10\'a böl.' },
+        ]
+      },
+      {
+        slug: 'kesirler', name: 'Kesirler', hedef: 'Kesirleri anlama, karşılaştırma ve işlem yapma',
         videoId: '5ZNxjyxT2hM',
         checkpoints: [
-          { saniye: 60, soru: '245 + 378 işleminin sonucu kaçtır?', secenekler: ['613', '623', '633', '523'], dogru: 0, ipucu: 'Birler basamağından başla: 5+8=13, 1 elde var.' },
-          { saniye: 120, soru: 'Hangi sayı 500\'den büyük ve 600\'den küçüktür?', secenekler: ['489', '550', '601', '500'], dogru: 1, ipucu: '500 < ? < 600 aralığına bak.' },
-          { saniye: 180, soru: '1000 - 347 = ?', secenekler: ['653', '753', '663', '647'], dogru: 0, ipucu: '1000\'den çıkarma yaparken her basamaktan ödünç alabilirsin.' },
+          { saniye: 60, soru: '3/4 kesrinde pay kaçtır?', secenekler: ['4', '3', '7', '1'], dogru: 1, ipucu: 'Kesirde pay çizginin üstündeki sayıdır.' },
+          { saniye: 120, soru: '1/2 + 1/4 işleminin sonucu nedir?', secenekler: ['2/6', '3/4', '2/4', '1/6'], dogru: 1, ipucu: 'Önce paydaları eşitle: 1/2 = 2/4 olur.' },
+          { saniye: 180, soru: 'Pizza 8 eşit parçaya bölündü, 3 parça yendi. Kalan kesir nedir?', secenekler: ['3/8', '5/8', '4/8', '6/8'], dogru: 1, ipucu: 'Bütün = 8/8, yenen 3/8\'i çıkar: 8/8 - 3/8 = ?' },
         ]
       },
       {
-        slug: 'kesirler', name: 'Kesirler', hedef: 'Kesirleri anlama ve işlem yapma',
-        videoId: 'HRAIsSfs48o',
+        slug: 'carpma-bolme', name: 'Çarpma ve Bölme Problemleri', hedef: 'Çarpma ve bölme işlemleri içeren problemleri çözme',
+        videoId: 'YJKpdPBgJmU',
         checkpoints: [
-          { saniye: 60, soru: '1/4 + 2/4 işleminin sonucu nedir?', secenekler: ['3/4', '3/8', '1/2', '2/4'], dogru: 0, ipucu: 'Paydalar aynıysa sadece payları topla.' },
-          { saniye: 120, soru: 'Hangi kesir 1/2\'den büyüktür?', secenekler: ['1/3', '2/5', '3/4', '1/4'], dogru: 2, ipucu: '1/2 = 2/4 olduğunu hatırla.' },
-          { saniye: 180, soru: 'Bir pizzanın 3/8\'i yenmiş. Kalan kaçtır?', secenekler: ['5/8', '3/8', '4/8', '6/8'], dogru: 0, ipucu: 'Bütün = 8/8, yenen kısmı çıkar.' },
+          { saniye: 60, soru: '12 × 15 işleminin sonucu kaçtır?', secenekler: ['170', '180', '190', '175'], dogru: 1, ipucu: '12 × 15 = 12 × 10 + 12 × 5 şeklinde düşün.' },
+          { saniye: 120, soru: '144 ÷ 12 işleminin sonucu kaçtır?', secenekler: ['11', '13', '12', '14'], dogru: 2, ipucu: '12 × ? = 144 sorusunu sor.' },
+          { saniye: 180, soru: 'Ali\'nin 5 defteri var. Her defterde 24 sayfa var. Toplam kaç sayfa var?', secenekler: ['100', '110', '120', '115'], dogru: 2, ipucu: '5 × 24 = ?' },
         ]
       },
       {
-        slug: 'ondalik-gosterim', name: 'Ondalık Gösterim', hedef: 'Ondalık sayıları kavrama',
-        videoId: 'fRRPgdOrehQ',
-        checkpoints: [
-          { saniye: 60, soru: '0,5 hangi kesre eşittir?', secenekler: ['1/2', '1/5', '5/10', '1/2 ve 5/10 ikisi de'], dogru: 3, ipucu: '0,5 = 5/10 = 1/2' },
-          { saniye: 120, soru: '0,25 + 0,75 = ?', secenekler: ['0,100', '1', '1,00', '0,975'], dogru: 1, ipucu: '25 + 75 = 100, yani 1 tam.' },
-        ]
-      },
-      {
-        slug: 'yuzdeler', name: 'Yüzdeler', hedef: 'Yüzde kavramını anlama',
+        slug: 'alan-cevre', name: 'Alan ve Çevre', hedef: 'Dikdörtgen ve karenin alan ve çevresini hesaplama',
         videoId: 'WKbrSAJ6oiI',
         checkpoints: [
-          { saniye: 60, soru: '%50 neye eşittir?', secenekler: ['Yarısına', 'Tamamına', 'Çeyreğine', 'Hiçbiri'], dogru: 0, ipucu: 'Yüzde 50 = 50/100 = 1/2' },
-          { saniye: 120, soru: '200\'ün %25\'i kaçtır?', secenekler: ['25', '50', '75', '100'], dogru: 1, ipucu: '%25 = çeyrek. 200\'ün çeyreği...' },
+          { saniye: 60, soru: 'Dikdörtgenin alanı nasıl hesaplanır?', secenekler: ['En + Boy', 'En × Boy', '2 × (En + Boy)', 'En ÷ Boy'], dogru: 1, ipucu: 'Alan = uzunluk × genişlik.' },
+          { saniye: 120, soru: 'En 6 cm, boy 4 cm olan dikdörtgenin alanı kaçtır?', secenekler: ['20 cm²', '24 cm²', '10 cm²', '48 cm²'], dogru: 1, ipucu: 'Alan = 6 × 4 = ?' },
         ]
       },
       {
-        slug: 'geometri', name: 'Geometri', hedef: 'Temel geometrik şekiller ve ölçme',
-        videoId: 'Wt-88DFqdkc',
+        slug: 'geometri', name: 'Geometrik Şekiller (Üçgenler)', hedef: 'Üçgenlerin özelliklerini öğrenme',
+        videoId: 'NZQCvqCBt5g',
         checkpoints: [
-          { saniye: 60, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['180°', '360°', '90°', '270°'], dogru: 0, ipucu: 'Tüm üçgenlerde bu toplam aynıdır.' },
-          { saniye: 120, soru: 'Karenin kaç kenarı eşittir?', secenekler: ['2', '3', '4', '1'], dogru: 2, ipucu: 'Kare özel bir dikdörtgendir, tüm kenarları...' },
+          { saniye: 60, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['90°', '180°', '270°', '360°'], dogru: 1, ipucu: 'Bu kural tüm üçgenler için geçerlidir.' },
+          { saniye: 120, soru: 'Eşkenar üçgende tüm kenarlar nasıldır?', secenekler: ['Farklı uzunluktadır', 'Biri diğerinin iki katıdır', 'Birbirine eşittir', 'İki tanesi eşittir'], dogru: 2, ipucu: '"Eşkenar" kelimesinin anlamı tüm kenarların eşit olduğunu söylüyor.' },
         ]
       },
       {
-        slug: 'veri-isleme', name: 'Veri İşleme', hedef: 'Tablo ve grafik okuma, yorumlama',
+        slug: 'zaman-olcme', name: 'Zaman Ölçme', hedef: 'Zaman birimlerini öğrenme ve dönüşüm yapma',
         videoId: 'euQgzldoUck',
         checkpoints: [
-          { saniye: 60, soru: 'Sütun grafiğinde en uzun sütun neyi gösterir?', secenekler: ['En büyük değeri', 'En küçük değeri', 'Ortalamayı', 'Toplamı'], dogru: 0, ipucu: 'Sütun ne kadar uzunsa değer o kadar büyüktür.' },
+          { saniye: 60, soru: '1 saat kaç dakikadır?', secenekler: ['30', '50', '60', '100'], dogru: 2, ipucu: 'Saatin kadranda 60 çizgi var.' },
+          { saniye: 120, soru: '3 saat 20 dakika toplamda kaç dakika eder?', secenekler: ['180', '200', '220', '320'], dogru: 1, ipucu: '3 saat = 3 × 60 = 180 dakika, üstüne 20 ekle.' },
         ]
       },
     ],
@@ -71,50 +73,52 @@ const DERSLER = [
     colorLight: '#E8F5E9',
     uniteler: [
       {
-        slug: 'gunes', name: 'Güneş, Dünya ve Ay', hedef: 'Güneş sistemini ve Ay\'ın evrelerini öğrenme',
-        videoId: '8muTsgbr18g',
+        slug: 'gunes', name: 'Güneş ve Güneş Sistemi', hedef: 'Güneş\'in yapısı ve özelliklerini öğrenme',
+        videoId: 'LoAG7HHVxtM',
         checkpoints: [
-          { saniye: 60, soru: 'Ay\'ın kendi ışığı var mıdır?', secenekler: ['Evet', 'Hayır'], dogru: 1, ipucu: 'Ay, Güneş\'ten aldığı ışığı yansıtır.' },
-          { saniye: 120, soru: 'Dünya\'nın Güneş etrafındaki dönüşü ne kadar sürer?', secenekler: ['1 gün', '1 ay', '1 yıl', '1 hafta'], dogru: 2, ipucu: 'Bu dönüş mevsimlerle ilgilidir.' },
-          { saniye: 180, soru: 'Ay\'ın evreleri kaç günde tamamlanır?', secenekler: ['Yaklaşık 7 gün', 'Yaklaşık 15 gün', 'Yaklaşık 29,5 gün', 'Yaklaşık 365 gün'], dogru: 2, ipucu: 'Bir ayın uzunluğu buradan gelir.' },
+          { saniye: 60, soru: 'Güneş ne tür bir gök cismidir?', secenekler: ['Gezegen', 'Yıldız', 'Uydu', 'Asteroid'], dogru: 1, ipucu: 'Güneş kendi ışığını ve ısısını üretir.' },
+          { saniye: 120, soru: 'Güneş\'ten Dünya\'ya ışık yaklaşık ne kadar sürede ulaşır?', secenekler: ['8 saniye', '8 dakika', '8 saat', '8 gün'], dogru: 1, ipucu: 'Işık çok hızlıdır ama mesafe çok büyüktür.' },
+          { saniye: 180, soru: 'Dünya\'nın Güneş etrafında dönüşü ne kadar sürer?', secenekler: ['1 gün', '1 ay', '1 yıl', '365 saat'], dogru: 2, ipucu: 'Bu dönüş mevsimlerin oluşmasını sağlar.' },
         ]
       },
       {
-        slug: 'canlilar', name: 'Canlılar Dünyası', hedef: 'Canlıların sınıflandırılması',
+        slug: 'ay-evreleri', name: 'Ay ve Ay\'ın Evreleri', hedef: 'Ay\'ın evrelerini ve özelliklerini öğrenme',
+        videoId: 'smkx-o2txNI',
+        checkpoints: [
+          { saniye: 60, soru: 'Ay kendi ışığını üretir mi?', secenekler: ['Evet, kendi ışığı var', 'Hayır, Güneş\'ten yansıtır', 'Evet ama çok azdır', 'Sadece geceleri üretir'], dogru: 1, ipucu: 'Ay bir uydu, yıldız değil — ışık üretemez.' },
+          { saniye: 120, soru: 'Ay\'ın bir tam evresi yaklaşık kaç günde tamamlanır?', secenekler: ['7 gün', '14 gün', '29,5 gün', '365 gün'], dogru: 2, ipucu: 'Takvimimizdeki "ay" kelimesi buradan gelir.' },
+        ]
+      },
+      {
+        slug: 'kuvvet', name: 'Kuvveti Tanıyalım', hedef: 'Kuvvetin ne olduğunu ve etkilerini öğrenme',
+        videoId: 'QOqTFJdp_88',
+        checkpoints: [
+          { saniye: 60, soru: 'Kuvvetin birimi nedir?', secenekler: ['Kilogram', 'Newton', 'Metre', 'Amper'], dogru: 1, ipucu: 'Bilim insanı Isaac Newton\'dan adını alır.' },
+          { saniye: 120, soru: 'Kuvvet bir cisme nasıl etki edebilir?', secenekler: ['Yalnızca hareket ettirir', 'Yalnızca şeklini değiştirir', 'Şeklini, hızını veya yönünü değiştirir', 'Hiçbir şey değişmez'], dogru: 2, ipucu: 'Kuvvet birden fazla şekilde etki edebilir.' },
+        ]
+      },
+      {
+        slug: 'surtunme', name: 'Sürtünme Kuvveti', hedef: 'Sürtünme kuvvetini ve etkilerini anlama',
+        videoId: 'auQui6S956o',
+        checkpoints: [
+          { saniye: 60, soru: 'Sürtünme kuvveti hareketi nasıl etkiler?', secenekler: ['Hızlandırır', 'Yavaşlatır', 'Değiştirmez', 'Ortadan kaldırır'], dogru: 1, ipucu: 'Bisikletten el çekince giderek yavaşlar.' },
+          { saniye: 120, soru: 'Buz üzerindeki sürtünme, kuru zemine göre nasıldır?', secenekler: ['Daha fazladır', 'Aynıdır', 'Daha azdır', 'Belirsizdir'], dogru: 2, ipucu: 'Buz üzerinde kaymak daha kolaydır...' },
+        ]
+      },
+      {
+        slug: 'madde-tanecikli', name: 'Maddenin Tanecikli Yapısı', hedef: 'Maddenin tanecikli yapısını öğrenme',
         videoId: '7hVI_SD_Ciw',
         checkpoints: [
-          { saniye: 60, soru: 'Canlıları sınıflandırmak neden önemlidir?', secenekler: ['Düzeni sağlar', 'Gereksizdir', 'Sadece bilim insanları içindir', 'Eğlence amaçlıdır'], dogru: 0, ipucu: 'Milyonlarca canlı türünü tanımak için...' },
-          { saniye: 120, soru: 'Bitkiler hangi özellikle hayvanlardan ayrılır?', secenekler: ['Hareket eder', 'Fotosentez yapar', 'Uyur', 'Nefes alır'], dogru: 1, ipucu: 'Güneş ışığını kullanarak besin üretme...' },
+          { saniye: 60, soru: 'Tüm maddeler neyin bir araya gelmesinden oluşur?', secenekler: ['Hücreler', 'Tanecikler (atom/molekül)', 'Damarlar', 'Lifler'], dogru: 1, ipucu: 'Gözle görülemeyen çok küçük parçacıklardır.' },
+          { saniye: 120, soru: 'Katı maddelerde tanecikler birbirine nasıl bağlıdır?', secenekler: ['Çok uzak ve serbesttirler', 'Birbirine yakın ama serbesttirler', 'Sıkıca bağlıdırlar', 'Rastgele dağılmışlardır'], dogru: 2, ipucu: 'Bu yüzden katılar belirli bir şekil korur.' },
         ]
       },
       {
-        slug: 'kuvvet', name: 'Kuvvet ve Hareket', hedef: 'Kuvvetin ölçülmesi ve etkileri',
-        videoId: 'q_M3R4KzwqU',
+        slug: 'madde-isi', name: 'Madde ve Isı', hedef: 'Isının madde üzerindeki etkilerini anlama',
+        videoId: '8muTsgbr18g',
         checkpoints: [
-          { saniye: 60, soru: 'Kuvvetin birimi nedir?', secenekler: ['Kilogram', 'Newton', 'Metre', 'Litre'], dogru: 1, ipucu: 'Isaac Newton\'dan adını alır.' },
-          { saniye: 120, soru: 'Sürtünme kuvveti hareketi nasıl etkiler?', secenekler: ['Hızlandırır', 'Yavaşlatır', 'Değiştirmez', 'Yön verir'], dogru: 1, ipucu: 'Buz üzerinde kayarken sürtünme azdır...' },
-        ]
-      },
-      {
-        slug: 'madde', name: 'Madde ve Değişim', hedef: 'Maddenin halleri ve hal değişimleri',
-        videoId: 'enhCFWIdovo',
-        checkpoints: [
-          { saniye: 60, soru: 'Maddenin üç hali nedir?', secenekler: ['Katı, sıvı, gaz', 'Sıcak, soğuk, ılık', 'Büyük, küçük, orta', 'Ağır, hafif, normal'], dogru: 0, ipucu: 'Su; buz, su ve buhar olarak...' },
-          { saniye: 120, soru: 'Buharlaşma hangi hal değişimidir?', secenekler: ['Katıdan sıvıya', 'Sıvıdan gaza', 'Gazdan sıvıya', 'Katıdan gaza'], dogru: 1, ipucu: 'Islak çamaşırlar kuruyunca su nereye gider?' },
-        ]
-      },
-      {
-        slug: 'isi-sicaklik', name: 'Isı ve Sıcaklık', hedef: 'Isı-sıcaklık farkı ve ölçme',
-        videoId: 'skxXJhM4IxI',
-        checkpoints: [
-          { saniye: 60, soru: 'Sıcaklık neyle ölçülür?', secenekler: ['Cetvel', 'Termometre', 'Terazi', 'Kronometre'], dogru: 1, ipucu: 'Hastalanınca ateşimizi neyle ölçeriz?' },
-        ]
-      },
-      {
-        slug: 'elektrik', name: 'Elektrik', hedef: 'Basit elektrik devreleri',
-        videoId: 'NIvbMpcmIMo',
-        checkpoints: [
-          { saniye: 60, soru: 'Basit bir elektrik devresinde hangi elemanlar bulunur?', secenekler: ['Pil, kablo, ampul, anahtar', 'Sadece pil', 'Sadece ampul', 'Pil ve su'], dogru: 0, ipucu: 'Elektrik akımı pil\'den çıkar, kablo ile taşınır...' },
+          { saniye: 60, soru: 'Isı verilince çoğu madde ne olur?', secenekler: ['Büzülür', 'Genleşir', 'Değişmez', 'Erir'], dogru: 1, ipucu: 'Sıcak havalarda demir köprüler daha uzundur.' },
+          { saniye: 120, soru: 'Sıcaklık hangi alet ile ölçülür?', secenekler: ['Cetvel', 'Terazi', 'Termometre', 'Barometre'], dogru: 2, ipucu: 'Ateşimiz çıktığında ne kullanırız?' },
         ]
       },
     ],
@@ -132,48 +136,52 @@ const DERSLER = [
     colorLight: '#FFEBEE',
     uniteler: [
       {
-        slug: 'sozcukte-anlam', name: 'Sözcükte Anlam', hedef: 'Eş anlamlı, zıt anlamlı sözcükler',
-        videoId: 'u3pKU_JN6cs',
+        slug: 'sozcukte-anlam', name: 'Sözcükte Anlam', hedef: 'Sözcüklerin gerçek, mecaz ve terim anlamları',
+        videoId: 'pm3cO8SmOZ4',
         checkpoints: [
           { saniye: 60, soru: '"Güzel" kelimesinin eş anlamlısı hangisidir?', secenekler: ['Çirkin', 'Hoş', 'Kötü', 'Zor'], dogru: 1, ipucu: 'Aynı anlama gelen sözcük arıyoruz.' },
           { saniye: 120, soru: '"Sıcak" kelimesinin zıt anlamlısı nedir?', secenekler: ['Ilık', 'Soğuk', 'Serin', 'Ateşli'], dogru: 1, ipucu: 'Tam karşıt anlam taşıyan sözcük hangisi?' },
-          { saniye: 180, soru: '"Ayağa kalkmak" ne tür bir söz öbeğidir?', secenekler: ['Atasözü', 'Deyim', 'Özdeyiş', 'Tekerleme'], dogru: 1, ipucu: 'Kalıplaşmış, gerçek anlamından farklı anlam taşıyan söz grubudur.' },
+          { saniye: 180, soru: 'Bir sözcüğün hem gerçek hem mecaz anlamı olabilir mi?', secenekler: ['Hayır, yalnızca biri olur', 'Evet, olabilir', 'Sadece isimler için geçerli', 'Sadece fiiller için geçerli'], dogru: 1, ipucu: '"Soğuk hava" gerçek, "soğuk davranış" mecaz anlamdır.' },
         ]
       },
       {
-        slug: 'cumle-bilgisi', name: 'Cümle Bilgisi', hedef: 'Cümle ögeleri ve türleri',
-        videoId: 'i8UVcMoj-iU',
+        slug: 'atasozleri-deyimler', name: 'Atasözleri ve Deyimler', hedef: 'Atasözlerini ve deyimleri anlama ve kullanma',
+        videoId: 'lbpRQLXb8hw',
         checkpoints: [
-          { saniye: 60, soru: 'Cümlede yüklemi bulmak için hangi soru sorulur?', secenekler: ['Kim?', 'Ne yapıyor?', 'Nerede?', 'Ne zaman?'], dogru: 1, ipucu: 'Yüklem, cümledeki eylemi bildirir.' },
-          { saniye: 120, soru: '"Ali okula gitti." cümlesinde özne kimdir?', secenekler: ['Okul', 'Ali', 'Gitti', 'Okula'], dogru: 1, ipucu: 'İşi yapan kişiyi bul.' },
+          { saniye: 60, soru: 'Atasözleri neyi yansıtır?', secenekler: ['Bireysel düşünceleri', 'Halkın deneyim ve bilgeliğini', 'Bilimsel gerçekleri', 'Devlet kurallarını'], dogru: 1, ipucu: 'Kuşaktan kuşağa aktarılan öğütler ve gözlemlerdir.' },
+          { saniye: 120, soru: '"Damlaya damlaya göl olur" atasözü ne anlama gelir?', secenekler: ['Yağmurlar gölü doldurur', 'Küçük birikimlerin zamanla büyüyeceği', 'Göller her zaman dolar', 'Su akar taş oyar'], dogru: 1, ipucu: 'Az az biriktirilen şeyin zamanla çoğalması...' },
         ]
       },
       {
-        slug: 'yazim-kurallari', name: 'Yazım Kuralları', hedef: 'Büyük harf, noktalama, yazım',
-        videoId: 'ok8UC7I9Qeo',
-        checkpoints: [
-          { saniye: 60, soru: 'Cümlenin sonuna hangi işaret konur?', secenekler: ['Virgül', 'Nokta', 'İki nokta', 'Tire'], dogru: 1, ipucu: 'Cümle tamamlandığında...' },
-        ]
-      },
-      {
-        slug: 'anlatimsallar', name: 'Anlatım Bozuklukları', hedef: 'Anlatım bozukluklarını bulma ve düzeltme',
-        videoId: 'h1fKCqhNqsE',
-        checkpoints: [
-          { saniye: 60, soru: '"Hızla koşarak hızlı gitti." cümlesindeki sorun nedir?', secenekler: ['Anlam tekrarı', 'Özne eksik', 'Yüklem yok', 'Doğru cümle'], dogru: 0, ipucu: '"Hızla" ve "hızlı" aynı anlama geliyor.' },
-        ]
-      },
-      {
-        slug: 'metin-turleri', name: 'Metin Türleri', hedef: 'Farklı metin türlerini tanıma',
+        slug: 'cumle-bilgisi', name: 'Cümlede Kavramlar', hedef: 'Cümle ögeleri ve cümle türlerini öğrenme',
         videoId: 'br54-02-bK4',
         checkpoints: [
-          { saniye: 60, soru: 'Bir hikâyede olay, yer, zaman ve kişi bulunur. Bu ne tür bir metindir?', secenekler: ['Bilgilendirici', 'Öyküleyici', 'Şiir', 'Deneme'], dogru: 1, ipucu: 'Olayların anlatıldığı metinler...' },
+          { saniye: 60, soru: 'Cümlede yüklemi bulmak için hangi soru sorulur?', secenekler: ['Kim?', 'Ne yapıyor / Ne?', 'Nerede?', 'Ne zaman?'], dogru: 1, ipucu: 'Yüklem, cümledeki temel eylemi veya durumu bildirir.' },
+          { saniye: 120, soru: '"Ali okula gitti." cümlesinde özne kimdir?', secenekler: ['Okul', 'Ali', 'Gitti', 'Okula'], dogru: 1, ipucu: 'İşi yapan ya da hakkında konuşulan kişiyi bul.' },
         ]
       },
       {
-        slug: 'dinleme', name: 'Dinleme ve Okuma', hedef: 'Dinleme ve okuduğunu anlama',
+        slug: 'yazim-kurallari', name: 'Yazım Kuralları ve Noktalama', hedef: 'Büyük harf kullanımı ve noktalama işaretleri',
+        videoId: 'u3pKU_JN6cs',
+        checkpoints: [
+          { saniye: 60, soru: 'Hangi durumlarda büyük harf kullanılır?', secenekler: ['Yalnızca cümle başında', 'Cümle başı ve özel isimlerde', 'Sadece isim tamlamalarında', 'Hiçbir zaman gerekmez'], dogru: 1, ipucu: 'Kişi adları, şehir adları, ülke adları büyük harfle başlar.' },
+          { saniye: 120, soru: 'Cümlenin sonuna hangi noktalama işareti konur?', secenekler: ['Virgül', 'İki nokta', 'Nokta', 'Tire'], dogru: 2, ipucu: 'Tamamlanmış düşüncenin ardından...' },
+        ]
+      },
+      {
+        slug: 'metin-turleri', name: 'Hikayenin Unsurları', hedef: 'Öykü ve hikaye yapısını tanıma',
         videoId: 'BFWZGxvgTS0',
         checkpoints: [
-          { saniye: 60, soru: 'Okuduğunu anlamak için en etkili yöntem hangisidir?', secenekler: ['Hızlı okumak', 'Not alarak okumak', 'Sesli okumak', 'Atlamak'], dogru: 1, ipucu: 'Anlamaya yardımcı olan aktif bir strateji...' },
+          { saniye: 60, soru: 'Bir hikayede mutlaka bulunması gereken unsurlar nelerdir?', secenekler: ['Yalnızca olay', 'Olay, yer, zaman ve kişi', 'Yalnızca kişiler', 'Şiir ve uyak'], dogru: 1, ipucu: 'Hikaye = kim, nerede, ne zaman, ne yaptı?' },
+          { saniye: 120, soru: 'Hikayede olayların yaşandığı yer ve zamana ne denir?', secenekler: ['Tema', 'Olay örgüsü', 'Mekân ve zaman', 'Kişi kadrosu'], dogru: 2, ipucu: 'Biri nerede, diğeri ne zaman sorusunu yanıtlar.' },
+        ]
+      },
+      {
+        slug: 'paragraf', name: 'Paragrafta Konu ve Ana Fikir', hedef: 'Paragrafın konusunu ve ana fikrini bulma',
+        videoId: 'jIIS5FPDCEc',
+        checkpoints: [
+          { saniye: 60, soru: 'Paragrafın konusu ile ana fikri arasındaki fark nedir?', secenekler: ['Fark yoktur', 'Konu ne hakkında, ana fikir ne söylüyor', 'Konu daha uzundur', 'Ana fikir her zaman başta yer alır'], dogru: 1, ipucu: 'Konu: Arkadaşlık. Ana fikir: İyi arkadaş seçmek önemlidir.' },
+          { saniye: 120, soru: 'Uygun paragraf başlığı nasıl olmalıdır?', secenekler: ['Çok uzun ve ayrıntılı', 'Kısa ama konuyu özetler nitelikte', 'Paragrafın ilk cümlesi', 'Rasgele seçilmiş'], dogru: 1, ipucu: 'Başlık, okuyucuya paragrafın ne hakkında olduğunu kısaca söyler.' },
         ]
       },
     ],
@@ -191,46 +199,50 @@ const DERSLER = [
     colorLight: '#FFF3E0',
     uniteler: [
       {
-        slug: 'birey-toplum', name: 'Birey ve Toplum', hedef: 'Gruplar, roller, haklar ve sorumluluklar',
-        videoId: 'ot516YDjf8o',
+        slug: 'gruplar-roller', name: 'Gruplar ve Rollerimiz', hedef: 'Toplumsal gruplar ve bireysel rolleri anlama',
+        videoId: 'UCGDuU_lEkY',
         checkpoints: [
-          { saniye: 60, soru: 'Aile, okul ve arkadaş çevresi neye örnektir?', secenekler: ['Toplumsal grup', 'Devlet', 'Kurum', 'Şirket'], dogru: 0, ipucu: 'İnsanların bir arada bulunduğu yapılardır.' },
-          { saniye: 120, soru: 'Her bireyin toplumda üstlendiği görevlere ne denir?', secenekler: ['Hak', 'Rol', 'Sorumluluk', 'Özgürlük'], dogru: 1, ipucu: 'Öğrenci, evlat, arkadaş...' },
+          { saniye: 60, soru: 'Aile, sınıf ve spor takımı neye örnek gösterilebilir?', secenekler: ['Devlet kurumlarına', 'Toplumsal gruplara', 'Ekonomik birimlere', 'Siyasi partilere'], dogru: 1, ipucu: 'Ortak amaçlarla bir araya gelen insanlar...' },
+          { saniye: 120, soru: 'Her bireyin toplumda üstlendiği görev ve davranış biçimine ne denir?', secenekler: ['Hak', 'Rol', 'Özgürlük', 'Yetki'], dogru: 1, ipucu: 'Öğrenci, evlat, arkadaş... hepsi birer rol.' },
         ]
       },
       {
-        slug: 'kultur', name: 'Kültür ve Miras', hedef: 'Kültürel zenginlikler ve ortak yaşam',
-        videoId: 'ZRex1rmWFwA',
+        slug: 'kulturel-zenginlik', name: 'Kültürel Zenginliklerin Katkısı', hedef: 'Kültürel çeşitliliğin ortak yaşama katkısını anlama',
+        videoId: '3F9edAIuVzI',
         checkpoints: [
-          { saniye: 60, soru: 'Yöresel yemekler, kıyafetler ve gelenekler neyin parçasıdır?', secenekler: ['Ekonomi', 'Kültür', 'Siyaset', 'Bilim'], dogru: 1, ipucu: 'Bir toplumun yaşam biçimini yansıtır.' },
+          { saniye: 60, soru: 'Kültürel zenginlikler toplumun birlikte yaşamasına nasıl katkı sağlar?', secenekler: ['Ayrılığa yol açar', 'Ortak değerler oluşturur', 'Ekonomiyi bozar', 'Sadece geçmişe aittir'], dogru: 1, ipucu: 'Farklı gelenekler, sanatlar ve diller zenginlik oluşturur.' },
+          { saniye: 120, soru: 'Yöresel yemekler, müzik ve gelenekler neyin parçasıdır?', secenekler: ['Ekonomi', 'Kültür mirası', 'Siyaset', 'Teknoloji'], dogru: 1, ipucu: 'Kuşaktan kuşağa aktarılan maddi ve manevi değerler...' },
         ]
       },
       {
-        slug: 'insanlar-yerler', name: 'İnsanlar, Yerler ve Çevreler', hedef: 'Haritalar, coğrafi ögeler',
-        videoId: 'x_YeUDKKly8',
+        slug: 'ilimizin-konumu', name: 'İlimizin Konumu', hedef: 'Harita okuma ve göreceli konum kavramı',
+        videoId: 'gCdFpGQtNcA',
         checkpoints: [
-          { saniye: 60, soru: 'Haritada yönleri bulmak için ne kullanılır?', secenekler: ['Ölçek', 'Pusula gülü', 'Lejant', 'Başlık'], dogru: 1, ipucu: 'Kuzey, güney, doğu, batıyı gösteren simge...' },
+          { saniye: 60, soru: 'Haritada yönleri bulmak için hangi sembol kullanılır?', secenekler: ['Ölçek', 'Pusula gülü', 'Lejant', 'Koordinat'], dogru: 1, ipucu: 'Kuzey, güney, doğu ve batıyı gösteren simge...' },
+          { saniye: 120, soru: 'İki yer arasındaki konumu tarif ederken hangi kavramı kullanırız?', secenekler: ['Mutlak konum', 'Göreceli konum', 'Harita projeksiyonu', 'Meridyen'], dogru: 1, ipucu: '"Ankara\'nın güneyinde" gibi başka bir yere göre belirtme...' },
         ]
       },
       {
-        slug: 'bilim-teknoloji', name: 'Bilim, Teknoloji ve Toplum', hedef: 'Bilimsel gelişmelerin topluma etkisi',
+        slug: 'kultur-miras', name: 'Ortak Kültürel Mirasımız', hedef: 'Türkiye\'nin kültürel miras zenginliklerini tanıma',
         videoId: 'Hlv-Y2rGZ4o',
         checkpoints: [
-          { saniye: 60, soru: 'Matbaa\'nın icadı toplumu nasıl etkilemiştir?', secenekler: ['Bilgi yayılması kolaylaştı', 'Ulaşım hızlandı', 'Tarım arttı', 'Savaşlar azaldı'], dogru: 0, ipucu: 'Kitapların çoğaltılması ile...' },
+          { saniye: 60, soru: 'Kültürel miras kavramı neyi kapsar?', secenekler: ['Yalnızca tarihi yapıları', 'Maddi ve manevi tüm değerleri', 'Yalnızca yiyecekleri', 'Yalnızca dil ve müziği'], dogru: 1, ipucu: 'Tarihi yapılar, gelenekler, dil, sanat... hepsi dahil.' },
         ]
       },
       {
-        slug: 'uretim-tuketim', name: 'Üretim, Dağıtım ve Tüketim', hedef: 'Ekonomi temelleri',
-        videoId: 'ijBw2KbL9NE',
+        slug: 'etkin-vatandaslik', name: 'Etkin Vatandaşlık', hedef: 'Etkin vatandaşın nitelikleri ve sorumlulukları',
+        videoId: 'ot516YDjf8o',
         checkpoints: [
-          { saniye: 60, soru: 'İhtiyaçlarımızı karşılamak için yapılan faaliyetlere ne denir?', secenekler: ['Üretim', 'Tüketim', 'Dağıtım', 'Ekonomi'], dogru: 0, ipucu: 'Buğday yetiştirmek, ekmek yapmak...' },
+          { saniye: 60, soru: 'Etkin bir vatandaş nasıl davranır?', secenekler: ['Yalnızca oy kullanır', 'Haklarını kullanır ve sorumluluklarını yerine getirir', 'Sadece vergi öder', 'Toplumla ilgilenmez'], dogru: 1, ipucu: 'Hem hak, hem sorumluluk.' },
+          { saniye: 120, soru: 'Demokratik toplumda bireyler hangi yolla yönetime katılır?', secenekler: ['Atanarak', 'Seçimle oy kullanarak', 'Kurayla', 'Güç göstererek'], dogru: 1, ipucu: 'Halkın iradesini yansıtan temel demokratik yöntem...' },
         ]
       },
       {
-        slug: 'etkin-vatandaslik', name: 'Etkin Vatandaşlık', hedef: 'Demokrasi ve yönetim biçimleri',
-        videoId: '0M590YD4dIM',
+        slug: 'demokrasi', name: 'Demokrasi ve Cumhuriyet', hedef: 'Demokratik yönetim ve Cumhuriyetin temel nitelikleri',
+        videoId: 'ZRex1rmWFwA',
         checkpoints: [
-          { saniye: 60, soru: 'Demokraside yöneticiler nasıl belirlenir?', secenekler: ['Atanarak', 'Seçimle', 'Kurayla', 'Sırayla'], dogru: 1, ipucu: 'Halkın iradesini yansıtan yöntem...' },
+          { saniye: 60, soru: 'Demokraside yöneticiler nasıl belirlenir?', secenekler: ['Atanarak', 'Seçimle', 'Kurayla', 'Miras yoluyla'], dogru: 1, ipucu: 'Halkın iradesi esastır.' },
+          { saniye: 120, soru: 'Türkiye Cumhuriyeti\'nde yönetim biçimi nedir?', secenekler: ['Monarşi', 'Teokrasi', 'Cumhuriyet', 'Oligarşi'], dogru: 2, ipucu: '29 Ekim 1923\'te ilan edildi.' },
         ]
       },
     ],
@@ -248,46 +260,52 @@ const DERSLER = [
     colorLight: '#F3E5F5',
     uniteler: [
       {
-        slug: 'hello', name: 'Hello!', hedef: 'Selamlaşma ve tanışma',
-        videoId: 'AGuZyYZDoWY',
+        slug: 'hello', name: 'Hello!', hedef: 'Selamlaşma ve kendini tanıtma',
+        videoId: 'yAGRyOA2kqE',
         checkpoints: [
           { saniye: 60, soru: '"Merhaba, benim adım Ali." cümlesinin İngilizcesi nedir?', secenekler: ['Hello, my name is Ali.', 'Goodbye Ali.', 'How are you Ali?', 'Thank you Ali.'], dogru: 0, ipucu: '"My name is" = "Benim adım"' },
-          { saniye: 120, soru: '"How are you?" sorusunun Türkçesi nedir?', secenekler: ['Adın ne?', 'Nasılsın?', 'Nerelisin?', 'Kaç yaşındasın?'], dogru: 1, ipucu: '"How" = "Nasıl"' },
+          { saniye: 120, soru: '"How are you?" sorusunun Türkçesi nedir?', secenekler: ['Adın ne?', 'Nasılsın?', 'Nerelisin?', 'Kaç yaşındasın?'], dogru: 1, ipucu: '"How" = nasıl, "are you" = siz/sen misiniz' },
+          { saniye: 180, soru: '"Nice to meet you." ne demektir?', secenekler: ['Görüşürüz.', 'Tanıştığıma memnun oldum.', 'Teşekkür ederim.', 'İyi geceler.'], dogru: 1, ipucu: '"Nice" = güzel/hoş, "meet" = tanışmak' },
         ]
       },
       {
-        slug: 'my-town', name: 'My Town', hedef: 'Şehir ve yönler',
-        videoId: 'gyBTOthrUOA',
+        slug: 'my-town', name: 'My Town', hedef: 'Şehirdeki yerleri ve yön tariflerini öğrenme',
+        videoId: 'tccjcPJovCE',
         checkpoints: [
-          { saniye: 60, soru: '"Where is the hospital?" ne demektir?', secenekler: ['Hastane ne zaman?', 'Hastane nerede?', 'Hastane nasıl?', 'Hastane kim?'], dogru: 1, ipucu: '"Where" = "Nerede"' },
+          { saniye: 60, soru: '"Where is the hospital?" ne demektir?', secenekler: ['Hastane ne zaman?', 'Hastane nerede?', 'Hastane nasıl?', 'Hastane var mı?'], dogru: 1, ipucu: '"Where" = nerede' },
+          { saniye: 120, soru: '"Turn left at the park." ne demektir?', secenekler: ['Parka git.', 'Parkta dur.', 'Parkta sola dön.', 'Parkın sağına git.'], dogru: 2, ipucu: '"Turn left" = sola dön, "at the park" = parkta' },
         ]
       },
       {
-        slug: 'games-hobbies', name: 'Games and Hobbies', hedef: 'Oyunlar, hobiler ve serbest zaman',
-        videoId: '8UiLqgPWx-E',
+        slug: 'games-hobbies', name: 'Games and Hobbies', hedef: 'Oyunlar ve hobileri anlatma',
+        videoId: 'FYSdqEcdOYY',
         checkpoints: [
-          { saniye: 60, soru: '"I like playing football." ne demektir?', secenekler: ['Futbol oynamayı seviyorum.', 'Futbol oynuyorum.', 'Futbol izliyorum.', 'Futbol zor.'], dogru: 0, ipucu: '"I like" = "Seviyorum", "playing" = "oynamayı"' },
+          { saniye: 60, soru: '"I like playing football." ne demektir?', secenekler: ['Futbol oynamayı seviyorum.', 'Futbol oynuyorum.', 'Futbol izliyorum.', 'Futbol oynamıyorum.'], dogru: 0, ipucu: '"I like" = seviyorum, "playing football" = futbol oynamayı' },
+          { saniye: 120, soru: '"What is your hobby?" ne demektir?', secenekler: ['Hobiniz nerede?', 'Hobiniz ne?', 'Hobilerin var mı?', 'Hobi nedir?'], dogru: 1, ipucu: '"What" = ne, "your hobby" = senin hobin' },
         ]
       },
       {
-        slug: 'my-daily-routine', name: 'My Daily Routine', hedef: 'Günlük rutin ve saatler',
-        videoId: '7-Nlig02b3E',
-        checkpoints: [
-          { saniye: 60, soru: '"I wake up at 7 o\'clock." ne demektir?', secenekler: ['Saat 7\'de uyurum.', 'Saat 7\'de uyanırım.', 'Saat 7\'de yerim.', 'Saat 7\'de giderim.'], dogru: 1, ipucu: '"Wake up" = "uyanmak"' },
-        ]
-      },
-      {
-        slug: 'health', name: 'Health', hedef: 'Sağlık ve hastalıklar',
+        slug: 'my-daily-routine', name: 'My Daily Routine', hedef: 'Günlük rutini ve saatleri anlatma',
         videoId: '2eHNj1EUB7I',
         checkpoints: [
-          { saniye: 60, soru: '"I have a headache" ne demektir?', secenekler: ['Karnım ağrıyor', 'Başım ağrıyor', 'Kolum ağrıyor', 'Gözüm ağrıyor'], dogru: 1, ipucu: '"Head" = "baş", "ache" = "ağrı"' },
+          { saniye: 60, soru: '"I wake up at 7 o\'clock." ne demektir?', secenekler: ['Saat 7\'de uyurum.', 'Saat 7\'de uyanırım.', 'Saat 7\'de okula giderim.', 'Saat 7\'de kahvaltı yaparım.'], dogru: 1, ipucu: '"Wake up" = uyanmak' },
+          { saniye: 120, soru: '"I go to school by bus." ne demektir?', secenekler: ['Otobüste okul var.', 'Okula otobüsle giderim.', 'Otobüs okula gider.', 'Okula yürüyerek giderim.'], dogru: 1, ipucu: '"go to school" = okula gitmek, "by bus" = otobüsle' },
         ]
       },
       {
-        slug: 'movies', name: 'Movies', hedef: 'Filmler ve tercihler',
-        videoId: 'a_JHeYp3vR4',
+        slug: 'health', name: 'Health', hedef: 'Sağlık ve hastalıkları anlatma',
+        videoId: 'gyBTOthrUOA',
         checkpoints: [
-          { saniye: 60, soru: '"What kind of movies do you like?" ne demektir?', secenekler: ['Hangi filmi izledin?', 'Ne tür filmler seversin?', 'Film ne zaman?', 'Film nerede?'], dogru: 1, ipucu: '"What kind of" = "Ne tür"' },
+          { saniye: 60, soru: '"I have a headache." ne demektir?', secenekler: ['Karnım ağrıyor.', 'Başım ağrıyor.', 'Kolum ağrıyor.', 'Gözüm ağrıyor.'], dogru: 1, ipucu: '"Head" = baş, "ache" = ağrı' },
+          { saniye: 120, soru: '"You should see a doctor." ne demektir?', secenekler: ['Doktoru görmelisin.', 'Doktor seni görüyor.', 'Doktora gitme.', 'Doktor nerede?'], dogru: 0, ipucu: '"Should" = -malı/-meli, "see a doctor" = doktora gitmek' },
+        ]
+      },
+      {
+        slug: 'health-2', name: 'Health (İleri)', hedef: 'Sağlık konularını daha ileri düzeyde anlama',
+        videoId: 'AGuZyYZDoWY',
+        checkpoints: [
+          { saniye: 60, soru: '"What\'s the matter?" ne demektir?', secenekler: ['Ne zaman?', 'Neden?', 'Sorun nedir / Neyin var?', 'Nereye?'], dogru: 2, ipucu: '"Matter" burada "sorun, mesele" anlamındadır.' },
+          { saniye: 120, soru: '"I have a fever." ne demektir?', secenekler: ['Üşüyorum.', 'Ateşim var.', 'Yorgunum.', 'Midem bulunuyor.'], dogru: 1, ipucu: '"Fever" = ateş (hastalık belirtisi)' },
         ]
       },
     ],
