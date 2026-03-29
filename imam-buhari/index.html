@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded',init);
 /* ═══════════ MAP ═══════════ */
 function initMap(){
   map=L.map('map',{center:[34,52],zoom:4,minZoom:3,maxZoom:12,zoomControl:true});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',{
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{
     attribution:'&copy; <a href="https://carto.com">CARTO</a>',subdomains:'abcd',maxZoom:19
   }).addTo(map);
 }
@@ -214,7 +214,7 @@ function renderRoutes(){
   if(!MAP_DATA.routes)return;
   MAP_DATA.routes.forEach(r=>{
     const c=PERIOD_COLORS[r.period]||'#d4a853';
-    const line=L.polyline(r.waypoints,{color:c,weight:1.5,opacity:.25,dashArray:'4,6'}).addTo(map);
+    const line=L.polyline(r.waypoints,{color:c,weight:1.8,opacity:.45,dashArray:'4,6'}).addTo(map);
     line.routeData=r;
     routeLayers.push(line);
   });
