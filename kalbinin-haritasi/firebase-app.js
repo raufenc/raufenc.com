@@ -553,7 +553,9 @@ async function loadClassDetail(classId) {
     const key = r.userId + '_' + r.testKey;
     if (seen[key]) continue;
     seen[key] = true;
-    studentMap[r.userId].tests[r.testKey] = { tefrit: r.tefrit, fazilet: r.fazilet, ifrat: r.ifrat };
+    // pct() ile raw score → yüzdeye çevir (pct idempotent: zaten yüzdeyse değişmez)
+    const raw = { tefrit: r.tefrit, fazilet: r.fazilet, ifrat: r.ifrat };
+    studentMap[r.userId].tests[r.testKey] = typeof pct === 'function' ? pct(raw) : raw;
   }
 
   const testKeys = Object.keys(TESTS);
