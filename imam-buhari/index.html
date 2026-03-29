@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded',init);
 /* ═══════════ MAP ═══════════ */
 function initMap(){
   map=L.map('map',{center:[34,52],zoom:4,minZoom:3,maxZoom:12,zoomControl:true});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',{
     attribution:'&copy; <a href="https://carto.com">CARTO</a>',subdomains:'abcd',maxZoom:19
   }).addTo(map);
 }
@@ -190,18 +190,6 @@ function renderMarkers(){
     m.locData=loc;
     markers[loc.id]=m;
   });
-  // Map-level popupopen — btn.onclick ataması çakışmayı önler
-  map.on('popupopen',function(e){
-    const el=e.popup.getElement();if(!el)return;
-    el.querySelectorAll('[data-action]').forEach(function(btn){
-      btn.onclick=function(ev){
-        ev.stopPropagation();
-        const action=btn.dataset.action,id=btn.dataset.id;
-        if(action==='detail')window._openDetail(id);
-        if(action==='timeline'){map.closePopup();setTimeout(function(){window._scrollToTimeline(id);},300);}
-      };
-    });
-  });
 }
 
 function makePopup(loc){
@@ -214,8 +202,8 @@ function makePopup(loc){
     <span style="display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;background:${c}20;color:${c}">${p?p.label:''}</span>
     ${ev}
     <div class="popup-links">
-      <a data-action="detail" data-id="${loc.id}">Detay</a>
-      <a data-action="timeline" data-id="${loc.id}">Kronolojide Göster</a>
+      <a href="javascript:void(0)" onclick="event.stopPropagation();window._openDetail('${loc.id}')">Detay</a>
+      <a href="javascript:void(0)" onclick="event.stopPropagation();window._goToTimeline('${loc.id}')">Kronolojide Göster</a>
     </div>`;
 }
 
