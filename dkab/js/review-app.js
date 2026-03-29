@@ -16,7 +16,7 @@ const FIREBASE_CONFIG = {
     appId: "1:664426174738:web:d0cdd4fcd0f097aa22fbcb"
 };
 
-const DATA_VERSION = 'v3'; // bump to clear stale localStorage
+const DATA_VERSION = 'v4'; // v4: unique keys (sinif_gorselId) fix duplicate ID bug
 
 let db = null; // Firebase ref
 let allImages = [];
@@ -26,7 +26,8 @@ let unitMeta = {};
 let currentFilter = { grade: 'all', status: 'all' };
 let currentModalIndex = -1;
 let useFirebase = false;
-let actionBusy = false; // debounce for keyboard rapid-fire
+let actionBusy = false;
+const keysHeld = new Set(); // track physically held keys to prevent re-fire
 
 // ===== INIT =====
 export async function init() {
@@ -184,12 +185,17 @@ async function loadUnitMeta() {
 }
 
 // ===== REVIEW OPERATIONS =====
-function getReview(gorselId) {
-    return reviews[gorselId] || null;
+// Unique key: sinif + gorsel_id (gorsel_id is NOT unique across grades)
+function reviewKey(img) {
+    return img.sinif + '_' + img.gorsel_id;
 }
 
-function getStatus(gorselId) {
-    const r = getReview(gorselId);
+function getReview(key) {
+    return reviews[key] || null;
+}
+
+function getStatus(key) {
+    const r = getReview(key);
     return r ? r.durum : 'beklemede';
 }
 
@@ -229,7 +235,7 @@ function applyFilter() {
     const { grade, status } = currentFilter;
     filteredImages = allImages.filter(img => {
         if (grade !== 'all' && img.sinif !== grade) return false;
-        if (status !== 'all' && getStatus(img.gorsel_id) !== status) return false;
+        if (status !== 'all' && getStatus(reviewKey(img)) !== status) return false;
         return true;
     });
     renderGrid();
@@ -244,13 +250,14 @@ function renderGrid() {
     }
 
     grid.innerHTML = filteredImages.map((img, idx) => {
-        const status = getStatus(img.gorsel_id);
+        const status = getStatus(reviewKey(img));
         const badgeIcon = status === 'uygun' ? '✓' : status === 'uygun_degil' ? '✗' : '?';
         const uniteBaslik = img._unite_baslik || '';
         const bolumBaslik = img._bolum_baslik || '';
 
+        const key = reviewKey(img);
         return `
-        <div class="image-card status-${status}" data-idx="${idx}" data-id="${img.gorsel_id}">
+        <div class="image-card status-${status}" data-idx="${idx}" data-id="${key}">
             <div class="card-image-wrapper">
                 <img src="${img.dosya_yolu}" alt="${img.gorsel_id}" loading="lazy"
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -265,8 +272,8 @@ function renderGrid() {
                 <span class="card-type">${img.tur || 'sahne'}</span>
             </div>
             <div class="card-actions">
-                <button class="btn-approve" onclick="event.stopPropagation(); window.reviewApp.quickAction('${img.gorsel_id}','uygun')">✓ Uygun</button>
-                <button class="btn-reject" onclick="event.stopPropagation(); window.reviewApp.quickAction('${img.gorsel_id}','uygun_degil')">✗ Red</button>
+                <button class="btn-approve" onclick="event.stopPropagation(); window.reviewApp.quickAction('${key}','uygun')">✓ Uygun</button>
+                <button class="btn-reject" onclick="event.stopPropagation(); window.reviewApp.quickAction('${key}','uygun_degil')">✗ Red</button>
             </div>
         </div>`;
     }).join('');
@@ -286,7 +293,7 @@ function updateCardStatus(gorselId, status) {
 function updateStats() {
     let beklemede = 0, uygun = 0, uygun_degil = 0;
     allImages.forEach(img => {
-        const s = getStatus(img.gorsel_id);
+        const s = getStatus(reviewKey(img));
         if (s === 'uygun') uygun++;
         else if (s === 'uygun_degil') uygun_degil++;
         else beklemede++;
@@ -319,7 +326,7 @@ function openModal(idx) {
     const img = filteredImages[idx];
     if (!img) return;
 
-    const review = getReview(img.gorsel_id);
+    const review = getReview(reviewKey(img));
     const modal = document.getElementById('modal-overlay');
 
     document.getElementById('modal-image').src = img.dosya_yolu;
@@ -377,18 +384,19 @@ async function modalAction(durum) {
 
     const img = filteredImages[currentModalIndex];
     const not = document.getElementById('modal-note').value;
-    await setReview(img.gorsel_id, durum, not);
+    await setReview(reviewKey(img), durum, not);
     showToast(durum === 'uygun' ? '✓ Uygun olarak işaretlendi' : '✗ Uygun değil olarak işaretlendi');
 
-    // Update modal badge visually (stay on same image, no auto-advance)
-    const badge = document.querySelector(`[data-id="${img.gorsel_id}"] .card-badge`);
-    if (badge) {
-        badge.className = `card-badge ${durum}`;
-        badge.textContent = durum === 'uygun' ? '✓' : '✗';
+    // Auto-advance to next
+    if (currentModalIndex < filteredImages.length - 1) {
+        navigateModal(1);
+    } else {
+        closeModal();
     }
 
-    // Release after 500ms to prevent any rapid-fire
-    setTimeout(() => { actionBusy = false; }, 500);
+    // actionBusy stays true — only released when key is physically released (keyup)
+    // For mouse clicks, release after a short delay
+    setTimeout(() => { actionBusy = false; }, 400);
 }
 
 // ===== QUICK ACTIONS =====
@@ -416,11 +424,11 @@ function exportJSON() {
     let uygunCount = 0, uygunDegilList = [];
 
     allImages.forEach(img => {
-        const s = getStatus(img.gorsel_id);
+        const s = getStatus(reviewKey(img));
         if (s === 'uygun') {
             uygunCount++;
         } else if (s === 'uygun_degil') {
-            const r = getReview(img.gorsel_id);
+            const r = getReview(reviewKey(img));
             uygunDegilList.push({
                 gorsel_id: img.gorsel_id,
                 sinif: parseInt(img.sinif),
@@ -466,8 +474,8 @@ function copyExport() {
     let uygunDegilList = [];
 
     allImages.forEach(img => {
-        if (getStatus(img.gorsel_id) === 'uygun_degil') {
-            const r = getReview(img.gorsel_id);
+        if (getStatus(reviewKey(img)) === 'uygun_degil') {
+            const r = getReview(reviewKey(img));
             uygunDegilList.push({
                 gorsel_id: img.gorsel_id,
                 sinif: parseInt(img.sinif),
@@ -541,24 +549,35 @@ function bindEvents() {
         localStorage.setItem('dkab_reviewer_name', e.target.value);
     });
 
-    // Keyboard shortcuts (with debounce via actionBusy flag)
+    // Keyboard shortcuts — bulletproof: key must be released before it can fire again
     document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-        if (e.repeat) return; // BLOCK key-repeat to prevent rapid-fire
+
+        const key = e.key.toLowerCase();
+
+        // Block if key is already held down (repeat or still pressed)
+        if (keysHeld.has(key)) return;
+        keysHeld.add(key);
 
         if (currentModalIndex >= 0) {
-            switch (e.key) {
-                case 'Escape': closeModal(); break;
-                case 'ArrowLeft': navigateModal(-1); break;
-                case 'ArrowRight': navigateModal(1); break;
-                case 'a': case 'A': modalAction('uygun'); break;
-                case 'r': case 'R': modalAction('uygun_degil'); break;
-                case 'n': case 'N':
+            switch (key) {
+                case 'escape': closeModal(); break;
+                case 'arrowleft': navigateModal(-1); break;
+                case 'arrowright': navigateModal(1); break;
+                case 'a': modalAction('uygun'); break;
+                case 'r': modalAction('uygun_degil'); break;
+                case 'n':
                     e.preventDefault();
                     document.getElementById('modal-note')?.focus();
                     break;
             }
         }
+    });
+
+    document.addEventListener('keyup', (e) => {
+        keysHeld.delete(e.key.toLowerCase());
+        // Release actionBusy on keyup so next press can fire
+        actionBusy = false;
     });
 }
 
