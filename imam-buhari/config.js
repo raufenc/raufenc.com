@@ -24,7 +24,7 @@ const SCHOLAR = {
     map: { title: 'Seyahat Haritası', desc: 'Buhârâ\'dan Hartenk\'e — 46 yıllık ilim yolculuğu' },
     timeline: { title: 'Zaman Çizelgesi', desc: 'Buhârâ\'dan Hartenk\'e, 62 yıllık bereketli ömür' },
     content: { title: 'Hayâtı ve İlmi', desc: 'Kaynak: İslâm Âlimleri Ansiklopedisi, Türkiye Gazetesi Yayınları' },
-    hadith: { title: 'Hadîs-i Şerîflerden Seçmeler', desc: 'İmâm-ı Buhârî hazretlerinin rivâyet ettiği hadîs-i şerîfler' }
+    ozel: { title: 'Hadîs-i Şerîflerden Seçmeler', desc: 'İmâm-ı Buhârî hazretlerinin rivâyet ettiği hadîs-i şerîfler', navLabel: 'Hadîsler', icon: '☪', cardLabel: 'Hadîs-i Şerîf' }
   },
   source: {
     name: 'İslâm Âlimleri Ansiklopedisi — Türkiye Gazetesi Yayınları',

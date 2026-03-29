@@ -369,7 +369,7 @@ const BOOK = [
     ]
   },
   {
-    "id": "hadisler",
+    "id": "ozel",
     "title": "Hadîs-i Şerîflerden Seçmeler",
     "color": "gold",
     "subs": [

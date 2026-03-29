@@ -1,8 +1,10 @@
-# Âlim Sayfası Üretim Talimatı
+# Tarihî Şahsiyet Sayfası Üretim Talimatı
 
-Aşağıdaki makaleyi oku. Bu makaleyi kullanarak interaktif bir âlim sayfası için **3 dosya** üret.
+Aşağıdaki makaleyi oku. Bu makaleyi kullanarak interaktif bir tarihî şahsiyet sayfası için **3 dosya** üret.
 
-Dosyalar `raufenc.com/KLASOR_ADI/` altına konulacak. Klasör adını âlimin isminden türet (örn: `imam-azam`, `imam-muslim`, `abdulkadir-geylani`).
+Şahsiyet bir İslâm âlimi, devlet adamı, komutan, mutasavvıf, şair veya başka herhangi bir tarihî figür olabilir. Bölümler makaleye göre şekillenir — zorunlu bir yapı yok.
+
+Dosyalar `raufenc.com/KLASOR_ADI/` altına konulacak. Klasör adını şahsiyetin isminden türet (örn: `imam-azam`, `fatih-sultan-mehmed`, `abdulkadir-geylani`).
 
 Aynı klasöre `_alim-sablonu/` dizininden `index.html`, `styles.css`, `engine.js` kopyalanacak — sen bunlara dokunma. Sadece aşağıdaki 3 dosyayı üret.
 
@@ -34,7 +36,13 @@ const SCHOLAR = {
     map:      { title: 'Seyahat Haritası', desc: 'Kısa açıklama' },
     timeline: { title: 'Zaman Çizelgesi', desc: 'Kısa açıklama' },
     content:  { title: 'Hayâtı ve İlmi',  desc: 'Kaynak: ...' },
-    hadith:   { title: 'Hadîs-i Şerîfler / Sözleri', desc: 'Kısa açıklama' }
+    ozel: {                               // OPSİYONEL — yoksa bu satırı silip sections'tan çıkar
+      title: 'Hadîs-i Şerîfler',         // veya 'Sözleri', 'Kerâmetleri', 'Fermanları' vs.
+      desc: 'Kısa açıklama',
+      navLabel: 'Hadîsler',               // Üst menüde görünen kısa isim
+      icon: '☪',                          // Nav butonundaki ikon
+      cardLabel: 'Hadîs-i Şerîf'          // Her kartın üstündeki etiket (boş bırakılabilir)
+    }
   },
   source: {
     name: 'Kaynak adı — Yayınevi',
@@ -70,16 +78,20 @@ const BOOK = [
     color: 'gold',   // gold|green|blue|purple|orange|red|teal
     subs: [
       { title: 'Alt Başlık', text: 'İçerik metni...' },
-      { title: 'Hadîs', text: 'Hadîs metni...', hadith: true }  // hadîs kartı
+      { title: 'Hadîs', text: 'Hadîs metni...', hadith: true }  // altın kenarlıklı kart
     ]
   },
-  // ... diğer bölümler
+  // ... diğer bölümler (makaleye göre şekillenir)
+
+  // OPSİYONEL — Özel bölüm (hadîs, söz, kerâmet, ferman vb.)
+  // Bu bölüm varsa ayrı section olarak render edilir (altın kenarlıklı kartlar)
+  // Yoksa bu bölümü ekleme, tüm içerik normal bölümler olarak gösterilir
   {
-    id: 'hadisler',   // SON bölüm — bu ID sabit olmalı
-    title: 'Hadîs-i Şerîfler',
+    id: 'ozel',       // Bu ID sabit — engine bu ID'yi ayrı render eder
+    title: 'Hadîs-i Şerîfler',  // veya 'Sözleri', 'Kerâmetleri' vs.
     color: 'gold',
     subs: [
-      { title: 'Hadîs Başlığı', text: 'Hadîs metni...', hadith: true }
+      { title: 'Başlık', text: 'İçerik...', hadith: true }
     ]
   }
 ];
@@ -103,10 +115,11 @@ const PERIOD_LABELS = {
 ### Kurallar:
 - Makaledeki TÜM metni dahil et — hiçbir paragraf atlanmamalı
 - Bölüm sayısı makaleye göre değişir (genelde 8-15 arası)
-- Son bölüm her zaman `id: 'hadisler'` olmalı — engine bunu ayrı render eder
+- Şahsiyetin öne çıkan sözleri, hadîsleri, kerâmetleri veya fermanları varsa `id: 'ozel'` bölümüyle ayrı göster
+- `id: 'ozel'` bölümü OPSİYONEL — yoksa ekleme, engine otomatik gizler
+- `id: 'ozel'` varsa config.js'te `sections.ozel` da tanımlanmalı (title, navLabel, icon, cardLabel)
 - `color` değerleri: gold (giriş/ana), green (eğitim), blue (seyahat), purple (hocalar), orange (hâfıza/menkıbe), teal (talebeler), red (vefat/son dönem)
-- Hadîs-i şerîfler varsa `hadith: true` ekle — altın kenarlıklı kart olarak gösterilir
-- Eğer âlimin hadîsi yoksa, sözlerini veya kerâmetlerini hadîsler bölümüne koy
+- `hadith: true` olan alt bölümler altın kenarlıklı kart olarak gösterilir — hem ana bölümlerde hem özel bölümde kullanılabilir
 - TIMELINE loc değerleri locations.json'daki id'lerle eşleşmeli
 - TIMELINE kronolojik sırada olmalı (küçük yıldan büyüğe)
 - Peygamber Efendimiz sallallâhü aleyhi ve sellem — tam yazılacak, kısaltma yok
@@ -212,7 +225,7 @@ raufenc.com/KLASOR_ADI/
 - [ ] Honorific'ler tam yazılmış (kısaltma yok)
 - [ ] modern_name'lerde "İsrail" yok
 - [ ] Waypoints kara rotası (deniz üstünden geçmiyor)
-- [ ] Son BOOK bölümü id:'hadisler'
+- [ ] Özel bölüm varsa BOOK'ta id:'ozel' VE config'te sections.ozel tanımlı
 
 ---
 
