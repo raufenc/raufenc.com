@@ -534,6 +534,16 @@ function bindEvents() {
     document.getElementById('modal-approve')?.addEventListener('click', () => modalAction('uygun'));
     document.getElementById('modal-reject')?.addEventListener('click', () => modalAction('uygun_degil'));
 
+    // Dashboard
+    document.getElementById('btn-dashboard')?.addEventListener('click', openDashboard);
+    document.getElementById('dashboard-close')?.addEventListener('click', closeDashboard);
+    document.getElementById('dashboard-overlay')?.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeDashboard();
+    });
+    document.getElementById('dash-grade-filter')?.addEventListener('change', renderDashboardTable);
+    document.getElementById('dash-status-filter')?.addEventListener('change', renderDashboardTable);
+    document.getElementById('dash-export-csv')?.addEventListener('click', exportCSV);
+
     // Export & Reset
     document.getElementById('btn-export')?.addEventListener('click', exportJSON);
     document.getElementById('btn-copy')?.addEventListener('click', copyExport);
@@ -579,6 +589,141 @@ function bindEvents() {
         // Release actionBusy on keyup so next press can fire
         actionBusy = false;
     });
+}
+
+// ===== DASHBOARD =====
+function openDashboard() {
+    // Populate grade filter
+    const gradeSelect = document.getElementById('dash-grade-filter');
+    if (gradeSelect.options.length <= 1) {
+        GRADES.forEach(g => {
+            const opt = document.createElement('option');
+            opt.value = g;
+            opt.textContent = GRADE_LABELS[g];
+            gradeSelect.appendChild(opt);
+        });
+    }
+
+    renderDashboardSummary();
+    renderDashboardTable();
+    document.getElementById('dashboard-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDashboard() {
+    document.getElementById('dashboard-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function renderDashboardSummary() {
+    let beklemede = 0, uygun = 0, uygun_degil = 0;
+    const perGrade = {};
+    GRADES.forEach(g => { perGrade[g] = { toplam: 0, uygun: 0, red: 0, beklemede: 0 }; });
+
+    allImages.forEach(img => {
+        const s = getStatus(reviewKey(img));
+        const pg = perGrade[img.sinif];
+        pg.toplam++;
+        if (s === 'uygun') { uygun++; pg.uygun++; }
+        else if (s === 'uygun_degil') { uygun_degil++; pg.red++; }
+        else { beklemede++; pg.beklemede++; }
+    });
+
+    const total = allImages.length;
+    const pct = total ? Math.round((uygun + uygun_degil) / total * 100) : 0;
+
+    let html = `
+        <div class="dash-stats">
+            <div class="dash-stat"><span class="dash-stat-num">${total}</span><span class="dash-stat-label">Toplam</span></div>
+            <div class="dash-stat uygun"><span class="dash-stat-num">${uygun}</span><span class="dash-stat-label">Uygun</span></div>
+            <div class="dash-stat uygun_degil"><span class="dash-stat-num">${uygun_degil}</span><span class="dash-stat-label">Red</span></div>
+            <div class="dash-stat beklemede"><span class="dash-stat-num">${beklemede}</span><span class="dash-stat-label">Beklemede</span></div>
+            <div class="dash-stat"><span class="dash-stat-num">%${pct}</span><span class="dash-stat-label">Tamamlanma</span></div>
+        </div>
+        <table class="dash-grade-table">
+            <thead><tr><th>Sınıf</th><th>Toplam</th><th>Uygun</th><th>Red</th><th>Beklemede</th><th>İlerleme</th></tr></thead>
+            <tbody>`;
+    GRADES.forEach(g => {
+        const pg = perGrade[g];
+        const done = pg.uygun + pg.red;
+        const gpct = pg.toplam ? Math.round(done / pg.toplam * 100) : 0;
+        html += `<tr>
+            <td><strong>${GRADE_LABELS[g]}</strong></td>
+            <td>${pg.toplam}</td>
+            <td style="color:#28a745">${pg.uygun}</td>
+            <td style="color:#dc3545">${pg.red}</td>
+            <td style="color:#6c757d">${pg.beklemede}</td>
+            <td><div class="dash-progress"><div class="dash-progress-fill" style="width:${gpct}%"></div></div> <small>${gpct}%</small></td>
+        </tr>`;
+    });
+    html += `</tbody></table>`;
+
+    document.getElementById('dashboard-summary').innerHTML = html;
+}
+
+function renderDashboardTable() {
+    const gradeFilter = document.getElementById('dash-grade-filter').value;
+    const statusFilter = document.getElementById('dash-status-filter').value;
+
+    const filtered = allImages.filter(img => {
+        if (gradeFilter !== 'all' && img.sinif !== gradeFilter) return false;
+        if (statusFilter !== 'all' && getStatus(reviewKey(img)) !== statusFilter) return false;
+        return true;
+    });
+
+    const tbody = document.getElementById('dashboard-tbody');
+    tbody.innerHTML = filtered.map((img, i) => {
+        const key = reviewKey(img);
+        const s = getStatus(key);
+        const r = getReview(key);
+        const statusLabel = s === 'uygun' ? 'Uygun' : s === 'uygun_degil' ? 'Red' : 'Beklemede';
+        const statusClass = s === 'uygun' ? 'color:#28a745' : s === 'uygun_degil' ? 'color:#dc3545' : 'color:#6c757d';
+        const tarih = r?.tarih ? new Date(r.tarih).toLocaleDateString('tr-TR') : '-';
+        return `<tr>
+            <td>${i + 1}</td>
+            <td>${GRADE_LABELS[img.sinif]}</td>
+            <td>${img.gorsel_id}</td>
+            <td>${img._unite_baslik || '-'}</td>
+            <td>${img._bolum_baslik || '-'}</td>
+            <td>${img.tur || '-'}</td>
+            <td style="${statusClass};font-weight:600">${statusLabel}</td>
+            <td>${r?.not || '-'}</td>
+            <td>${r?.reviewer || '-'}</td>
+            <td>${tarih}</td>
+        </tr>`;
+    }).join('');
+}
+
+function exportCSV() {
+    const rows = [['Sınıf','Görsel ID','Ünite','Bölüm','Tür','Durum','Not','İnceleyici','Tarih']];
+    allImages.forEach(img => {
+        const key = reviewKey(img);
+        const s = getStatus(key);
+        const r = getReview(key);
+        const statusLabel = s === 'uygun' ? 'Uygun' : s === 'uygun_degil' ? 'Red' : 'Beklemede';
+        const tarih = r?.tarih ? new Date(r.tarih).toLocaleDateString('tr-TR') : '';
+        rows.push([
+            GRADE_LABELS[img.sinif],
+            img.gorsel_id,
+            img._unite_baslik || '',
+            img._bolum_baslik || '',
+            img.tur || '',
+            statusLabel,
+            (r?.not || '').replace(/"/g, '""'),
+            r?.reviewer || '',
+            tarih
+        ]);
+    });
+    const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+    const bom = '\uFEFF';
+    const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dkab_inceleme_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV indirildi');
 }
 
 // ===== PUBLIC API =====

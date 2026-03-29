@@ -44,6 +44,7 @@
             </div>
             <div class="header-actions">
                 <input type="text" id="reviewer-name" class="reviewer-input" placeholder="İnceleyici adı">
+                <button id="btn-dashboard" class="btn-dashboard" title="Tablo görünümü">Tablo</button>
                 <button id="btn-copy">Kopyala</button>
                 <button id="btn-export" class="btn-export">JSON Export</button>
                 <button id="btn-reset" title="Tüm incelemeleri sıfırla">Sıfırla</button>
@@ -102,6 +103,48 @@
     <!-- Image Grid -->
     <div id="image-grid" class="image-grid"></div>
 
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="dashboard-overlay" class="dashboard-overlay">
+    <div class="dashboard-panel">
+        <div class="dashboard-header">
+            <h2>İnceleme Özeti</h2>
+            <button id="dashboard-close" class="modal-close">&times;</button>
+        </div>
+        <div class="dashboard-summary" id="dashboard-summary"></div>
+        <div class="dashboard-filters">
+            <select id="dash-grade-filter">
+                <option value="all">Tüm Sınıflar</option>
+            </select>
+            <select id="dash-status-filter">
+                <option value="all">Tüm Durumlar</option>
+                <option value="uygun">Uygun</option>
+                <option value="uygun_degil">Uygun Değil</option>
+                <option value="beklemede">Beklemede</option>
+            </select>
+            <button id="dash-export-csv" class="btn-export">CSV İndir</button>
+        </div>
+        <div class="dashboard-table-wrap">
+            <table class="dashboard-table" id="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Sınıf</th>
+                        <th>Görsel ID</th>
+                        <th>Ünite</th>
+                        <th>Bölüm</th>
+                        <th>Tür</th>
+                        <th>Durum</th>
+                        <th>Not</th>
+                        <th>İnceleyici</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboard-tbody"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!-- ===== MODAL ===== -->
