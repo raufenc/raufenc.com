@@ -22,7 +22,7 @@ const CONFIG = {
                     items.push({
                         id: dosyaAdi,
                         group: seriKey,
-                        imageUrl: '../WEBP_Final/' + kartYolu,
+                        imageUrl: 'https://cdn.jsdelivr.net/gh/raufenc/muallimo-images@main/WEBP_Final/' + kartYolu,
                         title: `${cilt.ad} — ${idx + 1}`,
                         subtitle: `${seri.emoji} ${seri.baslik}`,
                         desc: '',
@@ -36,16 +36,7 @@ const CONFIG = {
                 });
             }
         }
-        // Fen bilimleri icin ozel yol duzeltmesi
-        // VERİ'deki yol: "fen-bilimleri/kimya/kimya_0000.webp"
-        // Gercek dosya: /muallimo/fen-bilimleri/kimya/kimya_0000.webp
-        // review/ klasorunden: ../fen-bilimleri/kimya/kimya_0000.webp
-        items.forEach(item => {
-            if (item.group === 'fen-bilimleri') {
-                // "../WEBP_Final/fen-bilimleri/X" -> "../fen-bilimleri/X"
-                item.imageUrl = item.imageUrl.replace('../WEBP_Final/fen-bilimleri/', '../fen-bilimleri/');
-            }
-        });
+        // Fen bilimleri de CDN'de WEBP_Final/ altinda — ek duzeltme gerekmiyor
         return items;
     },
 
