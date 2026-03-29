@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yükleniyor…</title>
+<meta name="description" content="">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon" id="logo-letter"></div>
+      <div>
+        <span class="logo-text" id="logo-name"></span>
+        <span class="logo-sub" id="logo-sub"></span>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <a href="#map-section">Harita</a>
+      <a href="#timeline-section">Kronoloji</a>
+      <a href="#content-section">Hayâtı</a>
+      <a href="#ozel-section" id="nav-ozel">Özel</a>
+    </nav>
+    <div class="theme-btns">
+      <button class="theme-btn active" onclick="setTheme('')" title="Gece">🌙</button>
+      <button class="theme-btn" onclick="setTheme('sepia')" title="Sepya">📜</button>
+      <button class="theme-btn" onclick="setTheme('light')" title="Gündüz">☀️</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-badge" id="hero-badge"></div>
+  <h1 id="hero-title"></h1>
+  <p class="hero-name" id="hero-fullname"></p>
+  <p class="sub" id="hero-desc"></p>
+
+  <div class="hero-stats" id="hero-stats"></div>
+
+  <div class="qnav">
+    <a href="#map-section">🗺️ Harita</a>
+    <a href="#timeline-section">📅 Kronoloji</a>
+    <a href="#content-section">📖 Hayâtı</a>
+    <a href="#ozel-section" id="qnav-ozel">★ Özel</a>
+  </div>
+  <div class="scroll-h">▼</div>
+</section>
+
+<!-- ═══════════ MAP ═══════════ -->
+<div class="sh" id="map-section"><h2 id="sh-map-title"></h2><div class="gl"></div><p id="sh-map-desc"></p></div>
+<section>
+  <div class="map-controls">
+    <div class="filter-group">
+      <label>Dönem:</label>
+      <select id="period-filter"><option value="all">Tüm Dönemler</option></select>
+    </div>
+    <div class="filter-group search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Şehir ara..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+    <div class="filter-count" id="filter-count"></div>
+    <div class="journey-controls">
+      <button class="jc-btn" id="j-play" title="Seyahati İzle">▶ <span>Seyahati İzle</span></button>
+      <button class="jc-btn hidden" id="j-pause" title="Duraklat">⏸</button>
+      <button class="jc-btn hidden" id="j-reset" title="Sıfırla">↻</button>
+      <select class="jc-speed hidden" id="j-speed"><option value="1" selected>1x</option><option value="2">2x</option><option value="4">4x</option></select>
+    </div>
+  </div>
+
+  <div style="position:relative">
+    <div id="map"></div>
+    <div class="legend-panel" id="legend"></div>
+    <div class="journey-panel" id="j-panel">
+      <div class="jp-year" id="jp-year"></div>
+      <div class="jp-route" id="jp-route"></div>
+      <div class="jp-desc" id="jp-desc"></div>
+      <div class="jp-progress"><div class="jp-progress-fill" id="jp-progress"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Detail Panel -->
+<div class="overlay" id="overlay"></div>
+<div class="detail-panel" id="detail-panel">
+  <button class="detail-close" id="detail-close">&times;</button>
+  <div id="detail-content"></div>
+</div>
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<div class="sh" id="timeline-section"><h2 id="sh-timeline-title"></h2><div class="gl"></div><p id="sh-timeline-desc"></p></div>
+<section style="max-width:1000px;margin:0 auto;padding:20px">
+  <div class="timeline-wrap" id="timeline-wrap"></div>
+</section>
+
+<!-- ═══════════ KITAP İÇERİĞİ ═══════════ -->
+<div class="sh" id="content-section"><h2 id="sh-content-title"></h2><div class="gl"></div><p id="sh-content-desc"></p></div>
+<section id="book-content" style="max-width:900px;margin:0 auto;padding:20px"></section>
+
+<!-- ═══════════ ÖZEL BÖLÜM (Hadîs / Söz / Kerâmet — opsiyonel) ═══════════ -->
+<div class="sh" id="ozel-section"><h2 id="sh-ozel-title"></h2><div class="gl"></div><p id="sh-ozel-desc"></p></div>
+<section id="ozel-content" style="max-width:900px;margin:0 auto;padding:20px"></section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="tg-badge">Türkiye Gazetesi</div>
+  <p id="footer-source"></p>
+  <p style="margin-top:6px"><a id="footer-link" href="#" target="_blank">Orijinal Makale</a></p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="config.js?v=2"></script>
+<script src="book-data.js?v=2"></script>
+<script src="engine.js?v=2"></script>
+<script src="/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+{
+  "meta": {
+    "title": "Fatih Sultan Mehmed Han",
+    "subtitle": "İstanbul Fatihi",
+    "full_name": "Sultan Mehmed bin Murad bin Mehmed bin Bayezid el-Osmani",
+    "kunya": "Ebu'l-Feth",
+    "birth": "27 Receb 835 H / 30 Mart 1432 M",
+    "death": "4 Rebiülevvel 886 H / 3 Mayis 1481 M",
+    "stats": {
+      "cities": 15,
+      "conquests": 25,
+      "years_ruling": 31,
+      "mosques_built": 12,
+      "languages_known": 7,
+      "laws_codified": 2
+    }
+  },
+  "periods": [
+    {
+      "id": "cocukluk",
+      "label": "Cocukluk ve Egitim",
+      "ah_range": "835-848 H",
+      "ce_range": "1432-1444 M",
+      "color": "#22c55e",
+      "description": "Edirne'de dogum, Manisa sancakbeyligi, Molla Gürani ve Aksemseddin hazretlerinden egitim."
+    },
+    {
+      "id": "ilk_saltanat",
+      "label": "Ilk Saltanat Donemi",
+      "ah_range": "848-855 H",
+      "ce_range": "1444-1451 M",
+      "color": "#3b82f6",
+      "description": "12 yasinda ilk kez tahta cikis, Varna Zaferi, babasi Sultan Murad'in geri donmesi."
+    },
+    {
+      "id": "fetih_donemi",
+      "label": "Fetih Donemi",
+      "ah_range": "855-860 H",
+      "ce_range": "1451-1456 M",
+      "color": "#d4a853",
+      "description": "Ikinci saltanat, Rumelihisari insasi, Istanbul'un fethi, Eyüp Sultan Külliyesi."
+    },
+    {
+      "id": "imparatorluk",
+      "label": "Imparatorluk Genislemesi",
+      "ah_range": "860-883 H",
+      "ce_range": "1456-1478 M",
+      "color": "#a855f7",
+      "description": "Sirbistan, Mora, Trabzon, Bosna fetihleri, Fatih Camii, Otlukbeli Zaferi, Arnavutluk."
+    },
+    {
+      "id": "son_donem",
+      "label": "Son Donem",
+      "ah_range": "883-886 H",
+      "ce_range": "1478-1481 M",
+      "color": "#ef4444",
+      "description": "Otranto seferi, Italya'ya acilin, vefat."
+    }
+  ],
+  "locations": [
+    {
+      "id": "edirne",
+      "name": "Edirne",
+      "modern_name": "Edirne, Türkiye",
+      "lat": 41.67,
+      "lon": 26.56,
+      "precision": "kesin",
+      "periods": ["cocukluk", "ilk_saltanat", "fetih_donemi"],
+      "order": 1,
+      "significance": "major",
+      "events": [
+        {"ah_year": 835, "ce_year": 1432, "title": "Dogum", "description": "27 Receb 835 Hicri tarihinde Edirne Sarayi'nda dünyaya geldi.", "period": "cocukluk"},
+        {"ah_year": 848, "ce_year": 1444, "title": "Ilk Saltanat", "description": "Babasi Sultan II. Murad'in tahttan cekilmesi üzerine 12 yasinda ilk kez padisah oldu.", "period": "ilk_saltanat"},
+        {"ah_year": 855, "ce_year": 1451, "title": "Ikinci Saltanat", "description": "Babasi Sultan II. Murad'in vefati üzerine ikinci kez tahta cikti. Istanbul'un fethini planlamaya basladi.", "period": "fetih_donemi"}
+      ],
+      "detail_text": "Osmanli Devleti'nin baskenti ve Fatih Sultan Mehmed Han'in dogum yeri. Burada Molla Gürani, Molla Hüsrev ve Aksemsddin hazretlerinden ilim tahsil etti. Ilk ve ikinci saltanatinin baslangic noktasi."
+    },
+    {
+      "id": "manisa",
+      "name": "Manisa",
+      "modern_name": "Manisa, Türkiye",
+      "lat": 38.61,
+      "lon": 27.43,
+      "precision": "kesin",
+      "periods": ["cocukluk", "ilk_saltanat"],
+      "order": 2,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 843, "ce_year": 1440, "title": "Manisa Sancakbeyligi", "description": "Sehzadelik egitimi icin Manisa sancagina gönderildi. Burada devlet idaresi ve ilim tahsil etti.", "period": "cocukluk"},
+        {"ah_year": 850, "ce_year": 1446, "title": "Manisa'ya Donus", "description": "Babasi Sultan II. Murad tekrar tahta gecince sehzade Mehmed Manisa'ya döndü.", "period": "ilk_saltanat"}
+      ],
+      "detail_text": "Osmanli sehzadelerinin sancakbeyligi yaparak devlet tecrübesi kazandigi sehir. Fatih Sultan Mehmed Han burada Aksemseddin hazretleri ve diger hocalari gözetiminde yetisti."
+    },
+    {
+      "id": "istanbul",
+      "name": "Istanbul",
+      "modern_name": "Istanbul, Türkiye",
+      "lat": 41.01,
+      "lon": 28.98,
+      "precision": "kesin",
+      "periods": ["fetih_donemi", "imparatorluk", "son_donem"],
+      "order": 3,
+      "significance": "major",
+      "events": [
+        {"ah_year": 857, "ce_year": 1453, "title": "Istanbul'un Fethi", "description": "29 Mayis 1453'te Istanbul'u fethederek Peygamber Efendimiz sallallahu aleyhi ve sellemin müjdesine mazhar oldu.", "period": "fetih_donemi"},
+        {"ah_year": 870, "ce_year": 1466, "title": "Fatih Camii ve Sahn-i Seman", "description": "Fatih Külliyesi'ni insa ettirdi. Sahn-i Seman medreseleri ile Istanbul'u ilim merkezine dönüstürdü.", "period": "imparatorluk"},
+        {"ah_year": 886, "ce_year": 1481, "title": "Vefat", "description": "4 Rebiülevvel 886 tarihinde Gebze yakinlarinda Hünkar Cayiri'nda vefat etti. Fatih Camii haziresine defnedildi.", "period": "son_donem"}
+      ],
+      "detail_text": "Fetihten sonra Osmanli Devleti'nin yeni baskenti. Fatih Sultan Mehmed Han burada Fatih Camii, Topkapi Sarayi, Kapali Carsi ve sayisiz medrese insa ettirdi. Sehri dünya ilim ve ticaret merkezi haline getirdi."
+    },
+    {
+      "id": "varna",
+      "name": "Varna",
+      "modern_name": "Varna, Bulgaristan",
+      "lat": 43.21,
+      "lon": 27.91,
+      "precision": "kesin",
+      "periods": ["ilk_saltanat"],
+      "order": 4,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 848, "ce_year": 1444, "title": "Varna Zaferi", "description": "Hacli ordusuna karsi kazanilan büyük zafer. Sultan II. Murad komutasinda Osmanli ordusu galip geldi.", "period": "ilk_saltanat"}
+      ],
+      "detail_text": "1444 yilinda Hacli ordusuna karsi kazanilan büyük zafer. Macar Krali I. Vladislav bu savasta hayatini kaybetti. Bu zafer Osmanli'nin Balkanlar'daki hakimiyetini percinledi."
+    },
+    {
+      "id": "rumelihisari",
+      "name": "Rumelihisari",
+      "modern_name": "Istanbul, Türkiye",
+      "lat": 41.08,
+      "lon": 29.06,
+      "precision": "kesin",
+      "periods": ["fetih_donemi"],
+      "order": 5,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 856, "ce_year": 1452, "title": "Rumelihisari Insasi", "description": "Istanbul Bogazi'nin en dar noktasinda yalnizca 4 ayda insa ettirilerek Bizans'in Karadeniz'den yardim almasini engelledi.", "period": "fetih_donemi"}
+      ],
+      "detail_text": "Bogaz'in en dar noktasinda, Anadoluhisari'nin karsisina insa edilen kale. 'Bogazkesen' adi verilerek Istanbul kusamasinin stratejik hazirligi tamamlandi."
+    },
+    {
+      "id": "eyup",
+      "name": "Eyüp Sultan",
+      "modern_name": "Istanbul, Türkiye",
+      "lat": 41.05,
+      "lon": 28.93,
+      "precision": "kesin",
+      "periods": ["fetih_donemi"],
+      "order": 6,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 857, "ce_year": 1453, "title": "Eyüp Sultan Külliyesi", "description": "Fetihten sonra Eba Eyyub el-Ensari hazretlerinin kabr-i serifini buldurarak üzerine türbe ve külliye insa ettirdi.", "period": "fetih_donemi"}
+      ],
+      "detail_text": "Peygamber Efendimiz sallallahu aleyhi ve sellemin mihmandari Eba Eyyub el-Ensari hazretlerinin kabr-i serifi. Fatih Sultan Mehmed Han, fetihten hemen sonra Aksemseddin hazretlerinin isaretleriyle bu mübarek kabri buldurdu."
+    },
+    {
+      "id": "belgrad",
+      "name": "Belgrad",
+      "modern_name": "Belgrad, Sirbistan",
+      "lat": 44.79,
+      "lon": 20.46,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 7,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 858, "ce_year": 1454, "title": "Sirbistan Seferi", "description": "Sirbistan üzerine sefer düzenleyerek pek cok kaleyi fethetti.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Sirbistan'in baskenti ve Balkanlar'in kilit noktasi. Fatih Sultan Mehmed Han birden fazla sefer düzenlemistir."
+    },
+    {
+      "id": "mora",
+      "name": "Mora (Mistra)",
+      "modern_name": "Mora, Yunanistan",
+      "lat": 37.07,
+      "lon": 22.37,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 8,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 863, "ce_year": 1459, "title": "Mora Fethi", "description": "Mora Yarimadasi'ni fethederek Bizans kalintisi despotluklara son verdi.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Yunanistan'in güneyindeki Mora Yarimadasi. Bizans despotlugunun son kalintilari burada tasfiye edildi."
+    },
+    {
+      "id": "trabzon",
+      "name": "Trabzon",
+      "modern_name": "Trabzon, Türkiye",
+      "lat": 41.00,
+      "lon": 39.72,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 9,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 865, "ce_year": 1461, "title": "Trabzon'un Fethi", "description": "Trabzon Rum Imparatorlugu'na son vererek son Bizans kalintisini ortadan kaldirdi.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Karadeniz kiyisindaki Trabzon Rum Imparatorlugu'nun baskenti. Komnenos hanedaninin son kalesi fethedilerek Bizans mirasi tamamen tarih sahnesinden silindi."
+    },
+    {
+      "id": "bosna",
+      "name": "Bosna (Jajce)",
+      "modern_name": "Jajce, Bosna-Hersek",
+      "lat": 44.34,
+      "lon": 17.27,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 10,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 867, "ce_year": 1463, "title": "Bosna'nin Fethi", "description": "Bosna Kralligi'ni fethederek bölgeyi Osmanli topraklarina katti.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Bosna Kralligi'nin baskenti Jajce. Fatih Sultan Mehmed Han'in Bosna'yi fethetmesiyle bölge halki büyük ölcüde Islam'la sereflenecektir."
+    },
+    {
+      "id": "karaman",
+      "name": "Karaman",
+      "modern_name": "Karaman, Türkiye",
+      "lat": 37.18,
+      "lon": 33.23,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 11,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 873, "ce_year": 1468, "title": "Karaman'in Ilhaki", "description": "Karamanogullari Beyligi'ne son vererek Anadolu'daki siyasi birligi sagladi.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Karamanogullari Beyligi'nin merkezi. Anadolu'daki en güclü Türk beyliginin ilhak edilmesiyle Osmanli'nin Anadolu hakimiyeti kesinlesti."
+    },
+    {
+      "id": "otlukbeli",
+      "name": "Otlukbeli",
+      "modern_name": "Otlukbeli, Erzincan, Türkiye",
+      "lat": 39.95,
+      "lon": 40.00,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 12,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 878, "ce_year": 1473, "title": "Otlukbeli Zaferi", "description": "Akkoyunlu hükümdari Uzun Hasan'i agir bir yenilgiye ugratti. Dogu siniri güvence altina alindi.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Erzincan yakinlarindaki savas alani. Akkoyunlu Devleti'nin lideri Uzun Hasan'in agir bir yenilgiye ugratildigi meydan savasi. Bu zaferle Anadolu'daki Osmanli üstünlügü kesinlesti."
+    },
+    {
+      "id": "iskodra",
+      "name": "Iskodra (Shkodër)",
+      "modern_name": "Shkodër, Arnavutluk",
+      "lat": 42.07,
+      "lon": 19.51,
+      "precision": "kesin",
+      "periods": ["imparatorluk"],
+      "order": 13,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 879, "ce_year": 1474, "title": "Arnavutluk'un Fethi", "description": "Arnavutluk'taki son direnis noktalarini fethederek bölgeyi tamamen Osmanli topraklarina katti.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Arnavutluk'un kuzeyindeki stratejik kale sehri. Iskender Bey'in ölümünden sonra Arnavutluk'taki Venedik destekli direnis noktalarinin düsürülmesi."
+    },
+    {
+      "id": "otranto",
+      "name": "Otranto",
+      "modern_name": "Otranto, Italya",
+      "lat": 40.15,
+      "lon": 18.49,
+      "precision": "kesin",
+      "periods": ["son_donem"],
+      "order": 14,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 885, "ce_year": 1480, "title": "Otranto Seferi", "description": "Gedik Ahmed Pasa komutasindaki Osmanli donanmasi Güney Italya'daki Otranto'yu fethetti.", "period": "son_donem"}
+      ],
+      "detail_text": "Güney Italya'daki liman sehri. Gedik Ahmed Pasa komutasindaki Osmanli donanmasi 1480'de sehri fethetti. Fatih'in vefatiyla Italya seferi yarim kaldi."
+    },
+    {
+      "id": "semerkand",
+      "name": "Semerkand",
+      "modern_name": "Semerkand, Özbekistan",
+      "lat": 39.65,
+      "lon": 66.96,
+      "precision": "yaklasik",
+      "periods": ["imparatorluk"],
+      "order": 15,
+      "significance": "minor",
+      "events": [
+        {"ah_year": 870, "ce_year": 1466, "title": "Ubeydullah-i Ahrar ile Baglanti", "description": "Semerkand'daki büyük veli Ubeydullah-i Ahrar hazretleri ile mektuplasarak manevi irtibat kurdu.", "period": "imparatorluk"}
+      ],
+      "detail_text": "Fatih Sultan Mehmed Han bizzat gitmemis olmakla birlikte, Semerkand'daki büyük veli Ubeydullah-i Ahrar hazretleri ile mektuplasarak manevi irtibat kurmustur. Bu bag, Fatih'in tasavvufi yönünü gösteren önemli bir detaydir."
+    }
+  ],
+  "routes": [
+    {"from": "edirne", "to": "manisa", "period": "cocukluk", "ah_year": 843, "label": "Manisa Sancakbeyliği", "waypoints": [[41.67,26.56],[41.0,27.5],[40.2,26.4],[39.65,27.88],[38.61,27.43]]},
+    {"from": "manisa", "to": "edirne", "period": "ilk_saltanat", "ah_year": 848, "label": "Edirne'ye Dönüş", "waypoints": [[38.61,27.43],[39.65,27.88],[40.2,26.4],[41.0,27.5],[41.67,26.56]]},
+    {"from": "edirne", "to": "istanbul", "period": "fetih_donemi", "ah_year": 857, "label": "İstanbul Kuşatması", "waypoints": [[41.67,26.56],[41.4,27.35],[41.17,27.8],[41.01,28.98]]},
+    {"from": "istanbul", "to": "belgrad", "period": "imparatorluk", "ah_year": 858, "label": "Sırbistan Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[42.7,23.32],[43.32,21.9],[44.79,20.46]]},
+    {"from": "belgrad", "to": "mora", "period": "imparatorluk", "ah_year": 863, "label": "Mora Seferi", "waypoints": [[44.79,20.46],[42.0,21.43],[40.63,22.94],[39.64,22.42],[37.97,23.73],[37.07,22.37]]},
+    {"from": "istanbul", "to": "trabzon", "period": "imparatorluk", "ah_year": 865, "label": "Trabzon Seferi", "waypoints": [[41.01,28.98],[40.73,31.61],[39.93,32.86],[40.65,35.83],[40.31,36.55],[41.00,39.72]]},
+    {"from": "istanbul", "to": "otlukbeli", "period": "imparatorluk", "ah_year": 878, "label": "Otlukbeli Seferi", "waypoints": [[41.01,28.98],[39.93,32.86],[39.75,37.01],[39.75,39.49],[39.95,40.00]]},
+    {"from": "istanbul", "to": "iskodra", "period": "imparatorluk", "ah_year": 879, "label": "Arnavutluk Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[42.0,21.43],[41.12,20.8],[42.07,19.51]]},
+    {"from": "istanbul", "to": "otranto", "period": "son_donem", "ah_year": 885, "label": "İtalya Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[41.3,19.8],[40.5,19.3],[40.15,18.49]]}
+  ],
+  "timeline_events": [
+    {"ah_year": 835, "ce_year": 1432, "title": "Edirne'de Dogum", "location": "edirne", "period": "cocukluk", "description": "27 Receb 835 Hicri tarihinde Edirne Sarayi'nda dünyaya geldi.", "icon": "star"},
+    {"ah_year": 843, "ce_year": 1440, "title": "Manisa Sancakbeyligi", "location": "manisa", "period": "cocukluk", "description": "Sehzadelik egitimi icin Manisa'ya gönderildi. Aksemseddin hazretleri ve diger hocalardan ilim tahsil etti.", "icon": "book"},
+    {"ah_year": 848, "ce_year": 1444, "title": "Ilk Saltanat", "location": "edirne", "period": "ilk_saltanat", "description": "Babasi Sultan II. Murad'in tahttan cekilmesi üzerine 12 yasinda ilk kez padisah oldu.", "icon": "trophy"},
+    {"ah_year": 848, "ce_year": 1444, "title": "Varna Zaferi", "location": "varna", "period": "ilk_saltanat", "description": "Hacli ordusuna karsi kazanilan büyük zafer. Sultan II. Murad komutasinda Osmanli ordusu galip geldi.", "icon": "trophy"},
+    {"ah_year": 850, "ce_year": 1446, "title": "Manisa'ya Donus", "location": "manisa", "period": "ilk_saltanat", "description": "Babasi Sultan II. Murad tekrar tahta gecince sehzade Mehmed Manisa'ya döndü.", "icon": "travel"},
+    {"ah_year": 855, "ce_year": 1451, "title": "Ikinci Saltanat", "location": "edirne", "period": "fetih_donemi", "description": "Babasi Sultan II. Murad'in vefati üzerine 19 yasinda ikinci kez tahta cikti.", "icon": "star"},
+    {"ah_year": 856, "ce_year": 1452, "title": "Rumelihisari Insasi", "location": "rumelihisari", "period": "fetih_donemi", "description": "Istanbul Bogazi'nin en dar noktasinda yalnizca 4 ayda Rumelihisari'ni insa ettirdi.", "icon": "mosque"},
+    {"ah_year": 857, "ce_year": 1453, "title": "Istanbul'un Fethi", "location": "istanbul", "period": "fetih_donemi", "description": "29 Mayis 1453'te Istanbul'u fethederek Peygamber Efendimiz sallallahu aleyhi ve sellemin müjdesine mazhar oldu.", "icon": "moon"},
+    {"ah_year": 857, "ce_year": 1453, "title": "Eyüp Sultan Külliyesi", "location": "eyup", "period": "fetih_donemi", "description": "Aksemseddin hazretlerinin isaretleriyle Eba Eyyub el-Ensari hazretlerinin kabr-i serifini buldurarak türbe ve külliye insa ettirdi.", "icon": "mosque"},
+    {"ah_year": 858, "ce_year": 1454, "title": "Sirbistan Seferi", "location": "belgrad", "period": "imparatorluk", "description": "Sirbistan üzerine sefer düzenleyerek pek cok kaleyi fethetti.", "icon": "travel"},
+    {"ah_year": 863, "ce_year": 1459, "title": "Mora Fethi", "location": "mora", "period": "imparatorluk", "description": "Mora Yarimadasi'ni fethederek Bizans kalintisi despotluklara son verdi.", "icon": "trophy"},
+    {"ah_year": 865, "ce_year": 1461, "title": "Trabzon'un Fethi", "location": "trabzon", "period": "imparatorluk", "description": "Trabzon Rum Imparatorlugu'na son vererek son Bizans kalintisini ortadan kaldirdi.", "icon": "trophy"},
+    {"ah_year": 867, "ce_year": 1463, "title": "Bosna'nin Fethi", "location": "bosna", "period": "imparatorluk", "description": "Bosna Kralligi'ni fethederek bölgeyi Osmanli topraklarina katti.", "icon": "trophy"},
+    {"ah_year": 870, "ce_year": 1466, "title": "Fatih Camii ve Sahn-i Seman", "location": "istanbul", "period": "imparatorluk", "description": "Fatih Külliyesi'ni insa ettirdi. Sahn-i Seman medreseleri ile Istanbul'u ilim merkezine dönüstürdü.", "icon": "mosque"},
+    {"ah_year": 873, "ce_year": 1468, "title": "Karaman'in Ilhaki", "location": "karaman", "period": "imparatorluk", "description": "Karamanogullari Beyligi'ne son vererek Anadolu'daki siyasi birligi sagladi.", "icon": "trophy"},
+    {"ah_year": 878, "ce_year": 1473, "title": "Otlukbeli Zaferi", "location": "otlukbeli", "period": "imparatorluk", "description": "Akkoyunlu hükümdari Uzun Hasan'i agir bir yenilgiye ugratarak dogu sinirini güvence altina aldi.", "icon": "trophy"},
+    {"ah_year": 879, "ce_year": 1474, "title": "Arnavutluk'un Fethi", "location": "iskodra", "period": "imparatorluk", "description": "Arnavutluk'taki son direnis noktalarini fethederek bölgeyi tamamen Osmanli topraklarina katti.", "icon": "trophy"},
+    {"ah_year": 885, "ce_year": 1480, "title": "Otranto Seferi", "location": "otranto", "period": "son_donem", "description": "Gedik Ahmed Pasa komutasindaki Osmanli donanmasi Güney Italya'daki Otranto'yu fethetti.", "icon": "travel"},
+    {"ah_year": 886, "ce_year": 1481, "title": "Vefat", "location": "istanbul", "period": "son_donem", "description": "4 Rebiülevvel 886 tarihinde vefat etti. Fatih Camii haziresine defnedildi. Rahmetullahi aleyh.", "icon": "moon"}
+  ],
+  "works": [
+    {"title": "Fatih Kanunnamesi (Kanunname-i Al-i Osman)", "description": "Osmanli Devleti'nin ilk yazili anayasasi niteligindeki kanunname. Devlet teskilati, protokol ve ceza hukuku düzenlemeleri.", "icon": "scroll"},
+    {"title": "Kanunname-i Sultani (Ceza Kanunnamesi)", "description": "Osmanli ceza hukukunu düzenleyen kapsamli kanunname. Reayanin haklarini ve cezai müeyyideleri belirler.", "icon": "scroll"},
+    {"title": "Fatih Camii ve Külliyesi", "description": "Istanbul'un ilk büyük Osmanli külliyesi. 8 medrese (Sahn-i Seman), darüssifa, imaret, hamam ve kütüphane.", "icon": "mosque"},
+    {"title": "Topkapi Sarayi", "description": "Osmanli padisahlarinin asirlar boyu ikametgahi olacak saray kompleksi. Devlet idaresinin merkezi.", "icon": "palace"},
+    {"title": "Kapali Carsi", "description": "Dünyanin en eski ve en büyük kapali carsisi. Istanbul'un ticaret merkezinin temeli.", "icon": "market"},
+    {"title": "Avnî Divani", "description": "Fatih Sultan Mehmed Han'in 'Avni' mahlasi ile yazdigi Türkce ve Farsca siirlerden olusan divan.", "icon": "feather"}
+  ],
+  "sources": [
+    {"title": "Se'adet-i Ebediyye", "author": "Hüseyin Hilmi Isik", "type": "kaynak"},
+    {"title": "Osmanli Tarihi", "author": "Hammer-Purgstall", "type": "tarih"},
+    {"title": "Fatih ve Istanbul", "author": "Halil Inalcik", "type": "tarih"},
+    {"title": "Fatih Sultan Mehmed", "author": "Franz Babinger", "type": "biyografi"},
+    {"title": "Fatih Devri Üzerinde Tetkikler ve Vesikalar", "author": "Halil Inalcik", "type": "tarih"},
+    {"title": "Rehber Insanlar", "author": "Türkiye Gazetesi", "type": "kaynak"},
+    {"title": "Tam Ilmihal Se'adet-i Ebediyye", "author": "Hüseyin Hilmi Isik", "type": "kaynak"}
+  ]
+}
