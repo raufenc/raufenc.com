@@ -456,8 +456,21 @@ input { font-family: inherit; }
   .consent-banner { flex-direction: column; text-align: center; }
 }
 
-/* === UNMUTE BUTTON === */
-.unmute-btn { animation: pulse 1.5s infinite; font-size: 0.85rem; padding: 6px 14px; }
+/* === PLAY OVERLAY === */
+.play-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.4); border-radius: var(--radius-sm);
+  z-index: 10; cursor: pointer;
+}
+.play-overlay-btn {
+  background: var(--primary); color: #fff; border: none; border-radius: 50%;
+  width: 80px; height: 80px; font-size: 2rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: var(--transition);
+  animation: pulse 2s infinite;
+}
+.play-overlay-btn:hover { transform: scale(1.1); background: #3A7BC8; }
 
 /* === CHECKPOINT STATUS === */
 .checkpoint-status { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }

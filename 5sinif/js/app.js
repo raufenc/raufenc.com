@@ -393,8 +393,6 @@ function createPlayer(playlistId) {
     width: '100%',
     height: '100%',
     playerVars: {
-      autoplay: 1,
-      mute: 1,
       playsinline: 1,
       enablejsapi: 1,
       rel: 0,
@@ -419,32 +417,43 @@ function createPlayer(playlistId) {
 
 function onPlayerReady(event) {
   console.log('YT Player ready');
-  event.target.playVideo();
+  // Show play overlay — user must click to start (browser autoplay policy)
+  showPlayOverlay();
   startCheckpointMonitor();
-  // Show unmute button since autoplay requires muted start
-  showUnmutePrompt();
 }
 
 function onPlayerStateChange(event) {
   if (event.data === 1) { // PLAYING
+    hidePlayOverlay();
     startCheckpointMonitor();
-  } else if (event.data === 2) { // PAUSED (not by us)
-    stopCheckpointMonitor();
+  } else if (event.data === 2) { // PAUSED (not by checkpoint)
+    if (!window._quizState?.quizActive) {
+      stopCheckpointMonitor();
+    }
   }
 }
 
-function showUnmutePrompt() {
-  const controls = document.querySelector('.player-controls');
-  if (!controls) return;
-  const btn = document.createElement('button');
-  btn.className = 'btn btn-primary unmute-btn';
-  btn.innerHTML = '🔊 Sesi Aç';
-  btn.onclick = () => {
-    if (_ytPlayer && _ytPlayer.unMute) { _ytPlayer.unMute(); _ytPlayer.setVolume(100); }
-    btn.remove();
-  };
-  controls.prepend(btn);
+function showPlayOverlay() {
+  const wrapper = document.querySelector('.video-wrapper');
+  if (!wrapper || document.getElementById('playOverlay')) return;
+  const overlay = document.createElement('div');
+  overlay.id = 'playOverlay';
+  overlay.className = 'play-overlay';
+  overlay.innerHTML = '<button class="play-overlay-btn" onclick="startVideo()">▶ Videoyu Başlat</button>';
+  wrapper.appendChild(overlay);
 }
+
+function hidePlayOverlay() {
+  const overlay = document.getElementById('playOverlay');
+  if (overlay) overlay.remove();
+}
+
+window.startVideo = function() {
+  if (_ytPlayer && _ytPlayer.playVideo) {
+    _ytPlayer.playVideo();
+    hidePlayOverlay();
+  }
+};
 
 function startCheckpointMonitor() {
   if (_checkpointTimer) return;
