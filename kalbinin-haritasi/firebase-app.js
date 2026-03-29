@@ -3,12 +3,12 @@
 // FIREBASE CONFIG — kendi bilgilerini gir
 // ============================================
 const FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyATUuYFnaMX1yBqaoJxackYf4ucmWVixkw",
+  authDomain: "kalbinin-haritasi.firebaseapp.com",
+  projectId: "kalbinin-haritasi",
+  storageBucket: "kalbinin-haritasi.firebasestorage.app",
+  messagingSenderId: "485160854703",
+  appId: "1:485160854703:web:8842cf7642e82803a6605a"
 };
 
 // Admin email listesi — bu email'ler admin paneline erişir
