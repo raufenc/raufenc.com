@@ -361,6 +361,7 @@ function renderOyrenme(params) {
   // Quiz state
   window._quizState = {
     dersSlug, uniteSlug, checkpoints,
+    videoId: unite.videoId || null,
     currentCheckpoint: 0, score: 0, totalAnswered: 0,
     quizActive: false
   };
@@ -385,12 +386,13 @@ function createPlayer(playlistId) {
   const container = document.getElementById('ytPlayerContainer');
   if (!container) return;
 
-  _ytPlayer = new YT.Player('ytPlayerContainer', {
+  // Use single video ID if available, otherwise first video from playlist
+  const videoId = window._quizState?.videoId;
+
+  const playerConfig = {
     width: '100%',
     height: '100%',
     playerVars: {
-      list: playlistId,
-      listType: 'playlist',
       autoplay: 1,
       mute: 1,
       playsinline: 1,
@@ -403,7 +405,16 @@ function createPlayer(playlistId) {
       onReady: onPlayerReady,
       onStateChange: onPlayerStateChange
     }
-  });
+  };
+
+  if (videoId) {
+    playerConfig.videoId = videoId;
+  } else {
+    playerConfig.playerVars.list = playlistId;
+    playerConfig.playerVars.listType = 'playlist';
+  }
+
+  _ytPlayer = new YT.Player('ytPlayerContainer', playerConfig);
 }
 
 function onPlayerReady(event) {

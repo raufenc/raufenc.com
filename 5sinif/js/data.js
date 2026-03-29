@@ -9,7 +9,7 @@ const DERSLER = [
     uniteler: [
       {
         slug: 'dogal-sayilar', name: 'Doğal Sayılar', hedef: 'Doğal sayılarla işlemler yapabilme',
-        videoId: null, // playlist'ten ilk video otomatik gelecek
+        videoId: 'dQw4w9WgXcQ', // placeholder — gerçek video ID ile değiştirilecek // playlist'ten ilk video otomatik gelecek
         checkpoints: [
           { saniye: 60, soru: '245 + 378 işleminin sonucu kaçtır?', secenekler: ['613', '623', '633', '523'], dogru: 0, ipucu: 'Birler basamağından başla: 5+8=13, 1 elde var.' },
           { saniye: 120, soru: 'Hangi sayı 500\'den büyük ve 600\'den küçüktür?', secenekler: ['489', '550', '601', '500'], dogru: 1, ipucu: '500 < ? < 600 aralığına bak.' },
