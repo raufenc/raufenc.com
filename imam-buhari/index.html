@@ -28,6 +28,11 @@
       <a href="#content-section">Hayâtı</a>
       <a href="#hadisler">Hadîsler</a>
     </nav>
+    <div class="theme-btns">
+      <button class="theme-btn active" onclick="setTheme('')" title="Gece">🌙</button>
+      <button class="theme-btn" onclick="setTheme('sepia')" title="Sepya">📜</button>
+      <button class="theme-btn" onclick="setTheme('light')" title="Gündüz">☀️</button>
+    </div>
   </div>
 </header>
 
@@ -122,6 +127,16 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="book-data.js"></script>
 <script>
+/* ═══════════ TEMA SİSTEMİ ═══════════ */
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('imam-buhari-theme',t);
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  const labels={'':'🌙','sepia':'📜','light':'☀️'};
+  document.querySelectorAll('.theme-btn').forEach(b=>{if(b.textContent.trim()===labels[t])b.classList.add('active');});
+}
+(function(){var t=localStorage.getItem('imam-buhari-theme');if(t)setTheme(t);})();
+
 /* ═══════════════════════════════════════════════
    İmam-ı Buharî — Ana Uygulama
    ═══════════════════════════════════════════════ */
@@ -280,8 +295,14 @@ function setupDetailPanel(){
     if(loc){map.flyTo([loc.lat,loc.lon],8,{duration:1});document.getElementById('detail-panel').classList.remove('open');document.getElementById('overlay').classList.remove('open');setTimeout(()=>{if(markers[id])markers[id].openPopup();},1100);}
   };
   window._scrollToTimeline=function(locId){
+    map.closePopup();
     const items=document.querySelectorAll('.tl-item[data-loc="'+locId+'"]');
-    if(items.length){items[0].scrollIntoView({behavior:'smooth',block:'center'});items[0].style.borderColor='var(--gold)';setTimeout(()=>items[0].style.borderColor='',2000);}
+    if(items.length){
+      items[0].scrollIntoView({behavior:'smooth',block:'center'});
+      items[0].style.borderColor='var(--gold)';
+      items[0].style.boxShadow='0 0 20px rgba(212,168,83,.3)';
+      setTimeout(()=>{items[0].style.borderColor='';items[0].style.boxShadow='';},3000);
+    }
   };
 }
 
@@ -383,8 +404,9 @@ function renderTimeline(){
   window._flyToFromTimeline=function(locId){
     const loc=MAP_DATA.locations?MAP_DATA.locations.find(l=>l.id===locId):null;
     if(loc&&markers[locId]){
-      document.getElementById('map-section').scrollIntoView({behavior:'smooth'});
-      setTimeout(()=>{map.flyTo([loc.lat,loc.lon],7,{duration:1});setTimeout(()=>markers[locId].openPopup(),1100);},500);
+      const mapEl=document.getElementById('map');
+      mapEl.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(()=>{map.invalidateSize();map.flyTo([loc.lat,loc.lon],7,{duration:1});setTimeout(()=>markers[locId].openPopup(),1200);},800);
     }
   };
 }
