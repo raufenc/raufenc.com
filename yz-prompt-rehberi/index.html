@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yapay Zekâ ve Eğitim — MEB Prompt Rehberi</title>
+  <meta name="description" content="Öğretmenler için üretken YZ araçları, prompt mühendisliği ve yenilikçi öğrenme stratejileri. 243 araç, 8 formül, 10 teknik, interaktif quiz ve flashcard.">
+  <meta property="og:title" content="Yapay Zekâ ve Eğitim — MEB Prompt Rehberi">
+  <meta property="og:description" content="Öğretmenler için üretken YZ araçları, prompt mühendisliği ve yenilikçi öğrenme stratejileri.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://raufenc.com/yz-prompt-rehberi/" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/yz-prompt-rehberi/css/style.css">
+  <script src="/lib/design-system/theme.js" defer></script>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="yz-hero" id="hero">
+    <div class="yz-hero-bg"></div>
+    <div class="yz-hero-grid"></div>
+    <div class="yz-hero-orb-1"></div>
+    <div class="yz-hero-orb-2"></div>
+
+    <!-- Book Cover Placeholder (AI robot book visual) -->
+    <div class="yz-fade-in" style="margin-bottom:28px">
+      <div style="width:160px;height:220px;border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(59,130,246,0.4);border:2px solid rgba(59,130,246,0.3);background:linear-gradient(135deg,#0f172a,#1e3a5f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+        <div style="font-size:3.2rem">🤖</div>
+        <div style="font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#60a5fa;text-align:center;padding:0 12px">Yapay Zekâ<br>ve Eğitim</div>
+        <div style="font-size:0.55rem;color:#94a3b8;text-align:center;padding:0 10px">Prompt Mühendisliği</div>
+        <div style="font-size:0.5rem;color:#475569;margin-top:8px">MEB · YEGİTEK</div>
+      </div>
+    </div>
+
+    <p class="yz-label yz-fade-in" style="margin-bottom:14px;animation-delay:0.1s">
+      <span class="yz-pulse"></span>
+      T.C. Millî Eğitim Bakanlığı · YEGİTEK · 2025
+    </p>
+    <h1 class="yz-title yz-title-gradient yz-fade-in" style="animation-delay:0.15s">
+      Yapay Zekâ ve Eğitim
+    </h1>
+    <p class="yz-subtitle yz-fade-in" style="animation-delay:0.2s;margin:14px auto 0">
+      Öğretmenler İçin Uygulamalı Prompt Mühendisliği ve Üretken Araçlarla Yenilikçi Öğrenme Stratejileri
+    </p>
+
+    <!-- Stats -->
+    <div class="yz-stats yz-fade-in" style="animation-delay:0.3s">
+      <div class="yz-stat"><span class="yz-stat-num">243</span><span class="yz-stat-label">YZ Aracı</span></div>
+      <div class="yz-stat"><span class="yz-stat-num">8</span><span class="yz-stat-label">Formül</span></div>
+      <div class="yz-stat"><span class="yz-stat-num">10</span><span class="yz-stat-label">Teknik</span></div>
+      <div class="yz-stat"><span class="yz-stat-num">30</span><span class="yz-stat-label">Quiz Sorusu</span></div>
+      <div class="yz-stat"><span class="yz-stat-num">47</span><span class="yz-stat-label">Flashcard</span></div>
+      <div class="yz-stat"><span class="yz-stat-num">292</span><span class="yz-stat-label">Sayfa</span></div>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="yz-fade-in" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation-delay:0.4s;margin-top:12px">
+      <a href="/yz-prompt-rehberi/kitap.pdf" download="YZ-Prompt-Rehberi-MEB.pdf" class="yz-btn yz-btn-primary">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        Kitabı İndir (PDF)
+      </a>
+      <a href="#tabs" class="yz-btn yz-btn-glass">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        İnteraktif İçeriği Keşfet
+      </a>
+    </div>
+
+    <!-- ISBN/publisher info -->
+    <div class="yz-fade-in" style="animation-delay:0.5s;margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <span class="yz-badge yz-badge-blue">ISBN: 978-975-11-8925-7</span>
+      <span class="yz-badge yz-badge-violet">Ankara · 2025</span>
+      <span class="yz-badge yz-badge-green">Ücretsiz · Açık Erişim</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TAB NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="yz-tab-nav" id="tabs">
+    <div class="yz-tab-nav-inner">
+      <button class="yz-tab-btn active" onclick="showTab('harita',this)">📚 Kitap Haritası</button>
+      <button class="yz-tab-btn" onclick="showTab('sozluk',this)">🔤 Sözlük</button>
+      <button class="yz-tab-btn" onclick="showTab('formul',this)">🧩 Formüller</button>
+      <button class="yz-tab-btn" onclick="showTab('teknik',this)">⚡ Teknikler</button>
+      <button class="yz-tab-btn" onclick="showTab('araclar',this)">🛠 Araçlar</button>
+      <button class="yz-tab-btn" onclick="showTab('prompt',this)">💡 Prompt Bankası</button>
+      <button class="yz-tab-btn" onclick="showTab('flashcard',this)">🃏 Flashcard</button>
+      <button class="yz-tab-btn" onclick="showTab('quiz',this)">✏️ Quiz</button>
+      <button class="yz-tab-btn" onclick="showTab('etik',this)">🛡 Etik Kontrol</button>
+      <button class="yz-tab-btn" onclick="showTab('yollar',this)">🗺 Öğrenme Yolları</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       TAB CONTENT
+  ═══════════════════════════════════════ -->
+  <div style="position:relative;z-index:1">
+
+  <!-- ── 1. KİTAP HARİTASI ── -->
+  <div id="tab-harita" class="yz-tab-pane active">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">📚 İçindekiler</div>
+        <h2 class="yz-h2">Kitap Haritası</h2>
+        <p class="yz-lead">9 bölüm, 123 alt başlık. Bir bölüme tıklayarak içeriği görüntüleyin.</p>
+      </div>
+      <div class="yz-chapter-grid" id="chapterGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 2. SÖZLÜK ── -->
+  <div id="tab-sozluk" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🔤 Kısaltmalar</div>
+        <h2 class="yz-h2">Sözlük & Kavramlar</h2>
+        <p class="yz-lead">29 kısaltma ve 19 temel kavram. Arayın, filtreleyin.</p>
+      </div>
+      <input type="search" class="yz-search-box" id="glossarySearch" placeholder="Kısaltma veya kavram ara... (örn: AI, LLM, Prompt)" oninput="filterGlossary(this.value)">
+
+      <h3 style="font-size:0.85rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">
+        <span class="yz-badge yz-badge-blue" style="margin-right:8px">29</span> Kısaltmalar
+      </h3>
+      <div class="yz-glossary-grid" id="glossaryGrid"></div>
+
+      <hr class="yz-divider" style="margin:36px 0">
+
+      <h3 style="font-size:0.85rem;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">
+        <span class="yz-badge yz-badge-violet" style="margin-right:8px">19</span> Temel Kavramlar
+      </h3>
+      <div class="yz-concept-grid" id="conceptGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 3. FORMÜLLER ── -->
+  <div id="tab-formul" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🧩 Prompt Mühendisliği</div>
+        <h2 class="yz-h2">Prompt Formülleri</h2>
+        <p class="yz-lead">Sistematik prompt yazmak için 8 hazır şablon. Her formül farklı bir ihtiyaca yanıt verir.</p>
+      </div>
+      <div class="yz-formula-grid" id="formulaGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 4. TEKNİKLER ── -->
+  <div id="tab-teknik" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">⚡ Prompting</div>
+        <h2 class="yz-h2">Prompt Teknikleri</h2>
+        <p class="yz-lead">Shot, CoT, ABA, RGC ve daha fazlası. Her teknik ne zaman, nasıl kullanılır.</p>
+      </div>
+      <div class="yz-tech-grid" id="techGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 5. ARAÇLAR ── -->
+  <div id="tab-araclar" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🛠 Üretken YZ</div>
+        <h2 class="yz-h2">Araç Kataloğu</h2>
+        <p class="yz-lead">Kitapta yer alan 243 yapay zekâ aracı. Kategoriye göre filtreleyin veya arayın.</p>
+      </div>
+      <input type="search" class="yz-search-box" id="toolSearch" placeholder="Araç adı ara... (örn: ChatGPT, Canva, ElevenLabs)" oninput="filterTools()">
+      <div class="yz-tool-filters" id="toolFilters"></div>
+      <div class="yz-tool-count" id="toolCount"></div>
+      <div class="yz-tool-grid" id="toolGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 6. PROMPT BANKASI ── -->
+  <div id="tab-prompt" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">💡 Hazır Promptlar</div>
+        <h2 class="yz-h2">Prompt Bankası</h2>
+        <p class="yz-lead">50 hazır prompt tohumu. Günlük, destekleyici ve motivasyonel kategorilerde. Kopyala ve kullan.</p>
+      </div>
+      <div class="yz-seed-cats" id="seedCats"></div>
+      <div class="yz-seed-grid" id="seedGrid"></div>
+    </div>
+  </div>
+
+  <!-- ── 7. FLASHCARD ── -->
+  <div id="tab-flashcard" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header" style="text-align:center">
+        <div class="yz-section-tag" style="display:inline-flex">🃏 Ezber & Tekrar</div>
+        <h2 class="yz-h2">Flashcardlar</h2>
+        <p class="yz-lead" style="margin:8px auto 0">47 kart. Kartı çevirmek için tıklayın. Sol/sağ okları ile ilerleyin.</p>
+      </div>
+      <div class="yz-flashcard-wrap">
+        <div class="yz-deck-selector" id="deckSelector"></div>
+        <div class="yz-fc-scene" onclick="flipCard()">
+          <div class="yz-fc-card" id="fcCard">
+            <div class="yz-fc-front" id="fcFront">
+              <div class="yz-fc-hint">Ön Yüz — Tıklayarak çevirin</div>
+              <div class="yz-fc-text" id="fcFrontText"></div>
+            </div>
+            <div class="yz-fc-back" id="fcBack">
+              <div class="yz-fc-hint">Arka Yüz</div>
+              <div class="yz-fc-text" id="fcBackText"></div>
+              <div class="yz-fc-page" id="fcPage"></div>
+            </div>
+          </div>
+        </div>
+        <div class="yz-fc-controls">
+          <button class="yz-fc-nav-btn" onclick="prevCard()">←</button>
+          <div class="yz-fc-counter" id="fcCounter"></div>
+          <button class="yz-fc-nav-btn" onclick="nextCard()">→</button>
+        </div>
+        <div style="text-align:center;margin-top:16px">
+          <button class="yz-btn yz-btn-glass" onclick="shuffleCards()" style="font-size:0.82rem;padding:10px 20px">
+            🔀 Karıştır
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. QUIZ ── -->
+  <div id="tab-quiz" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">✏️ Test</div>
+        <h2 class="yz-h2">Quiz</h2>
+        <p class="yz-lead">5 quiz, 30 soru. Bir quiz seçin ve bilginizi sınayın.</p>
+      </div>
+      <div class="yz-quiz-wrap">
+        <div class="yz-quiz-selector" id="quizSelector"></div>
+        <div id="quizArea"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 9. ETİK KONTROL ── -->
+  <div id="tab-etik" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🛡 Sorumlu YZ</div>
+        <h2 class="yz-h2">Etik Kontrol Listesi</h2>
+        <p class="yz-lead">Bir YZ aracı kullanmadan önce 8 kritik soruyu yanıtlayın. Her maddeye tıklayarak işaretleyin.</p>
+      </div>
+      <div style="max-width:720px">
+        <div class="yz-ethics-list" id="ethicsList"></div>
+        <div class="yz-ethics-score" id="ethicsScore"></div>
+        <div style="margin-top:16px;text-align:center">
+          <button class="yz-btn yz-btn-glass" onclick="resetEthics()" style="font-size:0.82rem;padding:10px 20px">↺ Sıfırla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 10. ÖĞRENME YOLLARI ── -->
+  <div id="tab-yollar" class="yz-tab-pane">
+    <div class="yz-wrap yz-section">
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🗺 Rehberli Öğrenme</div>
+        <h2 class="yz-h2">Öğrenme Yolları</h2>
+        <p class="yz-lead">Hedefinize göre bir yol seçin. Kitabın hangi bölümlerini hangi sırayla okumanız gerektiğini öğrenin.</p>
+      </div>
+      <div class="yz-paths-grid" id="pathsGrid"></div>
+
+      <hr class="yz-divider" style="margin:48px 0 40px">
+
+      <div class="yz-section-header">
+        <div class="yz-section-tag">🎮 Oyun Şablonları</div>
+        <h2 class="yz-h2">Oyun Planları</h2>
+        <p class="yz-lead">Sınıfta uygulanabilecek 10 eğitici oyun şablonu. Öğrenme hedefleri ve kazanma koşullarıyla.</p>
+      </div>
+      <div class="yz-games-grid" id="gamesGrid"></div>
+    </div>
+  </div>
+
+  </div><!-- /tab content -->
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="yz-footer">
+    <div class="yz-wrap">
+      <p style="margin-bottom:8px">
+        <strong>Yapay Zekâ ve Eğitim</strong> — T.C. Millî Eğitim Bakanlığı, Yenilik ve Eğitim Teknolojileri Genel Müdürlüğü
+      </p>
+      <p style="margin-bottom:8px">
+        ISBN: 978-975-11-8925-7 · Ankara, 2025 · Kaynak gösterilerek alıntı yapılabilir.
+      </p>
+      <p>
+        Bu interaktif site <a href="https://raufenc.com">raufenc.com</a> tarafından hazırlanmıştır.
+        Kitabın tüm hakları MEB/YEGİTEK'e aittir.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════ -->
+  <script>
+const YZ = {
+  chapters: [{"id": 1, "code": "0", "title": "Ön Bölümler", "p1": 2, "p2": 14, "summary": "Künye, kısaltmalar, sunuş, yönetici özeti ve kitap özeti bölümlerini kapsar; kitabın amacı ile telif/atıf koşulları burada yer alır."}, {"id": 2, "code": "1", "title": "Giriş", "p1": 15, "p2": 16, "summary": "Yapay zekânın eğitimdeki rolünü, kitabın kapsamını ve araçların zamanla değişebileceğine ilişkin uyarıyı sunar."}, {"id": 3, "code": "2", "title": "Prompt Mühendisliğine Genel Bakış", "p1": 17, "p2": 20, "summary": "Prompt mühendisliğinin tanımını, neden önemli olduğunu ve öğretmenler için neden kritik görüldüğünü açıklar."}, {"id": 4, "code": "3", "title": "Temel Kavramlar", "p1": 21, "p2": 24, "summary": "Prompt kavramı, dil modelleri, uygulama alanları, sınırlılıklar ve eğitimde kullanım çerçevesini verir."}, {"id": 5, "code": "4", "title": "Prompt Yazma Teknikleri ve Örnek Uygulamalar", "p1": 25, "p2": 78, "summary": "İyi prompt özellikleri, 5S yaklaşımı, temel formüller, teknikler, günlük promptlar ve entegrasyon mantığını işler."}, {"id": 6, "code": "5", "title": "Eğitimde Prompt Kullanımı ve YZ Araçları", "p1": 79, "p2": 140, "summary": "Planlama, etkinlik tasarımı, araştırma, değerlendirme, motivasyon ve ChatGPT kullanımı gibi eğitim odaklı senaryoları toplar."}, {"id": 7, "code": "6", "title": "Üretken Yapay Zekâ Araçları", "p1": 141, "p2": 272, "summary": "Metin, görsel, ses, müzik, video, oyunlaştırma, sunum, kodlama ve chatbot araçlarını kategori bazlı tanıtır."}, {"id": 8, "code": "7", "title": "Eğitimde Yapay Zekâ ve Etik", "p1": 273, "p2": 280, "summary": "Etik ilkeler, veri gizliliği, AI okuryazarlığı, öğretmenin rolü ve araç seçimi ölçütlerini sunar."}, {"id": 9, "code": "8", "title": "Sonuç", "p1": 281, "p2": 292, "summary": "Gelecekte prompt mühendisliği, kişiselleştirilmiş öğrenme ve öğretmenin değişen rolüne dair sonuç ve öngörüler içerir."}],
+  sections: [{"id": 1, "ch": 1, "parent": null, "code": "0.1", "title": "Künye", "page": 2, "summary": "Kitabın yayıncı, editör, yazar, ISBN ve telif koşullarını verir."}, {"id": 2, "ch": 1, "parent": null, "code": "0.2", "title": "Kısaltmalar", "page": 8, "summary": "Kitapta kullanılan temel AI ve teknoloji kısaltmalarını açıklar."}, {"id": 3, "ch": 1, "parent": null, "code": "0.3", "title": "Sunuş", "page": 9, "summary": "Kitabın öğretmenlerin mesleki yeterlilikleriyle AI’ı buluşturma amacını vurgular."}, {"id": 4, "ch": 1, "parent": null, "code": "0.4", "title": "Yönetici Özeti", "page": 11, "summary": "Kitabın çok katmanlı yapısını ve prompt yazmaya verdiği ağırlığı özetler."}, {"id": 5, "ch": 1, "parent": null, "code": "0.5", "title": "Kitap Özeti", "page": 13, "summary": "Eserin hedef kitlesini ve ana temalarını kısa biçimde tanımlar."}, {"id": 6, "ch": 2, "parent": null, "code": "1.1", "title": "Yapay Zekâ ve Eğitim", "page": 15, "summary": "YZ’nin kişiselleştirme, geri bildirim ve öğretmen iş yükünü azaltma potansiyelini anlatır."}, {"id": 7, "ch": 2, "parent": null, "code": "1.2", "title": "Kitabın Amacı ve Kapsamı", "page": 15, "summary": "Kitabın hangi problem alanlarını ve kullanım hedeflerini kapsadığını tanımlar."}, {"id": 8, "ch": 2, "parent": null, "code": "1.3", "title": "Önemli Not: Yapay Zekâ Araçlarının Sürekli Değişen Dinamikleri Üzerine", "page": 16, "summary": "Araç isimlerinin, erişim koşullarının ve ücretlendirme modellerinin zamanla değişebileceği uyarısını yapar."}, {"id": 9, "ch": 3, "parent": null, "code": "2.1", "title": "Tanım", "page": 17, "summary": "Prompt mühendisliğini, amaca uygun çıktı almak için komut tasarlama ve optimize etme süreci olarak açıklar."}, {"id": 10, "ch": 3, "parent": null, "code": "2.2", "title": "Prompt Mühendisliği Neden Bu Kadar Önemli?", "page": 18, "summary": "Performans, kullanıcı deneyimi, verimlilik ve etik kullanım açısından önemini gerekçelendirir."}, {"id": 11, "ch": 3, "parent": null, "code": "2.3", "title": "Neden Öğretmenler İçin Prompt Mühendisliği?", "page": 19, "summary": "Kişiselleştirme, geri bildirim, materyal geliştirme ve zaman yönetimi boyutlarını öğretmen bağlamında ele alır."}, {"id": 12, "ch": 4, "parent": null, "code": "3.1", "title": "Prompt Nedir?", "page": 21, "summary": "YZ modellerine verilen komut/yönerge kavramını ve doğru promptun çıktıyı nasıl etkilediğini tanımlar."}, {"id": 13, "ch": 4, "parent": null, "code": "3.2", "title": "Yapay Zekâ ve Dil Modelleri", "page": 21, "summary": "Dil modellerinin nasıl çalıştığına, GPT gibi yapılara ve eğitimsel önemine giriş sunar."}, {"id": 14, "ch": 5, "parent": null, "code": "4.1", "title": "Prompt Yazma Teknikleri", "page": 25, "summary": "İyi prompt özellikleri ve yapılandırılmış istem mantığını öğretir."}, {"id": 15, "ch": 6, "parent": null, "code": "5.1", "title": "Planlama ve Etkili İçerik Üretimi", "page": 79, "summary": "Ders planı, yönerge, materyal, sunum ve kişiselleştirilmiş içerik tasarımını AI ile ilişkilendirir."}, {"id": 16, "ch": 6, "parent": null, "code": "5.2", "title": "Öğretme ve Öğrenme Etkinlikleri Tasarımı", "page": 91, "summary": "Senaryo, grup çalışması, oyunlaştırma ve geri bildirim odaklı etkinlik kurgularını işler."}, {"id": 17, "ch": 6, "parent": null, "code": "5.3", "title": "Araştırma ve Veri Analizi", "page": 103, "summary": "Literatür tarama, veri toplama, kaynak yönetimi ve görselleştirmeyi AI ile destekler."}, {"id": 18, "ch": 6, "parent": null, "code": "5.4", "title": "Ölçme, Değerlendirme ve Geri Bildirim Süreçlerini Güçlendirme", "page": 125, "summary": "Sınav, rubrik, ödev analizi ve ilerleme raporlarında AI kullanımını işler."}, {"id": 19, "ch": 6, "parent": null, "code": "5.5", "title": "Öğrenci Motivasyonu için Prompt’lar", "page": 132, "summary": "Farklı araç türleri için motive edici prompt örnekleri verir."}, {"id": 20, "ch": 6, "parent": null, "code": "5.6", "title": "ChatGPT’nin Eğitimde Kullanımı", "page": 133, "summary": "ChatGPT’yi ders planı, dil eğitimi, araştırma ve destek alanlarında konumlandırır."}, {"id": 21, "ch": 6, "parent": null, "code": "5.7", "title": "Eğitimde Kullanılabilecek Promptlar", "page": 136, "summary": "Farklı ders ve amaçlar için uygulama odaklı prompt örnekleri sağlar."}, {"id": 22, "ch": 7, "parent": null, "code": "6.1", "title": "Metin Oluşturma / Yazma Asistanları", "page": 141, "summary": "Metin üretimi, düzenleme, yaratıcı yazım ve akademik yazımı destekleyen araçları tanıtır."}, {"id": 23, "ch": 7, "parent": null, "code": "6.2", "title": "Görüntü Oluşturma", "page": 174, "summary": "Görsel üretim, düzenleme ve tasarım odaklı araçlara giriş yapar."}, {"id": 24, "ch": 7, "parent": null, "code": "6.3", "title": "Ses Oluşturma", "page": 201, "summary": "Metinden sese ve ses düzenleme araçlarını sınıflandırır."}, {"id": 25, "ch": 7, "parent": null, "code": "6.4", "title": "Müzik Üretme", "page": 209, "summary": "Yapay zekâ ile müzik üretim ve düzenleme araçlarını tanıtır."}, {"id": 26, "ch": 7, "parent": null, "code": "6.5", "title": "Video Oluşturma", "page": 215, "summary": "Metinden videoya, avatar video ve düzenleme araçlarını toplar."}, {"id": 27, "ch": 7, "parent": null, "code": "6.6", "title": "Oyunlaştırma Araçları", "page": 229, "summary": "Oyun tasarımı, karakter, senaryo ve etkileşimli deneyim üretimi araçlarını listeler."}, {"id": 28, "ch": 7, "parent": null, "code": "6.7", "title": "Sunum/İçerik Düzenleme", "page": 237, "summary": "Sunum üretimi, e-öğrenme içeriği ve etkileşimli materyal araçlarını kapsar."}, {"id": 29, "ch": 7, "parent": null, "code": "6.8", "title": "Kodlama", "page": 252, "summary": "Kod üretimi, düzenleme ve AI destekli geliştirici araçlarını toplar."}, {"id": 30, "ch": 7, "parent": null, "code": "6.9", "title": "Yapay Zekâ Destekli Chatbotlar", "page": 261, "summary": "Chatbot kavramını ve eğitim bağlamındaki kullanım biçimlerini sunar."}, {"id": 31, "ch": 8, "parent": null, "code": "7.1", "title": "Eğitimde Yapay Zekâ Kullanımında Etik İlkeler", "page": 273, "summary": "Adillik, açıklanabilirlik, sorumluluk ve veri güvenliği ilkelerini eğitim bağlamında ele alır."}, {"id": 32, "ch": 8, "parent": null, "code": "7.2", "title": "Öğretmenlerin Yapay Zekâ Kullanımındaki Rolü", "page": 274, "summary": "Öğretmenin rehber, denetleyici ve seçici rolünü vurgular."}, {"id": 33, "ch": 8, "parent": null, "code": "7.3", "title": "Öğrencilere Yapay Zekâ Kullanımını Öğretmek", "page": 274, "summary": "AI araçlarının nasıl ve hangi amaçla kullanılacağına dair öğretim yaklaşımını tanımlar."}, {"id": 34, "ch": 8, "parent": null, "code": "7.4", "title": "Yapay Zekâyı Kullanma Amaçları ve Hedefleri", "page": 274, "summary": "AI okuryazarlığı ve öğretim hedefleri açısından kullanım amaçlarını sistematize eder."}, {"id": 35, "ch": 8, "parent": null, "code": "7.5", "title": "Yapay Zekâ Eğitiminin Hedefleri", "page": 275, "summary": "Temel kavram, etik farkındalık, problem çözme ve proje geliştirme hedeflerini toplar."}, {"id": 36, "ch": 8, "parent": null, "code": "7.6", "title": "Yapay Zekâ Kullanımını Öğretme Yöntemleri", "page": 275, "summary": "Etik ve uygulama ekseninde daha ayrıntılı öğretim yollarını verir."}, {"id": 37, "ch": 8, "parent": null, "code": "7.7", "title": "Yapay Zekâ Eğitiminde Etkili Stratejiler", "page": 275, "summary": "Erken yaş, uygulama, etik ve proje yaklaşımı gibi stratejileri özetler."}, {"id": 38, "ch": 8, "parent": null, "code": "7.8", "title": "Geleceğin Eğitiminde Yapay Zekâ ve Etik", "page": 276, "summary": "Gelecekte öğretmen rolleri ve uyarlanabilir öğrenme ile etik boyutu birlikte tartışır."}, {"id": 39, "ch": 8, "parent": null, "code": "7.9", "title": "Sonuç ve Öneriler", "page": 276, "summary": "Etik farkındalık, mahremiyet ve gerçek hayat uygulamalarına yönelik öneriler sunar."}, {"id": 40, "ch": 8, "parent": null, "code": "7.10", "title": "Yapay Zekâ Aracı Seçerken Dikkat Edilmesi Gerekenler", "page": 277, "summary": "Araç seçimi için sistematik değerlendirme ölçütleri sunar."}, {"id": 41, "ch": 9, "parent": null, "code": "8.1", "title": "Gelecekte Prompt Mühendisliği ve Eğitimde Dönüşüm", "page": 281, "summary": "Prompt mühendisliğinin öğretim tasarımında stratejik rol oynayacağını savunur."}, {"id": 42, "ch": 9, "parent": null, "code": "8.2", "title": "Yapay Zekâ ile Kişiselleştirilmiş ve Uyarlanabilir Öğrenme", "page": 281, "summary": "AI’ın öğrenci merkezli uyarlanabilir öğrenmeyi güçlendireceğini öngörür."}, {"id": 43, "ch": 9, "parent": null, "code": "8.3", "title": "Yenilikçi Eğitim Modelleri ve Öğrenme", "page": 281, "summary": "Yeni araçlarla desteklenen hibrit ve esnek öğrenme modellerine işaret eder."}, {"id": 44, "ch": 9, "parent": null, "code": "8.4", "title": "Öğretmenlerin Rolü ve Sürekli Mesleki Gelişim", "page": 282, "summary": "Öğretmenin değişen rolü ve sürekli gelişim ihtiyacını vurgular."}, {"id": 45, "ch": 9, "parent": null, "code": "8.5", "title": "Geleceğin Eğitiminde Prompt Mühendisliğinin Önemi", "page": 282, "summary": "Doğru istem tasarımının pedagojik kaliteyi ve verimliliği artıracağını vurgular."}, {"id": 46, "ch": 4, "parent": 13, "code": "3.2.1", "title": "YZ Dil Modellerinin Uygulama Alanları", "page": 22, "summary": "Eğitim, müşteri hizmetleri, içerik üretimi, çeviri ve özetleme gibi kullanım alanlarını sıralar."}, {"id": 47, "ch": 4, "parent": 13, "code": "3.2.2", "title": "YZ Dil Modellerinin Sınırlılıkları ve Etik Sorunlar", "page": 22, "summary": "Önyargı, yanlış bilgi ve mahremiyet riskleri gibi kısıtları vurgular."}, {"id": 48, "ch": 4, "parent": 13, "code": "3.2.3", "title": "YZ Dil Modellerinin Geleceği", "page": 22, "summary": "Açıklanabilirlik, çok dillilik ve insan merkezli tasarım hedeflerine dikkat çeker."}, {"id": 49, "ch": 4, "parent": 13, "code": "3.2.4", "title": "Dil Modellerinin Eğitimde Kullanımı", "page": 22, "summary": "Metin analizi, kişiselleştirme ve öğretmen iş yükünü azaltma gibi eğitimsel kullanımları açıklar."}, {"id": 50, "ch": 5, "parent": 14, "code": "4.1.1", "title": "İyi Bir Promptun Özellikleri", "page": 25, "summary": "Açıklık, netlik, bağlam, anahtar kelime, format ve esneklik gibi ilkeleri listeler."}, {"id": 51, "ch": 5, "parent": 14, "code": "4.1.2", "title": "Prompt Mühendisliği İçin Temel Formüller", "page": 28, "summary": "Daha sistemli prompt üretmek için farklı yapı/formül şablonları sunar."}, {"id": 52, "ch": 5, "parent": 14, "code": "4.1.3", "title": "Basit Promptlar", "page": 40, "summary": "Günlük, yaratıcı ve destekleyici prompt örnekleri sunar."}, {"id": 53, "ch": 5, "parent": 14, "code": "4.1.4", "title": "Prompting Teknikleri ve Yöntemleri", "page": 44, "summary": "Shot, zincirleme düşünme, ters prompt ve benzeri teknikleri toplar."}, {"id": 54, "ch": 5, "parent": 14, "code": "4.1.5", "title": "Prompt Yazma Araçları", "page": 67, "summary": "Prompt üretimi ve yönetimi için araç kataloğu verir."}, {"id": 55, "ch": 5, "parent": 14, "code": "4.1.6", "title": "Teknoloji ile Entegrasyon", "page": 77, "summary": "Promptların API, LMS, CMS ve diğer dijital sistemlerle nasıl birleşeceğini açıklar."}, {"id": 56, "ch": 6, "parent": 15, "code": "5.1.1", "title": "Planlama ve Etkili İçerik Üretiminde Kullanılacak YZ Araçları", "page": 80, "summary": "Planlama ve içerik üretimi odaklı araçları listeler."}, {"id": 57, "ch": 6, "parent": 16, "code": "5.2.1", "title": "Öğretme ve Öğrenme Etkinlikleri Tasarımında Kullanılacak YZ Araçları", "page": 92, "summary": "Ses, video, görsel ve üretken içerik araçlarını öğretme-öğrenme tasarımında konumlandırır."}, {"id": 58, "ch": 6, "parent": 17, "code": "5.3.1", "title": "Araştırma ve Veri Analizinde Kullanılacak YZ Araçları", "page": 104, "summary": "Araştırma, atıf, veri analizi ve görselleştirme araçlarını kataloglar."}, {"id": 59, "ch": 6, "parent": 17, "code": "5.3.2", "title": "Yapay Zekâ Destekli Tarayıcı Eklentileri", "page": 120, "summary": "Tarayıcı üstünde özetleme, yazma ve okuma desteği veren araçlara odaklanır."}, {"id": 60, "ch": 6, "parent": 18, "code": "5.4.1", "title": "Ölçme, Değerlendirme ve Geri Bildirim Süreçlerini Güçlendirmede Kullanılabilecek YZ Araçları", "page": 126, "summary": "Quiz, oyunlaştırma ve otomatik puanlama araçlarını toplar."}, {"id": 61, "ch": 6, "parent": 20, "code": "5.6.1", "title": "Kullanım Alanları", "page": 133, "summary": "ChatGPT’nin eğitimsel kullanım başlıklarını örneklerle sunar."}, {"id": 62, "ch": 6, "parent": 20, "code": "5.6.2", "title": "ChatGPT’yi Verimli Kullanma Rehberi", "page": 135, "summary": "Hedef belirleme, hızlı erişim, materyal geliştirme ve araştırma desteği odaklı bir kullanım rehberi sunar."}, {"id": 63, "ch": 7, "parent": 22, "code": "6.1.1", "title": "İçerik Üretimi", "page": 142, "summary": "Metin üretim araçlarını ve içerik başlatma akışlarını örnekler."}, {"id": 64, "ch": 7, "parent": 22, "code": "6.1.2", "title": "Dil ve Yazım Düzeltmeleri", "page": 147, "summary": "Dilbilgisi, ton ve akıcılık iyileştirme araçlarını kapsar."}, {"id": 65, "ch": 7, "parent": 22, "code": "6.1.3", "title": "Yaratıcı Yazım", "page": 156, "summary": "Hikâye yazımı ve yaratıcı metin üretimini destekleyen araçları sunar."}, {"id": 66, "ch": 7, "parent": 22, "code": "6.1.4", "title": "Özetleme ve Analiz", "page": 162, "summary": "Uzun metinleri özetleme, ana fikir çıkarma ve analiz araçlarını toplar."}, {"id": 67, "ch": 7, "parent": 22, "code": "6.1.5", "title": "Akademik Yazma", "page": 166, "summary": "Akademik üslup, atıf ve dil kalitesi açısından destekleyici araçları listeler."}, {"id": 68, "ch": 7, "parent": 22, "code": "6.1.6", "title": "Kavram Haritaları", "page": 171, "summary": "PDF, video ve metinlerden kavram haritası üretimini işler."}, {"id": 69, "ch": 7, "parent": 23, "code": "6.2.1", "title": "Görsel İçerik Üretim Araçları", "page": 174, "summary": "Metinden görsele araçları ve temel iş akışlarını sunar."}, {"id": 70, "ch": 7, "parent": 23, "code": "6.2.2", "title": "Grafik ve Sanat Uygulamaları", "page": 193, "summary": "Grafik tasarım, iyileştirme ve sanat üretimi araçlarını listeler."}, {"id": 71, "ch": 7, "parent": 26, "code": "6.5.1", "title": "Video Yapım Araçları", "page": 215, "summary": "Video üretimi ve ders videosu iş akışı örnekleri içerir."}, {"id": 72, "ch": 7, "parent": 28, "code": "6.7.1", "title": "Sunum İçerik Düzenleme ve Sunum Hazırlama", "page": 237, "summary": "Sunum araçları için örnek iş akışları ve kullanım senaryoları verir."}, {"id": 73, "ch": 7, "parent": 29, "code": "6.8.1", "title": "Otomatik Kod Üretimi ve Kod Düzenleme", "page": 252, "summary": "Kod asistanları, refaktör ve SQL üretim araçlarını listeler."}, {"id": 74, "ch": 7, "parent": 30, "code": "6.9.1", "title": "Chatbot Nedir?", "page": 261, "summary": "Chatbotların temel işleyişini tanımlar."}, {"id": 75, "ch": 7, "parent": 30, "code": "6.9.2", "title": "Chatbotların Eğitimde Kullanımı", "page": 261, "summary": "Rehberlik, kişiselleştirme, sınav hazırlığı ve öğretmen desteği işlevlerini açıklar."}, {"id": 76, "ch": 7, "parent": 30, "code": "6.9.3", "title": "Yapay Zekâ Destekli Chatbot Araçları", "page": 263, "summary": "Chatbot ve sohbet asistanı araç kataloğu sunar."}, {"id": 77, "ch": 8, "parent": 35, "code": "7.5.1", "title": "Yapay Zekâ Okuryazarlığı", "page": 275, "summary": "Hangi aracı hangi amaçla kullanacağını bilme yetkinliğini öne çıkarır."}, {"id": 78, "ch": 8, "parent": 35, "code": "7.5.2", "title": "Yapay Zekâ Kullanımını Öğretme Yöntemleri", "page": 275, "summary": "Teorik ve uygulamalı öğretim dengesini anlatır."}, {"id": 79, "ch": 8, "parent": 35, "code": "7.5.3", "title": "Problem Çözme ve Proje Tabanlı Öğrenme", "page": 275, "summary": "Gerçek hayat problemleriyle AI destekli proje geliştirmeyi teşvik eder."}, {"id": 80, "ch": 8, "parent": 36, "code": "7.6.1", "title": "Teorik ve Uygulamalı Eğitimler", "page": 275, "summary": "Temel kavram öğretimi ile pratik araç kullanımını birleştirir."}, {"id": 81, "ch": 8, "parent": 36, "code": "7.6.2", "title": "Etik ve Veri Güvenliği Eğitimi", "page": 275, "summary": "Önyargı, gizlilik ve siber güvenlik risklerini vurgular."}, {"id": 82, "ch": 8, "parent": 36, "code": "7.6.3", "title": "Problem Çözme ve Proje Tabanlı Öğrenme", "page": 275, "summary": "Chatbot ve duygu analizi gibi proje örneklerini teşvik eder."}, {"id": 83, "ch": 8, "parent": 38, "code": "7.8.1", "title": "Prompt Mühendisliği ve Yapay Zekâ Kullanımı", "page": 276, "summary": "Gelecekte prompt becerilerinin artan rolünü vurgular."}, {"id": 84, "ch": 8, "parent": 38, "code": "7.8.2", "title": "Uyarlanabilir ve Kişiselleştirilmiş Öğrenme", "page": 276, "summary": "Veri temelli kişiselleştirmeyi eğitim geleceği açısından değerlendirir."}, {"id": 85, "ch": 8, "parent": 38, "code": "7.8.3", "title": "Öğretmenlerin Yeni Rolleri ve Mesleki Gelişim", "page": 276, "summary": "Öğretmenin seçici, yorumlayıcı ve tasarımcı rolünün öne çıkacağını savunur."}, {"id": 86, "ch": 8, "parent": 39, "code": "7.9.1", "title": "Etik Farkındalık ve Eleştirel Düşünme Eğitimine Öncelik Verin", "page": 276, "summary": "Eleştirel düşünme ile etik eğitimini birlikte güçlendirmeyi önerir."}, {"id": 87, "ch": 8, "parent": 39, "code": "7.9.2", "title": "Gerçek Hayattan Uygulamalar ile Destekleyin", "page": 276, "summary": "Kuramı somut örneklerle destekleme yaklaşımını savunur."}, {"id": 88, "ch": 8, "parent": 39, "code": "7.9.3", "title": "Veri Mahremiyeti Eğitimi Verin", "page": 276, "summary": "Mahremiyet ve veri güvenliği farkındalığını sistemli biçimde ele alır."}, {"id": 89, "ch": 8, "parent": 39, "code": "7.9.4", "title": "Yapay Zekânın Toplumsal ve Ekonomik Etkilerini Tartışın", "page": 276, "summary": "AI’ın toplumsal sonuçlarının eğitim içinde ele alınmasını önerir."}, {"id": 90, "ch": 8, "parent": 39, "code": "7.9.5", "title": "Sorumlu ve Bilinçli Kullanım Konusunda Yönlendirin", "page": 276, "summary": "Öğrencinin bilinçli araç kullanıcısı olmasını hedefler."}, {"id": 91, "ch": 8, "parent": 39, "code": "7.9.6", "title": "Proje Tabanlı Öğrenme Yöntemini Kullanın", "page": 276, "summary": "Uygulamalı proje tasarımını ana strateji olarak önerir."}, {"id": 92, "ch": 8, "parent": 39, "code": "7.9.7", "title": "Yapay Zekânın Sınırlarını Anlatın", "page": 277, "summary": "AI çıktılarına koşulsuz güven yerine eleştirel kontrolü teşvik eder."}, {"id": 93, "ch": 8, "parent": 39, "code": "7.9.8", "title": "Yapay Zekâ Araçlarını Seçme ve Değerlendirme", "page": 277, "summary": "İhtiyaç, veri türü ve güvenlik kriterleriyle seçim yapmayı önerir."}, {"id": 94, "ch": 8, "parent": 40, "code": "7.10.1", "title": "Kullanım Amacı ve İhtiyaç Analizi", "page": 277, "summary": "Aracı her iş için değil, amaca göre seçme ilkesini vurgular."}, {"id": 95, "ch": 8, "parent": 40, "code": "7.10.2", "title": "Veri Türü ve İşleme Kapasitesi", "page": 277, "summary": "Metin, ses, görsel gibi veri türlerinin seçim üzerindeki etkisini anlatır."}, {"id": 96, "ch": 8, "parent": 40, "code": "7.10.3", "title": "Kullanım Kolaylığı ve Erişilebilirlik", "page": 277, "summary": "Kullanılabilirlik ve erişim eşitliği ölçütlerini tanımlar."}, {"id": 97, "ch": 8, "parent": 40, "code": "7.10.4", "title": "Etik ve Güvenlik İlkeleri", "page": 277, "summary": "Araç seçiminde etik risklerin ve veri güvenliğinin zorunlu ölçüt olduğunu belirtir."}, {"id": 98, "ch": 8, "parent": 40, "code": "7.10.5", "title": "Yapay Zekâ Algoritmalarındaki Önyargılar", "page": 277, "summary": "Algoritmik önyargı risklerini ve sonuçlarını açıklar."}, {"id": 99, "ch": 8, "parent": 40, "code": "7.10.6", "title": "Entegrasyon ve Uyumluluk", "page": 278, "summary": "Araçların mevcut sistemlerle birlikte çalışabilirliğini öne çıkarır."}, {"id": 100, "ch": 8, "parent": 40, "code": "7.10.7", "title": "Metin, Ses ve Görsel Tabanlı Yapay Zekâ", "page": 279, "summary": "Modalite bazlı araç seçimi ve senaryo kurmayı açıklar."}, {"id": 101, "ch": 5, "parent": 51, "code": "4.1.2.1", "title": "Temel Prompting Adımları", "page": 28, "summary": "Bağlam, görev, kısıt, örnek, persona, format ve ton adımlarını açıklar."}, {"id": 102, "ch": 5, "parent": 51, "code": "4.1.2.2", "title": "Prompt Formülleri", "page": 32, "summary": "Sekiz formüllük yapı seti ile örnek prompt kurulumları verir."}, {"id": 103, "ch": 5, "parent": 52, "code": "4.1.3.1", "title": "30 Özgün ve Etkili Fikirle Yaratıcılığı Harekete Geçirin", "page": 40, "summary": "Türkçe gündelik üretkenlik ve yaratıcılık promptları sağlar."}, {"id": 104, "ch": 5, "parent": 52, "code": "4.1.3.2", "title": "30 Effective and Concise Prompts in English", "page": 42, "summary": "İngilizce kısa ve etkili prompt örnekleri sunar."}, {"id": 105, "ch": 5, "parent": 52, "code": "4.1.3.3", "title": "Destekleyici Promptlar", "page": 43, "summary": "Rol, senaryo, veri seti ve okuma parçası temelli destekleyici örnekler verir."}, {"id": 106, "ch": 5, "parent": 53, "code": "4.1.4.1", "title": "Shot Prompting", "page": 44, "summary": "Kısa ve öz girdilerle odaklı çıktı alma tekniğini örnekler."}, {"id": 107, "ch": 5, "parent": 53, "code": "4.1.4.2", "title": "Düşünce Zinciri İşletimi (Chain of Thought)", "page": 46, "summary": "Adım adım akıl yürütmeyi görünür kılarak daha iyi çözüm üretmeyi amaçlar."}, {"id": 108, "ch": 5, "parent": 53, "code": "4.1.4.3", "title": "Ask Before Answer", "page": 47, "summary": "Önce soru sorup bağlam netleştirerek daha doğru yanıt üretme tekniğini anlatır."}, {"id": 109, "ch": 5, "parent": 53, "code": "4.1.4.4", "title": "RGC Prompting", "page": 49, "summary": "Düşün-üret-eleştir döngüsüyle yanıt kalitesini artırmayı hedefler."}, {"id": 110, "ch": 5, "parent": 53, "code": "4.1.4.5", "title": "Rol, Davranış ve Uzmanlık Atama", "page": 51, "summary": "Modelin rolünü, davranış tonunu ve uzmanlık düzeyini belirlemeyi açıklar."}, {"id": 111, "ch": 5, "parent": 53, "code": "4.1.4.6", "title": "I Want You To Act As", "page": 53, "summary": "Belirli rol komutlarıyla bağlama uygun yanıt üreten yaklaşımı sunar."}, {"id": 112, "ch": 5, "parent": 53, "code": "4.1.4.7", "title": "Tersine Prompt", "page": 55, "summary": "Üretilmiş iyi bir içerikten geriye doğru prompt keşfetme yaklaşımını tanımlar."}, {"id": 113, "ch": 5, "parent": 53, "code": "4.1.4.8", "title": "Negative Prompt", "page": 60, "summary": "İstenmeyen unsurları açıkça dışlayarak daha kontrollü çıktı üretmeyi hedefler."}, {"id": 114, "ch": 5, "parent": 53, "code": "4.1.4.9", "title": "Pratik Günlük Promptlar", "page": 61, "summary": "Sınıf ve günlük üretkenlik için pratik prompt örneklerini listeler."}, {"id": 115, "ch": 5, "parent": 53, "code": "4.1.4.10", "title": "Üretken Yapay Zekâ ve Prompt", "page": 65, "summary": "Metin, görsel, ses ve diğer medya üretiminde prompt kullanımını araç örnekleriyle anlatır."}, {"id": 116, "ch": 5, "parent": 53, "code": "4.1.4.11", "title": "Öğretmenler İçin Adım Adım Prompt Yazma Akış Şeması", "page": 67, "summary": "Konu-hedef-kitle-format-ton akışına dayalı pratik üretim modeli sunar."}, {"id": 117, "ch": 5, "parent": 55, "code": "4.1.6.1", "title": "Dijital Araçlarla Prompt’ların Entegrasyonu", "page": 77, "summary": "API, no-code, veri analizi, iş birliği ve chatbot altyapılarına entegrasyon örnekleri sunar."}, {"id": 118, "ch": 7, "parent": 66, "code": "6.1.4.1", "title": "Özetleme ve Analiz Araçları", "page": 162, "summary": "Özet ve analiz odaklı araç kataloğu sunar."}, {"id": 119, "ch": 7, "parent": 67, "code": "6.1.5.1", "title": "Akademik Yazım Araçları", "page": 166, "summary": "Akademik yazım için seçili araçların kullanım mantığını toplar."}, {"id": 120, "ch": 8, "parent": 98, "code": "7.10.5.1", "title": "Eğitimde Ayrımcı Etkiler ve Çözüm Yolları", "page": 277, "summary": "Ayrımcı etkileri azaltma yollarını tartışır."}, {"id": 121, "ch": 8, "parent": 98, "code": "7.10.5.2", "title": "Yapay Zekâda Algoritmik Önyargılar Nasıl Ortaya Çıkar?", "page": 277, "summary": "Veri ve model tasarımı kaynaklı önyargı mekanizmalarını özetler."}, {"id": 122, "ch": 8, "parent": 98, "code": "7.10.5.3", "title": "Eğitimde Algoritmik Önyargıların Sonuçları", "page": 278, "summary": "Önyargıların eğitimsel çıktılar üzerindeki etkisini işler."}, {"id": 123, "ch": 8, "parent": 98, "code": "7.10.5.4", "title": "Yapay Zekâ Önyargılarını Azaltmak İçin Ne Yapılabilir?", "page": 278, "summary": "Denetim, veri kalitesi ve insan gözetimi gibi azaltım yollarını sıralar."}],
+  concepts: [{"title": "Yapay zekâ okuryazarlığı", "desc": "Öğrencinin ve öğretmenin hangi AI aracını ne amaçla, hangi sınırlılıkla kullanacağını bilme yetkinliği.", "page": "s.275"}, {"title": "Prompt", "desc": "YZ modeline belirli çıktı üretmesi için verilen komut veya yönerge.", "page": "s.21"}, {"title": "Prompt mühendisliği", "desc": "İstenen kalite ve biçimde çıktı almak için istem tasarlama ve optimize etme süreci.", "page": "s.17"}, {"title": "Dil modeli", "desc": "Doğal dili anlama ve üretme amacıyla eğitilmiş yapay zekâ modeli.", "page": "s.21-22"}, {"title": "Kişiselleştirilmiş öğrenme", "desc": "Öğrenci ihtiyaçlarına göre uyarlanmış içerik ve öğrenme yolu sunma yaklaşımı.", "page": "s.15,19,81"}, {"title": "Uyarlanabilir öğrenme", "desc": "Öğrencinin düzeyine ve hızına göre içeriğin dinamik biçimde ayarlanması.", "page": "s.16,281"}, {"title": "Oyunlaştırma", "desc": "Öğrenme sürecine oyun dinamikleri ekleyerek katılım ve motivasyonu artırma yaklaşımı.", "page": "s.91,229"}, {"title": "Ölçme-değerlendirme", "desc": "Soru üretimi, rubrik, geri bildirim ve ilerleme raporlarıyla öğrenmeyi izleme alanı.", "page": "s.125-131"}, {"title": "Araştırma ve veri analizi", "desc": "Literatür tarama, veri toplama, kaynak yönetimi ve veri görselleştirme süreçlerinin bütünü.", "page": "s.103-119"}, {"title": "Kavram haritası", "desc": "Bilgiyi düğüm ve ilişkiler üzerinden görselleştiren öğrenme ve analiz yapısı.", "page": "s.171-173"}, {"title": "Ses üretimi", "desc": "Metinden sese, ses klonlama ve ders seslendirme teknolojileri.", "page": "s.92-93,201-208"}, {"title": "Görsel üretim", "desc": "Metinden görsel, tasarım, iyileştirme ve sanat üretimi süreçleri.", "page": "s.174-200"}, {"title": "Video üretimi", "desc": "Metinden videoya, avatar destekli anlatım ve kısa video hazırlama süreçleri.", "page": "s.95-99,215-228"}, {"title": "Kodlama asistanları", "desc": "Kod önerisi, refaktör, hata analizi ve geliştirme desteği sunan araçlar kümesi.", "page": "s.252-260"}, {"title": "Chatbot", "desc": "Doğal dille etkileşim kuran ve eğitimde rehberlik/destek sağlayan sohbet sistemi.", "page": "s.261-271"}, {"title": "Etik ve veri gizliliği", "desc": "Veri mahremiyeti, güvenlik, açıklanabilirlik ve sorumlu kullanım ilkeleri.", "page": "s.273-279"}, {"title": "Algoritmik önyargı", "desc": "Veri ve model tasarımından kaynaklanan ayrımcı çıktı riski.", "page": "s.277-279"}, {"title": "Prompt formülü", "desc": "Belirli bileşenleri sıraya koyarak sistemli istem kurma şablonu.", "page": "s.32-40"}, {"title": "Prompt tekniği", "desc": "Belirli problem tipleri için kullanılan istem verme stratejisi.", "page": "s.44-61"}],
+  glossary: [{"abbr": "AI", "en": "Artificial Intelligence", "tr": "Yapay Zekâ", "page": "s.8"}, {"abbr": "AIGC", "en": "AI-Generated Content", "tr": "Yapay Zekâ ile Üretilmiş İçerik", "page": "s.8"}, {"abbr": "API", "en": "Application Programming Interface", "tr": "Uygulama Programlama Arayüzü", "page": "s.8"}, {"abbr": "AR", "en": "Augmented Reality", "tr": "Artırılmış Gerçeklik", "page": "s.8"}, {"abbr": "ASR", "en": "Automatic Speech Recognition", "tr": "Otomatik Konuşma Tanıma", "page": "s.8"}, {"abbr": "BERT", "en": "Bidirectional Encoder Representations from Transformers", "tr": null, "page": "s.8"}, {"abbr": "CV", "en": "Computer Vision", "tr": "Bilgisayarla Görme", "page": "s.8"}, {"abbr": "DL", "en": "Deep Learning", "tr": "Derin Öğrenme", "page": "s.8"}, {"abbr": "DNN", "en": "Deep Neural Network", "tr": "Derin Sinir Ağı", "page": "s.8"}, {"abbr": "EdTech", "en": "Educational Technology", "tr": "Eğitim Teknolojisi", "page": "s.8"}, {"abbr": "GAN", "en": "Generative Adversarial Network", "tr": "Üretici Çekişmeli Ağ", "page": "s.8"}, {"abbr": "GPT", "en": "Generative Pre-trained Transformer", "tr": null, "page": "s.8"}, {"abbr": "HCI", "en": "Human-Computer Interaction", "tr": "İnsan-Bilgisayar Etkileşimi", "page": "s.8"}, {"abbr": "IoT", "en": "Internet of Things", "tr": "Nesnelerin İnterneti", "page": "s.8"}, {"abbr": "LLM", "en": "Large Language Model", "tr": "Büyük Dil Modeli", "page": "s.8"}, {"abbr": "LMS", "en": "Learning Management System", "tr": "Öğrenme Yönetim Sistemi", "page": "s.8"}, {"abbr": "LTI", "en": "Learning Tools Interoperability", "tr": "Öğrenme Araçları Birlikte Çalışabilirliği", "page": "s.8"}, {"abbr": "ML", "en": "Machine Learning", "tr": "Makine Öğrenimi", "page": "s.8"}, {"abbr": "NLP", "en": "Natural Language Processing", "tr": "Doğal Dil İşleme", "page": "s.8"}, {"abbr": "OCR", "en": "Optical Character Recognition", "tr": "Optik Karakter Tanıma", "page": "s.8"}, {"abbr": "RL", "en": "Reinforcement Learning", "tr": "Pekiştirmeli Öğrenme", "page": "s.8"}, {"abbr": "RPA", "en": "Robotic Process Automation", "tr": "Robotik Süreç Otomasyonu", "page": "s.8"}, {"abbr": "STT", "en": "Speech-to-Text", "tr": "Sesten Metne Dönüştürme", "page": "s.8"}, {"abbr": "TTS", "en": "Text-to-Speech", "tr": "Metinden Sese Dönüştürme", "page": "s.8"}, {"abbr": "UI", "en": "User Interface", "tr": "Kullanıcı Arayüzü", "page": "s.8"}, {"abbr": "UX", "en": "User Experience", "tr": "Kullanıcı Deneyimi", "page": "s.8"}, {"abbr": "VR", "en": "Virtual Reality", "tr": "Sanal Gerçeklik", "page": "s.8"}, {"abbr": "XR", "en": "Extended Reality", "tr": "Genişletilmiş Gerçeklik", "page": "s.8"}, {"abbr": "YZ", "en": "Yapay Zekâ", "tr": null, "page": "s.8"}],
+  formulas: [{"code": "F1", "name": "Formül 1", "pattern": "Bağlam → Görev → Talimat → Açıklama → İyileştirme", "p1": 33, "p2": 33, "summary": "Genel çerçeve ile görevi netleştirip açıklama ve refine adımlarıyla sonucu daraltır.", "components": ["Bağlam", "Görev", "Talimat", "Açıklama", "İyileştirme"]}, {"code": "F2", "name": "Formül 2", "pattern": "Amaç → Rol → Parametreler → Konu → Kanal → Kitle → Format → Hedefler", "p1": 34, "p2": 34, "summary": "Hedef kitle ve sunum biçimini baştan tanımlayan çok alanlı planlama şablonudur.", "components": ["Amaç", "Rol", "Parametreler", "Konu", "Kanal", "Kitle", "Format", "Hedefler"]}, {"code": "F3", "name": "Formül 3", "pattern": "Rol → Hedefler → Kısıtlar → Sonuçları Biçimlendir", "p1": 35, "p2": 35, "summary": "Kısa, öğretmen odaklı ve çıktı biçimi belirgin bir prompt yapısı sunar.", "components": ["Rol", "Hedefler", "Kısıtlar Belirleme", "Sonuçları Biçimlendir"]}, {"code": "F4", "name": "Formül 4", "pattern": "Bağlam → Detaylı Bilgi → Spesifik Hedef → Ek Hedef Bilgisi → Ton/Ses/Yapı", "p1": 35, "p2": 36, "summary": "Bağlamı ve tonu birlikte tanımlayarak daha tutarlı anlatım üretir.", "components": ["Bağlam", "Detaylı Bilgi", "Spesifik Hedef", "Ek Hedef Bilgisi", "Ton/Ses/Yapı"]}, {"code": "F5", "name": "Formül 5", "pattern": "Görev → Bağlam → Örnek → Kişilik → Format → Ton", "p1": 36, "p2": 37, "summary": "Örnek ve persona yardımıyla hedef kitleye uyumlu üretim sağlar.", "components": ["Görev", "Bağlam", "Örnek", "Kişilik", "Format", "Ton"]}, {"code": "F6", "name": "Formül 6", "pattern": "Uzunluk → Konu → Yapı → Stil", "p1": 37, "p2": 38, "summary": "Özellikle kısa eğitim çıktıları ve açıklama akışları için kullanışlıdır.", "components": ["Uzunluk", "Konu", "Yapı", "Stil"]}, {"code": "F7", "name": "Formül 7", "pattern": "İstem → Görev → Kısıtlamalar", "p1": 38, "p2": 39, "summary": "Minimal ama kontrollü prompt tasarımı için en kısa formüldür.", "components": ["İstem", "Görev", "Kısıtlamalar"]}, {"code": "F8", "name": "Formül 8", "pattern": "İstem → Tamamlama", "p1": 39, "p2": 40, "summary": "Tek istemle hızlı öğretici içerik üretmeye odaklanan en yalın formüldür.", "components": ["İstem", "Tamamlama"]}],
+  techniques: [{"code": "5S", "name": "Beş S Modeli", "p1": 27, "p2": 28, "summary": "Sahneyi kur, spesifik ol, dili basitleştir, yapıyı belirt ve geri bildirim ver adımlarına dayalı prompt çerçevesi.", "use": "Prompt kalitesini artırmak için pratik kontrol listesi"}, {"code": "Shot", "name": "Shot Prompting", "p1": 44, "p2": 46, "summary": "Kısa ve öz girdilerle modelin odaklı çıktı üretmesini sağlayan teknik.", "use": "Hızlı örnek, açıklama ve içerik üretimi"}, {"code": "CoT", "name": "Düşünce Zinciri İşletimi", "p1": 46, "p2": 47, "summary": "Modelin çözüm adımlarını görünür kılarak akıl yürütmesini yapılandırır.", "use": "Matematik, bilimsel süreç ve neden-sonuç analizi"}, {"code": "ABA", "name": "Ask Before Answer", "p1": 47, "p2": 49, "summary": "Yanıt vermeden önce açıklayıcı soru sorarak bağlamı netleştirir.", "use": "Eksik bağlamlı veya çok boyutlu sorular"}, {"code": "RGC", "name": "Reflect-Generate-Critique", "p1": 49, "p2": 51, "summary": "Düşün, üret, eleştir döngüsüyle daha kaliteli çıktı üretir.", "use": "Karmaşık problemler ve öz-denetimli cevaplar"}, {"code": "Role", "name": "Rol, Davranış ve Uzmanlık Atama", "p1": 51, "p2": 53, "summary": "Modeli belirli rol, ton ve uzmanlık düzeyiyle konuşturur.", "use": "Öğretmen, danışman, bilim insanı gibi persona görevleri"}, {"code": "ActAs", "name": "I Want You To Act As", "p1": 53, "p2": 55, "summary": "Belirli rol komutlarıyla modelin tutarlı ve bağlama uygun yanıt üretmesini sağlar.", "use": "Rol bazlı açıklama, danışmanlık ve yaratıcı üretim"}, {"code": "Reverse", "name": "Tersine Prompt", "p1": 55, "p2": 59, "summary": "İyi bir çıktıdan geriye doğru promptu keşfetme ve stil çözümleme yaklaşımıdır.", "use": "Stil analizi, ders planı ve materyal ters mühendisliği"}, {"code": "Negative", "name": "Negative Prompt", "p1": 60, "p2": 61, "summary": "İstenmeyen unsurları açıkça dışlayarak daha kontrollü metin/görsel üretir.", "use": "Çocuk dostu, tematik veya güvenli üretim"}, {"code": "Flow", "name": "Adım Adım Prompt Yazma Akış Şeması", "p1": 67, "p2": 67, "summary": "Konu, rol, hedef, çıktı biçimi, hedef kitle ve ton adımlarıyla öğretmenler için üretim akışı sunar.", "use": "Sınıf içi hızlı prompt tasarımı"}],
+  seeds: [{"cat": "daily", "seq": 1, "title": "Yazılarınızı Dönüştürün", "text": "Dikkat çekici bir giriş paragrafı yazdırma", "page": "s.41-42"}, {"cat": "daily", "seq": 2, "title": "Günlük Rutini Güçlendirin", "text": "Sabah ve akşam rutinini verimli hale getirme", "page": "s.41-42"}, {"cat": "daily", "seq": 3, "title": "Motivasyonu Artırın", "text": "Ekip motivasyonu stratejileri üretme", "page": "s.41-42"}, {"cat": "daily", "seq": 4, "title": "Yaratıcı İş Fikirleri", "text": "Yenilikçi ve sürdürülebilir iş fikri üretme", "page": "s.41-42"}, {"cat": "daily", "seq": 5, "title": "Araştırma Başlangıcı", "text": "Araştırma projesi başlangıç planı kurma", "page": "s.41-42"}, {"cat": "daily", "seq": 6, "title": "Kişisel Gelişim Kitapları", "text": "Farkındalık, liderlik ve üretkenlik kitap önerileri alma", "page": "s.41-42"}, {"cat": "daily", "seq": 7, "title": "Toplantılarınızı İyileştirin", "text": "Hedef odaklı toplantı planı tasarlama", "page": "s.41-42"}, {"cat": "daily", "seq": 8, "title": "Yenilikçi Ürün Fikirleri", "text": "Sıfırdan ürün geliştirme adımları çıkarma", "page": "s.41-42"}, {"cat": "daily", "seq": 9, "title": "İş Planı Rehberi", "text": "Detaylı iş planı iskeleti üretme", "page": "s.41-42"}, {"cat": "daily", "seq": 10, "title": "Ağınızı Genişletin", "text": "Profesyonel ağ büyütme stratejileri çıkarma", "page": "s.41-42"}, {"cat": "daily", "seq": 11, "title": "Becerilerinizi Geliştirin", "text": "Yeni beceri öğrenmek için çevrim içi kaynak seçme", "page": "s.41-42"}, {"cat": "daily", "seq": 12, "title": "Stresi Yönetin", "text": "Bilimsel temelli stres yönetimi teknikleri toplama", "page": "s.41-42"}, {"cat": "daily", "seq": 13, "title": "Blog İçin Konu Seçimi", "text": "Okur ilgisi çekecek blog konu fikirleri seçme", "page": "s.41-42"}, {"cat": "daily", "seq": 14, "title": "Meditasyona Başlayın", "text": "Başlangıç düzeyi meditasyon rutini kurma", "page": "s.41-42"}, {"cat": "daily", "seq": 15, "title": "Ekip Çalışmasını Güçlendirin", "text": "İletişim ve iş birliğini artıracak taktikler geliştirme", "page": "s.41-42"}, {"cat": "daily", "seq": 16, "title": "Zaman Yönetimini İyileştirin", "text": "Zaman yönetimi için uygulanabilir yöntemler çıkarma", "page": "s.41-42"}, {"cat": "daily", "seq": 17, "title": "Sosyal Medya Kampanyaları", "text": "Sosyal medya kampanya planı üretme", "page": "s.41-42"}, {"cat": "daily", "seq": 18, "title": "Üretken Çalışma Alanları", "text": "Ergonomik ve estetik çalışma alanı düzenleme", "page": "s.41-42"}, {"cat": "daily", "seq": 19, "title": "Proje Yönetimi", "text": "Proje yönetimi kontrol listesi hazırlama", "page": "s.41-42"}, {"cat": "daily", "seq": 20, "title": "İnovasyon Kültürü", "text": "Organizasyonda inovasyon kültürü kurma", "page": "s.41-42"}, {"cat": "daily", "seq": 21, "title": "Pazar Stratejisi", "text": "Yeni pazara giriş stratejisi tasarlama", "page": "s.41-42"}, {"cat": "daily", "seq": 22, "title": "Pozitif Kültür Oluşturun", "text": "İş yerinde pozitif kültür ve bağlılık planı üretme", "page": "s.41-42"}, {"cat": "daily", "seq": 23, "title": "Finans Yönetimi", "text": "Kişisel finans yönetimi için araç/yöntem seçme", "page": "s.41-42"}, {"cat": "daily", "seq": 24, "title": "Eğitimde Teknoloji", "text": "Öğrenmeyi zenginleştiren teknoloji kullanım yolları bulma", "page": "s.41-42"}, {"cat": "daily", "seq": 25, "title": "Literatür Taraması", "text": "Literatür taramasını daha etkili tasarlama", "page": "s.41-42"}, {"cat": "supportive", "seq": null, "title": "Albert Einstein Perspektifi", "text": "Siz Albert Einstein'sınız. İzafiyet teorinizi, temel ilkelerini ve", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Yatırım Danışmanı Rolü", "text": "Bir yatırım danışmanı olarak, öğrencilere kişisel bir yatırım", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Banka Kredi Analisti Rolü", "text": "Bir banka kredi analisti olarak, öğrencilere küçük bir işletme", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "İklim Değişikliği ve Orman Ekosistemleri", "text": "Bir çevre bilimci rolünü üstlenerek, iklim değişikliğinin orman", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Hava Kirliliği ve İnsan Sağlığı", "text": "Bir çevre bilimci olarak, hava kirliliğinin insan sağlığı üzerindeki", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Astronom Rolü", "text": "Bir astronom rolünü üstlenerek, yeni bir gezegenin keşfi ve", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "TOEFL Kelime Egzersizleri", "text": "QuillBot'u kullanarak, TOEFL sınavı için uygun kelime egzer-", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Gelişmiş Kelime Testi", "text": "14 yaşındaki öğrenciler için 15 gelişmiş kelime, bu kelimele-", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Antik Yunan Felsefe Diyaloğu", "text": "Antik Yunan'dan iki filozof arasında, demokrasinin toplum", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Enerji Tüketimi Veri Seti", "text": "Son 20 yıl içindeki küresel enerji tüketimiyle ilgili bir veri seti", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Hikâye Başlangıcı", "text": "Bir grup gencin terk edilmiş bir kalede gizemli bir harita bulduğu", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Fotosentez Görseli", "text": "Fotosentez sürecinin aşamalarını gösteren bir görsel oluş-", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Su Kirliliği ve Balık Popülasyonları", "text": "Öğrencilerin su kirliliğinin balık popülasyonları üzerindeki", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Gübre ve Bitki Verimi", "text": "Öğrencilerin farklı gübre türlerinin bitki verimi üzerindeki", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Matematik Problemleri (İleri Düzey)", "text": "15 yaşındaki öğrenciler için olasılık ve trigonometri konula-", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Matematik Problemleri (Temel Düzey)", "text": "12 yaşındaki öğrenciler için bütçe planlamasının gerçek ha-", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Uzay Keşfi Okuma Parçası", "text": "13 yaşındaki öğrenciler için uzay keşfi hakkında uygun bir", "page": "s.43-44"}, {"cat": "supportive", "seq": null, "title": "Dijital Güvenlik Okuma Parçası", "text": "9 yaşındaki öğrenciler için dijital güvenlik ve internetin güven-", "page": "s.43-44"}, {"cat": "motivation", "seq": 1, "title": "Motivasyonel Metin Üretimi", "text": "10. sınıf öğrencisine çabayı öven, hataları öğrenme fırsatı olarak sunan ve düzenli pratiği teşvik eden kişisel bir motive mesajı üret.", "page": "s.132"}, {"cat": "motivation", "seq": 2, "title": "Yazma Motivasyonu", "text": "8. sınıf öğrencisinin hayal gücünü harekete geçirecek şekilde cesur bir bilim insanı karakteriyle ilham verici hikâye girişi üret.", "page": "s.132"}, {"cat": "motivation", "seq": 3, "title": "Görsel Motivasyon", "text": "Başarı yolunu tırmanış metaforuyla gösteren, umut verici renklerde motive edici bir öğrenci görseli tasarla.", "page": "s.132"}, {"cat": "motivation", "seq": 4, "title": "Okuma Motivasyonu", "text": "9. sınıf öğrencilerini bir kitabı okumaya teşvik edecek merak uyandırıcı kısa özet üret.", "page": "s.132"}, {"cat": "motivation", "seq": 5, "title": "Motivasyon Videosu", "text": "Öğrencinin adıyla hitap eden, haftalık başarısını anan ve gelişim alanını sıcak dille teşvik eden 30 saniyelik video metni oluştur.", "page": "s.133"}, {"cat": "motivation", "seq": 6, "title": "Kısa Sloganlar", "text": "Genç öğrenciler için hedefe odaklanmayı ve düzenli çalışmayı teşvik eden kısa, akılda kalıcı üç slogan üret.", "page": "s.133"}, {"cat": "motivation", "seq": 7, "title": "İlham Verici Kısa Hikâye", "text": "10-12 yaş grubu için yılmadan çalışan bir öğrenciyi merkez alan, öz güven ve azmi güçlendiren kısa hikâye üret.", "page": "s.133"}],
+  toolCats: [{"id": 1, "slug": "prompt_tools", "title": "Prompt Yazma Araçları"}, {"id": 2, "slug": "planning_content", "title": "Planlama ve İçerik Üretimi"}, {"id": 3, "slug": "teaching_learning", "title": "Öğretme-Öğrenme Etkinlikleri"}, {"id": 4, "slug": "research_data", "title": "Araştırma ve Veri Analizi"}, {"id": 5, "slug": "browser_extensions", "title": "Tarayıcı Eklentileri"}, {"id": 6, "slug": "assessment_feedback", "title": "Ölçme-Değerlendirme"}, {"id": 7, "slug": "text_writing", "title": "Metin / Yazma"}, {"id": 8, "slug": "concept_maps", "title": "Kavram Haritaları"}, {"id": 9, "slug": "image_visual", "title": "Görsel / İmaj"}, {"id": 10, "slug": "audio_voice", "title": "Ses"}, {"id": 11, "slug": "music_audio", "title": "Müzik"}, {"id": 12, "slug": "video_creation", "title": "Video"}, {"id": 13, "slug": "gamification_games", "title": "Oyunlaştırma / Oyun"}, {"id": 14, "slug": "presentations_content", "title": "Sunum / İçerik Düzenleme"}, {"id": 15, "slug": "coding", "title": "Kodlama"}, {"id": 16, "slug": "chatbots", "title": "Chatbotlar"}, {"id": 17, "slug": "general", "title": "Genel"}],
+  tools: [{"id": 1, "name": "G-Prompter", "cat": 1, "page": 67, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 2, "name": "OctoAI", "cat": 1, "page": 68, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 3, "name": "Snack Prompt", "cat": 1, "page": 68, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 4, "name": "PromptHero", "cat": 1, "page": 69, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 5, "name": "PromptPal", "cat": 1, "page": 69, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 6, "name": "FlowGPT", "cat": 1, "page": 70, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 7, "name": "AI Dungeon", "cat": 1, "page": 71, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 8, "name": "Alicent AI", "cat": 1, "page": 71, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 9, "name": "PromptBox", "cat": 1, "page": 71, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 10, "name": "Promptist", "cat": 1, "page": 72, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 11, "name": "Promptly", "cat": 1, "page": 72, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 12, "name": "OpenAI Codex", "cat": 1, "page": 73, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 13, "name": "TextSynth", "cat": 1, "page": 73, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 14, "name": "AI Text Prompt Generator", "cat": 1, "page": 74, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 15, "name": "Kaggle Notebooks", "cat": 1, "page": 74, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 16, "name": "Paperspace", "cat": 1, "page": 75, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 17, "name": "Pigeon", "cat": 1, "page": 75, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 18, "name": "Helicone.ai", "cat": 1, "page": 76, "summary": "Prompt üretimi, keşfi veya optimizasyonu için kitapta önerilen araç."}, {"id": 19, "name": "Almanack", "cat": 2, "page": 80, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 20, "name": "Forefront AI", "cat": 2, "page": 80, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 21, "name": "Knowji", "cat": 2, "page": 81, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 22, "name": "MagicSchool", "cat": 2, "page": 81, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 23, "name": "Google Bard", "cat": 2, "page": 82, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 24, "name": "MagicSlides", "cat": 2, "page": 82, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 25, "name": "EduAide", "cat": 2, "page": 83, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 26, "name": "Microsoft Copilot", "cat": 2, "page": 83, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 27, "name": "Jasper", "cat": 2, "page": 84, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 28, "name": "SchoolAI", "cat": 2, "page": 84, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 29, "name": "Grammarly", "cat": 2, "page": 85, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 30, "name": "Beautiful.ai", "cat": 2, "page": 86, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 31, "name": "Copy.ai", "cat": 2, "page": 86, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 32, "name": "Gamma", "cat": 2, "page": 87, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 33, "name": "Tome AI", "cat": 2, "page": 87, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 34, "name": "Curipod AI", "cat": 2, "page": 89, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 35, "name": "Designs.ai", "cat": 2, "page": 89, "summary": "Ders planı, içerik üretimi veya öğretim hazırlığı için konumlandırılan araç."}, {"id": 36, "name": "Murf AI", "cat": 3, "page": 92, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 37, "name": "Resemble AI", "cat": 3, "page": 92, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 38, "name": "Speechify", "cat": 3, "page": 92, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 39, "name": "WellSaid Labs", "cat": 3, "page": 92, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 40, "name": "ElevenLabs", "cat": 3, "page": 93, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 41, "name": "Lovo AI", "cat": 3, "page": 93, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 42, "name": "Beatoven", "cat": 3, "page": 94, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 43, "name": "Suno AI", "cat": 3, "page": 94, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 44, "name": "Fliki", "cat": 3, "page": 95, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 45, "name": "Pictory", "cat": 3, "page": 95, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 46, "name": "Synthesia", "cat": 3, "page": 95, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 47, "name": "InVideo", "cat": 3, "page": 97, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 48, "name": "Movavi", "cat": 3, "page": 97, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 49, "name": "VEED", "cat": 3, "page": 97, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 50, "name": "HeyGen", "cat": 3, "page": 98, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 51, "name": "Colossyan", "cat": 3, "page": 99, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 52, "name": "Vidnoz AI", "cat": 3, "page": 99, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 53, "name": "Airtable", "cat": 3, "page": 100, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 54, "name": "ClickUp", "cat": 3, "page": 100, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 55, "name": "Monday.com", "cat": 3, "page": 101, "summary": "Öğretme-öğrenme etkinlikleri, etkileşim veya materyal geliştirme için kullanılan araç."}, {"id": 56, "name": "Connected Papers", "cat": 4, "page": 104, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 57, "name": "Research Rabbit", "cat": 4, "page": 104, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 58, "name": "SurveyMonkey", "cat": 4, "page": 105, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 59, "name": "Zotero", "cat": 4, "page": 105, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 60, "name": "Typeform", "cat": 4, "page": 106, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 61, "name": "JotForm", "cat": 4, "page": 107, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 62, "name": "Samwell.ai", "cat": 4, "page": 107, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 63, "name": "Mendeley", "cat": 4, "page": 108, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 64, "name": "Tableau", "cat": 4, "page": 108, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 65, "name": "Datawrapper", "cat": 4, "page": 109, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 66, "name": "Power BI", "cat": 4, "page": 109, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 67, "name": "Gemini", "cat": 4, "page": 110, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 68, "name": "SciSpace", "cat": 4, "page": 110, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 69, "name": "Consensus", "cat": 4, "page": 111, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 70, "name": "Scite", "cat": 4, "page": 111, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 71, "name": "Crossref", "cat": 4, "page": 112, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 72, "name": "Research Kick", "cat": 4, "page": 112, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 73, "name": "Scinapse", "cat": 4, "page": 112, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 74, "name": "Elicit", "cat": 4, "page": 113, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 75, "name": "Iris AI", "cat": 4, "page": 113, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 76, "name": "Litmaps", "cat": 4, "page": 113, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 77, "name": "Recite", "cat": 4, "page": 114, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 78, "name": "Scholarcy", "cat": 4, "page": 114, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 79, "name": "ChatPDF", "cat": 4, "page": 115, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 80, "name": "Jenni", "cat": 4, "page": 115, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 81, "name": "Bearly AI", "cat": 4, "page": 116, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 82, "name": "Nanonets", "cat": 4, "page": 116, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 83, "name": "Paperpal", "cat": 4, "page": 116, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 84, "name": "NotebookLM", "cat": 4, "page": 117, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 85, "name": "Overleaf", "cat": 4, "page": 117, "summary": "Literatür tarama, anket, kaynak yönetimi veya veri analizi için kullanılan araç."}, {"id": 86, "name": "Merlin", "cat": 5, "page": 120, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 87, "name": "Monica", "cat": 5, "page": 120, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 88, "name": "Text Blaze", "cat": 5, "page": 120, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 89, "name": "Eightify", "cat": 5, "page": 121, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 90, "name": "Answer AI", "cat": 5, "page": 123, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 91, "name": "Brisk Teaching", "cat": 5, "page": 123, "summary": "Tarayıcı üzerinden özetleme, yazma, okuma veya hızlı etkileşim sağlayan araç."}, {"id": 92, "name": "Class Companion", "cat": 6, "page": 126, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 93, "name": "Diffit", "cat": 6, "page": 126, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 94, "name": "Edcafe", "cat": 6, "page": 127, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 95, "name": "Essay Grader AI", "cat": 6, "page": 127, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 96, "name": "Quizgecko", "cat": 6, "page": 127, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 97, "name": "Quizizz", "cat": 6, "page": 127, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 98, "name": "Gradescope AI", "cat": 6, "page": 128, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 99, "name": "Kahoot!", "cat": 6, "page": 128, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 100, "name": "Reclaim AI", "cat": 6, "page": 128, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 101, "name": "Fetchy", "cat": 6, "page": 129, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 102, "name": "Socrat", "cat": 6, "page": 129, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 103, "name": "Cognii", "cat": 6, "page": 130, "summary": "Ölçme, değerlendirme, rubrik, quiz veya geri bildirim süreçlerini destekleyen araç."}, {"id": 104, "name": "Napkin", "cat": 7, "page": 142, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 105, "name": "Storywizard", "cat": 7, "page": 143, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 106, "name": "Twee", "cat": 7, "page": 144, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 107, "name": "Storybird", "cat": 7, "page": 146, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 108, "name": "Write the World", "cat": 7, "page": 146, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 109, "name": "Reedsy Prompts", "cat": 7, "page": 147, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 110, "name": "Creative.ai", "cat": 7, "page": 148, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 111, "name": "ProWritingAid", "cat": 7, "page": 148, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 112, "name": "AdCreative.ai", "cat": 7, "page": 149, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 113, "name": "Bertha AI", "cat": 7, "page": 149, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 114, "name": "Simplified", "cat": 7, "page": 150, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 115, "name": "Shortly AI", "cat": 7, "page": 152, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 116, "name": "SurferSEO", "cat": 7, "page": 153, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 117, "name": "Wordtune", "cat": 7, "page": 153, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 118, "name": "Writesonic", "cat": 7, "page": 153, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 119, "name": "Crayon", "cat": 7, "page": 154, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 120, "name": "Notion AI", "cat": 7, "page": 154, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 121, "name": "Adcreative.ai", "cat": 7, "page": 155, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 122, "name": "ArticleForge", "cat": 7, "page": 156, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 123, "name": "Sudowrite", "cat": 7, "page": 156, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 124, "name": "Humbot.ai", "cat": 7, "page": 157, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 125, "name": "Paraphraser.io", "cat": 7, "page": 157, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 126, "name": "BypassAI", "cat": 7, "page": 158, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 127, "name": "Rytr", "cat": 7, "page": 159, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 128, "name": "AISEO", "cat": 7, "page": 160, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 129, "name": "QuillBot", "cat": 7, "page": 162, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 130, "name": "Writecream", "cat": 7, "page": 162, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 131, "name": "TLDR This", "cat": 7, "page": 163, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 132, "name": "Resoomer", "cat": 7, "page": 164, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 133, "name": "SMMRY", "cat": 7, "page": 165, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 134, "name": "Summary Box", "cat": 7, "page": 165, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 135, "name": "Trinka AI", "cat": 7, "page": 170, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 136, "name": "Mapify", "cat": 7, "page": 171, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 137, "name": "Visme", "cat": 7, "page": 171, "summary": "Metin üretimi, yazma desteği, özetleme veya akademik yazım için kullanılan araç."}, {"id": 138, "name": "GitMind", "cat": 8, "page": 172, "summary": "Kavram haritası, zihin haritası veya bilgi görselleştirme için kullanılan araç."}, {"id": 139, "name": "ContextMinds", "cat": 8, "page": 173, "summary": "Kavram haritası, zihin haritası veya bilgi görselleştirme için kullanılan araç."}, {"id": 140, "name": "NightCafe AI", "cat": 9, "page": 178, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 141, "name": "DeepAI", "cat": 9, "page": 179, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 142, "name": "Dream AI", "cat": 9, "page": 180, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 143, "name": "Ideogram", "cat": 9, "page": 180, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 144, "name": "Autoenhance", "cat": 9, "page": 181, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 145, "name": "Pixlr", "cat": 9, "page": 181, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 146, "name": "AI Picasso", "cat": 9, "page": 182, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 147, "name": "RestorePhotos.io", "cat": 9, "page": 182, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 148, "name": "Artbreeder", "cat": 9, "page": 183, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 149, "name": "PaintsChainer", "cat": 9, "page": 183, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 150, "name": "Flair AI", "cat": 9, "page": 184, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 151, "name": "AutoDraw", "cat": 9, "page": 185, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 152, "name": "ClipDrop", "cat": 9, "page": 186, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 153, "name": "Leap AI", "cat": 9, "page": 186, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 154, "name": "Gencraft", "cat": 9, "page": 187, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 155, "name": "Segmind", "cat": 9, "page": 187, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 156, "name": "Clarifai", "cat": 9, "page": 188, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 157, "name": "CapCut", "cat": 9, "page": 189, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 158, "name": "D-ID", "cat": 9, "page": 190, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 159, "name": "Vision Story", "cat": 9, "page": 190, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 160, "name": "LeiaPix Converter", "cat": 9, "page": 191, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 161, "name": "Remini", "cat": 9, "page": 191, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 162, "name": "Designify", "cat": 9, "page": 193, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 163, "name": "Looka", "cat": 9, "page": 193, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 164, "name": "Snappa", "cat": 9, "page": 193, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 165, "name": "VistaCreate", "cat": 9, "page": 193, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 166, "name": "AVCLabs Photo Enhancer AI", "cat": 9, "page": 194, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 167, "name": "Galileo AI", "cat": 9, "page": 194, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 168, "name": "Uizard", "cat": 9, "page": 194, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 169, "name": "Fronty", "cat": 9, "page": 195, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 170, "name": "Khroma: Yapay Zekâ Destekli Renk Paleti Oluşturma Aracı", "cat": 9, "page": 195, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 171, "name": "Let's Enhance", "cat": 9, "page": 196, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 172, "name": "Adobe Firefly", "cat": 9, "page": 197, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 173, "name": "NVIDIA Canvas", "cat": 9, "page": 198, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 174, "name": "Stable Diffusion", "cat": 9, "page": 198, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 175, "name": "BasedLabs", "cat": 9, "page": 199, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 176, "name": "Icons8", "cat": 9, "page": 199, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 177, "name": "HitPaw", "cat": 9, "page": 200, "summary": "Görsel üretim, tasarım veya görüntü düzenleme aracı."}, {"id": 178, "name": "Descript", "cat": 10, "page": 202, "summary": "Seslendirme, metinden sese ya da ses düzenleme aracı."}, {"id": 179, "name": "Auphonic", "cat": 10, "page": 203, "summary": "Seslendirme, metinden sese ya da ses düzenleme aracı."}, {"id": 180, "name": "Sonic AI", "cat": 10, "page": 203, "summary": "Seslendirme, metinden sese ya da ses düzenleme aracı."}, {"id": 181, "name": "Play.ht", "cat": 10, "page": 204, "summary": "Seslendirme, metinden sese ya da ses düzenleme aracı."}, {"id": 182, "name": "Amper Music", "cat": 11, "page": 209, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 183, "name": "LANDR", "cat": 11, "page": 210, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 184, "name": "Soundraw", "cat": 11, "page": 211, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 185, "name": "Boomy", "cat": 11, "page": 212, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 186, "name": "ROLI", "cat": 11, "page": 212, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 187, "name": "Soundful", "cat": 11, "page": 213, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 188, "name": "Spleeter", "cat": 11, "page": 213, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 189, "name": "Brain.fm", "cat": 11, "page": 214, "summary": "Müzik üretimi veya odak/ritim amaçlı ses üretim aracı."}, {"id": 190, "name": "Klap", "cat": 12, "page": 216, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 191, "name": "Opus Clip", "cat": 12, "page": 216, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 192, "name": "Runway", "cat": 12, "page": 217, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 193, "name": "Magic Studio", "cat": 12, "page": 218, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 194, "name": "Supercreator.ai", "cat": 12, "page": 219, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 195, "name": "Hedra AI", "cat": 12, "page": 220, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 196, "name": "Vizard", "cat": 12, "page": 220, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 197, "name": "DeepBrain", "cat": 12, "page": 222, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 198, "name": "Pipio", "cat": 12, "page": 224, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 199, "name": "Lumen5", "cat": 12, "page": 226, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 200, "name": "Animoto", "cat": 12, "page": 227, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 201, "name": "Elai.io", "cat": 12, "page": 228, "summary": "Video üretimi, avatar video veya video düzenleme aracı."}, {"id": 202, "name": "Promethean AI", "cat": 13, "page": 229, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 203, "name": "Ludo.ai", "cat": 13, "page": 230, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 204, "name": "Scenario", "cat": 13, "page": 230, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 205, "name": "Layer AI", "cat": 13, "page": 231, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 206, "name": "Rosebud AI", "cat": 13, "page": 231, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 207, "name": "InWorld", "cat": 13, "page": 232, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 208, "name": "Charisma", "cat": 13, "page": 233, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 209, "name": "Mesh", "cat": 13, "page": 233, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 210, "name": "Hotpot.ai", "cat": 13, "page": 234, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 211, "name": "Leonardo AI", "cat": 13, "page": 235, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 212, "name": "Fotor", "cat": 13, "page": 236, "summary": "Oyunlaştırma, oyun üretimi veya etkileşimli deneyim tasarımı aracı."}, {"id": 213, "name": "PromeAI", "cat": 14, "page": 237, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 214, "name": "Pitch", "cat": 14, "page": 241, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 215, "name": "Presentations AI", "cat": 14, "page": 242, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 216, "name": "Slidesgo", "cat": 14, "page": 243, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 217, "name": "Decktopus", "cat": 14, "page": 245, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 218, "name": "Prezo.ai", "cat": 14, "page": 246, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 219, "name": "Canva", "cat": 14, "page": 248, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 220, "name": "Plus AI", "cat": 14, "page": 249, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 221, "name": "Slidebean", "cat": 14, "page": 249, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 222, "name": "Raptivity", "cat": 14, "page": 250, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 223, "name": "iSpring", "cat": 14, "page": 251, "summary": "Sunum, etkileşimli içerik veya e-öğrenme materyali hazırlama aracı."}, {"id": 224, "name": "GitHub Copilot", "cat": 15, "page": 252, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 225, "name": "Tabnine", "cat": 15, "page": 254, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 226, "name": "Replit", "cat": 15, "page": 256, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 227, "name": "Windsurf", "cat": 15, "page": 256, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 228, "name": "CodePal", "cat": 15, "page": 257, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 229, "name": "Cody", "cat": 15, "page": 257, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 230, "name": "AI2sql", "cat": 15, "page": 258, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 231, "name": "Cursor", "cat": 15, "page": 258, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 232, "name": "DeepCode", "cat": 15, "page": 260, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 233, "name": "Durable AI", "cat": 15, "page": 260, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 234, "name": "LeetCode", "cat": 15, "page": 260, "summary": "Kod üretimi, refaktör, hata düzeltme veya AI destekli geliştirme aracı."}, {"id": 235, "name": "Akkio", "cat": 16, "page": 261, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 236, "name": "Chatbase", "cat": 16, "page": 263, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 237, "name": "Droxy", "cat": 16, "page": 263, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 238, "name": "Ivy", "cat": 16, "page": 263, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 239, "name": "Grok", "cat": 16, "page": 267, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 240, "name": "TextCortex", "cat": 16, "page": 268, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 241, "name": "Poe", "cat": 16, "page": 269, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 242, "name": "DeepSeek", "cat": 16, "page": 270, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}, {"id": 243, "name": "HuggingChat", "cat": 16, "page": 270, "summary": "Sohbet botu veya eğitim odaklı AI asistanı."}],
+  flashcards: [{"deck": "glossary", "front": "AI", "back": "Artificial Intelligence / Yapay Zekâ", "page": "s.8"}, {"deck": "glossary", "front": "AIGC", "back": "AI-Generated Content / Yapay Zekâ ile Üretilmiş İçerik", "page": "s.8"}, {"deck": "glossary", "front": "API", "back": "Application Programming Interface / Uygulama Programlama Arayüzü", "page": "s.8"}, {"deck": "glossary", "front": "AR", "back": "Augmented Reality / Artırılmış Gerçeklik", "page": "s.8"}, {"deck": "glossary", "front": "ASR", "back": "Automatic Speech Recognition / Otomatik Konuşma Tanıma", "page": "s.8"}, {"deck": "glossary", "front": "BERT", "back": "Bidirectional Encoder Representations from Transformers", "page": "s.8"}, {"deck": "glossary", "front": "CV", "back": "Computer Vision / Bilgisayarla Görme", "page": "s.8"}, {"deck": "glossary", "front": "DL", "back": "Deep Learning / Derin Öğrenme", "page": "s.8"}, {"deck": "glossary", "front": "DNN", "back": "Deep Neural Network / Derin Sinir Ağı", "page": "s.8"}, {"deck": "glossary", "front": "EdTech", "back": "Educational Technology / Eğitim Teknolojisi", "page": "s.8"}, {"deck": "glossary", "front": "GAN", "back": "Generative Adversarial Network / Üretici Çekişmeli Ağ", "page": "s.8"}, {"deck": "glossary", "front": "GPT", "back": "Generative Pre-trained Transformer", "page": "s.8"}, {"deck": "glossary", "front": "HCI", "back": "Human-Computer Interaction / İnsan-Bilgisayar Etkileşimi", "page": "s.8"}, {"deck": "glossary", "front": "IoT", "back": "Internet of Things / Nesnelerin İnterneti", "page": "s.8"}, {"deck": "glossary", "front": "LLM", "back": "Large Language Model / Büyük Dil Modeli", "page": "s.8"}, {"deck": "glossary", "front": "LMS", "back": "Learning Management System / Öğrenme Yönetim Sistemi", "page": "s.8"}, {"deck": "glossary", "front": "LTI", "back": "Learning Tools Interoperability / Öğrenme Araçları Birlikte Çalışabilirliği", "page": "s.8"}, {"deck": "glossary", "front": "ML", "back": "Machine Learning / Makine Öğrenimi", "page": "s.8"}, {"deck": "glossary", "front": "NLP", "back": "Natural Language Processing / Doğal Dil İşleme", "page": "s.8"}, {"deck": "glossary", "front": "OCR", "back": "Optical Character Recognition / Optik Karakter Tanıma", "page": "s.8"}, {"deck": "glossary", "front": "RL", "back": "Reinforcement Learning / Pekiştirmeli Öğrenme", "page": "s.8"}, {"deck": "glossary", "front": "RPA", "back": "Robotic Process Automation / Robotik Süreç Otomasyonu", "page": "s.8"}, {"deck": "glossary", "front": "STT", "back": "Speech-to-Text / Sesten Metne Dönüştürme", "page": "s.8"}, {"deck": "glossary", "front": "TTS", "back": "Text-to-Speech / Metinden Sese Dönüştürme", "page": "s.8"}, {"deck": "glossary", "front": "UI", "back": "User Interface / Kullanıcı Arayüzü", "page": "s.8"}, {"deck": "glossary", "front": "UX", "back": "User Experience / Kullanıcı Deneyimi", "page": "s.8"}, {"deck": "glossary", "front": "VR", "back": "Virtual Reality / Sanal Gerçeklik", "page": "s.8"}, {"deck": "glossary", "front": "XR", "back": "Extended Reality / Genişletilmiş Gerçeklik", "page": "s.8"}, {"deck": "glossary", "front": "YZ", "back": "Yapay Zekâ", "page": "s.8"}, {"deck": "formula", "front": "Formül 1", "back": "Bağlam → Görev → Talimat → Açıklama → İyileştirme", "page": "s.33-33"}, {"deck": "formula", "front": "Formül 2", "back": "Amaç → Rol → Parametreler → Konu → Kanal → Kitle → Format → Hedefler", "page": "s.34-34"}, {"deck": "formula", "front": "Formül 3", "back": "Rol → Hedefler → Kısıtlar → Sonuçları Biçimlendir", "page": "s.35-35"}, {"deck": "formula", "front": "Formül 4", "back": "Bağlam → Detaylı Bilgi → Spesifik Hedef → Ek Hedef Bilgisi → Ton/Ses/Yapı", "page": "s.35-36"}, {"deck": "formula", "front": "Formül 5", "back": "Görev → Bağlam → Örnek → Kişilik → Format → Ton", "page": "s.36-37"}, {"deck": "formula", "front": "Formül 6", "back": "Uzunluk → Konu → Yapı → Stil", "page": "s.37-38"}, {"deck": "formula", "front": "Formül 7", "back": "İstem → Görev → Kısıtlamalar", "page": "s.38-39"}, {"deck": "formula", "front": "Formül 8", "back": "İstem → Tamamlama", "page": "s.39-40"}, {"deck": "technique", "front": "Beş S Modeli", "back": "Sahneyi kur, spesifik ol, dili basitleştir, yapıyı belirt ve geri bildirim ver adımlarına dayalı prompt çerçevesi.", "page": "s.27-28"}, {"deck": "technique", "front": "Shot Prompting", "back": "Kısa ve öz girdilerle modelin odaklı çıktı üretmesini sağlayan teknik.", "page": "s.44-46"}, {"deck": "technique", "front": "Düşünce Zinciri İşletimi", "back": "Modelin çözüm adımlarını görünür kılarak akıl yürütmesini yapılandırır.", "page": "s.46-47"}, {"deck": "technique", "front": "Ask Before Answer", "back": "Yanıt vermeden önce açıklayıcı soru sorarak bağlamı netleştirir.", "page": "s.47-49"}, {"deck": "technique", "front": "Reflect-Generate-Critique", "back": "Düşün, üret, eleştir döngüsüyle daha kaliteli çıktı üretir.", "page": "s.49-51"}, {"deck": "technique", "front": "Rol, Davranış ve Uzmanlık Atama", "back": "Modeli belirli rol, ton ve uzmanlık düzeyiyle konuşturur.", "page": "s.51-53"}, {"deck": "technique", "front": "I Want You To Act As", "back": "Belirli rol komutlarıyla modelin tutarlı ve bağlama uygun yanıt üretmesini sağlar.", "page": "s.53-55"}, {"deck": "technique", "front": "Tersine Prompt", "back": "İyi bir çıktıdan geriye doğru promptu keşfetme ve stil çözümleme yaklaşımıdır.", "page": "s.55-59"}, {"deck": "technique", "front": "Negative Prompt", "back": "İstenmeyen unsurları açıkça dışlayarak daha kontrollü metin/görsel üretir.", "page": "s.60-61"}, {"deck": "technique", "front": "Adım Adım Prompt Yazma Akış Şeması", "back": "Konu, rol, hedef, çıktı biçimi, hedef kitle ve ton adımlarıyla öğretmenler için üretim akışı sunar.", "page": "s.67-67"}],
+  quizzes: [{"id": 1, "code": "Q1", "title": "Kısaltmalar ve Temel Kavramlar", "type": "mcq", "diff": "başlangıç", "desc": "Kısaltmalar ve temel AI kavramları"}, {"id": 2, "code": "Q2", "title": "Prompt Formülleri", "type": "mcq", "diff": "orta", "desc": "Formül ve bileşen mantığı"}, {"id": 3, "code": "Q3", "title": "Prompt Teknikleri", "type": "mcq", "diff": "orta", "desc": "Teknik-kullanım senaryosu eşleştirmesi"}, {"id": 4, "code": "Q4", "title": "Eğitim Araçları ve Modaliteler", "type": "mcq", "diff": "orta", "desc": "Aracın doğru kategoriyle eşleşmesi"}, {"id": 5, "code": "Q5", "title": "Ölçme, Etik ve Değerlendirme", "type": "mcq", "diff": "orta-ileri", "desc": "Geri bildirim, rubrik ve etik ilkeler"}],
+  questions: [{"id": 1, "quiz": 1, "order": 1, "q": "LLM kısaltması neyi ifade eder?", "answer": "Large Language Model", "explain": "LLM, büyük dil modeli anlamına gelir.", "page": "s.8", "opts": [{"text": "Large Learning Matrix", "correct": false}, {"text": "Large Language Model", "correct": true}, {"text": "Linked Learning Model", "correct": false}, {"text": "Layered Logic Machine", "correct": false}]}, {"id": 2, "quiz": 1, "order": 2, "q": "NLP hangi Türkçe karşılığa sahiptir?", "answer": "Doğal Dil İşleme", "explain": "NLP, doğal dil işleme olarak verilir.", "page": "s.8", "opts": [{"text": "Doğal Dil İşleme", "correct": true}, {"text": "Nesne Dil İlişkisi", "correct": false}, {"text": "Nöral Listeleme Prosedürü", "correct": false}, {"text": "Dilsel Programlama", "correct": false}]}, {"id": 3, "quiz": 1, "order": 3, "q": "OCR kitapta hangi işleve karşılık gelir?", "answer": "Optik karakter tanıma", "explain": "OCR görseldeki yazıyı metne dönüştürme yaklaşımıyla ilişkilidir.", "page": "s.8", "opts": [{"text": "Optik karakter tanıma", "correct": true}, {"text": "Otomatik cevap üretimi", "correct": false}, {"text": "Ortak kod çözümleme", "correct": false}, {"text": "Örüntüsel çıktı raporu", "correct": false}]}, {"id": 4, "quiz": 1, "order": 4, "q": "EdTech teriminin Türkçe karşılığı nedir?", "answer": "Eğitim Teknolojisi", "explain": "EdTech, eğitim teknolojisi olarak açıklanır.", "page": "s.8", "opts": [{"text": "Eğitim Teknolojisi", "correct": true}, {"text": "Elektronik Ders Tekniği", "correct": false}, {"text": "Eşzamanlı Dijital Teknoloji", "correct": false}, {"text": "Etkileşimli Tasarım", "correct": false}]}, {"id": 5, "quiz": 1, "order": 5, "q": "STT hangi dönüşümü anlatır?", "answer": "Sesten metne dönüştürme", "explain": "STT, speech-to-text karşılığıdır.", "page": "s.8", "opts": [{"text": "Metinden sese", "correct": false}, {"text": "Sesten metne dönüştürme", "correct": true}, {"text": "Ses tonu takibi", "correct": false}, {"text": "Sanal test tasarımı", "correct": false}]}, {"id": 6, "quiz": 1, "order": 6, "q": "GPT açılımı aşağıdakilerden hangisidir?", "answer": "Generative Pre-trained Transformer", "explain": "GPT açılımı kitapta doğrudan verilir.", "page": "s.8", "opts": [{"text": "Generative Pre-trained Transformer", "correct": true}, {"text": "General Prompt Tuner", "correct": false}, {"text": "Graph Processing Toolkit", "correct": false}, {"text": "Guided Pedagogic Template", "correct": false}]}, {"id": 7, "quiz": 2, "order": 1, "q": "Aşağıdakilerden hangisi Formül 1 bileşenlerinden biridir?", "answer": "İyileştirme", "explain": "Formül 1 bağlam, görev, talimat, açıklama ve iyileştirme bileşenlerini içerir.", "page": "s.33", "opts": [{"text": "İyileştirme", "correct": true}, {"text": "Karşılaştırma Matrisi", "correct": false}, {"text": "Veri Görselleştirme", "correct": false}, {"text": "Duygu Analizi", "correct": false}]}, {"id": 8, "quiz": 2, "order": 2, "q": "Amaç, rol, parametreler, konu, kanal, kitle, format ve hedefler hangi formüle aittir?", "answer": "Formül 2", "explain": "Bu çok alanlı yapı Formül 2’de sunulur.", "page": "s.34", "opts": [{"text": "Formül 1", "correct": false}, {"text": "Formül 2", "correct": true}, {"text": "Formül 5", "correct": false}, {"text": "Formül 7", "correct": false}]}, {"id": 9, "quiz": 2, "order": 3, "q": "Rol → Hedefler → Kısıtlar → Sonuçları Biçimlendir yapısı hangi formüldür?", "answer": "Formül 3", "explain": "Kısa ve öğretmen odaklı yapı Formül 3’tür.", "page": "s.35", "opts": [{"text": "Formül 3", "correct": true}, {"text": "Formül 4", "correct": false}, {"text": "Formül 6", "correct": false}, {"text": "Formül 8", "correct": false}]}, {"id": 10, "quiz": 2, "order": 4, "q": "Görev, bağlam, örnek, kişilik, format ve ton bileşenlerini kullanan yapı hangisidir?", "answer": "Formül 5", "explain": "Örnek ve persona içeren yapı Formül 5’tir.", "page": "s.36-37", "opts": [{"text": "Formül 4", "correct": false}, {"text": "Formül 5", "correct": true}, {"text": "Formül 6", "correct": false}, {"text": "Formül 7", "correct": false}]}, {"id": 11, "quiz": 2, "order": 5, "q": "Uzunluk, konu, yapı ve stil odaklı yapı hangisidir?", "answer": "Formül 6", "explain": "Kısa açıklama tasarımları için verilen dört bileşenli yapı Formül 6’dır.", "page": "s.37-38", "opts": [{"text": "Formül 5", "correct": false}, {"text": "Formül 6", "correct": true}, {"text": "Formül 7", "correct": false}, {"text": "Formül 8", "correct": false}]}, {"id": 12, "quiz": 2, "order": 6, "q": "İstem → Tamamlama mantığıyla çalışan en yalın formül hangisidir?", "answer": "Formül 8", "explain": "Formül 8 yalnızca istem ve tamamlama üzerinden işler.", "page": "s.39-40", "opts": [{"text": "Formül 4", "correct": false}, {"text": "Formül 6", "correct": false}, {"text": "Formül 7", "correct": false}, {"text": "Formül 8", "correct": true}]}, {"id": 13, "quiz": 3, "order": 1, "q": "Modelin yanıt vermeden önce açıklayıcı sorular sormasını isteyen teknik hangisidir?", "answer": "Ask Before Answer", "explain": "Bu teknik bağlamı netleştirmek için önce soru sorar.", "page": "s.47-49", "opts": [{"text": "Shot Prompting", "correct": false}, {"text": "Ask Before Answer", "correct": true}, {"text": "Negative Prompt", "correct": false}, {"text": "Reverse Prompt", "correct": false}]}, {"id": 14, "quiz": 3, "order": 2, "q": "Düşün-üret-eleştir döngüsünü kullanan teknik hangisidir?", "answer": "RGC Prompting", "explain": "RGC, Reflect-Generate-Critique yaklaşımıdır.", "page": "s.49-51", "opts": [{"text": "5S Modeli", "correct": false}, {"text": "RGC Prompting", "correct": true}, {"text": "Shot Prompting", "correct": false}, {"text": "Prompt Flow", "correct": false}]}, {"id": 15, "quiz": 3, "order": 3, "q": "İstenmeyen unsurları açıkça dışlamak için hangi teknik kullanılır?", "answer": "Negative Prompt", "explain": "Negatif istem, özellikle görsel ve metin üretiminde kontrol sağlar.", "page": "s.60-61", "opts": [{"text": "Negative Prompt", "correct": true}, {"text": "Chain of Thought", "correct": false}, {"text": "Role Assignment", "correct": false}, {"text": "Ask Before Answer", "correct": false}]}, {"id": 16, "quiz": 3, "order": 4, "q": "İyi bir çıktıdan geriye doğru prompt keşfetmeye dayanan teknik hangisidir?", "answer": "Tersine Prompt", "explain": "Reverse prompt, çıktıyı analiz edip istem üretir.", "page": "s.55-59", "opts": [{"text": "Shot Prompting", "correct": false}, {"text": "Tersine Prompt", "correct": true}, {"text": "RGC Prompting", "correct": false}, {"text": "5S Modeli", "correct": false}]}, {"id": 17, "quiz": 3, "order": 5, "q": "Adım adım akıl yürütmeyi görünür kılan teknik hangisidir?", "answer": "Chain of Thought", "explain": "Zincirleme düşünme, çözüm adımlarını görünür kılar.", "page": "s.46-47", "opts": [{"text": "Negative Prompt", "correct": false}, {"text": "Chain of Thought", "correct": true}, {"text": "Reverse Prompt", "correct": false}, {"text": "Ask Before Answer", "correct": false}]}, {"id": 18, "quiz": 3, "order": 6, "q": "Sahneyi kur, spesifik ol, dili basitleştir, yapıyı belirt ve geri bildirim ver yaklaşımı nedir?", "answer": "5S Modeli", "explain": "Kitapta prompt çerçevesi olarak 5S modeli sunulur.", "page": "s.27-28", "opts": [{"text": "Formül 6", "correct": false}, {"text": "5S Modeli", "correct": true}, {"text": "RGC Prompting", "correct": false}, {"text": "Role Assignment", "correct": false}]}, {"id": 19, "quiz": 4, "order": 1, "q": "Kahoot! kitapta en çok hangi işleve bağlanır?", "answer": "Oyunlaştırılmış sınav ve tekrar", "explain": "Kahoot! eğlenceli sınavlar ve tekrar için konumlandırılır.", "page": "s.128", "opts": [{"text": "Literatür tarama", "correct": false}, {"text": "Oyunlaştırılmış sınav ve tekrar", "correct": true}, {"text": "Akademik atıf yönetimi", "correct": false}, {"text": "Ses klonlama", "correct": false}]}, {"id": 20, "quiz": 4, "order": 2, "q": "Research Rabbit hangi kategoriye daha uygundur?", "answer": "Araştırma ve literatür keşfi", "explain": "Araştırma ve literatür haritalama aracı olarak tanıtılır.", "page": "s.104", "opts": [{"text": "Ses oluşturma", "correct": false}, {"text": "Araştırma ve literatür keşfi", "correct": true}, {"text": "Sunum hazırlama", "correct": false}, {"text": "Kod refaktörleme", "correct": false}]}, {"id": 21, "quiz": 4, "order": 3, "q": "Murf AI hangi modalitede yer alır?", "answer": "Seslendirme ve metinden sese", "explain": "Murf AI bir seslendirme platformu olarak listelenir.", "page": "s.92,201", "opts": [{"text": "Video avatar", "correct": false}, {"text": "Seslendirme ve metinden sese", "correct": true}, {"text": "Görsel sanat", "correct": false}, {"text": "Veri tabanı", "correct": false}]}, {"id": 22, "quiz": 4, "order": 4, "q": "Gradescope AI aşağıdaki alanlardan hangisini destekler?", "answer": "Otomatik puanlama ve geri bildirim", "explain": "Gradescope AI değerlendirme sürecini hızlandırır.", "page": "s.128", "opts": [{"text": "Renk paleti üretimi", "correct": false}, {"text": "Otomatik puanlama ve geri bildirim", "correct": true}, {"text": "Müzik üretimi", "correct": false}, {"text": "Prompt pazar yeri", "correct": false}]}, {"id": 23, "quiz": 4, "order": 5, "q": "Mapify hangi içerik türüyle ilişkilidir?", "answer": "Kavram haritası ve bilgi görselleştirme", "explain": "Mapify PDF ve videodan kavram haritası çıkarır.", "page": "s.171", "opts": [{"text": "Kavram haritası ve bilgi görselleştirme", "correct": true}, {"text": "Quiz savaşları", "correct": false}, {"text": "Dilbilgisi düzeltme", "correct": false}, {"text": "Video avatar", "correct": false}]}, {"id": 24, "quiz": 4, "order": 6, "q": "Synthesia hangi kullanımda öne çıkar?", "answer": "Avatar destekli video üretimi", "explain": "Synthesia metinden videoya ve avatar anlatıma odaklanır.", "page": "s.95-96,205", "opts": [{"text": "Atıf doğrulama", "correct": false}, {"text": "Avatar destekli video üretimi", "correct": true}, {"text": "Kod önerisi", "correct": false}, {"text": "Müzik mastering", "correct": false}]}, {"id": 25, "quiz": 5, "order": 1, "q": "Kitapta yapay zekâ sistemleriyle ilgili hangi etik başlık özellikle vurgulanır?", "answer": "Veri gizliliği ve önyargı", "explain": "Etik bölüm veri gizliliği ve algoritmik önyargıyı öne çıkarır.", "page": "s.273-279", "opts": [{"text": "Yalnızca telif hakkı", "correct": false}, {"text": "Veri gizliliği ve önyargı", "correct": true}, {"text": "Sadece donanım maliyeti", "correct": false}, {"text": "Sınav süresi", "correct": false}]}, {"id": 26, "quiz": 5, "order": 2, "q": "Rubrik tasarlama kitapta hangi bağlamda kullanılır?", "answer": "Ödev ve projeleri standartlaştırılmış biçimde değerlendirme", "explain": "Rubrik, adil ve açık ölçütlerle değerlendirme için önerilir.", "page": "s.130-131", "opts": [{"text": "Web tasarımı", "correct": false}, {"text": "Ödev ve projeleri standartlaştırılmış biçimde değerlendirme", "correct": true}, {"text": "Sadece araştırma makalesi yazma", "correct": false}, {"text": "Renk seçimi", "correct": false}]}, {"id": 27, "quiz": 5, "order": 3, "q": "İlerleme raporları hangi veri türlerinden türetilebilir?", "answer": "Sınav, ödev ve proje performans verileri", "explain": "Kitap, bu üç performans türünden kişiye özel raporlar üretilebileceğini söyler.", "page": "s.125", "opts": [{"text": "Yalnızca fotoğraflar", "correct": false}, {"text": "Sınav, ödev ve proje performans verileri", "correct": true}, {"text": "Sadece sosyal medya verileri", "correct": false}, {"text": "Yalnızca ses kayıtları", "correct": false}]}, {"id": 28, "quiz": 5, "order": 4, "q": "Öğretmenin yapay zekâ kullanımındaki temel rolü aşağıdakilerden hangisine en yakındır?", "answer": "Rehberlik ve denetleyici seçim yapma", "explain": "Etik bölüm öğretmenin denetleyici ve yönlendirici rolünü vurgular.", "page": "s.274-279", "opts": [{"text": "Tam otomasyon", "correct": false}, {"text": "Rehberlik ve denetleyici seçim yapma", "correct": true}, {"text": "Sadece veri girişi", "correct": false}, {"text": "Araçları sorgusuz kabul etme", "correct": false}]}, {"id": 29, "quiz": 5, "order": 5, "q": "Gerçek zamanlı öğrenci geri bildirimi hangi bölümün temel vaatlerinden biridir?", "answer": "Öğretme ve öğrenme etkinlikleri tasarımı", "explain": "5.2 bölümünde anlık geri bildirim açıkça yer alır.", "page": "s.91-92", "opts": [{"text": "Kısaltmalar", "correct": false}, {"text": "Öğretme ve öğrenme etkinlikleri tasarımı", "correct": true}, {"text": "Künye", "correct": false}, {"text": "Müzik üretimi", "correct": false}]}, {"id": 30, "quiz": 5, "order": 6, "q": "Algoritmik önyargıyı azaltma için kitapta öne çıkan yaklaşım hangisidir?", "answer": "Etik farkındalık, veri kalitesi ve insan gözetimi", "explain": "Önyargıların azaltılması için bilinçli seçim ve insan kontrolü vurgulanır.", "page": "s.277-279", "opts": [{"text": "Daha çok reklam verisi toplamak", "correct": false}, {"text": "Etik farkındalık, veri kalitesi ve insan gözetimi", "correct": true}, {"text": "Her aracı aynı anda kullanmak", "correct": false}, {"text": "Tüm kararı modele bırakmak", "correct": false}]}],
+  ethics: [{"order": 1, "title": "Kullanım amacı net mi?", "desc": "Araç seçimi belirli pedagojik hedefe dayanmalı; yalnızca moda veya merak sebebiyle seçilmemelidir.", "page": "s.277"}, {"order": 2, "title": "Hangi veri türü işleniyor?", "desc": "Metin, ses, görsel veya öğrenci verisi işleniyorsa uygun gizlilik önlemi tanımlanmalıdır.", "page": "s.277"}, {"order": 3, "title": "Erişilebilirlik sağlanıyor mu?", "desc": "Araç farklı yaş grupları ve erişim ihtiyaçları açısından kullanılabilir olmalıdır.", "page": "s.277"}, {"order": 4, "title": "Veri gizliliği korunuyor mu?", "desc": "Öğrenci verisinin nasıl toplandığı, saklandığı ve işlendiği anlaşılır olmalıdır.", "page": "s.275-279"}, {"order": 5, "title": "Algoritmik önyargı riski gözden geçirildi mi?", "desc": "Ayrımcı veya tek taraflı sonuç üretebilecek veri/model riskleri değerlendirilmelidir.", "page": "s.277-279"}, {"order": 6, "title": "Öğretmen gözetimi var mı?", "desc": "Kritik kararlar tamamen modele bırakılmamalı, insan denetimi sürmelidir.", "page": "s.274-279"}, {"order": 7, "title": "Geri bildirim doğrulanıyor mu?", "desc": "Model çıktıları öğretim hedefi ve doğruluk açısından kontrol edilmelidir.", "page": "s.125-131,135"}, {"order": 8, "title": "Mevcut sistemlerle uyumlu mu?", "desc": "Araç okulun/LMS’in veya iş akışının parçası olabiliyorsa daha sürdürülebilir kullanım sunar.", "page": "s.77-78,278"}],
+  paths: [{"slug": "teacher_quickstart", "title": "Öğretmen Hızlı Başlangıç", "desc": "Öğretmenler için hızlı giriş: temel kavramlar → prompt tasarımı → ders planı → değerlendirme → etik."}, {"slug": "student_prompt_lab", "title": "Öğrenci Prompt Laboratuvarı", "desc": "Öğrenciler için güvenli prompt deneyimi: temel kavramlar → yaratıcı prompt → araştırma → proje üretimi."}, {"slug": "research_path", "title": "Araştırma Yolu", "desc": "Akademik kullanım: literatür haritalama → atıf/özetleme → veri görselleştirme → etik doğrulama."}, {"slug": "assessment_path", "title": "Değerlendirme Tasarımı", "desc": "Ölçme-değerlendirme tasarlayan kullanıcılar için: hedef → soru türü → rubrik → geri bildirim → raporlama."}],
+  games: [{"title": "Kısaltma Eşleştirme", "type": "matching", "goal": "Sözlük bilgisini hızlı tekrar etmek", "mechanics": "Oyuncu kısaltma kartını doğru Türkçe/İngilizce açılımla eşleştirir.", "win": "Tüm kısaltmaları hatasız eşleştirmek"}, {"title": "Formül Kurucu", "type": "drag_drop", "goal": "Prompt formüllerinin yapısını pekiştirmek", "mechanics": "Bileşen blokları sürüklenerek doğru prompt formülü kurulmaya çalışılır.", "win": "Hedef formülü doğru sırayla kurmak"}, {"title": "Teknik Sınıflandırıcı", "type": "sorting", "goal": "Hangi tekniğin hangi senaryoya uyduğunu ayırt etmek", "mechanics": "Oyuncu teknik kartlarını kullanım amacına göre doğru alana taşır.", "win": "Tüm teknikleri doğru kategoriye yerleştirmek"}, {"title": "Araç Laboratuvarı", "type": "sorting", "goal": "Araç ekosistemini modalite bazında tanımak", "mechanics": "Araç kartları metin, görsel, ses, araştırma, değerlendirme gibi kategorilere ayrılır.", "win": "Belirli sürede doğru kategori sayısına ulaşmak"}, {"title": "Senaryo Rotası", "type": "branching", "goal": "Bağlama göre araç ve teknik kararı verebilmek", "mechanics": "Oyuncu verilen ders senaryosu için doğru prompt yaklaşımı ve araç setini seçer.", "win": "Senaryoyu hedeflere uygun şekilde tamamlamak"}, {"title": "Etik Muhafız", "type": "decision_tree", "goal": "Etik farkındalık ve risk değerlendirme", "mechanics": "Öğrenci veri gizliliği, önyargı ve araç seçimi kararlarını vaka kartları üzerinden verir.", "win": "Riskleri düşük karar seti üretmek"}, {"title": "Quiz Savaşı", "type": "timed_quiz", "goal": "Hızlı tekrar ve öz değerlendirme", "mechanics": "Çoktan seçmeli ve kısa cevaplı sorularla süreye karşı yarışılır.", "win": "Hedef puanı aşmak"}, {"title": "Araştırma Haritası Avı", "type": "network", "goal": "Araştırma iş akışını kavramak", "mechanics": "Araştırma araçları ve kaynak yönetim akışları doğru sıraya yerleştirilir.", "win": "Kaynak akışını eksiksiz kurmak"}, {"title": "Hikâye Prompt Stüdyosu", "type": "creative_builder", "goal": "Yaratıcı prompt tasarımını uygulamak", "mechanics": "Rol, tema ve hedef kitle seçilerek kitap temelli destekleyici prompt kombinasyonları oluşturulur.", "win": "Belirlenen kısıtları karşılayan istem üretmek"}, {"title": "Değerlendirme Tasarımcısı", "type": "builder", "goal": "Ölçme-değerlendirme tasarımını anlamak", "mechanics": "Öğretmen rolündeki oyuncu rubrik, soru türü ve geri bildirim bileşenlerini seçer.", "win": "Tutarlı ve tam değerlendirme seti üretmek"}]
+};
+
+// ── Tab System ──
+function showTab(id, btn) {
+  document.querySelectorAll('.yz-tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.yz-tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('tabs').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ── Chapter Map ──
+function buildChapterMap() {
+  const grid = document.getElementById('chapterGrid');
+  YZ.chapters.forEach(ch => {
+    const secs = YZ.sections.filter(s => s.ch === ch.id && !s.parent);
+    const secHTML = secs.map(s => {
+      const subsecs = YZ.sections.filter(sub => sub.parent === s.id);
+      return `<div class="yz-section-item">
+        <span class="yz-section-code">${s.code}</span>
+        <span class="yz-section-title">${s.title}${subsecs.length > 0 ? ` <span style="color:var(--yz-blue);font-size:0.7rem">(+${subsecs.length})</span>` : ''}</span>
+        <span class="yz-section-page">s.${s.page}</span>
+      </div>`;
+    }).join('');
+
+    const card = document.createElement('div');
+    card.className = 'yz-chapter-card';
+    card.innerHTML = `
+      <div class="yz-chapter-num">Bölüm ${ch.code === '0' ? 'Ön' : ch.code}</div>
+      <div class="yz-chapter-title">${ch.title}</div>
+      <div class="yz-chapter-pages">s.${ch.p1} – ${ch.p2} (${ch.p2-ch.p1+1} sayfa)</div>
+      <div class="yz-chapter-summary">${ch.summary}</div>
+      <div class="yz-section-list" id="secs-${ch.id}">${secHTML}</div>
+      <div style="margin-top:10px;font-size:0.75rem;color:var(--yz-cyan);display:flex;align-items:center;gap:4px" class="yz-expand-hint">
+        <span>▼ ${secs.length} alt başlık</span>
+      </div>
+    `;
+    card.onclick = () => {
+      const list = document.getElementById('secs-' + ch.id);
+      const hint = card.querySelector('.yz-expand-hint');
+      if (list.classList.toggle('open')) {
+        card.classList.add('active');
+        hint.innerHTML = '<span>▲ Kapat</span>';
+      } else {
+        card.classList.remove('active');
+        hint.innerHTML = `<span>▼ ${secs.length} alt başlık</span>`;
+      }
+    };
+    grid.appendChild(card);
+  });
+}
+
+// ── Glossary ──
+function buildGlossary() {
+  renderGlossary(YZ.glossary);
+  renderConcepts(YZ.concepts);
+}
+
+function renderGlossary(items) {
+  const grid = document.getElementById('glossaryGrid');
+  grid.innerHTML = items.map(g => `
+    <div class="yz-glossary-card">
+      <div class="yz-glossary-abbr">${g.abbr}</div>
+      ${g.en ? `<div class="yz-glossary-en">${g.en}</div>` : ''}
+      ${g.tr ? `<div class="yz-glossary-tr">${g.tr}</div>` : ''}
+      <div class="yz-glossary-page">s.${g.page}</div>
+    </div>
+  `).join('');
+}
+
+function renderConcepts(items) {
+  const grid = document.getElementById('conceptGrid');
+  grid.innerHTML = items.map(c => `
+    <div class="yz-concept-card">
+      <div class="yz-concept-title">${c.title}</div>
+      <div class="yz-concept-desc">${c.desc}</div>
+      ${c.page ? `<div style="font-size:0.7rem;color:var(--yz-blue);margin-top:6px">s.${c.page}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function filterGlossary(q) {
+  q = q.toLowerCase().trim();
+  if (!q) { renderGlossary(YZ.glossary); renderConcepts(YZ.concepts); return; }
+  renderGlossary(YZ.glossary.filter(g =>
+    g.abbr.toLowerCase().includes(q) ||
+    (g.en||'').toLowerCase().includes(q) ||
+    (g.tr||'').toLowerCase().includes(q)
+  ));
+  renderConcepts(YZ.concepts.filter(c =>
+    c.title.toLowerCase().includes(q) ||
+    c.desc.toLowerCase().includes(q)
+  ));
+}
+
+// ── Formulas ──
+function buildFormulas() {
+  const COLORS = ['#3b82f6','#06b6d4','#8b5cf6','#10b981','#f59e0b','#f97316','#ef4444','#a855f7'];
+  const grid = document.getElementById('formulaGrid');
+  grid.innerHTML = YZ.formulas.map((f, i) => {
+    const color = COLORS[i % COLORS.length];
+    const compsHTML = f.components.map((c, j) => `
+      ${j > 0 ? '<span class="yz-comp-arrow">→</span>' : ''}
+      <span class="yz-comp-pill">${c}</span>
+    `).join('');
+    return `
+      <div class="yz-formula-card">
+        <span class="yz-formula-code">${f.code}</span>
+        <div class="yz-formula-name">${f.name}</div>
+        <div class="yz-formula-pattern">${f.pattern}</div>
+        <div class="yz-formula-components">${compsHTML}</div>
+        ${f.summary ? `<div class="yz-formula-summary">${f.summary}</div>` : ''}
+        <div class="yz-formula-page">s.${f.p1}${f.p2 !== f.p1 ? '–'+f.p2 : ''}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── Techniques ──
+function buildTechniques() {
+  const grid = document.getElementById('techGrid');
+  grid.innerHTML = YZ.techniques.map(t => `
+    <div class="yz-tech-card">
+      <span class="yz-tech-code">${t.code}</span>
+      <div class="yz-tech-name">${t.name}</div>
+      <div class="yz-tech-summary">${t.summary}</div>
+      ${t.use ? `<div class="yz-tech-use">💡 ${t.use}</div>` : ''}
+      <div class="yz-tech-pages">s.${t.p1}${t.p2 !== t.p1 ? '–'+t.p2 : ''}</div>
+    </div>
+  `).join('');
+}
+
+// ── Tools ──
+let activeToolCat = 0;
+
+function buildTools() {
+  const filters = document.getElementById('toolFilters');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'yz-filter-btn active';
+  allBtn.textContent = `Tümü (${YZ.tools.length})`;
+  allBtn.dataset.cat = '0';
+  allBtn.onclick = function() { setToolFilter(0, this); };
+  filters.appendChild(allBtn);
+
+  YZ.toolCats.forEach(tc => {
+    const count = YZ.tools.filter(t => t.cat === tc.id).length;
+    if (!count) return;
+    const btn = document.createElement('button');
+    btn.className = 'yz-filter-btn';
+    btn.textContent = `${tc.title} (${count})`;
+    btn.dataset.cat = tc.id;
+    btn.onclick = function() { setToolFilter(tc.id, this); };
+    filters.appendChild(btn);
+  });
+
+  renderTools();
+}
+
+function setToolFilter(catId, btn) {
+  activeToolCat = catId;
+  document.querySelectorAll('.yz-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('toolSearch').value = '';
+  renderTools();
+}
+
+function filterTools() {
+  renderTools();
+}
+
+function renderTools() {
+  const q = document.getElementById('toolSearch').value.toLowerCase().trim();
+  const catMap = {};
+  YZ.toolCats.forEach(tc => catMap[tc.id] = tc.title);
+
+  let filtered = YZ.tools;
+  if (activeToolCat) filtered = filtered.filter(t => t.cat === activeToolCat);
+  if (q) filtered = filtered.filter(t =>
+    t.name.toLowerCase().includes(q) ||
+    (t.summary||'').toLowerCase().includes(q)
+  );
+
+  document.getElementById('toolCount').textContent = `${filtered.length} araç gösteriliyor`;
+  document.getElementById('toolGrid').innerHTML = filtered.map(t => `
+    <div class="yz-tool-card">
+      <div class="yz-tool-name">${t.name}</div>
+      <div class="yz-tool-cat">${catMap[t.cat] || '—'}</div>
+      <div class="yz-tool-summary">${t.summary}</div>
+      <div class="yz-tool-page">s.${t.page}</div>
+    </div>
+  `).join('');
+}
+
+// ── Prompt Seeds ──
+let activeSeedCat = 'all';
+
+function buildSeeds() {
+  const cats = document.getElementById('seedCats');
+  const catLabels = { all: 'Tümü', daily: '📅 Günlük', supportive: '🎭 Destekleyici', motivation: '🚀 Motivasyon' };
+
+  ['all','daily','supportive','motivation'].forEach(cat => {
+    const count = cat === 'all' ? YZ.seeds.length : YZ.seeds.filter(s => s.cat === cat).length;
+    const btn = document.createElement('button');
+    btn.className = 'yz-filter-btn' + (cat === 'all' ? ' active' : '');
+    btn.textContent = `${catLabels[cat] || cat} (${count})`;
+    btn.onclick = function() {
+      activeSeedCat = cat;
+      document.querySelectorAll('#seedCats .yz-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      renderSeeds();
+    };
+    cats.appendChild(btn);
+  });
+
+  renderSeeds();
+}
+
+function renderSeeds() {
+  const items = activeSeedCat === 'all' ? YZ.seeds : YZ.seeds.filter(s => s.cat === activeSeedCat);
+  document.getElementById('seedGrid').innerHTML = items.map((ps, i) => `
+    <div class="yz-seed-card" id="seed-${i}">
+      <button class="yz-copy-btn" onclick="copySeed(${i},event)" title="Kopyala">📋</button>
+      <div class="yz-seed-title">${ps.title}</div>
+      <div class="yz-seed-text">${ps.text}</div>
+      <div class="yz-seed-page">s.${ps.page}</div>
+    </div>
+  `).join('');
+}
+
+function copySeed(i, e) {
+  e.stopPropagation();
+  const items = activeSeedCat === 'all' ? YZ.seeds : YZ.seeds.filter(s => s.cat === activeSeedCat);
+  navigator.clipboard.writeText(items[i].text).then(() => {
+    const btn = document.querySelector(`#seed-${i} .yz-copy-btn`);
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = '📋', 1500);
+  });
+}
+
+// ── Flashcards ──
+let fcDeck = [];
+let fcIndex = 0;
+let fcFlipped = false;
+let activeDeck = 'all';
+
+function buildFlashcards() {
+  const sel = document.getElementById('deckSelector');
+  const decks = [...new Set(YZ.flashcards.map(f => f.deck))];
+  const deckLabels = { all: 'Tümü', glossary: '🔤 Sözlük', concept: '💡 Kavram' };
+
+  ['all', ...decks].forEach(deck => {
+    const count = deck === 'all' ? YZ.flashcards.length : YZ.flashcards.filter(f => f.deck === deck).length;
+    const btn = document.createElement('button');
+    btn.className = 'yz-filter-btn' + (deck === 'all' ? ' active' : '');
+    btn.textContent = `${deckLabels[deck] || deck} (${count})`;
+    btn.onclick = function() {
+      activeDeck = deck;
+      document.querySelectorAll('#deckSelector .yz-filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      loadDeck();
+    };
+    sel.appendChild(btn);
+  });
+
+  loadDeck();
+}
+
+function loadDeck() {
+  fcDeck = activeDeck === 'all' ? [...YZ.flashcards] : YZ.flashcards.filter(f => f.deck === activeDeck);
+  fcIndex = 0;
+  fcFlipped = false;
+  document.getElementById('fcCard').classList.remove('flipped');
+  updateCard();
+}
+
+function updateCard() {
+  if (!fcDeck.length) return;
+  const c = fcDeck[fcIndex];
+  document.getElementById('fcFrontText').textContent = c.front;
+  document.getElementById('fcBackText').textContent = c.back;
+  document.getElementById('fcPage').textContent = 's.' + c.page;
+  document.getElementById('fcCounter').textContent = `${fcIndex+1} / ${fcDeck.length}`;
+  if (fcFlipped) { fcFlipped = false; document.getElementById('fcCard').classList.remove('flipped'); }
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('fcCard').classList.toggle('flipped', fcFlipped);
+}
+
+function nextCard() {
+  fcIndex = (fcIndex + 1) % fcDeck.length;
+  fcFlipped = false;
+  document.getElementById('fcCard').classList.remove('flipped');
+  updateCard();
+}
+
+function prevCard() {
+  fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+  fcFlipped = false;
+  document.getElementById('fcCard').classList.remove('flipped');
+  updateCard();
+}
+
+function shuffleCards() {
+  for (let i = fcDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [fcDeck[i], fcDeck[j]] = [fcDeck[j], fcDeck[i]];
+  }
+  fcIndex = 0; fcFlipped = false;
+  document.getElementById('fcCard').classList.remove('flipped');
+  updateCard();
+}
+
+// ── Quiz ──
+let activeQuiz = null;
+let qIndex = 0;
+let qScore = 0;
+let qAnswered = false;
+let qQuestions = [];
+
+function buildQuizSelector() {
+  const sel = document.getElementById('quizSelector');
+  sel.innerHTML = YZ.quizzes.map(q => `
+    <button class="yz-quiz-sel-btn" onclick="startQuiz(${q.id}, this)">
+      <div>${q.title}</div>
+      <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:3px;font-weight:400">
+        ${YZ.questions.filter(qq => qq.quiz === q.id).length} soru
+      </div>
+    </button>
+  `).join('');
+}
+
+function startQuiz(quizId, btn) {
+  document.querySelectorAll('.yz-quiz-sel-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeQuiz = quizId;
+  qQuestions = YZ.questions.filter(qq => qq.quiz === quizId);
+  qIndex = 0; qScore = 0; qAnswered = false;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const area = document.getElementById('quizArea');
+  if (qIndex >= qQuestions.length) {
+    area.innerHTML = `
+      <div class="yz-quiz-score show">
+        <div class="yz-score-num">${qScore}/${qQuestions.length}</div>
+        <div class="yz-score-label" style="margin-top:8px">${getScoreMsg(qScore, qQuestions.length)}</div>
+        <button class="yz-btn yz-btn-primary" onclick="startQuiz(${activeQuiz}, document.querySelector('.yz-quiz-sel-btn.active'))" style="margin-top:20px">
+          Tekrar Dene
+        </button>
+      </div>`;
+    return;
+  }
+
+  const qq = qQuestions[qIndex];
+  const progress = ((qIndex) / qQuestions.length * 100).toFixed(0);
+
+  area.innerHTML = `
+    <div class="yz-quiz-container open">
+      <div class="yz-quiz-progress">
+        <span>${qIndex+1}/${qQuestions.length}</span>
+        <div class="yz-quiz-progress-bar"><div class="yz-quiz-progress-fill" style="width:${progress}%"></div></div>
+        <span>Puan: ${qScore}</span>
+      </div>
+      <div class="yz-question-text">${qq.q}</div>
+      <div class="yz-options" id="optionsArea">
+        ${qq.opts.map((o, i) => `
+          <button class="yz-option" onclick="answerQuiz(${i})">${o.text}</button>
+        `).join('')}
+      </div>
+      <div class="yz-explanation" id="quizExpl">💡 ${qq.explain} (s.${qq.page})</div>
+      <div style="display:none" id="nextBtnWrap">
+        <button class="yz-btn yz-btn-primary" onclick="nextQuestion()" style="margin-top:12px">
+          ${qIndex + 1 < qQuestions.length ? 'Sonraki Soru →' : 'Sonucu Gör →'}
+        </button>
+      </div>
+    </div>`;
+  qAnswered = false;
+}
+
+function answerQuiz(optIndex) {
+  if (qAnswered) return;
+  qAnswered = true;
+  const qq = qQuestions[qIndex];
+  const opts = document.querySelectorAll('.yz-option');
+  opts.forEach((btn, i) => {
+    btn.classList.add('disabled');
+    if (qq.opts[i].correct) btn.classList.add('correct');
+    else if (i === optIndex && !qq.opts[i].correct) btn.classList.add('wrong');
+  });
+  if (qq.opts[optIndex].correct) qScore++;
+  document.getElementById('quizExpl').classList.add('show');
+  document.getElementById('nextBtnWrap').style.display = 'block';
+}
+
+function nextQuestion() {
+  qIndex++;
+  renderQuestion();
+}
+
+function getScoreMsg(score, total) {
+  const pct = score / total;
+  if (pct >= 0.9) return '🏆 Harika! Konuya hakimsiniz.';
+  if (pct >= 0.7) return '👏 İyi iş! Biraz daha pratik yapabilirsiniz.';
+  if (pct >= 0.5) return '📚 Orta düzey. Tekrar etmenizi öneririz.';
+  return '💪 Devam edin! Kitabı tekrar gözden geçirin.';
+}
+
+// ── Ethics ──
+function buildEthics() {
+  const list = document.getElementById('ethicsList');
+  list.innerHTML = YZ.ethics.map((e, i) => `
+    <div class="yz-ethics-item" id="ethic-${i}" onclick="toggleEthic(${i})">
+      <div class="yz-ethics-check" id="check-${i}">✓</div>
+      <div class="yz-ethics-content">
+        <div class="yz-ethics-title">${e.order}. ${e.title}</div>
+        <div class="yz-ethics-desc">${e.desc}</div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--yz-blue);flex-shrink:0">s.${e.page}</div>
+    </div>
+  `).join('');
+  updateEthicsScore();
+}
+
+function toggleEthic(i) {
+  document.getElementById('ethic-' + i).classList.toggle('checked');
+  updateEthicsScore();
+}
+
+function updateEthicsScore() {
+  const total = YZ.ethics.length;
+  const checked = document.querySelectorAll('.yz-ethics-item.checked').length;
+  document.getElementById('ethicsScore').innerHTML =
+    `<span>${checked}</span>/${total} madde işaretlendi — ${checked === total ? '✅ Araç kullanıma hazır!' : checked >= total/2 ? '⚠️ Bazı maddeler eksik.' : '🔴 Daha fazlasını değerlendirin.'}`;
+}
+
+function resetEthics() {
+  document.querySelectorAll('.yz-ethics-item').forEach(el => el.classList.remove('checked'));
+  updateEthicsScore();
+}
+
+// ── Learning Paths ──
+function buildPaths() {
+  const icons = ['🚀','🎓','🔬','📊'];
+  const grid = document.getElementById('pathsGrid');
+  grid.innerHTML = YZ.paths.map((p, i) => `
+    <div class="yz-path-card">
+      <div class="yz-path-icon">${icons[i] || '📚'}</div>
+      <div class="yz-path-title">${p.title}</div>
+      <div class="yz-path-desc">${p.desc}</div>
+    </div>
+  `).join('');
+
+  const typeLabels = { matching:'Eşleştirme', drag_drop:'Sürükle-Bırak', sorting:'Sıralama', branching:'Dal-Budak' };
+  document.getElementById('gamesGrid').innerHTML = YZ.games.map(g => `
+    <div class="yz-game-card">
+      <span class="yz-game-type">${typeLabels[g.type] || g.type}</span>
+      <div class="yz-game-title">${g.title}</div>
+      <div class="yz-game-goal">🎯 ${g.goal}</div>
+      <div style="font-size:0.75rem;color:var(--text-secondary);margin-top:6px;line-height:1.4">⚙️ ${g.mechanics}</div>
+      <div style="font-size:0.75rem;color:var(--yz-green);margin-top:4px">🏆 ${g.win}</div>
+    </div>
+  `).join('');
+}
+
+// ── Init ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildChapterMap();
+  buildGlossary();
+  buildFormulas();
+  buildTechniques();
+  buildTools();
+  buildSeeds();
+  buildFlashcards();
+  buildQuizSelector();
+  buildEthics();
+  buildPaths();
+});
+
+// Keyboard nav for flashcards
+document.addEventListener('keydown', e => {
+  const fc = document.getElementById('tab-flashcard');
+  if (!fc || !fc.classList.contains('active')) return;
+  if (e.key === 'ArrowRight') nextCard();
+  else if (e.key === 'ArrowLeft') prevCard();
+  else if (e.key === ' ') { e.preventDefault(); flipCard(); }
+});
+  </script>
+</body>
+</html>
