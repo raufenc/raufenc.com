@@ -371,7 +371,7 @@ function setupJourney(){
     const toLoc=MAP_DATA.locations.find(l=>l.id===route.to);
 
     // Bilgi paneli güncelle — detay bilgi dahil
-    yearEl.textContent=route.ah_year+' H';
+    yearEl.textContent=route.ah_year+' H · '+(route.ah_year-194)+' yaşında';
     routeEl.innerHTML=`${fromLoc?fromLoc.name:'?'} <span class="arrow">→</span> ${toLoc?toLoc.name:'?'}`;
     descEl.textContent=ROUTE_DETAILS[route.label]||route.label;
     progEl.style.width=Math.round((state.step+1)/routes.length*100)+'%';
