@@ -536,7 +536,43 @@ function render(){
     admin:typeof screenAdmin==='function'?screenAdmin:screenWelcome};
   app.innerHTML=(screens[S.screen]||screenWelcome)();
   window.scrollTo({top:0,behavior:'smooth'});
+  pushRoute();
 }
+
+/* ═══════════════════════════════════════════════
+   URL ROUTING
+   ═══════════════════════════════════════════════ */
+function pushRoute(){
+  const map={
+    welcome:'#/',start:'#/start',quiz:'#/test/'+(S.testKey||''),
+    result:'#/result/'+(S.testKey||''),history:'#/history',about:'#/about',
+    profile:'#/profile',classDetail:'#/class/'+(S.classId||''),admin:'#/admin'
+  };
+  const h=map[S.screen]||'#/';
+  if(window.location.hash!==h) history.pushState(null,'',h);
+}
+
+function applyRoute(){
+  const hash=window.location.hash.replace(/^#\/?/,'');
+  const parts=(hash||'').split('/');
+  const seg0=parts[0]||'',seg1=parts[1]||'';
+  if(!seg0){S.screen='welcome';}
+  else if(seg0==='start'){S.screen='start';}
+  else if(seg0==='test'&&seg1&&typeof TESTS!=='undefined'&&TESTS[seg1]){
+    S.testKey=seg1;S.answers={};S.qi=0;S.scores=null;S.gemini=null;S.loadingGemini=false;S.screen='quiz';
+  }else if(seg0==='history'){S.screen='history';}
+  else if(seg0==='about'){S.screen='about';}
+  else if(seg0==='profile'){S.screen='profile';}
+  else if(seg0==='class'&&seg1){S.classId=seg1;S.screen='classDetail';}
+  else if(seg0==='admin'){S.screen='admin';}
+  else{S.screen='welcome';}
+  render();
+  if(S.screen==='profile')setTimeout(()=>{if(typeof isTeacher==='function'&&isTeacher())loadTeacherClasses();else loadStudentClasses();},100);
+  else if(S.screen==='classDetail')setTimeout(()=>{if(typeof loadClassDetail==='function')loadClassDetail(S.classId);},100);
+  else if(S.screen==='admin')setTimeout(()=>{if(typeof loadAdminPanel==='function')loadAdminPanel();},100);
+}
+
+window.addEventListener('popstate',applyRoute);
 
 /* ═══════════════════════════════════════════════
    WELCOME SCREEN
@@ -2588,7 +2624,7 @@ const TESTS_PART3 = {
 Object.assign(TESTS, TESTS_PART3);
 
 
-render();
+applyRoute();
 attachEvents();
 </script>
 <script src="firebase-app.js"></script>

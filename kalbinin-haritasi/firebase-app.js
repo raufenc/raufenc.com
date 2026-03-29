@@ -36,6 +36,15 @@ function initFirebase() {
         updateAuthUI();
         const m = document.getElementById('auth-modal');
         if (m) m.remove();
+        // Doğrudan URL ile gelinen auth gerektiren sayfalarda yeniden render
+        if (typeof S !== 'undefined' && ['profile','classDetail','admin'].includes(S.screen)) {
+          if (typeof render === 'function') {
+            render();
+            if (S.screen === 'profile') setTimeout(() => { if(isTeacher()) loadTeacherClasses(); else loadStudentClasses(); }, 100);
+            else if (S.screen === 'classDetail') setTimeout(() => loadClassDetail(S.classId), 100);
+            else if (S.screen === 'admin') setTimeout(loadAdminPanel, 100);
+          }
+        }
       } else {
         currentUser = null;
         userProfile = null;
