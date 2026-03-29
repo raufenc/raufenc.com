@@ -696,3 +696,91 @@ body {
     .card-desc { font-size: 0.75rem; }
     .card-actions button { font-size: 0.7rem; padding: 5px 0; }
 }
+
+/* ===== DASHBOARD ===== */
+.btn-dashboard {
+    background: var(--primary); color: #fff; border: none; padding: 6px 14px;
+    border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+}
+.btn-dashboard:hover { background: var(--primary-dark); }
+
+.dashboard-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    z-index: 2000; justify-content: center; align-items: flex-start; padding: 30px;
+    overflow-y: auto;
+}
+.dashboard-overlay.active { display: flex; }
+
+.dashboard-panel {
+    background: #fff; border-radius: 12px; width: 100%; max-width: 1200px;
+    box-shadow: var(--shadow-lg); padding: 24px; position: relative;
+}
+.dashboard-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; border-bottom: 2px solid var(--primary); padding-bottom: 12px;
+}
+.dashboard-header h2 { color: var(--primary); font-size: 1.3rem; }
+
+/* Summary stats */
+.dash-stats {
+    display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.dash-stat {
+    flex: 1; min-width: 100px; text-align: center; padding: 12px;
+    background: #f8f9fa; border-radius: 8px; border-left: 4px solid #adb5bd;
+}
+.dash-stat.uygun { border-left-color: #28a745; background: #f0fff4; }
+.dash-stat.uygun_degil { border-left-color: #dc3545; background: #fff5f5; }
+.dash-stat.beklemede { border-left-color: #6c757d; background: #f8f9fa; }
+.dash-stat-num { display: block; font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+.dash-stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Per-grade summary table */
+.dash-grade-table {
+    width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 0.85rem;
+}
+.dash-grade-table th {
+    background: var(--primary); color: #fff; padding: 8px 12px; text-align: left;
+}
+.dash-grade-table td { padding: 6px 12px; border-bottom: 1px solid #eee; }
+.dash-grade-table tr:hover td { background: #f8f9fa; }
+
+.dash-progress {
+    display: inline-block; width: 80px; height: 8px; background: #e9ecef;
+    border-radius: 4px; overflow: hidden; vertical-align: middle; margin-right: 6px;
+}
+.dash-progress-fill { height: 100%; background: var(--primary-light); border-radius: 4px; }
+
+/* Dashboard filters */
+.dashboard-filters {
+    display: flex; gap: 10px; align-items: center; margin-bottom: 12px; flex-wrap: wrap;
+}
+.dashboard-filters select {
+    padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px;
+    font-size: 0.85rem; background: #fff;
+}
+
+/* Detail table */
+.dashboard-table-wrap { overflow-x: auto; max-height: 500px; overflow-y: auto; }
+.dashboard-table {
+    width: 100%; border-collapse: collapse; font-size: 0.8rem; white-space: nowrap;
+}
+.dashboard-table th {
+    background: #f1f3f5; color: var(--text-primary); padding: 8px 10px;
+    text-align: left; position: sticky; top: 0; z-index: 1;
+    border-bottom: 2px solid #dee2e6;
+}
+.dashboard-table td {
+    padding: 6px 10px; border-bottom: 1px solid #f1f3f5;
+}
+.dashboard-table td:nth-child(4),
+.dashboard-table td:nth-child(5) { white-space: normal; max-width: 200px; }
+.dashboard-table td:nth-child(8) { white-space: normal; max-width: 150px; font-style: italic; color: #666; }
+.dashboard-table tr:hover td { background: #f8f9fa; }
+
+@media (max-width: 768px) {
+    .dashboard-panel { padding: 14px; margin: 10px; }
+    .dash-stats { gap: 8px; }
+    .dash-stat { min-width: 70px; padding: 8px; }
+    .dash-stat-num { font-size: 1.1rem; }
+}
