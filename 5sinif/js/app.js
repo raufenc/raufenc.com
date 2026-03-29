@@ -387,7 +387,7 @@ function createPlayer(playlistId) {
 
   // Create iframe manually with nocookie domain, then attach YT API
   container.innerHTML = `<iframe id="ytIframe"
-    src="https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&enablejsapi=1&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}"
+    src="https://www.youtube.com/embed/videoseries?list=${playlistId}&enablejsapi=1&rel=0&modestbranding=1&origin=${encodeURIComponent(window.location.origin)}"
     style="width:100%;height:100%;border:0;border-radius:10px"
     allow="autoplay; encrypted-media; picture-in-picture"
     allowfullscreen></iframe>`;

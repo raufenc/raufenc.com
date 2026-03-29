@@ -307,7 +307,7 @@ const MODLAR = [
 ];
 
 function getEmbedUrl(playlistId) {
-  return `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&enablejsapi=1&rel=0&modestbranding=1`;
+  return `https://www.youtube.com/embed/videoseries?list=${playlistId}&enablejsapi=1&rel=0&modestbranding=1`;
 }
 
 function getDers(slug) {
