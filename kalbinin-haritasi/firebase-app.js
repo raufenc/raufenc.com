@@ -605,8 +605,13 @@ async function loadClassDetail(classId) {
             <p class="text-sm font-semibold" style="color:var(--text-primary)">${s.name}</p>
             <span class="text-xs" style="color:var(--text-muted)">${Object.keys(s.tests).length}/17</span>
           </div>
-          ${Object.keys(s.tests).length > 0 ? `<div class="flex flex-wrap gap-1 mt-2">${Object.entries(s.tests).map(([k, v]) =>
-            `<span class="text-xs px-2 py-0.5 rounded" style="background:rgba(52,211,153,0.1);color:var(--emerald-light)">${TESTS[k]?.concepts?.fazilet||k} ${v.fazilet}%</span>`
+          ${Object.keys(s.tests).length > 0 ? `<div class="flex flex-wrap gap-2 mt-2">${Object.entries(s.tests).map(([k, v]) =>
+            `<span class="text-xs px-2 py-1 rounded" style="background:rgba(212,175,55,0.06);border:1px solid var(--border-gold)">
+              <span style="color:var(--gold-light);font-weight:600">${TESTS[k]?.concepts?.fazilet||k}</span>
+              <span class="ml-1 text-tefrit">${v.tefrit}%</span>
+              <span class="ml-1 text-fazilet" style="font-weight:700">${v.fazilet}%</span>
+              <span class="ml-1 text-ifrat">${v.ifrat}%</span>
+            </span>`
           ).join('')}</div>` : ''}
         </div>`).join('')}
     </div>`;
