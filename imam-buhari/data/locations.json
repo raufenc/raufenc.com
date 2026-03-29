@@ -1,0 +1,414 @@
+{
+  "meta": {
+    "title": "İmam-ı Buharî",
+    "subtitle": "Hadîs İlminin Güneşi",
+    "full_name": "Muhammed bin İsmâîl bin İbrâhîm bin Mugîre bin Berdizbeh el-Cu'fî el-Buhârî",
+    "kunya": "Ebû Abdullah",
+    "birth": "13 Şevvâl 194 H / 20 Temmuz 810 M",
+    "death": "Ramazan Bayramı Gecesi, 256 H / 1 Eylül 870 M",
+    "stats": {
+      "cities": 19,
+      "hadith_memorized": 600000,
+      "sahih_selected": 7275,
+      "years_compiling": 16,
+      "teachers": 1080,
+      "narrators": 90000
+    }
+  },
+  "periods": [
+    {
+      "id": "cocukluk",
+      "label": "Çocukluk ve İlk Eğitim",
+      "ah_range": "194-210 H",
+      "ce_range": "810-825 M",
+      "color": "#22c55e",
+      "description": "Buhara'da doğum, hadîs ezberlemeye başlama, 70.000'den fazla hadîs-i şerîf ezberi."
+    },
+    {
+      "id": "hicaz",
+      "label": "Hicaz Dönemi",
+      "ah_range": "210-216 H",
+      "ce_range": "825-831 M",
+      "color": "#c8a46e",
+      "description": "Hac seyahati, Mekke-i Mükerreme'de kalma, Medîne-i Münevvere'de Târîh-i Kebîr'i yazması."
+    },
+    {
+      "id": "irak",
+      "label": "Irak Seyahatleri",
+      "ah_range": "216-230 H",
+      "ce_range": "831-845 M",
+      "color": "#3b82f6",
+      "description": "Bağdat, Basra, Kûfe ve Vâsıt'ta hadîs tahsîli, Bağdat'ta 100 hadîs imtihanı."
+    },
+    {
+      "id": "misir_sam",
+      "label": "Mısır ve Şam",
+      "ah_range": "çeşitli ziyaretler",
+      "ce_range": "~830-850 M",
+      "color": "#a855f7",
+      "description": "Mısır'a iki kez seyahat, Dımaşk, Humus ve Askalân'da hadîs tahsîli."
+    },
+    {
+      "id": "horasan",
+      "label": "Horasan ve Doğu",
+      "ah_range": "230-250 H",
+      "ce_range": "845-864 M",
+      "color": "#f97316",
+      "description": "Nîşâbur'da 4.000 kişilik karşılama, Merv, Rey ve Belh'te ilim halkları."
+    },
+    {
+      "id": "son_donem",
+      "label": "Son Dönem",
+      "ah_range": "250-256 H",
+      "ce_range": "864-870 M",
+      "color": "#ef4444",
+      "description": "Buhara vâlisi ile anlaşmazlık, sürgün, Semerkand'a davet, Hartenk'te vefât."
+    }
+  ],
+  "locations": [
+    {
+      "id": "buhara",
+      "name": "Buhârâ",
+      "modern_name": "Buhara, Özbekistan",
+      "lat": 39.77,
+      "lon": 64.42,
+      "precision": "kesin",
+      "periods": ["cocukluk", "son_donem"],
+      "order": 1,
+      "significance": "major",
+      "events": [
+        {"ah_year": 194, "ce_year": 810, "title": "Doğum", "description": "13 Şevvâl 194 Hicrî, Cuma günü öğleden sonra Buhârâ'da dünyâya geldi.", "period": "cocukluk"},
+        {"ah_year": 204, "ce_year": 819, "title": "Hadîs Ezberlemeye Başlama", "description": "10 yaşında hadîs-i şerîf ezberlemeye başladı. Kısa sürede 70.000'den fazla hadîsi ezberledi.", "period": "cocukluk"},
+        {"ah_year": 209, "ce_year": 824, "title": "Abdullah bin Mübârek'in Eserlerini Ezberleme", "description": "15 yaşında Abdullah bin Mübârek ve Vekî bin Cerrâh'ın eserlerini ezberledi.", "period": "cocukluk"},
+        {"ah_year": 254, "ce_year": 868, "title": "Vâli ile Anlaşmazlık ve Sürgün", "description": "Buhârâ vâlisi Hâlid bin Ahmed'in özel ders talebini reddetti: 'İlmi, sultânın kapısına götürerek küçük düşürmem.' Buhârâ'dan sürgün edildi.", "period": "son_donem"}
+      ],
+      "detail_text": "İmâm-ı Buhârî hazretlerinin doğduğu ve ilk eğitimini aldığı şehir. Babası İsmâîl, tanınmış bir hadîs âlimi idi. Küçük yaşta babasını kaybetti. Annesi ve ağabeyi Ahmed ile birlikte yaşadı. Çocukluğunda bir hastalık sebebiyle gözlerini kaybetti; annesinin duâsı bereketiyle şifâ buldu."
+    },
+    {
+      "id": "mekke",
+      "name": "Mekke-i Mükerreme",
+      "modern_name": "Mekke, Suudi Arabistan",
+      "lat": 21.42,
+      "lon": 39.83,
+      "precision": "kesin",
+      "periods": ["hicaz"],
+      "order": 2,
+      "significance": "major",
+      "events": [
+        {"ah_year": 210, "ce_year": 825, "title": "Hac ve Mekke'de Kalma", "description": "Annesi ve ağabeyi Ahmed ile hacca gitti. Onlar döndü, kendisi Mekke'de kaldı.", "period": "hicaz"},
+        {"ah_year": 220, "ce_year": 835, "title": "Sahîh-i Buhârî'nin Yazımına Başlama", "description": "Mescid-i Harâm'da el-Câmiu's-Sahîh'i tasnîf etmeye başladı. Her hadîsten önce abdest alıp iki rekât namaz kıldı ve istihâre yaptı.", "period": "hicaz"}
+      ],
+      "detail_text": "Sahîh-i Buhârî'nin yazımına Mescid-i Harâm'da başladı. 600.000 hadîs-i şerîften seçim yaparak 16 yıl süren titiz bir çalışma yürüttü. Hocaları arasında Abdullah bin Zübeyr el-Humeydî ve Ebû Sâbit Muhammed bulunmaktadır."
+    },
+    {
+      "id": "medine",
+      "name": "Medîne-i Münevvere",
+      "modern_name": "Medine, Suudi Arabistan",
+      "lat": 24.47,
+      "lon": 39.61,
+      "precision": "kesin",
+      "periods": ["hicaz"],
+      "order": 3,
+      "significance": "major",
+      "events": [
+        {"ah_year": 212, "ce_year": 827, "title": "Târîh-i Kebîr'in Yazılması", "description": "18 yaşında Peygamber Efendimiz sallallâhü aleyhi ve sellemin kabr-i şerîflerinin yanında, mehtap ışığında Târîh-i Kebîr'i yazdı. Eseri üç kez gözden geçirdi.", "period": "hicaz"}
+      ],
+      "detail_text": "Hadîs râvîlerinin biyografilerini içeren Târîh-i Kebîr'i burada yazdı. Ravza-i Mutahhara'da Sahîh'in son tasnîfini de gerçekleştirdi. Hocaları arasında Abdülazîz el-Üveysî ve Mutarrif bin Abdullah vardır."
+    },
+    {
+      "id": "bagdat",
+      "name": "Bağdat",
+      "modern_name": "Bağdat, Irak",
+      "lat": 33.31,
+      "lon": 44.37,
+      "precision": "kesin",
+      "periods": ["irak"],
+      "order": 4,
+      "significance": "major",
+      "events": [
+        {"ah_year": 216, "ce_year": 831, "title": "100 Hadîs İmtihanı", "description": "Bağdat'ta 100 hadîs âlimi, isnâdları karıştırarak kendisini imtihan etti. Tüm hadîslerin doğru isnâdlarını tek tek düzeltti.", "period": "irak"}
+      ],
+      "detail_text": "İslâm dünyâsının ilim merkezi olan Bağdat'ta 100 hadîs âliminin karıştırdığı isnâdları doğru şekilde düzelterek büyük bir imtihandan geçti. Bu hâdise onun eşsiz hâfızasının delîlidir. Hocaları: Süreyc bin en-Nu'mân, Muhammed bin Îsâ et-Tabbâî."
+    },
+    {
+      "id": "basra",
+      "name": "Basra",
+      "modern_name": "Basra, Irak",
+      "lat": 30.51,
+      "lon": 47.81,
+      "precision": "kesin",
+      "periods": ["irak"],
+      "order": 5,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 218, "ce_year": 833, "title": "Basra'da Hadîs Tahsîli", "description": "Basra'da 1.000'den fazla âlime hitap ederek Basralı râvîlerin hadîslerini aktardı.", "period": "irak"}
+      ],
+      "detail_text": "Basra'da birçok muhaddis ile görüşerek hadîs topladı. Hocaları arasında Ebû Âsım en-Nebîl eş-Şeybânî ve Muhammed bin Abdullah el-Ensârî yer almaktadır."
+    },
+    {
+      "id": "kufe",
+      "name": "Kûfe",
+      "modern_name": "Necef yakınları, Irak",
+      "lat": 32.03,
+      "lon": 44.40,
+      "precision": "kesin",
+      "periods": ["irak"],
+      "order": 6,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 219, "ce_year": 834, "title": "Kûfe'de Hadîs Tahsîli", "description": "Kûfe'nin hadîs meclislerinde ilim tahsîl etti.", "period": "irak"}
+      ],
+      "detail_text": "Kûfe, Hz. Ali radıyallâhü anh döneminden beri önemli bir ilim merkeziydi. Hocası Ebû Nuaym Fadl bin Dükayn buradandır."
+    },
+    {
+      "id": "vasit",
+      "name": "Vâsıt",
+      "modern_name": "Vâsıt harabeleri, Irak",
+      "lat": 32.34,
+      "lon": 46.25,
+      "precision": "yaklasik",
+      "periods": ["irak"],
+      "order": 7,
+      "significance": "minor",
+      "events": [
+        {"ah_year": 220, "ce_year": 835, "title": "Vâsıt'ta Konaklama", "description": "Irak seyahatleri sırasında Vâsıt şehrinde de hadîs âlimleriyle görüştü.", "period": "irak"}
+      ],
+      "detail_text": "Bağdat ile Basra arasında önemli bir konaklama ve ilim noktası."
+    },
+    {
+      "id": "misir",
+      "name": "Mısır (Fustat)",
+      "modern_name": "Kahire, Mısır",
+      "lat": 30.04,
+      "lon": 31.24,
+      "precision": "kesin",
+      "periods": ["misir_sam"],
+      "order": 8,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 222, "ce_year": 837, "title": "Mısır'a İlk Seyahat", "description": "Hadîs tahsîli için Mısır'a gitti.", "period": "misir_sam"},
+        {"ah_year": 230, "ce_year": 845, "title": "Mısır'a İkinci Seyahat", "description": "İkinci kez Mısır'ı ziyâret ederek yeni râvîlerden hadîs topladı.", "period": "misir_sam"}
+      ],
+      "detail_text": "Mısır'ı iki kez ziyâret etti. Hocaları arasında Saîd bin Ebû Meryem ve Abdullah bin Sâlih bulunmaktadır."
+    },
+    {
+      "id": "dimask",
+      "name": "Dımaşk (Şam)",
+      "modern_name": "Şam, Suriye",
+      "lat": 33.51,
+      "lon": 36.29,
+      "precision": "kesin",
+      "periods": ["misir_sam"],
+      "order": 9,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 224, "ce_year": 839, "title": "Şam'da Hadîs Tahsîli", "description": "Dımaşk'ta Şâm bölgesinin muhaddislerinden hadîs dinledi.", "period": "misir_sam"}
+      ],
+      "detail_text": "Emevîler döneminden beri İslâm dünyâsının en önemli ilim merkezlerinden biri olan Dımaşk'ta hadîs tahsîl etti."
+    },
+    {
+      "id": "humus",
+      "name": "Humus",
+      "modern_name": "Humus, Suriye",
+      "lat": 34.73,
+      "lon": 36.72,
+      "precision": "kesin",
+      "periods": ["misir_sam"],
+      "order": 10,
+      "significance": "minor",
+      "events": [
+        {"ah_year": 225, "ce_year": 840, "title": "Humus'ta Hadîs Tahsîli", "description": "Şam bölgesindeki seyahatlerinde Humus'u da ziyâret etti.", "period": "misir_sam"}
+      ],
+      "detail_text": "Sahâbe-i kirâmdan pek çok zâtın yerleştiği bir şehir olması sebebiyle hadîs ilmi açısından önemli bir merkezdi."
+    },
+    {
+      "id": "askalan",
+      "name": "Askalân",
+      "modern_name": "Aşkelon, Filistin",
+      "lat": 31.67,
+      "lon": 34.57,
+      "precision": "kesin",
+      "periods": ["misir_sam"],
+      "order": 11,
+      "significance": "minor",
+      "events": [
+        {"ah_year": 225, "ce_year": 840, "title": "Askalân'da Hadîs Tahsîli", "description": "Filistin bölgesindeki hadîs âlimlerinden rivâyet topladı.", "period": "misir_sam"}
+      ],
+      "detail_text": "Akdeniz kıyısında, Mısır ile Şam arasındaki önemli bir konaklama noktası."
+    },
+    {
+      "id": "horasan_merkez",
+      "name": "Horasan",
+      "modern_name": "Kuzeydoğu İran / Türkmenistan",
+      "lat": 36.21,
+      "lon": 59.61,
+      "precision": "yaklasik",
+      "periods": ["horasan"],
+      "order": 12,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 232, "ce_year": 847, "title": "Horasan'a Dönüş", "description": "Uzun seyahatlerinden sonra doğduğu bölge olan Horasan'a döndü.", "period": "horasan"}
+      ],
+      "detail_text": "Ahmed bin Hanbel'in 'Horasan onun gibisini çıkarmamıştır' dediği topraklar. Horasan bölgesi, İmâm-ı Buhârî'nin vatanıdır."
+    },
+    {
+      "id": "nisabur",
+      "name": "Nîşâbur",
+      "modern_name": "Nişabur, İran",
+      "lat": 36.21,
+      "lon": 58.80,
+      "precision": "kesin",
+      "periods": ["horasan"],
+      "order": 13,
+      "significance": "major",
+      "events": [
+        {"ah_year": 250, "ce_year": 864, "title": "4.000 Kişilik Karşılama", "description": "Nîşâbur'a gelişinde 4.000 kişi tarafından karşılandı. Büyük bir ilim halkası oluşturdu.", "period": "horasan"}
+      ],
+      "detail_text": "Müslim bin Haccâc (Sahîh-i Müslim'in müellifi) burada İmâm-ı Buhârî'nin alnından öpüp 'Ey üstâdların üstâdı!' demiştir. Hocaları: Yahyâ bin Yahyâ, Muhammed bin Yahyâ."
+    },
+    {
+      "id": "merv",
+      "name": "Merv",
+      "modern_name": "Mary, Türkmenistan",
+      "lat": 37.67,
+      "lon": 62.19,
+      "precision": "kesin",
+      "periods": ["horasan"],
+      "order": 14,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 235, "ce_year": 850, "title": "Merv'de Hadîs Tahsîli", "description": "İpek Yolu üzerindeki bu kadîm şehirde hadîs meclislerine katıldı.", "period": "horasan"}
+      ],
+      "detail_text": "İpek Yolu'nun en önemli duraklarından biri olan Merv, aynı zamanda hadîs ilminin merkez noktalarından biriydi."
+    },
+    {
+      "id": "rey",
+      "name": "Rey",
+      "modern_name": "Tahran yakınları, İran",
+      "lat": 35.60,
+      "lon": 51.45,
+      "precision": "kesin",
+      "periods": ["horasan"],
+      "order": 15,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 237, "ce_year": 851, "title": "Rey'de Hadîs Tahsîli", "description": "İran'ın batısındaki Rey şehrinde de hadîs âlimleriyle görüştü.", "period": "horasan"}
+      ],
+      "detail_text": "Günümüzde Tahran'ın bir mahallesi olan Rey, o dönemde bağımsız ve önemli bir ilim merkeziydi."
+    },
+    {
+      "id": "belh",
+      "name": "Belh",
+      "modern_name": "Belh, Afganistan",
+      "lat": 36.76,
+      "lon": 66.90,
+      "precision": "kesin",
+      "periods": ["horasan"],
+      "order": 16,
+      "significance": "standard",
+      "events": [
+        {"ah_year": 240, "ce_year": 854, "title": "Belh'te İlim Halkası", "description": "Kadîm ilim şehri Belh'te hadîs meclisi kurdu.", "period": "horasan"}
+      ],
+      "detail_text": "İslâm medeniyetinin doğu sınırındaki en önemli ilim merkezlerinden biri. Pek çok büyük âlimin yetiştiği topraklar."
+    },
+    {
+      "id": "kayseriyye",
+      "name": "Kayseriyye",
+      "modern_name": "Filistin bölgesi",
+      "lat": 32.50,
+      "lon": 34.89,
+      "precision": "yaklasik",
+      "periods": ["misir_sam"],
+      "order": 10.5,
+      "significance": "minor",
+      "events": [
+        {"ah_year": 226, "ce_year": 841, "title": "Kayseriyye'de Konaklama", "description": "Şam ve Filistin seyahatleri sırasında Kayseriyye'yi de ziyâret etti.", "period": "misir_sam"}
+      ],
+      "detail_text": "Akdeniz kıyısındaki kadîm şehir. Filistin bölgesindeki hadîs rivâyet merkezlerinden biri."
+    },
+    {
+      "id": "semerkand",
+      "name": "Semerkand",
+      "modern_name": "Semerkand, Özbekistan",
+      "lat": 39.65,
+      "lon": 66.96,
+      "precision": "kesin",
+      "periods": ["son_donem"],
+      "order": 18,
+      "significance": "major",
+      "events": [
+        {"ah_year": 256, "ce_year": 870, "title": "Semerkand'a Davet", "description": "Buhârâ'dan sürgün edildikten sonra Semerkandlılar onu dâvet etti.", "period": "son_donem"}
+      ],
+      "detail_text": "Buhârâ'dan ayrıldıktan sonra Semerkand halkının dâvetiyle buraya yöneldi. Ancak farklı görüşlerin olduğunu öğrenince Hartenk köyüne yerleşti."
+    },
+    {
+      "id": "hartenk",
+      "name": "Hartenk",
+      "modern_name": "Hartenk köyü, Semerkand yakınları, Özbekistan",
+      "lat": 39.50,
+      "lon": 66.50,
+      "precision": "yaklasik",
+      "periods": ["son_donem"],
+      "order": 19,
+      "significance": "major",
+      "events": [
+        {"ah_year": 256, "ce_year": 870, "title": "Vefât", "description": "Ramazan bayramı gecesi, 62 yaşında Hakk'ın rahmetine kavuştu. Kabr-i şerîfi buradadır.", "period": "son_donem"}
+      ],
+      "detail_text": "Semerkand'a 72 km mesâfedeki Hartenk köyünde akrabâlarının yanına yerleşti. Buhârâ'dan ayrıldıktan kısa süre sonra hastalandı ve burada vefât etti. Kabr-i şerîfinden günlerce misk kokusu yayıldığı rivâyet edilmiştir."
+    }
+  ],
+  "routes": [
+    {"from": "buhara", "to": "mekke", "period": "hicaz", "ah_year": 210, "label": "Hacca Çıkış", "waypoints": [[39.77,64.42],[37.0,58.0],[33.5,48.0],[30.0,44.0],[25.0,42.0],[21.42,39.83]]},
+    {"from": "mekke", "to": "medine", "period": "hicaz", "ah_year": 211, "label": "Medîne'ye Geçiş", "waypoints": [[21.42,39.83],[24.47,39.61]]},
+    {"from": "medine", "to": "bagdat", "period": "irak", "ah_year": 216, "label": "Irak Seyahati", "waypoints": [[24.47,39.61],[28.0,42.0],[33.31,44.37]]},
+    {"from": "bagdat", "to": "basra", "period": "irak", "ah_year": 218, "label": "Basra'ya", "waypoints": [[33.31,44.37],[32.0,45.5],[30.51,47.81]]},
+    {"from": "basra", "to": "kufe", "period": "irak", "ah_year": 219, "label": "Kûfe'ye", "waypoints": [[30.51,47.81],[31.5,46.0],[32.03,44.40]]},
+    {"from": "kufe", "to": "vasit", "period": "irak", "ah_year": 220, "label": "Vâsıt'a", "waypoints": [[32.03,44.40],[32.2,45.3],[32.34,46.25]]},
+    {"from": "vasit", "to": "misir", "period": "misir_sam", "ah_year": 222, "label": "Mısır'a İlk Seyahat", "waypoints": [[32.34,46.25],[33.0,44.0],[32.0,38.0],[31.0,34.0],[30.04,31.24]]},
+    {"from": "misir", "to": "askalan", "period": "misir_sam", "ah_year": 225, "label": "Filistin'e", "waypoints": [[30.04,31.24],[31.0,33.0],[31.67,34.57]]},
+    {"from": "askalan", "to": "dimask", "period": "misir_sam", "ah_year": 224, "label": "Şam'a", "waypoints": [[31.67,34.57],[32.5,35.5],[33.51,36.29]]},
+    {"from": "dimask", "to": "humus", "period": "misir_sam", "ah_year": 225, "label": "Humus'a", "waypoints": [[33.51,36.29],[34.73,36.72]]},
+    {"from": "humus", "to": "horasan_merkez", "period": "horasan", "ah_year": 232, "label": "Horasan'a Dönüş", "waypoints": [[34.73,36.72],[35.0,44.0],[35.5,51.0],[36.21,59.61]]},
+    {"from": "horasan_merkez", "to": "nisabur", "period": "horasan", "ah_year": 250, "label": "Nîşâbur'a", "waypoints": [[36.21,59.61],[36.21,58.80]]},
+    {"from": "nisabur", "to": "merv", "period": "horasan", "ah_year": 235, "label": "Merv'e", "waypoints": [[36.21,58.80],[37.0,60.5],[37.67,62.19]]},
+    {"from": "merv", "to": "belh", "period": "horasan", "ah_year": 240, "label": "Belh'e", "waypoints": [[37.67,62.19],[37.5,64.5],[36.76,66.90]]},
+    {"from": "horasan_merkez", "to": "rey", "period": "horasan", "ah_year": 237, "label": "Rey'e", "waypoints": [[36.21,59.61],[35.9,55.5],[35.60,51.45]]},
+    {"from": "buhara", "to": "semerkand", "period": "son_donem", "ah_year": 256, "label": "Sürgün Sonrası", "waypoints": [[39.77,64.42],[39.7,65.7],[39.65,66.96]]},
+    {"from": "semerkand", "to": "hartenk", "period": "son_donem", "ah_year": 256, "label": "Hartenk'e Yerleşme", "waypoints": [[39.65,66.96],[39.50,66.50]]}
+  ],
+  "timeline_events": [
+    {"ah_year": 194, "ce_year": 810, "title": "Buhârâ'da Doğum", "location": "buhara", "period": "cocukluk", "description": "13 Şevvâl 194, Cuma öğleden sonra dünyâya geldi.", "icon": "star"},
+    {"ah_year": 196, "ce_year": 812, "title": "Babasının Vefâtı", "location": "buhara", "period": "cocukluk", "description": "Küçük yaşta babasını kaybetti; annesi ve ağabeyi Ahmed ile büyüdü.", "icon": "heart"},
+    {"ah_year": 198, "ce_year": 814, "title": "Gözlerinin Şifâ Bulması", "location": "buhara", "period": "cocukluk", "description": "Hastalık sebebiyle gözlerini kaybetti. Annesinin duâsı bereketiyle mûcizevî şekilde şifâ buldu.", "icon": "eye"},
+    {"ah_year": 204, "ce_year": 819, "title": "Hadîs Ezberlemeye Başlama", "location": "buhara", "period": "cocukluk", "description": "10 yaşında hadîs-i şerîf ezberlemeye başladı.", "icon": "book"},
+    {"ah_year": 209, "ce_year": 824, "title": "70.000+ Hadîs Ezberi", "location": "buhara", "period": "cocukluk", "description": "15 yaşına geldiğinde 70.000'den fazla hadîsi isnâdlarıyla ezberlemiş bulunuyordu.", "icon": "brain"},
+    {"ah_year": 210, "ce_year": 825, "title": "Hac Seyahati", "location": "mekke", "period": "hicaz", "description": "Annesi ve ağabeyi ile hacca gitti. Onlar döndü, kendisi Mekke'de kaldı.", "icon": "kaaba"},
+    {"ah_year": 212, "ce_year": 827, "title": "Târîh-i Kebîr'in Yazılması", "location": "medine", "period": "hicaz", "description": "18 yaşında, Peygamber Efendimiz sallallâhü aleyhi ve sellemin kabr-i şerîfinin yanında mehtap ışığında bu eseri yazdı.", "icon": "pen"},
+    {"ah_year": 216, "ce_year": 831, "title": "Bağdat'ta Büyük İmtihan", "location": "bagdat", "period": "irak", "description": "100 hadîs âliminin karıştırdığı isnâdları tek tek düzelterek eşsiz hâfızasını ispatladı.", "icon": "trophy"},
+    {"ah_year": 220, "ce_year": 835, "title": "Sahîh-i Buhârî'ye Başlama", "location": "mekke", "period": "hicaz", "description": "Mescid-i Harâm'da el-Câmiu's-Sahîh'i tasnîf etmeye başladı.", "icon": "scroll"},
+    {"ah_year": 222, "ce_year": 837, "title": "Mısır'a İlk Seyahat", "location": "misir", "period": "misir_sam", "description": "Hadîs tahsîli için Mısır'a seyahat etti.", "icon": "travel"},
+    {"ah_year": 224, "ce_year": 839, "title": "Şam'da Hadîs Tahsîli", "location": "dimask", "period": "misir_sam", "description": "Dımaşk'ta Şâm bölgesinin muhaddislerinden ilim aldı.", "icon": "mosque"},
+    {"ah_year": 236, "ce_year": 851, "title": "Sahîh-i Buhârî'nin Tamamlanması", "location": "medine", "period": "hicaz", "description": "16 yıl süren titiz çalışma sonucunda 600.000 hadîsten 7.275 sahîh hadîs seçilerek eser tamamlandı.", "icon": "check"},
+    {"ah_year": 250, "ce_year": 864, "title": "Nîşâbur'da 4.000 Kişilik Karşılama", "location": "nisabur", "period": "horasan", "description": "Nîşâbur'a geldiğinde 4.000 kişi tarafından karşılandı. Müslim bin Haccâc alnından öptü.", "icon": "people"},
+    {"ah_year": 254, "ce_year": 868, "title": "Buhârâ'dan Sürgün", "location": "buhara", "period": "son_donem", "description": "Vâli Hâlid bin Ahmed'in özel ders talebini reddetti: 'İlmi sultânın kapısına götürerek küçük düşürmem.' Buhârâ'dan sürgün edildi.", "icon": "exile"},
+    {"ah_year": 256, "ce_year": 870, "title": "Vefât", "location": "hartenk", "period": "son_donem", "description": "Ramazan bayramı gecesi, 62 yaşında Hartenk köyünde Hakk'ın rahmetine kavuştu. Kabr-i şerîfinden günlerce misk kokusu yayıldı.", "icon": "moon"}
+  ],
+  "works": [
+    {"title": "el-Câmiu's-Sahîh (Sahîh-i Buhârî)", "description": "600.000 hadîsten seçilen 7.275 sahîh hadîs. 97 kitap, 3.450 bâb. Kur'ân-ı Kerîm'den sonra en sahîh kitap olarak kabul edilir. 16 yılda tamamlanmıştır.", "icon": "book-gold"},
+    {"title": "et-Târîhu'l-Kebîr", "description": "Hadîs râvîlerinin biyografilerini içeren ansiklopedik eser. 18 yaşında Medîne'de yazılmış, üç kez gözden geçirilmiştir.", "icon": "scroll"},
+    {"title": "et-Târîhu'l-Evsât", "description": "Târîh-i Kebîr'in orta hacimli versiyonu.", "icon": "scroll"},
+    {"title": "et-Târîhu's-Sagîr", "description": "Târîh-i Kebîr'in özet versiyonu.", "icon": "scroll"},
+    {"title": "el-Edebü'l-Müfred", "description": "Ahlâk ve edep konulu hadîs-i şerîflerin müstakil derlemesi.", "icon": "feather"},
+    {"title": "Halku Ef'âli'l-İbâd", "description": "Cehmiyye mezhebine reddiye olarak yazılan akâid eseri.", "icon": "shield"}
+  ],
+  "sources": [
+    {"title": "Siyeru A'lâmi'n-Nübelâ", "author": "Zehebî", "type": "biyografi"},
+    {"title": "Tehzîbü't-Tehzîb", "author": "İbn Hacer el-Askalânî", "type": "biyografi"},
+    {"title": "Umdetü'l-Kârî", "author": "Bedrüddîn el-Aynî", "type": "şerh"},
+    {"title": "İrşâdü's-Sârî", "author": "Kastallânî", "type": "şerh"},
+    {"title": "Fethü'l-Bârî", "author": "İbn Hacer el-Askalânî", "type": "şerh"},
+    {"title": "el-Kevâkibü'd-Derârî", "author": "Kirmânî", "type": "şerh"},
+    {"title": "Tecrîdü's-Sarîh", "author": "Zeynüddîn Ahmed ez-Zebîdî", "type": "muhtasar"},
+    {"title": "Rehber İnsanlar — İmam-ı Buhârî", "author": "Türkiye Gazetesi", "type": "kaynak"}
+  ]
+}

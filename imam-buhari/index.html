@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İmam-ı Buharî - Hadîs İlminin Güneşi | İnteraktif Harita Biyografisi</title>
+<meta name="description" content="İmam-ı Buharî hazretlerinin hayatı, seyahatleri ve eserleri. 19 şehir, 600.000 hadîs, 7.275 sahîh hadîs. İnteraktif harita ve zaman çizelgesi ile keşfedin.">
+<meta property="og:title" content="İmam-ı Buharî - Hadîs İlminin Güneşi">
+<meta property="og:description" content="İmam-ı Buharî hazretlerinin hayatını interaktif harita ve zaman çizelgesi ile keşfedin.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- Design System -->
+<link rel="stylesheet" href="/lib/design-system/tokens.css">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Project Styles -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">194 - 256 H &nbsp;/&nbsp; 810 - 870 M</div>
+    <h1>İmam-ı Buharî</h1>
+    <p class="hero-subtitle">Hadîs İlminin Güneşi</p>
+    <p class="hero-name">Muhammed bin İsmâîl bin İbrâhîm el-Buhârî <span>rahmetullâhi aleyh</span></p>
+    <p class="hero-intro">
+      Hadîs-i şerîf ilminde en büyük otorite kabul edilen İmâm-ı Buhârî hazretleri,
+      46 yıl boyunca İslâm coğrafyasının dört bir yanını dolaşarak
+      1.080'den fazla hocadan 600.000 hadîs-i şerîf topladı ve bunlardan
+      7.275 sahîh hadîsi seçerek Kur'ân-ı Kerîm'den sonra en sahîh kitap olan
+      el-Câmiu's-Sahîh'i meydana getirdi.
+    </p>
+
+    <!-- Animated Stats -->
+    <div class="hero-stats" id="hero-stats">
+      <div class="stat">
+        <div class="stat-num" data-target="19">0</div>
+        <div class="stat-label">Şehir</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="600000" data-suffix="+">0</div>
+        <div class="stat-label">Hadîs Ezberi</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="7275">0</div>
+        <div class="stat-label">Sahîh Hadîs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="16">0</div>
+        <div class="stat-label">Yıl Tasnîf</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-target="1080" data-suffix="+">0</div>
+        <div class="stat-label">Hoca</div>
+      </div>
+    </div>
+
+    <!-- Hadith Funnel -->
+    <div class="funnel-container" id="funnel">
+      <div class="funnel-title">Hadîs Süzgeci</div>
+      <div class="funnel-visual">
+        <div class="funnel-bar funnel-bar-1">
+          <span class="funnel-num">600.000</span>
+          <span class="funnel-lbl">Ezberlenmiş Hadîs</span>
+        </div>
+        <div class="funnel-bar funnel-bar-2">
+          <span class="funnel-num">7.275</span>
+          <span class="funnel-lbl">Sahîh-i Buhârî'ye Seçilen</span>
+        </div>
+      </div>
+      <p class="funnel-note">Her hadîs için abdest alıp iki rekât namaz kılarak ve istihâre yaparak seçim yaptı.</p>
+    </div>
+
+    <!-- Scroll CTA -->
+    <a href="#map-section" class="hero-scroll" aria-label="Haritaya git">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════ NAV TABS ═══════════ -->
+<nav class="section-nav" id="section-nav">
+  <a href="#map-section" class="active">Harita</a>
+  <a href="#timeline">Zaman Çizelgesi</a>
+  <a href="#works">Eserleri</a>
+  <a href="#sources">Kaynaklar</a>
+</nav>
+
+<!-- ═══════════ MAP ═══════════ -->
+<section id="map-section">
+  <div class="map-controls">
+    <div class="filter-group">
+      <label for="period-filter">Dönem</label>
+      <select id="period-filter">
+        <option value="all">Tüm Dönemler</option>
+      </select>
+    </div>
+    <div class="filter-group search-box">
+      <span class="search-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </span>
+      <input type="text" id="search-input" placeholder="Şehir ara..." autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+    <div class="filter-count" id="filter-count">19 / 19 lokasyon</div>
+
+    <!-- Journey Animation Controls -->
+    <div class="journey-controls" id="journey-controls">
+      <button id="journey-play" class="jc-btn" title="Yolculuğu İzle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span>Yolculuğu İzle</span>
+      </button>
+      <button id="journey-pause" class="jc-btn hidden" title="Duraklat">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+      <button id="journey-reset" class="jc-btn hidden" title="Sıfırla">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </button>
+      <select id="journey-speed" class="jc-speed hidden">
+        <option value="1">1x</option>
+        <option value="2" selected>2x</option>
+        <option value="4">4x</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="map-wrapper">
+    <div id="map"></div>
+
+    <!-- Legend -->
+    <div class="legend-panel" id="legend">
+      <div class="legend-title">Dönemler</div>
+      <div id="legend-items"></div>
+      <div class="legend-sep"></div>
+      <div class="legend-row">
+        <span class="legend-dot pulsing" style="background:#22c55e"></span>
+        <span>Doğum Yeri</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-dot pulsing" style="background:#ef4444"></span>
+        <span>Vefât Yeri</span>
+      </div>
+      <div class="legend-row">
+        <span class="legend-line"></span>
+        <span>Seyahat Rotası</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Panel -->
+  <div class="overlay" id="overlay"></div>
+  <div class="detail-panel" id="detail-panel">
+    <button class="detail-close" id="detail-close" aria-label="Kapat">&times;</button>
+    <div id="detail-content"></div>
+  </div>
+
+  <!-- Journey Info -->
+  <div class="journey-info hidden" id="journey-info">
+    <div class="ji-year" id="ji-year"></div>
+    <div class="ji-label" id="ji-label"></div>
+  </div>
+</section>
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<section id="timeline">
+  <h2 class="section-title">Zaman Çizelgesi</h2>
+  <p class="section-sub">Buhârâ'dan Hartenk'e, 62 yıllık bereketli ömür</p>
+  <div class="timeline-wrap" id="timeline-wrap"></div>
+</section>
+
+<!-- ═══════════ WORKS ═══════════ -->
+<section id="works">
+  <h2 class="section-title">Eserleri</h2>
+  <p class="section-sub">23'ten fazla eser bırakmıştır; başlıcaları</p>
+  <div class="works-grid" id="works-grid"></div>
+</section>
+
+<!-- ═══════════ SOURCES ═══════════ -->
+<section id="sources">
+  <h2 class="section-title">Kaynaklar</h2>
+  <p class="section-sub">Başvurulan temel eserler</p>
+  <div class="sources-grid" id="sources-grid"></div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <p>
+    <a href="/">raufenc.com</a> &mdash;
+    Kaynak: Türkiye Gazetesi, Rehber İnsanlar Serisi
+  </p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/nav.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
