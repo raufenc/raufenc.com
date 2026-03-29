@@ -186,6 +186,9 @@ function renderMarkers(){
       dashArray:loc.precision==='yaklasik'?'4,3':null
     }).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
+    if(loc.significance==='major'||loc.significance==='standard'){
+      m.bindTooltip(loc.name,{permanent:true,className:'map-label',direction:'top',offset:[0,-r-2]});
+    }
     m.on('click',()=>m.openPopup());
     m.locData=loc;
     markers[loc.id]=m;
