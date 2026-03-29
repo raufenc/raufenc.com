@@ -16,7 +16,7 @@ const FIREBASE_CONFIG = {
     appId: "1:664426174738:web:d0cdd4fcd0f097aa22fbcb"
 };
 
-const DATA_VERSION = 'v4'; // v4: unique keys (sinif_gorselId) fix duplicate ID bug
+const DATA_VERSION = 'v5'; // v5: 210 yeniden üretilen görsel güncellendi (2026-03-30)
 
 let db = null; // Firebase ref
 let allImages = [];
