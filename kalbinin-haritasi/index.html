@@ -557,20 +557,18 @@ function screenWelcome(){
     <h2 class="font-display text-2xl sm:text-4xl font-semibold mb-6 fade-in-delay-2" style="color:var(--text-primary);opacity:0.85">Ahlak Pusulası</h2>
 
     <p class="text-base sm:text-lg max-w-xl mb-6 leading-relaxed fade-in-delay-3" style="color:var(--text-secondary)">
-      İçindeki uçurumlar ve doruklar... 17 farklı testte kalbine ayna tut, nefsini tanı, hakikate yürü.
+      Hoş geldin. Burada seni yargılayan yok, puan veren bir sınav da yok.<br>
+      Sadece 17 küçük ayna var — her biri kalbinin bir köşesini gösteriyor.<br>
+      Hazırsan, kendine dürüstçe bakmaya başlayalım.
     </p>
 
-    <div class="card max-w-lg mx-auto mb-8 fade-in-delay-3" style="padding:1.25rem 1.5rem;text-align:left">
-      <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sosyal Model</p>
-      <p class="text-sm leading-relaxed" style="color:var(--text-secondary)">
-        Finansal risk analizi tablolarından ilham alan bu model, ahlâkî eğilimleri <strong style="color:var(--gold-light)">ölçülebilir</strong> hâle getirir. Her erdem üç eksende — eksiklik, denge ve aşırılık — puanlanır. Deterministik skorlama sayesinde zaman içindeki değişimini takip eder, sana <strong style="color:var(--gold-light)">içgörü</strong> sağlar.
-      </p>
-      <button class="text-xs mt-2 transition-colors" style="color:var(--gold);opacity:0.7" data-action="goAbout">Model Hakkında →</button>
-    </div>
-
     <button class="btn btn-gold text-lg py-4 px-12 fade-in-delay-3" data-action="goStart">
-      Yolculuğa Başla
+      Başlayalım
     </button>
+
+    <div class="max-w-md mx-auto mt-10 fade-in-delay-3" style="text-align:center">
+      <button class="text-xs transition-colors" style="color:var(--text-muted);opacity:0.5" data-action="goAbout">Bu proje nasıl çalışıyor? →</button>
+    </div>
     ${progressText}
   </div>`;
 }
