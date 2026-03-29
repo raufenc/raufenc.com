@@ -315,7 +315,7 @@ function setupDetailPanel(){
 /* ═══════════ SINEMATIK YOLCULUK ═══════════ */
 function setupJourney(){
   const playBtn=document.getElementById('j-play'),pauseBtn=document.getElementById('j-pause'),resetBtn=document.getElementById('j-reset'),speedSel=document.getElementById('j-speed');
-  const panel=document.getElementById('j-panel'),yearEl=document.getElementById('jp-year'),routeEl=document.getElementById('jp-route'),descEl=document.getElementById('jp-desc'),progEl=document.getElementById('jp-progress');
+  const panel=document.getElementById('j-panel'),yearEl=document.getElementById('jp-year'),routeEl=document.getElementById('jp-route'),descEl=document.getElementById('jp-desc'),progEl=document.getElementById('jp-progress'),legend=document.getElementById('legend');
   let state={playing:false,paused:false,step:0,timer:null,drawn:[],movMarker:null};
 
   playBtn.addEventListener('click',()=>{
@@ -323,7 +323,7 @@ function setupJourney(){
     resetVisuals();state.playing=true;state.paused=false;state.step=0;
     playBtn.classList.add('hidden');pauseBtn.classList.remove('hidden');resetBtn.classList.remove('hidden');speedSel.classList.remove('hidden');
     routeLayers.forEach(rl=>map.removeLayer(rl));
-    panel.classList.add('show');
+    panel.classList.add('show');legend.classList.add('hidden');
     animateStep();
   });
   pauseBtn.addEventListener('click',()=>{state.paused=true;state.playing=false;clearTimeout(state.timer);pauseBtn.classList.add('hidden');playBtn.classList.remove('hidden');playBtn.textContent='▶ Devam';});
@@ -331,7 +331,7 @@ function setupJourney(){
     state.playing=false;state.paused=false;clearTimeout(state.timer);resetVisuals();
     routeLayers.forEach(rl=>{if(activePeriod==='all'||rl.routeData.period===activePeriod)rl.addTo(map);});
     playBtn.classList.remove('hidden');playBtn.innerHTML='▶ <span>Seyahati İzle</span>';
-    pauseBtn.classList.add('hidden');resetBtn.classList.add('hidden');speedSel.classList.add('hidden');panel.classList.remove('show');
+    pauseBtn.classList.add('hidden');resetBtn.classList.add('hidden');speedSel.classList.add('hidden');panel.classList.remove('show');legend.classList.remove('hidden');
   });
 
   function resetVisuals(){state.drawn.forEach(l=>map.removeLayer(l));state.drawn=[];if(state.movMarker){map.removeLayer(state.movMarker);state.movMarker=null;}}
@@ -363,7 +363,7 @@ function setupJourney(){
     if(state.step>=routes.length){
       yearEl.textContent='256 H / 870 M';routeEl.innerHTML='Yolculuk Tamamlandı';
       descEl.textContent='Ramazan bayramı gecesi, 62 yaşında Hartenk köyünde Hakk\'ın rahmetine kavuştu. Kabr-i şerîfinden günlerce misk kokusu yayıldı.';
-      progEl.style.width='100%';state.playing=false;pauseBtn.classList.add('hidden');playBtn.classList.add('hidden');return;
+      progEl.style.width='100%';state.playing=false;pauseBtn.classList.add('hidden');playBtn.classList.add('hidden');legend.classList.remove('hidden');return;
     }
     const route=routes[state.step];const color=PERIOD_COLORS[route.period]||'#d4a853';
     const speed=parseInt(speedSel.value)||2;const dur=2500/speed;
