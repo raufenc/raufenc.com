@@ -61,6 +61,7 @@ const CONFIG = {
 // ============================================================
 
 const PENDING_KEY = 'beklemede';
+const PAGE_SIZE = 48;
 
 let db = null;
 let allItems = [];
@@ -70,6 +71,8 @@ let currentFilter = { group: 'all', status: 'all' };
 let currentModalIndex = -1;
 let useFirebase = false;
 let actionBusy = false;
+let renderedCount = 0;
+let loadMoreObserver = null;
 const keysHeld = new Set();
 
 // ===== INIT =====
@@ -201,40 +204,74 @@ function applyFilter() {
     updateStats();
 }
 
-function renderGrid() {
+function cardHTML(item, idx) {
+    const key = reviewKey(item);
+    const status = getStatus(key);
+    const action = CONFIG.actions.find(a => a.key === status);
+    const badge = action ? action.icon : '?';
+    return `
+    <div class="item-card status-${status}" data-idx="${idx}" data-id="${key}">
+        <div class="card-image-wrapper">
+            <img src="${item.imageUrl || ''}" alt="${item.id}" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="placeholder" style="display:none">🖼</div>
+            <span class="card-badge ${status}">${badge}</span>
+        </div>
+        <div class="card-info">
+            <div class="card-title">${item.title || item.id}</div>
+            ${item.subtitle ? `<div class="card-subtitle">${item.subtitle}</div>` : ''}
+            ${item.tag ? `<span class="card-tag">${item.tag}</span>` : ''}
+        </div>
+        <div class="card-actions">
+            ${CONFIG.actions.map(a =>
+                `<button class="btn-action btn-${a.key}"
+                    onclick="event.stopPropagation();window.reviewApp.quickAction('${key}','${a.key}')">
+                    ${a.icon} ${a.label}
+                </button>`
+            ).join('')}
+        </div>
+    </div>`;
+}
+
+function appendCards(from, to) {
     const grid = document.getElementById('item-grid');
+    const sentinel = grid.querySelector('.load-sentinel');
+    if (sentinel) sentinel.remove();
+
+    const html = filteredItems.slice(from, to).map((item, i) => cardHTML(item, from + i)).join('');
+    grid.insertAdjacentHTML('beforeend', html);
+
+    if (to < filteredItems.length) {
+        grid.insertAdjacentHTML('beforeend', '<div class="load-sentinel"></div>');
+        observeSentinel(grid);
+    }
+    renderedCount = to;
+}
+
+function observeSentinel(grid) {
+    if (loadMoreObserver) loadMoreObserver.disconnect();
+    const sentinel = grid.querySelector('.load-sentinel');
+    if (!sentinel) return;
+    loadMoreObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            const next = Math.min(renderedCount + PAGE_SIZE, filteredItems.length);
+            appendCards(renderedCount, next);
+        }
+    }, { rootMargin: '300px' });
+    loadMoreObserver.observe(sentinel);
+}
+
+function renderGrid() {
+    if (loadMoreObserver) { loadMoreObserver.disconnect(); loadMoreObserver = null; }
+    const grid = document.getElementById('item-grid');
+    grid.innerHTML = '';
+    renderedCount = 0;
+
     if (!filteredItems.length) {
         grid.innerHTML = '<div class="empty-state"><div class="icon">🔍</div><h3>Sonuç bulunamadı</h3></div>';
         return;
     }
-    grid.innerHTML = filteredItems.map((item, idx) => {
-        const key = reviewKey(item);
-        const status = getStatus(key);
-        const action = CONFIG.actions.find(a => a.key === status);
-        const badge = action ? action.icon : '?';
-        return `
-        <div class="item-card status-${status}" data-idx="${idx}" data-id="${key}">
-            <div class="card-image-wrapper">
-                <img src="${item.imageUrl || ''}" alt="${item.id}" loading="lazy"
-                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-                <div class="placeholder" style="display:none">🖼</div>
-                <span class="card-badge ${status}">${badge}</span>
-            </div>
-            <div class="card-info">
-                <div class="card-title">${item.title || item.id}</div>
-                ${item.subtitle ? `<div class="card-subtitle">${item.subtitle}</div>` : ''}
-                ${item.tag ? `<span class="card-tag">${item.tag}</span>` : ''}
-            </div>
-            <div class="card-actions">
-                ${CONFIG.actions.map(a =>
-                    `<button class="btn-action btn-${a.key}"
-                        onclick="event.stopPropagation();window.reviewApp.quickAction('${key}','${a.key}')">
-                        ${a.icon} ${a.label}
-                    </button>`
-                ).join('')}
-            </div>
-        </div>`;
-    }).join('');
+    appendCards(0, Math.min(PAGE_SIZE, filteredItems.length));
 }
 
 function updateCardStatus(key, durum) {
