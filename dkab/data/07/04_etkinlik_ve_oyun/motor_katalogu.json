@@ -1,0 +1,344 @@
+[
+  {
+    "motor_id": "E01",
+    "ad": "Hızlı Ön Tarama",
+    "kategori": "diagnostic",
+    "amac": "Üniteye girmeden önce mevcut bilgiyi tarar.",
+    "ui": "çip seçim + kısa çoktan seçmeli",
+    "veri_alanlari": [
+      "sorular",
+      "secenekler",
+      "dogru_cevap",
+      "ipucu"
+    ],
+    "puanlama": "doğru başına 1 puan, sonuçta hazırbulunuşluk yüzdesi",
+    "geri_bildirim": "hemen geri bildirim + ilgili bölüme yönlendirme",
+    "ustalik": "%70 üstü ise hızlandırılmış yol açılır"
+  },
+  {
+    "motor_id": "E02",
+    "ad": "Terim Kartları",
+    "kategori": "vocabulary",
+    "amac": "Terim, tanım, örnek ve karşıt örnekleri birlikte öğretir.",
+    "ui": "ön/arka çevrilen kartlar",
+    "veri_alanlari": [
+      "terim",
+      "tanim",
+      "ornek",
+      "sayfa_ref"
+    ],
+    "puanlama": "tamamlama tabanlı",
+    "geri_bildirim": "kart arkasında açıklama ve görsel bağlantı",
+    "ustalik": "en az 3 kez doğru hatırlama"
+  },
+  {
+    "motor_id": "E03",
+    "ad": "Terim-Tanım Eşleştirme",
+    "kategori": "vocabulary",
+    "amac": "Tanımsal bilgiyi pekiştirir.",
+    "ui": "sürükle-bırak eşleştirme",
+    "veri_alanlari": [
+      "terim",
+      "tanim"
+    ],
+    "puanlama": "süre + doğruluk",
+    "geri_bildirim": "yanlış eşlemede kart kırmızı titreşir",
+    "ustalik": "60 saniye altında hatasız"
+  },
+  {
+    "motor_id": "E04",
+    "ad": "Görsel-Kelime Eşleştirme",
+    "kategori": "visual",
+    "amac": "Görsel hafızayı güçlendirir.",
+    "ui": "kart eşleştirme / hafıza oyunu",
+    "veri_alanlari": [
+      "gorsel_id",
+      "terim"
+    ],
+    "puanlama": "hamle sayısı + süre",
+    "geri_bildirim": "eşleşen çift parlayarak kaybolur",
+    "ustalik": "minimum hamle sayısına ulaşma"
+  },
+  {
+    "motor_id": "E05",
+    "ad": "Sıcak Nokta Etiketleme",
+    "kategori": "visual",
+    "amac": "Görsel üzerinde detay fark etme.",
+    "ui": "görsel üstünde hotspot",
+    "veri_alanlari": [
+      "gorsel_id",
+      "noktalar[{x,y,etiket}]"
+    ],
+    "puanlama": "bulunan nokta başına puan",
+    "geri_bildirim": "bulunamayan noktalar yanıp söner",
+    "ustalik": "tümünü bul"
+  },
+  {
+    "motor_id": "E06",
+    "ad": "Doğru-Yanlış Ağacı",
+    "kategori": "logic",
+    "amac": "Kavramsal yargılama becerisi.",
+    "ui": "evet/hayır dallanma",
+    "veri_alanlari": [
+      "ifade",
+      "dogru_mu",
+      "aciklama"
+    ],
+    "puanlama": "doğru başına 1 puan",
+    "geri_bildirim": "yanlışta açıklama balonu",
+    "ustalik": "%90 doğruluk"
+  },
+  {
+    "motor_id": "E07",
+    "ad": "Boşluk Doldurma",
+    "kategori": "language",
+    "amac": "Anahtar kavramları bağlam içinde pekiştirir.",
+    "ui": "metin içi boşluklar, kelimeler havada uçuşur",
+    "veri_alanlari": [
+      "metin_sablonu",
+      "bosluklar[{konum, dogru_kelime}]"
+    ],
+    "puanlama": "doğru başına puan",
+    "geri_bildirim": "doğru kelime yerine oturunca kilitlenir",
+    "ustalik": "hatasız tamamlama"
+  },
+  {
+    "motor_id": "E08",
+    "ad": "Cümle Sıralama",
+    "kategori": "language",
+    "amac": "Süreç ve anlatım sırası kavrama.",
+    "ui": "sürükle-bırak sıra, vagon dizme animasyonu",
+    "veri_alanlari": [
+      "cumleler_karisik[]",
+      "dogru_sira[]"
+    ],
+    "puanlama": "doğru sıra + süre",
+    "geri_bildirim": "doğru sırada vagonlar bağlanır",
+    "ustalik": "ilk denemede doğru"
+  },
+  {
+    "motor_id": "E09",
+    "ad": "Sesli Takip ve Tekrar",
+    "kategori": "recitation",
+    "amac": "Dua ve sure ezberleme.",
+    "ui": "satır satır oynatıcı + tekrar butonu",
+    "veri_alanlari": [
+      "satirlar[{arapca, okunusu, anlami}]"
+    ],
+    "puanlama": "tekrar sayısı tabanlı",
+    "geri_bildirim": "satır tamamlandığında yeşile döner",
+    "ustalik": "tüm satırları en az 3 kez tekrar"
+  },
+  {
+    "motor_id": "E10",
+    "ad": "Anlam Eşleme",
+    "kategori": "recitation",
+    "amac": "Arapça ifade ile Türkçe anlamı eşler.",
+    "ui": "iki kolon eşleme (Arapça ↔ anlam)",
+    "veri_alanlari": [
+      "ciftler[{arapca, anlam}]"
+    ],
+    "puanlama": "doğru eşleme + süre",
+    "geri_bildirim": "eşleşen çift altın rengine döner",
+    "ustalik": "hatasız 30 saniye altı"
+  },
+  {
+    "motor_id": "E11",
+    "ad": "Adım Sıralama Simülasyonu",
+    "kategori": "process",
+    "amac": "İbadet veya süreç adımlarını sıralar.",
+    "ui": "basamak kartları + ilerleme çubuğu",
+    "veri_alanlari": [
+      "adimlar[{sira, baslik, aciklama}]"
+    ],
+    "puanlama": "doğru sıra",
+    "geri_bildirim": "yanlış adımda uyarı + doğru konumu gösterme",
+    "ustalik": "hatasız sıralama"
+  },
+  {
+    "motor_id": "E12",
+    "ad": "Hata Avı",
+    "kategori": "process",
+    "amac": "Yanlış uygulamayı tespit etme.",
+    "ui": "senaryo kartı, yanlışı bul",
+    "veri_alanlari": [
+      "senaryo",
+      "hatalar[{konum, aciklama}]"
+    ],
+    "puanlama": "bulunan hata başına puan",
+    "geri_bildirim": "hata bulununca açıklama balonu",
+    "ustalik": "tüm hataları bul"
+  },
+  {
+    "motor_id": "E13",
+    "ad": "Sebep-Sonuç Zinciri",
+    "kategori": "reasoning",
+    "amac": "Nedensellik ilişkisi kurma.",
+    "ui": "oklarla bağlanan kartlar",
+    "veri_alanlari": [
+      "kartlar[{id, metin, baglanir[]}]"
+    ],
+    "puanlama": "doğru bağlantı başına puan",
+    "geri_bildirim": "doğru ok yeşil, yanlış ok kırmızı",
+    "ustalik": "tüm zinciri doğru kur"
+  },
+  {
+    "motor_id": "E14",
+    "ad": "Zaman Çizgisi",
+    "kategori": "story",
+    "amac": "Kronolojik sıralama ve tarih bilgisi.",
+    "ui": "timeline sürükle-bırak, kaydırılabilir harita",
+    "veri_alanlari": [
+      "olaylar[{tarih, baslik, aciklama}]"
+    ],
+    "puanlama": "doğru konum + süre",
+    "geri_bildirim": "olay doğru yere düşünce sabitlenir",
+    "ustalik": "hatasız sıralama"
+  },
+  {
+    "motor_id": "E15",
+    "ad": "Karakter-Rol Eşleştirme",
+    "kategori": "story",
+    "amac": "Tarihî/dinî şahsiyetleri tanıma.",
+    "ui": "kart eşleştirme",
+    "veri_alanlari": [
+      "karakterler[{isim, ozellik, rol}]"
+    ],
+    "puanlama": "doğru eşleme",
+    "geri_bildirim": "eşleşmede bilgi balonu açılır",
+    "ustalik": "hatasız tamamlama"
+  },
+  {
+    "motor_id": "E16",
+    "ad": "Mesaj Avı",
+    "kategori": "story",
+    "amac": "Metinden ana mesajı çıkarma.",
+    "ui": "kartları tema kutularına atma",
+    "veri_alanlari": [
+      "kartlar[{metin, tema}]",
+      "temalar[]"
+    ],
+    "puanlama": "doğru sınıflama",
+    "geri_bildirim": "kutuya düşünce renk değişir",
+    "ustalik": "%90 doğruluk"
+  },
+  {
+    "motor_id": "E17",
+    "ad": "Karşılaştırma Matrisi",
+    "kategori": "comparison",
+    "amac": "İki kavram arasındaki fark ve benzerlikleri görme.",
+    "ui": "iki sütunlu tablo veya Venn diyagramı",
+    "veri_alanlari": [
+      "kavram_a",
+      "kavram_b",
+      "ortak[]",
+      "farkli_a[]",
+      "farkli_b[]"
+    ],
+    "puanlama": "doğru yerleştirme",
+    "geri_bildirim": "yanlış yerleşimde uyarı",
+    "ustalik": "hatasız tamamlama"
+  },
+  {
+    "motor_id": "E18",
+    "ad": "Sınıflandırma Sepeti",
+    "kategori": "classification",
+    "amac": "Kavramları kategorilere ayırma.",
+    "ui": "sepetlere sürükle-bırak, fizik animasyonu",
+    "veri_alanlari": [
+      "ogeler[{metin, kategori}]",
+      "kategoriler[]"
+    ],
+    "puanlama": "doğru sınıflama + süre",
+    "geri_bildirim": "yanlış sepete atılınca geri fırlar",
+    "ustalik": "hatasız 45 saniye altı"
+  },
+  {
+    "motor_id": "E19",
+    "ad": "Çoktan Seçmeli Mikro Quiz",
+    "kategori": "assessment",
+    "amac": "Bilgi kontrolü.",
+    "ui": "tek soru ekranı, her şık bir kapı",
+    "veri_alanlari": [
+      "soru",
+      "secenekler[]",
+      "dogru_cevap",
+      "aciklama"
+    ],
+    "puanlama": "doğru = 10 XP",
+    "geri_bildirim": "yanlış kapı çarpılır, doğru kapı açılır",
+    "ustalik": "ilk denemede doğru"
+  },
+  {
+    "motor_id": "E20",
+    "ad": "Açık Uçlu Düşünce Kutusu",
+    "kategori": "reflection",
+    "amac": "Kişisel yorum ve transfer üretmek.",
+    "ui": "yazma alanı + yönlendirici sorular",
+    "veri_alanlari": [
+      "soru",
+      "yonlendirici_sorular[]",
+      "rubrik[]"
+    ],
+    "puanlama": "rubrik tabanlı (kontrol listesi)",
+    "geri_bildirim": "kontrol listesi ile öz değerlendirme",
+    "ustalik": "rubrikte 3 ölçütü karşıla"
+  },
+  {
+    "motor_id": "E21",
+    "ad": "Öz Değerlendirme Kontrol Listesi",
+    "kategori": "reflection",
+    "amac": "Öğrencinin kendi öğrenmesini izlemesi.",
+    "ui": "checkbox listesi",
+    "veri_alanlari": [
+      "maddeler[{metin, kategori}]"
+    ],
+    "puanlama": "tamamlama tabanlı",
+    "geri_bildirim": "tamamlanma yüzdesi gösterilir",
+    "ustalik": "%100 tamamlama"
+  },
+  {
+    "motor_id": "E22",
+    "ad": "Performans Görevi Oluşturucu",
+    "kategori": "performance",
+    "amac": "Gerçek hayat görevi tasarlama.",
+    "ui": "adım adım görev sihirbazı",
+    "veri_alanlari": [
+      "gorev_basligi",
+      "adimlar[]",
+      "rubrik[]",
+      "teslim_formati"
+    ],
+    "puanlama": "rubrik tabanlı",
+    "geri_bildirim": "her adım tamamlandığında ilerleme",
+    "ustalik": "tüm adımları tamamla"
+  },
+  {
+    "motor_id": "E23",
+    "ad": "Spiral Tekrar Destesi",
+    "kategori": "review",
+    "amac": "Önceki ünitelerin bilgisini taze tutar.",
+    "ui": "karışık kart destesi, spaced repetition",
+    "veri_alanlari": [
+      "kartlar[{soru, cevap, unite_id, zorluk}]"
+    ],
+    "puanlama": "doğru hatırlama oranı",
+    "geri_bildirim": "zorlandığın kartlar daha sık gelir",
+    "ustalik": "%90 doğruluk 3 tekrarda"
+  },
+  {
+    "motor_id": "E24",
+    "ad": "Ustalık Panosu",
+    "kategori": "dashboard",
+    "amac": "Genel ilerlemeyi görselleştirir.",
+    "ui": "rozet + ilerleme halkası + istatistik kartları",
+    "veri_alanlari": [
+      "unite_ilerlemeleri[]",
+      "rozetler[]",
+      "toplam_xp"
+    ],
+    "puanlama": "görselleştirme",
+    "geri_bildirim": "yeni rozet kazanıldığında kutlama",
+    "ustalik": "tüm rozetleri topla"
+  }
+]
