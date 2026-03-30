@@ -39,7 +39,7 @@ export default async function handler(req) {
       return json({ error: 'Yanlış şifre' }, 401);
     try {
       const data = await gh(`/repos/${REPO}/contents/${NEWS_FILE}`);
-      const news = JSON.parse(atob(data.content.replace(/\n/g, '')));
+      const news = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
       return json({ news, sha: data.sha });
     } catch (e) {
       return json({ error: e.message }, 500);
