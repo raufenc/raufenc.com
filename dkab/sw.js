@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Service Worker (Offline Destek) =====
 // Cache-first for static assets and data, network-first for Firebase
 
-const CACHE_NAME = 'dkab-v8';
-const DATA_CACHE = 'dkab-data-v8';
+const CACHE_NAME = 'dkab-v9';
+const DATA_CACHE = 'dkab-data-v9';
 
 // Static assets to precache
 const PRECACHE_URLS = [
