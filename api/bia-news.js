@@ -12,6 +12,7 @@ const FILES = {
   homepage: BASE + 'homepage.json',
   programs: BASE + 'programs.json',
 };
+const IMAGES_PATH = 'birlikteiyilik-site/static/images/';
 
 export default async function handler(req) {
   const ADMIN_PW = process.env.BIA_ADMIN_PASSWORD || 'birlikte2026';
@@ -64,6 +65,28 @@ export default async function handler(req) {
   if (req.method === 'POST') {
     const body = await req.json();
     if (body.password !== ADMIN_PW) return json({ error: 'Yanlış şifre' }, 401);
+
+    // Image upload handler
+    if (body.type === 'upload') {
+      const { filename, content: imgBase64 } = body;
+      if (!filename || !imgBase64) return json({ error: 'filename ve content gerekli' }, 400);
+      const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const filePath = IMAGES_PATH + safeName;
+      // Check if file already exists (to get sha for update)
+      let existingSha = '';
+      try {
+        const existing = await gh(`/repos/${REPO}/contents/${filePath}`);
+        if (existing.sha) existingSha = existing.sha;
+      } catch(_) {}
+      const result = await gh(`/repos/${REPO}/contents/${filePath}`, 'PUT', {
+        message: `BIA: görsel yüklendi — ${safeName}`,
+        content: imgBase64,
+        ...(existingSha ? { sha: existingSha } : {}),
+      });
+      const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${filePath}`;
+      return json({ ok: true, url: rawUrl, path: filePath });
+    }
+
     const type = body.type || 'news';
     const file = FILES[type];
     if (!file) return json({ error: 'Geçersiz tip' }, 400);
