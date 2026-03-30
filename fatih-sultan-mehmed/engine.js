@@ -233,7 +233,7 @@ function setupSearch(){
     res.classList.add('show');
     res.querySelectorAll('.sr-item').forEach(it=>it.addEventListener('click',()=>{
       const loc=MAP_DATA.locations.find(l=>l.id===it.dataset.id);
-      if(loc&&markers[it.dataset.id]){map.flyTo([loc.lat,loc.lon],7,{duration:1});markers[it.dataset.id].openPopup();}
+      if(loc&&markers[it.dataset.id]){map.setView([loc.lat,loc.lon],7,{animate:true,duration:.3});markers[it.dataset.id].openPopup();}
       res.classList.remove('show');inp.value='';
     }));
   });
@@ -270,7 +270,7 @@ function setupDetailPanel(){
   };
   window._flyTo=function(id){
     const loc=MAP_DATA.locations.find(l=>l.id===id);
-    if(loc){map.flyTo([loc.lat,loc.lon],8,{duration:1});document.getElementById('detail-panel').classList.remove('open');document.getElementById('overlay').classList.remove('open');setTimeout(()=>{if(markers[id])markers[id].openPopup();},1100);}
+    if(loc){map.setView([loc.lat,loc.lon],8,{animate:true,duration:.3});document.getElementById('detail-panel').classList.remove('open');document.getElementById('overlay').classList.remove('open');setTimeout(()=>{if(markers[id])markers[id].openPopup();},1100);}
   };
   window._goToTimeline=function(locId){
     map.closePopup();
@@ -348,9 +348,9 @@ function setupJourney(){
     const totalPts=pts.length;
     const frameDelay=Math.round(1800/(speed*totalPts));
 
-    /* Haritayı rotanın ortasına uçur */
+    /* Haritayı rotanın ortasına kaydır — kısa animasyon */
     const midIdx=Math.floor(totalPts/2);
-    map.flyTo(pts[midIdx],5,{duration:.8});
+    map.setView(pts[midIdx],5,{animate:true,duration:.4});
 
     /* Hareketli marker oluştur */
     if(state.movMarker)map.removeLayer(state.movMarker);
@@ -404,7 +404,7 @@ function renderTimeline(){
     item.addEventListener('click',()=>{
       if(loc&&markers[ev.loc]){
         document.getElementById('map-section').scrollIntoView({behavior:'smooth'});
-        setTimeout(()=>{map.flyTo([loc.lat,loc.lon],7,{duration:1});setTimeout(()=>markers[ev.loc].openPopup(),1100);},500);
+        setTimeout(()=>{map.setView([loc.lat,loc.lon],7,{animate:true,duration:.3});setTimeout(()=>markers[ev.loc].openPopup(),400);},500);
       }
     });
     wrap.appendChild(item);
@@ -415,7 +415,7 @@ function renderTimeline(){
     if(loc&&markers[locId]){
       const mapEl=document.getElementById('map');
       mapEl.scrollIntoView({behavior:'smooth',block:'center'});
-      setTimeout(()=>{map.invalidateSize();map.flyTo([loc.lat,loc.lon],7,{duration:1});setTimeout(()=>markers[locId].openPopup(),1200);},800);
+      setTimeout(()=>{map.invalidateSize();map.setView([loc.lat,loc.lon],7,{animate:true,duration:.3});setTimeout(()=>markers[locId].openPopup(),400);},800);
     }
   };
 }
