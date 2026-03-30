@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Birlikte İyilik Akademi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --red: #E20439;
+            --red-deep: #B00030;
+            --rose: #FCE8EE;
+            --charcoal: #111;
+            --gray: #E6E6E6;
+            --gray-mid: #888;
+            --bg: #F4F5F7;
+            --white: #fff;
+            --radius: 10px;
+            --shadow: 0 2px 12px rgba(0,0,0,.07);
+            --font: 'Inter', -apple-system, sans-serif;
+        }
+
+        body { font-family: var(--font); background: var(--bg); color: var(--charcoal); min-height: 100vh; }
+
+        /* ---- LOGIN ---- */
+        #loginScreen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0010 0%, #3a0020 100%);
+        }
+        .login-box {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 360px;
+            box-shadow: 0 24px 60px rgba(0,0,0,.3);
+            text-align: center;
+        }
+        .login-box .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--red);
+            margin-bottom: .25rem;
+        }
+        .login-box h1 {
+            font-size: 1.4rem;
+            margin-bottom: 1.75rem;
+            color: var(--charcoal);
+        }
+        .login-box input {
+            width: 100%;
+            padding: .75rem 1rem;
+            border: 1.5px solid var(--gray);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: var(--font);
+            margin-bottom: 1rem;
+            transition: border-color .2s;
+        }
+        .login-box input:focus { outline: none; border-color: var(--red); }
+        .login-box button {
+            width: 100%;
+            padding: .75rem;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .2s;
+        }
+        .login-box button:hover { background: var(--red-deep); }
+        .login-error {
+            color: var(--red);
+            font-size: .85rem;
+            margin-top: .75rem;
+            min-height: 1.2em;
+        }
+
+        /* ---- ADMIN SHELL ---- */
+        #adminShell { display: none; }
+
+        .admin-header {
+            background: var(--charcoal);
+            color: #fff;
+            padding: 0 1.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .admin-header__brand {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .admin-header__brand span { color: var(--red); }
+        .admin-header__actions { display: flex; align-items: center; gap: .75rem; }
+        .admin-header__actions a {
+            color: rgba(255,255,255,.7);
+            text-decoration: none;
+            font-size: .85rem;
+            transition: color .2s;
+        }
+        .admin-header__actions a:hover { color: #fff; }
+        .btn-logout {
+            background: transparent;
+            border: 1.5px solid rgba(255,255,255,.3);
+            color: rgba(255,255,255,.8);
+            padding: .35rem .85rem;
+            border-radius: 6px;
+            font-size: .82rem;
+            cursor: pointer;
+            font-family: var(--font);
+            transition: all .2s;
+        }
+        .btn-logout:hover { background: rgba(255,255,255,.1); color: #fff; }
+
+        .admin-main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* ---- PAGE VIEWS ---- */
+        .view { display: none; }
+        .view.active { display: block; }
+
+        /* ---- LIST VIEW ---- */
+        .list-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .list-header h2 { font-size: 1.35rem; }
+        .list-count {
+            font-size: .85rem;
+            color: var(--gray-mid);
+            margin-top: .2rem;
+        }
+
+        .btn { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.25rem; border-radius: var(--radius); font-size: .9rem; font-weight: 600; cursor: pointer; border: none; font-family: var(--font); text-decoration: none; transition: all .2s; }
+        .btn--primary { background: var(--red); color: #fff; }
+        .btn--primary:hover { background: var(--red-deep); }
+        .btn--outline { background: transparent; border: 1.5px solid var(--gray); color: var(--charcoal); }
+        .btn--outline:hover { border-color: var(--red); color: var(--red); }
+        .btn--sm { padding: .35rem .75rem; font-size: .8rem; }
+        .btn--danger { background: transparent; border: 1.5px solid #e74c3c; color: #e74c3c; }
+        .btn--danger:hover { background: #fdecea; }
+        .btn--success { background: #27ae60; color: #fff; }
+        .btn--success:hover { background: #219150; }
+
+        .articles-table {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        .articles-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .articles-table th {
+            background: var(--charcoal);
+            color: #fff;
+            padding: .85rem 1rem;
+            text-align: left;
+            font-size: .82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .articles-table td {
+            padding: .85rem 1rem;
+            border-bottom: 1px solid var(--gray);
+            font-size: .88rem;
+            vertical-align: middle;
+        }
+        .articles-table tr:last-child td { border-bottom: none; }
+        .articles-table tr:hover td { background: #fafafa; }
+        .td-title { font-weight: 600; color: var(--charcoal); max-width: 260px; }
+        .td-kategori {
+            font-size: .75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            color: var(--red);
+            background: var(--rose);
+            padding: .2rem .55rem;
+            border-radius: 99px;
+            white-space: nowrap;
+        }
+        .td-actions { display: flex; gap: .4rem; white-space: nowrap; }
+        .badge-aktif { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #27ae60; }
+        .badge-pasif { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gray-mid); }
+
+        /* ---- FORM VIEW ---- */
+        .form-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .form-header h2 { font-size: 1.35rem; }
+        .form-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+        .form-row { margin-bottom: 1.25rem; }
+        .form-row label {
+            display: block;
+            font-size: .82rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: .4rem;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+        .form-row input,
+        .form-row select,
+        .form-row textarea {
+            width: 100%;
+            padding: .7rem 1rem;
+            border: 1.5px solid var(--gray);
+            border-radius: var(--radius);
+            font-size: .95rem;
+            font-family: var(--font);
+            color: var(--charcoal);
+            transition: border-color .2s;
+            background: #fff;
+        }
+        .form-row input:focus,
+        .form-row select:focus,
+        .form-row textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(226,4,57,.08);
+        }
+        .form-row textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+        .form-row textarea.icerik { min-height: 320px; font-family: monospace; font-size: .88rem; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .form-hint { font-size: .78rem; color: var(--gray-mid); margin-top: .35rem; }
+        .form-actions {
+            display: flex;
+            gap: .75rem;
+            justify-content: flex-end;
+            margin-top: 1.75rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray);
+        }
+
+        /* ---- EXPORT ---- */
+        .export-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-top: 2rem;
+        }
+        .export-card h3 { font-size: 1rem; margin-bottom: .75rem; }
+        .export-card p { font-size: .88rem; color: var(--gray-mid); margin-bottom: 1rem; }
+        .export-card textarea {
+            width: 100%;
+            font-family: monospace;
+            font-size: .8rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--radius);
+            padding: 1rem;
+            min-height: 200px;
+            background: #f9f9f9;
+            resize: vertical;
+        }
+
+        /* ---- TOAST ---- */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: var(--charcoal);
+            color: #fff;
+            padding: .75rem 1.25rem;
+            border-radius: var(--radius);
+            font-size: .88rem;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0,0,0,.2);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .3s, transform .3s;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.toast--success { background: #27ae60; }
+        .toast.toast--error { background: #e74c3c; }
+
+        /* ---- CONFIRM ---- */
+        .confirm-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+        }
+        .confirm-modal.open { display: flex; }
+        .confirm-box {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 360px;
+            width: 90%;
+            box-shadow: 0 24px 60px rgba(0,0,0,.2);
+            text-align: center;
+        }
+        .confirm-box h3 { font-size: 1.1rem; margin-bottom: .75rem; }
+        .confirm-box p { font-size: .9rem; color: #555; margin-bottom: 1.5rem; }
+        .confirm-actions { display: flex; gap: .75rem; justify-content: center; }
+
+        @media (max-width: 700px) {
+            .articles-table { overflow-x: auto; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+            .admin-main { padding: 1.25rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== LOGIN SCREEN ========== -->
+<div id="loginScreen">
+    <div class="login-box">
+        <div class="logo">Birlikte İyilik Akademi</div>
+        <h1>Admin Paneli</h1>
+        <input type="password" id="loginPass" placeholder="Şifre" autocomplete="current-password">
+        <button onclick="doLogin()">Giriş Yap</button>
+        <p class="login-error" id="loginError"></p>
+    </div>
+</div>
+
+<!-- ========== ADMIN SHELL ========== -->
+<div id="adminShell">
+
+    <header class="admin-header">
+        <div class="admin-header__brand">
+            <span>BİA</span> Admin
+        </div>
+        <div class="admin-header__actions">
+            <a href="index.html" target="_blank">Siteyi Gör ↗</a>
+            <button class="btn-logout" onclick="doLogout()">Çıkış</button>
+        </div>
+    </header>
+
+    <main class="admin-main">
+
+        <!-- LIST VIEW -->
+        <div class="view active" id="viewList">
+            <div class="list-header">
+                <div>
+                    <h2>Yazılar & Haberler</h2>
+                    <div class="list-count" id="listCount"></div>
+                </div>
+                <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+                    <button class="btn btn--outline btn--sm" onclick="showExport()">JSON Dışa Aktar</button>
+                    <button class="btn btn--primary" onclick="showFormNew()">+ Yeni Yazı</button>
+                </div>
+            </div>
+            <div class="articles-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Başlık</th>
+                            <th>Kategori</th>
+                            <th>Tarih</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articlesTableBody"></tbody>
+                </table>
+            </div>
+
+            <!-- EXPORT -->
+            <div class="export-card" id="exportCard" style="display:none;">
+                <h3>JSON Dışa Aktarma</h3>
+                <p>Aşağıdaki JSON içeriğini kopyalayıp <code>js/data.js</code> dosyasındaki <code>_data</code> array'inin içine yapıştırabilirsiniz (kalıcı güncelleme için).</p>
+                <textarea id="exportOutput" readonly></textarea>
+                <div style="margin-top:.75rem;display:flex;gap:.5rem;">
+                    <button class="btn btn--primary btn--sm" onclick="copyExport()">Kopyala</button>
+                    <button class="btn btn--outline btn--sm" onclick="document.getElementById('exportCard').style.display='none'">Kapat</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORM VIEW -->
+        <div class="view" id="viewForm">
+            <div class="form-header">
+                <button class="btn btn--outline btn--sm" onclick="showList()">&larr; Listeye Dön</button>
+                <h2 id="formTitle">Yeni Yazı</h2>
+            </div>
+            <div class="form-card">
+                <input type="hidden" id="fieldId">
+                <div class="form-row">
+                    <label>Başlık *</label>
+                    <input type="text" id="fieldBaslik" placeholder="Yazı başlığı...">
+                </div>
+                <div class="form-grid-2">
+                    <div class="form-row">
+                        <label>Kategori *</label>
+                        <select id="fieldKategori">
+                            <option value="Ahlak & Davranış">Ahlak & Davranış</option>
+                            <option value="Mübarek Geceler">Mübarek Geceler</option>
+                            <option value="Evliya Hayatları">Evliya Hayatları</option>
+                            <option value="Tarih & Kültür">Tarih & Kültür</option>
+                            <option value="İbadet & Sağlık">İbadet & Sağlık</option>
+                            <option value="Değerler Eğitimi">Değerler Eğitimi</option>
+                            <option value="Duyuru">Duyuru</option>
+                            <option value="Haber">Haber</option>
+                            <option value="Diğer">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>Tarih *</label>
+                        <input type="date" id="fieldTarih">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>Özet (kart önizlemesi)</label>
+                    <textarea id="fieldOzet" placeholder="Kartlarda gösterilecek kısa özet..."></textarea>
+                </div>
+                <div class="form-row">
+                    <label>İçerik (HTML destekler)</label>
+                    <textarea class="icerik" id="fieldIcerik" placeholder="<p>Yazının tam içeriği...</p>"></textarea>
+                    <p class="form-hint">HTML etiketleri kullanabilirsiniz: &lt;p&gt; &lt;h3&gt; &lt;strong&gt; &lt;em&gt; &lt;blockquote&gt; &lt;ul&gt; &lt;li&gt;</p>
+                </div>
+                <div class="form-row">
+                    <label>Durum</label>
+                    <select id="fieldAktif">
+                        <option value="true">Yayında (Aktif)</option>
+                        <option value="false">Taslak (Gizli)</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn--outline" onclick="showList()">İptal</button>
+                    <button class="btn btn--success" onclick="saveArticle()">Kaydet</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="confirm-modal" id="confirmModal">
+    <div class="confirm-box">
+        <h3>Yazıyı Sil</h3>
+        <p id="confirmText">Bu yazıyı silmek istediğinizden emin misiniz?</p>
+        <div class="confirm-actions">
+            <button class="btn btn--outline" onclick="closeConfirm()">İptal</button>
+            <button class="btn btn--danger" id="confirmOkBtn">Sil</button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script>
+(function() {
+    'use strict';
+
+    var ADMIN_PASSWORD = 'biaadmin2026';
+    var SESSION_KEY = 'biakademi_admin_session';
+
+    // --- Auth ---
+    function isLoggedIn() {
+        return sessionStorage.getItem(SESSION_KEY) === 'ok';
+    }
+
+    function doLogin() {
+        var pw = document.getElementById('loginPass').value;
+        var err = document.getElementById('loginError');
+        if (pw === ADMIN_PASSWORD) {
+            sessionStorage.setItem(SESSION_KEY, 'ok');
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminShell').style.display = 'block';
+            loadList();
+        } else {
+            err.textContent = 'Şifre yanlış. Tekrar deneyin.';
+            document.getElementById('loginPass').value = '';
+        }
+    }
+
+    window.doLogin = doLogin;
+
+    document.getElementById('loginPass').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') doLogin();
+    });
+
+    function doLogout() {
+        sessionStorage.removeItem(SESSION_KEY);
+        location.reload();
+    }
+    window.doLogout = doLogout;
+
+    if (isLoggedIn()) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('adminShell').style.display = 'block';
+        loadList();
+    }
+
+    // --- Views ---
+    function showView(id) {
+        document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+        document.getElementById(id).classList.add('active');
+    }
+
+    window.showList = function() { showView('viewList'); loadList(); };
+    window.showFormNew = function() {
+        document.getElementById('formTitle').textContent = 'Yeni Yazı';
+        document.getElementById('fieldId').value = '';
+        document.getElementById('fieldBaslik').value = '';
+        document.getElementById('fieldKategori').value = 'Ahlak & Davranış';
+        document.getElementById('fieldTarih').value = new Date().toISOString().split('T')[0];
+        document.getElementById('fieldOzet').value = '';
+        document.getElementById('fieldIcerik').value = '';
+        document.getElementById('fieldAktif').value = 'true';
+        showView('viewForm');
+    };
+
+    window.showFormEdit = function(id) {
+        var yazi = BIAKADEMI_YAZILAR.getById(id);
+        if (!yazi) return;
+        document.getElementById('formTitle').textContent = 'Yazıyı Düzenle';
+        document.getElementById('fieldId').value = yazi.id;
+        document.getElementById('fieldBaslik').value = yazi.baslik;
+        document.getElementById('fieldKategori').value = yazi.kategori;
+        document.getElementById('fieldTarih').value = yazi.tarih;
+        document.getElementById('fieldOzet').value = yazi.ozet;
+        document.getElementById('fieldIcerik').value = yazi.icerik;
+        document.getElementById('fieldAktif').value = yazi.aktif ? 'true' : 'false';
+        showView('viewForm');
+    };
+
+    // --- List ---
+    function loadList() {
+        var yazilar = BIAKADEMI_YAZILAR.getAllAdmin();
+        var tbody = document.getElementById('articlesTableBody');
+        var count = document.getElementById('listCount');
+        count.textContent = yazilar.length + ' yazı';
+        tbody.innerHTML = '';
+        yazilar.forEach(function(yazi, i) {
+            var tr = document.createElement('tr');
+            tr.innerHTML =
+                '<td style="color:var(--gray-mid);font-size:.8rem">' + (i+1) + '</td>' +
+                '<td class="td-title">' + esc(yazi.baslik) + '</td>' +
+                '<td><span class="td-kategori">' + esc(yazi.kategori) + '</span></td>' +
+                '<td style="white-space:nowrap;font-size:.83rem;color:var(--gray-mid)">' + esc(yazi.tarihGosterim || yazi.tarih) + '</td>' +
+                '<td><span class="' + (yazi.aktif ? 'badge-aktif' : 'badge-pasif') + '" title="' + (yazi.aktif ? 'Yayında' : 'Taslak') + '"></span></td>' +
+                '<td><div class="td-actions">' +
+                '<button class="btn btn--outline btn--sm" onclick="showFormEdit(' + yazi.id + ')">Düzenle</button>' +
+                '<button class="btn btn--danger btn--sm" onclick="confirmDelete(' + yazi.id + ', \'' + esc(yazi.baslik).replace(/'/g, '\\\'') + '\')">Sil</button>' +
+                '</div></td>';
+            tbody.appendChild(tr);
+        });
+    }
+
+    function esc(str) {
+        if (!str) return '';
+        return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // --- Save ---
+    window.saveArticle = function() {
+        var baslik = document.getElementById('fieldBaslik').value.trim();
+        var kategori = document.getElementById('fieldKategori').value;
+        var tarih = document.getElementById('fieldTarih').value;
+        var ozet = document.getElementById('fieldOzet').value.trim();
+        var icerik = document.getElementById('fieldIcerik').value.trim();
+        var aktif = document.getElementById('fieldAktif').value === 'true';
+        var idVal = document.getElementById('fieldId').value;
+
+        if (!baslik) { showToast('Başlık zorunludur.', 'error'); return; }
+        if (!tarih) { showToast('Tarih zorunludur.', 'error'); return; }
+        if (!icerik) { showToast('İçerik zorunludur.', 'error'); return; }
+
+        var tarihGosterim = formatDate(tarih);
+
+        var yazi = {
+            id: idVal ? parseInt(idVal) : Date.now(),
+            slug: slugify(baslik),
+            baslik: baslik,
+            kategori: kategori,
+            tarih: tarih,
+            tarihGosterim: tarihGosterim,
+            ozet: ozet || baslik,
+            icerik: icerik,
+            aktif: aktif
+        };
+
+        BIAKADEMI_YAZILAR.save(yazi);
+        showToast('Yazı kaydedildi!', 'success');
+        showList();
+    };
+
+    function slugify(str) {
+        var tr = {'ı':'i','ğ':'g','ü':'u','ş':'s','ö':'o','ç':'c','İ':'i','Ğ':'g','Ü':'u','Ş':'s','Ö':'o','Ç':'c'};
+        return str.toLowerCase().replace(/[ığüşöçİĞÜŞÖÇı]/g, function(c){ return tr[c] || c; })
+            .replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,60);
+    }
+
+    function formatDate(iso) {
+        var months = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+        var parts = iso.split('-');
+        return parseInt(parts[2]) + ' ' + months[parseInt(parts[1])-1] + ' ' + parts[0];
+    }
+
+    // --- Delete ---
+    var pendingDeleteId = null;
+
+    window.confirmDelete = function(id, baslik) {
+        pendingDeleteId = id;
+        document.getElementById('confirmText').textContent = '"' + baslik + '" başlıklı yazıyı silmek istediğinizden emin misiniz?';
+        document.getElementById('confirmModal').classList.add('open');
+        document.getElementById('confirmOkBtn').onclick = function() {
+            BIAKADEMI_YAZILAR.delete(pendingDeleteId);
+            closeConfirm();
+            loadList();
+            showToast('Yazı silindi.', 'success');
+        };
+    };
+
+    window.closeConfirm = function() {
+        document.getElementById('confirmModal').classList.remove('open');
+        pendingDeleteId = null;
+    };
+
+    // --- Export ---
+    window.showExport = function() {
+        var card = document.getElementById('exportCard');
+        card.style.display = 'block';
+        document.getElementById('exportOutput').value = BIAKADEMI_YAZILAR.exportJSON();
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    window.copyExport = function() {
+        var ta = document.getElementById('exportOutput');
+        ta.select();
+        document.execCommand('copy');
+        showToast('JSON kopyalandı!', 'success');
+    };
+
+    // --- Toast ---
+    function showToast(msg, type) {
+        var t = document.getElementById('toast');
+        t.textContent = msg;
+        t.className = 'toast toast--' + (type || 'success');
+        t.classList.add('show');
+        setTimeout(function() { t.classList.remove('show'); }, 3000);
+    }
+
+})();
+</script>
+</body>
+</html>
