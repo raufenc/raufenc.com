@@ -344,7 +344,7 @@ function buildMonthLabels(weeks) {
 // ===== RADAR CHART =====
 function buildRadarData(grade, essentials) {
     if (!essentials?.units) return [];
-    return essentials.units.slice(0, 8).map(unit => {
+    return essentials.units.slice(0, 12).map(unit => {
         const chapters = essentials.chapters?.filter(c => c.unite_id === unit.unite_id) || [];
         const mastery = getUnitMasteryScore(unit.unite_id, chapters);
         // Also factor in completion

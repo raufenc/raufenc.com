@@ -177,7 +177,7 @@ function analyzeProgress(grade, essentials) {
         return {
             unitId: u.unite_id,
             unitNum,
-            title: u.unite_adi,
+            title: u.baslik || u.unite_id,
             totalChapters,
             completedChapters,
             completionPercent,

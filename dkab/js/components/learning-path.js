@@ -64,7 +64,7 @@ function generateRecommendations(grade, essentials) {
                 unitId: ch.unite_id,
                 chapterId: ch.bolum_id,
                 title: ch.baslik || ch.bolum_adi,
-                unitTitle: units.find(u => u.unite_id === ch.unite_id)?.unite_adi || '',
+                unitTitle: units.find(u => u.unite_id === ch.unite_id)?.baslik || '',
                 mastery: mastery.score,
                 reason: mastery.attempts > 0 ? 'Devam et' : 'Yeni ders'
             });
@@ -85,7 +85,7 @@ function generateRecommendations(grade, essentials) {
                     unitId: ch.unite_id,
                     chapterId: ch.bolum_id,
                     title: ch.baslik || ch.bolum_adi,
-                    unitTitle: units.find(u => u.unite_id === ch.unite_id)?.unite_adi || '',
+                    unitTitle: units.find(u => u.unite_id === ch.unite_id)?.baslik || '',
                     mastery: mastery.score,
                     daysSince,
                     reason: mastery.score < 60 ? 'Guclendirme gerekli' : 'Tekrar zamani'
@@ -119,7 +119,7 @@ function generateRecommendations(grade, essentials) {
                     unitId: u.unite_id,
                     chapterId: weakest.bolum_id,
                     title: weakest.baslik || weakest.bolum_adi,
-                    unitTitle: u.unite_adi,
+                    unitTitle: u.baslik || '',
                     mastery: weakestScore,
                     reason: 'Zayif alan'
                 });
@@ -194,7 +194,7 @@ function renderRecommendations(container, recommendations, grade, gradeInfo, ess
                     const progress = store.getUnitProgress(grade, u.unite_id);
                     return `
                         <div style="text-align:center;">
-                            <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">${u.unite_adi.substring(0, 20)}${u.unite_adi.length > 20 ? '...' : ''}</div>
+                            <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:4px;">${(u.baslik || '').substring(0, 20)}${(u.baslik || '').length > 20 ? '...' : ''}</div>
                             <div class="progress-bar" style="height:6px; margin-bottom:4px;">
                                 <div class="fill" style="width:${progress.percent}%; background:${mastery >= 70 ? 'var(--success)' : mastery >= 40 ? 'var(--warning)' : 'var(--primary)'};"></div>
                             </div>
