@@ -128,31 +128,42 @@ function initMap(){
   },null,{position:'bottomleft',collapsed:true}).addTo(map);
 }
 
-/* Osmanlı marker sistemi — tek palet, şekil farkı */
+/* Kayı tarzı SVG marker sistemi */
+const _goldIcon=L.divIcon({
+  className:'custom-marker',
+  html:'<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="10" cy="10" r="2.5" fill="#5a3e1b"/></svg>',
+  iconSize:[20,20],iconAnchor:[10,10],popupAnchor:[0,-12]
+});
+const _capitalIcon=L.divIcon({
+  className:'custom-marker',
+  html:'<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#8b6914" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="#5a3e1b"/></svg>',
+  iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-14]
+});
+function _battleIcon(s){
+  const h=s/2,p=Math.round(s*.18),q=s-p;
+  return L.divIcon({
+    className:'custom-marker battle-marker',
+    html:'<svg width="'+s+'" height="'+s+'" viewBox="0 0 '+s+' '+s+'"><line x1="'+p+'" y1="'+p+'" x2="'+q+'" y2="'+q+'" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/><line x1="'+q+'" y1="'+p+'" x2="'+p+'" y2="'+q+'" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/><circle cx="'+h+'" cy="'+h+'" r="'+Math.round(s*.16)+'" fill="#c0392b" stroke="#4a0e0e" stroke-width="1"/><line x1="'+(p-1)+'" y1="'+(p-1)+'" x2="'+(p+2)+'" y2="'+(p+2)+'" stroke="#8b6914" stroke-width="1.5" stroke-linecap="round"/><line x1="'+(q+1)+'" y1="'+(p-1)+'" x2="'+(q-2)+'" y2="'+(p+2)+'" stroke="#8b6914" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    iconSize:[s,s],iconAnchor:[h,h],popupAnchor:[0,-h-2]
+  });
+}
+const _battleSmall=_battleIcon(20);
+const _battleLarge=_battleIcon(26);
+
 function renderMarkers(){
   if(!MAP_DATA.locations)return;
   MAP_DATA.locations.sort((a,b)=>a.order-b.order).forEach(loc=>{
     const cat=loc.category||'default';
     const isBattle=cat==='savas';
     const isCap=cat==='baskent';
-    const sz=isCap?16:loc.significance==='major'?14:loc.significance==='standard'?11:8;
-    let html;
-    if(isBattle){
-      /* Savaş — çarpı işareti */
-      html='<div class="loc-marker loc-battle" style="width:'+sz+'px;height:'+sz+'px">✕</div>';
-    } else if(isCap){
-      /* Başkent — haleli altın */
-      html='<div class="loc-marker loc-capital" style="width:'+sz+'px;height:'+sz+'px"></div>';
-    } else {
-      /* Normal şehir */
-      html='<div class="loc-marker loc-city" style="width:'+sz+'px;height:'+sz+'px"></div>';
-    }
-    const icon=L.divIcon({className:'',html:html,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
-    const m=L.marker([loc.lat,loc.lon],{icon:icon}).addTo(map);
+    const icon=isBattle?(loc.significance==='major'?_battleLarge:_battleSmall):isCap?_capitalIcon:_goldIcon;
+    const m=L.marker([loc.lat,loc.lon],{icon:icon,zIndexOffset:isBattle?500:0}).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
     if(loc.significance!=='minor'){
       const lbl=isBattle&&loc.events&&loc.events[0]?loc.events[0].title:loc.name;
-      m.bindTooltip(lbl,{permanent:true,className:'map-label'+(isBattle?' map-label-battle':''),direction:'top',offset:[0,-sz/2-4]});
+      const lblCls=isBattle?'map-label-battle':isCap?'map-label-capital':'map-label';
+      const lblIcon=L.divIcon({className:lblCls,html:'<span>'+lbl+'</span>',iconSize:[0,0],iconAnchor:[-14,5]});
+      L.marker([loc.lat,loc.lon],{icon:lblIcon,interactive:false}).addTo(map);
     }
     m.on('click',()=>m.openPopup());
     m.locData=loc;
