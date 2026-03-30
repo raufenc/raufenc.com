@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yönetim Paneli — Birlikte İyilik Akademi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #E20439; --red-d: #B00030; --rose: #FCE8EE;
+      --ink: #111; --gray: #E6E6E6; --muted: #888;
+      --bg: #F4F5F7; --white: #fff;
+      --r: 10px; --r-lg: 16px;
+      --shadow: 0 2px 12px rgba(0,0,0,.06);
+      --t: all .25s cubic-bezier(.4,0,.2,1);
+      --font: 'Inter', system-ui, sans-serif;
+    }
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:var(--font); background:var(--bg); color:var(--ink); min-height:100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      display:flex; align-items:center; justify-content:center;
+      min-height:100vh;
+      background:linear-gradient(145deg,#1a0010 0%,#370018 50%,#111 100%);
+    }
+    .login-box {
+      background:var(--white); border-radius:20px;
+      padding:2.5rem 2rem; width:100%; max-width:360px;
+      box-shadow:0 32px 80px rgba(0,0,0,.35); text-align:center;
+    }
+    .login-logo { height:40px; margin:0 auto 1.25rem; display:block; }
+    .login-box h1 { font-size:1.15rem; font-weight:700; margin-bottom:1.75rem; color:var(--ink); }
+    .login-box input {
+      width:100%; padding:.75rem 1rem; border:1.5px solid var(--gray);
+      border-radius:var(--r); font:inherit; font-size:1rem;
+      margin-bottom:.75rem; transition:var(--t);
+    }
+    .login-box input:focus { outline:none; border-color:var(--red); box-shadow:0 0 0 3px rgba(226,4,57,.1); }
+    .login-box .btn-login {
+      width:100%; padding:.75rem; background:var(--red); color:#fff;
+      border:none; border-radius:var(--r); font:600 1rem var(--font); cursor:pointer; transition:var(--t);
+    }
+    .login-box .btn-login:hover { background:var(--red-d); }
+    .login-err { color:var(--red); font-size:.83rem; margin-top:.65rem; min-height:1.1em; }
+
+    /* ── SHELL ── */
+    #adminShell { display:none; }
+
+    .topbar {
+      background:var(--ink); color:#fff; height:58px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 1.5rem; position:sticky; top:0; z-index:200;
+    }
+    .topbar-brand { font-weight:700; font-size:.95rem; }
+    .topbar-brand span { color:var(--red); }
+    .topbar-actions { display:flex; align-items:center; gap:.75rem; }
+    .topbar-actions a { color:rgba(255,255,255,.65); font-size:.82rem; text-decoration:none; transition:var(--t); }
+    .topbar-actions a:hover { color:#fff; }
+    .btn-logout {
+      background:transparent; border:1.5px solid rgba(255,255,255,.25);
+      color:rgba(255,255,255,.75); padding:.3rem .85rem; border-radius:6px;
+      font:.82rem var(--font); cursor:pointer; transition:var(--t);
+    }
+    .btn-logout:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+    .admin-wrap { max-width:1080px; margin:0 auto; padding:2rem 1.25rem; }
+
+    /* ── TABS ── */
+    .tabs { display:flex; gap:.5rem; margin-bottom:1.5rem; border-bottom:2px solid var(--gray); padding-bottom:0; }
+    .tab-btn {
+      padding:.6rem 1.25rem; font:.87rem var(--font); font-weight:600; cursor:pointer;
+      border:none; background:none; color:var(--muted); border-bottom:2px solid transparent;
+      margin-bottom:-2px; transition:var(--t);
+    }
+    .tab-btn.active { color:var(--red); border-bottom-color:var(--red); }
+    .tab-btn:hover:not(.active) { color:var(--ink); }
+
+    /* ── VIEWS ── */
+    .view { display:none; }
+    .view.active { display:block; }
+
+    /* ── LIST VIEW ── */
+    .list-header {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:1.25rem; flex-wrap:wrap; gap:.75rem;
+    }
+    .list-header h2 { font-size:1.2rem; }
+    .list-meta { font-size:.82rem; color:var(--muted); margin-top:.15rem; }
+
+    .btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem 1.1rem; border-radius:var(--r); font:.87rem/1 var(--font); font-weight:600; cursor:pointer; border:none; text-decoration:none; transition:var(--t); }
+    .btn-primary { background:var(--red); color:#fff; }
+    .btn-primary:hover { background:var(--red-d); }
+    .btn-outline { background:transparent; border:1.5px solid var(--gray); color:var(--ink); }
+    .btn-outline:hover { border-color:var(--red); color:var(--red); }
+    .btn-sm { padding:.32rem .7rem; font-size:.78rem; }
+    .btn-danger { background:transparent; border:1.5px solid #e74c3c; color:#e74c3c; }
+    .btn-danger:hover { background:#fdecea; }
+    .btn-success { background:#27ae60; color:#fff; }
+    .btn-success:hover { background:#219150; }
+
+    .card-table {
+      background:var(--white); border-radius:var(--r-lg); box-shadow:var(--shadow); overflow:hidden;
+    }
+    table { width:100%; border-collapse:collapse; }
+    th {
+      background:var(--ink); color:#fff; padding:.8rem 1rem;
+      text-align:left; font-size:.78rem; font-weight:600;
+      text-transform:uppercase; letter-spacing:.05em;
+    }
+    td { padding:.8rem 1rem; border-bottom:1px solid var(--gray); font-size:.86rem; vertical-align:middle; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:#fafafa; }
+    .td-title { font-weight:600; max-width:240px; }
+    .cat-pill {
+      font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
+      color:var(--red); background:var(--rose); padding:2px 9px; border-radius:99px; white-space:nowrap;
+    }
+    .td-actions { display:flex; gap:.35rem; white-space:nowrap; }
+    .status-dot { display:inline-block; width:8px; height:8px; border-radius:50%; }
+    .dot-on  { background:#27ae60; }
+    .dot-off { background:var(--muted); }
+
+    /* ── FORM VIEW ── */
+    .form-header { display:flex; align-items:center; gap:.75rem; margin-bottom:1.75rem; }
+    .form-header h2 { font-size:1.2rem; }
+    .form-card { background:var(--white); border-radius:var(--r-lg); padding:1.75rem; box-shadow:var(--shadow); }
+    .fg { margin-bottom:1.1rem; }
+    .fg label { display:block; font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#555; margin-bottom:.35rem; }
+    .fg input, .fg select, .fg textarea {
+      width:100%; padding:.65rem .9rem; border:1.5px solid var(--gray);
+      border-radius:var(--r); font:inherit; font-size:.93rem;
+      color:var(--ink); transition:var(--t); background:#fff;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      outline:none; border-color:var(--red); box-shadow:0 0 0 3px rgba(226,4,57,.08);
+    }
+    .fg textarea { resize:vertical; min-height:90px; line-height:1.6; }
+    .fg textarea.icerik-area { min-height:300px; font-family:monospace; font-size:.83rem; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
+    .hint { font-size:.74rem; color:var(--muted); margin-top:.3rem; }
+    .form-actions {
+      display:flex; gap:.65rem; justify-content:flex-end;
+      margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--gray);
+    }
+
+    /* ── EXPORT ── */
+    .export-panel {
+      background:var(--white); border-radius:var(--r-lg); padding:1.5rem;
+      box-shadow:var(--shadow); margin-top:1.5rem; display:none;
+    }
+    .export-panel h3 { font-size:.95rem; margin-bottom:.5rem; }
+    .export-panel p  { font-size:.83rem; color:var(--muted); margin-bottom:.75rem; }
+    .export-panel textarea {
+      width:100%; font-family:monospace; font-size:.78rem;
+      border:1px solid var(--gray); border-radius:var(--r);
+      padding:.75rem; min-height:180px; background:#f9f9f9; resize:vertical;
+    }
+
+    /* ── CONFIRM MODAL ── */
+    .confirm-overlay {
+      position:fixed; inset:0; background:rgba(0,0,0,.5);
+      display:none; align-items:center; justify-content:center; z-index:5000;
+    }
+    .confirm-overlay.open { display:flex; }
+    .confirm-box {
+      background:#fff; border-radius:var(--r-lg); padding:1.75rem;
+      max-width:340px; width:90%; box-shadow:0 24px 60px rgba(0,0,0,.22); text-align:center;
+    }
+    .confirm-box h3 { font-size:1rem; margin-bottom:.6rem; }
+    .confirm-box p  { font-size:.88rem; color:#555; margin-bottom:1.35rem; }
+    .confirm-actions { display:flex; gap:.6rem; justify-content:center; }
+
+    /* ── TOAST ── */
+    .toast {
+      position:fixed; bottom:1.5rem; right:1.5rem; z-index:9999;
+      background:var(--ink); color:#fff;
+      padding:.7rem 1.15rem; border-radius:var(--r); font-size:.86rem; font-weight:500;
+      box-shadow:0 8px 32px rgba(0,0,0,.2);
+      opacity:0; transform:translateY(10px); pointer-events:none;
+      transition:opacity .3s, transform .3s;
+    }
+    .toast.show { opacity:1; transform:translateY(0); }
+    .toast.ok  { background:#27ae60; }
+    .toast.err { background:#e74c3c; }
+
+    @media (max-width:680px) {
+      .grid-2 { grid-template-columns:1fr; }
+      .admin-wrap { padding:1.25rem .75rem; }
+      table { font-size:.8rem; }
+      td, th { padding:.65rem .75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginScreen">
+  <div class="login-box">
+    <img src="../img/logo.png" alt="Birlikte İyilik Akademi" class="login-logo">
+    <h1>Yönetim Paneli</h1>
+    <input type="password" id="loginPass" placeholder="Şifre" autocomplete="current-password">
+    <button class="btn-login" onclick="doLogin()">Giriş</button>
+    <p class="login-err" id="loginErr"></p>
+  </div>
+</div>
+
+<!-- ── ADMIN SHELL ── -->
+<div id="adminShell">
+
+  <div class="topbar">
+    <div class="topbar-brand"><span>BİA</span> Yönetim</div>
+    <div class="topbar-actions">
+      <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
+      <button class="btn-logout" onclick="doLogout()">Çıkış</button>
+    </div>
+  </div>
+
+  <div class="admin-wrap">
+
+    <!-- LIST VIEW -->
+    <div class="view active" id="viewList">
+      <div class="list-header">
+        <div>
+          <h2>Yazılar & Haberler</h2>
+          <div class="list-meta" id="listMeta"></div>
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="btn btn-outline btn-sm" onclick="showExport()">JSON Dışa Aktar</button>
+          <button class="btn btn-primary" onclick="newForm()">+ Yeni Yazı</button>
+        </div>
+      </div>
+      <div class="card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Başlık</th>
+              <th>Kategori</th>
+              <th>Tarih</th>
+              <th>Durum</th>
+              <th>İşlem</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+      <div class="export-panel" id="exportPanel">
+        <h3>JSON Dışa Aktarma</h3>
+        <p>Aşağıdaki JSON'u kopyalayıp <code>js/data.js</code> dosyasındaki <code>_data</code> dizisine yapıştırın.</p>
+        <textarea id="exportOut" readonly></textarea>
+        <div style="display:flex;gap:.5rem;margin-top:.6rem">
+          <button class="btn btn-primary btn-sm" onclick="copyExport()">Kopyala</button>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('exportPanel').style.display='none'">Kapat</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM VIEW -->
+    <div class="view" id="viewForm">
+      <div class="form-header">
+        <button class="btn btn-outline btn-sm" onclick="showList()">← Geri</button>
+        <h2 id="formHeading">Yeni Yazı</h2>
+      </div>
+      <div class="form-card">
+        <input type="hidden" id="fId">
+        <div class="fg">
+          <label>Başlık *</label>
+          <input type="text" id="fBaslik" placeholder="Yazı başlığı…">
+        </div>
+        <div class="grid-2">
+          <div class="fg">
+            <label>Kategori *</label>
+            <select id="fKategori">
+              <option>Ahlak &amp; Davranış</option>
+              <option>Mübarek Geceler</option>
+              <option>Evliya Hayatları</option>
+              <option>Tarih &amp; Kültür</option>
+              <option>İbadet &amp; Sağlık</option>
+              <option>Değerler Eğitimi</option>
+              <option>Duyuru</option>
+              <option>Haber</option>
+              <option>Diğer</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Tarih *</label>
+            <input type="date" id="fTarih">
+          </div>
+        </div>
+        <div class="fg">
+          <label>Özet (kart gösterimi)</label>
+          <textarea id="fOzet" placeholder="Kartlarda görünecek kısa özet…"></textarea>
+        </div>
+        <div class="fg">
+          <label>İçerik (HTML destekli) *</label>
+          <textarea class="icerik-area" id="fIcerik" placeholder="&lt;p&gt;Yazı içeriği…&lt;/p&gt;"></textarea>
+          <p class="hint">Kullanılabilir etiketler: &lt;p&gt; &lt;h3&gt; &lt;strong&gt; &lt;em&gt; &lt;blockquote&gt; &lt;ul&gt; &lt;li&gt;</p>
+        </div>
+        <div class="fg">
+          <label>Durum</label>
+          <select id="fAktif">
+            <option value="true">Yayında</option>
+            <option value="false">Taslak (Gizli)</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-outline" onclick="showList()">İptal</button>
+          <button class="btn btn-success" onclick="saveItem()">Kaydet</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <h3>Yazıyı Sil</h3>
+    <p id="confirmMsg"></p>
+    <div class="confirm-actions">
+      <button class="btn btn-outline" onclick="closeConfirm()">İptal</button>
+      <button class="btn btn-danger" id="confirmOk">Sil</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="../js/data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var PW  = 'biaadmin2026';
+  var KEY = 'bia_admin_session';
+
+  /* ── Auth ── */
+  function loggedIn() { return sessionStorage.getItem(KEY) === '1'; }
+
+  window.doLogin = function () {
+    var pw  = document.getElementById('loginPass').value;
+    var err = document.getElementById('loginErr');
+    if (pw === PW) {
+      sessionStorage.setItem(KEY, '1');
+      document.getElementById('loginScreen').style.display  = 'none';
+      document.getElementById('adminShell').style.display   = 'block';
+      loadList();
+    } else {
+      err.textContent = 'Şifre hatalı.';
+      document.getElementById('loginPass').value = '';
+    }
+  };
+
+  document.getElementById('loginPass').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') window.doLogin();
+  });
+
+  window.doLogout = function () {
+    sessionStorage.removeItem(KEY);
+    location.reload();
+  };
+
+  if (loggedIn()) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminShell').style.display  = 'block';
+    loadList();
+  }
+
+  /* ── Views ── */
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(function (v) { v.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+  }
+
+  window.showList = function () { showView('viewList'); loadList(); };
+
+  window.newForm = function () {
+    document.getElementById('formHeading').textContent = 'Yeni Yazı';
+    document.getElementById('fId').value      = '';
+    document.getElementById('fBaslik').value  = '';
+    document.getElementById('fKategori').value = 'Ahlak & Davranış';
+    document.getElementById('fTarih').value   = today();
+    document.getElementById('fOzet').value    = '';
+    document.getElementById('fIcerik').value  = '';
+    document.getElementById('fAktif').value   = 'true';
+    showView('viewForm');
+  };
+
+  window.editForm = function (id) {
+    var y = BIAKADEMI_YAZILAR.getById(id);
+    if (!y) return;
+    document.getElementById('formHeading').textContent = 'Yazıyı Düzenle';
+    document.getElementById('fId').value      = y.id;
+    document.getElementById('fBaslik').value  = y.baslik;
+    document.getElementById('fKategori').value = y.kategori;
+    document.getElementById('fTarih').value   = y.tarih;
+    document.getElementById('fOzet').value    = y.ozet;
+    document.getElementById('fIcerik').value  = y.icerik;
+    document.getElementById('fAktif').value   = y.aktif ? 'true' : 'false';
+    showView('viewForm');
+  };
+
+  /* ── List ── */
+  function loadList() {
+    var items = BIAKADEMI_YAZILAR.getAllAdmin();
+    var tbody = document.getElementById('tableBody');
+    document.getElementById('listMeta').textContent = items.length + ' yazı';
+    tbody.innerHTML = '';
+    items.forEach(function (y, i) {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td style="color:var(--muted);font-size:.78rem">' + (i + 1) + '</td>' +
+        '<td class="td-title">' + esc(y.baslik) + '</td>' +
+        '<td><span class="cat-pill">' + esc(y.kategori) + '</span></td>' +
+        '<td style="white-space:nowrap;font-size:.8rem;color:var(--muted)">' + esc(y.tarihGosterim || y.tarih) + '</td>' +
+        '<td><span class="status-dot ' + (y.aktif ? 'dot-on' : 'dot-off') + '" title="' + (y.aktif ? 'Yayında' : 'Taslak') + '"></span></td>' +
+        '<td><div class="td-actions">' +
+          '<button class="btn btn-outline btn-sm" onclick="editForm(' + y.id + ')">Düzenle</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="askDelete(' + y.id + ',\'' + esc(y.baslik).replace(/'/g, "\\\'") + '\')">Sil</button>' +
+        '</div></td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ── Save ── */
+  window.saveItem = function () {
+    var baslik  = document.getElementById('fBaslik').value.trim();
+    var kat     = document.getElementById('fKategori').value;
+    var tarih   = document.getElementById('fTarih').value;
+    var ozet    = document.getElementById('fOzet').value.trim();
+    var icerik  = document.getElementById('fIcerik').value.trim();
+    var aktif   = document.getElementById('fAktif').value === 'true';
+    var idVal   = document.getElementById('fId').value;
+
+    if (!baslik)  { toast('Başlık zorunludur.', 'err'); return; }
+    if (!tarih)   { toast('Tarih zorunludur.', 'err'); return; }
+    if (!icerik)  { toast('İçerik zorunludur.', 'err'); return; }
+
+    var yazi = {
+      id:           idVal ? parseInt(idVal) : Date.now(),
+      slug:         slugify(baslik),
+      baslik:       baslik,
+      kategori:     kat,
+      tarih:        tarih,
+      tarihGosterim: formatDate(tarih),
+      ozet:         ozet || baslik,
+      icerik:       icerik,
+      aktif:        aktif
+    };
+
+    BIAKADEMI_YAZILAR.save(yazi);
+    toast('Yazı kaydedildi!', 'ok');
+    showList();
+  };
+
+  /* ── Delete ── */
+  var _deleteId = null;
+
+  window.askDelete = function (id, baslik) {
+    _deleteId = id;
+    document.getElementById('confirmMsg').textContent = '"' + baslik + '" yazısını silmek istiyor musunuz?';
+    document.getElementById('confirmOverlay').classList.add('open');
+    document.getElementById('confirmOk').onclick = function () {
+      BIAKADEMI_YAZILAR.delete(_deleteId);
+      closeConfirm();
+      loadList();
+      toast('Yazı silindi.', 'ok');
+    };
+  };
+
+  window.closeConfirm = function () {
+    document.getElementById('confirmOverlay').classList.remove('open');
+    _deleteId = null;
+  };
+
+  /* ── Export ── */
+  window.showExport = function () {
+    var panel = document.getElementById('exportPanel');
+    panel.style.display = 'block';
+    document.getElementById('exportOut').value = BIAKADEMI_YAZILAR.exportJSON();
+    panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  };
+
+  window.copyExport = function () {
+    var ta = document.getElementById('exportOut');
+    ta.select();
+    document.execCommand('copy');
+    toast('Kopyalandı!', 'ok');
+  };
+
+  /* ── Toast ── */
+  function toast(msg, type) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className   = 'toast ' + (type || 'ok');
+    el.classList.add('show');
+    setTimeout(function () { el.classList.remove('show'); }, 3000);
+  }
+
+  /* ── Helpers ── */
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function today() { return new Date().toISOString().split('T')[0]; }
+
+  function slugify(s) {
+    var tr = {ı:'i',ğ:'g',ü:'u',ş:'s',ö:'o',ç:'c',İ:'i',Ğ:'g',Ü:'u',Ş:'s',Ö:'o',Ç:'c'};
+    return s.toLowerCase()
+      .replace(/[ığüşöçİĞÜŞÖÇı]/g, function (c){ return tr[c] || c; })
+      .replace(/[^a-z0-9\s-]/g,'').trim()
+      .replace(/\s+/g,'-').replace(/-+/g,'-').slice(0,60);
+  }
+
+  function formatDate(iso) {
+    var m = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+    var p = iso.split('-');
+    return parseInt(p[2]) + ' ' + m[parseInt(p[1])-1] + ' ' + p[0];
+  }
+
+})();
+</script>
+</body>
+</html>
