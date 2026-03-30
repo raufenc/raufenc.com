@@ -135,9 +135,12 @@ select:focus,input:focus{outline:none;border-color:var(--gold3)}
 }
 .theme-btn:hover,.theme-btn.active{border-color:var(--gold3);color:var(--gold);background:rgba(212,168,83,.1)}
 /* Varsayılan (karanlık) harita filtresi — light/sepia dışı */
-html:not([data-theme="light"]):not([data-theme="sepia"]) #map .leaflet-tile-pane{filter:sepia(.65) brightness(.88) saturate(.55) contrast(1.15)}
+html:not([data-theme="light"]):not([data-theme="sepia"]) #map .leaflet-tile-pane{filter:sepia(.2) brightness(.85) saturate(.75) contrast(1.1)}
 .map-label{background:transparent!important;border:none!important;box-shadow:none!important;color:#2c1810!important;font-size:11px!important;font-weight:700!important;font-family:var(--font-sans)!important;text-shadow:1px 1px 0 rgba(255,240,200,.8),-1px -1px 0 rgba(255,240,200,.8),1px -1px 0 rgba(255,240,200,.8),-1px 1px 0 rgba(255,240,200,.8)!important;white-space:nowrap!important;pointer-events:none!important;padding:0!important;}
 .map-label::before{display:none!important}
+.leaflet-control-layers{background:var(--bg2)!important;color:var(--text)!important;border:1px solid var(--gold3)!important;border-radius:var(--radius)!important;box-shadow:var(--shadow)!important;font-family:var(--font-sans)!important;font-size:13px!important}
+.leaflet-control-layers label{color:var(--text)!important;cursor:pointer}
+.leaflet-control-layers-toggle{width:30px!important;height:30px!important}
 .leaflet-popup-content-wrapper{background:var(--bg2)!important;color:var(--text)!important;border:1px solid var(--gold3)!important;border-radius:var(--radius)!important;box-shadow:var(--shadow)!important}
 .leaflet-popup-tip{background:var(--bg2)!important;border-color:var(--gold3)!important}
 .leaflet-popup-content{margin:12px 16px!important;font-family:var(--font-sans)!important;font-size:13px!important;line-height:1.5!important}
