@@ -48,14 +48,23 @@ export default async function handler(req) {
 
   if (req.method === 'GET') {
     const { searchParams } = new URL(req.url);
-    if (searchParams.get('password') !== ADMIN_PW)
-      return json({ error: 'Yanlış şifre' }, 401);
     const type = searchParams.get('type') || 'news';
     const file = FILES[type];
     if (!file) return json({ error: 'Geçersiz tip' }, 400);
+
+    const hasPw = searchParams.get('password') === ADMIN_PW;
+    const isPublic = searchParams.has('public');
+
+    if (!hasPw && !isPublic) return json({ error: 'Yanlış şifre' }, 401);
+
     try {
       const data = await gh(`/repos/${REPO}/contents/${file}`);
       const content = decode(data.content);
+      // Public mode: data only, no sha. Admin mode: data + sha
+      if (isPublic) {
+        const publicCors = { ...cors, 'Cache-Control': 'public, max-age=60, s-maxage=60' };
+        return new Response(JSON.stringify({ data: content }), { status: 200, headers: publicCors });
+      }
       return json({ data: content, sha: data.sha });
     } catch (e) {
       return json({ error: e.message }, 500);
