@@ -1110,3 +1110,43 @@
     .classification-bins { flex-direction: column; }
     .timeline-item .ordering-btns { position: static !important; transform: none !important; margin-top: 0.5rem; }
 }
+
+/* ===== Gunluk Icerik Karti ===== */
+.gunluk-kart {
+    padding: 1.25rem 1.5rem;
+}
+.gunluk-kart-ust {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+.gunluk-etiket {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.gunluk-etiket.ayet { background: #fff3cd; color: #856404; }
+.gunluk-etiket.hadis { background: #d1ecf1; color: #0c5460; }
+.gunluk-etiket.dua  { background: #d4edda; color: #155724; }
+
+/* ===== TTS Button active state ===== */
+#btn-tts.active {
+    background: var(--primary-light, #e8f4f0) !important;
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+/* ===== Activity Calendar ===== */
+#activity-calendar svg rect { cursor: default; }
+#activity-calendar svg rect:hover { opacity: 0.8; }
+
+/* ===== Radar Chart Container ===== */
+.radar-container {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}

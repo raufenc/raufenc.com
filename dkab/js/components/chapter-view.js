@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=4';
-import { getGradeInfo } from '../data-loader.js?v=4';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=4';
+import { store } from '../store.js?v=6';
+import { getGradeInfo } from '../data-loader.js?v=6';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=6';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {
@@ -40,14 +40,21 @@ export function renderChapterView(el, data, app) {
                     </div>
                 </div>
 
-                <!-- Tab bar -->
-                <div class="tab-bar mt-md">
-                    ${tabs.map((t, i) => `
-                        <button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.id}">
-                            <span>${t.icon}</span>
-                            <span>${t.label}</span>
-                        </button>
-                    `).join('')}
+                <!-- TTS + Tab bar -->
+                <div class="flex items-center justify-between mt-md" style="gap: 0.5rem; flex-wrap: wrap;">
+                    <div class="tab-bar" style="flex: 1; min-width: 0;">
+                        ${tabs.map((t, i) => `
+                            <button class="tab-btn ${i === 0 ? 'active' : ''}" data-tab="${t.id}">
+                                <span>${t.icon}</span>
+                                <span>${t.label}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    ${window.speechSynthesis ? `
+                    <button id="btn-tts" class="btn btn-sm" style="flex-shrink:0; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); font-size:0.8rem; padding: 0.4rem 0.75rem; border-radius: 20px;">
+                        &#128362; Sesli Oku
+                    </button>
+                    ` : ''}
                 </div>
             </div>
 
@@ -79,7 +86,7 @@ export function renderChapterView(el, data, app) {
         });
     });
 
-    // Init first tab if quiz
+    // Init first tab if quiz/games/dua
     if (tabs[0]?.id === 'quiz') {
         initQuiz(el, data, app);
     }
@@ -89,6 +96,55 @@ export function renderChapterView(el, data, app) {
     if (tabs[0]?.id === 'dua') {
         initAudioPlayers(el);
     }
+
+    // TTS button
+    initTTS(el, data);
+}
+
+function initTTS(el, data) {
+    const btn = el.querySelector('#btn-tts');
+    if (!btn || !window.speechSynthesis) return;
+
+    const ozet = data.conceptCard?.ozet || '';
+    if (!ozet) { btn.style.display = 'none'; return; }
+
+    let utterance = null;
+    let speaking = false;
+
+    btn.addEventListener('click', () => {
+        if (speaking) {
+            window.speechSynthesis.cancel();
+            speaking = false;
+            btn.innerHTML = '&#128362; Sesli Oku';
+            btn.classList.remove('active');
+            return;
+        }
+
+        utterance = new SpeechSynthesisUtterance(ozet);
+        utterance.lang = 'tr-TR';
+        utterance.rate = 0.9;
+
+        // Prefer a Turkish voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const trVoice = voices.find(v => v.lang.startsWith('tr'));
+        if (trVoice) utterance.voice = trVoice;
+
+        utterance.onend = () => {
+            speaking = false;
+            btn.innerHTML = '&#128362; Sesli Oku';
+            btn.classList.remove('active');
+        };
+        utterance.onerror = () => {
+            speaking = false;
+            btn.innerHTML = '&#128362; Sesli Oku';
+            btn.classList.remove('active');
+        };
+
+        window.speechSynthesis.speak(utterance);
+        speaking = true;
+        btn.innerHTML = '&#9646;&#9646; Durdur';
+        btn.classList.add('active');
+    });
 }
 
 function renderTabContent(tabId, data) {

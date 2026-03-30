@@ -1,16 +1,21 @@
 // ===== DKAB Akademi - Ana Uygulama + Router =====
 
-import { store } from './store.js?v=4';
-import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=4';
-import { renderHeader } from './components/header.js?v=4';
-import { renderSidebar } from './components/sidebar.js?v=4';
-import { renderHome } from './components/home.js?v=4';
-import { renderClassSelector } from './components/class-selector.js?v=4';
-import { renderUnitList } from './components/unit-list.js?v=4';
-import { renderChapterView } from './components/chapter-view.js?v=4';
-import { renderGlossary } from './components/glossary.js?v=4';
-import { renderProgressDashboard } from './components/progress-dashboard.js?v=4';
-import { showConfetti, showXpPopup } from './components/effects.js?v=4';
+import { store } from './store.js?v=6';
+import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=6';
+import { renderHeader } from './components/header.js?v=6';
+import { renderSidebar } from './components/sidebar.js?v=6';
+import { renderHome } from './components/home.js?v=6';
+import { renderClassSelector } from './components/class-selector.js?v=6';
+import { renderUnitList } from './components/unit-list.js?v=6';
+import { renderChapterView } from './components/chapter-view.js?v=6';
+import { renderGlossary } from './components/glossary.js?v=6';
+import { renderProgressDashboard } from './components/progress-dashboard.js?v=6';
+import { showConfetti, showXpPopup } from './components/effects.js?v=6';
+// 360° Ekosistem bilesenleri
+import { renderLearningPath } from './components/learning-path.js?v=6';
+import { renderAssessment } from './components/assessment.js?v=6';
+import { renderGoals } from './components/goals.js?v=6';
+import { renderHabits } from './components/habits.js?v=6';
 
 class App {
     constructor() {
@@ -23,9 +28,10 @@ class App {
         this._bindEvents();
         this._initTheme();
 
-        // Update streak on load
+        // Update streak and daily activity on load
         if (store.user) {
             store.updateStreak();
+            store.logDailyActivity();
         }
 
         // Initial render
@@ -86,6 +92,9 @@ class App {
             const grade = parseInt(parts[1]);
             if (parts[2] === 'unite' && parts[3]) {
                 const unitId = `U${parts[3]}`;
+                if (parts[4] === 'degerlendirme') {
+                    return { page: 'assessment', grade, unitId };
+                }
                 if (parts[4] === 'bolum' && parts[5]) {
                     // bolum_id comes directly from URL (e.g. U1_B1, U1_GIRIS, U1_DEG, U1_PERF)
                     const chapterId = parts[5];
@@ -102,6 +111,14 @@ class App {
         if (parts[0] === 'sinif-sec') return { page: 'class-selector' };
         if (parts[0] === 'ilerleme') return { page: 'progress' };
         if (parts[0] === 'profil') return { page: 'profile' };
+
+        // 360° Ekosistem rotalari
+        if (parts[0] === 'yolum') return { page: 'learning-path' };
+        if (parts[0] === 'hedefler') return { page: 'goals' };
+        if (parts[0] === 'aliskanliklar') return { page: 'habits' };
+        if (parts[0] === 'sinif-siralamasi') return { page: 'leaderboard' };
+        if (parts[0] === 'pano') return { page: 'knowledge-wall' };
+        if (parts[0] === 'meydan-okuma') return { page: 'challenges' };
 
         return { page: 'home' };
     }
@@ -126,7 +143,7 @@ class App {
                     window.location.hash = '#/sinif-sec';
                     return;
                 }
-                renderHome(this.mainEl, this);
+                await renderHome(this.mainEl, this);
                 break;
 
             case 'grade-home':
@@ -146,7 +163,36 @@ class App {
                 break;
 
             case 'progress':
-                renderProgressDashboard(this.mainEl, this);
+                await renderProgressDashboard(this.mainEl, this);
+                break;
+
+            // 360° Ekosistem sayfalari
+            case 'learning-path':
+                await renderLearningPath(this.mainEl, this);
+                break;
+
+            case 'assessment':
+                await renderAssessment(this.mainEl, this, route.grade, route.unitId);
+                break;
+
+            case 'goals':
+                renderGoals(this.mainEl, this);
+                break;
+
+            case 'habits':
+                renderHabits(this.mainEl, this);
+                break;
+
+            case 'leaderboard':
+            case 'knowledge-wall':
+            case 'challenges':
+                this.mainEl.innerHTML = `
+                    <div class="content-area text-center mt-xl">
+                        <span style="font-size:4rem;">&#128679;</span>
+                        <h2 class="mt-lg">Yakin Zamanda</h2>
+                        <p class="text-muted mt-md">Bu ozellik sinif kodu sistemi ile birlikte aktif olacak.</p>
+                        <a href="#/" class="btn btn-primary mt-lg">Ana Sayfaya Don</a>
+                    </div>`;
                 break;
 
             default:

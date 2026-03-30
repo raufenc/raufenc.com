@@ -16,7 +16,45 @@ const DEFAULT_STATE = {
         totalQuizzes: 0,
         correctAnswers: 0,
         totalAnswers: 0,
-        enginesUsed: []
+        enginesUsed: [],
+        timeTracking: {},
+        sessionLog: []
+    },
+    // 360° Ekosistem - Adaptif Ogrenme
+    adaptive: {
+        questionHistory: {},
+        topicMastery: {}
+    },
+    // 360° Ekosistem - Degerlendirme
+    assessments: {
+        reactions: [],
+        prePostResults: {}
+    },
+    // 360° Ekosistem - Akilli Ogrenme Yolu
+    learningPath: {
+        recommendations: [],
+        lastGenerated: null,
+        preferences: {
+            dailyGoalMinutes: 15,
+            difficulty: 'normal'
+        }
+    },
+    // 360° Ekosistem - Hedef ve Dusunme
+    goals: {
+        active: [],
+        completed: [],
+        reflections: []
+    },
+    // 360° Ekosistem - Davranis Takibi
+    behaviorLog: [],
+    // 360° Ekosistem - Aliskanlik Takibi
+    habits: {
+        dailyLog: {}
+    },
+    // 360° Ekosistem - Sinif (Ekip)
+    classroom: {
+        code: null,
+        joinedAt: null
     }
 };
 
@@ -53,10 +91,21 @@ class Store {
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
                 const parsed = JSON.parse(raw);
+                const defaults = JSON.parse(JSON.stringify(DEFAULT_STATE));
                 return {
-                    ...JSON.parse(JSON.stringify(DEFAULT_STATE)),
+                    ...defaults,
                     ...parsed,
-                    stats: { ...JSON.parse(JSON.stringify(DEFAULT_STATE.stats)), ...(parsed.stats || {}) }
+                    stats: { ...defaults.stats, ...(parsed.stats || {}) },
+                    adaptive: { ...defaults.adaptive, ...(parsed.adaptive || {}) },
+                    assessments: { ...defaults.assessments, ...(parsed.assessments || {}) },
+                    learningPath: {
+                        ...defaults.learningPath,
+                        ...(parsed.learningPath || {}),
+                        preferences: { ...defaults.learningPath.preferences, ...(parsed.learningPath?.preferences || {}) }
+                    },
+                    goals: { ...defaults.goals, ...(parsed.goals || {}) },
+                    habits: { ...defaults.habits, ...(parsed.habits || {}) },
+                    classroom: { ...defaults.classroom, ...(parsed.classroom || {}) }
                 };
             }
         } catch (e) {
@@ -307,6 +356,167 @@ class Store {
 
         // Game variety badge
         if (s.enginesUsed && s.enginesUsed.length >= 10) this.awardBadge('game_variety');
+    }
+
+    // ===== 360° Adaptif Ogrenme =====
+    recordAdaptiveAnswer(questionId, isCorrect) {
+        const h = this._state.adaptive.questionHistory;
+        if (!h[questionId]) {
+            h[questionId] = { attempts: 0, correct: 0, lastSeen: null, interval: 1, nextReview: null };
+        }
+        h[questionId].attempts++;
+        if (isCorrect) h[questionId].correct++;
+        h[questionId].lastSeen = new Date().toISOString();
+
+        // Aralikli tekrar: dogru ise aralik 2x, yanlis ise 1'e dusur
+        if (isCorrect) {
+            h[questionId].interval = Math.min(30, h[questionId].interval * 2);
+        } else {
+            h[questionId].interval = 1;
+        }
+        const next = new Date();
+        next.setDate(next.getDate() + h[questionId].interval);
+        h[questionId].nextReview = next.toISOString().split('T')[0];
+
+        this._save();
+    }
+
+    updateTopicMastery(unitId, chapterId, score) {
+        const key = `${unitId}_${chapterId}`;
+        const m = this._state.adaptive.topicMastery;
+        if (!m[key]) m[key] = { score: 0, attempts: 0 };
+        m[key].attempts++;
+        // Agirlikli ortalama: eski %60 + yeni %40
+        m[key].score = Math.round(m[key].score * 0.6 + score * 0.4);
+        this._save();
+    }
+
+    getTopicMastery(unitId, chapterId) {
+        return this._state.adaptive.topicMastery[`${unitId}_${chapterId}`] || { score: 0, attempts: 0 };
+    }
+
+    getQuestionsForReview() {
+        const today = new Date().toISOString().split('T')[0];
+        return Object.entries(this._state.adaptive.questionHistory)
+            .filter(([, h]) => h.nextReview && h.nextReview <= today)
+            .map(([id, h]) => ({ questionId: id, ...h }));
+    }
+
+    // ===== 360° Degerlendirme =====
+    addReaction(grade, unitId, chapterId, rating, comment) {
+        this._state.assessments.reactions.push({
+            grade, unitId, chapterId, rating, comment,
+            date: new Date().toISOString()
+        });
+        this._save();
+    }
+
+    savePrePostResult(grade, unitId, type, score, total) {
+        const key = `${grade}_${unitId}`;
+        if (!this._state.assessments.prePostResults[key]) {
+            this._state.assessments.prePostResults[key] = {};
+        }
+        this._state.assessments.prePostResults[key][type] = {
+            score, total,
+            percent: total > 0 ? Math.round((score / total) * 100) : 0,
+            date: new Date().toISOString()
+        };
+        this._save();
+    }
+
+    getPrePostResult(grade, unitId) {
+        return this._state.assessments.prePostResults[`${grade}_${unitId}`] || null;
+    }
+
+    // ===== 360° Hedefler =====
+    addGoal(text, deadline) {
+        this._state.goals.active.push({
+            id: Date.now().toString(36),
+            text, deadline,
+            createdAt: new Date().toISOString()
+        });
+        this._save();
+    }
+
+    completeGoal(goalId) {
+        const idx = this._state.goals.active.findIndex(g => g.id === goalId);
+        if (idx >= 0) {
+            const goal = this._state.goals.active.splice(idx, 1)[0];
+            goal.completedAt = new Date().toISOString();
+            this._state.goals.completed.push(goal);
+            this._save();
+        }
+    }
+
+    addReflection(text) {
+        this._state.goals.reflections.push({
+            text,
+            date: new Date().toISOString()
+        });
+        this._save();
+    }
+
+    // ===== 360° Davranis Takibi =====
+    logBehavior(behaviors) {
+        this._state.behaviorLog.push({
+            behaviors,
+            date: new Date().toISOString()
+        });
+        this._save();
+    }
+
+    // ===== 360° Aliskanlik Takibi =====
+    logDailyActivity() {
+        const today = new Date().toISOString().split('T')[0];
+        if (!this._state.habits.dailyLog[today]) {
+            this._state.habits.dailyLog[today] = { sessions: 0, minutesSpent: 0 };
+        }
+        this._state.habits.dailyLog[today].sessions++;
+        this._save();
+    }
+
+    addTimeSpent(minutes) {
+        const today = new Date().toISOString().split('T')[0];
+        if (!this._state.habits.dailyLog[today]) {
+            this._state.habits.dailyLog[today] = { sessions: 0, minutesSpent: 0 };
+        }
+        this._state.habits.dailyLog[today].minutesSpent += minutes;
+        this._save();
+    }
+
+    getDailyLog() {
+        return this._state.habits.dailyLog;
+    }
+
+    getTotalDaysActive() {
+        return Object.keys(this._state.habits.dailyLog).length;
+    }
+
+    // ===== 360° Ogrenme Yolu Tercihleri =====
+    setDifficulty(difficulty) {
+        this._state.learningPath.preferences.difficulty = difficulty;
+        this._save();
+    }
+
+    getDifficulty() {
+        return this._state.learningPath.preferences.difficulty || 'normal';
+    }
+
+    // ===== 360° Sinif (Ekip) =====
+    joinClassroom(code) {
+        this._state.classroom.code = code;
+        this._state.classroom.joinedAt = new Date().toISOString();
+        this._save();
+    }
+
+    leaveClassroom() {
+        this._state.classroom.code = null;
+        this._state.classroom.joinedAt = null;
+        this._save();
+    }
+
+    getClassroomCode() {
+        return this._state.classroom.code;
     }
 
     // ===== Reset =====

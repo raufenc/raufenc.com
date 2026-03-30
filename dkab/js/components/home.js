@@ -1,9 +1,55 @@
 // ===== DKAB Akademi - Ana Sayfa (Dashboard) =====
 
-import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=4';
-import { getGradeInfo } from '../data-loader.js?v=4';
+import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=6';
+import { getGradeInfo } from '../data-loader.js?v=6';
+import { getDailyMessage, getStreakMessage, getComebackMessage } from '../messages.js?v=6';
 
-export function renderHome(el, app) {
+// Gunluk icerik: deterministik (yilin gunune gore)
+let _gunlukIcerik = null;
+async function getGunlukIcerik() {
+    if (_gunlukIcerik) return _gunlukIcerik;
+    try {
+        const res = await fetch('data/shared/gunluk_icerik.json');
+        const data = await res.json();
+        const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+        _gunlukIcerik = data.icerikler[dayOfYear % data.icerikler.length];
+    } catch {
+        _gunlukIcerik = null;
+    }
+    return _gunlukIcerik;
+}
+
+// Hicri takvim: mevcut aya yakin ozel gun varsa banner dondurur
+let _takvimBanner = undefined;
+async function getTakvimBanner(grade) {
+    if (_takvimBanner !== undefined) return _takvimBanner;
+    try {
+        const res = await fetch('data/shared/takvim.json');
+        const data = await res.json();
+        const currentMonth = new Date().getMonth() + 1; // 1-12
+        // Find a Hicri month that approximates current Gregorian month (±1)
+        const match = data.aylar.find(a =>
+            Math.abs(a.approximate_gregorian_month - currentMonth) <= 1
+        );
+        if (match) {
+            const relevant = match.one_cikar.find(o =>
+                !o.siniflar || o.siniflar.includes(grade)
+            );
+            if (relevant) {
+                _takvimBanner = { ay: match, konu: relevant };
+            } else {
+                _takvimBanner = null;
+            }
+        } else {
+            _takvimBanner = null;
+        }
+    } catch {
+        _takvimBanner = null;
+    }
+    return _takvimBanner;
+}
+
+export async function renderHome(el, app) {
     const user = store.user;
     const stats = store.stats;
     const grade = user.grade;
@@ -14,12 +60,17 @@ export function renderHome(el, app) {
 
     // Get earned badges
     const earnedBadges = stats.badges.map(id => BADGES[id]).filter(Boolean);
-    const recentBadges = earnedBadges.slice(-3);
 
     // Quiz accuracy
     const accuracy = stats.totalAnswers > 0
         ? Math.round((stats.correctAnswers / stats.totalAnswers) * 100)
         : 0;
+
+    // Load daily content + Islamic calendar banner in parallel
+    const [gunluk, takvimBanner] = await Promise.all([
+        getGunlukIcerik(),
+        getTakvimBanner(grade)
+    ]);
 
     el.innerHTML = `
         <div class="content-area">
@@ -52,8 +103,47 @@ export function renderHome(el, app) {
                 </div>
             </div>
 
+            <!-- Gunluk Icerik -->
+            ${gunluk ? `
+            <div class="gunluk-kart card anim-fade-in-up mt-lg" style="background: linear-gradient(135deg, #f8f0e3, #fff8ee); border-left: 4px solid #c8a96e;">
+                <div class="gunluk-kart-ust">
+                    <span class="gunluk-etiket ${gunluk.kategori === 'ayet' ? 'ayet' : gunluk.kategori === 'hadis' ? 'hadis' : 'dua'}">
+                        ${gunluk.kategori === 'ayet' ? '&#128214; Ayet-i Kerime' : gunluk.kategori === 'hadis' ? '&#128218; Hadis-i Şerif' : '&#128591; Dua'}
+                    </span>
+                    <span class="text-muted" style="font-size:0.8rem;">Gunun Ogutü</span>
+                </div>
+                <p class="gunluk-metin font-display" style="font-size:1.05rem; line-height:1.7; color:#3d2b1f; margin: 0.75rem 0;">
+                    "${gunluk.metin}"
+                </p>
+                ${gunluk.tercume ? `<p class="text-muted" style="font-size:0.85rem; font-style:italic; margin-bottom:0.5rem;">${gunluk.tercume}</p>` : ''}
+                <p class="text-muted" style="font-size:0.8rem; margin:0;">— ${gunluk.kaynak}</p>
+            </div>
+            ` : ''}
+
+            <!-- Hicri Takvim Banneri -->
+            ${takvimBanner ? `
+            <a href="#/sinif/${grade}" class="takvim-banner card anim-fade-in-up mt-lg" style="display:flex; align-items:center; gap:1rem; padding: 1rem 1.25rem; background: linear-gradient(135deg, ${takvimBanner.ay.renk}22, ${takvimBanner.ay.renk}11); border-left: 4px solid ${takvimBanner.ay.renk}; text-decoration:none; color:inherit;">
+                <span style="font-size:2rem;">${takvimBanner.ay.ikon}</span>
+                <div style="flex:1; min-width:0;">
+                    <div style="font-size:0.75rem; font-weight:600; color:${takvimBanner.ay.renk}; text-transform:uppercase; letter-spacing:0.05em;">${takvimBanner.ay.ad} Ayi</div>
+                    <div style="font-weight:600; margin-top:0.15rem;">${takvimBanner.konu.konu}</div>
+                    <div class="text-muted" style="font-size:0.8rem; margin-top:0.15rem;">${takvimBanner.konu.aciklama}</div>
+                </div>
+                <span style="color:${takvimBanner.ay.renk};">&#8594;</span>
+            </a>
+            ` : ''}
+
             <!-- Quick Actions -->
             <div class="quick-actions mt-xl stagger">
+                <a href="#/yolum" class="quick-action-card anim-fade-in-up card card-interactive">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #6C63FF, #48C6EF);">&#128269;</div>
+                    <div class="quick-action-info">
+                        <h3>Ogrenme Yolum</h3>
+                        <p class="text-muted">Sana ozel ders onerileri</p>
+                    </div>
+                    <span class="quick-action-arrow">&#8594;</span>
+                </a>
+
                 <a href="#/sinif/${grade}" class="quick-action-card anim-fade-in-up card card-interactive">
                     <div class="quick-action-icon" style="background: ${gradeInfo?.gradient};">&#128218;</div>
                     <div class="quick-action-info">
@@ -63,20 +153,20 @@ export function renderHome(el, app) {
                     <span class="quick-action-arrow">&#8594;</span>
                 </a>
 
-                <a href="#/sinif/${grade}/sozluk" class="quick-action-card anim-fade-in-up card card-interactive">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #feca57, #ff9f43);">&#128214;</div>
+                <a href="#/hedefler" class="quick-action-card anim-fade-in-up card card-interactive">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #feca57, #ff9f43);">&#127919;</div>
                     <div class="quick-action-info">
-                        <h3>Sozluk</h3>
-                        <p class="text-muted">Terimleri ogren ve tekrarla</p>
+                        <h3>Hedeflerim</h3>
+                        <p class="text-muted">${store.state.goals.active.length > 0 ? `${store.state.goals.active.length} aktif hedef` : 'Hedef koy, basla!'}</p>
                     </div>
                     <span class="quick-action-arrow">&#8594;</span>
                 </a>
 
-                <a href="#/ilerleme" class="quick-action-card anim-fade-in-up card card-interactive">
-                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #6C63FF, #48C6EF);">&#128200;</div>
+                <a href="#/aliskanliklar" class="quick-action-card anim-fade-in-up card card-interactive">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #1dd1a1, #10ac84);">&#128197;</div>
                     <div class="quick-action-info">
-                        <h3>Ilerleme</h3>
-                        <p class="text-muted">${stats.completedChapters} bolum tamamlandi</p>
+                        <h3>Aliskanlik Takibi</h3>
+                        <p class="text-muted">${store.getTotalDaysActive()} gun aktif</p>
                     </div>
                     <span class="quick-action-arrow">&#8594;</span>
                 </a>
@@ -138,9 +228,17 @@ export function renderHome(el, app) {
 }
 
 function getMotivation(stats) {
-    if (stats.streak >= 7) return 'Harika bir seri! Devam et, cok iyi gidiyorsun!';
-    if (stats.streak >= 3) return `${stats.streak} gunluk serin var. Birakma!`;
-    if (stats.completedChapters > 10) return 'Cok yol kat ettin, tebrikler!';
-    if (stats.completedChapters > 0) return 'Guzel ilerliyorsun, bugun de bir ders yapalim mi?';
-    return 'Bugune bir ders ile basla, harika seyler seni bekliyor!';
+    // Inaktiflik kontrolu
+    if (stats.lastActiveDate) {
+        const last = new Date(stats.lastActiveDate + 'T00:00:00');
+        const daysSince = Math.floor((new Date() - last) / (1000 * 60 * 60 * 24));
+        const comebackMsg = getComebackMessage(daysSince);
+        if (comebackMsg) return comebackMsg;
+    }
+
+    // Seri mesaji
+    if (stats.streak > 0) return getStreakMessage(stats.streak);
+
+    // Genel motivasyon
+    return getDailyMessage();
 }

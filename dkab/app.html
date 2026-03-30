@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css?v=4">
-    <link rel="stylesheet" href="css/components.css?v=4">
-    <link rel="stylesheet" href="css/animations.css?v=4">
+    <link rel="stylesheet" href="css/main.css?v=6">
+    <link rel="stylesheet" href="css/components.css?v=6">
+    <link rel="stylesheet" href="css/animations.css?v=6">
 </head>
 <body>
     <!-- Header -->
@@ -29,6 +29,34 @@
         </div>
     </main>
 
-    <script type="module" src="js/app.js?v=4"></script>
+    <script type="module" src="js/app.js?v=6"></script>
+    <script>
+        // Service Worker kaydı
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/dkab/sw.js', { scope: '/dkab/' })
+                    .catch(() => { /* SW kaydı başarısız olursa sessizce devam et */ });
+            });
+        }
+
+        // Offline/online göstergesi
+        function updateOnlineStatus() {
+            const el = document.getElementById('offline-banner');
+            if (!el) return;
+            if (!navigator.onLine) {
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        document.addEventListener('DOMContentLoaded', updateOnlineStatus);
+    </script>
+
+    <!-- Offline banneri -->
+    <div id="offline-banner" style="display:none; position:fixed; bottom:0; left:0; right:0; background:#2d3436; color:#fff; text-align:center; padding:0.6rem 1rem; font-size:0.85rem; z-index:9999;">
+        &#9888;&#65039; Çevrimdışısınız — Kayıtlı içerikler gösteriliyor
+    </div>
 </body>
 </html>
