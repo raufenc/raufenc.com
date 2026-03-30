@@ -369,6 +369,27 @@ textarea.form-input { min-height: 120px; resize: vertical; }
 .doc-info h4 { font-family: var(--font-sans); font-size: 15px; font-weight: 500; margin-bottom: 0; }
 .doc-info p { font-size: 13px; margin-bottom: 0; }
 
+/* ── CAROUSEL ── */
+.carousel { position: relative; overflow: hidden; }
+.carousel-track {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 4px 0 16px;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-card {
+  flex: 0 0 calc(33.333% - 11px); scroll-snap-align: start; min-width: 280px;
+}
+.carousel-card .card { margin-bottom: 0; }
+.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.dot {
+  width: 10px; height: 10px; border-radius: 50%; border: none;
+  background: var(--color-border); cursor: pointer; padding: 0; transition: background .2s;
+}
+.dot.active { background: var(--color-primary); width: 24px; border-radius: 5px; }
+@media(max-width:768px) {
+  .carousel-card { flex: 0 0 85%; min-width: 260px; }
+}
+
 /* ── ARTICLE MODAL ── */
 .article-modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 9999;

@@ -152,38 +152,20 @@
   </div>
 </section>
 
-<!-- 7. HABERLER -->
+<!-- 7. HABERLER & DUYURULAR — Carousel -->
 <section class="section" id="haberler">
   <div class="container">
-    <div class="section-header">
-      <h2>{{ homepage.news_section.title }}</h2>
-      <p>{{ homepage.news_section.subtitle }}</p>
-    </div>
-
-    {% for item in news if item.featured %}
-    <div class="featured-banner">
-      <h3>{{ item.title }}</h3>
-      <p>{{ item.excerpt }}</p>
-      <a href="javascript:void(0)" onclick="openArticle('{{ item.slug }}')" class="btn btn-primary btn-sm">Devamini Oku</a>
-    </div>
-    {% endfor %}
-
-    <div class="grid grid-3">
-      {% for item in news[:3] if not item.featured %}
-      <div class="card news-card">
-        <div class="card-image">📰</div>
-        <div class="card-body">
-          <span class="card-category">{{ item.category }}</span>
-          <p class="card-date">{{ item.date | tr_date }}</p>
-          <h3><a href="/haberler/{{ item.slug }}">{{ item.title }}</a></h3>
-          <p>{{ item.excerpt | truncate_words(20) }}</p>
-        </div>
+    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h2>{{ homepage.news_section.title }}</h2>
+        <p>{{ homepage.news_section.subtitle }}</p>
       </div>
-      {% endfor %}
+      <a href="/haberler" class="btn btn-secondary btn-sm">Tüm Haberler →</a>
     </div>
-    <div class="text-center mt-8">
-      <a href="/haberler" class="btn btn-secondary">Tum Haberler</a>
+    <div class="carousel" id="newsCarousel">
+      <div class="carousel-track" id="newsTrack"></div>
     </div>
+    <div class="carousel-dots" id="newsDots"></div>
   </div>
 </section>
 
@@ -194,72 +176,29 @@
       <h2>{{ homepage.events_section.title }}</h2>
       <p>{{ homepage.events_section.subtitle }}</p>
     </div>
-    <div class="grid grid-3">
-      {% for ev in events[:3] %}
-      <div class="card event-card">
-        <div class="event-date-badge">
-          <div class="day">{{ ev.date[8:10] }}</div>
-          <div class="month">{{ ev.date | tr_date }}</div>
-        </div>
-        <div>
-          <h4 style="margin-bottom:var(--s-1);">{{ ev.title }}</h4>
-          <p class="text-sm text-muted mb-0">{{ ev.time }} &middot; {{ ev.location }}</p>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
+    <div class="grid grid-3" id="eventsGrid"></div>
   </div>
 </section>
 
-<!-- 9. YAZILAR -->
-<section class="section" id="yazilar">
+<!-- 9. YAZILAR — Carousel -->
+<section class="section" id="icerik">
   <div class="container">
-    <div class="section-header">
-      <h2>{{ homepage.articles_section.title }}</h2>
-      <p>{{ homepage.articles_section.subtitle }}</p>
-    </div>
-    <div class="grid grid-3">
-      {% for art in articles[:3] %}
-      <div class="card news-card">
-        <div class="card-image">✍️</div>
-        <div class="card-body">
-          {% if art.tags %}<span class="card-category">{{ art.tags[0] }}</span>{% endif %}
-          <p class="card-date">{{ art.date | tr_date }}</p>
-          <h3><a href="/yazilar/{{ art.slug }}">{{ art.title }}</a></h3>
-          <p>{{ art.excerpt | truncate_words(20) }}</p>
-        </div>
+    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <h2>{{ homepage.articles_section.title }}</h2>
+        <p>{{ homepage.articles_section.subtitle }}</p>
       </div>
-      {% endfor %}
+      <a href="/yazilar" class="btn btn-secondary btn-sm">Tüm Yazılar →</a>
     </div>
-    <div class="text-center mt-8">
-      <a href="/yazilar" class="btn btn-secondary">Tum Yazilar</a>
+    <div class="carousel" id="articlesCarousel">
+      <div class="carousel-track" id="articlesTrack"></div>
     </div>
+    <div class="carousel-dots" id="articlesDots"></div>
   </div>
 </section>
 
-<!-- 10. VIDEO -->
-<section class="section bg-white" id="videolar">
-  <div class="container">
-    <div class="section-header">
-      <h2>{{ homepage.video_section.title }}</h2>
-      <p>{{ homepage.video_section.subtitle }}</p>
-    </div>
-    <div class="grid grid-3">
-      {% for vid in videos[:3] %}
-      <div class="card">
-        <h4>{{ vid.title }}</h4>
-        <p class="text-sm">{{ vid.description | truncate_words(20) }}</p>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="text-center mt-8">
-      <a href="/videolar" class="btn btn-secondary">Tum Videolar</a>
-    </div>
-  </div>
-</section>
-
-<!-- 11. UYGULAMA -->
-<section class="section" id="uygulama">
+<!-- 10. UYGULAMA -->
+<section class="section bg-white" id="uygulama">
   <div class="container">
     <div class="app-section">
       <div class="app-mockup">
@@ -286,7 +225,7 @@
   </div>
 </section>
 
-<!-- 12. DESTEK OL -->
+<!-- 11. DESTEK OL -->
 <section class="section bg-soft" id="destek">
   <div class="container">
     <div class="section-header">
@@ -306,88 +245,125 @@
   </div>
 </section>
 
-<!-- 13. SEFFAFLIK SERIDI -->
-<section class="section bg-white" id="seffaflik">
-  <div class="container">
+<!-- İLETİŞİM -->
+<section class="section bg-white" id="iletisim">
+  <div class="container container-narrow">
     <div class="section-header">
-      <h2>{{ homepage.transparency.title }}</h2>
-      <p>{{ homepage.transparency.subtitle }}</p>
+      <h2>İletişim</h2>
+      <p>Sorularınız için bize ulaşın</p>
     </div>
-    <div class="grid grid-4">
-      <a href="/hakkimizda/seffaflik-belgeler" class="card quick-card">
-        <span class="card-icon" aria-hidden="true">📄</span>
-        <h3>Belgeler</h3>
+    <div class="grid grid-3" style="text-align:center;">
+      <a href="{{ site.whatsapp }}" class="card quick-card" target="_blank" rel="noopener" data-track="click_whatsapp">
+        <span class="card-icon" aria-hidden="true">💬</span>
+        <h3>WhatsApp</h3>
+        <p>{{ site.phone }}</p>
       </a>
-      <a href="/sss" class="card quick-card">
-        <span class="card-icon" aria-hidden="true">❓</span>
-        <h3>SSS</h3>
-      </a>
-      <a href="/iletisim" class="card quick-card">
+      <a href="tel:{{ site.phone_href }}" class="card quick-card" data-track="click_call">
         <span class="card-icon" aria-hidden="true">📞</span>
-        <h3>Iletisim</h3>
+        <h3>Telefon</h3>
+        <p>{{ site.phone }}</p>
       </a>
-      <a href="/etki" class="card quick-card">
-        <span class="card-icon" aria-hidden="true">📊</span>
-        <h3>Etki Raporu</h3>
+      <a href="mailto:{{ site.email }}" class="card quick-card">
+        <span class="card-icon" aria-hidden="true">✉️</span>
+        <h3>E-posta</h3>
+        <p>{{ site.email }}</p>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Dynamic content refresh: loads latest data from API so admin changes appear without rebuild -->
+<!-- Dynamic content: carousel + API -->
 <script>
 (function(){
-  var API='/api/bia-news';
-  var base='{{ base }}';
-  var TR_MONTHS=['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
-  function trDate(d){if(!d)return'';var p=d.split('-');return parseInt(p[2])+' '+TR_MONTHS[parseInt(p[1])]+' '+p[0];}
+  var API='/api/bia-news', base='{{ base }}';
+  var TR_M=['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  function trD(d){if(!d)return'';var p=d.split('-');return parseInt(p[2])+' '+TR_M[parseInt(p[1])]+' '+p[0];}
   function trunc(t,n){var w=t.split(' ');return w.length<=n?t:w.slice(0,n).join(' ')+'...';}
   function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+  function pub(type){return fetch(API+'?type='+type+'&public=1').then(function(r){return r.json();}).then(function(d){return d.data;});}
+  var CATS={haber:'HABER',duyuru:'DUYURU',etkinlik:'ETKİNLİK',icerik:'İÇERİK'};
 
-  function loadPublic(type){
-    return fetch(API+'?type='+type+'&public=1').then(function(r){return r.json();}).then(function(d){return d.data;});
+  function buildCard(item){
+    var cat=item.category||'haber';
+    var img=item.image
+      ?'<img src="'+esc(item.image)+'" alt="'+esc(item.title)+'" class="news-card-img" loading="lazy">'
+      :'<div class="card-image-placeholder cat-'+cat+'"></div>';
+    return '<div class="carousel-card"><div class="card news-card" style="height:100%;">'+img+
+      '<div class="card-body"><div class="card-meta-row"><span class="card-category cat-badge-'+cat+'">'+(CATS[cat]||cat)+'</span><p class="card-date">'+trD(item.date)+'</p></div>'+
+      '<h3 style="font-size:.95rem;">'+esc(item.title)+'</h3>'+
+      '<p style="font-size:.85rem;">'+esc(trunc(item.excerpt||'',15))+'</p>'+
+      '<a href="javascript:void(0)" onclick="openArticle(\''+item.slug+'\')" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a></div></div></div>';
   }
 
+  function initCarousel(trackId, dotsId){
+    var track=document.getElementById(trackId);
+    var dotsEl=document.getElementById(dotsId);
+    if(!track)return;
+    var cards=track.querySelectorAll('.carousel-card');
+    if(cards.length<=3){dotsEl.style.display='none';return;}
+    // Dots
+    var pages=Math.ceil(cards.length/3);
+    var dots='';
+    for(var i=0;i<pages;i++) dots+='<button class="dot'+(i===0?' active':'')+'" onclick="scrollCarousel(\''+trackId+'\',\''+dotsId+'\','+i+')"></button>';
+    dotsEl.innerHTML=dots;
+  }
+
+  // News carousel (exclude icerik)
+  pub('news').then(function(items){
+    var news=items.filter(function(i){return i.category!=='icerik';});
+    var track=document.getElementById('newsTrack');
+    if(!track||!news.length)return;
+    track.innerHTML=news.slice(0,12).map(buildCard).join('');
+    initCarousel('newsTrack','newsDots');
+  })['catch'](function(){});
+
+  // Articles carousel (only icerik)
+  pub('news').then(function(items){
+    var arts=items.filter(function(i){return i.category==='icerik';});
+    var track=document.getElementById('articlesTrack');
+    if(!track||!arts.length)return;
+    track.innerHTML=arts.slice(0,12).map(buildCard).join('');
+    initCarousel('articlesTrack','articlesDots');
+  })['catch'](function(){});
+
+  // Events
+  pub('events').then(function(evs){
+    var el=document.getElementById('eventsGrid');
+    if(!el||!evs||!evs.length){if(el)el.innerHTML='<p class="text-muted">Yakında yeni etkinlikler eklenecek.</p>';return;}
+    var upcoming=evs.filter(function(e){return!e.past;}).slice(0,3);
+    if(!upcoming.length)upcoming=evs.slice(0,3);
+    el.innerHTML=upcoming.map(function(ev){return '<div class="card event-card"><div class="event-date-badge"><div class="day">'+(ev.date||'').slice(8,10)+'</div><div class="month">'+trD(ev.date)+'</div></div><div><h4 style="margin-bottom:var(--s-1);">'+esc(ev.title)+'</h4><p class="text-sm text-muted mb-0">'+esc(ev.time||'')+' &middot; '+esc(ev.location||'')+'</p></div></div>';}).join('');
+  })['catch'](function(){});
+
   // Programs
-  loadPublic('programs').then(function(progs){
+  pub('programs').then(function(progs){
     var el=document.getElementById('programsGrid');
     if(!el||!progs||!progs.length)return;
     el.innerHTML=progs.slice(0,5).map(function(p){return '<div class="card program-card"><span class="card-icon" aria-hidden="true">'+esc(p.icon||'📚')+'</span><h3>'+esc(p.title)+'</h3><p class="card-meta">'+esc(p.model||'')+' &middot; '+esc(p.target||'')+'</p><p>'+esc(p.short||'')+'</p><div class="card-footer"><a href="'+base+'/egitimler/'+(p.id||'')+'" class="btn btn-secondary btn-sm">Detaylar</a></div></div>';}).join('');
   })['catch'](function(){});
 
-  // News
-  loadPublic('news').then(function(items){
-    var el=document.getElementById('newsGrid');
-    if(!el||!items||!items.length)return;
-    var CATS={haber:'HABER',duyuru:'DUYURU',etkinlik:'ETKİNLİK',icerik:'İÇERİK'};
-    el.innerHTML=items.map(function(item,i){
-      var cat=item.category||'haber';
-      var hidden=i>=6?' news-hidden':'';
-      var img=item.image
-        ?'<img src="'+esc(item.image)+'" alt="'+esc(item.title)+'" class="news-card-img" loading="lazy">'
-        :'<div class="card-image-placeholder cat-'+cat+'"></div>';
-      return '<div class="card news-card'+hidden+'">'+img+'<div class="card-body"><div class="card-meta-row"><span class="card-category cat-badge-'+cat+'">'+(CATS[cat]||cat)+'</span><p class="card-date">'+trDate(item.date)+'</p></div><h3>'+esc(item.title)+'</h3><p>'+esc(trunc(item.excerpt||'',18))+'</p><a href="javascript:void(0)" onclick="openArticle(\''+(item.slug||'')+'\')" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a></div></div>';
-    }).join('');
-    var btn=document.getElementById('showMoreNews');
-    if(btn){var extra=items.length-6;if(extra>0){btn.textContent='Daha Fazla Göster ('+extra+' haber daha)';btn.style.display='';}else{btn.style.display='none';}}
-  })['catch'](function(){});
-
-  // Events
-  loadPublic('events').then(function(evs){
-    var el=document.querySelector('#etkinlikler .grid');
-    if(!el||!evs||!evs.length)return;
-    var upcoming=evs.filter(function(e){return!e.past;}).slice(0,3);
-    if(!upcoming.length)return;
-    el.innerHTML=upcoming.map(function(ev){return '<div class="card event-card"><div class="event-date-badge"><div class="day">'+(ev.date||'').slice(8,10)+'</div><div class="month">'+trDate(ev.date)+'</div></div><div><h4 style="margin-bottom:var(--s-1);">'+esc(ev.title)+'</h4><p class="text-sm text-muted mb-0">'+esc(ev.time||'')+' &middot; '+esc(ev.location||'')+'</p></div></div>';}).join('');
-  })['catch'](function(){});
-
-  // Impact counters
-  loadPublic('homepage').then(function(hp){
+  // Counters
+  pub('homepage').then(function(hp){
     if(!hp||!hp.impact||!hp.impact.counters)return;
     var cg=document.querySelector('.counter-grid');
     if(!cg)return;
     cg.innerHTML=hp.impact.counters.map(function(c){return '<div class="counter-item"><div class="counter-value" data-counter="'+c.value+'" data-suffix="'+(c.suffix||'')+'">'+c.value+(c.suffix||'')+'</div><div class="counter-label">'+esc(c.label)+'</div></div>';}).join('');
   })['catch'](function(){});
 })();
+
+// Carousel scroll
+function scrollCarousel(trackId,dotsId,page){
+  var track=document.getElementById(trackId);
+  if(!track)return;
+  var card=track.querySelector('.carousel-card');
+  if(!card)return;
+  var gap=16;
+  var w=card.offsetWidth+gap;
+  track.scrollTo({left:page*w*3,behavior:'smooth'});
+  // Update dots
+  var dots=document.getElementById(dotsId);
+  if(!dots)return;
+  dots.querySelectorAll('.dot').forEach(function(d,i){d.classList.toggle('active',i===page);});
+}
 </script>
 {% endblock %}
