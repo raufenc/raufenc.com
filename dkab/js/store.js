@@ -519,6 +519,26 @@ class Store {
         return this._state.classroom.code;
     }
 
+    // Kalıcı anonim kullanıcı ID'si (Firebase için)
+    getUserId() {
+        if (!this._state.userId) {
+            this._state.userId = 'u_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+            this._save();
+        }
+        return this._state.userId;
+    }
+
+    // XP ekle (harici tetikleyiciler için — örn. meydan okuma kabul)
+    addXP(amount) {
+        this._state.stats.totalXp = (this._state.stats.totalXp || 0) + amount;
+        const newLevel = Math.floor(this._state.stats.totalXp / XP_PER_LEVEL) + 1;
+        if (newLevel > this._state.stats.level) {
+            this._state.stats.level = newLevel;
+        }
+        this._save();
+        this._notify();
+    }
+
     // ===== Reset =====
     resetAll() {
         this._state = JSON.parse(JSON.stringify(DEFAULT_STATE));

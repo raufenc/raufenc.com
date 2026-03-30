@@ -16,6 +16,10 @@ import { renderLearningPath } from './components/learning-path.js?v=6';
 import { renderAssessment } from './components/assessment.js?v=6';
 import { renderGoals } from './components/goals.js?v=6';
 import { renderHabits } from './components/habits.js?v=6';
+// Faz 3 — İşbirlikçi
+import { renderLeaderboard } from './components/leaderboard.js?v=6';
+import { renderKnowledgeWall } from './components/knowledge-wall.js?v=6';
+import { renderChallenges } from './components/challenges.js?v=6';
 
 class App {
     constructor() {
@@ -124,6 +128,11 @@ class App {
     }
 
     async _renderRoute(route) {
+        // Firebase listener temizle (önceki sayfadan kalan)
+        if (this._leaderboardRef) { this._leaderboardRef.off(); this._leaderboardRef = null; }
+        if (this._wallRef) { this._wallRef.off(); this._wallRef = null; }
+        if (this._challengesRef) { this._challengesRef.off(); this._challengesRef = null; }
+
         // Scroll to top on page navigation
         window.scrollTo(0, 0);
 
@@ -184,17 +193,14 @@ class App {
                 break;
 
             case 'leaderboard':
-            case 'knowledge-wall':
-            case 'challenges':
-                this.mainEl.innerHTML = `
-                    <div class="content-area text-center mt-xl">
-                        <span style="font-size:4rem;">&#128679;</span>
-                        <h2 class="mt-lg">Yakin Zamanda</h2>
-                        <p class="text-muted mt-md">Bu ozellik sinif kodu sistemi ile birlikte aktif olacak.</p>
-                        <a href="#/" class="btn btn-primary mt-lg">Ana Sayfaya Don</a>
-                    </div>`;
+                await renderLeaderboard(this.mainEl, this);
                 break;
-
+            case 'knowledge-wall':
+                await renderKnowledgeWall(this.mainEl, this);
+                break;
+            case 'challenges':
+                await renderChallenges(this.mainEl, this);
+                break;
             default:
                 this.mainEl.innerHTML = `
                     <div class="content-area text-center mt-xl">
