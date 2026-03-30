@@ -128,19 +128,29 @@ function initMap(){
   },null,{position:'bottomleft',collapsed:true}).addTo(map);
 }
 
+/* Kategori renkleri — locations.json'da category alanı varsa kullanılır */
+const CAT_COLORS={
+  baskent:'#8B0000',savas:'#DC2626',fetih:'#16A34A',
+  egitim:'#2563EB',dini:'#7C3AED',manevi:'#6B7280',
+  default:'#CC8400'
+};
 function renderMarkers(){
   if(!MAP_DATA.locations)return;
   MAP_DATA.locations.sort((a,b)=>a.order-b.order).forEach(loc=>{
-    const color=PERIOD_COLORS[loc.periods[0]]||'#d4a853';
-    const r=loc.significance==='major'?8:loc.significance==='standard'?6:4;
-    const m=L.circleMarker([loc.lat,loc.lon],{
-      radius:r,fillColor:color,fillOpacity:loc.significance==='major'?.9:.7,
-      color:color,weight:loc.precision==='kesin'?2:1,
-      dashArray:loc.precision==='yaklasik'?'4,3':null
-    }).addTo(map);
+    const cat=loc.category||'default';
+    const color=CAT_COLORS[cat]||CAT_COLORS.default;
+    const sz=loc.significance==='major'?14:loc.significance==='standard'?11:8;
+    const isBattle=cat==='savas';
+    const cls=isBattle?'loc-marker battle-marker':'loc-marker';
+    const icon=L.divIcon({
+      className:'',
+      html:'<div class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px;background:'+color+'"></div>',
+      iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]
+    });
+    const m=L.marker([loc.lat,loc.lon],{icon:icon}).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
     if(loc.significance==='major'||loc.significance==='standard'){
-      m.bindTooltip(loc.name,{permanent:true,className:'map-label',direction:'top',offset:[0,-r-2]});
+      m.bindTooltip(loc.name,{permanent:true,className:'map-label',direction:'top',offset:[0,-sz/2-4]});
     }
     m.on('click',()=>m.openPopup());
     m.locData=loc;
