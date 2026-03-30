@@ -1,9 +1,17 @@
 export const config = { runtime: 'edge' };
 
 const REPO = 'raufenc/raufenc.com';
-const NEWS_FILE = 'birlikteiyilik-site/content/news.json';
-const EVENTS_FILE = 'birlikteiyilik-site/content/events.json';
 const GH_API = 'https://api.github.com';
+const BASE = 'birlikteiyilik-site/content/';
+
+const FILES = {
+  news:     BASE + 'news.json',
+  events:   BASE + 'events.json',
+  site:     BASE + 'site.json',
+  faq:      BASE + 'faq.json',
+  homepage: BASE + 'homepage.json',
+  programs: BASE + 'programs.json',
+};
 
 export default async function handler(req) {
   const ADMIN_PW = process.env.BIA_ADMIN_PASSWORD || 'birlikte2026';
@@ -34,19 +42,20 @@ export default async function handler(req) {
   const json = (data, status = 200) =>
     new Response(JSON.stringify(data), { status, headers: cors });
 
+  const decode = (b64) => JSON.parse(decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))));
+  const encode = (obj) => btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2))));
+
   if (req.method === 'GET') {
     const { searchParams } = new URL(req.url);
     if (searchParams.get('password') !== ADMIN_PW)
       return json({ error: 'Yanlış şifre' }, 401);
+    const type = searchParams.get('type') || 'news';
+    const file = FILES[type];
+    if (!file) return json({ error: 'Geçersiz tip' }, 400);
     try {
-      if (searchParams.get('type') === 'events') {
-        const data = await gh(`/repos/${REPO}/contents/${EVENTS_FILE}`);
-        const events = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
-        return json({ events, sha: data.sha });
-      }
-      const data = await gh(`/repos/${REPO}/contents/${NEWS_FILE}`);
-      const news = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
-      return json({ news, sha: data.sha });
+      const data = await gh(`/repos/${REPO}/contents/${file}`);
+      const content = decode(data.content);
+      return json({ data: content, sha: data.sha });
     } catch (e) {
       return json({ error: e.message }, 500);
     }
@@ -55,25 +64,18 @@ export default async function handler(req) {
   if (req.method === 'POST') {
     const body = await req.json();
     if (body.password !== ADMIN_PW) return json({ error: 'Yanlış şifre' }, 401);
+    const type = body.type || 'news';
+    const file = FILES[type];
+    if (!file) return json({ error: 'Geçersiz tip' }, 400);
     try {
-      if (body.type === 'events') {
-        const events = (body.events || []).sort((a, b) =>
-          (b.date || '').localeCompare(a.date || '')
-        );
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(events, null, 2))));
-        const result = await gh(`/repos/${REPO}/contents/${EVENTS_FILE}`, 'PUT', {
-          message: body.message || 'BIA: Etkinlik güncellendi',
-          content,
-          sha: body.sha || '',
-        });
-        return json({ ok: true, sha: result.content.sha });
+      let payload = body.data;
+      // Sort arrays by date for news/events
+      if ((type === 'news' || type === 'events') && Array.isArray(payload)) {
+        payload = payload.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       }
-      const news = (body.news || []).sort((a, b) =>
-        (b.date || '').localeCompare(a.date || '')
-      );
-      const content = btoa(unescape(encodeURIComponent(JSON.stringify(news, null, 2))));
-      const result = await gh(`/repos/${REPO}/contents/${NEWS_FILE}`, 'PUT', {
-        message: body.message || 'BIA: Haber güncellendi',
+      const content = encode(payload);
+      const result = await gh(`/repos/${REPO}/contents/${file}`, 'PUT', {
+        message: body.message || `BIA: ${type} güncellendi`,
         content,
         sha: body.sha || '',
       });

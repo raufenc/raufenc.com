@@ -10,9 +10,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 /* TOP BAR */
 .topbar { background: #E20439; color: #fff; padding: 0 20px; height: 56px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
-.topbar-title { font-weight: 700; font-size: 1rem; }
-.topbar-nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
-.topbar-btn { background: rgba(255,255,255,.15); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: .85rem; cursor: pointer; font-weight: 600; }
+.topbar-title { font-weight: 700; font-size: 1rem; white-space: nowrap; }
+.topbar-nav { margin-left: auto; display: flex; gap: 8px; align-items: center; overflow-x: auto; max-width: calc(100vw - 160px); padding-bottom: 2px; }
+.topbar-nav::-webkit-scrollbar { height: 3px; }
+.topbar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,.3); border-radius: 2px; }
+.topbar-btn { background: rgba(255,255,255,.15); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: .85rem; cursor: pointer; font-weight: 600; white-space: nowrap; }
 .topbar-btn:hover { background: rgba(255,255,255,.25); }
 .topbar-btn.green { background: rgba(255,255,255,.9); color: #E20439; }
 .topbar-btn.green:hover { background: #fff; }
@@ -93,9 +95,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <div class="topbar">
   <span class="topbar-title">BİA Yönetim</span>
   <div class="topbar-nav" id="topNav" style="display:none">
-    <button class="topbar-btn" onclick="showMain()">Haberler</button>
-    <button class="topbar-btn" id="topEventsBtn" onclick="showEvents()">Etkinlikler</button>
-    <button class="topbar-btn" onclick="showEdit(null)">+ Yeni</button>
+    <button class="topbar-btn" onclick="switchTab('news')">📰 Haberler</button>
+    <button class="topbar-btn" onclick="switchTab('events')">📅 Etkinlikler</button>
+    <button class="topbar-btn" onclick="switchTab('site')">⚙️ Ayarlar</button>
+    <button class="topbar-btn" onclick="switchTab('homepage')">🏠 Ana Sayfa</button>
+    <button class="topbar-btn" onclick="switchTab('faq')">❓ SSS</button>
+    <button class="topbar-btn" onclick="switchTab('programs')">📚 Programlar</button>
     <button class="topbar-btn green" onclick="rebuild()" id="rebuildBtn">Yayınla</button>
     <button class="topbar-btn" onclick="logout()">Çıkış</button>
   </div>
@@ -125,7 +130,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="container">
     <div id="mainNotice"></div>
     <div class="list-header">
-      <h1>Haberler & İçerikler</h1>
+      <h1>Haberler &amp; İçerikler</h1>
       <span id="countBadge" style="font-size:.85rem;color:#888;"></span>
     </div>
     <div class="filters" id="filterBar"></div>
@@ -268,6 +273,68 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div>
 </div>
 
+<!-- SITE AYARLARI -->
+<div id="siteScreen" class="container" style="display:none;">
+  <div id="siteNotice"></div>
+  <div class="card">
+    <h2 style="font-size:1.2rem;margin-bottom:24px;">⚙️ Site Ayarları</h2>
+    <div class="field-2">
+      <div class="field"><label>Telefon</label><input id="sPhone" type="text" placeholder="0534 811 77 57"></div>
+      <div class="field"><label>Telefon (href)</label><input id="sPhoneHref" type="text" placeholder="+905348117757"></div>
+    </div>
+    <div class="field"><label>E-posta</label><input id="sEmail" type="email" placeholder="bilgi@birlikteiyilik.com"></div>
+    <div class="field"><label>WhatsApp Linki</label><input id="sWhatsapp" type="url" placeholder="https://wa.me/905348117757"></div>
+    <div class="field"><label>Instagram</label><input id="sInstagram" type="url"></div>
+    <div class="field"><label>YouTube</label><input id="sYoutube" type="url"></div>
+    <div class="field-2">
+      <div class="field"><label>App Store (iOS)</label><input id="sIos" type="url"></div>
+      <div class="field"><label>Google Play (Android)</label><input id="sAndroid" type="url"></div>
+    </div>
+    <button id="saveSiteBtn" class="btn btn-red" onclick="saveSite()">Kaydet</button>
+  </div>
+</div>
+
+<!-- ANA SAYFA DÜZENLEYİCİ -->
+<div id="homepageScreen" class="container" style="display:none;">
+  <div id="homepageNotice"></div>
+  <div class="card" style="margin-bottom:16px;">
+    <h2 style="font-size:1.1rem;margin-bottom:20px;">🦸 Hero Bölümü</h2>
+    <div class="field"><label>Başlık</label><input id="hpHeroTitle" type="text"></div>
+    <div class="field"><label>Alt Başlık</label><textarea id="hpHeroSubtitle" rows="3"></textarea></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <h2 style="font-size:1.1rem;margin-bottom:20px;">🏛 Hakkımızda Bölümü</h2>
+    <div class="field"><label>Başlık</label><input id="hpAboutTitle" type="text"></div>
+    <div class="field"><label>Metin</label><textarea id="hpAboutText" rows="4"></textarea></div>
+  </div>
+  <div class="card" style="margin-bottom:16px;">
+    <h2 style="font-size:1.1rem;margin-bottom:20px;">📊 Etki Sayaçları</h2>
+    <div id="countersList"></div>
+  </div>
+  <button id="saveHomepageBtn" class="btn btn-red" onclick="saveHomepage()">Kaydet</button>
+</div>
+
+<!-- SSS YÖNETİMİ -->
+<div id="faqScreen" class="container" style="display:none;">
+  <div id="faqNotice"></div>
+  <div id="faqList"></div>
+  <div style="text-align:center;margin:16px 0;">
+    <button class="btn btn-red" onclick="addFaqCategory()">+ Yeni Kategori</button>
+  </div>
+  <div style="text-align:right;margin-top:8px;">
+    <button id="saveFaqBtn" class="btn btn-red" onclick="saveFaq()">Tümünü Kaydet</button>
+  </div>
+</div>
+
+<!-- PROGRAMLAR -->
+<div id="programsScreen" class="container" style="display:none;">
+  <div id="programsNotice"></div>
+  <div id="programsList"></div>
+  <div style="text-align:right;margin-top:8px;">
+    <button id="saveProgramsBtn" class="btn btn-red" onclick="savePrograms()">Tümünü Kaydet</button>
+  </div>
+</div>
+
 <script>
 const API = '/api/bia-news';
 const CATS = {haber:'Haber', duyuru:'Duyuru', etkinlik:'Etkinlik', icerik:'İçerik'};
@@ -285,10 +352,16 @@ function autoSlug() {
   document.getElementById('fSlug').value = slugify(t);
 }
 
-function show(id) {
-  ['loginScreen','mainScreen','editScreen'].forEach(s => document.getElementById(s).style.display = 'none');
-  document.getElementById(id).style.display = 'block';
+// ── SCREEN HELPER ──
+const ALL_SCREENS = ['loginScreen','mainScreen','editScreen','eventsScreen','eventEditScreen','siteScreen','homepageScreen','faqScreen','programsScreen'];
+function showScreen(id) {
+  ALL_SCREENS.forEach(s => { const el = document.getElementById(s); if(el) el.style.display = 'none'; });
+  const target = document.getElementById(id);
+  if (target) target.style.display = 'block';
 }
+
+// Keep legacy show() for any internal references
+function show(id) { showScreen(id); }
 
 async function doLogin() {
   pw = document.getElementById('pwInput').value;
@@ -296,10 +369,10 @@ async function doLogin() {
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Giriş yapılıyor...';
   document.getElementById('loginErr').innerHTML = '';
   try {
-    const r = await fetch(`${API}?password=${encodeURIComponent(pw)}`);
+    const r = await fetch(`${API}?password=${encodeURIComponent(pw)}&type=news`);
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || 'Hata');
-    news = d.news; sha = d.sha;
+    news = d.data; sha = d.sha;
     sessionStorage.setItem('biaPw', pw);
     document.getElementById('topNav').style.display = 'flex';
     showMain();
@@ -341,7 +414,7 @@ function setFilter(f) { filter = f; renderList(); }
 
 function showMain() {
   renderList();
-  show('mainScreen');
+  showScreen('mainScreen');
   document.getElementById('mainNotice').innerHTML = '';
 }
 
@@ -360,7 +433,7 @@ function showEdit(idx) {
   document.getElementById('fSourceUrl').value = item.source_url || '';
   document.getElementById('deleteBtn').style.display = idx !== null ? 'inline-flex' : 'none';
   document.getElementById('editNotice').innerHTML = '';
-  show('editScreen');
+  showScreen('editScreen');
 }
 
 async function saveItem() {
@@ -369,10 +442,8 @@ async function saveItem() {
   const btn = document.getElementById('saveBtn');
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Kaydediliyor...';
   const item = {
-    title,
-    slug: document.getElementById('fSlug').value || slugify(title),
-    date: document.getElementById('fDate').value,
-    category: document.getElementById('fCat').value,
+    title, slug: document.getElementById('fSlug').value || slugify(title),
+    date: document.getElementById('fDate').value, category: document.getElementById('fCat').value,
     excerpt: document.getElementById('fExcerpt').value.trim(),
     content: document.getElementById('fContent').value.trim(),
     image: document.getElementById('fImage').value.trim(),
@@ -381,11 +452,8 @@ async function saveItem() {
   };
   if (editIdx === null) news.push(item); else news[editIdx] = item;
   try {
-    const r = await fetch(API, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({password:pw, news, sha, message:`BIA: "${title}" ${editIdx===null?'eklendi':'güncellendi'}`})
-    });
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'news', data: news, sha, message: `BIA: "${title}" ${editIdx===null?'eklendi':'güncellendi'}` }) });
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || 'Sunucu hatası');
     sha = d.sha;
@@ -402,11 +470,8 @@ async function deleteItem() {
   if (!confirm('Bu kaydı silmek istediğinize emin misiniz?')) return;
   const title = news[editIdx]?.title || '';
   news.splice(editIdx, 1);
-  const r = await fetch(API, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({password:pw, news, sha, message:`BIA: "${title}" silindi`})
-  });
+  const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ password: pw, type: 'news', data: news, sha, message: `BIA: "${title}" silindi` }) });
   const d = await r.json();
   if (r.ok) { sha = d.sha; showMain(); }
   else { alert('Silme hatası: ' + (d.error||'bilinmiyor')); news.splice(editIdx, 0, news[editIdx]); }
@@ -415,9 +480,8 @@ async function deleteItem() {
 async function rebuild() {
   const btn = document.getElementById('rebuildBtn');
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
-  // Trigger Vercel redeploy via a dummy commit (update a timestamp file)
   try {
-    const r = await fetch(API + '?password=' + encodeURIComponent(pw) + '&action=rebuild');
+    await fetch(API + '?password=' + encodeURIComponent(pw) + '&action=rebuild');
     document.getElementById('mainNotice').innerHTML = '<div class="notice info">⏳ Site yenileniyor… Vercel ~1 dakika içinde günceller.</div>';
   } catch(e) {}
   btn.disabled = false; btn.innerHTML = 'Yayınla';
@@ -427,20 +491,13 @@ function cleanHtml() {
   const ta = document.getElementById('fContent');
   let h = ta.value;
   if (!h.trim()) return;
-  // Remove style, face, color, size, class attributes
   h = h.replace(/\s*(style|face|color|size|class|align|dir|lang|data-[^=]*)="[^"]*"/gi, '');
-  // Remove empty spans and divs
   h = h.replace(/<span>\s*<\/span>/gi, '');
   h = h.replace(/<div>\s*<\/div>/gi, '');
-  // Unwrap font tags
   h = h.replace(/<font[^>]*>([\s\S]*?)<\/font>/gi, '$1');
-  // Remove <o:p> tags
   h = h.replace(/<o:p[^>]*>[\s\S]*?<\/o:p>/gi, '');
-  // Collapse multiple <br> into one
   h = h.replace(/(<br\s*\/?>\s*){3,}/gi, '<br><br>');
-  // Remove leading/trailing whitespace in tags
   h = h.replace(/>\s{2,}</g, '> ');
-  // Remove empty paragraphs
   h = h.replace(/<p>\s*<\/p>/gi, '');
   ta.value = h.trim();
   document.getElementById('editNotice').innerHTML = '<div class="notice ok">✅ HTML temizlendi</div>';
@@ -448,21 +505,19 @@ function cleanHtml() {
 }
 
 async function showEvents() {
-  // Load events if not loaded yet
   if (!events.length && !eventsSha) {
     try {
       const r = await fetch(`${API}?password=${encodeURIComponent(pw)}&type=events`);
       const d = await r.json();
       if (!r.ok) throw new Error(d.error);
-      events = d.events || [];
-      eventsSha = d.sha;
+      events = d.data || []; eventsSha = d.sha;
     } catch(e) {
       document.getElementById('eventsMainNotice').innerHTML = `<div class="notice err">Yüklenemedi: ${e.message}</div>`;
+      return;
     }
   }
   renderEventsList();
-  ['loginScreen','mainScreen','editScreen','eventsScreen','eventEditScreen'].forEach(s => document.getElementById(s).style.display = 'none');
-  document.getElementById('eventsScreen').style.display = 'block';
+  showScreen('eventsScreen');
 }
 
 function renderEventsList() {
@@ -500,8 +555,7 @@ function showEventEdit(idx) {
   document.getElementById('efPast').checked = !!ev.past;
   document.getElementById('deleteEventBtn').style.display = idx !== null ? 'inline-flex' : 'none';
   document.getElementById('eventEditNotice').innerHTML = '';
-  ['loginScreen','mainScreen','editScreen','eventsScreen','eventEditScreen'].forEach(s => document.getElementById(s).style.display = 'none');
-  document.getElementById('eventEditScreen').style.display = 'block';
+  showScreen('eventEditScreen');
 }
 
 function autoEventSlug() {
@@ -515,24 +569,17 @@ async function saveEvent() {
   const btn = document.getElementById('saveEventBtn');
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Kaydediliyor...';
   const ev = {
-    title,
-    slug: document.getElementById('efSlug').value || slugify(title),
-    date: document.getElementById('efDate').value,
-    time: document.getElementById('efTime').value,
-    location: document.getElementById('efLocation').value.trim(),
-    type: document.getElementById('efType').value,
+    title, slug: document.getElementById('efSlug').value || slugify(title),
+    date: document.getElementById('efDate').value, time: document.getElementById('efTime').value,
+    location: document.getElementById('efLocation').value.trim(), type: document.getElementById('efType').value,
     description: document.getElementById('efDesc').value.trim(),
     registration_url: document.getElementById('efRegUrl').value.trim(),
     past: document.getElementById('efPast').checked,
   };
-  if (eventEditIdx === null) events.push(ev);
-  else events[eventEditIdx] = ev;
+  if (eventEditIdx === null) events.push(ev); else events[eventEditIdx] = ev;
   try {
-    const r = await fetch(API, {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ password: pw, type: 'events', events, sha: eventsSha, message: `BIA: Etkinlik "${title}" ${eventEditIdx===null?'eklendi':'güncellendi'}` })
-    });
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'events', data: events, sha: eventsSha, message: `BIA: Etkinlik "${title}" ${eventEditIdx===null?'eklendi':'güncellendi'}` }) });
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || 'Sunucu hatası');
     eventsSha = d.sha;
@@ -549,29 +596,244 @@ async function deleteEvent() {
   if (!confirm('Bu etkinliği silmek istediğinize emin misiniz?')) return;
   const title = events[eventEditIdx]?.title || '';
   events.splice(eventEditIdx, 1);
-  const r = await fetch(API, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ password: pw, type: 'events', events, sha: eventsSha, message: `BIA: Etkinlik "${title}" silindi` })
-  });
+  const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ password: pw, type: 'events', data: events, sha: eventsSha, message: `BIA: Etkinlik "${title}" silindi` }) });
   const d = await r.json();
   if (r.ok) { eventsSha = d.sha; showEvents(); }
   else { alert('Silme hatası: ' + (d.error||'')); events.splice(eventEditIdx, 0, events[eventEditIdx]); }
 }
 
+// ── TAB SWITCH ──
+let siteData = null, siteSha = '';
+let homepageData = null, homepageSha = '';
+let faqData = null, faqSha = '';
+let programsData = null, programsSha = '';
+
+async function switchTab(type) {
+  if (type === 'news') { showMain(); return; }
+  if (type === 'events') { showEvents(); return; }
+  if (type === 'site') { await loadAndShowSite(); return; }
+  if (type === 'homepage') { await loadAndShowHomepage(); return; }
+  if (type === 'faq') { await loadAndShowFaq(); return; }
+  if (type === 'programs') { await loadAndShowPrograms(); return; }
+}
+
+async function loadJson(type) {
+  const r = await fetch(`${API}?password=${encodeURIComponent(pw)}&type=${type}`);
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error);
+  return { data: d.data, sha: d.sha };
+}
+
+// ── SITE AYARLARI ──
+async function loadAndShowSite() {
+  if (!siteData) {
+    try { const res = await loadJson('site'); siteData = res.data; siteSha = res.sha; }
+    catch(e) { alert('Yüklenemedi: ' + e.message); return; }
+  }
+  document.getElementById('sPhone').value = siteData.phone || '';
+  document.getElementById('sPhoneHref').value = siteData.phone_href || '';
+  document.getElementById('sEmail').value = siteData.email || '';
+  document.getElementById('sWhatsapp').value = siteData.whatsapp || '';
+  document.getElementById('sInstagram').value = siteData.social?.instagram || '';
+  document.getElementById('sYoutube').value = siteData.social?.youtube || '';
+  document.getElementById('sIos').value = siteData.apps?.ios || '';
+  document.getElementById('sAndroid').value = siteData.apps?.android || '';
+  showScreen('siteScreen');
+}
+
+async function saveSite() {
+  const btn = document.getElementById('saveSiteBtn');
+  btn.disabled = true; btn.textContent = 'Kaydediliyor...';
+  siteData.phone = document.getElementById('sPhone').value.trim();
+  siteData.phone_href = document.getElementById('sPhoneHref').value.trim();
+  siteData.email = document.getElementById('sEmail').value.trim();
+  siteData.whatsapp = document.getElementById('sWhatsapp').value.trim();
+  if (!siteData.social) siteData.social = {};
+  siteData.social.instagram = document.getElementById('sInstagram').value.trim();
+  siteData.social.youtube = document.getElementById('sYoutube').value.trim();
+  if (!siteData.apps) siteData.apps = {};
+  siteData.apps.ios = document.getElementById('sIos').value.trim();
+  siteData.apps.android = document.getElementById('sAndroid').value.trim();
+  try {
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'site', data: siteData, sha: siteSha, message: 'BIA: Site ayarları güncellendi' }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error);
+    siteSha = d.sha;
+    document.getElementById('siteNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi! Site yeniden derlenince değişiklikler yayınlanır.</div>';
+  } catch(e) {
+    document.getElementById('siteNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Kaydet';
+}
+
+// ── ANA SAYFA ──
+async function loadAndShowHomepage() {
+  if (!homepageData) {
+    try { const res = await loadJson('homepage'); homepageData = res.data; homepageSha = res.sha; }
+    catch(e) { alert('Yüklenemedi: ' + e.message); return; }
+  }
+  document.getElementById('hpHeroTitle').value = homepageData.hero?.title || '';
+  document.getElementById('hpHeroSubtitle').value = homepageData.hero?.subtitle || '';
+  document.getElementById('hpAboutTitle').value = homepageData.about?.title || '';
+  document.getElementById('hpAboutText').value = homepageData.about?.text || '';
+  // Render counters
+  const counters = homepageData.impact?.counters || [];
+  document.getElementById('countersList').innerHTML = counters.map((c, i) => `
+    <div class="field-2" style="margin-bottom:8px;">
+      <div class="field"><label>Sayı ${i+1}</label><input type="number" id="cnt_val_${i}" value="${c.value}"></div>
+      <div class="field"><label>Etiket</label><input type="text" id="cnt_lbl_${i}" value="${c.label}"></div>
+    </div>`).join('');
+  showScreen('homepageScreen');
+}
+
+async function saveHomepage() {
+  const btn = document.getElementById('saveHomepageBtn');
+  btn.disabled = true; btn.textContent = 'Kaydediliyor...';
+  if (!homepageData.hero) homepageData.hero = {};
+  homepageData.hero.title = document.getElementById('hpHeroTitle').value.trim();
+  homepageData.hero.subtitle = document.getElementById('hpHeroSubtitle').value.trim();
+  if (!homepageData.about) homepageData.about = {};
+  homepageData.about.title = document.getElementById('hpAboutTitle').value.trim();
+  homepageData.about.text = document.getElementById('hpAboutText').value.trim();
+  const counters = homepageData.impact?.counters || [];
+  counters.forEach((c, i) => {
+    const valEl = document.getElementById(`cnt_val_${i}`);
+    const lblEl = document.getElementById(`cnt_lbl_${i}`);
+    if (valEl) c.value = parseInt(valEl.value) || c.value;
+    if (lblEl) c.label = lblEl.value.trim() || c.label;
+  });
+  try {
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'homepage', data: homepageData, sha: homepageSha, message: 'BIA: Ana sayfa güncellendi' }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error);
+    homepageSha = d.sha;
+    document.getElementById('homepageNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi!</div>';
+  } catch(e) {
+    document.getElementById('homepageNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Kaydet';
+}
+
+// ── SSS ──
+async function loadAndShowFaq() {
+  if (!faqData) {
+    try { const res = await loadJson('faq'); faqData = res.data; faqSha = res.sha; }
+    catch(e) { alert('Yüklenemedi: ' + e.message); return; }
+  }
+  renderFaq();
+  showScreen('faqScreen');
+}
+
+function renderFaq() {
+  document.getElementById('faqList').innerHTML = faqData.map((cat, ci) => `
+    <div class="card" style="margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+        <input type="text" value="${cat.category}" onchange="faqData[${ci}].category=this.value" style="flex:1;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;font-weight:600;">
+        <button class="btn btn-del" style="padding:6px 12px;font-size:.8rem;" onclick="removeFaqCategory(${ci})">✕ Kategori Sil</button>
+      </div>
+      ${cat.questions.map((q, qi) => `
+        <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;margin-bottom:8px;">
+          <div class="field"><label>Soru</label><input type="text" value="${q.q.replace(/"/g,'&quot;')}" onchange="faqData[${ci}].questions[${qi}].q=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+          <div class="field"><label>Cevap</label><textarea rows="2" onchange="faqData[${ci}].questions[${qi}].a=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;resize:vertical;">${q.a}</textarea></div>
+          <button class="btn btn-del" style="padding:4px 10px;font-size:.78rem;" onclick="removeFaqQ(${ci},${qi})">Soruyu Sil</button>
+        </div>`).join('')}
+      <button class="btn btn-gray" style="width:100%;margin-top:4px;" onclick="addFaqQ(${ci})">+ Soru Ekle</button>
+    </div>`).join('');
+}
+
+function addFaqCategory() {
+  faqData.push({ category: 'Yeni Kategori', questions: [] });
+  renderFaq();
+}
+
+function removeFaqCategory(ci) {
+  if (!confirm('Bu kategoriyi silmek istiyor musunuz?')) return;
+  faqData.splice(ci, 1); renderFaq();
+}
+
+function addFaqQ(ci) {
+  faqData[ci].questions.push({ q: '', a: '' }); renderFaq();
+}
+
+function removeFaqQ(ci, qi) {
+  faqData[ci].questions.splice(qi, 1); renderFaq();
+}
+
+async function saveFaq() {
+  const btn = document.getElementById('saveFaqBtn');
+  btn.disabled = true; btn.textContent = 'Kaydediliyor...';
+  try {
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'faq', data: faqData, sha: faqSha, message: 'BIA: SSS güncellendi' }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error);
+    faqSha = d.sha;
+    document.getElementById('faqNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi!</div>';
+  } catch(e) {
+    document.getElementById('faqNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Tümünü Kaydet';
+}
+
+// ── PROGRAMLAR ──
+async function loadAndShowPrograms() {
+  if (!programsData) {
+    try { const res = await loadJson('programs'); programsData = res.data; programsSha = res.sha; }
+    catch(e) { alert('Yüklenemedi: ' + e.message); return; }
+  }
+  renderPrograms();
+  showScreen('programsScreen');
+}
+
+function renderPrograms() {
+  document.getElementById('programsList').innerHTML = programsData.map((p, i) => `
+    <div class="card" style="margin-bottom:12px;">
+      <div class="field-2">
+        <div class="field"><label>İkon</label><input type="text" value="${p.icon||''}" onchange="programsData[${i}].icon=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+        <div class="field"><label>Başlık</label><input type="text" value="${p.title||''}" onchange="programsData[${i}].title=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+      </div>
+      <div class="field"><label>Kısa Açıklama</label><input type="text" value="${p.short||''}" onchange="programsData[${i}].short=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+      <div class="field-2">
+        <div class="field"><label>Hedef Kitle</label><input type="text" value="${p.target||''}" onchange="programsData[${i}].target=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+        <div class="field"><label>Model</label><input type="text" value="${p.model||''}" onchange="programsData[${i}].model=this.value" style="width:100%;padding:8px 12px;border:1.5px solid #d1d5db;border-radius:8px;"></div>
+      </div>
+    </div>`).join('');
+}
+
+async function savePrograms() {
+  const btn = document.getElementById('saveProgramsBtn');
+  btn.disabled = true; btn.textContent = 'Kaydediliyor...';
+  try {
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'programs', data: programsData, sha: programsSha, message: 'BIA: Programlar güncellendi' }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error);
+    programsSha = d.sha;
+    document.getElementById('programsNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi!</div>';
+  } catch(e) {
+    document.getElementById('programsNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Tümünü Kaydet';
+}
+
 function logout() {
   sessionStorage.removeItem('biaPw');
   pw = ''; news = []; sha = ''; events = []; eventsSha = '';
+  siteData = null; siteSha = ''; homepageData = null; homepageSha = '';
+  faqData = null; faqSha = ''; programsData = null; programsSha = '';
   document.getElementById('topNav').style.display = 'none';
   document.getElementById('pwInput').value = '';
-  show('loginScreen');
+  showScreen('loginScreen');
 }
 
 // Auto-login
 window.onload = () => {
   const saved = sessionStorage.getItem('biaPw');
   if (saved) { document.getElementById('pwInput').value = saved; doLogin(); }
-  else show('loginScreen');
+  else showScreen('loginScreen');
 };
 </script>
 </body>
