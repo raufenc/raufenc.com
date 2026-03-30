@@ -272,6 +272,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div id="editNotice" style="margin-top:4px;"></div>
       <div class="edit-footer">
         <button class="btn btn-red" onclick="saveItem()" id="saveBtn">Kaydet</button>
+        <button class="btn btn-gray" onclick="previewItem()">Önizle</button>
         <button class="btn btn-gray" onclick="showMain()">İptal</button>
         <button class="btn btn-del" onclick="deleteItem()" id="deleteBtn" style="margin-left:auto;display:none;">Sil</button>
       </div>
@@ -290,6 +291,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
     <div class="field"><label>E-posta</label><input id="sEmail" type="email" placeholder="bilgi@birlikteiyilik.com"></div>
     <div class="field"><label>WhatsApp Linki</label><input id="sWhatsapp" type="url" placeholder="https://wa.me/905348117757"></div>
+    <div class="field"><label>Google Analytics ID</label><input id="sGaId" type="text" placeholder="G-XXXXXXXXXX"></div>
     <div class="field"><label>Instagram</label><input id="sInstagram" type="url"></div>
     <div class="field"><label>YouTube</label><input id="sYoutube" type="url"></div>
     <div class="field-2">
@@ -493,6 +495,31 @@ async function rebuild() {
     document.getElementById('mainNotice').innerHTML = '<div class="notice info">⏳ Site yenileniyor… Vercel ~1 dakika içinde günceller.</div>';
   } catch(e) {}
   btn.disabled = false; btn.innerHTML = 'Yayınla';
+}
+
+function previewItem() {
+  const title = document.getElementById('fTitle').value || 'Başlıksız';
+  const cat = document.getElementById('fCat').value || 'haber';
+  const date = document.getElementById('fDate').value || '';
+  const content = document.getElementById('fContent').value || document.getElementById('fExcerpt').value || '';
+  const image = document.getElementById('fImage').value || '';
+  const CATS = {haber:'HABER',duyuru:'DUYURU',etkinlik:'ETKİNLİK',icerik:'İÇERİK'};
+  const TR_M = ['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  let dateStr = '';
+  if (date) { const p = date.split('-'); dateStr = parseInt(p[2]) + ' ' + TR_M[parseInt(p[1])] + ' ' + p[0]; }
+  const imgHtml = image ? `<img src="${image}" style="width:100%;max-height:360px;object-fit:cover;border-radius:12px 12px 0 0;">` : '';
+  const w = window.open('', '_blank', 'width=700,height=800');
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Önizleme</title>
+    <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;padding:20px}
+    .card{background:#fff;border-radius:12px;max-width:640px;margin:0 auto;box-shadow:0 4px 20px rgba(0,0,0,.1);overflow:hidden}
+    .body{padding:24px 28px 32px}.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:700;margin-bottom:12px;background:#FCE8EE;color:#E20439}
+    h1{font-size:1.5rem;margin-bottom:8px;font-family:Georgia,serif}.meta{color:#888;font-size:.9rem;margin-bottom:20px}
+    .content{line-height:1.8;font-size:.95rem}.content img{max-width:100%;border-radius:8px}
+    .bar{background:#E20439;color:#fff;padding:10px 20px;font-size:.8rem;text-align:center}</style></head>
+    <body><div class="bar">📋 Önizleme — henüz kaydedilmedi</div>
+    <div class="card">${imgHtml}<div class="body"><span class="badge">${CATS[cat]||cat}</span>
+    <h1>${title}</h1><p class="meta">${dateStr}</p><div class="content">${content}</div></div></div></body></html>`);
+  w.document.close();
 }
 
 function cleanHtml() {
@@ -699,6 +726,7 @@ async function loadAndShowSite() {
   document.getElementById('sPhoneHref').value = siteData.phone_href || '';
   document.getElementById('sEmail').value = siteData.email || '';
   document.getElementById('sWhatsapp').value = siteData.whatsapp || '';
+  document.getElementById('sGaId').value = siteData.ga_id || '';
   document.getElementById('sInstagram').value = siteData.social?.instagram || '';
   document.getElementById('sYoutube').value = siteData.social?.youtube || '';
   document.getElementById('sIos').value = siteData.apps?.ios || '';
@@ -713,6 +741,7 @@ async function saveSite() {
   siteData.phone_href = document.getElementById('sPhoneHref').value.trim();
   siteData.email = document.getElementById('sEmail').value.trim();
   siteData.whatsapp = document.getElementById('sWhatsapp').value.trim();
+  siteData.ga_id = document.getElementById('sGaId').value.trim();
   if (!siteData.social) siteData.social = {};
   siteData.social.instagram = document.getElementById('sInstagram').value.trim();
   siteData.social.youtube = document.getElementById('sYoutube').value.trim();
