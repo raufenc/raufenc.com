@@ -26,9 +26,9 @@
           <span class="card-category cat-badge-{{ item.category or 'haber' }}">{{ item.category | upper if item.category else 'HABER' }}</span>
           <p class="card-date">{{ item.date | tr_date }}</p>
         </div>
-        <h3><a href="javascript:void(0)" onclick="openArticle('{{ item.slug }}')">{{ item.title }}</a></h3>
+        <h3><a href="#" onclick="openArticle('{{ item.slug }}');return false;">{{ item.title }}</a></h3>
         <p>{{ item.excerpt | truncate_words(20) }}</p>
-        <a href="javascript:void(0)" onclick="openArticle('{{ item.slug }}')" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a>
+        <a href="#" onclick="openArticle('{{ item.slug }}');return false;" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a>
       </div>
     </div>
     {% endfor %}
@@ -61,7 +61,7 @@ function filterNews(cat){
     el.innerHTML=items.map(function(item){
       var cat=item.category||'haber';
       var img=item.image?'<img src="'+esc(item.image)+'" alt="'+esc(item.title)+'" class="news-card-img" loading="lazy">':'<div class="card-image-placeholder cat-'+cat+'"></div>';
-      return '<div class="card news-card" data-cat="'+cat+'">'+img+'<div class="card-body"><div class="card-meta-row"><span class="card-category cat-badge-'+cat+'">'+(CATS[cat]||cat)+'</span><p class="card-date">'+trDate(item.date)+'</p></div><h3><a href="javascript:void(0)" onclick="openArticle(\''+item.slug+'\')">'+esc(item.title)+'</a></h3><p>'+esc(trunc(item.excerpt||'',20))+'</p><a href="javascript:void(0)" onclick="openArticle(\''+item.slug+'\')" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a></div></div>';
+      return '<div class="card news-card" data-cat="'+cat+'">'+img+'<div class="card-body"><div class="card-meta-row"><span class="card-category cat-badge-'+cat+'">'+(CATS[cat]||cat)+'</span><p class="card-date">'+trDate(item.date)+'</p></div><h3><a href="#" onclick="openArticle(\''+item.slug+'\');return false;">'+esc(item.title)+'</a></h3><p>'+esc(trunc(item.excerpt||'',20))+'</p><a href="#" onclick="openArticle(\''+item.slug+'\');return false;" class="btn btn-secondary btn-sm mt-4">Devamını Oku</a></div></div>';
     }).join('');
   })['catch'](function(){});
 })();
