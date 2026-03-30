@@ -5,6 +5,7 @@
 import { GameShell } from './game-shell.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText } from './engine-utils.js';
 
 const MAX_WRONG = 6;
 
@@ -41,7 +42,7 @@ export function renderHangman(container, game, data, app) {
         words = game.veri.sorular
             .filter(s => s.dogru_cevap)
             .map(s => ({
-                kelime: (s.dogru_cevap.replace(/^[A-D]\)\s*/, '')).toUpperCase(),
+                kelime: getCorrectText(s).toUpperCase(),
                 ipucu: s.soru,
                 kategori: ''
             }))

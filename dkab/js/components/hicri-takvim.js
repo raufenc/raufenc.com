@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Faz 4: Hicri Takvim Detay Sayfasi =====
 // Ozel gunler, kandiller, ay bilgileri, sinifla iliskilendirme
 
-import { store } from '../store.js?v=12';
+import { store } from '../store.js?v=13';
 
 // Hicri aylar ve ozel gunler (kapsamli veri)
 const HICRI_AYLAR = [

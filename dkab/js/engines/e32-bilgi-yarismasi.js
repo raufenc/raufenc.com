@@ -5,6 +5,7 @@
 import { GameShell } from './game-shell.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText, getWrongTexts, shuffle } from './engine-utils.js';
 
 const PUAN_SEVIYELERI = [100, 200, 300, 400];
 
@@ -142,10 +143,8 @@ export function renderJeopardy(container, game, data, app) {
         activeCell = cellId;
         shell.gameArea.innerHTML = '';
 
-        const correct = (soru.dogru_cevap || '').replace(/^[A-D]\)\s*/, '');
-        const opts = shuffle([correct, ...(soru.secenekler || [])
-            .map(o => o.replace(/^[A-D]\)\s*/, ''))
-            .filter(o => o !== correct)
+        const correct = getCorrectText(soru);
+        const opts = shuffle([correct, ...getWrongTexts(soru, correct)
             .slice(0, 3)
         ]);
 

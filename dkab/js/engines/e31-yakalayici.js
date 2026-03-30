@@ -6,6 +6,7 @@ import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { drawSprite } from './sprite-renderer.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText } from './engine-utils.js';
 
 export function renderCatcher(container, game, data, app) {
     let goodItems = game.veri?.iyi || [];
@@ -14,11 +15,11 @@ export function renderCatcher(container, game, data, app) {
     // Fallback: MCQ sorulardan iyi/kötü üret
     if (goodItems.length === 0 && game.veri?.sorular) {
         game.veri.sorular.forEach(s => {
-            const correct = (s.dogru_cevap || '').replace(/^[A-D]\)\s*/, '');
+            const correct = getCorrectText(s);
             goodItems.push({ metin: correct, emoji: '✅', puan: 10 });
             (s.secenekler || []).forEach(opt => {
-                const o = opt.replace(/^[A-D]\)\s*/, '');
-                if (o !== correct) badItems.push({ metin: o, emoji: '❌', ceza: 5 });
+                const o = (opt || '').replace(/^[A-D]\)\s*/, '').trim();
+                if (o && o !== correct) badItems.push({ metin: o, emoji: '❌', ceza: 5 });
             });
         });
     }

@@ -1,31 +1,27 @@
-// ===== E27: Uzay Nişancısı (Space Shooter) =====
-// Alt kısımda uzay gemisi. Üstten balonlar/uzaylılar iniyor.
-// Her hedefte bir cevap. Doğru olanı vur!
+// ===== E27: Uzay Nişancısı =====
+// Soru ekranın üstünde büyük gösterilir.
+// Uzayda yüzen hedeflere tıkla — doğru cevabı vur!
 
 import { GameShell } from './game-shell.js';
 import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { drawSprite } from './sprite-renderer.js';
 import { getGameDifficulty } from './difficulty.js';
+import { soruToWave, shuffle } from './engine-utils.js';
 
 export function renderSpaceShooter(container, game, data, app) {
     let waves = game.veri?.dalgalar || [];
 
-    // Fallback: MCQ sorulardan dalga olustur
+    // Fallback: MCQ sorulardan dalga oluştur
     if (waves.length === 0 && game.veri?.sorular) {
-        waves = game.veri.sorular.map(s => ({
-            soru: s.soru,
-            dogru: s.dogru_cevap?.replace(/^[A-D]\)\s*/, '') || '',
-            yanlis: (s.secenekler || [])
-                .map(o => o.replace(/^[A-D]\)\s*/, ''))
-                .filter(o => o !== (s.dogru_cevap?.replace(/^[A-D]\)\s*/, '')))
-                .slice(0, 3),
-            hiz: 1
-        }));
+        waves = game.veri.sorular.map(soruToWave);
     }
 
+    // Temizle: boş soruları çıkar
+    waves = waves.filter(w => w.soru && w.dogru);
+
     if (waves.length === 0) {
-        container.innerHTML = '<div class="card text-center" style="padding:2rem;"><p>Bu oyun icin veri bulunamadi.</p></div>';
+        container.innerHTML = '<div class="card text-center" style="padding:2rem;"><p>Bu oyun için veri bulunamadı.</p></div>';
         return;
     }
 
@@ -51,10 +47,7 @@ export function renderSpaceShooter(container, game, data, app) {
     }
 
     function startWave() {
-        if (waveIndex >= waves.length) {
-            shell.gameWin();
-            return;
-        }
+        if (waveIndex >= waves.length) { shell.gameWin(); return; }
         if (shell.finished) return;
 
         const wave = waves[waveIndex];
@@ -62,131 +55,104 @@ export function renderSpaceShooter(container, game, data, app) {
 
         shell.gameArea.innerHTML = '';
 
-        // Soru paneli
-        const questionDiv = document.createElement('div');
-        questionDiv.style.cssText = `
-            text-align:center; padding:0.75rem 1rem; font-weight:600;
-            background:rgba(108,99,255,0.15); border-radius:14px; margin-bottom:0.5rem;
-            border:1px solid rgba(108,99,255,0.3);
+        // ── Soru kutusu (büyük, net) ──────────────────────────────────
+        const qBox = document.createElement('div');
+        qBox.style.cssText = `
+            background: linear-gradient(135deg, #4834d4ee, #6C63FFee);
+            border-radius: 16px; padding: 1rem 1.25rem; margin-bottom: 0.5rem;
+            text-align: center; color: white;
         `;
-        questionDiv.innerHTML = `
-            <div style="font-size:0.7rem; color:var(--text-muted); margin-bottom:0.2rem;">
-                Dalga ${waveIndex + 1} / ${waves.length} — Dogru hedefe ates et!
+        qBox.innerHTML = `
+            <div style="font-size:0.7rem; opacity:0.8; margin-bottom:0.3rem; letter-spacing:0.05em; text-transform:uppercase;">
+                Soru ${waveIndex + 1} / ${waves.length} &nbsp;·&nbsp; Doğru hedefe tıkla!
             </div>
-            <div style="font-size:0.95rem;">${wave.soru}</div>
+            <div style="font-size:1rem; font-weight:700; line-height:1.4;">${wave.soru}</div>
         `;
-        shell.gameArea.appendChild(questionDiv);
+        shell.gameArea.appendChild(qBox);
 
-        const canvasContainer = document.createElement('div');
-        canvasContainer.style.cssText = 'position:relative;';
-        shell.gameArea.appendChild(canvasContainer);
+        // ── Canvas ───────────────────────────────────────────────────
+        const canvasWrap = document.createElement('div');
+        shell.gameArea.appendChild(canvasWrap);
 
-        const W = 360, H = 380;
-        const canvas = new CanvasGame(canvasContainer, { width: W, height: H, bgColor: '#0a0a1a' });
+        const W = 360, H = 300;
+        const canvas = new CanvasGame(canvasWrap, { width: W, height: H, bgColor: '#050d1a' });
 
-        // Gemi
-        const ship = {
-            x: W / 2,
-            y: H - 40,
-            w: 48,
-            h: 40,
-            speed: 200,
-        };
+        // Hedef konumları: 2×2 grid + hafif rastgele offset
+        const positions = [
+            { x: W * 0.25, y: H * 0.3 },
+            { x: W * 0.75, y: H * 0.3 },
+            { x: W * 0.25, y: H * 0.72 },
+            { x: W * 0.75, y: H * 0.72 },
+        ];
 
-        // Dusman hedefler
-        const speedMult = diff.speed * (1 + (wave.hiz || 1) * 0.2);
+        const COLORS = ['#FF6B6B', '#48DBFB', '#1DD1A1', '#FECA57'];
         const targets = allAnswers.map((text, i) => ({
             text,
             correct: text === wave.dogru,
-            x: (W / (allAnswers.length + 1)) * (i + 1),
-            y: -40 - i * 30,
-            w: 60,
-            h: 30,
-            speed: (50 + Math.random() * 30) * speedMult,
+            x: positions[i].x + (Math.random() - 0.5) * 30,
+            y: positions[i].y + (Math.random() - 0.5) * 20,
+            r: 44,
+            color: COLORS[i],
+            wobble: Math.random() * Math.PI * 2,
+            wobbleSpeed: 0.8 + Math.random() * 0.4,
             alive: true,
-            color: ['#FF6B6B', '#48DBFB', '#FECA57', '#FF9FF3'][i % 4],
+            hitAnim: 0, // 0 = none, >0 = animating
         }));
 
-        // Mermiler
-        const bullets = [];
-        let lastShot = 0;
         let answered = false;
         let resultMsg = '';
         let resultTimer = 0;
 
-        // Otomatik ates: hedef hizasina gelince yavaslayarak dogru olanı vurur
-        function autoAim() {
-            // Gemi en yakın hedefe dogru gider (kullanici ipucuyla)
-        }
-
         canvas.start(
             (dt) => {
-                if (shell.paused || answered) return;
-
-                // Gemi hareketi (sol/sag tuslari veya dokunmatik)
-                if (canvas.keys['ArrowLeft'] || canvas.keys['KeyA']) {
-                    ship.x = Math.max(ship.w / 2, ship.x - ship.speed * dt);
-                }
-                if (canvas.keys['ArrowRight'] || canvas.keys['KeyD']) {
-                    ship.x = Math.min(W - ship.w / 2, ship.x + ship.speed * dt);
-                }
-
-                // Dokunmatik: gemi parmak pozisyonunu takip eder
-                if (canvas.pointer.x > 0 && canvas.pointer.held) {
-                    ship.x += (canvas.pointer.x - ship.x) * 0.15;
-                }
-
-                // Otomatik ates (Space veya tap)
-                lastShot += dt;
-                if ((canvas.keys['Space'] || canvas.pointer.down) && lastShot > 0.3) {
-                    canvas.pointer.down = false;
-                    lastShot = 0;
-                    bullets.push({ x: ship.x, y: ship.y - 20, speed: 350 });
-                    playGameSound('shoot');
-                }
-
-                // Mermi hareketi
-                for (let i = bullets.length - 1; i >= 0; i--) {
-                    bullets[i].y -= bullets[i].speed * dt;
-                    if (bullets[i].y < -10) bullets.splice(i, 1);
-                }
-
-                // Hedef hareketi
-                for (const t of targets) {
-                    if (!t.alive) continue;
-                    t.y += t.speed * dt;
-
-                    // Ekran dısına cıktı mı?
-                    if (t.y > H + 20) {
-                        t.alive = false;
-                        if (t.correct) {
-                            // Doğru hedef kaçtı → can kaybet
-                            const ended = shell.wrongAnswer();
-                            playGameSound('miss');
-                            if (ended) { canvas.destroy(); return; }
-                            answered = true;
-                            resultMsg = '❌ Kaçırdın!';
-                            resultTimer = 0;
+                if (shell.paused || answered) {
+                    if (answered) {
+                        resultTimer += dt;
+                        if (resultTimer > 1.4) {
+                            canvas.destroy();
+                            waveIndex++;
+                            startWave();
                         }
                     }
+                    return;
+                }
 
-                    // Mermi çarpışması
-                    for (let i = bullets.length - 1; i >= 0; i--) {
-                        const b = bullets[i];
-                        if (CanvasGame.pointInRect(b.x, b.y, { x: t.x - t.w/2, y: t.y - t.h/2, w: t.w, h: t.h })) {
-                            bullets.splice(i, 1);
-                            t.alive = false;
+                // Hedef salınımı
+                for (const t of targets) {
+                    if (!t.alive) continue;
+                    t.wobble += dt * t.wobbleSpeed;
+                    // Yavaş yatay drift
+                    t.x += Math.sin(t.wobble * 0.7) * 0.4;
+                    t.y += Math.cos(t.wobble * 0.5) * 0.25;
+                    // Sınır koru
+                    t.x = Math.max(t.r + 5, Math.min(W - t.r - 5, t.x));
+                    t.y = Math.max(t.r + 5, Math.min(H - t.r - 5, t.y));
+
+                    if (t.hitAnim > 0) t.hitAnim -= dt * 3;
+                }
+
+                // Tıklama
+                if (canvas.pointer.down && !answered) {
+                    canvas.pointer.down = false;
+                    for (const t of targets) {
+                        if (!t.alive) continue;
+                        const d = CanvasGame.distance({ x: canvas.pointer.x, y: canvas.pointer.y }, { x: t.x, y: t.y });
+                        if (d <= t.r + 8) {
                             answered = true;
+                            t.alive = false;
+                            t.hitAnim = 1;
 
                             if (t.correct) {
                                 shell.correctAnswer(diff.pointsPerCorrect);
                                 playGameSound('pop');
-                                canvas.spawnParticles(t.x, t.y, { count: 12, colors: ['#FFD700', '#FF6B6B', '#48DBFB'], speed: 100 });
+                                canvas.spawnParticles(t.x, t.y, { count: 16, colors: [t.color, '#FFD700', 'white'], speed: 120 });
                                 resultMsg = '✅ Doğru!';
                             } else {
                                 const ended = shell.wrongAnswer();
                                 playGameSound('miss');
-                                resultMsg = `❌ Yanlış! Doğru: ${wave.dogru}`;
+                                resultMsg = `❌ Yanlış! Doğru: "${wave.dogru}"`;
+                                // Doğru hedefi vurgula
+                                targets.find(x => x.correct && x.alive)?.(() => {});
                                 if (ended) { canvas.destroy(); return; }
                             }
                             resultTimer = 0;
@@ -194,86 +160,92 @@ export function renderSpaceShooter(container, game, data, app) {
                         }
                     }
                 }
-
-                // Tüm hedefler öldü ama cevap verilmedi → hepsini miss
-                if (!answered && targets.every(t => !t.alive)) {
-                    answered = true;
-                    resultMsg = `⏱️ Kaçırdın! Doğru: ${wave.dogru}`;
-                }
-
-                // Sonuç mesajı süresi
-                if (answered) {
-                    resultTimer += dt;
-                    if (resultTimer > 1.5) {
-                        canvas.destroy();
-                        waveIndex++;
-                        startWave();
-                    }
-                }
             },
             (ctx) => {
                 // Yıldız alanı
-                ctx.fillStyle = 'rgba(255,255,255,0.6)';
-                for (let i = 0; i < 40; i++) {
-                    const sx = (i * 137 + 11) % W;
-                    const sy = (i * 79 + 23) % H;
-                    ctx.fillRect(sx, sy, 1, 1);
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                for (let i = 0; i < 60; i++) {
+                    const sx = (i * 113 + 7) % W;
+                    const sy = (i * 79 + 19) % H;
+                    const br = Math.sin(Date.now() * 0.001 + i) * 0.3 + 0.7;
+                    ctx.globalAlpha = br * 0.6;
+                    ctx.fillRect(sx, sy, 1.5, 1.5);
                 }
+                ctx.globalAlpha = 1;
 
-                // Mermiler
-                ctx.fillStyle = '#FFD700';
-                for (const b of bullets) {
-                    ctx.fillRect(b.x - 2, b.y - 8, 4, 12);
-                }
-
-                // Hedefler (uzaylı + metin)
+                // Hedefler
                 for (const t of targets) {
-                    if (!t.alive) continue;
+                    if (!t.alive && t.hitAnim <= 0) continue;
+                    const alpha = t.alive ? 1 : t.hitAnim;
+                    ctx.globalAlpha = alpha;
 
-                    // Arka plan kutusu
-                    ctx.fillStyle = t.color + '33';
+                    // Dış halka
+                    ctx.beginPath();
+                    ctx.arc(t.x, t.y, t.r + 4, 0, Math.PI * 2);
                     ctx.strokeStyle = t.color;
                     ctx.lineWidth = 2;
-                    const rx = t.x - t.w/2, ry = t.y - t.h/2;
-                    ctx.beginPath();
-                    if (ctx.roundRect) ctx.roundRect(rx, ry, t.w, t.h, 8);
-                    else ctx.rect(rx, ry, t.w, t.h);
-                    ctx.fill();
                     ctx.stroke();
 
-                    // Emoji
-                    drawSprite(ctx, '👾', t.x, t.y - 22, 20);
+                    // Gövde
+                    ctx.beginPath();
+                    ctx.arc(t.x, t.y, t.r, 0, Math.PI * 2);
+                    ctx.fillStyle = t.color + '33';
+                    ctx.fill();
 
-                    // Metin
+                    // Emoji (uzaylı)
+                    drawSprite(ctx, '👾', t.x, t.y - 10, 28);
+
+                    // Cevap metni
                     ctx.fillStyle = 'white';
-                    ctx.font = 'bold 10px Inter, sans-serif';
+                    const fontSize = t.text.length > 12 ? 9 : t.text.length > 8 ? 11 : 13;
+                    ctx.font = `bold ${fontSize}px Inter, sans-serif`;
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    const display = t.text.length > 10 ? t.text.slice(0, 9) + '…' : t.text;
-                    ctx.fillText(display, t.x, t.y, t.w - 4);
+                    const display = t.text.length > 16 ? t.text.slice(0, 15) + '…' : t.text;
+                    ctx.fillText(display, t.x, t.y + 18, t.r * 1.7);
+
+                    ctx.globalAlpha = 1;
                 }
 
-                // Gemi
-                drawSprite(ctx, '🚀', ship.x, ship.y, 36);
-
-                // Motor ateşi
-                ctx.fillStyle = `hsl(${Date.now() * 0.3 % 60 + 10}, 100%, 60%)`;
-                ctx.beginPath();
-                ctx.arc(ship.x, ship.y + 22, 6, 0, Math.PI * 2);
-                ctx.fill();
+                // Doğru hedefi (yanıt verilince) yeşil vurgula
+                if (answered) {
+                    const correct = targets.find(t => t.correct && t.alive);
+                    if (correct) {
+                        ctx.strokeStyle = '#1DD1A1';
+                        ctx.lineWidth = 4;
+                        ctx.beginPath();
+                        ctx.arc(correct.x, correct.y, correct.r + 8, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                }
 
                 // Sonuç mesajı
                 if (answered && resultMsg) {
-                    ctx.fillStyle = 'rgba(0,0,0,0.75)';
+                    const isCorrect = resultMsg.startsWith('✅');
+                    ctx.fillStyle = isCorrect ? 'rgba(29,209,161,0.9)' : 'rgba(255,71,87,0.9)';
+                    const boxW = Math.min(W - 20, 320);
+                    const boxH = 44;
+                    const bx = (W - boxW) / 2;
+                    const by = H / 2 - boxH / 2;
                     ctx.beginPath();
-                    if (ctx.roundRect) ctx.roundRect(W/2 - 120, H/2 - 24, 240, 48, 12);
-                    else ctx.rect(W/2 - 120, H/2 - 24, 240, 48);
+                    if (ctx.roundRect) ctx.roundRect(bx, by, boxW, boxH, 12);
+                    else ctx.rect(bx, by, boxW, boxH);
                     ctx.fill();
+
                     ctx.fillStyle = 'white';
-                    ctx.font = 'bold 14px Inter, sans-serif';
+                    ctx.font = 'bold 13px Inter, sans-serif';
                     ctx.textAlign = 'center';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText(resultMsg, W/2, H/2, 230);
+                    ctx.fillText(resultMsg, W / 2, H / 2, boxW - 16);
+                }
+
+                // Alt kılavuz metni
+                if (!answered) {
+                    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+                    ctx.font = '11px Inter, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText('👆 Doğru cevabı tıkla', W / 2, H - 6);
                 }
             }
         );
@@ -281,27 +253,13 @@ export function renderSpaceShooter(container, game, data, app) {
 
     shell.onReplay = () => {
         waveIndex = 0;
-        shell.score = 0;
-        shell.correct = 0;
-        shell.wrong = 0;
-        shell.combo = 0;
-        shell.lives = shell.maxLives;
+        shell.score = 0; shell.correct = 0; shell.wrong = 0;
+        shell.combo = 0; shell.lives = shell.maxLives;
         shell.timeLeft = shell.timerSeconds;
-        shell.finished = false;
-        shell.paused = false;
+        shell.finished = false; shell.paused = false;
         startGame();
     };
-
     shell.onTimeUp = () => { shell.gameWin(); };
 
     startGame();
-}
-
-function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
 }

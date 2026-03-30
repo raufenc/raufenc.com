@@ -1,6 +1,6 @@
 // ===== DKAB Akademi - Header Bileseni =====
 
-import { store, XP_PER_LEVEL } from '../store.js?v=12';
+import { store, XP_PER_LEVEL } from '../store.js?v=13';
 
 export function renderHeader(el, app) {
     const user = store.user;

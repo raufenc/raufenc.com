@@ -6,6 +6,7 @@ import { GameShell } from './game-shell.js';
 import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText } from './engine-utils.js';
 
 const TURKISH_LETTERS = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ';
 
@@ -27,7 +28,7 @@ export function renderWordSearch(container, game, data, app) {
             .filter(s => s.dogru_cevap)
             .slice(0, 8)
             .map(s => ({
-                kelime: (s.dogru_cevap.replace(/^[A-D]\)\s*/, '')).toUpperCase(),
+                kelime: getCorrectText(s).toUpperCase(),
                 ipucu: s.soru
             }))
             .filter(k => k.kelime.length >= 3 && k.kelime.length <= gridBoyut - 1);

@@ -5,6 +5,7 @@
 import { GameShell } from './game-shell.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText } from './engine-utils.js';
 
 // Şifre karakterleri
 const CIPHER_SYMBOLS = ['★', '♦', '●', '▲', '■', '◆', '♠', '♣',
@@ -29,9 +30,9 @@ export function renderCipherBreaker(container, game, data, app) {
             .filter(s => s.dogru_cevap)
             .slice(0, 5)
             .map(s => ({
-                sifreli_metin: s.dogru_cevap.replace(/^[A-D]\)\s*/, '').toUpperCase(),
+                sifreli_metin: getCorrectText(s).toUpperCase(),
                 harf_ipuclari: [],
-                cozum: s.dogru_cevap.replace(/^[A-D]\)\s*/, ''),
+                cozum: getCorrectText(s),
                 soru: s.soru
             }));
     }

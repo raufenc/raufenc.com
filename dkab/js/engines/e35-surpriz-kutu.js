@@ -5,6 +5,7 @@
 import { GameShell } from './game-shell.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText, getWrongTexts, shuffle } from './engine-utils.js';
 
 export function renderSurpriseBox(container, game, data, app) {
     let kutular = game.veri?.kutular || [];
@@ -182,10 +183,8 @@ export function renderSurpriseBox(container, game, data, app) {
         } else {
             // Soru tipi
             const icerik = kutu.icerik || {};
-            const correct = (icerik.dogru_cevap || '').replace(/^[A-D]\)\s*/, '');
-            let opts = shuffle([correct, ...(icerik.secenekler || [])
-                .map(o => o.replace(/^[A-D]\)\s*/, ''))
-                .filter(o => o !== correct)
+            const correct = getCorrectText(icerik);
+            let opts = shuffle([correct, ...getWrongTexts(icerik, correct)
                 .slice(0, 3)
             ]);
 

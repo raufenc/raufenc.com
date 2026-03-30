@@ -7,12 +7,13 @@ import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { drawSprite } from './sprite-renderer.js';
 import { getGameDifficulty } from './difficulty.js';
+import { normalizeSoru, shuffle } from './engine-utils.js';
 
 export function renderRace(container, game, data, app) {
-    let questions = game.veri?.sorular || [];
+    let questions = (game.veri?.sorular || []).map(normalizeSoru);
 
     if (questions.length === 0 && game.veri?.turlar) {
-        questions = game.veri.turlar.map(t => ({
+        questions = game.veri.turlar.map(t => normalizeSoru({
             soru: t.soru,
             secenekler: [t.dogru_balon, ...(t.diger_balonlar || [])],
             dogru_cevap: t.dogru_balon
@@ -162,12 +163,8 @@ export function renderRace(container, game, data, app) {
         if (shell.finished) return;
 
         const q = questions[qIndex];
-        const options = shuffle([q.dogru_cevap, ...(q.secenekler || [])
-            .map(o => o.replace(/^[A-D]\)\s*/, ''))
-            .filter(o => o !== q.dogru_cevap.replace(/^[A-D]\)\s*/, ''))
-            .slice(0, 3)
-        ]);
-        const correct = q.dogru_cevap.replace(/^[A-D]\)\s*/, '');
+        const correct = q.dogru_cevap;
+        const options = shuffle([...new Set([correct, ...(q.secenekler || [])].slice(0, 4))]);
 
         const qArea = document.getElementById('race-q-area');
         if (!qArea) return;

@@ -2,6 +2,7 @@ export const config = { runtime: 'edge' };
 
 const REPO = 'raufenc/raufenc.com';
 const NEWS_FILE = 'birlikteiyilik-site/content/news.json';
+const EVENTS_FILE = 'birlikteiyilik-site/content/events.json';
 const GH_API = 'https://api.github.com';
 
 export default async function handler(req) {
@@ -38,6 +39,11 @@ export default async function handler(req) {
     if (searchParams.get('password') !== ADMIN_PW)
       return json({ error: 'Yanlış şifre' }, 401);
     try {
+      if (searchParams.get('type') === 'events') {
+        const data = await gh(`/repos/${REPO}/contents/${EVENTS_FILE}`);
+        const events = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
+        return json({ events, sha: data.sha });
+      }
       const data = await gh(`/repos/${REPO}/contents/${NEWS_FILE}`);
       const news = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g, '')))));
       return json({ news, sha: data.sha });
@@ -50,6 +56,18 @@ export default async function handler(req) {
     const body = await req.json();
     if (body.password !== ADMIN_PW) return json({ error: 'Yanlış şifre' }, 401);
     try {
+      if (body.type === 'events') {
+        const events = (body.events || []).sort((a, b) =>
+          (b.date || '').localeCompare(a.date || '')
+        );
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(events, null, 2))));
+        const result = await gh(`/repos/${REPO}/contents/${EVENTS_FILE}`, 'PUT', {
+          message: body.message || 'BIA: Etkinlik güncellendi',
+          content,
+          sha: body.sha || '',
+        });
+        return json({ ok: true, sha: result.content.sha });
+      }
       const news = (body.news || []).sort((a, b) =>
         (b.date || '').localeCompare(a.date || '')
       );

@@ -8,6 +8,7 @@ import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { drawBalloon, BALLOON_COLORS } from './sprite-renderer.js';
 import { getGameDifficulty } from './difficulty.js';
+import { soruToWave } from './engine-utils.js';
 
 export function renderBalloonPop(container, game, data, app) {
     // Veri cek
@@ -15,15 +16,15 @@ export function renderBalloonPop(container, game, data, app) {
 
     // Fallback: MCQ sorularini tur formatina donustur
     if (rounds.length === 0 && game.veri?.sorular) {
-        rounds = game.veri.sorular.map(s => ({
-            soru: s.soru,
-            dogru_balon: s.dogru_cevap?.replace(/^[A-D]\)\s*/, '') || s.secenekler?.[0],
-            diger_balonlar: (s.secenekler || [])
-                .map(o => o.replace(/^[A-D]\)\s*/, ''))
-                .filter(o => o !== (s.dogru_cevap?.replace(/^[A-D]\)\s*/, '')))
-                .slice(0, 3),
-            aciklama: s.aciklama
-        }));
+        rounds = game.veri.sorular.map(s => {
+            const w = soruToWave(s);
+            return {
+                soru: w.soru,
+                dogru_balon: w.dogru,
+                diger_balonlar: w.yanlis,
+                aciklama: s.aciklama
+            };
+        });
     }
 
     if (rounds.length === 0) {

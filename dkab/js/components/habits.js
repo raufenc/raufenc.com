@@ -1,6 +1,6 @@
 // ===== DKAB Akademi - 360° Aliskanlik Takibi =====
 
-import { store } from '../store.js?v=12';
+import { store } from '../store.js?v=13';
 
 const MILESTONES = [
     { days: 10, icon: '&#127793;', name: 'Filiz', desc: '10 gun aktif!' },

@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Faz 4: Davranis Takibi (Kirkpatrick L3) =====
 // Ogrencinin ogrendiklerini gunluk hayata yansitma olcumu
 
-import { store } from '../store.js?v=12';
+import { store } from '../store.js?v=13';
 
 // DKAB mufredatina uygun davranis kategorileri
 const BEHAVIOR_CATEGORIES = [

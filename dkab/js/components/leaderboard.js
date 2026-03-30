@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Sınıf Sıralama Tablosu =====
 
-import { store } from '../store.js?v=12';
-import { getDB, DB_PATHS } from '../firebase-config.js?v=12';
+import { store } from '../store.js?v=13';
+import { getDB, DB_PATHS } from '../firebase-config.js?v=13';
 
 export async function renderLeaderboard(el, app) {
     const code = store.getClassroomCode();

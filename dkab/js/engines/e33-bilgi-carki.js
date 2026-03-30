@@ -6,6 +6,7 @@ import { GameShell } from './game-shell.js';
 import { CanvasGame } from './canvas-core.js';
 import { playGameSound } from './sound-fx.js';
 import { getGameDifficulty } from './difficulty.js';
+import { getCorrectText, getWrongTexts, shuffle } from './engine-utils.js';
 
 const DEFAULT_COLORS = ['#FF6B6B','#48DBFB','#1DD1A1','#FECA57','#FF9FF3','#54A0FF','#FF9F43','#5F27CD'];
 
@@ -248,10 +249,8 @@ export function renderSpinWheel(container, game, data, app) {
         }
 
         const q = catSorular[Math.floor(Math.random() * catSorular.length)];
-        const correct = (q.dogru_cevap || '').replace(/^[A-D]\)\s*/, '');
-        const opts = shuffle([correct, ...(q.secenekler || [])
-            .map(o => o.replace(/^[A-D]\)\s*/, ''))
-            .filter(o => o !== correct)
+        const correct = getCorrectText(q);
+        const opts = shuffle([correct, ...getWrongTexts(q, correct)
             .slice(0, 3)
         ]);
 
