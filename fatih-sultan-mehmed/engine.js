@@ -243,11 +243,10 @@ function setupSearch(){
 /* ═══════════ LEGEND ═══════════ */
 function renderLegend(){
   const el=document.getElementById('legend');
-  let html='<div class="legend-title">Dönemler</div>';
-  if(MAP_DATA.periods)MAP_DATA.periods.forEach(p=>{
-    html+=`<div class="legend-row" onclick="document.getElementById('period-filter').value='${p.id}';document.getElementById('period-filter').dispatchEvent(new Event('change'))"><div class="legend-dot" style="background:${p.color}"></div>${p.label}</div>`;
-  });
-  el.innerHTML=html;
+  el.innerHTML=`
+    <div class="legend-row"><svg width="16" height="16" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="10" cy="10" r="2.5" fill="#5a3e1b"/></svg> Şehir / Yerleşim</div>
+    <div class="legend-row"><svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#8b6914" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="#c9a84c" stroke="#5a3e1b" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="#5a3e1b"/></svg> Başkent / Merkez</div>
+    <div class="legend-row"><svg width="16" height="16" viewBox="0 0 20 20"><line x1="4" y1="4" x2="16" y2="16" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="4" x2="4" y2="16" stroke="#6b1d1d" stroke-width="2" stroke-linecap="round"/><circle cx="10" cy="10" r="3" fill="#c0392b" stroke="#4a0e0e" stroke-width="1"/></svg> Savaş / Kuşatma</div>`;
 }
 
 /* ═══════════ DETAIL PANEL ═══════════ */
