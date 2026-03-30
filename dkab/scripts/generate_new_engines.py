@@ -70,6 +70,29 @@ def get_kavram_sample(kavramlar, n=8):
     return k[:n]
 
 
+# ⛔ KUTSAL İÇERİK KORUMASI
+# E27 (Uzay Nişancısı), E28 (Balon Patlatma), E31 (Yakalayıcı) gibi
+# "yıkıcı mekanikli" oyunlarda Allah'ın isimleri, kutsal lafızlar,
+# ayet/sure metinleri KULLANILMAZ. Bu fonksiyon bu içerikleri filtreler.
+SACRED_TERMS = [
+    'bismillah', 'besmele', 'elhamdulillah', 'elhamdülillah',
+    'allahu ekber', 'tekbir', 'subhanallah', 'sübhanallah',
+    'estağfirullah', 'astaghfirullah', 'selamünaleyküm', 'selamunaleykum',
+    'maşallah', 'masallah', 'inşallah', 'insallah', 'salavat',
+    'la ilahe illallah', 'la ilahe',
+    'er-rahman', 'er-rahîm', 'er-rahim', 'el-alîm', 'el-alim',
+    'el-basîr', 'el-basir', 'es-semî', 'es-semi', 'el-kadîr', 'el-kadir',
+    'esmâü\'l-hüsnâ', 'esmaül husna', 'esmayıhüsna',
+    'allah razı olsun', 'allah bereket', 'allah şifa versin',
+]
+
+
+def is_sacred_content(text):
+    """Metnin kutsal lafız içerip içermediğini kontrol eder."""
+    t = (text or '').lower()
+    return any(s in t for s in SACRED_TERMS)
+
+
 def generate_grade_games(grade):
     bank_path = os.path.join(BASE, 'data', grade, '04_etkinlik_ve_oyun', 'oyun_bankasi.json')
     bank = load_json(bank_path)
@@ -179,10 +202,14 @@ def generate_grade_games(grade):
             })
 
     # ── E27: Uzay Nişancısı ───────────────────────────────────────────
+    # ⛔ Kutsal içerik (Allah'ın isimleri, zikirler) hedef olarak kullanılmaz
     if sample8:
         dalgalar = []
         for s in sample8[:6]:
             yanlis = [o for o in s['secenekler'] if o != s['dogru_cevap']][:3]
+            # Kutsal içerik filtreleme
+            if is_sacred_content(s['dogru_cevap']) or any(is_sacred_content(y) for y in yanlis):
+                continue
             if s['soru'] and s['dogru_cevap'] and yanlis:
                 dalgalar.append({
                     "soru": s['soru'],

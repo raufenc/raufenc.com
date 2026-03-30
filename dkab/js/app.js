@@ -1,30 +1,30 @@
 // ===== DKAB Akademi - Ana Uygulama + Router =====
 
-import { store } from './store.js?v=13';
-import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=13';
-import { renderHeader } from './components/header.js?v=13';
-import { renderSidebar } from './components/sidebar.js?v=13';
-import { renderHome } from './components/home.js?v=13';
-import { renderClassSelector } from './components/class-selector.js?v=13';
-import { renderUnitList } from './components/unit-list.js?v=13';
-import { renderChapterView } from './components/chapter-view.js?v=13';
-import { renderGlossary } from './components/glossary.js?v=13';
-import { renderProgressDashboard } from './components/progress-dashboard.js?v=13';
-import { showConfetti, showXpPopup, showLevelUp } from './components/effects.js?v=13';
+import { store } from './store.js?v=14';
+import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=14';
+import { renderHeader } from './components/header.js?v=14';
+import { renderSidebar } from './components/sidebar.js?v=14';
+import { renderHome } from './components/home.js?v=14';
+import { renderClassSelector } from './components/class-selector.js?v=14';
+import { renderUnitList } from './components/unit-list.js?v=14';
+import { renderChapterView } from './components/chapter-view.js?v=14';
+import { renderGlossary } from './components/glossary.js?v=14';
+import { renderProgressDashboard } from './components/progress-dashboard.js?v=14';
+import { showConfetti, showXpPopup, showLevelUp } from './components/effects.js?v=14';
 // 360° Ekosistem bilesenleri
-import { renderLearningPath } from './components/learning-path.js?v=13';
-import { renderAssessment } from './components/assessment.js?v=13';
-import { renderGoals } from './components/goals.js?v=13';
-import { renderHabits } from './components/habits.js?v=13';
+import { renderLearningPath } from './components/learning-path.js?v=14';
+import { renderAssessment } from './components/assessment.js?v=14';
+import { renderGoals } from './components/goals.js?v=14';
+import { renderHabits } from './components/habits.js?v=14';
 // Faz 3 — Isbirlikci
-import { renderLeaderboard } from './components/leaderboard.js?v=13';
-import { renderKnowledgeWall } from './components/knowledge-wall.js?v=13';
-import { renderChallenges } from './components/challenges.js?v=13';
+import { renderLeaderboard } from './components/leaderboard.js?v=14';
+import { renderKnowledgeWall } from './components/knowledge-wall.js?v=14';
+import { renderChallenges } from './components/challenges.js?v=14';
 // Faz 4 — Kultur + Rehberlik
-import { renderStudyGuide } from './components/study-guide.js?v=13';
-import { renderHicriTakvim } from './components/hicri-takvim.js?v=13';
-import { renderBehaviorTracker } from './components/behavior-tracker.js?v=13';
-import { renderAnnualReport } from './components/annual-report.js?v=13';
+import { renderStudyGuide } from './components/study-guide.js?v=14';
+import { renderHicriTakvim } from './components/hicri-takvim.js?v=14';
+import { renderBehaviorTracker } from './components/behavior-tracker.js?v=14';
+import { renderAnnualReport } from './components/annual-report.js?v=14';
 
 class App {
     constructor() {

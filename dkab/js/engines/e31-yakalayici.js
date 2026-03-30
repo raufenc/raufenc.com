@@ -1,5 +1,8 @@
 // ===== E31: Yakalayıcı (Catcher) =====
 // Üstten nesneler düşüyor. İyi olanları yakala, kötülerden kaç!
+//
+// ⛔ İÇERİK KISITLAMASI: Allah'ın isimleri, kutsal lafızlar, ayet metinleri
+//   düşen nesneler olarak KULLANILAMAZ. Yalnızca ahlak/davranış kavramları kullanın.
 
 import { GameShell } from './game-shell.js';
 import { CanvasGame } from './canvas-core.js';

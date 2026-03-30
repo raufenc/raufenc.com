@@ -1,6 +1,9 @@
 // ===== E27: Uzay Nişancısı =====
 // Soru ekranın üstünde büyük gösterilir.
 // Uzayda yüzen hedeflere tıkla — doğru cevabı vur!
+//
+// ⛔ İÇERİK KISITLAMASI: Allah'ın isimleri, kutsal lafızlar, ayet metinleri
+//   hedef olarak KULLANILAMAZ. Yalnızca tarafsız kavram/bilgi içeriği kullanın.
 
 import { GameShell } from './game-shell.js';
 import { CanvasGame } from './canvas-core.js';

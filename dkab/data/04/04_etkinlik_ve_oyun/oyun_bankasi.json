@@ -4049,66 +4049,47 @@
     "tasarimci_notu": "Kontrol listesi yüzdelik ilerleme ile gösterilir."
   },
   {
-    "oyun_id": "U1_B1_E28",
+    "oyun_id": "U1_B1_E03",
     "bolum_id": "U1_B1",
-    "unite": "1. Unite",
-    "baslik": "Balon Patlatma: Dini Ifadeler",
-    "motor_id": "E28",
-    "motor_adi": "Balon Patlatma",
-    "hedef": "Dini ifadeleri eglenceli bir sekilde pekistirmek",
+    "unite": "1. Ünite: Günlük Hayattaki Dinî İfadeler",
+    "baslik": "Dini İfadeleri Eşleştir",
+    "motor_id": "E03",
+    "motor_adi": "Terim-Tanım Eşleştirme",
+    "hedef": "Günlük hayatta kullanılan dini ifadelerin anlam ve kullanım yerlerini pekiştirmek",
     "veri": {
-      "turlar": [
+      "eslesmeler": [
         {
-          "soru": "Bir ise baslarken ne deriz?",
-          "dogru_balon": "Bismillah",
-          "diger_balonlar": [
-            "Masallah",
-            "Insallah",
-            "Elhamdulillah"
-          ]
+          "terim": "Bismillah",
+          "tanim": "Bir işe başlarken okunur. \"Allah'ın adıyla\" anlamına gelir."
         },
         {
-          "soru": "Birine selam verirken ne deriz?",
-          "dogru_balon": "Selamunaleykum",
-          "diger_balonlar": [
-            "Estgafirullah",
-            "Allahu Ekber",
-            "Subhanallah"
-          ]
+          "terim": "Selamünaleyküm",
+          "tanim": "Müslümanların birbirini karşıladığında kullandığı selamlama sözüdür."
         },
         {
-          "soru": "Bir nimet karsiliginda ne deriz?",
-          "dogru_balon": "Elhamdulillah",
-          "diger_balonlar": [
-            "Bismillah",
-            "Masallah",
-            "La havle"
-          ]
+          "terim": "Elhamdülillah",
+          "tanim": "Bir nimetin ardından Allah'a şükran belirtmek için söylenir."
         },
         {
-          "soru": "Guzel bir sey gordugumuzde ne deriz?",
-          "dogru_balon": "Masallah",
-          "diger_balonlar": [
-            "Insallah",
-            "Estgafirullah",
-            "Bismillah"
-          ],
-          "aciklama": "Masallah, birinin basarisina veya guzelligine hayranligi ifade eder."
+          "terim": "Sübhanallah",
+          "tanim": "Allah'ı tüm eksikliklerden tenzih etmek için ve bir şeye hayran kalınca söylenir."
         },
         {
-          "soru": "Gelecekle ilgili bir niyet belirtirken ne deriz?",
-          "dogru_balon": "Insallah",
-          "diger_balonlar": [
-            "Masallah",
-            "Subhanallah",
-            "Elhamdulillah"
-          ],
-          "aciklama": "Insallah, 'Allah izin verirse' anlamina gelir."
+          "terim": "Maşallah",
+          "tanim": "Bir şeyin güzelliğine veya bir başarıya duyulan hayranlığı ifade eder."
+        },
+        {
+          "terim": "İnşallah",
+          "tanim": "Gelecekteki bir niyet veya istek için \"Allah'ın izniyle\" anlamında söylenir."
+        },
+        {
+          "terim": "Estağfirullah",
+          "tanim": "Allah'tan bağışlanma dilenmek için söylenir."
         }
       ]
     },
-    "kazanma_kosulu": "5 turun en az 4'unu dogru bilmek",
-    "tasarimci_notu": "Balonlar yukarı cikiyor, dogru olanina tikla!"
+    "kazanma_kosulu": "Tüm eşleştirmeleri doğru yapmak",
+    "tasarimci_notu": "Her dini ifade, kullanım yerine eşleştirilir."
   },
   {
     "oyun_id": "U1_B1_E25",
@@ -4120,11 +4101,31 @@
     "hedef": "Dini kavramları harflerden tahmin ederek pekiştirmek",
     "veri": {
       "kelimeler": [
-        { "kelime": "NAMAZ", "ipucu": "Günde beş vakit kılınan ibadet", "kategori": "İbadet" },
-        { "kelime": "ORUÇ", "ipucu": "Ramazan ayında tutulan ibadet", "kategori": "İbadet" },
-        { "kelime": "ZEKAT", "ipucu": "Zenginlerin fakirlere verdiği mali ibadet", "kategori": "İbadet" },
-        { "kelime": "HACC", "ipucu": "Kabe'ye yapılan kutsal ziyaret", "kategori": "İbadet" },
-        { "kelime": "KURAN", "ipucu": "Allah'ın Hz. Muhammed'e gönderdiği kutsal kitap", "kategori": "Kutsal Kitap" }
+        {
+          "kelime": "NAMAZ",
+          "ipucu": "Günde beş vakit kılınan ibadet",
+          "kategori": "İbadet"
+        },
+        {
+          "kelime": "ORUÇ",
+          "ipucu": "Ramazan ayında tutulan ibadet",
+          "kategori": "İbadet"
+        },
+        {
+          "kelime": "ZEKAT",
+          "ipucu": "Zenginlerin fakirlere verdiği mali ibadet",
+          "kategori": "İbadet"
+        },
+        {
+          "kelime": "HACC",
+          "ipucu": "Kabe'ye yapılan kutsal ziyaret",
+          "kategori": "İbadet"
+        },
+        {
+          "kelime": "KURAN",
+          "ipucu": "Allah'ın Hz. Muhammed'e gönderdiği kutsal kitap",
+          "kategori": "Kutsal Kitap"
+        }
       ]
     }
   },
@@ -4141,31 +4142,51 @@
         {
           "soru": "İslam'ın birinci şartı nedir?",
           "dogru": "Kelime-i Şehadet",
-          "yanlis": ["Namaz", "Zekat", "Hac"],
+          "yanlis": [
+            "Namaz",
+            "Zekat",
+            "Hac"
+          ],
           "hiz": 1
         },
         {
           "soru": "Günde kaç vakit namaz kılınır?",
           "dogru": "5 vakit",
-          "yanlis": ["3 vakit", "7 vakit", "10 vakit"],
+          "yanlis": [
+            "3 vakit",
+            "7 vakit",
+            "10 vakit"
+          ],
           "hiz": 1
         },
         {
           "soru": "Hangi ayda oruç tutulur?",
           "dogru": "Ramazan",
-          "yanlis": ["Muharrem", "Recep", "Zilhicce"],
+          "yanlis": [
+            "Muharrem",
+            "Recep",
+            "Zilhicce"
+          ],
           "hiz": 2
         },
         {
           "soru": "Zekat kimlere verilir?",
           "dogru": "Fakirlere",
-          "yanlis": ["Zengine", "Devlete", "Camiiye"],
+          "yanlis": [
+            "Zengine",
+            "Devlete",
+            "Camiiye"
+          ],
           "hiz": 2
         },
         {
           "soru": "Hac ibadeti nerede yapılır?",
           "dogru": "Mekke",
-          "yanlis": ["Medine", "Kudüs", "İstanbul"],
+          "yanlis": [
+            "Medine",
+            "Kudüs",
+            "İstanbul"
+          ],
           "hiz": 3
         }
       ]
@@ -4183,18 +4204,58 @@
       "sure": 60,
       "hiz": 1,
       "iyi": [
-        { "metin": "Dürüstlük", "emoji": "💚", "puan": 10 },
-        { "metin": "Cömertlik", "emoji": "💝", "puan": 15 },
-        { "metin": "Sabır", "emoji": "⏳", "puan": 10 },
-        { "metin": "Şükür", "emoji": "🙏", "puan": 10 },
-        { "metin": "Merhamet", "emoji": "❤️", "puan": 15 },
-        { "metin": "Yardım", "emoji": "🤝", "puan": 10 }
+        {
+          "metin": "Dürüstlük",
+          "emoji": "💚",
+          "puan": 10
+        },
+        {
+          "metin": "Cömertlik",
+          "emoji": "💝",
+          "puan": 15
+        },
+        {
+          "metin": "Sabır",
+          "emoji": "⏳",
+          "puan": 10
+        },
+        {
+          "metin": "Şükür",
+          "emoji": "🙏",
+          "puan": 10
+        },
+        {
+          "metin": "Merhamet",
+          "emoji": "❤️",
+          "puan": 15
+        },
+        {
+          "metin": "Yardım",
+          "emoji": "🤝",
+          "puan": 10
+        }
       ],
       "kotu": [
-        { "metin": "Yalan", "emoji": "🤥", "ceza": 8 },
-        { "metin": "Gıybet", "emoji": "👄", "ceza": 8 },
-        { "metin": "Kibir", "emoji": "😤", "ceza": 10 },
-        { "metin": "Hased", "emoji": "😒", "ceza": 8 }
+        {
+          "metin": "Yalan",
+          "emoji": "🤥",
+          "ceza": 8
+        },
+        {
+          "metin": "Gıybet",
+          "emoji": "👄",
+          "ceza": 8
+        },
+        {
+          "metin": "Kibir",
+          "emoji": "😤",
+          "ceza": 10
+        },
+        {
+          "metin": "Hased",
+          "emoji": "😒",
+          "ceza": 8
+        }
       ]
     }
   },
@@ -4211,28 +4272,148 @@
         {
           "ad": "İbadetler",
           "sorular": [
-            { "puan": 100, "soru": "Günlük kaç vakit namaz kılınır?", "secenekler": ["3", "5", "7", "10"], "dogru_cevap": "5" },
-            { "puan": 200, "soru": "Ramazan hangi ayda kutlanır?", "secenekler": ["Şaban", "Ramazan", "Muharrem", "Recep"], "dogru_cevap": "Ramazan" },
-            { "puan": 300, "soru": "Zekatın nisap miktarı neye göredir?", "secenekler": ["Yaşa", "Servete", "Dine", "Cinsiyete"], "dogru_cevap": "Servete" },
-            { "puan": 400, "soru": "Haccın farz olma şartlarından biri nedir?", "secenekler": ["Genç olmak", "Güçlü olmak", "Muktedir olmak", "Evli olmak"], "dogru_cevap": "Muktedir olmak" }
+            {
+              "puan": 100,
+              "soru": "Günlük kaç vakit namaz kılınır?",
+              "secenekler": [
+                "3",
+                "5",
+                "7",
+                "10"
+              ],
+              "dogru_cevap": "5"
+            },
+            {
+              "puan": 200,
+              "soru": "Ramazan hangi ayda kutlanır?",
+              "secenekler": [
+                "Şaban",
+                "Ramazan",
+                "Muharrem",
+                "Recep"
+              ],
+              "dogru_cevap": "Ramazan"
+            },
+            {
+              "puan": 300,
+              "soru": "Zekatın nisap miktarı neye göredir?",
+              "secenekler": [
+                "Yaşa",
+                "Servete",
+                "Dine",
+                "Cinsiyete"
+              ],
+              "dogru_cevap": "Servete"
+            },
+            {
+              "puan": 400,
+              "soru": "Haccın farz olma şartlarından biri nedir?",
+              "secenekler": [
+                "Genç olmak",
+                "Güçlü olmak",
+                "Muktedir olmak",
+                "Evli olmak"
+              ],
+              "dogru_cevap": "Muktedir olmak"
+            }
           ]
         },
         {
           "ad": "Peygamberler",
           "sorular": [
-            { "puan": 100, "soru": "İslam'ın son peygamberi kimdir?", "secenekler": ["Hz. İsa", "Hz. Musa", "Hz. Muhammed", "Hz. İbrahim"], "dogru_cevap": "Hz. Muhammed" },
-            { "puan": 200, "soru": "Hz. Nuh kaç yıl yaşadığı söylenir?", "secenekler": ["100", "950", "500", "200"], "dogru_cevap": "950" },
-            { "puan": 300, "soru": "Hz. İbrahim'e hangi kitap gönderildi?", "secenekler": ["Tevrat", "İncil", "Kuran", "Suhuf"], "dogru_cevap": "Suhuf" },
-            { "puan": 400, "soru": "Hz. Süleyman'ın mucizelerinden biri nedir?", "secenekler": ["Ölüleri diriltmek", "Hayvanlara konuşmak", "Su yürümek", "Uçmak"], "dogru_cevap": "Hayvanlara konuşmak" }
+            {
+              "puan": 100,
+              "soru": "İslam'ın son peygamberi kimdir?",
+              "secenekler": [
+                "Hz. İsa",
+                "Hz. Musa",
+                "Hz. Muhammed",
+                "Hz. İbrahim"
+              ],
+              "dogru_cevap": "Hz. Muhammed"
+            },
+            {
+              "puan": 200,
+              "soru": "Hz. Nuh kaç yıl yaşadığı söylenir?",
+              "secenekler": [
+                "100",
+                "950",
+                "500",
+                "200"
+              ],
+              "dogru_cevap": "950"
+            },
+            {
+              "puan": 300,
+              "soru": "Hz. İbrahim'e hangi kitap gönderildi?",
+              "secenekler": [
+                "Tevrat",
+                "İncil",
+                "Kuran",
+                "Suhuf"
+              ],
+              "dogru_cevap": "Suhuf"
+            },
+            {
+              "puan": 400,
+              "soru": "Hz. Süleyman'ın mucizelerinden biri nedir?",
+              "secenekler": [
+                "Ölüleri diriltmek",
+                "Hayvanlara konuşmak",
+                "Su yürümek",
+                "Uçmak"
+              ],
+              "dogru_cevap": "Hayvanlara konuşmak"
+            }
           ]
         },
         {
           "ad": "Ahlak",
           "sorular": [
-            { "puan": 100, "soru": "Doğru söyleme erdemi nedir?", "secenekler": ["Cesaret", "Dürüstlük", "Cömertlik", "Sabır"], "dogru_cevap": "Dürüstlük" },
-            { "puan": 200, "soru": "Başkasının nimetine gıpta etmenin adı nedir?", "secenekler": ["Kibir", "Hased", "Gıybet", "Kin"], "dogru_cevap": "Hased" },
-            { "puan": 300, "soru": "Kişiyi kötülüklerden koruyan erdem hangisidir?", "secenekler": ["Sabır", "Şükür", "Takva", "İlim"], "dogru_cevap": "Takva" },
-            { "puan": 400, "soru": "Emr-i bi'l maruf ne anlama gelir?", "secenekler": ["Kötülüğü önlemek", "İyiliği emretmek", "İlim öğrenmek", "Dua etmek"], "dogru_cevap": "İyiliği emretmek" }
+            {
+              "puan": 100,
+              "soru": "Doğru söyleme erdemi nedir?",
+              "secenekler": [
+                "Cesaret",
+                "Dürüstlük",
+                "Cömertlik",
+                "Sabır"
+              ],
+              "dogru_cevap": "Dürüstlük"
+            },
+            {
+              "puan": 200,
+              "soru": "Başkasının nimetine gıpta etmenin adı nedir?",
+              "secenekler": [
+                "Kibir",
+                "Hased",
+                "Gıybet",
+                "Kin"
+              ],
+              "dogru_cevap": "Hased"
+            },
+            {
+              "puan": 300,
+              "soru": "Kişiyi kötülüklerden koruyan erdem hangisidir?",
+              "secenekler": [
+                "Sabır",
+                "Şükür",
+                "Takva",
+                "İlim"
+              ],
+              "dogru_cevap": "Takva"
+            },
+            {
+              "puan": 400,
+              "soru": "Emr-i bi'l maruf ne anlama gelir?",
+              "secenekler": [
+                "Kötülüğü önlemek",
+                "İyiliği emretmek",
+                "İlim öğrenmek",
+                "Dua etmek"
+              ],
+              "dogru_cevap": "İyiliği emretmek"
+            }
           ]
         }
       ]
@@ -4249,29 +4430,125 @@
     "veri": {
       "hak": 8,
       "dilimler": [
-        { "kategori": "Namaz", "renk": "#1DD1A1", "puan": 50 },
-        { "kategori": "Oruç", "renk": "#FECA57", "puan": 75 },
-        { "kategori": "Zekat", "renk": "#54A0FF", "puan": 100 },
-        { "kategori": "Hac", "renk": "#FF9F43", "puan": 150 },
-        { "kategori": "İflasss!", "renk": "#636e72", "puan": -50 },
-        { "kategori": "Bonus", "renk": "#5F27CD", "puan": 200 }
+        {
+          "kategori": "Namaz",
+          "renk": "#1DD1A1",
+          "puan": 50
+        },
+        {
+          "kategori": "Oruç",
+          "renk": "#FECA57",
+          "puan": 75
+        },
+        {
+          "kategori": "Zekat",
+          "renk": "#54A0FF",
+          "puan": 100
+        },
+        {
+          "kategori": "Hac",
+          "renk": "#FF9F43",
+          "puan": 150
+        },
+        {
+          "kategori": "İflasss!",
+          "renk": "#636e72",
+          "puan": -50
+        },
+        {
+          "kategori": "Bonus",
+          "renk": "#5F27CD",
+          "puan": 200
+        }
       ],
       "sorular": {
         "Namaz": [
-          { "soru": "Sabah namazı kaç rekattır?", "secenekler": ["2", "3", "4", "5"], "dogru_cevap": "2" },
-          { "soru": "Öğle namazı kaç rekattır?", "secenekler": ["2", "4", "6", "3"], "dogru_cevap": "4" }
+          {
+            "soru": "Sabah namazı kaç rekattır?",
+            "secenekler": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "dogru_cevap": "2"
+          },
+          {
+            "soru": "Öğle namazı kaç rekattır?",
+            "secenekler": [
+              "2",
+              "4",
+              "6",
+              "3"
+            ],
+            "dogru_cevap": "4"
+          }
         ],
         "Oruç": [
-          { "soru": "Oruç hangi ayda tutulur?", "secenekler": ["Şaban", "Ramazan", "Muharrem", "Recep"], "dogru_cevap": "Ramazan" },
-          { "soru": "Orucu bozan şeylerden biri nedir?", "secenekler": ["Uyumak", "Yemek yemek", "Namaz kılmak", "Dua etmek"], "dogru_cevap": "Yemek yemek" }
+          {
+            "soru": "Oruç hangi ayda tutulur?",
+            "secenekler": [
+              "Şaban",
+              "Ramazan",
+              "Muharrem",
+              "Recep"
+            ],
+            "dogru_cevap": "Ramazan"
+          },
+          {
+            "soru": "Orucu bozan şeylerden biri nedir?",
+            "secenekler": [
+              "Uyumak",
+              "Yemek yemek",
+              "Namaz kılmak",
+              "Dua etmek"
+            ],
+            "dogru_cevap": "Yemek yemek"
+          }
         ],
         "Zekat": [
-          { "soru": "Zekat İslam'ın kaçıncı şartıdır?", "secenekler": ["2.", "3.", "4.", "5."], "dogru_cevap": "3." },
-          { "soru": "Zekat kime verilmez?", "secenekler": ["Fakire", "Yolcuya", "Zengine", "Borçluya"], "dogru_cevap": "Zengine" }
+          {
+            "soru": "Zekat İslam'ın kaçıncı şartıdır?",
+            "secenekler": [
+              "2.",
+              "3.",
+              "4.",
+              "5."
+            ],
+            "dogru_cevap": "3."
+          },
+          {
+            "soru": "Zekat kime verilmez?",
+            "secenekler": [
+              "Fakire",
+              "Yolcuya",
+              "Zengine",
+              "Borçluya"
+            ],
+            "dogru_cevap": "Zengine"
+          }
         ],
         "Hac": [
-          { "soru": "Hac nerede yapılır?", "secenekler": ["Medine", "Mekke", "İstanbul", "Kudüs"], "dogru_cevap": "Mekke" },
-          { "soru": "Hac İslam'ın kaçıncı şartıdır?", "secenekler": ["3.", "4.", "5.", "2."], "dogru_cevap": "5." }
+          {
+            "soru": "Hac nerede yapılır?",
+            "secenekler": [
+              "Medine",
+              "Mekke",
+              "İstanbul",
+              "Kudüs"
+            ],
+            "dogru_cevap": "Mekke"
+          },
+          {
+            "soru": "Hac İslam'ın kaçıncı şartıdır?",
+            "secenekler": [
+              "3.",
+              "4.",
+              "5.",
+              "2."
+            ],
+            "dogru_cevap": "5."
+          }
         ],
         "Bonus": []
       }
@@ -4287,21 +4564,60 @@
     "hedef": "Kavramları doğru kategorilere ayırt etmek",
     "veri": {
       "kategoriler": [
-        { "ad": "İbadet", "renk": "#1DD1A1" },
-        { "ad": "Ahlak", "renk": "#FF9F43" },
-        { "ad": "İnanç", "renk": "#6C63FF" }
+        {
+          "ad": "İbadet",
+          "renk": "#1DD1A1"
+        },
+        {
+          "ad": "Ahlak",
+          "renk": "#FF9F43"
+        },
+        {
+          "ad": "İnanç",
+          "renk": "#6C63FF"
+        }
       ],
       "kartlar": [
-        { "metin": "Namaz", "dogru_kategori": "İbadet" },
-        { "metin": "Oruç", "dogru_kategori": "İbadet" },
-        { "metin": "Dürüstlük", "dogru_kategori": "Ahlak" },
-        { "metin": "Allah'a iman", "dogru_kategori": "İnanç" },
-        { "metin": "Zekat", "dogru_kategori": "İbadet" },
-        { "metin": "Cömertlik", "dogru_kategori": "Ahlak" },
-        { "metin": "Meleklere iman", "dogru_kategori": "İnanç" },
-        { "metin": "Hac", "dogru_kategori": "İbadet" },
-        { "metin": "Sabır", "dogru_kategori": "Ahlak" },
-        { "metin": "Peygamberlere iman", "dogru_kategori": "İnanç" }
+        {
+          "metin": "Namaz",
+          "dogru_kategori": "İbadet"
+        },
+        {
+          "metin": "Oruç",
+          "dogru_kategori": "İbadet"
+        },
+        {
+          "metin": "Dürüstlük",
+          "dogru_kategori": "Ahlak"
+        },
+        {
+          "metin": "Allah'a iman",
+          "dogru_kategori": "İnanç"
+        },
+        {
+          "metin": "Zekat",
+          "dogru_kategori": "İbadet"
+        },
+        {
+          "metin": "Cömertlik",
+          "dogru_kategori": "Ahlak"
+        },
+        {
+          "metin": "Meleklere iman",
+          "dogru_kategori": "İnanç"
+        },
+        {
+          "metin": "Hac",
+          "dogru_kategori": "İbadet"
+        },
+        {
+          "metin": "Sabır",
+          "dogru_kategori": "Ahlak"
+        },
+        {
+          "metin": "Peygamberlere iman",
+          "dogru_kategori": "İnanç"
+        }
       ]
     }
   },
@@ -4315,39 +4631,102 @@
     "hedef": "Sürpriz kutulardan dini sorular çözmek",
     "veri": {
       "kutular": [
-        { "tip": "bonus", "icerik": { "bonus_xp": 30 } },
-        { "tip": "soru", "icerik": {
-          "soru": "İslam'ın beş şartından ilki nedir?",
-          "secenekler": ["Namaz", "Kelime-i Şehadet", "Oruç", "Zekat"],
-          "dogru_cevap": "Kelime-i Şehadet"
-        }},
-        { "tip": "joker", "icerik": { "yardim": "İki yanlış seçenek elenir!" } },
-        { "tip": "soru", "icerik": {
-          "soru": "Kur'an-ı Kerim kaç yılda inmiştir?",
-          "secenekler": ["10 yıl", "23 yıl", "40 yıl", "15 yıl"],
-          "dogru_cevap": "23 yıl"
-        }},
-        { "tip": "soru", "icerik": {
-          "soru": "Mescid-i Haram hangi şehirdedir?",
-          "secenekler": ["Medine", "İstanbul", "Mekke", "Kudüs"],
-          "dogru_cevap": "Mekke"
-        }},
-        { "tip": "soru", "icerik": {
-          "soru": "Hz. Muhammed (s.a.v.) kaç yaşında peygamber oldu?",
-          "secenekler": ["30", "40", "25", "50"],
-          "dogru_cevap": "40"
-        }},
-        { "tip": "bonus", "icerik": { "bonus_xp": 20 } },
-        { "tip": "soru", "icerik": {
-          "soru": "Sabah namazı kaç rekattır?",
-          "secenekler": ["2", "3", "4", "5"],
-          "dogru_cevap": "2"
-        }},
-        { "tip": "soru", "icerik": {
-          "soru": "Fatiha suresi kaç ayetten oluşur?",
-          "secenekler": ["5", "7", "9", "10"],
-          "dogru_cevap": "7"
-        }}
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 30
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "İslam'ın beş şartından ilki nedir?",
+            "secenekler": [
+              "Namaz",
+              "Kelime-i Şehadet",
+              "Oruç",
+              "Zekat"
+            ],
+            "dogru_cevap": "Kelime-i Şehadet"
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "Kur'an-ı Kerim kaç yılda inmiştir?",
+            "secenekler": [
+              "10 yıl",
+              "23 yıl",
+              "40 yıl",
+              "15 yıl"
+            ],
+            "dogru_cevap": "23 yıl"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "Mescid-i Haram hangi şehirdedir?",
+            "secenekler": [
+              "Medine",
+              "İstanbul",
+              "Mekke",
+              "Kudüs"
+            ],
+            "dogru_cevap": "Mekke"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "Hz. Muhammed (s.a.v.) kaç yaşında peygamber oldu?",
+            "secenekler": [
+              "30",
+              "40",
+              "25",
+              "50"
+            ],
+            "dogru_cevap": "40"
+          }
+        },
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 20
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "Sabah namazı kaç rekattır?",
+            "secenekler": [
+              "2",
+              "3",
+              "4",
+              "5"
+            ],
+            "dogru_cevap": "2"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "Fatiha suresi kaç ayetten oluşur?",
+            "secenekler": [
+              "5",
+              "7",
+              "9",
+              "10"
+            ],
+            "dogru_cevap": "7"
+          }
+        }
       ]
     }
   },
@@ -4362,14 +4741,38 @@
     "veri": {
       "grid_boyut": 10,
       "kelimeler": [
-        { "kelime": "NAMAZ", "ipucu": "Günde 5 vakit kılınan ibadet" },
-        { "kelime": "ORUÇ", "ipucu": "Ramazan'da tutulan ibadet" },
-        { "kelime": "ZEKAT", "ipucu": "Mali ibadet" },
-        { "kelime": "HAC", "ipucu": "Kabe ziyareti" },
-        { "kelime": "KURAN", "ipucu": "Allah'ın kitabı" },
-        { "kelime": "EZAN", "ipucu": "Namaza çağrı" },
-        { "kelime": "DINI", "ipucu": "İnanç sistemi" },
-        { "kelime": "IMAN", "ipucu": "İnanç ve güven" }
+        {
+          "kelime": "NAMAZ",
+          "ipucu": "Günde 5 vakit kılınan ibadet"
+        },
+        {
+          "kelime": "ORUÇ",
+          "ipucu": "Ramazan'da tutulan ibadet"
+        },
+        {
+          "kelime": "ZEKAT",
+          "ipucu": "Mali ibadet"
+        },
+        {
+          "kelime": "HAC",
+          "ipucu": "Kabe ziyareti"
+        },
+        {
+          "kelime": "KURAN",
+          "ipucu": "Allah'ın kitabı"
+        },
+        {
+          "kelime": "EZAN",
+          "ipucu": "Namaza çağrı"
+        },
+        {
+          "kelime": "DINI",
+          "ipucu": "İnanç sistemi"
+        },
+        {
+          "kelime": "IMAN",
+          "ipucu": "İnanç ve güven"
+        }
       ]
     }
   },
@@ -4384,14 +4787,86 @@
     "veri": {
       "rakip_zorlugu": 0.5,
       "sorular": [
-        { "soru": "Allah'ın isimlerinden 'El-Adl' ne anlama gelir?", "secenekler": ["Adaletli", "Bağışlayan", "Gören", "Duyan"], "dogru_cevap": "Adaletli" },
-        { "soru": "İlk inen sure hangisidir?", "secenekler": ["Fatiha", "Alak", "İhlas", "Nas"], "dogru_cevap": "Alak" },
-        { "soru": "Kur'an kaç sureden oluşur?", "secenekler": ["110", "114", "120", "100"], "dogru_cevap": "114" },
-        { "soru": "Mirac ne demektir?", "secenekler": ["Hicret", "Göğe yükseliş", "Savaş", "Dua"], "dogru_cevap": "Göğe yükseliş" },
-        { "soru": "Hz. Muhammed (s.a.v.) hangi yılda doğdu (Miladi)?", "secenekler": ["570", "610", "622", "632"], "dogru_cevap": "570" },
-        { "soru": "Medine'ye hicret hangi yılda oldu?", "secenekler": ["610", "620", "622", "630"], "dogru_cevap": "622" },
-        { "soru": "Namaz kaç vakittir?", "secenekler": ["3", "4", "5", "7"], "dogru_cevap": "5" },
-        { "soru": "Kıble hangi şehirdedir?", "secenekler": ["Medine", "Kudüs", "Mekke", "Bağdat"], "dogru_cevap": "Mekke" }
+        {
+          "soru": "Allah'ın isimlerinden 'El-Adl' ne anlama gelir?",
+          "secenekler": [
+            "Adaletli",
+            "Bağışlayan",
+            "Gören",
+            "Duyan"
+          ],
+          "dogru_cevap": "Adaletli"
+        },
+        {
+          "soru": "İlk inen sure hangisidir?",
+          "secenekler": [
+            "Fatiha",
+            "Alak",
+            "İhlas",
+            "Nas"
+          ],
+          "dogru_cevap": "Alak"
+        },
+        {
+          "soru": "Kur'an kaç sureden oluşur?",
+          "secenekler": [
+            "110",
+            "114",
+            "120",
+            "100"
+          ],
+          "dogru_cevap": "114"
+        },
+        {
+          "soru": "Mirac ne demektir?",
+          "secenekler": [
+            "Hicret",
+            "Göğe yükseliş",
+            "Savaş",
+            "Dua"
+          ],
+          "dogru_cevap": "Göğe yükseliş"
+        },
+        {
+          "soru": "Hz. Muhammed (s.a.v.) hangi yılda doğdu (Miladi)?",
+          "secenekler": [
+            "570",
+            "610",
+            "622",
+            "632"
+          ],
+          "dogru_cevap": "570"
+        },
+        {
+          "soru": "Medine'ye hicret hangi yılda oldu?",
+          "secenekler": [
+            "610",
+            "620",
+            "622",
+            "630"
+          ],
+          "dogru_cevap": "622"
+        },
+        {
+          "soru": "Namaz kaç vakittir?",
+          "secenekler": [
+            "3",
+            "4",
+            "5",
+            "7"
+          ],
+          "dogru_cevap": "5"
+        },
+        {
+          "soru": "Kıble hangi şehirdedir?",
+          "secenekler": [
+            "Medine",
+            "Kudüs",
+            "Mekke",
+            "Bağdat"
+          ],
+          "dogru_cevap": "Mekke"
+        }
       ]
     }
   },
@@ -4406,14 +4881,86 @@
     "veri": {
       "cekme_gucu": 1,
       "sorular": [
-        { "soru": "İslam'ın beşinci şartı nedir?", "secenekler": ["Hac", "Zekat", "Namaz", "Oruç"], "dogru_cevap": "Hac" },
-        { "soru": "Kuran-ı Kerim kaç ayetten oluşur?", "secenekler": ["6000", "6236", "5000", "7000"], "dogru_cevap": "6236" },
-        { "soru": "Hangi sureye 'Kuran'ın kalbi' denir?", "secenekler": ["Yasin", "Fatiha", "Bakara", "İhlas"], "dogru_cevap": "Yasin" },
-        { "soru": "Cuma namazı hangi gün kılınır?", "secenekler": ["Cumartesi", "Pazar", "Cuma", "Perşembe"], "dogru_cevap": "Cuma" },
-        { "soru": "Ramazan ayı Hicri takvimde kaçıncı aydır?", "secenekler": ["7.", "9.", "11.", "12."], "dogru_cevap": "9." },
-        { "soru": "Ezan kaç cümleden oluşur?", "secenekler": ["5", "7", "9", "15"], "dogru_cevap": "15" },
-        { "soru": "Abdest alırken kaç organ yıkanır?", "secenekler": ["2", "3", "4", "5"], "dogru_cevap": "4" },
-        { "soru": "Kurban Bayramı'nda kaç gün kurban kesilir?", "secenekler": ["1", "2", "3", "4"], "dogru_cevap": "3" }
+        {
+          "soru": "İslam'ın beşinci şartı nedir?",
+          "secenekler": [
+            "Hac",
+            "Zekat",
+            "Namaz",
+            "Oruç"
+          ],
+          "dogru_cevap": "Hac"
+        },
+        {
+          "soru": "Kuran-ı Kerim kaç ayetten oluşur?",
+          "secenekler": [
+            "6000",
+            "6236",
+            "5000",
+            "7000"
+          ],
+          "dogru_cevap": "6236"
+        },
+        {
+          "soru": "Hangi sureye 'Kuran'ın kalbi' denir?",
+          "secenekler": [
+            "Yasin",
+            "Fatiha",
+            "Bakara",
+            "İhlas"
+          ],
+          "dogru_cevap": "Yasin"
+        },
+        {
+          "soru": "Cuma namazı hangi gün kılınır?",
+          "secenekler": [
+            "Cumartesi",
+            "Pazar",
+            "Cuma",
+            "Perşembe"
+          ],
+          "dogru_cevap": "Cuma"
+        },
+        {
+          "soru": "Ramazan ayı Hicri takvimde kaçıncı aydır?",
+          "secenekler": [
+            "7.",
+            "9.",
+            "11.",
+            "12."
+          ],
+          "dogru_cevap": "9."
+        },
+        {
+          "soru": "Ezan kaç cümleden oluşur?",
+          "secenekler": [
+            "5",
+            "7",
+            "9",
+            "15"
+          ],
+          "dogru_cevap": "15"
+        },
+        {
+          "soru": "Abdest alırken kaç organ yıkanır?",
+          "secenekler": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "dogru_cevap": "4"
+        },
+        {
+          "soru": "Kurban Bayramı'nda kaç gün kurban kesilir?",
+          "secenekler": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "dogru_cevap": "3"
+        }
       ]
     }
   },
@@ -4429,31 +4976,64 @@
       "sifreler": [
         {
           "sifreli_metin": "NAMAZ",
-          "harf_ipuclari": [{ "harf": "N", "ipucu": "İlk harf" }, { "harf": "Z", "ipucu": "Son harf" }],
+          "harf_ipuclari": [
+            {
+              "harf": "N",
+              "ipucu": "İlk harf"
+            },
+            {
+              "harf": "Z",
+              "ipucu": "Son harf"
+            }
+          ],
           "cozum": "NAMAZ",
           "soru": "Günde 5 vakit kılınan ibadet"
         },
         {
           "sifreli_metin": "KURAN",
-          "harf_ipuclari": [{ "harf": "K", "ipucu": "İlk harf" }],
+          "harf_ipuclari": [
+            {
+              "harf": "K",
+              "ipucu": "İlk harf"
+            }
+          ],
           "cozum": "KURAN",
           "soru": "Allah'ın insanlara gönderdiği kutsal kitap"
         },
         {
           "sifreli_metin": "ALLAH",
-          "harf_ipuclari": [{ "harf": "A", "ipucu": "İlk ve son harfler" }],
+          "harf_ipuclari": [
+            {
+              "harf": "A",
+              "ipucu": "İlk ve son harfler"
+            }
+          ],
           "cozum": "ALLAH",
           "soru": "Her şeyin yaratıcısı"
         },
         {
           "sifreli_metin": "MELEK",
-          "harf_ipuclari": [{ "harf": "M", "ipucu": "İlk harf" }],
+          "harf_ipuclari": [
+            {
+              "harf": "M",
+              "ipucu": "İlk harf"
+            }
+          ],
           "cozum": "MELEK",
           "soru": "Allah'ın nurdan yarattığı varlıklar"
         },
         {
           "sifreli_metin": "IMAN",
-          "harf_ipuclari": [{ "harf": "I", "ipucu": "İlk harf" }, { "harf": "N", "ipucu": "Son harf" }],
+          "harf_ipuclari": [
+            {
+              "harf": "I",
+              "ipucu": "İlk harf"
+            },
+            {
+              "harf": "N",
+              "ipucu": "Son harf"
+            }
+          ],
           "cozum": "IMAN",
           "soru": "Allah'a ve dinin esaslarına inanmak"
         }

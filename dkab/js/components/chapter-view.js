@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=13';
-import { getGradeInfo } from '../data-loader.js?v=13';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=13';
+import { store } from '../store.js?v=14';
+import { getGradeInfo } from '../data-loader.js?v=14';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=14';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {
@@ -271,62 +271,62 @@ async function launchGame(container, game, data, app) {
     try {
         switch (motorId) {
             case 'E25': {
-                const { renderHangman } = await import('../engines/e25-kelime-tahmin.js?v=13');
+                const { renderHangman } = await import('../engines/e25-kelime-tahmin.js?v=14');
                 renderHangman(container, game, data, app);
                 return;
             }
             case 'E26': {
-                const { renderCipherBreaker } = await import('../engines/e26-sifre-cozucu.js?v=13');
+                const { renderCipherBreaker } = await import('../engines/e26-sifre-cozucu.js?v=14');
                 renderCipherBreaker(container, game, data, app);
                 return;
             }
             case 'E27': {
-                const { renderSpaceShooter } = await import('../engines/e27-uzay-nisancisi.js?v=13');
+                const { renderSpaceShooter } = await import('../engines/e27-uzay-nisancisi.js?v=14');
                 renderSpaceShooter(container, game, data, app);
                 return;
             }
             case 'E28': {
-                const { renderBalloonPop } = await import('../engines/e28-balon-patlatma.js?v=13');
+                const { renderBalloonPop } = await import('../engines/e28-balon-patlatma.js?v=14');
                 renderBalloonPop(container, game, data, app);
                 return;
             }
             case 'E29': {
-                const { renderRace } = await import('../engines/e29-yaris.js?v=13');
+                const { renderRace } = await import('../engines/e29-yaris.js?v=14');
                 renderRace(container, game, data, app);
                 return;
             }
             case 'E30': {
-                const { renderTugOfWar } = await import('../engines/e30-halat-cekme.js?v=13');
+                const { renderTugOfWar } = await import('../engines/e30-halat-cekme.js?v=14');
                 renderTugOfWar(container, game, data, app);
                 return;
             }
             case 'E31': {
-                const { renderCatcher } = await import('../engines/e31-yakalayici.js?v=13');
+                const { renderCatcher } = await import('../engines/e31-yakalayici.js?v=14');
                 renderCatcher(container, game, data, app);
                 return;
             }
             case 'E32': {
-                const { renderJeopardy } = await import('../engines/e32-bilgi-yarismasi.js?v=13');
+                const { renderJeopardy } = await import('../engines/e32-bilgi-yarismasi.js?v=14');
                 renderJeopardy(container, game, data, app);
                 return;
             }
             case 'E33': {
-                const { renderSpinWheel } = await import('../engines/e33-bilgi-carki.js?v=13');
+                const { renderSpinWheel } = await import('../engines/e33-bilgi-carki.js?v=14');
                 renderSpinWheel(container, game, data, app);
                 return;
             }
             case 'E34': {
-                const { renderDragClassify } = await import('../engines/e34-surukle-sinifla.js?v=13');
+                const { renderDragClassify } = await import('../engines/e34-surukle-sinifla.js?v=14');
                 renderDragClassify(container, game, data, app);
                 return;
             }
             case 'E35': {
-                const { renderSurpriseBox } = await import('../engines/e35-surpriz-kutu.js?v=13');
+                const { renderSurpriseBox } = await import('../engines/e35-surpriz-kutu.js?v=14');
                 renderSurpriseBox(container, game, data, app);
                 return;
             }
             case 'E36': {
-                const { renderWordSearch } = await import('../engines/e36-kelime-avi.js?v=13');
+                const { renderWordSearch } = await import('../engines/e36-kelime-avi.js?v=14');
                 renderWordSearch(container, game, data, app);
                 return;
             }

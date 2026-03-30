@@ -272,6 +272,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div id="editNotice" style="margin-top:4px;"></div>
       <div class="edit-footer">
         <button class="btn btn-red" onclick="saveItem()" id="saveBtn">Kaydet</button>
+        <button class="btn btn-gray" onclick="previewItem()">Önizle</button>
         <button class="btn btn-gray" onclick="showMain()">İptal</button>
         <button class="btn btn-del" onclick="deleteItem()" id="deleteBtn" style="margin-left:auto;display:none;">Sil</button>
       </div>
@@ -290,6 +291,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
     <div class="field"><label>E-posta</label><input id="sEmail" type="email" placeholder="bilgi@birlikteiyilik.com"></div>
     <div class="field"><label>WhatsApp Linki</label><input id="sWhatsapp" type="url" placeholder="https://wa.me/905348117757"></div>
+    <div class="field"><label>Google Analytics ID</label><input id="sGaId" type="text" placeholder="G-XXXXXXXXXX"></div>
     <div class="field"><label>Instagram</label><input id="sInstagram" type="url"></div>
     <div class="field"><label>YouTube</label><input id="sYoutube" type="url"></div>
     <div class="field-2">
@@ -699,6 +701,7 @@ async function loadAndShowSite() {
   document.getElementById('sPhoneHref').value = siteData.phone_href || '';
   document.getElementById('sEmail').value = siteData.email || '';
   document.getElementById('sWhatsapp').value = siteData.whatsapp || '';
+  document.getElementById('sGaId').value = siteData.ga_id || '';
   document.getElementById('sInstagram').value = siteData.social?.instagram || '';
   document.getElementById('sYoutube').value = siteData.social?.youtube || '';
   document.getElementById('sIos').value = siteData.apps?.ios || '';
@@ -713,6 +716,7 @@ async function saveSite() {
   siteData.phone_href = document.getElementById('sPhoneHref').value.trim();
   siteData.email = document.getElementById('sEmail').value.trim();
   siteData.whatsapp = document.getElementById('sWhatsapp').value.trim();
+  siteData.ga_id = document.getElementById('sGaId').value.trim();
   if (!siteData.social) siteData.social = {};
   siteData.social.instagram = document.getElementById('sInstagram').value.trim();
   siteData.social.youtube = document.getElementById('sYoutube').value.trim();
