@@ -1,5 +1,5 @@
 // NöroTerbiye — Okuyucu Yorumları (Kitapyurdu + Trendyol + Hepsiburada)
-// Son güncelleme: 2026-03-23
+// Son güncelleme: 2026-03-30
 const YORUMLAR_DATA = [
   // ── Kitapyurdu (4 yorum) ──
   { yazar: "takmaatsız", tarih: "04.03.2026", puan: 5, kaynak: "Kitapyurdu", onayli: true, metin: "Beyin, nörobiyoloji, sindirim sistemi, sağlıklı beslenme, irade terbiyesi vs üzerine yazılmış Serkan İsmailoğlu, Oytun Erbaş, Canan Karatay vb yazarlara ait toplam on tane kitap okumuşumdur. Bunları ve benzeri bilimsel kitapları, özümüze hitap eden Gazali, İmam Rabbani rahimullah gibi referans İslam âlimlerinin nefs ve terbiyesi konusuyla ilgili eserlerine harmanlayarak ortaya hap gibi bilgi ve çözüm sunan mükemmel bir kitap çıkarmış. Yani günümüz anlayışına hitap eden üslupla, onlarca kitaba bedel bir hülasa olmuş, keşke 3-5 sene önce yazsaydı da bunca kitabı okuma zahmetinden kurtulsaydık. Umarım okuyanlara istifade etmek yani uygulamak nasip olur. Şiddetle tavsiye edilir." },
@@ -17,7 +17,9 @@ const YORUMLAR_DATA = [
   { yazar: "Trendyol Alıcısı", tarih: "10.05.2025", puan: 5, kaynak: "Trendyol", onayli: true, metin: "Böyle kitaplar artmalı." },
   { yazar: "Trendyol Alıcısı", tarih: "15.06.2025", puan: 5, kaynak: "Trendyol", onayli: true, metin: "Çok faydalı bir kitap, tavsiye ederim." },
 
-  // ── Hepsiburada (2 yorum) ──
+  // ── Hepsiburada (4 yorum) ──
   { yazar: "B**** Ç****", tarih: "12.03.2026", puan: 5, kaynak: "Hepsiburada", onayli: true, metin: "Okunması hayata bakışını değiştirir. İnsanı okumuş oluyorsunuz." },
   { yazar: "Ö**** Ö****", tarih: "29.10.2025", puan: 5, kaynak: "Hepsiburada", onayli: true, metin: "Bilim ve ilimi bir arada yürütmeye çalışan, çok faydalı bir kitap. Özellikle eğitimcilerin, anne babaların okuması faydalıdır." },
+  { yazar: "h**** t****", tarih: "22.03.2026", puan: 5, kaynak: "Hepsiburada", onayli: true, metin: "Faydalandığım kıymetli bir eser. Tavsiye ederim." },
+  { yazar: "A**** T****", tarih: "23.03.2026", puan: 5, kaynak: "Hepsiburada", onayli: true, metin: "Harika bir kitap" },
 ];
