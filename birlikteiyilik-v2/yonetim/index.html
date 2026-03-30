@@ -94,6 +94,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <span class="topbar-title">BİA Yönetim</span>
   <div class="topbar-nav" id="topNav" style="display:none">
     <button class="topbar-btn" onclick="showMain()">Haberler</button>
+    <button class="topbar-btn" id="topEventsBtn" onclick="showEvents()">Etkinlikler</button>
     <button class="topbar-btn" onclick="showEdit(null)">+ Yeni</button>
     <button class="topbar-btn green" onclick="rebuild()" id="rebuildBtn">Yayınla</button>
     <button class="topbar-btn" onclick="logout()">Çıkış</button>
@@ -130,6 +131,77 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="filters" id="filterBar"></div>
     <div class="card" style="padding:0;overflow:hidden;">
       <div id="newsList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ETKİNLİK LİSTESİ -->
+<div id="eventsScreen" class="container" style="display:none;">
+  <div id="eventsMainNotice"></div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h2 style="font-size:1.2rem;">Etkinlik Takvimi</h2>
+      <button class="btn btn-red" onclick="showEventEdit(null)">+ Yeni Etkinlik</button>
+    </div>
+    <div id="eventsList"></div>
+  </div>
+</div>
+
+<!-- ETKİNLİK DÜZENLEME FORMU -->
+<div id="eventEditScreen" class="container" style="display:none;">
+  <div id="eventEditNotice"></div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+      <button class="btn btn-gray" onclick="showEvents()">← Geri</button>
+      <h2 id="eventEditHeading" style="font-size:1.2rem;margin:0;">Yeni Etkinlik</h2>
+    </div>
+    <div class="field">
+      <label>Başlık *</label>
+      <input id="efTitle" type="text" oninput="autoEventSlug()">
+    </div>
+    <div class="field" style="display:none;">
+      <input id="efSlug" type="text">
+    </div>
+    <div class="field-2">
+      <div class="field">
+        <label>Tarih *</label>
+        <input id="efDate" type="date">
+      </div>
+      <div class="field">
+        <label>Saat</label>
+        <input id="efTime" type="time" value="10:00">
+      </div>
+    </div>
+    <div class="field-2">
+      <div class="field">
+        <label>Yer / Platform</label>
+        <input id="efLocation" type="text" placeholder="Online (Zoom), İstanbul...">
+      </div>
+      <div class="field">
+        <label>Tür</label>
+        <select id="efType">
+          <option value="online">Online</option>
+          <option value="yuz-yuze">Yüz Yüze</option>
+          <option value="karma">Karma</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Açıklama</label>
+      <textarea id="efDesc" rows="4" placeholder="Etkinlik hakkında kısa bilgi..."></textarea>
+    </div>
+    <div class="field">
+      <label>Kayıt / Katılım Linki (isteğe bağlı)</label>
+      <input id="efRegUrl" type="url" placeholder="https://forms.gle/...">
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:8px;">
+      <input id="efPast" type="checkbox" style="width:auto;">
+      <label style="margin:0;">Geçmiş etkinlik olarak işaretle</label>
+    </div>
+    <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;">
+      <button id="saveEventBtn" class="btn btn-red" onclick="saveEvent()">Kaydet</button>
+      <button class="btn btn-gray" onclick="showEvents()">İptal</button>
+      <button id="deleteEventBtn" class="btn btn-del" onclick="deleteEvent()" style="display:none;">🗑 Sil</button>
     </div>
   </div>
 </div>
@@ -202,6 +274,7 @@ const CATS = {haber:'Haber', duyuru:'Duyuru', etkinlik:'Etkinlik', icerik:'İçe
 const TR = {'ş':'s','ı':'i','ö':'o','ü':'u','ç':'c','ğ':'g','â':'a','î':'i','û':'u'};
 
 let pw = '', news = [], sha = '', editIdx = null, filter = '';
+let events = [], eventsSha = '', eventEditIdx = null;
 
 function slugify(t) {
   return t.toLowerCase().replace(/[şıöüçğâîû]/g,c=>TR[c]||c)
@@ -374,9 +447,121 @@ function cleanHtml() {
   setTimeout(() => { document.getElementById('editNotice').innerHTML = ''; }, 2000);
 }
 
+async function showEvents() {
+  // Load events if not loaded yet
+  if (!events.length && !eventsSha) {
+    try {
+      const r = await fetch(`${API}?password=${encodeURIComponent(pw)}&type=events`);
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error);
+      events = d.events || [];
+      eventsSha = d.sha;
+    } catch(e) {
+      document.getElementById('eventsMainNotice').innerHTML = `<div class="notice err">Yüklenemedi: ${e.message}</div>`;
+    }
+  }
+  renderEventsList();
+  ['loginScreen','mainScreen','editScreen','eventsScreen','eventEditScreen'].forEach(s => document.getElementById(s).style.display = 'none');
+  document.getElementById('eventsScreen').style.display = 'block';
+}
+
+function renderEventsList() {
+  const upcoming = events.filter(e => !e.past);
+  const past = events.filter(e => e.past);
+
+  let html = '';
+  if (!events.length) {
+    html = '<div class="empty">Henüz etkinlik yok</div>';
+  } else {
+    [...upcoming, ...past].forEach((ev, i) => {
+      const idx = events.indexOf(ev);
+      html += `<div class="news-item${ev.past ? ' opacity-50' : ''}" onclick="showEventEdit(${idx})" style="${ev.past ? 'opacity:.5' : ''}">
+        <span class="ni-date">${ev.date||''}</span>
+        <span class="ni-title">${ev.title||''}</span>
+        <span class="badge b-${ev.type||'online'}">${ev.time||''} · ${ev.location||''}</span>
+      </div>`;
+    });
+  }
+  document.getElementById('eventsList').innerHTML = html;
+}
+
+function showEventEdit(idx) {
+  eventEditIdx = idx;
+  const ev = idx !== null ? events[idx] : {};
+  document.getElementById('eventEditHeading').textContent = idx === null ? 'Yeni Etkinlik' : 'Etkinliği Düzenle';
+  document.getElementById('efTitle').value = ev.title || '';
+  document.getElementById('efSlug').value = ev.slug || '';
+  document.getElementById('efDate').value = ev.date || new Date().toISOString().slice(0,10);
+  document.getElementById('efTime').value = ev.time || '10:00';
+  document.getElementById('efLocation').value = ev.location || '';
+  document.getElementById('efType').value = ev.type || 'online';
+  document.getElementById('efDesc').value = ev.description || '';
+  document.getElementById('efRegUrl').value = ev.registration_url || '';
+  document.getElementById('efPast').checked = !!ev.past;
+  document.getElementById('deleteEventBtn').style.display = idx !== null ? 'inline-flex' : 'none';
+  document.getElementById('eventEditNotice').innerHTML = '';
+  ['loginScreen','mainScreen','editScreen','eventsScreen','eventEditScreen'].forEach(s => document.getElementById(s).style.display = 'none');
+  document.getElementById('eventEditScreen').style.display = 'block';
+}
+
+function autoEventSlug() {
+  const t = document.getElementById('efTitle').value;
+  document.getElementById('efSlug').value = slugify(t);
+}
+
+async function saveEvent() {
+  const title = document.getElementById('efTitle').value.trim();
+  if (!title) { document.getElementById('eventEditNotice').innerHTML = '<div class="notice err">Başlık zorunlu.</div>'; return; }
+  const btn = document.getElementById('saveEventBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Kaydediliyor...';
+  const ev = {
+    title,
+    slug: document.getElementById('efSlug').value || slugify(title),
+    date: document.getElementById('efDate').value,
+    time: document.getElementById('efTime').value,
+    location: document.getElementById('efLocation').value.trim(),
+    type: document.getElementById('efType').value,
+    description: document.getElementById('efDesc').value.trim(),
+    registration_url: document.getElementById('efRegUrl').value.trim(),
+    past: document.getElementById('efPast').checked,
+  };
+  if (eventEditIdx === null) events.push(ev);
+  else events[eventEditIdx] = ev;
+  try {
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'events', events, sha: eventsSha, message: `BIA: Etkinlik "${title}" ${eventEditIdx===null?'eklendi':'güncellendi'}` })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Sunucu hatası');
+    eventsSha = d.sha;
+    document.getElementById('eventEditNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi!</div>';
+    setTimeout(showEvents, 900);
+  } catch(e) {
+    if (eventEditIdx === null) events.pop();
+    document.getElementById('eventEditNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
+  }
+  btn.disabled = false; btn.innerHTML = 'Kaydet';
+}
+
+async function deleteEvent() {
+  if (!confirm('Bu etkinliği silmek istediğinize emin misiniz?')) return;
+  const title = events[eventEditIdx]?.title || '';
+  events.splice(eventEditIdx, 1);
+  const r = await fetch(API, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ password: pw, type: 'events', events, sha: eventsSha, message: `BIA: Etkinlik "${title}" silindi` })
+  });
+  const d = await r.json();
+  if (r.ok) { eventsSha = d.sha; showEvents(); }
+  else { alert('Silme hatası: ' + (d.error||'')); events.splice(eventEditIdx, 0, events[eventEditIdx]); }
+}
+
 function logout() {
   sessionStorage.removeItem('biaPw');
-  pw = ''; news = []; sha = '';
+  pw = ''; news = []; sha = ''; events = []; eventsSha = '';
   document.getElementById('topNav').style.display = 'none';
   document.getElementById('pwInput').value = '';
   show('loginScreen');
