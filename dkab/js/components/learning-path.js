@@ -1,9 +1,9 @@
 // ===== DKAB Akademi - 360° Akilli Ogrenme Yolu =====
 
-import { store } from '../store.js?v=9';
-import { loadGradeEssentials, loadData, getGradeInfo } from '../data-loader.js?v=9';
-import { getUnitMasteryScore } from '../adaptive.js?v=9';
-import { getDailyMessage } from '../messages.js?v=9';
+import { store } from '../store.js?v=10';
+import { loadGradeEssentials, loadData, getGradeInfo } from '../data-loader.js?v=10';
+import { getUnitMasteryScore } from '../adaptive.js?v=10';
+import { getDailyMessage } from '../messages.js?v=10';
 
 /**
  * Akilli ogrenme yolu bileseni

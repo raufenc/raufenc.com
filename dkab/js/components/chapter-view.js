@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=9';
-import { getGradeInfo } from '../data-loader.js?v=9';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=9';
+import { store } from '../store.js?v=10';
+import { getGradeInfo } from '../data-loader.js?v=10';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=10';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {
@@ -594,6 +594,9 @@ function renderMiniQuiz(container, game, data, app) {
 
     let current = 0;
     let correct = 0;
+    let combo = 0;
+    const OPT_COLORS = ['#FF6B6B', '#48DBFB', '#1DD1A1', '#FECA57'];
+    const OPT_LETTERS = ['A', 'B', 'C', 'D'];
 
     function render() {
         if (current >= items.length) {
@@ -603,14 +606,15 @@ function renderMiniQuiz(container, game, data, app) {
             if (stars === 3) showConfetti();
             showXpPopup(xp);
             playSound('complete');
-
+            const msgs = ['Tekrar dene! 💪', 'Tekrar dene! 💪', 'Cok iyi! 🌟', 'Mukemmel! 🏆'];
             container.innerHTML = `
-                <div class="quiz-result card anim-bounce-in text-center" style="padding: 2rem;">
-                    <span style="font-size: 3rem;">${stars === 3 ? '&#127942;' : '&#11088;'}</span>
-                    <h2 class="mt-md">${correct} / ${items.length} Dogru</h2>
-                    <div class="stars mt-md" style="font-size:2rem; justify-content:center;">${'&#11088;'.repeat(stars)}${'&#9734;'.repeat(3 - stars)}</div>
-                    <p class="xp-display mt-lg" style="font-size:1.3rem;">+${xp} XP</p>
-                    <button class="btn btn-primary mt-lg" onclick="window.location.hash='#/'">Devam Et</button>
+                <div class="quiz-result card anim-bounce-in text-center" style="padding:2.5rem;">
+                    <div style="font-size:4rem;">${stars === 3 ? '🏆' : stars === 2 ? '⭐' : '💪'}</div>
+                    <h2 style="margin-top:0.75rem; font-size:1.8rem;">${msgs[stars]}</h2>
+                    <div style="font-size:2.2rem; margin:0.75rem 0;">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+                    <div style="font-size:1.1rem; color:var(--text-secondary); margin-bottom:0.75rem;">${correct} / ${items.length} dogru</div>
+                    <div style="font-size:1.6rem; font-weight:800; color:var(--primary); margin-bottom:1.5rem;">+${xp} XP</div>
+                    <button class="btn btn-primary btn-lg" onclick="window.location.hash='#/'">Devam Et →</button>
                 </div>`;
             return;
         }
@@ -620,46 +624,65 @@ function renderMiniQuiz(container, game, data, app) {
         const options = q.secenekler || [];
         const correctAnswer = q.dogru_cevap || q.dogru || '';
 
+        // Progress dots
+        const dots = Array.from({length: items.length}, (_, i) =>
+            `<span style="display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 3px;background:${i < current ? 'var(--primary)' : i === current ? 'var(--secondary)' : 'var(--bg-secondary)'}"></span>`
+        ).join('');
+
         container.innerHTML = `
-            <div class="mini-quiz anim-fade-in-up">
-                <div class="progress-bar mb-md" style="height:4px;">
-                    <div class="fill" style="width:${(current / items.length) * 100}%"></div>
+            <div class="mini-quiz anim-fade-in-up" style="max-width:520px; margin:0 auto;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem;">
+                    <div>${dots}</div>
+                    ${combo >= 2 ? `<div style="font-weight:700; color:#FF9F43; font-size:0.95rem;">🔥 ${combo} art arda!</div>` : `<div style="color:var(--text-muted); font-size:0.85rem;">${current + 1} / ${items.length}</div>`}
                 </div>
-                <p class="text-muted mb-md">${current + 1} / ${items.length}</p>
-                <div class="card" style="padding:1.5rem;">
-                    <p style="font-size:1.05rem; line-height:1.6;">${question}</p>
+                <div style="background:var(--bg-secondary); border-radius:16px; padding:1.5rem; margin-bottom:1.25rem; min-height:90px; display:flex; align-items:center; justify-content:center; text-align:center;">
+                    <p style="font-size:1.1rem; line-height:1.6; font-weight:500; margin:0;">${question}</p>
                 </div>
-                <div class="quiz-options mt-lg">
+                <div style="display:flex; flex-direction:column; gap:0.65rem;">
                     ${options.map((opt, i) => `
-                        <button class="quiz-option" data-index="${i}" data-value="${typeof opt === 'string' ? opt.charAt(0) : i}">
-                            ${opt}
+                        <button class="quiz-option" data-index="${i}" data-value="${typeof opt === 'string' ? opt.charAt(0) : i}"
+                            style="display:flex;align-items:center;gap:0.85rem;padding:0.9rem 1.1rem;border-radius:14px;border:2px solid ${OPT_COLORS[i % 4]}44;background:white;cursor:pointer;text-align:left;font-size:0.95rem;width:100%;transition:transform 0.1s,border-color 0.1s;">
+                            <span style="min-width:34px;height:34px;border-radius:50%;background:${OPT_COLORS[i % 4]}22;color:${OPT_COLORS[i % 4]};font-weight:800;font-size:0.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${OPT_LETTERS[i]}</span>
+                            <span>${opt}</span>
                         </button>
                     `).join('')}
                 </div>
             </div>`;
 
         container.querySelectorAll('.quiz-option').forEach(btn => {
+            btn.addEventListener('mouseenter', () => { if (!btn.disabled) btn.style.transform = 'translateX(4px)'; });
+            btn.addEventListener('mouseleave', () => { if (!btn.disabled) btn.style.transform = ''; });
             btn.addEventListener('click', () => {
                 const val = btn.dataset.value;
                 const isCorrect = val === correctAnswer || btn.textContent.trim().startsWith(correctAnswer);
                 if (isCorrect) {
-                    btn.classList.add('answer-correct');
+                    btn.style.background = '#d4edda';
+                    btn.style.borderColor = '#28a745';
+                    btn.style.transform = 'scale(1.02)';
                     correct++;
+                    combo++;
                     playSound('correct');
                 } else {
-                    btn.classList.add('answer-wrong');
+                    btn.style.background = '#f8d7da';
+                    btn.style.borderColor = '#dc3545';
+                    combo = 0;
                     playSound('wrong');
-                    // Show correct
                     container.querySelectorAll('.quiz-option').forEach(b => {
                         if (b.textContent.trim().startsWith(correctAnswer)) {
-                            b.classList.add('answer-correct');
+                            b.style.background = '#d4edda';
+                            b.style.borderColor = '#28a745';
                         }
                     });
                 }
-                // Disable all
-                container.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
+                container.querySelectorAll('.quiz-option').forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
+                if (q.aciklama) {
+                    const explain = document.createElement('div');
+                    explain.style.cssText = 'margin-top:0.75rem;padding:0.65rem 1rem;border-radius:10px;background:#e8f4f8;font-size:0.85rem;color:#444;';
+                    explain.innerHTML = `💡 ${q.aciklama}`;
+                    container.querySelector('.mini-quiz')?.appendChild(explain);
+                }
                 current++;
-                setTimeout(() => render(), 1000);
+                setTimeout(() => render(), q.aciklama ? 1800 : 1100);
             });
         });
     }

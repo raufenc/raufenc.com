@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Unite Listesi (Duolingo tarzi yol haritasi) =====
 
-import { store } from '../store.js?v=9';
-import { getGradeInfo } from '../data-loader.js?v=9';
+import { store } from '../store.js?v=10';
+import { getGradeInfo } from '../data-loader.js?v=10';
 
 export function renderUnitList(el, grade, data, app, focusUnitId) {
     const { units, chapters, bookMap } = data;
@@ -110,10 +110,7 @@ function renderUnitNode(grade, unit, chapters, progress, idx, isExpanded) {
             <!-- Chapters (expandable) -->
             <div class="unit-node-body ${isExpanded ? '' : 'hidden'}">
                 <div class="chapter-list stagger">
-                    ${chapters.map((ch, ci) => {
-                        const prevDone = ci === 0 ? true : !!store.getProgress(grade, unit.unite_id, chapters[ci - 1].bolum_id)?.completed;
-                        return renderChapterItem(grade, unit.unite_id, ch, ci, color, prevDone);
-                    }).join('')}
+                    ${chapters.map((ch, ci) => renderChapterItem(grade, unit.unite_id, ch, ci, color)).join('')}
                 </div>
                 ${unit.dua_sure ? `
                     <div class="unit-dua-hint text-muted mt-md" style="font-size:0.8rem; padding-left: 3rem;">
@@ -124,7 +121,7 @@ function renderUnitNode(grade, unit, chapters, progress, idx, isExpanded) {
         </div>`;
 }
 
-function renderChapterItem(grade, unitId, chapter, index, color, prevCompleted) {
+function renderChapterItem(grade, unitId, chapter, index, color) {
     const progress = store.getProgress(grade, unitId, chapter.bolum_id);
     const isCompleted = progress?.completed;
     const stars = progress?.stars || 0;
@@ -140,28 +137,10 @@ function renderChapterItem(grade, unitId, chapter, index, color, prevCompleted) 
 
     const icon = typeIcons[chapter.tur] || '&#128218;';
 
-    // Kilit sistemi: ilk bolum acik, sonrakiler oncekinin tamamlanmasina bagli
-    const isLocked = index > 0 && !prevCompleted;
-
-    if (isLocked) {
-        return `
-            <div class="chapter-item anim-fade-in-up locked" style="opacity:0.5; pointer-events:none; filter:grayscale(0.5);">
-                <div class="chapter-item-icon" style="background:#eee; color:#bbb;">
-                    &#128274;
-                </div>
-                <div class="chapter-item-info">
-                    <div class="chapter-item-title" style="color:var(--text-muted);">${chapter.baslik}</div>
-                    <div class="chapter-item-meta text-muted">
-                        <span class="badge badge-secondary" style="font-size:0.7rem;">&#128274; Kilitli</span>
-                    </div>
-                </div>
-            </div>`;
-    }
-
     return `
         <a href="#/sinif/${grade}/unite/${unitId.replace('U', '')}/bolum/${chapter.bolum_id}"
            class="chapter-item anim-fade-in-up ${isCompleted ? 'completed' : ''}"
-           ${!isCompleted && index > 0 && prevCompleted ? 'data-just-unlocked="true"' : ''}>
+           >
             <div class="chapter-item-icon" style="background: ${isCompleted ? color.bg : '#f5f5f5'}; color: ${isCompleted ? color.border : '#999'};">
                 ${isCompleted ? '&#10004;' : icon}
             </div>

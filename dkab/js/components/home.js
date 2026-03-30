@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Ana Sayfa (Dashboard) =====
 
-import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=9';
-import { getGradeInfo } from '../data-loader.js?v=9';
-import { getDailyMessage, getStreakMessage, getComebackMessage } from '../messages.js?v=9';
+import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=10';
+import { getGradeInfo } from '../data-loader.js?v=10';
+import { getDailyMessage, getStreakMessage, getComebackMessage } from '../messages.js?v=10';
 
 // Gunluk icerik: deterministik (yilin gunune gore)
 let _gunlukIcerik = null;
@@ -132,6 +132,30 @@ export async function renderHome(el, app) {
                 <span style="color:${takvimBanner.ay.renk};">&#8594;</span>
             </a>
             ` : ''}
+
+            <!-- OYNA Karti -->
+            <a href="#/sinif/${grade}" class="oyna-kart anim-fade-in-up mt-xl" style="
+                display:flex; align-items:center; gap:1.25rem; padding:1.5rem 1.75rem;
+                background: linear-gradient(135deg, #6C63FF 0%, #ff6584 100%);
+                border-radius:20px; text-decoration:none; color:white;
+                box-shadow: 0 8px 32px rgba(108,99,255,0.35);
+                transition: transform 0.15s, box-shadow 0.15s;
+                cursor:pointer;"
+                onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 40px rgba(108,99,255,0.45)';"
+                onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(108,99,255,0.35)';"
+                ontouchstart="this.style.transform='scale(0.97)';"
+                ontouchend="this.style.transform='';">
+                <div style="font-size:3.5rem; line-height:1; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.2));">&#127918;</div>
+                <div style="flex:1; min-width:0;">
+                    <div style="font-size:1.4rem; font-weight:800; letter-spacing:-0.02em;">Hemen Oyna! &#9889;</div>
+                    <div style="opacity:0.88; font-size:0.9rem; margin-top:0.25rem;">
+                        ${gradeProgress.percent > 0
+                            ? `${gradeProgress.percent}% tamamladin — devam et!`
+                            : 'Derslerinde oyunlar, quizler, egzersizler seni bekliyor!'}
+                    </div>
+                </div>
+                <div style="font-size:2rem; flex-shrink:0; opacity:0.9;">&#8594;</div>
+            </a>
 
             <!-- Quick Actions -->
             <div class="quick-actions mt-xl stagger">
