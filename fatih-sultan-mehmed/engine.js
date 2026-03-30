@@ -128,29 +128,31 @@ function initMap(){
   },null,{position:'bottomleft',collapsed:true}).addTo(map);
 }
 
-/* Kategori renkleri — locations.json'da category alanı varsa kullanılır */
-const CAT_COLORS={
-  baskent:'#8B0000',savas:'#DC2626',fetih:'#16A34A',
-  egitim:'#2563EB',dini:'#7C3AED',manevi:'#6B7280',
-  default:'#CC8400'
-};
+/* Osmanlı marker sistemi — tek palet, şekil farkı */
 function renderMarkers(){
   if(!MAP_DATA.locations)return;
   MAP_DATA.locations.sort((a,b)=>a.order-b.order).forEach(loc=>{
     const cat=loc.category||'default';
-    const color=CAT_COLORS[cat]||CAT_COLORS.default;
-    const sz=loc.significance==='major'?14:loc.significance==='standard'?11:8;
     const isBattle=cat==='savas';
-    const cls=isBattle?'loc-marker battle-marker':'loc-marker';
-    const icon=L.divIcon({
-      className:'',
-      html:'<div class="'+cls+'" style="width:'+sz+'px;height:'+sz+'px;background:'+color+'"></div>',
-      iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]
-    });
+    const isCap=cat==='baskent';
+    const sz=isCap?16:loc.significance==='major'?14:loc.significance==='standard'?11:8;
+    let html;
+    if(isBattle){
+      /* Savaş — çarpı işareti */
+      html='<div class="loc-marker loc-battle" style="width:'+sz+'px;height:'+sz+'px">✕</div>';
+    } else if(isCap){
+      /* Başkent — haleli altın */
+      html='<div class="loc-marker loc-capital" style="width:'+sz+'px;height:'+sz+'px"></div>';
+    } else {
+      /* Normal şehir */
+      html='<div class="loc-marker loc-city" style="width:'+sz+'px;height:'+sz+'px"></div>';
+    }
+    const icon=L.divIcon({className:'',html:html,iconSize:[sz,sz],iconAnchor:[sz/2,sz/2]});
     const m=L.marker([loc.lat,loc.lon],{icon:icon}).addTo(map);
     m.bindPopup(makePopup(loc),{maxWidth:300});
-    if(loc.significance==='major'||loc.significance==='standard'){
-      m.bindTooltip(loc.name,{permanent:true,className:'map-label',direction:'top',offset:[0,-sz/2-4]});
+    if(loc.significance!=='minor'){
+      const lbl=isBattle&&loc.events&&loc.events[0]?loc.events[0].title:loc.name;
+      m.bindTooltip(lbl,{permanent:true,className:'map-label'+(isBattle?' map-label-battle':''),direction:'top',offset:[0,-sz/2-4]});
     }
     m.on('click',()=>m.openPopup());
     m.locData=loc;
