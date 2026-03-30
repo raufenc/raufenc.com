@@ -4664,72 +4664,100 @@
     "tasarimci_notu": "Her soru tek ekranda gösterilsin."
   },
   {
+    "oyun_id": "U1_B1_E25",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Adam Asmaca: Konu Kavramları",
+    "motor_id": "E25",
+    "motor_adi": "Kelime Tahmin",
+    "hedef": "Konu kavramlarını harflerden tahmin et",
+    "veri": {
+      "kelimeler": [
+        {
+          "kelime": "EMANET",
+          "ipucu": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+          "kategori": ""
+        },
+        {
+          "kelime": "TEBLIĞ",
+          "ipucu": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad veri",
+          "kategori": ""
+        },
+        {
+          "kelime": "ZEBUR",
+          "ipucu": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptı",
+          "kategori": ""
+        }
+      ]
+    }
+  },
+  {
     "oyun_id": "U1_B1_E27",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Uzay Nişancısı: Konu Soruları",
     "motor_id": "E27",
     "motor_adi": "Uzay Nişancısı",
-    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullan",
     "veri": {
       "dalgalar": [
         {
-          "soru": "",
-          "dogru": "C",
+          "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
           "yanlis": [
-            "A) Doğruluğundan emin olunmayan bilgileri yaymak",
-            "B) Özel bilgileri herkese açık paylaşmak",
-            "C) Türkçeyi doğru kullanmak ve mahremiyeti korumak"
+            "Sadece meleklere verilen bilgileri",
+            "İnsanların kendi akıllarıyla kurdukları kuralları",
+            "Âlimlerin yaptığı yorumları"
           ],
           "hiz": 1
         },
         {
-          "soru": "",
-          "dogru": "B",
+          "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+          "dogru": "Emanet",
           "yanlis": [
-            "A) İncil – Tevrat – Zebur – Kur'ân-ı Kerîm",
-            "B) Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
-            "C) Zebur – İncil – Tevrat – Kur'ân-ı Kerîm"
+            "Fetanet",
+            "Tebliğ",
+            "İsmet"
           ],
           "hiz": 1
         },
         {
-          "soru": "",
-          "dogru": "B",
+          "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
+          "dogru": "Tebliğ",
           "yanlis": [
-            "A) Gösteriş yapmayı",
-            "B) İncitmeden yardımlaşmayı",
-            "C) Sadece bireysel başarıyı"
+            "Temsil",
+            "Tezkiye",
+            "Tebyin"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
+          "dogru": "Zebur",
+          "yanlis": [
+            "İncil",
+            "Tevrat",
+            "Kur'ân-ı Kerîm"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Felak kelimesi aşağıdaki anlamlardan hangisine gelir?",
+          "dogru": "Sabah aydınlığı ve şafak",
+          "yanlis": [
+            "Gök gürültüsü",
+            "Bereketli yağmur",
+            "Gecenin karanlığı"
           ],
           "hiz": 2
         },
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "Vahyin insanlara gönderiliş temel amacı aşağıdakilerden hangisidir?",
+          "dogru": "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
           "yanlis": [
-            "A) Vatan sevgisinin sorumluluk gerektirdiğini",
-            "B) Vatan sevgisinin sadece sözle gösterileceğini",
-            "C) Çalışmanın önemsiz olduğunu"
-          ],
-          "hiz": 2
-        },
-        {
-          "soru": "",
-          "dogru": "B",
-          "yanlis": [
-            "A) Rahîm",
-            "B) Rahman",
-            "C) Hâdî"
-          ],
-          "hiz": 1
-        },
-        {
-          "soru": "",
-          "dogru": "B",
-          "yanlis": [
-            "A) Bencilliği artırır",
-            "B) Sabır ve paylaşma duygusunu güçlendirir",
-            "C) İsraf alışkanlığını çoğaltır"
+            "İnsanları birbirinden üstün tutmak",
+            "Ticari hayatı canlandırmak",
+            "Sadece geçmiş toplumları anlatmak"
           ],
           "hiz": 1
         }
@@ -4743,23 +4771,185 @@
     "baslik": "Yarış: Konu Soruları",
     "motor_id": "E29",
     "motor_adi": "Yarış",
-    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geç",
     "veri": {
       "rakip_zorlugu": 0.4,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru_cevap": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+          "secenekler": [
+            "Sadece meleklere verilen bilgileri",
+            "İnsanların kendi akıllarıyla kurdukları kuralları",
+            "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+            "Âlimlerin yaptığı yorumları"
+          ]
+        },
+        {
+          "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+          "dogru_cevap": "Emanet",
+          "secenekler": [
+            "Fetanet",
+            "Emanet",
+            "Tebliğ",
+            "İsmet"
+          ]
+        },
+        {
+          "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
+          "dogru_cevap": "Tebliğ",
+          "secenekler": [
+            "Temsil",
+            "Tezkiye",
+            "Tebyin",
+            "Tebliğ"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
+          "dogru_cevap": "Zebur",
+          "secenekler": [
+            "İncil",
+            "Zebur",
+            "Tevrat",
+            "Kur'ân-ı Kerîm"
+          ]
+        },
+        {
+          "soru": "Felak kelimesi aşağıdaki anlamlardan hangisine gelir?",
+          "dogru_cevap": "Sabah aydınlığı ve şafak",
+          "secenekler": [
+            "Gök gürültüsü",
+            "Bereketli yağmur",
+            "Sabah aydınlığı ve şafak",
+            "Gecenin karanlığı"
+          ]
+        },
+        {
+          "soru": "Vahyin insanlara gönderiliş temel amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+          "secenekler": [
+            "İnsanları birbirinden üstün tutmak",
+            "Ticari hayatı canlandırmak",
+            "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+            "Sadece geçmiş toplumları anlatmak"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi ilâhî kitaplarla ilgili doğru bir bilgidir?",
+          "dogru_cevap": "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+          "secenekler": [
+            "Suhuf, sadece Hazret-i Muhammed'e (sallallâhu aleyhi ve sellem) verilmiştir.",
+            "Bütün ilâhî kitaplar günümüze hiç değişmeden ulaşmıştır.",
+            "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+            "Zebur, Hazret-i Musa'ya (aleyhisselâm) gönderilmiştir."
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi peygamberlerin ortak özelliklerinden biri değildir?",
+          "dogru_cevap": "Kibirli olmak",
+          "secenekler": [
+            "Zeki olmak",
+            "Kibirli olmak",
+            "Doğru sözlü olmak",
+            "Güvenilir olmak"
+          ]
+        }
+      ]
     }
   },
   {
     "oyun_id": "U1_B1_E30",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
-    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "baslik": "Halat Çekme: Bilgi Yarışması",
     "motor_id": "E30",
     "motor_adi": "Halat Çekme",
-    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendir",
     "veri": {
       "cekme_gucu": 1,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru_cevap": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+          "secenekler": [
+            "Sadece meleklere verilen bilgileri",
+            "İnsanların kendi akıllarıyla kurdukları kuralları",
+            "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+            "Âlimlerin yaptığı yorumları"
+          ]
+        },
+        {
+          "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+          "dogru_cevap": "Emanet",
+          "secenekler": [
+            "Fetanet",
+            "Emanet",
+            "Tebliğ",
+            "İsmet"
+          ]
+        },
+        {
+          "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
+          "dogru_cevap": "Tebliğ",
+          "secenekler": [
+            "Temsil",
+            "Tezkiye",
+            "Tebyin",
+            "Tebliğ"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
+          "dogru_cevap": "Zebur",
+          "secenekler": [
+            "İncil",
+            "Zebur",
+            "Tevrat",
+            "Kur'ân-ı Kerîm"
+          ]
+        },
+        {
+          "soru": "Felak kelimesi aşağıdaki anlamlardan hangisine gelir?",
+          "dogru_cevap": "Sabah aydınlığı ve şafak",
+          "secenekler": [
+            "Gök gürültüsü",
+            "Bereketli yağmur",
+            "Sabah aydınlığı ve şafak",
+            "Gecenin karanlığı"
+          ]
+        },
+        {
+          "soru": "Vahyin insanlara gönderiliş temel amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+          "secenekler": [
+            "İnsanları birbirinden üstün tutmak",
+            "Ticari hayatı canlandırmak",
+            "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+            "Sadece geçmiş toplumları anlatmak"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi ilâhî kitaplarla ilgili doğru bir bilgidir?",
+          "dogru_cevap": "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+          "secenekler": [
+            "Suhuf, sadece Hazret-i Muhammed'e (sallallâhu aleyhi ve sellem) verilmiştir.",
+            "Bütün ilâhî kitaplar günümüze hiç değişmeden ulaşmıştır.",
+            "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+            "Zebur, Hazret-i Musa'ya (aleyhisselâm) gönderilmiştir."
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi peygamberlerin ortak özelliklerinden biri değildir?",
+          "dogru_cevap": "Kibirli olmak",
+          "secenekler": [
+            "Zeki olmak",
+            "Kibirli olmak",
+            "Doğru sözlü olmak",
+            "Güvenilir olmak"
+          ]
+        }
+      ]
     }
   },
   {
@@ -4769,7 +4959,7 @@
     "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
     "motor_id": "E31",
     "motor_adi": "Yakalayıcı",
-    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "hedef": "İyi kavramları yakala, kötülerden kaç",
     "veri": {
       "sure": 60,
       "hiz": 1,
@@ -4820,13 +5010,389 @@
     }
   },
   {
+    "oyun_id": "U1_B1_E32",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Yarışması: Konu Panosu",
+    "motor_id": "E32",
+    "motor_adi": "Bilgi Yarışması",
+    "hedef": "Jeopardy panosunda soruları çöz",
+    "veri": {
+      "kategoriler": [
+        {
+          "ad": "Konu 1",
+          "sorular": [
+            {
+              "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
+              "dogru_cevap": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+              "secenekler": [
+                "Sadece meleklere verilen bilgileri",
+                "İnsanların kendi akıllarıyla kurdukları kuralları",
+                "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+                "Âlimlerin yaptığı yorumları"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+              "dogru_cevap": "Emanet",
+              "secenekler": [
+                "Fetanet",
+                "Emanet",
+                "Tebliğ",
+                "İsmet"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
+              "dogru_cevap": "Tebliğ",
+              "secenekler": [
+                "Temsil",
+                "Tezkiye",
+                "Tebyin",
+                "Tebliğ"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
+              "dogru_cevap": "Zebur",
+              "secenekler": [
+                "İncil",
+                "Zebur",
+                "Tevrat",
+                "Kur'ân-ı Kerîm"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 2",
+          "sorular": [
+            {
+              "soru": "Bir öğrenci, ramazanda iftar sofrasında komşularını da davet edip yiyeceklerini paylaşıyor. Bu davranış orucun hangi kazanımına daha çok örnektir?",
+              "dogru_cevap": "Dayanışma ve kardeşlik",
+              "secenekler": [
+                "Yalnız kalma alışkanlığı",
+                "Ticari başarı",
+                "Dayanışma ve kardeşlik",
+                "Kibir"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Aşağıdaki sıralamalardan hangisi oruç çeşitlerini dinî hüküm bakımından doğru sınıflandırır?",
+              "dogru_cevap": "Ramazan: farz, adak: vacip, muharrem: sünnet",
+              "secenekler": [
+                "Ramazan: vacip, kefaret: sünnet, muharrem: farz",
+                "Ramazan: farz, adak: sünnet, şevval: vacip",
+                "Ramazan: farz, adak: vacip, muharrem: sünnet",
+                "Ramazan: sünnet, adak: vacip, şevval: farz"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "İftar duasında “Senin rızkınla orucumu açtım.” ifadesi aşağıdaki düşüncelerden hangisini destekler?",
+              "dogru_cevap": "Nimetlerin gerçek sahibinin Allah olduğu",
+              "secenekler": [
+                "Rızkın sadece zenginlere verildiği",
+                "Oruçta duaya gerek olmadığı",
+                "Nimetlerin gerçek sahibinin Allah olduğu",
+                "İnsanların her nimeti kendi gücüyle elde ettiği"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Kadir Gecesi'nin bin aydan hayırlı olması aşağıdakilerden hangisini gösterir?",
+              "dogru_cevap": "Ramazan gecelerinin sıradan bir zaman olmadığını",
+              "secenekler": [
+                "Oruç ibadetinin önemsiz olduğunu",
+                "Sadece çocukların dua edebileceğini",
+                "Ramazan gecelerinin sıradan bir zaman olmadığını",
+                "O gecede hiçbir ibadet yapılmaması gerektiğini"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 3",
+          "sorular": [
+            {
+              "soru": "Mekke'de ekonomik hayatın büyük ölçüde ticarete dayanmasının temel nedeni aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Toprakların verimsiz ve iklimin kurak olması",
+              "secenekler": [
+                "Şehrin tarıma çok elverişli olması",
+                "Toprakların verimsiz ve iklimin kurak olması",
+                "Madenlerin çok fazla olması",
+                "Denize kıyısının olmaması"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Peygamber Efendimiz'in (sallallâhu aleyhi ve sellem) annesi vefat edince bir süre kimin yanında kalmıştır?",
+              "dogru_cevap": "Abdülmuttalib'in",
+              "secenekler": [
+                "Zübeyr'in",
+                "Halîme'nin",
+                "Ebû Talib'in",
+                "Abdülmuttalib'in"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Hilfülfudûl'ün kurulma amacı aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Haksızlığa uğrayanları korumak ve güvenliği sağlamak",
+              "secenekler": [
+                "Haksızlığa uğrayanları korumak ve güvenliği sağlamak",
+                "Ticaret kervanlarını vergiye bağlamak",
+                "Yeni putlar yapmak",
+                "Şiir yarışmaları düzenlemek"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Peygamber Efendimiz'in (sallallâhu aleyhi ve sellem) ilk çocuğu kimdir?",
+              "dogru_cevap": "Kasım",
+              "secenekler": [
+                "Zeyneb",
+                "Abdullah",
+                "Kasım",
+                "Fâtıma"
+              ],
+              "puan": 400
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E33",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Çarkı: Konu Soruları",
+    "motor_id": "E33",
+    "motor_adi": "Bilgi Çarkı",
+    "hedef": "Çark çevirerek soruları çöz",
+    "veri": {
+      "hak": 8,
+      "dilimler": [
+        {
+          "kategori": "Konu 1",
+          "renk": "#1DD1A1",
+          "puan": 50
+        },
+        {
+          "kategori": "Konu 2",
+          "renk": "#FECA57",
+          "puan": 100
+        },
+        {
+          "kategori": "Konu 3",
+          "renk": "#54A0FF",
+          "puan": 150
+        },
+        {
+          "kategori": "Konu 4",
+          "renk": "#FF9F43",
+          "puan": 200
+        },
+        {
+          "kategori": "İflasss!",
+          "renk": "#636e72",
+          "puan": -50
+        },
+        {
+          "kategori": "Bonus",
+          "renk": "#5F27CD",
+          "puan": 150
+        }
+      ],
+      "sorular": {
+        "Konu 1": [
+          {
+            "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
+            "dogru_cevap": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+            "secenekler": [
+              "Sadece meleklere verilen bilgileri",
+              "İnsanların kendi akıllarıyla kurdukları kuralları",
+              "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+              "Âlimlerin yaptığı yorumları"
+            ]
+          },
+          {
+            "soru": "Felak kelimesi aşağıdaki anlamlardan hangisine gelir?",
+            "dogru_cevap": "Sabah aydınlığı ve şafak",
+            "secenekler": [
+              "Gök gürültüsü",
+              "Bereketli yağmur",
+              "Sabah aydınlığı ve şafak",
+              "Gecenin karanlığı"
+            ]
+          },
+          {
+            "soru": "Peygamberlerin ibadetleri yaşayarak örnek göstermesi hangi görev kapsamında değerlendirilebilir?",
+            "dogru_cevap": "Temsil",
+            "secenekler": [
+              "İnzar",
+              "Mucize",
+              "Tebşir",
+              "Temsil"
+            ]
+          },
+          {
+            "soru": "Bir öğrenci dört ilâhî kitabı gönderiliş sırasına göre dizmek istiyor. Doğru sıra aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
+            "secenekler": [
+              "İncil – Tevrat – Zebur – Kur'ân-ı Kerîm",
+              "Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
+              "Tevrat – İncil – Zebur – Kur'ân-ı Kerîm",
+              "Zebur – İncil – Tevrat – Kur'ân-ı Kerîm"
+            ]
+          }
+        ],
+        "Konu 2": [
+          {
+            "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
+            "dogru_cevap": "Emanet",
+            "secenekler": [
+              "Fetanet",
+              "Emanet",
+              "Tebliğ",
+              "İsmet"
+            ]
+          },
+          {
+            "soru": "Vahyin insanlara gönderiliş temel amacı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+            "secenekler": [
+              "İnsanları birbirinden üstün tutmak",
+              "Ticari hayatı canlandırmak",
+              "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+              "Sadece geçmiş toplumları anlatmak"
+            ]
+          },
+          {
+            "soru": "Felak Sûresi'nde Allah'a sığınılan kötülüklerden biri aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Kıskanç kişinin şerri",
+            "secenekler": [
+              "Kıskanç kişinin şerri",
+              "Açlık hissi",
+              "Yağmur yağması",
+              "Yolculuk yorgunluğu"
+            ]
+          },
+          {
+            "soru": "Aşağıdaki örneklerden hangisi “fetanet” özelliğine örnek verilebilir?",
+            "dogru_cevap": "Hazret-i İbrahim'in (aleyhisselâm) putperestleri düşündüren akıllıca bir cevap vermesi",
+            "secenekler": [
+              "Peygamberlerin vahyi gizlemeden duyurması",
+              "Hazret-i İbrahim'in (aleyhisselâm) putperestleri düşündüren akıllıca bir cevap vermesi",
+              "Peygamberlerin günah işlememesi",
+              "İnsanlara müjde vermesi"
+            ]
+          }
+        ],
+        "Konu 3": [
+          {
+            "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
+            "dogru_cevap": "Tebliğ",
+            "secenekler": [
+              "Temsil",
+              "Tezkiye",
+              "Tebyin",
+              "Tebliğ"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi ilâhî kitaplarla ilgili doğru bir bilgidir?",
+            "dogru_cevap": "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+            "secenekler": [
+              "Suhuf, sadece Hazret-i Muhammed'e (sallallâhu aleyhi ve sellem) verilmiştir.",
+              "Bütün ilâhî kitaplar günümüze hiç değişmeden ulaşmıştır.",
+              "Kur'ân-ı Kerîm korunmuş son ilâhî kitaptır.",
+              "Zebur, Hazret-i Musa'ya (aleyhisselâm) gönderilmiştir."
+            ]
+          },
+          {
+            "soru": "Bir öğrenci, “Peygamberler sadece mesaj getirir; açıklama yapmaz ve örnek olmaz.” diyor. Buna göre aşağıdakilerden hangisi bu görüşü düzeltir?",
+            "dogru_cevap": "Peygamberler vahyi açıklar ve yaşayarak örnek olurlar.",
+            "secenekler": [
+              "Peygamberler insanlardan farklı varlıklardır.",
+              "Peygamberler görevlerini seçerek yapar.",
+              "Peygamberler vahyi sadece meleklerle paylaşır.",
+              "Peygamberler vahyi açıklar ve yaşayarak örnek olurlar."
+            ]
+          },
+          {
+            "soru": "Felak Sûresi'nin günlük hayatımıza verdiği en temel mesaj aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Tedbirli olup kötülüklerden korunmak için Allah'a sığınmak",
+            "secenekler": [
+              "Tedbirli olup kötülüklerden korunmak için Allah'a sığınmak",
+              "Korktuğumuz her durumda hiçbir tedbir almamak",
+              "Kötülükler karşısında sadece insanlardan yardım istemek",
+              "Sadece geceleri dua etmek"
+            ]
+          }
+        ],
+        "Konu 4": [
+          {
+            "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
+            "dogru_cevap": "Zebur",
+            "secenekler": [
+              "İncil",
+              "Zebur",
+              "Tevrat",
+              "Kur'ân-ı Kerîm"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi peygamberlerin ortak özelliklerinden biri değildir?",
+            "dogru_cevap": "Kibirli olmak",
+            "secenekler": [
+              "Zeki olmak",
+              "Kibirli olmak",
+              "Doğru sözlü olmak",
+              "Güvenilir olmak"
+            ]
+          },
+          {
+            "soru": "“Ey insanlar! Sizi ve sizden öncekileri yaratan Rabb'inize ibadet edin...” mesajı vahyin hangi yönünü daha çok gösterir?",
+            "dogru_cevap": "İnsanın yaratılış amacını bildirmesini",
+            "secenekler": [
+              "Ticaret kurallarını açıklamasını",
+              "Coğrafya bilgisi vermesini",
+              "Şiir ve hitabet öğretmesini",
+              "İnsanın yaratılış amacını bildirmesini"
+            ]
+          },
+          {
+            "soru": "Ramazan ayı hicrî takvime göre hangi aydır?",
+            "dogru_cevap": "Dokuzuncu ay",
+            "secenekler": [
+              "Dokuzuncu ay",
+              "On ikinci ay",
+              "Birinci ay",
+              "Onuncu ay"
+            ]
+          }
+        ],
+        "İflasss!": [],
+        "Bonus": []
+      }
+    }
+  },
+  {
     "oyun_id": "U1_B1_E35",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Sürpriz Kutu: Konu Soruları",
     "motor_id": "E35",
     "motor_adi": "Sürpriz Kutu",
-    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "hedef": "Sürpriz kutulardan çıkan soruları çöz",
     "veri": {
       "kutular": [
         {
@@ -4844,79 +5410,79 @@
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Vahiy kavramı aşağıdakilerden hangisini ifade eder?",
             "secenekler": [
-              "A) Doğruluğundan emin olunmayan bilgileri yaymak",
-              "B) Özel bilgileri herkese açık paylaşmak",
-              "C) Türkçeyi doğru kullanmak ve mahremiyeti korumak",
-              "D) Kaba ifadeleri normal görmek"
+              "Sadece meleklere verilen bilgileri",
+              "İnsanların kendi akıllarıyla kurdukları kuralları",
+              "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini",
+              "Âlimlerin yaptığı yorumları"
             ],
-            "dogru_cevap": "C"
+            "dogru_cevap": "Allah'ın (celle celâlühû) emirlerini peygamberlere bildirmesini"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "“Peygamberlerin güvenilir olması” hangi kavramla ifade edilir?",
             "secenekler": [
-              "A) İncil – Tevrat – Zebur – Kur'ân-ı Kerîm",
-              "B) Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
-              "C) Zebur – İncil – Tevrat – Kur'ân-ı Kerîm",
-              "D) Tevrat – İncil – Zebur – Kur'ân-ı Kerîm"
+              "Fetanet",
+              "Emanet",
+              "Tebliğ",
+              "İsmet"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Emanet"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Peygamberlerin Allah'tan aldıkları mesajları eksiksiz iletme görevine ne ad verilir?",
             "secenekler": [
-              "A) Gösteriş yapmayı",
-              "B) İncitmeden yardımlaşmayı",
-              "C) Sadece bireysel başarıyı",
-              "D) Rekabeti"
+              "Temsil",
+              "Tezkiye",
+              "Tebyin",
+              "Tebliğ"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Tebliğ"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Aşağıdakilerden hangisi Hazret-i Davud'a (aleyhisselâm) gönderilen ilâhî kitaptır?",
             "secenekler": [
-              "A) Vatan sevgisinin sorumluluk gerektirdiğini",
-              "B) Vatan sevgisinin sadece sözle gösterileceğini",
-              "C) Çalışmanın önemsiz olduğunu",
-              "D) Bağımsızlığın kendiliğinden korunacağını"
+              "İncil",
+              "Zebur",
+              "Tevrat",
+              "Kur'ân-ı Kerîm"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Zebur"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Felak kelimesi aşağıdaki anlamlardan hangisine gelir?",
             "secenekler": [
-              "A) Rahîm",
-              "B) Rahman",
-              "C) Hâdî",
-              "D) Rızık Veren"
+              "Gök gürültüsü",
+              "Bereketli yağmur",
+              "Sabah aydınlığı ve şafak",
+              "Gecenin karanlığı"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Sabah aydınlığı ve şafak"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Vahyin insanlara gönderiliş temel amacı aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Bencilliği artırır",
-              "B) Sabır ve paylaşma duygusunu güçlendirir",
-              "C) İsraf alışkanlığını çoğaltır",
-              "D) Toplumdan uzaklaştırır"
+              "İnsanları birbirinden üstün tutmak",
+              "Ticari hayatı canlandırmak",
+              "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak",
+              "Sadece geçmiş toplumları anlatmak"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "İnsanları doğru yola yönelterek dünya ve âhiret mutluluğunu sağlamak"
           }
         }
       ]

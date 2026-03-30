@@ -2680,72 +2680,90 @@
     "tasarimci_notu": "Doğru yanıttan sonra ünite rozeti parlayarak görünür."
   },
   {
+    "oyun_id": "U1_B1_E25",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Adam Asmaca: Konu Kavramları",
+    "motor_id": "E25",
+    "motor_adi": "Kelime Tahmin",
+    "hedef": "Konu kavramlarını harflerden tahmin et",
+    "veri": {
+      "kelimeler": [
+        {
+          "kelime": "HALIFE",
+          "ipucu": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+          "kategori": ""
+        }
+      ]
+    }
+  },
+  {
     "oyun_id": "U1_B1_E27",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Uzay Nişancısı: Konu Soruları",
     "motor_id": "E27",
     "motor_adi": "Uzay Nişancısı",
-    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullan",
     "veri": {
       "dalgalar": [
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
+          "dogru": "Sadık haber, selim akıl ve salim duyular",
           "yanlis": [
-            "A) Geri dönüşüm ve enerji verimliliğini desteklemesi",
-            "B) Tüketim bağımlılığını artırması",
-            "C) Çarpık kentleşmeyi yaygınlaştırması"
+            "Gelenek, alışkanlık ve moda",
+            "Rüya, sezgi ve ilham",
+            "Duygu, heyecan ve sezgi"
           ],
           "hiz": 1
         },
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
+          "dogru": "Mütevatir haber",
           "yanlis": [
-            "A) Kaynakları gelecek nesilleri de gözeterek koruma sorumluluğunu",
-            "B) Yalnız bireysel ibadet sorumluluğunu",
-            "C) Sadece tarih bilgisini"
-          ],
-          "hiz": 3
-        },
-        {
-          "soru": "",
-          "dogru": "A",
-          "yanlis": [
-            "A) Teleolojik delil",
-            "B) Sadece tarihî delil",
-            "C) Mütevatir haber"
-          ],
-          "hiz": 1
-        },
-        {
-          "soru": "",
-          "dogru": "A",
-          "yanlis": [
-            "A) Yenilenebilir enerji",
-            "B) Tükenmiş enerji",
-            "C) Kirletici enerji"
-          ],
-          "hiz": 1
-        },
-        {
-          "soru": "",
-          "dogru": "A",
-          "yanlis": [
-            "A) İhsan",
-            "B) Tecessüs",
-            "C) Gıybet"
+            "Tecessüs",
+            "Kişisel görüş",
+            "Zannî haber"
           ],
           "hiz": 2
         },
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
+          "dogru": "Şehadet âlemi",
           "yanlis": [
-            "A) Ehlisünnet'e bağlı itikadî mezhepler",
-            "B) Şia içindeki fıkhî mezhepler",
-            "C) Sadece siyasî hareketler"
+            "Gayb âlemi",
+            "Berzah âlemi",
+            "Misal âlemi"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+          "dogru": "Halife",
+          "yanlis": [
+            "Mahremiyet",
+            "Teleoloji",
+            "Mütevatir"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Mülk Sûresi 23. âyet-i kerîmede insana verilen hangi nimetler özellikle hatırlatılır?",
+          "dogru": "Kulak, göz ve kalp",
+          "yanlis": [
+            "Ev, aile ve çevre",
+            "Mal, makam ve şöhret",
+            "Toprak, hava ve su"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam'da bilginin önemine dair doğru bir çıkarımdır?",
+          "dogru": "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+          "yanlis": [
+            "Duyular her zaman kesin sonuç verir.",
+            "Bilginin kaynağı önemli değildir.",
+            "Sadece çoğunluğun sözü doğru kabul edilir."
           ],
           "hiz": 2
         }
@@ -2759,23 +2777,185 @@
     "baslik": "Yarış: Konu Soruları",
     "motor_id": "E29",
     "motor_adi": "Yarış",
-    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geç",
     "veri": {
       "rakip_zorlugu": 0.85,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Sadık haber, selim akıl ve salim duyular",
+          "secenekler": [
+            "Sadık haber, selim akıl ve salim duyular",
+            "Gelenek, alışkanlık ve moda",
+            "Rüya, sezgi ve ilham",
+            "Duygu, heyecan ve sezgi"
+          ]
+        },
+        {
+          "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
+          "dogru_cevap": "Mütevatir haber",
+          "secenekler": [
+            "Tecessüs",
+            "Kişisel görüş",
+            "Zannî haber",
+            "Mütevatir haber"
+          ]
+        },
+        {
+          "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Şehadet âlemi",
+          "secenekler": [
+            "Şehadet âlemi",
+            "Gayb âlemi",
+            "Berzah âlemi",
+            "Misal âlemi"
+          ]
+        },
+        {
+          "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+          "dogru_cevap": "Halife",
+          "secenekler": [
+            "Mahremiyet",
+            "Teleoloji",
+            "Mütevatir",
+            "Halife"
+          ]
+        },
+        {
+          "soru": "Mülk Sûresi 23. âyet-i kerîmede insana verilen hangi nimetler özellikle hatırlatılır?",
+          "dogru_cevap": "Kulak, göz ve kalp",
+          "secenekler": [
+            "Kulak, göz ve kalp",
+            "Ev, aile ve çevre",
+            "Mal, makam ve şöhret",
+            "Toprak, hava ve su"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam'da bilginin önemine dair doğru bir çıkarımdır?",
+          "dogru_cevap": "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+          "secenekler": [
+            "Duyular her zaman kesin sonuç verir.",
+            "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+            "Bilginin kaynağı önemli değildir.",
+            "Sadece çoğunluğun sözü doğru kabul edilir."
+          ]
+        },
+        {
+          "soru": "Gayb alanına ilişkin bilgiler için en temel başvuru kaynağı hangisidir?",
+          "dogru_cevap": "Sadık haber",
+          "secenekler": [
+            "Kıyas",
+            "Tecrübe",
+            "Sadık haber",
+            "Salim duyular"
+          ]
+        },
+        {
+          "soru": "Allah-âlem ilişkisine göre aşağıdakilerden hangisi doğrudur?",
+          "dogru_cevap": "Bütün varlıklar Allah'a muhtaçtır.",
+          "secenekler": [
+            "Allah yaratmayı başlatmış, sonra âlemi kendi hâline bırakmıştır.",
+            "Âlem kendi kendine var olmuştur.",
+            "Bütün varlıklar Allah'a muhtaçtır.",
+            "İnsan hiçbir sorumluluk taşımadan yaşamaktadır."
+          ]
+        }
+      ]
     }
   },
   {
     "oyun_id": "U1_B1_E30",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
-    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "baslik": "Halat Çekme: Bilgi Yarışması",
     "motor_id": "E30",
     "motor_adi": "Halat Çekme",
-    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendir",
     "veri": {
       "cekme_gucu": 1,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Sadık haber, selim akıl ve salim duyular",
+          "secenekler": [
+            "Sadık haber, selim akıl ve salim duyular",
+            "Gelenek, alışkanlık ve moda",
+            "Rüya, sezgi ve ilham",
+            "Duygu, heyecan ve sezgi"
+          ]
+        },
+        {
+          "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
+          "dogru_cevap": "Mütevatir haber",
+          "secenekler": [
+            "Tecessüs",
+            "Kişisel görüş",
+            "Zannî haber",
+            "Mütevatir haber"
+          ]
+        },
+        {
+          "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Şehadet âlemi",
+          "secenekler": [
+            "Şehadet âlemi",
+            "Gayb âlemi",
+            "Berzah âlemi",
+            "Misal âlemi"
+          ]
+        },
+        {
+          "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+          "dogru_cevap": "Halife",
+          "secenekler": [
+            "Mahremiyet",
+            "Teleoloji",
+            "Mütevatir",
+            "Halife"
+          ]
+        },
+        {
+          "soru": "Mülk Sûresi 23. âyet-i kerîmede insana verilen hangi nimetler özellikle hatırlatılır?",
+          "dogru_cevap": "Kulak, göz ve kalp",
+          "secenekler": [
+            "Kulak, göz ve kalp",
+            "Ev, aile ve çevre",
+            "Mal, makam ve şöhret",
+            "Toprak, hava ve su"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam'da bilginin önemine dair doğru bir çıkarımdır?",
+          "dogru_cevap": "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+          "secenekler": [
+            "Duyular her zaman kesin sonuç verir.",
+            "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+            "Bilginin kaynağı önemli değildir.",
+            "Sadece çoğunluğun sözü doğru kabul edilir."
+          ]
+        },
+        {
+          "soru": "Gayb alanına ilişkin bilgiler için en temel başvuru kaynağı hangisidir?",
+          "dogru_cevap": "Sadık haber",
+          "secenekler": [
+            "Kıyas",
+            "Tecrübe",
+            "Sadık haber",
+            "Salim duyular"
+          ]
+        },
+        {
+          "soru": "Allah-âlem ilişkisine göre aşağıdakilerden hangisi doğrudur?",
+          "dogru_cevap": "Bütün varlıklar Allah'a muhtaçtır.",
+          "secenekler": [
+            "Allah yaratmayı başlatmış, sonra âlemi kendi hâline bırakmıştır.",
+            "Âlem kendi kendine var olmuştur.",
+            "Bütün varlıklar Allah'a muhtaçtır.",
+            "İnsan hiçbir sorumluluk taşımadan yaşamaktadır."
+          ]
+        }
+      ]
     }
   },
   {
@@ -2785,7 +2965,7 @@
     "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
     "motor_id": "E31",
     "motor_adi": "Yakalayıcı",
-    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "hedef": "İyi kavramları yakala, kötülerden kaç",
     "veri": {
       "sure": 60,
       "hiz": 1,
@@ -2836,13 +3016,389 @@
     }
   },
   {
+    "oyun_id": "U1_B1_E32",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Yarışması: Konu Panosu",
+    "motor_id": "E32",
+    "motor_adi": "Bilgi Yarışması",
+    "hedef": "Jeopardy panosunda soruları çöz",
+    "veri": {
+      "kategoriler": [
+        {
+          "ad": "Konu 1",
+          "sorular": [
+            {
+              "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Sadık haber, selim akıl ve salim duyular",
+              "secenekler": [
+                "Sadık haber, selim akıl ve salim duyular",
+                "Gelenek, alışkanlık ve moda",
+                "Rüya, sezgi ve ilham",
+                "Duygu, heyecan ve sezgi"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
+              "dogru_cevap": "Mütevatir haber",
+              "secenekler": [
+                "Tecessüs",
+                "Kişisel görüş",
+                "Zannî haber",
+                "Mütevatir haber"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Şehadet âlemi",
+              "secenekler": [
+                "Şehadet âlemi",
+                "Gayb âlemi",
+                "Berzah âlemi",
+                "Misal âlemi"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+              "dogru_cevap": "Halife",
+              "secenekler": [
+                "Mahremiyet",
+                "Teleoloji",
+                "Mütevatir",
+                "Halife"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 2",
+          "sorular": [
+            {
+              "soru": "Bir kimse 'Doğadaki bilinçsiz unsurların ortak bir amaca hizmet etmesi onları yönlendiren bilinçli bir kudreti gösterir.' diyorsa hangi delili esas almış olur?",
+              "dogru_cevap": "Teleolojik delil",
+              "secenekler": [
+                "Teleolojik delil",
+                "Sezgi delili",
+                "Mütevatir haber",
+                "Sadece tarihî delil"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Allah'ın isim ve sıfatlarını bilmenin insan üzerindeki en temel etkisi aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Allah sevgisini ve kulluk bilincini güçlendirmesi",
+              "secenekler": [
+                "Allah sevgisini ve kulluk bilincini güçlendirmesi",
+                "İnsanı bütün sorumluluklardan kurtarması",
+                "Başka bilgi kaynaklarını değersizleştirmesi",
+                "Sadece teorik bilgi vermesi"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "'Basar' ile insanın görmesi arasındaki farkı en iyi açıklayan ifade hangisidir?",
+              "dogru_cevap": "İsim benzerliği vardır; mahiyetleri aynı değildir.",
+              "secenekler": [
+                "İnsanın görmesi daha kapsamlıdır.",
+                "İkisi de sınırsızdır.",
+                "Allah'ın görmesi sadece ahirette gerçekleşir.",
+                "İsim benzerliği vardır; mahiyetleri aynı değildir."
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Aşağıdaki yargılardan hangisi Haşr Sûresi 22-24. âyet-i kerîmelerin mesajına uygundur?",
+              "dogru_cevap": "Allah'ın isimleri bir bütün hâlinde tanınmalı ve hayata yansıtılmalıdır.",
+              "secenekler": [
+                "Allah'ın isimleri bir bütün hâlinde tanınmalı ve hayata yansıtılmalıdır.",
+                "Allah yalnızca tek bir isimle tanınabilir.",
+                "İlahî isimler sadece geçmiş toplumlara yöneliktir.",
+                "Allah'ın isimleri ile ahlak arasında ilişki kurulamaz."
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 3",
+          "sorular": [
+            {
+              "soru": "Aşağıdakilerden hangisi çevre sorunlarının önemli ölçüde insan kaynaklı olduğuna örnek gösterilebilir?",
+              "dogru_cevap": "Fosil yakıt kullanımı ve plansız tüketim",
+              "secenekler": [
+                "Fosil yakıt kullanımı ve plansız tüketim",
+                "Sadece gece-gündüz oluşumu",
+                "Yalnız dağların varlığı",
+                "Yalnız mevsimlerin değişmesi"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Teknolojiyi geliştirenlerin ve kullananların ahlakî ilkelere uyması neden önemlidir?",
+              "dogru_cevap": "Bağımlılık, veri ihlali ve zarar gibi riskleri azaltmak için",
+              "secenekler": [
+                "Teknolojiyi tamamen yasaklamak için",
+                "Bilgiye erişimi sınırlamak için",
+                "Bağımlılık, veri ihlali ve zarar gibi riskleri azaltmak için",
+                "Sadece ekonomik kazanç sağlamak için"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Aşağıdakilerden hangisi teknolojinin çevre üzerindeki olumlu etkilerinden biridir?",
+              "dogru_cevap": "Geri dönüşüm ve enerji verimliliğini desteklemesi",
+              "secenekler": [
+                "Doğal kaynakların daha hızlı tükenmesi",
+                "Tüketim bağımlılığını artırması",
+                "Çarpık kentleşmeyi yaygınlaştırması",
+                "Geri dönüşüm ve enerji verimliliğini desteklemesi"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Sosyal medyada bir arkadaşının fotoğrafını izinsiz paylaşmak öncelikle hangi ilkeye aykırıdır?",
+              "dogru_cevap": "Mahremiyet ilkesine",
+              "secenekler": [
+                "Mahremiyet ilkesine",
+                "Mütevatir habere",
+                "Tevhit ilkesine",
+                "Kıyas ilkesine"
+              ],
+              "puan": 400
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E33",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Çarkı: Konu Soruları",
+    "motor_id": "E33",
+    "motor_adi": "Bilgi Çarkı",
+    "hedef": "Çark çevirerek soruları çöz",
+    "veri": {
+      "hak": 8,
+      "dilimler": [
+        {
+          "kategori": "Konu 1",
+          "renk": "#1DD1A1",
+          "puan": 50
+        },
+        {
+          "kategori": "Konu 2",
+          "renk": "#FECA57",
+          "puan": 100
+        },
+        {
+          "kategori": "Konu 3",
+          "renk": "#54A0FF",
+          "puan": 150
+        },
+        {
+          "kategori": "Konu 4",
+          "renk": "#FF9F43",
+          "puan": 200
+        },
+        {
+          "kategori": "İflasss!",
+          "renk": "#636e72",
+          "puan": -50
+        },
+        {
+          "kategori": "Bonus",
+          "renk": "#5F27CD",
+          "puan": 150
+        }
+      ],
+      "sorular": {
+        "Konu 1": [
+          {
+            "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Sadık haber, selim akıl ve salim duyular",
+            "secenekler": [
+              "Sadık haber, selim akıl ve salim duyular",
+              "Gelenek, alışkanlık ve moda",
+              "Rüya, sezgi ve ilham",
+              "Duygu, heyecan ve sezgi"
+            ]
+          },
+          {
+            "soru": "Mülk Sûresi 23. âyet-i kerîmede insana verilen hangi nimetler özellikle hatırlatılır?",
+            "dogru_cevap": "Kulak, göz ve kalp",
+            "secenekler": [
+              "Kulak, göz ve kalp",
+              "Ev, aile ve çevre",
+              "Mal, makam ve şöhret",
+              "Toprak, hava ve su"
+            ]
+          },
+          {
+            "soru": "İsrâ Sûresi 36. âyet-i kerîmenin ana uyarısı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Bilgi sahibi olunmayan konuda kesin hüküm vermemek",
+            "secenekler": [
+              "Bilgi sahibi olunmayan konuda kesin hüküm vermemek",
+              "Sadece görme duyusuna güvenmek",
+              "Her duyulan haberi hemen paylaşmak",
+              "Merak edilen her şeyi araştırmak"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi Mülk Sûresi 23. âyet-i kerîmenin mesajını günlük hayata daha uygun yansıtır?",
+            "dogru_cevap": "Duyuları amaç dışı kullanmamak ve nimetlere şükretmek",
+            "secenekler": [
+              "Duyuları amaç dışı kullanmamak ve nimetlere şükretmek",
+              "Yalnızca kalbe güvenmek",
+              "Şüpheli bilgileri yaygınlaştırmak",
+              "Bilginin kaynağını önemsememek"
+            ]
+          }
+        ],
+        "Konu 2": [
+          {
+            "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
+            "dogru_cevap": "Mütevatir haber",
+            "secenekler": [
+              "Tecessüs",
+              "Kişisel görüş",
+              "Zannî haber",
+              "Mütevatir haber"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi İslam'da bilginin önemine dair doğru bir çıkarımdır?",
+            "dogru_cevap": "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+            "secenekler": [
+              "Duyular her zaman kesin sonuç verir.",
+              "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+              "Bilginin kaynağı önemli değildir.",
+              "Sadece çoğunluğun sözü doğru kabul edilir."
+            ]
+          },
+          {
+            "soru": "Tecessüs kavramı aşağıdakilerden hangisini ifade eder?",
+            "dogru_cevap": "Başkasının özel hâllerini araştırmak",
+            "secenekler": [
+              "Varlıkların yaratılış amacını incelemek",
+              "İlim öğrenmek için çaba göstermek",
+              "Nimetlere şükretmek",
+              "Başkasının özel hâllerini araştırmak"
+            ]
+          },
+          {
+            "soru": "Şehadet ve gayb âlemi ayrımı dikkate alındığında aşağıdakilerden hangisi gayb alanına örnektir?",
+            "dogru_cevap": "Melekler",
+            "secenekler": [
+              "Denizler",
+              "Dağlar",
+              "Melekler",
+              "Yağmur"
+            ]
+          }
+        ],
+        "Konu 3": [
+          {
+            "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Şehadet âlemi",
+            "secenekler": [
+              "Şehadet âlemi",
+              "Gayb âlemi",
+              "Berzah âlemi",
+              "Misal âlemi"
+            ]
+          },
+          {
+            "soru": "Gayb alanına ilişkin bilgiler için en temel başvuru kaynağı hangisidir?",
+            "dogru_cevap": "Sadık haber",
+            "secenekler": [
+              "Kıyas",
+              "Tecrübe",
+              "Sadık haber",
+              "Salim duyular"
+            ]
+          },
+          {
+            "soru": "Bir öğrenci 'Duyu organları beni hiç yanıltmaz.' diyorsa üniteye göre bu iddia nasıl değerlendirilir?",
+            "dogru_cevap": "Yanlıştır; duyular bazen yanıltıcı olabilir.",
+            "secenekler": [
+              "Doğrudur; duyular mutlak bilgi verir.",
+              "Doğrudur; özellikle görme duyusu her zaman kesindir.",
+              "Yanlıştır; duyular bazen yanıltıcı olabilir.",
+              "Yanlıştır; çünkü duyular bilgi kaynağı değildir."
+            ]
+          },
+          {
+            "soru": "Bir kişi sosyal medyada doğruluğunu araştırmadığı bir bilgiyi paylaşırsa üniteye göre öncelikle hangi ilkeye aykırı davranmış olur?",
+            "dogru_cevap": "Bilginin kaynağını sorgulama ve doğru bilgiye göre hareket etme ilkesine",
+            "secenekler": [
+              "Bilginin kaynağını sorgulama ve doğru bilgiye göre hareket etme ilkesine",
+              "Sadece zenginlere ait olma ilkesine",
+              "Şehadet âlemini inkâr ilkesine",
+              "Gayb alanını araştırma ilkesine"
+            ]
+          }
+        ],
+        "Konu 4": [
+          {
+            "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
+            "dogru_cevap": "Halife",
+            "secenekler": [
+              "Mahremiyet",
+              "Teleoloji",
+              "Mütevatir",
+              "Halife"
+            ]
+          },
+          {
+            "soru": "Allah-âlem ilişkisine göre aşağıdakilerden hangisi doğrudur?",
+            "dogru_cevap": "Bütün varlıklar Allah'a muhtaçtır.",
+            "secenekler": [
+              "Allah yaratmayı başlatmış, sonra âlemi kendi hâline bırakmıştır.",
+              "Âlem kendi kendine var olmuştur.",
+              "Bütün varlıklar Allah'a muhtaçtır.",
+              "İnsan hiçbir sorumluluk taşımadan yaşamaktadır."
+            ]
+          },
+          {
+            "soru": "'İnsan, yeryüzünde Allah'ın koyduğu ölçülere göre davranmakla yükümlüdür.' yargısı aşağıdaki kavramlardan hangisiyle en yakından ilişkilidir?",
+            "dogru_cevap": "Kulluk",
+            "secenekler": [
+              "Kulluk",
+              "Şeffaflık",
+              "Ontoloji",
+              "Mütevatir"
+            ]
+          },
+          {
+            "soru": "Allah'ın varlığını evrenden hareketle ispatlamaya çalışan delillerden biri aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Kozmolojik delil",
+            "secenekler": [
+              "Tevhit ilkesi",
+              "Sıla-i rahim",
+              "Tecessüs",
+              "Kozmolojik delil"
+            ]
+          }
+        ],
+        "İflasss!": [],
+        "Bonus": []
+      }
+    }
+  },
+  {
     "oyun_id": "U1_B1_E35",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Sürpriz Kutu: Konu Soruları",
     "motor_id": "E35",
     "motor_adi": "Sürpriz Kutu",
-    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "hedef": "Sürpriz kutulardan çıkan soruları çöz",
     "veri": {
       "kutular": [
         {
@@ -2860,79 +3416,79 @@
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "İslam düşüncesinde nesnel bilgi kaynakları aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Geri dönüşüm ve enerji verimliliğini desteklemesi",
-              "B) Tüketim bağımlılığını artırması",
-              "C) Çarpık kentleşmeyi yaygınlaştırması",
-              "D) Doğal kaynakların daha hızlı tükenmesi"
+              "Sadık haber, selim akıl ve salim duyular",
+              "Gelenek, alışkanlık ve moda",
+              "Rüya, sezgi ve ilham",
+              "Duygu, heyecan ve sezgi"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Sadık haber, selim akıl ve salim duyular"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Yalan üzere birleşmeleri mümkün olmayan toplulukların aktardığı habere ne ad verilir?",
             "secenekler": [
-              "A) Kaynakları gelecek nesilleri de gözeterek koruma sorumluluğunu",
-              "B) Yalnız bireysel ibadet sorumluluğunu",
-              "C) Sadece tarih bilgisini",
-              "D) Mezhepler arası farkları"
+              "Tecessüs",
+              "Kişisel görüş",
+              "Zannî haber",
+              "Mütevatir haber"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Mütevatir haber"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "İnsanın duyu organlarıyla algılayabildiği varlık alanı aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Teleolojik delil",
-              "B) Sadece tarihî delil",
-              "C) Mütevatir haber",
-              "D) Sezgi delili"
+              "Şehadet âlemi",
+              "Gayb âlemi",
+              "Berzah âlemi",
+              "Misal âlemi"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Şehadet âlemi"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "İslam inancına göre insanın yeryüzündeki konumu hangi kavramla açıklanır?",
             "secenekler": [
-              "A) Yenilenebilir enerji",
-              "B) Tükenmiş enerji",
-              "C) Kirletici enerji",
-              "D) Atık enerji"
+              "Mahremiyet",
+              "Teleoloji",
+              "Mütevatir",
+              "Halife"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Halife"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Mülk Sûresi 23. âyet-i kerîmede insana verilen hangi nimetler özellikle hatırlatılır?",
             "secenekler": [
-              "A) İhsan",
-              "B) Tecessüs",
-              "C) Gıybet",
-              "D) Bağy"
+              "Kulak, göz ve kalp",
+              "Ev, aile ve çevre",
+              "Mal, makam ve şöhret",
+              "Toprak, hava ve su"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Kulak, göz ve kalp"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Aşağıdakilerden hangisi İslam'da bilginin önemine dair doğru bir çıkarımdır?",
             "secenekler": [
-              "A) Ehlisünnet'e bağlı itikadî mezhepler",
-              "B) Şia içindeki fıkhî mezhepler",
-              "C) Sadece siyasî hareketler",
-              "D) Çevre ahlakı yorumları"
+              "Duyular her zaman kesin sonuç verir.",
+              "Doğru bilgi, doğru inanç ve davranışa yöneltir.",
+              "Bilginin kaynağı önemli değildir.",
+              "Sadece çoğunluğun sözü doğru kabul edilir."
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Doğru bilgi, doğru inanç ve davranışa yöneltir."
           }
         }
       ]

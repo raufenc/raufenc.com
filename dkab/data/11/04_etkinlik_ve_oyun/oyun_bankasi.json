@@ -2770,74 +2770,92 @@
     "tasarimci_notu": "Ünite sonu pekiştirmesi için hızlı geri bildirim sunulur."
   },
   {
+    "oyun_id": "U1_B1_E25",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Adam Asmaca: Konu Kavramları",
+    "motor_id": "E25",
+    "motor_adi": "Kelime Tahmin",
+    "hedef": "Konu kavramlarını harflerden tahmin et",
+    "veri": {
+      "kelimeler": [
+        {
+          "kelime": "MAHŞER",
+          "ipucu": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verili",
+          "kategori": ""
+        }
+      ]
+    }
+  },
+  {
     "oyun_id": "U1_B1_E27",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Uzay Nişancısı: Konu Soruları",
     "motor_id": "E27",
     "motor_adi": "Uzay Nişancısı",
-    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullan",
     "veri": {
       "dalgalar": [
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
+          "dogru": "Allah’a kulluk etmek",
           "yanlis": [
-            "A) Şavout",
-            "B) Evharistiya",
-            "C) Konfirmasyon"
+            "Mal biriktirmek",
+            "Sadece dünyada rahat yaşamak",
+            "Başka insanlara üstünlük kurmak"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
+          "dogru": "Hayatı anlamlandırma bilinci",
+          "yanlis": [
+            "Kötülüğü meşrulaştırma",
+            "Sorumluluktan kaçma isteği",
+            "Tam bir anlamsızlık hissi"
           ],
           "hiz": 1
         },
         {
-          "soru": "",
-          "dogru": "B",
+          "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru": "Dünya ile âhiret arasındaki ara dönem",
           "yanlis": [
-            "A) Mihrak",
-            "B) Mîzan",
-            "C) Menora"
-          ],
-          "hiz": 1
-        },
-        {
-          "soru": "",
-          "dogru": "C",
-          "yanlis": [
-            "A) Kötülük Tanrı’nın yokluğunu kesin biçimde ispatlar.",
-            "B) İnsan aklı kötülüğün ardındaki bütün hikmetleri kuşatabilir.",
-            "C) Kötülük bazı durumlarda daha büyük bir iyiliğin ortaya çıkmasına vesile olabilir."
+            "Dünyada geçirilen çocukluk dönemi",
+            "Yalnızca kıyâmet anı",
+            "Cennet nimetlerinin tamamı"
           ],
           "hiz": 2
         },
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
+          "dogru": "Ölülerin yeniden diriltilmesi",
           "yanlis": [
-            "A) Doğru yola yönelme ve yönlendirilme",
-            "B) Sadece korku duygusu",
-            "C) Geçici dünya menfaati"
+            "Kabirlerin yapılması",
+            "Amel defterlerinin kapanması",
+            "Namâzın farz kılınması"
           ],
           "hiz": 2
         },
         {
-          "soru": "",
-          "dogru": "B",
+          "soru": "Aşağıdakilerden hangisi vefat eden Müslümana karşı görevlerden biridir?",
+          "dogru": "Cenaze namâzını kılmak",
           "yanlis": [
-            "A) Temsil",
-            "B) Teşrî",
-            "C) Tezkiye"
+            "Borçlarını görmezden gelmek",
+            "Taziyeyi yasaklamak",
+            "Vasiyetini yok saymak"
           ],
           "hiz": 2
         },
         {
-          "soru": "",
-          "dogru": "A",
+          "soru": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verilir?",
+          "dogru": "Mahşer",
           "yanlis": [
-            "A) Teizm",
-            "B) Ateizm",
-            "C) Nihilizm"
+            "Tekfin",
+            "Mişna",
+            "Berzah"
           ],
-          "hiz": 3
+          "hiz": 2
         }
       ]
     }
@@ -2849,23 +2867,185 @@
     "baslik": "Yarış: Konu Soruları",
     "motor_id": "E29",
     "motor_adi": "Yarış",
-    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geç",
     "veri": {
       "rakip_zorlugu": 0.85,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Allah’a kulluk etmek",
+          "secenekler": [
+            "Mal biriktirmek",
+            "Sadece dünyada rahat yaşamak",
+            "Başka insanlara üstünlük kurmak",
+            "Allah’a kulluk etmek"
+          ]
+        },
+        {
+          "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Hayatı anlamlandırma bilinci",
+          "secenekler": [
+            "Kötülüğü meşrulaştırma",
+            "Sorumluluktan kaçma isteği",
+            "Tam bir anlamsızlık hissi",
+            "Hayatı anlamlandırma bilinci"
+          ]
+        },
+        {
+          "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru_cevap": "Dünya ile âhiret arasındaki ara dönem",
+          "secenekler": [
+            "Dünyada geçirilen çocukluk dönemi",
+            "Yalnızca kıyâmet anı",
+            "Cennet nimetlerinin tamamı",
+            "Dünya ile âhiret arasındaki ara dönem"
+          ]
+        },
+        {
+          "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Ölülerin yeniden diriltilmesi",
+          "secenekler": [
+            "Kabirlerin yapılması",
+            "Amel defterlerinin kapanması",
+            "Ölülerin yeniden diriltilmesi",
+            "Namâzın farz kılınması"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi vefat eden Müslümana karşı görevlerden biridir?",
+          "dogru_cevap": "Cenaze namâzını kılmak",
+          "secenekler": [
+            "Borçlarını görmezden gelmek",
+            "Cenaze namâzını kılmak",
+            "Taziyeyi yasaklamak",
+            "Vasiyetini yok saymak"
+          ]
+        },
+        {
+          "soru": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verilir?",
+          "dogru_cevap": "Mahşer",
+          "secenekler": [
+            "Tekfin",
+            "Mişna",
+            "Mahşer",
+            "Berzah"
+          ]
+        },
+        {
+          "soru": "Aşağıdaki sıralamalardan hangisi âhiret hayatının aşamalarına daha uygundur?",
+          "dogru_cevap": "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+          "secenekler": [
+            "Ölüm → Cehennem → Baas → Berzah",
+            "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+            "Haşir → Ölüm → Kıyâmet → Berzah",
+            "Cennet → Ölüm → Haşir → Kıyâmet"
+          ]
+        },
+        {
+          "soru": "Teçhiz ve tekfin işlemleri aşağıdakilerden hangisiyle ilgilidir?",
+          "dogru_cevap": "Cenazeyi yıkayıp kefenleyerek defne hazırlamak",
+          "secenekler": [
+            "Zekât miktarını hesaplamak",
+            "Hac yolculuğuna hazırlanmak",
+            "Günlük ibadetleri planlamak",
+            "Cenazeyi yıkayıp kefenleyerek defne hazırlamak"
+          ]
+        }
+      ]
     }
   },
   {
     "oyun_id": "U1_B1_E30",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
-    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "baslik": "Halat Çekme: Bilgi Yarışması",
     "motor_id": "E30",
     "motor_adi": "Halat Çekme",
-    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendir",
     "veri": {
       "cekme_gucu": 1,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Allah’a kulluk etmek",
+          "secenekler": [
+            "Mal biriktirmek",
+            "Sadece dünyada rahat yaşamak",
+            "Başka insanlara üstünlük kurmak",
+            "Allah’a kulluk etmek"
+          ]
+        },
+        {
+          "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Hayatı anlamlandırma bilinci",
+          "secenekler": [
+            "Kötülüğü meşrulaştırma",
+            "Sorumluluktan kaçma isteği",
+            "Tam bir anlamsızlık hissi",
+            "Hayatı anlamlandırma bilinci"
+          ]
+        },
+        {
+          "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
+          "dogru_cevap": "Dünya ile âhiret arasındaki ara dönem",
+          "secenekler": [
+            "Dünyada geçirilen çocukluk dönemi",
+            "Yalnızca kıyâmet anı",
+            "Cennet nimetlerinin tamamı",
+            "Dünya ile âhiret arasındaki ara dönem"
+          ]
+        },
+        {
+          "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Ölülerin yeniden diriltilmesi",
+          "secenekler": [
+            "Kabirlerin yapılması",
+            "Amel defterlerinin kapanması",
+            "Ölülerin yeniden diriltilmesi",
+            "Namâzın farz kılınması"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi vefat eden Müslümana karşı görevlerden biridir?",
+          "dogru_cevap": "Cenaze namâzını kılmak",
+          "secenekler": [
+            "Borçlarını görmezden gelmek",
+            "Cenaze namâzını kılmak",
+            "Taziyeyi yasaklamak",
+            "Vasiyetini yok saymak"
+          ]
+        },
+        {
+          "soru": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verilir?",
+          "dogru_cevap": "Mahşer",
+          "secenekler": [
+            "Tekfin",
+            "Mişna",
+            "Mahşer",
+            "Berzah"
+          ]
+        },
+        {
+          "soru": "Aşağıdaki sıralamalardan hangisi âhiret hayatının aşamalarına daha uygundur?",
+          "dogru_cevap": "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+          "secenekler": [
+            "Ölüm → Cehennem → Baas → Berzah",
+            "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+            "Haşir → Ölüm → Kıyâmet → Berzah",
+            "Cennet → Ölüm → Haşir → Kıyâmet"
+          ]
+        },
+        {
+          "soru": "Teçhiz ve tekfin işlemleri aşağıdakilerden hangisiyle ilgilidir?",
+          "dogru_cevap": "Cenazeyi yıkayıp kefenleyerek defne hazırlamak",
+          "secenekler": [
+            "Zekât miktarını hesaplamak",
+            "Hac yolculuğuna hazırlanmak",
+            "Günlük ibadetleri planlamak",
+            "Cenazeyi yıkayıp kefenleyerek defne hazırlamak"
+          ]
+        }
+      ]
     }
   },
   {
@@ -2875,7 +3055,7 @@
     "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
     "motor_id": "E31",
     "motor_adi": "Yakalayıcı",
-    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "hedef": "İyi kavramları yakala, kötülerden kaç",
     "veri": {
       "sure": 60,
       "hiz": 1,
@@ -2926,13 +3106,389 @@
     }
   },
   {
+    "oyun_id": "U1_B1_E32",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Yarışması: Konu Panosu",
+    "motor_id": "E32",
+    "motor_adi": "Bilgi Yarışması",
+    "hedef": "Jeopardy panosunda soruları çöz",
+    "veri": {
+      "kategoriler": [
+        {
+          "ad": "Konu 1",
+          "sorular": [
+            {
+              "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Allah’a kulluk etmek",
+              "secenekler": [
+                "Mal biriktirmek",
+                "Sadece dünyada rahat yaşamak",
+                "Başka insanlara üstünlük kurmak",
+                "Allah’a kulluk etmek"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Hayatı anlamlandırma bilinci",
+              "secenekler": [
+                "Kötülüğü meşrulaştırma",
+                "Sorumluluktan kaçma isteği",
+                "Tam bir anlamsızlık hissi",
+                "Hayatı anlamlandırma bilinci"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
+              "dogru_cevap": "Dünya ile âhiret arasındaki ara dönem",
+              "secenekler": [
+                "Dünyada geçirilen çocukluk dönemi",
+                "Yalnızca kıyâmet anı",
+                "Cennet nimetlerinin tamamı",
+                "Dünya ile âhiret arasındaki ara dönem"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Ölülerin yeniden diriltilmesi",
+              "secenekler": [
+                "Kabirlerin yapılması",
+                "Amel defterlerinin kapanması",
+                "Ölülerin yeniden diriltilmesi",
+                "Namâzın farz kılınması"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 2",
+          "sorular": [
+            {
+              "soru": "Aşağıdakilerden hangisi Peygamber Efendimizin (sallallâhu aleyhi ve sellem) örnekliği ile ilgili doğru bir yargıdır?",
+              "dogru_cevap": "Dinî ve dünyevî alanlarda modeldir.",
+              "secenekler": [
+                "Sünnetinin bağlayıcılığı yoktur.",
+                "Örnekliği yalnızca ibadet alanıyla sınırlıdır.",
+                "Sadece Arap toplumuna örnektir.",
+                "Dinî ve dünyevî alanlarda modeldir."
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "'Namazı benden gördüğünüz gibi kılın.' hadîs-i şerîfi en çok hangi görevin somut örneğidir?",
+              "dogru_cevap": "Tebyin",
+              "secenekler": [
+                "Tebyin",
+                "Hicret",
+                "Tebliğ",
+                "İnzâr"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Takrirî sünnet aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Sahâbenin uygun davranışlarını onaylaması",
+              "secenekler": [
+                "Sahâbenin uygun davranışlarını onaylaması",
+                "Yalnızca savaş kararları",
+                "Peygamber Efendimizin (sallallâhu aleyhi ve sellem) bizzat yaptığı fiiller",
+                "Kur’ân-ı Kerîm’deki bütün emirler"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Ahzab Sûresi 45-46. âyet-i kerîmeler ışığında Peygamber Efendimizin (sallallâhu aleyhi ve sellem) 'şahit' oluşu neyi ifade eder?",
+              "dogru_cevap": "İnsanlara vahyin ulaştığına tanıklık etmesini",
+              "secenekler": [
+                "İnsanları zorla inandırmasını",
+                "İnsanlara vahyin ulaştığına tanıklık etmesini",
+                "Her insanın ameline doğrudan hükmetmesini",
+                "Sadece kıyâmetin vaktini bilmesini"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 3",
+          "sorular": [
+            {
+              "soru": "Pozitivizmin bilgi anlayışına göre geçerli bilgi kaynağı aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Sadece bilimsel gözlem ve olgular",
+              "secenekler": [
+                "Yalnızca sezgiler",
+                "Yalnızca tarihî rivayetler",
+                "Sadece rüyalar",
+                "Sadece bilimsel gözlem ve olgular"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Sekülarizmin temel özelliği aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Dünya hayatını merkeze alıp dinin belirleyiciliğini azaltması",
+              "secenekler": [
+                "Vahyi bilgiye öncelik vermesi",
+                "Dünya hayatını merkeze alıp dinin belirleyiciliğini azaltması",
+                "Din ile dünya arasında bağ kurmayı güçlendirmesi",
+                "Sadece Yahudilikle ilgilenmesi"
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Agnostisizm aşağıdakilerden hangisini savunur?",
+              "dogru_cevap": "Tanrı ve metafizik alan hakkında kesin bilgiye ulaşılamayacağını",
+              "secenekler": [
+                "Tanrı’nın kesinlikle yok olduğunu",
+                "Sadece peygamberlerin bilgi sahibi olduğunu",
+                "Tanrı ve metafizik alan hakkında kesin bilgiye ulaşılamayacağını",
+                "Tanrı’nın kesinlikle var olduğunu"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Yeni dinî hareketlerin ortaya çıkmasında aşağıdakilerden hangisi etkili olmuştur?",
+              "dogru_cevap": "Manevî boşluk ve yalnızlık duygusu",
+              "secenekler": [
+                "Hiçbir toplumsal değişim yaşanmaması",
+                "Geleneksel bağların güçlenmesi",
+                "Manevî boşluk ve yalnızlık duygusu",
+                "Dinî kurumlara güvenin artması"
+              ],
+              "puan": 400
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E33",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Çarkı: Konu Soruları",
+    "motor_id": "E33",
+    "motor_adi": "Bilgi Çarkı",
+    "hedef": "Çark çevirerek soruları çöz",
+    "veri": {
+      "hak": 8,
+      "dilimler": [
+        {
+          "kategori": "Konu 1",
+          "renk": "#1DD1A1",
+          "puan": 50
+        },
+        {
+          "kategori": "Konu 2",
+          "renk": "#FECA57",
+          "puan": 100
+        },
+        {
+          "kategori": "Konu 3",
+          "renk": "#54A0FF",
+          "puan": 150
+        },
+        {
+          "kategori": "Konu 4",
+          "renk": "#FF9F43",
+          "puan": 200
+        },
+        {
+          "kategori": "İflasss!",
+          "renk": "#636e72",
+          "puan": -50
+        },
+        {
+          "kategori": "Bonus",
+          "renk": "#5F27CD",
+          "puan": 150
+        }
+      ],
+      "sorular": {
+        "Konu 1": [
+          {
+            "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Allah’a kulluk etmek",
+            "secenekler": [
+              "Mal biriktirmek",
+              "Sadece dünyada rahat yaşamak",
+              "Başka insanlara üstünlük kurmak",
+              "Allah’a kulluk etmek"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi vefat eden Müslümana karşı görevlerden biridir?",
+            "dogru_cevap": "Cenaze namâzını kılmak",
+            "secenekler": [
+              "Borçlarını görmezden gelmek",
+              "Cenaze namâzını kılmak",
+              "Taziyeyi yasaklamak",
+              "Vasiyetini yok saymak"
+            ]
+          },
+          {
+            "soru": "Bakara Sûresi 153. âyet-i kerîmede müminlere hangi iki unsurla yardım dilenmeleri öğütlenir?",
+            "dogru_cevap": "Sabır ve namâz",
+            "secenekler": [
+              "Hac ve zekât",
+              "Oruç ve infak",
+              "Tövbe ve cihat",
+              "Sabır ve namâz"
+            ]
+          },
+          {
+            "soru": "Vasiyetle ilgili aşağıdaki bilgilerden hangisi doğrudur?",
+            "dogru_cevap": "Miras paylaşımından önce vasiyetin ve borcun yerine getirilmesi gerekir.",
+            "secenekler": [
+              "Miras paylaşımından önce vasiyetin ve borcun yerine getirilmesi gerekir.",
+              "Vasiyet hiçbir şartta yerine getirilemez.",
+              "Vasiyet yalnızca aile dışındaki kişilere yapılabilir.",
+              "Vasiyet yalnızca sözlü yapıldığında geçerlidir."
+            ]
+          }
+        ],
+        "Konu 2": [
+          {
+            "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Hayatı anlamlandırma bilinci",
+            "secenekler": [
+              "Kötülüğü meşrulaştırma",
+              "Sorumluluktan kaçma isteği",
+              "Tam bir anlamsızlık hissi",
+              "Hayatı anlamlandırma bilinci"
+            ]
+          },
+          {
+            "soru": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verilir?",
+            "dogru_cevap": "Mahşer",
+            "secenekler": [
+              "Tekfin",
+              "Mişna",
+              "Mahşer",
+              "Berzah"
+            ]
+          },
+          {
+            "soru": "Bakara Sûresi 154. âyet-i kerîmeye göre Allah yolunda öldürülenler için hangi hüküm vurgulanır?",
+            "dogru_cevap": "Dirî oldukları fakat bunun herkesçe bilinmediği",
+            "secenekler": [
+              "Dirî oldukları fakat bunun herkesçe bilinmediği",
+              "Hemen yeniden dünyaya döndükleri",
+              "Hiç hesaba çekilmeyecekleri",
+              "Tamamen yok oldukları"
+            ]
+          },
+          {
+            "soru": "Bakara Sûresi 156. âyet-i kerîmede musibet anında söylenmesi öğretilen ifade aşağıdakilerden hangisidir?",
+            "dogru_cevap": "İnna lillâhi ve innâ ileyhi râciûn",
+            "secenekler": [
+              "Elhamdülillah Rabbilâlemîn",
+              "İnna lillâhi ve innâ ileyhi râciûn",
+              "Hasbiyallahu ve ni’me’l-vekîl",
+              "Subhânallahi ve bihamdihî"
+            ]
+          }
+        ],
+        "Konu 3": [
+          {
+            "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
+            "dogru_cevap": "Dünya ile âhiret arasındaki ara dönem",
+            "secenekler": [
+              "Dünyada geçirilen çocukluk dönemi",
+              "Yalnızca kıyâmet anı",
+              "Cennet nimetlerinin tamamı",
+              "Dünya ile âhiret arasındaki ara dönem"
+            ]
+          },
+          {
+            "soru": "Aşağıdaki sıralamalardan hangisi âhiret hayatının aşamalarına daha uygundur?",
+            "dogru_cevap": "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+            "secenekler": [
+              "Ölüm → Cehennem → Baas → Berzah",
+              "Ölüm → Berzah → Kıyâmet → Baas → Haşir → Hesap",
+              "Haşir → Ölüm → Kıyâmet → Berzah",
+              "Cennet → Ölüm → Haşir → Kıyâmet"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi âhiret inancının kişiye kazandırdığı sonuçlardan biri değildir?",
+            "dogru_cevap": "Dünyadaki sorumlulukları anlamsız görmek",
+            "secenekler": [
+              "Adaletin gerçekleşeceğine güven duymak",
+              "Ölüm korkusunu anlam çerçevesinde yönetmek",
+              "İyiliğe yönelmek",
+              "Dünyadaki sorumlulukları anlamsız görmek"
+            ]
+          },
+          {
+            "soru": "Cehennemle ilgili aşağıdaki yargılardan hangisi kitapta yer alan bilgilere uygundur?",
+            "dogru_cevap": "İnançsızlık ve affedilmeyen günahlarla ilişkilendirilen ceza yurdudur.",
+            "secenekler": [
+              "Cennetle aynı anlamda kullanılan bir kavramdır.",
+              "Yalnızca dünyada ceza görenler için vardır.",
+              "İnançsızlık ve affedilmeyen günahlarla ilişkilendirilen ceza yurdudur.",
+              "Herkes için geçici bir konak yeridir."
+            ]
+          }
+        ],
+        "Konu 4": [
+          {
+            "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Ölülerin yeniden diriltilmesi",
+            "secenekler": [
+              "Kabirlerin yapılması",
+              "Amel defterlerinin kapanması",
+              "Ölülerin yeniden diriltilmesi",
+              "Namâzın farz kılınması"
+            ]
+          },
+          {
+            "soru": "Teçhiz ve tekfin işlemleri aşağıdakilerden hangisiyle ilgilidir?",
+            "dogru_cevap": "Cenazeyi yıkayıp kefenleyerek defne hazırlamak",
+            "secenekler": [
+              "Zekât miktarını hesaplamak",
+              "Hac yolculuğuna hazırlanmak",
+              "Günlük ibadetleri planlamak",
+              "Cenazeyi yıkayıp kefenleyerek defne hazırlamak"
+            ]
+          },
+          {
+            "soru": "Hesap gününde davranışların tartılacağı ölçüye ne ad verilir?",
+            "dogru_cevap": "Mîzan",
+            "secenekler": [
+              "Muvatta",
+              "Mihrak",
+              "Menora",
+              "Mîzan"
+            ]
+          },
+          {
+            "soru": "Peygamber Efendimizin (sallallâhu aleyhi ve sellem) beşer oluşu hangi gerçeği vurgular?",
+            "dogru_cevap": "İnsanlar için yaşanabilir bir örnek olduğunu",
+            "secenekler": [
+              "Vahiy almadığını",
+              "İnsanlar için yaşanabilir bir örnek olduğunu",
+              "İnsanüstü bir hayat yaşadığını",
+              "Hiç üzülmediğini"
+            ]
+          }
+        ],
+        "İflasss!": [],
+        "Bonus": []
+      }
+    }
+  },
+  {
     "oyun_id": "U1_B1_E35",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Sürpriz Kutu: Konu Soruları",
     "motor_id": "E35",
     "motor_adi": "Sürpriz Kutu",
-    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "hedef": "Sürpriz kutulardan çıkan soruları çöz",
     "veri": {
       "kutular": [
         {
@@ -2950,79 +3506,79 @@
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "İslâm'a göre insanın yaratılış amacı aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Şavout",
-              "B) Evharistiya",
-              "C) Konfirmasyon",
-              "D) Epifani"
+              "Mal biriktirmek",
+              "Sadece dünyada rahat yaşamak",
+              "Başka insanlara üstünlük kurmak",
+              "Allah’a kulluk etmek"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Allah’a kulluk etmek"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Âhiret inancının insana kazandırdığı duygulardan biri aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Mihrak",
-              "B) Mîzan",
-              "C) Menora",
-              "D) Muvatta"
+              "Kötülüğü meşrulaştırma",
+              "Sorumluluktan kaçma isteği",
+              "Tam bir anlamsızlık hissi",
+              "Hayatı anlamlandırma bilinci"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Hayatı anlamlandırma bilinci"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Berzah âlemi kavramı aşağıdakilerden hangisini ifade eder?",
             "secenekler": [
-              "A) Kötülük Tanrı’nın yokluğunu kesin biçimde ispatlar.",
-              "B) İnsan aklı kötülüğün ardındaki bütün hikmetleri kuşatabilir.",
-              "C) Kötülük bazı durumlarda daha büyük bir iyiliğin ortaya çıkmasına vesile olabilir.",
-              "D) İnsanın özgür iradesi kötülükle hiçbir şekilde ilgili değildir."
+              "Dünyada geçirilen çocukluk dönemi",
+              "Yalnızca kıyâmet anı",
+              "Cennet nimetlerinin tamamı",
+              "Dünya ile âhiret arasındaki ara dönem"
             ],
-            "dogru_cevap": "C"
+            "dogru_cevap": "Dünya ile âhiret arasındaki ara dönem"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Baas kavramının anlamı aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Doğru yola yönelme ve yönlendirilme",
-              "B) Sadece korku duygusu",
-              "C) Geçici dünya menfaati",
-              "D) Kaderi tamamen inkâr"
+              "Kabirlerin yapılması",
+              "Amel defterlerinin kapanması",
+              "Ölülerin yeniden diriltilmesi",
+              "Namâzın farz kılınması"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Ölülerin yeniden diriltilmesi"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Aşağıdakilerden hangisi vefat eden Müslümana karşı görevlerden biridir?",
             "secenekler": [
-              "A) Temsil",
-              "B) Teşrî",
-              "C) Tezkiye",
-              "D) Tertil"
+              "Borçlarını görmezden gelmek",
+              "Cenaze namâzını kılmak",
+              "Taziyeyi yasaklamak",
+              "Vasiyetini yok saymak"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Cenaze namâzını kılmak"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Kıyâmet gününde insanların hesaba çekilmek üzere toplandıkları yere ne ad verilir?",
             "secenekler": [
-              "A) Teizm",
-              "B) Ateizm",
-              "C) Nihilizm",
-              "D) Materyalizm"
+              "Tekfin",
+              "Mişna",
+              "Mahşer",
+              "Berzah"
             ],
-            "dogru_cevap": "A"
+            "dogru_cevap": "Mahşer"
           }
         }
       ]

@@ -3814,72 +3814,100 @@
     "tasarimci_notu": "Öğrenci tamamlamadıklarını tekrar planına ekleyebilir."
   },
   {
+    "oyun_id": "U1_B1_E25",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Adam Asmaca: Konu Kavramları",
+    "motor_id": "E25",
+    "motor_adi": "Kelime Tahmin",
+    "hedef": "Konu kavramlarını harflerden tahmin et",
+    "veri": {
+      "kelimeler": [
+        {
+          "kelime": "SÜNNETULLAH",
+          "ipucu": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavraml",
+          "kategori": ""
+        },
+        {
+          "kelime": "RASATHANE",
+          "ipucu": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan ku",
+          "kategori": ""
+        },
+        {
+          "kelime": "TIP",
+          "ipucu": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
+          "kategori": ""
+        }
+      ]
+    }
+  },
+  {
     "oyun_id": "U1_B1_E27",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Uzay Nişancısı: Konu Soruları",
     "motor_id": "E27",
     "motor_adi": "Uzay Nişancısı",
-    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullan",
     "veri": {
       "dalgalar": [
         {
-          "soru": "",
-          "dogru": "C",
+          "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
+          "dogru": "Sünnetullah",
           "yanlis": [
-            "A) Akıl dinin yerine geçer.",
-            "B) Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
-            "C) Akıl ve vahiy birbirini tamamlar."
-          ],
-          "hiz": 3
-        },
-        {
-          "soru": "",
-          "dogru": "B",
-          "yanlis": [
-            "A) Bir kişinin bireysel kanaatini",
-            "B) Müctehidlerin bir hüküm üzerinde görüş birliği etmesini",
-            "C) Sadece mahkeme kararını"
-          ],
-          "hiz": 3
-        },
-        {
-          "soru": "",
-          "dogru": "C",
-          "yanlis": [
-            "A) Matematik",
-            "B) Coğrafya",
-            "C) Tıp"
-          ],
-          "hiz": 2
-        },
-        {
-          "soru": "",
-          "dogru": "B",
-          "yanlis": [
-            "A) Sadece ekonomik değerleriyle",
-            "B) Bereket ve doğurganlık sembolü olarak görülmeleriyle",
-            "C) Savaşçılığı temsil etmeleriyle"
-          ],
-          "hiz": 3
-        },
-        {
-          "soru": "",
-          "dogru": "B",
-          "yanlis": [
-            "A) Tenasüh",
-            "B) İctihad",
-            "C) Semah"
+            "Karma",
+            "Tasavvuf",
+            "Tenasüh"
           ],
           "hiz": 1
         },
         {
-          "soru": "",
-          "dogru": "B",
+          "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
+          "dogru": "Akıl ve vahiy birbirini tamamlar.",
           "yanlis": [
-            "A) Astronomi kuramı geliştirmesi",
-            "B) Ahilik teşkilatını kurumsallaştırması",
-            "C) Budizm'i yayması"
+            "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+            "Akıl dinin yerine geçer.",
+            "Bilim sadece vahye dayanır."
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
+          "dogru": "Beytü'l-hikme",
+          "yanlis": [
+            "Rasathane",
+            "Tekke",
+            "Şifahane"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
+          "dogru": "Rasathane",
+          "yanlis": [
+            "Kervansaray",
+            "Medrese",
+            "Sıbyan mektebi"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
+          "dogru": "Tıp",
+          "yanlis": [
+            "Coğrafya",
+            "Matematik",
+            "Hadîs"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "Dâru'l-kurrâ kurumlarının temel amacı aşağıdakilerden hangisidir?",
+          "dogru": "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek",
+          "yanlis": [
+            "Devlet görevlisi yetiştirmek",
+            "Ticaret hukuku öğretmek",
+            "Sadece astronomi öğretmek"
           ],
           "hiz": 2
         }
@@ -3893,23 +3921,185 @@
     "baslik": "Yarış: Konu Soruları",
     "motor_id": "E29",
     "motor_adi": "Yarış",
-    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geç",
     "veri": {
       "rakip_zorlugu": 0.85,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
+          "dogru_cevap": "Sünnetullah",
+          "secenekler": [
+            "Karma",
+            "Sünnetullah",
+            "Tasavvuf",
+            "Tenasüh"
+          ]
+        },
+        {
+          "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
+          "dogru_cevap": "Akıl ve vahiy birbirini tamamlar.",
+          "secenekler": [
+            "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+            "Akıl dinin yerine geçer.",
+            "Bilim sadece vahye dayanır.",
+            "Akıl ve vahiy birbirini tamamlar."
+          ]
+        },
+        {
+          "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
+          "dogru_cevap": "Beytü'l-hikme",
+          "secenekler": [
+            "Rasathane",
+            "Beytü'l-hikme",
+            "Tekke",
+            "Şifahane"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
+          "dogru_cevap": "Rasathane",
+          "secenekler": [
+            "Kervansaray",
+            "Medrese",
+            "Rasathane",
+            "Sıbyan mektebi"
+          ]
+        },
+        {
+          "soru": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
+          "dogru_cevap": "Tıp",
+          "secenekler": [
+            "Coğrafya",
+            "Matematik",
+            "Tıp",
+            "Hadîs"
+          ]
+        },
+        {
+          "soru": "Dâru'l-kurrâ kurumlarının temel amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek",
+          "secenekler": [
+            "Devlet görevlisi yetiştirmek",
+            "Ticaret hukuku öğretmek",
+            "Sadece astronomi öğretmek",
+            "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek"
+          ]
+        },
+        {
+          "soru": "Selçuklular zamanında sistemli medreselerin kurucusu olarak kim kabul edilir?",
+          "dogru_cevap": "Nizâmülmülk",
+          "secenekler": [
+            "Uluğ Bey",
+            "İbn Haldun",
+            "Câbir bin Hayyan",
+            "Nizâmülmülk"
+          ]
+        },
+        {
+          "soru": "Aşağıdaki eşleştirmelerden hangisi yanlıştır?",
+          "dogru_cevap": "Evliya Çelebi - kimya",
+          "secenekler": [
+            "Hârizmî - cebir",
+            "Evliya Çelebi - kimya",
+            "İbnü'l-Heysem - optik",
+            "Uluğ Bey - astronomi"
+          ]
+        }
+      ]
     }
   },
   {
     "oyun_id": "U1_B1_E30",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
-    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "baslik": "Halat Çekme: Bilgi Yarışması",
     "motor_id": "E30",
     "motor_adi": "Halat Çekme",
-    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendir",
     "veri": {
       "cekme_gucu": 1,
-      "sorular": []
+      "sorular": [
+        {
+          "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
+          "dogru_cevap": "Sünnetullah",
+          "secenekler": [
+            "Karma",
+            "Sünnetullah",
+            "Tasavvuf",
+            "Tenasüh"
+          ]
+        },
+        {
+          "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
+          "dogru_cevap": "Akıl ve vahiy birbirini tamamlar.",
+          "secenekler": [
+            "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+            "Akıl dinin yerine geçer.",
+            "Bilim sadece vahye dayanır.",
+            "Akıl ve vahiy birbirini tamamlar."
+          ]
+        },
+        {
+          "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
+          "dogru_cevap": "Beytü'l-hikme",
+          "secenekler": [
+            "Rasathane",
+            "Beytü'l-hikme",
+            "Tekke",
+            "Şifahane"
+          ]
+        },
+        {
+          "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
+          "dogru_cevap": "Rasathane",
+          "secenekler": [
+            "Kervansaray",
+            "Medrese",
+            "Rasathane",
+            "Sıbyan mektebi"
+          ]
+        },
+        {
+          "soru": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
+          "dogru_cevap": "Tıp",
+          "secenekler": [
+            "Coğrafya",
+            "Matematik",
+            "Tıp",
+            "Hadîs"
+          ]
+        },
+        {
+          "soru": "Dâru'l-kurrâ kurumlarının temel amacı aşağıdakilerden hangisidir?",
+          "dogru_cevap": "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek",
+          "secenekler": [
+            "Devlet görevlisi yetiştirmek",
+            "Ticaret hukuku öğretmek",
+            "Sadece astronomi öğretmek",
+            "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek"
+          ]
+        },
+        {
+          "soru": "Selçuklular zamanında sistemli medreselerin kurucusu olarak kim kabul edilir?",
+          "dogru_cevap": "Nizâmülmülk",
+          "secenekler": [
+            "Uluğ Bey",
+            "İbn Haldun",
+            "Câbir bin Hayyan",
+            "Nizâmülmülk"
+          ]
+        },
+        {
+          "soru": "Aşağıdaki eşleştirmelerden hangisi yanlıştır?",
+          "dogru_cevap": "Evliya Çelebi - kimya",
+          "secenekler": [
+            "Hârizmî - cebir",
+            "Evliya Çelebi - kimya",
+            "İbnü'l-Heysem - optik",
+            "Uluğ Bey - astronomi"
+          ]
+        }
+      ]
     }
   },
   {
@@ -3919,7 +4109,7 @@
     "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
     "motor_id": "E31",
     "motor_adi": "Yakalayıcı",
-    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "hedef": "İyi kavramları yakala, kötülerden kaç",
     "veri": {
       "sure": 60,
       "hiz": 1,
@@ -3970,13 +4160,389 @@
     }
   },
   {
+    "oyun_id": "U1_B1_E32",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Yarışması: Konu Panosu",
+    "motor_id": "E32",
+    "motor_adi": "Bilgi Yarışması",
+    "hedef": "Jeopardy panosunda soruları çöz",
+    "veri": {
+      "kategoriler": [
+        {
+          "ad": "Konu 1",
+          "sorular": [
+            {
+              "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
+              "dogru_cevap": "Sünnetullah",
+              "secenekler": [
+                "Karma",
+                "Sünnetullah",
+                "Tasavvuf",
+                "Tenasüh"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
+              "dogru_cevap": "Akıl ve vahiy birbirini tamamlar.",
+              "secenekler": [
+                "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+                "Akıl dinin yerine geçer.",
+                "Bilim sadece vahye dayanır.",
+                "Akıl ve vahiy birbirini tamamlar."
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
+              "dogru_cevap": "Beytü'l-hikme",
+              "secenekler": [
+                "Rasathane",
+                "Beytü'l-hikme",
+                "Tekke",
+                "Şifahane"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
+              "dogru_cevap": "Rasathane",
+              "secenekler": [
+                "Kervansaray",
+                "Medrese",
+                "Rasathane",
+                "Sıbyan mektebi"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 2",
+          "sorular": [
+            {
+              "soru": "Türklerin İslamiyet'i kabulünde derviş ve erenlerin rolü en çok hangi alanda görülmüştür?",
+              "dogru_cevap": "Halkın mistik ve şiir diliyle İslam'a ısındırılması",
+              "secenekler": [
+                "Yalnızca vergi düzeninin kurulması",
+                "Halkın mistik ve şiir diliyle İslam'a ısındırılması",
+                "Siyasi unvanların dağıtılması",
+                "Sadece askerî eğitim verilmesi"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "Aşağıdakilerden hangisi Caferîlik hakkında kitapta verilen bilgilerden biridir?",
+              "dogru_cevap": "On iki imamı inanç sistemi içinde değerlendirir.",
+              "secenekler": [
+                "Hiçbir hadîs kaynağını kabul etmez.",
+                "On iki imamı inanç sistemi içinde değerlendirir.",
+                "Kur'ân-ı Kerîm'i temel kaynak kabul etmez.",
+                "Yalnızca Hindistan'da yaygındır."
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Mevlana'nın düşünce sisteminin kendisinden sonra aldığı ad hangisidir?",
+              "dogru_cevap": "Mevlevîlik",
+              "secenekler": [
+                "Selefîlik",
+                "Mevlevîlik",
+                "Rıfâîlik",
+                "Kâdirîlik"
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Hacı Bektaş-ı Veli'nin öğretilerinden hangisi ahlaki öz denetimi vurgular?",
+              "dogru_cevap": "Eline, diline, beline sahip ol",
+              "secenekler": [
+                "Wu wei",
+                "Sekiz dilimli yol",
+                "Nirvana",
+                "Eline, diline, beline sahip ol"
+              ],
+              "puan": 400
+            }
+          ]
+        },
+        {
+          "ad": "Konu 3",
+          "sorular": [
+            {
+              "soru": "İcma kavramı aşağıdakilerden hangisini ifade eder?",
+              "dogru_cevap": "Müctehidlerin bir hüküm üzerinde görüş birliği etmesini",
+              "secenekler": [
+                "Sadece mahkeme kararını",
+                "Ticari anlaşmayı",
+                "Bir kişinin bireysel kanaatini",
+                "Müctehidlerin bir hüküm üzerinde görüş birliği etmesini"
+              ],
+              "puan": 100
+            },
+            {
+              "soru": "İslam'a göre özel mülkiyetle ilgili aşağıdakilerden hangisi doğrudur?",
+              "dogru_cevap": "Hırsızlık ve gasp yoluyla mülk edinmek yasaktır.",
+              "secenekler": [
+                "Emek olmadan her kazanç meşrudur.",
+                "Mülkiyetin hiçbir sınırı yoktur.",
+                "Hırsızlık ve gasp yoluyla mülk edinmek yasaktır.",
+                "İnfak tavsiye edilmez."
+              ],
+              "puan": 200
+            },
+            {
+              "soru": "Hazır gıdalardaki katkı maddeleriyle ilgili temel ölçüt aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Kaynağı ve dinen temiz olup olmaması belirleyicidir.",
+              "secenekler": [
+                "Rengi koyu olanlar haramdır.",
+                "Sadece ithal ürünler sakıncalıdır.",
+                "Kaynağı ve dinen temiz olup olmaması belirleyicidir.",
+                "Paketli olan her ürün helaldir."
+              ],
+              "puan": 300
+            },
+            {
+              "soru": "Bağımlılıkların dinen yasaklanmasının temel gerekçelerinden biri aşağıdakilerden hangisidir?",
+              "dogru_cevap": "Aklı ve bedeni zarara uğratmaları",
+              "secenekler": [
+                "Aklı ve bedeni zarara uğratmaları",
+                "Sadece pahalı olmaları",
+                "Sadece gelenek dışı olmaları",
+                "Yalnızca spor yapmayı azaltmaları"
+              ],
+              "puan": 400
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E33",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Bilgi Çarkı: Konu Soruları",
+    "motor_id": "E33",
+    "motor_adi": "Bilgi Çarkı",
+    "hedef": "Çark çevirerek soruları çöz",
+    "veri": {
+      "hak": 8,
+      "dilimler": [
+        {
+          "kategori": "Konu 1",
+          "renk": "#1DD1A1",
+          "puan": 50
+        },
+        {
+          "kategori": "Konu 2",
+          "renk": "#FECA57",
+          "puan": 100
+        },
+        {
+          "kategori": "Konu 3",
+          "renk": "#54A0FF",
+          "puan": 150
+        },
+        {
+          "kategori": "Konu 4",
+          "renk": "#FF9F43",
+          "puan": 200
+        },
+        {
+          "kategori": "İflasss!",
+          "renk": "#636e72",
+          "puan": -50
+        },
+        {
+          "kategori": "Bonus",
+          "renk": "#5F27CD",
+          "puan": 150
+        }
+      ],
+      "sorular": {
+        "Konu 1": [
+          {
+            "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
+            "dogru_cevap": "Sünnetullah",
+            "secenekler": [
+              "Karma",
+              "Sünnetullah",
+              "Tasavvuf",
+              "Tenasüh"
+            ]
+          },
+          {
+            "soru": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
+            "dogru_cevap": "Tıp",
+            "secenekler": [
+              "Coğrafya",
+              "Matematik",
+              "Tıp",
+              "Hadîs"
+            ]
+          },
+          {
+            "soru": "Müslüman bilim insanlarının Batı düşüncesine etkisi en çok hangi iki hareketle ilişkilendirilir?",
+            "dogru_cevap": "Reform ve Rönesans",
+            "secenekler": [
+              "Reform ve Rönesans",
+              "Hümanizm ve Romantizm",
+              "Coğrafi Keşifler ve Kolonyalizm",
+              "Aydınlanma ve Sanayi Devrimi"
+            ]
+          },
+          {
+            "soru": "Şifahanelerle ilgili aşağıdakilerden hangisi çıkarılamaz?",
+            "dogru_cevap": "Şifahaneler yalnızca savaş zamanı kullanılmıştır.",
+            "secenekler": [
+              "Bazı hastaneler külliye şeklinde kurulmuştur.",
+              "Ruh ve sinir hastalıkları için özel uygulamalar geliştirilmiştir.",
+              "Sadece tedavi değil eğitim faaliyeti de yürütülmüştür.",
+              "Şifahaneler yalnızca savaş zamanı kullanılmıştır."
+            ]
+          }
+        ],
+        "Konu 2": [
+          {
+            "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
+            "dogru_cevap": "Akıl ve vahiy birbirini tamamlar.",
+            "secenekler": [
+              "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+              "Akıl dinin yerine geçer.",
+              "Bilim sadece vahye dayanır.",
+              "Akıl ve vahiy birbirini tamamlar."
+            ]
+          },
+          {
+            "soru": "Dâru'l-kurrâ kurumlarının temel amacı aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek",
+            "secenekler": [
+              "Devlet görevlisi yetiştirmek",
+              "Ticaret hukuku öğretmek",
+              "Sadece astronomi öğretmek",
+              "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek"
+            ]
+          },
+          {
+            "soru": "Fâtır Sûresi 27-28. âyetlerde öne çıkan temel vurgu aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Yaratılıştaki çeşitlilikten hareketle ilim ve tefekkür",
+            "secenekler": [
+              "Sadece ibadet şekilleri",
+              "Siyasi yönetim ilkeleri",
+              "Yaratılıştaki çeşitlilikten hareketle ilim ve tefekkür",
+              "Ticaret kuralları"
+            ]
+          },
+          {
+            "soru": "Aşağıdakilerden hangisi Müslüman bilginlerin coğrafya alanındaki katkılarından biridir?",
+            "dogru_cevap": "Piri Reis'in haritaları",
+            "secenekler": [
+              "Hucurât Sûresi tefsiri",
+              "Dâru'l-hadîs kurulması",
+              "Semâ töreninin düzenlenmesi",
+              "Piri Reis'in haritaları"
+            ]
+          }
+        ],
+        "Konu 3": [
+          {
+            "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
+            "dogru_cevap": "Beytü'l-hikme",
+            "secenekler": [
+              "Rasathane",
+              "Beytü'l-hikme",
+              "Tekke",
+              "Şifahane"
+            ]
+          },
+          {
+            "soru": "Selçuklular zamanında sistemli medreselerin kurucusu olarak kim kabul edilir?",
+            "dogru_cevap": "Nizâmülmülk",
+            "secenekler": [
+              "Uluğ Bey",
+              "İbn Haldun",
+              "Câbir bin Hayyan",
+              "Nizâmülmülk"
+            ]
+          },
+          {
+            "soru": "Kitaba göre bir bilimsel çalışmanın İslam açısından değer taşıması için aşağıdakilerden hangisi gerekli değildir?",
+            "dogru_cevap": "Sırf yıkıcı güç üretmeyi amaçlaması",
+            "secenekler": [
+              "İnsana ve canlılara fayda sağlaması",
+              "Ahlaki sınırlara bağlı kalması",
+              "Sırf yıkıcı güç üretmeyi amaçlaması",
+              "Allah'ın yarattığı düzeni anlamaya katkı vermesi"
+            ]
+          },
+          {
+            "soru": "Fâtır Sûresi 28. âyete göre Allah'tan gereğince korkanların niteliği nedir?",
+            "dogru_cevap": "Âlim olmaları",
+            "secenekler": [
+              "Savaşçı olmaları",
+              "Zengin olmaları",
+              "Yalnız yaşamaları",
+              "Âlim olmaları"
+            ]
+          }
+        ],
+        "Konu 4": [
+          {
+            "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
+            "dogru_cevap": "Rasathane",
+            "secenekler": [
+              "Kervansaray",
+              "Medrese",
+              "Rasathane",
+              "Sıbyan mektebi"
+            ]
+          },
+          {
+            "soru": "Aşağıdaki eşleştirmelerden hangisi yanlıştır?",
+            "dogru_cevap": "Evliya Çelebi - kimya",
+            "secenekler": [
+              "Hârizmî - cebir",
+              "Evliya Çelebi - kimya",
+              "İbnü'l-Heysem - optik",
+              "Uluğ Bey - astronomi"
+            ]
+          },
+          {
+            "soru": "Tercüme hareketleriyle İslam dünyasına giren felsefenin etkisi hakkında aşağıdakilerden hangisi doğrudur?",
+            "dogru_cevap": "Felsefe İslam düşüncesiyle yeniden yorumlanmıştır.",
+            "secenekler": [
+              "Yalnızca dinî ilimler tamamen terk edilmiştir.",
+              "Bilimsel gelişme durmuş ve düşünce zayıflamıştır.",
+              "Felsefe İslam düşüncesiyle yeniden yorumlanmıştır.",
+              "Yalnızca Hint metinleri çevrilmiştir."
+            ]
+          },
+          {
+            "soru": "Türklerin İslamiyet'i benimsemelerinde etkili olan savaş aşağıdakilerden hangisidir?",
+            "dogru_cevap": "Talas Savaşı",
+            "secenekler": [
+              "Talas Savaşı",
+              "Yermük Savaşı",
+              "Ankara Savaşı",
+              "Bedir Savaşı"
+            ]
+          }
+        ],
+        "İflasss!": [],
+        "Bonus": []
+      }
+    }
+  },
+  {
     "oyun_id": "U1_B1_E35",
     "bolum_id": "U1_B1",
     "unite": "1. Ünite",
     "baslik": "Sürpriz Kutu: Konu Soruları",
     "motor_id": "E35",
     "motor_adi": "Sürpriz Kutu",
-    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "hedef": "Sürpriz kutulardan çıkan soruları çöz",
     "veri": {
       "kutular": [
         {
@@ -3994,79 +4560,79 @@
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Bilimsel araştırmanın evrendeki düzeni anlamaya çalışması, kitapta hangi kavramla ilişkilendirilir?",
             "secenekler": [
-              "A) Akıl dinin yerine geçer.",
-              "B) Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
-              "C) Akıl ve vahiy birbirini tamamlar.",
-              "D) Bilim sadece vahye dayanır."
+              "Karma",
+              "Sünnetullah",
+              "Tasavvuf",
+              "Tenasüh"
             ],
-            "dogru_cevap": "C"
+            "dogru_cevap": "Sünnetullah"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Kur'ân-ı Kerîm ve akıl ilişkisi bakımından aşağıdakilerden hangisi doğrudur?",
             "secenekler": [
-              "A) Bir kişinin bireysel kanaatini",
-              "B) Müctehidlerin bir hüküm üzerinde görüş birliği etmesini",
-              "C) Sadece mahkeme kararını",
-              "D) Ticari anlaşmayı"
+              "Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+              "Akıl dinin yerine geçer.",
+              "Bilim sadece vahye dayanır.",
+              "Akıl ve vahiy birbirini tamamlar."
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Akıl ve vahiy birbirini tamamlar."
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Abbâsîler döneminde tercüme ve araştırma faaliyetlerinin merkezi olan kurum hangisidir?",
             "secenekler": [
-              "A) Matematik",
-              "B) Coğrafya",
-              "C) Tıp",
-              "D) Hadîs"
+              "Rasathane",
+              "Beytü'l-hikme",
+              "Tekke",
+              "Şifahane"
             ],
-            "dogru_cevap": "C"
+            "dogru_cevap": "Beytü'l-hikme"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Aşağıdakilerden hangisi İslam medeniyetinde astronomik gözlemler için kurulan kurumlardan biridir?",
             "secenekler": [
-              "A) Sadece ekonomik değerleriyle",
-              "B) Bereket ve doğurganlık sembolü olarak görülmeleriyle",
-              "C) Savaşçılığı temsil etmeleriyle",
-              "D) Nirvana'ya ulaşmalarıyla"
+              "Kervansaray",
+              "Medrese",
+              "Rasathane",
+              "Sıbyan mektebi"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Rasathane"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "El-Kânûn fi't-Tıbb adlı eser hangi bilim alanıyla ilişkilidir?",
             "secenekler": [
-              "A) Tenasüh",
-              "B) İctihad",
-              "C) Semah",
-              "D) Avatar"
+              "Coğrafya",
+              "Matematik",
+              "Tıp",
+              "Hadîs"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Tıp"
           }
         },
         {
           "tip": "soru",
           "icerik": {
-            "soru": "",
+            "soru": "Dâru'l-kurrâ kurumlarının temel amacı aşağıdakilerden hangisidir?",
             "secenekler": [
-              "A) Astronomi kuramı geliştirmesi",
-              "B) Ahilik teşkilatını kurumsallaştırması",
-              "C) Budizm'i yayması",
-              "D) Rasathane inşa etmesi"
+              "Devlet görevlisi yetiştirmek",
+              "Ticaret hukuku öğretmek",
+              "Sadece astronomi öğretmek",
+              "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek"
             ],
-            "dogru_cevap": "B"
+            "dogru_cevap": "Kur'ân-ı Kerîm kıraati ve hâfızlık öğretmek"
           }
         }
       ]
