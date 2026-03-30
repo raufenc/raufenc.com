@@ -249,15 +249,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </label>
         <textarea id="fContent" placeholder="Haber içeriği..."></textarea>
       </div>
-      <div class="field-2">
-        <div class="field">
-          <label>Görsel URL <span style="font-weight:400;color:#aaa">(isteğe bağlı)</span></label>
-          <input id="fImage" placeholder="https://...">
+      <div class="field">
+        <label>Görsel <span style="font-weight:400;color:#aaa">(URL girin veya cihazdan yükleyin)</span></label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="fImage" placeholder="https://..." style="flex:1;">
+          <button type="button" class="btn btn-gray" style="white-space:nowrap;padding:9px 14px;" onclick="document.getElementById('imgFileInput').click()" id="uploadImgBtn">📷 Yükle</button>
+          <input type="file" id="imgFileInput" accept="image/*" style="display:none;" onchange="uploadImage(this)">
         </div>
-        <div class="field" style="display:flex;align-items:center;gap:10px;padding-top:26px;">
-          <input type="checkbox" id="fFeatured" style="width:auto;height:18px;cursor:pointer;">
-          <label for="fFeatured" style="margin:0;cursor:pointer;font-weight:600;">⭐ Öne Çıkar</label>
+        <div id="imgUploadStatus" style="font-size:.8rem;margin-top:6px;"></div>
+        <div id="imgPreview" style="margin-top:8px;display:none;">
+          <img id="imgPreviewEl" style="max-height:120px;border-radius:6px;border:1px solid #e2e8f0;" alt="">
         </div>
+      </div>
+      <div class="field" style="display:flex;align-items:center;gap:10px;">
+        <input type="checkbox" id="fFeatured" style="width:auto;height:18px;cursor:pointer;">
+        <label for="fFeatured" style="margin:0;cursor:pointer;font-weight:600;">⭐ Öne Çıkar</label>
       </div>
       <!-- Hidden fields -->
       <input type="hidden" id="fSlug">
@@ -433,6 +439,8 @@ function showEdit(idx) {
   document.getElementById('fSourceUrl').value = item.source_url || '';
   document.getElementById('deleteBtn').style.display = idx !== null ? 'inline-flex' : 'none';
   document.getElementById('editNotice').innerHTML = '';
+  document.getElementById('imgUploadStatus').innerHTML = '';
+  updateImgPreview(item.image || '');
   showScreen('editScreen');
 }
 
@@ -502,6 +510,62 @@ function cleanHtml() {
   ta.value = h.trim();
   document.getElementById('editNotice').innerHTML = '<div class="notice ok">✅ HTML temizlendi</div>';
   setTimeout(() => { document.getElementById('editNotice').innerHTML = ''; }, 2000);
+}
+
+// Also update preview when URL is typed manually
+document.addEventListener('DOMContentLoaded', () => {
+  const fi = document.getElementById('fImage');
+  if (fi) fi.addEventListener('input', () => updateImgPreview(fi.value));
+});
+
+function updateImgPreview(url) {
+  const prev = document.getElementById('imgPreview');
+  const el = document.getElementById('imgPreviewEl');
+  if (url && url.startsWith('http')) {
+    el.src = url;
+    prev.style.display = 'block';
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
+async function uploadImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const status = document.getElementById('imgUploadStatus');
+  const btn = document.getElementById('uploadImgBtn');
+  btn.disabled = true;
+  status.innerHTML = '<span style="color:#888;">⏳ Yükleniyor...</span>';
+
+  try {
+    // Read file as base64
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = e => res(e.target.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    // Unique filename: timestamp + original name
+    const ext = file.name.split('.').pop().toLowerCase();
+    const ts = Date.now();
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const filename = `${ts}_${safeName}`;
+
+    const r = await fetch(API, { method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pw, type: 'upload', filename, content: base64 }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Yükleme hatası');
+
+    document.getElementById('fImage').value = d.url;
+    updateImgPreview(d.url);
+    status.innerHTML = '<span style="color:#15803d;">✅ Yüklendi! URL kopyalandı.</span>';
+    setTimeout(() => { status.innerHTML = ''; }, 3000);
+  } catch(e) {
+    status.innerHTML = `<span style="color:#dc2626;">❌ ${e.message}</span>`;
+  }
+  btn.disabled = false;
+  input.value = '';
 }
 
 async function showEvents() {

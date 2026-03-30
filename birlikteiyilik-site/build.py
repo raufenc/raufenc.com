@@ -196,12 +196,12 @@ def build_site(base_path=''):
 
     # ── 6) Base path post-processing ──
     if base_path:
+        escaped_base = re.escape(base_path.lstrip('/'))
         for html_file in DIST_DIR.rglob('*.html'):
             text = html_file.read_text(encoding='utf-8')
-            # Replace internal absolute paths with base-prefixed ones
-            # href="/xxx" → href="/base/xxx" (but not href="http" or href="#" or href="{{ already done }}")
-            text = re.sub(r'href="(/(?!/))', f'href="{base_path}\\1', text)
-            text = re.sub(r'src="(/(?!/))', f'src="{base_path}\\1', text)
+            # href="/xxx" → href="/base/xxx" (skip already-prefixed and anchor-only URLs)
+            text = re.sub(r'href="(/(?!' + escaped_base + r'))', f'href="{base_path}\\1', text)
+            text = re.sub(r'src="(/(?!' + escaped_base + r'))', f'src="{base_path}\\1', text)
             html_file.write_text(text, encoding='utf-8')
         print(f"✅ Base path '{base_path}' uygulandı")
 
@@ -217,4 +217,9 @@ if __name__ == '__main__':
         idx = sys.argv.index('--base')
         if idx + 1 < len(sys.argv):
             base = sys.argv[idx + 1].rstrip('/')
+    # --output ../birlikteiyilik-v2 to override DIST_DIR
+    if '--output' in sys.argv:
+        idx = sys.argv.index('--output')
+        if idx + 1 < len(sys.argv):
+            DIST_DIR = Path(sys.argv[idx + 1])
     build_site(base_path=base)
