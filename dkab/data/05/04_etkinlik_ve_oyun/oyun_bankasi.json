@@ -3620,5 +3620,264 @@
     },
     "kazanma_kosulu": "Dört maddeyi de tamamla",
     "tasarimci_notu": "Tamamlanan maddeler rozet kazanımına bağlanabilir."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Cemaatle kılınması gerekmez",
+            "B) Haftada bir kılınan farz namâzlardandır",
+            "C) Yalnız ramazan ayında kılınır"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Yalnız kendileri için dua etmeyi",
+            "B) Selâmlaşmanın ve bütün müminler için hayır dilemeyi",
+            "C) Namâzın sadece bireysel olduğunu"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Alışveriş hukuku ve miras",
+            "B) İman esasları, ahiret ve ahlâk",
+            "C) Sadece savaş kuralları"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Kelimeişehâdet",
+            "B) Ezan",
+            "C) Sübhaneke"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Mimari ölçüler",
+            "B) İnanç",
+            "C) Trafik kuralları"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Mescid-i Nebevî",
+            "B) Kâbe",
+            "C) Mescid-i Aksâ"
+          ],
+          "hiz": 2
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.4,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Dürüstlük",
+          "emoji": "💚",
+          "puan": 10
+        },
+        {
+          "metin": "Paylaşmak",
+          "emoji": "🤝",
+          "puan": 10
+        },
+        {
+          "metin": "Saygı",
+          "emoji": "🙏",
+          "puan": 10
+        },
+        {
+          "metin": "Yardım",
+          "emoji": "❤️",
+          "puan": 15
+        },
+        {
+          "metin": "Sabır",
+          "emoji": "⏳",
+          "puan": 10
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Yalan",
+          "emoji": "🤥",
+          "ceza": 8
+        },
+        {
+          "metin": "Hırsızlık",
+          "emoji": "😈",
+          "ceza": 10
+        },
+        {
+          "metin": "Kıskançlık",
+          "emoji": "😒",
+          "ceza": 8
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Cemaatle kılınması gerekmez",
+              "B) Haftada bir kılınan farz namâzlardandır",
+              "C) Yalnız ramazan ayında kılınır",
+              "D) Sadece iki rekât sünnetten oluşur"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Yalnız kendileri için dua etmeyi",
+              "B) Selâmlaşmanın ve bütün müminler için hayır dilemeyi",
+              "C) Namâzın sadece bireysel olduğunu",
+              "D) Sadece Arapça öğrenmeyi"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Alışveriş hukuku ve miras",
+              "B) İman esasları, ahiret ve ahlâk",
+              "C) Sadece savaş kuralları",
+              "D) Mimari sanatlar"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Kelimeişehâdet",
+              "B) Ezan",
+              "C) Sübhaneke",
+              "D) Kunut"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Mimari ölçüler",
+              "B) İnanç",
+              "C) Trafik kuralları",
+              "D) Spor branşları"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Mescid-i Nebevî",
+              "B) Kâbe",
+              "C) Mescid-i Aksâ",
+              "D) Kubâ Mescidi"
+            ],
+            "dogru_cevap": "C"
+          }
+        }
+      ]
+    }
   }
 ]

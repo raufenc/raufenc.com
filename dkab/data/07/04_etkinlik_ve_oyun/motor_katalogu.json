@@ -340,5 +340,157 @@
     "puanlama": "görselleştirme",
     "geri_bildirim": "yeni rozet kazanıldığında kutlama",
     "ustalik": "tüm rozetleri topla"
+  },
+  {
+    "motor_id": "E25",
+    "ad": "Kelime Tahmin (Adam Asmaca)",
+    "kategori": "vocabulary",
+    "amac": "Gizli kelimeyi harflere tıklayarak tahmin et.",
+    "ui": "DOM - darağaç SVG + harf klavyesi",
+    "veri_alanlari": [
+      "kelimeler[]{kelime,ipucu,kategori}"
+    ],
+    "puanlama": "Her doğru harf puan kazandırır",
+    "geri_bildirim": "Yanlış tahminlerde adam şekli tamamlanır",
+    "ustalik": "Tüm kelimeleri 6 hak altında çöz"
+  },
+  {
+    "motor_id": "E26",
+    "ad": "Şifre Çözücü",
+    "kategori": "vocabulary",
+    "amac": "Sembollerden harfleri çöz, gizli mesajı aç.",
+    "ui": "DOM - sembol tablosu + harf butonları",
+    "veri_alanlari": [
+      "sifreler[]{sifreli_metin,harf_ipuclari,cozum,soru}"
+    ],
+    "puanlama": "Her harf çözümü puan",
+    "geri_bildirim": "Anlık sembol→harf eşleşmesi görünür",
+    "ustalik": "Tüm şifreleri çöz"
+  },
+  {
+    "motor_id": "E27",
+    "ad": "Uzay Nişancısı",
+    "kategori": "action",
+    "amac": "Uzay gemisiyle doğru cevap hedefini vur!",
+    "ui": "Canvas 2D - gemi + düşen hedefler",
+    "veri_alanlari": [
+      "dalgalar[]{soru,dogru,yanlis[],hiz}"
+    ],
+    "puanlama": "Her doğru isabet puan, yanlışta can kaybi",
+    "geri_bildirim": "Patlama efekti + ses",
+    "ustalik": "Tüm dalgaları can kaybetmeden geç"
+  },
+  {
+    "motor_id": "E29",
+    "ad": "Yarış / Tırmanış",
+    "kategori": "race",
+    "amac": "Doğru cevap vererek rakibi geç, zirveye ulaş.",
+    "ui": "Canvas 2D - dikey yol + AI rakip",
+    "veri_alanlari": [
+      "sorular[]{soru,secenekler,dogru_cevap}",
+      "rakip_zorlugu"
+    ],
+    "puanlama": "Her doğru = +1 adım, yanlış = -1 adım",
+    "geri_bildirim": "Karakter pozisyon animasyonu",
+    "ustalik": "Rakipten önce zirveye ulaş"
+  },
+  {
+    "motor_id": "E30",
+    "ad": "Halat Çekme",
+    "kategori": "race",
+    "amac": "Doğru cevapla bilgi tarafını kazandır.",
+    "ui": "Canvas 2D - halat + iki karakter",
+    "veri_alanlari": [
+      "sorular[]{soru,secenekler,dogru_cevap}",
+      "cekme_gucu"
+    ],
+    "puanlama": "Her doğru halatı bilgiye çeker",
+    "geri_bildirim": "Halat animasyonu + denge göstergesi",
+    "ustalik": "Halatı tamamen bilgi tarafına çek"
+  },
+  {
+    "motor_id": "E31",
+    "ad": "Yakalayıcı (Catcher)",
+    "kategori": "action",
+    "amac": "İyi kavramları yakala, kötülerden kaç!",
+    "ui": "Canvas 2D - sepet + düşen nesneler",
+    "veri_alanlari": [
+      "iyi[]{metin,emoji,puan}",
+      "kotu[]{metin,emoji,ceza}",
+      "sure",
+      "hiz"
+    ],
+    "puanlama": "İyi=puan, kötü=can kaybı",
+    "geri_bildirim": "Parçacık efektleri + ses",
+    "ustalik": "Sure dolana kadar hayatta kal"
+  },
+  {
+    "motor_id": "E32",
+    "ad": "Bilgi Yarışması (Jeopardy)",
+    "kategori": "quiz",
+    "amac": "Pano üzerinden kategori ve puan seç, soruyu çöz.",
+    "ui": "DOM - Jeopardy panosu + modal soru",
+    "veri_alanlari": [
+      "kategoriler[]{ad,sorular[]{puan,soru,secenekler,dogru_cevap}}"
+    ],
+    "puanlama": "Puan seviyesine göre değişken",
+    "geri_bildirim": "Hücre yeşil/kırmızı renkle kapanır",
+    "ustalik": "Tüm hücreleri doğru tamamla"
+  },
+  {
+    "motor_id": "E33",
+    "ad": "Bilgi Çarkı (Çarkıfelek)",
+    "kategori": "chance",
+    "amac": "Çarkı döndür, durulan kategoriden soru çöz.",
+    "ui": "Canvas çark + DOM soru paneli",
+    "veri_alanlari": [
+      "dilimler[]{kategori,renk,puan}",
+      "sorular{kategori:[...]}",
+      "hak"
+    ],
+    "puanlama": "Dilim puanına göre değişken",
+    "geri_bildirim": "Çark dönüş animasyonu + ses",
+    "ustalik": "Tüm hakları kullanarak yüksek puan yap"
+  },
+  {
+    "motor_id": "E34",
+    "ad": "Sürükle & Sınıfla v2",
+    "kategori": "classification",
+    "amac": "Kartları doğru kategoriye sürükle-bırak.",
+    "ui": "DOM - Pointer Events drag-drop",
+    "veri_alanlari": [
+      "kategoriler[]{ad,renk}",
+      "kartlar[]{metin,dogru_kategori}"
+    ],
+    "puanlama": "Her doğru yerleştirme puan",
+    "geri_bildirim": "Yanlışta kart geri döner (animasyon)",
+    "ustalik": "Tüm kartları doğru yerleştir"
+  },
+  {
+    "motor_id": "E35",
+    "ad": "Sürpriz Kutu",
+    "kategori": "surprise",
+    "amac": "Hediye kutusunu aç, sürpriz içeriği bul.",
+    "ui": "DOM - CSS 3D flip animasyonu",
+    "veri_alanlari": [
+      "kutular[]{tip:soru|bonus|joker,icerik}"
+    ],
+    "puanlama": "Soru doğruysa puan, bonus=hazır puan",
+    "geri_bildirim": "3D açılma animasyonu + ses",
+    "ustalik": "Tüm kutuları aç"
+  },
+  {
+    "motor_id": "E36",
+    "ad": "Kelime Avı (Word Search)",
+    "kategori": "vocabulary",
+    "amac": "Harf tablosunda gizli terimleri bul.",
+    "ui": "Canvas 2D - harf ızgarası + sürükleme",
+    "veri_alanlari": [
+      "kelimeler[]{kelime,ipucu}",
+      "grid_boyut"
+    ],
+    "puanlama": "Her bulunan kelime puan",
+    "geri_bildirim": "Kelime vurgulanır + ses",
+    "ustalik": "Tüm kelimeleri bul"
   }
 ]

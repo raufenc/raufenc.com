@@ -3812,5 +3812,264 @@
     },
     "kazanma_kosulu": "Tüm maddeleri işaretle",
     "tasarimci_notu": "Öğrenci tamamlamadıklarını tekrar planına ekleyebilir."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Akıl dinin yerine geçer.",
+            "B) Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+            "C) Akıl ve vahiy birbirini tamamlar."
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Bir kişinin bireysel kanaatini",
+            "B) Müctehidlerin bir hüküm üzerinde görüş birliği etmesini",
+            "C) Sadece mahkeme kararını"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Matematik",
+            "B) Coğrafya",
+            "C) Tıp"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Sadece ekonomik değerleriyle",
+            "B) Bereket ve doğurganlık sembolü olarak görülmeleriyle",
+            "C) Savaşçılığı temsil etmeleriyle"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Tenasüh",
+            "B) İctihad",
+            "C) Semah"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Astronomi kuramı geliştirmesi",
+            "B) Ahilik teşkilatını kurumsallaştırması",
+            "C) Budizm'i yayması"
+          ],
+          "hiz": 2
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.85,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Takva",
+          "emoji": "🌟",
+          "puan": 20
+        },
+        {
+          "metin": "Tevazu",
+          "emoji": "🌱",
+          "puan": 15
+        },
+        {
+          "metin": "İhsan",
+          "emoji": "✨",
+          "puan": 20
+        },
+        {
+          "metin": "Zühd",
+          "emoji": "🌙",
+          "puan": 20
+        },
+        {
+          "metin": "Verâ",
+          "emoji": "💎",
+          "puan": 20
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Nifak",
+          "emoji": "🐍",
+          "ceza": 15
+        },
+        {
+          "metin": "Şirk",
+          "emoji": "⚠️",
+          "ceza": 20
+        },
+        {
+          "metin": "Fesad",
+          "emoji": "💀",
+          "ceza": 15
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Akıl dinin yerine geçer.",
+              "B) Vahiy ile akıl arasında zorunlu bir çatışma vardır.",
+              "C) Akıl ve vahiy birbirini tamamlar.",
+              "D) Bilim sadece vahye dayanır."
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Bir kişinin bireysel kanaatini",
+              "B) Müctehidlerin bir hüküm üzerinde görüş birliği etmesini",
+              "C) Sadece mahkeme kararını",
+              "D) Ticari anlaşmayı"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Matematik",
+              "B) Coğrafya",
+              "C) Tıp",
+              "D) Hadîs"
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Sadece ekonomik değerleriyle",
+              "B) Bereket ve doğurganlık sembolü olarak görülmeleriyle",
+              "C) Savaşçılığı temsil etmeleriyle",
+              "D) Nirvana'ya ulaşmalarıyla"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Tenasüh",
+              "B) İctihad",
+              "C) Semah",
+              "D) Avatar"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Astronomi kuramı geliştirmesi",
+              "B) Ahilik teşkilatını kurumsallaştırması",
+              "C) Budizm'i yayması",
+              "D) Rasathane inşa etmesi"
+            ],
+            "dogru_cevap": "B"
+          }
+        }
+      ]
+    }
   }
 ]

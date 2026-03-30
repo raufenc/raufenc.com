@@ -2768,5 +2768,264 @@
     },
     "kazanma_kosulu": "Soruyu ilk denemede doğru cevapla",
     "tasarimci_notu": "Ünite sonu pekiştirmesi için hızlı geri bildirim sunulur."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Şavout",
+            "B) Evharistiya",
+            "C) Konfirmasyon"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Mihrak",
+            "B) Mîzan",
+            "C) Menora"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Kötülük Tanrı’nın yokluğunu kesin biçimde ispatlar.",
+            "B) İnsan aklı kötülüğün ardındaki bütün hikmetleri kuşatabilir.",
+            "C) Kötülük bazı durumlarda daha büyük bir iyiliğin ortaya çıkmasına vesile olabilir."
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Doğru yola yönelme ve yönlendirilme",
+            "B) Sadece korku duygusu",
+            "C) Geçici dünya menfaati"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Temsil",
+            "B) Teşrî",
+            "C) Tezkiye"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Teizm",
+            "B) Ateizm",
+            "C) Nihilizm"
+          ],
+          "hiz": 3
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.85,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Takva",
+          "emoji": "🌟",
+          "puan": 20
+        },
+        {
+          "metin": "Tevazu",
+          "emoji": "🌱",
+          "puan": 15
+        },
+        {
+          "metin": "İhsan",
+          "emoji": "✨",
+          "puan": 20
+        },
+        {
+          "metin": "Zühd",
+          "emoji": "🌙",
+          "puan": 20
+        },
+        {
+          "metin": "Verâ",
+          "emoji": "💎",
+          "puan": 20
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Nifak",
+          "emoji": "🐍",
+          "ceza": 15
+        },
+        {
+          "metin": "Şirk",
+          "emoji": "⚠️",
+          "ceza": 20
+        },
+        {
+          "metin": "Fesad",
+          "emoji": "💀",
+          "ceza": 15
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Şavout",
+              "B) Evharistiya",
+              "C) Konfirmasyon",
+              "D) Epifani"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Mihrak",
+              "B) Mîzan",
+              "C) Menora",
+              "D) Muvatta"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Kötülük Tanrı’nın yokluğunu kesin biçimde ispatlar.",
+              "B) İnsan aklı kötülüğün ardındaki bütün hikmetleri kuşatabilir.",
+              "C) Kötülük bazı durumlarda daha büyük bir iyiliğin ortaya çıkmasına vesile olabilir.",
+              "D) İnsanın özgür iradesi kötülükle hiçbir şekilde ilgili değildir."
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Doğru yola yönelme ve yönlendirilme",
+              "B) Sadece korku duygusu",
+              "C) Geçici dünya menfaati",
+              "D) Kaderi tamamen inkâr"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Temsil",
+              "B) Teşrî",
+              "C) Tezkiye",
+              "D) Tertil"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Teizm",
+              "B) Ateizm",
+              "C) Nihilizm",
+              "D) Materyalizm"
+            ],
+            "dogru_cevap": "A"
+          }
+        }
+      ]
+    }
   }
 ]

@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Unite Listesi (Duolingo tarzi yol haritasi) =====
 
-import { store } from '../store.js?v=11';
-import { getGradeInfo } from '../data-loader.js?v=11';
+import { store } from '../store.js?v=12';
+import { getGradeInfo } from '../data-loader.js?v=12';
 
 export function renderUnitList(el, grade, data, app, focusUnitId) {
     const { units, chapters, bookMap } = data;

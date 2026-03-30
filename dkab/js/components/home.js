@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Ana Sayfa (Dashboard) =====
 
-import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=11';
-import { getGradeInfo } from '../data-loader.js?v=11';
-import { getDailyMessage, getStreakMessage, getComebackMessage } from '../messages.js?v=11';
+import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=12';
+import { getGradeInfo } from '../data-loader.js?v=12';
+import { getDailyMessage, getStreakMessage, getComebackMessage } from '../messages.js?v=12';
 
 // Gunluk icerik: deterministik (yilin gunune gore)
 let _gunlukIcerik = null;

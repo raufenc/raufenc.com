@@ -2,8 +2,8 @@
 // Timer, can (hearts), skor, combo, durdurma, sonuc ekrani
 // Her yeni motor (E25-E36) bu kabuyu kullanir.
 
-import { store } from '../store.js?v=11';
-import { showConfetti, showXpPopup, playSound } from '../components/effects.js?v=11';
+import { store } from '../store.js?v=12';
+import { showConfetti, showXpPopup, playSound } from '../components/effects.js?v=12';
 
 const STAR_THRESHOLDS = [0.9, 0.7, 0.5]; // 3, 2, 1 yildiz
 

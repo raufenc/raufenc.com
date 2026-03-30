@@ -2678,5 +2678,264 @@
     },
     "kazanma_kosulu": "Soruyu doğru cevaplamak",
     "tasarimci_notu": "Doğru yanıttan sonra ünite rozeti parlayarak görünür."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Geri dönüşüm ve enerji verimliliğini desteklemesi",
+            "B) Tüketim bağımlılığını artırması",
+            "C) Çarpık kentleşmeyi yaygınlaştırması"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Kaynakları gelecek nesilleri de gözeterek koruma sorumluluğunu",
+            "B) Yalnız bireysel ibadet sorumluluğunu",
+            "C) Sadece tarih bilgisini"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Teleolojik delil",
+            "B) Sadece tarihî delil",
+            "C) Mütevatir haber"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Yenilenebilir enerji",
+            "B) Tükenmiş enerji",
+            "C) Kirletici enerji"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) İhsan",
+            "B) Tecessüs",
+            "C) Gıybet"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Ehlisünnet'e bağlı itikadî mezhepler",
+            "B) Şia içindeki fıkhî mezhepler",
+            "C) Sadece siyasî hareketler"
+          ],
+          "hiz": 2
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.85,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Takva",
+          "emoji": "🌟",
+          "puan": 20
+        },
+        {
+          "metin": "Tevazu",
+          "emoji": "🌱",
+          "puan": 15
+        },
+        {
+          "metin": "İhsan",
+          "emoji": "✨",
+          "puan": 20
+        },
+        {
+          "metin": "Zühd",
+          "emoji": "🌙",
+          "puan": 20
+        },
+        {
+          "metin": "Verâ",
+          "emoji": "💎",
+          "puan": 20
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Nifak",
+          "emoji": "🐍",
+          "ceza": 15
+        },
+        {
+          "metin": "Şirk",
+          "emoji": "⚠️",
+          "ceza": 20
+        },
+        {
+          "metin": "Fesad",
+          "emoji": "💀",
+          "ceza": 15
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Geri dönüşüm ve enerji verimliliğini desteklemesi",
+              "B) Tüketim bağımlılığını artırması",
+              "C) Çarpık kentleşmeyi yaygınlaştırması",
+              "D) Doğal kaynakların daha hızlı tükenmesi"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Kaynakları gelecek nesilleri de gözeterek koruma sorumluluğunu",
+              "B) Yalnız bireysel ibadet sorumluluğunu",
+              "C) Sadece tarih bilgisini",
+              "D) Mezhepler arası farkları"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Teleolojik delil",
+              "B) Sadece tarihî delil",
+              "C) Mütevatir haber",
+              "D) Sezgi delili"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Yenilenebilir enerji",
+              "B) Tükenmiş enerji",
+              "C) Kirletici enerji",
+              "D) Atık enerji"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) İhsan",
+              "B) Tecessüs",
+              "C) Gıybet",
+              "D) Bağy"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Ehlisünnet'e bağlı itikadî mezhepler",
+              "B) Şia içindeki fıkhî mezhepler",
+              "C) Sadece siyasî hareketler",
+              "D) Çevre ahlakı yorumları"
+            ],
+            "dogru_cevap": "A"
+          }
+        }
+      ]
+    }
   }
 ]

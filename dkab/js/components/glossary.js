@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Sozluk =====
 
-import { getGradeInfo } from '../data-loader.js?v=11';
-import { store } from '../store.js?v=11';
+import { getGradeInfo } from '../data-loader.js?v=12';
+import { store } from '../store.js?v=12';
 
 export function renderGlossary(el, grade, glossary, app) {
     // Rozet kontrolu: 50+ terim goruntuleme

@@ -4238,5 +4238,264 @@
     },
     "kazanma_kosulu": "ilk denemede doğru",
     "tasarimci_notu": "Seçenekler kapı biçiminde sunulur; doğru kapı açılırken açıklama görünür."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Uyarıları önemsememek gerekir.",
+            "B) Peygamberlerin çağrısına kulak vermek ve bozgunculuktan kaçınmak gerekir.",
+            "C) Güçlü olmak her zaman haklı olmak demektir."
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Dinin temel kaynaklarının aynı kaldığını",
+            "B) İnsanların farklı şartlarda yeni çözümler üretmeye çalıştığını",
+            "C) İslam’ın özünde bölünmüş ve eksik olduğunu"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) İnançta pazarlık yapılabileceğini",
+            "B) Tevhitten taviz verilmeyeceğini",
+            "C) Her inancın aynı olduğunu"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Parfüm sürmek",
+            "B) Kol saati takmak",
+            "C) Çanta kullanmak"
+          ],
+          "hiz": 3
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Davranışlarını kontrol edemez.",
+            "B) Görevlerini hatırlatılmadan yerine getirebilir.",
+            "C) Her istediğini hemen yapar."
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Doğru sözlü kişi",
+            "B) Kıskançlık eden kimse",
+            "C) Sabırlı insan"
+          ],
+          "hiz": 3
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.65,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Adalet",
+          "emoji": "⚖️",
+          "puan": 15
+        },
+        {
+          "metin": "İffet",
+          "emoji": "🌸",
+          "puan": 15
+        },
+        {
+          "metin": "Tevekkül",
+          "emoji": "🕊️",
+          "puan": 15
+        },
+        {
+          "metin": "Şükür",
+          "emoji": "🙏",
+          "puan": 10
+        },
+        {
+          "metin": "Merhamet",
+          "emoji": "💝",
+          "puan": 15
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Riya",
+          "emoji": "🎭",
+          "ceza": 10
+        },
+        {
+          "metin": "Kibir",
+          "emoji": "😤",
+          "ceza": 12
+        },
+        {
+          "metin": "Haset",
+          "emoji": "😒",
+          "ceza": 10
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Uyarıları önemsememek gerekir.",
+              "B) Peygamberlerin çağrısına kulak vermek ve bozgunculuktan kaçınmak gerekir.",
+              "C) Güçlü olmak her zaman haklı olmak demektir.",
+              "D) Mucize isteyen herkes doğru yoldadır."
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Dinin temel kaynaklarının aynı kaldığını",
+              "B) İnsanların farklı şartlarda yeni çözümler üretmeye çalıştığını",
+              "C) İslam’ın özünde bölünmüş ve eksik olduğunu",
+              "D) Yorumun insan unsuruyla ilgili olduğunu"
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) İnançta pazarlık yapılabileceğini",
+              "B) Tevhitten taviz verilmeyeceğini",
+              "C) Her inancın aynı olduğunu",
+              "D) Tebliğin gereksiz olduğunu"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Parfüm sürmek",
+              "B) Kol saati takmak",
+              "C) Çanta kullanmak",
+              "D) Diş fırçalamak"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Davranışlarını kontrol edemez.",
+              "B) Görevlerini hatırlatılmadan yerine getirebilir.",
+              "C) Her istediğini hemen yapar.",
+              "D) Sonuçlarını düşünmez."
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Doğru sözlü kişi",
+              "B) Kıskançlık eden kimse",
+              "C) Sabırlı insan",
+              "D) Yardımsever kişi"
+            ],
+            "dogru_cevap": "B"
+          }
+        }
+      ]
+    }
   }
 ]

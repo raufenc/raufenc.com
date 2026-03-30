@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=11';
-import { getGradeInfo } from '../data-loader.js?v=11';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=11';
+import { store } from '../store.js?v=12';
+import { getGradeInfo } from '../data-loader.js?v=12';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=12';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {
@@ -270,14 +270,66 @@ async function launchGame(container, game, data, app) {
     // Yeni motorlar (E25-E36): dinamik import
     try {
         switch (motorId) {
+            case 'E25': {
+                const { renderHangman } = await import('../engines/e25-kelime-tahmin.js?v=12');
+                renderHangman(container, game, data, app);
+                return;
+            }
+            case 'E26': {
+                const { renderCipherBreaker } = await import('../engines/e26-sifre-cozucu.js?v=12');
+                renderCipherBreaker(container, game, data, app);
+                return;
+            }
+            case 'E27': {
+                const { renderSpaceShooter } = await import('../engines/e27-uzay-nisancisi.js?v=12');
+                renderSpaceShooter(container, game, data, app);
+                return;
+            }
             case 'E28': {
-                const { renderBalloonPop } = await import('../engines/e28-balon-patlatma.js?v=11');
+                const { renderBalloonPop } = await import('../engines/e28-balon-patlatma.js?v=12');
                 renderBalloonPop(container, game, data, app);
                 return;
             }
-            // Gelecek motorlar buraya eklenecek:
-            // case 'E25': ...
-            // case 'E27': ...
+            case 'E29': {
+                const { renderRace } = await import('../engines/e29-yaris.js?v=12');
+                renderRace(container, game, data, app);
+                return;
+            }
+            case 'E30': {
+                const { renderTugOfWar } = await import('../engines/e30-halat-cekme.js?v=12');
+                renderTugOfWar(container, game, data, app);
+                return;
+            }
+            case 'E31': {
+                const { renderCatcher } = await import('../engines/e31-yakalayici.js?v=12');
+                renderCatcher(container, game, data, app);
+                return;
+            }
+            case 'E32': {
+                const { renderJeopardy } = await import('../engines/e32-bilgi-yarismasi.js?v=12');
+                renderJeopardy(container, game, data, app);
+                return;
+            }
+            case 'E33': {
+                const { renderSpinWheel } = await import('../engines/e33-bilgi-carki.js?v=12');
+                renderSpinWheel(container, game, data, app);
+                return;
+            }
+            case 'E34': {
+                const { renderDragClassify } = await import('../engines/e34-surukle-sinifla.js?v=12');
+                renderDragClassify(container, game, data, app);
+                return;
+            }
+            case 'E35': {
+                const { renderSurpriseBox } = await import('../engines/e35-surpriz-kutu.js?v=12');
+                renderSurpriseBox(container, game, data, app);
+                return;
+            }
+            case 'E36': {
+                const { renderWordSearch } = await import('../engines/e36-kelime-avi.js?v=12');
+                renderWordSearch(container, game, data, app);
+                return;
+            }
         }
     } catch (err) {
         console.warn('Motor yukleme hatasi:', motorId, err);

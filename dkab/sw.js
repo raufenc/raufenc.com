@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Service Worker (Offline Destek) =====
 // Cache-first for static assets and data, network-first for Firebase
 
-const CACHE_NAME = 'dkab-v11';
-const DATA_CACHE = 'dkab-data-v9';
+const CACHE_NAME = 'dkab-v12';
+const DATA_CACHE = 'dkab-data-v10';
 
 // Static assets to precache
 const PRECACHE_URLS = [
@@ -28,6 +28,23 @@ const PRECACHE_URLS = [
     '/dkab/js/components/assessment.js',
     '/dkab/js/components/goals.js',
     '/dkab/js/components/habits.js',
+    '/dkab/js/engines/game-shell.js',
+    '/dkab/js/engines/canvas-core.js',
+    '/dkab/js/engines/sound-fx.js',
+    '/dkab/js/engines/difficulty.js',
+    '/dkab/js/engines/sprite-renderer.js',
+    '/dkab/js/engines/e25-kelime-tahmin.js',
+    '/dkab/js/engines/e26-sifre-cozucu.js',
+    '/dkab/js/engines/e27-uzay-nisancisi.js',
+    '/dkab/js/engines/e28-balon-patlatma.js',
+    '/dkab/js/engines/e29-yaris.js',
+    '/dkab/js/engines/e30-halat-cekme.js',
+    '/dkab/js/engines/e31-yakalayici.js',
+    '/dkab/js/engines/e32-bilgi-yarismasi.js',
+    '/dkab/js/engines/e33-bilgi-carki.js',
+    '/dkab/js/engines/e34-surukle-sinifla.js',
+    '/dkab/js/engines/e35-surpriz-kutu.js',
+    '/dkab/js/engines/e36-kelime-avi.js',
 ];
 
 // Install: precache static assets

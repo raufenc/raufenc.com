@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Gelismis Ilerleme Panosu =====
 
-import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=11';
-import { getAllGrades, getGradeInfo, loadGradeEssentials } from '../data-loader.js?v=11';
-import { getUnitMasteryScore } from '../adaptive.js?v=11';
+import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=12';
+import { getAllGrades, getGradeInfo, loadGradeEssentials } from '../data-loader.js?v=12';
+import { getUnitMasteryScore } from '../adaptive.js?v=12';
 
 export async function renderProgressDashboard(el, app) {
     const user = store.user;

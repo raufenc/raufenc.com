@@ -4662,5 +4662,264 @@
     },
     "kazanma_kosulu": "Soruların tamamını doğru cevapla",
     "tasarimci_notu": "Her soru tek ekranda gösterilsin."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Doğruluğundan emin olunmayan bilgileri yaymak",
+            "B) Özel bilgileri herkese açık paylaşmak",
+            "C) Türkçeyi doğru kullanmak ve mahremiyeti korumak"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) İncil – Tevrat – Zebur – Kur'ân-ı Kerîm",
+            "B) Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
+            "C) Zebur – İncil – Tevrat – Kur'ân-ı Kerîm"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Gösteriş yapmayı",
+            "B) İncitmeden yardımlaşmayı",
+            "C) Sadece bireysel başarıyı"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) Vatan sevgisinin sorumluluk gerektirdiğini",
+            "B) Vatan sevgisinin sadece sözle gösterileceğini",
+            "C) Çalışmanın önemsiz olduğunu"
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Rahîm",
+            "B) Rahman",
+            "C) Hâdî"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) Bencilliği artırır",
+            "B) Sabır ve paylaşma duygusunu güçlendirir",
+            "C) İsraf alışkanlığını çoğaltır"
+          ],
+          "hiz": 1
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.4,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Dürüstlük",
+          "emoji": "💚",
+          "puan": 10
+        },
+        {
+          "metin": "Paylaşmak",
+          "emoji": "🤝",
+          "puan": 10
+        },
+        {
+          "metin": "Saygı",
+          "emoji": "🙏",
+          "puan": 10
+        },
+        {
+          "metin": "Yardım",
+          "emoji": "❤️",
+          "puan": 15
+        },
+        {
+          "metin": "Sabır",
+          "emoji": "⏳",
+          "puan": 10
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Yalan",
+          "emoji": "🤥",
+          "ceza": 8
+        },
+        {
+          "metin": "Hırsızlık",
+          "emoji": "😈",
+          "ceza": 10
+        },
+        {
+          "metin": "Kıskançlık",
+          "emoji": "😒",
+          "ceza": 8
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Doğruluğundan emin olunmayan bilgileri yaymak",
+              "B) Özel bilgileri herkese açık paylaşmak",
+              "C) Türkçeyi doğru kullanmak ve mahremiyeti korumak",
+              "D) Kaba ifadeleri normal görmek"
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) İncil – Tevrat – Zebur – Kur'ân-ı Kerîm",
+              "B) Tevrat – Zebur – İncil – Kur'ân-ı Kerîm",
+              "C) Zebur – İncil – Tevrat – Kur'ân-ı Kerîm",
+              "D) Tevrat – İncil – Zebur – Kur'ân-ı Kerîm"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Gösteriş yapmayı",
+              "B) İncitmeden yardımlaşmayı",
+              "C) Sadece bireysel başarıyı",
+              "D) Rekabeti"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Vatan sevgisinin sorumluluk gerektirdiğini",
+              "B) Vatan sevgisinin sadece sözle gösterileceğini",
+              "C) Çalışmanın önemsiz olduğunu",
+              "D) Bağımsızlığın kendiliğinden korunacağını"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Rahîm",
+              "B) Rahman",
+              "C) Hâdî",
+              "D) Rızık Veren"
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Bencilliği artırır",
+              "B) Sabır ve paylaşma duygusunu güçlendirir",
+              "C) İsraf alışkanlığını çoğaltır",
+              "D) Toplumdan uzaklaştırır"
+            ],
+            "dogru_cevap": "B"
+          }
+        }
+      ]
+    }
   }
 ]

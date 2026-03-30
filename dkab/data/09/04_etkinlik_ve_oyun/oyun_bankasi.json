@@ -3727,5 +3727,264 @@
     },
     "kazanma_kosulu": "Beş sorunun en az dördünü doğru cevapla.",
     "tasarimci_notu": "Quiz sonunda başarı rozeti gösterilsin."
+  },
+  {
+    "oyun_id": "U1_B1_E27",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Uzay Nişancısı: Konu Soruları",
+    "motor_id": "E27",
+    "motor_adi": "Uzay Nişancısı",
+    "hedef": "Soruları doğru cevaplarken uzay gemisi kullanmak",
+    "veri": {
+      "dalgalar": [
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) beşer",
+            "B) vahiy",
+            "C) Mekke"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "D",
+          "yanlis": [
+            "A) Ahlâkın tanımını, kaynağını ve İslâm ahlâkının mahiyetini açıklamak.",
+            "B) Adalet, şecaat, iffet ve hikmet erdemleri arasındaki ilişkiyi öğretmek.",
+            "C) İsrâ Sûresi 23-29. âyet-i kerîmelerinde yer alan ahlâk ilkelerini özetlemek."
+          ],
+          "hiz": 2
+        },
+        {
+          "soru": "",
+          "dogru": "A",
+          "yanlis": [
+            "A) ahlâk",
+            "B) vicdan",
+            "C) irade"
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "B",
+          "yanlis": [
+            "A) İslâm ahlâkının kaynağını ve amacını açıklar.",
+            "B) İslâm ahlâkının temel unsurlarını açıklar.",
+            "C) Ahlâk ile vicdan, akıl ve irade arasındaki ilişkiyi kurar."
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) Beşerî ve peygamberlik yönünü birlikte değerlendirir.",
+            "B) Hazret-i Muhammed'in (sallallâhu aleyhi ve sellem) örnekliğini açıklayabilir.",
+            "C) Hazret-i Muhammed'in (sallallâhu aleyhi ve sellem) yaşadığı çevreyi özetler."
+          ],
+          "hiz": 1
+        },
+        {
+          "soru": "",
+          "dogru": "C",
+          "yanlis": [
+            "A) beşer",
+            "B) vahiy",
+            "C) Ehl-i Beyt-i Mustafa"
+          ],
+          "hiz": 2
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E29",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yarış: Konu Soruları",
+    "motor_id": "E29",
+    "motor_adi": "Yarış",
+    "hedef": "Sorulara hızlı cevap vererek rakibi geçmek",
+    "veri": {
+      "rakip_zorlugu": 0.65,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E30",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Halat Çekme: Doğru mu Yanlış mı?",
+    "motor_id": "E30",
+    "motor_adi": "Halat Çekme",
+    "hedef": "Doğru cevap vererek bilgi tarafını güçlendirmek",
+    "veri": {
+      "cekme_gucu": 1,
+      "sorular": []
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E31",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Yakalayıcı: İyi ve Kötü Ahlak",
+    "motor_id": "E31",
+    "motor_adi": "Yakalayıcı",
+    "hedef": "İyi ve kötü ahlak kavramlarını ayırt etmek",
+    "veri": {
+      "sure": 60,
+      "hiz": 1,
+      "iyi": [
+        {
+          "metin": "Adalet",
+          "emoji": "⚖️",
+          "puan": 15
+        },
+        {
+          "metin": "İffet",
+          "emoji": "🌸",
+          "puan": 15
+        },
+        {
+          "metin": "Tevekkül",
+          "emoji": "🕊️",
+          "puan": 15
+        },
+        {
+          "metin": "Şükür",
+          "emoji": "🙏",
+          "puan": 10
+        },
+        {
+          "metin": "Merhamet",
+          "emoji": "💝",
+          "puan": 15
+        }
+      ],
+      "kotu": [
+        {
+          "metin": "Riya",
+          "emoji": "🎭",
+          "ceza": 10
+        },
+        {
+          "metin": "Kibir",
+          "emoji": "😤",
+          "ceza": 12
+        },
+        {
+          "metin": "Haset",
+          "emoji": "😒",
+          "ceza": 10
+        }
+      ]
+    }
+  },
+  {
+    "oyun_id": "U1_B1_E35",
+    "bolum_id": "U1_B1",
+    "unite": "1. Ünite",
+    "baslik": "Sürpriz Kutu: Konu Soruları",
+    "motor_id": "E35",
+    "motor_adi": "Sürpriz Kutu",
+    "hedef": "Sürpriz kutulardan çıkan soruları çözmek",
+    "veri": {
+      "kutular": [
+        {
+          "tip": "bonus",
+          "icerik": {
+            "bonus_xp": 25
+          }
+        },
+        {
+          "tip": "joker",
+          "icerik": {
+            "yardim": "İki yanlış seçenek elenir!"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) beşer",
+              "B) vahiy",
+              "C) Mekke",
+              "D) cahiliye"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Ahlâkın tanımını, kaynağını ve İslâm ahlâkının mahiyetini açıklamak.",
+              "B) Adalet, şecaat, iffet ve hikmet erdemleri arasındaki ilişkiyi öğretmek.",
+              "C) İsrâ Sûresi 23-29. âyet-i kerîmelerinde yer alan ahlâk ilkelerini özetlemek.",
+              "D) Dürüstlük, yardımseverlik, sabır ve adabımuaşeret gibi ahlâkî tutumların gerekliliğini göstermek."
+            ],
+            "dogru_cevap": "D"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) ahlâk",
+              "B) vicdan",
+              "C) irade",
+              "D) terbiye"
+            ],
+            "dogru_cevap": "A"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) İslâm ahlâkının kaynağını ve amacını açıklar.",
+              "B) İslâm ahlâkının temel unsurlarını açıklar.",
+              "C) Ahlâk ile vicdan, akıl ve irade arasındaki ilişkiyi kurar.",
+              "D) Erdemler arasındaki denge ve ilişkiyi sentezler."
+            ],
+            "dogru_cevap": "B"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) Beşerî ve peygamberlik yönünü birlikte değerlendirir.",
+              "B) Hazret-i Muhammed'in (sallallâhu aleyhi ve sellem) örnekliğini açıklayabilir.",
+              "C) Hazret-i Muhammed'in (sallallâhu aleyhi ve sellem) yaşadığı çevreyi özetler.",
+              "D) Onun örnekliğini kendi hayatı için anlamlı hâle getirir."
+            ],
+            "dogru_cevap": "C"
+          }
+        },
+        {
+          "tip": "soru",
+          "icerik": {
+            "soru": "",
+            "secenekler": [
+              "A) beşer",
+              "B) vahiy",
+              "C) Ehl-i Beyt-i Mustafa",
+              "D) Mekke"
+            ],
+            "dogru_cevap": "C"
+          }
+        }
+      ]
+    }
   }
 ]

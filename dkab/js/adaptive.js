@@ -1,6 +1,6 @@
 // ===== DKAB Akademi - 360° Adaptif Ogrenme Motoru =====
 
-import { store } from './store.js?v=11';
+import { store } from './store.js?v=12';
 
 /**
  * Adaptif ogrenme algoritmasi:
