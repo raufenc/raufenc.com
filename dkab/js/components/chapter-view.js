@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=10';
-import { getGradeInfo } from '../data-loader.js?v=10';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=10';
+import { store } from '../store.js?v=11';
+import { getGradeInfo } from '../data-loader.js?v=11';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=11';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {
@@ -264,10 +264,26 @@ function initGames(el, data, app) {
     });
 }
 
-function launchGame(container, game, data, app) {
+async function launchGame(container, game, data, app) {
     const motorId = game.motor_id;
 
-    // Route to appropriate engine
+    // Yeni motorlar (E25-E36): dinamik import
+    try {
+        switch (motorId) {
+            case 'E28': {
+                const { renderBalloonPop } = await import('../engines/e28-balon-patlatma.js?v=11');
+                renderBalloonPop(container, game, data, app);
+                return;
+            }
+            // Gelecek motorlar buraya eklenecek:
+            // case 'E25': ...
+            // case 'E27': ...
+        }
+    } catch (err) {
+        console.warn('Motor yukleme hatasi:', motorId, err);
+    }
+
+    // Mevcut motorlar (E01-E24): eski switch
     switch (motorId) {
         case 'E02': // Terim Kartlari (Flashcard)
             renderFlashcardGame(container, game, data, app);

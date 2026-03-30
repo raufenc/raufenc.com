@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Meydan Okuma =====
 
-import { store } from '../store.js?v=10';
-import { getDB, DB_PATHS } from '../firebase-config.js?v=10';
+import { store } from '../store.js?v=11';
+import { getDB, DB_PATHS } from '../firebase-config.js?v=11';
 
 const CHALLENGE_TOPICS = [
     'Allah\'ın (c.c.) isimlerinden birini anlat',

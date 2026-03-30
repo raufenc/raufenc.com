@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - 360° Sidebar Bileseni =====
 
-import { store } from '../store.js?v=10';
-import { getAllGrades } from '../data-loader.js?v=10';
+import { store } from '../store.js?v=11';
+import { getAllGrades } from '../data-loader.js?v=11';
 
 export function renderSidebar(el, app) {
     const user = store.user;

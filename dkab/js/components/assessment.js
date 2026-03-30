@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - 360° Degerlendirme (On-Test / Son-Test) =====
 
-import { store } from '../store.js?v=10';
-import { loadData, getGradeInfo } from '../data-loader.js?v=10';
-import { getMessage } from '../messages.js?v=10';
+import { store } from '../store.js?v=11';
+import { loadData, getGradeInfo } from '../data-loader.js?v=11';
+import { getMessage } from '../messages.js?v=11';
 
 /**
  * On-Test / Son-Test degerlendirme bileseni

@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Faz 4: Rehberli Calisma Modu =====
 // Baglam duyarli ipuclari + kisisellestirilmis calisma plani
 
-import { store } from '../store.js?v=10';
-import { loadGradeEssentials } from '../data-loader.js?v=10';
+import { store } from '../store.js?v=11';
+import { loadGradeEssentials } from '../data-loader.js?v=11';
 
 // Calisma ipuclari havuzu (bağlama gore secilir)
 const STUDY_TIPS = {
