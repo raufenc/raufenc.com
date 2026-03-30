@@ -1,0 +1,38 @@
+name: BIA Site Rebuild
+
+on:
+  push:
+    paths:
+      - 'birlikteiyilik-site/content/**'
+      - 'birlikteiyilik-site/templates/**'
+      - 'birlikteiyilik-site/static/**'
+      - 'birlikteiyilik-site/build.py'
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Jinja2
+        run: pip install jinja2
+
+      - name: Build site
+        run: python3 birlikteiyilik-site/build.py --base /birlikteiyilik-v2 --output birlikteiyilik-v2
+
+      - name: Commit and push rebuilt site
+        run: |
+          git config user.name "BIA Bot"
+          git config user.email "bot@birlikteiyilik.com"
+          git add birlikteiyilik-v2/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "BIA: site otomatik yeniden derlendi"
+            git push
+          fi
