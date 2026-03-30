@@ -305,7 +305,7 @@ const BOOK = [
     ]
   },
   {
-    "id": "hadisler",
+    "id": "ozel",
     "title": "Meşhur Sözleri",
     "color": "gold",
     "subs": [

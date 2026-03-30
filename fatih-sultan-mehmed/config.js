@@ -24,7 +24,13 @@ const SCHOLAR = {
     map: { title: 'Sefer Haritası', desc: 'Edirne\'den İstanbul\'a, Balkanlara ve Anadolu\'ya — 30 yıllık saltanat yolculuğu' },
     timeline: { title: 'Zaman Çizelgesi', desc: 'Edirne\'den ebediyyete — 49 yıllık bereketli ömür' },
     content: { title: 'Hayâtı ve Cihâdı', desc: 'Kaynak: İslâm Âlimleri Ansiklopedisi, Türkiye Gazetesi Yayınları' },
-    hadith: { title: 'Meşhur Sözleri ve Menkıbeleri', desc: 'Fâtih Sultan Mehmed Hân\'ın hikmet dolu sözleri' }
+    ozel: {
+      title: 'Meşhur Sözleri ve Menkıbeleri',
+      desc: 'Fâtih Sultan Mehmed Hân\'ın hikmet dolu sözleri',
+      navLabel: 'Sözleri',
+      icon: '⚔',
+      cardLabel: 'Meşhur Söz'
+    }
   },
   source: {
     name: 'İslâm Âlimleri Ansiklopedisi — Türkiye Gazetesi Yayınları',
