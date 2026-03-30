@@ -3,396 +3,363 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BİA Yönetim Paneli</title>
+<title>BİA Yönetim</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #222; min-height: 100vh; }
-.topbar { background: #E20439; color: #fff; padding: 12px 24px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
-.topbar-title { font-weight: 700; font-size: 1.1rem; }
-.topbar nav { margin-left: auto; display: flex; gap: 16px; align-items: center; }
-.topbar nav a { color: rgba(255,255,255,.85); text-decoration: none; font-size: .9rem; cursor: pointer; }
-.topbar nav a:hover { color: #fff; }
-#tokenDisplay { font-size: .8rem; opacity: .7; }
-.container { max-width: 900px; margin: 32px auto; padding: 0 16px; }
-h1 { font-size: 1.4rem; margin-bottom: 8px; color: #111; }
-.subtitle { color: #666; font-size: .9rem; margin-bottom: 24px; }
-.card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.08); padding: 24px; margin-bottom: 20px; }
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; border-radius: 7px; font-size: .88rem; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: background .15s; }
-.btn-primary { background: #E20439; color: #fff; }
-.btn-primary:hover { background: #B00030; }
-.btn-secondary { background: #f1f5f9; color: #334155; }
-.btn-secondary:hover { background: #e2e8f0; }
-.btn-danger { background: #fff; color: #dc2626; border: 1px solid #fca5a5; }
-.btn-danger:hover { background: #fef2f2; }
-.btn-green { background: #16a34a; color: #fff; }
-.btn-green:hover { background: #15803d; }
-.btn-sm { padding: 5px 11px; font-size: .8rem; }
-.btn:disabled { opacity: .5; cursor: not-allowed; }
-table { width: 100%; border-collapse: collapse; }
-th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: .88rem; vertical-align: middle; }
-th { background: #fafafa; font-weight: 600; color: #666; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
-tr:hover td { background: #fafafa; }
-.badge { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: .75rem; font-weight: 600; }
-.badge-duyuru { background: #dbeafe; color: #1d4ed8; }
-.badge-haber { background: #dcfce7; color: #15803d; }
-.badge-etkinlik { background: #fef9c3; color: #854d0e; }
-.badge-icerik { background: #f3e8ff; color: #7e22ce; }
-.actions { display: flex; gap: 6px; }
-.field { margin-bottom: 16px; }
-.field label { display: block; font-size: .83rem; font-weight: 600; color: #555; margin-bottom: 5px; }
+
+/* TOP BAR */
+.topbar { background: #E20439; color: #fff; padding: 0 20px; height: 56px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+.topbar-title { font-weight: 700; font-size: 1rem; }
+.topbar-nav { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.topbar-btn { background: rgba(255,255,255,.15); border: none; color: #fff; padding: 6px 14px; border-radius: 6px; font-size: .85rem; cursor: pointer; font-weight: 600; }
+.topbar-btn:hover { background: rgba(255,255,255,.25); }
+.topbar-btn.green { background: rgba(255,255,255,.9); color: #E20439; }
+.topbar-btn.green:hover { background: #fff; }
+
+/* LAYOUT */
+.container { max-width: 860px; margin: 28px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.08); padding: 28px; margin-bottom: 20px; }
+
+/* LOGIN */
+#loginScreen { display: none; }
+.login-wrap { max-width: 380px; margin: 70px auto; }
+.login-wrap h1 { font-size: 1.5rem; text-align: center; margin-bottom: 6px; }
+.login-wrap p { text-align: center; color: #888; font-size: .9rem; margin-bottom: 28px; }
+.login-logo { display: block; margin: 0 auto 20px; width: 60px; height: 60px; border-radius: 12px; background: #E20439; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #fff; font-weight: 800; }
+
+/* FORM FIELDS */
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: .83rem; font-weight: 600; color: #555; margin-bottom: 6px; }
 .field input, .field select, .field textarea {
-  width: 100%; padding: 9px 12px; border: 1.5px solid #d1d5db; border-radius: 7px;
-  font-size: .9rem; font-family: inherit; transition: border-color .15s;
+  width: 100%; padding: 10px 14px; border: 1.5px solid #d1d5db; border-radius: 8px;
+  font-size: .95rem; font-family: inherit; transition: border-color .15s;
 }
-.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #E20439; }
-.field textarea { min-height: 180px; resize: vertical; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-.filter-btn { padding: 5px 14px; border-radius: 20px; font-size: .8rem; border: none; cursor: pointer; background: #f1f5f9; color: #475569; font-weight: 500; }
-.filter-btn.active { background: #E20439; color: #fff; }
-.notice { padding: 12px 16px; border-radius: 8px; font-size: .88rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-.notice-warn { background: #fff7ed; border: 1px solid #fed7aa; color: #92400e; }
-.notice-ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
-.notice-err { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; }
-.notice-info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
-#loginScreen, #mainScreen, #editScreen { display: none; }
-#loginScreen.active, #mainScreen.active, #editScreen.active { display: block; }
-.login-box { max-width: 420px; margin: 80px auto; }
-.login-box h1 { text-align: center; margin-bottom: 8px; }
-.login-box .subtitle { text-align: center; margin-bottom: 32px; }
-.spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: #E20439; box-shadow: 0 0 0 3px rgba(226,4,57,.08); }
+.field textarea { min-height: 160px; resize: vertical; }
+.field-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px) { .field-2 { grid-template-columns: 1fr; } }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: .9rem; font-weight: 600; cursor: pointer; border: none; transition: background .15s; text-decoration: none; }
+.btn-red { background: #E20439; color: #fff; }
+.btn-red:hover { background: #B00030; }
+.btn-gray { background: #f1f5f9; color: #334155; }
+.btn-gray:hover { background: #e2e8f0; }
+.btn-del { background: #fff; color: #dc2626; border: 1.5px solid #fca5a5; }
+.btn-del:hover { background: #fef2f2; }
+.btn-block { width: 100%; justify-content: center; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* NOTICE */
+.notice { padding: 12px 16px; border-radius: 8px; font-size: .88rem; margin-bottom: 16px; }
+.ok { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+.err { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; }
+.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+
+/* NEWS LIST */
+#mainScreen { display: none; }
+.list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.list-header h1 { font-size: 1.2rem; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.filter { padding: 5px 13px; border-radius: 20px; font-size: .8rem; border: none; cursor: pointer; background: #f1f5f9; color: #475569; font-weight: 500; }
+.filter.on { background: #E20439; color: #fff; }
+.news-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: background .1s; }
+.news-item:hover { background: #fafafa; }
+.news-item:last-child { border-bottom: none; }
+.ni-date { font-size: .8rem; color: #888; white-space: nowrap; min-width: 90px; }
+.ni-title { flex: 1; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ni-star { font-size: .85rem; }
+.badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: .72rem; font-weight: 700; white-space: nowrap; }
+.b-duyuru { background: #dbeafe; color: #1d4ed8; }
+.b-haber { background: #dcfce7; color: #15803d; }
+.b-etkinlik { background: #fef9c3; color: #854d0e; }
+.b-icerik { background: #f3e8ff; color: #7e22ce; }
+.empty { text-align: center; padding: 40px; color: #aaa; font-size: .9rem; }
+
+/* EDIT FORM */
+#editScreen { display: none; }
+.edit-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.edit-header h1 { font-size: 1.2rem; }
+.edit-footer { display: flex; gap: 10px; margin-top: 20px; align-items: center; }
+
+/* SPINNER */
+.spin { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .6s linear infinite; vertical-align: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
-.truncate { max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.build-status { font-size: .82rem; color: #666; margin-top: 8px; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <span class="topbar-title">BİA Yönetim Paneli</span>
-  <nav>
-    <a onclick="showMain()">Haberler</a>
-    <a onclick="showEdit(null)" class="btn btn-primary btn-sm" style="margin:0;">+ Yeni</a>
-    <span id="tokenDisplay"></span>
-    <a onclick="logout()">Çıkış</a>
-  </nav>
+  <span class="topbar-title">BİA Yönetim</span>
+  <div class="topbar-nav" id="topNav" style="display:none">
+    <button class="topbar-btn" onclick="showMain()">Haberler</button>
+    <button class="topbar-btn" onclick="showEdit(null)">+ Yeni</button>
+    <button class="topbar-btn green" onclick="rebuild()" id="rebuildBtn">Yayınla</button>
+    <button class="topbar-btn" onclick="logout()">Çıkış</button>
+  </div>
 </div>
 
-<!-- LOGIN -->
+<!-- GİRİŞ -->
 <div id="loginScreen">
   <div class="container">
-    <div class="login-box card">
-      <h1>Giriş</h1>
-      <p class="subtitle">GitHub Personal Access Token ile giriş yapın</p>
-      <div class="field">
-        <label>GitHub Token</label>
-        <input type="password" id="tokenInput" placeholder="ghp_..." autocomplete="off">
+    <div class="login-wrap card">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="width:60px;height:60px;background:#E20439;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;font-weight:800;">B</div>
       </div>
-      <p style="font-size:.8rem;color:#888;margin-bottom:16px;">Token localStorage'da saklanır, sunucuya gönderilmez.</p>
-      <button class="btn btn-primary" onclick="doLogin()" style="width:100%">Giriş Yap</button>
-      <div id="loginError" style="margin-top:12px;"></div>
+      <h1 style="text-align:center;margin-bottom:6px;">Birlikte İyilik</h1>
+      <p style="text-align:center;color:#888;font-size:.9rem;margin-bottom:24px;">Yönetim Paneli</p>
+      <div class="field">
+        <label>Şifre</label>
+        <input type="password" id="pwInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div id="loginErr" style="margin-bottom:12px;"></div>
+      <button class="btn btn-red btn-block" onclick="doLogin()" id="loginBtn">Giriş Yap</button>
     </div>
   </div>
 </div>
 
-<!-- MAIN LIST -->
+<!-- HABER LİSTESİ -->
 <div id="mainScreen">
   <div class="container">
     <div id="mainNotice"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-      <div>
-        <h1>Haberler & İçerikler</h1>
-        <p class="subtitle" id="newsCount"></p>
-      </div>
-      <button class="btn btn-green" onclick="publish()" id="publishBtn">🚀 Yayınla</button>
+    <div class="list-header">
+      <h1>Haberler & İçerikler</h1>
+      <span id="countBadge" style="font-size:.85rem;color:#888;"></span>
     </div>
-    <div id="buildNotice" style="display:none;" class="notice notice-info">
-      ⏳ Site yeniden derleniyor... GitHub Actions tamamlandığında (~1-2 dk) Vercel otomatik günceller.
-      <a href="https://github.com/raufenc/raufenc.com/actions" target="_blank" style="margin-left:8px;font-weight:600;">Actions →</a>
-    </div>
-    <div class="filter-bar" id="filterBar"></div>
+    <div class="filters" id="filterBar"></div>
     <div class="card" style="padding:0;overflow:hidden;">
-      <table>
-        <thead><tr><th>Tarih</th><th>Başlık</th><th>Kategori</th><th>İşlem</th></tr></thead>
-        <tbody id="newsList"></tbody>
-      </table>
+      <div id="newsList"></div>
     </div>
   </div>
 </div>
 
-<!-- EDIT FORM -->
+<!-- DÜZENLEME FORMU -->
 <div id="editScreen">
   <div class="container">
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
-      <button class="btn btn-secondary btn-sm" onclick="showMain()">← Geri</button>
-      <h1 id="editTitle">Yeni Haber</h1>
+    <div class="edit-header">
+      <button class="btn btn-gray" style="padding:7px 14px" onclick="showMain()">← Geri</button>
+      <h1 id="editHeading">Yeni Haber</h1>
     </div>
     <div class="card">
       <div class="field">
         <label>Başlık *</label>
-        <input id="fTitle" placeholder="Haber başlığı">
+        <input id="fTitle" placeholder="Haber başlığı..." oninput="autoSlug()">
       </div>
-      <div class="field-row">
-        <div class="field">
-          <label>Slug (URL)</label>
-          <input id="fSlug" placeholder="otomatik-olusturulur">
-        </div>
+      <div class="field-2">
         <div class="field">
           <label>Tarih *</label>
           <input id="fDate" type="date">
         </div>
-      </div>
-      <div class="field-row">
         <div class="field">
           <label>Kategori</label>
-          <select id="fCategory">
-            <option value="duyuru">Duyuru</option>
-            <option value="haber">Haber</option>
-            <option value="etkinlik">Etkinlik</option>
-            <option value="icerik">İçerik / Makale</option>
+          <select id="fCat">
+            <option value="haber">📰 Haber</option>
+            <option value="duyuru">📢 Duyuru</option>
+            <option value="etkinlik">📅 Etkinlik</option>
+            <option value="icerik">✍️ İçerik / Makale</option>
           </select>
         </div>
+      </div>
+      <div class="field">
+        <label>Özet <span style="font-weight:400;color:#aaa">(kart önizlemesi)</span></label>
+        <textarea id="fExcerpt" rows="3" placeholder="Kısa bir özet yazın..."></textarea>
+      </div>
+      <div class="field">
+        <label>İçerik <span style="font-weight:400;color:#aaa">(HTML destekler)</span></label>
+        <textarea id="fContent" placeholder="Haber içeriği..."></textarea>
+      </div>
+      <div class="field-2">
         <div class="field">
-          <label>Görsel URL</label>
+          <label>Görsel URL <span style="font-weight:400;color:#aaa">(isteğe bağlı)</span></label>
           <input id="fImage" placeholder="https://...">
         </div>
-      </div>
-      <div class="field">
-        <label>Özet (kart önizlemesi)</label>
-        <textarea id="fExcerpt" rows="3"></textarea>
-      </div>
-      <div class="field">
-        <label>İçerik (HTML destekler)</label>
-        <textarea id="fContent"></textarea>
-      </div>
-      <div class="field-row">
-        <div class="field">
-          <label>Kaynak URL</label>
-          <input id="fSourceUrl" placeholder="https://...">
-        </div>
-        <div class="field" style="display:flex;align-items:center;gap:10px;padding-top:28px;">
+        <div class="field" style="display:flex;align-items:center;gap:10px;padding-top:26px;">
           <input type="checkbox" id="fFeatured" style="width:auto;height:18px;cursor:pointer;">
-          <label for="fFeatured" style="margin:0;cursor:pointer;">Öne çıkar ⭐</label>
+          <label for="fFeatured" style="margin:0;cursor:pointer;font-weight:600;">⭐ Öne Çıkar</label>
         </div>
       </div>
-      <div id="editNotice" style="margin-top:8px;"></div>
-      <div style="display:flex;gap:12px;margin-top:16px;">
-        <button class="btn btn-primary" onclick="saveItem()" id="saveBtn">Kaydet</button>
-        <button class="btn btn-secondary" onclick="showMain()">İptal</button>
-        <button class="btn btn-danger" onclick="deleteItem()" id="deleteBtn" style="margin-left:auto;">Sil</button>
+      <!-- Hidden fields -->
+      <input type="hidden" id="fSlug">
+      <input type="hidden" id="fSourceUrl">
+
+      <div id="editNotice" style="margin-top:4px;"></div>
+      <div class="edit-footer">
+        <button class="btn btn-red" onclick="saveItem()" id="saveBtn">Kaydet</button>
+        <button class="btn btn-gray" onclick="showMain()">İptal</button>
+        <button class="btn btn-del" onclick="deleteItem()" id="deleteBtn" style="margin-left:auto;display:none;">Sil</button>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-const REPO = 'raufenc/raufenc.com';
-const FILE = 'birlikteiyilik-site/content/news.json';
-const API = 'https://api.github.com';
-const CATS = { duyuru:'Duyuru', haber:'Haber', etkinlik:'Etkinlik', icerik:'İçerik' };
+const API = '/api/bia-news';
+const CATS = {haber:'Haber', duyuru:'Duyuru', etkinlik:'Etkinlik', icerik:'İçerik'};
+const TR = {'ş':'s','ı':'i','ö':'o','ü':'u','ç':'c','ğ':'g','â':'a','î':'i','û':'u'};
 
-let token = '';
-let newsData = [];
-let fileSha = '';
-let editIdx = null;
-let currentFilter = '';
+let pw = '', news = [], sha = '', editIdx = null, filter = '';
 
-const TR_MAP = {'ş':'s','ı':'i','ö':'o','ü':'u','ç':'c','ğ':'g','â':'a','î':'i','û':'u'};
 function slugify(t) {
-  return t.toLowerCase()
-    .replace(/[şıöüçğâîû]/g, c => TR_MAP[c] || c)
+  return t.toLowerCase().replace(/[şıöüçğâîû]/g,c=>TR[c]||c)
     .normalize('NFKD').replace(/[^\w\s-]/g,'').replace(/[-\s]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
 }
-
-function gh(path, opts={}) {
-  return fetch(`${API}${path}`, {
-    ...opts,
-    headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github+json', ...(opts.headers||{}) }
-  });
+function autoSlug() {
+  const t = document.getElementById('fTitle').value;
+  document.getElementById('fSlug').value = slugify(t);
 }
 
 function show(id) {
-  ['loginScreen','mainScreen','editScreen'].forEach(s => document.getElementById(s).classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  ['loginScreen','mainScreen','editScreen'].forEach(s => document.getElementById(s).style.display = 'none');
+  document.getElementById(id).style.display = 'block';
 }
 
 async function doLogin() {
-  token = document.getElementById('tokenInput').value.trim();
-  if (!token) return;
-  const r = await gh(`/repos/${REPO}/contents/${FILE}`);
-  if (!r.ok) {
-    document.getElementById('loginError').innerHTML = '<div class="notice notice-err">Token geçersiz veya yetersiz yetki.</div>';
-    return;
+  pw = document.getElementById('pwInput').value;
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Giriş yapılıyor...';
+  document.getElementById('loginErr').innerHTML = '';
+  try {
+    const r = await fetch(`${API}?password=${encodeURIComponent(pw)}`);
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Hata');
+    news = d.news; sha = d.sha;
+    sessionStorage.setItem('biaPw', pw);
+    document.getElementById('topNav').style.display = 'flex';
+    showMain();
+  } catch(e) {
+    document.getElementById('loginErr').innerHTML = `<div class="notice err">${e.message}</div>`;
   }
-  localStorage.setItem('biaToken', token);
-  const data = await r.json();
-  fileSha = data.sha;
-  newsData = JSON.parse(atob(data.content.replace(/\n/g,'')));
-  document.getElementById('tokenDisplay').textContent = token.slice(0,8)+'…';
-  showMain();
-}
-
-function logout() {
-  localStorage.removeItem('biaToken');
-  token = '';
-  show('loginScreen');
+  btn.disabled = false; btn.innerHTML = 'Giriş Yap';
 }
 
 function renderList() {
-  const filtered = currentFilter ? newsData.filter(n => n.category === currentFilter) : newsData;
-
-  // Filter bar
-  const fb = document.getElementById('filterBar');
-  const allActive = !currentFilter ? 'active' : '';
-  fb.innerHTML = `<button class="filter-btn ${allActive}" onclick="setFilter('')">Tümü (${newsData.length})</button>`;
+  const filtered = filter ? news.filter(n => n.category === filter) : news;
+  // Filters
+  let fb = `<button class="filter ${!filter?'on':''}" onclick="setFilter('')">Tümü (${news.length})</button>`;
   Object.entries(CATS).forEach(([k,v]) => {
-    const cnt = newsData.filter(n => n.category === k).length;
-    const active = currentFilter === k ? 'active' : '';
-    fb.innerHTML += `<button class="filter-btn ${active}" onclick="setFilter('${k}')">${v} (${cnt})</button>`;
+    const cnt = news.filter(n=>n.category===k).length;
+    fb += `<button class="filter ${filter===k?'on':''}" onclick="setFilter('${k}')">${v} (${cnt})</button>`;
   });
+  document.getElementById('filterBar').innerHTML = fb;
+  document.getElementById('countBadge').textContent = filter ? `${filtered.length} sonuç` : '';
 
-  // Table
-  const tbody = document.getElementById('newsList');
-  tbody.innerHTML = filtered.map((item) => {
-    const origIdx = newsData.indexOf(item);
-    const star = item.featured ? '⭐ ' : '';
+  if (!filtered.length) {
+    document.getElementById('newsList').innerHTML = '<div class="empty">Henüz kayıt yok</div>';
+    return;
+  }
+  document.getElementById('newsList').innerHTML = filtered.map(item => {
+    const i = news.indexOf(item);
     const cat = item.category || 'haber';
-    return `<tr>
-      <td style="white-space:nowrap">${item.date||''}</td>
-      <td class="truncate">${star}${item.title||''}</td>
-      <td><span class="badge badge-${cat}">${CATS[cat]||cat}</span></td>
-      <td><div class="actions">
-        <button class="btn btn-secondary btn-sm" onclick="showEdit(${origIdx})">Düzenle</button>
-      </div></td>
-    </tr>`;
+    const star = item.featured ? '<span class="ni-star">⭐</span>' : '';
+    return `<div class="news-item" onclick="showEdit(${i})">
+      <span class="ni-date">${item.date||''}</span>
+      ${star}
+      <span class="ni-title">${item.title||''}</span>
+      <span class="badge b-${cat}">${CATS[cat]||cat}</span>
+    </div>`;
   }).join('');
-
-  document.getElementById('newsCount').textContent = `${newsData.length} kayıt`;
 }
 
-function setFilter(cat) {
-  currentFilter = cat;
-  renderList();
-}
+function setFilter(f) { filter = f; renderList(); }
 
 function showMain() {
   renderList();
   show('mainScreen');
+  document.getElementById('mainNotice').innerHTML = '';
 }
 
 function showEdit(idx) {
   editIdx = idx;
-  if (idx === null) {
-    document.getElementById('editTitle').textContent = 'Yeni Haber';
-    document.getElementById('fTitle').value = '';
-    document.getElementById('fSlug').value = '';
-    document.getElementById('fDate').value = new Date().toISOString().slice(0,10);
-    document.getElementById('fCategory').value = 'haber';
-    document.getElementById('fExcerpt').value = '';
-    document.getElementById('fContent').value = '';
-    document.getElementById('fImage').value = '';
-    document.getElementById('fSourceUrl').value = '';
-    document.getElementById('fFeatured').checked = false;
-    document.getElementById('deleteBtn').style.display = 'none';
-  } else {
-    const item = newsData[idx];
-    document.getElementById('editTitle').textContent = 'Düzenle';
-    document.getElementById('fTitle').value = item.title || '';
-    document.getElementById('fSlug').value = item.slug || '';
-    document.getElementById('fDate').value = item.date || '';
-    document.getElementById('fCategory').value = item.category || 'haber';
-    document.getElementById('fExcerpt').value = item.excerpt || '';
-    document.getElementById('fContent').value = item.content || '';
-    document.getElementById('fImage').value = item.image || '';
-    document.getElementById('fSourceUrl').value = item.source_url || '';
-    document.getElementById('fFeatured').checked = !!item.featured;
-    document.getElementById('deleteBtn').style.display = '';
-  }
+  const item = idx !== null ? news[idx] : {};
+  document.getElementById('editHeading').textContent = idx === null ? 'Yeni Haber Ekle' : 'Düzenle';
+  document.getElementById('fTitle').value = item.title || '';
+  document.getElementById('fSlug').value = item.slug || '';
+  document.getElementById('fDate').value = item.date || new Date().toISOString().slice(0,10);
+  document.getElementById('fCat').value = item.category || 'haber';
+  document.getElementById('fExcerpt').value = item.excerpt || '';
+  document.getElementById('fContent').value = item.content || '';
+  document.getElementById('fImage').value = item.image || '';
+  document.getElementById('fFeatured').checked = !!item.featured;
+  document.getElementById('fSourceUrl').value = item.source_url || '';
+  document.getElementById('deleteBtn').style.display = idx !== null ? 'inline-flex' : 'none';
   document.getElementById('editNotice').innerHTML = '';
   show('editScreen');
 }
 
-async function saveFile(message) {
-  newsData.sort((a,b) => (b.date||'').localeCompare(a.date||''));
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(newsData, null, 2))));
-  const body = JSON.stringify({ message, content, sha: fileSha });
-  const r = await gh(`/repos/${REPO}/contents/${FILE}`, { method: 'PUT', body });
-  if (!r.ok) throw new Error((await r.json()).message || 'API hatası');
-  const data = await r.json();
-  fileSha = data.content.sha;
-}
-
 async function saveItem() {
   const title = document.getElementById('fTitle').value.trim();
-  if (!title) { document.getElementById('editNotice').innerHTML = '<div class="notice notice-err">Başlık zorunlu.</div>'; return; }
+  if (!title) { document.getElementById('editNotice').innerHTML = '<div class="notice err">Başlık zorunlu.</div>'; return; }
   const btn = document.getElementById('saveBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Kaydediliyor…';
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Kaydediliyor...';
   const item = {
     title,
-    slug: document.getElementById('fSlug').value.trim() || slugify(title),
+    slug: document.getElementById('fSlug').value || slugify(title),
     date: document.getElementById('fDate').value,
-    category: document.getElementById('fCategory').value,
+    category: document.getElementById('fCat').value,
     excerpt: document.getElementById('fExcerpt').value.trim(),
     content: document.getElementById('fContent').value.trim(),
     image: document.getElementById('fImage').value.trim(),
     featured: document.getElementById('fFeatured').checked,
     source_url: document.getElementById('fSourceUrl').value.trim(),
   };
+  if (editIdx === null) news.push(item); else news[editIdx] = item;
   try {
-    if (editIdx === null) newsData.push(item);
-    else newsData[editIdx] = item;
-    await saveFile(`BIA: "${title}" ${editIdx === null ? 'eklendi' : 'güncellendi'}`);
-    document.getElementById('editNotice').innerHTML = '<div class="notice notice-ok">✅ Kaydedildi! Site yeniden derleniyor...</div>';
-    document.getElementById('buildNotice').style.display = 'flex';
-    setTimeout(showMain, 1500);
+    const r = await fetch(API, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({password:pw, news, sha, message:`BIA: "${title}" ${editIdx===null?'eklendi':'güncellendi'}`})
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'Sunucu hatası');
+    sha = d.sha;
+    document.getElementById('editNotice').innerHTML = '<div class="notice ok">✅ Kaydedildi!</div>';
+    setTimeout(showMain, 900);
   } catch(e) {
-    document.getElementById('editNotice').innerHTML = `<div class="notice notice-err">❌ ${e.message}</div>`;
+    if (editIdx === null) news.pop(); else news[editIdx] = news[editIdx];
+    document.getElementById('editNotice').innerHTML = `<div class="notice err">❌ ${e.message}</div>`;
   }
-  btn.disabled = false;
-  btn.innerHTML = 'Kaydet';
+  btn.disabled = false; btn.innerHTML = 'Kaydet';
 }
 
 async function deleteItem() {
   if (!confirm('Bu kaydı silmek istediğinize emin misiniz?')) return;
-  const btn = document.getElementById('deleteBtn');
-  btn.disabled = true;
-  const title = newsData[editIdx]?.title || '';
-  newsData.splice(editIdx, 1);
-  try {
-    await saveFile(`BIA: "${title}" silindi`);
-    showMain();
-    document.getElementById('buildNotice').style.display = 'flex';
-  } catch(e) {
-    alert('Silme hatası: ' + e.message);
-    btn.disabled = false;
-  }
+  const title = news[editIdx]?.title || '';
+  news.splice(editIdx, 1);
+  const r = await fetch(API, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({password:pw, news, sha, message:`BIA: "${title}" silindi`})
+  });
+  const d = await r.json();
+  if (r.ok) { sha = d.sha; showMain(); }
+  else { alert('Silme hatası: ' + (d.error||'bilinmiyor')); news.splice(editIdx, 0, news[editIdx]); }
 }
 
-async function publish() {
-  // Just show the Actions link — saving already triggers the build
-  document.getElementById('buildNotice').style.display = 'flex';
-  document.getElementById('mainNotice').innerHTML = '<div class="notice notice-ok">✅ GitHub\'a kaydedildi. Actions tamamlanınca Vercel günceller (~1-2 dk). <a href="https://github.com/raufenc/raufenc.com/actions" target="_blank">İzle →</a></div>';
+async function rebuild() {
+  const btn = document.getElementById('rebuildBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+  // Trigger Vercel redeploy via a dummy commit (update a timestamp file)
+  try {
+    const r = await fetch(API + '?password=' + encodeURIComponent(pw) + '&action=rebuild');
+    document.getElementById('mainNotice').innerHTML = '<div class="notice info">⏳ Site yenileniyor… Vercel ~1 dakika içinde günceller.</div>';
+  } catch(e) {}
+  btn.disabled = false; btn.innerHTML = 'Yayınla';
+}
+
+function logout() {
+  sessionStorage.removeItem('biaPw');
+  pw = ''; news = []; sha = '';
+  document.getElementById('topNav').style.display = 'none';
+  document.getElementById('pwInput').value = '';
+  show('loginScreen');
 }
 
 // Auto-login
-window.onload = async () => {
-  const saved = localStorage.getItem('biaToken');
-  if (saved) {
-    token = saved;
-    try {
-      const r = await gh(`/repos/${REPO}/contents/${FILE}`);
-      if (r.ok) {
-        const data = await r.json();
-        fileSha = data.sha;
-        newsData = JSON.parse(atob(data.content.replace(/\n/g,'')));
-        document.getElementById('tokenDisplay').textContent = token.slice(0,8)+'…';
-        showMain();
-        return;
-      }
-    } catch(e) {}
-  }
-  show('loginScreen');
+window.onload = () => {
+  const saved = sessionStorage.getItem('biaPw');
+  if (saved) { document.getElementById('pwInput').value = saved; doLogin(); }
+  else show('loginScreen');
 };
 </script>
 </body>
