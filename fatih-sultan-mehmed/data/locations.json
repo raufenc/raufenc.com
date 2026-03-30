@@ -290,11 +290,17 @@
     }
   ],
   "routes": [
-    {"from": "edirne", "to": "manisa", "period": "cocukluk", "ah_year": 843, "label": "Manisa Sancakbeyliği", "waypoints": [[41.67,26.56],[41.18,27.51],[40.65,27.96],[40.19,27.84],[39.65,27.88],[39.12,27.58],[38.61,27.43]]},
-    {"from": "manisa", "to": "edirne", "period": "ilk_saltanat", "ah_year": 848, "label": "Edirne'ye Dönüş", "waypoints": [[38.61,27.43],[39.12,27.58],[39.65,27.88],[40.19,27.84],[40.65,27.96],[41.18,27.51],[41.67,26.56]]},
-    {"from": "edirne", "to": "istanbul", "period": "fetih_donemi", "ah_year": 857, "label": "İstanbul Kuşatması", "waypoints": [[41.67,26.56],[41.55,27.08],[41.40,27.35],[41.28,27.80],[41.17,28.20],[41.05,28.60],[41.01,28.98]]},
-    {"from": "istanbul", "to": "trabzon", "period": "imparatorluk", "ah_year": 865, "label": "Trabzon Seferi", "waypoints": [[41.01,28.98],[40.85,30.40],[40.73,31.61],[40.55,33.50],[40.35,35.20],[40.65,36.55],[40.95,38.10],[41.00,39.72]]},
-    {"from": "istanbul", "to": "otlukbeli", "period": "imparatorluk", "ah_year": 878, "label": "Otlukbeli Seferi", "waypoints": [[41.01,28.98],[40.50,30.50],[39.93,32.86],[39.80,34.80],[39.75,37.01],[39.78,38.50],[39.95,40.00]]}
+    {"from": "edirne", "to": "manisa", "period": "cocukluk", "ah_year": 843, "label": "Manisa Sancakbeyliği", "waypoints": [[41.67,26.56],[41.10,27.50],[40.40,27.90],[39.90,27.80],[39.30,27.60],[38.61,27.43]]},
+    {"from": "manisa", "to": "edirne", "period": "ilk_saltanat", "ah_year": 848, "label": "Edirne'ye Dönüş", "waypoints": [[38.61,27.43],[39.30,27.60],[39.90,27.80],[40.40,27.90],[41.10,27.50],[41.67,26.56]]},
+    {"from": "edirne", "to": "istanbul", "period": "fetih_donemi", "ah_year": 857, "label": "İstanbul Kuşatması", "waypoints": [[41.67,26.56],[41.50,27.10],[41.35,27.50],[41.20,27.90],[41.10,28.40],[41.01,28.98]]},
+    {"from": "istanbul", "to": "belgrad", "period": "imparatorluk", "ah_year": 858, "label": "Sırbistan Seferi", "waypoints": [[41.01,28.98],[41.20,28.00],[41.67,26.56],[42.15,24.75],[42.70,23.32],[43.32,21.90],[43.80,20.90],[44.79,20.46]]},
+    {"from": "istanbul", "to": "mora", "period": "imparatorluk", "ah_year": 863, "label": "Mora Seferi", "waypoints": [[41.01,28.98],[41.20,28.00],[41.67,26.56],[41.10,23.55],[40.64,22.94],[39.64,22.42],[38.50,22.80],[37.97,22.60],[37.07,22.37]]},
+    {"from": "istanbul", "to": "trabzon", "period": "imparatorluk", "ah_year": 865, "label": "Trabzon Seferi", "waypoints": [[41.01,28.98],[40.73,30.40],[40.73,31.61],[40.65,33.00],[40.50,34.50],[40.35,35.83],[40.60,37.00],[40.90,38.10],[41.00,39.72]]},
+    {"from": "istanbul", "to": "bosna", "period": "imparatorluk", "ah_year": 867, "label": "Bosna Seferi", "waypoints": [[41.01,28.98],[41.20,28.00],[41.67,26.56],[42.15,24.75],[42.70,23.32],[43.32,21.90],[43.80,20.00],[44.10,18.60],[44.34,17.27]]},
+    {"from": "istanbul", "to": "karaman", "period": "imparatorluk", "ah_year": 873, "label": "Karaman Seferi", "waypoints": [[41.01,28.98],[40.40,29.50],[40.18,29.07],[39.77,30.52],[39.20,31.50],[38.40,32.30],[37.87,32.48],[37.18,33.23]]},
+    {"from": "istanbul", "to": "otlukbeli", "period": "imparatorluk", "ah_year": 878, "label": "Otlukbeli Seferi", "waypoints": [[41.01,28.98],[40.73,30.40],[40.73,31.61],[40.35,33.00],[39.93,34.50],[39.75,36.50],[39.75,38.00],[39.95,40.00]]},
+    {"from": "istanbul", "to": "iskodra", "period": "imparatorluk", "ah_year": 879, "label": "Arnavutluk Seferi", "waypoints": [[41.01,28.98],[41.20,28.00],[41.67,26.56],[42.00,24.50],[42.00,21.43],[41.50,20.80],[42.07,19.51]]},
+    {"from": "istanbul", "to": "otranto", "period": "son_donem", "ah_year": 885, "label": "İtalya Seferi", "waypoints": [[41.01,28.98],[41.20,28.00],[41.67,26.56],[42.00,24.50],[41.30,22.00],[40.85,20.18],[40.50,19.50],[40.15,18.49]]}
   ],
   "timeline_events": [
     {"ah_year": 835, "ce_year": 1432, "title": "Edirne'de Doğum", "location": "edirne", "period": "cocukluk", "description": "27 Receb 835 Hicrî tarihinde Edirne Sarayı'nda dünyâya geldi.", "icon": "star"},

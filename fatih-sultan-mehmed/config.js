@@ -42,10 +42,16 @@ const SCHOLAR = {
     desc: 'Fâtih Sultan Mehmed Hân, 886 (1481) senesinde vefât etti. Cenâze namazını Muhyiddin Ebü\'l-Vefâ hazretleri kıldırdı. İstanbul\'da yaptırdığı Fâtih Câmii\'nin bahçesindeki türbesine defnedildi.'
   },
   routeDetails: {
-    'Manisa Sancakbeyliği': 'Şehzâde Mehmed, tahsîli için Manisa\'ya sancakbeyi olarak gönderildi. Burada devrin en büyük âlimlerinden ders aldı.',
+    'Manisa Sancakbeyliği': 'Şehzâde Mehmed, tahsîli için Manisa\'ya sancakbeyi olarak gönderildi. Akşemseddin hazretlerinin terbiyesinde yetişti.',
     'Edirne\'ye Dönüş': 'Babasının tahtı bırakması üzerine 14 yaşında Edirne\'ye çağrılıp ilk kez pâdişâh oldu.',
     'İstanbul Kuşatması': 'Rumelihisarı\'nı yaptırıp Boğaz\'ı kesen Sultan, 857 (1453) baharında ordusunu İstanbul önlerine çıkardı.',
-    'Trabzon Seferi': 'Trabzon Rum İmparatorluğu\'na son vererek Karadeniz kıyılarını Osmanlı toprağına kattı.',
-    'Otlukbeli Seferi': 'Akkoyunlu hükümdârı Uzun Hasan\'ı Otlukbeli\'nde büyük bir bozguna uğrattı.'
+    'Sırbistan Seferi': 'İstanbul\'dan Edirne üzerinden Balkanlar\'a ilerledi. Sırbistan\'ın pek çok kalesini fethetti.',
+    'Mora Seferi': 'Edirne-Selanik güzergâhından Mora Yarımadası\'na inerek Bizans despotluklarına son verdi.',
+    'Trabzon Seferi': 'Anadolu\'nun kuzey kıyısı boyunca ilerleyerek Trabzon Rum İmparatorluğu\'nu fethetti.',
+    'Bosna Seferi': 'Edirne-Sofya-Niş üzerinden Bosna\'ya ulaşarak krallığı Osmanlı topraklarına kattı.',
+    'Karaman Seferi': 'Eskişehir-Konya güzergâhından Karaman Beyliği\'ni ilhâk ederek Anadolu birliğini sağladı.',
+    'Otlukbeli Seferi': 'Anadolu\'nun içinden doğuya ilerleyerek Akkoyunlu Uzun Hasan\'ı Erzincan yakınlarında bozguna uğrattı.',
+    'Arnavutluk Seferi': 'Edirne-Üsküp güzergâhından Arnavutluk\'a ulaşıp İskender Bey sonrası direniş noktalarını fethetti.',
+    'İtalya Seferi': 'Gedik Ahmed Paşa komutasında Adriyatik kıyısından İtalya\'nın Otranto şehrine çıkarma yapıldı.'
   }
 };
