@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Sınıf Sıralama Tablosu =====
 
-import { store } from '../store.js?v=6';
-import { getDB, DB_PATHS } from '../firebase-config.js?v=6';
+import { store } from '../store.js?v=7';
+import { getDB, DB_PATHS } from '../firebase-config.js?v=7';
 
 export async function renderLeaderboard(el, app) {
     const code = store.getClassroomCode();
@@ -100,11 +100,11 @@ function renderRankings(container, data, myUserId) {
                         ${i < 3 ? medals[i] : `<span style="font-size:1rem;font-weight:700;color:var(--text-secondary);">#${i + 1}</span>`}
                     </div>
                     <div class="lb-avatar" style="width:40px;height:40px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;flex-shrink:0;">
-                        ${(e.name || '?')[0].toUpperCase()}
+                        ${esc((e.name || '?')[0].toUpperCase())}
                     </div>
                     <div style="flex:1;min-width:0;">
-                        <div style="font-weight:600;">${e.name || 'Anonim'} ${isMe ? '<span style="font-size:0.75rem;color:var(--primary);">(Sen)</span>' : ''}</div>
-                        <div class="text-muted" style="font-size:0.8rem;">${e.grade}. Sınıf · Sv.${e.level || 1}</div>
+                        <div style="font-weight:600;">${esc(e.name || 'Anonim')} ${isMe ? '<span style="font-size:0.75rem;color:var(--primary);">(Sen)</span>' : ''}</div>
+                        <div class="text-muted" style="font-size:0.8rem;">${parseInt(e.grade) || '?'}. Sınıf · Sv.${parseInt(e.level) || 1}</div>
                     </div>
                     <div style="text-align:right;flex-shrink:0;">
                         <div style="font-weight:700;color:var(--primary);">⚡ ${e.xp || 0}</div>
@@ -121,4 +121,10 @@ function renderRankings(container, data, myUserId) {
             </div>
         </div>
     `;
+}
+
+function esc(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
 }

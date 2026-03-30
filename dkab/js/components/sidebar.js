@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - 360° Sidebar Bileseni =====
 
-import { store } from '../store.js?v=6';
-import { getAllGrades, getGradeInfo } from '../data-loader.js?v=6';
+import { store } from '../store.js?v=7';
+import { getAllGrades, getGradeInfo } from '../data-loader.js?v=7';
 
 export function renderSidebar(el, app) {
     const user = store.user;
@@ -23,7 +23,7 @@ export function renderSidebar(el, app) {
                     <span>${user.name.charAt(0).toUpperCase()}</span>
                 </div>
                 <div class="sidebar-user-info">
-                    <div class="sidebar-user-name">${user.name}</div>
+                    <div class="sidebar-user-name">${esc(user.name)}</div>
                     <div class="sidebar-user-grade text-muted">${currentGrade}. Sinif &middot; Sv.${store.stats.level}</div>
                 </div>
             </div>
@@ -79,6 +79,11 @@ export function renderSidebar(el, app) {
         <div class="sidebar-section">
             <div class="sidebar-section-title">Gelisim</div>
             <div class="sidebar-nav">
+                <a href="#/rehber" class="sidebar-link ${route?.page === 'study-guide' ? 'active' : ''}">
+                    <span class="sidebar-link-icon">&#128218;</span>
+                    Rehberli Calisma
+                    <span class="badge badge-info" style="margin-left:auto; font-size:0.65rem;">Yeni</span>
+                </a>
                 <a href="#/ilerleme" class="sidebar-link ${route?.page === 'progress' ? 'active' : ''}">
                     <span class="sidebar-link-icon">&#128200;</span>
                     Ilerleme
@@ -90,6 +95,27 @@ export function renderSidebar(el, app) {
                 <a href="#/aliskanliklar" class="sidebar-link ${route?.page === 'habits' ? 'active' : ''}">
                     <span class="sidebar-link-icon">&#128197;</span>
                     Aliskanlik Takibi
+                </a>
+                <a href="#/davranis" class="sidebar-link ${route?.page === 'behavior-tracker' ? 'active' : ''}">
+                    <span class="sidebar-link-icon">&#127793;</span>
+                    Davranis Takibi
+                    <span class="badge badge-info" style="margin-left:auto; font-size:0.65rem;">L3</span>
+                </a>
+                <a href="#/yillik-rapor" class="sidebar-link ${route?.page === 'annual-report' ? 'active' : ''}">
+                    <span class="sidebar-link-icon">&#128202;</span>
+                    Yillik Rapor
+                    <span class="badge badge-info" style="margin-left:auto; font-size:0.65rem;">L4</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- KULTUR -->
+        <div class="sidebar-section">
+            <div class="sidebar-section-title">Kultur</div>
+            <div class="sidebar-nav">
+                <a href="#/hicri-takvim" class="sidebar-link ${route?.page === 'hicri-takvim' ? 'active' : ''}">
+                    <span class="sidebar-link-icon">&#127769;</span>
+                    Hicri Takvim
                 </a>
             </div>
         </div>
@@ -128,6 +154,8 @@ export function renderSidebar(el, app) {
         </div>`;
 
     // Olay dinleyicileri
+    function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
     el.querySelector('#btn-reset')?.addEventListener('click', () => {
         if (confirm('Tum ilerlemeniz silinecek. Emin misiniz?')) {
             store.resetAll();

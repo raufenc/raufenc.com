@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Meydan Okuma =====
 
-import { store } from '../store.js?v=6';
-import { getDB, DB_PATHS } from '../firebase-config.js?v=6';
+import { store } from '../store.js?v=7';
+import { getDB, DB_PATHS } from '../firebase-config.js?v=7';
 
 const CHALLENGE_TOPICS = [
     'Allah\'ın (c.c.) isimlerinden birini anlat',
@@ -175,8 +175,12 @@ function renderChallengeList(container, data, myUserId, code, db) {
                 await ref.remove(); // toggle: geri al
             } else {
                 await ref.set(Date.now());
-                // XP ödülü
-                store.addXP(10);
+                // XP ödülü (sadece ilk kez — localStorage ile kontrol)
+                const xpKey = `challenge_xp_${challengeId}`;
+                if (!localStorage.getItem(xpKey)) {
+                    store.addXP(10);
+                    localStorage.setItem(xpKey, '1');
+                }
             }
         });
     });

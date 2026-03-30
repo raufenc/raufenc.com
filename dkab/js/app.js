@@ -1,25 +1,30 @@
 // ===== DKAB Akademi - Ana Uygulama + Router =====
 
-import { store } from './store.js?v=6';
-import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=6';
-import { renderHeader } from './components/header.js?v=6';
-import { renderSidebar } from './components/sidebar.js?v=6';
-import { renderHome } from './components/home.js?v=6';
-import { renderClassSelector } from './components/class-selector.js?v=6';
-import { renderUnitList } from './components/unit-list.js?v=6';
-import { renderChapterView } from './components/chapter-view.js?v=6';
-import { renderGlossary } from './components/glossary.js?v=6';
-import { renderProgressDashboard } from './components/progress-dashboard.js?v=6';
-import { showConfetti, showXpPopup } from './components/effects.js?v=6';
+import { store } from './store.js?v=7';
+import { getGradeInfo, loadGradeEssentials, loadChapterContent, loadGlossary, loadData } from './data-loader.js?v=7';
+import { renderHeader } from './components/header.js?v=7';
+import { renderSidebar } from './components/sidebar.js?v=7';
+import { renderHome } from './components/home.js?v=7';
+import { renderClassSelector } from './components/class-selector.js?v=7';
+import { renderUnitList } from './components/unit-list.js?v=7';
+import { renderChapterView } from './components/chapter-view.js?v=7';
+import { renderGlossary } from './components/glossary.js?v=7';
+import { renderProgressDashboard } from './components/progress-dashboard.js?v=7';
+import { showConfetti, showXpPopup } from './components/effects.js?v=7';
 // 360° Ekosistem bilesenleri
-import { renderLearningPath } from './components/learning-path.js?v=6';
-import { renderAssessment } from './components/assessment.js?v=6';
-import { renderGoals } from './components/goals.js?v=6';
-import { renderHabits } from './components/habits.js?v=6';
-// Faz 3 — İşbirlikçi
-import { renderLeaderboard } from './components/leaderboard.js?v=6';
-import { renderKnowledgeWall } from './components/knowledge-wall.js?v=6';
-import { renderChallenges } from './components/challenges.js?v=6';
+import { renderLearningPath } from './components/learning-path.js?v=7';
+import { renderAssessment } from './components/assessment.js?v=7';
+import { renderGoals } from './components/goals.js?v=7';
+import { renderHabits } from './components/habits.js?v=7';
+// Faz 3 — Isbirlikci
+import { renderLeaderboard } from './components/leaderboard.js?v=7';
+import { renderKnowledgeWall } from './components/knowledge-wall.js?v=7';
+import { renderChallenges } from './components/challenges.js?v=7';
+// Faz 4 — Kultur + Rehberlik
+import { renderStudyGuide } from './components/study-guide.js?v=7';
+import { renderHicriTakvim } from './components/hicri-takvim.js?v=7';
+import { renderBehaviorTracker } from './components/behavior-tracker.js?v=7';
+import { renderAnnualReport } from './components/annual-report.js?v=7';
 
 class App {
     constructor() {
@@ -123,6 +128,11 @@ class App {
         if (parts[0] === 'sinif-siralamasi') return { page: 'leaderboard' };
         if (parts[0] === 'pano') return { page: 'knowledge-wall' };
         if (parts[0] === 'meydan-okuma') return { page: 'challenges' };
+        // Faz 4 rotalari
+        if (parts[0] === 'rehber') return { page: 'study-guide' };
+        if (parts[0] === 'hicri-takvim') return { page: 'hicri-takvim' };
+        if (parts[0] === 'davranis') return { page: 'behavior-tracker' };
+        if (parts[0] === 'yillik-rapor') return { page: 'annual-report' };
 
         return { page: 'home' };
     }
@@ -142,6 +152,7 @@ class App {
         // Small delay for animation
         await new Promise(r => setTimeout(r, 50));
 
+        try {
         switch (route.page) {
             case 'class-selector':
                 renderClassSelector(this.mainEl, this);
@@ -201,6 +212,21 @@ class App {
             case 'challenges':
                 await renderChallenges(this.mainEl, this);
                 break;
+
+            // Faz 4
+            case 'study-guide':
+                await renderStudyGuide(this.mainEl, this);
+                break;
+            case 'hicri-takvim':
+                renderHicriTakvim(this.mainEl, this);
+                break;
+            case 'behavior-tracker':
+                renderBehaviorTracker(this.mainEl, this);
+                break;
+            case 'annual-report':
+                await renderAnnualReport(this.mainEl, this);
+                break;
+
             default:
                 this.mainEl.innerHTML = `
                     <div class="content-area text-center mt-xl">
@@ -208,6 +234,16 @@ class App {
                         <p class="text-muted mt-md">Aradaginiz sayfa mevcut degil.</p>
                         <a href="#/" class="btn btn-primary mt-lg">Ana Sayfaya Don</a>
                     </div>`;
+        }
+
+        } catch (err) {
+            console.error('Sayfa render hatasi:', err);
+            this.mainEl.innerHTML = `
+                <div class="content-area text-center mt-xl">
+                    <h2>&#9888; Bir sorun olustu</h2>
+                    <p class="text-muted mt-md">${err.message || 'Bilinmeyen hata'}</p>
+                    <a href="#/" class="btn btn-primary mt-lg">Ana Sayfaya Don</a>
+                </div>`;
         }
 
         this.mainEl.classList.add('page-enter');

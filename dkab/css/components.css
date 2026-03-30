@@ -1194,3 +1194,38 @@
     transition: transform 0.15s;
 }
 .challenge-card:hover { transform: translateY(-1px); }
+
+/* ===== Phase 4: Study Guide ===== */
+.study-status .card { transition: transform 0.15s; }
+.study-status .card:hover { transform: translateY(-2px); }
+.tips-list .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.8rem; }
+.unit-map a:hover .card { box-shadow: var(--shadow-md); }
+.week-plan > div { transition: background 0.15s; }
+
+/* ===== Phase 4: Hicri Takvim ===== */
+.hicri-grid .card { transition: transform 0.15s; }
+.hicri-grid .card:hover { transform: translateY(-2px); }
+.hicri-current { animation: hicri-glow 2s ease-in-out infinite alternate; }
+@keyframes hicri-glow {
+    from { box-shadow: 0 0 8px rgba(108,99,255,0.15); }
+    to   { box-shadow: 0 0 16px rgba(108,99,255,0.3); }
+}
+.special-days > div { transition: transform 0.15s; }
+.special-days > div:hover { transform: translateX(4px); }
+
+/* ===== Phase 4: Behavior Tracker ===== */
+.behavior-item { user-select: none; }
+.behavior-item:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+.week-bars > div { transition: all 0.3s; }
+
+/* ===== Phase 4: Annual Report ===== */
+.report-metrics .card { transition: transform 0.15s; }
+.report-metrics .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* ===== Responsive Phase 4 ===== */
+@media (max-width: 640px) {
+    .hicri-grid { grid-template-columns: 1fr !important; }
+    .report-metrics { grid-template-columns: repeat(2, 1fr) !important; }
+    .week-bars { gap: 0.4rem !important; }
+    .week-bars > div > div:nth-child(2) { width: 24px !important; }
+}

@@ -1,8 +1,7 @@
 // ===== DKAB Akademi - Bilgi Panosu (Knowledge Wall) =====
 
-import { store } from '../store.js?v=6';
-import { getDB, DB_PATHS } from '../firebase-config.js?v=6';
-import { getMessage } from '../messages.js?v=6';
+import { store } from '../store.js?v=7';
+import { getDB, DB_PATHS } from '../firebase-config.js?v=7';
 
 const MAX_POST_LENGTH = 280;
 

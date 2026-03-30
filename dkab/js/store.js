@@ -465,6 +465,18 @@ class Store {
         this._save();
     }
 
+    updateTodayBehavior(behaviors) {
+        const today = new Date().toISOString().split('T')[0];
+        const log = this._state.behaviorLog;
+        const idx = log.findIndex(l => l.date?.startsWith(today));
+        if (idx >= 0) {
+            log[idx] = { behaviors, date: new Date().toISOString() };
+        } else {
+            log.push({ behaviors, date: new Date().toISOString() });
+        }
+        this._save();
+    }
+
     // ===== 360° Aliskanlik Takibi =====
     logDailyActivity() {
         const today = new Date().toISOString().split('T')[0];
@@ -528,15 +540,16 @@ class Store {
         return this._state.userId;
     }
 
-    // XP ekle (harici tetikleyiciler için — örn. meydan okuma kabul)
+    // XP ekle (harici tetikleyiciler icin — orn. meydan okuma kabul)
     addXP(amount) {
+        if (amount <= 0) return;
         this._state.stats.totalXp = (this._state.stats.totalXp || 0) + amount;
-        const newLevel = Math.floor(this._state.stats.totalXp / XP_PER_LEVEL) + 1;
-        if (newLevel > this._state.stats.level) {
-            this._state.stats.level = newLevel;
-        }
+        this._state.stats.level = Math.min(
+            MAX_LEVEL,
+            Math.floor(this._state.stats.totalXp / XP_PER_LEVEL) + 1
+        );
+        this._checkBadges();
         this._save();
-        this._notify();
     }
 
     // ===== Reset =====

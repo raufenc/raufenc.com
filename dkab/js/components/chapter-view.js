@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Bolum Gorunumu =====
 
-import { store } from '../store.js?v=6';
-import { getGradeInfo } from '../data-loader.js?v=6';
-import { showConfetti, showXpPopup, playSound } from './effects.js?v=6';
+import { store } from '../store.js?v=7';
+import { getGradeInfo } from '../data-loader.js?v=7';
+import { showConfetti, showXpPopup, playSound } from './effects.js?v=7';
 
 // Helper: navigate back to chapter view
 function backToChapter(data) {

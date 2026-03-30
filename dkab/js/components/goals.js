@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - 360° Hedefler ve Oz Dusunme =====
 
-import { store } from '../store.js?v=6';
-import { getMessage } from '../messages.js?v=6';
+import { store } from '../store.js?v=7';
+import { getMessage } from '../messages.js?v=7';
 
 const REFLECTION_PROMPTS = [
     'Bu hafta ogrendigin en onemli kavram neydi?',
