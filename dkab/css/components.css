@@ -1229,3 +1229,27 @@
     .week-bars { gap: 0.4rem !important; }
     .week-bars > div > div:nth-child(2) { width: 24px !important; }
 }
+
+/* ===== Review Fixes: Missing Hover States ===== */
+.progress-stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); transition: all 0.2s; }
+.matching-item:hover:not(:disabled) { background: rgba(27, 107, 74, 0.05); }
+.quiz-option:hover:not(.correct):not(.wrong):not(:disabled) { background: rgba(27, 107, 74, 0.06); }
+.tab-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* ===== Lock effect for chapters ===== */
+.chapter-item.locked {
+    opacity: 0.45 !important;
+    pointer-events: none !important;
+    filter: grayscale(0.4);
+}
+.chapter-item[data-just-unlocked="true"] {
+    animation: unlockPulse 0.6s ease-out;
+}
+@keyframes unlockPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(78, 203, 113, 0.5); }
+    50% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(78, 203, 113, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(78, 203, 113, 0); }
+}
+
+/* ===== Confetti performance ===== */
+.confetti-piece { will-change: transform; }

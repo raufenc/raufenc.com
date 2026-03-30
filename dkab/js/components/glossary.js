@@ -1,8 +1,13 @@
 // ===== DKAB Akademi - Sozluk =====
 
-import { getGradeInfo } from '../data-loader.js?v=7';
+import { getGradeInfo } from '../data-loader.js?v=8';
+import { store } from '../store.js?v=8';
 
 export function renderGlossary(el, grade, glossary, app) {
+    // Rozet kontrolu: 50+ terim goruntuleme
+    if (glossary.length >= 50) {
+        store.awardBadge('vocab_50');
+    }
     const gradeInfo = getGradeInfo(grade);
     let filteredTerms = [...glossary];
     let searchQuery = '';

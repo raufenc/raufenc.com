@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - 360° Sidebar Bileseni =====
 
-import { store } from '../store.js?v=7';
-import { getAllGrades, getGradeInfo } from '../data-loader.js?v=7';
+import { store } from '../store.js?v=8';
+import { getAllGrades } from '../data-loader.js?v=8';
 
 export function renderSidebar(el, app) {
     const user = store.user;
@@ -147,6 +147,10 @@ export function renderSidebar(el, app) {
                     Siniftan Ayril (${store.getClassroomCode()})
                 </button>
             `}
+            <button class="sidebar-link text-muted" id="btn-dark-mode" style="border:none; background:none; width:100%; cursor:pointer;">
+                <span class="sidebar-link-icon">${document.body.classList.contains('dark-mode') ? '&#9728;' : '&#127769;'}</span>
+                ${document.body.classList.contains('dark-mode') ? 'Aydinlik Mod' : 'Karanlik Mod'}
+            </button>
             <button class="sidebar-link text-muted" id="btn-reset" style="border:none; background:none; width:100%; cursor:pointer;">
                 <span class="sidebar-link-icon">&#9881;</span>
                 Sifirla
@@ -155,6 +159,12 @@ export function renderSidebar(el, app) {
 
     // Olay dinleyicileri
     function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+    el.querySelector('#btn-dark-mode')?.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('dkab_dark_mode', document.body.classList.contains('dark-mode') ? '1' : '0');
+        renderSidebar(el, app);
+    });
 
     el.querySelector('#btn-reset')?.addEventListener('click', () => {
         if (confirm('Tum ilerlemeniz silinecek. Emin misiniz?')) {

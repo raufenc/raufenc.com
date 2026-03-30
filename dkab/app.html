@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DKAB Akademi</title>
+    <meta name="theme-color" content="#1B6B4A">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css?v=7">
-    <link rel="stylesheet" href="css/components.css?v=7">
-    <link rel="stylesheet" href="css/animations.css?v=7">
+    <link rel="stylesheet" href="css/main.css?v=8">
+    <link rel="stylesheet" href="css/components.css?v=8">
+    <link rel="stylesheet" href="css/animations.css?v=8">
 </head>
 <body>
+    <script>if(localStorage.getItem('dkab_dark_mode')==='1')document.body.classList.add('dark-mode');</script>
     <!-- Header -->
     <header class="app-header" id="app-header"></header>
 
@@ -29,7 +31,7 @@
         </div>
     </main>
 
-    <script type="module" src="js/app.js?v=7"></script>
+    <script type="module" src="js/app.js?v=8"></script>
     <script>
         // Service Worker kaydı
         if ('serviceWorker' in navigator) {

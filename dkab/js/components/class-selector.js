@@ -1,7 +1,7 @@
 // ===== DKAB Akademi - Sinif Secim Ekrani =====
 
-import { store } from '../store.js?v=7';
-import { getAllGrades } from '../data-loader.js?v=7';
+import { store } from '../store.js?v=8';
+import { getAllGrades } from '../data-loader.js?v=8';
 
 const AVATARS = [
     { id: 'star', icon: '&#11088;', name: 'Yildiz' },

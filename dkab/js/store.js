@@ -245,15 +245,8 @@ class Store {
 
     // ===== XP & Level =====
     addXp(amount) {
-        if (amount <= 0) return;
-        this._state.stats.totalXp += amount;
-        this._state.stats.level = Math.min(
-            MAX_LEVEL,
-            Math.floor(this._state.stats.totalXp / XP_PER_LEVEL) + 1
-        );
-        this._checkBadges();
-        this._save();
-        return { newLevel: this._state.stats.level };
+        // Eski metot adi — geriye uyumluluk icin addXP'ye yonlendir
+        return this.addXP(amount);
     }
 
     getXpForCurrentLevel() {
@@ -543,6 +536,7 @@ class Store {
     // XP ekle (harici tetikleyiciler icin — orn. meydan okuma kabul)
     addXP(amount) {
         if (amount <= 0) return;
+        const oldLevel = this._state.stats.level;
         this._state.stats.totalXp = (this._state.stats.totalXp || 0) + amount;
         this._state.stats.level = Math.min(
             MAX_LEVEL,
@@ -550,6 +544,16 @@ class Store {
         );
         this._checkBadges();
         this._save();
+
+        // Seviye atladiysa kutlama
+        if (this._state.stats.level > oldLevel) {
+            this._onLevelUp?.(this._state.stats.level);
+        }
+    }
+
+    // Seviye atlama callback'i (effects.js ile entegrasyon)
+    onLevelUp(fn) {
+        this._onLevelUp = fn;
     }
 
     // ===== Reset =====

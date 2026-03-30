@@ -1,8 +1,8 @@
 // ===== DKAB Akademi - Faz 4: Yillik Ilerleme Raporu (Kirkpatrick L4) =====
 // Kapsamli yillik buyume ve etki analizi
 
-import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=7';
-import { loadGradeEssentials } from '../data-loader.js?v=7';
+import { store, BADGES, XP_PER_LEVEL } from '../store.js?v=8';
+import { loadGradeEssentials } from '../data-loader.js?v=8';
 
 export async function renderAnnualReport(el, app) {
     const user = store.user;
