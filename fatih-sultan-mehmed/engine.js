@@ -190,7 +190,7 @@ function renderRoutes(){
   if(!MAP_DATA.routes)return;
   MAP_DATA.routes.forEach(r=>{
     const c=PERIOD_COLORS[r.period]||'#d4a853';
-    const line=L.polyline(r.waypoints,{color:c,weight:1.8,opacity:.45,dashArray:'4,6'}).addTo(map);
+    const line=L.polyline(r.waypoints,{color:'#c9a84c',weight:2.5,opacity:.7,dashArray:'6,4'}).addTo(map);
     line.routeData=r;
     routeLayers.push(line);
   });
@@ -369,8 +369,8 @@ function setupJourney(){
     function drawFrame(){
       if(!state.playing||state.paused)return;
       if(idx>=totalPts){
-        /* Yol bitti — kalıcı iz bırak */
-        const permLine=L.polyline(wp,{color:color,weight:1.8,opacity:.45,dashArray:'4,6'}).addTo(map);
+        /* Yol bitti — kalıcı iz bırak (altın, belirgin) */
+        const permLine=L.polyline(wp,{color:'#c9a84c',weight:2.5,opacity:.7,dashArray:'6,4'}).addTo(map);
         state.drawn.push(permLine);
         map.removeLayer(trail);
         state.step++;
