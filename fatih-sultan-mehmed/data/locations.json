@@ -132,7 +132,7 @@
       "precision": "kesin",
       "periods": ["fetih_donemi"],
       "order": 5,
-      "significance": "standard",
+      "significance": "minor",
       "events": [
         {"ah_year": 856, "ce_year": 1452, "title": "Rumelihisârı İnşâsı", "description": "İstanbul Boğazı'nın en dar noktasında yalnızca 4 ayda inşâ ettirilerek Bizans'ın Karadeniz'den yardım almasını engelledi.", "period": "fetih_donemi"}
       ],
@@ -147,7 +147,7 @@
       "precision": "kesin",
       "periods": ["fetih_donemi"],
       "order": 6,
-      "significance": "standard",
+      "significance": "minor",
       "events": [
         {"ah_year": 857, "ce_year": 1453, "title": "Eyüp Sultan Külliyesi", "description": "Fetihten sonra Ebâ Eyyûb el-Ensârî hazretlerinin kabr-i şerîfini buldurarak üzerine türbe ve külliye inşâ ettirdi.", "period": "fetih_donemi"}
       ],
@@ -290,15 +290,11 @@
     }
   ],
   "routes": [
-    {"from": "edirne", "to": "manisa", "period": "cocukluk", "ah_year": 843, "label": "Manisa Sancakbeyliği", "waypoints": [[41.67,26.56],[41.0,27.5],[40.2,26.4],[39.65,27.88],[38.61,27.43]]},
-    {"from": "manisa", "to": "edirne", "period": "ilk_saltanat", "ah_year": 848, "label": "Edirne'ye Dönüş", "waypoints": [[38.61,27.43],[39.65,27.88],[40.2,26.4],[41.0,27.5],[41.67,26.56]]},
-    {"from": "edirne", "to": "istanbul", "period": "fetih_donemi", "ah_year": 857, "label": "İstanbul Kuşatması", "waypoints": [[41.67,26.56],[41.4,27.35],[41.17,27.8],[41.01,28.98]]},
-    {"from": "istanbul", "to": "belgrad", "period": "imparatorluk", "ah_year": 858, "label": "Sırbistan Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[42.7,23.32],[43.32,21.9],[44.79,20.46]]},
-    {"from": "belgrad", "to": "mora", "period": "imparatorluk", "ah_year": 863, "label": "Mora Seferi", "waypoints": [[44.79,20.46],[42.0,21.43],[40.63,22.94],[39.64,22.42],[37.97,23.73],[37.07,22.37]]},
-    {"from": "istanbul", "to": "trabzon", "period": "imparatorluk", "ah_year": 865, "label": "Trabzon Seferi", "waypoints": [[41.01,28.98],[40.73,31.61],[39.93,32.86],[40.65,35.83],[40.31,36.55],[41.00,39.72]]},
-    {"from": "istanbul", "to": "otlukbeli", "period": "imparatorluk", "ah_year": 878, "label": "Otlukbeli Seferi", "waypoints": [[41.01,28.98],[39.93,32.86],[39.75,37.01],[39.75,39.49],[39.95,40.00]]},
-    {"from": "istanbul", "to": "iskodra", "period": "imparatorluk", "ah_year": 879, "label": "Arnavutluk Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[42.0,21.43],[41.12,20.8],[42.07,19.51]]},
-    {"from": "istanbul", "to": "otranto", "period": "son_donem", "ah_year": 885, "label": "İtalya Seferi", "waypoints": [[41.01,28.98],[41.67,26.56],[41.3,19.8],[40.5,19.3],[40.15,18.49]]}
+    {"from": "edirne", "to": "manisa", "period": "cocukluk", "ah_year": 843, "label": "Manisa Sancakbeyliği", "waypoints": [[41.67,26.56],[41.18,27.51],[40.65,27.96],[40.19,27.84],[39.65,27.88],[39.12,27.58],[38.61,27.43]]},
+    {"from": "manisa", "to": "edirne", "period": "ilk_saltanat", "ah_year": 848, "label": "Edirne'ye Dönüş", "waypoints": [[38.61,27.43],[39.12,27.58],[39.65,27.88],[40.19,27.84],[40.65,27.96],[41.18,27.51],[41.67,26.56]]},
+    {"from": "edirne", "to": "istanbul", "period": "fetih_donemi", "ah_year": 857, "label": "İstanbul Kuşatması", "waypoints": [[41.67,26.56],[41.55,27.08],[41.40,27.35],[41.28,27.80],[41.17,28.20],[41.05,28.60],[41.01,28.98]]},
+    {"from": "istanbul", "to": "trabzon", "period": "imparatorluk", "ah_year": 865, "label": "Trabzon Seferi", "waypoints": [[41.01,28.98],[40.85,30.40],[40.73,31.61],[40.55,33.50],[40.35,35.20],[40.65,36.55],[40.95,38.10],[41.00,39.72]]},
+    {"from": "istanbul", "to": "otlukbeli", "period": "imparatorluk", "ah_year": 878, "label": "Otlukbeli Seferi", "waypoints": [[41.01,28.98],[40.50,30.50],[39.93,32.86],[39.80,34.80],[39.75,37.01],[39.78,38.50],[39.95,40.00]]}
   ],
   "timeline_events": [
     {"ah_year": 835, "ce_year": 1432, "title": "Edirne'de Doğum", "location": "edirne", "period": "cocukluk", "description": "27 Receb 835 Hicrî tarihinde Edirne Sarayı'nda dünyâya geldi.", "icon": "star"},

@@ -45,11 +45,7 @@ const SCHOLAR = {
     'Manisa Sancakbeyliği': 'Şehzâde Mehmed, tahsîli için Manisa\'ya sancakbeyi olarak gönderildi. Burada devrin en büyük âlimlerinden ders aldı.',
     'Edirne\'ye Dönüş': 'Babasının tahtı bırakması üzerine 14 yaşında Edirne\'ye çağrılıp ilk kez pâdişâh oldu.',
     'İstanbul Kuşatması': 'Rumelihisarı\'nı yaptırıp Boğaz\'ı kesen Sultan, 857 (1453) baharında ordusunu İstanbul önlerine çıkardı.',
-    'Sırbistan Seferi': 'Belgrad\'ı kuşattı. Balkan topraklarında Osmanlı hâkimiyetini pekiştirdi.',
-    'Mora Seferi': 'Mora Yarımadası\'ndaki Bizans bakiyyelerini ortadan kaldırarak Yunanistan\'ı fethetti.',
     'Trabzon Seferi': 'Trabzon Rum İmparatorluğu\'na son vererek Karadeniz kıyılarını Osmanlı toprağına kattı.',
-    'Otlukbeli Seferi': 'Akkoyunlu hükümdârı Uzun Hasan\'ı Otlukbeli\'nde büyük bir bozguna uğrattı.',
-    'Arnavutluk Seferi': 'İskender Bey\'in ölümünden sonra Arnavutluk\'u tamamen Osmanlı topraklarına kattı.',
-    'İtalya Seferi': 'Gedik Ahmed Paşa komutasındaki donanma Otranto\'yu fethederek İtalya\'ya ayak bastı.'
+    'Otlukbeli Seferi': 'Akkoyunlu hükümdârı Uzun Hasan\'ı Otlukbeli\'nde büyük bir bozguna uğrattı.'
   }
 };
