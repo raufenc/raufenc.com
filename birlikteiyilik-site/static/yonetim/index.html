@@ -397,7 +397,7 @@ function renderList() {
     fb += `<button class="filter ${filter===k?'on':''}" onclick="setFilter('${k}')">${v} (${cnt})</button>`;
   });
   document.getElementById('filterBar').innerHTML = fb;
-  document.getElementById('countBadge').textContent = filter ? `${filtered.length} sonuç` : '';
+  const cb = document.getElementById('countBadge'); if(cb) cb.textContent = filter ? `${filtered.length} sonuç` : '';
 
   if (!filtered.length) {
     document.getElementById('newsList').innerHTML = '<div class="empty">Henüz kayıt yok</div>';
