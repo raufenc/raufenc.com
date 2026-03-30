@@ -118,6 +118,17 @@ function initMap(){
 
   physical.addTo(map);
 
+  /* Katman → rota renk eşlemesi (zemine zıt) */
+  const _routeStyles={
+    'Coğrafî':    {color:'#8B0000',weight:2.5,opacity:.75},
+    'Topoğrafik': {color:'#8B0000',weight:2.5,opacity:.7},
+    'Siyâsî':     {color:'#8B0000',weight:2.5,opacity:.7},
+    'Açık Tema':  {color:'#8B0000',weight:2.5,opacity:.7},
+    'Koyu Tema':  {color:'#e8d48b',weight:2.5,opacity:.8},
+    'Uydu':       {color:'#ffd700',weight:3,opacity:.9}
+  };
+  window._activeRouteStyle=_routeStyles['Coğrafî'];
+
   L.control.layers({
     'Coğrafî':physical,
     'Topoğrafik':topo,
@@ -126,6 +137,12 @@ function initMap(){
     'Koyu Tema':cartoDark,
     'Uydu':satellite
   },null,{position:'bottomleft',collapsed:true}).addTo(map);
+
+  map.on('baselayerchange',function(e){
+    window._activeRouteStyle=_routeStyles[e.name]||_routeStyles['Coğrafî'];
+    /* Mevcut rotaları yeni renkle güncelle */
+    routeLayers.forEach(rl=>{rl.setStyle({color:window._activeRouteStyle.color,weight:window._activeRouteStyle.weight,opacity:window._activeRouteStyle.opacity});});
+  });
 }
 
 /* Kayı tarzı SVG marker sistemi */
@@ -190,7 +207,8 @@ function renderRoutes(){
   if(!MAP_DATA.routes)return;
   MAP_DATA.routes.forEach(r=>{
     const c=PERIOD_COLORS[r.period]||'#d4a853';
-    const line=L.polyline(r.waypoints,{color:'#c9a84c',weight:2.5,opacity:.7,dashArray:'6,4'}).addTo(map);
+    const rs=window._activeRouteStyle||{color:'#8B0000',weight:2.5,opacity:.75};
+    const line=L.polyline(r.waypoints,{color:rs.color,weight:rs.weight,opacity:rs.opacity,dashArray:'6,4'}).addTo(map);
     line.routeData=r;
     routeLayers.push(line);
   });
@@ -369,8 +387,9 @@ function setupJourney(){
     function drawFrame(){
       if(!state.playing||state.paused)return;
       if(idx>=totalPts){
-        /* Yol bitti — kalıcı iz bırak (altın, belirgin) */
-        const permLine=L.polyline(wp,{color:'#c9a84c',weight:2.5,opacity:.7,dashArray:'6,4'}).addTo(map);
+        /* Yol bitti — kalıcı iz bırak */
+        const rs=window._activeRouteStyle||{color:'#8B0000',weight:2.5,opacity:.75};
+        const permLine=L.polyline(wp,{color:rs.color,weight:rs.weight,opacity:rs.opacity,dashArray:'6,4'}).addTo(map);
         state.drawn.push(permLine);
         map.removeLayer(trail);
         state.step++;
