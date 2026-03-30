@@ -166,7 +166,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <textarea id="fExcerpt" rows="3" placeholder="Kısa bir özet yazın..."></textarea>
       </div>
       <div class="field">
-        <label>İçerik <span style="font-weight:400;color:#aaa">(HTML destekler)</span></label>
+        <label style="display:flex;align-items:center;justify-content:space-between;">
+          <span>İçerik <span style="font-weight:400;color:#aaa">(HTML destekler)</span></span>
+          <button type="button" class="btn btn-gray" style="font-size:.78rem;padding:4px 10px;" onclick="cleanHtml()" title="Blogger'dan kopyalanan inline stilleri temizle">🧹 HTML Temizle</button>
+        </label>
         <textarea id="fContent" placeholder="Haber içeriği..."></textarea>
       </div>
       <div class="field-2">
@@ -345,6 +348,30 @@ async function rebuild() {
     document.getElementById('mainNotice').innerHTML = '<div class="notice info">⏳ Site yenileniyor… Vercel ~1 dakika içinde günceller.</div>';
   } catch(e) {}
   btn.disabled = false; btn.innerHTML = 'Yayınla';
+}
+
+function cleanHtml() {
+  const ta = document.getElementById('fContent');
+  let h = ta.value;
+  if (!h.trim()) return;
+  // Remove style, face, color, size, class attributes
+  h = h.replace(/\s*(style|face|color|size|class|align|dir|lang|data-[^=]*)="[^"]*"/gi, '');
+  // Remove empty spans and divs
+  h = h.replace(/<span>\s*<\/span>/gi, '');
+  h = h.replace(/<div>\s*<\/div>/gi, '');
+  // Unwrap font tags
+  h = h.replace(/<font[^>]*>([\s\S]*?)<\/font>/gi, '$1');
+  // Remove <o:p> tags
+  h = h.replace(/<o:p[^>]*>[\s\S]*?<\/o:p>/gi, '');
+  // Collapse multiple <br> into one
+  h = h.replace(/(<br\s*\/?>\s*){3,}/gi, '<br><br>');
+  // Remove leading/trailing whitespace in tags
+  h = h.replace(/>\s{2,}</g, '> ');
+  // Remove empty paragraphs
+  h = h.replace(/<p>\s*<\/p>/gi, '');
+  ta.value = h.trim();
+  document.getElementById('editNotice').innerHTML = '<div class="notice ok">✅ HTML temizlendi</div>';
+  setTimeout(() => { document.getElementById('editNotice').innerHTML = ''; }, 2000);
 }
 
 function logout() {
