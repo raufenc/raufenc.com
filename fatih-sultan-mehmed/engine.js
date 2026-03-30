@@ -311,6 +311,20 @@ function setupJourney(){
 
   function resetVisuals(){state.drawn.forEach(l=>map.removeLayer(l));state.drawn=[];if(state.movMarker){map.removeLayer(state.movMarker);state.movMarker=null;}}
 
+  /* Waypoint'ler arası ara noktalar üret — akıcı hareket */
+  function interpolateWP(wp,steps){
+    const pts=[];
+    for(let i=0;i<wp.length-1;i++){
+      const a=wp[i],b=wp[i+1];
+      for(let j=0;j<steps;j++){
+        const t=j/steps;
+        pts.push([a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t]);
+      }
+    }
+    pts.push(wp[wp.length-1]);
+    return pts;
+  }
+
   function animateStep(){
     if(!state.playing||state.paused)return;
     const routes=MAP_DATA.routes;
@@ -320,7 +334,7 @@ function setupJourney(){
       progEl.style.width='100%';state.playing=false;pauseBtn.classList.add('hidden');playBtn.classList.add('hidden');legend.classList.remove('hidden');return;
     }
     const route=routes[state.step];const color=PERIOD_COLORS[route.period]||'#d4a853';
-    const speed=parseInt(speedSel.value)||2;const dur=2500/speed;
+    const speed=parseInt(speedSel.value)||2;
     const fromLoc=MAP_DATA.locations.find(l=>l.id===route.from);
     const toLoc=MAP_DATA.locations.find(l=>l.id===route.to);
 
@@ -330,17 +344,45 @@ function setupJourney(){
     progEl.style.width=Math.round((state.step+1)/routes.length*100)+'%';
 
     const wp=route.waypoints;
-    const line=L.polyline(wp,{color:color,weight:2.5,opacity:.7}).addTo(map);
-    state.drawn.push(line);
+    const pts=interpolateWP(wp, 8);
+    const totalPts=pts.length;
+    const frameDelay=Math.round(1800/(speed*totalPts));
 
+    /* Haritayı rotanın ortasına uçur */
+    const midIdx=Math.floor(totalPts/2);
+    map.flyTo(pts[midIdx],5,{duration:.8});
+
+    /* Hareketli marker oluştur */
     if(state.movMarker)map.removeLayer(state.movMarker);
-    const dest=wp[wp.length-1];
-    state.movMarker=L.circleMarker(dest,{radius:6,fillColor:'#d4a853',fillOpacity:1,color:'#fff',weight:2}).addTo(map);
+    const mIcon=L.divIcon({
+      className:'',
+      html:'<svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#d4a853" stroke="#fff" stroke-width="2"/><circle cx="9" cy="9" r="3" fill="#5a3e1b"/></svg>',
+      iconSize:[18,18],iconAnchor:[9,9]
+    });
+    state.movMarker=L.marker(pts[0],{icon:mIcon,zIndexOffset:1000}).addTo(map);
 
-    map.flyTo(dest,5,{duration:1});
+    /* Çizgiyi adım adım çiz + marker'ı yürüt */
+    const trail=L.polyline([pts[0]],{color:color,weight:3,opacity:.8}).addTo(map);
+    state.drawn.push(trail);
+    let idx=0;
 
-    state.step++;
-    state.timer=setTimeout(animateStep,dur);
+    function drawFrame(){
+      if(!state.playing||state.paused)return;
+      if(idx>=totalPts){
+        /* Yol bitti — kalıcı iz bırak */
+        const permLine=L.polyline(wp,{color:color,weight:1.8,opacity:.45,dashArray:'4,6'}).addTo(map);
+        state.drawn.push(permLine);
+        map.removeLayer(trail);
+        state.step++;
+        state.timer=setTimeout(animateStep,800/speed);
+        return;
+      }
+      trail.addLatLng(pts[idx]);
+      state.movMarker.setLatLng(pts[idx]);
+      idx++;
+      state.timer=setTimeout(drawFrame,frameDelay);
+    }
+    setTimeout(drawFrame,900);
   }
 }
 
