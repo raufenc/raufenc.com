@@ -9,7 +9,7 @@ const DERSLER = [
     uniteler: [
       {
         slug: 'basamak-degeri', name: 'Basamak Değeri ve Sayı Değeri', hedef: 'Büyük doğal sayılarda basamak ve sayı değerini bulabilme',
-        videoId: 'I108YUUtwmU',
+        videoId: 'fT7DWHW8JE4',
         checkpoints: [
           {
             saniye: 60,
@@ -168,7 +168,7 @@ const DERSLER = [
       },
       {
         slug: 'carpma-bolme', name: 'Çarpma ve Bölme Problemleri', hedef: 'Çarpma ve bölme işlemleri içeren çok adımlı problemleri çözme',
-        videoId: 'YJKpdPBgJmU',
+        videoId: 'NZQCvqCBt5g',
         checkpoints: [
           {
             saniye: 60,
@@ -235,7 +235,7 @@ const DERSLER = [
       },
       {
         slug: 'alan-cevre', name: 'Alan ve Çevre', hedef: 'Dikdörtgenin alan ve çevresini hesaplama, bilinmeyeni bulma',
-        videoId: 'WKbrSAJ6oiI',
+        videoId: 'CCIfZrD2awI',
         checkpoints: [
           {
             saniye: 60,
@@ -301,80 +301,8 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'bolukler', name: 'Büyük Sayıları Bölüklere Ayırma', hedef: 'Büyük doğal sayıları bölüklere ayırarak okuma ve yazma',
-        videoId: 'NZQCvqCBt5g',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Sayıları bölüklere ayırırken sağdan başlayarak kaçar basamak gruplanır?',
-            secenekler: ['3\'er basamak', '2\'şer basamak', '4\'er basamak', '1\'er basamak'],
-            dogru: 0,
-            ipucu: '"Sağdan başlamak şartıyla her üç basamakta bir birleşen kısım bölüktür."'
-          },
-          {
-            saniye: 120,
-            soru: 'Bölük isimleri küçükten büyüğe doğru hangi sıradadır?',
-            secenekler: [
-              'Birler → Binler → Milyonlar → Milyarlar',
-              'Birler → Milyonlar → Binler → Milyarlar',
-              'Milyarlar → Milyonlar → Binler → Birler',
-              'Binler → Birler → Milyonlar → Milyarlar'
-            ],
-            dogru: 0,
-            ipucu: 'Sağdan sola: birler bölüğü → binler → milyonlar → milyarlar.'
-          },
-          {
-            saniye: 240,
-            soru: '4.852.736 sayısında "binler bölüğü" hangi rakamlardan oluşur?',
-            secenekler: ['4 ve 8', '8, 5 ve 2', '7, 3 ve 6', '2, 7 ve 3'],
-            dogru: 1,
-            ipucu: 'Binler bölüğü: yüz binler, on binler ve binler basamaklarını içerir.'
-          },
-          {
-            saniye: 300,
-            soru: '7.000.000 + 300.000 + 50.000 + 6.000 + 400 + 20 + 8 toplamı kaçtır?',
-            secenekler: ['7.356.428', '7.365.428', '73.564.28', '7.356.248'],
-            dogru: 0,
-            ipucu: 'Bölüklere ayırarak yazılan sayıyı topladığımızda gerçek sayıya ulaşırız.'
-          },
-          {
-            saniye: 360,
-            soru: 'Hangi sayıda milyonlar bölüğü sıfırdan farklıdır?',
-            secenekler: ['987.654', '1.000.001', '999.999', '456.789'],
-            dogru: 1,
-            ipucu: 'Milyonlar bölüğü en az 7 basamaklı sayılarda yer alır.'
-          },
-          {
-            saniye: 420,
-            soru: '12.345.678 sayısında binler bölüğü hangi rakamlardan oluşur?',
-            secenekler: ['1 ve 2', '3, 4 ve 5', '6, 7 ve 8', '1, 2 ve 3'],
-            dogru: 1,
-            ipucu: 'Binler bölüğü: yüz binler (3), on binler (4) ve binler (5) basamaklarından oluşur.'
-          },
-          {
-            saniye: 480,
-            soru: '9 milyar 40 milyon 7 bin 15 sayısını rakamlarla nasıl yazarsın?',
-            secenekler: ['9.040.007.015', '9.400.070.015', '9.040.700.015', '9.004.007.015'],
-            dogru: 0,
-            ipucu: '9 milyar → 9.000.000.000; 40 milyon → 40.000.000; 7 bin → 7.000; 15 → 15.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Büyük sayıları bölüklere ayırmanın temel kuralı hangisidir?',
-            secenekler: [
-              'Sağdan başlayarak her 3 basamakta bir gruplama yapılır: birler, binler, milyonlar, milyarlar.',
-              'Soldan başlayarak her 2 basamakta bir gruplama yapılır.',
-              'Yalnızca 6 basamaklı sayılar bölüklere ayrılır.',
-              'Bölükler her zaman eşit sayıda rakam içerir.'
-            ],
-            dogru: 0,
-            ipucu: 'Sağdan: ilk 3 → birler, sonraki 3 → binler, sonraki 3 → milyonlar, son 3 → milyarlar.'
-          }
-        ]
-      },
-      {
         slug: 'zaman-olcme', name: 'Zaman Ölçme', hedef: 'Zaman birimlerini dönüştürme ve problemleri çözme',
-        videoId: 'euQgzldoUck',
+        videoId: 'gNqWh-Um6vM',
         checkpoints: [
           {
             saniye: 60,
@@ -436,6 +364,662 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: '1 yıl=12 ay, 1 ay=30 gün, 1 gün=24 saat, 1 saat=60 dakika, 1 dakika=60 saniye.'
+          }
+        ]
+      },
+      {
+        slug: 'dogal-sayilar-okuma', name: 'Doğal Sayıları Okuma ve Yazma', hedef: 'Çok basamaklı doğal sayıları okuma ve yazma',
+        videoId: '3uvFo550SQg',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Milyonlar bölüğü kaç basamaktan sonra başlar?',
+            secenekler: ['3 basamaktan sonra', '6 basamaktan sonra', '9 basamaktan sonra', '4 basamaktan sonra'],
+            dogru: 1,
+            ipucu: 'Birler bölüğü ilk 3, binler bölüğü sonraki 3, milyonlar bölüğü 7. basamaktan itibaren başlar.'
+          },
+          {
+            saniye: 120,
+            soru: '3.450.000 sayısı nasıl okunur?',
+            secenekler: [
+              'Üç milyon dört yüz elli bin',
+              'Otuz dört milyon elli bin',
+              'Üç milyon kırk beş bin',
+              'Üç yüz kırk beş milyon'
+            ],
+            dogru: 0,
+            ipucu: 'Bölüklere ayır: 3 milyon / 450 bin / 000 birler → üç milyon dört yüz elli bin.'
+          },
+          {
+            saniye: 180,
+            soru: '"Yirmi bir milyon beş yüz bin" sayısını rakamlarla nasıl yazarsın?',
+            secenekler: ['21.500.000', '2.150.000', '215.000.000', '21.050.000'],
+            dogru: 0,
+            ipucu: '21 milyon = 21.000.000; beş yüz bin = 500.000 → 21.500.000.'
+          },
+          {
+            saniye: 240,
+            soru: 'Milyarlar bölüğünde hangi basamaklar bulunur?',
+            secenekler: [
+              'Birler, onlar, yüzler',
+              'Milyarlar, on milyarlar, yüz milyarlar',
+              'Yüz binler, on binler, binler',
+              'Milyonlar, on milyonlar, yüz milyonlar'
+            ],
+            dogru: 1,
+            ipucu: 'Her bölükte 3 basamak vardır: milyarlar bölüğü → milyarlar, on milyarlar, yüz milyarlar.'
+          },
+          {
+            saniye: 300,
+            soru: '5.008.070.000 sayısında sıfır olan bölük hangisidir?',
+            secenekler: ['Birler bölüğü', 'Binler bölüğü', 'Milyonlar bölüğü', 'Milyarlar bölüğü'],
+            dogru: 0,
+            ipucu: 'Sağdan başla: birler bölüğü 000 → tamamı sıfır.'
+          },
+          {
+            saniye: 360,
+            soru: '"Dört milyar üç yüz milyon" sayısını rakamlarla nasıl yazarsın?',
+            secenekler: ['4.300.000.000', '43.000.000.000', '430.000.000', '4.030.000.000'],
+            dogru: 0,
+            ipucu: '4 milyar = 4.000.000.000; üç yüz milyon = 300.000.000 → topla.'
+          },
+          {
+            saniye: 420,
+            soru: '72.156.003 sayısında 7 rakamının basamak değeri kaçtır?',
+            secenekler: ['7.000.000', '70.000.000', '700.000', '7.000'],
+            dogru: 1,
+            ipucu: '7 rakamı on milyonlar basamağında: 7 × 10.000.000 = 70.000.000.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Çok basamaklı doğal sayıları doğru okumak için en önemli kural nedir?',
+            secenekler: [
+              'Sağdan sola bölüklere ayırıp her bölüğü kendi adıyla okumak.',
+              'Soldan sağa tek tek rakam okumak.',
+              'Sadece sıfır olmayan rakamları okumak.',
+              'Sayıyı ikişer ikişer gruplamak.'
+            ],
+            dogru: 0,
+            ipucu: 'Sağdan 3\'er basamak ayır → birler, binler, milyonlar, milyarlar; her bölüğü adıyla oku.'
+          }
+        ]
+      },
+      {
+        slug: 'toplama-cikarma', name: 'Doğal Sayılarla Toplama ve Çıkarma', hedef: 'Doğal sayılarla toplama ve çıkarma işlemlerini yapma',
+        videoId: 'IHoenJnlNUw',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Toplama işleminde "elde" ne zaman oluşur?',
+            secenekler: [
+              'Bir basamaktaki rakamların toplamı 10 veya daha fazla olduğunda.',
+              'İki sayının birler basamağı aynı olduğunda.',
+              'Toplanan sayılardan biri sıfır olduğunda.',
+              'Sadece üç basamaklı sayılarda oluşur.'
+            ],
+            dogru: 0,
+            ipucu: 'Örneğin 7+8=15; 5 yazılır, 1 elde olarak bir üst basamağa eklenir.'
+          },
+          {
+            saniye: 120,
+            soru: '4.567 + 3.895 işleminin sonucu kaçtır?',
+            secenekler: ['8.462', '7.462', '8.362', '8.452'],
+            dogru: 0,
+            ipucu: 'Birler: 7+5=12 (yaz 2, elde 1). Onlar: 6+9+1=16 (yaz 6, elde 1). Devam et.'
+          },
+          {
+            saniye: 180,
+            soru: 'Çıkarma işleminde "onluk bozdurma" ne demektir?',
+            secenekler: [
+              'Üstteki basamak yetersiz kalınca bir üst basamaktan 1 alıp 10 olarak eklemek.',
+              'Her basamaktan 10 çıkarmak.',
+              'Sayıyı 10\'a bölmek.',
+              'Sadece onlar basamağında yapılan bir işlem.'
+            ],
+            dogru: 0,
+            ipucu: 'Örneğin 42−17: birler basamağında 2 < 7, onlardan 1 bozdur → 12−7=5.'
+          },
+          {
+            saniye: 240,
+            soru: '8.003 − 4.567 işleminin sonucu kaçtır?',
+            secenekler: ['3.436', '3.536', '4.436', '3.446'],
+            dogru: 0,
+            ipucu: 'Birler: 3 < 7, onluk bozdurmamız lazım. Adım adım yaparak ilerle.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir kitapçıda 12.450 kitap vardı. 3.875 kitap satıldı, 2.130 yeni kitap geldi. Kaç kitap kaldı?',
+            secenekler: ['10.705', '10.605', '11.705', '10.805'],
+            dogru: 0,
+            ipucu: 'Önce çıkar: 12.450 − 3.875 = 8.575; sonra ekle: 8.575 + 2.130 = 10.705.'
+          },
+          {
+            saniye: 360,
+            soru: 'Toplama işleminin doğruluğunu kontrol etmek için ne yapılır?',
+            secenekler: [
+              'Sonuçtan toplananlardan birini çıkarırız; diğer toplanan çıkmalıdır.',
+              'İşlemi baştan sona tekrar yaparız.',
+              'Sayıları çarparız.',
+              'Sonuca 10 ekleriz.'
+            ],
+            dogru: 0,
+            ipucu: 'Toplam − bir toplanan = diğer toplanan → sağlama yapılır.'
+          },
+          {
+            saniye: 420,
+            soru: '56.789 + 34.211 işleminin sonucu kaçtır?',
+            secenekler: ['91.000', '90.000', '89.000', '91.100'],
+            dogru: 0,
+            ipucu: 'Basamak basamak topla: 9+1=10, 8+1+1=10, 7+2+1=10, 6+4+1=11, 5+3+1=9 → 91.000.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Toplama ve çıkarma işlemlerinde dikkat edilmesi gereken en önemli nokta hangisidir?',
+            secenekler: [
+              'Basamakları alt alta doğru hizalamak ve elde/bozdurma işlemlerini unutmamak.',
+              'Sayıları her zaman büyükten küçüğe yazmak.',
+              'Sadece birler basamağını kontrol etmek yeterlidir.',
+              'İşlemi soldan sağa yapmak.'
+            ],
+            dogru: 0,
+            ipucu: 'Basamakları hizala, elde ve bozdurma işlemlerini doğru yap, sağlamayla kontrol et.'
+          }
+        ]
+      },
+      {
+        slug: 'zihinden-islem', name: 'Zihinden Toplama ve Çıkarma', hedef: 'Zihinden toplama ve çıkarma stratejileri',
+        videoId: '0wj7svyTgKw',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Zihinden toplama yaparken "yuvarlama" stratejisi nasıl kullanılır?',
+            secenekler: [
+              'Sayıyı en yakın onluğa veya yüzlüğe yuvarlayıp, farkı sonra düzeltiriz.',
+              'Sayının son rakamını sileriz.',
+              'İki sayıyı da 10\'a böleriz.',
+              'Sadece birler basamağını toplarız.'
+            ],
+            dogru: 0,
+            ipucu: 'Örneğin 48+35: 48→50 yap, 50+35=85, sonra 2 çıkar → 83.'
+          },
+          {
+            saniye: 120,
+            soru: '197 + 245 işlemini zihinden yapmak için en kolay yöntem hangisidir?',
+            secenekler: [
+              '197\'yi 200\'e yuvarlayıp 200+245=445, sonra 3 çıkarmak → 442.',
+              'İki sayıyı da 100\'e yuvarlamak.',
+              '197+245=442 doğrudan ezberlemek.',
+              'Sadece yüzler basamağını toplamak.'
+            ],
+            dogru: 0,
+            ipucu: '197 sayısı 200\'e çok yakın; 3 fazla ekledik, sonra 3 çıkarırız.'
+          },
+          {
+            saniye: 180,
+            soru: '"Parçalama" stratejisinde 56 + 37 nasıl hesaplanır?',
+            secenekler: [
+              '50+30=80, 6+7=13, 80+13=93',
+              '56+30=86, 86+7=93',
+              'Her iki yöntem de doğru.',
+              '56+40=96, 96−3=93'
+            ],
+            dogru: 2,
+            ipucu: 'Parçalama farklı şekillerde yapılabilir: basamaklara ayırma veya bir sayıyı parçalama.'
+          },
+          {
+            saniye: 240,
+            soru: '503 − 198 işlemini zihinden en kolay nasıl yaparsın?',
+            secenekler: [
+              '503 − 200 = 303, sonra 2 ekle → 305',
+              '500 − 198 = 302, sonra 3 ekle → 305',
+              'Her iki yöntem de doğru ve sonuç 305.',
+              '503 − 200 = 303, sonra 2 çıkar → 301'
+            ],
+            dogru: 2,
+            ipucu: '198\'i 200\'e yuvarlarsak 2 fazla çıkarmış oluruz; bunu geri ekleriz.'
+          },
+          {
+            saniye: 300,
+            soru: 'Zihinden 750 − 380 işlemini "onluklar yöntemi" ile nasıl yaparsın?',
+            secenekler: [
+              '750−380: 750−400=350, 350+20=370',
+              '750−380: 700−300=400, 50−80=−30 → 370',
+              '750−380: 750−300=450, 450−80=370',
+              'Hepsi doğru sonucu verir.'
+            ],
+            dogru: 3,
+            ipucu: 'Farklı stratejilerle aynı sonuca ulaşılır: 750 − 380 = 370.'
+          },
+          {
+            saniye: 360,
+            soru: '1.995 + 2.008 işlemini zihinden yapmak için hangi strateji en pratiktir?',
+            secenekler: [
+              '2.000 + 2.000 = 4.000; sonra 5 çıkar ve 8 ekle → 4.003',
+              '1.995 + 2.000 = 3.995; 3.995 + 8 = 4.003',
+              'Her iki yöntem de doğrudur.',
+              '1.000 + 2.000 = 3.000; 995 + 8 = 1.003 → sonuç 3.003'
+            ],
+            dogru: 2,
+            ipucu: 'Her iki sayıyı da yuvarlayabilir veya sadece birini yuvarlayıp farkı düzeltebilirsin.'
+          },
+          {
+            saniye: 420,
+            soru: 'Markette 85 TL harcadın, kasiyere 200 TL verdin. Para üstünü zihinden nasıl bulursun?',
+            secenekler: [
+              '85\'ten 100\'e 15, 100\'den 200\'e 100 → 15+100=115 TL',
+              '200−85: 200−80=120, 120−5=115 TL',
+              'Her iki yöntem de doğru → 115 TL',
+              '200−85: 200−90=110, 110+5=115 TL'
+            ],
+            dogru: 2,
+            ipucu: '"Tamamlama" yöntemi: 85→100 (15 TL), 100→200 (100 TL) → toplam 115 TL.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Zihinden işlem stratejilerinin ortak özelliği nedir?',
+            secenekler: [
+              'Sayıları kolay hesaplanabilir hale getirip, sonra düzeltme yapmak.',
+              'Her zaman kâğıt kalem kullanmak.',
+              'Sadece küçük sayılarda uygulanabilir.',
+              'Sayıları her zaman 10\'a bölmek.'
+            ],
+            dogru: 0,
+            ipucu: 'Yuvarlama, parçalama, tamamlama → hepsi sayıları kolay hale getirip farkı düzeltir.'
+          }
+        ]
+      },
+      {
+        slug: 'carpma-bolme-islemleri', name: 'Doğal Sayılarda Çarpma ve Bölme', hedef: 'Doğal sayılarda çarpma ve bölme işlemlerini yapma',
+        videoId: '-FruESJRVeE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Çarpma işlemi aslında neyin kısa yoludur?',
+            secenekler: [
+              'Aynı sayının tekrar tekrar toplanmasının.',
+              'Sayıları büyükten küçüğe sıralamanın.',
+              'Bölme işleminin tersinin.',
+              'Sayıların basamaklarını ayırmanın.'
+            ],
+            dogru: 0,
+            ipucu: 'Örneğin 4×3 = 4+4+4 = 12; çarpma tekrarlı toplamadır.'
+          },
+          {
+            saniye: 120,
+            soru: '345 × 12 işleminin sonucu kaçtır?',
+            secenekler: ['4.140', '3.140', '4.040', '4.240'],
+            dogru: 0,
+            ipucu: '345×2=690 ve 345×10=3.450 → 690+3.450=4.140.'
+          },
+          {
+            saniye: 180,
+            soru: 'Bölme işleminde "bölünen", "bölen", "bölüm" ve "kalan" nedir?',
+            secenekler: [
+              'Bölünen ÷ bölen = bölüm, artan kısım kalandır.',
+              'Bölen ÷ bölünen = kalan.',
+              'Bölüm × kalan = bölünen.',
+              'Kalan her zaman bölenden büyüktür.'
+            ],
+            dogru: 0,
+            ipucu: '17÷5=3 kalan 2 → 17 bölünen, 5 bölen, 3 bölüm, 2 kalan.'
+          },
+          {
+            saniye: 240,
+            soru: '1.728 ÷ 8 işleminin sonucu kaçtır?',
+            secenekler: ['216', '206', '226', '218'],
+            dogru: 0,
+            ipucu: '17÷8=2 kalan 1 → 12÷8=1 kalan 4 → 48÷8=6 → sonuç: 216.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir sayı 25 ile çarpılıp sonuç 3.750 bulunmuştur. Bu sayı kaçtır?',
+            secenekler: ['150', '145', '155', '160'],
+            dogru: 0,
+            ipucu: 'Ters işlem: 3.750 ÷ 25 = ? → 25×150 = 3.750.'
+          },
+          {
+            saniye: 360,
+            soru: '4.625 ÷ 25 işleminde bölüm ve kalan kaçtır?',
+            secenekler: ['Bölüm: 185, kalan: 0', 'Bölüm: 184, kalan: 25', 'Bölüm: 183, kalan: 0', 'Bölüm: 185, kalan: 5'],
+            dogru: 0,
+            ipucu: '25×185 = 4.625 → tam bölünür, kalan 0.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir fabrikada günde 756 kutu üretiliyor. 18 günde kaç kutu üretilir?',
+            secenekler: ['13.608', '13.508', '14.608', '12.608'],
+            dogru: 0,
+            ipucu: '756 × 18: 756×10=7.560, 756×8=6.048 → 7.560+6.048=13.608.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Çarpma ile bölme işlemi arasındaki ilişki nedir?',
+            secenekler: [
+              'Bölme, çarpmanın ters işlemidir; a×b=c ise c÷b=a olur.',
+              'İkisi birbirinden tamamen bağımsızdır.',
+              'Çarpma yalnızca büyük sayılarda, bölme küçük sayılarda kullanılır.',
+              'Bölmede her zaman kalan kalır.'
+            ],
+            dogru: 0,
+            ipucu: 'Çarpma ve bölme ters işlemlerdir: 6×4=24 ise 24÷4=6.'
+          }
+        ]
+      },
+      {
+        slug: 'karenin-cevresi', name: 'Karenin Çevresi', hedef: 'Karenin çevre uzunluğunu hesaplama',
+        videoId: 'fRRPgdOrehQ',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Karenin en temel özelliği nedir?',
+            secenekler: [
+              'Dört kenarının uzunluğu birbirine eşittir.',
+              'İki kenarı uzun, iki kenarı kısadır.',
+              'Üç kenarı vardır.',
+              'Kenarları farklı uzunluktadır.'
+            ],
+            dogru: 0,
+            ipucu: 'Kare: dört kenarı eşit, dört açısı 90° olan özel bir dikdörtgendir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Çevre ne demektir?',
+            secenekler: [
+              'Bir şeklin dış sınırının toplam uzunluğudur.',
+              'Bir şeklin içindeki alandır.',
+              'Şeklin köşe sayısıdır.',
+              'Şeklin kenar sayısıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Çevre, şeklin etrafını dolaştığında aldığın toplam yol uzunluğudur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Kenar uzunluğu 6 cm olan karenin çevresi kaç cm\'dir?',
+            secenekler: ['24 cm', '12 cm', '36 cm', '18 cm'],
+            dogru: 0,
+            ipucu: 'Karenin çevresi = 4 × kenar = 4 × 6 = ?'
+          },
+          {
+            saniye: 240,
+            soru: 'Bir karenin çevresi 48 cm ise bir kenarı kaç cm\'dir?',
+            secenekler: ['10 cm', '12 cm', '16 cm', '8 cm'],
+            dogru: 1,
+            ipucu: 'Çevre = 4 × kenar → kenar = çevre ÷ 4 = 48 ÷ 4 = ?'
+          },
+          {
+            saniye: 300,
+            soru: 'Kenar uzunluğu 15 cm olan kare şeklinde bir çerçevenin çevresi kaç cm\'dir?',
+            secenekler: ['45 cm', '60 cm', '30 cm', '75 cm'],
+            dogru: 1,
+            ipucu: 'Çevre = 4 × 15 = 60 cm.'
+          },
+          {
+            saniye: 360,
+            soru: 'İki karenin kenar uzunlukları 8 cm ve 5 cm\'dir. Çevreleri arasındaki fark kaç cm\'dir?',
+            secenekler: ['12 cm', '3 cm', '20 cm', '13 cm'],
+            dogru: 0,
+            ipucu: 'Birinci çevre: 4×8=32; ikinci çevre: 4×5=20; fark: 32−20=12 cm.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kare şeklinde bir bahçenin etrafına tel çekilecek. Kenar uzunluğu 25 m ise kaç metre tel gerekir?',
+            secenekler: ['75 m', '100 m', '50 m', '125 m'],
+            dogru: 1,
+            ipucu: 'Bahçenin etrafı = çevre = 4 × 25 = 100 m.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Karenin çevresi için hangi formül doğrudur?',
+            secenekler: [
+              'Çevre = 4 × kenar uzunluğu',
+              'Çevre = 2 × kenar uzunluğu',
+              'Çevre = kenar × kenar',
+              'Çevre = kenar + kenar'
+            ],
+            dogru: 0,
+            ipucu: 'Karenin 4 eşit kenarı vardır; çevre = kenar + kenar + kenar + kenar = 4 × kenar.'
+          }
+        ]
+      },
+      {
+        slug: 'karenin-alani', name: 'Karenin Alanı', hedef: 'Karenin alanını hesaplama ve birim kare',
+        videoId: 'HRAIsSfs48o',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Alan ne demektir?',
+            secenekler: [
+              'Bir şeklin kapladığı yüzey büyüklüğüdür.',
+              'Bir şeklin çevresinin uzunluğudur.',
+              'Bir şeklin köşe sayısıdır.',
+              'Bir şeklin kenar uzunluğudur.'
+            ],
+            dogru: 0,
+            ipucu: 'Alan, düz bir yüzeyin ne kadar yer kapladığını gösterir; birimi cm², m² gibidir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Birim kare ne demektir?',
+            secenekler: [
+              'Kenar uzunluğu 1 birim olan kare; alanı ölçmek için kullanılır.',
+              'En büyük kare şeklinin adı.',
+              'Alanı 100 cm² olan kare.',
+              'Çevresi 1 cm olan kare.'
+            ],
+            dogru: 0,
+            ipucu: '1 cm × 1 cm = 1 cm² → bu bir birim karedir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Kenar uzunluğu 5 cm olan karenin alanı kaç cm²\'dir?',
+            secenekler: ['20 cm²', '10 cm²', '25 cm²', '15 cm²'],
+            dogru: 2,
+            ipucu: 'Karenin alanı = kenar × kenar = 5 × 5 = ?'
+          },
+          {
+            saniye: 240,
+            soru: 'Bir karenin alanı 64 cm² ise kenar uzunluğu kaç cm\'dir?',
+            secenekler: ['6 cm', '8 cm', '16 cm', '32 cm'],
+            dogru: 1,
+            ipucu: 'Alan = kenar × kenar → kenar × kenar = 64 → 8 × 8 = 64.'
+          },
+          {
+            saniye: 300,
+            soru: 'Kenar uzunluğu 9 cm olan karenin alanı kaç cm²\'dir?',
+            secenekler: ['36 cm²', '72 cm²', '81 cm²', '18 cm²'],
+            dogru: 2,
+            ipucu: 'Alan = 9 × 9 = 81 cm².'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir karenin alanı 49 m² ise çevresi kaç metredir?',
+            secenekler: ['28 m', '14 m', '21 m', '49 m'],
+            dogru: 0,
+            ipucu: 'Alan = 49 → kenar = 7 m; çevre = 4 × 7 = 28 m.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kenar uzunluğu 12 cm olan kare şeklinde bir kartondan kaç tane 1 cm²\'lik birim kare çıkar?',
+            secenekler: ['48 tane', '24 tane', '144 tane', '120 tane'],
+            dogru: 2,
+            ipucu: 'Karenin alanı = 12 × 12 = 144 cm²; her 1 cm² bir birim karedir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Karenin alanı ile çevresi arasındaki fark nedir?',
+            secenekler: [
+              'Alan = kenar × kenar (cm²); çevre = 4 × kenar (cm). Birimleri farklıdır.',
+              'Alan ve çevre her zaman aynı değeri verir.',
+              'Alan kenarların toplamıdır; çevre kenarların çarpımıdır.',
+              'Alan sadece büyük kareler için hesaplanır.'
+            ],
+            dogru: 0,
+            ipucu: 'Alan yüzey ölçer (cm²), çevre kenar toplamını ölçer (cm) — farklı kavramlardır.'
+          }
+        ]
+      },
+      {
+        slug: 'ondalik-gosterim', name: 'Ondalık Gösterim', hedef: 'Ondalık gösterimi anlama ve kullanma',
+        videoId: '9asGD316AHc',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Ondalık gösterimde virgülden sonraki ilk basamak neyi ifade eder?',
+            secenekler: [
+              'Onda birler basamağını (1/10)',
+              'Yüzde birler basamağını (1/100)',
+              'Birler basamağını',
+              'Binde birler basamağını (1/1000)'
+            ],
+            dogru: 0,
+            ipucu: 'Virgülden sonra sırasıyla: onda birler, yüzde birler, binde birler gelir.'
+          },
+          {
+            saniye: 120,
+            soru: '3/10 kesrinin ondalık gösterimi nedir?',
+            secenekler: ['0,3', '0,03', '3,0', '0,003'],
+            dogru: 0,
+            ipucu: '3/10 = 3 onda bir = 0,3. Payda 10 ise virgülden sonra bir basamak.'
+          },
+          {
+            saniye: 180,
+            soru: '0,47 sayısı kesir olarak nasıl yazılır?',
+            secenekler: ['47/10', '47/100', '47/1000', '4/7'],
+            dogru: 1,
+            ipucu: 'Virgülden sonra 2 basamak varsa payda 100 olur: 0,47 = 47/100.'
+          },
+          {
+            saniye: 240,
+            soru: '0,250 ile 0,25 sayıları arasında nasıl bir ilişki vardır?',
+            secenekler: [
+              'Eşittirler; sondaki sıfır değeri değiştirmez.',
+              '0,250 daha büyüktür.',
+              '0,25 daha büyüktür.',
+              'Karşılaştırılamazlar.'
+            ],
+            dogru: 0,
+            ipucu: '0,250 = 250/1000 = 25/100 = 0,25 → sondaki sıfır anlam değiştirmez.'
+          },
+          {
+            saniye: 300,
+            soru: '2,75 sayısında 7 rakamının basamak değeri kaçtır?',
+            secenekler: ['7', '0,7', '0,07', '70'],
+            dogru: 1,
+            ipucu: '7, onda birler basamağında: 7 × 0,1 = 0,7.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisi en büyük sayıdır?',
+            secenekler: ['0,9', '0,85', '0,125', '0,8'],
+            dogru: 0,
+            ipucu: 'Basamak basamak karşılaştır: onda birler → 9 > 8 > 8 > 1 → 0,9 en büyük.'
+          },
+          {
+            saniye: 420,
+            soru: '15/1000 kesrinin ondalık gösterimi nedir?',
+            secenekler: ['0,15', '0,015', '1,5', '0,0015'],
+            dogru: 1,
+            ipucu: 'Payda 1000 ise virgülden sonra 3 basamak: 15/1000 = 0,015.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Ondalık gösterim ile kesir arasındaki ilişkiyi en doğru açıklayan hangisidir?',
+            secenekler: [
+              'Ondalık gösterim, paydası 10, 100 veya 1000 olan kesirlerin virgüllü yazılış biçimidir.',
+              'Ondalık gösterim sadece tam sayılar için geçerlidir.',
+              'Her kesir ondalık gösterimle yazılamaz.',
+              'Ondalık gösterimde virgül kullanılmaz.'
+            ],
+            dogru: 0,
+            ipucu: '3/10=0,3; 47/100=0,47; 125/1000=0,125 → hepsi ondalık gösterimdir.'
+          }
+        ]
+      },
+      {
+        slug: 'sayi-oruntuler', name: 'Sayı ve Şekil Örüntüleri', hedef: 'Sayı ve şekil örüntülerinin kuralını bulma',
+        videoId: 'vVd-ndQ-vB8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Örüntü nedir?',
+            secenekler: [
+              'Belirli bir kurala göre tekrar eden veya değişen sayı ya da şekil dizisidir.',
+              'Rastgele sıralanmış sayılardır.',
+              'Sadece çift sayılardan oluşan dizilerdir.',
+              'Geometrik şekillerin adıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Örüntü: bir kuralı olan, tahmin edilebilir bir düzendir.'
+          },
+          {
+            saniye: 120,
+            soru: '3, 7, 11, 15, 19, … örüntüsünün kuralı nedir?',
+            secenekler: [
+              'Her adımda 4 ekleniyor.',
+              'Her adımda 3 ekleniyor.',
+              'Her adımda 2 ile çarpılıyor.',
+              'Her adımda 5 ekleniyor.'
+            ],
+            dogru: 0,
+            ipucu: '7−3=4, 11−7=4, 15−11=4 → her seferinde 4 ekleniyor.'
+          },
+          {
+            saniye: 180,
+            soru: '2, 6, 18, 54, … örüntüsünde bir sonraki sayı kaçtır?',
+            secenekler: ['108', '162', '72', '60'],
+            dogru: 1,
+            ipucu: '6÷2=3, 18÷6=3, 54÷18=3 → her adımda 3 ile çarpılıyor: 54×3=?'
+          },
+          {
+            saniye: 240,
+            soru: '100, 90, 81, 73, 66, … örüntüsünde çıkarılan sayılar nasıl değişiyor?',
+            secenekler: [
+              '10, 9, 8, 7, … şeklinde birer azalıyor.',
+              'Hep 10 çıkarılıyor.',
+              '10, 8, 6, 4, … şeklinde ikişer azalıyor.',
+              'Sabit bir kural yok.'
+            ],
+            dogru: 0,
+            ipucu: '100−90=10, 90−81=9, 81−73=8, 73−66=7 → farklar 10, 9, 8, 7, … birer azalıyor.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir şekil örüntüsünde 1. adımda 1 kare, 2. adımda 3 kare, 3. adımda 5 kare var. 5. adımda kaç kare olur?',
+            secenekler: ['7', '9', '11', '13'],
+            dogru: 1,
+            ipucu: '1, 3, 5, 7, 9 → her adımda 2 ekleniyor: 4. adım=7, 5. adım=9.'
+          },
+          {
+            saniye: 360,
+            soru: '1, 1, 2, 3, 5, 8, 13, … örüntüsünün kuralı nedir?',
+            secenekler: [
+              'Her sayı kendinden önceki iki sayının toplamıdır.',
+              'Her adımda 2 ekleniyor.',
+              'Her sayı bir öncekinin 2 katıdır.',
+              'Sabit bir kural yoktur.'
+            ],
+            dogru: 0,
+            ipucu: '1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13 → her sayı önceki ikisinin toplamı.'
+          },
+          {
+            saniye: 420,
+            soru: '5, 10, 20, 40, … örüntüsünde 6. terim kaçtır?',
+            secenekler: ['80', '160', '120', '200'],
+            dogru: 1,
+            ipucu: 'Her adımda 2 ile çarpılıyor: 5, 10, 20, 40, 80, 160.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Bir örüntünün kuralını bulmak için ne yapmalıyız?',
+            secenekler: [
+              'Ardışık terimler arasındaki farkı veya oranı inceleyerek düzeni keşfetmeliyiz.',
+              'Sadece ilk iki terime bakmalıyız.',
+              'Sayıları büyükten küçüğe sıralamalıyız.',
+              'Terimleri toplamalıyız.'
+            ],
+            dogru: 0,
+            ipucu: 'Farklar sabit mi? Oranlar sabit mi? Yoksa farklar da değişiyor mu? Bunu bul, kuralı çöz.'
           }
         ]
       }
@@ -550,95 +1134,8 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'esnek-cisimler', name: 'Kuvvet ve Esnek Cisimler', hedef: 'Kuvvetin etkilerini ve esnek/esnek olmayan cisimleri tanıma',
-        videoId: 'smkx-o2txNI',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Aşağıdakilerden hangisi kuvvetin etkisine örnek DEĞİLDİR?',
-            secenekler: [
-              'Bir cismin renginin değişmesi.',
-              'Durmakta olan bir cismin harekete geçmesi.',
-              'Hareket eden bir cismin durması.',
-              'Cismin şeklinin değişmesi.'
-            ],
-            dogru: 0,
-            ipucu: 'Kuvvet: harekete geçirir, durdurur, şeklini/hızını/yönünü değiştirir — ama rengini değiştirmez!'
-          },
-          {
-            saniye: 120,
-            soru: 'Esnek cisimler ile esnek olmayan cisimler arasındaki temel fark nedir?',
-            secenekler: [
-              'Esnek cisimler kuvvet kaldırılınca eski haline döner; esnek olmayanlar dönmez.',
-              'Esnek cisimler ağır, esnek olmayanlar hafiftir.',
-              'Esnek cisimler her zaman katıdır.',
-              'Esnek cisimler kuvvet altında hiç şekil değiştirmez.'
-            ],
-            dogru: 0,
-            ipucu: 'Balon ve yay esnek; oyun hamuru ve silgi esnek değil — şekillerini korurlar.'
-          },
-          {
-            saniye: 240,
-            soru: 'Esnek bir cisme uygulanan kuvvet ortadan kalkınca ne olur?',
-            secenekler: [
-              'Cisim kalıcı olarak şekil değiştirir.',
-              'Cisim eski şekline döner.',
-              'Cisim parçalanır.',
-              'Cisim büyür.'
-            ],
-            dogru: 1,
-            ipucu: 'Esnek cisimler, kuvvet kalktığında orijinal şekillerine geri dönerler.'
-          },
-          {
-            saniye: 300,
-            soru: 'Aşağıdakilerden hangisi esnek bir cisim değildir?',
-            secenekler: ['Yay', 'Lastik bant', 'Cam', 'Sünger'],
-            dogru: 2,
-            ipucu: 'Cam kırılgan bir maddedir; esneyen cisimler gibi şekil değiştirip geri dönemez.'
-          },
-          {
-            saniye: 360,
-            soru: 'Bir yaya uygulanan kuvvet arttıkça uzama miktarı nasıl değişir?',
-            secenekler: ['Azalır', 'Değişmez', 'Artar', 'Önce artar sonra azalır'],
-            dogru: 2,
-            ipucu: 'Yaya uygulanan kuvvet ile uzama miktarı arasında doğru orantı vardır.'
-          },
-          {
-            saniye: 420,
-            soru: 'Kuvvet hangi birimle ölçülür?',
-            secenekler: ['Kilogram', 'Newton', 'Metre', 'Joule'],
-            dogru: 1,
-            ipucu: 'Kuvvetin birimi Newton\'dur (N); bilim insanı Isaac Newton\'ın adından gelir.'
-          },
-          {
-            saniye: 480,
-            soru: 'Aşağıdakilerden hangisi esnek olmayan (plastik) bir cismin özelliğidir?',
-            secenekler: [
-              'Kuvvet kalktıktan sonra eski şekline döner.',
-              'Kuvvet uygulandığında şekli değişmez.',
-              'Kuvvet kalktıktan sonra şeklini korur, eski haline dönmez.',
-              'Kuvvet altında parçalanır ve kaybolur.'
-            ],
-            dogru: 2,
-            ipucu: 'Oyun hamuruna bastırınca şekil değişir; bırakınca eski haline dönmez — bu plastik (esnek olmayan) davranıştır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Kuvvet ve esnek cisimler konusunu özetleyen hangisidir?',
-            secenekler: [
-              'Kuvvet yalnızca cisimleri harekete geçirir; esnek cisimler her zaman parçalanır.',
-              'Kuvvet: hareket, duruş, şekil/hız/yön değişikliğine yol açar; esnek cisimler kuvvet kalktığında eski haline dönerken esnek olmayanlar dönmez.',
-              'Tüm cisimler eşit esnekliğe sahiptir; fark yoktur.',
-              'Kuvvet yalnızca itme ya da çekme biçiminde olabilir; başka etkisi yoktur.'
-            ],
-            dogru: 1,
-            ipucu: 'Kuvvetin 4 etkisi: harekete geçirme, durdurma, şekil değiştirme, hız/yön değiştirme.'
-          }
-        ]
-      },
-      {
         slug: 'kutle-agirlik', name: 'Kütle, Ağırlık ve Yer Çekimi', hedef: 'Kütle ile ağırlık arasındaki farkı ve yer çekimini anlama',
-        videoId: 'QOqTFJdp_88',
+        videoId: 'smkx-o2txNI',
         checkpoints: [
           {
             saniye: 60,
@@ -715,83 +1212,6 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Kütle → terazi, kg; Ağırlık → dinamometre, N. Ay\'da kütle aynı, ağırlık 1/6 olur.'
-          }
-        ]
-      },
-      {
-        slug: 'hucre-mikroskop', name: 'Hücre ve Mikroskop', hedef: 'Hücreyi ve mikroskobun kullanımını öğrenme',
-        videoId: 'auQui6S956o',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Hücreleri incelemek için kullanılan alet hangisidir?',
-            secenekler: ['Mikroskop', 'Termometre', 'Dinamometre', 'Teleskop'],
-            dogru: 0,
-            ipucu: '"Hücreleri incelemek için mikroskop denilen bir alet kullanıyoruz."'
-          },
-          {
-            saniye: 120,
-            soru: 'Mikroskobun inceleme tablasına preparat yerleştirirken kullanılan ince cam parçasına ne denir?',
-            secenekler: ['Lamel', 'Lam', 'Oküler', 'Objektif'],
-            dogru: 0,
-            ipucu: '"Lam biraz daha kalın cam, lamel daha ince küçük cam."'
-          },
-          {
-            saniye: 240,
-            soru: 'Mikroskobun büyütme gücü nasıl hesaplanır?',
-            secenekler: [
-              'Oküler büyütme + objektif büyütme',
-              'Oküler büyütme × objektif büyütme',
-              'Oküler büyütme ÷ objektif büyütme',
-              'Sadece objektif büyütmesine bakılır'
-            ],
-            dogru: 1,
-            ipucu: 'Toplam büyütme = oküler mercek büyütmesi × objektif mercek büyütmesi.'
-          },
-          {
-            saniye: 300,
-            soru: 'Aşağıdakilerden hangisi hem bitki hem hayvan hücrelerinde bulunur?',
-            secenekler: ['Hücre duvarı', 'Kloroplast', 'Hücre zarı', 'Büyük koful'],
-            dogru: 2,
-            ipucu: 'Hücre zarı tüm canlı hücrelerde ortak olarak bulunan yapıdır.'
-          },
-          {
-            saniye: 360,
-            soru: 'Fotosentez hangi hücre organelinde gerçekleşir?',
-            secenekler: ['Mitokondri', 'Kloroplast', 'Ribozom', 'Çekirdek'],
-            dogru: 1,
-            ipucu: 'Kloroplast içindeki klorofil, ışık enerjisini kullanarak besin üretir.'
-          },
-          {
-            saniye: 420,
-            soru: 'Mikroskop kullanırken önce hangi objektifle başlamak doğrudur?',
-            secenekler: ['En yüksek büyütmeli objektifle', 'En düşük büyütmeli objektifle', 'Herhangi biriyle başlanabilir', 'Okülerle'],
-            dogru: 1,
-            ipucu: 'Önce küçük büyütmeyle genel görüntü elde edilir; ardından yüksek büyütmeye geçilir.'
-          },
-          {
-            saniye: 480,
-            soru: 'Hayvan hücrelerinde bulunmayan ama bitki hücrelerinde bulunan yapılar hangileridir?',
-            secenekler: [
-              'Hücre zarı ve çekirdek',
-              'Hücre duvarı, kloroplast ve büyük koful',
-              'Mitokondri ve ribozom',
-              'Hücre zarı ve mitokondri'
-            ],
-            dogru: 1,
-            ipucu: 'Bitki hücresine özgü yapılar: hücre duvarı, kloroplast, büyük koful (merkezi vacuole).'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Hücre ve mikroskop konusunu özetleyen hangisidir?',
-            secenekler: [
-              'Hücreler gözle görülebilir; mikroskop yalnızca taşları incelemek için kullanılır.',
-              'Hücre, canlıların temel yapı birimidir; mikroskopla incelenir; bitki ve hayvan hücrelerinin bazı yapıları farklıdır.',
-              'Tüm hücreler aynı yapıya sahiptir; fark yoktur.',
-              'Mikroskop büyütmesi oküler ve objektif büyütmelerinin toplamıdır.'
-            ],
-            dogru: 1,
-            ipucu: 'Hücre = temel birim. Bitki: hücre duvarı + kloroplast + büyük koful. Hayvan: bunlar yok.'
           }
         ]
       },
@@ -963,6 +1383,822 @@ const DERSLER = [
             ipucu: 'Isı: sıcaktan soğuğa akar. İletken: metal. Yalıtkan: tahta, plastik, yün, hava, cam yünü.'
           }
         ]
+      },
+      {
+        slug: 'gunes-ozellikleri', name: 'Gökyüzündeki Komşumuz: Güneş', hedef: 'Güneş hakkında temel bilgileri öğrenme',
+        videoId: 'yx7xbUKNYkU',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Güneş bir yıldız mıdır yoksa gezegen midir?',
+            secenekler: [
+              'Güneş bir yıldızdır; kendi ışığını ve ısısını kendisi üretir.',
+              'Güneş bir gezegendir; Dünya\'nın etrafında döner.',
+              'Güneş bir uydudur; Ay gibi ışık yansıtır.',
+              'Güneş ne yıldız ne gezegendir; özel bir gök cismidir.'
+            ],
+            dogru: 0,
+            ipucu: 'Güneş, Güneş Sistemi\'nin merkezindeki yıldızdır ve kendi enerjisini üretir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Güneş\'in ışığı ve ısısı Dünya\'ya nasıl ulaşır?',
+            secenekler: [
+              'Işınım (radyasyon) yoluyla boşlukta yayılarak ulaşır.',
+              'Hava molekülleri taşıyarak ulaştırır.',
+              'Rüzgâr aracılığıyla ulaşır.',
+              'Yalnızca Ay üzerinden yansıyarak ulaşır.'
+            ],
+            dogru: 0,
+            ipucu: 'Uzayda hava yoktur; ısı ve ışık ışınım yoluyla yayılır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Güneş\'in yüzey sıcaklığı yaklaşık kaç derecedir?',
+            secenekler: [
+              'Yaklaşık 100 °C',
+              'Yaklaşık 1.000 °C',
+              'Yaklaşık 6.000 °C',
+              'Yaklaşık 100.000 °C'
+            ],
+            dogru: 2,
+            ipucu: 'Güneş\'in yüzey sıcaklığı yaklaşık 5.500-6.000 °C civarındadır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Güneş enerjisini nasıl üretir?',
+            secenekler: [
+              'İçindeki hidrojen gazının helyuma dönüşmesiyle (nükleer füzyon).',
+              'Yüzeyindeki volkanlar sayesinde.',
+              'Etrafındaki gezegenlerden enerji alarak.',
+              'Kendi etrafında hızla dönerek.'
+            ],
+            dogru: 0,
+            ipucu: 'Güneş\'in çekirdeğinde hidrojen atomları birleşerek helyuma dönüşür; bu olay büyük enerji açığa çıkarır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Dünya\'nın Güneş\'e olan uzaklığı yaklaşık ne kadardır?',
+            secenekler: [
+              'Yaklaşık 150 milyon km',
+              'Yaklaşık 15 milyon km',
+              'Yaklaşık 1,5 milyar km',
+              'Yaklaşık 384.000 km'
+            ],
+            dogru: 0,
+            ipucu: 'Dünya-Güneş arası yaklaşık 150 milyon kilometredir; ışık bu mesafeyi 8 dakikada alır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Güneş olmasaydı aşağıdakilerden hangisi gerçekleşmezdi?',
+            secenekler: [
+              'Dünya\'da mevsimler, ısı ve ışık olmazdı; canlılar yaşayamazdı.',
+              'Dünya daha hızlı dönerdi.',
+              'Ay daha parlak olurdu.',
+              'Denizlerdeki su tuzlu olurdu.'
+            ],
+            dogru: 0,
+            ipucu: 'Güneş; ışık, ısı ve enerji kaynağıdır — onsuz Dünya\'da yaşam mümkün olmazdı.'
+          },
+          {
+            saniye: 420,
+            soru: 'Güneş, Dünya\'dan yaklaşık kaç kat büyüktür?',
+            secenekler: [
+              'Yaklaşık 10 kat',
+              'Yaklaşık 109 kat (çap olarak)',
+              'Yaklaşık 1.000 kat',
+              'Dünya ile aynı büyüklüktedir.'
+            ],
+            dogru: 1,
+            ipucu: 'Güneş\'in çapı Dünya\'nın çapının yaklaşık 109 katıdır; çok devasa bir yıldızdır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Güneş hakkında aşağıdakilerden hangisi YANLIŞTIR?',
+            secenekler: [
+              'Güneş bir gezegendir ve kendi ışığı yoktur.',
+              'Güneş bir yıldızdır ve kendi ışığını üretir.',
+              'Güneş\'in yüzey sıcaklığı yaklaşık 6.000 °C\'dir.',
+              'Güneş enerjisini nükleer füzyon ile üretir.'
+            ],
+            dogru: 0,
+            ipucu: 'Güneş gezegen değil, yıldızdır; kendi ışığını ve ısısını kendisi üretir.'
+          }
+        ]
+      },
+      {
+        slug: 'kuvveti-taniyalim', name: 'Kuvveti Tanıyalım', hedef: 'Kuvvet kavramını ve kuvvetin ölçülmesini öğrenme',
+        videoId: '6f4W8MRqtV8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Kuvvet nedir?',
+            secenekler: [
+              'Bir cismi iten veya çeken her türlü etki.',
+              'Yalnızca cisimleri durduran etki.',
+              'Sadece ağır cisimlere uygulanan güç.',
+              'Cisimlerin ağırlığı demektir.'
+            ],
+            dogru: 0,
+            ipucu: 'Kuvvet, itme veya çekme şeklinde cisimlere uygulanan etkidir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Kuvvetin birimi nedir ve hangi aletle ölçülür?',
+            secenekler: [
+              'Birimi Newton (N); dinamometre ile ölçülür.',
+              'Birimi kilogram; terazi ile ölçülür.',
+              'Birimi metre; cetvel ile ölçülür.',
+              'Birimi joule; termometre ile ölçülür.'
+            ],
+            dogru: 0,
+            ipucu: 'Kuvvet Newton (N) birimiyle ifade edilir ve dinamometre (kuvvetölçer) ile ölçülür.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi kuvvetin etkisine örnek değildir?',
+            secenekler: [
+              'Topun şeklinin bozulması.',
+              'Bisikletin hızlanması.',
+              'Masanın renginin değişmesi.',
+              'Arabanın durması.'
+            ],
+            dogru: 2,
+            ipucu: 'Kuvvet cismin hareketini, hızını, yönünü veya şeklini değiştirir; renk değişimi kuvvetle ilgili değildir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Temas gerektirmeden etkisini gösteren kuvvete ne denir?',
+            secenekler: [
+              'Temas kuvveti',
+              'Temassız (alan) kuvveti',
+              'Sürtünme kuvveti',
+              'Kas kuvveti'
+            ],
+            dogru: 1,
+            ipucu: 'Mıknatıs kuvveti ve yer çekimi kuvveti temas olmadan etkisini gösterir; bunlara temassız kuvvet denir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Aşağıdakilerden hangisi temas kuvvetine örnektir?',
+            secenekler: [
+              'Yer çekimi kuvveti',
+              'Mıknatıs kuvveti',
+              'Sürtünme kuvveti',
+              'Elektrik kuvveti'
+            ],
+            dogru: 2,
+            ipucu: 'Sürtünme kuvveti, iki yüzey birbirine temas ettiğinde ortaya çıkar.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir cisme aynı yönde iki kuvvet uygulanırsa bileşke kuvvet nasıl bulunur?',
+            secenekler: [
+              'İki kuvvet toplanır.',
+              'İki kuvvet çıkarılır.',
+              'Sadece büyük olan alınır.',
+              'İki kuvvet çarpılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Aynı yöndeki kuvvetler toplanarak bileşke kuvveti oluşturur.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir cisme zıt yönde 8 N ve 3 N kuvvet uygulanırsa bileşke kuvvet kaç N olur?',
+            secenekler: [
+              '11 N',
+              '5 N',
+              '3 N',
+              '24 N'
+            ],
+            dogru: 1,
+            ipucu: 'Zıt yöndeki kuvvetlerde bileşke: büyükten küçük çıkarılır → 8 − 3 = 5 N.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kuvvet hakkında aşağıdakilerden hangisi doğrudur?',
+            secenekler: [
+              'Kuvvet yalnızca cisimleri iter; çekme etkisi yoktur.',
+              'Kuvvet itme veya çekme etkisidir; birimi Newton\'dur; temas ve temassız olarak ikiye ayrılır.',
+              'Kuvvet yalnızca büyük cisimler arasında oluşur.',
+              'Kuvvetin etkisi yalnızca harekettir; şekil değişikliğine neden olmaz.'
+            ],
+            dogru: 1,
+            ipucu: 'Kuvvet: itme/çekme etkisi, birimi N, dinamometre ile ölçülür, temas/temassız olarak sınıflandırılır.'
+          }
+        ]
+      },
+      {
+        slug: 'surtunme-kuvveti', name: 'Sürtünme Kuvveti', hedef: 'Sürtünme kuvvetini ve etkilerini anlama',
+        videoId: 'QOqTFJdp_88',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Sürtünme kuvveti nedir?',
+            secenekler: [
+              'Birbirine temas eden iki yüzey arasında hareketi zorlaştıran kuvvet.',
+              'Cisimleri havaya kaldıran kuvvet.',
+              'Sadece sıvılarda oluşan bir kuvvet.',
+              'Mıknatısın çekme kuvveti.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme, temas eden yüzeyler arasında harekete karşı yönde oluşan dirençtir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Sürtünme kuvvetinin yönü nasıldır?',
+            secenekler: [
+              'Her zaman hareket yönünün tersinedir.',
+              'Her zaman hareket yönüyle aynıdır.',
+              'Yukarı doğrudur.',
+              'Sabit bir yönü yoktur; rastgele değişir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme kuvveti her zaman cismin hareket yönüne zıt yönde etki eder.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi sürtünme kuvvetini artırır?',
+            secenekler: [
+              'Yüzeyin pürüzlü olması.',
+              'Yüzeyin kaygan olması.',
+              'Cismin daha hafif olması.',
+              'Yüzeye yağ sürülmesi.'
+            ],
+            dogru: 0,
+            ipucu: 'Yüzey ne kadar pürüzlü olursa sürtünme o kadar fazla olur.'
+          },
+          {
+            saniye: 240,
+            soru: 'Araba lastiklerinin desenli olmasının nedeni nedir?',
+            secenekler: [
+              'Sürtünmeyi artırarak yolda tutunmayı sağlamak.',
+              'Arabanın daha hızlı gitmesini sağlamak.',
+              'Lastiğin daha güzel görünmesi.',
+              'Lastiğin daha hafif olması.'
+            ],
+            dogru: 0,
+            ipucu: 'Lastik desenleri yüzey pürüzlülüğünü artırarak sürtünmeyi ve tutunmayı güçlendirir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Sürtünme kuvveti olmasaydı aşağıdakilerden hangisi gerçekleşirdi?',
+            secenekler: [
+              'Yürüyemez, yazı yazamaz ve araçlar frenlemeyle duramazdık.',
+              'Her şey daha kolay olurdu.',
+              'Sadece araçlar etkilenirdi.',
+              'Hiçbir değişiklik olmazdı.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme olmasaydı ayağımız kayar, kalem tutamaz, araçlar duramaz; yaşam çok zorlaşırdı.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisinde sürtünme kuvveti AZALTILMAK istenir?',
+            secenekler: [
+              'Kayak pistinin yüzeyinin düzgün yapılması.',
+              'Ayakkabı tabanlarının desenli yapılması.',
+              'Araba lastiklerinin desenli olması.',
+              'Kapı kolunun pürüzlü yapılması.'
+            ],
+            dogru: 0,
+            ipucu: 'Kayak yaparken sürtünmenin az olması istenir; bu yüzden pist düzgün ve kaygan yapılır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Sürtünme kuvveti ile cismin ağırlığı arasındaki ilişki nedir?',
+            secenekler: [
+              'Cisim ağırlaştıkça sürtünme kuvveti artar.',
+              'Cisim ağırlaştıkça sürtünme azalır.',
+              'Ağırlık sürtünmeyi etkilemez.',
+              'Sadece hafif cisimler sürtünmeden etkilenir.'
+            ],
+            dogru: 0,
+            ipucu: 'Cismin ağırlığı arttıkça yüzeye baskı artar ve sürtünme kuvveti de artar.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Sürtünme kuvveti hakkında aşağıdakilerden hangisi doğrudur?',
+            secenekler: [
+              'Sürtünme kuvveti her zaman zararlıdır ve azaltılmalıdır.',
+              'Sürtünme yüzeyler arasında hareketin tersine etki eder; pürüzlülük ve ağırlık artınca artar; bazen yararlı bazen zararlıdır.',
+              'Sürtünme sadece katı yüzeylerde oluşur.',
+              'Sürtünme kuvvetinin yönü hareketle aynıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Sürtünme: hareket yönüne zıt, pürüzlülük/ağırlıkla artar, yararlı ve zararlı yönleri var.'
+          }
+        ]
+      },
+      {
+        slug: 'hucre-organeller', name: 'Hücre ve Organelleri', hedef: 'Hücrenin yapısını ve organellerin görevlerini tanıma',
+        videoId: 'DbWkNSM89D8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Hücre nedir?',
+            secenekler: [
+              'Canlıların en küçük yapı ve görev birimidir.',
+              'Yalnızca bitkilerde bulunan bir yapıdır.',
+              'Sadece gözle görülebilen büyük yapılardır.',
+              'Cansız maddelerin temel birimidir.'
+            ],
+            dogru: 0,
+            ipucu: 'Hücre, tüm canlıların yapısını ve görevlerini oluşturan en küçük birimdir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Hücre zarının görevi nedir?',
+            secenekler: [
+              'Hücreyi dış ortamdan ayırır ve madde giriş-çıkışını kontrol eder.',
+              'Hücreye şekil verir ve sert tutar.',
+              'Hücrenin enerji üretimini sağlar.',
+              'Kalıtım bilgisini taşır.'
+            ],
+            dogru: 0,
+            ipucu: 'Hücre zarı seçici geçirgendir; hangi maddelerin girip çıkacağını kontrol eder.'
+          },
+          {
+            saniye: 180,
+            soru: 'Hücrenin yönetim merkezi hangisidir?',
+            secenekler: [
+              'Çekirdek',
+              'Mitokondri',
+              'Koful',
+              'Hücre zarı'
+            ],
+            dogru: 0,
+            ipucu: 'Çekirdek, DNA\'yı (kalıtım bilgisini) barındırır ve hücrenin tüm faaliyetlerini yönetir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Hücrenin enerji santralı olarak bilinen organel hangisidir?',
+            secenekler: [
+              'Koful',
+              'Mitokondri',
+              'Ribozom',
+              'Endoplazmik retikulum'
+            ],
+            dogru: 1,
+            ipucu: 'Mitokondri, besinlerdeki enerjiyi hücrenin kullanabileceği enerjiye dönüştürür.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bitki hücresinde bulunup hayvan hücresinde bulunmayan yapı hangisidir?',
+            secenekler: [
+              'Hücre duvarı ve kloroplast',
+              'Çekirdek ve mitokondri',
+              'Hücre zarı ve ribozom',
+              'Sitoplazma ve koful'
+            ],
+            dogru: 0,
+            ipucu: 'Hücre duvarı bitkiye şekil/dayanıklılık verir; kloroplast fotosentez yapar — ikisi de hayvanda yok.'
+          },
+          {
+            saniye: 360,
+            soru: 'Kloroplastın görevi nedir?',
+            secenekler: [
+              'Fotosentez yaparak besin (glikoz) üretmek.',
+              'Hücreye şekil vermek.',
+              'Artık maddeleri depolamak.',
+              'Protein üretmek.'
+            ],
+            dogru: 0,
+            ipucu: 'Kloroplast güneş ışığını kullanarak su ve karbondioksitten besin üretir (fotosentez).'
+          },
+          {
+            saniye: 420,
+            soru: 'Ribozomun görevi nedir?',
+            secenekler: [
+              'Protein sentezi yapmak.',
+              'Enerji üretmek.',
+              'Madde depolamak.',
+              'Hücreyi korumak.'
+            ],
+            dogru: 0,
+            ipucu: 'Ribozom, hücrede protein üretiminden sorumlu küçük organeldir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Hücre ve organeller hakkında hangisi doğrudur?',
+            secenekler: [
+              'Tüm hücreler aynıdır; bitki ve hayvan hücresi arasında fark yoktur.',
+              'Hücre canlıların en küçük birimi; çekirdek yönetir, mitokondri enerji üretir, kloroplast fotosentez yapar; bitki hücresinde hücre duvarı ve kloroplast ekstra bulunur.',
+              'Hayvan hücresinde kloroplast ve hücre duvarı bulunur.',
+              'Mitokondri yalnızca bitki hücrelerinde bulunur.'
+            ],
+            dogru: 1,
+            ipucu: 'Hücre: en küçük birim. Çekirdek→yönetim, mitokondri→enerji, kloroplast→fotosentez (sadece bitki).'
+          }
+        ]
+      },
+      {
+        slug: 'destek-hareket', name: 'Destek ve Hareket Sistemi', hedef: 'İskelet ve kas sistemini tanıma',
+        videoId: 'H3_FwuwIgM0',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'İskelet sisteminin görevi nedir?',
+            secenekler: [
+              'Vücuda şekil vermek, iç organları korumak ve hareketi sağlamak.',
+              'Yalnızca vücuda şekil vermek.',
+              'Sadece kanı taşımak.',
+              'Besinleri sindirmek.'
+            ],
+            dogru: 0,
+            ipucu: 'İskelet sistemi üç ana görev üstlenir: şekil verme, koruma ve hareket.'
+          },
+          {
+            saniye: 120,
+            soru: 'İnsan vücudunda yaklaşık kaç kemik bulunur?',
+            secenekler: [
+              'Yaklaşık 106',
+              'Yaklaşık 206',
+              'Yaklaşık 306',
+              'Yaklaşık 406'
+            ],
+            dogru: 1,
+            ipucu: 'Yetişkin bir insanın vücudunda yaklaşık 206 kemik bulunur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Kemiklerin birbirine bağlandığı yere ne denir?',
+            secenekler: [
+              'Eklem',
+              'Kas',
+              'Kıkırdak',
+              'Tendon'
+            ],
+            dogru: 0,
+            ipucu: 'Eklemler, kemiklerin birbirine bağlandığı ve hareketin sağlandığı yerlerdir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Aşağıdakilerden hangisi oynar eklem örneğidir?',
+            secenekler: [
+              'Diz eklemi',
+              'Kafatası kemikleri arasındaki bağlantı',
+              'Omurga kemikleri arasındaki bağlantı',
+              'Diş-çene bağlantısı'
+            ],
+            dogru: 0,
+            ipucu: 'Diz, dirsek ve omuz eklemleri serbestçe hareket edebilen oynar eklemlerdir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Kaslar nasıl hareket sağlar?',
+            secenekler: [
+              'Kasılıp gevşeyerek kemikleri hareket ettirir.',
+              'Kendiliğinden kemikleri iter.',
+              'Kaslar hareket sağlamaz, sadece koruma görevi yapar.',
+              'Kaslar yalnızca gevşer, kasılmaz.'
+            ],
+            dogru: 0,
+            ipucu: 'Kaslar, kemiklere tendonlarla bağlıdır; kasılıp gevşeyerek hareketi sağlar.'
+          },
+          {
+            saniye: 360,
+            soru: 'Kemiklerin sağlığını korumak için aşağıdakilerden hangisi yapılmalıdır?',
+            secenekler: [
+              'Kalsiyum ve D vitamini içeren besinler tüketmek ve düzenli egzersiz yapmak.',
+              'Hiç hareket etmemek ve sürekli oturmak.',
+              'Sadece şekerli gıdalar yemek.',
+              'Ağır yükleri tek elle taşımak.'
+            ],
+            dogru: 0,
+            ipucu: 'Süt, peynir, yoğurt (kalsiyum) ve güneş ışığı (D vitamini) kemik sağlığı için önemlidir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kıkırdağın görevi nedir?',
+            secenekler: [
+              'Eklemlerde sürtünmeyi azaltmak ve darbeleri emmek.',
+              'Kan üretmek.',
+              'Kasları kemiklere bağlamak.',
+              'Sinir sinyallerini iletmek.'
+            ],
+            dogru: 0,
+            ipucu: 'Kıkırdak, esnek bir dokudur; eklemlerde tampon görevi görerek sürtünmeyi ve darbeleri azaltır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Destek ve hareket sistemi hakkında hangisi doğrudur?',
+            secenekler: [
+              'İskelet ve kas sistemi birlikte çalışır; iskelet vücuda şekil verip organları korur, kaslar kasılıp gevşeyerek hareketi sağlar.',
+              'Kaslar kemik olmadan da hareket sağlayabilir.',
+              'İskeletin tek görevi vücuda şekil vermektir.',
+              'İnsan vücudunda yaklaşık 50 kemik bulunur.'
+            ],
+            dogru: 0,
+            ipucu: 'İskelet + kas = destek ve hareket sistemi; birlikte çalışarak vücuda şekil, koruma ve hareket sağlar.'
+          }
+        ]
+      },
+      {
+        slug: 'isigin-yayilmasi', name: 'Işığın Yayılması', hedef: 'Işığın doğrusal yayılmasını ve ışık kaynaklarını öğrenme',
+        videoId: 'NIvbMpcmIMo',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Işık nasıl yayılır?',
+            secenekler: [
+              'Doğrusal (düz bir çizgi boyunca) yayılır.',
+              'Eğri bir yol izleyerek yayılır.',
+              'Rastgele yönlerde zikzak çizerek yayılır.',
+              'Yalnızca yukarıdan aşağıya yayılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Işık her zaman doğrusal olarak, yani düz bir çizgi boyunca ilerler.'
+          },
+          {
+            saniye: 120,
+            soru: 'Aşağıdakilerden hangisi doğal ışık kaynağıdır?',
+            secenekler: [
+              'Güneş',
+              'Fener',
+              'Lamba',
+              'Mum'
+            ],
+            dogru: 0,
+            ipucu: 'Güneş ve yıldızlar doğal ışık kaynağıdır; lamba, fener ve mum ise yapay ışık kaynaklarıdır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Işığı geçirmeyen maddelere ne denir?',
+            secenekler: [
+              'Saydam',
+              'Yarı saydam',
+              'Opak (ışık geçirmez)',
+              'Şeffaf'
+            ],
+            dogru: 2,
+            ipucu: 'Opak (ışık geçirmez) maddeler: tahta, metal, karton gibi ışığı hiç geçirmeyen maddeler.'
+          },
+          {
+            saniye: 240,
+            soru: 'Aşağıdakilerden hangisi saydam (şeffaf) maddedir?',
+            secenekler: [
+              'Cam',
+              'Karton',
+              'Tahta',
+              'Metal levha'
+            ],
+            dogru: 0,
+            ipucu: 'Saydam maddeler ışığı geçirir; cam, temiz su ve temiz hava saydam maddelere örnektir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Gölge nasıl oluşur?',
+            secenekler: [
+              'Işık doğrusal yayıldığı için opak bir cismin arkasına ulaşamaz ve karanlık alan oluşur.',
+              'Işık cismin etrafından dolanarak oluşturur.',
+              'Gölge sadece gece oluşur.',
+              'Gölge oluşması için ışığa gerek yoktur.'
+            ],
+            dogru: 0,
+            ipucu: 'Işık doğrusal yayılır → opak cismin arkasına geçemez → gölge oluşur.'
+          },
+          {
+            saniye: 360,
+            soru: 'Yarı saydam madde hangisidir?',
+            secenekler: [
+              'Buzlu cam',
+              'Berrak cam',
+              'Demir levha',
+              'Ayna'
+            ],
+            dogru: 0,
+            ipucu: 'Yarı saydam maddeler ışığın bir kısmını geçirir; buzlu cam, yağlı kâğıt ve tül perde örnektir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Işık kaynağından çıkan ışık demetleri bir engelden geçirildiğinde düz bir çizgi oluşturur. Bu neyi kanıtlar?',
+            secenekler: [
+              'Işığın doğrusal yayıldığını.',
+              'Işığın eğri yayıldığını.',
+              'Işığın yalnızca saydam maddelerden geçtiğini.',
+              'Işığın renkli olduğunu.'
+            ],
+            dogru: 0,
+            ipucu: 'Karanlık odada ışık demetinin düz bir çizgi oluşturması, ışığın doğrusal yayıldığını gösterir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Işığın yayılması konusuyla ilgili hangisi doğrudur?',
+            secenekler: [
+              'Işık doğrusal yayılır; saydam maddelerden geçer, opak maddelerden geçemez ve gölge oluşturur.',
+              'Işık eğri yayılır ve her maddeden geçer.',
+              'Gölge yalnızca saydam maddelerin arkasında oluşur.',
+              'Işık kaynağına yaklaştıkça gölge büyür.'
+            ],
+            dogru: 0,
+            ipucu: 'Işık: doğrusal yayılır, saydam→geçer, yarı saydam→kısmen geçer, opak→geçemez→gölge oluşur.'
+          }
+        ]
+      },
+      {
+        slug: 'tam-golge', name: 'Tam Gölge Oluşumu', hedef: 'Tam gölge oluşumunu ve gölgenin boyutunu etkileyen faktörleri öğrenme',
+        videoId: 'skxXJhM4IxI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Tam gölge oluşması için hangi koşullar gereklidir?',
+            secenekler: [
+              'Bir ışık kaynağı, bir opak cisim ve bir perde (ekran) gereklidir.',
+              'Sadece ışık kaynağı yeterlidir.',
+              'Saydam bir cisim ve ışık kaynağı gereklidir.',
+              'Gölge oluşması için karanlık oda gereklidir.'
+            ],
+            dogru: 0,
+            ipucu: 'Tam gölge için üç şey lazım: ışık kaynağı + opak cisim + gölgenin düştüğü perde.'
+          },
+          {
+            saniye: 120,
+            soru: 'Noktasal ışık kaynağı ile cisim arasındaki mesafe azalırsa gölge nasıl değişir?',
+            secenekler: [
+              'Gölge büyür.',
+              'Gölge küçülür.',
+              'Gölge değişmez.',
+              'Gölge kaybolur.'
+            ],
+            dogru: 0,
+            ipucu: 'Işık kaynağı cisme yaklaştıkça gölge büyür; uzaklaştıkça gölge küçülür.'
+          },
+          {
+            saniye: 180,
+            soru: 'Cisim perdeye yaklaştırılırsa gölgenin boyutu nasıl değişir?',
+            secenekler: [
+              'Gölge küçülür ve cisme benzer.',
+              'Gölge büyür.',
+              'Gölge renk değiştirir.',
+              'Gölge oluşmaz.'
+            ],
+            dogru: 0,
+            ipucu: 'Cisim perdeye yaklaştıkça gölge küçülür ve cismin gerçek boyutuna yaklaşır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Tam gölgenin şekli neye bağlıdır?',
+            secenekler: [
+              'Cismin şekline bağlıdır.',
+              'Işık kaynağının rengine bağlıdır.',
+              'Perdenin rengine bağlıdır.',
+              'Odanın büyüklüğüne bağlıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Gölgenin şekli, ışığı engelleyen cismin şeklinin bir yansımasıdır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Noktasal ışık kaynağı kullanıldığında gölgenin özelliği nedir?',
+            secenekler: [
+              'Kenarları keskin ve net bir tam gölge oluşur.',
+              'Gölge oluşmaz.',
+              'Yarı gölge oluşur.',
+              'Gölge renkli olur.'
+            ],
+            dogru: 0,
+            ipucu: 'Noktasal ışık kaynağı tek bir noktadan ışık verir; bu yüzden gölgenin kenarları keskin ve net olur.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisi gölgenin boyutunu ETKİLEMEZ?',
+            secenekler: [
+              'Cismin rengi.',
+              'Cismin ışık kaynağına uzaklığı.',
+              'Cismin perdeye uzaklığı.',
+              'Cismin büyüklüğü.'
+            ],
+            dogru: 0,
+            ipucu: 'Gölgenin boyutunu etkileyen: cismin büyüklüğü, ışık kaynağına ve perdeye olan uzaklığı. Renk gölgeyi etkilemez.'
+          },
+          {
+            saniye: 420,
+            soru: 'Geniş (yayılı) ışık kaynağı kullanıldığında ne oluşur?',
+            secenekler: [
+              'Tam gölgenin etrafında yarı gölge bölgesi oluşur.',
+              'Sadece tam gölge oluşur.',
+              'Hiç gölge oluşmaz.',
+              'Gölge cisimden küçük olur.'
+            ],
+            dogru: 0,
+            ipucu: 'Geniş ışık kaynağı birden fazla noktadan ışık gönderir; ortada tam gölge, etrafında yarı gölge oluşur.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Tam gölge oluşumu hakkında hangisi doğrudur?',
+            secenekler: [
+              'Noktasal ışık kaynağı keskin kenarlı tam gölge oluşturur; ışık kaynağı cisme yaklaştıkça gölge büyür; cisim perdeye yaklaştıkça gölge küçülür.',
+              'Gölgenin boyutu yalnızca cismin rengine bağlıdır.',
+              'Geniş ışık kaynağı ile sadece tam gölge oluşur.',
+              'Saydam cisimler tam gölge oluşturur.'
+            ],
+            dogru: 0,
+            ipucu: 'Tam gölge: noktasal kaynak→net kenar; kaynak yakın→gölge büyük; cisim perdeye yakın→gölge küçük.'
+          }
+        ]
+      },
+      {
+        slug: 'tanecikli-yapi', name: 'Maddenin Tanecikli Yapısı', hedef: 'Maddenin taneciklerden oluştuğunu ve tanecik özelliklerini öğrenme',
+        videoId: 'q_M3R4KzwqU',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Madde nedir?',
+            secenekler: [
+              'Kütlesi olan ve uzayda yer kaplayan her şey.',
+              'Sadece gözle görebildiğimiz nesneler.',
+              'Yalnızca katı olan şeyler.',
+              'Havada uçan her şey.'
+            ],
+            dogru: 0,
+            ipucu: 'Madde, kütlesi olan ve boşlukta yer kaplayan her şeydir; katı, sıvı ve gaz olabilir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Maddenin tanecikli yapısı ne anlama gelir?',
+            secenekler: [
+              'Tüm maddeler çok küçük taneciklerden (atom ve moleküllerden) oluşur.',
+              'Maddeler yalnızca büyük parçalardan oluşur.',
+              'Tanecikler sadece gazlarda bulunur.',
+              'Tanecikli yapı yalnızca metallerde vardır.'
+            ],
+            dogru: 0,
+            ipucu: 'Her madde, gözle görülemeyecek kadar küçük taneciklerden (atom/molekül) oluşmuştur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Katı maddelerdeki tanecikler nasıl dizilmiştir?',
+            secenekler: [
+              'Düzenli ve sıkı dizilmiştir; birbirine çok yakındır.',
+              'Dağınık ve birbirinden çok uzaktır.',
+              'Tamamen serbest hareket eder.',
+              'Tanecikler arası boşluk çok fazladır.'
+            ],
+            dogru: 0,
+            ipucu: 'Katı maddelerde tanecikler düzenli, sıkı ve birbirine yakın dizilmiştir; bu yüzden şekilleri sabittir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Sıvı maddelerdeki taneciklerin özelliği nedir?',
+            secenekler: [
+              'Tanecikler katıya göre daha gevşek dizilmiştir; birbirleri üzerinden kayabilir.',
+              'Tanecikler tamamen sabittir ve hiç hareket etmez.',
+              'Tanecikler arasında hiç boşluk yoktur.',
+              'Tanecikler en hızlı sıvıda hareket eder.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıvılarda tanecikler birbirine yakın ama serbestçe kayabilir; bu yüzden sıvılar bulunduğu kabın şeklini alır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Gaz maddelerdeki tanecikler nasıl hareket eder?',
+            secenekler: [
+              'Çok hızlı ve düzensiz hareket eder; birbirinden çok uzaktır.',
+              'Yavaş ve düzenli hareket eder.',
+              'Hiç hareket etmez.',
+              'Sadece aşağı doğru hareket eder.'
+            ],
+            dogru: 0,
+            ipucu: 'Gaz tanecikleri çok hızlı, rastgele hareket eder ve aralarındaki boşluk çok fazladır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir parfüm şişesi açıldığında kokusunun odaya yayılmasının nedeni nedir?',
+            secenekler: [
+              'Parfüm taneciklerinin hava tanecikleri arasındaki boşluklardan geçerek yayılması (difüzyon).',
+              'Parfümün görünmez bir güçle itilmesi.',
+              'Havanın parfümü emmesi.',
+              'Parfüm taneciklerinin yok olup yeniden oluşması.'
+            ],
+            dogru: 0,
+            ipucu: 'Tanecikler arasında boşluk vardır; parfüm tanecikleri bu boşluklardan geçerek her yere yayılır (difüzyon).'
+          },
+          {
+            saniye: 420,
+            soru: 'Hangi hâlde tanecikler arası boşluk en fazladır?',
+            secenekler: [
+              'Katı hâlde',
+              'Sıvı hâlde',
+              'Gaz hâlde',
+              'Hepsinde eşittir.'
+            ],
+            dogru: 2,
+            ipucu: 'Tanecikler arası boşluk: katı < sıvı < gaz. Gaz hâlde tanecikler en uzak ve en hızlıdır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Maddenin tanecikli yapısı hakkında hangisi doğrudur?',
+            secenekler: [
+              'Tüm maddeler taneciklerden oluşur; tanecikler sürekli hareket eder; katıda sıkı, sıvıda gevşek, gazda çok uzak dizilmiştir; aralarında boşluk vardır.',
+              'Tanecikler yalnızca gazlarda hareket eder.',
+              'Katı maddelerde tanecikler arası boşluk en fazladır.',
+              'Tanecikler arası boşluk tüm hâllerde aynıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Madde = taneciklerden oluşur, tanecikler hareket eder, aralarında boşluk var; katı→sıkı, sıvı→gevşek, gaz→çok uzak.'
+          }
+        ]
       }
     ],
     playlists: [
@@ -1075,170 +2311,6 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: '"Yüz, gül, kır, dal, bor, bar…" — hepsi aynı yazılır; anlam cümleden çıkarılır.'
-          }
-        ]
-      },
-      {
-        slug: 'yabanci-sozcukler', name: 'Yabancı Sözcüklerin Türkçe Karşılıkları', hedef: 'Dilimize giren yabancı sözcüklerin Türkçe karşılıklarını öğrenme',
-        videoId: 'lbpRQLXb8hw',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: '"Laptop" sözcüğünün Türkçe karşılığı hangisidir?',
-            secenekler: ['Dizüstü bilgisayar', 'Akıllı telefon', 'Masaüstü bilgisayar', 'Tablet'],
-            dogru: 0,
-            ipucu: '"Bilgisayarı nerede kullanıyorum? Dizimin üstünde — o zaman dizüstü bilgisayar."'
-          },
-          {
-            saniye: 120,
-            soru: '"Spiker" sözcüğünün Türkçe karşılığı hangisidir?',
-            secenekler: ['Sunucu / Konuşmacı', 'Seyirci', 'Yönetmen', 'Muhabir'],
-            dogru: 0,
-            ipucu: '"Spiker yerine Türkçe karşılığını söylemen gerekiyor: konuşmacı veya sunucu."'
-          },
-          {
-            saniye: 240,
-            soru: '"Aktüel" sözcüğünün Türkçe karşılığı hangisidir?',
-            secenekler: ['Güncel', 'Tarihsel', 'Bilimsel', 'Sanatsal'],
-            dogru: 0,
-            ipucu: 'Dilimize Fransızcadan giren sözcüklerin yerine Türkçe karşılıkları kullanılmalıdır.'
-          },
-          {
-            saniye: 300,
-            soru: '"Tolerans" sözcüğünün Türkçe karşılığı hangisidir?',
-            secenekler: ['Sabır', 'Hoşgörü', 'Duygu', 'Saygı'],
-            dogru: 1,
-            ipucu: 'Yabancı sözcükler yerine Türkçe karşılıklarını kullanmak dilimizi zenginleştirir.'
-          },
-          {
-            saniye: 360,
-            soru: '"Konser" sözcüğünün Türkçe karşılığı nedir?',
-            secenekler: ['Sergi', 'Dinleti', 'Gösteri', 'Tiyatro'],
-            dogru: 1,
-            ipucu: 'Sanatçının müzik icra ettiği etkinliğin Türkçe karşılığı "dinleti"dir.'
-          },
-          {
-            saniye: 420,
-            soru: '"Fuar" sözcüğünün Türkçe karşılığı hangisidir?',
-            secenekler: ['Sergi', 'Festival', 'Panayır', 'Tiyatro'],
-            dogru: 2,
-            ipucu: 'Fuar Fransızcadan gelir; Türkçe karşılığı "panayır" veya "sergi" olarak kullanılır.'
-          },
-          {
-            saniye: 480,
-            soru: '"Ambülans" sözcüğünün Türkçe karşılığı nedir?',
-            secenekler: ['Kurtarma arabası', 'Cankurtaran', 'İtfaiye', 'Polis arabası'],
-            dogru: 1,
-            ipucu: '"Ambülans" yerine "cankurtaran" sözcüğü Türkçe karşılık olarak kullanılır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Yabancı sözcükler yerine Türkçe karşılıklarını kullanmanın önemi nedir?',
-            secenekler: [
-              'Türkçeyi yabancı dillerden üstün kılar.',
-              'Dilimizi yabancı etkilerden korur, zenginleştirir ve anlaşılırlığı artırır.',
-              'Yabancı sözcükler kullanmak tamamen yasaktır.',
-              'Türkçe karşılıklar her zaman daha kısadır.'
-            ],
-            dogru: 1,
-            ipucu: 'Türkçe karşılıklar: dili canlı tutar, anlaşılırlığı artırır, kültürel kimliği korur.'
-          }
-        ]
-      },
-      {
-        slug: 'oznel-nesnel', name: 'Öznel ve Nesnel Cümleler', hedef: 'Öznel ve nesnel ifadeleri ayırt etme; hayıflanma ve pişmanlık cümleleri',
-        videoId: 'br54-02-bK4',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Nesnel cümlenin temel özelliği nedir?',
-            secenekler: [
-              'Doğruluğu veya yanlışlığı kanıtlanabilir.',
-              'Kişisel düşünce ve beğenileri içerir.',
-              'Yalnızca soruları ifade eder.',
-              'Mecaz anlam taşır.'
-            ],
-            dogru: 0,
-            ipucu: '"Alfabemizde 29 harf vardır" — bunu doğrulayıp yanlışlayabiliriz; nesnel cümle budur.'
-          },
-          {
-            saniye: 120,
-            soru: 'Hayıflanma ile pişmanlık arasındaki temel fark nedir?',
-            secenekler: [
-              'Hayıflanma yapılmayan şeyden duyulan üzüntüdür; pişmanlık yapılan hatadan duyulur.',
-              'Pişmanlık gelecekle, hayıflanma geçmişle ilgilidir.',
-              'İkisi de aynı anlama gelir.',
-              'Hayıflanma sevinçle, pişmanlık üzüntüyle ilgilidir.'
-            ],
-            dogru: 0,
-            ipucu: '"Keşke almayaydım" → hayıflanma (almadım). "Borsada kaybettim" → pişmanlık (yaptım).'
-          },
-          {
-            saniye: 240,
-            soru: 'Aşağıdaki cümlelerden hangisi nesneldir?',
-            secenekler: [
-              'Bu film çok sıkıcıydı.',
-              'Türkiye\'nin başkenti Ankara\'dır.',
-              'Bence en güzel mevsim sonbahardır.',
-              'Futbol harika bir spordur.'
-            ],
-            dogru: 1,
-            ipucu: 'Nesnel cümleler kişiden kişiye değişmeyen, kanıtlanabilir bilgiler içerir.'
-          },
-          {
-            saniye: 300,
-            soru: '"Bu kitap çok güzel yazılmış." cümlesi hangi tür bir yargı içermektedir?',
-            secenekler: [
-              'Nesnel — herkesçe doğrulanabilir',
-              'Öznel — kişisel bir beğeni içermektedir',
-              'Ne öznel ne nesnel',
-              'Bilimsel bir yargıdır'
-            ],
-            dogru: 1,
-            ipucu: 'Öznel cümleler kişiden kişiye değişen, kanıtlanamayan yargılar içerir.'
-          },
-          {
-            saniye: 360,
-            soru: 'Aşağıdakilerden hangisi öznel bir cümledir?',
-            secenekler: [
-              'Güneş doğudan doğar.',
-              'Su 100°C\'de kaynar.',
-              'Türkçe öğrenmesi kolay bir dildir.',
-              'İstanbul iki kıta üzerindedir.'
-            ],
-            dogru: 2,
-            ipucu: '"Kolay" gibi değerlendirmeler kişiden kişiye değişir; bu öznel cümle yapar.'
-          },
-          {
-            saniye: 420,
-            soru: '"Keşke o konsere gitseydim." cümlesi hangi duyguyu ifade eder?',
-            secenekler: ['Pişmanlık', 'Hayıflanma', 'Sevinç', 'Öfke'],
-            dogru: 1,
-            ipucu: '"Keşke gideyeydim" = gitmedim ama keşke gitseydim → hayıflanma (gerçekleşmeyen eylem için üzüntü).'
-          },
-          {
-            saniye: 480,
-            soru: '"Keşke o parayı harcamasaydım." cümlesi hayıflanma mı, pişmanlık mı ifade eder?',
-            secenekler: [
-              'Hayıflanma — para harcanmadı ama keşke harcansaydı.',
-              'Pişmanlık — para harcandı ve bundan üzüntü duyuluyor.',
-              'Ne hayıflanma ne de pişmanlık.',
-              'Öznel bir yargı bildiriyor.'
-            ],
-            dogru: 1,
-            ipucu: '"Harcamasaydım" → para harcandı (gerçekleşti); olumsuzluk pişmanlığı gösterir.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Öznel-nesnel cümle ile hayıflanma-pişmanlık kavramlarını doğru özetleyen hangisidir?',
-            secenekler: [
-              'Nesnel cümleler kanıtlanamaz; öznel cümleler herkese göre aynıdır.',
-              'Nesnel cümleler kanıtlanabilir; öznel cümleler kişisel yargı içerir. Hayıflanma yapılmayan eylem için, pişmanlık yapılan eylem için duyulan üzüntüdür.',
-              'Hayıflanma ve pişmanlık aynı kavramlardır.',
-              'Nesnel cümleler yalnızca bilimsel konularda kullanılır.'
-            ],
-            dogru: 1,
-            ipucu: 'Nesnel: kanıtlanabilir. Öznel: kişisel. Hayıflanma: yapmadım keşke yapsaydım. Pişmanlık: yaptım keşke yapmасаydım.'
           }
         ]
       },
@@ -1502,6 +2574,618 @@ const DERSLER = [
             ipucu: 'Büyük: cümle başı, özel ad, unvan, ay adı. Küçük: mevsim, renk, gün adı (ama ay adı büyük!).'
           }
         ]
+      },
+      {
+        slug: 'soz-sanatlari', name: 'Söz Sanatları (Benzetme, Kişileştirme, Konuşturma)', hedef: 'Benzetme, kişileştirme ve konuşturma söz sanatlarını tanıma',
+        videoId: 'br54-02-bK4',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Söz sanatları neden kullanılır?',
+            secenekler: [
+              'Anlatımı daha etkili, güzel ve canlı kılmak için.',
+              'Cümledeki yazım hatalarını düzeltmek için.',
+              'Kelimelerin anlamlarını değiştirmek için.',
+              'Paragrafı uzatmak için.'
+            ],
+            dogru: 0,
+            ipucu: 'Söz sanatları anlatıma güzellik ve etki katmak amacıyla kullanılır.'
+          },
+          {
+            saniye: 120,
+            soru: '"Kızın yanakları elma gibi kıpkırmızıydı." cümlesinde hangi söz sanatı vardır?',
+            secenekler: [
+              'Kişileştirme',
+              'Konuşturma',
+              'Benzetme',
+              'Abartma'
+            ],
+            dogru: 2,
+            ipucu: '"Gibi" edatı benzetme söz sanatının en belirgin ipucusudur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Benzetme söz sanatında hangi öge benzetilen şeyi belirtir?',
+            secenekler: [
+              'Benzeyen',
+              'Kendisine benzetilen',
+              'Benzetme yönü',
+              'Benzetme edatı'
+            ],
+            dogru: 1,
+            ipucu: '"Saçları ipek gibi yumuşak" — ipek, kendisine benzetilendir.'
+          },
+          {
+            saniye: 240,
+            soru: '"Rüzgâr ağaçlara fısıldıyordu." cümlesinde hangi söz sanatı kullanılmıştır?',
+            secenekler: [
+              'Benzetme',
+              'Konuşturma',
+              'Kişileştirme',
+              'Abartma'
+            ],
+            dogru: 2,
+            ipucu: 'İnsan dışı varlıklara insan özellikleri vermeye kişileştirme denir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Kişileştirme ile konuşturma arasındaki fark nedir?',
+            secenekler: [
+              'İkisi de aynı anlama gelir.',
+              'Kişileştirmede varlığa insan özelliği verilir; konuşturmada varlık doğrudan konuşturulur.',
+              'Konuşturmada "gibi" edatı kullanılır.',
+              'Kişileştirmede varlık konuşturulur; konuşturmada insan özelliği verilir.'
+            ],
+            dogru: 1,
+            ipucu: 'Konuşturma, kişileştirmenin bir ileri adımıdır — varlık tırnak içinde konuşur.'
+          },
+          {
+            saniye: 360,
+            soru: '"Güneş, \'Bugün herkesi ısıtacağım!\' dedi." cümlesinde hangi söz sanatı vardır?',
+            secenekler: [
+              'Benzetme',
+              'Kişileştirme',
+              'Konuşturma',
+              'Abartma'
+            ],
+            dogru: 2,
+            ipucu: 'Güneş doğrudan konuşuyor — bu konuşturma (intak) sanatıdır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdakilerden hangisinde benzetme sanatı vardır?',
+            secenekler: [
+              '"Yapraklar yere usulca süzüldü."',
+              '"Deniz bugün çok sakin görünüyor."',
+              '"Gözleri yıldız gibi parlıyordu."',
+              '"Çiçek, \'Beni kopar!\' diye seslendi."'
+            ],
+            dogru: 2,
+            ipucu: '"Gibi" edatı olan cümle benzetme sanatını gösterir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Söz sanatlarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Benzetme: varlıklar arasında "gibi, kadar" ile benzerlik kurma. Kişileştirme: insan dışı varlığa insan özelliği verme. Konuşturma: insan dışı varlığı doğrudan konuşturma.',
+              'Söz sanatları yalnızca şiirlerde kullanılır, düzyazıda kullanılmaz.',
+              'Kişileştirme ve konuşturma aynı şeydir; aralarında fark yoktur.',
+              'Benzetme söz sanatında "gibi" edatı asla kullanılmaz.'
+            ],
+            dogru: 0,
+            ipucu: 'Benzetme = gibi/kadar. Kişileştirme = insan özelliği. Konuşturma = doğrudan konuşma.'
+          }
+        ]
+      },
+      {
+        slug: 'anlatim-bicimleri', name: 'Anlatım Biçimleri ve Düşünceyi Geliştirme Yolları', hedef: 'Betimleme, öyküleme ve tanıtma anlatım biçimlerini ayırt etme',
+        videoId: 'H7ILiRWnzOY',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Anlatım biçimleri kaça ayrılır?',
+            secenekler: [
+              'İkiye: betimleme ve öyküleme.',
+              'Üçe: açıklama, betimleme ve tartışma.',
+              'Dörde: açıklama (öğretici), betimleme (tasvir), öyküleme (olay anlatma) ve tartışma.',
+              'Beşe: betimleme, öyküleme, açıklama, tartışma ve karşılaştırma.'
+            ],
+            dogru: 2,
+            ipucu: 'Temel anlatım biçimleri: açıklayıcı, betimleyici, öyküleyici ve tartışmacı anlatımdır.'
+          },
+          {
+            saniye: 120,
+            soru: '"Evin önündeki bahçe rengarenk çiçeklerle doluydu; mis gibi bir koku yayılıyordu." Bu metin hangi anlatım biçimine örnektir?',
+            secenekler: [
+              'Öyküleme',
+              'Betimleme (tasvir)',
+              'Tartışma',
+              'Açıklama'
+            ],
+            dogru: 1,
+            ipucu: 'Duyu organlarına hitap eden, görüntüyü tasvir eden anlatım betimleme anlatımıdır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Öyküleme anlatım biçiminin temel özelliği nedir?',
+            secenekler: [
+              'Bir kavramı tanımlamak.',
+              'Bir olayı baştan sona anlatmak, hareket ve değişim içermek.',
+              'Bir konuyu savunmak veya eleştirmek.',
+              'Bir manzarayı ayrıntılı betimlemek.'
+            ],
+            dogru: 1,
+            ipucu: 'Öykülemede bir olay sırası vardır; olaylar birbiri ardına anlatılır.'
+          },
+          {
+            saniye: 240,
+            soru: '"Dünya\'da su kaynaklarının yalnızca %3\'ü tatlı sudur." Bu cümle hangi anlatım biçimine örnektir?',
+            secenekler: [
+              'Betimleme',
+              'Öyküleme',
+              'Açıklayıcı anlatım',
+              'Tartışma'
+            ],
+            dogru: 2,
+            ipucu: 'Bilgi veren, öğretici nitelikteki anlatım açıklayıcı anlatımdır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Düşünceyi geliştirme yollarından "tanımlama" nedir?',
+            secenekler: [
+              'Bir kavramın ne olduğunu açıklamaktır.',
+              'İki kavramı karşılaştırmaktır.',
+              'Bir konuyu örnekle desteklemektir.',
+              'Bir olayı zaman sırasına göre anlatmaktır.'
+            ],
+            dogru: 0,
+            ipucu: '"Tanımlama" bir kavramın "ne olduğunu" ortaya koyan ifadedir.'
+          },
+          {
+            saniye: 360,
+            soru: '"Kitap okumak zihin için egzersiz gibidir." cümlesinde hangi düşünceyi geliştirme yolu kullanılmıştır?',
+            secenekler: [
+              'Tanımlama',
+              'Örnekleme',
+              'Benzetme',
+              'Tanık gösterme'
+            ],
+            dogru: 2,
+            ipucu: '"Gibi" edatıyla bir kavram başka bir kavrama benzetilmiştir.'
+          },
+          {
+            saniye: 420,
+            soru: '"Atatürk, \'Hayatta en hakiki mürşit ilimdir.\' demiştir." cümlesinde hangi düşünceyi geliştirme yolu vardır?',
+            secenekler: [
+              'Örnekleme',
+              'Karşılaştırma',
+              'Tanık gösterme (alıntı yapma)',
+              'Tanımlama'
+            ],
+            dogru: 2,
+            ipucu: 'Bir düşünceyi desteklemek için ünlü birinin sözünü aktarmaya tanık gösterme denir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Anlatım biçimleri ve düşünceyi geliştirme yollarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Anlatım biçimleri (açıklama, betimleme, öyküleme, tartışma) metnin genel yapısını belirler; düşünceyi geliştirme yolları (tanımlama, örnekleme, benzetme, karşılaştırma, tanık gösterme) ise düşünceyi destekler.',
+              'Anlatım biçimleri ile düşünceyi geliştirme yolları aynı şeydir.',
+              'Betimleme bir düşünceyi geliştirme yoludur, anlatım biçimi değildir.',
+              'Düşünceyi geliştirme yolları yalnızca tartışma anlatımında kullanılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Anlatım biçimi = metnin genel çerçevesi. Düşünceyi geliştirme yolu = düşünceyi destekleyen teknikler.'
+          }
+        ]
+      },
+      {
+        slug: 'hikaye-unsurlari', name: 'Hikâyenin Unsurları', hedef: 'Hikâyenin olay, kişi, yer, zaman unsurlarını belirleme',
+        videoId: 'lbpRQLXb8hw',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Bir hikâyenin temel unsurları nelerdir?',
+            secenekler: [
+              'Yalnızca olay ve kişiler.',
+              'Olay, kişiler, yer (mekân) ve zaman.',
+              'Başlık, yazar ve sayfa sayısı.',
+              'Giriş, gelişme ve sonuç.'
+            ],
+            dogru: 1,
+            ipucu: 'Hikâyenin dört temel unsuru: olay, kişiler, yer ve zaman.'
+          },
+          {
+            saniye: 120,
+            soru: 'Hikâyedeki "olay" unsuru neyi ifade eder?',
+            secenekler: [
+              'Hikâyenin geçtiği yeri.',
+              'Hikâyede anlatılan temel sorunu veya yaşananları.',
+              'Hikâyedeki kişilerin özelliklerini.',
+              'Hikâyenin yazılış tarihini.'
+            ],
+            dogru: 1,
+            ipucu: 'Olay, hikâyenin temelini oluşturan yaşanmış veya kurgulanmış hadisedir.'
+          },
+          {
+            saniye: 180,
+            soru: '"Ali, yaz tatilinde köyde dedesini ziyarete gitti." cümlesinde yer unsuru hangisidir?',
+            secenekler: [
+              'Ali',
+              'Yaz tatili',
+              'Köy',
+              'Dedesini ziyaret etmek'
+            ],
+            dogru: 2,
+            ipucu: 'Yer unsuru, olayın geçtiği mekânı belirtir — nerede sorusunun cevabıdır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Hikâyede "zaman" unsuru nasıl belirlenir?',
+            secenekler: [
+              'Hikâyedeki kişilerin yaşlarına bakılarak.',
+              'Olayın ne zaman geçtiğini bildiren ifadelerden (mevsim, saat, yıl, gece-gündüz gibi).',
+              'Hikâyenin sayfa sayısına bakılarak.',
+              'Yazarın doğum tarihine bakılarak.'
+            ],
+            dogru: 1,
+            ipucu: '"Yaz tatilinde", "sabahın erken saatlerinde" gibi ifadeler zaman unsurudur.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir hikâyede "kişiler" unsurunu bulmak için hangi soruyu sorarız?',
+            secenekler: [
+              'Ne zaman?',
+              'Nerede?',
+              'Kim / Kimler?',
+              'Nasıl?'
+            ],
+            dogru: 2,
+            ipucu: 'Kişiler unsuru "kim" sorusunun cevabıdır.'
+          },
+          {
+            saniye: 360,
+            soru: '"Küçük kız, kış günü parkta bir yavru kedi buldu." cümlesinde olay unsuru hangisidir?',
+            secenekler: [
+              'Küçük kız',
+              'Kış günü',
+              'Parkta',
+              'Yavru kedi bulması'
+            ],
+            dogru: 3,
+            ipucu: 'Olay unsuru, yapılan eylemi veya yaşanan durumu belirtir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Hikâyenin bölümleri (giriş, gelişme, sonuç) ile unsurları arasındaki fark nedir?',
+            secenekler: [
+              'Fark yoktur, ikisi aynı şeydir.',
+              'Bölümler hikâyenin yapısını (sırasını); unsurlar hikâyenin içeriğini (olay, kişi, yer, zaman) belirtir.',
+              'Bölümler yalnızca romanlarda, unsurlar yalnızca hikâyelerde bulunur.',
+              'Unsurlar hikâyenin uzunluğunu belirler.'
+            ],
+            dogru: 1,
+            ipucu: 'Bölümler = yapı (sıralama). Unsurlar = içerik (ne, kim, nerede, ne zaman).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Hikâyenin unsurlarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Hikâyenin unsurları: olay (ne oldu), kişiler (kim), yer (nerede), zaman (ne zaman). Bu unsurlar birlikte hikâyenin temelini oluşturur.',
+              'Hikâyenin tek unsuru olaydır; diğerleri önemsizdir.',
+              'Yer ve zaman unsuru yalnızca romanlarda bulunur.',
+              'Hikâyenin unsurları giriş, gelişme ve sonuçtur.'
+            ],
+            dogru: 0,
+            ipucu: 'Dört temel unsur: olay, kişiler, yer, zaman. Hepsi bir arada hikâyeyi oluşturur.'
+          }
+        ]
+      },
+      {
+        slug: 'gecis-baglanti', name: 'Geçiş ve Bağlantı İfadeleri', hedef: 'Geçiş ve bağlantı ifadelerini metinde doğru kullanma',
+        videoId: 'sUIAdU-Fwl0',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Geçiş ve bağlantı ifadeleri ne işe yarar?',
+            secenekler: [
+              'Cümleleri birbirinden ayırarak bağımsız kılar.',
+              'Cümleler ve paragraflar arasında anlam ilişkisi kurarak metni akıcı hale getirir.',
+              'Kelimelerin yazımını düzeltir.',
+              'Noktalama işaretlerinin yerini alır.'
+            ],
+            dogru: 1,
+            ipucu: 'Bağlantı ifadeleri metin içindeki cümleleri birbirine bağlayarak akıcılık sağlar.'
+          },
+          {
+            saniye: 120,
+            soru: '"Öncelikle, bu konunun önemini anlamamız gerekir." cümlesinde "öncelikle" hangi tür bağlantı ifadesidir?',
+            secenekler: [
+              'Karşıtlık bildiren',
+              'Sıralama (öncelik) bildiren',
+              'Neden-sonuç bildiren',
+              'Örnekleme bildiren'
+            ],
+            dogru: 1,
+            ipucu: '"Öncelikle, ilk olarak, birincisi" gibi ifadeler sıralama bildirir.'
+          },
+          {
+            saniye: 180,
+            soru: '"Hava çok soğuktu. Buna rağmen dışarı çıktık." cümlesinde "buna rağmen" ne tür bir bağlantı ifadesidir?',
+            secenekler: [
+              'Sıralama',
+              'Örnekleme',
+              'Karşıtlık (zıtlık) bildiren',
+              'Ekleme bildiren'
+            ],
+            dogru: 2,
+            ipucu: '"Buna rağmen, ancak, fakat, oysa" gibi ifadeler karşıtlık bildirir.'
+          },
+          {
+            saniye: 240,
+            soru: '"Örneğin, kitap okumak kelime dağarcığımızı genişletir." cümlesindeki "örneğin" hangi bağlantı türüne aittir?',
+            secenekler: [
+              'Karşıtlık',
+              'Sıralama',
+              'Örnekleme',
+              'Sonuç'
+            ],
+            dogru: 2,
+            ipucu: '"Örneğin, mesela, sözgelimi" örnekleme bildiren bağlantı ifadeleridir.'
+          },
+          {
+            saniye: 300,
+            soru: '"Bu nedenle hepimiz daha dikkatli olmalıyız." cümlesindeki bağlantı ifadesi ne tür bir ilişki kurar?',
+            secenekler: [
+              'Ekleme',
+              'Neden-sonuç',
+              'Karşıtlık',
+              'Sıralama'
+            ],
+            dogru: 1,
+            ipucu: '"Bu nedenle, bu yüzden, dolayısıyla, bundan dolayı" neden-sonuç bildirir.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisi ekleme bildiren bir bağlantı ifadesidir?',
+            secenekler: [
+              'Ancak',
+              'Bunun yanı sıra',
+              'Sonuç olarak',
+              'Örneğin'
+            ],
+            dogru: 1,
+            ipucu: '"Bunun yanı sıra, ayrıca, üstelik, hem de" ekleme bildiren ifadelerdir.'
+          },
+          {
+            saniye: 420,
+            soru: '"Sonuç olarak, bu proje hepimize çok şey öğretti." cümlesindeki bağlantı ifadesi hangi amaçla kullanılmıştır?',
+            secenekler: [
+              'Konuya giriş yapmak için.',
+              'Karşıt bir düşünce bildirmek için.',
+              'Konuyu özetlemek ve bitirmek için.',
+              'Yeni bir örnek vermek için.'
+            ],
+            dogru: 2,
+            ipucu: '"Sonuç olarak, kısacası, özetle" ifadeleri metni toparlama ve sonlandırma amaçlıdır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Geçiş ve bağlantı ifadelerini doğru özetleyen hangisidir?',
+            secenekler: [
+              'Bağlantı ifadeleri metni akıcı yapar: sıralama (öncelikle, sonra), karşıtlık (ancak, buna rağmen), neden-sonuç (bu yüzden), ekleme (ayrıca), örnekleme (örneğin) ve özetleme (sonuç olarak) gibi türleri vardır.',
+              'Bağlantı ifadeleri sadece "ve, ama, çünkü" kelimelerinden oluşur.',
+              'Bağlantı ifadeleri yalnızca paragrafların sonunda kullanılır.',
+              'Bağlantı ifadeleri anlam ilişkisi kurmaz, sadece süs amaçlıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıralama, karşıtlık, neden-sonuç, ekleme, örnekleme, özetleme — hepsi bağlantı ifadesidir.'
+          }
+        ]
+      },
+      {
+        slug: 'cumlede-kavramlar', name: 'Cümlede Kavramlar (Neden-Sonuç, Amaç-Sonuç, Koşul)', hedef: 'Neden-sonuç, amaç-sonuç ve koşul cümlelerini ayırt etme',
+        videoId: '6eDBln5v9M8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Neden-sonuç cümlesi ne anlam taşır?',
+            secenekler: [
+              'Bir olayın gerçekleşmesi için gerekli şartı bildirir.',
+              'Bir olayın hangi nedenle (sebep) gerçekleştiğini ve sonucunu bildirir.',
+              'İki olayı karşılaştırır.',
+              'Bir dileği ifade eder.'
+            ],
+            dogru: 1,
+            ipucu: 'Neden-sonuç: "Çok çalıştığı için sınavı geçti." Neden = çalışmak, sonuç = geçmek.'
+          },
+          {
+            saniye: 120,
+            soru: '"Hava soğuk olduğu için mont giydim." cümlesinde neden hangisidir?',
+            secenekler: [
+              'Mont giymek',
+              'Havanın soğuk olması',
+              'Her ikisi de neden',
+              'Hiçbiri'
+            ],
+            dogru: 1,
+            ipucu: '"İçin, -den dolayı, -diği için" gibi ifadeler nedenin ipucusudur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Amaç-sonuç cümlesi ile neden-sonuç cümlesi arasındaki fark nedir?',
+            secenekler: [
+              'İkisi de aynı anlama gelir.',
+              'Neden-sonuçta bir olay kendiliğinden gerçekleşir; amaç-sonuçta bir hedef/niyet için eylem yapılır.',
+              'Amaç-sonuçta "çünkü" kullanılır.',
+              'Neden-sonuçta bir hedef vardır, amaç-sonuçta yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Amaç-sonuç: "Sınavı geçmek İÇİN çalıştı." — bir hedef (amaç) var.'
+          },
+          {
+            saniye: 240,
+            soru: '"Kardeşine hediye almak için markete gitti." cümlesinde amaç hangisidir?',
+            secenekler: [
+              'Markete gitmek',
+              'Kardeşine hediye almak',
+              'Alışveriş yapmak',
+              'Marketten dönmek'
+            ],
+            dogru: 1,
+            ipucu: '"İçin, amacıyla, diye" ifadeleri amacı gösterir; amaç eylemin hedefidir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Koşul (şart) cümlesi ne anlam taşır?',
+            secenekler: [
+              'Bir olayın kesin olarak gerçekleşeceğini bildirir.',
+              'Bir olayın gerçekleşmesinin başka bir olaya bağlı olduğunu bildirir.',
+              'İki olayın aynı anda gerçekleştiğini bildirir.',
+              'Bir olayın nedenini açıklar.'
+            ],
+            dogru: 1,
+            ipucu: '"Eğer/şayet + -se/-sa" yapısı koşul bildirir: "Eğer yağmur yağarsa evde kalırız."'
+          },
+          {
+            saniye: 360,
+            soru: '"Eğer erken kalkarsan okula geç kalmazsın." cümlesindeki koşul nedir?',
+            secenekler: [
+              'Okula geç kalmamak',
+              'Erken kalkmak',
+              'Okula gitmek',
+              'Uyumak'
+            ],
+            dogru: 1,
+            ipucu: '"Eğer" ve "-san" eki koşulu gösterir; koşul şartın gerçekleşmesi gereken kısmıdır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdaki cümlelerden hangisi amaç-sonuç ilişkisi taşır?',
+            secenekler: [
+              '"Hava güzel olduğu için pikniğe gittik."',
+              '"Eğer ders çalışırsan başarılı olursun."',
+              '"Sağlıklı olmak için her gün spor yapıyor."',
+              '"Çok yorulduğundan erken yattı."'
+            ],
+            dogru: 2,
+            ipucu: '"İçin" edatı ve bir hedef (sağlıklı olmak) = amaç-sonuç ilişkisi.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Neden-sonuç, amaç-sonuç ve koşul kavramlarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Neden-sonuç: bir olay başka bir olaya yol açar (-diği için, -den dolayı). Amaç-sonuç: bir hedef için eylem yapılır (için, amacıyla, diye). Koşul: bir olayın gerçekleşmesi şarta bağlıdır (eğer, -se/-sa).',
+              'Üçü de aynı anlama gelir; aralarında fark yoktur.',
+              'Koşul cümlelerinde "çünkü" kullanılır.',
+              'Amaç-sonuç cümleleri "eğer" ile başlar.'
+            ],
+            dogru: 0,
+            ipucu: 'Neden-sonuç = sebep → sonuç. Amaç-sonuç = hedef → eylem. Koşul = şart → sonuç.'
+          }
+        ]
+      },
+      {
+        slug: 'isimler-adlar', name: 'İsimler (Adlar)', hedef: 'İsimleri özel/cins, tekil/çoğul, somut/soyut olarak sınıflandırma',
+        videoId: 'ok8UC7I9Qeo',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'İsim (ad) nedir?',
+            secenekler: [
+              'Varlıkların hareketlerini bildiren sözcüklerdir.',
+              'Varlıkları ve kavramları karşılayan sözcüklerdir.',
+              'Varlıkların özelliklerini bildiren sözcüklerdir.',
+              'Cümledeki bağlaçlardır.'
+            ],
+            dogru: 1,
+            ipucu: 'İsimler; canlı-cansız varlıkları, kavramları ve duyguları karşılayan sözcüklerdir.'
+          },
+          {
+            saniye: 120,
+            soru: '"Atatürk" özel ad mıdır, yoksa cins (tür) ad mıdır?',
+            secenekler: [
+              'Cins (tür) addır.',
+              'Özel addır.',
+              'Hem özel hem cins addır.',
+              'Ad değildir.'
+            ],
+            dogru: 1,
+            ipucu: 'Tek bir varlığı, kişiyi veya yeri karşılayan adlar özel addır ve büyük harfle başlar.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi cins (tür) addır?',
+            secenekler: [
+              'Ankara',
+              'Kalem',
+              'Sakarya',
+              'Atatürk'
+            ],
+            dogru: 1,
+            ipucu: 'Cins ad, aynı türdeki tüm varlıkları karşılar: kalem, ağaç, çiçek...'
+          },
+          {
+            saniye: 240,
+            soru: '"Çocuklar" sözcüğü tekil midir, çoğul mudur?',
+            secenekler: [
+              'Tekil',
+              'Çoğul',
+              'Hem tekil hem çoğul',
+              'Belirsiz'
+            ],
+            dogru: 1,
+            ipucu: '"-ler/-lar" eki sözcüğü çoğul yapar: çocuk → çocuklar.'
+          },
+          {
+            saniye: 300,
+            soru: 'Somut isim ile soyut isim arasındaki fark nedir?',
+            secenekler: [
+              'Somut isimler yalnızca canlıları, soyut isimler yalnızca cansızları karşılar.',
+              'Somut isimler beş duyu organıyla algılanabilir; soyut isimler algılanamaz, yalnızca düşünülür veya hissedilir.',
+              'İkisi arasında fark yoktur.',
+              'Soyut isimler her zaman çoğul kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Somut: masa, su, çiçek (görebilirsin). Soyut: sevgi, özlem, mutluluk (hissedersin).'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisi soyut bir isimdir?',
+            secenekler: [
+              'Ağaç',
+              'Deniz',
+              'Özgürlük',
+              'Taş'
+            ],
+            dogru: 2,
+            ipucu: 'Özgürlük gözle görülemez, elle tutulamaz — yalnızca düşünülür ve hissedilir.'
+          },
+          {
+            saniye: 420,
+            soru: '"Topluluk ismi" ne demektir?',
+            secenekler: [
+              'Birden fazla varlıktan oluşan bir grubu tek sözcükle karşılayan isimdir.',
+              'Çoğul eki almış her isimdir.',
+              'Yalnızca insan topluluklarını ifade eden isimdir.',
+              'Soyut isimlerin başka bir adıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Ordu, sürü, orman, takım — hepsi birçok varlığı tek sözcükle anlatır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'İsimlerin sınıflandırılmasını doğru özetleyen hangisidir?',
+            secenekler: [
+              'İsimler; özel/cins (tür), tekil/çoğul, somut/soyut ve topluluk ismi olarak sınıflandırılır. Özel adlar büyük harfle yazılır.',
+              'İsimler yalnızca özel ve cins olmak üzere ikiye ayrılır.',
+              'Soyut isimler daima özel ad sayılır.',
+              'Topluluk isimleri çoğul eki almış isimlerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Özel/cins, tekil/çoğul, somut/soyut, topluluk — isimlerin dört sınıflandırma ölçütü.'
+          }
+        ]
       }
     ],
     playlists: [
@@ -1605,108 +3289,6 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Kültür = çok boyutlu. Çeşitlilik = güç. Koruma = kimlik aktarımı. UNESCO = evrensel değer.'
-          }
-        ]
-      },
-      {
-        slug: 'kultur-katki', name: 'Kültürel Zenginliklerin Birlikte Yaşamaya Katkısı', hedef: 'Kültürel çeşitliliğin ortak yaşama katkısını değerlendirme',
-        videoId: '3F9edAIuVzI',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Kültürel zenginlikler birlikte yaşamaya nasıl katkı sağlar?',
-            secenekler: [
-              'Birbirine saygıyı artırır ve topluma çeşitlilik katar.',
-              'Toplumları birbirinden ayırır ve çatışma çıkarır.',
-              'Yalnızca ekonomiyi etkiler.',
-              'Kültürel zenginliklerin birlikte yaşamaya katkısı yoktur.'
-            ],
-            dogru: 0,
-            ipucu: 'Farklı kültürler bir arada yaşayınca toplum zenginleşir, saygı ve dayanışma artar.'
-          },
-          {
-            saniye: 120,
-            soru: 'Aşağıdakilerden hangisi kültürel zenginliğe örnek DEĞİLDİR?',
-            secenekler: [
-              'Bir ülkenin nüfus yoğunluğu.',
-              'Halk oyunları.',
-              'Geleneksel yemekler.',
-              'El sanatları.'
-            ],
-            dogru: 0,
-            ipucu: 'Nüfus yoğunluğu demografik bir veridir; halk oyunları, yemek ve el sanatları kültürel değerlerdir.'
-          },
-          {
-            saniye: 240,
-            soru: 'Kültürel zenginlikler bir ülkenin ekonomisine nasıl katkı sağlar?',
-            secenekler: [
-              'Sağlamaz, kültür ekonomiyle ilgili değildir.',
-              'Turizm geliri ve istihdam yoluyla katkı sağlar.',
-              'Sadece devlet bütçesini zorlar.',
-              'Yalnızca sanata katkı sağlar.'
-            ],
-            dogru: 1,
-            ipucu: 'Kültürel mekânları ziyaret eden turistler, yörenin ekonomisine önemli katkı sağlar.'
-          },
-          {
-            saniye: 300,
-            soru: 'Geleneksel el sanatları neden korunmalıdır?',
-            secenekler: [
-              'Çünkü ucuz üretim sağlarlar.',
-              'Çünkü yalnızca yabancılara satılırlar.',
-              'Çünkü kültürel kimliği yansıtır ve nesiller arası aktarımı sağlarlar.',
-              'Çünkü zorunlu ihtiyaçları karşılarlar.'
-            ],
-            dogru: 2,
-            ipucu: 'Geleneksel el sanatları, kültürümüzün somut göstergelerinden biri ve kimliğimizi yansıtır.'
-          },
-          {
-            saniye: 360,
-            soru: 'Kültürel zenginliklerin toplumsal birlik açısından önemi nedir?',
-            secenekler: [
-              'Toplumsal birliğe katkısı yoktur.',
-              'Ortak değerler ve geçmiş paylaşımı toplumu bir arada tutar.',
-              'Yalnızca ayrımcılığa yol açar.',
-              'Sadece bireysel kimlik oluşturur.'
-            ],
-            dogru: 1,
-            ipucu: 'Ortak kültürel miras, bir toplumun bağlarını güçlendiren ve birliği pekiştiren temel unsurdur.'
-          },
-          {
-            saniye: 420,
-            soru: 'Kültürel alışveriş (kültürlerarası etkileşim) ne anlama gelir?',
-            secenekler: [
-              'Bir kültürün diğerini tamamen yok etmesi.',
-              'Farklı kültürlerin birbirinden etkilenerek yeni unsurlar kazanması.',
-              'Kültürlerin hiç değişmeden kalması.',
-              'Yalnızca ticaret yoluyla gerçekleşen değişim.'
-            ],
-            dogru: 1,
-            ipucu: 'Kültürler ticaret, göç, sanat ve iletişim yoluyla birbirini etkiler ve zenginleşir.'
-          },
-          {
-            saniye: 480,
-            soru: 'Yerel festival ve şenliklerin kültürel önemi nedir?',
-            secenekler: [
-              'Yalnızca eğlence amaçlıdır; kültürel değeri yoktur.',
-              'Gelenekleri yaşatır, toplumsal dayanışmayı güçlendirir ve turistlere kültür tanıtır.',
-              'Ekonomik zararlar yaratır.',
-              'Yabancı kültürlerin yayılmasını sağlar.'
-            ],
-            dogru: 1,
-            ipucu: 'Festivaller: gelenek yaşatır, kimlik pekiştirir, turizm katkısı sağlar, dayanışmayı artırır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Kültürel zenginliklerin birlikte yaşamaya katkısını özetleyen hangisidir?',
-            secenekler: [
-              'Farklı kültürler her zaman çatışmaya neden olur.',
-              'Kültürel çeşitlilik saygı, hoşgörü ve dayanışmayı artırarak toplumun birlikte yaşamasına zemin hazırlar.',
-              'Kültürel zenginlikler yalnızca ekonomik değer taşır.',
-              'Tek tip kültür toplumsal barışı sağlar.'
-            ],
-            dogru: 1,
-            ipucu: 'Çeşitlilik → zenginlik. Ortak değerler + saygı → birlikte yaşam. Farklılık = tehdit değil, kaynak.'
           }
         ]
       },
@@ -2065,6 +3647,516 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Demokrasi = halk egemenliği. Cumhuriyet = halkın seçtiği yönetim. TC: 29 Ekim 1923.'
+          }
+        ]
+      },
+      {
+        slug: 'ilimizin-konumu', name: 'İlimizin Göreceli Konumu', hedef: 'İlimizin göreceli konumunu ve komşu illeri tanıma',
+        videoId: '4ygoBUqSmvI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Göreceli konum ne demektir?',
+            secenekler: [
+              'Bir yerin enlem ve boylam derecesiyle belirlenmesidir.',
+              'Bir yerin çevresindeki illere, denizlere, dağlara göre yerinin tarif edilmesidir.',
+              'Bir yerin nüfus sayısına göre belirlenmesidir.',
+              'Bir yerin yüzölçümüne göre sıralanmasıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Göreceli konum, çevredeki yerlere (il, deniz, dağ) göre yapılan konum tarifidir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Göreceli konum ile mutlak konum arasındaki fark nedir?',
+            secenekler: [
+              'İkisi aynı şeydir.',
+              'Mutlak konum enlem-boylamla, göreceli konum çevreye göre belirlenir.',
+              'Göreceli konum enlem-boylamla belirlenir.',
+              'Mutlak konum komşu illere göre belirlenir.'
+            ],
+            dogru: 1,
+            ipucu: 'Mutlak = koordinat (enlem-boylam). Göreceli = çevreye göre tarif.'
+          },
+          {
+            saniye: 180,
+            soru: 'Bir ilin göreceli konumu tarif edilirken hangi bilgiler kullanılır?',
+            secenekler: [
+              'Yalnızca nüfus ve yüzölçümü bilgileri.',
+              'Komşu iller, yakınındaki denizler, dağlar ve nehirler.',
+              'Yalnızca enlem ve boylam bilgileri.',
+              'Yalnızca iklim bilgileri.'
+            ],
+            dogru: 1,
+            ipucu: '"Kuzeyinde ... denizi, doğusunda ... ili var." gibi ifadeler göreceli konumu anlatır.'
+          },
+          {
+            saniye: 240,
+            soru: '"İlimiz, Karadeniz\'in güneyinde yer alır." cümlesi hangi tür konum bilgisi verir?',
+            secenekler: [
+              'Mutlak konum',
+              'Göreceli konum',
+              'Matematik konum',
+              'Özel konum'
+            ],
+            dogru: 1,
+            ipucu: 'Bir denize göre yön belirtilmişse bu göreceli konum tarifidir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Komşu illeri bilmek neden önemlidir?',
+            secenekler: [
+              'Sadece sınav soruları için gereklidir.',
+              'Ticaret, ulaşım ve sosyal ilişkiler açısından komşu illerin etkisini anlamamızı sağlar.',
+              'Hiçbir önemi yoktur.',
+              'Sadece harita çizmek için kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Komşu iller arasında ticaret, ulaşım ve kültürel etkileşim yoğundur.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir ilin göreceli konumu zamanla değişir mi?',
+            secenekler: [
+              'Evet, her yıl değişir.',
+              'Hayır, coğrafi konumu sabittir; ancak çevresindeki yapılar (yollar, köprüler) değişebilir.',
+              'Evet, depremlerle sürekli değişir.',
+              'Hayır, hiçbir şekilde değişmez.'
+            ],
+            dogru: 1,
+            ipucu: 'İlin fiziksel yeri aynıdır ama çevresindeki beşeri unsurlar (yol, baraj) değişebilir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdakilerden hangisi göreceli konum tarifi değildir?',
+            secenekler: [
+              '"İlimiz 40° kuzey enlemi üzerindedir."',
+              '"İlimizin kuzeyinde Kastamonu ili yer alır."',
+              '"İlimiz Karadeniz kıyısındadır."',
+              '"İlimizin doğusunda verimli ovalar uzanır."'
+            ],
+            dogru: 0,
+            ipucu: 'Enlem-boylam bilgisi mutlak (matematik) konumu belirtir, göreceli konum değil.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Göreceli konum kavramını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Göreceli konum, bir yerin çevresindeki illere, denizlere, dağlara ve nehirlere göre tarif edilmesidir. Mutlak konumdan farkı, koordinat kullanılmamasıdır.',
+              'Göreceli konum, enlem ve boylam derecelerini kullanarak yapılan konum tarifidir.',
+              'Göreceli konum yalnızca büyükşehirler için kullanılır.',
+              'Göreceli konum ve mutlak konum aynı anlama gelir.'
+            ],
+            dogru: 0,
+            ipucu: 'Göreceli = çevreye göre tarif. Mutlak = enlem-boylam.'
+          }
+        ]
+      },
+      {
+        slug: 'komsu-devletler', name: 'Ülkemize Komşu Devletler', hedef: 'Türkiye\'ye komşu olan devletleri tanıma',
+        videoId: 'C6-43BBvcuM',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Türkiye kaç ülkeyle kara sınırına sahiptir?',
+            secenekler: [
+              '6',
+              '7',
+              '8',
+              '9'
+            ],
+            dogru: 2,
+            ipucu: 'Türkiye 8 ülkeyle kara komşusudur: Yunanistan, Bulgaristan, Gürcistan, Ermenistan, Nahçıvan (Azerbaycan), İran, Irak, Suriye.'
+          },
+          {
+            saniye: 120,
+            soru: 'Türkiye\'nin batı komşuları hangileridir?',
+            secenekler: [
+              'İran ve Irak',
+              'Yunanistan ve Bulgaristan',
+              'Gürcistan ve Ermenistan',
+              'Suriye ve Irak'
+            ],
+            dogru: 1,
+            ipucu: 'Avrupa kıtasındaki komşularımız batıda yer alır: Yunanistan ve Bulgaristan.'
+          },
+          {
+            saniye: 180,
+            soru: 'Türkiye\'nin kuzeydoğu komşuları kimlerdir?',
+            secenekler: [
+              'Yunanistan ve Bulgaristan',
+              'Gürcistan ve Ermenistan',
+              'İran ve Irak',
+              'Suriye ve Lübnan'
+            ],
+            dogru: 1,
+            ipucu: 'Kafkasya bölgesindeki komşularımız kuzeydoğudadır: Gürcistan ve Ermenistan.'
+          },
+          {
+            saniye: 240,
+            soru: 'Türkiye\'nin güneyinde hangi ülkeler yer alır?',
+            secenekler: [
+              'Bulgaristan ve Yunanistan',
+              'Gürcistan ve İran',
+              'Suriye ve Irak',
+              'Ermenistan ve Azerbaycan'
+            ],
+            dogru: 2,
+            ipucu: 'Güney sınırımız boyunca Suriye ve Irak yer alır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Nahçıvan hangi ülkeye bağlıdır?',
+            secenekler: [
+              'İran',
+              'Ermenistan',
+              'Azerbaycan',
+              'Gürcistan'
+            ],
+            dogru: 2,
+            ipucu: 'Nahçıvan, Azerbaycan\'ın özerk bölgesidir ve Türkiye ile kısa bir sınırı vardır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Türkiye\'nin en uzun kara sınırı hangi ülkeyledir?',
+            secenekler: [
+              'Yunanistan',
+              'Bulgaristan',
+              'Suriye',
+              'İran'
+            ],
+            dogru: 2,
+            ipucu: 'Türkiye\'nin güney sınırı boyunca uzanan Suriye ile en uzun kara sınırımız vardır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Türkiye hangi denizlerle çevrilidir?',
+            secenekler: [
+              'Yalnızca Akdeniz ve Karadeniz.',
+              'Karadeniz, Marmara Denizi, Ege Denizi ve Akdeniz.',
+              'Yalnızca Karadeniz ve Ege Denizi.',
+              'Atlas Okyanusu ve Akdeniz.'
+            ],
+            dogru: 1,
+            ipucu: 'Üç tarafı denizlerle çevrili: kuzeyde Karadeniz, batıda Ege, güneyde Akdeniz, arada Marmara.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Türkiye\'nin komşu devletlerini doğru özetleyen hangisidir?',
+            secenekler: [
+              'Türkiye 8 kara komşusuna sahiptir: batıda Yunanistan-Bulgaristan, kuzeydoğuda Gürcistan-Ermenistan, doğuda Nahçıvan (Azerbaycan)-İran, güneyde Irak-Suriye. Üç tarafı denizlerle çevrilidir.',
+              'Türkiye yalnızca 5 ülkeyle komşudur.',
+              'Türkiye\'nin deniz komşusu yoktur.',
+              'Türkiye yalnızca Asya kıtasında komşulara sahiptir.'
+            ],
+            dogru: 0,
+            ipucu: '8 kara komşusu: Yunanistan, Bulgaristan, Gürcistan, Ermenistan, Nahçıvan, İran, Irak, Suriye.'
+          }
+        ]
+      },
+      {
+        slug: 'afetler', name: 'İlimizde Yaşanabilecek Afetler ve Etkileri', hedef: 'Doğal afetleri tanıma ve afetlere karşı hazırlıklı olma',
+        videoId: '3F9edAIuVzI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Doğal afet nedir?',
+            secenekler: [
+              'İnsanların yaptığı kazalar.',
+              'Doğada kendiliğinden meydana gelen ve can-mal kaybına yol açan olaylar.',
+              'Yalnızca deprem demektir.',
+              'Sadece yurt dışında yaşanan olaylar.'
+            ],
+            dogru: 1,
+            ipucu: 'Deprem, sel, heyelan, çığ gibi doğanın kendiliğinden ürettiği yıkıcı olaylardır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Aşağıdakilerden hangisi doğal bir afet değildir?',
+            secenekler: [
+              'Deprem',
+              'Sel',
+              'Trafik kazası',
+              'Heyelan'
+            ],
+            dogru: 2,
+            ipucu: 'Trafik kazası insan kaynaklıdır; doğal afet doğa olaylarından kaynaklanır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Deprem sırasında en güvenli hareket hangisidir?',
+            secenekler: [
+              'Pencereden atlamak.',
+              'Asansöre binmek.',
+              'Çök-kapan-tutun (sağlam masa altına sığınmak).',
+              'Panikle dışarı koşmak.'
+            ],
+            dogru: 2,
+            ipucu: '"Çök-kapan-tutun" deprem anında hayat kurtaran temel harekettir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Sel afeti genellikle neden meydana gelir?',
+            secenekler: [
+              'Aşırı sıcaklıktan.',
+              'Şiddetli ve uzun süren yağışlardan veya kar erimelerinden.',
+              'Rüzgârın çok şiddetli esmesinden.',
+              'Yer kabuğunun kırılmasından.'
+            ],
+            dogru: 1,
+            ipucu: 'Sel, fazla yağış veya kar erimesiyle suların taşması sonucu oluşur.'
+          },
+          {
+            saniye: 300,
+            soru: 'Heyelan ne demektir?',
+            secenekler: [
+              'Deniz suyunun yükselmesidir.',
+              'Toprağın ve kayaların eğimli yamaçlardan aşağı kaymasıdır.',
+              'Yeraltı suyunun bitmesidir.',
+              'Volkanik patlamadır.'
+            ],
+            dogru: 1,
+            ipucu: 'Heyelan: eğimli arazide toprağın, taşın ve kayanın yer çekimiyle kaymasıdır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Afetlere karşı hazırlıklı olmak için ailece ne yapılmalıdır?',
+            secenekler: [
+              'Hiçbir şey yapmaya gerek yoktur.',
+              'Deprem çantası hazırlamak, toplanma alanını belirlemek ve tatbikat yapmak.',
+              'Sadece haberleri izlemek yeterlidir.',
+              'Afet olduğunda karar verilir, önceden hazırlık gereksizdir.'
+            ],
+            dogru: 1,
+            ipucu: 'Deprem çantası + toplanma alanı + aile iletişim planı = afete hazırlık.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir deprem çantasında hangisi bulunmalıdır?',
+            secenekler: [
+              'Oyuncaklar ve kitaplar.',
+              'Su, kuru gıda, ilk yardım malzemesi, el feneri ve düdük.',
+              'Sadece para.',
+              'Sadece battaniye.'
+            ],
+            dogru: 1,
+            ipucu: 'Su, gıda, ilk yardım, fener, düdük — deprem çantasının olmazsa olmazları.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Doğal afetler konusunu doğru özetleyen hangisidir?',
+            secenekler: [
+              'Deprem, sel, heyelan ve çığ gibi doğal afetler can ve mal kaybına yol açar. Hazırlıklı olmak için deprem çantası hazırlanmalı, toplanma alanı bilinmeli ve tatbikatlar yapılmalıdır.',
+              'Doğal afetler yalnızca tropikal bölgelerde yaşanır.',
+              'Afetlere karşı hazırlık yapmak gereksizdir.',
+              'Doğal afetlerin etkisini yalnızca devlet önleyebilir, bireylere düşen bir görev yoktur.'
+            ],
+            dogru: 0,
+            ipucu: 'Afetler her yerde olabilir; bireysel hazırlık (çanta, plan, tatbikat) hayat kurtarır.'
+          }
+        ]
+      },
+      {
+        slug: 'ilk-yerlesimler', name: 'Anadolu\'nun İlk Yerleşim Yerlerinde Yaşam', hedef: 'Anadolu\'daki ilk yerleşim yerlerini ve yaşam biçimlerini tanıma',
+        videoId: 'b3xT-xnCXUE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'İnsanlar neden göçebe yaşamdan yerleşik yaşama geçmiştir?',
+            secenekler: [
+              'Savaşlardan kaçmak için.',
+              'Tarım yapmayı öğrenmeleri ve hayvanları evcilleştirmeleriyle birlikte.',
+              'Deniz seviyesinin yükselmesi nedeniyle.',
+              'Devletin emriyle.'
+            ],
+            dogru: 1,
+            ipucu: 'Tarım ve hayvancılığın başlaması insanları bir yere bağlamış, yerleşik yaşam başlamıştır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Anadolu\'daki en eski yerleşim yerlerinden biri hangisidir?',
+            secenekler: [
+              'İstanbul',
+              'Çatalhöyük',
+              'Ankara',
+              'İzmir'
+            ],
+            dogru: 1,
+            ipucu: 'Çatalhöyük (Konya), dünyada bilinen en eski yerleşim yerlerinden biridir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Çatalhöyük\'te evlerin özelliği neydi?',
+            secenekler: [
+              'Evlerin kapısı yoktu; çatıdan girilirdi.',
+              'Evler taştan çok katlı yapılırdı.',
+              'Her evin büyük bir bahçesi vardı.',
+              'Evler birbirinden çok uzaktı.'
+            ],
+            dogru: 0,
+            ipucu: 'Çatalhöyük\'te evler bitişikti ve çatıdaki bir açıklıktan merdivene girilirdi.'
+          },
+          {
+            saniye: 240,
+            soru: 'İlk yerleşim yerlerinde insanlar geçimlerini nasıl sağlıyordu?',
+            secenekler: [
+              'Fabrikada çalışarak.',
+              'Tarım, hayvancılık ve el sanatlarıyla.',
+              'Madencilikle.',
+              'Yalnızca balıkçılıkla.'
+            ],
+            dogru: 1,
+            ipucu: 'Tarım (buğday, arpa), hayvancılık (koyun, keçi) ve basit el sanatları temel geçim yoluydu.'
+          },
+          {
+            saniye: 300,
+            soru: 'İlk yerleşim yerlerinde kullanılan araçlar hangi malzemeden yapılırdı?',
+            secenekler: [
+              'Demir ve çelik',
+              'Taş, kemik ve kilden',
+              'Plastik ve cam',
+              'Bakır ve altın'
+            ],
+            dogru: 1,
+            ipucu: 'İlk dönemlerde taş, kemik ve kil en çok kullanılan malzemelerdi (Taş Devri).'
+          },
+          {
+            saniye: 360,
+            soru: 'Anadolu neden ilk yerleşim için uygun bir bölgeydi?',
+            secenekler: [
+              'Çöl iklimi olduğu için.',
+              'Verimli toprakları, ılıman iklimi ve su kaynaklarının bolluğu nedeniyle.',
+              'Dağlık olduğu için düşmandan korunma sağladığından.',
+              'Denizlerle çevrili olduğu için balıkçılık yapılabildiğinden.'
+            ],
+            dogru: 1,
+            ipucu: 'Verimli toprak + su + ılıman iklim = tarıma ve yerleşime uygun ortam.'
+          },
+          {
+            saniye: 420,
+            soru: 'Göbeklitepe\'nin önemi nedir?',
+            secenekler: [
+              'Dünyanın en büyük şehridir.',
+              'Bilinen en eski tapınak kalıntılarını barındırır (yaklaşık 12.000 yıl öncesine ait).',
+              'İlk yazının burada bulunduğu düşünülmektedir.',
+              'Anadolu\'nun en yeni yerleşim yeridir.'
+            ],
+            dogru: 1,
+            ipucu: 'Göbeklitepe (Şanlıurfa), yaklaşık 12.000 yıllık tarihi ile dünyanın bilinen en eski tapınağıdır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Anadolu\'nun ilk yerleşim yerleri konusunu doğru özetleyen hangisidir?',
+            secenekler: [
+              'Tarım ve hayvancılığın başlamasıyla yerleşik yaşama geçildi. Çatalhöyük ve Göbeklitepe gibi merkezler Anadolu\'nun en eski yerleşim alanlarıdır. İnsanlar taş, kemik ve kilden araçlar kullanarak geçimlerini sağlıyordu.',
+              'Anadolu\'da yerleşik yaşam yalnızca 500 yıl önce başlamıştır.',
+              'İlk yerleşimciler yalnızca avcılıkla geçinirdi.',
+              'Anadolu\'daki ilk yerleşim yerleri yalnızca kıyı bölgelerdeydi.'
+            ],
+            dogru: 0,
+            ipucu: 'Tarım → yerleşik yaşam. Çatalhöyük, Göbeklitepe = Anadolu\'nun en eski merkezleri.'
+          }
+        ]
+      },
+      {
+        slug: 'mezopotamya', name: 'Mezopotamya ve Anadolu\'nun Ortak Kültürel Mirasa Katkıları', hedef: 'Mezopotamya ve Anadolu medeniyetlerinin kültürel mirasını tanıma',
+        videoId: 'ijBw2KbL9NE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Mezopotamya neresidir?',
+            secenekler: [
+              'Mısır\'daki Nil Nehri çevresidir.',
+              'Dicle ve Fırat nehirleri arasındaki bölgedir (bugünkü Irak civarı).',
+              'Anadolu\'nun batısıdır.',
+              'Yunanistan\'daki antik şehirlerin bulunduğu bölgedir.'
+            ],
+            dogru: 1,
+            ipucu: 'Mezopotamya = "iki nehir arası" (Dicle ve Fırat). Bugünkü Irak topraklarıdır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Mezopotamya\'da hangi önemli buluş gerçekleştirilmiştir?',
+            secenekler: [
+              'Matbaa',
+              'Yazı (çivi yazısı)',
+              'Pusula',
+              'Barut'
+            ],
+            dogru: 1,
+            ipucu: 'Sümerler, tarihteki ilk yazıyı (çivi yazısı) Mezopotamya\'da geliştirmiştir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Mezopotamya\'da yaşayan medeniyetlerden hangisi değildir?',
+            secenekler: [
+              'Sümerler',
+              'Babilliler',
+              'Asurlular',
+              'Lidyalılar'
+            ],
+            dogru: 3,
+            ipucu: 'Lidyalılar Anadolu\'da (bugünkü Manisa civarı) yaşamıştır, Mezopotamya\'da değil.'
+          },
+          {
+            saniye: 240,
+            soru: 'Parayı ilk kullanan medeniyet hangisidir ve nerede kurulmuştur?',
+            secenekler: [
+              'Sümerler — Mezopotamya\'da',
+              'Lidyalılar — Anadolu\'da',
+              'Mısırlılar — Afrika\'da',
+              'Romalılar — Avrupa\'da'
+            ],
+            dogru: 1,
+            ipucu: 'Lidyalılar parayı ilk kez kullanarak ticareti kolaylaştırmıştır (Anadolu, Sardes).'
+          },
+          {
+            saniye: 300,
+            soru: 'Hititler hangi alanda önemli bir ilke imza atmıştır?',
+            secenekler: [
+              'İlk çivi yazısını icat etmişlerdir.',
+              'Tarihteki bilinen ilk yazılı antlaşmayı (Kadeş) yapmışlardır.',
+              'İlk parayı basmışlardır.',
+              'İlk piramitleri inşa etmişlerdir.'
+            ],
+            dogru: 1,
+            ipucu: 'Kadeş Antlaşması (MÖ 1259), Hititler ile Mısırlılar arasında yapılan bilinen ilk yazılı barış antlaşmasıdır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Anadolu ve Mezopotamya medeniyetleri insanlığa hangi katkıları sağlamıştır?',
+            secenekler: [
+              'Hiçbir katkıları olmamıştır.',
+              'Yazı, hukuk, para, tarım, astronomi ve mimari gibi alanlarda temel buluşlar.',
+              'Sadece savaş teknolojileri geliştirmişlerdir.',
+              'Yalnızca sanat alanında katkı sağlamışlardır.'
+            ],
+            dogru: 1,
+            ipucu: 'Yazı (Sümer), para (Lidya), hukuk (Babil - Hammurabi), antlaşma (Hitit) — köklü katkılar.'
+          },
+          {
+            saniye: 420,
+            soru: 'Hammurabi Kanunları\'nın önemi nedir?',
+            secenekler: [
+              'Tarihteki ilk yazılı kanun metnidir.',
+              'Bilinen en eski ve en kapsamlı yazılı hukuk kurallarından biridir (Babil).',
+              'Yalnızca ticaret kurallarını içerir.',
+              'Anadolu\'da yazılmıştır.'
+            ],
+            dogru: 1,
+            ipucu: 'Babil Kralı Hammurabi, toplum düzenini sağlamak için kapsamlı yazılı yasalar oluşturmuştur.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Mezopotamya ve Anadolu\'nun kültürel mirasını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Mezopotamya (Sümerler: yazı, Babilliler: hukuk) ve Anadolu (Hititler: ilk yazılı antlaşma, Lidyalılar: para) medeniyetleri; yazı, hukuk, ticaret ve diplomasi alanlarında insanlığa temel katkılar sağlamıştır.',
+              'Bu medeniyetler yalnızca tarımla uğraşmıştır.',
+              'Anadolu medeniyetleri Mezopotamya\'dan etkilenmemiştir.',
+              'Mezopotamya medeniyetleri yalnızca savaş teknolojisi geliştirmiştir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sümer = yazı, Babil = hukuk, Hitit = antlaşma, Lidya = para. Köklü miras.'
           }
         ]
       }
@@ -2640,6 +4732,210 @@ const DERSLER = [
             ],
             dogru: 1,
             ipucu: 'Should + base verb = advice. Shouldn\'t + base verb = advice against. No -s, no "to", no -ing after should.'
+          }
+        ]
+      },
+      {
+        slug: 'movies', name: 'Movies — Superlatives & Making Suggestions', hedef: 'Film türlerini ve superlative yapısını öğrenme',
+        videoId: 'dUsuMGzvwtY',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Which of these is a movie genre (film türü)?',
+            secenekler: [
+              'Comedy',
+              'Library',
+              'Kitchen',
+              'Hospital'
+            ],
+            dogru: 0,
+            ipucu: 'Comedy (komedi), horror (korku), action (aksiyon), animation (animasyon) — bunlar film türleridir.'
+          },
+          {
+            saniye: 120,
+            soru: '"Horror" film türü Türkçede ne anlama gelir?',
+            secenekler: [
+              'Komedi',
+              'Korku',
+              'Bilim kurgu',
+              'Macera'
+            ],
+            dogru: 1,
+            ipucu: 'Horror = korku. Horror movies korku filmleridir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Superlative (en üstünlük) yapısı ne işe yarar?',
+            secenekler: [
+              'İki şeyi karşılaştırmak için.',
+              'Üç veya daha fazla şey arasından "en" olanı belirtmek için.',
+              'Bir şeyin eşit olduğunu göstermek için.',
+              'Geçmiş zamandaki olayları anlatmak için.'
+            ],
+            dogru: 1,
+            ipucu: 'Superlative = en üstünlük. "The best, the funniest, the most exciting" gibi yapılar.'
+          },
+          {
+            saniye: 240,
+            soru: '"Good" kelimesinin superlative hali hangisidir?',
+            secenekler: [
+              'gooder',
+              'goodest',
+              'the best',
+              'the most good'
+            ],
+            dogru: 2,
+            ipucu: 'Good → better → the best. Bu düzensiz (irregular) bir sıfattır.'
+          },
+          {
+            saniye: 300,
+            soru: '"This is the ___ movie I have ever seen." (Bu gördüğüm en komik film.) Boşluğa ne gelir?',
+            secenekler: [
+              'funnier',
+              'funniest',
+              'most funny',
+              'more funny'
+            ],
+            dogru: 1,
+            ipucu: 'Funny → funnier → the funniest. Kısa sıfatlarda "-est" eki superlative yapar.'
+          },
+          {
+            saniye: 360,
+            soru: '"Let\'s watch a comedy!" cümlesi ne tür bir ifadedir?',
+            secenekler: [
+              'Soru cümlesi',
+              'Öneri (suggestion) cümlesi',
+              'Emir cümlesi',
+              'Olumsuz cümle'
+            ],
+            dogru: 1,
+            ipucu: '"Let\'s..." yapısı "Hadi ...yapalım!" anlamında öneri bildirir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Öneri yapmak için hangi yapı kullanılmaz?',
+            secenekler: [
+              'Let\'s watch a film.',
+              'How about going to the cinema?',
+              'Why don\'t we see a movie?',
+              'I must do my homework.'
+            ],
+            dogru: 3,
+            ipucu: '"Must" zorunluluk bildirir, öneri değildir. Let\'s / How about / Why don\'t we = öneri.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises superlatives and making suggestions?',
+            secenekler: [
+              'Superlatives compare only two things; suggestions use "must".',
+              'Superlatives show "the most/the -est" among three or more; suggestions use "Let\'s / How about / Why don\'t we". Irregular: good → the best, bad → the worst.',
+              'Superlatives and comparatives are the same thing.',
+              'Making suggestions always requires "shall" and nothing else.'
+            ],
+            dogru: 1,
+            ipucu: 'Superlative = the -est / the most. Suggestions = Let\'s / How about / Why don\'t we.'
+          }
+        ]
+      },
+      {
+        slug: 'movies-opinions', name: 'Movies — Expressing Opinions', hedef: 'Film türleri hakkında fikir belirtme',
+        videoId: 'DGFgqvG5_nY',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"I think comedies are funny." cümlesinde "I think" ne anlama gelir?',
+            secenekler: [
+              'Biliyorum',
+              'Bence / Düşünüyorum ki',
+              'Hatırlıyorum',
+              'Hayal ediyorum'
+            ],
+            dogru: 1,
+            ipucu: '"I think" = "Bence" veya "Düşünüyorum ki". Fikir bildiren bir ifadedir.'
+          },
+          {
+            saniye: 120,
+            soru: '"What do you think about action movies?" sorusuna hangisi uygun bir cevaptır?',
+            secenekler: [
+              'I am 10 years old.',
+              'I think they are exciting!',
+              'I go to school every day.',
+              'My name is Ali.'
+            ],
+            dogru: 1,
+            ipucu: '"What do you think about...?" = "... hakkında ne düşünüyorsun?" — fikir soran soru.'
+          },
+          {
+            saniye: 180,
+            soru: '"In my opinion, animation movies are the best." cümlesindeki "in my opinion" ne demektir?',
+            secenekler: [
+              'Benim hatırama göre',
+              'Benim fikrimce / Bana göre',
+              'Benim evimde',
+              'Benim öğretmenime göre'
+            ],
+            dogru: 1,
+            ipucu: '"In my opinion" = "Bana göre / Benim fikrimce" — kişisel görüş bildiren ifade.'
+          },
+          {
+            saniye: 240,
+            soru: 'Birine film önerirken hangisini söyleyebilirsin?',
+            secenekler: [
+              'You should watch this movie. It\'s great!',
+              'I don\'t like movies.',
+              'What time is it?',
+              'I have a headache.'
+            ],
+            dogru: 0,
+            ipucu: '"You should watch..." = "İzlemelisin..." — öneri ve tavsiye bildiren yapı.'
+          },
+          {
+            saniye: 300,
+            soru: '"Scary" kelimesi hangi film türünü tanımlar?',
+            secenekler: [
+              'Comedy',
+              'Romance',
+              'Horror',
+              'Animation'
+            ],
+            dogru: 2,
+            ipucu: 'Scary = korkutucu. Korku filmleri (horror movies) scary olarak nitelendirilir.'
+          },
+          {
+            saniye: 360,
+            soru: '"I don\'t like romantic movies because they are boring." cümlesinde olumsuz fikir nasıl ifade edilmiş?',
+            secenekler: [
+              '"I like" ile',
+              '"I don\'t like ... because ..." yapısıyla',
+              '"I think" ile',
+              '"Let\'s" ile'
+            ],
+            dogru: 1,
+            ipucu: '"I don\'t like ... because ..." = "Sevmiyorum çünkü..." — olumsuz fikir + neden.'
+          },
+          {
+            saniye: 420,
+            soru: 'Film hakkında fikir belirtirken hangi sıfatlar kullanılabilir?',
+            secenekler: [
+              'Tall, short, thin',
+              'Exciting, boring, funny, scary, interesting',
+              'Hot, cold, warm',
+              'Monday, Tuesday, Wednesday'
+            ],
+            dogru: 1,
+            ipucu: 'Exciting (heyecanlı), boring (sıkıcı), funny (komik), scary (korkutucu) — film sıfatları.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises expressing opinions about movies?',
+            secenekler: [
+              'We use "I think / In my opinion / I believe" to share opinions; "I like / I don\'t like ... because ..." to express preferences; and adjectives like exciting, boring, funny, scary to describe movies.',
+              'Opinions can only be expressed with "I think".',
+              'We never give reasons for our movie preferences.',
+              'Movie opinions only use positive adjectives.'
+            ],
+            dogru: 0,
+            ipucu: 'I think / In my opinion = fikir. I like/don\'t like ... because = tercih + neden. Sıfatlar: exciting, boring, funny, scary.'
           }
         ]
       }
