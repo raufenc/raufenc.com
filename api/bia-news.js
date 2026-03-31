@@ -15,7 +15,7 @@ const FILES = {
 const IMAGES_PATH = 'birlikteiyilik-site/static/images/';
 
 export default async function handler(req) {
-  const ADMIN_PW = process.env.BIA_ADMIN_PASSWORD || 'birlikte2026';
+  const ADMIN_PW = process.env.BIA_ADMIN_PASSWORD;
   const TOKEN = process.env.BIA_GITHUB_TOKEN || '';
 
   const cors = {
