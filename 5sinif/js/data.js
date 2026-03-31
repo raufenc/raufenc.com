@@ -8,6 +8,83 @@ const DERSLER = [
     colorLight: '#E8F0FE',
     uniteler: [
       {
+        slug: 'dogal-sayilar-okuma', name: 'Doğal Sayıları Okuma ve Yazma', hedef: 'Çok basamaklı doğal sayıları okuma ve yazma',
+        videoId: '3uvFo550SQg',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Milyonlar bölüğü kaç basamaktan sonra başlar?',
+            secenekler: ['3 basamaktan sonra', '6 basamaktan sonra', '9 basamaktan sonra', '4 basamaktan sonra'],
+            dogru: 1,
+            ipucu: 'Birler bölüğü ilk 3, binler bölüğü sonraki 3, milyonlar bölüğü 7. basamaktan itibaren başlar.'
+          },
+          {
+            saniye: 120,
+            soru: '3.450.000 sayısı nasıl okunur?',
+            secenekler: [
+              'Üç milyon dört yüz elli bin',
+              'Otuz dört milyon elli bin',
+              'Üç milyon kırk beş bin',
+              'Üç yüz kırk beş milyon'
+            ],
+            dogru: 0,
+            ipucu: 'Bölüklere ayır: 3 milyon / 450 bin / 000 birler → üç milyon dört yüz elli bin.'
+          },
+          {
+            saniye: 180,
+            soru: '"Yirmi bir milyon beş yüz bin" sayısını rakamlarla nasıl yazarsın?',
+            secenekler: ['21.500.000', '2.150.000', '215.000.000', '21.050.000'],
+            dogru: 0,
+            ipucu: '21 milyon = 21.000.000; beş yüz bin = 500.000 → 21.500.000.'
+          },
+          {
+            saniye: 240,
+            soru: 'Milyarlar bölüğünde hangi basamaklar bulunur?',
+            secenekler: [
+              'Birler, onlar, yüzler',
+              'Milyarlar, on milyarlar, yüz milyarlar',
+              'Yüz binler, on binler, binler',
+              'Milyonlar, on milyonlar, yüz milyonlar'
+            ],
+            dogru: 1,
+            ipucu: 'Her bölükte 3 basamak vardır: milyarlar bölüğü → milyarlar, on milyarlar, yüz milyarlar.'
+          },
+          {
+            saniye: 300,
+            soru: '5.008.070.000 sayısında sıfır olan bölük hangisidir?',
+            secenekler: ['Birler bölüğü', 'Binler bölüğü', 'Milyonlar bölüğü', 'Milyarlar bölüğü'],
+            dogru: 0,
+            ipucu: 'Sağdan başla: birler bölüğü 000 → tamamı sıfır.'
+          },
+          {
+            saniye: 360,
+            soru: '"Dört milyar üç yüz milyon" sayısını rakamlarla nasıl yazarsın?',
+            secenekler: ['4.300.000.000', '43.000.000.000', '430.000.000', '4.030.000.000'],
+            dogru: 0,
+            ipucu: '4 milyar = 4.000.000.000; üç yüz milyon = 300.000.000 → topla.'
+          },
+          {
+            saniye: 420,
+            soru: '72.156.003 sayısında 7 rakamının basamak değeri kaçtır?',
+            secenekler: ['7.000.000', '70.000.000', '700.000', '7.000'],
+            dogru: 1,
+            ipucu: '7 rakamı on milyonlar basamağında: 7 × 10.000.000 = 70.000.000.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Çok basamaklı doğal sayıları doğru okumak için en önemli kural nedir?',
+            secenekler: [
+              'Sağdan sola bölüklere ayırıp her bölüğü kendi adıyla okumak.',
+              'Soldan sağa tek tek rakam okumak.',
+              'Sadece sıfır olmayan rakamları okumak.',
+              'Sayıyı ikişer ikişer gruplamak.'
+            ],
+            dogru: 0,
+            ipucu: 'Sağdan 3\'er basamak ayır → birler, binler, milyonlar, milyarlar; her bölüğü adıyla oku.'
+          }
+        ]
+      },
+      {
         slug: 'basamak-degeri', name: 'Basamak Değeri ve Sayı Değeri', hedef: 'Büyük doğal sayılarda basamak ve sayı değerini bulabilme',
         videoId: 'fT7DWHW8JE4',
         checkpoints: [
@@ -91,356 +168,6 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Basamak değeri = rakam × basamağın değeri. Sayı değeri = rakamın kendisi.'
-          }
-        ]
-      },
-      {
-        slug: 'kesirler', name: 'Kesirler', hedef: 'Birim, basit ve bileşik kesirleri tanıma ve karşılaştırma',
-        videoId: '5ZNxjyxT2hM',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Birim kesir nasıl tanımlanır?',
-            secenekler: [
-              'Payı daima 1 olan, bir bütünün eş parçalarından yalnızca birini gösteren kesir.',
-              'Payı paydasından büyük olan kesir.',
-              'Bir tam sayı ile kesrin birlikte yazıldığı kesir.',
-              'Payı paydadan küçük olan her kesir.'
-            ],
-            dogru: 0,
-            ipucu: 'Birim kesirde pay daima 1 olacak — örnek: 1/4, 1/12, 1/7.'
-          },
-          {
-            saniye: 120,
-            soru: '1/8 birim kesrini sayı doğrusunda göstermek için 0 ile 1 arasını kaç eş parçaya bölmek gerekir?',
-            secenekler: ['8', '1', '4', '2'],
-            dogru: 0,
-            ipucu: '0 ile 1 arasını payda kadar eş parçaya böl; birinci noktayı seç.'
-          },
-          {
-            saniye: 180,
-            soru: 'Aşağıdaki kesirlerden hangisi bileşik kesirdir?',
-            secenekler: ['5/3', '1/7', '4/9', '3/20'],
-            dogru: 0,
-            ipucu: 'Bileşik kesirde pay paydasından büyük olur — örnek: 5/3, 19/12.'
-          },
-          {
-            saniye: 240,
-            soru: '3/4 ile 5/8 kesirlerinden hangisi daha büyüktür?',
-            secenekler: ['5/8', '3/4', 'Eşittirler', 'Karşılaştırılamaz'],
-            dogru: 1,
-            ipucu: 'Kesirleri karşılaştırmak için paydaları eşitlemeliyiz: 3/4 = 6/8.'
-          },
-          {
-            saniye: 300,
-            soru: '2/3 + 1/4 işleminin sonucu kaçtır?',
-            secenekler: ['3/7', '11/12', '3/12', '8/12'],
-            dogru: 1,
-            ipucu: 'Paydaları farklı kesirlerde ortak payda buluruz: 2/3=8/12, 1/4=3/12, toplam=11/12.'
-          },
-          {
-            saniye: 420,
-            soru: 'Aşağıdakilerden hangisi basit (tam sayılı değil) bir kesirdir?',
-            secenekler: ['3 1/4', '7/5', '3/8', '2 2/3'],
-            dogru: 2,
-            ipucu: 'Basit kesirde pay paydasından küçüktür: 3/8 → 3 < 8 ✓'
-          },
-          {
-            saniye: 480,
-            soru: '9/4 kesrini tam sayılı kesir olarak nasıl yazarsın?',
-            secenekler: ['1 1/4', '2 1/4', '2 3/4', '3 1/4'],
-            dogru: 1,
-            ipucu: '9 ÷ 4 = 2 kalan 1 → tam sayılı kesir: 2 ve 1/4 yani 2 1/4.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Birim kesir, basit kesir ve bileşik kesir arasındaki farkı en iyi hangisi açıklar?',
-            secenekler: [
-              'Birim kesirde pay=1; basit kesirde pay<payda; bileşik kesirde pay>payda.',
-              'Hepsinde pay 1\'dir; fark paydadadır.',
-              'Bileşik kesirde pay paydadan küçüktür.',
-              'Birim kesirde pay paydasına eşittir.'
-            ],
-            dogru: 0,
-            ipucu: '1/5 birim; 3/5 basit; 7/5 bileşik — pay-payda ilişkisine bak.'
-          }
-        ]
-      },
-      {
-        slug: 'carpma-bolme', name: 'Çarpma ve Bölme Problemleri', hedef: 'Çarpma ve bölme işlemleri içeren çok adımlı problemleri çözme',
-        videoId: 'NZQCvqCBt5g',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: '552 cm uzunluğundaki çubuk 2 eşit parçaya bölünüyor. Her parçanın uzunluğu kaç cm olur?',
-            secenekler: ['276 cm', '138 cm', '184 cm', '552 cm'],
-            dogru: 0,
-            ipucu: '552 ÷ 2 = ?'
-          },
-          {
-            saniye: 120,
-            soru: 'Lokantada 675 kg domatesin 260 kg\'ı tüketilmiş, kalan 5 güne eşit bölünmüştür. Her güne kaç kg düşer?',
-            secenekler: ['83 kg', '135 kg', '92 kg', '46 kg'],
-            dogru: 0,
-            ipucu: 'Önce 675−260=415; sonra 415÷5=?'
-          },
-          {
-            saniye: 180,
-            soru: 'Genişliği 254 cm olan rafa, genişliği 8 cm olan kitaplardan en fazla kaç tane sığar?',
-            secenekler: ['31', '32', '33', '30'],
-            dogru: 0,
-            ipucu: '254 ÷ 8 = 31 kalan 6; 6 cm bir kitap için yetmez.'
-          },
-          {
-            saniye: 240,
-            soru: '456 × 23 işleminin sonucu kaçtır?',
-            secenekler: ['9.488', '10.488', '10.288', '9.288'],
-            dogru: 1,
-            ipucu: 'Çarpma işleminde basamak basamak çarpar, sonuçları toplarız.'
-          },
-          {
-            saniye: 300,
-            soru: '2.856 ÷ 7 işleminin sonucu kaçtır?',
-            secenekler: ['308', '408', '418', '508'],
-            dogru: 1,
-            ipucu: 'Bölme işlemini basamak basamak yaparak kontrol ederiz.'
-          },
-          {
-            saniye: 420,
-            soru: 'Bir fabrika günde 348 araba üretmektedir. 15 günde kaç araba üretir?',
-            secenekler: ['4.220', '5.220', '5.020', '4.520'],
-            dogru: 1,
-            ipucu: '348 × 15 = 348 × 10 + 348 × 5 = 3480 + 1740 = 5220.'
-          },
-          {
-            saniye: 480,
-            soru: 'Toplam 1.248 öğrenci 8 eşit sınıfa bölünüyor. Her sınıfta kaç öğrenci olur?',
-            secenekler: ['146', '156', '148', '166'],
-            dogru: 1,
-            ipucu: '1.248 ÷ 8 = ? Basamak basamak böl: 12÷8=1 kalan 4 → 48÷8=6 → 156.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Çarpma ve bölme problemlerini çözerken hangi strateji en doğrudur?',
-            secenekler: [
-              'Problemdeki tüm sayıları topla.',
-              'Adım adım işlem yap; önce ne bilindiğini, ne sorulduğunu belirle.',
-              'Her zaman önce bölme, sonra çarpma işlemi yap.',
-              'Yalnızca büyük sayıyı küçük sayıyla çarp.'
-            ],
-            dogru: 1,
-            ipucu: 'Problem çözme: verilenler → istenilen → işlem sırası. Kontrol için ters işlem kullan.'
-          }
-        ]
-      },
-      {
-        slug: 'alan-cevre', name: 'Alan ve Çevre', hedef: 'Dikdörtgenin alan ve çevresini hesaplama, bilinmeyeni bulma',
-        videoId: 'CCIfZrD2awI',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Uzun kenarı 10 cm, kısa kenarı 7 cm olan dikdörtgenin alanı kaçtır?',
-            secenekler: ['70 cm²', '34 cm²', '17 cm²', '100 cm²'],
-            dogru: 0,
-            ipucu: 'Alan = kısa kenar × uzun kenar = 7 × 10 = ?'
-          },
-          {
-            saniye: 120,
-            soru: 'Alanı 90 m² ve uzun kenarı 15 m olan dikdörtgenin kısa kenarı kaç metredir?',
-            secenekler: ['6 m', '9 m', '12 m', '75 m'],
-            dogru: 0,
-            ipucu: 'Alan = kısa × uzun → kısa = 90 ÷ 15 = ?'
-          },
-          {
-            saniye: 240,
-            soru: 'Kenar uzunluğu 7 cm olan bir karenin alanı kaç cm²dir?',
-            secenekler: ['14 cm²', '28 cm²', '49 cm²', '21 cm²'],
-            dogru: 2,
-            ipucu: 'Karenin alanı = kenar × kenar = 7 × 7 = ?'
-          },
-          {
-            saniye: 300,
-            soru: 'Uzunluğu 12 cm, genişliği 5 cm olan dikdörtgenin çevresi kaç cm\'dir?',
-            secenekler: ['60 cm', '34 cm', '17 cm', '24 cm'],
-            dogru: 1,
-            ipucu: 'Dikdörtgenin çevresi = 2 × (uzunluk + genişlik) = 2 × (12 + 5) = ?'
-          },
-          {
-            saniye: 360,
-            soru: 'Çevresi 36 cm olan bir karenin bir kenarı kaç cm\'dir?',
-            secenekler: ['6 cm', '9 cm', '12 cm', '18 cm'],
-            dogru: 1,
-            ipucu: 'Karenin 4 kenarı eşit; çevreyi 4\'e böleriz: 36 ÷ 4 = ?'
-          },
-          {
-            saniye: 420,
-            soru: 'Alanı 48 cm² ve genişliği 6 cm olan dikdörtgenin uzunluğu kaç cm\'dir?',
-            secenekler: ['6 cm', '8 cm', '9 cm', '12 cm'],
-            dogru: 1,
-            ipucu: 'Alan = uzunluk × genişlik → uzunluk = 48 ÷ 6 = 8 cm.'
-          },
-          {
-            saniye: 480,
-            soru: 'Kenar uzunluğu 9 cm olan karenin çevresi kaç cm\'dir?',
-            secenekler: ['18 cm', '27 cm', '36 cm', '81 cm'],
-            dogru: 2,
-            ipucu: 'Karenin çevresi = 4 × kenar = 4 × 9 = 36 cm.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Alan ve çevre hesaplamalarında en önemli fark nedir?',
-            secenekler: [
-              'Alan, şeklin içini kaplar (cm²); çevre, dış sınırının uzunluğudur (cm).',
-              'Alan ile çevre her zaman aynı sayısal değeri verir.',
-              'Çevre kenarların çarpımı; alan kenarların toplamıdır.',
-              'Alan yalnızca kareler için, çevre yalnızca dikdörtgenler için hesaplanır.'
-            ],
-            dogru: 0,
-            ipucu: 'Alan = kısa × uzun (cm²); çevre = 2×(kısa+uzun) (cm). Birimlerine dikkat!'
-          }
-        ]
-      },
-      {
-        slug: 'zaman-olcme', name: 'Zaman Ölçme', hedef: 'Zaman birimlerini dönüştürme ve problemleri çözme',
-        videoId: 'gNqWh-Um6vM',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Standart hesaplamalarda bir ay kaç gün olarak alınır?',
-            secenekler: ['30 gün', '31 gün', '28 gün', '29 gün'],
-            dogru: 0,
-            ipucu: 'Şubat 28, bazı aylar 31 olsa da standart hesapta 1 ay = 30 gün.'
-          },
-          {
-            saniye: 120,
-            soru: '5 günü saate çevirmek için hangi işlemi yaparsın?',
-            secenekler: ['5 × 24 = 120 saat', '5 × 60 = 300 saat', '5 × 7 = 35 saat', '5 × 12 = 60 saat'],
-            dogru: 0,
-            ipucu: 'Bir gün 24 saat; 5 gün = 5 × 24 = ?'
-          },
-          {
-            saniye: 240,
-            soru: '3 saat 45 dakika kaç dakikadır?',
-            secenekler: ['165 dakika', '195 dakika', '215 dakika', '225 dakika'],
-            dogru: 3,
-            ipucu: '3 × 60 = 180 dakika + 45 dakika = ?'
-          },
-          {
-            saniye: 300,
-            soru: 'Bir film saat 14:35\'te başlayıp 16:20\'de biterse kaç dakika sürmüştür?',
-            secenekler: ['95 dakika', '105 dakika', '85 dakika', '115 dakika'],
-            dogru: 1,
-            ipucu: '14:35\'ten 16:20\'ye: 1 saat 45 dakika = 60 + 45 = 105 dakika.'
-          },
-          {
-            saniye: 360,
-            soru: '250 dakika kaç saat kaç dakikadır?',
-            secenekler: ['3 saat 50 dakika', '4 saat 10 dakika', '4 saat 30 dakika', '3 saat 70 dakika'],
-            dogru: 1,
-            ipucu: '250 ÷ 60 = 4 saat kalan 10 dakika.'
-          },
-          {
-            saniye: 420,
-            soru: '2 yıl 3 ay kaç aydır?',
-            secenekler: ['23 ay', '27 ay', '24 ay', '36 ay'],
-            dogru: 1,
-            ipucu: '1 yıl = 12 ay → 2 yıl = 24 ay; 24 + 3 = 27 ay.'
-          },
-          {
-            saniye: 480,
-            soru: 'Saat 09:45\'te başlayan etkinlik 1 saat 30 dakika sürüyor. Kaçta biter?',
-            secenekler: ['10:45', '11:00', '11:15', '11:30'],
-            dogru: 2,
-            ipucu: '09:45 + 1 saat = 10:45; 10:45 + 30 dakika = 11:15.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Zaman birimlerinin büyükten küçüğe doğru sırası ve dönüşüm katsayıları hangisinde doğrudur?',
-            secenekler: [
-              'Yıl → ay (÷12) → hafta (÷4) → gün (÷7) → saat (÷24) → dakika (÷60)',
-              'Yıl → ay (×12) → hafta (×4) → gün (×7) → saat (×24) → dakika (×60)',
-              'Yıl (12 ay), ay (30 gün), gün (24 saat), saat (60 dakika), dakika (60 saniye).',
-              'Yıl (10 ay), ay (28 gün), gün (12 saat).'
-            ],
-            dogru: 2,
-            ipucu: '1 yıl=12 ay, 1 ay=30 gün, 1 gün=24 saat, 1 saat=60 dakika, 1 dakika=60 saniye.'
-          }
-        ]
-      },
-      {
-        slug: 'dogal-sayilar-okuma', name: 'Doğal Sayıları Okuma ve Yazma', hedef: 'Çok basamaklı doğal sayıları okuma ve yazma',
-        videoId: '3uvFo550SQg',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Milyonlar bölüğü kaç basamaktan sonra başlar?',
-            secenekler: ['3 basamaktan sonra', '6 basamaktan sonra', '9 basamaktan sonra', '4 basamaktan sonra'],
-            dogru: 1,
-            ipucu: 'Birler bölüğü ilk 3, binler bölüğü sonraki 3, milyonlar bölüğü 7. basamaktan itibaren başlar.'
-          },
-          {
-            saniye: 120,
-            soru: '3.450.000 sayısı nasıl okunur?',
-            secenekler: [
-              'Üç milyon dört yüz elli bin',
-              'Otuz dört milyon elli bin',
-              'Üç milyon kırk beş bin',
-              'Üç yüz kırk beş milyon'
-            ],
-            dogru: 0,
-            ipucu: 'Bölüklere ayır: 3 milyon / 450 bin / 000 birler → üç milyon dört yüz elli bin.'
-          },
-          {
-            saniye: 180,
-            soru: '"Yirmi bir milyon beş yüz bin" sayısını rakamlarla nasıl yazarsın?',
-            secenekler: ['21.500.000', '2.150.000', '215.000.000', '21.050.000'],
-            dogru: 0,
-            ipucu: '21 milyon = 21.000.000; beş yüz bin = 500.000 → 21.500.000.'
-          },
-          {
-            saniye: 240,
-            soru: 'Milyarlar bölüğünde hangi basamaklar bulunur?',
-            secenekler: [
-              'Birler, onlar, yüzler',
-              'Milyarlar, on milyarlar, yüz milyarlar',
-              'Yüz binler, on binler, binler',
-              'Milyonlar, on milyonlar, yüz milyonlar'
-            ],
-            dogru: 1,
-            ipucu: 'Her bölükte 3 basamak vardır: milyarlar bölüğü → milyarlar, on milyarlar, yüz milyarlar.'
-          },
-          {
-            saniye: 300,
-            soru: '5.008.070.000 sayısında sıfır olan bölük hangisidir?',
-            secenekler: ['Birler bölüğü', 'Binler bölüğü', 'Milyonlar bölüğü', 'Milyarlar bölüğü'],
-            dogru: 0,
-            ipucu: 'Sağdan başla: birler bölüğü 000 → tamamı sıfır.'
-          },
-          {
-            saniye: 360,
-            soru: '"Dört milyar üç yüz milyon" sayısını rakamlarla nasıl yazarsın?',
-            secenekler: ['4.300.000.000', '43.000.000.000', '430.000.000', '4.030.000.000'],
-            dogru: 0,
-            ipucu: '4 milyar = 4.000.000.000; üç yüz milyon = 300.000.000 → topla.'
-          },
-          {
-            saniye: 420,
-            soru: '72.156.003 sayısında 7 rakamının basamak değeri kaçtır?',
-            secenekler: ['7.000.000', '70.000.000', '700.000', '7.000'],
-            dogru: 1,
-            ipucu: '7 rakamı on milyonlar basamağında: 7 × 10.000.000 = 70.000.000.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Çok basamaklı doğal sayıları doğru okumak için en önemli kural nedir?',
-            secenekler: [
-              'Sağdan sola bölüklere ayırıp her bölüğü kendi adıyla okumak.',
-              'Soldan sağa tek tek rakam okumak.',
-              'Sadece sıfır olmayan rakamları okumak.',
-              'Sayıyı ikişer ikişer gruplamak.'
-            ],
-            dogru: 0,
-            ipucu: 'Sağdan 3\'er basamak ayır → birler, binler, milyonlar, milyarlar; her bölüğü adıyla oku.'
           }
         ]
       },
@@ -706,6 +433,289 @@ const DERSLER = [
         ]
       },
       {
+        slug: 'carpma-bolme', name: 'Çarpma ve Bölme Problemleri', hedef: 'Çarpma ve bölme işlemleri içeren çok adımlı problemleri çözme',
+        videoId: 'NZQCvqCBt5g',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '552 cm uzunluğundaki çubuk 2 eşit parçaya bölünüyor. Her parçanın uzunluğu kaç cm olur?',
+            secenekler: ['276 cm', '138 cm', '184 cm', '552 cm'],
+            dogru: 0,
+            ipucu: '552 ÷ 2 = ?'
+          },
+          {
+            saniye: 120,
+            soru: 'Lokantada 675 kg domatesin 260 kg\'ı tüketilmiş, kalan 5 güne eşit bölünmüştür. Her güne kaç kg düşer?',
+            secenekler: ['83 kg', '135 kg', '92 kg', '46 kg'],
+            dogru: 0,
+            ipucu: 'Önce 675−260=415; sonra 415÷5=?'
+          },
+          {
+            saniye: 180,
+            soru: 'Genişliği 254 cm olan rafa, genişliği 8 cm olan kitaplardan en fazla kaç tane sığar?',
+            secenekler: ['31', '32', '33', '30'],
+            dogru: 0,
+            ipucu: '254 ÷ 8 = 31 kalan 6; 6 cm bir kitap için yetmez.'
+          },
+          {
+            saniye: 240,
+            soru: '456 × 23 işleminin sonucu kaçtır?',
+            secenekler: ['9.488', '10.488', '10.288', '9.288'],
+            dogru: 1,
+            ipucu: 'Çarpma işleminde basamak basamak çarpar, sonuçları toplarız.'
+          },
+          {
+            saniye: 300,
+            soru: '2.856 ÷ 7 işleminin sonucu kaçtır?',
+            secenekler: ['308', '408', '418', '508'],
+            dogru: 1,
+            ipucu: 'Bölme işlemini basamak basamak yaparak kontrol ederiz.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir fabrika günde 348 araba üretmektedir. 15 günde kaç araba üretir?',
+            secenekler: ['4.220', '5.220', '5.020', '4.520'],
+            dogru: 1,
+            ipucu: '348 × 15 = 348 × 10 + 348 × 5 = 3480 + 1740 = 5220.'
+          },
+          {
+            saniye: 480,
+            soru: 'Toplam 1.248 öğrenci 8 eşit sınıfa bölünüyor. Her sınıfta kaç öğrenci olur?',
+            secenekler: ['146', '156', '148', '166'],
+            dogru: 1,
+            ipucu: '1.248 ÷ 8 = ? Basamak basamak böl: 12÷8=1 kalan 4 → 48÷8=6 → 156.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Çarpma ve bölme problemlerini çözerken hangi strateji en doğrudur?',
+            secenekler: [
+              'Problemdeki tüm sayıları topla.',
+              'Adım adım işlem yap; önce ne bilindiğini, ne sorulduğunu belirle.',
+              'Her zaman önce bölme, sonra çarpma işlemi yap.',
+              'Yalnızca büyük sayıyı küçük sayıyla çarp.'
+            ],
+            dogru: 1,
+            ipucu: 'Problem çözme: verilenler → istenilen → işlem sırası. Kontrol için ters işlem kullan.'
+          }
+        ]
+      },
+      {
+        slug: 'kesirler', name: 'Kesirler', hedef: 'Birim, basit ve bileşik kesirleri tanıma ve karşılaştırma',
+        videoId: '5ZNxjyxT2hM',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Birim kesir nasıl tanımlanır?',
+            secenekler: [
+              'Payı daima 1 olan, bir bütünün eş parçalarından yalnızca birini gösteren kesir.',
+              'Payı paydasından büyük olan kesir.',
+              'Bir tam sayı ile kesrin birlikte yazıldığı kesir.',
+              'Payı paydadan küçük olan her kesir.'
+            ],
+            dogru: 0,
+            ipucu: 'Birim kesirde pay daima 1 olacak — örnek: 1/4, 1/12, 1/7.'
+          },
+          {
+            saniye: 120,
+            soru: '1/8 birim kesrini sayı doğrusunda göstermek için 0 ile 1 arasını kaç eş parçaya bölmek gerekir?',
+            secenekler: ['8', '1', '4', '2'],
+            dogru: 0,
+            ipucu: '0 ile 1 arasını payda kadar eş parçaya böl; birinci noktayı seç.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdaki kesirlerden hangisi bileşik kesirdir?',
+            secenekler: ['5/3', '1/7', '4/9', '3/20'],
+            dogru: 0,
+            ipucu: 'Bileşik kesirde pay paydasından büyük olur — örnek: 5/3, 19/12.'
+          },
+          {
+            saniye: 240,
+            soru: '3/4 ile 5/8 kesirlerinden hangisi daha büyüktür?',
+            secenekler: ['5/8', '3/4', 'Eşittirler', 'Karşılaştırılamaz'],
+            dogru: 1,
+            ipucu: 'Kesirleri karşılaştırmak için paydaları eşitlemeliyiz: 3/4 = 6/8.'
+          },
+          {
+            saniye: 300,
+            soru: '2/3 + 1/4 işleminin sonucu kaçtır?',
+            secenekler: ['3/7', '11/12', '3/12', '8/12'],
+            dogru: 1,
+            ipucu: 'Paydaları farklı kesirlerde ortak payda buluruz: 2/3=8/12, 1/4=3/12, toplam=11/12.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdakilerden hangisi basit (tam sayılı değil) bir kesirdir?',
+            secenekler: ['3 1/4', '7/5', '3/8', '2 2/3'],
+            dogru: 2,
+            ipucu: 'Basit kesirde pay paydasından küçüktür: 3/8 → 3 < 8 ✓'
+          },
+          {
+            saniye: 480,
+            soru: '9/4 kesrini tam sayılı kesir olarak nasıl yazarsın?',
+            secenekler: ['1 1/4', '2 1/4', '2 3/4', '3 1/4'],
+            dogru: 1,
+            ipucu: '9 ÷ 4 = 2 kalan 1 → tam sayılı kesir: 2 ve 1/4 yani 2 1/4.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Birim kesir, basit kesir ve bileşik kesir arasındaki farkı en iyi hangisi açıklar?',
+            secenekler: [
+              'Birim kesirde pay=1; basit kesirde pay<payda; bileşik kesirde pay>payda.',
+              'Hepsinde pay 1\'dir; fark paydadadır.',
+              'Bileşik kesirde pay paydadan küçüktür.',
+              'Birim kesirde pay paydasına eşittir.'
+            ],
+            dogru: 0,
+            ipucu: '1/5 birim; 3/5 basit; 7/5 bileşik — pay-payda ilişkisine bak.'
+          }
+        ]
+      },
+      {
+        slug: 'ondalik-gosterim', name: 'Ondalık Gösterim', hedef: 'Ondalık gösterimi anlama ve kullanma',
+        videoId: '9asGD316AHc',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Ondalık gösterimde virgülden sonraki ilk basamak neyi ifade eder?',
+            secenekler: [
+              'Onda birler basamağını (1/10)',
+              'Yüzde birler basamağını (1/100)',
+              'Birler basamağını',
+              'Binde birler basamağını (1/1000)'
+            ],
+            dogru: 0,
+            ipucu: 'Virgülden sonra sırasıyla: onda birler, yüzde birler, binde birler gelir.'
+          },
+          {
+            saniye: 120,
+            soru: '3/10 kesrinin ondalık gösterimi nedir?',
+            secenekler: ['0,3', '0,03', '3,0', '0,003'],
+            dogru: 0,
+            ipucu: '3/10 = 3 onda bir = 0,3. Payda 10 ise virgülden sonra bir basamak.'
+          },
+          {
+            saniye: 180,
+            soru: '0,47 sayısı kesir olarak nasıl yazılır?',
+            secenekler: ['47/10', '47/100', '47/1000', '4/7'],
+            dogru: 1,
+            ipucu: 'Virgülden sonra 2 basamak varsa payda 100 olur: 0,47 = 47/100.'
+          },
+          {
+            saniye: 240,
+            soru: '0,250 ile 0,25 sayıları arasında nasıl bir ilişki vardır?',
+            secenekler: [
+              'Eşittirler; sondaki sıfır değeri değiştirmez.',
+              '0,250 daha büyüktür.',
+              '0,25 daha büyüktür.',
+              'Karşılaştırılamazlar.'
+            ],
+            dogru: 0,
+            ipucu: '0,250 = 250/1000 = 25/100 = 0,25 → sondaki sıfır anlam değiştirmez.'
+          },
+          {
+            saniye: 300,
+            soru: '2,75 sayısında 7 rakamının basamak değeri kaçtır?',
+            secenekler: ['7', '0,7', '0,07', '70'],
+            dogru: 1,
+            ipucu: '7, onda birler basamağında: 7 × 0,1 = 0,7.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisi en büyük sayıdır?',
+            secenekler: ['0,9', '0,85', '0,125', '0,8'],
+            dogru: 0,
+            ipucu: 'Basamak basamak karşılaştır: onda birler → 9 > 8 > 8 > 1 → 0,9 en büyük.'
+          },
+          {
+            saniye: 420,
+            soru: '15/1000 kesrinin ondalık gösterimi nedir?',
+            secenekler: ['0,15', '0,015', '1,5', '0,0015'],
+            dogru: 1,
+            ipucu: 'Payda 1000 ise virgülden sonra 3 basamak: 15/1000 = 0,015.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Ondalık gösterim ile kesir arasındaki ilişkiyi en doğru açıklayan hangisidir?',
+            secenekler: [
+              'Ondalık gösterim, paydası 10, 100 veya 1000 olan kesirlerin virgüllü yazılış biçimidir.',
+              'Ondalık gösterim sadece tam sayılar için geçerlidir.',
+              'Her kesir ondalık gösterimle yazılamaz.',
+              'Ondalık gösterimde virgül kullanılmaz.'
+            ],
+            dogru: 0,
+            ipucu: '3/10=0,3; 47/100=0,47; 125/1000=0,125 → hepsi ondalık gösterimdir.'
+          }
+        ]
+      },
+      {
+        slug: 'alan-cevre', name: 'Alan ve Çevre', hedef: 'Dikdörtgenin alan ve çevresini hesaplama, bilinmeyeni bulma',
+        videoId: 'CCIfZrD2awI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Uzun kenarı 10 cm, kısa kenarı 7 cm olan dikdörtgenin alanı kaçtır?',
+            secenekler: ['70 cm²', '34 cm²', '17 cm²', '100 cm²'],
+            dogru: 0,
+            ipucu: 'Alan = kısa kenar × uzun kenar = 7 × 10 = ?'
+          },
+          {
+            saniye: 120,
+            soru: 'Alanı 90 m² ve uzun kenarı 15 m olan dikdörtgenin kısa kenarı kaç metredir?',
+            secenekler: ['6 m', '9 m', '12 m', '75 m'],
+            dogru: 0,
+            ipucu: 'Alan = kısa × uzun → kısa = 90 ÷ 15 = ?'
+          },
+          {
+            saniye: 240,
+            soru: 'Kenar uzunluğu 7 cm olan bir karenin alanı kaç cm²dir?',
+            secenekler: ['14 cm²', '28 cm²', '49 cm²', '21 cm²'],
+            dogru: 2,
+            ipucu: 'Karenin alanı = kenar × kenar = 7 × 7 = ?'
+          },
+          {
+            saniye: 300,
+            soru: 'Uzunluğu 12 cm, genişliği 5 cm olan dikdörtgenin çevresi kaç cm\'dir?',
+            secenekler: ['60 cm', '34 cm', '17 cm', '24 cm'],
+            dogru: 1,
+            ipucu: 'Dikdörtgenin çevresi = 2 × (uzunluk + genişlik) = 2 × (12 + 5) = ?'
+          },
+          {
+            saniye: 360,
+            soru: 'Çevresi 36 cm olan bir karenin bir kenarı kaç cm\'dir?',
+            secenekler: ['6 cm', '9 cm', '12 cm', '18 cm'],
+            dogru: 1,
+            ipucu: 'Karenin 4 kenarı eşit; çevreyi 4\'e böleriz: 36 ÷ 4 = ?'
+          },
+          {
+            saniye: 420,
+            soru: 'Alanı 48 cm² ve genişliği 6 cm olan dikdörtgenin uzunluğu kaç cm\'dir?',
+            secenekler: ['6 cm', '8 cm', '9 cm', '12 cm'],
+            dogru: 1,
+            ipucu: 'Alan = uzunluk × genişlik → uzunluk = 48 ÷ 6 = 8 cm.'
+          },
+          {
+            saniye: 480,
+            soru: 'Kenar uzunluğu 9 cm olan karenin çevresi kaç cm\'dir?',
+            secenekler: ['18 cm', '27 cm', '36 cm', '81 cm'],
+            dogru: 2,
+            ipucu: 'Karenin çevresi = 4 × kenar = 4 × 9 = 36 cm.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Alan ve çevre hesaplamalarında en önemli fark nedir?',
+            secenekler: [
+              'Alan, şeklin içini kaplar (cm²); çevre, dış sınırının uzunluğudur (cm).',
+              'Alan ile çevre her zaman aynı sayısal değeri verir.',
+              'Çevre kenarların çarpımı; alan kenarların toplamıdır.',
+              'Alan yalnızca kareler için, çevre yalnızca dikdörtgenler için hesaplanır.'
+            ],
+            dogru: 0,
+            ipucu: 'Alan = kısa × uzun (cm²); çevre = 2×(kısa+uzun) (cm). Birimlerine dikkat!'
+          }
+        ]
+      },
+      {
         slug: 'karenin-cevresi', name: 'Karenin Çevresi', hedef: 'Karenin çevre uzunluğunu hesaplama',
         videoId: 'fRRPgdOrehQ',
         checkpoints: [
@@ -860,79 +870,69 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'ondalik-gosterim', name: 'Ondalık Gösterim', hedef: 'Ondalık gösterimi anlama ve kullanma',
-        videoId: '9asGD316AHc',
+        slug: 'zaman-olcme', name: 'Zaman Ölçme', hedef: 'Zaman birimlerini dönüştürme ve problemleri çözme',
+        videoId: 'gNqWh-Um6vM',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Ondalık gösterimde virgülden sonraki ilk basamak neyi ifade eder?',
-            secenekler: [
-              'Onda birler basamağını (1/10)',
-              'Yüzde birler basamağını (1/100)',
-              'Birler basamağını',
-              'Binde birler basamağını (1/1000)'
-            ],
+            soru: 'Standart hesaplamalarda bir ay kaç gün olarak alınır?',
+            secenekler: ['30 gün', '31 gün', '28 gün', '29 gün'],
             dogru: 0,
-            ipucu: 'Virgülden sonra sırasıyla: onda birler, yüzde birler, binde birler gelir.'
+            ipucu: 'Şubat 28, bazı aylar 31 olsa da standart hesapta 1 ay = 30 gün.'
           },
           {
             saniye: 120,
-            soru: '3/10 kesrinin ondalık gösterimi nedir?',
-            secenekler: ['0,3', '0,03', '3,0', '0,003'],
+            soru: '5 günü saate çevirmek için hangi işlemi yaparsın?',
+            secenekler: ['5 × 24 = 120 saat', '5 × 60 = 300 saat', '5 × 7 = 35 saat', '5 × 12 = 60 saat'],
             dogru: 0,
-            ipucu: '3/10 = 3 onda bir = 0,3. Payda 10 ise virgülden sonra bir basamak.'
-          },
-          {
-            saniye: 180,
-            soru: '0,47 sayısı kesir olarak nasıl yazılır?',
-            secenekler: ['47/10', '47/100', '47/1000', '4/7'],
-            dogru: 1,
-            ipucu: 'Virgülden sonra 2 basamak varsa payda 100 olur: 0,47 = 47/100.'
+            ipucu: 'Bir gün 24 saat; 5 gün = 5 × 24 = ?'
           },
           {
             saniye: 240,
-            soru: '0,250 ile 0,25 sayıları arasında nasıl bir ilişki vardır?',
-            secenekler: [
-              'Eşittirler; sondaki sıfır değeri değiştirmez.',
-              '0,250 daha büyüktür.',
-              '0,25 daha büyüktür.',
-              'Karşılaştırılamazlar.'
-            ],
-            dogru: 0,
-            ipucu: '0,250 = 250/1000 = 25/100 = 0,25 → sondaki sıfır anlam değiştirmez.'
+            soru: '3 saat 45 dakika kaç dakikadır?',
+            secenekler: ['165 dakika', '195 dakika', '215 dakika', '225 dakika'],
+            dogru: 3,
+            ipucu: '3 × 60 = 180 dakika + 45 dakika = ?'
           },
           {
             saniye: 300,
-            soru: '2,75 sayısında 7 rakamının basamak değeri kaçtır?',
-            secenekler: ['7', '0,7', '0,07', '70'],
+            soru: 'Bir film saat 14:35\'te başlayıp 16:20\'de biterse kaç dakika sürmüştür?',
+            secenekler: ['95 dakika', '105 dakika', '85 dakika', '115 dakika'],
             dogru: 1,
-            ipucu: '7, onda birler basamağında: 7 × 0,1 = 0,7.'
+            ipucu: '14:35\'ten 16:20\'ye: 1 saat 45 dakika = 60 + 45 = 105 dakika.'
           },
           {
             saniye: 360,
-            soru: 'Aşağıdakilerden hangisi en büyük sayıdır?',
-            secenekler: ['0,9', '0,85', '0,125', '0,8'],
-            dogru: 0,
-            ipucu: 'Basamak basamak karşılaştır: onda birler → 9 > 8 > 8 > 1 → 0,9 en büyük.'
+            soru: '250 dakika kaç saat kaç dakikadır?',
+            secenekler: ['3 saat 50 dakika', '4 saat 10 dakika', '4 saat 30 dakika', '3 saat 70 dakika'],
+            dogru: 1,
+            ipucu: '250 ÷ 60 = 4 saat kalan 10 dakika.'
           },
           {
             saniye: 420,
-            soru: '15/1000 kesrinin ondalık gösterimi nedir?',
-            secenekler: ['0,15', '0,015', '1,5', '0,0015'],
+            soru: '2 yıl 3 ay kaç aydır?',
+            secenekler: ['23 ay', '27 ay', '24 ay', '36 ay'],
             dogru: 1,
-            ipucu: 'Payda 1000 ise virgülden sonra 3 basamak: 15/1000 = 0,015.'
+            ipucu: '1 yıl = 12 ay → 2 yıl = 24 ay; 24 + 3 = 27 ay.'
+          },
+          {
+            saniye: 480,
+            soru: 'Saat 09:45\'te başlayan etkinlik 1 saat 30 dakika sürüyor. Kaçta biter?',
+            secenekler: ['10:45', '11:00', '11:15', '11:30'],
+            dogru: 2,
+            ipucu: '09:45 + 1 saat = 10:45; 10:45 + 30 dakika = 11:15.'
           },
           {
             saniye: 'fin',
-            soru: 'Ondalık gösterim ile kesir arasındaki ilişkiyi en doğru açıklayan hangisidir?',
+            soru: 'Zaman birimlerinin büyükten küçüğe doğru sırası ve dönüşüm katsayıları hangisinde doğrudur?',
             secenekler: [
-              'Ondalık gösterim, paydası 10, 100 veya 1000 olan kesirlerin virgüllü yazılış biçimidir.',
-              'Ondalık gösterim sadece tam sayılar için geçerlidir.',
-              'Her kesir ondalık gösterimle yazılamaz.',
-              'Ondalık gösterimde virgül kullanılmaz.'
+              'Yıl → ay (÷12) → hafta (÷4) → gün (÷7) → saat (÷24) → dakika (÷60)',
+              'Yıl → ay (×12) → hafta (×4) → gün (×7) → saat (×24) → dakika (×60)',
+              'Yıl (12 ay), ay (30 gün), gün (24 saat), saat (60 dakika), dakika (60 saniye).',
+              'Yıl (10 ay), ay (28 gün), gün (12 saat).'
             ],
-            dogru: 0,
-            ipucu: '3/10=0,3; 47/100=0,47; 125/1000=0,125 → hepsi ondalık gösterimdir.'
+            dogru: 2,
+            ipucu: '1 yıl=12 ay, 1 ay=30 gün, 1 gün=24 saat, 1 saat=60 dakika, 1 dakika=60 saniye.'
           }
         ]
       },
@@ -1037,354 +1037,6 @@ const DERSLER = [
     colorLight: '#E8F5E9',
     uniteler: [
       {
-        slug: 'ay-ozellikleri', name: 'Ay\'ın Özellikleri', hedef: 'Ay\'ın yüzeyi, ışığı ve sıcaklık farkı hakkında bilgi edinme',
-        videoId: 'LoAG7HHVxtM',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Ayın yüzeyinde krater (çukur) bulunmasının temel nedeni nedir?',
-            secenekler: [
-              'Atmosferi çok ince olduğundan göktaşları çarparak çukur bırakır.',
-              'Ay\'ın Güneş\'e çok yakın olması.',
-              'Ay\'ın Dünya\'nın etrafında dönmesi.',
-              'Ay\'ın kendi ışığının olmaması.'
-            ],
-            dogru: 0,
-            ipucu: '"Atmosferi yok denecek kadar az ve ince" olduğundan göktaşları çarpıp çukur bırakıyor.'
-          },
-          {
-            saniye: 120,
-            soru: 'Ay\'ın kendi ışığı yoktur; peki Ay\'ı nasıl görürüz?',
-            secenekler: [
-              'Güneş\'ten gelen ışığı alıp Dünya\'ya yansıtır.',
-              'Ay\'ın çekirdeği ışık üretir.',
-              'Dünya\'dan yansıyan ışığı alır.',
-              'Yıldızlardan gelen ışığı biriktirir.'
-            ],
-            dogru: 0,
-            ipucu: '"Ay, Güneş\'ten gelen ışığı alıp Dünya\'ya yansıtıyor; biz de onu bu şekilde görüyoruz."'
-          },
-          {
-            saniye: 180,
-            soru: 'Ay\'ın gündüz ile gece sıcaklıkları arasında büyük fark olmasının nedeni nedir?',
-            secenekler: [
-              'Atmosferi ince olduğundan ısıyı tutamaz.',
-              'Ay\'ın Güneş\'e çok yakın olması.',
-              'Ay\'ın küçük olması.',
-              'Ay\'ın çok hızlı dönmesi.'
-            ],
-            dogru: 0,
-            ipucu: 'Gündüz ~+100°C, gece ~−172°C; ince atmosfer ısıyı tutamıyor.'
-          },
-          {
-            saniye: 240,
-            soru: 'Ay\'ın kendi ekseni etrafında dönüş süresi ile Dünya\'nın çevresindeki dolanım süresi nasıldır?',
-            secenekler: [
-              'Her ikisi de yaklaşık 27-28 gündür.',
-              'Kendi ekseni 24 saat, Dünya çevresi 30 gündür.',
-              'Kendi ekseni 7 gün, Dünya çevresi 30 gündür.',
-              'Her ikisi de 365 gündür.'
-            ],
-            dogru: 0,
-            ipucu: 'İki sürenin eşit olması nedeniyle Ay\'ın hep aynı yüzünü görürüz.'
-          },
-          {
-            saniye: 300,
-            soru: 'Aşağıdaki gök cisimlerinden hangisi kendi ışığını üretir?',
-            secenekler: ['Ay', 'Dünya', 'Güneş', 'Mars'],
-            dogru: 2,
-            ipucu: 'Güneş bir yıldızdır ve enerjiyi nükleer füzyon yoluyla kendisi üretir.'
-          },
-          {
-            saniye: 420,
-            soru: 'Ay yüzeyinde astronotların ayak izleri neden çok uzun süre silinmez?',
-            secenekler: [
-              'Ay\'da rüzgâr ve hava olmadığı için izleri silen erozyon gerçekleşmez.',
-              'Ay yüzeyi çok ıslak olduğu için iz kalıcıdır.',
-              'Ay\'da yerçekimi olmadığı için toz havada asılı kalır.',
-              'Ay yüzeyi camdan yapılmıştır.'
-            ],
-            dogru: 0,
-            ipucu: 'Atmosfer olmadığında rüzgâr, yağmur ve aşınma yoktur; izler kalıcı olur.'
-          },
-          {
-            saniye: 480,
-            soru: 'Ay\'ın hangi özelliği, Dünya\'dan her zaman aynı yüzünü görmemize neden olur?',
-            secenekler: [
-              'Kendi ekseni etrafındaki dönüş süresi ile Dünya\'nın çevresindeki dolanım süresinin eşit olması.',
-              'Ay\'ın çok yavaş dönmesi.',
-              'Ay\'ın yalnızca gece görünmesi.',
-              'Güneş ışığının Ay\'ı tek taraflı aydınlatması.'
-            ],
-            dogru: 0,
-            ipucu: 'Her iki süre de yaklaşık 27-28 gün olduğundan Ay hep aynı yüzünü bize döner.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Ay hakkında öğrendiklerimizden hangisi doğrudur?',
-            secenekler: [
-              'Ay\'ın kendi ışığı vardır, atmosferi kalındır ve sıcaklık farkı azdır.',
-              'Ay kendi ışığını üretmez; atmosferi neredeyse yoktur; bu yüzden hem kraterleri hem de büyük sıcaklık farkları vardır.',
-              'Ay Güneş\'in etrafında döner ve sıcaklığı her yerde eşittir.',
-              'Ay\'ın yüzeyinde su bulunmaktadır ve düzenli yağış görülür.'
-            ],
-            dogru: 1,
-            ipucu: 'Ay: kendi ışığı yok, atmosfer yok → kraterler + −172/+100°C sıcaklık farkı.'
-          }
-        ]
-      },
-      {
-        slug: 'kutle-agirlik', name: 'Kütle, Ağırlık ve Yer Çekimi', hedef: 'Kütle ile ağırlık arasındaki farkı ve yer çekimini anlama',
-        videoId: 'smkx-o2txNI',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Yerçekimi kuvveti hakkında aşağıdakilerden hangisi doğrudur?',
-            secenekler: [
-              'Yerin merkezinden uzaklaştıkça yer çekimi azalır.',
-              'Yerin merkezine yaklaştıkça yer çekimi azalır.',
-              'Yer çekimi her yerde eşit büyüklüktedir.',
-              'Yer çekimi yalnızca ağır cisimlere etki eder.'
-            ],
-            dogru: 0,
-            ipucu: '"Yerçekimi kuvveti dünyanın merkezinden uzaklaştıkça azalıyor."'
-          },
-          {
-            saniye: 120,
-            soru: 'Kütle ile ağırlık arasındaki temel fark nedir?',
-            secenekler: [
-              'Kütle her yerde aynı kalır; ağırlık bulunulan konuma göre değişir.',
-              'Ağırlık her yerde aynı kalır; kütle konuma göre değişir.',
-              'Kütle ve ağırlık her zaman birbirine eşittir.',
-              'Kütle Newton, ağırlık kilogram birimiyle ölçülür.'
-            ],
-            dogru: 0,
-            ipucu: '"Ay\'da kütlen aynı, ama ağırlığın farklı — çünkü yer çekimi daha az."'
-          },
-          {
-            saniye: 240,
-            soru: 'Ay\'da yer çekimi Dünya\'nınkinin yaklaşık kaçta biri kadardır?',
-            secenekler: ['1/2', '1/4', '1/6', '1/10'],
-            dogru: 2,
-            ipucu: 'Ay\'ın kütlesi Dünya\'dan küçük olduğu için yer çekimi yaklaşık 6 kat azdır.'
-          },
-          {
-            saniye: 300,
-            soru: 'Kütlesi 60 kg olan bir kişinin Dünya\'daki ağırlığı 600 N ise Ay\'daki ağırlığı kaç N\'dur?',
-            secenekler: ['600 N', '300 N', '100 N', '60 N'],
-            dogru: 2,
-            ipucu: 'Ay\'da yer çekimi 1/6\'sı olduğundan: 600 ÷ 6 = 100 N.'
-          },
-          {
-            saniye: 360,
-            soru: 'Ağırlık hangi alet ile ölçülür?',
-            secenekler: ['Terazi', 'Dinamometre', 'Termometre', 'Cetvel'],
-            dogru: 1,
-            ipucu: 'Ağırlık Newton birimiyle ölçülür; dinamometre bu işe yarar.'
-          },
-          {
-            saniye: 420,
-            soru: 'Kütle hangi alet ile ölçülür?',
-            secenekler: ['Dinamometre', 'Termometre', 'Terazi', 'Barometre'],
-            dogru: 2,
-            ipucu: 'Kütle kilogram birimiyle ölçülür; terazi (hassas veya kefeli) bu işe yarar.'
-          },
-          {
-            saniye: 480,
-            soru: 'Uzayda (yerçekimsiz ortamda) astronotun kütlesi ve ağırlığı nasıl değişir?',
-            secenekler: [
-              'Her ikisi de sıfır olur.',
-              'Kütle değişmez; ağırlık sıfır olur (yerçekimi yok).',
-              'Kütle artar; ağırlık azalır.',
-              'İkisi de yerde olduğu gibi kalır.'
-            ],
-            dogru: 1,
-            ipucu: 'Kütle miktara bağlıdır, değişmez. Ağırlık = kütle × yerçekimi; yerçekimi sıfırsa ağırlık sıfır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Kütle, ağırlık ve yerçekimi arasındaki ilişkiyi en iyi hangisi özetler?',
-            secenekler: [
-              'Kütle her yerde aynıdır (kg); ağırlık, yerçekimine bağlı olarak değişir (N); yerçekimi merkezden uzaklaştıkça azalır.',
-              'Kütle ve ağırlık her zaman birbirine eşittir.',
-              'Ağırlık her yerde sabittir; kütle değişir.',
-              'Yerçekimi Ay\'da Dünya\'dan daha fazladır.'
-            ],
-            dogru: 0,
-            ipucu: 'Kütle → terazi, kg; Ağırlık → dinamometre, N. Ay\'da kütle aynı, ağırlık 1/6 olur.'
-          }
-        ]
-      },
-      {
-        slug: 'hal-degisimi', name: 'Maddenin Hal Değişimi', hedef: 'Erime, donma, buharlaşma ve yoğuşmayı anlama',
-        videoId: '7hVI_SD_Ciw',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Katı haldeki bir maddenin ısı alarak sıvı hale geçmesine ne denir?',
-            secenekler: ['Erime', 'Donma', 'Buharlaşma', 'Yoğuşma'],
-            dogru: 0,
-            ipucu: 'Dondurma yavaş yavaş erir — katıdan sıvıya geçişin adı "erime"dir.'
-          },
-          {
-            saniye: 120,
-            soru: 'Donma sırasında madde çevresiyle nasıl bir ısı alışverişi yapar?',
-            secenekler: [
-              'Ortama ısı verir, çevreyi ısıtır.',
-              'Ortamdan ısı alır, çevreyi soğutur.',
-              'Ortamla hiçbir ısı alışverişi yapmaz.',
-              'Ortamı nemlendirir.'
-            ],
-            dogru: 0,
-            ipucu: '"Donma olurken madde ortama ısı verir" — kar yağdığında hava biraz ılıklaşır.'
-          },
-          {
-            saniye: 240,
-            soru: 'Sıvının gaz hâline geçmesine ne denir?',
-            secenekler: ['Donma', 'Buharlaşma', 'Yoğunlaşma', 'Erime'],
-            dogru: 1,
-            ipucu: 'Su ısıtıldığında sıvıdan gaz hâline geçer; buna buharlaşma denir.'
-          },
-          {
-            saniye: 300,
-            soru: 'Gaz hâlindeki suyun sıvıya dönüşmesine ne denir?',
-            secenekler: ['Buharlaşma', 'Süblimleşme', 'Yoğunlaşma', 'Donma'],
-            dogru: 2,
-            ipucu: 'Soğuk yüzeylere değen su buharı sıvıya döner; bu olay yoğunlaşmadır.'
-          },
-          {
-            saniye: 360,
-            soru: 'Katının doğrudan gaz hâline geçmesine ne ad verilir?',
-            secenekler: ['Erime', 'Donma', 'Buharlaşma', 'Süblimleşme'],
-            dogru: 3,
-            ipucu: 'Naftalin ve kuru buz gibi maddeler sıvı hâle geçmeden doğrudan gaz olur; buna süblimleşme denir.'
-          },
-          {
-            saniye: 420,
-            soru: 'Erime sırasında madde ısı alır mı yoksa verir mi?',
-            secenekler: ['Ortama ısı verir.', 'Ortamdan ısı alır.', 'Hiçbir ısı alışverişi olmaz.', 'Önce alır sonra verir.'],
-            dogru: 1,
-            ipucu: 'Erimek için enerji gerekir; madde çevresinden ısı alarak erir (endotermik).'
-          },
-          {
-            saniye: 480,
-            soru: 'Buharlaşma ile kaynamanın farkı nedir?',
-            secenekler: [
-              'Buharlaşma yalnızca yüzeyden gerçekleşir ve her sıcaklıkta olur; kaynama belirli bir sıcaklıkta tüm sıvıdan gerçekleşir.',
-              'İkisi tamamen aynı olaydır.',
-              'Kaynama yüzeyden, buharlaşma iç kısımdan gerçekleşir.',
-              'Buharlaşma sadece soğukta, kaynama sıcakta olur.'
-            ],
-            dogru: 0,
-            ipucu: 'Buharlaşma: yüzeyden, her T\'de. Kaynama: belirli kaynama noktasında, tüm sıvıdan.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Maddenin hal değişimlerini doğru özetleyen seçenek hangisidir?',
-            secenekler: [
-              'Erime (katı→sıvı, ısı alır), Donma (sıvı→katı, ısı verir), Buharlaşma (sıvı→gaz, ısı alır), Yoğuşma (gaz→sıvı, ısı verir), Süblimleşme (katı→gaz).',
-              'Erime ısı verir; donma ısı alır.',
-              'Tüm hal değişimleri ısı vermekle gerçekleşir.',
-              'Süblimleşmede madde önce sıvıya, sonra gaza dönüşür.'
-            ],
-            dogru: 0,
-            ipucu: 'Isı alan değişimler: erime, buharlaşma, süblimleşme. Isı veren: donma, yoğuşma.'
-          }
-        ]
-      },
-      {
-        slug: 'isi-iletimi', name: 'Isı İletimi ve Yalıtım', hedef: 'Isı iletken ve yalıtkan maddeleri tanıma',
-        videoId: '8muTsgbr18g',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Aşağıdaki maddelerden hangisi iyi bir ısı iletenidir?',
-            secenekler: ['Bakır', 'Tahta', 'Plastik', 'Yün'],
-            dogru: 0,
-            ipucu: '"Altın, gümüş, bakır gibi metaller iyi ısı iletenidir." Tahta, plastik, yün yalıtkandır.'
-          },
-          {
-            saniye: 120,
-            soru: 'Isı yalıtkan maddelerin ortak özelliği nedir?',
-            secenekler: [
-              'Boşluklu ve gözenekli olmaları.',
-              'Çok yoğun ve sert olmaları.',
-              'Tanecikleri birbirine çok yakın olması.',
-              'Metal içermeleri.'
-            ],
-            dogru: 0,
-            ipucu: '"Isı yalıtkanı maddeler boşluklu ve gözenekli olmalı" — tanecikler arası mesafe büyükse ısı zorlanır.'
-          },
-          {
-            saniye: 240,
-            soru: 'Evlerde çift cam kullanılmasının amacı nedir?',
-            secenekler: [
-              'Güneş ışığını artırmak',
-              'Isı yalıtımı sağlamak',
-              'Sesi artırmak',
-              'Camı daha sağlam yapmak'
-            ],
-            dogru: 1,
-            ipucu: 'Çift cam arasındaki hava tabakası ısının geçişini yavaşlatarak yalıtım sağlar.'
-          },
-          {
-            saniye: 300,
-            soru: 'Termos bardakta içeceğin sıcaklığının uzun süre korunmasının nedeni nedir?',
-            secenekler: [
-              'Termosun elektrikle ısıtması',
-              'Çift cidarlı yapısı ve vakum tabakası sayesinde ısı iletimini azaltması',
-              'Camın ısıyı iletmesi',
-              'İçindeki soğutucu gaz'
-            ],
-            dogru: 1,
-            ipucu: 'Termos çift cidarlı ve aralarında vakum olan bir yapıya sahip; bu ısı iletimini en aza indirir.'
-          },
-          {
-            saniye: 360,
-            soru: 'Isı iletiminin gerçekleşmesi için ne gereklidir?',
-            secenekler: [
-              'İki cisim arasında sıcaklık farkı olmalıdır.',
-              'İki cismin aynı sıcaklıkta olması gerekir.',
-              'Cisimlerin mutlaka metal olması gerekir.',
-              'Isı iletimi yalnızca sıvılarda gerçekleşir.'
-            ],
-            dogru: 0,
-            ipucu: 'Isı her zaman sıcak cisimden soğuk cisme doğru akar; bunun için iki cisim arasında sıcaklık farkı olmalıdır.'
-          },
-          {
-            saniye: 420,
-            soru: 'Kışın kalın yünlü kıyafet giyilmesinin ısı yalıtımıyla ilişkisi nedir?',
-            secenekler: [
-              'Yün ısı üretir ve vücudu ısıtır.',
-              'Yün gözenekli yapısıyla havayı hapsettiğinden vücut ısısının dışarı kaçmasını engeller.',
-              'Yün hava geçirmez olduğundan dışarıdaki soğuğu içeri almaz.',
-              'Yünün ısı iletimle ilişkisi yoktur.'
-            ],
-            dogru: 1,
-            ipucu: 'Yün gözenekli → içinde hava hapseder → hava ısı yalıtkanı → vücut ısısı korunur.'
-          },
-          {
-            saniye: 480,
-            soru: 'Aşağıdakilerden hangisi ısı yalıtkanı olarak kullanılır?',
-            secenekler: ['Alüminyum folyo', 'Demir çubuk', 'Cam yünü', 'Bakır tel'],
-            dogru: 2,
-            ipucu: 'Cam yünü gözenekli yapısıyla binalarda yaygın kullanılan bir ısı yalıtkan malzemesidir.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Isı iletimi ve yalıtım konusunu en iyi özetleyen hangisidir?',
-            secenekler: [
-              'Metaller yalıtkan, gözenekli maddeler iletkendir.',
-              'Isı soğuk cisimden sıcak cisme akar; metal cisimler iyi iletken, gözenekli maddeler iyi yalıtkandır.',
-              'Isı yalnızca sıvılar aracılığıyla iletilir.',
-              'Isı her yönde eşit miktarda akar; sıcaklık farkı önemli değildir.'
-            ],
-            dogru: 1,
-            ipucu: 'Isı: sıcaktan soğuğa akar. İletken: metal. Yalıtkan: tahta, plastik, yün, hava, cam yünü.'
-          }
-        ]
-      },
-      {
         slug: 'gunes-ozellikleri', name: 'Gökyüzündeki Komşumuz: Güneş', hedef: 'Güneş hakkında temel bilgileri öğrenme',
         videoId: 'yx7xbUKNYkU',
         checkpoints: [
@@ -1487,206 +1139,99 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'kuvveti-taniyalim', name: 'Kuvveti Tanıyalım', hedef: 'Kuvvet kavramını ve kuvvetin ölçülmesini öğrenme',
-        videoId: '6f4W8MRqtV8',
+        slug: 'ay-ozellikleri', name: 'Ay\'ın Özellikleri', hedef: 'Ay\'ın yüzeyi, ışığı ve sıcaklık farkı hakkında bilgi edinme',
+        videoId: 'LoAG7HHVxtM',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Kuvvet nedir?',
+            soru: 'Ayın yüzeyinde krater (çukur) bulunmasının temel nedeni nedir?',
             secenekler: [
-              'Bir cismi iten veya çeken her türlü etki.',
-              'Yalnızca cisimleri durduran etki.',
-              'Sadece ağır cisimlere uygulanan güç.',
-              'Cisimlerin ağırlığı demektir.'
+              'Atmosferi çok ince olduğundan göktaşları çarparak çukur bırakır.',
+              'Ay\'ın Güneş\'e çok yakın olması.',
+              'Ay\'ın Dünya\'nın etrafında dönmesi.',
+              'Ay\'ın kendi ışığının olmaması.'
             ],
             dogru: 0,
-            ipucu: 'Kuvvet, itme veya çekme şeklinde cisimlere uygulanan etkidir.'
+            ipucu: '"Atmosferi yok denecek kadar az ve ince" olduğundan göktaşları çarpıp çukur bırakıyor.'
           },
           {
             saniye: 120,
-            soru: 'Kuvvetin birimi nedir ve hangi aletle ölçülür?',
+            soru: 'Ay\'ın kendi ışığı yoktur; peki Ay\'ı nasıl görürüz?',
             secenekler: [
-              'Birimi Newton (N); dinamometre ile ölçülür.',
-              'Birimi kilogram; terazi ile ölçülür.',
-              'Birimi metre; cetvel ile ölçülür.',
-              'Birimi joule; termometre ile ölçülür.'
+              'Güneş\'ten gelen ışığı alıp Dünya\'ya yansıtır.',
+              'Ay\'ın çekirdeği ışık üretir.',
+              'Dünya\'dan yansıyan ışığı alır.',
+              'Yıldızlardan gelen ışığı biriktirir.'
             ],
             dogru: 0,
-            ipucu: 'Kuvvet Newton (N) birimiyle ifade edilir ve dinamometre (kuvvetölçer) ile ölçülür.'
+            ipucu: '"Ay, Güneş\'ten gelen ışığı alıp Dünya\'ya yansıtıyor; biz de onu bu şekilde görüyoruz."'
           },
           {
             saniye: 180,
-            soru: 'Aşağıdakilerden hangisi kuvvetin etkisine örnek değildir?',
+            soru: 'Ay\'ın gündüz ile gece sıcaklıkları arasında büyük fark olmasının nedeni nedir?',
             secenekler: [
-              'Topun şeklinin bozulması.',
-              'Bisikletin hızlanması.',
-              'Masanın renginin değişmesi.',
-              'Arabanın durması.'
+              'Atmosferi ince olduğundan ısıyı tutamaz.',
+              'Ay\'ın Güneş\'e çok yakın olması.',
+              'Ay\'ın küçük olması.',
+              'Ay\'ın çok hızlı dönmesi.'
             ],
-            dogru: 2,
-            ipucu: 'Kuvvet cismin hareketini, hızını, yönünü veya şeklini değiştirir; renk değişimi kuvvetle ilgili değildir.'
+            dogru: 0,
+            ipucu: 'Gündüz ~+100°C, gece ~−172°C; ince atmosfer ısıyı tutamıyor.'
           },
           {
             saniye: 240,
-            soru: 'Temas gerektirmeden etkisini gösteren kuvvete ne denir?',
+            soru: 'Ay\'ın kendi ekseni etrafında dönüş süresi ile Dünya\'nın çevresindeki dolanım süresi nasıldır?',
             secenekler: [
-              'Temas kuvveti',
-              'Temassız (alan) kuvveti',
-              'Sürtünme kuvveti',
-              'Kas kuvveti'
+              'Her ikisi de yaklaşık 27-28 gündür.',
+              'Kendi ekseni 24 saat, Dünya çevresi 30 gündür.',
+              'Kendi ekseni 7 gün, Dünya çevresi 30 gündür.',
+              'Her ikisi de 365 gündür.'
             ],
-            dogru: 1,
-            ipucu: 'Mıknatıs kuvveti ve yer çekimi kuvveti temas olmadan etkisini gösterir; bunlara temassız kuvvet denir.'
+            dogru: 0,
+            ipucu: 'İki sürenin eşit olması nedeniyle Ay\'ın hep aynı yüzünü görürüz.'
           },
           {
             saniye: 300,
-            soru: 'Aşağıdakilerden hangisi temas kuvvetine örnektir?',
-            secenekler: [
-              'Yer çekimi kuvveti',
-              'Mıknatıs kuvveti',
-              'Sürtünme kuvveti',
-              'Elektrik kuvveti'
-            ],
+            soru: 'Aşağıdaki gök cisimlerinden hangisi kendi ışığını üretir?',
+            secenekler: ['Ay', 'Dünya', 'Güneş', 'Mars'],
             dogru: 2,
-            ipucu: 'Sürtünme kuvveti, iki yüzey birbirine temas ettiğinde ortaya çıkar.'
-          },
-          {
-            saniye: 360,
-            soru: 'Bir cisme aynı yönde iki kuvvet uygulanırsa bileşke kuvvet nasıl bulunur?',
-            secenekler: [
-              'İki kuvvet toplanır.',
-              'İki kuvvet çıkarılır.',
-              'Sadece büyük olan alınır.',
-              'İki kuvvet çarpılır.'
-            ],
-            dogru: 0,
-            ipucu: 'Aynı yöndeki kuvvetler toplanarak bileşke kuvveti oluşturur.'
+            ipucu: 'Güneş bir yıldızdır ve enerjiyi nükleer füzyon yoluyla kendisi üretir.'
           },
           {
             saniye: 420,
-            soru: 'Bir cisme zıt yönde 8 N ve 3 N kuvvet uygulanırsa bileşke kuvvet kaç N olur?',
+            soru: 'Ay yüzeyinde astronotların ayak izleri neden çok uzun süre silinmez?',
             secenekler: [
-              '11 N',
-              '5 N',
-              '3 N',
-              '24 N'
+              'Ay\'da rüzgâr ve hava olmadığı için izleri silen erozyon gerçekleşmez.',
+              'Ay yüzeyi çok ıslak olduğu için iz kalıcıdır.',
+              'Ay\'da yerçekimi olmadığı için toz havada asılı kalır.',
+              'Ay yüzeyi camdan yapılmıştır.'
             ],
-            dogru: 1,
-            ipucu: 'Zıt yöndeki kuvvetlerde bileşke: büyükten küçük çıkarılır → 8 − 3 = 5 N.'
+            dogru: 0,
+            ipucu: 'Atmosfer olmadığında rüzgâr, yağmur ve aşınma yoktur; izler kalıcı olur.'
+          },
+          {
+            saniye: 480,
+            soru: 'Ay\'ın hangi özelliği, Dünya\'dan her zaman aynı yüzünü görmemize neden olur?',
+            secenekler: [
+              'Kendi ekseni etrafındaki dönüş süresi ile Dünya\'nın çevresindeki dolanım süresinin eşit olması.',
+              'Ay\'ın çok yavaş dönmesi.',
+              'Ay\'ın yalnızca gece görünmesi.',
+              'Güneş ışığının Ay\'ı tek taraflı aydınlatması.'
+            ],
+            dogru: 0,
+            ipucu: 'Her iki süre de yaklaşık 27-28 gün olduğundan Ay hep aynı yüzünü bize döner.'
           },
           {
             saniye: 'fin',
-            soru: 'Kuvvet hakkında aşağıdakilerden hangisi doğrudur?',
+            soru: 'Ay hakkında öğrendiklerimizden hangisi doğrudur?',
             secenekler: [
-              'Kuvvet yalnızca cisimleri iter; çekme etkisi yoktur.',
-              'Kuvvet itme veya çekme etkisidir; birimi Newton\'dur; temas ve temassız olarak ikiye ayrılır.',
-              'Kuvvet yalnızca büyük cisimler arasında oluşur.',
-              'Kuvvetin etkisi yalnızca harekettir; şekil değişikliğine neden olmaz.'
+              'Ay\'ın kendi ışığı vardır, atmosferi kalındır ve sıcaklık farkı azdır.',
+              'Ay kendi ışığını üretmez; atmosferi neredeyse yoktur; bu yüzden hem kraterleri hem de büyük sıcaklık farkları vardır.',
+              'Ay Güneş\'in etrafında döner ve sıcaklığı her yerde eşittir.',
+              'Ay\'ın yüzeyinde su bulunmaktadır ve düzenli yağış görülür.'
             ],
             dogru: 1,
-            ipucu: 'Kuvvet: itme/çekme etkisi, birimi N, dinamometre ile ölçülür, temas/temassız olarak sınıflandırılır.'
-          }
-        ]
-      },
-      {
-        slug: 'surtunme-kuvveti', name: 'Sürtünme Kuvveti', hedef: 'Sürtünme kuvvetini ve etkilerini anlama',
-        videoId: 'QOqTFJdp_88',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Sürtünme kuvveti nedir?',
-            secenekler: [
-              'Birbirine temas eden iki yüzey arasında hareketi zorlaştıran kuvvet.',
-              'Cisimleri havaya kaldıran kuvvet.',
-              'Sadece sıvılarda oluşan bir kuvvet.',
-              'Mıknatısın çekme kuvveti.'
-            ],
-            dogru: 0,
-            ipucu: 'Sürtünme, temas eden yüzeyler arasında harekete karşı yönde oluşan dirençtir.'
-          },
-          {
-            saniye: 120,
-            soru: 'Sürtünme kuvvetinin yönü nasıldır?',
-            secenekler: [
-              'Her zaman hareket yönünün tersinedir.',
-              'Her zaman hareket yönüyle aynıdır.',
-              'Yukarı doğrudur.',
-              'Sabit bir yönü yoktur; rastgele değişir.'
-            ],
-            dogru: 0,
-            ipucu: 'Sürtünme kuvveti her zaman cismin hareket yönüne zıt yönde etki eder.'
-          },
-          {
-            saniye: 180,
-            soru: 'Aşağıdakilerden hangisi sürtünme kuvvetini artırır?',
-            secenekler: [
-              'Yüzeyin pürüzlü olması.',
-              'Yüzeyin kaygan olması.',
-              'Cismin daha hafif olması.',
-              'Yüzeye yağ sürülmesi.'
-            ],
-            dogru: 0,
-            ipucu: 'Yüzey ne kadar pürüzlü olursa sürtünme o kadar fazla olur.'
-          },
-          {
-            saniye: 240,
-            soru: 'Araba lastiklerinin desenli olmasının nedeni nedir?',
-            secenekler: [
-              'Sürtünmeyi artırarak yolda tutunmayı sağlamak.',
-              'Arabanın daha hızlı gitmesini sağlamak.',
-              'Lastiğin daha güzel görünmesi.',
-              'Lastiğin daha hafif olması.'
-            ],
-            dogru: 0,
-            ipucu: 'Lastik desenleri yüzey pürüzlülüğünü artırarak sürtünmeyi ve tutunmayı güçlendirir.'
-          },
-          {
-            saniye: 300,
-            soru: 'Sürtünme kuvveti olmasaydı aşağıdakilerden hangisi gerçekleşirdi?',
-            secenekler: [
-              'Yürüyemez, yazı yazamaz ve araçlar frenlemeyle duramazdık.',
-              'Her şey daha kolay olurdu.',
-              'Sadece araçlar etkilenirdi.',
-              'Hiçbir değişiklik olmazdı.'
-            ],
-            dogru: 0,
-            ipucu: 'Sürtünme olmasaydı ayağımız kayar, kalem tutamaz, araçlar duramaz; yaşam çok zorlaşırdı.'
-          },
-          {
-            saniye: 360,
-            soru: 'Aşağıdakilerden hangisinde sürtünme kuvveti AZALTILMAK istenir?',
-            secenekler: [
-              'Kayak pistinin yüzeyinin düzgün yapılması.',
-              'Ayakkabı tabanlarının desenli yapılması.',
-              'Araba lastiklerinin desenli olması.',
-              'Kapı kolunun pürüzlü yapılması.'
-            ],
-            dogru: 0,
-            ipucu: 'Kayak yaparken sürtünmenin az olması istenir; bu yüzden pist düzgün ve kaygan yapılır.'
-          },
-          {
-            saniye: 420,
-            soru: 'Sürtünme kuvveti ile cismin ağırlığı arasındaki ilişki nedir?',
-            secenekler: [
-              'Cisim ağırlaştıkça sürtünme kuvveti artar.',
-              'Cisim ağırlaştıkça sürtünme azalır.',
-              'Ağırlık sürtünmeyi etkilemez.',
-              'Sadece hafif cisimler sürtünmeden etkilenir.'
-            ],
-            dogru: 0,
-            ipucu: 'Cismin ağırlığı arttıkça yüzeye baskı artar ve sürtünme kuvveti de artar.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Sürtünme kuvveti hakkında aşağıdakilerden hangisi doğrudur?',
-            secenekler: [
-              'Sürtünme kuvveti her zaman zararlıdır ve azaltılmalıdır.',
-              'Sürtünme yüzeyler arasında hareketin tersine etki eder; pürüzlülük ve ağırlık artınca artar; bazen yararlı bazen zararlıdır.',
-              'Sürtünme sadece katı yüzeylerde oluşur.',
-              'Sürtünme kuvvetinin yönü hareketle aynıdır.'
-            ],
-            dogru: 1,
-            ipucu: 'Sürtünme: hareket yönüne zıt, pürüzlülük/ağırlıkla artar, yararlı ve zararlı yönleri var.'
+            ipucu: 'Ay: kendi ışığı yok, atmosfer yok → kraterler + −172/+100°C sıcaklık farkı.'
           }
         ]
       },
@@ -1895,6 +1440,563 @@ const DERSLER = [
         ]
       },
       {
+        slug: 'kuvveti-taniyalim', name: 'Kuvveti Tanıyalım', hedef: 'Kuvvet kavramını ve kuvvetin ölçülmesini öğrenme',
+        videoId: '6f4W8MRqtV8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Kuvvet nedir?',
+            secenekler: [
+              'Bir cismi iten veya çeken her türlü etki.',
+              'Yalnızca cisimleri durduran etki.',
+              'Sadece ağır cisimlere uygulanan güç.',
+              'Cisimlerin ağırlığı demektir.'
+            ],
+            dogru: 0,
+            ipucu: 'Kuvvet, itme veya çekme şeklinde cisimlere uygulanan etkidir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Kuvvetin birimi nedir ve hangi aletle ölçülür?',
+            secenekler: [
+              'Birimi Newton (N); dinamometre ile ölçülür.',
+              'Birimi kilogram; terazi ile ölçülür.',
+              'Birimi metre; cetvel ile ölçülür.',
+              'Birimi joule; termometre ile ölçülür.'
+            ],
+            dogru: 0,
+            ipucu: 'Kuvvet Newton (N) birimiyle ifade edilir ve dinamometre (kuvvetölçer) ile ölçülür.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi kuvvetin etkisine örnek değildir?',
+            secenekler: [
+              'Topun şeklinin bozulması.',
+              'Bisikletin hızlanması.',
+              'Masanın renginin değişmesi.',
+              'Arabanın durması.'
+            ],
+            dogru: 2,
+            ipucu: 'Kuvvet cismin hareketini, hızını, yönünü veya şeklini değiştirir; renk değişimi kuvvetle ilgili değildir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Temas gerektirmeden etkisini gösteren kuvvete ne denir?',
+            secenekler: [
+              'Temas kuvveti',
+              'Temassız (alan) kuvveti',
+              'Sürtünme kuvveti',
+              'Kas kuvveti'
+            ],
+            dogru: 1,
+            ipucu: 'Mıknatıs kuvveti ve yer çekimi kuvveti temas olmadan etkisini gösterir; bunlara temassız kuvvet denir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Aşağıdakilerden hangisi temas kuvvetine örnektir?',
+            secenekler: [
+              'Yer çekimi kuvveti',
+              'Mıknatıs kuvveti',
+              'Sürtünme kuvveti',
+              'Elektrik kuvveti'
+            ],
+            dogru: 2,
+            ipucu: 'Sürtünme kuvveti, iki yüzey birbirine temas ettiğinde ortaya çıkar.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir cisme aynı yönde iki kuvvet uygulanırsa bileşke kuvvet nasıl bulunur?',
+            secenekler: [
+              'İki kuvvet toplanır.',
+              'İki kuvvet çıkarılır.',
+              'Sadece büyük olan alınır.',
+              'İki kuvvet çarpılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Aynı yöndeki kuvvetler toplanarak bileşke kuvveti oluşturur.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir cisme zıt yönde 8 N ve 3 N kuvvet uygulanırsa bileşke kuvvet kaç N olur?',
+            secenekler: [
+              '11 N',
+              '5 N',
+              '3 N',
+              '24 N'
+            ],
+            dogru: 1,
+            ipucu: 'Zıt yöndeki kuvvetlerde bileşke: büyükten küçük çıkarılır → 8 − 3 = 5 N.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kuvvet hakkında aşağıdakilerden hangisi doğrudur?',
+            secenekler: [
+              'Kuvvet yalnızca cisimleri iter; çekme etkisi yoktur.',
+              'Kuvvet itme veya çekme etkisidir; birimi Newton\'dur; temas ve temassız olarak ikiye ayrılır.',
+              'Kuvvet yalnızca büyük cisimler arasında oluşur.',
+              'Kuvvetin etkisi yalnızca harekettir; şekil değişikliğine neden olmaz.'
+            ],
+            dogru: 1,
+            ipucu: 'Kuvvet: itme/çekme etkisi, birimi N, dinamometre ile ölçülür, temas/temassız olarak sınıflandırılır.'
+          }
+        ]
+      },
+      {
+        slug: 'kutle-agirlik', name: 'Kütle, Ağırlık ve Yer Çekimi', hedef: 'Kütle ile ağırlık arasındaki farkı ve yer çekimini anlama',
+        videoId: 'smkx-o2txNI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Yerçekimi kuvveti hakkında aşağıdakilerden hangisi doğrudur?',
+            secenekler: [
+              'Yerin merkezinden uzaklaştıkça yer çekimi azalır.',
+              'Yerin merkezine yaklaştıkça yer çekimi azalır.',
+              'Yer çekimi her yerde eşit büyüklüktedir.',
+              'Yer çekimi yalnızca ağır cisimlere etki eder.'
+            ],
+            dogru: 0,
+            ipucu: '"Yerçekimi kuvveti dünyanın merkezinden uzaklaştıkça azalıyor."'
+          },
+          {
+            saniye: 120,
+            soru: 'Kütle ile ağırlık arasındaki temel fark nedir?',
+            secenekler: [
+              'Kütle her yerde aynı kalır; ağırlık bulunulan konuma göre değişir.',
+              'Ağırlık her yerde aynı kalır; kütle konuma göre değişir.',
+              'Kütle ve ağırlık her zaman birbirine eşittir.',
+              'Kütle Newton, ağırlık kilogram birimiyle ölçülür.'
+            ],
+            dogru: 0,
+            ipucu: '"Ay\'da kütlen aynı, ama ağırlığın farklı — çünkü yer çekimi daha az."'
+          },
+          {
+            saniye: 240,
+            soru: 'Ay\'da yer çekimi Dünya\'nınkinin yaklaşık kaçta biri kadardır?',
+            secenekler: ['1/2', '1/4', '1/6', '1/10'],
+            dogru: 2,
+            ipucu: 'Ay\'ın kütlesi Dünya\'dan küçük olduğu için yer çekimi yaklaşık 6 kat azdır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Kütlesi 60 kg olan bir kişinin Dünya\'daki ağırlığı 600 N ise Ay\'daki ağırlığı kaç N\'dur?',
+            secenekler: ['600 N', '300 N', '100 N', '60 N'],
+            dogru: 2,
+            ipucu: 'Ay\'da yer çekimi 1/6\'sı olduğundan: 600 ÷ 6 = 100 N.'
+          },
+          {
+            saniye: 360,
+            soru: 'Ağırlık hangi alet ile ölçülür?',
+            secenekler: ['Terazi', 'Dinamometre', 'Termometre', 'Cetvel'],
+            dogru: 1,
+            ipucu: 'Ağırlık Newton birimiyle ölçülür; dinamometre bu işe yarar.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kütle hangi alet ile ölçülür?',
+            secenekler: ['Dinamometre', 'Termometre', 'Terazi', 'Barometre'],
+            dogru: 2,
+            ipucu: 'Kütle kilogram birimiyle ölçülür; terazi (hassas veya kefeli) bu işe yarar.'
+          },
+          {
+            saniye: 480,
+            soru: 'Uzayda (yerçekimsiz ortamda) astronotun kütlesi ve ağırlığı nasıl değişir?',
+            secenekler: [
+              'Her ikisi de sıfır olur.',
+              'Kütle değişmez; ağırlık sıfır olur (yerçekimi yok).',
+              'Kütle artar; ağırlık azalır.',
+              'İkisi de yerde olduğu gibi kalır.'
+            ],
+            dogru: 1,
+            ipucu: 'Kütle miktara bağlıdır, değişmez. Ağırlık = kütle × yerçekimi; yerçekimi sıfırsa ağırlık sıfır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kütle, ağırlık ve yerçekimi arasındaki ilişkiyi en iyi hangisi özetler?',
+            secenekler: [
+              'Kütle her yerde aynıdır (kg); ağırlık, yerçekimine bağlı olarak değişir (N); yerçekimi merkezden uzaklaştıkça azalır.',
+              'Kütle ve ağırlık her zaman birbirine eşittir.',
+              'Ağırlık her yerde sabittir; kütle değişir.',
+              'Yerçekimi Ay\'da Dünya\'dan daha fazladır.'
+            ],
+            dogru: 0,
+            ipucu: 'Kütle → terazi, kg; Ağırlık → dinamometre, N. Ay\'da kütle aynı, ağırlık 1/6 olur.'
+          }
+        ]
+      },
+      {
+        slug: 'surtunme-kuvveti', name: 'Sürtünme Kuvveti', hedef: 'Sürtünme kuvvetini ve etkilerini anlama',
+        videoId: 'QOqTFJdp_88',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Sürtünme kuvveti nedir?',
+            secenekler: [
+              'Birbirine temas eden iki yüzey arasında hareketi zorlaştıran kuvvet.',
+              'Cisimleri havaya kaldıran kuvvet.',
+              'Sadece sıvılarda oluşan bir kuvvet.',
+              'Mıknatısın çekme kuvveti.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme, temas eden yüzeyler arasında harekete karşı yönde oluşan dirençtir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Sürtünme kuvvetinin yönü nasıldır?',
+            secenekler: [
+              'Her zaman hareket yönünün tersinedir.',
+              'Her zaman hareket yönüyle aynıdır.',
+              'Yukarı doğrudur.',
+              'Sabit bir yönü yoktur; rastgele değişir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme kuvveti her zaman cismin hareket yönüne zıt yönde etki eder.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi sürtünme kuvvetini artırır?',
+            secenekler: [
+              'Yüzeyin pürüzlü olması.',
+              'Yüzeyin kaygan olması.',
+              'Cismin daha hafif olması.',
+              'Yüzeye yağ sürülmesi.'
+            ],
+            dogru: 0,
+            ipucu: 'Yüzey ne kadar pürüzlü olursa sürtünme o kadar fazla olur.'
+          },
+          {
+            saniye: 240,
+            soru: 'Araba lastiklerinin desenli olmasının nedeni nedir?',
+            secenekler: [
+              'Sürtünmeyi artırarak yolda tutunmayı sağlamak.',
+              'Arabanın daha hızlı gitmesini sağlamak.',
+              'Lastiğin daha güzel görünmesi.',
+              'Lastiğin daha hafif olması.'
+            ],
+            dogru: 0,
+            ipucu: 'Lastik desenleri yüzey pürüzlülüğünü artırarak sürtünmeyi ve tutunmayı güçlendirir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Sürtünme kuvveti olmasaydı aşağıdakilerden hangisi gerçekleşirdi?',
+            secenekler: [
+              'Yürüyemez, yazı yazamaz ve araçlar frenlemeyle duramazdık.',
+              'Her şey daha kolay olurdu.',
+              'Sadece araçlar etkilenirdi.',
+              'Hiçbir değişiklik olmazdı.'
+            ],
+            dogru: 0,
+            ipucu: 'Sürtünme olmasaydı ayağımız kayar, kalem tutamaz, araçlar duramaz; yaşam çok zorlaşırdı.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdakilerden hangisinde sürtünme kuvveti AZALTILMAK istenir?',
+            secenekler: [
+              'Kayak pistinin yüzeyinin düzgün yapılması.',
+              'Ayakkabı tabanlarının desenli yapılması.',
+              'Araba lastiklerinin desenli olması.',
+              'Kapı kolunun pürüzlü yapılması.'
+            ],
+            dogru: 0,
+            ipucu: 'Kayak yaparken sürtünmenin az olması istenir; bu yüzden pist düzgün ve kaygan yapılır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Sürtünme kuvveti ile cismin ağırlığı arasındaki ilişki nedir?',
+            secenekler: [
+              'Cisim ağırlaştıkça sürtünme kuvveti artar.',
+              'Cisim ağırlaştıkça sürtünme azalır.',
+              'Ağırlık sürtünmeyi etkilemez.',
+              'Sadece hafif cisimler sürtünmeden etkilenir.'
+            ],
+            dogru: 0,
+            ipucu: 'Cismin ağırlığı arttıkça yüzeye baskı artar ve sürtünme kuvveti de artar.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Sürtünme kuvveti hakkında aşağıdakilerden hangisi doğrudur?',
+            secenekler: [
+              'Sürtünme kuvveti her zaman zararlıdır ve azaltılmalıdır.',
+              'Sürtünme yüzeyler arasında hareketin tersine etki eder; pürüzlülük ve ağırlık artınca artar; bazen yararlı bazen zararlıdır.',
+              'Sürtünme sadece katı yüzeylerde oluşur.',
+              'Sürtünme kuvvetinin yönü hareketle aynıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Sürtünme: hareket yönüne zıt, pürüzlülük/ağırlıkla artar, yararlı ve zararlı yönleri var.'
+          }
+        ]
+      },
+      {
+        slug: 'tanecikli-yapi', name: 'Maddenin Tanecikli Yapısı', hedef: 'Maddenin taneciklerden oluştuğunu ve tanecik özelliklerini öğrenme',
+        videoId: 'q_M3R4KzwqU',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Madde nedir?',
+            secenekler: [
+              'Kütlesi olan ve uzayda yer kaplayan her şey.',
+              'Sadece gözle görebildiğimiz nesneler.',
+              'Yalnızca katı olan şeyler.',
+              'Havada uçan her şey.'
+            ],
+            dogru: 0,
+            ipucu: 'Madde, kütlesi olan ve boşlukta yer kaplayan her şeydir; katı, sıvı ve gaz olabilir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Maddenin tanecikli yapısı ne anlama gelir?',
+            secenekler: [
+              'Tüm maddeler çok küçük taneciklerden (atom ve moleküllerden) oluşur.',
+              'Maddeler yalnızca büyük parçalardan oluşur.',
+              'Tanecikler sadece gazlarda bulunur.',
+              'Tanecikli yapı yalnızca metallerde vardır.'
+            ],
+            dogru: 0,
+            ipucu: 'Her madde, gözle görülemeyecek kadar küçük taneciklerden (atom/molekül) oluşmuştur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Katı maddelerdeki tanecikler nasıl dizilmiştir?',
+            secenekler: [
+              'Düzenli ve sıkı dizilmiştir; birbirine çok yakındır.',
+              'Dağınık ve birbirinden çok uzaktır.',
+              'Tamamen serbest hareket eder.',
+              'Tanecikler arası boşluk çok fazladır.'
+            ],
+            dogru: 0,
+            ipucu: 'Katı maddelerde tanecikler düzenli, sıkı ve birbirine yakın dizilmiştir; bu yüzden şekilleri sabittir.'
+          },
+          {
+            saniye: 240,
+            soru: 'Sıvı maddelerdeki taneciklerin özelliği nedir?',
+            secenekler: [
+              'Tanecikler katıya göre daha gevşek dizilmiştir; birbirleri üzerinden kayabilir.',
+              'Tanecikler tamamen sabittir ve hiç hareket etmez.',
+              'Tanecikler arasında hiç boşluk yoktur.',
+              'Tanecikler en hızlı sıvıda hareket eder.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıvılarda tanecikler birbirine yakın ama serbestçe kayabilir; bu yüzden sıvılar bulunduğu kabın şeklini alır.'
+          },
+          {
+            saniye: 300,
+            soru: 'Gaz maddelerdeki tanecikler nasıl hareket eder?',
+            secenekler: [
+              'Çok hızlı ve düzensiz hareket eder; birbirinden çok uzaktır.',
+              'Yavaş ve düzenli hareket eder.',
+              'Hiç hareket etmez.',
+              'Sadece aşağı doğru hareket eder.'
+            ],
+            dogru: 0,
+            ipucu: 'Gaz tanecikleri çok hızlı, rastgele hareket eder ve aralarındaki boşluk çok fazladır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir parfüm şişesi açıldığında kokusunun odaya yayılmasının nedeni nedir?',
+            secenekler: [
+              'Parfüm taneciklerinin hava tanecikleri arasındaki boşluklardan geçerek yayılması (difüzyon).',
+              'Parfümün görünmez bir güçle itilmesi.',
+              'Havanın parfümü emmesi.',
+              'Parfüm taneciklerinin yok olup yeniden oluşması.'
+            ],
+            dogru: 0,
+            ipucu: 'Tanecikler arasında boşluk vardır; parfüm tanecikleri bu boşluklardan geçerek her yere yayılır (difüzyon).'
+          },
+          {
+            saniye: 420,
+            soru: 'Hangi hâlde tanecikler arası boşluk en fazladır?',
+            secenekler: [
+              'Katı hâlde',
+              'Sıvı hâlde',
+              'Gaz hâlde',
+              'Hepsinde eşittir.'
+            ],
+            dogru: 2,
+            ipucu: 'Tanecikler arası boşluk: katı < sıvı < gaz. Gaz hâlde tanecikler en uzak ve en hızlıdır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Maddenin tanecikli yapısı hakkında hangisi doğrudur?',
+            secenekler: [
+              'Tüm maddeler taneciklerden oluşur; tanecikler sürekli hareket eder; katıda sıkı, sıvıda gevşek, gazda çok uzak dizilmiştir; aralarında boşluk vardır.',
+              'Tanecikler yalnızca gazlarda hareket eder.',
+              'Katı maddelerde tanecikler arası boşluk en fazladır.',
+              'Tanecikler arası boşluk tüm hâllerde aynıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Madde = taneciklerden oluşur, tanecikler hareket eder, aralarında boşluk var; katı→sıkı, sıvı→gevşek, gaz→çok uzak.'
+          }
+        ]
+      },
+      {
+        slug: 'hal-degisimi', name: 'Maddenin Hal Değişimi', hedef: 'Erime, donma, buharlaşma ve yoğuşmayı anlama',
+        videoId: '7hVI_SD_Ciw',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Katı haldeki bir maddenin ısı alarak sıvı hale geçmesine ne denir?',
+            secenekler: ['Erime', 'Donma', 'Buharlaşma', 'Yoğuşma'],
+            dogru: 0,
+            ipucu: 'Dondurma yavaş yavaş erir — katıdan sıvıya geçişin adı "erime"dir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Donma sırasında madde çevresiyle nasıl bir ısı alışverişi yapar?',
+            secenekler: [
+              'Ortama ısı verir, çevreyi ısıtır.',
+              'Ortamdan ısı alır, çevreyi soğutur.',
+              'Ortamla hiçbir ısı alışverişi yapmaz.',
+              'Ortamı nemlendirir.'
+            ],
+            dogru: 0,
+            ipucu: '"Donma olurken madde ortama ısı verir" — kar yağdığında hava biraz ılıklaşır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Sıvının gaz hâline geçmesine ne denir?',
+            secenekler: ['Donma', 'Buharlaşma', 'Yoğunlaşma', 'Erime'],
+            dogru: 1,
+            ipucu: 'Su ısıtıldığında sıvıdan gaz hâline geçer; buna buharlaşma denir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Gaz hâlindeki suyun sıvıya dönüşmesine ne denir?',
+            secenekler: ['Buharlaşma', 'Süblimleşme', 'Yoğunlaşma', 'Donma'],
+            dogru: 2,
+            ipucu: 'Soğuk yüzeylere değen su buharı sıvıya döner; bu olay yoğunlaşmadır.'
+          },
+          {
+            saniye: 360,
+            soru: 'Katının doğrudan gaz hâline geçmesine ne ad verilir?',
+            secenekler: ['Erime', 'Donma', 'Buharlaşma', 'Süblimleşme'],
+            dogru: 3,
+            ipucu: 'Naftalin ve kuru buz gibi maddeler sıvı hâle geçmeden doğrudan gaz olur; buna süblimleşme denir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Erime sırasında madde ısı alır mı yoksa verir mi?',
+            secenekler: ['Ortama ısı verir.', 'Ortamdan ısı alır.', 'Hiçbir ısı alışverişi olmaz.', 'Önce alır sonra verir.'],
+            dogru: 1,
+            ipucu: 'Erimek için enerji gerekir; madde çevresinden ısı alarak erir (endotermik).'
+          },
+          {
+            saniye: 480,
+            soru: 'Buharlaşma ile kaynamanın farkı nedir?',
+            secenekler: [
+              'Buharlaşma yalnızca yüzeyden gerçekleşir ve her sıcaklıkta olur; kaynama belirli bir sıcaklıkta tüm sıvıdan gerçekleşir.',
+              'İkisi tamamen aynı olaydır.',
+              'Kaynama yüzeyden, buharlaşma iç kısımdan gerçekleşir.',
+              'Buharlaşma sadece soğukta, kaynama sıcakta olur.'
+            ],
+            dogru: 0,
+            ipucu: 'Buharlaşma: yüzeyden, her T\'de. Kaynama: belirli kaynama noktasında, tüm sıvıdan.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Maddenin hal değişimlerini doğru özetleyen seçenek hangisidir?',
+            secenekler: [
+              'Erime (katı→sıvı, ısı alır), Donma (sıvı→katı, ısı verir), Buharlaşma (sıvı→gaz, ısı alır), Yoğuşma (gaz→sıvı, ısı verir), Süblimleşme (katı→gaz).',
+              'Erime ısı verir; donma ısı alır.',
+              'Tüm hal değişimleri ısı vermekle gerçekleşir.',
+              'Süblimleşmede madde önce sıvıya, sonra gaza dönüşür.'
+            ],
+            dogru: 0,
+            ipucu: 'Isı alan değişimler: erime, buharlaşma, süblimleşme. Isı veren: donma, yoğuşma.'
+          }
+        ]
+      },
+      {
+        slug: 'isi-iletimi', name: 'Isı İletimi ve Yalıtım', hedef: 'Isı iletken ve yalıtkan maddeleri tanıma',
+        videoId: '8muTsgbr18g',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Aşağıdaki maddelerden hangisi iyi bir ısı iletenidir?',
+            secenekler: ['Bakır', 'Tahta', 'Plastik', 'Yün'],
+            dogru: 0,
+            ipucu: '"Altın, gümüş, bakır gibi metaller iyi ısı iletenidir." Tahta, plastik, yün yalıtkandır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Isı yalıtkan maddelerin ortak özelliği nedir?',
+            secenekler: [
+              'Boşluklu ve gözenekli olmaları.',
+              'Çok yoğun ve sert olmaları.',
+              'Tanecikleri birbirine çok yakın olması.',
+              'Metal içermeleri.'
+            ],
+            dogru: 0,
+            ipucu: '"Isı yalıtkanı maddeler boşluklu ve gözenekli olmalı" — tanecikler arası mesafe büyükse ısı zorlanır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Evlerde çift cam kullanılmasının amacı nedir?',
+            secenekler: [
+              'Güneş ışığını artırmak',
+              'Isı yalıtımı sağlamak',
+              'Sesi artırmak',
+              'Camı daha sağlam yapmak'
+            ],
+            dogru: 1,
+            ipucu: 'Çift cam arasındaki hava tabakası ısının geçişini yavaşlatarak yalıtım sağlar.'
+          },
+          {
+            saniye: 300,
+            soru: 'Termos bardakta içeceğin sıcaklığının uzun süre korunmasının nedeni nedir?',
+            secenekler: [
+              'Termosun elektrikle ısıtması',
+              'Çift cidarlı yapısı ve vakum tabakası sayesinde ısı iletimini azaltması',
+              'Camın ısıyı iletmesi',
+              'İçindeki soğutucu gaz'
+            ],
+            dogru: 1,
+            ipucu: 'Termos çift cidarlı ve aralarında vakum olan bir yapıya sahip; bu ısı iletimini en aza indirir.'
+          },
+          {
+            saniye: 360,
+            soru: 'Isı iletiminin gerçekleşmesi için ne gereklidir?',
+            secenekler: [
+              'İki cisim arasında sıcaklık farkı olmalıdır.',
+              'İki cismin aynı sıcaklıkta olması gerekir.',
+              'Cisimlerin mutlaka metal olması gerekir.',
+              'Isı iletimi yalnızca sıvılarda gerçekleşir.'
+            ],
+            dogru: 0,
+            ipucu: 'Isı her zaman sıcak cisimden soğuk cisme doğru akar; bunun için iki cisim arasında sıcaklık farkı olmalıdır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Kışın kalın yünlü kıyafet giyilmesinin ısı yalıtımıyla ilişkisi nedir?',
+            secenekler: [
+              'Yün ısı üretir ve vücudu ısıtır.',
+              'Yün gözenekli yapısıyla havayı hapsettiğinden vücut ısısının dışarı kaçmasını engeller.',
+              'Yün hava geçirmez olduğundan dışarıdaki soğuğu içeri almaz.',
+              'Yünün ısı iletimle ilişkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Yün gözenekli → içinde hava hapseder → hava ısı yalıtkanı → vücut ısısı korunur.'
+          },
+          {
+            saniye: 480,
+            soru: 'Aşağıdakilerden hangisi ısı yalıtkanı olarak kullanılır?',
+            secenekler: ['Alüminyum folyo', 'Demir çubuk', 'Cam yünü', 'Bakır tel'],
+            dogru: 2,
+            ipucu: 'Cam yünü gözenekli yapısıyla binalarda yaygın kullanılan bir ısı yalıtkan malzemesidir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Isı iletimi ve yalıtım konusunu en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Metaller yalıtkan, gözenekli maddeler iletkendir.',
+              'Isı soğuk cisimden sıcak cisme akar; metal cisimler iyi iletken, gözenekli maddeler iyi yalıtkandır.',
+              'Isı yalnızca sıvılar aracılığıyla iletilir.',
+              'Isı her yönde eşit miktarda akar; sıcaklık farkı önemli değildir.'
+            ],
+            dogru: 1,
+            ipucu: 'Isı: sıcaktan soğuğa akar. İletken: metal. Yalıtkan: tahta, plastik, yün, hava, cam yünü.'
+          }
+        ]
+      },
+      {
         slug: 'isigin-yayilmasi', name: 'Işığın Yayılması', hedef: 'Işığın doğrusal yayılmasını ve ışık kaynaklarını öğrenme',
         videoId: 'NIvbMpcmIMo',
         checkpoints: [
@@ -2097,108 +2199,6 @@ const DERSLER = [
             ipucu: 'Tam gölge: noktasal kaynak→net kenar; kaynak yakın→gölge büyük; cisim perdeye yakın→gölge küçük.'
           }
         ]
-      },
-      {
-        slug: 'tanecikli-yapi', name: 'Maddenin Tanecikli Yapısı', hedef: 'Maddenin taneciklerden oluştuğunu ve tanecik özelliklerini öğrenme',
-        videoId: 'q_M3R4KzwqU',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Madde nedir?',
-            secenekler: [
-              'Kütlesi olan ve uzayda yer kaplayan her şey.',
-              'Sadece gözle görebildiğimiz nesneler.',
-              'Yalnızca katı olan şeyler.',
-              'Havada uçan her şey.'
-            ],
-            dogru: 0,
-            ipucu: 'Madde, kütlesi olan ve boşlukta yer kaplayan her şeydir; katı, sıvı ve gaz olabilir.'
-          },
-          {
-            saniye: 120,
-            soru: 'Maddenin tanecikli yapısı ne anlama gelir?',
-            secenekler: [
-              'Tüm maddeler çok küçük taneciklerden (atom ve moleküllerden) oluşur.',
-              'Maddeler yalnızca büyük parçalardan oluşur.',
-              'Tanecikler sadece gazlarda bulunur.',
-              'Tanecikli yapı yalnızca metallerde vardır.'
-            ],
-            dogru: 0,
-            ipucu: 'Her madde, gözle görülemeyecek kadar küçük taneciklerden (atom/molekül) oluşmuştur.'
-          },
-          {
-            saniye: 180,
-            soru: 'Katı maddelerdeki tanecikler nasıl dizilmiştir?',
-            secenekler: [
-              'Düzenli ve sıkı dizilmiştir; birbirine çok yakındır.',
-              'Dağınık ve birbirinden çok uzaktır.',
-              'Tamamen serbest hareket eder.',
-              'Tanecikler arası boşluk çok fazladır.'
-            ],
-            dogru: 0,
-            ipucu: 'Katı maddelerde tanecikler düzenli, sıkı ve birbirine yakın dizilmiştir; bu yüzden şekilleri sabittir.'
-          },
-          {
-            saniye: 240,
-            soru: 'Sıvı maddelerdeki taneciklerin özelliği nedir?',
-            secenekler: [
-              'Tanecikler katıya göre daha gevşek dizilmiştir; birbirleri üzerinden kayabilir.',
-              'Tanecikler tamamen sabittir ve hiç hareket etmez.',
-              'Tanecikler arasında hiç boşluk yoktur.',
-              'Tanecikler en hızlı sıvıda hareket eder.'
-            ],
-            dogru: 0,
-            ipucu: 'Sıvılarda tanecikler birbirine yakın ama serbestçe kayabilir; bu yüzden sıvılar bulunduğu kabın şeklini alır.'
-          },
-          {
-            saniye: 300,
-            soru: 'Gaz maddelerdeki tanecikler nasıl hareket eder?',
-            secenekler: [
-              'Çok hızlı ve düzensiz hareket eder; birbirinden çok uzaktır.',
-              'Yavaş ve düzenli hareket eder.',
-              'Hiç hareket etmez.',
-              'Sadece aşağı doğru hareket eder.'
-            ],
-            dogru: 0,
-            ipucu: 'Gaz tanecikleri çok hızlı, rastgele hareket eder ve aralarındaki boşluk çok fazladır.'
-          },
-          {
-            saniye: 360,
-            soru: 'Bir parfüm şişesi açıldığında kokusunun odaya yayılmasının nedeni nedir?',
-            secenekler: [
-              'Parfüm taneciklerinin hava tanecikleri arasındaki boşluklardan geçerek yayılması (difüzyon).',
-              'Parfümün görünmez bir güçle itilmesi.',
-              'Havanın parfümü emmesi.',
-              'Parfüm taneciklerinin yok olup yeniden oluşması.'
-            ],
-            dogru: 0,
-            ipucu: 'Tanecikler arasında boşluk vardır; parfüm tanecikleri bu boşluklardan geçerek her yere yayılır (difüzyon).'
-          },
-          {
-            saniye: 420,
-            soru: 'Hangi hâlde tanecikler arası boşluk en fazladır?',
-            secenekler: [
-              'Katı hâlde',
-              'Sıvı hâlde',
-              'Gaz hâlde',
-              'Hepsinde eşittir.'
-            ],
-            dogru: 2,
-            ipucu: 'Tanecikler arası boşluk: katı < sıvı < gaz. Gaz hâlde tanecikler en uzak ve en hızlıdır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Maddenin tanecikli yapısı hakkında hangisi doğrudur?',
-            secenekler: [
-              'Tüm maddeler taneciklerden oluşur; tanecikler sürekli hareket eder; katıda sıkı, sıvıda gevşek, gazda çok uzak dizilmiştir; aralarında boşluk vardır.',
-              'Tanecikler yalnızca gazlarda hareket eder.',
-              'Katı maddelerde tanecikler arası boşluk en fazladır.',
-              'Tanecikler arası boşluk tüm hâllerde aynıdır.'
-            ],
-            dogru: 0,
-            ipucu: 'Madde = taneciklerden oluşur, tanecikler hareket eder, aralarında boşluk var; katı→sıkı, sıvı→gevşek, gaz→çok uzak.'
-          }
-        ]
       }
     ],
     playlists: [
@@ -2311,6 +2311,98 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: '"Yüz, gül, kır, dal, bor, bar…" — hepsi aynı yazılır; anlam cümleden çıkarılır.'
+          }
+        ]
+      },
+      {
+        slug: 'buyuk-harf', name: 'Büyük Harf Kullanımı', hedef: 'Büyük harf kullanım kurallarını öğrenme ve uygulama',
+        videoId: 'jIIS5FPDCEc',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Şiirde her dize büyük harfle başlar çünkü:',
+            secenekler: [
+              'Yazım kuralı gereği her dize yeni bir satır olarak kabul edilir.',
+              'Şiirlerde cümle olmaz.',
+              'Yalnızca birinci dize büyük harfle başlar.',
+              'Şiirler yalnızca özel isimlerden oluşur.'
+            ],
+            dogru: 0,
+            ipucu: '"Dize şeklinde yazılmışsa büyük harflerle başlayacak" — birleştirince tek cümle olsa bile.'
+          },
+          {
+            saniye: 120,
+            soru: 'Kişi adlarından önce veya sonra gelen unvanlar (Sultan, Profesör, Mareşal) nasıl yazılır?',
+            secenekler: [
+              'Büyük harfle başlanır.',
+              'Tamamen küçük harfle yazılır.',
+              'Tırnak içine alınır.',
+              'Kısaltılarak yazılır.'
+            ],
+            dogru: 0,
+            ipucu: '"Fatih Sultan Mehmet — Sultan büyük yazılacak çünkü ona verilen bir unvandır."'
+          },
+          {
+            saniye: 240,
+            soru: 'Aşağıdakilerden hangisi büyük harfle yazılmaz?',
+            secenekler: [
+              'Ülke adları',
+              'Şehir adları',
+              'Mevsim adları',
+              'Kişi adları'
+            ],
+            dogru: 2,
+            ipucu: 'Mevsim adları (ilkbahar, yaz, sonbahar, kış) özel ad olmadığından küçük harfle yazılır.'
+          },
+          {
+            saniye: 300,
+            soru: '"Atatürk, cumhuriyeti 29 ekim 1923\'te ilan etti." cümlesindeki yazım yanlışı nedir?',
+            secenekler: [
+              'Atatürk büyük harfle başlamamalı.',
+              '"Ekim" ay adı büyük harfle başlamalı.',
+              'Cümle doğru yazılmış.',
+              '"Cumhuriyeti" büyük harfle yazılmalı.'
+            ],
+            dogru: 1,
+            ipucu: 'Ay adları Türkçede büyük harfle başlar: Ocak, Şubat, Ekim gibi.'
+          },
+          {
+            saniye: 360,
+            soru: 'Kitap, dergi ve gazete adları nasıl yazılır?',
+            secenekler: [
+              'Tamamen büyük harfle',
+              'Her sözcüğü büyük harfle',
+              'Tırnak içinde ve her sözcüğünün ilk harfi büyük',
+              'Sadece baş harfi büyük'
+            ],
+            dogru: 2,
+            ipucu: 'Kitap, dergi ve gazete adları tırnak içine alınır ve her sözcüğünün ilk harfi büyük yazılır.'
+          },
+          {
+            saniye: 420,
+            soru: '"türkiye\'nin başkenti ankara\'dır." cümlesinde kaç yazım yanlışı vardır?',
+            secenekler: ['1', '2', '3', 'Hiç yok'],
+            dogru: 1,
+            ipucu: '"Türkiye" ülke adı, "Ankara" şehir adı — her ikisi de büyük harfle başlamalı. 2 hata.'
+          },
+          {
+            saniye: 480,
+            soru: 'Hangi sözcük büyük harfle başlamaz?',
+            secenekler: ['Atatürk', 'Ocak', 'Kış', 'Marmara'],
+            dogru: 2,
+            ipucu: 'Mevsim adları (kış, ilkbahar, yaz, sonbahar) özel ad değildir; küçük harfle yazılır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Büyük harf kullanımının temel kurallarını özetleyen hangisidir?',
+            secenekler: [
+              'Yalnızca cümle başları büyük harfle başlar.',
+              'Cümle başları, özel adlar (kişi, ülke, şehir, ay), unvanlar ve eser adlarının her sözcüğü büyük harfle başlar; mevsim ve gün adları küçük yazılır.',
+              'Her sözcük büyük harfle başlar.',
+              'Büyük harf yalnızca resmî belgelerde kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Büyük: cümle başı, özel ad, unvan, ay adı. Küçük: mevsim, renk, gün adı (ama ay adı büyük!).'
           }
         ]
       },
@@ -2484,94 +2576,206 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'buyuk-harf', name: 'Büyük Harf Kullanımı', hedef: 'Büyük harf kullanım kurallarını öğrenme ve uygulama',
-        videoId: 'jIIS5FPDCEc',
+        slug: 'isimler-adlar', name: 'İsimler (Adlar)', hedef: 'İsimleri özel/cins, tekil/çoğul, somut/soyut olarak sınıflandırma',
+        videoId: 'ok8UC7I9Qeo',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Şiirde her dize büyük harfle başlar çünkü:',
+            soru: 'İsim (ad) nedir?',
             secenekler: [
-              'Yazım kuralı gereği her dize yeni bir satır olarak kabul edilir.',
-              'Şiirlerde cümle olmaz.',
-              'Yalnızca birinci dize büyük harfle başlar.',
-              'Şiirler yalnızca özel isimlerden oluşur.'
+              'Varlıkların hareketlerini bildiren sözcüklerdir.',
+              'Varlıkları ve kavramları karşılayan sözcüklerdir.',
+              'Varlıkların özelliklerini bildiren sözcüklerdir.',
+              'Cümledeki bağlaçlardır.'
             ],
-            dogru: 0,
-            ipucu: '"Dize şeklinde yazılmışsa büyük harflerle başlayacak" — birleştirince tek cümle olsa bile.'
+            dogru: 1,
+            ipucu: 'İsimler; canlı-cansız varlıkları, kavramları ve duyguları karşılayan sözcüklerdir.'
           },
           {
             saniye: 120,
-            soru: 'Kişi adlarından önce veya sonra gelen unvanlar (Sultan, Profesör, Mareşal) nasıl yazılır?',
+            soru: '"Atatürk" özel ad mıdır, yoksa cins (tür) ad mıdır?',
             secenekler: [
-              'Büyük harfle başlanır.',
-              'Tamamen küçük harfle yazılır.',
-              'Tırnak içine alınır.',
-              'Kısaltılarak yazılır.'
+              'Cins (tür) addır.',
+              'Özel addır.',
+              'Hem özel hem cins addır.',
+              'Ad değildir.'
             ],
-            dogru: 0,
-            ipucu: '"Fatih Sultan Mehmet — Sultan büyük yazılacak çünkü ona verilen bir unvandır."'
+            dogru: 1,
+            ipucu: 'Tek bir varlığı, kişiyi veya yeri karşılayan adlar özel addır ve büyük harfle başlar.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi cins (tür) addır?',
+            secenekler: [
+              'Ankara',
+              'Kalem',
+              'Sakarya',
+              'Atatürk'
+            ],
+            dogru: 1,
+            ipucu: 'Cins ad, aynı türdeki tüm varlıkları karşılar: kalem, ağaç, çiçek...'
           },
           {
             saniye: 240,
-            soru: 'Aşağıdakilerden hangisi büyük harfle yazılmaz?',
+            soru: '"Çocuklar" sözcüğü tekil midir, çoğul mudur?',
             secenekler: [
-              'Ülke adları',
-              'Şehir adları',
-              'Mevsim adları',
-              'Kişi adları'
+              'Tekil',
+              'Çoğul',
+              'Hem tekil hem çoğul',
+              'Belirsiz'
             ],
-            dogru: 2,
-            ipucu: 'Mevsim adları (ilkbahar, yaz, sonbahar, kış) özel ad olmadığından küçük harfle yazılır.'
+            dogru: 1,
+            ipucu: '"-ler/-lar" eki sözcüğü çoğul yapar: çocuk → çocuklar.'
           },
           {
             saniye: 300,
-            soru: '"Atatürk, cumhuriyeti 29 ekim 1923\'te ilan etti." cümlesindeki yazım yanlışı nedir?',
+            soru: 'Somut isim ile soyut isim arasındaki fark nedir?',
             secenekler: [
-              'Atatürk büyük harfle başlamamalı.',
-              '"Ekim" ay adı büyük harfle başlamalı.',
-              'Cümle doğru yazılmış.',
-              '"Cumhuriyeti" büyük harfle yazılmalı.'
+              'Somut isimler yalnızca canlıları, soyut isimler yalnızca cansızları karşılar.',
+              'Somut isimler beş duyu organıyla algılanabilir; soyut isimler algılanamaz, yalnızca düşünülür veya hissedilir.',
+              'İkisi arasında fark yoktur.',
+              'Soyut isimler her zaman çoğul kullanılır.'
             ],
             dogru: 1,
-            ipucu: 'Ay adları Türkçede büyük harfle başlar: Ocak, Şubat, Ekim gibi.'
+            ipucu: 'Somut: masa, su, çiçek (görebilirsin). Soyut: sevgi, özlem, mutluluk (hissedersin).'
           },
           {
             saniye: 360,
-            soru: 'Kitap, dergi ve gazete adları nasıl yazılır?',
+            soru: 'Aşağıdakilerden hangisi soyut bir isimdir?',
             secenekler: [
-              'Tamamen büyük harfle',
-              'Her sözcüğü büyük harfle',
-              'Tırnak içinde ve her sözcüğünün ilk harfi büyük',
-              'Sadece baş harfi büyük'
+              'Ağaç',
+              'Deniz',
+              'Özgürlük',
+              'Taş'
             ],
             dogru: 2,
-            ipucu: 'Kitap, dergi ve gazete adları tırnak içine alınır ve her sözcüğünün ilk harfi büyük yazılır.'
+            ipucu: 'Özgürlük gözle görülemez, elle tutulamaz — yalnızca düşünülür ve hissedilir.'
           },
           {
             saniye: 420,
-            soru: '"türkiye\'nin başkenti ankara\'dır." cümlesinde kaç yazım yanlışı vardır?',
-            secenekler: ['1', '2', '3', 'Hiç yok'],
-            dogru: 1,
-            ipucu: '"Türkiye" ülke adı, "Ankara" şehir adı — her ikisi de büyük harfle başlamalı. 2 hata.'
-          },
-          {
-            saniye: 480,
-            soru: 'Hangi sözcük büyük harfle başlamaz?',
-            secenekler: ['Atatürk', 'Ocak', 'Kış', 'Marmara'],
-            dogru: 2,
-            ipucu: 'Mevsim adları (kış, ilkbahar, yaz, sonbahar) özel ad değildir; küçük harfle yazılır.'
+            soru: '"Topluluk ismi" ne demektir?',
+            secenekler: [
+              'Birden fazla varlıktan oluşan bir grubu tek sözcükle karşılayan isimdir.',
+              'Çoğul eki almış her isimdir.',
+              'Yalnızca insan topluluklarını ifade eden isimdir.',
+              'Soyut isimlerin başka bir adıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Ordu, sürü, orman, takım — hepsi birçok varlığı tek sözcükle anlatır.'
           },
           {
             saniye: 'fin',
-            soru: 'Büyük harf kullanımının temel kurallarını özetleyen hangisidir?',
+            soru: 'İsimlerin sınıflandırılmasını doğru özetleyen hangisidir?',
             secenekler: [
-              'Yalnızca cümle başları büyük harfle başlar.',
-              'Cümle başları, özel adlar (kişi, ülke, şehir, ay), unvanlar ve eser adlarının her sözcüğü büyük harfle başlar; mevsim ve gün adları küçük yazılır.',
-              'Her sözcük büyük harfle başlar.',
-              'Büyük harf yalnızca resmî belgelerde kullanılır.'
+              'İsimler; özel/cins (tür), tekil/çoğul, somut/soyut ve topluluk ismi olarak sınıflandırılır. Özel adlar büyük harfle yazılır.',
+              'İsimler yalnızca özel ve cins olmak üzere ikiye ayrılır.',
+              'Soyut isimler daima özel ad sayılır.',
+              'Topluluk isimleri çoğul eki almış isimlerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Özel/cins, tekil/çoğul, somut/soyut, topluluk — isimlerin dört sınıflandırma ölçütü.'
+          }
+        ]
+      },
+      {
+        slug: 'cumlede-kavramlar', name: 'Cümlede Kavramlar (Neden-Sonuç, Amaç-Sonuç, Koşul)', hedef: 'Neden-sonuç, amaç-sonuç ve koşul cümlelerini ayırt etme',
+        videoId: '6eDBln5v9M8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Neden-sonuç cümlesi ne anlam taşır?',
+            secenekler: [
+              'Bir olayın gerçekleşmesi için gerekli şartı bildirir.',
+              'Bir olayın hangi nedenle (sebep) gerçekleştiğini ve sonucunu bildirir.',
+              'İki olayı karşılaştırır.',
+              'Bir dileği ifade eder.'
             ],
             dogru: 1,
-            ipucu: 'Büyük: cümle başı, özel ad, unvan, ay adı. Küçük: mevsim, renk, gün adı (ama ay adı büyük!).'
+            ipucu: 'Neden-sonuç: "Çok çalıştığı için sınavı geçti." Neden = çalışmak, sonuç = geçmek.'
+          },
+          {
+            saniye: 120,
+            soru: '"Hava soğuk olduğu için mont giydim." cümlesinde neden hangisidir?',
+            secenekler: [
+              'Mont giymek',
+              'Havanın soğuk olması',
+              'Her ikisi de neden',
+              'Hiçbiri'
+            ],
+            dogru: 1,
+            ipucu: '"İçin, -den dolayı, -diği için" gibi ifadeler nedenin ipucusudur.'
+          },
+          {
+            saniye: 180,
+            soru: 'Amaç-sonuç cümlesi ile neden-sonuç cümlesi arasındaki fark nedir?',
+            secenekler: [
+              'İkisi de aynı anlama gelir.',
+              'Neden-sonuçta bir olay kendiliğinden gerçekleşir; amaç-sonuçta bir hedef/niyet için eylem yapılır.',
+              'Amaç-sonuçta "çünkü" kullanılır.',
+              'Neden-sonuçta bir hedef vardır, amaç-sonuçta yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Amaç-sonuç: "Sınavı geçmek İÇİN çalıştı." — bir hedef (amaç) var.'
+          },
+          {
+            saniye: 240,
+            soru: '"Kardeşine hediye almak için markete gitti." cümlesinde amaç hangisidir?',
+            secenekler: [
+              'Markete gitmek',
+              'Kardeşine hediye almak',
+              'Alışveriş yapmak',
+              'Marketten dönmek'
+            ],
+            dogru: 1,
+            ipucu: '"İçin, amacıyla, diye" ifadeleri amacı gösterir; amaç eylemin hedefidir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Koşul (şart) cümlesi ne anlam taşır?',
+            secenekler: [
+              'Bir olayın kesin olarak gerçekleşeceğini bildirir.',
+              'Bir olayın gerçekleşmesinin başka bir olaya bağlı olduğunu bildirir.',
+              'İki olayın aynı anda gerçekleştiğini bildirir.',
+              'Bir olayın nedenini açıklar.'
+            ],
+            dogru: 1,
+            ipucu: '"Eğer/şayet + -se/-sa" yapısı koşul bildirir: "Eğer yağmur yağarsa evde kalırız."'
+          },
+          {
+            saniye: 360,
+            soru: '"Eğer erken kalkarsan okula geç kalmazsın." cümlesindeki koşul nedir?',
+            secenekler: [
+              'Okula geç kalmamak',
+              'Erken kalkmak',
+              'Okula gitmek',
+              'Uyumak'
+            ],
+            dogru: 1,
+            ipucu: '"Eğer" ve "-san" eki koşulu gösterir; koşul şartın gerçekleşmesi gereken kısmıdır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Aşağıdaki cümlelerden hangisi amaç-sonuç ilişkisi taşır?',
+            secenekler: [
+              '"Hava güzel olduğu için pikniğe gittik."',
+              '"Eğer ders çalışırsan başarılı olursun."',
+              '"Sağlıklı olmak için her gün spor yapıyor."',
+              '"Çok yorulduğundan erken yattı."'
+            ],
+            dogru: 2,
+            ipucu: '"İçin" edatı ve bir hedef (sağlıklı olmak) = amaç-sonuç ilişkisi.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Neden-sonuç, amaç-sonuç ve koşul kavramlarını doğru özetleyen hangisidir?',
+            secenekler: [
+              'Neden-sonuç: bir olay başka bir olaya yol açar (-diği için, -den dolayı). Amaç-sonuç: bir hedef için eylem yapılır (için, amacıyla, diye). Koşul: bir olayın gerçekleşmesi şarta bağlıdır (eğer, -se/-sa).',
+              'Üçü de aynı anlama gelir; aralarında fark yoktur.',
+              'Koşul cümlelerinde "çünkü" kullanılır.',
+              'Amaç-sonuç cümleleri "eğer" ile başlar.'
+            ],
+            dogru: 0,
+            ipucu: 'Neden-sonuç = sebep → sonuç. Amaç-sonuç = hedef → eylem. Koşul = şart → sonuç.'
           }
         ]
       },
@@ -2982,210 +3186,6 @@ const DERSLER = [
             ipucu: 'Sıralama, karşıtlık, neden-sonuç, ekleme, örnekleme, özetleme — hepsi bağlantı ifadesidir.'
           }
         ]
-      },
-      {
-        slug: 'cumlede-kavramlar', name: 'Cümlede Kavramlar (Neden-Sonuç, Amaç-Sonuç, Koşul)', hedef: 'Neden-sonuç, amaç-sonuç ve koşul cümlelerini ayırt etme',
-        videoId: '6eDBln5v9M8',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Neden-sonuç cümlesi ne anlam taşır?',
-            secenekler: [
-              'Bir olayın gerçekleşmesi için gerekli şartı bildirir.',
-              'Bir olayın hangi nedenle (sebep) gerçekleştiğini ve sonucunu bildirir.',
-              'İki olayı karşılaştırır.',
-              'Bir dileği ifade eder.'
-            ],
-            dogru: 1,
-            ipucu: 'Neden-sonuç: "Çok çalıştığı için sınavı geçti." Neden = çalışmak, sonuç = geçmek.'
-          },
-          {
-            saniye: 120,
-            soru: '"Hava soğuk olduğu için mont giydim." cümlesinde neden hangisidir?',
-            secenekler: [
-              'Mont giymek',
-              'Havanın soğuk olması',
-              'Her ikisi de neden',
-              'Hiçbiri'
-            ],
-            dogru: 1,
-            ipucu: '"İçin, -den dolayı, -diği için" gibi ifadeler nedenin ipucusudur.'
-          },
-          {
-            saniye: 180,
-            soru: 'Amaç-sonuç cümlesi ile neden-sonuç cümlesi arasındaki fark nedir?',
-            secenekler: [
-              'İkisi de aynı anlama gelir.',
-              'Neden-sonuçta bir olay kendiliğinden gerçekleşir; amaç-sonuçta bir hedef/niyet için eylem yapılır.',
-              'Amaç-sonuçta "çünkü" kullanılır.',
-              'Neden-sonuçta bir hedef vardır, amaç-sonuçta yoktur.'
-            ],
-            dogru: 1,
-            ipucu: 'Amaç-sonuç: "Sınavı geçmek İÇİN çalıştı." — bir hedef (amaç) var.'
-          },
-          {
-            saniye: 240,
-            soru: '"Kardeşine hediye almak için markete gitti." cümlesinde amaç hangisidir?',
-            secenekler: [
-              'Markete gitmek',
-              'Kardeşine hediye almak',
-              'Alışveriş yapmak',
-              'Marketten dönmek'
-            ],
-            dogru: 1,
-            ipucu: '"İçin, amacıyla, diye" ifadeleri amacı gösterir; amaç eylemin hedefidir.'
-          },
-          {
-            saniye: 300,
-            soru: 'Koşul (şart) cümlesi ne anlam taşır?',
-            secenekler: [
-              'Bir olayın kesin olarak gerçekleşeceğini bildirir.',
-              'Bir olayın gerçekleşmesinin başka bir olaya bağlı olduğunu bildirir.',
-              'İki olayın aynı anda gerçekleştiğini bildirir.',
-              'Bir olayın nedenini açıklar.'
-            ],
-            dogru: 1,
-            ipucu: '"Eğer/şayet + -se/-sa" yapısı koşul bildirir: "Eğer yağmur yağarsa evde kalırız."'
-          },
-          {
-            saniye: 360,
-            soru: '"Eğer erken kalkarsan okula geç kalmazsın." cümlesindeki koşul nedir?',
-            secenekler: [
-              'Okula geç kalmamak',
-              'Erken kalkmak',
-              'Okula gitmek',
-              'Uyumak'
-            ],
-            dogru: 1,
-            ipucu: '"Eğer" ve "-san" eki koşulu gösterir; koşul şartın gerçekleşmesi gereken kısmıdır.'
-          },
-          {
-            saniye: 420,
-            soru: 'Aşağıdaki cümlelerden hangisi amaç-sonuç ilişkisi taşır?',
-            secenekler: [
-              '"Hava güzel olduğu için pikniğe gittik."',
-              '"Eğer ders çalışırsan başarılı olursun."',
-              '"Sağlıklı olmak için her gün spor yapıyor."',
-              '"Çok yorulduğundan erken yattı."'
-            ],
-            dogru: 2,
-            ipucu: '"İçin" edatı ve bir hedef (sağlıklı olmak) = amaç-sonuç ilişkisi.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Neden-sonuç, amaç-sonuç ve koşul kavramlarını doğru özetleyen hangisidir?',
-            secenekler: [
-              'Neden-sonuç: bir olay başka bir olaya yol açar (-diği için, -den dolayı). Amaç-sonuç: bir hedef için eylem yapılır (için, amacıyla, diye). Koşul: bir olayın gerçekleşmesi şarta bağlıdır (eğer, -se/-sa).',
-              'Üçü de aynı anlama gelir; aralarında fark yoktur.',
-              'Koşul cümlelerinde "çünkü" kullanılır.',
-              'Amaç-sonuç cümleleri "eğer" ile başlar.'
-            ],
-            dogru: 0,
-            ipucu: 'Neden-sonuç = sebep → sonuç. Amaç-sonuç = hedef → eylem. Koşul = şart → sonuç.'
-          }
-        ]
-      },
-      {
-        slug: 'isimler-adlar', name: 'İsimler (Adlar)', hedef: 'İsimleri özel/cins, tekil/çoğul, somut/soyut olarak sınıflandırma',
-        videoId: 'ok8UC7I9Qeo',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'İsim (ad) nedir?',
-            secenekler: [
-              'Varlıkların hareketlerini bildiren sözcüklerdir.',
-              'Varlıkları ve kavramları karşılayan sözcüklerdir.',
-              'Varlıkların özelliklerini bildiren sözcüklerdir.',
-              'Cümledeki bağlaçlardır.'
-            ],
-            dogru: 1,
-            ipucu: 'İsimler; canlı-cansız varlıkları, kavramları ve duyguları karşılayan sözcüklerdir.'
-          },
-          {
-            saniye: 120,
-            soru: '"Atatürk" özel ad mıdır, yoksa cins (tür) ad mıdır?',
-            secenekler: [
-              'Cins (tür) addır.',
-              'Özel addır.',
-              'Hem özel hem cins addır.',
-              'Ad değildir.'
-            ],
-            dogru: 1,
-            ipucu: 'Tek bir varlığı, kişiyi veya yeri karşılayan adlar özel addır ve büyük harfle başlar.'
-          },
-          {
-            saniye: 180,
-            soru: 'Aşağıdakilerden hangisi cins (tür) addır?',
-            secenekler: [
-              'Ankara',
-              'Kalem',
-              'Sakarya',
-              'Atatürk'
-            ],
-            dogru: 1,
-            ipucu: 'Cins ad, aynı türdeki tüm varlıkları karşılar: kalem, ağaç, çiçek...'
-          },
-          {
-            saniye: 240,
-            soru: '"Çocuklar" sözcüğü tekil midir, çoğul mudur?',
-            secenekler: [
-              'Tekil',
-              'Çoğul',
-              'Hem tekil hem çoğul',
-              'Belirsiz'
-            ],
-            dogru: 1,
-            ipucu: '"-ler/-lar" eki sözcüğü çoğul yapar: çocuk → çocuklar.'
-          },
-          {
-            saniye: 300,
-            soru: 'Somut isim ile soyut isim arasındaki fark nedir?',
-            secenekler: [
-              'Somut isimler yalnızca canlıları, soyut isimler yalnızca cansızları karşılar.',
-              'Somut isimler beş duyu organıyla algılanabilir; soyut isimler algılanamaz, yalnızca düşünülür veya hissedilir.',
-              'İkisi arasında fark yoktur.',
-              'Soyut isimler her zaman çoğul kullanılır.'
-            ],
-            dogru: 1,
-            ipucu: 'Somut: masa, su, çiçek (görebilirsin). Soyut: sevgi, özlem, mutluluk (hissedersin).'
-          },
-          {
-            saniye: 360,
-            soru: 'Aşağıdakilerden hangisi soyut bir isimdir?',
-            secenekler: [
-              'Ağaç',
-              'Deniz',
-              'Özgürlük',
-              'Taş'
-            ],
-            dogru: 2,
-            ipucu: 'Özgürlük gözle görülemez, elle tutulamaz — yalnızca düşünülür ve hissedilir.'
-          },
-          {
-            saniye: 420,
-            soru: '"Topluluk ismi" ne demektir?',
-            secenekler: [
-              'Birden fazla varlıktan oluşan bir grubu tek sözcükle karşılayan isimdir.',
-              'Çoğul eki almış her isimdir.',
-              'Yalnızca insan topluluklarını ifade eden isimdir.',
-              'Soyut isimlerin başka bir adıdır.'
-            ],
-            dogru: 0,
-            ipucu: 'Ordu, sürü, orman, takım — hepsi birçok varlığı tek sözcükle anlatır.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'İsimlerin sınıflandırılmasını doğru özetleyen hangisidir?',
-            secenekler: [
-              'İsimler; özel/cins (tür), tekil/çoğul, somut/soyut ve topluluk ismi olarak sınıflandırılır. Özel adlar büyük harfle yazılır.',
-              'İsimler yalnızca özel ve cins olmak üzere ikiye ayrılır.',
-              'Soyut isimler daima özel ad sayılır.',
-              'Topluluk isimleri çoğul eki almış isimlerdir.'
-            ],
-            dogru: 0,
-            ipucu: 'Özel/cins, tekil/çoğul, somut/soyut, topluluk — isimlerin dört sınıflandırma ölçütü.'
-          }
-        ]
       }
     ],
     playlists: [
@@ -3293,88 +3293,6 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'doga-beseri', name: 'Doğal ve Beşeri Çevre', hedef: 'Doğal ve beşeri çevreyi ayırt etme ve değişimlerini anlama',
-        videoId: 'gCdFpGQtNcA',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Aşağıdakilerden hangisi doğal çevrenin bir parçasıdır?',
-            secenekler: ['Nehirler', 'Fabrikalar', 'Yollar', 'Köprüler'],
-            dogru: 0,
-            ipucu: '"Fabrikalar, yollar, köprüler insan yapımı; nehirler ise doğal çevrenin parçası."'
-          },
-          {
-            saniye: 120,
-            soru: 'Heyelan (toprak kayması) hangi tür çevre değişimine örnektir?',
-            secenekler: [
-              'Doğal etkenlerle gerçekleşen doğal çevre değişimi.',
-              'İnsan eliyle gerçekleşen beşeri çevre değişimi.',
-              'Tarım alanlarının genişletilmesi.',
-              'Şehirleşme ve nüfus artışı.'
-            ],
-            dogru: 0,
-            ipucu: '"Karadeniz\'de yoğun yağışlar nedeniyle heyelan görülür; bu doğal bir değişimdir."'
-          },
-          {
-            saniye: 240,
-            soru: 'Aşağıdakilerden hangisi beşeri (insan yapımı) bir çevre unsurudur?',
-            secenekler: ['Dağlar', 'Nehirler', 'Köprüler', 'Ormanlar'],
-            dogru: 2,
-            ipucu: 'İnsanlar tarafından oluşturulan her şey beşeri çevrenin parçasıdır.'
-          },
-          {
-            saniye: 300,
-            soru: 'İnsanların doğal çevreyi dönüştürmesine ne denir?',
-            secenekler: ['Doğal afet', 'Coğrafi keşif', 'Beşeri müdahale', 'İklim değişikliği'],
-            dogru: 2,
-            ipucu: 'İnsanlar tarım, yapılaşma ve sanayiyle doğal çevreyi dönüştürür; buna beşeri müdahale denir.'
-          },
-          {
-            saniye: 360,
-            soru: 'Doğal çevrenin korunması için bireysel düzeyde neler yapılabilir?',
-            secenekler: [
-              'Yalnızca devlet önlem alabilir.',
-              'Hiçbir şey yapılamaz.',
-              'Geri dönüşüm, su tasarrufu ve ağaç dikme gibi davranışlar.',
-              'Sadece fabrikaları kapatmak yeterlidir.'
-            ],
-            dogru: 2,
-            ipucu: 'Her bireyin çevreye duyarlı davranışları doğanın korunmasına katkı sağlar.'
-          },
-          {
-            saniye: 420,
-            soru: 'Şehirleşme doğal çevreyi nasıl etkiler?',
-            secenekler: [
-              'Şehirleşmenin doğal çevreye etkisi yoktur.',
-              'Orman ve tarım alanları azalır, hava-su kirliliği artar.',
-              'Şehirleşme doğayı her zaman olumlu etkiler.',
-              'Yalnızca deniz canlılarını olumsuz etkiler.'
-            ],
-            dogru: 1,
-            ipucu: 'Şehirleşme: beton artışı → yeşil alan kaybı, sanayi → hava ve su kirliliği.'
-          },
-          {
-            saniye: 480,
-            soru: 'Aşağıdakilerden hangisi doğal bir çevre değişimine örnek değildir?',
-            secenekler: ['Deprem', 'Sel', 'Fabrika kurma', 'Yanardağ patlaması'],
-            dogru: 2,
-            ipucu: 'Fabrika kurmak insan eliyle gerçekleşir; deprem, sel ve yanardağ doğal süreçlerdir.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Doğal ve beşeri çevre konusunu en iyi özetleyen hangisidir?',
-            secenekler: [
-              'Doğal çevre insan yapısı unsurları da kapsar.',
-              'Doğal çevre (dağ, nehir, orman) ile beşeri çevre (yol, köprü, fabrika) birbirini etkiler; insan müdahalesi doğal çevreyi dönüştürür.',
-              'Beşeri çevre yalnızca doğal değişimlerle oluşur.',
-              'İnsan faaliyetlerinin çevreye hiçbir olumsuz etkisi yoktur.'
-            ],
-            dogru: 1,
-            ipucu: 'Doğal = Tanrı\'nın yarattığı. Beşeri = insanın yaptığı. İkisi sürekli etkileşim halindedir.'
-          }
-        ]
-      },
-      {
         slug: 'anadolu-miras', name: 'Anadolu\'nun Kültürel Mirasa Katkıları', hedef: 'Anadolu\'daki ilk yerleşimler ve kültürel miras alanlarını tanıma',
         videoId: 'Hlv-Y2rGZ4o',
         checkpoints: [
@@ -3462,191 +3380,288 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'etkin-vatandaslik', name: 'Etkin Vatandaşlık', hedef: 'Etkin vatandaşın özelliklerini ve demokratik tutumlarını öğrenme',
-        videoId: 'ot516YDjf8o',
+        slug: 'ilk-yerlesimler', name: 'Anadolu\'nun İlk Yerleşim Yerlerinde Yaşam', hedef: 'Anadolu\'daki ilk yerleşim yerlerini ve yaşam biçimlerini tanıma',
+        videoId: 'b3xT-xnCXUE',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Etkin vatandaşın temel özelliği nedir?',
+            soru: 'İnsanlar neden göçebe yaşamdan yerleşik yaşama geçmiştir?',
             secenekler: [
-              'Haklarını bilen, sorumluluklarını yerine getiren ve toplumsal sorunlara duyarlı olan bireydir.',
-              'Yalnızca kendi çıkarlarını düşünen bireydir.',
-              'Sorunlar karşısında sessiz kalan bireydir.',
-              'Yalnızca oy kullanan bireydir.'
+              'Savaşlardan kaçmak için.',
+              'Tarım yapmayı öğrenmeleri ve hayvanları evcilleştirmeleriyle birlikte.',
+              'Deniz seviyesinin yükselmesi nedeniyle.',
+              'Devletin emriyle.'
             ],
-            dogru: 0,
-            ipucu: '"Etkin vatandaş; haklar + sorumluluklar + duyarlılık üçgeninde yaşar; pasif değildir."'
+            dogru: 1,
+            ipucu: 'Tarım ve hayvancılığın başlaması insanları bir yere bağlamış, yerleşik yaşam başlamıştır.'
           },
           {
             saniye: 120,
-            soru: 'Etkin vatandaş haksızlıkla karşılaştığında nasıl davranır?',
+            soru: 'Anadolu\'daki en eski yerleşim yerlerinden biri hangisidir?',
             secenekler: [
-              'Şiddete başvurmadan yasal ve demokratik yolları kullanır.',
-              'Her durumda sessiz kalır.',
-              'Şiddet kullanarak hakkını arar.',
-              'Durumu görmezden gelir.'
+              'İstanbul',
+              'Çatalhöyük',
+              'Ankara',
+              'İzmir'
+            ],
+            dogru: 1,
+            ipucu: 'Çatalhöyük (Konya), dünyada bilinen en eski yerleşim yerlerinden biridir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Çatalhöyük\'te evlerin özelliği neydi?',
+            secenekler: [
+              'Evlerin kapısı yoktu; çatıdan girilirdi.',
+              'Evler taştan çok katlı yapılırdı.',
+              'Her evin büyük bir bahçesi vardı.',
+              'Evler birbirinden çok uzaktı.'
             ],
             dogru: 0,
-            ipucu: '"Haksızlık karşısında sessiz kalmaz — ama şiddete de başvurmaz; yasal yolları kullanır."'
+            ipucu: 'Çatalhöyük\'te evler bitişikti ve çatıdaki bir açıklıktan merdivene girilirdi.'
           },
           {
             saniye: 240,
-            soru: 'Etkin bir vatandaş aşağıdakilerden hangisini yapar?',
+            soru: 'İlk yerleşim yerlerinde insanlar geçimlerini nasıl sağlıyordu?',
             secenekler: [
-              'Toplumsal sorunlarla ilgilenmez.',
-              'Sadece kendi çıkarını düşünür.',
-              'Toplumsal sorunlara duyarlı olur ve çözüm üretmeye çalışır.',
-              'Hiçbir zaman oy kullanmaz.'
+              'Fabrikada çalışarak.',
+              'Tarım, hayvancılık ve el sanatlarıyla.',
+              'Madencilikle.',
+              'Yalnızca balıkçılıkla.'
             ],
-            dogru: 2,
-            ipucu: 'Etkin vatandaş, topluma karşı sorumluluk duyar ve haklarını bilir.'
+            dogru: 1,
+            ipucu: 'Tarım (buğday, arpa), hayvancılık (koyun, keçi) ve basit el sanatları temel geçim yoluydu.'
           },
           {
             saniye: 300,
-            soru: 'Demokratik bir toplumda vatandaşların en temel siyasi katılım hakkı nedir?',
-            secenekler: ['Gösteri düzenlemek', 'Oy kullanmak', 'Dernek kurmak', 'Dilekçe vermek'],
+            soru: 'İlk yerleşim yerlerinde kullanılan araçlar hangi malzemeden yapılırdı?',
+            secenekler: [
+              'Demir ve çelik',
+              'Taş, kemik ve kilden',
+              'Plastik ve cam',
+              'Bakır ve altın'
+            ],
             dogru: 1,
-            ipucu: 'Seçimlerde oy kullanmak, demokratik katılımın en temel biçimidir.'
+            ipucu: 'İlk dönemlerde taş, kemik ve kil en çok kullanılan malzemelerdi (Taş Devri).'
           },
           {
             saniye: 360,
-            soru: 'Sivil toplum kuruluşlarının (dernekler, vakıflar) toplumdaki rolü nedir?',
+            soru: 'Anadolu neden ilk yerleşim için uygun bir bölgeydi?',
             secenekler: [
-              'Yalnızca devlet adına çalışmak.',
-              'Toplumsal sorunlara çözüm üretmek ve dayanışmayı güçlendirmek.',
-              'Ticari kazanç sağlamak.',
-              'Siyasi partileri yönetmek.'
+              'Çöl iklimi olduğu için.',
+              'Verimli toprakları, ılıman iklimi ve su kaynaklarının bolluğu nedeniyle.',
+              'Dağlık olduğu için düşmandan korunma sağladığından.',
+              'Denizlerle çevrili olduğu için balıkçılık yapılabildiğinden.'
             ],
             dogru: 1,
-            ipucu: 'Sivil toplum kuruluşları, toplumun ihtiyaçlarını karşılamak için gönüllülük esasıyla çalışır.'
+            ipucu: 'Verimli toprak + su + ılıman iklim = tarıma ve yerleşime uygun ortam.'
           },
           {
             saniye: 420,
-            soru: 'Etkin vatandaş vergi ödemek, seçimlere katılmak gibi sorumluluklarını yerine getirmezse ne olur?',
+            soru: 'Göbeklitepe\'nin önemi nedir?',
             secenekler: [
-              'Devlet hizmetleri aksayabilir ve demokratik düzen zayıflar.',
-              'Hiçbir şey olmaz; bireyler isteğe göre karar verir.',
-              'Bu sorumluluklar zaten zorunlu değildir.',
-              'Diğer vatandaşların hakları genişler.'
-            ],
-            dogru: 0,
-            ipucu: 'Etkin vatandaşlık: hem hak kullanmak hem de sorumluluğu yerine getirmek gerektirir.'
-          },
-          {
-            saniye: 480,
-            soru: 'Bir öğrencinin okul temizliğine katılması hangi etkin vatandaşlık davranışına örnektir?',
-            secenekler: [
-              'Kişisel çıkar gözetmek',
-              'Toplumsal sorumluluk ve ortak alana sahip çıkmak',
-              'Yasal zorunluluk yerine getirmek',
-              'Oy kullanma hakkını kullanmak'
+              'Dünyanın en büyük şehridir.',
+              'Bilinen en eski tapınak kalıntılarını barındırır (yaklaşık 12.000 yıl öncesine ait).',
+              'İlk yazının burada bulunduğu düşünülmektedir.',
+              'Anadolu\'nun en yeni yerleşim yeridir.'
             ],
             dogru: 1,
-            ipucu: 'Etkin vatandaş yalnızca hak talep etmez; çevresine, okuluna ve ülkesine de katkı sağlar.'
+            ipucu: 'Göbeklitepe (Şanlıurfa), yaklaşık 12.000 yıllık tarihi ile dünyanın bilinen en eski tapınağıdır.'
           },
           {
             saniye: 'fin',
-            soru: 'Etkin vatandaşlık kavramını en iyi özetleyen hangisidir?',
+            soru: 'Anadolu\'nun ilk yerleşim yerleri konusunu doğru özetleyen hangisidir?',
             secenekler: [
-              'Yalnızca oy kullanan kişidir.',
-              'Haklarını bilen, sorumluluklarını yerine getiren, toplumsal sorunlara duyarlı ve demokratik yollarla çözüm arayan bireydir.',
-              'Devletin tüm kararlarına körce uyan kişidir.',
-              'Yalnızca kendi çıkarını düşünen kişidir.'
+              'Tarım ve hayvancılığın başlamasıyla yerleşik yaşama geçildi. Çatalhöyük ve Göbeklitepe gibi merkezler Anadolu\'nun en eski yerleşim alanlarıdır. İnsanlar taş, kemik ve kilden araçlar kullanarak geçimlerini sağlıyordu.',
+              'Anadolu\'da yerleşik yaşam yalnızca 500 yıl önce başlamıştır.',
+              'İlk yerleşimciler yalnızca avcılıkla geçinirdi.',
+              'Anadolu\'daki ilk yerleşim yerleri yalnızca kıyı bölgelerdeydi.'
             ],
-            dogru: 1,
-            ipucu: 'Etkin vatandaş: Hak + Sorumluluk + Duyarlılık + Demokratik tutum = 4 temel unsur.'
+            dogru: 0,
+            ipucu: 'Tarım → yerleşik yaşam. Çatalhöyük, Göbeklitepe = Anadolu\'nun en eski merkezleri.'
           }
         ]
       },
       {
-        slug: 'demokrasi', name: 'Demokrasi ve Cumhuriyet', hedef: 'Demokratik yönetim biçimini ve Cumhuriyetin temel niteliklerini öğrenme',
-        videoId: 'ZRex1rmWFwA',
+        slug: 'mezopotamya', name: 'Mezopotamya ve Anadolu\'nun Ortak Kültürel Mirasa Katkıları', hedef: 'Mezopotamya ve Anadolu medeniyetlerinin kültürel mirasını tanıma',
+        videoId: 'ijBw2KbL9NE',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Demokrasi yalnızca devlet yönetiminde değil, günlük hayatta da uygulanır. Buna örnek hangisidir?',
+            soru: 'Mezopotamya neresidir?',
             secenekler: [
-              'Ailecek nereye gidileceğine birlikte karar vermek.',
-              'Tek kişinin kararı ile yönetim yapmak.',
-              'Seçimlere katılmamak.',
-              'Başka ülkelerin yasalarına uymak.'
+              'Mısır\'daki Nil Nehri çevresidir.',
+              'Dicle ve Fırat nehirleri arasındaki bölgedir (bugünkü Irak civarı).',
+              'Anadolu\'nun batısıdır.',
+              'Yunanistan\'daki antik şehirlerin bulunduğu bölgedir.'
             ],
-            dogru: 0,
-            ipucu: '"Demokrasi bir yaşam biçimi — evde bile ailecek beraber karar alırız."'
+            dogru: 1,
+            ipucu: 'Mezopotamya = "iki nehir arası" (Dicle ve Fırat). Bugünkü Irak topraklarıdır.'
           },
           {
             saniye: 120,
-            soru: '"Milli egemenlik" ne anlama gelir?',
+            soru: 'Mezopotamya\'da hangi önemli buluş gerçekleştirilmiştir?',
             secenekler: [
-              'Yönetme gücünün halka ait olması.',
-              'Yalnızca askerlerin yönetme hakkına sahip olması.',
-              'Milletvekillerinin keyfi karar alması.',
-              'Dış güçlerin ülkeyi yönetmesi.'
+              'Matbaa',
+              'Yazı (çivi yazısı)',
+              'Pusula',
+              'Barut'
             ],
-            dogru: 0,
-            ipucu: '"Milli egemenlik: yönetme gücü halka ait; seçimlerle temsilcilerini halk seçer."'
+            dogru: 1,
+            ipucu: 'Sümerler, tarihteki ilk yazıyı (çivi yazısı) Mezopotamya\'da geliştirmiştir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Mezopotamya\'da yaşayan medeniyetlerden hangisi değildir?',
+            secenekler: [
+              'Sümerler',
+              'Babilliler',
+              'Asurlular',
+              'Lidyalılar'
+            ],
+            dogru: 3,
+            ipucu: 'Lidyalılar Anadolu\'da (bugünkü Manisa civarı) yaşamıştır, Mezopotamya\'da değil.'
           },
           {
             saniye: 240,
-            soru: 'Türkiye Cumhuriyeti hangi tarihte ilan edilmiştir?',
-            secenekler: ['23 Nisan 1920', '30 Ağustos 1922', '29 Ekim 1923', '3 Mart 1924'],
-            dogru: 2,
-            ipucu: 'Cumhuriyetimiz, 29 Ekim 1923\'te Atatürk önderliğinde ilan edilmiştir.'
+            soru: 'Parayı ilk kullanan medeniyet hangisidir ve nerede kurulmuştur?',
+            secenekler: [
+              'Sümerler — Mezopotamya\'da',
+              'Lidyalılar — Anadolu\'da',
+              'Mısırlılar — Afrika\'da',
+              'Romalılar — Avrupa\'da'
+            ],
+            dogru: 1,
+            ipucu: 'Lidyalılar parayı ilk kez kullanarak ticareti kolaylaştırmıştır (Anadolu, Sardes).'
           },
           {
             saniye: 300,
-            soru: 'Demokrasilerde yasama yetkisi kimde bulunur?',
-            secenekler: ['Cumhurbaşkanında', 'Orduda', 'Halk tarafından seçilen parlamentoda', 'Yargıda'],
-            dogru: 2,
-            ipucu: 'Kanun yapmak ve değiştirmek halkın seçtiği yasama organına aittir.'
+            soru: 'Hititler hangi alanda önemli bir ilke imza atmıştır?',
+            secenekler: [
+              'İlk çivi yazısını icat etmişlerdir.',
+              'Tarihteki bilinen ilk yazılı antlaşmayı (Kadeş) yapmışlardır.',
+              'İlk parayı basmışlardır.',
+              'İlk piramitleri inşa etmişlerdir.'
+            ],
+            dogru: 1,
+            ipucu: 'Kadeş Antlaşması (MÖ 1259), Hititler ile Mısırlılar arasında yapılan bilinen ilk yazılı barış antlaşmasıdır.'
           },
           {
             saniye: 360,
-            soru: 'Cumhuriyet yönetiminde devlet başkanı nasıl belirlenir?',
+            soru: 'Anadolu ve Mezopotamya medeniyetleri insanlığa hangi katkıları sağlamıştır?',
             secenekler: [
-              'Miras yoluyla (saltanat)',
-              'Askeri atama ile',
-              'Halk tarafından seçimle',
-              'Dini liderler tarafından'
+              'Hiçbir katkıları olmamıştır.',
+              'Yazı, hukuk, para, tarım, astronomi ve mimari gibi alanlarda temel buluşlar.',
+              'Sadece savaş teknolojileri geliştirmişlerdir.',
+              'Yalnızca sanat alanında katkı sağlamışlardır.'
             ],
-            dogru: 2,
-            ipucu: 'Cumhuriyetin temel özelliği: devlet başkanının halk tarafından seçilmesidir.'
+            dogru: 1,
+            ipucu: 'Yazı (Sümer), para (Lidya), hukuk (Babil - Hammurabi), antlaşma (Hitit) — köklü katkılar.'
           },
           {
             saniye: 420,
-            soru: 'Demokrasilerde azınlık haklarının korunması neden önemlidir?',
+            soru: 'Hammurabi Kanunları\'nın önemi nedir?',
             secenekler: [
-              'Çünkü azınlıklar her seçimi kazanır.',
-              'Çünkü çoğunluk yönetimi herkes için adil olmayabilir; herkesin temel hakları güvence altında olmalıdır.',
-              'Çünkü azınlık hakları anayasada yer almaz.',
-              'Azınlık haklarının demokrasiyle ilişkisi yoktur.'
+              'Tarihteki ilk yazılı kanun metnidir.',
+              'Bilinen en eski ve en kapsamlı yazılı hukuk kurallarından biridir (Babil).',
+              'Yalnızca ticaret kurallarını içerir.',
+              'Anadolu\'da yazılmıştır.'
             ],
             dogru: 1,
-            ipucu: 'Gerçek demokrasi: çoğunluğun yönetimi + azınlığın haklarının güvencesi.'
-          },
-          {
-            saniye: 480,
-            soru: 'Türkiye Cumhuriyeti\'nin "laik" olması ne anlama gelir?',
-            secenekler: [
-              'Dini kurumların devleti yönetmesi.',
-              'Din ve devlet işlerinin birbirinden ayrılması; herkesin inanç özgürlüğüne sahip olması.',
-              'Yalnızca bir dinin tanınması.',
-              'Din eğitiminin tamamen yasaklanması.'
-            ],
-            dogru: 1,
-            ipucu: 'Laiklik: devlet dini tarafsız yönetir; bireyler inanç özgürlüğüne sahiptir.'
+            ipucu: 'Babil Kralı Hammurabi, toplum düzenini sağlamak için kapsamlı yazılı yasalar oluşturmuştur.'
           },
           {
             saniye: 'fin',
-            soru: 'Demokrasi ve Cumhuriyet konusunu özetleyen hangisidir?',
+            soru: 'Mezopotamya ve Anadolu\'nun kültürel mirasını doğru özetleyen hangisidir?',
             secenekler: [
-              'Demokrasi yalnızca seçimlerden ibarettir; Cumhuriyet saltanatın devamıdır.',
-              'Demokrasi; egemenliğin halka ait olduğu yönetim biçimidir. Türkiye Cumhuriyeti 1923\'te kurulmuş, laik, demokratik bir cumhuriyettir.',
-              'Cumhuriyet yönetiminde halkın seçme hakkı yoktur.',
-              'Demokrasi ve Cumhuriyet aynı anlama gelir; fark yoktur.'
+              'Mezopotamya (Sümerler: yazı, Babilliler: hukuk) ve Anadolu (Hititler: ilk yazılı antlaşma, Lidyalılar: para) medeniyetleri; yazı, hukuk, ticaret ve diplomasi alanlarında insanlığa temel katkılar sağlamıştır.',
+              'Bu medeniyetler yalnızca tarımla uğraşmıştır.',
+              'Anadolu medeniyetleri Mezopotamya\'dan etkilenmemiştir.',
+              'Mezopotamya medeniyetleri yalnızca savaş teknolojisi geliştirmiştir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sümer = yazı, Babil = hukuk, Hitit = antlaşma, Lidya = para. Köklü miras.'
+          }
+        ]
+      },
+      {
+        slug: 'doga-beseri', name: 'Doğal ve Beşeri Çevre', hedef: 'Doğal ve beşeri çevreyi ayırt etme ve değişimlerini anlama',
+        videoId: 'gCdFpGQtNcA',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Aşağıdakilerden hangisi doğal çevrenin bir parçasıdır?',
+            secenekler: ['Nehirler', 'Fabrikalar', 'Yollar', 'Köprüler'],
+            dogru: 0,
+            ipucu: '"Fabrikalar, yollar, köprüler insan yapımı; nehirler ise doğal çevrenin parçası."'
+          },
+          {
+            saniye: 120,
+            soru: 'Heyelan (toprak kayması) hangi tür çevre değişimine örnektir?',
+            secenekler: [
+              'Doğal etkenlerle gerçekleşen doğal çevre değişimi.',
+              'İnsan eliyle gerçekleşen beşeri çevre değişimi.',
+              'Tarım alanlarının genişletilmesi.',
+              'Şehirleşme ve nüfus artışı.'
+            ],
+            dogru: 0,
+            ipucu: '"Karadeniz\'de yoğun yağışlar nedeniyle heyelan görülür; bu doğal bir değişimdir."'
+          },
+          {
+            saniye: 240,
+            soru: 'Aşağıdakilerden hangisi beşeri (insan yapımı) bir çevre unsurudur?',
+            secenekler: ['Dağlar', 'Nehirler', 'Köprüler', 'Ormanlar'],
+            dogru: 2,
+            ipucu: 'İnsanlar tarafından oluşturulan her şey beşeri çevrenin parçasıdır.'
+          },
+          {
+            saniye: 300,
+            soru: 'İnsanların doğal çevreyi dönüştürmesine ne denir?',
+            secenekler: ['Doğal afet', 'Coğrafi keşif', 'Beşeri müdahale', 'İklim değişikliği'],
+            dogru: 2,
+            ipucu: 'İnsanlar tarım, yapılaşma ve sanayiyle doğal çevreyi dönüştürür; buna beşeri müdahale denir.'
+          },
+          {
+            saniye: 360,
+            soru: 'Doğal çevrenin korunması için bireysel düzeyde neler yapılabilir?',
+            secenekler: [
+              'Yalnızca devlet önlem alabilir.',
+              'Hiçbir şey yapılamaz.',
+              'Geri dönüşüm, su tasarrufu ve ağaç dikme gibi davranışlar.',
+              'Sadece fabrikaları kapatmak yeterlidir.'
+            ],
+            dogru: 2,
+            ipucu: 'Her bireyin çevreye duyarlı davranışları doğanın korunmasına katkı sağlar.'
+          },
+          {
+            saniye: 420,
+            soru: 'Şehirleşme doğal çevreyi nasıl etkiler?',
+            secenekler: [
+              'Şehirleşmenin doğal çevreye etkisi yoktur.',
+              'Orman ve tarım alanları azalır, hava-su kirliliği artar.',
+              'Şehirleşme doğayı her zaman olumlu etkiler.',
+              'Yalnızca deniz canlılarını olumsuz etkiler.'
             ],
             dogru: 1,
-            ipucu: 'Demokrasi = halk egemenliği. Cumhuriyet = halkın seçtiği yönetim. TC: 29 Ekim 1923.'
+            ipucu: 'Şehirleşme: beton artışı → yeşil alan kaybı, sanayi → hava ve su kirliliği.'
+          },
+          {
+            saniye: 480,
+            soru: 'Aşağıdakilerden hangisi doğal bir çevre değişimine örnek değildir?',
+            secenekler: ['Deprem', 'Sel', 'Fabrika kurma', 'Yanardağ patlaması'],
+            dogru: 2,
+            ipucu: 'Fabrika kurmak insan eliyle gerçekleşir; deprem, sel ve yanardağ doğal süreçlerdir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Doğal ve beşeri çevre konusunu en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Doğal çevre insan yapısı unsurları da kapsar.',
+              'Doğal çevre (dağ, nehir, orman) ile beşeri çevre (yol, köprü, fabrika) birbirini etkiler; insan müdahalesi doğal çevreyi dönüştürür.',
+              'Beşeri çevre yalnızca doğal değişimlerle oluşur.',
+              'İnsan faaliyetlerinin çevreye hiçbir olumsuz etkisi yoktur.'
+            ],
+            dogru: 1,
+            ipucu: 'Doğal = Tanrı\'nın yarattığı. Beşeri = insanın yaptığı. İkisi sürekli etkileşim halindedir.'
           }
         ]
       },
@@ -3957,206 +3972,191 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'ilk-yerlesimler', name: 'Anadolu\'nun İlk Yerleşim Yerlerinde Yaşam', hedef: 'Anadolu\'daki ilk yerleşim yerlerini ve yaşam biçimlerini tanıma',
-        videoId: 'b3xT-xnCXUE',
+        slug: 'etkin-vatandaslik', name: 'Etkin Vatandaşlık', hedef: 'Etkin vatandaşın özelliklerini ve demokratik tutumlarını öğrenme',
+        videoId: 'ot516YDjf8o',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'İnsanlar neden göçebe yaşamdan yerleşik yaşama geçmiştir?',
+            soru: 'Etkin vatandaşın temel özelliği nedir?',
             secenekler: [
-              'Savaşlardan kaçmak için.',
-              'Tarım yapmayı öğrenmeleri ve hayvanları evcilleştirmeleriyle birlikte.',
-              'Deniz seviyesinin yükselmesi nedeniyle.',
-              'Devletin emriyle.'
+              'Haklarını bilen, sorumluluklarını yerine getiren ve toplumsal sorunlara duyarlı olan bireydir.',
+              'Yalnızca kendi çıkarlarını düşünen bireydir.',
+              'Sorunlar karşısında sessiz kalan bireydir.',
+              'Yalnızca oy kullanan bireydir.'
             ],
-            dogru: 1,
-            ipucu: 'Tarım ve hayvancılığın başlaması insanları bir yere bağlamış, yerleşik yaşam başlamıştır.'
+            dogru: 0,
+            ipucu: '"Etkin vatandaş; haklar + sorumluluklar + duyarlılık üçgeninde yaşar; pasif değildir."'
           },
           {
             saniye: 120,
-            soru: 'Anadolu\'daki en eski yerleşim yerlerinden biri hangisidir?',
+            soru: 'Etkin vatandaş haksızlıkla karşılaştığında nasıl davranır?',
             secenekler: [
-              'İstanbul',
-              'Çatalhöyük',
-              'Ankara',
-              'İzmir'
-            ],
-            dogru: 1,
-            ipucu: 'Çatalhöyük (Konya), dünyada bilinen en eski yerleşim yerlerinden biridir.'
-          },
-          {
-            saniye: 180,
-            soru: 'Çatalhöyük\'te evlerin özelliği neydi?',
-            secenekler: [
-              'Evlerin kapısı yoktu; çatıdan girilirdi.',
-              'Evler taştan çok katlı yapılırdı.',
-              'Her evin büyük bir bahçesi vardı.',
-              'Evler birbirinden çok uzaktı.'
+              'Şiddete başvurmadan yasal ve demokratik yolları kullanır.',
+              'Her durumda sessiz kalır.',
+              'Şiddet kullanarak hakkını arar.',
+              'Durumu görmezden gelir.'
             ],
             dogru: 0,
-            ipucu: 'Çatalhöyük\'te evler bitişikti ve çatıdaki bir açıklıktan merdivene girilirdi.'
+            ipucu: '"Haksızlık karşısında sessiz kalmaz — ama şiddete de başvurmaz; yasal yolları kullanır."'
           },
           {
             saniye: 240,
-            soru: 'İlk yerleşim yerlerinde insanlar geçimlerini nasıl sağlıyordu?',
+            soru: 'Etkin bir vatandaş aşağıdakilerden hangisini yapar?',
             secenekler: [
-              'Fabrikada çalışarak.',
-              'Tarım, hayvancılık ve el sanatlarıyla.',
-              'Madencilikle.',
-              'Yalnızca balıkçılıkla.'
+              'Toplumsal sorunlarla ilgilenmez.',
+              'Sadece kendi çıkarını düşünür.',
+              'Toplumsal sorunlara duyarlı olur ve çözüm üretmeye çalışır.',
+              'Hiçbir zaman oy kullanmaz.'
             ],
-            dogru: 1,
-            ipucu: 'Tarım (buğday, arpa), hayvancılık (koyun, keçi) ve basit el sanatları temel geçim yoluydu.'
+            dogru: 2,
+            ipucu: 'Etkin vatandaş, topluma karşı sorumluluk duyar ve haklarını bilir.'
           },
           {
             saniye: 300,
-            soru: 'İlk yerleşim yerlerinde kullanılan araçlar hangi malzemeden yapılırdı?',
-            secenekler: [
-              'Demir ve çelik',
-              'Taş, kemik ve kilden',
-              'Plastik ve cam',
-              'Bakır ve altın'
-            ],
+            soru: 'Demokratik bir toplumda vatandaşların en temel siyasi katılım hakkı nedir?',
+            secenekler: ['Gösteri düzenlemek', 'Oy kullanmak', 'Dernek kurmak', 'Dilekçe vermek'],
             dogru: 1,
-            ipucu: 'İlk dönemlerde taş, kemik ve kil en çok kullanılan malzemelerdi (Taş Devri).'
+            ipucu: 'Seçimlerde oy kullanmak, demokratik katılımın en temel biçimidir.'
           },
           {
             saniye: 360,
-            soru: 'Anadolu neden ilk yerleşim için uygun bir bölgeydi?',
+            soru: 'Sivil toplum kuruluşlarının (dernekler, vakıflar) toplumdaki rolü nedir?',
             secenekler: [
-              'Çöl iklimi olduğu için.',
-              'Verimli toprakları, ılıman iklimi ve su kaynaklarının bolluğu nedeniyle.',
-              'Dağlık olduğu için düşmandan korunma sağladığından.',
-              'Denizlerle çevrili olduğu için balıkçılık yapılabildiğinden.'
+              'Yalnızca devlet adına çalışmak.',
+              'Toplumsal sorunlara çözüm üretmek ve dayanışmayı güçlendirmek.',
+              'Ticari kazanç sağlamak.',
+              'Siyasi partileri yönetmek.'
             ],
             dogru: 1,
-            ipucu: 'Verimli toprak + su + ılıman iklim = tarıma ve yerleşime uygun ortam.'
+            ipucu: 'Sivil toplum kuruluşları, toplumun ihtiyaçlarını karşılamak için gönüllülük esasıyla çalışır.'
           },
           {
             saniye: 420,
-            soru: 'Göbeklitepe\'nin önemi nedir?',
+            soru: 'Etkin vatandaş vergi ödemek, seçimlere katılmak gibi sorumluluklarını yerine getirmezse ne olur?',
             secenekler: [
-              'Dünyanın en büyük şehridir.',
-              'Bilinen en eski tapınak kalıntılarını barındırır (yaklaşık 12.000 yıl öncesine ait).',
-              'İlk yazının burada bulunduğu düşünülmektedir.',
-              'Anadolu\'nun en yeni yerleşim yeridir.'
+              'Devlet hizmetleri aksayabilir ve demokratik düzen zayıflar.',
+              'Hiçbir şey olmaz; bireyler isteğe göre karar verir.',
+              'Bu sorumluluklar zaten zorunlu değildir.',
+              'Diğer vatandaşların hakları genişler.'
+            ],
+            dogru: 0,
+            ipucu: 'Etkin vatandaşlık: hem hak kullanmak hem de sorumluluğu yerine getirmek gerektirir.'
+          },
+          {
+            saniye: 480,
+            soru: 'Bir öğrencinin okul temizliğine katılması hangi etkin vatandaşlık davranışına örnektir?',
+            secenekler: [
+              'Kişisel çıkar gözetmek',
+              'Toplumsal sorumluluk ve ortak alana sahip çıkmak',
+              'Yasal zorunluluk yerine getirmek',
+              'Oy kullanma hakkını kullanmak'
             ],
             dogru: 1,
-            ipucu: 'Göbeklitepe (Şanlıurfa), yaklaşık 12.000 yıllık tarihi ile dünyanın bilinen en eski tapınağıdır.'
+            ipucu: 'Etkin vatandaş yalnızca hak talep etmez; çevresine, okuluna ve ülkesine de katkı sağlar.'
           },
           {
             saniye: 'fin',
-            soru: 'Anadolu\'nun ilk yerleşim yerleri konusunu doğru özetleyen hangisidir?',
+            soru: 'Etkin vatandaşlık kavramını en iyi özetleyen hangisidir?',
             secenekler: [
-              'Tarım ve hayvancılığın başlamasıyla yerleşik yaşama geçildi. Çatalhöyük ve Göbeklitepe gibi merkezler Anadolu\'nun en eski yerleşim alanlarıdır. İnsanlar taş, kemik ve kilden araçlar kullanarak geçimlerini sağlıyordu.',
-              'Anadolu\'da yerleşik yaşam yalnızca 500 yıl önce başlamıştır.',
-              'İlk yerleşimciler yalnızca avcılıkla geçinirdi.',
-              'Anadolu\'daki ilk yerleşim yerleri yalnızca kıyı bölgelerdeydi.'
+              'Yalnızca oy kullanan kişidir.',
+              'Haklarını bilen, sorumluluklarını yerine getiren, toplumsal sorunlara duyarlı ve demokratik yollarla çözüm arayan bireydir.',
+              'Devletin tüm kararlarına körce uyan kişidir.',
+              'Yalnızca kendi çıkarını düşünen kişidir.'
             ],
-            dogru: 0,
-            ipucu: 'Tarım → yerleşik yaşam. Çatalhöyük, Göbeklitepe = Anadolu\'nun en eski merkezleri.'
+            dogru: 1,
+            ipucu: 'Etkin vatandaş: Hak + Sorumluluk + Duyarlılık + Demokratik tutum = 4 temel unsur.'
           }
         ]
       },
       {
-        slug: 'mezopotamya', name: 'Mezopotamya ve Anadolu\'nun Ortak Kültürel Mirasa Katkıları', hedef: 'Mezopotamya ve Anadolu medeniyetlerinin kültürel mirasını tanıma',
-        videoId: 'ijBw2KbL9NE',
+        slug: 'demokrasi', name: 'Demokrasi ve Cumhuriyet', hedef: 'Demokratik yönetim biçimini ve Cumhuriyetin temel niteliklerini öğrenme',
+        videoId: 'ZRex1rmWFwA',
         checkpoints: [
           {
             saniye: 60,
-            soru: 'Mezopotamya neresidir?',
+            soru: 'Demokrasi yalnızca devlet yönetiminde değil, günlük hayatta da uygulanır. Buna örnek hangisidir?',
             secenekler: [
-              'Mısır\'daki Nil Nehri çevresidir.',
-              'Dicle ve Fırat nehirleri arasındaki bölgedir (bugünkü Irak civarı).',
-              'Anadolu\'nun batısıdır.',
-              'Yunanistan\'daki antik şehirlerin bulunduğu bölgedir.'
+              'Ailecek nereye gidileceğine birlikte karar vermek.',
+              'Tek kişinin kararı ile yönetim yapmak.',
+              'Seçimlere katılmamak.',
+              'Başka ülkelerin yasalarına uymak.'
             ],
-            dogru: 1,
-            ipucu: 'Mezopotamya = "iki nehir arası" (Dicle ve Fırat). Bugünkü Irak topraklarıdır.'
+            dogru: 0,
+            ipucu: '"Demokrasi bir yaşam biçimi — evde bile ailecek beraber karar alırız."'
           },
           {
             saniye: 120,
-            soru: 'Mezopotamya\'da hangi önemli buluş gerçekleştirilmiştir?',
+            soru: '"Milli egemenlik" ne anlama gelir?',
             secenekler: [
-              'Matbaa',
-              'Yazı (çivi yazısı)',
-              'Pusula',
-              'Barut'
+              'Yönetme gücünün halka ait olması.',
+              'Yalnızca askerlerin yönetme hakkına sahip olması.',
+              'Milletvekillerinin keyfi karar alması.',
+              'Dış güçlerin ülkeyi yönetmesi.'
             ],
-            dogru: 1,
-            ipucu: 'Sümerler, tarihteki ilk yazıyı (çivi yazısı) Mezopotamya\'da geliştirmiştir.'
-          },
-          {
-            saniye: 180,
-            soru: 'Mezopotamya\'da yaşayan medeniyetlerden hangisi değildir?',
-            secenekler: [
-              'Sümerler',
-              'Babilliler',
-              'Asurlular',
-              'Lidyalılar'
-            ],
-            dogru: 3,
-            ipucu: 'Lidyalılar Anadolu\'da (bugünkü Manisa civarı) yaşamıştır, Mezopotamya\'da değil.'
+            dogru: 0,
+            ipucu: '"Milli egemenlik: yönetme gücü halka ait; seçimlerle temsilcilerini halk seçer."'
           },
           {
             saniye: 240,
-            soru: 'Parayı ilk kullanan medeniyet hangisidir ve nerede kurulmuştur?',
-            secenekler: [
-              'Sümerler — Mezopotamya\'da',
-              'Lidyalılar — Anadolu\'da',
-              'Mısırlılar — Afrika\'da',
-              'Romalılar — Avrupa\'da'
-            ],
-            dogru: 1,
-            ipucu: 'Lidyalılar parayı ilk kez kullanarak ticareti kolaylaştırmıştır (Anadolu, Sardes).'
+            soru: 'Türkiye Cumhuriyeti hangi tarihte ilan edilmiştir?',
+            secenekler: ['23 Nisan 1920', '30 Ağustos 1922', '29 Ekim 1923', '3 Mart 1924'],
+            dogru: 2,
+            ipucu: 'Cumhuriyetimiz, 29 Ekim 1923\'te Atatürk önderliğinde ilan edilmiştir.'
           },
           {
             saniye: 300,
-            soru: 'Hititler hangi alanda önemli bir ilke imza atmıştır?',
-            secenekler: [
-              'İlk çivi yazısını icat etmişlerdir.',
-              'Tarihteki bilinen ilk yazılı antlaşmayı (Kadeş) yapmışlardır.',
-              'İlk parayı basmışlardır.',
-              'İlk piramitleri inşa etmişlerdir.'
-            ],
-            dogru: 1,
-            ipucu: 'Kadeş Antlaşması (MÖ 1259), Hititler ile Mısırlılar arasında yapılan bilinen ilk yazılı barış antlaşmasıdır.'
+            soru: 'Demokrasilerde yasama yetkisi kimde bulunur?',
+            secenekler: ['Cumhurbaşkanında', 'Orduda', 'Halk tarafından seçilen parlamentoda', 'Yargıda'],
+            dogru: 2,
+            ipucu: 'Kanun yapmak ve değiştirmek halkın seçtiği yasama organına aittir.'
           },
           {
             saniye: 360,
-            soru: 'Anadolu ve Mezopotamya medeniyetleri insanlığa hangi katkıları sağlamıştır?',
+            soru: 'Cumhuriyet yönetiminde devlet başkanı nasıl belirlenir?',
             secenekler: [
-              'Hiçbir katkıları olmamıştır.',
-              'Yazı, hukuk, para, tarım, astronomi ve mimari gibi alanlarda temel buluşlar.',
-              'Sadece savaş teknolojileri geliştirmişlerdir.',
-              'Yalnızca sanat alanında katkı sağlamışlardır.'
+              'Miras yoluyla (saltanat)',
+              'Askeri atama ile',
+              'Halk tarafından seçimle',
+              'Dini liderler tarafından'
             ],
-            dogru: 1,
-            ipucu: 'Yazı (Sümer), para (Lidya), hukuk (Babil - Hammurabi), antlaşma (Hitit) — köklü katkılar.'
+            dogru: 2,
+            ipucu: 'Cumhuriyetin temel özelliği: devlet başkanının halk tarafından seçilmesidir.'
           },
           {
             saniye: 420,
-            soru: 'Hammurabi Kanunları\'nın önemi nedir?',
+            soru: 'Demokrasilerde azınlık haklarının korunması neden önemlidir?',
             secenekler: [
-              'Tarihteki ilk yazılı kanun metnidir.',
-              'Bilinen en eski ve en kapsamlı yazılı hukuk kurallarından biridir (Babil).',
-              'Yalnızca ticaret kurallarını içerir.',
-              'Anadolu\'da yazılmıştır.'
+              'Çünkü azınlıklar her seçimi kazanır.',
+              'Çünkü çoğunluk yönetimi herkes için adil olmayabilir; herkesin temel hakları güvence altında olmalıdır.',
+              'Çünkü azınlık hakları anayasada yer almaz.',
+              'Azınlık haklarının demokrasiyle ilişkisi yoktur.'
             ],
             dogru: 1,
-            ipucu: 'Babil Kralı Hammurabi, toplum düzenini sağlamak için kapsamlı yazılı yasalar oluşturmuştur.'
+            ipucu: 'Gerçek demokrasi: çoğunluğun yönetimi + azınlığın haklarının güvencesi.'
+          },
+          {
+            saniye: 480,
+            soru: 'Türkiye Cumhuriyeti\'nin "laik" olması ne anlama gelir?',
+            secenekler: [
+              'Dini kurumların devleti yönetmesi.',
+              'Din ve devlet işlerinin birbirinden ayrılması; herkesin inanç özgürlüğüne sahip olması.',
+              'Yalnızca bir dinin tanınması.',
+              'Din eğitiminin tamamen yasaklanması.'
+            ],
+            dogru: 1,
+            ipucu: 'Laiklik: devlet dini tarafsız yönetir; bireyler inanç özgürlüğüne sahiptir.'
           },
           {
             saniye: 'fin',
-            soru: 'Mezopotamya ve Anadolu\'nun kültürel mirasını doğru özetleyen hangisidir?',
+            soru: 'Demokrasi ve Cumhuriyet konusunu özetleyen hangisidir?',
             secenekler: [
-              'Mezopotamya (Sümerler: yazı, Babilliler: hukuk) ve Anadolu (Hititler: ilk yazılı antlaşma, Lidyalılar: para) medeniyetleri; yazı, hukuk, ticaret ve diplomasi alanlarında insanlığa temel katkılar sağlamıştır.',
-              'Bu medeniyetler yalnızca tarımla uğraşmıştır.',
-              'Anadolu medeniyetleri Mezopotamya\'dan etkilenmemiştir.',
-              'Mezopotamya medeniyetleri yalnızca savaş teknolojisi geliştirmiştir.'
+              'Demokrasi yalnızca seçimlerden ibarettir; Cumhuriyet saltanatın devamıdır.',
+              'Demokrasi; egemenliğin halka ait olduğu yönetim biçimidir. Türkiye Cumhuriyeti 1923\'te kurulmuş, laik, demokratik bir cumhuriyettir.',
+              'Cumhuriyet yönetiminde halkın seçme hakkı yoktur.',
+              'Demokrasi ve Cumhuriyet aynı anlama gelir; fark yoktur.'
             ],
-            dogru: 0,
-            ipucu: 'Sümer = yazı, Babil = hukuk, Hitit = antlaşma, Lidya = para. Köklü miras.'
+            dogru: 1,
+            ipucu: 'Demokrasi = halk egemenliği. Cumhuriyet = halkın seçtiği yönetim. TC: 29 Ekim 1923.'
           }
         ]
       }
