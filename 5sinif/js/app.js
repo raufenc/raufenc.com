@@ -20,6 +20,13 @@ const routes = {
   'tekrar': renderTekrar,
   'basarilar': renderBasarilar,
   'veli': renderVeliPanel,
+  // --- Günlük öğrenme akışı ---
+  'gunluk':         renderGunluk,
+  'gunluk-oyrenme': renderGunlukOyrenme,
+  'gunluk-mola':    renderGunlukMola,
+  'gunluk-ozet':    renderGunlukOzet,
+  // --- Veli detay ---
+  'veli-ders':      renderVeliDersDetay,
 };
 
 function navigate(hash) { window.location.hash = hash; }
@@ -43,6 +50,11 @@ function cleanup() {
   if (_checkpointTimer) { clearInterval(_checkpointTimer); _checkpointTimer = null; }
   _ytPlayer = null;
   _firedCheckpoints = new Set();
+  // Veli panelinden ayrılınca gerçek zamanlı dinleyiciyi durdur
+  if (window._veliPanelActive) {
+    window._veliPanelActive = false;
+    if (window.FirebaseService?.stopVeliListener) FirebaseService.stopVeliListener();
+  }
 }
 
 window.addEventListener('hashchange', router);
@@ -333,15 +345,32 @@ function renderAnasayfa() {
           <div class="stat-item"><span class="stat-val">🎖️ ${Store.getBadges().length}</span><span class="stat-label">Rozet</span></div>
         </div>
       </div>
-      ${reviews.length > 0 ? `
-        <div class="quest-card"><div class="quest-badge">📋 Bugünkü Görev</div>
-          <h3>${reviews.length} tekrar kartın bekliyor</h3>
-          <button class="btn btn-primary" onclick="navigate('#/tekrar')">Tekrarlara Git →</button></div>
-      ` : `
-        <div class="quest-card"><div class="quest-badge">🎯 Bugünkü Görev</div>
-          <h3>Bir ders seç ve öğrenmeye başla!</h3>
-          <button class="btn btn-primary" onclick="navigate('#/dersler')">Derslere Git →</button></div>
-      `}
+      ${(() => {
+        const session = Store.getDailySession();
+        const allDone = session && session.completed.every(Boolean);
+        const inProgress = session && !allDone && (session.currentIndex > 0 || session.completed.some(Boolean));
+        if (allDone) {
+          return `<div class="quest-card quest-card-done">
+            <div class="quest-badge">🌟 Bugün Tamamlandı</div>
+            <h3>Harika çalıştın! Yarın devam ederiz.</h3>
+            <button class="btn btn-outline" onclick="navigate('#/dersler')">Serbest Çalışma →</button>
+          </div>`;
+        } else if (inProgress) {
+          const doneCount = session.completed.filter(Boolean).length;
+          return `<div class="quest-card quest-card-resume">
+            <div class="quest-badge">▶ Devam Et</div>
+            <h3>Günlük öğrenmen yarım kaldı (${doneCount}/3)</h3>
+            <button class="btn btn-primary gunluk-cta-btn" onclick="navigate('#/gunluk')">Kaldığın Yerden Devam Et →</button>
+          </div>`;
+        } else {
+          return `<div class="quest-card quest-card-new">
+            <div class="quest-badge">🎯 Günlük Öğrenme</div>
+            <h3>Bugün 3 dersten yeni konular seni bekliyor!</h3>
+            <button class="btn btn-primary gunluk-cta-btn" onclick="navigate('#/gunluk')">Başla 🚀</button>
+            ${reviews.length > 0 ? `<button class="btn btn-outline" onclick="navigate('#/tekrar')">📋 ${reviews.length} tekrar kartın var</button>` : ''}
+          </div>`;
+        }
+      })()}
       <h3 class="section-title">Derslerin</h3>
       <div class="ders-strip">
         ${DERSLER.map(d => {
@@ -649,6 +678,7 @@ function fireFinCheckpoint() {
 function triggerCheckpoint(idx) {
   const state = window._quizState;
   state.quizActive = true;
+  window._answerStartTime = Date.now(); // cevap süresi ölçümü
 
   // Pause video
   if (_ytPlayer && _ytPlayer.pauseVideo) _ytPlayer.pauseVideo();
@@ -670,6 +700,22 @@ window.handleAnswer = function(cpIdx, ansIdx) {
   const state = window._quizState;
   const cp = state.checkpoints[cpIdx];
   const correct = ansIdx === cp.dogru;
+  const ipucuKullanildi = !document.getElementById('hintBox')?.classList.contains('hidden');
+  if (ipucuKullanildi) window._hintsUsedThisSession = (window._hintsUsedThisSession || 0) + 1;
+
+  // Detaylı cevap kaydı (360° takip)
+  const sure = window._answerStartTime ? (Date.now() - window._answerStartTime) / 1000 : null;
+  window._answerStartTime = null;
+  Store.recordAnswer(state.dersSlug, state.uniteSlug, {
+    saniye: cp.saniye,
+    soru: cp.soru,
+    secilen: ansIdx,
+    dogru: cp.dogru,
+    dogruMu: correct,
+    ipucuKullandiMi: ipucuKullanildi,
+    sure,
+    tarih: new Date().toISOString(),
+  });
 
   if (correct) {
     state.score++;
@@ -839,46 +885,618 @@ function renderBasarilar() {
   `;
 }
 
-// ========== VELİ PANELİ ==========
-function renderVeliPanel() {
+// ========== GÜNLÜK ÖĞRENME ==========
+
+const MOLA_MESAJLARI = [
+  'Harika gidiyorsun! Her öğrenilen şey bir adım ileri! 🚀',
+  'Beynin şu an yeni bilgiler kaydediyor, inan bana! 🧠',
+  'Bir dersi bitirdin! Sıradakine hazır mısın? 💪',
+  'Serinle bu gün daha da uzuyor! Devam et! 🔥',
+  'Öğrenmek süper güç — ve sen onu kullanıyorsun! ⚡',
+];
+
+function gunlukStepperHTML(session) {
+  return `<div class="gunluk-mini-stepper">
+    ${session.subjectsToday.map((slug, i) => {
+      const ders = getDers(slug);
+      const done = session.completed[i];
+      const active = i === session.currentIndex && !done;
+      return `<div class="gms-step ${done ? 'gms-done' : active ? 'gms-active' : 'gms-pending'}">
+        <div class="gms-circle">${done ? '✓' : ders ? ders.icon : '?'}</div>
+        <span class="gms-label">${i + 1}/${session.subjectsToday.length}</span>
+      </div>`;
+    }).join('<div class="gms-line"></div>')}
+  </div>`;
+}
+
+function renderGunluk() {
+  if (requireLogin()) return;
+
+  let session = Store.getDailySession();
+  const allDone = session && session.completed.every(Boolean);
+
+  if (allDone) {
+    // Bugün tamamlandı
+    const report = Store.getTodayReport();
+    app.innerHTML = `
+      ${topNavHTML(true, 'Günlük Öğrenme')}
+      <div class="page-center">
+        <div class="gunluk-done-card">
+          <div class="confetti-container" id="confetti"></div>
+          <div class="gunluk-done-icon">🌟</div>
+          <h2>Bugün harika çalıştın!</h2>
+          <p>Yarın yeni dersler seni bekliyor.</p>
+          ${report ? `<div class="gunluk-ozet-stats">
+            <div class="gos-item"><span class="gos-val">${report.completedCount}/3</span><span class="gos-label">Ders</span></div>
+            <div class="gos-item"><span class="gos-val">${report.correctAnswers}/${report.totalQuestions}</span><span class="gos-label">Doğru</span></div>
+            <div class="gos-item"><span class="gos-val">+${report.xpEarned}</span><span class="gos-label">XP</span></div>
+          </div>` : ''}
+          <div class="gunluk-done-actions">
+            <button class="btn btn-primary btn-lg" onclick="navigate('#/anasayfa')">Ana Sayfaya Dön</button>
+            <button class="btn btn-outline" onclick="navigate('#/dersler')">Serbest Çalışma →</button>
+          </div>
+        </div>
+      </div>`;
+    setTimeout(createConfetti, 200);
+    return;
+  }
+
+  if (!session) session = Store.initDailySession();
+
+  const isResume = session.currentIndex > 0 || session.completed.some(Boolean);
+
+  app.innerHTML = `
+    ${topNavHTML(true, 'Günlük Öğrenme')}
+    <div class="page-container">
+      <div class="gunluk-header">
+        <div class="gunluk-header-icon">🎯</div>
+        <div>
+          <h2>${isResume ? 'Kaldığın Yerden Devam Et' : 'Bugünkü Öğrenme Planın'}</h2>
+          <p>Her gün 3 farklı dersten ilerle</p>
+        </div>
+      </div>
+
+      <div class="gunluk-stepper">
+        ${session.subjectsToday.map((slug, i) => {
+          const ders = getDers(slug);
+          const unite = getUnite(slug, session.unitesToday[i]);
+          const done = session.completed[i];
+          const active = i === session.currentIndex;
+          return `<div class="gs-item ${done ? 'gs-done' : active ? 'gs-active' : 'gs-pending'}">
+            <div class="gs-circle" style="${ders ? `--step-color:${ders.color}` : ''}">${done ? '✓' : ders ? ders.icon : '?'}</div>
+            <div class="gs-info">
+              <span class="gs-ders">${ders ? ders.name : slug}</span>
+              <span class="gs-unite">${unite ? unite.name : ''}</span>
+            </div>
+            ${done ? '<span class="gs-badge">Tamamlandı ✓</span>' : active ? '<span class="gs-badge gs-badge-active">Sırada →</span>' : ''}
+          </div>`;
+        }).join('')}
+      </div>
+
+      <button class="btn btn-primary btn-lg btn-full gunluk-cta"
+        onclick="navigate('#/gunluk-oyrenme/${session.currentIndex}')">
+        ${isResume ? `Devam Et (${session.completed.filter(Boolean).length}/3) →` : 'Başlayalım! 🚀'}
+      </button>
+      <button class="btn btn-outline btn-full" onclick="navigate('#/anasayfa')">Şimdi Değil</button>
+    </div>`;
+}
+
+function renderGunlukOyrenme(params) {
+  if (requireLogin()) return;
+
+  const idx = parseInt(params[0] || '0', 10);
+  const session = Store.getDailySession();
+  if (!session) { navigate('#/gunluk'); return; }
+  if (session.completed[idx]) { navigate('#/gunluk'); return; }
+
+  const dersSlug  = session.subjectsToday[idx];
+  const uniteSlug = session.unitesToday[idx];
+  const ders  = getDers(dersSlug);
+  const unite = getUnite(dersSlug, uniteSlug);
+  if (!ders || !unite) { navigate('#/gunluk'); return; }
+
+  const checkpoints = unite.checkpoints || [];
+  window._gunlukIdx = idx;
+  window._answerStartTime = null;
+  window._hintsUsedThisSession = 0;
+
+  app.innerHTML = `
+    ${topNavHTML(false, '')}
+    <div class="player-page">
+      ${gunlukStepperHTML(session)}
+      <div class="player-layout">
+        <div class="player-video">
+          <div class="video-wrapper"><div id="ytPlayerContainer"></div></div>
+          <div class="player-controls">
+            <span class="source-badge">📺 ${ders.playlists[0].kanal}</span>
+            <span class="player-info">${unite.name}</span>
+          </div>
+        </div>
+        <div class="player-sidebar">
+          <div class="hedef-card" style="border-color:${ders.color}">
+            <h4>${ders.icon} ${ders.name}</h4>
+            <p>${unite.hedef}</p>
+          </div>
+          <div class="checkpoint-info">
+            <p>📝 <strong>${checkpoints.length}</strong> checkpoint sorusu</p>
+            <p class="checkpoint-sub">Video oynarken otomatik açılır</p>
+            <div id="checkpointStatus" class="checkpoint-status">
+              ${checkpoints.map((c, i) => `<div class="cp-dot" id="cp-${i}" title="${c.saniye}. saniyede">○</div>`).join('')}
+            </div>
+          </div>
+          <div id="quizScore" class="quiz-score hidden">
+            <span id="quizScoreText"></span>
+          </div>
+          <button class="btn btn-primary btn-full" id="btnComplete" disabled onclick="completeGunlukLesson(${idx})">
+            Dersi Tamamla →
+          </button>
+          <p class="complete-hint" id="completeHint">Soruları yanıtladıktan sonra aktif olur</p>
+          <button class="btn btn-outline btn-full gunluk-exit-btn" onclick="gunlukEarlyExit()">
+            Bugünlük Tamam
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="quizOverlay" class="quiz-overlay hidden">
+      <div class="quiz-modal">
+        <div class="quiz-header"><h3>Bir bakalım, anladın mı? 🤔</h3><span id="quizProgress"></span></div>
+        <div id="quizContent"></div>
+      </div>
+    </div>`;
+
+  window._quizState = {
+    dersSlug, uniteSlug, checkpoints,
+    videoId: unite.videoId || null,
+    currentCheckpoint: 0, score: 0, totalAnswered: 0,
+    quizActive: false,
+    isGunluk: true,
+    gunlukIdx: idx,
+  };
+
+  initYouTubePlayer(ders.playlists[0].id);
+}
+
+window.completeGunlukLesson = function(idx) {
+  const session = Store.getDailySession();
+  if (!session) return;
+
+  const dersSlug  = session.subjectsToday[idx];
+  const uniteSlug = session.unitesToday[idx];
+  const ders  = getDers(dersSlug);
+  const unite = getUnite(dersSlug, uniteSlug);
+  const state = window._quizState || {};
+
+  // İlerlemeyi kaydet
+  if (!Store.getLessonProgress(dersSlug, uniteSlug).completed) {
+    Store.setLessonProgress(dersSlug, uniteSlug, { completed: true });
+    Store.addXP(50);
+    const dueDate = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+    Store.addReview({ dersSlug, uniteSlug, dersName: ders.name, uniteName: unite.name, dueDate, intervalIdx: 0 });
+  }
+  Store.recordActivity();
+  updateNavXP();
+
+  // Oturumu güncelle
+  const newCompleted = [...session.completed];
+  newCompleted[idx] = true;
+  const nextIdx = newCompleted.findIndex(c => !c);
+  const totalCorrect  = (session.correctAnswers || 0) + (state.score || 0);
+  const totalQuestions = (session.totalQuestions || 0) + (state.checkpoints?.length || 0);
+  const xpEarned = (session.xpEarned || 0) + 50 + (state.score || 0) * 10;
+
+  Store.updateDailySession({
+    completed: newCompleted,
+    currentIndex: nextIdx >= 0 ? nextIdx : idx,
+    correctAnswers: totalCorrect,
+    totalQuestions,
+    xpEarned,
+  });
+
+  // Hepsi tamam mı?
+  if (newCompleted.every(Boolean)) {
+    Store.saveDailySummary({
+      date: new Date().toISOString().split('T')[0],
+      subjects: session.subjectsToday,
+      units: session.unitesToday,
+      completedCount: 3,
+      totalQuestions,
+      correctAnswers: totalCorrect,
+      wrongAnswers: totalQuestions - totalCorrect,
+      hintsUsed: window._hintsUsedThisSession || 0,
+      totalTime: Date.now() - session.startedAt,
+      xpEarned,
+      earlyExit: false,
+    });
+    navigate('#/gunluk-ozet');
+  } else {
+    navigate(`#/gunluk-mola/${idx}`);
+  }
+};
+
+window.gunlukEarlyExit = function() {
+  if (!confirm('Bugünlük çalışmayı bitirmek istiyor musun? İlerleme kaydedilecek.')) return;
+  const session = Store.getDailySession();
+  if (session) {
+    const state = window._quizState || {};
+    const completedCount = session.completed.filter(Boolean).length;
+    Store.saveDailySummary({
+      date: new Date().toISOString().split('T')[0],
+      subjects: session.subjectsToday,
+      units: session.unitesToday,
+      completedCount,
+      totalQuestions: session.totalQuestions || 0,
+      correctAnswers: session.correctAnswers || 0,
+      wrongAnswers: (session.totalQuestions || 0) - (session.correctAnswers || 0),
+      hintsUsed: window._hintsUsedThisSession || 0,
+      totalTime: Date.now() - session.startedAt,
+      xpEarned: session.xpEarned || 0,
+      earlyExit: true,
+    });
+    Store.updateDailySession({ earlyExit: true });
+  }
+  navigate('#/gunluk-ozet');
+};
+
+function renderGunlukMola(params) {
+  if (requireLogin()) return;
+  const idx = parseInt(params[0] || '0', 10);
+  const session = Store.getDailySession();
+  if (!session) { navigate('#/gunluk'); return; }
+
+  const doneCount = session.completed.filter(Boolean).length;
+  const nextIdx = session.completed.findIndex(c => !c);
+  const nextDersSlug = session.subjectsToday[nextIdx];
+  const nextDers = getDers(nextDersSlug);
+  const nextUnite = getUnite(nextDersSlug, session.unitesToday[nextIdx]);
+  const msg = MOLA_MESAJLARI[Math.floor(Math.random() * MOLA_MESAJLARI.length)];
+
+  app.innerHTML = `
+    ${topNavHTML(false, 'Mola')}
+    <div class="page-center">
+      <div class="gunluk-mola-card">
+        <div class="confetti-container" id="confetti"></div>
+        ${gunlukStepperHTML(session)}
+        <div class="mola-check">✓</div>
+        <h2>Harika! ${doneCount}/3 tamamlandı! 🎉</h2>
+        <p class="mola-msg">${msg}</p>
+        ${nextDers ? `<div class="mola-next-card" style="border-color:${nextDers.color}">
+          <span class="mola-next-icon">${nextDers.icon}</span>
+          <div>
+            <span class="mola-next-label">Sıradaki</span>
+            <strong>${nextDers.name}</strong>
+            <span class="mola-next-unite">${nextUnite ? nextUnite.name : ''}</span>
+          </div>
+        </div>` : ''}
+        <button class="btn btn-primary btn-lg btn-full" onclick="navigate('#/gunluk-oyrenme/${nextIdx}')">
+          Devam Et →
+        </button>
+        <button class="btn btn-outline" onclick="gunlukEarlyExit()">Bugünlük Tamam</button>
+      </div>
+    </div>`;
+  setTimeout(createConfetti, 200);
+}
+
+function renderGunlukOzet() {
+  if (requireLogin()) return;
+
+  const report = Store.getTodayReport();
+  const session = Store.getDailySession();
   const profile = Store.getProfile();
-  const xp = Store.getXP();
-  const streak = Store.getStreak();
-  const badges = Store.getBadges();
+  const streak  = Store.getStreak();
+  const badges  = Store.getBadges();
+
+  const correct    = report?.correctAnswers || 0;
+  const total      = report?.totalQuestions || 0;
+  const pct        = total > 0 ? Math.round((correct / total) * 100) : 0;
+  const completed  = report?.completedCount || 0;
+  const xpEarned   = report?.xpEarned || 0;
+  const earlyExit  = report?.earlyExit || false;
+  const durationMs = report?.totalTime || 0;
+  const durationMin = Math.max(1, Math.round(durationMs / 60000));
+  const stars = pct >= 85 ? 3 : pct >= 60 ? 2 : 1;
+
+  // Son kazanılan rozetleri bul (son 10 dakikada)
+  const recentBadges = badges.filter(b => {
+    const ago = Date.now() - new Date(b.earnedAt).getTime();
+    return ago < 600000;
+  });
+
+  const weakSubjects = Store.getWeakSubjects(0.5).slice(0, 2);
+
+  app.innerHTML = `
+    ${topNavHTML(false, 'Günlük Özet')}
+    <div class="page-center">
+      <div class="gunluk-ozet-card">
+        <div class="confetti-container" id="confetti"></div>
+        <div class="ozet-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
+        <h2>${earlyExit ? 'Bugün burada bıraktın!' : 'Günlük öğrenme tamamlandı!'}</h2>
+        <p>${earlyExit ? 'Yarın devam edebilirsin.' : 'Harika bir gün! 🎉'}</p>
+
+        <div class="gunluk-ozet-stats">
+          <div class="gos-item"><span class="gos-val">${completed}/3</span><span class="gos-label">Ders</span></div>
+          <div class="gos-item"><span class="gos-val">${correct}/${total}</span><span class="gos-label">Doğru</span></div>
+          <div class="gos-item"><span class="gos-val">%${pct}</span><span class="gos-label">Başarı</span></div>
+          <div class="gos-item"><span class="gos-val">+${xpEarned}</span><span class="gos-label">XP</span></div>
+          <div class="gos-item"><span class="gos-val">🔥 ${streak}</span><span class="gos-label">Seri</span></div>
+          <div class="gos-item"><span class="gos-val">⏱️ ${durationMin}dk</span><span class="gos-label">Süre</span></div>
+        </div>
+
+        ${recentBadges.length > 0 ? `<div class="ozet-badges">
+          <p>🎖️ Yeni rozet kazandın!</p>
+          ${recentBadges.map(b => `<div class="ozet-badge-item">${b.icon} <strong>${b.name}</strong> — ${b.desc}</div>`).join('')}
+        </div>` : ''}
+
+        ${weakSubjects.length > 0 ? `<div class="ozet-zayif">
+          <p>💡 Zorlandığın konular:</p>
+          ${weakSubjects.map(w => {
+            const d = getDers(w.slug);
+            return `<span class="ozet-zayif-tag" style="${d ? `background:${d.colorLight};color:${d.color}` : ''}">
+              ${d ? d.icon : ''} ${d ? d.name : w.slug} — %${w.wrongRate} hata
+            </span>`;
+          }).join('')}
+          <p class="ozet-zayif-hint">Yarın bu konular tekrar gelecek, merak etme!</p>
+        </div>` : ''}
+
+        <button class="btn btn-primary btn-lg btn-full" onclick="navigate('#/anasayfa')">Ana Sayfaya Dön</button>
+      </div>
+    </div>`;
+  if (!earlyExit) setTimeout(createConfetti, 200);
+}
+
+// ========== VELİ PANELİ 360° ==========
+// Gerçek zamanlı Firebase dinleyicisi: veli paneli açıkken öğrenci veri değiştirirse otomatik yeniler
+window._veliPanelActive = false;
+
+function renderVeliPanel() {
+  window._veliPanelActive = true;
+
+  // Firebase gerçek zamanlı dinleyici kur
+  if (window.FirebaseService?.isReady()) {
+    const user = FirebaseService.getCurrentUser();
+    if (user) {
+      FirebaseService.startVeliListener(user.uid, (freshData) => {
+        if (!window._veliPanelActive) return;
+        // Store'u sessizce güncelle (sync olmadan)
+        try { localStorage.setItem(Store._key, JSON.stringify(freshData)); } catch(_) {}
+        _veliPanelRefresh();
+      });
+    }
+  }
+
+  _veliPanelRefresh();
+}
+
+function _veliPanelRefresh() {
+  const profile   = Store.getProfile();
+  const xp        = Store.getXP();
+  const streak    = Store.getStreak();
+  const badges    = Store.getBadges();
   const totalMins = Store.getTotalMinutes() + Store.getSessionMinutes();
+  const today     = Store.getTodayReport();
+  const history   = Store.getDailyHistory(7);
+  const weakSubs  = Store.getWeakSubjects(0.4);
+
+  if (!profile) {
+    app.innerHTML = `
+      ${topNavHTML(true, 'Veli Paneli')}
+      <div class="page-container">
+        <div class="empty-state"><div class="empty-icon">👋</div><h3>Henüz veri yok</h3>
+          <p>Öğrenci giriş yaptığında burada ilerleme bilgileri görünecek.</p>
+          <button class="btn btn-primary" onclick="navigate('#/giris')">Giriş Yap</button></div>
+      </div>`;
+    return;
+  }
+
+  // Haftalık grafik verisi
+  const last7 = (() => {
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+      const h = history.find(x => x.date === d);
+      days.push({ date: d, label: ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'][new Date(d).getDay()], h });
+    }
+    return days;
+  })();
+
+  const maxQ = Math.max(...last7.map(d => d.h?.totalQuestions || 0), 1);
 
   app.innerHTML = `
     ${topNavHTML(true, 'Veli Paneli')}
     <div class="page-container">
-      <div class="veli-header"><h2>👨‍👩‍👧 Veli Paneli</h2>
-        ${profile ? `<p>${profile.name} için ilerleme raporu</p>` : '<p>Henüz öğrenci girişi yapılmadı</p>'}</div>
-      ${profile ? `
-        <div class="veli-stats-grid">
-          <div class="veli-stat-card"><span class="veli-stat-icon">⭐</span><span class="veli-stat-val">${xp}</span><span class="veli-stat-label">Toplam XP</span></div>
-          <div class="veli-stat-card"><span class="veli-stat-icon">🔥</span><span class="veli-stat-val">${streak}</span><span class="veli-stat-label">Gün Serisi</span></div>
-          <div class="veli-stat-card"><span class="veli-stat-icon">🎖️</span><span class="veli-stat-val">${badges.length}</span><span class="veli-stat-label">Rozet</span></div>
-          <div class="veli-stat-card"><span class="veli-stat-icon">⏱️</span><span class="veli-stat-val">${totalMins}</span><span class="veli-stat-label">Dakika</span></div>
+      <div class="veli-header">
+        <h2>👨‍👩‍👧 Veli Paneli</h2>
+        <p>${profile.name} için 360° ilerleme raporu
+          ${window.FirebaseService?.getCurrentUser() ? '<span class="veli-sync-badge">☁️ Canlı Senkron</span>' : ''}</p>
+      </div>
+
+      <!-- Özet Sayaçlar -->
+      <div class="veli-stats-grid">
+        <div class="veli-stat-card"><span class="veli-stat-icon">⭐</span><span class="veli-stat-val">${xp}</span><span class="veli-stat-label">Toplam XP</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">🔥</span><span class="veli-stat-val">${streak}</span><span class="veli-stat-label">Gün Serisi</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">🎖️</span><span class="veli-stat-val">${badges.length}</span><span class="veli-stat-label">Rozet</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">⏱️</span><span class="veli-stat-val">${totalMins}</span><span class="veli-stat-label">Toplam Dakika</span></div>
+      </div>
+
+      <!-- Bugünün Raporu -->
+      ${today ? `<div class="veli-bugun-rapor">
+        <h3>📊 Bugünün Raporu</h3>
+        <div class="veli-rapor-grid">
+          <div class="veli-rapor-item ${today.completedCount === 3 ? 'veli-rapor-good' : ''}">
+            <span class="vr-icon">${today.completedCount === 3 ? '✅' : '⏳'}</span>
+            <span class="vr-val">${today.completedCount}/3</span>
+            <span class="vr-label">Ders Tamamlandı</span>
+          </div>
+          <div class="veli-rapor-item ${today.totalQuestions > 0 && (today.correctAnswers/today.totalQuestions) >= 0.7 ? 'veli-rapor-good' : 'veli-rapor-warn'}">
+            <span class="vr-icon">📝</span>
+            <span class="vr-val">${today.correctAnswers}/${today.totalQuestions}</span>
+            <span class="vr-label">Doğru Cevap ${today.totalQuestions > 0 ? '(%' + Math.round(today.correctAnswers/today.totalQuestions*100) + ')' : ''}</span>
+          </div>
+          <div class="veli-rapor-item">
+            <span class="vr-icon">💡</span>
+            <span class="vr-val">${today.hintsUsed || 0}</span>
+            <span class="vr-label">İpucu Kullandı</span>
+          </div>
+          <div class="veli-rapor-item">
+            <span class="vr-icon">⏱️</span>
+            <span class="vr-val">${Math.max(1, Math.round((today.totalTime||0)/60000))} dk</span>
+            <span class="vr-label">Çalışma Süresi</span>
+          </div>
         </div>
-        <h3 class="section-title">Ders İlerlemesi</h3>
-        <div class="veli-ders-list">
-          ${DERSLER.map(d => {
-            const prog = Store.getDersProgress(d.slug);
-            const completed = Object.values(prog).filter(p => p.completed).length;
-            const pct = Math.round((completed / d.uniteler.length) * 100) || 0;
-            return `<div class="veli-ders-card"><div class="veli-ders-top"><span>${d.icon} ${d.name}</span><span>${pct}%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${d.color}"></div></div>
-              <p>${completed}/${d.uniteler.length} ünite tamamlandı</p></div>`;
+        ${today.earlyExit ? '<p class="veli-early-exit">⚠️ Bugün erken çıkış yapıldı.</p>' : ''}
+        <p class="veli-rapor-dersler">Çalışılan konular: ${(today.subjects||[]).map(s => { const d=getDers(s); return d ? d.icon+' '+d.name : s; }).join(', ')}</p>
+      </div>` : `<div class="veli-bugun-rapor veli-rapor-empty">
+        <p>📅 Bugün henüz çalışma yapılmadı.</p>
+      </div>`}
+
+      <!-- Haftalık Grafik -->
+      <div class="veli-grafik-section">
+        <h3>📈 Son 7 Gün</h3>
+        <div class="veli-grafik">
+          ${last7.map(day => {
+            const q = day.h?.totalQuestions || 0;
+            const c = day.h?.correctAnswers || 0;
+            const w = q - c;
+            const hC = q > 0 ? Math.round((c / maxQ) * 100) : 0;
+            const hW = q > 0 ? Math.round((w / maxQ) * 100) : 0;
+            return `<div class="veli-bar-col">
+              <div class="veli-bar-wrap">
+                ${q > 0 ? `<div class="veli-bar-correct" style="height:${hC}%" title="${c} doğru"></div>
+                <div class="veli-bar-wrong" style="height:${hW}%" title="${w} yanlış"></div>` :
+                '<div class="veli-bar-empty"></div>'}
+              </div>
+              <span class="veli-bar-label ${day.date === new Date().toISOString().split('T')[0] ? 'veli-bar-today' : ''}">${day.label}</span>
+            </div>`;
           }).join('')}
         </div>
-        <div class="veli-insight"><h4>💡 Öneriler</h4><ul>
-          ${xp < 50 ? '<li>Henüz başlangıç aşamasında. Günde 1-2 kısa ders önerilir.</li>' : ''}
-          ${streak < 3 ? '<li>Düzenli çalışma alışkanlığı için her gün en az 1 ders tamamlamayı hedefleyin.</li>' : ''}
-          ${streak >= 7 ? '<li>Harika bir seri! Çocuğunuz düzenli çalışıyor, tebrikler.</li>' : ''}
-          <li>Çocuğunuzla birlikte ders sonrası kısa sohbetler motivasyonu artırır.</li>
-        </ul></div>
-      ` : `<div class="empty-state"><div class="empty-icon">👋</div><h3>Henüz veri yok</h3>
-        <p>Öğrenci giriş yaptığında burada ilerleme bilgileri görünecek.</p>
-        <button class="btn btn-primary" onclick="navigate('#/giris')">Giriş Yap</button></div>`}
-    </div>
-  `;
+        <div class="veli-grafik-legend">
+          <span class="veli-legend-correct">■ Doğru</span>
+          <span class="veli-legend-wrong">■ Yanlış</span>
+        </div>
+      </div>
+
+      <!-- Zayıf Noktalar -->
+      ${weakSubs.length > 0 ? `<div class="veli-zayif-section">
+        <h3>⚠️ Dikkat Edilecek Konular</h3>
+        <div class="veli-zayif-list">
+          ${weakSubs.map(w => {
+            const d = getDers(w.slug);
+            if (!d) return '';
+            return `<div class="veli-zayif-card" style="border-left-color:${d.color}">
+              <div class="veli-zayif-top">
+                <span>${d.icon} ${d.name}</span>
+                <span class="veli-zayif-pct veli-zayif-bad">%${w.wrongRate} hata</span>
+              </div>
+              <p>Zorlandığı üniteler: ${w.topics.map(t => { const u=getUnite(w.slug,t); return u?u.name:t; }).join(', ')}</p>
+              <button class="btn btn-outline btn-sm" onclick="navigate('#/veli-ders/${w.slug}')">Detayına Bak →</button>
+            </div>`;
+          }).join('')}
+        </div>
+        <p class="veli-zayif-oneri">💡 Öneri: Bu konulardaki videoları çocuğunuzla birlikte izleyebilir, ders sonrası kısa sohbetler yapabilirsiniz.</p>
+      </div>` : ''}
+
+      <!-- Ders İlerlemesi -->
+      <h3 class="section-title">Ders İlerlemesi</h3>
+      <div class="veli-ders-list">
+        ${DERSLER.map(d => {
+          const prog = Store.getDersProgress(d.slug);
+          const completed = Object.values(prog).filter(p => p.completed).length;
+          const pct = Math.round((completed / d.uniteler.length) * 100) || 0;
+          const wp = Store.getWeakPoints()[d.slug];
+          const wrongRate = wp && wp.total > 0 ? Math.round(wp.wrong / wp.total * 100) : null;
+          return `<div class="veli-ders-card" onclick="navigate('#/veli-ders/${d.slug}')" style="cursor:pointer">
+            <div class="veli-ders-top">
+              <span>${d.icon} ${d.name}</span>
+              <span class="veli-ders-pct">${pct}%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${d.color}"></div></div>
+            <div class="veli-ders-meta">
+              <span>${completed}/${d.uniteler.length} ünite tamamlandı</span>
+              ${wrongRate !== null ? `<span class="veli-ders-acc ${wrongRate > 40 ? 'veli-acc-warn' : 'veli-acc-ok'}">Başarı: %${100-wrongRate}</span>` : ''}
+            </div>
+            <span class="veli-ders-arrow">Detay →</span>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <!-- Genel Öneriler -->
+      <div class="veli-insight">
+        <h4>💡 Öneriler</h4>
+        <ul>
+          ${xp < 50 ? '<li>Henüz başlangıç aşamasında. Günlük öğrenme modülünü birlikte keşfedin.</li>' : ''}
+          ${streak < 3 ? '<li>Düzenli çalışma için her gün en az Günlük Öğrenme modülünü tamamlamayı hedefleyin.</li>' : ''}
+          ${streak >= 7 ? '<li>🎉 Harika bir seri! Çocuğunuz düzenli çalışıyor, tebrikler.</li>' : ''}
+          ${weakSubs.length > 0 ? '<li>Zayıf noktalardaki konuları ders dışı hayatla ilişkilendirerek anlatmak kalıcılığı artırır.</li>' : ''}
+          <li>Ders sonrası "Bugün ne öğrendin?" sorusu öğrenmeyi pekiştirir.</li>
+        </ul>
+      </div>
+
+      <!-- Firebase Veli Kodu (Firebase aktifse) -->
+      ${window.FirebaseService?.isReady() ? `<div class="veli-kod-section">
+        <h4>📲 Uzaktan Takip</h4>
+        ${Store.get('veliCode') ? `<p>Veli kodunuz: <strong class="veli-kod">${Store.get('veliCode')}</strong></p>
+          <p class="veli-kod-hint">Bu kodu veli uygulamasına girerek çocuğunuzun ilerlemesini başka bir cihazdan takip edebilirsiniz.</p>` :
+        `<button class="btn btn-outline" onclick="veliKodOlustur()">Veli Kodu Oluştur</button>
+          <p class="veli-kod-hint">Firebase bağlıyken öğrenci verileri otomatik buluta senkronize edilir.</p>`}
+      </div>` : ''}
+    </div>`;
+}
+
+window.veliKodOlustur = async function() {
+  const user = window.FirebaseService?.getCurrentUser();
+  if (!user) return;
+  const code = await FirebaseService.generateVeliCode(user.uid, user.email);
+  if (code) {
+    alert(`Veli kodunuz: ${code}\nBu kodu veli uygulamasına girin.`);
+    _veliPanelRefresh();
+  }
+};
+
+// ========== VELİ DERS DETAYI ==========
+function renderVeliDersDetay(params) {
+  const dersSlug = params[0];
+  const ders = getDers(dersSlug);
+  if (!ders) { navigate('#/veli'); return; }
+
+  const prog = Store.getDersProgress(dersSlug);
+  const wp   = Store.getWeakPoints()[dersSlug] || {};
+
+  app.innerHTML = `
+    ${topNavHTML(true, ders.name + ' — Detay')}
+    <div class="page-container">
+      <div class="veli-detay-header" style="border-left:4px solid ${ders.color}; background:${ders.colorLight}">
+        <h2>${ders.icon} ${ders.name}</h2>
+        <p>${wp.total ? `Toplam ${wp.total} sorudan ${wp.total - wp.wrong} doğru (%${Math.round((wp.total-wp.wrong)/wp.total*100)} başarı)` : 'Henüz soru cevaplanmadı'}</p>
+      </div>
+
+      ${ders.uniteler.map((unite, i) => {
+        const lessonProg = Store.getLessonProgress(dersSlug, unite.slug);
+        const answers    = Store.getAnswerDetails(dersSlug, unite.slug);
+        const correct    = answers.filter(a => a.dogruMu).length;
+        const total      = answers.length;
+        const hintsUsed  = answers.filter(a => a.ipucuKullandiMi).length;
+        const pct        = total > 0 ? Math.round(correct / total * 100) : null;
+
+        return `<div class="veli-unite-card ${lessonProg.completed ? 'vd-done' : ''}">
+          <div class="veli-unite-header">
+            <div class="veli-unite-num" style="background:${ders.color}">${i+1}</div>
+            <div class="veli-unite-info">
+              <strong>${unite.name}</strong>
+              <span>${lessonProg.completed ? '✅ Tamamlandı' : lessonProg.attempts > 0 ? '⏳ Devam Ediyor' : '🔒 Başlanmadı'}</span>
+            </div>
+            ${pct !== null ? `<span class="vd-pct ${pct >= 70 ? 'vd-good' : 'vd-warn'}">%${pct}</span>` : ''}
+          </div>
+
+          ${answers.length > 0 ? `<div class="vd-answers">
+            ${answers.map((a, ai) => `<div class="vd-answer-row ${a.dogruMu ? 'vda-correct' : 'vda-wrong'}" title="${a.soru}">
+              <span class="vda-num">${ai+1}</span>
+              <span class="vda-icon">${a.dogruMu ? '✓' : '✗'}</span>
+              <span class="vda-soru">${a.soru.length > 60 ? a.soru.slice(0,57)+'...' : a.soru}</span>
+              ${a.ipucuKullandiMi ? '<span class="vda-hint" title="İpucu kullandı">💡</span>' : ''}
+              ${a.sure ? `<span class="vda-sure">${Math.round(a.sure)}s</span>` : ''}
+            </div>`).join('')}
+            ${hintsUsed > 0 ? `<p class="vd-hints">💡 ${hintsUsed} kez ipucu kullandı</p>` : ''}
+          </div>` : lessonProg.attempts > 0 ? '<p class="vd-no-data">Soru detayı mevcut değil.</p>' : ''}
+        </div>`;
+      }).join('')}
+    </div>`;
 }
