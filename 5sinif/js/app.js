@@ -133,7 +133,7 @@ function renderLanding() {
     ${topNavHTML()}
     <section class="hero">
       <div class="hero-content">
-        <div class="hero-mascot">🦉</div>
+        <div class="hero-mascot"><img src="assets/mascot.svg" alt="Maskot" class="mascot-img"></div>
         <h1>5. Sınıf Evde Öğrenme</h1>
         <p class="hero-sub">Video dersler, eğlenceli quizler ve kişiselleştirilmiş öğrenme yolculuğun burada başlıyor!</p>
         <div class="hero-buttons">
@@ -185,7 +185,7 @@ function renderGiris() {
     ${topNavHTML(true, 'Giriş')}
     <div class="page-center">
       <div class="card card-form">
-        <div class="form-mascot">🦉</div>
+        <div class="form-mascot"><img src="assets/mascot.svg" alt="Maskot" class="mascot-img-sm"></div>
         <h2>Hoş Geldin!</h2>
 
         ${fbConfigured ? `

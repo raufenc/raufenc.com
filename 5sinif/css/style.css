@@ -93,7 +93,8 @@ input { font-family: inherit; }
 .card-form { width: 100%; max-width: 400px; text-align: center; }
 .card-form h2 { margin-bottom: 4px; }
 .card-form p { color: var(--text-secondary); margin-bottom: 24px; }
-.form-mascot { font-size: 3rem; margin-bottom: 12px; }
+.form-mascot { margin-bottom: 12px; }
+.mascot-img-sm { width: 80px; height: auto; margin: 0 auto; }
 
 /* === FORMS === */
 .form-group { text-align: left; margin-bottom: 16px; }
@@ -111,7 +112,8 @@ input { font-family: inherit; }
   text-align: center;
 }
 .hero-content { max-width: 640px; margin: 0 auto; }
-.hero-mascot { font-size: 4rem; margin-bottom: 16px; animation: bounce 2s infinite; }
+.hero-mascot { margin-bottom: 16px; animation: bounce 2s infinite; }
+.mascot-img { width: 100px; height: 100px; margin: 0 auto; object-fit: contain; }
 .hero h1 { font-size: 2.2rem; margin-bottom: 12px; color: var(--text); line-height: 1.2; }
 .hero-sub { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 28px; }
 .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -455,7 +457,7 @@ input { font-family: inherit; }
 
 @media (max-width: 480px) {
   .hero { padding: 36px 16px 50px; }
-  .hero-mascot { font-size: 3rem; }
+  .hero-mascot .mascot-img { width: 90px; }
   .hero h1 { font-size: 1.3rem; }
   .hero-buttons { flex-direction: column; align-items: stretch; }
   .btn-lg { width: 100%; padding: 12px 20px; font-size: 0.95rem; }
