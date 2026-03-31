@@ -27,6 +27,11 @@ const routes = {
   'gunluk-ozet':    renderGunlukOzet,
   // --- Veli detay ---
   'veli-ders':      renderVeliDersDetay,
+  // --- Admin ---
+  'admin':          renderAdmin,
+  'admin-ogrenci':  renderAdminOgrenci,
+  // --- Veli Portalı (şifresiz, veli kodu ile) ---
+  'veli-portal':    renderVeliPortal,
 };
 
 function navigate(hash) { window.location.hash = hash; }
@@ -50,9 +55,13 @@ function cleanup() {
   if (_checkpointTimer) { clearInterval(_checkpointTimer); _checkpointTimer = null; }
   _ytPlayer = null;
   _firedCheckpoints = new Set();
-  // Veli panelinden ayrılınca gerçek zamanlı dinleyiciyi durdur
+  // Veli panelinden / portalından ayrılınca gerçek zamanlı dinleyiciyi durdur
   if (window._veliPanelActive) {
     window._veliPanelActive = false;
+    if (window.FirebaseService?.stopVeliListener) FirebaseService.stopVeliListener();
+  }
+  if (window._veliPortalActive) {
+    window._veliPortalActive = false;
     if (window.FirebaseService?.stopVeliListener) FirebaseService.stopVeliListener();
   }
 }
@@ -67,6 +76,12 @@ window.addEventListener('DOMContentLoaded', () => {
 function requireLogin() {
   if (!Store.isLoggedIn()) { navigate('#/giris'); return true; }
   Store.recordActivity();
+  return false;
+}
+
+function requireAdmin() {
+  if (!Store.isLoggedIn()) { navigate('#/giris'); return true; }
+  if (Store.getProfile()?.role !== 'admin') { navigate('#/anasayfa'); return true; }
   return false;
 }
 
@@ -155,8 +170,14 @@ function renderLanding() {
 }
 
 // ========== GİRİŞ ==========
+const ADMIN_CODE = 'ADMIN2026';
+
 function renderGiris() {
-  if (Store.isLoggedIn()) { navigate('#/anasayfa'); return; }
+  if (Store.isLoggedIn()) {
+    const role = Store.getProfile()?.role;
+    navigate(role === 'admin' ? '#/admin' : role === 'veli' ? '#/veli' : '#/anasayfa');
+    return;
+  }
 
   const fbConfigured = window.FirebaseService && window.FirebaseService.isConfigured();
 
@@ -168,7 +189,7 @@ function renderGiris() {
         <h2>Hoş Geldin!</h2>
 
         ${fbConfigured ? `
-          <!-- Firebase Auth Sekmeler -->
+          <!-- Giriş/Kayıt Sekmeleri -->
           <div class="auth-tabs" id="authTabs">
             <button class="auth-tab active" id="tabLogin" onclick="girisToggleTab('login')">Giriş Yap</button>
             <button class="auth-tab" id="tabRegister" onclick="girisToggleTab('register')">Kayıt Ol</button>
@@ -178,11 +199,18 @@ function renderGiris() {
           <div class="role-selector" id="roleSelector">
             <button class="role-btn active" id="roleOgrenci" onclick="girisToggleRole('ogrenci')">👤 Öğrenci</button>
             <button class="role-btn" id="roleVeli" onclick="girisToggleRole('veli')">👨‍👩‍👧 Veli</button>
+            <button class="role-btn" id="roleAdmin" onclick="girisToggleRole('admin')">🔑 Admin</button>
+          </div>
+
+          <!-- Admin Kodu (sadece admin rolünde görünür) -->
+          <div class="form-group hidden" id="adminCodeGroup">
+            <label>Admin Kodu</label>
+            <input type="password" id="adminCode" placeholder="Admin erişim kodu" maxlength="20">
           </div>
 
           <!-- Firebase Giriş Formu -->
           <form id="fbForm">
-            <div class="form-group" id="nameGroup" style="display:none">
+            <div class="form-group hidden" id="nameGroup">
               <label>Ad Soyad</label>
               <input type="text" id="fbName" placeholder="Adın ve soyadın" maxlength="40">
             </div>
@@ -199,11 +227,15 @@ function renderGiris() {
           </form>
 
           <div class="divider"><span>veya</span></div>
-        ` : ''}
+          <p class="veli-portal-link-hint">Veli misiniz? <a href="#/veli-portal" class="btn-link">Veli Portalı →</a></p>
+        ` : `
+          <!-- Firebase yapılandırılmamışsa çevrimdışı form -->
+          <p class="offline-notice">⚠️ Firebase yapılandırılmamış — çevrimdışı mod</p>
+        `}
 
-        <!-- Çevrimdışı / Hızlı Başlangıç -->
-        <form id="girisForm">
-          ${fbConfigured ? '<p class="offline-label">Hesap açmadan hızlı başla</p>' : '<p>Hadi seni tanıyalım</p>'}
+        <!-- Çevrimdışı / Hızlı Başlangıç (her zaman mevcut, Firebase varsa ikincil) -->
+        <form id="girisForm" ${fbConfigured ? 'style="margin-top:0"' : ''}>
+          ${fbConfigured ? '<p class="offline-label">Hesapsız hızlı başla (demo)</p>' : '<p>Hadi seni tanıyalım</p>'}
           <div class="form-group">
             <label>Öğrenci Adı</label>
             <input type="text" id="ogrenciAdi" placeholder="Adını yaz..." required maxlength="30">
@@ -231,29 +263,40 @@ function renderGiris() {
   // Firebase form (sadece config varsa)
   if (fbConfigured) {
     let _role = 'ogrenci';
-    let _tab = 'login';
+    let _tab  = 'login';
 
     window.girisToggleRole = (role) => {
       _role = role;
-      document.getElementById('roleOgrenci').classList.toggle('active', role === 'ogrenci');
-      document.getElementById('roleVeli').classList.toggle('active', role === 'veli');
+      ['ogrenci', 'veli', 'admin'].forEach(r => {
+        document.getElementById('role' + r.charAt(0).toUpperCase() + r.slice(1))?.classList.toggle('active', r === role);
+      });
+      // Admin kodu alanını göster/gizle
+      document.getElementById('adminCodeGroup').classList.toggle('hidden', role !== 'admin');
     };
 
     window.girisToggleTab = (tab) => {
       _tab = tab;
       document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
       document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
-      document.getElementById('nameGroup').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('nameGroup').classList.toggle('hidden', tab !== 'register');
       document.getElementById('fbSubmit').textContent = tab === 'register' ? 'Kayıt Ol 🎉' : 'Giriş Yap';
     };
 
     document.getElementById('fbForm').onsubmit = async (e) => {
       e.preventDefault();
-      const email = document.getElementById('fbEmail').value.trim();
-      const pass  = document.getElementById('fbPass').value;
-      const name  = document.getElementById('fbName')?.value.trim() || '';
-      const errEl = document.getElementById('fbError');
-      const btn   = document.getElementById('fbSubmit');
+      const email    = document.getElementById('fbEmail').value.trim();
+      const pass     = document.getElementById('fbPass').value;
+      const name     = document.getElementById('fbName')?.value.trim() || '';
+      const errEl    = document.getElementById('fbError');
+      const btn      = document.getElementById('fbSubmit');
+      const aCode    = document.getElementById('adminCode')?.value.trim() || '';
+
+      // Admin kodu doğrulama
+      if (_role === 'admin' && aCode !== ADMIN_CODE) {
+        errEl.textContent = 'Admin kodu hatalı.';
+        errEl.classList.remove('hidden');
+        return;
+      }
 
       errEl.classList.add('hidden');
       btn.disabled = true;
@@ -267,6 +310,8 @@ function renderGiris() {
         } else {
           cred = await FirebaseService.signInEmail(email, pass);
           // Profile will be loaded from Firestore by _onFirebaseSignIn
+          // Override role if admin code was entered
+          window._pendingRole = _role === 'admin' ? 'admin' : null;
         }
         Store.startSession();
         // Navigation handled by _onFirebaseSignIn callback after data pull
@@ -278,15 +323,26 @@ function renderGiris() {
       }
     };
 
-    // Firebase sign-in callback
+    // Firebase sign-in callback (global — diğer sayfalardan da tetiklenebilir)
     window._onFirebaseSignIn = (user) => {
-      const profile = Store.getProfile();
+      let profile = Store.getProfile();
       if (!profile) {
         // İlk giriş — profil oluştur
-        Store.setProfile({ name: user.displayName || user.email.split('@')[0], email: user.email, role: 'ogrenci', uid: user.uid });
+        const role = window._pendingRole || 'ogrenci';
+        window._pendingRole = null;
+        Store.setProfile({ name: user.displayName || user.email.split('@')[0], email: user.email, role, uid: user.uid });
+        profile = Store.getProfile();
+      } else if (window._pendingRole) {
+        // Mevcut hesap admin koduyla açıldı — rolü güncelle
+        Store.setProfile({ ...profile, role: window._pendingRole });
+        profile = Store.getProfile();
+        window._pendingRole = null;
       }
       Store.startSession();
-      navigate(Store.getProfile()?.role === 'veli' ? '#/veli' : '#/mod-sec');
+      const role = profile?.role;
+      if (role === 'admin')    navigate('#/admin');
+      else if (role === 'veli') navigate('#/veli');
+      else                      navigate(profile?.xp > 0 ? '#/anasayfa' : '#/mod-sec');
     };
   }
 }
@@ -1498,5 +1554,472 @@ function renderVeliDersDetay(params) {
           </div>` : lessonProg.attempts > 0 ? '<p class="vd-no-data">Soru detayı mevcut değil.</p>' : ''}
         </div>`;
       }).join('')}
+    </div>`;
+}
+
+// ========== ADMİN PANELİ ==========
+
+function renderAdmin() {
+  if (requireAdmin()) return;
+
+  const fbReady = window.FirebaseService?.isReady();
+  app.innerHTML = `
+    ${topNavHTML(true, 'Admin Paneli')}
+    <div class="page-container">
+      <div class="admin-header">
+        <div>
+          <h2>🔑 Admin Paneli</h2>
+          <p>Tüm öğrencilerin ilerlemesini buradan izleyebilirsiniz.</p>
+        </div>
+        <div class="admin-header-actions">
+          <a href="#/veli-portal" class="btn btn-outline btn-sm">👁 Veli Portalı</a>
+        </div>
+      </div>
+
+      ${!fbReady ? `<div class="admin-offline-warning">
+        <p>⚠️ Firebase bağlantısı yok. Öğrenci listesi Firebase gerektirir.</p>
+        <p class="admin-offline-sub">firebase.js içindeki FIREBASE_CONFIG değerlerini doldurun.</p>
+      </div>` : `<div id="adminStudentList" class="admin-loading">
+        <div class="admin-spinner">⏳ Öğrenci listesi yükleniyor...</div>
+      </div>`}
+    </div>`;
+
+  if (!fbReady) return;
+
+  FirebaseService.listStudents().then(students => {
+    const el = document.getElementById('adminStudentList');
+    if (!el) return;
+
+    if (!students.length) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><h3>Henüz kayıtlı öğrenci yok</h3>
+        <p>Öğrenciler giriş yapıp veri senkronize ettikçe burada görünecek.</p></div>`;
+      return;
+    }
+
+    // Sınıf geneli istatistikler
+    const totalStudents = students.length;
+    const avgXP = Math.round(students.reduce((s, st) => s + (st.xp || 0), 0) / totalStudents);
+    const activeToday = students.filter(st => st.todayReport && st.todayReport.completedCount > 0).length;
+    const avgStreak = Math.round(students.reduce((s, st) => s + (st.streak || 0), 0) / totalStudents);
+
+    el.innerHTML = `
+      <!-- Sınıf İstatistikleri -->
+      <div class="admin-class-stats">
+        <div class="admin-stat-card"><span class="admin-stat-icon">👥</span><span class="admin-stat-val">${totalStudents}</span><span class="admin-stat-label">Toplam Öğrenci</span></div>
+        <div class="admin-stat-card"><span class="admin-stat-icon">⭐</span><span class="admin-stat-val">${avgXP}</span><span class="admin-stat-label">Ort. XP</span></div>
+        <div class="admin-stat-card"><span class="admin-stat-icon">📅</span><span class="admin-stat-val">${activeToday}</span><span class="admin-stat-label">Bugün Aktif</span></div>
+        <div class="admin-stat-card"><span class="admin-stat-icon">🔥</span><span class="admin-stat-val">${avgStreak}</span><span class="admin-stat-label">Ort. Seri</span></div>
+      </div>
+
+      <!-- Öğrenci Listesi -->
+      <h3 class="section-title">Öğrenciler</h3>
+      <div class="admin-student-list">
+        ${students.sort((a, b) => (b.xp || 0) - (a.xp || 0)).map(st => {
+          const today = st.todayReport;
+          const lastActive = st.lastActiveDate
+            ? (st.lastActiveDate === new Date().toISOString().split('T')[0] ? 'Bugün' : st.lastActiveDate)
+            : 'Hiç';
+          const todayPct = today?.totalQuestions > 0
+            ? Math.round(today.correctAnswers / today.totalQuestions * 100)
+            : null;
+          return `<div class="admin-student-card" onclick="navigate('#/admin-ogrenci/${st.uid}')">
+            <div class="admin-student-top">
+              <div class="admin-student-avatar">${(st.name || '?')[0].toUpperCase()}</div>
+              <div class="admin-student-info">
+                <strong>${st.name || '—'}</strong>
+                <span class="admin-student-email">${st.email || ''}</span>
+              </div>
+              <div class="admin-student-stats">
+                <span class="admin-badge-xp">⭐ ${st.xp || 0} XP</span>
+                <span class="admin-badge-streak">🔥 ${st.streak || 0}</span>
+                ${st.badgeCount > 0 ? `<span class="admin-badge-count">🎖️ ${st.badgeCount}</span>` : ''}
+              </div>
+            </div>
+            <div class="admin-student-bottom">
+              <span class="admin-last-active ${lastActive === 'Bugün' ? 'admin-active-today' : ''}">Son aktif: ${lastActive}</span>
+              ${today ? `<span class="admin-today-report ${today.completedCount === 3 ? 'admin-today-complete' : ''}">
+                Bugün: ${today.completedCount}/3 ders | ${today.correctAnswers}/${today.totalQuestions} doğru${todayPct !== null ? ' (%' + todayPct + ')' : ''}
+              </span>` : '<span class="admin-today-none">Bugün çalışma yok</span>'}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+  });
+}
+
+function renderAdminOgrenci(params) {
+  if (requireAdmin()) return;
+
+  const uid = params[0];
+  if (!uid) { navigate('#/admin'); return; }
+
+  const fbReady = window.FirebaseService?.isReady();
+
+  app.innerHTML = `
+    ${topNavHTML(true, 'Öğrenci Detayı')}
+    <div class="page-container">
+      <div id="adminOgrenciContent" class="admin-loading">
+        <div class="admin-spinner">⏳ Öğrenci verisi yükleniyor...</div>
+      </div>
+    </div>`;
+
+  if (!fbReady) {
+    document.getElementById('adminOgrenciContent').innerHTML =
+      '<p class="admin-offline-warning">Firebase bağlantısı gerekiyor.</p>';
+    return;
+  }
+
+  FirebaseService.getStudentFullData(uid).then(data => {
+    const el = document.getElementById('adminOgrenciContent');
+    if (!el) return;
+
+    if (!data) {
+      el.innerHTML = '<div class="empty-state"><p>Öğrenci bulunamadı.</p><button class="btn btn-outline" onclick="navigate(\'#/admin\')">Geri Dön</button></div>';
+      return;
+    }
+
+    const profile = data.profile || {};
+    const xp      = data.xp || 0;
+    const streak  = data.streak || 0;
+    const badges  = data.badges || [];
+    const history = data.dailyHistory || [];
+    const weakPts = data.weakPoints || {};
+    const progress = data.progress || {};
+    const adminNotes = data.adminNotes || [];
+
+    // Son 7 günün özeti
+    const last7 = (() => {
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+        const h = history.find(x => x.date === d);
+        days.push({ date: d, label: ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'][new Date(d).getDay()], h });
+      }
+      return days;
+    })();
+    const maxQ = Math.max(...last7.map(d => d.h?.totalQuestions || 0), 1);
+
+    el.innerHTML = `
+      <!-- Öğrenci Başlık -->
+      <div class="admin-ogrenci-header">
+        <div class="admin-ogrenci-avatar">${(profile.name || '?')[0].toUpperCase()}</div>
+        <div>
+          <h2>${profile.name || '—'}</h2>
+          <p>${profile.email || ''}</p>
+        </div>
+        <div class="admin-ogrenci-stats">
+          <span>⭐ ${xp} XP</span>
+          <span>🔥 ${streak} Seri</span>
+          <span>🎖️ ${badges.length} Rozet</span>
+        </div>
+      </div>
+
+      <!-- Son 7 Gün Grafiği -->
+      <div class="veli-grafik-section">
+        <h3>📈 Son 7 Gün</h3>
+        <div class="veli-grafik">
+          ${last7.map(day => {
+            const q = day.h?.totalQuestions || 0;
+            const c = day.h?.correctAnswers || 0;
+            const w = q - c;
+            const hC = q > 0 ? Math.round((c / maxQ) * 100) : 0;
+            const hW = q > 0 ? Math.round((w / maxQ) * 100) : 0;
+            return `<div class="veli-bar-col">
+              <div class="veli-bar-wrap">
+                ${q > 0 ? `<div class="veli-bar-correct" style="height:${hC}%"></div>
+                <div class="veli-bar-wrong" style="height:${hW}%"></div>` : '<div class="veli-bar-empty"></div>'}
+              </div>
+              <span class="veli-bar-label ${day.date === new Date().toISOString().split('T')[0] ? 'veli-bar-today' : ''}">${day.label}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="veli-grafik-legend"><span class="veli-legend-correct">■ Doğru</span><span class="veli-legend-wrong">■ Yanlış</span></div>
+      </div>
+
+      <!-- Zayıf Noktalar -->
+      ${Object.keys(weakPts).length > 0 ? `<div class="veli-zayif-section">
+        <h3>⚠️ Zayıf Noktalar</h3>
+        <div class="veli-zayif-list">
+          ${Object.entries(weakPts).map(([slug, wp]) => {
+            const d = getDers(slug);
+            const rate = wp.total > 0 ? Math.round(wp.wrong / wp.total * 100) : 0;
+            return `<div class="veli-zayif-card" style="border-left-color:${d?.color || '#ccc'}">
+              <div class="veli-zayif-top">
+                <span>${d ? d.icon + ' ' + d.name : slug}</span>
+                <span class="veli-zayif-pct ${rate > 40 ? 'veli-zayif-bad' : ''}">%${rate} hata</span>
+              </div>
+              <p>Toplam: ${wp.total} soru | Yanlış: ${wp.wrong}</p>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>` : ''}
+
+      <!-- Ders İlerlemesi -->
+      <h3 class="section-title">Ders İlerlemesi</h3>
+      <div class="veli-ders-list">
+        ${DERSLER.map(d => {
+          const prog = progress[d.slug] || {};
+          const completed = Object.values(prog).filter(p => p.completed).length;
+          const pct = Math.round((completed / d.uniteler.length) * 100) || 0;
+          return `<div class="veli-ders-card">
+            <div class="veli-ders-top"><span>${d.icon} ${d.name}</span><span class="veli-ders-pct">${pct}%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${d.color}"></div></div>
+            <div class="veli-ders-meta"><span>${completed}/${d.uniteler.length} ünite tamamlandı</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <!-- Admin Notları -->
+      <div class="admin-notes-section">
+        <h3>📝 Öğretmen Notları</h3>
+        ${adminNotes.length > 0 ? `<div class="admin-notes-list">
+          ${adminNotes.slice().reverse().map(n => `<div class="admin-note-item">
+            <p>${n.note}</p>
+            <span class="admin-note-date">${new Date(n.createdAt).toLocaleDateString('tr-TR')}</span>
+          </div>`).join('')}
+        </div>` : '<p class="admin-notes-empty">Henüz not eklenmedi.</p>'}
+        <div class="admin-note-form">
+          <textarea id="adminNoteInput" class="admin-note-textarea" placeholder="Not ekle..." rows="3" maxlength="500"></textarea>
+          <button class="btn btn-primary" onclick="adminAddNote('${uid}')">Not Ekle</button>
+        </div>
+      </div>`;
+  });
+}
+
+window.adminAddNote = async function(uid) {
+  const input = document.getElementById('adminNoteInput');
+  if (!input || !input.value.trim()) return;
+  const note = input.value.trim();
+  input.disabled = true;
+  await FirebaseService.addAdminNote(uid, note);
+  // Refresh page to show new note
+  renderAdminOgrenci([uid]);
+};
+
+// ========== VELİ PORTALI ==========
+// Veliler Firebase hesabı olmadan sadece öğrenci koduyla gerçek zamanlı takip yapabilir.
+
+window._veliPortalActive = false;
+
+function renderVeliPortal() {
+  // Mevcut kullanıcı admin veya veli ise kendi paneline yönlendir
+  if (Store.isLoggedIn()) {
+    const role = Store.getProfile()?.role;
+    if (role === 'admin') { navigate('#/admin'); return; }
+    if (role === 'veli')  { navigate('#/veli');  return; }
+  }
+
+  const fbReady = window.FirebaseService?.isReady();
+
+  app.innerHTML = `
+    ${topNavHTML(true, 'Veli Portalı')}
+    <div class="page-center">
+      <div class="card card-form veli-portal-card">
+        <div class="form-mascot">👨‍👩‍👧</div>
+        <h2>Veli Portalı</h2>
+        <p class="veli-portal-sub">Çocuğunuzun size verdiği 8 haneli kodu girerek ilerlemesini takip edin.</p>
+
+        ${!fbReady ? `<div class="admin-offline-warning">
+          <p>⚠️ Firebase yapılandırılmamış. Veli portalı Firebase gerektirir.</p>
+        </div>` : `
+        <form id="veliPortalForm">
+          <div class="form-group">
+            <label>Öğrenci Kodu</label>
+            <input type="text" id="veliPortalCode" placeholder="Örn: ABC12345" maxlength="8"
+              style="text-transform:uppercase;letter-spacing:2px;font-size:1.2rem;text-align:center" required>
+          </div>
+          <div id="veliPortalError" class="form-error hidden"></div>
+          <button type="submit" id="veliPortalBtn" class="btn btn-primary btn-lg btn-full">Takip Etmeye Başla →</button>
+        </form>
+
+        <div class="divider"><span>veya</span></div>
+        <button class="btn btn-outline btn-full" onclick="navigate('#/giris')">Veli Hesabıyla Giriş Yap</button>
+        `}
+      </div>
+    </div>`;
+
+  if (!fbReady) return;
+
+  document.getElementById('veliPortalForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const code = document.getElementById('veliPortalCode').value.trim().toUpperCase();
+    const errEl = document.getElementById('veliPortalError');
+    const btn   = document.getElementById('veliPortalBtn');
+
+    errEl.classList.add('hidden');
+    btn.disabled = true;
+    btn.textContent = 'Aranıyor...';
+
+    const ogrenciUid = await FirebaseService.resolveVeliCode(code);
+    if (!ogrenciUid) {
+      errEl.textContent = 'Geçersiz kod. Çocuğunuzdan kodu tekrar isteyin.';
+      errEl.classList.remove('hidden');
+      btn.disabled = false;
+      btn.textContent = 'Takip Etmeye Başla →';
+      return;
+    }
+
+    // Öğrenciyi bulduk — gerçek zamanlı dinleyiciyi başlat
+    _startVeliPortalView(ogrenciUid, code);
+  };
+}
+
+function _startVeliPortalView(ogrenciUid, code) {
+  window._veliPortalActive = true;
+
+  // Önce bir kere veri çek ve ekranı kur
+  FirebaseService.getStudentFullData(ogrenciUid).then(data => {
+    _renderVeliPortalView(ogrenciUid, code, data);
+
+    // Gerçek zamanlı dinleyiciyi başlat
+    FirebaseService.startVeliListener(ogrenciUid, (freshData) => {
+      if (!window._veliPortalActive) return;
+      _renderVeliPortalView(ogrenciUid, code, freshData);
+    });
+  });
+}
+
+function _renderVeliPortalView(ogrenciUid, code, data) {
+  if (!data) {
+    app.innerHTML = `${topNavHTML(true, 'Veli Portalı')}
+      <div class="page-container"><div class="empty-state"><p>Öğrenci verisi bulunamadı.</p>
+      <button class="btn btn-outline" onclick="navigate('#/veli-portal')">Geri</button></div></div>`;
+    return;
+  }
+
+  const profile  = data.profile || {};
+  const xp       = data.xp || 0;
+  const streak   = data.streak || 0;
+  const badges   = data.badges || [];
+  const history  = data.dailyHistory || [];
+  const weakPts  = data.weakPoints || {};
+  const today    = history.slice(-1)[0] || null;
+  const todayStr = new Date().toISOString().split('T')[0];
+  const todayReport = (today?.date === todayStr) ? today : null;
+
+  const last7 = (() => {
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(Date.now() - i * 86400000).toISOString().split('T')[0];
+      const h = history.find(x => x.date === d);
+      days.push({ date: d, label: ['Paz','Pzt','Sal','Çar','Per','Cum','Cmt'][new Date(d).getDay()], h });
+    }
+    return days;
+  })();
+  const maxQ = Math.max(...last7.map(d => d.h?.totalQuestions || 0), 1);
+
+  const weakList = Object.entries(weakPts)
+    .map(([slug, wp]) => ({ slug, rate: wp.total > 0 ? Math.round(wp.wrong / wp.total * 100) : 0, ...wp }))
+    .filter(w => w.total >= 3 && w.rate >= 40)
+    .sort((a, b) => b.rate - a.rate);
+
+  app.innerHTML = `
+    ${topNavHTML(true, 'Veli Portalı')}
+    <div class="page-container">
+      <div class="veli-portal-top">
+        <div class="veli-portal-student">
+          <div class="veli-portal-avatar">${(profile.name || '?')[0].toUpperCase()}</div>
+          <div>
+            <h2>${profile.name || '—'}</h2>
+            <p class="veli-portal-code-label">Kod: <strong>${code}</strong></p>
+          </div>
+        </div>
+        <span class="veli-sync-badge">☁️ Canlı Takip</span>
+      </div>
+
+      <!-- Özet Sayaçlar -->
+      <div class="veli-stats-grid">
+        <div class="veli-stat-card"><span class="veli-stat-icon">⭐</span><span class="veli-stat-val">${xp}</span><span class="veli-stat-label">Toplam XP</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">🔥</span><span class="veli-stat-val">${streak}</span><span class="veli-stat-label">Gün Serisi</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">🎖️</span><span class="veli-stat-val">${badges.length}</span><span class="veli-stat-label">Rozet</span></div>
+        <div class="veli-stat-card"><span class="veli-stat-icon">📅</span><span class="veli-stat-val">${history.length}</span><span class="veli-stat-label">Aktif Gün</span></div>
+      </div>
+
+      <!-- Bugünün Raporu -->
+      ${todayReport ? `<div class="veli-bugun-rapor">
+        <h3>📊 Bugünün Raporu</h3>
+        <div class="veli-rapor-grid">
+          <div class="veli-rapor-item ${todayReport.completedCount === 3 ? 'veli-rapor-good' : ''}">
+            <span class="vr-icon">${todayReport.completedCount === 3 ? '✅' : '⏳'}</span>
+            <span class="vr-val">${todayReport.completedCount}/3</span>
+            <span class="vr-label">Ders Tamamlandı</span>
+          </div>
+          <div class="veli-rapor-item ${todayReport.totalQuestions > 0 && (todayReport.correctAnswers / todayReport.totalQuestions) >= 0.7 ? 'veli-rapor-good' : 'veli-rapor-warn'}">
+            <span class="vr-icon">📝</span>
+            <span class="vr-val">${todayReport.correctAnswers}/${todayReport.totalQuestions}</span>
+            <span class="vr-label">Doğru Cevap</span>
+          </div>
+          <div class="veli-rapor-item">
+            <span class="vr-icon">💡</span>
+            <span class="vr-val">${todayReport.hintsUsed || 0}</span>
+            <span class="vr-label">İpucu</span>
+          </div>
+          <div class="veli-rapor-item">
+            <span class="vr-icon">⏱️</span>
+            <span class="vr-val">${Math.max(1, Math.round((todayReport.totalTime || 0) / 60000))} dk</span>
+            <span class="vr-label">Süre</span>
+          </div>
+        </div>
+      </div>` : `<div class="veli-bugun-rapor veli-rapor-empty"><p>📅 Bugün henüz çalışma yapılmadı.</p></div>`}
+
+      <!-- Haftalık Grafik -->
+      <div class="veli-grafik-section">
+        <h3>📈 Son 7 Gün</h3>
+        <div class="veli-grafik">
+          ${last7.map(day => {
+            const q = day.h?.totalQuestions || 0;
+            const c = day.h?.correctAnswers || 0;
+            const w = q - c;
+            const hC = q > 0 ? Math.round((c / maxQ) * 100) : 0;
+            const hW = q > 0 ? Math.round((w / maxQ) * 100) : 0;
+            return `<div class="veli-bar-col">
+              <div class="veli-bar-wrap">
+                ${q > 0 ? `<div class="veli-bar-correct" style="height:${hC}%"></div>
+                <div class="veli-bar-wrong" style="height:${hW}%"></div>` : '<div class="veli-bar-empty"></div>'}
+              </div>
+              <span class="veli-bar-label ${day.date === new Date().toISOString().split('T')[0] ? 'veli-bar-today' : ''}">${day.label}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="veli-grafik-legend"><span class="veli-legend-correct">■ Doğru</span><span class="veli-legend-wrong">■ Yanlış</span></div>
+      </div>
+
+      <!-- Zayıf Noktalar -->
+      ${weakList.length > 0 ? `<div class="veli-zayif-section">
+        <h3>⚠️ Dikkat Edilecek Konular</h3>
+        <div class="veli-zayif-list">
+          ${weakList.map(w => {
+            const d = getDers(w.slug);
+            if (!d) return '';
+            return `<div class="veli-zayif-card" style="border-left-color:${d.color}">
+              <div class="veli-zayif-top">
+                <span>${d.icon} ${d.name}</span>
+                <span class="veli-zayif-pct veli-zayif-bad">%${w.rate} hata</span>
+              </div>
+              <p>Zorlandığı üniteler: ${(w.topics || []).map(t => { const u = getUnite(w.slug, t); return u ? u.name : t; }).join(', ')}</p>
+            </div>`;
+          }).join('')}
+        </div>
+        <p class="veli-zayif-oneri">💡 Bu konulardaki videoları birlikte izleyebilirsiniz.</p>
+      </div>` : ''}
+
+      <!-- Genel İlerleme -->
+      <h3 class="section-title">Ders İlerlemesi</h3>
+      <div class="veli-ders-list">
+        ${DERSLER.map(d => {
+          const prog = (data.progress || {})[d.slug] || {};
+          const completed = Object.values(prog).filter(p => p.completed).length;
+          const pct = Math.round((completed / d.uniteler.length) * 100) || 0;
+          return `<div class="veli-ders-card">
+            <div class="veli-ders-top"><span>${d.icon} ${d.name}</span><span class="veli-ders-pct">${pct}%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${d.color}"></div></div>
+            <div class="veli-ders-meta"><span>${completed}/${d.uniteler.length} ünite tamamlandı</span></div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      <button class="btn btn-outline btn-full" onclick="navigate('#/veli-portal')" style="margin-top:1.5rem">
+        ← Farklı Öğrenciyi Takip Et
+      </button>
     </div>`;
 }

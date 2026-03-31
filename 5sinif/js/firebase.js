@@ -33,6 +33,19 @@
 //                   && exists(/databases/$(database)/documents/veliLinks/$(request.auth.token.email))
 //                   && get(/databases/$(database)/documents/veliLinks/$(request.auth.token.email)).data.ogrenciUid == uid;
 //     }
+//
+//     // Admin tüm öğrenci verilerini okuyabilir
+//     match /users/{uid} {
+//       allow read: if request.auth != null
+//                   && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.profile.role == 'admin';
+//     }
+//
+//     // StudentIndex: öğrenci kendi kaydını yazar; admin hepsini okur
+//     match /studentIndex/{uid} {
+//       allow write: if request.auth != null && request.auth.uid == uid;
+//       allow read: if request.auth != null
+//                   && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.profile.role == 'admin';
+//     }
 //   }
 // }
 // ─────────────────────────────
@@ -122,6 +135,8 @@ const FirebaseService = (() => {
         { ...data, _lastSync: firebase.firestore.FieldValue.serverTimestamp() },
         { merge: true }
       );
+      // Öğrenci indeksini de güncelle (admin listesi için)
+      await writeStudentIndex(uid);
     } catch (err) {
       console.error('[Firebase] Push hatası:', err);
     }
@@ -223,6 +238,72 @@ const FirebaseService = (() => {
     }
   }
 
+  // ——— Firestore: Admin Paneli ———
+
+  /**
+   * Öğrencinin kısa özetini /studentIndex/{uid} koleksiyonuna yazar.
+   * Admin paneli bu koleksiyonu listeler — tam kullanıcı verisine erişmeden.
+   */
+  async function writeStudentIndex(uid) {
+    if (!_ready || !uid) return;
+    try {
+      const data = Store._load();
+      const profile = data.profile || {};
+      await _db.collection('studentIndex').doc(uid).set({
+        uid,
+        name: profile.name || '',
+        email: profile.email || '',
+        xp: data.xp || 0,
+        streak: data.streak || 0,
+        lastActiveDate: data.lastActiveDate || null,
+        badgeCount: (data.badges || []).length,
+        todayReport: (data.dailyHistory || []).slice(-1)[0] || null,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      }, { merge: true });
+    } catch (err) {
+      console.error('[Firebase] StudentIndex yazma hatası:', err);
+    }
+  }
+
+  /** Admin: tüm kayıtlı öğrencilerin özetlerini getirir */
+  async function listStudents() {
+    if (!_ready) return [];
+    try {
+      const snap = await _db.collection('studentIndex').get();
+      return snap.docs.map(d => d.data());
+    } catch (err) {
+      console.error('[Firebase] Öğrenci listesi hatası:', err);
+      return [];
+    }
+  }
+
+  /** Admin: tek öğrencinin tam Firestore verisini getirir */
+  async function getStudentFullData(uid) {
+    if (!_ready || !uid) return null;
+    try {
+      const doc = await _db.collection('users').doc(uid).get();
+      return doc.exists ? doc.data() : null;
+    } catch (err) {
+      console.error('[Firebase] Öğrenci verisi hatası:', err);
+      return null;
+    }
+  }
+
+  /** Admin: öğrenciye not ekler (adminNotes dizisine append) */
+  async function addAdminNote(uid, note) {
+    if (!_ready || !uid || !note) return;
+    try {
+      await _db.collection('users').doc(uid).set({
+        adminNotes: firebase.firestore.FieldValue.arrayUnion({
+          note,
+          createdAt: new Date().toISOString(),
+        })
+      }, { merge: true });
+    } catch (err) {
+      console.error('[Firebase] Not ekleme hatası:', err);
+    }
+  }
+
   // ——— Internal ———
 
   function _onSignIn(user) {
@@ -242,6 +323,7 @@ const FirebaseService = (() => {
     pushData, pullData, scheduleSync,
     startVeliListener, stopVeliListener,
     generateVeliCode, resolveVeliCode,
+    writeStudentIndex, listStudents, getStudentFullData, addAdminNote,
   };
 })();
 
