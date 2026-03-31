@@ -1589,6 +1589,7 @@ function renderAdmin() {
   FirebaseService.listStudents().then(students => {
     const el = document.getElementById('adminStudentList');
     if (!el) return;
+    el.className = ''; // admin-loading display:flex'i kaldır
 
     if (!students.length) {
       el.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><h3>Henüz kayıtlı öğrenci yok</h3>
@@ -1672,6 +1673,7 @@ function renderAdminOgrenci(params) {
   FirebaseService.getStudentFullData(uid).then(data => {
     const el = document.getElementById('adminOgrenciContent');
     if (!el) return;
+    el.className = ''; // admin-loading display:flex'i kaldır
 
     if (!data) {
       el.innerHTML = '<div class="empty-state"><p>Öğrenci bulunamadı.</p><button class="btn btn-outline" onclick="navigate(\'#/admin\')">Geri Dön</button></div>';
