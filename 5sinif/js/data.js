@@ -500,34 +500,6 @@ const DERSLER = [
         ]
       },
       {
-        slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı kavramını öğrenme ve iletki ile açı ölçme',
-        videoId: 'V3voEO1TqUQ',
-        checkpoints: [
-          { saniye: 60, soru: 'Açı nedir?', secenekler: ['Aynı noktadan çıkan iki ışının oluşturduğu şekil','İki doğrunun kesişmesi','Bir doğru parçasının uzunluğu','İki nokta arasındaki mesafe'], dogru: 0, ipucu: 'Açı, ortak başlangıç noktasından çıkan iki ışın arasında kalan bölgedir.' },
-          { saniye: 120, soru: 'Dik açı kaç derecedir?', secenekler: ['45°','90°','180°','360°'], dogru: 1, ipucu: 'Dik açı tam 90 derecedir ve köşesine küçük kare işareti konur.' },
-          { saniye: 180, soru: 'Dar açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 360° arası','Tam 90°'], dogru: 0, ipucu: 'Dik açıdan küçük açılara dar açı denir.' },
-          { saniye: 240, soru: 'Geniş açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 270° arası','Tam 180°'], dogru: 1, ipucu: '90 dereceden büyük, 180 dereceden küçük açılara geniş açı denir.' },
-          { saniye: 300, soru: 'Doğru açı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Doğru açı düz bir çizgi gibi görünür ve 180 derecedir.' },
-          { saniye: 360, soru: 'İletki ne işe yarar?', secenekler: ['Uzunluk ölçmeye','Açı ölçmeye','Çember çizmeye','Paralel çizgi çizmeye'], dogru: 1, ipucu: 'İletki, açıların derecesini ölçmek için kullanılan araçtır.' },
-          { saniye: 420, soru: 'Tümler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 0, ipucu: 'Toplamları 90° olan iki açıya tümler açılar denir.' },
-          { saniye: 'fin', soru: 'Bütünler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Toplamları 180° olan iki açıya bütünler açılar denir.' }
-        ]
-      },
-      {
-        slug: 'cokgenler', name: 'Çokgenler ve Üçgenler', hedef: 'Çokgen ve üçgen türlerini tanıma ve özelliklerini öğrenme',
-        videoId: 'IHoenJnlNUw',
-        checkpoints: [
-          { saniye: 60, soru: 'Çokgen nedir?', secenekler: ['En az üç doğru parçasıyla sınırlandırılmış kapalı şekil','Yalnızca dört kenarı olan şekil','Dairesel alan','İki doğrunun kesişimi'], dogru: 0, ipucu: 'Çokgenler en az 3 kenardan oluşan kapalı şekillerdir.' },
-          { saniye: 120, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Her üçgenin iç açıları toplamı 180 derecedir.' },
-          { saniye: 180, soru: 'Eşkenar üçgenin her açısı kaç derecedir?', secenekler: ['45°','60°','90°','120°'], dogru: 1, ipucu: '180 / 3 = 60°. Üç açı da eşittir.' },
-          { saniye: 240, soru: 'İkizkenar üçgenin özelliği nedir?', secenekler: ['Üç kenarı eşit','İki kenarı eşit','Hiçbir kenarı eşit değil','Bir açısı 90°'], dogru: 1, ipucu: 'İkizkenar üçgenin iki kenarı ve buna karşılık gelen iki açısı eşittir.' },
-          { saniye: 300, soru: 'Dörtgenin iç açıları toplamı kaç derecedir?', secenekler: ['180°','270°','360°','540°'], dogru: 2, ipucu: 'Bir dörtgen iki üçgene bölünür: 2 x 180° = 360°' },
-          { saniye: 360, soru: 'Düzgün çokgende tüm kenarlar ve açılar ne durumdadır?', secenekler: ['Hepsi farklı','Kenarlar eşit ama açılar farklı','Tüm kenarlar ve açılar eşit','Sadece açılar eşit'], dogru: 2, ipucu: 'Düzgün çokgenlerde hem tüm kenarlar hem tüm açılar birbirine eşittir.' },
-          { saniye: 420, soru: 'Köşegen nedir?', secenekler: ['Bir kenarın uzunluğu','Komşu olmayan iki köşeyi birleştiren doğru parçası','Bir açının ölçüsü','Çevre uzunluğu'], dogru: 1, ipucu: 'Köşegen, çokgende yan yana olmayan köşeleri birleştirir.' },
-          { saniye: 'fin', soru: 'Dik açılı üçgende dik açı kaç derecedir?', secenekler: ['60°','90°','120°','180°'], dogru: 1, ipucu: 'Dik açılı üçgende bir açı tam 90 derecedir.' }
-        ]
-      },
-      {
         slug: 'kesirler', name: 'Kesirler', hedef: 'Birim, basit ve bileşik kesirleri tanıma ve karşılaştırma',
         videoId: '5ZNxjyxT2hM',
         checkpoints: [
@@ -688,6 +660,121 @@ const DERSLER = [
           { saniye: 360, soru: 'Bir sınıfta 40 öğrenci var. %20\'si gözlüklü ise kaç öğrenci gözlüklüdür?', secenekler: ['4','8','10','20'], dogru: 1, ipucu: '40 x 20 / 100 = 8' },
           { saniye: 420, soru: '0,1 ondalık sayısının yüzde karşılığı nedir?', secenekler: ['%1','%10','%100','%0,1'], dogru: 1, ipucu: '0,1 x 100 = %10' },
           { saniye: 'fin', soru: '%30 + %20 kaç eder?', secenekler: ['%10','%50','%60','%150'], dogru: 1, ipucu: 'Aynı bütüne ait yüzdeler doğrudan toplanabilir.' }
+        ]
+      },
+      {
+        slug: 'sayi-oruntuler', name: 'Sayı ve Şekil Örüntüleri', hedef: 'Sayı ve şekil örüntülerinin kuralını bulma',
+        videoId: 'vVd-ndQ-vB8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Örüntü nedir?',
+            secenekler: [
+              'Belirli bir kurala göre tekrar eden veya değişen sayı ya da şekil dizisidir.',
+              'Rastgele sıralanmış sayılardır.',
+              'Sadece çift sayılardan oluşan dizilerdir.',
+              'Geometrik şekillerin adıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Örüntü: bir kuralı olan, tahmin edilebilir bir düzendir.'
+          },
+          {
+            saniye: 120,
+            soru: '3, 7, 11, 15, 19, … örüntüsünün kuralı nedir?',
+            secenekler: [
+              'Her adımda 4 ekleniyor.',
+              'Her adımda 3 ekleniyor.',
+              'Her adımda 2 ile çarpılıyor.',
+              'Her adımda 5 ekleniyor.'
+            ],
+            dogru: 0,
+            ipucu: '7−3=4, 11−7=4, 15−11=4 → her seferinde 4 ekleniyor.'
+          },
+          {
+            saniye: 180,
+            soru: '2, 6, 18, 54, … örüntüsünde bir sonraki sayı kaçtır?',
+            secenekler: ['108', '162', '72', '60'],
+            dogru: 1,
+            ipucu: '6÷2=3, 18÷6=3, 54÷18=3 → her adımda 3 ile çarpılıyor: 54×3=?'
+          },
+          {
+            saniye: 240,
+            soru: '100, 90, 81, 73, 66, … örüntüsünde çıkarılan sayılar nasıl değişiyor?',
+            secenekler: [
+              '10, 9, 8, 7, … şeklinde birer azalıyor.',
+              'Hep 10 çıkarılıyor.',
+              '10, 8, 6, 4, … şeklinde ikişer azalıyor.',
+              'Sabit bir kural yok.'
+            ],
+            dogru: 0,
+            ipucu: '100−90=10, 90−81=9, 81−73=8, 73−66=7 → farklar 10, 9, 8, 7, … birer azalıyor.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir şekil örüntüsünde 1. adımda 1 kare, 2. adımda 3 kare, 3. adımda 5 kare var. 5. adımda kaç kare olur?',
+            secenekler: ['7', '9', '11', '13'],
+            dogru: 1,
+            ipucu: '1, 3, 5, 7, 9 → her adımda 2 ekleniyor: 4. adım=7, 5. adım=9.'
+          },
+          {
+            saniye: 360,
+            soru: '1, 1, 2, 3, 5, 8, 13, … örüntüsünün kuralı nedir?',
+            secenekler: [
+              'Her sayı kendinden önceki iki sayının toplamıdır.',
+              'Her adımda 2 ekleniyor.',
+              'Her sayı bir öncekinin 2 katıdır.',
+              'Sabit bir kural yoktur.'
+            ],
+            dogru: 0,
+            ipucu: '1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13 → her sayı önceki ikisinin toplamı.'
+          },
+          {
+            saniye: 420,
+            soru: '5, 10, 20, 40, … örüntüsünde 6. terim kaçtır?',
+            secenekler: ['80', '160', '120', '200'],
+            dogru: 1,
+            ipucu: 'Her adımda 2 ile çarpılıyor: 5, 10, 20, 40, 80, 160.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Bir örüntünün kuralını bulmak için ne yapmalıyız?',
+            secenekler: [
+              'Ardışık terimler arasındaki farkı veya oranı inceleyerek düzeni keşfetmeliyiz.',
+              'Sadece ilk iki terime bakmalıyız.',
+              'Sayıları büyükten küçüğe sıralamalıyız.',
+              'Terimleri toplamalıyız.'
+            ],
+            dogru: 0,
+            ipucu: 'Farklar sabit mi? Oranlar sabit mi? Yoksa farklar da değişiyor mu? Bunu bul, kuralı çöz.'
+          }
+        ]
+      },
+      {
+        slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı kavramını öğrenme ve iletki ile açı ölçme',
+        videoId: 'V3voEO1TqUQ',
+        checkpoints: [
+          { saniye: 60, soru: 'Açı nedir?', secenekler: ['Aynı noktadan çıkan iki ışının oluşturduğu şekil','İki doğrunun kesişmesi','Bir doğru parçasının uzunluğu','İki nokta arasındaki mesafe'], dogru: 0, ipucu: 'Açı, ortak başlangıç noktasından çıkan iki ışın arasında kalan bölgedir.' },
+          { saniye: 120, soru: 'Dik açı kaç derecedir?', secenekler: ['45°','90°','180°','360°'], dogru: 1, ipucu: 'Dik açı tam 90 derecedir ve köşesine küçük kare işareti konur.' },
+          { saniye: 180, soru: 'Dar açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 360° arası','Tam 90°'], dogru: 0, ipucu: 'Dik açıdan küçük açılara dar açı denir.' },
+          { saniye: 240, soru: 'Geniş açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 270° arası','Tam 180°'], dogru: 1, ipucu: '90 dereceden büyük, 180 dereceden küçük açılara geniş açı denir.' },
+          { saniye: 300, soru: 'Doğru açı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Doğru açı düz bir çizgi gibi görünür ve 180 derecedir.' },
+          { saniye: 360, soru: 'İletki ne işe yarar?', secenekler: ['Uzunluk ölçmeye','Açı ölçmeye','Çember çizmeye','Paralel çizgi çizmeye'], dogru: 1, ipucu: 'İletki, açıların derecesini ölçmek için kullanılan araçtır.' },
+          { saniye: 420, soru: 'Tümler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 0, ipucu: 'Toplamları 90° olan iki açıya tümler açılar denir.' },
+          { saniye: 'fin', soru: 'Bütünler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Toplamları 180° olan iki açıya bütünler açılar denir.' }
+        ]
+      },
+      {
+        slug: 'cokgenler', name: 'Çokgenler ve Üçgenler', hedef: 'Çokgen ve üçgen türlerini tanıma ve özelliklerini öğrenme',
+        videoId: 'IHoenJnlNUw',
+        checkpoints: [
+          { saniye: 60, soru: 'Çokgen nedir?', secenekler: ['En az üç doğru parçasıyla sınırlandırılmış kapalı şekil','Yalnızca dört kenarı olan şekil','Dairesel alan','İki doğrunun kesişimi'], dogru: 0, ipucu: 'Çokgenler en az 3 kenardan oluşan kapalı şekillerdir.' },
+          { saniye: 120, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Her üçgenin iç açıları toplamı 180 derecedir.' },
+          { saniye: 180, soru: 'Eşkenar üçgenin her açısı kaç derecedir?', secenekler: ['45°','60°','90°','120°'], dogru: 1, ipucu: '180 / 3 = 60°. Üç açı da eşittir.' },
+          { saniye: 240, soru: 'İkizkenar üçgenin özelliği nedir?', secenekler: ['Üç kenarı eşit','İki kenarı eşit','Hiçbir kenarı eşit değil','Bir açısı 90°'], dogru: 1, ipucu: 'İkizkenar üçgenin iki kenarı ve buna karşılık gelen iki açısı eşittir.' },
+          { saniye: 300, soru: 'Dörtgenin iç açıları toplamı kaç derecedir?', secenekler: ['180°','270°','360°','540°'], dogru: 2, ipucu: 'Bir dörtgen iki üçgene bölünür: 2 x 180° = 360°' },
+          { saniye: 360, soru: 'Düzgün çokgende tüm kenarlar ve açılar ne durumdadır?', secenekler: ['Hepsi farklı','Kenarlar eşit ama açılar farklı','Tüm kenarlar ve açılar eşit','Sadece açılar eşit'], dogru: 2, ipucu: 'Düzgün çokgenlerde hem tüm kenarlar hem tüm açılar birbirine eşittir.' },
+          { saniye: 420, soru: 'Köşegen nedir?', secenekler: ['Bir kenarın uzunluğu','Komşu olmayan iki köşeyi birleştiren doğru parçası','Bir açının ölçüsü','Çevre uzunluğu'], dogru: 1, ipucu: 'Köşegen, çokgende yan yana olmayan köşeleri birleştirir.' },
+          { saniye: 'fin', soru: 'Dik açılı üçgende dik açı kaç derecedir?', secenekler: ['60°','90°','120°','180°'], dogru: 1, ipucu: 'Dik açılı üçgende bir açı tam 90 derecedir.' }
         ]
       },
       {
@@ -975,324 +1062,6 @@ const DERSLER = [
             ],
             dogru: 2,
             ipucu: '1 yıl=12 ay, 1 ay=30 gün, 1 gün=24 saat, 1 saat=60 dakika, 1 dakika=60 saniye.'
-          }
-        ]
-      },
-      {
-        slug: 'sayi-oruntuler', name: 'Sayı ve Şekil Örüntüleri', hedef: 'Sayı ve şekil örüntülerinin kuralını bulma',
-        videoId: 'vVd-ndQ-vB8',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Örüntü nedir?',
-            secenekler: [
-              'Belirli bir kurala göre tekrar eden veya değişen sayı ya da şekil dizisidir.',
-              'Rastgele sıralanmış sayılardır.',
-              'Sadece çift sayılardan oluşan dizilerdir.',
-              'Geometrik şekillerin adıdır.'
-            ],
-            dogru: 0,
-            ipucu: 'Örüntü: bir kuralı olan, tahmin edilebilir bir düzendir.'
-          },
-          {
-            saniye: 120,
-            soru: '3, 7, 11, 15, 19, … örüntüsünün kuralı nedir?',
-            secenekler: [
-              'Her adımda 4 ekleniyor.',
-              'Her adımda 3 ekleniyor.',
-              'Her adımda 2 ile çarpılıyor.',
-              'Her adımda 5 ekleniyor.'
-            ],
-            dogru: 0,
-            ipucu: '7−3=4, 11−7=4, 15−11=4 → her seferinde 4 ekleniyor.'
-          },
-          {
-            saniye: 180,
-            soru: '2, 6, 18, 54, … örüntüsünde bir sonraki sayı kaçtır?',
-            secenekler: ['108', '162', '72', '60'],
-            dogru: 1,
-            ipucu: '6÷2=3, 18÷6=3, 54÷18=3 → her adımda 3 ile çarpılıyor: 54×3=?'
-          },
-          {
-            saniye: 240,
-            soru: '100, 90, 81, 73, 66, … örüntüsünde çıkarılan sayılar nasıl değişiyor?',
-            secenekler: [
-              '10, 9, 8, 7, … şeklinde birer azalıyor.',
-              'Hep 10 çıkarılıyor.',
-              '10, 8, 6, 4, … şeklinde ikişer azalıyor.',
-              'Sabit bir kural yok.'
-            ],
-            dogru: 0,
-            ipucu: '100−90=10, 90−81=9, 81−73=8, 73−66=7 → farklar 10, 9, 8, 7, … birer azalıyor.'
-          },
-          {
-            saniye: 300,
-            soru: 'Bir şekil örüntüsünde 1. adımda 1 kare, 2. adımda 3 kare, 3. adımda 5 kare var. 5. adımda kaç kare olur?',
-            secenekler: ['7', '9', '11', '13'],
-            dogru: 1,
-            ipucu: '1, 3, 5, 7, 9 → her adımda 2 ekleniyor: 4. adım=7, 5. adım=9.'
-          },
-          {
-            saniye: 360,
-            soru: '1, 1, 2, 3, 5, 8, 13, … örüntüsünün kuralı nedir?',
-            secenekler: [
-              'Her sayı kendinden önceki iki sayının toplamıdır.',
-              'Her adımda 2 ekleniyor.',
-              'Her sayı bir öncekinin 2 katıdır.',
-              'Sabit bir kural yoktur.'
-            ],
-            dogru: 0,
-            ipucu: '1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13 → her sayı önceki ikisinin toplamı.'
-          },
-          {
-            saniye: 420,
-            soru: '5, 10, 20, 40, … örüntüsünde 6. terim kaçtır?',
-            secenekler: ['80', '160', '120', '200'],
-            dogru: 1,
-            ipucu: 'Her adımda 2 ile çarpılıyor: 5, 10, 20, 40, 80, 160.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Bir örüntünün kuralını bulmak için ne yapmalıyız?',
-            secenekler: [
-              'Ardışık terimler arasındaki farkı veya oranı inceleyerek düzeni keşfetmeliyiz.',
-              'Sadece ilk iki terime bakmalıyız.',
-              'Sayıları büyükten küçüğe sıralamalıyız.',
-              'Terimleri toplamalıyız.'
-            ],
-            dogru: 0,
-            ipucu: 'Farklar sabit mi? Oranlar sabit mi? Yoksa farklar da değişiyor mu? Bunu bul, kuralı çöz.'
-          }
-        ]
-      },
-      {
-        slug: 'yuzde', name: 'Yüzdeler', hedef: 'Kesirleri ve ondalıkları yüzde gösterimiyle ilişkilendirme ve bir çokluğun yüzdesini bulma',
-        videoId: 'JMJwFPL0Rhw',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: '"Yüzde" kavramı ne anlama gelir?',
-            secenekler: [
-              '100\'ün kaçı anlamına gelir; paydası 100 olan kesirlerdir.',
-              '10\'un kaçı anlamına gelir; paydası 10 olan kesirlerdir.',
-              'Herhangi bir sayının yarısı anlamına gelir.',
-              'Sadece büyük sayılarda kullanılan bir kavramdır.'
-            ],
-            dogru: 0,
-            ipucu: 'Yüzde (%), bir bütünün 100 eşit parçaya bölünmesiyle elde edilen miktarı ifade eder.'
-          },
-          {
-            saniye: 120,
-            soru: '37/100 kesri yüzde olarak nasıl yazılır?',
-            secenekler: ['%3,7', '%37', '%370', '%0,37'],
-            dogru: 1,
-            ipucu: 'Paydası 100 olan kesirlerde pay, yüzde değeridir: 37/100 = %37.'
-          },
-          {
-            saniye: 180,
-            soru: '%45 ondalık olarak nasıl yazılır?',
-            secenekler: ['4,5', '45', '0,45', '0,045'],
-            dogru: 2,
-            ipucu: '%45 = 45/100 = 0,45. Virgülü iki basamak sola taşı.'
-          },
-          {
-            saniye: 240,
-            soru: '50 öğrencinin %20\'si kaç öğrencidir?',
-            secenekler: ['5', '10', '20', '25'],
-            dogru: 1,
-            ipucu: '50 × 20/100 = 50 × 0,20 = 10 öğrenci.'
-          },
-          {
-            saniye: 300,
-            soru: '1/4 kesri yüzde olarak kaçtır?',
-            secenekler: ['%14', '%25', '%40', '%75'],
-            dogru: 1,
-            ipucu: '1/4 = 25/100 = %25. Payı ve paydayı 25 ile çarp.'
-          },
-          {
-            saniye: 360,
-            soru: 'Bir kitap 200 TL\'dir. %10 indirim yapılırsa kaç TL indirim yapılır?',
-            secenekler: ['10 TL', '20 TL', '25 TL', '40 TL'],
-            dogru: 1,
-            ipucu: '200 × 10/100 = 20 TL indirim yapılır.'
-          },
-          {
-            saniye: 420,
-            soru: '%75 = ? kesir olarak en sade hali hangisidir?',
-            secenekler: ['75/10', '3/4', '7/5', '3/5'],
-            dogru: 1,
-            ipucu: '%75 = 75/100 → EBOB(75,100)=25 → 3/4.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Yüzde, kesir ve ondalık gösterim arasındaki ilişkiyi en iyi açıklayan ifade hangisidir?',
-            secenekler: [
-              '%45 = 45/100 = 0,45; yüzde değerini 100\'e bölerek ondalık, paydayı 100 yaparak kesir elde ederiz.',
-              'Yüzde değerini 10\'a bölerek ondalık elde ederiz.',
-              'Kesir ile yüzde birbirinden tamamen bağımsız kavramlardır.',
-              'Ondalık sayıları yüzdeye çevirmek için 1000\'e böleriz.'
-            ],
-            dogru: 0,
-            ipucu: '%45 = 45/100 = 0,45. Bu üç gösterim aynı miktarı farklı biçimlerde ifade eder.'
-          }
-        ]
-      },
-      {
-        slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı çeşitlerini tanıma ve iletki ile açı ölçmeyi öğrenme',
-        videoId: 'V3voEO1TqUQ',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Açı nasıl oluşur?',
-            secenekler: [
-              'İki ışının ortak bir noktadan (köşe noktasından) başlamasıyla oluşur.',
-              'İki paralel doğrunun kesişmesiyle oluşur.',
-              'Bir doğrunun ortasına bir nokta koyulmasıyla oluşur.',
-              'Üç doğrunun birbirine paralel olmasıyla oluşur.'
-            ],
-            dogru: 0,
-            ipucu: 'Açı; iki ışının ortak bir noktadan (köşe) çıkmasıyla oluşan geometrik şekildir.'
-          },
-          {
-            saniye: 120,
-            soru: 'Dik açının ölçüsü kaç derecedir?',
-            secenekler: ['45°', '90°', '180°', '360°'],
-            dogru: 1,
-            ipucu: 'Dik açı tam olarak 90° dir. Karede her köşe dik açıdır.'
-          },
-          {
-            saniye: 180,
-            soru: 'Dar açı ile geniş açıyı ayırt eden ölçü nedir?',
-            secenekler: [
-              'Dar açı 0°–90° arasındadır; geniş açı 90°–180° arasındadır.',
-              'Dar açı 90°–180° arasındadır; geniş açı 0°–90° arasındadır.',
-              'İkisi de 90° dir sadece yönleri farklıdır.',
-              'Dar açı 180°, geniş açı 360° dir.'
-            ],
-            dogru: 0,
-            ipucu: 'Dar < 90° < Dik = 90° < Geniş < 180°.'
-          },
-          {
-            saniye: 240,
-            soru: 'Doğru açının ölçüsü kaç derecedir?',
-            secenekler: ['90°', '135°', '180°', '270°'],
-            dogru: 2,
-            ipucu: 'Doğru açı = 180°. İki ışın birbirinin tam zıttı yönünde uzanır ve düz bir doğru oluşturur.'
-          },
-          {
-            saniye: 300,
-            soru: 'Bir saatin 12:00\'deki akrep ile yelkovan arasındaki açı nedir?',
-            secenekler: ['Dar açı', 'Dik açı', 'Tam açı', 'Doğru açı'],
-            dogru: 2,
-            ipucu: '12:00\'de akrep ve yelkovan üst üstedir → 0° ya da tam çevre düşünülürse 360° = tam açı.'
-          },
-          {
-            saniye: 360,
-            soru: 'İletki (açıölçer) ile açı ölçülürken nasıl bir hizalama yapılır?',
-            secenekler: [
-              'İletki merkezi açının köşesine, 0° çizgisi açının bir kenarına hizalanır.',
-              'İletki merkezi açının ortasına, 90° çizgisi açının köşesine gelir.',
-              'İletki herhangi bir yere konulabilir.',
-              'İletki her zaman soldan sağa tutulur.'
-            ],
-            dogru: 0,
-            ipucu: 'İletki merkezi → köşe noktası; 0° çizgisi → açının bir kenarı; diğer kenarın gösterdiği derece = açı ölçüsü.'
-          },
-          {
-            saniye: 420,
-            soru: 'Bir üçgenin iki açısı 60° ve 80° ise üçüncü açı kaç derecedir?',
-            secenekler: ['30°', '40°', '50°', '60°'],
-            dogru: 1,
-            ipucu: 'Üçgenlerin iç açıları toplamı 180°: 180 − 60 − 80 = 40°.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Açı çeşitlerini küçükten büyüğe doğru sıralayan seçenek hangisidir?',
-            secenekler: [
-              'Dar açı (0°–90°) → Dik açı (90°) → Geniş açı (90°–180°) → Doğru açı (180°) → Tam açı (360°)',
-              'Dik açı → Dar açı → Geniş açı → Doğru açı → Tam açı',
-              'Doğru açı → Dik açı → Dar açı → Geniş açı → Tam açı',
-              'Tam açı → Doğru açı → Geniş açı → Dik açı → Dar açı'
-            ],
-            dogru: 0,
-            ipucu: 'Dar (< 90°) < Dik (= 90°) < Geniş (90°–180°) < Doğru (= 180°) < Tam (= 360°).'
-          }
-        ]
-      },
-      {
-        slug: 'ucgen-cokgen', name: 'Üçgenler ve Çokgenler', hedef: 'Üçgen ve çokgenleri kenar ve açı özelliklerine göre sınıflandırma',
-        videoId: '-FruESJRVeE',
-        checkpoints: [
-          {
-            saniye: 60,
-            soru: 'Üçgenler kenar uzunluklarına göre kaç gruba ayrılır?',
-            secenekler: [
-              '3 grup: eşkenar, ikizkenar, çeşitkenar',
-              '2 grup: eşkenar ve ikizkenar',
-              '4 grup: eşkenar, ikizkenar, çeşitkenar, dik üçgen',
-              'Sadece 1 grup: hepsi aynıdır.'
-            ],
-            dogru: 0,
-            ipucu: 'Kenar uzunluklarına göre: Eşkenar (3 eşit kenar), İkizkenar (2 eşit kenar), Çeşitkenar (hiç eşit kenar yok).'
-          },
-          {
-            saniye: 120,
-            soru: 'Eşkenar üçgenin açıları kaç derecedir?',
-            secenekler: ['60°, 60°, 60°', '90°, 45°, 45°', '30°, 60°, 90°', '70°, 60°, 50°'],
-            dogru: 0,
-            ipucu: 'Eşkenar üçgende 3 kenar eşit → 3 açı da eşit → 180°÷3 = 60° her açı.'
-          },
-          {
-            saniye: 180,
-            soru: 'Dik üçgende en büyük açı kaç derecedir?',
-            secenekler: ['60°', '90°', '120°', '180°'],
-            dogru: 1,
-            ipucu: 'Dik üçgende bir iç açı 90° dir; bu en büyük açıdır.'
-          },
-          {
-            saniye: 240,
-            soru: 'Çokgen nedir?',
-            secenekler: [
-              'En az 3 doğru parçasıyla sınırlanmış kapalı düzlem şeklidir.',
-              'Sadece 4 kenarlı geometrik şekildir.',
-              'İçinde çember bulunan şekildir.',
-              'Tüm kenarları eşit olan şekildir.'
-            ],
-            dogru: 0,
-            ipucu: 'Çokgen: 3 veya daha fazla doğru parçasıyla çevrili kapalı düzlemsel şekil. Üçgen, dörtgen, beşgen, altıgen…'
-          },
-          {
-            saniye: 300,
-            soru: 'Beşgenin köşegen sayısı kaçtır?',
-            secenekler: ['3', '4', '5', '6'],
-            dogru: 2,
-            ipucu: 'n kenarlı çokgenin köşegen sayısı = n(n-3)/2. Beşgen: 5×2/2 = 5 köşegen.'
-          },
-          {
-            saniye: 360,
-            soru: 'Bir dörtgenin iç açıları toplamı kaç derecedir?',
-            secenekler: ['180°', '270°', '360°', '540°'],
-            dogru: 2,
-            ipucu: 'Dörtgeni köşegeniyle iki üçgene böl: 2 × 180° = 360°.'
-          },
-          {
-            saniye: 420,
-            soru: 'Hangi çokgenin tüm kenarları ve tüm açıları eşittir?',
-            secenekler: ['Dikdörtgen', 'İkizkenar üçgen', 'Düzgün çokgen', 'Paralelkenar'],
-            dogru: 2,
-            ipucu: 'Tüm kenarları ve açıları eşit olan çokgene "düzgün çokgen" denir. Eşkenar üçgen ve kare birer düzgün çokgendir.'
-          },
-          {
-            saniye: 'fin',
-            soru: 'Üçgenler ve çokgenler hakkında aşağıdakilerin hangisi doğrudur?',
-            secenekler: [
-              'Üçgen iç açılar toplamı 180°; n kenarlı çokgen iç açılar toplamı (n-2)×180°; kenar sayısına göre üçgen, dörtgen, beşgen… olarak adlandırılır.',
-              'Tüm çokgenlerin iç açılar toplamı 360° dir.',
-              'Üçgenlerin iç açılar toplamı kenar sayısına göre değişir.',
-              'Çokgen sadece 4 veya daha fazla kenarlı şekiller için kullanılır.'
-            ],
-            dogru: 0,
-            ipucu: 'Üçgen: 180°. Dörtgen: 360°. n-gen: (n-2)×180°. Kenar sayısı artıkça toplam açı artar.'
           }
         ]
       },
