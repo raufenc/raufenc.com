@@ -14,14 +14,62 @@ const FILES = {
 };
 const IMAGES_PATH = 'birlikteiyilik-site/static/images/';
 
+// ── JWT helpers (Web Crypto API — Edge uyumlu) ──
+async function signJWT(payload, secret) {
+  const enc = new TextEncoder();
+  const urlsafe = s => s.replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+  const header = urlsafe(btoa(JSON.stringify({alg:'HS256',typ:'JWT'})));
+  const body   = urlsafe(btoa(JSON.stringify(payload)));
+  const msg    = `${header}.${body}`;
+  const key    = await crypto.subtle.importKey('raw', enc.encode(secret), {name:'HMAC',hash:'SHA-256'}, false, ['sign']);
+  const sig    = await crypto.subtle.sign('HMAC', key, enc.encode(msg));
+  const sigB64 = urlsafe(btoa(String.fromCharCode(...new Uint8Array(sig))));
+  return `${msg}.${sigB64}`;
+}
+
+async function verifyJWT(token, secret) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) return null;
+    const [header, body, sig] = parts;
+    const msg = `${header}.${body}`;
+    const enc = new TextEncoder();
+    const key = await crypto.subtle.importKey('raw', enc.encode(secret), {name:'HMAC',hash:'SHA-256'}, false, ['verify']);
+    const pad = s => s.replace(/-/g,'+').replace(/_/g,'/') + '=='.slice((s.length + 3) % 4);
+    const sigBytes = Uint8Array.from(atob(pad(sig)), c => c.charCodeAt(0));
+    const valid = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(msg));
+    if (!valid) return null;
+    const payload = JSON.parse(atob(pad(body)));
+    if (payload.exp < Math.floor(Date.now() / 1000)) return null;
+    return payload;
+  } catch(e) { return null; }
+}
+
+// ── Auth: JWT Bearer > X-Admin-Key header > legacy body.password ──
+async function checkAuth(req, body, ADMIN_PW, jwtSecret) {
+  const authHeader = req.headers.get('authorization') || '';
+  if (authHeader.startsWith('Bearer ')) {
+    const payload = await verifyJWT(authHeader.slice(7), jwtSecret);
+    if (payload) return { valid: true, user: payload };
+  }
+  const xKey = req.headers.get('x-admin-key') || '';
+  if (xKey && xKey === ADMIN_PW)
+    return { valid: true, user: { id: 'admin', name: 'Admin', role: 'admin' } };
+  if (body && body.password === ADMIN_PW)
+    return { valid: true, user: { id: 'admin', name: 'Admin', role: 'admin' } };
+  return { valid: false };
+}
+
 export default async function handler(req) {
-  const ADMIN_PW = process.env.BIA_ADMIN_PASSWORD;
-  const TOKEN = process.env.BIA_GITHUB_TOKEN || '';
+  const ADMIN_PW   = process.env.BIA_ADMIN_PASSWORD;
+  const TOKEN      = process.env.BIA_GITHUB_TOKEN || '';
+  const JWT_SECRET = process.env.BIA_JWT_SECRET || ADMIN_PW;
+  const BIA_USERS  = process.env.BIA_USERS || '';
 
   const cors = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key',
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
   };
@@ -52,15 +100,19 @@ export default async function handler(req) {
     const file = FILES[type];
     if (!file) return json({ error: 'Geçersiz tip' }, 400);
 
-    const hasPw = searchParams.get('password') === ADMIN_PW;
     const isPublic = searchParams.has('public');
 
-    if (!hasPw && !isPublic) return json({ error: 'Yanlış şifre' }, 401);
+    if (!isPublic) {
+      const legacyPw = searchParams.get('password') === ADMIN_PW;
+      if (!legacyPw) {
+        const auth = await checkAuth(req, null, ADMIN_PW, JWT_SECRET);
+        if (!auth.valid) return json({ error: 'Yanlış şifre' }, 401);
+      }
+    }
 
     try {
       const data = await gh(`/repos/${REPO}/contents/${file}`);
       const content = decode(data.content);
-      // Public mode: data only, no sha. Admin mode: data + sha
       if (isPublic) {
         const publicCors = { ...cors, 'Cache-Control': 'public, max-age=60, s-maxage=60' };
         return new Response(JSON.stringify({ data: content }), { status: 200, headers: publicCors });
@@ -73,21 +125,49 @@ export default async function handler(req) {
 
   if (req.method === 'POST') {
     const body = await req.json();
-    if (body.password !== ADMIN_PW) return json({ error: 'Yanlış şifre' }, 401);
 
-    // Image upload handler
+    // ── Giriş endpoint'i ──
+    if (body.action === 'login') {
+      const { username = 'admin', password } = body;
+      let user = null;
+
+      if (BIA_USERS) {
+        try {
+          const users = JSON.parse(BIA_USERS);
+          const found = users.find(u => u.id === username || u.name === username);
+          if (found && found.password === password) {
+            user = { id: found.id, name: found.name, role: found.role || 'admin' };
+          }
+        } catch(e) {}
+      }
+
+      if (!user && password === ADMIN_PW) {
+        user = { id: 'admin', name: 'Admin', role: 'admin' };
+      }
+
+      if (!user) return json({ error: 'Yanlış kullanıcı adı veya şifre' }, 401);
+
+      const exp = Math.floor(Date.now() / 1000) + 28800; // 8 saat
+      const token = await signJWT({ ...user, exp }, JWT_SECRET);
+      return json({ ok: true, token, user, exp });
+    }
+
+    // ── Diğer tüm işlemler için auth kontrolü ──
+    const auth = await checkAuth(req, body, ADMIN_PW, JWT_SECRET);
+    if (!auth.valid) return json({ error: 'Yanlış şifre' }, 401);
+
+    // Görsel yükleme
     if (body.type === 'upload') {
       const { filename, content: imgBase64 } = body;
       if (!filename || !imgBase64) return json({ error: 'filename ve content gerekli' }, 400);
       const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
       const filePath = IMAGES_PATH + safeName;
-      // Check if file already exists (to get sha for update)
       let existingSha = '';
       try {
         const existing = await gh(`/repos/${REPO}/contents/${filePath}`);
         if (existing.sha) existingSha = existing.sha;
       } catch(_) {}
-      const result = await gh(`/repos/${REPO}/contents/${filePath}`, 'PUT', {
+      await gh(`/repos/${REPO}/contents/${filePath}`, 'PUT', {
         message: `BIA: görsel yüklendi — ${safeName}`,
         content: imgBase64,
         ...(existingSha ? { sha: existingSha } : {}),
@@ -101,7 +181,6 @@ export default async function handler(req) {
     if (!file) return json({ error: 'Geçersiz tip' }, 400);
     try {
       let payload = body.data;
-      // Sort arrays by date for news/events
       if ((type === 'news' || type === 'events') && Array.isArray(payload)) {
         payload = payload.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       }
