@@ -19,6 +19,24 @@ const NT = {
   // Hamburger menü navigasyonu
   renderNav(container) {
     const path = window.location.pathname.replace(/index\.html$/, '');
+
+    // Skip-link (erişilebilirlik)
+    if (!document.querySelector('.nt-skip-link')) {
+      const skip = document.createElement('a');
+      skip.href = '#main-content';
+      skip.className = 'nt-skip-link';
+      skip.textContent = 'Ana içeriğe geç';
+      skip.style.cssText = 'position:absolute;top:-9999px;left:0;background:var(--surface,#1a1a2e);color:var(--text,#e8e8f0);padding:8px 16px;z-index:9999;font-size:0.85rem;border-radius:0 0 8px 0;';
+      skip.addEventListener('focus', () => { skip.style.position = 'fixed'; skip.style.top = '0'; });
+      skip.addEventListener('blur', () => { skip.style.position = 'absolute'; skip.style.top = '-9999px'; });
+      document.body.insertBefore(skip, document.body.firstChild);
+      // main-content id'si yoksa ilk section'a ekle
+      if (!document.getElementById('main-content')) {
+        const firstSection = document.querySelector('section, main, [role="main"]');
+        if (firstSection) firstSection.id = 'main-content';
+      }
+    }
+
     const nav = document.createElement('nav');
     nav.className = 'nt-nav';
     nav.innerHTML = `
@@ -77,7 +95,7 @@ const NT = {
     f.className = 'nt-footer';
     f.innerHTML = `
       <p>NöroTerbiye — İçindeki düşmanı dosta çevirmek</p>
-      <p style="margin-top:6px"><a href="/noroterbiye/kitap/">Kitap</a> · <a href="/">raufenc.com</a></p>
+      <p style="margin-top:6px"><a href="/noroterbiye/kitap/">Kitap</a> · <a href="/">raufenc.com</a> · <a href="/gizlilik/">Gizlilik</a></p>
       <p style="margin-top:8px;font-size:0.7rem">Bu site teşhis koymaz; farkındalık oluşturur.</p>
     `;
     document.body.appendChild(f);
@@ -171,10 +189,11 @@ const NT = {
     }, duration);
   },
 
-  // localStorage yardımcıları (hata yönetimli)
+  // localStorage yardımcıları (hata yönetimli + TTL)
   save(key, data) {
     try {
-      localStorage.setItem('nt_' + key, JSON.stringify(data));
+      const wrapper = { data, _savedAt: Date.now() };
+      localStorage.setItem('nt_' + key, JSON.stringify(wrapper));
       return true;
     } catch(e) {
       // Quota aşımı veya diğer hatalar
@@ -188,14 +207,62 @@ const NT = {
     }
   },
 
-  load(key, fallback = null) {
+  load(key, fallback = null, maxAgeDays = 0) {
     try {
-      const d = localStorage.getItem('nt_' + key);
-      return d ? JSON.parse(d) : fallback;
+      const raw = localStorage.getItem('nt_' + key);
+      if (!raw) return fallback;
+      const parsed = JSON.parse(raw);
+      // Eski format uyumu (_savedAt olmayan kayıtlar)
+      if (parsed && typeof parsed === 'object' && '_savedAt' in parsed) {
+        if (maxAgeDays > 0) {
+          const age = Date.now() - parsed._savedAt;
+          if (age > maxAgeDays * 86400000) {
+            localStorage.removeItem('nt_' + key);
+            return fallback;
+          }
+        }
+        return parsed.data;
+      }
+      // Eski formattaki veri — olduğu gibi döndür
+      return parsed;
     } catch(e) {
       console.error('NT.load error:', e);
       return fallback;
     }
+  },
+
+  // Tüm NöroTerbiye araç verilerini sil
+  clearAllToolData() {
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('nt_') && key !== 'nt_streak') keysToRemove.push(key);
+    }
+    if (keysToRemove.length === 0) {
+      this.toast('Silinecek veri bulunamadı.');
+      return 0;
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+    this.toast(keysToRemove.length + ' veri kaydı silindi.');
+    return keysToRemove.length;
+  },
+
+  // Tüm NT anahtarlarını listele
+  listAllData() {
+    const items = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('nt_')) {
+        try {
+          const raw = JSON.parse(localStorage.getItem(key));
+          const savedAt = raw && raw._savedAt ? new Date(raw._savedAt).toLocaleDateString('tr-TR') : 'bilinmiyor';
+          items.push({ key: key.replace('nt_', ''), savedAt, size: localStorage.getItem(key).length });
+        } catch(e) {
+          items.push({ key: key.replace('nt_', ''), savedAt: 'bilinmiyor', size: localStorage.getItem(key).length });
+        }
+      }
+    }
+    return items;
   },
 
   // ── Kayıt İndirme Sistemi ──

@@ -23,9 +23,17 @@
       <p class="nt-subtitle nt-fade-in" style="animation-delay:0.1s;margin-bottom:8px">
         Bilgiyi eyleme çeviren pratik araçlar. Planla, kaydet, dönüştür.
       </p>
-      <p class="nt-fade-in" style="animation-delay:0.15s;font-size:0.78rem;color:var(--muted);margin-bottom:32px">
+      <p class="nt-fade-in" style="animation-delay:0.15s;font-size:0.78rem;color:var(--muted);margin-bottom:16px">
         Tüm veriler tarayıcında kalır, hiçbir bilgi dışarı gönderilmez.
       </p>
+      <div class="nt-fade-in" style="animation-delay:0.2s;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:32px;font-size:0.82rem;color:var(--text-secondary);line-height:1.6">
+        <strong style="color:var(--text)">Veri bilgisi:</strong> Araç verilerin yalnızca bu cihazın tarayıcısında saklanır.
+        Paylaşılan bir cihaz kullanıyorsan, işin bittiğinde verilerini temizle.
+        <a href="/gizlilik/" style="color:var(--warm);text-decoration:none;font-weight:600">Gizlilik bildirimi &rarr;</a>
+        <div style="margin-top:10px">
+          <button onclick="if(confirm('Tüm araç verilerini silmek istediğine emin misin?')){NT.clearAllToolData();}" style="padding:6px 16px;background:#ef4444;color:#fff;border:none;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;font-family:inherit">Tüm Araç Verilerini Sil</button>
+        </div>
+      </div>
 
       <div class="nt-filters nt-fade-in" style="animation-delay:0.18s" id="filters">
         <button class="nt-filter-btn active" data-filter="all">Tümü</button>

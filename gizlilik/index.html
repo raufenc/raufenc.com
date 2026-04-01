@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gizlilik ve Veri İşleme Bildirimi — raufenc.com</title>
+  <meta name="description" content="raufenc.com gizlilik bildirimi. Hangi veriler toplanır, nasıl saklanır, nasıl silinir. KVKK uyumlu aydınlatma metni.">
+  <meta property="og:title" content="Gizlilik ve Veri İşleme Bildirimi">
+  <meta property="og:description" content="raufenc.com gizlilik bildirimi ve KVKK aydınlatma metni.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://raufenc.com/gizlilik/" />
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--text, #e8e8f0); background: var(--bg, #0f0f1a); line-height: 1.8; margin: 0; padding: 0; }
+    .privacy-wrap { max-width: 720px; margin: 0 auto; padding: 80px 20px 60px; }
+    h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+    h2 { font-size: 1.15rem; font-weight: 700; margin: 32px 0 12px; color: var(--warm, #c8a46e); }
+    h3 { font-size: 1rem; font-weight: 600; margin: 20px 0 8px; }
+    p, li { font-size: 0.92rem; color: var(--text-secondary, #9ca3af); }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    .date { font-size: 0.78rem; color: var(--muted, #6b7280); margin-bottom: 32px; }
+    .info-box { background: var(--surface, #1a1a2e); border: 1px solid var(--border, #2a2a3e); border-radius: 12px; padding: 20px 24px; margin: 20px 0; }
+    .btn-delete { display: inline-block; margin-top: 12px; padding: 10px 24px; background: #ef4444; color: #fff; border: none; border-radius: 8px; font-size: 0.88rem; font-weight: 600; cursor: pointer; font-family: inherit; text-decoration: none; }
+    .btn-delete:hover { background: #dc2626; }
+    a { color: var(--warm, #c8a46e); }
+    .back-link { display: inline-block; margin-top: 32px; font-size: 0.85rem; color: var(--muted, #6b7280); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border, #2a2a3e); border-radius: 20px; }
+  </style>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <div class="privacy-wrap">
+    <h1>Gizlilik ve Veri İsleme Bildirimi</h1>
+    <p class="date">Son guncelleme: 1 Nisan 2026</p>
+
+    <p>Bu sayfa, raufenc.com ve alt uygulamalarinda (NöroTerbiye, Osmanlica Lugat vb.) hangi verilerin toplandigi, nasil islendigi ve haklariniz hakkinda bilgi verir.</p>
+
+    <h2>1. Veri Sorumlusu</h2>
+    <p>Rauf Enc — raufenc.com<br>
+    Iletisim: <a href="/#iletisim">raufenc.com iletisim formu</a></p>
+
+    <h2>2. Toplanan Veriler</h2>
+
+    <h3>2.1 Analitik (Google Analytics 4)</h3>
+    <p>Siteyi ziyaret ettiginizde Google Analytics 4 (GA4) araciligiyla anonim kullanim verileri toplanir:</p>
+    <ul>
+      <li>Sayfa goruntulemeleri ve gezinme akisi</li>
+      <li>Cihaz turu, tarayici ve isletim sistemi (anonimlestirilmis)</li>
+      <li>Yaklasik konum (sehir duzeyi, IP adresi saklanmaz)</li>
+      <li>Oturum suresi ve etkilesim olculeri</li>
+    </ul>
+    <p>Bu veriler kisisellestirilemez ve kimlik tespiti icin kullanilamaz.</p>
+
+    <h3>2.2 Yerel Depolama (localStorage)</h3>
+    <p>NöroTerbiye arac ve testleri, verilerinizi <strong>yalnizca sizin cihazinizin tarayicisinda</strong> saklar. Hicbir kisisel veri sunucumuza gonderilmez.</p>
+    <div class="info-box">
+      <p><strong>Saklanan veri turleri:</strong></p>
+      <ul>
+        <li>Test sonuclari ve oyun skorlari</li>
+        <li>Arac verileri (yapilacaklar listesi, aliskanlik kanvasi, ekran suresi sozlesmesi vb.)</li>
+        <li>Tema tercihi (acik/koyu mod)</li>
+        <li>Gunluk kullanim serisi (streak)</li>
+      </ul>
+      <p style="margin-top:12px"><strong>Saklama suresi:</strong> Veriler siz silene kadar tarayicinizda kalir. Streak verileri otomatik olarak 90 gun ile sinirlidir.</p>
+      <p style="margin-top:8px"><strong>Paylasilan cihaz uyarisi:</strong> Baskasinin da kullandigi bir cihazda iseniz, isiniz bittiginde verilerinizi silmenizi oneririz.</p>
+    </div>
+
+    <h3>2.3 Iletisim Formu</h3>
+    <p>Ana sayfadaki iletisim formu araciligiyla gonderdiginiz bilgiler (ad, e-posta, mesaj) yalnizca sizinle iletisim kurmak icin kullanilir ve ucuncu taraflarla paylasilmaz.</p>
+
+    <h2>3. Verilerinizi Silme</h2>
+    <p>NöroTerbiye araclarinda saklanan tum yerel verileri tek tikla silebilirsiniz:</p>
+    <button class="btn-delete" onclick="clearAllNTData()">Tum NöroTerbiye Verilerini Sil</button>
+    <p style="font-size:0.8rem;color:var(--muted);margin-top:8px">Bu islem geri alinamaz. Tum test sonuclari, arac verileri ve oyun kayitlari silinir.</p>
+
+    <h2>4. Ucuncu Taraf Hizmetler</h2>
+    <ul>
+      <li><strong>Google Analytics 4:</strong> Anonim site kullanim analitigi (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Gizlilik Politikasi</a>)</li>
+      <li><strong>Google Fonts:</strong> Yazi tipi yuklemesi</li>
+      <li><strong>Vercel:</strong> Site barindirma (<a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel Gizlilik Politikasi</a>)</li>
+    </ul>
+
+    <h2>5. Cerezler</h2>
+    <p>Bu site birinci taraf cerez kullanmaz. Google Analytics ucuncu taraf cerezleri kullanabilir. Tarayicinizin cerez ayarlarindan bunlari kontrol edebilirsiniz.</p>
+
+    <h2>6. KVKK Kapsamindaki Haklariniz</h2>
+    <p>6698 sayili Kisisel Verilerin Korunmasi Kanunu kapsaminda asagidaki haklara sahipsiniz:</p>
+    <ul>
+      <li>Kisisel verilerinizin islenip islenmedigini ogrenme</li>
+      <li>Islenmisse buna iliskin bilgi talep etme</li>
+      <li>Isleme amacini ve amacina uygun kullanilip kullanilmadigini ogrenme</li>
+      <li>Eksik veya yanlis islenmisse duzeltilmesini isteme</li>
+      <li>Silinmesini veya yok edilmesini isteme</li>
+      <li>Islenen verilerin ucuncu kisilere bildirilmesini isteme</li>
+      <li>Aleyhinize bir sonucun ortaya cikmasina itiraz etme</li>
+    </ul>
+    <p>Bu haklarinizi kullanmak icin <a href="/#iletisim">iletisim formu</a> araciligiyla bize ulasabilirsiniz.</p>
+
+    <h2>7. Guvenlik Bildirimi</h2>
+    <p>Bir guvenlik acigi tespit ederseniz, lutfen <a href="/.well-known/security.txt">security.txt</a> dosyasindaki iletisim bilgilerini kullanin.</p>
+
+    <a href="/" class="back-link">&larr; Ana Sayfa</a>
+  </div>
+
+  <script>
+    function clearAllNTData() {
+      if (!confirm('Tum NöroTerbiye verilerini silmek istediginize emin misiniz? Bu islem geri alinamaz.')) return;
+      let count = 0;
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('nt_')) keysToRemove.push(key);
+      }
+      keysToRemove.forEach(k => { localStorage.removeItem(k); count++; });
+      alert(count + ' veri kaydi silindi.');
+    }
+  </script>
+</body>
+</html>
