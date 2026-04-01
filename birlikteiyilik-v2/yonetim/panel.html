@@ -402,25 +402,16 @@ function authHeaders() {
 }
 
 async function apiFetch(params) {
-  try {
-    const r = await fetch(API, {
-      method: 'POST',
-      headers: authHeaders(),
-      body: JSON.stringify(params)
-    });
-    if (r.status === 401) { logout(); return; }
-    if (r.ok) return await r.json();
-  } catch(e) {}
-
-  // Fallback: eski GET API (token yoksa)
-  if (!token) {
-    const qs = new URLSearchParams({ password: pw, ...params });
-    const r = await fetch(`${API}?${qs}`);
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.error || 'Sunucu hatasi');
-    return d;
-  }
-  throw new Error('API erisim hatasi');
+  // GET ile veri oku (token veya password ile)
+  const qs = new URLSearchParams(params);
+  if (!token) qs.set('password', pw);
+  const r = await fetch(`${API}?${qs}`, {
+    headers: token ? { 'Authorization': `Bearer ${token}` } : {}
+  });
+  if (r.status === 401) { logout(); throw new Error('Oturum suresi doldu'); }
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.error || 'Sunucu hatasi');
+  return d;
 }
 
 async function apiSave(params) {
