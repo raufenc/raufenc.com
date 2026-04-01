@@ -69,20 +69,30 @@ async function doLogin() {
   btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Giriş yapılıyor...';
   document.getElementById('loginErr').innerHTML = '';
   try {
+    // 1. Yeni JWT login dene
+    let token = null, loginOk = false;
     const r = await fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ action: 'login', username, password: pw })
     });
     const d = await r.json();
-    if (!r.ok) throw new Error(d.error || 'Giriş başarısız');
-
-    // JWT token al ve sakla
-    if (d.token) {
-      sessionStorage.setItem('biaToken', d.token);
+    if (r.ok && d.token) {
+      token = d.token;
+      sessionStorage.setItem('biaToken', token);
       sessionStorage.setItem('biaName', d.user?.name || username);
+      loginOk = true;
     }
-    // Backward compat
+
+    // 2. Fallback: eski GET yöntemi (API eski sürümdeyse)
+    if (!loginOk) {
+      const r2 = await fetch(`${API}?type=news&password=${encodeURIComponent(pw)}`);
+      const d2 = await r2.json();
+      if (!r2.ok) throw new Error(d.error || d2.error || 'Yanlış şifre');
+      loginOk = true;
+    }
+
+    // Backward compat: şifreyi sakla
     sessionStorage.setItem('biaPw', pw);
 
     // Middleware için cookie (8 saat)
