@@ -5,10 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Osmanlıca Lügat — Rauf Enç</title>
   <meta name="description" content="454 Osmanlıca terim, hat görselleri ve anlamlarıyla interaktif sözlük." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Osmanlıca Lügat — Rauf Enç" />
+  <meta property="og:description" content="454 Osmanlıca terim, hat görselleri ve anlamlarıyla interaktif sözlük." />
+  <meta property="og:url" content="https://raufenc.com/osmanlica/" />
+  <meta property="og:image" content="https://raufenc.com/images/og-image.png" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Osmanlıca Lügat — Rauf Enç" />
+  <meta name="twitter:description" content="454 Osmanlıca terim, hat görselleri ve anlamlarıyla interaktif sözlük." />
+  <script src="/lib/error-logger.js"></script>
   <link rel="canonical" href="https://raufenc.com/osmanlica/" />
   <link rel="stylesheet" href="/lib/design-system/tokens.css" />
   <script src="/lib/design-system/theme.js"></script>
-  <script src="veri.js" defer></script>
+  <script src="veri.js" defer onerror="document.getElementById('total').textContent='!';document.getElementById('results-text').textContent='Veri yüklenemedi';document.getElementById('fihrist-count').textContent='Veri yüklenemedi'"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -469,7 +479,7 @@
     </div>
   </div>
   <div class="results-info">
-    <span id="results-text">0 sonuç</span>
+    <span id="results-text">Yükleniyor...</span>
     <button class="shuffle-btn" onclick="karistir()">Karıştır</button>
   </div>
   <div id="grid"></div>
@@ -479,7 +489,7 @@
 <div class="wrap" id="panel-fihrist" style="display:none;">
   <div class="az-bar" id="az-bar"></div>
   <div class="results-info">
-    <span id="fihrist-count">0 sonuç</span>
+    <span id="fihrist-count">Yükleniyor...</span>
   </div>
   <div id="fihrist-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; padding-bottom:24px;"></div>
 </div>

@@ -5,7 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kalbinin Haritası — Ahlak Pusulası</title>
   <meta name="description" content="17 farklı ahlâk testinde kendini tanı. Finansal risk analizinden ilham alan deterministik skorlama ile erdemlerini ölç, gelişimini takip et. İslâmî ahlâk eğitiminde yenilikçi sosyal model.">
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kalbinin Haritası — Ahlak Pusulası" />
+  <meta property="og:description" content="17 farklı ahlâk testinde kendini tanı. Finansal risk analizinden ilham alan deterministik skorlama ile erdemlerini ölç, gelişimini takip et. İslâmî ahlâk eğitiminde yenilikçi sosyal model." />
+  <meta property="og:url" content="https://raufenc.com/kalbinin-haritasi/" />
+  <meta property="og:image" content="https://raufenc.com/images/og-image.png" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kalbinin Haritası — Ahlak Pusulası" />
+  <meta name="twitter:description" content="17 farklı ahlâk testinde kendini tanı. Finansal risk analizinden ilham alan deterministik skorlama ile erdemlerini ölç, gelişimini takip et. İslâmî ahlâk eğitiminde yenilikçi sosyal model." />
   <link rel="canonical" href="https://raufenc.com/kalbinin-haritasi/" />
+  <script src="/lib/error-logger.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -465,7 +475,24 @@
   <button id="auth-btn" onclick="showAuthModal()" aria-label="Giriş Yap" style="position:fixed;top:12px;right:56px;z-index:50;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-gold);background:var(--bg-card);color:var(--gold);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.3s" title="Giriş Yap">👤</button>
   <button id="theme-toggle" onclick="toggleTheme()" aria-label="Tema Değiştir" role="switch" style="position:fixed;top:12px;right:12px;z-index:50;width:36px;height:36px;border-radius:50%;border:1px solid var(--border-gold);background:var(--bg-card);color:var(--gold);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);transition:all 0.3s" title="Tema Değiştir">☀️</button>
   <a href="#app" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-black focus:p-2 focus:rounded">İçeriğe Atla</a>
-  <main id="app" role="main" aria-label="Ahlak Pusulası Uygulaması" class="container mx-auto max-w-4xl p-4 sm:p-6 py-8"></main>
+  <main id="app" role="main" aria-label="Ahlak Pusulası Uygulaması" class="container mx-auto max-w-4xl p-4 sm:p-6 py-8">
+    <!-- Statik ilk içerik: JS yüklenince üzerine yazılır, SEO ve erişilebilirlik için -->
+    <div class="flex flex-col items-center justify-center min-h-[90vh] text-center relative" id="static-welcome">
+      <p class="text-2xl sm:text-3xl mb-4" style="color:var(--gold);opacity:0.7;font-family:'Amiri',serif">بسم الله الرحمن الرحيم</p>
+      <h1 class="text-5xl sm:text-7xl md:text-8xl font-bold mb-3" style="color:var(--gold)">Kalbinin Haritasi</h1>
+      <h2 class="text-2xl sm:text-4xl font-semibold mb-6" style="color:var(--text-primary);opacity:0.85">Ahlak Pusulasi</h2>
+      <p class="text-base sm:text-lg max-w-xl mb-6 leading-relaxed" style="color:var(--text-secondary)">
+        17 farkli ahlak testinde kendini tani. Finansal risk analizinden ilham alan deterministik skorlama ile erdemlerini olc, gelisimini takip et. Islami ahlak egitiminde yenilikci sosyal model.
+      </p>
+      <p class="text-sm" style="color:var(--text-muted)">Uygulama yukleniyor...</p>
+      <noscript>
+        <div style="margin-top:2rem;padding:1.5rem;border:1px solid var(--border-gold);border-radius:12px;max-width:400px">
+          <p style="color:var(--gold);font-weight:600;margin-bottom:0.5rem">JavaScript Gerekli</p>
+          <p style="color:var(--text-secondary);font-size:0.875rem">Bu uygulama JavaScript gerektirir. Lutfen tarayicinizda JavaScript'i etkinlestirin ve sayfayi yenileyin.</p>
+        </div>
+      </noscript>
+    </div>
+  </main>
 <script>
 /* Theme */
 function toggleTheme(){
