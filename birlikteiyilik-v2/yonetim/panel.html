@@ -986,7 +986,7 @@ async function savePrograms() {
 
 function logout() {
   sessionStorage.clear();
-  document.cookie = 'bia_auth=; path=/birlikteiyilik-v2/yonetim; max-age=0; SameSite=Strict';
+  document.cookie = 'bia_auth=; path=/birlikteiyilik-v2/yonetim; max-age=0; SameSite=Lax';
   window.location.replace('index.html');
 }
 
