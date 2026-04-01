@@ -402,14 +402,17 @@ function authHeaders() {
 }
 
 async function apiFetch(params) {
+  // Token yoksa body'ye de parola ekle (X-Admin-Key başarısız olursa body.password devreye girer)
+  const body = token ? params : { ...params, password: pw };
   try {
     const r = await fetch(API, {
       method: 'POST',
       headers: authHeaders(),
-      body: JSON.stringify(params)
+      body: JSON.stringify(body)
     });
-    if (r.status === 401) { logout(); return; }
     if (r.ok) return await r.json();
+    // Sadece token varken 401 gelirse oturumu kapat
+    if (r.status === 401 && token) { logout(); return; }
   } catch(e) {}
 
   // Fallback: eski GET API (token yoksa)
