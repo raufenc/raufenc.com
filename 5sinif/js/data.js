@@ -500,6 +500,34 @@ const DERSLER = [
         ]
       },
       {
+        slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı kavramını öğrenme ve iletki ile açı ölçme',
+        videoId: 'V3voEO1TqUQ',
+        checkpoints: [
+          { saniye: 60, soru: 'Açı nedir?', secenekler: ['Aynı noktadan çıkan iki ışının oluşturduğu şekil','İki doğrunun kesişmesi','Bir doğru parçasının uzunluğu','İki nokta arasındaki mesafe'], dogru: 0, ipucu: 'Açı, ortak başlangıç noktasından çıkan iki ışın arasında kalan bölgedir.' },
+          { saniye: 120, soru: 'Dik açı kaç derecedir?', secenekler: ['45°','90°','180°','360°'], dogru: 1, ipucu: 'Dik açı tam 90 derecedir ve köşesine küçük kare işareti konur.' },
+          { saniye: 180, soru: 'Dar açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 360° arası','Tam 90°'], dogru: 0, ipucu: 'Dik açıdan küçük açılara dar açı denir.' },
+          { saniye: 240, soru: 'Geniş açı hangi aralıktadır?', secenekler: ['0° ile 90° arası','90° ile 180° arası','180° ile 270° arası','Tam 180°'], dogru: 1, ipucu: '90 dereceden büyük, 180 dereceden küçük açılara geniş açı denir.' },
+          { saniye: 300, soru: 'Doğru açı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Doğru açı düz bir çizgi gibi görünür ve 180 derecedir.' },
+          { saniye: 360, soru: 'İletki ne işe yarar?', secenekler: ['Uzunluk ölçmeye','Açı ölçmeye','Çember çizmeye','Paralel çizgi çizmeye'], dogru: 1, ipucu: 'İletki, açıların derecesini ölçmek için kullanılan araçtır.' },
+          { saniye: 420, soru: 'Tümler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 0, ipucu: 'Toplamları 90° olan iki açıya tümler açılar denir.' },
+          { saniye: 'fin', soru: 'Bütünler açıların toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Toplamları 180° olan iki açıya bütünler açılar denir.' }
+        ]
+      },
+      {
+        slug: 'cokgenler', name: 'Çokgenler ve Üçgenler', hedef: 'Çokgen ve üçgen türlerini tanıma ve özelliklerini öğrenme',
+        videoId: 'IHoenJnlNUw',
+        checkpoints: [
+          { saniye: 60, soru: 'Çokgen nedir?', secenekler: ['En az üç doğru parçasıyla sınırlandırılmış kapalı şekil','Yalnızca dört kenarı olan şekil','Dairesel alan','İki doğrunun kesişimi'], dogru: 0, ipucu: 'Çokgenler en az 3 kenardan oluşan kapalı şekillerdir.' },
+          { saniye: 120, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Her üçgenin iç açıları toplamı 180 derecedir.' },
+          { saniye: 180, soru: 'Eşkenar üçgenin her açısı kaç derecedir?', secenekler: ['45°','60°','90°','120°'], dogru: 1, ipucu: '180 / 3 = 60°. Üç açı da eşittir.' },
+          { saniye: 240, soru: 'İkizkenar üçgenin özelliği nedir?', secenekler: ['Üç kenarı eşit','İki kenarı eşit','Hiçbir kenarı eşit değil','Bir açısı 90°'], dogru: 1, ipucu: 'İkizkenar üçgenin iki kenarı ve buna karşılık gelen iki açısı eşittir.' },
+          { saniye: 300, soru: 'Dörtgenin iç açıları toplamı kaç derecedir?', secenekler: ['180°','270°','360°','540°'], dogru: 2, ipucu: 'Bir dörtgen iki üçgene bölünür: 2 x 180° = 360°' },
+          { saniye: 360, soru: 'Düzgün çokgende tüm kenarlar ve açılar ne durumdadır?', secenekler: ['Hepsi farklı','Kenarlar eşit ama açılar farklı','Tüm kenarlar ve açılar eşit','Sadece açılar eşit'], dogru: 2, ipucu: 'Düzgün çokgenlerde hem tüm kenarlar hem tüm açılar birbirine eşittir.' },
+          { saniye: 420, soru: 'Köşegen nedir?', secenekler: ['Bir kenarın uzunluğu','Komşu olmayan iki köşeyi birleştiren doğru parçası','Bir açının ölçüsü','Çevre uzunluğu'], dogru: 1, ipucu: 'Köşegen, çokgende yan yana olmayan köşeleri birleştirir.' },
+          { saniye: 'fin', soru: 'Dik açılı üçgende dik açı kaç derecedir?', secenekler: ['60°','90°','120°','180°'], dogru: 1, ipucu: 'Dik açılı üçgende bir açı tam 90 derecedir.' }
+        ]
+      },
+      {
         slug: 'kesirler', name: 'Kesirler', hedef: 'Birim, basit ve bileşik kesirleri tanıma ve karşılaştırma',
         videoId: '5ZNxjyxT2hM',
         checkpoints: [
@@ -646,6 +674,20 @@ const DERSLER = [
             dogru: 0,
             ipucu: '3/10=0,3; 47/100=0,47; 125/1000=0,125 → hepsi ondalık gösterimdir.'
           }
+        ]
+      },
+      {
+        slug: 'yuzde', name: 'Yüzde Hesaplama', hedef: 'Yüzde kavramını anlama ve hesaplama yapabilme',
+        videoId: 'JMJwFPL0Rhw',
+        checkpoints: [
+          { saniye: 60, soru: 'Yüzde ne demektir?', secenekler: ['Bir bütünün 100 eşit parçasından kaçı olduğunu gösteren oran','Ondalık sayı','Kesirli ifade','Tam sayı'], dogru: 0, ipucu: 'Yüzde, bir bütünün 100 eşit parçaya bölünmesiyle elde edilen oranı ifade eder.' },
+          { saniye: 120, soru: '%50 hangi kesre eşittir?', secenekler: ['1/4','1/2','3/4','1/5'], dogru: 1, ipucu: '50/100 sadeleştirilince 1/2 olur.' },
+          { saniye: 180, soru: '200 liranın %25\'i kaç liradır?', secenekler: ['25','50','75','100'], dogru: 1, ipucu: '200 x 25 / 100 = 50' },
+          { saniye: 240, soru: '%100 ne anlama gelir?', secenekler: ['Hiç','Yarısı','Tamamı','Çeyreği'], dogru: 2, ipucu: 'Yüzde 100, bütünün tamamını ifade eder.' },
+          { saniye: 300, soru: '3/4 kesrinin yüzde karşılığı nedir?', secenekler: ['%25','%50','%75','%80'], dogru: 2, ipucu: '3 / 4 = 0,75 → %75' },
+          { saniye: 360, soru: 'Bir sınıfta 40 öğrenci var. %20\'si gözlüklü ise kaç öğrenci gözlüklüdür?', secenekler: ['4','8','10','20'], dogru: 1, ipucu: '40 x 20 / 100 = 8' },
+          { saniye: 420, soru: '0,1 ondalık sayısının yüzde karşılığı nedir?', secenekler: ['%1','%10','%100','%0,1'], dogru: 1, ipucu: '0,1 x 100 = %10' },
+          { saniye: 'fin', soru: '%30 + %20 kaç eder?', secenekler: ['%10','%50','%60','%150'], dogru: 1, ipucu: 'Aynı bütüne ait yüzdeler doğrudan toplanabilir.' }
         ]
       },
       {
@@ -1020,6 +1062,416 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'Farklar sabit mi? Oranlar sabit mi? Yoksa farklar da değişiyor mu? Bunu bul, kuralı çöz.'
+          }
+        ]
+      },
+      {
+        slug: 'yuzde', name: 'Yüzdeler', hedef: 'Kesirleri ve ondalıkları yüzde gösterimiyle ilişkilendirme ve bir çokluğun yüzdesini bulma',
+        videoId: 'JMJwFPL0Rhw',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"Yüzde" kavramı ne anlama gelir?',
+            secenekler: [
+              '100\'ün kaçı anlamına gelir; paydası 100 olan kesirlerdir.',
+              '10\'un kaçı anlamına gelir; paydası 10 olan kesirlerdir.',
+              'Herhangi bir sayının yarısı anlamına gelir.',
+              'Sadece büyük sayılarda kullanılan bir kavramdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Yüzde (%), bir bütünün 100 eşit parçaya bölünmesiyle elde edilen miktarı ifade eder.'
+          },
+          {
+            saniye: 120,
+            soru: '37/100 kesri yüzde olarak nasıl yazılır?',
+            secenekler: ['%3,7', '%37', '%370', '%0,37'],
+            dogru: 1,
+            ipucu: 'Paydası 100 olan kesirlerde pay, yüzde değeridir: 37/100 = %37.'
+          },
+          {
+            saniye: 180,
+            soru: '%45 ondalık olarak nasıl yazılır?',
+            secenekler: ['4,5', '45', '0,45', '0,045'],
+            dogru: 2,
+            ipucu: '%45 = 45/100 = 0,45. Virgülü iki basamak sola taşı.'
+          },
+          {
+            saniye: 240,
+            soru: '50 öğrencinin %20\'si kaç öğrencidir?',
+            secenekler: ['5', '10', '20', '25'],
+            dogru: 1,
+            ipucu: '50 × 20/100 = 50 × 0,20 = 10 öğrenci.'
+          },
+          {
+            saniye: 300,
+            soru: '1/4 kesri yüzde olarak kaçtır?',
+            secenekler: ['%14', '%25', '%40', '%75'],
+            dogru: 1,
+            ipucu: '1/4 = 25/100 = %25. Payı ve paydayı 25 ile çarp.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir kitap 200 TL\'dir. %10 indirim yapılırsa kaç TL indirim yapılır?',
+            secenekler: ['10 TL', '20 TL', '25 TL', '40 TL'],
+            dogru: 1,
+            ipucu: '200 × 10/100 = 20 TL indirim yapılır.'
+          },
+          {
+            saniye: 420,
+            soru: '%75 = ? kesir olarak en sade hali hangisidir?',
+            secenekler: ['75/10', '3/4', '7/5', '3/5'],
+            dogru: 1,
+            ipucu: '%75 = 75/100 → EBOB(75,100)=25 → 3/4.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Yüzde, kesir ve ondalık gösterim arasındaki ilişkiyi en iyi açıklayan ifade hangisidir?',
+            secenekler: [
+              '%45 = 45/100 = 0,45; yüzde değerini 100\'e bölerek ondalık, paydayı 100 yaparak kesir elde ederiz.',
+              'Yüzde değerini 10\'a bölerek ondalık elde ederiz.',
+              'Kesir ile yüzde birbirinden tamamen bağımsız kavramlardır.',
+              'Ondalık sayıları yüzdeye çevirmek için 1000\'e böleriz.'
+            ],
+            dogru: 0,
+            ipucu: '%45 = 45/100 = 0,45. Bu üç gösterim aynı miktarı farklı biçimlerde ifade eder.'
+          }
+        ]
+      },
+      {
+        slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı çeşitlerini tanıma ve iletki ile açı ölçmeyi öğrenme',
+        videoId: 'V3voEO1TqUQ',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Açı nasıl oluşur?',
+            secenekler: [
+              'İki ışının ortak bir noktadan (köşe noktasından) başlamasıyla oluşur.',
+              'İki paralel doğrunun kesişmesiyle oluşur.',
+              'Bir doğrunun ortasına bir nokta koyulmasıyla oluşur.',
+              'Üç doğrunun birbirine paralel olmasıyla oluşur.'
+            ],
+            dogru: 0,
+            ipucu: 'Açı; iki ışının ortak bir noktadan (köşe) çıkmasıyla oluşan geometrik şekildir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Dik açının ölçüsü kaç derecedir?',
+            secenekler: ['45°', '90°', '180°', '360°'],
+            dogru: 1,
+            ipucu: 'Dik açı tam olarak 90° dir. Karede her köşe dik açıdır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Dar açı ile geniş açıyı ayırt eden ölçü nedir?',
+            secenekler: [
+              'Dar açı 0°–90° arasındadır; geniş açı 90°–180° arasındadır.',
+              'Dar açı 90°–180° arasındadır; geniş açı 0°–90° arasındadır.',
+              'İkisi de 90° dir sadece yönleri farklıdır.',
+              'Dar açı 180°, geniş açı 360° dir.'
+            ],
+            dogru: 0,
+            ipucu: 'Dar < 90° < Dik = 90° < Geniş < 180°.'
+          },
+          {
+            saniye: 240,
+            soru: 'Doğru açının ölçüsü kaç derecedir?',
+            secenekler: ['90°', '135°', '180°', '270°'],
+            dogru: 2,
+            ipucu: 'Doğru açı = 180°. İki ışın birbirinin tam zıttı yönünde uzanır ve düz bir doğru oluşturur.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir saatin 12:00\'deki akrep ile yelkovan arasındaki açı nedir?',
+            secenekler: ['Dar açı', 'Dik açı', 'Tam açı', 'Doğru açı'],
+            dogru: 2,
+            ipucu: '12:00\'de akrep ve yelkovan üst üstedir → 0° ya da tam çevre düşünülürse 360° = tam açı.'
+          },
+          {
+            saniye: 360,
+            soru: 'İletki (açıölçer) ile açı ölçülürken nasıl bir hizalama yapılır?',
+            secenekler: [
+              'İletki merkezi açının köşesine, 0° çizgisi açının bir kenarına hizalanır.',
+              'İletki merkezi açının ortasına, 90° çizgisi açının köşesine gelir.',
+              'İletki herhangi bir yere konulabilir.',
+              'İletki her zaman soldan sağa tutulur.'
+            ],
+            dogru: 0,
+            ipucu: 'İletki merkezi → köşe noktası; 0° çizgisi → açının bir kenarı; diğer kenarın gösterdiği derece = açı ölçüsü.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir üçgenin iki açısı 60° ve 80° ise üçüncü açı kaç derecedir?',
+            secenekler: ['30°', '40°', '50°', '60°'],
+            dogru: 1,
+            ipucu: 'Üçgenlerin iç açıları toplamı 180°: 180 − 60 − 80 = 40°.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Açı çeşitlerini küçükten büyüğe doğru sıralayan seçenek hangisidir?',
+            secenekler: [
+              'Dar açı (0°–90°) → Dik açı (90°) → Geniş açı (90°–180°) → Doğru açı (180°) → Tam açı (360°)',
+              'Dik açı → Dar açı → Geniş açı → Doğru açı → Tam açı',
+              'Doğru açı → Dik açı → Dar açı → Geniş açı → Tam açı',
+              'Tam açı → Doğru açı → Geniş açı → Dik açı → Dar açı'
+            ],
+            dogru: 0,
+            ipucu: 'Dar (< 90°) < Dik (= 90°) < Geniş (90°–180°) < Doğru (= 180°) < Tam (= 360°).'
+          }
+        ]
+      },
+      {
+        slug: 'ucgen-cokgen', name: 'Üçgenler ve Çokgenler', hedef: 'Üçgen ve çokgenleri kenar ve açı özelliklerine göre sınıflandırma',
+        videoId: '-FruESJRVeE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Üçgenler kenar uzunluklarına göre kaç gruba ayrılır?',
+            secenekler: [
+              '3 grup: eşkenar, ikizkenar, çeşitkenar',
+              '2 grup: eşkenar ve ikizkenar',
+              '4 grup: eşkenar, ikizkenar, çeşitkenar, dik üçgen',
+              'Sadece 1 grup: hepsi aynıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Kenar uzunluklarına göre: Eşkenar (3 eşit kenar), İkizkenar (2 eşit kenar), Çeşitkenar (hiç eşit kenar yok).'
+          },
+          {
+            saniye: 120,
+            soru: 'Eşkenar üçgenin açıları kaç derecedir?',
+            secenekler: ['60°, 60°, 60°', '90°, 45°, 45°', '30°, 60°, 90°', '70°, 60°, 50°'],
+            dogru: 0,
+            ipucu: 'Eşkenar üçgende 3 kenar eşit → 3 açı da eşit → 180°÷3 = 60° her açı.'
+          },
+          {
+            saniye: 180,
+            soru: 'Dik üçgende en büyük açı kaç derecedir?',
+            secenekler: ['60°', '90°', '120°', '180°'],
+            dogru: 1,
+            ipucu: 'Dik üçgende bir iç açı 90° dir; bu en büyük açıdır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Çokgen nedir?',
+            secenekler: [
+              'En az 3 doğru parçasıyla sınırlanmış kapalı düzlem şeklidir.',
+              'Sadece 4 kenarlı geometrik şekildir.',
+              'İçinde çember bulunan şekildir.',
+              'Tüm kenarları eşit olan şekildir.'
+            ],
+            dogru: 0,
+            ipucu: 'Çokgen: 3 veya daha fazla doğru parçasıyla çevrili kapalı düzlemsel şekil. Üçgen, dörtgen, beşgen, altıgen…'
+          },
+          {
+            saniye: 300,
+            soru: 'Beşgenin köşegen sayısı kaçtır?',
+            secenekler: ['3', '4', '5', '6'],
+            dogru: 2,
+            ipucu: 'n kenarlı çokgenin köşegen sayısı = n(n-3)/2. Beşgen: 5×2/2 = 5 köşegen.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bir dörtgenin iç açıları toplamı kaç derecedir?',
+            secenekler: ['180°', '270°', '360°', '540°'],
+            dogru: 2,
+            ipucu: 'Dörtgeni köşegeniyle iki üçgene böl: 2 × 180° = 360°.'
+          },
+          {
+            saniye: 420,
+            soru: 'Hangi çokgenin tüm kenarları ve tüm açıları eşittir?',
+            secenekler: ['Dikdörtgen', 'İkizkenar üçgen', 'Düzgün çokgen', 'Paralelkenar'],
+            dogru: 2,
+            ipucu: 'Tüm kenarları ve açıları eşit olan çokgene "düzgün çokgen" denir. Eşkenar üçgen ve kare birer düzgün çokgendir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Üçgenler ve çokgenler hakkında aşağıdakilerin hangisi doğrudur?',
+            secenekler: [
+              'Üçgen iç açılar toplamı 180°; n kenarlı çokgen iç açılar toplamı (n-2)×180°; kenar sayısına göre üçgen, dörtgen, beşgen… olarak adlandırılır.',
+              'Tüm çokgenlerin iç açılar toplamı 360° dir.',
+              'Üçgenlerin iç açılar toplamı kenar sayısına göre değişir.',
+              'Çokgen sadece 4 veya daha fazla kenarlı şekiller için kullanılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Üçgen: 180°. Dörtgen: 360°. n-gen: (n-2)×180°. Kenar sayısı artıkça toplam açı artar.'
+          }
+        ]
+      },
+      {
+        slug: 'veri-analizi', name: 'Veri Toplama ve Grafik', hedef: 'Araştırma sorusu oluşturma, sıklık tablosu ve sütun grafiğini okuma ve yorumlama',
+        videoId: '_k4hEu7uXiE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Veri toplamak için önce ne yapılmalıdır?',
+            secenekler: [
+              'Araştırma sorusu oluşturulmalıdır.',
+              'Grafik çizilmelidir.',
+              'Tablo doldurulmalıdır.',
+              'Sıklıklar hesaplanmalıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Veri toplama süreci: Araştırma sorusu → Veri toplama → Tablo → Grafik → Yorum.'
+          },
+          {
+            saniye: 120,
+            soru: 'Sıklık tablosunda "sıklık" neyi gösterir?',
+            secenekler: [
+              'Her bir verinin kaç kez tekrarlandığını gösterir.',
+              'Verilerin alfabetik sırasını gösterir.',
+              'En büyük veriyi gösterir.',
+              'Verilerin toplamını gösterir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıklık = frekans; bir veri değerinin kaç kez geçtiğini gösteren sayıdır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Çetele tablosunda 5 veri nasıl gösterilir?',
+            secenekler: [
+              '4 dikey çizgi ve üzerinden geçen 1 yatay çizgi ile (正)',
+              '5 dikey çizgi ile (| | | | |)',
+              '5 nokta ile (• • • • •)',
+              'Sadece 5 rakamı yazılarak'
+            ],
+            dogru: 0,
+            ipucu: 'Çetelede 4+1 sistemi kullanılır: 4 dikey çizgiye 1 yatay çizgi çekilerek 5\'li gruplar oluşturulur.'
+          },
+          {
+            saniye: 240,
+            soru: 'Sütun grafiğinde yatay eksen (x ekseni) genellikle neyi gösterir?',
+            secenekler: [
+              'Veri kategorilerini (örn. renkler, aylar, isimler)',
+              'Sıklık değerlerini',
+              'Ortalamaları',
+              'Toplam sayıyı'
+            ],
+            dogru: 0,
+            ipucu: 'Yatay eksen: kategoriler. Dikey eksen: sıklık (frekans) değerleri.'
+          },
+          {
+            saniye: 300,
+            soru: 'Bir sınıfta 5 öğrenci kırmızı, 8 öğrenci mavi, 7 öğrenci yeşil rengi seviyor. En çok hangi renk sevilmektedir?',
+            secenekler: ['Kırmızı', 'Mavi', 'Yeşil', 'Hepsi eşit'],
+            dogru: 1,
+            ipucu: 'En yüksek sıklık değeri: mavi = 8. Bu nedenle en çok sevilen renk mavidir.'
+          },
+          {
+            saniye: 360,
+            soru: 'Hangi tür araştırma sorusu veri toplamaya uygundur?',
+            secenekler: [
+              '"Sınıftaki öğrencilerin en sevdiği meyve hangisidir?"',
+              '"Türkiye\'nin başkenti neresidir?"',
+              '"2+3 kaçtır?"',
+              '"Dünyanın şekli nedir?"'
+            ],
+            dogru: 0,
+            ipucu: 'Veri toplamaya uygun sorular, farklı yanıtlar alınabilecek ve sayılabilecek sorulardır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Veri toplarken "tarafsız araştırma sorusu" ne demektir?',
+            secenekler: [
+              'Katılımcıyı belirli bir yanıta yönlendirmeyen, açık uçlu soru',
+              'Sadece evet/hayır cevaplı soru',
+              'Araştırmacının kendi cevabını içeren soru',
+              'Birden fazla konu içeren soru'
+            ],
+            dogru: 0,
+            ipucu: 'Tarafsız soru örneği: "En sevdiğin ders hangisi?" — yönlendirici olmayan, açık uçlu.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Veri toplama sürecinin doğru sırası hangisidir?',
+            secenekler: [
+              'Araştırma sorusu oluştur → Veri topla → Çetele/sıklık tablosu yap → Grafik çiz → Yorumla',
+              'Grafik çiz → Veri topla → Tablo yap → Soru oluştur',
+              'Veri topla → Soru oluştur → Yorumla → Tablo yap',
+              'Tablo yap → Grafik çiz → Araştırma sorusu oluştur → Veri topla'
+            ],
+            dogru: 0,
+            ipucu: 'Sıra: Soru → Veri → Tablo → Grafik → Yorum. Her adım bir öncekinin üzerine inşa edilir.'
+          }
+        ]
+      },
+      {
+        slug: 'olasilik', name: 'Olasılık', hedef: 'Kesin, imkânsız ve eşit şanslı olayları tanıma; basit olasılık hesaplama',
+        videoId: 'GxdIklp-bB8',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"Kesin olay" ne demektir?',
+            secenekler: [
+              'Gerçekleşmesi kesin olan, olasılığı 1 olan olaydır.',
+              'Hiç gerçekleşmeyecek olaydır.',
+              'Yarı yarıya gerçekleşen olaydır.',
+              'Rastgele gerçekleşen olaydır.'
+            ],
+            dogru: 0,
+            ipucu: 'Kesin olay: mutlaka gerçekleşir. Olasılığı = 1. Örnek: "Güneş doğudan doğar."'
+          },
+          {
+            saniye: 120,
+            soru: '"İmkânsız olay" ne demektir?',
+            secenekler: [
+              'Hiçbir zaman gerçekleşemeyen, olasılığı 0 olan olaydır.',
+              'Olasılığı 1/2 olan olaydır.',
+              'Sadece bir kez gerçekleşen olaydır.',
+              'Her zaman gerçekleşen olaydır.'
+            ],
+            dogru: 0,
+            ipucu: 'İmkânsız olay: asla gerçekleşemez. Olasılığı = 0. Örnek: "Zar atınca 7 gelir."'
+          },
+          {
+            saniye: 180,
+            soru: '1–6 yüzlü zar atılıyor. Tek sayı gelme olasılığı kaçtır?',
+            secenekler: ['1/6', '1/3', '1/2', '2/3'],
+            dogru: 2,
+            ipucu: 'Tek sayılar: 1, 3, 5 → 3 olumlu sonuç. Toplam: 6. Olasılık = 3/6 = 1/2.'
+          },
+          {
+            saniye: 240,
+            soru: 'Bir torbada 3 kırmızı ve 2 mavi bilye var. Rastgele bir bilye çekildiğinde kırmızı gelme olasılığı nedir?',
+            secenekler: ['2/5', '3/5', '1/2', '3/2'],
+            dogru: 1,
+            ipucu: 'Olasılık = olumlu sonuç sayısı / toplam sonuç sayısı = 3 / (3+2) = 3/5.'
+          },
+          {
+            saniye: 300,
+            soru: '"Eşit şanslı olay" ne demektir?',
+            secenekler: [
+              'Her sonucun gerçekleşme ihtimalinin eşit olduğu durumdur.',
+              'Her zaman aynı sonucun çıktığı durumdur.',
+              'Sonuçlardan birinin diğerinden iki kat daha olası olduğu durumdur.',
+              'Hiçbir sonucun gerçekleşmediği durumdur.'
+            ],
+            dogru: 0,
+            ipucu: 'Eşit şanslı: madeni para atışında tura ve yazı gelme ihtimali eşittir (her biri 1/2).'
+          },
+          {
+            saniye: 360,
+            soru: 'Olasılık değeri hangi aralıkta olabilir?',
+            secenekler: ['0 ile 1 arasında (0 ve 1 dahil)', '1 ile 10 arasında', '−1 ile 1 arasında', '0 ile 100 arasında'],
+            dogru: 0,
+            ipucu: 'İmkânsız olay = 0, kesin olay = 1. Olasılık her zaman 0 ≤ P ≤ 1 aralığındadır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir torbada 4 sarı, 4 mavi top var. Sarı top çekme olasılığı nedir?',
+            secenekler: ['1/4', '1/2', '3/4', '1'],
+            dogru: 1,
+            ipucu: 'Sarı = 4, toplam = 8. Olasılık = 4/8 = 1/2. Eşit şanslı olaydır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Olasılık kavramını en iyi özetleyen ifade hangisidir?',
+            secenekler: [
+              'Bir olayın gerçekleşme şansı 0 (imkânsız) ile 1 (kesin) arasındadır; olumlu sonuç sayısının toplam sonuç sayısına oranıdır.',
+              'Olasılık her zaman 1/2 değerini alır.',
+              'Olasılık sadece zar ve para gibi oyunlarda kullanılır.',
+              'İmkânsız olayın olasılığı 1, kesin olayın olasılığı 0\'dır.'
+            ],
+            dogru: 0,
+            ipucu: 'P = olumlu / toplam; 0 ≤ P ≤ 1; imkânsız = 0, eşit şanslı = 1/2, kesin = 1.'
           }
         ]
       }
@@ -2199,6 +2651,210 @@ const DERSLER = [
             ipucu: 'Tam gölge: noktasal kaynak→net kenar; kaynak yakın→gölge büyük; cisim perdeye yakın→gölge küçük.'
           }
         ]
+      },
+      {
+        slug: 'elektrik-devreleri', name: 'Elektrik Devreleri', hedef: 'Devre elemanlarını tanıma, sembollerle gösterme ve basit devre kurma',
+        videoId: 'Ny5qqXqokeo',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Bir elektrik devresinin temel elemanları hangileridir?',
+            secenekler: [
+              'Pil (enerji kaynağı), ampul, anahtar ve bağlantı kablosu',
+              'Sadece pil ve ampul',
+              'Yalnızca kablo ve anahtar',
+              'Pil, su ve ışık'
+            ],
+            dogru: 0,
+            ipucu: 'Temel devre: pil (enerji), kablo (iletim), anahtar (kontrol), ampul (yük) den oluşur.'
+          },
+          {
+            saniye: 120,
+            soru: 'Devre şemalarında pil nasıl sembolize edilir?',
+            secenekler: [
+              'Uzun ve kısa çizgilerden oluşan sembolle (+ uzun, − kısa)',
+              'Daire içinde X işaretiyle',
+              'Üçgen şekliyle',
+              'Yıldız şekliyle'
+            ],
+            dogru: 0,
+            ipucu: 'Pil sembolü: uzun çizgi (+), kısa çizgi (−). Tüm dünyada aynı sembol kullanılır.'
+          },
+          {
+            saniye: 180,
+            soru: 'Anahtarın görevi nedir?',
+            secenekler: [
+              'Devredeki elektrik akışını açıp kapatmak',
+              'Elektrik üretmek',
+              'Işık vermek',
+              'Pili şarj etmek'
+            ],
+            dogru: 0,
+            ipucu: 'Anahtar kapalıyken devre tamamlanır ve akım geçer; açıkken devre kesilir ve ampul söner.'
+          },
+          {
+            saniye: 240,
+            soru: 'Kapalı devrede ne olur?',
+            secenekler: [
+              'Elektrik akımı akar ve ampul yanar.',
+              'Elektrik akmaz ve ampul söner.',
+              'Pil bozulur.',
+              'Kablo erir.'
+            ],
+            dogru: 0,
+            ipucu: 'Kapalı devre: anahtar kapalı → devre tamamlanmış → akım akar → ampul yanar.'
+          },
+          {
+            saniye: 300,
+            soru: 'Ampulün parlaklığını artırmak için ne yapılabilir?',
+            secenekler: [
+              'Pil sayısını artırmak (ampul sayısı aynıyken)',
+              'Ampul sayısını artırmak (pil sayısı aynıyken)',
+              'Kabloyu kısaltmak',
+              'Anahtarı açmak'
+            ],
+            dogru: 0,
+            ipucu: 'Daha fazla pil → daha yüksek gerilim → ampul daha parlak. Daha fazla ampul → her birine daha az enerji.'
+          },
+          {
+            saniye: 360,
+            soru: 'Hangi madde elektriği iletir (iletken)?',
+            secenekler: [
+              'Bakır tel',
+              'Plastik',
+              'Tahta',
+              'Cam'
+            ],
+            dogru: 0,
+            ipucu: 'Metaller (bakır, demir, alüminyum) elektriği iletir. Plastik, tahta, cam yalıtkandır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Devre şeması çizmenin amacı nedir?',
+            secenekler: [
+              'Devre elemanlarını sembollerle göstererek herkesin anlayabileceği evrensel bir dil oluşturmak',
+              'Devreyi daha güzel göstermek',
+              'Sadece öğretmenler için not tutmak',
+              'Elemanları boyamak için'
+            ],
+            dogru: 0,
+            ipucu: 'Devre sembolleri tüm dünyada ortaktır; farklı dil konuşan bilim insanları bile aynı şemayı anlayabilir.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Elektrik devreleri hakkında hangisi doğrudur?',
+            secenekler: [
+              'Devre; pil, kablo, anahtar ve ampulden oluşur; anahtar kapalıyken akım akar; daha fazla pil ampulü parlaklaştırır; semboller evrenseldir.',
+              'Devrede anahtar her zaman açık olmalıdır.',
+              'Sadece plastik kablolar elektriği iletir.',
+              'Ampul sayısı artınca parlaklık da artar.'
+            ],
+            dogru: 0,
+            ipucu: 'Temel devre = pil + kablo + anahtar + ampul. Kapalı devre → akım akar. Daha az ampul = daha parlak.'
+          }
+        ]
+      },
+      {
+        slug: 'insan-cevre', name: 'İnsan ve Çevre / Biyoçeşitlilik', hedef: 'Biyoçeşitliliğin önemini, tehdit eden faktörleri ve koruma yollarını anlama',
+        videoId: 'UjBAkwASPWI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Biyoçeşitlilik ne demektir?',
+            secenekler: [
+              'Bir bölgedeki canlı türlerinin çeşitliliği ve toplam sayısı',
+              'Sadece hayvan türlerinin sayısı',
+              'Bitkiler ve mantarların çeşitliliği',
+              'Bir bölgedeki insan nüfusu'
+            ],
+            dogru: 0,
+            ipucu: 'Biyoçeşitlilik = bir bölgedeki tür çeşitliliği + genetik çeşitlilik + ekosistem çeşitliliği.'
+          },
+          {
+            saniye: 120,
+            soru: 'Türkiye\'nin biyoçeşitlilik açısından zengin olmasının başlıca nedeni nedir?',
+            secenekler: [
+              'Farklı iklimler, üç tarafı denizle çevrili coğrafya ve hem Avrupa\'da hem Asya\'da toprak bulunması',
+              'Sadece büyük bir ülke olması',
+              'Yalnızca tarım yapılması',
+              'Çok az ormana sahip olması'
+            ],
+            dogru: 0,
+            ipucu: 'Türkiye: 3 tarafı deniz, 4 mevsim, Avrupa + Asya → farklı iklimlerde farklı canlılar yaşar.'
+          },
+          {
+            saniye: 180,
+            soru: 'Aşağıdakilerden hangisi biyoçeşitliliği tehdit eden insan kaynaklı bir faktördür?',
+            secenekler: [
+              'Orman tahribatı ve aşırı avlanma',
+              'Mevsim değişimleri',
+              'Güneş ışınları',
+              'Yağmur yağması'
+            ],
+            dogru: 0,
+            ipucu: 'İnsan kaynaklı tehditler: orman tahribatı, aşırı avlanma, tarım ilaçları, çevre kirliliği.'
+          },
+          {
+            saniye: 240,
+            soru: 'Nesli tükenen canlı ile nesli tehlike altındaki canlı arasındaki fark nedir?',
+            secenekler: [
+              'Nesli tükenen canlı tamamen yok olmuştur; nesli tehlike altındaki canlı henüz yaşıyor ama sayısı çok azdır.',
+              'İkisi de tamamen yok olmuştur.',
+              'Nesli tükenen canlı hâlâ yaşamaktadır.',
+              'İkisi de bolca bulunmaktadır.'
+            ],
+            dogru: 0,
+            ipucu: 'Mamut, dinozor → nesli tükenmiş. Dağ gorili, kel kartal → nesli tehlike altında (az sayıda yaşıyor).'
+          },
+          {
+            saniye: 300,
+            soru: 'Sadece Türkiye\'de yaşayan (endemik) canlılara örnek hangisidir?',
+            secenekler: [
+              'Van kedisi, Kangal köpeği, Kazdağı köknarı',
+              'Aslan, fil, zürafa',
+              'Penguen, kutup ayısı',
+              'Hint fili, Bengal kaplanı'
+            ],
+            dogru: 0,
+            ipucu: 'Endemik: sadece belirli bir bölgede bulunan türler. Türkiye\'ye özgü: Van kedisi, Kangal, Sığla ağacı…'
+          },
+          {
+            saniye: 360,
+            soru: 'Biyoçeşitliliği korumak için ne yapılabilir?',
+            secenekler: [
+              'Doğal yaşam alanlarını koruma altına almak, aşırı avlanmayı önlemek, tabiat parkları oluşturmak',
+              'Daha fazla fabrika kurmak',
+              'Ormanları kesmek ve tarım alanı açmak',
+              'Yabani hayvanları şehirlere taşımak'
+            ],
+            dogru: 0,
+            ipucu: 'Koruma yolları: milli parklar, av yasakları, bilinçlendirme, kimyasal kullanımı azaltma.'
+          },
+          {
+            saniye: 420,
+            soru: 'Biyoçeşitlilik neden önemlidir?',
+            secenekler: [
+              'Gıda, ilaç, hava ve su döngüsü gibi yaşamsal hizmetler biyoçeşitliliğe bağlıdır.',
+              'Sadece estetik güzellik için önemlidir.',
+              'Yalnızca bilim insanlarını ilgilendirir.',
+              'Ekonomik değeri yoktur.'
+            ],
+            dogru: 0,
+            ipucu: 'Biyoçeşitlilik: gıda güvenliği, ilaç kaynakları, oksijen üretimi, iklim dengesi… hepsini destekler.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Biyoçeşitlilik ve insan-çevre ilişkisi hakkında hangisi doğrudur?',
+            secenekler: [
+              'Biyoçeşitlilik; tür, genetik ve ekosistem çeşitliliğini kapsar; orman tahribatı ve aşırı avlanma tehdit eder; milli parklar ve bilinçlendirme koruma yollarıdır.',
+              'Biyoçeşitlilik sadece hayvanları kapsar.',
+              'İnsanların doğaya müdahalesi biyoçeşitliliği artırır.',
+              'Türkiye biyoçeşitlilik açısından fakir bir ülkedir.'
+            ],
+            dogru: 0,
+            ipucu: 'Biyoçeşitlilik = tür + gen + ekosistem çeşitliliği. Tehdit: insan faaliyetleri. Koruma: parklar, yasalar, bilinç.'
+          }
+        ]
       }
     ],
     playlists: [
@@ -3186,6 +3842,384 @@ const DERSLER = [
             ipucu: 'Sıralama, karşıtlık, neden-sonuç, ekleme, örnekleme, özetleme — hepsi bağlantı ifadesidir.'
           }
         ]
+      },
+      {
+        slug: 'es-zit-anlamli', name: 'Eş ve Zıt Anlamlı Sözcükler', hedef: 'Eş anlamlı ve zıt anlamlı sözcükleri tanıma ve metinde doğru kullanma',
+        videoId: 'pm3cO8SmOZ4',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Eş anlamlı (anlamdaş) sözcükler ne demektir?',
+            secenekler: [
+              'Yazılışları ve okunuşları farklı fakat anlamları aynı olan sözcüklerdir.',
+              'Yazılışları aynı fakat anlamları farklı sözcüklerdir.',
+              'Birbirinin tam karşıtı anlam taşıyan sözcüklerdir.',
+              'Aynı anda iki farklı anlam taşıyan sözcüklerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Eş anlamlı: "kent" ve "şehir" aynı anlama gelir ama farklı yazılır. Örnek: kalp = yürek, cevap = yanıt.'
+          },
+          {
+            saniye: 120,
+            soru: '"Yetenek" sözcüğünün eş anlamlısı hangisidir?',
+            secenekler: ['Kabiliyet', 'Güçsüzlük', 'Çirkinlik', 'Zayıflık'],
+            dogru: 0,
+            ipucu: 'Yetenek = kabiliyet. İkisi de bir kişinin bir işi yapmadaki doğal becerisi anlamına gelir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Zıt (karşıt) anlamlı sözcükler ne demektir?',
+            secenekler: [
+              'Anlamca birbirinin tam karşısında olan, birbirini dışlayan sözcüklerdir.',
+              'Yazılışları farklı, anlamları aynı sözcüklerdir.',
+              'Aynı heceden türetilen sözcüklerdir.',
+              'Birden fazla anlamı olan sözcüklerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Zıt anlamlı: uzun ↔ kısa, sıcak ↔ soğuk, güzel ↔ çirkin. Anlamca tam karşıt.'
+          },
+          {
+            saniye: 240,
+            soru: '"Güzel" sözcüğünün zıt anlamlısı hangisidir?',
+            secenekler: ['Çirkin', 'Hoş', 'Şirin', 'Alımlı'],
+            dogru: 0,
+            ipucu: 'Güzel ↔ Çirkin. Hoş, şirin ve alımlı güzelin yakın anlamlılarıdır, zıttı değildir.'
+          },
+          {
+            saniye: 300,
+            soru: 'Hangisi bir eş anlamlı çifttir?',
+            secenekler: [
+              'Görev – Vazife',
+              'Büyük – Küçük',
+              'Hızlı – Yavaş',
+              'Açık – Kapalı'
+            ],
+            dogru: 0,
+            ipucu: 'Görev = vazife → eş anlamlı. Büyük/Küçük, Hızlı/Yavaş, Açık/Kapalı → zıt anlamlı.'
+          },
+          {
+            saniye: 360,
+            soru: '"Almamak" sözcüğü "almak" sözcüğünün zıt anlamlısı olabilir mi?',
+            secenekler: [
+              'Hayır; bir sözcüğün olumsuz biçimi onun zıt anlamlısı değildir.',
+              'Evet; bir eylemin olumsuzu her zaman zıt anlamlısıdır.',
+              'Evet; çünkü tamamen zıt işlem yapılır.',
+              'Bazen evet bazen hayır.'
+            ],
+            dogru: 0,
+            ipucu: '"Almak" ↔ "vermek" (gerçek zıt anlam). "Almamak", sadece olumsuzdur; zıt anlam için yeni sözcük gerekir.'
+          },
+          {
+            saniye: 420,
+            soru: 'Hangisi zıt anlamlı bir çifttir?',
+            secenekler: [
+              'İleri – Geri',
+              'Kent – Şehir',
+              'Lisan – Dil',
+              'Yurt – Vatan'
+            ],
+            dogru: 0,
+            ipucu: 'İleri ↔ Geri → zıt anlamlı. Kent=Şehir, Lisan=Dil, Yurt=Vatan → eş anlamlı çiftler.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Eş ve zıt anlamlı sözcükler hakkında hangisi doğrudur?',
+            secenekler: [
+              'Eş anlamlı: farklı yazılış, aynı anlam (kent=şehir); zıt anlamlı: tam karşıt anlam (sıcak↔soğuk); olumsuz biçim zıt anlam değildir.',
+              'Eş anlamlı sözcükler her cümlede birbirinin yerine kullanılabilir.',
+              'Bir sözcüğün olumsuz biçimi her zaman onun zıt anlamlısıdır.',
+              'Zıt anlamlı sözcükler eş kökenlidir.'
+            ],
+            dogru: 0,
+            ipucu: 'Eş anlamlı = aynı anlam farklı biçim. Zıt anlamlı = karşıt anlam. "Almamak" ≠ "vermek".'
+          }
+        ]
+      },
+      {
+        slug: 'zamirler', name: 'Zamirler (Adıllar)', hedef: 'Kişi, işaret ve soru zamirlerini tanıma ve cümlede doğru kullanma',
+        videoId: '5_AZW2ZfHrI',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Zamir (adıl) nedir?',
+            secenekler: [
+              'İsimlerin yerini tutan, onları temsil eden sözcüklerdir.',
+              'Nesnelerin adını veren sözcüklerdir.',
+              'Eylemleri niteleyen sözcüklerdir.',
+              'Cümleleri birbirine bağlayan sözcüklerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Zamir = adıl. "Ahmet kitabı aldı. O çok mutluydu." cümlesinde "o" Ahmet\'in yerini tutmaktadır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Kişi zamirleri hangileridir?',
+            secenekler: [
+              'Ben, sen, o, biz, siz, onlar',
+              'Bu, şu, o',
+              'Kim, ne, hangi',
+              'Hepsi, bazısı, birkaçı'
+            ],
+            dogru: 0,
+            ipucu: 'Kişi zamirleri: tekil (ben, sen, o) + çoğul (biz, siz, onlar). Kişileri temsil eder.'
+          },
+          {
+            saniye: 180,
+            soru: '"Bu kitabı çok seviyorum." cümlesinde "bu" hangi tür zamirdir?',
+            secenekler: [
+              'İşaret zamiri',
+              'Kişi zamiri',
+              'Soru zamiri',
+              'Belirsizlik zamiri'
+            ],
+            dogru: 0,
+            ipucu: 'Bu, şu, o → işaret zamirleri. Bir nesneye ya da kişiye işaret ederek onun yerini tutar.'
+          },
+          {
+            saniye: 240,
+            soru: '"Kapıyı kim çaldı?" cümlesinde "kim" hangi tür zamirdir?',
+            secenekler: [
+              'Soru zamiri',
+              'Kişi zamiri',
+              'İşaret zamiri',
+              'Belirsizlik zamiri'
+            ],
+            dogru: 0,
+            ipucu: 'Kim ve ne → soru zamirleri. Cevabı bilinmeyen kişi veya nesnenin yerini tutar.'
+          },
+          {
+            saniye: 300,
+            soru: '"Sınıftaki öğrencilerin hepsi sınava girdi." cümlesinde "hepsi" hangi tür zamirdir?',
+            secenekler: [
+              'Belirsizlik zamiri',
+              'Kişi zamiri',
+              'Soru zamiri',
+              'İşaret zamiri'
+            ],
+            dogru: 0,
+            ipucu: 'Hepsi, bazısı, birkaçı, kimse → belirsizlik zamirleri. Belirsiz miktarda varlığın yerini tutar.'
+          },
+          {
+            saniye: 360,
+            soru: 'Aşağıdaki cümlelerden hangisinde zamir kullanılmıştır?',
+            secenekler: [
+              '"Kitabı aldım, onu okuyacağım."',
+              '"Güzel bir gün."',
+              '"Hızlı koşuyordu."',
+              '"Büyük bir şehir."'
+            ],
+            dogru: 0,
+            ipucu: '"Onu" = "kitabı" yerine kullanılmış zamir. Diğer cümlelerde sıfat/zarf var, zamir yok.'
+          },
+          {
+            saniye: 420,
+            soru: '"Ne istiyorsun?" sorusunda "ne" hangi işlevi üstleniyor?',
+            secenekler: [
+              'Soru zamiri olarak nesnenin yerini tutuyor.',
+              'Soru sıfatı olarak ismi niteleyen sözcük.',
+              'Bağlaç olarak cümleleri bağlıyor.',
+              'Kişi zamiri olarak kişiyi temsil ediyor.'
+            ],
+            dogru: 0,
+            ipucu: '"Ne istiyorsun?" → "ne" tek başına ismin yerini tutuyor = soru zamiri. "Ne kitap?" → sıfat.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Zamirler hakkında hangisi doğrudur?',
+            secenekler: [
+              'Zamirler isimlerin yerini tutar; kişi (ben/sen/o/biz/siz/onlar), işaret (bu/şu/o), soru (kim/ne) ve belirsizlik (hepsi/bazısı) zamirleri vardır.',
+              'Zamirler sadece kişileri temsil edebilir.',
+              'Soru zamirleri her zaman soru cümlesi kurmak zorundadır.',
+              'İşaret zamirleri sadece yakındaki nesneler için kullanılır.'
+            ],
+            dogru: 0,
+            ipucu: 'Zamir türleri: kişi, işaret, soru, belirsizlik. Hepsi isimlerin yerini tutma görevini üstlenir.'
+          }
+        ]
+      },
+      {
+        slug: 'sifatlar', name: 'Sıfatlar (Ön Adlar)', hedef: 'Niteleme ve belirtme sıfatlarını tanıma ve cümlede doğru kullanma',
+        videoId: 'GdhePnu2EU4',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Sıfat (ön ad) nedir?',
+            secenekler: [
+              'İsimleri niteleyen veya belirten sözcüklerdir.',
+              'Eylemleri açıklayan sözcüklerdir.',
+              'İsimlerin yerini tutan sözcüklerdir.',
+              'Cümleleri birbirine bağlayan sözcüklerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıfat: bir ismin önünde gelerek onu niteler ya da belirtir. "Kırmızı elma" → kırmızı sıfattır.'
+          },
+          {
+            saniye: 120,
+            soru: '"Büyük bir ev satın aldılar." cümlesinde sıfat hangi sözcüktür?',
+            secenekler: ['Büyük', 'Ev', 'Satın', 'Aldılar'],
+            dogru: 0,
+            ipucu: '"Büyük" → evin özelliğini belirtiyor = niteleme sıfatı.'
+          },
+          {
+            saniye: 180,
+            soru: 'Niteleme sıfatı ile belirtme sıfatı arasındaki fark nedir?',
+            secenekler: [
+              'Niteleme sıfatı ismin özelliğini anlatır (güzel, uzun); belirtme sıfatı sayı, soru, işaret gibi bilgiler verir (iki, hangi, bu).',
+              'Niteleme sıfatı sayı bildirir; belirtme sıfatı özellik bildirir.',
+              'İkisi de tamamen aynı görevdedir.',
+              'Belirtme sıfatı sadece renk bildirir.'
+            ],
+            dogru: 0,
+            ipucu: 'Niteleme: nasıl? → güzel kız, uzun yol. Belirtme: kaç? hangisi? hangi? → iki elma, bu kitap.'
+          },
+          {
+            saniye: 240,
+            soru: '"Üç öğrenci yarışmaya katıldı." cümlesinde "üç" hangi tür sıfattır?',
+            secenekler: [
+              'Sayı sıfatı (belirtme sıfatı)',
+              'Niteleme sıfatı',
+              'İşaret sıfatı',
+              'Soru sıfatı'
+            ],
+            dogru: 0,
+            ipucu: '"Üç" → sayı bildiren belirtme sıfatı. Kaç öğrenci? → Üç öğrenci.'
+          },
+          {
+            saniye: 300,
+            soru: '"Hangi kitabı okudun?" cümlesinde "hangi" hangi tür sıfattır?',
+            secenekler: [
+              'Soru sıfatı (belirtme sıfatı)',
+              'Niteleme sıfatı',
+              'Sayı sıfatı',
+              'İşaret sıfatı'
+            ],
+            dogru: 0,
+            ipucu: '"Hangi" soru bildiriyor ve bir ismin önünde geliyor = soru sıfatı (belirtme sıfatı türü).'
+          },
+          {
+            saniye: 360,
+            soru: '"Şu arabayı gördün mü?" cümlesinde "şu" hangi tür sıfattır?',
+            secenekler: [
+              'İşaret sıfatı (belirtme sıfatı)',
+              'Niteleme sıfatı',
+              'Soru sıfatı',
+              'Sayı sıfatı'
+            ],
+            dogru: 0,
+            ipucu: '"Şu" → bir nesneye işaret ediyor ve ismin önünde geliyor = işaret sıfatı.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bir sözcüğün sıfat olup olmadığını anlamak için ne sorulur?',
+            secenekler: [
+              '"Nasıl bir? / Kaç tane? / Hangi?" soruları sorulur; yanıt verebiliyorsa sıfattır.',
+              '"Nerede?" sorusu sorulur.',
+              '"Ne zaman?" sorusu sorulur.',
+              '"Kim?" sorusu sorulur.'
+            ],
+            dogru: 0,
+            ipucu: 'Sıfat testi: "Nasıl araba?" → hızlı (niteleme). "Kaç araba?" → beş (sayı). "Hangi araba?" → bu (işaret).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Sıfatlar hakkında hangisi doğrudur?',
+            secenekler: [
+              'Sıfatlar isimleri niteler veya belirtir; niteleme sıfatları özellik (güzel, uzun), belirtme sıfatları sayı/işaret/soru/belirsizlik bildirir.',
+              'Sıfatlar yalnızca renk bildirir.',
+              'Sıfatlar isimlerin yerini tutar.',
+              'Belirtme sıfatları sadece sayı bildirebilir.'
+            ],
+            dogru: 0,
+            ipucu: 'Niteleme: nasıl? Belirtme türleri: sayı (iki), işaret (bu/şu/o), soru (hangi/kaç), belirsizlik (birkaç/bazı).'
+          }
+        ]
+      },
+      {
+        slug: 'kok-ekler', name: 'Kök, Gövde ve Yapım Ekleri', hedef: 'Sözcüklerin kök ve gövdesini bulma; yapım eklerini tanıma ve kullanma',
+        videoId: '5uStteWPdyc',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Bir sözcüğün kökü nedir?',
+            secenekler: [
+              'Sözcüğün bölünemeyen en küçük anlamlı parçasıdır.',
+              'Sözcüğe eklenen ek kısmıdır.',
+              'Sözcüğün son hecesidir.',
+              'Sözcüğün ilk harfidir.'
+            ],
+            dogru: 0,
+            ipucu: '"Evler" sözcüğünde "ev" köktür; artık bölünemez ve anlam taşır.'
+          },
+          {
+            saniye: 120,
+            soru: '"Kitaplık" sözcüğünün kökü nedir?',
+            secenekler: ['Kitap', 'Kitaplık', 'Lık', 'Kita'],
+            dogru: 0,
+            ipucu: '"Kitap" + "-lık" yapım eki. Kök = kitap. "-lık" eki yeni anlam katmıştır.'
+          },
+          {
+            saniye: 180,
+            soru: 'İsim kökü ile fiil kökü arasındaki fark nedir?',
+            secenekler: [
+              'İsim kökü varlık ya da kavram adıdır (ev, taş); fiil kökü bir eylemi ya da oluşu ifade eder (git-, gel-).',
+              'İkisi de tamamen aynıdır.',
+              'İsim kökü her zaman çok heceli, fiil kökü tek heceli olur.',
+              'Fiil kökü hep büyük harfle yazılır.'
+            ],
+            dogru: 0,
+            ipucu: 'İsim kökü: ev, taş, yol. Fiil kökü: git-, gel-, bak-. (Fiil kökü sonuna "-" konur.)'
+          },
+          {
+            saniye: 240,
+            soru: 'Yapım eki ne işe yarar?',
+            secenekler: [
+              'Sözcüğe yeni anlam katar, sözcüğü farklı bir sözcük türüne dönüştürebilir.',
+              'Sözcüğün sadece çoğulunu yapar.',
+              'Sözcüğün zamanını değiştirir.',
+              'Sözcüğün anlamını değiştirmeden cümledeki görevini belirtir.'
+            ],
+            dogru: 0,
+            ipucu: 'Yapım eki: "taş" + "-lık" = "taşlık" (yeni sözcük). Çekim eki: "ev" + "-de" = "evde" (aynı sözcük, farklı görev).'
+          },
+          {
+            saniye: 300,
+            soru: '"Güzellik" sözcüğünde yapım eki hangisidir?',
+            secenekler: ['-lik', '-güz', '-el', '-güzel'],
+            dogru: 0,
+            ipucu: '"Güzel" (sıfat) + "-lik" yapım eki = "güzellik" (isim). Ek yeni sözcük türetti.'
+          },
+          {
+            saniye: 360,
+            soru: '"Yazarlar" sözcüğünü doğru çözümleyen seçenek hangisidir?',
+            secenekler: [
+              '"Yaz-" (fiil kökü) + "-ar" (yapım eki) + "-lar" (çekim eki)',
+              '"Yazar" (kök) + "-lar" (yapım eki)',
+              '"Yazarlar" sözcüğünün kökü yoktur.',
+              '"Yaz" (isim kökü) + "-arlar" (tek ek)'
+            ],
+            dogru: 0,
+            ipucu: '"Yaz-" fiil kökü → "-ar" yapım eki → "yazar" (isim) → "-lar" çekim eki → "yazarlar".'
+          },
+          {
+            saniye: 420,
+            soru: '"Gözlük" sözcüğünde hangi yapım eki kullanılmıştır?',
+            secenekler: ['-lük', '-göz', '-lük+göz', '-ük'],
+            dogru: 0,
+            ipucu: '"Göz" (isim kökü) + "-lük" yapım eki = "gözlük". Ek, ince ünlü uyumuna göre "-lük" biçimini almıştır.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Kök, gövde ve yapım ekleri hakkında hangisi doğrudur?',
+            secenekler: [
+              'Kök sözcüğün en küçük anlamlı parçasıdır; yapım eki yeni sözcük türetir; çekim eki anlamı değiştirmez, sadece cümledeki görevi belirtir.',
+              'Yapım ekleri ve çekim ekleri aynı işlevi yapar.',
+              'Fiil kökleri her zaman isim kökleriyle aynıdır.',
+              'Kök sözcüğün son ekidir.'
+            ],
+            dogru: 0,
+            ipucu: 'Kök = bölünemez anlam. Yapım eki = yeni sözcük (taş→taşlık). Çekim eki = görev (ev→evde).'
+          }
+        ]
       }
     ],
     playlists: [
@@ -4159,6 +5193,210 @@ const DERSLER = [
             ipucu: 'Demokrasi = halk egemenliği. Cumhuriyet = halkın seçtiği yönetim. TC: 29 Ekim 1923.'
           }
         ]
+      },
+      {
+        slug: 'bilim-teknoloji', name: 'Bilim, Teknoloji ve Toplum', hedef: 'Bilimsel gelişmelerin toplumsal hayata etkilerini anlama',
+        videoId: '8w80rP0yj24',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Bilim ne anlama gelir?',
+            secenekler: [
+              'Doğayı ve evreni anlama amacıyla gözlem ve deney yapma çabası.',
+              'Yalnızca makine ve araç üretme faaliyeti.',
+              'Siyasi kararlar alma sürecidir.',
+              'Sanat eserlerini inceleme dalıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Bilim: doğayı anlamak için gözlem, deney ve akıl yürütme yöntemidir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Teknoloji nasıl tanımlanır?',
+            secenekler: [
+              'Yalnızca bilgisayar ve telefon demektir.',
+              'Bilimsel bilgilerin insanların işine yarayan araç, gereç ve yöntemlere dönüştürülmesidir.',
+              'Tarihsel olayların incelenmesidir.',
+              'Coğrafya bilgisinin uygulamasıdır.'
+            ],
+            dogru: 1,
+            ipucu: 'Teknoloji: bilimi hayatımıza uygulayan araç ve yöntemlerin bütünüdür.'
+          },
+          {
+            saniye: 180,
+            soru: 'Bilimsel gelişmelere hangisi örnek verilebilir?',
+            secenekler: [
+              'Geleneksel el sanatları',
+              'Sözlü kültür geleneği',
+              'İnternet, uzay araştırmaları ve aşı geliştirme',
+              'Halk hikayeleri'
+            ],
+            dogru: 2,
+            ipucu: 'İnternet, uzay teknolojisi, aşı — bunlar bilimsel araştırma sonucu ortaya çıkmıştır.'
+          },
+          {
+            saniye: 240,
+            soru: 'Teknolojik gelişmeler toplumsal yaşamı nasıl etkilemiştir?',
+            secenekler: [
+              'İnsanlar arası iletişimi zorlaştırmış; ulaşımı yavaşlatmıştır.',
+              'İletişimi, ulaşımı ve sağlık hizmetlerini kolaylaştırmış; hayat standardını yükseltmiştir.',
+              'Tarımı tamamen ortadan kaldırmıştır.',
+              'İnsanları birbirinden tamamen uzaklaştırmıştır.'
+            ],
+            dogru: 1,
+            ipucu: 'Teknoloji: iletişim hızlandı, sağlık gelişti, ulaşım kolaylaştı — yaşam kalitesi arttı.'
+          },
+          {
+            saniye: 300,
+            soru: 'Teknoloji kullanımının olumsuz sonuçlarından biri hangisidir?',
+            secenekler: [
+              'Tarımın artması',
+              'İnsanların daha sağlıklı olması',
+              'Çevre kirliliği ve ekran bağımlılığı',
+              'Kitap okuma alışkanlığının artması'
+            ],
+            dogru: 2,
+            ipucu: 'Teknolojinin olumsuz etkileri: çevre kirliliği, bağımlılık, sosyal yalnızlaşma.'
+          },
+          {
+            saniye: 360,
+            soru: 'Bilim insanlarının ortak özellikleri nelerdir?',
+            secenekler: [
+              'Meraklı, sorgulayan, gözlemleyen ve deney yapan kişilerdir.',
+              'Yalnızca kitap okuyan ve not alan kişilerdir.',
+              'Sadece matematik öğretmenliği yapan kişilerdir.',
+              'Sporla uğraşan ve fiziksel çalışmalar yapan kişilerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Bilim insanı: merak eder, sorgular, gözlemler, deney yapar ve sonuçları paylaşır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Günlük hayatımızda teknoloji nerede karşımıza çıkar?',
+            secenekler: [
+              'Yalnızca okullarda',
+              'Sadece fabrikalarda',
+              'Elektrik, ulaşım araçları, haberleşme araçları ve sağlık aletleri gibi pek çok alanda',
+              'Yalnızca eğlence sektöründe'
+            ],
+            dogru: 2,
+            ipucu: 'Elektrik, otobüs, telefon, röntgen cihazı — teknoloji her alanda hayatımızda.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Bilim, teknoloji ve toplum ilişkisini en iyi özetleyen hangisidir?',
+            secenekler: [
+              'Bilim merakla başlar, teknoloji onu hayata uygular; toplumsal yaşamı hem olumlu hem olumsuz etkiler.',
+              'Bilim ve teknoloji birbirinden bağımsızdır ve toplumu etkilemez.',
+              'Teknoloji yalnızca olumsuz etkilere sahiptir.',
+              'Bilim yalnızca üniversitelerde üretilir; sıradan insanlarla ilgisi yoktur.'
+            ],
+            dogru: 0,
+            ipucu: 'Bilim → teknoloji → toplumsal değişim. Faydaları: ulaşım, sağlık, iletişim. Zararları: çevre, bağımlılık.'
+          }
+        ]
+      },
+      {
+        slug: 'uretim-dagitim-tuketim', name: 'Üretim, Dağıtım ve Tüketim', hedef: 'Üretim-dağıtım-tüketim sürecini ve ekonomik ilişkileri anlama',
+        videoId: 'OALnahJ0Qtk',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'Üretim nedir?',
+            secenekler: [
+              'Mal ve hizmetlerin satın alınması.',
+              'İnsanların ihtiyaçlarını karşılamak için mal ve hizmet ortaya koyma faaliyetidir.',
+              'Ürünlerin depolanması işlemidir.',
+              'Tüketilen malların geri dönüştürülmesidir.'
+            ],
+            dogru: 1,
+            ipucu: 'Üretim: ihtiyaçları karşılamak için mal (ekmek, araba) veya hizmet (doktorluk, öğretmenlik) üretmektir.'
+          },
+          {
+            saniye: 120,
+            soru: 'Dağıtım ne anlama gelir?',
+            secenekler: [
+              'Ürünlerin üreticiden son tüketiciye ulaştırılma sürecidir.',
+              'Fabrikada ürün yapılması sürecidir.',
+              'Tüketicinin ürünü kullanmasıdır.',
+              'Devletin vergi toplamasıdır.'
+            ],
+            dogru: 0,
+            ipucu: 'Dağıtım: üreticiden çıkan ürünün toptancı, perakendeci aracılığıyla tüketiciye ulaşması.'
+          },
+          {
+            saniye: 180,
+            soru: 'Tüketim nedir?',
+            secenekler: [
+              'Mal ve hizmetlerin üretilmesidir.',
+              'İhtiyaçları karşılamak amacıyla mal ve hizmetlerin kullanılmasıdır.',
+              'Ürünlerin dağıtım merkezine gönderilmesidir.',
+              'Ham maddelerin işlenmesidir.'
+            ],
+            dogru: 1,
+            ipucu: 'Tüketim: üretilen malları veya hizmetleri ihtiyacımız için kullanmak (yemek yemek, kıyafet giymek).'
+          },
+          {
+            saniye: 240,
+            soru: 'Üretimin temel faktörleri hangileridir?',
+            secenekler: [
+              'Doğal kaynaklar, emek, sermaye ve girişim',
+              'Yalnızca para ve fabrika',
+              'Sadece işçi ve toprak',
+              'Hava, su ve güneş ışığı'
+            ],
+            dogru: 0,
+            ipucu: 'Üretim faktörleri: doğal kaynaklar (toprak/su), emek (insan gücü), sermaye (para/makine), girişim (fikir ve organizasyon).'
+          },
+          {
+            saniye: 300,
+            soru: 'İş bölümü neden önemlidir?',
+            secenekler: [
+              'Herkes her işi yapınca verimlilik artar.',
+              'Herkesin bir işte uzmanlaşması üretimi hızlandırır ve kaliteyi artırır.',
+              'İş bölümü yalnızca fabrikalarda geçerlidir.',
+              'İş bölümü ücretleri düşürür.'
+            ],
+            dogru: 1,
+            ipucu: 'İş bölümü: uzmanlaşma → daha hızlı ve kaliteli üretim → toplumsal refah.'
+          },
+          {
+            saniye: 360,
+            soru: 'Tarımsal üretim ile sanayi üretimi arasındaki fark nedir?',
+            secenekler: [
+              'İkisi de aynıdır; fark yoktur.',
+              'Tarımsal üretim doğadan ham madde elde etme; sanayi üretimi ham maddeleri işleyerek ürüne dönüştürmedir.',
+              'Sanayi üretimi yalnızca köylerde yapılır.',
+              'Tarım üretimi makinelerle yapılmaz.'
+            ],
+            dogru: 1,
+            ipucu: 'Tarım: buğday, sebze gibi doğadan ürün. Sanayi: bu ürünleri işleyip ekmek, kumaş gibi yeni mallara dönüştürme.'
+          },
+          {
+            saniye: 420,
+            soru: 'Bilinçli tüketici nasıl davranır?',
+            secenekler: [
+              'Her gördüğü şeyi satın alır.',
+              'İhtiyaç ile isteği birbirinden ayırır; tasarruflu ve çevreci tüketim yapar.',
+              'Yalnızca pahalı ürünleri tercih eder.',
+              'Reklamlara göre alışveriş yapar.'
+            ],
+            dogru: 1,
+            ipucu: 'Bilinçli tüketim: ihtiyaç mı, istek mi? → Gereksiz harcamadan kaçın, çevreye zarar verme.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Üretim, dağıtım ve tüketim döngüsünü en iyi anlatan hangisidir?',
+            secenekler: [
+              'Üretici mal yapar → dağıtım kanallarıyla tüketiciye ulaşır → tüketici ihtiyacını karşılar. Bu döngü ekonominin temelidir.',
+              'Tüketici mal yapar ve üreticiye satar.',
+              'Dağıtım olmadan da ürünler tüketiciye ulaşır.',
+              'Üretim, dağıtım ve tüketim birbirinden tamamen bağımsız süreçlerdir.'
+            ],
+            dogru: 0,
+            ipucu: 'Üretim → Dağıtım → Tüketim: ekonominin temel döngüsü. Bilinçli tüketim ekonomiyi sağlıklı kılar.'
+          }
+        ]
       }
     ],
     playlists: [
@@ -4936,6 +6174,414 @@ const DERSLER = [
             ],
             dogru: 0,
             ipucu: 'I think / In my opinion = fikir. I like/don\'t like ... because = tercih + neden. Sıfatlar: exciting, boring, funny, scary.'
+          }
+        ]
+      },
+      {
+        slug: 'party-time', name: 'Party Time — Months, Days & Invitations', hedef: 'Ayları, günleri ve parti davetini İngilizce kullanma',
+        videoId: 'YrHnsNsr-FA',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: 'What is the correct order of months from January?',
+            secenekler: [
+              'January, March, February, April',
+              'January, February, March, April, May, June...',
+              'December, November, October...',
+              'Monday, Tuesday, Wednesday...'
+            ],
+            dogru: 1,
+            ipucu: 'Months: January(1), February(2), March(3)... December(12). Aylar 12 tane.'
+          },
+          {
+            saniye: 120,
+            soru: '"My birthday is on the fifteenth of March." Bu cümle neyi ifade ediyor?',
+            secenekler: [
+              'Doğum günü Mart\'ın 15\'indedir.',
+              'Doğum günü Mayıs\'ın 5\'indedir.',
+              'Doğum günü Mart\'ın 5\'indedir.',
+              'Doğum günü 15 Ocak\'tadır.'
+            ],
+            dogru: 0,
+            ipucu: '"on the fifteenth of March" = 15 Mart. "fifteenth" = 15. ordinal number (sıra sayısı).'
+          },
+          {
+            saniye: 180,
+            soru: 'Which sentence correctly invites someone to a birthday party?',
+            secenekler: [
+              'I go to school every day.',
+              'Would you like to come to my birthday party on Saturday?',
+              'What time is it now?',
+              'I don\'t like cake.'
+            ],
+            dogru: 1,
+            ipucu: '"Would you like to come to my party?" = "Doğum günü partim için gelir misin?" — davet cümlesi.'
+          },
+          {
+            saniye: 240,
+            soru: 'How do you accept an invitation in English?',
+            secenekler: [
+              'Sorry, I can\'t make it.',
+              'Sure, I\'d love to! Thank you for the invitation.',
+              'I don\'t know you.',
+              'What party?'
+            ],
+            dogru: 1,
+            ipucu: '"Sure, I\'d love to!" = "Tabii, çok severim!" — daveti kabul etme ifadesi.'
+          },
+          {
+            saniye: 300,
+            soru: 'Which words are related to a birthday party?',
+            secenekler: [
+              'Homework, pencil, ruler',
+              'Balloons, cake, candles, decorations',
+              'Bus, train, airplane',
+              'Winter, summer, autumn'
+            ],
+            dogru: 1,
+            ipucu: 'Party vocabulary: balloons (balonlar), cake (pasta), candles (mumlar), decorations (süslemeler).'
+          },
+          {
+            saniye: 360,
+            soru: '"The party is on the third of June." cümlesinde "third" ne anlama gelir?',
+            secenekler: [
+              'Üçüncü (3.)',
+              'Üç',
+              'Salı',
+              'Haziran'
+            ],
+            dogru: 0,
+            ipucu: '"Third" = üçüncü. Ordinal numbers: first (1st), second (2nd), third (3rd), fourth (4th)...'
+          },
+          {
+            saniye: 420,
+            soru: 'What do you say when you decline an invitation politely?',
+            secenekler: [
+              'Yes, absolutely!',
+              'Sure, I\'d love to!',
+              'Sorry, I can\'t come. I have other plans.',
+              'What invitation?'
+            ],
+            dogru: 2,
+            ipucu: '"Sorry, I can\'t come." = "Özür dilerim, gelemiyorum." — kibarca reddetme.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises the "Party Time" topic?',
+            secenekler: [
+              'We use months (January–December), days (Monday–Sunday) and ordinal numbers (first, second...) to talk about dates; "Would you like to come?" to invite; "Sure, I\'d love to!" to accept; "Sorry, I can\'t" to decline.',
+              'Months and days are not used when talking about parties.',
+              'We only need cake vocabulary for party invitations.',
+              'Invitations are only given in Turkish.'
+            ],
+            dogru: 0,
+            ipucu: 'Months + ordinal numbers = tarih. "Would you like to come?" = davet. "I\'d love to / Sorry I can\'t" = kabul/ret.'
+          }
+        ]
+      },
+      {
+        slug: 'fitness', name: 'Fitness — Can / Can\'t & Sports', hedef: 'Can/can\'t yapısını yetenek bildirmek için kullanma',
+        videoId: 'XT4vkLAvXYE',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"I can swim very well." Bu cümle ne anlama gelir?',
+            secenekler: [
+              'Yüzmeyi sevmiyorum.',
+              'Yüzebilirim, hem de çok iyi.',
+              'Yüzmeyi öğrenmek istiyorum.',
+              'Hiç yüzmedim.'
+            ],
+            dogru: 1,
+            ipucu: '"Can" = yetenek/yeteneği olma. "I can swim" = yüzebiliyorum. "very well" = çok iyi.'
+          },
+          {
+            saniye: 120,
+            soru: '"Can you ride a bike?" sorusuna doğru cevap hangisidir?',
+            secenekler: [
+              'Yes, I can.',
+              'Yes, I am.',
+              'Yes, I do.',
+              'Yes, I have.'
+            ],
+            dogru: 0,
+            ipucu: '"Can you...?" sorusuna "Yes, I can." veya "No, I can\'t." ile cevap verilir.'
+          },
+          {
+            saniye: 180,
+            soru: 'Which sport vocabulary is correct?',
+            secenekler: [
+              'Swim → yüzmek, play basketball → basketbol oynamak, do gymnastics → jimnastik yapmak',
+              'Swim → koşmak, basketball → futbol, gymnastics → yüzme',
+              'Play football → tenis oynamak',
+              'Run → bisiklete binmek'
+            ],
+            dogru: 0,
+            ipucu: 'swim (yüz), play basketball/football (oyna), do gymnastics/yoga (yap), ride a bike (bisiklete bin).'
+          },
+          {
+            saniye: 240,
+            soru: '"She can\'t fly." Bu cümle ne anlama gelir?',
+            secenekler: [
+              'O uçabilir.',
+              'O uçmak istiyor.',
+              'O uçamaz.',
+              'O uçmayı sever.'
+            ],
+            dogru: 2,
+            ipucu: '"Can\'t" = cannot = yapamaz. "She can\'t fly" = o uçamaz.'
+          },
+          {
+            saniye: 300,
+            soru: 'How do you ask about someone\'s sports ability?',
+            secenekler: [
+              'Do you sports?',
+              'What sports can you play?',
+              'Are you sports?',
+              'Have you sports?'
+            ],
+            dogru: 1,
+            ipucu: '"What sports can you play?" = "Hangi sporları yapabilirsin?" — yetenek sorusu.'
+          },
+          {
+            saniye: 360,
+            soru: 'Which sentence talks about a healthy habit?',
+            secenekler: [
+              'I watch TV all day and never exercise.',
+              'I play sports three times a week and eat healthy food.',
+              'I eat junk food every day.',
+              'I sleep 20 hours a day.'
+            ],
+            dogru: 1,
+            ipucu: 'Sağlıklı alışkanlık: düzenli spor + sağlıklı beslenme. "Three times a week" = haftada üç kez.'
+          },
+          {
+            saniye: 420,
+            soru: '"I can play the piano a little." cümlesinde "a little" ne anlama gelir?',
+            secenekler: [
+              'Çok iyi',
+              'Hiç',
+              'Biraz / azıcık',
+              'Mükemmel düzeyde'
+            ],
+            dogru: 2,
+            ipucu: 'Yetenek düzeyleri: very well (çok iyi), well (iyi), a little (biraz), not at all (hiç).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises the can / can\'t structure for sports?',
+            secenekler: [
+              '"Can" is used to express ability: "I can swim." "Can\'t" is the negative: "I can\'t fly." Questions: "Can you...? — Yes, I can / No, I can\'t." Level: very well / a little / not at all.',
+              '"Can" is only used for future plans.',
+              '"Can" and "can\'t" are only used with the verb "be".',
+              'We never use "can" to talk about sports.'
+            ],
+            dogru: 0,
+            ipucu: 'Can = yetenek (+). Can\'t = yetersizlik (−). Can you...? = Yapabilir misin? Düzey: very well / a little / not at all.'
+          }
+        ]
+      },
+      {
+        slug: 'animal-shelter', name: 'Animal Shelter — Describing Animals', hedef: 'Hayvanları tanımlama ve have/has yapısını kullanma',
+        videoId: 'F3nJcWtnHTA',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"A dog has four legs and a tail." Bu cümle hangi yapıyı kullanıyor?',
+            secenekler: [
+              'Have / Has yapısını (sahip olma)',
+              'Can / Can\'t yapısını',
+              'Is / Are yapısını',
+              'Do / Does yapısını'
+            ],
+            dogru: 0,
+            ipucu: '"Has" = 3. tekil şahıs için "have". Hayvanları tanımlarken "have/has" kullanılır.'
+          },
+          {
+            saniye: 120,
+            soru: 'Which sentence correctly describes an animal\'s body?',
+            secenekler: [
+              'A parrot has colourful feathers and a beak.',
+              'A fish has legs and fur.',
+              'A cat has wings and feathers.',
+              'A rabbit has fins and scales.'
+            ],
+            dogru: 0,
+            ipucu: 'Parrot (papağan): feathers (tüyler), beak (gaga). Her hayvanın kendine özgü fiziksel özellikleri var.'
+          },
+          {
+            saniye: 180,
+            soru: 'Match the animal with its correct habitat: "It lives in the ocean."',
+            secenekler: [
+              'Eagle (kartal)',
+              'Dolphin (yunus)',
+              'Camel (deve)',
+              'Bear (ayı)'
+            ],
+            dogru: 1,
+            ipucu: 'Dolphin lives in the ocean. Ocean = okyanus. Habitat = yaşam ortamı.'
+          },
+          {
+            saniye: 240,
+            soru: '"It eats grass and leaves." Bu cümle hangi hayvanı tanımlar?',
+            secenekler: [
+              'Lion (aslan)',
+              'Shark (köpek balığı)',
+              'Rabbit (tavşan)',
+              'Eagle (kartal)'
+            ],
+            dogru: 2,
+            ipucu: 'Rabbit: eats grass and leaves (ot ve yaprak yer). Herbivore = otçul hayvan.'
+          },
+          {
+            saniye: 300,
+            soru: '"Endangered animals" ne anlama gelir?',
+            secenekler: [
+              'Çok hızlı koşan hayvanlar',
+              'Nesli tehlike altında olan hayvanlar',
+              'Evcil hayvanlar',
+              'Deniz hayvanları'
+            ],
+            dogru: 1,
+            ipucu: 'Endangered = tehlikede. Endangered animals = nesli tükenme tehlikesinde olan hayvanlar.'
+          },
+          {
+            saniye: 360,
+            soru: 'Which adjectives can describe animals?',
+            secenekler: [
+              'Monday, Tuesday, Wednesday',
+              'Red, blue, green (only colours)',
+              'Big, small, cute, dangerous, fluffy, wild',
+              'First, second, third'
+            ],
+            dogru: 2,
+            ipucu: 'Animal adjectives: big/small (büyük/küçük), cute (sevimli), dangerous (tehlikeli), fluffy (tüylü), wild (yabani).'
+          },
+          {
+            saniye: 420,
+            soru: '"I / We have a pet cat." ve "She / He has a pet dog." Hangi kural doğrudur?',
+            secenekler: [
+              'Have ve has her zaman birbirinin yerine kullanılabilir.',
+              'I/You/We/They → have; He/She/It → has',
+              'He/She → have; I → has',
+              '"Has" yalnızca sorularda kullanılır.'
+            ],
+            dogru: 1,
+            ipucu: 'Have: I, you, we, they. Has: he, she, it. 3. tekil şahıs için "has" kullanırız.'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises describing animals in English?',
+            secenekler: [
+              'We use "have/has" to describe physical features; adjectives (big, cute, dangerous) for appearance; "It lives in..." for habitat; "It eats..." for diet. Some animals are endangered.',
+              'We only use "is/are" to describe animals.',
+              'Animal descriptions don\'t use any adjectives.',
+              'Habitat and diet are not part of animal descriptions.'
+            ],
+            dogru: 0,
+            ipucu: 'Have/has = özellik. Adjectives = görünüş. "Lives in..." = habitat. "Eats..." = diyet. Endangered = nesli tehlikede.'
+          }
+        ]
+      },
+      {
+        slug: 'festivals', name: 'Festivals & Special Days — Dates', hedef: 'Tarihleri ve özel günleri İngilizce anlatma',
+        videoId: 'OwVND8hykOo',
+        checkpoints: [
+          {
+            saniye: 60,
+            soru: '"April 23rd" nasıl okunur?',
+            secenekler: [
+              'April twenty-third',
+              'April twenty-three',
+              'April two-three',
+              'April the twenty'
+            ],
+            dogru: 0,
+            ipucu: 'Tarihlerde ordinal number kullanılır: 23rd = "twenty-third". "April 23rd" = April twenty-third.'
+          },
+          {
+            saniye: 120,
+            soru: 'Which date is Republic Day in Turkey?',
+            secenekler: [
+              'April 23rd',
+              'May 19th',
+              'October 29th',
+              'August 30th'
+            ],
+            dogru: 2,
+            ipucu: 'Republic Day = Cumhuriyet Bayramı = October 29th (29 Ekim). Atatürk declared the Republic on October 29, 1923.'
+          },
+          {
+            saniye: 180,
+            soru: '"When is National Sovereignty and Children\'s Day?" sorusuna doğru cevap hangisidir?',
+            secenekler: [
+              'It\'s on October 29th.',
+              'It\'s on April 23rd.',
+              'It\'s on May 19th.',
+              'It\'s on August 30th.'
+            ],
+            dogru: 1,
+            ipucu: 'National Sovereignty and Children\'s Day = Ulusal Egemenlik ve Çocuk Bayramı = April 23rd (23 Nisan).'
+          },
+          {
+            saniye: 240,
+            soru: '"Eid" in English refers to which celebrations?',
+            secenekler: [
+              'Christmas and New Year',
+              'Eid al-Fitr (Ramazan Bayramı) and Eid al-Adha (Kurban Bayramı)',
+              'Republic Day and Victory Day',
+              'Halloween and Thanksgiving'
+            ],
+            dogru: 1,
+            ipucu: 'Eid al-Fitr = Ramazan Bayramı (Sugar Feast). Eid al-Adha = Kurban Bayramı (Sacrifice Feast).'
+          },
+          {
+            saniye: 300,
+            soru: '"29th" kelimesi nasıl okunur?',
+            secenekler: [
+              'Twenty-nine',
+              'Twenty-ninth',
+              'Twenty-nine-th',
+              'The twenty nine'
+            ],
+            dogru: 1,
+            ipucu: 'Ordinal numbers: 9 → ninth; 19 → nineteenth; 29 → twenty-ninth. Tarihler için ordinal kullanılır.'
+          },
+          {
+            saniye: 360,
+            soru: 'How do you say "15 Ağustos" in English?',
+            secenekler: [
+              'August fifteen',
+              'The fifteenth of August / August 15th',
+              'Fifteen August',
+              'August fifth'
+            ],
+            dogru: 1,
+            ipucu: 'Tarih söyleme: "the fifteenth of August" veya "August 15th". Ordinal number (sıra sayısı) kullanılır.'
+          },
+          {
+            saniye: 420,
+            soru: 'Which word is related to festival celebrations?',
+            secenekler: [
+              'Homework and exams',
+              'Parade, ceremony, fireworks, holiday',
+              'Pencil, ruler, eraser',
+              'Train, bus, ferry'
+            ],
+            dogru: 1,
+            ipucu: 'Festival vocabulary: parade (geçit töreni), ceremony (tören), fireworks (havai fişek), holiday (tatil/bayram).'
+          },
+          {
+            saniye: 'fin',
+            soru: 'Which best summarises Festivals & Special Days?',
+            secenekler: [
+              'Dates use ordinal numbers (23rd, 29th). "When is...? — It\'s on + date." Key Turkish festivals: April 23rd, May 19th, August 30th, October 29th. Eid al-Fitr & Eid al-Adha are religious festivals. Vocabulary: parade, ceremony, fireworks.',
+              'Dates in English never use ordinal numbers.',
+              'Turkey has no national festivals.',
+              'We only use cardinal numbers (1, 2, 3) for dates.'
+            ],
+            dogru: 0,
+            ipucu: 'Ordinal numbers = tarihler. "When is...? It\'s on..." = tarih sorup cevaplama. Milli + dini bayramlar bilgisi.'
           }
         ]
       }
