@@ -19,7 +19,7 @@ var PROJELER = [
   { emoji: '\u{1F916}', title: 'Yapay Zekâ Araç Atlası', desc: 'Hangi YZ aracı ne işe yarar? 32 aracı karşılaştır, ihtiyacına göre seç. Üstelik çoğu ücretsiz.', tag: 'Rehber', href: '/ai-atlasi/', featured: true },
   { emoji: '\u{1F9EC}', title: 'Beyin ↔ Yapay Zekâ', desc: 'İnsan beyni ile yapay zekâ arasındaki şaşırtıcı benzerlikler. 50 paralel keşif, 120 yıllık bir hikâye.', tag: 'Ansiklopedi', href: '/beyin-ve-yapay-zeka/' },
   { emoji: '\u{262A}\u{FE0F}', title: 'Sevgili Peygamberim', desc: 'O\'nun hayatını hiç bu kadar yakından okumadınız. 72 bölüm, interaktif harita, kişi kartları ve quizlerle dolu bir yolculuk.', tag: 'Ansiklopedi', href: '/sevgili-peygamberim/', featured: true },
-  { emoji: '\u{2709}\u{FE0F}', title: 'Davet Mektubu', desc: 'Ateist bir mühendise ne yazarsın? Agnostik bir doktora? 27 mesleğe özel, düşündürücü mektuplar.', tag: 'Uygulama', href: '/davetmektubu/' },
+  { emoji: '\u{2709}\u{FE0F}', title: 'Davet Mektubu', desc: 'Ateist bir mühendise ne yazarsın? Agnostik bir doktora? 27 mesleğe özel, düşündürücü mektuplar.', tag: 'Uygulama', href: 'https://davetmektubu.com/', external: true },
   { emoji: '\u{1F3F9}', title: 'Kayı I — Ertuğrul\'un Ocağı', desc: 'Bir uç beyliğinden cihan devletine — Osmanlı\'nın kuruluş destanını kişiler, olaylar ve haritalarla keşfet.', tag: 'Ansiklopedi', href: '/kayi/' },
   { emoji: '\u{1F331}', title: 'İyilik Akademi', desc: 'Çocuklara güzel ahlakı nasıl öğretirsin? 40 derslik interaktif bir yolculukla — oyunlaştırılmış, quizlerle dolu.', tag: 'Uygulama', href: '/iyilikakademi/' }
 ];
