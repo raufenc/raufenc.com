@@ -814,10 +814,9 @@ input { font-family: inherit; }
   animation: mascotBounce 0.5s ease;
 }
 .mascot-img-celebrate {
-  max-width: 180px; max-height: 140px; border-radius: 12px;
-  margin: 10px auto 0; display: block;
+  width: 100%; max-height: 240px; object-fit: cover;
+  margin: 8px 0 0 0; display: block; border-radius: 12px;
   animation: mascotPop 0.5s ease;
-  object-fit: contain; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 .mascot-completion { text-align: center; margin-bottom: 12px; }
 .mascot-img-completion {
@@ -838,6 +837,6 @@ input { font-family: inherit; }
 }
 @media (max-width: 600px) {
   .mascot-img-break { width: calc(100% + 40px); margin: -20px -20px 16px -20px; max-height: 160px; }
-  .mascot-img-celebrate { max-width: 130px; max-height: 100px; }
+  .mascot-img-celebrate { width: 100%; max-height: 180px; }
   .mascot-img-completion { max-width: 280px; max-height: 200px; }
 }

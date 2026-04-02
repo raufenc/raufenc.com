@@ -96,7 +96,7 @@ async function doLogin() {
     sessionStorage.setItem('biaPw', pw);
 
     // Middleware için cookie (8 saat)
-    document.cookie = 'bia_auth=1; path=/birlikteiyilik-v2/yonetim; SameSite=Strict; Secure; max-age=28800';
+    document.cookie = 'bia_auth=1; path=/birlikteiyilik-v2/yonetim; SameSite=Lax; max-age=28800';
 
     window.location.href = 'panel.html';
   } catch(e) {

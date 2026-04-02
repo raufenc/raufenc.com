@@ -812,9 +812,9 @@ window.handleAnswer = function(cpIdx, ansIdx) {
   const outroImg = uniteForFeedback?.mascotImages?.outro;
   const celebrateHtml = (correct && outroImg) ? `<img src="${outroImg}" class="mascot-img-celebrate" alt="Tebrikler!">` : '';
   const feedbackHTML = `
+    ${celebrateHtml}
     <div class="quiz-feedback ${correct ? 'feedback-correct' : 'feedback-wrong'}">
       ${correct ? '🎉 Harika, doğru!' : '😊 Bir daha bakalım! Doğru cevap: <strong>' + cp.secenekler[cp.dogru] + '</strong>'}
-      ${celebrateHtml}
     </div>
     <button class="btn btn-primary" onclick="closeCheckpoint()">Devam Et ▶</button>
   `;
