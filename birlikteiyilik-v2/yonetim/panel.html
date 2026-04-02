@@ -438,6 +438,14 @@ async function apiSave(params) {
   return d;
 }
 
+// ── SHA KURTARMA: Save hatası sonrası güncel sha'yı al ──
+async function recoverSha(type) {
+  try {
+    const d = await apiFetch({ type });
+    return { data: d.data, sha: d.sha };
+  } catch(e) { return null; }
+}
+
 function slugify(t) {
   return t.toLowerCase().replace(/[şıöüçğâîû]/g,c=>TR[c]||c)
     .normalize('NFKD').replace(/[^\w\s-]/g,'').replace(/[-\s]+/g,'-').replace(/^-|-$/g,'').slice(0,80);
@@ -542,15 +550,17 @@ async function saveItem() {
     featured: document.getElementById('fFeatured').checked,
     source_url: document.getElementById('fSourceUrl').value.trim(),
   };
-  if (editIdx === null) news.push(item); else news[editIdx] = item;
+  const newData = editIdx === null ? [...news, item] : news.map((n, i) => i === editIdx ? item : n);
   try {
-    const d = await apiSave({ type: 'news', data: news, sha, message: `BIA: "${title}" ${editIdx===null?'eklendi':'guncellendi'}` });
+    const d = await apiSave({ type: 'news', data: newData, sha, message: `BIA: "${title}" ${editIdx===null?'eklendi':'guncellendi'}` });
+    news = newData;
     sha = d.sha;
     document.getElementById('editNotice').innerHTML = '<div class="notice ok">Kaydedildi!</div>';
     setTimeout(showMain, 900);
   } catch(e) {
-    if (editIdx === null) news.pop();
     document.getElementById('editNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('news');
+    if (rec) sha = rec.sha;
   }
   btn.disabled = false; btn.innerHTML = 'Kaydet';
 }
@@ -558,12 +568,15 @@ async function saveItem() {
 async function deleteItem() {
   if (!confirm('Bu kaydi silmek istediginize emin misiniz?')) return;
   const title = news[editIdx]?.title || '';
-  news.splice(editIdx, 1);
+  const newData = news.filter((_, i) => i !== editIdx);
   try {
-    const d = await apiSave({ type: 'news', data: news, sha, message: `BIA: "${title}" silindi` });
+    const d = await apiSave({ type: 'news', data: newData, sha, message: `BIA: "${title}" silindi` });
+    news = newData;
     sha = d.sha; showMain();
   } catch(e) {
-    alert('Silme hatasi: ' + e.message);
+    document.getElementById('editNotice').innerHTML = `<div class="notice err">Silme hatasi: ${e.message}</div>`;
+    const rec = await recoverSha('news');
+    if (rec) sha = rec.sha;
   }
 }
 
@@ -773,15 +786,17 @@ async function saveEvent() {
     registration_url: document.getElementById('efRegUrl').value.trim(),
     past: document.getElementById('efPast').checked,
   };
-  if (eventEditIdx === null) events.push(ev); else events[eventEditIdx] = ev;
+  const newData = eventEditIdx === null ? [...events, ev] : events.map((e, i) => i === eventEditIdx ? ev : e);
   try {
-    const d = await apiSave({ type: 'events', data: events, sha: eventsSha, message: `BIA: Etkinlik "${title}" ${eventEditIdx===null?'eklendi':'guncellendi'}` });
+    const d = await apiSave({ type: 'events', data: newData, sha: eventsSha, message: `BIA: Etkinlik "${title}" ${eventEditIdx===null?'eklendi':'guncellendi'}` });
+    events = newData;
     eventsSha = d.sha;
     document.getElementById('eventEditNotice').innerHTML = '<div class="notice ok">Kaydedildi!</div>';
     setTimeout(showEvents, 900);
   } catch(e) {
-    if (eventEditIdx === null) events.pop();
     document.getElementById('eventEditNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('events');
+    if (rec) eventsSha = rec.sha;
   }
   btn.disabled = false; btn.innerHTML = 'Kaydet';
 }
@@ -789,11 +804,16 @@ async function saveEvent() {
 async function deleteEvent() {
   if (!confirm('Bu etkinligi silmek istediginize emin misiniz?')) return;
   const title = events[eventEditIdx]?.title || '';
-  events.splice(eventEditIdx, 1);
+  const newData = events.filter((_, i) => i !== eventEditIdx);
   try {
-    const d = await apiSave({ type: 'events', data: events, sha: eventsSha, message: `BIA: Etkinlik "${title}" silindi` });
+    const d = await apiSave({ type: 'events', data: newData, sha: eventsSha, message: `BIA: Etkinlik "${title}" silindi` });
+    events = newData;
     eventsSha = d.sha; showEvents();
-  } catch(e) { alert('Silme hatasi: ' + e.message); }
+  } catch(e) {
+    document.getElementById('eventEditNotice').innerHTML = `<div class="notice err">Silme hatasi: ${e.message}</div>`;
+    const rec = await recoverSha('events');
+    if (rec) eventsSha = rec.sha;
+  }
 }
 
 // ── TAB SWITCH ──
@@ -849,6 +869,8 @@ async function saveSite() {
     document.getElementById('siteNotice').innerHTML = '<div class="notice ok">Kaydedildi! Site yeniden derlenince degisiklikler yayinlanir.</div>';
   } catch(e) {
     document.getElementById('siteNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('site');
+    if (rec) siteSha = rec.sha;
   }
   btn.disabled = false; btn.textContent = 'Kaydet';
 }
@@ -894,6 +916,8 @@ async function saveHomepage() {
     document.getElementById('homepageNotice').innerHTML = '<div class="notice ok">Kaydedildi!</div>';
   } catch(e) {
     document.getElementById('homepageNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('homepage');
+    if (rec) homepageSha = rec.sha;
   }
   btn.disabled = false; btn.textContent = 'Kaydet';
 }
@@ -946,6 +970,8 @@ async function saveFaq() {
     document.getElementById('faqNotice').innerHTML = '<div class="notice ok">Kaydedildi!</div>';
   } catch(e) {
     document.getElementById('faqNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('faq');
+    if (rec) faqSha = rec.sha;
   }
   btn.disabled = false; btn.textContent = 'Tumunu Kaydet';
 }
@@ -991,6 +1017,8 @@ async function savePrograms() {
     document.getElementById('programsNotice').innerHTML = '<div class="notice ok">Kaydedildi!</div>';
   } catch(e) {
     document.getElementById('programsNotice').innerHTML = `<div class="notice err">${e.message}</div>`;
+    const rec = await recoverSha('programs');
+    if (rec) programsSha = rec.sha;
   }
   btn.disabled = false; btn.textContent = 'Tumunu Kaydet';
 }

@@ -76,8 +76,8 @@ export default async function handler(req) {
 
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
 
-  const gh = (path, method = 'GET', data = null) =>
-    fetch(`${GH_API}${path}`, {
+  const gh = async (path, method = 'GET', data = null) => {
+    const r = await fetch(`${GH_API}${path}`, {
       method,
       headers: {
         Authorization: `token ${TOKEN}`,
@@ -86,7 +86,10 @@ export default async function handler(req) {
         'User-Agent': 'BIA-Admin/1.0',
       },
       ...(data ? { body: JSON.stringify(data) } : {}),
-    }).then(r => r.json());
+    });
+    const body = await r.json();
+    return { status: r.status, data: body };
+  };
 
   const json = (data, status = 200) =>
     new Response(JSON.stringify(data), { status, headers: cors });
@@ -111,13 +114,16 @@ export default async function handler(req) {
     }
 
     try {
-      const data = await gh(`/repos/${REPO}/contents/${file}`);
-      const content = decode(data.content);
+      const res = await gh(`/repos/${REPO}/contents/${file}`);
+      if (res.status !== 200 || !res.data?.content) {
+        return json({ error: res.data?.message || 'Dosya okunamadi' }, res.status === 404 ? 404 : 500);
+      }
+      const content = decode(res.data.content);
       if (isPublic) {
         const publicCors = { ...cors, 'Cache-Control': 'public, max-age=60, s-maxage=60' };
         return new Response(JSON.stringify({ data: content }), { status: 200, headers: publicCors });
       }
-      return json({ data: content, sha: data.sha });
+      return json({ data: content, sha: res.data.sha });
     } catch (e) {
       return json({ error: e.message }, 500);
     }
@@ -165,13 +171,16 @@ export default async function handler(req) {
       let existingSha = '';
       try {
         const existing = await gh(`/repos/${REPO}/contents/${filePath}`);
-        if (existing.sha) existingSha = existing.sha;
+        if (existing.data?.sha) existingSha = existing.data.sha;
       } catch(_) {}
-      await gh(`/repos/${REPO}/contents/${filePath}`, 'PUT', {
+      const upRes = await gh(`/repos/${REPO}/contents/${filePath}`, 'PUT', {
         message: `BIA: görsel yüklendi — ${safeName}`,
         content: imgBase64,
         ...(existingSha ? { sha: existingSha } : {}),
       });
+      if (!upRes.data?.content) {
+        return json({ error: upRes.data?.message || 'Gorsel yuklenemedi' }, 500);
+      }
       const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${filePath}`;
       return json({ ok: true, url: rawUrl, path: filePath });
     }
@@ -185,12 +194,26 @@ export default async function handler(req) {
         payload = payload.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
       }
       const content = encode(payload);
-      const result = await gh(`/repos/${REPO}/contents/${file}`, 'PUT', {
-        message: body.message || `BIA: ${type} güncellendi`,
-        content,
-        sha: body.sha || '',
+      const msg = body.message || `BIA: ${type} güncellendi`;
+
+      // İlk deneme
+      let putRes = await gh(`/repos/${REPO}/contents/${file}`, 'PUT', {
+        message: msg, content, sha: body.sha || '',
       });
-      return json({ ok: true, sha: result.content.sha });
+
+      // SHA conflict veya hata → güncel sha ile tekrar dene
+      if (putRes.status === 409 || putRes.status === 422 || !putRes.data?.content?.sha) {
+        const current = await gh(`/repos/${REPO}/contents/${file}`);
+        const freshSha = current.data?.sha || '';
+        putRes = await gh(`/repos/${REPO}/contents/${file}`, 'PUT', {
+          message: msg, content, sha: freshSha,
+        });
+      }
+
+      if (!putRes.data?.content?.sha) {
+        return json({ error: putRes.data?.message || 'GitHub kayit hatasi' }, 500);
+      }
+      return json({ ok: true, sha: putRes.data.content.sha });
     } catch (e) {
       return json({ error: e.message }, 500);
     }
