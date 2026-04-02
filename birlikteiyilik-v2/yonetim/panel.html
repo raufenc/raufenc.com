@@ -411,11 +411,11 @@ async function apiFetch(params) {
       body: JSON.stringify(body)
     });
     if (r.ok) return await r.json();
-    // Sadece token varken 401 gelirse oturumu kapat
-    if (r.status === 401 && token) { logout(); return; }
+    // 401: token geçersizse password fallback'e düş (logout yapma)
+    if (r.status === 401) token = '';
   } catch(e) {}
 
-  // Fallback: eski GET API (token yoksa)
+  // Fallback: eski GET API
   if (!token) {
     const qs = new URLSearchParams({ password: pw, ...params });
     const r = await fetch(`${API}?${qs}`);

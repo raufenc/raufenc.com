@@ -35,7 +35,7 @@ async function verifyJWT(token, secret) {
     const msg = `${header}.${body}`;
     const enc = new TextEncoder();
     const key = await crypto.subtle.importKey('raw', enc.encode(secret), {name:'HMAC',hash:'SHA-256'}, false, ['verify']);
-    const pad = s => s.replace(/-/g,'+').replace(/_/g,'/') + '=='.slice((s.length + 3) % 4);
+    const pad = s => { const r=s.length%4; return s.replace(/-/g,'+').replace(/_/g,'/')+(r===2?'==':(r===3?'=':'')); };
     const sigBytes = Uint8Array.from(atob(pad(sig)), c => c.charCodeAt(0));
     const valid = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(msg));
     if (!valid) return null;
