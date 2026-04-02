@@ -402,28 +402,27 @@ function authHeaders() {
 }
 
 async function apiFetch(params) {
-  // Token yoksa body'ye de parola ekle (X-Admin-Key başarısız olursa body.password devreye girer)
-  const body = token ? params : { ...params, password: pw };
-  try {
-    const r = await fetch(API, {
-      method: 'POST',
-      headers: authHeaders(),
-      body: JSON.stringify(body)
-    });
-    if (r.ok) return await r.json();
-    // 401: token geçersizse password fallback'e düş (logout yapma)
-    if (r.status === 401) token = '';
-  } catch(e) {}
-
-  // Fallback: eski GET API
-  if (!token) {
-    const qs = new URLSearchParams({ password: pw, ...params });
-    const r = await fetch(`${API}?${qs}`);
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.error || 'Sunucu hatasi');
-    return d;
+  // Okuma her zaman GET ile yapılır
+  const qs = new URLSearchParams(params);
+  const headers = {};
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  } else {
+    qs.set('password', pw);
   }
-  throw new Error('API erisim hatasi');
+  const r = await fetch(`${API}?${qs}`, { headers });
+  const d = await r.json();
+  if (r.status === 401 && token) {
+    // Token geçersiz, parola ile tekrar dene
+    token = '';
+    const qs2 = new URLSearchParams({ password: pw, ...params });
+    const r2 = await fetch(`${API}?${qs2}`);
+    const d2 = await r2.json();
+    if (!r2.ok) throw new Error(d2.error || 'Giris hatasi');
+    return d2;
+  }
+  if (!r.ok) throw new Error(d.error || 'Sunucu hatasi');
+  return d;
 }
 
 async function apiSave(params) {
