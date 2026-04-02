@@ -13,6 +13,12 @@
       ]
     },
     {
+      "source": "/5sinif/:path*",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.youtube-nocookie.com https://www.gstatic.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src https://www.youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" }
+      ]
+    },
+    {
       "source": "/birlikteiyilik-v2/yonetim/(.*)",
       "headers": [
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
@@ -26,6 +32,11 @@
       "has": [{ "type": "host", "value": "lab.raufenc.com" }],
       "destination": "https://raufenc.com/:path*",
       "permanent": true
+    },
+    {
+      "source": "/5sinif",
+      "destination": "/5sinif/",
+      "permanent": false
     },
     {
       "source": "/hakkinda",
