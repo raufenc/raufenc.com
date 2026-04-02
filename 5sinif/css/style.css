@@ -314,7 +314,7 @@ input { font-family: inherit; }
 .quiz-modal {
   background: var(--bg-card); border-radius: var(--radius); padding: 32px;
   max-width: 500px; width: 90%; box-shadow: var(--shadow-lg);
-  animation: slideUp 0.3s ease;
+  animation: slideUp 0.3s ease; overflow: hidden;
 }
 .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .quiz-header h3 { font-size: 1.1rem; }
@@ -483,18 +483,28 @@ input { font-family: inherit; }
 /* === PLAY OVERLAY === */
 .play-overlay {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-  background: rgba(0,0,0,0.4); border-radius: var(--radius-sm);
-  z-index: 10; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding-bottom: 10%; border-radius: var(--radius-sm);
+  z-index: 10; cursor: pointer; overflow: hidden;
+}
+.mascot-cover {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; border-radius: var(--radius-sm);
+}
+.play-overlay::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 45%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  pointer-events: none;
 }
 .play-overlay-btn {
-  background: var(--primary); color: #fff; border: none; border-radius: 50%;
-  width: 80px; height: 80px; font-size: 2rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: var(--transition);
-  animation: pulse 2s infinite;
+  position: relative; z-index: 2;
+  background: var(--primary); color: #fff; border: none; border-radius: 50px;
+  padding: 14px 36px; font-size: 1.15rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: var(--transition);
+  animation: pulse 2s infinite; letter-spacing: 0.3px;
 }
-.play-overlay-btn:hover { transform: scale(1.1); background: #3A7BC8; }
+.play-overlay-btn:hover { transform: scale(1.05); background: #3A7BC8; }
 .play-hint { color: var(--text-light); font-size: 0.8rem; font-style: italic; }
 
 /* === CHECKPOINT STATUS === */
@@ -792,29 +802,28 @@ input { font-family: inherit; }
 /* === MASCOT / KARİKATÜR GÖRSELLERİ === */
 .mascot-intro { text-align: center; }
 .mascot-img-intro {
-  max-width: 260px; max-height: 180px; border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  max-width: 340px; max-height: 260px; border-radius: 16px; display: block; margin: 0 auto;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.35);
   animation: mascotBounce 0.6s ease;
   object-fit: contain;
 }
 .mascot-img-break {
-  max-width: 180px; max-height: 130px; border-radius: 12px;
-  margin: 0 auto 14px; display: block;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  width: calc(100% + 64px); max-height: 220px;
+  margin: -32px -32px 20px -32px;
+  object-fit: cover; border-radius: 12px 12px 0 0; display: block;
   animation: mascotBounce 0.5s ease;
-  object-fit: contain;
 }
 .mascot-img-celebrate {
-  max-width: 100px; max-height: 80px; border-radius: 8px;
-  margin-top: 8px; display: block;
-  animation: mascotPop 0.4s ease;
-  object-fit: contain;
+  max-width: 180px; max-height: 140px; border-radius: 12px;
+  margin: 10px auto 0; display: block;
+  animation: mascotPop 0.5s ease;
+  object-fit: contain; box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
-.mascot-completion { text-align: center; margin-bottom: 8px; }
+.mascot-completion { text-align: center; margin-bottom: 12px; }
 .mascot-img-completion {
-  max-width: 300px; max-height: 220px; border-radius: 16px;
-  margin: 0 auto 12px; display: block;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  max-width: 420px; max-height: 300px; border-radius: 16px;
+  margin: 0 auto 16px; display: block;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.18);
   animation: mascotPop 0.6s ease;
   object-fit: contain;
 }
@@ -828,8 +837,7 @@ input { font-family: inherit; }
   100% { transform: scale(1); opacity: 1; }
 }
 @media (max-width: 600px) {
-  .mascot-img-intro { max-width: 180px; max-height: 130px; }
-  .mascot-img-break { max-width: 130px; max-height: 100px; }
-  .mascot-img-celebrate { max-width: 70px; }
-  .mascot-img-completion { max-width: 220px; max-height: 160px; }
+  .mascot-img-break { width: calc(100% + 40px); margin: -20px -20px 16px -20px; max-height: 160px; }
+  .mascot-img-celebrate { max-width: 130px; max-height: 100px; }
+  .mascot-img-completion { max-width: 280px; max-height: 200px; }
 }

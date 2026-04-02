@@ -666,7 +666,7 @@ function showPlayOverlay() {
   const unite = state ? getUnite(state.dersSlug, state.uniteSlug) : null;
   const introImg = unite?.mascotImages?.intro;
   overlay.innerHTML = `
-    ${introImg ? `<div class="mascot-intro"><img src="${introImg}" alt="Ders tanıtımı" class="mascot-img-intro"></div>` : ''}
+    ${introImg ? `<img src="${introImg}" alt="Ders tanıtımı" class="mascot-cover">` : ''}
     <button class="play-overlay-btn" onclick="startVideo()">▶ Videoyu Başlat</button>
   `;
   wrapper.appendChild(overlay);
