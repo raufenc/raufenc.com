@@ -661,7 +661,14 @@ function showPlayOverlay() {
   const overlay = document.createElement('div');
   overlay.id = 'playOverlay';
   overlay.className = 'play-overlay';
-  overlay.innerHTML = '<button class="play-overlay-btn" onclick="startVideo()">▶ Videoyu Başlat</button>';
+  // Karikatür intro resmi
+  const state = window._quizState;
+  const unite = state ? getUnite(state.dersSlug, state.uniteSlug) : null;
+  const introImg = unite?.mascotImages?.intro;
+  overlay.innerHTML = `
+    ${introImg ? `<div class="mascot-intro"><img src="${introImg}" alt="Ders tanıtımı" class="mascot-img-intro"></div>` : ''}
+    <button class="play-overlay-btn" onclick="startVideo()">▶ Videoyu Başlat</button>
+  `;
   wrapper.appendChild(overlay);
 }
 
@@ -742,7 +749,14 @@ function triggerCheckpoint(idx) {
   const cp = state.checkpoints[idx];
   document.getElementById('quizOverlay').classList.remove('hidden');
   document.getElementById('quizProgress').textContent = `Soru ${idx + 1} / ${state.checkpoints.length}`;
+  // Break karikatürünü sadece ortadaki soruda göster
+  const unite = getUnite(state.dersSlug, state.uniteSlug);
+  const breakImg = unite?.mascotImages?.break;
+  const midIdx = Math.floor(state.checkpoints.length / 2);
+  const showBreakImg = breakImg && (idx === midIdx);
+
   document.getElementById('quizContent').innerHTML = `
+    ${showBreakImg ? `<img src="${breakImg}" class="mascot-img-break" alt="Mola">` : ''}
     <p class="quiz-question">${cp.soru}</p>
     <div class="quiz-options">
       ${cp.secenekler.map((sec, i) => `<button class="quiz-option" onclick="handleAnswer(${idx}, ${i})">${sec}</button>`).join('')}
@@ -793,10 +807,14 @@ window.handleAnswer = function(cpIdx, ansIdx) {
   const dot = document.getElementById(`cp-${cpIdx}`);
   if (dot) { dot.textContent = correct ? '●' : '✗'; dot.classList.add(correct ? 'cp-correct' : 'cp-wrong'); }
 
-  // Show feedback
+  // Show feedback + doğru cevapta küçük karikatür
+  const uniteForFeedback = getUnite(state.dersSlug, state.uniteSlug);
+  const outroImg = uniteForFeedback?.mascotImages?.outro;
+  const celebrateHtml = (correct && outroImg) ? `<img src="${outroImg}" class="mascot-img-celebrate" alt="Tebrikler!">` : '';
   const feedbackHTML = `
     <div class="quiz-feedback ${correct ? 'feedback-correct' : 'feedback-wrong'}">
       ${correct ? '🎉 Harika, doğru!' : '😊 Bir daha bakalım! Doğru cevap: <strong>' + cp.secenekler[cp.dogru] + '</strong>'}
+      ${celebrateHtml}
     </div>
     <button class="btn btn-primary" onclick="closeCheckpoint()">Devam Et ▶</button>
   `;
@@ -859,6 +877,7 @@ function renderDersSonu(params) {
     <div class="page-center">
       <div class="ders-sonu-card">
         <div class="confetti-container" id="confetti"></div>
+        ${unite.mascotImages?.outro ? `<div class="mascot-completion"><img src="${unite.mascotImages.outro}" class="mascot-img-completion" alt="Ders tamamlandı!"></div>` : ''}
         <div class="sonu-stars">${'⭐'.repeat(stars)}${'☆'.repeat(3 - stars)}</div>
         <h2>Tebrikler! 🎉</h2>
         <p>${unite.name} dersini tamamladın!</p>

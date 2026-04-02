@@ -10,6 +10,7 @@ const DERSLER = [
       {
         slug: 'dogal-sayilar-okuma', name: 'Doğal Sayıları Okuma ve Yazma', hedef: 'Çok basamaklı doğal sayıları okuma ve yazma',
         videoId: '3uvFo550SQg',
+        mascotImages: { intro: 'assets/cartoon/matematik-dogal-sayilar-okuma-intro.jpeg', break: 'assets/cartoon/matematik-dogal-sayilar-okuma-break.jpeg', outro: 'assets/cartoon/matematik-dogal-sayilar-okuma-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -87,6 +88,7 @@ const DERSLER = [
       {
         slug: 'basamak-degeri', name: 'Basamak Değeri ve Sayı Değeri', hedef: 'Büyük doğal sayılarda basamak ve sayı değerini bulabilme',
         videoId: 'fT7DWHW8JE4',
+        mascotImages: { intro: 'assets/cartoon/matematik-basamak-degeri-intro.jpeg', break: 'assets/cartoon/matematik-basamak-degeri-break.jpeg', outro: 'assets/cartoon/matematik-basamak-degeri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -174,6 +176,7 @@ const DERSLER = [
       {
         slug: 'toplama-cikarma', name: 'Doğal Sayılarla Toplama ve Çıkarma', hedef: 'Doğal sayılarla toplama ve çıkarma işlemlerini yapma',
         videoId: 'IHoenJnlNUw',
+        mascotImages: { intro: 'assets/cartoon/matematik-toplama-cikarma-intro.jpeg', break: 'assets/cartoon/matematik-toplama-cikarma-break.jpeg', outro: 'assets/cartoon/matematik-toplama-cikarma-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -256,6 +259,7 @@ const DERSLER = [
       {
         slug: 'zihinden-islem', name: 'Zihinden Toplama ve Çıkarma', hedef: 'Zihinden toplama ve çıkarma stratejileri',
         videoId: '0wj7svyTgKw',
+        mascotImages: { intro: 'assets/cartoon/matematik-zihinden-islem-intro.jpeg', break: 'assets/cartoon/matematik-zihinden-islem-break.jpeg', outro: 'assets/cartoon/matematik-zihinden-islem-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -358,6 +362,7 @@ const DERSLER = [
       {
         slug: 'carpma-bolme-islemleri', name: 'Doğal Sayılarda Çarpma ve Bölme', hedef: 'Doğal sayılarda çarpma ve bölme işlemlerini yapma',
         videoId: '-FruESJRVeE',
+        mascotImages: { intro: 'assets/cartoon/matematik-carpma-bolme-islemleri-intro.jpeg', break: 'assets/cartoon/matematik-carpma-bolme-islemleri-break.jpeg', outro: 'assets/cartoon/matematik-carpma-bolme-islemleri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -435,6 +440,7 @@ const DERSLER = [
       {
         slug: 'carpma-bolme', name: 'Çarpma ve Bölme Problemleri', hedef: 'Çarpma ve bölme işlemleri içeren çok adımlı problemleri çözme',
         videoId: 'NZQCvqCBt5g',
+        mascotImages: { intro: 'assets/cartoon/matematik-carpma-bolme-intro.jpeg', break: 'assets/cartoon/matematik-carpma-bolme-break.jpeg', outro: 'assets/cartoon/matematik-carpma-bolme-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -502,6 +508,7 @@ const DERSLER = [
       {
         slug: 'kesirler', name: 'Kesirler', hedef: 'Birim, basit ve bileşik kesirleri tanıma ve karşılaştırma',
         videoId: '5ZNxjyxT2hM',
+        mascotImages: { intro: 'assets/cartoon/matematik-kesirler-intro.jpeg', break: 'assets/cartoon/matematik-kesirler-break.jpeg', outro: 'assets/cartoon/matematik-kesirler-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -574,6 +581,7 @@ const DERSLER = [
       {
         slug: 'ondalik-gosterim', name: 'Ondalık Gösterim', hedef: 'Ondalık gösterimi anlama ve kullanma',
         videoId: '9asGD316AHc',
+        mascotImages: { intro: 'assets/cartoon/matematik-ondalik-gosterim-intro.jpeg', break: 'assets/cartoon/matematik-ondalik-gosterim-break.jpeg', outro: 'assets/cartoon/matematik-ondalik-gosterim-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -651,6 +659,7 @@ const DERSLER = [
       {
         slug: 'yuzde', name: 'Yüzde Hesaplama', hedef: 'Yüzde kavramını anlama ve hesaplama yapabilme',
         videoId: 'JMJwFPL0Rhw',
+        mascotImages: { intro: 'assets/cartoon/matematik-yuzde-intro.jpeg', break: 'assets/cartoon/matematik-yuzde-break.jpeg', outro: 'assets/cartoon/matematik-yuzde-outro.jpeg' },
         checkpoints: [
           { saniye: 60, soru: 'Yüzde ne demektir?', secenekler: ['Bir bütünün 100 eşit parçasından kaçı olduğunu gösteren oran','Ondalık sayı','Kesirli ifade','Tam sayı'], dogru: 0, ipucu: 'Yüzde, bir bütünün 100 eşit parçaya bölünmesiyle elde edilen oranı ifade eder.' },
           { saniye: 120, soru: '%50 hangi kesre eşittir?', secenekler: ['1/4','1/2','3/4','1/5'], dogru: 1, ipucu: '50/100 sadeleştirilince 1/2 olur.' },
@@ -665,6 +674,7 @@ const DERSLER = [
       {
         slug: 'sayi-oruntuler', name: 'Sayı ve Şekil Örüntüleri', hedef: 'Sayı ve şekil örüntülerinin kuralını bulma',
         videoId: 'vVd-ndQ-vB8',
+        mascotImages: { intro: 'assets/cartoon/matematik-sayi-oruntuler-intro.jpeg', break: 'assets/cartoon/matematik-sayi-oruntuler-break.jpeg', outro: 'assets/cartoon/matematik-sayi-oruntuler-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -752,6 +762,7 @@ const DERSLER = [
       {
         slug: 'acilar', name: 'Açılar ve Açı Ölçme', hedef: 'Açı kavramını öğrenme ve iletki ile açı ölçme',
         videoId: 'V3voEO1TqUQ',
+        mascotImages: { intro: 'assets/cartoon/matematik-acilar-intro.jpeg', break: 'assets/cartoon/matematik-acilar-break.jpeg', outro: 'assets/cartoon/matematik-acilar-outro.jpeg' },
         checkpoints: [
           { saniye: 60, soru: 'Açı nedir?', secenekler: ['Aynı noktadan çıkan iki ışının oluşturduğu şekil','İki doğrunun kesişmesi','Bir doğru parçasının uzunluğu','İki nokta arasındaki mesafe'], dogru: 0, ipucu: 'Açı, ortak başlangıç noktasından çıkan iki ışın arasında kalan bölgedir.' },
           { saniye: 120, soru: 'Dik açı kaç derecedir?', secenekler: ['45°','90°','180°','360°'], dogru: 1, ipucu: 'Dik açı tam 90 derecedir ve köşesine küçük kare işareti konur.' },
@@ -766,6 +777,7 @@ const DERSLER = [
       {
         slug: 'cokgenler', name: 'Çokgenler ve Üçgenler', hedef: 'Çokgen ve üçgen türlerini tanıma ve özelliklerini öğrenme',
         videoId: 'IHoenJnlNUw',
+        mascotImages: { intro: 'assets/cartoon/matematik-cokgenler-intro.jpeg', break: 'assets/cartoon/matematik-cokgenler-break.jpeg', outro: 'assets/cartoon/matematik-cokgenler-outro.jpeg' },
         checkpoints: [
           { saniye: 60, soru: 'Çokgen nedir?', secenekler: ['En az üç doğru parçasıyla sınırlandırılmış kapalı şekil','Yalnızca dört kenarı olan şekil','Dairesel alan','İki doğrunun kesişimi'], dogru: 0, ipucu: 'Çokgenler en az 3 kenardan oluşan kapalı şekillerdir.' },
           { saniye: 120, soru: 'Üçgenin iç açıları toplamı kaç derecedir?', secenekler: ['90°','180°','270°','360°'], dogru: 1, ipucu: 'Her üçgenin iç açıları toplamı 180 derecedir.' },
@@ -780,6 +792,7 @@ const DERSLER = [
       {
         slug: 'alan-cevre', name: 'Alan ve Çevre', hedef: 'Dikdörtgenin alan ve çevresini hesaplama, bilinmeyeni bulma',
         videoId: 'CCIfZrD2awI',
+        mascotImages: { intro: 'assets/cartoon/matematik-alan-cevre-intro.jpeg', break: 'assets/cartoon/matematik-alan-cevre-break.jpeg', outro: 'assets/cartoon/matematik-alan-cevre-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -847,6 +860,7 @@ const DERSLER = [
       {
         slug: 'karenin-cevresi', name: 'Karenin Çevresi', hedef: 'Karenin çevre uzunluğunu hesaplama',
         videoId: 'fRRPgdOrehQ',
+        mascotImages: { intro: 'assets/cartoon/matematik-karenin-cevresi-intro.jpeg', break: 'assets/cartoon/matematik-karenin-cevresi-break.jpeg', outro: 'assets/cartoon/matematik-karenin-cevresi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -924,6 +938,7 @@ const DERSLER = [
       {
         slug: 'karenin-alani', name: 'Karenin Alanı', hedef: 'Karenin alanını hesaplama ve birim kare',
         videoId: 'HRAIsSfs48o',
+        mascotImages: { intro: 'assets/cartoon/matematik-karenin-alani-intro.jpeg', break: 'assets/cartoon/matematik-karenin-alani-break.jpeg', outro: 'assets/cartoon/matematik-karenin-alani-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1001,6 +1016,7 @@ const DERSLER = [
       {
         slug: 'zaman-olcme', name: 'Zaman Ölçme', hedef: 'Zaman birimlerini dönüştürme ve problemleri çözme',
         videoId: 'gNqWh-Um6vM',
+        mascotImages: { intro: 'assets/cartoon/matematik-zaman-olcme-intro.jpeg', break: 'assets/cartoon/matematik-zaman-olcme-break.jpeg', outro: 'assets/cartoon/matematik-zaman-olcme-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1068,6 +1084,7 @@ const DERSLER = [
       {
         slug: 'veri-analizi', name: 'Veri Toplama ve Grafik', hedef: 'Araştırma sorusu oluşturma, sıklık tablosu ve sütun grafiğini okuma ve yorumlama',
         videoId: '_k4hEu7uXiE',
+        mascotImages: { intro: 'assets/cartoon/matematik-veri-analizi-intro.jpeg', break: 'assets/cartoon/matematik-veri-analizi-break.jpeg', outro: 'assets/cartoon/matematik-veri-analizi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1165,6 +1182,7 @@ const DERSLER = [
       {
         slug: 'olasilik', name: 'Olasılık', hedef: 'Kesin, imkânsız ve eşit şanslı olayları tanıma; basit olasılık hesaplama',
         videoId: 'GxdIklp-bB8',
+        mascotImages: { intro: 'assets/cartoon/matematik-olasilik-intro.jpeg', break: 'assets/cartoon/matematik-olasilik-break.jpeg', outro: 'assets/cartoon/matematik-olasilik-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1260,6 +1278,7 @@ const DERSLER = [
       {
         slug: 'gunes-ozellikleri', name: 'Gökyüzündeki Komşumuz: Güneş', hedef: 'Güneş hakkında temel bilgileri öğrenme',
         videoId: 'yx7xbUKNYkU',
+        mascotImages: { intro: 'assets/cartoon/fen-gunes-ozellikleri-intro.jpeg', break: 'assets/cartoon/fen-gunes-ozellikleri-break.jpeg', outro: 'assets/cartoon/fen-gunes-ozellikleri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1362,6 +1381,7 @@ const DERSLER = [
       {
         slug: 'ay-ozellikleri', name: 'Ay\'ın Özellikleri', hedef: 'Ay\'ın yüzeyi, ışığı ve sıcaklık farkı hakkında bilgi edinme',
         videoId: 'LoAG7HHVxtM',
+        mascotImages: { intro: 'assets/cartoon/fen-ay-ozellikleri-intro.jpeg', break: 'assets/cartoon/fen-ay-ozellikleri-break.jpeg', outro: 'assets/cartoon/fen-ay-ozellikleri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1459,6 +1479,7 @@ const DERSLER = [
       {
         slug: 'hucre-organeller', name: 'Hücre ve Organelleri', hedef: 'Hücrenin yapısını ve organellerin görevlerini tanıma',
         videoId: 'DbWkNSM89D8',
+        mascotImages: { intro: 'assets/cartoon/fen-hucre-organeller-intro.jpeg', break: 'assets/cartoon/fen-hucre-organeller-break.jpeg', outro: 'assets/cartoon/fen-hucre-organeller-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1561,6 +1582,7 @@ const DERSLER = [
       {
         slug: 'destek-hareket', name: 'Destek ve Hareket Sistemi', hedef: 'İskelet ve kas sistemini tanıma',
         videoId: 'H3_FwuwIgM0',
+        mascotImages: { intro: 'assets/cartoon/fen-destek-hareket-intro.jpeg', break: 'assets/cartoon/fen-destek-hareket-break.jpeg', outro: 'assets/cartoon/fen-destek-hareket-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1663,6 +1685,7 @@ const DERSLER = [
       {
         slug: 'kuvveti-taniyalim', name: 'Kuvveti Tanıyalım', hedef: 'Kuvvet kavramını ve kuvvetin ölçülmesini öğrenme',
         videoId: '6f4W8MRqtV8',
+        mascotImages: { intro: 'assets/cartoon/fen-kuvveti-taniyalim-intro.jpeg', break: 'assets/cartoon/fen-kuvveti-taniyalim-break.jpeg', outro: 'assets/cartoon/fen-kuvveti-taniyalim-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1765,6 +1788,7 @@ const DERSLER = [
       {
         slug: 'kutle-agirlik', name: 'Kütle, Ağırlık ve Yer Çekimi', hedef: 'Kütle ile ağırlık arasındaki farkı ve yer çekimini anlama',
         videoId: 'smkx-o2txNI',
+        mascotImages: { intro: 'assets/cartoon/fen-kutle-agirlik-intro.jpeg', break: 'assets/cartoon/fen-kutle-agirlik-break.jpeg', outro: 'assets/cartoon/fen-kutle-agirlik-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1847,6 +1871,7 @@ const DERSLER = [
       {
         slug: 'surtunme-kuvveti', name: 'Sürtünme Kuvveti', hedef: 'Sürtünme kuvvetini ve etkilerini anlama',
         videoId: 'QOqTFJdp_88',
+        mascotImages: { intro: 'assets/cartoon/fen-surtunme-kuvveti-intro.jpeg', break: 'assets/cartoon/fen-surtunme-kuvveti-break.jpeg', outro: 'assets/cartoon/fen-surtunme-kuvveti-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -1949,6 +1974,7 @@ const DERSLER = [
       {
         slug: 'tanecikli-yapi', name: 'Maddenin Tanecikli Yapısı', hedef: 'Maddenin taneciklerden oluştuğunu ve tanecik özelliklerini öğrenme',
         videoId: 'q_M3R4KzwqU',
+        mascotImages: { intro: 'assets/cartoon/fen-tanecikli-yapi-intro.jpeg', break: 'assets/cartoon/fen-tanecikli-yapi-break.jpeg', outro: 'assets/cartoon/fen-tanecikli-yapi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2051,6 +2077,7 @@ const DERSLER = [
       {
         slug: 'hal-degisimi', name: 'Maddenin Hal Değişimi', hedef: 'Erime, donma, buharlaşma ve yoğuşmayı anlama',
         videoId: '7hVI_SD_Ciw',
+        mascotImages: { intro: 'assets/cartoon/fen-hal-degisimi-intro.jpeg', break: 'assets/cartoon/fen-hal-degisimi-break.jpeg', outro: 'assets/cartoon/fen-hal-degisimi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2128,6 +2155,7 @@ const DERSLER = [
       {
         slug: 'isi-iletimi', name: 'Isı İletimi ve Yalıtım', hedef: 'Isı iletken ve yalıtkan maddeleri tanıma',
         videoId: '8muTsgbr18g',
+        mascotImages: { intro: 'assets/cartoon/fen-isi-iletimi-intro.jpeg', break: 'assets/cartoon/fen-isi-iletimi-break.jpeg', outro: 'assets/cartoon/fen-isi-iletimi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2220,6 +2248,7 @@ const DERSLER = [
       {
         slug: 'isigin-yayilmasi', name: 'Işığın Yayılması', hedef: 'Işığın doğrusal yayılmasını ve ışık kaynaklarını öğrenme',
         videoId: 'NIvbMpcmIMo',
+        mascotImages: { intro: 'assets/cartoon/fen-isigin-yayilmasi-intro.jpeg', break: 'assets/cartoon/fen-isigin-yayilmasi-break.jpeg', outro: 'assets/cartoon/fen-isigin-yayilmasi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2322,6 +2351,7 @@ const DERSLER = [
       {
         slug: 'tam-golge', name: 'Tam Gölge Oluşumu', hedef: 'Tam gölge oluşumunu ve gölgenin boyutunu etkileyen faktörleri öğrenme',
         videoId: 'skxXJhM4IxI',
+        mascotImages: { intro: 'assets/cartoon/fen-tam-golge-intro.jpeg', break: 'assets/cartoon/fen-tam-golge-break.jpeg', outro: 'assets/cartoon/fen-tam-golge-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2424,6 +2454,7 @@ const DERSLER = [
       {
         slug: 'elektrik-devreleri', name: 'Elektrik Devreleri', hedef: 'Devre elemanlarını tanıma, sembollerle gösterme ve basit devre kurma',
         videoId: 'Ny5qqXqokeo',
+        mascotImages: { intro: 'assets/cartoon/fen-elektrik-devreleri-intro.jpeg', break: 'assets/cartoon/fen-elektrik-devreleri-break.jpeg', outro: 'assets/cartoon/fen-elektrik-devreleri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2526,6 +2557,7 @@ const DERSLER = [
       {
         slug: 'insan-cevre', name: 'İnsan ve Çevre / Biyoçeşitlilik', hedef: 'Biyoçeşitliliğin önemini, tehdit eden faktörleri ve koruma yollarını anlama',
         videoId: 'UjBAkwASPWI',
+        mascotImages: { intro: 'assets/cartoon/fen-insan-cevre-intro.jpeg', break: 'assets/cartoon/fen-insan-cevre-break.jpeg', outro: 'assets/cartoon/fen-insan-cevre-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2641,6 +2673,7 @@ const DERSLER = [
       {
         slug: 'es-sesli', name: 'Eş Sesli Sözcükler', hedef: 'Yazılışı aynı, anlamı farklı sözcükleri tanıma ve kullanma',
         videoId: 'pm3cO8SmOZ4',
+        mascotImages: { intro: 'assets/cartoon/turkce-es-sesli-intro.jpeg', break: 'assets/cartoon/turkce-es-sesli-break.jpeg', outro: 'assets/cartoon/turkce-es-sesli-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2742,6 +2775,7 @@ const DERSLER = [
       {
         slug: 'buyuk-harf', name: 'Büyük Harf Kullanımı', hedef: 'Büyük harf kullanım kurallarını öğrenme ve uygulama',
         videoId: 'jIIS5FPDCEc',
+        mascotImages: { intro: 'assets/cartoon/turkce-buyuk-harf-intro.jpeg', break: 'assets/cartoon/turkce-buyuk-harf-break.jpeg', outro: 'assets/cartoon/turkce-buyuk-harf-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2834,6 +2868,7 @@ const DERSLER = [
       {
         slug: 'noktalama', name: 'Noktalama İşaretleri', hedef: 'İki nokta, üç nokta ve diğer noktalama işaretlerini yerinde kullanma',
         videoId: 'u3pKU_JN6cs',
+        mascotImages: { intro: 'assets/cartoon/turkce-noktalama-intro.jpeg', break: 'assets/cartoon/turkce-noktalama-break.jpeg', outro: 'assets/cartoon/turkce-noktalama-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -2926,6 +2961,7 @@ const DERSLER = [
       {
         slug: 'isim-fiil', name: 'İsim ve Fiil', hedef: 'Sözcükleri isim ve fiil olarak sınıflandırma',
         videoId: 'BFWZGxvgTS0',
+        mascotImages: { intro: 'assets/cartoon/turkce-isim-fiil-intro.jpeg', break: 'assets/cartoon/turkce-isim-fiil-break.jpeg', outro: 'assets/cartoon/turkce-isim-fiil-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3003,6 +3039,7 @@ const DERSLER = [
       {
         slug: 'isimler-adlar', name: 'İsimler (Adlar)', hedef: 'İsimleri özel/cins, tekil/çoğul, somut/soyut olarak sınıflandırma',
         videoId: 'ok8UC7I9Qeo',
+        mascotImages: { intro: 'assets/cartoon/turkce-isimler-adlar-intro.jpeg', break: 'assets/cartoon/turkce-isimler-adlar-break.jpeg', outro: 'assets/cartoon/turkce-isimler-adlar-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3105,6 +3142,7 @@ const DERSLER = [
       {
         slug: 'cumlede-kavramlar', name: 'Cümlede Kavramlar (Neden-Sonuç, Amaç-Sonuç, Koşul)', hedef: 'Neden-sonuç, amaç-sonuç ve koşul cümlelerini ayırt etme',
         videoId: '6eDBln5v9M8',
+        mascotImages: { intro: 'assets/cartoon/turkce-cumlede-kavramlar-intro.jpeg', break: 'assets/cartoon/turkce-cumlede-kavramlar-break.jpeg', outro: 'assets/cartoon/turkce-cumlede-kavramlar-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3207,6 +3245,7 @@ const DERSLER = [
       {
         slug: 'soz-sanatlari', name: 'Söz Sanatları (Benzetme, Kişileştirme, Konuşturma)', hedef: 'Benzetme, kişileştirme ve konuşturma söz sanatlarını tanıma',
         videoId: 'br54-02-bK4',
+        mascotImages: { intro: 'assets/cartoon/turkce-soz-sanatlari-intro.jpeg', break: 'assets/cartoon/turkce-soz-sanatlari-break.jpeg', outro: 'assets/cartoon/turkce-soz-sanatlari-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3309,6 +3348,7 @@ const DERSLER = [
       {
         slug: 'anlatim-bicimleri', name: 'Anlatım Biçimleri ve Düşünceyi Geliştirme Yolları', hedef: 'Betimleme, öyküleme ve tanıtma anlatım biçimlerini ayırt etme',
         videoId: 'H7ILiRWnzOY',
+        mascotImages: { intro: 'assets/cartoon/turkce-anlatim-bicimleri-intro.jpeg', break: 'assets/cartoon/turkce-anlatim-bicimleri-break.jpeg', outro: 'assets/cartoon/turkce-anlatim-bicimleri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3411,6 +3451,7 @@ const DERSLER = [
       {
         slug: 'hikaye-unsurlari', name: 'Hikâyenin Unsurları', hedef: 'Hikâyenin olay, kişi, yer, zaman unsurlarını belirleme',
         videoId: 'lbpRQLXb8hw',
+        mascotImages: { intro: 'assets/cartoon/turkce-hikaye-unsurlari-intro.jpeg', outro: 'assets/cartoon/turkce-hikaye-unsurlari-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3513,6 +3554,7 @@ const DERSLER = [
       {
         slug: 'gecis-baglanti', name: 'Geçiş ve Bağlantı İfadeleri', hedef: 'Geçiş ve bağlantı ifadelerini metinde doğru kullanma',
         videoId: 'sUIAdU-Fwl0',
+        mascotImages: { intro: 'assets/cartoon/turkce-gecis-baglanti-intro.jpeg', outro: 'assets/cartoon/turkce-gecis-baglanti-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3615,6 +3657,7 @@ const DERSLER = [
       {
         slug: 'es-zit-anlamli', name: 'Eş ve Zıt Anlamlı Sözcükler', hedef: 'Eş anlamlı ve zıt anlamlı sözcükleri tanıma ve metinde doğru kullanma',
         videoId: 'pm3cO8SmOZ4',
+        mascotImages: { intro: 'assets/cartoon/turkce-es-zit-anlamli-intro.jpeg', break: 'assets/cartoon/turkce-es-zit-anlamli-break.jpeg', outro: 'assets/cartoon/turkce-es-zit-anlamli-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3707,6 +3750,7 @@ const DERSLER = [
       {
         slug: 'zamirler', name: 'Zamirler (Adıllar)', hedef: 'Kişi, işaret ve soru zamirlerini tanıma ve cümlede doğru kullanma',
         videoId: '5_AZW2ZfHrI',
+        mascotImages: { intro: 'assets/cartoon/turkce-zamirler-intro.jpeg', break: 'assets/cartoon/turkce-zamirler-break.jpeg', outro: 'assets/cartoon/turkce-zamirler-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3809,6 +3853,7 @@ const DERSLER = [
       {
         slug: 'sifatlar', name: 'Sıfatlar (Ön Adlar)', hedef: 'Niteleme ve belirtme sıfatlarını tanıma ve cümlede doğru kullanma',
         videoId: 'GdhePnu2EU4',
+        mascotImages: { intro: 'assets/cartoon/turkce-sifatlar-intro.jpeg', break: 'assets/cartoon/turkce-sifatlar-break.jpeg', outro: 'assets/cartoon/turkce-sifatlar-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -3906,6 +3951,7 @@ const DERSLER = [
       {
         slug: 'kok-ekler', name: 'Kök, Gövde ve Yapım Ekleri', hedef: 'Sözcüklerin kök ve gövdesini bulma; yapım eklerini tanıma ve kullanma',
         videoId: '5uStteWPdyc',
+        mascotImages: { intro: 'assets/cartoon/turkce-kok-ekler-intro.jpeg', break: 'assets/cartoon/turkce-kok-ekler-break.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4006,6 +4052,7 @@ const DERSLER = [
       {
         slug: 'kulturel-zenginlik', name: 'Kültürel Zenginlikler', hedef: 'Kültür kavramını ve kültürel zenginliklerin önemini anlama',
         videoId: 'UCGDuU_lEkY',
+        mascotImages: { intro: 'assets/cartoon/sosyal-kulturel-zenginlik-intro.jpeg', break: 'assets/cartoon/sosyal-kulturel-zenginlik-break.jpeg', outro: 'assets/cartoon/sosyal-kulturel-zenginlik-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4098,6 +4145,7 @@ const DERSLER = [
       {
         slug: 'anadolu-miras', name: 'Anadolu\'nun Kültürel Mirasa Katkıları', hedef: 'Anadolu\'daki ilk yerleşimler ve kültürel miras alanlarını tanıma',
         videoId: 'Hlv-Y2rGZ4o',
+        mascotImages: { intro: 'assets/cartoon/sosyal-anadolu-miras-intro.jpeg', break: 'assets/cartoon/sosyal-anadolu-miras-break.jpeg', outro: 'assets/cartoon/sosyal-anadolu-miras-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4185,6 +4233,7 @@ const DERSLER = [
       {
         slug: 'ilk-yerlesimler', name: 'Anadolu\'nun İlk Yerleşim Yerlerinde Yaşam', hedef: 'Anadolu\'daki ilk yerleşim yerlerini ve yaşam biçimlerini tanıma',
         videoId: 'b3xT-xnCXUE',
+        mascotImages: { intro: 'assets/cartoon/sosyal-ilk-yerlesimler-intro.jpeg', break: 'assets/cartoon/sosyal-ilk-yerlesimler-break.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4287,6 +4336,7 @@ const DERSLER = [
       {
         slug: 'mezopotamya', name: 'Mezopotamya ve Anadolu\'nun Ortak Kültürel Mirasa Katkıları', hedef: 'Mezopotamya ve Anadolu medeniyetlerinin kültürel mirasını tanıma',
         videoId: 'ijBw2KbL9NE',
+        mascotImages: { intro: 'assets/cartoon/sosyal-mezopotamya-intro.jpeg', outro: 'assets/cartoon/sosyal-mezopotamya-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4389,6 +4439,7 @@ const DERSLER = [
       {
         slug: 'doga-beseri', name: 'Doğal ve Beşeri Çevre', hedef: 'Doğal ve beşeri çevreyi ayırt etme ve değişimlerini anlama',
         videoId: 'gCdFpGQtNcA',
+        mascotImages: { intro: 'assets/cartoon/sosyal-doga-beseri-intro.jpeg', outro: 'assets/cartoon/sosyal-doga-beseri-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4471,6 +4522,7 @@ const DERSLER = [
       {
         slug: 'ilimizin-konumu', name: 'İlimizin Göreceli Konumu', hedef: 'İlimizin göreceli konumunu ve komşu illeri tanıma',
         videoId: '4ygoBUqSmvI',
+        mascotImages: { intro: 'assets/cartoon/sosyal-ilimizin-konumu-intro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4573,6 +4625,7 @@ const DERSLER = [
       {
         slug: 'komsu-devletler', name: 'Ülkemize Komşu Devletler', hedef: 'Türkiye\'ye komşu olan devletleri tanıma',
         videoId: 'C6-43BBvcuM',
+        mascotImages: { intro: 'assets/cartoon/sosyal-komsu-devletler-intro.jpeg', break: 'assets/cartoon/sosyal-komsu-devletler-break.jpeg', outro: 'assets/cartoon/sosyal-komsu-devletler-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4675,6 +4728,7 @@ const DERSLER = [
       {
         slug: 'afetler', name: 'İlimizde Yaşanabilecek Afetler ve Etkileri', hedef: 'Doğal afetleri tanıma ve afetlere karşı hazırlıklı olma',
         videoId: '3F9edAIuVzI',
+        mascotImages: { intro: 'assets/cartoon/sosyal-afetler-intro.jpeg', break: 'assets/cartoon/sosyal-afetler-break.jpeg', outro: 'assets/cartoon/sosyal-afetler-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4777,6 +4831,7 @@ const DERSLER = [
       {
         slug: 'etkin-vatandaslik', name: 'Etkin Vatandaşlık', hedef: 'Etkin vatandaşın özelliklerini ve demokratik tutumlarını öğrenme',
         videoId: 'ot516YDjf8o',
+        mascotImages: { intro: 'assets/cartoon/sosyal-etkin-vatandaslik-intro.jpeg', outro: 'assets/cartoon/sosyal-etkin-vatandaslik-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4874,6 +4929,7 @@ const DERSLER = [
       {
         slug: 'demokrasi', name: 'Demokrasi ve Cumhuriyet', hedef: 'Demokratik yönetim biçimini ve Cumhuriyetin temel niteliklerini öğrenme',
         videoId: 'ZRex1rmWFwA',
+        mascotImages: { intro: 'assets/cartoon/sosyal-demokrasi-intro.jpeg', break: 'assets/cartoon/sosyal-demokrasi-break.jpeg', outro: 'assets/cartoon/sosyal-demokrasi-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -4966,6 +5022,7 @@ const DERSLER = [
       {
         slug: 'bilim-teknoloji', name: 'Bilim, Teknoloji ve Toplum', hedef: 'Bilimsel gelişmelerin toplumsal hayata etkilerini anlama',
         videoId: '8w80rP0yj24',
+        mascotImages: { intro: 'assets/cartoon/sosyal-bilim-teknoloji-intro.jpeg', break: 'assets/cartoon/sosyal-bilim-teknoloji-break.jpeg', outro: 'assets/cartoon/sosyal-bilim-teknoloji-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5068,6 +5125,7 @@ const DERSLER = [
       {
         slug: 'uretim-dagitim-tuketim', name: 'Üretim, Dağıtım ve Tüketim', hedef: 'Üretim-dağıtım-tüketim sürecini ve ekonomik ilişkileri anlama',
         videoId: 'OALnahJ0Qtk',
+        mascotImages: { intro: 'assets/cartoon/sosyal-uretim-dagitim-tuketim-intro.jpeg', break: 'assets/cartoon/sosyal-uretim-dagitim-tuketim-break.jpeg', outro: 'assets/cartoon/sosyal-uretim-dagitim-tuketim-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5183,6 +5241,7 @@ const DERSLER = [
       {
         slug: 'hello', name: 'Hello! — Countries & Nationalities', hedef: 'Ülkeleri, milliyet isimlerini ve dilleri öğrenme',
         videoId: 'yAGRyOA2kqE',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-hello-intro.jpeg', break: 'assets/cartoon/ingilizce-hello-break.jpeg', outro: 'assets/cartoon/ingilizce-hello-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5260,6 +5319,7 @@ const DERSLER = [
       {
         slug: 'my-town', name: 'My Town — Prepositions of Place', hedef: 'Yer bildiren edatları ve yön tarifini öğrenme',
         videoId: 'tccjcPJovCE',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-my-town-intro.jpeg', break: 'assets/cartoon/ingilizce-my-town-break.jpeg', outro: 'assets/cartoon/ingilizce-my-town-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5354,6 +5414,7 @@ const DERSLER = [
       {
         slug: 'games-hobbies', name: 'Games and Hobbies — Adverbs of Frequency', hedef: 'Sıklık zarflarını cümlede doğru kullanma',
         videoId: 'FYSdqEcdOYY',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-games-hobbies-intro.jpeg', break: 'assets/cartoon/ingilizce-games-hobbies-break.jpeg', outro: 'assets/cartoon/ingilizce-games-hobbies-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5448,6 +5509,7 @@ const DERSLER = [
       {
         slug: 'my-daily-routine', name: 'My Daily Routine — Time Expressions', hedef: 'Zaman ifadelerini ve günlük rutini anlatma',
         videoId: '2eHNj1EUB7I',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-my-daily-routine-intro.jpeg', break: 'assets/cartoon/ingilizce-my-daily-routine-break.jpeg', outro: 'assets/cartoon/ingilizce-my-daily-routine-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5547,6 +5609,7 @@ const DERSLER = [
       {
         slug: 'health', name: 'Health — Body Parts & Complaints', hedef: 'Sağlık sorunlarını ve vücut bölümlerini İngilizce anlatma',
         videoId: 'gyBTOthrUOA',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-health-intro.jpeg', break: 'assets/cartoon/ingilizce-health-break.jpeg', outro: 'assets/cartoon/ingilizce-health-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5641,6 +5704,7 @@ const DERSLER = [
       {
         slug: 'health-2', name: 'Health — Should & Shouldn\'t', hedef: 'Should/shouldn\'t yapısını sağlık önerileri için kullanma',
         videoId: 'AGuZyYZDoWY',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-health-2-intro.jpeg', break: 'assets/cartoon/ingilizce-health-2-break.jpeg', outro: 'assets/cartoon/ingilizce-health-2-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5745,6 +5809,7 @@ const DERSLER = [
       {
         slug: 'movies', name: 'Movies — Superlatives & Making Suggestions', hedef: 'Film türlerini ve superlative yapısını öğrenme',
         videoId: 'dUsuMGzvwtY',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-movies-intro.jpeg', break: 'assets/cartoon/ingilizce-movies-break.jpeg', outro: 'assets/cartoon/ingilizce-movies-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5847,6 +5912,7 @@ const DERSLER = [
       {
         slug: 'movies-opinions', name: 'Movies — Expressing Opinions', hedef: 'Film türleri hakkında fikir belirtme',
         videoId: 'DGFgqvG5_nY',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-movies-opinions-intro.jpeg', break: 'assets/cartoon/ingilizce-movies-opinions-break.jpeg', outro: 'assets/cartoon/ingilizce-movies-opinions-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -5949,6 +6015,7 @@ const DERSLER = [
       {
         slug: 'party-time', name: 'Party Time — Months, Days & Invitations', hedef: 'Ayları, günleri ve parti davetini İngilizce kullanma',
         videoId: 'YrHnsNsr-FA',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-party-time-intro.jpeg', break: 'assets/cartoon/ingilizce-party-time-break.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -6051,6 +6118,7 @@ const DERSLER = [
       {
         slug: 'fitness', name: 'Fitness — Can / Can\'t & Sports', hedef: 'Can/can\'t yapısını yetenek bildirmek için kullanma',
         videoId: 'XT4vkLAvXYE',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-fitness-intro.jpeg', break: 'assets/cartoon/ingilizce-fitness-break.jpeg', outro: 'assets/cartoon/ingilizce-fitness-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -6153,6 +6221,7 @@ const DERSLER = [
       {
         slug: 'animal-shelter', name: 'Animal Shelter — Describing Animals', hedef: 'Hayvanları tanımlama ve have/has yapısını kullanma',
         videoId: 'F3nJcWtnHTA',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-animal-shelter-intro.jpeg', break: 'assets/cartoon/ingilizce-animal-shelter-break.jpeg', outro: 'assets/cartoon/ingilizce-animal-shelter-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
@@ -6255,6 +6324,7 @@ const DERSLER = [
       {
         slug: 'festivals', name: 'Festivals & Special Days — Dates', hedef: 'Tarihleri ve özel günleri İngilizce anlatma',
         videoId: 'OwVND8hykOo',
+        mascotImages: { intro: 'assets/cartoon/ingilizce-festivals-intro.jpeg', break: 'assets/cartoon/ingilizce-festivals-break.jpeg', outro: 'assets/cartoon/ingilizce-festivals-outro.jpeg' },
         checkpoints: [
           {
             saniye: 60,
