@@ -514,7 +514,7 @@ target="_blank" rel="noopener"         data-track="">
         <h3>WhatsApp</h3>
         <p>0534 811 77 57</p>
       </a>
-      <a href="tel:tel:+905348117757" class="card quick-card" data-track="click_call">
+      <a href="tel:+905348117757" class="card quick-card" data-track="click_call">
         <span class="card-icon" aria-hidden="true">📞</span>
         <h3>Telefon</h3>
         <p>0534 811 77 57</p>
@@ -603,7 +603,9 @@ target="_blank" rel="noopener"         data-track="">
     if(!hp||!hp.impact||!hp.impact.counters)return;
     var cg=document.querySelector('.counter-grid');
     if(!cg)return;
-    cg.innerHTML=hp.impact.counters.map(function(c){return '<div class="counter-item"><div class="counter-value" data-counter="'+c.value+'" data-suffix="'+(c.suffix||'')+'">'+c.value+(c.suffix||'')+'</div><div class="counter-label">'+esc(c.label)+'</div></div>';}).join('');
+    cg.innerHTML=hp.impact.counters.map(function(c){return '<div class="counter-item"><div class="counter-value" data-counter="'+c.value+'" data-suffix="'+(c.suffix||'')+'">0</div><div class="counter-label">'+esc(c.label)+'</div></div>';}).join('');
+    // counter.js DOMContentLoaded'da eski elemanları observe etmişti; yeni elemanlar için tekrar başlat
+    if(window.__initCounters) window.__initCounters();
   })['catch'](function(){});
 })();
 
@@ -689,7 +691,7 @@ function scrollCarousel(trackId,dotsId,page){
     <div class="footer-bottom">
       <span>&copy; 2026 Birlikte Iyilik Akademi. Tum haklari saklidir.</span>
       <div class="d-flex gap-4">
-        <a href="tel:tel:+905348117757" data-track="click_call">0534 811 77 57</a>
+        <a href="tel:+905348117757" data-track="click_call">0534 811 77 57</a>
         <a href="mailto:bilgi@birlikteiyilik.com">bilgi@birlikteiyilik.com</a>
       </div>
     </div>
@@ -738,7 +740,7 @@ function scrollCarousel(trackId,dotsId,page){
     function trD(d){if(!d)return'';var p=d.split('-');return parseInt(p[2])+' '+TR_M[parseInt(p[1])]+' '+p[0];}
     var CATS={haber:'HABER',duyuru:'DUYURU',etkinlik:'ETKİNLİK',icerik:'İÇERİK'};
     var cat=item.category||'haber';
-    var img=item.image?'<img class="article-modal-img" src="'+item.image+'" alt="">':'';
+    var img=item.image?'<img class="article-modal-img" src="'+esc(item.image)+'" alt="'+esc(item.title)+'">':'';
     var ov=document.getElementById('articleModal');
     ov.style.display='flex';
     ov.innerHTML='<div class="article-modal">'+img+
@@ -746,7 +748,7 @@ function scrollCarousel(trackId,dotsId,page){
       '<div class="article-modal-body">'+
       '<span class="card-category cat-badge-'+cat+'" style="margin-bottom:12px;display:inline-block;">'+
       (CATS[cat]||cat)+'</span>'+
-      '<h1>'+item.title+'</h1>'+
+      '<h1>'+esc(item.title)+'</h1>'+
       '<p class="meta">'+trD(item.date)+'</p>'+
       '<div class="content-body">'+(item.content||'<p>'+(item.excerpt||'')+'</p>')+'</div>'+
       '<div class="modal-share"><span style="font-size:.8rem;color:#888;">Paylaş:</span>'+
