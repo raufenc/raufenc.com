@@ -1,6 +1,14 @@
 {
   "headers": [
     {
+      "source": "/yonetim/(.*)",
+      "has": [{ "type": "host", "value": "birlikteiyilik.com" }],
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
@@ -21,6 +29,12 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.birlikteiyilik.com" }],
+      "destination": "https://birlikteiyilik.com/:path*",
+      "permanent": true
+    },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "lab.raufenc.com" }],
@@ -99,6 +113,11 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "birlikteiyilik.com" }],
+      "destination": "/birlikteiyilik-com/:path*"
+    },
     {
       "source": "/iyilikakademi",
       "destination": "/iyilikakademi/index.html"
