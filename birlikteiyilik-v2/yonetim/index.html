@@ -98,7 +98,7 @@ async function doLogin() {
     // Middleware için cookie (8 saat)
     document.cookie = 'bia_auth=1; path=/birlikteiyilik-v2/yonetim; SameSite=Lax; max-age=28800';
 
-    window.location.href = 'panel.html';
+    window.location.href = '/birlikteiyilik-v2/yonetim/panel.html';
   } catch(e) {
     document.getElementById('loginErr').innerHTML = `<div class="notice err">${e.message}</div>`;
   }
@@ -108,7 +108,7 @@ async function doLogin() {
 // Zaten giriş yapılmışsa panele yönlendir
 window.onload = () => {
   if (sessionStorage.getItem('biaToken') || sessionStorage.getItem('biaPw')) {
-    window.location.href = 'panel.html';
+    window.location.href = '/birlikteiyilik-v2/yonetim/panel.html';
   }
 };
 </script>

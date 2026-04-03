@@ -326,7 +326,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <script>
 // ── GÜVENLİK: Oturum kontrolü ──
 if (!sessionStorage.getItem('biaToken') && !sessionStorage.getItem('biaPw')) {
-  window.location.replace('index.html');
+  window.location.replace('/birlikteiyilik-v2/yonetim/');
   throw new Error('Unauthorized');
 }
 
@@ -1026,7 +1026,7 @@ async function savePrograms() {
 function logout() {
   sessionStorage.clear();
   document.cookie = 'bia_auth=; path=/birlikteiyilik-v2/yonetim; max-age=0; SameSite=Strict';
-  window.location.replace('index.html');
+  window.location.replace('/birlikteiyilik-v2/yonetim/');
 }
 
 // ── BAŞLANGIÇ ──
