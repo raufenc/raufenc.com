@@ -67,6 +67,41 @@ a{text-decoration:none;color:inherit}
 #b2{animation-duration:25s;animation-direction:reverse}
 #dots{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px);background-size:48px 48px;display:none}
 
+/* ── Hero ── */
+.hero-wrap{position:relative;min-height:min(calc(100vh - 54px),720px);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.hero-bg-layer{position:absolute;inset:0;z-index:0;transition:opacity .6s}
+.hero-pattern{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='%23C8963E' stroke-width='.5'/%3E%3C/svg%3E");background-size:60px 60px}
+.hero-particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.hero-p{position:absolute;border-radius:50%;opacity:0;animation:hFloat var(--dur,8s) var(--del,0s) ease-in-out infinite}
+@keyframes hFloat{0%{opacity:0;transform:translateY(0) scale(.5)}15%{opacity:var(--peak,.7)}85%{opacity:var(--peak,.7)}100%{opacity:0;transform:translateY(calc(-1 * var(--drift,100px))) scale(1)}}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:760px;padding:0 20px}
+.hero-badge-wrap{display:inline-flex;align-items:center;gap:8px;padding:8px 22px;border-radius:30px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero-h1{font-family:'Crimson Pro',serif;font-weight:300;line-height:1.15;letter-spacing:-.01em}
+.hero-h1 em{font-style:italic;font-weight:400}
+.hero-sub{font-family:'Crimson Pro',serif;font-style:italic;font-weight:300;line-height:1.7;max-width:520px;margin:0 auto}
+.hero-stats-row{display:flex;align-items:center;justify-content:center;gap:24px}
+.hero-stat-num{font-family:'Crimson Pro',serif;font-weight:700;display:block;line-height:1}
+.hero-stat-label{font-size:12px;font-weight:400;opacity:.5;margin-top:2px}
+.hero-stat-div{width:1px;height:28px;opacity:.15}
+.hero-scroll{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.4;animation:hBounce 2.5s ease-in-out 2.5s infinite}
+@keyframes hBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.hero-scroll-track{width:20px;height:32px;border:1.5px solid;border-radius:10px;position:relative;overflow:hidden}
+.hero-scroll-dot{width:4px;height:4px;border-radius:50%;position:absolute;top:6px;left:50%;transform:translateX(-50%);animation:hDot 2.5s ease-in-out 2.5s infinite}
+@keyframes hDot{0%{transform:translateX(-50%) translateY(0);opacity:1}100%{transform:translateX(-50%) translateY(14px);opacity:0}}
+.hero-explore{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+@media(min-width:768px){
+  .hero-h1{font-size:clamp(38px,5.5vw,56px)}
+  .hero-sub{font-size:18px}
+  .hero-stat-num{font-size:28px}
+  .hero-stats-row{gap:32px}
+}
+@media(max-width:767px){
+  .hero-h1{font-size:clamp(28px,7vw,38px)}
+  .hero-sub{font-size:15px}
+  .hero-stat-num{font-size:22px}
+  .hero-stats-row{gap:16px}
+}
+
 /* ── Nav ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
 #app{position:relative;z-index:1;padding-top:54px;min-height:100vh}
@@ -300,6 +335,33 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
   .m-alinti{font-size:23px}
   .m-kapatis{font-size:23px}
 }
+
+/* ── Print / PDF ── */
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
+  body{background:#0C0A08!important;color:#EDE8E0!important;font-size:11pt}
+  nav,#b1,#b2,#dots,#readProgress,.btn-back,.mektup-share-btn,.baglar,.hero-wrap,.hero-particles,.hero-bg-layer,.hero-pattern,.hero-scroll,.fav-btn,.btn-tema,.toast,.modal-bg,.search-wrap{display:none!important}
+  #app{padding-top:0!important;background:#0C0A08!important}
+  .pg{max-width:100%!important;padding:0!important;background:#0C0A08!important}
+  .m-header{border:1px solid rgba(200,150,62,.2)!important;background:linear-gradient(135deg,rgba(200,150,62,.1),rgba(200,150,62,.03))!important;page-break-after:avoid;border-radius:14px!important;padding:24px!important}
+  .m-badge{color:#F0B84A!important}
+  h1{color:#EDE8E0!important}
+  .m-h2{color:#EDE8E0!important;page-break-after:avoid}
+  .m-p{color:rgba(237,232,224,.75)!important}
+  .m-giris{color:rgba(237,232,224,.6)!important;border-color:rgba(200,150,62,.15)!important;font-style:italic!important}
+  .m-alinti{border-color:#C8963E!important;background:rgba(200,150,62,.08)!important;color:#EDE8E0!important;page-break-inside:avoid;border-radius:0 10px 10px 0!important}
+  .m-gecis{border-color:rgba(200,150,62,.15)!important;background:rgba(200,150,62,.06)!important;color:rgba(237,232,224,.7)!important;page-break-inside:avoid;border-radius:10px!important}
+  .m-kapatis{color:#EDE8E0!important;border-color:rgba(200,150,62,.15)!important}
+  .m-img{box-shadow:none!important;page-break-inside:avoid;border-radius:12px!important;overflow:hidden!important}
+  .m-img img{max-width:100%!important}
+  .m-img-caption{color:rgba(237,232,224,.5)!important;background:rgba(200,150,62,.05)!important}
+  .glow-card::before{display:none!important}
+  .m-skeleton-info{display:none!important}
+  div[style*="Bu mektupla birlikte"]{display:none!important}
+  @page{margin:1.8cm 1.5cm;size:A4}
+  .print-footer{display:block!important;text-align:center;font-size:9pt;color:rgba(200,150,62,.4);margin-top:28pt;padding-top:14pt;border-top:1px solid rgba(200,150,62,.12)}
+}
+.print-footer{display:none}
 </style>
 </head>
 <body class="dk">
@@ -2175,44 +2237,119 @@ function renderAna(){
     {id:"deist",ikon:"✦",renk:PR.deist.ana,label:"Deist","kisa":"Yaratıcı neden sessiz kalsın?"},
     {id:"agnostik",ikon:"∿",renk:PR.agnostik.ana,label:"Agnostik",kisa:"Bilmiyorum mu, kaçış mı?"},
   ];
-  return`<div class="pg-lg">
+  // Particle generation
+  const particles=Array.from({length:28},(_,i)=>{
+    const colors=['rgba(200,150,62,','rgba(240,184,74,','rgba(91,168,138,','rgba(155,123,196,'];
+    const col=colors[i%4];
+    const size=2+Math.random()*3;
+    const x=5+Math.random()*90;
+    const y=20+Math.random()*70;
+    const dur=6+Math.random()*6;
+    const del=Math.random()*8;
+    const drift=60+Math.random()*80;
+    const peak=.3+Math.random()*.4;
+    return`<div class="hero-p" style="width:${size}px;height:${size}px;left:${x}%;top:${y}%;background:${col}${peak});--dur:${dur}s;--del:${del}s;--drift:${drift}px;--peak:${peak}"></div>`;
+  }).join('');
 
-  <!-- HERO -->
-  <div style="text-align:center;padding:40px 0 24px">
-    <h1 style="font-family:'Crimson Pro',serif;font-size:34px;font-weight:300;line-height:1.15;color:${c.met};margin-bottom:14px;animation:fadeUp .6s var(--e) both">
-      Arkadaşın <em style="color:${rr.parlak};font-style:italic">büyük soruyu</em> soruyor.
-    </h1>
-    <p style="font-family:'Crimson Pro',serif;font-size:15px;color:${c.soluk};line-height:1.7;max-width:480px;margin:0 auto 20px;font-weight:300;font-style:italic;animation:fadeUp .6s var(--e) .06s both">
-      Mesleğine özel, akademik kaynaklı mektuplar ve düşündürücü sorular.
-    </p>
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;color:${c.cs};animation:fadeUp .6s var(--e) .12s both">
-      <span><b style="font-family:'Crimson Pro',serif;font-size:20px;font-weight:700;color:${c.met}">82</b> mektup</span>
-      <span style="width:1px;height:16px;background:${c.cerç}"></span>
-      <span><b style="font-family:'Crimson Pro',serif;font-size:20px;font-weight:700;color:${c.met}">27</b> meslek</span>
-      <span style="width:1px;height:16px;background:${c.cerç}"></span>
-      <span><b style="font-family:'Crimson Pro',serif;font-size:20px;font-weight:700;color:${c.met}">3</b> perspektif</span>
+  // Background gradient (theme-aware)
+  const heroBg=dk
+    ?`radial-gradient(ellipse at 30% 40%,rgba(200,150,62,.12) 0%,transparent 55%),
+      radial-gradient(ellipse at 70% 60%,rgba(91,168,138,.08) 0%,transparent 50%),
+      radial-gradient(ellipse at 50% 90%,rgba(155,123,196,.06) 0%,transparent 45%),
+      radial-gradient(ellipse at 50% 20%,rgba(200,150,62,.08) 0%,transparent 60%),
+      linear-gradient(180deg,#0C0A08 0%,#141210 40%,#0C0A08 100%)`
+    :`radial-gradient(ellipse at 30% 40%,rgba(200,150,62,.08) 0%,transparent 55%),
+      radial-gradient(ellipse at 70% 60%,rgba(91,168,138,.05) 0%,transparent 50%),
+      radial-gradient(ellipse at 50% 90%,rgba(155,123,196,.04) 0%,transparent 45%),
+      linear-gradient(180deg,${c.bg} 0%,${c.bg} 100%)`;
+
+  return`<div style="position:relative">
+  <!-- ═══ HERO ═══ -->
+  <div class="hero-wrap">
+    <div class="hero-bg-layer" style="background:${heroBg}"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-particles">${particles}</div>
+
+    <div class="hero-content">
+      <!-- Badge -->
+      <div style="animation:fadeUp .6s var(--e) .1s both">
+        <span class="hero-badge-wrap" style="background:${dk?'rgba(200,150,62,.08)':'rgba(200,150,62,.1)'};border:1px solid ${dk?'rgba(200,150,62,.15)':'rgba(200,150,62,.2)'};color:${PR.ateist.parlak}">
+          ✉ Dijital Tebliğ Platformu
+        </span>
+      </div>
+
+      <!-- Başlık -->
+      <h1 class="hero-h1" style="color:${c.met};margin:28px 0 18px;animation:fadeUp .7s var(--e) .25s both">
+        Her mesleğin bir dili var.<br>
+        <em style="color:${PR.ateist.parlak}">Tebliğin de olmalı.</em>
+      </h1>
+
+      <!-- Alt başlık -->
+      <p class="hero-sub" style="color:${c.soluk};margin-bottom:36px;animation:fadeUp .7s var(--e) .4s both">
+        Fizikçiye fiziğin diliyle, felsefeciye felsefenin, doktora tıbbın...<br>
+        Arkadaşına, onun anlayacağı dilden, saygıyla ve ilimle hitap et.
+      </p>
+
+      <!-- İstatistikler -->
+      <div class="hero-stats-row" style="margin-bottom:44px;animation:fadeUp .6s var(--e) .55s both">
+        <div style="text-align:center">
+          <span class="hero-stat-num" style="color:${PR.ateist.parlak}">81</span>
+          <span class="hero-stat-label" style="color:${c.soluk}">mektup</span>
+        </div>
+        <div class="hero-stat-div" style="background:${c.cerç}"></div>
+        <div style="text-align:center">
+          <span class="hero-stat-num" style="color:${PR.deist.parlak}">27</span>
+          <span class="hero-stat-label" style="color:${c.soluk}">meslek</span>
+        </div>
+        <div class="hero-stat-div" style="background:${c.cerç}"></div>
+        <div style="text-align:center">
+          <span class="hero-stat-num" style="color:${PR.agnostik.parlak}">3</span>
+          <span class="hero-stat-label" style="color:${c.soluk}">perspektif</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeUp .6s var(--e) .7s both">
+        <button class="btn-pri" onclick="document.getElementById('poz-section').scrollIntoView({behavior:'smooth'})"
+          style="background:linear-gradient(135deg,${PR.ateist.ana},${PR.ateist.koyu});box-shadow:0 8px 32px rgba(200,150,62,.25)">
+          Keşfetmeye Başla ↓
+        </button>
+        <button class="btn-pri" onclick="navigate({screen:'poz'})"
+          style="background:transparent;border:1px solid ${PR.ateist.ana}60;color:${PR.ateist.parlak};box-shadow:none">
+          Tüm Mektuplar →
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll göstergesi -->
+    <div class="hero-scroll" style="color:${c.soluk}">
+      <div class="hero-scroll-track" style="border-color:${c.cerç}">
+        <div class="hero-scroll-dot" style="background:${PR.ateist.parlak}"></div>
+      </div>
+      <span class="hero-explore" style="color:${c.cs}">Keşfet</span>
     </div>
   </div>
 
-  <!-- Pozisyon Kartları -->
-  <div style="text-align:center;margin-bottom:8px;padding-top:20px">
-    <p style="font-family:'Crimson Pro',serif;font-size:20px;color:${c.met};font-weight:400;animation:fadeUp .5s var(--e) .16s both">Arkadaşın hangi pozisyonda?</p>
-    <p style="font-size:13px;color:${c.cs};margin-top:6px;margin-bottom:20px;font-weight:300;animation:fadeUp .5s var(--e) .2s both">Bir pozisyon seç, mesleğine uygun mektubu bul.</p>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:48px">
-    ${pozlar.map((p,i)=>`
-    <button class="glow-card${p.id==='deist'?' glow-deist':p.id==='agnostik'?' glow-agnostik':''}" onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
-      style="background:${c.kart};border:1px solid ${c.cerç};border-radius:16px;padding:24px 20px;text-align:center;transition:all .3s var(--e);cursor:pointer;animation:fadeUp .5s var(--e) ${.22+i*.05}s both"
-      onmouseover="this.style.transform='translateY(-4px)'"
-      onmouseout="this.style.transform=''">
-      <div style="width:44px;height:44px;border-radius:50%;background:${p.renk}10;border:1px solid ${p.renk}18;display:inline-flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px">${p.ikon}</div>
-      <div style="font-family:'Crimson Pro',serif;font-size:18px;font-weight:600;color:${c.met};margin-bottom:6px">${p.label}</div>
-      <div style="font-size:13px;color:${c.soluk};line-height:1.5;font-weight:300">${p.kisa}</div>
-    </button>`).join("")}
-  </div>
+  <!-- ═══ POZİSYON KARTLARI ═══ -->
+  <div class="pg-lg" id="poz-section">
+    <div style="text-align:center;margin-bottom:8px;padding-top:16px">
+      <p style="font-family:'Crimson Pro',serif;font-size:clamp(22px,3.5vw,28px);color:${c.met};font-weight:400;animation:fadeUp .5s var(--e) .16s both">Arkadaşın hangi pozisyonda?</p>
+      <p style="font-size:14px;color:${c.cs};margin-top:8px;margin-bottom:28px;font-weight:300;animation:fadeUp .5s var(--e) .2s both">Bir pozisyon seç, mesleğine uygun mektubu bul.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:56px">
+      ${pozlar.map((p,i)=>`
+      <button class="glow-card${p.id==='deist'?' glow-deist':p.id==='agnostik'?' glow-agnostik':''}" onclick="navigate({screen:'liste',poz:'${p.id}',kat:null,soruI:0})"
+        style="background:${c.kart};border:1px solid ${c.cerç};border-radius:20px;padding:28px 20px;text-align:center;transition:all .35s var(--e);cursor:pointer;animation:fadeUp .5s var(--e) ${.22+i*.06}s both"
+        onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 40px ${p.renk}20'"
+        onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div style="width:56px;height:56px;border-radius:50%;background:${p.renk}12;border:1px solid ${p.renk}20;display:inline-flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;transition:all .3s var(--e)">${p.ikon}</div>
+        <div style="font-family:'Crimson Pro',serif;font-size:20px;font-weight:600;color:${c.met};margin-bottom:8px">${p.label}</div>
+        <div style="font-size:13px;color:${c.soluk};line-height:1.6;font-weight:300">${p.kisa}</div>
+      </button>`).join("")}
+    </div>
 
     <!-- Nasıl çalışıyor -->
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:clamp(24px,3.5vw,36px);animation:fadeIn 1s ease .8s both">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:clamp(24px,3.5vw,36px)">
       <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,${c.cerç})"></div>
       <span style="font-size:clamp(10px,1.3vw,13px);color:${c.cs};letter-spacing:.15em;text-transform:uppercase;font-weight:500">Nasıl Çalışıyor?</span>
       <div style="flex:1;height:1px;background:linear-gradient(90deg,${c.cerç},transparent)"></div>
@@ -2224,14 +2361,14 @@ function renderAna(){
         {ikon:"✉",b:"Mektubu oku",a:"Mesleğine özel, argümanlı, itirazları dürüstçe işleyen."},
         {ikon:"📲",b:"Soru gönder",a:"Görsel kart olarak paylaş. WhatsApp'a tek dokunuş."}
       ].map((x,i)=>`
-      <div class="step" style="background:${c.kart};border-color:${c.cerç};animation:fadeUp .6s var(--ease) ${.9+i*.1}s both">
+      <div class="step" style="background:${c.kart};border-color:${c.cerç}">
         <div style="font-size:clamp(26px,4vw,36px);margin-bottom:clamp(10px,1.5vw,16px)">${x.ikon}</div>
         <div style="font-size:clamp(15px,2.2vw,20px);font-weight:600;color:${c.met};margin-bottom:clamp(6px,1vw,10px)">${x.b}</div>
         <div style="font-size:clamp(13px,1.8vw,16px);color:${c.soluk};line-height:1.65;font-weight:300">${x.a}</div>
       </div>`).join("")}
     </div>
 
-    <p style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};margin-top:clamp(32px,4vw,48px);text-align:center;opacity:.6;animation:fadeIn 1s ease 1.2s both">
+    <p style="font-size:clamp(11px,1.5vw,14px);color:${c.cs};margin-top:clamp(32px,4vw,48px);text-align:center;opacity:.6">
       Akademik kaynaklı · Ehl-i Sünnet çerçevesinde
     </p>
   </div>
@@ -2379,7 +2516,9 @@ function renderMektup(){
   <!-- Mektup paylaş -->
   <div style="display:flex;gap:7px;margin-top:16px">
     <button onclick="mektupLinkKopyala()" class="mektup-share-btn" style="background:${c.yuz};border-color:${c.cerç};color:${c.soluk}">🔗 Mektup Linkini Kopyala</button>
+    <button onclick="pdfIndir()" class="mektup-share-btn" style="background:${r.bg};border-color:${r.ana}35;color:${r.parlak}">📄 PDF İndir</button>
   </div>
+  <div class="print-footer">davetmektubu.com — Mesleğine özel, akademik kaynaklı mektuplar</div>
 </div>`;
 }
 
@@ -2531,6 +2670,29 @@ function mektupLinkKopyala(){
   const url=location.origin+location.pathname+"#mektup-"+state.mektupId;
   try{navigator.clipboard.writeText(url);}catch{}
   toast("🔗 Mektup linki kopyalandı");
+}
+
+// ── PDF İNDİR ──
+function pdfIndir(){
+  // Resimlerin yüklenmesini bekle
+  const imgs=document.querySelectorAll('.m-img img');
+  const promises=[...imgs].map(img=>{
+    if(img.complete) return Promise.resolve();
+    return new Promise(r=>{img.onload=r;img.onerror=r;});
+  });
+  toast("📄 PDF hazırlanıyor...");
+  Promise.all(promises).then(()=>{
+    // Mektup adını dosya ismi için al
+    const m=MEKTUPLAR[state.mektupId];
+    if(m){
+      const oldTitle=document.title;
+      document.title=`Davet Mektubu — ${m.poz.charAt(0).toUpperCase()+m.poz.slice(1)} ${m.meslek}`;
+      window.print();
+      setTimeout(()=>{document.title=oldTitle;},500);
+    } else {
+      window.print();
+    }
+  });
 }
 
 // ── STORY FORMAT (1080×1920) ──
