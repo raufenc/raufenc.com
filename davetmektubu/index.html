@@ -340,7 +340,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}
   body{background:#0C0A08!important;color:#EDE8E0!important;font-size:11pt}
-  nav,#b1,#b2,#dots,#readProgress,.btn-back,.mektup-share-btn,.baglar,.hero-wrap,.hero-particles,.hero-bg-layer,.hero-pattern,.hero-scroll,.fav-btn,.btn-tema,.toast,.modal-bg,.search-wrap{display:none!important}
+  nav,#b1,#b2,#dots,#readProgress,.btn-back,.mektup-share-btn,.baglar,.hero-wrap,.hero-particles,.hero-bg-layer,.hero-pattern,.hero-scroll,.fav-btn,.btn-tema,.toast,.modal-bg,.search-wrap,.soru-cta,.site-footer-links{display:none!important}
   #app{padding-top:0!important;background:#0C0A08!important}
   .pg{max-width:100%!important;padding:0!important;background:#0C0A08!important}
   .m-header{border:1px solid rgba(200,150,62,.2)!important;background:linear-gradient(135deg,rgba(200,150,62,.1),rgba(200,150,62,.03))!important;page-break-after:avoid;border-radius:14px!important;padding:24px!important}
@@ -357,7 +357,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:saturate(180
   .m-img-caption{color:rgba(237,232,224,.5)!important;background:rgba(200,150,62,.05)!important}
   .glow-card::before{display:none!important}
   .m-skeleton-info{display:none!important}
-  div[style*="Bu mektupla birlikte"]{display:none!important}
   @page{margin:1.8cm 1.5cm;size:A4}
   .print-footer{display:block!important;text-align:center;font-size:9pt;color:rgba(200,150,62,.4);margin-top:28pt;padding-top:14pt;border-top:1px solid rgba(200,150,62,.12)}
 }
@@ -2508,7 +2507,7 @@ function renderMektup(){
     <p style="font-size:13px;color:${c.soluk};font-weight:300">Bu mektuptaki argümanlar şuralarda devam ediyor:</p>
     ${baglarHTML}
   </div>
-  <div style="margin-top:32px;padding:24px;background:${r.ana}08;border:1px solid ${r.ana}15;border-radius:16px;text-align:center">
+  <div class="soru-cta" style="margin-top:32px;padding:24px;background:${r.ana}08;border:1px solid ${r.ana}15;border-radius:16px;text-align:center">
     <div style="font-size:20px;margin-bottom:10px">💬</div>
     <h3 style="font-family:'Crimson Pro',serif;font-size:18px;font-weight:400;color:${c.met};margin-bottom:10px">Bu mektupla birlikte bir soru da gönder</h3>
     <button onclick="navigate({screen:'sorular',soruI:0,kat:null})" style="background:linear-gradient(135deg,${r.ana},${r.koyu});border:none;border-radius:12px;padding:12px 28px;color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:all .22s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Soruları Gör →</button>
@@ -3192,7 +3191,7 @@ self.addEventListener("fetch",e=>e.respondWith(fetch(e.request).catch(()=>caches
   navigator.serviceWorker.register(url).catch(()=>{});
 }
 </script>
-<div style="max-width:720px;margin:24px auto;padding:0 20px;">
+<div class="site-footer-links" style="max-width:720px;margin:24px auto;padding:0 20px;">
   <div style="display:flex;gap:10px;flex-wrap:wrap;">
     <a href="/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">&larr; Ana Sayfa</a>
     <a href="/noroterbiye/" style="font-size:12px;color:var(--muted2,#6b7280);text-decoration:none;padding:6px 14px;border:1px solid var(--border,#2a2a3e);border-radius:20px;transition:all 0.2s;">NöroTerbiye</a>
