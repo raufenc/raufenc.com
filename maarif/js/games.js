@@ -173,100 +173,199 @@ function shortFam(f) {
   return f.slice(0,30);
 }
 
-// ===== GAME03: Fark Tahtasi =====
+// ===== GAME03: Kavram Tasnifi (Sorting) =====
+// Öğrenme mekaniği: kavramı okuyarak hangi aileye ait olduğunu düşünürsün
+// Yanlış atarsan doğrusu gösterilir → öğrenme anı
 function game03(app) {
-  const withDesc = DATA.concepts.filter(c => c.desc && c.desc.length > 20 && c.desc.length < 300 && !c.desc.includes(' • '));
-  let score = 0, q = 0, total = 5;
+  const allFams = [...new Set(DATA.concepts.map(c => c.family))]
+    .filter(f => DATA.concepts.filter(c => c.family === f && c.desc && c.desc.length < 200 && !c.desc.includes(' • ')).length >= 3);
+  if (allFams.length < 3) { app.innerHTML = '<div class="empty-state"><p>Yeterli veri yok</p></div>'; return; }
 
-  function nextQ() {
-    if (q >= total) { showResult(app, 'GAME03', score, total, ()=>game03(app)); return; }
-    const pair = pick(withDesc, 2);
-    const c1 = pair[0], c2 = pair[1];
-    const dims = [
-      { dim: 'Aile', v1: shortFam(c1.family), v2: shortFam(c2.family) },
-      { dim: 'Tanım Anahtar', v1: c1.desc.split(' ').slice(0,4).join(' ')+'...', v2: c2.desc.split(' ').slice(0,4).join(' ')+'...' },
-      { dim: 'Sayfa', v1: 's.'+c1.p1, v2: 's.'+c2.p1 },
-      { dim: 'Kod', v1: c1.code||'—', v2: c2.code||'—' },
-    ];
+  let totalScore = 0, round = 0, totalRounds = 3;
 
-    app.innerHTML = `
-      ${hud([{val:(q+1)+'/'+total,label:'Soru'},{val:score,label:'Puan'}])}
-      <div class="game-area">
-        <p class="game-question">${c1.term} ile ${c2.term} arasındaki farklar</p>
-        <table class="compare-table">
-          <tr><th>Boyut</th><th>${c1.term}</th><th>${c2.term}</th></tr>
-          ${dims.map(d => `<tr><td><strong>${d.dim}</strong></td><td>${d.v1}</td><td>${d.v2}</td></tr>`).join('')}
-        </table>
-        <p class="mt-2 game-question" style="font-size:.95rem">"${c1.desc.slice(0,100)}..." tanımı hangisine ait?</p>
-        <div class="options-grid">
-          <button class="option-btn" data-correct="true" onclick="window._g3ans(this,true)">${c1.term}</button>
-          <button class="option-btn" data-correct="false" onclick="window._g3ans(this,false)">${c2.term}</button>
-        </div>
-        <div id="g3fb" class="mt-1 text-center"></div>
-      </div>`;
+  function playRound() {
+    if (round >= totalRounds) { showResult(app, 'GAME03', totalScore, totalRounds * 9, () => game03(app)); return; }
 
-    let answered = false;
-    window._g3ans = (btn, correct) => {
-      if (answered) return;
-      answered = true;
-      if (correct) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
-      app.querySelectorAll('.option-btn').forEach(b => b.classList.add('disabled'));
-      document.getElementById('g3fb').innerHTML = `<button class="btn btn-primary btn-sm mt-1" onclick="window._g3next()">Sonraki →</button>`;
+    const selectedFams = pick(allFams, 3);
+    const buckets = selectedFams.map(f => ({
+      family: f,
+      label: shortFam(f),
+      concepts: pick(DATA.concepts.filter(c => c.family === f && c.desc && c.desc.length < 200 && !c.desc.includes(' • ')), 3)
+    }));
+    const allCards = shuffle(buckets.flatMap(b => b.concepts.map(c => ({ ...c, correctFam: b.family }))));
+    const assignments = {}; // conceptId → assigned family
+    let roundScore = 0;
+    let remaining = allCards.length;
+
+    function render() {
+      app.innerHTML = `
+        ${hud([{val: round+1+'/'+totalRounds, label:'Tur'},{val:totalScore+roundScore, label:'Puan'},{val:remaining, label:'Kalan'}])}
+        <div class="game-area">
+          <p class="game-question">Kavramları doğru aile kovalarına yerleştir</p>
+          <div class="tasnif-buckets" id="buckets">
+            ${buckets.map(b => `
+              <div class="tasnif-bucket" data-fam="${b.family}" id="bucket-${b.family.replace(/\s/g,'_')}">
+                <div class="tb-label">${b.label}</div>
+                <div class="tb-cards" id="tbcards-${b.family.replace(/\s/g,'_')}"></div>
+              </div>`).join('')}
+          </div>
+          <div class="tasnif-pool" id="cardPool">
+            ${allCards.map(c => `
+              <div class="tasnif-card" id="tc-${c.id}" data-id="${c.id}" data-fam="${c.correctFam}" onclick="window._g3pick(this)">
+                <div class="tc-term">${c.term}</div>
+                ${c.desc ? `<div class="tc-hint">${c.desc.slice(0,80)}${c.desc.length>80?'…':''}</div>` : ''}
+              </div>`).join('')}
+          </div>
+          <div id="g3msg" class="g3-msg hidden"></div>
+        </div>`;
+    }
+
+    render();
+
+    let selectedCard = null;
+
+    window._g3pick = function(cardEl) {
+      if (cardEl.classList.contains('placed')) return;
+      // Deselect previous
+      document.querySelectorAll('.tasnif-card.selected-card').forEach(c => c.classList.remove('selected-card'));
+      if (selectedCard && selectedCard.dataset.id === cardEl.dataset.id) { selectedCard = null; return; }
+      selectedCard = cardEl;
+      cardEl.classList.add('selected-card');
+      // Highlight buckets
+      document.querySelectorAll('.tasnif-bucket').forEach(b => b.classList.add('bucket-active'));
+      // Assign bucket click
+      document.querySelectorAll('.tasnif-bucket').forEach(bucketEl => {
+        bucketEl.onclick = function() {
+          if (!selectedCard) return;
+          document.querySelectorAll('.tasnif-bucket').forEach(b => { b.classList.remove('bucket-active'); b.onclick = null; });
+          const assignedFam = bucketEl.dataset.fam;
+          const correct = assignedFam === selectedCard.dataset.fam;
+          selectedCard.classList.remove('selected-card');
+          if (correct) {
+            roundScore++;
+            selectedCard.classList.add('placed', 'placed-ok');
+            const key = assignedFam.replace(/\s/g,'_');
+            document.getElementById('tbcards-'+key).insertAdjacentHTML('beforeend',
+              `<div class="tb-chip">${selectedCard.querySelector('.tc-term').textContent}</div>`);
+          } else {
+            selectedCard.classList.add('placed', 'placed-err');
+            const correctLabel = shortFam(selectedCard.dataset.fam);
+            const msg = document.getElementById('g3msg');
+            msg.textContent = `❌ "${selectedCard.querySelector('.tc-term').textContent}" → ${correctLabel} ailesine ait`;
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2500);
+            // Still place it to correct bucket visually
+            const correctKey = selectedCard.dataset.fam.replace(/\s/g,'_');
+            const correctBucket = document.getElementById('tbcards-'+correctKey);
+            if (correctBucket) correctBucket.insertAdjacentHTML('beforeend',
+              `<div class="tb-chip tb-chip-err">${selectedCard.querySelector('.tc-term').textContent}</div>`);
+          }
+          remaining--;
+          selectedCard = null;
+          document.getElementById('g3msg'); // trigger repaint
+          if (remaining === 0) {
+            setTimeout(() => {
+              totalScore += roundScore;
+              round++;
+              playRound();
+            }, 1200);
+          }
+        };
+      });
     };
-    window._g3next = () => { q++; nextQ(); };
   }
-  nextQ();
+  playRound();
 }
 
-// ===== GAME04: Beceri Agaci =====
+// ===== GAME04: Eşleşme Kartları (Memory flip) =====
+// Öğrenme mekaniği: kartı çevirince tanımı/terimi GÖRÜRSÜN → öğrenme kartları çevirirken olur
+// Test değil keşif: kaç çevirmede tüm eşleri bulursun?
 function game04(app) {
-  // Find concepts with parent-child relationships
-  const parents = DATA.concepts.filter(c => c.sub === 'Kategori' && DATA.concepts.some(ch => ch.parent === c.term));
-  let score = 0, q = 0, total = 5;
+  const pool = DATA.concepts.filter(c => c.desc && c.desc.length > 20 && c.desc.length < 120 && !c.desc.includes(' • '));
+  const selected = pick(pool, 8);
+  // 16 kart: 8 terim + 8 tanım
+  const cards = shuffle([
+    ...selected.map((c, i) => ({ pairId: i, type: 'term', text: c.term, sub: shortFam(c.family), concept: c })),
+    ...selected.map((c, i) => ({ pairId: i, type: 'desc', text: c.desc, sub: shortFam(c.family), concept: c }))
+  ]).map((card, idx) => ({ ...card, idx }));
 
-  function nextQ() {
-    if (q >= total || parents.length === 0) { showResult(app, 'GAME04', score, Math.min(total, q||1), ()=>game04(app)); return; }
-    const parent = parents[q % parents.length];
-    const children = DATA.concepts.filter(c => c.parent === parent.term && c.sub !== 'Kategori').slice(0,5);
-    const fakes = pick(DATA.concepts.filter(c => c.parent !== parent.term && c.family !== parent.family), 2);
-    const allItems = shuffle([...children, ...fakes]);
+  let flipped = [];   // max 2 cards currently face-up
+  let matched = new Set();
+  let moves = 0;
+  let locked = false;
 
+  function renderGrid() {
     app.innerHTML = `
-      ${hud([{val:(q+1)+'/'+total,label:'Soru'},{val:score,label:'Puan'}])}
+      ${hud([{val:matched.size/2+'/8',label:'Eşleşme'},{val:moves,label:'Hamle'}])}
       <div class="game-area">
-        <p class="game-question">Hangileri <strong>${parent.term}</strong> altında yer alır?</p>
-        <div class="options-grid" id="g4opts">
-          ${allItems.map(i => `<button class="option-btn" data-correct="${children.some(c=>c.id===i.id)}" style="text-align:center">${i.term}</button>`).join('')}
-        </div>
-        <div id="g4fb" class="mt-2 text-center">
-          <button class="btn btn-primary" id="g4check">✅ Kontrol Et</button>
+        <p class="game-question" style="font-size:.9rem;margin-bottom:.75rem">Terim ile tanımını eşleştir — kartları çevirince öğrenirsin 🧠</p>
+        <div class="memory-grid" id="memGrid">
+          ${cards.map(card => `
+            <div class="mem-card ${matched.has(card.pairId)?'mem-matched':''}" data-idx="${card.idx}" data-pair="${card.pairId}" data-type="${card.type}">
+              <div class="mem-face mem-back">?</div>
+              <div class="mem-face mem-front ${card.type==='term'?'mem-term':'mem-desc'}">
+                <div class="mem-text">${card.text}</div>
+                <div class="mem-sub">${card.sub}</div>
+              </div>
+            </div>`).join('')}
         </div>
       </div>`;
 
-    const selected = new Set();
-    app.querySelectorAll('#g4opts .option-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-        if (selected.has(btn)) selected.delete(btn); else selected.add(btn);
+    app.querySelectorAll('.mem-card').forEach(cardEl => {
+      if (matched.has(parseInt(cardEl.dataset.pair))) {
+        cardEl.classList.add('face-up');
+        return;
+      }
+      cardEl.addEventListener('click', () => {
+        if (locked) return;
+        if (cardEl.classList.contains('face-up')) return;
+        if (flipped.length >= 2) return;
+        cardEl.classList.add('face-up');
+        flipped.push(cardEl);
+        if (flipped.length === 2) {
+          moves++;
+          locked = true;
+          const [a, b] = flipped;
+          const pairMatch = a.dataset.pair === b.dataset.pair && a.dataset.type !== b.dataset.type;
+          if (pairMatch) {
+            matched.add(parseInt(a.dataset.pair));
+            a.classList.add('mem-matched');
+            b.classList.add('mem-matched');
+            flipped = [];
+            locked = false;
+            // Update moves counter
+            const hudEl = app.querySelector('.hud-item:first-child .hud-val');
+            if (hudEl) hudEl.textContent = matched.size/2+'/8';
+            if (matched.size === 8) {
+              setTimeout(() => {
+                Store.addGameScore('GAME04', Math.max(10, 100 - moves));
+                Store.addXP(20);
+                app.innerHTML = `
+                  <div class="result-screen">
+                    <div class="result-stars">⭐⭐⭐</div>
+                    <div class="result-score">${moves} hamle</div>
+                    <div class="result-label">Tüm ${selected.length} çift eşleştirildi!</div>
+                    <div class="result-actions">
+                      <button class="btn btn-primary" onclick="window.Games.start(document.getElementById('app'),'GAME04')">🔄 Tekrar</button>
+                      <a href="#/oyunlar" class="btn btn-outline">🎮 Oyunlar</a>
+                    </div>
+                  </div>`;
+              }, 600);
+            }
+          } else {
+            // Show mismatch briefly then flip back
+            setTimeout(() => {
+              a.classList.remove('face-up');
+              b.classList.remove('face-up');
+              flipped = [];
+              locked = false;
+            }, 1200);
+          }
+        }
       });
     });
-
-    document.getElementById('g4check').addEventListener('click', () => {
-      let roundScore = 0;
-      app.querySelectorAll('#g4opts .option-btn').forEach(btn => {
-        btn.classList.add('disabled');
-        const isCorrect = btn.dataset.correct === 'true';
-        const isSelected = btn.classList.contains('selected');
-        if (isCorrect) btn.classList.add('correct');
-        if (!isCorrect && isSelected) btn.classList.add('wrong');
-        if (isCorrect === isSelected) roundScore++;
-      });
-      if (roundScore === allItems.length) score++;
-      document.getElementById('g4fb').innerHTML = `<p>${roundScore}/${allItems.length} doğru</p><button class="btn btn-primary btn-sm mt-1" onclick="window._g4next()">Sonraki →</button>`;
-    });
-    window._g4next = () => { q++; nextQ(); };
   }
-  nextQ();
+  renderGrid();
 }
 
 // ===== GAME05: Sayfa Avcisi =====
@@ -312,55 +411,80 @@ function game05(app) {
   nextQ();
 }
 
-// ===== GAME06: Mini Vaka =====
+// ===== GAME06: Değeri Keşfet (Önce göster, sonra pekiştir) =====
+// Öğrenme mekaniği: ÖNCE değeri ve tüm eylemlerini görürsün → kavramsal bağlantı kurulur
+// Sonra "bu değere ait BAŞKA bir eylem hangisi?" sorusu → kısa süreli hafıza testi
 function game06(app) {
   const values = DATA.concepts.filter(c => c.family === 'Erdem-Değer-Eylem' && c.sub === 'Değer' && c.desc);
-  // Kirli refler: bullet içeren veya 200+ karakter olanlar veri sorunu, filtrele
-  const refs = DATA.references.filter(r =>
-    r.type === 'eylem' &&
-    r.text.length > 15 &&
-    r.text.length < 180 &&
-    !r.text.includes(' • ') &&
-    !r.text.includes('öğrenme •') &&
-    !r.text.includes('Değer telkini')
+  const cleanRefs = DATA.references.filter(r =>
+    r.type === 'eylem' && r.text.length > 15 && r.text.length < 180 &&
+    !r.text.includes(' • ') && !r.text.includes('öğrenme •') && !r.text.includes('Değer telkini')
   );
-  let score = 0, q = 0, total = 8;
+  let score = 0, q = 0, total = 6;
 
   function nextQ() {
-    if (q >= total) { showResult(app, 'GAME06', score, total, ()=>game06(app)); return; }
-    // Pick a random action reference
-    const ref = refs[Math.floor(Math.random()*refs.length)];
-    // Find parent value
-    const parentCode = ref.pc.split('.')[0];
-    const correct = values.find(v => v.code === parentCode);
-    if (!correct) { q++; nextQ(); return; }
-    const wrongs = pick(values.filter(v => v.id !== correct.id), 3);
-    const options = shuffle([correct, ...wrongs]);
+    if (q >= total) { showResult(app, 'GAME06', score, total, () => game06(app)); return; }
+    // Pick a value with at least 3 clean actions
+    const candidates = values.filter(v => cleanRefs.filter(r => r.pc.split('.')[0] === v.code).length >= 3);
+    if (candidates.length === 0) { q++; nextQ(); return; }
+    const value = candidates[Math.floor(Math.random() * candidates.length)];
+    const valueRefs = cleanRefs.filter(r => r.pc.split('.')[0] === value.code);
+    // Show 3 actions in the "learn" phase, then test with 1 more
+    const showRefs = pick(valueRefs, Math.min(3, valueRefs.length));
+    const testRef = pick(valueRefs.filter(r => !showRefs.includes(r)), 1)[0];
+    if (!testRef) { q++; nextQ(); return; }
+    // Wrong options: real actions from OTHER values
+    const wrongRefs = pick(cleanRefs.filter(r => r.pc.split('.')[0] !== value.code), 3);
+    const options = shuffle([testRef, ...wrongRefs]);
 
+    // Phase 1: LEARN — show value + its actions
     app.innerHTML = `
       ${hud([{val:(q+1)+'/'+total,label:'Soru'},{val:score,label:'Puan'}])}
       <div class="game-area">
-        <p class="game-question">Bu eylem hangi değere aittir?</p>
-        <div style="background:var(--surface-alt);padding:1.25rem;border-radius:var(--radius);margin-bottom:1.5rem;font-style:italic;line-height:1.6">"${ref.text}"</div>
-        <div class="options-grid" id="g6opts">
-          ${options.map(o => `<button class="option-btn" data-correct="${o.id===correct.id}">${o.term}</button>`).join('')}
+        <div class="g6-reveal">
+          <div class="g6-value-card">
+            <div class="g6-value-label">Değer</div>
+            <div class="g6-value-name">${value.term}</div>
+            ${value.desc ? `<div class="g6-value-desc">${value.desc}</div>` : ''}
+          </div>
+          <div class="g6-actions-list">
+            <div class="g6-actions-title">Bu değere ait eylemler:</div>
+            ${showRefs.map(r => `<div class="g6-action-item">→ ${r.text}</div>`).join('')}
+          </div>
+          <button class="btn btn-primary mt-2" id="g6ready">Anladım, devam →</button>
         </div>
-        <div id="g6fb" class="mt-1 text-center"></div>
       </div>`;
 
-    let answered = false;
-    app.querySelectorAll('#g6opts .option-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (answered) return; answered = true;
-        const ok = btn.dataset.correct === 'true';
-        if (ok) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
-        app.querySelectorAll('#g6opts .option-btn').forEach(b => { b.classList.add('disabled'); if(b.dataset.correct==='true') b.classList.add('correct'); });
-        document.getElementById('g6fb').innerHTML = `
-          <div class="g2-explain">${ok?'✅':'❌'} Doğru cevap: <strong>${correct.term}</strong>${correct.desc ? ` — ${correct.desc.slice(0,100)}` : ''}</div>
-          <button class="btn btn-primary btn-sm mt-1" onclick="window._g6next()">Sonraki →</button>`;
+    document.getElementById('g6ready').addEventListener('click', () => {
+      // Phase 2: TEST — find another action belonging to this value
+      app.innerHTML = `
+        ${hud([{val:(q+1)+'/'+total,label:'Soru'},{val:score,label:'Puan'}])}
+        <div class="game-area">
+          <div class="g6-test-header">
+            <span class="g6-test-badge">${value.term}</span> değerine ait BAŞKA bir eylem hangisi?
+          </div>
+          <div class="options-grid" id="g6opts">
+            ${options.map(o => `<button class="option-btn g2-card" data-correct="${o === testRef}">
+              <div class="g2-term">${o.text}</div>
+            </button>`).join('')}
+          </div>
+          <div id="g6fb" class="mt-1 text-center"></div>
+        </div>`;
+
+      let answered = false;
+      app.querySelectorAll('#g6opts .option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (answered) return; answered = true;
+          const ok = btn.dataset.correct === 'true';
+          if (ok) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
+          app.querySelectorAll('#g6opts .option-btn').forEach(b => { b.classList.add('disabled'); if(b.dataset.correct==='true') b.classList.add('correct'); });
+          document.getElementById('g6fb').innerHTML = `
+            <div class="g2-explain">${ok ? '✅ Doğru!' : '❌ Yanlış!'} Doğru eylem: <em>"${testRef.text}"</em></div>
+            <button class="btn btn-primary btn-sm mt-1" onclick="window._g6next()">Sonraki →</button>`;
+        });
       });
+      window._g6next = () => { q++; nextQ(); };
     });
-    window._g6next = () => { q++; nextQ(); };
   }
   nextQ();
 }
