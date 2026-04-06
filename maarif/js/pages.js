@@ -17,10 +17,29 @@ function el(tag, cls, html) {
 
 function conceptCard(c) {
   const fc = getFamilyClass(c.family);
+  const refs = DATA.references.filter(r => r.pc === c.code);
+  const refCount = refs.length;
+  // Description: use desc, or fallback to first ref text, or sub-type hint
+  let preview = c.desc || '';
+  if (!preview && refs.length > 0) {
+    preview = refs[0].text || '';
+  }
+  if (preview.length > 130) preview = preview.slice(0, 128) + '…';
+
+  const refBadge = refCount > 0
+    ? `<span class="cc-refs">${refCount} referans</span>`
+    : '';
   return `<div class="card concept-card ${fc}" onclick="location.hash='#/kavram/${c.id}'">
-    <div class="card-header"><span class="cc-code">${c.code||c.id}</span> ${c.term}</div>
-    ${c.desc ? `<div class="card-desc">${c.desc.slice(0,120)}${c.desc.length>120?'...':''}</div>` : ''}
-    <div class="card-footer"><span class="cc-family">${shortFamily(c.family)}</span><span>s.${c.p1||'—'}</span></div>
+    <div class="card-header">
+      <span class="cc-code">${c.code||c.id}</span>
+      <span class="cc-term">${c.term}</span>
+    </div>
+    ${preview ? `<div class="card-desc">${preview}</div>` : ''}
+    <div class="card-footer">
+      <span class="cc-family">${shortFamily(c.family)}</span>
+      ${refBadge}
+      <span class="cc-page">s.${c.p1||'—'}</span>
+    </div>
   </div>`;
 }
 
@@ -167,11 +186,20 @@ function kavramDetay(app, id) {
   const siblings = DATA.concepts.filter(s => s.family === c.family && s.id !== c.id).slice(0,12);
   const fc = getFamilyClass(c.family);
 
-  // Group refs by type
-  const refsByType = groupBy(refs, 'type');
+  const sbRefs   = refs.filter(r => r.type === 'süreç_bileşeni');
+  const eylemRefs= refs.filter(r => r.type === 'eylem');
+  const gRefs    = refs.filter(r => r.type === 'gösterge');
+  const otherRefs= refs.filter(r => !['süreç_bileşeni','eylem','gösterge'].includes(r.type));
 
-  // Mini quiz
-  const quizHTML = buildMiniQuiz(c);
+  // Build description: use desc, or synthesize from refs
+  const descHTML = c.desc
+    ? `<div class="detail-desc">${c.desc}</div>`
+    : (sbRefs.length > 0
+        ? `<div class="detail-desc">Bu kavram; <strong>${sbRefs.map(r=>r.text.replace(/\.$/, '')).join(', ')}</strong> süreçlerini kapsar.</div>`
+        : '');
+
+  // Collect child concepts (sub-items defined as concepts)
+  const childConcepts = DATA.concepts.filter(ch => ch.parent === c.term || ch.parent === c.code);
 
   app.innerHTML = `
     <div class="breadcrumb">
@@ -179,41 +207,67 @@ function kavramDetay(app, id) {
       <a href="#/kavramlar">Kavramlar</a><span class="bc-sep">›</span>
       <span>${c.term}</span>
     </div>
+
     <div class="detail-header ${fc}">
-      <div style="display:flex;gap:.5rem;flex-wrap:wrap;align-items:center">
+      <div class="detail-badges">
         <span class="detail-badge cc-family">${shortFamily(c.family)}</span>
-        ${c.sub ? `<span class="detail-badge" style="background:var(--surface-alt)">${c.sub}</span>` : ''}
-        ${c.code ? `<span class="detail-badge" style="background:var(--surface-alt);font-family:var(--mono)">${c.code}</span>` : ''}
+        ${c.sub ? `<span class="detail-badge badge-sub">${c.sub}</span>` : ''}
+        ${c.code ? `<span class="detail-badge badge-code">${c.code}</span>` : ''}
+        <span class="detail-badge badge-page">📄 s.${c.p1}${c.p2 && c.p2!==c.p1 ? '–'+c.p2 : ''}</span>
       </div>
       <h1 class="detail-title">${c.term}</h1>
-      <div class="detail-meta">
-        <span>📄 Sayfa: ${c.p1}${c.p2 && c.p2!==c.p1 ? '–'+c.p2 : ''}</span>
-        <span>📂 ${c.family}</span>
-        ${c.parent ? `<span>⬆️ ${c.parent}</span>` : ''}
-      </div>
-      ${c.desc ? `<div class="detail-desc">${c.desc}</div>` : ''}
+      ${c.parent ? `<div class="detail-parent">⬆️ <a href="#/kavram/${encodeURIComponent(c.parent)}">${c.parent}</a> kapsamında</div>` : ''}
+      ${descHTML}
     </div>
 
-    ${refs.length > 0 ? `
-    <div class="detail-section">
-      <h3>📋 Kodlu Referanslar (${refs.length})</h3>
-      ${Object.entries(refsByType).map(([type, items]) => `
-        <h4 style="font-size:.85rem;color:var(--text-secondary);margin:.75rem 0 .4rem;text-transform:capitalize">${typeLabel(type)} (${items.length})</h4>
-        <ul class="ref-list">
-          ${items.map(r => `<li class="ref-item">
-            <span class="ref-code">${r.code}</span>
-            <span class="ref-type ${typeClass(r.type)}">${typeLabel(r.type)}</span>
-            <span>${r.text}</span>
-          </li>`).join('')}
-        </ul>
-      `).join('')}
+    ${sbRefs.length > 0 ? `
+    <div class="detail-section edu-section edu-sb">
+      <div class="edu-header"><span class="edu-icon">🔢</span><div><h3>Süreç Adımları</h3><p class="edu-sub">Bu kavram şu aşamalardan oluşur:</p></div></div>
+      <ol class="edu-list">
+        ${sbRefs.map((r,i) => `<li><span class="step-num">${i+1}</span><span>${r.text}</span></li>`).join('')}
+      </ol>
     </div>` : ''}
 
-    ${quizHTML}
+    ${gRefs.length > 0 ? `
+    <div class="detail-section edu-section edu-gosterge">
+      <div class="edu-header"><span class="edu-icon">👁️</span><div><h3>Gözlemlenebilir Davranışlar</h3><p class="edu-sub">Bu kavrama sahip bireyden şunlar beklenir:</p></div></div>
+      <ul class="edu-list">
+        ${gRefs.map(r => `<li><span class="check-icon">✓</span><span>${r.text}</span></li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${eylemRefs.length > 0 ? `
+    <div class="detail-section edu-section edu-eylem">
+      <div class="edu-header"><span class="edu-icon">⚡</span><div><h3>Somut Eylemler</h3><p class="edu-sub">Öğrenci bu değeri/beceriyi yaşatmak için şunları yapar:</p></div></div>
+      <ul class="edu-list">
+        ${eylemRefs.map(r => `<li><span class="arrow-icon">→</span><span>${r.text}</span></li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${otherRefs.length > 0 ? `
+    <div class="detail-section">
+      <h3>📋 Diğer Referanslar</h3>
+      <ul class="ref-list">
+        ${otherRefs.map(r => `<li class="ref-item">
+          <span class="ref-code">${r.code}</span>
+          <span>${r.text}</span>
+        </li>`).join('')}
+      </ul>
+    </div>` : ''}
+
+    ${childConcepts.length > 0 ? `
+    <div class="detail-section">
+      <h3>📌 Alt Kavramlar</h3>
+      <div class="related-grid">
+        ${childConcepts.map(ch => `<a href="#/kavram/${ch.id}" class="related-chip">${ch.term}</a>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${buildMiniQuiz(c)}
 
     ${siblings.length > 0 ? `
     <div class="detail-section">
-      <h3>🔗 İlgili Kavramlar</h3>
+      <h3>🔗 Aynı Aileden Diğer Kavramlar</h3>
       <div class="related-grid">
         ${siblings.map(s => `<a href="#/kavram/${s.id}" class="related-chip">${s.term}</a>`).join('')}
       </div>

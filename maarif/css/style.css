@@ -315,6 +315,38 @@ body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:
 .xp-bar .xp-progress{flex:1}
 .xp-bar .xp-text{font-size:.75rem;color:var(--text-secondary)}
 
+/* ===== CONCEPT CARD IMPROVEMENTS ===== */
+.concept-card .cc-term{font-weight:700;flex:1}
+.concept-card .card-header{display:flex;align-items:flex-start;gap:.5rem}
+.concept-card .cc-refs{font-size:.72rem;background:#e0e7ff;color:#3730a3;padding:.15rem .4rem;border-radius:99px;font-weight:600}
+.concept-card .cc-page{color:var(--text-secondary);font-size:.8rem}
+
+/* ===== EDUCATIONAL SECTIONS ===== */
+.edu-section{border-left:4px solid var(--border)}
+.edu-sb{border-color:var(--c-beceri)}
+.edu-gosterge{border-color:var(--c-sdb)}
+.edu-eylem{border-color:var(--c-deger)}
+
+.edu-header{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:1rem}
+.edu-icon{font-size:1.6rem;flex-shrink:0;margin-top:.1rem}
+.edu-header h3{font-size:1rem;font-weight:700;margin-bottom:.15rem}
+.edu-sub{font-size:.82rem;color:var(--text-secondary);margin:0}
+
+.edu-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.edu-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;line-height:1.5;background:var(--surface-alt);padding:.6rem .75rem;border-radius:var(--radius-sm)}
+.step-num{width:1.4rem;height:1.4rem;border-radius:50%;background:var(--c-beceri);color:#fff;font-size:.72rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.check-icon{color:var(--c-sdb);font-weight:800;flex-shrink:0;margin-top:.05rem}
+.arrow-icon{color:var(--c-deger);font-weight:800;flex-shrink:0;margin-top:.05rem}
+
+/* Detail header improvements */
+.detail-badges{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-bottom:.5rem}
+.badge-sub{background:var(--surface-alt);color:var(--text-secondary)}
+.badge-code{background:var(--surface-alt);color:var(--text);font-family:var(--mono);font-size:.75rem}
+.badge-page{background:var(--surface-alt);color:var(--text-secondary)}
+.detail-parent{font-size:.85rem;color:var(--text-secondary);margin-bottom:.5rem}
+.detail-parent a{color:var(--primary-light);text-decoration:none}
+.detail-parent a:hover{text-decoration:underline}
+
 /* ===== UTILITY ===== */
 .text-center{text-align:center}
 .mt-1{margin-top:.5rem}.mt-2{margin-top:1rem}.mt-3{margin-top:1.5rem}.mt-4{margin-top:2rem}
