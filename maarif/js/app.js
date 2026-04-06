@@ -71,6 +71,7 @@
     const route = '/' + (parts[0] || '');
     APP.innerHTML = '';
     APP.className = 'fade-in';
+    window.scrollTo(0, 0);
 
     // Update active nav
     document.querySelectorAll('.nav-links a').forEach(a => {

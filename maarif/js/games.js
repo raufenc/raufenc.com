@@ -114,30 +114,48 @@ function game02(app) {
     const same = pick(samePool, 3);
     const diff = pick(diffPool, 1)[0];
     const options = shuffle([...same, diff]);
+    const famLabel = shortFam(mainFam);
+
+    function optCard(o) {
+      const isDiff = o.id === diff.id;
+      const previewText = o.desc ? o.desc.slice(0, 90) + (o.desc.length > 90 ? '…' : '') : '';
+      const fc = getFamilyClass(o.family);
+      return `<button class="option-btn g2-card" data-id="${o.id}" data-diff="${isDiff}">
+        <div class="g2-term">${o.term}</div>
+        ${previewText ? `<div class="g2-hint">${previewText}</div>` : ''}
+        <div class="g2-code">${o.code || ''}</div>
+      </button>`;
+    }
 
     app.innerHTML = `
       ${hud([{val:(q+1)+'/'+total,label:'Soru'},{val:score,label:'Puan'}])}
       <div class="game-area">
-        <p class="game-question">Hangisi bu gruba ait değil?</p>
-        <div class="options-grid" id="g2opts">
-          ${options.map(o => `<button class="option-btn" data-id="${o.id}" data-diff="${o.id===diff.id}">${o.term}<br><small style="color:var(--text-light)">${o.code||''}</small></button>`).join('')}
+        <div class="g2-header">
+          <div class="g2-family-label">📂 Grup: <strong>${famLabel}</strong></div>
+          <p class="game-question">Bu gruba ait OLMAYAN hangisi?</p>
+        </div>
+        <div class="options-grid g2-grid" id="g2opts">
+          ${options.map(o => optCard(o)).join('')}
         </div>
         <div id="g2fb" class="mt-1 text-center"></div>
       </div>`;
 
     let answered = false;
-    app.querySelectorAll('#g2opts .option-btn').forEach(btn => {
+    app.querySelectorAll('#g2opts .g2-card').forEach(btn => {
       btn.addEventListener('click', () => {
         if (answered) return;
         answered = true;
         const correct = btn.dataset.diff === 'true';
-        if (correct) { score++; btn.classList.add('correct'); }
-        else { btn.classList.add('wrong'); }
-        app.querySelectorAll('#g2opts .option-btn').forEach(b => {
+        if (correct) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
+        app.querySelectorAll('#g2opts .g2-card').forEach(b => {
           b.classList.add('disabled');
-          if (b.dataset.diff==='true') b.classList.add('correct');
+          if (b.dataset.diff === 'true') b.classList.add('correct');
         });
-        document.getElementById('g2fb').innerHTML = `<p>${correct?'✅ Doğru!':'❌ Yanlış!'} ${diff.term} → ${window.H ? window.Pages ? shortFam(diff.family) : diff.family : diff.family}</p>
+        document.getElementById('g2fb').innerHTML = `
+          <div class="g2-explain">
+            <span>${correct ? '✅ Doğru!' : '❌ Yanlış!'}</span>
+            <strong>${diff.term}</strong>, <em>${shortFam(diff.family)}</em> ailesine ait — bu gruptaki diğerleri <em>${famLabel}</em> ailesinden.
+          </div>
           <button class="btn btn-primary btn-sm mt-1" onclick="window._g2next()">Sonraki →</button>`;
       });
     });
@@ -329,7 +347,9 @@ function game06(app) {
         const ok = btn.dataset.correct === 'true';
         if (ok) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
         app.querySelectorAll('#g6opts .option-btn').forEach(b => { b.classList.add('disabled'); if(b.dataset.correct==='true') b.classList.add('correct'); });
-        document.getElementById('g6fb').innerHTML = `<p>Doğru cevap: <strong>${correct.term}</strong></p><button class="btn btn-primary btn-sm mt-1" onclick="window._g6next()">Sonraki →</button>`;
+        document.getElementById('g6fb').innerHTML = `
+          <div class="g2-explain">${ok?'✅':'❌'} Doğru cevap: <strong>${correct.term}</strong>${correct.desc ? ` — ${correct.desc.slice(0,100)}` : ''}</div>
+          <button class="btn btn-primary btn-sm mt-1" onclick="window._g6next()">Sonraki →</button>`;
       });
     });
     window._g6next = () => { q++; nextQ(); };
@@ -371,7 +391,9 @@ function game07(app) {
         if (ok) { score++; btn.classList.add('correct'); } else { btn.classList.add('wrong'); }
         app.querySelectorAll('#g7opts .option-btn').forEach(b => { b.classList.add('disabled'); if(b.dataset.correct==='true') b.classList.add('correct'); });
         Store.updateMastery(concept.id, ok);
-        document.getElementById('g7fb').innerHTML = `<button class="btn btn-primary btn-sm mt-1" onclick="window._g7next()">Sonraki →</button>`;
+        document.getElementById('g7fb').innerHTML = `
+          <div class="g2-explain">${ok?'✅ Doğru!':'❌ Yanlış!'} Tam tanım: <em>"${concept.desc}"</em></div>
+          <button class="btn btn-primary btn-sm mt-1" onclick="window._g7next()">Sonraki →</button>`;
       });
     });
     window._g7next = () => { q++; nextQ(); };

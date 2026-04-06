@@ -195,7 +195,7 @@ function kavramDetay(app, id) {
   const descHTML = c.desc
     ? `<div class="detail-desc">${c.desc}</div>`
     : (sbRefs.length > 0
-        ? `<div class="detail-desc">Bu kavram; <strong>${sbRefs.map(r=>r.text.replace(/\.$/, '')).join(', ')}</strong> süreçlerini kapsar.</div>`
+        ? `<div class="detail-desc">Bu kavram; <strong>${sbRefs.slice(0,3).map(r=>r.text.replace(/\.$/, '').slice(0,60)).join(', ')}</strong> süreçlerini kapsar.</div>`
         : '');
 
   // Collect child concepts (sub-items defined as concepts)
@@ -216,7 +216,7 @@ function kavramDetay(app, id) {
         <span class="detail-badge badge-page">📄 s.${c.p1}${c.p2 && c.p2!==c.p1 ? '–'+c.p2 : ''}</span>
       </div>
       <h1 class="detail-title">${c.term}</h1>
-      ${c.parent ? `<div class="detail-parent">⬆️ <a href="#/kavram/${encodeURIComponent(c.parent)}">${c.parent}</a> kapsamında</div>` : ''}
+      ${c.parent ? (function(){ const pc = DATA.concepts.find(x=>x.term===c.parent||x.code===c.parent||x.id===c.parent); return `<div class="detail-parent">⬆️ ${pc ? `<a href="#/kavram/${pc.id}">${c.parent}</a>` : `<span>${c.parent}</span>`} kapsamında</div>`; })() : ''}
       ${descHTML}
     </div>
 
