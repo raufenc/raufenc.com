@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maarif Modeli - Türkiye Yüzyılı Eğitim Platformu</title>
+<meta name="description" content="Türkiye Yüzyılı Maarif Modeli interaktif öğrenme platformu. 269 kavram, 10 oyun, quizler ve öğrenme yolları.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#/" class="nav-brand">
+      <span class="brand-icon">📚</span>
+      <span class="brand-text">Maarif Modeli</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#/kavramlar">Kavramlar</a>
+      <a href="#/beceriler">Beceriler</a>
+      <a href="#/degerler">Değerler</a>
+      <a href="#/ogrenci-profili">Öğrenci Profili</a>
+      <a href="#/okuryazarlik">Okuryazarlık</a>
+      <a href="#/oyunlar">Oyunlar</a>
+      <a href="#/arama">🔍</a>
+      <a href="#/profil" class="nav-profile">👤</a>
+    </div>
+  </div>
+</nav>
+<main id="app"></main>
+<footer id="footer">
+  <div class="footer-inner">
+    <p>Türkiye Yüzyılı Maarif Modeli Öğrenme Platformu</p>
+    <p class="footer-sub">269 Kavram &bull; 10 Oyun &bull; 20 Değer &bull; 9 Okuryazarlık</p>
+  </div>
+</footer>
+<div id="toast" class="toast hidden"></div>
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/search.js"></script>
+<script src="js/games.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
