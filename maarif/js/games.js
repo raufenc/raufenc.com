@@ -1,6 +1,18 @@
 /* games.js - 10 Oyun Motoru */
 (function(){
-const { getFamilyClass, findConcept, getRefsForConcept, shortFamily } = window.H || {};
+function getFamilyClass(f) { return window.H ? window.H.getFamilyClass(f) : ''; }
+function findConcept(id) { return window.H ? window.H.findConcept(id) : null; }
+function getRefsForConcept(c) { return window.H ? window.H.getRefsForConcept(c) : []; }
+function shortFam(f) {
+  if (!f) return '';
+  if (f.includes('Erdem')) return 'Değerler';
+  if (f.includes('Kavramsal')) return 'Kavramsal';
+  if (f.includes('Eğilim')) return 'Eğilimler';
+  if (f.includes('Sosyal')) return 'SDB';
+  if (f.includes('Okuryazarlık')) return 'Okuryazarlık';
+  if (f.includes('Profil')) return 'Profil';
+  return f.slice(0, 20);
+}
 
 function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 function pick(arr, n) { return shuffle(arr).slice(0, n); }

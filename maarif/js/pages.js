@@ -1,6 +1,12 @@
 /* pages.js - Tum sayfa renderer'lari */
 (function(){
-const { getFamilyClass, slugify, findConcept, getRefsForConcept, groupBy, getConceptsByFamily, getAllFamilies } = window.H;
+function getFamilyClass(f) { return window.H.getFamilyClass(f); }
+function slugify(s) { return window.H.slugify(s); }
+function findConcept(id) { return window.H.findConcept(id); }
+function getRefsForConcept(c) { return window.H.getRefsForConcept(c); }
+function groupBy(arr, key) { return window.H.groupBy(arr, key); }
+function getConceptsByFamily(f) { return window.H.getConceptsByFamily(f); }
+function getAllFamilies() { return window.H.getAllFamilies(); }
 
 function el(tag, cls, html) {
   const e = document.createElement(tag);
