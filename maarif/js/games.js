@@ -175,7 +175,7 @@ function shortFam(f) {
 
 // ===== GAME03: Fark Tahtasi =====
 function game03(app) {
-  const withDesc = DATA.concepts.filter(c => c.desc && c.desc.length > 30);
+  const withDesc = DATA.concepts.filter(c => c.desc && c.desc.length > 20 && c.desc.length < 300 && !c.desc.includes(' • '));
   let score = 0, q = 0, total = 5;
 
   function nextQ() {
@@ -315,7 +315,15 @@ function game05(app) {
 // ===== GAME06: Mini Vaka =====
 function game06(app) {
   const values = DATA.concepts.filter(c => c.family === 'Erdem-Değer-Eylem' && c.sub === 'Değer' && c.desc);
-  const refs = DATA.references.filter(r => r.type === 'eylem' && r.text.length > 30);
+  // Kirli refler: bullet içeren veya 200+ karakter olanlar veri sorunu, filtrele
+  const refs = DATA.references.filter(r =>
+    r.type === 'eylem' &&
+    r.text.length > 15 &&
+    r.text.length < 180 &&
+    !r.text.includes(' • ') &&
+    !r.text.includes('öğrenme •') &&
+    !r.text.includes('Değer telkini')
+  );
   let score = 0, q = 0, total = 8;
 
   function nextQ() {
@@ -359,7 +367,7 @@ function game06(app) {
 
 // ===== GAME07: Bosluk Doldur =====
 function game07(app) {
-  const withDesc = DATA.concepts.filter(c => c.desc && c.desc.split(' ').length >= 5);
+  const withDesc = DATA.concepts.filter(c => c.desc && c.desc.split(' ').length >= 5 && c.desc.length < 300 && !c.desc.includes(' • '));
   let score = 0, q = 0, total = 10;
 
   function nextQ() {
