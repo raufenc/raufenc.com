@@ -1008,8 +1008,10 @@ const Rehber = {
       }
       if (info) info.textContent = `${currentPage} / ${totalPages}`;
       if (input) input.value = currentPage;
-      document.getElementById('pgPrev').disabled = currentPage <= 1;
-      document.getElementById('pgNext').disabled = currentPage >= totalPages;
+      const prevBtn = document.getElementById('pgPrev');
+      const nextBtn = document.getElementById('pgNext');
+      if (prevBtn) prevBtn.disabled = currentPage <= 1;
+      if (nextBtn) nextBtn.disabled = currentPage >= totalPages;
       const hashBase = type === 'ortak_metin' ? '#/rehber/ortak-metin' : `#/rehber/${dersKey}/${type}`;
       history.replaceState(null, '', hashBase + '/' + currentPage);
     };
@@ -1051,12 +1053,14 @@ const Rehber = {
       if (e.key === 'ArrowRight') updatePage(currentPage + 1);
     };
     document.addEventListener('keydown', keyHandler);
-    const cleanup = setInterval(() => {
+    // Temizlik: hashchange ile sayfa değiştiğinde listener'ı kaldır
+    const onNav = () => {
       if (!document.getElementById('pageImg')) {
         document.removeEventListener('keydown', keyHandler);
-        clearInterval(cleanup);
+        window.removeEventListener('hashchange', onNav);
       }
-    }, 1000);
+    };
+    window.addEventListener('hashchange', onNav);
 
     // Swipe desteği (mobil)
     let touchStartX = 0;

@@ -244,25 +244,30 @@ function game03(app) {
           if (correct) {
             roundScore++;
             selectedCard.classList.add('placed', 'placed-ok');
+            const termText = selectedCard.querySelector('.tc-term')?.textContent || '';
             const key = assignedFam.replace(/\s/g,'_');
-            document.getElementById('tbcards-'+key).insertAdjacentHTML('beforeend',
-              `<div class="tb-chip">${selectedCard.querySelector('.tc-term').textContent}</div>`);
+            const bucket = document.getElementById('tbcards-'+key);
+            if (bucket) bucket.insertAdjacentHTML('beforeend',
+              `<div class="tb-chip">${termText}</div>`);
           } else {
             selectedCard.classList.add('placed', 'placed-err');
             const correctLabel = shortFam(selectedCard.dataset.fam);
+            const termText = selectedCard.querySelector('.tc-term')?.textContent || '';
             const msg = document.getElementById('g3msg');
-            msg.textContent = `❌ "${selectedCard.querySelector('.tc-term').textContent}" → ${correctLabel} ailesine ait`;
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 2500);
+            if (msg) {
+              msg.textContent = `❌ "${termText}" → ${correctLabel} ailesine ait`;
+              msg.classList.remove('hidden');
+              setTimeout(() => msg.classList.add('hidden'), 2500);
+            }
             // Still place it to correct bucket visually
             const correctKey = selectedCard.dataset.fam.replace(/\s/g,'_');
             const correctBucket = document.getElementById('tbcards-'+correctKey);
             if (correctBucket) correctBucket.insertAdjacentHTML('beforeend',
-              `<div class="tb-chip tb-chip-err">${selectedCard.querySelector('.tc-term').textContent}</div>`);
+              `<div class="tb-chip tb-chip-err">${termText}</div>`);
           }
           remaining--;
           selectedCard = null;
-          document.getElementById('g3msg'); // trigger repaint
+          void document.getElementById('g3msg')?.offsetHeight; // trigger repaint
           if (remaining === 0) {
             setTimeout(() => {
               totalScore += roundScore;
