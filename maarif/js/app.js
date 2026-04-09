@@ -135,12 +135,12 @@
         <span style="font-size:2.5rem">📖</span>
         <div style="flex:1">
           <div style="font-size:1.2rem;font-weight:700">Program Rehberim</div>
-          <div style="font-size:.85rem;opacity:.9;margin-top:.2rem">Ogretmen El Kitabi — Haftalik plan, ders akisi, materyaller ve olcme araclari</div>
+          <div style="font-size:.85rem;opacity:.9;margin-top:.2rem">Öğretmen El Kitabı — Haftalık plan, ders akışı, materyaller ve ölçme araçları</div>
         </div>
         <span style="font-size:1.5rem;opacity:.6">&rarr;</span>
       </div>
       <div style="padding:.6rem 1.5rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.8rem;color:var(--text-secondary);background:var(--surface)">
-        <span>📅 Haftalik Plan</span><span>📋 Ders Akisi</span><span>📦 Materyaller</span><span>🛠️ Teknikler</span><span>📊 Olcme</span>
+        <span>📅 Haftalık Plan</span><span>📋 Ders Akışı</span><span>📦 Materyaller</span><span>🛠️ Teknikler</span><span>📊 Ölçme</span>
       </div>`;
     statsRow.after(card);
   }
