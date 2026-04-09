@@ -175,6 +175,99 @@ const Rehber = {
     return d ? (d.kitap?.materyaller || []) : [];
   },
 
+  getTeknikKutuphanesi(dersKey) {
+    const d = this.getCourseData(dersKey);
+    return d && d.eslestirme ? (d.eslestirme.teknikler_kutuphanesi || []) : [];
+  },
+
+  // Teknik bul — isme gore, tum derslerde ara
+  findTeknik(ad) {
+    const adLow = ad.toLowerCase();
+    for (const [key, d] of Object.entries(this.data)) {
+      const lib = d.eslestirme?.teknikler_kutuphanesi || [];
+      const found = lib.find(t => t.ad.toLowerCase() === adLow || t.ad.toLowerCase().includes(adLow) || adLow.includes(t.ad.toLowerCase()));
+      if (found) return { teknik: found, dersKey: key };
+    }
+    return null;
+  },
+
+  // Teknik modalini goster
+  showTeknikModal(ad, context) {
+    const result = this.findTeknik(ad);
+    if (!result) return;
+    const t = result.teknik;
+    const dersKey = result.dersKey;
+
+    // Konuya ozel ornek olustur
+    let ornekHtml = '';
+    if (context) {
+      ornekHtml = `<div style="background:var(--accent-light);border-radius:var(--radius-sm);padding:.75rem;margin-top:.75rem">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">💡 Bu Dersteki Uygulamasi</div>
+        ${context.nerede ? `<div style="font-size:.82rem;margin-bottom:.3rem"><strong>Ne zaman:</strong> ${context.nerede}</div>` : ''}
+        ${context.konu ? `<div style="font-size:.82rem"><strong>Konu:</strong> ${context.konu}</div>` : ''}
+      </div>`;
+    }
+
+    // Kullanildigi ciktilar
+    let kullanimHtml = '';
+    if (t.kullanildigi_ciktilar && t.kullanildigi_ciktilar.length) {
+      kullanimHtml = `<div style="margin-top:.75rem">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">📍 Kullanildigi Ciktilar</div>
+        <div style="display:flex;flex-wrap:wrap;gap:.3rem">${t.kullanildigi_ciktilar.map(k => {
+          const parts = k.split('.');
+          const uniteNo = parts.length >= 3 ? parts[2] : '1';
+          return `<a href="#/rehber/${dersKey}/unite/${uniteNo}/cikti/${k}" onclick="Rehber._closeTeknikModal()" style="font-size:.72rem;padding:.2rem .5rem;background:var(--primary-light);color:#fff;border-radius:3px;text-decoration:none">${k}</a>`;
+        }).join('')}</div>
+      </div>`;
+    }
+
+    // Nasil uygulanir adimlari
+    let adimlarHtml = '';
+    if (t.nasil_uygulanir) {
+      const lines = t.nasil_uygulanir.split(/\d+[\.\)]\s*/).filter(Boolean);
+      adimlarHtml = `<div style="margin-top:.75rem">
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">📋 Nasil Uygulanir?</div>
+        <ol style="margin:0;padding-left:1.25rem;font-size:.85rem;line-height:1.7">
+          ${lines.map(l => `<li style="margin-bottom:.3rem">${l.trim()}</li>`).join('')}
+        </ol>
+      </div>`;
+    }
+
+    const modal = document.createElement('div');
+    modal.id = 'rehber-teknik-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:999;display:flex;align-items:flex-end;justify-content:center';
+    modal.innerHTML = `
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)" onclick="Rehber._closeTeknikModal()"></div>
+      <div style="position:relative;background:var(--surface);border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:85vh;overflow-y:auto;width:100%;max-width:600px;box-shadow:0 -4px 30px rgba(0,0,0,.2);animation:fadeIn .25s">
+        <div style="position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;z-index:1">
+          <div style="font-size:1.1rem;font-weight:700">🛠️ ${t.ad}</div>
+          <button onclick="Rehber._closeTeknikModal()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text-secondary)">&times;</button>
+        </div>
+        <div style="padding:1.25rem">
+          <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
+            ${t.sure_tahmini ? `<span style="font-size:.78rem;padding:.2rem .5rem;background:var(--surface-alt);border-radius:3px">⏱ ${t.sure_tahmini}</span>` : ''}
+            ${t.gerekli_materyal ? `<span style="font-size:.78rem;padding:.2rem .5rem;background:var(--surface-alt);border-radius:3px">📦 ${t.gerekli_materyal}</span>` : ''}
+          </div>
+          <div style="font-size:.9rem;line-height:1.6;margin-bottom:.75rem">${t.aciklama || ''}</div>
+          ${adimlarHtml}
+          ${t.uygun_oldugu_durumlar ? `<div style="margin-top:.75rem">
+            <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">🎯 Uygun Durumlar</div>
+            <div style="font-size:.85rem;color:var(--text-secondary)">${t.uygun_oldugu_durumlar}</div>
+          </div>` : ''}
+          ${ornekHtml}
+          ${kullanimHtml}
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+  },
+
+  _closeTeknikModal() {
+    const m = document.getElementById('rehber-teknik-modal');
+    if (m) m.remove();
+    document.body.style.overflow = '';
+  },
+
   getCiktiKitap(dersKey) {
     const d = this.getCourseData(dersKey);
     return d && d.eslestirme ? d.eslestirme.cikti_kitap : [];
@@ -399,9 +492,10 @@ const Rehber = {
     }).join('');
 
     // Techniques
-    const techHtml = (w.onerilen_teknikler || []).map(t =>
-      `<span class="btn btn-sm btn-outline" style="cursor:default">${t}</span>`
-    ).join(' ');
+    const techHtml = (w.onerilen_teknikler || []).map(t => {
+      const escaped = t.replace(/'/g, "\\'");
+      return `<button class="btn btn-sm btn-outline" style="cursor:pointer" onclick="event.preventDefault();Rehber.showTeknikModal('${escaped}',{konu:'${w.konu_ozeti.replace(/'/g, "\\'").substring(0,80)}'})">🛠️ ${t}</button>`;
+    }).join(' ');
 
     // Materials checklist from hazirlik_notu
     const hazirlik = w.hazirlik_notu || '';
@@ -520,12 +614,21 @@ const Rehber = {
     ).join('');
 
     // Techniques with nerede
-    const techCards = (uyg.kullanilan_teknikler || []).map(t =>
-      `<div class="card" style="padding:.75rem;border-left:3px solid var(--accent)">
-        <div style="font-weight:600;font-size:.9rem">🛠️ ${t.ad}</div>
+    const techCards = (uyg.kullanilan_teknikler || []).map(t => {
+      const escaped = t.ad.replace(/'/g, "\\'");
+      const neredeEsc = (t.nerede || '').replace(/'/g, "\\'");
+      const found = this.findTeknik(t.ad);
+      const teknikData = found?.teknik;
+      return `<div class="card" style="padding:.75rem;border-left:3px solid var(--accent);cursor:pointer" onclick="Rehber.showTeknikModal('${escaped}',{nerede:'${neredeEsc}',konu:'${(cikti.baslik||'').replace(/'/g, "\\'").substring(0,80)}'})">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-weight:600;font-size:.9rem">🛠️ ${t.ad}</div>
+          ${teknikData?.sure_tahmini ? `<span style="font-size:.75rem;color:var(--text-secondary)">⏱ ${teknikData.sure_tahmini}</span>` : ''}
+        </div>
         ${t.nerede ? `<div style="font-size:.82rem;color:var(--warning);margin-top:.25rem">📍 Nerede: ${t.nerede}</div>` : ''}
-      </div>`
-    ).join('');
+        ${teknikData?.aciklama ? `<div style="font-size:.8rem;color:var(--text-secondary);margin-top:.3rem;line-height:1.4">${teknikData.aciklama.substring(0,120)}${teknikData.aciklama.length > 120 ? '...' : ''}</div>` : ''}
+        <div style="font-size:.75rem;color:var(--primary);margin-top:.3rem">Detayli bilgi icin tiklayin →</div>
+      </div>`;
+    }).join('');
 
     // Iliskilendirilen kodlar
     const iliskiBadges = (uyg.iliskilendirilen_kodlar || []).map(kod => this.yetkinlikBadge(kod)).join(' ');
@@ -801,21 +904,40 @@ const Rehber = {
 
     let currentOpen = null;
 
+    // Teknik kutuphanesinden detaylari al
+    const teknikLib = this.getTeknikKutuphanesi(dersKey);
+
     const techCards = techs.map((t, i) => {
+      const libEntry = teknikLib.find(tk => tk.ad.toLowerCase() === t.ad.toLowerCase());
       const usages = t.kullanim.map(k =>
         `<div style="display:flex;align-items:flex-start;gap:.5rem;font-size:.82rem;padding:.4rem 0;border-bottom:1px solid var(--border)">
           <a href="#/rehber/${dersKey}/unite/${k.unite_no}/cikti/${k.cikti_kodu}" style="font-family:var(--mono);font-size:.72rem;color:var(--primary);white-space:nowrap">${k.cikti_kodu}</a>
           <span style="color:var(--text-secondary)">${k.nerede ? '📍 ' + k.nerede : k.unite_adi}</span>
         </div>`
       ).join('');
+      // Nasil uygulanir adimlari
+      let adimlarHtml = '';
+      if (libEntry?.nasil_uygulanir) {
+        const lines = libEntry.nasil_uygulanir.split(/\d+[\.\)]\s*/).filter(Boolean);
+        adimlarHtml = `<div style="margin-top:.5rem"><strong style="font-size:.82rem">📋 Nasil Uygulanir:</strong>
+          <ol style="margin:.3rem 0 0;padding-left:1.1rem;font-size:.82rem;line-height:1.6">${lines.map(l => `<li>${l.trim()}</li>`).join('')}</ol></div>`;
+      }
       return `<div class="card" style="padding:.75rem">
         <div data-tech-toggle="${i}" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between">
           <div><span style="font-size:1.1rem;margin-right:.4rem">🛠️</span><strong>${t.ad}</strong>
             <span style="font-size:.75rem;background:var(--surface-alt);padding:.15rem .4rem;border-radius:99px;margin-left:.4rem">${t.kullanim.length}x</span>
+            ${libEntry?.sure_tahmini ? `<span style="font-size:.72rem;color:var(--text-secondary);margin-left:.3rem">⏱ ${libEntry.sure_tahmini}</span>` : ''}
           </div>
           <span class="tech-arrow" style="font-size:.8rem;color:var(--text-secondary)">▸</span>
         </div>
-        <div data-tech-body="${i}" style="display:none;margin-top:.75rem">${usages}</div>
+        ${libEntry?.aciklama ? `<div style="font-size:.82rem;color:var(--text-secondary);margin-top:.4rem;line-height:1.5">${libEntry.aciklama}</div>` : ''}
+        <div data-tech-body="${i}" style="display:none;margin-top:.75rem">
+          ${adimlarHtml}
+          ${libEntry?.uygun_oldugu_durumlar ? `<div style="margin-top:.5rem;font-size:.82rem"><strong>🎯 Uygun Durumlar:</strong> ${libEntry.uygun_oldugu_durumlar}</div>` : ''}
+          ${libEntry?.gerekli_materyal ? `<div style="margin-top:.3rem;font-size:.82rem"><strong>📦 Materyal:</strong> ${libEntry.gerekli_materyal}</div>` : ''}
+          <div style="margin-top:.5rem"><strong style="font-size:.82rem">📍 Kullanildigi Yerler:</strong></div>
+          ${usages}
+        </div>
       </div>`;
     }).join('');
 

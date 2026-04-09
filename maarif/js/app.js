@@ -85,7 +85,7 @@
 
     try {
       switch(route) {
-        case '/': Pages.home(APP); break;
+        case '/': Pages.home(APP); injectRehberCard(APP); break;
         case '/kavramlar': Pages.kavramlar(APP); break;
         case '/kavram': Pages.kavramDetay(APP, parts[1]); break;
         case '/beceriler': Pages.beceriler(APP); break;
@@ -121,6 +121,29 @@
   // First render
   if (!location.hash) location.hash = '#/';
   render();
+
+  function injectRehberCard(app) {
+    const statsRow = app.querySelector('.stats-row');
+    if (!statsRow) return;
+    const card = document.createElement('a');
+    card.href = '#/rehber';
+    card.style.cssText = 'display:block;margin:1.5rem 0;overflow:hidden;text-decoration:none;color:inherit;border:2px solid var(--primary);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:transform .2s,box-shadow .2s';
+    card.onmouseenter = () => { card.style.transform='translateY(-3px)'; card.style.boxShadow='0 8px 30px rgba(30,64,175,.25)'; };
+    card.onmouseleave = () => { card.style.transform=''; card.style.boxShadow='var(--shadow-lg)'; };
+    card.innerHTML = `
+      <div style="background:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#0891b2 100%);color:#fff;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem">
+        <span style="font-size:2.5rem">📖</span>
+        <div style="flex:1">
+          <div style="font-size:1.2rem;font-weight:700">Program Rehberim</div>
+          <div style="font-size:.85rem;opacity:.9;margin-top:.2rem">Ogretmen El Kitabi — Haftalik plan, ders akisi, materyaller ve olcme araclari</div>
+        </div>
+        <span style="font-size:1.5rem;opacity:.6">&rarr;</span>
+      </div>
+      <div style="padding:.6rem 1.5rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.8rem;color:var(--text-secondary);background:var(--surface)">
+        <span>📅 Haftalik Plan</span><span>📋 Ders Akisi</span><span>📦 Materyaller</span><span>🛠️ Teknikler</span><span>📊 Olcme</span>
+      </div>`;
+    statsRow.after(card);
+  }
 
   window.navigate = navigate;
 })();
