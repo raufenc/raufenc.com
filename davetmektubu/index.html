@@ -3169,14 +3169,15 @@ function updateSEO(){
 
 // readMode artık temaToggle içinde localStorage'a kaydediliyor
 
-// Deep link'ten başla
-readHash();
-applyTheme();
-render();
-
 // Her render sonrası scroll reveal + SEO
 const origRender=render;
 render=function(){origRender();setTimeout(()=>{setupReveal();updateSEO();updateReadProgress();},50);};
+
+// Deep link'ten başla
+readHash();
+applyTheme();
+if(location.hash) window.scrollTo(0,0);
+render();
 
 // Hash değişimini dinle
 window.addEventListener("hashchange",()=>{readHash();render();});

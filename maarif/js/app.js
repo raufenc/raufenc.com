@@ -100,6 +100,7 @@
         case '/karsilastir': Pages.karsilastir(APP, parts[1], parts[2]); break;
         case '/kaynak': Pages.kaynak(APP, parts[1]); break;
         case '/profil': Pages.profil(APP); break;
+        case '/rehber': Rehber.render(APP, parts); break;
         default: Pages.notFound(APP);
       }
     } catch(e) {
