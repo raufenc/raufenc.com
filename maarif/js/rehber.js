@@ -1,4 +1,4 @@
-/* rehber.js - Program Rehberim: Ogretmen El Kitabi */
+/* rehber.js - Program Rehberim: Öğretmen El Kitabı */
 (function(){
 'use strict';
 
@@ -13,7 +13,7 @@ const COURSES = {
 };
 
 /* ============================================================
-   OLCME ARACLARI SOZLUGU
+   ÖLÇME ARAÇLARI SÖZLÜĞÜ
    ============================================================ */
 const OLCME_ARACLARI = {
   'acik uclu sorular':        { icon:'✏️', ad:'Açık Uçlu Sorular', aciklama:'Öğrencinin serbest yanıtladığı, düşünme ve ifade becerisini ölçen sorular.', nasil:'Soru kâğıdı dağıtılır, öğrenciler bireysel yanıt yazar (5-10 dk).', sure:'5-10 dk' },
@@ -39,9 +39,9 @@ const OLCME_ARACLARI = {
 /* ============================================================
    SEMESTER / WEEK CALCULATION
    ============================================================ */
-const SEMESTER_START = new Date(2025, 8, 8); // 8 Eylul 2025
+const SEMESTER_START = new Date(2025, 8, 8); // 8 Eylül 2025
 const HOLIDAYS = [
-  { start: new Date(2025, 10, 10), end: new Date(2025, 10, 14) }, // 10-14 Kasim
+  { start: new Date(2025, 10, 10), end: new Date(2025, 10, 14) }, // 10-14 Kasım
   { start: new Date(2026, 0, 19),  end: new Date(2026, 0, 30) },  // 19-30 Ocak
   { start: new Date(2026, 2, 16),  end: new Date(2026, 2, 20) }   // 16-20 Mart
 ];
@@ -198,12 +198,12 @@ const Rehber = {
     const t = result.teknik;
     const dersKey = result.dersKey;
 
-    // Konuya ozel ornek olustur
+    // Konuya özel örnek oluştur
     let ornekHtml = '';
     if (context) {
       ornekHtml = `<div style="background:var(--accent-light);border-radius:var(--radius-sm);padding:.75rem;margin-top:.75rem">
         <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">💡 Bu Dersteki Uygulaması</div>
-        ${context.nerede ? `<div style="font-size:.82rem;margin-bottom:.3rem"><strong>Ne zaman:</strong> ${context.nerede}</div>` : ''}
+        ${context.nerede ? `<div style="font-size:.82rem;margin-bottom:.3rem"><strong>Nerede:</strong> ${context.nerede}</div>` : ''}
         ${context.konu ? `<div style="font-size:.82rem"><strong>Konu:</strong> ${context.konu}</div>` : ''}
       </div>`;
     }
@@ -317,7 +317,7 @@ const Rehber = {
         <span style="font-size:1.2rem;flex-shrink:0">${tool.icon}</span>
         <div><strong style="font-size:.85rem">${name}</strong>
         <div style="font-size:.78rem;color:var(--text-secondary);margin-top:.15rem">${tool.aciklama}</div>
-        <div style="font-size:.75rem;color:var(--text-light);margin-top:.2rem">Sure: ${tool.sure}</div></div></div>`;
+        <div style="font-size:.75rem;color:var(--text-light);margin-top:.2rem">Süre: ${tool.sure}</div></div></div>`;
     }
     return `<div class="card" style="padding:.75rem;font-size:.85rem">${name}</div>`;
   },
@@ -605,7 +605,7 @@ const Rehber = {
     const relatedMats = kitapInfo ? (kitapInfo.iliskili_materyaller || []) : [];
     const allMats = this.getMaterials(dersKey);
 
-    // Surec bilesenleri
+    // Süreç bileşenleri
     const surecHtml = (cikti.surec_bilesenleri || []).map((sb, i) =>
       `<li><span class="step-num">${sb.harf}</span><span>${sb.metin}</span></li>`
     ).join('');
@@ -627,10 +627,10 @@ const Rehber = {
       </div>`;
     }).join('');
 
-    // Iliskilendirilen kodlar
+    // İlişkilendirilen kodlar
     const iliskiBadges = (uyg.iliskilendirilen_kodlar || []).map(kod => this.yetkinlikBadge(kod)).join(' ');
 
-    // Olcme araclari
+    // Ölçme araçları
     const olcmeHtml = (uyg.olcme_onerileri || []).map(name => this.olcmeCard(name)).join('');
 
     // Performans gorevi
@@ -657,12 +657,12 @@ const Rehber = {
       </a>`;
     }).join('');
 
-    // Farklilastirma
+    // Farklılaştırma
     const fark = u.farklilarstirma || u.farklilastirma || {};
     const zengin = (fark.zenginlestirme || []).map(z => `<li style="font-size:.85rem;margin-bottom:.4rem;line-height:1.5">${z}</li>`).join('');
     const destek = (fark.destekleme || []).map(d => `<li style="font-size:.85rem;margin-bottom:.4rem;line-height:1.5">${d}</li>`).join('');
 
-    // Temel kabuller, kopru kurma, on degerlendirme
+    // Temel kabuller, köprü kurma, ön değerlendirme
     const yasantilar = u.ogrenme_ogretme_yasantilari || {};
 
     APP.innerHTML = `
@@ -901,7 +901,7 @@ const Rehber = {
 
     let currentOpen = null;
 
-    // Teknik kutuphanesinden detaylari al
+    // Teknik kütüphanesinden detayları al
     const teknikLib = this.getTeknikKutuphanesi(dersKey);
 
     const techCards = techs.map((t, i) => {
@@ -961,8 +961,8 @@ const Rehber = {
   },
 
   /* ============================================================
-     SAYFA GORUNTULEME — JPEG sayfa resimleri (PDF.js yok!)
-     Her sayfa ~70KB, aninda yuklenir
+     SAYFA GÖRÜNTÜLEME — JPEG sayfa resimleri (PDF.js yok!)
+     Her sayfa ~70KB, anında yüklenir
      ============================================================ */
 
   // Sayfa sayilari (onceden biliniyor)
@@ -1066,8 +1066,8 @@ const Rehber = {
       imgEl.addEventListener('touchend', (e) => {
         const diff = e.changedTouches[0].clientX - touchStartX;
         if (Math.abs(diff) > 50) {
-          if (diff > 0) updatePage(currentPage - 1); // saga kaydirma = onceki
-          else updatePage(currentPage + 1); // sola kaydirma = sonraki
+          if (diff > 0) updatePage(currentPage - 1); // sağa kaydırma = önceki
+          else updatePage(currentPage + 1); // sola kaydırma = sonraki
         }
       }, { passive: true });
     }
@@ -1086,7 +1086,7 @@ const Rehber = {
   }
 };
 
-/* Hazirlik notu helper: finds from weekly plan */
+/* Hazırlık notu helper: finds from weekly plan */
 function w_hazirlikNotu(dersKey, ciktiKod, self) {
   const weeks = self.getWeeklyPlan(dersKey);
   const matching = weeks.filter(w => (w.cikti_kodlari || []).includes(ciktiKod));
