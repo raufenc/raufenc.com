@@ -961,167 +961,116 @@ const Rehber = {
   },
 
   /* ============================================================
-     PDF VIEWER (pdf.js) — gelismis versiyon
+     SAYFA GORUNTULEME — JPEG sayfa resimleri (PDF.js yok!)
+     Her sayfa ~70KB, aninda yuklenir
      ============================================================ */
-  _pdfCache: {}, // { pdfPath: pdfDoc }
 
-  async renderPdf(APP, dersKey, type, pageNum) {
+  // Sayfa sayilari (onceden biliniyor)
+  _pageCounts: {
+    FKH_10_kitap: 185, FKH_10_program: 30,
+    HDS_10_kitap: 160, HDS_10_program: 30,
+    SYR_10_kitap: 176, SYR_10_program: 35,
+    TDB_9_kitap: 172, TDB_9_program: 31,
+    ortak_metin: 158
+  },
+
+  renderPdf(APP, dersKey, type, pageNum) {
     const backHref = dersKey ? `#/rehber/${dersKey}` : '#/rehber';
     const backLabel = dersKey ? this.courseTitle(dersKey) : 'Rehber';
     const title = type === 'ortak_metin' ? 'Ortak Metin' : type === 'kitap' ? 'Ders Kitabi' : 'Ogretim Programi';
 
+    // Dizin adi
+    let folderName = '';
     let pdfPath = '';
     if (type === 'ortak_metin') {
+      folderName = 'ortak_metin';
       pdfPath = 'pdfs/ortak_metin.pdf';
     } else if (dersKey) {
       const c = COURSES[dersKey];
-      pdfPath = `pdfs/${c.code}_${c.sinif}_${type === 'kitap' ? 'kitap' : 'program'}.pdf`;
+      const subtype = type === 'kitap' ? 'kitap' : 'program';
+      folderName = `${c.code}_${c.sinif}_${subtype}`;
+      pdfPath = `pdfs/${folderName}.pdf`;
     }
+
+    const totalPages = this._pageCounts[folderName] || 100;
+    let currentPage = Math.min(Math.max(1, parseInt(pageNum) || 1), totalPages);
+
+    const updatePage = (num) => {
+      currentPage = Math.min(Math.max(1, num), totalPages);
+      const img = document.getElementById('pageImg');
+      const info = document.getElementById('pageInfo');
+      const input = document.getElementById('pageInput');
+      if (img) {
+        img.style.opacity = '0.4';
+        img.src = `pages/${folderName}/${currentPage}.jpg`;
+        img.onload = () => { img.style.opacity = '1'; };
+        img.onerror = () => { img.alt = 'Sayfa yuklenemedi'; img.style.opacity = '1'; };
+      }
+      if (info) info.textContent = `${currentPage} / ${totalPages}`;
+      if (input) input.value = currentPage;
+      document.getElementById('pgPrev').disabled = currentPage <= 1;
+      document.getElementById('pgNext').disabled = currentPage >= totalPages;
+      const hashBase = type === 'ortak_metin' ? '#/rehber/ortak-metin' : `#/rehber/${dersKey}/${type}`;
+      history.replaceState(null, '', hashBase + '/' + currentPage);
+    };
 
     APP.innerHTML = `
       ${this.back(backHref, backLabel)}
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
         <h2 style="font-size:1.1rem;font-weight:700">${title}</h2>
-        <a href="${pdfPath}" download class="btn btn-sm btn-outline" title="PDF'i indir">⬇️ Indir</a>
+        <a href="${pdfPath}" download class="btn btn-sm btn-outline">⬇️ PDF Indir</a>
       </div>
-      <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap" id="pdfControls">
-        <button class="btn btn-sm btn-outline" id="pdfPrev" disabled>◀</button>
-        <span id="pdfPageInfo" style="font-size:.82rem;min-width:90px;text-align:center;color:var(--text-secondary)">Yukleniyor...</span>
-        <button class="btn btn-sm btn-outline" id="pdfNext" disabled>▶</button>
+      <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.75rem;flex-wrap:wrap">
+        <button class="btn btn-sm btn-outline" id="pgPrev">◀</button>
+        <span id="pageInfo" style="font-size:.85rem;min-width:80px;text-align:center">${currentPage} / ${totalPages}</span>
+        <button class="btn btn-sm btn-outline" id="pgNext">▶</button>
         <span style="flex:1"></span>
-        <input type="number" id="pdfPageInput" value="${pageNum}" min="1" style="width:55px;padding:.25rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-size:.82rem">
-        <button class="btn btn-sm btn-primary" id="pdfGo">Git</button>
+        <input type="number" id="pageInput" value="${currentPage}" min="1" max="${totalPages}" style="width:55px;padding:.3rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-size:.85rem">
+        <button class="btn btn-sm btn-primary" id="pgGo">Git</button>
       </div>
-      <div id="pdfProgress" style="height:3px;background:var(--border);border-radius:2px;margin-bottom:.5rem;overflow:hidden">
-        <div id="pdfProgressBar" style="height:100%;width:0%;background:var(--primary);transition:width .3s"></div>
-      </div>
-      <div id="pdfContainer" style="display:flex;justify-content:center;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);min-height:300px;overflow:auto">
-        <canvas id="pdfCanvas" style="max-width:100%"></canvas>
-      </div>
-      <div id="pdfLoading" style="text-align:center;padding:2rem;color:var(--text-secondary)">
-        <div style="font-size:2rem;margin-bottom:.5rem">📄</div>
-        <div>PDF yukleniyor...</div>
-        <div id="pdfLoadPercent" style="font-size:.8rem;margin-top:.25rem">%0</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;text-align:center;min-height:200px">
+        <img id="pageImg" src="pages/${folderName}/${currentPage}.jpg" alt="Sayfa ${currentPage}"
+          style="max-width:100%;height:auto;transition:opacity .2s"
+          loading="eager">
       </div>`;
 
-    await this._ensurePdfJs();
-
-    try {
-      const pdfjsLib = window.pdfjsLib;
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-      // Cache'den al veya yukle (progress ile)
-      let pdf;
-      if (this._pdfCache[pdfPath]) {
-        pdf = this._pdfCache[pdfPath];
-      } else {
-        const loadingTask = pdfjsLib.getDocument(pdfPath);
-        loadingTask.onProgress = (p) => {
-          if (p.total > 0) {
-            const pct = Math.round((p.loaded / p.total) * 100);
-            const bar = document.getElementById('pdfProgressBar');
-            const txt = document.getElementById('pdfLoadPercent');
-            if (bar) bar.style.width = pct + '%';
-            if (txt) txt.textContent = `%${pct} (${(p.loaded/1024/1024).toFixed(1)} MB)`;
-          }
-        };
-        pdf = await loadingTask.promise;
-        this._pdfCache[pdfPath] = pdf; // Cache'le
-      }
-
-      const totalPages = pdf.numPages;
-      let currentPage = Math.min(Math.max(1, pageNum), totalPages);
-      let rendering = false;
-
-      // Responsive scale
-      const getScale = () => {
-        const container = document.getElementById('pdfContainer');
-        if (!container) return 1.2;
-        return Math.min(1.8, (container.clientWidth - 20) / 595);
-      };
-
-      const renderPage = async (num) => {
-        if (rendering) return;
-        rendering = true;
-        try {
-          const page = await pdf.getPage(num);
-          const canvas = document.getElementById('pdfCanvas');
-          if (!canvas) { rendering = false; return; }
-          const scale = getScale();
-          const viewport = page.getViewport({ scale });
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
-          currentPage = num;
-          const info = document.getElementById('pdfPageInfo');
-          if (info) info.textContent = `${num} / ${totalPages}`;
-          const input = document.getElementById('pdfPageInput');
-          if (input) { input.value = num; input.max = totalPages; }
-          document.getElementById('pdfPrev').disabled = num <= 1;
-          document.getElementById('pdfNext').disabled = num >= totalPages;
-          const hashBase = type === 'ortak_metin' ? '#/rehber/ortak-metin' : `#/rehber/${dersKey}/${type}`;
-          history.replaceState(null, '', hashBase + '/' + num);
-        } catch(e) { console.error('Sayfa render hatasi:', e); }
-        rendering = false;
-      };
-
-      // Progress bar'i gizle, kontrolleri aktifle
-      document.getElementById('pdfLoading').style.display = 'none';
-      document.getElementById('pdfProgress').style.display = 'none';
-      document.getElementById('pdfPrev').disabled = false;
-      document.getElementById('pdfNext').disabled = false;
-
-      await renderPage(currentPage);
-
-      // Keyboard navigation
-      const keyHandler = (e) => {
-        if (e.target.tagName === 'INPUT') return;
-        if (e.key === 'ArrowLeft' && currentPage > 1) { renderPage(currentPage - 1); }
-        if (e.key === 'ArrowRight' && currentPage < totalPages) { renderPage(currentPage + 1); }
-      };
-      document.addEventListener('keydown', keyHandler);
-      // Cleanup when navigating away
-      const cleanupInterval = setInterval(() => {
-        if (!document.getElementById('pdfCanvas')) {
-          document.removeEventListener('keydown', keyHandler);
-          clearInterval(cleanupInterval);
-        }
-      }, 1000);
-
-      document.getElementById('pdfPrev')?.addEventListener('click', () => {
-        if (currentPage > 1) renderPage(currentPage - 1);
-      });
-      document.getElementById('pdfNext')?.addEventListener('click', () => {
-        if (currentPage < totalPages) renderPage(currentPage + 1);
-      });
-      document.getElementById('pdfGo')?.addEventListener('click', () => {
-        const v = parseInt(document.getElementById('pdfPageInput')?.value);
-        if (v >= 1 && v <= totalPages) renderPage(v);
-      });
-      document.getElementById('pdfPageInput')?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') document.getElementById('pdfGo')?.click();
-      });
-    } catch(e) {
-      console.error('PDF yukleme hatasi:', e);
-      const loadEl = document.getElementById('pdfLoading');
-      if (loadEl) loadEl.innerHTML = `<div style="text-align:center;padding:2rem">
-        <div style="font-size:2rem;margin-bottom:.5rem">⚠️</div>
-        <p>PDF yuklenemedi.</p>
-        <a href="${pdfPath}" target="_blank" class="btn btn-sm btn-primary" style="margin-top:.5rem">Tarayicide Ac</a>
-        <a href="${pdfPath}" download class="btn btn-sm btn-outline" style="margin-top:.5rem">Indir</a>
-      </div>`;
-    }
-  },
-
-  _ensurePdfJs() {
-    return new Promise((resolve, reject) => {
-      if (window.pdfjsLib) return resolve();
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-      script.onload = () => resolve();
-      script.onerror = () => reject(new Error('pdf.js yuklenemedi'));
-      document.head.appendChild(script);
+    // Navigasyon
+    document.getElementById('pgPrev')?.addEventListener('click', () => updatePage(currentPage - 1));
+    document.getElementById('pgNext')?.addEventListener('click', () => updatePage(currentPage + 1));
+    document.getElementById('pgGo')?.addEventListener('click', () => {
+      updatePage(parseInt(document.getElementById('pageInput')?.value) || 1);
     });
+    document.getElementById('pageInput')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('pgGo')?.click();
+    });
+
+    // Klavye navigasyonu
+    const keyHandler = (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowLeft') updatePage(currentPage - 1);
+      if (e.key === 'ArrowRight') updatePage(currentPage + 1);
+    };
+    document.addEventListener('keydown', keyHandler);
+    const cleanup = setInterval(() => {
+      if (!document.getElementById('pageImg')) {
+        document.removeEventListener('keydown', keyHandler);
+        clearInterval(cleanup);
+      }
+    }, 1000);
+
+    // Swipe desteği (mobil)
+    let touchStartX = 0;
+    const imgEl = document.getElementById('pageImg');
+    if (imgEl) {
+      imgEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      imgEl.addEventListener('touchend', (e) => {
+        const diff = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) updatePage(currentPage - 1); // saga kaydirma = onceki
+          else updatePage(currentPage + 1); // sola kaydirma = sonraki
+        }
+      }, { passive: true });
+    }
   },
 
   /* ============================================================
