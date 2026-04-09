@@ -347,9 +347,6 @@ const Rehber = {
       <div class="hero" style="background:linear-gradient(135deg,#1e3a8a,#4f46e5,#7c3aed)">
         <h1>Program Rehberim</h1>
         <p>Ogretmen El Kitabi &mdash; Haftalik planlar, ders akislari, materyaller ve olcme araclari</p>
-        <div class="hero-actions">
-          <a href="#/rehber/ortak-metin" class="btn btn-secondary">📄 Ortak Metin</a>
-        </div>
       </div>
       <h2 class="section-title"><span class="st-icon">📚</span> Ders Secin</h2>
       <div class="card-grid">${cards}</div>`;
@@ -964,11 +961,14 @@ const Rehber = {
   },
 
   /* ============================================================
-     PDF VIEWER (pdf.js)
+     PDF VIEWER (pdf.js) — gelismis versiyon
      ============================================================ */
+  _pdfCache: {}, // { pdfPath: pdfDoc }
+
   async renderPdf(APP, dersKey, type, pageNum) {
     const backHref = dersKey ? `#/rehber/${dersKey}` : '#/rehber';
     const backLabel = dersKey ? this.courseTitle(dersKey) : 'Rehber';
+    const title = type === 'ortak_metin' ? 'Ortak Metin' : type === 'kitap' ? 'Ders Kitabi' : 'Ogretim Programi';
 
     let pdfPath = '';
     if (type === 'ortak_metin') {
@@ -980,67 +980,136 @@ const Rehber = {
 
     APP.innerHTML = `
       ${this.back(backHref, backLabel)}
-      <div class="detail-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
-        <h2 style="font-size:1.1rem;font-weight:700">${type === 'ortak_metin' ? 'Ortak Metin' : type === 'kitap' ? 'Ders Kitabi' : 'Ogretim Programi'}</h2>
-        <div style="display:flex;align-items:center;gap:.5rem">
-          <button class="btn btn-sm btn-outline" id="pdfPrev">&larr;</button>
-          <span id="pdfPageInfo" style="font-size:.85rem;min-width:80px;text-align:center">Sayfa ${pageNum}</span>
-          <button class="btn btn-sm btn-outline" id="pdfNext">&rarr;</button>
-          <input type="number" id="pdfPageInput" value="${pageNum}" min="1" style="width:60px;padding:.3rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-size:.85rem">
-          <button class="btn btn-sm btn-primary" id="pdfGo">Git</button>
-        </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem">
+        <h2 style="font-size:1.1rem;font-weight:700">${title}</h2>
+        <a href="${pdfPath}" download class="btn btn-sm btn-outline" title="PDF'i indir">⬇️ Indir</a>
       </div>
-      <div id="pdfContainer" style="display:flex;justify-content:center;margin-top:1rem">
-        <canvas id="pdfCanvas" style="max-width:100%;box-shadow:var(--shadow-lg);border-radius:var(--radius)"></canvas>
+      <div style="display:flex;align-items:center;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap" id="pdfControls">
+        <button class="btn btn-sm btn-outline" id="pdfPrev" disabled>◀</button>
+        <span id="pdfPageInfo" style="font-size:.82rem;min-width:90px;text-align:center;color:var(--text-secondary)">Yukleniyor...</span>
+        <button class="btn btn-sm btn-outline" id="pdfNext" disabled>▶</button>
+        <span style="flex:1"></span>
+        <input type="number" id="pdfPageInput" value="${pageNum}" min="1" style="width:55px;padding:.25rem;border:1px solid var(--border);border-radius:var(--radius-sm);text-align:center;font-size:.82rem">
+        <button class="btn btn-sm btn-primary" id="pdfGo">Git</button>
       </div>
-      <div id="pdfLoading" class="loading">PDF yukleniyor...</div>`;
+      <div id="pdfProgress" style="height:3px;background:var(--border);border-radius:2px;margin-bottom:.5rem;overflow:hidden">
+        <div id="pdfProgressBar" style="height:100%;width:0%;background:var(--primary);transition:width .3s"></div>
+      </div>
+      <div id="pdfContainer" style="display:flex;justify-content:center;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);min-height:300px;overflow:auto">
+        <canvas id="pdfCanvas" style="max-width:100%"></canvas>
+      </div>
+      <div id="pdfLoading" style="text-align:center;padding:2rem;color:var(--text-secondary)">
+        <div style="font-size:2rem;margin-bottom:.5rem">📄</div>
+        <div>PDF yukleniyor...</div>
+        <div id="pdfLoadPercent" style="font-size:.8rem;margin-top:.25rem">%0</div>
+      </div>`;
 
-    // Load pdf.js
     await this._ensurePdfJs();
 
     try {
       const pdfjsLib = window.pdfjsLib;
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-      const pdf = await pdfjsLib.getDocument(pdfPath).promise;
+      // Cache'den al veya yukle (progress ile)
+      let pdf;
+      if (this._pdfCache[pdfPath]) {
+        pdf = this._pdfCache[pdfPath];
+      } else {
+        const loadingTask = pdfjsLib.getDocument(pdfPath);
+        loadingTask.onProgress = (p) => {
+          if (p.total > 0) {
+            const pct = Math.round((p.loaded / p.total) * 100);
+            const bar = document.getElementById('pdfProgressBar');
+            const txt = document.getElementById('pdfLoadPercent');
+            if (bar) bar.style.width = pct + '%';
+            if (txt) txt.textContent = `%${pct} (${(p.loaded/1024/1024).toFixed(1)} MB)`;
+          }
+        };
+        pdf = await loadingTask.promise;
+        this._pdfCache[pdfPath] = pdf; // Cache'le
+      }
+
       const totalPages = pdf.numPages;
       let currentPage = Math.min(Math.max(1, pageNum), totalPages);
+      let rendering = false;
 
-      const renderPage = async (num) => {
-        const page = await pdf.getPage(num);
-        const canvas = document.getElementById('pdfCanvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: 1.5 });
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        const info = document.getElementById('pdfPageInfo');
-        if (info) info.textContent = `Sayfa ${num} / ${totalPages}`;
-        const input = document.getElementById('pdfPageInput');
-        if (input) { input.value = num; input.max = totalPages; }
-        // Update URL without re-render
-        const hashBase = type === 'ortak_metin' ? '#/rehber/ortak-metin' : `#/rehber/${dersKey}/${type}`;
-        history.replaceState(null, '', hashBase + '/' + num);
+      // Responsive scale
+      const getScale = () => {
+        const container = document.getElementById('pdfContainer');
+        if (!container) return 1.2;
+        return Math.min(1.8, (container.clientWidth - 20) / 595);
       };
 
+      const renderPage = async (num) => {
+        if (rendering) return;
+        rendering = true;
+        try {
+          const page = await pdf.getPage(num);
+          const canvas = document.getElementById('pdfCanvas');
+          if (!canvas) { rendering = false; return; }
+          const scale = getScale();
+          const viewport = page.getViewport({ scale });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+          currentPage = num;
+          const info = document.getElementById('pdfPageInfo');
+          if (info) info.textContent = `${num} / ${totalPages}`;
+          const input = document.getElementById('pdfPageInput');
+          if (input) { input.value = num; input.max = totalPages; }
+          document.getElementById('pdfPrev').disabled = num <= 1;
+          document.getElementById('pdfNext').disabled = num >= totalPages;
+          const hashBase = type === 'ortak_metin' ? '#/rehber/ortak-metin' : `#/rehber/${dersKey}/${type}`;
+          history.replaceState(null, '', hashBase + '/' + num);
+        } catch(e) { console.error('Sayfa render hatasi:', e); }
+        rendering = false;
+      };
+
+      // Progress bar'i gizle, kontrolleri aktifle
       document.getElementById('pdfLoading').style.display = 'none';
+      document.getElementById('pdfProgress').style.display = 'none';
+      document.getElementById('pdfPrev').disabled = false;
+      document.getElementById('pdfNext').disabled = false;
+
       await renderPage(currentPage);
 
+      // Keyboard navigation
+      const keyHandler = (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowLeft' && currentPage > 1) { renderPage(currentPage - 1); }
+        if (e.key === 'ArrowRight' && currentPage < totalPages) { renderPage(currentPage + 1); }
+      };
+      document.addEventListener('keydown', keyHandler);
+      // Cleanup when navigating away
+      const cleanupInterval = setInterval(() => {
+        if (!document.getElementById('pdfCanvas')) {
+          document.removeEventListener('keydown', keyHandler);
+          clearInterval(cleanupInterval);
+        }
+      }, 1000);
+
       document.getElementById('pdfPrev')?.addEventListener('click', () => {
-        if (currentPage > 1) { currentPage--; renderPage(currentPage); }
+        if (currentPage > 1) renderPage(currentPage - 1);
       });
       document.getElementById('pdfNext')?.addEventListener('click', () => {
-        if (currentPage < totalPages) { currentPage++; renderPage(currentPage); }
+        if (currentPage < totalPages) renderPage(currentPage + 1);
       });
       document.getElementById('pdfGo')?.addEventListener('click', () => {
         const v = parseInt(document.getElementById('pdfPageInput')?.value);
-        if (v >= 1 && v <= totalPages) { currentPage = v; renderPage(currentPage); }
+        if (v >= 1 && v <= totalPages) renderPage(v);
+      });
+      document.getElementById('pdfPageInput')?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') document.getElementById('pdfGo')?.click();
       });
     } catch(e) {
       console.error('PDF yukleme hatasi:', e);
       const loadEl = document.getElementById('pdfLoading');
-      if (loadEl) loadEl.innerHTML = `<div class="empty-state"><span class="es-icon">⚠️</span><p class="es-text">PDF yuklenemedi. <a href="${pdfPath}" target="_blank">Dogrudan ac</a></p></div>`;
+      if (loadEl) loadEl.innerHTML = `<div style="text-align:center;padding:2rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">⚠️</div>
+        <p>PDF yuklenemedi.</p>
+        <a href="${pdfPath}" target="_blank" class="btn btn-sm btn-primary" style="margin-top:.5rem">Tarayicide Ac</a>
+        <a href="${pdfPath}" download class="btn btn-sm btn-outline" style="margin-top:.5rem">Indir</a>
+      </div>`;
     }
   },
 

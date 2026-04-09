@@ -91,23 +91,6 @@ function home(app) {
       <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Okuryazarlık</div></div>
       <div class="stat-card"><div class="stat-num">1802</div><div class="stat-label">Referans</div></div>
     </div>
-    <a href="#/rehber" class="card" style="display:block;margin-bottom:1.5rem;overflow:hidden;text-decoration:none;color:inherit;border:2px solid var(--primary);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg)">
-      <div style="background:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#0891b2 100%);color:#fff;padding:1.5rem;display:flex;align-items:center;gap:1.25rem">
-        <span style="font-size:2.5rem">📖</span>
-        <div>
-          <div style="font-size:1.25rem;font-weight:700">Program Rehberim</div>
-          <div style="font-size:.9rem;opacity:.9;margin-top:.25rem">Ogretmen El Kitabi — Haftalik plan, ders akisi, materyaller</div>
-        </div>
-        <span style="margin-left:auto;font-size:1.5rem;opacity:.7">&rarr;</span>
-      </div>
-      <div style="padding:.75rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.85rem;color:var(--text-secondary)">
-        <span>📅 Haftalik Plan</span>
-        <span>📋 Ders Akisi</span>
-        <span>📦 202 Materyal</span>
-        <span>🛠️ Teknikler</span>
-        <span>📊 Olcme Araclari</span>
-      </div>
-    </a>
     <h2 class="section-title"><span class="st-icon">🚀</span> Hızlı Erişim</h2>
     <div class="quick-grid">
       <a href="#/kavramlar" class="quick-card"><span class="qc-icon">📚</span><span class="qc-title">Kavram Kütüphanesi</span><span class="qc-count">269 kavram</span></a>
