@@ -840,3 +840,143 @@ input { font-family: inherit; }
   .mascot-img-celebrate { width: 100%; max-height: 180px; }
   .mascot-img-completion { max-width: 280px; max-height: 200px; }
 }
+
+/* ====== SEVİYE SİSTEMİ — Nav Bar ====== */
+.nav-level-badge { display:flex; align-items:center; gap:4px; background:rgba(255,215,0,0.15); border:1px solid rgba(255,215,0,0.3); border-radius:20px; padding:2px 10px 2px 6px; text-decoration:none; color:inherit; font-size:0.8rem; cursor:pointer; transition:all 0.2s; }
+.nav-level-badge:hover { background:rgba(255,215,0,0.25); transform:translateY(-1px); }
+.nav-level-icon { font-size:1.1rem; }
+.nav-level-num { font-weight:700; white-space:nowrap; }
+.nav-level-bar { width:40px; height:4px; background:rgba(0,0,0,0.1); border-radius:2px; overflow:hidden; }
+.nav-level-fill { height:100%; background:linear-gradient(90deg,#FFD700,#FF6B35); border-radius:2px; transition:width 0.5s; }
+
+/* ====== SEVİYE — Anasayfa Stat ====== */
+.stat-level-home { cursor:pointer; text-decoration:none; color:inherit; }
+.stat-level-bar { width:100%; height:4px; background:rgba(0,0,0,0.08); border-radius:2px; margin-top:4px; overflow:hidden; }
+.stat-level-fill { height:100%; background:linear-gradient(90deg,#FFD700,#FF6B35); border-radius:2px; transition:width 0.5s; }
+.stat-level-hint { font-size:0.65rem; color:#888; margin-top:2px; }
+
+/* ====== GÜNLÜK GÖREVLER ====== */
+.missions-card { background:linear-gradient(135deg,#FFF8E1,#FFF3E0); border:1px solid #FFE0B2; border-radius:16px; padding:16px 20px; margin-bottom:20px; }
+.missions-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+.missions-header h3 { margin:0; font-size:1rem; }
+.missions-count { background:#FF6B35; color:#fff; font-weight:700; font-size:0.85rem; padding:2px 10px; border-radius:12px; }
+.missions-list { display:flex; flex-direction:column; gap:8px; }
+.mission-item { display:flex; align-items:center; gap:10px; padding:8px 12px; background:#fff; border-radius:10px; transition:all 0.2s; }
+.mission-done { background:#E8F5E9; }
+.mission-check { font-size:1.1rem; flex-shrink:0; }
+.mission-text { flex:1; font-size:0.9rem; }
+.mission-xp { font-size:0.8rem; font-weight:700; color:#FF6B35; white-space:nowrap; }
+.missions-complete-msg { text-align:center; margin-top:8px; font-size:0.85rem; color:#43A047; font-weight:600; }
+
+/* ====== GENİŞLETİLMİŞ ROZET SİSTEMİ ====== */
+.basari-header { text-align:center; margin-bottom:24px; }
+.basari-header h2 { margin-bottom:4px; }
+.basari-counter { font-size:0.9rem; color:#666; margin-bottom:4px; }
+.badge-category { margin-bottom:28px; }
+.badge-cat-title { font-size:1rem; margin-bottom:12px; display:flex; align-items:center; gap:8px; border-bottom:2px solid #eee; padding-bottom:8px; }
+.badge-cat-count { font-size:0.8rem; color:#888; font-weight:400; }
+.badge-card { position:relative; }
+.badge-new { position:absolute; top:-4px; right:-4px; background:#E53935; color:#fff; font-size:0.6rem; font-weight:700; padding:2px 6px; border-radius:8px; animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.1); } }
+
+/* ====== SEVİYE HARİTASI ====== */
+.seviye-hero { text-align:center; background:linear-gradient(135deg,#EDE7F6,#E8EAF6); border-radius:20px; padding:24px; margin-bottom:24px; }
+.seviye-hero-icon { font-size:3rem; margin-bottom:8px; }
+.seviye-hero h2 { margin:0 0 4px; }
+.seviye-hero-level { color:#666; font-size:0.9rem; margin-bottom:12px; }
+.seviye-hero-bar { max-width:300px; margin:0 auto; }
+.seviye-hero-xp { font-size:0.8rem; color:#888; }
+.seviye-next-hint { font-size:0.85rem; color:#555; margin-top:8px; }
+.seviye-yol { display:flex; flex-direction:column; align-items:center; gap:0; padding:0 16px; }
+.seviye-node { display:flex; align-items:center; gap:12px; padding:10px 16px; width:100%; max-width:400px; border-radius:12px; transition:all 0.2s; }
+.seviye-reached { background:rgba(76,175,80,0.08); }
+.seviye-locked { opacity:0.5; }
+.seviye-current { background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,107,53,0.1)); border:2px solid #FFD700; transform:scale(1.02); opacity:1; }
+.seviye-node-circle { width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; border-radius:50%; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.1); flex-shrink:0; }
+.seviye-node-info { display:flex; flex-direction:column; }
+.seviye-node-info strong { font-size:0.8rem; color:#555; }
+.seviye-node-info span { font-size:0.85rem; }
+.seviye-node-xp { font-size:0.7rem; color:#999; }
+.seviye-line { width:2px; height:12px; background:#ddd; margin-left:35px; }
+.seviye-line-active { background:#4CAF50; }
+
+/* ====== PRATİK MODU ====== */
+.pratik-header { text-align:center; margin-bottom:20px; }
+.pratik-header h2 { margin-bottom:4px; }
+.pratik-header p { color:#666; }
+.pratik-ders-card { background:var(--ders-bg); border:1px solid color-mix(in srgb, var(--ders-color) 20%, transparent); border-radius:16px; padding:16px; margin-bottom:16px; }
+.pratik-ders-icon { font-size:2rem; }
+.pratik-unite-list { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+.pratik-unite-btn { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:#fff; border:1px solid #eee; border-radius:8px; cursor:pointer; font-size:0.85rem; transition:all 0.2s; }
+.pratik-unite-btn:hover { border-color:var(--ders-color,#4A90D9); transform:translateX(4px); }
+.pratik-done { border-left:3px solid #4CAF50; }
+.pratik-q-count { font-size:0.75rem; color:#888; }
+.pratik-quiz-header { display:flex; justify-content:space-between; align-items:center; padding:12px 16px; background:#f5f5f5; border-radius:12px; border-left:4px solid; margin-bottom:16px; }
+.pratik-progress { text-align:center; font-size:0.9rem; color:#666; margin-bottom:12px; font-weight:600; }
+.pratik-question { background:#fff; border-radius:16px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+
+/* ====== HATALARIM ====== */
+.hatalarim-header { text-align:center; margin-bottom:20px; }
+.hatalarim-header h2 { margin-bottom:4px; }
+.hatalarim-summary { display:flex; justify-content:center; gap:16px; margin-bottom:20px; color:#666; font-size:0.9rem; }
+.hata-grup { margin-bottom:20px; }
+.hata-grup-header { display:flex; align-items:center; gap:8px; padding:10px 14px; background:#FFF3E0; border-radius:10px; border-left:4px solid; margin-bottom:10px; flex-wrap:wrap; }
+.hata-count { font-size:0.8rem; color:#E53935; font-weight:600; margin-left:auto; }
+.btn-sm { font-size:0.75rem; padding:4px 10px; border-radius:6px; }
+.hata-list { display:flex; flex-direction:column; gap:8px; }
+.hata-item { background:#fff; border:1px solid #fee; border-radius:10px; padding:12px; }
+.hata-soru { font-size:0.9rem; font-weight:500; margin-bottom:8px; }
+.hata-cevaplar { display:flex; gap:12px; font-size:0.8rem; flex-wrap:wrap; }
+.hata-yanlis { color:#E53935; background:#FFEBEE; padding:2px 8px; border-radius:6px; }
+.hata-dogru { color:#2E7D32; background:#E8F5E9; padding:2px 8px; border-radius:6px; }
+.hata-ipucu { font-size:0.8rem; color:#F57C00; margin-top:6px; }
+.hata-more { text-align:center; color:#888; font-size:0.85rem; }
+
+/* ====== SEVİYE ATLAMA BANNER ====== */
+.level-up-banner { background:linear-gradient(135deg,#FFD700,#FFA000); color:#fff; text-align:center; padding:12px 16px; border-radius:12px; font-weight:700; font-size:1rem; margin:12px 0; animation:pulse 1s ease; }
+.level-up-banner span { font-size:1.5rem; }
+.badge-earned-banner { background:linear-gradient(135deg,#7B1FA2,#9C27B0); color:#fff; text-align:center; padding:10px 16px; border-radius:12px; font-weight:600; font-size:0.9rem; margin:8px 0; }
+
+/* ====== VELİ DETAY — İÇGÖRÜLER ====== */
+.vd-insights { display:flex; flex-direction:column; gap:4px; margin-top:8px; padding-top:8px; border-top:1px dashed #eee; }
+.vd-insight { font-size:0.8rem; color:#555; padding:3px 0; }
+.vd-insight-warn { color:#E53935; font-weight:600; }
+.vd-insight-info { color:#F57C00; }
+
+/* ====== VELİ HEDEF SİSTEMİ ====== */
+.veli-hedefler-section { background:#F3E5F5; border:1px solid #CE93D8; border-radius:16px; padding:16px 20px; margin-bottom:20px; }
+.veli-hedefler-section h3 { margin:0 0 4px; }
+.veli-hedef-desc { font-size:0.85rem; color:#666; margin-bottom:12px; }
+.veli-hedef-list { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.veli-hedef-card { display:flex; align-items:center; gap:10px; padding:10px 14px; background:#fff; border-radius:10px; }
+.veli-hedef-done { background:#E8F5E9; border:1px solid #A5D6A7; }
+.veli-hedef-info { flex:1; display:flex; flex-direction:column; gap:2px; }
+.veli-hedef-progress { font-size:0.8rem; color:#666; }
+.veli-hedef-reward { font-size:0.85rem; color:#F57C00; font-weight:600; }
+.veli-hedef-date { font-size:0.75rem; color:#888; }
+.veli-hedef-form { display:flex; flex-direction:column; gap:8px; }
+.veli-hedef-form .form-input { padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:0.85rem; }
+
+/* ====== ANASAYFA HEDEF KARTI ====== */
+.hedef-card-home { background:linear-gradient(135deg,#F3E5F5,#EDE7F6); border:1px solid #CE93D8; border-radius:16px; padding:14px 18px; margin-bottom:20px; }
+.hedef-card-home h3 { margin:0 0 10px; font-size:1rem; }
+.hedef-item-home { padding:8px 0; border-bottom:1px solid rgba(0,0,0,0.06); }
+.hedef-item-home:last-child { border-bottom:none; }
+.hedef-info-home { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; font-size:0.9rem; }
+.hedef-reward-home { font-size:0.8rem; color:#F57C00; }
+.hedef-pct-home { font-size:0.75rem; color:#888; text-align:right; display:block; margin-top:2px; }
+.hedef-done-home { background:rgba(76,175,80,0.1); padding:8px 12px; border-radius:8px; }
+
+/* ====== MOBİL — Yeni bileşenler ====== */
+@media (max-width: 600px) {
+  .nav-level-badge { padding:2px 6px; font-size:0.7rem; }
+  .nav-level-bar { width:28px; }
+  .nav-level-num { font-size:0.7rem; }
+  .missions-card { padding:12px 14px; }
+  .mission-item { padding:6px 10px; }
+  .seviye-node { padding:8px 10px; }
+  .seviye-node-circle { width:32px; height:32px; font-size:1rem; }
+  .hata-cevaplar { flex-direction:column; gap:4px; }
+  .hata-grup-header { font-size:0.85rem; }
+  .stat-level-hint { display:none; }
+}

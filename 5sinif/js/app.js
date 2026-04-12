@@ -32,6 +32,11 @@ const routes = {
   'admin-ogrenci':  renderAdminOgrenci,
   // --- Veli Portalı (şifresiz, veli kodu ile) ---
   'veli-portal':    renderVeliPortal,
+  // --- Yeni Faza 1 sayfaları ---
+  'seviye':         renderSeviyeHaritasi,
+  'pratik':         renderPratik,
+  'pratik-quiz':    renderPratikQuiz,
+  'hatalarim':      renderHatalarim,
 };
 
 function navigate(hash) { window.location.hash = hash; }
@@ -101,6 +106,8 @@ function updateNavXP() {
 
 function topNavHTML(showBack = false, title = '') {
   const loggedIn = Store.isLoggedIn();
+  const lvl = Store.getLevel();
+  const lvlProg = Store.getLevelProgress();
   return `
     <nav class="top-nav">
       <div class="nav-left">
@@ -110,6 +117,11 @@ function topNavHTML(showBack = false, title = '') {
       </div>
       <div class="nav-right">
         ${loggedIn ? `
+          <a href="#/seviye" class="nav-level-badge" title="Seviye ${lvl.level}: ${lvl.name}">
+            <span class="nav-level-icon">${lvl.icon}</span>
+            <span class="nav-level-num">Sv. ${lvl.level}</span>
+            <div class="nav-level-bar"><div class="nav-level-fill" style="width:${lvlProg.pct}%"></div></div>
+          </a>
           <span class="nav-xp">⭐ <span id="navXP">${Store.getXP()} XP</span></span>
           <span class="nav-streak">🔥 <span id="navStreak">${Store.getStreak()}</span></span>
           ${window.FirebaseService?.getCurrentUser() ? '<span class="nav-sync" title="Bulut senkronize">☁️</span>' : ''}
@@ -396,11 +408,68 @@ function renderAnasayfa() {
           </p>
         </div>
         <div class="stats-bar">
+          ${(() => {
+            const lp = Store.getLevelProgress();
+            return `<a href="#/seviye" class="stat-item stat-level-home">
+              <span class="stat-val">${lp.current.icon} Sv. ${lp.current.level}</span>
+              <span class="stat-label">${lp.current.name}</span>
+              <div class="stat-level-bar"><div class="stat-level-fill" style="width:${lp.pct}%"></div></div>
+              ${lp.next ? `<span class="stat-level-hint">${lp.xpToNext} XP sonraki seviye</span>` : '<span class="stat-level-hint">Maks. seviye!</span>'}
+            </a>`;
+          })()}
           <div class="stat-item"><span class="stat-val">⭐ ${Store.getXP()}</span><span class="stat-label">XP</span></div>
           <div class="stat-item"><span class="stat-val">🔥 ${Store.getStreak()}</span><span class="stat-label">Gün Serisi</span></div>
-          <div class="stat-item"><span class="stat-val">🎖️ ${Store.getBadges().length}</span><span class="stat-label">Rozet</span></div>
+          <div class="stat-item"><span class="stat-val">🎖️ ${Store.getBadges().length}/${BADGE_DEFS.length}</span><span class="stat-label">Rozet</span></div>
         </div>
       </div>
+      ${(() => {
+        Store.resetDailyTrackers();
+        const missions = Store.checkMissions();
+        const doneCount = missions.filter(m => m.completed).length;
+        return `<div class="missions-card">
+          <div class="missions-header">
+            <h3>🎯 Günlük Görevler</h3>
+            <span class="missions-count">${doneCount}/3</span>
+          </div>
+          <div class="missions-list">
+            ${missions.map(m => `
+              <div class="mission-item ${m.completed ? 'mission-done' : ''}">
+                <span class="mission-check">${m.completed ? '✅' : '⬜'}</span>
+                <span class="mission-text">${m.text}</span>
+                <span class="mission-xp">+${m.xp} XP</span>
+              </div>
+            `).join('')}
+          </div>
+          ${doneCount === 3 ? '<p class="missions-complete-msg">Tüm görevler tamamlandı! Harikasın! 🎉</p>' : ''}
+        </div>`;
+      })()}
+      ${(() => {
+        const goals = Store.checkParentGoals();
+        const active = goals.filter(g => !g.completed);
+        const recentDone = goals.filter(g => g.completed && g.completedAt && (Date.now() - new Date(g.completedAt).getTime()) < 86400000 * 3);
+        if (active.length === 0 && recentDone.length === 0) return '';
+        return `<div class="hedef-card-home">
+          <h3>🎯 Hedeflerim</h3>
+          ${active.map(g => {
+            let pct = 0;
+            if (g.type === 'lessons') pct = Math.min(100, Math.round((Store._countCompletedUnits() / g.target) * 100));
+            else if (g.type === 'streak') pct = Math.min(100, Math.round((Store.getStreak() / g.target) * 100));
+            else if (g.type === 'xp') pct = Math.min(100, Math.round((Store.getXP() / g.target) * 100));
+            return `<div class="hedef-item-home">
+              <div class="hedef-info-home">
+                <span>${g.description}</span>
+                ${g.reward ? `<span class="hedef-reward-home">🎁 ${g.reward}</span>` : ''}
+              </div>
+              <div class="progress-bar" style="height:6px"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,#4CAF50,#8BC34A)"></div></div>
+              <span class="hedef-pct-home">%${pct}</span>
+            </div>`;
+          }).join('')}
+          ${recentDone.map(g => `<div class="hedef-item-home hedef-done-home">
+            <span>✅ ${g.description}</span>
+            ${g.reward ? `<span class="hedef-reward-home">🎁 ${g.reward} — Tebrikler!</span>` : ''}
+          </div>`).join('')}
+        </div>`;
+      })()}
       ${(() => {
         const session = Store.getDailySession();
         const allDone = session && session.completed.every(Boolean);
@@ -442,7 +511,10 @@ function renderAnasayfa() {
         }).join('')}
       </div>
       <div class="bottom-actions">
+        <a href="#/pratik" class="btn btn-outline">📝 Pratik Modu</a>
+        <a href="#/hatalarim" class="btn btn-outline">❌ Hatalarım</a>
         <a href="#/basarilar" class="btn btn-outline">🎖️ Rozetlerim</a>
+        <a href="#/seviye" class="btn btn-outline">🏆 Seviye Haritam</a>
         <a href="#/tekrar" class="btn btn-outline">🔄 Tekrar Merkezi</a>
         <a href="#/veli" class="btn btn-outline">👨‍👩‍👧 Veli Paneli</a>
         <button class="btn btn-outline btn-danger" onclick="if(confirm('Çıkış yapılsın mı?')){Store.logout();navigate('#/')}">🚪 Çıkış</button>
@@ -935,27 +1007,38 @@ function renderTekrar() {
 function renderBasarilar() {
   if (requireLogin()) return;
   const badges = Store.getBadges();
-  const allBadges = [
-    { id: 'first_lesson', name: 'İlk Adım', icon: '🌟', desc: 'İlk dersini tamamla' },
-    { id: 'xp_100', name: 'Yüzlük Kulüp', icon: '💯', desc: '100 XP topla' },
-    { id: 'xp_500', name: 'Bilgi Şampiyonu', icon: '🏆', desc: '500 XP topla' },
-    { id: 'streak_3', name: '3 Gün Serisi', icon: '🔥', desc: '3 gün üst üste çalış' },
-    { id: 'streak_7', name: 'Haftalık Seri', icon: '⚡', desc: '7 gün üst üste çalış' },
-    { id: 'streak_21', name: 'Süper Seri', icon: '🚀', desc: '21 gün üst üste çalış' },
-  ];
+  const earnedCount = badges.length;
+  const totalCount = BADGE_DEFS.length;
+
   app.innerHTML = `
     ${topNavHTML(true, 'Başarılarım')}
     <div class="page-container">
-      <h2 class="section-title">🎖️ Rozet Koleksiyonum</h2>
-      <div class="badge-grid">
-        ${allBadges.map(b => {
-          const earned = badges.find(e => e.id === b.id);
-          return `<div class="badge-card ${earned ? 'badge-earned' : 'badge-locked'}">
-            <div class="badge-icon">${b.icon}</div><h4>${b.name}</h4><p>${b.desc}</p>
-            ${earned ? '<span class="badge-date">Kazanıldı!</span>' : '<span class="badge-lock">🔒</span>'}
-          </div>`;
-        }).join('')}
+      <div class="basari-header">
+        <h2>🎖️ Rozet Koleksiyonum</h2>
+        <div class="basari-counter">${earnedCount}/${totalCount} rozet kazanıldı</div>
+        <div class="progress-bar" style="margin-top:0.5rem"><div class="progress-fill" style="width:${Math.round((earnedCount/totalCount)*100)}%;background:linear-gradient(90deg,#FFD700,#FF6B35)"></div></div>
       </div>
+      ${Object.entries(BADGE_CATEGORIES).map(([catKey, cat]) => {
+        const catBadges = BADGE_DEFS.filter(b => b.category === catKey);
+        const catEarned = catBadges.filter(b => badges.find(e => e.id === b.id)).length;
+        return `
+          <div class="badge-category">
+            <h3 class="badge-cat-title">${cat.icon} ${cat.name} <span class="badge-cat-count">${catEarned}/${catBadges.length}</span></h3>
+            <div class="badge-grid">
+              ${catBadges.map(b => {
+                const earned = badges.find(e => e.id === b.id);
+                const isNew = earned && (Date.now() - new Date(earned.earnedAt).getTime()) < 86400000;
+                return `<div class="badge-card ${earned ? 'badge-earned' : 'badge-locked'}">
+                  ${isNew ? '<span class="badge-new">YENİ</span>' : ''}
+                  <div class="badge-icon">${earned ? b.icon : '🔒'}</div>
+                  <h4>${earned ? b.name : '???'}</h4>
+                  <p>${earned ? b.desc : b.hint}</p>
+                  ${earned ? `<span class="badge-date">${new Date(earned.earnedAt).toLocaleDateString('tr-TR')}</span>` : ''}
+                </div>`;
+              }).join('')}
+            </div>
+          </div>`;
+      }).join('')}
     </div>
   `;
 }
@@ -1493,6 +1576,53 @@ function _veliPanelRefresh() {
         }).join('')}
       </div>
 
+      <!-- Veli Hedef Sistemi -->
+      <div class="veli-hedefler-section">
+        <h3>🎯 Hedefler & Ödüller</h3>
+        <p class="veli-hedef-desc">Çocuğunuza hedef koyun ve motivasyonu artıracak ödüller belirleyin!</p>
+        ${(() => {
+          const goals = Store.checkParentGoals();
+          const activeGoals = goals.filter(g => !g.completed);
+          const doneGoals = goals.filter(g => g.completed);
+          return `
+            ${goals.length > 0 ? `<div class="veli-hedef-list">
+              ${activeGoals.map(g => {
+                let progressText = '';
+                if (g.type === 'lessons') progressText = `${Store._countCompletedUnits()}/${g.target} ünite`;
+                else if (g.type === 'streak') progressText = `${Store.getStreak()}/${g.target} gün`;
+                else if (g.type === 'xp') progressText = `${Store.getXP()}/${g.target} XP`;
+                else progressText = 'Devam ediyor...';
+                return `<div class="veli-hedef-card">
+                  <div class="veli-hedef-info">
+                    <strong>${g.description}</strong>
+                    <span class="veli-hedef-progress">${progressText}</span>
+                    ${g.reward ? `<span class="veli-hedef-reward">🎁 ${g.reward}</span>` : ''}
+                  </div>
+                  <button class="btn btn-sm btn-outline" onclick="veliHedefSil(${g.id})">Sil</button>
+                </div>`;
+              }).join('')}
+              ${doneGoals.map(g => `<div class="veli-hedef-card veli-hedef-done">
+                <div class="veli-hedef-info">
+                  <strong>✅ ${g.description}</strong>
+                  ${g.reward ? `<span class="veli-hedef-reward">🎁 ${g.reward}</span>` : ''}
+                  <span class="veli-hedef-date">Tamamlandı: ${new Date(g.completedAt).toLocaleDateString('tr-TR')}</span>
+                </div>
+              </div>`).join('')}
+            </div>` : ''}
+            <div class="veli-hedef-form" id="hedefForm">
+              <select id="hedefType" class="form-input" onchange="veliHedefTypeChange()">
+                <option value="lessons">Ünite Tamamlama</option>
+                <option value="streak">Gün Serisi</option>
+                <option value="xp">XP Hedefi</option>
+              </select>
+              <input type="number" id="hedefTarget" class="form-input" placeholder="Hedef sayı (ör: 10)" min="1" max="999">
+              <input type="text" id="hedefDesc" class="form-input" placeholder="Hedef açıklaması (ör: 10 ünite tamamla)">
+              <input type="text" id="hedefReward" class="form-input" placeholder="Ödül (ör: Dışarda dondurma yiyoruz!)">
+              <button class="btn btn-primary btn-sm" onclick="veliHedefEkle()">Hedef Ekle</button>
+            </div>`;
+        })()}
+      </div>
+
       <!-- Genel Öneriler -->
       <div class="veli-insight">
         <h4>💡 Öneriler</h4>
@@ -1515,6 +1645,33 @@ function _veliPanelRefresh() {
       </div>` : ''}
     </div>`;
 }
+
+window.veliHedefEkle = function() {
+  const type = document.getElementById('hedefType').value;
+  const target = parseInt(document.getElementById('hedefTarget').value);
+  const desc = document.getElementById('hedefDesc').value.trim();
+  const reward = document.getElementById('hedefReward').value.trim();
+  if (!target || !desc) { alert('Hedef sayısı ve açıklaması gerekli.'); return; }
+  Store.addParentGoal({ type, target, description: desc, reward });
+  if (window.FirebaseService) FirebaseService.scheduleSync();
+  _veliPanelRefresh();
+};
+
+window.veliHedefSil = function(id) {
+  if (!confirm('Bu hedefi silmek istediğinize emin misiniz?')) return;
+  Store.removeParentGoal(id);
+  if (window.FirebaseService) FirebaseService.scheduleSync();
+  _veliPanelRefresh();
+};
+
+window.veliHedefTypeChange = function() {
+  const type = document.getElementById('hedefType').value;
+  const descEl = document.getElementById('hedefDesc');
+  const targetEl = document.getElementById('hedefTarget');
+  if (type === 'lessons') { descEl.placeholder = 'ör: 10 ünite tamamla'; targetEl.placeholder = 'Ünite sayısı'; }
+  else if (type === 'streak') { descEl.placeholder = 'ör: 7 gün art arda çalış'; targetEl.placeholder = 'Gün sayısı'; }
+  else if (type === 'xp') { descEl.placeholder = 'ör: 500 XP topla'; targetEl.placeholder = 'XP miktarı'; }
+};
 
 window.veliKodOlustur = async function() {
   const user = window.FirebaseService?.getCurrentUser();
@@ -1567,9 +1724,21 @@ function renderVeliDersDetay(params) {
               <span class="vda-icon">${a.dogruMu ? '✓' : '✗'}</span>
               <span class="vda-soru">${a.soru.length > 60 ? a.soru.slice(0,57)+'...' : a.soru}</span>
               ${a.ipucuKullandiMi ? '<span class="vda-hint" title="İpucu kullandı">💡</span>' : ''}
-              ${a.sure ? `<span class="vda-sure">${Math.round(a.sure)}s</span>` : ''}
+              ${a.sure ? `<span class="vda-sure">${Math.round(a.sure)}s${a.sure > 30 ? ' ⚠️' : ''}</span>` : ''}
             </div>`).join('')}
             ${hintsUsed > 0 ? `<p class="vd-hints">💡 ${hintsUsed} kez ipucu kullandı</p>` : ''}
+            ${(() => {
+              const wrongCount = answers.filter(a => !a.dogruMu).length;
+              const slowCount = answers.filter(a => a.sure && a.sure > 30).length;
+              const hintRate = total > 0 ? Math.round((hintsUsed / total) * 100) : 0;
+              const avgTime = total > 0 ? Math.round(answers.reduce((s, a) => s + (a.sure || 0), 0) / total) : 0;
+              const insights = [];
+              if (wrongCount >= 3) insights.push(`<span class="vd-insight vd-insight-warn">⚠️ Kavram Boşluğu: ${wrongCount} yanlış cevap — bu konuyu tekrar etmesi önerilir</span>`);
+              if (slowCount >= 2) insights.push(`<span class="vd-insight vd-insight-info">⏱️ ${slowCount} soruda 30sn+ düşünme — doğru olsa bile emin değil</span>`);
+              if (hintRate >= 50) insights.push(`<span class="vd-insight vd-insight-info">💡 İpucu bağımlılığı: %${hintRate} — yüzeysel anlama, derinleştirme gerekli</span>`);
+              if (avgTime > 0) insights.push(`<span class="vd-insight">Ortalama cevap süresi: ${avgTime} saniye</span>`);
+              return insights.length > 0 ? `<div class="vd-insights">${insights.join('')}</div>` : '';
+            })()}
           </div>` : lessonProg.attempts > 0 ? '<p class="vd-no-data">Soru detayı mevcut değil.</p>' : ''}
         </div>`;
       }).join('')}
@@ -2043,4 +2212,234 @@ function _renderVeliPortalView(ogrenciUid, code, data) {
         ← Farklı Öğrenciyi Takip Et
       </button>
     </div>`;
+}
+
+// ========== SEVİYE HARİTASI ==========
+function renderSeviyeHaritasi() {
+  if (requireLogin()) return;
+  const currentLevel = Store.getLevel();
+  const lp = Store.getLevelProgress();
+  app.innerHTML = `
+    ${topNavHTML(true, 'Seviye Haritam')}
+    <div class="page-container">
+      <div class="seviye-hero">
+        <div class="seviye-hero-icon">${currentLevel.icon}</div>
+        <h2>${currentLevel.name}</h2>
+        <p class="seviye-hero-level">Seviye ${currentLevel.level}</p>
+        <div class="seviye-hero-bar">
+          <div class="progress-bar"><div class="progress-fill" style="width:${lp.pct}%;background:linear-gradient(90deg,#FFD700,#FF6B35)"></div></div>
+          <span class="seviye-hero-xp">${Store.getXP()} XP ${lp.next ? `/ ${lp.next.xp} XP` : '(Maks!)'}</span>
+        </div>
+        ${lp.next ? `<p class="seviye-next-hint">Sonraki seviye: <strong>${lp.next.icon} ${lp.next.name}</strong> — ${lp.xpToNext} XP kaldı</p>` : '<p class="seviye-next-hint">En yüksek seviyeye ulaştın! Tebrikler!</p>'}
+      </div>
+      <div class="seviye-yol">
+        ${LEVELS.map((lvl, i) => {
+          const reached = Store.getXP() >= lvl.xp;
+          const isCurrent = lvl.level === currentLevel.level;
+          return `<div class="seviye-node ${reached ? 'seviye-reached' : 'seviye-locked'} ${isCurrent ? 'seviye-current' : ''}">
+            <div class="seviye-node-circle">${reached ? lvl.icon : '🔒'}</div>
+            <div class="seviye-node-info">
+              <strong>Sv. ${lvl.level}</strong>
+              <span>${reached ? lvl.name : '???'}</span>
+              <span class="seviye-node-xp">${lvl.xp} XP</span>
+            </div>
+          </div>
+          ${i < LEVELS.length - 1 ? '<div class="seviye-line ' + (Store.getXP() >= LEVELS[i+1].xp ? 'seviye-line-active' : '') + '"></div>' : ''}`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ========== PRATİK MODU ==========
+function renderPratik() {
+  if (requireLogin()) return;
+  app.innerHTML = `
+    ${topNavHTML(true, 'Pratik Modu')}
+    <div class="page-container">
+      <div class="pratik-header">
+        <h2>📝 Pratik Modu</h2>
+        <p>Video izlemeden sadece soruları çöz! Tekrar etmenin en hızlı yolu.</p>
+      </div>
+      <div class="ders-full-grid">
+        ${DERSLER.map(d => {
+          const totalQ = d.uniteler.reduce((sum, u) => sum + (u.checkpoints || []).length, 0);
+          return `<div class="pratik-ders-card" style="--ders-color:${d.color};--ders-bg:${d.colorLight}">
+            <div class="pratik-ders-icon">${d.icon}</div>
+            <h3>${d.name}</h3>
+            <p>${totalQ} soru &middot; ${d.uniteler.length} ünite</p>
+            <div class="pratik-unite-list">
+              ${d.uniteler.map(u => {
+                const qCount = (u.checkpoints || []).length;
+                if (qCount === 0) return '';
+                const prog = Store.getLessonProgress(d.slug, u.slug);
+                return `<button class="pratik-unite-btn ${prog.completed ? 'pratik-done' : ''}" onclick="navigate('#/pratik-quiz/${d.slug}/${u.slug}')">
+                  <span>${u.name}</span><span class="pratik-q-count">${qCount} soru</span>
+                </button>`;
+              }).join('')}
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ========== PRATİK QUİZ ==========
+function renderPratikQuiz(params) {
+  if (requireLogin()) return;
+  const [dersSlug, uniteSlug] = params;
+  const ders = getDers(dersSlug);
+  const unite = getUnite(dersSlug, uniteSlug);
+  if (!ders || !unite || !unite.checkpoints?.length) { navigate('#/pratik'); return; }
+
+  const questions = [...unite.checkpoints].sort(() => Math.random() - 0.5);
+  let currentIdx = 0;
+  let score = 0;
+  let answered = false;
+  let correctStreak = 0;
+
+  function renderQuestion() {
+    if (currentIdx >= questions.length) {
+      // Bitir
+      const pct = Math.round((score / questions.length) * 100);
+      const result = Store.addXP(score * 5);
+      Store.checkMissions();
+      app.innerHTML = `
+        ${topNavHTML(true, 'Pratik Sonucu')}
+        <div class="page-center">
+          <div class="ders-sonu-card">
+            <div class="confetti-container" id="confetti"></div>
+            <h2>Pratik Tamamlandı! 🎉</h2>
+            <p>${ders.icon} ${unite.name}</p>
+            <div class="sonu-stats">
+              <div class="sonu-stat"><span class="sonu-val">${score}/${questions.length}</span><span class="sonu-label">Doğru</span></div>
+              <div class="sonu-stat"><span class="sonu-val">%${pct}</span><span class="sonu-label">Başarı</span></div>
+              <div class="sonu-stat"><span class="sonu-val">+${score * 5}</span><span class="sonu-label">XP</span></div>
+            </div>
+            ${result.leveledUp ? `<div class="level-up-banner"><span>${result.leveledUp.icon}</span> Seviye ${result.leveledUp.level}: ${result.leveledUp.name} oldun!</div>` : ''}
+            ${result.newBadge ? `<div class="badge-earned-banner">${result.newBadge.icon} ${result.newBadge.name} rozeti kazanıldı!</div>` : ''}
+            <div class="sonu-actions">
+              <button class="btn btn-primary btn-lg" onclick="navigate('#/pratik')">Başka Ünite Seç</button>
+              <button class="btn btn-outline" onclick="navigate('#/anasayfa')">Ana Sayfa</button>
+            </div>
+          </div>
+        </div>`;
+      if (pct >= 60) setTimeout(createConfetti, 200);
+      return;
+    }
+
+    const q = questions[currentIdx];
+    answered = false;
+    const qEl = document.getElementById('pratikQuizArea');
+    if (!qEl) return;
+    qEl.innerHTML = `
+      <div class="pratik-progress">Soru ${currentIdx + 1} / ${questions.length}</div>
+      <div class="pratik-question">
+        <p class="quiz-question-text">${q.soru}</p>
+        <div class="quiz-options">
+          ${q.secenekler.map((s, i) => `<button class="quiz-opt" data-idx="${i}" onclick="pratikAnswer(${i})">${s}</button>`).join('')}
+        </div>
+        ${q.ipucu ? `<details class="quiz-hint"><summary>💡 İpucu</summary><p>${q.ipucu}</p></details>` : ''}
+      </div>
+    `;
+  }
+
+  window.pratikAnswer = function(idx) {
+    if (answered) return;
+    answered = true;
+    const q = questions[currentIdx];
+    const isCorrect = idx === q.dogru;
+    const opts = document.querySelectorAll('.quiz-opt');
+    opts.forEach((opt, i) => {
+      opt.disabled = true;
+      if (i === q.dogru) opt.classList.add('quiz-correct');
+      if (i === idx && !isCorrect) opt.classList.add('quiz-wrong');
+    });
+    if (isCorrect) {
+      score++;
+      correctStreak++;
+      Store.recordCorrectStreak(correctStreak);
+    } else {
+      correctStreak = 0;
+    }
+    // Kaydet
+    Store.recordAnswer(dersSlug, uniteSlug, {
+      soru: q.soru, secilen: idx, dogru: q.dogru, dogruMu: isCorrect,
+      ipucuKullandiMi: false, sure: 0, tarih: new Date().toISOString()
+    });
+    setTimeout(() => { currentIdx++; renderQuestion(); }, isCorrect ? 800 : 1500);
+  };
+
+  app.innerHTML = `
+    ${topNavHTML(true, unite.name + ' — Pratik')}
+    <div class="page-container">
+      <div class="pratik-quiz-header" style="border-color:${ders.color}">
+        <span>${ders.icon} ${ders.name}</span>
+        <span>Skor: <strong id="pratikScore">${score}/${questions.length}</strong></span>
+      </div>
+      <div id="pratikQuizArea"></div>
+    </div>`;
+  renderQuestion();
+}
+
+// ========== HATALARIM ==========
+function renderHatalarim() {
+  if (requireLogin()) return;
+  const allErrors = [];
+  for (const d of DERSLER) {
+    for (const u of d.uniteler) {
+      const answers = Store.getAnswerDetails(d.slug, u.slug);
+      const errors = answers.filter(a => !a.dogruMu);
+      if (errors.length > 0) {
+        allErrors.push({ ders: d, unite: u, errors });
+      }
+    }
+  }
+
+  app.innerHTML = `
+    ${topNavHTML(true, 'Hatalarım')}
+    <div class="page-container">
+      <div class="hatalarim-header">
+        <h2>❌ Hatalarım</h2>
+        <p>Yanlış cevapladığın soruları burada tekrar edebilirsin.</p>
+      </div>
+      ${allErrors.length === 0 ? `
+        <div class="empty-state">
+          <div class="empty-icon">🎉</div>
+          <h3>Hata yok!</h3>
+          <p>Henüz yanlış cevabın bulunmuyor. Harikasın!</p>
+          <button class="btn btn-primary" onclick="navigate('#/dersler')">Derse Git →</button>
+        </div>
+      ` : `
+        <div class="hatalarim-summary">
+          <span>Toplam ${allErrors.reduce((s, e) => s + e.errors.length, 0)} yanlış cevap</span>
+          <span>${allErrors.length} farklı ünitede</span>
+        </div>
+        ${allErrors.map(({ ders, unite, errors }) => `
+          <div class="hata-grup">
+            <div class="hata-grup-header" style="border-left-color:${ders.color}">
+              <span>${ders.icon} ${ders.name} — ${unite.name}</span>
+              <span class="hata-count">${errors.length} hata</span>
+              <button class="btn btn-sm btn-primary" onclick="navigate('#/pratik-quiz/${ders.slug}/${unite.slug}')">Tekrar Et →</button>
+            </div>
+            <div class="hata-list">
+              ${errors.slice(0, 5).map(e => {
+                const cp = (unite.checkpoints || []).find(c => c.soru === e.soru);
+                return `<div class="hata-item">
+                  <div class="hata-soru">${e.soru}</div>
+                  <div class="hata-cevaplar">
+                    <span class="hata-yanlis">Senin: ${cp ? cp.secenekler[e.secilen] : '—'}</span>
+                    <span class="hata-dogru">Doğru: ${cp ? cp.secenekler[e.dogru] : '—'}</span>
+                  </div>
+                  ${cp?.ipucu ? `<div class="hata-ipucu">💡 ${cp.ipucu}</div>` : ''}
+                </div>`;
+              }).join('')}
+              ${errors.length > 5 ? `<p class="hata-more">...ve ${errors.length - 5} hata daha</p>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      `}
+    </div>
+  `;
 }
