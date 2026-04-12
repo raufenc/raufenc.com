@@ -177,12 +177,14 @@ def build_site(base_path=''):
             page_count += 1
 
     # ── 4) sitemap.xml ──
+    SITEMAP_EXCLUDE = {'yonetim', '404'}
     sitemap_entries = []
     for html_file in DIST_DIR.rglob('*.html'):
         rel = html_file.relative_to(DIST_DIR)
-        if 'yonetim' in str(rel):
+        rel_str = str(rel)
+        if any(ex in rel_str for ex in SITEMAP_EXCLUDE):
             continue
-        url_path = str(rel).replace('index.html', '').rstrip('/')
+        url_path = rel_str.replace('index.html', '').rstrip('/')
         if not url_path:
             url_path = ''
         sitemap_entries.append(f"{SITE_URL}/{url_path}")
