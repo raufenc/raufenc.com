@@ -32,11 +32,18 @@ const routes = {
   'admin-ogrenci':  renderAdminOgrenci,
   // --- Veli Portalı (şifresiz, veli kodu ile) ---
   'veli-portal':    renderVeliPortal,
-  // --- Yeni Faza 1 sayfaları ---
+  // --- Yeni sayfalar ---
   'seviye':         renderSeviyeHaritasi,
   'pratik':         renderPratik,
   'pratik-quiz':    renderPratikQuiz,
   'hatalarim':      renderHatalarim,
+  'oyunlar':        renderOyunlar,
+  'avatar':         renderAvatar,
+  'magaza':         renderMagaza,
+  'arama':          renderArama,
+  'flashcard':      renderFlashcard,
+  'deneme':         renderDeneme,
+  'onboarding':     renderOnboarding,
 };
 
 function navigate(hash) { window.location.hash = hash; }
@@ -90,6 +97,13 @@ function requireAdmin() {
   return false;
 }
 
+window.toggleSound = function() {
+  if (!window.AudioFX) return;
+  const on = AudioFX.toggle();
+  const btn = document.getElementById('soundBtn');
+  if (btn) btn.textContent = on ? '🔊' : '🔇';
+};
+
 window.appLogout = async function() {
   if (!confirm('Çıkış yapmak istediğine emin misin?')) return;
   if (window.FirebaseService) await FirebaseService.signOut();
@@ -125,11 +139,26 @@ function topNavHTML(showBack = false, title = '') {
           <span class="nav-xp">⭐ <span id="navXP">${Store.getXP()} XP</span></span>
           <span class="nav-streak">🔥 <span id="navStreak">${Store.getStreak()}</span></span>
           ${window.FirebaseService?.getCurrentUser() ? '<span class="nav-sync" title="Bulut senkronize">☁️</span>' : ''}
+          <button class="btn-icon" onclick="navigate('#/arama')" title="Ara">🔍</button>
+          <button class="btn-icon" onclick="toggleSound()" title="Ses" id="soundBtn">${window.AudioFX?.isEnabled() ? '🔊' : '🔇'}</button>
           <button class="btn-icon" onclick="navigate('#/anasayfa')">🏠</button>
           <button class="btn-icon nav-logout" title="Çıkış" onclick="appLogout()">⏻</button>
         ` : ''}
       </div>
     </nav>`;
+}
+
+function animateCounters() {
+  document.querySelectorAll('.ls-num[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    let current = 0;
+    const step = Math.max(1, Math.ceil(target / 40));
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current >= 1000 ? current.toLocaleString('tr-TR') + '+' : current;
+    }, 30);
+  });
 }
 
 function getGreetingEmoji() {
@@ -166,12 +195,26 @@ function renderLanding() {
         `).join('')}
       </div>
     </section>
+    <section class="landing-stats-bar">
+      <div class="landing-stat"><span class="ls-num" data-target="1000">0</span><span class="ls-label">Soru</span></div>
+      <div class="landing-stat"><span class="ls-num" data-target="71">0</span><span class="ls-label">Ünite</span></div>
+      <div class="landing-stat"><span class="ls-num" data-target="5">0</span><span class="ls-label">Ders</span></div>
+      <div class="landing-stat"><span class="ls-num" data-target="30">0</span><span class="ls-label">Rozet</span></div>
+    </section>
+    <section class="landing-howto">
+      <h2>Nasıl Çalışır?</h2>
+      <div class="howto-grid">
+        <div class="howto-step"><div class="howto-num">1</div><div class="howto-icon">📺</div><h3>Video İzle</h3><p>Kısa ve öz konu anlatım videoları</p></div>
+        <div class="howto-step"><div class="howto-num">2</div><div class="howto-icon">❓</div><h3>Soru Çöz</h3><p>Video sırasında checkpoint soruları</p></div>
+        <div class="howto-step"><div class="howto-num">3</div><div class="howto-icon">⭐</div><h3>XP Kazan</h3><p>Seviye atla, rozet topla, görev tamamla</p></div>
+      </div>
+    </section>
     <section class="landing-features">
       <div class="feature-grid">
         <div class="feature-card"><div class="feature-icon">🎯</div><h3>Kişiselleştirilmiş</h3><p>Hızına ve seviyene göre uyarlanan dersler</p></div>
-        <div class="feature-card"><div class="feature-icon">🏆</div><h3>Oyunlaştırılmış</h3><p>XP kazan, rozet topla, serini koru</p></div>
-        <div class="feature-card"><div class="feature-icon">📺</div><h3>Video Tabanlı</h3><p>En iyi eğitimcilerin kısa konu anlatımları</p></div>
-        <div class="feature-card"><div class="feature-icon">👨‍👩‍👧</div><h3>Veli Dostu</h3><p>İlerleme takibi ve destek önerileri</p></div>
+        <div class="feature-card"><div class="feature-icon">🏆</div><h3>Oyunlaştırılmış</h3><p>30 seviye, 30 rozet, günlük görevler</p></div>
+        <div class="feature-card"><div class="feature-icon">🎮</div><h3>Mini Oyunlar</h3><p>Eğlenerek öğren — Hızlı Cevap, Hafıza Kartları</p></div>
+        <div class="feature-card"><div class="feature-icon">👨‍👩‍👧</div><h3>Veli Dostu</h3><p>Hedef koyma, ödev atama, kutlama gönderme</p></div>
       </div>
     </section>
     <section class="landing-trust">
@@ -179,6 +222,7 @@ function renderLanding() {
     </section>
     <footer class="landing-footer"><p>5. Sınıf Evde Öğrenme Platformu &copy; 2026</p></footer>
   `;
+  setTimeout(animateCounters, 300);
 }
 
 // ========== GİRİŞ ==========
@@ -354,7 +398,7 @@ function renderGiris() {
       const role = profile?.role;
       if (role === 'admin')    navigate('#/admin');
       else if (role === 'veli') navigate('#/veli');
-      else                      navigate(profile?.xp > 0 ? '#/anasayfa' : '#/mod-sec');
+      else                      navigate(!Store.isOnboarded() ? '#/onboarding' : profile?.xp > 0 ? '#/anasayfa' : '#/mod-sec');
     };
   }
 }
@@ -513,12 +557,32 @@ function renderAnasayfa() {
       <div class="bottom-actions">
         <a href="#/pratik" class="btn btn-outline">📝 Pratik Modu</a>
         <a href="#/hatalarim" class="btn btn-outline">❌ Hatalarım</a>
+        <a href="#/flashcard" class="btn btn-outline">🃏 Flashcard</a>
+        <a href="#/deneme" class="btn btn-outline">📋 Deneme Sınavı</a>
+        <a href="#/oyunlar" class="btn btn-outline">🎮 Mini Oyunlar</a>
         <a href="#/basarilar" class="btn btn-outline">🎖️ Rozetlerim</a>
         <a href="#/seviye" class="btn btn-outline">🏆 Seviye Haritam</a>
+        <a href="#/magaza" class="btn btn-outline">🎨 Tema Mağazası</a>
+        <a href="#/avatar" class="btn btn-outline">👤 Avatarım</a>
         <a href="#/tekrar" class="btn btn-outline">🔄 Tekrar Merkezi</a>
         <a href="#/veli" class="btn btn-outline">👨‍👩‍👧 Veli Paneli</a>
         <button class="btn btn-outline btn-danger" onclick="if(confirm('Çıkış yapılsın mı?')){Store.logout();navigate('#/')}">🚪 Çıkış</button>
       </div>
+      ${(() => {
+        const unseen = Store.getUnseenCelebrations();
+        if (unseen.length === 0) return '';
+        Store.markCelebrationsSeen();
+        const c = unseen[0];
+        if (window.AudioFX) setTimeout(() => AudioFX.play('celebrate'), 300);
+        return `<div class="celebration-overlay" id="celebOverlay" onclick="this.remove()">
+          <div class="celebration-card">
+            <div class="celebration-emoji">${c.type === 'star' ? '⭐' : c.type === 'confetti' ? '🎉' : '❤️'}</div>
+            <h2>Ailenden Mesaj!</h2>
+            <p class="celebration-msg">${c.msg}</p>
+            <button class="btn btn-primary" onclick="document.getElementById('celebOverlay').remove()">Teşekkürler! 😊</button>
+          </div>
+        </div>`;
+      })()}
     </div>
   `;
 }
@@ -1623,6 +1687,43 @@ function _veliPanelRefresh() {
         })()}
       </div>
 
+      <!-- Ödev Atama -->
+      <div class="veli-odev-section">
+        <h3>📚 Ödev Ver</h3>
+        ${(() => {
+          const assignments = Store.getAssignments();
+          const active = assignments.filter(a => !a.completed);
+          return `${active.length > 0 ? `<div class="veli-odev-list">${active.map(a => {
+            const d = getDers(a.dersSlug); const u = getUnite(a.dersSlug, a.uniteSlug);
+            return `<div class="veli-odev-item"><span>${d?.icon} ${u?.name || a.uniteSlug}</span>
+              ${a.note ? `<span class="veli-odev-note">${a.note}</span>` : ''}
+            </div>`;
+          }).join('')}</div>` : ''}
+          <select id="odevDers" class="form-input" onchange="odevDersChange()">
+            <option value="">Ders seç...</option>
+            ${DERSLER.map(d => `<option value="${d.slug}">${d.icon} ${d.name}</option>`).join('')}
+          </select>
+          <select id="odevUnite" class="form-input" style="display:none"><option value="">Ünite seç...</option></select>
+          <input type="text" id="odevNote" class="form-input" placeholder="Not (isteğe bağlı)" style="display:none">
+          <button class="btn btn-primary btn-sm" id="odevBtn" style="display:none" onclick="odevEkle()">Ödev Ver</button>`;
+        })()}
+      </div>
+
+      <!-- Kutlama Gönder -->
+      <div class="veli-kutlama-section">
+        <h3>🎉 Kutlama Gönder</h3>
+        <p class="veli-hedef-desc">Çocuğunuza sürpriz bir motivasyon mesajı gönderin!</p>
+        <div class="kutlama-btns">
+          <button class="btn btn-outline" onclick="veliKutlamaGonder('Seninle gurur duyuyorum!','star')">⭐ Gurur</button>
+          <button class="btn btn-outline" onclick="veliKutlamaGonder('Harika çalışıyorsun!','confetti')">🎉 Harika</button>
+          <button class="btn btn-outline" onclick="veliKutlamaGonder('Seni çok seviyorum!','heart')">❤️ Sevgi</button>
+        </div>
+        <div class="kutlama-custom">
+          <input type="text" id="kutlamaMsg" class="form-input" placeholder="Kendi mesajını yaz..." maxlength="100">
+          <button class="btn btn-primary btn-sm" onclick="veliKutlamaOzel()">Gönder</button>
+        </div>
+      </div>
+
       <!-- Genel Öneriler -->
       <div class="veli-insight">
         <h4>💡 Öneriler</h4>
@@ -1645,6 +1746,42 @@ function _veliPanelRefresh() {
       </div>` : ''}
     </div>`;
 }
+
+window.odevDersChange = function() {
+  const slug = document.getElementById('odevDers').value;
+  const uniteEl = document.getElementById('odevUnite');
+  const noteEl = document.getElementById('odevNote');
+  const btn = document.getElementById('odevBtn');
+  if (!slug) { uniteEl.style.display='none'; noteEl.style.display='none'; btn.style.display='none'; return; }
+  const ders = getDers(slug);
+  uniteEl.innerHTML = '<option value="">Ünite seç...</option>' + ders.uniteler.map(u => `<option value="${u.slug}">${u.name}</option>`).join('');
+  uniteEl.style.display=''; noteEl.style.display=''; btn.style.display='';
+};
+
+window.odevEkle = function() {
+  const dersSlug = document.getElementById('odevDers').value;
+  const uniteSlug = document.getElementById('odevUnite').value;
+  const note = document.getElementById('odevNote').value.trim();
+  if (!dersSlug || !uniteSlug) { alert('Ders ve ünite seçin.'); return; }
+  Store.addAssignment({ dersSlug, uniteSlug, note });
+  if (window.FirebaseService) FirebaseService.scheduleSync();
+  _veliPanelRefresh();
+};
+
+window.veliKutlamaGonder = function(msg, type) {
+  Store.addCelebration(msg, type);
+  if (window.FirebaseService) FirebaseService.scheduleSync();
+  alert('Kutlama gönderildi! Çocuğunuz sonraki girişinde görecek. 🎉');
+};
+
+window.veliKutlamaOzel = function() {
+  const msg = document.getElementById('kutlamaMsg').value.trim();
+  if (!msg) { alert('Mesaj yazın.'); return; }
+  Store.addCelebration(msg, 'confetti');
+  if (window.FirebaseService) FirebaseService.scheduleSync();
+  document.getElementById('kutlamaMsg').value = '';
+  alert('Mesajınız gönderildi! 💌');
+};
 
 window.veliHedefEkle = function() {
   const type = document.getElementById('hedefType').value;
@@ -2442,4 +2579,330 @@ function renderHatalarim() {
       `}
     </div>
   `;
+}
+
+// ========== ONBOARDING ==========
+function renderOnboarding() {
+  let step = 0;
+  const steps = [
+    { icon: '🎓', title: 'Hoş Geldin!', text: 'Ben senin öğrenme arkadaşınım. Birlikte harika şeyler öğreneceğiz!' },
+    { icon: '📅', title: 'Her Gün 3 Ders', text: 'Her gün sana 3 farklı dersten konular seçiyorum. Günlük Öğrenme ile düzenli ilerlersin!' },
+    { icon: '📺', title: 'Video İzle, Soru Çöz', text: 'Kısa video dersler izle, video sırasında çıkan soruları yanıtla. Pratik moduyla tekrar et!' },
+    { icon: '⭐', title: 'XP Kazan, Seviye Atla', text: 'Her doğru cevap XP kazandırır. Seviyeni yükselt, rozetler topla, görevleri tamamla!' },
+    { icon: '🚀', title: 'Hadi Başlayalım!', text: 'Hazırsan ilk dersine başlayalım. Ailene ilerlemeni göstermeyi unutma!' },
+  ];
+  function render() {
+    app.innerHTML = `
+      ${topNavHTML()}
+      <div class="page-center">
+        <div class="onboarding-card">
+          <div class="onboarding-dots">${steps.map((_, i) => `<span class="ob-dot ${i === step ? 'ob-active' : i < step ? 'ob-done' : ''}"></span>`).join('')}</div>
+          <div class="onboarding-icon">${steps[step].icon}</div>
+          <h2>${steps[step].title}</h2>
+          <p>${steps[step].text}</p>
+          <div class="onboarding-actions">
+            ${step > 0 ? '<button class="btn btn-outline" onclick="onboardingPrev()">← Geri</button>' : ''}
+            ${step < steps.length - 1
+              ? '<button class="btn btn-primary btn-lg" onclick="onboardingNext()">İleri →</button>'
+              : '<button class="btn btn-primary btn-lg" onclick="onboardingDone()">Başlayalım! 🚀</button>'}
+          </div>
+        </div>
+      </div>`;
+  }
+  window.onboardingNext = () => { step++; render(); };
+  window.onboardingPrev = () => { step--; render(); };
+  window.onboardingDone = () => { Store.setOnboarded(); navigate('#/mod-sec'); };
+  render();
+}
+
+// ========== AVATAR ==========
+const AVATAR_BASES = ['👦','👧','👦🏻','👧🏻','👦🏽','👧🏽','🧒','🧒🏻','🧒🏽','👶'];
+const AVATAR_HAIRS = ['🎀','🧢','👒','🎩','🪖','👑','💎','🌸'];
+const AVATAR_FRAMES = ['⭐','🔥','💜','💚','🩵','🧡'];
+
+function renderAvatar() {
+  if (requireLogin()) return;
+  const av = Store.getAvatar();
+  const lvl = Store.getLevel().level;
+  function render() {
+    const current = Store.getAvatar();
+    app.innerHTML = `
+      ${topNavHTML(true, 'Avatarım')}
+      <div class="page-container">
+        <div class="avatar-preview">
+          <div class="avatar-display">
+            ${current.frame >= 0 ? `<span class="avatar-frame">${AVATAR_FRAMES[current.frame]}</span>` : ''}
+            <span class="avatar-face">${AVATAR_BASES[current.base]}</span>
+            ${current.hair >= 0 ? `<span class="avatar-hair">${AVATAR_HAIRS[current.hair]}</span>` : ''}
+          </div>
+        </div>
+        <div class="avatar-section"><h3>Yüz</h3>
+          <div class="avatar-options">${AVATAR_BASES.map((b, i) =>
+            `<button class="av-opt ${current.base === i ? 'av-active' : ''}" onclick="setAvatarPart('base',${i})">${b}</button>`).join('')}
+          </div>
+        </div>
+        <div class="avatar-section"><h3>Aksesuar</h3>
+          <div class="avatar-options">${AVATAR_HAIRS.map((h, i) => {
+            const locked = i > 3 && lvl < (i * 3);
+            return `<button class="av-opt ${current.hair === i ? 'av-active' : ''} ${locked ? 'av-locked' : ''}" onclick="${locked ? '' : `setAvatarPart('hair',${i})`}" ${locked ? 'disabled' : ''}>${locked ? '🔒' : h}</button>`;
+          }).join('')}
+          </div>
+        </div>
+        <div class="avatar-section"><h3>Çerçeve</h3>
+          <div class="avatar-options">${AVATAR_FRAMES.map((f, i) => {
+            const locked = i > 1 && lvl < (i * 5);
+            return `<button class="av-opt ${current.frame === i ? 'av-active' : ''} ${locked ? 'av-locked' : ''}" onclick="${locked ? '' : `setAvatarPart('frame',${i})`}" ${locked ? 'disabled' : ''}>${locked ? '🔒' : f}</button>`;
+          }).join('')}
+          </div>
+        </div>
+      </div>`;
+  }
+  window.setAvatarPart = (part, val) => {
+    const av = Store.getAvatar();
+    av[part] = val;
+    Store.setAvatar(av);
+    if (window.AudioFX) AudioFX.play('click');
+    render();
+  };
+  render();
+}
+
+// ========== TEMA MAĞAZASI ==========
+function renderMagaza() {
+  if (requireLogin()) return;
+  const unlocked = Store.getUnlockedThemes();
+  const current = Store.getTheme();
+  app.innerHTML = `
+    ${topNavHTML(true, 'Tema Mağazası')}
+    <div class="page-container">
+      <h2 class="section-title">🎨 Tema Mağazası</h2>
+      <p style="text-align:center;color:#666;margin-bottom:20px">Seviye yükselttikçe yeni temalar açılır!</p>
+      <div class="tema-grid">
+        ${Object.entries(THEMES).map(([id, t]) => {
+          const isUnlocked = unlocked.includes(id);
+          const isActive = current === id;
+          const reqLevel = id === 'sunset' ? 5 : id === 'forest' ? 10 : id === 'space' ? 15 : id === 'ocean' ? 20 : id === 'rainbow' ? 30 : 0;
+          return `<button class="tema-card ${isActive ? 'tema-active' : ''} ${!isUnlocked ? 'tema-locked' : ''}"
+            onclick="${isUnlocked ? `Store.setTheme('${id}');navigate('#/magaza')` : ''}" ${!isUnlocked ? 'disabled' : ''}>
+            <span class="tema-icon">${t.icon}</span>
+            <h4>${t.name}</h4>
+            ${!isUnlocked ? `<span class="tema-req">Seviye ${reqLevel}</span>` : isActive ? '<span class="tema-check">✓ Aktif</span>' : ''}
+          </button>`;
+        }).join('')}
+      </div>
+    </div>`;
+}
+
+// ========== ARAMA ==========
+function renderArama() {
+  if (requireLogin()) return;
+  app.innerHTML = `
+    ${topNavHTML(true, 'Ara')}
+    <div class="page-container">
+      <div class="arama-box">
+        <input type="text" id="aramaInput" class="form-input arama-input" placeholder="Ünite veya soru ara..." autofocus oninput="aramaYap()">
+      </div>
+      <div id="aramaResults"></div>
+    </div>`;
+  window.aramaYap = function() {
+    const q = document.getElementById('aramaInput').value.toLocaleLowerCase('tr').trim();
+    const el = document.getElementById('aramaResults');
+    if (q.length < 2) { el.innerHTML = '<p class="arama-hint">En az 2 karakter yazın...</p>'; return; }
+    const results = [];
+    DERSLER.forEach(d => d.uniteler.forEach(u => {
+      const nameMatch = u.name.toLocaleLowerCase('tr').includes(q);
+      const hedefMatch = u.hedef.toLocaleLowerCase('tr').includes(q);
+      const questionMatches = (u.checkpoints || []).filter(c => c.soru.toLocaleLowerCase('tr').includes(q));
+      if (nameMatch || hedefMatch || questionMatches.length > 0) {
+        results.push({ ders: d, unite: u, nameMatch, questionMatches });
+      }
+    }));
+    el.innerHTML = results.length === 0 ? '<p class="arama-empty">Sonuç bulunamadı.</p>' :
+      results.slice(0, 20).map(r => `<a href="#/unite/${r.ders.slug}/${r.unite.slug}" class="arama-result">
+        <span class="arama-ders">${r.ders.icon} ${r.ders.name}</span>
+        <strong>${r.unite.name}</strong>
+        ${r.questionMatches.length > 0 ? `<span class="arama-q-count">${r.questionMatches.length} soru eşleşmesi</span>` : ''}
+      </a>`).join('');
+  };
+}
+
+// ========== FLASHCARD ==========
+function renderFlashcard() {
+  if (requireLogin()) return;
+  app.innerHTML = `
+    ${topNavHTML(true, 'Flashcard')}
+    <div class="page-container">
+      <h2 class="section-title">🃏 Flashcard Modu</h2>
+      <p style="text-align:center;color:#666;margin-bottom:20px">Kartı çevirmek için tıkla! Hızlı tekrar için ideal.</p>
+      <div class="ders-full-grid">
+        ${DERSLER.map(d => `<button class="ders-card-full" style="--ders-color:${d.color};--ders-bg:${d.colorLight}"
+          onclick="startFlashcards('${d.slug}')">
+          <div class="ders-card-full-icon">${d.icon}</div>
+          <div class="ders-card-full-info"><h3>${d.name}</h3><p>${d.uniteler.reduce((s,u) => s + (u.checkpoints||[]).length, 0)} kart</p></div>
+          <span class="ders-card-full-arrow">→</span>
+        </button>`).join('')}
+      </div>
+    </div>`;
+  window.startFlashcards = function(dersSlug) {
+    const ders = getDers(dersSlug);
+    if (!ders) return;
+    const cards = [];
+    ders.uniteler.forEach(u => (u.checkpoints || []).forEach(c => {
+      cards.push({ q: c.soru, a: c.secenekler[c.dogru], hint: c.ipucu || '' });
+    }));
+    if (cards.length === 0) return;
+    const shuffled = cards.sort(() => Math.random() - 0.5);
+    let idx = 0, flipped = false;
+    function renderCard() {
+      const c = shuffled[idx];
+      app.innerHTML = `
+        ${topNavHTML(true, ders.name + ' Flashcard')}
+        <div class="page-center">
+          <div class="fc-progress">${idx + 1} / ${shuffled.length}</div>
+          <div class="fc-card ${flipped ? 'fc-flipped' : ''}" onclick="flipCard()">
+            <div class="fc-front"><p>${c.q}</p></div>
+            <div class="fc-back"><p>${c.a}</p>${c.hint ? `<small>💡 ${c.hint}</small>` : ''}</div>
+          </div>
+          <div class="fc-actions">
+            <button class="btn btn-outline" onclick="fcPrev()" ${idx === 0 ? 'disabled' : ''}>← Önceki</button>
+            <button class="btn btn-primary" onclick="fcNext()">${idx < shuffled.length - 1 ? 'Sonraki →' : 'Bitir ✓'}</button>
+          </div>
+        </div>`;
+    }
+    window.flipCard = () => { flipped = !flipped; if (window.AudioFX) AudioFX.play('click'); renderCard(); };
+    window.fcPrev = () => { if (idx > 0) { idx--; flipped = false; renderCard(); } };
+    window.fcNext = () => { if (idx < shuffled.length - 1) { idx++; flipped = false; renderCard(); } else navigate('#/flashcard'); };
+    renderCard();
+  };
+}
+
+// ========== DENEME SINAVI ==========
+function renderDeneme() {
+  if (requireLogin()) return;
+  app.innerHTML = `
+    ${topNavHTML(true, 'Deneme Sınavı')}
+    <div class="page-container">
+      <h2 class="section-title">📋 Deneme Sınavı</h2>
+      <p style="text-align:center;color:#666;margin-bottom:20px">20 soruluk deneme sınavı çöz! Süreli ve puanlı.</p>
+      <div class="ders-full-grid">
+        ${DERSLER.map(d => {
+          const totalQ = d.uniteler.reduce((s, u) => s + (u.checkpoints || []).length, 0);
+          return totalQ >= 20 ? `<button class="ders-card-full" style="--ders-color:${d.color};--ders-bg:${d.colorLight}"
+            onclick="startDeneme('${d.slug}')">
+            <div class="ders-card-full-icon">${d.icon}</div>
+            <div class="ders-card-full-info"><h3>${d.name}</h3><p>${totalQ} sorudan 20'si</p></div>
+            <span class="ders-card-full-arrow">→</span>
+          </button>` : '';
+        }).join('')}
+      </div>
+    </div>`;
+  window.startDeneme = function(dersSlug) {
+    const ders = getDers(dersSlug);
+    if (!ders) return;
+    const allQ = [];
+    ders.uniteler.forEach(u => (u.checkpoints || []).forEach(c => allQ.push({...c, unite: u.name})));
+    const questions = allQ.sort(() => Math.random() - 0.5).slice(0, 20);
+    let answers = Array(20).fill(null);
+    let currentQ = 0;
+    let timeLeft = 20 * 60; // 20 dakika
+    let timer = null;
+
+    function renderExam() {
+      const q = questions[currentQ];
+      app.innerHTML = `
+        ${topNavHTML(true, ders.name + ' Deneme')}
+        <div class="page-container">
+          <div class="deneme-hud">
+            <span class="deneme-timer" id="denemeTimer">⏱️ ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}</span>
+            <span>Soru ${currentQ + 1}/20</span>
+          </div>
+          <div class="deneme-nav">${questions.map((_, i) =>
+            `<button class="dn-dot ${answers[i] !== null ? 'dn-answered' : ''} ${i === currentQ ? 'dn-current' : ''}"
+              onclick="goToQ(${i})">${i+1}</button>`).join('')}
+          </div>
+          <div class="deneme-question">
+            <p class="deneme-unite">${q.unite}</p>
+            <p class="deneme-q-text">${q.soru}</p>
+            <div class="quiz-options">
+              ${q.secenekler.map((s, i) => `<button class="quiz-opt ${answers[currentQ] === i ? 'quiz-selected' : ''}"
+                onclick="denemeAnswer(${i})">${s}</button>`).join('')}
+            </div>
+          </div>
+          <div class="deneme-actions">
+            <button class="btn btn-outline" onclick="goToQ(${currentQ - 1})" ${currentQ === 0 ? 'disabled' : ''}>←</button>
+            <button class="btn btn-primary" onclick="${currentQ < 19 ? `goToQ(${currentQ + 1})` : 'submitDeneme()'}">
+              ${currentQ < 19 ? 'Sonraki →' : 'Sınavı Bitir'}</button>
+          </div>
+        </div>`;
+    }
+
+    window.denemeAnswer = (i) => { answers[currentQ] = i; if (window.AudioFX) AudioFX.play('click'); renderExam(); };
+    window.goToQ = (i) => { if (i >= 0 && i < 20) { currentQ = i; renderExam(); } };
+    window.submitDeneme = () => {
+      if (timer) clearInterval(timer);
+      let correct = 0;
+      questions.forEach((q, i) => { if (answers[i] === q.dogru) correct++; });
+      const pct = Math.round((correct / 20) * 100);
+      const xpEarned = correct * 5;
+      Store.addXP(xpEarned);
+      if (window.AudioFX) AudioFX.play(pct >= 70 ? 'celebrate' : 'complete');
+      app.innerHTML = `
+        ${topNavHTML(true, 'Deneme Sonucu')}
+        <div class="page-center">
+          <div class="ders-sonu-card">
+            <div class="confetti-container" id="confetti"></div>
+            <h2>${pct >= 70 ? 'Harika!' : pct >= 50 ? 'İyi Gidiyor!' : 'Tekrar Et!'} ${pct >= 70 ? '🎉' : '💪'}</h2>
+            <p>${ders.icon} ${ders.name} Deneme Sınavı</p>
+            <div class="sonu-stats">
+              <div class="sonu-stat"><span class="sonu-val">${correct}/20</span><span class="sonu-label">Doğru</span></div>
+              <div class="sonu-stat"><span class="sonu-val">%${pct}</span><span class="sonu-label">Başarı</span></div>
+              <div class="sonu-stat"><span class="sonu-val">+${xpEarned}</span><span class="sonu-label">XP</span></div>
+            </div>
+            <div class="sonu-actions">
+              <button class="btn btn-primary" onclick="navigate('#/deneme')">Yeni Deneme</button>
+              <button class="btn btn-outline" onclick="navigate('#/anasayfa')">Ana Sayfa</button>
+            </div>
+          </div>
+        </div>`;
+      if (pct >= 60) setTimeout(createConfetti, 200);
+    };
+
+    timer = setInterval(() => {
+      timeLeft--;
+      const el = document.getElementById('denemeTimer');
+      if (el) el.textContent = `⏱️ ${Math.floor(timeLeft/60)}:${String(timeLeft%60).padStart(2,'0')}`;
+      if (timeLeft <= 0) submitDeneme();
+    }, 1000);
+    renderExam();
+  };
+}
+
+// ========== MİNİ OYUNLAR ==========
+function renderOyunlar() {
+  if (requireLogin()) return;
+  app.innerHTML = `
+    ${topNavHTML(true, 'Mini Oyunlar')}
+    <div class="page-container">
+      <h2 class="section-title">🎮 Mini Oyunlar</h2>
+      <p style="text-align:center;color:#666;margin-bottom:20px">Eğlenerek öğren! Her oyun XP kazandırır.</p>
+      <div class="game-list">
+        <button class="game-card" onclick="startGame('hizli')" style="--game-color:#FF6B35">
+          <span class="game-card-icon">⚡</span><h3>Hızlı Cevap</h3><p>60 saniyede kaç soru çözebilirsin?</p>
+        </button>
+        <button class="game-card" onclick="startGame('hafiza')" style="--game-color:#7B1FA2">
+          <span class="game-card-icon">🧠</span><h3>Hafıza Kartları</h3><p>Soru-cevap eşleştirme oyunu</p>
+        </button>
+        <button class="game-card" onclick="startGame('kelime')" style="--game-color:#2E7D32">
+          <span class="game-card-icon">🔤</span><h3>Kelime Avı</h3><p>Gizli kelimeleri bul!</p>
+        </button>
+      </div>
+      <div id="gameArea"></div>
+    </div>`;
+  window.startGame = function(type) {
+    const area = document.getElementById('gameArea');
+    if (type === 'hizli') MiniGames.renderHizliCevap(area);
+    else if (type === 'hafiza') MiniGames.renderHafizaKartlari(area);
+    else if (type === 'kelime') MiniGames.renderKelimeAvi(area);
+    area.scrollIntoView({ behavior: 'smooth' });
+  };
 }

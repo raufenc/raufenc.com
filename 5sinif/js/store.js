@@ -609,6 +609,69 @@ const Store = {
     return history.find(h => h.date === today) || null;
   },
 
+  // ====== AVATAR SİSTEMİ ======
+  getAvatar() {
+    return this.get('avatar') || { base: 0, hair: 0, accessory: -1, frame: -1 };
+  },
+  setAvatar(config) { this.set('avatar', config); },
+
+  // ====== TEMA SİSTEMİ ======
+  getTheme() { return this.get('theme') || 'default'; },
+  setTheme(id) { this.set('theme', id); applyTheme(id); },
+
+  getUnlockedThemes() {
+    const lvl = this.getLevel().level;
+    const unlocked = ['default'];
+    if (lvl >= 5) unlocked.push('sunset');
+    if (lvl >= 10) unlocked.push('forest');
+    if (lvl >= 15) unlocked.push('space');
+    if (lvl >= 20) unlocked.push('ocean');
+    if (lvl >= 30) unlocked.push('rainbow');
+    return unlocked;
+  },
+
+  // ====== ÖDEV SİSTEMİ ======
+  getAssignments() { return this.get('assignments') || []; },
+  addAssignment(a) {
+    const list = this.getAssignments();
+    list.push({ ...a, id: Date.now(), createdAt: new Date().toISOString(), completed: false });
+    this.set('assignments', list);
+  },
+  completeAssignment(id) {
+    const list = this.getAssignments();
+    const a = list.find(x => x.id === id);
+    if (a) { a.completed = true; a.completedAt = new Date().toISOString(); this.set('assignments', list); }
+  },
+
+  // ====== VELİ KUTLAMA SİSTEMİ ======
+  getCelebrations() { return this.get('celebrations') || []; },
+  addCelebration(msg, type) {
+    const list = this.getCelebrations();
+    list.push({ msg, type, id: Date.now(), seen: false });
+    this.set('celebrations', list);
+  },
+  getUnseenCelebrations() {
+    return this.getCelebrations().filter(c => !c.seen);
+  },
+  markCelebrationsSeen() {
+    const list = this.getCelebrations();
+    list.forEach(c => c.seen = true);
+    this.set('celebrations', list);
+  },
+
+  // ====== MESAJLAŞMA ======
+  getMessages() { return this.get('messages') || []; },
+  addMessage(from, text) {
+    const list = this.getMessages();
+    list.push({ from, text, time: new Date().toISOString(), read: false });
+    if (list.length > 50) list.shift();
+    this.set('messages', list);
+  },
+
+  // ====== ONBOARDING ======
+  isOnboarded() { return !!this.get('onboarded'); },
+  setOnboarded() { this.set('onboarded', true); },
+
   // ====== VELİ HEDEF SİSTEMİ ======
   getParentGoals() {
     return this.get('parentGoals') || [];
@@ -659,3 +722,29 @@ const Store = {
 };
 
 window.Store = Store;
+
+// ====== TEMA UYGULAMA ======
+const THEMES = {
+  default: { name: 'Varsayılan', icon: '💙', colors: {} },
+  sunset:  { name: 'Günbatımı', icon: '🌅', colors: { '--primary':'#FF6B35','--primary-light':'#FFF3E0','--bg':'#FFF8F0','--card-bg':'#FFFAF5' }},
+  forest:  { name: 'Orman', icon: '🌲', colors: { '--primary':'#2E7D32','--primary-light':'#E8F5E9','--bg':'#F1F8E9','--card-bg':'#F9FBF2' }},
+  space:   { name: 'Uzay', icon: '🌌', colors: { '--primary':'#7C4DFF','--primary-light':'#1a1a2e','--bg':'#0f0f23','--card-bg':'#16213e','--text':'#e0e0e0','--text-light':'#aaa' }},
+  ocean:   { name: 'Okyanus', icon: '🌊', colors: { '--primary':'#00ACC1','--primary-light':'#E0F7FA','--bg':'#F0FEFF','--card-bg':'#F5FFFE' }},
+  rainbow: { name: 'Gökkuşağı', icon: '🌈', colors: { '--primary':'#E91E63','--primary-light':'#FCE4EC','--bg':'linear-gradient(135deg,#FFF3E0,#F3E5F5,#E8F5E9)','--card-bg':'#fff' }},
+};
+window.THEMES = THEMES;
+
+function applyTheme(id) {
+  const theme = THEMES[id];
+  if (!theme) return;
+  const root = document.documentElement;
+  // Reset
+  root.removeAttribute('data-theme');
+  ['--primary','--primary-light','--bg','--card-bg','--text','--text-light'].forEach(p => root.style.removeProperty(p));
+  if (id === 'space') root.setAttribute('data-theme', 'dark');
+  Object.entries(theme.colors).forEach(([k, v]) => root.style.setProperty(k, v));
+}
+window.applyTheme = applyTheme;
+
+// Sayfa yuklenince aktif temayi uygula
+document.addEventListener('DOMContentLoaded', () => applyTheme(Store.getTheme()));
