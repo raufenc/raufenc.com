@@ -1090,18 +1090,89 @@ input { font-family: inherit; }
 @keyframes bounceIn { 0% { transform:scale(0.5); opacity:0; } 60% { transform:scale(1.05); } 100% { transform:scale(1); opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-/* ====== DARK MODE (Uzay Teması) ====== */
+/* ====== SEVİYE ATLAMA KUTLAMA ====== */
+.levelup-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; z-index:9999; animation:fadeIn 0.3s; }
+.levelup-card { background:#fff; border-radius:24px; padding:40px 32px; text-align:center; max-width:360px; position:relative; overflow:hidden; animation:bounceIn 0.5s; }
+.levelup-icon { font-size:4rem; margin-bottom:12px; }
+.levelup-card h2 { color:#FFB300; margin:0 0 4px; }
+.levelup-name { font-size:1.1rem; color:#555; margin-bottom:20px; }
+
+/* ====== ROZET TOAST ====== */
+.badge-toast { position:fixed; top:80px; right:-300px; background:#fff; border:2px solid #7B1FA2; border-radius:16px; padding:12px 18px; display:flex; align-items:center; gap:10px; z-index:9998; box-shadow:0 8px 24px rgba(0,0,0,0.15); transition:right 0.4s cubic-bezier(0.4,0,0.2,1); }
+.badge-toast-show { right:16px; }
+.badge-toast-icon { font-size:2rem; }
+.badge-toast div { display:flex; flex-direction:column; }
+.badge-toast strong { font-size:0.9rem; }
+.badge-toast span { font-size:0.75rem; color:#888; }
+
+/* ====== LANDING STATS FIX ====== */
+.landing-stats-bar { background:linear-gradient(135deg,#E8EAF6,#E3F2FD) !important; border-bottom:1px solid #C5CAE9; }
+.ls-label { color:#555; font-weight:500; }
+
+/* ====== DARK MODE — Tam Kapsam ====== */
 [data-theme="dark"] { color-scheme:dark; }
 [data-theme="dark"] body { background:#0f0f23; color:#e0e0e0; }
 [data-theme="dark"] .top-nav { background:#16213e; border-color:#1a1a3e; }
-[data-theme="dark"] .card,.card-form,[data-theme="dark"] .ders-card,[data-theme="dark"] .unite-card,
-[data-theme="dark"] .quest-card,[data-theme="dark"] .badge-card,[data-theme="dark"] .pratik-ders-card,
-[data-theme="dark"] .game-card,[data-theme="dark"] .tema-card { background:#1a1a2e; border-color:#2a2a4e; color:#e0e0e0; }
+[data-theme="dark"] .card,.card-form,
+[data-theme="dark"] .ders-card,[data-theme="dark"] .unite-card,
+[data-theme="dark"] .quest-card,[data-theme="dark"] .badge-card,
+[data-theme="dark"] .pratik-ders-card,[data-theme="dark"] .game-card,
+[data-theme="dark"] .tema-card,[data-theme="dark"] .ders-card-full,
+[data-theme="dark"] .ders-card-landing { background:#1a1a2e; border-color:#2a2a4e; color:#e0e0e0; }
 [data-theme="dark"] .btn-outline { border-color:#444; color:#ccc; }
+[data-theme="dark"] .btn-primary { background:#5C6BC0; }
 [data-theme="dark"] .progress-bar { background:#2a2a3e; }
 [data-theme="dark"] .missions-card { background:#1a1520; border-color:#3a2a4e; }
 [data-theme="dark"] .mission-item { background:#1e1e33; }
 [data-theme="dark"] .hero { background:linear-gradient(135deg,#0a0a1a,#1a1a3e); }
+/* Quiz */
+[data-theme="dark"] .quiz-modal,[data-theme="dark"] .quiz-overlay { background:rgba(0,0,0,0.85); }
+[data-theme="dark"] .quiz-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .quiz-option,[data-theme="dark"] .quiz-opt,[data-theme="dark"] .game-opt { background:#16213e; color:#e0e0e0; border-color:#2a3a5e; }
+[data-theme="dark"] .quiz-correct { background:#1b5e20 !important; color:#A5D6A7 !important; }
+[data-theme="dark"] .quiz-wrong { background:#b71c1c !important; color:#EF9A9A !important; }
+[data-theme="dark"] .quiz-selected { background:#283593 !important; border-color:#5C6BC0 !important; }
+[data-theme="dark"] .hint-box,[data-theme="dark"] .quiz-hint { background:#2a2a1e; color:#FFD54F; border-color:#4a4a2e; }
+/* Feedback */
+[data-theme="dark"] .quiz-feedback { background:#1a1a2e; }
+[data-theme="dark"] .feedback-correct { background:#1b3a1b; color:#81C784; }
+[data-theme="dark"] .feedback-wrong { background:#3a1b1b; color:#EF9A9A; }
+/* Landing */
+[data-theme="dark"] .landing-stats-bar { background:linear-gradient(135deg,#16213e,#1a1a3e) !important; border-color:#2a2a4e; }
+[data-theme="dark"] .ls-num { color:#7C4DFF; }
+[data-theme="dark"] .ls-label { color:#aaa; }
+[data-theme="dark"] .landing-howto { background:#0f0f23; }
+[data-theme="dark"] .howto-step { color:#e0e0e0; }
+[data-theme="dark"] .feature-card { background:#1a1a2e; color:#e0e0e0; }
+/* Veli & Admin */
+[data-theme="dark"] .veli-stat-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .veli-rapor-item { background:#16213e; color:#e0e0e0; }
+[data-theme="dark"] .veli-zayif-card { background:#2a1a1a; border-color:#4a2a2a; }
+[data-theme="dark"] .veli-bugun-rapor { background:#16213e; border-color:#2a3a5e; }
+[data-theme="dark"] .veli-grafik-section { color:#e0e0e0; }
+[data-theme="dark"] .veli-hedefler-section { background:#1a1520; border-color:#3a2a4e; }
+[data-theme="dark"] .veli-odev-section,[data-theme="dark"] .veli-kutlama-section { background:#16213e; border-color:#2a3a5e; }
+[data-theme="dark"] .veli-hedef-card,[data-theme="dark"] .veli-odev-item { background:#1e1e33; }
+[data-theme="dark"] .admin-student-card { background:#1a1a2e; border-color:#2a2a4e; color:#e0e0e0; }
+/* Diğer */
+[data-theme="dark"] .ders-sonu-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .celebration-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .levelup-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .levelup-card h2 { color:#FFD54F; }
+[data-theme="dark"] .badge-toast { background:#1a1a2e; color:#e0e0e0; border-color:#9C27B0; }
+[data-theme="dark"] .onboarding-card { background:#1a1a2e; color:#e0e0e0; }
+[data-theme="dark"] .arama-result { background:#16213e; border-color:#2a3a5e; color:#e0e0e0; }
+[data-theme="dark"] .fc-front { background:linear-gradient(135deg,#16213e,#1a2a4e); border-color:#2a3a5e; color:#e0e0e0; }
+[data-theme="dark"] .fc-back { background:linear-gradient(135deg,#1a2a1a,#1e3a1e); border-color:#2a4a2a; color:#e0e0e0; }
+[data-theme="dark"] .pratik-unite-btn { background:#16213e; border-color:#2a3a5e; color:#e0e0e0; }
+[data-theme="dark"] .hata-item { background:#1a1a2e; border-color:#2a2a3e; }
+[data-theme="dark"] .seviye-hero { background:linear-gradient(135deg,#16213e,#1a1a3e); }
+[data-theme="dark"] .seviye-current { background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(124,77,255,0.1)); border-color:#7C4DFF; }
+[data-theme="dark"] .seviye-node-circle { background:#16213e; }
+[data-theme="dark"] .memory-card { background:#16213e; border-color:#2a3a5e; color:#e0e0e0; }
+[data-theme="dark"] .form-input,[data-theme="dark"] input,[data-theme="dark"] select { background:#16213e; color:#e0e0e0; border-color:#2a3a5e; }
+[data-theme="dark"] .hedef-card-home { background:linear-gradient(135deg,#1a1520,#16213e); border-color:#3a2a4e; }
+[data-theme="dark"] .page-container,[data-theme="dark"] .page-center { color:#e0e0e0; }
 
 /* ====== GELİŞTİRİLMİŞ ANİMASYONLAR ====== */
 .quiz-correct { animation:correctPulse 0.5s ease; }
@@ -1110,6 +1181,33 @@ input { font-family: inherit; }
 @keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } }
 .bottom-actions a,.bottom-actions button { transition:all 0.2s; }
 .bottom-actions a:hover,.bottom-actions button:hover { transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+
+/* ====== ERİŞİLEBİLİRLİK ====== */
+*:focus-visible { outline:2px solid var(--primary, #4A90D9); outline-offset:2px; border-radius:4px; }
+.btn:focus-visible,.btn-icon:focus-visible,.quiz-opt:focus-visible,.quiz-option:focus-visible { outline:2px solid var(--primary, #4A90D9); outline-offset:2px; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+/* ====== MOBİL ALT NAVİGASYON ====== */
+.bottom-nav { display:none; }
+@media (max-width: 768px) {
+  .bottom-nav { display:flex; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #eee; z-index:100; padding:4px 0 env(safe-area-inset-bottom,4px); justify-content:space-around; }
+  [data-theme="dark"] .bottom-nav { background:#16213e; border-color:#2a2a4e; }
+  .bnav-item { display:flex; flex-direction:column; align-items:center; gap:2px; padding:6px 8px; text-decoration:none; color:#888; font-size:0.65rem; transition:color 0.2s; border:none; background:none; cursor:pointer; }
+  .bnav-item.bnav-active { color:#4A90D9; }
+  .bnav-icon { font-size:1.2rem; }
+  .nav-right .btn-icon:nth-child(n+3) { display:none; } /* mobilde ust nav butonlarini gizle */
+  .page-container,.page-center { padding-bottom:72px; } /* alt nav icin bosluk */
+}
+
+/* ====== TABLET BREAKPOINT ====== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .ders-strip { grid-template-columns:repeat(3,1fr); }
+  .ders-full-grid { grid-template-columns:repeat(2,1fr); }
+  .badge-grid { grid-template-columns:repeat(3,1fr); }
+  .tema-grid { grid-template-columns:repeat(3,1fr); }
+  .game-list { grid-template-columns:repeat(2,1fr); }
+  .veli-stats-grid { grid-template-columns:repeat(2,1fr); }
+}
 
 /* ====== MOBİL — Tüm bileşenler ====== */
 @media (max-width: 600px) {

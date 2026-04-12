@@ -109,9 +109,29 @@ const DAILY_ROTATIONS = [
   ['ingilizce', 'fen',      'sosyal'],
 ];
 
-// localStorage CRUD helpers
+// localStorage CRUD helpers — Çoklu kullanıcı namespace desteği
 const Store = {
-  _key: '5sinif_lms_v1',
+  _currentUid: null,
+  _legacyKey: '5sinif_lms_v1',
+
+  get _key() {
+    return '5sinif_' + (this._currentUid || 'anonymous');
+  },
+
+  setUser(uid) {
+    this._currentUid = uid || 'anonymous';
+    // Migrasyon: eski veriler varsa ve yeni key boşsa, kopyala
+    if (uid && !localStorage.getItem(this._key) && localStorage.getItem(this._legacyKey)) {
+      const legacy = localStorage.getItem(this._legacyKey);
+      try {
+        const data = JSON.parse(legacy);
+        // Sadece aynı uid veya profili olmayan legacy data kopyalanır
+        if (!data.profile?.uid || data.profile.uid === uid) {
+          localStorage.setItem(this._key, legacy);
+        }
+      } catch {}
+    }
+  },
 
   _load() {
     try {

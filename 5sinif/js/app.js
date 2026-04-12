@@ -139,13 +139,71 @@ function topNavHTML(showBack = false, title = '') {
           <span class="nav-xp">⭐ <span id="navXP">${Store.getXP()} XP</span></span>
           <span class="nav-streak">🔥 <span id="navStreak">${Store.getStreak()}</span></span>
           ${window.FirebaseService?.getCurrentUser() ? '<span class="nav-sync" title="Bulut senkronize">☁️</span>' : ''}
-          <button class="btn-icon" onclick="navigate('#/arama')" title="Ara">🔍</button>
-          <button class="btn-icon" onclick="toggleSound()" title="Ses" id="soundBtn">${window.AudioFX?.isEnabled() ? '🔊' : '🔇'}</button>
-          <button class="btn-icon" onclick="navigate('#/anasayfa')">🏠</button>
-          <button class="btn-icon nav-logout" title="Çıkış" onclick="appLogout()">⏻</button>
+          <button class="btn-icon" onclick="navigate('#/arama')" title="Ara" aria-label="Ara">🔍</button>
+          <button class="btn-icon" onclick="toggleSound()" title="Ses" id="soundBtn" aria-label="Ses aç/kapa">${window.AudioFX?.isEnabled() ? '🔊' : '🔇'}</button>
+          <button class="btn-icon" onclick="navigate('#/anasayfa')" aria-label="Ana sayfa">🏠</button>
+          <button class="btn-icon nav-logout" title="Çıkış" onclick="appLogout()" aria-label="Çıkış yap">⏻</button>
         ` : ''}
       </div>
-    </nav>`;
+    </nav>
+    ${loggedIn ? `<nav class="bottom-nav" aria-label="Alt menü">
+      <a href="#/anasayfa" class="bnav-item"><span class="bnav-icon">🏠</span>Ana Sayfa</a>
+      <a href="#/gunluk" class="bnav-item"><span class="bnav-icon">📅</span>Günlük</a>
+      <a href="#/pratik" class="bnav-item"><span class="bnav-icon">📝</span>Pratik</a>
+      <a href="#/oyunlar" class="bnav-item"><span class="bnav-icon">🎮</span>Oyunlar</a>
+      <a href="#/basarilar" class="bnav-item"><span class="bnav-icon">🎖️</span>Profil</a>
+    </nav>` : ''}`;
+}
+
+// ========== KUTLAMA FONKSİYONLARI ==========
+function showLevelUpCelebration(level) {
+  const overlay = document.createElement('div');
+  overlay.className = 'levelup-overlay';
+  overlay.innerHTML = `
+    <div class="levelup-card">
+      <div class="confetti-container" id="levelupConfetti"></div>
+      <div class="levelup-icon">${level.icon}</div>
+      <h2>Seviye Atladın!</h2>
+      <p class="levelup-name">Seviye ${level.level}: ${level.name}</p>
+      <button class="btn btn-primary btn-lg" onclick="this.closest('.levelup-overlay').remove()">Harika! 🎉</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  if (window.AudioFX) AudioFX.play('levelup');
+  setTimeout(() => {
+    const c = overlay.querySelector('#levelupConfetti');
+    if (c) createConfettiIn(c);
+  }, 200);
+  setTimeout(() => overlay.remove(), 8000);
+}
+
+function showBadgeToast(badge) {
+  const toast = document.createElement('div');
+  toast.className = 'badge-toast';
+  toast.innerHTML = `<span class="badge-toast-icon">${badge.icon}</span><div><strong>${badge.name}</strong><span>Yeni rozet kazanıldı!</span></div>`;
+  document.body.appendChild(toast);
+  if (window.AudioFX) AudioFX.play('badge');
+  setTimeout(() => toast.classList.add('badge-toast-show'), 50);
+  setTimeout(() => { toast.classList.remove('badge-toast-show'); setTimeout(() => toast.remove(), 400); }, 3500);
+}
+
+function createConfettiIn(container) {
+  if (!container) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const colors = isDark
+    ? ['#FFD700', '#FF6B35', '#00E5FF', '#76FF03', '#E040FB', '#FF4081', '#FFEA00', '#69F0AE']
+    : ['#FF6B35', '#4A90D9', '#43A047', '#FF9800', '#7B1FA2', '#E53935', '#FFD700', '#00BCD4'];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDelay = Math.random() * 1.5 + 's';
+    p.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+    p.style.width = (Math.random() * 8 + 6) + 'px';
+    p.style.height = (Math.random() * 8 + 6) + 'px';
+    container.appendChild(p);
+  }
 }
 
 function animateCounters() {
@@ -311,6 +369,7 @@ function renderGiris() {
     const ad = document.getElementById('ogrenciAdi').value.trim();
     if (!ad) return;
     const veliEl = document.getElementById('veliAdi');
+    Store.setUser('local_' + ad.toLowerCase().replace(/\s+/g, '_'));
     Store.setProfile({ name: ad, parentName: veliEl ? veliEl.value.trim() : '', role: 'ogrenci' });
     Store.startSession();
     navigate('#/mod-sec');
@@ -380,23 +439,29 @@ function renderGiris() {
     };
 
     // Firebase sign-in callback (global — diğer sayfalardan da tetiklenebilir)
-    window._onFirebaseSignIn = (user) => {
+    window._onFirebaseSignIn = async (user) => {
+      // Çoklu kullanıcı: uid bazlı namespace
+      Store.setUser(user.uid);
       let profile = Store.getProfile();
       if (!profile) {
         // İlk giriş — profil oluştur
-        const role = window._pendingRole || 'ogrenci';
+        let role = window._pendingRole || 'ogrenci';
         window._pendingRole = null;
+        // Admin kontrolü: Firestore'dan doğrula (hardcoded kod yerine)
+        if (role === 'admin' && window.FirebaseService?.checkIsAdmin) {
+          const isAdmin = await FirebaseService.checkIsAdmin(user.uid);
+          if (!isAdmin) role = 'ogrenci'; // Admin değilse öğrenci olarak devam et
+        }
         Store.setProfile({ name: user.displayName || user.email.split('@')[0], email: user.email, role, uid: user.uid });
         profile = Store.getProfile();
       } else if (window._pendingRole) {
-        // Mevcut hesap admin koduyla açıldı — rolü güncelle
         Store.setProfile({ ...profile, role: window._pendingRole });
         profile = Store.getProfile();
         window._pendingRole = null;
       }
       Store.startSession();
       const role = profile?.role;
-      if (role === 'admin')    navigate('#/admin');
+      if (role === 'admin')     navigate('#/admin');
       else if (role === 'veli') navigate('#/veli');
       else                      navigate(!Store.isOnboarded() ? '#/onboarding' : profile?.xp > 0 ? '#/anasayfa' : '#/mod-sec');
     };
@@ -925,10 +990,21 @@ window.handleAnswer = function(cpIdx, ansIdx) {
 
   if (correct) {
     state.score++;
-    Store.addXP(10);
+    const xpResult = Store.addXP(10);
     updateNavXP();
+    if (window.AudioFX) AudioFX.play('correct');
+    // Checkpoint dogru seri takibi
+    window._checkpointCorrectStreak = (window._checkpointCorrectStreak || 0) + 1;
+    Store.recordCorrectStreak(window._checkpointCorrectStreak);
+    // Seviye atlama & rozet kontrolu
+    if (xpResult.leveledUp) setTimeout(() => showLevelUpCelebration(xpResult.leveledUp), 600);
+    if (xpResult.newBadge) setTimeout(() => showBadgeToast(xpResult.newBadge), 800);
+  } else {
+    if (window.AudioFX) AudioFX.play('wrong');
+    window._checkpointCorrectStreak = 0;
   }
   state.totalAnswered++;
+  Store.checkMissions();
 
   // Highlight answers
   const options = document.querySelectorAll('.quiz-option');
@@ -1002,7 +1078,11 @@ function renderDersSonu(params) {
 
   if (!prog.completed) {
     Store.setLessonProgress(dersSlug, uniteSlug, { completed: true });
-    Store.addXP(50);
+    const _dersResult = Store.addXP(50);
+    if (window.AudioFX) AudioFX.play('complete');
+    if (_dersResult.leveledUp) setTimeout(() => showLevelUpCelebration(_dersResult.leveledUp), 500);
+    if (_dersResult.newBadge) setTimeout(() => showBadgeToast(_dersResult.newBadge), 700);
+    Store.checkMissions();
     // Schedule review
     const dueDate = new Date(Date.now() + 86400000).toISOString().split('T')[0];
     Store.addReview({ dersSlug, uniteSlug, dersName: ders.name, uniteName: unite.name, dueDate, intervalIdx: 0 });
@@ -1291,11 +1371,15 @@ window.completeGunlukLesson = function(idx) {
   // İlerlemeyi kaydet
   if (!Store.getLessonProgress(dersSlug, uniteSlug).completed) {
     Store.setLessonProgress(dersSlug, uniteSlug, { completed: true });
-    Store.addXP(50);
+    const _gResult = Store.addXP(50);
     const dueDate = new Date(Date.now() + 86400000).toISOString().split('T')[0];
     Store.addReview({ dersSlug, uniteSlug, dersName: ders.name, uniteName: unite.name, dueDate, intervalIdx: 0 });
+    if (window.AudioFX) AudioFX.play('complete');
+    if (_gResult.leveledUp) setTimeout(() => showLevelUpCelebration(_gResult.leveledUp), 500);
+    if (_gResult.newBadge) setTimeout(() => showBadgeToast(_gResult.newBadge), 700);
   }
   Store.recordActivity();
+  Store.checkMissions();
   updateNavXP();
 
   // Oturumu güncelle
@@ -2844,8 +2928,11 @@ function renderDeneme() {
       questions.forEach((q, i) => { if (answers[i] === q.dogru) correct++; });
       const pct = Math.round((correct / 20) * 100);
       const xpEarned = correct * 5;
-      Store.addXP(xpEarned);
+      const _denemeResult = Store.addXP(xpEarned);
       if (window.AudioFX) AudioFX.play(pct >= 70 ? 'celebrate' : 'complete');
+      if (_denemeResult.leveledUp) setTimeout(() => showLevelUpCelebration(_denemeResult.leveledUp), 600);
+      if (_denemeResult.newBadge) setTimeout(() => showBadgeToast(_denemeResult.newBadge), 800);
+      Store.checkMissions();
       app.innerHTML = `
         ${topNavHTML(true, 'Deneme Sonucu')}
         <div class="page-center">

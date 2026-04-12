@@ -205,10 +205,36 @@ const FirebaseService = (() => {
    * Veli bu kodu kullanarak öğrencinin ilerlemesini okuyabilir.
    * Kod: öğrenci email karmasından üretilir (deterministik, 8 hane).
    */
+  // Güvenli rastgele kod üretici
+  function _generateRandomCode(length = 8) {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    const array = new Uint8Array(length);
+    crypto.getRandomValues(array);
+    return Array.from(array, b => chars[b % chars.length]).join('');
+  }
+
+  /**
+   * Davet kodu oluşturur. Öğrenci bu kodu velisiyle paylaşır.
+   * Rastgele 8 haneli güvenli kod (artık email hash değil).
+   */
   async function generateVeliCode(uid, email) {
     if (!_ready) return null;
     try {
-      const code = btoa(email).replace(/[^A-Z0-9]/gi, '').slice(0, 8).toUpperCase();
+      // Mevcut kodu kontrol et
+      const existing = Store.get('veliCode');
+      if (existing) {
+        const doc = await _db.collection('inviteCodes').doc(existing).get();
+        if (doc.exists && doc.data().studentUid === uid) return existing;
+      }
+      const code = _generateRandomCode(8);
+      const name = Store.getProfile()?.name || email?.split('@')[0] || '';
+      await _db.collection('inviteCodes').doc(code).set({
+        studentUid: uid,
+        studentName: name,
+        studentEmail: email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      });
+      // Eski veliLinks formatını da yaz (geriye uyumluluk)
       await _db.collection('veliLinks').doc(code).set({
         ogrenciUid: uid,
         ogrenciEmail: email,
@@ -217,19 +243,82 @@ const FirebaseService = (() => {
       Store.set('veliCode', code);
       return code;
     } catch (err) {
-      console.error('[Firebase] Veli kodu oluşturma hatası:', err);
+      console.error('[Firebase] Davet kodu oluşturma hatası:', err);
       return null;
     }
   }
 
   /**
+   * Veli davet kodunu kullanır ve öğrenciyi bağlar.
+   * Veli birden fazla öğrenciyi bağlayabilir.
+   */
+  async function redeemInviteCode(parentUid, code) {
+    if (!_ready || !parentUid || !code) return null;
+    try {
+      const codeUpper = code.toUpperCase();
+      // Önce inviteCodes koleksiyonunu dene, yoksa veliLinks
+      let codeDoc = await _db.collection('inviteCodes').doc(codeUpper).get();
+      let studentUid, studentName;
+      if (codeDoc.exists) {
+        studentUid = codeDoc.data().studentUid;
+        studentName = codeDoc.data().studentName || '';
+      } else {
+        codeDoc = await _db.collection('veliLinks').doc(codeUpper).get();
+        if (codeDoc.exists) {
+          studentUid = codeDoc.data().ogrenciUid;
+          studentName = codeDoc.data().ogrenciEmail?.split('@')[0] || '';
+        }
+      }
+      if (!studentUid) return null;
+      // Velinin linkedStudents listesine ekle
+      await _db.collection('parents').doc(parentUid).set({
+        linkedStudents: firebase.firestore.FieldValue.arrayUnion({
+          uid: studentUid,
+          name: studentName,
+          code: codeUpper,
+          linkedAt: new Date().toISOString()
+        })
+      }, { merge: true });
+      return { uid: studentUid, name: studentName };
+    } catch (err) {
+      console.error('[Firebase] Davet kodu kullanma hatası:', err);
+      return null;
+    }
+  }
+
+  /** Velinin bağlı öğrencilerini getirir */
+  async function getLinkedStudents(parentUid) {
+    if (!_ready || !parentUid) return [];
+    try {
+      const doc = await _db.collection('parents').doc(parentUid).get();
+      if (doc.exists) return doc.data().linkedStudents || [];
+      return [];
+    } catch (err) {
+      console.error('[Firebase] Bağlı öğrenci listesi hatası:', err);
+      return [];
+    }
+  }
+
+  /** Admin kontrolü — Firestore'dan admin rolünü doğrular */
+  async function checkIsAdmin(uid) {
+    if (!_ready || !uid) return false;
+    try {
+      const doc = await _db.collection('admins').doc(uid).get();
+      return doc.exists;
+    } catch { return false; }
+  }
+
+  /**
    * Veli kodu ile öğrencinin uid'sini çözer.
-   * Sonra startVeliListener() ile dinlemeye başlanabilir.
+   * Hem yeni inviteCodes hem eski veliLinks koleksiyonunu dener.
    */
   async function resolveVeliCode(code) {
     if (!_ready) return null;
     try {
-      const doc = await _db.collection('veliLinks').doc(code.toUpperCase()).get();
+      const codeUpper = code.toUpperCase();
+      let doc = await _db.collection('inviteCodes').doc(codeUpper).get();
+      if (doc.exists) return doc.data().studentUid;
+      doc = await _db.collection('veliLinks').doc(codeUpper).get();
       if (doc.exists) return doc.data().ogrenciUid;
       return null;
     } catch (err) {
@@ -323,6 +412,7 @@ const FirebaseService = (() => {
     pushData, pullData, scheduleSync,
     startVeliListener, stopVeliListener,
     generateVeliCode, resolveVeliCode,
+    redeemInviteCode, getLinkedStudents, checkIsAdmin,
     writeStudentIndex, listStudents, getStudentFullData, addAdminNote,
   };
 })();
