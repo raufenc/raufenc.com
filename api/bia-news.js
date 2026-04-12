@@ -45,18 +45,13 @@ async function verifyJWT(token, secret) {
   } catch(e) { return null; }
 }
 
-// ── Auth: JWT Bearer > X-Admin-Key header > legacy body.password ──
+// ── Auth: yalnızca JWT Bearer token ──
 async function checkAuth(req, body, ADMIN_PW, jwtSecret) {
   const authHeader = req.headers.get('authorization') || '';
   if (authHeader.startsWith('Bearer ')) {
     const payload = await verifyJWT(authHeader.slice(7), jwtSecret);
     if (payload) return { valid: true, user: payload };
   }
-  const xKey = req.headers.get('x-admin-key') || '';
-  if (xKey && xKey === ADMIN_PW)
-    return { valid: true, user: { id: 'admin', name: 'Admin', role: 'admin' } };
-  if (body && body.password === ADMIN_PW)
-    return { valid: true, user: { id: 'admin', name: 'Admin', role: 'admin' } };
   return { valid: false };
 }
 
@@ -66,10 +61,15 @@ export default async function handler(req) {
   const JWT_SECRET = process.env.BIA_JWT_SECRET || ADMIN_PW;
   const BIA_USERS  = process.env.BIA_USERS || '';
 
+  // CORS: yalnızca kendi origin'lerimize izin ver
+  const allowedOrigins = ['https://raufenc.com', 'https://birlikteiyilik.com', 'https://www.birlikteiyilik.com'];
+  const reqOrigin = req.headers.get('origin') || '';
+  const origin = allowedOrigins.includes(reqOrigin) ? reqOrigin : allowedOrigins[0];
+
   const cors = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Admin-Key',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
   };
@@ -106,11 +106,8 @@ export default async function handler(req) {
     const isPublic = searchParams.has('public');
 
     if (!isPublic) {
-      const legacyPw = searchParams.get('password') === ADMIN_PW;
-      if (!legacyPw) {
-        const auth = await checkAuth(req, null, ADMIN_PW, JWT_SECRET);
-        if (!auth.valid) return json({ error: 'Yanlış şifre' }, 401);
-      }
+      const auth = await checkAuth(req, null, ADMIN_PW, JWT_SECRET);
+      if (!auth.valid) return json({ error: 'Yetkisiz erişim' }, 401);
     }
 
     try {

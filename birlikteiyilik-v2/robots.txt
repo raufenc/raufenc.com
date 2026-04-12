@@ -1,3 +1,5 @@
 User-agent: *
-Allow: /
-Sitemap: https://birlikteiyilik.com/sitemap.xml
+Disallow: /
+
+# Staging ortamı — domain taşınana kadar indeksleme kapalı.
+# birlikteiyilik.com aktif olunca Allow: / yapılıp Sitemap eklenecek.
