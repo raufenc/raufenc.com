@@ -36,7 +36,7 @@
 
     <div>
       <h2>Mesaj Gönderin</h2>
-      <form class="mt-6" action="#" method="post" onsubmit="return false;">
+      <form class="mt-6" id="contactForm" onsubmit="return sendContact(event);">
         <div class="form-group">
           <label for="name" class="form-label">Adınız Soyadınız</label>
           <input type="text" id="name" name="name" class="form-input" required>
@@ -61,8 +61,26 @@
           <label for="message" class="form-label">Mesajınız</label>
           <textarea id="message" name="message" class="form-input" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" data-track="submit_contact_form">Mesaj Gönder</button>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+          <button type="submit" class="btn btn-primary" style="flex:1;min-width:180px;" data-track="submit_contact_whatsapp">WhatsApp ile Gönder</button>
+          <a href="mailto:{{ site.email }}" class="btn btn-secondary" style="flex:1;min-width:180px;text-align:center;" data-track="submit_contact_email">E-posta ile Gönder</a>
+        </div>
       </form>
+      <script>
+      function sendContact(e) {
+        e.preventDefault();
+        var n = document.getElementById('name').value.trim();
+        var em = document.getElementById('email').value.trim();
+        var s = document.getElementById('subject');
+        var konu = s.options[s.selectedIndex].text;
+        var m = document.getElementById('message').value.trim();
+        if (!n || !em || !m) return false;
+        var text = 'Merhaba, birlikteiyilik.com iletisim formu:\n\n'
+          + 'Ad: ' + n + '\nE-posta: ' + em + '\nKonu: ' + konu + '\n\nMesaj:\n' + m;
+        window.open('https://wa.me/905348117757?text=' + encodeURIComponent(text), '_blank');
+        return false;
+      }
+      </script>
     </div>
   </div>
 </div></section>

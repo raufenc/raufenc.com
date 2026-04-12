@@ -2,7 +2,7 @@
    Birlikte İyilik Akademi — Animated Counters
    ============================================================ */
 
-function __initCounters() {
+document.addEventListener('DOMContentLoaded', () => {
   const counters = document.querySelectorAll('[data-counter]');
   if (!counters.length) return;
 
@@ -35,6 +35,4 @@ function __initCounters() {
   }, { threshold: 0.3 });
 
   counters.forEach(el => observer.observe(el));
-}
-
-document.addEventListener('DOMContentLoaded', __initCounters);
+});

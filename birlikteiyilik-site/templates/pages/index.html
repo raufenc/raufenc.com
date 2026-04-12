@@ -213,12 +213,21 @@
           {% endfor %}
         </ul>
         <div class="store-badges">
+          {% if site.apps.live %}
           <a href="{{ site.apps.android }}" class="store-badge" data-track="click_googleplay" target="_blank" rel="noopener">
             <span class="store-badge-icon" aria-hidden="true">&#9654;</span> Google Play
           </a>
           <a href="{{ site.apps.ios }}" class="store-badge" data-track="click_appstore" target="_blank" rel="noopener">
             <span class="store-badge-icon" aria-hidden="true">&#63743;</span> App Store
           </a>
+          {% else %}
+          <span class="store-badge" style="opacity:0.6;cursor:default;">
+            <span class="store-badge-icon" aria-hidden="true">&#9654;</span> Google Play — Yakında
+          </span>
+          <span class="store-badge" style="opacity:0.6;cursor:default;">
+            <span class="store-badge-icon" aria-hidden="true">&#63743;</span> App Store — Yakında
+          </span>
+          {% endif %}
         </div>
       </div>
     </div>

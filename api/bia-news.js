@@ -56,23 +56,30 @@ async function checkAuth(req, body, ADMIN_PW, jwtSecret) {
 }
 
 export default async function handler(req) {
-  const ADMIN_PW   = process.env.BIA_ADMIN_PASSWORD;
+  const ADMIN_PW   = process.env.BIA_ADMIN_PASSWORD || '';
   const TOKEN      = process.env.BIA_GITHUB_TOKEN || '';
   const JWT_SECRET = process.env.BIA_JWT_SECRET || ADMIN_PW;
   const BIA_USERS  = process.env.BIA_USERS || '';
 
+  // Güvenlik: secret yoksa hiçbir işleme izin verme
+  if (!JWT_SECRET) {
+    return new Response(JSON.stringify({ error: 'Sunucu yapilandirma hatasi' }), {
+      status: 500, headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
   // CORS: yalnızca kendi origin'lerimize izin ver
   const allowedOrigins = ['https://raufenc.com', 'https://birlikteiyilik.com', 'https://www.birlikteiyilik.com'];
   const reqOrigin = req.headers.get('origin') || '';
-  const origin = allowedOrigins.includes(reqOrigin) ? reqOrigin : allowedOrigins[0];
+  const origin = allowedOrigins.includes(reqOrigin) ? reqOrigin : null;
 
-  const cors = {
-    'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  const corsBase = {
     'Content-Type': 'application/json; charset=utf-8',
     'Cache-Control': 'no-store',
   };
+  const cors = origin
+    ? { ...corsBase, 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization' }
+    : corsBase;
 
   if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
 
@@ -94,8 +101,9 @@ export default async function handler(req) {
   const json = (data, status = 200) =>
     new Response(JSON.stringify(data), { status, headers: cors });
 
-  const decode = (b64) => JSON.parse(decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))));
-  const encode = (obj) => btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2))));
+  const dec = new TextDecoder();
+  const decode = (b64) => JSON.parse(dec.decode(Uint8Array.from(atob(b64.replace(/\n/g, '')), c => c.charCodeAt(0))));
+  const encode = (obj) => btoa(Array.from(new TextEncoder().encode(JSON.stringify(obj, null, 2)), b => String.fromCharCode(b)).join(''));
 
   if (req.method === 'GET') {
     const { searchParams } = new URL(req.url);
@@ -152,7 +160,11 @@ export default async function handler(req) {
 
       const exp = Math.floor(Date.now() / 1000) + 28800; // 8 saat
       const token = await signJWT({ ...user, exp }, JWT_SECRET);
-      return json({ ok: true, token, user, exp });
+      const cookieVal = `bia_auth=${token}; Path=/birlikteiyilik-v2/yonetim; HttpOnly; Secure; SameSite=Lax; Max-Age=28800`;
+      return new Response(JSON.stringify({ ok: true, token, user, exp }), {
+        status: 200,
+        headers: { ...cors, 'Set-Cookie': cookieVal }
+      });
     }
 
     // ── Diğer tüm işlemler için auth kontrolü ──
@@ -163,7 +175,16 @@ export default async function handler(req) {
     if (body.type === 'upload') {
       const { filename, content: imgBase64 } = body;
       if (!filename || !imgBase64) return json({ error: 'filename ve content gerekli' }, 400);
-      const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+
+      // Server-side MIME doğrulaması (magic bytes)
+      const ALLOWED_MAGIC = { '/9j/': 'jpg', 'iVBOR': 'png', 'R0lGO': 'gif', 'UklGR': 'webp' };
+      const prefix = imgBase64.substring(0, 5);
+      if (!Object.keys(ALLOWED_MAGIC).some(m => prefix.startsWith(m))) {
+        return json({ error: 'Yalnizca JPEG, PNG, GIF ve WebP yuklenebilir' }, 400);
+      }
+
+      // Dosya adı güvenliği: çift uzantı ve tehlikeli uzantıları engelle
+      const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_').replace(/\.(html|htm|svg|js|php)$/i, '.blocked');
       const filePath = IMAGES_PATH + safeName;
       let existingSha = '';
       try {

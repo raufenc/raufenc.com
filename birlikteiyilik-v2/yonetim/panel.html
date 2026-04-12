@@ -358,9 +358,13 @@ function sanitizeHTML(html) {
   if (typeof DOMPurify !== 'undefined') {
     return DOMPurify.sanitize(html, PURIFY_CONFIG);
   }
-  // Fallback: temel temizlik
-  return html.replace(/<script[\s\S]*?<\/script>/gi, '')
+  // Fallback: kapsamlı temizlik (DOMPurify yüklenemezse)
+  return html
+    .replace(/<(script|iframe|object|embed|form|style|link|meta|base|svg|math)[\s\S]*?<\/\1>/gi, '')
+    .replace(/<(script|iframe|object|embed|form|style|link|meta|base|svg|math)[^>]*>/gi, '')
+    .replace(/<img[^>]*\bon\w+\s*=[^>]*>/gi, '')
     .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
+    .replace(/on\w+\s*=\s*[^\s>]*/gi, '')
     .replace(/javascript\s*:/gi, '');
 }
 
@@ -1010,7 +1014,7 @@ async function savePrograms() {
 
 function logout() {
   sessionStorage.clear();
-  document.cookie = 'bia_auth=; path=/birlikteiyilik-v2/yonetim; max-age=0; SameSite=Strict';
+  document.cookie = 'bia_auth=; path=/birlikteiyilik-v2/yonetim; max-age=0; SameSite=Lax; Secure';
   window.location.replace('/birlikteiyilik-v2/yonetim/');
 }
 

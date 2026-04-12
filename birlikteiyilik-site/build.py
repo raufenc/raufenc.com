@@ -122,6 +122,7 @@ def build_site(base_path=''):
         'homepage': content.get('homepage', {}),
         'site_url': SITE_URL,
         'base': base_path,
+        'noindex': bool(base_path),
         'now': datetime.now().strftime('%Y-%m-%d'),
     }
 
@@ -144,8 +145,9 @@ def build_site(base_path=''):
 
         out_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Sayfa bazlı context
-        page_ctx = {**ctx, 'current_path': '/' + out_rel.replace('/index.html', '').replace('index.html', '')}
+        # Sayfa bazlı context — canonical URL için temiz yol hesapla
+        clean_path = str(out_path.relative_to(DIST_DIR)).replace('index.html', '').rstrip('/')
+        page_ctx = {**ctx, 'current_path': '/' + clean_path if clean_path else '/'}
         html = template.render(**page_ctx)
         out_path.write_text(html, encoding='utf-8')
         page_count += 1
@@ -178,6 +180,8 @@ def build_site(base_path=''):
     sitemap_entries = []
     for html_file in DIST_DIR.rglob('*.html'):
         rel = html_file.relative_to(DIST_DIR)
+        if 'yonetim' in str(rel):
+            continue
         url_path = str(rel).replace('index.html', '').rstrip('/')
         if not url_path:
             url_path = ''
@@ -191,7 +195,10 @@ def build_site(base_path=''):
     (DIST_DIR / 'sitemap.xml').write_text(sitemap_xml, encoding='utf-8')
 
     # ── 5) robots.txt ──
-    robots = f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n"
+    if base_path:
+        robots = "User-agent: *\nDisallow: /\n\n# Staging ortami — domain tasinana kadar indeksleme kapali.\n"
+    else:
+        robots = f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n"
     (DIST_DIR / 'robots.txt').write_text(robots, encoding='utf-8')
 
     # ── 6) Base path post-processing ──

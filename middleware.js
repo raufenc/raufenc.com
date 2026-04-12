@@ -30,6 +30,12 @@ async function verifyJWT(token, secret) {
 export default async function middleware(req) {
   const JWT_SECRET = process.env.BIA_JWT_SECRET || process.env.BIA_ADMIN_PASSWORD || '';
 
+  // Güvenlik: secret yoksa giriş sayfasına yönlendir
+  if (!JWT_SECRET) {
+    const loginUrl = new URL('/birlikteiyilik-v2/yonetim/', req.url);
+    return Response.redirect(loginUrl, 302);
+  }
+
   // Cookie'den JWT token'ı al
   const cookieHeader = req.headers.get('cookie') || '';
   const match = cookieHeader.split(';').find(c => c.trim().startsWith('bia_auth='));
