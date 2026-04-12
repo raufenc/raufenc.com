@@ -51,14 +51,13 @@
 // ─────────────────────────────
 // ============================================================
 
-// TODO: Firebase konsolundan aldığınız gerçek değerleri buraya yazın
 const FIREBASE_CONFIG = {
-  apiKey:            "FIREBASE_API_KEY",
-  authDomain:        "FIREBASE_PROJECT_ID.firebaseapp.com",
-  projectId:         "FIREBASE_PROJECT_ID",
-  storageBucket:     "FIREBASE_PROJECT_ID.appspot.com",
-  messagingSenderId: "FIREBASE_SENDER_ID",
-  appId:             "FIREBASE_APP_ID"
+  apiKey:            "AIzaSyC0KX9_viGk0H9BFrbGxFAsGjqYF6ESGew",
+  authDomain:        "sinif5-lms.firebaseapp.com",
+  projectId:         "sinif5-lms",
+  storageBucket:     "sinif5-lms.firebasestorage.app",
+  messagingSenderId: "634738369301",
+  appId:             "1:634738369301:web:a3ba242d02af761de7ff1c"
 };
 
 const FirebaseService = (() => {
