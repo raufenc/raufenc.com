@@ -82,7 +82,8 @@ async function doLogin() {
     sessionStorage.setItem('biaToken', token);
     sessionStorage.setItem('biaName', d.user?.name || username);
 
-    // Cookie artık API tarafından HttpOnly Set-Cookie ile ayarlanıyor
+    // Middleware için JWT token'ı cookie'de sakla (8 saat, Secure)
+    document.cookie = `bia_auth=${token}; path=/birlikteiyilik-v2/yonetim; SameSite=Lax; Secure; max-age=28800`;
 
     window.location.href = '/birlikteiyilik-v2/yonetim/panel.html';
   } catch(e) {

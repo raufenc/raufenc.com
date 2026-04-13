@@ -358,13 +358,9 @@ function sanitizeHTML(html) {
   if (typeof DOMPurify !== 'undefined') {
     return DOMPurify.sanitize(html, PURIFY_CONFIG);
   }
-  // Fallback: kapsamlı temizlik (DOMPurify yüklenemezse)
-  return html
-    .replace(/<(script|iframe|object|embed|form|style|link|meta|base|svg|math)[\s\S]*?<\/\1>/gi, '')
-    .replace(/<(script|iframe|object|embed|form|style|link|meta|base|svg|math)[^>]*>/gi, '')
-    .replace(/<img[^>]*\bon\w+\s*=[^>]*>/gi, '')
+  // Fallback: temel temizlik
+  return html.replace(/<script[\s\S]*?<\/script>/gi, '')
     .replace(/on\w+\s*=\s*["'][^"']*["']/gi, '')
-    .replace(/on\w+\s*=\s*[^\s>]*/gi, '')
     .replace(/javascript\s*:/gi, '');
 }
 
