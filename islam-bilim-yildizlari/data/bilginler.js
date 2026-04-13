@@ -142,11 +142,11 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 465,
+        "id": 11,
         "isim": "Altuncuzâde"
       },
       {
-        "id": 785,
+        "id": 82,
         "isim": "İbnü’n-Nefîs"
       },
       {
@@ -462,7 +462,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 998,
+        "id": 125,
         "isim": "Uluğ Bey"
       },
       {
@@ -641,7 +641,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 810,
+        "id": 86,
         "isim": "İbn Tufeyl"
       }
     ],
@@ -1472,7 +1472,7 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 687,
+        "id": 60,
         "isim": "Muhyiddin İbn Arabi"
       }
     ],
@@ -2303,11 +2303,11 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 891,
+        "id": 105,
         "isim": "Kutbüddin Şîrâzî"
       },
       {
-        "id": 752,
+        "id": 75,
         "isim": "İbnü’l-Heysem (Alhazen)"
       }
     ],
@@ -2491,7 +2491,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 459,
+        "id": 10,
         "isim": "Ali Qushji"
       },
       {
@@ -3052,7 +3052,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 546,
+        "id": 28,
         "isim": "Dâvûd el-Kayserî"
       }
     ],
@@ -3155,11 +3155,11 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 810,
+        "id": 86,
         "isim": "İbn Tufeyl"
       },
       {
-        "id": 790,
+        "id": 83,
         "isim": "İbn Rüşd (Averroes)"
       },
       {
@@ -3265,7 +3265,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 630,
+        "id": 47,
         "isim": "Muhammed el-Gâfikî"
       }
     ],
@@ -3317,7 +3317,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 757,
+        "id": 76,
         "isim": "İbn Kunfuz el-Kasantînî"
       },
       {
@@ -3660,7 +3660,7 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 820,
+        "id": 89,
         "isim": "İbn Zuhr (Avenzoar)"
       }
     ],
@@ -3707,17 +3707,17 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 485,
+        "id": 16,
         "isim": "Ebu Ubeyd el-Bekrî"
       },
       {
-        "id": 834,
+        "id": 92,
         "isim": "eş-Şerîf el-İdrîsî"
       }
     ],
     "etkilenen": [
       {
-        "id": 845,
+        "id": 95,
         "isim": "İstahrî"
       }
     ],
@@ -3816,7 +3816,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 623,
+        "id": 45,
         "isim": "Kemâleddîn el-Fârisî"
       },
       {
@@ -3876,7 +3876,7 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 710,
+        "id": 65,
         "isim": "İbn al-Bennâ el-Merrâküşî"
       }
     ],
@@ -4211,11 +4211,11 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 696,
+        "id": 62,
         "isim": "İbn Bâcce (Avempace)"
       },
       {
-        "id": 810,
+        "id": 86,
         "isim": "İbn Tufeyl"
       }
     ],
@@ -4328,7 +4328,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 766,
+        "id": 78,
         "isim": "İbnü’l-Mecdî"
       }
     ],
@@ -4379,7 +4379,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 790,
+        "id": 83,
         "isim": "İbn Rüşd (Averroes)"
       },
       {
@@ -4389,7 +4389,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 696,
+        "id": 62,
         "isim": "İbn Bâcce (Avempace)"
       }
     ],
@@ -4524,11 +4524,11 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 790,
+        "id": 83,
         "isim": "İbn Rüşd (Averroes)"
       },
       {
-        "id": 739,
+        "id": 72,
         "isim": "İbn Hâtime el-Ensârî"
       }
     ],
@@ -4674,17 +4674,17 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 586,
+        "id": 37,
         "isim": "Ebü'l-Fidâ İsmail"
       }
     ],
     "etkilenen": [
       {
-        "id": 743,
+        "id": 73,
         "isim": "İbn Havkal"
       },
       {
-        "id": 845,
+        "id": 95,
         "isim": "İstahrî"
       }
     ],
@@ -4819,11 +4819,11 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 743,
+        "id": 73,
         "isim": "İbn Havkal"
       },
       {
-        "id": 834,
+        "id": 92,
         "isim": "eş-Şerîf el-İdrîsî"
       },
       {
@@ -4879,7 +4879,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 978,
+        "id": 121,
         "isim": "Seyyid Şerif Cürcânî"
       },
       {
@@ -4986,23 +4986,23 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 459,
+        "id": 10,
         "isim": "Ali Qushji"
       },
       {
-        "id": 998,
+        "id": 125,
         "isim": "Uluğ Bey"
       },
       {
-        "id": 638,
+        "id": 49,
         "isim": "Gıyâseddin Cemşid el-Kâşî"
       },
       {
-        "id": 459,
+        "id": 10,
         "isim": "Ali Qushji"
       },
       {
-        "id": 998,
+        "id": 125,
         "isim": "Uluğ Bey"
       },
       {
@@ -5069,7 +5069,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 710,
+        "id": 65,
         "isim": "İbn al-Bennâ el-Merrâküşî"
       },
       {
@@ -5173,7 +5173,7 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 834,
+        "id": 92,
         "isim": "eş-Şerîf el-İdrîsî"
       },
       {
@@ -5347,7 +5347,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 623,
+        "id": 45,
         "isim": "Kemâleddîn el-Fârisî"
       },
       {
@@ -5357,7 +5357,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 752,
+        "id": 75,
         "isim": "İbnü’l-Heysem (Alhazen)"
       },
       {
@@ -5458,7 +5458,7 @@ const BILGINLER = [
     "etkiledi": [],
     "etkilenen": [
       {
-        "id": 739,
+        "id": 72,
         "isim": "İbn Hâtime el-Ensârî"
       }
     ],
@@ -5507,7 +5507,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 1006,
+        "id": 127,
         "isim": "ez-Zerkâlî (Arzachel)"
       },
       {
@@ -5609,7 +5609,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 922,
+        "id": 111,
         "isim": "Mimar Sinan"
       }
     ],
@@ -6219,7 +6219,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 848,
+        "id": 96,
         "isim": "Adudüddin el-Îcî"
       },
       {
@@ -6282,11 +6282,11 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 877,
+        "id": 102,
         "isim": "Zekeriyyâ el-Kazvînî"
       },
       {
-        "id": 834,
+        "id": 92,
         "isim": "eş-Şerîf el-İdrîsî"
       }
     ],
@@ -6435,7 +6435,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 459,
+        "id": 10,
         "isim": "Ali Qushji"
       },
       {
@@ -6449,7 +6449,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 638,
+        "id": 49,
         "isim": "Gıyâseddin Cemşid el-Kâşî"
       },
       {
@@ -6522,7 +6522,7 @@ const BILGINLER = [
     ],
     "etkiledi": [
       {
-        "id": 820,
+        "id": 89,
         "isim": "İbn Zuhr (Avenzoar)"
       },
       {
@@ -6589,7 +6589,7 @@ const BILGINLER = [
     ],
     "etkilenen": [
       {
-        "id": 906,
+        "id": 108,
         "isim": "Mesleme el-Mecrîtî"
       },
       {
