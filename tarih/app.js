@@ -97,6 +97,8 @@ const APP = {
 function getRouteFromPath() {
     const path = window.location.pathname;
     let route = path.replace(APP.basePath, '').replace(/^\/+|\/+$/g, '');
+    /* Treat index.html as home (local dev server serves literal files) */
+    if (route === 'index.html' || route.startsWith('index.html?')) route = '';
     return route;
 }
 
@@ -126,6 +128,7 @@ async function handleRoute() {
         switch (page) {
             case '':
             case 'anasayfa':
+            case 'index.html':
                 await renderHome();
                 break;
             case 'arama':
@@ -224,8 +227,11 @@ async function loadCatalog() {
 
 async function loadManifest(db) {
     if (APP.manifests[db]) return APP.manifests[db];
-    const manifest = await loadJSON(`data/${db}/manifest.json`);
-    if (manifest) APP.manifests[db] = manifest;
+    const raw = await loadJSON(`data/${db}/manifest.json`);
+    if (!raw) return null;
+    /* Normalize: pipeline outputs a plain array, but app expects {entries:[]} */
+    const manifest = Array.isArray(raw) ? { entries: raw } : raw;
+    APP.manifests[db] = manifest;
     return manifest;
 }
 
