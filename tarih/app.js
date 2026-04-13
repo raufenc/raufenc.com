@@ -178,29 +178,31 @@ function getSearchParam() {
    Page Transitions
    ---------------------------------------------------------------- */
 async function transitionPage(renderFn) {
+    if (APP.isTransitioning) return;
     const app = document.getElementById('app');
     APP.isTransitioning = true;
+    try {
+        // Fade out
+        app.classList.remove('page-transition-active');
+        app.classList.add('page-transition-exit');
 
-    // Fade out
-    app.classList.remove('page-transition-active');
-    app.classList.add('page-transition-exit');
+        await sleep(150);
 
-    await sleep(150);
+        // Render new content
+        await renderFn();
 
-    // Render new content
-    await renderFn();
+        // Fade in
+        app.classList.remove('page-transition-exit');
+        app.classList.add('page-transition-enter');
 
-    // Fade in
-    app.classList.remove('page-transition-exit');
-    app.classList.add('page-transition-enter');
+        // Force reflow
+        void app.offsetHeight;
 
-    // Force reflow
-    void app.offsetHeight;
-
-    app.classList.remove('page-transition-enter');
-    app.classList.add('page-transition-active');
-
-    APP.isTransitioning = false;
+        app.classList.remove('page-transition-enter');
+        app.classList.add('page-transition-active');
+    } finally {
+        APP.isTransitioning = false;
+    }
 }
 
 
@@ -660,7 +662,7 @@ async function renderEntry(db, slug) {
     ` : '';
 
     app.innerHTML = `
-        <div class="article-page ${headings.length > 2 ? '' : 'style="grid-template-columns:1fr"'}">
+        <div class="article-page" ${headings.length > 2 ? '' : 'style="grid-template-columns:1fr"'}>
             <div class="article-content">
                 <nav class="breadcrumb" aria-label="Breadcrumb">
                     <a href="/tarih/" data-link>Ana Sayfa</a>
