@@ -8,7 +8,7 @@ const OGRENME_YOLLARI = [
     renk: "#818cf8",
     adimlar: [
       {
-        bilginId: 568,
+        bilginId: 33,
         konu: "Islam Astronomisinin Safagi",
         hedef: "Ebu Ma'ser el-Belhi'nin astronomi ve astrolojideki onculugunu ogren",
         quiz: {
@@ -18,7 +18,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 906,
+        bilginId: 108,
         konu: "Endulus'te Bilimin Yukselisi",
         hedef: "Mesleme el-Mecriti'nin Endulus'teki matematik ve astronomi okulu kurma cabasini ogren",
         quiz: {
@@ -28,7 +28,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 509,
+        bilginId: 20,
         konu: "Kuresel Trigonometri",
         hedef: "Jabir ibn Aflah'in kuresel trigonometri alanindaki katkilarini ogren",
         quiz: {
@@ -38,7 +38,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 472,
+        bilginId: 13,
         konu: "Gezegen Hareketlerinde Yeni Yaklasim",
         hedef: "Bitruci'nin Batlamyus'un episikl modeline karsi gelistirdigi alternatif sistemi ogren",
         quiz: {
@@ -48,7 +48,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 1006,
+        bilginId: 127,
         konu: "Hassas Astronomi Aletleri",
         hedef: "Zerkali'nin usturlap ve astronomi aletlerindeki devrimci katkilarini ogren",
         quiz: {
@@ -58,7 +58,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 929,
+        bilginId: 112,
         konu: "Trigonometrik Tablolar",
         hedef: "Muhyiddin el-Magibi'nin trigonometri ve astronomi tablolarina katkilarini ogren",
         quiz: {
@@ -68,7 +68,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 987,
+        bilginId: 123,
         konu: "Namaz Vakitleri ve Matematik",
         hedef: "Semseddin el-Halili'nin namaz vakitlerini hesaplamak icin gelistirdigi matematiksel tablolari ogren",
         quiz: {
@@ -78,7 +78,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 805,
+        bilginId: 85,
         konu: "Gezegen Teorisinde Devrim",
         hedef: "Ibn Satir'in Batlamyus modelini duzeltmesini ve Kopernik'e etkisini ogren",
         quiz: {
@@ -88,7 +88,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 858,
+        bilginId: 98,
         konu: "Semerkant Matematik Okulu",
         hedef: "Kadizade-i Rumi'nin Semerkant'ta matematik ve astronomi egitimindeki rolunu ogren",
         quiz: {
@@ -98,7 +98,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 998,
+        bilginId: 125,
         konu: "Yildiz Katalogu ve Gozlemevi",
         hedef: "Ulug Bey'in dunyanin en buyuk gozlemevini kurup yildiz katalogunu hazirlamasini ogren",
         quiz: {
@@ -108,7 +108,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 459,
+        bilginId: 10,
         konu: "Matematiksel Astronomi",
         hedef: "Ali Kuscu'nun matematik ve astronomideki ozgun katkilarini ogren",
         quiz: {
@@ -118,7 +118,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 991,
+        bilginId: 124,
         konu: "Istanbul Gozlemevi",
         hedef: "Takiyyuddin'in Istanbul Gozlemevi'ni kurup modern astronomi aletleri gelistirmesini ogren",
         quiz: {
@@ -138,7 +138,7 @@ const OGRENME_YOLLARI = [
     renk: "#34d399",
     adimlar: [
       {
-        bilginId: 657,
+        bilginId: 53,
         konu: "Kimya ve Tibin Bulusmasi",
         hedef: "Halid b. Yezid'in tibba kimyasal yaklasimi ve tercume hareketindeki rolunu ogren",
         quiz: {
@@ -148,7 +148,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 715,
+        bilginId: 66,
         konu: "Bulaski Hastaliklar ve Eczacilik",
         hedef: "Ibn Cezzar'in bulaski hastaliklar ve ilac bilimi uzerine calismalari ogren",
         quiz: {
@@ -158,7 +158,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 630,
+        bilginId: 47,
         konu: "Tibbi Botanik",
         hedef: "Gafiki'nin tibbi bitkileri resimleriyle tanimlama calismasini ogren",
         quiz: {
@@ -168,7 +168,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 1002,
+        bilginId: 126,
         konu: "Cerrahinin Babasi",
         hedef: "Zehravi'nin cerrahi aletler ve cerrahi tekniklerdeki devrimci katkilarini ogren",
         quiz: {
@@ -178,7 +178,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 820,
+        bilginId: 89,
         konu: "Klinik Tip ve Deneysellik",
         hedef: "Ibn Zuhr'un klinik gozleme dayali tip anlayisini ve cerrahi katkilarini ogren",
         quiz: {
@@ -188,7 +188,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 573,
+        bilginId: 34,
         konu: "Anatomi ve Gozlem",
         hedef: "Abdullatif el-Bagdadi'nin anatomi ve tibbi gozlem alanindaki katkilarini ogren",
         quiz: {
@@ -198,7 +198,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 785,
+        bilginId: 82,
         konu: "Kucuk Kan Dolasiminin Kesfi",
         hedef: "Ibnu'n-Nefis'in akciger kan dolasimini kesfetmesini ogren",
         quiz: {
@@ -208,7 +208,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 739,
+        bilginId: 72,
         konu: "Veba ve Bulaski Hastalik Teorisi",
         hedef: "Ibn Hatime'nin vebanin bulasma yollarini arastirmasini ogren",
         quiz: {
@@ -218,7 +218,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 649,
+        bilginId: 51,
         konu: "Anadolu'da Tip Gelenegi",
         hedef: "Haci Pasa'nin Anadolu'daki tibbi calismalari ve Turkce tip eserlerini ogren",
         quiz: {
@@ -228,7 +228,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 441,
+        bilginId: 6,
         konu: "Hekimlik ve Maneviyat",
         hedef: "Aksemseddin'in tip ve mikrobiyoloji alanindaki ongoruleri ogren",
         quiz: {
@@ -238,7 +238,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 542,
+        bilginId: 27,
         konu: "Eczacilik Ansiklopedisi",
         hedef: "Davud el-Antaki'nin kapsamli eczacilik ve tip ansiklopedisini ogren",
         quiz: {
@@ -248,7 +248,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 933,
+        bilginId: 113,
         konu: "Osmanli'da Modern Tip",
         hedef: "Mustafa Behcet Efendi'nin Osmanli'da modern tibbi kurumsallastirma cabasini ogren",
         quiz: {
@@ -268,7 +268,7 @@ const OGRENME_YOLLARI = [
     renk: "#f472b6",
     adimlar: [
       {
-        bilginId: 885,
+        bilginId: 104,
         konu: "Islam Felsefe ve Biliminin Oncusu",
         hedef: "Kindi'nin optik, fizik ve felsefe alanlarindaki kurucu katkilarini ogren",
         quiz: {
@@ -278,7 +278,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 752,
+        bilginId: 75,
         konu: "Optigin Babasi",
         hedef: "Ibnu'l-Heysem'in Kitabu'l-Menazir eseriyle optik bilimine devrim yapmasini ogren",
         quiz: {
@@ -288,7 +288,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 623,
+        bilginId: 45,
         konu: "Gokkusagi Teorisi",
         hedef: "Kemaleddin Farisi'nin isigin kirilmasi ve gokkusagi olusumunu aciklamasini ogren",
         quiz: {
@@ -298,7 +298,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 891,
+        bilginId: 105,
         konu: "Optik ve Astronomi Sentezi",
         hedef: "Kutbuddin Sirazi'nin isigin kirilmasi ve gokkusagi uzerindeki calismasini ogren",
         quiz: {
@@ -308,7 +308,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 657,
+        bilginId: 53,
         konu: "Kimyanin Ilk Adimlari",
         hedef: "Halid b. Yezid'in kimya (simya) alanindaki tercume ve arastirmalarini ogren",
         quiz: {
@@ -318,7 +318,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 683,
+        bilginId: 59,
         konu: "Simyadan Kimyaya Gecis",
         hedef: "Iraki es-Semavi'nin kimya ve simya alanindaki deneysel calismalarini ogren",
         quiz: {
@@ -328,7 +328,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 842,
+        bilginId: 94,
         konu: "Modern Bilimlerin Osmanli'ya Aktarimi",
         hedef: "Hoca Ishak Efendi'nin Bati bilimlerini Osmanli'ya aktarma cabasini ogren",
         quiz: {
@@ -338,7 +338,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 906,
+        bilginId: 108,
         konu: "Endulus'te Kimya",
         hedef: "Mesleme el-Mecriti'nin kimya ve dogal bilimler alanindaki katkilarini ogren",
         quiz: {
@@ -348,7 +348,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 568,
+        bilginId: 33,
         konu: "Doga Felsefesi ve Kozmoloji",
         hedef: "Ebu Ma'ser'in doga felsefesi ve fiziksel dunyanin isleyisine dair goruslerini ogren",
         quiz: {
@@ -358,7 +358,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 610,
+        bilginId: 43,
         konu: "Tabiat Bilimleri ve Kelam",
         hedef: "Fahreddin Razi'nin tabiat felsefesi ve fizik konularindaki elestirel yaklasimini ogren",
         quiz: {
@@ -378,7 +378,7 @@ const OGRENME_YOLLARI = [
     renk: "#fb923c",
     adimlar: [
       {
-        bilginId: 845,
+        bilginId: 95,
         konu: "Islam Cografyaciligin Temelleri",
         hedef: "Istahri'nin Islam dunyasinin bolgesel cografyasini sistematik olarak haritalandirmasini ogren",
         quiz: {
@@ -388,7 +388,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 743,
+        bilginId: 73,
         konu: "Ticaret Yollari ve Cografya",
         hedef: "Ibn Havkal'in uzun seyahatlere dayanan cografi eserlerini ogren",
         quiz: {
@@ -398,7 +398,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 485,
+        bilginId: 16,
         konu: "Kuzey Afrika ve Endulus Cografyasi",
         hedef: "Bekri'nin Kuzey Afrika ve Endulus bolgesinin cografyasina dair ansiklopedik eserini ogren",
         quiz: {
@@ -408,7 +408,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 834,
+        bilginId: 92,
         konu: "Dunyanin En Buyuk Ortacag Haritasi",
         hedef: "Idrisi'nin Sicilya Krali Roger II icin hazirladigi dunya haritasini ogren",
         quiz: {
@@ -418,7 +418,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 558,
+        bilginId: 31,
         konu: "Seyahat ve Acayip Haberler",
         hedef: "Girnati'nin seyahatlerinde kaydetigi ilginc cografi ve kulturel bilgileri ogren",
         quiz: {
@@ -428,7 +428,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 877,
+        bilginId: 102,
         konu: "Kozmografya ve Doga Harikaları",
         hedef: "Kazvini'nin dogal dunyanin harikalarini derleyen ansiklopedik eserini ogren",
         quiz: {
@@ -438,7 +438,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 702,
+        bilginId: 63,
         konu: "Dunyanin En Buyuk Seyyahi",
         hedef: "Ibn Battuta'nin 30 yillik seyahatinde ziyaret ettigi ulkeleri ve gozlemlerini ogren",
         quiz: {
@@ -448,7 +448,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 956,
+        bilginId: 117,
         konu: "Osmanli Denizciligi ve Haritacilik",
         hedef: "Piri Reis'in dunya haritasini ve denizcilik kitabini ogren",
         quiz: {
@@ -458,7 +458,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 762,
+        bilginId: 77,
         konu: "Hint Okyanusu'nun Kutbu",
         hedef: "Ahmed b. Macid'in denizcilik ve navigasyon alanindaki eserlerini ogren",
         quiz: {
@@ -468,7 +468,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 607,
+        bilginId: 42,
         konu: "10 Ciltlik Seyahat Ansiklopedisi",
         hedef: "Evliya Celebi'nin 'Seyahatname' eserinin kapsami ve onemini ogren",
         quiz: {
@@ -488,7 +488,7 @@ const OGRENME_YOLLARI = [
     renk: "#a78bfa",
     adimlar: [
       {
-        bilginId: 885,
+        bilginId: 104,
         konu: "Islam Felsefesinin Babasi",
         hedef: "Kindi'nin Islam dunyasinda felsefi dusuncenin temellerini atmasini ogren",
         quiz: {
@@ -498,7 +498,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 696,
+        bilginId: 62,
         konu: "Bireysel Akil ve Ozgurluk",
         hedef: "Ibn Bacce'nin insan aklinin tekamulu hakkindaki felsefesini ogren",
         quiz: {
@@ -508,7 +508,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 810,
+        bilginId: 86,
         konu: "Felsefe Romani",
         hedef: "Ibn Tufeyl'in 'Hayy bin Yakzan' eserinin felsefi mesajini ogren",
         quiz: {
@@ -518,7 +518,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 790,
+        bilginId: 83,
         konu: "Akil ve Vahiy Uyumu",
         hedef: "Ibn Rusd'un akil-iman iliskisine dair goruslerini ve Avrupa'ya etkisini ogren",
         quiz: {
@@ -528,7 +528,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 610,
+        bilginId: 43,
         konu: "Kelam ve Felsefe Elestirisi",
         hedef: "Fahreddin Razi'nin kelam ve felsefe arasindaki elestirel yaklasiminini ogren",
         quiz: {
@@ -538,7 +538,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 687,
+        bilginId: 60,
         konu: "Tasavvuf ve Varlik Felsefesi",
         hedef: "Muhyiddin Ibn Arabi'nin vahdet-i vucud dusuncesini ogren",
         quiz: {
@@ -548,7 +548,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 746,
+        bilginId: 74,
         konu: "Zahiri Dusunce",
         hedef: "Ibn Hazm'in zahiri fikih ve felsefe yaklasimini ogren",
         quiz: {
@@ -558,7 +558,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 848,
+        bilginId: 96,
         konu: "Kelam Ilminin Sistematigi",
         hedef: "Adududdin Ici'nin kelam ilmini sistematik bir sekilde derlemesini ogren",
         quiz: {
@@ -568,7 +568,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 978,
+        bilginId: 121,
         konu: "Kelam ve Mantik Ustaligi",
         hedef: "Seyyid Serif Curcani'nin kelam, mantik ve dil bilimlerindeki sentezini ogren",
         quiz: {
@@ -578,7 +578,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 546,
+        bilginId: 28,
         konu: "Tasavvuf ve Felsefe Sentezi",
         hedef: "Davud el-Kayseri'nin Ibn Arabi dusuncesini sistematiklestirmesini ogren",
         quiz: {
@@ -598,7 +598,7 @@ const OGRENME_YOLLARI = [
     renk: "#fbbf24",
     adimlar: [
       {
-        bilginId: 728,
+        bilginId: 69,
         konu: "Ilk Ucus Denemesi",
         hedef: "Abbas Ibn Firnas'in tarihte ilk kontrollü ucus denemesini ogren",
         quiz: {
@@ -608,7 +608,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 670,
+        bilginId: 56,
         konu: "Istanbul Bogazi Uzerinde Ucus",
         hedef: "Hezarfen Ahmed Celebi'nin kanat ile ucus hikayesini ogren",
         quiz: {
@@ -618,7 +618,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 897,
+        bilginId: 106,
         konu: "Roket ile Yukselen Adam",
         hedef: "Lagari Hasan Celebi'nin barutlu roketle yukselen ilk insan olma hikayesini ogren",
         quiz: {
@@ -628,7 +628,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 1002,
+        bilginId: 126,
         konu: "Cerrahi Alet Muhendisligi",
         hedef: "Zehravi'nin 200'den fazla cerrahi aleti tasarlayip muhendislik acisindan tanimlamasini ogren",
         quiz: {
@@ -638,7 +638,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 805,
+        bilginId: 85,
         konu: "Mekanik Saat ve Astronomi Aletleri",
         hedef: "Ibn Satir'in tasarladigi hassas astronomi aletleri ve mekanik saatleri ogren",
         quiz: {
@@ -648,7 +648,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 916,
+        bilginId: 110,
         konu: "Osmanli Mimari Geleneginin Surduruculugu",
         hedef: "Mimar Davud Aga'nin Sultanahmet Camii'nin temellerini atan mimari mirasini ogren",
         quiz: {
@@ -658,7 +658,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 922,
+        bilginId: 111,
         konu: "Mimarlığin Zirvesi",
         hedef: "Mimar Sinan'in Osmanli mimarisine kazandirdigi saheserleri ve muhendislik dehasini ogren",
         quiz: {
@@ -668,7 +668,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 829,
+        bilginId: 91,
         konu: "Osmanli'da Matbaacilik Devrimi",
         hedef: "Ibrahim Muteferrika'nin Osmanli'da ilk matbaayi kurup kitap basmasini ogren",
         quiz: {
@@ -678,7 +678,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 991,
+        bilginId: 124,
         konu: "Mekanik Saatler ve Gozlem Aletleri",
         hedef: "Takiyyuddin'in otomatik makineler ve mekanik saatler alanindaki muhendislik basarilarini ogren",
         quiz: {
@@ -688,7 +688,7 @@ const OGRENME_YOLLARI = [
         }
       },
       {
-        bilginId: 871,
+        bilginId: 101,
         konu: "Bilgi Ansiklopedisti",
         hedef: "Katip Celebi'nin bilim ve cografya ansiklopedilerindeki sistematik yaklasimini ogren",
         quiz: {
