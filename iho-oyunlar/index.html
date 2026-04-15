@@ -402,22 +402,17 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 </div>
 
 <script>
+/* Oyunları aynı pencerede aç — iframe overlay yerine doğrudan navigate
+   (CSP/X-Frame-Options engellerini aşar, mobilde daha akıcı, browser ← geri) */
 function openGame(url, name) {
-  document.getElementById('overlayGameName').textContent = name || '';
-  document.getElementById('gameFrame').src = url;
-  document.getElementById('overlay').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  window.location.href = url;
 }
-
+/* Eski overlay API korundu — çağıran kod kırılmasın */
 function closeGame() {
-  document.getElementById('overlay').classList.remove('active');
-  document.getElementById('gameFrame').src = 'about:blank';
+  var el = document.getElementById('overlay');
+  if (el) el.classList.remove('active');
   document.body.style.overflow = '';
 }
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeGame();
-});
 </script>
 </body>
 </html>
