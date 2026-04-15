@@ -1,0 +1,1547 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0f0c29">
+<title>فَرْقَعَةُ البَالُونَات — Balon Pop</title>
+<meta name="description" content="İHO 7. Sınıf Arapça kelime-tanım eşleştirme oyunu. Balonları patlat, Arapça öğren.">
+<style>
+@font-face{font-family:'Arakom';src:url('fonts/Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
+@font-face{font-family:'Arakom';src:url('fonts/Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+:root{
+  --bg-a:#0f0c29; --bg-b:#302b63; --bg-c:#24243e;
+  --fg:#fff; --fg-dim:rgba(255,255,255,.72); --fg-mute:rgba(255,255,255,.5);
+  --glass:rgba(255,255,255,.08); --glass-br:rgba(255,255,255,.14);
+  --glass-hi:rgba(255,255,255,.22);
+  --success:#4ade80; --error:#f87171; --warn:#fbbf24; --info:#38bdf8;
+  --b1:#c084fc; --b2:#60a5fa; --b3:#f472b6; --b4:#fbbf24; --b5:#34d399; --b6:#f87171;
+  --focus:#fbbf24;
+  --radius-s:10px; --radius-m:16px; --radius-l:24px;
+  --shadow-sm:0 2px 10px rgba(0,0,0,.25);
+  --shadow-md:0 8px 32px rgba(0,0,0,.35);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.45);
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+
+html,body{height:100%;min-height:100dvh;overflow:hidden}
+body{
+  font-family:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  background:radial-gradient(ellipse at top,#1a1a4a 0%,var(--bg-a) 45%,#000 100%);
+  color:var(--fg);
+  overscroll-behavior:none;
+  user-select:none;-webkit-user-select:none;
+  position:fixed;inset:0;
+}
+
+/* Arapça metin stili — RTL isolation */
+.ar{font-family:'Arakom','Amiri',serif;direction:rtl;unicode-bidi:isolate;font-weight:bold;letter-spacing:0}
+.tr{font-family:'Inter',sans-serif;direction:ltr;unicode-bidi:isolate}
+
+/* ══════════════════════════════════════════════════
+   YILDIZLAR (CSS-only backdrop)
+   ══════════════════════════════════════════════════ */
+.stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.stars::before,.stars::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20px 30px,#fff,transparent),
+    radial-gradient(1px 1px at 70px 180px,rgba(255,255,255,.8),transparent),
+    radial-gradient(1.5px 1.5px at 140px 90px,#fff,transparent),
+    radial-gradient(1px 1px at 200px 240px,rgba(255,255,255,.6),transparent),
+    radial-gradient(1px 1px at 280px 40px,#fff,transparent),
+    radial-gradient(1.5px 1.5px at 350px 150px,rgba(255,255,255,.9),transparent),
+    radial-gradient(1px 1px at 100px 300px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1px 1px at 420px 220px,#fff,transparent);
+  background-size:500px 400px;
+  background-repeat:repeat;
+  opacity:.5;animation:twinkle 8s ease-in-out infinite
+}
+.stars::after{background-position:250px 200px;animation-delay:-4s;opacity:.3}
+@keyframes twinkle{0%,100%{opacity:.3}50%{opacity:.6}}
+
+/* ══════════════════════════════════════════════════
+   EKRAN SİSTEMİ
+   ══════════════════════════════════════════════════ */
+.screen{
+  position:absolute;inset:0;display:none;
+  flex-direction:column;
+  padding:calc(12px + var(--safe-t)) 12px calc(12px + var(--safe-b));
+  z-index:1;
+}
+.screen[data-active="true"]{display:flex}
+
+/* ══════════════════════════════════════════════════
+   GERİ BUTON
+   ══════════════════════════════════════════════════ */
+.back-btn{
+  position:fixed;top:calc(12px + var(--safe-t));left:12px;z-index:100;
+  background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-br);color:var(--fg);
+  width:44px;height:44px;border-radius:50%;font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;text-decoration:none;
+  transition:background .15s,transform .15s;
+}
+.back-btn:hover,.back-btn:focus-visible{background:var(--glass-hi);transform:scale(1.05)}
+
+/* ══════════════════════════════════════════════════
+   MENÜ EKRANI
+   ══════════════════════════════════════════════════ */
+#menu{overflow-y:auto;overflow-x:hidden;align-items:stretch}
+.menu-inner{max-width:720px;margin:0 auto;width:100%;padding:8px 4px 24px;display:flex;flex-direction:column;gap:18px}
+
+.menu-hero{text-align:center;padding:20px 8px 8px}
+.menu-hero-badge{
+  display:inline-block;background:var(--glass);border:1px solid var(--glass-br);
+  padding:6px 18px;border-radius:100px;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-dim);margin-bottom:14px;
+}
+.menu-hero h1{
+  font-family:'Arakom',serif;direction:rtl;
+  font-size:clamp(30px,7vw,54px);line-height:1.1;
+  background:linear-gradient(90deg,#fbbf24,#f472b6,#c084fc);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:6px;filter:drop-shadow(0 0 30px rgba(251,191,36,.3));
+}
+.menu-hero-sub{font-size:clamp(14px,2.5vw,18px);color:var(--fg-dim);margin-top:4px}
+
+.menu-section{background:var(--glass);border:1px solid var(--glass-br);border-radius:var(--radius-l);padding:16px}
+.menu-section-title{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-mute);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+
+/* Set grid */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.set-card{
+  background:linear-gradient(135deg,var(--glass),transparent);
+  border:2px solid var(--glass-br);border-radius:var(--radius-m);
+  padding:14px 10px;text-align:center;cursor:pointer;
+  transition:transform .15s,border-color .15s,background .15s;
+  min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+}
+.set-card:hover,.set-card:focus-visible{transform:translateY(-3px);border-color:var(--glass-hi);background:rgba(255,255,255,.1)}
+.set-card.sel{border-color:var(--warn);background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(251,191,36,.05));box-shadow:0 0 20px rgba(251,191,36,.3)}
+.set-card-icon{font-size:32px;line-height:1}
+.set-card-ar{font-family:'Arakom',serif;direction:rtl;font-size:15px;font-weight:bold}
+.set-card-tr{font-size:11px;color:var(--fg-dim);line-height:1.3}
+.set-card-count{font-size:10px;color:var(--fg-mute);letter-spacing:.04em}
+
+/* Mode + size chips */
+.chip-row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  flex:1 1 100px;
+  background:var(--glass);border:2px solid var(--glass-br);
+  border-radius:100px;padding:12px 14px;
+  color:var(--fg);font-family:inherit;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all .15s;text-align:center;
+  min-height:44px;
+}
+.chip:hover,.chip:focus-visible{border-color:var(--glass-hi);background:rgba(255,255,255,.12)}
+.chip.sel{border-color:var(--info);background:linear-gradient(135deg,rgba(56,189,248,.2),rgba(56,189,248,.05));box-shadow:0 0 20px rgba(56,189,248,.25)}
+.chip-label{font-size:13px}
+.chip-hint{display:block;font-size:10px;color:var(--fg-mute);margin-top:2px;font-weight:400;letter-spacing:.03em}
+
+#sizeRow[data-hidden="true"]{display:none}
+
+/* Toggles (ses / tema) */
+.toggle-row{display:flex;gap:10px;justify-content:center;margin-top:4px}
+.toggle{
+  background:var(--glass);border:1px solid var(--glass-br);border-radius:100px;
+  padding:8px 14px;color:var(--fg-dim);font-size:13px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:6px;min-height:36px;
+}
+.toggle:hover{background:var(--glass-hi);color:var(--fg)}
+.toggle[data-on="true"]{color:var(--fg)}
+
+/* Start button */
+.start-btn{
+  background:linear-gradient(135deg,#fbbf24,#f472b6);
+  border:none;color:#1a0e3d;font-family:'Inter',sans-serif;
+  font-size:18px;font-weight:800;letter-spacing:.04em;
+  padding:18px 28px;border-radius:var(--radius-m);
+  cursor:pointer;box-shadow:0 10px 40px rgba(244,114,182,.4);
+  transition:transform .15s,box-shadow .15s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  text-transform:uppercase;min-height:56px;
+}
+.start-btn:hover,.start-btn:focus-visible{transform:translateY(-2px);box-shadow:0 16px 50px rgba(244,114,182,.55)}
+.start-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ══════════════════════════════════════════════════
+   PLAY EKRANI
+   ══════════════════════════════════════════════════ */
+#play{padding:0;background:transparent}
+#hud{
+  position:relative;z-index:30;display:flex;align-items:center;gap:10px;
+  padding:calc(8px + var(--safe-t)) 14px 10px;
+  background:linear-gradient(180deg,rgba(0,0,0,.45),transparent);
+}
+.hud-pill{
+  background:var(--glass);border:1px solid var(--glass-br);border-radius:100px;
+  padding:6px 14px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  min-height:34px;
+}
+.hud-pill.score{color:var(--warn)}
+.hud-pill.timer{color:var(--info);font-variant-numeric:tabular-nums}
+.hud-pill.progress{color:var(--success);font-variant-numeric:tabular-nums}
+.hud-spacer{flex:1}
+.hud-icon-btn{
+  background:var(--glass);border:1px solid var(--glass-br);border-radius:50%;
+  width:38px;height:38px;color:var(--fg);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+}
+.hud-icon-btn:hover,.hud-icon-btn:focus-visible{background:var(--glass-hi)}
+
+.timer-bar{
+  position:absolute;top:0;left:0;height:3px;
+  background:linear-gradient(90deg,var(--success),var(--warn),var(--error));
+  transition:width .3s linear;z-index:50;
+}
+
+/* Arena */
+#arena{
+  position:absolute;top:0;left:0;right:0;bottom:170px;
+  overflow:hidden;touch-action:none;
+  z-index:10;
+}
+#arena.tight{bottom:210px}
+
+/* Balon */
+.balloon{
+  position:absolute;
+  width:96px;height:118px;
+  cursor:grab;touch-action:none;
+  transition:transform .1s,filter .2s,opacity .3s;
+  will-change:transform;
+  display:flex;align-items:center;justify-content:center;
+  filter:drop-shadow(0 8px 20px rgba(0,0,0,.35));
+}
+.balloon:active{cursor:grabbing}
+.balloon.picked{filter:drop-shadow(0 0 24px var(--warn)) drop-shadow(0 8px 20px rgba(0,0,0,.5));z-index:20}
+.balloon.wrong{animation:shake .45s}
+.balloon.pop{opacity:0;transform:scale(1.25);pointer-events:none}
+.balloon-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.balloon-text{
+  position:absolute;top:32%;left:50%;transform:translate(-50%,-50%);
+  width:80%;text-align:center;
+  font-family:'Arakom',serif;direction:rtl;font-weight:bold;
+  font-size:clamp(14px,3.5vw,22px);
+  color:#1a0e3d;text-shadow:0 1px 2px rgba(255,255,255,.5);
+  pointer-events:none;line-height:1.2;
+}
+.balloon-text.short{font-size:clamp(17px,4vw,26px)}
+.balloon-text.long{font-size:clamp(11px,2.8vw,16px)}
+.balloon[data-focus="true"]{outline:3px solid var(--focus);outline-offset:4px;border-radius:50%}
+
+/* Targets */
+#targets{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 10px calc(10px + var(--safe-b));
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.55) 30%,rgba(0,0,0,.75));
+  display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  z-index:20;
+}
+#targets::-webkit-scrollbar{height:4px}
+#targets::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:2px}
+
+.target{
+  flex:0 0 auto;
+  background:linear-gradient(135deg,var(--glass-hi),var(--glass));
+  border:2px solid var(--glass-br);border-radius:var(--radius-m);
+  width:100px;min-height:120px;padding:10px 8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  cursor:pointer;transition:all .2s;
+  scroll-snap-align:start;position:relative;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.target:hover,.target:focus-visible{border-color:var(--glass-hi);background:rgba(255,255,255,.15);transform:translateY(-2px)}
+.target[data-over="true"]{border-color:var(--warn);background:rgba(251,191,36,.2);transform:scale(1.06)}
+.target[data-correct="true"]{
+  border-color:var(--success);background:linear-gradient(135deg,rgba(74,222,128,.25),rgba(74,222,128,.08));
+  cursor:default;box-shadow:0 0 30px rgba(74,222,128,.35);
+}
+.target[data-wrong="true"]{animation:flashRed .5s}
+.target-emoji{font-size:36px;line-height:1}
+.target-emoji.small{font-size:28px}
+.target-hint{font-size:11px;color:var(--fg-dim);text-align:center;line-height:1.2}
+.target-answer{
+  font-family:'Arakom',serif;direction:rtl;font-weight:bold;
+  font-size:13px;color:var(--success);margin-top:2px;line-height:1.2;
+}
+.target-check{
+  position:absolute;top:4px;right:4px;
+  color:var(--success);font-size:18px;opacity:0;
+}
+.target[data-correct="true"] .target-check{opacity:1;animation:pop .35s}
+
+/* Hint bar */
+#hint{
+  position:absolute;bottom:calc(154px + var(--safe-b));left:0;right:0;
+  text-align:center;font-size:12px;color:var(--fg-mute);
+  padding:4px 12px;pointer-events:none;z-index:15;
+}
+
+/* ══════════════════════════════════════════════════
+   MODAL (round-end / game-over)
+   ══════════════════════════════════════════════════ */
+.modal{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal[data-active="true"]{display:flex}
+.modal-card{
+  background:linear-gradient(135deg,rgba(48,43,99,.95),rgba(15,12,41,.95));
+  border:1px solid var(--glass-hi);border-radius:var(--radius-l);
+  padding:28px 22px;max-width:420px;width:100%;text-align:center;
+  box-shadow:var(--shadow-lg);
+  animation:slideUp .4s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-stars{font-size:56px;margin-bottom:8px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.modal-title{font-size:24px;font-weight:800;margin-bottom:4px}
+.modal-title.ar{font-family:'Arakom',serif;direction:rtl;font-size:28px}
+.modal-score{
+  font-size:52px;font-weight:900;
+  background:linear-gradient(90deg,#fbbf24,#f472b6);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin:10px 0;font-variant-numeric:tabular-nums;
+}
+.modal-sub{color:var(--fg-dim);font-size:14px;margin-bottom:4px}
+.modal-stat-row{display:flex;justify-content:space-around;margin:18px 0;gap:10px;flex-wrap:wrap}
+.modal-stat{background:var(--glass);border-radius:var(--radius-s);padding:10px 12px;flex:1 1 100px;min-width:100px}
+.modal-stat-label{font-size:11px;color:var(--fg-mute);text-transform:uppercase;letter-spacing:.06em}
+.modal-stat-val{font-size:20px;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.modal-btns{display:flex;gap:10px;margin-top:16px}
+.modal-btn{
+  flex:1;padding:14px 12px;border-radius:var(--radius-m);
+  font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+  border:none;transition:all .15s;min-height:50px;
+}
+.modal-btn.primary{background:linear-gradient(135deg,#fbbf24,#f472b6);color:#1a0e3d}
+.modal-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(244,114,182,.35)}
+.modal-btn.secondary{background:var(--glass);color:var(--fg);border:1px solid var(--glass-br)}
+.modal-btn.secondary:hover{background:var(--glass-hi)}
+
+/* ══════════════════════════════════════════════════
+   TOAST / LIVE REGION
+   ══════════════════════════════════════════════════ */
+#toast{
+  position:fixed;top:60px;left:50%;transform:translateX(-50%);
+  background:var(--glass);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--glass-br);color:var(--fg);
+  padding:10px 18px;border-radius:100px;font-size:14px;font-weight:600;
+  opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:300;
+  max-width:90vw;
+}
+#toast[data-show="true"]{opacity:1;transform:translateX(-50%) translateY(6px)}
+#toast.success{border-color:var(--success);color:var(--success)}
+#toast.error{border-color:var(--error);color:var(--error)}
+
+.sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Focus styles */
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+
+/* ══════════════════════════════════════════════════
+   ANIMASYONLAR
+   ══════════════════════════════════════════════════ */
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px) rotate(-3deg)}40%{transform:translateX(8px) rotate(3deg)}60%{transform:translateX(-6px) rotate(-2deg)}80%{transform:translateX(6px) rotate(2deg)}}
+@keyframes flashRed{0%,100%{background:linear-gradient(135deg,var(--glass-hi),var(--glass))}50%{background:rgba(248,113,113,.3);border-color:var(--error)}}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes particleFly{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+
+/* Particle */
+.particle-layer{position:absolute;inset:0;pointer-events:none;z-index:25;overflow:hidden}
+.particle{
+  position:absolute;width:10px;height:10px;border-radius:50%;
+  animation:particleFly .6s cubic-bezier(.25,.8,.25,1) forwards;
+}
+
+/* ══════════════════════════════════════════════════
+   REDUCED MOTION
+   ══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  .stars::before,.stars::after{animation:none}
+  .balloon{transition:opacity .2s}
+  .particle{display:none}
+  .modal-card,.modal-stars{animation:none}
+  .timer-bar{transition:none}
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════ */
+@media (max-width:600px){
+  .menu-hero{padding:8px 4px 0}
+  .menu-section{padding:12px 10px;border-radius:var(--radius-m)}
+  .set-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+  .set-card{min-height:98px;padding:10px 6px}
+  .set-card-icon{font-size:26px}
+  .set-card-ar{font-size:14px}
+  .target{width:88px;min-height:100px;padding:8px 6px}
+  .target-emoji{font-size:30px}
+  .target-emoji.small{font-size:22px}
+  .balloon{width:86px;height:106px}
+  .hud-pill{padding:5px 10px;font-size:12px}
+  .hud-icon-btn{width:34px;height:34px;font-size:14px}
+}
+@media (max-height:640px){
+  #arena{bottom:150px}
+  .target{min-height:96px}
+  #hint{bottom:calc(134px + var(--safe-b))}
+}
+@media (max-width:380px){
+  .chip{flex:1 1 80px;padding:10px 8px;font-size:13px}
+  .target{width:80px}
+  .balloon{width:78px;height:96px}
+}
+
+/* Landscape mobile */
+@media (orientation:landscape) and (max-height:500px){
+  #arena{bottom:130px}
+  #targets{padding-top:6px}
+  .target{min-height:90px;width:90px}
+  .target-emoji{font-size:28px}
+  .balloon{width:78px;height:96px}
+  #hint{bottom:calc(114px + var(--safe-b))}
+}
+
+/* Print hide */
+@media print{body{display:none}}
+</style>
+</head>
+<body>
+
+<!-- Arkaplan yıldızlar -->
+<div class="stars" aria-hidden="true"></div>
+
+<!-- Erişilebilirlik canlı bölgeleri -->
+<div class="sr-only" aria-live="polite" aria-atomic="true" id="srLive"></div>
+<div class="sr-only" aria-live="assertive" id="srAlert"></div>
+
+<!-- Geri butonu (menüden çıkar ya da hub'a döner) -->
+<button class="back-btn" id="backBtn" type="button" aria-label="Geri dön">←</button>
+
+<!-- ═══════════════════ MENÜ ═══════════════════ -->
+<section class="screen" data-screen="menu" data-active="true" id="menu" aria-label="Ana menü">
+  <div class="menu-inner">
+
+    <div class="menu-hero">
+      <div class="menu-hero-badge">İHO &middot; 7. Sınıf &middot; Arapça</div>
+      <h1 class="ar">فَرْقَعَةُ البَالُونَات</h1>
+      <div class="menu-hero-sub">Balon Pop — Kelime-Tanım Eşleştirme</div>
+    </div>
+
+    <!-- SET SEÇİMİ -->
+    <div class="menu-section" role="group" aria-labelledby="secSet">
+      <div class="menu-section-title" id="secSet"><span>1</span> Konu Seç</div>
+      <div class="set-grid" id="setGrid" role="radiogroup" aria-label="Konu seçimi"></div>
+    </div>
+
+    <!-- MOD SEÇİMİ -->
+    <div class="menu-section" role="group" aria-labelledby="secMode">
+      <div class="menu-section-title" id="secMode"><span>2</span> Oyun Modu</div>
+      <div class="chip-row" id="modeRow" role="radiogroup" aria-label="Oyun modu">
+        <button class="chip sel" type="button" role="radio" data-mode="klasik" aria-checked="true">
+          <span class="chip-label">♾️ Klasik</span>
+          <span class="chip-hint">Süre yok</span>
+        </button>
+        <button class="chip" type="button" role="radio" data-mode="hizli" aria-checked="false">
+          <span class="chip-label">⚡ Hızlı</span>
+          <span class="chip-hint">60 sn</span>
+        </button>
+        <button class="chip" type="button" role="radio" data-mode="tur" aria-checked="false">
+          <span class="chip-label">🎯 Tur</span>
+          <span class="chip-hint">N balon</span>
+        </button>
+      </div>
+      <div class="chip-row" id="sizeRow" data-hidden="true" role="radiogroup" aria-label="Tur uzunluğu" style="margin-top:10px">
+        <button class="chip sel" type="button" role="radio" data-size="5" aria-checked="true"><span class="chip-label">5 balon</span></button>
+        <button class="chip" type="button" role="radio" data-size="10" aria-checked="false"><span class="chip-label">10 balon</span></button>
+        <button class="chip" type="button" role="radio" data-size="15" aria-checked="false"><span class="chip-label">15 balon</span></button>
+      </div>
+    </div>
+
+    <!-- BAŞLAT -->
+    <button class="start-btn" id="startBtn" type="button">
+      <span>🎈</span><span>Oyunu Başlat</span>
+    </button>
+
+    <!-- AYARLAR -->
+    <div class="toggle-row">
+      <button class="toggle" id="soundToggle" type="button" data-on="true" aria-pressed="true">
+        <span id="soundIcon">🔊</span><span id="soundLabel">Ses Açık</span>
+      </button>
+      <button class="toggle" id="speakToggle" type="button" data-on="true" aria-pressed="true">
+        <span>🗣️</span><span>Arapça Seslendirme</span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════ PLAY ═══════════════════ -->
+<section class="screen" data-screen="play" id="play" aria-label="Oyun ekranı" aria-live="off">
+  <div id="hud">
+    <div class="hud-pill score" aria-label="Skor"><span>🏆</span><span id="scoreVal">0</span></div>
+    <div class="hud-pill progress" aria-label="İlerleme"><span>🎈</span><span id="progVal">0/0</span></div>
+    <div class="hud-spacer"></div>
+    <div class="hud-pill timer" id="timerPill" aria-label="Süre"><span>⏱️</span><span id="timerVal">0:00</span></div>
+    <button class="hud-icon-btn" id="pauseBtn" type="button" aria-label="Duraklat">⏸</button>
+  </div>
+  <div class="timer-bar" id="timerBar" style="width:100%"></div>
+  <div id="arena" role="application" aria-label="Balon alanı"></div>
+  <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
+  <div id="hint">Balonu seç, sonra doğru tanıma tıkla · Drag ile de sürükleyebilirsin</div>
+  <div id="targets" role="list" aria-label="Hedef tanımlar"></div>
+</section>
+
+<!-- ═══════════════════ TOAST ═══════════════════ -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<!-- ═══════════════════ ROUND END ═══════════════════ -->
+<div class="modal" id="roundEndModal" role="dialog" aria-modal="true" aria-labelledby="reTitle">
+  <div class="modal-card">
+    <div class="modal-stars" id="reStars">⭐⭐⭐</div>
+    <div class="modal-title ar" id="reTitle">أَحْسَنْتَ!</div>
+    <div class="modal-sub" id="reSub">Tur tamamlandı</div>
+    <div class="modal-score" id="reScore">0</div>
+    <div class="modal-stat-row">
+      <div class="modal-stat"><div class="modal-stat-label">Doğru</div><div class="modal-stat-val" id="reCorrect">0</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Hata</div><div class="modal-stat-val" id="reWrong">0</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Süre</div><div class="modal-stat-val" id="reTime">0s</div></div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn secondary" id="reMenuBtn" type="button">Menü</button>
+      <button class="modal-btn primary" id="reNextBtn" type="button">Devam →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ GAME OVER ═══════════════════ -->
+<div class="modal" id="gameOverModal" role="dialog" aria-modal="true" aria-labelledby="goTitle">
+  <div class="modal-card">
+    <div class="modal-stars" id="goStars">⭐⭐⭐</div>
+    <div class="modal-title" id="goTitle">🎉 Tebrikler!</div>
+    <div class="modal-sub" id="goSub">Oyun tamamlandı</div>
+    <div class="modal-score" id="goScore">0</div>
+    <div class="modal-stat-row">
+      <div class="modal-stat"><div class="modal-stat-label">Doğru</div><div class="modal-stat-val" id="goCorrect">0</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Hata</div><div class="modal-stat-val" id="goWrong">0</div></div>
+      <div class="modal-stat"><div class="modal-stat-label">Doğruluk</div><div class="modal-stat-val" id="goAcc">%0</div></div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-btn secondary" id="goMenuBtn" type="button">Menü</button>
+      <button class="modal-btn primary" id="goReplayBtn" type="button">🔄 Tekrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════════
+   SCORM 1.2 Wrapper (ka.html pattern — sadece skor raporu)
+   ══════════════════════════════════════════════════════════════════ */
+var SCORM = (function(){
+  var api = null, ini = false;
+  function find(w){
+    var a = 0;
+    if (w.opener && w.opener !== w) { var o = find(w.opener); if (o) return o; }
+    while (!w.API && w.parent && w.parent !== w && a < 500) { a++; w = w.parent; }
+    return w.API || null;
+  }
+  function get(){ if (!api) api = find(window); return api; }
+  return {
+    init: function(){
+      var a = get(); if (!a) return false;
+      try {
+        var r = a.LMSInitialize('');
+        if (r === 'true' || r === true) {
+          ini = true;
+          a.LMSSetValue('cmi.core.lesson_status','incomplete');
+          a.LMSCommit('');
+          return true;
+        }
+      } catch(e){}
+      return false;
+    },
+    /* Kullanıcı isteği: passed/failed yok, sadece skor + completed */
+    done: function(s){
+      var a = get(); if (!a || !ini) return;
+      try {
+        a.LMSSetValue('cmi.core.score.raw', String(s));
+        a.LMSSetValue('cmi.core.score.min', '0');
+        a.LMSSetValue('cmi.core.score.max', '100');
+        a.LMSSetValue('cmi.core.lesson_status', 'completed');
+        a.LMSCommit('');
+      } catch(e){}
+    },
+    fin: function(){
+      var a = get(); if (!a || !ini) return;
+      try { a.LMSCommit(''); a.LMSFinish(''); ini = false; } catch(e){}
+    }
+  };
+})();
+SCORM.init();
+window.addEventListener('beforeunload', function(){ SCORM.fin(); });
+
+/* ══════════════════════════════════════════════════════════════════
+   SES SİSTEMİ (WebAudio + SpeechSynthesis)
+   ══════════════════════════════════════════════════════════════════ */
+var actx = null;
+function ac(){ if (!actx) try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e){} return actx; }
+
+function tone(freq, dur, type, vol, delay){
+  if (!state.soundOn) return;
+  try {
+    var c = ac(); if (!c) return;
+    var o = c.createOscillator(), g = c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.frequency.value = freq; o.type = type || 'sine';
+    var t = c.currentTime + (delay || 0);
+    g.gain.setValueAtTime(vol || 0.25, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.start(t); o.stop(t + dur);
+  } catch(e){}
+}
+function sfxPop(){      tone(523,0.08,'sine',0.3); tone(784,0.12,'sine',0.3,0.08); }
+function sfxWrong(){    tone(180,0.15,'sawtooth',0.2); tone(140,0.2,'sawtooth',0.18,0.15); }
+function sfxTick(){     tone(900,0.04,'sine',0.1); }
+function sfxStart(){    tone(440,0.1,'sine',0.25); tone(554,0.1,'sine',0.25,0.1); tone(659,0.2,'sine',0.3,0.2); }
+function sfxFinish(){   tone(523,0.15,'sine',0.3); tone(659,0.15,'sine',0.3,0.15); tone(784,0.15,'sine',0.3,0.3); tone(1047,0.35,'sine',0.3,0.45); }
+
+var arVoice = null;
+function findArVoice(){
+  try {
+    var voices = speechSynthesis.getVoices();
+    arVoice = voices.find(function(v){ return /^ar/i.test(v.lang); }) || null;
+  } catch(e){}
+}
+if (typeof speechSynthesis !== 'undefined'){
+  findArVoice();
+  speechSynthesis.onvoiceschanged = findArVoice;
+}
+function speakAr(txt){
+  if (!state.speakOn) return;
+  try {
+    if (typeof speechSynthesis === 'undefined' || !SpeechSynthesisUtterance) return;
+    var u = new SpeechSynthesisUtterance(txt);
+    u.lang = 'ar-SA';
+    if (arVoice) u.voice = arVoice;
+    u.rate = 0.85; u.pitch = 1;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   VERİ — 6 SET (ka.html'den uyarlandı)
+   ══════════════════════════════════════════════════════════════════ */
+var SETS = {
+  yemek: {
+    title: 'أطعمة ومشروبات',
+    titleTr: 'Yemek & İçecek',
+    icon: '🍽️',
+    type: 'emoji',
+    items: [
+      {w:'خُبْز',t:'🍞'},{w:'جُبْن',t:'🧀'},{w:'أُرُز',t:'🍚'},{w:'دَجاج',t:'🍗'},
+      {w:'زَيْتون',t:'🫒'},{w:'لَحْم',t:'🥩'},{w:'عَسَل',t:'🍯'},{w:'سَمَك',t:'🐟'},
+      {w:'بَيْض',t:'🥚'},{w:'كُفْتَة',t:'🧆'},{w:'حَساء',t:'🍲'},{w:'زُبْدَة',t:'🧈'},
+      {w:'شاي',t:'🍵'},{w:'ماء',t:'💧'},{w:'حَلِيب',t:'🥛'},{w:'عَصِير',t:'🧃'},
+      {w:'قَهْوَة',t:'☕'},{w:'شَوْكَة',t:'🍴'},{w:'سِكِّين',t:'🔪'},{w:'مِلْعَقَة',t:'🥄'},
+      {w:'كَأْس',t:'🥤'},{w:'طَبَق',t:'🍽️'}
+    ]
+  },
+  aktivite: {
+    title: 'الأنشطة اليومية',
+    titleTr: 'Günlük Aktiviteler',
+    icon: '☀️',
+    type: 'emoji',
+    items: [
+      {w:'أَسْتَيْقِظُ',t:'⏰',hint:'Uyanıyorum'},
+      {w:'أَتَوَضَّأُ',t:'💧',hint:'Abdest alıyorum'},
+      {w:'أُصَلِّي',t:'🕌',hint:'Namaz kılıyorum'},
+      {w:'أَتَناوَلُ الفَطور',t:'🍳',hint:'Kahvaltı'},
+      {w:'أَلْبَسُ',t:'👔',hint:'Giyiniyorum'},
+      {w:'أَذْهَبُ',t:'🏫',hint:'Gidiyorum'},
+      {w:'أَرْجِعُ',t:'🏠',hint:'Dönüyorum'},
+      {w:'أُساعِدُ',t:'🤝',hint:'Yardım ediyorum'},
+      {w:'أَدْرُسُ',t:'📚',hint:'Çalışıyorum'},
+      {w:'أَنامُ',t:'😴',hint:'Uyuyorum'}
+    ]
+  },
+  saat: {
+    title: 'الساعة',
+    titleTr: 'Saatler',
+    icon: '🕐',
+    type: 'text',
+    items: [
+      {w:'السّاعة الواحِدة',t:'1:00'},
+      {w:'السّاعة الثّانِيَة',t:'2:00'},
+      {w:'السّاعة الثّالِثَة',t:'3:00'},
+      {w:'السّاعة الرّابِعَة',t:'4:00'},
+      {w:'السّاعة الخامِسَة',t:'5:00'},
+      {w:'السّاعة السّادِسَة',t:'6:00'},
+      {w:'السّاعة السّابِعَة',t:'7:00'},
+      {w:'السّاعة الثّامِنَة',t:'8:00'},
+      {w:'السّاعة التّاسِعَة',t:'9:00'},
+      {w:'السّاعة العاشِرَة',t:'10:00'},
+      {w:'السّاعة الحادِيَة عَشْرَة',t:'11:00'},
+      {w:'السّاعة الثّانِيَة عَشْرَة',t:'12:00'}
+    ]
+  },
+  soru: {
+    title: 'كلمات السؤال',
+    titleTr: 'Soru Kelimeleri',
+    icon: '❓',
+    type: 'emoji',
+    items: [
+      {w:'ماذا',t:'❓',hint:'Ne?'},
+      {w:'مَتى',t:'⏰',hint:'Ne zaman?'},
+      {w:'أَيْنَ',t:'📍',hint:'Nerede?'},
+      {w:'مَنْ',t:'👤',hint:'Kim?'},
+      {w:'كَمْ',t:'🔢',hint:'Kaç?'},
+      {w:'كَيْفَ',t:'🤔',hint:'Nasıl?'},
+      {w:'لِماذا',t:'💭',hint:'Neden?'},
+      {w:'هَلْ',t:'❔',hint:'-mı/-mi?'}
+    ]
+  },
+  fiil: {
+    title: 'الأفعال والضَّمائر',
+    titleTr: 'Zamir-Fiil Eşleşmesi',
+    icon: '📝',
+    type: 'text',
+    items: [
+      {w:'يَسْتَيْقِظُ',t:'هُوَ',hint:'O (er) uyanıyor'},
+      {w:'تَسْتَيْقِظُ',t:'هِيَ',hint:'O (di) uyanıyor'},
+      {w:'تَسْتَيْقِظِينَ',t:'أَنْتِ',hint:'Sen (di) uyanıyorsun'},
+      {w:'أَسْتَيْقِظُ',t:'أَنا',hint:'Ben uyanıyorum'},
+      {w:'يَدْرُسُ',t:'هُوَ',hint:'O (er) çalışıyor'},
+      {w:'تَدْرُسُ',t:'هِيَ',hint:'O (di) çalışıyor'},
+      {w:'تَدْرُسِينَ',t:'أَنْتِ',hint:'Sen (di) çalışıyorsun'},
+      {w:'أَدْرُسُ',t:'أَنا',hint:'Ben çalışıyorum'}
+    ]
+  },
+  ev: {
+    title: 'أدوات المائدة',
+    titleTr: 'Sofra Eşyaları',
+    icon: '🍴',
+    type: 'emoji',
+    items: [
+      {w:'شَوْكَة',t:'🍴'},
+      {w:'سِكِّين',t:'🔪'},
+      {w:'مِلْعَقَة',t:'🥄'},
+      {w:'كَأْس',t:'🥤'},
+      {w:'طَبَق',t:'🍽️'},
+      {w:'إِبْرِيق',t:'🫖'},
+      {w:'مِلْح',t:'🧂'},
+      {w:'خُبْز',t:'🍞'}
+    ]
+  }
+};
+var SET_ORDER = ['yemek','aktivite','saat','soru','fiil','ev'];
+var BALLOON_COLORS = ['var(--b1)','var(--b2)','var(--b3)','var(--b4)','var(--b5)','var(--b6)'];
+
+/* ══════════════════════════════════════════════════════════════════
+   GLOBAL STATE
+   ══════════════════════════════════════════════════════════════════ */
+var state = {
+  soundOn: true,
+  speakOn: true,
+  setId: 'yemek',
+  mode: 'klasik',       // klasik | hizli | tur
+  size: 5,              // tur mod için
+  screen: 'menu',
+  paused: false,
+  reducedMotion: window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches,
+  /* round/play state */
+  balloons: [],         // {id, item, x, y, vx, phase, amp, freq, el, popped, color}
+  targets: [],          // {item, el, matched}
+  roundItems: [],
+  score: 0,
+  correct: 0,
+  wrong: 0,
+  totalItems: 0,
+  matched: 0,
+  picked: null,
+  roundStart: 0,
+  timerRemain: 60,
+  timerTotal: 60,
+  playStart: 0,
+  focusIdx: 0,
+  /* loop */
+  rafId: 0,
+  lastT: 0
+};
+
+/* localStorage load */
+try {
+  var ls = localStorage.getItem('balonPop.prefs');
+  if (ls) {
+    var p = JSON.parse(ls);
+    if (typeof p.soundOn === 'boolean') state.soundOn = p.soundOn;
+    if (typeof p.speakOn === 'boolean') state.speakOn = p.speakOn;
+  }
+} catch(e){}
+function savePrefs(){
+  try { localStorage.setItem('balonPop.prefs', JSON.stringify({soundOn:state.soundOn,speakOn:state.speakOn})); } catch(e){}
+}
+
+/* URL params */
+(function(){
+  try {
+    var p = new URLSearchParams(location.search);
+    var s = p.get('set'); if (s && SETS[s]) state.setId = s;
+    var m = p.get('mode'); if (m && ['klasik','hizli','tur'].indexOf(m) >= 0) state.mode = m;
+    var n = parseInt(p.get('n'),10); if ([5,10,15].indexOf(n) >= 0) state.size = n;
+  } catch(e){}
+})();
+
+/* ══════════════════════════════════════════════════════════════════
+   YARDIMCI
+   ══════════════════════════════════════════════════════════════════ */
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function rand(a,b){ return a + Math.random()*(b-a); }
+function clamp(v,a,b){ return v<a?a:v>b?b:v; }
+function srSay(txt, alert){ var el = alert ? $('srAlert') : $('srLive'); el.textContent = ''; setTimeout(function(){ el.textContent = txt; }, 30); }
+
+function toast(msg, kind){
+  var t = $('toast');
+  t.textContent = msg;
+  t.className = kind || '';
+  t.dataset.show = 'true';
+  clearTimeout(toast._h);
+  toast._h = setTimeout(function(){ t.dataset.show = 'false'; }, 1600);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MENÜ RENDER
+   ══════════════════════════════════════════════════════════════════ */
+function renderSetGrid(){
+  var grid = $('setGrid'); grid.innerHTML = '';
+  SET_ORDER.forEach(function(id){
+    var s = SETS[id];
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'set-card' + (id === state.setId ? ' sel' : '');
+    b.setAttribute('role','radio');
+    b.setAttribute('aria-checked', id === state.setId ? 'true' : 'false');
+    b.dataset.setId = id;
+    b.innerHTML =
+      '<span class="set-card-icon" aria-hidden="true">' + s.icon + '</span>' +
+      '<span class="set-card-ar ar">' + s.title + '</span>' +
+      '<span class="set-card-tr">' + s.titleTr + '</span>' +
+      '<span class="set-card-count">' + s.items.length + ' öğe</span>';
+    b.addEventListener('click', function(){ selectSet(id); });
+    grid.appendChild(b);
+  });
+}
+function selectSet(id){
+  state.setId = id;
+  $$('#setGrid .set-card').forEach(function(el){
+    var sel = el.dataset.setId === id;
+    el.classList.toggle('sel', sel);
+    el.setAttribute('aria-checked', sel ? 'true' : 'false');
+  });
+}
+function $$(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+
+function selectMode(mode){
+  state.mode = mode;
+  $$('#modeRow .chip').forEach(function(el){
+    var sel = el.dataset.mode === mode;
+    el.classList.toggle('sel', sel);
+    el.setAttribute('aria-checked', sel ? 'true' : 'false');
+  });
+  $('sizeRow').dataset.hidden = mode === 'tur' ? 'false' : 'true';
+}
+function selectSize(sz){
+  state.size = parseInt(sz,10);
+  $$('#sizeRow .chip').forEach(function(el){
+    var sel = parseInt(el.dataset.size,10) === state.size;
+    el.classList.toggle('sel', sel);
+    el.setAttribute('aria-checked', sel ? 'true' : 'false');
+  });
+}
+
+/* Ses / seslendirme toggle */
+function updateToggle(id, iconId, labelId, on, onIcon, offIcon, onLabel, offLabel){
+  var btn = $(id);
+  btn.dataset.on = on ? 'true' : 'false';
+  btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  if (iconId) $(iconId).textContent = on ? onIcon : offIcon;
+  if (labelId) $(labelId).textContent = on ? onLabel : offLabel;
+}
+function wireMenu(){
+  renderSetGrid();
+
+  $$('#modeRow .chip').forEach(function(el){
+    el.addEventListener('click', function(){ selectMode(el.dataset.mode); });
+  });
+  $$('#sizeRow .chip').forEach(function(el){
+    el.addEventListener('click', function(){ selectSize(el.dataset.size); });
+  });
+  selectMode(state.mode);
+  selectSize(state.size);
+
+  $('soundToggle').addEventListener('click', function(){
+    state.soundOn = !state.soundOn;
+    updateToggle('soundToggle','soundIcon','soundLabel',state.soundOn,'🔊','🔇','Ses Açık','Ses Kapalı');
+    savePrefs();
+  });
+  $('speakToggle').addEventListener('click', function(){
+    state.speakOn = !state.speakOn;
+    $('speakToggle').dataset.on = state.speakOn ? 'true' : 'false';
+    $('speakToggle').setAttribute('aria-pressed', state.speakOn ? 'true' : 'false');
+    savePrefs();
+  });
+  updateToggle('soundToggle','soundIcon','soundLabel',state.soundOn,'🔊','🔇','Ses Açık','Ses Kapalı');
+  $('speakToggle').dataset.on = state.speakOn ? 'true' : 'false';
+
+  $('startBtn').addEventListener('click', startGame);
+
+  $('backBtn').addEventListener('click', function(){
+    if (state.screen === 'play') { goMenu(); return; }
+    /* Hub'a dön: iframe ise parent overlay'i kapatacak, değilse history */
+    try { if (window.parent !== window && window.parent.closeGame) { window.parent.closeGame(); return; } } catch(e){}
+    if (history.length > 1) history.back(); else location.href = './index.html';
+  });
+
+  /* Round end / game over */
+  $('reNextBtn').addEventListener('click', function(){ closeModal('roundEndModal'); nextRound(); });
+  $('reMenuBtn').addEventListener('click', function(){ closeModal('roundEndModal'); goMenu(); });
+  $('goReplayBtn').addEventListener('click', function(){ closeModal('gameOverModal'); startGame(); });
+  $('goMenuBtn').addEventListener('click', function(){ closeModal('gameOverModal'); goMenu(); });
+
+  $('pauseBtn').addEventListener('click', togglePause);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   EKRAN GEÇİŞLERİ
+   ══════════════════════════════════════════════════════════════════ */
+function showScreen(name){
+  state.screen = name;
+  $$('.screen').forEach(function(el){
+    el.dataset.active = (el.dataset.screen === name) ? 'true' : 'false';
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   OYUN BAŞLAT
+   ══════════════════════════════════════════════════════════════════ */
+function startGame(){
+  sfxStart();
+  var set = SETS[state.setId];
+  var items = shuffle([...set.items]);
+  if (state.mode === 'tur') items = items.slice(0, Math.min(state.size, items.length));
+  if (state.mode === 'hizli') items = items.slice(0, Math.min(20, items.length));
+
+  state.roundItems = items;
+  state.totalItems = items.length;
+  state.matched = 0;
+  state.score = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.picked = null;
+  state.paused = false;
+  state.focusIdx = 0;
+  state.playStart = performance.now();
+
+  if (state.mode === 'hizli'){
+    state.timerTotal = 60;
+    state.timerRemain = 60;
+    $('timerPill').style.display = '';
+    $('timerBar').style.display = '';
+  } else {
+    $('timerPill').style.display = 'none';
+    $('timerBar').style.display = 'none';
+  }
+
+  showScreen('play');
+  setTimeout(spawnRound, 50);       // DOM hazır olsun
+}
+
+function spawnRound(){
+  var arena = $('arena');
+  var targets = $('targets');
+  arena.innerHTML = '';
+  targets.innerHTML = '';
+  $('particleLayer').innerHTML = '';
+
+  /* Bu tur için alt küme */
+  var perRound = state.mode === 'hizli' ? 6 : (state.mode === 'tur' ? Math.min(5, state.roundItems.length) : 5);
+  if (state.roundItems.length < perRound) perRound = state.roundItems.length;
+  var roundSubset = state.roundItems.slice(state.matched, state.matched + perRound);
+  if (roundSubset.length === 0) { endGame(); return; }
+
+  /* Balonları oluştur */
+  state.balloons = [];
+  var aw = arena.clientWidth, ah = arena.clientHeight;
+  var cols = Math.min(roundSubset.length, Math.max(3, Math.floor(aw / 110)));
+  shuffle([...roundSubset]).forEach(function(item, idx){
+    var bw = 96, bh = 118;
+    var bx = rand(10, Math.max(20, aw - bw - 10));
+    var by = rand(20, Math.max(40, ah - bh - 30));
+    var color = BALLOON_COLORS[idx % BALLOON_COLORS.length];
+    var b = {
+      id: 'b' + idx,
+      item: item,
+      x: bx, y: by,
+      vx: rand(-0.25, 0.25),
+      phase: rand(0, Math.PI*2),
+      amp: rand(10, 18),
+      freq: rand(0.0008, 0.0014),
+      popped: false,
+      color: color
+    };
+    b.el = makeBalloon(b);
+    arena.appendChild(b.el);
+    state.balloons.push(b);
+  });
+
+  /* Hedefleri oluştur */
+  state.targets = [];
+  shuffle([...roundSubset]).forEach(function(item){
+    var tc = makeTarget(item);
+    targets.appendChild(tc.el);
+    state.targets.push(tc);
+  });
+
+  /* HUD güncelle */
+  updateHud();
+
+  /* Focus ilk balon */
+  state.focusIdx = 0;
+  if (state.balloons[0]) focusBalloon(0);
+
+  /* Loop başlat */
+  state.lastT = performance.now();
+  state.roundStart = state.lastT;
+  if (state.rafId) cancelAnimationFrame(state.rafId);
+  tick();
+
+  srSay('Yeni tur başladı. ' + state.balloons.length + ' balon, ' + state.targets.length + ' hedef.');
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   BALON / HEDEF FACTORY
+   ══════════════════════════════════════════════════════════════════ */
+function makeBalloon(b){
+  var el = document.createElement('div');
+  el.className = 'balloon';
+  el.dataset.id = b.id;
+  el.style.transform = 'translate(' + b.x + 'px,' + b.y + 'px)';
+  el.setAttribute('role','button');
+  el.setAttribute('tabindex','0');
+  el.setAttribute('aria-label', 'Balon: ' + b.item.w + (b.item.hint ? ' — ' + b.item.hint : ''));
+  el.style.setProperty('--b-color', b.color);
+
+  /* SVG balon */
+  var gradId = 'bg' + b.id;
+  var hiId = 'bh' + b.id;
+  el.innerHTML =
+    '<svg class="balloon-svg" viewBox="0 0 96 118" preserveAspectRatio="none" aria-hidden="true">' +
+      '<defs>' +
+        '<radialGradient id="' + gradId + '" cx="35%" cy="30%" r="70%">' +
+          '<stop offset="0%" stop-color="' + b.color + '" stop-opacity="1"/>' +
+          '<stop offset="60%" stop-color="' + b.color + '" stop-opacity=".85"/>' +
+          '<stop offset="100%" stop-color="' + b.color + '" stop-opacity=".65"/>' +
+        '</radialGradient>' +
+        '<radialGradient id="' + hiId + '" cx="30%" cy="25%" r="18%">' +
+          '<stop offset="0%" stop-color="#fff" stop-opacity=".9"/>' +
+          '<stop offset="100%" stop-color="#fff" stop-opacity="0"/>' +
+        '</radialGradient>' +
+      '</defs>' +
+      '<ellipse cx="48" cy="48" rx="42" ry="46" fill="url(#' + gradId + ')" stroke="rgba(255,255,255,.35)" stroke-width="1"/>' +
+      '<ellipse cx="36" cy="34" rx="12" ry="10" fill="url(#' + hiId + ')"/>' +
+      '<polygon points="48,92 44,96 52,96" fill="' + b.color + '" opacity=".9"/>' +
+      '<path d="M48 96 Q46 108 50 116" stroke="rgba(255,255,255,.45)" stroke-width="1.5" fill="none"/>' +
+    '</svg>' +
+    '<div class="balloon-text ' + lenClass(b.item.w) + ' ar">' + b.item.w + '</div>';
+
+  /* Input */
+  attachBalloonInput(el, b);
+
+  return el;
+}
+
+function lenClass(w){
+  var len = w ? w.length : 0;
+  if (len <= 4) return 'short';
+  if (len >= 12) return 'long';
+  return '';
+}
+
+function makeTarget(item){
+  var el = document.createElement('button');
+  el.type = 'button';
+  el.className = 'target';
+  el.setAttribute('role','listitem');
+  var set = SETS[state.setId];
+  var isText = set.type === 'text';
+  var visibleLabel = item.t;
+  el.setAttribute('aria-label', 'Hedef: ' + visibleLabel + (item.hint ? ' — ' + item.hint : ''));
+
+  var emojiCls = isText ? 'target-emoji small' : 'target-emoji';
+  var emojiContent = isText ? '<div class="ar" style="font-family:\'Arakom\',serif;direction:rtl;font-size:22px;font-weight:bold">' + item.t + '</div>'
+                             : '<div class="' + emojiCls + '">' + item.t + '</div>';
+  if (!isText && item.t.length > 1 && !/^[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{1F300}-\u{1F9FF}]/u.test(item.t)){
+    /* t saat gibi "7:00" ise text olarak göster */
+    emojiContent = '<div style="font-size:22px;font-weight:800;color:#60a5fa;font-variant-numeric:tabular-nums">' + item.t + '</div>';
+  }
+  el.innerHTML =
+    '<span class="target-check" aria-hidden="true">✓</span>' +
+    emojiContent +
+    (item.hint ? '<div class="target-hint">' + item.hint + '</div>' : '') +
+    '<div class="target-answer ar" style="display:none"></div>';
+
+  var tc = { item: item, el: el, matched: false };
+
+  /* Target'a tıklanırsa: seçili balon varsa bırak */
+  el.addEventListener('click', function(){
+    if (tc.matched) return;
+    if (state.picked){
+      tryMatch(state.picked, tc);
+    } else {
+      toast('Önce balonu seç', 'error');
+    }
+  });
+
+  /* Drag drop */
+  el.addEventListener('dragover', function(e){ e.preventDefault(); el.dataset.over = 'true'; });
+  el.addEventListener('dragleave', function(){ el.dataset.over = 'false'; });
+  el.addEventListener('drop', function(e){
+    e.preventDefault();
+    el.dataset.over = 'false';
+    var id = e.dataTransfer.getData('text');
+    var b = state.balloons.find(function(x){ return x.id === id; });
+    if (b && !b.popped) tryMatch(b, tc);
+  });
+
+  return tc;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   INPUT — pointer (tap + drag), keyboard
+   ══════════════════════════════════════════════════════════════════ */
+function attachBalloonInput(el, b){
+  var dragging = false;
+  var startX = 0, startY = 0;
+  var originX = 0, originY = 0;
+  var moved = false;
+
+  el.addEventListener('pointerdown', function(e){
+    if (b.popped || state.paused) return;
+    e.preventDefault();
+    el.setPointerCapture(e.pointerId);
+    dragging = true;
+    moved = false;
+    startX = e.clientX; startY = e.clientY;
+    originX = b.x; originY = b.y;
+    el.style.transition = 'none';
+    sfxTick();
+  });
+
+  el.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+    b.x = originX + dx;
+    b.y = originY + dy;
+    el.style.transform = 'translate(' + b.x + 'px,' + b.y + 'px)';
+    /* drop hedef kontrolü */
+    updateDropHover(e.clientX, e.clientY);
+  });
+
+  el.addEventListener('pointerup', function(e){
+    if (!dragging) return;
+    dragging = false;
+    el.style.transition = '';
+    try { el.releasePointerCapture(e.pointerId); } catch(err){}
+
+    if (moved){
+      /* drop test */
+      var t = elementTargetAt(e.clientX, e.clientY);
+      clearDropHover();
+      if (t){
+        tryMatch(b, t);
+      } else {
+        /* balon arenaya döner — snap back */
+        b.x = clamp(b.x, 0, $('arena').clientWidth - 96);
+        b.y = clamp(b.y, 0, $('arena').clientHeight - 118);
+        el.style.transform = 'translate(' + b.x + 'px,' + b.y + 'px)';
+      }
+    } else {
+      /* tap-tap: seç */
+      pick(b);
+    }
+  });
+
+  el.addEventListener('pointercancel', function(){
+    dragging = false;
+    el.style.transition = '';
+    clearDropHover();
+  });
+
+  /* Keyboard */
+  el.addEventListener('keydown', function(e){
+    if (b.popped) return;
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      pick(b);
+    } else if (e.key === 'Escape'){
+      unpick();
+    } else if (/^[1-9]$/.test(e.key)){
+      var n = parseInt(e.key,10) - 1;
+      if (state.targets[n] && !state.targets[n].matched){
+        if (state.picked === b) tryMatch(b, state.targets[n]);
+        else { pick(b); tryMatch(b, state.targets[n]); }
+      }
+    } else if (e.key === 'Tab'){
+      // Tab native; nothing special
+    } else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowDown'){
+      e.preventDefault();
+      var dir = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+      cycleBalloonFocus(dir);
+    }
+  });
+
+  el.addEventListener('focus', function(){
+    state.focusIdx = state.balloons.indexOf(b);
+    el.dataset.focus = 'true';
+  });
+  el.addEventListener('blur', function(){ el.dataset.focus = 'false'; });
+}
+
+function pick(b){
+  if (state.picked && state.picked !== b){
+    state.picked.el.classList.remove('picked');
+  }
+  if (state.picked === b){
+    state.picked.el.classList.remove('picked');
+    state.picked = null;
+    srSay('Seçim iptal');
+    return;
+  }
+  state.picked = b;
+  b.el.classList.add('picked');
+  if (state.speakOn) speakAr(b.item.w);
+  sfxTick();
+  srSay('Balon seçildi: ' + b.item.w + '. Şimdi doğru hedefe tıkla veya 1-' + state.targets.length + ' tuşuna bas.');
+}
+function unpick(){
+  if (state.picked){
+    state.picked.el.classList.remove('picked');
+    state.picked = null;
+  }
+}
+
+function updateDropHover(px, py){
+  $$('#targets .target').forEach(function(el){ el.dataset.over = 'false'; });
+  var t = elementTargetAt(px, py);
+  if (t) t.el.dataset.over = 'true';
+}
+function clearDropHover(){ $$('#targets .target').forEach(function(el){ el.dataset.over = 'false'; }); }
+
+function elementTargetAt(px, py){
+  var els = document.elementsFromPoint(px, py);
+  for (var i=0;i<els.length;i++){
+    if (els[i].classList && els[i].classList.contains('target')){
+      var idx = $$('#targets .target').indexOf(els[i]);
+      if (idx >= 0 && !state.targets[idx].matched) return state.targets[idx];
+    }
+  }
+  return null;
+}
+
+function focusBalloon(i){
+  var b = state.balloons[i];
+  if (b && !b.popped) b.el.focus();
+}
+function cycleBalloonFocus(dir){
+  var n = state.balloons.length;
+  if (n === 0) return;
+  var i = state.focusIdx;
+  for (var k=0;k<n;k++){
+    i = (i + dir + n) % n;
+    if (!state.balloons[i].popped){ state.focusIdx = i; focusBalloon(i); return; }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   EŞLEŞTIRME
+   ══════════════════════════════════════════════════════════════════ */
+function tryMatch(b, t){
+  if (b.popped || t.matched || state.paused) return;
+
+  if (t.item.w === b.item.w){  /* doğru eşleşme */
+    correctMatch(b, t);
+  } else {
+    wrongMatch(b, t);
+  }
+}
+
+function correctMatch(b, t){
+  state.correct++;
+  state.matched++;
+  /* Hız bonusu: hızlı modda tick başına daha çok puan */
+  var base = 10;
+  var bonus = state.mode === 'hizli' ? Math.round(state.timerRemain / 60 * 5) : 0;
+  state.score += base + bonus;
+
+  t.matched = true;
+  t.el.dataset.correct = 'true';
+  var ans = t.el.querySelector('.target-answer');
+  ans.textContent = b.item.w;
+  ans.style.display = '';
+
+  /* particle */
+  spawnParticles(b.x + 48, b.y + 48, b.color);
+  sfxPop();
+  if (state.speakOn) speakAr(b.item.w);
+
+  /* pop animasyonu */
+  b.el.classList.add('pop');
+  b.popped = true;
+  if (state.picked === b) state.picked = null;
+
+  setTimeout(function(){ if (b.el.parentNode) b.el.parentNode.removeChild(b.el); }, 400);
+
+  updateHud();
+  srSay('Doğru! ' + b.item.w + ' → ' + t.item.t + '. Skor ' + state.score, false);
+
+  /* Tur tamamlandı mı? */
+  var remaining = state.balloons.filter(function(x){ return !x.popped; }).length;
+  if (remaining === 0){
+    setTimeout(function(){ nextRoundOrEnd(); }, 600);
+  }
+}
+
+function wrongMatch(b, t){
+  state.wrong++;
+  b.el.classList.add('wrong');
+  t.el.dataset.wrong = 'true';
+  sfxWrong();
+  setTimeout(function(){
+    b.el.classList.remove('wrong');
+    t.el.dataset.wrong = 'false';
+  }, 500);
+  srSay('Yanlış. Tekrar dene.', true);
+  updateHud();
+}
+
+function nextRoundOrEnd(){
+  if (state.matched >= state.totalItems){
+    endGame();
+  } else {
+    /* Kalan öğe varsa yeni tur */
+    if (state.mode === 'tur' || state.mode === 'klasik'){
+      showRoundEnd();
+    } else {
+      /* hızlı modda kesintisiz yeni tur */
+      spawnRound();
+    }
+  }
+}
+
+function nextRound(){ spawnRound(); }
+
+/* ══════════════════════════════════════════════════════════════════
+   PARTICLE
+   ══════════════════════════════════════════════════════════════════ */
+function spawnParticles(cx, cy, color){
+  if (state.reducedMotion) return;
+  var layer = $('particleLayer');
+  var arenaRect = $('arena').getBoundingClientRect();
+  var layerRect = layer.getBoundingClientRect();
+  var offsetY = arenaRect.top - layerRect.top;
+  var n = 14;
+  for (var i=0;i<n;i++){
+    var p = document.createElement('div');
+    p.className = 'particle';
+    var ang = (i/n) * Math.PI * 2 + Math.random()*0.3;
+    var dist = 50 + Math.random()*40;
+    var dx = Math.cos(ang) * dist;
+    var dy = Math.sin(ang) * dist;
+    p.style.setProperty('--dx', dx + 'px');
+    p.style.setProperty('--dy', dy + 'px');
+    p.style.left = (cx - 5) + 'px';
+    p.style.top = (cy + offsetY - 5) + 'px';
+    p.style.background = color;
+    p.style.boxShadow = '0 0 8px ' + color;
+    layer.appendChild(p);
+    setTimeout((function(el){ return function(){ if (el.parentNode) el.parentNode.removeChild(el); }; })(p), 700);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HUD / TIMER
+   ══════════════════════════════════════════════════════════════════ */
+function updateHud(){
+  $('scoreVal').textContent = state.score;
+  $('progVal').textContent = state.matched + '/' + state.totalItems;
+  if (state.mode === 'hizli'){
+    var s = Math.max(0, Math.ceil(state.timerRemain));
+    var m = Math.floor(s/60), r = s%60;
+    $('timerVal').textContent = m + ':' + (r<10 ? '0'+r : r);
+    $('timerBar').style.width = Math.max(0, state.timerRemain / state.timerTotal * 100) + '%';
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ANA DÖNGÜ (RAF fizik)
+   ══════════════════════════════════════════════════════════════════ */
+function tick(){
+  state.rafId = requestAnimationFrame(tick);
+  if (state.paused || state.screen !== 'play') return;
+
+  var now = performance.now();
+  var dt = now - state.lastT;
+  state.lastT = now;
+
+  /* Timer */
+  if (state.mode === 'hizli'){
+    state.timerRemain -= dt/1000;
+    if (state.timerRemain <= 0){
+      state.timerRemain = 0;
+      updateHud();
+      endGame();
+      return;
+    }
+    updateHud();
+  }
+
+  /* Balon fiziği */
+  if (!state.reducedMotion){
+    var arena = $('arena');
+    var aw = arena.clientWidth, ah = arena.clientHeight;
+    var bw = 96, bh = 118;
+    state.balloons.forEach(function(b){
+      if (b.popped) return;
+      if (state.picked === b) return;  /* seçili balon durur (tap-tap modelinde) */
+      /* Sine wave y + drift x */
+      var ty = b.y + Math.sin(now * b.freq + b.phase) * 0.15 * dt/16;
+      var tx = b.x + b.vx * dt/16;
+      /* Sınır kontrolü */
+      if (tx < 0){ tx = 0; b.vx = Math.abs(b.vx); }
+      else if (tx > aw - bw){ tx = aw - bw; b.vx = -Math.abs(b.vx); }
+      if (ty < 10) ty = 10;
+      else if (ty > ah - bh){ ty = ah - bh; }
+      b.x = tx; b.y = ty;
+      b.el.style.transform = 'translate(' + b.x + 'px,' + b.y + 'px)';
+    });
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MODAL / BİTİŞ
+   ══════════════════════════════════════════════════════════════════ */
+function showModal(id){ $(id).dataset.active = 'true'; }
+function closeModal(id){ $(id).dataset.active = 'false'; }
+
+function showRoundEnd(){
+  var elapsed = Math.round((performance.now() - state.roundStart)/1000);
+  var correct = state.correct;
+  var wrong = state.wrong;
+  $('reScore').textContent = state.score;
+  $('reCorrect').textContent = correct;
+  $('reWrong').textContent = wrong;
+  $('reTime').textContent = elapsed + 's';
+  var acc = correct + wrong > 0 ? Math.round(correct / (correct + wrong) * 100) : 0;
+  var stars = acc >= 90 ? '⭐⭐⭐' : acc >= 70 ? '⭐⭐' : '⭐';
+  $('reStars').textContent = stars;
+  $('reTitle').textContent = acc >= 90 ? 'مُمْتاز!' : acc >= 70 ? 'جَيِّد جِدًّا!' : 'حاوِلْ مَرَّة أُخْرى';
+  showModal('roundEndModal');
+  sfxFinish();
+  srSay('Tur bitti. Doğru: ' + correct + '. Skor: ' + state.score);
+  setTimeout(function(){ $('reNextBtn').focus(); }, 100);
+}
+
+function endGame(){
+  cancelAnimationFrame(state.rafId);
+  state.rafId = 0;
+
+  var correct = state.correct;
+  var wrong = state.wrong;
+  var acc = correct + wrong > 0 ? Math.round(correct / (correct + wrong) * 100) : 0;
+
+  /* SCORM skor hesabı: doğruluk + tamamlanan oran */
+  var completionPct = Math.round(state.matched / state.totalItems * 100);
+  var finalScore = Math.round((acc * 0.6) + (completionPct * 0.4));
+  SCORM.done(finalScore);
+
+  $('goScore').textContent = finalScore;
+  $('goCorrect').textContent = correct;
+  $('goWrong').textContent = wrong;
+  $('goAcc').textContent = '%' + acc;
+  var stars = finalScore >= 90 ? '⭐⭐⭐' : finalScore >= 70 ? '⭐⭐' : finalScore >= 40 ? '⭐' : '💫';
+  $('goStars').textContent = stars;
+  $('goTitle').textContent = finalScore >= 90 ? '🎉 Mükemmel!' : finalScore >= 70 ? '👏 Tebrikler!' : '💪 Tekrar dene!';
+  $('goSub').textContent = 'Oyun tamamlandı · ' + SETS[state.setId].titleTr + ' · ' + (state.mode === 'hizli' ? 'Hızlı' : state.mode === 'tur' ? 'Tur' : 'Klasik');
+  showModal('gameOverModal');
+  sfxFinish();
+  srSay('Oyun bitti. Final skor: ' + finalScore + '. Doğruluk yüzde ' + acc);
+  setTimeout(function(){ $('goReplayBtn').focus(); }, 100);
+}
+
+function goMenu(){
+  cancelAnimationFrame(state.rafId);
+  state.rafId = 0;
+  state.picked = null;
+  closeModal('roundEndModal');
+  closeModal('gameOverModal');
+  showScreen('menu');
+}
+
+function togglePause(){
+  if (state.screen !== 'play') return;
+  state.paused = !state.paused;
+  $('pauseBtn').textContent = state.paused ? '▶' : '⏸';
+  $('pauseBtn').setAttribute('aria-label', state.paused ? 'Devam ettir' : 'Duraklat');
+  toast(state.paused ? '⏸ Duraklatıldı' : '▶ Devam', state.paused ? 'error' : 'success');
+}
+
+/* Keyboard global shortcuts */
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape'){
+    if (state.screen === 'play'){
+      if (state.picked){ unpick(); return; }
+      togglePause();
+    }
+  } else if (e.key === 'p' || e.key === 'P'){
+    if (state.screen === 'play') togglePause();
+  }
+});
+
+/* Visibilitychange: sekme değişince duraklat */
+document.addEventListener('visibilitychange', function(){
+  if (document.hidden && state.screen === 'play' && !state.paused){
+    togglePause();
+  }
+});
+
+/* ══════════════════════════════════════════════════════════════════
+   INIT
+   ══════════════════════════════════════════════════════════════════ */
+wireMenu();
+showScreen('menu');
+
+/* AudioContext'i ilk kullanıcı etkileşiminde aç (Safari) */
+document.addEventListener('pointerdown', function unlock(){
+  try { ac().resume(); } catch(e){}
+  document.removeEventListener('pointerdown', unlock);
+}, { once: true });
+
+</script>
+</body>
+</html>
