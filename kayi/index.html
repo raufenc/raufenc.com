@@ -230,6 +230,7 @@ body {
   z-index: 1000;
   padding: 0 2rem;
   background: rgba(13,13,13,0.85);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(201,168,76,0.15);
   transition: var(--transition);
@@ -331,7 +332,7 @@ body {
 
 .hero-bg {
   position: absolute;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   background:
     radial-gradient(ellipse at 20% 50%, rgba(107,29,42,0.3) 0%, transparent 60%),
     radial-gradient(ellipse at 80% 50%, rgba(26,58,42,0.3) 0%, transparent 60%),
@@ -342,7 +343,7 @@ body {
 
 .hero-pattern {
   position: absolute;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 30L30 55L5 30z' fill='none' stroke='%23c9a84c' stroke-width='0.5'/%3E%3C/svg%3E");
   z-index: 0;
@@ -351,7 +352,7 @@ body {
 /* Animated floating particles */
 .hero-particles {
   position: absolute;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   z-index: 0;
   overflow: hidden;
 }
@@ -652,8 +653,9 @@ body {
 .modal-overlay {
   display: none;
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   background: rgba(0,0,0,0.85);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 2000;
   overflow-y: auto;
@@ -1944,6 +1946,7 @@ body {
   border-radius: 8px;
   border: 1.5px solid var(--gold);
   background: rgba(13,13,13,0.85);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   color: var(--gold);
   cursor: pointer;
@@ -1962,6 +1965,7 @@ body {
   background: rgba(13,13,13,0.85);
   border-color: var(--burgundy-light);
   color: var(--burgundy-light);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 .campaign-btn.pause:hover { background: rgba(139,45,58,0.25); }
@@ -1998,6 +2002,7 @@ body {
   right: 20px;
   max-width: 480px;
   background: rgba(13,13,13,0.92);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(201,168,76,0.3);
   border-radius: 10px;
@@ -2105,8 +2110,9 @@ body {
    ============================================ */
 .search-overlay {
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0; left: 0;
   background: rgba(0,0,0,0.6);
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   z-index: 10000;
   display: none;
