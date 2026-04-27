@@ -144,8 +144,9 @@ body{
 
 /* Mixer area */
 .mixer-area{
-  display:flex;flex-direction:row-reverse;justify-content:center;
+  display:flex;flex-direction:row;justify-content:center;
   gap:8px;padding:14px 10px;width:100%;flex-wrap:wrap;
+  direction:rtl;
 }
 .mixer-slot{
   width:clamp(40px,10vw,55px);height:clamp(50px,12vw,65px);
@@ -702,7 +703,7 @@ function buildMixer(state,containerId){
     slot.id=containerId+'_slot_'+i;
     const num=document.createElement('span');
     num.className='slot-num';
-    num.textContent=state.letters.length-i;
+    num.textContent=i+1;
     slot.appendChild(num);
     c.appendChild(slot);
   });

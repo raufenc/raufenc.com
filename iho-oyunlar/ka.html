@@ -99,7 +99,7 @@ body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;font-size:clamp(16px,1.8v
 .g3-clock .cd{position:absolute;top:50%;left:50%;width:12px;height:12px;background:#0d7a6e;border-radius:50%;transform:translate(-50%,-50%);z-index:5}
 .g3-clock .hh{position:absolute;bottom:50%;left:50%;width:6px;height:55px;background:#333;border-radius:3px;transform-origin:bottom center;z-index:3;transition:transform 0.5s}
 .g3-clock .mh{position:absolute;bottom:50%;left:50%;width:4px;height:75px;background:#11998e;border-radius:2px;transform-origin:bottom center;z-index:4;transition:transform 0.5s}
-.g3-clock .cn{position:absolute;font-size:1em;font-weight:bold;color:#0d7a6e}
+.g3-clock .cn{position:absolute;font-size:1em;font-weight:bold;color:#0d7a6e;transform:translate(-50%,-50%);line-height:1;text-align:center}
 .g3-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
 .g3-opt{background:#f0faf8;border:3px solid #b2dfdb;border-radius:15px;padding:15px;text-align:center;cursor:pointer;font-size:1.15em;transition:all 0.3s}
 .g3-opt:hover{border-color:#11998e;background:#e0f7f0;transform:translateY(-2px)}
@@ -632,7 +632,7 @@ var g3Hours=[{h:1,a:"السّاعة الواحِدة"},{h:2,a:"السّاعة ا
 var g3Qs,g3Cur,g3Sc;
 function g3InitClock(){
 var c=document.getElementById('g3clock');c.querySelectorAll('.cn').forEach(function(n){n.remove()});
-for(var i=1;i<=12;i++){var n=document.createElement('div');n.className='cn';var ang=(i*30-90)*(Math.PI/180);var r=78;n.style.left=(100+r*Math.cos(ang)-8)+'px';n.style.top=(100+r*Math.sin(ang)-10)+'px';n.textContent=i;c.appendChild(n)}
+var sz=c.clientWidth||c.offsetWidth-12||188;var cx=sz/2;var r=sz*0.40;for(var i=1;i<=12;i++){var n=document.createElement('div');n.className='cn';var ang=(i*30-90)*(Math.PI/180);n.style.left=(cx+r*Math.cos(ang))+'px';n.style.top=(cx+r*Math.sin(ang))+'px';n.textContent=i;c.appendChild(n)}
 }
 function g3Init(){
 g3Cur=0;g3Sc=0;document.getElementById('g3score').textContent=0;
@@ -865,8 +865,8 @@ endGame(6,fs);
 
 window.onbeforeunload=function(){SCORM.fin()};
 updateMenu();
-// Hash-based deep link (hub integration)
-(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=1&&n<=6)setTimeout(function(){startGame(n);},200);}})();
+// Hash-based deep link (hub integration); doğrudan ka.html açılırsa iç menüyü göster
+(function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=1&&n<=6){setTimeout(function(){startGame(n);},200);return;}}var ms=document.getElementById('menuScreen');if(ms){ms.style.setProperty('display','block','important');}var bb=document.getElementById('backBtn');if(bb){bb.style.setProperty('display','none','important');}})();
 </script>
 </body>
 </html>
