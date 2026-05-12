@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0f0c29">
+<title>الْمَأْكُولاَتُ وَالْمَشْرُوبَاتُ — Yiyecekler ve İçecekler</title>
+<meta name="description" content="İHO 7. Sınıf Arapça — videoyu izle, sorulara cevap ver. Yiyecek ve içecek kelime alıştırması.">
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
+  background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
+  color:#fff; min-height:100vh; min-height:100dvh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:16px; padding-top:max(16px,env(safe-area-inset-top));
+  padding-bottom:max(16px,env(safe-area-inset-bottom));
+}
+
+/* Back butonu — diğer oyunlarla aynı stil */
+.back-btn{
+  position:fixed; top:max(16px,env(safe-area-inset-top)); right:16px;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  color:#fff; font-size:22px; cursor:pointer; z-index:50;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, transform .15s;
+}
+.back-btn:hover,.back-btn:focus-visible{background:rgba(255,255,255,.22); transform:scale(1.05)}
+
+/* HUD üst */
+#hud{
+  width:100%; max-width:960px;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:12px; font-size:16px;
+}
+.dots{display:flex; gap:8px}
+.dot{
+  width:10px; height:10px; border-radius:50%;
+  background:rgba(255,255,255,.18); transition:all .25s ease;
+}
+.dot.active{background:#4f7cff; transform:scale(1.25)}
+.dot.ok{background:#2bb673}
+.dot.bad{background:#e74c3c}
+.counter{font-size:22px; font-weight:600; opacity:.92; letter-spacing:1px}
+
+/* Sahne */
+#stage{
+  position:relative; width:100%; max-width:960px;
+  aspect-ratio:16/9; background:#000;
+  border-radius:14px; overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.45);
+}
+video{width:100%; height:100%; display:block; object-fit:contain; background:#000}
+
+/* Başlat */
+#startScreen{
+  position:absolute; inset:0;
+  background:rgba(10,15,40,.94);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  z-index:30; gap:24px; padding:24px; text-align:center;
+}
+#startScreen h1{
+  margin:0; font-size:clamp(28px,4.5vw,44px); font-weight:700;
+  background:linear-gradient(90deg,#f7971e,#ffd200);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.start-btn{
+  background:linear-gradient(135deg,#4f7cff,#6e5dff);
+  border:none; color:#fff;
+  padding:16px 56px; border-radius:999px;
+  font-size:clamp(20px,2.6vw,26px); font-weight:600; cursor:pointer;
+  box-shadow:0 8px 24px rgba(79,124,255,.45);
+  transition:transform .15s ease; font-family:inherit;
+}
+.start-btn:hover{transform:translateY(-2px)}
+.start-btn:active{transform:translateY(0)}
+
+/* Soru overlay */
+#qOverlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,rgba(8,12,30,.35) 0%, rgba(8,12,30,.92) 35%);
+  display:none; flex-direction:column;
+  align-items:center; justify-content:flex-end;
+  z-index:20; padding:4% 5% 5%;
+  gap:clamp(10px,1.6vw,16px);
+}
+#qOverlay.show{display:flex; animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.opts{display:flex; flex-direction:column; gap:10px; width:100%; max-width:620px}
+.opt-btn{
+  background:rgba(255,255,255,.10);
+  border:2px solid rgba(255,255,255,.20);
+  color:#fff; padding:14px 22px;
+  border-radius:14px;
+  font-size:clamp(18px,2.4vw,26px); font-family:inherit;
+  cursor:pointer; text-align:right;
+  transition:all .18s ease;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  line-height:1.5;
+}
+.opt-btn:hover:not(:disabled){background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.4)}
+.opt-btn:disabled{cursor:default}
+.opt-btn.correct{
+  background:linear-gradient(135deg,#2bb673,#1f9d5f)!important;
+  border-color:#2bb673!important;
+  box-shadow:0 8px 24px rgba(43,182,115,.45);
+}
+.opt-btn.wrong{
+  background:linear-gradient(135deg,#e74c3c,#c0392b)!important;
+  border-color:#e74c3c!important;
+  box-shadow:0 8px 24px rgba(231,76,60,.45);
+}
+
+.feedback{
+  min-height:28px; font-size:clamp(20px,2.6vw,28px); font-weight:600;
+  opacity:0; transition:opacity .25s ease;
+}
+.feedback.show{opacity:1}
+.feedback.ok{color:#6ee7a8}
+.feedback.bad{color:#ffb3a8}
+
+/* Bitiş */
+#endScreen{
+  position:absolute; inset:0;
+  background:rgba(10,15,40,.97);
+  display:none; flex-direction:column;
+  align-items:center; justify-content:center;
+  z-index:25; gap:18px; padding:24px; text-align:center;
+}
+#endScreen.show{display:flex; animation:fadeIn .45s ease}
+.end-title{font-size:clamp(26px,4vw,38px); font-weight:700; margin:0}
+.end-score{
+  font-size:clamp(48px,9vw,88px); font-weight:800; letter-spacing:4px;
+  background:linear-gradient(135deg,#6ee7a8,#4f7cff);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; margin:0;
+}
+.end-msg{font-size:clamp(18px,2.4vw,26px); opacity:.92; margin:0}
+
+@media(max-width:540px){
+  body{padding:8px}
+  .opt-btn{padding:12px 16px}
+  #hud{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<button class="back-btn" id="backBtn" type="button" aria-label="Geri dön">←</button>
+
+<div id="hud">
+  <div class="dots" id="dots">
+    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+  <div class="counter"><span id="curIdx">١</span> / ٤</div>
+</div>
+
+<div id="stage">
+  <video id="vid" preload="auto" playsinline></video>
+
+  <div id="startScreen">
+    <h1>الْمَأْكُولاَتُ وَالْمَشْرُوبَاتُ</h1>
+    <button class="start-btn" id="startBtn">اِبْدَأْ ▶</button>
+  </div>
+
+  <div id="qOverlay">
+    <div class="opts" id="qOpts"></div>
+    <div class="feedback" id="qFeedback"></div>
+  </div>
+
+  <div id="endScreen">
+    <h2 class="end-title">النَّتِيجَةُ</h2>
+    <p class="end-score" id="finalScore">٠ / ٤</p>
+    <p class="end-msg" id="endMsg"></p>
+    <button class="start-btn" id="replayBtn">أَعِدْ</button>
+  </div>
+</div>
+
+<script>
+const ARABIC_DIGITS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toArDigit = n => String(n).split('').map(c => ARABIC_DIGITS[+c] ?? c).join('');
+
+const STEPS = [
+  { id:'q1', video:'iy/soru1.mp4', answerAudio:'iy/cevap1.mp3',
+    options:[
+      'هُوَ يَأْكُلُ الْخُبْزَ وَالْجُبْنَ',
+      'هُوَ يَأْكُلُ الْعَسَلَ وَالزُّبْدَةَ',
+      'هُوَ يَأْكُلُ الْمُرَبَّى وَالْبَيْضَ'
+    ],
+    correct:1
+  },
+  { id:'q2', video:'iy/soru2.mp4', answerAudio:'iy/cevap2.mp3',
+    options:[
+      'هِيَ تَشْرَبُ الْمَاءَ',
+      'هِيَ تَشْرَبُ الْعَصِيرَ',
+      'هِيَ تَشْرَبُ الْحَلِيبَ'
+    ],
+    correct:2
+  },
+  { id:'q3', video:'iy/soru3.mp4', answerAudio:'iy/cevap3.mp3',
+    options:[
+      'لاَ، هُوَ يَأْكُلُ السَّمَكَ',
+      'نَعَمْ، هُوَ يَأْكُلُ الدَّجَاجَ',
+      'لاَ، هُوَ يَأْكُلُ اللَّحْمَ'
+    ],
+    correct:1
+  },
+  { id:'q4', video:'iy/soru4.mp4', answerAudio:'iy/cevap4.mp3',
+    options:[
+      'نَعَمْ، هِيَ تَشْرَبُ الْعَصِيرَ',
+      'لاَ، هِيَ تَشْرَبُ الْقَهْوَةَ',
+      'لاَ، هِيَ تَشْرَبُ الشَّايَ'
+    ],
+    correct:1
+  }
+];
+
+const video       = document.getElementById('vid');
+const startScreen = document.getElementById('startScreen');
+const startBtn    = document.getElementById('startBtn');
+const qOverlay    = document.getElementById('qOverlay');
+const qOpts       = document.getElementById('qOpts');
+const qFeedback   = document.getElementById('qFeedback');
+const endScreen   = document.getElementById('endScreen');
+const finalScore  = document.getElementById('finalScore');
+const endMsg      = document.getElementById('endMsg');
+const replayBtn   = document.getElementById('replayBtn');
+const dotsEl      = document.getElementById('dots');
+const curIdxEl    = document.getElementById('curIdx');
+const backBtn     = document.getElementById('backBtn');
+
+let idx = 0;
+let correctCount = 0;
+let busy = false;
+
+/* Web Audio: ding / buzz */
+let audioCtx = null;
+function ensureAudio(){
+  if(!audioCtx){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(AC) audioCtx = new AC();
+  }
+  if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+function playTone(type){
+  const ctx = ensureAudio(); if(!ctx) return;
+  if(type === 'ok'){
+    [659.25, 880].forEach((f,i) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = f;
+      g.gain.setValueAtTime(0, ctx.currentTime + i*0.10);
+      g.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i*0.10 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i*0.10 + 0.22);
+      o.connect(g); g.connect(ctx.destination);
+      o.start(ctx.currentTime + i*0.10);
+      o.stop(ctx.currentTime + i*0.10 + 0.28);
+    });
+  } else {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'square'; o.frequency.value = 196;
+    g.gain.setValueAtTime(0, ctx.currentTime);
+    g.gain.linearRampToValueAtTime(0.15, ctx.currentTime + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.4);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.42);
+  }
+}
+
+function updateHud(){
+  curIdxEl.textContent = toArDigit(Math.min(idx + 1, STEPS.length));
+  [...dotsEl.children].forEach((d,i) => {
+    d.classList.remove('active');
+    if(i === idx) d.classList.add('active');
+  });
+}
+function markDot(i, ok){
+  const d = dotsEl.children[i];
+  d.classList.remove('active');
+  d.classList.add(ok ? 'ok' : 'bad');
+}
+
+function loadStep(){
+  if(idx >= STEPS.length){ finish(); return; }
+  busy = true;
+  const s = STEPS[idx];
+  qOverlay.classList.remove('show');
+  qFeedback.classList.remove('show','ok','bad');
+  qFeedback.textContent = '';
+  qOpts.innerHTML = '';
+  updateHud();
+  video.src = s.video;
+  video.currentTime = 0;
+  video.play().catch(()=>{});
+}
+
+video.addEventListener('ended', () => {
+  if(idx >= STEPS.length) return;
+  showOptions();
+});
+
+function showOptions(){
+  busy = false;
+  const s = STEPS[idx];
+  qOpts.innerHTML = '';
+  s.options.forEach((txt,i) => {
+    const b = document.createElement('button');
+    b.className = 'opt-btn';
+    b.textContent = txt;
+    b.onclick = () => choose(i, b);
+    qOpts.appendChild(b);
+  });
+  qOverlay.classList.add('show');
+}
+
+function choose(selected, btn){
+  if(busy) return;
+  busy = true;
+  const s = STEPS[idx];
+  const buttons = qOpts.querySelectorAll('.opt-btn');
+  buttons.forEach(b => b.disabled = true);
+
+  const isCorrect = selected === s.correct;
+  if(isCorrect){
+    btn.classList.add('correct');
+    correctCount++;
+    qFeedback.textContent = 'أَحْسَنْتَ';
+    qFeedback.classList.add('show','ok');
+    playTone('ok');
+  } else {
+    btn.classList.add('wrong');
+    buttons[s.correct].classList.add('correct');
+    qFeedback.textContent = 'الْإِجَابَةُ الصَّحِيحَةُ';
+    qFeedback.classList.add('show','bad');
+    playTone('bad');
+  }
+
+  markDot(idx, isCorrect);
+
+  setTimeout(() => {
+    const audio = new Audio(s.answerAudio);
+    let advanced = false;
+    const advance = () => {
+      if(advanced) return; advanced = true;
+      idx++;
+      setTimeout(loadStep, 350);
+    };
+    audio.play().catch(() => advance());
+    audio.onended = advance;
+    setTimeout(advance, 5500);
+  }, 700);
+}
+
+function finish(){
+  qOverlay.classList.remove('show');
+  finalScore.textContent = toArDigit(correctCount) + ' / ' + toArDigit(STEPS.length);
+  const pct = correctCount / STEPS.length;
+  let msg = '';
+  if(pct === 1)       msg = 'مُمْتَازٌ! مَا شَاءَ اللَّهُ';
+  else if(pct >= .75) msg = 'جَيِّدٌ جِدًّا';
+  else if(pct >= .5)  msg = 'جَيِّدٌ، حَاوِلْ مَرَّةً أُخْرَى';
+  else                msg = 'تَدَرَّبْ ثُمَّ أَعِدْ';
+  endMsg.textContent = msg;
+  endScreen.classList.add('show');
+}
+
+startBtn.addEventListener('click', () => {
+  ensureAudio();
+  startScreen.style.display = 'none';
+  idx = 0; correctCount = 0;
+  [...dotsEl.children].forEach(d => d.classList.remove('ok','bad','active'));
+  loadStep();
+});
+
+replayBtn.addEventListener('click', () => {
+  endScreen.classList.remove('show');
+  startScreen.style.display = 'flex';
+});
+
+backBtn.addEventListener('click', () => {
+  if(history.length > 1) history.back();
+  else location.href = './index.html';
+});
+</script>
+</body>
+</html>
