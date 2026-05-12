@@ -22,8 +22,7 @@ var PROJELER = [
   { emoji: '\u{2709}\u{FE0F}', title: 'Davet Mektubu', desc: 'Ateist bir mühendise ne yazarsın? Agnostik bir doktora? 27 mesleğe özel, düşündürücü mektuplar.', tag: 'Uygulama', href: 'https://davetmektubu.com/', external: true },
   { emoji: '\u{1F3F9}', title: 'Kayı I — Ertuğrul\'un Ocağı', desc: 'Bir uç beyliğinden cihan devletine — Osmanlı\'nın kuruluş destanını kişiler, olaylar ve haritalarla keşfet.', tag: 'Ansiklopedi', href: '/kayi/' },
   { emoji: '\u{1F331}', title: 'İyilik Akademi', desc: 'Çocuklara güzel ahlakı nasıl öğretirsin? 40 derslik interaktif bir yolculukla — oyunlaştırılmış, quizlerle dolu.', tag: 'Uygulama', href: '/iyilikakademi/' },
-  { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', featured: true },
-  { emoji: '\u{2728}', title: 'Hikmetler', desc: 'İslâmî usul, akıl ve ahlâka dair 337 hikmet kartı, 20 temada. Temiz bir arşiv, hızlı paylaşım.', tag: 'Ansiklopedi', href: '/hikmetler/', featured: true }
+  { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', featured: true }
 ];
 
 var SINIF_ARACLARI = [];
