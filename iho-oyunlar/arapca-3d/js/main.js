@@ -38,6 +38,12 @@ const State = {
   hedefRing: null         // ipucu halkası mesh'i
 };
 
+// Arapça-Hindî rakamlara çevir: 0123 → ٠١٢٣
+function arabicNum(n) {
+  const m = '٠١٢٣٤٥٦٧٨٩';
+  return String(n).split('').map(c => (c >= '0' && c <= '9') ? m[c.charCodeAt(0) - 48] : c).join('');
+}
+
 // === Init ===
 function init() {
   const canvas = document.getElementById('oyun-canvas');
@@ -373,9 +379,7 @@ function ipucuGoster() {
   if (!State.hedefKelime) return;
   const k = State.hedefKelime;
   const ipucuEl = document.getElementById('ipucu-arapca');
-  const trEl = document.getElementById('ipucu-translit');
   if (ipucuEl) ipucuEl.textContent = k.ar;
-  if (trEl) trEl.textContent = '(' + k.translit + ')';
   setTimeout(() => window.TTS && window.TTS.speakArabic(k.ar), 250);
 }
 
@@ -457,39 +461,40 @@ function alisverisListeyiCiz() {
     const tamam = item.mevcut >= item.gerekli;
     const li = document.createElement('li');
     li.className = 'alisveris-satir' + (tamam ? ' tamam' : '');
+    // Tamamen Arapça: emoji + Arapça kelime + Arapça-Hindî rakamlarla fiyat ve miktar
     li.innerHTML =
       '<span class="av-emoji">' + (k.emoji || '·') + '</span>' +
-      '<div class="av-ad"><div class="av-ar">' + k.ar + '</div>' +
-      '<div class="av-tr">' + k.tr + ' · ' + item.fiyat + '₺/adet</div></div>' +
-      '<div class="av-mik">' + item.mevcut + ' / ' + item.gerekli + '</div>';
+      '<div class="av-ad">' +
+        '<div class="av-ar">' + k.ar + '</div>' +
+        '<div class="av-fiyat">' + arabicNum(item.fiyat) + ' ﷼</div>' +
+      '</div>' +
+      '<div class="av-mik">' + arabicNum(item.mevcut) + ' / ' + arabicNum(item.gerekli) + '</div>';
     ul.appendChild(li);
   }
 }
 
 function alisverisToplamGuncelle() {
   const tut = document.getElementById('av-toplam');
-  if (tut) tut.textContent = State.paraOdenen + ' ₺';
+  if (tut) tut.textContent = arabicNum(State.paraOdenen) + ' ﷼';
   const sayac = document.getElementById('av-sayac');
-  if (sayac) sayac.textContent = State.toplamMevcut + ' / ' + State.toplamGerekli;
+  if (sayac) sayac.textContent = arabicNum(State.toplamMevcut) + ' / ' + arabicNum(State.toplamGerekli);
 }
 
 function alisverisTikla(rec) {
   const item = State.liste.find(x => x.kid === rec.kelime.id);
   if (!item) {
-    // Listede yok
     rec.flash = { tip: 'yanlis', t0: performance.now() };
     flashMaterial(rec, 0xff8a3a, 0.5);
     yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
-      'Listede yok', '#cc6a1a');
+      'لَيْسَ فِي القَائِمَة', '#cc6a1a');
     window.SFX && window.SFX.yanlis();
     return;
   }
   if (item.mevcut >= item.gerekli) {
-    // Yeterli
     rec.flash = { tip: 'yanlis', t0: performance.now() };
     flashMaterial(rec, 0xff8a3a, 0.4);
     yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
-      'Yeterli (' + item.mevcut + ')', '#cc6a1a');
+      'يَكْفِي', '#cc6a1a');
     return;
   }
   // Sepete ekle
@@ -502,7 +507,7 @@ function alisverisTikla(rec) {
   // Arapça'sını söyle
   window.TTS && window.TTS.speakArabic(window.Data.KELIMELER[item.kid].ar);
   yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
-    '+1 ' + window.Data.KELIMELER[item.kid].tr + ' · ' + item.fiyat + '₺', '#1aaa3a');
+    '+' + arabicNum(1) + ' · ' + arabicNum(item.fiyat) + ' ﷼', '#1aaa3a');
   alisverisListeyiCiz();
   alisverisToplamGuncelle();
 
@@ -520,13 +525,13 @@ function alisverisBitti() {
     window.SCORM.setScore(yuzde, 100, 0);
     window.SCORM.setStatus('completed');
   }
-  document.getElementById('sonuc-yuzde').textContent = State.paraOdenen;
-  document.getElementById('sonuc-yuzde-isaret').textContent = ' ₺';
-  document.getElementById('sonuc-dogru').textContent = State.toplamMevcut;
-  document.getElementById('sonuc-toplam').textContent = State.toplamGerekli;
+  document.getElementById('sonuc-yuzde').textContent = arabicNum(State.paraOdenen);
+  document.getElementById('sonuc-yuzde-isaret').textContent = ' ﷼';
+  document.getElementById('sonuc-dogru').textContent = arabicNum(State.toplamMevcut);
+  document.getElementById('sonuc-toplam').textContent = arabicNum(State.toplamGerekli);
   document.getElementById('sonuc-mesaj').textContent =
-    'Tüm alışverişin tamam — ' + State.paraOdenen + ' ₺ ödedin. Aferin! 🛒✨';
-  document.getElementById('sonuc-basarili-buton').textContent = 'Tekrar Alışveriş';
+    'أَكْمَلْتَ التَّسَوُّق! دَفَعْتَ ' + arabicNum(State.paraOdenen) + ' ﷼. أَحْسَنْتَ! 🛒✨';
+  document.getElementById('sonuc-basarili-buton').textContent = 'تَسَوُّق جَدِيد';
   document.getElementById('sonuc-basarili-buton').onclick = () => {
     document.getElementById('sonuc-modal').style.display = 'none';
     UI.alisverisBaslat();
@@ -551,7 +556,7 @@ function dogruTahmin(rec) {
   updateHUD();
   if (window.SCORM) window.SCORM.setScore(Math.min(100, State.skor), 100, 0);
   // Yüzen "✓ tr" yazısı
-  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), '✓ ' + rec.kelime.tr, '#1aaa3a');
+  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), '✓ ' + rec.kelime.ar, '#1aaa3a');
   if (State.modu === 'sinav') {
     setTimeout(() => sonrakiSoru(), 1100);
   } else {
@@ -563,7 +568,7 @@ function yanlisTahmin(rec) {
   window.SFX && window.SFX.yanlis();
   State.yanlis++;
   updateHUD();
-  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), 'Tekrar dene', '#cc2a2a');
+  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), 'حَاوِلْ ثَانِيَة', '#cc2a2a');
   if (State.modu === 'sinav') {
     setTimeout(() => sonrakiSoru(), 900);
   }
@@ -635,16 +640,16 @@ function sinavBitir() {
     window.SCORM.setScore(yuzde, 100, 0);
     window.SCORM.setStatus(yuzde >= 60 ? 'passed' : 'failed');
   }
-  document.getElementById('sonuc-yuzde').textContent = yuzde;
-  document.getElementById('sonuc-yuzde-isaret').textContent = '%';
-  document.getElementById('sonuc-dogru').textContent = State.dogru;
-  document.getElementById('sonuc-toplam').textContent = State.toplamSoru;
+  document.getElementById('sonuc-yuzde').textContent = arabicNum(yuzde);
+  document.getElementById('sonuc-yuzde-isaret').textContent = '٪';
+  document.getElementById('sonuc-dogru').textContent = arabicNum(State.dogru);
+  document.getElementById('sonuc-toplam').textContent = arabicNum(State.toplamSoru);
   document.getElementById('sonuc-mesaj').textContent =
-    yuzde >= 90 ? 'Harika! Çok iyi biliyorsun! ✨' :
-    yuzde >= 70 ? 'Aferin! Çok güzel bir performans.' :
-    yuzde >= 50 ? 'Güzel başlangıç, tekrar denersen daha iyi olur.' :
-    'Endişelenme, biraz daha alıştırma yap.';
-  document.getElementById('sonuc-basarili-buton').textContent = 'Tekrar Sına';
+    yuzde >= 90 ? 'رَائِع! أَحْسَنْتَ ✨' :
+    yuzde >= 70 ? 'جَيِّد جِدًّا!' :
+    yuzde >= 50 ? 'بِدَايَة جَيِّدَة' :
+    'لا تَقْلَق، حَاوِلْ مَرَّةً أُخْرَى';
+  document.getElementById('sonuc-basarili-buton').textContent = 'مَرَّةً أُخْرَى';
   document.getElementById('sonuc-basarili-buton').onclick = () => {
     document.getElementById('sonuc-modal').style.display = 'none';
     UI.sinavBaslat();
@@ -719,14 +724,14 @@ function updateHUD() {
   const d = document.getElementById('dogru');
   const y = document.getElementById('yanlis');
   const sayac = document.getElementById('soru-sayac');
-  if (s) s.textContent = State.skor;
-  if (d) d.textContent = State.dogru;
-  if (y) y.textContent = State.yanlis;
+  if (s) s.textContent = arabicNum(State.skor);
+  if (d) d.textContent = arabicNum(State.dogru);
+  if (y) y.textContent = arabicNum(State.yanlis);
   if (sayac) {
     if (State.modu === 'sinav') {
       const kalan = State.kalanSorular.length;
       const cevaplanan = State.toplamSoru - kalan;
-      sayac.textContent = (cevaplanan + 1) + ' / ' + State.toplamSoru;
+      sayac.textContent = arabicNum(cevaplanan + 1) + ' / ' + arabicNum(State.toplamSoru);
       sayac.style.display = '';
     } else {
       sayac.style.display = 'none';
@@ -747,7 +752,7 @@ const UI = {
     document.getElementById('ipucu-karti').style.display = '';
     onResize();
     const sahne = window.Data.SAHNELER[sahneId];
-    document.getElementById('sahne-baslik').textContent = sahne.ad + ' — ' + sahne.ar;
+    document.getElementById('sahne-baslik').textContent = sahne.ar;
     document.getElementById('soru-sayac').style.display = 'none';
     sahneAc(sahneId);
     updateHUD();
@@ -758,14 +763,14 @@ const UI = {
     document.getElementById('alisveris-paneli').style.display = 'none';
     document.getElementById('ipucu-karti').style.display = '';
     onResize();
-    document.getElementById('sahne-baslik').textContent = 'Sınav Modu — الاِخْتِبَار';
+    document.getElementById('sahne-baslik').textContent = 'الاِخْتِبَار';
     sinavBaslat();
   },
   alisverisBaslat() {
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
     onResize();
-    document.getElementById('sahne-baslik').textContent = 'Manav Alışverişi — التَّسَوُّق';
+    document.getElementById('sahne-baslik').textContent = 'تَسَوُّق البَقَّال';
     document.getElementById('soru-sayac').style.display = 'none';
     sahneAc('manav', { skipNewTarget: true });
     alisverisBaslat();
