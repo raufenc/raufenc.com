@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="ARAPCA_3D_OYUN_V1"
+          version="1.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="ORG_ARAPCA_3D">
+    <organization identifier="ORG_ARAPCA_3D">
+      <title>Arapça 3D Dünya — İnteraktif Kelime Oyunu</title>
+      <item identifier="item-arapca-3d" identifierref="res-arapca-3d">
+        <title>عَالَمُ العَرَبِيَّةِ ثُلَاثِيُّ الأَبْعَاد — Arapça 3D Dünya</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="res-arapca-3d"
+              type="webcontent"
+              adlcp:scormtype="sco"
+              href="index.html">
+      <file href="index.html"/>
+      <file href="js/voxel.js"/>
+      <file href="js/models.js"/>
+      <file href="js/data.js"/>
+      <file href="js/scenes.js"/>
+      <file href="js/scorm.js"/>
+      <file href="js/tts.js"/>
+      <file href="js/sfx.js"/>
+      <file href="js/game.js"/>
+      <file href="js/ui.js"/>
+    </resource>
+  </resources>
+
+</manifest>
