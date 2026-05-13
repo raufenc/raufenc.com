@@ -749,13 +749,19 @@ M.bulut = function () {
   return g;
 };
 
-// Manav tezgahı (uzun ahşap masa)
+// Manav tezgahı — ahşap tezgah + çizgili eğimli kumaş tente + tabela
 M.tezgah = function () {
   const g = new THREE.Group();
+  // Tezgah yüzeyi
   const top = new THREE.Mesh(new THREE.BoxGeometry(8, 0.15, 1.6), mat({ color: 0xa06330 }));
   top.position.y = 0.9;
   top.castShadow = true; top.receiveShadow = true;
   g.add(top);
+  // Tezgah ön paneli (görünür ön yüz)
+  const front = new THREE.Mesh(new THREE.BoxGeometry(8, 0.88, 0.05), mat({ color: 0x7a4818 }));
+  front.position.set(0, 0.46, 0.78);
+  front.castShadow = true; front.receiveShadow = true;
+  g.add(front);
   // Bacaklar
   for (const x of [-3.7, 3.7]) {
     for (const z of [-0.7, 0.7]) {
@@ -765,24 +771,100 @@ M.tezgah = function () {
       g.add(leg);
     }
   }
-  // Çatı/sayebari
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(8.5, 0.08, 2), mat({ color: 0xc23a3a }));
-  roof.position.y = 2.6;
-  roof.castShadow = true; roof.receiveShadow = true;
-  g.add(roof);
-  // Çatı direkleri
-  for (const x of [-3.9, 3.9]) {
-    for (const z of [-0.9, 0.9]) {
-      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 1.7), mat({ color: 0x6b3f1f }));
-      post.position.set(x, 1.75, z);
-      post.castShadow = true; post.receiveShadow = true;
-      g.add(post);
-    }
+  // Tente direkleri (4 dikme, tezgahın arka köşelerinden ön köşelerine doğru yüksek)
+  const postMat = mat({ color: 0x5a3416 });
+  const arkaSol = [-3.9, -0.9, 2.6];
+  const arkaSag = [3.9, -0.9, 2.6];
+  const onSol = [-3.9, 0.9, 2.2];
+  const onSag = [3.9, 0.9, 2.2];
+  for (const p of [arkaSol, arkaSag]) {
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, p[2]), postMat);
+    post.position.set(p[0], p[2] / 2, p[1]);
+    post.castShadow = true; post.receiveShadow = true;
+    g.add(post);
   }
-  // Çizgili tente görünümü için ön sarkma
-  const stripe = new THREE.Mesh(new THREE.BoxGeometry(8.5, 0.3, 0.05), mat({ color: 0xfff3d0 }));
-  stripe.position.set(0, 2.45, 1);
-  g.add(stripe);
+  for (const p of [onSol, onSag]) {
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, p[2]), postMat);
+    post.position.set(p[0], p[2] / 2, p[1]);
+    post.castShadow = true; post.receiveShadow = true;
+    g.add(post);
+  }
+  // Eğimli çizgili kumaş tente — 8 alternating şerit
+  // Arka kenar: y=2.6, z=-0.95 ; Ön kenar: y=2.2, z=1.0
+  // Her şerit ince bir düzlem; her ikisi arası alternatif renk
+  const stripeColors = [0xd23a3a, 0xfaf3e0]; // klasik kırmızı/krem
+  const stripes = 10;
+  const totalW = 8.4;
+  const stripeW = totalW / stripes;
+  for (let i = 0; i < stripes; i++) {
+    const color = stripeColors[i % 2];
+    const xCenter = -totalW / 2 + stripeW * (i + 0.5);
+    // Düz dörtgen şerit — eğimli düzlem
+    const geom = new THREE.PlaneGeometry(stripeW * 0.985, 2.2);
+    const m = new THREE.MeshStandardMaterial({ color, roughness: 0.95, side: THREE.DoubleSide });
+    const stripe = new THREE.Mesh(geom, m);
+    // Konumla: y orta = (2.6+2.2)/2 = 2.4, z orta = ( -0.95 + 1.0 )/2 = 0.025
+    stripe.position.set(xCenter, 2.4, 0.025);
+    // Eğim: z-y düzleminde, arka yukarı, ön aşağı; rot.x = atan( (2.2-2.6) / (1.0-(-0.95)) ) = atan(-0.4/1.95) ≈ -0.203
+    stripe.rotation.x = -Math.PI / 2 + Math.atan2(2.6 - 2.2, 1.0 - (-0.95));
+    stripe.castShadow = true; stripe.receiveShadow = true;
+    g.add(stripe);
+  }
+  // Ön sarkma — ondulasyonlu kenar (festoon): üçgen sarkıklar
+  const fringeMat = new THREE.MeshStandardMaterial({ color: 0xd23a3a, roughness: 0.95, side: THREE.DoubleSide });
+  for (let i = 0; i < 12; i++) {
+    const tri = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.4, 3, 1), fringeMat);
+    tri.position.set(-3.9 + (i + 0.5) * (7.8 / 12), 2.0, 1.05);
+    tri.rotation.x = Math.PI;
+    tri.rotation.y = Math.PI / 6;
+    tri.castShadow = true;
+    g.add(tri);
+  }
+  // Arka kiriş (tentenin durduğu üst destek)
+  const topBar = new THREE.Mesh(new THREE.BoxGeometry(8.2, 0.1, 0.08), mat({ color: 0x5a3416 }));
+  topBar.position.set(0, 2.6, -0.95);
+  topBar.castShadow = true; topBar.receiveShadow = true;
+  g.add(topBar);
+  const frontBar = new THREE.Mesh(new THREE.BoxGeometry(8.2, 0.08, 0.06), mat({ color: 0x5a3416 }));
+  frontBar.position.set(0, 2.2, 1.0);
+  frontBar.castShadow = true;
+  g.add(frontBar);
+
+  // Manav tabelası
+  const sign = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.55, 0.06), mat({ color: 0x3a6b8c }));
+  sign.position.set(0, 3.05, -0.95);
+  sign.castShadow = true;
+  g.add(sign);
+  // Tabelaya küçük çerçeve
+  const signFr = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.65, 0.04), mat({ color: 0xfff5d6 }));
+  signFr.position.set(0, 3.05, -0.97);
+  g.add(signFr);
+
+  return g;
+};
+
+// Meyve sandığı (içine meyveler oturur)
+M.sandik = function (color) {
+  const g = new THREE.Group();
+  const c = color || 0x8a5a2b;
+  const woodMat = mat({ color: c, roughness: 0.9 });
+  // 4 yan + taban (kalın tahtalı görünüm)
+  const front = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.05), woodMat);
+  front.position.set(0, 0.225, 0.7);
+  g.add(front);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.05), woodMat);
+  back.position.set(0, 0.225, -0.7);
+  g.add(back);
+  const left = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 1.4), woodMat);
+  left.position.set(-0.65, 0.225, 0);
+  g.add(left);
+  const right = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 1.4), woodMat);
+  right.position.set(0.65, 0.225, 0);
+  g.add(right);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.03, 1.4), woodMat);
+  base.position.set(0, 0.015, 0);
+  g.add(base);
+  g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   return g;
 };
 

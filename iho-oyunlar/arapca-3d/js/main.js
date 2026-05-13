@@ -20,9 +20,15 @@ const State = {
   hedefKelime: null,
   bulutlar: [],
 
-  modu: 'oyun',           // 'oyun' | 'sinav'
+  modu: 'oyun',           // 'oyun' | 'sinav' | 'alisveris'
   aktifSahne: null,
   skor: 0,
+
+  // Alışveriş modu state'i
+  liste: [],              // [{kid, gerekli, mevcut, fiyat}]
+  toplamGerekli: 0,
+  toplamMevcut: 0,
+  paraOdenen: 0,
   dogru: 0,
   yanlis: 0,
   kalanSorular: [],
@@ -149,6 +155,15 @@ function kurManav() {
   tez.position.set(0, 0, -1.2);
   State.worldRoot.add(tez);
 
+  // Sandıklar — tezgah üzerine 5 ahşap sandık
+  const sandikRenkleri = [0x8a5a2b, 0x965a2b, 0x7c4a18, 0x965e2c, 0x824a18];
+  for (let i = 0; i < 5; i++) {
+    const sn = Models3D.sandik(sandikRenkleri[i]);
+    sn.position.set(-3.2 + i * 1.6, 0.97, -1.2);
+    sn.scale.setScalar(0.95);
+    State.worldRoot.add(sn);
+  }
+
   // Ağaçlar
   for (const [x, z] of [[-10, -8], [10, -8], [-12, 6], [12, 6]]) {
     const ag = Models3D.agac();
@@ -227,21 +242,17 @@ function kurHayvanlar() {
 // Nesneleri serpiştir
 function yerlestir(sahneId, kelimeIdler) {
   let pozisyonlar = [];
+  let nesneScale = 1;
   if (sahneId === 'manav') {
-    // Tek sıra tezgah üstü, biraz aralı
+    // Meyveler/sebzeler sandıklara oturur — küçük ölçek
+    nesneScale = 0.55;
     const n = kelimeIdler.length;
-    const step = 8 / Math.max(n - 1, 1);
-    for (let i = 0; i < n; i++) {
-      pozisyonlar.push([-4 + i * step, 0.97, -1.2]);
-    }
-    // Çok kalabalıksa 2 sıra
-    if (n > 7) {
-      pozisyonlar = [];
-      const ust = Math.ceil(n / 2);
-      const alt = n - ust;
-      for (let i = 0; i < ust; i++) pozisyonlar.push([-3.5 + i * (7 / Math.max(ust - 1, 1)), 0.97, -1.6]);
-      for (let i = 0; i < alt; i++) pozisyonlar.push([-3 + i * (6 / Math.max(alt - 1, 1)), 0.97, -0.8]);
-    }
+    const ust = Math.ceil(n / 2);
+    const alt = n - ust;
+    pozisyonlar = [];
+    // Y = sandık tabanı (0.97 tezgah + 0.03 sandık tabanı) ≈ 1.0
+    for (let i = 0; i < ust; i++) pozisyonlar.push([-3.2 + i * (6.4 / Math.max(ust - 1, 1)), 1.0, -1.55]);
+    for (let i = 0; i < alt; i++) pozisyonlar.push([-3.2 + i * (6.4 / Math.max(alt - 1, 1)), 1.0, -0.85]);
   } else if (sahneId === 'araclar') {
     // İki sıra, asfalt üstüne, geniş aralık
     const n = kelimeIdler.length;
@@ -278,6 +289,7 @@ function yerlestir(sahneId, kelimeIdler) {
     const grp = mFn();
     const [x, y, z] = pozisyonlar[i] || [0, 0, 0];
     grp.position.set(x, y, z);
+    if (nesneScale !== 1) grp.scale.setScalar(nesneScale);
     // Her nesne kendi orijinal renkleri kalsın — flash için runtime'da değişir
     State.worldRoot.add(grp);
     State.nesneler.push({
@@ -391,6 +403,10 @@ function onPointerDown(ev) {
 function tiklandi(rec) {
   window.SFX && window.SFX.tiklama();
   const t = performance.now();
+  if (State.modu === 'alisveris') {
+    alisverisTikla(rec);
+    return;
+  }
   if (State.hedefKelime && rec.kelime.id === State.hedefKelime.id) {
     rec.flash = { tip: 'dogru', t0: t };
     flashMaterial(rec, 0x4cd66d, 0.6);
@@ -400,6 +416,122 @@ function tiklandi(rec) {
     flashMaterial(rec, 0xff4444, 0.6);
     yanlisTahmin(rec);
   }
+}
+
+// === Alışveriş modu mantığı ===
+function alisverisBaslat() {
+  State.modu = 'alisveris';
+  State.skor = 0;
+  State.dogru = 0;
+  State.yanlis = 0;
+  State.toplamMevcut = 0;
+  State.paraOdenen = 0;
+
+  // Rastgele 4 ürün, her biri 1-3 adet
+  const tum = window.Data.SAHNELER.manav.kelimeler.slice();
+  for (let i = tum.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tum[i], tum[j]] = [tum[j], tum[i]];
+  }
+  const secilen = tum.slice(0, 4);
+  State.liste = secilen.map(kid => ({
+    kid,
+    gerekli: 1 + Math.floor(Math.random() * 3),
+    mevcut: 0,
+    fiyat: window.Data.KELIMELER[kid].fiyat
+  }));
+  State.toplamGerekli = State.liste.reduce((s, x) => s + x.gerekli, 0);
+  document.getElementById('alisveris-paneli').style.display = 'flex';
+  document.getElementById('ipucu-karti').style.display = 'none';
+  alisverisListeyiCiz();
+  alisverisToplamGuncelle();
+  // Hedefi temizle (alışverişte hedef yok)
+  State.hedefKelime = null;
+}
+
+function alisverisListeyiCiz() {
+  const ul = document.getElementById('alisveris-liste');
+  ul.innerHTML = '';
+  for (const item of State.liste) {
+    const k = window.Data.KELIMELER[item.kid];
+    const tamam = item.mevcut >= item.gerekli;
+    const li = document.createElement('li');
+    li.className = 'alisveris-satir' + (tamam ? ' tamam' : '');
+    li.innerHTML =
+      '<span class="av-emoji">' + (k.emoji || '·') + '</span>' +
+      '<div class="av-ad"><div class="av-ar">' + k.ar + '</div>' +
+      '<div class="av-tr">' + k.tr + ' · ' + item.fiyat + '₺/adet</div></div>' +
+      '<div class="av-mik">' + item.mevcut + ' / ' + item.gerekli + '</div>';
+    ul.appendChild(li);
+  }
+}
+
+function alisverisToplamGuncelle() {
+  const tut = document.getElementById('av-toplam');
+  if (tut) tut.textContent = State.paraOdenen + ' ₺';
+  const sayac = document.getElementById('av-sayac');
+  if (sayac) sayac.textContent = State.toplamMevcut + ' / ' + State.toplamGerekli;
+}
+
+function alisverisTikla(rec) {
+  const item = State.liste.find(x => x.kid === rec.kelime.id);
+  if (!item) {
+    // Listede yok
+    rec.flash = { tip: 'yanlis', t0: performance.now() };
+    flashMaterial(rec, 0xff8a3a, 0.5);
+    yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
+      'Listede yok', '#cc6a1a');
+    window.SFX && window.SFX.yanlis();
+    return;
+  }
+  if (item.mevcut >= item.gerekli) {
+    // Yeterli
+    rec.flash = { tip: 'yanlis', t0: performance.now() };
+    flashMaterial(rec, 0xff8a3a, 0.4);
+    yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
+      'Yeterli (' + item.mevcut + ')', '#cc6a1a');
+    return;
+  }
+  // Sepete ekle
+  item.mevcut++;
+  State.toplamMevcut++;
+  State.paraOdenen += item.fiyat;
+  rec.flash = { tip: 'dogru', t0: performance.now() };
+  flashMaterial(rec, 0x4cd66d, 0.6);
+  window.SFX && window.SFX.dogru();
+  // Arapça'sını söyle
+  window.TTS && window.TTS.speakArabic(window.Data.KELIMELER[item.kid].ar);
+  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
+    '+1 ' + window.Data.KELIMELER[item.kid].tr + ' · ' + item.fiyat + '₺', '#1aaa3a');
+  alisverisListeyiCiz();
+  alisverisToplamGuncelle();
+
+  // Tüm liste tamam mı?
+  const tumTamam = State.liste.every(x => x.mevcut >= x.gerekli);
+  if (tumTamam) {
+    setTimeout(() => alisverisBitti(), 800);
+  }
+}
+
+function alisverisBitti() {
+  window.SFX && window.SFX.basari();
+  const yuzde = 100;
+  if (window.SCORM) {
+    window.SCORM.setScore(yuzde, 100, 0);
+    window.SCORM.setStatus('completed');
+  }
+  document.getElementById('sonuc-yuzde').textContent = State.paraOdenen;
+  document.getElementById('sonuc-yuzde-isaret').textContent = ' ₺';
+  document.getElementById('sonuc-dogru').textContent = State.toplamMevcut;
+  document.getElementById('sonuc-toplam').textContent = State.toplamGerekli;
+  document.getElementById('sonuc-mesaj').textContent =
+    'Tüm alışverişin tamam — ' + State.paraOdenen + ' ₺ ödedin. Aferin! 🛒✨';
+  document.getElementById('sonuc-basarili-buton').textContent = 'Tekrar Alışveriş';
+  document.getElementById('sonuc-basarili-buton').onclick = () => {
+    document.getElementById('sonuc-modal').style.display = 'none';
+    UI.alisverisBaslat();
+  };
+  document.getElementById('sonuc-modal').style.display = 'flex';
 }
 
 function flashMaterial(rec, color, intensity) {
@@ -504,6 +636,7 @@ function sinavBitir() {
     window.SCORM.setStatus(yuzde >= 60 ? 'passed' : 'failed');
   }
   document.getElementById('sonuc-yuzde').textContent = yuzde;
+  document.getElementById('sonuc-yuzde-isaret').textContent = '%';
   document.getElementById('sonuc-dogru').textContent = State.dogru;
   document.getElementById('sonuc-toplam').textContent = State.toplamSoru;
   document.getElementById('sonuc-mesaj').textContent =
@@ -511,6 +644,11 @@ function sinavBitir() {
     yuzde >= 70 ? 'Aferin! Çok güzel bir performans.' :
     yuzde >= 50 ? 'Güzel başlangıç, tekrar denersen daha iyi olur.' :
     'Endişelenme, biraz daha alıştırma yap.';
+  document.getElementById('sonuc-basarili-buton').textContent = 'Tekrar Sına';
+  document.getElementById('sonuc-basarili-buton').onclick = () => {
+    document.getElementById('sonuc-modal').style.display = 'none';
+    UI.sinavBaslat();
+  };
   document.getElementById('sonuc-modal').style.display = 'flex';
 }
 
@@ -605,6 +743,8 @@ const UI = {
     State.yanlis = 0;
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
+    document.getElementById('alisveris-paneli').style.display = 'none';
+    document.getElementById('ipucu-karti').style.display = '';
     onResize();
     const sahne = window.Data.SAHNELER[sahneId];
     document.getElementById('sahne-baslik').textContent = sahne.ad + ' — ' + sahne.ar;
@@ -615,13 +755,26 @@ const UI = {
   sinavBaslat() {
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
+    document.getElementById('alisveris-paneli').style.display = 'none';
+    document.getElementById('ipucu-karti').style.display = '';
     onResize();
     document.getElementById('sahne-baslik').textContent = 'Sınav Modu — الاِخْتِبَار';
     sinavBaslat();
   },
+  alisverisBaslat() {
+    document.getElementById('menu-ekrani').style.display = 'none';
+    document.getElementById('oyun-ekrani').style.display = 'block';
+    onResize();
+    document.getElementById('sahne-baslik').textContent = 'Manav Alışverişi — التَّسَوُّق';
+    document.getElementById('soru-sayac').style.display = 'none';
+    sahneAc('manav', { skipNewTarget: true });
+    alisverisBaslat();
+  },
   menuyeDon() {
     document.getElementById('oyun-ekrani').style.display = 'none';
     document.getElementById('sonuc-modal').style.display = 'none';
+    document.getElementById('alisveris-paneli').style.display = 'none';
+    document.getElementById('ipucu-karti').style.display = '';
     document.getElementById('menu-ekrani').style.display = '';
     try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
   },
