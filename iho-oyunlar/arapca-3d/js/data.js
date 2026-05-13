@@ -4,19 +4,19 @@
   'use strict';
 
   const KELIMELER = {
-    // === MEYVELER ===
-    elma:      { id: 'elma',      model: 'elma',      ar: 'تُفَّاحَة',   tr: 'elma',      translit: 'tüffaha' },
-    portakal:  { id: 'portakal',  model: 'portakal',  ar: 'بُرْتُقَالَة', tr: 'portakal',  translit: 'burtukâle' },
-    muz:       { id: 'muz',       model: 'muz',       ar: 'مَوْزَة',     tr: 'muz',       translit: 'mevze' },
-    uzum:      { id: 'uzum',      model: 'uzum',      ar: 'عِنَب',      tr: 'üzüm',      translit: 'ineb' },
-    cilek:     { id: 'cilek',     model: 'cilek',     ar: 'فَرَاوْلَة',   tr: 'çilek',     translit: 'feravle' },
-    karpuz:    { id: 'karpuz',    model: 'karpuz',    ar: 'بِطِّيخ',     tr: 'karpuz',    translit: 'bittîh' },
+    // === MEYVELER === (fiyat = TL/adet)
+    elma:      { id: 'elma',      model: 'elma',      ar: 'تُفَّاحَة',   tr: 'elma',      translit: 'tüffaha',   fiyat: 5,  emoji: '🍎' },
+    portakal:  { id: 'portakal',  model: 'portakal',  ar: 'بُرْتُقَالَة', tr: 'portakal',  translit: 'burtukâle', fiyat: 6,  emoji: '🍊' },
+    muz:       { id: 'muz',       model: 'muz',       ar: 'مَوْزَة',     tr: 'muz',       translit: 'mevze',     fiyat: 4,  emoji: '🍌' },
+    uzum:      { id: 'uzum',      model: 'uzum',      ar: 'عِنَب',      tr: 'üzüm',      translit: 'ineb',      fiyat: 12, emoji: '🍇' },
+    cilek:     { id: 'cilek',     model: 'cilek',     ar: 'فَرَاوْلَة',   tr: 'çilek',     translit: 'feravle',   fiyat: 10, emoji: '🍓' },
+    karpuz:    { id: 'karpuz',    model: 'karpuz',    ar: 'بِطِّيخ',     tr: 'karpuz',    translit: 'bittîh',    fiyat: 30, emoji: '🍉' },
 
     // === SEBZELER ===
-    domates:   { id: 'domates',   model: 'domates',   ar: 'طَمَاطِم',    tr: 'domates',   translit: 'tamâtim' },
-    salatalik: { id: 'salatalik', model: 'salatalik', ar: 'خِيَار',     tr: 'salatalık', translit: 'hıyâr' },
-    havuc:     { id: 'havuc',     model: 'havuc',     ar: 'جَزَر',      tr: 'havuç',     translit: 'cezer' },
-    patates:   { id: 'patates',   model: 'patates',   ar: 'بَطَاطِس',    tr: 'patates',   translit: 'batâtis' },
+    domates:   { id: 'domates',   model: 'domates',   ar: 'طَمَاطِم',    tr: 'domates',   translit: 'tamâtim',   fiyat: 3,  emoji: '🍅' },
+    salatalik: { id: 'salatalik', model: 'salatalik', ar: 'خِيَار',     tr: 'salatalık', translit: 'hıyâr',     fiyat: 3,  emoji: '🥒' },
+    havuc:     { id: 'havuc',     model: 'havuc',     ar: 'جَزَر',      tr: 'havuç',     translit: 'cezer',     fiyat: 2,  emoji: '🥕' },
+    patates:   { id: 'patates',   model: 'patates',   ar: 'بَطَاطِس',    tr: 'patates',   translit: 'batâtis',   fiyat: 4,  emoji: '🥔' },
 
     // === ARAÇLAR ===
     araba:     { id: 'araba',     model: 'araba',     ar: 'سَيَّارَة',    tr: 'araba',     translit: 'seyyâra' },
