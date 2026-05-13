@@ -209,9 +209,9 @@ html, body {
 
 .hub-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px;
-  max-width: 760px;
+  max-width: 920px;
   width: 100%;
 }
 
@@ -884,6 +884,17 @@ html, body {
     <div class="answer-options" id="preps-options"></div>
   </div>
 
+  <!-- TRANSPORT panel -->
+  <div class="mode-panel" id="panel-transport">
+    <div class="question-banner" id="transport-q">
+      <div class="q-text">
+        <div class="q-ar" id="transport-ar"></div>
+      </div>
+      <button class="q-speak" id="transport-speak" title="اِسْتَمِعْ">🔊</button>
+    </div>
+    <div class="answer-options" id="transport-options"></div>
+  </div>
+
   <!-- VOCABULARY panel -->
   <div class="mode-panel" id="panel-vocab">
     <div class="panel-title">
@@ -903,7 +914,7 @@ html, body {
     <div class="hub-header">
       <h1>اَلْعابُ الاتِّجاهات</h1>
       <p>اِخْتَرْ لُعْبَة وَالْعَبْ ✨</p>
-      <div class="total-score">⭐ <span id="hub-total-stars">0</span> / 12</div>
+      <div class="total-score">⭐ <span id="hub-total-stars">0</span> / 15</div>
     </div>
     <div class="hub-grid" id="hub-grid"></div>
     <div class="hub-footer">
@@ -1217,12 +1228,80 @@ const PREPS_QUESTIONS = [
 
 // Mode 4: Vocabulary
 const VOCAB_ITEMS = [
-  { ar: 'اَلْمُسْتَشْفى',     tr: 'hastane',           tag: 'hospital' },
-  { ar: 'اَلسّوق',            tr: 'çarşı',            tag: 'market' },
-  { ar: 'مَوْقِف الحافِلَة',  tr: 'otobüs durağı',     tag: 'busstop' },
-  { ar: 'اَلْمَدْرَسَة',       tr: 'okul',             tag: 'school' },
-  { ar: 'اَلْحافِلَة',         tr: 'otobüs',           tag: 'bus' },
-  { ar: 'سَيّارَةُ الإِسْعاف', tr: 'ambulans',         tag: 'ambulance' }
+  { ar: 'اَلْمُسْتَشْفى',         tag: 'hospital' },
+  { ar: 'اَلسّوقُ القَديمُ',       tag: 'market' },
+  { ar: 'مَوْقِفُ الحافِلَةِ',     tag: 'busstop' },
+  { ar: 'اَلْمَدْرَسَةُ',           tag: 'school' },
+  { ar: 'اَلْحافِلَةُ',             tag: 'bus' },
+  { ar: 'سَيّارَةُ الإِسْعافِ',    tag: 'ambulance' }
+];
+
+// Mode 5: Transportation (وَسائِطُ النَّقْل) — PDF Ünite 3
+const TRANSPORT_QUESTIONS = [
+  {
+    ar: 'بِماذا تُسافِرُ إِلَى أَنْقَرَةَ؟',
+    options: [
+      { ar: 'بِالطّائِرَةِ', correct: true },
+      { ar: 'بِالدَّرّاجَةِ' },
+      { ar: 'مَشْيًا' }
+    ]
+  },
+  {
+    ar: 'بِماذا تَذْهَبُ إِلَى المَدْرَسَةِ القَريبَةِ؟',
+    options: [
+      { ar: 'بِالطّائِرَةِ' },
+      { ar: 'مَشْيًا', correct: true },
+      { ar: 'بِالسَّفينَةِ' }
+    ]
+  },
+  {
+    ar: 'بِماذا تُسافِرُ إِلَى بورْصَةَ بَحْرًا؟',
+    options: [
+      { ar: 'بِالقِطارِ' },
+      { ar: 'بِالسَّفينَةِ', correct: true },
+      { ar: 'بِالطّائِرَةِ' }
+    ]
+  },
+  {
+    ar: 'بِماذا تَذْهَبُ إِلَى المُسْتَشْفى البَعيدِ؟',
+    options: [
+      { ar: 'بِالسَّيّارَةِ', correct: true },
+      { ar: 'بِالدَّرّاجَةِ' },
+      { ar: 'مَشْيًا' }
+    ]
+  },
+  {
+    ar: 'أَيُّ وَسيلَةٍ أَسْرَعُ؟',
+    options: [
+      { ar: 'اَلطّائِرَةُ', correct: true },
+      { ar: 'اَلسَّفينَةُ' },
+      { ar: 'اَلدَّرّاجَةُ' }
+    ]
+  },
+  {
+    ar: 'أَيُّ وَسيلَةٍ أَبْطَأُ؟',
+    options: [
+      { ar: 'اَلْقِطارُ' },
+      { ar: 'اَلسَّيّارَةُ' },
+      { ar: 'اَلدَّرّاجَةُ', correct: true }
+    ]
+  },
+  {
+    ar: 'بِماذا تُسافِرُ إِلَى إِسْطَنْبولَ جَوًّا؟',
+    options: [
+      { ar: 'بِالقِطارِ' },
+      { ar: 'بِالطّائِرَةِ', correct: true },
+      { ar: 'بِالسَّفينَةِ' }
+    ]
+  },
+  {
+    ar: 'أَيُّ وَسيلَةٍ أَحْدَثُ؟',
+    options: [
+      { ar: 'اَلْمِتْرو', correct: true },
+      { ar: 'اَلْحافِلَةُ القَديمَةُ' },
+      { ar: 'اَلدَّرّاجَةُ' }
+    ]
+  }
 ];
 
 // Modes registry
@@ -1231,36 +1310,35 @@ const MODES = [
     id: 'directions',
     icon: '🗺️',
     arTitle: 'اَلاتِّجاهات إِلى السّوق',
-    trSubtitle: 'Yol Tarifi (Murad)',
-    arDesc: 'سَاعِدْ مُراد لِيَصِلَ إِلى السّوق القَديم.',
-    trDesc: 'Cümleleri haritada doğru konumlara yerleştir.',
+    arDesc: 'سَاعِدْ مُراد لِيَصِلَ إِلى اَلسّوق القَديم.',
     maxScore: 4
   },
   {
     id: 'whereis',
     icon: '📍',
     arTitle: '؟أَيْنَ ...',
-    trSubtitle: 'Nerede? (Yer Bulma)',
     arDesc: 'اِسْتَمِعْ إِلى السُّؤال واِنْقُرْ عَلى المَكان الصَّحيح.',
-    trDesc: 'Soruyu dinle, haritada doğru yeri tıkla.',
+    maxScore: 10
+  },
+  {
+    id: 'transport',
+    icon: '🚌',
+    arTitle: 'وَسائِطُ النَّقْل',
+    arDesc: 'اِخْتَرْ وَسيلَةَ النَّقْلِ المُناسِبَةَ لِكُلِّ سُؤالٍ.',
     maxScore: 8
   },
   {
     id: 'preps',
     icon: '↔️',
     arTitle: 'حُروفُ الجَرّ',
-    trSubtitle: 'Edatlar',
-    arDesc: 'اِخْتَرْ الكَلِمَة الصَّحيحَة لِإِتْمام الجُمْلَة.',
-    trDesc: 'Boşluğa uygun edatı seç: ön/arka/yan...',
-    maxScore: 6
+    arDesc: 'اِخْتَرْ الكَلِمَةَ الصَّحيحَةَ لِإِتْمامِ الجُمْلَةِ.',
+    maxScore: 10
   },
   {
     id: 'vocab',
     icon: '🔤',
     arTitle: 'اَلْمُفْرَدات',
-    trSubtitle: 'Kelime Eşleme',
-    arDesc: 'اِسْحَبْ كُلَّ كَلِمَة إِلى المَكان الصَّحيح.',
-    trDesc: 'Arapça kelimeleri sahnedeki yerlere bağla.',
+    arDesc: 'اِسْحَبْ كُلَّ كَلِمَةٍ إِلَى المَكانِ الصَّحيحِ.',
     maxScore: 6
   }
 ];
@@ -3489,10 +3567,103 @@ const ModeVocab = {
   }
 };
 
+/* ============================================================
+   MODE 5: TRANSPORT (وَسائِطُ النَّقْل)
+   ============================================================ */
+const ModeTransport = {
+  state: null,
+
+  start() {
+    Object.values(markers3D).forEach(m => m.visible = false);
+    const qs = TRANSPORT_QUESTIONS.slice().sort(() => Math.random() - 0.5);
+    this.state = {
+      questions: qs,
+      currentIndex: 0,
+      correctCount: 0,
+      wrongInThisQuestion: false,
+      completed: false
+    };
+    $('#panel-transport').classList.add('active');
+    $('#mode-progress').style.display = 'flex';
+    $('#prog-total').textContent = qs.length;
+    $('#score-max').textContent = qs.length;
+    this.showQuestion();
+    this.updateProgress();
+  },
+
+  end() {
+    $('#panel-transport').classList.remove('active');
+    $('#mode-progress').style.display = 'none';
+  },
+
+  showQuestion() {
+    const q = this.state.questions[this.state.currentIndex];
+    if (!q) return;
+    $('#transport-ar').textContent = q.ar;
+    const opts = $('#transport-options');
+    opts.innerHTML = '';
+    const shuffled = q.options.slice().sort(() => Math.random() - 0.5);
+    shuffled.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'opt-btn';
+      btn.textContent = opt.ar;
+      btn.addEventListener('click', () => this.onAnswer(btn, opt));
+      opts.appendChild(btn);
+    });
+    this.state.wrongInThisQuestion = false;
+    setTimeout(() => Sound.speak(q.ar), 200);
+  },
+
+  onAnswer(btn, opt) {
+    if (this.state.completed) return;
+    Hub.modeAttempts++;
+    Sound.click();
+    if (opt.correct) {
+      btn.classList.add('correct');
+      Sound.success();
+      Sound.speak(opt.ar);
+      if (!this.state.wrongInThisQuestion) this.state.correctCount++;
+      showToast('أَحْسَنْت!', '', 'success');
+      btn.parentElement.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+      this.updateProgress();
+      this.state.currentIndex++;
+      setTimeout(() => {
+        if (this.state.currentIndex >= this.state.questions.length) {
+          this.state.completed = true;
+          Hub.finishMode(this.state.correctCount, this.state.questions.length);
+        } else {
+          this.showQuestion();
+        }
+      }, 1400);
+    } else {
+      this.state.wrongInThisQuestion = true;
+      btn.classList.add('wrong');
+      Sound.error();
+      showToast('حاوِلْ مَرَّةً أُخْرى', '', 'error');
+      setTimeout(() => { btn.classList.remove('wrong'); btn.disabled = true; }, 700);
+    }
+  },
+
+  updateProgress() {
+    $('#prog-current').textContent = this.state.correctCount;
+    $('#score-display').textContent = this.state.correctCount;
+    const pct = (this.state.currentIndex / this.state.questions.length) * 100;
+    $('#prog-fill').style.width = pct + '%';
+  },
+
+  showHint() {
+    const q = this.state.questions[this.state.currentIndex];
+    if (!q) return;
+    const correctOpt = q.options.find(o => o.correct);
+    if (correctOpt) showToast('💡 ' + correctOpt.ar, '', 'info');
+  }
+};
+
 /* Modes registry */
 const Modes = {
   directions: ModeDirections,
   whereis: ModeWhereIs,
+  transport: ModeTransport,
   preps: ModePreps,
   vocab: ModeVocab
 };
@@ -3657,6 +3828,10 @@ window.addEventListener('load', () => {
   });
   $('#preps-speak').addEventListener('click', () => {
     const q = ModePreps.state && ModePreps.state.questions[ModePreps.state.currentIndex];
+    if (q) Sound.speak(q.ar);
+  });
+  $('#transport-speak').addEventListener('click', () => {
+    const q = ModeTransport.state && ModeTransport.state.questions[ModeTransport.state.currentIndex];
     if (q) Sound.speak(q.ar);
   });
   // Hide loading
