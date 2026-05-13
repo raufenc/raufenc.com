@@ -6,38 +6,41 @@
 
   function el(id) { return document.getElementById(id); }
 
-  function show(id) {
-    const e = el(id);
-    if (e) e.style.display = '';
-  }
-
-  function hide(id) {
-    const e = el(id);
-    if (e) e.style.display = 'none';
+  // CSS'te #oyun-ekrani { display: none } olduğundan inline 'block', menü için
+  // CSS'te .menu varsayılan flex → inline temizleyince geri gelir.
+  function ekraniGoster() {
+    const me = el('menu-ekrani');
+    if (me) me.style.display = 'none';
+    const o = el('oyun-ekrani');
+    if (o) o.style.display = 'block';
+    // Canvas, sayfa açılışında display:none altında 0x0 buffer'lı kaldı —
+    // ekran görünür hale gelince yeniden ölçüp DPR'a göre buffer ayarla.
+    if (Game.resize) Game.resize();
   }
 
   UI.menuyeDon = function () {
-    hide('oyun-ekrani');
-    hide('sonuc-modal');
-    show('menu-ekrani');
+    const o = el('oyun-ekrani');
+    if (o) o.style.display = 'none';
+    const m = el('sonuc-modal');
+    if (m) m.style.display = 'none';
+    const me = el('menu-ekrani');
+    if (me) me.style.display = ''; // CSS varsayılan = flex
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
   };
 
   UI.sahneAc = function (sahneId) {
-    hide('menu-ekrani');
-    show('oyun-ekrani');
+    ekraniGoster();
     Game.setMode('oyun');
     Game.sahneAc(sahneId);
-    // Sahne başlığı
     const sahne = Data.SAHNELER[sahneId];
     const bas = el('sahne-baslik');
     if (bas) bas.textContent = sahne.ad + ' — ' + sahne.ar;
-    // Modal başlığını gizle
-    el('soru-sayac').style.display = 'none';
+    const ss = el('soru-sayac');
+    if (ss) ss.style.display = 'none';
   };
 
   UI.sinavBaslat = function () {
-    hide('menu-ekrani');
-    show('oyun-ekrani');
+    ekraniGoster();
     const bas = el('sahne-baslik');
     if (bas) bas.textContent = 'Sınav Modu — الاِخْتِبَار';
     Game.sinavBaslat();
@@ -54,7 +57,7 @@
       yuzde >= 70 ? 'Aferin! Çok güzel bir performans.' :
       yuzde >= 50 ? 'Güzel başlangıç, tekrar denersen daha iyi olur.' :
       'Endişelenme, biraz daha alıştırma yap.';
-    m.style.display = '';
+    m.style.display = 'flex';
   };
 
   UI.kelimeSesle = function () {
@@ -65,7 +68,6 @@
 
   UI.ipucu = function () {
     if (!Game.hedefKelime) return;
-    // Hedefi 1 saniye yaylama ile öne çıkar
     for (const n of Game.nesneler) {
       if (n.kelime.id === Game.hedefKelime.id) {
         n.anim.zip = 1;
