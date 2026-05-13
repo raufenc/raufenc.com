@@ -28,8 +28,9 @@
 
   function resize() {
     const c = Game.canvas;
-    const cssW = c.clientWidth;
-    const cssH = c.clientHeight;
+    if (!c) return;
+    const cssW = c.clientWidth || window.innerWidth;
+    const cssH = c.clientHeight || window.innerHeight;
     Game.dpr = window.devicePixelRatio || 1;
     c.width = cssW * Game.dpr;
     c.height = cssH * Game.dpr;
@@ -460,6 +461,7 @@
     sinavBaslat,
     sonrakiSoru,
     ipucuGoster,
+    resize,
     setMode: (m) => { Game.modu = m; updateHUD(); },
     updateHUD
   });
