@@ -1102,11 +1102,11 @@ const Sound = (function() {
 
 // Mode 1: Directions
 const SENTENCES = [
-  { id: 1, ar: 'ثُمَّ ارْكَبْ الحافِلَة مِن المَوْقِف.', tr: 'Sonra duraktan otobüse bin.' },
-  { id: 2, ar: 'السّوق القَديم عَلى اليَسار.',           tr: 'Eski çarşı sol tarafta.' },
-  { id: 3, ar: 'أَعْبُرُ الطَّريق.',                      tr: 'Yoldan karşıya geçiyorum.', isExample: true },
-  { id: 4, ar: 'اِمْشِ إِلى الأَمام قَليلاً.',             tr: 'Biraz ileri yürü.' },
-  { id: 5, ar: 'اِنْزِلْ أَمام المُسْتَشْفى.',             tr: 'Hastanenin önünde in.' }
+  { id: 1, ar: 'ثُمَّ ارْكَبِ الحافِلَةَ مِنَ المَوْقِفِ.', tr: 'Sonra duraktan otobüse bin.' },
+  { id: 2, ar: 'اَلسّوقُ القَديمُ عَلَى اليَسارِ.',          tr: 'Eski çarşı sol tarafta.' },
+  { id: 3, ar: 'اُعْبُرِ الطَّريقَ.',                       tr: 'Yoldan karşıya geç.', isExample: true },
+  { id: 4, ar: 'اِمْشِ إِلَى الأَمامِ قَليلاً.',             tr: 'Biraz ileri yürü.' },
+  { id: 5, ar: 'اِنْزِلْ أَمامَ المُسْتَشْفى.',             tr: 'Hastanenin önünde in.' }
 ];
 
 const POSITIONS = {
@@ -1119,70 +1119,98 @@ const POSITIONS = {
 
 // Mode 2: Where Is...?
 const WHEREIS_QUESTIONS = [
-  { ar: 'أَيْنَ المُسْتَشْفى؟',          tr: 'Hastane nerede?',         tag: 'hospital' },
-  { ar: 'أَيْنَ السّوق القَديم؟',         tr: 'Eski çarşı nerede?',      tag: 'market' },
-  { ar: 'أَيْنَ مَوْقِف الحافِلَة؟',       tr: 'Otobüs durağı nerede?',  tag: 'busstop' },
-  { ar: 'أَيْنَ الحافِلَة الصَّفْراء؟',     tr: 'Sarı otobüs nerede?',    tag: 'bus' },
-  { ar: 'أَيْنَ المَدْرَسَة؟',             tr: 'Okul nerede?',            tag: 'school' },
-  { ar: 'أَيْنَ سَيّارَة الإِسْعاف؟',      tr: 'Ambulans nerede?',        tag: 'ambulance' },
-  { ar: 'أَيْنَ مَعْبَرُ المُشاة؟',         tr: 'Yaya geçidi nerede?',    tag: 'crosswalk' },
-  { ar: 'أَيْنَ مَلْعَبُ كُرَة القَدَم؟',     tr: 'Futbol sahası nerede?',  tag: 'soccer' }
+  { ar: 'أَيْنَ المُسْتَشْفى؟',           tr: '', tag: 'hospital' },
+  { ar: 'أَيْنَ اَلسّوقُ القَديمُ؟',          tr: '', tag: 'market' },
+  { ar: 'أَيْنَ مَوْقِفُ الحافِلَةِ؟',        tr: '', tag: 'busstop' },
+  { ar: 'أَيْنَ الحافِلَةُ الصَّفْراءُ؟',      tr: '', tag: 'bus' },
+  { ar: 'أَيْنَ المَدْرَسَةُ؟',              tr: '', tag: 'school' },
+  { ar: 'أَيْنَ المَسْجِدُ؟',                tr: '', tag: 'mosque' },
+  { ar: 'أَيْنَ سَيّارَةُ الإِسْعافِ؟',       tr: '', tag: 'ambulance' },
+  { ar: 'أَيْنَ مَعْبَرُ المُشاةِ؟',          tr: '', tag: 'crosswalk' },
+  { ar: 'أَيْنَ مَلْعَبُ كُرَةِ القَدَمِ؟',     tr: '', tag: 'soccer' },
+  { ar: 'أَيْنَ النَّخْلَةُ؟',                tr: '', tag: 'palm' }
 ];
 
-// Mode 3: Prepositions
+// Mode 3: Prepositions (حُروفُ الجَرّ) — PDF müfredatından
 const PREPS_QUESTIONS = [
   {
-    ar: 'الحافِلَةُ ____ مَوْقِف الحافِلَة.',
-    tr: 'Otobüs durağın ___ .',
+    ar: 'اَلْحافِلَةُ ____ مَوْقِفِ الحافِلَةِ.',
     options: [
-      { ar: 'بِجانِبِ', tr: 'yanında', correct: true },
-      { ar: 'فَوْقَ',  tr: 'üstünde' },
-      { ar: 'تَحْتَ',  tr: 'altında' }
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'فَوْقَ' },
+      { ar: 'تَحْتَ' }
     ]
   },
   {
-    ar: 'السَّيّارَاتُ ____ الطَّريق.',
-    tr: 'Arabalar yol _____.',
+    ar: 'اَلسَّيّاراتُ ____ الطَّريقِ.',
     options: [
-      { ar: 'تَحْتَ', tr: 'altında' },
-      { ar: 'عَلى',  tr: 'üstünde', correct: true },
-      { ar: 'وَراءَ', tr: 'arkasında' }
+      { ar: 'تَحْتَ' },
+      { ar: 'عَلَى',  correct: true },
+      { ar: 'وَراءَ' }
     ]
   },
   {
-    ar: 'المُسْتَشْفى ____ السّوقِ القَديم.',
-    tr: 'Hastane eski çarşının ___ .',
+    ar: 'اَلْمُسْتَشْفى ____ اَلسّوقِ القَديمِ.',
     options: [
-      { ar: 'تَحْتَ',  tr: 'altında' },
-      { ar: 'فَوْقَ',  tr: 'üstünde' },
-      { ar: 'مُقابِلَ', tr: 'karşısında', correct: true }
+      { ar: 'تَحْتَ' },
+      { ar: 'فَوْقَ' },
+      { ar: 'مُقابِلَ', correct: true }
     ]
   },
   {
-    ar: 'الأَشْجارُ ____ المَنازِل.',
-    tr: 'Ağaçlar evlerin ___ .',
+    ar: 'اَلنَّخيلُ ____ اَلسّوقِ.',
     options: [
-      { ar: 'فَوْقَ',  tr: 'üstünde' },
-      { ar: 'بِجانِبِ', tr: 'yanında', correct: true },
-      { ar: 'داخِلَ', tr: 'içinde' }
+      { ar: 'فَوْقَ' },
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'داخِلَ' }
     ]
   },
   {
     ar: 'سَيّارَةُ الإِسْعافِ ____ المُسْتَشْفى.',
-    tr: 'Ambulans hastanenin ___ .',
     options: [
-      { ar: 'وَراءَ',  tr: 'arkasında' },
-      { ar: 'تَحْتَ',  tr: 'altında' },
-      { ar: 'أَمامَ',  tr: 'önünde', correct: true }
+      { ar: 'وَراءَ' },
+      { ar: 'تَحْتَ' },
+      { ar: 'أَمامَ',  correct: true }
     ]
   },
   {
-    ar: 'مَلْعَبُ كُرَة القَدَم ____ المَدْرَسَة.',
-    tr: 'Futbol sahası okulun ___ .',
+    ar: 'مَلْعَبُ كُرَةِ القَدَمِ ____ المَدْرَسَةِ.',
     options: [
-      { ar: 'بِجانِبِ', tr: 'yanında', correct: true },
-      { ar: 'تَحْتَ',  tr: 'altında' },
-      { ar: 'داخِلَ', tr: 'içinde' }
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'تَحْتَ' },
+      { ar: 'داخِلَ' }
+    ]
+  },
+  {
+    ar: 'اَلْمَدْرَسَةُ ____ مَلْعَبِ كُرَةِ القَدَمِ.',
+    options: [
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'فَوْقَ' },
+      { ar: 'داخِلَ' }
+    ]
+  },
+  {
+    ar: 'اَلْمَسْجِدُ ____ اَلسّوقِ.',
+    options: [
+      { ar: 'تَحْتَ' },
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'فَوْقَ' }
+    ]
+  },
+  {
+    ar: 'اَلطّالِبَةُ ____ المَدْرَسَةِ.',
+    options: [
+      { ar: 'أَمامَ',  correct: true },
+      { ar: 'تَحْتَ' },
+      { ar: 'داخِلَ' }
+    ]
+  },
+  {
+    ar: 'اَلْحافِلَةُ ____ مَعْبَرِ المُشاةِ.',
+    options: [
+      { ar: 'بِجانِبِ', correct: true },
+      { ar: 'تَحْتَ' },
+      { ar: 'فَوْقَ' }
     ]
   }
 ];
