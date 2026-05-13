@@ -4,62 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
   <title>Arapça 3D Dünya — Eğlenceli Kelime Oyunu</title>
-  <meta name="description" content="Minecraft tarzı 3D voksel dünyada Arapça kelime öğrenme oyunu. Manav, araçlar ve hayvanlar dünyasında interaktif eğitim." />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Arapça 3D Dünya — Eğlenceli Kelime Oyunu" />
-  <meta property="og:description" content="Minecraft tarzı 3D voksel dünyada Arapça kelime öğrenme oyunu." />
-  <meta property="og:url" content="https://raufenc.com/arapca-3d-oyun/" />
-  <link rel="canonical" href="https://raufenc.com/arapca-3d-oyun/" />
+  <meta name="description" content="Gerçek 3D dünyada Arapça kelime öğrenme oyunu. Manav, araçlar ve hayvanlar — kelimeyi duy, nesneyi bul." />
+  <link rel="canonical" href="https://raufenc.com/iho-oyunlar/arapca-3d/" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <style>
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
+      margin: 0; padding: 0; height: 100%;
       overflow: hidden;
       background: #1a2840;
       font-family: 'Nunito', ui-rounded, "SF Pro Rounded", system-ui, -apple-system, sans-serif;
       color: #fff;
-      user-select: none;
-      -webkit-user-select: none;
+      user-select: none; -webkit-user-select: none;
     }
 
-    /* === MENÜ EKRANI === */
+    /* === MENÜ === */
     #menu-ekrani {
       position: fixed; inset: 0;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: flex-start;
-      padding: 24px 16px 40px;
+      align-items: center; padding: 24px 16px 40px;
+      overflow-y: auto;
       background:
         radial-gradient(ellipse at top, rgba(255,255,255,0.08), transparent 60%),
         linear-gradient(180deg, #2a4376 0%, #1a2840 60%, #131c2e 100%);
-      overflow-y: auto;
     }
-    .menu-baslik {
-      text-align: center;
-      margin: 24px auto 8px;
-      max-width: 720px;
-    }
+    .menu-baslik { text-align: center; margin: 16px auto 4px; max-width: 760px; }
     .menu-baslik h1 {
       margin: 0;
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(30px, 5.5vw, 54px);
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.05;
       background: linear-gradient(135deg, #ffd76b, #ff9b3a, #ff6b9b);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 4px 20px rgba(255, 155, 58, 0.3);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      letter-spacing: -0.01em;
     }
     .menu-baslik .alt-baslik {
-      margin: 8px 0 0;
-      font-size: clamp(14px, 2.5vw, 18px);
+      margin: 10px 0 0;
+      font-size: clamp(14px, 2.4vw, 18px);
       opacity: 0.85;
-      font-weight: 500;
     }
     .arapca-baslik {
-      margin: 16px 0;
+      margin: 14px 0;
       font-size: clamp(28px, 5vw, 44px);
       font-family: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
       direction: rtl;
@@ -68,17 +53,17 @@
     }
     .menu-kartlar {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
-      max-width: 900px;
+      max-width: 920px;
       width: 100%;
-      margin: 24px auto;
+      margin: 22px auto;
     }
     .sahne-kart {
       background: rgba(255,255,255,0.07);
       border: 2px solid rgba(255,255,255,0.12);
       border-radius: 24px;
-      padding: 22px 18px;
+      padding: 24px 18px 22px;
       cursor: pointer;
       transition: all 0.2s ease;
       backdrop-filter: blur(10px);
@@ -92,41 +77,12 @@
       border-color: rgba(255,255,255,0.3);
       box-shadow: 0 14px 36px rgba(0,0,0,0.3);
     }
-    .sahne-kart::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--kart-renk, #10b981);
-      opacity: 0.12;
-      z-index: -1;
-    }
-    .sahne-emoji {
-      font-size: 56px;
-      display: block;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
-    }
-    .sahne-ad-tr {
-      font-size: 22px;
-      font-weight: 800;
-      margin: 4px 0;
-    }
-    .sahne-ad-ar {
-      font-size: 24px;
-      font-family: 'Amiri', 'Noto Naskh Arabic', serif;
-      direction: rtl;
-      color: #ffd76b;
-      margin: 6px 0;
-    }
-    .sahne-aciklama {
-      font-size: 13px;
-      opacity: 0.7;
-      margin-top: 6px;
-    }
+    .sahne-emoji { font-size: 60px; display: block; margin-bottom: 10px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
+    .sahne-ad-tr { font-size: 22px; font-weight: 800; margin: 6px 0 2px; }
+    .sahne-ad-ar { font-size: 26px; font-family: 'Amiri','Noto Naskh Arabic',serif; direction: rtl; color: #ffd76b; margin: 4px 0; }
+    .sahne-aciklama { font-size: 13px; opacity: 0.7; margin-top: 8px; }
     .sinav-kart {
-      grid-column: 1 / -1;
-      max-width: 460px;
-      margin: 0 auto;
+      grid-column: 1 / -1; max-width: 480px; margin: 0 auto;
       background: linear-gradient(135deg, rgba(255, 107, 155, 0.22), rgba(255, 215, 107, 0.18));
       border-color: rgba(255, 215, 107, 0.4);
     }
@@ -134,47 +90,27 @@
       background: linear-gradient(135deg, rgba(255, 107, 155, 0.32), rgba(255, 215, 107, 0.28));
     }
     .nasil-oynanir {
-      margin: 32px auto 12px;
-      max-width: 600px;
+      margin: 28px auto 12px;
+      max-width: 640px;
       background: rgba(255,255,255,0.05);
       border-radius: 16px;
-      padding: 18px 22px;
-      font-size: 14px;
-      line-height: 1.7;
+      padding: 16px 22px;
+      font-size: 14px; line-height: 1.6;
       opacity: 0.9;
     }
-    .nasil-oynanir h3 {
-      margin: 0 0 8px;
-      font-size: 16px;
-      color: #ffd76b;
-    }
+    .nasil-oynanir h3 { margin: 0 0 6px; font-size: 16px; color: #ffd76b; }
 
-    /* === OYUN EKRANI === */
-    #oyun-ekrani { position: fixed; inset: 0; display: none; }
-    #oyun-canvas {
-      width: 100%; height: 100%;
-      display: block;
-      cursor: pointer;
-      background: #bce8ff;
-    }
+    /* === OYUN === */
+    #oyun-ekrani { position: fixed; inset: 0; display: none; background: #bfe4ff; }
+    #oyun-canvas { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+    #oyun-canvas:active { cursor: grabbing; }
 
-    /* Üst HUD */
     .hud-ust {
-      position: fixed;
-      top: 12px;
-      left: 12px; right: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      pointer-events: none;
-      gap: 8px;
-      z-index: 10;
+      position: fixed; top: 12px; left: 64px; right: 12px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      pointer-events: none; gap: 8px; z-index: 10;
     }
-    .hud-sol, .hud-sag {
-      display: flex; gap: 8px;
-      pointer-events: auto;
-      flex-wrap: wrap;
-    }
+    .hud-sol, .hud-sag { display: flex; gap: 8px; pointer-events: auto; flex-wrap: wrap; }
     .hud-rozeti {
       background: rgba(15,30,55,0.85);
       backdrop-filter: blur(12px);
@@ -183,241 +119,170 @@
       color: #fff;
       font-weight: 700;
       font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      display: flex; align-items: center; gap: 6px;
       box-shadow: 0 4px 18px rgba(0,0,0,0.25);
-    }
-    .hud-rozeti .ikon {
-      font-size: 16px;
     }
     .hud-rozeti.dogru { background: rgba(20, 140, 60, 0.88); }
     .hud-rozeti.yanlis { background: rgba(180, 40, 40, 0.85); }
-    .hud-buton {
-      background: rgba(15,30,55,0.85);
-      backdrop-filter: blur(12px);
-      border: none;
-      border-radius: 14px;
-      padding: 10px 14px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      transition: transform 0.15s, background 0.15s;
-    }
-    .hud-buton:hover, .hud-buton:active {
-      background: rgba(30,55,95,0.95);
-      transform: translateY(-1px);
-    }
 
-    /* Alt ipucu kartı — büyük Arapça kelime */
     .ipucu-karti {
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
+      position: fixed; bottom: 18px; left: 50%;
       transform: translateX(-50%);
       background: rgba(255,255,255,0.96);
       color: #1a2840;
       border-radius: 22px;
       padding: 14px 24px;
       box-shadow: 0 12px 36px rgba(0,0,0,0.35);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
       z-index: 10;
-      min-width: 240px;
+      min-width: 240px; max-width: 92vw;
       text-align: center;
     }
     #ipucu-arapca {
-      font-family: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+      font-family: 'Amiri','Noto Naskh Arabic','Traditional Arabic', serif;
       font-size: clamp(36px, 6vw, 56px);
-      font-weight: 900;
-      line-height: 1;
-      direction: rtl;
+      font-weight: 900; line-height: 1; direction: rtl;
       color: #1a2840;
     }
-    #ipucu-translit {
-      font-size: 14px;
-      color: #6b7a90;
-      font-style: italic;
-    }
-    .ipucu-butonlar {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-    }
+    #ipucu-translit { font-size: 14px; color: #6b7a90; font-style: italic; }
+    .ipucu-butonlar { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; justify-content: center; }
     .ipucu-buton {
       background: linear-gradient(135deg, #2a4376, #1a2840);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 8px 14px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: #fff; border: none; border-radius: 12px;
+      padding: 9px 14px; font-weight: 700; font-size: 13px;
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
     }
-    .ipucu-buton.altsari {
-      background: linear-gradient(135deg, #ff9b3a, #ffd76b);
-      color: #1a2840;
-    }
+    .ipucu-buton.altsari { background: linear-gradient(135deg, #ff9b3a, #ffd76b); color: #1a2840; }
 
     .sahne-baslik-bar {
-      position: fixed;
-      top: 12px;
-      left: 50%;
+      position: fixed; top: 12px; left: 50%;
       transform: translateX(-50%);
       background: rgba(15,30,55,0.85);
       backdrop-filter: blur(12px);
       color: #fff;
-      padding: 6px 16px;
-      border-radius: 12px;
-      font-weight: 800;
-      font-size: 14px;
+      padding: 6px 16px; border-radius: 12px;
+      font-weight: 800; font-size: 14px;
       z-index: 5;
+      max-width: 70vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    /* Sonuç modal */
     .modal-arkaplan {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(10,20,40,0.85);
       backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      padding: 20px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 50; padding: 20px;
     }
     .modal-icerik {
       background: linear-gradient(135deg, #2a4376, #1a2840);
       border-radius: 28px;
       padding: 36px 28px 28px;
-      max-width: 420px;
-      width: 100%;
+      max-width: 420px; width: 100%;
       text-align: center;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
       border: 2px solid rgba(255,215,107,0.3);
     }
     .yuzde-buyuk {
-      font-size: 72px;
-      font-weight: 900;
+      font-size: 76px; font-weight: 900;
       background: linear-gradient(135deg, #ffd76b, #ff9b3a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      line-height: 1;
-      margin: 8px 0 0;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      line-height: 1; margin: 8px 0 0;
     }
     .yuzde-isareti { font-size: 32px; }
-    .sonuc-detay {
-      margin: 12px 0 6px;
-      font-size: 18px;
-      font-weight: 700;
-    }
-    #sonuc-mesaj {
-      margin: 16px 0 22px;
-      font-size: 15px;
-      opacity: 0.9;
-      line-height: 1.5;
-    }
-    .modal-butonlar {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .sonuc-detay { margin: 12px 0 6px; font-size: 18px; font-weight: 700; }
+    #sonuc-mesaj { margin: 16px 0 22px; font-size: 15px; opacity: 0.9; line-height: 1.5; }
+    .modal-butonlar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     .modal-buton {
       background: linear-gradient(135deg, #ff9b3a, #ffd76b);
-      color: #1a2840;
-      border: none;
-      border-radius: 14px;
-      padding: 12px 22px;
-      font-weight: 800;
-      font-size: 15px;
-      cursor: pointer;
+      color: #1a2840; border: none; border-radius: 14px;
+      padding: 12px 22px; font-weight: 800; font-size: 15px; cursor: pointer;
     }
-    .modal-buton.ikincil {
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-    }
+    .modal-buton.ikincil { background: rgba(255,255,255,0.12); color: #fff; }
 
-    /* Geri butonu */
     .geri-buton {
-      position: fixed;
-      top: 12px; left: 12px;
+      position: fixed; top: 12px; left: 12px;
       background: rgba(15,30,55,0.85);
-      color: #fff;
-      border: none;
-      border-radius: 14px;
-      width: 40px; height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 11;
+      color: #fff; border: none; border-radius: 14px;
+      width: 42px; height: 42px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 22px; z-index: 11;
     }
 
-    /* Mobil ayarlamalar */
-    @media (max-width: 600px) {
-      .hud-ust {
-        flex-direction: column;
-        align-items: stretch;
-      }
+    .yuzen-yazi {
+      position: fixed;
+      font-weight: 900;
+      font-size: 26px;
+      pointer-events: none;
+      z-index: 20;
+      text-shadow: 0 2px 8px rgba(255,255,255,0.7), 0 4px 12px rgba(0,0,0,0.3);
+      transform: translate(-50%, -50%);
+    }
+
+    .yardim-bar {
+      position: fixed;
+      top: 64px; right: 12px;
+      background: rgba(15,30,55,0.7);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      z-index: 5;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 700px) {
+      .hud-ust { flex-direction: column; align-items: stretch; }
       .hud-sol, .hud-sag { justify-content: center; }
       .ipucu-karti { min-width: 200px; padding: 10px 18px; bottom: 14px; }
-      .sahne-baslik-bar {
-        top: 60px;
-        font-size: 12px;
-      }
-      .geri-buton {
-        top: 60px;
-      }
-    }
-
-    /* Arapça font yükleme — sistem fontları kullanılıyor, fallback hazır */
-    @font-face {
-      font-family: 'Amiri';
-      src: local('Amiri'), local('Noto Naskh Arabic'), local('Traditional Arabic');
-      font-weight: 400;
-      font-style: normal;
+      .sahne-baslik-bar { top: 60px; font-size: 12px; }
+      .geri-buton { top: 60px; }
+      .yardim-bar { display: none; }
     }
   </style>
+
+  <!-- Three.js import map — lokal vendor klasöründen yükler -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.min.js",
+      "OrbitControls": "./vendor/OrbitControls.js"
+    }
+  }
+  </script>
 </head>
 <body>
 
-  <!-- === ANA MENÜ === -->
+  <!-- === MENÜ === -->
   <div id="menu-ekrani">
     <div class="menu-baslik">
       <h1>Arapça 3D Dünya</h1>
       <div class="arapca-baslik">عَالَمُ العَرَبِيَّةِ ثُلَاثِيُّ الأَبْعَاد</div>
-      <p class="alt-baslik">Voksel dünyada eğlenerek Arapça öğren! Bir dünya seç ve oyunla.</p>
+      <p class="alt-baslik">Gerçek 3D dünyada eğlenerek Arapça öğren. Sahneyi parmağınla çevir, kelimeyi bul ve tıkla!</p>
     </div>
 
     <div class="menu-kartlar">
-      <div class="sahne-kart" style="--kart-renk:#10b981" onclick="UI.sahneAc('manav')">
+      <div class="sahne-kart" onclick="UI.baslat('manav')">
         <span class="sahne-emoji">🍎</span>
         <div class="sahne-ad-tr">Manav</div>
         <div class="sahne-ad-ar">البَقَّال</div>
-        <div class="sahne-aciklama">Meyve ve sebzelerin Arapçası</div>
+        <div class="sahne-aciklama">Meyve ve sebze tezgahı</div>
       </div>
 
-      <div class="sahne-kart" style="--kart-renk:#3b82f6" onclick="UI.sahneAc('araclar')">
+      <div class="sahne-kart" onclick="UI.baslat('araclar')">
         <span class="sahne-emoji">🚗</span>
         <div class="sahne-ad-tr">Araçlar</div>
         <div class="sahne-ad-ar">المَرْكَبَات</div>
         <div class="sahne-aciklama">Araba, uçak, gemi ve daha fazlası</div>
       </div>
 
-      <div class="sahne-kart" style="--kart-renk:#f59e0b" onclick="UI.sahneAc('hayvanlar')">
+      <div class="sahne-kart" onclick="UI.baslat('hayvanlar')">
         <span class="sahne-emoji">🦁</span>
         <div class="sahne-ad-tr">Hayvanlar</div>
         <div class="sahne-ad-ar">الحَيَوَانَات</div>
-        <div class="sahne-aciklama">Sevimli hayvanların adlarını öğren</div>
+        <div class="sahne-aciklama">Sevimli hayvanların adları</div>
       </div>
 
       <div class="sahne-kart sinav-kart" onclick="UI.sinavBaslat()">
@@ -430,18 +295,20 @@
 
     <div class="nasil-oynanir">
       <h3>🎮 Nasıl Oynanır?</h3>
-      Ekranda Arapça bir kelime ve sesi duyacaksın. Bu kelimeye uygun nesneyi 3D dünyada bul ve tıkla!
-      Doğruysa yeşil parlama, yanlışsa kırmızı uyarı görürsün. Sınav modunda 10 soru cevaplayıp puanını gör.
+      Bir dünya seç. Arapça kelime yazıyla görünür ve sesli okunur. Sahneyi çevirip uygun nesneyi bul ve tıkla.
+      Doğruysa yeşil, yanlışsa kırmızı parıltı görürsün. Bilemezsen "İpucu" butonu hedefi sana gösterir.
     </div>
   </div>
 
-  <!-- === OYUN EKRANI === -->
+  <!-- === OYUN === -->
   <div id="oyun-ekrani">
     <canvas id="oyun-canvas"></canvas>
 
     <button class="geri-buton" onclick="UI.menuyeDon()" aria-label="Menüye dön">←</button>
 
     <div class="sahne-baslik-bar" id="sahne-baslik">Manav</div>
+
+    <div class="yardim-bar">Sürükle: döndür &middot; Tekerlek/sıkıştır: yakınlaş</div>
 
     <div class="hud-ust">
       <div class="hud-sol">
@@ -458,7 +325,7 @@
       <div id="ipucu-arapca">تُفَّاحَة</div>
       <div id="ipucu-translit">(tüffaha)</div>
       <div class="ipucu-butonlar">
-        <button class="ipucu-buton" onclick="UI.kelimeSesle()">🔊 Tekrar dinle</button>
+        <button class="ipucu-buton" onclick="UI.sesle()">🔊 Tekrar dinle</button>
         <button class="ipucu-buton altsari" onclick="UI.ipucu()">💡 İpucu</button>
       </div>
     </div>
@@ -472,38 +339,19 @@
       <div class="sonuc-detay"><span id="sonuc-dogru">0</span> / <span id="sonuc-toplam">10</span> doğru</div>
       <p id="sonuc-mesaj">Harika iş!</p>
       <div class="modal-butonlar">
-        <button class="modal-buton" onclick="document.getElementById('sonuc-modal').style.display='none'; UI.sinavBaslat()">Tekrar Sına</button>
-        <button class="modal-buton ikincil" onclick="document.getElementById('sonuc-modal').style.display='none'; UI.menuyeDon()">Menüye Dön</button>
+        <button class="modal-buton" onclick="UI.kapatSonuc(); UI.sinavBaslat()">Tekrar Sına</button>
+        <button class="modal-buton ikincil" onclick="UI.kapatSonuc(); UI.menuyeDon()">Menüye Dön</button>
       </div>
     </div>
   </div>
 
-  <!-- Modüller — sırayla -->
-  <script src="js/voxel.js"></script>
-  <script src="js/models.js"></script>
+  <!-- Veri ve yardımcılar (window üzerinde) -->
   <script src="js/data.js"></script>
-  <script src="js/scenes.js"></script>
   <script src="js/scorm.js"></script>
   <script src="js/tts.js"></script>
   <script src="js/sfx.js"></script>
-  <script src="js/game.js"></script>
-  <script src="js/ui.js"></script>
-  <script>
-    // Başlangıç
-    window.addEventListener('load', function () {
-      TTS.init();
-      SCORM.init();
-      const canvas = document.getElementById('oyun-canvas');
-      Game.baslat(canvas);
-    });
-    // İlk dokunuşta sesi başlat (autoplay politikası)
-    document.addEventListener('pointerdown', function once() {
-      try {
-        const C = window.AudioContext || window.webkitAudioContext;
-        if (C) { const c = new C(); c.resume && c.resume(); }
-      } catch (e) {}
-      document.removeEventListener('pointerdown', once);
-    }, { once: true });
-  </script>
+
+  <!-- Ana 3D motor — ES module (importmap ile three.js'i lokalden yükler) -->
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest identifier="ARAPCA_3D_OYUN_V1"
-          version="1.0"
+<manifest identifier="ARAPCA_3D_DUNYA_V2"
+          version="2.0"
           xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
           xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -28,15 +28,14 @@
               adlcp:scormtype="sco"
               href="index.html">
       <file href="index.html"/>
-      <file href="js/voxel.js"/>
-      <file href="js/models.js"/>
       <file href="js/data.js"/>
-      <file href="js/scenes.js"/>
       <file href="js/scorm.js"/>
       <file href="js/tts.js"/>
       <file href="js/sfx.js"/>
-      <file href="js/game.js"/>
-      <file href="js/ui.js"/>
+      <file href="js/main.js"/>
+      <file href="js/models3d.js"/>
+      <file href="vendor/three.module.min.js"/>
+      <file href="vendor/OrbitControls.js"/>
     </resource>
   </resources>
 
