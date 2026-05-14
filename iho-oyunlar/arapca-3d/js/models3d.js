@@ -12,6 +12,21 @@ function mat(opts) {
   }, opts));
 }
 
+// Gerçekçi meyve kabuğu — parlak (PhysicalMaterial yerine
+// MeshStandardMaterial + envmap-benzeri reflektans için düşük roughness)
+function fruitMat(opts) {
+  return new THREE.MeshStandardMaterial(Object.assign({
+    roughness: 0.42, metalness: 0.0
+  }, opts));
+}
+
+// Mat kabuk (portakal, karpuz vb. dokusu)
+function mattFruitMat(opts) {
+  return new THREE.MeshStandardMaterial(Object.assign({
+    roughness: 0.85, metalness: 0.0
+  }, opts));
+}
+
 function addToGroup(grp, mesh) {
   mesh.castShadow = true;
   mesh.receiveShadow = true;
@@ -28,109 +43,158 @@ function makeGroup(kelimeId) {
 // === MEYVELER ===
 M.elma = function () {
   const g = makeGroup('elma');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.55, 24, 18), mat({ color: 0xd63b3b }));
+  // Daha yüksek poligon + parlak kabuk
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.55, 36, 28), fruitMat({ color: 0xd2342f }));
   body.position.y = 0.55;
-  body.scale.y = 0.95;
+  body.scale.set(1, 0.92, 1);
   addToGroup(g, body);
-  // Çukur (üst)
-  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.18, 8), mat({ color: 0x5b3a18 }));
-  stem.position.y = 1.15;
+  // Tepede ve altta küçük çukurluk (iki nokta) — elmanın klasik şekli için
+  const dimpleTop = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 12), fruitMat({ color: 0x9e1f1f, roughness: 0.6 }));
+  dimpleTop.position.y = 1.04;
+  dimpleTop.scale.y = 0.3;
+  addToGroup(g, dimpleTop);
+  // Sap
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 0.2, 10), mat({ color: 0x5b3a18, roughness: 0.85 }));
+  stem.position.y = 1.18;
+  stem.rotation.z = 0.18;
   addToGroup(g, stem);
-  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.13, 8, 6), mat({ color: 0x3a9b46 }));
-  leaf.position.set(0.13, 1.22, 0);
-  leaf.scale.set(1.2, 0.4, 0.7);
+  // Yaprak (eğri yüzey için ovalimsi)
+  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 8), mat({ color: 0x3a9b46, roughness: 0.7 }));
+  leaf.position.set(0.16, 1.22, 0.02);
+  leaf.scale.set(1.3, 0.35, 0.7);
+  leaf.rotation.z = -0.3;
   addToGroup(g, leaf);
   return g;
 };
 
 M.portakal = function () {
   const g = makeGroup('portakal');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.55, 22, 16), mat({ color: 0xef8a18, roughness: 0.85 }));
+  // Hafif yumuşak doku — kabuk mat
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.55, 36, 28), mattFruitMat({ color: 0xef8a18 }));
   body.position.y = 0.55;
+  body.scale.y = 0.97;
   addToGroup(g, body);
-  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.11, 8, 6), mat({ color: 0x3a9b46 }));
-  leaf.position.set(0, 1.18, 0);
-  leaf.scale.set(1.4, 0.4, 0.8);
+  // Tepedeki küçük çukur (sap deliği)
+  const dimple = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 10), mat({ color: 0x9e5a08 }));
+  dimple.position.y = 1.08;
+  dimple.scale.y = 0.4;
+  addToGroup(g, dimple);
+  // Sap kalıntısı
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.035, 0.06, 8), mat({ color: 0x5b3a18 }));
+  stem.position.y = 1.12;
+  addToGroup(g, stem);
+  // Yaprak
+  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 8), mat({ color: 0x3a9b46 }));
+  leaf.position.set(0.05, 1.16, 0);
+  leaf.scale.set(1.4, 0.35, 0.8);
+  leaf.rotation.z = -0.4;
   addToGroup(g, leaf);
   return g;
 };
 
 M.muz = function () {
   const g = makeGroup('muz');
-  // Eğri muz — Bezier yolu
+  // Daha doğal eğri (ay biçimi)
   const curve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(-0.6, 0.3, 0),
-    new THREE.Vector3(-0.3, 0.7, 0.1),
-    new THREE.Vector3(0.3, 0.9, 0.05),
-    new THREE.Vector3(0.7, 0.6, 0)
+    new THREE.Vector3(-0.65, 0.32, 0),
+    new THREE.Vector3(-0.35, 0.62, 0.06),
+    new THREE.Vector3(0.0,  0.78, 0.06),
+    new THREE.Vector3(0.4,  0.7, 0.04),
+    new THREE.Vector3(0.7,  0.48, 0)
   ]);
-  const geom = new THREE.TubeGeometry(curve, 32, 0.15, 12, false);
-  const body = new THREE.Mesh(geom, mat({ color: 0xf5c61a }));
+  // Değişen radius için TubeGeometry üzerine ölçek vermek yerine — sabit ince radius, eklenecek detay
+  const geom = new THREE.TubeGeometry(curve, 48, 0.135, 16, false);
+  const body = new THREE.Mesh(geom, fruitMat({ color: 0xf4c81e, roughness: 0.55 }));
   addToGroup(g, body);
-  // Uç (kahve)
-  const tipA = new THREE.Mesh(new THREE.SphereGeometry(0.16, 10, 8), mat({ color: 0x7a4d12 }));
-  tipA.position.set(-0.6, 0.3, 0);
+  // Hafif yeşilimsi alt bant (alttaki sırt)
+  const ridgeMat = mat({ color: 0xc6a014, roughness: 0.7 });
+  const ridge = new THREE.Mesh(new THREE.TubeGeometry(curve, 48, 0.028, 6, false), ridgeMat);
+  ridge.position.y = -0.13;
+  addToGroup(g, ridge);
+  // Uç sapı (alttaki olgun kahverengi)
+  const tipA = new THREE.Mesh(new THREE.SphereGeometry(0.13, 12, 10), mat({ color: 0x6a4012 }));
+  tipA.position.set(-0.65, 0.32, 0);
   addToGroup(g, tipA);
-  const tipB = new THREE.Mesh(new THREE.SphereGeometry(0.13, 10, 8), mat({ color: 0x7a4d12 }));
-  tipB.position.set(0.7, 0.6, 0);
-  addToGroup(g, tipB);
+  // Üst sap (ince koyu)
+  const stemTop = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.18, 8), mat({ color: 0x4a3010 }));
+  stemTop.position.set(0.72, 0.6, 0);
+  stemTop.rotation.z = -0.5;
+  addToGroup(g, stemTop);
   return g;
 };
 
 M.uzum = function () {
   const g = makeGroup('uzum');
-  // Salkım — küçük kürelerin piramidal dizilimi
+  // Salkım — gerçekçi piramit; her tane parlak kabuk, tonlama varyasyonu
+  const grapeMats = [
+    fruitMat({ color: 0x7a3aa0 }),
+    fruitMat({ color: 0x6f339a }),
+    fruitMat({ color: 0x854baf }),
+    fruitMat({ color: 0x5e2890 })
+  ];
   const layers = [
-    { y: 0.2, r: 0.4, n: 0 },
-    { y: 0.45, r: 0.45, n: 5 },
-    { y: 0.7, r: 0.4, n: 6 },
-    { y: 0.95, r: 0.3, n: 5 },
-    { y: 1.15, r: 0.18, n: 3 }
+    { y: 0.25, r: 0,    n: 1 },
+    { y: 0.4,  r: 0.22, n: 5 },
+    { y: 0.55, r: 0.32, n: 7 },
+    { y: 0.7,  r: 0.38, n: 7 },
+    { y: 0.85, r: 0.32, n: 6 },
+    { y: 1.0,  r: 0.22, n: 5 },
+    { y: 1.13, r: 0.1,  n: 3 }
   ];
   for (const L of layers) {
-    if (L.n === 0) {
-      const c = new THREE.Mesh(new THREE.SphereGeometry(0.15, 14, 10), mat({ color: 0x7b3fa0 }));
-      c.position.y = L.y;
+    for (let i = 0; i < L.n; i++) {
+      const a = (i / Math.max(L.n, 1)) * Math.PI * 2 + L.y * 0.7;  // hafif spiral
+      const m = grapeMats[Math.floor(Math.random() * grapeMats.length)];
+      const c = new THREE.Mesh(new THREE.SphereGeometry(0.14, 18, 14), m);
+      c.position.set(Math.cos(a) * L.r, L.y, Math.sin(a) * L.r);
+      // Ufak rastgele kayma
+      c.position.x += (Math.random() - 0.5) * 0.04;
+      c.position.z += (Math.random() - 0.5) * 0.04;
       addToGroup(g, c);
-    } else {
-      for (let i = 0; i < L.n; i++) {
-        const a = (i / L.n) * Math.PI * 2;
-        const c = new THREE.Mesh(new THREE.SphereGeometry(0.15, 14, 10), mat({ color: 0x7b3fa0 }));
-        c.position.set(Math.cos(a) * L.r, L.y, Math.sin(a) * L.r);
-        addToGroup(g, c);
-      }
     }
   }
-  // Yaprak
-  const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 6), mat({ color: 0x3a9b46 }));
-  leaf.position.set(0.12, 1.3, 0.05);
-  leaf.scale.set(1.4, 0.4, 1);
-  addToGroup(g, leaf);
   // Sap
-  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.2), mat({ color: 0x5b3a18 }));
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.03, 0.18, 8), mat({ color: 0x5b3a18 }));
   stem.position.y = 1.3;
   addToGroup(g, stem);
+  // İki büyük yaprak
+  for (const dx of [-1, 1]) {
+    const leaf = new THREE.Mesh(new THREE.SphereGeometry(0.18, 14, 10), mat({ color: 0x3a9b46, roughness: 0.65 }));
+    leaf.position.set(dx * 0.14, 1.36, dx * 0.05);
+    leaf.scale.set(1.4, 0.3, 1.1);
+    leaf.rotation.z = dx * 0.3;
+    addToGroup(g, leaf);
+  }
   return g;
 };
 
 M.cilek = function () {
   const g = makeGroup('cilek');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.45, 22, 18), mat({ color: 0xe23a5e }));
-  body.position.y = 0.45;
-  body.scale.set(1, 1.1, 1);
+  // Klasik çilek silüeti — üstte geniş, altta sivri
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.45, 32, 24), fruitMat({ color: 0xd9264a }));
+  body.position.y = 0.5;
+  body.scale.set(1, 1.05, 1);
   addToGroup(g, body);
-  // Aşağıya doğru sivri
-  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.4, 16), mat({ color: 0xe23a5e }));
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.55, 24), fruitMat({ color: 0xd9264a }));
   tip.position.y = 0.18;
   tip.rotation.x = Math.PI;
   addToGroup(g, tip);
-  // Yapraklar
-  for (let i = 0; i < 5; i++) {
-    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.25, 6), mat({ color: 0x3a9b46 }));
-    const a = (i / 5) * Math.PI * 2;
-    leaf.position.set(Math.cos(a) * 0.18, 0.92, Math.sin(a) * 0.18);
-    leaf.rotation.z = -Math.cos(a) * 0.6;
-    leaf.rotation.x = Math.sin(a) * 0.6;
+  // Sarı çekirdek noktacıkları
+  for (let i = 0; i < 14; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const r = 0.18 + Math.random() * 0.22;
+    const yy = 0.25 + Math.random() * 0.55;
+    const seed = new THREE.Mesh(new THREE.SphereGeometry(0.022, 6, 5), mat({ color: 0xf6d65a, roughness: 0.5 }));
+    seed.position.set(Math.cos(a) * r, yy, Math.sin(a) * r);
+    g.add(seed);
+  }
+  // Yeşil yapraklar (taç) — daha gerçekçi açılarla
+  for (let i = 0; i < 6; i++) {
+    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.11, 0.3, 8), mat({ color: 0x3aa050, roughness: 0.6 }));
+    const a = (i / 6) * Math.PI * 2;
+    leaf.position.set(Math.cos(a) * 0.14, 1.0, Math.sin(a) * 0.14);
+    leaf.rotation.z = -Math.cos(a) * 0.45;
+    leaf.rotation.x = Math.sin(a) * 0.45;
     addToGroup(g, leaf);
   }
   return g;
@@ -138,59 +202,98 @@ M.cilek = function () {
 
 M.karpuz = function () {
   const g = makeGroup('karpuz');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.95, 28, 18), mat({ color: 0x2e7d32 }));
+  // Mat kabuk + koyu yeşil şeritler
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.95, 40, 28), mattFruitMat({ color: 0x4ea150 }));
   body.position.y = 0.85;
-  body.scale.set(1.1, 1, 1.1);
+  body.scale.set(1.1, 0.95, 1.1);
   addToGroup(g, body);
-  // Açık şeritler
-  for (let i = 0; i < 6; i++) {
-    const stripe = new THREE.Mesh(new THREE.SphereGeometry(0.96, 28, 4, (i / 6) * Math.PI * 2, 0.08, 0, Math.PI), mat({ color: 0x5cab5f }));
-    stripe.position.y = 0.85;
-    stripe.scale.set(1.1, 1, 1.1);
+  // Koyu yeşil dikey şeritler (zigzag görünüm)
+  const stripeMat = mattFruitMat({ color: 0x1f5928 });
+  for (let i = 0; i < 8; i++) {
+    const angle = (i / 8) * Math.PI * 2;
+    const stripe = new THREE.Mesh(
+      new THREE.TorusGeometry(0.92, 0.045, 8, 22, Math.PI),
+      stripeMat
+    );
+    stripe.position.set(0, 0.85, 0);
+    stripe.rotation.x = Math.PI / 2;
+    stripe.rotation.z = angle;
+    stripe.scale.set(1.13, 1.02, 1.13);
     addToGroup(g, stripe);
   }
+  // Sap çıkıntısı
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.08, 0.12, 8), mat({ color: 0x4a7028 }));
+  stem.position.y = 1.78;
+  addToGroup(g, stem);
   return g;
 };
 
 M.domates = function () {
   const g = makeGroup('domates');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 22, 16), mat({ color: 0xd83a3a }));
+  // Parlak kabuk
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.42, 32, 24), fruitMat({ color: 0xd02828 }));
   body.position.y = 0.4;
-  body.scale.y = 0.85;
+  body.scale.set(1.05, 0.82, 1.05);
   addToGroup(g, body);
-  // Yapraklar
+  // Yeşil yıldız taç (sepal) — daha düz yatay yapraklar
   for (let i = 0; i < 5; i++) {
     const a = (i / 5) * Math.PI * 2;
-    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.18, 6), mat({ color: 0x3a9b46 }));
-    leaf.position.set(Math.cos(a) * 0.1, 0.74, Math.sin(a) * 0.1);
-    leaf.rotation.z = -Math.cos(a) * 1.1;
-    leaf.rotation.x = Math.sin(a) * 1.1;
+    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.22, 6), mat({ color: 0x4a8a30, roughness: 0.7 }));
+    leaf.position.set(Math.cos(a) * 0.12, 0.74, Math.sin(a) * 0.12);
+    leaf.rotation.z = -Math.cos(a) * 1.3;
+    leaf.rotation.x = Math.sin(a) * 1.3;
     addToGroup(g, leaf);
   }
+  // Merkez sap
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.025, 0.1, 6), mat({ color: 0x4a7028 }));
+  stem.position.y = 0.8;
+  addToGroup(g, stem);
   return g;
 };
 
 M.salatalik = function () {
   const g = makeGroup('salatalik');
-  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.8, 6, 12), mat({ color: 0x5a9a3b, roughness: 0.85 }));
-  body.position.y = 0.18;
+  const body = new THREE.Mesh(new THREE.CapsuleGeometry(0.18, 0.85, 12, 24), mattFruitMat({ color: 0x4f8d34 }));
+  body.position.set(0, 0.22, 0);
   body.rotation.z = Math.PI / 2;
   addToGroup(g, body);
+  // Üzerine küçük çizgiler — açık yeşil noktacıklar
+  for (let i = 0; i < 12; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const t = -0.45 + Math.random() * 0.9;
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.02, 6, 5), mat({ color: 0x8fc15f, roughness: 0.7 }));
+    dot.position.set(t, 0.22 + Math.cos(a) * 0.18, Math.sin(a) * 0.18);
+    g.add(dot);
+  }
+  // Uçlar (sap)
+  const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.035, 0.07, 8), mat({ color: 0x4a7028 }));
+  stem.position.set(0.55, 0.22, 0);
+  stem.rotation.z = Math.PI / 2;
+  addToGroup(g, stem);
   return g;
 };
 
 M.havuc = function () {
   const g = makeGroup('havuc');
-  const body = new THREE.Mesh(new THREE.ConeGeometry(0.22, 1, 14), mat({ color: 0xef7a1a }));
-  body.position.y = 0.5;
+  // Daha gerçekçi havuç — uzun ve düz değil, hafif eğri
+  const body = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.05, 24), fruitMat({ color: 0xeb7818, roughness: 0.7 }));
+  body.position.y = 0.52;
+  body.rotation.x = 0.06;
   addToGroup(g, body);
-  // Yapraklar
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2;
-    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.45, 6), mat({ color: 0x3a9b46 }));
-    leaf.position.set(Math.cos(a) * 0.04, 1.2, Math.sin(a) * 0.04);
-    leaf.rotation.z = -Math.cos(a) * 0.5;
-    leaf.rotation.x = Math.sin(a) * 0.5;
+  // Yatay halka çizgileri (havuç dokusu)
+  for (let i = 0; i < 5; i++) {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.18 - i * 0.03, 0.012, 6, 18), mat({ color: 0xc25a10, roughness: 0.8 }));
+    ring.position.y = 0.15 + i * 0.18;
+    ring.rotation.x = Math.PI / 2;
+    g.add(ring);
+  }
+  // Tepedeki yeşil yapraklar
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.04, 0.5 + Math.random() * 0.15, 6), mat({ color: 0x3a9b46 }));
+    leaf.position.set(Math.cos(a) * 0.05, 1.32, Math.sin(a) * 0.05);
+    leaf.rotation.z = -Math.cos(a) * 0.4;
+    leaf.rotation.x = Math.sin(a) * 0.4;
     addToGroup(g, leaf);
   }
   return g;
@@ -198,14 +301,24 @@ M.havuc = function () {
 
 M.patates = function () {
   const g = makeGroup('patates');
-  const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 18, 14), mat({ color: 0xb88a52, roughness: 0.9 }));
+  // Düzensiz şekil — birden çok küre
+  const skinMat = mattFruitMat({ color: 0xb88a52 });
+  const body = new THREE.Mesh(new THREE.SphereGeometry(0.4, 24, 18), skinMat);
   body.position.y = 0.32;
-  body.scale.set(1.3, 0.75, 1);
+  body.scale.set(1.3, 0.78, 1);
   addToGroup(g, body);
-  // Lekecikler
+  // Boyut yumruları (düzensizlik)
   for (let i = 0; i < 4; i++) {
-    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 6), mat({ color: 0x6b4b22 }));
-    dot.position.set((Math.random() - 0.5) * 0.7, 0.5, (Math.random() - 0.5) * 0.7);
+    const lump = new THREE.Mesh(new THREE.SphereGeometry(0.12, 12, 8), skinMat);
+    const a = (i / 4) * Math.PI * 2;
+    lump.position.set(Math.cos(a) * 0.45, 0.32 + (Math.random() - 0.5) * 0.1, Math.sin(a) * 0.32);
+    lump.scale.set(0.9, 0.55, 0.9);
+    addToGroup(g, lump);
+  }
+  // Lekecikler / gözler
+  for (let i = 0; i < 6; i++) {
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.025, 6, 5), mat({ color: 0x6b4b22, roughness: 0.95 }));
+    dot.position.set((Math.random() - 0.5) * 0.9, 0.4 + (Math.random() - 0.5) * 0.2, (Math.random() - 0.5) * 0.5);
     addToGroup(g, dot);
   }
   return g;
@@ -752,93 +865,54 @@ M.bulut = function () {
 // Manav tezgahı — ahşap tezgah + çizgili eğimli kumaş tente + tabela
 M.tezgah = function () {
   const g = new THREE.Group();
-  // Tezgah yüzeyi
-  const top = new THREE.Mesh(new THREE.BoxGeometry(8, 0.15, 1.6), mat({ color: 0xa06330 }));
-  top.position.y = 0.9;
-  top.castShadow = true; top.receiveShadow = true;
-  g.add(top);
-  // Tezgah ön paneli (görünür ön yüz)
-  const front = new THREE.Mesh(new THREE.BoxGeometry(8, 0.88, 0.05), mat({ color: 0x7a4818 }));
-  front.position.set(0, 0.46, 0.78);
-  front.castShadow = true; front.receiveShadow = true;
-  g.add(front);
-  // Bacaklar
-  for (const x of [-3.7, 3.7]) {
+  // Daha kaliteli tahta (BoxGeometry segmentleri + farklı tonlar)
+  const woodTopMat = mat({ color: 0xa67340, roughness: 0.85, metalness: 0.02 });
+  const woodSideMat = mat({ color: 0x8a5a2c, roughness: 0.9, metalness: 0.02 });
+  const woodDarkMat = mat({ color: 0x6b3f1f, roughness: 0.95, metalness: 0.02 });
+
+  // Tezgah yüzeyi (üst tabla — birden çok kalas)
+  for (let i = 0; i < 6; i++) {
+    const plank = new THREE.Mesh(new THREE.BoxGeometry(1.32, 0.13, 1.55), woodTopMat);
+    plank.position.set(-3.34 + i * 1.34, 0.9, 0);
+    plank.castShadow = true; plank.receiveShadow = true;
+    g.add(plank);
+    // Her iki kalas arasında çok ince koyu çizgi (ek)
+    if (i < 5) {
+      const seam = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.135, 1.55), woodDarkMat);
+      seam.position.set(-2.67 + i * 1.34, 0.901, 0);
+      g.add(seam);
+    }
+  }
+
+  // Ön panel — yatay kalaslar
+  for (let i = 0; i < 3; i++) {
+    const board = new THREE.Mesh(new THREE.BoxGeometry(7.9, 0.28, 0.04), woodSideMat);
+    board.position.set(0, 0.16 + i * 0.3, 0.78);
+    board.castShadow = true; board.receiveShadow = true;
+    g.add(board);
+  }
+  // Yan paneller
+  for (const x of [-3.95, 3.95]) {
+    const side = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.85, 1.55), woodSideMat);
+    side.position.set(x, 0.45, 0);
+    side.castShadow = true; side.receiveShadow = true;
+    g.add(side);
+  }
+
+  // Bacaklar (daha sağlam, kare profil)
+  for (const x of [-3.85, 3.85]) {
     for (const z of [-0.7, 0.7]) {
-      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.9, 0.15), mat({ color: 0x6b3f1f }));
+      const leg = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.85, 0.18), woodDarkMat);
       leg.position.set(x, 0.45, z);
       leg.castShadow = true; leg.receiveShadow = true;
       g.add(leg);
     }
   }
-  // Tente direkleri (4 dikme, tezgahın arka köşelerinden ön köşelerine doğru yüksek)
-  const postMat = mat({ color: 0x5a3416 });
-  const arkaSol = [-3.9, -0.9, 2.6];
-  const arkaSag = [3.9, -0.9, 2.6];
-  const onSol = [-3.9, 0.9, 2.2];
-  const onSag = [3.9, 0.9, 2.2];
-  for (const p of [arkaSol, arkaSag]) {
-    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, p[2]), postMat);
-    post.position.set(p[0], p[2] / 2, p[1]);
-    post.castShadow = true; post.receiveShadow = true;
-    g.add(post);
-  }
-  for (const p of [onSol, onSag]) {
-    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, p[2]), postMat);
-    post.position.set(p[0], p[2] / 2, p[1]);
-    post.castShadow = true; post.receiveShadow = true;
-    g.add(post);
-  }
-  // Eğimli çizgili kumaş tente — 8 alternating şerit
-  // Arka kenar: y=2.6, z=-0.95 ; Ön kenar: y=2.2, z=1.0
-  // Her şerit ince bir düzlem; her ikisi arası alternatif renk
-  const stripeColors = [0xd23a3a, 0xfaf3e0]; // klasik kırmızı/krem
-  const stripes = 10;
-  const totalW = 8.4;
-  const stripeW = totalW / stripes;
-  for (let i = 0; i < stripes; i++) {
-    const color = stripeColors[i % 2];
-    const xCenter = -totalW / 2 + stripeW * (i + 0.5);
-    // Düz dörtgen şerit — eğimli düzlem
-    const geom = new THREE.PlaneGeometry(stripeW * 0.985, 2.2);
-    const m = new THREE.MeshStandardMaterial({ color, roughness: 0.95, side: THREE.DoubleSide });
-    const stripe = new THREE.Mesh(geom, m);
-    // Konumla: y orta = (2.6+2.2)/2 = 2.4, z orta = ( -0.95 + 1.0 )/2 = 0.025
-    stripe.position.set(xCenter, 2.4, 0.025);
-    // Eğim: z-y düzleminde, arka yukarı, ön aşağı; rot.x = atan( (2.2-2.6) / (1.0-(-0.95)) ) = atan(-0.4/1.95) ≈ -0.203
-    stripe.rotation.x = -Math.PI / 2 + Math.atan2(2.6 - 2.2, 1.0 - (-0.95));
-    stripe.castShadow = true; stripe.receiveShadow = true;
-    g.add(stripe);
-  }
-  // Ön sarkma — ondulasyonlu kenar (festoon): üçgen sarkıklar
-  const fringeMat = new THREE.MeshStandardMaterial({ color: 0xd23a3a, roughness: 0.95, side: THREE.DoubleSide });
-  for (let i = 0; i < 12; i++) {
-    const tri = new THREE.Mesh(new THREE.ConeGeometry(0.32, 0.4, 3, 1), fringeMat);
-    tri.position.set(-3.9 + (i + 0.5) * (7.8 / 12), 2.0, 1.05);
-    tri.rotation.x = Math.PI;
-    tri.rotation.y = Math.PI / 6;
-    tri.castShadow = true;
-    g.add(tri);
-  }
-  // Arka kiriş (tentenin durduğu üst destek)
-  const topBar = new THREE.Mesh(new THREE.BoxGeometry(8.2, 0.1, 0.08), mat({ color: 0x5a3416 }));
-  topBar.position.set(0, 2.6, -0.95);
-  topBar.castShadow = true; topBar.receiveShadow = true;
-  g.add(topBar);
-  const frontBar = new THREE.Mesh(new THREE.BoxGeometry(8.2, 0.08, 0.06), mat({ color: 0x5a3416 }));
-  frontBar.position.set(0, 2.2, 1.0);
-  frontBar.castShadow = true;
-  g.add(frontBar);
-
-  // Manav tabelası
-  const sign = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.55, 0.06), mat({ color: 0x3a6b8c }));
-  sign.position.set(0, 3.05, -0.95);
-  sign.castShadow = true;
-  g.add(sign);
-  // Tabelaya küçük çerçeve
-  const signFr = new THREE.Mesh(new THREE.BoxGeometry(2.5, 0.65, 0.04), mat({ color: 0xfff5d6 }));
-  signFr.position.set(0, 3.05, -0.97);
-  g.add(signFr);
+  // Bacaklar arası alt kuşak
+  const lowerBar = new THREE.Mesh(new THREE.BoxGeometry(7.7, 0.08, 0.12), woodDarkMat);
+  lowerBar.position.set(0, 0.18, 0);
+  lowerBar.castShadow = true; lowerBar.receiveShadow = true;
+  g.add(lowerBar);
 
   return g;
 };
