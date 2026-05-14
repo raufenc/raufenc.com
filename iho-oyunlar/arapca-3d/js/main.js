@@ -24,6 +24,10 @@ const State = {
   aktifSahne: null,
   skor: 0,
 
+  // Can sistemi (5 başlangıç, her yanlış 1 azaltır, 0'da oyun biter)
+  cans: 5,
+  maxCans: 5,
+
   // Alışveriş modu state'i
   liste: [],              // [{kid, gerekli, mevcut, fiyat}]
   toplamGerekli: 0,
@@ -80,15 +84,15 @@ function init() {
   const sun = new THREE.DirectionalLight(0xfff0d8, 2.2);
   sun.position.set(8, 16, 7);
   sun.castShadow = true;
-  sun.shadow.mapSize.width = 2048;
-  sun.shadow.mapSize.height = 2048;
+  sun.shadow.mapSize.width = 4096;
+  sun.shadow.mapSize.height = 4096;
   sun.shadow.camera.near = 1;
-  sun.shadow.camera.far = 50;
-  sun.shadow.camera.left = -20;
-  sun.shadow.camera.right = 20;
-  sun.shadow.camera.top = 20;
-  sun.shadow.camera.bottom = -20;
-  sun.shadow.radius = 4; // yumuşak gölge kenarı
+  sun.shadow.camera.far = 60;
+  sun.shadow.camera.left = -22;
+  sun.shadow.camera.right = 22;
+  sun.shadow.camera.top = 22;
+  sun.shadow.camera.bottom = -22;
+  sun.shadow.radius = 5; // yumuşak gölge kenarı
   sun.shadow.normalBias = 0.02;
   sun.shadow.bias = -0.0008;
   State.scene.add(sun);
@@ -470,9 +474,8 @@ function alisverisListeyiCiz() {
     const tamam = item.mevcut >= item.gerekli;
     const li = document.createElement('li');
     li.className = 'alisveris-satir' + (tamam ? ' tamam' : '');
-    // Tamamen Arapça: emoji + Arapça kelime + Arapça-Hindî rakamlarla fiyat ve miktar
+    // Yalnız Arapça kelime + fiyat + miktar (emoji yok — çocuk kelimeyi öğrensin)
     li.innerHTML =
-      '<span class="av-emoji">' + (k.emoji || '·') + '</span>' +
       '<div class="av-ad">' +
         '<div class="av-ar">' + k.ar + '</div>' +
         '<div class="av-fiyat">' + arabicNum(item.fiyat) + ' ﷼</div>' +
@@ -497,6 +500,9 @@ function alisverisTikla(rec) {
     yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)),
       'لَيْسَ فِي القَائِمَة', '#cc6a1a');
     window.SFX && window.SFX.yanlis();
+    State.yanlis++;
+    canKaybet();
+    if (State.cans <= 0) setTimeout(() => oyunBitti(false), 800);
     return;
   }
   if (item.mevcut >= item.gerekli) {
@@ -529,17 +535,21 @@ function alisverisTikla(rec) {
 
 function alisverisBitti() {
   window.SFX && window.SFX.basari();
-  const yuzde = 100;
   if (window.SCORM) {
-    window.SCORM.setScore(yuzde, 100, 0);
+    window.SCORM.setScore(100, 100, 0);
     window.SCORM.setStatus('completed');
   }
+  // Alışverişe özel sonuç ekranı: yüzde yerine ödenen tutar, ek bilgi ile
   document.getElementById('sonuc-yuzde').textContent = arabicNum(State.paraOdenen);
   document.getElementById('sonuc-yuzde-isaret').textContent = ' ﷼';
-  document.getElementById('sonuc-dogru').textContent = arabicNum(State.toplamMevcut);
-  document.getElementById('sonuc-toplam').textContent = arabicNum(State.toplamGerekli);
+  document.getElementById('sonuc-dogru').textContent = arabicNum(State.dogru);
+  document.getElementById('sonuc-yanlis').textContent = arabicNum(State.yanlis);
+  document.getElementById('sonuc-skor').textContent = arabicNum(State.toplamMevcut);
+  document.getElementById('sonuc-can').textContent = arabicNum(State.cans);
+  const ikonEl = document.getElementById('sonuc-ikon');
+  if (ikonEl) ikonEl.textContent = '🎉';
   document.getElementById('sonuc-mesaj').textContent =
-    'أَكْمَلْتَ التَّسَوُّق! دَفَعْتَ ' + arabicNum(State.paraOdenen) + ' ﷼. أَحْسَنْتَ! 🛒✨';
+    'أَكْمَلْتَ التَّسَوُّق — دَفَعْتَ ' + arabicNum(State.paraOdenen) + ' ﷼';
   document.getElementById('sonuc-basarili-buton').textContent = 'تَسَوُّق جَدِيد';
   document.getElementById('sonuc-basarili-buton').onclick = () => {
     document.getElementById('sonuc-modal').style.display = 'none';
@@ -576,11 +586,26 @@ function dogruTahmin(rec) {
 function yanlisTahmin(rec) {
   window.SFX && window.SFX.yanlis();
   State.yanlis++;
-  updateHUD();
-  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), 'حَاوِلْ ثَانِيَة', '#cc2a2a');
+  canKaybet();
+  yuzenYazi(rec.group.position.clone().add(new THREE.Vector3(0, 1.8, 0)), '−١ ❤', '#cc2a2a');
+  if (State.cans <= 0) {
+    setTimeout(() => oyunBitti(false), 800);
+    return;
+  }
   if (State.modu === 'sinav') {
     setTimeout(() => sonrakiSoru(), 900);
   }
+}
+
+// === Can sistemi ===
+function canKaybet() {
+  if (State.cans > 0) State.cans--;
+  updateHUD();
+}
+
+function canlariSifirla() {
+  State.cans = State.maxCans;
+  updateHUD();
 }
 
 // Yüzen ekran üstü yazısı: 3D dünya konumunu 2D'ye projeksiyonla göster
@@ -642,26 +667,58 @@ function sonrakiSoru() {
 }
 
 function sinavBitir() {
+  oyunBitti(true);
+}
+
+// Genel oyun bitiş — basarili: true (tamamlandı) | false (can bitti)
+function oyunBitti(basarili) {
+  const oncekiModu = State.modu;
   State.modu = 'oyun';
-  const yuzde = Math.round((State.dogru / State.toplamSoru) * 100);
-  window.SFX && window.SFX.basari();
+
+  // İstatistikler
+  const dogru = State.dogru;
+  const yanlis = State.yanlis;
+  const skor = State.skor;
+  let yuzde = 0;
+  if (oncekiModu === 'sinav' && State.toplamSoru) {
+    yuzde = Math.round((dogru / State.toplamSoru) * 100);
+  } else if (dogru + yanlis > 0) {
+    yuzde = Math.round((dogru / (dogru + yanlis)) * 100);
+  }
+
+  window.SFX && (basarili ? window.SFX.basari() : window.SFX.yanlis());
   if (window.SCORM) {
     window.SCORM.setScore(yuzde, 100, 0);
-    window.SCORM.setStatus(yuzde >= 60 ? 'passed' : 'failed');
+    window.SCORM.setStatus(basarili && yuzde >= 60 ? 'passed' : 'failed');
   }
-  document.getElementById('sonuc-yuzde').textContent = arabicNum(yuzde);
-  document.getElementById('sonuc-yuzde-isaret').textContent = '٪';
-  document.getElementById('sonuc-dogru').textContent = arabicNum(State.dogru);
-  document.getElementById('sonuc-toplam').textContent = arabicNum(State.toplamSoru);
-  document.getElementById('sonuc-mesaj').textContent =
-    yuzde >= 90 ? 'رَائِع! أَحْسَنْتَ ✨' :
-    yuzde >= 70 ? 'جَيِّد جِدًّا!' :
-    yuzde >= 50 ? 'بِدَايَة جَيِّدَة' :
-    'لا تَقْلَق، حَاوِلْ مَرَّةً أُخْرَى';
+
+  // Modal alanlarını doldur
+  const isaretEl = document.getElementById('sonuc-yuzde-isaret');
+  const yuzdeEl = document.getElementById('sonuc-yuzde');
+  yuzdeEl.textContent = arabicNum(yuzde);
+  isaretEl.textContent = '٪';
+  document.getElementById('sonuc-dogru').textContent = arabicNum(dogru);
+  document.getElementById('sonuc-yanlis').textContent = arabicNum(yanlis);
+  document.getElementById('sonuc-skor').textContent = arabicNum(skor);
+  document.getElementById('sonuc-can').textContent = arabicNum(State.cans);
+
+  // İkonu güncelle
+  const ikonEl = document.getElementById('sonuc-ikon');
+  if (ikonEl) ikonEl.textContent = basarili ? '🎉' : '💔';
+
+  document.getElementById('sonuc-mesaj').textContent = basarili
+    ? (yuzde >= 90 ? 'رَائِع! أَحْسَنْتَ' :
+       yuzde >= 70 ? 'جَيِّد جِدًّا!' :
+       yuzde >= 50 ? 'بِدَايَة جَيِّدَة' :
+       'تَمَّ، حَاوِلْ تَحْسِينَ نَتِيجَتِك')
+    : 'اِنْتَهَتِ المُحَاوَلَات — حَاوِلْ مَرَّةً أُخْرَى';
+
   document.getElementById('sonuc-basarili-buton').textContent = 'مَرَّةً أُخْرَى';
   document.getElementById('sonuc-basarili-buton').onclick = () => {
     document.getElementById('sonuc-modal').style.display = 'none';
-    UI.sinavBaslat();
+    if (oncekiModu === 'sinav') UI.sinavBaslat();
+    else if (oncekiModu === 'alisveris') UI.alisverisBaslat();
+    else UI.baslat(State.aktifSahne || 'manav');
   };
   document.getElementById('sonuc-modal').style.display = 'flex';
 }
@@ -701,12 +758,10 @@ function animate() {
         }
       }
     }
-    // Çok HAFİF ambient salınım — sahnede canlılık (her nesne için aynı amplitude, hedef değil)
-    if (State.aktifSahne === 'hayvanlar') {
-      // Hayvanlar nefes alıyor gibi
-      const breath = Math.sin(t * 1.8 + rec.basRotY * 7) * 0.015;
-      rec.group.position.y = rec.basY + breath;
-    }
+    // Çok hafif salınım — sahnede canlılık (TÜM nesneler için aynı amplitude, ipucu vermez)
+    const offset = (rec.group.position.x + rec.group.position.z) * 0.7;
+    const breath = Math.sin(t * 1.4 + offset) * 0.012;
+    rec.group.position.y = rec.basY + breath;
   }
 
   // İpucu halkası
@@ -746,6 +801,11 @@ function updateHUD() {
       sayac.style.display = 'none';
     }
   }
+  // Canları güncelle
+  const canlar = document.querySelectorAll('#cans-display .can');
+  canlar.forEach((h, i) => {
+    h.classList.toggle('dolu', i < State.cans);
+  });
 }
 
 // === UI köprüsü (HTML onclick'leri buradan çağırır) ===
@@ -755,6 +815,7 @@ const UI = {
     State.skor = 0;
     State.dogru = 0;
     State.yanlis = 0;
+    canlariSifirla();
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
     document.getElementById('alisveris-paneli').style.display = 'none';
@@ -767,6 +828,7 @@ const UI = {
     updateHUD();
   },
   sinavBaslat() {
+    canlariSifirla();
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
     document.getElementById('alisveris-paneli').style.display = 'none';
@@ -776,6 +838,7 @@ const UI = {
     sinavBaslat();
   },
   alisverisBaslat() {
+    canlariSifirla();
     document.getElementById('menu-ekrani').style.display = 'none';
     document.getElementById('oyun-ekrani').style.display = 'block';
     onResize();

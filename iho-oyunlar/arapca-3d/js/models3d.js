@@ -12,6 +12,69 @@ function mat(opts) {
   }, opts));
 }
 
+// Procedural ahşap doku (Canvas2D'den THREE.CanvasTexture)
+let _woodTex = null;
+function woodTexture() {
+  if (_woodTex) return _woodTex;
+  const c = document.createElement('canvas');
+  c.width = 512; c.height = 256;
+  const ctx = c.getContext('2d');
+  // Taban — sıcak kahverengi
+  const grad = ctx.createLinearGradient(0, 0, 0, 256);
+  grad.addColorStop(0, '#a06d3a');
+  grad.addColorStop(0.5, '#955f30');
+  grad.addColorStop(1, '#b07a48');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 256);
+  // Damarlar — koyu çizgiler
+  for (let i = 0; i < 40; i++) {
+    ctx.globalAlpha = 0.08 + Math.random() * 0.15;
+    ctx.strokeStyle = '#5a3416';
+    ctx.lineWidth = 0.5 + Math.random() * 1.8;
+    ctx.beginPath();
+    const y0 = Math.random() * 256;
+    ctx.moveTo(0, y0);
+    // Hafif yumuşak sinüs damarı
+    for (let x = 0; x < 512; x += 16) {
+      const yy = y0 + Math.sin((x + i * 17) * 0.03) * (4 + Math.random() * 6);
+      ctx.lineTo(x, yy);
+    }
+    ctx.stroke();
+  }
+  // Nodüller (göz)
+  ctx.globalAlpha = 0.6;
+  for (let i = 0; i < 4; i++) {
+    const x = Math.random() * 512;
+    const y = Math.random() * 256;
+    const r = 6 + Math.random() * 8;
+    const g2 = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g2.addColorStop(0, '#3e220a');
+    g2.addColorStop(0.5, '#6a4018');
+    g2.addColorStop(1, 'rgba(106,64,24,0)');
+    ctx.fillStyle = g2;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  const tex = new THREE.CanvasTexture(c);
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.wrapT = THREE.RepeatWrapping;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  _woodTex = tex;
+  return tex;
+}
+
+// Ahşap material — texture'lı
+function woodMat(repeatX, repeatY, opts) {
+  const tex = woodTexture().clone();
+  tex.repeat.set(repeatX || 1, repeatY || 1);
+  tex.needsUpdate = true;
+  return new THREE.MeshStandardMaterial(Object.assign({
+    map: tex, roughness: 0.88, metalness: 0.02
+  }, opts || {}));
+}
+
 // Gerçekçi meyve kabuğu — parlak (PhysicalMaterial yerine
 // MeshStandardMaterial + envmap-benzeri reflektans için düşük roughness)
 function fruitMat(opts) {
@@ -865,10 +928,10 @@ M.bulut = function () {
 // Manav tezgahı — ahşap tezgah + çizgili eğimli kumaş tente + tabela
 M.tezgah = function () {
   const g = new THREE.Group();
-  // Daha kaliteli tahta (BoxGeometry segmentleri + farklı tonlar)
-  const woodTopMat = mat({ color: 0xa67340, roughness: 0.85, metalness: 0.02 });
-  const woodSideMat = mat({ color: 0x8a5a2c, roughness: 0.9, metalness: 0.02 });
-  const woodDarkMat = mat({ color: 0x6b3f1f, roughness: 0.95, metalness: 0.02 });
+  // Gerçek ahşap dokulu materialler
+  const woodTopMat = woodMat(2, 1, { color: 0xc8956a });
+  const woodSideMat = woodMat(3, 1, { color: 0xa67340 });
+  const woodDarkMat = woodMat(1.5, 1, { color: 0x8a5a2c });
 
   // Tezgah yüzeyi (üst tabla — birden çok kalas)
   for (let i = 0; i < 6; i++) {
@@ -920,24 +983,34 @@ M.tezgah = function () {
 // Meyve sandığı (içine meyveler oturur)
 M.sandik = function (color) {
   const g = new THREE.Group();
-  const c = color || 0x8a5a2b;
-  const woodMat = mat({ color: c, roughness: 0.9 });
+  const c = color || 0xa67340;
+  const sideMat = woodMat(1, 0.4, { color: c });
+  const baseMat = woodMat(1, 0.5, { color: 0x8a5a2c });
   // 4 yan + taban (kalın tahtalı görünüm)
-  const front = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.05), woodMat);
+  const front = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.06), sideMat);
   front.position.set(0, 0.225, 0.7);
   g.add(front);
-  const back = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.05), woodMat);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.45, 0.06), sideMat);
   back.position.set(0, 0.225, -0.7);
   g.add(back);
-  const left = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 1.4), woodMat);
+  const left = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 1.4), sideMat);
   left.position.set(-0.65, 0.225, 0);
   g.add(left);
-  const right = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.45, 1.4), woodMat);
+  const right = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 1.4), sideMat);
   right.position.set(0.65, 0.225, 0);
   g.add(right);
-  const base = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.03, 1.4), woodMat);
-  base.position.set(0, 0.015, 0);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.05, 1.4), baseMat);
+  base.position.set(0, 0.025, 0);
   g.add(base);
+  // Köşe takviyeleri (koyu)
+  const cornerMat = mat({ color: 0x4a2a10, roughness: 0.9 });
+  for (const x of [-0.62, 0.62]) {
+    for (const z of [-0.67, 0.67]) {
+      const corner = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.45, 0.07), cornerMat);
+      corner.position.set(x, 0.225, z);
+      g.add(corner);
+    }
+  }
   g.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
   return g;
 };

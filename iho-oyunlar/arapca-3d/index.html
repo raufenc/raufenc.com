@@ -133,6 +133,58 @@
     }
     .hud-rozeti.dogru { background: rgba(20, 140, 60, 0.88); }
     .hud-rozeti.yanlis { background: rgba(180, 40, 40, 0.85); }
+    .hud-rozeti.cans-rozeti {
+      gap: 3px; padding: 8px 12px;
+    }
+    .can {
+      font-size: 18px; line-height: 1;
+      color: rgba(255,255,255,0.18);
+      transition: color 0.3s, transform 0.3s;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.35));
+    }
+    .can.dolu {
+      color: #ff4e6a;
+      text-shadow: 0 0 8px rgba(255, 78, 106, 0.6);
+    }
+    .can.kaybedildi {
+      animation: canKayip 0.5s ease-out;
+    }
+    @keyframes canKayip {
+      0% { transform: scale(1.4); color: #ff8e8e; }
+      50% { transform: scale(0.7); }
+      100% { transform: scale(1); color: rgba(255,255,255,0.18); }
+    }
+
+    .sonuc-istatistik {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 18px 0 22px;
+    }
+    .sonuc-kutu {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 10px 4px;
+      text-align: center;
+    }
+    .sonuc-kutu-ikon {
+      font-size: 22px; line-height: 1; margin-bottom: 4px;
+      font-weight: 900;
+    }
+    .sonuc-kutu-deger {
+      font-size: 22px; font-weight: 800; line-height: 1;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      direction: ltr; unicode-bidi: isolate;
+    }
+    .sonuc-kutu-etiket {
+      margin-top: 6px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      font-family: 'Arakom','Amiri',serif;
+      direction: rtl;
+    }
 
     .ipucu-karti {
       position: fixed; bottom: 18px; left: 50%;
@@ -279,10 +331,10 @@
     }
     .alisveris-satir {
       display: grid;
-      grid-template-columns: 36px 1fr auto;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 10px;
-      padding: 8px 10px;
+      gap: 12px;
+      padding: 10px 14px;
       border-radius: 12px;
       margin-bottom: 4px;
       background: rgba(0,0,0,0.04);
@@ -381,31 +433,26 @@
 
     <div class="menu-kartlar">
       <div class="sahne-kart" onclick="UI.baslat('manav')">
-        <span class="sahne-emoji">🍎</span>
         <div class="sahne-ad-ar">البَقَّال</div>
         <div class="sahne-aciklama-ar">فَوَاكِه وَخَضْرَاوَات</div>
       </div>
 
       <div class="sahne-kart" style="border-color:rgba(255,107,155,0.5)" onclick="UI.alisverisBaslat()">
-        <span class="sahne-emoji">🛒</span>
         <div class="sahne-ad-ar">التَّسَوُّق</div>
         <div class="sahne-aciklama-ar">أَكْمِلِ القَائِمَة</div>
       </div>
 
       <div class="sahne-kart" onclick="UI.baslat('araclar')">
-        <span class="sahne-emoji">🚗</span>
         <div class="sahne-ad-ar">المَرْكَبَات</div>
         <div class="sahne-aciklama-ar">سَيَّارَة، طَائِرَة، سَفِينَة</div>
       </div>
 
       <div class="sahne-kart" onclick="UI.baslat('hayvanlar')">
-        <span class="sahne-emoji">🦁</span>
         <div class="sahne-ad-ar">الحَيَوَانَات</div>
         <div class="sahne-aciklama-ar">قِطَّة، كَلْب، أَسَد</div>
       </div>
 
       <div class="sahne-kart sinav-kart" onclick="UI.sinavBaslat()">
-        <span class="sahne-emoji">🏆</span>
         <div class="sahne-ad-ar">الاِخْتِبَار</div>
         <div class="sahne-aciklama-ar">١٠ أَسْئِلَة</div>
       </div>
@@ -422,9 +469,16 @@
 
     <div class="hud-ust">
       <div class="hud-sol">
-        <div class="hud-rozeti">🏆 <span id="skor">٠</span></div>
+        <div class="hud-rozeti cans-rozeti" id="cans-display">
+          <span class="can dolu">♥</span>
+          <span class="can dolu">♥</span>
+          <span class="can dolu">♥</span>
+          <span class="can dolu">♥</span>
+          <span class="can dolu">♥</span>
+        </div>
         <div class="hud-rozeti dogru">✓ <span id="dogru">٠</span></div>
         <div class="hud-rozeti yanlis">✗ <span id="yanlis">٠</span></div>
+        <div class="hud-rozeti">★ <span id="skor">٠</span></div>
       </div>
       <div class="hud-sag">
         <div class="hud-rozeti" id="soru-sayac" style="display:none">١ / ١٠</div>
@@ -442,11 +496,11 @@
     <!-- Alışveriş paneli (yalnız alışveriş modunda görünür) -->
     <div id="alisveris-paneli">
       <div class="av-baslik">
-        <span>🛒 قَائِمَةُ التَّسَوُّق</span>
+        <span>قَائِمَةُ التَّسَوُّق</span>
       </div>
       <ul id="alisveris-liste"></ul>
       <div class="av-altbar">
-        <span>🛍️ <strong id="av-sayac">٠ / ٠</strong></span>
+        <span class="av-sayac-bar"><strong id="av-sayac">٠ / ٠</strong></span>
         <span class="av-toplam-buyuk" id="av-toplam">٠ ﷼</span>
       </div>
     </div>
@@ -455,10 +509,31 @@
   <!-- === SONUÇ MODAL === -->
   <div class="modal-arkaplan" id="sonuc-modal" style="display:none">
     <div class="modal-icerik">
-      <div style="font-size:48px">🎉</div>
+      <div id="sonuc-ikon" style="font-size:54px; line-height:1;">🎉</div>
       <div class="yuzde-buyuk"><span id="sonuc-yuzde">٠</span><span class="yuzde-isareti" id="sonuc-yuzde-isaret">٪</span></div>
-      <div class="sonuc-detay"><span id="sonuc-dogru">٠</span> / <span id="sonuc-toplam">١٠</span></div>
       <p id="sonuc-mesaj">رَائِع!</p>
+      <div class="sonuc-istatistik">
+        <div class="sonuc-kutu">
+          <div class="sonuc-kutu-ikon" style="color:#4cd66d">✓</div>
+          <div class="sonuc-kutu-deger" id="sonuc-dogru">٠</div>
+          <div class="sonuc-kutu-etiket">صَحِيح</div>
+        </div>
+        <div class="sonuc-kutu">
+          <div class="sonuc-kutu-ikon" style="color:#ff7b7b">✗</div>
+          <div class="sonuc-kutu-deger" id="sonuc-yanlis">٠</div>
+          <div class="sonuc-kutu-etiket">خَطَأ</div>
+        </div>
+        <div class="sonuc-kutu">
+          <div class="sonuc-kutu-ikon" style="color:#ff4e6a">♥</div>
+          <div class="sonuc-kutu-deger" id="sonuc-can">٥</div>
+          <div class="sonuc-kutu-etiket">قُلُوب</div>
+        </div>
+        <div class="sonuc-kutu">
+          <div class="sonuc-kutu-ikon" style="color:#ffd76b">★</div>
+          <div class="sonuc-kutu-deger" id="sonuc-skor">٠</div>
+          <div class="sonuc-kutu-etiket">النَّتِيجَة</div>
+        </div>
+      </div>
       <div class="modal-butonlar">
         <button class="modal-buton" id="sonuc-basarili-buton" onclick="UI.kapatSonuc(); UI.sinavBaslat()">مَرَّةً أُخْرَى</button>
         <button class="modal-buton ikincil" onclick="UI.kapatSonuc(); UI.menuyeDon()">عَوْدَة</button>
