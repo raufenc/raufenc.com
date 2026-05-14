@@ -52,10 +52,13 @@ function init() {
   State.renderer.shadowMap.enabled = true;
   State.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   State.renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // Gerçekçi tonlama (ACES Filmic) — yumuşak doygun renkler
+  State.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  State.renderer.toneMappingExposure = 1.05;
 
   State.scene = new THREE.Scene();
-  State.scene.background = new THREE.Color(0xbfe4ff);
-  State.scene.fog = new THREE.Fog(0xbfe4ff, 30, 90);
+  State.scene.background = new THREE.Color(0xa8d8f0);
+  State.scene.fog = new THREE.Fog(0xc8e4f5, 35, 95);
 
   State.camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
   State.camera.position.set(0, 6, 14);
@@ -71,26 +74,32 @@ function init() {
   State.controls.enableDamping = true;
   State.controls.dampingFactor = 0.08;
 
-  // Işıklandırma
-  const hemi = new THREE.HemisphereLight(0xfff5d6, 0x4a7a3a, 0.55);
+  // Işıklandırma — gerçekçi gün ışığı
+  const hemi = new THREE.HemisphereLight(0xfff5dc, 0x6a8a4a, 0.65);
   State.scene.add(hemi);
-  const sun = new THREE.DirectionalLight(0xffffff, 1.6);
-  sun.position.set(8, 14, 6);
+  const sun = new THREE.DirectionalLight(0xfff0d8, 2.2);
+  sun.position.set(8, 16, 7);
   sun.castShadow = true;
   sun.shadow.mapSize.width = 2048;
   sun.shadow.mapSize.height = 2048;
   sun.shadow.camera.near = 1;
-  sun.shadow.camera.far = 40;
-  sun.shadow.camera.left = -18;
-  sun.shadow.camera.right = 18;
-  sun.shadow.camera.top = 18;
-  sun.shadow.camera.bottom = -18;
+  sun.shadow.camera.far = 50;
+  sun.shadow.camera.left = -20;
+  sun.shadow.camera.right = 20;
+  sun.shadow.camera.top = 20;
+  sun.shadow.camera.bottom = -20;
+  sun.shadow.radius = 4; // yumuşak gölge kenarı
+  sun.shadow.normalBias = 0.02;
   sun.shadow.bias = -0.0008;
   State.scene.add(sun);
-  // Hafif önden dolgu ışığı
-  const fill = new THREE.DirectionalLight(0xdce8ff, 0.25);
-  fill.position.set(-6, 6, -4);
+  // Hafif önden dolgu ışığı (mavimsi gökyüzü yansıması)
+  const fill = new THREE.DirectionalLight(0xc8e0ff, 0.4);
+  fill.position.set(-7, 5, -3);
   State.scene.add(fill);
+  // Yumuşak arkadan ışık (rim light)
+  const rim = new THREE.DirectionalLight(0xffffff, 0.25);
+  rim.position.set(0, 4, -10);
+  State.scene.add(rim);
 
   // Hedef vurgu halkası (sadece ipucuda görünür)
   const ringGeom = new THREE.RingGeometry(0.9, 1.15, 32);

@@ -8,6 +8,20 @@
   <link rel="canonical" href="https://raufenc.com/iho-oyunlar/arapca-3d/" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <style>
+    @font-face {
+      font-family: 'Arakom';
+      src: url('fonts/Arakom-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Arakom';
+      src: url('fonts/Arakom-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body {
       margin: 0; padding: 0; height: 100%;
@@ -34,7 +48,7 @@
       font-size: clamp(40px, 7vw, 72px);
       font-weight: 900;
       line-height: 1.1;
-      font-family: 'Amiri','Noto Naskh Arabic','Traditional Arabic', serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       direction: rtl;
       background: linear-gradient(135deg, #ffd76b, #ff9b3a, #ff6b9b);
       -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -42,7 +56,7 @@
     .arapca-baslik {
       margin: 14px 0;
       font-size: clamp(28px, 5vw, 44px);
-      font-family: 'Amiri', 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       direction: rtl;
       color: #ffd76b;
       text-shadow: 0 2px 8px rgba(0,0,0,0.4);
@@ -74,8 +88,8 @@
       box-shadow: 0 14px 36px rgba(0,0,0,0.3);
     }
     .sahne-emoji { font-size: 60px; display: block; margin-bottom: 10px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4)); }
-    .sahne-ad-ar { font-size: 30px; font-family: 'Amiri','Noto Naskh Arabic',serif; direction: rtl; color: #ffd76b; margin: 8px 0 4px; line-height: 1.2; font-weight: 700; }
-    .sahne-aciklama-ar { font-family: 'Amiri','Noto Naskh Arabic',serif; direction: rtl; font-size: 16px; opacity: 0.75; margin-top: 4px; }
+    .sahne-ad-ar { font-size: 30px; font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif; direction: rtl; color: #ffd76b; margin: 8px 0 4px; line-height: 1.2; font-weight: 700; }
+    .sahne-aciklama-ar { font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif; direction: rtl; font-size: 16px; opacity: 0.75; margin-top: 4px; }
     .sinav-kart {
       grid-column: 1 / -1; max-width: 480px; margin: 0 auto;
       background: linear-gradient(135deg, rgba(255, 107, 155, 0.22), rgba(255, 215, 107, 0.18));
@@ -134,7 +148,7 @@
       text-align: center;
     }
     #ipucu-arapca {
-      font-family: 'Amiri','Noto Naskh Arabic','Traditional Arabic', serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       font-size: clamp(36px, 6vw, 56px);
       font-weight: 900; line-height: 1; direction: rtl;
       color: #1a2840;
@@ -252,7 +266,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      font-family: 'Amiri','Noto Naskh Arabic',serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       direction: rtl;
       font-size: 22px;
     }
@@ -289,7 +303,7 @@
       text-align: center;
     }
     .av-ar {
-      font-family: 'Amiri','Noto Naskh Arabic',serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       direction: rtl;
       font-size: 22px;
       font-weight: 700;
@@ -300,7 +314,7 @@
       opacity: 0.7;
       margin-top: 2px;
       direction: rtl;
-      font-family: 'Amiri','Noto Naskh Arabic',serif;
+      font-family: 'Arakom', 'Amiri', 'Noto Naskh Arabic', serif;
       font-weight: 700;
     }
     .av-mik {
