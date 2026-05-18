@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İHO 7. Sınıf 4. Ünite Oyunlar — مَدِينَتِي وَبَلَدِي</title>
+<meta name="description" content="İmam Hatip Ortaokulu 7. sınıf Arapça dersi 4. ünite (مَدِينَتِي وَبَلَدِي — Şehrim ve Ülkem) için 22 interaktif oyun. Şehir, yön, saat, karşılaştırma kalıpları.">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+
+:root{
+  --iho-body-bg:linear-gradient(135deg,#1a0f06 0%,#2a1a08 40%,#1a0f06 100%);
+  --iho-text:#fff;
+  --iho-badge-bg:rgba(255,255,255,0.08);
+  --iho-badge-border:rgba(255,255,255,0.15);
+  --iho-badge-text:rgba(255,255,255,0.6);
+  --iho-subtitle:rgba(255,255,255,0.5);
+  --iho-count:rgba(255,255,255,0.3);
+  --iho-section-text:rgba(255,255,255,0.4);
+  --iho-section-line:rgba(255,255,255,0.08);
+  --iho-card-bg:rgba(255,255,255,0.05);
+  --iho-card-border:rgba(255,255,255,0.08);
+  --iho-card-hover-bg:rgba(255,255,255,0.1);
+  --iho-card-tr:rgba(255,255,255,0.5);
+  --iho-footer:rgba(255,255,255,0.2);
+  --iho-unit-chip-bg:rgba(255,255,255,0.06);
+  --iho-unit-chip-border:rgba(255,255,255,0.12);
+  --iho-unit-chip-text:rgba(255,255,255,0.55);
+  --iho-unit-chip-active-bg:rgba(255,255,255,0.18);
+  --iho-unit-chip-active-text:#fff;
+}
+html.light{
+  --iho-body-bg:linear-gradient(135deg,#fdf6ec 0%,#f7ecd9 40%,#fdf6ec 100%);
+  --iho-text:var(--text);
+  --iho-badge-bg:rgba(0,0,0,0.05);
+  --iho-badge-border:rgba(0,0,0,0.1);
+  --iho-badge-text:rgba(0,0,0,0.5);
+  --iho-subtitle:rgba(0,0,0,0.45);
+  --iho-count:rgba(0,0,0,0.3);
+  --iho-section-text:rgba(0,0,0,0.4);
+  --iho-section-line:rgba(0,0,0,0.08);
+  --iho-card-bg:rgba(255,255,255,0.7);
+  --iho-card-border:rgba(0,0,0,0.08);
+  --iho-card-hover-bg:rgba(255,255,255,0.92);
+  --iho-card-tr:rgba(0,0,0,0.5);
+  --iho-footer:rgba(0,0,0,0.2);
+  --iho-unit-chip-bg:rgba(0,0,0,0.05);
+  --iho-unit-chip-border:rgba(0,0,0,0.1);
+  --iho-unit-chip-text:rgba(0,0,0,0.55);
+  --iho-unit-chip-active-bg:rgba(0,0,0,0.85);
+  --iho-unit-chip-active-text:#fff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--iho-body-bg);min-height:100vh;color:var(--iho-text);overflow-x:hidden}
+
+/* ── UNIT SWITCHER STRIP ── */
+.unit-strip{max-width:1300px;margin:18px auto 0;padding:0 24px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.unit-chip{background:var(--iho-unit-chip-bg);border:1px solid var(--iho-unit-chip-border);color:var(--iho-unit-chip-text);padding:8px 18px;border-radius:100px;font-size:13px;letter-spacing:.04em;text-decoration:none;font-weight:600;transition:all .2s;white-space:nowrap}
+.unit-chip:hover{background:var(--iho-card-hover-bg);color:var(--iho-text)}
+.unit-chip.active{background:var(--iho-unit-chip-active-bg);color:var(--iho-unit-chip-active-text);border-color:transparent}
+
+/* ── HEADER ── */
+.hub-header{text-align:center;padding:28px 24px 24px}
+.hub-badge{display:inline-block;background:var(--iho-badge-bg);border:1px solid var(--iho-badge-border);color:var(--iho-badge-text);padding:8px 24px;border-radius:100px;font-size:15px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.hub-title{font-size:clamp(28px,5vw,52px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:10px;background:linear-gradient(90deg,#fb923c,#facc15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Arakom',sans-serif;direction:rtl}
+.hub-subtitle{font-family:'Arakom',sans-serif;color:var(--iho-subtitle);font-size:clamp(16px,2.5vw,22px);margin-bottom:6px;direction:rtl}
+.hub-count{color:var(--iho-count);font-size:15px;margin-top:8px}
+
+/* ── SECTION LABELS ── */
+.section-label{max-width:1300px;margin:32px auto 14px;padding:0 24px;font-size:clamp(13px,1.8vw,16px);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--iho-section-text);display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--iho-section-line)}
+
+/* ── GAME GRID ── */
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;max-width:1300px;margin:0 auto;padding:0 24px 20px}
+
+/* ── GAME CARD ── */
+.game-card{background:var(--iho-card-bg);border:1px solid var(--iho-card-border);border-radius:18px;padding:24px 18px 20px;text-align:center;cursor:pointer;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;transition:opacity .3s;opacity:0.7}
+.game-card:hover{background:var(--iho-card-hover-bg);transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.game-card:hover::before{opacity:1}
+.game-card:active{transform:translateY(-2px)}
+html.light .game-card{box-shadow:var(--shadow-sm)}
+.card-emoji{font-size:54px;line-height:1;margin:6px auto 14px;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.28))}
+html.light .card-emoji{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.18))}
+.card-name{font-family:'Arakom',sans-serif;font-size:clamp(1.1em,2vw,1.35em);font-weight:bold;margin-bottom:6px;direction:rtl;color:var(--iho-text);line-height:1.3}
+.card-tr{font-size:clamp(12px,1.4vw,14px);color:var(--iho-card-tr);margin-bottom:10px;line-height:1.5;min-height:2.4em;display:flex;align-items:center;justify-content:center;text-align:center}
+.card-badge{display:inline-block;font-size:12px;padding:4px 14px;border-radius:100px;font-weight:600;letter-spacing:.04em}
+
+.badge-solo{background:rgba(99,102,241,0.15);color:#a5b4fc;border:1px solid rgba(99,102,241,0.2)}
+.badge-duo{background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.2)}
+html.light .badge-solo{background:rgba(99,102,241,0.12);color:#4f46e5;border-color:rgba(99,102,241,0.25)}
+html.light .badge-duo{background:rgba(239,68,68,0.12);color:#b91c1c;border-color:rgba(239,68,68,0.25)}
+
+/* Color accent per group */
+.group-ka .game-card::before{background:linear-gradient(90deg,#6366f1,#818cf8)}
+.group-ka .game-card{border-color:rgba(99,102,241,0.18)}
+.group-ka .game-card:hover{border-color:rgba(99,102,241,0.4)}
+
+.group-hf .game-card::before{background:linear-gradient(90deg,#10b981,#34d399)}
+.group-hf .game-card{border-color:rgba(16,185,129,0.18)}
+.group-hf .game-card:hover{border-color:rgba(16,185,129,0.4)}
+
+.group-sa .game-card::before{background:linear-gradient(90deg,#ef4444,#f87171)}
+.group-sa .game-card{border-color:rgba(239,68,68,0.18)}
+.group-sa .game-card:hover{border-color:rgba(239,68,68,0.4)}
+
+.group-ar .game-card::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.group-ar .game-card{border-color:rgba(245,158,11,0.18)}
+.group-ar .game-card:hover{border-color:rgba(245,158,11,0.4)}
+
+/* ── FOOTER ── */
+.hub-footer{text-align:center;padding:32px 20px 48px;color:var(--iho-footer);font-size:13px;line-height:1.7}
+.hub-footer .ar{font-family:'Arakom',sans-serif;direction:rtl;font-size:15px}
+
+/* ── LANDSCAPE (1024+) ── */
+@media(min-width:1024px){
+  .games-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+  .card-emoji{font-size:64px}
+  .card-name{font-size:1.4em}
+  .card-tr{font-size:15px}
+  .card-badge{font-size:13px;padding:5px 16px}
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .hub-header{padding:22px 16px 18px}
+  .games-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px 20px}
+  .game-card{padding:18px 12px 16px}
+  .card-emoji{font-size:42px;margin-bottom:8px}
+  .card-name{font-size:1em}
+  .card-tr{font-size:11px;min-height:2em}
+  .unit-chip{padding:7px 14px;font-size:12px}
+}
+@media(max-width:360px){
+  .games-grid{grid-template-columns:1fr}
+}
+</style>
+  <script src="/nav.js"></script>
+  <!-- Vercel Analytics + Speed Insights -->
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<!-- UNIT SWITCHER -->
+<div class="unit-strip" aria-label="Ünite seçici">
+  <a class="unit-chip" href="../index.html">1. Ünite &middot; ماذا فعلت اليوم؟</a>
+  <a class="unit-chip" href="../unit3/index.html">3. Ünite &middot; إلى أين نسافر؟</a>
+  <span class="unit-chip active">4. Ünite &middot; مَدِينَتِي وَبَلَدِي</span>
+</div>
+
+<!-- HEADER -->
+<div class="hub-header">
+  <div class="hub-badge">İHO &middot; Arapça &middot; 7. Sınıf &middot; 4. Ünite</div>
+  <div class="hub-title">مَدِينَتِي وَبَلَدِي</div>
+  <div class="hub-subtitle">ألعاب اللغة العربية &mdash; الوحدة الرابعة &mdash; الصف السابع</div>
+  <div class="hub-count">Şehrim ve Ülkem &middot; 4 kategori &middot; 22 oyun</div>
+</div>
+
+<!-- ══════════ SECTION 1: KELİME AVCISI ══════════ -->
+<div class="section-label">🎯 Kelime Avcısı &middot; Alıştırma Oyunları</div>
+<div class="games-grid group-ka">
+
+  <a class="game-card" href="./game.html#ka_g1_vocab_match">
+    <span class="card-emoji">🎴</span>
+    <div class="card-name">لَعْبَةُ المُفْرَدات</div>
+    <div class="card-tr">Şehir kelimelerini Türkçe karşılığıyla eşleştir</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ka_g2_city_sentence_order">
+    <span class="card-emoji">🧩</span>
+    <div class="card-name">رَتِّبِ الجُمْلَة</div>
+    <div class="card-tr">Şehir cümlesini doğru sıraya diz</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ka_g3_clock">
+    <span class="card-emoji">⏰</span>
+    <div class="card-name">كَمِ السَّاعَة؟</div>
+    <div class="card-tr">Arapça saat ifadelerini öğren ve oku</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ka_g4_correct_phrase">
+    <span class="card-emoji">✏️</span>
+    <div class="card-name">اِخْتَرِ التَّرْكِيب</div>
+    <div class="card-tr">Boşluğa uygun doğru kalıbı seç</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ka_g5_dialogue_fill">
+    <span class="card-emoji">💬</span>
+    <div class="card-name">أَكْمِلِ الفَرَاغ</div>
+    <div class="card-tr">Cümlelerdeki eksik kelimeyi tamamla</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ka_g6_memory">
+    <span class="card-emoji">🧠</span>
+    <div class="card-name">لُعْبَةُ الذَّاكِرَة</div>
+    <div class="card-tr">Kartları çevir, kelime çiftlerini bul</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+</div>
+
+<!-- ══════════ SECTION 2: HARF FIRTINASI ══════════ -->
+<div class="section-label">🌪️ Harf Fırtınası &middot; Kelime &amp; Cümle Oyunları</div>
+<div class="games-grid group-hf">
+
+  <a class="game-card" href="./game.html#hf_g1_word_scramble">
+    <span class="card-emoji">🌪️</span>
+    <div class="card-name">كَلِمَاتٌ مُتَنَاثِرَة</div>
+    <div class="card-tr">Karışık harfleri sırala, kelimeyi bul</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#hf_g2_sorting">
+    <span class="card-emoji">📦</span>
+    <div class="card-name">صَنِّفِ الكَلِمَات</div>
+    <div class="card-tr">Kelimeleri şehir, yön, yiyecek vb. kategorilere ayır</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#hf_g3_build_sentence">
+    <span class="card-emoji">🏗️</span>
+    <div class="card-name">اِبْنِ الجُمْلَة</div>
+    <div class="card-tr">Kelimelerden anlamlı cümle oluştur</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#hf_g4_odd_one_out">
+    <span class="card-emoji">🎯</span>
+    <div class="card-name">اِقْصِفِ الخَطَأ</div>
+    <div class="card-tr">Gruba uymayan kelimeyi tespit et</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#hf_g5_speed_quiz">
+    <span class="card-emoji">⚡</span>
+    <div class="card-name">الوَقْتُ يَضْغَط</div>
+    <div class="card-tr">Süre dolmadan hızlıca cevap ver</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+</div>
+
+<!-- ══════════ SECTION 3: SINIF ARENASI ══════════ -->
+<div class="section-label">⚔️ Sınıf Arenası &middot; 2 Kişilik Yarışma</div>
+<div class="games-grid group-sa">
+
+  <a class="game-card" href="./game.html#sa_g0_answer_race">
+    <span class="card-emoji">🏁</span>
+    <div class="card-name">سِبَاقُ الإِجَابَة</div>
+    <div class="card-tr">Çoktan seçmeli hız yarışması</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </a>
+
+  <a class="game-card" href="./game.html#sa_g1_true_false">
+    <span class="card-emoji">✅</span>
+    <div class="card-name">صَحّ أَمْ خَطَأ</div>
+    <div class="card-tr">Doğru mu yanlış mı? İlk basan kazanır</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </a>
+
+  <a class="game-card" href="./game.html#sa_g4_missing_word">
+    <span class="card-emoji">🔍</span>
+    <div class="card-name">الكَلِمَةُ النَّاقِصَة</div>
+    <div class="card-tr">Cümledeki eksik kelimeyi bul</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </a>
+
+  <a class="game-card" href="./game.html#sa_g5_who_am_i">
+    <span class="card-emoji">🕵️</span>
+    <div class="card-name">مَنْ أَنَا؟</div>
+    <div class="card-tr">İpuçlarından şehri/kelimeyi tahmin et</div>
+    <span class="card-badge badge-duo">2 Kişi</span>
+  </a>
+
+</div>
+
+<!-- ══════════ SECTION 4: ARCADE & EKSTRA ══════════ -->
+<div class="section-label">🕹️ Arcade &amp; Ekstra Oyunlar</div>
+<div class="games-grid group-ar">
+
+  <a class="game-card" href="./game.html#ar_g1_space_defense_adapter">
+    <span class="card-emoji">🚀</span>
+    <div class="card-name">الدِّفَاعُ الفَضَائِي</div>
+    <div class="card-tr">Arapça soruyu oku, doğru cevabı seç</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#ar_g3_letter_rain_adapter">
+    <span class="card-emoji">🌧️</span>
+    <div class="card-name">مَطَرُ الحُرُوف</div>
+    <div class="card-tr">Karışık harflerden kelimeyi inşa et</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#map_g1_city_locations">
+    <span class="card-emoji">🗺️</span>
+    <div class="card-name">خَرِيطَةُ المُدُن</div>
+    <div class="card-tr">Türkiye haritasında şehirleri yönleriyle eşleştir</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#u4_dialogue_order">
+    <span class="card-emoji">🎭</span>
+    <div class="card-name">رَتِّبِ الحِوَار</div>
+    <div class="card-tr">Diyalog cümlelerini doğru sıraya diz</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#u4_demonstratives">
+    <span class="card-emoji">👉</span>
+    <div class="card-name">هَذَا / هَذِهِ</div>
+    <div class="card-tr">İşaret zamirini doğru seç</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#u4_city_famous_match">
+    <span class="card-emoji">🏛️</span>
+    <div class="card-name">المَدِينَة وَمَا تَشْتَهِر</div>
+    <div class="card-tr">Şehri meşhur olduğu şeyle eşleştir</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+  <a class="game-card" href="./game.html#u4_word_search">
+    <span class="card-emoji">🔎</span>
+    <div class="card-name">كَلِمَاتٌ مُتَقَاطِعَة</div>
+    <div class="card-tr">Harf bulmacasında ünite kelimelerini bul</div>
+    <span class="card-badge badge-solo">Bireysel</span>
+  </a>
+
+</div>
+
+<!-- FOOTER -->
+<div class="hub-footer">
+  İHO 7. Sınıf &middot; 4. Ünite<br>
+  <span class="ar">مَدِينَتِي وَبَلَدِي</span> &middot; Şehir, yön, saat, karşılaştırma, işaret zamirleri
+</div>
+
+</body>
+</html>

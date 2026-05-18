@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İHO 7. Sınıf 4. Ünite — Oyun</title>
+<meta name="description" content="İmam Hatip Ortaokulu 7. sınıf Arapça 4. ünite — interaktif oyun motoru.">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+
+:root{
+  --u4-page-bg:linear-gradient(135deg,#1a0f06 0%,#2a1a08 40%,#1a0f06 100%);
+  --u4-page-text:#fff;
+  --u4-bar-bg:linear-gradient(180deg,#1a1208,#0f0905);
+  --u4-bar-border:#3a2611;
+  --u4-back-bg:rgba(255,255,255,0.08);
+  --u4-back-border:rgba(255,255,255,0.15);
+  --u4-name:rgba(255,255,255,0.55);
+}
+html.light{
+  --u4-page-bg:linear-gradient(135deg,#fdf6ec 0%,#f7ecd9 40%,#fdf6ec 100%);
+  --u4-page-text:var(--text);
+  --u4-bar-bg:linear-gradient(180deg,#f8f1e2,#efe3cd);
+  --u4-bar-border:var(--border);
+  --u4-back-bg:rgba(0,0,0,0.05);
+  --u4-back-border:rgba(0,0,0,0.1);
+  --u4-name:rgba(0,0,0,0.55);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--u4-page-bg);color:var(--u4-page-text);min-height:100vh;display:flex;flex-direction:column}
+
+.bar{height:54px;background:var(--u4-bar-bg);display:flex;align-items:center;padding:0 20px;gap:14px;flex-shrink:0;border-bottom:1px solid var(--u4-bar-border)}
+.bar-back{background:var(--u4-back-bg);border:1px solid var(--u4-back-border);color:var(--u4-page-text);padding:9px 20px;border-radius:10px;cursor:pointer;font-size:15px;font-family:inherit;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.bar-back:hover{background:rgba(255,255,255,0.15)}
+html.light .bar-back:hover{background:rgba(0,0,0,0.08)}
+.bar-name{font-family:'Arakom',sans-serif;font-size:16px;color:var(--u4-name);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;direction:rtl;text-align:right}
+
+.stage{flex:1;overflow-y:auto;padding:20px 12px 40px}
+#game{margin:0 auto;max-width:980px}
+.loader{padding:48px 24px;text-align:center;color:rgba(255,255,255,0.6)}
+html.light .loader{color:rgba(0,0,0,0.6)}
+
+@media(max-width:600px){
+  .bar{padding:0 12px;gap:8px}
+  .bar-back{padding:8px 14px;font-size:14px}
+  .bar-name{font-size:14px}
+  .stage{padding:14px 6px 32px}
+}
+</style>
+<link rel="stylesheet" href="src/unit4-game-engine.css">
+<script src="/nav.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<div class="bar">
+  <a class="bar-back" href="./index.html">← Tüm Oyunlara Dön</a>
+  <span class="bar-name" id="barName" dir="rtl"></span>
+</div>
+
+<div class="stage">
+  <div id="game"><div class="loader">Yükleniyor…</div></div>
+</div>
+
+<script src="src/unit4-game-engine.js"></script>
+<script>
+  (function(){
+    function parseId(){
+      const h = (location.hash || '').replace('#','').trim();
+      if(h) return h;
+      const q = new URLSearchParams(location.search).get('id');
+      return q || 'ka_g1_vocab_match';
+    }
+    const target = document.getElementById('game');
+    const nameEl = document.getElementById('barName');
+
+    let dbCache = null;
+
+    function load(id){
+      const g = (dbCache.games || []).find(x => x.id === id) || dbCache.games[0];
+      if(g){
+        nameEl.textContent = g.title_ar || g.title_tr || '';
+        const trPart = (g.title_tr || '').split(' - ').pop() || g.title_tr || 'Oyun';
+        document.title = trPart + ' — İHO 7. Sınıf 4. Ünite';
+      }
+      IHOGame.mount('#game', dbCache, id);
+    }
+
+    IHOGame.load('data/unit4.database.json')
+      .then(db => { dbCache = db; load(parseId()); })
+      .catch(err => {
+        target.innerHTML = '<div class="loader"><p>Veri yüklenemedi. Sayfayı yenileyin.</p><pre style="opacity:.6;font-size:12px;margin-top:8px">'+(err && err.message ? err.message : err)+'</pre></div>';
+      });
+
+    window.addEventListener('hashchange', () => { if(dbCache) load(parseId()); });
+  })();
+</script>
+</body>
+</html>
