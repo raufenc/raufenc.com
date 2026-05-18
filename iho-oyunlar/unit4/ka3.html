@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
+<title>كَمِ السَّاعَة؟ — İHO 7. Sınıf 4. Ünite</title>
+<meta name="description" content="Arapça saat okuma oyunu — analog saatte gösterilen zamanı doğru Arapça ifadeyle eşleştir. 7. sınıf 4. ünite (مَدِينَتِي وَبَلَدِي).">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --c-bg-1:#1a0e04;
+  --c-bg-2:#3b2a14;
+  --c-bg-3:#5c3a1a;
+  --c-sun:#fb923c;
+  --c-gold:#facc15;
+  --c-gold-d:#a16207;
+  --c-cream:#fef3c7;
+  --c-face:#fffbeb;
+  --c-face-edge:#fde68a;
+  --c-hand-h:#1c1917;
+  --c-hand-m:#b91c1c;
+  --c-good:#16a34a;
+  --c-bad:#dc2626;
+  --c-card:rgba(255,251,235,0.07);
+  --c-card-b:rgba(252,211,77,0.18);
+  --c-card-h:rgba(255,251,235,0.13);
+  --c-card-active-b:#facc15;
+  --c-text:#fff8ec;
+  --c-muted:rgba(255,248,236,0.6);
+}
+html.light{
+  --c-bg-1:#fef6e4;
+  --c-bg-2:#fde4b0;
+  --c-bg-3:#fbcf83;
+  --c-cream:#78350f;
+  --c-face:#fffbeb;
+  --c-text:#3a2a10;
+  --c-muted:rgba(58,42,16,0.6);
+  --c-card:rgba(255,255,255,0.75);
+  --c-card-b:rgba(217,119,6,0.25);
+  --c-card-h:rgba(255,255,255,0.95);
+}
+
+html,body{height:100%;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Inter','Segoe UI',Tahoma,sans-serif;
+  background:radial-gradient(ellipse at top,#7c2d12 0%,#1a0e04 60%);
+  color:var(--c-text);
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+html.light body{background:radial-gradient(ellipse at top,#fed7aa 0%,#fef6e4 60%)}
+
+/* Decorative sun + minaret silhouette */
+body::before{
+  content:'';position:fixed;left:50%;top:-8vw;width:60vw;height:60vw;
+  background:radial-gradient(circle,rgba(251,146,60,0.25) 0%,rgba(251,146,60,0) 60%);
+  transform:translateX(-50%);pointer-events:none;z-index:0;
+}
+.skyline{
+  position:fixed;left:0;right:0;bottom:0;height:90px;pointer-events:none;z-index:0;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 90' preserveAspectRatio='xMidYMax slice'><g fill='%23000' opacity='0.65'><rect x='0' y='60' width='80' height='30'/><rect x='90' y='40' width='60' height='50'/><rect x='160' y='30' width='10' height='60'/><circle cx='165' cy='28' r='6'/><rect x='180' y='55' width='90' height='35'/><rect x='280' y='35' width='70' height='55'/><polygon points='285,35 350,35 317,15'/><rect x='360' y='50' width='100' height='40'/><rect x='470' y='25' width='12' height='65'/><circle cx='476' cy='22' r='7'/><rect x='495' y='45' width='80' height='45'/><rect x='585' y='55' width='90' height='35'/><rect x='680' y='35' width='60' height='55'/><polygon points='685,35 740,35 712,18'/><rect x='755' y='50' width='110' height='40'/><rect x='875' y='30' width='10' height='60'/><circle cx='880' cy='28' r='6'/><rect x='900' y='45' width='70' height='45'/><rect x='980' y='55' width='100' height='35'/><rect x='1090' y='35' width='60' height='55'/><polygon points='1095,35 1150,35 1122,18'/><rect x='1160' y='50' width='40' height='40'/></g></svg>") center bottom / cover no-repeat;
+  opacity:.55;
+}
+html.light .skyline{filter:invert(0.85)}
+
+.top-bar{
+  position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;gap:12px;
+  padding:0 18px 0 170px;background:linear-gradient(180deg,rgba(15,9,3,0.85),rgba(15,9,3,0.55));
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(252,211,77,0.18);
+}
+@media(max-width:600px){.top-bar{padding-left:130px;padding-right:12px}}
+@media(max-width:380px){.top-bar{padding-left:120px;gap:8px}}
+html.light .top-bar{background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.5));border-bottom-color:rgba(217,119,6,0.18)}
+.back-btn{
+  background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);
+  padding:8px 18px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px;
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.2s;
+}
+.back-btn:hover{background:rgba(252,211,77,0.22);transform:translateX(2px)}
+.title-ar{font-family:'Arakom',sans-serif;font-size:18px;color:var(--c-gold);flex:1;text-align:center;direction:rtl;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:380px){.back-btn-text{display:none}.title-ar{font-size:16px}.progress-chip{padding:5px 10px;font-size:12px}}
+.progress-chip{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em}
+
+.stage{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;padding:28px 16px 140px;min-height:calc(100vh - 54px)}
+
+.hud{
+  display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;
+  margin-bottom:18px;direction:ltr;
+}
+.hud-stat{
+  background:rgba(0,0,0,0.25);border:1px solid rgba(252,211,77,0.2);
+  padding:8px 18px;border-radius:14px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--c-muted)
+}
+html.light .hud-stat{background:rgba(255,255,255,0.7);color:#5b3a14;border-color:rgba(217,119,6,0.2)}
+.hud-stat b{display:block;font-size:22px;color:var(--c-gold);font-family:'Inter',sans-serif;letter-spacing:0;margin-top:2px;text-align:center}
+html.light .hud-stat b{color:#a16207}
+
+/* CLOCK */
+.clock-wrap{position:relative;width:min(78vw,320px);aspect-ratio:1/1;margin:6px auto 26px;filter:drop-shadow(0 24px 48px rgba(0,0,0,0.5))}
+.clock-face{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff 0%,var(--c-face) 55%,#fde68a 100%);
+  border:14px solid transparent;
+  background-clip:padding-box;
+  box-shadow:inset 0 0 0 2px rgba(180,83,9,0.4),0 0 0 6px #78350f,0 0 0 10px #a16207,0 0 0 12px #facc15;
+}
+html.light .clock-face{box-shadow:inset 0 0 0 2px rgba(180,83,9,0.5),0 0 0 6px #92400e,0 0 0 10px #d97706,0 0 0 12px #fbbf24}
+
+.clock-num{position:absolute;left:50%;top:50%;width:0;height:0;font-family:'Arakom',sans-serif;color:#5b2a0a;font-weight:bold;font-size:clamp(18px,4.2vw,28px)}
+.clock-num span{display:inline-block;transform:translate(-50%,-50%);position:absolute;left:0;top:0}
+.tick{position:absolute;left:50%;top:50%;width:2px;height:46%;transform-origin:bottom center;margin-left:-1px;margin-top:-46%;pointer-events:none}
+.tick::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:#92400e;border-radius:2px;opacity:.6}
+.tick.major::before{width:4px;height:14px;background:#78350f;margin-left:-1px;opacity:1}
+
+.hand{
+  position:absolute;left:50%;top:50%;transform-origin:50% 90%;
+  border-radius:6px;transition:transform .9s cubic-bezier(.34,1.42,.42,1);
+  z-index:5;
+}
+.hand.hour{width:8px;height:30%;background:linear-gradient(180deg,#1c1917,#3f2a14);margin-left:-4px;margin-top:-27%;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+.hand.minute{width:5px;height:40%;background:linear-gradient(180deg,#b91c1c,#7f1d1d);margin-left:-2.5px;margin-top:-36%;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.hand-pin{position:absolute;left:50%;top:50%;width:22px;height:22px;background:radial-gradient(circle,#fbbf24,#78350f);margin:-11px 0 0 -11px;border-radius:50%;z-index:6;box-shadow:0 2px 6px rgba(0,0,0,.55),inset 0 1px 2px rgba(255,255,255,.4)}
+
+/* digital readout */
+.time-readout{
+  text-align:center;margin:0 auto 18px;
+  font-family:'Arakom',sans-serif;font-size:clamp(28px,5vw,42px);
+  color:var(--c-gold);letter-spacing:.04em;
+  direction:rtl;
+  text-shadow:0 2px 10px rgba(0,0,0,0.4);
+}
+html.light .time-readout{color:#a16207;text-shadow:none}
+.time-readout small{display:block;color:var(--c-muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:4px;font-family:'Inter',sans-serif;direction:ltr}
+
+/* OPTIONS */
+.q-prompt{text-align:center;color:var(--c-muted);font-size:14px;margin-bottom:14px;letter-spacing:.04em;text-transform:uppercase;direction:ltr}
+.options{display:grid;grid-template-columns:1fr;gap:12px;width:min(100%,580px);margin:0 auto;direction:rtl}
+@media(min-width:760px){.options{grid-template-columns:1fr 1fr;gap:14px;width:min(100%,720px)}}
+
+.opt{
+  background:var(--c-card);border:1.5px solid var(--c-card-b);color:var(--c-text);
+  font-family:'Arakom',sans-serif;font-size:clamp(17px,2.6vw,22px);font-weight:bold;
+  padding:18px 20px;border-radius:18px;cursor:pointer;text-align:right;direction:rtl;
+  transition:all .25s cubic-bezier(.2,.8,.3,1);position:relative;overflow:hidden;line-height:1.5;
+}
+.opt::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(252,211,77,0.18),transparent 60%);opacity:0;transition:opacity .3s}
+.opt:hover{transform:translateY(-3px);border-color:var(--c-gold);background:var(--c-card-h)}
+.opt:hover::before{opacity:1}
+.opt:active{transform:translateY(0)}
+.opt.correct{background:rgba(22,163,74,0.22);border-color:var(--c-good);box-shadow:0 0 0 4px rgba(22,163,74,0.22),0 0 30px rgba(22,163,74,0.45);animation:popOk .55s ease}
+.opt.wrong{background:rgba(220,38,38,0.18);border-color:var(--c-bad);animation:shakeX .42s}
+.opt:disabled{cursor:default;opacity:.78}
+@keyframes popOk{0%{transform:scale(.96)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shakeX{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+
+/* End screen */
+.end{
+  background:linear-gradient(135deg,rgba(252,211,77,0.08),rgba(180,83,9,0.05));
+  border:1.5px solid rgba(252,211,77,0.28);
+  border-radius:24px;padding:40px 28px;text-align:center;max-width:520px;margin:30px auto;direction:ltr;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.end h2{font-family:'Arakom',sans-serif;font-size:32px;color:var(--c-gold);margin-bottom:8px;direction:rtl}
+.end .score-big{font-size:64px;font-weight:900;color:var(--c-gold);letter-spacing:-.02em;line-height:1;margin:14px 0}
+.end .score-big small{font-size:24px;color:var(--c-muted);font-weight:400}
+.end p{color:var(--c-muted);margin-bottom:24px}
+.end button{
+  background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;color:#1a0e04;
+  padding:14px 32px;border-radius:999px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;
+  letter-spacing:.04em;box-shadow:0 8px 24px rgba(245,158,11,0.4);transition:transform .2s
+}
+.end button:hover{transform:translateY(-2px)}
+.medal{font-size:80px;margin-bottom:10px;line-height:1;filter:drop-shadow(0 6px 18px rgba(250,204,21,0.5))}
+
+/* Confetti */
+.confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.confetti i{position:absolute;width:8px;height:14px;border-radius:2px;animation:fall 2.2s linear forwards;top:-20px}
+@keyframes fall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+.loading{padding:60px 20px;text-align:center;color:var(--c-muted)}
+
+@media(max-width:380px){.hud-stat{padding:6px 12px;font-size:11px} .hud-stat b{font-size:18px}}
+</style>
+<script src="/nav.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<div class="skyline" aria-hidden="true"></div>
+
+<header class="top-bar">
+  <a class="back-btn" href="./index.html" aria-label="Tüm oyunlara dön"><span>←</span> <span class="back-btn-text">Tüm Oyunlar</span></a>
+  <div class="title-ar" id="titleAr" dir="rtl">كَمِ السَّاعَة؟</div>
+  <span class="progress-chip" id="progressChip">— / —</span>
+</header>
+
+<main class="stage" id="stage">
+  <div class="loading">Yükleniyor…</div>
+</main>
+
+<canvas class="confetti" id="confetti" aria-hidden="true" style="display:none"></canvas>
+
+<script>
+(function(){
+  const DATA_URL = 'data/unit4.database.json';
+  const GAME_ID = 'ka_g3_clock';
+
+  // Arabic-Indic numeral mapping
+  const AR_NUMS = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  const toArDigits = s => String(s).replace(/\d/g, d => AR_NUMS[+d]);
+  const numLabels = ['١','٢','٣','٤','٥','٦','٧','٨','٩','١٠','١١','١٢'];
+
+  // Strip Arabic diacritics for comparison
+  const strip = s => String(s||'').replace(/[ً-ٰٟ]/g,'').replace(/[؟?،,.؛;]/g,'').trim();
+  const shuffle = a => { const r=[...a]; for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];} return r; };
+
+  const stage = document.getElementById('stage');
+  const chip  = document.getElementById('progressChip');
+
+  let items = [];
+  let i = 0;
+  let score = 0;
+  let locked = false;
+
+  function buildClock(){
+    // Build the static face with Arabic numerals + minute ticks
+    const html = `
+      <div class="clock-wrap" id="clockWrap">
+        <div class="clock-face" aria-hidden="true">
+          ${numLabels.map((n,idx)=>{
+            const deg = (idx+1)*30;
+            const r = 42; // % radius for number placement
+            const rad = (deg-90)*Math.PI/180;
+            const x = 50 + r*Math.cos(rad);
+            const y = 50 + r*Math.sin(rad);
+            return `<div class="clock-num" style="left:${x}%;top:${y}%"><span>${n}</span></div>`;
+          }).join('')}
+          ${Array.from({length:60},(_,k)=>{
+            const major = k%5===0;
+            return `<div class="tick${major?' major':''}" style="transform:rotate(${k*6}deg)"></div>`;
+          }).join('')}
+        </div>
+        <div class="hand hour" id="handHour" style="transform:rotate(0deg)"></div>
+        <div class="hand minute" id="handMin" style="transform:rotate(0deg)"></div>
+        <div class="hand-pin" aria-hidden="true"></div>
+      </div>
+    `;
+    return html;
+  }
+
+  function render(){
+    if(i >= items.length){ return renderEnd(); }
+    const it = items[i];
+    chip.textContent = `${i+1} / ${items.length}`;
+
+    stage.innerHTML = `
+      <div class="hud" role="status" aria-live="polite">
+        <div class="hud-stat">Skor<b id="hudScore">${score}</b></div>
+        <div class="hud-stat">Süre<b id="hudTime">${items.length - i}</b></div>
+      </div>
+      ${buildClock()}
+      <div class="time-readout"><small>الوَقْت</small>${toArDigits(it.time)}</div>
+      <div class="q-prompt">Doğru Arapça ifadeyi seç</div>
+      <div class="options" id="opts"></div>
+    `;
+
+    // animate hands to the time
+    const [h,m] = it.time.split(':').map(Number);
+    const hourDeg = (h%12)*30 + m*0.5;
+    const minDeg  = m*6;
+    requestAnimationFrame(()=>{
+      document.getElementById('handHour').style.transform = `rotate(${hourDeg}deg)`;
+      document.getElementById('handMin').style.transform  = `rotate(${minDeg}deg)`;
+    });
+
+    // build options
+    const opts = shuffle(it.options || []);
+    const wrap = document.getElementById('opts');
+    opts.forEach(opt=>{
+      const b = document.createElement('button');
+      b.className = 'opt';
+      b.dir = 'rtl';
+      b.textContent = opt;
+      b.addEventListener('mousemove', e=>{
+        const r = b.getBoundingClientRect();
+        b.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100)+'%');
+        b.style.setProperty('--my', ((e.clientY-r.top)/r.height*100)+'%');
+      });
+      b.addEventListener('click', ()=>choose(b, opt, it));
+      wrap.appendChild(b);
+    });
+  }
+
+  function choose(btn, opt, item){
+    if(locked) return;
+    locked = true;
+    const correct = strip(opt) === strip(item.phrase);
+    const all = stage.querySelectorAll('.opt');
+    all.forEach(b => b.disabled = true);
+    if(correct){
+      btn.classList.add('correct');
+      score++;
+      burstConfetti();
+    } else {
+      btn.classList.add('wrong');
+      // also highlight the right answer
+      all.forEach(b => { if(strip(b.textContent)===strip(item.phrase)) b.classList.add('correct'); });
+    }
+    setTimeout(()=>{ i++; locked=false; render(); }, correct ? 900 : 1500);
+  }
+
+  function renderEnd(){
+    chip.textContent = `${items.length} / ${items.length}`;
+    const pct = Math.round(score / items.length * 100);
+    const medal = pct === 100 ? '🥇' : pct >= 70 ? '🥈' : pct >= 40 ? '🥉' : '⏰';
+    const msg = pct === 100 ? 'Mükemmel! Tüm saatleri doğru okudun.'
+              : pct >=  70 ? 'İyi iş — birkaç tane daha pratik yap.'
+              : pct >=  40 ? 'Fena değil; tekrar denemeye ne dersin?'
+              :              'Saat ifadelerini tekrar gözden geçir, sonra dene.';
+    stage.innerHTML = `
+      <div class="end" role="region" aria-label="Sonuç">
+        <div class="medal" aria-hidden="true">${medal}</div>
+        <h2>أَحْسَنْت!</h2>
+        <div class="score-big">${score}<small> / ${items.length}</small></div>
+        <p>${msg}</p>
+        <button id="again">Tekrar Oyna</button>
+      </div>
+    `;
+    document.getElementById('again').addEventListener('click', ()=>{
+      items = shuffle(items); i=0; score=0; locked=false; render();
+    });
+    if(pct >= 70) burstConfetti(80);
+  }
+
+  // tiny confetti
+  function burstConfetti(count=36){
+    const c = document.getElementById('confetti');
+    c.style.display='block';
+    const colors=['#facc15','#fb923c','#22c55e','#38bdf8','#f472b6','#fff'];
+    const frag = document.createDocumentFragment();
+    for(let k=0;k<count;k++){
+      const i = document.createElement('i');
+      i.style.left = (Math.random()*100)+'%';
+      i.style.background = colors[Math.floor(Math.random()*colors.length)];
+      i.style.animationDelay = (Math.random()*0.4)+'s';
+      i.style.animationDuration = (1.6+Math.random()*1.2)+'s';
+      i.style.transform = `rotate(${Math.random()*360}deg)`;
+      frag.appendChild(i);
+    }
+    c.appendChild(frag);
+    setTimeout(()=>{ c.innerHTML=''; c.style.display='none'; }, 2400);
+  }
+
+  // bootstrap
+  fetch(DATA_URL).then(r=>{ if(!r.ok) throw new Error('JSON '+r.status); return r.json(); })
+    .then(db=>{
+      const g = (db.games||[]).find(x=>x.id===GAME_ID);
+      if(!g){ stage.innerHTML = '<div class="loading">Oyun bulunamadı.</div>'; return; }
+      items = shuffle(g.items || []);
+      render();
+    })
+    .catch(err=>{
+      stage.innerHTML = `<div class="loading"><p>Veri yüklenemedi: ${err.message}</p></div>`;
+    });
+})();
+</script>
+</body>
+</html>
