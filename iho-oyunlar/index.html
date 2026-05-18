@@ -82,7 +82,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--iho
 .game-card:hover::before{opacity:1}
 .game-card:active{transform:translateY(-2px)}
 html.light .game-card{box-shadow:var(--shadow-sm)}
-.card-icon{font-size:2.8em;margin-bottom:12px;display:block;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.3))}
+.card-icon{width:88px;height:88px;margin:0 auto 12px;display:block;object-fit:contain;border-radius:20px;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.28))}
+html.light .card-icon{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.18))}
 .card-name{font-family:'Arakom',sans-serif;font-size:clamp(1.1em,2vw,1.35em);font-weight:bold;margin-bottom:6px;direction:rtl;color:var(--iho-text);line-height:1.3}
 .card-tr{font-size:clamp(12px,1.4vw,14px);color:var(--iho-card-tr);margin-bottom:10px;line-height:1.5;min-height:2.4em;display:flex;align-items:center;justify-content:center}
 .card-badge{display:inline-block;font-size:12px;padding:4px 14px;border-radius:100px;font-weight:600;letter-spacing:.04em}
@@ -109,6 +110,14 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 .group-ar .game-card{border-color:rgba(245,158,11,0.15)}
 .group-ar .game-card:hover{border-color:rgba(245,158,11,0.35)}
 
+/* ── UNIT SWITCHER STRIP ── */
+.unit-strip{max-width:1300px;margin:18px auto 0;padding:0 24px;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.unit-chip{background:var(--iho-badge-bg);border:1px solid var(--iho-badge-border);color:var(--iho-badge-text);padding:8px 18px;border-radius:100px;font-size:13px;letter-spacing:.04em;text-decoration:none;font-weight:600;transition:all .2s;white-space:nowrap}
+.unit-chip:hover{background:var(--iho-card-hover-bg);color:var(--iho-text)}
+.unit-chip.active{background:rgba(255,255,255,0.18);color:#fff;border-color:transparent}
+html.light .unit-chip.active{background:rgba(0,0,0,0.85);color:#fff}
+@media(max-width:600px){.unit-chip{padding:7px 14px;font-size:12px}}
+
 /* ── FOOTER ── */
 .hub-footer{text-align:center;padding:32px 20px 48px;color:var(--iho-footer);font-size:13px}
 
@@ -124,7 +133,7 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 /* ── LANDSCAPE (1024+) ── */
 @media(min-width:1024px){
   .games-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-  .card-icon{font-size:3.2em}
+  .card-icon{width:104px;height:104px}
   .card-name{font-size:1.4em}
   .card-tr{font-size:15px}
   .card-badge{font-size:13px;padding:5px 16px}
@@ -135,7 +144,7 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
   .hub-header{padding:32px 16px 20px}
   .games-grid{grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px 20px}
   .game-card{padding:18px 12px 16px}
-  .card-icon{font-size:2.2em}
+  .card-icon{width:68px;height:68px;margin-bottom:8px}
   .card-name{font-size:1em}
   .card-tr{font-size:11px;min-height:2em}
 }
@@ -147,11 +156,19 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
   <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="shared/icons.js" defer></script>
 </head>
 <body>
 
+<!-- UNIT SWITCHER -->
+<div class="unit-strip" aria-label="Ünite seçici">
+  <span class="unit-chip active">1. Ünite &middot; ماذا فعلت اليوم؟</span>
+  <a class="unit-chip" href="./unit3/index.html">3. Ünite &middot; إلى أين نسافر؟</a>
+  <a class="unit-chip" href="./unit4/index.html">4. Ünite &middot; مَدِينَتِي وَبَلَدِي</a>
+</div>
+
 <!-- HEADER -->
-<div class="hub-header">
+<div class="hub-header" style="padding-top:28px">
   <div class="hub-badge">İHO &middot; Arapça &middot; 7. Sınıf &middot; 1. Ünite</div>
   <div class="hub-title">ماذا فعلت اليوم؟</div>
   <div class="hub-subtitle">ألعاب اللغة العربية &mdash; الوحدة الأولى &mdash; الصف السابع</div>
@@ -163,63 +180,63 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 <div class="games-grid group-ka">
 
   <div class="game-card" onclick="openGame('./ka.html#g1','لعبة المفردات')">
-    <span class="card-icon">🎯</span>
+    <img class="card-icon" src="img/hub/01-kelime.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">لعبة المفردات</div>
     <div class="card-tr">Arapça kelimeyi doğru resimle eşleştir</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ka.html#g2','رتّب يومك')">
-    <span class="card-icon">📋</span>
+    <img class="card-icon" src="img/hub/02-gunsirala.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">رتّب يومك</div>
     <div class="card-tr">Günlük aktiviteleri doğru sıraya koy</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ka.html#g3','كم الساعة؟')">
-    <span class="card-icon">🕐</span>
+    <img class="card-icon" src="img/hub/03-saat.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">كم الساعة؟</div>
     <div class="card-tr">Arapça saat ifadelerini öğren ve oku</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ka.html#g4','اختر الفعل الصحيح')">
-    <span class="card-icon">📝</span>
+    <img class="card-icon" src="img/hub/04-fiil.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">اختر الفعل الصحيح</div>
     <div class="card-tr">Cümleye uygun doğru fiili seç</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ka.html#g5','أكمل الحوار')">
-    <span class="card-icon">💬</span>
+    <img class="card-icon" src="img/hub/05-dialog.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">أكمل الحوار</div>
     <div class="card-tr">Eksik yeri tamamlayarak diyalog kur</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ka.html#g6','لعبة الذاكرة')">
-    <span class="card-icon">🧠</span>
+    <img class="card-icon" src="img/hub/06-hafiza.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">لعبة الذاكرة</div>
     <div class="card-tr">Kartları çevir, kelime çiftlerini bul</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./balon.html','فَرْقَعَةُ البَالُونَات')">
-    <span class="card-icon">🎈</span>
+    <img class="card-icon" src="img/hub/07-balon.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">فَرْقَعَةُ البَالُونَات</div>
     <div class="card-tr">Yüzen balonları doğru tanımla eşleştir</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./flappy.html','طائر الكلمات')">
-    <span class="card-icon">🐦</span>
+    <img class="card-icon" src="img/hub/08-flappy.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">طائر الكلمات</div>
     <div class="card-tr">Flappy Bird tarzı: kelimeyi duy, doğru resme uç</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./iy.html','الْمَأْكُولاَتُ وَالْمَشْرُوبَاتُ')">
-    <span class="card-icon">🍯</span>
+    <img class="card-icon" src="img/hub/09-yemek.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">الْمَأْكُولاَتُ وَالْمَشْرُوبَاتُ</div>
     <div class="card-tr">Mini videoyu izle, sorulan soruya doğru cevabı seç</div>
     <span class="card-badge badge-solo">Bireysel</span>
@@ -232,42 +249,42 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 <div class="games-grid group-hf">
 
   <div class="game-card" onclick="openGame('./hf.html#g1','كلمات مقلوبة')">
-    <span class="card-icon">🔤</span>
+    <img class="card-icon" src="img/hub/10-karisik.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">كلمات مقلوبة</div>
     <div class="card-tr">Karışık harfleri sırala, kelimeyi bul</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./hf.html#g2','صنِّف الطعام')">
-    <span class="card-icon">📂</span>
+    <img class="card-icon" src="img/hub/11-sinif.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">صنِّف الطعام</div>
     <div class="card-tr">Yiyecekleri doğru öğüne sınıflandır</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./hf.html#g3','ابنِ الجملة')">
-    <span class="card-icon">🏗️</span>
+    <img class="card-icon" src="img/hub/12-cumle.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">ابنِ الجملة</div>
     <div class="card-tr">Kelimelerden anlamlı cümle oluştur</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./hf.html#g4','اقصف الخطأ')">
-    <span class="card-icon">💥</span>
+    <img class="card-icon" src="img/hub/13-vur.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">اقصف الخطأ</div>
     <div class="card-tr">Gruba uymayan kelimeyi tespit et</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./hf.html#g5','الوقت يضغط')">
-    <span class="card-icon">⏱️</span>
+    <img class="card-icon" src="img/hub/14-sure.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">الوقت يضغط</div>
     <div class="card-tr">Süre dolmadan hızlıca cevap ver</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </div>
 
   <div class="game-card" onclick="openGame('./hf.html#g6','رحلة اليوم')">
-    <span class="card-icon">🗺️</span>
+    <img class="card-icon" src="img/hub/15-yolculuk.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">رحلة اليوم</div>
     <div class="card-tr">Fatih'in günlük hikayesini takip et</div>
     <span class="card-badge badge-solo">Bireysel</span>
@@ -280,28 +297,28 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 <div class="games-grid group-sa">
 
   <div class="game-card" onclick="openGame('./sa.html#g0','سباق الإجابة')">
-    <span class="card-icon">🏎️</span>
+    <img class="card-icon" src="img/hub/16-yaris.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">سباق الإجابة</div>
     <div class="card-tr">Çoktan seçmeli hız yarışması</div>
     <span class="card-badge badge-duo">2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./sa.html#g1','صح أم خطأ')">
-    <span class="card-icon">✅</span>
+    <img class="card-icon" src="img/hub/17-dogruyanlis.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">صح أم خطأ</div>
     <div class="card-tr">Doğru mu yanlış mı? İlk basan kazanır</div>
     <span class="card-badge badge-duo">2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./sa.html#g4','الكلمة الناقصة')">
-    <span class="card-icon">✏️</span>
+    <img class="card-icon" src="img/hub/18-eksik.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">الكلمة الناقصة</div>
     <div class="card-tr">Cümledeki eksik kelimeyi bul</div>
     <span class="card-badge badge-duo">2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./sa.html#g5','مَنْ أنا؟')">
-    <span class="card-icon">🔔</span>
+    <img class="card-icon" src="img/hub/19-kimben.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">مَنْ أنا؟</div>
     <div class="card-tr">İpuçlarından kelimeyi tahmin et</div>
     <span class="card-badge badge-duo">2 Kişi</span>
@@ -314,91 +331,91 @@ html.light .game-card{box-shadow:var(--shadow-sm)}
 <div class="games-grid group-ar">
 
   <div class="game-card" onclick="openGame('./ar.html#g1','الدفاع الفضائي')">
-    <span class="card-icon">🚀</span>
+    <img class="card-icon" src="img/hub/20-uzay.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">الدفاع الفضائي</div>
     <div class="card-tr">Arapça kelimeyi oku, doğru asteroiti vur</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ar.html#g2','الطبّاخ الماهر')">
-    <span class="card-icon">🍳</span>
+    <img class="card-icon" src="img/hub/21-asci.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">الطبّاخ الماهر</div>
     <div class="card-tr">Arapça etiketleri okuyarak tarif hazırla</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./ar.html#g3','مطر الحروف')">
-    <span class="card-icon">🧩</span>
+    <img class="card-icon" src="img/hub/22-harfyagmuru.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">مطر الحروف</div>
     <div class="card-tr">Düşen harflerden Arapça kelimeyi yaz</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./sovalye.html','فارس المعرفة')">
-    <span class="card-icon">🏰</span>
+    <img class="card-icon" src="img/hub/23-sovalye.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">فارس المعرفة</div>
     <div class="card-tr">Şövalye ol, canavarları Arapça okuyarak yen</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./pazar.html','السوق العربي')">
-    <span class="card-icon">🏪</span>
+    <img class="card-icon" src="img/hub/24-pazar.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">السوق العربي</div>
     <div class="card-tr">Arapça etiketli raflardan alışveriş yap</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./mayin.html','حقل الألغام')">
-    <span class="card-icon">💣</span>
+    <img class="card-icon" src="img/hub/25-mayin.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">حقل الألغام</div>
     <div class="card-tr">Arapça kelimeleri okuyarak mayınlardan kaçın</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./sorf.html','راكب الأمواج')">
-    <span class="card-icon">🌊</span>
+    <img class="card-icon" src="img/hub/26-sorf.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">راكب الأمواج</div>
     <div class="card-tr">Doğru Arapça dalgayı seçerek sörf yap</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./miknatis.html','مغناطيس الكلمات')">
-    <span class="card-icon">🧲</span>
+    <img class="card-icon" src="img/hub/27-miknatis.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">مغناطيس الكلمات</div>
     <div class="card-tr">Yüzen balonlardan doğru Arapça kelimeyi çek</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./nisanci.html','القنّاص')">
-    <span class="card-icon">🎯</span>
+    <img class="card-icon" src="img/hub/28-nisanci.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">القنّاص</div>
     <div class="card-tr">Hareket eden hedeflerde doğru kelimeyi vur</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./korsan.html','كنز القراصنة')">
-    <span class="card-icon">🗺️</span>
+    <img class="card-icon" src="img/hub/29-korsan.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">كنز القراصنة</div>
     <div class="card-tr">5 adada Arapça bulmacaları çöz, hazineyi bul</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./cark.html','عجلة الحظ')">
-    <span class="card-icon">🎪</span>
+    <img class="card-icon" src="img/hub/30-cark.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">عجلة الحظ</div>
     <div class="card-tr">Çarkı çevir, Arapça oku, puan kazan</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./lab.html','مختبر الكلمات')">
-    <span class="card-icon">🧬</span>
+    <img class="card-icon" src="img/hub/31-lab.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">مختبر الكلمات</div>
     <div class="card-tr">Deney tüplerinden Arapça kelime sentezle</div>
     <span class="card-badge badge-both">Solo &amp; 2 Kişi</span>
   </div>
 
   <div class="game-card" onclick="openGame('./harita.html','اَلْعابُ الاتِّجاهات')">
-    <span class="card-icon">🗺️</span>
+    <img class="card-icon" src="img/hub/32-pusula.webp" alt="" loading="lazy" decoding="async">
     <div class="card-name">اَلْعابُ الاتِّجاهات</div>
     <div class="card-tr">3D haritada yön-yer kelimeleri: 4 oyun (yol tarifi, nerede, edatlar, eşleme)</div>
     <span class="card-badge badge-solo">Bireysel</span>
