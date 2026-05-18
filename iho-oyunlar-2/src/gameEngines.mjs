@@ -1,0 +1,12 @@
+import './gameEngines.umd.js';
+const api = globalThis.IHOGameEngines;
+export const normalizeArabic = api.normalizeArabic;
+export const createRng = api.createRng;
+export const shuffle = api.shuffle;
+export const poolByConfig = api.poolByConfig;
+export const createGame = api.createGame;
+export const engines = api.engines;
+export const isCorrect = api.isCorrect;
+export const gradeMultipleChoice = api.gradeMultipleChoice;
+export const scoreAnswers = api.scoreAnswers;
+export default api;

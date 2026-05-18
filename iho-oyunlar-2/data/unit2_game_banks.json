@@ -1,0 +1,852 @@
+{
+  "metadata": {
+    "unit": 2,
+    "title_ar": "وَقْتُ التَّسَوُّق",
+    "title_tr": "Alışveriş Zamanı",
+    "grade": "İHO Arapça 7. Sınıf",
+    "source_pdf": "IHO_Arp7_02_Unite2_04052026.pdf",
+    "source_book_pages": "52-93",
+    "generated_at_utc": "2026-05-18T19:12:26.484842+00:00",
+    "version": "1.0.0",
+    "language": {
+      "source": "ar",
+      "support": "tr"
+    },
+    "scope_tr": "Ünite 2 için kelime, cümle kalıbı, örnek cümle, diyalog, oyun bankası ve bağımsız oyun motorları paketi.",
+    "notes_tr": "Görsel/ses dosyası içermez; emoji ve audio_key alanları ileride siteye bağlanacak varlıklar için yer tutucudur. Font dosyası eklenmemiştir."
+  },
+  "price_sets": [
+    {
+      "id": "prices_page67",
+      "title_tr": "Pazar fiyatları 1",
+      "currency": "TRY",
+      "items": [
+        {
+          "word_id": "v041",
+          "ar": "الفاصوليا",
+          "tr": "fasulye",
+          "price": 9,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v038",
+          "ar": "البَطاطا",
+          "tr": "patates",
+          "price": 5,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v031",
+          "ar": "العِنَب",
+          "tr": "üzüm",
+          "price": 7,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v028",
+          "ar": "التُّفّاح",
+          "tr": "elma",
+          "price": 10,
+          "unit": "كيلو"
+        }
+      ],
+      "source_pages": [
+        67,
+        69
+      ]
+    },
+    {
+      "id": "prices_practice",
+      "title_tr": "Alıştırma fiyatları",
+      "currency": "TRY",
+      "items": [
+        {
+          "word_id": "v039",
+          "ar": "البَصَل",
+          "tr": "soğan",
+          "price": 4,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v034",
+          "ar": "الطَّماطِم",
+          "tr": "domates",
+          "price": 6,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v033",
+          "ar": "المِشْمِش",
+          "tr": "kayısı",
+          "price": 9,
+          "unit": "عُلْبَة"
+        },
+        {
+          "word_id": "v035",
+          "ar": "الخِيار",
+          "tr": "salatalık",
+          "price": 5,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v030",
+          "ar": "المَوْز",
+          "tr": "muz",
+          "price": 10,
+          "unit": "كيلو"
+        },
+        {
+          "word_id": "v020",
+          "ar": "الحَليب",
+          "tr": "süt",
+          "price": 7,
+          "unit": "عُلْبَة"
+        },
+        {
+          "word_id": "v017",
+          "ar": "السُّكَّر",
+          "tr": "şeker",
+          "price": 5,
+          "unit": "عُلْبَة"
+        },
+        {
+          "word_id": "v018",
+          "ar": "المِلْح",
+          "tr": "tuz",
+          "price": 2,
+          "unit": "عُلْبَة"
+        }
+      ],
+      "source_pages": [
+        70,
+        71,
+        74,
+        79
+      ]
+    }
+  ],
+  "banks": {
+    "mc_questions": [
+      {
+        "id": "mc001",
+        "type": "meaning",
+        "q_ar": "ما معنى «خُبْز»؟",
+        "q_tr": "«خُبْز» ne demektir?",
+        "options": [
+          "ekmek",
+          "şeker",
+          "tuz",
+          "süt"
+        ],
+        "answer": "ekmek",
+        "source_pages": [
+          56
+        ]
+      },
+      {
+        "id": "mc002",
+        "type": "meaning",
+        "q_ar": "ما معنى «فاصوليا»؟",
+        "q_tr": "«فاصوليا» ne demektir?",
+        "options": [
+          "fasulye",
+          "elma",
+          "muz",
+          "tuz"
+        ],
+        "answer": "fasulye",
+        "source_pages": [
+          64,
+          67
+        ]
+      },
+      {
+        "id": "mc003",
+        "type": "category",
+        "q_ar": "أَيُّ كَلِمَةٍ مِنَ الفَواكِهِ؟",
+        "q_tr": "Hangisi meyvedir?",
+        "options": [
+          "تُفّاح",
+          "بَصَل",
+          "خِيار",
+          "مِلْح"
+        ],
+        "answer": "تُفّاح",
+        "source_pages": [
+          64,
+          65
+        ]
+      },
+      {
+        "id": "mc004",
+        "type": "category",
+        "q_ar": "أَيُّ كَلِمَةٍ مِنَ الخُضْراواتِ؟",
+        "q_tr": "Hangisi sebzedir?",
+        "options": [
+          "جَزَر",
+          "عِنَب",
+          "مَوْز",
+          "عَسَل"
+        ],
+        "answer": "جَزَر",
+        "source_pages": [
+          64,
+          65
+        ]
+      },
+      {
+        "id": "mc005",
+        "type": "phrase",
+        "q_ar": "أَكْمِلْ: أَنا ____ إِلى حَليبٍ.",
+        "q_tr": "Tamamla: Süte ihtiyacım var.",
+        "options": [
+          "بِحاجَةٍ",
+          "بِكَم",
+          "أَرْخَصُ",
+          "تِسْع"
+        ],
+        "answer": "بِحاجَةٍ",
+        "source_pages": [
+          60,
+          87
+        ]
+      },
+      {
+        "id": "mc006",
+        "type": "phrase",
+        "q_ar": "أَكْمِلْ: بِكَم ____؟",
+        "q_tr": "Fiyat sorma kalıbını tamamla.",
+        "options": [
+          "البَصَلُ",
+          "إِلى",
+          "مِن",
+          "شُكْرًا"
+        ],
+        "answer": "البَصَلُ",
+        "source_pages": [
+          71
+        ]
+      },
+      {
+        "id": "mc007",
+        "type": "comparison",
+        "q_ar": "الفاصوليا ٩ ليرات، البطاطا ٥ ليرات. أيُّ جُمْلَةٍ صَحيحَة؟",
+        "q_tr": "Fasulye 9, patates 5 lira. Hangisi doğru?",
+        "options": [
+          "الفاصوليا أَغْلى مِنَ البَطاطا",
+          "الفاصوليا أَرْخَصُ مِنَ البَطاطا",
+          "البَطاطا أَغْلى مِنَ الفاصوليا",
+          "الفاصوليا بِخَمْسِ ليرات"
+        ],
+        "answer": "الفاصوليا أَغْلى مِنَ البَطاطا",
+        "source_pages": [
+          67,
+          68
+        ]
+      },
+      {
+        "id": "mc008",
+        "type": "dialogue",
+        "q_ar": "ما الجواب المناسب: هَل تُريدُ شيئًا آخَر؟",
+        "q_tr": "Uygun cevap hangisi?",
+        "options": [
+          "لا، شُكْرًا.",
+          "بِكَم البَصَل؟",
+          "أَيُّ خِدْمَة؟",
+          "الفاصوليا غالية"
+        ],
+        "answer": "لا، شُكْرًا.",
+        "source_pages": [
+          67,
+          76,
+          87
+        ]
+      }
+    ],
+    "fill_blanks": [
+      {
+        "id": "fb001",
+        "sentence_ar": "أَنا ____ إِلى حَليبٍ.",
+        "answer": "بِحاجَةٍ",
+        "options": [
+          "بِحاجَةٍ",
+          "بِكَم",
+          "أَرْخَصُ",
+          "عِنْدي"
+        ],
+        "tr": "Süte ihtiyacım var.",
+        "pattern_id": "p001",
+        "source_pages": [
+          60,
+          87
+        ]
+      },
+      {
+        "id": "fb002",
+        "sentence_ar": "أُريدُ عُلْبَةَ ____.",
+        "answer": "مِلْحٍ",
+        "options": [
+          "مِلْحٍ",
+          "إِلى",
+          "بِكَم",
+          "أَغْلى"
+        ],
+        "tr": "Bir kutu tuz istiyorum.",
+        "pattern_id": "p002",
+        "source_pages": [
+          56
+        ]
+      },
+      {
+        "id": "fb003",
+        "sentence_ar": "البَصَلُ ____ أَرْبَعِ ليراتٍ.",
+        "answer": "بِـ",
+        "options": [
+          "بِـ",
+          "مِن",
+          "إِلى",
+          "في"
+        ],
+        "tr": "Soğan dört lira.",
+        "pattern_id": "p006",
+        "source_pages": [
+          71
+        ]
+      },
+      {
+        "id": "fb004",
+        "sentence_ar": "التُّفّاحُ أَرْخَصُ ____ المَوْزِ.",
+        "answer": "مِنَ",
+        "options": [
+          "مِنَ",
+          "إِلى",
+          "بِـ",
+          "في"
+        ],
+        "tr": "Elma muzdan daha ucuz.",
+        "pattern_id": "p013",
+        "source_pages": [
+          80,
+          82
+        ]
+      },
+      {
+        "id": "fb005",
+        "sentence_ar": "أَشْتَري الخُبْزَ ____ البَقّالَةِ.",
+        "answer": "مِنَ",
+        "options": [
+          "مِنَ",
+          "إِلى",
+          "بِـ",
+          "هَل"
+        ],
+        "tr": "Bakkaldan ekmek satın alırım.",
+        "source_pages": [
+          80
+        ]
+      },
+      {
+        "id": "fb006",
+        "sentence_ar": "هَل تُريدُ شيئًا ____؟",
+        "answer": "آخَر",
+        "options": [
+          "آخَر",
+          "رَخيص",
+          "كبير",
+          "ليرة"
+        ],
+        "tr": "Başka bir şey ister misin?",
+        "pattern_id": "p009",
+        "source_pages": [
+          56,
+          76
+        ]
+      },
+      {
+        "id": "fb007",
+        "sentence_ar": "الفاصوليا أَغْلى ____ البَطاطا.",
+        "answer": "مِنَ",
+        "options": [
+          "مِنَ",
+          "إِلى",
+          "بِـ",
+          "في"
+        ],
+        "tr": "Fasulye patatesten daha pahalı.",
+        "pattern_id": "p014",
+        "source_pages": [
+          67,
+          68
+        ]
+      },
+      {
+        "id": "fb008",
+        "sentence_ar": "أَهْلًا وَسَهْلًا، ____ خِدْمَةٍ؟",
+        "answer": "أَيُّ",
+        "options": [
+          "أَيُّ",
+          "كَم",
+          "مِن",
+          "بِـ"
+        ],
+        "tr": "Hoş geldiniz, nasıl yardımcı olabilirim?",
+        "pattern_id": "p011",
+        "source_pages": [
+          64,
+          67,
+          76
+        ]
+      }
+    ],
+    "sentence_orders": [
+      {
+        "id": "so001",
+        "tokens": [
+          "أَنا",
+          "بِحاجَةٍ",
+          "إِلى",
+          "حَليبٍ"
+        ],
+        "answer_ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
+        "tr": "Süte ihtiyacım var.",
+        "pattern_id": "p001"
+      },
+      {
+        "id": "so002",
+        "tokens": [
+          "أُريدُ",
+          "عُلْبَةَ",
+          "مِلْحٍ"
+        ],
+        "answer_ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
+        "tr": "Bir kutu tuz istiyorum.",
+        "pattern_id": "p002"
+      },
+      {
+        "id": "so003",
+        "tokens": [
+          "بِكَم",
+          "البَصَلُ؟"
+        ],
+        "answer_ar": "بِكَم البَصَلُ؟",
+        "tr": "Soğan kaç lira?",
+        "pattern_id": "p005"
+      },
+      {
+        "id": "so004",
+        "tokens": [
+          "البَصَلُ",
+          "بِأَرْبَعِ",
+          "ليراتٍ"
+        ],
+        "answer_ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+        "tr": "Soğan dört lira.",
+        "pattern_id": "p006"
+      },
+      {
+        "id": "so005",
+        "tokens": [
+          "التُّفّاحُ",
+          "أَرْخَصُ",
+          "مِنَ",
+          "المَوْزِ"
+        ],
+        "answer_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+        "tr": "Elma muzdan daha ucuz.",
+        "pattern_id": "p013"
+      },
+      {
+        "id": "so006",
+        "tokens": [
+          "الفاصوليا",
+          "أَغْلى",
+          "مِنَ",
+          "البَطاطا"
+        ],
+        "answer_ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
+        "tr": "Fasulye patatesten daha pahalı.",
+        "pattern_id": "p014"
+      },
+      {
+        "id": "so007",
+        "tokens": [
+          "أَذْهَبُ",
+          "إِلى",
+          "السّوقِ",
+          "لِلتَّسَوُّقِ"
+        ],
+        "answer_ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+        "tr": "Alışveriş için pazara giderim.",
+        "pattern_id": "p019"
+      }
+    ],
+    "odd_one_out": [
+      {
+        "id": "odd001",
+        "choices": [
+          "تُفّاح",
+          "مَوْز",
+          "بَصَل",
+          "عِنَب"
+        ],
+        "odd": "بَصَل",
+        "reason_tr": "Bصل sebzedir; diğerleri meyvedir."
+      },
+      {
+        "id": "odd002",
+        "choices": [
+          "خِيار",
+          "جَزَر",
+          "مِشْمِش",
+          "بَطاطا"
+        ],
+        "odd": "مِشْمِش",
+        "reason_tr": "مشمش meyvedir; diğerleri sebzedir."
+      },
+      {
+        "id": "odd003",
+        "choices": [
+          "سُكَّر",
+          "مِلْح",
+          "حَليب",
+          "أَرْخَص"
+        ],
+        "odd": "أَرْخَص",
+        "reason_tr": "أرخص karşılaştırma sıfatıdır; diğerleri üründür."
+      },
+      {
+        "id": "odd004",
+        "choices": [
+          "بِكَم",
+          "كَم",
+          "أَيْنَ",
+          "ليرة"
+        ],
+        "odd": "ليرة",
+        "reason_tr": "ليرة para birimidir; diğerleri soru ifadesidir."
+      },
+      {
+        "id": "odd005",
+        "choices": [
+          "كيلو",
+          "عُلْبَة",
+          "كيس",
+          "فاصوليا"
+        ],
+        "odd": "فاصوليا",
+        "reason_tr": "فاصوليا üründür; diğerleri miktar/kap belirtir."
+      }
+    ],
+    "word_search_words": [
+      "حَليب",
+      "طَماطِم",
+      "مَوْز",
+      "تُفّاح",
+      "جَزَر",
+      "خُبْز",
+      "مِلْح",
+      "خِيار",
+      "مِشْمِش",
+      "بُرْتُقال",
+      "فُلْفُل",
+      "فاصوليا"
+    ]
+  },
+  "games": [
+    {
+      "id": "g001_flashcards_core",
+      "type": "flashcards",
+      "title_tr": "Kelime Kartları — Çekirdek Ürünler",
+      "title_ar": "بطاقات الكلمات",
+      "instructions_tr": "Kartı çevir; Arapça kelime, Türkçe anlam ve örnek cümleyi gör.",
+      "config": {
+        "pool": {
+          "categories": [
+            "grocery",
+            "fruit",
+            "vegetable"
+          ],
+          "limit": 36
+        },
+        "front": "ar",
+        "back": [
+          "tr",
+          "example"
+        ]
+      }
+    },
+    {
+      "id": "g002_match_grocery",
+      "type": "matching",
+      "title_tr": "Eşleştir — Bakkal Ürünleri",
+      "title_ar": "صِل الكلمات",
+      "instructions_tr": "Arapça kelimeyi Türkçe anlamıyla eşleştir.",
+      "config": {
+        "word_ids": [
+          "v016",
+          "v017",
+          "v018",
+          "v019",
+          "v020",
+          "v021",
+          "v023",
+          "v024",
+          "v025"
+        ],
+        "left": "ar",
+        "right": "tr"
+      }
+    },
+    {
+      "id": "g003_sort_fruit_vegetable",
+      "type": "category_sort",
+      "title_tr": "Sınıflandır — Meyve mi Sebze mi?",
+      "title_ar": "صَنِّف الفواكه والخضراوات",
+      "instructions_tr": "Kelimeleri doğru sepete at: meyve veya sebze.",
+      "config": {
+        "categories": [
+          {
+            "id": "fruit",
+            "title_tr": "Meyveler",
+            "title_ar": "الفَواكِه"
+          },
+          {
+            "id": "vegetable",
+            "title_tr": "Sebzeler",
+            "title_ar": "الخُضْراوات"
+          }
+        ],
+        "word_ids": [
+          "v028",
+          "v029",
+          "v030",
+          "v031",
+          "v032",
+          "v033",
+          "v034",
+          "v035",
+          "v036",
+          "v037",
+          "v038",
+          "v039",
+          "v040",
+          "v041"
+        ]
+      }
+    },
+    {
+      "id": "g004_shopping_list_basic",
+      "type": "shopping_list",
+      "title_tr": "Alışveriş Listesi — Bakkaldan Bul",
+      "title_ar": "قائمة التسوق",
+      "instructions_tr": "Listede yazan ürünleri raftan seç.",
+      "config": {
+        "target_count": 5,
+        "shelf_count": 12,
+        "word_ids": [
+          "v016",
+          "v017",
+          "v018",
+          "v019",
+          "v020",
+          "v021",
+          "v022",
+          "v023",
+          "v024",
+          "v025",
+          "v028",
+          "v030",
+          "v034",
+          "v039"
+        ]
+      }
+    },
+    {
+      "id": "g005_price_quiz",
+      "type": "price_quiz",
+      "title_tr": "Fiyat Soruları",
+      "title_ar": "أسئلة الأسعار",
+      "instructions_tr": "بِكَم؟ sorularını fiyat tablosuna göre cevapla.",
+      "config": {
+        "price_set": "prices_practice",
+        "question_count": 8
+      }
+    },
+    {
+      "id": "g006_comparison_price",
+      "type": "comparative_quiz",
+      "title_tr": "Karşılaştırma — Ucuz/Pahalı",
+      "title_ar": "المقارنة: أرخص/أغلى",
+      "instructions_tr": "Fiyatlara göre doğru karşılaştırma cümlesini seç.",
+      "config": {
+        "price_set": "prices_page67",
+        "relations": [
+          "cheaper",
+          "more_expensive"
+        ],
+        "question_count": 8
+      }
+    },
+    {
+      "id": "g007_fill_blanks_core",
+      "type": "fill_blank",
+      "title_tr": "Boşluk Doldur — Kalıplar",
+      "title_ar": "أَكْمِل الفراغ",
+      "instructions_tr": "Doğru kelime veya edatı seçerek cümleyi tamamla.",
+      "config": {
+        "items": "fill_blanks"
+      }
+    },
+    {
+      "id": "g008_sentence_order",
+      "type": "sentence_order",
+      "title_tr": "Cümle Kur — Kelime Diz",
+      "title_ar": "رَتِّب الكلمات",
+      "instructions_tr": "Kelime parçalarını doğru sıraya koy.",
+      "config": {
+        "items": "sentence_orders"
+      }
+    },
+    {
+      "id": "g009_dialogue_order_souq",
+      "type": "dialogue_order",
+      "title_tr": "Diyalog Sırala — Pazarda",
+      "title_ar": "رَتِّب الحوار",
+      "instructions_tr": "Satıcı-müşteri diyaloğunu doğru sıraya koy.",
+      "config": {
+        "dialogue_id": "d003"
+      }
+    },
+    {
+      "id": "g010_dialogue_order_baqala",
+      "type": "dialogue_order",
+      "title_tr": "Diyalog Sırala — Bakkalda",
+      "title_ar": "رَتِّب الحوار",
+      "instructions_tr": "Bakkal diyaloğunu doğru sıraya koy.",
+      "config": {
+        "dialogue_id": "d004"
+      }
+    },
+    {
+      "id": "g011_word_search",
+      "type": "word_search",
+      "title_tr": "Kelime Avı",
+      "title_ar": "ابحث عن الكلمات",
+      "instructions_tr": "Ünite kelimelerini harf tablosunda bul.",
+      "config": {
+        "words": [
+          "حَليب",
+          "طَماطِم",
+          "مَوْز",
+          "تُفّاح",
+          "جَزَر",
+          "خُبْز",
+          "مِلْح",
+          "خِيار",
+          "مِشْمِش",
+          "بُرْتُقال",
+          "فُلْفُل",
+          "فاصوليا"
+        ],
+        "size": 12,
+        "directions": [
+          "horizontal",
+          "vertical"
+        ]
+      }
+    },
+    {
+      "id": "g012_memory_vocab",
+      "type": "memory",
+      "title_tr": "Hafıza Oyunu — Ürünler",
+      "title_ar": "لعبة الذاكرة",
+      "instructions_tr": "Arapça kelime ile Türkçe anlam kartlarını eşleştir.",
+      "config": {
+        "word_ids": [
+          "v016",
+          "v017",
+          "v018",
+          "v020",
+          "v028",
+          "v030",
+          "v034",
+          "v039"
+        ],
+        "pair": "ar_tr"
+      }
+    },
+    {
+      "id": "g013_odd_one_out",
+      "type": "odd_one_out",
+      "title_tr": "Farklı Olanı Bul",
+      "title_ar": "اختر الكلمة الغريبة",
+      "instructions_tr": "Gruptaki farklı kelimeyi seç.",
+      "config": {
+        "items": "odd_one_out"
+      }
+    },
+    {
+      "id": "g014_multiple_choice",
+      "type": "multiple_choice",
+      "title_tr": "Çoktan Seçmeli Ünite Testi",
+      "title_ar": "اختبار الاختيار",
+      "instructions_tr": "Kelime, kategori, fiyat ve kalıp sorularını cevapla.",
+      "config": {
+        "items": "mc_questions"
+      }
+    },
+    {
+      "id": "g015_roleplay_market",
+      "type": "roleplay",
+      "title_tr": "Rol Oyna — Satıcı ve Müşteri",
+      "title_ar": "تمثيل الحوار",
+      "instructions_tr": "Motor rastgele ürün ve fiyat vererek satıcı-müşteri rol oyunu üretir.",
+      "config": {
+        "roles": [
+          "البائِع",
+          "المُشْتَري"
+        ],
+        "price_set": "prices_practice",
+        "required_patterns": [
+          "p011",
+          "p005",
+          "p006",
+          "p013",
+          "p014",
+          "p021"
+        ]
+      }
+    },
+    {
+      "id": "g016_listening_select_placeholder",
+      "type": "listening_select",
+      "title_tr": "Dinle-Seç — Ses Yer Tutuculu",
+      "title_ar": "استمع واختر",
+      "instructions_tr": "audio_key alanı gerçek ses dosyalarına bağlanınca çalışır; şimdilik metinle test edilebilir.",
+      "config": {
+        "items": [
+          {
+            "audio_key": "u2_sentence_s028",
+            "prompt_ar": "بِكَم الفاصوليا؟",
+            "options": [
+              "بِكَم الفاصوليا؟",
+              "أَنا بِحاجَةٍ إِلى حَليبٍ.",
+              "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ."
+            ],
+            "answer": "بِكَم الفاصوليا؟"
+          },
+          {
+            "audio_key": "u2_sentence_s069",
+            "prompt_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+            "options": [
+              "المَوْزُ بِعَشْرِ ليراتٍ.",
+              "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+              "لا، شُكْرًا."
+            ],
+            "answer": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,772 @@
+{
+  "metadata": {
+    "unit": 2,
+    "title_ar": "وَقْتُ التَّسَوُّق",
+    "title_tr": "Alışveriş Zamanı",
+    "grade": "İHO Arapça 7. Sınıf",
+    "source_pdf": "IHO_Arp7_02_Unite2_04052026.pdf",
+    "source_book_pages": "52-93",
+    "generated_at_utc": "2026-05-18T19:12:26.484842+00:00",
+    "version": "1.0.0",
+    "language": {
+      "source": "ar",
+      "support": "tr"
+    },
+    "scope_tr": "Ünite 2 için kelime, cümle kalıbı, örnek cümle, diyalog, oyun bankası ve bağımsız oyun motorları paketi.",
+    "notes_tr": "Görsel/ses dosyası içermez; emoji ve audio_key alanları ileride siteye bağlanacak varlıklar için yer tutucudur. Font dosyası eklenmemiştir."
+  },
+  "patterns": [
+    {
+      "id": "p001",
+      "title_tr": "İhtiyaç belirtme",
+      "title_ar": "التعبير عن الحاجة",
+      "pattern_ar": "{pronoun} بِحاجَةٍ إِلى {object}",
+      "pattern_tr": "{kişi} {nesneye} ihtiyaç duyuyor.",
+      "examples": [
+        {
+          "ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
+          "tr": "Süte ihtiyacım var."
+        },
+        {
+          "ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
+          "tr": "Onun ekmeğe ihtiyacı var."
+        }
+      ],
+      "slots": {
+        "pronoun": [
+          "أَنا",
+          "أَنْتَ",
+          "أَنْتِ",
+          "هُوَ",
+          "هِيَ"
+        ],
+        "object": [
+          "خُبْز",
+          "سُكَّر",
+          "مِلْح",
+          "حَليب",
+          "تُفّاح",
+          "بَطاطا",
+          "فاصوليا"
+        ]
+      },
+      "note_tr": "إِلى'dan sonra ismin yönelme/ilişki anlamı kuvvetlenir.",
+      "source_pages": [
+        52,
+        56,
+        60
+      ],
+      "tags": [
+        "core",
+        "need"
+      ],
+      "audio_key": "u2_pattern_p001"
+    },
+    {
+      "id": "p002",
+      "title_tr": "İstemek",
+      "title_ar": "طلب الشيء",
+      "pattern_ar": "أُريدُ {object}",
+      "pattern_tr": "{nesneyi} istiyorum.",
+      "examples": [
+        {
+          "ar": "أُريدُ خُبْزًا طازَجًا.",
+          "tr": "Taze ekmek istiyorum."
+        },
+        {
+          "ar": "أُريدُ كيلوغرامًا واحِدًا.",
+          "tr": "Bir kilogram istiyorum."
+        }
+      ],
+      "slots": {
+        "object": [
+          "خُبْز",
+          "سُكَّر",
+          "مِلْح",
+          "حَليب",
+          "تُفّاح",
+          "بَطاطا",
+          "فاصوليا",
+          "كيلو",
+          "كيلوغرام",
+          "عُلْبَة",
+          "عُلْبَتان",
+          "ثَلاثَة كيلوغرامات"
+        ]
+      },
+      "note_tr": "أُريدُ tek başına doğrudan istek bildirir.",
+      "source_pages": [
+        52,
+        56,
+        64,
+        67
+      ],
+      "tags": [
+        "core",
+        "request"
+      ],
+      "audio_key": "u2_pattern_p002"
+    },
+    {
+      "id": "p003",
+      "title_tr": "Satın almak istemek",
+      "title_ar": "إرادة الشراء",
+      "pattern_ar": "أُريدُ أَنْ أَشْتَري {object}",
+      "pattern_tr": "{nesne} satın almak istiyorum.",
+      "examples": [
+        {
+          "ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
+          "tr": "Biraz sebze satın almak istiyorum."
+        },
+        {
+          "ar": "أُريدُ أَنْ أَشْتَري مَوْزًا.",
+          "tr": "Muz satın almak istiyorum."
+        }
+      ],
+      "slots": {
+        "object": [
+          "بَعْضَ الخُضَرِ",
+          "مَوْزًا",
+          "تُفّاحًا",
+          "حَليبًا"
+        ]
+      },
+      "note_tr": "أَنْ + fiil mastar anlamı verir.",
+      "source_pages": [
+        67,
+        76
+      ],
+      "tags": [
+        "request"
+      ],
+      "audio_key": "u2_pattern_p003"
+    },
+    {
+      "id": "p004",
+      "title_tr": "Birinden isteme",
+      "title_ar": "الطلب من شخص",
+      "pattern_ar": "أَطْلُبُ مِنْكَ {quantity} مِنْ {object}",
+      "pattern_tr": "Senden {miktar} {nesne} istiyorum.",
+      "examples": [
+        {
+          "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
+          "tr": "Senden bir kilo şeker istiyorum."
+        },
+        {
+          "ar": "أَطْلُبُ مِنْكَ عُلْبَةَ مِلْحٍ.",
+          "tr": "Senden bir kutu tuz istiyorum."
+        }
+      ],
+      "slots": {
+        "quantity": [
+          "كيلو",
+          "كيلوغرام",
+          "عُلْبَة",
+          "عُلْبَتان",
+          "ثَلاثَة كيلوغرامات"
+        ],
+        "object": [
+          "خُبْز",
+          "سُكَّر",
+          "مِلْح",
+          "حَليب",
+          "تُفّاح",
+          "بَطاطا",
+          "فاصوليا"
+        ]
+      },
+      "note_tr": "مِنْكَ hitap edilen kişiden isteme anlamı verir.",
+      "source_pages": [
+        56,
+        60
+      ],
+      "tags": [
+        "request"
+      ],
+      "audio_key": "u2_pattern_p004"
+    },
+    {
+      "id": "p005",
+      "title_tr": "Fiyat sorma",
+      "title_ar": "السؤال عن السعر",
+      "pattern_ar": "بِكَم {item}؟",
+      "pattern_tr": "{ürün} kaç lira?",
+      "examples": [
+        {
+          "ar": "بِكَم البَصَلُ؟",
+          "tr": "Soğan kaç lira?"
+        },
+        {
+          "ar": "بِكَم الفاصوليا؟",
+          "tr": "Fasulye kaç lira?"
+        }
+      ],
+      "slots": {
+        "item": [
+          "البَصَلُ",
+          "الفاصوليا",
+          "المَوْزُ",
+          "التُّفّاحُ"
+        ]
+      },
+      "note_tr": "بِكَم fiyat sormak için kullanılır.",
+      "source_pages": [
+        52,
+        67,
+        70,
+        71
+      ],
+      "tags": [
+        "price",
+        "question"
+      ],
+      "audio_key": "u2_pattern_p005"
+    },
+    {
+      "id": "p006",
+      "title_tr": "Fiyat söyleme",
+      "title_ar": "الإخبار عن السعر",
+      "pattern_ar": "{item} بِـ{number} ليرات",
+      "pattern_tr": "{ürün} {sayı} lira.",
+      "examples": [
+        {
+          "ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+          "tr": "Soğan dört lira."
+        },
+        {
+          "ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
+          "tr": "Fasulye dokuz lira."
+        }
+      ],
+      "slots": {
+        "item": [
+          "البَصَلُ",
+          "الفاصوليا",
+          "المَوْزُ",
+          "الخِيارُ"
+        ],
+        "number": [
+          "أَرْبَع",
+          "خَمْس",
+          "سَبْع",
+          "تِسْع",
+          "عَشْر"
+        ]
+      },
+      "note_tr": "B fiyat bildirirken بِـ kullanılır.",
+      "source_pages": [
+        67,
+        70,
+        71
+      ],
+      "tags": [
+        "price"
+      ],
+      "audio_key": "u2_pattern_p006"
+    },
+    {
+      "id": "p007",
+      "title_tr": "Miktar sorma",
+      "title_ar": "السؤال عن الكمية",
+      "pattern_ar": "كَم كيلوغرامًا تُريدُ مِنْ {item}؟",
+      "pattern_tr": "{üründen} kaç kilogram istiyorsun?",
+      "examples": [
+        {
+          "ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
+          "tr": "Elmadan kaç kilogram istiyorsun?"
+        },
+        {
+          "ar": "كَم كيلوغرامًا تُريدُ مِنَ البَطاطا؟",
+          "tr": "Patatesten kaç kilogram istiyorsun?"
+        }
+      ],
+      "slots": {
+        "item": [
+          "التُّفّاحِ",
+          "البَطاطا",
+          "الطَّماطِمِ",
+          "المَوْزِ"
+        ]
+      },
+      "note_tr": "كَم miktar/sayı sorar.",
+      "source_pages": [
+        70,
+        71
+      ],
+      "tags": [
+        "quantity",
+        "question"
+      ],
+      "audio_key": "u2_pattern_p007"
+    },
+    {
+      "id": "p008",
+      "title_tr": "Miktar cevaplama",
+      "title_ar": "الإخبار عن الكمية",
+      "pattern_ar": "أُريدُ {number} كيلوغراماتٍ مِنْ {item}",
+      "pattern_tr": "{üründen} {sayı} kilogram istiyorum.",
+      "examples": [
+        {
+          "ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
+          "tr": "Kayısıdan üç kilogram istiyorum."
+        },
+        {
+          "ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+          "tr": "Her çeşitten bir kilogram istiyorum."
+        }
+      ],
+      "slots": {
+        "number": [
+          "ثَلاثَةَ",
+          "كيلوغرامًا واحِدًا"
+        ],
+        "item": [
+          "المِشْمِشِ",
+          "التُّفّاحِ",
+          "البَطاطا"
+        ]
+      },
+      "note_tr": "Sayı-miktar ilişkisinde kalıp hazır olarak verilir.",
+      "source_pages": [
+        64,
+        70,
+        76
+      ],
+      "tags": [
+        "quantity"
+      ],
+      "audio_key": "u2_pattern_p008"
+    },
+    {
+      "id": "p009",
+      "title_tr": "Başka bir şey sorma",
+      "title_ar": "السؤال عن شيء آخر",
+      "pattern_ar": "هَل تُريدُ شيئًا آخَر؟",
+      "pattern_tr": "Başka bir şey ister misin?",
+      "examples": [
+        {
+          "ar": "هَل تُريدينَ شيئًا آخَر؟",
+          "tr": "Başka bir şey ister misin?"
+        },
+        {
+          "ar": "هَل تُريدُ شيئًا آخَر؟",
+          "tr": "Başka bir şey ister misin?"
+        }
+      ],
+      "slots": {},
+      "note_tr": "تُريدينَ kadın muhatap için kullanılır.",
+      "source_pages": [
+        56,
+        76,
+        77
+      ],
+      "tags": [
+        "dialogue"
+      ],
+      "audio_key": "u2_pattern_p009"
+    },
+    {
+      "id": "p010",
+      "title_tr": "Olumlu/olumsuz cevap",
+      "title_ar": "الجواب بنعم أو لا",
+      "pattern_ar": "نَعَم، أُريدُ {object}. / لا، شُكْرًا.",
+      "pattern_tr": "Evet, {nesne} istiyorum. / Hayır, teşekkürler.",
+      "examples": [
+        {
+          "ar": "نَعَم، أُريدُ عُلْبَةً مِنَ الحَليبِ.",
+          "tr": "Evet, bir kutu süt istiyorum."
+        },
+        {
+          "ar": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
+          "tr": "Hayır, çok teşekkürler. Bu yeterli."
+        }
+      ],
+      "slots": {
+        "object": [
+          "خُبْز",
+          "سُكَّر",
+          "مِلْح",
+          "حَليب",
+          "تُفّاح",
+          "بَطاطا",
+          "فاصوليا"
+        ]
+      },
+      "note_tr": "Diyalog kapatma ve kibar cevap için kullanılır.",
+      "source_pages": [
+        67,
+        76,
+        87
+      ],
+      "tags": [
+        "dialogue"
+      ],
+      "audio_key": "u2_pattern_p010"
+    },
+    {
+      "id": "p011",
+      "title_tr": "Satıcı karşılama",
+      "title_ar": "تحية البائع",
+      "pattern_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
+      "pattern_tr": "Hoş geldiniz, nasıl yardımcı olabilirim?",
+      "examples": [
+        {
+          "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ يا سَيِّدي؟",
+          "tr": "Hoş geldiniz, nasıl yardımcı olabilirim efendim?"
+        }
+      ],
+      "slots": {},
+      "note_tr": "Bakkal/pazar rol oyunlarının başlangıç kalıbıdır.",
+      "source_pages": [
+        64,
+        67,
+        76
+      ],
+      "tags": [
+        "dialogue",
+        "greeting"
+      ],
+      "audio_key": "u2_pattern_p011"
+    },
+    {
+      "id": "p012",
+      "title_tr": "Satıcının ürün sayması",
+      "title_ar": "ذكر المنتجات",
+      "pattern_ar": "عِنْدي {item1}، {item2}، و{item3}",
+      "pattern_tr": "Bende {ürün1}, {ürün2} ve {ürün3} var.",
+      "examples": [
+        {
+          "ar": "عِنْدي طَماطِمُ، خِيارٌ، وجَزَرٌ.",
+          "tr": "Bende domates, salatalık ve havuç var."
+        },
+        {
+          "ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، ومَوْزٌ.",
+          "tr": "Bende elma, portakal ve muz var."
+        }
+      ],
+      "slots": {
+        "item1": [
+          "طَماطِمُ",
+          "تُفّاحٌ"
+        ],
+        "item2": [
+          "خِيارٌ",
+          "بُرْتُقالٌ"
+        ],
+        "item3": [
+          "جَزَرٌ",
+          "مَوْزٌ"
+        ]
+      },
+      "note_tr": "و son unsurdan önce bağlaçtır.",
+      "source_pages": [
+        64
+      ],
+      "tags": [
+        "dialogue",
+        "vocabulary"
+      ],
+      "audio_key": "u2_pattern_p012"
+    },
+    {
+      "id": "p013",
+      "title_tr": "Ucuz karşılaştırması",
+      "title_ar": "المقارنة بالرخص",
+      "pattern_ar": "{item1} أَرْخَصُ مِنْ {item2}",
+      "pattern_tr": "{ürün1}, {ürün2}den daha ucuz.",
+      "examples": [
+        {
+          "ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
+          "tr": "Üzüm elmadan daha ucuz."
+        },
+        {
+          "ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
+          "tr": "Soğan kayısıdan daha ucuz."
+        }
+      ],
+      "slots": {
+        "item1": [
+          "العِنَبُ",
+          "البَصَلُ",
+          "التُّفّاحُ"
+        ],
+        "item2": [
+          "التُّفّاحِ",
+          "المِشْمِشِ",
+          "المَوْزِ"
+        ]
+      },
+      "note_tr": "Karşılaştırmada مِن kullanılır.",
+      "source_pages": [
+        52,
+        67,
+        74,
+        82
+      ],
+      "tags": [
+        "comparison",
+        "price"
+      ],
+      "audio_key": "u2_pattern_p013"
+    },
+    {
+      "id": "p014",
+      "title_tr": "Pahalı karşılaştırması",
+      "title_ar": "المقارنة بالغلاء",
+      "pattern_ar": "{item1} أَغْلى مِنْ {item2}",
+      "pattern_tr": "{ürün1}, {ürün2}den daha pahalı.",
+      "examples": [
+        {
+          "ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
+          "tr": "Fasulye patatesten daha pahalı."
+        },
+        {
+          "ar": "المَوْزُ أَغْلى مِنَ التُّفّاحِ.",
+          "tr": "Muz elmadan daha pahalı."
+        }
+      ],
+      "slots": {
+        "item1": [
+          "الفاصوليا",
+          "المَوْزُ",
+          "المِشْمِشُ"
+        ],
+        "item2": [
+          "البَطاطا",
+          "التُّفّاحِ",
+          "البَصَلِ"
+        ]
+      },
+      "note_tr": "أغلى genellikle fiyat karşılaştırır.",
+      "source_pages": [
+        52,
+        67,
+        74,
+        82
+      ],
+      "tags": [
+        "comparison",
+        "price"
+      ],
+      "audio_key": "u2_pattern_p014"
+    },
+    {
+      "id": "p015",
+      "title_tr": "Boyut karşılaştırması",
+      "title_ar": "المقارنة بالحجم",
+      "pattern_ar": "{item1} أَكْبَرُ/أَصْغَرُ مِنْ {item2}",
+      "pattern_tr": "{ürün1}, {ürün2}den daha büyük/küçük.",
+      "examples": [
+        {
+          "ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
+          "tr": "Portakal kirazdan daha büyük."
+        },
+        {
+          "ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
+          "tr": "Kiraz portakaldan daha küçük."
+        }
+      ],
+      "slots": {
+        "item1": [
+          "البُرْتُقالَةُ",
+          "الكَرَزَةُ"
+        ],
+        "item2": [
+          "الكَرَزَةِ",
+          "البُرْتُقالَةِ"
+        ]
+      },
+      "note_tr": "Büyük/küçük karşılaştırmaları nesne özellikleri için kullanılır.",
+      "source_pages": [
+        52,
+        72,
+        74
+      ],
+      "tags": [
+        "comparison",
+        "size"
+      ],
+      "audio_key": "u2_pattern_p015"
+    },
+    {
+      "id": "p016",
+      "title_tr": "Ağırlık karşılaştırması",
+      "title_ar": "المقارنة بالوزن",
+      "pattern_ar": "{item1} أَخَفُّ/أَثْقَلُ مِنْ {item2}",
+      "pattern_tr": "{ürün1}, {ürün2}den daha hafif/ağır.",
+      "examples": [
+        {
+          "ar": "الكَرَزُ أَخَفُّ مِنَ البُرْتُقالِ.",
+          "tr": "Kiraz portakaldan daha hafif."
+        },
+        {
+          "ar": "البُرْتُقالُ أَثْقَلُ مِنَ الكَرَزِ.",
+          "tr": "Portakal kirazdan daha ağır."
+        }
+      ],
+      "slots": {
+        "item1": [
+          "الكَرَزُ",
+          "البُرْتُقالُ"
+        ],
+        "item2": [
+          "البُرْتُقالِ",
+          "الكَرَزِ"
+        ]
+      },
+      "note_tr": "أخفّ ve أثقل ağırlık karşılaştırır.",
+      "source_pages": [
+        72,
+        89
+      ],
+      "tags": [
+        "comparison",
+        "weight"
+      ],
+      "audio_key": "u2_pattern_p016"
+    },
+    {
+      "id": "p017",
+      "title_tr": "Nereden satın aldın?",
+      "title_ar": "السؤال عن مكان الشراء",
+      "pattern_ar": "مِنْ أَيْنَ اشْتَرَيْتَ؟",
+      "pattern_tr": "Nereden satın aldın?",
+      "examples": [
+        {
+          "ar": "اشْتَرَيْتُ مِنَ السّوقِ.",
+          "tr": "Pazardan satın aldım."
+        },
+        {
+          "ar": "اشْتَرَيْتُ مِنَ البَقّالَةِ.",
+          "tr": "Bakkaldan satın aldım."
+        }
+      ],
+      "slots": {},
+      "note_tr": "Konuşma etkinliğinde alışveriş yerini sormak için kullanılır.",
+      "source_pages": [
+        78
+      ],
+      "tags": [
+        "speaking"
+      ],
+      "audio_key": "u2_pattern_p017"
+    },
+    {
+      "id": "p018",
+      "title_tr": "Ne satın aldın?",
+      "title_ar": "السؤال عما اشتريته",
+      "pattern_ar": "ماذا اشْتَرَيْتَ؟",
+      "pattern_tr": "Ne satın aldın?",
+      "examples": [
+        {
+          "ar": "اشْتَرَيْتُ البَطاطا والطَّماطِمَ والبَصَلَ.",
+          "tr": "Patates, domates ve soğan satın aldım."
+        },
+        {
+          "ar": "اشْتَرَيْتُ السُّكَّرَ والشّايَ والمِلْحَ.",
+          "tr": "Şeker, çay ve tuz satın aldım."
+        }
+      ],
+      "slots": {},
+      "note_tr": "Cevapta satın alınan ürünler sıralanır.",
+      "source_pages": [
+        78
+      ],
+      "tags": [
+        "speaking"
+      ],
+      "audio_key": "u2_pattern_p018"
+    },
+    {
+      "id": "p019",
+      "title_tr": "Alışverişe nereye gidiyorsun?",
+      "title_ar": "السؤال عن وجهة التسوق",
+      "pattern_ar": "إِلى أَيْنَ تَذْهَبُ لِلتَّسَوُّقِ؟",
+      "pattern_tr": "Alışveriş için nereye gidiyorsun?",
+      "examples": [
+        {
+          "ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+          "tr": "Alışveriş için pazara gidiyorum."
+        }
+      ],
+      "slots": {},
+      "note_tr": "İfade yazma bölümünde kullanılır.",
+      "source_pages": [
+        80,
+        82
+      ],
+      "tags": [
+        "writing",
+        "speaking"
+      ],
+      "audio_key": "u2_pattern_p019"
+    },
+    {
+      "id": "p020",
+      "title_tr": "Alışveriş listesi yazma",
+      "title_ar": "إعداد قائمة التسوق",
+      "pattern_ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ",
+      "pattern_tr": "Alışveriş listesi hazırlarım.",
+      "examples": [
+        {
+          "ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ وأَكْتُبُ الحاجاتِ اليَوْمِيَّةَ.",
+          "tr": "Alışveriş listesi hazırlar ve günlük ihtiyaçları yazarım."
+        }
+      ],
+      "slots": {},
+      "note_tr": "Yazma kazanımı için temel üretim kalıbıdır.",
+      "source_pages": [
+        83,
+        93
+      ],
+      "tags": [
+        "writing"
+      ],
+      "audio_key": "u2_pattern_p020"
+    },
+    {
+      "id": "p021",
+      "title_tr": "Kibarlık kapanışı",
+      "title_ar": "إنهاء الحوار",
+      "pattern_ar": "شُكْرًا، مَعَ السَّلامَةِ",
+      "pattern_tr": "Teşekkürler, güle güle.",
+      "examples": [
+        {
+          "ar": "شُكْرًا، مَعَ السَّلامَةِ.",
+          "tr": "Teşekkürler, güle güle."
+        }
+      ],
+      "slots": {},
+      "note_tr": "Satıcı-müşteri rol oyunlarında kapanış.",
+      "source_pages": [
+        76
+      ],
+      "tags": [
+        "dialogue"
+      ],
+      "audio_key": "u2_pattern_p021"
+    },
+    {
+      "id": "p022",
+      "title_tr": "Hadis-kültür cümlesi",
+      "title_ar": "جملة ثقافية",
+      "pattern_ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا",
+      "pattern_tr": "Bizi aldatan bizden değildir.",
+      "examples": [
+        {
+          "ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا.",
+          "tr": "Bizi aldatan bizden değildir."
+        }
+      ],
+      "slots": {},
+      "note_tr": "Ünitedeki alışveriş ahlakı/kültür bağlantısıdır.",
+      "source_pages": [
+        92
+      ],
+      "tags": [
+        "culture"
+      ],
+      "audio_key": "u2_pattern_p022"
+    }
+  ]
+}

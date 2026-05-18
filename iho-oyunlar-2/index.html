@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <script src="/lib/design-system/theme.js"></script>
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İHO 7. Sınıf 2. Ünite Oyunlar</title>
+  <meta name="description" content="İHO 7. sınıf Arapça 2. ünite Alışveriş Zamanı için kelime, fiyat, diyalog ve cümle oyunları.">
+  <link rel="canonical" href="https://raufenc.com/iho-oyunlar-2/">
+  <link rel="stylesheet" href="style.css">
+  <script src="/nav.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="back-link" href="/iho-oyunlar/">1. Ünite</a>
+      <div class="title-block">
+        <p class="eyebrow">İHO Arapça 7. Sınıf - 2. Ünite</p>
+        <h1>وَقْتُ التَّسَوُّق</h1>
+        <p>Alışveriş Zamanı</p>
+      </div>
+      <div class="summary-strip" aria-label="Ünite özeti">
+        <span><strong id="gameCount">16</strong> oyun</span>
+        <span><strong id="wordCount">98</strong> kelime</span>
+        <span><strong id="dialogueCount">5</strong> diyalog</span>
+      </div>
+    </header>
+
+    <section class="hub-workspace" aria-label="Oyun vitrini">
+      <div class="hub-intro">
+        <p class="game-kicker">Ünite 2 oyun vitrini</p>
+        <h2>Her oyun ayrı akışta açılır</h2>
+        <p>Kelime, alışveriş listesi, fiyat, karşılaştırma, diyalog ve hafıza etkinlikleri ayrı sayfalara bölündü.</p>
+      </div>
+      <div id="hubMenu" class="hub-grid"></div>
+    </section>
+  </main>
+
+  <script src="data/unit2_all.js"></script>
+  <script src="src/gameEngines.umd.js"></script>
+  <script src="hub.js"></script>
+</body>
+</html>

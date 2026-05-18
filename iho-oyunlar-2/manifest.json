@@ -1,0 +1,22 @@
+{
+  "package": "iho_unit2_oyun_database_motorlari",
+  "version": "1.0.0",
+  "counts": {
+    "vocabulary": 98,
+    "patterns": 22,
+    "sentences": 71,
+    "dialogues": 5,
+    "dialogue_lines": 34,
+    "games": 16,
+    "price_sets": 2,
+    "audio_placeholders": 225
+  },
+  "entry_points": {
+    "json_all": "data/unit2_all.json",
+    "browser_data": "data/unit2_all.js",
+    "sqlite": "db/iho_unit2.sqlite",
+    "engine_browser": "src/gameEngines.umd.js",
+    "engine_esm": "src/gameEngines.mjs",
+    "demo": "demo/index.html"
+  }
+}
