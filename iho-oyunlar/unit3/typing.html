@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harf Dizme — İHO 7. Sınıf 3. Ünite</title>
+<meta name="description" content="İHO Arapça 7. sınıf 3. ünite (إلى أين نسافر؟) Harf Dizme oyunu. Karışık harflerden Arapça kelimeyi sırala ve yaz.">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+
+:root{
+  --u3-page-bg:linear-gradient(135deg,#0c1d3a 0%,#102a52 40%,#0a1830 100%);
+  --u3-page-text:#fff;
+  --u3-bar-bg:linear-gradient(180deg,#0f1c34,#0a142a);
+  --u3-bar-border:rgba(255,255,255,0.06);
+  --u3-back-bg:rgba(255,255,255,0.08);
+  --u3-back-border:rgba(255,255,255,0.15);
+  --u3-name:rgba(255,255,255,0.6);
+}
+html.light{
+  --u3-page-bg:linear-gradient(135deg,#e6eef9 0%,#dde7f5 40%,#e8eef7 100%);
+  --u3-page-text:var(--text);
+  --u3-bar-bg:linear-gradient(180deg,#f8f8f8,#f0f0f0);
+  --u3-bar-border:var(--border);
+  --u3-back-bg:rgba(0,0,0,0.05);
+  --u3-back-border:rgba(0,0,0,0.1);
+  --u3-name:rgba(0,0,0,0.55);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--u3-page-bg);color:var(--u3-page-text);min-height:100vh;display:flex;flex-direction:column}
+
+.bar{height:54px;background:var(--u3-bar-bg);display:flex;align-items:center;padding:0 20px;gap:14px;flex-shrink:0;border-bottom:1px solid var(--u3-bar-border)}
+.bar-back{background:var(--u3-back-bg);border:1px solid var(--u3-back-border);color:var(--u3-page-text);padding:9px 20px;border-radius:10px;cursor:pointer;font-size:15px;font-family:inherit;transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+.bar-back:hover{background:rgba(255,255,255,0.15)}
+html.light .bar-back:hover{background:rgba(0,0,0,0.08)}
+.bar-name{font-family:'Arakom',sans-serif;font-size:16px;color:var(--u3-name);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;direction:rtl;text-align:right}
+
+.stage{flex:1;overflow-y:auto;padding:20px 12px 40px}
+#game{margin:0 auto}
+
+@media(max-width:600px){
+  .bar{padding:0 12px;gap:8px}
+  .bar-back{padding:8px 14px;font-size:14px}
+  .bar-name{font-size:14px}
+  .stage{padding:14px 6px 32px}
+}
+</style>
+<link rel="stylesheet" href="src/unit3-game-engine.css">
+<script src="/nav.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<div class="bar">
+  <a class="bar-back" href="./index.html">← Tüm Oyunlara Dön</a>
+  <span class="bar-name">تَرْكيبُ الحُروف</span>
+</div>
+
+<div class="stage">
+  <div id="game"></div>
+</div>
+
+<script src="data/unit3-database.js"></script>
+<script src="src/unit3-game-engine.js"></script>
+<script>
+Unit3GameEngine.mount('#game', 'typing', {
+  data: Unit3Database,
+  limit: 8,
+  title: 'Harf Dizme',
+  subtitle: 'تَرْكيبُ الحُروف'
+});
+</script>
+</body>
+</html>
