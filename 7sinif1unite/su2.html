@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>هل تُحبّ؟ — أداة الاستفهام "هل"</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#004D40,#00695C,#00897B);min-height:100vh;color:#004D40;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+.box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+h1{text-align:center;color:#004D40;font-size:1.55em;margin-bottom:6px}
+.sub{text-align:center;color:#00897B;margin-bottom:14px;font-size:.95em}
+.bar{display:flex;justify-content:space-between;background:#E0F2F1;border-radius:12px;padding:10px 16px;margin-bottom:16px;font-weight:bold;color:#004D40;flex-wrap:wrap;gap:6px}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip b{color:#004D40}
+.scene{background:linear-gradient(135deg,#00897B,#004D40);color:#fff;border-radius:16px;padding:22px 18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,137,123,.35)}
+.scene .who{font-size:2.2em}
+.scene .item-row{display:flex;align-items:center;justify-content:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.scene .pic{font-size:3em;background:#fff;border-radius:14px;padding:6px 12px;color:#004D40}
+.scene .item-label{background:rgba(255,255,255,.18);padding:4px 14px;border-radius:18px;font-weight:bold;font-size:1.1em}
+.scene .ask{font-size:1.25em;margin-top:10px;line-height:1.55}
+.scene .tr{font-size:.82em;color:rgba(255,255,255,.75);margin-top:6px;font-style:italic}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.btn-ans{background:#fff;border:3px solid;border-radius:16px;padding:18px;cursor:pointer;font-family:inherit;font-size:1.1em;font-weight:bold;transition:all .2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.btn-yes{border-color:#4CAF50;color:#1B5E20}
+.btn-yes:hover{background:#C8E6C9}
+.btn-no{border-color:#F44336;color:#B71C1C}
+.btn-no:hover{background:#FFCDD2}
+.btn-ans .em{font-size:1.6em}
+.btn-ans.selected{transform:scale(.96)}
+.btn-ans.correct{background:#C8E6C9;border-color:#4CAF50;color:#1B5E20}
+.btn-ans.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
+.btn-ans.disabled{pointer-events:none;opacity:.55}
+.fb{text-align:center;margin-top:10px;min-height:30px;font-size:1.1em;font-weight:bold}
+.exp{text-align:center;color:#00695C;margin-top:4px;font-size:.98em;background:#E0F2F1;padding:10px 12px;border-radius:10px;line-height:1.55}
+.btn{display:inline-block;background:#00897B;color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
+.btn:hover{background:#004D40}
+.btn.alt{background:#9c88ff}
+.result{text-align:center}
+.result .score{font-size:3em;color:#00897B;font-weight:bold;margin:12px 0}
+.result .stars{font-size:2.2em;margin:8px 0}
+.hidden{display:none}
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10}
+.back:hover{background:rgba(0,0,0,.85)}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>❓ هَلْ تُحِبُّ؟ هَلْ يَأكُلُ؟</h1>
+<div class="sub">السؤال بِـ "هَلْ" — الجواب: نَعَم أو لا (الكتاب: ص. ٢٦-٢٩)</div>
+<div id="game">
+<div class="tip">
+<b>📘 هَلْ</b> أداةُ استفهامٍ جَوابُها <b>نَعَم</b> أو <b>لا</b>. مَثلًا: <b>هَلْ تُحِبُّ الكُفْتَة؟</b> – نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا.
+</div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
+<div class="scene">
+<div class="who" id="who">🧑</div>
+<div class="item-row"><span class="pic" id="pic">🍡</span><span class="item-label" id="item">الكُفْتَة</span></div>
+<div class="ask" id="q"></div>
+<div class="tr" id="tr"></div>
+</div>
+<div class="options">
+<div class="btn-ans btn-yes" id="yesBtn"><span class="em">✅</span>نَعَم</div>
+<div class="btn-ans btn-no" id="noBtn"><span class="em">❌</span>لا</div>
+</div>
+<div class="fb" id="fb"></div>
+<div class="exp" id="exp"></div>
+</div>
+<div id="result" class="result hidden">
+<h2 style="color:#004D40">🎉 رائِعٌ!</h2>
+<div class="stars" id="stars"></div>
+<div class="score" id="final"></div>
+<div id="msg" style="color:#00695C;margin-bottom:14px"></div>
+<button class="btn" onclick="init()">إعادة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائمة ↩</button>
+</div>
+</div>
+<script>
+/* Sahneye karakter + ürün + soru + doğru cevap + açıklama
+   Senaryo: bir karakter ürünü "tutuyor/öne sürüyor", soru soruluyor.
+   Görsel "doğru" cevabı belirliyor:
+     ✓ Eğer karakterin yanındaki ürün = soru sorulan ürün → NEAM
+     ✗ Aksi durumda → LA (alternatifi açıklamada veriliyor) */
+var ALL=[
+/* Kahvaltıda tercihler */
+{who:'🧑',pic:'🍡',item:'الكُفْتَة',q:'هَلْ تُحِبُّ الكُفْتَةَ؟',tr:'Köfte sever misin?',ans:'yes',exp:'نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا'},
+{who:'👧',pic:'🍝',item:'المَكَرونَة',q:'هَلْ تُحِبِّينَ المَكَرونَةَ؟',tr:'Makarna sever misin (kız)?',ans:'no',exp:'لا، لا أُحِبُّ المَكَرونَةَ'},
+{who:'🧑',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ الشّايَ؟',tr:'Çay içer misin?',ans:'yes',exp:'نَعَم، أَشْرَبُ الشّايَ كَثيرًا في الفَطورِ'},
+{who:'👧',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبينَ القَهْوَةَ بَعْدَ الغَداءِ؟',tr:'Öğleden sonra kahve içer misin?',ans:'no',exp:'لا، لا أَشْرَبُ القَهْوَةَ. أَشْرَبُ الشّايَ'},
+/* 3. şahıs — kitap s.28-29 örnekleri */
+{who:'🧔',pic:'🍯',item:'العَسَل',q:'هَلْ يَأكُلُ عُثْمانُ العَسَلَ؟',tr:'Osman bal yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ العَسَلَ والزُبْدَةَ'},
+{who:'👩',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ شَيْماءُ الحَلِيبَ؟',tr:'Şeymâ süt içer mi?',ans:'yes',exp:'نَعَم، هِيَ تَشْرَبُ الحَلِيبَ'},
+{who:'🧔',pic:'🍗',item:'الدَّجاج',q:'هَلْ يَأكُلُ إِبراهيمُ الدَّجاجَ؟',tr:'İbrahim tavuk yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الدَّجاجَ'},
+{who:'👩',pic:'🧃',item:'العَصير',q:'هَلْ تَشْرَبُ ياسَمينُ العَصيرَ؟',tr:'Yâsemin meyve suyu içer mi?',ans:'no',exp:'لا، هِيَ تَشْرَبُ القَهْوَةَ'},
+/* Öğün sınıflandırması — kitap s.24'e göre */
+{who:'🧑',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ الحَلِيبَ في الفَطورِ؟',tr:'Kahvaltıda süt içer misin?',ans:'yes',exp:'نَعَم، أَشْرَبُ الحَلِيبَ كَثيرًا في الفَطورِ'},
+{who:'👧',pic:'🐟',item:'السَّمَك',q:'هَلْ تَأكُلينَ السَّمَكَ في الفَطورِ؟',tr:'Kahvaltıda balık yer misin (kız)?',ans:'no',exp:'لا، آكُلُ السَّمَكَ في العَشاءِ'},
+{who:'🧑',pic:'🫒',item:'الزَّيتون',q:'هَلْ تَأكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ؟',tr:'Kahvaltıda zeytin ve peynir yer misin?',ans:'yes',exp:'نَعَم، آكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ'},
+{who:'👧',pic:'🥩',item:'اللَّحْم',q:'هَلْ تَأكُلينَ اللَّحْمَ في الفَطورِ؟',tr:'Kahvaltıda et yer misin (kız)?',ans:'no',exp:'لا، آكُلُ اللَّحْمَ والأُرُزَ في الغَداءِ'},
+{who:'🧔',pic:'🍡',item:'الكُفْتَة',q:'هَلْ يَأكُلُ أَحْمَدُ الكُفْتَةَ؟',tr:'Ahmed köfte yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الكُفْتَةَ'},
+{who:'👩',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبُ عائِشَةُ القَهْوَةَ؟',tr:'Âişe kahve içer mi?',ans:'no',exp:'لا، هِيَ تَشْرَبُ الشّايَ'}
+];
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var qs,cur,sc;
+function init(){qs=shuf([...ALL]).slice(0,10);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
+function loadQ(){
+var q=qs[cur];
+document.getElementById('who').textContent=q.who;
+document.getElementById('pic').textContent=q.pic;
+document.getElementById('item').textContent=q.item;
+document.getElementById('q').textContent=q.q;
+document.getElementById('tr').textContent='🇹🇷 '+q.tr;
+document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
+['yesBtn','noBtn'].forEach(function(id){var b=document.getElementById(id);b.classList.remove('correct','wrong','disabled')});
+document.getElementById('yesBtn').onclick=function(){answer('yes',this,q)};
+document.getElementById('noBtn').onclick=function(){answer('no',this,q)};
+}
+function answer(choice,btn,q){
+document.getElementById('yesBtn').classList.add('disabled');
+document.getElementById('noBtn').classList.add('disabled');
+if(choice===q.ans){btn.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
+else{btn.classList.add('wrong');
+var corId=q.ans==='yes'?'yesBtn':'noBtn';document.getElementById(corId).classList.add('correct');
+document.getElementById('fb').textContent='❌ الصَّوابُ: '+(q.ans==='yes'?'نَعَم':'لا');document.getElementById('fb').style.color='#F44336';}
+document.getElementById('exp').textContent='💡 '+q.exp;
+cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},2000);
+}
+function end(){
+var fs=Math.round(sc/(qs.length*10)*100);
+document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+document.getElementById('final').textContent=fs+'%';
+document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
+document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+}
+init();
+</script>
+</body>
+</html>

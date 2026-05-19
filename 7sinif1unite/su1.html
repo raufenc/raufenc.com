@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ماذا تُريد؟ — أداة الاستفهام "ماذا"</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1A237E,#3949AB,#5C6BC0);min-height:100vh;color:#1A237E;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+.box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+h1{text-align:center;color:#1A237E;font-size:1.55em;margin-bottom:6px}
+.sub{text-align:center;color:#5C6BC0;margin-bottom:14px;font-size:.95em}
+.bar{display:flex;justify-content:space-between;background:#E8EAF6;border-radius:12px;padding:10px 16px;margin-bottom:16px;font-weight:bold;color:#1A237E;flex-wrap:wrap;gap:6px}
+.q-card{background:linear-gradient(135deg,#3949AB,#1A237E);color:#fff;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(57,73,171,.35)}
+.q-card .badge{display:inline-block;background:#FFD54F;color:#1A237E;padding:4px 14px;border-radius:20px;font-size:.75em;font-weight:bold;margin-bottom:8px;letter-spacing:.04em}
+.q-card .q-text{font-size:1.3em;line-height:1.6}
+.q-card .tr{font-size:.82em;color:rgba(255,255,255,.75);margin-top:8px;font-style:italic}
+.tray{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px;background:#F5F6FB;border-radius:14px;padding:14px}
+.tile{background:#fff;border:2px solid #C5CAE9;border-radius:14px;padding:12px 8px;cursor:pointer;text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tile:hover{background:#E8EAF6;transform:translateY(-3px);border-color:#3949AB}
+.tile .em{font-size:2em}
+.tile .w{font-weight:bold;color:#1A237E;font-size:1em;direction:rtl}
+.tile.correct{background:#C8E6C9;border-color:#4CAF50}
+.tile.wrong{background:#FFCDD2;border-color:#F44336}
+.tile.disabled{pointer-events:none;opacity:.55}
+.fb{text-align:center;margin-top:10px;min-height:30px;font-size:1.1em;font-weight:bold}
+.exp{text-align:center;color:#5C6BC0;margin-top:4px;font-size:.95em;background:#E8EAF6;padding:8px 12px;border-radius:10px;min-height:0}
+.btn{display:inline-block;background:#3949AB;color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
+.btn:hover{background:#1A237E}
+.btn.alt{background:#9c88ff}
+.result{text-align:center}
+.result .score{font-size:3em;color:#3949AB;font-weight:bold;margin:12px 0}
+.result .stars{font-size:2.2em;margin:8px 0}
+.hidden{display:none}
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10}
+.back:hover{background:rgba(0,0,0,.85)}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.5}
+.tip b{color:#1A237E}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>🍽️ ماذا تُريد؟ ماذا يَأكُل؟</h1>
+<div class="sub">السؤال بِـ "ماذا" — المَأكولات والمَشروبات (الكتاب: ص. ٢٦-٢٩)</div>
+<div id="game">
+<div class="tip">
+<b>📘 ماذا</b> أداة استفهام نَسأل بِها عَنِ الشَّيءِ. مَثلًا: <b>ماذا تُريدُ مِنَ المَأكولات؟</b> – أُريدُ <b>الكُفْتَةَ والأُرُزَ</b>.
+</div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
+<div class="q-card">
+<span class="badge" id="badge">ماذا تُريدُ؟</span>
+<div class="q-text" id="q"></div>
+<div class="tr" id="qtr"></div>
+</div>
+<div class="tray" id="tray"></div>
+<div class="fb" id="fb"></div>
+<div class="exp" id="exp"></div>
+</div>
+<div id="result" class="result hidden">
+<h2 style="color:#1A237E">🎉 أَحْسَنْتَ!</h2>
+<div class="stars" id="stars"></div>
+<div class="score" id="final"></div>
+<div id="msg" style="color:#5C6BC0;margin-bottom:14px"></div>
+<button class="btn" onclick="init()">إعادة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائمة ↩</button>
+</div>
+</div>
+<script>
+/* Tüm seçenekler — kitap S.22-24'teki kelimeler */
+var FOODS=[
+{w:'خُبْز',e:'🍞',type:'f'},{w:'جُبْن',e:'🧀',type:'f'},{w:'زَيْتون',e:'🫒',type:'f'},{w:'عَسَل',e:'🍯',type:'f'},
+{w:'زُبْدَة',e:'🧈',type:'f'},{w:'لَحْم',e:'🥩',type:'f'},{w:'دَجاج',e:'🍗',type:'f'},{w:'سَمَك',e:'🐟',type:'f'},
+{w:'أُرُز',e:'🍚',type:'f'},{w:'كُفْتَة',e:'🍡',type:'f'},{w:'بَيْض',e:'🥚',type:'f'},{w:'سَلَطَة',e:'🥗',type:'f'},
+{w:'حَساء',e:'🍲',type:'f'},{w:'مَكَرونَة',e:'🍝',type:'f'}
+];
+var DRINKS=[
+{w:'شاي',e:'🍵',type:'d'},{w:'حَلِيب',e:'🥛',type:'d'},{w:'قَهْوَة',e:'☕',type:'d'},{w:'عَصِير',e:'🧃',type:'d'},{w:'ماء',e:'🚰',type:'d'}
+];
+/* Sorular — kitap S.26-29 ve 38-39 örneklerinden */
+var ALL=[
+{q:'ماذا تُريدُ مِنَ المَأكولاتِ؟',tr:'Yiyeceklerden ne istersin?',ans:'كُفْتَة',exp:'أُريدُ الكُفْتَةَ والأُرُزَ',badge:'ماذا تُريد؟',pool:'f'},
+{q:'ماذا تُريدينَ مِنَ المَشروباتِ؟',tr:'İçeceklerden ne istersin?',ans:'شاي',exp:'أُريدُ الشّايَ',badge:'ماذا تُريدين؟',pool:'d'},
+{q:'ماذا تَأكُلُ في الفَطورِ؟',tr:'Kahvaltıda ne yersin?',ans:'عَسَل',exp:'آكُلُ العَسَلَ والزُبْدَةَ في الفَطورِ',badge:'ماذا تَأكُل؟',pool:'f'},
+{q:'ماذا تَأكُلُ في الغَداءِ؟',tr:'Öğle yemeğinde ne yersin?',ans:'لَحْم',exp:'آكُلُ اللَّحْمَ والأُرُزَ في الغَداءِ',badge:'ماذا تَأكُل؟',pool:'f'},
+{q:'ماذا تَأكُلُ في العَشاءِ؟',tr:'Akşam yemeğinde ne yersin?',ans:'سَمَك',exp:'آكُلُ السَّمَكَ والسَّلَطَةَ في العَشاءِ',badge:'ماذا تَأكُل؟',pool:'f'},
+{q:'ماذا تَشْرَبُ في الفَطورِ؟',tr:'Kahvaltıda ne içersin?',ans:'حَلِيب',exp:'أَشْرَبُ الحَلِيبَ كَثيرًا في الفَطورِ',badge:'ماذا تَشْرَب؟',pool:'d'},
+{q:'ماذا تَشْرَبُ بَعْدَ الغَداءِ؟',tr:'Öğle yemeğinden sonra ne içersin?',ans:'قَهْوَة',exp:'أَشْرَبُ القَهْوَةَ قَليلًا بَعْدَ الغَداءِ',badge:'ماذا تَشْرَب؟',pool:'d'},
+{q:'ماذا يَأكُلُ عُثْمانُ مِنَ المَأكولاتِ؟',tr:'Osman yiyeceklerden ne yer?',ans:'زُبْدَة',exp:'هُوَ يَأكُلُ العَسَلَ والزُبْدَةَ',badge:'ماذا يَأكُل؟',pool:'f'},
+{q:'ماذا تَشْرَبُ شَيْماءُ مِنَ المَشروباتِ؟',tr:'Şeymâ içeceklerden ne içer?',ans:'حَلِيب',exp:'هِيَ تَشْرَبُ الحَلِيبَ',badge:'ماذا تَشْرَب؟',pool:'d'},
+{q:'ماذا تُريدُ مِنَ المَأكولاتِ؟',tr:'Yiyeceklerden ne istersin?',ans:'حَساء',exp:'أُريدُ اللَّحْمَ والحَساءَ',badge:'ماذا تُريد؟',pool:'f'},
+{q:'ماذا تَأكُلِينَ في الغَداءِ يا زَيْنَب؟',tr:'Zeynep öğleyin ne yersin?',ans:'سَمَك',exp:'آكُلُ السَّمَكَ والسَّلَطَةَ',badge:'ماذا تَأكُلين؟',pool:'f'},
+{q:'ماذا يَأكُلُ عُمَرُ مِنَ المَأكولاتِ؟',tr:'Ömer yiyeceklerden ne yer?',ans:'دَجاج',exp:'هُوَ يَأكُلُ الدَّجاجَ',badge:'ماذا يَأكُل؟',pool:'f'}
+];
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var qs,cur,sc;
+function init(){qs=shuf([...ALL]).slice(0,10);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
+function loadQ(){
+var q=qs[cur];
+document.getElementById('q').textContent=q.q;
+document.getElementById('qtr').textContent='🇹🇷 '+q.tr;
+document.getElementById('badge').textContent=q.badge;
+document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
+var pool=q.pool==='d'?DRINKS:FOODS;
+var correctItem=pool.find(function(x){return x.w===q.ans});
+var wrongs=shuf(pool.filter(function(x){return x.w!==q.ans})).slice(0,5);
+var opts=shuf([correctItem].concat(wrongs));
+var el=document.getElementById('tray');el.innerHTML='';
+opts.forEach(function(o){
+var t=document.createElement('div');t.className='tile';
+t.innerHTML='<span class="em">'+o.e+'</span><span class="w">'+o.w+'</span>';
+t.onclick=function(){answer(o,t,q)};
+el.appendChild(t);
+});
+}
+function answer(o,t,q){
+document.querySelectorAll('.tile').forEach(function(x){x.classList.add('disabled')});
+if(o.w===q.ans){t.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
+else{t.classList.add('wrong');
+document.querySelectorAll('.tile').forEach(function(x){if(x.querySelector('.w').textContent===q.ans)x.classList.add('correct')});
+document.getElementById('fb').textContent='❌ الصَّوابُ: '+q.ans;document.getElementById('fb').style.color='#F44336';}
+document.getElementById('exp').textContent='💡 '+q.exp;
+cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1900);
+}
+function end(){
+var fs=Math.round(sc/(qs.length*10)*100);
+document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+document.getElementById('final').textContent=fs+'%';
+document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
+document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+}
+init();
+</script>
+</body>
+</html>

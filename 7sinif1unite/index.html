@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İHO 7. Sınıf 1. Ünite — Arapça Oyunlar ve Etkinlikler</title>
+<meta name="description" content="İmam Hatip Ortaokulu 7. sınıf Arapça 1. ünite için seçilmiş oyunlar: günlük rutinler, zamir-fiil, kelime, soru edatları, namaz vakitleri ve haftanın günleri.">
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+:root{
+  --bg:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
+  --text:#fff;
+  --badge-bg:rgba(255,255,255,.08);
+  --badge-bd:rgba(255,255,255,.15);
+  --badge-tx:rgba(255,255,255,.6);
+  --subtitle:rgba(255,255,255,.55);
+  --count:rgba(255,255,255,.3);
+  --label-tx:rgba(255,255,255,.42);
+  --label-ln:rgba(255,255,255,.08);
+  --card-bg:rgba(255,255,255,.05);
+  --card-bd:rgba(255,255,255,.08);
+  --card-hover:rgba(255,255,255,.10);
+  --card-tr:rgba(255,255,255,.45);
+  --note-bg:rgba(255,255,255,.04);
+  --note-bd:rgba(255,255,255,.10);
+  --note-tx:rgba(255,255,255,.7);
+  --footer:rgba(255,255,255,.22);
+  --overlay-bg:#000;
+  --overlay-bar:linear-gradient(180deg,#111,#0a0a0a);
+  --overlay-bd:#222;
+  --overlay-back-bg:rgba(255,255,255,.08);
+  --overlay-back-bd:rgba(255,255,255,.15);
+  --overlay-name:rgba(255,255,255,.55);
+  --frame-bg:#1a1a2e;
+}
+html.light{
+  --bg:linear-gradient(135deg,#eae8f2 0%,#e0ddf0 40%,#e8e6f2 100%);
+  --text:#1a1a2e;
+  --badge-bg:rgba(0,0,0,.05);
+  --badge-bd:rgba(0,0,0,.1);
+  --badge-tx:rgba(0,0,0,.5);
+  --subtitle:rgba(0,0,0,.5);
+  --count:rgba(0,0,0,.3);
+  --label-tx:rgba(0,0,0,.45);
+  --label-ln:rgba(0,0,0,.08);
+  --card-bg:rgba(255,255,255,.7);
+  --card-bd:rgba(0,0,0,.08);
+  --card-hover:rgba(255,255,255,.9);
+  --card-tr:rgba(0,0,0,.5);
+  --note-bg:rgba(0,0,0,.03);
+  --note-bd:rgba(0,0,0,.08);
+  --note-tx:rgba(0,0,0,.7);
+  --footer:rgba(0,0,0,.25);
+  --overlay-bg:#fff;
+  --overlay-bar:linear-gradient(180deg,#f8f8f8,#f0f0f0);
+  --overlay-bd:#ccc;
+  --overlay-back-bg:rgba(0,0,0,.05);
+  --overlay-back-bd:rgba(0,0,0,.1);
+  --overlay-name:rgba(0,0,0,.55);
+  --frame-bg:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden}
+
+.hub-header{text-align:center;padding:48px 24px 18px}
+.hub-badge{display:inline-block;background:var(--badge-bg);border:1px solid var(--badge-bd);color:var(--badge-tx);padding:8px 24px;border-radius:100px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.hub-title{font-size:clamp(26px,4.6vw,46px);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:6px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hub-subtitle{font-family:'Arakom',sans-serif;color:var(--subtitle);font-size:clamp(15px,2vw,20px);margin-bottom:6px;direction:rtl}
+.hub-count{color:var(--count);font-size:14px;margin-top:8px}
+
+.intro{max-width:1100px;margin:18px auto;padding:0 24px;color:var(--note-tx);font-size:15px;line-height:1.65}
+.intro .card{background:var(--note-bg);border:1px solid var(--note-bd);border-radius:14px;padding:14px 18px}
+.intro b{color:var(--text)}
+.intro .src{color:var(--count);font-size:13px;margin-top:6px;display:block}
+
+.section-label{max-width:1300px;margin:30px auto 12px;padding:0 24px;font-size:clamp(13px,1.7vw,15px);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--label-tx);display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--label-ln)}
+.section-note{max-width:1300px;margin:-6px auto 10px;padding:0 24px;color:var(--count);font-size:13px;direction:rtl;text-align:right}
+
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;max-width:1300px;margin:0 auto;padding:0 24px 8px}
+.game-card{background:var(--card-bg);border:1px solid var(--card-bd);border-radius:18px;padding:22px 16px 18px;text-align:center;cursor:pointer;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;overflow:hidden}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;opacity:.65;transition:opacity .3s}
+.game-card:hover{background:var(--card-hover);transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.game-card:hover::before{opacity:1}
+.card-icon{width:74px;height:74px;margin:0 auto 10px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08)}
+html.light .card-icon{background:linear-gradient(135deg,#fff,#f3f3fa);border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.card-name{font-family:'Arakom',sans-serif;font-size:clamp(1.05em,1.9vw,1.3em);font-weight:bold;margin-bottom:5px;direction:rtl;color:var(--text);line-height:1.3}
+.card-tr{font-size:clamp(12px,1.3vw,13.5px);color:var(--card-tr);margin-bottom:8px;line-height:1.45;min-height:2.4em;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.card-page{display:inline-block;font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.04em;background:rgba(255,255,255,.05);color:var(--card-tr);border:1px solid var(--card-bd)}
+html.light .card-page{background:rgba(0,0,0,.04)}
+.card-edit{display:inline-block;font-size:10.5px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.03em;background:rgba(255,193,7,.15);color:#ffd54f;border:1px solid rgba(255,193,7,.25);margin-right:4px}
+html.light .card-edit{background:rgba(245,127,23,.10);color:#e65100;border:1px solid rgba(245,127,23,.2)}
+.card-new{display:inline-block;font-size:10.5px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.03em;background:rgba(76,175,80,.15);color:#a5d6a7;border:1px solid rgba(76,175,80,.25);margin-right:4px}
+html.light .card-new{background:rgba(46,125,50,.10);color:#1b5e20;border:1px solid rgba(46,125,50,.2)}
+
+.group-a .game-card::before{background:linear-gradient(90deg,#667eea,#764ba2)}
+.group-a .game-card{border-color:rgba(102,126,234,.15)}
+.group-a .game-card:hover{border-color:rgba(102,126,234,.4)}
+
+.group-b .game-card::before{background:linear-gradient(90deg,#f5576c,#f093fb)}
+.group-b .game-card{border-color:rgba(245,87,108,.15)}
+.group-b .game-card:hover{border-color:rgba(245,87,108,.4)}
+
+.group-c .game-card::before{background:linear-gradient(90deg,#00BCD4,#4CAF50)}
+.group-c .game-card{border-color:rgba(0,188,212,.15)}
+.group-c .game-card:hover{border-color:rgba(0,188,212,.4)}
+
+.group-d .game-card::before{background:linear-gradient(90deg,#3949AB,#7B1FA2)}
+.group-d .game-card{border-color:rgba(57,73,171,.18)}
+.group-d .game-card:hover{border-color:rgba(57,73,171,.45)}
+
+.group-e .game-card::before{background:linear-gradient(90deg,#5e35b2,#7CB342)}
+.group-e .game-card{border-color:rgba(94,53,177,.18)}
+.group-e .game-card:hover{border-color:rgba(94,53,177,.45)}
+
+.video-note{max-width:1300px;margin:24px auto 14px;padding:0 24px}
+.video-note .card{background:var(--note-bg);border:1px dashed var(--note-bd);border-radius:14px;padding:14px 18px;color:var(--note-tx);font-size:14px;line-height:1.55}
+.video-note b{color:var(--text)}
+.video-note small{color:var(--count);font-size:12.5px}
+
+.hub-footer{text-align:center;color:var(--footer);font-size:13px;padding:30px 20px 50px}
+.hub-footer a{color:var(--footer);text-decoration:none;border-bottom:1px dotted var(--footer)}
+.hub-footer a:hover{color:var(--text)}
+
+/* Overlay frame */
+.overlay{position:fixed;inset:0;display:none;flex-direction:column;background:var(--overlay-bg);z-index:9999}
+.overlay.active{display:flex}
+.overlay-bar{background:var(--overlay-bar);border-bottom:1px solid var(--overlay-bd);padding:10px 16px;display:flex;align-items:center;gap:12px}
+.overlay-back{background:var(--overlay-back-bg);border:1px solid var(--overlay-back-bd);color:var(--text);padding:8px 18px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:14px}
+.overlay-back:hover{background:var(--card-hover)}
+.overlay-name{font-family:'Arakom',sans-serif;font-weight:bold;color:var(--text);direction:rtl;font-size:18px}
+.overlay-sub{color:var(--overlay-name);font-size:13px}
+.overlay-frame{flex:1;width:100%;border:none;background:var(--frame-bg)}
+</style>
+</head>
+<body>
+
+<div class="hub-header">
+  <div class="hub-badge">İHO • 7. Sınıf • 1. Ünite</div>
+  <h1 class="hub-title">Arapça 1. Ünite Oyunları</h1>
+  <div class="hub-subtitle">ماذا فَعَلْتَ اليَوْمَ؟</div>
+  <div class="hub-count">15 etkinlik · 9 oyunun düzenlenmiş hâli + 6 yeni öneri</div>
+</div>
+
+<div class="intro">
+  <div class="card">
+    <b>📄 Bu sayfa ne içerir?</b> Bu sayfa, <b>7. sınıf 1. ünite</b> için elindeki <b>“Arapça 7. Sınıf 1. Üniteyle İlgili Oyunlar ve Öneriler”</b> dökümanına göre derlendi. Dökümanda adı geçen oyunlar buraya taşındı ve <b>belirtilen düzenlemeler uygulandı</b>. Etkinlik istenen iki konu (<b>"ماذا/هل" soru kalıpları</b> ve <b>Namaz vakitleri + Haftanın günleri</b>) için ise <b>üçer yeni oyun</b> hazırlandı.
+    <br><br>
+    <b>📘 Ders kitabı uyumu:</b> Tüm oyunların kelime, cümle ve dil bilgisi içeriği <i>IHO_Arp7_01_Unite1 (25.02.2026)</i> ders kitabıyla <b>sayfa sayfa karşılaştırılarak doğrulandı</b>. Soru-edatı oyunları kitabın <b>"ماذا" ve "هل"</b> ekseninde, yiyecek/içecek bağlamında kuruldu (kitap s. 26-29).
+    <span class="src">📌 Sarı etiket = dökümandaki düzenleme uygulandı &nbsp;&nbsp; 🆕 Yeşil etiket = yeni öneri</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP A: Sayfa 14-17 — Günlük hayat rutinleri (muzari fiil) ─────────── -->
+<div class="section-label">A · Sayfa 14-17 · Günlük rutinler (muzari fiil)</div>
+<div class="section-note">الوحدة الأولى — الأنشطة اليومية والفعل المضارع</div>
+<div class="games-grid group-a">
+  <div class="game-card" onclick="openGame('./ka.html#g4','اخْتَر الفِعْلَ الصَّحيح','Doğru Fiili Seç')">
+    <div class="card-icon">🎯</div>
+    <div class="card-name">اخْتَرْ الفِعْلَ الصَّحيح</div>
+    <div class="card-tr">Cümleye uygun doğru fiili seç</div>
+    <span class="card-page">s. 14-17</span>
+  </div>
+  <div class="game-card" onclick="openGame('./ka.html#g2','رَتِّب يَوْمَكَ','Gününü Düzenle')">
+    <div class="card-icon">📋</div>
+    <div class="card-name">رَتِّبْ يَوْمَكَ</div>
+    <div class="card-tr">Sabah + Akşam: iki bölümde 5'er cümle</div>
+    <span class="card-edit">✎ 2 bölüm, 5'er cümle</span>
+    <span class="card-page">s. 14-17</span>
+  </div>
+  <div class="game-card" onclick="openGame('./hf.html#g3','ابْنِ الجُمْلَة','Cümle Kur')">
+    <div class="card-icon">🏗️</div>
+    <div class="card-name">ابْنِ الجُمْلَة</div>
+    <div class="card-tr">Bir cümleye ait kelimelerden cümle kur</div>
+    <span class="card-edit">✎ Tek cümle odaklı</span>
+    <span class="card-page">s. 14-17</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP B: Sayfa 18-21 — Zamir-Fiil ilişkisi ─────────── -->
+<div class="section-label">B · Sayfa 18-21 · Zamir-fiil ilişkisi</div>
+<div class="section-note">الضمير والفعل المضارع</div>
+<div class="games-grid group-b">
+  <div class="game-card" onclick="openGame('./hf.html#g4','اقْصِفِ الخَطَأ','Hatayı Bombala')">
+    <div class="card-icon">💥</div>
+    <div class="card-name">اقْصِفِ الخَطَأ</div>
+    <div class="card-tr">Zamire göre fiil / Fiile göre zamir — iki yönlü</div>
+    <span class="card-edit">✎ Süre 8s→12s, çift yönlü mod</span>
+    <span class="card-page">s. 18-21</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP C: Sayfa 22-29 — Kelime, Yiyecek, Soru edatları ─────────── -->
+<div class="section-label">C · Sayfa 22-25 · Kelime ve Yiyecek</div>
+<div class="section-note">المُفْرَدات والطعام</div>
+<div class="games-grid group-c">
+  <div class="game-card" onclick="openGame('./ka.html#g1','لُعْبَةُ المُفْرَدات','Kelime Eşleştirme')">
+    <div class="card-icon">🧩</div>
+    <div class="card-name">لُعْبَةُ المُفْرَدات</div>
+    <div class="card-tr">Kelimeyi doğru simgeyle eşle</div>
+    <span class="card-edit">✎ Simgeler düzeltildi</span>
+    <span class="card-page">s. 22-23</span>
+  </div>
+  <div class="game-card" onclick="openGame('./hf.html#g2','صَنِّفِ الطَّعام','Yiyecekleri Sınıflandır')">
+    <div class="card-icon">📂</div>
+    <div class="card-name">صَنِّفِ الطَّعام</div>
+    <div class="card-tr">Kahvaltı · Öğle · Akşam — kitap s.24 sınıflandırması</div>
+    <span class="card-edit">✎ Kitaba göre düzenlendi</span>
+    <span class="card-page">s. 24-25</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP D: Sayfa 26-29 — Soru edatları "ماذا / هل" (YENİ ETKİNLİKLER) ─────────── -->
+<div class="section-label">D · Sayfa 26-29 · "ماذا" ve "هل" (Yeni 3 öneri)</div>
+<div class="section-note">السؤال بِـ "ماذا" و"هل" مَعَ المَأكولات والمَشروبات</div>
+<div class="games-grid group-d">
+  <div class="game-card" onclick="openGame('./su1.html','ماذا تُريد؟','Mâzâ — Yiyecek Seç')">
+    <div class="card-icon">🍽️</div>
+    <div class="card-name">ماذا تُريدُ؟ ماذا يَأكُلُ؟</div>
+    <div class="card-tr">"Mâzâ" soruları — yiyecek/içecek seç</div>
+    <span class="card-new">🆕 Yeni öneri 1/3</span>
+    <span class="card-page">s. 26-29</span>
+  </div>
+  <div class="game-card" onclick="openGame('./su2.html','هَلْ تُحِبُّ؟','Hel — Evet/Hayır')">
+    <div class="card-icon">❓</div>
+    <div class="card-name">هَلْ تُحِبُّ؟ هَلْ يَأكُلُ؟</div>
+    <div class="card-tr">"Hel" soruları — Nâam / Lâ tercihi</div>
+    <span class="card-new">🆕 Yeni öneri 2/3</span>
+    <span class="card-page">s. 26-29</span>
+  </div>
+  <div class="game-card" onclick="openGame('./su3.html','هُوَ / هِيَ','3. şahıs (Hu/Hiye)')">
+    <div class="card-icon">👥</div>
+    <div class="card-name">ماذا يَأكُلُ؟ ماذا تَشْرَبُ؟</div>
+    <div class="card-tr">"Hu / Hiye" zamir-fiil uyumlu cümle seç</div>
+    <span class="card-new">🆕 Yeni öneri 3/3</span>
+    <span class="card-page">s. 28-29</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP C2: Sayfa 34 — Saatler ─────────── -->
+<div class="section-label">C · Sayfa 34 · Saatler</div>
+<div class="section-note">السّاعات</div>
+<div class="games-grid group-c">
+  <div class="game-card" onclick="openGame('./ka.html#g3','كَمِ السّاعَة','Saat Kaç?')">
+    <div class="card-icon">🕐</div>
+    <div class="card-name">كَمِ السّاعَة؟</div>
+    <div class="card-tr">Saati Arapça oku ve doğru ifadeyi seç</div>
+    <span class="card-page">s. 34</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP E: Sayfa 35-37 — Namaz vakitleri + Haftanın günleri (YENİ ETKİNLİKLER) ─────────── -->
+<div class="section-label">E · Sayfa 35-37 · Namaz Vakitleri & Haftanın Günleri (Yeni 3 öneri)</div>
+<div class="section-note">مَواقيتُ الصَّلاةِ وأَيّامُ الأُسْبوع</div>
+<div class="games-grid group-e">
+  <div class="game-card" onclick="openGame('./na1.html','مَواقيتُ الصَّلاة','Namaz Vakti Eşle')">
+    <div class="card-icon">🕌</div>
+    <div class="card-name">مَواقيتُ الصَّلاةِ</div>
+    <div class="card-tr">Görsel ve saatten namaz vaktini bul</div>
+    <span class="card-new">🆕 Yeni öneri 1/3</span>
+    <span class="card-page">s. 35-37</span>
+  </div>
+  <div class="game-card" onclick="openGame('./na2.html','أَيّامُ الأُسْبوع','Haftanın Günleri')">
+    <div class="card-icon">📅</div>
+    <div class="card-name">أَيّامُ الأُسْبوعِ</div>
+    <div class="card-tr">Günleri Pazardan Cumartesiye sırala (2 bölüm)</div>
+    <span class="card-new">🆕 Yeni öneri 2/3</span>
+    <span class="card-page">s. 35-37</span>
+  </div>
+  <div class="game-card" onclick="openGame('./na3.html','جَدْوَلُ اليَوْمِ','Günlük Plan')">
+    <div class="card-icon">📔</div>
+    <div class="card-name">جَدْوَلُ اليَوْمِ</div>
+    <div class="card-tr">Gün + vakit verili, yapılacak işi seç</div>
+    <span class="card-new">🆕 Yeni öneri 3/3</span>
+    <span class="card-page">s. 35-37</span>
+  </div>
+</div>
+
+<!-- ─────────── GROUP A2: Sayfa 17, 31, 38 — Diyalog / Hafıza ─────────── -->
+<div class="section-label">F · Sayfa 17, 31, 38 · Diyalog ve Hafıza</div>
+<div class="section-note">إكمال الحوار ولُعبة الذاكرة</div>
+<div class="games-grid group-a">
+  <div class="game-card" onclick="openGame('./ka.html#g5','أَكْمِلِ الحِوار','Diyaloğu Tamamla')">
+    <div class="card-icon">💬</div>
+    <div class="card-name">أَكْمِلِ الحِوارَ</div>
+    <div class="card-tr">Diyaloğun eksik kısımlarını tamamla</div>
+    <span class="card-page">s. 17, 31, 38</span>
+  </div>
+  <div class="game-card" onclick="openGame('./ka.html#g6','لُعْبَةُ الذّاكِرَة','Hafıza Oyunu')">
+    <div class="card-icon">🧠</div>
+    <div class="card-name">لُعْبَةُ الذّاكِرَةِ</div>
+    <div class="card-tr">Yiyecek-içecek, mutfak eşyaları, tam saatler</div>
+    <span class="card-edit">✎ Saatler eklendi</span>
+    <span class="card-page">s. 17, 31, 38</span>
+  </div>
+</div>
+
+<div class="video-note">
+  <div class="card">
+    <b>🎬 Video önerisi (dökümandaki not):</b> Her ders için video izletip ardından soru sorma etkinliği planlamak çok faydalıdır. Bu etkinlik tipi şu an bu sayfada doğrudan bulunmamakla birlikte, mevcut <i>"الْمَأْكولاتُ والْمَشْروبات"</i> (iy.html) modülü video + soru yapısının örneğidir.
+    <br><small>Not: Bu sayfada listelenen ✎ etiketli oyunlar, dökümandaki öneri ve düzenlemeler uygulanmış hâlleridir; orijinal sürümleri /iho-oyunlar altında ayrıca durmaktadır.</small>
+  </div>
+</div>
+
+<div class="hub-footer">
+  <a href="/iho-oyunlar/">↩ Tüm İHO Oyunları</a> &nbsp;·&nbsp; <a href="/">raufenc.com</a>
+</div>
+
+<!-- ─────── Overlay ─────── -->
+<div class="overlay" id="ov">
+  <div class="overlay-bar">
+    <button class="overlay-back" onclick="closeGame()">↩ Geri</button>
+    <div>
+      <div class="overlay-name" id="ovName"></div>
+      <div class="overlay-sub" id="ovSub"></div>
+    </div>
+  </div>
+  <iframe class="overlay-frame" id="ovFrame" src="about:blank"></iframe>
+</div>
+
+<script>
+function openGame(url,arName,trName){
+  document.getElementById('ovName').textContent=arName||'';
+  document.getElementById('ovSub').textContent=trName||'';
+  document.getElementById('ovFrame').src=url;
+  document.getElementById('ov').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeGame(){
+  document.getElementById('ov').classList.remove('active');
+  document.getElementById('ovFrame').src='about:blank';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeGame()});
+</script>
+</body>
+</html>
