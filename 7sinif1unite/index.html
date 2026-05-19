@@ -310,13 +310,13 @@ html.light .card-new{background:rgba(46,125,50,.10);color:#1b5e20;border:1px sol
 </div>
 
 <script>
-/* Tarayıcı bazı iframe içeriklerini engelleyebildiği için her oyun
-   doğrudan aynı sekmede açılır. Geri dönüş için her oyun içinde
-   "↩ القائمة" linki vardır (su*/na* dosyalarında) veya ka.html/hf.html
-   doğrudan açılırken kendi iç menüsünden çalışır. */
+// Tarayıcı bazı iframe içeriklerini engelleyebildiği için her oyun
+// doğrudan aynı sekmede açılır. Geri dönüş için her oyun içinde
+// "↩ القائمة" linki vardır (su ve na dosyalarında) veya ka/hf
+// doğrudan açılırken kendi iç menüsünden çalışır.
 function openGame(ev,url,arName,trName){
   if(ev&&(ev.ctrlKey||ev.metaKey||ev.button===1)){
-    /* Ctrl/Cmd-click veya orta tık → yeni sekmede */
+    // Ctrl/Cmd-click veya orta tık → yeni sekmede
     window.open(url,'_blank','noopener');
     return;
   }
