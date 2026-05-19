@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دائرة اليوم — مَواقيتُ الصَّلاةِ</title>
+<style>
+@font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:radial-gradient(ellipse at top,#1a237e 0%,#000033 60%,#000 100%);min-height:100vh;color:#fff;padding:14px;font-size:clamp(15px,1.7vw,20px);overflow-x:hidden}
+.box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;max-width:1100px;margin:0 auto;backdrop-filter:blur(8px)}
+h1{text-align:center;font-size:1.5em;margin-bottom:4px;background:linear-gradient(90deg,#FFD54F,#FF9800,#E91E63);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{text-align:center;color:rgba(255,255,255,.65);margin-bottom:14px;font-size:.92em}
+.tip{background:rgba(255,193,7,.10);border-right:3px solid #FFC107;border-radius:10px;padding:9px 14px;margin-bottom:12px;color:rgba(255,255,255,.85);font-size:.88em;line-height:1.55}
+.tip b{color:#FFD54F}
+
+/* Mode toggle */
+.mode-bar{display:flex;justify-content:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.mode-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);color:#fff;padding:8px 18px;border-radius:24px;cursor:pointer;font-family:inherit;font-size:.92em;font-weight:bold;transition:all .2s}
+.mode-btn:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.25)}
+.mode-btn.active{background:linear-gradient(135deg,#FF9800,#E91E63);border-color:#FFD54F}
+
+/* Status bar */
+.status-bar{display:flex;justify-content:space-between;background:rgba(255,255,255,.05);border-radius:12px;padding:9px 16px;margin-bottom:12px;font-weight:bold;flex-wrap:wrap;gap:8px;font-size:.92em}
+.status-bar .timer{color:#FFD54F}
+.status-bar .p1{color:#4FC3F7}.status-bar .p2{color:#FF8A80}
+
+/* Game arena */
+.arena{display:flex;gap:14px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
+.player-zone{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px;flex:1;min-width:320px;max-width:480px;transition:all .3s}
+.player-zone.win{box-shadow:0 0 30px 5px #4CAF50,inset 0 0 30px rgba(76,175,80,.18);border-color:#4CAF50}
+.player-zone .ptitle{text-align:center;font-size:1.1em;font-weight:bold;margin-bottom:8px}
+.player-zone.p1 .ptitle{color:#4FC3F7}
+.player-zone.p2 .ptitle{color:#FF8A80}
+
+/* Clock circle */
+.clock-wrap{position:relative;width:280px;height:280px;margin:0 auto 12px}
+.clock-svg{width:100%;height:100%;display:block;overflow:visible}
+.clock-center{font-size:.7em}
+
+/* Prayer slots — clickable when something is selected */
+.prayer-slot{cursor:pointer;transition:all .25s}
+.prayer-slot:hover{filter:brightness(1.25)}
+.prayer-slot.filled{filter:brightness(1)}
+.prayer-slot.wrong{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+
+/* Prayer cards (drag pool) */
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:10px;background:rgba(0,0,0,.25);border-radius:14px;min-height:60px}
+.pcard{background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05));border:2px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;border-radius:14px;cursor:pointer;font-family:'Arakom',sans-serif;font-size:1em;font-weight:bold;transition:all .2s;user-select:none}
+.pcard:hover{transform:translateY(-2px);border-color:#FFD54F;background:linear-gradient(135deg,rgba(255,213,79,.3),rgba(255,152,0,.1))}
+.pcard.selected{background:linear-gradient(135deg,#FF9800,#E91E63);border-color:#FFD54F;transform:scale(1.06)}
+.pcard.placed{opacity:.3;pointer-events:none;text-decoration:line-through}
+
+/* Feedback */
+.fb{text-align:center;margin-top:10px;min-height:22px;font-weight:bold;font-size:.95em}
+
+/* Result */
+.result{text-align:center;padding:20px}
+.result h2{font-size:1.6em;margin-bottom:10px}
+.result .winner{font-size:2em;color:#FFD54F;margin:10px 0;font-weight:bold}
+.result .summary{color:rgba(255,255,255,.75);margin:10px 0}
+.btn{display:inline-block;background:linear-gradient(135deg,#FF9800,#E91E63);color:#fff;border:none;border-radius:25px;padding:11px 26px;font-family:inherit;font-size:1em;cursor:pointer;margin:6px 4px;font-weight:bold}
+.btn.alt{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2)}
+.btn:hover{filter:brightness(1.1)}
+.hidden{display:none}
+
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10;text-decoration:none;font-size:.92em}
+.back:hover{background:rgba(0,0,0,.85)}
+
+/* Sun animation */
+.sun{font-size:24px;transition:all .5s ease-out;filter:drop-shadow(0 0 8px #FFD54F)}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>🕌 دائِرَةُ اليَوْمِ — مَواقيتُ الصَّلاةِ</h1>
+<div class="sub">ضَعْ كُلَّ صَلاةٍ في وَقْتِها على دائِرَةِ ٢٤ ساعَة — الشَّمْسُ تَدورُ مَعَكَ!</div>
+
+<div class="tip">
+<b>📘 الطَّريقَة:</b> اضْغَطْ على اسْمِ الصَّلاةِ (أَسْفَل)، ثُمَّ اضْغَطْ على المِنْطَقَةِ الصَّحيحَةِ في الدائِرَة. الشَّمْسُ تَتَحَرَّك حَوْلَ الدّائِرَةِ كَأَنَّها يَوْمٌ كامِلٌ.
+</div>
+
+<div class="mode-bar">
+  <button class="mode-btn active" id="modeSolo" onclick="setMode('solo')">👤 لاعِبٌ واحِدٌ</button>
+  <button class="mode-btn" id="mode2p" onclick="setMode('2p')">👥 لاعِبانِ — سِباقٌ</button>
+</div>
+
+<div id="game">
+  <div class="status-bar" id="statusBar">
+    <span>الحالة: <span id="status">الزَّمَنُ يَجري…</span></span>
+    <span class="timer">⏱ <span id="timer">0.0</span> ث</span>
+  </div>
+
+  <div class="arena" id="arena">
+    <!-- Player zones inserted by JS -->
+  </div>
+
+  <div class="fb" id="fb"></div>
+</div>
+
+<div id="result" class="result hidden">
+  <h2 id="resultTitle">🎉 انتَهَت اللُّعْبَة!</h2>
+  <div class="winner" id="winner"></div>
+  <div class="summary" id="summary"></div>
+  <button class="btn" onclick="reset()">إعادَة 🔄</button>
+  <button class="btn alt" onclick="location.href='./index.html'">القائمَة ↩</button>
+</div>
+</div>
+
+<script>
+/* Namaz vakitleri — 24 saatlik daire üzerinde başlangıç ve bitiş açıları (derece)
+   Tam daire = 24 saat. Saat 0 (gece yarısı) = en üst (12 yönü, -90°).
+   Her saat = 15°. Gün ilerleyişi clockwise (sağa doğru). */
+const PRAYERS = [
+  {key:'fajr',   ar:'الفَجْر',   start: 4.5, end: 6.0,  color:'#5C6BC0', sunIcon:'🌄', tip:'قَبْلَ شُروقِ الشَّمْسِ'},
+  {key:'zuhr',   ar:'الظُّهْر', start: 12.5, end: 14.5, color:'#FF9800', sunIcon:'☀️', tip:'بَعْدَ زَوالِ الشَّمْسِ'},
+  {key:'asr',    ar:'العَصْر',  start: 15.5, end: 17.5, color:'#FFB74D', sunIcon:'🌤️', tip:'بَيْنَ الظُّهْرِ والمَغْرِبِ'},
+  {key:'maghrib',ar:'المَغْرِب',start: 18.5, end: 19.5, color:'#E91E63', sunIcon:'🌇', tip:'عِنْدَ غُروبِ الشَّمْسِ'},
+  {key:'isha',   ar:'العِشاء', start: 20.5, end: 22.5, color:'#3F51B5', sunIcon:'🌃', tip:'بَعْدَ ذَهابِ الشَّفَقِ'}
+];
+
+// 24 saatlik daire için: saat h => açı (radyan). Üst (12 yönü) = 0 saat. Saat ilerlemesi clockwise.
+function hourToAngleDeg(h){ return (h / 24) * 360 - 90; }   // -90° offset: 0 saat üstte
+function hourToRad(h){ return hourToAngleDeg(h) * Math.PI / 180; }
+
+let mode = 'solo';
+let players = [];
+let startTime = 0;
+let timerInterval = null;
+let sunInterval = null;
+let virtualHour = 4.0; // sun starts at fajr
+
+function setMode(m){
+  mode = m;
+  document.getElementById('modeSolo').classList.toggle('active', m==='solo');
+  document.getElementById('mode2p').classList.toggle('active', m==='2p');
+  reset();
+}
+
+function buildClock(playerId){
+  // SVG: 280x280, center 140,140, radius 110 (ring), inner 60 (center text)
+  const cx = 140, cy = 140, rOuter = 124, rInner = 78;
+  let segments = '';
+
+  // Her namaz dilimini ark olarak çiz
+  PRAYERS.forEach(p => {
+    const a1 = hourToAngleDeg(p.start);
+    const a2 = hourToAngleDeg(p.end);
+    const x1 = cx + rOuter * Math.cos(a1 * Math.PI/180);
+    const y1 = cy + rOuter * Math.sin(a1 * Math.PI/180);
+    const x2 = cx + rOuter * Math.cos(a2 * Math.PI/180);
+    const y2 = cy + rOuter * Math.sin(a2 * Math.PI/180);
+    const xi1 = cx + rInner * Math.cos(a1 * Math.PI/180);
+    const yi1 = cy + rInner * Math.sin(a1 * Math.PI/180);
+    const xi2 = cx + rInner * Math.cos(a2 * Math.PI/180);
+    const yi2 = cy + rInner * Math.sin(a2 * Math.PI/180);
+    const large = (p.end - p.start) > 12 ? 1 : 0;
+    const path = `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2} ${y2} L ${xi2} ${yi2} A ${rInner} ${rInner} 0 ${large} 0 ${xi1} ${yi1} Z`;
+    segments += `<path class="prayer-slot" data-key="${p.key}" data-player="${playerId}" d="${path}" fill="${p.color}" fill-opacity="0.18" stroke="${p.color}" stroke-width="2" stroke-opacity="0.4"/>`;
+
+    // Etiket (saat aralığı)
+    const am = (p.start + p.end) / 2;
+    const aMid = hourToAngleDeg(am);
+    const rLbl = (rOuter + rInner) / 2;
+    const xL = cx + rLbl * Math.cos(aMid * Math.PI/180);
+    const yL = cy + rLbl * Math.sin(aMid * Math.PI/180);
+    segments += `<text class="slot-label-${playerId}-${p.key}" x="${xL}" y="${yL}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.55)" font-size="9" font-family="Arial">${Math.floor(p.start)}-${Math.floor(p.end)}</text>`;
+  });
+
+  // 24 saat işaretleri
+  let ticks = '';
+  for(let h=0; h<24; h++){
+    const a = hourToAngleDeg(h) * Math.PI/180;
+    const x = cx + (rOuter + 6) * Math.cos(a);
+    const y = cy + (rOuter + 6) * Math.sin(a);
+    const x2 = cx + (rOuter + 14) * Math.cos(a);
+    const y2 = cy + (rOuter + 14) * Math.sin(a);
+    ticks += `<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,${h%6===0?.55:.25})" stroke-width="${h%6===0?2:1}"/>`;
+    if(h%6===0){
+      const xt = cx + (rOuter + 22) * Math.cos(a);
+      const yt = cy + (rOuter + 22) * Math.sin(a);
+      ticks += `<text x="${xt}" y="${yt}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.6)" font-size="10" font-family="Arial">${h}</text>`;
+    }
+  }
+
+  return `
+    <div class="clock-wrap">
+      <svg class="clock-svg" viewBox="0 0 280 280">
+        <circle cx="${cx}" cy="${cy}" r="${rOuter+14}" fill="rgba(0,0,0,0.35)"/>
+        <circle cx="${cx}" cy="${cy}" r="${rOuter}" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+        <circle cx="${cx}" cy="${cy}" r="${rInner}" fill="rgba(15,12,41,.7)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
+        ${segments}
+        ${ticks}
+        <text x="${cx}" y="${cy-6}" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="11" font-family="Arial">دائِرَةُ اليَوْمِ</text>
+        <text id="sunHour-${playerId}" x="${cx}" y="${cy+12}" text-anchor="middle" fill="#FFD54F" font-size="14" font-weight="bold" font-family="Arial">04:00</text>
+        <text id="sun-${playerId}" class="sun" x="${cx}" y="${cy-rOuter+4}" text-anchor="middle" font-size="22">🌅</text>
+      </svg>
+    </div>
+  `;
+}
+
+function renderPlayer(p){
+  const cardHTML = PRAYERS.map(pr => `
+    <div class="pcard" data-key="${pr.key}" data-player="${p.id}" onclick="selectCard(${p.id},'${pr.key}')">${pr.ar}</div>
+  `).join('');
+  return `
+    <div class="player-zone p${p.id+1}" id="zone-${p.id}">
+      <div class="ptitle">${p.label}</div>
+      ${buildClock(p.id)}
+      <div class="pool" id="pool-${p.id}">${cardHTML}</div>
+      <div style="text-align:center;margin-top:8px;color:rgba(255,255,255,.55);font-size:.85em" id="hint-${p.id}">اخْتَرْ صَلاةً ↑ ثُمَّ المِنْطَقَةَ المُناسِبَة</div>
+    </div>
+  `;
+}
+
+function selectCard(playerId, key){
+  const p = players[playerId];
+  if(p.placed[key]) return;
+  p.selected = key;
+  // visual: mark selected card
+  document.querySelectorAll(`.pcard[data-player="${playerId}"]`).forEach(c => {
+    c.classList.toggle('selected', c.dataset.key === key);
+  });
+  const pr = PRAYERS.find(x => x.key === key);
+  document.getElementById(`hint-${playerId}`).innerHTML = `💡 ${pr.tip}`;
+}
+
+function clickSlot(e){
+  const slot = e.target.closest('.prayer-slot');
+  if(!slot) return;
+  const playerId = parseInt(slot.dataset.player);
+  const slotKey = slot.dataset.key;
+  const p = players[playerId];
+  if(!p.selected){
+    document.getElementById('fb').textContent = 'اخْتَرْ صَلاةً أَوَّلًا 👇';
+    document.getElementById('fb').style.color = '#FFB74D';
+    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1500);
+    return;
+  }
+  if(p.placed[slotKey]) return;
+
+  const correct = (p.selected === slotKey);
+  if(correct){
+    p.placed[slotKey] = true;
+    slot.setAttribute('fill-opacity', '0.65');
+    slot.classList.add('filled');
+    const card = document.querySelector(`.pcard[data-player="${playerId}"][data-key="${slotKey}"]`);
+    if(card){ card.classList.add('placed'); card.classList.remove('selected'); }
+    const pr = PRAYERS.find(x => x.key === slotKey);
+    // sun jump to that hour for nice effect
+    setSunHour(playerId, (pr.start + pr.end) / 2);
+    p.selected = null;
+    document.getElementById('fb').textContent = `✅ ${pr.ar} في مَكانِها!`;
+    document.getElementById('fb').style.color = '#4CAF50';
+    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1100);
+
+    // check win
+    if(Object.keys(p.placed).length === PRAYERS.length){
+      finishPlayer(playerId);
+    }
+  }else{
+    slot.classList.add('wrong');
+    setTimeout(() => slot.classList.remove('wrong'), 400);
+    p.mistakes++;
+    document.getElementById('fb').textContent = `❌ خَطَأ — حاوِلْ مَرَّةً أُخْرى`;
+    document.getElementById('fb').style.color = '#FF8A80';
+    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1100);
+  }
+}
+
+function finishPlayer(id){
+  const p = players[id];
+  p.done = true;
+  p.endTime = Date.now();
+  document.getElementById(`zone-${id}`).classList.add('win');
+
+  if(mode === 'solo'){
+    endGame();
+  }else{
+    // 2P: first to finish wins; if the other is still going, give a moment
+    if(players.every(x => x.done)) endGame();
+    else{
+      // brief pause then end
+      setTimeout(() => { if(!players.every(x=>x.done)) endGame(); }, 2500);
+    }
+  }
+}
+
+function endGame(){
+  clearInterval(timerInterval);
+  clearInterval(sunInterval);
+  document.getElementById('game').classList.add('hidden');
+  document.getElementById('result').classList.remove('hidden');
+
+  if(mode === 'solo'){
+    const p = players[0];
+    const t = ((p.endTime - startTime)/1000).toFixed(1);
+    document.getElementById('resultTitle').textContent = '🎉 أَحْسَنْت!';
+    document.getElementById('winner').textContent = `${t} ثانية`;
+    document.getElementById('summary').innerHTML = `الأَخْطاء: ${p.mistakes} ${p.mistakes===0?'⭐⭐⭐':p.mistakes<3?'⭐⭐':'⭐'}`;
+  }else{
+    const [a,b] = players;
+    const doneA = Object.keys(a.placed).length;
+    const doneB = Object.keys(b.placed).length;
+    let winnerText;
+    if(a.done && b.done){
+      const ta = (a.endTime - startTime), tb = (b.endTime - startTime);
+      if(ta < tb) winnerText = '🏆 اللاعِبُ الأَوَّل فاز!';
+      else if(tb < ta) winnerText = '🏆 اللاعِبُ الثّاني فاز!';
+      else winnerText = '🤝 تَعادُل!';
+    }else if(a.done) winnerText = '🏆 اللاعِبُ الأَوَّل فاز!';
+    else if(b.done) winnerText = '🏆 اللاعِبُ الثّاني فاز!';
+    else winnerText = '⏱ انْتَهى الوَقْت';
+    document.getElementById('resultTitle').textContent = winnerText;
+    document.getElementById('winner').textContent = '';
+    document.getElementById('summary').innerHTML = `
+      <div style="color:#4FC3F7">اللاعِبُ ١: ${doneA}/5 صَحيح · ${a.mistakes} خَطَأ ${a.done ? '· '+((a.endTime-startTime)/1000).toFixed(1)+' ث' : ''}</div>
+      <div style="color:#FF8A80;margin-top:6px">اللاعِبُ ٢: ${doneB}/5 صَحيح · ${b.mistakes} خَطَأ ${b.done ? '· '+((b.endTime-startTime)/1000).toFixed(1)+' ث' : ''}</div>
+    `;
+  }
+}
+
+function setSunHour(playerId, h){
+  const angle = hourToRad(h);
+  const rOrbit = 124; // radius matching slot ring
+  const cx = 140, cy = 140;
+  const x = cx + rOrbit * Math.cos(angle);
+  const y = cy + rOrbit * Math.sin(angle);
+  const sun = document.getElementById(`sun-${playerId}`);
+  if(sun){
+    sun.setAttribute('x', x);
+    sun.setAttribute('y', y + 2);
+    // güneş/ay simgesi günün saatine göre
+    let sym = '🌅';
+    if(h>=4.5 && h<6.5) sym='🌄';
+    else if(h>=6.5 && h<11) sym='🌅';
+    else if(h>=11 && h<15) sym='☀️';
+    else if(h>=15 && h<18) sym='🌤️';
+    else if(h>=18 && h<19.5) sym='🌇';
+    else if(h>=19.5 && h<21) sym='🌆';
+    else if(h>=21 || h<4.5) sym='🌙';
+    sun.textContent = sym;
+  }
+  const txt = document.getElementById(`sunHour-${playerId}`);
+  if(txt){
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    txt.textContent = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+  }
+}
+
+function reset(){
+  document.getElementById('game').classList.remove('hidden');
+  document.getElementById('result').classList.add('hidden');
+  document.getElementById('fb').textContent = '';
+
+  const arena = document.getElementById('arena');
+  arena.innerHTML = '';
+
+  if(mode === 'solo'){
+    players = [{id:0, label:'لاعِبٌ', placed:{}, selected:null, mistakes:0, done:false}];
+  }else{
+    players = [
+      {id:0, label:'اللاعِبُ ١', placed:{}, selected:null, mistakes:0, done:false},
+      {id:1, label:'اللاعِبُ ٢', placed:{}, selected:null, mistakes:0, done:false}
+    ];
+  }
+  players.forEach(p => { arena.insertAdjacentHTML('beforeend', renderPlayer(p)); });
+
+  // attach slot click handlers
+  document.querySelectorAll('.prayer-slot').forEach(s => s.addEventListener('click', clickSlot));
+
+  // start timer
+  startTime = Date.now();
+  if(timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    const t = ((Date.now() - startTime)/1000).toFixed(1);
+    document.getElementById('timer').textContent = t;
+  }, 100);
+
+  // start sun orbit (subtle daily cycle)
+  virtualHour = 4.0;
+  if(sunInterval) clearInterval(sunInterval);
+  sunInterval = setInterval(() => {
+    virtualHour += 0.10; // hour per tick
+    if(virtualHour >= 24) virtualHour = 0;
+    players.forEach(p => {
+      // only animate sun if player not done
+      if(!p.done) setSunHour(p.id, virtualHour);
+    });
+  }, 220);
+}
+
+window.addEventListener('load', () => { reset(); });
+</script>
+</body>
+</html>
