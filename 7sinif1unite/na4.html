@@ -15,52 +15,68 @@ h1{text-align:center;font-size:1.5em;margin-bottom:4px;background:linear-gradien
 .tip{background:rgba(255,193,7,.10);border-right:3px solid #FFC107;border-radius:10px;padding:9px 14px;margin-bottom:12px;color:rgba(255,255,255,.85);font-size:.88em;line-height:1.55}
 .tip b{color:#FFD54F}
 
-/* Mode toggle */
 .mode-bar{display:flex;justify-content:center;gap:6px;margin-bottom:14px;flex-wrap:wrap}
 .mode-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.12);color:#fff;padding:8px 18px;border-radius:24px;cursor:pointer;font-family:inherit;font-size:.92em;font-weight:bold;transition:all .2s}
 .mode-btn:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.25)}
 .mode-btn.active{background:linear-gradient(135deg,#FF9800,#E91E63);border-color:#FFD54F}
 
-/* Status bar */
 .status-bar{display:flex;justify-content:space-between;background:rgba(255,255,255,.05);border-radius:12px;padding:9px 16px;margin-bottom:12px;font-weight:bold;flex-wrap:wrap;gap:8px;font-size:.92em}
 .status-bar .timer{color:#FFD54F}
 .status-bar .p1{color:#4FC3F7}.status-bar .p2{color:#FF8A80}
 
-/* Game arena */
 .arena{display:flex;gap:14px;justify-content:center;align-items:flex-start;flex-wrap:wrap}
-.player-zone{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px;flex:1;min-width:320px;max-width:480px;transition:all .3s}
+.player-zone{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:14px;flex:1;min-width:320px;max-width:480px;transition:all .3s;position:relative}
 .player-zone.win{box-shadow:0 0 30px 5px #4CAF50,inset 0 0 30px rgba(76,175,80,.18);border-color:#4CAF50}
 .player-zone .ptitle{text-align:center;font-size:1.1em;font-weight:bold;margin-bottom:8px}
 .player-zone.p1 .ptitle{color:#4FC3F7}
 .player-zone.p2 .ptitle{color:#FF8A80}
 
-/* Clock circle */
-.clock-wrap{position:relative;width:280px;height:280px;margin:0 auto 12px}
+.clock-wrap{position:relative;width:320px;height:320px;margin:0 auto 12px;touch-action:none}
 .clock-svg{width:100%;height:100%;display:block;overflow:visible}
-.clock-center{font-size:.7em}
 
-/* Prayer slots — clickable when something is selected */
-.prayer-slot{cursor:pointer;transition:all .25s}
-.prayer-slot:hover{filter:brightness(1.25)}
-.prayer-slot.filled{filter:brightness(1)}
+/* Slots */
+.prayer-slot{transition:fill-opacity .25s,stroke-width .2s;cursor:default}
+.prayer-slot.drop-target{fill-opacity:.45!important;stroke-width:3!important;stroke-opacity:.85!important}
 .prayer-slot.wrong{animation:shake .4s}
+.prayer-slot.correct-pulse{animation:pulse .6s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 
-/* Prayer cards (drag pool) */
-.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:10px;background:rgba(0,0,0,.25);border-radius:14px;min-height:60px}
-.pcard{background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05));border:2px solid rgba(255,255,255,.2);color:#fff;padding:9px 16px;border-radius:14px;cursor:pointer;font-family:'Arakom',sans-serif;font-size:1em;font-weight:bold;transition:all .2s;user-select:none}
+/* Slot label inside ring */
+.slot-emoji{font-size:18px;pointer-events:none;user-select:none}
+.slot-name{font-size:9px;fill:rgba(255,255,255,.55);pointer-events:none;user-select:none}
+.slot-name.placed{fill:#fff;font-weight:bold}
+
+/* 4 cardinal direction labels (outside ring) */
+.dir-label{font-size:11px;fill:rgba(255,255,255,.5);pointer-events:none;user-select:none}
+.dir-emoji{font-size:18px;pointer-events:none;user-select:none}
+
+/* Sun on orbit */
+.sun-icon{font-size:24px;filter:drop-shadow(0 0 10px #FFD54F);transition:opacity .3s}
+.moon-icon{font-size:22px;filter:drop-shadow(0 0 8px #B0BEC5);transition:opacity .3s}
+
+/* Earth at center */
+.earth-icon{font-size:32px;pointer-events:none;user-select:none}
+
+/* Drag pool */
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px;background:rgba(0,0,0,.25);border-radius:14px;min-height:60px;touch-action:none}
+.pcard{background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.05));border:2px solid rgba(255,255,255,.2);color:#fff;padding:10px 18px;border-radius:14px;cursor:grab;font-family:'Arakom',sans-serif;font-size:1.05em;font-weight:bold;transition:transform .2s,box-shadow .2s,opacity .25s,border-color .2s;user-select:none;touch-action:none;position:relative}
 .pcard:hover{transform:translateY(-2px);border-color:#FFD54F;background:linear-gradient(135deg,rgba(255,213,79,.3),rgba(255,152,0,.1))}
-.pcard.selected{background:linear-gradient(135deg,#FF9800,#E91E63);border-color:#FFD54F;transform:scale(1.06)}
-.pcard.placed{opacity:.3;pointer-events:none;text-decoration:line-through}
+.pcard.dragging{cursor:grabbing;opacity:.35}
+.pcard.placed{opacity:.25;pointer-events:none;text-decoration:line-through;filter:grayscale(.6)}
 
-/* Feedback */
+/* Floating drag clone */
+.drag-ghost{position:fixed;pointer-events:none;background:linear-gradient(135deg,#FFD54F,#FF9800);color:#1a237e;border:2px solid #fff;padding:10px 18px;border-radius:14px;font-family:'Arakom',sans-serif;font-size:1.05em;font-weight:bold;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.5);transform:translate(-50%,-50%);transition:none}
+
+/* Hint */
+.hint{text-align:center;color:rgba(255,255,255,.6);font-size:.85em;margin-top:8px;min-height:18px}
+
 .fb{text-align:center;margin-top:10px;min-height:22px;font-weight:bold;font-size:.95em}
 
-/* Result */
 .result{text-align:center;padding:20px}
 .result h2{font-size:1.6em;margin-bottom:10px}
-.result .winner{font-size:2em;color:#FFD54F;margin:10px 0;font-weight:bold}
-.result .summary{color:rgba(255,255,255,.75);margin:10px 0}
+.result .winner{font-size:1.7em;color:#FFD54F;margin:10px 0;font-weight:bold}
+.result .summary{color:rgba(255,255,255,.78);margin:10px 0;font-size:.95em}
 .btn{display:inline-block;background:linear-gradient(135deg,#FF9800,#E91E63);color:#fff;border:none;border-radius:25px;padding:11px 26px;font-family:inherit;font-size:1em;cursor:pointer;margin:6px 4px;font-weight:bold}
 .btn.alt{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.2)}
 .btn:hover{filter:brightness(1.1)}
@@ -68,19 +84,16 @@ h1{text-align:center;font-size:1.5em;margin-bottom:4px;background:linear-gradien
 
 .back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10;text-decoration:none;font-size:.92em}
 .back:hover{background:rgba(0,0,0,.85)}
-
-/* Sun animation */
-.sun{font-size:24px;transition:all .5s ease-out;filter:drop-shadow(0 0 8px #FFD54F)}
 </style>
 </head>
 <body>
 <a href="./index.html" class="back">↩ القائمة</a>
 <div class="box">
-<h1>🕌 دائِرَةُ اليَوْمِ — مَواقيتُ الصَّلاةِ</h1>
-<div class="sub">ضَعْ كُلَّ صَلاةٍ في وَقْتِها على دائِرَةِ ٢٤ ساعَة — الشَّمْسُ تَدورُ مَعَكَ!</div>
+<h1>🌍 دائِرَةُ اليَوْمِ — مَواقيتُ الصَّلاةِ</h1>
+<div class="sub">اسْحَبْ اسْمَ الصَّلاةِ وَاتْرُكْهُ في مَوْضِعِها على دائِرَةِ اليَوْمِ — الشَّمْسُ تَدورُ مِنَ الشُّروقِ إلى الغُروبِ</div>
 
 <div class="tip">
-<b>📘 الطَّريقَة:</b> اضْغَطْ على اسْمِ الصَّلاةِ (أَسْفَل)، ثُمَّ اضْغَطْ على المِنْطَقَةِ الصَّحيحَةِ في الدائِرَة. الشَّمْسُ تَتَحَرَّك حَوْلَ الدّائِرَةِ كَأَنَّها يَوْمٌ كامِلٌ.
+<b>📘 الإرشاد:</b> الشَّمْسُ تَطْلُعُ مِنَ الشَّرْقِ (يَسارُ الدائِرَة) ثُمَّ تَصِلُ إلى أَعْلى عِنْدَ الظُّهْرِ، ثُمَّ تَغْرُبُ في الغَرْبِ (يَمينُ الدائِرَة). اسْحَبْ كُلَّ صَلاةٍ إلى وَقْتِها الصَّحيحِ.
 </div>
 
 <div class="mode-bar">
@@ -90,19 +103,16 @@ h1{text-align:center;font-size:1.5em;margin-bottom:4px;background:linear-gradien
 
 <div id="game">
   <div class="status-bar" id="statusBar">
-    <span>الحالة: <span id="status">الزَّمَنُ يَجري…</span></span>
+    <span>الحالة: <span id="status">اِسْحَبْ — أَسْرَع وأَقَلّ خَطَأً يَفوز</span></span>
     <span class="timer">⏱ <span id="timer">0.0</span> ث</span>
   </div>
 
-  <div class="arena" id="arena">
-    <!-- Player zones inserted by JS -->
-  </div>
-
+  <div class="arena" id="arena"></div>
   <div class="fb" id="fb"></div>
 </div>
 
 <div id="result" class="result hidden">
-  <h2 id="resultTitle">🎉 انتَهَت اللُّعْبَة!</h2>
+  <h2 id="resultTitle">🎉 انْتَهَت اللُّعْبَة!</h2>
   <div class="winner" id="winner"></div>
   <div class="summary" id="summary"></div>
   <button class="btn" onclick="reset()">إعادَة 🔄</button>
@@ -111,27 +121,41 @@ h1{text-align:center;font-size:1.5em;margin-bottom:4px;background:linear-gradien
 </div>
 
 <script>
-/* Namaz vakitleri — 24 saatlik daire üzerinde başlangıç ve bitiş açıları (derece)
-   Tam daire = 24 saat. Saat 0 (gece yarısı) = en üst (12 yönü, -90°).
-   Her saat = 15°. Gün ilerleyişi clockwise (sağa doğru). */
+/* ─── GEOMETRY ──────────────────────────────────────────────────
+   12:00 = TOP (sun at zenith)         → angle -90° (SVG)
+   18:00 = RIGHT (sunset, west)        → angle 0°
+   24:00/0 = BOTTOM (midnight)         → angle 90°
+   06:00 = LEFT (sunrise, east)        → angle 180° (or -180°)
+   Formula: angle(h) = -90 + (h - 12) * 15
+*/
+function hourAngleDeg(h){ return -90 + (h - 12) * 15; }
+function hourAngleRad(h){ return hourAngleDeg(h) * Math.PI / 180; }
+
+/* Namaz vakitleri (saat aralıkları, yaklaşık) */
 const PRAYERS = [
-  {key:'fajr',   ar:'الفَجْر',   start: 4.5, end: 6.0,  color:'#5C6BC0', sunIcon:'🌄', tip:'قَبْلَ شُروقِ الشَّمْسِ'},
-  {key:'zuhr',   ar:'الظُّهْر', start: 12.5, end: 14.5, color:'#FF9800', sunIcon:'☀️', tip:'بَعْدَ زَوالِ الشَّمْسِ'},
-  {key:'asr',    ar:'العَصْر',  start: 15.5, end: 17.5, color:'#FFB74D', sunIcon:'🌤️', tip:'بَيْنَ الظُّهْرِ والمَغْرِبِ'},
-  {key:'maghrib',ar:'المَغْرِب',start: 18.5, end: 19.5, color:'#E91E63', sunIcon:'🌇', tip:'عِنْدَ غُروبِ الشَّمْسِ'},
-  {key:'isha',   ar:'العِشاء', start: 20.5, end: 22.5, color:'#3F51B5', sunIcon:'🌃', tip:'بَعْدَ ذَهابِ الشَّفَقِ'}
+  {key:'fajr',   ar:'الفَجْر',   tr:'Sabah',  start: 4.5, end: 6.0,  color:'#5C6BC0', emoji:'🌄', tip:'قَبْلَ شُروقِ الشَّمْسِ'},
+  {key:'zuhr',   ar:'الظُّهْر',  tr:'Öğle',   start: 12.5,end: 14.5, color:'#FF9800', emoji:'☀️', tip:'بَعْدَ زَوالِ الشَّمْسِ — قَريبٌ مِنْ زِنيتِها'},
+  {key:'asr',    ar:'العَصْر',   tr:'İkindi', start: 15.5,end: 17.5, color:'#FFB74D', emoji:'🌤️', tip:'بَيْنَ الظُّهْرِ والمَغْرِبِ'},
+  {key:'maghrib',ar:'المَغْرِب', tr:'Akşam',  start: 18.5,end: 19.5, color:'#E91E63', emoji:'🌇', tip:'عِنْدَ غُروبِ الشَّمْسِ — يَمينُ الدائِرَة'},
+  {key:'isha',   ar:'العِشاء',   tr:'Yatsı',  start: 20.5,end: 22.5, color:'#3F51B5', emoji:'🌃', tip:'بَعْدَ ذَهابِ الشَّفَقِ — في اللَّيْلِ'}
 ];
 
-// 24 saatlik daire için: saat h => açı (radyan). Üst (12 yönü) = 0 saat. Saat ilerlemesi clockwise.
-function hourToAngleDeg(h){ return (h / 24) * 360 - 90; }   // -90° offset: 0 saat üstte
-function hourToRad(h){ return hourToAngleDeg(h) * Math.PI / 180; }
+/* 4 cardinal milestones for orientation */
+const DIRS = [
+  {hour:6,  emoji:'🌅', label:'الشُّروق',   side:'left'},
+  {hour:12, emoji:'☀️', label:'الظَّهيرَة',  side:'top'},
+  {hour:18, emoji:'🌇', label:'الغُروب',    side:'right'},
+  {hour:0,  emoji:'🌙', label:'مُنْتَصَفُ اللَّيْل', side:'bottom'}
+];
 
 let mode = 'solo';
 let players = [];
 let startTime = 0;
 let timerInterval = null;
 let sunInterval = null;
-let virtualHour = 4.0; // sun starts at fajr
+let virtualHour = 4.0;
+
+let dragState = null;  // {playerId, key, ghost, slotUnder}
 
 function setMode(m){
   mode = m;
@@ -140,63 +164,91 @@ function setMode(m){
   reset();
 }
 
-function buildClock(playerId){
-  // SVG: 280x280, center 140,140, radius 110 (ring), inner 60 (center text)
-  const cx = 140, cy = 140, rOuter = 124, rInner = 78;
-  let segments = '';
+function buildClockSVG(playerId){
+  const cx = 160, cy = 160, rOuter = 138, rInner = 72;
 
-  // Her namaz dilimini ark olarak çiz
+  // 5 prayer slots
+  let slots = '';
   PRAYERS.forEach(p => {
-    const a1 = hourToAngleDeg(p.start);
-    const a2 = hourToAngleDeg(p.end);
-    const x1 = cx + rOuter * Math.cos(a1 * Math.PI/180);
-    const y1 = cy + rOuter * Math.sin(a1 * Math.PI/180);
-    const x2 = cx + rOuter * Math.cos(a2 * Math.PI/180);
-    const y2 = cy + rOuter * Math.sin(a2 * Math.PI/180);
-    const xi1 = cx + rInner * Math.cos(a1 * Math.PI/180);
-    const yi1 = cy + rInner * Math.sin(a1 * Math.PI/180);
-    const xi2 = cx + rInner * Math.cos(a2 * Math.PI/180);
-    const yi2 = cy + rInner * Math.sin(a2 * Math.PI/180);
+    const a1 = hourAngleDeg(p.start);
+    const a2 = hourAngleDeg(p.end);
+    const x1 = cx + rOuter * Math.cos(a1*Math.PI/180);
+    const y1 = cy + rOuter * Math.sin(a1*Math.PI/180);
+    const x2 = cx + rOuter * Math.cos(a2*Math.PI/180);
+    const y2 = cy + rOuter * Math.sin(a2*Math.PI/180);
+    const xi1 = cx + rInner * Math.cos(a1*Math.PI/180);
+    const yi1 = cy + rInner * Math.sin(a1*Math.PI/180);
+    const xi2 = cx + rInner * Math.cos(a2*Math.PI/180);
+    const yi2 = cy + rInner * Math.sin(a2*Math.PI/180);
     const large = (p.end - p.start) > 12 ? 1 : 0;
     const path = `M ${x1} ${y1} A ${rOuter} ${rOuter} 0 ${large} 1 ${x2} ${y2} L ${xi2} ${yi2} A ${rInner} ${rInner} 0 ${large} 0 ${xi1} ${yi1} Z`;
-    segments += `<path class="prayer-slot" data-key="${p.key}" data-player="${playerId}" d="${path}" fill="${p.color}" fill-opacity="0.18" stroke="${p.color}" stroke-width="2" stroke-opacity="0.4"/>`;
-
-    // Etiket (saat aralığı)
+    slots += `<path class="prayer-slot" data-key="${p.key}" data-player="${playerId}" d="${path}" fill="${p.color}" fill-opacity="0.15" stroke="${p.color}" stroke-width="1.5" stroke-opacity="0.4"/>`;
+    // slot emoji at midpoint
     const am = (p.start + p.end) / 2;
-    const aMid = hourToAngleDeg(am);
+    const aMid = hourAngleDeg(am) * Math.PI/180;
     const rLbl = (rOuter + rInner) / 2;
-    const xL = cx + rLbl * Math.cos(aMid * Math.PI/180);
-    const yL = cy + rLbl * Math.sin(aMid * Math.PI/180);
-    segments += `<text class="slot-label-${playerId}-${p.key}" x="${xL}" y="${yL}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.55)" font-size="9" font-family="Arial">${Math.floor(p.start)}-${Math.floor(p.end)}</text>`;
+    const xL = cx + rLbl * Math.cos(aMid);
+    const yL = cy + rLbl * Math.sin(aMid);
+    slots += `<text class="slot-emoji" data-emoji-for="${p.key}" data-player="${playerId}" x="${xL}" y="${yL+6}" text-anchor="middle">${p.emoji}</text>`;
+    // placed-name (initially empty)
+    slots += `<text class="slot-name" id="name-${playerId}-${p.key}" x="${xL}" y="${yL+22}" text-anchor="middle"></text>`;
   });
 
-  // 24 saat işaretleri
+  // 4 direction labels outside the ring
+  let dirs = '';
+  DIRS.forEach(d => {
+    const a = hourAngleDeg(d.hour) * Math.PI/180;
+    const r = rOuter + 22;
+    const x = cx + r * Math.cos(a);
+    const y = cy + r * Math.sin(a);
+    dirs += `<text class="dir-emoji" x="${x}" y="${y+6}" text-anchor="middle">${d.emoji}</text>`;
+    const r2 = rOuter + 38;
+    const x2 = cx + r2 * Math.cos(a);
+    const y2 = cy + r2 * Math.sin(a);
+    dirs += `<text class="dir-label" x="${x2}" y="${y2+4}" text-anchor="middle">${d.label}</text>`;
+  });
+
+  // 24 hour minor ticks
   let ticks = '';
   for(let h=0; h<24; h++){
-    const a = hourToAngleDeg(h) * Math.PI/180;
-    const x = cx + (rOuter + 6) * Math.cos(a);
-    const y = cy + (rOuter + 6) * Math.sin(a);
-    const x2 = cx + (rOuter + 14) * Math.cos(a);
-    const y2 = cy + (rOuter + 14) * Math.sin(a);
-    ticks += `<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,${h%6===0?.55:.25})" stroke-width="${h%6===0?2:1}"/>`;
-    if(h%6===0){
-      const xt = cx + (rOuter + 22) * Math.cos(a);
-      const yt = cy + (rOuter + 22) * Math.sin(a);
-      ticks += `<text x="${xt}" y="${yt}" text-anchor="middle" dominant-baseline="middle" fill="rgba(255,255,255,.6)" font-size="10" font-family="Arial">${h}</text>`;
-    }
+    const a = hourAngleDeg(h) * Math.PI/180;
+    const len = (h%6===0) ? 8 : 4;
+    const x1 = cx + (rOuter+2) * Math.cos(a);
+    const y1 = cy + (rOuter+2) * Math.sin(a);
+    const x2 = cx + (rOuter+2+len) * Math.cos(a);
+    const y2 = cy + (rOuter+2+len) * Math.sin(a);
+    ticks += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(255,255,255,${h%6===0?.65:.22})" stroke-width="${h%6===0?1.6:1}"/>`;
   }
 
+  // sun orbit at radius = (rOuter + rInner)/2 minus a bit (above slots visually but on ring)
+  // Sun starts at fajr (4)
+  const aSun = hourAngleDeg(4) * Math.PI/180;
+  const rSun = rOuter + 4;  // just outside the slot ring
+  const sxn = cx + rSun * Math.cos(aSun);
+  const syn = cy + rSun * Math.sin(aSun);
+
   return `
-    <div class="clock-wrap">
-      <svg class="clock-svg" viewBox="0 0 280 280">
-        <circle cx="${cx}" cy="${cy}" r="${rOuter+14}" fill="rgba(0,0,0,0.35)"/>
-        <circle cx="${cx}" cy="${cy}" r="${rOuter}" fill="none" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
-        <circle cx="${cx}" cy="${cy}" r="${rInner}" fill="rgba(15,12,41,.7)" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-        ${segments}
+    <div class="clock-wrap" id="clock-wrap-${playerId}">
+      <svg class="clock-svg" viewBox="0 0 320 320">
+        <!-- Background sky -->
+        <defs>
+          <radialGradient id="skyGrad-${playerId}" cx="50%" cy="50%" r="60%">
+            <stop offset="0%" stop-color="#FFD54F" stop-opacity="0.10"/>
+            <stop offset="60%" stop-color="#3F51B5" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="${cx}" cy="${cy}" r="${rOuter+50}" fill="url(#skyGrad-${playerId})"/>
+        <circle cx="${cx}" cy="${cy}" r="${rOuter}" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+        ${slots}
         ${ticks}
-        <text x="${cx}" y="${cy-6}" text-anchor="middle" fill="rgba(255,255,255,.8)" font-size="11" font-family="Arial">دائِرَةُ اليَوْمِ</text>
-        <text id="sunHour-${playerId}" x="${cx}" y="${cy+12}" text-anchor="middle" fill="#FFD54F" font-size="14" font-weight="bold" font-family="Arial">04:00</text>
-        <text id="sun-${playerId}" class="sun" x="${cx}" y="${cy-rOuter+4}" text-anchor="middle" font-size="22">🌅</text>
+        <circle cx="${cx}" cy="${cy}" r="${rInner}" fill="rgba(15,12,41,.85)" stroke="rgba(255,255,255,.20)" stroke-width="1"/>
+        <!-- Earth at center -->
+        <text class="earth-icon" x="${cx}" y="${cy-2}" text-anchor="middle" dominant-baseline="middle">🌍</text>
+        <text id="sunHour-${playerId}" x="${cx}" y="${cy+24}" text-anchor="middle" fill="#FFD54F" font-size="12" font-weight="bold" font-family="Arial">04:00</text>
+        ${dirs}
+        <!-- Sun on orbit -->
+        <text id="sun-${playerId}" class="sun-icon" x="${sxn}" y="${syn+8}" text-anchor="middle">🌄</text>
       </svg>
     </div>
   `;
@@ -204,89 +256,189 @@ function buildClock(playerId){
 
 function renderPlayer(p){
   const cardHTML = PRAYERS.map(pr => `
-    <div class="pcard" data-key="${pr.key}" data-player="${p.id}" onclick="selectCard(${p.id},'${pr.key}')">${pr.ar}</div>
+    <div class="pcard" data-key="${pr.key}" data-player="${p.id}">${pr.ar}</div>
   `).join('');
   return `
     <div class="player-zone p${p.id+1}" id="zone-${p.id}">
       <div class="ptitle">${p.label}</div>
-      ${buildClock(p.id)}
+      ${buildClockSVG(p.id)}
       <div class="pool" id="pool-${p.id}">${cardHTML}</div>
-      <div style="text-align:center;margin-top:8px;color:rgba(255,255,255,.55);font-size:.85em" id="hint-${p.id}">اخْتَرْ صَلاةً ↑ ثُمَّ المِنْطَقَةَ المُناسِبَة</div>
+      <div class="hint" id="hint-${p.id}">اسْحَبِ الصَّلاةَ إلى مَوْضِعِها على الدائِرَةِ</div>
     </div>
   `;
 }
 
-function selectCard(playerId, key){
-  const p = players[playerId];
-  if(p.placed[key]) return;
-  p.selected = key;
-  // visual: mark selected card
-  document.querySelectorAll(`.pcard[data-player="${playerId}"]`).forEach(c => {
-    c.classList.toggle('selected', c.dataset.key === key);
+/* ─── DRAG & DROP ──────────────────────────────────────────────── */
+function attachDragHandlers(){
+  document.querySelectorAll('.pcard').forEach(card => {
+    card.addEventListener('mousedown', startDrag);
+    card.addEventListener('touchstart', startDrag, {passive: false});
   });
-  const pr = PRAYERS.find(x => x.key === key);
-  document.getElementById(`hint-${playerId}`).innerHTML = `💡 ${pr.tip}`;
 }
 
-function clickSlot(e){
-  const slot = e.target.closest('.prayer-slot');
-  if(!slot) return;
-  const playerId = parseInt(slot.dataset.player);
+function startDrag(e){
+  e.preventDefault();
+  const card = e.currentTarget;
+  if(card.classList.contains('placed')) return;
+  const playerId = parseInt(card.dataset.player);
+  const key = card.dataset.key;
+  const p = players[playerId];
+  if(p.placed[key]) return;
+
+  // Create ghost clone
+  const ghost = document.createElement('div');
+  ghost.className = 'drag-ghost';
+  ghost.textContent = PRAYERS.find(x => x.key === key).ar;
+  document.body.appendChild(ghost);
+
+  card.classList.add('dragging');
+
+  // Show tip
+  const pr = PRAYERS.find(x => x.key === key);
+  document.getElementById(`hint-${playerId}`).innerHTML = `💡 ${pr.tip}`;
+
+  // Initial position
+  const pt = getEventPoint(e);
+  ghost.style.left = pt.x + 'px';
+  ghost.style.top = pt.y + 'px';
+
+  dragState = {playerId, key, card, ghost, slotUnder: null};
+
+  document.addEventListener('mousemove', dragMove);
+  document.addEventListener('mouseup', dragEnd);
+  document.addEventListener('touchmove', dragMove, {passive: false});
+  document.addEventListener('touchend', dragEnd);
+  document.addEventListener('touchcancel', dragEnd);
+}
+
+function getEventPoint(e){
+  if(e.touches && e.touches.length) return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+  if(e.changedTouches && e.changedTouches.length) return {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
+  return {x: e.clientX, y: e.clientY};
+}
+
+function dragMove(e){
+  if(!dragState) return;
+  e.preventDefault();
+  const pt = getEventPoint(e);
+  dragState.ghost.style.left = pt.x + 'px';
+  dragState.ghost.style.top = pt.y + 'px';
+
+  // Find slot under cursor — temporarily hide ghost to use elementFromPoint
+  dragState.ghost.style.display = 'none';
+  const el = document.elementFromPoint(pt.x, pt.y);
+  dragState.ghost.style.display = 'block';
+
+  // Clear previous drop target highlight
+  if(dragState.slotUnder){
+    dragState.slotUnder.classList.remove('drop-target');
+    dragState.slotUnder = null;
+  }
+  if(el && el.classList.contains('prayer-slot') && parseInt(el.dataset.player) === dragState.playerId){
+    el.classList.add('drop-target');
+    dragState.slotUnder = el;
+  }
+}
+
+function dragEnd(e){
+  if(!dragState) return;
+  e.preventDefault();
+  const {playerId, key, card, ghost, slotUnder} = dragState;
+
+  // Clean up
+  card.classList.remove('dragging');
+  ghost.remove();
+  document.removeEventListener('mousemove', dragMove);
+  document.removeEventListener('mouseup', dragEnd);
+  document.removeEventListener('touchmove', dragMove);
+  document.removeEventListener('touchend', dragEnd);
+  document.removeEventListener('touchcancel', dragEnd);
+  if(slotUnder) slotUnder.classList.remove('drop-target');
+
+  if(slotUnder){
+    handleDrop(playerId, key, slotUnder);
+  }
+
+  dragState = null;
+}
+
+function handleDrop(playerId, key, slot){
   const slotKey = slot.dataset.key;
   const p = players[playerId];
-  if(!p.selected){
-    document.getElementById('fb').textContent = 'اخْتَرْ صَلاةً أَوَّلًا 👇';
-    document.getElementById('fb').style.color = '#FFB74D';
-    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1500);
-    return;
-  }
-  if(p.placed[slotKey]) return;
+  const pr = PRAYERS.find(x => x.key === key);
 
-  const correct = (p.selected === slotKey);
-  if(correct){
-    p.placed[slotKey] = true;
-    slot.setAttribute('fill-opacity', '0.65');
-    slot.classList.add('filled');
-    const card = document.querySelector(`.pcard[data-player="${playerId}"][data-key="${slotKey}"]`);
-    if(card){ card.classList.add('placed'); card.classList.remove('selected'); }
-    const pr = PRAYERS.find(x => x.key === slotKey);
-    // sun jump to that hour for nice effect
+  if(slotKey === key){
+    // CORRECT
+    p.placed[key] = true;
+    slot.setAttribute('fill-opacity', '0.6');
+    slot.classList.add('correct-pulse');
+    setTimeout(() => slot.classList.remove('correct-pulse'), 600);
+    document.querySelector(`.pcard[data-player="${playerId}"][data-key="${key}"]`)?.classList.add('placed');
+    // write name into slot
+    const nameEl = document.getElementById(`name-${playerId}-${key}`);
+    if(nameEl){ nameEl.textContent = pr.ar; nameEl.classList.add('placed'); }
+    // jump sun to slot midpoint for visual reward
     setSunHour(playerId, (pr.start + pr.end) / 2);
-    p.selected = null;
     document.getElementById('fb').textContent = `✅ ${pr.ar} في مَكانِها!`;
     document.getElementById('fb').style.color = '#4CAF50';
     setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1100);
 
-    // check win
     if(Object.keys(p.placed).length === PRAYERS.length){
       finishPlayer(playerId);
     }
   }else{
+    // WRONG
     slot.classList.add('wrong');
     setTimeout(() => slot.classList.remove('wrong'), 400);
     p.mistakes++;
-    document.getElementById('fb').textContent = `❌ خَطَأ — حاوِلْ مَرَّةً أُخْرى`;
+    document.getElementById('fb').textContent = `❌ ليس هَذا مَوْضِعَ ${pr.ar}`;
     document.getElementById('fb').style.color = '#FF8A80';
-    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1100);
+    setTimeout(() => { document.getElementById('fb').textContent = ''; }, 1300);
   }
 }
 
+/* ─── SUN ANIMATION ────────────────────────────────────────────── */
+function setSunHour(playerId, h){
+  const wrap = document.getElementById(`clock-wrap-${playerId}`);
+  if(!wrap) return;
+  const cx = 160, cy = 160, rOuter = 138;
+  const rSun = rOuter + 4;
+  const a = hourAngleRad(h);
+  const x = cx + rSun * Math.cos(a);
+  const y = cy + rSun * Math.sin(a);
+  const sun = document.getElementById(`sun-${playerId}`);
+  if(sun){
+    sun.setAttribute('x', x);
+    sun.setAttribute('y', y + 8);
+    // dynamic symbol depending on day phase
+    let sym = '☀️';
+    if(h>=4.5 && h<6.5) sym='🌄';
+    else if(h>=6.5 && h<11) sym='🌅';
+    else if(h>=11 && h<14) sym='☀️';
+    else if(h>=14 && h<17) sym='🌤️';
+    else if(h>=17 && h<18.5) sym='🌇';
+    else if(h>=18.5 && h<20) sym='🌆';
+    else if(h>=20 || h<4.5) sym='🌙';
+    sun.textContent = sym;
+  }
+  const txt = document.getElementById(`sunHour-${playerId}`);
+  if(txt){
+    const hh = Math.floor(h);
+    const mm = Math.round((h - hh) * 60);
+    txt.textContent = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+  }
+}
+
+/* ─── FLOW ─────────────────────────────────────────────────────── */
 function finishPlayer(id){
   const p = players[id];
   p.done = true;
   p.endTime = Date.now();
   document.getElementById(`zone-${id}`).classList.add('win');
 
-  if(mode === 'solo'){
-    endGame();
-  }else{
-    // 2P: first to finish wins; if the other is still going, give a moment
-    if(players.every(x => x.done)) endGame();
-    else{
-      // brief pause then end
-      setTimeout(() => { if(!players.every(x=>x.done)) endGame(); }, 2500);
-    }
-  }
+  if(mode === 'solo'){ endGame(); return; }
+  if(players.every(x => x.done)){ endGame(); return; }
+  setTimeout(() => { if(!players.every(x=>x.done)) endGame(); }, 2500);
 }
 
 function endGame(){
@@ -323,35 +475,6 @@ function endGame(){
   }
 }
 
-function setSunHour(playerId, h){
-  const angle = hourToRad(h);
-  const rOrbit = 124; // radius matching slot ring
-  const cx = 140, cy = 140;
-  const x = cx + rOrbit * Math.cos(angle);
-  const y = cy + rOrbit * Math.sin(angle);
-  const sun = document.getElementById(`sun-${playerId}`);
-  if(sun){
-    sun.setAttribute('x', x);
-    sun.setAttribute('y', y + 2);
-    // güneş/ay simgesi günün saatine göre
-    let sym = '🌅';
-    if(h>=4.5 && h<6.5) sym='🌄';
-    else if(h>=6.5 && h<11) sym='🌅';
-    else if(h>=11 && h<15) sym='☀️';
-    else if(h>=15 && h<18) sym='🌤️';
-    else if(h>=18 && h<19.5) sym='🌇';
-    else if(h>=19.5 && h<21) sym='🌆';
-    else if(h>=21 || h<4.5) sym='🌙';
-    sun.textContent = sym;
-  }
-  const txt = document.getElementById(`sunHour-${playerId}`);
-  if(txt){
-    const hh = Math.floor(h);
-    const mm = Math.round((h - hh) * 60);
-    txt.textContent = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
-  }
-}
-
 function reset(){
   document.getElementById('game').classList.remove('hidden');
   document.getElementById('result').classList.add('hidden');
@@ -361,40 +484,33 @@ function reset(){
   arena.innerHTML = '';
 
   if(mode === 'solo'){
-    players = [{id:0, label:'لاعِبٌ', placed:{}, selected:null, mistakes:0, done:false}];
+    players = [{id:0, label:'لاعِبٌ', placed:{}, mistakes:0, done:false}];
   }else{
     players = [
-      {id:0, label:'اللاعِبُ ١', placed:{}, selected:null, mistakes:0, done:false},
-      {id:1, label:'اللاعِبُ ٢', placed:{}, selected:null, mistakes:0, done:false}
+      {id:0, label:'اللاعِبُ ١', placed:{}, mistakes:0, done:false},
+      {id:1, label:'اللاعِبُ ٢', placed:{}, mistakes:0, done:false}
     ];
   }
   players.forEach(p => { arena.insertAdjacentHTML('beforeend', renderPlayer(p)); });
 
-  // attach slot click handlers
-  document.querySelectorAll('.prayer-slot').forEach(s => s.addEventListener('click', clickSlot));
+  attachDragHandlers();
 
-  // start timer
   startTime = Date.now();
   if(timerInterval) clearInterval(timerInterval);
   timerInterval = setInterval(() => {
-    const t = ((Date.now() - startTime)/1000).toFixed(1);
-    document.getElementById('timer').textContent = t;
+    document.getElementById('timer').textContent = ((Date.now() - startTime)/1000).toFixed(1);
   }, 100);
 
-  // start sun orbit (subtle daily cycle)
   virtualHour = 4.0;
   if(sunInterval) clearInterval(sunInterval);
   sunInterval = setInterval(() => {
-    virtualHour += 0.10; // hour per tick
+    virtualHour += 0.12;
     if(virtualHour >= 24) virtualHour = 0;
-    players.forEach(p => {
-      // only animate sun if player not done
-      if(!p.done) setSunHour(p.id, virtualHour);
-    });
-  }, 220);
+    players.forEach(p => { if(!p.done) setSunHour(p.id, virtualHour); });
+  }, 200);
 }
 
-window.addEventListener('load', () => { reset(); });
+window.addEventListener('load', reset);
 </script>
 </body>
 </html>
