@@ -906,5 +906,15 @@ updateMenu();
 // Hash-based deep link (hub integration); doğrudan ka.html açılırsa iç menüyü göster
 (function(){var h=location.hash,m=h.match(/^#g(\d+)$/);if(m){var n=parseInt(m[1]);if(n>=1&&n<=6){setTimeout(function(){startGame(n);},200);return;}}var ms=document.getElementById('menuScreen');if(ms){ms.style.setProperty('display','block','important');}var bb=document.getElementById('backBtn');if(bb){bb.style.setProperty('display','none','important');}})();
 </script>
+<!-- 7sinif1unite hub-direct override: artık iframe içinde değil, doğrudan açılıyor -->
+<style>
+#hub-back{position:fixed;top:14px;left:14px;z-index:99999;background:rgba(0,0,0,.7);color:#fff;padding:10px 20px;border-radius:25px;font-family:inherit;text-decoration:none;backdrop-filter:blur(10px);display:flex;align-items:center;gap:6px;font-size:.95em;border:none;cursor:pointer;font-weight:600}
+#hub-back:hover{background:rgba(0,0,0,.85)}
+#backBtn{display:none!important}
+</style>
+<a id="hub-back" href="./index.html">↩ القائمة</a>
+<script>
+window.goMenu=function(){location.href='./index.html'};
+</script>
 </body>
 </html>
