@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
+<title>صَنِّفِ الكَلِمَات — İHO 7. Sınıf 4. Ünite</title>
+<meta name="description" content="Kelimeleri kategorilere ayır — İHO 7. sınıf 4. ünite (مَدِينَتِي وَبَلَدِي) sınıflandırma oyunu.">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--c-gold:#facc15;--c-good:#16a34a;--c-bad:#dc2626;--c-text:#fff8ec;--c-muted:rgba(255,248,236,0.62)}
+html.light{--c-text:#3a2a10;--c-muted:rgba(58,42,16,0.6)}
+html,body{height:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter','Segoe UI',sans-serif;color:var(--c-text);min-height:100vh;overflow-x:hidden;position:relative;background:radial-gradient(ellipse at top,#7c2d12 0%,#1a0e04 60%)}
+html.light body{background:radial-gradient(ellipse at top,#fed7aa 0%,#fef6e4 60%)}
+body::before{content:'';position:fixed;left:50%;top:-8vw;width:60vw;height:60vw;background:radial-gradient(circle,rgba(251,146,60,0.22) 0%,transparent 60%);transform:translateX(-50%);pointer-events:none;z-index:0}
+.top-bar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;gap:12px;padding:0 18px 0 170px;background:linear-gradient(180deg,rgba(15,9,3,0.85),rgba(15,9,3,0.55));backdrop-filter:blur(10px);border-bottom:1px solid rgba(252,211,77,0.18)}
+html.light .top-bar{background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.5));border-bottom-color:rgba(217,119,6,0.18)}
+@media(max-width:600px){.top-bar{padding-left:130px;padding-right:12px}}
+@media(max-width:380px){.top-bar{padding-left:120px;gap:8px}}
+.back-btn{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);padding:8px 18px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.back-btn:hover{background:rgba(252,211,77,0.22);transform:translateX(2px)}
+.title-ar{font-family:'Arakom',sans-serif;font-size:18px;color:var(--c-gold);flex:1;text-align:center;direction:rtl;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress-chip{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em}
+@media(max-width:380px){.back-btn-text{display:none}.title-ar{font-size:16px}.progress-chip{padding:5px 10px;font-size:12px}}
+
+.stage{position:relative;z-index:1;padding:24px 16px 80px;max-width:1000px;margin:0 auto}
+.hud{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.hud-stat{background:rgba(0,0,0,0.28);border:1px solid rgba(252,211,77,0.2);padding:8px 18px;border-radius:14px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--c-muted)}
+html.light .hud-stat{background:rgba(255,255,255,0.7);color:#5b3a14;border-color:rgba(217,119,6,0.2)}
+.hud-stat b{display:block;font-size:22px;color:var(--c-gold);margin-top:2px;text-align:center}
+html.light .hud-stat b{color:#a16207}
+.intro{text-align:center;color:var(--c-muted);font-size:13px;letter-spacing:.06em;margin-bottom:16px;text-transform:uppercase}
+
+.words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;direction:rtl;margin-bottom:18px;min-height:50px;padding:14px;background:rgba(255,255,255,0.03);border:1px dashed rgba(252,211,77,0.18);border-radius:16px}
+.word{
+  font-family:'Arakom',sans-serif;font-size:clamp(15px,2.2vw,19px);font-weight:bold;
+  background:linear-gradient(135deg,#fffbeb,#fde68a);color:#3a1d0a;
+  padding:8px 14px;border-radius:999px;border:2px solid transparent;cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,0.32);
+  transition:all .2s;
+}
+.word:hover{transform:translateY(-2px)}
+.word.selected{border-color:var(--c-gold);box-shadow:0 0 0 4px rgba(252,211,77,0.35),0 6px 14px rgba(0,0,0,0.4)}
+.word.placed{display:none}
+
+.boxes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:740px){.boxes{grid-template-columns:repeat(3,1fr)}}
+.box{
+  background:linear-gradient(135deg,rgba(56,189,248,0.08),rgba(14,165,233,0.04));
+  border:2px solid rgba(56,189,248,0.25);border-radius:18px;padding:14px;
+  min-height:120px;display:flex;flex-direction:column;gap:8px;
+  transition:.25s;cursor:pointer;
+}
+.box:hover{border-color:#7dd3fc;background:rgba(56,189,248,0.12)}
+html.light .box{background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-color:rgba(7,89,133,0.25)}
+.box-title{font-family:'Arakom',sans-serif;font-size:clamp(15px,2.2vw,18px);font-weight:bold;color:#7dd3fc;text-align:center;padding:6px 8px;border-bottom:1px dashed rgba(56,189,248,0.25);direction:rtl}
+html.light .box-title{color:#075985}
+.box-items{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;flex:1;align-items:flex-start;direction:rtl}
+.placed-item{font-family:'Arakom',sans-serif;font-size:clamp(13px,2vw,16px);font-weight:bold;background:rgba(22,163,74,0.18);color:#86efac;padding:5px 12px;border-radius:999px;border:1px solid rgba(22,163,74,0.4)}
+html.light .placed-item{background:rgba(22,163,74,0.18);color:#14532d}
+.placed-item.wrong{background:rgba(220,38,38,0.18);color:#fca5a5;border-color:rgba(220,38,38,0.4)}
+html.light .placed-item.wrong{color:#7f1d1d}
+
+.feedback{min-height:34px;text-align:center;margin-top:14px;font-size:14px;color:var(--c-muted)}
+.feedback.ok{color:#86efac}.feedback.bad{color:#fca5a5}
+
+.end{background:linear-gradient(135deg,rgba(252,211,77,0.1),rgba(180,83,9,0.06));border:1.5px solid rgba(252,211,77,0.28);border-radius:24px;padding:36px 28px;text-align:center;max-width:520px;margin:30px auto}
+.end h2{font-family:'Arakom',sans-serif;font-size:30px;color:var(--c-gold);margin-bottom:6px}
+.end .score-big{font-size:60px;font-weight:900;color:var(--c-gold);line-height:1;margin:14px 0}
+.end .score-big small{font-size:22px;color:var(--c-muted);font-weight:400}
+.end p{color:var(--c-muted);margin-bottom:22px}
+.end button{background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;color:#1a0e04;padding:14px 32px;border-radius:999px;font:inherit;font-weight:800;font-size:16px;cursor:pointer;letter-spacing:.04em;box-shadow:0 8px 24px rgba(245,158,11,0.4);transition:.2s}
+.end button:hover{transform:translateY(-2px)}
+.medal{font-size:72px;line-height:1;filter:drop-shadow(0 6px 18px rgba(250,204,21,0.5))}
+.confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.confetti i{position:absolute;width:8px;height:14px;border-radius:2px;animation:fall 2.2s linear forwards;top:-20px}
+@keyframes fall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.loading{padding:60px 20px;text-align:center;color:var(--c-muted)}
+</style>
+<script src="/nav.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-btn" href="./index.html"><span>←</span> <span class="back-btn-text">Tüm Oyunlar</span></a>
+  <div class="title-ar" dir="rtl">صَنِّفِ الكَلِمَات</div>
+  <span class="progress-chip" id="chip">— / —</span>
+</header>
+<main class="stage" id="stage"><div class="loading">Yükleniyor…</div></main>
+<canvas class="confetti" id="cf" style="display:none"></canvas>
+<script>
+(function(){
+  const shuffle=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;};
+  const stage=document.getElementById('stage');
+  const chip=document.getElementById('chip');
+  let words=[], cats=[], placed=0, total=0, errors=0, selected=null;
+
+  function render(){
+    chip.textContent=`${placed} / ${total}`;
+    stage.innerHTML=`
+      <div class="hud"><div class="hud-stat">Yerleşen<b id="hPlaced">${placed}</b></div><div class="hud-stat">Hata<b id="hErr">${errors}</b></div><div class="hud-stat">Toplam<b>${total}</b></div></div>
+      <div class="intro">Önce kelimeyi seç, sonra kategorisine tıkla</div>
+      <div class="words" id="words">${words.map((w,k)=>`<button class="word" data-k="${k}" data-cat="${encodeURIComponent(w.category)}">${w.text}</button>`).join('')}</div>
+      <div class="boxes" id="boxes">${cats.map(c=>`<div class="box" data-cat="${encodeURIComponent(c)}"><div class="box-title">${c}</div><div class="box-items"></div></div>`).join('')}</div>
+      <div class="feedback" id="fb"></div>
+    `;
+    document.querySelectorAll('.word').forEach(w=>w.addEventListener('click',()=>onWord(w)));
+    document.querySelectorAll('.box').forEach(b=>b.addEventListener('click',()=>onBox(b)));
+  }
+
+  function onWord(w){
+    document.querySelectorAll('.word').forEach(x=>x.classList.remove('selected'));
+    selected=w; w.classList.add('selected');
+  }
+  function onBox(box){
+    if(!selected) return;
+    const cat=decodeURIComponent(box.dataset.cat);
+    const wCat=decodeURIComponent(selected.dataset.cat);
+    const itemsHolder=box.querySelector('.box-items');
+    const ok=cat===wCat;
+    const chip=document.createElement('span');
+    chip.className='placed-item'+(ok?'':' wrong');
+    chip.textContent=selected.textContent;
+    itemsHolder.appendChild(chip);
+    selected.classList.add('placed');
+    if(ok){placed++;burst(14);}
+    else{errors++; chip.textContent+=' → '+wCat;}
+    selected=null;
+    document.getElementById('hPlaced').textContent=placed;
+    document.getElementById('hErr').textContent=errors;
+    const ch=document.getElementById('chip'); ch.textContent=`${placed} / ${total}`;
+    const fb=document.getElementById('fb');
+    fb.className='feedback '+(ok?'ok':'bad');
+    fb.textContent=ok?'✓ Doğru':'✗ Yanlış kategori — doğrusu: '+wCat;
+    if(placed+errors===total) setTimeout(end,800);
+  }
+  function end(){
+    const pct=Math.round(placed/total*100);
+    const medal=pct===100?'🥇':pct>=70?'🥈':pct>=40?'🥉':'📦';
+    const msg=pct===100?'Hatasız sınıflandırdın!':pct>=70?'İyi iş — birkaç kategoride dikkat.':pct>=40?'Yarıyı aştın.':'Kelime kategorilerini tekrar gözden geçir.';
+    stage.innerHTML=`<div class="end"><div class="medal">${medal}</div><h2 dir="rtl">أَحْسَنْت!</h2><div class="score-big">${placed}<small> / ${total}</small></div><p>${msg}</p><button id="again">Tekrar Oyna</button></div>`;
+    document.getElementById('again').addEventListener('click',()=>{words=shuffle(words);placed=0;errors=0;selected=null;render();});
+    if(pct>=70) burst(80);
+  }
+  function burst(count=36){const c=document.getElementById('cf');c.style.display='block';const colors=['#facc15','#fb923c','#22c55e','#38bdf8','#f472b6','#fff'];const frag=document.createDocumentFragment();for(let k=0;k<count;k++){const i=document.createElement('i');i.style.left=(Math.random()*100)+'%';i.style.background=colors[Math.floor(Math.random()*colors.length)];i.style.animationDelay=(Math.random()*0.4)+'s';i.style.animationDuration=(1.6+Math.random()*1.2)+'s';frag.appendChild(i);}c.appendChild(frag);setTimeout(()=>{c.innerHTML='';c.style.display='none';},2400);}
+
+  fetch('data/unit4.database.json').then(r=>{if(!r.ok)throw new Error('JSON '+r.status);return r.json();}).then(db=>{
+    const g=(db.games||[]).find(x=>x.id==='hf_g2_sorting');
+    if(!g){stage.innerHTML='<div class="loading">Oyun bulunamadı.</div>';return;}
+    words=shuffle(g.items||[]); total=words.length;
+    cats=(g.settings&&g.settings.categories)||[...new Set(words.map(w=>w.category))];
+    render();
+  }).catch(err=>{stage.innerHTML=`<div class="loading"><p>Veri yüklenemedi: ${err.message}</p></div>`;});
+})();
+</script>
+</body>
+</html>
