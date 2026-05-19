@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
+<title>صَحّ أَمْ خَطَأ — İHO 7. Sınıf 4. Ünite</title>
+<meta name="description" content="2 kişilik doğru/yanlış buzzer oyunu — İHO 7. sınıf 4. ünite (مَدِينَتِي وَبَلَدِي).">
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--c-gold:#facc15;--c-good:#16a34a;--c-bad:#dc2626;--c-text:#fff8ec;--c-muted:rgba(255,248,236,0.62)}
+html.light{--c-text:#3a2a10;--c-muted:rgba(58,42,16,0.6)}
+html,body{height:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter','Segoe UI',sans-serif;color:var(--c-text);min-height:100vh;overflow-x:hidden;position:relative;background:radial-gradient(ellipse at top,#7c2d12 0%,#1a0e04 60%)}
+html.light body{background:radial-gradient(ellipse at top,#fed7aa 0%,#fef6e4 60%)}
+body::before{content:'';position:fixed;left:50%;top:-8vw;width:60vw;height:60vw;background:radial-gradient(circle,rgba(251,146,60,0.22) 0%,transparent 60%);transform:translateX(-50%);pointer-events:none;z-index:0}
+.top-bar{position:sticky;top:0;z-index:20;height:54px;display:flex;align-items:center;gap:12px;padding:0 18px 0 170px;background:linear-gradient(180deg,rgba(15,9,3,0.85),rgba(15,9,3,0.55));backdrop-filter:blur(10px);border-bottom:1px solid rgba(252,211,77,0.18)}
+html.light .top-bar{background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.5));border-bottom-color:rgba(217,119,6,0.18)}
+@media(max-width:600px){.top-bar{padding-left:130px;padding-right:12px}}
+@media(max-width:380px){.top-bar{padding-left:120px;gap:8px}}
+.back-btn{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);padding:8px 18px;border-radius:999px;cursor:pointer;font:inherit;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+.back-btn:hover{background:rgba(252,211,77,0.22);transform:translateX(2px)}
+.title-ar{font-family:'Arakom',sans-serif;font-size:18px;color:var(--c-gold);flex:1;text-align:center;direction:rtl;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.progress-chip{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:var(--c-text);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.04em}
+@media(max-width:380px){.back-btn-text{display:none}.title-ar{font-size:16px}.progress-chip{padding:5px 10px;font-size:12px}}
+
+.stage{position:relative;z-index:1;padding:24px 16px 80px;max-width:880px;margin:0 auto}
+
+.scoreboard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.player{background:rgba(0,0,0,0.32);border-radius:18px;padding:14px;text-align:center;border:2px solid transparent}
+.player.a{border-color:rgba(251,146,60,0.4)}
+.player.b{border-color:rgba(56,189,248,0.4)}
+.player .pname{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--c-muted);margin-bottom:4px}
+.player .pscore{font-family:'Inter',sans-serif;font-size:38px;font-weight:900;color:var(--c-gold);line-height:1}
+html.light .player .pscore{color:#a16207}
+.player.a .pname{color:#fb923c}
+.player.b .pname{color:#38bdf8}
+
+.statement{
+  font-family:'Arakom',sans-serif;font-size:clamp(20px,3.5vw,30px);font-weight:bold;text-align:center;direction:rtl;color:var(--c-text);
+  background:linear-gradient(135deg,rgba(252,211,77,0.08),rgba(180,83,9,0.04));border:1.5px solid rgba(252,211,77,0.25);border-radius:20px;
+  padding:30px 22px;margin-bottom:22px;min-height:120px;display:flex;align-items:center;justify-content:center;line-height:1.7;
+}
+
+.buzzers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.buzzer{
+  position:relative;font-family:'Arakom',sans-serif;font-size:clamp(28px,5vw,46px);font-weight:900;
+  border-radius:24px;padding:38px 12px;cursor:pointer;border:3px solid transparent;
+  transition:all .2s cubic-bezier(.3,1.4,.4,1);overflow:hidden;
+  box-shadow:0 12px 0 rgba(0,0,0,0.45),0 16px 30px rgba(0,0,0,0.45);
+}
+.buzzer:active{transform:translateY(8px);box-shadow:0 4px 0 rgba(0,0,0,0.45),0 6px 12px rgba(0,0,0,0.45)}
+.buzzer.t{background:radial-gradient(circle at 30% 30%,#86efac,#16a34a);color:#052e16}
+.buzzer.f{background:radial-gradient(circle at 30% 30%,#fca5a5,#dc2626);color:#450a0a}
+.buzzer.correct{box-shadow:0 0 0 6px rgba(252,211,77,0.5),0 12px 0 rgba(0,0,0,0.45),0 16px 30px rgba(0,0,0,0.55);animation:flash .55s}
+.buzzer.wrong{filter:grayscale(.7) brightness(.7);animation:shakeX .42s}
+.buzzer:disabled{cursor:default}
+@keyframes flash{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5)}}
+@keyframes shakeX{10%,90%{transform:translateX(-2px)}30%,70%{transform:translateX(-7px)}50%{transform:translateX(7px)}}
+
+.turn{text-align:center;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-muted);margin:18px 0 10px}
+.turn-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.turn-tab{padding:6px 16px;border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:var(--c-text)}
+.turn-tab.a.active{background:linear-gradient(135deg,#fb923c,#fbbf24);color:#1a0e04;border-color:transparent}
+.turn-tab.b.active{background:linear-gradient(135deg,#38bdf8,#22d3ee);color:#1a0e04;border-color:transparent}
+
+.explanation{margin-top:18px;padding:14px 18px;border-radius:14px;font-size:14px;line-height:1.55;background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);color:#7dd3fc;text-align:center;display:none}
+html.light .explanation{background:#e0f2fe;color:#075985;border-color:rgba(7,89,133,0.2)}
+.explanation.show{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.end{background:linear-gradient(135deg,rgba(252,211,77,0.1),rgba(180,83,9,0.06));border:1.5px solid rgba(252,211,77,0.28);border-radius:24px;padding:36px 28px;text-align:center;max-width:520px;margin:30px auto}
+.end h2{font-family:'Arakom',sans-serif;font-size:30px;color:var(--c-gold);margin-bottom:6px}
+.end .winner{font-size:50px;font-weight:900;line-height:1;margin:14px 0;color:var(--c-gold)}
+.end .ws{display:flex;justify-content:center;gap:20px;font-size:18px;margin-bottom:22px}
+.end .ws .pa{color:#fb923c} .end .ws .pb{color:#38bdf8}
+.end button{background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;color:#1a0e04;padding:14px 32px;border-radius:999px;font:inherit;font-weight:800;font-size:16px;cursor:pointer;letter-spacing:.04em;box-shadow:0 8px 24px rgba(245,158,11,0.4);transition:.2s}
+.end button:hover{transform:translateY(-2px)}
+.medal{font-size:72px;line-height:1;filter:drop-shadow(0 6px 18px rgba(250,204,21,0.5))}
+.confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:50}
+.confetti i{position:absolute;width:8px;height:14px;border-radius:2px;animation:fall 2.2s linear forwards;top:-20px}
+@keyframes fall{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.loading{padding:60px 20px;text-align:center;color:var(--c-muted)}
+</style>
+<script src="/nav.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-btn" href="./index.html"><span>←</span> <span class="back-btn-text">Tüm Oyunlar</span></a>
+  <div class="title-ar" dir="rtl">صَحّ أَمْ خَطَأ</div>
+  <span class="progress-chip" id="chip">— / —</span>
+</header>
+<main class="stage" id="stage"><div class="loading">Yükleniyor…</div></main>
+<canvas class="confetti" id="cf" style="display:none"></canvas>
+<script>
+(function(){
+  const shuffle=a=>{const r=[...a];for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}return r;};
+  const stage=document.getElementById('stage'); const chip=document.getElementById('chip');
+  let items=[],i=0,sA=0,sB=0,turn='A',locked=false;
+  function render(){
+    if(i>=items.length) return renderEnd();
+    const it=items[i]; locked=false;
+    chip.textContent=`${i+1} / ${items.length}`;
+    stage.innerHTML=`
+      <div class="scoreboard">
+        <div class="player a"><div class="pname">🔴 OYUNCU A</div><div class="pscore">${sA}</div></div>
+        <div class="player b"><div class="pname">🔵 OYUNCU B</div><div class="pscore">${sB}</div></div>
+      </div>
+      <div class="turn-tabs"><button class="turn-tab a ${turn==='A'?'active':''}" data-p="A">Oyuncu A</button><button class="turn-tab b ${turn==='B'?'active':''}" data-p="B">Oyuncu B</button></div>
+      <div class="turn">Sıra: Oyuncu ${turn} · Soru ${i+1}/${items.length}</div>
+      <div class="statement" dir="rtl">${it.statement}</div>
+      <div class="buzzers">
+        <button class="buzzer t" data-v="true" dir="rtl">صَحّ</button>
+        <button class="buzzer f" data-v="false" dir="rtl">خَطَأ</button>
+      </div>
+      <div class="explanation" id="exp"></div>
+    `;
+    document.querySelectorAll('.turn-tab').forEach(t=>t.addEventListener('click',()=>{if(locked)return;turn=t.dataset.p;render();}));
+    document.querySelectorAll('.buzzer').forEach(b=>b.addEventListener('click',()=>choose(b,b.dataset.v==='true',it)));
+  }
+  function choose(btn,val,it){
+    if(locked) return; locked=true;
+    document.querySelectorAll('.buzzer').forEach(b=>b.disabled=true);
+    const ok = (val===!!it.answer);
+    if(ok){btn.classList.add('correct'); turn==='A'?sA++:sB++; burst(20);}
+    else{btn.classList.add('wrong'); const other=document.querySelector(`.buzzer.${it.answer?'t':'f'}`); if(other) other.classList.add('correct');}
+    if(it.explanation){const e=document.getElementById('exp');e.textContent=it.explanation;e.classList.add('show');}
+    setTimeout(()=>{turn=turn==='A'?'B':'A';i++;render();}, ok?1100:1700);
+  }
+  function renderEnd(){
+    chip.textContent=`${items.length} / ${items.length}`;
+    const winner = sA>sB ? '🔴 Oyuncu A' : sB>sA ? '🔵 Oyuncu B' : '🤝 Berabere';
+    const medal = sA===sB ? '🤝' : '🏆';
+    stage.innerHTML=`<div class="end"><div class="medal">${medal}</div><h2 dir="rtl">أَحْسَنْت!</h2><div class="winner">${winner}</div><div class="ws"><span class="pa">A: ${sA}</span><span class="pb">B: ${sB}</span></div><button id="again">Tekrar Oyna</button></div>`;
+    document.getElementById('again').addEventListener('click',()=>{items=shuffle(items);i=0;sA=0;sB=0;turn='A';render();});
+    burst(80);
+  }
+  function burst(count=36){const c=document.getElementById('cf');c.style.display='block';const colors=['#facc15','#fb923c','#22c55e','#38bdf8','#f472b6','#fff'];const frag=document.createDocumentFragment();for(let k=0;k<count;k++){const i=document.createElement('i');i.style.left=(Math.random()*100)+'%';i.style.background=colors[Math.floor(Math.random()*colors.length)];i.style.animationDelay=(Math.random()*0.4)+'s';i.style.animationDuration=(1.6+Math.random()*1.2)+'s';frag.appendChild(i);}c.appendChild(frag);setTimeout(()=>{c.innerHTML='';c.style.display='none';},2400);}
+  fetch('data/unit4.database.json').then(r=>{if(!r.ok)throw new Error('JSON '+r.status);return r.json();}).then(db=>{const g=(db.games||[]).find(x=>x.id==='sa_g1_true_false');if(!g){stage.innerHTML='<div class="loading">Oyun bulunamadı.</div>';return;}items=shuffle(g.items||[]);render();}).catch(err=>{stage.innerHTML=`<div class="loading"><p>Veri yüklenemedi: ${err.message}</p></div>`;});
+})();
+</script>
+</body>
+</html>
