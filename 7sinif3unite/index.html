@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<base href="/7sinif3unite/">
+<script src="/lib/design-system/theme.js"></script>
+<link rel="stylesheet" href="/lib/design-system/tokens.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İHO 7. Sınıf 3. Ünite — إلى أين نسافر؟ — Oyunlar ve Etkinlikler</title>
+<meta name="description" content="İmam Hatip Ortaokulu 7. sınıf Arapça 3. ünite (إلى أين نسافر؟) için sayfa sayfa eşleştirilmiş oyun derlemesi: ulaşım araçları, seyahat fiilleri, adres, trafik.">
+<style>
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+:root{
+  --bg:linear-gradient(135deg,#0c1d3a 0%,#102a52 40%,#0a1830 100%);
+  --text:#fff;
+  --badge-bg:rgba(255,255,255,.08);--badge-bd:rgba(255,255,255,.15);--badge-tx:rgba(255,255,255,.6);
+  --subtitle:rgba(255,255,255,.55);--count:rgba(255,255,255,.3);
+  --label-tx:rgba(255,255,255,.42);--label-ln:rgba(255,255,255,.08);
+  --card-bg:rgba(255,255,255,.05);--card-bd:rgba(255,255,255,.08);
+  --card-hover:rgba(255,255,255,.10);--card-tr:rgba(255,255,255,.50);
+  --note-bg:rgba(255,255,255,.04);--note-bd:rgba(255,255,255,.10);--note-tx:rgba(255,255,255,.72);
+  --footer:rgba(255,255,255,.22);
+}
+html.light{
+  --bg:linear-gradient(135deg,#e6f0fa 0%,#dde8f5 40%,#e6f0fa 100%);
+  --text:#0c1d3a;
+  --badge-bg:rgba(0,0,0,.05);--badge-bd:rgba(0,0,0,.1);--badge-tx:rgba(0,0,0,.5);
+  --subtitle:rgba(0,0,0,.5);--count:rgba(0,0,0,.3);
+  --label-tx:rgba(0,0,0,.45);--label-ln:rgba(0,0,0,.08);
+  --card-bg:rgba(255,255,255,.7);--card-bd:rgba(0,0,0,.08);
+  --card-hover:rgba(255,255,255,.9);--card-tr:rgba(0,0,0,.5);
+  --note-bg:rgba(0,0,0,.03);--note-bd:rgba(0,0,0,.08);--note-tx:rgba(0,0,0,.7);
+  --footer:rgba(0,0,0,.25);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);min-height:100vh;color:var(--text);overflow-x:hidden}
+.hub-header{text-align:center;padding:48px 24px 18px}
+.hub-badge{display:inline-block;background:var(--badge-bg);border:1px solid var(--badge-bd);color:var(--badge-tx);padding:8px 24px;border-radius:100px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px}
+.hub-title{font-size:clamp(26px,4.6vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:6px;background:linear-gradient(90deg,#00BCD4,#4FC3F7,#9C27B0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hub-subtitle{font-family:'Arakom',sans-serif;color:var(--subtitle);font-size:clamp(15px,2vw,20px);margin-bottom:6px;direction:rtl}
+.hub-count{color:var(--count);font-size:14px;margin-top:8px}
+
+.intro{max-width:1100px;margin:18px auto;padding:0 24px;color:var(--note-tx);font-size:15px;line-height:1.65}
+.intro .card{background:var(--note-bg);border:1px solid var(--note-bd);border-radius:14px;padding:14px 18px}
+.intro b{color:var(--text)}
+.intro .src{color:var(--count);font-size:13px;margin-top:6px;display:block}
+
+.section-label{max-width:1300px;margin:30px auto 12px;padding:0 24px;font-size:clamp(13px,1.7vw,15px);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--label-tx);display:flex;align-items:center;gap:12px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--label-ln)}
+.section-note{max-width:1300px;margin:-6px auto 10px;padding:0 24px;color:var(--count);font-size:13px;direction:rtl;text-align:right}
+
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;max-width:1300px;margin:0 auto;padding:0 24px 8px}
+.game-card{background:var(--card-bg);border:1px solid var(--card-bd);border-radius:18px;padding:22px 16px 18px;text-align:center;cursor:pointer;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block}
+.game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;opacity:.65;transition:opacity .3s}
+.game-card:hover{background:var(--card-hover);transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.game-card:hover::before{opacity:1}
+.card-icon{width:74px;height:74px;margin:0 auto 10px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08)}
+html.light .card-icon{background:linear-gradient(135deg,#fff,#f3f3fa);border:1px solid rgba(0,0,0,.06);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.card-name{font-family:'Arakom',sans-serif;font-size:clamp(1.05em,1.9vw,1.3em);font-weight:bold;margin-bottom:5px;direction:rtl;color:var(--text);line-height:1.3}
+.card-tr{font-size:clamp(12px,1.3vw,13.5px);color:var(--card-tr);margin-bottom:8px;line-height:1.45;min-height:2.4em;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.card-page{display:inline-block;font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.04em;background:rgba(255,255,255,.05);color:var(--card-tr);border:1px solid var(--card-bd)}
+html.light .card-page{background:rgba(0,0,0,.04)}
+.card-tag{display:inline-block;font-size:10.5px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.03em;margin-right:4px}
+.tag-existing{background:rgba(0,188,212,.13);color:#80DEEA;border:1px solid rgba(0,188,212,.27)}
+.tag-edit{background:rgba(255,193,7,.15);color:#FFD54F;border:1px solid rgba(255,193,7,.25)}
+.tag-new{background:rgba(76,175,80,.15);color:#A5D6A7;border:1px solid rgba(76,175,80,.25)}
+html.light .tag-existing{background:rgba(0,131,143,.12);color:#006064;border:1px solid rgba(0,131,143,.25)}
+html.light .tag-edit{background:rgba(245,127,23,.10);color:#e65100;border:1px solid rgba(245,127,23,.2)}
+html.light .tag-new{background:rgba(46,125,50,.10);color:#1b5e20;border:1px solid rgba(46,125,50,.2)}
+
+.group-a .game-card::before{background:linear-gradient(90deg,#00BCD4,#4FC3F7)}
+.group-a .game-card{border-color:rgba(0,188,212,.15)}
+.group-a .game-card:hover{border-color:rgba(0,188,212,.4)}
+.group-b .game-card::before{background:linear-gradient(90deg,#3F51B5,#7986CB)}
+.group-b .game-card{border-color:rgba(63,81,181,.15)}
+.group-b .game-card:hover{border-color:rgba(63,81,181,.4)}
+.group-c .game-card::before{background:linear-gradient(90deg,#4CAF50,#8BC34A)}
+.group-c .game-card{border-color:rgba(76,175,80,.15)}
+.group-c .game-card:hover{border-color:rgba(76,175,80,.4)}
+.group-d .game-card::before{background:linear-gradient(90deg,#FF9800,#FFC107)}
+.group-d .game-card{border-color:rgba(255,152,0,.15)}
+.group-d .game-card:hover{border-color:rgba(255,152,0,.4)}
+.group-e .game-card::before{background:linear-gradient(90deg,#9C27B0,#BA68C8)}
+.group-e .game-card{border-color:rgba(156,39,176,.15)}
+.group-e .game-card:hover{border-color:rgba(156,39,176,.4)}
+.group-f .game-card::before{background:linear-gradient(90deg,#F44336,#FF5722)}
+.group-f .game-card{border-color:rgba(244,67,54,.15)}
+.group-f .game-card:hover{border-color:rgba(244,67,54,.4)}
+
+.hub-footer{text-align:center;color:var(--footer);font-size:13px;padding:30px 20px 50px}
+.hub-footer a{color:var(--footer);text-decoration:none;border-bottom:1px dotted var(--footer)}
+.hub-footer a:hover{color:var(--text)}
+</style>
+</head>
+<body>
+
+<div class="hub-header">
+  <div class="hub-badge">İHO • 7. Sınıf • 3. Ünite</div>
+  <h1 class="hub-title">Nereye Yolculuk? — Oyunlar</h1>
+  <div class="hub-subtitle">إلى أَيْنَ نُسافِر؟</div>
+  <div class="hub-count">16 mevcut oyun · 3 düzenleme · 2 yeni öneri</div>
+</div>
+
+<div class="intro">
+  <div class="card">
+    <b>📄 Bu sayfa ne içerir?</b> <i>"Arapça 7. Sınıf 3. Üniteyle İlgili Oyunlar ve Öneriler"</i> dökümanına göre, mevcut <code>iho-oyunlar/unit3</code> oyunları ders kitabı sayfalarına göre tasniflendi. Dökümanda istenen üç oyunda kritik düzenlemeler yapılmış kopyaları da burada bulabilirsin.
+    <br><br>
+    <b>📘 Ders kitabı uyumu:</b> Tüm sayfa numaraları <i>IHO_Arp7_03_Unite3 (12.05.2026)</i> ders kitabına göre kontrol edildi. Konular: ulaşım araçları, seyahat fiilleri (mudâri + emir kipi), karşılaştırma kalıpları, adres-yön ifadeleri, trafik işaretleri.
+    <span class="src">📌 Mavi etiket = mevcut · Sarı etiket = düzenleme uygulandı · 🆕 Yeşil etiket = yeni öneri</span>
+  </div>
+</div>
+
+<!-- ─── A: Ulaşım Araçları Kelime ─── -->
+<div class="section-label">A · Sayfa 96-103 · Ulaşım Araçları (Kelime)</div>
+<div class="section-note">وَسائِطُ النَّقْل: حافِلَة، طائِرَة، قِطار، سَيّارَة…</div>
+<div class="games-grid group-a">
+  <a class="game-card" href="/iho-oyunlar/unit3/flashcards.html">
+    <div class="card-icon">🃏</div>
+    <div class="card-name">لُعْبَةُ المُفْرَدات</div>
+    <div class="card-tr">Ulaşım kelimelerini öğren (kart)</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-103</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/match.html">
+    <div class="card-icon">🔗</div>
+    <div class="card-name">المُطابَقَة</div>
+    <div class="card-tr">Arapça kelime ↔ resim eşleştirme</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-103</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/balloonPop.html">
+    <div class="card-icon">🎈</div>
+    <div class="card-name">الدِّفاعُ الفَضائي</div>
+    <div class="card-tr">Tema kelimelerini balon/asteroidle vur</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-103, 116-119</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/wheel.html">
+    <div class="card-icon">🎡</div>
+    <div class="card-name">عَجَلَةُ الحَظّ</div>
+    <div class="card-tr">Çarkı çevir, ulaşım kelimesi sor</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-103</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/memory.html">
+    <div class="card-icon">🧠</div>
+    <div class="card-name">لُعْبَةُ الذّاكِرَة</div>
+    <div class="card-tr">Hafıza: ulaşım + trafik işaretleri çiftleri</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-102, 116-119</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/wordSearch.html">
+    <div class="card-icon">🔤</div>
+    <div class="card-name">بَحْثُ الكَلِمات</div>
+    <div class="card-tr">Bulmaca kareleri içinde kelime ara</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-102, 116-119</span>
+  </a>
+</div>
+
+<!-- ─── B: Seyahat Fiilleri + Zamir-Fiil ─── -->
+<div class="section-label">B · Sayfa 96-102 · Seyahat Fiilleri + Emir + Zamir-Fiil</div>
+<div class="section-note">أَفْعالُ السَّفَر — المُضارِع وَالأَمْر — الضَّمير وَالفِعْل</div>
+<div class="games-grid group-b">
+  <a class="game-card" href="/iho-oyunlar/unit3/quiz.html">
+    <div class="card-icon">🎯</div>
+    <div class="card-name">اخْتَرْ الفِعْلَ الصَّحيح</div>
+    <div class="card-tr">Çoktan seçmeli: doğru fiil çekimi</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-102</span>
+  </a>
+  <a class="game-card" href="cumle-kur-edit.html">
+    <div class="card-icon">🏗️</div>
+    <div class="card-name">ابْنِ الجُمْلَة</div>
+    <div class="card-tr">Cümle kur — sadece 1 fazla kelime (öğretmen istedi)</div>
+    <span class="card-tag tag-edit">✎ Düzenlendi</span>
+    <span class="card-page">s. 96-102</span>
+  </a>
+  <a class="game-card" href="hata-bul-edit.html">
+    <div class="card-icon">💥</div>
+    <div class="card-name">اقْصِفِ الخَطَأ</div>
+    <div class="card-tr">Süre uzatıldı + ulaşım türü modu eklendi</div>
+    <span class="card-tag tag-edit">✎ Düzenlendi</span>
+    <span class="card-page">s. 96-102</span>
+  </a>
+</div>
+
+<!-- ─── C: Seyahat Türleri (Sınıflandırma) ─── -->
+<div class="section-label">C · Sayfa 104-105 · Seyahat Türleri (Sınıflandırma)</div>
+<div class="section-note">صَنِّفْ وَسائِطَ النَّقْل: جَوًّا، بَحْرًا، بَرًّا</div>
+<div class="games-grid group-c">
+  <a class="game-card" href="vasita-sinif.html">
+    <div class="card-icon">📂</div>
+    <div class="card-name">صَنِّفْ وَسائِطَ النَّقْل</div>
+    <div class="card-tr">Hava-Deniz-Kara — sürükle bırak</div>
+    <span class="card-tag tag-new">🆕 Yeni öneri 1/2</span>
+    <span class="card-page">s. 104-105</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/typing.html">
+    <div class="card-icon">⌨️</div>
+    <div class="card-name">كَلِماتٌ مَقْلوبَة</div>
+    <div class="card-tr">Karışık harflerden ulaşım kelimesi yaz</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 96-102, 116-119</span>
+  </a>
+</div>
+
+<!-- ─── D: Karşılaştırma ─── -->
+<div class="section-label">D · Sayfa 114-117 · Karşılaştırma</div>
+<div class="section-note">المُقارَنَة: أَسْرَع، أَبْطَأ، أَكْبَر، أَصْغَر</div>
+<div class="games-grid group-d">
+  <a class="game-card" href="/iho-oyunlar/unit3/comparative.html">
+    <div class="card-icon">⚖️</div>
+    <div class="card-name">المُقارَنَة</div>
+    <div class="card-tr">İki ulaşım aracını kıyasla</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 114-117</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/truefalse.html">
+    <div class="card-icon">✅</div>
+    <div class="card-name">صَحٌّ أَمْ خَطَأ</div>
+    <div class="card-tr">"Tren uçaktan daha hızlıdır" — doğru mu?</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 114-117</span>
+  </a>
+</div>
+
+<!-- ─── E: Adres + Trafik ─── -->
+<div class="section-label">E · Sayfa 116-127 · Adres + Yön + Trafik İşaretleri</div>
+<div class="section-note">العُنْوان، الاِتِّجاهات، إِشاراتُ المُرور</div>
+<div class="games-grid group-e">
+  <a class="game-card" href="/iho-oyunlar/unit3/directionsMap.html">
+    <div class="card-icon">🗺️</div>
+    <div class="card-name">رِحْلَةُ اليَوْم — أَلْعابُ الاتِّجاهات</div>
+    <div class="card-tr">Harita üzerinde yön tarifiyle git</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 121-127</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/traffic.html">
+    <div class="card-icon">🚦</div>
+    <div class="card-name">إِشاراتُ المُرور</div>
+    <div class="card-tr">Trafik işaretlerini doğru anlamlandır</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 116-119</span>
+  </a>
+  <a class="game-card" href="adres-sor.html">
+    <div class="card-icon">📍</div>
+    <div class="card-name">السُّؤالُ عَنِ العُنْوان</div>
+    <div class="card-tr">Adresi sor + yön tarif et (مَتى/كَيْف/أَيْن)</div>
+    <span class="card-tag tag-new">🆕 Yeni öneri 2/2</span>
+    <span class="card-page">s. 120-127</span>
+  </a>
+</div>
+
+<!-- ─── F: Boşluk + Diyalog ─── -->
+<div class="section-label">F · Genel · Boşluk Doldurma + Diyalog</div>
+<div class="section-note">الكَلِمَةُ النّاقِصَة — أَكْمِلِ الحِوار — سِباقُ الإجابَة</div>
+<div class="games-grid group-f">
+  <a class="game-card" href="/iho-oyunlar/unit3/fillBlank.html">
+    <div class="card-icon">📝</div>
+    <div class="card-name">الكَلِمَةُ النّاقِصَة</div>
+    <div class="card-tr">Karşılaştırma + soru edatları + boşluk</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 112-113</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/dialogueBuilder.html">
+    <div class="card-icon">💬</div>
+    <div class="card-name">أَكْمِلِ الحِوار</div>
+    <div class="card-tr">Diyalog metnini tamamla</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">s. 97, 109, 120, 127, 129, 130</span>
+  </a>
+  <a class="game-card" href="/iho-oyunlar/unit3/oddOneOut.html">
+    <div class="card-icon">❓</div>
+    <div class="card-name">سِباقُ الإجابَة (orijinal)</div>
+    <div class="card-tr">Klasik "farklı olanı bul" yarışması</div>
+    <span class="card-tag tag-existing">📦 Mevcut</span>
+    <span class="card-page">genel</span>
+  </a>
+</div>
+
+<div class="intro" style="margin-top:30px">
+  <div class="card" style="border-style:dashed">
+    <b>💡 Öğretmen önerileri:</b>
+    <ul style="margin:8px 18px 0;padding:0;line-height:1.7">
+      <li><b>ابن الجملة</b>: Fazla 1 kelime yeterlidir (orijinal sürümde 2 kelime fazla — öğrenciyi yoruyor) → <i>"Cümle Kur — Düzenlendi"</i> kartı.</li>
+      <li><b>اقصف الخطأ</b>: Süre artırıldı + zamire göre fiil ↔ seyahat türüne göre ulaşım aracı çift yönlü → <i>"Hatayı Bombala — Düzenlendi"</i> kartı.</li>
+      <li><b>سباق الإجابة</b>: Orijinaldeki الكلمة الناقصة kısmı iyi; diğer sorular karışık/zor — şu an için <code>fillBlank.html</code> bağımsız olarak çalışıyor.</li>
+      <li>Adres belirleme ve trafik kuralları açıklamalarında <i>"رحلة اليوم"</i> ve <i>"إشارات المرور"</i> kartlarındaki video/metinler birlikte kullanılabilir.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="hub-footer">
+  <a href="/iho-oyunlar/unit3/">↩ Orijinal İHO 3. Ünite Hub</a> &nbsp;·&nbsp;
+  <a href="/7sinif2unite/">↩ 2. Ünite</a> &nbsp;·&nbsp;
+  <a href="/7sinif1unite/">↩ 1. Ünite</a> &nbsp;·&nbsp;
+  <a href="/">raufenc.com</a>
+</div>
+
+</body>
+</html>

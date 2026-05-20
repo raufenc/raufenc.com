@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>اقصف الخطأ — أَفْعالُ السَّفَر</title>
+<style>
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f1f,#440a4f,#9C27B0);min-height:100vh;color:#1a0f1f;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+.box{background:#fff;border-radius:24px;padding:24px;max-width:760px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
+.edited-tag{display:inline-block;background:#FFC107;color:#5D4037;padding:3px 12px;border-radius:14px;font-size:.72em;font-weight:bold;margin-left:6px}
+.sub{text-align:center;color:#9C27B0;margin-bottom:14px;font-size:.95em}
+.bar{display:flex;justify-content:space-between;background:#F3E5F5;border-radius:12px;padding:10px 16px;margin-bottom:12px;font-weight:bold;color:#4A148C;flex-wrap:wrap;gap:6px}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip b{color:#7B1FA2}
+.timer-wrap{width:100%;height:10px;background:#F3E5F5;border-radius:5px;margin-bottom:14px;overflow:hidden}
+.timer-bar{height:100%;background:#4CAF50;border-radius:5px;transition:width .1s linear,background .3s}
+.cat{background:linear-gradient(135deg,#7B1FA2,#4A148C);color:#fff;border-radius:14px;padding:14px;text-align:center;margin-bottom:12px;font-size:1.2em;font-weight:bold;box-shadow:0 6px 18px rgba(123,31,162,.4)}
+.cat .tr{font-size:.72em;color:rgba(255,255,255,.78);margin-top:6px;font-weight:normal;font-style:italic}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.opt{background:#F3E5F5;border:2px solid #CE93D8;border-radius:14px;padding:14px;cursor:pointer;font-size:1.05em;color:#4A148C;transition:all .2s;text-align:center;font-weight:600}
+.opt:hover{background:#CE93D8;transform:translateY(-2px)}
+.opt.correct{background:#C8E6C9;border-color:#4CAF50;color:#1B5E20}
+.opt.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
+.opt.disabled{pointer-events:none;opacity:.6}
+.fb{text-align:center;margin-top:10px;min-height:22px;font-weight:bold}
+.exp{text-align:center;color:#7B1FA2;margin-top:4px;font-size:.95em;background:#F3E5F5;padding:8px 12px;border-radius:10px;min-height:0}
+.btn{display:inline-block;background:linear-gradient(135deg,#7B1FA2,#9C27B0);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:#9c88ff}
+.result{text-align:center}
+.result .score{font-size:3em;color:#7B1FA2;font-weight:bold;margin:12px 0}
+.result .stars{font-size:2.2em;margin:8px 0}
+.hidden{display:none}
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10;text-decoration:none}
+.back:hover{background:rgba(0,0,0,.85)}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>💥 اقْصِفِ الخَطَأ<span class="edited-tag">✎ وَقْت ١٢ث · ضَمائِر + سَفَر</span></h1>
+<div class="sub">اخْتَرْ الكَلِمَةَ الَّتي لا تَنْتَمي إلى المَجْموعَة (الوَقْت ١٢ ثانِيَة)</div>
+<div id="game">
+<div class="tip">
+<b>📘 الأَنْواع:</b> هَذِهِ النُّسْخَة فيها ثَلاثَة أَنْواعٍ مِنَ الأَسْئِلَة:
+١) ضَمير ⇐ اخْتَرْ الفِعْلَ المُختَلِف،
+٢) فِعْل ⇐ اخْتَرْ الضَّميرَ المُختَلِف،
+٣) نَوْعُ السَّفَر ⇐ اخْتَرْ الوَسيلَةَ الَّتي لا تُناسِبُ.
+</div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/12</span></div>
+<div class="timer-wrap"><div class="timer-bar" id="tbar" style="width:100%"></div></div>
+<div class="cat" id="cat">…<div class="tr" id="cattr"></div></div>
+<div class="opts" id="opts"></div>
+<div class="fb" id="fb"></div>
+<div class="exp" id="exp"></div>
+</div>
+<div id="result" class="result hidden">
+<h2 style="color:#7B1FA2">🎉 أَحْسَنْت!</h2>
+<div class="stars" id="stars"></div>
+<div class="score" id="final"></div>
+<div id="msg" style="color:#9C27B0;margin-bottom:14px"></div>
+<button class="btn" onclick="init()">إعادَة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
+</div>
+</div>
+<script>
+var TIME=12000;  // 12 saniye (orijinal 8 idi)
+var ALL=[
+/* Mod 1: zamire göre fiil (Hu, Hiye, Ente, Enti, Ene) */
+{cat:'الفِعْلُ المُناسِب لِـ "هُوَ"',tr:'"O (e)" zamirine uygun fiili seç — farklı olanı bul',opts:['يَذْهَبُ','يَرْكَبُ','يُسافِرُ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = هِيَ / أَنْتَ'},
+{cat:'الفِعْلُ المُناسِب لِـ "هِيَ"',tr:'"O (k)" zamirine uygun fiili seç',opts:['تَرْكَبُ','تُسافِرُ','يَرْكَبُ','تَذْهَبُ'],odd:2,exp:'يَرْكَبُ = هُوَ'},
+{cat:'الفِعْلُ المُناسِب لِـ "أَنْتَ"',tr:'"Sen (e)" zamirine uygun fiili seç',opts:['تَذْهَبُ','تَرْكَبُ','تُسافِرُ','تَذْهَبينَ'],odd:3,exp:'تَذْهَبينَ = أَنْتِ'},
+{cat:'الفِعْلُ المُناسِب لِـ "أَنْتِ"',tr:'"Sen (k)" zamirine uygun fiili seç',opts:['تَذْهَبينَ','تَرْكَبينَ','تُسافِرينَ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = أَنْتَ / هِيَ'},
+/* Mod 2: fiile göre zamir */
+{cat:'الضَّميرُ المُناسِب لِـ "يَذْهَبُ"',tr:'"يَذْهَبُ" fiilinin zamirini seç',opts:['هُوَ','هِيَ','أَنا','نَحْنُ'],odd:1,exp:'يَذْهَبُ خاصٌّ بِـ هُوَ'},
+{cat:'الضَّميرُ المُناسِب لِـ "تَرْكَبينَ"',tr:'"تَرْكَبينَ" fiilinin zamirini seç',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,exp:'تَرْكَبينَ خاصٌّ بِـ أَنْتِ',hint:0},
+{cat:'الضَّميرُ المُناسِب لِـ "أُسافِرُ"',tr:'"أُسافِرُ" fiilinin zamirini seç',opts:['أَنا','هُوَ','أَنْتَ','هِيَ'],odd:0,exp:'أُسافِرُ خاصٌّ بِـ أَنا'},
+/* Mod 3: seyahat türüne göre ulaşım aracı (cevap = uymayan) */
+{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',tr:'Hava taşıtları — bunlardan biri hava değil',opts:['طائِرَة','هَليكوبتر','مِنْطاد','حافِلَة'],odd:3,exp:'الحافِلَة = vasiate-i berriyye (kara)'},
+{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',tr:'Kara taşıtları — bunlardan biri kara değil',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة = bahriyye (deniz)'},
+{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',tr:'Deniz taşıtları — bunlardan biri deniz değil',opts:['سَفينَة','قارِب','يَخْت','طائِرَة'],odd:3,exp:'الطّائِرَة = jevviyye (hava)'},
+/* Karşılaştırma */
+{cat:'كَلِماتُ المُقارَنَة (الأَسْرَع)',tr:'Hızla ilgili karşılaştırma — biri konu dışı',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','مُتَوَسِّط'],odd:2,exp:'أَكْبَر = boyut, hız değil'},
+/* Trafik */
+{cat:'إِشاراتُ المُرور',tr:'Trafik işaretleri — biri farklı',opts:['الإِشارَة الحَمْراء','الإِشارَة الخَضْراء','الإِشارَة الصَّفْراء','الحافِلَة'],odd:3,exp:'الحافِلَة = otobüs (taşıt, ışık değil)'}
+];
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var qs,cur,sc,timerInt;
+function init(){qs=shuf([...ALL]).slice(0,12);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
+function loadQ(){
+clearInterval(timerInt);
+var q=qs[cur];
+document.getElementById('cat').firstChild.textContent='المَجْموعَة: '+q.cat;
+document.getElementById('cattr').textContent='🇹🇷 '+q.tr;
+document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
+var el=document.getElementById('opts');el.innerHTML='';
+q.opts.forEach(function(o,i){
+var b=document.createElement('div');b.className='opt';b.textContent=o;
+b.onclick=function(){answer(i,b,q)};
+el.appendChild(b);
+});
+var start=Date.now();
+timerInt=setInterval(function(){
+var el2=Date.now()-start;var left=Math.max(0,TIME-el2);var pct=left/TIME*100;
+var bar=document.getElementById('tbar');bar.style.width=pct+'%';
+bar.style.background=pct>60?'#4CAF50':pct>30?'#FF9800':'#F44336';
+if(left===0){clearInterval(timerInt);answer(-1,null,q)}
+},50);
+}
+function answer(idx,b,q){
+clearInterval(timerInt);
+document.querySelectorAll('.opt').forEach(function(x){x.classList.add('disabled')});
+document.getElementById('tbar').style.width='0%';
+if(idx===q.odd){if(b)b.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
+else{if(b)b.classList.add('wrong');
+var correctBtn=document.querySelectorAll('.opt')[q.odd];if(correctBtn)correctBtn.classList.add('correct');
+document.getElementById('fb').textContent=idx===-1?'⏰ انْتَهى الوَقْت':'❌ خَطَأ';document.getElementById('fb').style.color='#F44336';}
+document.getElementById('exp').textContent='💡 '+q.exp;
+cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1900);
+}
+function end(){
+var fs=Math.round(sc/(qs.length*10)*100);
+document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+document.getElementById('final').textContent=fs+'%';
+document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
+document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>عَلامَةُ الأَسْعار — السِّعْر</title>
+<style>
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#E91E63);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(16px,1.8vw,22px);overflow-x:hidden}
+.box{background:#fff;border-radius:24px;padding:24px;max-width:880px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+h1{text-align:center;color:#C2185B;font-size:1.55em;margin-bottom:6px}
+.sub{text-align:center;color:#AD1457;margin-bottom:14px;font-size:.95em}
+.bar{display:flex;justify-content:space-between;background:#FCE4EC;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:bold;color:#880E4F;flex-wrap:wrap;gap:6px}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip b{color:#C2185B}
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.item{background:linear-gradient(180deg,#FCE4EC,#F8BBD0);border:3px dashed #F48FB1;border-radius:14px;padding:14px 8px 12px;text-align:center;position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;transition:all .25s}
+.item .em{font-size:2.8em;display:block;margin-bottom:4px}
+.item .ar{font-weight:bold;color:#880E4F;font-size:1.05em}
+.item .price-slot{background:rgba(255,255,255,.6);border:2px dashed #F48FB1;border-radius:10px;padding:6px 10px;margin-top:8px;min-width:90px;min-height:28px;font-size:.9em;color:#AD1457;display:flex;align-items:center;justify-content:center}
+.item.drop-target{border-color:#FFC107;background:linear-gradient(180deg,#FFF9C4,#FFEE58);transform:scale(1.03)}
+.item.correct{border-color:#4CAF50;border-style:solid;background:linear-gradient(180deg,#C8E6C9,#A5D6A7)}
+.item.correct .price-slot{background:#4CAF50;color:#fff;border-style:solid;font-weight:bold}
+.item.wrong{border-color:#F44336;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:12px;background:rgba(255,193,7,.10);border:1px dashed #FFC107;border-radius:14px;min-height:70px}
+.tag{background:linear-gradient(135deg,#FFD54F,#FF9800);color:#5D4037;padding:10px 16px;border-radius:18px;cursor:grab;font-family:'Arakom',sans-serif;font-weight:bold;font-size:1em;user-select:none;touch-action:none;box-shadow:0 4px 12px rgba(255,152,0,.35);transition:transform .2s,opacity .25s}
+.tag:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(255,152,0,.5)}
+.tag.dragging{opacity:.3;cursor:grabbing}
+.tag.placed{display:none}
+.drag-ghost{position:fixed;pointer-events:none;background:linear-gradient(135deg,#FFD54F,#FF9800);color:#5D4037;padding:10px 16px;border-radius:18px;font-family:'Arakom',sans-serif;font-weight:bold;font-size:1em;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.45);transform:translate(-50%,-50%)}
+.fb{text-align:center;margin-top:14px;min-height:24px;font-weight:bold;font-size:1em}
+.btn{display:inline-block;background:linear-gradient(135deg,#C2185B,#FF9800);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:#9c88ff}
+.result{text-align:center}
+.result .score{font-size:3em;color:#C2185B;font-weight:bold;margin:12px 0}
+.result .stars{font-size:2.2em;margin:8px 0}
+.hidden{display:none}
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10;text-decoration:none}
+.back:hover{background:rgba(0,0,0,.85)}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>🏷️ عَلامَةُ الأَسْعار</h1>
+<div class="sub">اِسْحَبْ كُلَّ عَلامَةِ سِعْرٍ إلى المُنْتَجِ المُناسِبِ</div>
+<div id="game">
+<div class="tip">
+<b>📘 الأَرقام بِالعَرَبِيَّة:</b> ٥ = خَمْس · ٧ = سَبْع · ١٠ = عَشَر · ١٥ = خَمْس عَشْرَة · ٢٠ = عِشْرين — مَعَ كَلِمَة "لِيرات".
+</div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>المَرحَلَة: <span id="rnd">1</span>/3</span></div>
+<div class="shelf" id="shelf"></div>
+<div class="tags" id="tags"></div>
+<div class="fb" id="fb"></div>
+</div>
+<div id="result" class="result hidden">
+<h2 style="color:#C2185B">🎉 أَحْسَنْت!</h2>
+<div class="stars" id="stars"></div>
+<div class="score" id="final"></div>
+<div id="msg" style="color:#AD1457;margin-bottom:14px"></div>
+<button class="btn" onclick="init()">إعادَة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
+</div>
+</div>
+<script>
+var ROUNDS=[
+[
+  {em:'🍞',ar:'خُبْز',price:'بِلِيرَتَيْن'},
+  {em:'🥛',ar:'حَلِيب',price:'بِخَمْس لِيرات'},
+  {em:'🍎',ar:'تُفّاحَة',price:'بِسَبْع لِيرات'},
+  {em:'🍗',ar:'دَجاج',price:'بِخَمْسٍ وَعِشْرين لِيرَة'}
+],
+[
+  {em:'🧀',ar:'جُبْن',price:'بِعَشَر لِيرات'},
+  {em:'🍯',ar:'عَسَل',price:'بِخَمْس عَشْرَة لِيرَة'},
+  {em:'🫒',ar:'زَيْتون',price:'بِثَماني لِيرات'},
+  {em:'🥩',ar:'لَحْم',price:'بِأَرْبَعين لِيرَة'}
+],
+[
+  {em:'🍌',ar:'مَوْز',price:'بِسِتّ لِيرات'},
+  {em:'🍇',ar:'عِنَب',price:'بِاثْنَتَيْ عَشْرَة لِيرَة'},
+  {em:'🍅',ar:'طَماطِم',price:'بِأَرْبَع لِيرات'},
+  {em:'🐟',ar:'سَمَك',price:'بِثَلاثين لِيرَة'}
+]
+];
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+var rnd,sc,placed,total,dragState=null;
+function init(){rnd=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadRound()}
+function loadRound(){
+var items=ROUNDS[rnd];
+total=items.length;placed=0;
+document.getElementById('rnd').textContent=rnd+1;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='';
+
+var shelf=document.getElementById('shelf');shelf.innerHTML='';
+items.forEach(function(it){
+var el=document.createElement('div');el.className='item';el.dataset.price=it.price;
+el.innerHTML='<span class="em">'+it.em+'</span><span class="ar">'+it.ar+'</span><div class="price-slot">—</div>';
+shelf.appendChild(el);
+});
+
+var tags=document.getElementById('tags');tags.innerHTML='';
+shuf([...items]).forEach(function(it){
+var t=document.createElement('div');t.className='tag';t.dataset.price=it.price;t.textContent=it.price;
+t.addEventListener('mousedown',startDrag);
+t.addEventListener('touchstart',startDrag,{passive:false});
+tags.appendChild(t);
+});
+}
+function startDrag(e){
+e.preventDefault();
+var tag=e.currentTarget;
+if(tag.classList.contains('placed'))return;
+var ghost=document.createElement('div');ghost.className='drag-ghost';ghost.textContent=tag.textContent;
+document.body.appendChild(ghost);
+tag.classList.add('dragging');
+var pt=getPt(e);ghost.style.left=pt.x+'px';ghost.style.top=pt.y+'px';
+dragState={tag:tag,ghost:ghost,priceText:tag.dataset.price,target:null};
+document.addEventListener('mousemove',dragMove);
+document.addEventListener('mouseup',dragEnd);
+document.addEventListener('touchmove',dragMove,{passive:false});
+document.addEventListener('touchend',dragEnd);
+}
+function getPt(e){if(e.touches&&e.touches.length)return {x:e.touches[0].clientX,y:e.touches[0].clientY};if(e.changedTouches&&e.changedTouches.length)return {x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};return {x:e.clientX,y:e.clientY}}
+function dragMove(e){
+if(!dragState)return;e.preventDefault();
+var pt=getPt(e);
+dragState.ghost.style.left=pt.x+'px';dragState.ghost.style.top=pt.y+'px';
+dragState.ghost.style.display='none';
+var el=document.elementFromPoint(pt.x,pt.y);
+dragState.ghost.style.display='block';
+if(dragState.target){dragState.target.classList.remove('drop-target');dragState.target=null}
+var item=el?el.closest('.item'):null;
+if(item && !item.classList.contains('correct')){item.classList.add('drop-target');dragState.target=item}
+}
+function dragEnd(e){
+if(!dragState)return;e.preventDefault();
+var ds=dragState;ds.tag.classList.remove('dragging');ds.ghost.remove();
+document.removeEventListener('mousemove',dragMove);
+document.removeEventListener('mouseup',dragEnd);
+document.removeEventListener('touchmove',dragMove);
+document.removeEventListener('touchend',dragEnd);
+if(ds.target){
+ds.target.classList.remove('drop-target');
+if(ds.target.dataset.price===ds.priceText){
+ds.target.classList.add('correct');
+ds.target.querySelector('.price-slot').textContent=ds.priceText;
+ds.tag.classList.add('placed');
+sc+=10;document.getElementById('sc').textContent=sc;placed++;
+document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';
+setTimeout(function(){document.getElementById('fb').textContent=''},900);
+if(placed===total){
+rnd++;
+if(rnd>=ROUNDS.length){setTimeout(end,1000)}
+else{setTimeout(loadRound,1100)}
+}
+}else{
+ds.target.classList.add('wrong');setTimeout(function(){ds.target.classList.remove('wrong')},420);
+document.getElementById('fb').textContent='❌ ليس هَذا السِّعْر';document.getElementById('fb').style.color='#F44336';
+setTimeout(function(){document.getElementById('fb').textContent=''},1100);
+}
+}
+dragState=null;
+}
+function end(){
+var fs=Math.round(sc/120*100);
+document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+document.getElementById('final').textContent=fs+'%';
+document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
+document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+}
+init();
+</script>
+</body>
+</html>

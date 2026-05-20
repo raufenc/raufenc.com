@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>أيّهُما — المُقارَنَة</title>
+<style>
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#FF9800);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+.box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+h1{text-align:center;color:#9C27B0;font-size:1.55em;margin-bottom:6px}
+.sub{text-align:center;color:#7B1FA2;margin-bottom:14px;font-size:.95em}
+.bar{display:flex;justify-content:space-between;background:#F3E5F5;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:bold;color:#6A1B9A;flex-wrap:wrap;gap:6px}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip b{color:#9C27B0}
+.q-card{background:linear-gradient(135deg,#9C27B0,#FF9800);color:#fff;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(156,39,176,.35)}
+.q-card .ask{font-size:1.05em;margin-bottom:10px;color:rgba(255,255,255,.85)}
+.q-card .items{display:flex;justify-content:space-around;align-items:center;gap:10px;flex-wrap:wrap}
+.q-card .item{background:rgba(255,255,255,.15);border-radius:12px;padding:10px 14px;text-align:center;min-width:120px}
+.q-card .item .em{font-size:2.4em;display:block;margin-bottom:4px}
+.q-card .item .ar{font-weight:bold;font-size:1.1em}
+.q-card .item .price{font-size:.85em;color:#FFD54F;margin-top:4px}
+.q-card .vs{font-size:1.4em;color:#FFD54F;font-weight:bold}
+.q-card .quest{margin-top:12px;font-size:1.25em;font-weight:bold}
+.q-card .tr{font-size:.82em;color:rgba(255,255,255,.75);margin-top:6px;font-style:italic}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:#F3E5F5;border:2px solid #CE93D8;border-radius:14px;padding:14px;cursor:pointer;font-size:1.05em;color:#4A148C;transition:all .2s;text-align:center;font-weight:bold}
+.opt:hover{background:#CE93D8;transform:translateY(-2px)}
+.opt.correct{background:#C8E6C9;border-color:#4CAF50;color:#1B5E20}
+.opt.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
+.opt.disabled{pointer-events:none;opacity:.55}
+.fb{text-align:center;margin-top:14px;min-height:30px;font-size:1.1em;font-weight:bold}
+.exp{text-align:center;color:#7B1FA2;margin-top:6px;font-size:.95em;background:#F3E5F5;padding:8px 12px;border-radius:10px}
+.btn{display:inline-block;background:linear-gradient(135deg,#9C27B0,#FF9800);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
+.btn:hover{filter:brightness(1.1)}
+.btn.alt{background:#9c88ff}
+.result{text-align:center}
+.result .score{font-size:3em;color:#9C27B0;font-weight:bold;margin:12px 0}
+.result .stars{font-size:2.2em;margin:8px 0}
+.hidden{display:none}
+.back{position:fixed;top:14px;left:14px;background:rgba(0,0,0,.6);color:#fff;border:none;border-radius:25px;padding:10px 18px;cursor:pointer;font-family:inherit;backdrop-filter:blur(8px);z-index:10;text-decoration:none}
+.back:hover{background:rgba(0,0,0,.85)}
+</style>
+</head>
+<body>
+<a href="./index.html" class="back">↩ القائمة</a>
+<div class="box">
+<h1>⚖️ أَيُّهُما؟ — المُقارَنَة</h1>
+<div class="sub">قارِنْ بَيْنَ شَيْئَيْنِ — اخْتَرِ الجَوابَ المُناسِبَ</div>
+<div id="game">
+<div class="tip">
+<b>📘 كَلِماتُ المُقارَنَة:</b> أَغْلى مِنْ، أَرْخَص مِنْ، أَكْبَر مِنْ، أَصْغَر مِنْ، أَثْقَل مِنْ، أَخَفّ مِنْ، أَطْوَل مِنْ، أَقْصَر مِنْ.
+</div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
+<div class="q-card">
+  <div class="ask">انْظُرْ إلى الشَيْئَيْنِ:</div>
+  <div class="items">
+    <div class="item"><span class="em" id="em1">🍎</span><span class="ar" id="ar1">تُفّاحَة</span><span class="price" id="price1">٥ ليرات</span></div>
+    <div class="vs">VS</div>
+    <div class="item"><span class="em" id="em2">🍌</span><span class="ar" id="ar2">مَوْز</span><span class="price" id="price2">١٠ ليرات</span></div>
+  </div>
+  <div class="quest" id="quest">أَيُّهُما أَرْخَص؟</div>
+  <div class="tr" id="tr">Hangisi daha ucuz?</div>
+</div>
+<div class="opts" id="opts"></div>
+<div class="fb" id="fb"></div>
+<div class="exp" id="exp"></div>
+</div>
+<div id="result" class="result hidden">
+<h2 style="color:#9C27B0">🎉 أَحْسَنْت!</h2>
+<div class="stars" id="stars"></div>
+<div class="score" id="final"></div>
+<div id="msg" style="color:#7B1FA2;margin-bottom:14px"></div>
+<button class="btn" onclick="init()">إعادَة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
+</div>
+</div>
+<script>
+var ALL=[
+{a:{em:'🍎',ar:'تُفّاحَة',v:5,vU:'ليرات'},b:{em:'🍌',ar:'مَوْز',v:10,vU:'ليرات'},attr:'price',q:'أَيُّهُما أَرْخَص؟',tr:'Hangisi daha ucuz?',exp:'التُّفّاحَةُ أَرْخَصُ مِنَ المَوْزِ (٥<١٠)'},
+{a:{em:'🍞',ar:'خُبْز',v:3,vU:'ليرات'},b:{em:'🥩',ar:'لَحْم',v:50,vU:'ليرات'},attr:'price',q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'اللَّحْمُ أَغْلى مِنَ الخُبْزِ (٥٠>٣)'},
+{a:{em:'🥛',ar:'حَلِيب',v:8,vU:'ليرات'},b:{em:'☕',ar:'قَهْوَة',v:15,vU:'ليرات'},attr:'price',q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'القَهْوَةُ أَغْلى مِنَ الحَلِيبِ'},
+{a:{em:'🐘',ar:'فيل',v:'كَبير',vU:''},b:{em:'🐭',ar:'فَأر',v:'صَغير',vU:''},attr:'size',q:'أَيُّهُما أَكْبَر؟',tr:'Hangisi daha büyük?',exp:'الفيلُ أَكْبَرُ مِنَ الفَأرِ'},
+{a:{em:'🍉',ar:'بَطّيخ',v:5,vU:'كغ'},b:{em:'🍓',ar:'فَراوِلَة',v:'٠.٥',vU:'كغ'},attr:'weight',q:'أَيُّهُما أَثْقَل؟',tr:'Hangisi daha ağır?',exp:'البَطّيخُ أَثْقَلُ مِنَ الفَراوِلَةِ'},
+{a:{em:'🍪',ar:'بِسْكُويت',v:'٠.١',vU:'كغ'},b:{em:'🍎',ar:'تُفّاحَة',v:'٠.٢',vU:'كغ'},attr:'weight',q:'أَيُّهُما أَخَفّ؟',tr:'Hangisi daha hafif?',exp:'البِسْكُويتُ أَخَفُّ مِنَ التُفّاحَةِ'},
+{a:{em:'🥒',ar:'خِيار',v:'طَويل',vU:''},b:{em:'🍅',ar:'طَماطِم',v:'قَصير',vU:''},attr:'length',q:'أَيُّهُما أَطْوَل؟',tr:'Hangisi daha uzun?',exp:'الخِيارُ أَطْوَلُ مِنَ الطَّماطِمِ'},
+{a:{em:'🐎',ar:'حِصان',v:'سَرِيع',vU:''},b:{em:'🐢',ar:'سُلَحْفاة',v:'بَطيء',vU:''},attr:'speed',q:'أَيُّهُما أَسْرَع؟',tr:'Hangisi daha hızlı?',exp:'الحِصانُ أَسْرَعُ مِنَ السُّلَحْفاةِ'},
+{a:{em:'🧃',ar:'عَصير',v:7,vU:'ليرات'},b:{em:'💧',ar:'ماء',v:2,vU:'ليرات'},attr:'price',q:'أَيُّهُما أَرْخَص؟',tr:'Hangisi daha ucuz?',exp:'الماءُ أَرْخَصُ مِنَ العَصيرِ'},
+{a:{em:'🍇',ar:'عِنَب',v:12,vU:'ليرات'},b:{em:'🍌',ar:'مَوْز',v:8,vU:'ليرات'},attr:'price',q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'العِنَبُ أَغْلى مِنَ المَوْزِ'},
+{a:{em:'🐘',ar:'فيل',v:'ثَقيل',vU:''},b:{em:'🦋',ar:'فَراشَة',v:'خَفيف',vU:''},attr:'weight',q:'أَيُّهُما أَثْقَل؟',tr:'Hangisi daha ağır?',exp:'الفيلُ أَثْقَلُ مِنَ الفَراشَةِ'},
+{a:{em:'🚴',ar:'دَرّاجَة',v:'بَطيء',vU:''},b:{em:'🏎️',ar:'سَيّارَة',v:'سَرِيع',vU:''},attr:'speed',q:'أَيُّهُما أَبْطَأ؟',tr:'Hangisi daha yavaş?',exp:'الدَّرّاجَةُ أَبْطَأُ مِنَ السَّيّارَةِ'}
+];
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function correctAnswer(q){
+  var keys=['أَرْخَص','أَغْلى','أَكْبَر','أَصْغَر','أَثْقَل','أَخَفّ','أَطْوَل','أَقْصَر','أَسْرَع','أَبْطَأ'];
+  var t=q.q;
+  // Compare 'price'/'weight'/'size' values, choose A or B
+  var aV=q.a.v, bV=q.b.v;
+  if(typeof aV === 'number' && typeof bV === 'number'){
+    if(/أَرْخَص|أَخَفّ|أَصْغَر|أَقْصَر|أَبْطَأ/.test(t)) return aV<bV?'a':'b';
+    return aV>bV?'a':'b';
+  }
+  // String values: use semantic mapping
+  var map={'كَبير':'big','صَغير':'small','ثَقيل':'heavy','خَفيف':'light','طَويل':'long','قَصير':'short','سَرِيع':'fast','بَطيء':'slow'};
+  var pickHigh=/أَكْبَر|أَثْقَل|أَطْوَل|أَسْرَع/.test(t);
+  var aClass=map[q.a.v], bClass=map[q.b.v];
+  var highClasses=['big','heavy','long','fast'];
+  if(pickHigh) return highClasses.indexOf(aClass)>=0?'a':'b';
+  return highClasses.indexOf(aClass)>=0?'b':'a';
+}
+var qs,cur,sc;
+function init(){qs=shuf([...ALL]).slice(0,10);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
+function loadQ(){
+var q=qs[cur];
+document.getElementById('em1').textContent=q.a.em;document.getElementById('ar1').textContent=q.a.ar;document.getElementById('price1').textContent=q.a.v+(q.a.vU?' '+q.a.vU:'');
+document.getElementById('em2').textContent=q.b.em;document.getElementById('ar2').textContent=q.b.ar;document.getElementById('price2').textContent=q.b.v+(q.b.vU?' '+q.b.vU:'');
+document.getElementById('quest').textContent=q.q;document.getElementById('tr').textContent=q.tr;
+document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
+q._correct=correctAnswer(q);
+var opts=shuf([{key:'a',text:q.a.em+' '+q.a.ar},{key:'b',text:q.b.em+' '+q.b.ar}]);
+var el=document.getElementById('opts');el.innerHTML='';
+opts.forEach(function(o){
+var b=document.createElement('div');b.className='opt';b.innerHTML=o.text;
+b.onclick=function(){answer(o.key,b,q)};
+el.appendChild(b);
+});
+}
+function answer(choice,b,q){
+document.querySelectorAll('.opt').forEach(function(x){x.classList.add('disabled')});
+if(choice===q._correct){b.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
+document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
+else{b.classList.add('wrong');
+document.querySelectorAll('.opt').forEach(function(x){if(x.innerHTML===(q._correct==='a'?(q.a.em+' '+q.a.ar):(q.b.em+' '+q.b.ar)))x.classList.add('correct')});
+document.getElementById('fb').textContent='❌ خَطَأ';document.getElementById('fb').style.color='#F44336';}
+document.getElementById('exp').textContent='💡 '+q.exp;
+cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1800);
+}
+function end(){
+var fs=Math.round(sc/(qs.length*10)*100);
+document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
+document.getElementById('final').textContent=fs+'%';
+document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
+document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+}
+init();
+</script>
+</body>
+</html>
