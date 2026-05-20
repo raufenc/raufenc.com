@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اللُّغَة العَرَبِيَّة — الصَّفُّ السّابِع</title>
+<meta name="description" content="İHO 7. sınıf Arapça — 4 ünitenin oyun ve etkinlik portalı">
+<style>
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{min-height:100%}
+body{
+  font-family:'Arakom','Inter',system-ui,-apple-system,sans-serif;
+  background:#05030d;
+  color:#fff;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ── ARKA PLAN ORB'LARI ── */
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;pointer-events:none;z-index:0;animation:float 18s ease-in-out infinite}
+.orb-1{width:520px;height:520px;background:radial-gradient(circle,#8B5CF6 0%,#4C1D95 60%,transparent 70%);top:-150px;right:-100px;animation-delay:0s}
+.orb-2{width:480px;height:480px;background:radial-gradient(circle,#EC4899 0%,#9D174D 60%,transparent 70%);bottom:-120px;left:-80px;animation-delay:-6s}
+.orb-3{width:380px;height:380px;background:radial-gradient(circle,#0EA5E9 0%,#0C4A6E 60%,transparent 70%);top:40%;left:30%;animation-delay:-12s;opacity:.35}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-30px) scale(1.05)}
+  66%{transform:translate(-30px,40px) scale(.95)}
+}
+
+/* Yıldız noktaları */
+.stars{position:fixed;inset:0;z-index:0;background-image:
+  radial-gradient(1px 1px at 20px 30px,rgba(255,255,255,.4),transparent),
+  radial-gradient(1px 1px at 60px 70px,rgba(255,255,255,.3),transparent),
+  radial-gradient(1.5px 1.5px at 120px 110px,rgba(255,255,255,.5),transparent),
+  radial-gradient(1px 1px at 180px 50px,rgba(255,255,255,.25),transparent),
+  radial-gradient(1px 1px at 240px 200px,rgba(255,255,255,.35),transparent),
+  radial-gradient(1px 1px at 320px 140px,rgba(255,255,255,.3),transparent),
+  radial-gradient(1.5px 1.5px at 380px 280px,rgba(255,255,255,.4),transparent);
+  background-repeat:repeat;
+  background-size:400px 320px;
+  opacity:.6;
+  pointer-events:none;
+  animation:twinkle 6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:.8}}
+
+/* ── HEADER ── */
+.wrap{position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:60px 32px 80px}
+.header{text-align:center;margin-bottom:60px;animation:fadeUp .8s ease-out}
+.eyebrow{
+  display:inline-block;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(20px);
+  padding:10px 28px;
+  border-radius:100px;
+  font-size:14px;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  margin-bottom:24px;
+  font-family:'Inter',sans-serif;
+}
+.title-ar{
+  font-family:'Arakom',sans-serif;
+  font-size:clamp(48px,8vw,96px);
+  font-weight:bold;
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin-bottom:18px;
+  background:linear-gradient(135deg,#FFD700 0%,#FF6B35 30%,#EC4899 60%,#A855F7 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 8px 60px rgba(168,85,247,.3);
+  direction:rtl;
+}
+.title-tr{
+  font-family:'Inter',sans-serif;
+  font-size:clamp(18px,2.2vw,26px);
+  color:rgba(255,255,255,.55);
+  font-weight:300;
+  letter-spacing:.04em;
+  margin-bottom:14px;
+}
+.subtitle-ar{
+  font-family:'Arakom',sans-serif;
+  font-size:clamp(20px,2.5vw,32px);
+  color:rgba(255,255,255,.8);
+  direction:rtl;
+  margin-bottom:8px;
+}
+.meta{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  color:rgba(255,255,255,.35);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-top:14px;
+}
+
+/* ── GRID ── */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:28px;
+}
+
+/* ── KART ── */
+.unit{
+  position:relative;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:28px;
+  padding:36px 32px 32px;
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  min-height:380px;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,background .4s;
+  backdrop-filter:blur(20px);
+  animation:fadeUp .8s ease-out backwards;
+  cursor:pointer;
+}
+.unit:nth-child(1){animation-delay:.1s}
+.unit:nth-child(2){animation-delay:.2s}
+.unit:nth-child(3){animation-delay:.3s}
+.unit:nth-child(4){animation-delay:.4s}
+
+.unit::before{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:28px;
+  background:var(--grad,linear-gradient(135deg,#8B5CF6,#EC4899));
+  opacity:0;
+  z-index:-1;
+  transition:opacity .4s;
+  filter:blur(1px);
+}
+.unit::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:var(--grad);
+  border-radius:28px 28px 0 0;
+  opacity:.5;
+  transition:opacity .4s,height .4s;
+}
+.unit:hover{
+  transform:translateY(-12px) scale(1.015);
+  border-color:rgba(255,255,255,.25);
+  background:rgba(255,255,255,.07);
+  box-shadow:0 30px 80px -10px var(--shadow,rgba(139,92,246,.4));
+}
+.unit:hover::after{height:5px;opacity:1}
+.unit:hover .num{transform:scale(1.05) rotate(-3deg);opacity:.6}
+
+/* Ünite numarası — büyük dekoratif */
+.num{
+  position:absolute;
+  top:-30px;
+  right:-20px;
+  font-family:'Inter',sans-serif;
+  font-size:240px;
+  font-weight:900;
+  line-height:1;
+  color:transparent;
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  opacity:.18;
+  transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:-.05em;
+}
+
+.unit-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  padding:5px 14px;
+  border-radius:8px;
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  width:fit-content;
+  position:relative;
+  z-index:2;
+}
+
+.unit-ar{
+  font-family:'Arakom',sans-serif;
+  font-size:clamp(32px,3.5vw,44px);
+  font-weight:bold;
+  line-height:1.1;
+  direction:rtl;
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  position:relative;
+  z-index:2;
+}
+.unit-tr{
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  color:rgba(255,255,255,.6);
+  letter-spacing:.02em;
+  position:relative;
+  z-index:2;
+}
+.unit-desc{
+  font-family:'Inter',sans-serif;
+  font-size:14.5px;
+  color:rgba(255,255,255,.5);
+  line-height:1.6;
+  margin-top:6px;
+  position:relative;
+  z-index:2;
+}
+
+.unit-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  position:relative;
+  z-index:2;
+}
+.unit-stats{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  color:rgba(255,255,255,.45);
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.unit-stats span{display:inline-flex;align-items:center;gap:6px}
+.unit-stats b{color:rgba(255,255,255,.85);font-weight:600}
+
+.unit-cta{
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:gap .3s;
+}
+.unit:hover .unit-cta{gap:12px}
+.unit-cta .arrow{
+  display:inline-block;
+  transition:transform .3s;
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:bold;
+  font-size:18px;
+}
+.unit:hover .unit-cta .arrow{transform:translateX(-4px)}
+
+/* ÜNİTE RENK TEMALARI */
+.u1{--grad:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%);--shadow:rgba(139,92,246,.4)}
+.u2{--grad:linear-gradient(135deg,#FB923C 0%,#EC4899 50%,#BE185D 100%);--shadow:rgba(236,72,153,.4)}
+.u3{--grad:linear-gradient(135deg,#06B6D4 0%,#3B82F6 50%,#1E40AF 100%);--shadow:rgba(6,182,212,.4)}
+.u4{--grad:linear-gradient(135deg,#6B7280 0%,#4B5563 50%,#374151 100%);--shadow:rgba(107,114,128,.3);opacity:.85}
+
+/* Yapım aşamasında stamp */
+.coming-soon{
+  position:absolute;
+  top:18px;
+  right:18px;
+  background:linear-gradient(135deg,#F59E0B,#DC2626);
+  color:#fff;
+  padding:8px 16px;
+  border-radius:100px;
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  box-shadow:0 8px 20px rgba(220,38,38,.35);
+  z-index:5;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.unit.locked{cursor:not-allowed}
+.unit.locked:hover{transform:translateY(-4px) scale(1.005)}
+.unit.locked::before{display:none}
+.unit.locked .unit-cta{color:rgba(255,255,255,.4)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+
+/* Footer */
+.footer{
+  text-align:center;
+  margin-top:80px;
+  padding-top:40px;
+  border-top:1px solid rgba(255,255,255,.06);
+  color:rgba(255,255,255,.3);
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  position:relative;
+  z-index:10;
+  animation:fadeUp .8s ease-out .6s backwards;
+}
+.footer a{color:rgba(255,255,255,.5);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.3);transition:color .2s,border-color .2s}
+.footer a:hover{color:#fff;border-bottom-color:#fff}
+.footer .marka{font-family:'Arakom',sans-serif;color:rgba(255,255,255,.5);direction:rtl;font-size:16px;display:block;margin-bottom:8px}
+
+@media(max-width:640px){
+  .wrap{padding:40px 18px 60px}
+  .header{margin-bottom:40px}
+  .num{font-size:180px;top:-20px;right:-10px}
+  .unit{padding:28px 22px 24px;min-height:auto;gap:10px}
+  .unit-ar{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<!-- Arka plan -->
+<div class="stars"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="wrap">
+
+  <header class="header">
+    <span class="eyebrow">İmam Hatip Ortaokulu · 7. Sınıf</span>
+    <h1 class="title-ar">اللُّغَةُ العَرَبِيَّة</h1>
+    <div class="title-tr">Arapça Oyunları &amp; Etkinlikleri</div>
+    <div class="subtitle-ar">٤ وَحَدات · أَكثَر مِن ٦٠ نَشاطًا</div>
+    <div class="meta">Ders Kitabıyla Uyumlu · Sayfa Sayfa Eşleştirilmiş</div>
+  </header>
+
+  <main class="grid">
+
+    <!-- ÜNİTE 1 -->
+    <a href="/7sinif1unite/" class="unit u1">
+      <div class="num">1</div>
+      <span class="unit-badge">Ünite I</span>
+      <h2 class="unit-ar">ماذا فَعَلْتُ اليَوْم؟</h2>
+      <div class="unit-tr">Bugün Ne Yaptım?</div>
+      <p class="unit-desc">Günlük rutinler, muzari fiil, zamir-fiil uyumu, kelime öğretimi, soru kalıpları (مَاذا / هَلْ), saatler, namaz vakitleri ve haftanın günleri.</p>
+      <div class="unit-foot">
+        <div class="unit-stats">
+          <span>🎮 <b>16</b> oyun</span>
+          <span>📄 s. <b>14-45</b></span>
+        </div>
+        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+      </div>
+    </a>
+
+    <!-- ÜNİTE 2 -->
+    <a href="/7sinif2unite/" class="unit u2">
+      <div class="num">2</div>
+      <span class="unit-badge">Ünite II</span>
+      <h2 class="unit-ar">وَقْتُ التَّسَوُّق</h2>
+      <div class="unit-tr">Alışveriş Zamanı</div>
+      <p class="unit-desc">Yiyecek-içecek ve ölçü kelimeleri, ihtiyaç/istek bildirme, meyve-sebze sınıflandırma, fiyat sorma, alışveriş diyalogları ve karşılaştırma kalıpları.</p>
+      <div class="unit-foot">
+        <div class="unit-stats">
+          <span>🎮 <b>18</b> oyun</span>
+          <span>📄 s. <b>52-83</b></span>
+        </div>
+        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+      </div>
+    </a>
+
+    <!-- ÜNİTE 3 -->
+    <a href="/7sinif3unite/" class="unit u3">
+      <div class="num">3</div>
+      <span class="unit-badge">Ünite III</span>
+      <h2 class="unit-ar">إلى أَيْنَ نُسافِر؟</h2>
+      <div class="unit-tr">Nereye Yolculuk?</div>
+      <p class="unit-desc">Ulaşım araçları, seyahat fiilleri ve emir kipi, karşılaştırma, adres ve yön ifadeleri, trafik işaretleri ve günlük yolculuk metinleri.</p>
+      <div class="unit-foot">
+        <div class="unit-stats">
+          <span>🎮 <b>20</b> oyun</span>
+          <span>📄 s. <b>94-130</b></span>
+        </div>
+        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+      </div>
+    </a>
+
+    <!-- ÜNİTE 4 — yapım aşamasında -->
+    <div class="unit u4 locked">
+      <div class="coming-soon">🚧 Yapım Aşamasında</div>
+      <div class="num">4</div>
+      <span class="unit-badge">Ünite IV</span>
+      <h2 class="unit-ar">قَريبًا</h2>
+      <div class="unit-tr">Yakında</div>
+      <p class="unit-desc">Dördüncü ünite hazırlanıyor. Ders kitabıyla uyumlu yeni oyunlar ve etkinlikler kısa süre içinde burada olacak.</p>
+      <div class="unit-foot">
+        <div class="unit-stats">
+          <span>⏳ Hazırlanıyor…</span>
+        </div>
+        <div class="unit-cta">Bilgi geliyor</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <span class="marka">رَؤُف · raufenc.com</span>
+    İHO 7. Sınıf Arapça oyun portalı · &copy; 2026 ·
+    <a href="/">Ana Sayfa</a> ·
+    <a href="/iho-oyunlar/">Orijinal İHO Oyunları</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
