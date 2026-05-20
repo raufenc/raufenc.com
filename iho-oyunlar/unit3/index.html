@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="tr">
 <head>
 <script src="/lib/design-system/theme.js"></script>
 <link rel="stylesheet" href="/lib/design-system/tokens.css" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الصَّفُّ السّابِع · الوَحْدَة الثّالِثَة الأَلْعاب — إلى أين نسافر؟</title>
-<meta name="description" content="لُعْبَة تَعْليمِيَّة لِلُّغَة العَرَبِيَّة">
+<title>İHO 7. Sınıf 3. Ünite Oyunlar — إلى أين نسافر؟</title>
+<meta name="description" content="İmam Hatip Ortaokulu 7. sınıf Arapça dersi 3. ünite (إلى أين نسافر؟) için 16 interaktif oyun. Ulaşım, yol tarifi, trafik, karşılaştırma kalıpları.">
 <style>
 @font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -78,7 +78,7 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--iho
 .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;max-width:1300px;margin:0 auto;padding:0 24px 20px}
 
 /* ── GAME CARD ── */
-.game-card{background:var(--iho-card-bg);border:1px solid var(--iho-card-border);border-radius:18px;padding:24px 18px 20px;text-align:center;cursor:pointer;transition:all .3s cubاِشْرَب-bezier(.25,.8,.25,1);position:relative;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.game-card{background:var(--iho-card-bg);border:1px solid var(--iho-card-border);border-radius:18px;padding:24px 18px 20px;text-align:center;cursor:pointer;transition:all .3s cubic-bezier(.25,.8,.25,1);position:relative;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
 .game-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;transition:opacity .3s;opacity:0.7}
 .game-card:hover{background:var(--iho-card-hover-bg);transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .game-card:hover::before{opacity:1}
@@ -95,17 +95,17 @@ html.light .card-emoji{filter:drop-shadow(0 4px 12px rgba(0,0,0,0.18))}
 html.light .badge-solo{background:rgba(99,102,241,0.12);color:#4f46e5;border-color:rgba(99,102,241,0.25)}
 
 /* Color accent per group */
-.group-الكَلِمَة .game-card::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
-.group-الكَلِمَة .game-card{border-color:rgba(59,130,246,0.18)}
-.group-الكَلِمَة .game-card:hover{border-color:rgba(59,130,246,0.4)}
+.group-kelime .game-card::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.group-kelime .game-card{border-color:rgba(59,130,246,0.18)}
+.group-kelime .game-card:hover{border-color:rgba(59,130,246,0.4)}
 
-.group-الاِخْتِبار .game-card::before{background:linear-gradient(90deg,#06b6d4,#22d3ee)}
-.group-الاِخْتِبار .game-card{border-color:rgba(6,182,212,0.18)}
-.group-الاِخْتِبار .game-card:hover{border-color:rgba(6,182,212,0.4)}
+.group-quiz .game-card::before{background:linear-gradient(90deg,#06b6d4,#22d3ee)}
+.group-quiz .game-card{border-color:rgba(6,182,212,0.18)}
+.group-quiz .game-card:hover{border-color:rgba(6,182,212,0.4)}
 
-.group-جُمْلَة .game-card::before{background:linear-gradient(90deg,#10b981,#34d399)}
-.group-جُمْلَة .game-card{border-color:rgba(16,185,129,0.18)}
-.group-جُمْلَة .game-card:hover{border-color:rgba(16,185,129,0.4)}
+.group-cumle .game-card::before{background:linear-gradient(90deg,#10b981,#34d399)}
+.group-cumle .game-card{border-color:rgba(16,185,129,0.18)}
+.group-cumle .game-card:hover{border-color:rgba(16,185,129,0.4)}
 
 .group-tema .game-card::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
 .group-tema .game-card{border-color:rgba(245,158,11,0.18)}
@@ -146,124 +146,124 @@ html.light .badge-solo{background:rgba(99,102,241,0.12);color:#4f46e5;border-col
 <body>
 
 <!-- UNIT SWITCHER -->
-<div class="unit-strip" aria-label="إعادَة">
-  <a class="unit-chip" href="../index.html">1. الوَحْدَة &middot; ماذا فعلت اليوم؟</a>
-  <span class="unit-chip active">3. الوَحْدَة &middot; إلى أين نسافر؟</span>
-  <a class="unit-chip" href="../unit4/index.html">4. الوَحْدَة &middot; مَدِينَتِي وَبَلَدِي</a>
+<div class="unit-strip" aria-label="Ünite seçici">
+  <a class="unit-chip" href="../index.html">1. Ünite &middot; ماذا فعلت اليوم؟</a>
+  <span class="unit-chip active">3. Ünite &middot; إلى أين نسافر؟</span>
+  <a class="unit-chip" href="../unit4/index.html">4. Ünite &middot; مَدِينَتِي وَبَلَدِي</a>
 </div>
 
 <!-- HEADER -->
 <div class="hub-header">
-  <div class="hub-badge"> &middot; العَرَبِيَّة &middot; الصَّفُّ السّابِع &middot; 3. الوَحْدَة</div>
+  <div class="hub-badge">İHO &middot; Arapça &middot; 7. Sınıf &middot; 3. Ünite</div>
   <div class="hub-title">إِلى أَيْنَ نُسافِرُ؟</div>
   <div class="hub-subtitle">ألعاب اللغة العربية &mdash; الوحدة الثالثة &mdash; الصف السابع</div>
-  <div class="hub-count">4 kategori &middot; 16 </div>
+  <div class="hub-count">4 kategori &middot; 16 oyun</div>
 </div>
 
 <!-- ══════════ SECTION 1: KELİME & TANIMA ══════════ -->
-<div class="section-label">🎯 الكَلِمَة &amp; Tanıma</div>
-<div class="games-grid group-الكَلِمَة">
+<div class="section-label">🎯 Kelime &amp; Tanıma</div>
+<div class="games-grid group-kelime">
 
   <a class="game-card" href="./flashcards.html">
     <span class="card-emoji">🗂️</span>
     <div class="card-name">بِطاقاتُ المُفْرَدات</div>
-    <div class="card-tr">الكَلِمَة kartlarını اِقْلِب, العَرَبِيَّة-العَرَبِيَّة حاوِل</div>
+    <div class="card-tr">Kelime kartlarını çevir, Arapça-Türkçe çalış</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./match.html">
     <span class="card-emoji">🔗</span>
     <div class="card-name">لُعْبَةُ المُطابَقَة</div>
-    <div class="card-tr">العَرَبِيَّة kelimeyi العَرَبِيَّة  eşleştir</div>
+    <div class="card-tr">Arapça kelimeyi Türkçe karşılığıyla eşleştir</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./memory.html">
     <span class="card-emoji">🧠</span>
     <div class="card-name">لُعْبَةُ الذّاكِرَة</div>
-    <div class="card-tr">البِطاقات  العَرَبِيَّة-العَرَبِيَّة أَزْواج اِبْحَث</div>
+    <div class="card-tr">Kartları çevirerek Arapça-Türkçe çiftleri bul</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./wordSearch.html">
     <span class="card-emoji">🔎</span>
     <div class="card-name">صَيْدُ الكَلِمات</div>
-    <div class="card-tr">حَرْف  hedef kelimeyi حَرْف حَرْف اِبْحَث</div>
+    <div class="card-tr">Harf ızgarasında hedef kelimeyi harf harf bul</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./balloonPop.html">
     <span class="card-emoji">🎈</span>
     <div class="card-name">فَرْقَعَةُ البالونات</div>
-    <div class="card-tr">العَرَبِيَّة anlamın العَرَبِيَّة balonunu patlat</div>
+    <div class="card-tr">Türkçe anlamın Arapça balonunu patlat</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
 </div>
 
 <!-- ══════════ SECTION 2: QUIZ & BİLGİ ══════════ -->
-<div class="section-label">🧩 الاِخْتِبار &amp; Bilgi</div>
-<div class="games-grid group-الاِخْتِبار">
+<div class="section-label">🧩 Quiz &amp; Bilgi</div>
+<div class="games-grid group-quiz">
 
-  <a class="game-card" href="./الاِخْتِبار.html">
+  <a class="game-card" href="./quiz.html">
     <span class="card-emoji">❓</span>
     <div class="card-name">الاخْتِبارُ الذَّكِيّ</div>
-    <div class="card-tr">Çoktan  soruları cevapla</div>
+    <div class="card-tr">Çoktan seçmeli soruları cevapla</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./truefalse.html">
     <span class="card-emoji">✅</span>
     <div class="card-name">صَواب أَمْ خَطَأ</div>
-    <div class="card-tr">الجُمْلَة صَحيح mu خَطَأ ? Karar ver</div>
+    <div class="card-tr">Cümle doğru mu yanlış mı? Karar ver</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./oddOneOut.html">
     <span class="card-emoji">🎴</span>
     <div class="card-name">الكَلِمَةُ المُخْتَلِفَة</div>
-    <div class="card-tr">Gruba uymayan المُخْتَلِف kelimeyi tespit et</div>
+    <div class="card-tr">Gruba uymayan farklı kelimeyi tespit et</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./fillBlank.html">
     <span class="card-emoji">✏️</span>
     <div class="card-name">مَلْءُ الفَراغ</div>
-    <div class="card-tr">Cümledeki boşluğu صَحيح kelimeyle tamamla</div>
+    <div class="card-tr">Cümledeki boşluğu doğru kelimeyle tamamla</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./comparative.html">
     <span class="card-emoji">⚖️</span>
     <div class="card-name">المُقارَنَة</div>
-    <div class="card-tr">أَفْعَلُ مِنْ  مُقارَنَة yap</div>
+    <div class="card-tr">أَفْعَلُ مِنْ kalıbıyla karşılaştırma yap</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
 </div>
 
 <!-- ══════════ SECTION 3: CÜMLE & DİYALOG ══════════ -->
-<div class="section-label">💬 الجُمْلَة &amp; الحِوار</div>
-<div class="games-grid group-جُمْلَة">
+<div class="section-label">💬 Cümle &amp; Diyalog</div>
+<div class="games-grid group-cumle">
 
   <a class="game-card" href="./sentenceOrder.html">
     <span class="card-emoji">🧱</span>
     <div class="card-name">تَرْتيبُ الجُمْلَة</div>
-    <div class="card-tr">مُخْتَلَط kelimelerden صَحيح cümleyi kur</div>
+    <div class="card-tr">Karışık kelimelerden doğru cümleyi kur</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./dialogueBuilder.html">
     <span class="card-emoji">🗨️</span>
     <div class="card-name">بِناءُ الحِوار</div>
-    <div class="card-tr">Konuşma  صَحيح تَرْتيب diz</div>
+    <div class="card-tr">Konuşma satırlarını doğru sıraya diz</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./typing.html">
     <span class="card-emoji">⌨️</span>
     <div class="card-name">تَرْكيبُ الحُروف</div>
-    <div class="card-tr">مُخْتَلَط harflerden العَرَبِيَّة kelimeyi اُكْتُب</div>
+    <div class="card-tr">Karışık harflerden Arapça kelimeyi yaz</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
@@ -276,21 +276,21 @@ html.light .badge-solo{background:rgba(99,102,241,0.12);color:#4f46e5;border-col
   <a class="game-card" href="./directionsMap.html">
     <span class="card-emoji">🧭</span>
     <div class="card-name">وَصْفُ الطَّريق</div>
-    <div class="card-tr">طَريق تَوْجيه adımlarını harita üstünde رَتِّب</div>
+    <div class="card-tr">Yol tarifi adımlarını harita üstünde sırala</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
-  <a class="game-card" href="./traffاِشْرَب.html">
+  <a class="game-card" href="./traffic.html">
     <span class="card-emoji">🚦</span>
     <div class="card-name">إِشاراتُ المُرور</div>
-    <div class="card-tr">المُرور   صَحيح fiili اِخْتَر</div>
+    <div class="card-tr">Trafik ışığına göre doğru fiili seç</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
   <a class="game-card" href="./wheel.html">
     <span class="card-emoji">🎡</span>
     <div class="card-name">عَجَلَةُ الأَسْئِلَة</div>
-    <div class="card-tr">Çarkı اِقْلِب, gelen soruyu صَحيح cevapla</div>
+    <div class="card-tr">Çarkı çevir, gelen soruyu doğru cevapla</div>
     <span class="card-badge badge-solo">Bireysel</span>
   </a>
 
@@ -298,8 +298,8 @@ html.light .badge-solo{background:rgba(99,102,241,0.12);color:#4f46e5;border-col
 
 <!-- FOOTER -->
 <div class="hub-footer">
-  الصَّفُّ السّابِع &middot; 3. الوَحْدَة<br>
-  <span class="ar">إِلى أَيْنَ نُسافِرُ؟</span> &middot; Ulaşım, yön تَوْجيه, trafik, مُقارَنَة
+  İHO 7. Sınıf &middot; 3. Ünite<br>
+  <span class="ar">إِلى أَيْنَ نُسافِرُ؟</span> &middot; Ulaşım, yön tarifi, trafik, karşılaştırma
 </div>
 
 </body>
