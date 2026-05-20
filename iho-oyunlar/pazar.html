@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>السوق العربي — Arap Pazarı</title>
+<title>السوق العربي — السوق العربي</title>
 <style>
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -80,7 +80,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 @keyframes shakeCard{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-6px)}60%{transform:translateX(6px)}75%{transform:translateX(-3px)}90%{transform:translateX(3px)}}
 
 /* FLY ANIMATION */
-.fly-item{position:fixed;z-index:1000;pointer-events:none;font-size:40px;transition:all .6s cubic-bezier(0.22,1,0.36,1)}
+.fly-item{position:fixed;z-index:1000;pointer-events:none;font-size:40px;transition:all .6s cubاِشْرَب-bezier(0.22,1,0.36,1)}
 
 /* SPLIT SCREEN 2-PLAYER */
 .split-container{display:flex;gap:16px;width:100%;max-width:1400px;flex:1}
@@ -151,7 +151,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 /* MOBILE */
 @media(max-width:768px){
   .game-layout{flex-direction:column}
-  .list-panel{width:100%;min-width:unset;position:static;margin-bottom:10px}
+  .list-panel{width:100%;min-width:unset;position:statاِشْرَب;margin-bottom:10px}
   .list-items{display:flex;flex-wrap:wrap;gap:4px}
   .list-items li{flex:1;min-width:120px;padding:8px 10px;margin-bottom:0}
   .shelf-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
@@ -169,6 +169,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="shared/icons.js" defer></script>
 </head>
 <body>
 
@@ -180,18 +181,18 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 <div class="start-content">
   <span class="start-icon">🏪</span>
   <div class="start-title">السوق العربي</div>
-  <div class="start-subtitle">Arap Pazari - Alisveris Oyunu</div>
+  <div class="start-subtitle">لُعْبَةُ التَّسَوُّق</div>
   <div class="start-desc">
-    Elinde bir <strong>alisveris listesi</strong> var!<br>
+    Elinde bir <strong>تَسَوُّق listesi</strong> var!<br>
     Raflarda sadece <strong>Arapca</strong> yaziyor.<br>
-    Dogru urunleri bulup sepete at!<br><br>
-    3 tur | Her turda daha zor | Yildiz topla!
+    اِبْحَثْ عَنِ المُنْتَجاتِ وَأَضِفْها لِلسَلَّة!<br><br>
+    ٣ جَوْلات · كُلُّ جَوْلَةٍ أَصْعَب · اِجْمَع النُّجوم!
   </div>
   <div class="player-toggle">
-    <button id="btnSolo" class="active" onclick="setMode(1)">Solo</button>
-    <button id="btnDuo" onclick="setMode(2)">2 Kisi</button>
+    <button id="btnلاعِبٌ" class="active" onclick="setMode(1)">لاعِبٌ</button>
+    <button id="btnDuo" onclick="setMode(2)">لاعِبانِ</button>
   </div>
-  <button class="start-btn" onclick="startGame()">Alisverise Basla!</button>
+  <button class="start-btn" onclick="startGame()">اِبْدَأ التَّسَوُّق!</button>
 </div>
 </div>
 
@@ -201,30 +202,30 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   <div class="game-round-badge" id="roundBadge"></div>
   <div class="game-title-sm">السوق العربي</div>
   <div class="game-hud">
-    <span>Puan: <span class="hud-score" id="hudScore">0</span></span>
-    <span>Sure: <span class="hud-timer" id="hudTimer">0</span>s</span>
+    <span>النَّتيجة: <span class="hud-score" id="hudScore">0</span></span>
+    <span>الوَقْت: <span class="hud-timer" id="hudTimer">0</span>s</span>
     <span class="hud-stars" id="hudStars"></span>
-    <span>Hata: <span class="hud-mistakes" id="hudMistakes">0</span></span>
+    <span>الأَخْطاء: <span class="hud-mistakes" id="hudMistakes">0</span></span>
   </div>
 </div>
 <div id="soloLayout" class="game-layout">
   <div class="list-panel" id="listPanel">
-    <div class="list-title"><span class="cart-icon">🛒</span> Alisveris Listesi</div>
+    <div class="list-title"><span class="cart-icon">🛒</span> قائِمَة التَّسَوُّق</div>
     <ul class="list-items" id="listItems"></ul>
   </div>
   <div class="market-panel">
-    <div class="market-label">Raflarda Arapca etiketleri oku ve dogru urunleri bul!</div>
+    <div class="market-label">اِقْرَأ المُلْصَقاتِ العَرَبِيَّةَ وَاخْتَر المُنْتَجاتِ الصَّحيحَة!</div>
     <div class="shelf-grid" id="shelfGrid"></div>
   </div>
 </div>
 <div id="splitLayout" class="split-container" style="display:none">
   <div class="split-half p1">
-    <div class="split-player-label">Oyuncu 1</div>
+    <div class="split-player-label">اللاعِبُ ١</div>
     <ul class="split-list" id="splitList1"></ul>
     <div class="split-shelf-grid" id="splitGrid1"></div>
   </div>
   <div class="split-half p2">
-    <div class="split-player-label">Oyuncu 2</div>
+    <div class="split-player-label">اللاعِبُ ٢</div>
     <ul class="split-list" id="splitList2"></ul>
     <div class="split-shelf-grid" id="splitGrid2"></div>
   </div>
@@ -249,7 +250,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   <div class="final-title" id="finalTitle"></div>
   <div id="finalBody"></div>
   <button class="round-btn" onclick="resetToStart()">Ana Menu</button>
-  <button class="round-btn secondary" onclick="startGame()">Tekrar Oyna</button>
+  <button class="round-btn secondary" onclick="startGame()">إعادَة اِلعَب</button>
 </div>
 </div>
 
@@ -276,16 +277,16 @@ const VOCAB = {
 };
 const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
 const VOCAB_TR = {
-  '\u062E\u064F\u0628\u0652\u0632':'Ekmek','\u062C\u064F\u0628\u0652\u0646':'Peynir','\u0623\u064F\u0631\u064F\u0632':'Pirinc','\u0639\u064E\u0633\u064E\u0644':'Bal',
-  '\u0634\u0627\u064A':'Cay','\u062F\u064E\u062C\u0627\u062C':'Tavuk','\u0644\u064E\u062D\u0652\u0645':'Et','\u0633\u064E\u0645\u064E\u0643':'Balik',
-  '\u0628\u064E\u064A\u0652\u0636':'Yumurta','\u0632\u064F\u0628\u0652\u062F\u064E\u0629':'Tereyagi','\u0643\u064F\u0641\u0652\u062A\u064E\u0629':'Kofte','\u062D\u064E\u0633\u0627\u0621':'Corba',
-  '\u062D\u064E\u0644\u0650\u064A\u0628':'Sut','\u0642\u064E\u0647\u0652\u0648\u064E\u0629':'Kahve','\u0639\u064E\u0635\u0650\u064A\u0631':'Meyve Suyu','\u0632\u064E\u064A\u0652\u062A\u0648\u0646':'Zeytin',
-  '\u062A\u064F\u0641\u0651\u064E\u0627\u062D':'Elma','\u0645\u064E\u0648\u0652\u0632':'Muz',
-  '\u064A\u064E\u0633\u0652\u062A\u064E\u064A\u0652\u0642\u0650\u0638':'Uyanmak','\u064A\u064F\u0635\u064E\u0644\u0651\u0650\u064A':'Namaz Kilmak','\u064A\u064E\u062A\u064E\u0646\u0627\u0648\u064E\u0644':'Yemek Yemek',
+  '\u062E\u064F\u0628\u0652\u0632':'خُبْز','\u062C\u064F\u0628\u0652\u0646':'جُبْن','\u0623\u064F\u0631\u064F\u0632':'أُرُز','\u0639\u064E\u0633\u064E\u0644':'عَسَل',
+  '\u0634\u0627\u064A':'شاي','\u062F\u064E\u062C\u0627\u062C':'دَجاج','\u0644\u064E\u062D\u0652\u0645':'لَحْم','\u0633\u064E\u0645\u064E\u0643':'سَمَك',
+  '\u0628\u064E\u064A\u0652\u0636':'بَيْض','\u0632\u064F\u0628\u0652\u062F\u064E\u0629':'زُبْدَة','\u0643\u064F\u0641\u0652\u062A\u064E\u0629':'كُفْتَة','\u062D\u064E\u0633\u0627\u0621':'حَساء',
+  '\u062D\u064E\u0644\u0650\u064A\u0628':'حَلِيب','\u0642\u064E\u0647\u0652\u0648\u064E\u0629':'قَهْوَة','\u0639\u064E\u0635\u0650\u064A\u0631':'فَواكِه Suyu','\u0632\u064E\u064A\u0652\u062A\u0648\u0646':'زَيْتون',
+  '\u062A\u064F\u0641\u0651\u064E\u0627\u062D':'تُفّاح','\u0645\u064E\u0648\u0652\u0632':'مَوْز',
+  '\u064A\u064E\u0633\u0652\u062A\u064E\u064A\u0652\u0642\u0650\u0638':'Uyanmak','\u064A\u064F\u0635\u064E\u0644\u0651\u0650\u064A':'Namaz أَداء','\u064A\u064E\u062A\u064E\u0646\u0627\u0648\u064E\u0644':'طَعام طَعام',
   '\u064A\u064E\u0644\u0652\u0628\u064E\u0633':'Giyinmek','\u064A\u064E\u0630\u0652\u0647\u064E\u0628':'Gitmek','\u064A\u064E\u0631\u0652\u062C\u0650\u0639':'Donmek',
-  '\u064A\u064F\u0633\u0627\u0639\u0650\u062F':'Yardim Etmek','\u064A\u064E\u062F\u0652\u0631\u064F\u0633':'Ders Calismak','\u064A\u064E\u0623\u0652\u0643\u064F\u0644':'Yemek',
-  '\u064A\u064E\u0634\u0652\u0631\u064E\u0628':'Icmek','\u064A\u064E\u0646\u0627\u0645':'Uyumak','\u064A\u064E\u062A\u064E\u0648\u064E\u0636\u0651\u064E\u0623':'Abdest Almak',
-  '\u0627\u0644\u0635\u0651\u064E\u0628\u0627\u062D':'Sabah','\u0627\u0644\u0638\u064F\u0647\u0631':'Ogle','\u0627\u0644\u0639\u0635\u0631':'Ikindi',
+  '\u064A\u064F\u0633\u0627\u0639\u0650\u062F':'Yardim Etmek','\u064A\u064E\u062F\u0652\u0631\u064F\u0633':'Ders Calismak','\u064A\u064E\u0623\u0652\u0643\u064F\u0644':'طَعام',
+  '\u064A\u064E\u0634\u0652\u0631\u064E\u0628':'اِشْرَب','\u064A\u064E\u0646\u0627\u0645':'Uyumak','\u064A\u064E\u062A\u064E\u0648\u064E\u0636\u0651\u064E\u0623':'Abdest Almak',
+  '\u0627\u0644\u0635\u0651\u064E\u0628\u0627\u062D':'Sabah','\u0627\u0644\u0638\u064F\u0647\u0631':'Ogle','\u0627\u0644\u0639\u0635\u0631':'العَصْر',
   '\u0627\u0644\u0645\u0633\u0627\u0621':'Aksam','\u0627\u0644\u0644\u064A\u0644':'Gece','\u0627\u0644\u0641\u064E\u062C\u0652\u0631':'Fecir'
 };
 function getTr(w){ return VOCAB_TR[w.ar]||''; }
@@ -357,9 +358,9 @@ let p1RoundStars=[0,0,0];
 let p2RoundStars=[0,0,0];
 
 const ROUNDS=[
-  {listCount:4,shelfCount:8,pool:'foods',label:'Tur 1: Yiyecekler'},
-  {listCount:5,shelfCount:10,pool:'foodsVerbs',label:'Tur 2: Yiyecekler + Fiiller'},
-  {listCount:6,shelfCount:12,pool:'all',label:'Tur 3: Karisik'}
+  {listCount:4,shelfCount:8,pool:'foods',label:'الجَوْلَة ١: المَأكولات'},
+  {listCount:5,shelfCount:10,pool:'foodsVerbs',label:'الجَوْلَة ٢: المَأكولات + الأَفْعال'},
+  {listCount:6,shelfCount:12,pool:'all',label:'الجَوْلَة ٣: مُخْتَلَط'}
 ];
 
 // ======================== HELPERS ========================
@@ -368,7 +369,7 @@ function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classL
 
 function setMode(m){
   mode=m;
-  document.getElementById('btnSolo').classList.toggle('active',m===1);
+  document.getElementById('btnلاعِبٌ').classList.toggle('active',m===1);
   document.getElementById('btnDuo').classList.toggle('active',m===2);
 }
 
@@ -441,7 +442,7 @@ function startRound(){
   document.getElementById('hudMistakes').textContent='0';
   updateHudStars();
 
-  if(mode===1) setupSoloRound(cfg);
+  if(mode===1) setupلاعِبٌRound(cfg);
   else setupDuoRound(cfg);
 
   // Start timer
@@ -453,7 +454,7 @@ function startRound(){
 }
 
 // ======================== SOLO MODE ========================
-function setupSoloRound(cfg){
+function setupلاعِبٌRound(cfg){
   document.getElementById('soloLayout').style.display='flex';
   document.getElementById('splitLayout').style.display='none';
 
@@ -489,14 +490,14 @@ function renderShelf(items,containerId,playerNum){
     card.innerHTML='<span class="shelf-ar">'+w.ar+'</span>';
     card.addEventListener('click',()=>{
       if(card.classList.contains('found-card')) return;
-      if(playerNum===null) handleSoloPick(w,card,i);
+      if(playerNum===null) handleلاعِبٌPick(w,card,i);
       else handleDuoPick(w,card,i,playerNum);
     });
     grid.appendChild(card);
   });
 }
 
-function handleSoloPick(word,card,idx){
+function handleلاعِبٌPick(word,card,idx){
   const isOnList=shoppingList.some(w=>w.ar===word.ar);
   if(isOnList && !foundItems.has(word.ar)){
     // CORRECT
@@ -688,16 +689,16 @@ function completeRound(){
 
   const overlay=document.getElementById('roundOverlay');
   overlay.style.display='flex';
-  document.getElementById('roundCompleteTitle').textContent='Alisveris Tamamlandi! \uD83D\uDED2';
+  document.getElementById('roundCompleteTitle').textContent='اِكْتَمَلَ التَّسَوُّق! \uD83D\uDED2';
   document.getElementById('roundStarsDisplay').innerHTML=starsHTML(stars);
-  document.getElementById('roundScoreDisplay').textContent='Puan: +'+roundScore;
-  document.getElementById('roundTimeDisplay').textContent='Sure: '+roundElapsed+'s | Hata: '+roundMistakes;
+  document.getElementById('roundScoreDisplay').textContent='النَّتيجة: +'+roundScore;
+  document.getElementById('roundTimeDisplay').textContent='الوَقْت: '+roundElapsed+'s | الأَخْطاء: '+roundMistakes;
 
   sesCelebrate();
 
   const btn=document.getElementById('roundNextBtn');
   if(currentRound<2){
-    btn.textContent='Sonraki Tur \u2192';
+    btn.textContent='التّالي Tur \u2192';
     btn.onclick=nextRound;
   } else {
     btn.textContent='Sonuclari Gor';
@@ -717,19 +718,19 @@ function completeDuoRound(){
   const overlay=document.getElementById('roundOverlay');
   overlay.style.display='flex';
 
-  const winner=p1Score>p2Score?'Oyuncu 1':p2Score>p1Score?'Oyuncu 2':'Berabere';
-  document.getElementById('roundCompleteTitle').textContent='Tur Tamamlandi! '+winner+(winner!=='Berabere'?' Kazandi!':'!');
+  const winner=p1Score>p2Score?'اللاعِبُ ١':p2Score>p1Score?'اللاعِبُ ٢':'تَعادُل';
+  document.getElementById('roundCompleteTitle').textContent='Tur Tamamlandi! '+winner+(winner!=='تَعادُل'?' فازَ!':'!');
   document.getElementById('roundStarsDisplay').innerHTML=
-    '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">Oyuncu 1</div>'+starsHTML(s1)+
-    '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">Oyuncu 2</div>'+starsHTML(s2);
+    '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ١</div>'+starsHTML(s1)+
+    '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ٢</div>'+starsHTML(s2);
   document.getElementById('roundScoreDisplay').textContent='P1: +'+p1Score+' | P2: +'+p2Score;
-  document.getElementById('roundTimeDisplay').textContent='P1 Sure: '+p1Time+'s ('+p1Mistakes+' hata) | P2 Sure: '+p2Time+'s ('+p2Mistakes+' hata)';
+  document.getElementById('roundTimeDisplay').textContent='P1 الوَقْت: '+p1Time+'s ('+p1Mistakes+' خَطَأ) | P2 الوَقْت: '+p2Time+'s ('+p2Mistakes+' خَطَأ)';
 
   sesCelebrate();
 
   const btn=document.getElementById('roundNextBtn');
   if(currentRound<2){
-    btn.textContent='Sonraki Tur \u2192';
+    btn.textContent='التّالي Tur \u2192';
     btn.onclick=nextRound;
   } else {
     btn.textContent='Sonuclari Gor';
@@ -753,9 +754,9 @@ function showFinal(){
   let msg='';
   if(totalStarsCount>=8) msg='Muhtesem! Arapca pazarlik ustasisin!';
   else if(totalStarsCount>=5) msg='Harika! Arapca alisveriste cok iyisin!';
-  else msg='Iyi baslangic! Pratik yaptikca daha iyi olacak!';
+  else msg='Iyi baslangاِشْرَب! Pratik yaptikca daha iyi olacak!';
 
-  document.getElementById('finalTitle').textContent='Alisveris Bitti!';
+  document.getElementById('finalTitle').textContent='اِنْتَهى التَّسَوُّق!';
 
   let html='';
   let totalStarsHTML='';
@@ -765,7 +766,7 @@ function showFinal(){
   }
   html+='<div class="final-total-stars">'+totalStarsHTML+'</div>';
   // Show x/9
-  html+='<div style="font-family:Arial,sans-serif;font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:8px;direction:ltr">'+totalStarsCount+' / 9 Yildiz</div>';
+  html+='<div style="font-family:Arial,sans-serif;font-size:18px;color:rgba(255,255,255,0.5);margin-bottom:8px;direction:ltr">'+totalStarsCount+' / 9 نَجْم</div>';
   html+='<div class="final-score-num">'+totalScore+'</div>';
   html+='<div class="final-msg">'+msg+'</div>';
   html+='<div class="final-rounds">';
@@ -788,20 +789,20 @@ function showFinalDuo(){
   const p2Total=p2RoundStars.reduce((a,b)=>a+b,0);
   const winner=totalP1Score>totalP2Score?1:totalP2Score>totalP1Score?2:0;
 
-  document.getElementById('finalTitle').textContent=winner===0?'Berabere!':('Oyuncu '+winner+' Kazandi!');
+  document.getElementById('finalTitle').textContent=winner===0?'تَعادُل!':('Oyuncu '+winner+' فازَ!');
 
   let html='<div class="final-2p">';
   // P1
   html+='<div class="final-2p-card'+(winner===1?' winner':'')+'">';
   if(winner===1) html+='<div class="f2p-crown">&#128081;</div>';
-  html+='<div class="f2p-label" style="color:#4895ef">Oyuncu 1</div>';
+  html+='<div class="f2p-label" style="color:#4895ef">اللاعِبُ ١</div>';
   html+='<div class="f2p-score">'+totalP1Score+'</div>';
   html+='<div class="f2p-stars">'+starsOf9(p1Total)+'</div>';
   html+='</div>';
   // P2
   html+='<div class="final-2p-card'+(winner===2?' winner':'')+'">';
   if(winner===2) html+='<div class="f2p-crown">&#128081;</div>';
-  html+='<div class="f2p-label" style="color:#ef233c">Oyuncu 2</div>';
+  html+='<div class="f2p-label" style="color:#ef233c">اللاعِبُ ٢</div>';
   html+='<div class="f2p-score">'+totalP2Score+'</div>';
   html+='<div class="f2p-stars">'+starsOf9(p2Total)+'</div>';
   html+='</div>';

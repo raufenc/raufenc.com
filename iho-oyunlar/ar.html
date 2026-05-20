@@ -25,11 +25,11 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 .back-btn:hover{background:rgba(255,255,255,0.22);transform:scale(1.05)}
 
 /* MENU */
-.menu-header{text-align:center;padding:30px 20px 10px}
-.menu-badge{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:8px 24px;border-radius:100px;font-size:18px;letter-spacing:.08em;margin-bottom:14px;font-family:Arial,sans-serif}
-.menu-title{font-size:clamp(36px,6vw,64px);font-weight:bold;line-height:1.2;margin-bottom:8px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.menu-subtitle{color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:8px;direction:rtl}
-.menu-info{color:rgba(255,255,255,0.3);font-size:18px;font-family:Arial,sans-serif}
+.القائمَة-header{text-align:center;padding:30px 20px 10px}
+.القائمَة-badge{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:8px 24px;border-radius:100px;font-size:18px;letter-spacing:.08em;margin-bottom:14px;font-family:Arial,sans-serif}
+.القائمَة-title{font-size:clamp(36px,6vw,64px);font-weight:bold;line-height:1.2;margin-bottom:8px;background:linear-gradient(90deg,#f7971e,#ffd200);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.القائمَة-subtitle{color:rgba(255,255,255,0.5);font-size:24px;margin-bottom:8px;direction:rtl}
+.القائمَة-info{color:rgba(255,255,255,0.3);font-size:18px;font-family:Arial,sans-serif}
 
 /* PLAYER TOGGLE */
 .player-toggle{display:flex;justify-content:center;gap:12px;margin:20px auto 24px;max-width:420px}
@@ -65,8 +65,8 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 .game-over-box button{margin:8px;padding:16px 36px;border-radius:14px;border:none;font-family:'Arakom',Arial,sans-serif;font-size:22px;cursor:pointer;transition:all .2s}
 .go-btn-restart{background:#4361ee;color:#fff}
 .go-btn-restart:hover{background:#5a78f0}
-.go-btn-menu{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
-.go-btn-menu:hover{background:rgba(255,255,255,0.2)}
+.go-btn-القائمَة{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.go-btn-القائمَة:hover{background:rgba(255,255,255,0.2)}
 
 /* SPLIT SCREEN */
 .split-container{display:flex;gap:12px;width:100%;max-width:1400px;margin:0 auto}
@@ -154,9 +154,9 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   .rain-area{height:260px}
 }
 
-/* hub entegrasyonu: iç menü gizli */
-#screen-menu{display:none!important}
-.menu-header{display:none!important}
+
+#screen-القائمَة{display:none!important}
+.القائمَة-header{display:none!important}
 .player-toggle{display:none!important}
 .games-grid{display:none!important}
 </style>
@@ -164,27 +164,28 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="shared/icons.js" defer></script>
 </head>
 <body>
 
 <!-- ============ MENU SCREEN ============ -->
 <div id="menuScreen" class="screen active">
-  <div class="menu-header">
-    <div class="menu-badge">ARCADE · 7. SINIF · 1. ÜNİTE</div>
-    <div class="menu-title">ألعاب الآركيد</div>
-    <div class="menu-subtitle">ماذا فعلت اليوم؟ — Arcade Oyunlar</div>
-    <div class="menu-info">3 oyun · Solo & 2 Kişilik</div>
+  <div class="القائمَة-header">
+    <div class="القائمَة-badge">ARCADE · 7. SINIF · 1. الوَحْدَة</div>
+    <div class="القائمَة-title">ألعاب الآركيد</div>
+    <div class="القائمَة-subtitle">ماذا فعلت اليوم؟ — Arcade الأَلْعاب</div>
+    <div class="القائمَة-info">3  · لاعِبٌ & 2 </div>
   </div>
   <div class="player-toggle">
-    <button id="btnSolo" class="active" onclick="setPlayers(1)">🎮 Solo</button>
-    <button id="btn2P" onclick="setPlayers(2)">👥 2 Kişi</button>
+    <button id="btnلاعِبٌ" class="active" onclick="setPlayers(1)">🎮 لاعِبٌ</button>
+    <button id="btn2P" onclick="setPlayers(2)">👥 2 شَخْص</button>
   </div>
   <div class="games-grid" id="menuGrid"></div>
 </div>
 
 <!-- ============ GAME 1: SPACE DEFENSE ============ -->
 <div id="g1Screen" class="screen">
-  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <button class="back-btn" onclick="goMenu()">← القائمَة</button>
   <div class="game-title">🚀 الدفاع الفضائي</div>
   <div class="round-info" id="g1RoundInfo"></div>
   <div class="game-hud" id="g1Hud"></div>
@@ -193,7 +194,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 
 <!-- ============ GAME 2: MASTER CHEF ============ -->
 <div id="g2Screen" class="screen">
-  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <button class="back-btn" onclick="goMenu()">← القائمَة</button>
   <div class="game-title">🍳 الطبّاخ الماهر</div>
   <div class="round-info" id="g2RoundInfo"></div>
   <div class="game-hud" id="g2Hud"></div>
@@ -202,7 +203,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 
 <!-- ============ GAME 3: LETTER RAIN ============ -->
 <div id="g3Screen" class="screen">
-  <button class="back-btn" onclick="goMenu()">← Menü</button>
+  <button class="back-btn" onclick="goMenu()">← القائمَة</button>
   <div class="game-title">🧩 مطر الحروف</div>
   <div class="round-info" id="g3RoundInfo"></div>
   <div class="game-hud" id="g3Hud"></div>
@@ -239,17 +240,17 @@ const ALL_WORDS = [...VOCAB.foods,...VOCAB.verbs,...VOCAB.times];
    TURKISH TRANSLATIONS
    ================================================================ */
 const VOCAB_TR = {
-  'خُبْز':'Ekmek','جُبْن':'Peynir','أُرُز':'Pirinç','عَسَل':'Bal',
-  'شاي':'Çay','دَجاج':'Tavuk','لَحْم':'Et','سَمَك':'Balık',
-  'بَيْض':'Yumurta','زُبْدَة':'Tereyağı','كُفْتَة':'Köfte','حَساء':'Çorba',
-  'حَلِيب':'Süt','قَهْوَة':'Kahve','عَصِير':'Meyve Suyu','زَيْتون':'Zeytin',
-  'تُفَّاح':'Elma','مَوْز':'Muz',
-  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz Kılmak','يَتَناوَل':'Yemek Yemek',
-  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'Dönmek',
-  'يُساعِد':'Yardım Etmek','يَدْرُس':'Ders Çalışmak','يَأْكُل':'Yemek',
-  'يَشْرَب':'İçmek','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
-  'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
-  'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
+  'خُبْز':'خُبْز','جُبْن':'جُبْن','أُرُز':'أُرُز','عَسَل':'عَسَل',
+  'شاي':'شاي','دَجاج':'دَجاج','لَحْم':'لَحْم','سَمَك':'سَمَك',
+  'بَيْض':'بَيْض','زُبْدَة':'زُبْدَة','كُفْتَة':'كُفْتَة','حَساء':'حَساء',
+  'حَلِيب':'حَلِيب','قَهْوَة':'قَهْوَة','عَصِير':'فَواكِه Suyu','زَيْتون':'زَيْتون',
+  'تُفَّاح':'تُفّاح','مَوْز':'مَوْز',
+  'يَسْتَيْقِظ':'Uyanmak','يُصَلِّي':'Namaz أَداء','يَتَناوَل':'طَعام طَعام',
+  'يَلْبَس':'Giyinmek','يَذْهَب':'Gitmek','يَرْجِع':'العَوْدَة',
+  'يُساعِد':'مُساعَدَة Etmek','يَدْرُس':'Ders العَمَل','يَأْكُل':'طَعام',
+  'يَشْرَب':'اِشْرَب','يَنام':'Uyumak','يَتَوَضَّأ':'Abdest Almak',
+  'الصَّباح':'Sabah','الظُهر':'الظُّهْر','العصر':'العَصْر',
+  'المساء':'المَساء','الليل':'Gece','الفَجْر':'Fecir'
 };
 function getTr(w){ return VOCAB_TR[w.ar]||''; }
 
@@ -296,7 +297,7 @@ let activeTimeouts = [];
 
 function setPlayers(n){
   playerCount=n;
-  document.getElementById('btnSolo').classList.toggle('active',n===1);
+  document.getElementById('btnلاعِبٌ').classList.toggle('active',n===1);
   document.getElementById('btn2P').classList.toggle('active',n===2);
 }
 
@@ -347,7 +348,7 @@ function showGameOver(scores,restartFn){
     else html+='<div style="color:#ffd60a;font-size:30px;margin:10px 0">تعادُل!</div>';
   }
   html+='<button class="go-btn-restart" onclick="this.closest(\'.game-over-overlay\').remove();('+restartFn.name+')()">أعد اللعب</button> ';
-  html+='<button class="go-btn-menu" onclick="this.closest(\'.game-over-overlay\').remove();goMenu()">القائمة</button>';
+  html+='<button class="go-btn-القائمَة" onclick="this.closest(\'.game-over-overlay\').remove();goMenu()">القائمة</button>';
   html+='</div>';
   ov.innerHTML=html;
   document.body.appendChild(ov);
@@ -379,9 +380,9 @@ document.addEventListener('click',function unlock(){
    MENU
    ================================================================ */
 const GAMES=[
-  {id:'g1',icon:'🚀',ar:'الدفاع الفضائي',tr:'Uzay Savunması'},
-  {id:'g2',icon:'🍳',ar:'الطبّاخ الماهر',tr:'Aşçıbaşı'},
-  {id:'g3',icon:'🧩',ar:'مطر الحروف',tr:'Harf Yağmuru'}
+  {id:'g1',icon:'🚀',ar:'الدفاع الفضائي',tr:'Uzay الدِّفاع'},
+  {id:'g2',icon:'🍳',ar:'الطبّاخ الماهر',tr:'الطَّبّاخ'},
+  {id:'g3',icon:'🧩',ar:'مطر الحروف',tr:'حَرْف المَطَر'}
 ];
 
 function buildMenu(){
@@ -497,16 +498,16 @@ function initSpaceDefense(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      const p1w=buildPlayerArea('g1P1',state.p1,'Oyuncu 1');
-      const p2w=buildPlayerArea('g1P2',state.p2,'Oyuncu 2');
+      const p1w=buildPlayerArea('g1P1',state.p1,'اللاعِبُ ١');
+      const p2w=buildPlayerArea('g1P2',state.p2,'اللاعِبُ ٢');
       split.appendChild(p1w);split.appendChild(p2w);
       area.appendChild(split);
       players.push({id:'g1P1',ps:state.p1,target:null,asteroids:[]});
       players.push({id:'g1P2',ps:state.p2,target:null,asteroids:[]});
     } else {
-      const pw=buildPlayerArea('g1Solo',state.p1,null);
+      const pw=buildPlayerArea('g1لاعِبٌ',state.p1,null);
       area.appendChild(pw);
-      players.push({id:'g1Solo',ps:state.p1,target:null,asteroids:[]});
+      players.push({id:'g1لاعِبٌ',ps:state.p1,target:null,asteroids:[]});
     }
 
     function updateHud(){
@@ -670,14 +671,14 @@ function initMasterChef(){
 
   /* Themed recipe sets — ingredients that go together */
   const RECIPE_SETS=[
-    {name:'🍳 Kahvaltı Tabağı', items:['خُبْز','جُبْن','بَيْض','عَسَل','زُبْدَة','زَيْتون','شاي','حَلِيب']},
-    {name:'🥩 Et Yemeği', items:['لَحْم','أُرُز','حَساء','زَيْتون','خُبْز','عَصِير']},
-    {name:'🍗 Tavuk Yemeği', items:['دَجاج','أُرُز','حَساء','خُبْز','زَيْتون','عَصِير']},
-    {name:'🐟 Balık Tabağı', items:['سَمَك','أُرُز','زَيْتون','حَساء','خُبْز','عَصِير']},
-    {name:'🧆 Köfte Tabağı', items:['كُفْتَة','أُرُز','خُبْز','حَساء','زَيْتون','عَصِير']},
-    {name:'🍎 Meyve & İçecek', items:['تُفَّاح','مَوْز','عَصِير','حَلِيب','عَسَل','قَهْوَة']},
-    {name:'🧀 Peynir Tabağı', items:['جُبْن','خُبْز','زَيْتون','شاي','عَسَل','زُبْدَة']},
-    {name:'🍲 Çorba Sofrası', items:['حَساء','خُبْز','زَيْتون','لَحْم','شاي','زُبْدَة']}
+    {name:'🍳 الفَطور الطَّبَق', items:['خُبْز','جُبْن','بَيْض','عَسَل','زُبْدَة','زَيْتون','شاي','حَلِيب']},
+    {name:'🥩 لَحْم طَعام', items:['لَحْم','أُرُز','حَساء','زَيْتون','خُبْز','عَصِير']},
+    {name:'🍗 دَجاج طَعام', items:['دَجاج','أُرُز','حَساء','خُبْز','زَيْتون','عَصِير']},
+    {name:'🐟 سَمَك الطَّبَق', items:['سَمَك','أُرُز','زَيْتون','حَساء','خُبْز','عَصِير']},
+    {name:'🧆 كُفْتَة الطَّبَق', items:['كُفْتَة','أُرُز','خُبْز','حَساء','زَيْتون','عَصِير']},
+    {name:'🍎 فَواكِه & مَشْروب', items:['تُفَّاح','مَوْز','عَصِير','حَلِيب','عَسَل','قَهْوَة']},
+    {name:'🧀 جُبْن الطَّبَق', items:['جُبْن','خُبْز','زَيْتون','شاي','عَسَل','زُبْدَة']},
+    {name:'🍲 حَساء السُّفْرَة', items:['حَساء','خُبْز','زَيْتون','لَحْم','شاي','زُبْدَة']}
   ];
 
   function findWord(ar){ return VOCAB.foods.find(f=>f.ar===ar); }
@@ -731,14 +732,14 @@ function initMasterChef(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      split.appendChild(buildChefUI('g2P1',state.p1,'Oyuncu 1'));
-      split.appendChild(buildChefUI('g2P2',state.p2,'Oyuncu 2'));
+      split.appendChild(buildChefUI('g2P1',state.p1,'اللاعِبُ ١'));
+      split.appendChild(buildChefUI('g2P2',state.p2,'اللاعِبُ ٢'));
       area.appendChild(split);
       players.push({id:'g2P1',ps:state.p1,recipe:null,found:0});
       players.push({id:'g2P2',ps:state.p2,recipe:null,found:0});
     } else {
-      area.appendChild(buildChefUI('g2Solo',state.p1,null));
-      players.push({id:'g2Solo',ps:state.p1,recipe:null,found:0});
+      area.appendChild(buildChefUI('g2لاعِبٌ',state.p1,null));
+      players.push({id:'g2لاعِبٌ',ps:state.p1,recipe:null,found:0});
     }
 
     function updateHud(){
@@ -935,14 +936,14 @@ function initLetterRain(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      split.appendChild(buildRainUI('g3P1',state.p1,'Oyuncu 1'));
-      split.appendChild(buildRainUI('g3P2',state.p2,'Oyuncu 2'));
+      split.appendChild(buildRainUI('g3P1',state.p1,'اللاعِبُ ١'));
+      split.appendChild(buildRainUI('g3P2',state.p2,'اللاعِبُ ٢'));
       area.appendChild(split);
       players.push({id:'g3P1',ps:state.p1});
       players.push({id:'g3P2',ps:state.p2});
     } else {
-      area.appendChild(buildRainUI('g3Solo',state.p1,null));
-      players.push({id:'g3Solo',ps:state.p1});
+      area.appendChild(buildRainUI('g3لاعِبٌ',state.p1,null));
+      players.push({id:'g3لاعِبٌ',ps:state.p1});
     }
 
     /* Shared word list for round */
@@ -981,7 +982,7 @@ function initLetterRain(){
       p.wrongCount=0;
 
       const disp=document.getElementById(p.id+'Display');
-      if(disp) disp.textContent=w.e+' '+getTr(w)+' — '+p.letters.length+' harf';
+      if(disp) disp.textContent=w.e+' '+getTr(w)+' — '+p.letters.length+' حَرْف';
 
       const builder=document.getElementById(p.id+'Builder');
       if(builder){
