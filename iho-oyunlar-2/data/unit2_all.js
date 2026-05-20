@@ -2,8 +2,8 @@ window.IHO_UNIT2_DATA = {
   "metadata": {
     "unit": 2,
     "title_ar": "وَقْتُ التَّسَوُّق",
-    "title_tr": "Alışveriş Zamanı",
-    "grade": "İHO Arapça 7. Sınıf",
+    "title_tr": "وَقْتُ التَّسَوُّق",
+    "grade": "",
     "source_pdf": "IHO_Arp7_02_Unite2_04052026.pdf",
     "source_book_pages": "52-93",
     "generated_at_utc": "2026-05-18T19:12:26.484842+00:00",
@@ -12,57 +12,57 @@ window.IHO_UNIT2_DATA = {
       "source": "ar",
       "support": "tr"
     },
-    "scope_tr": "Ünite 2 için kelime, cümle kalıbı, örnek cümle, diyalog, oyun bankası ve bağımsız oyun motorları paketi.",
-    "notes_tr": "Görsel/ses dosyası içermez; emoji ve audio_key alanları ileride siteye bağlanacak varlıklar için yer tutucudur. Font dosyası eklenmemiştir."
+    "scope_tr": "وَقْتُ التَّسَوُّق",
+    "notes_tr": "وَقْتُ التَّسَوُّق"
   },
   "categories": [
     {
       "id": "place_role",
-      "title_tr": "Yerler ve roller",
+      "title_tr": "الأماكن والأدوار",
       "title_ar": "الأماكن والأدوار",
-      "description_tr": "Alışveriş yeri, satıcı, müşteri ve alışveriş nesneleri."
+      "description_tr": "الأماكن والأدوار"
     },
     {
       "id": "grocery",
-      "title_tr": "Bakkal ürünleri",
+      "title_tr": "مُنتجات البقالة",
       "title_ar": "مُنتجات البقالة",
-      "description_tr": "Bakkaldan alınan temel ürünler."
+      "description_tr": "مُنتجات البقالة"
     },
     {
       "id": "fruit",
-      "title_tr": "Meyveler",
+      "title_tr": "الفواكه",
       "title_ar": "الفواكه",
-      "description_tr": "Pazarda geçen meyveler."
+      "description_tr": "الفواكه"
     },
     {
       "id": "vegetable",
-      "title_tr": "Sebzeler",
+      "title_tr": "الخضراوات",
       "title_ar": "الخضراوات",
-      "description_tr": "Pazarda geçen sebzeler."
+      "description_tr": "الخضراوات"
     },
     {
       "id": "quantity",
-      "title_tr": "Miktar, kap ve fiyat",
+      "title_tr": "الكميات والأسعار",
       "title_ar": "الكميات والأسعار",
-      "description_tr": "Kilo, kutu, lira, sayı ve ölçü sözleri."
+      "description_tr": "الكميات والأسعار"
     },
     {
       "id": "verb_phrase",
-      "title_tr": "Fiil ve günlük ifade",
+      "title_tr": "الأفعال والتعبيرات",
       "title_ar": "الأفعال والتعبيرات",
-      "description_tr": "İhtiyaç, isteme, satın alma ve diyalog ifadeleri."
+      "description_tr": "الأفعال والتعبيرات"
     },
     {
       "id": "adjective_comparison",
-      "title_tr": "Sıfat ve karşılaştırma",
+      "title_tr": "الصفات والمقارنة",
       "title_ar": "الصفات والمقارنة",
-      "description_tr": "Ucuz/pahalı, büyük/küçük ve karşılaştırma kalıpları."
+      "description_tr": "الصفات والمقارنة"
     },
     {
       "id": "question_word",
-      "title_tr": "Soru ve bağlaç edatları",
+      "title_tr": "أدوات السؤال والحروف",
       "title_ar": "أدوات السؤال والحروف",
-      "description_tr": "بكم، كم، هل، من، إلى, بـ gibi kalıp parçaları."
+      "description_tr": "أدوات السؤال والحروف"
     }
   ],
   "vocabulary": [
@@ -70,7 +70,7 @@ window.IHO_UNIT2_DATA = {
       "id": "v001",
       "ar": "التَّسَوُّق",
       "ar_clean": "التسوق",
-      "tr": "alışveriş",
+      "tr": "التَّسَوُّق",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🛒",
@@ -87,14 +87,14 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "التَّسَوُّق",
       "audio_key": "u2_vocab_v001"
     },
     {
       "id": "v002",
       "ar": "البَقّالَة",
       "ar_clean": "البقاله",
-      "tr": "bakkal",
+      "tr": "البَقّالَة",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🏪",
@@ -111,14 +111,14 @@ window.IHO_UNIT2_DATA = {
         56
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "البَقّالَة",
       "audio_key": "u2_vocab_v002"
     },
     {
       "id": "v003",
       "ar": "السّوق",
       "ar_clean": "السوق",
-      "tr": "pazar / çarşı",
+      "tr": "السّوق",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🏬",
@@ -135,14 +135,14 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "السّوق",
       "audio_key": "u2_vocab_v003"
     },
     {
       "id": "v004",
       "ar": "السّوق المَرْكَزِيّ",
       "ar_clean": "السوق المركزي",
-      "tr": "merkezî pazar",
+      "tr": "السّوق المَرْكَزِيّ",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🏬",
@@ -157,14 +157,14 @@ window.IHO_UNIT2_DATA = {
         55
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "السّوق المَرْكَزِيّ",
       "audio_key": "u2_vocab_v004"
     },
     {
       "id": "v005",
       "ar": "سوق الخُضَر",
       "ar_clean": "سوق الخضر",
-      "tr": "sebze pazarı",
+      "tr": "سوق الخُضَر",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🥬",
@@ -180,14 +180,14 @@ window.IHO_UNIT2_DATA = {
         66
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "سوق الخُضَر",
       "audio_key": "u2_vocab_v005"
     },
     {
       "id": "v006",
       "ar": "البائِع",
       "ar_clean": "البائع",
-      "tr": "satıcı",
+      "tr": "البائِع",
       "category": "place_role",
       "pos": "isim",
       "emoji": "👨‍🌾",
@@ -203,14 +203,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "البائِع",
       "audio_key": "u2_vocab_v006"
     },
     {
       "id": "v007",
       "ar": "المُشْتَري",
       "ar_clean": "المشتري",
-      "tr": "müşteri / alıcı",
+      "tr": "المُشْتَري",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🧑",
@@ -225,14 +225,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "المُشْتَري",
       "audio_key": "u2_vocab_v007"
     },
     {
       "id": "v008",
       "ar": "البَقّال",
       "ar_clean": "البقال",
-      "tr": "bakkal / bakkal sahibi",
+      "tr": "البَقّال",
       "category": "place_role",
       "pos": "isim",
       "emoji": "👨‍🍳",
@@ -248,14 +248,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "البَقّال",
       "audio_key": "u2_vocab_v008"
     },
     {
       "id": "v009",
       "ar": "قائِمَةُ التَّسَوُّق",
       "ar_clean": "قائمه التسوق",
-      "tr": "alışveriş listesi",
+      "tr": "قائِمَةُ التَّسَوُّق",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🧾",
@@ -272,14 +272,14 @@ window.IHO_UNIT2_DATA = {
         90
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "قائِمَةُ التَّسَوُّق",
       "audio_key": "u2_vocab_v009"
     },
     {
       "id": "v010",
       "ar": "سَلَّة",
       "ar_clean": "سله",
-      "tr": "sepet",
+      "tr": "سَلَّة",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🧺",
@@ -295,14 +295,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "سَلَّة",
       "audio_key": "u2_vocab_v010"
     },
     {
       "id": "v011",
       "ar": "عَرَبَة",
       "ar_clean": "عربه",
-      "tr": "alışveriş arabası",
+      "tr": "عَرَبَة",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🛒",
@@ -318,14 +318,14 @@ window.IHO_UNIT2_DATA = {
         91
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عَرَبَة",
       "audio_key": "u2_vocab_v011"
     },
     {
       "id": "v012",
       "ar": "صُنْدوق",
       "ar_clean": "صندوق",
-      "tr": "kasa / sandık",
+      "tr": "صُنْدوق",
       "category": "place_role",
       "pos": "isim",
       "emoji": "📦",
@@ -341,14 +341,14 @@ window.IHO_UNIT2_DATA = {
         73
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "صُنْدوق",
       "audio_key": "u2_vocab_v012"
     },
     {
       "id": "v013",
       "ar": "كيس",
       "ar_clean": "كيس",
-      "tr": "poşet / torba",
+      "tr": "كيس",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🛍️",
@@ -364,14 +364,14 @@ window.IHO_UNIT2_DATA = {
         73
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كيس",
       "audio_key": "u2_vocab_v013"
     },
     {
       "id": "v014",
       "ar": "خِدْمَة",
       "ar_clean": "خدمه",
-      "tr": "hizmet",
+      "tr": "خِدْمَة",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🤝",
@@ -388,14 +388,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "خِدْمَة",
       "audio_key": "u2_vocab_v014"
     },
     {
       "id": "v015",
       "ar": "مُنْتَج",
       "ar_clean": "منتج",
-      "tr": "ürün",
+      "tr": "مُنْتَج",
       "category": "place_role",
       "pos": "isim",
       "emoji": "🏷️",
@@ -410,14 +410,14 @@ window.IHO_UNIT2_DATA = {
         69
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مُنْتَج",
       "audio_key": "u2_vocab_v015"
     },
     {
       "id": "v016",
       "ar": "خُبْز",
       "ar_clean": "خبز",
-      "tr": "ekmek",
+      "tr": "خُبْز",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍞",
@@ -434,14 +434,14 @@ window.IHO_UNIT2_DATA = {
         58
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "خُبْز",
       "audio_key": "u2_vocab_v016"
     },
     {
       "id": "v017",
       "ar": "سُكَّر",
       "ar_clean": "سكر",
-      "tr": "şeker",
+      "tr": "سُكَّر",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍚",
@@ -458,14 +458,14 @@ window.IHO_UNIT2_DATA = {
         58
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "سُكَّر",
       "audio_key": "u2_vocab_v017"
     },
     {
       "id": "v018",
       "ar": "مِلْح",
       "ar_clean": "ملح",
-      "tr": "tuz",
+      "tr": "مِلْح",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🧂",
@@ -482,14 +482,14 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مِلْح",
       "audio_key": "u2_vocab_v018"
     },
     {
       "id": "v019",
       "ar": "شاي",
       "ar_clean": "شاي",
-      "tr": "çay",
+      "tr": "شاي",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍵",
@@ -505,14 +505,14 @@ window.IHO_UNIT2_DATA = {
         58
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "شاي",
       "audio_key": "u2_vocab_v019"
     },
     {
       "id": "v020",
       "ar": "حَليب",
       "ar_clean": "حليب",
-      "tr": "süt",
+      "tr": "حَليب",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🥛",
@@ -529,14 +529,14 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "حَليب",
       "audio_key": "u2_vocab_v020"
     },
     {
       "id": "v021",
       "ar": "عَسَل",
       "ar_clean": "عسل",
-      "tr": "bal",
+      "tr": "عَسَل",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍯",
@@ -552,14 +552,14 @@ window.IHO_UNIT2_DATA = {
         62
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عَسَل",
       "audio_key": "u2_vocab_v021"
     },
     {
       "id": "v022",
       "ar": "ماء",
       "ar_clean": "ماء",
-      "tr": "su",
+      "tr": "ماء",
       "category": "grocery",
       "pos": "isim",
       "emoji": "💧",
@@ -575,14 +575,14 @@ window.IHO_UNIT2_DATA = {
         58
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ماء",
       "audio_key": "u2_vocab_v022"
     },
     {
       "id": "v023",
       "ar": "بَيْض",
       "ar_clean": "بيض",
-      "tr": "yumurta",
+      "tr": "بَيْض",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🥚",
@@ -598,14 +598,14 @@ window.IHO_UNIT2_DATA = {
         62
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بَيْض",
       "audio_key": "u2_vocab_v023"
     },
     {
       "id": "v024",
       "ar": "مَكَرونَة",
       "ar_clean": "مكرونه",
-      "tr": "makarna",
+      "tr": "مَكَرونَة",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍝",
@@ -621,14 +621,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مَكَرونَة",
       "audio_key": "u2_vocab_v024"
     },
     {
       "id": "v025",
       "ar": "زَيْتون",
       "ar_clean": "زيتون",
-      "tr": "zeytin",
+      "tr": "زَيْتون",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🫒",
@@ -643,14 +643,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "زَيْتون",
       "audio_key": "u2_vocab_v025"
     },
     {
       "id": "v026",
       "ar": "دَجاجَة",
       "ar_clean": "دجاجه",
-      "tr": "tavuk",
+      "tr": "دَجاجَة",
       "category": "grocery",
       "pos": "isim",
       "emoji": "🍗",
@@ -665,14 +665,14 @@ window.IHO_UNIT2_DATA = {
         75
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "دَجاجَة",
       "audio_key": "u2_vocab_v026"
     },
     {
       "id": "v027",
       "ar": "حاجات يَوْمِيَّة",
       "ar_clean": "حاجات يوميه",
-      "tr": "günlük ihtiyaçlar",
+      "tr": "حاجات يَوْمِيَّة",
       "category": "grocery",
       "pos": "ifade",
       "emoji": "🧺",
@@ -687,14 +687,14 @@ window.IHO_UNIT2_DATA = {
         93
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "حاجات يَوْمِيَّة",
       "audio_key": "u2_vocab_v027"
     },
     {
       "id": "v028",
       "ar": "تُفّاح",
       "ar_clean": "تفاح",
-      "tr": "elma",
+      "tr": "تُفّاح",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍎",
@@ -712,14 +712,14 @@ window.IHO_UNIT2_DATA = {
         82
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "تُفّاح",
       "audio_key": "u2_vocab_v028"
     },
     {
       "id": "v029",
       "ar": "بُرْتُقال",
       "ar_clean": "برتقال",
-      "tr": "portakal",
+      "tr": "بُرْتُقال",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍊",
@@ -735,14 +735,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بُرْتُقال",
       "audio_key": "u2_vocab_v029"
     },
     {
       "id": "v030",
       "ar": "مَوْز",
       "ar_clean": "موز",
-      "tr": "muz",
+      "tr": "مَوْز",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍌",
@@ -759,14 +759,14 @@ window.IHO_UNIT2_DATA = {
         82
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مَوْز",
       "audio_key": "u2_vocab_v030"
     },
     {
       "id": "v031",
       "ar": "عِنَب",
       "ar_clean": "عنب",
-      "tr": "üzüm",
+      "tr": "عِنَب",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍇",
@@ -782,14 +782,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عِنَب",
       "audio_key": "u2_vocab_v031"
     },
     {
       "id": "v032",
       "ar": "كَرَز",
       "ar_clean": "كرز",
-      "tr": "kiraz",
+      "tr": "كَرَز",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍒",
@@ -805,14 +805,14 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كَرَز",
       "audio_key": "u2_vocab_v032"
     },
     {
       "id": "v033",
       "ar": "مِشْمِش",
       "ar_clean": "مشمش",
-      "tr": "kayısı",
+      "tr": "مِشْمِش",
       "category": "fruit",
       "pos": "isim",
       "emoji": "🍑",
@@ -829,14 +829,14 @@ window.IHO_UNIT2_DATA = {
         83
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مِشْمِش",
       "audio_key": "u2_vocab_v033"
     },
     {
       "id": "v034",
       "ar": "طَماطِم",
       "ar_clean": "طماطم",
-      "tr": "domates",
+      "tr": "طَماطِم",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🍅",
@@ -852,14 +852,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "طَماطِم",
       "audio_key": "u2_vocab_v034"
     },
     {
       "id": "v035",
       "ar": "خِيار",
       "ar_clean": "خيار",
-      "tr": "salatalık",
+      "tr": "خِيار",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🥒",
@@ -875,14 +875,14 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "خِيار",
       "audio_key": "u2_vocab_v035"
     },
     {
       "id": "v036",
       "ar": "جَزَر",
       "ar_clean": "جزر",
-      "tr": "havuç",
+      "tr": "جَزَر",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🥕",
@@ -898,14 +898,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "جَزَر",
       "audio_key": "u2_vocab_v036"
     },
     {
       "id": "v037",
       "ar": "باذِنْجان",
       "ar_clean": "باذنجان",
-      "tr": "patlıcan",
+      "tr": "باذِنْجان",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🍆",
@@ -921,14 +921,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "باذِنْجان",
       "audio_key": "u2_vocab_v037"
     },
     {
       "id": "v038",
       "ar": "بَطاطا",
       "ar_clean": "بطاطا",
-      "tr": "patates",
+      "tr": "بَطاطا",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🥔",
@@ -945,14 +945,14 @@ window.IHO_UNIT2_DATA = {
         68
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بَطاطا",
       "audio_key": "u2_vocab_v038"
     },
     {
       "id": "v039",
       "ar": "بَصَل",
       "ar_clean": "بصل",
-      "tr": "soğan",
+      "tr": "بَصَل",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🧅",
@@ -969,14 +969,14 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بَصَل",
       "audio_key": "u2_vocab_v039"
     },
     {
       "id": "v040",
       "ar": "فُلْفُل",
       "ar_clean": "فلفل",
-      "tr": "biber",
+      "tr": "فُلْفُل",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🫑",
@@ -992,14 +992,14 @@ window.IHO_UNIT2_DATA = {
         65
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "فُلْفُل",
       "audio_key": "u2_vocab_v040"
     },
     {
       "id": "v041",
       "ar": "فاصوليا",
       "ar_clean": "فاصوليا",
-      "tr": "fasulye",
+      "tr": "فاصوليا",
       "category": "vegetable",
       "pos": "isim",
       "emoji": "🫛",
@@ -1016,16 +1016,16 @@ window.IHO_UNIT2_DATA = {
         68
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "فاصوليا",
       "audio_key": "u2_vocab_v041"
     },
     {
       "id": "v042",
       "ar": "كيلو",
       "ar_clean": "كيلو",
-      "tr": "kilo",
+      "tr": "كيلو",
       "category": "quantity",
-      "pos": "ölçü",
+      "pos": "",
       "emoji": "⚖️",
       "translit": "kīlū",
       "examples": [
@@ -1039,16 +1039,16 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كيلو",
       "audio_key": "u2_vocab_v042"
     },
     {
       "id": "v043",
       "ar": "كيلوغرام",
       "ar_clean": "كيلوغرام",
-      "tr": "kilogram",
+      "tr": "كيلوغرام",
       "category": "quantity",
-      "pos": "ölçü",
+      "pos": "",
       "emoji": "⚖️",
       "translit": "kīlūghrām",
       "examples": [
@@ -1063,16 +1063,16 @@ window.IHO_UNIT2_DATA = {
         64
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كيلوغرام",
       "audio_key": "u2_vocab_v043"
     },
     {
       "id": "v044",
       "ar": "كيلوغرامان",
       "ar_clean": "كيلوغرامان",
-      "tr": "iki kilogram",
+      "tr": "كيلوغرامان",
       "category": "quantity",
-      "pos": "ölçü",
+      "pos": "",
       "emoji": "⚖️",
       "translit": "kīlūghrāmān",
       "examples": [
@@ -1086,16 +1086,16 @@ window.IHO_UNIT2_DATA = {
         63
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كيلوغرامان",
       "audio_key": "u2_vocab_v044"
     },
     {
       "id": "v045",
       "ar": "كيلوغرامات",
       "ar_clean": "كيلوغرامات",
-      "tr": "kilogramlar",
+      "tr": "كيلوغرامات",
       "category": "quantity",
-      "pos": "ölçü",
+      "pos": "",
       "emoji": "⚖️",
       "translit": "kīlūghrāmāt",
       "examples": [
@@ -1110,14 +1110,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كيلوغرامات",
       "audio_key": "u2_vocab_v045"
     },
     {
       "id": "v046",
       "ar": "عُلْبَة",
       "ar_clean": "علبه",
-      "tr": "kutu / paket",
+      "tr": "عُلْبَة",
       "category": "quantity",
       "pos": "kap",
       "emoji": "📦",
@@ -1134,14 +1134,14 @@ window.IHO_UNIT2_DATA = {
         62
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عُلْبَة",
       "audio_key": "u2_vocab_v046"
     },
     {
       "id": "v047",
       "ar": "عُلْبَتان",
       "ar_clean": "علبتان",
-      "tr": "iki kutu",
+      "tr": "عُلْبَتان",
       "category": "quantity",
       "pos": "kap",
       "emoji": "📦",
@@ -1157,14 +1157,14 @@ window.IHO_UNIT2_DATA = {
         63
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عُلْبَتان",
       "audio_key": "u2_vocab_v047"
     },
     {
       "id": "v048",
       "ar": "عُلَب",
       "ar_clean": "علب",
-      "tr": "kutular",
+      "tr": "عُلَب",
       "category": "quantity",
       "pos": "kap",
       "emoji": "📦",
@@ -1179,14 +1179,14 @@ window.IHO_UNIT2_DATA = {
         84
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عُلَب",
       "audio_key": "u2_vocab_v048"
     },
     {
       "id": "v049",
       "ar": "ليرة",
       "ar_clean": "ليره",
-      "tr": "lira",
+      "tr": "ليرة",
       "category": "quantity",
       "pos": "para",
       "emoji": "₺",
@@ -1201,14 +1201,14 @@ window.IHO_UNIT2_DATA = {
         70
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ليرة",
       "audio_key": "u2_vocab_v049"
     },
     {
       "id": "v050",
       "ar": "ليرات",
       "ar_clean": "ليرات",
-      "tr": "liralar",
+      "tr": "ليرات",
       "category": "quantity",
       "pos": "para",
       "emoji": "₺",
@@ -1225,16 +1225,16 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ليرات",
       "audio_key": "u2_vocab_v050"
     },
     {
       "id": "v051",
       "ar": "واحِد",
       "ar_clean": "واحد",
-      "tr": "bir",
+      "tr": "واحِد",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "1",
       "translit": "wāḥid",
       "examples": [
@@ -1248,16 +1248,16 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "واحِد",
       "audio_key": "u2_vocab_v051"
     },
     {
       "id": "v052",
       "ar": "ثَلاثَة",
       "ar_clean": "ثلاثه",
-      "tr": "üç",
+      "tr": "ثَلاثَة",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "3",
       "translit": "thalātha",
       "examples": [
@@ -1272,16 +1272,16 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ثَلاثَة",
       "audio_key": "u2_vocab_v052"
     },
     {
       "id": "v053",
       "ar": "خَمْس",
       "ar_clean": "خمس",
-      "tr": "beş",
+      "tr": "خَمْس",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "5",
       "translit": "khams",
       "examples": [
@@ -1295,16 +1295,16 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "خَمْس",
       "audio_key": "u2_vocab_v053"
     },
     {
       "id": "v054",
       "ar": "سَبْع",
       "ar_clean": "سبع",
-      "tr": "yedi",
+      "tr": "سَبْع",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "7",
       "translit": "sabʿ",
       "examples": [
@@ -1317,16 +1317,16 @@ window.IHO_UNIT2_DATA = {
         84
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "سَبْع",
       "audio_key": "u2_vocab_v054"
     },
     {
       "id": "v055",
       "ar": "تِسْع",
       "ar_clean": "تسع",
-      "tr": "dokuz",
+      "tr": "تِسْع",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "9",
       "translit": "tisʿ",
       "examples": [
@@ -1339,16 +1339,16 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "تِسْع",
       "audio_key": "u2_vocab_v055"
     },
     {
       "id": "v056",
       "ar": "عَشْر",
       "ar_clean": "عشر",
-      "tr": "on",
+      "tr": "عَشْر",
       "category": "quantity",
-      "pos": "sayı",
+      "pos": "",
       "emoji": "10",
       "translit": "ʿashr",
       "examples": [
@@ -1362,14 +1362,14 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عَشْر",
       "audio_key": "u2_vocab_v056"
     },
     {
       "id": "v057",
       "ar": "أَذْهَبُ",
       "ar_clean": "اذهب",
-      "tr": "giderim",
+      "tr": "أَذْهَبُ",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "🚶",
@@ -1385,14 +1385,14 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَذْهَبُ",
       "audio_key": "u2_vocab_v057"
     },
     {
       "id": "v058",
       "ar": "أَشْتَري",
       "ar_clean": "اشتري",
-      "tr": "satın alırım",
+      "tr": "أَشْتَري",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "🛍️",
@@ -1408,14 +1408,14 @@ window.IHO_UNIT2_DATA = {
         80
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَشْتَري",
       "audio_key": "u2_vocab_v058"
     },
     {
       "id": "v059",
       "ar": "أُريدُ",
       "ar_clean": "اريد",
-      "tr": "istiyorum",
+      "tr": "أُريدُ",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "🙋",
@@ -1433,14 +1433,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أُريدُ",
       "audio_key": "u2_vocab_v059"
     },
     {
       "id": "v060",
       "ar": "أَطْلُبُ",
       "ar_clean": "اطلب",
-      "tr": "isterim / talep ederim",
+      "tr": "أَطْلُبُ",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "🧾",
@@ -1456,16 +1456,16 @@ window.IHO_UNIT2_DATA = {
         60
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَطْلُبُ",
       "audio_key": "u2_vocab_v060"
     },
     {
       "id": "v061",
       "ar": "بِحاجَةٍ إِلى",
       "ar_clean": "بحاجه الي",
-      "tr": "...e ihtiyacı var",
+      "tr": "بِحاجَةٍ إِلى",
       "category": "verb_phrase",
-      "pos": "kalıp",
+      "pos": "",
       "emoji": "🔎",
       "translit": "bi-ḥāja ilā",
       "examples": [
@@ -1480,14 +1480,14 @@ window.IHO_UNIT2_DATA = {
         60
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بِحاجَةٍ إِلى",
       "audio_key": "u2_vocab_v061"
     },
     {
       "id": "v062",
       "ar": "تُريدُ",
       "ar_clean": "تريد",
-      "tr": "istiyor",
+      "tr": "تُريدُ",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "❓",
@@ -1503,14 +1503,14 @@ window.IHO_UNIT2_DATA = {
         61
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "تُريدُ",
       "audio_key": "u2_vocab_v062"
     },
     {
       "id": "v063",
       "ar": "تُريدين",
       "ar_clean": "تريدين",
-      "tr": "istiyorsun (kadın)",
+      "tr": "تُريدين",
       "category": "verb_phrase",
       "pos": "fiil",
       "emoji": "❓",
@@ -1526,14 +1526,14 @@ window.IHO_UNIT2_DATA = {
         77
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "تُريدين",
       "audio_key": "u2_vocab_v063"
     },
     {
       "id": "v064",
       "ar": "عِنْدي",
       "ar_clean": "عندي",
-      "tr": "bende var / yanımda var",
+      "tr": "عِنْدي",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "✅",
@@ -1548,14 +1548,14 @@ window.IHO_UNIT2_DATA = {
         64
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "عِنْدي",
       "audio_key": "u2_vocab_v064"
     },
     {
       "id": "v065",
       "ar": "تَفَضَّل",
       "ar_clean": "تفضل",
-      "tr": "buyurun",
+      "tr": "تَفَضَّل",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "🤲",
@@ -1571,14 +1571,14 @@ window.IHO_UNIT2_DATA = {
         77
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "تَفَضَّل",
       "audio_key": "u2_vocab_v065"
     },
     {
       "id": "v066",
       "ar": "شُكْرًا",
       "ar_clean": "شكرا",
-      "tr": "teşekkürler",
+      "tr": "شُكْرًا",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "🙏",
@@ -1595,14 +1595,14 @@ window.IHO_UNIT2_DATA = {
         87
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "شُكْرًا",
       "audio_key": "u2_vocab_v066"
     },
     {
       "id": "v067",
       "ar": "مَعَ السَّلامَة",
       "ar_clean": "مع السلامه",
-      "tr": "güle güle",
+      "tr": "مَعَ السَّلامَة",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "👋",
@@ -1617,14 +1617,14 @@ window.IHO_UNIT2_DATA = {
         76
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مَعَ السَّلامَة",
       "audio_key": "u2_vocab_v067"
     },
     {
       "id": "v068",
       "ar": "هذا كافٍ",
       "ar_clean": "هذا كاف",
-      "tr": "bu yeterli",
+      "tr": "هذا كافٍ",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "👌",
@@ -1639,14 +1639,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "هذا كافٍ",
       "audio_key": "u2_vocab_v068"
     },
     {
       "id": "v069",
       "ar": "شيء آخَر",
       "ar_clean": "شيء اخر",
-      "tr": "başka bir şey",
+      "tr": "شيء آخَر",
       "category": "verb_phrase",
       "pos": "ifade",
       "emoji": "➕",
@@ -1663,14 +1663,14 @@ window.IHO_UNIT2_DATA = {
         77
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "شيء آخَر",
       "audio_key": "u2_vocab_v069"
     },
     {
       "id": "v070",
       "ar": "أَيْضًا",
       "ar_clean": "ايضا",
-      "tr": "ayrıca / de",
+      "tr": "أَيْضًا",
       "category": "verb_phrase",
       "pos": "zarf",
       "emoji": "➕",
@@ -1686,14 +1686,14 @@ window.IHO_UNIT2_DATA = {
         64
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَيْضًا",
       "audio_key": "u2_vocab_v070"
     },
     {
       "id": "v071",
       "ar": "اليَوْم",
       "ar_clean": "اليوم",
-      "tr": "bugün",
+      "tr": "اليَوْم",
       "category": "verb_phrase",
       "pos": "zarf",
       "emoji": "📅",
@@ -1709,14 +1709,14 @@ window.IHO_UNIT2_DATA = {
         82
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "اليَوْم",
       "audio_key": "u2_vocab_v071"
     },
     {
       "id": "v072",
       "ar": "الآن",
       "ar_clean": "الان",
-      "tr": "şimdi",
+      "tr": "الآن",
       "category": "verb_phrase",
       "pos": "zarf",
       "emoji": "⏱️",
@@ -1731,16 +1731,16 @@ window.IHO_UNIT2_DATA = {
         56
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "الآن",
       "audio_key": "u2_vocab_v072"
     },
     {
       "id": "v073",
       "ar": "طازَج",
       "ar_clean": "طازج",
-      "tr": "taze",
+      "tr": "طازَج",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🌿",
       "translit": "ṭāzaj",
       "examples": [
@@ -1755,16 +1755,16 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "طازَج",
       "audio_key": "u2_vocab_v073"
     },
     {
       "id": "v074",
       "ar": "رَخيص",
       "ar_clean": "رخيص",
-      "tr": "ucuz",
+      "tr": "رَخيص",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🏷️",
       "translit": "rakhīṣ",
       "examples": [
@@ -1778,16 +1778,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "رَخيص",
       "audio_key": "u2_vocab_v074"
     },
     {
       "id": "v075",
       "ar": "غالٍ",
       "ar_clean": "غال",
-      "tr": "pahalı",
+      "tr": "غالٍ",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "💰",
       "translit": "ghālin",
       "examples": [
@@ -1801,16 +1801,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "غالٍ",
       "audio_key": "u2_vocab_v075"
     },
     {
       "id": "v076",
       "ar": "أَرْخَصُ مِن",
       "ar_clean": "ارخص من",
-      "tr": "...den daha ucuz",
+      "tr": "أَرْخَصُ مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "⬇️",
       "translit": "arkhaṣu min",
       "examples": [
@@ -1825,16 +1825,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَرْخَصُ مِن",
       "audio_key": "u2_vocab_v076"
     },
     {
       "id": "v077",
       "ar": "أَغْلى مِن",
       "ar_clean": "اغلي من",
-      "tr": "...den daha pahalı",
+      "tr": "أَغْلى مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "⬆️",
       "translit": "aghlā min",
       "examples": [
@@ -1849,16 +1849,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَغْلى مِن",
       "audio_key": "u2_vocab_v077"
     },
     {
       "id": "v078",
       "ar": "كَبير",
       "ar_clean": "كبير",
-      "tr": "büyük",
+      "tr": "كَبير",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🔷",
       "translit": "kabīr",
       "examples": [
@@ -1872,16 +1872,16 @@ window.IHO_UNIT2_DATA = {
         72
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كَبير",
       "audio_key": "u2_vocab_v078"
     },
     {
       "id": "v079",
       "ar": "صَغير",
       "ar_clean": "صغير",
-      "tr": "küçük",
+      "tr": "صَغير",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🔹",
       "translit": "ṣaghīr",
       "examples": [
@@ -1895,16 +1895,16 @@ window.IHO_UNIT2_DATA = {
         72
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "صَغير",
       "audio_key": "u2_vocab_v079"
     },
     {
       "id": "v080",
       "ar": "أَكْبَرُ مِن",
       "ar_clean": "اكبر من",
-      "tr": "...den daha büyük",
+      "tr": "أَكْبَرُ مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "↗️",
       "translit": "akbaru min",
       "examples": [
@@ -1919,16 +1919,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَكْبَرُ مِن",
       "audio_key": "u2_vocab_v080"
     },
     {
       "id": "v081",
       "ar": "أَصْغَرُ مِن",
       "ar_clean": "اصغر من",
-      "tr": "...den daha küçük",
+      "tr": "أَصْغَرُ مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "↘️",
       "translit": "aṣgharu min",
       "examples": [
@@ -1943,16 +1943,16 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَصْغَرُ مِن",
       "audio_key": "u2_vocab_v081"
     },
     {
       "id": "v082",
       "ar": "خَفيف",
       "ar_clean": "خفيف",
-      "tr": "hafif",
+      "tr": "خَفيف",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🪶",
       "translit": "khafīf",
       "examples": [
@@ -1965,16 +1965,16 @@ window.IHO_UNIT2_DATA = {
         72
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "خَفيف",
       "audio_key": "u2_vocab_v082"
     },
     {
       "id": "v083",
       "ar": "ثَقيل",
       "ar_clean": "ثقيل",
-      "tr": "ağır",
+      "tr": "ثَقيل",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🏋️",
       "translit": "thaqīl",
       "examples": [
@@ -1987,16 +1987,16 @@ window.IHO_UNIT2_DATA = {
         72
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ثَقيل",
       "audio_key": "u2_vocab_v083"
     },
     {
       "id": "v084",
       "ar": "أَخَفُّ مِن",
       "ar_clean": "اخف من",
-      "tr": "...den daha hafif",
+      "tr": "أَخَفُّ مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "🪶",
       "translit": "akhaffu min",
       "examples": [
@@ -2010,16 +2010,16 @@ window.IHO_UNIT2_DATA = {
         89
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَخَفُّ مِن",
       "audio_key": "u2_vocab_v084"
     },
     {
       "id": "v085",
       "ar": "أَثْقَلُ مِن",
       "ar_clean": "اثقل من",
-      "tr": "...den daha ağır",
+      "tr": "أَثْقَلُ مِن",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "🏋️",
       "translit": "athqalu min",
       "examples": [
@@ -2033,16 +2033,16 @@ window.IHO_UNIT2_DATA = {
         89
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَثْقَلُ مِن",
       "audio_key": "u2_vocab_v085"
     },
     {
       "id": "v086",
       "ar": "أَخْضَر",
       "ar_clean": "اخضر",
-      "tr": "yeşil",
+      "tr": "أَخْضَر",
       "category": "adjective_comparison",
-      "pos": "sıfat",
+      "pos": "",
       "emoji": "🟢",
       "translit": "akhḍar",
       "examples": [
@@ -2055,16 +2055,16 @@ window.IHO_UNIT2_DATA = {
         91
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَخْضَر",
       "audio_key": "u2_vocab_v086"
     },
     {
       "id": "v087",
       "ar": "أَقَلّ",
       "ar_clean": "اقل",
-      "tr": "daha az",
+      "tr": "أَقَلّ",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "➖",
       "translit": "aqall",
       "examples": [
@@ -2077,16 +2077,16 @@ window.IHO_UNIT2_DATA = {
         73
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَقَلّ",
       "audio_key": "u2_vocab_v087"
     },
     {
       "id": "v088",
       "ar": "أَقْوى",
       "ar_clean": "اقوي",
-      "tr": "daha güçlü",
+      "tr": "أَقْوى",
       "category": "adjective_comparison",
-      "pos": "karşılaştırma",
+      "pos": "",
       "emoji": "💪",
       "translit": "aqwā",
       "examples": [
@@ -2099,14 +2099,14 @@ window.IHO_UNIT2_DATA = {
         75
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَقْوى",
       "audio_key": "u2_vocab_v088"
     },
     {
       "id": "v089",
       "ar": "بِكَم؟",
       "ar_clean": "بكم؟",
-      "tr": "kaç lira?",
+      "tr": "بِكَم؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2124,14 +2124,14 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بِكَم؟",
       "audio_key": "u2_vocab_v089"
     },
     {
       "id": "v090",
       "ar": "كَم؟",
       "ar_clean": "كم؟",
-      "tr": "ne kadar? / kaç?",
+      "tr": "كَم؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2147,14 +2147,14 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "كَم؟",
       "audio_key": "u2_vocab_v090"
     },
     {
       "id": "v091",
       "ar": "ماذا؟",
       "ar_clean": "ماذا؟",
-      "tr": "ne?",
+      "tr": "ماذا؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2170,14 +2170,14 @@ window.IHO_UNIT2_DATA = {
         64
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "ماذا؟",
       "audio_key": "u2_vocab_v091"
     },
     {
       "id": "v092",
       "ar": "هَل؟",
       "ar_clean": "هل؟",
-      "tr": "mi?",
+      "tr": "هَل؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2193,14 +2193,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "هَل؟",
       "audio_key": "u2_vocab_v092"
     },
     {
       "id": "v093",
       "ar": "أَيْنَ؟",
       "ar_clean": "اين؟",
-      "tr": "nerede? / nereye?",
+      "tr": "أَيْنَ؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2215,14 +2215,14 @@ window.IHO_UNIT2_DATA = {
         82
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَيْنَ؟",
       "audio_key": "u2_vocab_v093"
     },
     {
       "id": "v094",
       "ar": "أَيّ؟",
       "ar_clean": "اي؟",
-      "tr": "hangi?",
+      "tr": "أَيّ؟",
       "category": "question_word",
       "pos": "soru",
       "emoji": "❓",
@@ -2239,14 +2239,14 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "أَيّ؟",
       "audio_key": "u2_vocab_v094"
     },
     {
       "id": "v095",
       "ar": "مِن",
       "ar_clean": "من",
-      "tr": "-den / -dan",
+      "tr": "مِن",
       "category": "question_word",
       "pos": "edat",
       "emoji": "↩️",
@@ -2263,14 +2263,14 @@ window.IHO_UNIT2_DATA = {
         74
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "مِن",
       "audio_key": "u2_vocab_v095"
     },
     {
       "id": "v096",
       "ar": "إِلى",
       "ar_clean": "الي",
-      "tr": "-e / -a",
+      "tr": "إِلى",
       "category": "question_word",
       "pos": "edat",
       "emoji": "➡️",
@@ -2287,14 +2287,14 @@ window.IHO_UNIT2_DATA = {
         60
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "إِلى",
       "audio_key": "u2_vocab_v096"
     },
     {
       "id": "v097",
       "ar": "بِـ",
       "ar_clean": "ب",
-      "tr": "ile / fiyat bildirir",
+      "tr": "بِـ",
       "category": "question_word",
       "pos": "edat",
       "emoji": "₺",
@@ -2311,14 +2311,14 @@ window.IHO_UNIT2_DATA = {
         71
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "بِـ",
       "audio_key": "u2_vocab_v097"
     },
     {
       "id": "v098",
       "ar": "في",
       "ar_clean": "في",
-      "tr": "-de / içinde",
+      "tr": "في",
       "category": "question_word",
       "pos": "edat",
       "emoji": "📍",
@@ -2333,25 +2333,25 @@ window.IHO_UNIT2_DATA = {
         67
       ],
       "forms": {},
-      "note_tr": "",
+      "note_tr": "في",
       "audio_key": "u2_vocab_v098"
     }
   ],
   "patterns": [
     {
       "id": "p001",
-      "title_tr": "İhtiyaç belirtme",
+      "title_tr": "التعبير عن الحاجة",
       "title_ar": "التعبير عن الحاجة",
       "pattern_ar": "{pronoun} بِحاجَةٍ إِلى {object}",
-      "pattern_tr": "{kişi} {nesneye} ihtiyaç duyuyor.",
+      "pattern_tr": "التعبير عن الحاجة",
       "examples": [
         {
           "ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
-          "tr": "Süte ihtiyacım var."
+          "tr": "أَنا بِحاجَةٍ إِلى حَليبٍ."
         },
         {
           "ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
-          "tr": "Onun ekmeğe ihtiyacı var."
+          "tr": "هُوَ بِحاجَةٍ إِلى الخُبْزِ."
         }
       ],
       "slots": {
@@ -2372,7 +2372,7 @@ window.IHO_UNIT2_DATA = {
           "فاصوليا"
         ]
       },
-      "note_tr": "إِلى'dan sonra ismin yönelme/ilişki anlamı kuvvetlenir.",
+      "note_tr": "التعبير عن الحاجة",
       "source_pages": [
         52,
         56,
@@ -2386,18 +2386,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p002",
-      "title_tr": "İstemek",
+      "title_tr": "طلب الشيء",
       "title_ar": "طلب الشيء",
       "pattern_ar": "أُريدُ {object}",
-      "pattern_tr": "{nesneyi} istiyorum.",
+      "pattern_tr": "طلب الشيء",
       "examples": [
         {
           "ar": "أُريدُ خُبْزًا طازَجًا.",
-          "tr": "Taze ekmek istiyorum."
+          "tr": "أُريدُ خُبْزًا طازَجًا."
         },
         {
           "ar": "أُريدُ كيلوغرامًا واحِدًا.",
-          "tr": "Bir kilogram istiyorum."
+          "tr": "أُريدُ كيلوغرامًا واحِدًا."
         }
       ],
       "slots": {
@@ -2416,7 +2416,7 @@ window.IHO_UNIT2_DATA = {
           "ثَلاثَة كيلوغرامات"
         ]
       },
-      "note_tr": "أُريدُ tek başına doğrudan istek bildirir.",
+      "note_tr": "طلب الشيء",
       "source_pages": [
         52,
         56,
@@ -2431,18 +2431,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p003",
-      "title_tr": "Satın almak istemek",
+      "title_tr": "إرادة الشراء",
       "title_ar": "إرادة الشراء",
       "pattern_ar": "أُريدُ أَنْ أَشْتَري {object}",
-      "pattern_tr": "{nesne} satın almak istiyorum.",
+      "pattern_tr": "إرادة الشراء",
       "examples": [
         {
           "ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
-          "tr": "Biraz sebze satın almak istiyorum."
+          "tr": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ."
         },
         {
           "ar": "أُريدُ أَنْ أَشْتَري مَوْزًا.",
-          "tr": "Muz satın almak istiyorum."
+          "tr": "أُريدُ أَنْ أَشْتَري مَوْزًا."
         }
       ],
       "slots": {
@@ -2453,7 +2453,7 @@ window.IHO_UNIT2_DATA = {
           "حَليبًا"
         ]
       },
-      "note_tr": "أَنْ + fiil mastar anlamı verir.",
+      "note_tr": "إرادة الشراء",
       "source_pages": [
         67,
         76
@@ -2465,18 +2465,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p004",
-      "title_tr": "Birinden isteme",
+      "title_tr": "الطلب من شخص",
       "title_ar": "الطلب من شخص",
       "pattern_ar": "أَطْلُبُ مِنْكَ {quantity} مِنْ {object}",
-      "pattern_tr": "Senden {miktar} {nesne} istiyorum.",
+      "pattern_tr": "الطلب من شخص",
       "examples": [
         {
           "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
-          "tr": "Senden bir kilo şeker istiyorum."
+          "tr": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ."
         },
         {
           "ar": "أَطْلُبُ مِنْكَ عُلْبَةَ مِلْحٍ.",
-          "tr": "Senden bir kutu tuz istiyorum."
+          "tr": "أَطْلُبُ مِنْكَ عُلْبَةَ مِلْحٍ."
         }
       ],
       "slots": {
@@ -2497,7 +2497,7 @@ window.IHO_UNIT2_DATA = {
           "فاصوليا"
         ]
       },
-      "note_tr": "مِنْكَ hitap edilen kişiden isteme anlamı verir.",
+      "note_tr": "الطلب من شخص",
       "source_pages": [
         56,
         60
@@ -2509,18 +2509,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p005",
-      "title_tr": "Fiyat sorma",
+      "title_tr": "السؤال عن السعر",
       "title_ar": "السؤال عن السعر",
       "pattern_ar": "بِكَم {item}؟",
-      "pattern_tr": "{ürün} kaç lira?",
+      "pattern_tr": "السؤال عن السعر",
       "examples": [
         {
           "ar": "بِكَم البَصَلُ؟",
-          "tr": "Soğan kaç lira?"
+          "tr": "بِكَم البَصَلُ؟"
         },
         {
           "ar": "بِكَم الفاصوليا؟",
-          "tr": "Fasulye kaç lira?"
+          "tr": "بِكَم الفاصوليا؟"
         }
       ],
       "slots": {
@@ -2531,7 +2531,7 @@ window.IHO_UNIT2_DATA = {
           "التُّفّاحُ"
         ]
       },
-      "note_tr": "بِكَم fiyat sormak için kullanılır.",
+      "note_tr": "السؤال عن السعر",
       "source_pages": [
         52,
         67,
@@ -2546,18 +2546,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p006",
-      "title_tr": "Fiyat söyleme",
+      "title_tr": "الإخبار عن السعر",
       "title_ar": "الإخبار عن السعر",
       "pattern_ar": "{item} بِـ{number} ليرات",
-      "pattern_tr": "{ürün} {sayı} lira.",
+      "pattern_tr": "الإخبار عن السعر",
       "examples": [
         {
           "ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
-          "tr": "Soğan dört lira."
+          "tr": "البَصَلُ بِأَرْبَعِ ليراتٍ."
         },
         {
           "ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
-          "tr": "Fasulye dokuz lira."
+          "tr": "الفاصوليا بِتِسْعِ ليراتٍ."
         }
       ],
       "slots": {
@@ -2575,7 +2575,7 @@ window.IHO_UNIT2_DATA = {
           "عَشْر"
         ]
       },
-      "note_tr": "B fiyat bildirirken بِـ kullanılır.",
+      "note_tr": "الإخبار عن السعر",
       "source_pages": [
         67,
         70,
@@ -2588,18 +2588,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p007",
-      "title_tr": "Miktar sorma",
+      "title_tr": "السؤال عن الكمية",
       "title_ar": "السؤال عن الكمية",
       "pattern_ar": "كَم كيلوغرامًا تُريدُ مِنْ {item}؟",
-      "pattern_tr": "{üründen} kaç kilogram istiyorsun?",
+      "pattern_tr": "السؤال عن الكمية",
       "examples": [
         {
           "ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
-          "tr": "Elmadan kaç kilogram istiyorsun?"
+          "tr": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟"
         },
         {
           "ar": "كَم كيلوغرامًا تُريدُ مِنَ البَطاطا؟",
-          "tr": "Patatesten kaç kilogram istiyorsun?"
+          "tr": "كَم كيلوغرامًا تُريدُ مِنَ البَطاطا؟"
         }
       ],
       "slots": {
@@ -2610,7 +2610,7 @@ window.IHO_UNIT2_DATA = {
           "المَوْزِ"
         ]
       },
-      "note_tr": "كَم miktar/sayı sorar.",
+      "note_tr": "السؤال عن الكمية",
       "source_pages": [
         70,
         71
@@ -2623,18 +2623,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p008",
-      "title_tr": "Miktar cevaplama",
+      "title_tr": "الإخبار عن الكمية",
       "title_ar": "الإخبار عن الكمية",
       "pattern_ar": "أُريدُ {number} كيلوغراماتٍ مِنْ {item}",
-      "pattern_tr": "{üründen} {sayı} kilogram istiyorum.",
+      "pattern_tr": "الإخبار عن الكمية",
       "examples": [
         {
           "ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
-          "tr": "Kayısıdan üç kilogram istiyorum."
+          "tr": "أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ."
         },
         {
           "ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
-          "tr": "Her çeşitten bir kilogram istiyorum."
+          "tr": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ."
         }
       ],
       "slots": {
@@ -2648,7 +2648,7 @@ window.IHO_UNIT2_DATA = {
           "البَطاطا"
         ]
       },
-      "note_tr": "Sayı-miktar ilişkisinde kalıp hazır olarak verilir.",
+      "note_tr": "الإخبار عن الكمية",
       "source_pages": [
         64,
         70,
@@ -2661,22 +2661,22 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p009",
-      "title_tr": "Başka bir şey sorma",
+      "title_tr": "السؤال عن شيء آخر",
       "title_ar": "السؤال عن شيء آخر",
       "pattern_ar": "هَل تُريدُ شيئًا آخَر؟",
-      "pattern_tr": "Başka bir şey ister misin?",
+      "pattern_tr": "السؤال عن شيء آخر",
       "examples": [
         {
           "ar": "هَل تُريدينَ شيئًا آخَر؟",
-          "tr": "Başka bir şey ister misin?"
+          "tr": "هَل تُريدينَ شيئًا آخَر؟"
         },
         {
           "ar": "هَل تُريدُ شيئًا آخَر؟",
-          "tr": "Başka bir şey ister misin?"
+          "tr": "هَل تُريدُ شيئًا آخَر؟"
         }
       ],
       "slots": {},
-      "note_tr": "تُريدينَ kadın muhatap için kullanılır.",
+      "note_tr": "السؤال عن شيء آخر",
       "source_pages": [
         56,
         76,
@@ -2689,18 +2689,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p010",
-      "title_tr": "Olumlu/olumsuz cevap",
+      "title_tr": "الجواب بنعم أو لا",
       "title_ar": "الجواب بنعم أو لا",
       "pattern_ar": "نَعَم، أُريدُ {object}. / لا، شُكْرًا.",
-      "pattern_tr": "Evet, {nesne} istiyorum. / Hayır, teşekkürler.",
+      "pattern_tr": "الجواب بنعم أو لا",
       "examples": [
         {
           "ar": "نَعَم، أُريدُ عُلْبَةً مِنَ الحَليبِ.",
-          "tr": "Evet, bir kutu süt istiyorum."
+          "tr": "نَعَم، أُريدُ عُلْبَةً مِنَ الحَليبِ."
         },
         {
           "ar": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
-          "tr": "Hayır, çok teşekkürler. Bu yeterli."
+          "tr": "لا، شُكْرًا جَزيلًا. هذا كافٍ."
         }
       ],
       "slots": {
@@ -2714,7 +2714,7 @@ window.IHO_UNIT2_DATA = {
           "فاصوليا"
         ]
       },
-      "note_tr": "Diyalog kapatma ve kibar cevap için kullanılır.",
+      "note_tr": "الجواب بنعم أو لا",
       "source_pages": [
         67,
         76,
@@ -2727,18 +2727,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p011",
-      "title_tr": "Satıcı karşılama",
+      "title_tr": "تحية البائع",
       "title_ar": "تحية البائع",
       "pattern_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
-      "pattern_tr": "Hoş geldiniz, nasıl yardımcı olabilirim?",
+      "pattern_tr": "تحية البائع",
       "examples": [
         {
           "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ يا سَيِّدي؟",
-          "tr": "Hoş geldiniz, nasıl yardımcı olabilirim efendim?"
+          "tr": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ يا سَيِّدي؟"
         }
       ],
       "slots": {},
-      "note_tr": "Bakkal/pazar rol oyunlarının başlangıç kalıbıdır.",
+      "note_tr": "تحية البائع",
       "source_pages": [
         64,
         67,
@@ -2752,18 +2752,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p012",
-      "title_tr": "Satıcının ürün sayması",
+      "title_tr": "ذكر المنتجات",
       "title_ar": "ذكر المنتجات",
       "pattern_ar": "عِنْدي {item1}، {item2}، و{item3}",
-      "pattern_tr": "Bende {ürün1}, {ürün2} ve {ürün3} var.",
+      "pattern_tr": "ذكر المنتجات",
       "examples": [
         {
           "ar": "عِنْدي طَماطِمُ، خِيارٌ، وجَزَرٌ.",
-          "tr": "Bende domates, salatalık ve havuç var."
+          "tr": "عِنْدي طَماطِمُ، خِيارٌ، وجَزَرٌ."
         },
         {
           "ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، ومَوْزٌ.",
-          "tr": "Bende elma, portakal ve muz var."
+          "tr": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، ومَوْزٌ."
         }
       ],
       "slots": {
@@ -2780,7 +2780,7 @@ window.IHO_UNIT2_DATA = {
           "مَوْزٌ"
         ]
       },
-      "note_tr": "و son unsurdan önce bağlaçtır.",
+      "note_tr": "ذكر المنتجات",
       "source_pages": [
         64
       ],
@@ -2792,18 +2792,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p013",
-      "title_tr": "Ucuz karşılaştırması",
+      "title_tr": "المقارنة بالرخص",
       "title_ar": "المقارنة بالرخص",
       "pattern_ar": "{item1} أَرْخَصُ مِنْ {item2}",
-      "pattern_tr": "{ürün1}, {ürün2}den daha ucuz.",
+      "pattern_tr": "المقارنة بالرخص",
       "examples": [
         {
           "ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
-          "tr": "Üzüm elmadan daha ucuz."
+          "tr": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ."
         },
         {
           "ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
-          "tr": "Soğan kayısıdan daha ucuz."
+          "tr": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ."
         }
       ],
       "slots": {
@@ -2818,7 +2818,7 @@ window.IHO_UNIT2_DATA = {
           "المَوْزِ"
         ]
       },
-      "note_tr": "Karşılaştırmada مِن kullanılır.",
+      "note_tr": "المقارنة بالرخص",
       "source_pages": [
         52,
         67,
@@ -2833,18 +2833,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p014",
-      "title_tr": "Pahalı karşılaştırması",
+      "title_tr": "المقارنة بالغلاء",
       "title_ar": "المقارنة بالغلاء",
       "pattern_ar": "{item1} أَغْلى مِنْ {item2}",
-      "pattern_tr": "{ürün1}, {ürün2}den daha pahalı.",
+      "pattern_tr": "المقارنة بالغلاء",
       "examples": [
         {
           "ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
-          "tr": "Fasulye patatesten daha pahalı."
+          "tr": "الفاصوليا أَغْلى مِنَ البَطاطا."
         },
         {
           "ar": "المَوْزُ أَغْلى مِنَ التُّفّاحِ.",
-          "tr": "Muz elmadan daha pahalı."
+          "tr": "المَوْزُ أَغْلى مِنَ التُّفّاحِ."
         }
       ],
       "slots": {
@@ -2859,7 +2859,7 @@ window.IHO_UNIT2_DATA = {
           "البَصَلِ"
         ]
       },
-      "note_tr": "أغلى genellikle fiyat karşılaştırır.",
+      "note_tr": "المقارنة بالغلاء",
       "source_pages": [
         52,
         67,
@@ -2874,18 +2874,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p015",
-      "title_tr": "Boyut karşılaştırması",
+      "title_tr": "المقارنة بالحجم",
       "title_ar": "المقارنة بالحجم",
       "pattern_ar": "{item1} أَكْبَرُ/أَصْغَرُ مِنْ {item2}",
-      "pattern_tr": "{ürün1}, {ürün2}den daha büyük/küçük.",
+      "pattern_tr": "المقارنة بالحجم",
       "examples": [
         {
           "ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
-          "tr": "Portakal kirazdan daha büyük."
+          "tr": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ."
         },
         {
           "ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
-          "tr": "Kiraz portakaldan daha küçük."
+          "tr": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ."
         }
       ],
       "slots": {
@@ -2898,7 +2898,7 @@ window.IHO_UNIT2_DATA = {
           "البُرْتُقالَةِ"
         ]
       },
-      "note_tr": "Büyük/küçük karşılaştırmaları nesne özellikleri için kullanılır.",
+      "note_tr": "المقارنة بالحجم",
       "source_pages": [
         52,
         72,
@@ -2912,18 +2912,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p016",
-      "title_tr": "Ağırlık karşılaştırması",
+      "title_tr": "المقارنة بالوزن",
       "title_ar": "المقارنة بالوزن",
       "pattern_ar": "{item1} أَخَفُّ/أَثْقَلُ مِنْ {item2}",
-      "pattern_tr": "{ürün1}, {ürün2}den daha hafif/ağır.",
+      "pattern_tr": "المقارنة بالوزن",
       "examples": [
         {
           "ar": "الكَرَزُ أَخَفُّ مِنَ البُرْتُقالِ.",
-          "tr": "Kiraz portakaldan daha hafif."
+          "tr": "الكَرَزُ أَخَفُّ مِنَ البُرْتُقالِ."
         },
         {
           "ar": "البُرْتُقالُ أَثْقَلُ مِنَ الكَرَزِ.",
-          "tr": "Portakal kirazdan daha ağır."
+          "tr": "البُرْتُقالُ أَثْقَلُ مِنَ الكَرَزِ."
         }
       ],
       "slots": {
@@ -2936,7 +2936,7 @@ window.IHO_UNIT2_DATA = {
           "الكَرَزِ"
         ]
       },
-      "note_tr": "أخفّ ve أثقل ağırlık karşılaştırır.",
+      "note_tr": "المقارنة بالوزن",
       "source_pages": [
         72,
         89
@@ -2949,22 +2949,22 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p017",
-      "title_tr": "Nereden satın aldın?",
+      "title_tr": "السؤال عن مكان الشراء",
       "title_ar": "السؤال عن مكان الشراء",
       "pattern_ar": "مِنْ أَيْنَ اشْتَرَيْتَ؟",
-      "pattern_tr": "Nereden satın aldın?",
+      "pattern_tr": "السؤال عن مكان الشراء",
       "examples": [
         {
           "ar": "اشْتَرَيْتُ مِنَ السّوقِ.",
-          "tr": "Pazardan satın aldım."
+          "tr": "اشْتَرَيْتُ مِنَ السّوقِ."
         },
         {
           "ar": "اشْتَرَيْتُ مِنَ البَقّالَةِ.",
-          "tr": "Bakkaldan satın aldım."
+          "tr": "اشْتَرَيْتُ مِنَ البَقّالَةِ."
         }
       ],
       "slots": {},
-      "note_tr": "Konuşma etkinliğinde alışveriş yerini sormak için kullanılır.",
+      "note_tr": "السؤال عن مكان الشراء",
       "source_pages": [
         78
       ],
@@ -2975,22 +2975,22 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p018",
-      "title_tr": "Ne satın aldın?",
+      "title_tr": "السؤال عما اشتريته",
       "title_ar": "السؤال عما اشتريته",
       "pattern_ar": "ماذا اشْتَرَيْتَ؟",
-      "pattern_tr": "Ne satın aldın?",
+      "pattern_tr": "السؤال عما اشتريته",
       "examples": [
         {
           "ar": "اشْتَرَيْتُ البَطاطا والطَّماطِمَ والبَصَلَ.",
-          "tr": "Patates, domates ve soğan satın aldım."
+          "tr": "اشْتَرَيْتُ البَطاطا والطَّماطِمَ والبَصَلَ."
         },
         {
           "ar": "اشْتَرَيْتُ السُّكَّرَ والشّايَ والمِلْحَ.",
-          "tr": "Şeker, çay ve tuz satın aldım."
+          "tr": "اشْتَرَيْتُ السُّكَّرَ والشّايَ والمِلْحَ."
         }
       ],
       "slots": {},
-      "note_tr": "Cevapta satın alınan ürünler sıralanır.",
+      "note_tr": "السؤال عما اشتريته",
       "source_pages": [
         78
       ],
@@ -3001,18 +3001,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p019",
-      "title_tr": "Alışverişe nereye gidiyorsun?",
+      "title_tr": "السؤال عن وجهة التسوق",
       "title_ar": "السؤال عن وجهة التسوق",
       "pattern_ar": "إِلى أَيْنَ تَذْهَبُ لِلتَّسَوُّقِ؟",
-      "pattern_tr": "Alışveriş için nereye gidiyorsun?",
+      "pattern_tr": "السؤال عن وجهة التسوق",
       "examples": [
         {
           "ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
-          "tr": "Alışveriş için pazara gidiyorum."
+          "tr": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ."
         }
       ],
       "slots": {},
-      "note_tr": "İfade yazma bölümünde kullanılır.",
+      "note_tr": "السؤال عن وجهة التسوق",
       "source_pages": [
         80,
         82
@@ -3025,18 +3025,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p020",
-      "title_tr": "Alışveriş listesi yazma",
+      "title_tr": "إعداد قائمة التسوق",
       "title_ar": "إعداد قائمة التسوق",
       "pattern_ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ",
-      "pattern_tr": "Alışveriş listesi hazırlarım.",
+      "pattern_tr": "إعداد قائمة التسوق",
       "examples": [
         {
           "ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ وأَكْتُبُ الحاجاتِ اليَوْمِيَّةَ.",
-          "tr": "Alışveriş listesi hazırlar ve günlük ihtiyaçları yazarım."
+          "tr": "أُعِدُّ قائِمَةَ التَّسَوُّقِ وأَكْتُبُ الحاجاتِ اليَوْمِيَّةَ."
         }
       ],
       "slots": {},
-      "note_tr": "Yazma kazanımı için temel üretim kalıbıdır.",
+      "note_tr": "إعداد قائمة التسوق",
       "source_pages": [
         83,
         93
@@ -3048,18 +3048,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p021",
-      "title_tr": "Kibarlık kapanışı",
+      "title_tr": "إنهاء الحوار",
       "title_ar": "إنهاء الحوار",
       "pattern_ar": "شُكْرًا، مَعَ السَّلامَةِ",
-      "pattern_tr": "Teşekkürler, güle güle.",
+      "pattern_tr": "إنهاء الحوار",
       "examples": [
         {
           "ar": "شُكْرًا، مَعَ السَّلامَةِ.",
-          "tr": "Teşekkürler, güle güle."
+          "tr": "شُكْرًا، مَعَ السَّلامَةِ."
         }
       ],
       "slots": {},
-      "note_tr": "Satıcı-müşteri rol oyunlarında kapanış.",
+      "note_tr": "إنهاء الحوار",
       "source_pages": [
         76
       ],
@@ -3070,18 +3070,18 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "p022",
-      "title_tr": "Hadis-kültür cümlesi",
+      "title_tr": "جملة ثقافية",
       "title_ar": "جملة ثقافية",
       "pattern_ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا",
-      "pattern_tr": "Bizi aldatan bizden değildir.",
+      "pattern_tr": "جملة ثقافية",
       "examples": [
         {
           "ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا.",
-          "tr": "Bizi aldatan bizden değildir."
+          "tr": "مَنْ غَشَّنا فَلَيْسَ مِنّا."
         }
       ],
       "slots": {},
-      "note_tr": "Ünitedeki alışveriş ahlakı/kültür bağlantısıdır.",
+      "note_tr": "جملة ثقافية",
       "source_pages": [
         92
       ],
@@ -3096,7 +3096,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s001",
       "ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
       "ar_clean": "انا بحاجه الي بعض الاشياء من البقاله.",
-      "tr": "Bakkaldan bazı şeylere ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3122,7 +3122,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s002",
       "ar": "ماذا تُريدينَ يا أُمّي؟",
       "ar_clean": "ماذا تريدين يا امي؟",
-      "tr": "Anneciğim, ne istiyorsun?",
+      "tr": "ماذا تُريدينَ يا أُمّي؟",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3144,7 +3144,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s003",
       "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
       "ar_clean": "اطلب منك كيلو سكر.",
-      "tr": "Senden bir kilo şeker istiyorum.",
+      "tr": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
       "pattern_id": "p004",
       "difficulty": "A1",
       "source_pages": [
@@ -3166,7 +3166,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s004",
       "ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
       "ar_clean": "اريد علبه ملح.",
-      "tr": "Bir kutu tuz istiyorum.",
+      "tr": "أُريدُ عُلْبَةَ مِلْحٍ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3187,7 +3187,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s005",
       "ar": "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ.",
       "ar_clean": "اريد علبتين من الشاي.",
-      "tr": "Çaydan iki kutu istiyorum.",
+      "tr": "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3209,7 +3209,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s006",
       "ar": "أُريدُ خُبْزًا طازَجًا أَيْضًا.",
       "ar_clean": "اريد خبزا طازجا ايضا.",
-      "tr": "Ayrıca taze ekmek istiyorum.",
+      "tr": "أُريدُ خُبْزًا طازَجًا أَيْضًا.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3231,7 +3231,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s007",
       "ar": "هَل تُريدينَ شيئًا آخَر؟",
       "ar_clean": "هل تريدين شيئا اخر؟",
-      "tr": "Başka bir şey ister misin?",
+      "tr": "هَل تُريدينَ شيئًا آخَر؟",
       "pattern_id": "p009",
       "difficulty": "A1",
       "source_pages": [
@@ -3253,7 +3253,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s008",
       "ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
       "ar_clean": "حسنا، ساذهب الان.",
-      "tr": "Tamam, şimdi gideceğim.",
+      "tr": "حَسَنًا، سَأَذْهَبُ الآنَ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3275,7 +3275,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s009",
       "ar": "أَنا أُريدُ السُّكَّرَ.",
       "ar_clean": "انا اريد السكر.",
-      "tr": "Ben şeker istiyorum.",
+      "tr": "أَنا أُريدُ السُّكَّرَ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3296,7 +3296,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s010",
       "ar": "أَنا بِحاجَةٍ إِلى الشّايِ.",
       "ar_clean": "انا بحاجه الي الشاي.",
-      "tr": "Çaya ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى الشّايِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3318,7 +3318,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s011",
       "ar": "أَنْتَ تَطْلُبُ المِلْحَ.",
       "ar_clean": "انت تطلب الملح.",
-      "tr": "Sen tuz istiyorsun.",
+      "tr": "أَنْتَ تَطْلُبُ المِلْحَ.",
       "pattern_id": "p004",
       "difficulty": "A1",
       "source_pages": [
@@ -3339,7 +3339,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s012",
       "ar": "أَنْتِ بِحاجَةٍ إِلى الحَليبِ.",
       "ar_clean": "انت بحاجه الي الحليب.",
-      "tr": "Senin süte ihtiyacın var.",
+      "tr": "أَنْتِ بِحاجَةٍ إِلى الحَليبِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3361,7 +3361,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s013",
       "ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
       "ar_clean": "هو بحاجه الي الخبز.",
-      "tr": "Onun ekmeğe ihtiyacı var.",
+      "tr": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3383,7 +3383,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s014",
       "ar": "هِيَ تُريدُ العَسَلَ.",
       "ar_clean": "هي تريد العسل.",
-      "tr": "O bal istiyor.",
+      "tr": "هِيَ تُريدُ العَسَلَ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3404,7 +3404,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s015",
       "ar": "أَنا أُريدُ عُلْبَةَ مِلْحٍ.",
       "ar_clean": "انا اريد علبه ملح.",
-      "tr": "Ben bir kutu tuz istiyorum.",
+      "tr": "أَنا أُريدُ عُلْبَةَ مِلْحٍ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3426,7 +3426,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s016",
       "ar": "أَنا بِحاجَةٍ إِلى كيلوغرامٍ مِنَ العَسَلِ.",
       "ar_clean": "انا بحاجه الي كيلوغرام من العسل.",
-      "tr": "Bir kilogram bala ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى كيلوغرامٍ مِنَ العَسَلِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3450,7 +3450,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s017",
       "ar": "أَنْتِ تُريدينَ عُلْبَتَيْنِ مِنَ المَكَرونَةِ.",
       "ar_clean": "انت تريدين علبتين من المكرونه.",
-      "tr": "Sen iki kutu makarna istiyorsun.",
+      "tr": "أَنْتِ تُريدينَ عُلْبَتَيْنِ مِنَ المَكَرونَةِ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3473,7 +3473,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s018",
       "ar": "أَنْتَ بِحاجَةٍ إِلى عُلْبَةٍ واحِدَةٍ مِنَ البَيْضِ.",
       "ar_clean": "انت بحاجه الي علبه واحده من البيض.",
-      "tr": "Senin bir kutu yumurtaya ihtiyacın var.",
+      "tr": "أَنْتَ بِحاجَةٍ إِلى عُلْبَةٍ واحِدَةٍ مِنَ البَيْضِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3498,7 +3498,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s019",
       "ar": "هُوَ بِحاجَةٍ إِلى كيلوغرامَيْنِ مِنَ السُّكَّرِ.",
       "ar_clean": "هو بحاجه الي كيلوغرامين من السكر.",
-      "tr": "Onun iki kilogram şekere ihtiyacı var.",
+      "tr": "هُوَ بِحاجَةٍ إِلى كيلوغرامَيْنِ مِنَ السُّكَّرِ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3522,7 +3522,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s020",
       "ar": "هِيَ تُريدُ ثَلاثَةً مِنَ الخُبْزِ.",
       "ar_clean": "هي تريد ثلاثه من الخبز.",
-      "tr": "O üç ekmek istiyor.",
+      "tr": "هِيَ تُريدُ ثَلاثَةً مِنَ الخُبْزِ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3545,7 +3545,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s021",
       "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
       "ar_clean": "اهلا وسهلا، اي خدمه؟",
-      "tr": "Hoş geldiniz, nasıl yardımcı olabilirim?",
+      "tr": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
       "pattern_id": "p011",
       "difficulty": "A1",
       "source_pages": [
@@ -3570,7 +3570,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s022",
       "ar": "أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
       "ar_clean": "انا بحاجه الي خضراوات طازجه.",
-      "tr": "Taze sebzelere ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -3593,7 +3593,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s023",
       "ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
       "ar_clean": "عندي طماطم، خيار، جزر، باذنجان، بطاطا، بصل، فلفل، وفاصوليا.",
-      "tr": "Bende domates, salatalık, havuç, patlıcan, patates, soğan, biber ve fasulye var.",
+      "tr": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
       "pattern_id": "p012",
       "difficulty": "A1",
       "source_pages": [
@@ -3627,7 +3627,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s024",
       "ar": "هَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
       "ar_clean": "هل عندك فواكه ايضا؟",
-      "tr": "Sende meyveler de var mı?",
+      "tr": "هَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3649,7 +3649,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s025",
       "ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
       "ar_clean": "عندي تفاح، برتقال، موز، عنب، كرز، ومشمش.",
-      "tr": "Bende elma, portakal, muz, üzüm, kiraz ve kayısı var.",
+      "tr": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
       "pattern_id": "p012",
       "difficulty": "A1",
       "source_pages": [
@@ -3679,7 +3679,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s026",
       "ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
       "ar_clean": "اريد كيلوغراما واحدا من كل نوع.",
-      "tr": "Her çeşitten bir kilogram istiyorum.",
+      "tr": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
       "pattern_id": "p008",
       "difficulty": "A1",
       "source_pages": [
@@ -3703,7 +3703,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s027",
       "ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
       "ar_clean": "اريد ان اشتري بعض الخضر.",
-      "tr": "Biraz sebze satın almak istiyorum.",
+      "tr": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
       "pattern_id": "p003",
       "difficulty": "A1",
       "source_pages": [
@@ -3726,7 +3726,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s028",
       "ar": "بِكَم الفاصوليا؟",
       "ar_clean": "بكم الفاصوليا؟",
-      "tr": "Fasulye kaç lira?",
+      "tr": "بِكَم الفاصوليا؟",
       "pattern_id": "p005",
       "difficulty": "A1",
       "source_pages": [
@@ -3746,7 +3746,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s029",
       "ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
       "ar_clean": "الفاصوليا بتسع ليرات.",
-      "tr": "Fasulye dokuz lira.",
+      "tr": "الفاصوليا بِتِسْعِ ليراتٍ.",
       "pattern_id": "p006",
       "difficulty": "A1",
       "source_pages": [
@@ -3768,7 +3768,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s030",
       "ar": "هِيَ طازَجَةٌ جِدًّا.",
       "ar_clean": "هي طازجه جدا.",
-      "tr": "O çok taze.",
+      "tr": "هِيَ طازَجَةٌ جِدًّا.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3789,7 +3789,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s031",
       "ar": "الفاصوليا غالِيَةٌ وأَغْلى مِنَ البَطاطا.",
       "ar_clean": "الفاصوليا غاليه واغلي من البطاطا.",
-      "tr": "Fasulye pahalı ve patatesten daha pahalı.",
+      "tr": "الفاصوليا غالِيَةٌ وأَغْلى مِنَ البَطاطا.",
       "pattern_id": "p014",
       "difficulty": "A1",
       "source_pages": [
@@ -3813,7 +3813,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s032",
       "ar": "أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
       "ar_clean": "اريد كيلوغراما واحدا فقط.",
-      "tr": "Sadece bir kilogram istiyorum.",
+      "tr": "أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
       "pattern_id": "p008",
       "difficulty": "A1",
       "source_pages": [
@@ -3836,7 +3836,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s033",
       "ar": "العِنَبُ رَخيصٌ اليَوْمَ.",
       "ar_clean": "العنب رخيص اليوم.",
-      "tr": "Üzüm bugün ucuz.",
+      "tr": "العِنَبُ رَخيصٌ اليَوْمَ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3857,7 +3857,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s034",
       "ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
       "ar_clean": "العنب ارخص من التفاح.",
-      "tr": "Üzüm elmadan daha ucuz.",
+      "tr": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
       "pattern_id": "p013",
       "difficulty": "A1",
       "source_pages": [
@@ -3880,7 +3880,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s035",
       "ar": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
       "ar_clean": "لا، شكرا جزيلا. هذا كاف.",
-      "tr": "Hayır, çok teşekkürler. Bu yeterli.",
+      "tr": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
       "pattern_id": "p010",
       "difficulty": "A1",
       "source_pages": [
@@ -3905,7 +3905,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s036",
       "ar": "بِكَم البَطاطا؟",
       "ar_clean": "بكم البطاطا؟",
-      "tr": "Patates kaç lira?",
+      "tr": "بِكَم البَطاطا؟",
       "pattern_id": "p005",
       "difficulty": "A1",
       "source_pages": [
@@ -3925,7 +3925,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s037",
       "ar": "البَطاطا بِخَمْسِ ليراتٍ.",
       "ar_clean": "البطاطا بخمس ليرات.",
-      "tr": "Patates beş lira.",
+      "tr": "البَطاطا بِخَمْسِ ليراتٍ.",
       "pattern_id": "p006",
       "difficulty": "A1",
       "source_pages": [
@@ -3946,7 +3946,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s038",
       "ar": "أَيَّ عُلْبَةٍ تُريدُ مِنَ المِشْمِشِ؟",
       "ar_clean": "اي علبه تريد من المشمش؟",
-      "tr": "Kayısıdan hangi kutuyu istiyorsun?",
+      "tr": "أَيَّ عُلْبَةٍ تُريدُ مِنَ المِشْمِشِ؟",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -3969,7 +3969,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s039",
       "ar": "أُريدُ هذِهِ العُلْبَةَ.",
       "ar_clean": "اريد هذه العلبه.",
-      "tr": "Bu kutuyu istiyorum.",
+      "tr": "أُريدُ هذِهِ العُلْبَةَ.",
       "pattern_id": "p002",
       "difficulty": "A1",
       "source_pages": [
@@ -3990,7 +3990,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s040",
       "ar": "بِكَم البَيْضَةُ الواحِدَةُ؟",
       "ar_clean": "بكم البيضه الواحده؟",
-      "tr": "Bir yumurta kaç lira?",
+      "tr": "بِكَم البَيْضَةُ الواحِدَةُ؟",
       "pattern_id": "p005",
       "difficulty": "A1",
       "source_pages": [
@@ -4011,7 +4011,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s041",
       "ar": "البَيْضَةُ الواحِدَةُ بِليرَتَيْنِ.",
       "ar_clean": "البيضه الواحده بليرتين.",
-      "tr": "Bir yumurta iki lira.",
+      "tr": "البَيْضَةُ الواحِدَةُ بِليرَتَيْنِ.",
       "pattern_id": "p006",
       "difficulty": "A1",
       "source_pages": [
@@ -4032,7 +4032,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s042",
       "ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
       "ar_clean": "كم كيلوغراما تريد من التفاح؟",
-      "tr": "Elmadan kaç kilogram istiyorsun?",
+      "tr": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
       "pattern_id": "p007",
       "difficulty": "A1",
       "source_pages": [
@@ -4056,7 +4056,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s043",
       "ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ.",
       "ar_clean": "اريد ثلاثه كيلوغرامات.",
-      "tr": "Üç kilogram istiyorum.",
+      "tr": "أُريدُ ثَلاثَةَ كيلوغراماتٍ.",
       "pattern_id": "p008",
       "difficulty": "A1",
       "source_pages": [
@@ -4078,7 +4078,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s044",
       "ar": "بِكَم البَصَلُ؟",
       "ar_clean": "بكم البصل؟",
-      "tr": "Soğan kaç lira?",
+      "tr": "بِكَم البَصَلُ؟",
       "pattern_id": "p005",
       "difficulty": "A1",
       "source_pages": [
@@ -4098,7 +4098,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s045",
       "ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
       "ar_clean": "البصل باربع ليرات.",
-      "tr": "Soğan dört lira.",
+      "tr": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
       "pattern_id": "p006",
       "difficulty": "A1",
       "source_pages": [
@@ -4119,7 +4119,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s046",
       "ar": "صُنْدوقٌ صَغيرٌ.",
       "ar_clean": "صندوق صغير.",
-      "tr": "Küçük sandık/kasa.",
+      "tr": "صُنْدوقٌ صَغيرٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4139,7 +4139,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s047",
       "ar": "صُنْدوقٌ كَبيرٌ.",
       "ar_clean": "صندوق كبير.",
-      "tr": "Büyük sandık/kasa.",
+      "tr": "صُنْدوقٌ كَبيرٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4159,7 +4159,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s048",
       "ar": "كيسٌ خَفيفٌ.",
       "ar_clean": "كيس خفيف.",
-      "tr": "Hafif poşet.",
+      "tr": "كيسٌ خَفيفٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4179,7 +4179,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s049",
       "ar": "كيسٌ ثَقيلٌ.",
       "ar_clean": "كيس ثقيل.",
-      "tr": "Ağır poşet.",
+      "tr": "كيسٌ ثَقيلٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4199,7 +4199,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s050",
       "ar": "المِشْمِشُ غالٍ.",
       "ar_clean": "المشمش غال.",
-      "tr": "Kayısı pahalı.",
+      "tr": "المِشْمِشُ غالٍ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4219,7 +4219,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s051",
       "ar": "المِشْمِشُ أَغْلى مِنَ البَصَلِ.",
       "ar_clean": "المشمش اغلي من البصل.",
-      "tr": "Kayısı soğandan daha pahalı.",
+      "tr": "المِشْمِشُ أَغْلى مِنَ البَصَلِ.",
       "pattern_id": "p014",
       "difficulty": "A1",
       "source_pages": [
@@ -4241,7 +4241,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s052",
       "ar": "البَصَلُ رَخيصٌ.",
       "ar_clean": "البصل رخيص.",
-      "tr": "Soğan ucuz.",
+      "tr": "البَصَلُ رَخيصٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4261,7 +4261,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s053",
       "ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
       "ar_clean": "البصل ارخص من المشمش.",
-      "tr": "Soğan kayısıdan daha ucuz.",
+      "tr": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
       "pattern_id": "p013",
       "difficulty": "A1",
       "source_pages": [
@@ -4283,7 +4283,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s054",
       "ar": "الكَرَزَةُ صَغيرَةٌ.",
       "ar_clean": "الكرزه صغيره.",
-      "tr": "Kiraz küçüktür.",
+      "tr": "الكَرَزَةُ صَغيرَةٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4303,7 +4303,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s055",
       "ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
       "ar_clean": "الكرزه اصغر من البرتقاله.",
-      "tr": "Kiraz portakaldan daha küçüktür.",
+      "tr": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
       "pattern_id": "p015",
       "difficulty": "A1",
       "source_pages": [
@@ -4325,7 +4325,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s056",
       "ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
       "ar_clean": "البرتقاله اكبر من الكرزه.",
-      "tr": "Portakal kirazdan daha büyüktür.",
+      "tr": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
       "pattern_id": "p015",
       "difficulty": "A1",
       "source_pages": [
@@ -4347,7 +4347,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s057",
       "ar": "عُلْبَةُ الحَليبِ غالِيَةٌ.",
       "ar_clean": "علبه الحليب غاليه.",
-      "tr": "Süt kutusu pahalıdır.",
+      "tr": "عُلْبَةُ الحَليبِ غالِيَةٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4368,7 +4368,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s058",
       "ar": "عُلْبَةُ الحَليبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ.",
       "ar_clean": "علبه الحليب اغلي من علبه الملح.",
-      "tr": "Süt kutusu tuz kutusundan daha pahalıdır.",
+      "tr": "عُلْبَةُ الحَليبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ.",
       "pattern_id": "p014",
       "difficulty": "A1",
       "source_pages": [
@@ -4392,7 +4392,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s059",
       "ar": "عُلْبَةُ المِلْحِ رَخيصَةٌ.",
       "ar_clean": "علبه الملح رخيصه.",
-      "tr": "Tuz kutusu ucuzdur.",
+      "tr": "عُلْبَةُ المِلْحِ رَخيصَةٌ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4413,7 +4413,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s060",
       "ar": "عُلْبَةُ المِلْحِ أَرْخَصُ مِنْ عُلْبَةِ الحَليبِ.",
       "ar_clean": "علبه الملح ارخص من علبه الحليب.",
-      "tr": "Tuz kutusu süt kutusundan daha ucuzdur.",
+      "tr": "عُلْبَةُ المِلْحِ أَرْخَصُ مِنْ عُلْبَةِ الحَليبِ.",
       "pattern_id": "p013",
       "difficulty": "A1",
       "source_pages": [
@@ -4437,7 +4437,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s061",
       "ar": "أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
       "ar_clean": "انا بحاجه الي كيلو زيتون وعلبه مكرونه.",
-      "tr": "Bir kilo zeytin ve bir kutu makarnaya ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -4462,7 +4462,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s062",
       "ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
       "ar_clean": "الموز بعشر ليرات.",
-      "tr": "Muz on lira.",
+      "tr": "المَوْزُ بِعَشْرِ ليراتٍ.",
       "pattern_id": "p006",
       "difficulty": "A1",
       "source_pages": [
@@ -4483,7 +4483,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s063",
       "ar": "المَوْزُ أَغْلى مِنَ المِشْمِشِ.",
       "ar_clean": "الموز اغلي من المشمش.",
-      "tr": "Muz kayısıdan daha pahalıdır.",
+      "tr": "المَوْزُ أَغْلى مِنَ المِشْمِشِ.",
       "pattern_id": "p014",
       "difficulty": "A1",
       "source_pages": [
@@ -4505,7 +4505,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s064",
       "ar": "المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
       "ar_clean": "المشمش ارخص من الموز اليوم.",
-      "tr": "Kayısı bugün muzdan daha ucuzdur.",
+      "tr": "المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
       "pattern_id": "p013",
       "difficulty": "A1",
       "source_pages": [
@@ -4528,7 +4528,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s065",
       "ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
       "ar_clean": "اذهب الي السوق للتسوق.",
-      "tr": "Alışveriş için pazara giderim.",
+      "tr": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
       "pattern_id": "p019",
       "difficulty": "A1",
       "source_pages": [
@@ -4550,7 +4550,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s066",
       "ar": "أَشْتَري الخُبْزَ والسُّكَّرَ والمِلْحَ مِنَ البَقّالَةِ.",
       "ar_clean": "اشتري الخبز والسكر والملح من البقاله.",
-      "tr": "Bakkaldan ekmek, şeker ve tuz satın alırım.",
+      "tr": "أَشْتَري الخُبْزَ والسُّكَّرَ والمِلْحَ مِنَ البَقّالَةِ.",
       "pattern_id": null,
       "difficulty": "A1",
       "source_pages": [
@@ -4574,7 +4574,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s067",
       "ar": "أُريدُ كيلو تُفّاحٍ وكيلو بَطاطا.",
       "ar_clean": "اريد كيلو تفاح وكيلو بطاطا.",
-      "tr": "Bir kilo elma ve bir kilo patates istiyorum.",
+      "tr": "أُريدُ كيلو تُفّاحٍ وكيلو بَطاطا.",
       "pattern_id": "p008",
       "difficulty": "A1",
       "source_pages": [
@@ -4597,7 +4597,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s068",
       "ar": "بِكَم كيلو المَوْزِ؟",
       "ar_clean": "بكم كيلو الموز؟",
-      "tr": "Bir kilo muz kaç lira?",
+      "tr": "بِكَم كيلو المَوْزِ؟",
       "pattern_id": "p005",
       "difficulty": "A1",
       "source_pages": [
@@ -4618,7 +4618,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s069",
       "ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
       "ar_clean": "التفاح ارخص من الموز.",
-      "tr": "Elma muzdan daha ucuzdur.",
+      "tr": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
       "pattern_id": "p013",
       "difficulty": "A1",
       "source_pages": [
@@ -4641,7 +4641,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s070",
       "ar": "أَنا بِحاجَةٍ إِلى عُلْبَةِ شايٍ أَيْضًا.",
       "ar_clean": "انا بحاجه الي علبه شاي ايضا.",
-      "tr": "Ayrıca bir kutu çaya ihtiyacım var.",
+      "tr": "أَنا بِحاجَةٍ إِلى عُلْبَةِ شايٍ أَيْضًا.",
       "pattern_id": "p001",
       "difficulty": "A1",
       "source_pages": [
@@ -4665,7 +4665,7 @@ window.IHO_UNIT2_DATA = {
       "id": "s071",
       "ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا.",
       "ar_clean": "من غشنا فليس منا.",
-      "tr": "Bizi aldatan bizden değildir.",
+      "tr": "مَنْ غَشَّنا فَلَيْسَ مِنّا.",
       "pattern_id": "p022",
       "difficulty": "A1",
       "source_pages": [
@@ -4687,9 +4687,9 @@ window.IHO_UNIT2_DATA = {
   "dialogues": [
     {
       "id": "d001",
-      "title_tr": "Bakkala gitmeden önce",
+      "title_tr": "قبل الذهاب إلى البقالة",
       "title_ar": "قبل الذهاب إلى البقالة",
-      "context_tr": "Anne ve çocuk arasında alışveriş listesi hazırlama diyaloğu.",
+      "context_tr": "قبل الذهاب إلى البقالة",
       "source_pages": [
         56
       ],
@@ -4702,42 +4702,42 @@ window.IHO_UNIT2_DATA = {
         {
           "speaker": "الأُمّ",
           "ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
-          "tr": "Bakkaldan bazı şeylere ihtiyacım var.",
+          "tr": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
           "line_no": 1,
           "audio_key": "u2_dialogue_d001_01"
         },
         {
           "speaker": "عُمَر",
           "ar": "ماذا تُريدينَ يا أُمّي؟",
-          "tr": "Anneciğim, ne istiyorsun?",
+          "tr": "ماذا تُريدينَ يا أُمّي؟",
           "line_no": 2,
           "audio_key": "u2_dialogue_d001_02"
         },
         {
           "speaker": "الأُمّ",
           "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ، وعُلْبَةَ مِلْحٍ، وعُلْبَتَيْنِ مِنَ الشّايِ.",
-          "tr": "Senden bir kilo şeker, bir kutu tuz ve iki kutu çay istiyorum.",
+          "tr": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ، وعُلْبَةَ مِلْحٍ، وعُلْبَتَيْنِ مِنَ الشّايِ.",
           "line_no": 3,
           "audio_key": "u2_dialogue_d001_03"
         },
         {
           "speaker": "الأُمّ",
           "ar": "أُريدُ خُبْزًا طازَجًا أَيْضًا.",
-          "tr": "Ayrıca taze ekmek istiyorum.",
+          "tr": "أُريدُ خُبْزًا طازَجًا أَيْضًا.",
           "line_no": 4,
           "audio_key": "u2_dialogue_d001_04"
         },
         {
           "speaker": "عُمَر",
           "ar": "هَل تُريدينَ شيئًا آخَر؟",
-          "tr": "Başka bir şey ister misin?",
+          "tr": "هَل تُريدينَ شيئًا آخَر؟",
           "line_no": 5,
           "audio_key": "u2_dialogue_d001_05"
         },
         {
           "speaker": "الأُمّ",
           "ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
-          "tr": "Tamam, şimdi gideceğim.",
+          "tr": "حَسَنًا، سَأَذْهَبُ الآنَ.",
           "line_no": 6,
           "audio_key": "u2_dialogue_d001_06"
         }
@@ -4745,9 +4745,9 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "d002",
-      "title_tr": "Sebze-meyve pazarı",
+      "title_tr": "في سوق الخضر والفواكه",
       "title_ar": "في سوق الخضر والفواكه",
-      "context_tr": "Satıcı ve Meryem arasında sebze-meyve satın alma diyaloğu.",
+      "context_tr": "في سوق الخضر والفواكه",
       "source_pages": [
         64
       ],
@@ -4760,42 +4760,42 @@ window.IHO_UNIT2_DATA = {
         {
           "speaker": "البائِع",
           "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟ ماذا تُريدينَ؟",
-          "tr": "Hoş geldiniz, nasıl yardımcı olabilirim? Ne istiyorsun?",
+          "tr": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟ ماذا تُريدينَ؟",
           "line_no": 1,
           "audio_key": "u2_dialogue_d002_01"
         },
         {
           "speaker": "مَرْيَم",
           "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
-          "tr": "Merhaba, taze sebzelere ihtiyacım var.",
+          "tr": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
           "line_no": 2,
           "audio_key": "u2_dialogue_d002_02"
         },
         {
           "speaker": "البائِع",
           "ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
-          "tr": "Bende domates, salatalık, havuç, patlıcan, patates, soğan, biber ve fasulye var.",
+          "tr": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
           "line_no": 3,
           "audio_key": "u2_dialogue_d002_03"
         },
         {
           "speaker": "مَرْيَم",
           "ar": "جَميلٌ جِدًّا! وهَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
-          "tr": "Çok güzel! Sende meyveler de var mı?",
+          "tr": "جَميلٌ جِدًّا! وهَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
           "line_no": 4,
           "audio_key": "u2_dialogue_d002_04"
         },
         {
           "speaker": "البائِع",
           "ar": "نَعَم، عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
-          "tr": "Evet, bende elma, portakal, muz, üzüm, kiraz ve kayısı var.",
+          "tr": "نَعَم، عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
           "line_no": 5,
           "audio_key": "u2_dialogue_d002_05"
         },
         {
           "speaker": "مَرْيَم",
           "ar": "حَسَنًا، أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
-          "tr": "Tamam, her çeşitten bir kilogram istiyorum.",
+          "tr": "حَسَنًا، أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
           "line_no": 6,
           "audio_key": "u2_dialogue_d002_06"
         }
@@ -4803,9 +4803,9 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "d003",
-      "title_tr": "Pazarda fiyat sorma",
+      "title_tr": "في السّوق",
       "title_ar": "في السّوق",
-      "context_tr": "Satıcı ve müşteri arasında fiyat ve karşılaştırma diyaloğu.",
+      "context_tr": "في السّوق",
       "source_pages": [
         67
       ],
@@ -4818,42 +4818,42 @@ window.IHO_UNIT2_DATA = {
         {
           "speaker": "البائِع",
           "ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ يا سَيِّدي؟",
-          "tr": "Hoş geldiniz! Nasıl yardımcı olabilirim efendim?",
+          "tr": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ يا سَيِّدي؟",
           "line_no": 1,
           "audio_key": "u2_dialogue_d003_01"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ، بِكَم الفاصوليا؟",
-          "tr": "Merhaba, biraz sebze satın almak istiyorum. Fasulye kaç lira?",
+          "tr": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ، بِكَم الفاصوليا؟",
           "line_no": 2,
           "audio_key": "u2_dialogue_d003_02"
         },
         {
           "speaker": "البائِع",
           "ar": "بِتِسْعِ ليراتٍ، هِيَ طازَجَةٌ جِدًّا.",
-          "tr": "Dokuz lira; çok taze.",
+          "tr": "بِتِسْعِ ليراتٍ، هِيَ طازَجَةٌ جِدًّا.",
           "line_no": 3,
           "audio_key": "u2_dialogue_d003_03"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "لَكِنَّها غالِيَةٌ، وأَغْلى مِنَ البَطاطا. أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
-          "tr": "Ama pahalı ve patatesten daha pahalı. Sadece bir kilogram istiyorum.",
+          "tr": "لَكِنَّها غالِيَةٌ، وأَغْلى مِنَ البَطاطا. أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
           "line_no": 4,
           "audio_key": "u2_dialogue_d003_04"
         },
         {
           "speaker": "البائِع",
           "ar": "العِنَبُ رَخيصٌ اليَوْمَ، وهُوَ أَرْخَصُ مِنَ التُّفّاحِ. هَل تُريدُ مِنْهُ؟",
-          "tr": "Üzüm bugün ucuz; elmadan daha ucuz. Ondan ister misin?",
+          "tr": "العِنَبُ رَخيصٌ اليَوْمَ، وهُوَ أَرْخَصُ مِنَ التُّفّاحِ. هَل تُريدُ مِنْهُ؟",
           "line_no": 5,
           "audio_key": "u2_dialogue_d003_05"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
-          "tr": "Hayır, çok teşekkürler. Bu yeterli.",
+          "tr": "لا، شُكْرًا جَزيلًا. هذا كافٍ.",
           "line_no": 6,
           "audio_key": "u2_dialogue_d003_06"
         }
@@ -4861,9 +4861,9 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "d004",
-      "title_tr": "Bakkalda ürün ve fiyat",
+      "title_tr": "التسوق من البقالة",
       "title_ar": "التسوق من البقالة",
-      "context_tr": "Bakkal ve müşteri arasında ürün isteme ve karşılaştırma.",
+      "context_tr": "التسوق من البقالة",
       "source_pages": [
         76
       ],
@@ -4876,70 +4876,70 @@ window.IHO_UNIT2_DATA = {
         {
           "speaker": "البَقّال",
           "ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ؟",
-          "tr": "Hoş geldiniz! Nasıl yardımcı olabilirim?",
+          "tr": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ؟",
           "line_no": 1,
           "audio_key": "u2_dialogue_d004_01"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
-          "tr": "Merhaba, bir kilo zeytine ve bir kutu makarnaya ihtiyacım var.",
+          "tr": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
           "line_no": 2,
           "audio_key": "u2_dialogue_d004_02"
         },
         {
           "speaker": "البَقّال",
           "ar": "تَفَضَّل، هَل تُريدُ شيئًا آخَر؟",
-          "tr": "Buyurun, başka bir şey ister misin?",
+          "tr": "تَفَضَّل، هَل تُريدُ شيئًا آخَر؟",
           "line_no": 3,
           "audio_key": "u2_dialogue_d004_03"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْزُ؟",
-          "tr": "Evet, muz satın almak istiyorum. Muz kaç lira?",
+          "tr": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْزُ؟",
           "line_no": 4,
           "audio_key": "u2_dialogue_d004_04"
         },
         {
           "speaker": "البَقّال",
           "ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
-          "tr": "Muz on lira.",
+          "tr": "المَوْزُ بِعَشْرِ ليراتٍ.",
           "line_no": 5,
           "audio_key": "u2_dialogue_d004_05"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "لَكِنَّهُ أَغْلى مِنَ المِشْمِشِ.",
-          "tr": "Ama kayısıdan daha pahalı.",
+          "tr": "لَكِنَّهُ أَغْلى مِنَ المِشْمِشِ.",
           "line_no": 6,
           "audio_key": "u2_dialogue_d004_06"
         },
         {
           "speaker": "البَقّال",
           "ar": "نَعَم، المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
-          "tr": "Evet, kayısı bugün muzdan daha ucuz.",
+          "tr": "نَعَم، المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
           "line_no": 7,
           "audio_key": "u2_dialogue_d004_07"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "حَسَنًا، أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
-          "tr": "Tamam, kayısıdan üç kilogram istiyorum.",
+          "tr": "حَسَنًا، أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
           "line_no": 8,
           "audio_key": "u2_dialogue_d004_08"
         },
         {
           "speaker": "البَقّال",
           "ar": "تَفَضَّل.",
-          "tr": "Buyurun.",
+          "tr": "تَفَضَّل.",
           "line_no": 9,
           "audio_key": "u2_dialogue_d004_09"
         },
         {
           "speaker": "المُشْتَري",
           "ar": "شُكْرًا، مَعَ السَّلامَةِ.",
-          "tr": "Teşekkürler, güle güle.",
+          "tr": "شُكْرًا، مَعَ السَّلامَةِ.",
           "line_no": 10,
           "audio_key": "u2_dialogue_d004_10"
         }
@@ -4947,9 +4947,9 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "d005",
-      "title_tr": "Telefon mesajı",
+      "title_tr": "المراسلة عبر الهاتف",
       "title_ar": "المراسلة عبر الهاتف",
-      "context_tr": "Telefon üzerinden ihtiyaç ve miktar sorma.",
+      "context_tr": "المراسلة عبر الهاتف",
       "source_pages": [
         87
       ],
@@ -4962,42 +4962,42 @@ window.IHO_UNIT2_DATA = {
         {
           "speaker": "البائِع",
           "ar": "أَهْلًا فاروق! أَيُّ خِدْمَةٍ؟",
-          "tr": "Merhaba Faruk! Nasıl yardımcı olabilirim?",
+          "tr": "أَهْلًا فاروق! أَيُّ خِدْمَةٍ؟",
           "line_no": 1,
           "audio_key": "u2_dialogue_d005_01"
         },
         {
           "speaker": "فاروق",
           "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى حَليبٍ.",
-          "tr": "Merhaba, süte ihtiyacım var.",
+          "tr": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى حَليبٍ.",
           "line_no": 2,
           "audio_key": "u2_dialogue_d005_02"
         },
         {
           "speaker": "البائِع",
           "ar": "حَسَنًا، كَم تُريدُ مِنَ الحَليبِ؟",
-          "tr": "Tamam, sütten ne kadar istiyorsun?",
+          "tr": "حَسَنًا، كَم تُريدُ مِنَ الحَليبِ؟",
           "line_no": 3,
           "audio_key": "u2_dialogue_d005_03"
         },
         {
           "speaker": "فاروق",
           "ar": "أُريدُ عُلْبَةً واحِدَةً.",
-          "tr": "Bir kutu istiyorum.",
+          "tr": "أُريدُ عُلْبَةً واحِدَةً.",
           "line_no": 4,
           "audio_key": "u2_dialogue_d005_04"
         },
         {
           "speaker": "البائِع",
           "ar": "حَسَنًا، هَل تُريدُ شيئًا آخَر؟",
-          "tr": "Tamam, başka bir şey ister misin?",
+          "tr": "حَسَنًا، هَل تُريدُ شيئًا آخَر؟",
           "line_no": 5,
           "audio_key": "u2_dialogue_d005_05"
         },
         {
           "speaker": "فاروق",
           "ar": "لا، شُكْرًا لَكَ.",
-          "tr": "Hayır, teşekkür ederim.",
+          "tr": "لا، شُكْرًا لَكَ.",
           "line_no": 6,
           "audio_key": "u2_dialogue_d005_06"
         }
@@ -5007,34 +5007,34 @@ window.IHO_UNIT2_DATA = {
   "price_sets": [
     {
       "id": "prices_page67",
-      "title_tr": "Pazar fiyatları 1",
+      "title_tr": "",
       "currency": "TRY",
       "items": [
         {
           "word_id": "v041",
           "ar": "الفاصوليا",
-          "tr": "fasulye",
+          "tr": "الفاصوليا",
           "price": 9,
           "unit": "كيلو"
         },
         {
           "word_id": "v038",
           "ar": "البَطاطا",
-          "tr": "patates",
+          "tr": "البَطاطا",
           "price": 5,
           "unit": "كيلو"
         },
         {
           "word_id": "v031",
           "ar": "العِنَب",
-          "tr": "üzüm",
+          "tr": "العِنَب",
           "price": 7,
           "unit": "كيلو"
         },
         {
           "word_id": "v028",
           "ar": "التُّفّاح",
-          "tr": "elma",
+          "tr": "التُّفّاح",
           "price": 10,
           "unit": "كيلو"
         }
@@ -5046,62 +5046,62 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "prices_practice",
-      "title_tr": "Alıştırma fiyatları",
+      "title_tr": "",
       "currency": "TRY",
       "items": [
         {
           "word_id": "v039",
           "ar": "البَصَل",
-          "tr": "soğan",
+          "tr": "البَصَل",
           "price": 4,
           "unit": "كيلو"
         },
         {
           "word_id": "v034",
           "ar": "الطَّماطِم",
-          "tr": "domates",
+          "tr": "الطَّماطِم",
           "price": 6,
           "unit": "كيلو"
         },
         {
           "word_id": "v033",
           "ar": "المِشْمِش",
-          "tr": "kayısı",
+          "tr": "المِشْمِش",
           "price": 9,
           "unit": "عُلْبَة"
         },
         {
           "word_id": "v035",
           "ar": "الخِيار",
-          "tr": "salatalık",
+          "tr": "الخِيار",
           "price": 5,
           "unit": "كيلو"
         },
         {
           "word_id": "v030",
           "ar": "المَوْز",
-          "tr": "muz",
+          "tr": "المَوْز",
           "price": 10,
           "unit": "كيلو"
         },
         {
           "word_id": "v020",
           "ar": "الحَليب",
-          "tr": "süt",
+          "tr": "الحَليب",
           "price": 7,
           "unit": "عُلْبَة"
         },
         {
           "word_id": "v017",
           "ar": "السُّكَّر",
-          "tr": "şeker",
+          "tr": "السُّكَّر",
           "price": 5,
           "unit": "عُلْبَة"
         },
         {
           "word_id": "v018",
           "ar": "المِلْح",
-          "tr": "tuz",
+          "tr": "المِلْح",
           "price": 2,
           "unit": "عُلْبَة"
         }
@@ -5120,12 +5120,12 @@ window.IHO_UNIT2_DATA = {
         "id": "mc001",
         "type": "meaning",
         "q_ar": "ما معنى «خُبْز»؟",
-        "q_tr": "«خُبْز» ne demektir?",
+        "q_tr": "",
         "options": [
           "ekmek",
-          "şeker",
+          "",
           "tuz",
-          "süt"
+          ""
         ],
         "answer": "ekmek",
         "source_pages": [
@@ -5136,7 +5136,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc002",
         "type": "meaning",
         "q_ar": "ما معنى «فاصوليا»؟",
-        "q_tr": "«فاصوليا» ne demektir?",
+        "q_tr": "",
         "options": [
           "fasulye",
           "elma",
@@ -5153,7 +5153,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc003",
         "type": "category",
         "q_ar": "أَيُّ كَلِمَةٍ مِنَ الفَواكِهِ؟",
-        "q_tr": "Hangisi meyvedir?",
+        "q_tr": "",
         "options": [
           "تُفّاح",
           "بَصَل",
@@ -5170,7 +5170,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc004",
         "type": "category",
         "q_ar": "أَيُّ كَلِمَةٍ مِنَ الخُضْراواتِ؟",
-        "q_tr": "Hangisi sebzedir?",
+        "q_tr": "",
         "options": [
           "جَزَر",
           "عِنَب",
@@ -5187,7 +5187,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc005",
         "type": "phrase",
         "q_ar": "أَكْمِلْ: أَنا ____ إِلى حَليبٍ.",
-        "q_tr": "Tamamla: Süte ihtiyacım var.",
+        "q_tr": "",
         "options": [
           "بِحاجَةٍ",
           "بِكَم",
@@ -5204,7 +5204,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc006",
         "type": "phrase",
         "q_ar": "أَكْمِلْ: بِكَم ____؟",
-        "q_tr": "Fiyat sorma kalıbını tamamla.",
+        "q_tr": "",
         "options": [
           "البَصَلُ",
           "إِلى",
@@ -5220,7 +5220,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc007",
         "type": "comparison",
         "q_ar": "الفاصوليا ٩ ليرات، البطاطا ٥ ليرات. أيُّ جُمْلَةٍ صَحيحَة؟",
-        "q_tr": "Fasulye 9, patates 5 lira. Hangisi doğru?",
+        "q_tr": "",
         "options": [
           "الفاصوليا أَغْلى مِنَ البَطاطا",
           "الفاصوليا أَرْخَصُ مِنَ البَطاطا",
@@ -5237,7 +5237,7 @@ window.IHO_UNIT2_DATA = {
         "id": "mc008",
         "type": "dialogue",
         "q_ar": "ما الجواب المناسب: هَل تُريدُ شيئًا آخَر؟",
-        "q_tr": "Uygun cevap hangisi?",
+        "q_tr": "",
         "options": [
           "لا، شُكْرًا.",
           "بِكَم البَصَل؟",
@@ -5263,7 +5263,7 @@ window.IHO_UNIT2_DATA = {
           "أَرْخَصُ",
           "عِنْدي"
         ],
-        "tr": "Süte ihtiyacım var.",
+        "tr": "",
         "pattern_id": "p001",
         "source_pages": [
           60,
@@ -5280,7 +5280,7 @@ window.IHO_UNIT2_DATA = {
           "بِكَم",
           "أَغْلى"
         ],
-        "tr": "Bir kutu tuz istiyorum.",
+        "tr": "",
         "pattern_id": "p002",
         "source_pages": [
           56
@@ -5296,7 +5296,7 @@ window.IHO_UNIT2_DATA = {
           "إِلى",
           "في"
         ],
-        "tr": "Soğan dört lira.",
+        "tr": "",
         "pattern_id": "p006",
         "source_pages": [
           71
@@ -5312,7 +5312,7 @@ window.IHO_UNIT2_DATA = {
           "بِـ",
           "في"
         ],
-        "tr": "Elma muzdan daha ucuz.",
+        "tr": "",
         "pattern_id": "p013",
         "source_pages": [
           80,
@@ -5329,7 +5329,7 @@ window.IHO_UNIT2_DATA = {
           "بِـ",
           "هَل"
         ],
-        "tr": "Bakkaldan ekmek satın alırım.",
+        "tr": "",
         "source_pages": [
           80
         ]
@@ -5344,7 +5344,7 @@ window.IHO_UNIT2_DATA = {
           "كبير",
           "ليرة"
         ],
-        "tr": "Başka bir şey ister misin?",
+        "tr": "",
         "pattern_id": "p009",
         "source_pages": [
           56,
@@ -5361,7 +5361,7 @@ window.IHO_UNIT2_DATA = {
           "بِـ",
           "في"
         ],
-        "tr": "Fasulye patatesten daha pahalı.",
+        "tr": "",
         "pattern_id": "p014",
         "source_pages": [
           67,
@@ -5378,7 +5378,7 @@ window.IHO_UNIT2_DATA = {
           "مِن",
           "بِـ"
         ],
-        "tr": "Hoş geldiniz, nasıl yardımcı olabilirim?",
+        "tr": "",
         "pattern_id": "p011",
         "source_pages": [
           64,
@@ -5397,7 +5397,7 @@ window.IHO_UNIT2_DATA = {
           "حَليبٍ"
         ],
         "answer_ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
-        "tr": "Süte ihtiyacım var.",
+        "tr": "",
         "pattern_id": "p001"
       },
       {
@@ -5408,7 +5408,7 @@ window.IHO_UNIT2_DATA = {
           "مِلْحٍ"
         ],
         "answer_ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
-        "tr": "Bir kutu tuz istiyorum.",
+        "tr": "",
         "pattern_id": "p002"
       },
       {
@@ -5418,7 +5418,7 @@ window.IHO_UNIT2_DATA = {
           "البَصَلُ؟"
         ],
         "answer_ar": "بِكَم البَصَلُ؟",
-        "tr": "Soğan kaç lira?",
+        "tr": "",
         "pattern_id": "p005"
       },
       {
@@ -5429,7 +5429,7 @@ window.IHO_UNIT2_DATA = {
           "ليراتٍ"
         ],
         "answer_ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
-        "tr": "Soğan dört lira.",
+        "tr": "",
         "pattern_id": "p006"
       },
       {
@@ -5441,7 +5441,7 @@ window.IHO_UNIT2_DATA = {
           "المَوْزِ"
         ],
         "answer_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
-        "tr": "Elma muzdan daha ucuz.",
+        "tr": "",
         "pattern_id": "p013"
       },
       {
@@ -5453,7 +5453,7 @@ window.IHO_UNIT2_DATA = {
           "البَطاطا"
         ],
         "answer_ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
-        "tr": "Fasulye patatesten daha pahalı.",
+        "tr": "",
         "pattern_id": "p014"
       },
       {
@@ -5465,7 +5465,7 @@ window.IHO_UNIT2_DATA = {
           "لِلتَّسَوُّقِ"
         ],
         "answer_ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
-        "tr": "Alışveriş için pazara giderim.",
+        "tr": "",
         "pattern_id": "p019"
       }
     ],
@@ -5479,7 +5479,7 @@ window.IHO_UNIT2_DATA = {
           "عِنَب"
         ],
         "odd": "بَصَل",
-        "reason_tr": "Bصل sebzedir; diğerleri meyvedir."
+        "reason_tr": ""
       },
       {
         "id": "odd002",
@@ -5490,7 +5490,7 @@ window.IHO_UNIT2_DATA = {
           "بَطاطا"
         ],
         "odd": "مِشْمِش",
-        "reason_tr": "مشمش meyvedir; diğerleri sebzedir."
+        "reason_tr": ""
       },
       {
         "id": "odd003",
@@ -5501,7 +5501,7 @@ window.IHO_UNIT2_DATA = {
           "أَرْخَص"
         ],
         "odd": "أَرْخَص",
-        "reason_tr": "أرخص karşılaştırma sıfatıdır; diğerleri üründür."
+        "reason_tr": ""
       },
       {
         "id": "odd004",
@@ -5512,7 +5512,7 @@ window.IHO_UNIT2_DATA = {
           "ليرة"
         ],
         "odd": "ليرة",
-        "reason_tr": "ليرة para birimidir; diğerleri soru ifadesidir."
+        "reason_tr": ""
       },
       {
         "id": "odd005",
@@ -5523,7 +5523,7 @@ window.IHO_UNIT2_DATA = {
           "فاصوليا"
         ],
         "odd": "فاصوليا",
-        "reason_tr": "فاصوليا üründür; diğerleri miktar/kap belirtir."
+        "reason_tr": ""
       }
     ],
     "word_search_words": [
@@ -5545,9 +5545,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g001_flashcards_core",
       "type": "flashcards",
-      "title_tr": "Kelime Kartları — Çekirdek Ürünler",
+      "title_tr": "بطاقات الكلمات",
       "title_ar": "بطاقات الكلمات",
-      "instructions_tr": "Kartı çevir; Arapça kelime, Türkçe anlam ve örnek cümleyi gör.",
+      "instructions_tr": "بطاقات الكلمات",
       "config": {
         "pool": {
           "categories": [
@@ -5567,9 +5567,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g002_match_grocery",
       "type": "matching",
-      "title_tr": "Eşleştir — Bakkal Ürünleri",
+      "title_tr": "صِل الكلمات",
       "title_ar": "صِل الكلمات",
-      "instructions_tr": "Arapça kelimeyi Türkçe anlamıyla eşleştir.",
+      "instructions_tr": "صِل الكلمات",
       "config": {
         "word_ids": [
           "v016",
@@ -5589,19 +5589,19 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g003_sort_fruit_vegetable",
       "type": "category_sort",
-      "title_tr": "Sınıflandır — Meyve mi Sebze mi?",
+      "title_tr": "صَنِّف الفواكه والخضراوات",
       "title_ar": "صَنِّف الفواكه والخضراوات",
-      "instructions_tr": "Kelimeleri doğru sepete at: meyve veya sebze.",
+      "instructions_tr": "صَنِّف الفواكه والخضراوات",
       "config": {
         "categories": [
           {
             "id": "fruit",
-            "title_tr": "Meyveler",
+            "title_tr": "الفَواكِه",
             "title_ar": "الفَواكِه"
           },
           {
             "id": "vegetable",
-            "title_tr": "Sebzeler",
+            "title_tr": "الخُضْراوات",
             "title_ar": "الخُضْراوات"
           }
         ],
@@ -5626,9 +5626,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g004_shopping_list_basic",
       "type": "shopping_list",
-      "title_tr": "Alışveriş Listesi — Bakkaldan Bul",
+      "title_tr": "قائمة التسوق",
       "title_ar": "قائمة التسوق",
-      "instructions_tr": "Listede yazan ürünleri raftan seç.",
+      "instructions_tr": "قائمة التسوق",
       "config": {
         "target_count": 5,
         "shelf_count": 12,
@@ -5653,9 +5653,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g005_price_quiz",
       "type": "price_quiz",
-      "title_tr": "Fiyat Soruları",
+      "title_tr": "أسئلة الأسعار",
       "title_ar": "أسئلة الأسعار",
-      "instructions_tr": "بِكَم؟ sorularını fiyat tablosuna göre cevapla.",
+      "instructions_tr": "أسئلة الأسعار",
       "config": {
         "price_set": "prices_practice",
         "question_count": 8
@@ -5664,9 +5664,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g006_comparison_price",
       "type": "comparative_quiz",
-      "title_tr": "Karşılaştırma — Ucuz/Pahalı",
+      "title_tr": "المقارنة: أرخص/أغلى",
       "title_ar": "المقارنة: أرخص/أغلى",
-      "instructions_tr": "Fiyatlara göre doğru karşılaştırma cümlesini seç.",
+      "instructions_tr": "المقارنة: أرخص/أغلى",
       "config": {
         "price_set": "prices_page67",
         "relations": [
@@ -5679,9 +5679,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g007_fill_blanks_core",
       "type": "fill_blank",
-      "title_tr": "Boşluk Doldur — Kalıplar",
+      "title_tr": "أَكْمِل الفراغ",
       "title_ar": "أَكْمِل الفراغ",
-      "instructions_tr": "Doğru kelime veya edatı seçerek cümleyi tamamla.",
+      "instructions_tr": "أَكْمِل الفراغ",
       "config": {
         "items": "fill_blanks"
       }
@@ -5689,9 +5689,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g008_sentence_order",
       "type": "sentence_order",
-      "title_tr": "Cümle Kur — Kelime Diz",
+      "title_tr": "رَتِّب الكلمات",
       "title_ar": "رَتِّب الكلمات",
-      "instructions_tr": "Kelime parçalarını doğru sıraya koy.",
+      "instructions_tr": "رَتِّب الكلمات",
       "config": {
         "items": "sentence_orders"
       }
@@ -5699,9 +5699,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g009_dialogue_order_souq",
       "type": "dialogue_order",
-      "title_tr": "Diyalog Sırala — Pazarda",
+      "title_tr": "رَتِّب الحوار",
       "title_ar": "رَتِّب الحوار",
-      "instructions_tr": "Satıcı-müşteri diyaloğunu doğru sıraya koy.",
+      "instructions_tr": "رَتِّب الحوار",
       "config": {
         "dialogue_id": "d003"
       }
@@ -5709,9 +5709,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g010_dialogue_order_baqala",
       "type": "dialogue_order",
-      "title_tr": "Diyalog Sırala — Bakkalda",
+      "title_tr": "رَتِّب الحوار",
       "title_ar": "رَتِّب الحوار",
-      "instructions_tr": "Bakkal diyaloğunu doğru sıraya koy.",
+      "instructions_tr": "رَتِّب الحوار",
       "config": {
         "dialogue_id": "d004"
       }
@@ -5719,9 +5719,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g011_word_search",
       "type": "word_search",
-      "title_tr": "Kelime Avı",
+      "title_tr": "ابحث عن الكلمات",
       "title_ar": "ابحث عن الكلمات",
-      "instructions_tr": "Ünite kelimelerini harf tablosunda bul.",
+      "instructions_tr": "ابحث عن الكلمات",
       "config": {
         "words": [
           "حَليب",
@@ -5747,9 +5747,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g012_memory_vocab",
       "type": "memory",
-      "title_tr": "Hafıza Oyunu — Ürünler",
+      "title_tr": "لعبة الذاكرة",
       "title_ar": "لعبة الذاكرة",
-      "instructions_tr": "Arapça kelime ile Türkçe anlam kartlarını eşleştir.",
+      "instructions_tr": "لعبة الذاكرة",
       "config": {
         "word_ids": [
           "v016",
@@ -5767,9 +5767,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g013_odd_one_out",
       "type": "odd_one_out",
-      "title_tr": "Farklı Olanı Bul",
+      "title_tr": "اختر الكلمة الغريبة",
       "title_ar": "اختر الكلمة الغريبة",
-      "instructions_tr": "Gruptaki farklı kelimeyi seç.",
+      "instructions_tr": "اختر الكلمة الغريبة",
       "config": {
         "items": "odd_one_out"
       }
@@ -5777,9 +5777,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g014_multiple_choice",
       "type": "multiple_choice",
-      "title_tr": "Çoktan Seçmeli Ünite Testi",
+      "title_tr": "اختبار الاختيار",
       "title_ar": "اختبار الاختيار",
-      "instructions_tr": "Kelime, kategori, fiyat ve kalıp sorularını cevapla.",
+      "instructions_tr": "اختبار الاختيار",
       "config": {
         "items": "mc_questions"
       }
@@ -5787,9 +5787,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g015_roleplay_market",
       "type": "roleplay",
-      "title_tr": "Rol Oyna — Satıcı ve Müşteri",
+      "title_tr": "تمثيل الحوار",
       "title_ar": "تمثيل الحوار",
-      "instructions_tr": "Motor rastgele ürün ve fiyat vererek satıcı-müşteri rol oyunu üretir.",
+      "instructions_tr": "تمثيل الحوار",
       "config": {
         "roles": [
           "البائِع",
@@ -5809,9 +5809,9 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "g016_listening_select_placeholder",
       "type": "listening_select",
-      "title_tr": "Dinle-Seç — Ses Yer Tutuculu",
+      "title_tr": "استمع واختر",
       "title_ar": "استمع واختر",
-      "instructions_tr": "audio_key alanı gerçek ses dosyalarına bağlanınca çalışır; şimdilik metinle test edilebilir.",
+      "instructions_tr": "استمع واختر",
       "config": {
         "items": [
           {
@@ -7600,45 +7600,45 @@ window.IHO_UNIT2_DATA = {
       ]
     },
     "VOCAB_TR": {
-      "التَّسَوُّق": "alışveriş",
+      "التَّسَوُّق": "",
       "البَقّالَة": "bakkal",
-      "السّوق": "pazar / çarşı",
+      "السّوق": "",
       "السّوق المَرْكَزِيّ": "merkezî pazar",
-      "سوق الخُضَر": "sebze pazarı",
-      "البائِع": "satıcı",
-      "المُشْتَري": "müşteri / alıcı",
+      "سوق الخُضَر": "",
+      "البائِع": "",
+      "المُشْتَري": "",
       "البَقّال": "bakkal / bakkal sahibi",
-      "قائِمَةُ التَّسَوُّق": "alışveriş listesi",
+      "قائِمَةُ التَّسَوُّق": "",
       "سَلَّة": "sepet",
-      "عَرَبَة": "alışveriş arabası",
-      "صُنْدوق": "kasa / sandık",
-      "كيس": "poşet / torba",
+      "عَرَبَة": "",
+      "صُنْدوق": "",
+      "كيس": "",
       "خِدْمَة": "hizmet",
-      "مُنْتَج": "ürün",
+      "مُنْتَج": "",
       "خُبْز": "ekmek",
-      "سُكَّر": "şeker",
+      "سُكَّر": "",
       "مِلْح": "tuz",
-      "شاي": "çay",
-      "حَليب": "süt",
+      "شاي": "",
+      "حَليب": "",
       "عَسَل": "bal",
       "ماء": "su",
       "بَيْض": "yumurta",
       "مَكَرونَة": "makarna",
       "زَيْتون": "zeytin",
       "دَجاجَة": "tavuk",
-      "حاجات يَوْمِيَّة": "günlük ihtiyaçlar",
+      "حاجات يَوْمِيَّة": "",
       "تُفّاح": "elma",
       "بُرْتُقال": "portakal",
       "مَوْز": "muz",
-      "عِنَب": "üzüm",
+      "عِنَب": "",
       "كَرَز": "kiraz",
-      "مِشْمِش": "kayısı",
+      "مِشْمِش": "",
       "طَماطِم": "domates",
-      "خِيار": "salatalık",
-      "جَزَر": "havuç",
-      "باذِنْجان": "patlıcan",
+      "خِيار": "",
+      "جَزَر": "",
+      "باذِنْجان": "",
       "بَطاطا": "patates",
-      "بَصَل": "soğan",
+      "بَصَل": "",
       "فُلْفُل": "biber",
       "فاصوليا": "fasulye",
       "كيلو": "kilo",
@@ -7651,45 +7651,45 @@ window.IHO_UNIT2_DATA = {
       "ليرة": "lira",
       "ليرات": "liralar",
       "واحِد": "bir",
-      "ثَلاثَة": "üç",
-      "خَمْس": "beş",
+      "ثَلاثَة": "",
+      "خَمْس": "",
       "سَبْع": "yedi",
       "تِسْع": "dokuz",
       "عَشْر": "on",
       "أَذْهَبُ": "giderim",
-      "أَشْتَري": "satın alırım",
+      "أَشْتَري": "",
       "أُريدُ": "istiyorum",
       "أَطْلُبُ": "isterim / talep ederim",
-      "بِحاجَةٍ إِلى": "...e ihtiyacı var",
+      "بِحاجَةٍ إِلى": "",
       "تُريدُ": "istiyor",
-      "تُريدين": "istiyorsun (kadın)",
-      "عِنْدي": "bende var / yanımda var",
+      "تُريدين": "",
+      "عِنْدي": "",
       "تَفَضَّل": "buyurun",
-      "شُكْرًا": "teşekkürler",
-      "مَعَ السَّلامَة": "güle güle",
+      "شُكْرًا": "",
+      "مَعَ السَّلامَة": "",
       "هذا كافٍ": "bu yeterli",
-      "شيء آخَر": "başka bir şey",
-      "أَيْضًا": "ayrıca / de",
-      "اليَوْم": "bugün",
-      "الآن": "şimdi",
+      "شيء آخَر": "",
+      "أَيْضًا": "",
+      "اليَوْم": "",
+      "الآن": "",
       "طازَج": "taze",
       "رَخيص": "ucuz",
-      "غالٍ": "pahalı",
+      "غالٍ": "",
       "أَرْخَصُ مِن": "...den daha ucuz",
-      "أَغْلى مِن": "...den daha pahalı",
-      "كَبير": "büyük",
-      "صَغير": "küçük",
-      "أَكْبَرُ مِن": "...den daha büyük",
-      "أَصْغَرُ مِن": "...den daha küçük",
+      "أَغْلى مِن": "",
+      "كَبير": "",
+      "صَغير": "",
+      "أَكْبَرُ مِن": "",
+      "أَصْغَرُ مِن": "",
       "خَفيف": "hafif",
-      "ثَقيل": "ağır",
+      "ثَقيل": "",
       "أَخَفُّ مِن": "...den daha hafif",
-      "أَثْقَلُ مِن": "...den daha ağır",
-      "أَخْضَر": "yeşil",
+      "أَثْقَلُ مِن": "",
+      "أَخْضَر": "",
       "أَقَلّ": "daha az",
-      "أَقْوى": "daha güçlü",
-      "بِكَم؟": "kaç lira?",
-      "كَم؟": "ne kadar? / kaç?",
+      "أَقْوى": "",
+      "بِكَم؟": "",
+      "كَم؟": "",
       "ماذا؟": "ne?",
       "هَل؟": "mi?",
       "أَيْنَ؟": "nerede? / nereye?",
@@ -7697,7 +7697,7 @@ window.IHO_UNIT2_DATA = {
       "مِن": "-den / -dan",
       "إِلى": "-e / -a",
       "بِـ": "ile / fiyat bildirir",
-      "في": "-de / içinde"
+      "في": ""
     }
   }
 };
