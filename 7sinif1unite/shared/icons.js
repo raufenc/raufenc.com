@@ -18,12 +18,9 @@
     "🚶":"37-yurumek","🤝":"38-yardim"
   };
 
-  // Resolve path so script works whether called from /iho-oyunlar/ root or sub.
-  const BASE = (() => {
-    const s = document.currentScript && document.currentScript.src;
-    if (!s) return "img/kelime/";
-    return s.replace(/shared\/icons\.js.*$/, "img/kelime/");
-  })();
+  // Görseller /iho-oyunlar/img/kelime/ altında tek kaynak olarak duruyor.
+  // Bu klasörün kendi img/ kopyası yok; absolute path ile referansla.
+  const BASE = "/iho-oyunlar/img/kelime/";
 
   // Escape for regex, build alternation from longest first (variation selectors first).
   const keys = Object.keys(MAP).sort((a,b) => b.length - a.length);
