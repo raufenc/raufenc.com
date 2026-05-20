@@ -8,12 +8,12 @@
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#FF9800);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#FF9800);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(20px,2.4vw,28px)}
 .box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-h1{text-align:center;color:#9C27B0;font-size:1.55em;margin-bottom:6px}
-.sub{text-align:center;color:#7B1FA2;margin-bottom:14px;font-size:.95em}
+h1{text-align:center;color:#9C27B0;font-size:2.2em;margin-bottom:6px}
+.sub{text-align:center;color:#7B1FA2;margin-bottom:14px;font-size:1.2em}
 .bar{display:flex;justify-content:space-between;background:#F3E5F5;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:bold;color:#6A1B9A;flex-wrap:wrap;gap:6px}
-.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:1.15em;line-height:1.55}
 .tip b{color:#9C27B0}
 .q-card{background:linear-gradient(135deg,#9C27B0,#FF9800);color:#fff;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(156,39,176,.35)}
 .q-card .ask{font-size:1.05em;margin-bottom:10px;color:rgba(255,255,255,.85)}
@@ -32,7 +32,7 @@ h1{text-align:center;color:#9C27B0;font-size:1.55em;margin-bottom:6px}
 .opt.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
 .opt.disabled{pointer-events:none;opacity:.55}
 .fb{text-align:center;margin-top:14px;min-height:30px;font-size:1.1em;font-weight:bold}
-.exp{text-align:center;color:#7B1FA2;margin-top:6px;font-size:.95em;background:#F3E5F5;padding:8px 12px;border-radius:10px}
+.exp{text-align:center;color:#7B1FA2;margin-top:6px;font-size:1.15em;background:#F3E5F5;padding:8px 12px;border-radius:10px}
 .btn{display:inline-block;background:linear-gradient(135deg,#9C27B0,#FF9800);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
 .btn:hover{filter:brightness(1.1)}
 .btn.alt{background:#9c88ff}
@@ -62,7 +62,6 @@ h1{text-align:center;color:#9C27B0;font-size:1.55em;margin-bottom:6px}
     <div class="item"><span class="em" id="em2">🍌</span><span class="ar" id="ar2">مَوْز</span><span class="price" id="price2">١٠ ليرات</span></div>
   </div>
   <div class="quest" id="quest">أَيُّهُما أَرْخَص؟</div>
-  <div class="tr" id="tr">Hangisi daha ucuz?</div>
 </div>
 <div class="opts" id="opts"></div>
 <div class="fb" id="fb"></div>
@@ -78,31 +77,25 @@ h1{text-align:center;color:#9C27B0;font-size:1.55em;margin-bottom:6px}
 </div>
 </div>
 <script>
-/* Tüm karşılaştırmalar SADECE Ünite 2 kelime havuzundan (kitap s.60-83):
-   Meyveler: تفاح, برتقال, موز, عنب, كرز, مشمش
-   Sebzeler: طماطم, خيار, جزر, باذنجان, بطاطا, بصل, فلفل, فاصوليا
-   Diğer: خبز, حليب, ملح, سكر, شاي, عسل, بيض
-   Karşılaştırma: أغلى/أرخص, أكبر/أصغر, أثقل/أخف (kitap s.72-75)
-   Fiyat örnekleri kitap s.68-71'den alındı.
-*/
+
 var ALL=[
-/* PRICE — fiyatlar kitap s.68'den */
-{a:{em:'🍎',ar:'التُّفّاح',v:5,vU:'ليرات'},b:{em:'🍌',ar:'المَوْز',v:10,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',tr:'Hangisi daha ucuz?',exp:'التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ (س.٨٢)'},
-{a:{em:'🍞',ar:'الخُبْز',v:3,vU:'ليرات'},b:{em:'🍯',ar:'العَسَل',v:10,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'العَسَلُ أَغْلى مِنَ الخُبْزِ'},
-{a:{em:'🥛',ar:'الحَلِيب',v:9,vU:'ليرات'},b:{em:'🧂',ar:'المِلْح',v:4,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'عُلْبَةُ الحَلِيبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ (س.٧٤)'},
-{a:{em:'🍇',ar:'العِنَب',v:7,vU:'ليرات'},b:{em:'🍅',ar:'الطَّماطِم',v:6,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'العِنَبُ أَغْلى مِنَ الطَّماطِمِ'},
-{a:{em:'🌽',ar:'الفاصوليا',v:9,vU:'ليرات'},b:{em:'🥔',ar:'البَطاطا',v:5,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',tr:'Hangisi daha ucuz?',exp:'البَطاطا أَرْخَصُ مِنَ الفاصوليا (س.٦٨)'},
-{a:{em:'🍯',ar:'العَسَل',v:15,vU:'ليرات'},b:{em:'🧂',ar:'المِلْح',v:3,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',tr:'Hangisi daha ucuz?',exp:'المِلْحُ أَرْخَصُ مِنَ العَسَلِ'},
-{a:{em:'🍊',ar:'البُرْتُقال',v:8,vU:'ليرات'},b:{em:'🍒',ar:'الكَرَز',v:12,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'الكَرَزُ أَغْلى مِنَ البُرْتُقالِ'},
-{a:{em:'🍌',ar:'المَوْز',v:7,vU:'ليرات'},b:{em:'🍎',ar:'التُّفّاح',v:10,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'التُّفّاحُ أَغْلى مِنَ المَوْزِ (س.٨٢)'},
-/* SIZE — kitap s.74: التفاح أكبر من المشمش */
-{a:{em:'🍎',ar:'التُّفّاحَة',v:'كَبير',vU:''},b:{em:'🍒',ar:'الكَرَزَة',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',tr:'Hangisi daha büyük?',exp:'التُّفّاحَةُ أَكْبَرُ مِنَ الكَرَزَةِ'},
-{a:{em:'🍊',ar:'البُرْتُقالَة',v:'كَبير',vU:''},b:{em:'🍒',ar:'الكَرَزَة',v:'صَغير',vU:''},q:'أَيُّهُما أَصْغَر؟',tr:'Hangisi daha küçük?',exp:'الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ (س.٧٤)'},
-{a:{em:'🍎',ar:'التُّفّاحَة',v:'كَبير',vU:''},b:{em:'🍇',ar:'العِنَبَة',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',tr:'Hangisi daha büyük?',exp:'التُّفّاحَةُ أَكْبَرُ مِنَ العِنَبَةِ'},
-/* WEIGHT — kitap s.72: كَيْس ثقيل/خفيف, صُنْدوق أَكْبَر/أَصْغَر */
-{a:{em:'🛍️',ar:'كَيْسُ البَطاطا',v:'ثَقيل',vU:''},b:{em:'👜',ar:'كَيْسُ الفُلْفُل',v:'خَفيف',vU:''},q:'أَيُّهُما أَثْقَل؟',tr:'Hangisi daha ağır?',exp:'كَيْسُ البَطاطا أَثْقَلُ مِنْ كَيْسِ الفُلْفُلِ (س.٧٢)'},
-{a:{em:'📦',ar:'صُنْدوقٌ كَبير',v:'كَبير',vU:''},b:{em:'🎁',ar:'صُنْدوقٌ صَغير',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',tr:'Hangisi daha büyük?',exp:'الصُّنْدوقُ الكَبيرُ أَكْبَرُ مِنَ الصُّنْدوقِ الصَّغيرِ (س.٧٢)'},
-{a:{em:'🥕',ar:'الجَزَر',v:6,vU:'ليرات'},b:{em:'🧅',ar:'البَصَل',v:4,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',tr:'Hangisi daha pahalı?',exp:'الجَزَرُ أَغْلى مِنَ البَصَلِ'}
+
+{a:{em:'🍎',ar:'التُّفّاح',v:5,vU:'ليرات'},b:{em:'🍌',ar:'المَوْز',v:10,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',exp:'التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ (س.٨٢)'},
+{a:{em:'🍞',ar:'الخُبْز',v:3,vU:'ليرات'},b:{em:'🍯',ar:'العَسَل',v:10,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'العَسَلُ أَغْلى مِنَ الخُبْزِ'},
+{a:{em:'🥛',ar:'الحَلِيب',v:9,vU:'ليرات'},b:{em:'🧂',ar:'المِلْح',v:4,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'عُلْبَةُ الحَلِيبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ (س.٧٤)'},
+{a:{em:'🍇',ar:'العِنَب',v:7,vU:'ليرات'},b:{em:'🍅',ar:'الطَّماطِم',v:6,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'العِنَبُ أَغْلى مِنَ الطَّماطِمِ'},
+{a:{em:'🌽',ar:'الفاصوليا',v:9,vU:'ليرات'},b:{em:'🥔',ar:'البَطاطا',v:5,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',exp:'البَطاطا أَرْخَصُ مِنَ الفاصوليا (س.٦٨)'},
+{a:{em:'🍯',ar:'العَسَل',v:15,vU:'ليرات'},b:{em:'🧂',ar:'المِلْح',v:3,vU:'ليرات'},q:'أَيُّهُما أَرْخَص؟',exp:'المِلْحُ أَرْخَصُ مِنَ العَسَلِ'},
+{a:{em:'🍊',ar:'البُرْتُقال',v:8,vU:'ليرات'},b:{em:'🍒',ar:'الكَرَز',v:12,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'الكَرَزُ أَغْلى مِنَ البُرْتُقالِ'},
+{a:{em:'🍌',ar:'المَوْز',v:7,vU:'ليرات'},b:{em:'🍎',ar:'التُّفّاح',v:10,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'التُّفّاحُ أَغْلى مِنَ المَوْزِ (س.٨٢)'},
+
+{a:{em:'🍎',ar:'التُّفّاحَة',v:'كَبير',vU:''},b:{em:'🍒',ar:'الكَرَزَة',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',exp:'التُّفّاحَةُ أَكْبَرُ مِنَ الكَرَزَةِ'},
+{a:{em:'🍊',ar:'البُرْتُقالَة',v:'كَبير',vU:''},b:{em:'🍒',ar:'الكَرَزَة',v:'صَغير',vU:''},q:'أَيُّهُما أَصْغَر؟',exp:'الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ (س.٧٤)'},
+{a:{em:'🍎',ar:'التُّفّاحَة',v:'كَبير',vU:''},b:{em:'🍇',ar:'العِنَبَة',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',exp:'التُّفّاحَةُ أَكْبَرُ مِنَ العِنَبَةِ'},
+
+{a:{em:'🛍️',ar:'كَيْسُ البَطاطا',v:'ثَقيل',vU:''},b:{em:'👜',ar:'كَيْسُ الفُلْفُل',v:'خَفيف',vU:''},q:'أَيُّهُما أَثْقَل؟',exp:'كَيْسُ البَطاطا أَثْقَلُ مِنْ كَيْسِ الفُلْفُلِ (س.٧٢)'},
+{a:{em:'📦',ar:'صُنْدوقٌ كَبير',v:'كَبير',vU:''},b:{em:'🎁',ar:'صُنْدوقٌ صَغير',v:'صَغير',vU:''},q:'أَيُّهُما أَكْبَر؟',exp:'الصُّنْدوقُ الكَبيرُ أَكْبَرُ مِنَ الصُّنْدوقِ الصَّغيرِ (س.٧٢)'},
+{a:{em:'🥕',ar:'الجَزَر',v:6,vU:'ليرات'},b:{em:'🧅',ar:'البَصَل',v:4,vU:'ليرات'},q:'أَيُّهُما أَغْلى؟',exp:'الجَزَرُ أَغْلى مِنَ البَصَلِ'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 function correctAnswer(q){
@@ -128,7 +121,6 @@ function loadQ(){
 var q=qs[cur];
 document.getElementById('em1').textContent=q.a.em;document.getElementById('ar1').textContent=q.a.ar;document.getElementById('price1').textContent=q.a.v+(q.a.vU?' '+q.a.vU:'');
 document.getElementById('em2').textContent=q.b.em;document.getElementById('ar2').textContent=q.b.ar;document.getElementById('price2').textContent=q.b.v+(q.b.vU?' '+q.b.vU:'');
-document.getElementById('quest').textContent=q.q;document.getElementById('tr').textContent=q.tr;
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 q._correct=correctAnswer(q);

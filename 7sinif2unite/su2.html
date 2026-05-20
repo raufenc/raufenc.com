@@ -8,12 +8,12 @@
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#E91E63);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(16px,1.8vw,22px);overflow-x:hidden}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f2e,#3a1450,#E91E63);min-height:100vh;color:#1a0f2e;padding:20px;font-size:clamp(20px,2.4vw,28px);overflow-x:hidden}
 .box{background:#fff;border-radius:24px;padding:24px;max-width:880px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-h1{text-align:center;color:#C2185B;font-size:1.55em;margin-bottom:6px}
-.sub{text-align:center;color:#AD1457;margin-bottom:14px;font-size:.95em}
+h1{text-align:center;color:#C2185B;font-size:2.2em;margin-bottom:6px}
+.sub{text-align:center;color:#AD1457;margin-bottom:14px;font-size:1.2em}
 .bar{display:flex;justify-content:space-between;background:#FCE4EC;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:bold;color:#880E4F;flex-wrap:wrap;gap:6px}
-.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:1.15em;line-height:1.55}
 .tip b{color:#C2185B}
 .shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
 .item{background:linear-gradient(180deg,#FCE4EC,#F8BBD0);border:3px dashed #F48FB1;border-radius:14px;padding:14px 8px 12px;text-align:center;position:relative;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;transition:all .25s}
@@ -67,28 +67,23 @@ h1{text-align:center;color:#C2185B;font-size:1.55em;margin-bottom:6px}
 </div>
 </div>
 <script>
-/* Ürünler SADECE Ünite 2 kelime havuzundan:
-   Meyveler: تفاح, برتقال, موز, عنب, كرز, مشمش
-   Sebzeler: طماطم, خيار, جزر, باذنجان, بطاطا, بصل, فلفل, فاصوليا
-   Diğer: خبز, حليب, ملح, سكر, شاي, عسل, بيض, مكرونة
-   Fiyat ifadeleri kitap s.68-71'den (بِخَمْس ليرات, بِتِسْع ليرات vs.)
-*/
+
 var ROUNDS=[
-/* Round 1 — temel yiyecek */
+
 [
   {em:'🍞',ar:'الخُبْز',price:'بِلِيرَتَيْن'},
   {em:'🥛',ar:'الحَلِيب',price:'بِخَمْس لِيرات'},
   {em:'🍯',ar:'العَسَل',price:'بِسَبْع لِيرات'},
   {em:'🧂',ar:'المِلْح',price:'بِأَرْبَع لِيرات'}
 ],
-/* Round 2 — meyveler */
+
 [
   {em:'🍎',ar:'التُّفّاح',price:'بِعَشَر لِيرات'},
   {em:'🍊',ar:'البُرْتُقال',price:'بِثَماني لِيرات'},
   {em:'🍒',ar:'الكَرَز',price:'بِاثْنَتَيْ عَشْرَة لِيرَة'},
   {em:'🍑',ar:'المِشْمِش',price:'بِتِسْع لِيرات'}
 ],
-/* Round 3 — sebzeler */
+
 [
   {em:'🍅',ar:'الطَّماطِم',price:'بِسِتّ لِيرات'},
   {em:'🥒',ar:'الخِيار',price:'بِخَمْس لِيرات'},

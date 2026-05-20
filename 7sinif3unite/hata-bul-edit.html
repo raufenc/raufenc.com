@@ -8,13 +8,13 @@
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f1f,#440a4f,#9C27B0);min-height:100vh;color:#1a0f1f;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#1a0f1f,#440a4f,#9C27B0);min-height:100vh;color:#1a0f1f;padding:20px;font-size:clamp(20px,2.4vw,28px)}
 .box{background:#fff;border-radius:24px;padding:24px;max-width:760px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
+h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 .edited-tag{display:inline-block;background:#FFC107;color:#5D4037;padding:3px 12px;border-radius:14px;font-size:.72em;font-weight:bold;margin-left:6px}
-.sub{text-align:center;color:#9C27B0;margin-bottom:14px;font-size:.95em}
+.sub{text-align:center;color:#9C27B0;margin-bottom:14px;font-size:1.2em}
 .bar{display:flex;justify-content:space-between;background:#F3E5F5;border-radius:12px;padding:10px 16px;margin-bottom:12px;font-weight:bold;color:#4A148C;flex-wrap:wrap;gap:6px}
-.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:1.15em;line-height:1.55}
 .tip b{color:#7B1FA2}
 .timer-wrap{width:100%;height:10px;background:#F3E5F5;border-radius:5px;margin-bottom:14px;overflow:hidden}
 .timer-bar{height:100%;background:#4CAF50;border-radius:5px;transition:width .1s linear,background .3s}
@@ -27,7 +27,7 @@ h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
 .opt.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
 .opt.disabled{pointer-events:none;opacity:.6}
 .fb{text-align:center;margin-top:10px;min-height:22px;font-weight:bold}
-.exp{text-align:center;color:#7B1FA2;margin-top:4px;font-size:.95em;background:#F3E5F5;padding:8px 12px;border-radius:10px;min-height:0}
+.exp{text-align:center;color:#7B1FA2;margin-top:4px;font-size:1.15em;background:#F3E5F5;padding:8px 12px;border-radius:10px;min-height:0}
 .btn{display:inline-block;background:linear-gradient(135deg,#7B1FA2,#9C27B0);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
 .btn:hover{filter:brightness(1.1)}
 .btn.alt{background:#9c88ff}
@@ -53,7 +53,7 @@ h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
 </div>
 <div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/12</span></div>
 <div class="timer-wrap"><div class="timer-bar" id="tbar" style="width:100%"></div></div>
-<div class="cat" id="cat">…<div class="tr" id="cattr"></div></div>
+<div class="cat" id="cat">…</div>
 <div class="opts" id="opts"></div>
 <div class="fb" id="fb"></div>
 <div class="exp" id="exp"></div>
@@ -69,33 +69,29 @@ h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
 </div>
 <script>
 var TIME=12000;  // 12 saniye (orijinal 8 idi)
-/* SADECE Ünite 3 kitabındaki kelime havuzundan:
-   Vasıtalar (kitap s.96-105): طائرة, قطار, سفينة, حافلة, سيارة, دراجة, مترو + mَشي
-   Trafik (kitap s.117): الضَّوْء الأَحْمَر/الأَصْفَر/الأَخْضَر (NOT: الإشارة değil!)
-   Karşılaştırma (s.123): أسرع/أبطأ
-   Fiiller (s.98-114): يسافر, يركب, يذهب, يرجع, يتجه, ينزل, يصل, يخرج, امشِ, اعبر, قف */
+
 var ALL=[
-/* Mod 1: zamire göre fiil */
-{cat:'الفِعْلُ المُناسِب لِـ "هُوَ"',tr:'"O (e)" zamirine uygun fiili seç — farklı olanı bul',opts:['يَذْهَبُ','يَرْكَبُ','يُسافِرُ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = هِيَ / أَنْتَ'},
-{cat:'الفِعْلُ المُناسِب لِـ "هِيَ"',tr:'"O (k)" zamirine uygun fiili seç',opts:['تَرْكَبُ','تُسافِرُ','يَرْكَبُ','تَذْهَبُ'],odd:2,exp:'يَرْكَبُ = هُوَ'},
-{cat:'الفِعْلُ المُناسِب لِـ "أَنْتَ"',tr:'"Sen (e)" zamirine uygun fiili seç',opts:['تَذْهَبُ','تَرْكَبُ','تُسافِرُ','تَذْهَبينَ'],odd:3,exp:'تَذْهَبينَ = أَنْتِ'},
-{cat:'الفِعْلُ المُناسِب لِـ "أَنْتِ"',tr:'"Sen (k)" zamirine uygun fiili seç',opts:['تَذْهَبينَ','تَرْكَبينَ','تُسافِرينَ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = أَنْتَ / هِيَ'},
-/* Mod 2: fiile göre zamir */
-{cat:'الضَّميرُ المُناسِب لِـ "يَذْهَبُ"',tr:'"يَذْهَبُ" fiilinin zamirini seç',opts:['هُوَ','هِيَ','أَنا','نَحْنُ'],odd:1,exp:'يَذْهَبُ خاصٌّ بِـ هُوَ'},
-{cat:'الضَّميرُ المُناسِب لِـ "تَرْكَبينَ"',tr:'"تَرْكَبينَ" fiilinin zamirini seç',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,exp:'تَرْكَبينَ خاصٌّ بِـ أَنْتِ'},
-{cat:'الضَّميرُ المُناسِب لِـ "أُسافِرُ"',tr:'"أُسافِرُ" fiilinin zamirini seç',opts:['أَنا','هُوَ','أَنْتَ','هِيَ'],odd:0,exp:'أُسافِرُ خاصٌّ بِـ أَنا'},
-/* Mod 3: seyahat türü — sadece kitap vasıtaları (s.104-105) */
-{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',tr:'Hava taşıtları (s.105) — biri hava yolu değil',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة (s.104)'},
-{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',tr:'Kara taşıtları (s.105) — biri kara yolu değil',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة = بَحْرّيَّة (s.98, 122)'},
-{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',tr:'Deniz taşıtları — biri deniz yolu değil',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرّيَّة — الباقي بَرّيَّة'},
-/* Karşılaştırma */
-{cat:'كَلِماتُ المُقارَنَة في السُّرْعَة',tr:'Hız karşılaştırması — biri konu dışı',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','أَحْدَث'],odd:2,exp:'أَكْبَر = boyut, hız değil (s.123: الطائرة أسرع من السيارة)'},
-/* Trafik — kitap s.117: الضَّوْء الأَحْمَر/الأَصْفَر/الأَخْضَر */
-{cat:'الضَّوْء وَإِشارات المُرور',tr:'Trafik ışığı — biri ışık değil',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة = otobüs, ışık değil (kitap s.117)'},
-/* Yön kelimeleri (kitap s.114-115) */
-{cat:'الاتِّجاهات',tr:'Yönler — biri yön değil',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة = uçak, yön değil'},
-/* Emir kipi (kitap s.114) */
-{cat:'الأَفْعالُ بِصيغَةِ الأَمْر',tr:'Emir kipi — biri emir değil',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ = mudâri, emir değil (kitap s.114: امشِ, اعبر, قف)'}
+
+{cat:'الفِعْلُ المُناسِب لِـ "هُوَ"',opts:['يَذْهَبُ','يَرْكَبُ','يُسافِرُ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ'},
+{cat:'الفِعْلُ المُناسِب لِـ "هِيَ"',opts:['تَرْكَبُ','تُسافِرُ','يَرْكَبُ','تَذْهَبُ'],odd:2,exp:'يَرْكَبُ'},
+{cat:'الفِعْلُ المُناسِب لِـ "أَنْتَ"',opts:['تَذْهَبُ','تَرْكَبُ','تُسافِرُ','تَذْهَبينَ'],odd:3,exp:'تَذْهَبينَ'},
+{cat:'الفِعْلُ المُناسِب لِـ "أَنْتِ"',opts:['تَذْهَبينَ','تَرْكَبينَ','تُسافِرينَ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ'},
+
+{cat:'الضَّميرُ المُناسِب لِـ "يَذْهَبُ"',opts:['هُوَ','هِيَ','أَنا','نَحْنُ'],odd:1,exp:'يَذْهَبُ خاصٌّ بِـ هُوَ'},
+{cat:'الضَّميرُ المُناسِب لِـ "تَرْكَبينَ"',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,exp:'تَرْكَبينَ خاصٌّ بِـ أَنْتِ'},
+{cat:'الضَّميرُ المُناسِب لِـ "أُسافِرُ"',opts:['أَنا','هُوَ','أَنْتَ','هِيَ'],odd:0,exp:'أُسافِرُ خاصٌّ بِـ أَنا'},
+
+{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة'},
+{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرّيَّة — الباقي بَرّيَّة'},
+
+{cat:'كَلِماتُ المُقارَنَة في السُّرْعَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','أَحْدَث'],odd:2,exp:'أَكْبَر'},
+
+{cat:'الضَّوْء وَإِشارات المُرور',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة'},
+
+{cat:'الاتِّجاهات',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة'},
+
+{cat:'الأَفْعالُ بِصيغَةِ الأَمْر',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,timerInt;
@@ -104,7 +100,7 @@ function loadQ(){
 clearInterval(timerInt);
 var q=qs[cur];
 document.getElementById('cat').firstChild.textContent='المَجْموعَة: '+q.cat;
-document.getElementById('cattr').textContent='🇹🇷 '+q.tr;
+document.getElementById('cattr').textContent=''+q.tr;
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 var el=document.getElementById('opts');el.innerHTML='';

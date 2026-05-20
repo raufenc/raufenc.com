@@ -8,12 +8,12 @@
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#004D40,#00695C,#00897B);min-height:100vh;color:#004D40;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#004D40,#00695C,#00897B);min-height:100vh;color:#004D40;padding:20px;font-size:clamp(20px,2.4vw,28px)}
 .box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-h1{text-align:center;color:#004D40;font-size:1.55em;margin-bottom:6px}
-.sub{text-align:center;color:#00897B;margin-bottom:14px;font-size:.95em}
+h1{text-align:center;color:#004D40;font-size:2.2em;margin-bottom:6px}
+.sub{text-align:center;color:#00897B;margin-bottom:14px;font-size:1.2em}
 .bar{display:flex;justify-content:space-between;background:#E0F2F1;border-radius:12px;padding:10px 16px;margin-bottom:16px;font-weight:bold;color:#004D40;flex-wrap:wrap;gap:6px}
-.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:1.15em;line-height:1.55}
 .tip b{color:#004D40}
 .scene{background:linear-gradient(135deg,#00897B,#004D40);color:#fff;border-radius:16px;padding:22px 18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,137,123,.35)}
 .scene .who{font-size:2.2em}
@@ -34,7 +34,7 @@ h1{text-align:center;color:#004D40;font-size:1.55em;margin-bottom:6px}
 .btn-ans.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
 .btn-ans.disabled{pointer-events:none;opacity:.55}
 .fb{text-align:center;margin-top:10px;min-height:30px;font-size:1.1em;font-weight:bold}
-.exp{text-align:center;color:#00695C;margin-top:4px;font-size:.98em;background:#E0F2F1;padding:10px 12px;border-radius:10px;line-height:1.55}
+.exp{text-align:center;color:#00695C;margin-top:4px;font-size:1.15em;background:#E0F2F1;padding:10px 12px;border-radius:10px;line-height:1.55}
 .btn{display:inline-block;background:#00897B;color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
 .btn:hover{background:#004D40}
 .btn.alt{background:#9c88ff}
@@ -60,7 +60,6 @@ h1{text-align:center;color:#004D40;font-size:1.55em;margin-bottom:6px}
 <div class="who" id="who">🧑</div>
 <div class="item-row"><span class="pic" id="pic">🧆</span><span class="item-label" id="item">الكُفْتَة</span></div>
 <div class="ask" id="q"></div>
-<div class="tr" id="tr"></div>
 </div>
 <div class="options">
 <div class="btn-ans btn-yes" id="yesBtn"><span class="em">✅</span>نَعَم</div>
@@ -79,29 +78,25 @@ h1{text-align:center;color:#004D40;font-size:1.55em;margin-bottom:6px}
 </div>
 </div>
 <script>
-/* Sahneye karakter + (karakterin tercih ettiği) ürün + soru + doğru cevap + açıklama
-   Görsel kuralı:
-     ✓ "Yes" sorularında: karakterin yanındaki ürün = soru sorulan ürün → NEAM
-     ✗ "No" sorularında: karakterin yanındaki ürün ≠ soru sorulan ürün
-                         (karakterin gerçekten yediği/içtiği gösterilir, açıklamada teyit edilir) */
+
 var ALL=[
-/* Kahvaltıda tercihler */
-{who:'🧑',pic:'🧆',item:'الكُفْتَة',q:'هَلْ تُحِبُّ الكُفْتَةَ؟',tr:'Köfte sever misin?',ans:'yes',exp:'نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا'},
-{who:'👧',pic:'🐟',item:'السَّمَك',q:'هَلْ تُحِبِّينَ المَكَرونَةَ؟',tr:'Makarna sever misin (kız)?',ans:'no',exp:'لا، أُحِبُّ السَّمَكَ، لا المَكَرونَةَ'},
-{who:'🧑',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ الشّايَ؟',tr:'Çay içer misin?',ans:'yes',exp:'نَعَم، أَشْرَبُ الشّايَ كَثيرًا في الفَطورِ'},
-{who:'👧',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبينَ القَهْوَةَ بَعْدَ الغَداءِ؟',tr:'Öğleden sonra kahve içer misin?',ans:'no',exp:'لا، أَشْرَبُ الشّايَ بَعْدَ الغَداءِ'},
-/* 3. şahıs — kitap s.28-29 örnekleri */
-{who:'🧔',pic:'🍯',item:'العَسَل',q:'هَلْ يَأكُلُ عُثْمانُ العَسَلَ؟',tr:'Osman bal yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ العَسَلَ والزُبْدَةَ'},
-{who:'👩',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ شَيْماءُ الحَلِيبَ؟',tr:'Şeymâ süt içer mi?',ans:'yes',exp:'نَعَم، هِيَ تَشْرَبُ الحَلِيبَ'},
-{who:'🧔',pic:'🍗',item:'الدَّجاج',q:'هَلْ يَأكُلُ إِبراهيمُ الدَّجاجَ؟',tr:'İbrahim tavuk yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الدَّجاجَ'},
-{who:'👩',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبُ ياسَمينُ العَصيرَ؟',tr:'Yâsemin meyve suyu içer mi?',ans:'no',exp:'لا، هِيَ تَشْرَبُ القَهْوَةَ'},
-/* Öğün sınıflandırması — kitap s.24'e göre */
-{who:'🧑',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ الحَلِيبَ في الفَطورِ؟',tr:'Kahvaltıda süt içer misin?',ans:'yes',exp:'نَعَم، أَشْرَبُ الحَلِيبَ كَثيرًا في الفَطورِ'},
-{who:'👧',pic:'🍞',item:'الخُبْز',q:'هَلْ تَأكُلينَ السَّمَكَ في الفَطورِ؟',tr:'Kahvaltıda balık yer misin (kız)?',ans:'no',exp:'لا، آكُلُ الخُبْزَ في الفَطورِ. السَّمَكُ في العَشاءِ'},
-{who:'🧑',pic:'🫒',item:'الزَّيتون',q:'هَلْ تَأكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ؟',tr:'Kahvaltıda zeytin ve peynir yer misin?',ans:'yes',exp:'نَعَم، آكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ'},
-{who:'👧',pic:'🧀',item:'الجُبْن',q:'هَلْ تَأكُلينَ اللَّحْمَ في الفَطورِ؟',tr:'Kahvaltıda et yer misin (kız)?',ans:'no',exp:'لا، آكُلُ الجُبْنَ في الفَطورِ. اللَّحْمُ في الغَداءِ'},
-{who:'🧔',pic:'🧆',item:'الكُفْتَة',q:'هَلْ يَأكُلُ أَحْمَدُ الكُفْتَةَ؟',tr:'Ahmed köfte yer mi?',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الكُفْتَةَ'},
-{who:'👩',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ عائِشَةُ القَهْوَةَ؟',tr:'Âişe kahve içer mi?',ans:'no',exp:'لا، هِيَ تَشْرَبُ الشّايَ، لا القَهْوَةَ'}
+
+{who:'🧑',pic:'🧆',item:'الكُفْتَة',q:'هَلْ تُحِبُّ الكُفْتَةَ؟',ans:'yes',exp:'نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا'},
+{who:'👧',pic:'🐟',item:'السَّمَك',q:'هَلْ تُحِبِّينَ المَكَرونَةَ؟',ans:'no',exp:'لا، أُحِبُّ السَّمَكَ، لا المَكَرونَةَ'},
+{who:'🧑',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ الشّايَ؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الشّايَ كَثيرًا في الفَطورِ'},
+{who:'👧',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبينَ القَهْوَةَ بَعْدَ الغَداءِ؟',ans:'no',exp:'لا، أَشْرَبُ الشّايَ بَعْدَ الغَداءِ'},
+
+{who:'🧔',pic:'🍯',item:'العَسَل',q:'هَلْ يَأكُلُ عُثْمانُ العَسَلَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ العَسَلَ والزُبْدَةَ'},
+{who:'👩',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ شَيْماءُ الحَلِيبَ؟',ans:'yes',exp:'نَعَم، هِيَ تَشْرَبُ الحَلِيبَ'},
+{who:'🧔',pic:'🍗',item:'الدَّجاج',q:'هَلْ يَأكُلُ إِبراهيمُ الدَّجاجَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الدَّجاجَ'},
+{who:'👩',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبُ ياسَمينُ العَصيرَ؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ القَهْوَةَ'},
+
+{who:'🧑',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ الحَلِيبَ في الفَطورِ؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الحَلِيبَ كَثيرًا في الفَطورِ'},
+{who:'👧',pic:'🍞',item:'الخُبْز',q:'هَلْ تَأكُلينَ السَّمَكَ في الفَطورِ؟',ans:'no',exp:'لا، آكُلُ الخُبْزَ في الفَطورِ. السَّمَكُ في العَشاءِ'},
+{who:'🧑',pic:'🫒',item:'الزَّيتون',q:'هَلْ تَأكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ؟',ans:'yes',exp:'نَعَم، آكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ'},
+{who:'👧',pic:'🧀',item:'الجُبْن',q:'هَلْ تَأكُلينَ اللَّحْمَ في الفَطورِ؟',ans:'no',exp:'لا، آكُلُ الجُبْنَ في الفَطورِ. اللَّحْمُ في الغَداءِ'},
+{who:'🧔',pic:'🧆',item:'الكُفْتَة',q:'هَلْ يَأكُلُ أَحْمَدُ الكُفْتَةَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الكُفْتَةَ'},
+{who:'👩',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ عائِشَةُ القَهْوَةَ؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ الشّايَ، لا القَهْوَةَ'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc;
@@ -112,7 +107,6 @@ document.getElementById('who').textContent=q.who;
 document.getElementById('pic').textContent=q.pic;
 document.getElementById('item').textContent=q.item;
 document.getElementById('q').textContent=q.q;
-document.getElementById('tr').textContent='🇹🇷 '+q.tr;
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 ['yesBtn','noBtn'].forEach(function(id){var b=document.getElementById(id);b.classList.remove('correct','wrong','disabled')});

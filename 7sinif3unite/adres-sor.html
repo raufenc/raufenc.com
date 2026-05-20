@@ -8,12 +8,12 @@
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#0c1d3a,#BF360C,#FF5722);min-height:100vh;color:#0c1d3a;padding:20px;font-size:clamp(16px,1.8vw,22px)}
+body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#0c1d3a,#BF360C,#FF5722);min-height:100vh;color:#0c1d3a;padding:20px;font-size:clamp(20px,2.4vw,28px)}
 .box{background:#fff;border-radius:24px;padding:24px;max-width:780px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-h1{text-align:center;color:#BF360C;font-size:1.55em;margin-bottom:6px}
-.sub{text-align:center;color:#E64A19;margin-bottom:14px;font-size:.95em}
+h1{text-align:center;color:#BF360C;font-size:2.2em;margin-bottom:6px}
+.sub{text-align:center;color:#E64A19;margin-bottom:14px;font-size:1.2em}
 .bar{display:flex;justify-content:space-between;background:#FBE9E7;border-radius:12px;padding:10px 16px;margin-bottom:14px;font-weight:bold;color:#BF360C;flex-wrap:wrap;gap:6px}
-.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:.92em;line-height:1.55}
+.tip{background:#FFF8E1;border-right:4px solid #FFC107;border-radius:8px;padding:10px 14px;margin-bottom:14px;color:#5D4037;font-size:1.15em;line-height:1.55}
 .tip b{color:#BF360C}
 .q-card{background:linear-gradient(135deg,#FF5722,#BF360C);color:#fff;border-radius:16px;padding:18px;text-align:center;margin-bottom:14px;box-shadow:0 8px 22px rgba(191,54,12,.4)}
 .q-card .badge{display:inline-block;background:#FFD54F;color:#5D4037;padding:4px 14px;border-radius:18px;font-size:.78em;font-weight:bold;margin-bottom:8px}
@@ -26,7 +26,7 @@ h1{text-align:center;color:#BF360C;font-size:1.55em;margin-bottom:6px}
 .opt.wrong{background:#FFCDD2;border-color:#F44336;color:#B71C1C}
 .opt.disabled{pointer-events:none;opacity:.6}
 .fb{text-align:center;margin-top:14px;min-height:24px;font-weight:bold;font-size:1em}
-.exp{text-align:center;color:#E64A19;margin-top:6px;font-size:.95em;background:#FBE9E7;padding:8px 12px;border-radius:10px;min-height:0}
+.exp{text-align:center;color:#E64A19;margin-top:6px;font-size:1.15em;background:#FBE9E7;padding:8px 12px;border-radius:10px;min-height:0}
 .btn{display:inline-block;background:linear-gradient(135deg,#FF5722,#BF360C);color:#fff;border:none;border-radius:25px;padding:12px 28px;font-family:inherit;font-size:1em;cursor:pointer;margin:8px 4px;font-weight:bold}
 .btn:hover{filter:brightness(1.1)}
 .btn.alt{background:#9c88ff}
@@ -45,13 +45,12 @@ h1{text-align:center;color:#BF360C;font-size:1.55em;margin-bottom:6px}
 <div class="sub">اخْتَرِ الجَوابَ المُناسِبَ لِكُلِّ سُؤال (يَن / كَيْف / بِماذا / إلى أَيْن)</div>
 <div id="game">
 <div class="tip">
-<b>📘 أَدَوات السُّؤال:</b> <b>أَيْن</b> = nerede (yer)، <b>كَيْف</b> = nasıl (yöntem/yön)، <b>بِماذا</b> = ne ile (vasıta)، <b>إلى أَيْن</b> = nereye، <b>مِنْ أَيْن</b> = nereden.
+<b>📘 أَدَوات السُّؤال:</b> <b>أَيْن</b> لِلمَكانِ، <b>كَيْف</b> لِلطَّريقَة، <b>بِماذا</b> لِلوَسيلَة، <b>إلى أَيْن</b> لِلوُجْهَة، <b>مِنْ أَيْن</b> لِلأَصْل.
 </div>
 <div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
 <div class="q-card">
   <div class="badge" id="badge">أَيْن…؟</div>
   <div class="quest" id="quest">…</div>
-  <div class="tr" id="tr"></div>
 </div>
 <div class="opts" id="opts"></div>
 <div class="fb" id="fb"></div>
@@ -68,18 +67,18 @@ h1{text-align:center;color:#BF360C;font-size:1.55em;margin-bottom:6px}
 </div>
 <script>
 var ALL=[
-{badge:'أَيْن…؟',q:'أَيْنَ عُنْوانُ المَدْرَسَة؟',tr:'Okulun adresi nerede?',ans:'في شارِع الفاتِح، رَقْم ١٢',opts:['في شارِع الفاتِح، رَقْم ١٢','بِالحافِلَة','إلى البَيْتِ','بَعْدَ الظُّهْرِ'],exp:'"أَيْن" بِجَوابِ المَكان'},
-{badge:'كَيْف…؟',q:'كَيْفَ أَذْهَبُ إلى المَطار؟',tr:'Havalimanına nasıl giderim?',ans:'اِذْهَبْ يَمينًا ثُمَّ يَسارًا',opts:['اِذْهَبْ يَمينًا ثُمَّ يَسارًا','بِخَمْس ليرات','إلى البَيْتِ','بِالحافِلَة'],exp:'"كَيْف" بِجَوابِ الطَّريقَة'},
-{badge:'بِماذا…؟',q:'بِماذا تَذْهَبُ إلى العَمَل؟',tr:'İşe ne ile gidersin?',ans:'بِالسَّيّارَة',opts:['بِالسَّيّارَة','في شارِع زَيْنَب','إلى المَدْرَسَة','يَمينًا'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'},
-{badge:'إلى أَيْن…؟',q:'إلى أَيْنَ تُسافِرُ في العُطْلَة؟',tr:'Tatilde nereye yolculuk edersin?',ans:'إلى إِسْطَنْبول',opts:['إلى إِسْطَنْبول','بِالطّائِرَة','صَباحًا','أَنا مِنْ تُرْكِيا'],exp:'"إلى أَيْن" بِجَوابِ الوُجْهَة'},
-{badge:'مِنْ أَيْن…؟',q:'مِنْ أَيْنَ أَنْتَ؟',tr:'Sen nerelisin?',ans:'أَنا مِنْ تُرْكِيا',opts:['أَنا مِنْ تُرْكِيا','إلى المَدْرَسَة','بِالقِطار','نَعَم'],exp:'"مِنْ أَيْن" بِجَوابِ الأَصْل'},
-{badge:'أَيْن…؟',q:'أَيْنَ مَحَطَّةُ الحافِلَة؟',tr:'Otobüs durağı nerede?',ans:'عَلى اليَمين، أَمامَ المَسْجِد',opts:['عَلى اليَمين، أَمامَ المَسْجِد','بِالطّائِرَة','إلى المَطار','صَباحًا'],exp:'"أَيْن" بِجَوابِ المَكان'},
-{badge:'كَيْف…؟',q:'كَيْفَ أَصِلُ إلى السوق؟',tr:'Pazara nasıl ulaşırım?',ans:'اِمْشِ إلى الأَمام، ثُمَّ اِتَّجِهْ إلى اليَمين',opts:['اِمْشِ إلى الأَمام، ثُمَّ اِتَّجِهْ إلى اليَمين','بِالحافِلَة','إلى المَدْرَسَة','صَباحًا'],exp:'"كَيْف" بِجَوابِ الإِرْشاد (kitap s.109)'},
-{badge:'بِماذا…؟',q:'بِماذا تُسافِرُ إلى مَكَّةَ المُكَرَّمَة؟',tr:'Mekke-i Mükerreme’ye ne ile gidersin?',ans:'بِالطّائِرَة',opts:['بِالطّائِرَة','في الشّارِع','يَمينًا','صَباحًا'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'},
-{badge:'إلى أَيْن…؟',q:'إلى أَيْنَ تَذْهَبُ يَوْمَ الجُمُعَة؟',tr:'Cuma günü nereye gidersin?',ans:'إلى المَسْجِدِ لِصَلاةِ الجُمُعَة',opts:['إلى المَسْجِدِ لِصَلاةِ الجُمُعَة','بِالحافِلَة','في شارِع كَذا','أَنا تُرْكِيّ'],exp:'"إلى أَيْن" بِجَوابِ الوُجْهَة'},
-{badge:'أَيْن…؟',q:'أَيْنَ تَسْكُنُ يا أَحْمَد؟',tr:'Ahmet, nerede oturuyorsun?',ans:'أَسْكُنُ في شارِعِ الحَدائِق',opts:['أَسْكُنُ في شارِعِ الحَدائِق','بِالقِطار','إلى البَيْت','صَباحًا'],exp:'"أَيْن" بِجَوابِ المَكان'},
-{badge:'كَيْف…؟',q:'كَيْفَ تَعْرِفُ الشّارِعَ؟',tr:'Sokağı nasıl tanırsın?',ans:'مِنَ الإِشاراتِ والأَرقام',opts:['مِنَ الإِشاراتِ والأَرقام','بِالسَّيّارَة','إلى المَدْرَسَة','بِخَمْس ليرات'],exp:'"كَيْف" بِجَوابِ الطَّريقَة'},
-{badge:'بِماذا…؟',q:'بِماذا تَرْكَبُ إلى المَدْرَسَة؟',tr:'Okula ne ile binersin?',ans:'بِالحافِلَة',opts:['بِالحافِلَة','صَباحًا','أَمامَ السوق','نَعَم'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'}
+{badge:'أَيْن…؟',q:'أَيْنَ عُنْوانُ المَدْرَسَة؟',ans:'في شارِع الفاتِح، رَقْم ١٢',opts:['في شارِع الفاتِح، رَقْم ١٢','بِالحافِلَة','إلى البَيْتِ','بَعْدَ الظُّهْرِ'],exp:'"أَيْن" بِجَوابِ المَكان'},
+{badge:'كَيْف…؟',q:'كَيْفَ أَذْهَبُ إلى المَطار؟',ans:'اِذْهَبْ يَمينًا ثُمَّ يَسارًا',opts:['اِذْهَبْ يَمينًا ثُمَّ يَسارًا','بِخَمْس ليرات','إلى البَيْتِ','بِالحافِلَة'],exp:'"كَيْف" بِجَوابِ الطَّريقَة'},
+{badge:'بِماذا…؟',q:'بِماذا تَذْهَبُ إلى العَمَل؟',ans:'بِالسَّيّارَة',opts:['بِالسَّيّارَة','في شارِع زَيْنَب','إلى المَدْرَسَة','يَمينًا'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'},
+{badge:'إلى أَيْن…؟',q:'إلى أَيْنَ تُسافِرُ في العُطْلَة؟',ans:'إلى إِسْطَنْبول',opts:['إلى إِسْطَنْبول','بِالطّائِرَة','صَباحًا','أَنا مِنْ تُرْكِيا'],exp:'"إلى أَيْن" بِجَوابِ الوُجْهَة'},
+{badge:'مِنْ أَيْن…؟',q:'مِنْ أَيْنَ أَنْتَ؟',ans:'أَنا مِنْ تُرْكِيا',opts:['أَنا مِنْ تُرْكِيا','إلى المَدْرَسَة','بِالقِطار','نَعَم'],exp:'"مِنْ أَيْن" بِجَوابِ الأَصْل'},
+{badge:'أَيْن…؟',q:'أَيْنَ مَحَطَّةُ الحافِلَة؟',ans:'عَلى اليَمين، أَمامَ المَسْجِد',opts:['عَلى اليَمين، أَمامَ المَسْجِد','بِالطّائِرَة','إلى المَطار','صَباحًا'],exp:'"أَيْن" بِجَوابِ المَكان'},
+{badge:'كَيْف…؟',q:'كَيْفَ أَصِلُ إلى السوق؟',ans:'اِمْشِ إلى الأَمام، ثُمَّ اِتَّجِهْ إلى اليَمين',opts:['اِمْشِ إلى الأَمام، ثُمَّ اِتَّجِهْ إلى اليَمين','بِالحافِلَة','إلى المَدْرَسَة','صَباحًا'],exp:'"كَيْف" بِجَوابِ الإِرْشاد'},
+{badge:'بِماذا…؟',q:'بِماذا تُسافِرُ إلى مَكَّةَ المُكَرَّمَة؟',ans:'بِالطّائِرَة',opts:['بِالطّائِرَة','في الشّارِع','يَمينًا','صَباحًا'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'},
+{badge:'إلى أَيْن…؟',q:'إلى أَيْنَ تَذْهَبُ يَوْمَ الجُمُعَة؟',ans:'إلى المَسْجِدِ لِصَلاةِ الجُمُعَة',opts:['إلى المَسْجِدِ لِصَلاةِ الجُمُعَة','بِالحافِلَة','في شارِع كَذا','أَنا تُرْكِيّ'],exp:'"إلى أَيْن" بِجَوابِ الوُجْهَة'},
+{badge:'أَيْن…؟',q:'أَيْنَ تَسْكُنُ يا أَحْمَد؟',ans:'أَسْكُنُ في شارِعِ الحَدائِق',opts:['أَسْكُنُ في شارِعِ الحَدائِق','بِالقِطار','إلى البَيْت','صَباحًا'],exp:'"أَيْن" بِجَوابِ المَكان'},
+{badge:'كَيْف…؟',q:'كَيْفَ تَعْرِفُ الشّارِعَ؟',ans:'مِنَ الإِشاراتِ والأَرقام',opts:['مِنَ الإِشاراتِ والأَرقام','بِالسَّيّارَة','إلى المَدْرَسَة','بِخَمْس ليرات'],exp:'"كَيْف" بِجَوابِ الطَّريقَة'},
+{badge:'بِماذا…؟',q:'بِماذا تَرْكَبُ إلى المَدْرَسَة؟',ans:'بِالحافِلَة',opts:['بِالحافِلَة','صَباحًا','أَمامَ السوق','نَعَم'],exp:'"بِماذا" بِجَوابِ الوَسيلَة'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc;
@@ -88,7 +87,6 @@ function loadQ(){
 var q=qs[cur];
 document.getElementById('badge').textContent=q.badge;
 document.getElementById('quest').textContent=q.q;
-document.getElementById('tr').textContent='🇹🇷 '+q.tr;
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 var el=document.getElementById('opts');el.innerHTML='';
