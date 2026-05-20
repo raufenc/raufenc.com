@@ -73,10 +73,20 @@ h1{text-align:center;color:#1B5E20;font-size:1.55em;margin-bottom:6px}
 </div>
 </div>
 <script>
+/* SADECE kitap s.96-105'te geçen vasıtalar:
+   جوًّا: طائرة
+   برًّا: سيارة, حافلة, قطار, دراجة, مترو, مَشي
+   بحرًا: سفينة
+   Toplam 8 öğe — 1 hava, 6 kara, 1 deniz (kitap böyle dengeliyor) */
 var ITEMS=[
-{em:'✈️',ar:'طائِرَة',cat:'air'},{em:'🚁',ar:'هَليكوبتر',cat:'air'},{em:'🎈',ar:'مِنْطاد',cat:'air'},{em:'🚀',ar:'صاروخ',cat:'air'},
-{em:'🚗',ar:'سَيّارَة',cat:'land'},{em:'🚌',ar:'حافِلَة',cat:'land'},{em:'🚆',ar:'قِطار',cat:'land'},{em:'🚲',ar:'دَرّاجَة',cat:'land'},{em:'🏍️',ar:'دَرّاجَة نارِيَّة',cat:'land'},
-{em:'🚢',ar:'سَفينَة',cat:'sea'},{em:'⛵',ar:'قارِب',cat:'sea'},{em:'🛥️',ar:'يَخْت',cat:'sea'}
+{em:'✈️',ar:'الطّائِرَة',cat:'air'},
+{em:'🚗',ar:'السَّيّارَة',cat:'land'},
+{em:'🚌',ar:'الحافِلَة',cat:'land'},
+{em:'🚆',ar:'القِطار',cat:'land'},
+{em:'🚲',ar:'الدَّرّاجَة',cat:'land'},
+{em:'🚇',ar:'المَتْرو',cat:'land'},
+{em:'🚶',ar:'مَشْيًا',cat:'land'},
+{em:'🚢',ar:'السَّفينَة',cat:'sea'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var queue,cur,sc,dragState=null;

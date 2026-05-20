@@ -69,24 +69,33 @@ h1{text-align:center;color:#7B1FA2;font-size:1.55em;margin-bottom:6px}
 </div>
 <script>
 var TIME=12000;  // 12 saniye (orijinal 8 idi)
+/* SADECE Ünite 3 kitabındaki kelime havuzundan:
+   Vasıtalar (kitap s.96-105): طائرة, قطار, سفينة, حافلة, سيارة, دراجة, مترو + mَشي
+   Trafik (kitap s.117): الضَّوْء الأَحْمَر/الأَصْفَر/الأَخْضَر (NOT: الإشارة değil!)
+   Karşılaştırma (s.123): أسرع/أبطأ
+   Fiiller (s.98-114): يسافر, يركب, يذهب, يرجع, يتجه, ينزل, يصل, يخرج, امشِ, اعبر, قف */
 var ALL=[
-/* Mod 1: zamire göre fiil (Hu, Hiye, Ente, Enti, Ene) */
+/* Mod 1: zamire göre fiil */
 {cat:'الفِعْلُ المُناسِب لِـ "هُوَ"',tr:'"O (e)" zamirine uygun fiili seç — farklı olanı bul',opts:['يَذْهَبُ','يَرْكَبُ','يُسافِرُ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = هِيَ / أَنْتَ'},
 {cat:'الفِعْلُ المُناسِب لِـ "هِيَ"',tr:'"O (k)" zamirine uygun fiili seç',opts:['تَرْكَبُ','تُسافِرُ','يَرْكَبُ','تَذْهَبُ'],odd:2,exp:'يَرْكَبُ = هُوَ'},
 {cat:'الفِعْلُ المُناسِب لِـ "أَنْتَ"',tr:'"Sen (e)" zamirine uygun fiili seç',opts:['تَذْهَبُ','تَرْكَبُ','تُسافِرُ','تَذْهَبينَ'],odd:3,exp:'تَذْهَبينَ = أَنْتِ'},
 {cat:'الفِعْلُ المُناسِب لِـ "أَنْتِ"',tr:'"Sen (k)" zamirine uygun fiili seç',opts:['تَذْهَبينَ','تَرْكَبينَ','تُسافِرينَ','تَذْهَبُ'],odd:3,exp:'تَذْهَبُ = أَنْتَ / هِيَ'},
 /* Mod 2: fiile göre zamir */
 {cat:'الضَّميرُ المُناسِب لِـ "يَذْهَبُ"',tr:'"يَذْهَبُ" fiilinin zamirini seç',opts:['هُوَ','هِيَ','أَنا','نَحْنُ'],odd:1,exp:'يَذْهَبُ خاصٌّ بِـ هُوَ'},
-{cat:'الضَّميرُ المُناسِب لِـ "تَرْكَبينَ"',tr:'"تَرْكَبينَ" fiilinin zamirini seç',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,exp:'تَرْكَبينَ خاصٌّ بِـ أَنْتِ',hint:0},
+{cat:'الضَّميرُ المُناسِب لِـ "تَرْكَبينَ"',tr:'"تَرْكَبينَ" fiilinin zamirini seç',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,exp:'تَرْكَبينَ خاصٌّ بِـ أَنْتِ'},
 {cat:'الضَّميرُ المُناسِب لِـ "أُسافِرُ"',tr:'"أُسافِرُ" fiilinin zamirini seç',opts:['أَنا','هُوَ','أَنْتَ','هِيَ'],odd:0,exp:'أُسافِرُ خاصٌّ بِـ أَنا'},
-/* Mod 3: seyahat türüne göre ulaşım aracı (cevap = uymayan) */
-{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',tr:'Hava taşıtları — bunlardan biri hava değil',opts:['طائِرَة','هَليكوبتر','مِنْطاد','حافِلَة'],odd:3,exp:'الحافِلَة = vasiate-i berriyye (kara)'},
-{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',tr:'Kara taşıtları — bunlardan biri kara değil',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة = bahriyye (deniz)'},
-{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',tr:'Deniz taşıtları — bunlardan biri deniz değil',opts:['سَفينَة','قارِب','يَخْت','طائِرَة'],odd:3,exp:'الطّائِرَة = jevviyye (hava)'},
+/* Mod 3: seyahat türü — sadece kitap vasıtaları (s.104-105) */
+{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',tr:'Hava taşıtları (s.105) — biri hava yolu değil',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة (s.104)'},
+{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',tr:'Kara taşıtları (s.105) — biri kara yolu değil',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة = بَحْرّيَّة (s.98, 122)'},
+{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',tr:'Deniz taşıtları — biri deniz yolu değil',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرّيَّة — الباقي بَرّيَّة'},
 /* Karşılaştırma */
-{cat:'كَلِماتُ المُقارَنَة (الأَسْرَع)',tr:'Hızla ilgili karşılaştırma — biri konu dışı',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','مُتَوَسِّط'],odd:2,exp:'أَكْبَر = boyut, hız değil'},
-/* Trafik */
-{cat:'إِشاراتُ المُرور',tr:'Trafik işaretleri — biri farklı',opts:['الإِشارَة الحَمْراء','الإِشارَة الخَضْراء','الإِشارَة الصَّفْراء','الحافِلَة'],odd:3,exp:'الحافِلَة = otobüs (taşıt, ışık değil)'}
+{cat:'كَلِماتُ المُقارَنَة في السُّرْعَة',tr:'Hız karşılaştırması — biri konu dışı',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','أَحْدَث'],odd:2,exp:'أَكْبَر = boyut, hız değil (s.123: الطائرة أسرع من السيارة)'},
+/* Trafik — kitap s.117: الضَّوْء الأَحْمَر/الأَصْفَر/الأَخْضَر */
+{cat:'الضَّوْء وَإِشارات المُرور',tr:'Trafik ışığı — biri ışık değil',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة = otobüs, ışık değil (kitap s.117)'},
+/* Yön kelimeleri (kitap s.114-115) */
+{cat:'الاتِّجاهات',tr:'Yönler — biri yön değil',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة = uçak, yön değil'},
+/* Emir kipi (kitap s.114) */
+{cat:'الأَفْعالُ بِصيغَةِ الأَمْر',tr:'Emir kipi — biri emir değil',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ = mudâri, emir değil (kitap s.114: امشِ, اعبر, قف)'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,timerInt;
