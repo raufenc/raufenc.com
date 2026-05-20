@@ -563,6 +563,7 @@ sesOyunBaşla();
 window['g'+n+'Init']();window.scrollTo(0,0);
 }
 function goMenu(){
+if(location.hash&&location.hash.match(/^#g\d+$/)){clearAllTimers();location.href='./index.html';return;}
 for(var i=1;i<=6;i++)document.getElementById('game'+i).classList.remove('active');
 document.getElementById('menuScreen').style.display='';
 document.getElementById('backBtn').classList.add('hidden');
@@ -767,7 +768,7 @@ endGame(1,fs);
    - Aşa (Akşam): balık+salata+meyve suyu+çay+çorba */
 var g2Items=[
 {w:'زَيْتون',e:'🫒',cat:0},{w:'جُبْن',e:'🧀',cat:0},{w:'حَلِيب',e:'🥛',cat:0},{w:'خُبْز',e:'🍞',cat:0},{w:'زُبْدَة',e:'🧈',cat:0},
-{w:'لَحْم',e:'🥩',cat:1},{w:'أُرُز',e:'🍚',cat:1},{w:'قَهْوَة',e:'☕',cat:1},{w:'دَجاج',e:'🍗',cat:1},{w:'كُفْتَة',e:'🍡',cat:1},
+{w:'لَحْم',e:'🥩',cat:1},{w:'أُرُز',e:'🍚',cat:1},{w:'قَهْوَة',e:'☕',cat:1},{w:'دَجاج',e:'🍗',cat:1},{w:'كُفْتَة',e:'🧆',cat:1},
 {w:'سَمَك',e:'🐟',cat:2},{w:'سَلَطَة',e:'🥗',cat:2},{w:'عَصِير',e:'🧃',cat:2},{w:'شاي',e:'🍵',cat:2},{w:'حَساء',e:'🍲',cat:2}
 ];
 var g2Queue,g2CurIdx,g2Sc,g2Cor,g2Combo,g2DragItem;
@@ -992,7 +993,7 @@ var g4All=[
 {cat:'الفعل المضارع لـ "أَنْتِ"',opts:['تَدْرُسينَ','تُساعِدينَ','تَنامينَ','تَذْهَبُ'],odd:3,explain:'تذهبُ = أنتَ، وليس أنتِ'},
 {cat:'الفعل المضارع لـ "هِيَ"',opts:['تَسْتَيْقِظُ','تُصَلِّي','يَسْتَيْقِظُ','تَتَناوَلُ'],odd:2,explain:'يستيقظُ = هُوَ'},
 {cat:'الفعل المضارع لـ "أَنْتَ"',opts:['تَذْهَبُ','تَرْجِعُ','تُساعِدُ','تَدْرُسينَ'],odd:3,explain:'تدرسين = أنتِ'},
-{cat:'تصريف "يَذْهَبُ"',opts:['يَذْهَبُ','تَذْهَبُ','تَذْهَبينَ','أَذْهَبُ'],odd:3,explain:'هذه كلمات لكل ضمير — جميعها صحيحة، إلا أن مضارع "هي" المنتظر "تَذْهَبُ" أيضًا'},
+{cat:'تصريف الفعل لِـ "هُوَ"',opts:['يَذْهَبُ','يَأكُلُ','يَشْرَبُ','تَدْرُسُ'],odd:3,explain:'تَدْرُسُ = هِيَ / أَنْتَ، لا "هُوَ"'},
 {cat:'الضمير لـ "تَدْرُسينَ"',opts:['أَنْتِ','هِيَ','أَنْتَ','أَنا'],odd:0,explain:'تَدْرُسينَ خاصّة بـ "أَنْتِ"',mode:'verb2pron'},
 {cat:'الضمير لـ "يَسْتَيْقِظُ"',opts:['هِيَ','هُوَ','أَنْتَ','أَنا'],odd:1,explain:'يَسْتَيْقِظُ خاصّ بـ "هُوَ"',mode:'verb2pron'},
 {cat:'الضمير لـ "تُصَلّينَ"',opts:['أَنْتَ','هِيَ','أَنْتِ','أَنا'],odd:2,explain:'تُصَلّينَ خاصّة بـ "أَنْتِ"',mode:'verb2pron'},
