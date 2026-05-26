@@ -59,10 +59,10 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 .list-title{font-family:Arial,sans-serif;font-size:20px;color:#ffd60a;text-align:center;margin-bottom:12px;direction:ltr}
 .list-title .cart-icon{font-size:28px;vertical-align:middle}
 .list-items{list-style:none}
-.list-items li{font-family:Arial,sans-serif;direction:ltr;text-align:left;padding:10px 12px;margin-bottom:6px;border-radius:10px;background:rgba(255,255,255,0.04);font-size:18px;display:flex;align-items:center;gap:10px;transition:all .3s}
-.list-items li .li-emoji{font-size:24px;flex-shrink:0}
-.list-items li .li-text{flex:1;color:rgba(255,255,255,0.85)}
-.list-items li .li-check{font-size:22px;opacity:0;transition:all .3s;flex-shrink:0}
+.list-items li{font-family:'Arakom',Arial,sans-serif;padding:14px 12px;margin-bottom:8px;border-radius:14px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;gap:14px;transition:all .3s;min-height:80px}
+.list-items li .li-emoji{font-size:56px;flex-shrink:0;line-height:1}
+.list-items li .li-text{display:none}
+.list-items li .li-check{font-size:32px;opacity:0;transition:all .3s;flex-shrink:0}
 .list-items li.found{background:rgba(6,214,160,0.12);border:1px solid rgba(6,214,160,0.25)}
 .list-items li.found .li-text{text-decoration:line-through;color:rgba(255,255,255,0.35)}
 .list-items li.found .li-check{opacity:1;color:#06d6a0}
@@ -91,7 +91,9 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 .split-half.p1 .split-player-label{color:#4895ef}
 .split-half.p2 .split-player-label{color:#ef233c}
 .split-list{list-style:none;margin-bottom:10px}
-.split-list li{font-family:Arial,sans-serif;direction:ltr;text-align:left;padding:6px 10px;margin-bottom:4px;border-radius:8px;background:rgba(255,255,255,0.04);font-size:15px;display:flex;align-items:center;gap:8px}
+.split-list li{font-family:'Arakom',sans-serif;padding:10px 8px;margin-bottom:4px;border-radius:10px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px}
+.split-list li .li-emoji{font-size:36px;line-height:1}
+.split-list li .li-text{display:none}
 .split-list li .li-emoji{font-size:18px}
 .split-list li .li-text{flex:1;color:rgba(255,255,255,0.8)}
 .split-list li .li-check{font-size:18px;opacity:0;transition:all .3s}
@@ -288,7 +290,7 @@ const VOCAB_TR = {
   '\u0627\u0644\u0635\u0651\u064E\u0628\u0627\u062D':'Sabah','\u0627\u0644\u0638\u064F\u0647\u0631':'Ogle','\u0627\u0644\u0639\u0635\u0631':'Ikindi',
   '\u0627\u0644\u0645\u0633\u0627\u0621':'Aksam','\u0627\u0644\u0644\u064A\u0644':'Gece','\u0627\u0644\u0641\u064E\u062C\u0652\u0631':'Fecir'
 };
-function getTr(w){ return VOCAB_TR[w.ar]||''; }
+function getTr(w){ return ''; }  // İpucu = sadece büyük emoji (Türkçe yok)
 
 // ======================== SOUND ========================
 let _actx;
