@@ -3,9 +3,9 @@
   "meta": {
     "unit": 3,
     "titleAr": "إِلى أَيْنَ نُسافِرُ؟",
-    "titleTr":"",
-    "grade":"",
-    "sourceNote":"",
+    "titleTr": "Nereye seyahat ederiz?",
+    "grade": "İHO Arapça 7. Sınıf",
+    "sourceNote": "Veri tabanı, kullanıcı tarafından yüklenen Unit 3 PDF'indeki kelime, kalıp ve etkinliklerden derlenmiştir.",
     "version": "1.0.0",
     "language": "ar-TR",
     "updated": "2026-05-18"
@@ -14,69 +14,69 @@
     {
       "id": "transport",
       "ar": "وَسائِطُ النَّقْل",
-      "tr":""
+      "tr": "Ulaşım araçları"
     },
     {
       "id": "places",
       "ar": "الأَماكِن",
-      "tr":""
+      "tr": "Yerler"
     },
     {
       "id": "cities",
       "ar": "المُدُن",
-      "tr":""
+      "tr": "Şehirler"
     },
     {
       "id": "verbs",
       "ar": "الأَفْعال",
-      "tr":""
+      "tr": "Fiiller"
     },
     {
       "id": "imperatives",
       "ar": "أَفْعالُ الأَمْر",
-      "tr":""
+      "tr": "Emir fiilleri"
     },
     {
       "id": "directions",
       "ar": "الاتِّجاهات وَالطَّريق",
-      "tr":""
+      "tr": "Yönler ve yol tarifi"
     },
     {
       "id": "traffic",
       "ar": "إِشاراتُ المُرور",
-      "tr":""
+      "tr": "Trafik işaretleri"
     },
     {
       "id": "questions",
       "ar": "أَدَواتُ السُّؤال",
-      "tr":""
+      "tr": "Soru kalıpları"
     },
     {
       "id": "modes",
       "ar": "طُرُقُ السَّفَر",
-      "tr":""
+      "tr": "Seyahat biçimleri"
     },
     {
       "id": "comparatives",
       "ar": "المُقارَنَة",
-      "tr":""
+      "tr": "Karşılaştırma"
     },
     {
       "id": "people",
       "ar": "الأَشْخاص وَالمِهَن",
-      "tr":""
+      "tr": "Kişiler ve meslekler"
     },
     {
       "id": "time",
       "ar": "الزَّمَن",
-      "tr":""
+      "tr": "Zaman ifadeleri"
     }
   ],
   "vocabulary": [
     {
       "id": "bus",
       "ar": "حافِلَة",
-      "tr":"",
+      "tr": "otobüs",
       "category": "transport",
       "translit": "ḥāfila",
       "emoji": "🚌",
@@ -90,7 +90,7 @@
     {
       "id": "plane",
       "ar": "طائِرَة",
-      "tr":"",
+      "tr": "uçak",
       "category": "transport",
       "translit": "ṭāʾira",
       "emoji": "✈️",
@@ -104,7 +104,7 @@
     {
       "id": "car",
       "ar": "سَيّارَة",
-      "tr":"",
+      "tr": "araba",
       "category": "transport",
       "translit": "sayyāra",
       "emoji": "🚗",
@@ -118,7 +118,7 @@
     {
       "id": "bicycle",
       "ar": "دَرّاجَة",
-      "tr":"",
+      "tr": "bisiklet",
       "category": "transport",
       "translit": "darrāja",
       "emoji": "🚲",
@@ -132,7 +132,7 @@
     {
       "id": "train",
       "ar": "قِطار",
-      "tr":"",
+      "tr": "tren",
       "category": "transport",
       "translit": "qiṭār",
       "emoji": "🚆",
@@ -146,7 +146,7 @@
     {
       "id": "ship",
       "ar": "سَفينَة",
-      "tr":"",
+      "tr": "gemi",
       "category": "transport",
       "translit": "safīna",
       "emoji": "🚢",
@@ -160,7 +160,7 @@
     {
       "id": "metro",
       "ar": "مِتْرو",
-      "tr":"",
+      "tr": "metro",
       "category": "transport",
       "translit": "mitrū",
       "emoji": "🚇",
@@ -174,7 +174,7 @@
     {
       "id": "bus_stop",
       "ar": "مَوْقِفُ الحافِلَةِ",
-      "tr":"",
+      "tr": "otobüs durağı",
       "category": "transport",
       "translit": "mawqif al-ḥāfila",
       "emoji": "🚏",
@@ -185,7 +185,7 @@
     {
       "id": "metro_station",
       "ar": "مَحَطَّةُ المِتْرو",
-      "tr":"",
+      "tr": "metro istasyonu",
       "category": "transport",
       "translit": "maḥaṭṭat al-mitrū",
       "emoji": "Ⓜ️",
@@ -196,7 +196,7 @@
     {
       "id": "ambulance",
       "ar": "سَيّارَةُ الإِسْعافِ",
-      "tr":"",
+      "tr": "ambulans",
       "category": "transport",
       "translit": "sayyārat al-isʿāf",
       "emoji": "🚑",
@@ -207,7 +207,7 @@
     {
       "id": "transport_means",
       "ar": "وَسائِطُ النَّقْل",
-      "tr":"",
+      "tr": "ulaşım araçları",
       "category": "transport",
       "translit": "wasāʾiṭ an-naql",
       "emoji": "🧭",
@@ -218,7 +218,7 @@
     {
       "id": "school",
       "ar": "مَدْرَسَة",
-      "tr":"",
+      "tr": "okul",
       "category": "places",
       "translit": "madrasa",
       "emoji": "🏫",
@@ -233,7 +233,7 @@
     {
       "id": "hospital",
       "ar": "مُسْتَشْفى",
-      "tr":"",
+      "tr": "hastane",
       "category": "places",
       "translit": "mustashfā",
       "emoji": "🏥",
@@ -248,7 +248,7 @@
     {
       "id": "library",
       "ar": "مَكْتَبَة",
-      "tr":"",
+      "tr": "kütüphane",
       "category": "places",
       "translit": "maktaba",
       "emoji": "📚",
@@ -263,7 +263,7 @@
     {
       "id": "mosque",
       "ar": "مَسْجِد",
-      "tr":"",
+      "tr": "cami",
       "category": "places",
       "translit": "masjid",
       "emoji": "🕌",
@@ -277,7 +277,7 @@
     {
       "id": "home",
       "ar": "بَيْت",
-      "tr":"",
+      "tr": "ev",
       "category": "places",
       "translit": "bayt",
       "emoji": "🏠",
@@ -292,7 +292,7 @@
     {
       "id": "old_market",
       "ar": "السّوقُ القَديمُ",
-      "tr":"",
+      "tr": "eski pazar / eski çarşı",
       "category": "places",
       "translit": "as-sūq al-qadīm",
       "emoji": "🏪",
@@ -305,7 +305,7 @@
     {
       "id": "city",
       "ar": "مَدينَة",
-      "tr":"",
+      "tr": "şehir",
       "category": "places",
       "translit": "madīna",
       "emoji": "🌆",
@@ -316,7 +316,7 @@
     {
       "id": "address",
       "ar": "عُنْوان",
-      "tr":"",
+      "tr": "adres",
       "category": "places",
       "translit": "ʿunwān",
       "emoji": "📍",
@@ -329,7 +329,7 @@
     {
       "id": "street",
       "ar": "شارِع",
-      "tr":"",
+      "tr": "cadde / sokak",
       "category": "places",
       "translit": "shāriʿ",
       "emoji": "🛣️",
@@ -342,7 +342,7 @@
     {
       "id": "road",
       "ar": "طَريق",
-      "tr":"",
+      "tr": "yol",
       "category": "places",
       "translit": "ṭarīq",
       "emoji": "🛤️",
@@ -355,7 +355,7 @@
     {
       "id": "pedestrian_crossing",
       "ar": "مَمَرُّ المُشاة",
-      "tr":"",
+      "tr": "yaya geçidi",
       "category": "places",
       "translit": "mamar al-mushāh",
       "emoji": "🚶",
@@ -366,7 +366,7 @@
     {
       "id": "istanbul",
       "ar": "إِسْطَنْبول",
-      "tr":"",
+      "tr": "İstanbul",
       "category": "cities",
       "translit": "Isṭanbūl",
       "emoji": "🌉",
@@ -377,7 +377,7 @@
     {
       "id": "ankara",
       "ar": "أَنْقَرَة",
-      "tr":"",
+      "tr": "Ankara",
       "category": "cities",
       "translit": "Anqara",
       "emoji": "🏛️",
@@ -388,7 +388,7 @@
     {
       "id": "bursa",
       "ar": "بورْصَة",
-      "tr":"",
+      "tr": "Bursa",
       "category": "cities",
       "translit": "Būrṣa",
       "emoji": "🌿",
@@ -399,7 +399,7 @@
     {
       "id": "kayseri",
       "ar": "قَيْصَري",
-      "tr":"",
+      "tr": "Kayseri",
       "category": "cities",
       "translit": "Qayṣarī",
       "emoji": "🏔️",
@@ -410,7 +410,7 @@
     {
       "id": "antalya",
       "ar": "أَنْطالْيا",
-      "tr":"",
+      "tr": "Antalya",
       "category": "cities",
       "translit": "Anṭālyā",
       "emoji": "🌊",
@@ -421,7 +421,7 @@
     {
       "id": "sivas",
       "ar": "سيواس",
-      "tr":"",
+      "tr": "Sivas",
       "category": "cities",
       "translit": "Sīwās",
       "emoji": "🏞️",
@@ -432,7 +432,7 @@
     {
       "id": "izmir",
       "ar": "إِزْمير",
-      "tr":"",
+      "tr": "İzmir",
       "category": "cities",
       "translit": "Izmīr",
       "emoji": "🌊",
@@ -443,7 +443,7 @@
     {
       "id": "mardin",
       "ar": "مارْدين",
-      "tr":"",
+      "tr": "Mardin",
       "category": "cities",
       "translit": "Mārdīn",
       "emoji": "🏜️",
@@ -454,7 +454,7 @@
     {
       "id": "gaziantep",
       "ar": "غازي عَيْنْتاب",
-      "tr":"",
+      "tr": "Gaziantep",
       "category": "cities",
       "translit": "Ghāzī ʿAyntāb",
       "emoji": "🏺",
@@ -465,7 +465,7 @@
     {
       "id": "hatay",
       "ar": "هاتاي",
-      "tr":"",
+      "tr": "Hatay",
       "category": "cities",
       "translit": "Hātāy",
       "emoji": "🍽️",
@@ -476,7 +476,7 @@
     {
       "id": "diyarbakir",
       "ar": "دِيار بَكْر",
-      "tr":"",
+      "tr": "Diyarbakır",
       "category": "cities",
       "translit": "Diyār Bakr",
       "emoji": "🧱",
@@ -487,7 +487,7 @@
     {
       "id": "sinop",
       "ar": "سينوب",
-      "tr":"",
+      "tr": "Sinop",
       "category": "cities",
       "translit": "Sīnūb",
       "emoji": "🌊",
@@ -498,7 +498,7 @@
     {
       "id": "van",
       "ar": "وان",
-      "tr":"",
+      "tr": "Van",
       "category": "cities",
       "translit": "Wān",
       "emoji": "🏔️",
@@ -509,7 +509,7 @@
     {
       "id": "trabzon",
       "ar": "طَرابْزون",
-      "tr":"",
+      "tr": "Trabzon",
       "category": "cities",
       "translit": "Ṭarābzūn",
       "emoji": "🌊",
@@ -520,7 +520,7 @@
     {
       "id": "mugla",
       "ar": "موغْلا",
-      "tr":"",
+      "tr": "Muğla",
       "category": "cities",
       "translit": "Mūghlā",
       "emoji": "🏖️",
@@ -531,7 +531,7 @@
     {
       "id": "samsun",
       "ar": "سامْسون",
-      "tr":"",
+      "tr": "Samsun",
       "category": "cities",
       "translit": "Sāmsūn",
       "emoji": "⚓",
@@ -542,7 +542,7 @@
     {
       "id": "nevsehir",
       "ar": "نَوْشَهِير",
-      "tr":"",
+      "tr": "Nevşehir",
       "category": "cities",
       "translit": "Nawshahīr",
       "emoji": "🎈",
@@ -553,7 +553,7 @@
     {
       "id": "go_1",
       "ar": "أَذْهَبُ",
-      "tr":"",
+      "tr": "giderim / gidiyorum",
       "category": "verbs",
       "translit": "adhhabu",
       "emoji": "🚶",
@@ -569,7 +569,7 @@
     {
       "id": "travel_1",
       "ar": "أُسافِرُ",
-      "tr":"",
+      "tr": "seyahat ederim / ediyorum",
       "category": "verbs",
       "translit": "usāfiru",
       "emoji": "🧳",
@@ -583,7 +583,7 @@
     {
       "id": "return_1",
       "ar": "أَرْجِعُ",
-      "tr":"",
+      "tr": "dönerim / dönüyorum",
       "category": "verbs",
       "translit": "arjiʿu",
       "emoji": "↩️",
@@ -597,7 +597,7 @@
     {
       "id": "ride_1",
       "ar": "أَرْكَبُ",
-      "tr":"",
+      "tr": "binerim / biniyorum",
       "category": "verbs",
       "translit": "arkabu",
       "emoji": "🎫",
@@ -611,7 +611,7 @@
     {
       "id": "get_off_1",
       "ar": "أَنْزِلُ",
-      "tr":"",
+      "tr": "inerim / iniyorum",
       "category": "verbs",
       "translit": "anzilu",
       "emoji": "⬇️",
@@ -625,7 +625,7 @@
     {
       "id": "arrive_1",
       "ar": "أَصِلُ",
-      "tr":"",
+      "tr": "varırım / ulaşıyorum",
       "category": "verbs",
       "translit": "aṣilu",
       "emoji": "✅",
@@ -638,7 +638,7 @@
     {
       "id": "head_1",
       "ar": "أَتَّجِهُ",
-      "tr":"",
+      "tr": "yönelirim / yöneliyorum",
       "category": "verbs",
       "translit": "attajihu",
       "emoji": "↪️",
@@ -653,7 +653,7 @@
     {
       "id": "cross_1",
       "ar": "أَعْبُرُ",
-      "tr":"",
+      "tr": "karşıya geçerim",
       "category": "verbs",
       "translit": "aʿburu",
       "emoji": "🚸",
@@ -667,7 +667,7 @@
     {
       "id": "walk_1",
       "ar": "أَمْشي",
-      "tr":"",
+      "tr": "yürürüm / yürüyorum",
       "category": "verbs",
       "translit": "amshī",
       "emoji": "🚶",
@@ -681,7 +681,7 @@
     {
       "id": "stand_1",
       "ar": "أَقِفُ",
-      "tr":"",
+      "tr": "dururum / beklerim",
       "category": "verbs",
       "translit": "aqifu",
       "emoji": "🛑",
@@ -695,7 +695,7 @@
     {
       "id": "prepare_1",
       "ar": "أَسْتَعِدُّ",
-      "tr":"",
+      "tr": "hazırlanırım",
       "category": "verbs",
       "translit": "astaʿiddu",
       "emoji": "🟡",
@@ -709,7 +709,7 @@
     {
       "id": "exit_1",
       "ar": "أَخْرُجُ",
-      "tr":"",
+      "tr": "çıkarım / çıkıyorum",
       "category": "verbs",
       "translit": "akhruju",
       "emoji": "🚪",
@@ -722,7 +722,7 @@
     {
       "id": "live_1",
       "ar": "أَسْكُنُ",
-      "tr":"",
+      "tr": "otururum / yaşarım",
       "category": "verbs",
       "translit": "askunu",
       "emoji": "🏠",
@@ -733,7 +733,7 @@
     {
       "id": "help_1",
       "ar": "أُساعِدُ",
-      "tr":"",
+      "tr": "yardım ederim",
       "category": "verbs",
       "translit": "usāʿidu",
       "emoji": "🤝",
@@ -746,7 +746,7 @@
     {
       "id": "explain_1",
       "ar": "أَشْرَحُ",
-      "tr":"",
+      "tr": "açıklarım",
       "category": "verbs",
       "translit": "ashraḥu",
       "emoji": "🗣️",
@@ -759,7 +759,7 @@
     {
       "id": "move_3f",
       "ar": "تَتَحَرَّكُ",
-      "tr":"",
+      "tr": "hareket eder",
       "category": "verbs",
       "translit": "tataḥarraku",
       "emoji": "🚦",
@@ -770,7 +770,7 @@
     {
       "id": "imp_go_m",
       "ar": "اِذْهَبْ",
-      "tr":"",
+      "tr": "git",
       "category": "imperatives",
       "translit": "idhhab",
       "emoji": "➡️",
@@ -781,7 +781,7 @@
     {
       "id": "imp_go_f",
       "ar": "اِذْهَبي",
-      "tr":"",
+      "tr": "git (kız)",
       "category": "imperatives",
       "translit": "idhhabī",
       "emoji": "➡️",
@@ -792,7 +792,7 @@
     {
       "id": "imp_ride_m",
       "ar": "اِرْكَبْ",
-      "tr":"",
+      "tr": "bin",
       "category": "imperatives",
       "translit": "irkab",
       "emoji": "🚌",
@@ -803,7 +803,7 @@
     {
       "id": "imp_ride_f",
       "ar": "اِرْكَبي",
-      "tr":"",
+      "tr": "bin (kız)",
       "category": "imperatives",
       "translit": "irkabī",
       "emoji": "🚌",
@@ -814,7 +814,7 @@
     {
       "id": "imp_getoff_m",
       "ar": "اِنْزِلْ",
-      "tr":"",
+      "tr": "in",
       "category": "imperatives",
       "translit": "inzil",
       "emoji": "⬇️",
@@ -825,7 +825,7 @@
     {
       "id": "imp_getoff_f",
       "ar": "اِنْزِلي",
-      "tr":"",
+      "tr": "in (kız)",
       "category": "imperatives",
       "translit": "inzilī",
       "emoji": "⬇️",
@@ -836,7 +836,7 @@
     {
       "id": "imp_head_m",
       "ar": "اِتَّجِهْ",
-      "tr":"",
+      "tr": "yönel",
       "category": "imperatives",
       "translit": "ittajih",
       "emoji": "↪️",
@@ -847,7 +847,7 @@
     {
       "id": "imp_head_f",
       "ar": "اِتَّجِهي",
-      "tr":"",
+      "tr": "yönel (kız)",
       "category": "imperatives",
       "translit": "ittajihī",
       "emoji": "↪️",
@@ -858,7 +858,7 @@
     {
       "id": "imp_walk_m",
       "ar": "اِمْشِ",
-      "tr":"",
+      "tr": "yürü",
       "category": "imperatives",
       "translit": "imshi",
       "emoji": "🚶",
@@ -869,7 +869,7 @@
     {
       "id": "imp_walk_f",
       "ar": "اِمْشي",
-      "tr":"",
+      "tr": "yürü (kız)",
       "category": "imperatives",
       "translit": "imshī",
       "emoji": "🚶",
@@ -880,7 +880,7 @@
     {
       "id": "imp_cross_m",
       "ar": "اُعْبُرْ",
-      "tr":"",
+      "tr": "karşıya geç",
       "category": "imperatives",
       "translit": "uʿbur",
       "emoji": "🚸",
@@ -891,7 +891,7 @@
     {
       "id": "imp_cross_f",
       "ar": "اُعْبُري",
-      "tr":"",
+      "tr": "karşıya geç (kız)",
       "category": "imperatives",
       "translit": "uʿburī",
       "emoji": "🚸",
@@ -902,7 +902,7 @@
     {
       "id": "imp_stand_m",
       "ar": "قِفْ",
-      "tr":"",
+      "tr": "dur",
       "category": "imperatives",
       "translit": "qif",
       "emoji": "🛑",
@@ -913,7 +913,7 @@
     {
       "id": "imp_stand_f",
       "ar": "قِفي",
-      "tr":"",
+      "tr": "dur (kız)",
       "category": "imperatives",
       "translit": "qifī",
       "emoji": "🛑",
@@ -924,7 +924,7 @@
     {
       "id": "right",
       "ar": "اليَمين",
-      "tr":"",
+      "tr": "sağ",
       "category": "directions",
       "translit": "al-yamīn",
       "emoji": "➡️",
@@ -935,7 +935,7 @@
     {
       "id": "left",
       "ar": "اليَسار",
-      "tr":"",
+      "tr": "sol",
       "category": "directions",
       "translit": "al-yasār",
       "emoji": "⬅️",
@@ -946,7 +946,7 @@
     {
       "id": "to_right",
       "ar": "إِلى اليَمين",
-      "tr":"",
+      "tr": "sağa",
       "category": "directions",
       "translit": "ilā al-yamīn",
       "emoji": "↪️",
@@ -957,7 +957,7 @@
     {
       "id": "to_left",
       "ar": "إِلى اليَسار",
-      "tr":"",
+      "tr": "sola",
       "category": "directions",
       "translit": "ilā al-yasār",
       "emoji": "↩️",
@@ -968,7 +968,7 @@
     {
       "id": "on_right",
       "ar": "عَلى اليَمين",
-      "tr":"",
+      "tr": "sağ tarafta",
       "category": "directions",
       "translit": "ʿalā al-yamīn",
       "emoji": "👉",
@@ -979,7 +979,7 @@
     {
       "id": "on_left",
       "ar": "عَلى اليَسار",
-      "tr":"",
+      "tr": "sol tarafta",
       "category": "directions",
       "translit": "ʿalā al-yasār",
       "emoji": "👈",
@@ -990,7 +990,7 @@
     {
       "id": "front",
       "ar": "أَمام",
-      "tr":"",
+      "tr": "önünde",
       "category": "directions",
       "translit": "amām",
       "emoji": "⬆️",
@@ -1001,7 +1001,7 @@
     {
       "id": "behind",
       "ar": "خَلْف",
-      "tr":"",
+      "tr": "arkasında",
       "category": "directions",
       "translit": "khalf",
       "emoji": "⬇️",
@@ -1012,7 +1012,7 @@
     {
       "id": "forward",
       "ar": "إِلى الأَمام",
-      "tr":"",
+      "tr": "ileriye",
       "category": "directions",
       "translit": "ilā al-amām",
       "emoji": "⬆️",
@@ -1023,7 +1023,7 @@
     {
       "id": "little",
       "ar": "قَليلاً",
-      "tr":"",
+      "tr": "biraz",
       "category": "directions",
       "translit": "qalīlan",
       "emoji": "➖",
@@ -1034,7 +1034,7 @@
     {
       "id": "traffic_signals",
       "ar": "إِشاراتُ المُرور",
-      "tr":"",
+      "tr": "trafik ışıkları / işaretleri",
       "category": "traffic",
       "translit": "ishārāt al-murūr",
       "emoji": "🚦",
@@ -1045,7 +1045,7 @@
     {
       "id": "red_light",
       "ar": "الضَّوْءُ الأَحْمَر",
-      "tr":"",
+      "tr": "kırmızı ışık",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-aḥmar",
       "emoji": "🔴",
@@ -1056,7 +1056,7 @@
     {
       "id": "yellow_light",
       "ar": "الضَّوْءُ الأَصْفَر",
-      "tr":"",
+      "tr": "sarı ışık",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-aṣfar",
       "emoji": "🟡",
@@ -1067,7 +1067,7 @@
     {
       "id": "green_light",
       "ar": "الضَّوْءُ الأَخْضَر",
-      "tr":"",
+      "tr": "yeşil ışık",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-akhḍar",
       "emoji": "🟢",
@@ -1078,7 +1078,7 @@
     {
       "id": "q_where_to",
       "ar": "إِلى أَيْنَ؟",
-      "tr":"",
+      "tr": "nereye?",
       "category": "questions",
       "translit": "ilā ayna",
       "emoji": "❓",
@@ -1089,7 +1089,7 @@
     {
       "id": "q_from_where",
       "ar": "مِنْ أَيْنَ؟",
-      "tr":"",
+      "tr": "nereden?",
       "category": "questions",
       "translit": "min ayna",
       "emoji": "❓",
@@ -1100,7 +1100,7 @@
     {
       "id": "q_how",
       "ar": "كَيْفَ؟",
-      "tr":"",
+      "tr": "nasıl?",
       "category": "questions",
       "translit": "kayfa",
       "emoji": "❓",
@@ -1111,7 +1111,7 @@
     {
       "id": "q_by_what",
       "ar": "بِماذا؟",
-      "tr":"",
+      "tr": "ne ile?",
       "category": "questions",
       "translit": "bimādhā",
       "emoji": "❓",
@@ -1122,7 +1122,7 @@
     {
       "id": "q_when",
       "ar": "مَتى؟",
-      "tr":"",
+      "tr": "ne zaman?",
       "category": "questions",
       "translit": "matā",
       "emoji": "❓",
@@ -1133,7 +1133,7 @@
     {
       "id": "q_with_whom",
       "ar": "مَعَ مَنْ؟",
-      "tr":"",
+      "tr": "kiminle?",
       "category": "questions",
       "translit": "maʿa man",
       "emoji": "❓",
@@ -1144,7 +1144,7 @@
     {
       "id": "q_is",
       "ar": "هَلْ؟",
-      "tr":"",
+      "tr": "mi / mı?",
       "category": "questions",
       "translit": "hal",
       "emoji": "❓",
@@ -1155,7 +1155,7 @@
     {
       "id": "q_what",
       "ar": "ماذا؟",
-      "tr":"",
+      "tr": "ne?",
       "category": "questions",
       "translit": "mādhā",
       "emoji": "❓",
@@ -1166,7 +1166,7 @@
     {
       "id": "walking_mode",
       "ar": "مَشْيًا",
-      "tr":"",
+      "tr": "yürüyerek",
       "category": "modes",
       "translit": "mashyan",
       "emoji": "🚶",
@@ -1177,7 +1177,7 @@
     {
       "id": "land_mode",
       "ar": "بَرًّا",
-      "tr":"",
+      "tr": "kara yoluyla",
       "category": "modes",
       "translit": "barran",
       "emoji": "🛣️",
@@ -1188,7 +1188,7 @@
     {
       "id": "sea_mode",
       "ar": "بَحْرًا",
-      "tr":"",
+      "tr": "deniz yoluyla",
       "category": "modes",
       "translit": "baḥran",
       "emoji": "🚢",
@@ -1199,7 +1199,7 @@
     {
       "id": "air_mode",
       "ar": "جَوًّا",
-      "tr":"",
+      "tr": "hava yoluyla",
       "category": "modes",
       "translit": "jawwan",
       "emoji": "✈️",
@@ -1210,7 +1210,7 @@
     {
       "id": "usually",
       "ar": "عادَةً",
-      "tr":"",
+      "tr": "genellikle",
       "category": "modes",
       "translit": "ʿādatan",
       "emoji": "🔁",
@@ -1221,7 +1221,7 @@
     {
       "id": "holiday",
       "ar": "في العُطْلَةِ",
-      "tr":"",
+      "tr": "tatilde",
       "category": "time",
       "translit": "fī al-ʿuṭla",
       "emoji": "🏖️",
@@ -1232,7 +1232,7 @@
     {
       "id": "every_morning",
       "ar": "كُلَّ صَباحٍ",
-      "tr":"",
+      "tr": "her sabah",
       "category": "time",
       "translit": "kulla ṣabāḥ",
       "emoji": "🌅",
@@ -1243,7 +1243,7 @@
     {
       "id": "friday",
       "ar": "يَوْمَ الجُمُعَةِ",
-      "tr":"",
+      "tr": "cuma günü",
       "category": "time",
       "translit": "yawm al-jumuʿa",
       "emoji": "📅",
@@ -1254,7 +1254,7 @@
     {
       "id": "evening",
       "ar": "مَساءً",
-      "tr":"",
+      "tr": "akşamleyin",
       "category": "time",
       "translit": "masāʾan",
       "emoji": "🌆",
@@ -1265,7 +1265,7 @@
     {
       "id": "morning",
       "ar": "صَباحًا",
-      "tr":"",
+      "tr": "sabahleyin",
       "category": "time",
       "translit": "ṣabāḥan",
       "emoji": "🌅",
@@ -1276,7 +1276,7 @@
     {
       "id": "fast_f",
       "ar": "سَريعَة",
-      "tr":"",
+      "tr": "hızlı",
       "category": "comparatives",
       "translit": "sarīʿa",
       "emoji": "⚡",
@@ -1287,7 +1287,7 @@
     {
       "id": "slow_f",
       "ar": "بَطيئَة",
-      "tr":"",
+      "tr": "yavaş",
       "category": "comparatives",
       "translit": "baṭīʾa",
       "emoji": "🐢",
@@ -1298,7 +1298,7 @@
     {
       "id": "old_f",
       "ar": "قَديمَة",
-      "tr":"",
+      "tr": "eski",
       "category": "comparatives",
       "translit": "qadīma",
       "emoji": "🏚️",
@@ -1309,7 +1309,7 @@
     {
       "id": "modern_f",
       "ar": "حَديثَة",
-      "tr":"",
+      "tr": "yeni / modern",
       "category": "comparatives",
       "translit": "ḥadītha",
       "emoji": "✨",
@@ -1320,7 +1320,7 @@
     {
       "id": "faster_than",
       "ar": "أَسْرَعُ مِنْ",
-      "tr":"",
+      "tr": "-den daha hızlı",
       "category": "comparatives",
       "translit": "asraʿu min",
       "emoji": "⚡",
@@ -1331,7 +1331,7 @@
     {
       "id": "slower_than",
       "ar": "أَبْطَأُ مِنْ",
-      "tr":"",
+      "tr": "-den daha yavaş",
       "category": "comparatives",
       "translit": "abṭaʾu min",
       "emoji": "🐢",
@@ -1342,7 +1342,7 @@
     {
       "id": "older_than",
       "ar": "أَقْدَمُ مِنْ",
-      "tr":"",
+      "tr": "-den daha eski",
       "category": "comparatives",
       "translit": "aqdamu min",
       "emoji": "🏺",
@@ -1353,7 +1353,7 @@
     {
       "id": "newer_than",
       "ar": "أَحْدَثُ مِنْ",
-      "tr":"",
+      "tr": "-den daha yeni",
       "category": "comparatives",
       "translit": "aḥdathu min",
       "emoji": "✨",
@@ -1364,7 +1364,7 @@
     {
       "id": "longer_than",
       "ar": "أَطْوَلُ مِنْ",
-      "tr":"",
+      "tr": "-den daha uzun",
       "category": "comparatives",
       "translit": "aṭwalu min",
       "emoji": "📏",
@@ -1375,7 +1375,7 @@
     {
       "id": "bigger_than",
       "ar": "أَكْبَرُ مِنْ",
-      "tr":"",
+      "tr": "-den daha büyük",
       "category": "comparatives",
       "translit": "akbaru min",
       "emoji": "➕",
@@ -1386,7 +1386,7 @@
     {
       "id": "smaller_than",
       "ar": "أَصْغَرُ مِنْ",
-      "tr":"",
+      "tr": "-den daha küçük",
       "category": "comparatives",
       "translit": "aṣgharu min",
       "emoji": "➖",
@@ -1397,7 +1397,7 @@
     {
       "id": "father",
       "ar": "أَب",
-      "tr":"",
+      "tr": "baba",
       "category": "people",
       "translit": "ab",
       "emoji": "👨",
@@ -1408,7 +1408,7 @@
     {
       "id": "mother",
       "ar": "أُمّ",
-      "tr":"",
+      "tr": "anne",
       "category": "people",
       "translit": "umm",
       "emoji": "👩",
@@ -1419,7 +1419,7 @@
     {
       "id": "sister",
       "ar": "أُخْت",
-      "tr":"",
+      "tr": "kız kardeş",
       "category": "people",
       "translit": "ukht",
       "emoji": "👧",
@@ -1430,7 +1430,7 @@
     {
       "id": "brother",
       "ar": "أَخ",
-      "tr":"",
+      "tr": "erkek kardeş",
       "category": "people",
       "translit": "akh",
       "emoji": "👦",
@@ -1441,7 +1441,7 @@
     {
       "id": "uncle",
       "ar": "عَمّ",
-      "tr":"",
+      "tr": "amca",
       "category": "people",
       "translit": "ʿamm",
       "emoji": "👨",
@@ -1452,7 +1452,7 @@
     {
       "id": "grandfather",
       "ar": "جَدّ",
-      "tr":"",
+      "tr": "dede",
       "category": "people",
       "translit": "jadd",
       "emoji": "👴",
@@ -1463,7 +1463,7 @@
     {
       "id": "merchant",
       "ar": "تاجِر",
-      "tr":"",
+      "tr": "tüccar",
       "category": "people",
       "translit": "tājir",
       "emoji": "🧑‍💼",
@@ -1474,7 +1474,7 @@
     {
       "id": "doctor_f",
       "ar": "طَبيبَة",
-      "tr":"",
+      "tr": "kadın doktor",
       "category": "people",
       "translit": "ṭabība",
       "emoji": "👩‍⚕️",
@@ -1485,7 +1485,7 @@
     {
       "id": "engineer_f",
       "ar": "مُهَنْدِسَة",
-      "tr":"",
+      "tr": "kadın mühendis",
       "category": "people",
       "translit": "muhandisa",
       "emoji": "👩‍💻",
@@ -1496,7 +1496,7 @@
     {
       "id": "student_m",
       "ar": "طالِب",
-      "tr":"",
+      "tr": "erkek öğrenci",
       "category": "people",
       "translit": "ṭālib",
       "emoji": "👨‍🎓",
@@ -1507,7 +1507,7 @@
     {
       "id": "student_f",
       "ar": "طالِبَة",
-      "tr":"",
+      "tr": "kız öğrenci",
       "category": "people",
       "translit": "ṭāliba",
       "emoji": "👩‍🎓",
@@ -1518,7 +1518,7 @@
     {
       "id": "driver",
       "ar": "سائِق",
-      "tr":"",
+      "tr": "şoför",
       "category": "people",
       "translit": "sāʾiq",
       "emoji": "🚘",
@@ -1530,12 +1530,12 @@
   "patterns": [
     {
       "id": "destination_go",
-      "nameTr":"",
+      "nameTr": "Nereye gidiyorsun?",
       "templateAr": "أَذْهَبُ إِلى {place}.",
       "questionAr": "إِلى أَيْنَ تَذْهَبُ؟",
-      "usageTr":"",
+      "usageTr": "Bir yere gitmeyi anlatır.",
       "slots": {
-        "place":""
+        "place": "yer/şehir"
       },
       "examples": [
         "أَذْهَبُ إِلى المَدْرَسَةِ.",
@@ -1544,12 +1544,12 @@
     },
     {
       "id": "destination_travel",
-      "nameTr":"",
+      "nameTr": "Nereye seyahat ediyorsun?",
       "templateAr": "أُسافِرُ إِلى {city}.",
       "questionAr": "إِلى أَيْنَ تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "Şehirler arası seyahati anlatır.",
       "slots": {
-        "city":""
+        "city": "şehir"
       },
       "examples": [
         "أُسافِرُ إِلى أَنْقَرَةَ.",
@@ -1558,12 +1558,12 @@
     },
     {
       "id": "instrument",
-      "nameTr":"",
+      "nameTr": "Ne ile?",
       "templateAr": "أَذْهَبُ / أُسافِرُ إِلى {place} بِـ{vehicle}.",
       "questionAr": "بِماذا تَذْهَبُ؟ / بِماذا تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "Ulaşım aracını bildirir. Araçtan önce genellikle بِـ kullanılır.",
       "slots": {
-        "vehicle":""
+        "vehicle": "ulaşım aracı"
       },
       "examples": [
         "أُسافِرُ إِلى أَنْقَرَةَ بِالطّائِرَةِ.",
@@ -1572,10 +1572,10 @@
     },
     {
       "id": "return_from_to",
-      "nameTr":"",
+      "nameTr": "Nereden nereye dönüyorsun?",
       "templateAr": "أَرْجِعُ مِنْ {from} إِلى {to} بِـ{vehicle}.",
       "questionAr": "مِنْ أَيْنَ تَرْجِعُ؟ / بِماذا تَرْجِعُ؟",
-      "usageTr":"",
+      "usageTr": "Dönüş yönünü ve aracını anlatır.",
       "examples": [
         "أَرْجِعُ مِنَ المَكْتَبَةِ إِلى البَيْتِ مَشْيًا.",
         "تَرْجِعُ أُخْتي إِلى إِسْطَنْبولَ بِالقِطارِ."
@@ -1583,10 +1583,10 @@
     },
     {
       "id": "how_route",
-      "nameTr":"",
+      "nameTr": "Yol tarifi isteme",
       "templateAr": "كَيْفَ أَذْهَبُ إِلى {place}؟",
       "questionAr": "كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-      "usageTr":"",
+      "usageTr": "Bir yere nasıl gidileceğini sormak için kullanılır.",
       "examples": [
         "كَيْفَ أَذْهَبُ إِلى المُسْتَشْفى؟",
         "كَيْفَ أَذْهَبُ إِلى المَكْتَبَةِ؟"
@@ -1594,9 +1594,9 @@
     },
     {
       "id": "directions_sequence",
-      "nameTr":"",
+      "nameTr": "Yol tarifinde sıralama",
       "templateAr": "اُعْبُرِ الطَّريقَ، ثُمَّ اِتَّجِهْ إِلى اليَمينِ، ثُمَّ اِمْشِ إِلى الأَمامِ قَليلاً.",
-      "usageTr":"",
+      "usageTr": "Yol tarifinde emir fiilleri ve ثُمَّ ile sıra kurulur.",
       "examples": [
         "اُعْبُرِ الطَّريقَ.",
         "اِمْشِ إِلى الأَمامِ قَليلاً.",
@@ -1605,7 +1605,7 @@
     },
     {
       "id": "side_location",
-      "nameTr":"",
+      "nameTr": "Sağda / solda",
       "templateAr": "{place} عَلى اليَمينِ / عَلى اليَسارِ.",
       "usageTr": "Bir yerin konumunu belirtir.",
       "examples": [
@@ -1615,9 +1615,9 @@
     },
     {
       "id": "comparative",
-      "nameTr":"",
+      "nameTr": "Karşılaştırma",
       "templateAr": "{noun1} أَسْرَعُ مِنْ {noun2}.",
-      "usageTr":"",
+      "usageTr": "أَفْعَلُ مِنْ kalıbıyla karşılaştırma yapılır.",
       "examples": [
         "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
         "الدَّرّاجَةُ أَبْطَأُ مِنَ القِطارِ.",
@@ -1626,9 +1626,9 @@
     },
     {
       "id": "traffic_light",
-      "nameTr":"",
+      "nameTr": "Trafik ışıkları",
       "templateAr": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ. اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ. اُعْبُرْ عِنْدَ الضَّوْءِ الأَخْضَرِ.",
-      "usageTr":"",
+      "usageTr": "Trafik ışığına göre emir cümleleri kurulur.",
       "examples": [
         "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ.",
@@ -1637,9 +1637,9 @@
     },
     {
       "id": "time_exit",
-      "nameTr":"",
+      "nameTr": "Saatte çıkmak",
       "templateAr": "أَخْرُجُ مِنَ {place} في السّاعَةِ {time}.",
-      "usageTr":"",
+      "usageTr": "Bir yerden çıkış zamanını bildirir.",
       "examples": [
         "أَخْرُجُ مِنَ المَدْرَسَةِ في السّاعَةِ الثّالِثَةِ.",
         "تَخْرُجُ مِنَ المَكْتَبَةِ في السّاعَةِ السّادِسَةِ."
@@ -1647,10 +1647,10 @@
     },
     {
       "id": "with_person",
-      "nameTr":"",
+      "nameTr": "Kiminle?",
       "templateAr": "أُسافِرُ مَعَ {person} إِلى {city}.",
       "questionAr": "مَعَ مَنْ تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "Seyahat edilen kişiyi bildirir.",
       "examples": [
         "أُسافِرُ مَعَ أُمّي إِلى بورْصَةَ.",
         "أَذْهَبُ مَعَ صَديقي إِلى المَكْتَبَةِ."
@@ -1658,9 +1658,9 @@
     },
     {
       "id": "yes_no",
-      "nameTr":"",
+      "nameTr": "هل ile soru",
       "templateAr": "هَلْ يَذْهَبُ المِتْرو إِلى {place}؟",
-      "usageTr":"",
+      "usageTr": "Evet/hayır sorusu kurar.",
       "examples": [
         "هَلْ يَذْهَبُ المِتْرو إِلى المُسْتَشْفى؟ نَعَمْ.",
         "هَلْ تَذْهَبُ إِلى المَدْرَسَةِ بِالحافِلَةِ؟"
@@ -1671,7 +1671,7 @@
     {
       "id": "s001",
       "ar": "اِسْمي عُمَر، أَنا أَسْكُنُ في إِسْطَنْبولَ.",
-      "tr":"",
+      "tr": "Adım Ömer; İstanbul’da oturuyorum.",
       "patternId": "intro",
       "tokens": [
         "اِسْمي",
@@ -1687,7 +1687,7 @@
     {
       "id": "s002",
       "ar": "أَرْكَبُ الدَّرّاجَةَ، ثُمَّ أَتَّجِهُ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "Bisiklete binerim, sonra okula yönelirim.",
       "patternId": "instrument",
       "tokens": [
         "أَرْكَبُ",
@@ -1703,7 +1703,7 @@
     {
       "id": "s003",
       "ar": "أَبي تاجِر، هُوَ يُسافِرُ إِلى أَنْقَرَةَ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "Babam tüccardır; Ankara’ya uçakla seyahat eder.",
       "patternId": "instrument",
       "tokens": [
         "أَبي",
@@ -1720,7 +1720,7 @@
     {
       "id": "s004",
       "ar": "أُمّي طَبيبَة، هِيَ تَذْهَبُ إِلى المُسْتَشْفى بِالسَّيّارَةِ.",
-      "tr":"",
+      "tr": "Annem doktordur; hastaneye arabayla gider.",
       "patternId": "instrument",
       "tokens": [
         "أُمّي",
@@ -1737,7 +1737,7 @@
     {
       "id": "s005",
       "ar": "أُخْتي مُهَنْدِسَة، هِيَ تَرْجِعُ إِلى إِسْطَنْبولَ بِالقِطارِ.",
-      "tr":"",
+      "tr": "Kız kardeşim mühendistir; İstanbul’a trenle döner.",
       "patternId": "return_from_to",
       "tokens": [
         "أُخْتي",
@@ -1754,7 +1754,7 @@
     {
       "id": "s006",
       "ar": "أَنا أُسافِرُ في العُطْلَةِ إِلى بورْصَةَ بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "Tatilde Bursa’ya gemiyle seyahat ederim.",
       "patternId": "destination_travel",
       "tokens": [
         "أَنا",
@@ -1770,7 +1770,7 @@
     {
       "id": "s007",
       "ar": "أَنا أَرْكَبُ الدَّرّاجَةَ كُلَّ صَباحٍ.",
-      "tr":"",
+      "tr": "Her sabah bisiklete binerim.",
       "patternId": "time_exit",
       "tokens": [
         "أَنا",
@@ -1784,7 +1784,7 @@
     {
       "id": "s008",
       "ar": "عائِشَةُ تُسافِرُ إِلى قَيْصَري بِالقِطارِ.",
-      "tr":"",
+      "tr": "Âişe Kayseri’ye trenle seyahat eder.",
       "patternId": "instrument",
       "tokens": [
         "عائِشَةُ",
@@ -1798,7 +1798,7 @@
     {
       "id": "s009",
       "ar": "جَدّي يَتَّجِهُ إِلى المَسْجِدِ بِالسَّيّارَةِ.",
-      "tr":"",
+      "tr": "Dedem camiye arabayla yönelir.",
       "patternId": "instrument",
       "tokens": [
         "جَدّي",
@@ -1812,7 +1812,7 @@
     {
       "id": "s010",
       "ar": "حَسَن يَرْجِعُ إِلى أَنْطالْيا بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "Hasan Antalya’ya gemiyle döner.",
       "patternId": "return_from_to",
       "tokens": [
         "حَسَن",
@@ -1826,7 +1826,7 @@
     {
       "id": "s011",
       "ar": "أَنْتِ تَذْهَبينَ إِلى المَكْتَبَةِ بِالْمِتْرو.",
-      "tr":"",
+      "tr": "Sen kütüphaneye metroyla gidersin.",
       "patternId": "instrument",
       "tokens": [
         "أَنْتِ",
@@ -1840,7 +1840,7 @@
     {
       "id": "s012",
       "ar": "أَنْتَ تَصِلُ إِلى إِسْطَنْبولَ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "Sen İstanbul’a uçakla ulaşırsın.",
       "patternId": "instrument",
       "tokens": [
         "أَنْتَ",
@@ -1854,7 +1854,7 @@
     {
       "id": "s013",
       "ar": "أَذْهَبُ إِلى المَكْتَبَةِ مَشْيًا.",
-      "tr":"",
+      "tr": "Kütüphaneye yürüyerek giderim.",
       "patternId": "instrument",
       "tokens": [
         "أَذْهَبُ",
@@ -1867,7 +1867,7 @@
     {
       "id": "s014",
       "ar": "أَبي يَرْجِعُ مِنْ أَنْقَرَةَ جَوًّا.",
-      "tr":"",
+      "tr": "Babam Ankara’dan hava yoluyla döner.",
       "patternId": "modes",
       "tokens": [
         "أَبي",
@@ -1881,7 +1881,7 @@
     {
       "id": "s015",
       "ar": "أُخْتي تُسافِرُ إِلى بورْصَةَ بَحْرًا.",
-      "tr":"",
+      "tr": "Kız kardeşim Bursa’ya deniz yoluyla seyahat eder.",
       "patternId": "modes",
       "tokens": [
         "أُخْتي",
@@ -1895,7 +1895,7 @@
     {
       "id": "s016",
       "ar": "أَخي يُسافِرُ إِلى سيواس بَرًّا.",
-      "tr":"",
+      "tr": "Erkek kardeşim Sivas’a kara yoluyla seyahat eder.",
       "patternId": "modes",
       "tokens": [
         "أَخي",
@@ -1909,7 +1909,7 @@
     {
       "id": "s017",
       "ar": "السَّيّارَةُ حَديثَة.",
-      "tr":"",
+      "tr": "Araba moderndir.",
       "patternId": "comparative",
       "tokens": [
         "السَّيّارَةُ",
@@ -1920,7 +1920,7 @@
     {
       "id": "s018",
       "ar": "الحافِلَةُ قَديمَة.",
-      "tr":"",
+      "tr": "Otobüs eskidir.",
       "patternId": "comparative",
       "tokens": [
         "الحافِلَةُ",
@@ -1931,7 +1931,7 @@
     {
       "id": "s019",
       "ar": "الطّائِرَةُ سَريعَة.",
-      "tr":"",
+      "tr": "Uçak hızlıdır.",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -1942,7 +1942,7 @@
     {
       "id": "s020",
       "ar": "الدَّرّاجَةُ بَطيئَة.",
-      "tr":"",
+      "tr": "Bisiklet yavaştır.",
       "patternId": "comparative",
       "tokens": [
         "الدَّرّاجَةُ",
@@ -1953,7 +1953,7 @@
     {
       "id": "s021",
       "ar": "القِطارُ أَقْدَمُ مِنَ الحافِلَةِ.",
-      "tr":"",
+      "tr": "Tren otobüsten daha eskidir.",
       "patternId": "comparative",
       "tokens": [
         "القِطارُ",
@@ -1966,7 +1966,7 @@
     {
       "id": "s022",
       "ar": "الدَّرّاجَةُ أَبْطَأُ مِنَ القِطارِ.",
-      "tr":"",
+      "tr": "Bisiklet trenden daha yavaştır.",
       "patternId": "comparative",
       "tokens": [
         "الدَّرّاجَةُ",
@@ -1979,7 +1979,7 @@
     {
       "id": "s023",
       "ar": "المِتْرو أَحْدَثُ مِنَ السَّيّارَةِ.",
-      "tr":"",
+      "tr": "Metro arabadan daha yenidir.",
       "patternId": "comparative",
       "tokens": [
         "المِتْرو",
@@ -1992,7 +1992,7 @@
     {
       "id": "s024",
       "ar": "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
-      "tr":"",
+      "tr": "Uçak gemiden daha hızlıdır.",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -2005,7 +2005,7 @@
     {
       "id": "s025",
       "ar": "كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-      "tr":"",
+      "tr": "Eski pazara nasıl giderim?",
       "patternId": "how_route",
       "tokens": [
         "كَيْفَ",
@@ -2019,7 +2019,7 @@
     {
       "id": "s026",
       "ar": "اُعْبُرِ الطَّريقَ.",
-      "tr":"",
+      "tr": "Yolu karşıya geç.",
       "patternId": "directions_sequence",
       "tokens": [
         "اُعْبُرِ",
@@ -2030,7 +2030,7 @@
     {
       "id": "s027",
       "ar": "اِمْشِ إِلى الأَمامِ قَليلاً.",
-      "tr":"",
+      "tr": "Biraz ileri yürü.",
       "patternId": "directions_sequence",
       "tokens": [
         "اِمْشِ",
@@ -2043,7 +2043,7 @@
     {
       "id": "s028",
       "ar": "اِرْكَبِ الحافِلَةَ مِنَ المَوْقِفِ.",
-      "tr":"",
+      "tr": "Duraktan otobüse bin.",
       "patternId": "directions_sequence",
       "tokens": [
         "اِرْكَبِ",
@@ -2056,7 +2056,7 @@
     {
       "id": "s029",
       "ar": "اِنْزِلْ أَمامَ المُسْتَشْفى.",
-      "tr":"",
+      "tr": "Hastanenin önünde in.",
       "patternId": "directions_sequence",
       "tokens": [
         "اِنْزِلْ",
@@ -2068,7 +2068,7 @@
     {
       "id": "s030",
       "ar": "السّوقُ عَلى اليَسارِ.",
-      "tr":"",
+      "tr": "Pazar sol taraftadır.",
       "patternId": "side_location",
       "tokens": [
         "السّوقُ",
@@ -2080,7 +2080,7 @@
     {
       "id": "s031",
       "ar": "المَدْرَسَةُ عَلى اليَمينِ.",
-      "tr":"",
+      "tr": "Okul sağ taraftadır.",
       "patternId": "side_location",
       "tokens": [
         "المَدْرَسَةُ",
@@ -2092,7 +2092,7 @@
     {
       "id": "s032",
       "ar": "إِشاراتُ المُرورِ مُهِمَّة.",
-      "tr":"",
+      "tr": "Trafik işaretleri önemlidir.",
       "patternId": "traffic_light",
       "tokens": [
         "إِشاراتُ",
@@ -2104,7 +2104,7 @@
     {
       "id": "s033",
       "ar": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
-      "tr":"",
+      "tr": "Kırmızı ışıkta dur.",
       "patternId": "traffic_light",
       "tokens": [
         "قِفْ",
@@ -2117,7 +2117,7 @@
     {
       "id": "s034",
       "ar": "اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ.",
-      "tr":"",
+      "tr": "Sarı ışıkta hazırlan.",
       "patternId": "traffic_light",
       "tokens": [
         "اِسْتَعِدَّ",
@@ -2130,7 +2130,7 @@
     {
       "id": "s035",
       "ar": "اُعْبُرْ عِنْدَ الضَّوْءِ الأَخْضَرِ.",
-      "tr":"",
+      "tr": "Yeşil ışıkta karşıya geç.",
       "patternId": "traffic_light",
       "tokens": [
         "اُعْبُرْ",
@@ -2143,7 +2143,7 @@
     {
       "id": "s036",
       "ar": "اِذْهَبْ إِلى هَذا العُنْوانِ.",
-      "tr":"",
+      "tr": "Bu adrese git.",
       "patternId": "destination_go",
       "tokens": [
         "اِذْهَبْ",
@@ -2156,7 +2156,7 @@
     {
       "id": "s037",
       "ar": "إِلى أَيْنَ تُسافِرُ؟ أُسافِرُ إِلى أَنْقَرَةَ.",
-      "tr":"",
+      "tr": "Nereye seyahat edersin? Ankara’ya seyahat ederim.",
       "patternId": "destination_travel",
       "tokens": [
         "إِلى",
@@ -2172,7 +2172,7 @@
     {
       "id": "s038",
       "ar": "بِماذا تُسافِرُ؟ أُسافِرُ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "Ne ile seyahat edersin? Uçakla seyahat ederim.",
       "patternId": "instrument",
       "tokens": [
         "بِماذا",
@@ -2186,7 +2186,7 @@
     {
       "id": "s039",
       "ar": "مِنْ أَيْنَ تَرْجِعُ؟ أَرْجِعُ مِنَ المَكْتَبَةِ.",
-      "tr":"",
+      "tr": "Nereden dönersin? Kütüphaneden dönerim.",
       "patternId": "return_from_to",
       "tokens": [
         "مِنْ",
@@ -2202,7 +2202,7 @@
     {
       "id": "s040",
       "ar": "كَيْفَ تَذْهَبُ إِلى المَدْرَسَةِ؟ أَذْهَبُ مَشْيًا.",
-      "tr":"",
+      "tr": "Okula nasıl gidersin? Yürüyerek giderim.",
       "patternId": "how_route",
       "tokens": [
         "كَيْفَ",
@@ -2218,7 +2218,7 @@
     {
       "id": "s041",
       "ar": "بِماذا تَرْجِعُ إِلى البَيْتِ؟ أَرْجِعُ بِالحافِلَةِ.",
-      "tr":"",
+      "tr": "Eve ne ile dönersin? Otobüsle dönerim.",
       "patternId": "return_from_to",
       "tokens": [
         "بِماذا",
@@ -2234,7 +2234,7 @@
     {
       "id": "s042",
       "ar": "مَتى تُسافِرُ إِلى بورْصَةَ؟ أُسافِرُ يَوْمَ الجُمُعَةِ.",
-      "tr":"",
+      "tr": "Bursa’ya ne zaman seyahat edersin? Cuma günü seyahat ederim.",
       "patternId": "time_exit",
       "tokens": [
         "مَتى",
@@ -2251,7 +2251,7 @@
     {
       "id": "s043",
       "ar": "هَلْ يَذْهَبُ المِتْرو إِلى المُسْتَشْفى؟ نَعَمْ.",
-      "tr":"",
+      "tr": "Metro hastaneye gider mi? Evet.",
       "patternId": "yes_no",
       "tokens": [
         "هَلْ",
@@ -2267,7 +2267,7 @@
     {
       "id": "s044",
       "ar": "اُعْبُرِ الطَّريقَ وَاتَّجِهْ إِلى اليَسارِ.",
-      "tr":"",
+      "tr": "Yolu geç ve sola yönel.",
       "patternId": "directions_sequence",
       "tokens": [
         "اُعْبُرِ",
@@ -2281,7 +2281,7 @@
     {
       "id": "s045",
       "ar": "مَحَطَّةُ المِتْرو عَلى اليَمينِ.",
-      "tr":"",
+      "tr": "Metro istasyonu sağdadır.",
       "patternId": "side_location",
       "tokens": [
         "مَحَطَّةُ",
@@ -2294,7 +2294,7 @@
     {
       "id": "s046",
       "ar": "أَخْرُجُ مِنَ المَدْرَسَةِ في السّاعَةِ الثّالِثَةِ.",
-      "tr":"",
+      "tr": "Saat üçte okuldan çıkarım.",
       "patternId": "time_exit",
       "tokens": [
         "أَخْرُجُ",
@@ -2309,7 +2309,7 @@
     {
       "id": "s047",
       "ar": "تَخْرُجُ مِنَ المَكْتَبَةِ في السّاعَةِ السّادِسَةِ.",
-      "tr":"",
+      "tr": "Saat altıda kütüphaneden çıkar.",
       "patternId": "time_exit",
       "tokens": [
         "تَخْرُجُ",
@@ -2324,7 +2324,7 @@
     {
       "id": "s048",
       "ar": "أَرْجِعُ إِلى البَيْتِ مَساءً مَشْيًا.",
-      "tr":"",
+      "tr": "Akşam eve yürüyerek dönerim.",
       "patternId": "return_from_to",
       "tokens": [
         "أَرْجِعُ",
@@ -2338,7 +2338,7 @@
     {
       "id": "s049",
       "ar": "تَذْهَبُ أَليف إِلى المَكْتَبَةِ بِالْمِتْرو.",
-      "tr":"",
+      "tr": "Elif kütüphaneye metroyla gider.",
       "patternId": "instrument",
       "tokens": [
         "تَذْهَبُ",
@@ -2352,7 +2352,7 @@
     {
       "id": "s050",
       "ar": "تَذْهَبُ أَليف بِالحافِلَةِ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "Elif okula otobüsle gider.",
       "patternId": "instrument",
       "tokens": [
         "تَذْهَبُ",
@@ -2366,7 +2366,7 @@
     {
       "id": "s051",
       "ar": "القِطارُ أَطْوَلُ مِنَ الحافِلَةِ.",
-      "tr":"",
+      "tr": "Tren otobüsten daha uzundur.",
       "patternId": "comparative",
       "tokens": [
         "القِطارُ",
@@ -2379,7 +2379,7 @@
     {
       "id": "s052",
       "ar": "الطّائِرَةُ أَسْرَعُ مِنَ السَّيّارَةِ.",
-      "tr":"",
+      "tr": "Uçak arabadan daha hızlıdır.",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -2392,7 +2392,7 @@
     {
       "id": "s053",
       "ar": "أَنا أَمامَ المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "Ben okulun önündeyim.",
       "patternId": "side_location",
       "tokens": [
         "أَنا",
@@ -2404,7 +2404,7 @@
     {
       "id": "s054",
       "ar": "المُسْتَشْفى عَلى يَسارِ الشّارِعِ.",
-      "tr":"",
+      "tr": "Hastane caddenin solundadır.",
       "patternId": "side_location",
       "tokens": [
         "المُسْتَشْفى",
@@ -2417,7 +2417,7 @@
     {
       "id": "s055",
       "ar": "المَكْتَبَةُ عَلى يَمينِ المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "Kütüphane okulun sağındadır.",
       "patternId": "side_location",
       "tokens": [
         "المَكْتَبَةُ",
@@ -2430,7 +2430,7 @@
     {
       "id": "s056",
       "ar": "المَوْقِفُ أَمامَ المُسْتَشْفى.",
-      "tr":"",
+      "tr": "Durak hastanenin önündedir.",
       "patternId": "side_location",
       "tokens": [
         "المَوْقِفُ",
@@ -2442,7 +2442,7 @@
     {
       "id": "s057",
       "ar": "ساعِدْ مُراد في الوُصولِ إِلى السّوقِ القَديمِ.",
-      "tr":"",
+      "tr": "Murad’ın eski pazara ulaşmasına yardım et.",
       "patternId": "directions_sequence",
       "tokens": [
         "ساعِدْ",
@@ -2458,7 +2458,7 @@
     {
       "id": "s058",
       "ar": "اِشْرَحْ طَريقَ الوُصولِ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "Okula ulaşma yolunu açıkla.",
       "patternId": "how_route",
       "tokens": [
         "اِشْرَحْ",
@@ -2472,7 +2472,7 @@
     {
       "id": "s059",
       "ar": "أَنا أَذْهَبُ إِلى المَدينَةِ المُنَوَّرَةِ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "Medine’ye uçakla giderim.",
       "patternId": "instrument",
       "tokens": [
         "أَنا",
@@ -2487,7 +2487,7 @@
     {
       "id": "s060",
       "ar": "أَنا أَذْهَبُ إِلى بورْصَةَ بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "Bursa’ya gemiyle giderim.",
       "patternId": "instrument",
       "tokens": [
         "أَنا",
@@ -2507,37 +2507,37 @@
         {
           "speaker": "مُراد",
           "ar": "مَرْحَبًا يا شَيْماء، كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-          "tr":""
+          "tr": "Merhaba Şeyma, eski pazara nasıl giderim?"
         },
         {
           "speaker": "شَيْماء",
           "ar": "مَرْحَبًا بِكَ يا مُراد، اُعْبُرِ الطَّريقَ، اِمْشِ إِلى الأَمامِ قَليلاً.",
-          "tr":""
+          "tr": "Merhaba Murad, yolu geç, biraz ileri yürü."
         },
         {
           "speaker": "شَيْماء",
           "ar": "اِتَّجِهْ إِلى اليَسارِ، ثُمَّ اِرْكَبِ الحافِلَةَ مِنَ المَوْقِفِ.",
-          "tr":""
+          "tr": "Sola yönel, sonra duraktan otobüse bin."
         },
         {
           "speaker": "مُراد",
           "ar": "أَيْنَ أَنْزِلُ مِنَ الحافِلَةِ؟",
-          "tr":""
+          "tr": "Otobüsten nerede ineyim?"
         },
         {
           "speaker": "شَيْماء",
           "ar": "اِنْزِلْ أَمامَ المُسْتَشْفى، السّوقُ عَلى اليَسارِ.",
-          "tr":""
+          "tr": "Hastanenin önünde in; pazar solda."
         },
         {
           "speaker": "مُراد",
           "ar": "شُكْرًا لَكِ يا شَيْماء، إِلى اللِّقاءِ.",
-          "tr":""
+          "tr": "Teşekkürler Şeyma, görüşmek üzere."
         },
         {
           "speaker": "شَيْماء",
           "ar": "عَفْوًا، مَعَ السَّلامَةِ.",
-          "tr":""
+          "tr": "Rica ederim, güle güle."
         }
       ]
     },
@@ -2548,32 +2548,32 @@
         {
           "speaker": "صادِق",
           "ar": "مَرْحَبًا يا سَلْمى، بِماذا تَذْهَبينَ إِلى المَدْرَسَةِ؟",
-          "tr":""
+          "tr": "Merhaba Selma, okula ne ile gidiyorsun?"
         },
         {
           "speaker": "سَلْمى",
           "ar": "أَذْهَبُ إِلى المَدْرَسَةِ مَشْيًا. وَأَنْتَ كَيْفَ تَذْهَبُ؟",
-          "tr":""
+          "tr": "Okula yürüyerek giderim. Sen nasıl gidersin?"
         },
         {
           "speaker": "صادِق",
           "ar": "أَذْهَبُ بِالحافِلَةِ.",
-          "tr":""
+          "tr": "Otobüsle giderim."
         },
         {
           "speaker": "سَلْمى",
           "ar": "إِلى أَيْنَ تَذْهَبُ الآن؟",
-          "tr":""
+          "tr": "Şimdi nereye gidiyorsun?"
         },
         {
           "speaker": "صادِق",
           "ar": "أَذْهَبُ إِلى المُسْتَشْفى بِالْمِتْرو.",
-          "tr":""
+          "tr": "Hastaneye metroyla gidiyorum."
         },
         {
           "speaker": "سَلْمى",
           "ar": "أَرْجِعُ إِلى البَيْتِ بِالسَّيّارَةِ مَعَ أُمّي.",
-          "tr":""
+          "tr": "Annemle arabayla eve dönüyorum."
         }
       ]
     },
@@ -2584,27 +2584,27 @@
         {
           "speaker": "أَمير",
           "ar": "مَتى تُسافِرُ إِلى بورْصَةَ يا طاهِر؟",
-          "tr":""
+          "tr": "Tahir, Bursa’ya ne zaman seyahat ediyorsun?"
         },
         {
           "speaker": "طاهِر",
           "ar": "أُسافِرُ يَوْمَ الجُمُعَةِ.",
-          "tr":""
+          "tr": "Cuma günü seyahat ederim."
         },
         {
           "speaker": "أَمير",
           "ar": "بِماذا تُسافِرُ إِلى بورْصَةَ؟",
-          "tr":""
+          "tr": "Bursa’ya ne ile seyahat edersin?"
         },
         {
           "speaker": "طاهِر",
           "ar": "أُسافِرُ بِالسَّفينَةِ، وَأَنْتَ كَيْفَ تَذْهَبُ إِلى غازي عَيْنْتاب؟",
-          "tr":""
+          "tr": "Gemiyle seyahat ederim. Sen Gaziantep’e nasıl gidersin?"
         },
         {
           "speaker": "أَمير",
           "ar": "أَذْهَبُ إِلى غازي عَيْنْتاب بِالطّائِرَةِ.",
-          "tr":""
+          "tr": "Gaziantep’e uçakla giderim."
         }
       ]
     }
@@ -2613,15 +2613,15 @@
     "matchingSets": [
       {
         "id": "match_transport",
-        "title":"",
+        "title": "Ulaşım Araçları",
         "pairs": [
           [
             "حافِلَة",
-            ""
+            "otobüs"
           ],
           [
             "طائِرَة",
-            ""
+            "uçak"
           ],
           [
             "سَيّارَة",
@@ -2645,7 +2645,7 @@
           ],
           [
             "مَوْقِفُ الحافِلَةِ",
-            ""
+            "otobüs durağı"
           ]
         ]
       },
@@ -2663,7 +2663,7 @@
           ],
           [
             "مَكْتَبَة",
-            ""
+            "kütüphane"
           ],
           [
             "مَسْجِد",
@@ -2689,11 +2689,11 @@
       },
       {
         "id": "match_directions",
-        "title":"",
+        "title": "Yön ve Trafik",
         "pairs": [
           [
             "إِلى اليَمين",
-            ""
+            "sağa"
           ],
           [
             "إِلى اليَسار",
@@ -2701,7 +2701,7 @@
           ],
           [
             "عَلى اليَمين",
-            ""
+            "sağda"
           ],
           [
             "عَلى اليَسار",
@@ -2709,19 +2709,19 @@
           ],
           [
             "أَمام",
-            ""
+            "önünde"
           ],
           [
             "خَلْف",
-            ""
+            "arkasında"
           ],
           [
             "الضَّوْءُ الأَحْمَر",
-            ""
+            "kırmızı ışık"
           ],
           [
             "الضَّوْءُ الأَخْضَر",
-            ""
+            "yeşil ışık"
           ]
         ]
       },
@@ -2739,7 +2739,7 @@
           ],
           [
             "أَرْجِعُ",
-            ""
+            "dönerim"
           ],
           [
             "أَرْكَبُ",
@@ -2751,11 +2751,11 @@
           ],
           [
             "أَعْبُرُ",
-            ""
+            "karşıya geçerim"
           ],
           [
             "أَمْشي",
-            ""
+            "yürürüm"
           ],
           [
             "أَقِفُ",
@@ -2783,8 +2783,8 @@
         "type": "mcq",
         "prompt": "ما معنى «حافِلَة»؟",
         "options": [
-          "",
-          "",
+          "otobüs",
+          "uçak",
           "gemi",
           "tren"
         ],
@@ -2797,7 +2797,7 @@
         "prompt": "ما معنى «طائِرَة»؟",
         "options": [
           "gemi",
-          "",
+          "uçak",
           "araba",
           "metro"
         ],
@@ -2810,7 +2810,7 @@
         "prompt": "ما معنى «إِلى اليَمين»؟",
         "options": [
           "sola",
-          "",
+          "sağa",
           "ileriye",
           "arkaya"
         ],
@@ -2875,7 +2875,7 @@
         "prompt": "«إِلى أَيْنَ؟» تعni ...",
         "options": [
           "Nereden?",
-          "",
+          "Nasıl?",
           "Nereye?",
           "Ne ile?"
         ],
@@ -2889,7 +2889,7 @@
         "options": [
           "Nereden?",
           "Nereye?",
-          "",
+          "Nasıl?",
           "Ne zaman?"
         ],
         "answerIndex": 0,
@@ -2979,9 +2979,9 @@
         "prompt": "«مَحَطَّةُ المِتْرو» تعني ...",
         "options": [
           "metro istasyonu",
-          "",
+          "otobüs",
           "hastane",
-          ""
+          "yaya geçidi"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -2993,7 +2993,7 @@
         "options": [
           "giderim",
           "binerim",
-          "",
+          "dönerim",
           "inerim"
         ],
         "answerIndex": 2,
@@ -3007,7 +3007,7 @@
           "bin",
           "in",
           "dur",
-          ""
+          "geç"
         ],
         "answerIndex": 0,
         "skill": "imperatives"
@@ -3020,7 +3020,7 @@
           "bin",
           "in",
           "git",
-          ""
+          "hazırlan"
         ],
         "answerIndex": 1,
         "skill": "imperatives"
@@ -3056,9 +3056,9 @@
         "type": "mcq",
         "prompt": "أُسافِرُ إِلى أَنْقَرَةَ جَوًّا = ...",
         "options": [
-          "",
+          "uçak/hava yoluyla",
           "deniz yoluyla",
-          "",
+          "yürüyerek",
           "bisikletle"
         ],
         "answerIndex": 0,
@@ -3093,12 +3093,12 @@
       {
         "id": "q026",
         "type": "mcq",
-        "prompt":"",
+        "prompt": "أَخْرُجُ مِنَ المَدْرَسَةِ في السّاعَةِ الثّالِثَةِ. Cümlenin anlamı nedir?",
         "options": [
-          "",
-          "",
-          "",
-          ""
+          "Saat üçte okuldan çıkarım.",
+          "Saat üçte okula giderim.",
+          "Okula otobüsle giderim.",
+          "Okul sağdadır."
         ],
         "answerIndex": 0,
         "skill": "time"
@@ -3108,10 +3108,10 @@
         "type": "mcq",
         "prompt": "«اِمْشِ إِلى الأَمامِ قَليلاً» ne demek?",
         "options": [
-          "",
-          "",
-          "",
-          ""
+          "Biraz ileri yürü.",
+          "Sağa dön.",
+          "Otobüsten in.",
+          "Kırmızıda dur."
         ],
         "answerIndex": 0,
         "skill": "directions"
@@ -3121,7 +3121,7 @@
         "type": "mcq",
         "prompt": "«عَلى اليَمين» ne demek?",
         "options": [
-          "",
+          "sağ tarafta",
           "sol tarafta",
           "ileri",
           "geri"
@@ -3132,12 +3132,12 @@
       {
         "id": "q029",
         "type": "mcq",
-        "prompt":"",
+        "prompt": "«المَوْقِفُ أَمامَ المُسْتَشْفى» cümlesinde مَوْقِفُ nedir?",
         "options": [
           "durak",
-          "",
+          "uçak",
           "adres",
-          ""
+          "şehir"
         ],
         "answerIndex": 0,
         "skill": "places"
@@ -3145,9 +3145,9 @@
       {
         "id": "q030",
         "type": "mcq",
-        "prompt":"",
+        "prompt": "«أَسْرَعُ مِنْ» kalıbı ne bildirir?",
         "options": [
-          "",
+          "karşılaştırma",
           "soru",
           "renk",
           "zaman"
@@ -3161,79 +3161,79 @@
         "id": "tf001",
         "statement": "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
         "answer": true,
-        "explanation":""
+        "explanation": "Uçak gemiden daha hızlıdır."
       },
       {
         "id": "tf002",
         "statement": "الدَّرّاجَةُ أَسْرَعُ مِنَ الطّائِرَةِ.",
         "answer": false,
-        "explanation":""
+        "explanation": "Bisiklet uçaktan hızlı değildir."
       },
       {
         "id": "tf003",
         "statement": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "answer": true,
-        "explanation":""
+        "explanation": "Kırmızı ışıkta durulur."
       },
       {
         "id": "tf004",
         "statement": "اُعْبُرْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "answer": false,
-        "explanation":""
+        "explanation": "Geçmek için yeşil ışık kullanılır."
       },
       {
         "id": "tf005",
         "statement": "أَذْهَبُ إِلى المَكْتَبَةِ مَشْيًا.",
         "answer": true,
-        "explanation":""
+        "explanation": "Mَشْيًا yürüyerek demektir."
       },
       {
         "id": "tf006",
-        "statement":"",
+        "statement": "السّوقُ عَلى اليَسارِ تعني pazar sağdadır.",
         "answer": false,
         "explanation": "عَلى اليَسارِ sol tarafta demektir."
       },
       {
         "id": "tf007",
-        "statement":"",
+        "statement": "بِماذا؟ sorusu 'ne ile?' anlamına gelir.",
         "answer": true,
-        "explanation":""
+        "explanation": "Araç sormak için kullanılır."
       },
       {
         "id": "tf008",
-        "statement":"",
+        "statement": "مِنْ أَيْنَ؟ sorusu 'nereye?' anlamına gelir.",
         "answer": false,
         "explanation": "مِنْ أَيْنَ؟ nereden? demektir."
       },
       {
         "id": "tf009",
-        "statement":"",
+        "statement": "المِتْرو bir ulaşım aracıdır.",
         "answer": true,
-        "explanation":""
+        "explanation": "Metro ulaşım aracıdır."
       },
       {
         "id": "tf010",
-        "statement":"",
+        "statement": "المُسْتَشْفى bir şehir adıdır.",
         "answer": false,
         "explanation": "المُسْتَشْفى hastane demektir."
       },
       {
         "id": "tf011",
-        "statement":"",
+        "statement": "أَنْزِلُ fiili 'inerim' anlamına gelir.",
         "answer": true,
-        "explanation":""
+        "explanation": "Özellikle araçtan inmek için kullanılır."
       },
       {
         "id": "tf012",
-        "statement":"",
+        "statement": "أَرْكَبُ fiili 'binerim' anlamına gelir.",
         "answer": true,
-        "explanation":""
+        "explanation": "Araçlara binme için kullanılır."
       },
       {
         "id": "tf013",
         "statement": "بَحْرًا deniz yoluyla demektir.",
         "answer": true,
-        "explanation":""
+        "explanation": "بحر = deniz kökünden gelir."
       },
       {
         "id": "tf014",
@@ -3243,25 +3243,25 @@
       },
       {
         "id": "tf015",
-        "statement":"",
+        "statement": "أَمامَ المُسْتَشْفى hastanenin önünde demektir.",
         "answer": true,
-        "explanation":""
+        "explanation": "أمام = önünde."
       },
       {
         "id": "tf016",
-        "statement":"",
+        "statement": "الضَّوْءُ الأَصْفَر kırmızı ışık demektir.",
         "answer": false,
-        "explanation":""
+        "explanation": "الأَصْفَر sarı demektir."
       },
       {
         "id": "tf017",
-        "statement":"",
+        "statement": "أَسْكُنُ في إِسْطَنْبولَ cümlesi 'İstanbul’da oturuyorum' demektir.",
         "answer": true,
-        "explanation":""
+        "explanation": "سكن = oturmak/yaşamak."
       },
       {
         "id": "tf018",
-        "statement":"",
+        "statement": "أُسافِرُ إِلى بورْصَةَ بِالسَّفينَةِ cümlesinde araç gemidir.",
         "answer": true,
         "explanation": "بِالسَّفينَةِ = gemiyle."
       }
@@ -3277,7 +3277,7 @@
           "المَكْتَبَةِ",
           "اليَسارِ"
         ],
-        "hintTr":""
+        "hintTr": "Ankara’ya hava yoluyla."
       },
       {
         "id": "fb002",
@@ -3289,7 +3289,7 @@
           "العُنْوانِ",
           "الأَصْفَرِ"
         ],
-        "hintTr":""
+        "hintTr": "Hastaneye arabayla."
       },
       {
         "id": "fb003",
@@ -3301,7 +3301,7 @@
           "جَوًّا",
           "أَسْرَعُ"
         ],
-        "hintTr":""
+        "hintTr": "Yürüyerek dönerim."
       },
       {
         "id": "fb004",
@@ -3313,7 +3313,7 @@
           "المِتْرو",
           "الضَّوْءِ"
         ],
-        "hintTr":""
+        "hintTr": "Sol tarafta."
       },
       {
         "id": "fb005",
@@ -3325,7 +3325,7 @@
           "بَحْرًا",
           "المَوْقِفِ"
         ],
-        "hintTr":""
+        "hintTr": "Sağ tarafta."
       },
       {
         "id": "fb006",
@@ -3337,7 +3337,7 @@
           "الأَصْفَرِ",
           "القَديمِ"
         ],
-        "hintTr":""
+        "hintTr": "Kırmızı ışıkta dur."
       },
       {
         "id": "fb007",
@@ -3349,7 +3349,7 @@
           "الأَصْفَرِ",
           "اليَمينِ"
         ],
-        "hintTr":""
+        "hintTr": "Yeşilde geç."
       },
       {
         "id": "fb008",
@@ -3361,7 +3361,7 @@
           "أَكْبَرُ",
           "أَحْدَثُ"
         ],
-        "hintTr":""
+        "hintTr": "Bisiklet daha yavaştır."
       },
       {
         "id": "fb009",
@@ -3373,7 +3373,7 @@
           "أَصْغَرُ",
           "أَقْدَمُ"
         ],
-        "hintTr":""
+        "hintTr": "Uçak daha hızlıdır."
       },
       {
         "id": "fb010",
@@ -3385,7 +3385,7 @@
           "أَقِفُ",
           "أَسْتَعِدُّ"
         ],
-        "hintTr":""
+        "hintTr": "Nasıl giderim?"
       },
       {
         "id": "fb011",
@@ -3397,7 +3397,7 @@
           "أَنْقَرَةَ",
           "الأَحْمَرِ"
         ],
-        "hintTr":""
+        "hintTr": "Duraktan bin."
       },
       {
         "id": "fb012",
@@ -3409,7 +3409,7 @@
           "مِنْ",
           "جَوًّا"
         ],
-        "hintTr":""
+        "hintTr": "Hastanenin önünde in."
       },
       {
         "id": "fb013",
@@ -3421,7 +3421,7 @@
           "اليَسارِ",
           "المَكْتَبَةِ"
         ],
-        "hintTr":""
+        "hintTr": "Saat üçte."
       },
       {
         "id": "fb014",
@@ -3433,7 +3433,7 @@
           "مَشْيًا",
           "أَمامَ"
         ],
-        "hintTr":""
+        "hintTr": "Deniz yoluyla."
       },
       {
         "id": "fb015",
@@ -3445,7 +3445,7 @@
           "مَشْيًا",
           "أَبْطَأُ"
         ],
-        "hintTr":""
+        "hintTr": "Hava yoluyla."
       },
       {
         "id": "fb016",
@@ -3457,7 +3457,7 @@
           "أَقِفُ",
           "أَعْبُرُ"
         ],
-        "hintTr":""
+        "hintTr": "İstanbul’da otururum."
       }
     ],
     "sentenceOrder": [
@@ -3472,7 +3472,7 @@
           "بِالطّائِرَةِ",
           "."
         ],
-        "tr":""
+        "tr": "Ankara’ya uçakla seyahat ederim."
       },
       {
         "id": "so002",
@@ -3485,7 +3485,7 @@
           "بِالسَّيّارَةِ",
           "."
         ],
-        "tr":""
+        "tr": "Annem hastaneye arabayla gider."
       },
       {
         "id": "so003",
@@ -3498,7 +3498,7 @@
           "بِالقِطارِ",
           "."
         ],
-        "tr":""
+        "tr": "Kız kardeşim İstanbul’a trenle döner."
       },
       {
         "id": "so004",
@@ -3510,7 +3510,7 @@
           "مَشْيًا",
           "."
         ],
-        "tr":""
+        "tr": "Kütüphaneye yürüyerek giderim."
       },
       {
         "id": "so005",
@@ -3522,7 +3522,7 @@
           "السَّفينَةِ",
           "."
         ],
-        "tr":""
+        "tr": "Uçak gemiden daha hızlıdır."
       },
       {
         "id": "so006",
@@ -3534,7 +3534,7 @@
           "الأَحْمَرِ",
           "."
         ],
-        "tr":""
+        "tr": "Kırmızı ışıkta dur."
       },
       {
         "id": "so007",
@@ -3547,7 +3547,7 @@
           "اليَسارِ",
           "."
         ],
-        "tr":""
+        "tr": "Yolu geç ve sola yönel."
       },
       {
         "id": "so008",
@@ -3558,7 +3558,7 @@
           "اليَمينِ",
           "."
         ],
-        "tr":""
+        "tr": "Okul sağdadır."
       },
       {
         "id": "so009",
@@ -3570,7 +3570,7 @@
           "قَليلاً",
           "."
         ],
-        "tr":""
+        "tr": "Biraz ileri yürü."
       },
       {
         "id": "so010",
@@ -3584,7 +3584,7 @@
           "الثّالِثَةِ",
           "."
         ],
-        "tr":""
+        "tr": "Saat üçte okuldan çıkarım."
       }
     ],
     "oddOneOut": [
@@ -3598,7 +3598,7 @@
           "مَكْتَبَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "مَكْتَبَة yer adıdır, ulaşım aracı değildir."
       },
       {
         "id": "odd002",
@@ -3610,7 +3610,7 @@
           "مَسْجِد"
         ],
         "oddIndex": 2,
-        "explanation":""
+        "explanation": "قِطار ulaşım aracıdır."
       },
       {
         "id": "odd003",
@@ -3622,7 +3622,7 @@
           "طائِرَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "طائِرَة yön değildir."
       },
       {
         "id": "odd004",
@@ -3634,7 +3634,7 @@
           "بورْصَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "بورصة şehir adıdır."
       },
       {
         "id": "odd005",
@@ -3646,7 +3646,7 @@
           "قِطار"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "قِطار soru kalıbı değildir."
       },
       {
         "id": "odd006",
@@ -3658,7 +3658,7 @@
           "أَمام"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "أَمام yön/konum ifadesidir."
       },
       {
         "id": "odd007",
@@ -3682,7 +3682,7 @@
           "شارِع"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": "شارِع karşılaştırma sıfatı değildir."
       }
     ],
     "wordSearch": {
@@ -3723,7 +3723,7 @@
           "اِنْزِلْ أَمامَ المُسْتَشْفى.",
           "السّوقُ عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": "Evden eski pazara gidiş."
       },
       {
         "id": "dir002",
@@ -3737,7 +3737,7 @@
           "اِتَّجِهْ إِلى اليَسارِ.",
           "المَكْتَبَةُ عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": "Okuldan kütüphaneye gidiş."
       },
       {
         "id": "dir003",
@@ -3750,7 +3750,7 @@
           "اُعْبُرِ الطَّريقَ.",
           "المُسْتَشْفى عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": "Camiden hastaneye gidiş."
       }
     ],
     "comparatives": [
@@ -3764,7 +3764,7 @@
           "أَقْدَمُ",
           "أَصْغَرُ"
         ],
-        "tr":""
+        "tr": "Uçak gemiden daha hızlıdır."
       },
       {
         "id": "cmp002",
@@ -3776,7 +3776,7 @@
           "أَحْدَثُ",
           "أَطْوَلُ"
         ],
-        "tr":""
+        "tr": "Bisiklet trenden daha yavaştır."
       },
       {
         "id": "cmp003",
@@ -3788,7 +3788,7 @@
           "أَبْطَأُ",
           "أَكْبَرُ"
         ],
-        "tr":""
+        "tr": "Metro arabadan daha yenidir."
       },
       {
         "id": "cmp004",
@@ -3800,7 +3800,7 @@
           "أَبْطَأُ",
           "أَقْدَمُ"
         ],
-        "tr":""
+        "tr": "Tren otobüsten daha uzundur."
       },
       {
         "id": "cmp005",
@@ -3812,7 +3812,7 @@
           "أَبْطَأُ",
           "أَحْدَثُ"
         ],
-        "tr":""
+        "tr": "Otobüs bisikletten daha büyüktür."
       }
     ],
     "traffic": [
@@ -3827,7 +3827,7 @@
           "اُعْبُرْ",
           "اِرْكَبْ"
         ],
-        "tr":""
+        "tr": "Kırmızıda dur."
       },
       {
         "id": "trf002",
@@ -3840,7 +3840,7 @@
           "اُعْبُرْ",
           "اِنْزِلْ"
         ],
-        "tr":""
+        "tr": "Sarıda hazırlan."
       },
       {
         "id": "trf003",
@@ -3853,81 +3853,81 @@
           "قِفْ",
           "اِسْتَعِدَّ"
         ],
-        "tr":""
+        "tr": "Yeşilde geç."
       }
     ],
     "memoryPairs": [
       {
         "ar": "حافِلَة",
-        "tr":""
+        "tr": "otobüs"
       },
       {
         "ar": "طائِرَة",
-        "tr":""
+        "tr": "uçak"
       },
       {
         "ar": "سَيّارَة",
-        "tr":""
+        "tr": "araba"
       },
       {
         "ar": "دَرّاجَة",
-        "tr":""
+        "tr": "bisiklet"
       },
       {
         "ar": "قِطار",
-        "tr":""
+        "tr": "tren"
       },
       {
         "ar": "سَفينَة",
-        "tr":""
+        "tr": "gemi"
       },
       {
         "ar": "مَدْرَسَة",
-        "tr":""
+        "tr": "okul"
       },
       {
         "ar": "مُسْتَشْفى",
-        "tr":""
+        "tr": "hastane"
       },
       {
         "ar": "مَكْتَبَة",
-        "tr":""
+        "tr": "kütüphane"
       },
       {
         "ar": "مَسْجِد",
-        "tr":""
+        "tr": "cami"
       },
       {
         "ar": "إِلى اليَمين",
-        "tr":""
+        "tr": "sağa"
       },
       {
         "ar": "إِلى اليَسار",
-        "tr":""
+        "tr": "sola"
       },
       {
         "ar": "عَلى اليَمين",
-        "tr":""
+        "tr": "sağda"
       },
       {
         "ar": "عَلى اليَسار",
-        "tr":""
+        "tr": "solda"
       },
       {
         "ar": "أَذْهَبُ",
-        "tr":""
+        "tr": "giderim"
       },
       {
         "ar": "أُسافِرُ",
-        "tr":""
+        "tr": "seyahat ederim"
       },
       {
         "ar": "أَرْجِعُ",
-        "tr":""
+        "tr": "dönerim"
       },
       {
         "ar": "أَرْكَبُ",
-        "tr":""
+        "tr": "binerim"
       }
     ],
     "wheelQuestions": [
@@ -3949,8 +3949,8 @@
         "type": "mcq",
         "prompt": "ما معنى «حافِلَة»؟",
         "options": [
-          "",
-          "",
+          "otobüs",
+          "uçak",
           "gemi",
           "tren"
         ],
@@ -3963,7 +3963,7 @@
         "prompt": "ما معنى «طائِرَة»؟",
         "options": [
           "gemi",
-          "",
+          "uçak",
           "araba",
           "metro"
         ],
@@ -3976,7 +3976,7 @@
         "prompt": "ما معنى «إِلى اليَمين»؟",
         "options": [
           "sola",
-          "",
+          "sağa",
           "ileriye",
           "arkaya"
         ],
@@ -4041,7 +4041,7 @@
         "prompt": "«إِلى أَيْنَ؟» تعni ...",
         "options": [
           "Nereden?",
-          "",
+          "Nasıl?",
           "Nereye?",
           "Ne ile?"
         ],
@@ -4055,7 +4055,7 @@
         "options": [
           "Nereden?",
           "Nereye?",
-          "",
+          "Nasıl?",
           "Ne zaman?"
         ],
         "answerIndex": 0,
@@ -4145,9 +4145,9 @@
         "prompt": "«مَحَطَّةُ المِتْرو» تعني ...",
         "options": [
           "metro istasyonu",
-          "",
+          "otobüs",
           "hastane",
-          ""
+          "yaya geçidi"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -4159,7 +4159,7 @@
         "options": [
           "giderim",
           "binerim",
-          "",
+          "dönerim",
           "inerim"
         ],
         "answerIndex": 2,
@@ -4203,42 +4203,42 @@
       {
         "ar": "حافِلَة",
         "target": "حافلة",
-        "tr":""
+        "tr": "otobüs"
       },
       {
         "ar": "طائِرَة",
         "target": "طائرة",
-        "tr":""
+        "tr": "uçak"
       },
       {
         "ar": "سَيّارَة",
         "target": "سيارة",
-        "tr":""
+        "tr": "araba"
       },
       {
         "ar": "دَرّاجَة",
         "target": "دراجة",
-        "tr":""
+        "tr": "bisiklet"
       },
       {
         "ar": "قِطار",
         "target": "قطار",
-        "tr":""
+        "tr": "tren"
       },
       {
         "ar": "سَفينَة",
         "target": "سفينة",
-        "tr":""
+        "tr": "gemi"
       },
       {
         "ar": "مَدْرَسَة",
         "target": "مدرسة",
-        "tr":""
+        "tr": "okul"
       },
       {
         "ar": "مَكْتَبَة",
         "target": "مكتبة",
-        "tr":""
+        "tr": "kütüphane"
       }
     ]
   },
@@ -4349,37 +4349,37 @@
         ]
       },
       "VOCAB_TR": {
-        "حافِلَة":"",
-        "طائِرَة":"",
+        "حافِلَة": "otobüs",
+        "طائِرَة": "uçak",
         "سَيّارَة": "araba",
         "دَرّاجَة": "bisiklet",
         "قِطار": "tren",
         "سَفينَة": "gemi",
         "مِتْرو": "metro",
-        "مَوْقِفُ الحافِلَةِ":"",
+        "مَوْقِفُ الحافِلَةِ": "otobüs durağı",
         "مَدْرَسَة": "okul",
         "مُسْتَشْفى": "hastane",
-        "مَكْتَبَة":"",
+        "مَكْتَبَة": "kütüphane",
         "مَسْجِد": "cami",
         "بَيْت": "ev",
         "السّوقُ القَديمُ": "eski pazar",
         "شارِع": "cadde",
         "عُنْوان": "adres",
-        "إِلى اليَمين":"",
+        "إِلى اليَمين": "sağa",
         "إِلى اليَسار": "sola",
-        "عَلى اليَمين":"",
+        "عَلى اليَمين": "sağda",
         "عَلى اليَسار": "solda",
-        "أَمام":"",
-        "خَلْف":"",
-        "الضَّوْءُ الأَحْمَر":"",
-        "الضَّوْءُ الأَخْضَر":"",
+        "أَمام": "önünde",
+        "خَلْف": "arkasında",
+        "الضَّوْءُ الأَحْمَر": "kırmızı ışık",
+        "الضَّوْءُ الأَخْضَر": "yeşil ışık",
         "أَذْهَبُ": "giderim",
         "أُسافِرُ": "seyahat ederim",
-        "أَرْجِعُ":"",
+        "أَرْجِعُ": "dönerim",
         "أَرْكَبُ": "binerim",
         "أَنْزِلُ": "inerim",
-        "أَعْبُرُ":"",
-        "أَمْشي":"",
+        "أَعْبُرُ": "karşıya geçerim",
+        "أَمْشي": "yürürüm",
         "أَقِفُ": "dururum"
       }
     }
