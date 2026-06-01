@@ -121,10 +121,9 @@
       const item = list[i];
       setScore(shell, i+1, list.length, i+1, list.length);
       shell.body.innerHTML = `
-        <div class="u3-card" style="min-height:330px;display:flex;flex-direction:column;justify-content:center;gap:8px">
-          <div class="u3-emoji">${escapeHtml(item.emoji || '🔤')}</div>
+        <div class="u3-card" style="min-height:330px;display:flex;flex-direction:column;justify-content:center;gap:12px">
           <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
-          <div class="u3-emoji" style="font-size:72px">${flipped ? escapeHtml(item.emoji || '🔤') : '👆'}</div>
+          <div class="u3-emoji" style="font-size:96px">${flipped ? escapeHtml(item.emoji || '🔤') : '👆'}</div>
         </div>
         <div class="u3-actions">
           <button class="u3-btn secondary" data-prev>→ السّابِق</button>

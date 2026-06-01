@@ -183,7 +183,6 @@ function renderFlashcards(game) {
     } else {
       card.append(
         el("div", {}, [
-          el("div", { class: "flash-emoji", text: item.emoji || "•" }),
           ar(item.front),
           el("p", { class: "muted", text: "🔄" })
         ])
@@ -255,7 +254,7 @@ function renderCategorySort(game) {
   const list = el("div", { class: "grid" });
   game.items.forEach(item => {
     const row = el("div", { class: "category-row" });
-    const info = el("div", {}, [el("span", { style: "font-size:40px", text: item.emoji || "" }), ar(item.text, true)]);
+    const info = el("div", {}, [ar(item.text, true)]);
     const actions = el("div", { class: "category-actions" });
     game.categories.forEach(category => {
       const button = el("button", { class: "ghost-btn", type: "button" }, [ar(category.title_ar || category.ar || "", true)]);
