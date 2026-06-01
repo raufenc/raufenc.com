@@ -11,21 +11,21 @@ const scoreText = document.getElementById("scoreText");
 const restartBtn = document.getElementById("restartBtn");
 
 const gameTypeNames = {
-  flashcards: "Kelime",
-  matching: "Eşleştirme",
-  category_sort: "Sınıflandırma",
-  shopping_list: "Liste",
-  price_quiz: "Fiyat",
-  comparative_quiz: "Karşılaştırma",
-  fill_blank: "Kalıp",
-  sentence_order: "Cümle",
-  dialogue_order: "Diyalog",
-  word_search: "Kelime Avı",
-  memory: "Hafıza",
-  odd_one_out: "Ayırt Etme",
-  multiple_choice: "Test",
-  roleplay: "Rol",
-  listening_select: "Dinleme"
+  flashcards: "المُفْرَدات",
+  matching: "المُطابَقَة",
+  category_sort: "التَّصْنيف",
+  shopping_list: "القائِمَة",
+  price_quiz: "الأَسْعار",
+  comparative_quiz: "المُقارَنَة",
+  fill_blank: "الفَراغ",
+  sentence_order: "الجُمْلَة",
+  dialogue_order: "الحِوار",
+  word_search: "البَحْث",
+  memory: "الذّاكِرَة",
+  odd_one_out: "المُخْتَلِف",
+  multiple_choice: "الاِخْتِبار",
+  roleplay: "الأَدْوار",
+  listening_select: "الاِسْتِماع"
 };
 
 const imageByType = {
@@ -76,7 +76,7 @@ function ar(text, small = false) {
 
 function setScore(correct, total, label) {
   if (!total) {
-    scoreText.textContent = label || "Hazır";
+    scoreText.textContent = label || "جاهِز";
     return;
   }
   scoreText.textContent = `${correct}/${total}`;
@@ -115,8 +115,7 @@ function renderMenu() {
     const button = el("button", { class: "game-card", type: "button", "data-game": game.id }, [
       el("img", { src: `img/hub/${imageByType[game.type] || "01-kelime.webp"}`, alt: "", loading: "lazy" }),
       el("span", {}, [
-        el("strong", { text: `${index + 1}. ${game.title_tr}` }),
-        el("span", { class: "ar-title", text: game.title_ar }),
+        el("strong", { class: "ar-title", text: game.title_ar }),
         el("small", { text: gameTypeNames[game.type] || game.type })
       ])
     ]);
@@ -138,9 +137,9 @@ function loadGame(gameId, pushHash = false) {
   if (pushHash && !window.IHO_GAME_ID) history.replaceState(null, "", `#${meta.id}`);
   activateMenu(meta.id);
   if (activeType) activeType.textContent = gameTypeNames[meta.type] || meta.type;
-  gameKicker.textContent = `${gameTypeNames[meta.type] || "Oyun"} - Ünite 2`;
-  gameTitle.textContent = meta.title_tr;
-  gameInstruction.textContent = meta.instructions_tr || "";
+  gameKicker.textContent = `${gameTypeNames[meta.type] || "لُعْبَة"} · الوَحْدَة ٢`;
+  gameTitle.textContent = meta.title_ar;
+  gameInstruction.textContent = meta.instructions_ar || "";
   gameArea.innerHTML = "";
 
   const game = Engine.createGame(meta, data, { seed: `${meta.id}-${seedSalt}` });
@@ -160,9 +159,9 @@ function renderFlashcards(game) {
   let flipped = false;
   const card = el("button", { class: "flash-card", type: "button" });
   const counter = el("div", { class: "item-card muted" });
-  const next = el("button", { class: "primary-btn", type: "button", text: "Sonraki" });
-  const prev = el("button", { class: "ghost-btn", type: "button", text: "Önceki" });
-  const flip = el("button", { class: "ghost-btn", type: "button", text: "Çevir" });
+  const next = el("button", { class: "primary-btn", type: "button", text: "التّالي ←" });
+  const prev = el("button", { class: "ghost-btn", type: "button", text: "→ السّابِق" });
+  const flip = el("button", { class: "ghost-btn", type: "button", text: "اقْلِب 🔄" });
   const side = el("div", { class: "flash-side" }, [
     counter,
     el("div", { class: "nav-row" }, [prev, flip, next])
@@ -177,9 +176,8 @@ function renderFlashcards(game) {
     if (flipped) {
       card.append(
         el("div", {}, [
-          el("div", { class: "flash-emoji", text: item.emoji || "•" }),
-          el("div", { class: "flash-tr", text: item.back }),
-          el("div", { class: "flash-example", text: item.example || "" })
+          el("div", { class: "flash-emoji", text: item.emoji || "•", style: "font-size:96px" }),
+          el("div", { class: "flash-example ar", text: item.example || "" })
         ])
       );
     } else {
@@ -187,7 +185,7 @@ function renderFlashcards(game) {
         el("div", {}, [
           el("div", { class: "flash-emoji", text: item.emoji || "•" }),
           ar(item.front),
-          el("p", { class: "muted", text: "Kartı çevir" })
+          el("p", { class: "muted", text: "🔄" })
         ])
       );
     }
@@ -224,7 +222,7 @@ function renderMatching(game) {
       selected.right.disabled = true;
       tracker.mark(selected.left.dataset.id, true);
       note.className = "feedback ok";
-      note.textContent = "Doğru eşleşti.";
+      note.textContent = "✅ أَحْسَنْت";
       selected.left = null;
       selected.right = null;
     } else {
@@ -242,7 +240,9 @@ function renderMatching(game) {
     left.appendChild(button);
   });
   game.right.forEach(item => {
-    const button = el("button", { class: "choice", type: "button", "data-id": item.id, text: item.text });
+    const button = el("button", { class: "choice", type: "button", "data-id": item.id }, [
+      el("span", { style: "font-size:48px", text: item.emoji || item.text })
+    ]);
     button.addEventListener("click", () => { selected.right = button; check(); });
     right.appendChild(button);
   });
@@ -255,10 +255,10 @@ function renderCategorySort(game) {
   const list = el("div", { class: "grid" });
   game.items.forEach(item => {
     const row = el("div", { class: "category-row" });
-    const info = el("div", {}, [ar(`${item.emoji || ""} ${item.text}`), el("div", { class: "muted", text: item.tr })]);
+    const info = el("div", {}, [el("span", { style: "font-size:40px", text: item.emoji || "" }), ar(item.text, true)]);
     const actions = el("div", { class: "category-actions" });
     game.categories.forEach(category => {
-      const button = el("button", { class: "ghost-btn", type: "button", text: category.title_tr });
+      const button = el("button", { class: "ghost-btn", type: "button" }, [ar(category.title_ar || category.ar || "", true)]);
       button.addEventListener("click", () => {
         const ok = item.category === category.id;
         markNode(row, ok);
@@ -280,8 +280,7 @@ function renderShoppingList(game) {
   const targetNodes = new Map();
   game.targets.forEach(target => {
     const chip = el("div", { class: "target-chip", "data-id": target.id }, [
-      ar(`${target.emoji || ""} ${target.text}`, true),
-      el("div", { class: "muted", text: target.tr })
+      el("span", { style: "font-size:48px", text: target.emoji || "" })
     ]);
     targetNodes.set(target.id, chip);
     targetList.appendChild(chip);
@@ -291,8 +290,7 @@ function renderShoppingList(game) {
   game.shelf.forEach(item => {
     const button = el("button", { class: "shelf-item", type: "button" }, [
       el("span", { class: "emoji", text: item.emoji || "•" }),
-      ar(item.text, true),
-      el("span", { class: "muted", text: item.tr })
+      ar(item.text, true)
     ]);
     button.addEventListener("click", () => {
       const ok = game.targetIds.includes(item.id);
@@ -308,8 +306,8 @@ function renderShoppingList(game) {
   });
   gameArea.append(
     el("div", { class: "grid" }, [
-      el("div", { class: "item-card" }, [el("h3", { text: "Liste" }), targetList]),
-      el("div", { class: "item-card" }, [el("h3", { text: "Raf" }), shelf])
+      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "القائِمَة" }), targetList]),
+      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "الرَّفّ" }), shelf])
     ])
   );
 }
@@ -346,7 +344,7 @@ function questionCard(question, index, tracker) {
         if (Engine.isCorrect(question.answer, btn.dataset.value)) markNode(btn, true);
       });
       tracker.mark(question.id || `${index}-${question.answer}`, ok);
-      card.appendChild(feedback(ok ? "Doğru." : "Doğru cevap işaretlendi.", ok));
+      card.appendChild(feedback(ok ? "✅ صَحيح" : "❌ الجَوابُ الصَّحيح مُعَلَّم", ok));
     });
     button.dataset.value = String(value);
     buttons.push(button);
@@ -377,15 +375,15 @@ function renderSentenceOrder(game) {
       });
       bank.appendChild(button);
     });
-    const check = el("button", { class: "primary-btn", type: "button", text: "Kontrol" });
-    const reset = el("button", { class: "ghost-btn", type: "button", text: "Sıfırla" });
+    const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّق ✅" });
+    const reset = el("button", { class: "ghost-btn", type: "button", text: "إعادَة 🔄" });
     check.addEventListener("click", () => {
       const ok = Engine.isCorrect(item.answer_ar, chosen.join(" "));
       markNode(card, ok);
       tracker.mark(item.id, ok);
       check.disabled = true;
       bank.querySelectorAll("button").forEach(btn => { btn.disabled = true; });
-      card.appendChild(feedback(ok ? "Cümle doğru kuruldu." : item.answer_ar, ok));
+      card.appendChild(feedback(ok ? "✅ أَحْسَنْت" : item.answer_ar, ok));
     });
     reset.addEventListener("click", () => {
       chosen.length = 0;
@@ -394,7 +392,6 @@ function renderSentenceOrder(game) {
     });
     card.append(
       el("div", { class: "question-number", text: String(index + 1) }),
-      el("p", { class: "muted", text: item.tr }),
       output,
       bank,
       el("div", { class: "nav-row" }, [check, reset])
@@ -409,14 +406,13 @@ function renderDialogueOrder(game) {
   const chosen = [];
   const chosenLines = el("div", { class: "chosen-lines" });
   const stack = el("div", { class: "line-stack" });
-  const check = el("button", { class: "primary-btn", type: "button", text: "Sırayı kontrol et" });
-  const reset = el("button", { class: "ghost-btn", type: "button", text: "Sıfırla" });
+  const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّق ✅" });
+  const reset = el("button", { class: "ghost-btn", type: "button", text: "إعادَة 🔄" });
 
   game.lines.forEach(line => {
     const button = el("button", { class: "line-button", type: "button" }, [
-      el("span", { class: "speaker", text: line.speaker }),
-      ar(line.ar, true),
-      el("span", { class: "muted", text: line.tr })
+      el("span", { class: "speaker ar", text: line.speaker }),
+      ar(line.ar, true)
     ]);
     button.addEventListener("click", () => {
       chosen.push(line.line_no);
@@ -433,13 +429,13 @@ function renderDialogueOrder(game) {
     tracker.mark("dialogue", ok);
     check.disabled = true;
     markNode(chosenLines, ok);
-    gameArea.appendChild(feedback(ok ? "Diyalog sırası doğru." : "Doğru sıra: " + game.answer.join(", "), ok));
+    gameArea.appendChild(feedback(ok ? "✅ التَّرتيبُ صَحيح" : "التَّرتيب: " + game.answer.join(" ← "), ok));
   });
   reset.addEventListener("click", () => loadGame(activeGameId));
   gameArea.append(
     el("div", { class: "grid two" }, [
-      el("div", { class: "item-card" }, [el("h3", { text: game.dialogue?.title_tr || "Diyalog" }), stack]),
-      el("div", { class: "item-card" }, [el("h3", { text: "Seçilen sıra" }), chosenLines, el("div", { class: "nav-row" }, [check, reset])])
+      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: game.dialogue?.title_ar || "الحِوار" }), stack]),
+      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "التَّرتيب" }), chosenLines, el("div", { class: "nav-row" }, [check, reset])])
     ])
   );
 }
@@ -470,7 +466,7 @@ function renderWordSearch(game) {
     });
     chips.appendChild(chip);
   });
-  gameArea.append(el("div", { class: "wordsearch-layout" }, [table, el("div", { class: "item-card" }, [el("h3", { text: "Kelimeler" }), chips])]));
+  gameArea.append(el("div", { class: "wordsearch-layout" }, [table, el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "الكَلِمات" }), chips])]));
 }
 
 function renderMemory(game) {
@@ -518,7 +514,7 @@ function renderOdd(game) {
   const mapped = game.items.map(item => ({
     ...item,
     q_ar: "اختر الكلمة الغريبة",
-    q_tr: item.reason_tr,
+    q_tr: "",
     options: item.choices,
     answer: item.odd
   }));
@@ -526,30 +522,30 @@ function renderOdd(game) {
 }
 
 function renderRoleplay(game) {
-  setScore(0, 0, "Senaryo");
+  setScore(0, 0, "الأَدْوار");
   const prompt = game.prompt;
   gameArea.append(
     el("div", { class: "role-grid" }, [
       el("div", { class: "role-card" }, [
-        el("h3", { text: "Roller" }),
+        el("h3", { class: "ar", text: "الأَدْوار" }),
         ar(prompt.roles.join(" / "), true),
-        el("p", { class: "muted", text: prompt.prompt_tr })
+        el("p", { class: "muted ar", text: prompt.prompt_tr || "" })
       ]),
       el("div", { class: "role-card" }, [
-        el("h3", { text: "Ürünler" }),
+        el("h3", { class: "ar", text: "المُنْتَجات" }),
         ar(`${prompt.product_a?.ar || ""} - ${prompt.product_a?.price || ""} ليرات`, true),
         ar(`${prompt.product_b?.ar || ""} - ${prompt.product_b?.price || ""} ليرات`, true)
       ])
     ]),
     el("div", { class: "item-card" }, [
-      el("h3", { text: "Kalıplar" }),
+      el("h3", { class: "ar", text: "العِبارات" }),
       el("div", { class: "pattern-list" }, prompt.must_use_ar.map(text => el("span", { text })))
     ])
   );
 }
 
 function renderRaw(game) {
-  setScore(0, 0, "Veri");
+  setScore(0, 0, "بَيانات");
   gameArea.appendChild(el("pre", { text: JSON.stringify(game, null, 2) }));
 }
 

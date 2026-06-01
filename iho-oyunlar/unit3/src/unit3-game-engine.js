@@ -2,22 +2,22 @@
   'use strict';
 
   const DEFAULT_GAME_TITLES = {
-    flashcards: ['Kelime Kartları', 'Arapça kelimeyi çevirisiyle çalış.'],
-    match: ['Eşleştirme', 'Arapça kelimeyi Türkçe karşılığıyla eşleştir.'],
-    quiz: ['Çoktan Seçmeli Quiz', 'Doğru cevabı seç.'],
-    truefalse: ['Doğru / Yanlış', 'Cümle doğru mu yanlış mı?'],
-    sentenceOrder: ['Cümle Sıralama', 'Kelimeleri doğru sıraya koy.'],
-    fillBlank: ['Boşluk Doldurma', 'Cümleyi doğru kelimeyle tamamla.'],
-    memory: ['Hafıza Oyunu', 'Arapça ve Türkçe kart çiftlerini bul.'],
-    oddOneOut: ['Farklı Olanı Bul', 'Gruba uymayan kelimeyi seç.'],
-    wordSearch: ['Kelime Avı', 'Hedef kelimenin harflerini sırayla bul.'],
-    directionsMap: ['Yol Tarifi Motoru', 'Yol tarifi adımlarını sıraya koy.'],
-    comparative: ['Karşılaştırma', 'أَفْعَلُ مِنْ kalıbını çalış.'],
-    traffic: ['Trafik Işıkları', 'Işığa göre doğru fiili seç.'],
-    dialogueBuilder: ['Diyalog Kurma', 'Konuşma satırlarını doğru sıraya koy.'],
-    wheel: ['Çark Soruları', 'Çarkı çevir ve gelen soruyu cevapla.'],
-    balloonPop: ['Balon Patlatma', 'Türkçe anlamın Arapçasını patlat.'],
-    typing: ['Yazma / Harf Dizme', 'Harfleri dizerek kelimeyi yaz.']
+    flashcards: ['بِطاقاتُ المُفْرَدات', 'اُنْظُرِ الصّورَةَ وَاقْرَأِ الكَلِمَة.'],
+    match: ['المُطابَقَة', 'طابِقِ الكَلِمَةَ مَعَ صورَتِها.'],
+    quiz: ['الاِخْتِبار', 'اِخْتَرِ الجَوابَ الصَّحيح.'],
+    truefalse: ['صَحٌّ أَمْ خَطَأ', 'هَلِ الجُمْلَةُ صَحيحَة؟'],
+    sentenceOrder: ['تَرْتيبُ الجُمْلَة', 'رَتِّبِ الكَلِماتِ بِالتَّرتيبِ الصَّحيح.'],
+    fillBlank: ['الكَلِمَةُ النّاقِصَة', 'أَكْمِلِ الجُمْلَةَ بِالكَلِمَةِ المُناسِبَة.'],
+    memory: ['الذّاكِرَة', 'طابِقِ الكَلِمَةَ مَعَ صورَتِها.'],
+    oddOneOut: ['المُخْتَلِف', 'اِخْتَرِ الكَلِمَةَ المُخْتَلِفَة.'],
+    wordSearch: ['البَحْثُ عَنِ الكَلِمات', 'اِبْحَثْ عَنْ حُروفِ الكَلِمَة.'],
+    directionsMap: ['الاِتِّجاهات', 'رَتِّبْ خُطُواتِ الطَّريق.'],
+    comparative: ['المُقارَنَة', 'دَرِّبْ صيغَةَ أَفْعَلُ مِنْ.'],
+    traffic: ['إِشاراتُ المُرور', 'اِخْتَرِ الفِعْلَ حَسَبَ الضَّوْء.'],
+    dialogueBuilder: ['بِناءُ الحِوار', 'رَتِّبْ سُطورَ الحِوار.'],
+    wheel: ['عَجَلَةُ الأَسْئِلَة', 'أَدِرِ العَجَلَةَ وَأَجِب.'],
+    balloonPop: ['فَرْقَعَةُ البالونات', 'فَرْقِعِ البالونَ المُناسِبَ لِلصّورَة.'],
+    typing: ['تَرْتيبُ الحُروف', 'رَتِّبِ الحُروفَ لِتَكْتُبَ الكَلِمَة.']
   };
 
   function $(sel, root){ return (root || document).querySelector(sel); }
@@ -54,7 +54,7 @@
   }
   function getData(options){
     const data = options && options.data || global.Unit3Database;
-    if(!data) throw new Error('Unit3Database bulunamadı. Önce data/unit3-database.js dosyasını yükleyin.');
+    if(!data) throw new Error('Unit3Database not found.');
     return data;
   }
   function containerOf(container){
@@ -62,7 +62,7 @@
     return container;
   }
   function makeShell(container, type, options){
-    const titles = DEFAULT_GAME_TITLES[type] || ['Ünite 3 Oyunu', ''];
+    const titles = DEFAULT_GAME_TITLES[type] || ['الوَحْدَة ٣', ''];
     const title = (options && options.title) || titles[0];
     const subtitle = (options && options.subtitle) || titles[1];
     container.classList.add('u3-game');
@@ -73,14 +73,14 @@
           <div class="u3-subtitle">${escapeHtml(subtitle)}</div>
         </div>
         <div class="u3-row">
-          <span class="u3-pill">Ünite 3</span>
+          <span class="u3-pill">الوَحْدَة ٣</span>
           <span class="u3-pill u3-score" data-score>0 / 0</span>
         </div>
       </div>
       <div class="u3-progress" aria-label="progress"><span data-progress></span></div>
       <div data-body style="margin-top:16px"></div>
       <div class="u3-feedback" data-feedback></div>
-      <div class="u3-footer-note">Veri: إِلى أَيْنَ نُسافِرُ؟ — ulaşım, yön tarifi, trafik ve karşılaştırma kalıpları.</div>
+      <div class="u3-footer-note">إِلى أَيْنَ نُسافِرُ؟</div>
     `;
     return {
       body: $('[data-body]', container),
@@ -103,9 +103,9 @@
     shell.body.innerHTML = `
       <div class="u3-card u3-center" style="flex-direction:column;gap:12px;text-align:center">
         <div style="font-size:56px">${pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘'}</div>
-        <div class="u3-title">Sonuç: ${pct}%</div>
-        <div class="u3-muted">${correct} doğru / ${total} soru</div>
-        <button class="u3-btn" data-restart>Tekrar başlat</button>
+        <div class="u3-title">${pct}%</div>
+        <div class="u3-muted">${correct} / ${total} ✅</div>
+        <button class="u3-btn" data-restart>إعادَة 🔄</button>
       </div>`;
     $('[data-restart]', shell.body).addEventListener('click', restart);
     feedback(shell, '', '');
@@ -124,14 +124,13 @@
         <div class="u3-card" style="min-height:330px;display:flex;flex-direction:column;justify-content:center;gap:8px">
           <div class="u3-emoji">${escapeHtml(item.emoji || '🔤')}</div>
           <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
-          <div class="u3-tr">${flipped ? escapeHtml(item.tr) : 'Çeviri için karta tıkla'}</div>
-          <div class="u3-muted" style="text-align:center">${flipped ? escapeHtml(item.translit || '') : ''}</div>
+          <div class="u3-emoji" style="font-size:72px">${flipped ? escapeHtml(item.emoji || '🔤') : '👆'}</div>
         </div>
         <div class="u3-actions">
-          <button class="u3-btn secondary" data-prev>Önceki</button>
-          <button class="u3-btn" data-flip>${flipped ? 'Arapçayı göster' : 'Çeviriyi göster'}</button>
-          <button class="u3-btn secondary" data-speak>Seslendir</button>
-          <button class="u3-btn orange" data-next>Sonraki</button>
+          <button class="u3-btn secondary" data-prev>→ السّابِق</button>
+          <button class="u3-btn" data-flip>اقْلِب 🔄</button>
+          <button class="u3-btn secondary" data-speak>🔊</button>
+          <button class="u3-btn orange" data-next>التّالي ←</button>
         </div>`;
       $('.u3-card', shell.body).addEventListener('click', () => { flipped = !flipped; draw(); });
       $('[data-flip]', shell.body).addEventListener('click', () => { flipped = !flipped; draw(); });
@@ -144,19 +143,19 @@
 
   function renderMatch(container, data, options){
     const shell = makeShell(container, 'match', options);
-    const set = options.matchSet ? data.gameBanks.matchingSets.find(s => s.id === options.matchSet) : sample(data.gameBanks.matchingSets,1)[0];
-    const pairs = sample(set.pairs, options.limit || 8).map(([ar,tr], idx) => ({id:'p'+idx, ar, tr}));
+    const vocab = data.vocabulary.filter(v => v.emoji && ['transport','places','directions','traffic','questions','modes','verbs'].includes(v.category));
+    const pairs = sample(vocab, options.limit || 8).map((w, idx) => ({id:'p'+idx, ar:w.ar, emoji:w.emoji}));
     let selected = null, correct = 0, attempts = 0;
     function draw(){
       setScore(shell, correct, pairs.length, correct, pairs.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><b>${escapeHtml(set.title)}</b><div class="u3-muted">Arapça kelimeyi seç, Türkçe kutusuna bırak veya tıkla.</div></div>
+        <div class="u3-card"><div class="u3-muted">اِخْتَرِ الكَلِمَةَ ثُمَّ صورَتَها المُناسِبَة.</div></div>
         <div class="u3-grid u3-grid-2" style="margin-top:14px">
           <div class="u3-card u3-match-col" data-chips>
             ${shuffle(pairs).map(p=>`<button class="u3-chip u3-ar" draggable="true" data-ar="${escapeHtml(p.ar)}">${escapeHtml(p.ar)}</button>`).join('')}
           </div>
           <div class="u3-card u3-match-col" data-targets>
-            ${shuffle(pairs).map(p=>`<div class="u3-match-target" data-expect="${escapeHtml(p.ar)}"><span>${escapeHtml(p.tr)}</span></div>`).join('')}
+            ${shuffle(pairs).map(p=>`<div class="u3-match-target" data-expect="${escapeHtml(p.ar)}"><span style="font-size:44px">${escapeHtml(p.emoji)}</span></div>`).join('')}
           </div>
         </div>`;
       const chips = $all('.u3-chip', shell.body);
@@ -178,12 +177,12 @@
       if(target.dataset.expect === ar){
         correct++;
         target.classList.add('filled');
-        target.innerHTML = `<span class="u3-ar">${escapeHtml(ar)}</span><span> — ${escapeHtml(pairs.find(p=>p.ar===ar).tr)}</span>`;
+        target.innerHTML = `<span class="u3-ar">${escapeHtml(ar)}</span><span style="font-size:32px"> ${escapeHtml(pairs.find(p=>p.ar===ar).emoji)}</span>`;
         if(chip) chip.classList.add('used');
         selected = null;
-        feedback(shell, 'Doğru!', 'good');
+        feedback(shell, '✅ أَحْسَنْت', 'good');
       }else{
-        feedback(shell, 'Tekrar dene.', 'bad');
+        feedback(shell, '🔁 حاوِلْ ثانِيَة', 'bad');
       }
       setScore(shell, correct, pairs.length, correct, pairs.length);
       if(correct === pairs.length) setTimeout(() => finalScreen(shell, correct, pairs.length, () => renderMatch(container, data, options)), 650);
@@ -216,8 +215,8 @@
       const chosen = Number(btn.dataset.index);
       const buttons = $all('.u3-option', shell.body);
       buttons.forEach((b,i)=>{ if(i===answerIndex) b.classList.add('correct'); if(i===chosen && i!==answerIndex) b.classList.add('wrong'); b.disabled = true; });
-      if(chosen === answerIndex){ correct++; feedback(shell, after || 'Doğru!', 'good'); }
-      else feedback(shell, after || 'Yanlış, doğru seçenek işaretlendi.', 'bad');
+      if(chosen === answerIndex){ correct++; feedback(shell, after || '✅ صَحيح', 'good'); }
+      else feedback(shell, after || '❌', 'bad');
       setScore(shell, correct, items.length, idx+1, items.length);
       setTimeout(() => { idx++; if(idx >= items.length) finalScreen(shell, correct, items.length, () => renderMCQGame(container, data, options, type, source, formatter)); else draw(); }, 950);
     }
@@ -228,11 +227,11 @@
     renderMCQGame(container, data, options, 'quiz', data.gameBanks.quizQuestions, q => ({prompt:q.prompt, options:q.options, answerIndex:q.answerIndex, hint:q.skill}));
   }
   function renderTrueFalse(container, data, options){
-    const src = data.gameBanks.trueFalse.map(q => ({...q, options:['Doğru','Yanlış'], answerIndex:q.answer ? 0 : 1}));
+    const src = data.gameBanks.trueFalse.map(q => ({...q, options:['صَحٌّ','خَطَأ'], answerIndex:q.answer ? 0 : 1}));
     renderMCQGame(container, data, options, 'truefalse', src, q => ({prompt:q.statement, options:q.options, answerIndex:q.answerIndex, after:q.explanation}));
   }
   function renderOddOneOut(container, data, options){
-    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`${q.category}: farklı olanı seç`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
+    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`اِخْتَرِ المُخْتَلِف`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
   }
   function renderComparative(container, data, options){
     renderMCQGame(container, data, options, 'comparative', data.gameBanks.comparatives, q => ({prompt:q.prompt, options:q.options, answerIndex:q.options.indexOf(q.answer), after:q.tr}));
@@ -256,12 +255,11 @@
       const bank = shuffle(item.tokens.map((t,i)=>({t, i})));
       setScore(shell, correct, list.length, idx, list.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">Türkçe ipucu:</div><b>${escapeHtml(item.tr)}</b></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">Cümle alanı</div><div class="u3-sentence-answer" data-answer></div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">Kelime bankası</div><div class="u3-sentence-bank" data-bank>
+        <div class="u3-card"><div class="u3-muted">الجُمْلَة</div><div class="u3-sentence-answer" data-answer></div></div>
+        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الكَلِمات</div><div class="u3-sentence-bank" data-bank>
           ${bank.map(x=>`<button class="u3-token" data-i="${x.i}">${escapeHtml(x.t)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>Temizle</button><button class="u3-btn" data-check>Kontrol et</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
       $all('.u3-token', $('[data-bank]', shell.body)).forEach(btn=>btn.addEventListener('click',()=>{
         btn.classList.add('used'); answer.push({i:Number(btn.dataset.i), t:btn.textContent, source:btn}); redrawAnswer(item);
       }));
@@ -279,19 +277,20 @@
       const got = answer.map(x=>x.t).join(' ');
       const expected = item.tokens.join(' ');
       if(got === expected){
-        correct++; feedback(shell,'Doğru cümle!', 'good');
+        correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
         setScore(shell, correct, list.length, idx+1, list.length);
         setTimeout(()=>{ idx++; if(idx>=list.length) finalScreen(shell, correct, list.length, () => renderSentenceOrder(container,data,options)); else draw(); }, 900);
-      }else feedback(shell,'Sıralamayı tekrar kontrol et.', 'bad');
+      }else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
     }
     draw();
   }
 
   function renderMemory(container, data, options){
     const shell = makeShell(container, 'memory', options);
-    const pairs = sample(data.gameBanks.memoryPairs, options.limit || 8);
+    const vocab = data.vocabulary.filter(v => v.emoji && ['transport','places','directions','traffic','questions','modes','verbs'].includes(v.category));
+    const pairs = sample(vocab, options.limit || 8);
     let cards = shuffle(pairs.flatMap((p,i)=>[
-      {id:i, text:p.ar, kind:'ar'}, {id:i, text:p.tr, kind:'tr'}
+      {id:i, text:p.ar, kind:'ar'}, {id:i, text:p.emoji, kind:'emoji'}
     ]));
     let open=[], done=0, moves=0;
     function draw(){
@@ -309,10 +308,10 @@
         moves++;
         const ok = open[0].data.id === open[1].data.id && open[0].data.kind !== open[1].data.kind;
         if(ok){
-          open.forEach(x=>{ x.data.done=true; x.el.classList.add('done'); }); done++; open=[]; feedback(shell,'Eşleşti!', 'good'); setScore(shell, done, pairs.length, done, pairs.length);
+          open.forEach(x=>{ x.data.done=true; x.el.classList.add('done'); }); done++; open=[]; feedback(shell,'✅ مُطابَق', 'good'); setScore(shell, done, pairs.length, done, pairs.length);
           if(done===pairs.length) setTimeout(()=>finalScreen(shell, done, pairs.length, () => renderMemory(container,data,options)), 700);
         }else{
-          open.forEach(x=>x.el.classList.add('miss')); feedback(shell,'Eşleşmedi.', 'bad');
+          open.forEach(x=>x.el.classList.add('miss')); feedback(shell,'❌', 'bad');
           setTimeout(()=>{ open.forEach(x=>{ x.el.classList.remove('miss'); x.el.classList.add('face-down'); x.el.classList.remove('u3-ar'); x.el.textContent='؟'; }); open=[]; }, 700);
         }
       }
@@ -355,7 +354,7 @@
       const target = words[targetIdx];
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">Hedef kelime</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div><div class="u3-muted" style="text-align:center">Harfleri sırayla tıkla.</div></div>
+        <div class="u3-card"><div class="u3-muted">الكَلِمَةُ المَطْلوبَة</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},38px)">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u3-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
@@ -372,13 +371,13 @@
         cell.classList.add('active'); selected.push(cell);
         if(selected.length === target.length){
           selected.forEach(c=>{ c.classList.remove('active'); c.classList.add('found'); });
-          feedback(shell,'Kelime bulundu!', 'good');
+          feedback(shell,'✅ أَحْسَنْت', 'good');
           targetIdx++; selected=[];
           if(targetIdx>=words.length) setTimeout(()=>finalScreen(shell, words.length, words.length, () => renderWordSearch(container,data,options)), 700);
           else setTimeout(draw, 650);
         }
       }else{
-        selected.forEach(c=>c.classList.remove('active')); selected=[]; feedback(shell,'Sıradaki harfi tekrar dene.', 'bad');
+        selected.forEach(c=>c.classList.remove('active')); selected=[]; feedback(shell,'🔁', 'bad');
       }
     }
     draw();
@@ -402,11 +401,11 @@
             return `<div class="u3-map-cell ${cls}">${escapeHtml(label)}</div>`;
           }).join('')}
         </div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">Tarif alanı</div><div class="u3-sentence-answer" data-answer></div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">Adımlar</div><div class="u3-sentence-bank" data-bank>
+        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الطَّريق</div><div class="u3-sentence-answer" data-answer></div></div>
+        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الخُطُوات</div><div class="u3-sentence-bank" data-bank>
           ${shuffled.map(x=>`<button class="u3-token u3-ar" data-i="${x.i}">${escapeHtml(x.s)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>Temizle</button><button class="u3-btn" data-check>Kontrol et</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
       $all('.u3-token', $('[data-bank]', shell.body)).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); answer.push({i:Number(btn.dataset.i), s:btn.textContent, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>x.source.classList.remove('used')); answer=[]; redraw(); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>check(sc));
@@ -418,8 +417,8 @@
     }
     function check(sc){
       const ok = answer.map(x=>x.i).join(',') === sc.steps.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'Yol tarifi doğru!', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
-      else feedback(shell,'Adımların sırasını tekrar kontrol et.', 'bad');
+      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
+      else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, scenarios.length, idx+1, scenarios.length);
     }
     draw();
@@ -434,8 +433,8 @@
       setScore(shell, correct, dialogues.length, idx, dialogues.length);
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
-        <div class="u3-card"><b>${escapeHtml(dlg.title)}</b><div class="u3-muted">Satırları doğru konuşma sırasına diz.</div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">Diyalog alanı</div><div data-answer></div></div>
+        <div class="u3-card"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطورَ الحِوار.</div></div>
+        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الحِوار</div><div data-answer></div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-grid">
           ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
         </div></div>
@@ -450,8 +449,8 @@
     }
     function check(dlg){
       const ok = answer.map(x=>x.i).join(',') === dlg.lines.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'Diyalog doğru!', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
-      else feedback(shell,'Diyalog sırasını tekrar düzenle.', 'bad');
+      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
+      else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, dialogues.length, idx+1, dialogues.length);
     }
     draw();
@@ -464,8 +463,8 @@
     function drawIntro(){
       setScore(shell, correct, questions.length, asked.length, questions.length);
       shell.body.innerHTML = `
-        <div class="u3-wheel" data-wheel><span>Çevir</span></div>
-        <div class="u3-actions"><button class="u3-btn orange" data-spin>Çarkı çevir</button></div>`;
+        <div class="u3-wheel" data-wheel><span>🎡</span></div>
+        <div class="u3-actions"><button class="u3-btn orange" data-spin>أَدِرِ العَجَلَة 🎡</button></div>`;
       $('[data-spin]', shell.body).addEventListener('click', spin);
       $('[data-wheel]', shell.body).addEventListener('click', spin);
     }
@@ -484,7 +483,7 @@
         <div class="u3-grid u3-grid-2" style="margin-top:14px">${current.options.map((o,i)=>optionButton(o,i)).join('')}</div>`;
       $all('.u3-option', shell.body).forEach(btn => btn.addEventListener('click',()=>{
         const ok = Number(btn.dataset.index) === current.answerIndex;
-        if(ok){ correct++; btn.classList.add('correct'); feedback(shell,'Doğru!', 'good'); } else { btn.classList.add('wrong'); feedback(shell,'Bir sonraki turda tekrar dene.', 'bad'); }
+        if(ok){ correct++; btn.classList.add('correct'); feedback(shell,'✅ صَحيح', 'good'); } else { btn.classList.add('wrong'); feedback(shell,'❌', 'bad'); }
         setScore(shell, correct, questions.length, asked.length, questions.length);
         setTimeout(()=> asked.length >= questions.length ? finalScreen(shell, correct, questions.length, () => renderWheel(container,data,options)) : drawIntro(), 900);
       }));
@@ -502,13 +501,13 @@
       const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 5))).slice(0,6);
       setScore(shell, correct, rounds.length, idx, rounds.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">Şu anlamın Arapçasını patlat:</div><div class="u3-title" style="text-align:center">${escapeHtml(item.tr)}</div></div>
+        <div class="u3-card"><div class="u3-muted">فَرْقِعِ الكَلِمَةَ المُناسِبَة:</div><div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div></div>
         <div class="u3-balloon-area" data-area style="margin-top:14px">
           ${opts.map((o,i)=>`<button class="u3-balloon u3-ar" data-id="${escapeHtml(o.id)}" style="left:${8+(i%3)*30}%; top:${18+Math.floor(i/3)*42}%">${escapeHtml(o.ar)}</button>`).join('')}
         </div>`;
       $all('.u3-balloon', shell.body).forEach(b => b.addEventListener('click',()=>{
-        if(b.dataset.id === item.id){ correct++; b.classList.add('correct'); feedback(shell,'Patladı! Doğru.', 'good'); }
-        else { b.classList.add('wrong'); feedback(shell,`Doğrusu: ${item.ar}`, 'bad'); }
+        if(b.dataset.id === item.id){ correct++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْت', 'good'); }
+        else { b.classList.add('wrong'); feedback(shell,`✅ ${item.ar}`, 'bad'); }
         setTimeout(()=>{ idx++; if(idx>=rounds.length) finalScreen(shell, correct, rounds.length, () => renderBalloonPop(container,data,options)); else draw(); }, 850);
       }));
     }
@@ -525,12 +524,11 @@
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="text-align:center">
-          <div class="u3-muted">Türkçe anlam</div>
-          <div class="u3-title">${escapeHtml(item.tr)}</div>
-          <div class="u3-muted">Hedef kelime harekeli: <span class="u3-ar">${escapeHtml(item.ar)}</span></div>
+          <div class="u3-muted">رَتِّبِ الحُروف</div>
+          <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
         </div>
         <div class="u3-card" style="margin-top:14px">
-          <input class="u3-input" data-input placeholder="Arapça kelimeyi yaz veya harfleri tıkla">
+          <input class="u3-input" data-input placeholder="✍️" dir="rtl">
           <div class="u3-actions" data-letters>${letters.map(ch=>`<button class="u3-chip" data-ch="${escapeHtml(ch)}">${escapeHtml(ch)}</button>`).join('')}</div>
           <div class="u3-actions"><button class="u3-btn secondary" data-clear>Temizle</button><button class="u3-btn" data-check>Kontrol et</button></div>
         </div>`;
@@ -539,10 +537,10 @@
       $('[data-clear]', shell.body).addEventListener('click',()=>{ input.value=''; $all('[data-ch]', shell.body).forEach(b=>b.classList.remove('used')); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>{
         if(normalizeArabic(input.value) === normalizeArabic(item.target)){
-          correct++; feedback(shell,'Doğru yazdın!', 'good');
+          correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
           setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 800);
-        }else feedback(shell,`Tekrar dene. İpucu: ${item.ar}`, 'bad');
+        }else feedback(shell,`🔁 ${item.ar}`, 'bad');
       });
     }
     draw();
@@ -571,10 +569,10 @@
     games: Object.keys(renderers),
     mount(container, gameType, options){
       const el = containerOf(container);
-      if(!el) throw new Error('Oyun container bulunamadı.');
+      if(!el) throw new Error('container not found.');
       const data = getData(options || {});
       const type = gameType || 'quiz';
-      if(!renderers[type]) throw new Error('Bilinmeyen oyun tipi: ' + type);
+      if(!renderers[type]) throw new Error('Unknown type: ' + type);
       renderers[type](el, data, options || {});
       return { destroy(){ el.innerHTML=''; el.classList.remove('u3-game'); } };
     },

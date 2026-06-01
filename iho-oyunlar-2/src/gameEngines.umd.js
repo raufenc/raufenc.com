@@ -60,8 +60,8 @@
     matching(config, data, opts={}){
       const byId = mapById(data.vocabulary);
       const ids = config.word_ids || [];
-      const pairs = ids.map(id => byId[id]).filter(Boolean).map(w => ({ id:w.id, left:w.ar, right:w.tr, emoji:w.emoji, audio_key:w.audio_key }));
-      return { type:'matching', left:shuffle(pairs.map(p => ({ id:p.id, text:p.left, emoji:p.emoji })), opts.seed+'L'), right:shuffle(pairs.map(p => ({ id:p.id, text:p.right })), opts.seed+'R'), pairs };
+      const pairs = ids.map(id => byId[id]).filter(Boolean).map(w => ({ id:w.id, left:w.ar, right:w.emoji, emoji:w.emoji, audio_key:w.audio_key }));
+      return { type:'matching', left:shuffle(pairs.map(p => ({ id:p.id, text:p.left, emoji:p.emoji })), opts.seed+'L'), right:shuffle(pairs.map(p => ({ id:p.id, text:p.right, emoji:p.emoji })), opts.seed+'R'), pairs };
     },
     category_sort(config, data, opts={}){
       const byId = mapById(data.vocabulary);
@@ -83,7 +83,7 @@
       const questions = shuffle(items, opts.seed || 'price').slice(0, config.question_count || items.length).map(item => {
         const optsPrices = shuffle([...new Set(items.map(x => x.price).concat([item.price+1, Math.max(1,item.price-1)]))], item.ar).slice(0,4);
         if(!optsPrices.includes(item.price)) optsPrices[0] = item.price;
-        return { id:'price_'+item.word_id, q_ar:'بِكَم '+item.ar+'؟', q_tr:item.tr+' kaç lira?', answer:item.price, options:shuffle(optsPrices, item.word_id).map(p => ({ value:p, label:p+' ليرات' })), item };
+        return { id:'price_'+item.word_id, q_ar:'بِكَم '+item.ar+'؟', q_tr:'', answer:item.price, options:shuffle(optsPrices, item.word_id).map(p => ({ value:p, label:p+' ليرات' })), item };
       });
       return { type:'price_quiz', price_set:ps, questions };
     },
@@ -102,7 +102,7 @@
           `${expensive.ar} أَرْخَصُ مِنَ ${cheaper.ar}`
         ];
         const answer = idx % 2 === 0 ? options[0] : options[1];
-        return { id:'cmp_'+idx, q_ar:`${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺`, q_tr:'Doğru karşılaştırmayı seç.', options:shuffle(options, 'cmp'+idx), answer, items:[a,b] };
+        return { id:'cmp_'+idx, q_ar:`${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺`, q_tr:'', options:shuffle(options, 'cmp'+idx), answer, items:[a,b] };
       });
       return { type:'comparative_quiz', questions };
     },
@@ -156,7 +156,7 @@
       (config.word_ids || []).forEach(id => {
         const w = byId[id]; if(!w) return;
         cards.push({ id:w.id+'_ar', pair:w.id, text:w.ar, kind:'ar', emoji:w.emoji });
-        cards.push({ id:w.id+'_tr', pair:w.id, text:w.tr, kind:'tr', emoji:'' });
+        cards.push({ id:w.id+'_em', pair:w.id, text:w.emoji, kind:'emoji', emoji:w.emoji });
       });
       return { type:'memory', cards:shuffle(cards, opts.seed || 'memory') };
     },
@@ -176,7 +176,7 @@
         roles: config.roles || ['البائِع','المُشْتَري'],
         product_a: a, product_b: b,
         must_use_ar: ['أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟','بِكَم ...؟','... بِـ ... ليرات','أَرْخَصُ مِن / أَغْلى مِن','شُكْرًا، مَعَ السَّلامَةِ'],
-        prompt_tr: `${a ? a.tr : 'ürün'} ve ${b ? b.tr : 'ürün'} ile satıcı-müşteri diyaloğu kur.`
+        prompt_tr: ''
       };
       return { type:'roleplay', prompt };
     },
