@@ -133,11 +133,11 @@ function hourAngleRad(h){ return hourAngleDeg(h) * Math.PI / 180; }
 
 /* Namaz vakitleri (saat aralıkları, yaklaşık) */
 const PRAYERS = [
-  {key:'fajr',   ar:'الفَجْر',   tr:'Sabah',  start: 4.5, end: 6.0,  color:'#5C6BC0', emoji:'🌄', tip:'قَبْلَ شُروقِ الشَّمْسِ'},
-  {key:'zuhr',   ar:'الظُّهْر',  tr:'Öğle',   start: 12.5,end: 14.5, color:'#FF9800', emoji:'☀️', tip:'بَعْدَ زَوالِ الشَّمْسِ — قَريبٌ مِنْ زِنيتِها'},
-  {key:'asr',    ar:'العَصْر',   tr:'İkindi', start: 15.5,end: 17.5, color:'#FFB74D', emoji:'🌤️', tip:'بَيْنَ الظُّهْرِ والمَغْرِبِ'},
-  {key:'maghrib',ar:'المَغْرِب', tr:'Akşam',  start: 18.5,end: 19.5, color:'#E91E63', emoji:'🌇', tip:'عِنْدَ غُروبِ الشَّمْسِ — يَمينُ الدائِرَة'},
-  {key:'isha',   ar:'العِشاء',   tr:'Yatsı',  start: 20.5,end: 22.5, color:'#3F51B5', emoji:'🌃', tip:'بَعْدَ ذَهابِ الشَّفَقِ — في اللَّيْلِ'}
+  {key:'fajr',   ar:'الفَجْر',  start: 4.5, end: 6.0,  color:'#5C6BC0', emoji:'🌄'},
+  {key:'zuhr',   ar:'الظُّهْر',   start: 12.5,end: 14.5, color:'#FF9800', emoji:'☀️'},
+  {key:'asr',    ar:'العَصْر', start: 15.5,end: 17.5, color:'#FFB74D', emoji:'🌤️'},
+  {key:'maghrib',ar:'المَغْرِب',  start: 18.5,end: 19.5, color:'#E91E63', emoji:'🌇'},
+  {key:'isha',   ar:'العِشاء',  start: 20.5,end: 22.5, color:'#3F51B5', emoji:'🌃'}
 ];
 
 /* 4 cardinal milestones for orientation */
