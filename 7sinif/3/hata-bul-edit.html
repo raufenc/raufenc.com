@@ -100,7 +100,7 @@ function loadQ(){
 clearInterval(timerInt);
 var q=qs[cur];
 document.getElementById('cat').firstChild.textContent='المَجْموعَة: '+q.cat;
-document.getElementById('cattr').textContent=''+q.tr;
+var _ca=document.getElementById('cattr');if(_ca)_ca.textContent='';
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 var el=document.getElementById('opts');el.innerHTML='';

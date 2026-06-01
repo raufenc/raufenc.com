@@ -504,7 +504,7 @@ function reset(){
   }, 200);
 }
 
-window.addEventListener('load', reset);
+document.addEventListener('DOMContentLoaded', function(){ setTimeout(reset, 100); });
 </script>
 <script src="/iho-oyunlar/intro.js" defer></script>
 </body>

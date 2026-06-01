@@ -99,7 +99,7 @@ function init(){qs=shuf([...ALL]).slice(0,10);cur=0;sc=0;document.getElementById
 function loadQ(){
 var q=qs[cur];
 document.getElementById('q').textContent=q.q;
-document.getElementById('qtr').textContent=''+q.tr;
+var _qtr=document.getElementById('qtr');if(_qtr)_qtr.textContent=''+q.tr;
 document.getElementById('badge').textContent=q.badge;
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
