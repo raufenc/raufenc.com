@@ -234,7 +234,7 @@ function renderMatching(game) {
 
   game.left.forEach(item => {
     const button = el("button", { class: "choice", type: "button", "data-id": item.id }, [
-      ar(`${item.emoji || ""} ${item.text}`, true)
+      ar(item.text, true)
     ]);
     button.addEventListener("click", () => { selected.left = button; check(); });
     left.appendChild(button);
@@ -289,7 +289,6 @@ function renderShoppingList(game) {
   const shelf = el("div", { class: "shelf-grid" });
   game.shelf.forEach(item => {
     const button = el("button", { class: "shelf-item", type: "button" }, [
-      el("span", { class: "emoji", text: item.emoji || "•" }),
       ar(item.text, true)
     ]);
     button.addEventListener("click", () => {
