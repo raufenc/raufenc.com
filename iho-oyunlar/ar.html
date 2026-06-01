@@ -497,8 +497,8 @@ function initSpaceDefense(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      const p1w=buildPlayerArea('g1P1',state.p1,'Oyuncu 1');
-      const p2w=buildPlayerArea('g1P2',state.p2,'Oyuncu 2');
+      const p1w=buildPlayerArea('g1P1',state.p1,'اللاعِبُ ١');
+      const p2w=buildPlayerArea('g1P2',state.p2,'اللاعِبُ ٢');
       split.appendChild(p1w);split.appendChild(p2w);
       area.appendChild(split);
       players.push({id:'g1P1',ps:state.p1,target:null,asteroids:[]});
@@ -731,8 +731,8 @@ function initMasterChef(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      split.appendChild(buildChefUI('g2P1',state.p1,'Oyuncu 1'));
-      split.appendChild(buildChefUI('g2P2',state.p2,'Oyuncu 2'));
+      split.appendChild(buildChefUI('g2P1',state.p1,'اللاعِبُ ١'));
+      split.appendChild(buildChefUI('g2P2',state.p2,'اللاعِبُ ٢'));
       area.appendChild(split);
       players.push({id:'g2P1',ps:state.p1,recipe:null,found:0});
       players.push({id:'g2P2',ps:state.p2,recipe:null,found:0});
@@ -935,8 +935,8 @@ function initLetterRain(){
     if(is2P){
       const split=document.createElement('div');
       split.className='split-container';
-      split.appendChild(buildRainUI('g3P1',state.p1,'Oyuncu 1'));
-      split.appendChild(buildRainUI('g3P2',state.p2,'Oyuncu 2'));
+      split.appendChild(buildRainUI('g3P1',state.p1,'اللاعِبُ ١'));
+      split.appendChild(buildRainUI('g3P2',state.p2,'اللاعِبُ ٢'));
       area.appendChild(split);
       players.push({id:'g3P1',ps:state.p1});
       players.push({id:'g3P2',ps:state.p2});

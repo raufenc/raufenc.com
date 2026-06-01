@@ -565,7 +565,7 @@ function showWrongPopup(card){
   const rect=card.getBoundingClientRect();
   const popup=document.createElement('div');
   popup.className='wrong-popup';
-  popup.textContent='Bu degil! \u2716';
+  popup.textContent='\u2716';
   popup.style.left=(rect.left+rect.width/2-60)+'px';
   popup.style.top=(rect.top-40)+'px';
   document.body.appendChild(popup);
@@ -699,10 +699,10 @@ function completeRound(){
 
   const btn=document.getElementById('roundNextBtn');
   if(currentRound<2){
-    btn.textContent='Sonraki Tur \u2192';
+    btn.textContent='الجَوْلَة التّالِيَة ←';
     btn.onclick=nextRound;
   } else {
-    btn.textContent='Sonuclari Gor';
+    btn.textContent='النَّتيجَة';
     btn.onclick=showFinal;
   }
 }
@@ -719,22 +719,22 @@ function completeDuoRound(){
   const overlay=document.getElementById('roundOverlay');
   overlay.style.display='flex';
 
-  const winner=p1Score>p2Score?'Oyuncu 1':p2Score>p1Score?'Oyuncu 2':'Berabere';
-  document.getElementById('roundCompleteTitle').textContent='Tur Tamamlandi! '+winner+(winner!=='Berabere'?' فاز!':'!');
+  const winner=p1Score>p2Score?'اللاعِبُ ١':p2Score>p1Score?'اللاعِبُ ٢':'تَعادُل';
+  document.getElementById('roundCompleteTitle').textContent=winner+(winner!=='تَعادُل'?' فاز! 🏆':' 🤝');
   document.getElementById('roundStarsDisplay').innerHTML=
     '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ١</div>'+starsHTML(s1)+
     '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ٢</div>'+starsHTML(s2);
   document.getElementById('roundScoreDisplay').textContent='P1: +'+p1Score+' | P2: +'+p2Score;
-  document.getElementById('roundTimeDisplay').textContent='اللاعِب ١ الوَقْت: '+p1Time+'s ('+p1Mistakes+' خَطَأ) | الوَقْت اللاعِب ٢: '+p2Time+'s ('+p2Mistakes+' hata)';
+  document.getElementById('roundTimeDisplay').textContent='اللاعِب ١ الوَقْت: '+p1Time+'s ('+p1Mistakes+' خَطَأ) | الوَقْت اللاعِب ٢: '+p2Time+'s ('+p2Mistakes+' خَطَأ)';
 
   sesCelebrate();
 
   const btn=document.getElementById('roundNextBtn');
   if(currentRound<2){
-    btn.textContent='Sonraki Tur \u2192';
+    btn.textContent='الجَوْلَة التّالِيَة ←';
     btn.onclick=nextRound;
   } else {
-    btn.textContent='Sonuclari Gor';
+    btn.textContent='النَّتيجَة';
     btn.onclick=showFinalDuo;
   }
 }
@@ -753,9 +753,9 @@ function showFinal(){
 
   const totalStarsCount=roundStars.reduce((a,b)=>a+b,0);
   let msg='';
-  if(totalStarsCount>=8) msg='Muhtesem! Arapca pazarlik ustasisin!';
-  else if(totalStarsCount>=5) msg='Harika! Arapca alisveriste cok iyisin!';
-  else msg='Iyi baslangic! Pratik yaptikca daha iyi olacak!';
+  if(totalStarsCount>=8) msg='🏆 مُمْتاز!';
+  else if(totalStarsCount>=5) msg='🌟 أَحْسَنْت!';
+  else msg='📘 حاوِلْ مَرَّةً أُخْرى!';
 
   document.getElementById('finalTitle').textContent='اِنْتَهى التَّسَوُّق!';
 

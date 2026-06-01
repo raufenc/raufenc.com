@@ -438,7 +438,7 @@
         <div class="u3-card" style="margin-top:14px"><div class="u3-grid">
           ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>Temizle</button><button class="u3-btn" data-check>Kontrol et</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
       $all('.u3-option', shell.body).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); btn.disabled=true; answer.push({i:Number(btn.dataset.i), html:btn.innerHTML, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>{ x.source.disabled=false; x.source.classList.remove('used'); }); answer=[]; redraw(); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>check(dlg));
@@ -530,7 +530,7 @@
         <div class="u3-card" style="margin-top:14px">
           <input class="u3-input" data-input placeholder="✍️" dir="rtl">
           <div class="u3-actions" data-letters>${letters.map(ch=>`<button class="u3-chip" data-ch="${escapeHtml(ch)}">${escapeHtml(ch)}</button>`).join('')}</div>
-          <div class="u3-actions"><button class="u3-btn secondary" data-clear>Temizle</button><button class="u3-btn" data-check>Kontrol et</button></div>
+          <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>
         </div>`;
       const input = $('[data-input]', shell.body);
       $all('[data-ch]', shell.body).forEach(btn => btn.addEventListener('click',()=>{ input.value += btn.dataset.ch; btn.classList.add('used'); }));
