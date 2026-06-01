@@ -13,19 +13,18 @@
     var id = (window.IHO_GAME_ID || '') + '';
     var hay = (p + ' ' + h + ' ' + id).toLowerCase();
     var map = [
-      ['eslestir|match|mufradat|kelime-kart|flashcard|g001|g002', 'match'],
+      ['na1|na2|na3|na4|mawaqit|namaz|clock|daire|circle', 'place'],
+      ['eslestir|match\\.|mufradat|kelime-kart|flashcard|g001|g002', 'match'],
       ['hafiza|memory|g012', 'memory'],
-      ['siniflandir|meyve|sebze|vasita|sinif|category|g003', 'sort'],
+      ['siniflandir|meyve|sebze|vasita|category|g003|sort', 'sort'],
       ['cumle|sentence|order|g008', 'order'],
-      ['bosluk|fill|naks|g007', 'fill'],
+      ['bosluk|fillblank|naks|naqis|g007', 'fill'],
       ['fiyat|price|sayi|g005', 'quiz'],
       ['diyalog|dialog|hiwar|g009|g010', 'dialogue'],
       ['avi|search|maqlub|typing|g011', 'search'],
-      ['hafiza|memory', 'memory'],
       ['balon|balloon|nisanci|defa', 'pop'],
       ['cark|wheel|hazz', 'wheel'],
-      ['namaz|mawaqit|na1|na2|na3|na4|saat|clock|gun|day', 'place'],
-      ['pazar|suuq|alisveris|shopping|list|g004', 'shop']
+      ['adres|pazar|suuq|alisveris|shopping|list|g004', 'shop']
     ];
     for (var i=0;i<map.length;i++){ if(new RegExp(map[i][0]).test(hay)) return map[i][1]; }
     return 'quiz';
@@ -47,14 +46,20 @@
     shop:     ['🖼️', '➡️', '🔎', 'كَلِمَة']
   };
 
-  // Öncelik sırasıyla ilk dolu elemanı bul
+  // Sadece GÖRÜNÜR ve dolu elemanı, öncelik sırasıyla bul (gizli sonuç ekranlarını atla)
+  function visible(e){ return e && e.offsetParent !== null && e.getClientRects().length>0; }
   function pick(){
-    var sels = ['#gameTitle','.u3-title','.start-subtitle','.start-title','.menu-title','.g1-box h1','h2','h1'];
+    var sels = ['#gameTitle','.u3-title','.start-subtitle','.start-title','.menu-title','h1','h2'];
     for (var i=0;i<sels.length;i++){
-      var e = document.querySelector(sels[i]);
-      if (e && e.textContent && e.textContent.trim().length>1) return e.textContent;
+      var nodes = document.querySelectorAll(sels[i]);
+      for (var j=0;j<nodes.length;j++){
+        var e = nodes[j];
+        if (visible(e) && e.textContent && e.textContent.trim().length>1) return e.textContent;
+      }
     }
-    return '';
+    // görünür yoksa #gameTitle'a düş
+    var g = document.querySelector('#gameTitle, h1');
+    return g ? g.textContent : '';
   }
   function bigEmoji(){
     // önce oyun başlığında, sonra sayfada belirgin bir emoji ara
