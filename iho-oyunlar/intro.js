@@ -47,18 +47,28 @@
     shop:     ['🖼️', '➡️', '🔎', 'كَلِمَة']
   };
 
+  // Öncelik sırasıyla ilk dolu elemanı bul
+  function pick(){
+    var sels = ['#gameTitle','.u3-title','.start-subtitle','.start-title','.menu-title','.g1-box h1','h2','h1'];
+    for (var i=0;i<sels.length;i++){
+      var e = document.querySelector(sels[i]);
+      if (e && e.textContent && e.textContent.trim().length>1) return e.textContent;
+    }
+    return '';
+  }
   function bigEmoji(){
-    // sayfadaki ilk anlamlı emoji'yi yakala (başlıktan)
-    var t = (document.querySelector('h1, .menu-title, .start-title, .hub-title, .u3-title, #gameTitle') || {}).textContent || '';
-    var m = t.match(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F300}-\u{1F9FF}]/u);
-    return m ? m[0] : '🎮';
+    // önce oyun başlığında, sonra sayfada belirgin bir emoji ara
+    var srcs = [pick(), (document.querySelector('.start-icon, .ii-src, #gameKicker')||{}).textContent || ''];
+    for (var i=0;i<srcs.length;i++){
+      var m = (srcs[i]||'').match(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u);
+      if (m) return m[0];
+    }
+    return '🎮';
   }
   function arabicName(){
-    var el = document.querySelector('#gameTitle, h1, .menu-title, .start-title, .u3-title');
-    var t = el ? el.textContent : '';
-    // emoji ve latin'i temizle, sadece Arapça bırak
+    var t = pick();
     t = t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{1F300}-\u{1F9FF}]/gu,'')
-         .replace(/[A-Za-z0-9çÇğĞıİöÖşŞüÜ.\-—|()/#]+/g,'').replace(/\s+/g,' ').trim();
+         .replace(/[A-Za-z0-9çÇğĞıİöÖşŞüÜ.\-—|()/#؟]+/g,'').replace(/\s+/g,' ').trim();
     return t || 'لُعْبَة';
   }
 
@@ -109,6 +119,6 @@
     ov.addEventListener('click', function(e){ if(e.target===ov) close(); });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(build, 350); });
-  else setTimeout(build, 350);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ setTimeout(build, 500); });
+  else setTimeout(build, 500);
 })();
