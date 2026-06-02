@@ -197,6 +197,10 @@
       const q = items[idx]; locked=false;
       setScore(shell, correct, items.length, idx, items.length);
       const f = formatter(q);
+      // Şıkları karıştır (>2 ise), doğru cevabın yeni konumunu hesapla → konum yanlılığını önler
+      const order = f.options.length > 2 ? shuffle(f.options.map((_, i) => i)) : f.options.map((_, i) => i);
+      const shOptions = order.map(i => f.options[i]);
+      const shAnswerIndex = order.indexOf(f.answerIndex);
       shell.body.innerHTML = `
         <div class="u3-card">
           ${f.visual || ''}
@@ -204,9 +208,9 @@
           ${f.hint ? `<div class="u3-muted">${escapeHtml(f.hint)}</div>` : ''}
         </div>
         <div class="u3-grid u3-grid-2" style="margin-top:14px">
-          ${f.options.map((o,i)=>optionButton(o,i)).join('')}
+          ${shOptions.map((o,i)=>optionButton(o,i)).join('')}
         </div>`;
-      $all('.u3-option', shell.body).forEach(btn => btn.addEventListener('click', () => choose(btn, f.answerIndex, f.after || '')));
+      $all('.u3-option', shell.body).forEach(btn => btn.addEventListener('click', () => choose(btn, shAnswerIndex, f.after || '')));
     }
     function choose(btn, answerIndex, after){
       if(locked) return;
@@ -477,11 +481,14 @@
       setTimeout(drawQuestion, 850);
     }
     function drawQuestion(){
+      const wOrder = current.options.length > 2 ? shuffle(current.options.map((_, i) => i)) : current.options.map((_, i) => i);
+      const wOptions = wOrder.map(i => current.options[i]);
+      const wAnswerIndex = wOrder.indexOf(current.answerIndex);
       shell.body.innerHTML = `
         <div class="u3-card"><div class="u3-mid-ar" dir="rtl">${escapeHtml(current.prompt)}</div><div class="u3-muted">${escapeHtml(current.skill || '')}</div></div>
-        <div class="u3-grid u3-grid-2" style="margin-top:14px">${current.options.map((o,i)=>optionButton(o,i)).join('')}</div>`;
+        <div class="u3-grid u3-grid-2" style="margin-top:14px">${wOptions.map((o,i)=>optionButton(o,i)).join('')}</div>`;
       $all('.u3-option', shell.body).forEach(btn => btn.addEventListener('click',()=>{
-        const ok = Number(btn.dataset.index) === current.answerIndex;
+        const ok = Number(btn.dataset.index) === wAnswerIndex;
         if(ok){ correct++; btn.classList.add('correct'); feedback(shell,'✅ صَحيح', 'good'); } else { btn.classList.add('wrong'); feedback(shell,'❌', 'bad'); }
         setScore(shell, correct, questions.length, asked.length, questions.length);
         setTimeout(()=> asked.length >= questions.length ? finalScreen(shell, correct, questions.length, () => renderWheel(container,data,options)) : drawIntro(), 900);

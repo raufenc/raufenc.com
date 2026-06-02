@@ -2757,8 +2757,8 @@
         "type": "mcq",
         "prompt": "ما معنى «حافِلَة»؟",
         "options": [
-          "",
-          ""
+          "otobüs",
+          "tren"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -2768,9 +2768,9 @@
         "type": "mcq",
         "prompt": "ما معنى «طائِرَة»؟",
         "options": [
-          "",
-          "",
-          ""
+          "gemi",
+          "uçak",
+          "bisiklet"
         ],
         "answerIndex": 1,
         "skill": "vocab"
@@ -2970,7 +2970,8 @@
         "options": [
           "bin",
           "in",
-          "",],
+          "yürü"
+        ],
         "answerIndex": 0,
         "skill": "imperatives"
       },
@@ -3051,8 +3052,12 @@
       {
         "id": "q026",
         "type": "mcq",
-        "prompt":"",
-        "options": [],
+        "prompt": "«الصَّباحُ» ne demek?",
+        "options": [
+          "sabah",
+          "akşam",
+          "gece"
+        ],
         "answerIndex": 0,
         "skill": "time"
       },
@@ -3060,7 +3065,11 @@
         "id": "q027",
         "type": "mcq",
         "prompt": "«اِمْشِ إِلى الأَمامِ قَليلاً» ne demek?",
-        "options": [],
+        "options": [
+          "biraz ileri yürü",
+          "geri dön",
+          "sağa dön"
+        ],
         "answerIndex": 0,
         "skill": "directions"
       },
@@ -3079,24 +3088,26 @@
       {
         "id": "q029",
         "type": "mcq",
-        "prompt":"",
+        "prompt": "«مَوْقِف» ne demek?",
         "options": [
           "durak",
-          "adres",],
+          "adres",
+          "köprü"
+        ],
         "answerIndex": 0,
         "skill": "places"
       },
       {
         "id": "q030",
         "type": "mcq",
-        "prompt":"",
+        "prompt": "«السّوقُ القَديمُ» ne demek?",
         "options": [
-          "soru",
-          "renk",
-          "zaman"
+          "eski çarşı",
+          "yeni okul",
+          "büyük hastane"
         ],
         "answerIndex": 0,
-        "skill": "comparative"
+        "skill": "vocab"
       }
     ],
     "trueFalse": [
@@ -3132,43 +3143,43 @@
       },
       {
         "id": "tf006",
-        "statement":"",
+        "statement": "«عَلى اليَسارِ» sağ tarafta demektir.",
         "answer": false,
         "explanation": "عَلى اليَسارِ sol tarafta demektir."
       },
       {
         "id": "tf007",
-        "statement":"",
+        "statement": "«السَّيّارَة» araba demektir.",
         "answer": true,
         "explanation":""
       },
       {
         "id": "tf008",
-        "statement":"",
+        "statement": "«مِنْ أَيْنَ؟» nereye? demektir.",
         "answer": false,
         "explanation": "مِنْ أَيْنَ؟ nereden? demektir."
       },
       {
         "id": "tf009",
-        "statement":"",
+        "statement": "«القِطار» tren demektir.",
         "answer": true,
         "explanation":""
       },
       {
         "id": "tf010",
-        "statement":"",
+        "statement": "«المُسْتَشْفى» okul demektir.",
         "answer": false,
         "explanation": "المُسْتَشْفى hastane demektir."
       },
       {
         "id": "tf011",
-        "statement":"",
+        "statement": "«المَدْرَسَة» okul demektir.",
         "answer": true,
         "explanation":""
       },
       {
         "id": "tf012",
-        "statement":"",
+        "statement": "الطّائِرَةُ أَسْرَعُ مِنَ السَّيّارَةِ.",
         "answer": true,
         "explanation":""
       },
@@ -3186,25 +3197,25 @@
       },
       {
         "id": "tf015",
-        "statement":"",
+        "statement": "«يَمينًا» sağa demektir.",
         "answer": true,
         "explanation":""
       },
       {
         "id": "tf016",
-        "statement":"",
+        "statement": "«قِفْ» geç demektir.",
         "answer": false,
-        "explanation":""
+        "explanation": "قِفْ dur demektir."
       },
       {
         "id": "tf017",
-        "statement":"",
+        "statement": "«اِنْزِلْ» in demektir.",
         "answer": true,
         "explanation":""
       },
       {
         "id": "tf018",
-        "statement":"",
+        "statement": "«بِالسَّفينَةِ» gemiyle demektir.",
         "answer": true,
         "explanation": "بِالسَّفينَةِ = gemiyle."
       }
@@ -3892,8 +3903,8 @@
         "type": "mcq",
         "prompt": "ما معنى «حافِلَة»؟",
         "options": [
-          "",
-          ""
+          "otobüs",
+          "tren"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -3903,9 +3914,9 @@
         "type": "mcq",
         "prompt": "ما معنى «طائِرَة»؟",
         "options": [
-          "",
-          "",
-          ""
+          "gemi",
+          "uçak",
+          "bisiklet"
         ],
         "answerIndex": 1,
         "skill": "vocab"

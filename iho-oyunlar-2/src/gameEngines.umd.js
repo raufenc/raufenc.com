@@ -91,18 +91,16 @@
       const ps = getPriceSet(data, config.price_set);
       const items = ps ? ps.items : [];
       const pairs = [];
-      for(let i=0;i<items.length;i++) for(let j=i+1;j<items.length;j++) pairs.push([items[i], items[j]]);
+      for(let i=0;i<items.length;i++) for(let j=i+1;j<items.length;j++) if(items[i].price !== items[j].price) pairs.push([items[i], items[j]]);
       const questions = shuffle(pairs, opts.seed || 'cmp').slice(0, config.question_count || 6).map(([a,b], idx) => {
         const cheaper = a.price < b.price ? a : b;
         const expensive = a.price > b.price ? a : b;
-        const options = [
-          `${cheaper.ar} أَرْخَصُ مِنَ ${expensive.ar}`,
-          `${expensive.ar} أَغْلى مِنَ ${cheaper.ar}`,
-          `${cheaper.ar} أَغْلى مِنَ ${expensive.ar}`,
-          `${expensive.ar} أَرْخَصُ مِنَ ${cheaper.ar}`
-        ];
-        const answer = idx % 2 === 0 ? options[0] : options[1];
-        return { id:'cmp_'+idx, q_ar:`${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺`, q_tr:'', options:shuffle(options, 'cmp'+idx), answer, items:[a,b] };
+        // Tek doğru ifade + iki yanlış (önceki sürümde iki şık da doğruydu)
+        const correct = `${cheaper.ar} أَرْخَصُ مِنَ ${expensive.ar}`;
+        const wrong1  = `${cheaper.ar} أَغْلى مِنَ ${expensive.ar}`;
+        const wrong2  = `${expensive.ar} أَرْخَصُ مِنَ ${cheaper.ar}`;
+        const options = shuffle([correct, wrong1, wrong2], 'cmp'+idx);
+        return { id:'cmp_'+idx, q_ar:`أَيُّ جُمْلَةٍ صَحيحَة؟ (${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺)`, q_tr:'', options, answer:correct, items:[a,b] };
       });
       return { type:'comparative_quiz', questions };
     },

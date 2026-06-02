@@ -329,7 +329,13 @@ function questionCard(question, index, tracker) {
   ]);
   const choices = el("div", { class: "choices" });
   const buttons = [];
-  (question.options || []).forEach(option => {
+  // Şıkları karıştır → doğru cevap hep aynı konumda kalmasın (cevap değere göre kontrol edildiği için güvenli)
+  const shuffledOptions = (question.options || []).slice();
+  for (let i = shuffledOptions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+  }
+  shuffledOptions.forEach(option => {
     const value = typeof option === "object" ? option.value : option;
     const label = typeof option === "object" ? option.label : option;
     const button = el("button", { class: "choice", type: "button" });

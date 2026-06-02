@@ -53,6 +53,7 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 <div class="q-card">
 <span class="badge" id="badge">ماذا تُريدُ؟</span>
 <div class="q-text" id="q"></div>
+<div class="q-emoji" id="qemoji" style="font-size:3.4em;margin-top:8px;line-height:1"></div>
 </div>
 <div class="tray" id="tray"></div>
 <div class="fb" id="fb"></div>
@@ -105,12 +106,13 @@ document.getElementById('qn').textContent=cur+1;document.getElementById('sc').te
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 var pool=q.pool==='d'?DRINKS:FOODS;
 var correctItem=pool.find(function(x){return x.w===q.ans});
+document.getElementById('qemoji').textContent=correctItem?correctItem.e:'';
 var wrongs=shuf(pool.filter(function(x){return x.w!==q.ans})).slice(0,5);
 var opts=shuf([correctItem].concat(wrongs));
 var el=document.getElementById('tray');el.innerHTML='';
 opts.forEach(function(o){
 var t=document.createElement('div');t.className='tile';
-t.innerHTML='<span class="em">'+o.e+'</span><span class="w">'+o.w+'</span>';
+t.innerHTML='<span class="w">'+o.w+'</span>';
 t.onclick=function(){answer(o,t,q)};
 el.appendChild(t);
 });

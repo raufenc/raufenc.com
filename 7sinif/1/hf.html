@@ -996,7 +996,7 @@ var g4All=[
 {cat:'الجُمْلَةُ الخَاطِئَة',opts:['أَنا أُصَلِّي الفَجْرَ مُبَكِّرًا.','هِيَ تُساعِدُ أُمَّها.','هُوَ يَرْجِعُ إِلى البَيْت.','هُوَ تَدْرُسُ دُروسَهُ.'],odd:3,explain:'هُوَ + تَدْرُسُ لا يتناسبان'},
 {cat:'الجُمْلَةُ الخَاطِئَة',opts:['هِيَ تَشْرَبُ الحَلِيبَ.','أَنْتِ تَتَناوَلِينَ الفَطورَ.','هُوَ يُصَلِّي الظُّهْرَ.','أَنْتِ تَشْرَبُ الشّاي.'],odd:3,explain:'أَنْتِ + تَشْرَبُ — الصحيح: تَشْرَبِينَ'}
 ];
-var g4Qs,g4Cur,g4Sc,g4Timer4;
+var g4Qs,g4Cur,g4Sc,g4Timer4,g4curOdd;
 var G4_TIME=12000;
 
 function g4Init(){
@@ -1016,9 +1016,11 @@ document.getElementById('g4cat').textContent='المجموعة: '+q.cat;
 document.getElementById('g4fb').textContent='';
 document.getElementById('g4explain').textContent='';
 var optsEl=document.getElementById('g4opts');optsEl.innerHTML='';
-q.opts.forEach(function(o,i){
-var b=document.createElement('div');b.className='g4-opt';b.textContent=o;
-b.addEventListener('click',function(){g4Answer(i,b)});
+var g4order=shuffle(q.opts.map(function(_,i){return i;}));
+g4curOdd=g4order.indexOf(q.odd);
+g4order.forEach(function(origIdx,newIdx){
+var b=document.createElement('div');b.className='g4-opt';b.textContent=q.opts[origIdx];
+b.addEventListener('click',function(){g4Answer(newIdx,b)});
 optsEl.appendChild(b);
 });
 // Timer
@@ -1039,7 +1041,7 @@ clearInterval(g4Timer4);
 var q=g4Qs[g4Cur];
 document.querySelectorAll('.g4-opt').forEach(function(b){b.classList.add('disabled')});
 document.getElementById('g4tbar').style.width='0%';
-if(idx===q.odd){
+if(idx===g4curOdd){
 sesDoğru();
 if(btn)btn.classList.add('correct');
 var timeLeft=parseInt(document.getElementById('g4tbar').style.width||'0');
@@ -1050,7 +1052,7 @@ document.getElementById('g4fb').style.color='#4CAF50';
 }else{
 sesYanlış();
 if(btn)btn.classList.add('wrong');
-var correctBtn=document.querySelectorAll('.g4-opt')[q.odd];
+var correctBtn=document.querySelectorAll('.g4-opt')[g4curOdd];
 if(correctBtn)correctBtn.classList.add('correct');
 document.getElementById('g4fb').textContent=idx===-1?'⏰ انتهى الوقت':'❌ خطأ';
 document.getElementById('g4fb').style.color='#F44336';

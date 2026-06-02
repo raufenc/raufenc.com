@@ -77,11 +77,11 @@ var ALL=[
 {cat:'الجُمْلَةُ الخَاطِئَة',opts:['هِيَ تَرْكَبُ الدَّرّاجَة.','هُوَ يَذْهَبُ بِالقِطار.','أَنا أُسافِرُ بِالطّائِرَة.','أَنْتِ تَذْهَبُ إِلى المَدرَسَة.'],odd:3,exp:'أَنْتِ + تَذْهَبُ — الصحيح: تَذْهَبِينَ'},
 {cat:'الجُمْلَةُ الخَاطِئَة',opts:['أَنْتَ تَرْكَبُ الحافِلَة.','أَنْتِ تُسافِرِينَ بِالطّائِرَة.','هُوَ يَرْجِعُ بِالسَيّارَة.','هِيَ تَرْكَبُينَ القِطار.'],odd:3,exp:'هِيَ + تَرْكَبِينَ — صيغة أَنْتِ'},
 
-{cat:'وَسائِطُ النَّقْلِ الجَوِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
 {cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة'},
-{cat:'وَسائِطُ النَّقْلِ البَحْرِيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرّيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرِيَّة — الباقي بَرّيَّة'},
 
-{cat:'كَلِماتُ المُقارَنَة في السُّرْعَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','أَحْدَث'],odd:2,exp:'أَكْبَر'},
+{cat:'كَلِماتُ المُقارَنَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','سَيّارَة'],odd:3,exp:'سَيّارَة اسْمٌ، والباقي صيَغُ تَفْضيلٍ (أَفْعَل)'},
 
 {cat:'الضَّوْء وَإِشارات المُرور',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة'},
 
@@ -90,7 +90,7 @@ var ALL=[
 {cat:'الأَفْعالُ بِصيغَةِ الأَمْر',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
-var qs,cur,sc,timerInt;
+var qs,cur,sc,timerInt,curOdd;
 function init(){qs=shuf([...ALL]).slice(0,12);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
 function loadQ(){
 clearInterval(timerInt);
@@ -100,9 +100,11 @@ var _ca=document.getElementById('cattr');if(_ca)_ca.textContent='';
 document.getElementById('qn').textContent=cur+1;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='';document.getElementById('exp').textContent='';
 var el=document.getElementById('opts');el.innerHTML='';
-q.opts.forEach(function(o,i){
-var b=document.createElement('div');b.className='opt';b.textContent=o;
-b.onclick=function(){answer(i,b,q)};
+var order=shuf(q.opts.map(function(_,i){return i;}));
+curOdd=order.indexOf(q.odd);
+order.forEach(function(origIdx,newIdx){
+var b=document.createElement('div');b.className='opt';b.textContent=q.opts[origIdx];
+b.onclick=function(){answer(newIdx,b,q)};
 el.appendChild(b);
 });
 var start=Date.now();
@@ -117,10 +119,10 @@ function answer(idx,b,q){
 clearInterval(timerInt);
 document.querySelectorAll('.opt').forEach(function(x){x.classList.add('disabled')});
 document.getElementById('tbar').style.width='0%';
-if(idx===q.odd){if(b)b.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
+if(idx===curOdd){if(b)b.classList.add('correct');sc+=10;document.getElementById('sc').textContent=sc;
 document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
 else{if(b)b.classList.add('wrong');
-var correctBtn=document.querySelectorAll('.opt')[q.odd];if(correctBtn)correctBtn.classList.add('correct');
+var correctBtn=document.querySelectorAll('.opt')[curOdd];if(correctBtn)correctBtn.classList.add('correct');
 document.getElementById('fb').textContent=idx===-1?'⏰ انْتَهى الوَقْت':'❌ خَطَأ';document.getElementById('fb').style.color='#F44336';}
 document.getElementById('exp').textContent='💡 '+q.exp;
 cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1900);
