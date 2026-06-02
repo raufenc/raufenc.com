@@ -323,7 +323,7 @@ function questionCard(question, index, tracker) {
   const top = el("div", { class: "question-top" }, [
     el("div", {}, [
       ar(question.q_ar || question.sentence_ar || question.prompt_ar || "", true),
-      el("div", { class: "muted", text: question.q_tr || question.tr || question.audio_key || "" })
+      el("div", { class: "muted", text: question.q_tr || question.tr || "" })
     ]),
     el("div", { class: "question-number", text: String(index + 1) })
   ]);
