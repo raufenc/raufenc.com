@@ -227,7 +227,7 @@
   }
 
   function renderQuiz(container, data, options){
-    renderMCQGame(container, data, options, 'quiz', data.gameBanks.quizQuestions, q => ({prompt:q.prompt, options:q.options, answerIndex:q.answerIndex, hint:q.skill}));
+    renderMCQGame(container, data, options, 'quiz', data.gameBanks.quizQuestions, q => ({prompt:q.prompt, options:q.options, answerIndex:q.answerIndex, hint:''}));
   }
   function renderTrueFalse(container, data, options){
     const src = data.gameBanks.trueFalse.map(q => ({...q, options:['صَحٌّ','خَطَأ'], answerIndex:q.answer ? 0 : 1}));
@@ -246,7 +246,7 @@
     renderMCQGame(container, data, {...options, limit: options.limit || 9}, 'traffic', data.gameBanks.traffic.concat(data.gameBanks.traffic).concat(data.gameBanks.traffic), q => ({visual:trafficVisual(q.light), prompt:q.question, options:q.options, answerIndex:q.options.indexOf(q.answer), after:q.tr}));
   }
   function renderFillBlank(container, data, options){
-    renderMCQGame(container, data, options, 'fillBlank', data.gameBanks.fillBlanks, q => ({prompt:q.text, options:q.options, answerIndex:q.options.indexOf(q.answer), hint:q.hintTr}));
+    renderMCQGame(container, data, options, 'fillBlank', data.gameBanks.fillBlanks, q => ({prompt:q.text, options:q.options, answerIndex:q.options.indexOf(q.answer), hint:''}));
   }
 
   function renderSentenceOrder(container, data, options){
@@ -485,7 +485,7 @@
       const wOptions = wOrder.map(i => current.options[i]);
       const wAnswerIndex = wOrder.indexOf(current.answerIndex);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-mid-ar" dir="rtl">${escapeHtml(current.prompt)}</div><div class="u3-muted">${escapeHtml(current.skill || '')}</div></div>
+        <div class="u3-card"><div class="u3-mid-ar" dir="rtl">${escapeHtml(current.prompt)}</div></div>
         <div class="u3-grid u3-grid-2" style="margin-top:14px">${wOptions.map((o,i)=>optionButton(o,i)).join('')}</div>`;
       $all('.u3-option', shell.body).forEach(btn => btn.addEventListener('click',()=>{
         const ok = Number(btn.dataset.index) === wAnswerIndex;

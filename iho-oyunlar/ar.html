@@ -250,7 +250,7 @@ const VOCAB_TR = {
   'الصَّباح':'Sabah','الظُهر':'Öğle','العصر':'İkindi',
   'المساء':'Akşam','الليل':'Gece','الفَجْر':'Fecir'
 };
-function getTr(w){ return VOCAB_TR[w.ar]||''; }
+function getTr(w){ return ''; }  /* Arapça-yalnız: Türkçe gösterilmez */
 
 /* ================================================================
    HARAKAT HELPERS
@@ -378,9 +378,9 @@ document.addEventListener('click',function unlock(){
    MENU
    ================================================================ */
 const GAMES=[
-  {id:'g1',icon:'🚀',ar:'الدفاع الفضائي',tr:'Uzay Savunması'},
-  {id:'g2',icon:'🍳',ar:'الطبّاخ الماهر',tr:'Aşçıbaşı'},
-  {id:'g3',icon:'🧩',ar:'مطر الحروف',tr:'Harf Yağmuru'}
+  {id:'g1',icon:'🚀',ar:'الدفاع الفضائي',tr:''},
+  {id:'g2',icon:'🍳',ar:'الطبّاخ الماهر',tr:''},
+  {id:'g3',icon:'🧩',ar:'مطر الحروف',tr:''}
 ];
 
 function buildMenu(){
@@ -480,7 +480,7 @@ function initSpaceDefense(){
     state.p1.hearts=3;state.p2.hearts=3;
     let roundDone=false;
 
-    document.getElementById('g1RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+    document.getElementById('g1RoundInfo').textContent='الجَوْلَة '+(rd+1)+'/'+rounds.length;
 
     let timeLeft=r.dur;
     const area=document.getElementById('g1Area');
@@ -669,14 +669,14 @@ function initMasterChef(){
 
   /* Themed recipe sets — ingredients that go together */
   const RECIPE_SETS=[
-    {name:'🍳 Kahvaltı Tabağı', items:['خُبْز','جُبْن','بَيْض','عَسَل','زُبْدَة','زَيْتون','شاي','حَلِيب']},
-    {name:'🥩 Et Yemeği', items:['لَحْم','أُرُز','حَساء','زَيْتون','خُبْز','عَصِير']},
-    {name:'🍗 Tavuk Yemeği', items:['دَجاج','أُرُز','حَساء','خُبْز','زَيْتون','عَصِير']},
-    {name:'🐟 Balık Tabağı', items:['سَمَك','أُرُز','زَيْتون','حَساء','خُبْز','عَصِير']},
-    {name:'🧆 Köfte Tabağı', items:['كُفْتَة','أُرُز','خُبْز','حَساء','زَيْتون','عَصِير']},
-    {name:'🍎 Meyve & İçecek', items:['تُفَّاح','مَوْز','عَصِير','حَلِيب','عَسَل','قَهْوَة']},
-    {name:'🧀 Peynir Tabağı', items:['جُبْن','خُبْز','زَيْتون','شاي','عَسَل','زُبْدَة']},
-    {name:'🍲 Çorba Sofrası', items:['حَساء','خُبْز','زَيْتون','لَحْم','شاي','زُبْدَة']}
+    {name:'🍳 طَبَقُ الفَطورِ', items:['خُبْز','جُبْن','بَيْض','عَسَل','زُبْدَة','زَيْتون','شاي','حَلِيب']},
+    {name:'🥩 طَبَقُ اللَّحْمِ', items:['لَحْم','أُرُز','حَساء','زَيْتون','خُبْز','عَصِير']},
+    {name:'🍗 طَبَقُ الدَّجاجِ', items:['دَجاج','أُرُز','حَساء','خُبْز','زَيْتون','عَصِير']},
+    {name:'🐟 طَبَقُ السَّمَكِ', items:['سَمَك','أُرُز','زَيْتون','حَساء','خُبْز','عَصِير']},
+    {name:'🧆 طَبَقُ الكُفْتَةِ', items:['كُفْتَة','أُرُز','خُبْز','حَساء','زَيْتون','عَصِير']},
+    {name:'🍎 فَواكِهُ وَمَشْروبات', items:['تُفَّاح','مَوْز','عَصِير','حَلِيب','عَسَل','قَهْوَة']},
+    {name:'🧀 طَبَقُ الجُبْنِ', items:['جُبْن','خُبْز','زَيْتون','شاي','عَسَل','زُبْدَة']},
+    {name:'🍲 مائِدَةُ الحَساءِ', items:['حَساء','خُبْز','زَيْتون','لَحْم','شاي','زُبْدَة']}
   ];
 
   function findWord(ar){ return VOCAB.foods.find(f=>f.ar===ar); }
@@ -716,7 +716,7 @@ function initMasterChef(){
     let roundDone=false;
     let timeLeft=r.dur;
 
-    document.getElementById('g2RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+    document.getElementById('g2RoundInfo').textContent='الجَوْلَة '+(rd+1)+'/'+rounds.length;
 
     const area=document.getElementById('g2Area');
     area.innerHTML='';
@@ -777,7 +777,7 @@ function initMasterChef(){
           const it=document.createElement('span');
           it.className='recipe-item';
           it.id=p.id+'Ri'+i;
-          it.textContent=w.e+' '+getTr(w);
+          it.textContent=w.e;
           itemsEl.appendChild(it);
         });
       }
@@ -922,7 +922,7 @@ function initLetterRain(){
     const r=rounds[rd];
     let roundDone=false;
 
-    document.getElementById('g3RoundInfo').textContent='Tur '+(rd+1)+'/'+rounds.length;
+    document.getElementById('g3RoundInfo').textContent='الجَوْلَة '+(rd+1)+'/'+rounds.length;
     const area=document.getElementById('g3Area');
     area.innerHTML='';
 
@@ -980,7 +980,7 @@ function initLetterRain(){
       p.wrongCount=0;
 
       const disp=document.getElementById(p.id+'Display');
-      if(disp) disp.textContent=w.e+' '+getTr(w)+' — '+p.letters.length+' harf';
+      if(disp) disp.textContent=w.e+' '+getTr(w)+' — '+p.letters.length+' حَرْف';
 
       const builder=document.getElementById(p.id+'Builder');
       if(builder){

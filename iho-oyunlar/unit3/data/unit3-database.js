@@ -3,9 +3,9 @@
   "meta": {
     "unit": 3,
     "titleAr": "إِلى أَيْنَ نُسافِرُ؟",
-    "titleTr":"",
-    "grade":"",
-    "sourceNote":"",
+    "titleTr": "",
+    "grade": "",
+    "sourceNote": "",
     "version": "1.0.0",
     "language": "ar-TR",
     "updated": "2026-05-18"
@@ -14,69 +14,69 @@
     {
       "id": "transport",
       "ar": "وَسائِطُ النَّقْل",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "places",
       "ar": "الأَماكِن",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "cities",
       "ar": "المُدُن",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "verbs",
       "ar": "الأَفْعال",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "imperatives",
       "ar": "أَفْعالُ الأَمْر",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "directions",
       "ar": "الاتِّجاهات وَالطَّريق",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "traffic",
       "ar": "إِشاراتُ المُرور",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "questions",
       "ar": "أَدَواتُ السُّؤال",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "modes",
       "ar": "طُرُقُ السَّفَر",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "comparatives",
       "ar": "المُقارَنَة",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "people",
       "ar": "الأَشْخاص وَالمِهَن",
-      "tr":""
+      "tr": ""
     },
     {
       "id": "time",
       "ar": "الزَّمَن",
-      "tr":""
+      "tr": ""
     }
   ],
   "vocabulary": [
     {
       "id": "bus",
       "ar": "حافِلَة",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "ḥāfila",
       "emoji": "🚌",
@@ -90,7 +90,7 @@
     {
       "id": "plane",
       "ar": "طائِرَة",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "ṭāʾira",
       "emoji": "✈️",
@@ -104,7 +104,7 @@
     {
       "id": "car",
       "ar": "سَيّارَة",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "sayyāra",
       "emoji": "🚗",
@@ -118,7 +118,7 @@
     {
       "id": "bicycle",
       "ar": "دَرّاجَة",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "darrāja",
       "emoji": "🚲",
@@ -132,7 +132,7 @@
     {
       "id": "train",
       "ar": "قِطار",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "qiṭār",
       "emoji": "🚆",
@@ -146,7 +146,7 @@
     {
       "id": "ship",
       "ar": "سَفينَة",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "safīna",
       "emoji": "🚢",
@@ -160,7 +160,7 @@
     {
       "id": "",
       "ar": "مِتْرو",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "mitrū",
       "emoji": "🚇",
@@ -174,7 +174,7 @@
     {
       "id": "bus_stop",
       "ar": "مَوْقِفُ الحافِلَةِ",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "mawqif al-ḥāfila",
       "emoji": "🚏",
@@ -185,7 +185,7 @@
     {
       "id": "metro_station",
       "ar": "مَحَطَّةُ المِتْرو",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "maḥaṭṭat al-mitrū",
       "emoji": "Ⓜ️",
@@ -196,7 +196,7 @@
     {
       "id": "ambulance",
       "ar": "سَيّارَةُ الإِسْعافِ",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "sayyārat al-isʿāf",
       "emoji": "🚑",
@@ -207,7 +207,7 @@
     {
       "id": "transport_means",
       "ar": "وَسائِطُ النَّقْل",
-      "tr":"",
+      "tr": "",
       "category": "transport",
       "translit": "wasāʾiṭ an-naql",
       "emoji": "🧭",
@@ -218,7 +218,7 @@
     {
       "id": "school",
       "ar": "مَدْرَسَة",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "madrasa",
       "emoji": "🏫",
@@ -233,7 +233,7 @@
     {
       "id": "hospital",
       "ar": "مُسْتَشْفى",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "mustashfā",
       "emoji": "🏥",
@@ -248,7 +248,7 @@
     {
       "id": "library",
       "ar": "مَكْتَبَة",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "maktaba",
       "emoji": "📚",
@@ -263,7 +263,7 @@
     {
       "id": "mosque",
       "ar": "مَسْجِد",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "masjid",
       "emoji": "🕌",
@@ -277,7 +277,7 @@
     {
       "id": "home",
       "ar": "بَيْت",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "bayt",
       "emoji": "🏠",
@@ -292,7 +292,7 @@
     {
       "id": "old_market",
       "ar": "السّوقُ القَديمُ",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "as-sūq al-qadīm",
       "emoji": "🏪",
@@ -305,7 +305,7 @@
     {
       "id": "city",
       "ar": "مَدينَة",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "madīna",
       "emoji": "🌆",
@@ -316,7 +316,7 @@
     {
       "id": "address",
       "ar": "عُنْوان",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "ʿunwān",
       "emoji": "📍",
@@ -329,7 +329,7 @@
     {
       "id": "street",
       "ar": "شارِع",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "shāriʿ",
       "emoji": "🛣️",
@@ -342,7 +342,7 @@
     {
       "id": "road",
       "ar": "طَريق",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "ṭarīq",
       "emoji": "🛤️",
@@ -355,7 +355,7 @@
     {
       "id": "pedestrian_crossing",
       "ar": "مَمَرُّ المُشاة",
-      "tr":"",
+      "tr": "",
       "category": "places",
       "translit": "mamar al-mushāh",
       "emoji": "🚶",
@@ -366,7 +366,7 @@
     {
       "id": "istanbul",
       "ar": "إِسْطَنْبول",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Isṭanbūl",
       "emoji": "🌉",
@@ -377,7 +377,7 @@
     {
       "id": "ankara",
       "ar": "أَنْقَرَة",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Anqara",
       "emoji": "🏛️",
@@ -388,7 +388,7 @@
     {
       "id": "bursa",
       "ar": "بورْصَة",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Būrṣa",
       "emoji": "🌿",
@@ -399,7 +399,7 @@
     {
       "id": "kayseri",
       "ar": "قَيْصَري",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Qayṣarī",
       "emoji": "🏔️",
@@ -410,7 +410,7 @@
     {
       "id": "antalya",
       "ar": "أَنْطالْيا",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Anṭālyā",
       "emoji": "🌊",
@@ -421,7 +421,7 @@
     {
       "id": "sivas",
       "ar": "سيواس",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Sīwās",
       "emoji": "🏞️",
@@ -432,7 +432,7 @@
     {
       "id": "izmir",
       "ar": "إِزْمير",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Izmīr",
       "emoji": "🌊",
@@ -443,7 +443,7 @@
     {
       "id": "mardin",
       "ar": "مارْدين",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Mārdīn",
       "emoji": "🏜️",
@@ -454,7 +454,7 @@
     {
       "id": "gaziantep",
       "ar": "غازي عَيْنْتاب",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Ghāzī ʿAyntāb",
       "emoji": "🏺",
@@ -465,7 +465,7 @@
     {
       "id": "hatay",
       "ar": "هاتاي",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Hātāy",
       "emoji": "🍽️",
@@ -476,7 +476,7 @@
     {
       "id": "diyarbakir",
       "ar": "دِيار بَكْر",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Diyār Bakr",
       "emoji": "🧱",
@@ -487,7 +487,7 @@
     {
       "id": "sinop",
       "ar": "سينوب",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Sīnūb",
       "emoji": "🌊",
@@ -498,7 +498,7 @@
     {
       "id": "van",
       "ar": "وان",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Wān",
       "emoji": "🏔️",
@@ -509,7 +509,7 @@
     {
       "id": "trabzon",
       "ar": "طَرابْزون",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Ṭarābzūn",
       "emoji": "🌊",
@@ -520,7 +520,7 @@
     {
       "id": "mugla",
       "ar": "موغْلا",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Mūghlā",
       "emoji": "🏖️",
@@ -531,7 +531,7 @@
     {
       "id": "samsun",
       "ar": "سامْسون",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Sāmsūn",
       "emoji": "⚓",
@@ -542,7 +542,7 @@
     {
       "id": "nevsehir",
       "ar": "نَوْشَهِير",
-      "tr":"",
+      "tr": "",
       "category": "cities",
       "translit": "Nawshahīr",
       "emoji": "🎈",
@@ -553,7 +553,7 @@
     {
       "id": "go_1",
       "ar": "أَذْهَبُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "adhhabu",
       "emoji": "🚶",
@@ -569,7 +569,7 @@
     {
       "id": "travel_1",
       "ar": "أُسافِرُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "usāfiru",
       "emoji": "🧳",
@@ -583,7 +583,7 @@
     {
       "id": "return_1",
       "ar": "أَرْجِعُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "arjiʿu",
       "emoji": "↩️",
@@ -597,7 +597,7 @@
     {
       "id": "ride_1",
       "ar": "أَرْكَبُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "arkabu",
       "emoji": "🎫",
@@ -611,7 +611,7 @@
     {
       "id": "get_off_1",
       "ar": "أَنْزِلُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "anzilu",
       "emoji": "⬇️",
@@ -625,7 +625,7 @@
     {
       "id": "arrive_1",
       "ar": "أَصِلُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "aṣilu",
       "emoji": "✅",
@@ -638,7 +638,7 @@
     {
       "id": "head_1",
       "ar": "أَتَّجِهُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "attajihu",
       "emoji": "↪️",
@@ -653,7 +653,7 @@
     {
       "id": "cross_1",
       "ar": "أَعْبُرُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "aʿburu",
       "emoji": "🚸",
@@ -667,7 +667,7 @@
     {
       "id": "walk_1",
       "ar": "أَمْشي",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "amshī",
       "emoji": "🚶",
@@ -681,7 +681,7 @@
     {
       "id": "stand_1",
       "ar": "أَقِفُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "aqifu",
       "emoji": "🛑",
@@ -695,7 +695,7 @@
     {
       "id": "prepare_1",
       "ar": "أَسْتَعِدُّ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "astaʿiddu",
       "emoji": "🟡",
@@ -709,7 +709,7 @@
     {
       "id": "exit_1",
       "ar": "أَخْرُجُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "akhruju",
       "emoji": "🚪",
@@ -722,7 +722,7 @@
     {
       "id": "live_1",
       "ar": "أَسْكُنُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "askunu",
       "emoji": "🏠",
@@ -733,7 +733,7 @@
     {
       "id": "help_1",
       "ar": "أُساعِدُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "usāʿidu",
       "emoji": "🤝",
@@ -746,7 +746,7 @@
     {
       "id": "explain_1",
       "ar": "أَشْرَحُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "ashraḥu",
       "emoji": "🗣️",
@@ -759,7 +759,7 @@
     {
       "id": "move_3f",
       "ar": "تَتَحَرَّكُ",
-      "tr":"",
+      "tr": "",
       "category": "verbs",
       "translit": "tataḥarraku",
       "emoji": "🚦",
@@ -770,7 +770,7 @@
     {
       "id": "imp_go_m",
       "ar": "اِذْهَبْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "idhhab",
       "emoji": "➡️",
@@ -781,7 +781,7 @@
     {
       "id": "imp_go_f",
       "ar": "اِذْهَبي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "idhhabī",
       "emoji": "➡️",
@@ -792,7 +792,7 @@
     {
       "id": "imp_ride_m",
       "ar": "اِرْكَبْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "irkab",
       "emoji": "🚌",
@@ -803,7 +803,7 @@
     {
       "id": "imp_ride_f",
       "ar": "اِرْكَبي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "irkabī",
       "emoji": "🚌",
@@ -814,7 +814,7 @@
     {
       "id": "imp_getoff_m",
       "ar": "اِنْزِلْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "inzil",
       "emoji": "⬇️",
@@ -825,7 +825,7 @@
     {
       "id": "imp_getoff_f",
       "ar": "اِنْزِلي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "inzilī",
       "emoji": "⬇️",
@@ -836,7 +836,7 @@
     {
       "id": "imp_head_m",
       "ar": "اِتَّجِهْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "ittajih",
       "emoji": "↪️",
@@ -847,7 +847,7 @@
     {
       "id": "imp_head_f",
       "ar": "اِتَّجِهي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "ittajihī",
       "emoji": "↪️",
@@ -858,7 +858,7 @@
     {
       "id": "imp_walk_m",
       "ar": "اِمْشِ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "imshi",
       "emoji": "🚶",
@@ -869,7 +869,7 @@
     {
       "id": "imp_walk_f",
       "ar": "اِمْشي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "imshī",
       "emoji": "🚶",
@@ -880,7 +880,7 @@
     {
       "id": "imp_cross_m",
       "ar": "اُعْبُرْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "uʿbur",
       "emoji": "🚸",
@@ -891,7 +891,7 @@
     {
       "id": "imp_cross_f",
       "ar": "اُعْبُري",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "uʿburī",
       "emoji": "🚸",
@@ -902,7 +902,7 @@
     {
       "id": "imp_stand_m",
       "ar": "قِفْ",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "qif",
       "emoji": "🛑",
@@ -913,7 +913,7 @@
     {
       "id": "imp_stand_f",
       "ar": "قِفي",
-      "tr":"",
+      "tr": "",
       "category": "imperatives",
       "translit": "qifī",
       "emoji": "🛑",
@@ -924,7 +924,7 @@
     {
       "id": "right",
       "ar": "اليَمين",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "al-yamīn",
       "emoji": "➡️",
@@ -935,7 +935,7 @@
     {
       "id": "left",
       "ar": "اليَسار",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "al-yasār",
       "emoji": "⬅️",
@@ -946,7 +946,7 @@
     {
       "id": "to_right",
       "ar": "إِلى اليَمين",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "ilā al-yamīn",
       "emoji": "↪️",
@@ -957,7 +957,7 @@
     {
       "id": "to_left",
       "ar": "إِلى اليَسار",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "ilā al-yasār",
       "emoji": "↩️",
@@ -968,7 +968,7 @@
     {
       "id": "on_right",
       "ar": "عَلى اليَمين",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "ʿalā al-yamīn",
       "emoji": "👉",
@@ -979,7 +979,7 @@
     {
       "id": "on_left",
       "ar": "عَلى اليَسار",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "ʿalā al-yasār",
       "emoji": "👈",
@@ -990,7 +990,7 @@
     {
       "id": "front",
       "ar": "أَمام",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "amām",
       "emoji": "⬆️",
@@ -1001,7 +1001,7 @@
     {
       "id": "behind",
       "ar": "خَلْف",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "khalf",
       "emoji": "⬇️",
@@ -1012,7 +1012,7 @@
     {
       "id": "forward",
       "ar": "إِلى الأَمام",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "ilā al-amām",
       "emoji": "⬆️",
@@ -1023,7 +1023,7 @@
     {
       "id": "little",
       "ar": "قَليلاً",
-      "tr":"",
+      "tr": "",
       "category": "directions",
       "translit": "qalīlan",
       "emoji": "➖",
@@ -1034,7 +1034,7 @@
     {
       "id": "traffic_signals",
       "ar": "إِشاراتُ المُرور",
-      "tr":"",
+      "tr": "",
       "category": "traffic",
       "translit": "ishārāt al-murūr",
       "emoji": "🚦",
@@ -1045,7 +1045,7 @@
     {
       "id": "red_light",
       "ar": "الضَّوْءُ الأَحْمَر",
-      "tr":"",
+      "tr": "",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-aḥmar",
       "emoji": "🔴",
@@ -1056,7 +1056,7 @@
     {
       "id": "yellow_light",
       "ar": "الضَّوْءُ الأَصْفَر",
-      "tr":"",
+      "tr": "",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-aṣfar",
       "emoji": "🟡",
@@ -1067,7 +1067,7 @@
     {
       "id": "green_light",
       "ar": "الضَّوْءُ الأَخْضَر",
-      "tr":"",
+      "tr": "",
       "category": "traffic",
       "translit": "aḍ-ḍawʾ al-akhḍar",
       "emoji": "🟢",
@@ -1078,7 +1078,7 @@
     {
       "id": "q_where_to",
       "ar": "إِلى أَيْنَ؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "ilā ayna",
       "emoji": "❓",
@@ -1089,7 +1089,7 @@
     {
       "id": "q_from_where",
       "ar": "مِنْ أَيْنَ؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "min ayna",
       "emoji": "❓",
@@ -1100,7 +1100,7 @@
     {
       "id": "q_how",
       "ar": "كَيْفَ؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "kayfa",
       "emoji": "❓",
@@ -1111,7 +1111,7 @@
     {
       "id": "q_by_what",
       "ar": "بِماذا؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "bimādhā",
       "emoji": "❓",
@@ -1122,7 +1122,7 @@
     {
       "id": "q_when",
       "ar": "مَتى؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "matā",
       "emoji": "❓",
@@ -1133,7 +1133,7 @@
     {
       "id": "q_with_whom",
       "ar": "مَعَ مَنْ؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "maʿa man",
       "emoji": "❓",
@@ -1144,7 +1144,7 @@
     {
       "id": "q_is",
       "ar": "هَلْ؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "hal",
       "emoji": "❓",
@@ -1155,7 +1155,7 @@
     {
       "id": "q_what",
       "ar": "ماذا؟",
-      "tr":"",
+      "tr": "",
       "category": "questions",
       "translit": "mādhā",
       "emoji": "❓",
@@ -1166,7 +1166,7 @@
     {
       "id": "walking_mode",
       "ar": "مَشْيًا",
-      "tr":"",
+      "tr": "",
       "category": "modes",
       "translit": "mashyan",
       "emoji": "🚶",
@@ -1177,7 +1177,7 @@
     {
       "id": "land_mode",
       "ar": "بَرًّا",
-      "tr":"",
+      "tr": "",
       "category": "modes",
       "translit": "barran",
       "emoji": "🛣️",
@@ -1188,7 +1188,7 @@
     {
       "id": "sea_mode",
       "ar": "بَحْرًا",
-      "tr":"",
+      "tr": "",
       "category": "modes",
       "translit": "baḥran",
       "emoji": "🚢",
@@ -1199,7 +1199,7 @@
     {
       "id": "air_mode",
       "ar": "جَوًّا",
-      "tr":"",
+      "tr": "",
       "category": "modes",
       "translit": "jawwan",
       "emoji": "✈️",
@@ -1210,7 +1210,7 @@
     {
       "id": "usually",
       "ar": "عادَةً",
-      "tr":"",
+      "tr": "",
       "category": "modes",
       "translit": "ʿādatan",
       "emoji": "🔁",
@@ -1221,7 +1221,7 @@
     {
       "id": "holiday",
       "ar": "في العُطْلَةِ",
-      "tr":"",
+      "tr": "",
       "category": "time",
       "translit": "fī al-ʿuṭla",
       "emoji": "🏖️",
@@ -1232,7 +1232,7 @@
     {
       "id": "every_morning",
       "ar": "كُلَّ صَباحٍ",
-      "tr":"",
+      "tr": "",
       "category": "time",
       "translit": "kulla ṣabāḥ",
       "emoji": "🌅",
@@ -1243,7 +1243,7 @@
     {
       "id": "friday",
       "ar": "يَوْمَ الجُمُعَةِ",
-      "tr":"",
+      "tr": "",
       "category": "time",
       "translit": "yawm al-jumuʿa",
       "emoji": "📅",
@@ -1254,7 +1254,7 @@
     {
       "id": "evening",
       "ar": "مَساءً",
-      "tr":"",
+      "tr": "",
       "category": "time",
       "translit": "masāʾan",
       "emoji": "🌆",
@@ -1265,7 +1265,7 @@
     {
       "id": "morning",
       "ar": "صَباحًا",
-      "tr":"",
+      "tr": "",
       "category": "time",
       "translit": "ṣabāḥan",
       "emoji": "🌅",
@@ -1276,7 +1276,7 @@
     {
       "id": "fast_f",
       "ar": "سَريعَة",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "sarīʿa",
       "emoji": "⚡",
@@ -1287,7 +1287,7 @@
     {
       "id": "slow_f",
       "ar": "بَطيئَة",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "baṭīʾa",
       "emoji": "🐢",
@@ -1298,7 +1298,7 @@
     {
       "id": "old_f",
       "ar": "قَديمَة",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "qadīma",
       "emoji": "🏚️",
@@ -1309,7 +1309,7 @@
     {
       "id": "modern_f",
       "ar": "حَديثَة",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "ḥadītha",
       "emoji": "✨",
@@ -1320,7 +1320,7 @@
     {
       "id": "faster_than",
       "ar": "أَسْرَعُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "asraʿu min",
       "emoji": "⚡",
@@ -1331,7 +1331,7 @@
     {
       "id": "slower_than",
       "ar": "أَبْطَأُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "abṭaʾu min",
       "emoji": "🐢",
@@ -1342,7 +1342,7 @@
     {
       "id": "older_than",
       "ar": "أَقْدَمُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "aqdamu min",
       "emoji": "🏺",
@@ -1353,7 +1353,7 @@
     {
       "id": "newer_than",
       "ar": "أَحْدَثُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "aḥdathu min",
       "emoji": "✨",
@@ -1364,7 +1364,7 @@
     {
       "id": "longer_than",
       "ar": "أَطْوَلُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "aṭwalu min",
       "emoji": "📏",
@@ -1375,7 +1375,7 @@
     {
       "id": "bigger_than",
       "ar": "أَكْبَرُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "akbaru min",
       "emoji": "➕",
@@ -1386,7 +1386,7 @@
     {
       "id": "smaller_than",
       "ar": "أَصْغَرُ مِنْ",
-      "tr":"",
+      "tr": "",
       "category": "comparatives",
       "translit": "aṣgharu min",
       "emoji": "➖",
@@ -1397,7 +1397,7 @@
     {
       "id": "father",
       "ar": "أَب",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ab",
       "emoji": "👨",
@@ -1408,7 +1408,7 @@
     {
       "id": "mother",
       "ar": "أُمّ",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "umm",
       "emoji": "👩",
@@ -1419,7 +1419,7 @@
     {
       "id": "sister",
       "ar": "أُخْت",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ukht",
       "emoji": "👧",
@@ -1430,7 +1430,7 @@
     {
       "id": "brother",
       "ar": "أَخ",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "akh",
       "emoji": "👦",
@@ -1441,7 +1441,7 @@
     {
       "id": "uncle",
       "ar": "عَمّ",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ʿamm",
       "emoji": "👨",
@@ -1452,7 +1452,7 @@
     {
       "id": "grandfather",
       "ar": "جَدّ",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "jadd",
       "emoji": "👴",
@@ -1463,7 +1463,7 @@
     {
       "id": "merchant",
       "ar": "تاجِر",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "tājir",
       "emoji": "🧑‍💼",
@@ -1474,7 +1474,7 @@
     {
       "id": "doctor_f",
       "ar": "طَبيبَة",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ṭabība",
       "emoji": "👩‍⚕️",
@@ -1485,7 +1485,7 @@
     {
       "id": "engineer_f",
       "ar": "مُهَنْدِسَة",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "muhandisa",
       "emoji": "👩‍💻",
@@ -1496,7 +1496,7 @@
     {
       "id": "student_m",
       "ar": "طالِب",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ṭālib",
       "emoji": "👨‍🎓",
@@ -1507,7 +1507,7 @@
     {
       "id": "student_f",
       "ar": "طالِبَة",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "ṭāliba",
       "emoji": "👩‍🎓",
@@ -1518,7 +1518,7 @@
     {
       "id": "driver",
       "ar": "سائِق",
-      "tr":"",
+      "tr": "",
       "category": "people",
       "translit": "sāʾiq",
       "emoji": "🚘",
@@ -1530,12 +1530,12 @@
   "patterns": [
     {
       "id": "destination_go",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أَذْهَبُ إِلى {place}.",
       "questionAr": "إِلى أَيْنَ تَذْهَبُ؟",
-      "usageTr":"",
+      "usageTr": "",
       "slots": {
-        "place":""
+        "place": ""
       },
       "examples": [
         "أَذْهَبُ إِلى المَدْرَسَةِ.",
@@ -1544,12 +1544,12 @@
     },
     {
       "id": "destination_travel",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أُسافِرُ إِلى {city}.",
       "questionAr": "إِلى أَيْنَ تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "",
       "slots": {
-        "city":""
+        "city": ""
       },
       "examples": [
         "أُسافِرُ إِلى أَنْقَرَةَ.",
@@ -1558,12 +1558,12 @@
     },
     {
       "id": "instrument",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أَذْهَبُ / أُسافِرُ إِلى {place} بِـ{vehicle}.",
       "questionAr": "بِماذا تَذْهَبُ؟ / بِماذا تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "",
       "slots": {
-        "vehicle":""
+        "vehicle": ""
       },
       "examples": [
         "أُسافِرُ إِلى أَنْقَرَةَ بِالطّائِرَةِ.",
@@ -1572,10 +1572,10 @@
     },
     {
       "id": "return_from_to",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أَرْجِعُ مِنْ {from} إِلى {to} بِـ{vehicle}.",
       "questionAr": "مِنْ أَيْنَ تَرْجِعُ؟ / بِماذا تَرْجِعُ؟",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "أَرْجِعُ مِنَ المَكْتَبَةِ إِلى البَيْتِ مَشْيًا.",
         "تَرْجِعُ أُخْتي إِلى إِسْطَنْبولَ بِالقِطارِ."
@@ -1583,10 +1583,10 @@
     },
     {
       "id": "how_route",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "كَيْفَ أَذْهَبُ إِلى {place}؟",
       "questionAr": "كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "كَيْفَ أَذْهَبُ إِلى المُسْتَشْفى؟",
         "كَيْفَ أَذْهَبُ إِلى المَكْتَبَةِ؟"
@@ -1594,9 +1594,9 @@
     },
     {
       "id": "directions_sequence",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "اُعْبُرِ الطَّريقَ، ثُمَّ اِتَّجِهْ إِلى اليَمينِ، ثُمَّ اِمْشِ إِلى الأَمامِ قَليلاً.",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "اُعْبُرِ الطَّريقَ.",
         "اِمْشِ إِلى الأَمامِ قَليلاً.",
@@ -1605,7 +1605,7 @@
     },
     {
       "id": "side_location",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "{place} عَلى اليَمينِ / عَلى اليَسارِ.",
       "usageTr": "Bir yerin konumunu belirtir.",
       "examples": [
@@ -1615,9 +1615,9 @@
     },
     {
       "id": "comparative",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "{noun1} أَسْرَعُ مِنْ {noun2}.",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
         "الدَّرّاجَةُ أَبْطَأُ مِنَ القِطارِ.",
@@ -1626,9 +1626,9 @@
     },
     {
       "id": "traffic_light",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ. اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ. اُعْبُرْ عِنْدَ الضَّوْءِ الأَخْضَرِ.",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ.",
@@ -1637,9 +1637,9 @@
     },
     {
       "id": "time_exit",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أَخْرُجُ مِنَ {place} في السّاعَةِ {time}.",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "أَخْرُجُ مِنَ المَدْرَسَةِ في السّاعَةِ الثّالِثَةِ.",
         "تَخْرُجُ مِنَ المَكْتَبَةِ في السّاعَةِ السّادِسَةِ."
@@ -1647,10 +1647,10 @@
     },
     {
       "id": "with_person",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "أُسافِرُ مَعَ {person} إِلى {city}.",
       "questionAr": "مَعَ مَنْ تُسافِرُ؟",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "أُسافِرُ مَعَ أُمّي إِلى بورْصَةَ.",
         "أَذْهَبُ مَعَ صَديقي إِلى المَكْتَبَةِ."
@@ -1658,9 +1658,9 @@
     },
     {
       "id": "yes_no",
-      "nameTr":"",
+      "nameTr": "",
       "templateAr": "هَلْ يَذْهَبُ المِتْرو إِلى {place}؟",
-      "usageTr":"",
+      "usageTr": "",
       "examples": [
         "هَلْ يَذْهَبُ المِتْرو إِلى المُسْتَشْفى؟ نَعَمْ.",
         "هَلْ تَذْهَبُ إِلى المَدْرَسَةِ بِالحافِلَةِ؟"
@@ -1671,7 +1671,7 @@
     {
       "id": "s001",
       "ar": "اِسْمي عُمَر، أَنا أَسْكُنُ في إِسْطَنْبولَ.",
-      "tr":"",
+      "tr": "",
       "patternId": "intro",
       "tokens": [
         "اِسْمي",
@@ -1687,7 +1687,7 @@
     {
       "id": "s002",
       "ar": "أَرْكَبُ الدَّرّاجَةَ، ثُمَّ أَتَّجِهُ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَرْكَبُ",
@@ -1703,7 +1703,7 @@
     {
       "id": "s003",
       "ar": "أَبي تاجِر، هُوَ يُسافِرُ إِلى أَنْقَرَةَ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَبي",
@@ -1720,7 +1720,7 @@
     {
       "id": "s004",
       "ar": "أُمّي طَبيبَة، هِيَ تَذْهَبُ إِلى المُسْتَشْفى بِالسَّيّارَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أُمّي",
@@ -1737,7 +1737,7 @@
     {
       "id": "s005",
       "ar": "أُخْتي مُهَنْدِسَة، هِيَ تَرْجِعُ إِلى إِسْطَنْبولَ بِالقِطارِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "return_from_to",
       "tokens": [
         "أُخْتي",
@@ -1754,7 +1754,7 @@
     {
       "id": "s006",
       "ar": "أَنا أُسافِرُ في العُطْلَةِ إِلى بورْصَةَ بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "destination_travel",
       "tokens": [
         "أَنا",
@@ -1770,7 +1770,7 @@
     {
       "id": "s007",
       "ar": "أَنا أَرْكَبُ الدَّرّاجَةَ كُلَّ صَباحٍ.",
-      "tr":"",
+      "tr": "",
       "patternId": "time_exit",
       "tokens": [
         "أَنا",
@@ -1784,7 +1784,7 @@
     {
       "id": "s008",
       "ar": "عائِشَةُ تُسافِرُ إِلى قَيْصَري بِالقِطارِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "عائِشَةُ",
@@ -1798,7 +1798,7 @@
     {
       "id": "s009",
       "ar": "جَدّي يَتَّجِهُ إِلى المَسْجِدِ بِالسَّيّارَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "جَدّي",
@@ -1812,7 +1812,7 @@
     {
       "id": "s010",
       "ar": "حَسَن يَرْجِعُ إِلى أَنْطالْيا بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "return_from_to",
       "tokens": [
         "حَسَن",
@@ -1826,7 +1826,7 @@
     {
       "id": "s011",
       "ar": "أَنْتِ تَذْهَبينَ إِلى المَكْتَبَةِ بِالْمِتْرو.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَنْتِ",
@@ -1840,7 +1840,7 @@
     {
       "id": "s012",
       "ar": "أَنْتَ تَصِلُ إِلى إِسْطَنْبولَ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَنْتَ",
@@ -1854,7 +1854,7 @@
     {
       "id": "s013",
       "ar": "أَذْهَبُ إِلى المَكْتَبَةِ مَشْيًا.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَذْهَبُ",
@@ -1867,7 +1867,7 @@
     {
       "id": "s014",
       "ar": "أَبي يَرْجِعُ مِنْ أَنْقَرَةَ جَوًّا.",
-      "tr":"",
+      "tr": "",
       "patternId": "modes",
       "tokens": [
         "أَبي",
@@ -1881,7 +1881,7 @@
     {
       "id": "s015",
       "ar": "أُخْتي تُسافِرُ إِلى بورْصَةَ بَحْرًا.",
-      "tr":"",
+      "tr": "",
       "patternId": "modes",
       "tokens": [
         "أُخْتي",
@@ -1895,7 +1895,7 @@
     {
       "id": "s016",
       "ar": "أَخي يُسافِرُ إِلى سيواس بَرًّا.",
-      "tr":"",
+      "tr": "",
       "patternId": "modes",
       "tokens": [
         "أَخي",
@@ -1909,7 +1909,7 @@
     {
       "id": "s017",
       "ar": "السَّيّارَةُ حَديثَة.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "السَّيّارَةُ",
@@ -1920,7 +1920,7 @@
     {
       "id": "s018",
       "ar": "الحافِلَةُ قَديمَة.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الحافِلَةُ",
@@ -1931,7 +1931,7 @@
     {
       "id": "s019",
       "ar": "الطّائِرَةُ سَريعَة.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -1942,7 +1942,7 @@
     {
       "id": "s020",
       "ar": "الدَّرّاجَةُ بَطيئَة.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الدَّرّاجَةُ",
@@ -1953,7 +1953,7 @@
     {
       "id": "s021",
       "ar": "القِطارُ أَقْدَمُ مِنَ الحافِلَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "القِطارُ",
@@ -1966,7 +1966,7 @@
     {
       "id": "s022",
       "ar": "الدَّرّاجَةُ أَبْطَأُ مِنَ القِطارِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الدَّرّاجَةُ",
@@ -1979,7 +1979,7 @@
     {
       "id": "s023",
       "ar": "المِتْرو أَحْدَثُ مِنَ السَّيّارَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "المِتْرو",
@@ -1992,7 +1992,7 @@
     {
       "id": "s024",
       "ar": "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -2005,7 +2005,7 @@
     {
       "id": "s025",
       "ar": "كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-      "tr":"",
+      "tr": "",
       "patternId": "how_route",
       "tokens": [
         "كَيْفَ",
@@ -2019,7 +2019,7 @@
     {
       "id": "s026",
       "ar": "اُعْبُرِ الطَّريقَ.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "اُعْبُرِ",
@@ -2030,7 +2030,7 @@
     {
       "id": "s027",
       "ar": "اِمْشِ إِلى الأَمامِ قَليلاً.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "اِمْشِ",
@@ -2043,7 +2043,7 @@
     {
       "id": "s028",
       "ar": "اِرْكَبِ الحافِلَةَ مِنَ المَوْقِفِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "اِرْكَبِ",
@@ -2056,7 +2056,7 @@
     {
       "id": "s029",
       "ar": "اِنْزِلْ أَمامَ المُسْتَشْفى.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "اِنْزِلْ",
@@ -2068,7 +2068,7 @@
     {
       "id": "s030",
       "ar": "السّوقُ عَلى اليَسارِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "السّوقُ",
@@ -2080,7 +2080,7 @@
     {
       "id": "s031",
       "ar": "المَدْرَسَةُ عَلى اليَمينِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "المَدْرَسَةُ",
@@ -2092,7 +2092,7 @@
     {
       "id": "s032",
       "ar": "إِشاراتُ المُرورِ مُهِمَّة.",
-      "tr":"",
+      "tr": "",
       "patternId": "traffic_light",
       "tokens": [
         "إِشاراتُ",
@@ -2104,7 +2104,7 @@
     {
       "id": "s033",
       "ar": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "traffic_light",
       "tokens": [
         "قِفْ",
@@ -2117,7 +2117,7 @@
     {
       "id": "s034",
       "ar": "اِسْتَعِدَّ عِنْدَ الضَّوْءِ الأَصْفَرِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "traffic_light",
       "tokens": [
         "اِسْتَعِدَّ",
@@ -2130,7 +2130,7 @@
     {
       "id": "s035",
       "ar": "اُعْبُرْ عِنْدَ الضَّوْءِ الأَخْضَرِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "traffic_light",
       "tokens": [
         "اُعْبُرْ",
@@ -2143,7 +2143,7 @@
     {
       "id": "s036",
       "ar": "اِذْهَبْ إِلى هَذا العُنْوانِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "destination_go",
       "tokens": [
         "اِذْهَبْ",
@@ -2156,7 +2156,7 @@
     {
       "id": "s037",
       "ar": "إِلى أَيْنَ تُسافِرُ؟ أُسافِرُ إِلى أَنْقَرَةَ.",
-      "tr":"",
+      "tr": "",
       "patternId": "destination_travel",
       "tokens": [
         "إِلى",
@@ -2172,7 +2172,7 @@
     {
       "id": "s038",
       "ar": "بِماذا تُسافِرُ؟ أُسافِرُ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "بِماذا",
@@ -2186,7 +2186,7 @@
     {
       "id": "s039",
       "ar": "مِنْ أَيْنَ تَرْجِعُ؟ أَرْجِعُ مِنَ المَكْتَبَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "return_from_to",
       "tokens": [
         "مِنْ",
@@ -2202,7 +2202,7 @@
     {
       "id": "s040",
       "ar": "كَيْفَ تَذْهَبُ إِلى المَدْرَسَةِ؟ أَذْهَبُ مَشْيًا.",
-      "tr":"",
+      "tr": "",
       "patternId": "how_route",
       "tokens": [
         "كَيْفَ",
@@ -2218,7 +2218,7 @@
     {
       "id": "s041",
       "ar": "بِماذا تَرْجِعُ إِلى البَيْتِ؟ أَرْجِعُ بِالحافِلَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "return_from_to",
       "tokens": [
         "بِماذا",
@@ -2234,7 +2234,7 @@
     {
       "id": "s042",
       "ar": "مَتى تُسافِرُ إِلى بورْصَةَ؟ أُسافِرُ يَوْمَ الجُمُعَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "time_exit",
       "tokens": [
         "مَتى",
@@ -2251,7 +2251,7 @@
     {
       "id": "s043",
       "ar": "هَلْ يَذْهَبُ المِتْرو إِلى المُسْتَشْفى؟ نَعَمْ.",
-      "tr":"",
+      "tr": "",
       "patternId": "yes_no",
       "tokens": [
         "هَلْ",
@@ -2267,7 +2267,7 @@
     {
       "id": "s044",
       "ar": "اُعْبُرِ الطَّريقَ وَاتَّجِهْ إِلى اليَسارِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "اُعْبُرِ",
@@ -2281,7 +2281,7 @@
     {
       "id": "s045",
       "ar": "مَحَطَّةُ المِتْرو عَلى اليَمينِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "مَحَطَّةُ",
@@ -2294,7 +2294,7 @@
     {
       "id": "s046",
       "ar": "أَخْرُجُ مِنَ المَدْرَسَةِ في السّاعَةِ الثّالِثَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "time_exit",
       "tokens": [
         "أَخْرُجُ",
@@ -2309,7 +2309,7 @@
     {
       "id": "s047",
       "ar": "تَخْرُجُ مِنَ المَكْتَبَةِ في السّاعَةِ السّادِسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "time_exit",
       "tokens": [
         "تَخْرُجُ",
@@ -2324,7 +2324,7 @@
     {
       "id": "s048",
       "ar": "أَرْجِعُ إِلى البَيْتِ مَساءً مَشْيًا.",
-      "tr":"",
+      "tr": "",
       "patternId": "return_from_to",
       "tokens": [
         "أَرْجِعُ",
@@ -2338,7 +2338,7 @@
     {
       "id": "s049",
       "ar": "تَذْهَبُ أَليف إِلى المَكْتَبَةِ بِالْمِتْرو.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "تَذْهَبُ",
@@ -2352,7 +2352,7 @@
     {
       "id": "s050",
       "ar": "تَذْهَبُ أَليف بِالحافِلَةِ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "تَذْهَبُ",
@@ -2366,7 +2366,7 @@
     {
       "id": "s051",
       "ar": "القِطارُ أَطْوَلُ مِنَ الحافِلَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "القِطارُ",
@@ -2379,7 +2379,7 @@
     {
       "id": "s052",
       "ar": "الطّائِرَةُ أَسْرَعُ مِنَ السَّيّارَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "comparative",
       "tokens": [
         "الطّائِرَةُ",
@@ -2392,7 +2392,7 @@
     {
       "id": "s053",
       "ar": "أَنا أَمامَ المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "أَنا",
@@ -2404,7 +2404,7 @@
     {
       "id": "s054",
       "ar": "المُسْتَشْفى عَلى يَسارِ الشّارِعِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "المُسْتَشْفى",
@@ -2417,7 +2417,7 @@
     {
       "id": "s055",
       "ar": "المَكْتَبَةُ عَلى يَمينِ المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "المَكْتَبَةُ",
@@ -2430,7 +2430,7 @@
     {
       "id": "s056",
       "ar": "المَوْقِفُ أَمامَ المُسْتَشْفى.",
-      "tr":"",
+      "tr": "",
       "patternId": "side_location",
       "tokens": [
         "المَوْقِفُ",
@@ -2442,7 +2442,7 @@
     {
       "id": "s057",
       "ar": "ساعِدْ مُراد في الوُصولِ إِلى السّوقِ القَديمِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "directions_sequence",
       "tokens": [
         "ساعِدْ",
@@ -2458,7 +2458,7 @@
     {
       "id": "s058",
       "ar": "اِشْرَحْ طَريقَ الوُصولِ إِلى المَدْرَسَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "how_route",
       "tokens": [
         "اِشْرَحْ",
@@ -2472,7 +2472,7 @@
     {
       "id": "s059",
       "ar": "أَنا أَذْهَبُ إِلى المَدينَةِ المُنَوَّرَةِ بِالطّائِرَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَنا",
@@ -2487,7 +2487,7 @@
     {
       "id": "s060",
       "ar": "أَنا أَذْهَبُ إِلى بورْصَةَ بِالسَّفينَةِ.",
-      "tr":"",
+      "tr": "",
       "patternId": "instrument",
       "tokens": [
         "أَنا",
@@ -2507,37 +2507,37 @@
         {
           "speaker": "مُراد",
           "ar": "مَرْحَبًا يا شَيْماء، كَيْفَ أَذْهَبُ إِلى السّوقِ القَديمِ؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "شَيْماء",
           "ar": "مَرْحَبًا بِكَ يا مُراد، اُعْبُرِ الطَّريقَ، اِمْشِ إِلى الأَمامِ قَليلاً.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "شَيْماء",
           "ar": "اِتَّجِهْ إِلى اليَسارِ، ثُمَّ اِرْكَبِ الحافِلَةَ مِنَ المَوْقِفِ.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "مُراد",
           "ar": "أَيْنَ أَنْزِلُ مِنَ الحافِلَةِ؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "شَيْماء",
           "ar": "اِنْزِلْ أَمامَ المُسْتَشْفى، السّوقُ عَلى اليَسارِ.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "مُراد",
           "ar": "شُكْرًا لَكِ يا شَيْماء، إِلى اللِّقاءِ.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "شَيْماء",
           "ar": "عَفْوًا، مَعَ السَّلامَةِ.",
-          "tr":""
+          "tr": ""
         }
       ]
     },
@@ -2548,32 +2548,32 @@
         {
           "speaker": "صادِق",
           "ar": "مَرْحَبًا يا سَلْمى، بِماذا تَذْهَبينَ إِلى المَدْرَسَةِ؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "سَلْمى",
           "ar": "أَذْهَبُ إِلى المَدْرَسَةِ مَشْيًا. وَأَنْتَ كَيْفَ تَذْهَبُ؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "صادِق",
           "ar": "أَذْهَبُ بِالحافِلَةِ.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "سَلْمى",
           "ar": "إِلى أَيْنَ تَذْهَبُ الآن؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "صادِق",
           "ar": "أَذْهَبُ إِلى المُسْتَشْفى بِالْمِتْرو.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "سَلْمى",
           "ar": "أَرْجِعُ إِلى البَيْتِ بِالسَّيّارَةِ مَعَ أُمّي.",
-          "tr":""
+          "tr": ""
         }
       ]
     },
@@ -2584,27 +2584,27 @@
         {
           "speaker": "أَمير",
           "ar": "مَتى تُسافِرُ إِلى بورْصَةَ يا طاهِر؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "طاهِر",
           "ar": "أُسافِرُ يَوْمَ الجُمُعَةِ.",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "أَمير",
           "ar": "بِماذا تُسافِرُ إِلى بورْصَةَ؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "طاهِر",
           "ar": "أُسافِرُ بِالسَّفينَةِ، وَأَنْتَ كَيْفَ تَذْهَبُ إِلى غازي عَيْنْتاب؟",
-          "tr":""
+          "tr": ""
         },
         {
           "speaker": "أَمير",
           "ar": "أَذْهَبُ إِلى غازي عَيْنْتاب بِالطّائِرَةِ.",
-          "tr":""
+          "tr": ""
         }
       ]
     }
@@ -2613,12 +2613,14 @@
     "matchingSets": [
       {
         "id": "match_transport",
-        "title":"",
+        "title": "",
         "pairs": [
           [
-            "حافِلَة",],
+            "حافِلَة"
+          ],
           [
-            "طائِرَة",],
+            "طائِرَة"
+          ],
           [
             "سَيّارَة",
             ""
@@ -2640,12 +2642,13 @@
             ""
           ],
           [
-            "مَوْقِفُ الحافِلَةِ",]
+            "مَوْقِفُ الحافِلَةِ"
+          ]
         ]
       },
       {
         "id": "match_places",
-        "title": "Yerler",
+        "title": "الأَماكِن",
         "pairs": [
           [
             "مَدْرَسَة",
@@ -2656,7 +2659,8 @@
             "hastane"
           ],
           [
-            "مَكْتَبَة",],
+            "مَكْتَبَة"
+          ],
           [
             "مَسْجِد",
             "cami"
@@ -2681,33 +2685,39 @@
       },
       {
         "id": "match_directions",
-        "title":"",
+        "title": "",
         "pairs": [
           [
-            "إِلى اليَمين",],
+            "إِلى اليَمين"
+          ],
           [
             "إِلى اليَسار",
             "sola"
           ],
           [
-            "عَلى اليَمين",],
+            "عَلى اليَمين"
+          ],
           [
             "عَلى اليَسار",
             "solda"
           ],
           [
-            "أَمام",],
+            "أَمام"
+          ],
           [
-            "خَلْف",],
+            "خَلْف"
+          ],
           [
-            "الضَّوْءُ الأَحْمَر",],
+            "الضَّوْءُ الأَحْمَر"
+          ],
           [
-            "الضَّوْءُ الأَخْضَر",]
+            "الضَّوْءُ الأَخْضَر"
+          ]
         ]
       },
       {
         "id": "match_verbs",
-        "title": "Fiiller",
+        "title": "الأَفْعال",
         "pairs": [
           [
             "أَذْهَبُ",
@@ -2718,7 +2728,8 @@
             "seyahat ederim"
           ],
           [
-            "أَرْجِعُ",],
+            "أَرْجِعُ"
+          ],
           [
             "أَرْكَبُ",
             "binerim"
@@ -2728,9 +2739,11 @@
             "inerim"
           ],
           [
-            "أَعْبُرُ",],
+            "أَعْبُرُ"
+          ],
           [
-            "أَمْشي",],
+            "أَمْشي"
+          ],
           [
             "أَقِفُ",
             "dururum"
@@ -2755,10 +2768,12 @@
       {
         "id": "q002",
         "type": "mcq",
-        "prompt": "ما معنى «حافِلَة»؟",
+        "prompt": "ما مَعْنى «حافِلَة»؟",
         "options": [
-          "otobüs",
-          "tren"
+          "🚌",
+          "✈️",
+          "🚢",
+          "🚲"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -2766,25 +2781,27 @@
       {
         "id": "q003",
         "type": "mcq",
-        "prompt": "ما معنى «طائِرَة»؟",
+        "prompt": "ما مَعْنى «طائِرَة»؟",
         "options": [
-          "gemi",
-          "uçak",
-          "bisiklet"
+          "✈️",
+          "🚌",
+          "🚢",
+          "🚆"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "vocab"
       },
       {
         "id": "q004",
         "type": "mcq",
-        "prompt": "ما معنى «إِلى اليَمين»؟",
+        "prompt": "ما مَعْنى «إِلى اليَمينِ»؟",
         "options": [
-          "sola",
-          "ileriye",
-          "arkaya"
+          "➡️",
+          "⬅️",
+          "⬆️",
+          "⬇️"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "directions"
       },
       {
@@ -2829,36 +2846,38 @@
       {
         "id": "q008",
         "type": "mcq",
-        "prompt": "«بِماذا؟» تعني ...",
+        "prompt": "بِماذا تَذْهَبُ إِلى المَدْرَسَةِ؟",
         "options": [
-          "Nereye?",
-          "Ne ile?",
-          "Ne zaman?",
-          "Kiminle?"
+          "بِالحافِلَةِ",
+          "فِي الصَّباحِ",
+          "مَعَ أَخي",
+          "إِلى البَيْتِ"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "questions"
       },
       {
         "id": "q009",
         "type": "mcq",
-        "prompt": "«إِلى أَيْنَ؟» تعni ...",
+        "prompt": "إِلى أَيْنَ تُسافِرُ؟",
         "options": [
-          "Nereden?",
-          "Nereye?",
-          "Ne ile?"
+          "إِلى إِسْطَنْبولَ",
+          "بِالقِطارِ",
+          "مَعَ أُمّي",
+          "صَباحًا"
         ],
-        "answerIndex": 2,
+        "answerIndex": 0,
         "skill": "questions"
       },
       {
         "id": "q010",
         "type": "mcq",
-        "prompt": "«مِنْ أَيْنَ؟» تعني ...",
+        "prompt": "مِنْ أَيْنَ أَنْتَ؟",
         "options": [
-          "Nereden?",
-          "Nereye?",
-          "Ne zaman?"
+          "أَنا مِنْ تُرْكِيا",
+          "إِلى المَدْرَسَةِ",
+          "بِالسَّيّارَةِ",
+          "غَدًا"
         ],
         "answerIndex": 0,
         "skill": "questions"
@@ -2944,33 +2963,38 @@
       {
         "id": "q017",
         "type": "mcq",
-        "prompt": "«مَحَطَّةُ المِتْرو» تعني ...",
+        "prompt": "ما مَعْنى «مَحَطَّةُ المِتْرو»؟",
         "options": [
-          "metro istasyonu",
-          "hastane",],
+          "🚇",
+          "🏥",
+          "🏫",
+          "🕌"
+        ],
         "answerIndex": 0,
         "skill": "vocab"
       },
       {
         "id": "q018",
         "type": "mcq",
-        "prompt": "«أَرْجِعُ» تعني ...",
+        "prompt": "مَتى أَرْجِعُ إِلى البَيْتِ؟",
         "options": [
-          "giderim",
-          "binerim",
-          "inerim"
+          "بَعْدَ المَدْرَسَةِ",
+          "قَبْلَ المَدْرَسَةِ",
+          "فِي اللَّيْلِ فَقَط",
+          "لا أَرْجِعُ أَبَدًا"
         ],
-        "answerIndex": 2,
+        "answerIndex": 0,
         "skill": "verbs"
       },
       {
         "id": "q019",
         "type": "mcq",
-        "prompt": "«اِرْكَبْ» تعني ...",
+        "prompt": "أَيْنَ أَرْكَبُ الحافِلَةَ؟",
         "options": [
-          "bin",
-          "in",
-          "yürü"
+          "فِي المَوْقِفِ",
+          "فِي المَدْرَسَةِ",
+          "فِي البَيْتِ",
+          "فِي السّوقِ"
         ],
         "answerIndex": 0,
         "skill": "imperatives"
@@ -2978,12 +3002,14 @@
       {
         "id": "q020",
         "type": "mcq",
-        "prompt": "«اِنْزِلْ» تعني ...",
+        "prompt": "مِنْ أَيْنَ أَنْزِلُ؟",
         "options": [
-          "bin",
-          "in",
-          "git",],
-        "answerIndex": 1,
+          "مِنَ الحافِلَةِ",
+          "مِنَ البَيْتِ",
+          "مِنَ المَدْرَسَةِ",
+          "مِنَ السّوقِ"
+        ],
+        "answerIndex": 0,
         "skill": "imperatives"
       },
       {
@@ -3015,10 +3041,12 @@
       {
         "id": "q023",
         "type": "mcq",
-        "prompt": "أُسافِرُ إِلى أَنْقَرَةَ جَوًّا = ...",
+        "prompt": "«جَوًّا» تَعْني السَّفَرَ بِـ...؟",
         "options": [
-          "deniz yoluyla",
-          "bisikletle"
+          "✈️",
+          "🚢",
+          "🚗",
+          "🚲"
         ],
         "answerIndex": 0,
         "skill": "modes"
@@ -3026,12 +3054,12 @@
       {
         "id": "q024",
         "type": "mcq",
-        "prompt": "أُسافِرُ إِلى بورْصَةَ بَحْرًا = ...",
+        "prompt": "«بَحْرًا» تَعْني السَّفَرَ بِـ...؟",
         "options": [
-          "deniz yoluyla",
-          "hava yoluyla",
-          "yaya",
-          "metro ile"
+          "🚢",
+          "✈️",
+          "🚗",
+          "🚶"
         ],
         "answerIndex": 0,
         "skill": "modes"
@@ -3039,12 +3067,12 @@
       {
         "id": "q025",
         "type": "mcq",
-        "prompt": "«إِشاراتُ المُرور» hangi alana aittir?",
+        "prompt": "ما مَعْنى «إِشاراتُ المُرورِ»؟",
         "options": [
-          "trafik",
-          "yiyecek",
-          "aile",
-          "saat"
+          "🚦",
+          "🍽️",
+          "🏠",
+          "🕐"
         ],
         "answerIndex": 0,
         "skill": "traffic"
@@ -3052,11 +3080,12 @@
       {
         "id": "q026",
         "type": "mcq",
-        "prompt": "«الصَّباحُ» ne demek?",
+        "prompt": "ما مَعْنى «الصَّباحُ»؟",
         "options": [
-          "sabah",
-          "akşam",
-          "gece"
+          "🌅",
+          "🌆",
+          "🌙",
+          "☀️"
         ],
         "answerIndex": 0,
         "skill": "time"
@@ -3064,11 +3093,12 @@
       {
         "id": "q027",
         "type": "mcq",
-        "prompt": "«اِمْشِ إِلى الأَمامِ قَليلاً» ne demek?",
+        "prompt": "«اِمْشِ إِلى الأَمامِ» تَعْني...؟",
         "options": [
-          "biraz ileri yürü",
-          "geri dön",
-          "sağa dön"
+          "🚶",
+          "🛑",
+          "🚌",
+          "🚲"
         ],
         "answerIndex": 0,
         "skill": "directions"
@@ -3076,11 +3106,12 @@
       {
         "id": "q028",
         "type": "mcq",
-        "prompt": "«عَلى اليَمين» ne demek?",
+        "prompt": "ما مَعْنى «عَلى اليَمينِ»؟",
         "options": [
-          "sol tarafta",
-          "ileri",
-          "geri"
+          "👉",
+          "👈",
+          "⬆️",
+          "⬇️"
         ],
         "answerIndex": 0,
         "skill": "directions"
@@ -3088,11 +3119,12 @@
       {
         "id": "q029",
         "type": "mcq",
-        "prompt": "«مَوْقِف» ne demek?",
+        "prompt": "ما مَعْنى «مَوْقِف»؟",
         "options": [
-          "durak",
-          "adres",
-          "köprü"
+          "🚏",
+          "🏥",
+          "🏫",
+          "🕌"
         ],
         "answerIndex": 0,
         "skill": "places"
@@ -3100,11 +3132,12 @@
       {
         "id": "q030",
         "type": "mcq",
-        "prompt": "«السّوقُ القَديمُ» ne demek?",
+        "prompt": "ما مَعْنى «السّوقُ القَديمُ»؟",
         "options": [
-          "eski çarşı",
-          "yeni okul",
-          "büyük hastane"
+          "🏪",
+          "🏫",
+          "🏥",
+          "📚"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -3115,109 +3148,109 @@
         "id": "tf001",
         "statement": "الطّائِرَةُ أَسْرَعُ مِنَ السَّفينَةِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf002",
         "statement": "الدَّرّاجَةُ أَسْرَعُ مِنَ الطّائِرَةِ.",
         "answer": false,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf003",
         "statement": "قِفْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf004",
         "statement": "اُعْبُرْ عِنْدَ الضَّوْءِ الأَحْمَرِ.",
         "answer": false,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf005",
         "statement": "أَذْهَبُ إِلى المَكْتَبَةِ مَشْيًا.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf006",
-        "statement": "«عَلى اليَسارِ» sağ tarafta demektir.",
+        "statement": "الطّائِرَةُ وَسيلَةُ نَقْلٍ بَحْرِيَّةٌ.",
         "answer": false,
-        "explanation": "عَلى اليَسارِ sol tarafta demektir."
+        "explanation": ""
       },
       {
         "id": "tf007",
-        "statement": "«السَّيّارَة» araba demektir.",
+        "statement": "السَّيّارَةُ وَسيلَةُ نَقْلٍ بَرِّيَّةٌ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf008",
-        "statement": "«مِنْ أَيْنَ؟» nereye? demektir.",
+        "statement": "السَّفينَةُ تَسيرُ فِي السَّماءِ.",
         "answer": false,
-        "explanation": "مِنْ أَيْنَ؟ nereden? demektir."
+        "explanation": ""
       },
       {
         "id": "tf009",
-        "statement": "«القِطار» tren demektir.",
+        "statement": "الطّائِرَةُ تَطيرُ فِي السَّماءِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf010",
-        "statement": "«المُسْتَشْفى» okul demektir.",
+        "statement": "المُسْتَشْفى مَكانٌ لِلطَّعامِ.",
         "answer": false,
-        "explanation": "المُسْتَشْفى hastane demektir."
+        "explanation": ""
       },
       {
         "id": "tf011",
-        "statement": "«المَدْرَسَة» okul demektir.",
+        "statement": "المَدْرَسَةُ مَكانٌ لِلتَّعَلُّمِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf012",
         "statement": "الطّائِرَةُ أَسْرَعُ مِنَ السَّيّارَةِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf013",
-        "statement": "بَحْرًا deniz yoluyla demektir.",
+        "statement": "نُسافِرُ بَحْرًا بِالسَّفينَةِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf014",
-        "statement": "جَوًّا kara yoluyla demektir.",
+        "statement": "نُسافِرُ جَوًّا بِالسَّيّارَةِ.",
         "answer": false,
-        "explanation": "جَوًّا hava yoluyla demektir."
+        "explanation": ""
       },
       {
         "id": "tf015",
-        "statement": "«يَمينًا» sağa demektir.",
+        "statement": "عِنْدَ الضَّوْءِ الأَحْمَرِ نَقِفُ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf016",
-        "statement": "«قِفْ» geç demektir.",
+        "statement": "عِنْدَ الضَّوْءِ الأَخْضَرِ نَقِفُ.",
         "answer": false,
-        "explanation": "قِفْ dur demektir."
+        "explanation": ""
       },
       {
         "id": "tf017",
-        "statement": "«اِنْزِلْ» in demektir.",
+        "statement": "نَعْبُرُ الطَّريقَ مِنْ مَمَرِّ المُشاةِ.",
         "answer": true,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "tf018",
-        "statement": "«بِالسَّفينَةِ» gemiyle demektir.",
+        "statement": "الدَّرّاجَةُ أَبْطَأُ مِنَ القِطارِ.",
         "answer": true,
-        "explanation": "بِالسَّفينَةِ = gemiyle."
+        "explanation": ""
       }
     ],
     "fillBlanks": [
@@ -3231,7 +3264,7 @@
           "المَكْتَبَةِ",
           "اليَسارِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb002",
@@ -3243,7 +3276,7 @@
           "العُنْوانِ",
           "الأَصْفَرِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb003",
@@ -3255,7 +3288,7 @@
           "جَوًّا",
           "أَسْرَعُ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb004",
@@ -3267,7 +3300,7 @@
           "المِتْرو",
           "الضَّوْءِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb005",
@@ -3279,7 +3312,7 @@
           "بَحْرًا",
           "المَوْقِفِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb006",
@@ -3291,7 +3324,7 @@
           "الأَصْفَرِ",
           "القَديمِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb007",
@@ -3303,7 +3336,7 @@
           "الأَصْفَرِ",
           "اليَمينِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb008",
@@ -3315,7 +3348,7 @@
           "أَكْبَرُ",
           "أَحْدَثُ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb009",
@@ -3327,7 +3360,7 @@
           "أَصْغَرُ",
           "أَقْدَمُ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb010",
@@ -3339,7 +3372,7 @@
           "أَقِفُ",
           "أَسْتَعِدُّ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb011",
@@ -3351,7 +3384,7 @@
           "أَنْقَرَةَ",
           "الأَحْمَرِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb012",
@@ -3363,7 +3396,7 @@
           "مِنْ",
           "جَوًّا"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb013",
@@ -3375,7 +3408,7 @@
           "اليَسارِ",
           "المَكْتَبَةِ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb014",
@@ -3387,7 +3420,7 @@
           "مَشْيًا",
           "أَمامَ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb015",
@@ -3399,7 +3432,7 @@
           "مَشْيًا",
           "أَبْطَأُ"
         ],
-        "hintTr":""
+        "hintTr": ""
       },
       {
         "id": "fb016",
@@ -3411,7 +3444,7 @@
           "أَقِفُ",
           "أَعْبُرُ"
         ],
-        "hintTr":""
+        "hintTr": ""
       }
     ],
     "sentenceOrder": [
@@ -3426,7 +3459,7 @@
           "بِالطّائِرَةِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so002",
@@ -3439,7 +3472,7 @@
           "بِالسَّيّارَةِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so003",
@@ -3452,7 +3485,7 @@
           "بِالقِطارِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so004",
@@ -3464,7 +3497,7 @@
           "مَشْيًا",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so005",
@@ -3476,7 +3509,7 @@
           "السَّفينَةِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so006",
@@ -3488,7 +3521,7 @@
           "الأَحْمَرِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so007",
@@ -3501,7 +3534,7 @@
           "اليَسارِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so008",
@@ -3512,7 +3545,7 @@
           "اليَمينِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so009",
@@ -3524,7 +3557,7 @@
           "قَليلاً",
           "."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "so010",
@@ -3538,7 +3571,7 @@
           "الثّالِثَةِ",
           "."
         ],
-        "tr":""
+        "tr": ""
       }
     ],
     "oddOneOut": [
@@ -3552,7 +3585,7 @@
           "مَكْتَبَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd002",
@@ -3564,7 +3597,7 @@
           "مَسْجِد"
         ],
         "oddIndex": 2,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd003",
@@ -3576,7 +3609,7 @@
           "طائِرَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd004",
@@ -3588,7 +3621,7 @@
           "بورْصَة"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd005",
@@ -3600,7 +3633,7 @@
           "قِطار"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd006",
@@ -3612,7 +3645,7 @@
           "أَمام"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       },
       {
         "id": "odd007",
@@ -3624,7 +3657,7 @@
           "سَفينَة"
         ],
         "oddIndex": 3,
-        "explanation": "سَفينَة isimdir."
+        "explanation": "السَّفينَةُ اسْمٌ، والباقي أَفْعالُ أَمْرٍ."
       },
       {
         "id": "odd008",
@@ -3636,7 +3669,7 @@
           "شارِع"
         ],
         "oddIndex": 3,
-        "explanation":""
+        "explanation": ""
       }
     ],
     "wordSearch": {
@@ -3677,7 +3710,7 @@
           "اِنْزِلْ أَمامَ المُسْتَشْفى.",
           "السّوقُ عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "dir002",
@@ -3691,7 +3724,7 @@
           "اِتَّجِهْ إِلى اليَسارِ.",
           "المَكْتَبَةُ عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "dir003",
@@ -3704,7 +3737,7 @@
           "اُعْبُرِ الطَّريقَ.",
           "المُسْتَشْفى عَلى اليَسارِ."
         ],
-        "tr":""
+        "tr": ""
       }
     ],
     "comparatives": [
@@ -3718,7 +3751,7 @@
           "أَقْدَمُ",
           "أَصْغَرُ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "cmp002",
@@ -3730,7 +3763,7 @@
           "أَحْدَثُ",
           "أَطْوَلُ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "cmp003",
@@ -3742,7 +3775,7 @@
           "أَبْطَأُ",
           "أَكْبَرُ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "cmp004",
@@ -3754,7 +3787,7 @@
           "أَبْطَأُ",
           "أَقْدَمُ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "cmp005",
@@ -3766,7 +3799,7 @@
           "أَبْطَأُ",
           "أَحْدَثُ"
         ],
-        "tr":""
+        "tr": ""
       }
     ],
     "traffic": [
@@ -3781,7 +3814,7 @@
           "اُعْبُرْ",
           "اِرْكَبْ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "trf002",
@@ -3794,7 +3827,7 @@
           "اُعْبُرْ",
           "اِنْزِلْ"
         ],
-        "tr":""
+        "tr": ""
       },
       {
         "id": "trf003",
@@ -3807,81 +3840,81 @@
           "قِفْ",
           "اِسْتَعِدَّ"
         ],
-        "tr":""
+        "tr": ""
       }
     ],
     "memoryPairs": [
       {
         "ar": "حافِلَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "طائِرَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "سَيّارَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "دَرّاجَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "قِطار",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "سَفينَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مَدْرَسَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مُسْتَشْفى",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مَكْتَبَة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مَسْجِد",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "إِلى اليَمين",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "إِلى اليَسار",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "عَلى اليَمين",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "عَلى اليَسار",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "أَذْهَبُ",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "أُسافِرُ",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "أَرْجِعُ",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "أَرْكَبُ",
-        "tr":""
+        "tr": ""
       }
     ],
     "wheelQuestions": [
@@ -3901,10 +3934,12 @@
       {
         "id": "q002",
         "type": "mcq",
-        "prompt": "ما معنى «حافِلَة»؟",
+        "prompt": "ما مَعْنى «حافِلَة»؟",
         "options": [
-          "otobüs",
-          "tren"
+          "🚌",
+          "✈️",
+          "🚢",
+          "🚲"
         ],
         "answerIndex": 0,
         "skill": "vocab"
@@ -3912,25 +3947,27 @@
       {
         "id": "q003",
         "type": "mcq",
-        "prompt": "ما معنى «طائِرَة»؟",
+        "prompt": "ما مَعْنى «طائِرَة»؟",
         "options": [
-          "gemi",
-          "uçak",
-          "bisiklet"
+          "✈️",
+          "🚌",
+          "🚢",
+          "🚆"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "vocab"
       },
       {
         "id": "q004",
         "type": "mcq",
-        "prompt": "ما معنى «إِلى اليَمين»؟",
+        "prompt": "ما مَعْنى «إِلى اليَمينِ»؟",
         "options": [
-          "sola",
-          "ileriye",
-          "arkaya"
+          "➡️",
+          "⬅️",
+          "⬆️",
+          "⬇️"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "directions"
       },
       {
@@ -3975,36 +4012,38 @@
       {
         "id": "q008",
         "type": "mcq",
-        "prompt": "«بِماذا؟» تعني ...",
+        "prompt": "بِماذا تَذْهَبُ إِلى المَدْرَسَةِ؟",
         "options": [
-          "Nereye?",
-          "Ne ile?",
-          "Ne zaman?",
-          "Kiminle?"
+          "بِالحافِلَةِ",
+          "فِي الصَّباحِ",
+          "مَعَ أَخي",
+          "إِلى البَيْتِ"
         ],
-        "answerIndex": 1,
+        "answerIndex": 0,
         "skill": "questions"
       },
       {
         "id": "q009",
         "type": "mcq",
-        "prompt": "«إِلى أَيْنَ؟» تعni ...",
+        "prompt": "إِلى أَيْنَ تُسافِرُ؟",
         "options": [
-          "Nereden?",
-          "Nereye?",
-          "Ne ile?"
+          "إِلى إِسْطَنْبولَ",
+          "بِالقِطارِ",
+          "مَعَ أُمّي",
+          "صَباحًا"
         ],
-        "answerIndex": 2,
+        "answerIndex": 0,
         "skill": "questions"
       },
       {
         "id": "q010",
         "type": "mcq",
-        "prompt": "«مِنْ أَيْنَ؟» تعني ...",
+        "prompt": "مِنْ أَيْنَ أَنْتَ؟",
         "options": [
-          "Nereden?",
-          "Nereye?",
-          "Ne zaman?"
+          "أَنا مِنْ تُرْكِيا",
+          "إِلى المَدْرَسَةِ",
+          "بِالسَّيّارَةِ",
+          "غَدًا"
         ],
         "answerIndex": 0,
         "skill": "questions"
@@ -4090,23 +4129,27 @@
       {
         "id": "q017",
         "type": "mcq",
-        "prompt": "«مَحَطَّةُ المِتْرو» تعني ...",
+        "prompt": "ما مَعْنى «مَحَطَّةُ المِتْرو»؟",
         "options": [
-          "metro istasyonu",
-          "hastane",],
+          "🚇",
+          "🏥",
+          "🏫",
+          "🕌"
+        ],
         "answerIndex": 0,
         "skill": "vocab"
       },
       {
         "id": "q018",
         "type": "mcq",
-        "prompt": "«أَرْجِعُ» تعني ...",
+        "prompt": "مَتى أَرْجِعُ إِلى البَيْتِ؟",
         "options": [
-          "giderim",
-          "binerim",
-          "inerim"
+          "بَعْدَ المَدْرَسَةِ",
+          "قَبْلَ المَدْرَسَةِ",
+          "فِي اللَّيْلِ فَقَط",
+          "لا أَرْجِعُ أَبَدًا"
         ],
-        "answerIndex": 2,
+        "answerIndex": 0,
         "skill": "verbs"
       },
       {
@@ -4147,42 +4190,42 @@
       {
         "ar": "حافِلَة",
         "target": "حافلة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "طائِرَة",
         "target": "طائرة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "سَيّارَة",
         "target": "سيارة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "دَرّاجَة",
         "target": "دراجة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "قِطار",
         "target": "قطار",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "سَفينَة",
         "target": "سفينة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مَدْرَسَة",
         "target": "مدرسة",
-        "tr":""
+        "tr": ""
       },
       {
         "ar": "مَكْتَبَة",
         "target": "مكتبة",
-        "tr":""
+        "tr": ""
       }
     ]
   },
@@ -4293,37 +4336,37 @@
         ]
       },
       "VOCAB_TR": {
-        "حافِلَة":"",
-        "طائِرَة":"",
+        "حافِلَة": "",
+        "طائِرَة": "",
         "سَيّارَة": "",
         "دَرّاجَة": "",
         "قِطار": "",
         "سَفينَة": "",
         "مِتْرو": "",
-        "مَوْقِفُ الحافِلَةِ":"",
+        "مَوْقِفُ الحافِلَةِ": "",
         "مَدْرَسَة": "okul",
         "مُسْتَشْفى": "hastane",
-        "مَكْتَبَة":"",
+        "مَكْتَبَة": "",
         "مَسْجِد": "cami",
         "بَيْت": "ev",
         "السّوقُ القَديمُ": "eski pazar",
         "شارِع": "cadde",
         "عُنْوان": "adres",
-        "إِلى اليَمين":"",
+        "إِلى اليَمين": "",
         "إِلى اليَسار": "sola",
-        "عَلى اليَمين":"",
+        "عَلى اليَمين": "",
         "عَلى اليَسار": "solda",
-        "أَمام":"",
-        "خَلْف":"",
-        "الضَّوْءُ الأَحْمَر":"",
-        "الضَّوْءُ الأَخْضَر":"",
+        "أَمام": "",
+        "خَلْف": "",
+        "الضَّوْءُ الأَحْمَر": "",
+        "الضَّوْءُ الأَخْضَر": "",
         "أَذْهَبُ": "giderim",
         "أُسافِرُ": "seyahat ederim",
-        "أَرْجِعُ":"",
+        "أَرْجِعُ": "",
         "أَرْكَبُ": "binerim",
         "أَنْزِلُ": "inerim",
-        "أَعْبُرُ":"",
-        "أَمْشي":"",
+        "أَعْبُرُ": "",
+        "أَمْشي": "",
         "أَقِفُ": "dururum"
       }
     }
