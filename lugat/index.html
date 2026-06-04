@@ -247,6 +247,7 @@ html[data-theme="dark"] mark{background:rgba(216,172,92,.22)}
 .card .face .q-lbl{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
 .card .face .word{font-family:var(--serif); font-size:34px; font-weight:600; color:var(--ink); line-height:1.15}
 .card .face .ans{display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+.card .face .ans[hidden]{display:none}
 .card .face .ans .syn{font-size:16px; color:var(--accent); background:var(--accent-soft);
   padding:5px 13px; border-radius:9px; font-weight:500}
 .card .face .reveal-hint{font-size:13px; color:var(--muted)}
@@ -364,7 +365,7 @@ footer p{margin:6px 0}
     <button class="close" id="cardClose" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div class="top"><span class="lbl">Öğrenme Kartı</span><span class="prog" id="cardProg"></span></div>
     <div class="face">
-      <span class="q-lbl">Bu kelimenin Türkçesi?</span>
+      <span class="q-lbl">Klasik Türkçe karşılığı?</span>
       <div class="word" id="cardWord"></div>
       <div class="ans" id="cardAns" hidden></div>
       <div class="reveal-hint" id="cardHint">Karşılığını görmek için dokun</div>

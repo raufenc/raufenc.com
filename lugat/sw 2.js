@@ -1,5 +1,5 @@
-/* Lügat — Service Worker (çevrimdışı destek + güvenli güncelleme) */
-const CACHE = "lugat-v2";
+/* Lügat — Service Worker (çevrimdışı destek) */
+const CACHE = "lugat-v1";
 const ASSETS = [
   "./",
   "./index.html",
@@ -31,31 +31,18 @@ self.addEventListener("fetch", function (e) {
   var req = e.request;
   if (req.method !== "GET") return;
   var url = new URL(req.url);
-  if (url.origin !== location.origin) return; // çapraz köken (fontlar) -> tarayıcıya bırak
-
-  // HTML / gezinme: AĞ ÖNCELİKLİ — çevrimiçiyse hep taze, çevrimdışıysa önbellek
-  if (req.mode === "navigate") {
-    e.respondWith(
-      fetch(req).then(function (res) {
+  // Sadece aynı köken (çapraz köken fontları tarayıcıya bırak — CSP connect-src uyumu)
+  if (url.origin !== location.origin) return;
+  e.respondWith(
+    caches.match(req).then(function (cached) {
+      return cached || fetch(req).then(function (res) {
         var copy = res.clone();
         caches.open(CACHE).then(function (c) { c.put(req, copy); });
         return res;
       }).catch(function () {
-        return caches.match(req).then(function (r) { return r || caches.match("./index.html"); });
-      })
-    );
-    return;
-  }
-
-  // Diğer aynı-köken varlıklar: stale-while-revalidate (hızlı + arkada tazelenir)
-  e.respondWith(
-    caches.match(req).then(function (cached) {
-      var net = fetch(req).then(function (res) {
-        var copy = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(req, copy); });
-        return res;
-      }).catch(function () { return cached; });
-      return cached || net;
+        // çevrimdışı gezinme -> ana sayfayı döndür
+        if (req.mode === "navigate") return caches.match("./index.html");
+      });
     })
   );
 });
