@@ -12,6 +12,7 @@
 const ARABIC_DIGITS=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>ARABIC_DIGITS[+c]??c).join('');
 const DIR='../eba-etkilesim/vid/clips/';
+const VER='?v=2';   /* cache-busting: demucs ile müziği temizlenmiş kliplerin taze çekilmesi (eski müzikli önbelleği atla) */
 
 const params=new URLSearchParams(location.search);
 const ACT=(window.ACTIVITIES||[]).find(a=>a.id===params.get('id'))||(window.ACTIVITIES||[])[0];
@@ -51,7 +52,7 @@ function playVoice(file){            /* file yoksa hemen çözer; varsa bitince 
     let done=false;
     const fin=()=>{ if(done)return; done=true; voice.removeEventListener('ended',fin); voice.removeEventListener('error',fin); res(); };
     voice.addEventListener('ended',fin); voice.addEventListener('error',fin);
-    try{ voice.src=DIR+file; voice.currentTime=0; const p=voice.play(); if(p&&p.catch)p.catch(()=>{}); }
+    try{ voice.src=DIR+file+VER; voice.currentTime=0; const p=voice.play(); if(p&&p.catch)p.catch(()=>{}); }
     catch(e){ fin(); return; }
     setTimeout(fin,9000);
   });
@@ -68,7 +69,7 @@ function playClip(file){            /* src değiştir → canplay'de baştan son
     video.addEventListener('ended',finish);
     video.addEventListener('error',finish);
     video.addEventListener('canplay',tryPlay);
-    video.src=DIR+file;
+    video.src=DIR+file+VER;
     if(video.readyState>=3) tryPlay();
     setTimeout(finish,20000);       /* güvenlik backstop (klipler ≤8sn) */
   });
