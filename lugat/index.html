@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lügat — Uydurukça Türkçe Sözlük</title>
+<meta name="description" content="Lügat: Uydurukça (öztürkçe) kelimelerin asırlardır kullanılan klasik Türkçe karşılıkları. 1.350 kelimelik aranabilir, modern sözlük.">
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://raufenc.com/lugat/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="raufenc.com">
+
+<!-- İkonlar / PWA -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Lügat">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="raufenc.com">
+<meta property="og:title" content="Lügat — Uydurukça Türkçe Sözlük">
+<meta property="og:description" content="Uydurukça kelimelerin klasik Türkçe karşılıkları. 1.350 kelimelik aranabilir, modern sözlük.">
+<meta property="og:url" content="https://raufenc.com/lugat/">
+<meta property="og:image" content="https://raufenc.com/lugat/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lügat — Uydurukça Türkçe Sözlük">
+<meta name="twitter:description" content="Uydurukça kelimelerin klasik Türkçe karşılıkları. 1.350 kelimelik aranabilir sözlük.">
+<meta name="twitter:image" content="https://raufenc.com/lugat/og.png">
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Lügat — Uydurukça Türkçe Sözlük","url":"https://raufenc.com/lugat/","applicationCategory":"EducationApplication","operatingSystem":"Web","inLanguage":"tr","description":"Uydurukça kelimelerin klasik Türkçe karşılıkları. 1.350 kelimelik aranabilir sözlük.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"}}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+
+<style>
+/* ===================== Tema değişkenleri ===================== */
+:root{
+  --bg:#f6f1e7; --bg-grad:#efe7d6;
+  --surface:#fffdf8; --surface-2:#f3ecdd;
+  --ink:#2a2521; --ink-soft:#5d544a; --muted:#8a7f70;
+  --accent:#9c2b21; --accent-ink:#fff; --accent-soft:#f3e3df;
+  --gold:#a8762a; --gold-soft:#f0e6cf;
+  --line:#e6dcc8; --line-strong:#d8cbb1;
+  --chip:#f4ecdd; --chip-ink:#6a604f;
+  --shadow:0 1px 2px rgba(60,45,20,.05), 0 10px 30px -18px rgba(60,45,20,.30);
+  --shadow-lg:0 30px 60px -30px rgba(60,45,20,.45);
+  --radius:16px; --radius-sm:11px;
+  --serif:"Lora",Georgia,"Times New Roman",serif;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+html[data-theme="dark"]{
+  --bg:#16130f; --bg-grad:#1b1712;
+  --surface:#211d17; --surface-2:#272118;
+  --ink:#efe7d8; --ink-soft:#c3b8a4; --muted:#938876;
+  --accent:#e58270; --accent-ink:#2a1410; --accent-soft:#3a241f;
+  --gold:#d8ac5c; --gold-soft:#352c1c;
+  --line:#332c22; --line-strong:#42392c;
+  --chip:#2c261d; --chip-ink:#bdb19c;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 34px -18px rgba(0,0,0,.7);
+  --shadow-lg:0 36px 70px -30px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; font-family:var(--sans); color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 50% -10%, var(--bg-grad), transparent 70%),
+    var(--bg);
+  background-attachment:fixed;
+  line-height:1.5; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  min-height:100vh;
+}
+::selection{background:var(--accent-soft); color:var(--accent)}
+a{color:inherit}
+button{font-family:inherit; cursor:pointer; color:inherit}
+
+.wrap{max-width:880px; margin:0 auto; padding:0 18px}
+
+/* ===================== Üst bar ===================== */
+.topbar{display:flex; align-items:center; justify-content:space-between; padding:18px 0 6px}
+.brand{display:flex; align-items:center; gap:9px; font-weight:600; letter-spacing:.14em;
+  font-size:11px; text-transform:uppercase; color:var(--muted)}
+.brand .dot{width:7px; height:7px; border-radius:50%; background:var(--accent);
+  box-shadow:0 0 0 3px var(--accent-soft)}
+.iconbtn{display:grid; place-items:center; width:40px; height:40px; border-radius:11px;
+  border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+  transition:.18s; box-shadow:var(--shadow)}
+.iconbtn:hover{color:var(--accent); border-color:var(--line-strong); transform:translateY(-1px)}
+.iconbtn svg{width:19px; height:19px}
+.iconbtn .moon{display:none} html[data-theme="dark"] .iconbtn .sun{display:none}
+html[data-theme="dark"] .iconbtn .moon{display:block}
+
+/* ===================== Başlık ===================== */
+header.hero{text-align:center; padding:22px 0 8px}
+.kicker{font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold);
+  font-weight:600; margin-bottom:12px}
+h1{font-family:var(--serif); font-weight:600; margin:0; letter-spacing:-.01em;
+  font-size:clamp(30px,7vw,50px); line-height:1.06}
+h1 .amp{color:var(--accent); font-style:italic; font-weight:500; padding:0 .12em}
+.lead{max-width:540px; margin:16px auto 0; color:var(--ink-soft); font-size:15.5px}
+.count-pill{display:inline-flex; align-items:center; gap:7px; margin-top:18px;
+  padding:7px 15px; border-radius:999px; background:var(--surface); border:1px solid var(--line);
+  font-size:13px; color:var(--ink-soft); box-shadow:var(--shadow)}
+.count-pill b{color:var(--accent); font-variant-numeric:tabular-nums}
+
+/* ===================== Epigraf / açıklama ===================== */
+.epigraph{margin:24px 0 6px; border:1px solid var(--line); border-radius:var(--radius);
+  background:linear-gradient(var(--surface),var(--surface)); box-shadow:var(--shadow); overflow:hidden}
+.epigraph summary{list-style:none; cursor:pointer; padding:15px 18px; display:flex;
+  align-items:center; gap:11px; font-weight:600; font-size:14px; color:var(--ink)}
+.epigraph summary::-webkit-details-marker{display:none}
+.epigraph summary .orn{color:var(--gold); font-size:17px}
+.epigraph summary .chev{margin-left:auto; transition:.2s; color:var(--muted)}
+.epigraph[open] summary .chev{transform:rotate(180deg)}
+.epigraph .body{padding:2px 20px 20px; color:var(--ink-soft); font-size:14.5px;
+  border-top:1px solid var(--line)}
+.epigraph .body p{margin:14px 0 0}
+.epigraph .body .serif{font-family:var(--serif); font-style:italic; font-size:16px;
+  color:var(--ink); line-height:1.6}
+.epigraph .src{margin-top:16px; font-size:12.5px; color:var(--muted)}
+.epigraph .src a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft)}
+
+/* ===================== Arama (yapışkan) ===================== */
+.searchwrap{position:sticky; top:0; z-index:30; padding:14px 0 10px; margin-top:8px;
+  background:linear-gradient(var(--bg) 72%, transparent);
+}
+.searchbox{position:relative; display:flex; align-items:center; background:var(--surface);
+  border:1.5px solid var(--line-strong); border-radius:14px; box-shadow:var(--shadow);
+  transition:.18s}
+.searchbox:focus-within{border-color:var(--accent); box-shadow:0 0 0 4px var(--accent-soft), var(--shadow)}
+.searchbox .mag{position:absolute; left:16px; width:20px; height:20px; color:var(--muted); pointer-events:none}
+#q{flex:1; border:0; background:transparent; outline:0; font-size:17px; color:var(--ink);
+  padding:15px 16px 15px 46px; font-family:var(--sans)}
+#q::placeholder{color:var(--muted)}
+.kbd{position:absolute; right:14px; display:flex; gap:5px; align-items:center}
+.kbd kbd{font-family:var(--sans); font-size:11px; color:var(--muted); background:var(--surface-2);
+  border:1px solid var(--line); border-bottom-width:2px; border-radius:6px; padding:2px 6px; min-width:18px; text-align:center}
+.clearbtn{position:absolute; right:12px; width:30px; height:30px; border:0; border-radius:8px;
+  background:var(--surface-2); color:var(--ink-soft); display:none; place-items:center}
+.clearbtn:hover{background:var(--accent-soft); color:var(--accent)}
+.clearbtn svg{width:15px;height:15px}
+body.has-query .kbd{display:none} body.has-query .clearbtn{display:grid}
+
+/* ===================== Kontroller ===================== */
+.controls{display:flex; flex-direction:column; gap:11px; margin:4px 0 6px}
+.row{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.meta{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; margin-right:auto}
+.meta b{color:var(--ink-soft)}
+
+/* segmented scope */
+.seg{display:inline-flex; background:var(--surface-2); border:1px solid var(--line);
+  border-radius:10px; padding:3px}
+.seg button{border:0; background:transparent; padding:6px 13px; border-radius:7px;
+  font-size:13px; font-weight:500; color:var(--ink-soft); transition:.15s}
+.seg button[aria-pressed="true"]{background:var(--surface); color:var(--accent);
+  box-shadow:var(--shadow); font-weight:600}
+
+/* aksiyon çipleri */
+.chip-btn{display:inline-flex; align-items:center; gap:7px; padding:8px 13px; font-size:13px;
+  font-weight:500; border:1px solid var(--line); background:var(--surface); border-radius:10px;
+  color:var(--ink-soft); transition:.15s; box-shadow:var(--shadow)}
+.chip-btn:hover{border-color:var(--line-strong); color:var(--accent); transform:translateY(-1px)}
+.chip-btn svg{width:16px; height:16px}
+.chip-btn[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.chip-btn.star[aria-pressed="true"] svg{fill:currentColor}
+
+/* harf rayı */
+.letters{display:flex; gap:5px; overflow-x:auto; padding:4px 2px 8px; margin:0 -2px;
+  scrollbar-width:thin; -webkit-overflow-scrolling:touch}
+.letters::-webkit-scrollbar{height:6px}
+.letters::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:3px}
+.letters button{flex:0 0 auto; min-width:34px; height:34px; padding:0 9px; border-radius:9px;
+  border:1px solid transparent; background:transparent; color:var(--ink-soft); font-size:13.5px;
+  font-weight:600; transition:.13s; text-transform:uppercase; position:relative}
+.letters button:hover:not(:disabled){background:var(--surface); border-color:var(--line)}
+.letters button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
+.letters button:disabled{opacity:.3; cursor:default}
+.letters button sup{font-size:9px; font-weight:600; opacity:.7; margin-left:1px; font-variant-numeric:tabular-nums}
+
+/* ===================== Sonuç listesi ===================== */
+#results{margin:6px 0 20px; min-height:40vh}
+.group-head{display:flex; align-items:center; gap:12px; margin:22px 4px 10px}
+.group-head .ltr{font-family:var(--serif); font-size:22px; font-weight:600; color:var(--accent);
+  width:34px; height:34px; display:grid; place-items:center; background:var(--accent-soft);
+  border-radius:10px; text-transform:uppercase}
+.group-head .ln{flex:1; height:1px; background:var(--line)}
+.group-head .c{font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+
+.entry{display:flex; align-items:flex-start; gap:13px; padding:15px 16px; background:var(--surface);
+  border:1px solid var(--line); border-radius:var(--radius-sm); margin-bottom:9px;
+  transition:.16s; position:relative}
+.entry:hover{border-color:var(--line-strong); box-shadow:var(--shadow); transform:translateY(-1px)}
+.entry .star{flex:0 0 auto; width:32px; height:32px; border:0; background:transparent; border-radius:8px;
+  display:grid; place-items:center; color:var(--muted); margin-top:1px; transition:.15s}
+.entry .star:hover{background:var(--gold-soft); color:var(--gold)}
+.entry .star svg{width:18px; height:18px; transition:.15s}
+.entry .star.on{color:var(--gold)} .entry .star.on svg{fill:currentColor}
+.entry .main{flex:1; min-width:0}
+.entry .u{font-family:var(--serif); font-size:19px; font-weight:600; color:var(--ink);
+  line-height:1.3; letter-spacing:-.005em}
+.entry .arrow{display:inline-block; margin:0 2px; color:var(--accent); font-weight:600}
+.entry .t{margin-top:5px; display:flex; flex-wrap:wrap; gap:6px}
+.entry .t .syn{font-size:14px; color:var(--ink-soft); background:var(--chip); border:1px solid var(--line);
+  padding:3px 10px; border-radius:8px; line-height:1.35}
+.entry .copy{flex:0 0 auto; width:32px; height:32px; border:1px solid transparent; background:transparent;
+  border-radius:8px; display:grid; place-items:center; color:var(--muted); opacity:0; transition:.15s; margin-top:1px}
+.entry:hover .copy{opacity:1}
+.entry .copy:hover{background:var(--surface-2); color:var(--accent); border-color:var(--line)}
+.entry .copy svg{width:16px; height:16px}
+@media(hover:none){.entry .copy{opacity:1}}
+mark{background:linear-gradient(transparent 55%, var(--gold-soft) 55%); color:inherit; padding:0 1px; border-radius:2px; font-weight:700}
+html[data-theme="dark"] mark{background:rgba(216,172,92,.22)}
+
+/* boş durum */
+.empty{text-align:center; padding:60px 20px; color:var(--muted)}
+.empty .big{font-family:var(--serif); font-size:22px; color:var(--ink-soft); margin-bottom:8px}
+.empty .sm{font-size:14.5px}
+.empty button{margin-top:16px}
+
+/* ===================== Flashcard ===================== */
+.overlay{position:fixed; inset:0; z-index:60; background:rgba(20,15,8,.5); backdrop-filter:blur(6px);
+  display:none; align-items:center; justify-content:center; padding:18px}
+.overlay.show{display:flex; animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.card{width:100%; max-width:460px; background:var(--surface); border:1px solid var(--line);
+  border-radius:22px; box-shadow:var(--shadow-lg); padding:24px; position:relative; animation:pop .25s}
+@keyframes pop{from{transform:scale(.96) translateY(8px); opacity:0}}
+.card .top{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; padding-right:44px}
+.card .top .lbl{font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:600}
+.card .top .prog{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+.card .face{text-align:center; padding:26px 8px; min-height:150px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:14px}
+.card .face .q-lbl{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.card .face .word{font-family:var(--serif); font-size:34px; font-weight:600; color:var(--ink); line-height:1.15}
+.card .face .ans{display:flex; flex-wrap:wrap; gap:8px; justify-content:center}
+.card .face .ans .syn{font-size:16px; color:var(--accent); background:var(--accent-soft);
+  padding:5px 13px; border-radius:9px; font-weight:500}
+.card .face .reveal-hint{font-size:13px; color:var(--muted)}
+.card .acts{display:flex; gap:9px; margin-top:18px}
+.card .acts button{flex:1; padding:13px; border-radius:12px; font-size:14.5px; font-weight:600;
+  border:1px solid var(--line); background:var(--surface-2); color:var(--ink); transition:.15s}
+.card .acts button:hover{transform:translateY(-1px)}
+.card .acts .primary{background:var(--accent); color:var(--accent-ink); border-color:var(--accent); flex:1.6}
+.card .close{position:absolute; top:16px; right:16px; width:34px; height:34px; border:0; background:var(--surface-2);
+  border-radius:9px; display:grid; place-items:center; color:var(--ink-soft)}
+.card .close:hover{background:var(--accent-soft); color:var(--accent)}
+.card .close svg{width:16px;height:16px}
+.card .scope-note{text-align:center; font-size:12px; color:var(--muted); margin-top:13px}
+
+/* ===================== Footer ===================== */
+footer{border-top:1px solid var(--line); margin-top:30px; padding:26px 0 40px; text-align:center;
+  color:var(--muted); font-size:13px}
+footer .orn{color:var(--gold); font-size:18px; margin-bottom:12px}
+footer a{color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-soft)}
+footer p{margin:6px 0}
+
+/* toast */
+.toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--bg); padding:11px 20px; border-radius:11px; font-size:14px;
+  font-weight:500; box-shadow:var(--shadow-lg); opacity:0; pointer-events:none; transition:.25s; z-index:80}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+@media(max-width:560px){
+  .wrap{padding:0 14px}
+  #q{font-size:16px; padding:14px 14px 14px 44px}
+  .entry .u{font-size:18px}
+  .row .seg{order:2}
+  .meta{width:100%; margin-bottom:2px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span> Türk Dili · Lügat</div>
+    <button class="iconbtn" id="theme" title="Aydınlık / Karanlık" aria-label="Temayı değiştir">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+
+  <header class="hero">
+    <div class="kicker">Uydurukça — Türkçe</div>
+    <h1>Lügat</h1>
+    <p class="lead">Dilimize sonradan girmiş <em>uydurukça</em> kelimelerin, asırlardır kullanılan klasik Türkçe karşılıkları.</p>
+    <div class="count-pill">📖 <b id="totalCount">1.350</b> kelime &nbsp;·&nbsp; tek tıkla ara, kopyala, öğren</div>
+  </header>
+
+  <details class="epigraph">
+    <summary><span class="orn">❧</span> Bu sözlük nedir? <span class="chev">▾</span></summary>
+    <div class="body">
+      <p class="serif">"Bin yıllık Türk-İslâm târihinde; Karahanlılar, Selçuklular ve Osmanlılar zamanında aşağıdaki sözlükte bulunan uydurukça kelimeler yoktu."</p>
+      <p>Bugün de Türkiye hâriç, Türk Dünyasının hiçbir yerinde bu kelimelerin birçoğu kullanılmamaktadır. Bu liste, sonradan türetilmiş kelimeleri klasik karşılıklarıyla bir arada gösterir; dil zevki ve kelime hazînesini tâzelemek isteyenler için bir başvuru kaynağıdır.</p>
+      <p class="src">Veri kaynağı: <a href="https://www.turkalemiyiz.com/Home/Getsozluk" target="_blank" rel="noopener">turkalemiyiz.com</a> · Bu arayüz, sözlüğü aranabilir ve modern bir biçimde sunmak için yeniden tasarlanmıştır.</p>
+    </div>
+  </details>
+
+  <div class="searchwrap">
+    <div class="searchbox">
+      <svg class="mag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+      <input id="q" type="search" autocomplete="off" autocapitalize="off" spellcheck="false"
+             placeholder="Kelime ara — uydurukça ya da Türkçe…" aria-label="Kelime ara">
+      <span class="kbd"><kbd>/</kbd></span>
+      <button class="clearbtn" id="clear" aria-label="Temizle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="row">
+      <span class="meta" id="meta"></span>
+      <div class="seg" role="group" aria-label="Arama kapsamı">
+        <button data-scope="both" aria-pressed="true">Tümü</button>
+        <button data-scope="u" aria-pressed="false">Uydurukça</button>
+        <button data-scope="t" aria-pressed="false">Türkçe</button>
+      </div>
+    </div>
+    <div class="row">
+      <button class="chip-btn star" id="favBtn" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>
+        Sık kullanılanlar
+      </button>
+      <button class="chip-btn" id="randomBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/><circle cx="16" cy="16" r="1.3" fill="currentColor"/><circle cx="16" cy="8" r="1.3" fill="currentColor"/><circle cx="8" cy="16" r="1.3" fill="currentColor"/></svg>
+        Rastgele
+      </button>
+      <button class="chip-btn" id="learnBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg>
+        Öğren
+      </button>
+    </div>
+    <div class="letters" id="letters" role="group" aria-label="Harfe göre"></div>
+  </div>
+
+  <div id="results"></div>
+
+  <footer>
+    <div class="orn">❦</div>
+    <p><b id="footCount">1.350</b> kelimelik sözlük · Türkçe alfabe sırasında</p>
+    <p>Veri: <a href="https://www.turkalemiyiz.com/Home/Getsozluk" target="_blank" rel="noopener">turkalemiyiz.com</a> · Arayüz yeniden tasarlandı</p>
+  </footer>
+
+</div>
+
+<!-- Flashcard -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Öğrenme kartı">
+  <div class="card">
+    <button class="close" id="cardClose" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="top"><span class="lbl">Öğrenme Kartı</span><span class="prog" id="cardProg"></span></div>
+    <div class="face">
+      <span class="q-lbl">Bu kelimenin Türkçesi?</span>
+      <div class="word" id="cardWord"></div>
+      <div class="ans" id="cardAns" hidden></div>
+      <div class="reveal-hint" id="cardHint">Karşılığını görmek için dokun</div>
+    </div>
+    <div class="acts">
+      <button id="cardReveal" class="primary">Karşılığı göster</button>
+      <button id="cardNext">Sonraki ↻</button>
+    </div>
+    <div class="scope-note" id="cardScope"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="./lugat-data.js"></script>
+<script>
+(function(){
+  "use strict";
+  var DATA = (window.SOZLUK||[]).map(function(d){
+    // çoklu karşılıkları diziye ayır
+    return {u:d.u, t:d.t, syn:d.t.split(/[,/]/).map(function(s){return s.trim();}).filter(Boolean)};
+  });
+  var ALPHA = "abcçdefgğhıijklmnoöprsştuüvyz".split("");
+
+  /* ---- Türkçe-duyarlı normalizasyon (1 karakter -> 1 karakter, indeks korunur) ---- */
+  var FOLD = {"ı":"i","İ":"i","I":"i","i":"i","ç":"c","Ç":"c","ğ":"g","Ğ":"g",
+    "ö":"o","Ö":"o","ş":"s","Ş":"s","ü":"u","Ü":"u","â":"a","Â":"a","î":"i","Î":"i",
+    "û":"u","Û":"u","ê":"e","Ê":"e","ô":"o","Ô":"o","ä":"a","ï":"i"};
+  function fold(str){
+    var out="";
+    for(var i=0;i<str.length;i++){
+      var ch=str[i];
+      if(FOLD[ch]!==undefined){out+=FOLD[ch];}
+      else{var lc=ch.toLowerCase(); out+=(lc.length===1?lc:ch);}
+    }
+    return out;
+  }
+  /* Türkçe-duyarlı büyük harf (i→İ, ı→I) */
+  function trUpper(s){return s.replace(/i/g,"İ").replace(/ı/g,"I").toUpperCase();}
+
+  /* ---- Durum ---- */
+  var state={q:"", scope:"both", letter:"", favOnly:false};
+  var favorites=new Set();
+  try{favorites=new Set(JSON.parse(localStorage.getItem("lugat_fav")||"[]"));}catch(e){}
+  function saveFav(){try{localStorage.setItem("lugat_fav",JSON.stringify([].concat(Array.from(favorites))));}catch(e){}}
+
+  /* ---- Eleman referansları ---- */
+  var $=function(s){return document.querySelector(s);};
+  var qEl=$("#q"), resEl=$("#results"), metaEl=$("#meta"), lettersEl=$("#letters"),
+      favBtn=$("#favBtn"), toastEl=$("#toast");
+  var trfmt=function(n){return n.toLocaleString("tr-TR");};
+
+  /* ---- Harf rayını kur ---- */
+  var letterCounts={};
+  DATA.forEach(function(d){var f=fold(d.u[0]); var c=d.u[0].toLowerCase();
+    letterCounts[c]=(letterCounts[c]||0)+1;});
+  (function buildLetters(){
+    var html='<button data-l="" aria-pressed="true">Tümü</button>';
+    ALPHA.forEach(function(L){
+      var n=letterCounts[L]||0;
+      html+='<button data-l="'+L+'" '+(n?'':'disabled')+' aria-pressed="false">'+trUpper(L)+
+            (n?'<sup>'+n+'</sup>':'')+'</button>';
+    });
+    lettersEl.innerHTML=html;
+  })();
+
+  /* ---- Vurgulama (folding indeks korur) ---- */
+  function highlight(text, needleFolded){
+    if(!needleFolded) return escapeHtml(text);
+    var hay=fold(text), idx=hay.indexOf(needleFolded);
+    if(idx<0) return escapeHtml(text);
+    return escapeHtml(text.slice(0,idx))+"<mark>"+escapeHtml(text.slice(idx,idx+needleFolded.length))+
+           "</mark>"+escapeHtml(text.slice(idx+needleFolded.length));
+  }
+  function escapeHtml(s){return s.replace(/[&<>"]/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c];});}
+
+  /* ---- Filtre + sıralama ---- */
+  function compute(){
+    var nq=fold(state.q.trim());
+    var list=DATA;
+    if(state.favOnly) list=list.filter(function(d){return favorites.has(d.u);});
+    if(state.letter)  list=list.filter(function(d){return d.u[0].toLowerCase()===state.letter;});
+
+    if(!nq){ return {items:list, ranked:false}; }
+
+    var scored=[];
+    for(var i=0;i<list.length;i++){
+      var d=list[i], fu=fold(d.u), ft=fold(d.t), score=-1;
+      var inU=(state.scope!=="t"), inT=(state.scope!=="u");
+      if(inU){
+        if(fu===nq) score=Math.max(score,100);
+        else if(fu.indexOf(nq)===0) score=Math.max(score,80);
+        else if(fu.indexOf(nq)>0) score=Math.max(score,55);
+      }
+      if(inT){
+        if(ft===nq) score=Math.max(score,70);
+        else if(ft.split(/[ ,]/).some(function(w){return w===nq;})) score=Math.max(score,60);
+        else if(ft.indexOf(nq)===0) score=Math.max(score,45);
+        else if(ft.indexOf(nq)>0) score=Math.max(score,30);
+      }
+      if(score>=0) scored.push({d:d,s:score,len:d.u.length});
+    }
+    scored.sort(function(a,b){return b.s-a.s || a.len-b.len || trcmp(a.d.u,b.d.u);});
+    return {items:scored.map(function(x){return x.d;}), ranked:true, needle:nq};
+  }
+  function trcmp(a,b){return a.localeCompare(b,"tr");}
+
+  /* ---- Render ---- */
+  function render(){
+    var r=compute(), items=r.items, nq=r.needle||"";
+    // meta
+    var total=DATA.length;
+    if(state.q.trim()||state.letter||state.favOnly){
+      metaEl.innerHTML="<b>"+trfmt(items.length)+"</b> sonuç"+
+        (state.favOnly?" · sık kullanılanlar":"")+
+        (state.letter?" · "+trUpper(state.letter)+" harfi":"");
+    } else {
+      metaEl.innerHTML="<b>"+trfmt(total)+"</b> kelime";
+    }
+
+    if(!items.length){
+      resEl.innerHTML='<div class="empty"><div class="big">Sonuç bulunamadı</div>'+
+        '<div class="sm">'+(state.favOnly?"Henüz sık kullanılan eklemediniz. Kelimelerin yanındaki ☆ ile ekleyebilirsiniz."
+          :"Farklı bir kelime veya kapsam deneyin.")+'</div>'+
+        (state.q||state.letter||state.favOnly?'<button class="chip-btn" id="resetBtn">Tümünü göster</button>':'')+'</div>';
+      var rb=$("#resetBtn"); if(rb) rb.onclick=resetAll;
+      return;
+    }
+
+    var html="", grouped=!r.ranked && !state.favOnly;
+    var lastL="";
+    for(var i=0;i<items.length;i++){
+      var d=items[i];
+      if(grouped){
+        var L=d.u[0].toLowerCase();
+        if(L!==lastL){
+          lastL=L;
+          html+='<div class="group-head"><span class="ltr">'+escapeHtml(trUpper(L))+
+                '</span><span class="ln"></span><span class="c">'+trfmt(letterCounts[L]||0)+'</span></div>';
+        }
+      }
+      var on=favorites.has(d.u);
+      var syns=d.syn.map(function(s){
+        return '<span class="syn">'+(nq&&state.scope!=="u"?highlight(s,nq):escapeHtml(s))+'</span>';
+      }).join("");
+      html+='<div class="entry" data-u="'+escapeHtml(d.u)+'">'+
+        '<button class="star'+(on?' on':'')+'" data-act="star" aria-label="Sık kullanılan" title="Sık kullanılanlara ekle">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9z"/></svg>'+
+        '</button>'+
+        '<div class="main"><span class="u">'+(nq&&state.scope!=="t"?highlight(d.u,nq):escapeHtml(d.u))+
+          '</span><span class="arrow"> → </span><span class="t">'+syns+'</span></div>'+
+        '<button class="copy" data-act="copy" aria-label="Kopyala" title="Kopyala">'+
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>'+
+        '</button></div>';
+    }
+    resEl.innerHTML=html;
+  }
+
+  /* ---- Olaylar: arama ---- */
+  var deb;
+  qEl.addEventListener("input",function(){
+    document.body.classList.toggle("has-query", !!qEl.value);
+    clearTimeout(deb);
+    deb=setTimeout(function(){
+      state.q=qEl.value;
+      if(state.q.trim()){ state.letter=""; syncLetters(); }
+      render(); syncUrl();
+    },110);
+  });
+  $("#clear").onclick=function(){qEl.value="";state.q="";document.body.classList.remove("has-query");qEl.focus();render();syncUrl();};
+
+  /* kapsam */
+  document.querySelectorAll(".seg button").forEach(function(b){
+    b.onclick=function(){
+      state.scope=b.dataset.scope;
+      document.querySelectorAll(".seg button").forEach(function(x){x.setAttribute("aria-pressed", x===b);});
+      render();
+    };
+  });
+
+  /* harfler */
+  lettersEl.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b||b.disabled) return;
+    state.letter=b.dataset.l;
+    if(state.letter){ state.q=""; qEl.value=""; document.body.classList.remove("has-query"); }
+    syncLetters(); render(); syncUrl();
+    window.scrollTo({top: $(".searchwrap").offsetTop-8, behavior:"smooth"});
+  });
+  function syncLetters(){
+    document.querySelectorAll("#letters button").forEach(function(x){
+      x.setAttribute("aria-pressed", (x.dataset.l||"")===state.letter);
+    });
+  }
+
+  /* sık kullanılanlar filtresi */
+  favBtn.onclick=function(){
+    state.favOnly=!state.favOnly;
+    favBtn.setAttribute("aria-pressed", state.favOnly);
+    render();
+  };
+
+  /* rastgele */
+  $("#randomBtn").onclick=function(){
+    var pool = state.favOnly ? DATA.filter(function(d){return favorites.has(d.u);}) : DATA;
+    if(!pool.length){toast("Önce sık kullanılan ekleyin");return;}
+    var d=pool[Math.floor(Math.random()*pool.length)];
+    state.q=d.u; qEl.value=d.u; document.body.classList.add("has-query");
+    state.letter=""; syncLetters(); render(); syncUrl();
+    qEl.blur();
+  };
+
+  /* sonuç tıklamaları (delegasyon) */
+  resEl.addEventListener("click",function(e){
+    var btn=e.target.closest("[data-act]"); if(!btn) return;
+    var entry=btn.closest(".entry"), u=entry.getAttribute("data-u");
+    var d=DATA.find(function(x){return x.u===u;}); if(!d) return;
+    if(btn.dataset.act==="star"){
+      if(favorites.has(u)){favorites.delete(u); btn.classList.remove("on");}
+      else{favorites.add(u); btn.classList.add("on"); toast("Sık kullanılanlara eklendi");}
+      saveFav();
+      if(state.favOnly && !favorites.has(u)) render();
+    } else if(btn.dataset.act==="copy"){
+      var txt=d.u+" → "+d.t;
+      copy(txt);
+    }
+  });
+
+  function copy(txt){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){toast("Kopyalandı");},function(){fallbackCopy(txt);});
+    } else fallbackCopy(txt);
+  }
+  function fallbackCopy(txt){
+    var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand("copy"); toast("Kopyalandı");}catch(e){toast("Kopyalanamadı");}
+    document.body.removeChild(ta);
+  }
+
+  var toastT;
+  function toast(msg){toastEl.textContent=msg; toastEl.classList.add("show");
+    clearTimeout(toastT); toastT=setTimeout(function(){toastEl.classList.remove("show");},1600);}
+
+  function resetAll(){state.q="";state.letter="";state.favOnly=false;qEl.value="";
+    document.body.classList.remove("has-query");
+    favBtn.setAttribute("aria-pressed",false); syncLetters(); render(); syncUrl();}
+
+  /* ---- Tema ---- */
+  var themeBtn=$("#theme");
+  function applyTheme(t){document.documentElement.setAttribute("data-theme",t);
+    try{localStorage.setItem("lugat_theme",t);}catch(e){}}
+  themeBtn.onclick=function(){
+    var cur=document.documentElement.getAttribute("data-theme")||"light";
+    applyTheme(cur==="dark"?"light":"dark");
+  };
+
+  /* ---- URL senkronu (paylaşılabilir arama) ---- */
+  function syncUrl(){
+    var p=new URLSearchParams();
+    if(state.q.trim()) p.set("q",state.q.trim());
+    else if(state.letter) p.set("harf",state.letter);
+    var qs=p.toString();
+    history.replaceState(null,"", qs?("?"+qs):location.pathname);
+  }
+  function readUrl(){
+    var p=new URLSearchParams(location.search);
+    if(p.get("q")){state.q=p.get("q"); qEl.value=state.q; document.body.classList.add("has-query");}
+    else if(p.get("harf") && letterCounts[p.get("harf")]){state.letter=p.get("harf"); syncLetters();}
+  }
+
+  /* ---- Klavye kısayolları ---- */
+  document.addEventListener("keydown",function(e){
+    if(e.key==="/"&&document.activeElement!==qEl&&!overlay.classList.contains("show")){
+      e.preventDefault(); qEl.focus(); qEl.select();
+    } else if(e.key==="Escape"){
+      if(overlay.classList.contains("show")) closeCard();
+      else if(document.activeElement===qEl||state.q){qEl.value="";state.q="";document.body.classList.remove("has-query");render();syncUrl();}
+    }
+  });
+
+  /* ===================== Flashcard ===================== */
+  var overlay=$("#overlay"), cardWord=$("#cardWord"), cardAns=$("#cardAns"),
+      cardHint=$("#cardHint"), cardProg=$("#cardProg"), cardScope=$("#cardScope"),
+      cardReveal=$("#cardReveal"), cardNext=$("#cardNext");
+  var deck=[], deckPos=0, revealed=false;
+
+  function openCard(){
+    var pool = state.favOnly ? DATA.filter(function(d){return favorites.has(d.u);})
+             : state.letter ? DATA.filter(function(d){return d.u[0].toLowerCase()===state.letter;})
+             : DATA.slice();
+    if(pool.length<1){toast("Kart için yeterli kelime yok");return;}
+    deck=shuffle(pool.slice()); deckPos=0;
+    cardScope.textContent = state.favOnly?"Sık kullanılanlarınızdan • "+deck.length+" kelime"
+                          : state.letter?(trUpper(state.letter)+" harfi • "+deck.length+" kelime")
+                          : "Tüm sözlük • "+deck.length+" kelime";
+    overlay.classList.add("show");
+    showCard();
+  }
+  function showCard(){
+    var d=deck[deckPos]; revealed=false;
+    cardWord.textContent=d.u;
+    cardAns.innerHTML=d.syn.map(function(s){return '<span class="syn">'+escapeHtml(s)+'</span>';}).join("");
+    cardAns.hidden=true; cardHint.style.display=""; cardReveal.style.display="";
+    cardProg.textContent=(deckPos+1)+" / "+deck.length;
+  }
+  function revealCard(){revealed=true; cardAns.hidden=false; cardHint.style.display="none"; cardReveal.style.display="none";}
+  function nextCard(){deckPos=(deckPos+1)%deck.length; if(deckPos===0) deck=shuffle(deck); showCard();}
+  function closeCard(){overlay.classList.remove("show");}
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+  $("#learnBtn").onclick=openCard;
+  cardReveal.onclick=revealCard;
+  cardNext.onclick=nextCard;
+  $("#cardClose").onclick=closeCard;
+  $(".card .face").onclick=function(){if(!revealed) revealCard();};
+  overlay.onclick=function(e){if(e.target===overlay) closeCard();};
+
+  /* ---- Başlat ---- */
+  (function init(){
+    var savedTheme;
+    try{savedTheme=localStorage.getItem("lugat_theme");}catch(e){}
+    if(savedTheme) document.documentElement.setAttribute("data-theme",savedTheme);
+    else if(window.matchMedia&&matchMedia("(prefers-color-scheme:dark)").matches)
+      document.documentElement.setAttribute("data-theme","dark");
+
+    $("#totalCount").textContent=trfmt(DATA.length);
+    $("#footCount").textContent=trfmt(DATA.length);
+    readUrl();
+    render();
+  })();
+
+  /* Service Worker — çevrimdışı destek (yalnızca https/localhost'ta kayıt olur) */
+  if("serviceWorker" in navigator){
+    window.addEventListener("load",function(){
+      navigator.serviceWorker.register("./sw.js").catch(function(){});
+    });
+  }
+})();
+</script>
+</body>
+</html>
