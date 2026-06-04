@@ -25,7 +25,6 @@ const video=$('#vid'),
   endScreen=$('#endScreen'), finalScore=$('#finalScore'), endMsg=$('#endMsg'), replayBtn=$('#replayBtn'),
   /* 2 kişi */
   duel=$('#duel'), duelPrompt=$('#duelPrompt'), optsA=$('#optsA'), optsB=$('#optsB'),
-  flashA=$('#flashA'), flashB=$('#flashB'),
   endScreen2=$('#endScreen2'), end2Win=$('#end2Win'), end2P1=$('#end2P1'), end2P2=$('#end2P2'), replayBtn2=$('#replayBtn2'),
   /* HUD */
   hudSolo=$('#hudSolo'), hudDuo=$('#hudDuo'),
@@ -198,10 +197,6 @@ function showDuel(q){
   buildLane(q,optsB,1);
   duel.classList.add('show');
 }
-function flashWin(player){
-  const f=player===0?flashA:flashB;
-  if(f){ f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); }
-}
 function choose2P(player,o,btn,container){
   if(ans[player])return;                 /* her oyuncu tek seçim */
   ans[player]={ok:o.ok};
@@ -209,7 +204,7 @@ function choose2P(player,o,btn,container){
     btn.classList.add('correct');
     P[player].correct++;
     if(firstCorrect===null){             /* ilk doğru → tur galibiyeti */
-      firstCorrect=player; P[player].wins++; flashWin(player);
+      firstCorrect=player; P[player].wins++;
     }
   } else {
     btn.classList.add('wrong');
