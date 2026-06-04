@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Türkçe Sözlük</title>
+  <meta name="description" content="Uydurukça - Türkçe sözlük için hızlı arama arayüzü.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Türkçe Sözlük">
+        <span class="brand-mark" aria-hidden="true">
+          <span>T</span>
+        </span>
+        <span class="brand-text">
+          <strong>Türkçe Sözlük</strong>
+          <small>Uydurukça - Türkçe</small>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <button class="icon-button" id="randomButton" type="button" title="Rastgele kayıt" aria-label="Rastgele kayıt">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+        </button>
+        <a class="source-link" id="sourceLink" href="https://www.turkalemiyiz.com/Home/Getsozluk" target="_blank" rel="noreferrer">
+          Kaynak
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/><path d="M5 5v14h14"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <section class="search-band" aria-label="Sözlük araması">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="7"/></svg>
+        <input id="searchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Kelime ara">
+        <button class="icon-button clear-button" id="clearButton" type="button" title="Aramayı temizle" aria-label="Aramayı temizle">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="controls-row">
+        <div class="segmented" role="group" aria-label="Arama alanı">
+          <button class="segment active" type="button" data-mode="both">Tümü</button>
+          <button class="segment" type="button" data-mode="source">Uydurukça</button>
+          <button class="segment" type="button" data-mode="target">Türkçe</button>
+        </div>
+
+        <button class="toolbar-button" id="favoritesToggle" type="button" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2 6.4 20.2l1.1-6.2L3 9.6l6.2-.9Z"/></svg>
+          Favoriler
+          <span id="favoriteBadge">0</span>
+        </button>
+
+        <select id="sortSelect" aria-label="Sıralama">
+          <option value="source">Uydurukçaya göre</option>
+          <option value="target">Türkçeye göre</option>
+          <option value="letter">Harfe göre</option>
+        </select>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <aside class="side-panel" aria-label="Filtreler ve özet">
+        <section class="metrics" aria-label="Kayıt özeti">
+          <div>
+            <span id="totalCount">0</span>
+            <small>Kayıt</small>
+          </div>
+          <div>
+            <span id="visibleCount">0</span>
+            <small>Sonuç</small>
+          </div>
+          <div>
+            <span id="letterCount">0</span>
+            <small>Harf</small>
+          </div>
+        </section>
+
+        <section class="letter-filter" aria-label="Harf filtresi">
+          <div class="panel-heading">
+            <h2>Harfler</h2>
+            <button id="resetFilters" type="button">Sıfırla</button>
+          </div>
+          <div class="letter-grid" id="letterGrid"></div>
+        </section>
+
+        <section class="letter-chart" aria-label="Harf dağılımı">
+          <div class="panel-heading">
+            <h2>Dağılım</h2>
+          </div>
+          <div id="letterChart"></div>
+        </section>
+      </aside>
+
+      <section class="results-panel" aria-live="polite">
+        <div class="results-head">
+          <div>
+            <h2 id="resultsTitle">Kayıtlar</h2>
+            <p id="statusLine">Veri yükleniyor.</p>
+          </div>
+          <button class="toolbar-button" id="copyVisibleButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h10v12H8z"/><path d="M6 16H4V4h12v2"/></svg>
+            Görünenleri kopyala
+          </button>
+        </div>
+
+        <div class="notice" id="sourceNotice">
+          <strong>Kaynak:</strong> <span id="sourceName">Türkalemiyiz.com</span>
+          <span id="fetchDate"></span>
+        </div>
+
+        <div class="results-list" id="resultsList"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <strong>Sonuç yok.</strong>
+          <span>Aramayı veya harf filtresini değiştir.</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
