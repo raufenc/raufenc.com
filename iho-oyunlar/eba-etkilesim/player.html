@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#0f0c29">
+<title>نشاط تفاعلي</title>
+<!-- İHO 7. Sınıf Arapça — kesilmiş klip etkileşimi: izle → cevapla → cevabı duy -->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="back-btn" id="backBtn" href="./index.html" aria-label="رجوع">←</a>
+
+<div id="hud">
+  <div class="dots" id="dots"></div>
+  <div class="counter"><span id="curIdx">١</span> / <span id="totIdx">٤</span></div>
+</div>
+
+<div id="stage">
+  <video id="vid" preload="auto" playsinline></video>
+
+  <div id="startScreen">
+    <h1 id="startTitle"></h1>
+    <div class="start-sub" id="startSub"></div>
+    <button class="start-btn" id="startBtn">اِبْدَأْ ▶</button>
+  </div>
+
+  <div id="endScreen">
+    <h2 class="end-title">النَّتيجَةُ</h2>
+    <p class="end-score" id="finalScore">٠ / ٤</p>
+    <p class="end-msg" id="endMsg"></p>
+    <button class="start-btn" id="replayBtn">أَعِدْ</button>
+  </div>
+</div>
+
+<!-- Şıklar videonun ALTINDA — video hep görünür kalır (çocuk saati/yiyeceği görür) -->
+<div id="qPanel">
+  <div class="q-prompt" id="qPrompt"></div>
+  <div class="opts" id="qOpts"></div>
+  <div class="feedback" id="qFeedback"></div>
+</div>
+
+<script src="activities.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

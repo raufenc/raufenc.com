@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#0f0c29">
+<title>أَنْشِطَة تَفاعُلِيَّة — العَرَبِيَّة ٧</title>
+<!-- İHO 7. Sınıf Arapça — EBA animasyonları üzerinden etkileşimli etkinlikler -->
+<style>
+@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
+@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
+  background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
+  color:#fff; min-height:100vh; min-height:100dvh; padding:28px 18px 48px; direction:rtl;
+}
+.wrap{max-width:1000px; margin:0 auto}
+.hub-title{font-size:clamp(28px,5vw,50px); font-weight:800; line-height:1.15; text-align:center;
+  background:linear-gradient(90deg,#f7971e,#ffd200); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+.hub-sub{text-align:center; opacity:.6; font-size:clamp(15px,2.4vw,20px); margin:8px 0 26px}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px}
+.card{
+  display:block; text-decoration:none; color:#fff;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  border-radius:18px; padding:20px 18px; position:relative; overflow:hidden;
+  transition:transform .15s ease, background .15s ease, border-color .15s;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+.card:hover{transform:translateY(-3px); background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.28)}
+.card .unit{font-size:13px; opacity:.65; margin-bottom:8px}
+.card .name{font-size:clamp(20px,2.6vw,26px); font-weight:700; line-height:1.35; margin-bottom:6px}
+.card .desc{font-size:14px; opacity:.7; line-height:1.5}
+.card .play{position:absolute; left:16px; bottom:16px; width:36px; height:36px; border-radius:50%;
+  background:linear-gradient(135deg,#4f7cff,#6e5dff); display:flex; align-items:center; justify-content:center; font-size:16px}
+.card .cnt{position:absolute; top:16px; left:18px; font-size:13px; opacity:.55}
+.back{display:inline-flex; align-items:center; gap:6px; color:#fff; opacity:.7; text-decoration:none; font-size:15px; margin-bottom:18px}
+.back:hover{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="../index.html">→ كُلُّ الأَلْعاب</a>
+  <h1 class="hub-title">أَنْشِطَة تَفاعُلِيَّة</h1>
+  <div class="hub-sub">شاهِدْ، أَجِبْ، ثُمَّ اسْتَمِعْ إِلى الجَواب — العَرَبِيَّة لِلصَّفِّ السّابِع</div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script src="activities.js"></script>
+<script>
+const UNIT_AR = {1:'الوَحْدَة الأولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
+const AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
+const grid=document.getElementById('grid');
+(window.ACTIVITIES||[]).forEach(a=>{
+  const el=document.createElement('a');
+  el.className='card'; el.href='player.html?id='+encodeURIComponent(a.id);
+  el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سؤال</div>
+    <div class="unit">${UNIT_AR[a.unit]||''}</div>
+    <div class="name">${a.title}</div>
+    <div class="desc">${a.subtitle||''}</div>
+    <div class="play">▶</div>`;
+  grid.appendChild(el);
+});
+</script>
+</body>
+</html>
