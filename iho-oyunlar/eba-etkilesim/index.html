@@ -55,8 +55,9 @@ const grid=document.getElementById('grid');
 (window.ACTIVITIES||[]).forEach(a=>{
   const el=document.createElement('a');
   el.className='card'; el.href='player.html?id='+encodeURIComponent(a.id);
+  const pg=parseInt(a.id.slice(1),10);
   el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سؤال</div>
-    <div class="unit">${UNIT_AR[a.unit]||''}</div>
+    <div class="unit">${UNIT_AR[a.unit]||''} &middot; صَفْحَة ${toAr(pg)}</div>
     <div class="name">${a.title}</div>
     <div class="desc">${a.subtitle||''}</div>
     <div class="play">▶</div>`;
