@@ -7,8 +7,8 @@
 <title>شاهِدْ وَتَسابَقْ — العَرَبِيَّة ٧</title>
 <!-- İHO 7. Sınıf Arapça — EBA etkileşim + 2 kişilik hız yarışı. Klipler/font tek kaynaktan (../eba-etkilesim, ../). -->
 <style>
-@font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
-@font-face{font-family:'Arakom';src:url('../Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
+@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{
   font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
@@ -46,14 +46,14 @@ body{
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="../index.html">→ كُلُّ الأَلْعاب</a>
+  <a class="back" href="/iho-oyunlar/index.html">→ كُلُّ الأَلْعاب</a>
   <h1 class="hub-title">شاهِدْ وَتَسابَقْ</h1>
   <div class="hub-sub">شاهِدْ، أَجِبْ، ثُمَّ اسْتَمِعْ إِلى الجَواب — العَرَبِيَّة لِلصَّفِّ السّابِع</div>
   <div class="mode-hint"><span>👤 <b>تَدَرَّبْ وَحْدَك</b></span> &nbsp;·&nbsp; <span>👥 <b>تَسابَقْ مَعَ صَديقِك</b></span></div>
   <div class="grid" id="grid"></div>
 </div>
 
-<script src="../eba-etkilesim/activities.js"></script>
+<script src="/iho-oyunlar/eba-etkilesim/activities.js"></script>
 <script>
 const UNIT_AR={1:'الوَحْدَة الأولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
 const AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
@@ -61,7 +61,7 @@ const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
 const grid=document.getElementById('grid');
 (window.ACTIVITIES||[]).forEach(a=>{
   const el=document.createElement('a');
-  el.className='card'; el.href='player.html?id='+encodeURIComponent(a.id);
+  el.className='card'; el.href='/iho-oyunlar/eba-yaris/player.html?id='+encodeURIComponent(a.id);
   const pg=parseInt(a.id.slice(1),10);
   el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سؤال</div>
     <div class="unit">${UNIT_AR[a.unit]||''} &middot; صَفْحَة ${toAr(pg)}</div>

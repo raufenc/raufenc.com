@@ -11,7 +11,7 @@
 
 const ARABIC_DIGITS=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>ARABIC_DIGITS[+c]??c).join('');
-const DIR='../eba-etkilesim/vid/clips/';
+const DIR='/iho-oyunlar/eba-etkilesim/vid/clips/';
 const VER='?v=2';   /* cache-busting: demucs ile müziği temizlenmiş kliplerin taze çekilmesi (eski müzikli önbelleği atla) */
 
 const params=new URLSearchParams(location.search);
