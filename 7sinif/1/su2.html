@@ -52,9 +52,6 @@ h1{text-align:center;color:#004D40;font-size:2.2em;margin-bottom:6px}
 <h1>❓ هَلْ تُحِبُّ؟ هَلْ يَأكُلُ؟</h1>
 <div class="sub">السؤال بِـ "هَلْ" — الجواب: نَعَم أو لا (الكتاب: ص. ٢٦-٢٩)</div>
 <div id="game">
-<div class="tip">
-<b>📘 هَلْ</b> أداةُ استفهامٍ جَوابُها <b>نَعَم</b> أو <b>لا</b>. مَثلًا: <b>هَلْ تُحِبُّ الكُفْتَة؟</b> – نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا.
-</div>
 <div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
 <div class="scene">
 <div class="who" id="who">🧑</div>
@@ -62,8 +59,8 @@ h1{text-align:center;color:#004D40;font-size:2.2em;margin-bottom:6px}
 <div class="ask" id="q"></div>
 </div>
 <div class="options">
-<div class="btn-ans btn-yes" id="yesBtn"><span class="em">✅</span>نَعَم</div>
-<div class="btn-ans btn-no" id="noBtn"><span class="em">❌</span>لا</div>
+<div class="btn-ans btn-yes" id="yesBtn"><span class="em">👍</span>نَعَم</div>
+<div class="btn-ans btn-no" id="noBtn"><span class="em">👎</span>لا</div>
 </div>
 <div class="fb" id="fb"></div>
 <div class="exp" id="exp"></div>
@@ -81,22 +78,22 @@ h1{text-align:center;color:#004D40;font-size:2.2em;margin-bottom:6px}
 
 var ALL=[
 
-{who:'🧑',pic:'🧆',item:'الكُفْتَة',q:'هَلْ تُحِبُّ الكُفْتَةَ؟',ans:'yes',exp:'نَعَم، أُحِبُّ الكُفْتَةَ كَثيرًا'},
-{who:'👧',pic:'🐟',item:'السَّمَك',q:'هَلْ تُحِبِّينَ المَكَرونَةَ؟',ans:'no',exp:'لا، أُحِبُّ السَّمَكَ، لا المَكَرونَةَ'},
-{who:'🧑',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ الشّايَ؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الشّايَ كَثيرًا في الفَطورِ'},
-{who:'👧',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبينَ القَهْوَةَ بَعْدَ الغَداءِ؟',ans:'no',exp:'لا، أَشْرَبُ الشّايَ بَعْدَ الغَداءِ'},
+{who:'🧑',pic:'🧆',item:'الكُفْتَة',q:'هَلْ تُحِبُّ الكُفْتَة؟',ans:'yes',exp:'نَعَم، أُحِبُّ الكُفْتَة كَثيرًا'},
+{who:'👧',pic:'🐟',item:'السَّمَك',q:'هَلْ تُحِبِّينَ المَكَرونَة؟',ans:'no',exp:'لا، أُحِبُّ السَّمَك، لا المَكَرونَة'},
+{who:'🧑',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ الشّاي؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الشّاي كَثيرًا في الفَطور'},
+{who:'👧',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبينَ القَهْوَة بَعْدَ الغَداء؟',ans:'no',exp:'لا، أَشْرَبُ الشّاي بَعْدَ الغَداء'},
 
-{who:'🧔',pic:'🍯',item:'العَسَل',q:'هَلْ يَأكُلُ عُثْمانُ العَسَلَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ العَسَلَ والزُبْدَةَ'},
-{who:'👩',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ شَيْماءُ الحَلِيبَ؟',ans:'yes',exp:'نَعَم، هِيَ تَشْرَبُ الحَلِيبَ'},
-{who:'🧔',pic:'🍗',item:'الدَّجاج',q:'هَلْ يَأكُلُ إِبراهيمُ الدَّجاجَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الدَّجاجَ'},
-{who:'👩',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبُ ياسَمينُ العَصيرَ؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ القَهْوَةَ'},
+{who:'🧔',pic:'🍯',item:'العَسَل',q:'هَلْ يَأكُلُ عُثْمان العَسَل؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ العَسَل والزُبْدَة'},
+{who:'👩',pic:'🥛',item:'الحَليب',q:'هَلْ تَشْرَبُ شَيْماء الحَليب؟',ans:'yes',exp:'نَعَم، هِيَ تَشْرَبُ الحَليب'},
+{who:'🧔',pic:'🍗',item:'الدَّجاج',q:'هَلْ يَأكُلُ إِبراهيم الدَّجاج؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الدَّجاج'},
+{who:'👩',pic:'☕',item:'القَهْوَة',q:'هَلْ تَشْرَبُ ياسَمين العَصير؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ القَهْوَة'},
 
-{who:'🧑',pic:'🥛',item:'الحَلِيب',q:'هَلْ تَشْرَبُ الحَلِيبَ في الفَطورِ؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الحَلِيبَ كَثيرًا في الفَطورِ'},
-{who:'👧',pic:'🍞',item:'الخُبْز',q:'هَلْ تَأكُلينَ السَّمَكَ في الفَطورِ؟',ans:'no',exp:'لا، آكُلُ الخُبْزَ في الفَطورِ. السَّمَكُ في العَشاءِ'},
-{who:'🧑',pic:'🫒',item:'الزَّيتون',q:'هَلْ تَأكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ؟',ans:'yes',exp:'نَعَم، آكُلُ الزَّيتونَ والجُبْنَ في الفَطورِ'},
-{who:'👧',pic:'🧀',item:'الجُبْن',q:'هَلْ تَأكُلينَ اللَّحْمَ في الفَطورِ؟',ans:'no',exp:'لا، آكُلُ الجُبْنَ في الفَطورِ. اللَّحْمُ في الغَداءِ'},
-{who:'🧔',pic:'🧆',item:'الكُفْتَة',q:'هَلْ يَأكُلُ أَحْمَدُ الكُفْتَةَ؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الكُفْتَةَ'},
-{who:'👩',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ عائِشَةُ القَهْوَةَ؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ الشّايَ، لا القَهْوَةَ'}
+{who:'🧑',pic:'🥛',item:'الحَليب',q:'هَلْ تَشْرَبُ الحَليب في الفَطور؟',ans:'yes',exp:'نَعَم، أَشْرَبُ الحَليب كَثيرًا في الفَطور'},
+{who:'👧',pic:'🍞',item:'الخُبْز',q:'هَلْ تَأكُلينَ السَّمَك في الفَطور؟',ans:'no',exp:'لا، آكُلُ الخُبْز في الفَطور. السَّمَك في العَشاء'},
+{who:'🧑',pic:'🫒',item:'الزَّيتون',q:'هَلْ تَأكُلُ الزَّيتون والجُبْن في الفَطور؟',ans:'yes',exp:'نَعَم، آكُلُ الزَّيتون والجُبْن في الفَطور'},
+{who:'👧',pic:'🧀',item:'الجُبْن',q:'هَلْ تَأكُلينَ اللَّحْم في الفَطور؟',ans:'no',exp:'لا، آكُلُ الجُبْن في الفَطور. اللَّحْم في الغَداء'},
+{who:'🧔',pic:'🧆',item:'الكُفْتَة',q:'هَلْ يَأكُلُ أَحْمَد الكُفْتَة؟',ans:'yes',exp:'نَعَم، هُوَ يَأكُلُ الكُفْتَة'},
+{who:'👩',pic:'🍵',item:'الشّاي',q:'هَلْ تَشْرَبُ عائِشَة القَهْوَة؟',ans:'no',exp:'لا، هِيَ تَشْرَبُ الشّاي، لا القَهْوَة'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc;
@@ -120,7 +117,7 @@ if(choice===q.ans){btn.classList.add('correct');sc+=10;document.getElementById('
 document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
 else{btn.classList.add('wrong');
 var corId=q.ans==='yes'?'yesBtn':'noBtn';document.getElementById(corId).classList.add('correct');
-document.getElementById('fb').textContent='❌ الصَّوابُ: '+(q.ans==='yes'?'نَعَم':'لا');document.getElementById('fb').style.color='#F44336';}
+document.getElementById('fb').textContent='❌ الصَّواب: '+(q.ans==='yes'?'نَعَم':'لا');document.getElementById('fb').style.color='#F44336';}
 document.getElementById('exp').textContent='💡 '+q.exp;
 cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},2000);
 }

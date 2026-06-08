@@ -50,24 +50,29 @@ body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;font-size:clamp(20px,2.4v
 /* ===== GAME 1: MUFRADAT ===== */
 .g1-bg{background:linear-gradient(135deg,#667eea,#764ba2);padding:10px}
 .g1-box{background:#fff;border-radius:20px;padding:20px;max-width:800px;width:100%}
-.g1-box h1{text-align:center;color:#4a3f8a;font-size:1.8em;margin-bottom:5px}
+.g1-box h1{text-align:center;color:#4a3f8a;font-size:1.8em;margin-bottom:5px;animation:g1pop 2.6s ease-in-out infinite;transform-origin:center}
 .g1-sub{text-align:center;color:#7c6fbf;font-size:1em;margin-bottom:15px}
 .g1-sbar{display:flex;justify-content:space-between;align-items:center;background:#f0edff;border-radius:12px;padding:10px 15px;margin-bottom:15px;font-size:0.95em;flex-wrap:wrap;gap:5px}
 .g1-sbar span{color:#4a3f8a;font-weight:bold}
 .g1-inst{text-align:center;color:#7c6fbf;font-size:0.85em;margin-bottom:10px;padding:8px;background:#f8f6ff;border-radius:10px}
 .g1-targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:10px}
 .g1-target{background:#f8f6ff;border:3px dashed #c4b8f0;border-radius:15px;padding:10px;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 0.3s}
-.g1-target .emoji{font-size:2.5em;margin-bottom:5px}
-.g1-target .label{font-size:0.75em;color:#999}
+.g1-target .emoji{font-size:2.5em;margin-bottom:5px;animation:g1efloat 3s ease-in-out infinite}
+.g1-target:nth-child(2n) .emoji{animation-delay:.5s}
+.g1-target:nth-child(3n) .emoji{animation-delay:1s}
+.g1-target.correct .emoji{animation:none}
+.g1-target .label{font-size:0.9em;color:#999;min-height:1.3em;line-height:1.2;display:flex;align-items:center;justify-content:center;text-align:center}
 .g1-target.drag-over{border-color:#667eea;background:#ede8ff;transform:scale(1.05)}
 .g1-target.correct{border-color:#4caf50;background:#e8f5e9;border-style:solid}
-.g1-target.correct .label{color:#4caf50;font-weight:bold;font-size:0.9em}
+.g1-target.correct .label{color:#4caf50;font-weight:bold}
 .g1-target.wrong{border-color:#f44336;background:#ffebee;animation:shake 0.5s}
 .g1-words{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:10px;background:#f0edff;border-radius:15px;min-height:50px;margin-top:15px}
 .g1-chip{background:#667eea;color:#fff;padding:8px 16px;border-radius:25px;cursor:grab;font-size:1.1em;user-select:none;transition:all 0.3s;touch-action:none}
 .g1-chip:hover{background:#5568d8;transform:translateY(-2px)}
-.g1-chip.placed{opacity:0;pointer-events:none;position:absolute}
+.g1-chip.placed{opacity:.4;pointer-events:none;background:#b7afe0;color:#fff;text-decoration:line-through;cursor:default;transform:none}
 .g1-chip.selected{background:#ff9800;transform:scale(1.1)}
+@keyframes g1pop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes g1efloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
 /* ===== GAME 2: RATTIB ===== */
 .g2-bg{background:linear-gradient(135deg,#f093fb,#f5576c);padding:10px}
@@ -359,7 +364,6 @@ function konuş(metin, hız=0.85) {
 <div class="g1-sub">صِلْ بين الكلمة والصورة المناسبة</div>
 <div id="g1game">
 <div class="g1-sbar"><span>النتيجة: <span id="g1score">0</span></span><span>الجولة: <span id="g1round">1</span>/3</span><span>الصحيح: <span id="g1correct">0</span>/<span id="g1total">0</span></span></div>
-<div class="g1-inst">اسحب الكلمة وأفلتها على الصورة، أو اضغط على الكلمة ثمّ الصورة</div>
 <div class="g1-targets" id="g1targets"></div>
 <div class="g1-words" id="g1words"></div>
 </div>
@@ -536,7 +540,7 @@ scores[n]=sc;
 }
 
 /* ===== GAME 1: MUFRADAT ===== */
-var g1All=[{w:"خُبْز",e:"🍞"},{w:"جُبْن",e:"🧀"},{w:"أُرُز",e:"🍚"},{w:"دَجاج",e:"🍗"},{w:"زَيْتون",e:"🫒"},{w:"لَحْم",e:"🥩"},{w:"عَسَل",e:"🍯"},{w:"سَمَك",e:"🐟"},{w:"بَيْض",e:"🥚"},{w:"كُفْتَة",e:"🧆"},{w:"حَساء",e:"🍲"},{w:"زُبْدَة",e:"🧈"},{w:"شاي",e:"🍵"},{w:"ماء",e:"💧"},{w:"حَلِيب",e:"🥛"},{w:"عَصِير",e:"🧃"},{w:"قَهْوَة",e:"☕"},{w:"شَوْكَة",e:"🍴"},{w:"سِكِّين",e:"🔪"},{w:"مِلْعَقَة",e:"🥄"},{w:"كَأْس",e:"🥃"},{w:"طَبَق",e:"🍽️"}];
+var g1All=[{w:"خُبْز",e:"🍞"},{w:"جُبْن",e:"🧀"},{w:"أُرُز",e:"🍚"},{w:"دَجاج",e:"🍗"},{w:"زَيْتون",e:"🫒"},{w:"لَحْم",e:"🥩"},{w:"عَسَل",e:"🍯"},{w:"سَمَك",e:"🐟"},{w:"بَيْض",e:"🥚"},{w:"كُفْتَة",e:"🧆"},{w:"حَساء",e:"🍲"},{w:"زُبْدَة",e:"🧈"},{w:"شاي",e:"🍵"},{w:"ماء",e:"💧"},{w:"حَليب",e:"🥛"},{w:"عَصير",e:"🧃"},{w:"قَهْوَة",e:"☕"},{w:"شَوْكَة",e:"🍴"},{w:"سِكّين",e:"🔪"},{w:"مِلْعَقَة",e:"🥄"},{w:"كَأْس",e:"🥃"},{w:"طَبَق",e:"🍽️"}];
 var g1Sets,g1Rnd,g1Sc,g1Cor,g1Tot,g1Sel,g1PPR=6,g1TR=3;
 function g1Init(){
 var sh=shuffle([...g1All]);g1Sets=[];for(var i=0;i<g1TR;i++)g1Sets.push(sh.slice(i*g1PPR,(i+1)*g1PPR));
@@ -590,18 +594,18 @@ endGame(1,fs);
 
 /* ===== GAME 2: RATTIB (2 BÖLÜM: SABAH / MESA) ===== */
 var g2Parts=[
-{name:"الجُزْءُ الأَوَّل: الصَّباحُ",acts:[
-{t:"أَسْتَيْقِظُ في الصَّباحِ مُبَكِّرًا.",e:"⏰",id:0},
-{t:"أَتَوَضَّأُ، ثُمَّ أُصَلِّي الفَجْرَ.",e:"🕌",id:1},
-{t:"أَتَناوَلُ الفَطورَ مَعَ عائِلَتي.",e:"🍳",id:2},
+{name:"الجُزْء الأَوَّل: الصَّباح",acts:[
+{t:"أَسْتَيْقِظُ في الصَّباح مُبَكِّرًا.",e:"⏰",id:0},
+{t:"أَتَوَضَّأُ، ثُمَّ أُصَلِّي الفَجْر.",e:"🕌",id:1},
+{t:"أَتَناوَلُ الفَطور مَعَ عائِلَتي.",e:"🍳",id:2},
 {t:"أَلْبَسُ مَلابِسي.",e:"👔",id:3},
-{t:"أَذْهَبُ إِلى المَدْرَسَةِ.",e:"🏫",id:4}
+{t:"أَذْهَبُ إِلى المَدْرَسَة.",e:"🏫",id:4}
 ]},
-{name:"الجُزْءُ الثّاني: المَساءُ",acts:[
-{t:"أَرْجِعُ إِلى البَيْتِ ظُهْرًا.",e:"🏠",id:0},
-{t:"أُساعِدُ أُمِّي في البَيْتِ.",e:"🤝",id:1},
+{name:"الجُزْء الثّاني: المَساء",acts:[
+{t:"أَرْجِعُ إِلى البَيْت ظُهْرًا.",e:"🏠",id:0},
+{t:"أُساعِدُ أُمِّي في البَيْت.",e:"🤝",id:1},
 {t:"أَدْرُسُ دُروسي مَساءً.",e:"📚",id:2},
-{t:"أُصَلِّي العِشاءَ.",e:"🌙",id:3},
+{t:"أُصَلِّي العِشاء.",e:"🌙",id:3},
 {t:"أَنامُ لَيْلًا.",e:"😴",id:4}
 ]}
 ];
@@ -609,7 +613,7 @@ var g2Acts,g2Ord,g2Att,g2Stage=0,g2ScoreP1=0;
 function g2Init(){g2Stage=0;g2ScoreP1=0;g2Att=0;document.getElementById('g2game').classList.remove('hidden');document.getElementById('g2result').classList.add('hidden');g2LoadPart()}
 function g2LoadPart(){
 g2Acts=g2Parts[g2Stage].acts;g2Att=0;
-var sub=document.getElementById('g2sub');if(sub)sub.textContent=g2Parts[g2Stage].name+' — رَتِّبْ من الأَوَّلِ إلى الأَخيرِ';
+var sub=document.getElementById('g2sub');if(sub)sub.textContent=g2Parts[g2Stage].name+' — رَتِّبْ من الأَوَّل إلى الأَخير';
 g2Shuffle();
 }
 function g2Shuffle(){g2Ord=shuffle([...g2Acts]);g2Render()}
@@ -654,7 +658,7 @@ var fs=Math.round((g2ScoreP1+p2Score)/2);
 document.getElementById('g2game').classList.add('hidden');document.getElementById('g2result').classList.remove('hidden');
 document.getElementById('g2final').textContent=fs+'%';
 document.getElementById('g2stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('g2msg').textContent='الصَّباحُ: '+g2ScoreP1+'%  |  المَساءُ: '+p2Score+'%';
+document.getElementById('g2msg').textContent='الصَّباح: '+g2ScoreP1+'%  |  المَساء: '+p2Score+'%';
 endGame(2,fs);
 }
 
@@ -701,20 +705,20 @@ endGame(3,g3Sc);
 
 /* ===== GAME 4: VERB ===== */
 var g4All=[
-{p:"هُوَ",s:"_____ في الصَّباحِ مُبَكِّرًا.",c:"يَسْتَيْقِظُ",w:["تَسْتَيْقِظُ","تَسْتَيْقِظِينَ","أَسْتَيْقِظُ"]},
-{p:"هِيَ",s:"_____ الفَجْرَ.",c:"تُصَلِّي",w:["يُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
-{p:"هُوَ",s:"_____ الفَطورَ مَعَ عائِلَتِهِ.",c:"يَتَناوَلُ",w:["تَتَناوَلُ","تَتَناوَلِينَ","أَتَناوَلُ"]},
-{p:"هِيَ",s:"_____ مَلابِسَها.",c:"تَلْبَسُ",w:["يَلْبَسُ","تَلْبَسِينَ","أَلْبَسُ"]},
-{p:"أَنْتَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبِينَ","أَذْهَبُ"]},
-{p:"أَنْتِ",s:"_____ إِلى البَيْتِ ظُهْرًا.",c:"تَرْجِعِينَ",w:["تَرْجِعُ","يَرْجِعُ","أَرْجِعُ"]},
-{p:"أَنْتَ",s:"_____ أُمَّكَ في البَيْت.",c:"تُساعِدُ",w:["تُساعِدِينَ","يُساعِدُ","أُساعِدُ"]},
-{p:"أَنْتِ",s:"_____ الدُروسَ مَساءً.",c:"تَدْرُسِينَ",w:["تَدْرُسُ","يَدْرُسُ","أَدْرُسُ"]},
-{p:"هُوَ",s:"_____ العِشاءَ قَبْلَ النَّوْم.",c:"يُصَلِّي",w:["تُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
-{p:"أَنْتِ",s:"_____ لَيْلًا.",c:"تَنامِينَ",w:["تَنامُ","يَنامُ","أَنامُ"]},
-{p:"هِيَ",s:"_____ أُمَّها في البَيْت.",c:"تُساعِدُ",w:["يُساعِدُ","تُساعِدِينَ","أُساعِدُ"]},
-{p:"هُوَ",s:"_____ دُروسَهُ مَساءً.",c:"يَدْرُسُ",w:["تَدْرُسُ","تَدْرُسِينَ","أَدْرُسُ"]},
-{p:"هِيَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبِينَ","أَذْهَبُ"]},
-{p:"أَنْتِ",s:"_____ الفَطورَ مَعَ عائِلَتِكِ.",c:"تَتَناوَلِينَ",w:["تَتَناوَلُ","يَتَناوَلُ","أَتَناوَلُ"]}
+{p:"هُوَ",s:"_____ في الصَّباح مُبَكِّرًا.",c:"يَسْتَيْقِظُ",w:["تَسْتَيْقِظُ","تَسْتَيْقِظينَ","أَسْتَيْقِظُ"]},
+{p:"هِيَ",s:"_____ الفَجْر.",c:"تُصَلِّي",w:["يُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
+{p:"هُوَ",s:"_____ الفَطور مَعَ عائِلَتِهِ.",c:"يَتَناوَلُ",w:["تَتَناوَلُ","تَتَناوَلينَ","أَتَناوَلُ"]},
+{p:"هِيَ",s:"_____ مَلابِسَها.",c:"تَلْبَسُ",w:["يَلْبَسُ","تَلْبَسينَ","أَلْبَسُ"]},
+{p:"أَنْتَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبينَ","أَذْهَبُ"]},
+{p:"أَنْتِ",s:"_____ إِلى البَيْت ظُهْرًا.",c:"تَرْجِعينَ",w:["تَرْجِعُ","يَرْجِعُ","أَرْجِعُ"]},
+{p:"أَنْتَ",s:"_____ أُمَّكَ في البَيْت.",c:"تُساعِدُ",w:["تُساعِدينَ","يُساعِدُ","أُساعِدُ"]},
+{p:"أَنْتِ",s:"_____ الدُروس مَساءً.",c:"تَدْرُسينَ",w:["تَدْرُسُ","يَدْرُسُ","أَدْرُسُ"]},
+{p:"هُوَ",s:"_____ العِشاء قَبْلَ النَّوْم.",c:"يُصَلِّي",w:["تُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
+{p:"أَنْتِ",s:"_____ لَيْلًا.",c:"تَنامينَ",w:["تَنامُ","يَنامُ","أَنامُ"]},
+{p:"هِيَ",s:"_____ أُمَّها في البَيْت.",c:"تُساعِدُ",w:["يُساعِدُ","تُساعِدينَ","أُساعِدُ"]},
+{p:"هُوَ",s:"_____ دُروسَهُ مَساءً.",c:"يَدْرُسُ",w:["تَدْرُسُ","تَدْرُسينَ","أَدْرُسُ"]},
+{p:"هِيَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبينَ","أَذْهَبُ"]},
+{p:"أَنْتِ",s:"_____ الفَطور مَعَ عائِلَتِكِ.",c:"تَتَناوَلينَ",w:["تَتَناوَلُ","يَتَناوَلُ","أَتَناوَلُ"]}
 ];
 var g4Qs,g4Cur,g4Sc;
 function g4Init(){
@@ -764,8 +768,8 @@ var g5Dialogs=[
 {sp:"زينب",side:"left",text:"لا، لا {0} المَكَرونَة.",blanks:["أُحِبُّ"]}
 ],words:["الكُفْتَة","الشّاي","أُحِبُّ","أُحِبُّ","الحَليب","أُريدُ"]},
 {title:"📅 يَوْم مِنْ حَياة فاتِح",lines:[
-{sp:"أحمد",side:"right",text:"مَتى تَتَناوَلُ الفَطورَ يا فاتِح؟"},
-{sp:"فاتح",side:"left",text:"أَتَناوَلُ الفَطورَ في السّاعة {0} صَباحًا.",blanks:["السّابِعَة"]},
+{sp:"أحمد",side:"right",text:"مَتى تَتَناوَلُ الفَطور يا فاتِح؟"},
+{sp:"فاتح",side:"left",text:"أَتَناوَلُ الفَطور في السّاعة {0} صَباحًا.",blanks:["السّابِعَة"]},
 {sp:"أحمد",side:"right",text:"ماذا تَأكُلُ في الفَطور؟"},
 {sp:"فاتح",side:"left",text:"آكُلُ {0} والزُبْدَة في الفَطور.",blanks:["العَسَل"]},
 {sp:"أحمد",side:"right",text:"مَتى تَذْهَبُ إِلى المَدْرَسَة؟"},
@@ -774,7 +778,7 @@ var g5Dialogs=[
 {sp:"فاتح",side:"left",text:"أَنامُ في السّاعة {0} لَيْلًا.",blanks:["الحادِيَة عَشْرَة"]}
 ],words:["السّابِعَة","العَسَل","الثّامِنَة","الحادِيَة عَشْرَة","التّاسِعَة","الجُبْن"]},
 {title:"🏠 زَيْنَب في البَيْت",lines:[
-{sp:"مَرْوَة",side:"right",text:"مَتى تَتَناوَلينَ الغَداءَ يا زَيْنَب؟"},
+{sp:"مَرْوَة",side:"right",text:"مَتى تَتَناوَلينَ الغَداء يا زَيْنَب؟"},
 {sp:"زينب",side:"left",text:"أَتَناوَلُهُ في السّاعة {0} ظُهْرًا.",blanks:["الواحِدَة"]},
 {sp:"مَرْوَة",side:"right",text:"وَماذا تَأكُلينَ في الغَداء؟"},
 {sp:"زينب",side:"left",text:"آكُلُ {0} والسَلَطَة.",blanks:["السَمَك"]},
@@ -853,9 +857,9 @@ endGame(5,fs);
 var g6PairData=[
 {e:"🍞",w:"خُبْز"},{e:"🧀",w:"جُبْن"},{e:"🍚",w:"أُرُز"},{e:"🍗",w:"دَجاج"},
 {e:"🫒",w:"زَيْتون"},{e:"🥩",w:"لَحْم"},{e:"🍯",w:"عَسَل"},{e:"🐟",w:"سَمَك"},
-{e:"🥚",w:"بَيْض"},{e:"🧆",w:"كُفْتَة"},{e:"☕",w:"قَهْوَة"},{e:"🍵",w:"شاي"},{e:"🥛",w:"حَلِيب"},
-{e:"💧",w:"ماء"},{e:"🧃",w:"عَصِير"},
-{e:"🍴",w:"شَوْكَة"},{e:"🔪",w:"سِكِّين"},{e:"🥄",w:"مِلْعَقَة"},{e:"🥃",w:"كَأْس"},{e:"🍽️",w:"طَبَق"},
+{e:"🥚",w:"بَيْض"},{e:"🧆",w:"كُفْتَة"},{e:"☕",w:"قَهْوَة"},{e:"🍵",w:"شاي"},{e:"🥛",w:"حَليب"},
+{e:"💧",w:"ماء"},{e:"🧃",w:"عَصير"},
+{e:"🍴",w:"شَوْكَة"},{e:"🔪",w:"سِكّين"},{e:"🥄",w:"مِلْعَقَة"},{e:"🥃",w:"كَأْس"},{e:"🍽️",w:"طَبَق"},
 {e:"🕐",w:"السّاعة الواحِدة"},{e:"🕒",w:"السّاعة الثّالِثَة"},{e:"🕕",w:"السّاعة السّادِسَة"},{e:"🕘",w:"السّاعة التّاسِعَة"},{e:"🕛",w:"السّاعة الثّانِيَة عَشْرَة"}
 ];
 var g6Cards,g6Flipped,g6Matched,g6Moves,g6Started,g6Start,g6ti,g6NP=8,g6Lock;
