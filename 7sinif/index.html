@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,334 +8,101 @@
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
-
 *{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --crimson:#E5176B; --crimson-d:#C2185B; --crimson-dd:#9E0E48;
+  --blue:#0288D1; --orange:#F57C00; --teal:#00897B;
+  --ink:#2A2F45; --ink-soft:#6B7088; --paper:#FFF7F3;
+}
 html,body{min-height:100%}
 body{
   font-family:'Arakom','Inter',system-ui,-apple-system,sans-serif;
-  background:#05030d;
-  color:#fff;
-  overflow-x:hidden;
-  position:relative;
+  background:
+    radial-gradient(circle at 10% 6%, rgba(229,23,107,.10), transparent 24%),
+    radial-gradient(circle at 90% 8%, rgba(2,136,209,.08), transparent 22%),
+    var(--paper);
+  color:var(--ink); position:relative; overflow-x:hidden;
+}
+/* kitap tarzı kırmızı konfeti */
+.confetti{position:fixed;inset:0 0 auto 0;height:230px;pointer-events:none;z-index:0;opacity:.8;
+  background-image:
+   radial-gradient(7px 7px at 7% 26%, #F386AC 60%, transparent 62%),
+   radial-gradient(4px 4px at 15% 64%, #E5176B 60%, transparent 62%),
+   radial-gradient(5px 5px at 23% 18%, #F8B0C8 60%, transparent 62%),
+   radial-gradient(3px 3px at 33% 50%, #E5176B 60%, transparent 62%),
+   radial-gradient(8px 8px at 70% 22%, #F386AC 60%, transparent 62%),
+   radial-gradient(4px 4px at 79% 60%, #E5176B 60%, transparent 62%),
+   radial-gradient(6px 6px at 88% 28%, #F8B0C8 60%, transparent 62%),
+   radial-gradient(3px 3px at 95% 54%, #E5176B 60%, transparent 62%);
+  background-repeat:no-repeat;
 }
 
-/* ── ARKA PLAN ORB'LARI ── */
-.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:.55;pointer-events:none;z-index:0;animation:float 18s ease-in-out infinite}
-.orb-1{width:520px;height:520px;background:radial-gradient(circle,#8B5CF6 0%,#4C1D95 60%,transparent 70%);top:-150px;right:-100px;animation-delay:0s}
-.orb-2{width:480px;height:480px;background:radial-gradient(circle,#EC4899 0%,#9D174D 60%,transparent 70%);bottom:-120px;left:-80px;animation-delay:-6s}
-.orb-3{width:380px;height:380px;background:radial-gradient(circle,#0EA5E9 0%,#0C4A6E 60%,transparent 70%);top:40%;left:30%;animation-delay:-12s;opacity:.35}
-@keyframes float{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(40px,-30px) scale(1.05)}
-  66%{transform:translate(-30px,40px) scale(.95)}
-}
+.wrap{position:relative;z-index:10;max-width:1280px;margin:0 auto;padding:48px 28px 70px}
+.header{text-align:center;margin-bottom:44px;animation:fadeUp .7s ease-out}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--crimson);
+  padding:7px 22px;border-radius:100px;font-size:13px;letter-spacing:.06em;font-weight:800;color:var(--crimson-d);
+  margin-bottom:20px;box-shadow:0 5px 16px rgba(229,23,107,.15)}
+.title-ar{font-family:'Arakom',sans-serif;font-size:clamp(40px,7vw,82px);font-weight:bold;line-height:1.06;
+  margin-bottom:14px;direction:rtl;
+  background:linear-gradient(100deg,var(--crimson),#FF5A8A 45%,var(--crimson-d));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.title-tr{font-size:clamp(17px,2.1vw,24px);color:var(--ink-soft);font-weight:600;margin-bottom:12px}
+.subtitle-ar{font-family:'Arakom',sans-serif;font-size:clamp(19px,2.4vw,30px);color:var(--crimson-d);direction:rtl;margin-bottom:6px;font-weight:bold}
+.meta{font-size:13px;color:var(--ink-soft);letter-spacing:.06em;font-weight:600;margin-top:12px}
 
-/* Yıldız noktaları */
-.stars{position:fixed;inset:0;z-index:0;background-image:
-  radial-gradient(1px 1px at 20px 30px,rgba(255,255,255,.4),transparent),
-  radial-gradient(1px 1px at 60px 70px,rgba(255,255,255,.3),transparent),
-  radial-gradient(1.5px 1.5px at 120px 110px,rgba(255,255,255,.5),transparent),
-  radial-gradient(1px 1px at 180px 50px,rgba(255,255,255,.25),transparent),
-  radial-gradient(1px 1px at 240px 200px,rgba(255,255,255,.35),transparent),
-  radial-gradient(1px 1px at 320px 140px,rgba(255,255,255,.3),transparent),
-  radial-gradient(1.5px 1.5px at 380px 280px,rgba(255,255,255,.4),transparent);
-  background-repeat:repeat;
-  background-size:400px 320px;
-  opacity:.6;
-  pointer-events:none;
-  animation:twinkle 6s ease-in-out infinite}
-@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:.8}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+.unit{position:relative;background:#fff;border:1px solid #F0DCE4;border-radius:26px;padding:30px 28px 26px;
+  overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:12px;min-height:340px;
+  box-shadow:0 10px 30px rgba(158,14,72,.08);
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;
+  animation:fadeUp .7s ease-out backwards;cursor:pointer}
+.unit:nth-child(1){animation-delay:.05s}.unit:nth-child(2){animation-delay:.13s}
+.unit:nth-child(3){animation-delay:.21s}.unit:nth-child(4){animation-delay:.29s}
+.unit::after{content:'';position:absolute;top:0;left:0;right:0;height:6px;background:var(--grad)}
+.unit:hover{transform:translateY(-10px);border-color:var(--c);box-shadow:0 26px 56px -12px var(--shadow)}
+.unit:hover .num{transform:scale(1.04) rotate(-3deg);opacity:.16}
+.num{position:absolute;top:-24px;right:-12px;font-family:'Inter',sans-serif;font-size:190px;font-weight:900;
+  line-height:1;color:transparent;background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;opacity:.10;transition:transform .6s,opacity .4s;pointer-events:none;user-select:none}
+.unit-badge{display:inline-block;background:var(--soft);color:var(--c);border:1px solid var(--c);padding:5px 14px;
+  border-radius:8px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;width:fit-content;
+  position:relative;z-index:2}
+.unit-ar{font-family:'Arakom',sans-serif;font-size:clamp(30px,3.3vw,42px);font-weight:bold;line-height:1.12;direction:rtl;
+  color:var(--c);position:relative;z-index:2}
+.unit-tr{font-size:16px;color:var(--ink-soft);font-weight:600;position:relative;z-index:2}
+.unit-desc{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:4px;position:relative;z-index:2}
+.unit-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:16px;
+  border-top:1px solid #F2E3E9;position:relative;z-index:2}
+.unit-stats{font-size:13px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;font-weight:600}
+.unit-stats b{color:var(--ink)}
+.unit-cta{font-size:14px;font-weight:800;color:var(--c);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}
+.unit:hover .unit-cta{gap:11px}
 
-/* ── HEADER ── */
-.wrap{position:relative;z-index:10;max-width:1400px;margin:0 auto;padding:60px 32px 80px}
-.header{text-align:center;margin-bottom:60px;animation:fadeUp .8s ease-out}
-.eyebrow{
-  display:inline-block;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.12);
-  backdrop-filter:blur(20px);
-  padding:10px 28px;
-  border-radius:100px;
-  font-size:14px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.7);
-  margin-bottom:24px;
-  font-family:'Inter',sans-serif;
-}
-.title-ar{
-  font-family:'Arakom',sans-serif;
-  font-size:clamp(48px,8vw,96px);
-  font-weight:bold;
-  line-height:1.05;
-  letter-spacing:-.02em;
-  margin-bottom:18px;
-  background:linear-gradient(135deg,#FFD700 0%,#FF6B35 30%,#EC4899 60%,#A855F7 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 8px 60px rgba(168,85,247,.3);
-  direction:rtl;
-}
-.title-tr{
-  font-family:'Inter',sans-serif;
-  font-size:clamp(18px,2.2vw,26px);
-  color:rgba(255,255,255,.55);
-  font-weight:300;
-  letter-spacing:.04em;
-  margin-bottom:14px;
-}
-.subtitle-ar{
-  font-family:'Arakom',sans-serif;
-  font-size:clamp(20px,2.5vw,32px);
-  color:rgba(255,255,255,.8);
-  direction:rtl;
-  margin-bottom:8px;
-}
-.meta{
-  font-family:'Inter',sans-serif;
-  font-size:14px;
-  color:rgba(255,255,255,.35);
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  margin-top:14px;
-}
+.u1{--grad:linear-gradient(100deg,#E5176B,#FF5A8A);--c:#E5176B;--soft:#FFEAF1;--shadow:rgba(229,23,107,.32)}
+.u2{--grad:linear-gradient(100deg,#F57C00,#FFB74D);--c:#E96B00;--soft:#FFF1E0;--shadow:rgba(245,124,0,.32)}
+.u3{--grad:linear-gradient(100deg,#0288D1,#4FC3F7);--c:#0277BD;--soft:#E3F4FD;--shadow:rgba(2,136,209,.32)}
+.u4{--grad:linear-gradient(100deg,#00897B,#4DB6AC);--c:#00796B;--soft:#E2F3F1;--shadow:rgba(0,137,123,.26)}
 
-/* ── GRID ── */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
-  gap:28px;
-}
+.coming-soon{position:absolute;top:18px;right:18px;background:linear-gradient(100deg,#E5176B,#C2185B);color:#fff;
+  padding:7px 15px;border-radius:100px;font-size:11px;font-weight:800;letter-spacing:.06em;
+  box-shadow:0 7px 18px rgba(229,23,107,.3);z-index:5;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.unit.locked{opacity:.92}.unit.locked .unit-cta{color:var(--ink-soft)}
 
-/* ── KART ── */
-.unit{
-  position:relative;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:28px;
-  padding:36px 32px 32px;
-  overflow:hidden;
-  text-decoration:none;
-  color:inherit;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-  min-height:380px;
-  transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,background .4s;
-  backdrop-filter:blur(20px);
-  animation:fadeUp .8s ease-out backwards;
-  cursor:pointer;
-}
-.unit:nth-child(1){animation-delay:.1s}
-.unit:nth-child(2){animation-delay:.2s}
-.unit:nth-child(3){animation-delay:.3s}
-.unit:nth-child(4){animation-delay:.4s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:translateY(0)}}
 
-.unit::before{
-  content:'';
-  position:absolute;
-  inset:-1px;
-  border-radius:28px;
-  background:var(--grad,linear-gradient(135deg,#8B5CF6,#EC4899));
-  opacity:0;
-  z-index:-1;
-  transition:opacity .4s;
-  filter:blur(1px);
-}
-.unit::after{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:3px;
-  background:var(--grad);
-  border-radius:28px 28px 0 0;
-  opacity:.5;
-  transition:opacity .4s,height .4s;
-}
-.unit:hover{
-  transform:translateY(-12px) scale(1.015);
-  border-color:rgba(255,255,255,.25);
-  background:rgba(255,255,255,.07);
-  box-shadow:0 30px 80px -10px var(--shadow,rgba(139,92,246,.4));
-}
-.unit:hover::after{height:5px;opacity:1}
-.unit:hover .num{transform:scale(1.05) rotate(-3deg);opacity:.6}
+.footer{text-align:center;margin-top:64px;padding-top:34px;border-top:1px solid #F2E3E9;color:var(--ink-soft);
+  font-size:13px;position:relative;z-index:10}
+.footer a{color:var(--crimson-d);text-decoration:none;border-bottom:1px dotted rgba(229,23,107,.4);font-weight:600}
+.footer a:hover{color:var(--crimson)}
+.footer .marka{font-family:'Arakom',sans-serif;color:var(--crimson-d);direction:rtl;font-size:17px;display:block;margin-bottom:8px;font-weight:bold}
 
-/* Ünite numarası — büyük dekoratif */
-.num{
-  position:absolute;
-  top:-30px;
-  right:-20px;
-  font-family:'Inter',sans-serif;
-  font-size:240px;
-  font-weight:900;
-  line-height:1;
-  color:transparent;
-  background:var(--grad);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  opacity:.18;
-  transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .4s;
-  pointer-events:none;
-  user-select:none;
-  letter-spacing:-.05em;
-}
-
-.unit-badge{
-  display:inline-block;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  padding:5px 14px;
-  border-radius:8px;
-  font-family:'Inter',sans-serif;
-  font-size:11px;
-  font-weight:600;
-  letter-spacing:.15em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.7);
-  width:fit-content;
-  position:relative;
-  z-index:2;
-}
-
-.unit-ar{
-  font-family:'Arakom',sans-serif;
-  font-size:clamp(32px,3.5vw,44px);
-  font-weight:bold;
-  line-height:1.1;
-  direction:rtl;
-  background:var(--grad);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  position:relative;
-  z-index:2;
-}
-.unit-tr{
-  font-family:'Inter',sans-serif;
-  font-size:16px;
-  color:rgba(255,255,255,.6);
-  letter-spacing:.02em;
-  position:relative;
-  z-index:2;
-}
-.unit-desc{
-  font-family:'Inter',sans-serif;
-  font-size:14.5px;
-  color:rgba(255,255,255,.5);
-  line-height:1.6;
-  margin-top:6px;
-  position:relative;
-  z-index:2;
-}
-
-.unit-foot{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:auto;
-  padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.08);
-  position:relative;
-  z-index:2;
-}
-.unit-stats{
-  font-family:'Inter',sans-serif;
-  font-size:13px;
-  color:rgba(255,255,255,.45);
-  display:flex;
-  gap:14px;
-  flex-wrap:wrap;
-}
-.unit-stats span{display:inline-flex;align-items:center;gap:6px}
-.unit-stats b{color:rgba(255,255,255,.85);font-weight:600}
-
-.unit-cta{
-  font-family:'Inter',sans-serif;
-  font-size:14px;
-  font-weight:600;
-  color:#fff;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  transition:gap .3s;
-}
-.unit:hover .unit-cta{gap:12px}
-.unit-cta .arrow{
-  display:inline-block;
-  transition:transform .3s;
-  background:var(--grad);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  font-weight:bold;
-  font-size:18px;
-}
-.unit:hover .unit-cta .arrow{transform:translateX(-4px)}
-
-/* ÜNİTE RENK TEMALARI */
-.u1{--grad:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%);--shadow:rgba(139,92,246,.4)}
-.u2{--grad:linear-gradient(135deg,#FB923C 0%,#EC4899 50%,#BE185D 100%);--shadow:rgba(236,72,153,.4)}
-.u3{--grad:linear-gradient(135deg,#06B6D4 0%,#3B82F6 50%,#1E40AF 100%);--shadow:rgba(6,182,212,.4)}
-.u4{--grad:linear-gradient(135deg,#6B7280 0%,#4B5563 50%,#374151 100%);--shadow:rgba(107,114,128,.3);opacity:.85}
-
-/* Yapım aşamasında stamp */
-.coming-soon{
-  position:absolute;
-  top:18px;
-  right:18px;
-  background:linear-gradient(135deg,#F59E0B,#DC2626);
-  color:#fff;
-  padding:8px 16px;
-  border-radius:100px;
-  font-family:'Inter',sans-serif;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  box-shadow:0 8px 20px rgba(220,38,38,.35);
-  z-index:5;
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.unit.locked{cursor:not-allowed}
-.unit.locked:hover{transform:translateY(-4px) scale(1.005)}
-.unit.locked::before{display:none}
-.unit.locked .unit-cta{color:rgba(255,255,255,.4)}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-
-/* Footer */
-.footer{
-  text-align:center;
-  margin-top:80px;
-  padding-top:40px;
-  border-top:1px solid rgba(255,255,255,.06);
-  color:rgba(255,255,255,.3);
-  font-family:'Inter',sans-serif;
-  font-size:13px;
-  position:relative;
-  z-index:10;
-  animation:fadeUp .8s ease-out .6s backwards;
-}
-.footer a{color:rgba(255,255,255,.5);text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.3);transition:color .2s,border-color .2s}
-.footer a:hover{color:#fff;border-bottom-color:#fff}
-.footer .marka{font-family:'Arakom',sans-serif;color:rgba(255,255,255,.5);direction:rtl;font-size:16px;display:block;margin-bottom:8px}
-
-@media(max-width:640px){
-  .wrap{padding:40px 18px 60px}
-  .header{margin-bottom:40px}
-  .num{font-size:180px;top:-20px;right:-10px}
-  .unit{padding:28px 22px 24px;min-height:auto;gap:10px}
-  .unit-ar{font-size:28px}
-}
+@media(max-width:640px){.wrap{padding:32px 16px 50px}.unit{min-height:auto;padding:24px 20px}.num{font-size:150px}}
 </style>
 </head>
 <body>
 
-<!-- Arka plan -->
-<div class="stars"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
-<div class="orb orb-3"></div>
+<div class="confetti"></div>
 
 <div class="wrap">
 
@@ -349,7 +116,6 @@ body{
 
   <main class="grid">
 
-    <!-- ÜNİTE 1 -->
     <a href="/7sinif/1/" class="unit u1">
       <div class="num">1</div>
       <span class="unit-badge">Ünite I</span>
@@ -357,47 +123,35 @@ body{
       <div class="unit-tr">Bugün Ne Yaptım?</div>
       <p class="unit-desc">Günlük rutinler, muzari fiil, zamir-fiil uyumu, kelime öğretimi, soru kalıpları (مَاذا / هَلْ) ve saatler.</p>
       <div class="unit-foot">
-        <div class="unit-stats">
-          <span>🎮 <b>11</b> oyun</span>
-          <span>📄 s. <b>14-45</b></span>
-        </div>
-        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+        <div class="unit-stats"><span>🎮 <b>11</b> oyun</span><span>📄 s. <b>14-45</b></span></div>
+        <div class="unit-cta">Başla <span>←</span></div>
       </div>
     </a>
 
-    <!-- ÜNİTE 2 -->
     <a href="/7sinif/2/" class="unit u2">
       <div class="num">2</div>
       <span class="unit-badge">Ünite II</span>
       <h2 class="unit-ar">وَقْتُ التَّسَوُّق</h2>
       <div class="unit-tr">Alışveriş Zamanı</div>
-      <p class="unit-desc">Yiyecek-içecek ve ölçü kelimeleri, ihtiyaç/istek bildirme, meyve-sebze sınıflandırma, fiyat sorma, alışveriş diyalogları ve karşılaştırma kalıpları.</p>
+      <p class="unit-desc">Yiyecek-içecek ve ölçü kelimeleri, ihtiyaç/istek bildirme, meyve-sebze sınıflandırma, fiyat sorma ve alışveriş diyalogları.</p>
       <div class="unit-foot">
-        <div class="unit-stats">
-          <span>🎮 <b>18</b> oyun</span>
-          <span>📄 s. <b>52-83</b></span>
-        </div>
-        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+        <div class="unit-stats"><span>🎮 <b>18</b> oyun</span><span>📄 s. <b>52-83</b></span></div>
+        <div class="unit-cta">Başla <span>←</span></div>
       </div>
     </a>
 
-    <!-- ÜNİTE 3 -->
     <a href="/7sinif/3/" class="unit u3">
       <div class="num">3</div>
       <span class="unit-badge">Ünite III</span>
       <h2 class="unit-ar">إلى أَيْنَ نُسافِر؟</h2>
       <div class="unit-tr">Nereye Yolculuk?</div>
-      <p class="unit-desc">Ulaşım araçları, seyahat fiilleri ve emir kipi, karşılaştırma, adres ve yön ifadeleri, trafik işaretleri ve günlük yolculuk metinleri.</p>
+      <p class="unit-desc">Ulaşım araçları, seyahat fiilleri ve emir kipi, karşılaştırma, adres ve yön ifadeleri, günlük yolculuk metinleri.</p>
       <div class="unit-foot">
-        <div class="unit-stats">
-          <span>🎮 <b>20</b> oyun</span>
-          <span>📄 s. <b>94-130</b></span>
-        </div>
-        <div class="unit-cta">Başla <span class="arrow">←</span></div>
+        <div class="unit-stats"><span>🎮 <b>20</b> oyun</span><span>📄 s. <b>94-130</b></span></div>
+        <div class="unit-cta">Başla <span>←</span></div>
       </div>
     </a>
 
-    <!-- ÜNİTE 4 — yapım aşamasında -->
     <a href="/7sinif/4/" class="unit u4 locked">
       <div class="coming-soon">🚧 Yapım Aşamasında</div>
       <div class="num">4</div>
@@ -406,10 +160,8 @@ body{
       <div class="unit-tr">Yakında</div>
       <p class="unit-desc">Dördüncü ünite hazırlanıyor. Ders kitabıyla uyumlu yeni oyunlar ve etkinlikler kısa süre içinde burada olacak.</p>
       <div class="unit-foot">
-        <div class="unit-stats">
-          <span>⏳ Hazırlanıyor…</span>
-        </div>
-        <div class="unit-cta">Bilgi sayfası <span class="arrow">←</span></div>
+        <div class="unit-stats"><span>⏳ Hazırlanıyor…</span></div>
+        <div class="unit-cta">Bilgi sayfası <span>←</span></div>
       </div>
     </a>
 
