@@ -42,16 +42,13 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 <body>
 <a href="./index.html" class="back">↩ القائمة</a>
 <div class="box">
-<h1>💥 اقْصِفِ الخَطَأ<span class="edited-tag">✎ وَقْت ١٢ث · ضَمائِر + سَفَر</span></h1>
-<div class="sub">اخْتَرْ الكَلِمَةَ الَّتي لا تَنْتَمي إلى المَجْموعَة (الوَقْت ١٢ ثانِيَة)</div>
+<h1>💥 اقْصِفِ الخَطَأ<span class="edited-tag">✎ وَقْت ٢٠ث · سَفَر</span></h1>
+<div class="sub">اخْتَرْ الكَلِمَةَ الَّتي لا تَنْتَمي إلى المَجْموعَة (الوَقْت ٢٠ ثانِيَة)</div>
 <div id="game">
 <div class="tip">
-<b>📘 الأَنْواع:</b> هَذِهِ النُّسْخَة فيها ثَلاثَة أَنْواعٍ مِنَ الأَسْئِلَة:
-١) ضَمير ⇐ اخْتَرْ الفِعْلَ المُختَلِف،
-٢) فِعْل ⇐ اخْتَرْ الضَّميرَ المُختَلِف،
-٣) نَوْعُ السَّفَر ⇐ اخْتَرْ الوَسيلَةَ الَّتي لا تُناسِبُ.
+<b>📘 التَّعْليمات:</b> في كُلِّ مَجْموعَةٍ كَلِمَةٌ واحِدَةٌ لا تُناسِبُ الباقِيَ — اِقْصِفْها قَبْلَ انْتِهاءِ الوَقْتِ!
 </div>
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/12</span></div>
+<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
 <div class="timer-wrap"><div class="timer-bar" id="tbar" style="width:100%"></div></div>
 <div class="cat" id="cat">…</div>
 <div class="opts" id="opts"></div>
@@ -68,14 +65,9 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 </div>
 </div>
 <script>
-var TIME=12000;  // 12 saniye (orijinal 8 idi)
+var TIME=20000;  // 20 saniye
 
 var ALL=[
-
-/* أسلوب الكتاب: جملة كاملة خاطئة — الطالب يلاحظ الخطأ بنفسه */
-{cat:'الجُمْلَةُ الخَاطِئَة',opts:['هُوَ يُسافِرُ إِلى أَنقَرَة.','هِيَ تَذْهَبُ بِالسَّيّارَة.','أَنا أَرْكَبُ الحافِلَة.','هُوَ تُسافِرُ إِلى إِسطَنبول.'],odd:3,exp:'هُوَ + تُسافِرُ لا يتناسبان'},
-{cat:'الجُمْلَةُ الخَاطِئَة',opts:['هِيَ تَرْكَبُ الدَّرّاجَة.','هُوَ يَذْهَبُ بِالقِطار.','أَنا أُسافِرُ بِالطّائِرَة.','أَنْتِ تَذْهَبُ إِلى المَدرَسَة.'],odd:3,exp:'أَنْتِ + تَذْهَبُ — الصحيح: تَذْهَبِينَ'},
-{cat:'الجُمْلَةُ الخَاطِئَة',opts:['أَنْتَ تَرْكَبُ الحافِلَة.','أَنْتِ تُسافِرِينَ بِالطّائِرَة.','هُوَ يَرْجِعُ بِالسَيّارَة.','هِيَ تَرْكَبُينَ القِطار.'],odd:3,exp:'هِيَ + تَرْكَبِينَ — صيغة أَنْتِ'},
 
 {cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
 {cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة'},
@@ -91,7 +83,7 @@ var ALL=[
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,timerInt,curOdd;
-function init(){qs=shuf([...ALL]).slice(0,12);cur=0;sc=0;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
+function init(){qs=shuf([...ALL]).slice(0,12);cur=0;sc=0;document.getElementById('tot').textContent=qs.length;document.getElementById('game').classList.remove('hidden');document.getElementById('result').classList.add('hidden');loadQ()}
 function loadQ(){
 clearInterval(timerInt);
 var q=qs[cur];

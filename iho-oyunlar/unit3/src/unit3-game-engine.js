@@ -122,6 +122,7 @@
       setScore(shell, i+1, list.length, i+1, list.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="min-height:330px;display:flex;flex-direction:column;justify-content:center;gap:12px">
+          <div class="u3-muted">بِطاقَةُ مُفْرَداتٍ — اِضْغَطْ عَلى البِطاقَةِ لِلقَلْبِ 👆</div>
           <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
           <div class="u3-emoji" style="font-size:96px">${flipped ? escapeHtml(item.emoji || '🔤') : '👆'}</div>
         </div>
@@ -234,7 +235,7 @@
     renderMCQGame(container, data, options, 'truefalse', src, q => ({prompt:q.statement, options:q.options, answerIndex:q.answerIndex, after:q.explanation}));
   }
   function renderOddOneOut(container, data, options){
-    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`اِخْتَرِ المُخْتَلِف`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
+    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`حَدِّدِ الكَلِمَةَ المُخْتَلِفَةَ`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
   }
   function renderComparative(container, data, options){
     renderMCQGame(container, data, options, 'comparative', data.gameBanks.comparatives, q => ({prompt:q.prompt, options:q.options, answerIndex:q.options.indexOf(q.answer), after:q.tr}));
@@ -325,6 +326,8 @@
   function renderWordSearch(container, data, options){
     const shell = makeShell(container, 'wordSearch', options);
     const words = sample(data.gameBanks.wordSearch.words, options.limit || 10).map(w => stripHarakat(w));
+    const wsNorm = s => normalizeArabic(s).replace(/^ال/,'');
+    const wsEmoji = w => { const v = data.vocabulary.find(x => x.emoji && wsNorm(x.ar) === wsNorm(w)); return v ? v.emoji : '🔤'; };
     const size = options.size || 10;
     const filler = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
     let grid, placements, occupied, targetIdx=0, selected=[];
@@ -357,7 +360,7 @@
       const target = words[targetIdx];
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">الكَلِمَةُ المَطْلوبَة</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
+        <div class="u3-card"><div class="u3-muted">الكَلِمَةُ المَطْلوبَة</div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},38px)">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u3-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
@@ -390,20 +393,17 @@
     const shell = makeShell(container, 'directionsMap', options);
     const scenarios = sample(data.gameBanks.directionsScenarios, options.limit || data.gameBanks.directionsScenarios.length);
     let idx=0, correct=0, answer=[];
-    const places = ['البَيْت','المَدْرَسَة','المَكْتَبَة','المُسْتَشْفى','المَسْجِد','السّوق','مَوْقِف','شارِع','طَريق'];
     function draw(){
       const sc = scenarios[idx]; answer=[];
       setScore(shell, correct, scenarios.length, idx, scenarios.length);
       const shuffled = shuffle(sc.steps.map((s,i)=>({s,i})));
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-mid-ar">${escapeHtml(sc.title)}</div><div class="u3-muted">${escapeHtml(sc.tr || '')}</div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-map">
-          ${Array.from({length:25},(_,i)=>{
-            const label = places[i % places.length];
-            const cls = label===sc.start ? 'start place' : label===sc.target ? 'target place' : (i%3===0 ? 'place' : '');
-            return `<div class="u3-map-cell ${cls}">${escapeHtml(label)}</div>`;
-          }).join('')}
-        </div></div>
+        <div class="u3-card" style="text-align:center">
+          <div class="u3-mid-ar" dir="rtl">${escapeHtml(sc.title)}</div>
+          <div class="u3-ar" style="font-weight:800;margin-top:6px">🏁 مِنْ: ${escapeHtml(sc.start)}</div>
+          <div class="u3-ar" style="font-weight:800">📍 إِلى: ${escapeHtml(sc.target)}</div>
+          <div class="u3-muted" style="margin-top:8px">رَتِّبْ خُطُواتِ الطَّريقِ بِالتَّرتيبِ الصَّحيحِ 👇</div>
+        </div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الطَّريق</div><div class="u3-sentence-answer" data-answer></div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الخُطُوات</div><div class="u3-sentence-bank" data-bank>
           ${shuffled.map(x=>`<button class="u3-token u3-ar" data-i="${x.i}">${escapeHtml(x.s)}</button>`).join('')}
@@ -530,8 +530,8 @@
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="text-align:center">
-          <div class="u3-muted">رَتِّبِ الحُروف</div>
-          <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
+          <div class="u3-muted">اُنْظُرِ الصّورَةَ ثُمَّ رَتِّبِ الحُروفَ لِتَكْتُبَ الكَلِمَةَ</div>
+          <div style="font-size:96px;line-height:1.1">${escapeHtml(item.emoji || '🔤')}</div>
         </div>
         <div class="u3-card" style="margin-top:14px">
           <input class="u3-input" data-input placeholder="✍️" dir="rtl">
