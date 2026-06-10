@@ -1,68 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="tr">
 <head>
+<base href="/7sinif/4/">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الوَحْدَة الرّابِعَة — قَريبًا</title>
+<title>4. Ünite — مَدينَتي وَبَلَدي</title>
+<meta name="description" content="İHO 7. sınıf Arapça 4. ünite oyunları">
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--crimson:#E5176B;--crimson-d:#C2185B;--ink:#2A2F45;--ink-soft:#6B7088;--paper:#FFF7F3}
-html,body{min-height:100%}
-body{font-family:'Arakom','Inter',system-ui,sans-serif;
-  background:radial-gradient(circle at 12% 10%,rgba(229,23,107,.10),transparent 24%),radial-gradient(circle at 88% 12%,rgba(2,136,209,.08),transparent 22%),var(--paper);
-  color:var(--ink);min-height:100dvh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;position:relative;overflow:hidden}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.8;
-  background-image:radial-gradient(7px 7px at 8% 18%,#F386AC 60%,transparent 62%),radial-gradient(4px 4px at 18% 78%,#E5176B 60%,transparent 62%),radial-gradient(5px 5px at 26% 24%,#F8B0C8 60%,transparent 62%),radial-gradient(8px 8px at 74% 20%,#F386AC 60%,transparent 62%),radial-gradient(4px 4px at 82% 72%,#E5176B 60%,transparent 62%),radial-gradient(6px 6px at 90% 30%,#F8B0C8 60%,transparent 62%);background-repeat:no-repeat}
-.wrap{position:relative;z-index:10;max-width:640px;animation:fadeUp .8s ease-out}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.num{font-family:'Inter',sans-serif;font-size:clamp(140px,26vw,220px);font-weight:900;line-height:1;
-  background:linear-gradient(135deg,#FF5A8A,var(--crimson),var(--crimson-d));-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;opacity:.16;margin-bottom:-24px;letter-spacing:-.05em}
-.badge{display:inline-block;background:linear-gradient(100deg,var(--crimson),var(--crimson-d));color:#fff;padding:11px 26px;
-  border-radius:100px;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  margin-bottom:26px;box-shadow:0 12px 28px rgba(229,23,107,.32);animation:pulse 2.2s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.title-ar{font-family:'Arakom',sans-serif;font-size:clamp(46px,8vw,78px);font-weight:bold;
-  background:linear-gradient(100deg,var(--crimson),#FF5A8A 45%,var(--crimson-d));-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;margin-bottom:14px;direction:rtl}
-.title-tr{font-size:clamp(19px,2.5vw,26px);color:var(--ink-soft);font-weight:600;margin-bottom:26px}
-.desc-ar{font-family:'Arakom',sans-serif;color:var(--crimson-d);font-size:clamp(19px,2.6vw,24px);margin-bottom:18px;direction:rtl;font-weight:bold}
-.desc{color:var(--ink-soft);font-size:16px;line-height:1.7;margin-bottom:14px}
-.back{display:inline-flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--crimson);color:var(--crimson-d);
-  padding:13px 30px;border-radius:100px;text-decoration:none;font-size:15px;font-weight:700;transition:all .3s;
-  box-shadow:0 8px 20px rgba(229,23,107,.15);direction:rtl}
-.back:hover{background:var(--crimson);color:#fff;transform:translateY(-2px)}
-.back .arr{font-size:18px;transition:transform .3s}
-.back:hover .arr{transform:translateX(-6px)}
-.progress{margin:30px auto 0;max-width:300px}
-.progress-label{font-size:12px;color:var(--ink-soft);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;font-weight:700}
-.progress-bar{height:7px;background:#F4DCE5;border-radius:100px;overflow:hidden}
-.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--crimson),#FF5A8A);border-radius:100px;
-  animation:fill 2s ease-out .5s forwards;box-shadow:0 0 16px rgba(229,23,107,.4)}
-@keyframes fill{to{width:35%}}
+:root{--crimson:#E5176B;--crimson-d:#C2185B;--blue:#0288D1;--orange:#F57C00;--teal:#00897B;--ink:#2A2F45;--ink-soft:#6B7088;--paper:#FFF7F3}
+html,body{height:100%}
+body{font-family:'Arakom','Segoe UI',system-ui,sans-serif;background:radial-gradient(circle at 12% 8%,rgba(229,23,107,.10),transparent 22%),radial-gradient(circle at 88% 6%,rgba(2,136,209,.09),transparent 20%),var(--paper);color:var(--ink);height:100dvh;overflow:hidden;display:flex;flex-direction:column}
+.confetti{position:fixed;inset:0 0 auto 0;height:130px;pointer-events:none;z-index:0;opacity:.85;background-image:radial-gradient(6px 6px at 6% 30%,#F386AC 60%,transparent 62%),radial-gradient(4px 4px at 14% 70%,#E5176B 60%,transparent 62%),radial-gradient(5px 5px at 22% 20%,#F8B0C8 60%,transparent 62%),radial-gradient(3px 3px at 30% 55%,#E5176B 60%,transparent 62%),radial-gradient(7px 7px at 72% 26%,#F386AC 60%,transparent 62%),radial-gradient(4px 4px at 80% 64%,#E5176B 60%,transparent 62%),radial-gradient(5px 5px at 88% 30%,#F8B0C8 60%,transparent 62%),radial-gradient(3px 3px at 94% 58%,#E5176B 60%,transparent 62%);background-repeat:no-repeat}
+.top{position:relative;z-index:5;display:flex;align-items:center;gap:14px;padding:12px 24px 4px;flex-wrap:wrap}
+.top a.back{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid rgba(229,23,107,.35);color:var(--crimson-d);text-decoration:none;padding:7px 16px;border-radius:100px;font-size:14px;font-weight:700;white-space:nowrap;transition:.2s;box-shadow:0 4px 12px rgba(229,23,107,.12)}
+.top a.back:hover{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+.top .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--crimson);color:var(--crimson-d);padding:5px 16px;border-radius:100px;font-size:12.5px;font-weight:800;box-shadow:0 4px 14px rgba(229,23,107,.15)}
+.hero{position:relative;z-index:5;text-align:center;padding:0 20px 6px}
+.hero h1{font-family:'Arakom',sans-serif;font-size:clamp(24px,3.6vw,40px);direction:rtl;line-height:1.05;background:linear-gradient(100deg,var(--crimson),#FF5A8A 45%,var(--crimson-d));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:bold}
+.hero .sub{color:var(--ink-soft);font-size:clamp(12px,1.5vw,15px);margin-top:1px;font-weight:600}
+.grid{position:relative;z-index:5;flex:1 1 auto;min-height:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(4,1fr);gap:clamp(7px,.9vw,13px);padding:5px clamp(12px,1.8vw,24px) clamp(12px,1.8vw,20px)}
+.tile{position:relative;background:#fff;border:1px solid #F0DCE4;border-radius:16px;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3px;padding:8px 8px;overflow:hidden;min-height:0;box-shadow:0 5px 14px rgba(158,14,72,.07);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,border-color .25s}
+.tile::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--g,var(--crimson))}
+.tile:hover{transform:translateY(-4px);border-color:var(--c,var(--crimson));box-shadow:0 14px 28px -8px var(--sh,rgba(229,23,107,.3))}
+.tile .tnum{position:absolute;top:6px;right:10px;font-size:11px;font-weight:800;color:#E3B9C8}
+.tile .ticon{font-size:clamp(24px,2.9vw,38px);line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+.tile .tname{font-family:'Arakom',sans-serif;font-size:clamp(13px,1.45vw,1.15em);direction:rtl;font-weight:bold;color:var(--ink);line-height:1.18}
+.tile .tdo{font-size:clamp(9.5px,.92vw,11.5px);color:var(--ink-soft);line-height:1.25;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tile .tplay{display:none}
+.g-crimson,.g-pink,.g-red{--g:linear-gradient(90deg,#E5176B,#FF5A8A);--c:#E5176B;--sh:rgba(229,23,107,.3)}
+.g-orange{--g:linear-gradient(90deg,#F57C00,#FFB74D);--c:#F57C00;--sh:rgba(245,124,0,.3)}
+.g-blue,.g-cyan{--g:linear-gradient(90deg,#0288D1,#4FC3F7);--c:#0288D1;--sh:rgba(2,136,209,.3)}
+.g-teal,.g-green,.g-purple{--g:linear-gradient(90deg,#00897B,#4DB6AC);--c:#00897B;--sh:rgba(0,137,123,.3)}
+.tile.soon{background:repeating-linear-gradient(135deg,#fff,#fff 12px,#FFF1F5 12px,#FFF1F5 24px);border:2px dashed #F3C6D5;box-shadow:none;cursor:default}
+.tile.soon::before{display:none}.tile.soon:hover{transform:none;box-shadow:none;border-color:#F3C6D5}
+.tile.soon .splus{font-size:clamp(22px,2.6vw,34px);color:#E9A9BE;line-height:1}
+.tile.soon .stxt{font-size:clamp(10px,1vw,12px);color:#C98AA0;font-weight:700}
+.tile.soon .stxt-ar{font-family:'Arakom',sans-serif;direction:rtl;color:#D98FA8;font-size:clamp(11px,1.1vw,14px);font-weight:bold}
+@media(max-width:860px){body{overflow:auto;height:auto;min-height:100dvh}.grid{grid-template-columns:repeat(2,1fr);grid-template-rows:none}.tile{min-height:130px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
-<div class="wrap">
-  <div class="num">4</div>
-  <span class="badge">🚧 Yapım Aşamasında</span>
-  <h1 class="title-ar">الوَحْدَة الرّابِعَة</h1>
-  <div class="title-tr">4. Ünite</div>
-  <p class="desc-ar">قَريبًا… الوَحْدَة الرّابِعَة تَحْتَ التَّحْضير</p>
-  <p class="desc">Dördüncü ünite için yeni oyunlar ve etkinlikler hazırlanıyor. Ders kitabıyla sayfa sayfa uyumlu, Arapça arayüzlü oyunlar kısa süre içinde burada olacak.</p>
-
-  <div class="progress">
-    <div class="progress-label">Hazırlık · İlerleme</div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
-  </div>
-
-  <div style="margin-top:46px">
-    <a href="/7sinif/" class="back"><span class="arr">→</span> الرُّجوع إِلى الصَّفْحَة الرَّئيسِيَّة</a>
-  </div>
+<div class="confetti"></div>
+<div class="top">
+  <a class="back" href="/7sinif/">← Üniteler</a>
+  <span class="pill">الوَحْدَة ٤ · İHO 7. Sınıf</span>
 </div>
-
+<div class="hero">
+  <h1>مَدينَتي وَبَلَدي</h1>
+  <div class="sub">Şehrim ve Ülkem · 18 oyun · Türkiye şehirleri, konum-yön, mahalle, işaret isimleri, saatler</div>
+</div>
+<div class="grid">
+  <a class="tile g-cyan" href="/iho-oyunlar/unit4/flashcards.html"><span class="tnum">01</span><span class="ticon">🃏</span><span class="tname">لُعْبَة المُفْرَدات</span><span class="tdo">Şehir ve mekân kelimelerini kart kart öğren</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-cyan" href="/iho-oyunlar/unit4/match.html"><span class="tnum">02</span><span class="ticon">🔗</span><span class="tname">المُطابَقَة</span><span class="tdo">Şehri meşhur olduğu şeyle eşleştir</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-cyan" href="/iho-oyunlar/unit4/balloonPop.html"><span class="tnum">03</span><span class="ticon">🎈</span><span class="tname">فَرْقَعَة البالونات</span><span class="tdo">Resme uyan Arapça balonu patlat</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-cyan" href="/iho-oyunlar/unit4/wheel.html"><span class="tnum">04</span><span class="ticon">🎡</span><span class="tname">عَجَلَة الأَسْئِلَة</span><span class="tdo">Çarkı çevir, gelen soruyu cevapla</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-red" href="/iho-oyunlar/unit4/memory.html"><span class="tnum">05</span><span class="ticon">🧠</span><span class="tname">لُعْبَة الذّاكِرَة</span><span class="tdo">Kartları çevir, kelime-resim çiftlerini bul</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-cyan" href="/iho-oyunlar/unit4/wordSearch.html"><span class="tnum">06</span><span class="ticon">🔤</span><span class="tname">البَحْث عَن الكَلِمات</span><span class="tdo">Bulmacada kitaptaki 10 kelimeyi bul</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-blue" href="/iho-oyunlar/unit4/quiz.html"><span class="tnum">07</span><span class="ticon">🎯</span><span class="tname">اِخْتَر الجَواب الصَّحيح</span><span class="tdo">Ünite sorularından doğru cevabı seç</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-orange" href="/iho-oyunlar/unit4/demonstrative.html"><span class="tnum">08</span><span class="ticon">👆</span><span class="tname">هَذا، هَذِه، هَؤُلاء</span><span class="tdo">Resme uyan işaret ismini seç</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-green" href="/iho-oyunlar/unit4/classify.html"><span class="tnum">09</span><span class="ticon">📂</span><span class="tname">صَنِّف الكَلِمات</span><span class="tdo">Tekil/çoğul ve yemek/mekân olarak ayır</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-orange" href="/iho-oyunlar/unit4/clock.html"><span class="tnum">10</span><span class="ticon">🕐</span><span class="tname">كَم السّاعَة؟</span><span class="tdo">Saati oku: buçuk, çeyrek, yirmi geçe</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-green" href="/iho-oyunlar/unit4/map.html"><span class="tnum">11</span><span class="ticon">🗺️</span><span class="tname">أَيْن تَقَعُ؟</span><span class="tdo">Şehrin bölgesini haritada bul</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-orange" href="/iho-oyunlar/unit4/truefalse.html"><span class="tnum">12</span><span class="ticon">✅</span><span class="tname">صَحّ أَمْ خَطَأ</span><span class="tdo">Cümle doğru mu yanlış mı?</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-blue" href="/iho-oyunlar/unit4/fillBlank.html"><span class="tnum">13</span><span class="ticon">📝</span><span class="tname">الكَلِمَة النّاقِصَة</span><span class="tdo">Boşluğu doğru kelimeyle tamamla</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-blue" href="/iho-oyunlar/unit4/sentenceOrder.html"><span class="tnum">14</span><span class="ticon">🏗️</span><span class="tname">رَتِّب الجُمْلَة</span><span class="tdo">Kelimelerden kitaptaki cümleyi kur</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-blue" href="/iho-oyunlar/unit4/typing.html"><span class="tnum">15</span><span class="ticon">⌨️</span><span class="tname">كَلِمات مَقْلوبَة</span><span class="tdo">Karışık harflerden kelimeyi diz</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-blue" href="/iho-oyunlar/unit4/dialogueBuilder.html"><span class="tnum">16</span><span class="ticon">💬</span><span class="tname">رَتِّب الحِوار</span><span class="tdo">Diyalog satırlarını doğru sıraya diz</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-crimson" href="/iho-oyunlar/unit4/secretWord.html"><span class="tnum">17</span><span class="ticon">🔐</span><span class="tname">كَلِمَة السِّرّ</span><span class="tdo">Soruları çöz, gizli kelimeyi bul</span><span class="tplay">▶ OYNA</span></a>
+  <a class="tile g-orange" href="/iho-oyunlar/unit4/oddOneOut.html"><span class="tnum">18</span><span class="ticon">❓</span><span class="tname">الكَلِمَة المُخْتَلِفَة</span><span class="tdo">Gruba uymayan kelimeyi bul</span><span class="tplay">▶ OYNA</span></a>
+  <div class="tile soon"><span class="splus">＋</span><span class="stxt-ar">قَريبًا</span><span class="stxt">Yeni oyun</span></div>
+  <div class="tile soon"><span class="splus">＋</span><span class="stxt-ar">قَريبًا</span><span class="stxt">Yeni oyun</span></div>
+</div>
 </body>
 </html>
