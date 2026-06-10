@@ -272,7 +272,7 @@
       return Object.assign({}, it, { options: [it.ar].concat(others), answerIndex: 0 });
     });
     renderMCQGame(container, data, Object.assign({}, options, {limit: src.length}), 'clock', src, q => ({
-      visual: clockSVG(q.h, q.m) + `<div class="u4-clock-digital">${escapeHtml(q.digital)}</div>`,
+      visual: clockSVG(q.h, q.m),
       prompt: 'كَم السّاعَة الآن؟',
       options: q.options,
       answerIndex: q.answerIndex
@@ -544,25 +544,98 @@
     drawIntro();
   }
 
+  const BALLOON_STORE = 'u4-balloon-records';
+  function balloonRecords(){
+    try { return JSON.parse(localStorage.getItem(BALLOON_STORE) || '[]'); } catch(e){ return []; }
+  }
+  function balloonBest(){
+    const r = balloonRecords();
+    return r.length ? r[0].s : 0;
+  }
+  function balloonSave(name, score){
+    const list = balloonRecords();
+    list.push({ n: name || 'طالِب', s: score, t: Date.now() });
+    list.sort((a,b) => b.s - a.s || a.t - b.t);
+    const top = list.slice(0, 10);
+    try { localStorage.setItem(BALLOON_STORE, JSON.stringify(top)); } catch(e){}
+    return top;
+  }
   function renderBalloonPop(container, data, options){
     const shell = makeShell(container, 'balloonPop', options);
     const pool = data.vocabulary.filter(v => v.emoji && EMOJI_CATS.includes(v.category));
-    const rounds = sample(pool, options.limit || 10);
-    let idx=0, correct=0;
+    const maxLives = options.lives || 3;
+    let queue = shuffle(pool);
+    let lives = maxLives, score = 0, locked = false;
+    function hud(){
+      shell.score.textContent = `🏆 ${score} · ${'❤️'.repeat(lives)}${'🤍'.repeat(maxLives - lives)}`;
+      shell.progress.style.width = `${(lives / maxLives) * 100}%`;
+    }
+    function nextItem(){
+      if(!queue.length) queue = shuffle(pool);
+      return queue.pop();
+    }
     function draw(){
-      const item = rounds[idx];
+      const item = nextItem(); locked = false;
+      hud();
       const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 5))).slice(0,6);
-      setScore(shell, correct, rounds.length, idx, rounds.length);
       shell.body.innerHTML = `
-        <div class="u4-card"><div class="u4-muted">فَرْقِع الكَلِمَة المُناسِبَة:</div><div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div></div>
+        <div class="u4-card">
+          <div class="u4-row" style="justify-content:space-between;align-items:center">
+            <div class="u4-muted">فَرْقِع الكَلِمَة المُناسِبَة:</div>
+            <span class="u4-pill">أَفْضَل نَتيجَة: ${balloonBest()} 🏆</span>
+          </div>
+          <div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div>
+        </div>
         <div class="u4-balloon-area" data-area style="margin-top:14px">
           ${opts.map((o,i)=>`<button class="u4-balloon u4-ar" data-id="${escapeHtml(o.id)}" style="left:${8+(i%3)*30}%; top:${18+Math.floor(i/3)*42}%">${escapeHtml(o.ar)}</button>`).join('')}
         </div>`;
       $all('.u4-balloon', shell.body).forEach(b => b.addEventListener('click',()=>{
-        if(b.dataset.id === item.id){ correct++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْت', 'good'); }
-        else { b.classList.add('wrong'); feedback(shell,`✅ ${item.ar}`, 'bad'); }
-        setTimeout(()=>{ idx++; if(idx>=rounds.length) finalScreen(shell, correct, rounds.length, () => renderBalloonPop(container,data,options)); else draw(); }, 850);
+        if(locked) return; locked = true;
+        if(b.dataset.id === item.id){
+          score++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْت', 'good'); hud();
+          setTimeout(draw, 700);
+        } else {
+          lives--; b.classList.add('wrong'); feedback(shell,`❌ الصَّحيح: ${item.ar}`, 'bad'); hud();
+          setTimeout(()=>{ if(lives <= 0) gameOver(); else draw(); }, 950);
+        }
       }));
+    }
+    function gameOver(){
+      const best = balloonBest();
+      shell.body.innerHTML = `
+        <div class="u4-card u4-center" style="flex-direction:column;gap:12px;text-align:center">
+          <div style="font-size:56px">🎈</div>
+          <div class="u4-title" dir="rtl">اِنْتَهَتِ اللُّعْبَة</div>
+          <div class="u4-big-ar">🏆 ${score}</div>
+          ${score > best ? `<div class="u4-pill" style="background:#fff7ed;border-color:#fdba74;color:#9a3412">رَقْم قِياسِيّ جَديد! 🎉</div>` : ''}
+          <input class="u4-input" data-name placeholder="اِسْمُك" dir="rtl" maxlength="20" style="max-width:280px">
+          <div class="u4-actions">
+            <button class="u4-btn" data-save>سَجِّل النَّتيجَة 🏆</button>
+            <button class="u4-btn secondary" data-again>إِعادَة 🔄</button>
+          </div>
+        </div>`;
+      feedback(shell, '', '');
+      $('[data-save]', shell.body).addEventListener('click', () => {
+        const name = $('[data-name]', shell.body).value.trim();
+        showBoard(balloonSave(name, score));
+      });
+      $('[data-again]', shell.body).addEventListener('click', () => renderBalloonPop(container, data, options));
+    }
+    function showBoard(list){
+      shell.body.innerHTML = `
+        <div class="u4-card" style="text-align:center">
+          <div class="u4-title" dir="rtl">لَوْحَة الأَبْطال 🏆</div>
+          <div class="u4-records" dir="rtl">
+            ${list.map((r,i)=>`<div class="u4-record-row">
+              <span class="u4-record-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)}</span>
+              <span class="u4-record-name u4-ar">${escapeHtml(r.n)}</span>
+              <span class="u4-record-score">${r.s}</span>
+            </div>`).join('')}
+          </div>
+          <div class="u4-actions"><button class="u4-btn orange" data-again>اِلْعَبْ مَرَّة أُخْرى 🎈</button></div>
+        </div>`;
+      feedback(shell, '', '');
+      $('[data-again]', shell.body).addEventListener('click', () => renderBalloonPop(container, data, options));
     }
     draw();
   }
