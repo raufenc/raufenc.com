@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>السوق العربي — السوق العربي</title>
+<title>السّوق العَرَبِيّ — السّوق العَرَبِيّ</title>
 <style>
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -175,23 +175,23 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 <body>
 
 <!-- BACK BUTTON -->
-<a href="index.html" class="back-btn">العودة ←</a>
+<a href="index.html" class="back-btn">العَوْدَة ←</a>
 
 <!-- START SCREEN -->
 <div id="startScreen" class="screen active">
 <div class="start-content">
   <span class="start-icon">🏪</span>
-  <div class="start-title">السوق العربي</div>
-  <div class="start-subtitle">لُعْبَةُ التَّسَوُّق</div>
+  <div class="start-title">السّوق العَرَبِيّ</div>
+  <div class="start-subtitle">لُعْبَة التَّسَوُّق</div>
   <div class="start-desc" style="font-family:'Arakom',sans-serif;direction:rtl;text-align:center">
-    لَدَيْكَ <strong>قائِمَةُ تَسَوُّق</strong>!<br>
-    الرُّفوفُ بِالـ<strong>عَرَبِيَّةِ</strong> فَقَط.<br>
-    اِبْحَثْ عَنِ المُنْتَجاتِ وَأَضِفْها لِلسَلَّة!<br><br>
-    ٣ جَوْلات · كُلُّ جَوْلَةٍ أَصْعَب · اِجْمَع النُّجوم!
+    لَدَيْكَ <strong>قائِمَة تَسَوُّق</strong>!<br>
+    الرُّفوف بِالـ<strong>عَرَبِيَّة</strong> فَقَط.<br>
+    اِبْحَثْ عَن المُنْتَجات وَأَضِفْها لِلسَّلَّة!<br><br>
+    ٣ جَوْلات · كُلّ جَوْلَة أَصْعَب · اِجْمَع النُّجوم!
   </div>
   <div class="player-toggle">
-    <button id="btnSolo" class="active" onclick="setMode(1)">لاعِبٌ</button>
-    <button id="btnDuo" onclick="setMode(2)">لاعِبانِ</button>
+    <button id="btnSolo" class="active" onclick="setMode(1)">لاعِب</button>
+    <button id="btnDuo" onclick="setMode(2)">لاعِبان</button>
   </div>
   <button class="start-btn" onclick="startGame()">اِبْدَأ التَّسَوُّق!</button>
 </div>
@@ -201,9 +201,9 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 <div id="gameScreen" class="screen">
 <div class="game-header">
   <div class="game-round-badge" id="roundBadge"></div>
-  <div class="game-title-sm">السوق العربي</div>
+  <div class="game-title-sm">السّوق العَرَبِيّ</div>
   <div class="game-hud">
-    <span>النَّتيجة: <span class="hud-score" id="hudScore">0</span></span>
+    <span>النَّتيجَة: <span class="hud-score" id="hudScore">0</span></span>
     <span>الوَقْت: <span class="hud-timer" id="hudTimer">0</span>s</span>
     <span class="hud-stars" id="hudStars"></span>
     <span>الأَخْطاء: <span class="hud-mistakes" id="hudMistakes">0</span></span>
@@ -215,18 +215,18 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
     <ul class="list-items" id="listItems"></ul>
   </div>
   <div class="market-panel">
-    <div class="market-label">اِقْرَأ المُلْصَقاتِ وَاخْتَر المُنْتَجاتِ الصَّحيحَة!</div>
+    <div class="market-label">اِقْرَأ المُلْصَقات وَاخْتَر المُنْتَجات الصَّحيحَة!</div>
     <div class="shelf-grid" id="shelfGrid"></div>
   </div>
 </div>
 <div id="splitLayout" class="split-container" style="display:none">
   <div class="split-half p1">
-    <div class="split-player-label">اللاعِبُ ١</div>
+    <div class="split-player-label">اللّاعِب ١</div>
     <ul class="split-list" id="splitList1"></ul>
     <div class="split-shelf-grid" id="splitGrid1"></div>
   </div>
   <div class="split-half p2">
-    <div class="split-player-label">اللاعِبُ ٢</div>
+    <div class="split-player-label">اللّاعِب ٢</div>
     <ul class="split-list" id="splitList2"></ul>
     <div class="split-shelf-grid" id="splitGrid2"></div>
   </div>
@@ -251,7 +251,7 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
   <div class="final-title" id="finalTitle"></div>
   <div id="finalBody"></div>
   <button class="round-btn" onclick="resetToStart()">↩ القائِمَة</button>
-  <button class="round-btn secondary" onclick="startGame()">🔄 إعادَة</button>
+  <button class="round-btn secondary" onclick="startGame()">🔄 إِعادَة</button>
 </div>
 </div>
 
@@ -359,8 +359,8 @@ let p1RoundStars=[0,0,0];
 let p2RoundStars=[0,0,0];
 
 const ROUNDS=[
-  {listCount:4,shelfCount:8,pool:'foods',label:'الجَوْلَة ١: المَأكولات'},
-  {listCount:5,shelfCount:10,pool:'foodsVerbs',label:'الجَوْلَة ٢: المَأكولات + الأَفْعال'},
+  {listCount:4,shelfCount:8,pool:'foods',label:'الجَوْلَة ١: المَأْكولات'},
+  {listCount:5,shelfCount:10,pool:'foodsVerbs',label:'الجَوْلَة ٢: المَأْكولات + الأَفْعال'},
   {listCount:6,shelfCount:12,pool:'all',label:'الجَوْلَة ٣: مُخْتَلَط'}
 ];
 
@@ -692,7 +692,7 @@ function completeRound(){
   overlay.style.display='flex';
   document.getElementById('roundCompleteTitle').textContent='اِكْتَمَلَ التَّسَوُّق! \uD83D\uDED2';
   document.getElementById('roundStarsDisplay').innerHTML=starsHTML(stars);
-  document.getElementById('roundScoreDisplay').textContent='النَّتيجة: +'+roundScore;
+  document.getElementById('roundScoreDisplay').textContent='النَّتيجَة: +'+roundScore;
   document.getElementById('roundTimeDisplay').textContent='الوَقْت: '+roundElapsed+'s | الأَخْطاء: '+roundMistakes;
 
   sesCelebrate();
@@ -719,13 +719,13 @@ function completeDuoRound(){
   const overlay=document.getElementById('roundOverlay');
   overlay.style.display='flex';
 
-  const winner=p1Score>p2Score?'اللاعِبُ ١':p2Score>p1Score?'اللاعِبُ ٢':'تَعادُل';
+  const winner=p1Score>p2Score?'اللّاعِب ١':p2Score>p1Score?'اللّاعِب ٢':'تَعادُل';
   document.getElementById('roundCompleteTitle').textContent=winner+(winner!=='تَعادُل'?' فاز! 🏆':' 🤝');
   document.getElementById('roundStarsDisplay').innerHTML=
-    '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ١</div>'+starsHTML(s1)+
-    '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">اللاعِبُ ٢</div>'+starsHTML(s2);
+    '<div style="font-size:16px;color:#4895ef;font-family:Arial,sans-serif;margin-bottom:4px">اللّاعِب ١</div>'+starsHTML(s1)+
+    '<div style="margin-top:10px;font-size:16px;color:#ef233c;font-family:Arial,sans-serif;margin-bottom:4px">اللّاعِب ٢</div>'+starsHTML(s2);
   document.getElementById('roundScoreDisplay').textContent='P1: +'+p1Score+' | P2: +'+p2Score;
-  document.getElementById('roundTimeDisplay').textContent='اللاعِب ١ الوَقْت: '+p1Time+'s ('+p1Mistakes+' خَطَأ) | الوَقْت اللاعِب ٢: '+p2Time+'s ('+p2Mistakes+' خَطَأ)';
+  document.getElementById('roundTimeDisplay').textContent='اللّاعِب ١ الوَقْت: '+p1Time+'s ('+p1Mistakes+' خَطَأ) | الوَقْت اللّاعِب ٢: '+p2Time+'s ('+p2Mistakes+' خَطَأ)';
 
   sesCelebrate();
 
@@ -754,7 +754,7 @@ function showFinal(){
   const totalStarsCount=roundStars.reduce((a,b)=>a+b,0);
   let msg='';
   if(totalStarsCount>=8) msg='🏆 مُمْتاز!';
-  else if(totalStarsCount>=5) msg='🌟 أَحْسَنْت!';
+  else if(totalStarsCount>=5) msg='🌟 أَحْسَنْتَ!';
   else msg='📘 حاوِلْ مَرَّةً أُخْرى!';
 
   document.getElementById('finalTitle').textContent='اِنْتَهى التَّسَوُّق!';
@@ -790,20 +790,20 @@ function showFinalDuo(){
   const p2Total=p2RoundStars.reduce((a,b)=>a+b,0);
   const winner=totalP1Score>totalP2Score?1:totalP2Score>totalP1Score?2:0;
 
-  document.getElementById('finalTitle').textContent=winner===0?'تَعادُل!':('اللاعِبُ '+winner+' فاز!');
+  document.getElementById('finalTitle').textContent=winner===0?'تَعادُل!':('اللّاعِب '+winner+' فاز!');
 
   let html='<div class="final-2p">';
   // P1
   html+='<div class="final-2p-card'+(winner===1?' winner':'')+'">';
   if(winner===1) html+='<div class="f2p-crown">&#128081;</div>';
-  html+='<div class="f2p-label" style="color:#4895ef">اللاعِبُ ١</div>';
+  html+='<div class="f2p-label" style="color:#4895ef">اللّاعِب ١</div>';
   html+='<div class="f2p-score">'+totalP1Score+'</div>';
   html+='<div class="f2p-stars">'+starsOf9(p1Total)+'</div>';
   html+='</div>';
   // P2
   html+='<div class="final-2p-card'+(winner===2?' winner':'')+'">';
   if(winner===2) html+='<div class="f2p-crown">&#128081;</div>';
-  html+='<div class="f2p-label" style="color:#ef233c">اللاعِبُ ٢</div>';
+  html+='<div class="f2p-label" style="color:#ef233c">اللّاعِب ٢</div>';
   html+='<div class="f2p-score">'+totalP2Score+'</div>';
   html+='<div class="f2p-stars">'+starsOf9(p2Total)+'</div>';
   html+='</div>';

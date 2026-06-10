@@ -2,22 +2,22 @@
   'use strict';
 
   const DEFAULT_GAME_TITLES = {
-    flashcards: ['بِطاقاتُ المُفْرَدات', 'اُنْظُرِ الصّورَةَ وَاقْرَأِ الكَلِمَة.'],
-    match: ['المُطابَقَة', 'طابِقِ الكَلِمَةَ مَعَ صورَتِها.'],
-    quiz: ['الاِخْتِبار', 'اِخْتَرِ الجَوابَ الصَّحيح.'],
-    truefalse: ['صَحٌّ أَمْ خَطَأ', 'هَلِ الجُمْلَةُ صَحيحَة؟'],
-    sentenceOrder: ['تَرْتيبُ الجُمْلَة', 'رَتِّبِ الكَلِماتِ بِالتَّرتيبِ الصَّحيح.'],
-    fillBlank: ['الكَلِمَةُ النّاقِصَة', 'أَكْمِلِ الجُمْلَةَ بِالكَلِمَةِ المُناسِبَة.'],
-    memory: ['الذّاكِرَة', 'طابِقِ الكَلِمَةَ مَعَ صورَتِها.'],
-    oddOneOut: ['المُخْتَلِف', 'اِخْتَرِ الكَلِمَةَ المُخْتَلِفَة.'],
-    wordSearch: ['البَحْثُ عَنِ الكَلِمات', 'اِبْحَثْ عَنْ حُروفِ الكَلِمَة.'],
-    directionsMap: ['الاِتِّجاهات', 'رَتِّبْ خُطُواتِ الطَّريق.'],
-    comparative: ['المُقارَنَة', 'دَرِّبْ صيغَةَ أَفْعَلُ مِنْ.'],
-    traffic: ['إِشاراتُ المُرور', 'اِخْتَرِ الفِعْلَ حَسَبَ الضَّوْء.'],
-    dialogueBuilder: ['بِناءُ الحِوار', 'رَتِّبْ سُطورَ الحِوار.'],
-    wheel: ['عَجَلَةُ الأَسْئِلَة', 'أَدِرِ العَجَلَةَ وَأَجِب.'],
-    balloonPop: ['فَرْقَعَةُ البالونات', 'فَرْقِعِ البالونَ المُناسِبَ لِلصّورَة.'],
-    typing: ['تَرْتيبُ الحُروف', 'رَتِّبِ الحُروفَ لِتَكْتُبَ الكَلِمَة.']
+    flashcards: ['بِطاقات المُفْرَدات', 'اُنْظُر الصّورَة وَاقْرَأ الكَلِمَة.'],
+    match: ['المُطابَقَة', 'طابِق الكَلِمَة مَعَ صورَتِها.'],
+    quiz: ['الاِخْتِبار', 'اِخْتَر الجَواب الصَّحيح.'],
+    truefalse: ['صَحّ أَمْ خَطَأ', 'هَل الجُمْلَة صَحيحَة؟'],
+    sentenceOrder: ['تَرْتيب الجُمْلَة', 'رَتِّب الكَلِمات بِالتَّرْتيب الصَّحيح.'],
+    fillBlank: ['الكَلِمَة النّاقِصَة', 'أَكْمِل الجُمْلَة بِالكَلِمَة المُناسِبَة.'],
+    memory: ['الذّاكِرَة', 'طابِق الكَلِمَة مَعَ صورَتِها.'],
+    oddOneOut: ['المُخْتَلِف', 'اِخْتَر الكَلِمَة المُخْتَلِفَة.'],
+    wordSearch: ['البَحْث عَن الكَلِمات', 'اِبْحَثْ عَنْ حُروف الكَلِمَة.'],
+    directionsMap: ['الاِتِّجاهات', 'رَتِّبْ خُطُوات الطَّريق.'],
+    comparative: ['المُقارَنَة', 'دَرِّبْ صيغَة أَفْعَل مِنْ.'],
+    traffic: ['إِشارات المُرور', 'اِخْتَر الفِعْل حَسَبَ الضَّوْء.'],
+    dialogueBuilder: ['بِناء الحِوار', 'رَتِّبْ سُطور الحِوار.'],
+    wheel: ['عَجَلَة الأَسْئِلَة', 'أَدِر العَجَلَة وَأَجِبْ.'],
+    balloonPop: ['فَرْقَعَة البالونات', 'فَرْقِع البالون المُناسِب لِلصّورَة.'],
+    typing: ['تَرْتيب الحُروف', 'رَتِّب الحُروف لِتَكْتُبَ الكَلِمَة.']
   };
 
   function $(sel, root){ return (root || document).querySelector(sel); }
@@ -80,7 +80,7 @@
       <div class="u3-progress" aria-label="progress"><span data-progress></span></div>
       <div data-body style="margin-top:16px"></div>
       <div class="u3-feedback" data-feedback></div>
-      <div class="u3-footer-note">إِلى أَيْنَ نُسافِرُ؟</div>
+      <div class="u3-footer-note">إِلى أَيْن نُسافِرُ؟</div>
     `;
     return {
       body: $('[data-body]', container),
@@ -105,7 +105,7 @@
         <div style="font-size:56px">${pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘'}</div>
         <div class="u3-title">${pct}%</div>
         <div class="u3-muted">${correct} / ${total} ✅</div>
-        <button class="u3-btn" data-restart>إعادَة 🔄</button>
+        <button class="u3-btn" data-restart>إِعادَة 🔄</button>
       </div>`;
     $('[data-restart]', shell.body).addEventListener('click', restart);
     feedback(shell, '', '');
@@ -122,7 +122,7 @@
       setScore(shell, i+1, list.length, i+1, list.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="min-height:330px;display:flex;flex-direction:column;justify-content:center;gap:12px">
-          <div class="u3-muted">بِطاقَةُ مُفْرَداتٍ — اِضْغَطْ عَلى البِطاقَةِ لِلقَلْبِ 👆</div>
+          <div class="u3-muted">بِطاقَة مُفْرَدات — اِضْغَطْ عَلى البِطاقَة لِلْقَلْب 👆</div>
           <div class="u3-big-ar" dir="rtl">${escapeHtml(item.ar)}</div>
           <div class="u3-emoji" style="font-size:96px">${flipped ? escapeHtml(item.emoji || '🔤') : '👆'}</div>
         </div>
@@ -149,7 +149,7 @@
     function draw(){
       setScore(shell, correct, pairs.length, correct, pairs.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">اِخْتَرِ الكَلِمَةَ ثُمَّ صورَتَها المُناسِبَة.</div></div>
+        <div class="u3-card"><div class="u3-muted">اِخْتَر الكَلِمَة ثُمَّ صورَتَها المُناسِبَة.</div></div>
         <div class="u3-grid u3-grid-2" style="margin-top:14px">
           <div class="u3-card u3-match-col" data-chips>
             ${shuffle(pairs).map(p=>`<button class="u3-chip u3-ar" draggable="true" data-ar="${escapeHtml(p.ar)}">${escapeHtml(p.ar)}</button>`).join('')}
@@ -180,7 +180,7 @@
         target.innerHTML = `<span class="u3-ar">${escapeHtml(ar)}</span><span style="font-size:32px"> ${escapeHtml(pairs.find(p=>p.ar===ar).emoji)}</span>`;
         if(chip) chip.classList.add('used');
         selected = null;
-        feedback(shell, '✅ أَحْسَنْت', 'good');
+        feedback(shell, '✅ أَحْسَنْتَ', 'good');
       }else{
         feedback(shell, '🔁 حاوِلْ ثانِيَة', 'bad');
       }
@@ -231,11 +231,11 @@
     renderMCQGame(container, data, options, 'quiz', data.gameBanks.quizQuestions, q => ({prompt:q.prompt, options:q.options, answerIndex:q.answerIndex, hint:''}));
   }
   function renderTrueFalse(container, data, options){
-    const src = data.gameBanks.trueFalse.map(q => ({...q, options:['صَحٌّ','خَطَأ'], answerIndex:q.answer ? 0 : 1}));
+    const src = data.gameBanks.trueFalse.map(q => ({...q, options:['صَحّ','خَطَأ'], answerIndex:q.answer ? 0 : 1}));
     renderMCQGame(container, data, options, 'truefalse', src, q => ({prompt:q.statement, options:q.options, answerIndex:q.answerIndex, after:q.explanation}));
   }
   function renderOddOneOut(container, data, options){
-    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`حَدِّدِ الكَلِمَةَ المُخْتَلِفَةَ`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
+    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`حَدِّد الكَلِمَة المُخْتَلِفَة`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
   }
   function renderComparative(container, data, options){
     renderMCQGame(container, data, options, 'comparative', data.gameBanks.comparatives, q => ({prompt:q.prompt, options:q.options, answerIndex:q.options.indexOf(q.answer), after:q.tr}));
@@ -263,7 +263,7 @@
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الكَلِمات</div><div class="u3-sentence-bank" data-bank>
           ${bank.map(x=>`<button class="u3-token" data-i="${x.i}">${escapeHtml(x.t)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّقْ ✅</button></div>`;
       $all('.u3-token', $('[data-bank]', shell.body)).forEach(btn=>btn.addEventListener('click',()=>{
         btn.classList.add('used'); answer.push({i:Number(btn.dataset.i), t:btn.textContent, source:btn}); redrawAnswer(item);
       }));
@@ -281,7 +281,7 @@
       const got = answer.map(x=>x.t).join(' ');
       const expected = item.tokens.join(' ');
       if(got === expected){
-        correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
+        correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good');
         setScore(shell, correct, list.length, idx+1, list.length);
         setTimeout(()=>{ idx++; if(idx>=list.length) finalScreen(shell, correct, list.length, () => renderSentenceOrder(container,data,options)); else draw(); }, 900);
       }else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
@@ -360,7 +360,7 @@
       const target = words[targetIdx];
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">الكَلِمَةُ المَطْلوبَة</div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
+        <div class="u3-card"><div class="u3-muted">الكَلِمَة المَطْلوبَة</div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},38px)">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u3-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
@@ -377,7 +377,7 @@
         cell.classList.add('active'); selected.push(cell);
         if(selected.length === target.length){
           selected.forEach(c=>{ c.classList.remove('active'); c.classList.add('found'); });
-          feedback(shell,'✅ أَحْسَنْت', 'good');
+          feedback(shell,'✅ أَحْسَنْتَ', 'good');
           targetIdx++; selected=[];
           if(targetIdx>=words.length) setTimeout(()=>finalScreen(shell, words.length, words.length, () => renderWordSearch(container,data,options)), 700);
           else setTimeout(draw, 650);
@@ -402,13 +402,13 @@
           <div class="u3-mid-ar" dir="rtl">${escapeHtml(sc.title)}</div>
           <div class="u3-ar" style="font-weight:800;margin-top:6px">🏁 مِنْ: ${escapeHtml(sc.start)}</div>
           <div class="u3-ar" style="font-weight:800">📍 إِلى: ${escapeHtml(sc.target)}</div>
-          <div class="u3-muted" style="margin-top:8px">رَتِّبْ خُطُواتِ الطَّريقِ بِالتَّرتيبِ الصَّحيحِ 👇</div>
+          <div class="u3-muted" style="margin-top:8px">رَتِّبْ خُطُوات الطَّريق بِالتَّرْتيب الصَّحيح 👇</div>
         </div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الطَّريق</div><div class="u3-sentence-answer" data-answer></div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الخُطُوات</div><div class="u3-sentence-bank" data-bank>
           ${shuffled.map(x=>`<button class="u3-token u3-ar" data-i="${x.i}">${escapeHtml(x.s)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّقْ ✅</button></div>`;
       $all('.u3-token', $('[data-bank]', shell.body)).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); answer.push({i:Number(btn.dataset.i), s:btn.textContent, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>x.source.classList.remove('used')); answer=[]; redraw(); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>check(sc));
@@ -420,7 +420,7 @@
     }
     function check(sc){
       const ok = answer.map(x=>x.i).join(',') === sc.steps.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
+      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
       else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, scenarios.length, idx+1, scenarios.length);
     }
@@ -436,12 +436,12 @@
       setScore(shell, correct, dialogues.length, idx, dialogues.length);
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
-        <div class="u3-card"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطورَ الحِوار.</div></div>
+        <div class="u3-card"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطور الحِوار.</div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الحِوار</div><div data-answer></div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-grid">
           ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
         </div></div>
-        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>`;
+        <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّقْ ✅</button></div>`;
       $all('.u3-option', shell.body).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); btn.disabled=true; answer.push({i:Number(btn.dataset.i), html:btn.innerHTML, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>{ x.source.disabled=false; x.source.classList.remove('used'); }); answer=[]; redraw(); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>check(dlg));
@@ -452,7 +452,7 @@
     }
     function check(dlg){
       const ok = answer.map(x=>x.i).join(',') === dlg.lines.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
+      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
       else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, dialogues.length, idx+1, dialogues.length);
     }
@@ -467,7 +467,7 @@
       setScore(shell, correct, questions.length, asked.length, questions.length);
       shell.body.innerHTML = `
         <div class="u3-wheel" data-wheel><span>🎡</span></div>
-        <div class="u3-actions"><button class="u3-btn orange" data-spin>أَدِرِ العَجَلَة 🎡</button></div>`;
+        <div class="u3-actions"><button class="u3-btn orange" data-spin>أَدِر العَجَلَة 🎡</button></div>`;
       $('[data-spin]', shell.body).addEventListener('click', spin);
       $('[data-wheel]', shell.body).addEventListener('click', spin);
     }
@@ -507,12 +507,12 @@
       const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 5))).slice(0,6);
       setScore(shell, correct, rounds.length, idx, rounds.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">فَرْقِعِ الكَلِمَةَ المُناسِبَة:</div><div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div></div>
+        <div class="u3-card"><div class="u3-muted">فَرْقِع الكَلِمَة المُناسِبَة:</div><div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div></div>
         <div class="u3-balloon-area" data-area style="margin-top:14px">
           ${opts.map((o,i)=>`<button class="u3-balloon u3-ar" data-id="${escapeHtml(o.id)}" style="left:${8+(i%3)*30}%; top:${18+Math.floor(i/3)*42}%">${escapeHtml(o.ar)}</button>`).join('')}
         </div>`;
       $all('.u3-balloon', shell.body).forEach(b => b.addEventListener('click',()=>{
-        if(b.dataset.id === item.id){ correct++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْت', 'good'); }
+        if(b.dataset.id === item.id){ correct++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْتَ', 'good'); }
         else { b.classList.add('wrong'); feedback(shell,`✅ ${item.ar}`, 'bad'); }
         setTimeout(()=>{ idx++; if(idx>=rounds.length) finalScreen(shell, correct, rounds.length, () => renderBalloonPop(container,data,options)); else draw(); }, 850);
       }));
@@ -530,20 +530,20 @@
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="text-align:center">
-          <div class="u3-muted">اُنْظُرِ الصّورَةَ ثُمَّ رَتِّبِ الحُروفَ لِتَكْتُبَ الكَلِمَةَ</div>
+          <div class="u3-muted">اُنْظُر الصّورَة ثُمَّ رَتِّب الحُروف لِتَكْتُبَ الكَلِمَة</div>
           <div style="font-size:96px;line-height:1.1">${escapeHtml(item.emoji || '🔤')}</div>
         </div>
         <div class="u3-card" style="margin-top:14px">
           <input class="u3-input" data-input placeholder="✍️" dir="rtl">
           <div class="u3-actions" data-letters>${letters.map(ch=>`<button class="u3-chip" data-ch="${escapeHtml(ch)}">${escapeHtml(ch)}</button>`).join('')}</div>
-          <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّق ✅</button></div>
+          <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّقْ ✅</button></div>
         </div>`;
       const input = $('[data-input]', shell.body);
       $all('[data-ch]', shell.body).forEach(btn => btn.addEventListener('click',()=>{ input.value += btn.dataset.ch; btn.classList.add('used'); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ input.value=''; $all('[data-ch]', shell.body).forEach(b=>b.classList.remove('used')); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>{
         if(normalizeArabic(input.value) === normalizeArabic(item.target)){
-          correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
+          correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
           setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 800);
         }else feedback(shell,`🔁 ${item.ar}`, 'bad');

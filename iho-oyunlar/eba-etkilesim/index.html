@@ -40,15 +40,15 @@ body{
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="../index.html">→ كُلُّ الأَلْعاب</a>
+  <a class="back" href="../index.html">→ كُلّ الأَلْعاب</a>
   <h1 class="hub-title">أَنْشِطَة تَفاعُلِيَّة</h1>
-  <div class="hub-sub">شاهِدْ، أَجِبْ، ثُمَّ اسْتَمِعْ إِلى الجَواب — العَرَبِيَّة لِلصَّفِّ السّابِع</div>
+  <div class="hub-sub">شاهِدْ، أَجِبْ، ثُمَّ اسْتَمِعْ إِلى الجَواب — العَرَبِيَّة لِلصَّفّ السّابِع</div>
   <div class="grid" id="grid"></div>
 </div>
 
 <script src="activities.js"></script>
 <script>
-const UNIT_AR = {1:'الوَحْدَة الأولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
+const UNIT_AR = {1:'الوَحْدَة الأُولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
 const AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
 const grid=document.getElementById('grid');
@@ -56,7 +56,7 @@ const grid=document.getElementById('grid');
   const el=document.createElement('a');
   el.className='card'; el.href='player.html?id='+encodeURIComponent(a.id);
   const pg=parseInt(a.id.slice(1),10);
-  el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سؤال</div>
+  el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سُؤال</div>
     <div class="unit">${UNIT_AR[a.unit]||''} &middot; صَفْحَة ${toAr(pg)}</div>
     <div class="name">${a.title}</div>
     <div class="desc">${a.subtitle||''}</div>

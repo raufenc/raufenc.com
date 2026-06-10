@@ -1,7 +1,7 @@
 window.IHO_UNIT2_DATA = {
   "metadata": {
     "unit": 2,
-    "title_ar": "وَقْتُ التَّسَوُّق",
+    "title_ar": "وَقْت التَّسَوُّق",
     "title_tr": "",
     "grade": "",
     "source_pdf": "IHO_Arp7_02_Unite2_04052026.pdf",
@@ -76,7 +76,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🛒",
       "translit": "at-tasawwuq",
       "examples": [
-        "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ."
+        "أَذْهَبُ إِلى السّوق لِلتَّسَوُّق."
       ],
       "tags": [
         "theme"
@@ -100,7 +100,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏪",
       "translit": "al-baqqāla",
       "examples": [
-        "أَشْتَري الخُبْزَ مِنَ البَقّالَةِ."
+        "أَشْتَري الخُبْز مِن البَقّالَة."
       ],
       "tags": [
         "place"
@@ -124,7 +124,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏬",
       "translit": "as-sūq",
       "examples": [
-        "أَشْتَري الفَواكِهَ مِنَ السّوقِ."
+        "أَشْتَري الفَواكِه مِن السّوق."
       ],
       "tags": [
         "place"
@@ -148,7 +148,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏬",
       "translit": "as-sūq al-markazī",
       "examples": [
-        "التَّسَوُّقُ مِنَ السّوقِ المَرْكَزِيِّ."
+        "التَّسَوُّق مِن السّوق المَرْكَزِيّ."
       ],
       "tags": [
         "place"
@@ -170,7 +170,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥬",
       "translit": "sūq al-khuḍar",
       "examples": [
-        "أَذْهَبُ إِلى سوقِ الخُضَرِ."
+        "أَذْهَبُ إِلى سوق الخُضَر."
       ],
       "tags": [
         "place"
@@ -193,7 +193,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "👨‍🌾",
       "translit": "al-bā’iʿ",
       "examples": [
-        "قالَ البائِعُ: أَيُّ خِدْمَةٍ؟"
+        "قالَ البائِع: أَيّ خِدْمَة؟"
       ],
       "tags": [
         "role"
@@ -238,7 +238,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "👨‍🍳",
       "translit": "al-baqqāl",
       "examples": [
-        "ساعِد العَمَّ البَقّالَ."
+        "ساعِد العَمّ البَقّال."
       ],
       "tags": [
         "role"
@@ -253,7 +253,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v009",
-      "ar": "قائِمَةُ التَّسَوُّق",
+      "ar": "قائِمَة التَّسَوُّق",
       "ar_clean": "قائمه التسوق",
       "tr": "",
       "category": "place_role",
@@ -261,7 +261,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧾",
       "translit": "qā’imat at-tasawwuq",
       "examples": [
-        "أُعِدُّ قائِمَةَ التَّسَوُّقِ."
+        "أُعِدُّ قائِمَة التَّسَوُّق."
       ],
       "tags": [
         "object"
@@ -285,7 +285,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧺",
       "translit": "salla",
       "examples": [
-        "ضَعِ المُنْتَجاتِ في السَّلَّةِ."
+        "ضَع المُنْتَجات في السَّلَّة."
       ],
       "tags": [
         "object"
@@ -308,7 +308,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🛒",
       "translit": "ʿaraba",
       "examples": [
-        "في العَرَبَةِ عُلْبَةُ حَليبٍ."
+        "في العَرَبَة عُلْبَة حَليب."
       ],
       "tags": [
         "object"
@@ -331,7 +331,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📦",
       "translit": "ṣundūq",
       "examples": [
-        "صُنْدوقٌ كَبيرٌ."
+        "صُنْدوق كَبير."
       ],
       "tags": [
         "object"
@@ -354,7 +354,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🛍️",
       "translit": "kīs",
       "examples": [
-        "كيسٌ خَفيفٌ."
+        "كيس خَفيف."
       ],
       "tags": [
         "object"
@@ -377,7 +377,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🤝",
       "translit": "khidma",
       "examples": [
-        "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟"
+        "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟"
       ],
       "tags": [
         "dialogue"
@@ -401,7 +401,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏷️",
       "translit": "muntaj",
       "examples": [
-        "هذا المُنْتَجُ رَخيصٌ."
+        "هذا المُنْتَج رَخيص."
       ],
       "tags": [
         "object"
@@ -447,7 +447,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍚",
       "translit": "sukkar",
       "examples": [
-        "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ."
+        "أَطْلُبُ مِنْكَ كيلو سُكَّر."
       ],
       "tags": [
         "food"
@@ -471,7 +471,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧂",
       "translit": "milḥ",
       "examples": [
-        "أُريدُ عُلْبَةَ مِلْحٍ."
+        "أُريدُ عُلْبَة مِلْح."
       ],
       "tags": [
         "food"
@@ -495,7 +495,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍵",
       "translit": "shāy",
       "examples": [
-        "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ."
+        "أُريدُ عُلْبَتَيْن مِن الشّاي."
       ],
       "tags": [
         "drink"
@@ -518,7 +518,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥛",
       "translit": "ḥalīb",
       "examples": [
-        "أَنْتِ بِحاجَةٍ إِلى الحَليبِ."
+        "أَنْتِ بِحاجَة إِلى الحَليب."
       ],
       "tags": [
         "drink"
@@ -542,7 +542,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍯",
       "translit": "ʿasal",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى كيلوغرامٍ مِنَ العَسَلِ."
+        "أَنا بِحاجَة إِلى كيلوغْرام مِن العَسَل."
       ],
       "tags": [
         "food"
@@ -565,7 +565,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "💧",
       "translit": "mā’",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى ماءٍ."
+        "أَنا بِحاجَة إِلى ماء."
       ],
       "tags": [
         "drink"
@@ -588,7 +588,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥚",
       "translit": "bayḍ",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى عُلْبَةٍ مِنَ البَيْضِ."
+        "أَنا بِحاجَة إِلى عُلْبَة مِن البَيْض."
       ],
       "tags": [
         "food"
@@ -611,7 +611,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍝",
       "translit": "makarūna",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى عُلْبَةِ مَكَرونَةٍ."
+        "أَنا بِحاجَة إِلى عُلْبَة مَكَرونَة."
       ],
       "tags": [
         "food"
@@ -634,7 +634,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🫒",
       "translit": "zaytūn",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ."
+        "أَنا بِحاجَة إِلى كيلو زَيْتون."
       ],
       "tags": [
         "food"
@@ -656,7 +656,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍗",
       "translit": "dajāja",
       "examples": [
-        "الدَّجاجَةُ غالِيَةٌ."
+        "الدَّجاجَة غالِيَة."
       ],
       "tags": [
         "food"
@@ -678,7 +678,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧺",
       "translit": "ḥājāt yawmiyya",
       "examples": [
-        "أَكْتُبُ الحاجاتِ اليَوْمِيَّةَ."
+        "أَكْتُبُ الحاجات اليَوْمِيَّة."
       ],
       "tags": [
         "phrase"
@@ -700,7 +700,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍎",
       "translit": "tuffāḥ",
       "examples": [
-        "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ."
+        "التُّفّاح أَرْخَص مِن المَوْز."
       ],
       "tags": [
         "fruit"
@@ -725,7 +725,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍊",
       "translit": "burtuqāl",
       "examples": [
-        "عِنْدي بُرْتُقالٌ."
+        "عِنْدي بُرْتُقال."
       ],
       "tags": [
         "fruit"
@@ -748,7 +748,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍌",
       "translit": "mawz",
       "examples": [
-        "المَوْزُ بِعَشْرِ ليراتٍ."
+        "المَوْز بِعَشْر ليرات."
       ],
       "tags": [
         "fruit"
@@ -772,7 +772,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍇",
       "translit": "ʿinab",
       "examples": [
-        "العِنَبُ رَخيصٌ اليَوْمَ."
+        "العِنَب رَخيص اليَوْم."
       ],
       "tags": [
         "fruit"
@@ -795,7 +795,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍒",
       "translit": "karaz",
       "examples": [
-        "الكَرَزَةُ صَغيرَةٌ."
+        "الكَرَزَة صَغيرَة."
       ],
       "tags": [
         "fruit"
@@ -818,7 +818,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍑",
       "translit": "mishmish",
       "examples": [
-        "المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ."
+        "المِشْمِش أَرْخَص مِن المَوْز."
       ],
       "tags": [
         "fruit"
@@ -842,7 +842,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍅",
       "translit": "ṭamāṭim",
       "examples": [
-        "عِنْدي طَماطِمُ طازَجَةٌ."
+        "عِنْدي طَماطِم طازَجَة."
       ],
       "tags": [
         "vegetable"
@@ -865,7 +865,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥒",
       "translit": "khiyār",
       "examples": [
-        "الخِيارُ بِخَمْسِ ليراتٍ."
+        "الخِيار بِخَمْس ليرات."
       ],
       "tags": [
         "vegetable"
@@ -888,7 +888,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥕",
       "translit": "jazar",
       "examples": [
-        "الجَزَرُ رَخيصٌ."
+        "الجَزَر رَخيص."
       ],
       "tags": [
         "vegetable"
@@ -911,7 +911,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🍆",
       "translit": "bādhinjān",
       "examples": [
-        "عِنْدي باذِنْجانٌ."
+        "عِنْدي باذِنْجان."
       ],
       "tags": [
         "vegetable"
@@ -934,7 +934,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🥔",
       "translit": "baṭāṭā",
       "examples": [
-        "الفاصوليا أَغْلى مِنَ البَطاطا."
+        "الفاصوليا أَغْلى مِن البَطاطا."
       ],
       "tags": [
         "vegetable"
@@ -958,7 +958,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧅",
       "translit": "baṣal",
       "examples": [
-        "البَصَلُ بِأَرْبَعِ ليراتٍ."
+        "البَصَل بِأَرْبَع ليرات."
       ],
       "tags": [
         "vegetable"
@@ -982,7 +982,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🫑",
       "translit": "fulful",
       "examples": [
-        "عِنْدي فُلْفُلٌ وفاصوليا."
+        "عِنْدي فُلْفُل وَفاصوليا."
       ],
       "tags": [
         "vegetable"
@@ -1005,7 +1005,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🫛",
       "translit": "fāṣūliyā",
       "examples": [
-        "الفاصوليا بِتِسْعِ ليراتٍ."
+        "الفاصوليا بِتِسْع ليرات."
       ],
       "tags": [
         "vegetable"
@@ -1029,7 +1029,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⚖️",
       "translit": "kīlū",
       "examples": [
-        "أُريدُ كيلو تُفّاحٍ."
+        "أُريدُ كيلو تُفّاح."
       ],
       "tags": [
         "quantity"
@@ -1044,7 +1044,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v043",
-      "ar": "كيلوغرام",
+      "ar": "كيلوغْرام",
       "ar_clean": "كيلوغرام",
       "tr": "",
       "category": "quantity",
@@ -1052,7 +1052,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⚖️",
       "translit": "kīlūghrām",
       "examples": [
-        "أُريدُ كيلوغرامًا واحِدًا."
+        "أُريدُ كيلوغْرامًا واحِدًا."
       ],
       "tags": [
         "quantity"
@@ -1068,7 +1068,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v044",
-      "ar": "كيلوغرامان",
+      "ar": "كيلوغْرامان",
       "ar_clean": "كيلوغرامان",
       "tr": "",
       "category": "quantity",
@@ -1076,7 +1076,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⚖️",
       "translit": "kīlūghrāmān",
       "examples": [
-        "هو بِحاجَةٍ إِلى كيلوغرامَيْنِ مِنَ السُّكَّرِ."
+        "هو بِحاجَة إِلى كيلوغرامَيْن مِن السُّكَّر."
       ],
       "tags": [
         "quantity"
@@ -1091,7 +1091,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v045",
-      "ar": "كيلوغرامات",
+      "ar": "كيلوغْرامات",
       "ar_clean": "كيلوغرامات",
       "tr": "",
       "category": "quantity",
@@ -1099,7 +1099,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⚖️",
       "translit": "kīlūghrāmāt",
       "examples": [
-        "أُريدُ ثَلاثَةَ كيلوغراماتٍ."
+        "أُريدُ ثَلاثَة كيلوغْرامات."
       ],
       "tags": [
         "quantity"
@@ -1123,7 +1123,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📦",
       "translit": "ʿulba",
       "examples": [
-        "أُريدُ عُلْبَةَ مِلْحٍ."
+        "أُريدُ عُلْبَة مِلْح."
       ],
       "tags": [
         "container"
@@ -1147,7 +1147,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📦",
       "translit": "ʿulbatān",
       "examples": [
-        "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ."
+        "أُريدُ عُلْبَتَيْن مِن الشّاي."
       ],
       "tags": [
         "container"
@@ -1170,7 +1170,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📦",
       "translit": "ʿulab",
       "examples": [
-        "أُريدُ عُلَبَ شايٍ."
+        "أُريدُ عُلَب شاي."
       ],
       "tags": [
         "container"
@@ -1184,7 +1184,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v049",
-      "ar": "ليرة",
+      "ar": "ليرَة",
       "ar_clean": "ليره",
       "tr": "",
       "category": "quantity",
@@ -1192,7 +1192,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "₺",
       "translit": "līra",
       "examples": [
-        "البَيْضَةُ الواحِدَةُ بِليرَتَيْنِ."
+        "البَيْضَة الواحِدَة بِليرَتَيْن."
       ],
       "tags": [
         "money"
@@ -1214,7 +1214,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "₺",
       "translit": "līrāt",
       "examples": [
-        "البَصَلُ بِأَرْبَعِ ليراتٍ."
+        "البَصَل بِأَرْبَع ليرات."
       ],
       "tags": [
         "money"
@@ -1238,7 +1238,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "1",
       "translit": "wāḥid",
       "examples": [
-        "كيلوغرامًا واحِدًا فقط."
+        "كيلوغْرامًا واحِدًا فَقَط."
       ],
       "tags": [
         "number"
@@ -1261,7 +1261,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "3",
       "translit": "thalātha",
       "examples": [
-        "أُريدُ ثَلاثَةَ كيلوغراماتٍ."
+        "أُريدُ ثَلاثَة كيلوغْرامات."
       ],
       "tags": [
         "number"
@@ -1285,7 +1285,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "5",
       "translit": "khams",
       "examples": [
-        "البَطاطا بِخَمْسِ ليراتٍ."
+        "البَطاطا بِخَمْس ليرات."
       ],
       "tags": [
         "number"
@@ -1308,7 +1308,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "7",
       "translit": "sabʿ",
       "examples": [
-        "التُّفّاحُ بِسَبْعِ ليراتٍ."
+        "التُّفّاح بِسَبْع ليرات."
       ],
       "tags": [
         "number"
@@ -1330,7 +1330,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "9",
       "translit": "tisʿ",
       "examples": [
-        "الفاصوليا بِتِسْعِ ليراتٍ."
+        "الفاصوليا بِتِسْع ليرات."
       ],
       "tags": [
         "number"
@@ -1352,7 +1352,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "10",
       "translit": "ʿashr",
       "examples": [
-        "المَوْزُ بِعَشْرِ ليراتٍ."
+        "المَوْز بِعَشْر ليرات."
       ],
       "tags": [
         "number"
@@ -1375,7 +1375,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🚶",
       "translit": "adhhabu",
       "examples": [
-        "أَذْهَبُ إِلى السّوقِ."
+        "أَذْهَبُ إِلى السّوق."
       ],
       "tags": [
         "verb"
@@ -1398,7 +1398,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🛍️",
       "translit": "ashtarī",
       "examples": [
-        "أَشْتَري الخُبْزَ والسُّكَّرَ."
+        "أَشْتَري الخُبْز وَالسُّكَّر."
       ],
       "tags": [
         "verb"
@@ -1421,7 +1421,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🙋",
       "translit": "urīdu",
       "examples": [
-        "أُريدُ كيلوغرامًا واحِدًا."
+        "أُريدُ كيلوغْرامًا واحِدًا."
       ],
       "tags": [
         "verb"
@@ -1446,7 +1446,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🧾",
       "translit": "aṭlubu",
       "examples": [
-        "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ."
+        "أَطْلُبُ مِنْكَ كيلو سُكَّر."
       ],
       "tags": [
         "verb"
@@ -1461,7 +1461,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v061",
-      "ar": "بِحاجَةٍ إِلى",
+      "ar": "بِحاجَة إِلى",
       "ar_clean": "بحاجه الي",
       "tr": "",
       "category": "verb_phrase",
@@ -1469,7 +1469,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🔎",
       "translit": "bi-ḥāja ilā",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى حَليبٍ."
+        "أَنا بِحاجَة إِلى حَليب."
       ],
       "tags": [
         "pattern"
@@ -1539,7 +1539,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "✅",
       "translit": "ʿindī",
       "examples": [
-        "عِنْدي تُفّاحٌ وبُرْتُقالٌ."
+        "عِنْدي تُفّاح وَبُرْتُقال."
       ],
       "tags": [
         "phrase"
@@ -1561,7 +1561,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🤲",
       "translit": "tafaḍḍal",
       "examples": [
-        "تَفَضَّل، هذا هو البَصَلُ."
+        "تَفَضَّل، هذا هو البَصَل."
       ],
       "tags": [
         "dialogue"
@@ -1608,7 +1608,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "👋",
       "translit": "maʿa as-salāma",
       "examples": [
-        "شُكْرًا، مَعَ السَّلامَةِ."
+        "شُكْرًا، مَعَ السَّلامَة."
       ],
       "tags": [
         "dialogue"
@@ -1699,7 +1699,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📅",
       "translit": "al-yawm",
       "examples": [
-        "العِنَبُ رَخيصٌ اليَوْمَ."
+        "العِنَب رَخيص اليَوْم."
       ],
       "tags": [
         "time"
@@ -1722,7 +1722,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⏱️",
       "translit": "al-ān",
       "examples": [
-        "سَأَذْهَبُ الآنَ."
+        "سَأَذْهَبُ الآن."
       ],
       "tags": [
         "time"
@@ -1744,7 +1744,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🌿",
       "translit": "ṭāzaj",
       "examples": [
-        "الخُبْزُ طازَجٌ."
+        "الخُبْز طازَج."
       ],
       "tags": [
         "adjective"
@@ -1768,7 +1768,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏷️",
       "translit": "rakhīṣ",
       "examples": [
-        "العِنَبُ رَخيصٌ اليَوْمَ."
+        "العِنَب رَخيص اليَوْم."
       ],
       "tags": [
         "adjective"
@@ -1791,7 +1791,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "💰",
       "translit": "ghālin",
       "examples": [
-        "المِشْمِشُ غالٍ."
+        "المِشْمِش غالٍ."
       ],
       "tags": [
         "adjective"
@@ -1806,7 +1806,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v076",
-      "ar": "أَرْخَصُ مِن",
+      "ar": "أَرْخَص مِن",
       "ar_clean": "ارخص من",
       "tr": "",
       "category": "adjective_comparison",
@@ -1814,7 +1814,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⬇️",
       "translit": "arkhaṣu min",
       "examples": [
-        "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ."
+        "البَصَل أَرْخَص مِن المِشْمِش."
       ],
       "tags": [
         "comparison"
@@ -1838,7 +1838,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "⬆️",
       "translit": "aghlā min",
       "examples": [
-        "المِشْمِشُ أَغْلى مِنَ البَصَلِ."
+        "المِشْمِش أَغْلى مِن البَصَل."
       ],
       "tags": [
         "comparison"
@@ -1862,7 +1862,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🔷",
       "translit": "kabīr",
       "examples": [
-        "صُنْدوقٌ كَبيرٌ."
+        "صُنْدوق كَبير."
       ],
       "tags": [
         "adjective"
@@ -1885,7 +1885,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🔹",
       "translit": "ṣaghīr",
       "examples": [
-        "صُنْدوقٌ صَغيرٌ."
+        "صُنْدوق صَغير."
       ],
       "tags": [
         "adjective"
@@ -1900,7 +1900,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v080",
-      "ar": "أَكْبَرُ مِن",
+      "ar": "أَكْبَر مِن",
       "ar_clean": "اكبر من",
       "tr": "",
       "category": "adjective_comparison",
@@ -1908,7 +1908,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "↗️",
       "translit": "akbaru min",
       "examples": [
-        "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ."
+        "البُرْتُقالَة أَكْبَر مِن الكَرَزَة."
       ],
       "tags": [
         "comparison"
@@ -1924,7 +1924,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v081",
-      "ar": "أَصْغَرُ مِن",
+      "ar": "أَصْغَر مِن",
       "ar_clean": "اصغر من",
       "tr": "",
       "category": "adjective_comparison",
@@ -1932,7 +1932,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "↘️",
       "translit": "aṣgharu min",
       "examples": [
-        "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ."
+        "الكَرَزَة أَصْغَر مِن البُرْتُقالَة."
       ],
       "tags": [
         "comparison"
@@ -1956,7 +1956,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🪶",
       "translit": "khafīf",
       "examples": [
-        "كيسٌ خَفيفٌ."
+        "كيس خَفيف."
       ],
       "tags": [
         "adjective"
@@ -1978,7 +1978,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏋️",
       "translit": "thaqīl",
       "examples": [
-        "كيسٌ ثَقيلٌ."
+        "كيس ثَقيل."
       ],
       "tags": [
         "adjective"
@@ -1992,7 +1992,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v084",
-      "ar": "أَخَفُّ مِن",
+      "ar": "أَخَفّ مِن",
       "ar_clean": "اخف من",
       "tr": "",
       "category": "adjective_comparison",
@@ -2000,7 +2000,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🪶",
       "translit": "akhaffu min",
       "examples": [
-        "الكَرَزُ أَخَفُّ مِنَ البُرْتُقالِ."
+        "الكَرَز أَخَفّ مِن البُرْتُقال."
       ],
       "tags": [
         "comparison"
@@ -2015,7 +2015,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v085",
-      "ar": "أَثْقَلُ مِن",
+      "ar": "أَثْقَل مِن",
       "ar_clean": "اثقل من",
       "tr": "",
       "category": "adjective_comparison",
@@ -2023,7 +2023,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🏋️",
       "translit": "athqalu min",
       "examples": [
-        "البُرْتُقالُ أَثْقَلُ مِنَ الكَرَزِ."
+        "البُرْتُقال أَثْقَل مِن الكَرَز."
       ],
       "tags": [
         "comparison"
@@ -2046,7 +2046,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "🟢",
       "translit": "akhḍar",
       "examples": [
-        "الخِيارُ أَخْضَرُ."
+        "الخِيار أَخْضَر."
       ],
       "tags": [
         "adjective"
@@ -2068,7 +2068,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "➖",
       "translit": "aqall",
       "examples": [
-        "هذا أَقَلُّ."
+        "هذا أَقَلّ."
       ],
       "tags": [
         "comparison"
@@ -2112,7 +2112,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "❓",
       "translit": "bi-kam",
       "examples": [
-        "بِكَم البَصَلُ؟"
+        "بِكَم البَصَل؟"
       ],
       "tags": [
         "question"
@@ -2137,7 +2137,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "❓",
       "translit": "kam",
       "examples": [
-        "كَم كيلوغرامًا تُريدُ؟"
+        "كَم كيلوغْرامًا تُريدُ؟"
       ],
       "tags": [
         "question"
@@ -2198,7 +2198,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "v093",
-      "ar": "أَيْنَ؟",
+      "ar": "أَيْن؟",
       "ar_clean": "اين؟",
       "tr": "",
       "category": "question_word",
@@ -2206,7 +2206,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "❓",
       "translit": "ayna",
       "examples": [
-        "إِلى أَيْنَ تَذْهَبُ لِلتَّسَوُّقِ؟"
+        "إِلى أَيْن تَذْهَبُ لِلتَّسَوُّق؟"
       ],
       "tags": [
         "question"
@@ -2228,7 +2228,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "❓",
       "translit": "ayy",
       "examples": [
-        "أَيُّ خِدْمَةٍ؟"
+        "أَيّ خِدْمَة؟"
       ],
       "tags": [
         "question"
@@ -2252,7 +2252,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "↩️",
       "translit": "min",
       "examples": [
-        "أَرْخَصُ مِنَ التُّفّاحِ."
+        "أَرْخَص مِن التُّفّاح."
       ],
       "tags": [
         "preposition"
@@ -2276,7 +2276,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "➡️",
       "translit": "ilā",
       "examples": [
-        "أَنا بِحاجَةٍ إِلى حَليبٍ."
+        "أَنا بِحاجَة إِلى حَليب."
       ],
       "tags": [
         "preposition"
@@ -2300,7 +2300,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "₺",
       "translit": "bi-",
       "examples": [
-        "البَصَلُ بِأَرْبَعِ ليراتٍ."
+        "البَصَل بِأَرْبَع ليرات."
       ],
       "tags": [
         "preposition"
@@ -2324,7 +2324,7 @@ window.IHO_UNIT2_DATA = {
       "emoji": "📍",
       "translit": "fī",
       "examples": [
-        "في السّوقِ."
+        "في السّوق."
       ],
       "tags": [
         "preposition"
@@ -2341,16 +2341,16 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p001",
       "title_tr": "",
-      "title_ar": "التعبير عن الحاجة",
-      "pattern_ar": "{pronoun} بِحاجَةٍ إِلى {object}",
+      "title_ar": "التَّعْبير عَن الحاجَة",
+      "pattern_ar": "{pronoun} بِحاجَة إِلى {object}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
+          "ar": "أَنا بِحاجَة إِلى حَليب.",
           "tr": ""
         },
         {
-          "ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
+          "ar": "هُوَ بِحاجَة إِلى الخُبْز.",
           "tr": ""
         }
       ],
@@ -2387,7 +2387,7 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p002",
       "title_tr": "",
-      "title_ar": "طلب الشيء",
+      "title_ar": "طَلَب الشَّيْء",
       "pattern_ar": "أُريدُ {object}",
       "pattern_tr": "{nesneyi} istiyorum.",
       "examples": [
@@ -2396,7 +2396,7 @@ window.IHO_UNIT2_DATA = {
           "tr": ""
         },
         {
-          "ar": "أُريدُ كيلوغرامًا واحِدًا.",
+          "ar": "أُريدُ كيلوغْرامًا واحِدًا.",
           "tr": ""
         }
       ],
@@ -2432,12 +2432,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p003",
       "title_tr": "",
-      "title_ar": "إرادة الشراء",
+      "title_ar": "إِرادَة الشِّراء",
       "pattern_ar": "أُريدُ أَنْ أَشْتَري {object}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
+          "ar": "أُريدُ أَنْ أَشْتَري بَعْض الخُضَر.",
           "tr": ""
         },
         {
@@ -2447,7 +2447,7 @@ window.IHO_UNIT2_DATA = {
       ],
       "slots": {
         "object": [
-          "بَعْضَ الخُضَرِ",
+          "بَعْض الخُضَر",
           "مَوْزًا",
           "تُفّاحًا",
           "حَليبًا"
@@ -2466,16 +2466,16 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p004",
       "title_tr": "",
-      "title_ar": "الطلب من شخص",
+      "title_ar": "الطَّلَب مِن شَخْص",
       "pattern_ar": "أَطْلُبُ مِنْكَ {quantity} مِنْ {object}",
       "pattern_tr": "Senden {miktar} {nesne} istiyorum.",
       "examples": [
         {
-          "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
+          "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّر.",
           "tr": ""
         },
         {
-          "ar": "أَطْلُبُ مِنْكَ عُلْبَةَ مِلْحٍ.",
+          "ar": "أَطْلُبُ مِنْكَ عُلْبَة مِلْح.",
           "tr": ""
         }
       ],
@@ -2510,12 +2510,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p005",
       "title_tr": "",
-      "title_ar": "السؤال عن السعر",
+      "title_ar": "السُّؤال عَن السِّعْر",
       "pattern_ar": "بِكَم {item}؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "بِكَم البَصَلُ؟",
+          "ar": "بِكَم البَصَل؟",
           "tr": ""
         },
         {
@@ -2525,10 +2525,10 @@ window.IHO_UNIT2_DATA = {
       ],
       "slots": {
         "item": [
-          "البَصَلُ",
+          "البَصَل",
           "الفاصوليا",
-          "المَوْزُ",
-          "التُّفّاحُ"
+          "المَوْز",
+          "التُّفّاح"
         ]
       },
       "note_tr": "",
@@ -2547,25 +2547,25 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p006",
       "title_tr": "",
-      "title_ar": "الإخبار عن السعر",
+      "title_ar": "الإِخْبار عَن السِّعْر",
       "pattern_ar": "{item} بِـ{number} ليرات",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+          "ar": "البَصَل بِأَرْبَع ليرات.",
           "tr": ""
         },
         {
-          "ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
+          "ar": "الفاصوليا بِتِسْع ليرات.",
           "tr": ""
         }
       ],
       "slots": {
         "item": [
-          "البَصَلُ",
+          "البَصَل",
           "الفاصوليا",
-          "المَوْزُ",
-          "الخِيارُ"
+          "المَوْز",
+          "الخِيار"
         ],
         "number": [
           "أَرْبَع",
@@ -2589,25 +2589,25 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p007",
       "title_tr": "",
-      "title_ar": "السؤال عن الكمية",
-      "pattern_ar": "كَم كيلوغرامًا تُريدُ مِنْ {item}؟",
+      "title_ar": "السُّؤال عَن الكَمِّيَّة",
+      "pattern_ar": "كَم كيلوغْرامًا تُريدُ مِنْ {item}؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
+          "ar": "كَم كيلوغْرامًا تُريدُ مِن التُّفّاح؟",
           "tr": ""
         },
         {
-          "ar": "كَم كيلوغرامًا تُريدُ مِنَ البَطاطا؟",
+          "ar": "كَم كيلوغْرامًا تُريدُ مِن البَطاطا؟",
           "tr": ""
         }
       ],
       "slots": {
         "item": [
-          "التُّفّاحِ",
+          "التُّفّاح",
           "البَطاطا",
-          "الطَّماطِمِ",
-          "المَوْزِ"
+          "الطَّماطِم",
+          "المَوْز"
         ]
       },
       "note_tr": "",
@@ -2624,27 +2624,27 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p008",
       "title_tr": "",
-      "title_ar": "الإخبار عن الكمية",
-      "pattern_ar": "أُريدُ {number} كيلوغراماتٍ مِنْ {item}",
+      "title_ar": "الإِخْبار عَن الكَمِّيَّة",
+      "pattern_ar": "أُريدُ {number} كيلوغرامات مِنْ {item}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
+          "ar": "أُريدُ ثَلاثَة كيلوغرامات مِن المِشْمِش.",
           "tr": ""
         },
         {
-          "ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+          "ar": "أُريدُ كيلوغْرامًا واحِدًا مِنْ كُلّ نَوْع.",
           "tr": ""
         }
       ],
       "slots": {
         "number": [
-          "ثَلاثَةَ",
-          "كيلوغرامًا واحِدًا"
+          "ثَلاثَة",
+          "كيلوغْرامًا واحِدًا"
         ],
         "item": [
-          "المِشْمِشِ",
-          "التُّفّاحِ",
+          "المِشْمِش",
+          "التُّفّاح",
           "البَطاطا"
         ]
       },
@@ -2662,7 +2662,7 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p009",
       "title_tr": "",
-      "title_ar": "السؤال عن شيء آخر",
+      "title_ar": "السُّؤال عَن شَيْء آخَر",
       "pattern_ar": "هَل تُريدُ شيئًا آخَر؟",
       "pattern_tr": "",
       "examples": [
@@ -2690,12 +2690,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p010",
       "title_tr": "",
-      "title_ar": "الجواب بنعم أو لا",
+      "title_ar": "الجَواب بِنَعَمْ أَوْ لا",
       "pattern_ar": "نَعَم، أُريدُ {object}. / لا، شُكْرًا.",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "نَعَم، أُريدُ عُلْبَةً مِنَ الحَليبِ.",
+          "ar": "نَعَم، أُريدُ عُلْبَةً مِن الحَليب.",
           "tr": ""
         },
         {
@@ -2728,12 +2728,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p011",
       "title_tr": "",
-      "title_ar": "تحية البائع",
-      "pattern_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
+      "title_ar": "تَحِيَّة البائِع",
+      "pattern_ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ يا سَيِّدي؟",
+          "ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة يا سَيِّدي؟",
           "tr": ""
         }
       ],
@@ -2753,31 +2753,31 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p012",
       "title_tr": "",
-      "title_ar": "ذكر المنتجات",
+      "title_ar": "ذِكْر المُنْتَجات",
       "pattern_ar": "عِنْدي {item1}، {item2}، و{item3}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "عِنْدي طَماطِمُ، خِيارٌ، وجَزَرٌ.",
+          "ar": "عِنْدي طَماطِم، خِيار، وَجَزَر.",
           "tr": ""
         },
         {
-          "ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، ومَوْزٌ.",
+          "ar": "عِنْدي تُفّاح، بُرْتُقال، وَمَوْز.",
           "tr": ""
         }
       ],
       "slots": {
         "item1": [
-          "طَماطِمُ",
-          "تُفّاحٌ"
+          "طَماطِم",
+          "تُفّاح"
         ],
         "item2": [
-          "خِيارٌ",
-          "بُرْتُقالٌ"
+          "خِيار",
+          "بُرْتُقال"
         ],
         "item3": [
-          "جَزَرٌ",
-          "مَوْزٌ"
+          "جَزَر",
+          "مَوْز"
         ]
       },
       "note_tr": "",
@@ -2793,29 +2793,29 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p013",
       "title_tr": "",
-      "title_ar": "المقارنة بالرخص",
-      "pattern_ar": "{item1} أَرْخَصُ مِنْ {item2}",
+      "title_ar": "المُقارَنَة بِالرُّخْص",
+      "pattern_ar": "{item1} أَرْخَص مِنْ {item2}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
+          "ar": "العِنَب أَرْخَص مِن التُّفّاح.",
           "tr": ""
         },
         {
-          "ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
+          "ar": "البَصَل أَرْخَص مِن المِشْمِش.",
           "tr": ""
         }
       ],
       "slots": {
         "item1": [
-          "العِنَبُ",
-          "البَصَلُ",
-          "التُّفّاحُ"
+          "العِنَب",
+          "البَصَل",
+          "التُّفّاح"
         ],
         "item2": [
-          "التُّفّاحِ",
-          "المِشْمِشِ",
-          "المَوْزِ"
+          "التُّفّاح",
+          "المِشْمِش",
+          "المَوْز"
         ]
       },
       "note_tr": "",
@@ -2834,29 +2834,29 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p014",
       "title_tr": "",
-      "title_ar": "المقارنة بالغلاء",
+      "title_ar": "المُقارَنَة بِالغَلاء",
       "pattern_ar": "{item1} أَغْلى مِنْ {item2}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
+          "ar": "الفاصوليا أَغْلى مِن البَطاطا.",
           "tr": ""
         },
         {
-          "ar": "المَوْزُ أَغْلى مِنَ التُّفّاحِ.",
+          "ar": "المَوْز أَغْلى مِن التُّفّاح.",
           "tr": ""
         }
       ],
       "slots": {
         "item1": [
           "الفاصوليا",
-          "المَوْزُ",
-          "المِشْمِشُ"
+          "المَوْز",
+          "المِشْمِش"
         ],
         "item2": [
           "البَطاطا",
-          "التُّفّاحِ",
-          "البَصَلِ"
+          "التُّفّاح",
+          "البَصَل"
         ]
       },
       "note_tr": "",
@@ -2875,27 +2875,27 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p015",
       "title_tr": "",
-      "title_ar": "المقارنة بالحجم",
-      "pattern_ar": "{item1} أَكْبَرُ/أَصْغَرُ مِنْ {item2}",
+      "title_ar": "المُقارَنَة بِالحَجْم",
+      "pattern_ar": "{item1} أَكْبَر/أَصْغَر مِنْ {item2}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
+          "ar": "البُرْتُقالَة أَكْبَر مِن الكَرَزَة.",
           "tr": ""
         },
         {
-          "ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
+          "ar": "الكَرَزَة أَصْغَر مِن البُرْتُقالَة.",
           "tr": ""
         }
       ],
       "slots": {
         "item1": [
-          "البُرْتُقالَةُ",
-          "الكَرَزَةُ"
+          "البُرْتُقالَة",
+          "الكَرَزَة"
         ],
         "item2": [
-          "الكَرَزَةِ",
-          "البُرْتُقالَةِ"
+          "الكَرَزَة",
+          "البُرْتُقالَة"
         ]
       },
       "note_tr": "",
@@ -2913,27 +2913,27 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p016",
       "title_tr": "",
-      "title_ar": "المقارنة بالوزن",
-      "pattern_ar": "{item1} أَخَفُّ/أَثْقَلُ مِنْ {item2}",
+      "title_ar": "المُقارَنَة بِالوَزْن",
+      "pattern_ar": "{item1} أَخَفّ/أَثْقَل مِنْ {item2}",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "الكَرَزُ أَخَفُّ مِنَ البُرْتُقالِ.",
+          "ar": "الكَرَز أَخَفّ مِن البُرْتُقال.",
           "tr": ""
         },
         {
-          "ar": "البُرْتُقالُ أَثْقَلُ مِنَ الكَرَزِ.",
+          "ar": "البُرْتُقال أَثْقَل مِن الكَرَز.",
           "tr": ""
         }
       ],
       "slots": {
         "item1": [
-          "الكَرَزُ",
-          "البُرْتُقالُ"
+          "الكَرَز",
+          "البُرْتُقال"
         ],
         "item2": [
-          "البُرْتُقالِ",
-          "الكَرَزِ"
+          "البُرْتُقال",
+          "الكَرَز"
         ]
       },
       "note_tr": "",
@@ -2950,16 +2950,16 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p017",
       "title_tr": "",
-      "title_ar": "السؤال عن مكان الشراء",
-      "pattern_ar": "مِنْ أَيْنَ اشْتَرَيْتَ؟",
+      "title_ar": "السُّؤال عَن مَكان الشِّراء",
+      "pattern_ar": "مِنْ أَيْن اشْتَرَيْتَ؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "اشْتَرَيْتُ مِنَ السّوقِ.",
+          "ar": "اشْتَرَيْتُ مِن السّوق.",
           "tr": ""
         },
         {
-          "ar": "اشْتَرَيْتُ مِنَ البَقّالَةِ.",
+          "ar": "اشْتَرَيْتُ مِن البَقّالَة.",
           "tr": ""
         }
       ],
@@ -2976,16 +2976,16 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p018",
       "title_tr": "",
-      "title_ar": "السؤال عما اشتريته",
+      "title_ar": "السُّؤال عَمّا اشْتَرَيْتَه",
       "pattern_ar": "ماذا اشْتَرَيْتَ؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "اشْتَرَيْتُ البَطاطا والطَّماطِمَ والبَصَلَ.",
+          "ar": "اشْتَرَيْتُ البَطاطا وَالطَّماطِم وَالبَصَل.",
           "tr": ""
         },
         {
-          "ar": "اشْتَرَيْتُ السُّكَّرَ والشّايَ والمِلْحَ.",
+          "ar": "اشْتَرَيْتُ السُّكَّر وَالشّاي وَالمِلْح.",
           "tr": ""
         }
       ],
@@ -3002,12 +3002,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p019",
       "title_tr": "",
-      "title_ar": "السؤال عن وجهة التسوق",
-      "pattern_ar": "إِلى أَيْنَ تَذْهَبُ لِلتَّسَوُّقِ؟",
+      "title_ar": "السُّؤال عَن وِجْهَة التَّسَوُّق",
+      "pattern_ar": "إِلى أَيْن تَذْهَبُ لِلتَّسَوُّق؟",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+          "ar": "أَذْهَبُ إِلى السّوق لِلتَّسَوُّق.",
           "tr": ""
         }
       ],
@@ -3026,12 +3026,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p020",
       "title_tr": "",
-      "title_ar": "إعداد قائمة التسوق",
-      "pattern_ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ",
+      "title_ar": "إِعْداد قائِمَة التَّسَوُّق",
+      "pattern_ar": "أُعِدُّ قائِمَة التَّسَوُّق",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ وأَكْتُبُ الحاجاتِ اليَوْمِيَّةَ.",
+          "ar": "أُعِدُّ قائِمَة التَّسَوُّق وَأَكْتُبُ الحاجات اليَوْمِيَّة.",
           "tr": ""
         }
       ],
@@ -3049,12 +3049,12 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p021",
       "title_tr": "",
-      "title_ar": "إنهاء الحوار",
-      "pattern_ar": "شُكْرًا، مَعَ السَّلامَةِ",
+      "title_ar": "إِنْهاء الحِوار",
+      "pattern_ar": "شُكْرًا، مَعَ السَّلامَة",
       "pattern_tr": "",
       "examples": [
         {
-          "ar": "شُكْرًا، مَعَ السَّلامَةِ.",
+          "ar": "شُكْرًا، مَعَ السَّلامَة.",
           "tr": ""
         }
       ],
@@ -3071,7 +3071,7 @@ window.IHO_UNIT2_DATA = {
     {
       "id": "p022",
       "title_tr": "",
-      "title_ar": "جملة ثقافية",
+      "title_ar": "جُمْلَة ثَقافِيَّة",
       "pattern_ar": "مَنْ غَشَّنا فَلَيْسَ مِنّا",
       "pattern_tr": "",
       "examples": [
@@ -3094,7 +3094,7 @@ window.IHO_UNIT2_DATA = {
   "sentences": [
     {
       "id": "s001",
-      "ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
+      "ar": "أَنا بِحاجَة إِلى بَعْض الأَشْياء مِن البَقّالَة.",
       "ar_clean": "انا بحاجه الي بعض الاشياء من البقاله.",
       "tr": "",
       "pattern_id": "p001",
@@ -3108,12 +3108,12 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "بَعْضِ",
-        "الأَشْياءِ",
-        "مِنَ",
-        "البَقّالَةِ",
+        "بَعْض",
+        "الأَشْياء",
+        "مِن",
+        "البَقّالَة",
         "."
       ],
       "audio_key": "u2_sentence_s001"
@@ -3142,7 +3142,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s003",
-      "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
+      "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّر.",
       "ar_clean": "اطلب منك كيلو سكر.",
       "tr": "",
       "pattern_id": "p004",
@@ -3157,14 +3157,14 @@ window.IHO_UNIT2_DATA = {
         "أَطْلُبُ",
         "مِنْكَ",
         "كيلو",
-        "سُكَّرٍ",
+        "سُكَّر",
         "."
       ],
       "audio_key": "u2_sentence_s003"
     },
     {
       "id": "s004",
-      "ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
+      "ar": "أُريدُ عُلْبَة مِلْح.",
       "ar_clean": "اريد علبه ملح.",
       "tr": "",
       "pattern_id": "p002",
@@ -3177,15 +3177,15 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أُريدُ",
-        "عُلْبَةَ",
-        "مِلْحٍ",
+        "عُلْبَة",
+        "مِلْح",
         "."
       ],
       "audio_key": "u2_sentence_s004"
     },
     {
       "id": "s005",
-      "ar": "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ.",
+      "ar": "أُريدُ عُلْبَتَيْن مِن الشّاي.",
       "ar_clean": "اريد علبتين من الشاي.",
       "tr": "",
       "pattern_id": "p002",
@@ -3198,9 +3198,9 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أُريدُ",
-        "عُلْبَتَيْنِ",
-        "مِنَ",
-        "الشّايِ",
+        "عُلْبَتَيْن",
+        "مِن",
+        "الشّاي",
         "."
       ],
       "audio_key": "u2_sentence_s005"
@@ -3251,7 +3251,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s008",
-      "ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
+      "ar": "حَسَنًا، سَأَذْهَبُ الآن.",
       "ar_clean": "حسنا، ساذهب الان.",
       "tr": "",
       "pattern_id": null,
@@ -3266,14 +3266,14 @@ window.IHO_UNIT2_DATA = {
         "حَسَنًا",
         "،",
         "سَأَذْهَبُ",
-        "الآنَ",
+        "الآن",
         "."
       ],
       "audio_key": "u2_sentence_s008"
     },
     {
       "id": "s009",
-      "ar": "أَنا أُريدُ السُّكَّرَ.",
+      "ar": "أَنا أُريدُ السُّكَّر.",
       "ar_clean": "انا اريد السكر.",
       "tr": "",
       "pattern_id": "p002",
@@ -3287,14 +3287,14 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أَنا",
         "أُريدُ",
-        "السُّكَّرَ",
+        "السُّكَّر",
         "."
       ],
       "audio_key": "u2_sentence_s009"
     },
     {
       "id": "s010",
-      "ar": "أَنا بِحاجَةٍ إِلى الشّايِ.",
+      "ar": "أَنا بِحاجَة إِلى الشّاي.",
       "ar_clean": "انا بحاجه الي الشاي.",
       "tr": "",
       "pattern_id": "p001",
@@ -3307,16 +3307,16 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "الشّايِ",
+        "الشّاي",
         "."
       ],
       "audio_key": "u2_sentence_s010"
     },
     {
       "id": "s011",
-      "ar": "أَنْتَ تَطْلُبُ المِلْحَ.",
+      "ar": "أَنْتَ تَطْلُبُ المِلْح.",
       "ar_clean": "انت تطلب الملح.",
       "tr": "",
       "pattern_id": "p004",
@@ -3330,14 +3330,14 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أَنْتَ",
         "تَطْلُبُ",
-        "المِلْحَ",
+        "المِلْح",
         "."
       ],
       "audio_key": "u2_sentence_s011"
     },
     {
       "id": "s012",
-      "ar": "أَنْتِ بِحاجَةٍ إِلى الحَليبِ.",
+      "ar": "أَنْتِ بِحاجَة إِلى الحَليب.",
       "ar_clean": "انت بحاجه الي الحليب.",
       "tr": "",
       "pattern_id": "p001",
@@ -3350,16 +3350,16 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنْتِ",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "الحَليبِ",
+        "الحَليب",
         "."
       ],
       "audio_key": "u2_sentence_s012"
     },
     {
       "id": "s013",
-      "ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
+      "ar": "هُوَ بِحاجَة إِلى الخُبْز.",
       "ar_clean": "هو بحاجه الي الخبز.",
       "tr": "",
       "pattern_id": "p001",
@@ -3372,16 +3372,16 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "هُوَ",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "الخُبْزِ",
+        "الخُبْز",
         "."
       ],
       "audio_key": "u2_sentence_s013"
     },
     {
       "id": "s014",
-      "ar": "هِيَ تُريدُ العَسَلَ.",
+      "ar": "هِيَ تُريدُ العَسَل.",
       "ar_clean": "هي تريد العسل.",
       "tr": "",
       "pattern_id": "p002",
@@ -3395,14 +3395,14 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "هِيَ",
         "تُريدُ",
-        "العَسَلَ",
+        "العَسَل",
         "."
       ],
       "audio_key": "u2_sentence_s014"
     },
     {
       "id": "s015",
-      "ar": "أَنا أُريدُ عُلْبَةَ مِلْحٍ.",
+      "ar": "أَنا أُريدُ عُلْبَة مِلْح.",
       "ar_clean": "انا اريد علبه ملح.",
       "tr": "",
       "pattern_id": "p002",
@@ -3416,15 +3416,15 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أَنا",
         "أُريدُ",
-        "عُلْبَةَ",
-        "مِلْحٍ",
+        "عُلْبَة",
+        "مِلْح",
         "."
       ],
       "audio_key": "u2_sentence_s015"
     },
     {
       "id": "s016",
-      "ar": "أَنا بِحاجَةٍ إِلى كيلوغرامٍ مِنَ العَسَلِ.",
+      "ar": "أَنا بِحاجَة إِلى كيلوغْرام مِن العَسَل.",
       "ar_clean": "انا بحاجه الي كيلوغرام من العسل.",
       "tr": "",
       "pattern_id": "p001",
@@ -3437,18 +3437,18 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "كيلوغرامٍ",
-        "مِنَ",
-        "العَسَلِ",
+        "كيلوغرام",
+        "مِن",
+        "العَسَل",
         "."
       ],
       "audio_key": "u2_sentence_s016"
     },
     {
       "id": "s017",
-      "ar": "أَنْتِ تُريدينَ عُلْبَتَيْنِ مِنَ المَكَرونَةِ.",
+      "ar": "أَنْتِ تُريدينَ عُلْبَتَيْن مِن المَكَرونَة.",
       "ar_clean": "انت تريدين علبتين من المكرونه.",
       "tr": "",
       "pattern_id": "p002",
@@ -3462,16 +3462,16 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أَنْتِ",
         "تُريدينَ",
-        "عُلْبَتَيْنِ",
-        "مِنَ",
-        "المَكَرونَةِ",
+        "عُلْبَتَيْن",
+        "مِن",
+        "المَكَرونَة",
         "."
       ],
       "audio_key": "u2_sentence_s017"
     },
     {
       "id": "s018",
-      "ar": "أَنْتَ بِحاجَةٍ إِلى عُلْبَةٍ واحِدَةٍ مِنَ البَيْضِ.",
+      "ar": "أَنْتَ بِحاجَة إِلى عُلْبَة واحِدَة مِن البَيْض.",
       "ar_clean": "انت بحاجه الي علبه واحده من البيض.",
       "tr": "",
       "pattern_id": "p001",
@@ -3484,19 +3484,19 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنْتَ",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "عُلْبَةٍ",
-        "واحِدَةٍ",
-        "مِنَ",
-        "البَيْضِ",
+        "عُلْبَة",
+        "واحِدَة",
+        "مِن",
+        "البَيْض",
         "."
       ],
       "audio_key": "u2_sentence_s018"
     },
     {
       "id": "s019",
-      "ar": "هُوَ بِحاجَةٍ إِلى كيلوغرامَيْنِ مِنَ السُّكَّرِ.",
+      "ar": "هُوَ بِحاجَة إِلى كيلوغرامَيْن مِن السُّكَّر.",
       "ar_clean": "هو بحاجه الي كيلوغرامين من السكر.",
       "tr": "",
       "pattern_id": "p001",
@@ -3509,18 +3509,18 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "هُوَ",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "كيلوغرامَيْنِ",
-        "مِنَ",
-        "السُّكَّرِ",
+        "كيلوغرامَيْن",
+        "مِن",
+        "السُّكَّر",
         "."
       ],
       "audio_key": "u2_sentence_s019"
     },
     {
       "id": "s020",
-      "ar": "هِيَ تُريدُ ثَلاثَةً مِنَ الخُبْزِ.",
+      "ar": "هِيَ تُريدُ ثَلاثَةً مِن الخُبْز.",
       "ar_clean": "هي تريد ثلاثه من الخبز.",
       "tr": "",
       "pattern_id": "p002",
@@ -3535,15 +3535,15 @@ window.IHO_UNIT2_DATA = {
         "هِيَ",
         "تُريدُ",
         "ثَلاثَةً",
-        "مِنَ",
-        "الخُبْزِ",
+        "مِن",
+        "الخُبْز",
         "."
       ],
       "audio_key": "u2_sentence_s020"
     },
     {
       "id": "s021",
-      "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
+      "ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟",
       "ar_clean": "اهلا وسهلا، اي خدمه؟",
       "tr": "",
       "pattern_id": "p011",
@@ -3560,15 +3560,15 @@ window.IHO_UNIT2_DATA = {
         "أَهْلًا",
         "وَسَهْلًا",
         "،",
-        "أَيُّ",
-        "خِدْمَةٍ",
+        "أَيّ",
+        "خِدْمَة",
         "؟"
       ],
       "audio_key": "u2_sentence_s021"
     },
     {
       "id": "s022",
-      "ar": "أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
+      "ar": "أَنا بِحاجَة إِلى خَضْراوات طازَجَة.",
       "ar_clean": "انا بحاجه الي خضراوات طازجه.",
       "tr": "",
       "pattern_id": "p001",
@@ -3581,17 +3581,17 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "خَضْراواتٍ",
-        "طازَجَةٍ",
+        "خَضْراوات",
+        "طازَجَة",
         "."
       ],
       "audio_key": "u2_sentence_s022"
     },
     {
       "id": "s023",
-      "ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
+      "ar": "عِنْدي طَماطِم، خِيار، جَزَر، باذِنْجان، بَطاطا، بَصَل، فُلْفُل، وَفاصوليا.",
       "ar_clean": "عندي طماطم، خيار، جزر، باذنجان، بطاطا، بصل، فلفل، وفاصوليا.",
       "tr": "",
       "pattern_id": "p012",
@@ -3604,19 +3604,19 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "عِنْدي",
-        "طَماطِمُ",
+        "طَماطِم",
         "،",
-        "خِيارٌ",
+        "خِيار",
         "،",
-        "جَزَرٌ",
+        "جَزَر",
         "،",
-        "باذِنْجانٌ",
+        "باذِنْجان",
         "،",
         "بَطاطا",
         "،",
-        "بَصَلٌ",
+        "بَصَل",
         "،",
-        "فُلْفُلٌ",
+        "فُلْفُل",
         "،",
         "وفاصوليا",
         "."
@@ -3625,7 +3625,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s024",
-      "ar": "هَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
+      "ar": "هَل عِنْدَكَ فَواكِه أَيْضًا؟",
       "ar_clean": "هل عندك فواكه ايضا؟",
       "tr": "",
       "pattern_id": null,
@@ -3639,7 +3639,7 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "هَل",
         "عِنْدَكَ",
-        "فَواكِهُ",
+        "فَواكِه",
         "أَيْضًا",
         "؟"
       ],
@@ -3647,7 +3647,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s025",
-      "ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
+      "ar": "عِنْدي تُفّاح، بُرْتُقال، مَوْز، عِنَب، كَرَز، وَمِشْمِش.",
       "ar_clean": "عندي تفاح، برتقال، موز، عنب، كرز، ومشمش.",
       "tr": "",
       "pattern_id": "p012",
@@ -3660,24 +3660,24 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "عِنْدي",
-        "تُفّاحٌ",
+        "تُفّاح",
         "،",
-        "بُرْتُقالٌ",
+        "بُرْتُقال",
         "،",
-        "مَوْزٌ",
+        "مَوْز",
         "،",
-        "عِنَبٌ",
+        "عِنَب",
         "،",
-        "كَرَزٌ",
+        "كَرَز",
         "،",
-        "ومِشْمِشٌ",
+        "وَمِشْمِش",
         "."
       ],
       "audio_key": "u2_sentence_s025"
     },
     {
       "id": "s026",
-      "ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+      "ar": "أُريدُ كيلوغْرامًا واحِدًا مِنْ كُلّ نَوْع.",
       "ar_clean": "اريد كيلوغراما واحدا من كل نوع.",
       "tr": "",
       "pattern_id": "p008",
@@ -3690,18 +3690,18 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أُريدُ",
-        "كيلوغرامًا",
+        "كيلوغْرامًا",
         "واحِدًا",
         "مِنْ",
-        "كُلِّ",
-        "نَوْعٍ",
+        "كُلّ",
+        "نَوْع",
         "."
       ],
       "audio_key": "u2_sentence_s026"
     },
     {
       "id": "s027",
-      "ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
+      "ar": "أُريدُ أَنْ أَشْتَري بَعْض الخُضَر.",
       "ar_clean": "اريد ان اشتري بعض الخضر.",
       "tr": "",
       "pattern_id": "p003",
@@ -3716,8 +3716,8 @@ window.IHO_UNIT2_DATA = {
         "أُريدُ",
         "أَنْ",
         "أَشْتَري",
-        "بَعْضَ",
-        "الخُضَرِ",
+        "بَعْض",
+        "الخُضَر",
         "."
       ],
       "audio_key": "u2_sentence_s027"
@@ -3744,7 +3744,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s029",
-      "ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
+      "ar": "الفاصوليا بِتِسْع ليرات.",
       "ar_clean": "الفاصوليا بتسع ليرات.",
       "tr": "",
       "pattern_id": "p006",
@@ -3758,15 +3758,15 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "الفاصوليا",
-        "بِتِسْعِ",
-        "ليراتٍ",
+        "بِتِسْع",
+        "ليرات",
         "."
       ],
       "audio_key": "u2_sentence_s029"
     },
     {
       "id": "s030",
-      "ar": "هِيَ طازَجَةٌ جِدًّا.",
+      "ar": "هِيَ طازَجَة جِدًّا.",
       "ar_clean": "هي طازجه جدا.",
       "tr": "",
       "pattern_id": null,
@@ -3779,7 +3779,7 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "هِيَ",
-        "طازَجَةٌ",
+        "طازَجَة",
         "جِدًّا",
         "."
       ],
@@ -3787,7 +3787,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s031",
-      "ar": "الفاصوليا غالِيَةٌ وأَغْلى مِنَ البَطاطا.",
+      "ar": "الفاصوليا غالِيَة وَأَغْلى مِن البَطاطا.",
       "ar_clean": "الفاصوليا غاليه واغلي من البطاطا.",
       "tr": "",
       "pattern_id": "p014",
@@ -3801,9 +3801,9 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "الفاصوليا",
-        "غالِيَةٌ",
-        "وأَغْلى",
-        "مِنَ",
+        "غالِيَة",
+        "وَأَغْلى",
+        "مِن",
         "البَطاطا",
         "."
       ],
@@ -3811,7 +3811,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s032",
-      "ar": "أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
+      "ar": "أُريدُ كيلوغْرامًا واحِدًا فَقَطْ.",
       "ar_clean": "اريد كيلوغراما واحدا فقط.",
       "tr": "",
       "pattern_id": "p008",
@@ -3825,7 +3825,7 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أُريدُ",
-        "كيلوغرامًا",
+        "كيلوغْرامًا",
         "واحِدًا",
         "فَقَطْ",
         "."
@@ -3834,7 +3834,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s033",
-      "ar": "العِنَبُ رَخيصٌ اليَوْمَ.",
+      "ar": "العِنَب رَخيص اليَوْم.",
       "ar_clean": "العنب رخيص اليوم.",
       "tr": "",
       "pattern_id": null,
@@ -3846,16 +3846,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "العِنَبُ",
-        "رَخيصٌ",
-        "اليَوْمَ",
+        "العِنَب",
+        "رَخيص",
+        "اليَوْم",
         "."
       ],
       "audio_key": "u2_sentence_s033"
     },
     {
       "id": "s034",
-      "ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
+      "ar": "العِنَب أَرْخَص مِن التُّفّاح.",
       "ar_clean": "العنب ارخص من التفاح.",
       "tr": "",
       "pattern_id": "p013",
@@ -3868,10 +3868,10 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "العِنَبُ",
-        "أَرْخَصُ",
-        "مِنَ",
-        "التُّفّاحِ",
+        "العِنَب",
+        "أَرْخَص",
+        "مِن",
+        "التُّفّاح",
         "."
       ],
       "audio_key": "u2_sentence_s034"
@@ -3923,7 +3923,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s037",
-      "ar": "البَطاطا بِخَمْسِ ليراتٍ.",
+      "ar": "البَطاطا بِخَمْس ليرات.",
       "ar_clean": "البطاطا بخمس ليرات.",
       "tr": "",
       "pattern_id": "p006",
@@ -3936,15 +3936,15 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "البَطاطا",
-        "بِخَمْسِ",
-        "ليراتٍ",
+        "بِخَمْس",
+        "ليرات",
         "."
       ],
       "audio_key": "u2_sentence_s037"
     },
     {
       "id": "s038",
-      "ar": "أَيَّ عُلْبَةٍ تُريدُ مِنَ المِشْمِشِ؟",
+      "ar": "أَيّ عُلْبَة تُريدُ مِن المِشْمِش؟",
       "ar_clean": "اي علبه تريد من المشمش؟",
       "tr": "",
       "pattern_id": null,
@@ -3956,18 +3956,18 @@ window.IHO_UNIT2_DATA = {
         "question"
       ],
       "tokens": [
-        "أَيَّ",
-        "عُلْبَةٍ",
+        "أَيّ",
+        "عُلْبَة",
         "تُريدُ",
-        "مِنَ",
-        "المِشْمِشِ",
+        "مِن",
+        "المِشْمِش",
         "؟"
       ],
       "audio_key": "u2_sentence_s038"
     },
     {
       "id": "s039",
-      "ar": "أُريدُ هذِهِ العُلْبَةَ.",
+      "ar": "أُريدُ هذِهِ العُلْبَة.",
       "ar_clean": "اريد هذه العلبه.",
       "tr": "",
       "pattern_id": "p002",
@@ -3981,14 +3981,14 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أُريدُ",
         "هذِهِ",
-        "العُلْبَةَ",
+        "العُلْبَة",
         "."
       ],
       "audio_key": "u2_sentence_s039"
     },
     {
       "id": "s040",
-      "ar": "بِكَم البَيْضَةُ الواحِدَةُ؟",
+      "ar": "بِكَم البَيْضَة الواحِدَة؟",
       "ar_clean": "بكم البيضه الواحده؟",
       "tr": "",
       "pattern_id": "p005",
@@ -4001,15 +4001,15 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "بِكَم",
-        "البَيْضَةُ",
-        "الواحِدَةُ",
+        "البَيْضَة",
+        "الواحِدَة",
         "؟"
       ],
       "audio_key": "u2_sentence_s040"
     },
     {
       "id": "s041",
-      "ar": "البَيْضَةُ الواحِدَةُ بِليرَتَيْنِ.",
+      "ar": "البَيْضَة الواحِدَة بِليرَتَيْن.",
       "ar_clean": "البيضه الواحده بليرتين.",
       "tr": "",
       "pattern_id": "p006",
@@ -4021,16 +4021,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "البَيْضَةُ",
-        "الواحِدَةُ",
-        "بِليرَتَيْنِ",
+        "البَيْضَة",
+        "الواحِدَة",
+        "بِليرَتَيْن",
         "."
       ],
       "audio_key": "u2_sentence_s041"
     },
     {
       "id": "s042",
-      "ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
+      "ar": "كَم كيلوغْرامًا تُريدُ مِن التُّفّاح؟",
       "ar_clean": "كم كيلوغراما تريد من التفاح؟",
       "tr": "",
       "pattern_id": "p007",
@@ -4044,17 +4044,17 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "كَم",
-        "كيلوغرامًا",
+        "كيلوغْرامًا",
         "تُريدُ",
-        "مِنَ",
-        "التُّفّاحِ",
+        "مِن",
+        "التُّفّاح",
         "؟"
       ],
       "audio_key": "u2_sentence_s042"
     },
     {
       "id": "s043",
-      "ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ.",
+      "ar": "أُريدُ ثَلاثَة كيلوغْرامات.",
       "ar_clean": "اريد ثلاثه كيلوغرامات.",
       "tr": "",
       "pattern_id": "p008",
@@ -4068,15 +4068,15 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أُريدُ",
-        "ثَلاثَةَ",
-        "كيلوغراماتٍ",
+        "ثَلاثَة",
+        "كيلوغرامات",
         "."
       ],
       "audio_key": "u2_sentence_s043"
     },
     {
       "id": "s044",
-      "ar": "بِكَم البَصَلُ؟",
+      "ar": "بِكَم البَصَل؟",
       "ar_clean": "بكم البصل؟",
       "tr": "",
       "pattern_id": "p005",
@@ -4089,14 +4089,14 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "بِكَم",
-        "البَصَلُ",
+        "البَصَل",
         "؟"
       ],
       "audio_key": "u2_sentence_s044"
     },
     {
       "id": "s045",
-      "ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+      "ar": "البَصَل بِأَرْبَع ليرات.",
       "ar_clean": "البصل باربع ليرات.",
       "tr": "",
       "pattern_id": "p006",
@@ -4108,16 +4108,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "البَصَلُ",
-        "بِأَرْبَعِ",
-        "ليراتٍ",
+        "البَصَل",
+        "بِأَرْبَع",
+        "ليرات",
         "."
       ],
       "audio_key": "u2_sentence_s045"
     },
     {
       "id": "s046",
-      "ar": "صُنْدوقٌ صَغيرٌ.",
+      "ar": "صُنْدوق صَغير.",
       "ar_clean": "صندوق صغير.",
       "tr": "",
       "pattern_id": null,
@@ -4129,15 +4129,15 @@ window.IHO_UNIT2_DATA = {
         "size"
       ],
       "tokens": [
-        "صُنْدوقٌ",
-        "صَغيرٌ",
+        "صُنْدوق",
+        "صَغير",
         "."
       ],
       "audio_key": "u2_sentence_s046"
     },
     {
       "id": "s047",
-      "ar": "صُنْدوقٌ كَبيرٌ.",
+      "ar": "صُنْدوق كَبير.",
       "ar_clean": "صندوق كبير.",
       "tr": "",
       "pattern_id": null,
@@ -4149,15 +4149,15 @@ window.IHO_UNIT2_DATA = {
         "size"
       ],
       "tokens": [
-        "صُنْدوقٌ",
-        "كَبيرٌ",
+        "صُنْدوق",
+        "كَبير",
         "."
       ],
       "audio_key": "u2_sentence_s047"
     },
     {
       "id": "s048",
-      "ar": "كيسٌ خَفيفٌ.",
+      "ar": "كيس خَفيف.",
       "ar_clean": "كيس خفيف.",
       "tr": "",
       "pattern_id": null,
@@ -4169,15 +4169,15 @@ window.IHO_UNIT2_DATA = {
         "weight"
       ],
       "tokens": [
-        "كيسٌ",
-        "خَفيفٌ",
+        "كيس",
+        "خَفيف",
         "."
       ],
       "audio_key": "u2_sentence_s048"
     },
     {
       "id": "s049",
-      "ar": "كيسٌ ثَقيلٌ.",
+      "ar": "كيس ثَقيل.",
       "ar_clean": "كيس ثقيل.",
       "tr": "",
       "pattern_id": null,
@@ -4189,15 +4189,15 @@ window.IHO_UNIT2_DATA = {
         "weight"
       ],
       "tokens": [
-        "كيسٌ",
-        "ثَقيلٌ",
+        "كيس",
+        "ثَقيل",
         "."
       ],
       "audio_key": "u2_sentence_s049"
     },
     {
       "id": "s050",
-      "ar": "المِشْمِشُ غالٍ.",
+      "ar": "المِشْمِش غالٍ.",
       "ar_clean": "المشمش غال.",
       "tr": "",
       "pattern_id": null,
@@ -4209,7 +4209,7 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "المِشْمِشُ",
+        "المِشْمِش",
         "غالٍ",
         "."
       ],
@@ -4217,7 +4217,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s051",
-      "ar": "المِشْمِشُ أَغْلى مِنَ البَصَلِ.",
+      "ar": "المِشْمِش أَغْلى مِن البَصَل.",
       "ar_clean": "المشمش اغلي من البصل.",
       "tr": "",
       "pattern_id": "p014",
@@ -4229,17 +4229,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "المِشْمِشُ",
+        "المِشْمِش",
         "أَغْلى",
-        "مِنَ",
-        "البَصَلِ",
+        "مِن",
+        "البَصَل",
         "."
       ],
       "audio_key": "u2_sentence_s051"
     },
     {
       "id": "s052",
-      "ar": "البَصَلُ رَخيصٌ.",
+      "ar": "البَصَل رَخيص.",
       "ar_clean": "البصل رخيص.",
       "tr": "",
       "pattern_id": null,
@@ -4251,15 +4251,15 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "البَصَلُ",
-        "رَخيصٌ",
+        "البَصَل",
+        "رَخيص",
         "."
       ],
       "audio_key": "u2_sentence_s052"
     },
     {
       "id": "s053",
-      "ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
+      "ar": "البَصَل أَرْخَص مِن المِشْمِش.",
       "ar_clean": "البصل ارخص من المشمش.",
       "tr": "",
       "pattern_id": "p013",
@@ -4271,17 +4271,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "البَصَلُ",
-        "أَرْخَصُ",
-        "مِنَ",
-        "المِشْمِشِ",
+        "البَصَل",
+        "أَرْخَص",
+        "مِن",
+        "المِشْمِش",
         "."
       ],
       "audio_key": "u2_sentence_s053"
     },
     {
       "id": "s054",
-      "ar": "الكَرَزَةُ صَغيرَةٌ.",
+      "ar": "الكَرَزَة صَغيرَة.",
       "ar_clean": "الكرزه صغيره.",
       "tr": "",
       "pattern_id": null,
@@ -4293,15 +4293,15 @@ window.IHO_UNIT2_DATA = {
         "size"
       ],
       "tokens": [
-        "الكَرَزَةُ",
-        "صَغيرَةٌ",
+        "الكَرَزَة",
+        "صَغيرَة",
         "."
       ],
       "audio_key": "u2_sentence_s054"
     },
     {
       "id": "s055",
-      "ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
+      "ar": "الكَرَزَة أَصْغَر مِن البُرْتُقالَة.",
       "ar_clean": "الكرزه اصغر من البرتقاله.",
       "tr": "",
       "pattern_id": "p015",
@@ -4313,17 +4313,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "الكَرَزَةُ",
-        "أَصْغَرُ",
-        "مِنَ",
-        "البُرْتُقالَةِ",
+        "الكَرَزَة",
+        "أَصْغَر",
+        "مِن",
+        "البُرْتُقالَة",
         "."
       ],
       "audio_key": "u2_sentence_s055"
     },
     {
       "id": "s056",
-      "ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
+      "ar": "البُرْتُقالَة أَكْبَر مِن الكَرَزَة.",
       "ar_clean": "البرتقاله اكبر من الكرزه.",
       "tr": "",
       "pattern_id": "p015",
@@ -4335,17 +4335,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "البُرْتُقالَةُ",
-        "أَكْبَرُ",
-        "مِنَ",
-        "الكَرَزَةِ",
+        "البُرْتُقالَة",
+        "أَكْبَر",
+        "مِن",
+        "الكَرَزَة",
         "."
       ],
       "audio_key": "u2_sentence_s056"
     },
     {
       "id": "s057",
-      "ar": "عُلْبَةُ الحَليبِ غالِيَةٌ.",
+      "ar": "عُلْبَة الحَليب غالِيَة.",
       "ar_clean": "علبه الحليب غاليه.",
       "tr": "",
       "pattern_id": null,
@@ -4357,16 +4357,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "عُلْبَةُ",
-        "الحَليبِ",
-        "غالِيَةٌ",
+        "عُلْبَة",
+        "الحَليب",
+        "غالِيَة",
         "."
       ],
       "audio_key": "u2_sentence_s057"
     },
     {
       "id": "s058",
-      "ar": "عُلْبَةُ الحَليبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ.",
+      "ar": "عُلْبَة الحَليب أَغْلى مِنْ عُلْبَة المِلْح.",
       "ar_clean": "علبه الحليب اغلي من علبه الملح.",
       "tr": "",
       "pattern_id": "p014",
@@ -4378,19 +4378,19 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "عُلْبَةُ",
-        "الحَليبِ",
+        "عُلْبَة",
+        "الحَليب",
         "أَغْلى",
         "مِنْ",
-        "عُلْبَةِ",
-        "المِلْحِ",
+        "عُلْبَة",
+        "المِلْح",
         "."
       ],
       "audio_key": "u2_sentence_s058"
     },
     {
       "id": "s059",
-      "ar": "عُلْبَةُ المِلْحِ رَخيصَةٌ.",
+      "ar": "عُلْبَة المِلْح رَخيصَة.",
       "ar_clean": "علبه الملح رخيصه.",
       "tr": "",
       "pattern_id": null,
@@ -4402,16 +4402,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "عُلْبَةُ",
-        "المِلْحِ",
-        "رَخيصَةٌ",
+        "عُلْبَة",
+        "المِلْح",
+        "رَخيصَة",
         "."
       ],
       "audio_key": "u2_sentence_s059"
     },
     {
       "id": "s060",
-      "ar": "عُلْبَةُ المِلْحِ أَرْخَصُ مِنْ عُلْبَةِ الحَليبِ.",
+      "ar": "عُلْبَة المِلْح أَرْخَص مِنْ عُلْبَة الحَليب.",
       "ar_clean": "علبه الملح ارخص من علبه الحليب.",
       "tr": "",
       "pattern_id": "p013",
@@ -4423,19 +4423,19 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "عُلْبَةُ",
-        "المِلْحِ",
-        "أَرْخَصُ",
+        "عُلْبَة",
+        "المِلْح",
+        "أَرْخَص",
         "مِنْ",
-        "عُلْبَةِ",
-        "الحَليبِ",
+        "عُلْبَة",
+        "الحَليب",
         "."
       ],
       "audio_key": "u2_sentence_s060"
     },
     {
       "id": "s061",
-      "ar": "أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
+      "ar": "أَنا بِحاجَة إِلى كيلو زَيْتون وَعُلْبَة مَكَرونَة.",
       "ar_clean": "انا بحاجه الي كيلو زيتون وعلبه مكرونه.",
       "tr": "",
       "pattern_id": "p001",
@@ -4448,19 +4448,19 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
         "كيلو",
-        "زَيْتونٍ",
-        "وعُلْبَةِ",
-        "مَكَرونَةٍ",
+        "زَيْتون",
+        "وَعُلْبَة",
+        "مَكَرونَة",
         "."
       ],
       "audio_key": "u2_sentence_s061"
     },
     {
       "id": "s062",
-      "ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
+      "ar": "المَوْز بِعَشْر ليرات.",
       "ar_clean": "الموز بعشر ليرات.",
       "tr": "",
       "pattern_id": "p006",
@@ -4472,16 +4472,16 @@ window.IHO_UNIT2_DATA = {
         "price"
       ],
       "tokens": [
-        "المَوْزُ",
-        "بِعَشْرِ",
-        "ليراتٍ",
+        "المَوْز",
+        "بِعَشْر",
+        "ليرات",
         "."
       ],
       "audio_key": "u2_sentence_s062"
     },
     {
       "id": "s063",
-      "ar": "المَوْزُ أَغْلى مِنَ المِشْمِشِ.",
+      "ar": "المَوْز أَغْلى مِن المِشْمِش.",
       "ar_clean": "الموز اغلي من المشمش.",
       "tr": "",
       "pattern_id": "p014",
@@ -4493,17 +4493,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "المَوْزُ",
+        "المَوْز",
         "أَغْلى",
-        "مِنَ",
-        "المِشْمِشِ",
+        "مِن",
+        "المِشْمِش",
         "."
       ],
       "audio_key": "u2_sentence_s063"
     },
     {
       "id": "s064",
-      "ar": "المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
+      "ar": "المِشْمِش أَرْخَص مِن المَوْز اليَوْم.",
       "ar_clean": "المشمش ارخص من الموز اليوم.",
       "tr": "",
       "pattern_id": "p013",
@@ -4515,18 +4515,18 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "المِشْمِشُ",
-        "أَرْخَصُ",
-        "مِنَ",
-        "المَوْزِ",
-        "اليَوْمَ",
+        "المِشْمِش",
+        "أَرْخَص",
+        "مِن",
+        "المَوْز",
+        "اليَوْم",
         "."
       ],
       "audio_key": "u2_sentence_s064"
     },
     {
       "id": "s065",
-      "ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+      "ar": "أَذْهَبُ إِلى السّوق لِلتَّسَوُّق.",
       "ar_clean": "اذهب الي السوق للتسوق.",
       "tr": "",
       "pattern_id": "p019",
@@ -4540,15 +4540,15 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أَذْهَبُ",
         "إِلى",
-        "السّوقِ",
-        "لِلتَّسَوُّقِ",
+        "السّوق",
+        "لِلتَّسَوُّق",
         "."
       ],
       "audio_key": "u2_sentence_s065"
     },
     {
       "id": "s066",
-      "ar": "أَشْتَري الخُبْزَ والسُّكَّرَ والمِلْحَ مِنَ البَقّالَةِ.",
+      "ar": "أَشْتَري الخُبْز وَالسُّكَّر وَالمِلْح مِن البَقّالَة.",
       "ar_clean": "اشتري الخبز والسكر والملح من البقاله.",
       "tr": "",
       "pattern_id": null,
@@ -4561,18 +4561,18 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَشْتَري",
-        "الخُبْزَ",
-        "والسُّكَّرَ",
-        "والمِلْحَ",
-        "مِنَ",
-        "البَقّالَةِ",
+        "الخُبْز",
+        "وَالسُّكَّر",
+        "وَالمِلْح",
+        "مِن",
+        "البَقّالَة",
         "."
       ],
       "audio_key": "u2_sentence_s066"
     },
     {
       "id": "s067",
-      "ar": "أُريدُ كيلو تُفّاحٍ وكيلو بَطاطا.",
+      "ar": "أُريدُ كيلو تُفّاح وَكيلو بَطاطا.",
       "ar_clean": "اريد كيلو تفاح وكيلو بطاطا.",
       "tr": "",
       "pattern_id": "p008",
@@ -4586,7 +4586,7 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "أُريدُ",
         "كيلو",
-        "تُفّاحٍ",
+        "تُفّاح",
         "وكيلو",
         "بَطاطا",
         "."
@@ -4595,7 +4595,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "id": "s068",
-      "ar": "بِكَم كيلو المَوْزِ؟",
+      "ar": "بِكَم كيلو المَوْز؟",
       "ar_clean": "بكم كيلو الموز؟",
       "tr": "",
       "pattern_id": "p005",
@@ -4609,14 +4609,14 @@ window.IHO_UNIT2_DATA = {
       "tokens": [
         "بِكَم",
         "كيلو",
-        "المَوْزِ",
+        "المَوْز",
         "؟"
       ],
       "audio_key": "u2_sentence_s068"
     },
     {
       "id": "s069",
-      "ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+      "ar": "التُّفّاح أَرْخَص مِن المَوْز.",
       "ar_clean": "التفاح ارخص من الموز.",
       "tr": "",
       "pattern_id": "p013",
@@ -4629,17 +4629,17 @@ window.IHO_UNIT2_DATA = {
         "comparison"
       ],
       "tokens": [
-        "التُّفّاحُ",
-        "أَرْخَصُ",
-        "مِنَ",
-        "المَوْزِ",
+        "التُّفّاح",
+        "أَرْخَص",
+        "مِن",
+        "المَوْز",
         "."
       ],
       "audio_key": "u2_sentence_s069"
     },
     {
       "id": "s070",
-      "ar": "أَنا بِحاجَةٍ إِلى عُلْبَةِ شايٍ أَيْضًا.",
+      "ar": "أَنا بِحاجَة إِلى عُلْبَة شاي أَيْضًا.",
       "ar_clean": "انا بحاجه الي علبه شاي ايضا.",
       "tr": "",
       "pattern_id": "p001",
@@ -4652,10 +4652,10 @@ window.IHO_UNIT2_DATA = {
       ],
       "tokens": [
         "أَنا",
-        "بِحاجَةٍ",
+        "بِحاجَة",
         "إِلى",
-        "عُلْبَةِ",
-        "شايٍ",
+        "عُلْبَة",
+        "شاي",
         "أَيْضًا",
         "."
       ],
@@ -4701,7 +4701,7 @@ window.IHO_UNIT2_DATA = {
       "lines": [
         {
           "speaker": "الأُمّ",
-          "ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
+          "ar": "أَنا بِحاجَة إِلى بَعْض الأَشْياء مِن البَقّالَة.",
           "tr": "",
           "line_no": 1,
           "audio_key": "u2_dialogue_d001_01"
@@ -4715,7 +4715,7 @@ window.IHO_UNIT2_DATA = {
         },
         {
           "speaker": "الأُمّ",
-          "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ، وعُلْبَةَ مِلْحٍ، وعُلْبَتَيْنِ مِنَ الشّايِ.",
+          "ar": "أَطْلُبُ مِنْكَ كيلو سُكَّر، وَعُلْبَة مِلْح، وَعُلْبَتَيْن مِن الشّاي.",
           "tr": "",
           "line_no": 3,
           "audio_key": "u2_dialogue_d001_03"
@@ -4736,7 +4736,7 @@ window.IHO_UNIT2_DATA = {
         },
         {
           "speaker": "الأُمّ",
-          "ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
+          "ar": "حَسَنًا، سَأَذْهَبُ الآن.",
           "tr": "",
           "line_no": 6,
           "audio_key": "u2_dialogue_d001_06"
@@ -4759,42 +4759,42 @@ window.IHO_UNIT2_DATA = {
       "lines": [
         {
           "speaker": "البائِع",
-          "ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟ ماذا تُريدينَ؟",
+          "ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟ ماذا تُريدينَ؟",
           "tr": "",
           "line_no": 1,
           "audio_key": "u2_dialogue_d002_01"
         },
         {
           "speaker": "مَرْيَم",
-          "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
+          "ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى خَضْراوات طازَجَة.",
           "tr": "",
           "line_no": 2,
           "audio_key": "u2_dialogue_d002_02"
         },
         {
           "speaker": "البائِع",
-          "ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
+          "ar": "عِنْدي طَماطِم، خِيار، جَزَر، باذِنْجان، بَطاطا، بَصَل، فُلْفُل، وَفاصوليا.",
           "tr": "",
           "line_no": 3,
           "audio_key": "u2_dialogue_d002_03"
         },
         {
           "speaker": "مَرْيَم",
-          "ar": "جَميلٌ جِدًّا! وهَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
+          "ar": "جَميل جِدًّا! وَهَل عِنْدَكَ فَواكِه أَيْضًا؟",
           "tr": "",
           "line_no": 4,
           "audio_key": "u2_dialogue_d002_04"
         },
         {
           "speaker": "البائِع",
-          "ar": "نَعَم، عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
+          "ar": "نَعَم، عِنْدي تُفّاح، بُرْتُقال، مَوْز، عِنَب، كَرَز، وَمِشْمِش.",
           "tr": "",
           "line_no": 5,
           "audio_key": "u2_dialogue_d002_05"
         },
         {
           "speaker": "مَرْيَم",
-          "ar": "حَسَنًا، أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+          "ar": "حَسَنًا، أُريدُ كيلوغْرامًا واحِدًا مِنْ كُلّ نَوْع.",
           "tr": "",
           "line_no": 6,
           "audio_key": "u2_dialogue_d002_06"
@@ -4817,35 +4817,35 @@ window.IHO_UNIT2_DATA = {
       "lines": [
         {
           "speaker": "البائِع",
-          "ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ يا سَيِّدي؟",
+          "ar": "أَهْلًا وَسَهْلًا! أَيّ خِدْمَة يا سَيِّدي؟",
           "tr": "",
           "line_no": 1,
           "audio_key": "u2_dialogue_d003_01"
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ، بِكَم الفاصوليا؟",
+          "ar": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْض الخُضَر، بِكَم الفاصوليا؟",
           "tr": "",
           "line_no": 2,
           "audio_key": "u2_dialogue_d003_02"
         },
         {
           "speaker": "البائِع",
-          "ar": "بِتِسْعِ ليراتٍ، هِيَ طازَجَةٌ جِدًّا.",
+          "ar": "بِتِسْع ليرات، هِيَ طازَجَة جِدًّا.",
           "tr": "",
           "line_no": 3,
           "audio_key": "u2_dialogue_d003_03"
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "لَكِنَّها غالِيَةٌ، وأَغْلى مِنَ البَطاطا. أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
+          "ar": "لَكِنَّها غالِيَة، وَأَغْلى مِن البَطاطا. أُريدُ كيلوغْرامًا واحِدًا فَقَطْ.",
           "tr": "",
           "line_no": 4,
           "audio_key": "u2_dialogue_d003_04"
         },
         {
           "speaker": "البائِع",
-          "ar": "العِنَبُ رَخيصٌ اليَوْمَ، وهُوَ أَرْخَصُ مِنَ التُّفّاحِ. هَل تُريدُ مِنْهُ؟",
+          "ar": "العِنَب رَخيص اليَوْم، وَهُوَ أَرْخَص مِن التُّفّاح. هَل تُريدُ مِنْه؟",
           "tr": "",
           "line_no": 5,
           "audio_key": "u2_dialogue_d003_05"
@@ -4875,14 +4875,14 @@ window.IHO_UNIT2_DATA = {
       "lines": [
         {
           "speaker": "البَقّال",
-          "ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ؟",
+          "ar": "أَهْلًا وَسَهْلًا! أَيّ خِدْمَة؟",
           "tr": "",
           "line_no": 1,
           "audio_key": "u2_dialogue_d004_01"
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
+          "ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى كيلو زَيْتون وَعُلْبَة مَكَرونَة.",
           "tr": "",
           "line_no": 2,
           "audio_key": "u2_dialogue_d004_02"
@@ -4896,35 +4896,35 @@ window.IHO_UNIT2_DATA = {
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْزُ؟",
+          "ar": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْز؟",
           "tr": "",
           "line_no": 4,
           "audio_key": "u2_dialogue_d004_04"
         },
         {
           "speaker": "البَقّال",
-          "ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
+          "ar": "المَوْز بِعَشْر ليرات.",
           "tr": "",
           "line_no": 5,
           "audio_key": "u2_dialogue_d004_05"
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "لَكِنَّهُ أَغْلى مِنَ المِشْمِشِ.",
+          "ar": "لَكِنَّه أَغْلى مِن المِشْمِش.",
           "tr": "",
           "line_no": 6,
           "audio_key": "u2_dialogue_d004_06"
         },
         {
           "speaker": "البَقّال",
-          "ar": "نَعَم، المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
+          "ar": "نَعَم، المِشْمِش أَرْخَص مِن المَوْز اليَوْم.",
           "tr": "",
           "line_no": 7,
           "audio_key": "u2_dialogue_d004_07"
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "حَسَنًا، أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
+          "ar": "حَسَنًا، أُريدُ ثَلاثَة كيلوغرامات مِن المِشْمِش.",
           "tr": "",
           "line_no": 8,
           "audio_key": "u2_dialogue_d004_08"
@@ -4938,7 +4938,7 @@ window.IHO_UNIT2_DATA = {
         },
         {
           "speaker": "المُشْتَري",
-          "ar": "شُكْرًا، مَعَ السَّلامَةِ.",
+          "ar": "شُكْرًا، مَعَ السَّلامَة.",
           "tr": "",
           "line_no": 10,
           "audio_key": "u2_dialogue_d004_10"
@@ -4961,21 +4961,21 @@ window.IHO_UNIT2_DATA = {
       "lines": [
         {
           "speaker": "البائِع",
-          "ar": "أَهْلًا فاروق! أَيُّ خِدْمَةٍ؟",
+          "ar": "أَهْلًا فاروق! أَيّ خِدْمَة؟",
           "tr": "",
           "line_no": 1,
           "audio_key": "u2_dialogue_d005_01"
         },
         {
           "speaker": "فاروق",
-          "ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى حَليبٍ.",
+          "ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى حَليب.",
           "tr": "",
           "line_no": 2,
           "audio_key": "u2_dialogue_d005_02"
         },
         {
           "speaker": "البائِع",
-          "ar": "حَسَنًا، كَم تُريدُ مِنَ الحَليبِ؟",
+          "ar": "حَسَنًا، كَم تُريدُ مِن الحَليب؟",
           "tr": "",
           "line_no": 3,
           "audio_key": "u2_dialogue_d005_03"
@@ -5152,7 +5152,7 @@ window.IHO_UNIT2_DATA = {
       {
         "id": "mc003",
         "type": "category",
-        "q_ar": "أَيُّ كَلِمَةٍ مِنَ الفَواكِهِ؟",
+        "q_ar": "أَيّ كَلِمَة مِن الفَواكِه؟",
         "q_tr": "",
         "options": [
           "تُفّاح",
@@ -5169,7 +5169,7 @@ window.IHO_UNIT2_DATA = {
       {
         "id": "mc004",
         "type": "category",
-        "q_ar": "أَيُّ كَلِمَةٍ مِنَ الخُضْراواتِ؟",
+        "q_ar": "أَيّ كَلِمَة مِن الخُضْراوات؟",
         "q_tr": "",
         "options": [
           "جَزَر",
@@ -5186,15 +5186,15 @@ window.IHO_UNIT2_DATA = {
       {
         "id": "mc005",
         "type": "phrase",
-        "q_ar": "أَكْمِلْ: أَنا ____ إِلى حَليبٍ.",
+        "q_ar": "أَكْمِلْ: أَنا ____ إِلى حَليب.",
         "q_tr": "",
         "options": [
-          "بِحاجَةٍ",
+          "بِحاجَة",
           "بِكَم",
-          "أَرْخَصُ",
+          "أَرْخَص",
           "تِسْع"
         ],
-        "answer": "بِحاجَةٍ",
+        "answer": "بِحاجَة",
         "source_pages": [
           60,
           87
@@ -5206,12 +5206,12 @@ window.IHO_UNIT2_DATA = {
         "q_ar": "أَكْمِلْ: بِكَم ____؟",
         "q_tr": "",
         "options": [
-          "البَصَلُ",
+          "البَصَل",
           "إِلى",
           "مِن",
           "شُكْرًا"
         ],
-        "answer": "البَصَلُ",
+        "answer": "البَصَل",
         "source_pages": [
           71
         ]
@@ -5219,15 +5219,15 @@ window.IHO_UNIT2_DATA = {
       {
         "id": "mc007",
         "type": "comparison",
-        "q_ar": "الفاصوليا ٩ ليرات، البطاطا ٥ ليرات. أيُّ جُمْلَةٍ صَحيحَة؟",
+        "q_ar": "الفاصوليا ٩ ليرات، البطاطا ٥ ليرات. أيّ جُمْلَة صَحيحَة؟",
         "q_tr": "",
         "options": [
-          "الفاصوليا أَغْلى مِنَ البَطاطا",
-          "الفاصوليا أَرْخَصُ مِنَ البَطاطا",
-          "البَطاطا أَغْلى مِنَ الفاصوليا",
-          "الفاصوليا بِخَمْسِ ليرات"
+          "الفاصوليا أَغْلى مِن البَطاطا",
+          "الفاصوليا أَرْخَص مِن البَطاطا",
+          "البَطاطا أَغْلى مِن الفاصوليا",
+          "الفاصوليا بِخَمْس ليرات"
         ],
-        "answer": "الفاصوليا أَغْلى مِنَ البَطاطا",
+        "answer": "الفاصوليا أَغْلى مِن البَطاطا",
         "source_pages": [
           67,
           68
@@ -5241,8 +5241,8 @@ window.IHO_UNIT2_DATA = {
         "options": [
           "لا، شُكْرًا.",
           "بِكَم البَصَل؟",
-          "أَيُّ خِدْمَة؟",
-          "الفاصوليا غالية"
+          "أَيّ خِدْمَة؟",
+          "الفاصوليا غالِيَة"
         ],
         "answer": "لا، شُكْرًا.",
         "source_pages": [
@@ -5255,12 +5255,12 @@ window.IHO_UNIT2_DATA = {
     "fill_blanks": [
       {
         "id": "fb001",
-        "sentence_ar": "أَنا ____ إِلى حَليبٍ.",
-        "answer": "بِحاجَةٍ",
+        "sentence_ar": "أَنا ____ إِلى حَليب.",
+        "answer": "بِحاجَة",
         "options": [
-          "بِحاجَةٍ",
+          "بِحاجَة",
           "بِكَم",
-          "أَرْخَصُ",
+          "أَرْخَص",
           "عِنْدي"
         ],
         "tr": "",
@@ -5272,10 +5272,10 @@ window.IHO_UNIT2_DATA = {
       },
       {
         "id": "fb002",
-        "sentence_ar": "أُريدُ عُلْبَةَ ____.",
-        "answer": "مِلْحٍ",
+        "sentence_ar": "أُريدُ عُلْبَة ____.",
+        "answer": "مِلْح",
         "options": [
-          "مِلْحٍ",
+          "مِلْح",
           "إِلى",
           "بِكَم",
           "أَغْلى"
@@ -5288,7 +5288,7 @@ window.IHO_UNIT2_DATA = {
       },
       {
         "id": "fb003",
-        "sentence_ar": "البَصَلُ ____ أَرْبَعِ ليراتٍ.",
+        "sentence_ar": "البَصَل ____ أَرْبَع ليرات.",
         "answer": "بِـ",
         "options": [
           "بِـ",
@@ -5304,10 +5304,10 @@ window.IHO_UNIT2_DATA = {
       },
       {
         "id": "fb004",
-        "sentence_ar": "التُّفّاحُ أَرْخَصُ ____ المَوْزِ.",
-        "answer": "مِنَ",
+        "sentence_ar": "التُّفّاح أَرْخَص ____ المَوْز.",
+        "answer": "مِن",
         "options": [
-          "مِنَ",
+          "مِن",
           "إِلى",
           "بِـ",
           "في"
@@ -5321,10 +5321,10 @@ window.IHO_UNIT2_DATA = {
       },
       {
         "id": "fb005",
-        "sentence_ar": "أَشْتَري الخُبْزَ ____ البَقّالَةِ.",
-        "answer": "مِنَ",
+        "sentence_ar": "أَشْتَري الخُبْز ____ البَقّالَة.",
+        "answer": "مِن",
         "options": [
-          "مِنَ",
+          "مِن",
           "إِلى",
           "بِـ",
           "هَل"
@@ -5354,9 +5354,9 @@ window.IHO_UNIT2_DATA = {
       {
         "id": "fb007",
         "sentence_ar": "الفاصوليا أَغْلى ____ البَطاطا.",
-        "answer": "مِنَ",
+        "answer": "مِن",
         "options": [
-          "مِنَ",
+          "مِن",
           "إِلى",
           "بِـ",
           "في"
@@ -5370,10 +5370,10 @@ window.IHO_UNIT2_DATA = {
       },
       {
         "id": "fb008",
-        "sentence_ar": "أَهْلًا وَسَهْلًا، ____ خِدْمَةٍ؟",
-        "answer": "أَيُّ",
+        "sentence_ar": "أَهْلًا وَسَهْلًا، ____ خِدْمَة؟",
+        "answer": "أَيّ",
         "options": [
-          "أَيُّ",
+          "أَيّ",
           "كَم",
           "مِن",
           "بِـ"
@@ -5392,11 +5392,11 @@ window.IHO_UNIT2_DATA = {
         "id": "so001",
         "tokens": [
           "أَنا",
-          "بِحاجَةٍ",
+          "بِحاجَة",
           "إِلى",
-          "حَليبٍ"
+          "حَليب"
         ],
-        "answer_ar": "أَنا بِحاجَةٍ إِلى حَليبٍ.",
+        "answer_ar": "أَنا بِحاجَة إِلى حَليب.",
         "tr": "",
         "pattern_id": "p001"
       },
@@ -5404,10 +5404,10 @@ window.IHO_UNIT2_DATA = {
         "id": "so002",
         "tokens": [
           "أُريدُ",
-          "عُلْبَةَ",
-          "مِلْحٍ"
+          "عُلْبَة",
+          "مِلْح"
         ],
-        "answer_ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
+        "answer_ar": "أُريدُ عُلْبَة مِلْح.",
         "tr": "",
         "pattern_id": "p002"
       },
@@ -5415,32 +5415,32 @@ window.IHO_UNIT2_DATA = {
         "id": "so003",
         "tokens": [
           "بِكَم",
-          "البَصَلُ؟"
+          "البَصَل؟"
         ],
-        "answer_ar": "بِكَم البَصَلُ؟",
+        "answer_ar": "بِكَم البَصَل؟",
         "tr": "",
         "pattern_id": "p005"
       },
       {
         "id": "so004",
         "tokens": [
-          "البَصَلُ",
-          "بِأَرْبَعِ",
-          "ليراتٍ"
+          "البَصَل",
+          "بِأَرْبَع",
+          "ليرات"
         ],
-        "answer_ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+        "answer_ar": "البَصَل بِأَرْبَع ليرات.",
         "tr": "",
         "pattern_id": "p006"
       },
       {
         "id": "so005",
         "tokens": [
-          "التُّفّاحُ",
-          "أَرْخَصُ",
-          "مِنَ",
-          "المَوْزِ"
+          "التُّفّاح",
+          "أَرْخَص",
+          "مِن",
+          "المَوْز"
         ],
-        "answer_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+        "answer_ar": "التُّفّاح أَرْخَص مِن المَوْز.",
         "tr": "",
         "pattern_id": "p013"
       },
@@ -5449,10 +5449,10 @@ window.IHO_UNIT2_DATA = {
         "tokens": [
           "الفاصوليا",
           "أَغْلى",
-          "مِنَ",
+          "مِن",
           "البَطاطا"
         ],
-        "answer_ar": "الفاصوليا أَغْلى مِنَ البَطاطا.",
+        "answer_ar": "الفاصوليا أَغْلى مِن البَطاطا.",
         "tr": "",
         "pattern_id": "p014"
       },
@@ -5461,10 +5461,10 @@ window.IHO_UNIT2_DATA = {
         "tokens": [
           "أَذْهَبُ",
           "إِلى",
-          "السّوقِ",
-          "لِلتَّسَوُّقِ"
+          "السّوق",
+          "لِلتَّسَوُّق"
         ],
-        "answer_ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+        "answer_ar": "أَذْهَبُ إِلى السّوق لِلتَّسَوُّق.",
         "tr": "",
         "pattern_id": "p019"
       }
@@ -5508,7 +5508,7 @@ window.IHO_UNIT2_DATA = {
         "choices": [
           "بِكَم",
           "كَم",
-          "أَيْنَ",
+          "أَيْن",
           "ليرة"
         ],
         "odd": "ليرة",
@@ -5546,7 +5546,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g001_flashcards_core",
       "type": "flashcards",
       "title_tr": "",
-      "title_ar": "بطاقات الكلمات",
+      "title_ar": "بِطاقات الكَلِمات",
       "instructions_tr": "",
       "config": {
         "pool": {
@@ -5568,7 +5568,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g002_match_grocery",
       "type": "matching",
       "title_tr": "",
-      "title_ar": "صِل الكلمات",
+      "title_ar": "صِل الكَلِمات",
       "instructions_tr": "",
       "config": {
         "word_ids": [
@@ -5590,7 +5590,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g003_sort_fruit_vegetable",
       "type": "category_sort",
       "title_tr": "",
-      "title_ar": "صَنِّف الفواكه والخضراوات",
+      "title_ar": "صَنِّف الفَواكِه وَالخُضْراوات",
       "instructions_tr": "",
       "config": {
         "categories": [
@@ -5627,7 +5627,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g004_shopping_list_basic",
       "type": "shopping_list",
       "title_tr": "",
-      "title_ar": "قائمة التسوق",
+      "title_ar": "قائِمَة التَّسَوُّق",
       "instructions_tr": "",
       "config": {
         "target_count": 5,
@@ -5654,7 +5654,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g005_price_quiz",
       "type": "price_quiz",
       "title_tr": "",
-      "title_ar": "أسئلة الأسعار",
+      "title_ar": "أَسْئِلَة الأَسْعار",
       "instructions_tr": "",
       "config": {
         "price_set": "prices_practice",
@@ -5665,7 +5665,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g006_comparison_price",
       "type": "comparative_quiz",
       "title_tr": "",
-      "title_ar": "المقارنة: أرخص/أغلى",
+      "title_ar": "المُقارَنَة: أَرْخَص/أَغْلى",
       "instructions_tr": "",
       "config": {
         "price_set": "prices_page67",
@@ -5680,7 +5680,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g007_fill_blanks_core",
       "type": "fill_blank",
       "title_tr": "",
-      "title_ar": "أَكْمِل الفراغ",
+      "title_ar": "أَكْمِل الفَراغ",
       "instructions_tr": "",
       "config": {
         "items": "fill_blanks"
@@ -5690,7 +5690,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g008_sentence_order",
       "type": "sentence_order",
       "title_tr": "",
-      "title_ar": "رَتِّب الكلمات",
+      "title_ar": "رَتِّب الكَلِمات",
       "instructions_tr": "",
       "config": {
         "items": "sentence_orders"
@@ -5700,7 +5700,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g009_dialogue_order_souq",
       "type": "dialogue_order",
       "title_tr": "",
-      "title_ar": "رَتِّب الحوار",
+      "title_ar": "رَتِّب الحِوار",
       "instructions_tr": "",
       "config": {
         "dialogue_id": "d003"
@@ -5710,7 +5710,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g010_dialogue_order_baqala",
       "type": "dialogue_order",
       "title_tr": "",
-      "title_ar": "رَتِّب الحوار",
+      "title_ar": "رَتِّب الحِوار",
       "instructions_tr": "",
       "config": {
         "dialogue_id": "d004"
@@ -5720,7 +5720,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g011_word_search",
       "type": "word_search",
       "title_tr": "",
-      "title_ar": "ابحث عن الكلمات",
+      "title_ar": "اِبْحَثْ عَن الكَلِمات",
       "instructions_tr": "",
       "config": {
         "words": [
@@ -5748,7 +5748,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g012_memory_vocab",
       "type": "memory",
       "title_tr": "",
-      "title_ar": "لعبة الذاكرة",
+      "title_ar": "لُعْبَة الذّاكِرَة",
       "instructions_tr": "",
       "config": {
         "word_ids": [
@@ -5768,7 +5768,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g013_odd_one_out",
       "type": "odd_one_out",
       "title_tr": "",
-      "title_ar": "اختر الكلمة الغريبة",
+      "title_ar": "اِخْتَر الكَلِمَة الغَريبَة",
       "instructions_tr": "",
       "config": {
         "items": "odd_one_out"
@@ -5778,7 +5778,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g014_multiple_choice",
       "type": "multiple_choice",
       "title_tr": "",
-      "title_ar": "اختبار الاختيار",
+      "title_ar": "اِخْتِبار الاخْتِيار",
       "instructions_tr": "",
       "config": {
         "items": "mc_questions"
@@ -5788,7 +5788,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g015_roleplay_market",
       "type": "roleplay",
       "title_tr": "",
-      "title_ar": "تمثيل الحوار",
+      "title_ar": "تَمْثيل الحِوار",
       "instructions_tr": "",
       "config": {
         "roles": [
@@ -5810,7 +5810,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g016_listening_select_placeholder",
       "type": "listening_select",
       "title_tr": "",
-      "title_ar": "استمع واختر",
+      "title_ar": "اِسْتَمِعْ وَاخْتَرْ",
       "instructions_tr": "",
       "config": {
         "items": [
@@ -5819,20 +5819,20 @@ window.IHO_UNIT2_DATA = {
             "prompt_ar": "بِكَم الفاصوليا؟",
             "options": [
               "بِكَم الفاصوليا؟",
-              "أَنا بِحاجَةٍ إِلى حَليبٍ.",
-              "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ."
+              "أَنا بِحاجَة إِلى حَليب.",
+              "التُّفّاح أَرْخَص مِن المَوْز."
             ],
             "answer": "بِكَم الفاصوليا؟"
           },
           {
             "audio_key": "u2_sentence_s069",
-            "prompt_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+            "prompt_ar": "التُّفّاح أَرْخَص مِن المَوْز.",
             "options": [
-              "المَوْزُ بِعَشْرِ ليراتٍ.",
-              "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+              "المَوْز بِعَشْر ليرات.",
+              "التُّفّاح أَرْخَص مِن المَوْز.",
               "لا، شُكْرًا."
             ],
-            "answer": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ."
+            "answer": "التُّفّاح أَرْخَص مِن المَوْز."
           }
         ]
       }
@@ -5889,7 +5889,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v009",
-      "text_ar": "قائِمَةُ التَّسَوُّق",
+      "text_ar": "قائِمَة التَّسَوُّق",
       "type": "vocab",
       "path": null
     },
@@ -6201,7 +6201,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v061",
-      "text_ar": "بِحاجَةٍ إِلى",
+      "text_ar": "بِحاجَة إِلى",
       "type": "vocab",
       "path": null
     },
@@ -6291,7 +6291,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v076",
-      "text_ar": "أَرْخَصُ مِن",
+      "text_ar": "أَرْخَص مِن",
       "type": "vocab",
       "path": null
     },
@@ -6315,13 +6315,13 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v080",
-      "text_ar": "أَكْبَرُ مِن",
+      "text_ar": "أَكْبَر مِن",
       "type": "vocab",
       "path": null
     },
     {
       "audio_key": "u2_vocab_v081",
-      "text_ar": "أَصْغَرُ مِن",
+      "text_ar": "أَصْغَر مِن",
       "type": "vocab",
       "path": null
     },
@@ -6339,13 +6339,13 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v084",
-      "text_ar": "أَخَفُّ مِن",
+      "text_ar": "أَخَفّ مِن",
       "type": "vocab",
       "path": null
     },
     {
       "audio_key": "u2_vocab_v085",
-      "text_ar": "أَثْقَلُ مِن",
+      "text_ar": "أَثْقَل مِن",
       "type": "vocab",
       "path": null
     },
@@ -6393,7 +6393,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_vocab_v093",
-      "text_ar": "أَيْنَ؟",
+      "text_ar": "أَيْن؟",
       "type": "vocab",
       "path": null
     },
@@ -6429,7 +6429,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_sentence_s001",
-      "text_ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
+      "text_ar": "أَنا بِحاجَة إِلى بَعْض الأَشْياء مِن البَقّالَة.",
       "type": "sentence",
       "path": null
     },
@@ -6441,19 +6441,19 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_sentence_s003",
-      "text_ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ.",
+      "text_ar": "أَطْلُبُ مِنْكَ كيلو سُكَّر.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s004",
-      "text_ar": "أُريدُ عُلْبَةَ مِلْحٍ.",
+      "text_ar": "أُريدُ عُلْبَة مِلْح.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s005",
-      "text_ar": "أُريدُ عُلْبَتَيْنِ مِنَ الشّايِ.",
+      "text_ar": "أُريدُ عُلْبَتَيْن مِن الشّاي.",
       "type": "sentence",
       "path": null
     },
@@ -6471,121 +6471,121 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_sentence_s008",
-      "text_ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
+      "text_ar": "حَسَنًا، سَأَذْهَبُ الآن.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s009",
-      "text_ar": "أَنا أُريدُ السُّكَّرَ.",
+      "text_ar": "أَنا أُريدُ السُّكَّر.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s010",
-      "text_ar": "أَنا بِحاجَةٍ إِلى الشّايِ.",
+      "text_ar": "أَنا بِحاجَة إِلى الشّاي.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s011",
-      "text_ar": "أَنْتَ تَطْلُبُ المِلْحَ.",
+      "text_ar": "أَنْتَ تَطْلُبُ المِلْح.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s012",
-      "text_ar": "أَنْتِ بِحاجَةٍ إِلى الحَليبِ.",
+      "text_ar": "أَنْتِ بِحاجَة إِلى الحَليب.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s013",
-      "text_ar": "هُوَ بِحاجَةٍ إِلى الخُبْزِ.",
+      "text_ar": "هُوَ بِحاجَة إِلى الخُبْز.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s014",
-      "text_ar": "هِيَ تُريدُ العَسَلَ.",
+      "text_ar": "هِيَ تُريدُ العَسَل.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s015",
-      "text_ar": "أَنا أُريدُ عُلْبَةَ مِلْحٍ.",
+      "text_ar": "أَنا أُريدُ عُلْبَة مِلْح.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s016",
-      "text_ar": "أَنا بِحاجَةٍ إِلى كيلوغرامٍ مِنَ العَسَلِ.",
+      "text_ar": "أَنا بِحاجَة إِلى كيلوغْرام مِن العَسَل.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s017",
-      "text_ar": "أَنْتِ تُريدينَ عُلْبَتَيْنِ مِنَ المَكَرونَةِ.",
+      "text_ar": "أَنْتِ تُريدينَ عُلْبَتَيْن مِن المَكَرونَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s018",
-      "text_ar": "أَنْتَ بِحاجَةٍ إِلى عُلْبَةٍ واحِدَةٍ مِنَ البَيْضِ.",
+      "text_ar": "أَنْتَ بِحاجَة إِلى عُلْبَة واحِدَة مِن البَيْض.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s019",
-      "text_ar": "هُوَ بِحاجَةٍ إِلى كيلوغرامَيْنِ مِنَ السُّكَّرِ.",
+      "text_ar": "هُوَ بِحاجَة إِلى كيلوغرامَيْن مِن السُّكَّر.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s020",
-      "text_ar": "هِيَ تُريدُ ثَلاثَةً مِنَ الخُبْزِ.",
+      "text_ar": "هِيَ تُريدُ ثَلاثَةً مِن الخُبْز.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s021",
-      "text_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
+      "text_ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s022",
-      "text_ar": "أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
+      "text_ar": "أَنا بِحاجَة إِلى خَضْراوات طازَجَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s023",
-      "text_ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
+      "text_ar": "عِنْدي طَماطِم، خِيار، جَزَر، باذِنْجان، بَطاطا، بَصَل، فُلْفُل، وَفاصوليا.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s024",
-      "text_ar": "هَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
+      "text_ar": "هَل عِنْدَكَ فَواكِه أَيْضًا؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s025",
-      "text_ar": "عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
+      "text_ar": "عِنْدي تُفّاح، بُرْتُقال، مَوْز، عِنَب، كَرَز، وَمِشْمِش.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s026",
-      "text_ar": "أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+      "text_ar": "أُريدُ كيلوغْرامًا واحِدًا مِنْ كُلّ نَوْع.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s027",
-      "text_ar": "أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ.",
+      "text_ar": "أُريدُ أَنْ أَشْتَري بَعْض الخُضَر.",
       "type": "sentence",
       "path": null
     },
@@ -6597,37 +6597,37 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_sentence_s029",
-      "text_ar": "الفاصوليا بِتِسْعِ ليراتٍ.",
+      "text_ar": "الفاصوليا بِتِسْع ليرات.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s030",
-      "text_ar": "هِيَ طازَجَةٌ جِدًّا.",
+      "text_ar": "هِيَ طازَجَة جِدًّا.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s031",
-      "text_ar": "الفاصوليا غالِيَةٌ وأَغْلى مِنَ البَطاطا.",
+      "text_ar": "الفاصوليا غالِيَة وَأَغْلى مِن البَطاطا.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s032",
-      "text_ar": "أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
+      "text_ar": "أُريدُ كيلوغْرامًا واحِدًا فَقَطْ.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s033",
-      "text_ar": "العِنَبُ رَخيصٌ اليَوْمَ.",
+      "text_ar": "العِنَب رَخيص اليَوْم.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s034",
-      "text_ar": "العِنَبُ أَرْخَصُ مِنَ التُّفّاحِ.",
+      "text_ar": "العِنَب أَرْخَص مِن التُّفّاح.",
       "type": "sentence",
       "path": null
     },
@@ -6645,205 +6645,205 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_sentence_s037",
-      "text_ar": "البَطاطا بِخَمْسِ ليراتٍ.",
+      "text_ar": "البَطاطا بِخَمْس ليرات.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s038",
-      "text_ar": "أَيَّ عُلْبَةٍ تُريدُ مِنَ المِشْمِشِ؟",
+      "text_ar": "أَيّ عُلْبَة تُريدُ مِن المِشْمِش؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s039",
-      "text_ar": "أُريدُ هذِهِ العُلْبَةَ.",
+      "text_ar": "أُريدُ هذِهِ العُلْبَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s040",
-      "text_ar": "بِكَم البَيْضَةُ الواحِدَةُ؟",
+      "text_ar": "بِكَم البَيْضَة الواحِدَة؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s041",
-      "text_ar": "البَيْضَةُ الواحِدَةُ بِليرَتَيْنِ.",
+      "text_ar": "البَيْضَة الواحِدَة بِليرَتَيْن.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s042",
-      "text_ar": "كَم كيلوغرامًا تُريدُ مِنَ التُّفّاحِ؟",
+      "text_ar": "كَم كيلوغْرامًا تُريدُ مِن التُّفّاح؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s043",
-      "text_ar": "أُريدُ ثَلاثَةَ كيلوغراماتٍ.",
+      "text_ar": "أُريدُ ثَلاثَة كيلوغْرامات.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s044",
-      "text_ar": "بِكَم البَصَلُ؟",
+      "text_ar": "بِكَم البَصَل؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s045",
-      "text_ar": "البَصَلُ بِأَرْبَعِ ليراتٍ.",
+      "text_ar": "البَصَل بِأَرْبَع ليرات.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s046",
-      "text_ar": "صُنْدوقٌ صَغيرٌ.",
+      "text_ar": "صُنْدوق صَغير.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s047",
-      "text_ar": "صُنْدوقٌ كَبيرٌ.",
+      "text_ar": "صُنْدوق كَبير.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s048",
-      "text_ar": "كيسٌ خَفيفٌ.",
+      "text_ar": "كيس خَفيف.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s049",
-      "text_ar": "كيسٌ ثَقيلٌ.",
+      "text_ar": "كيس ثَقيل.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s050",
-      "text_ar": "المِشْمِشُ غالٍ.",
+      "text_ar": "المِشْمِش غالٍ.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s051",
-      "text_ar": "المِشْمِشُ أَغْلى مِنَ البَصَلِ.",
+      "text_ar": "المِشْمِش أَغْلى مِن البَصَل.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s052",
-      "text_ar": "البَصَلُ رَخيصٌ.",
+      "text_ar": "البَصَل رَخيص.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s053",
-      "text_ar": "البَصَلُ أَرْخَصُ مِنَ المِشْمِشِ.",
+      "text_ar": "البَصَل أَرْخَص مِن المِشْمِش.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s054",
-      "text_ar": "الكَرَزَةُ صَغيرَةٌ.",
+      "text_ar": "الكَرَزَة صَغيرَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s055",
-      "text_ar": "الكَرَزَةُ أَصْغَرُ مِنَ البُرْتُقالَةِ.",
+      "text_ar": "الكَرَزَة أَصْغَر مِن البُرْتُقالَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s056",
-      "text_ar": "البُرْتُقالَةُ أَكْبَرُ مِنَ الكَرَزَةِ.",
+      "text_ar": "البُرْتُقالَة أَكْبَر مِن الكَرَزَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s057",
-      "text_ar": "عُلْبَةُ الحَليبِ غالِيَةٌ.",
+      "text_ar": "عُلْبَة الحَليب غالِيَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s058",
-      "text_ar": "عُلْبَةُ الحَليبِ أَغْلى مِنْ عُلْبَةِ المِلْحِ.",
+      "text_ar": "عُلْبَة الحَليب أَغْلى مِنْ عُلْبَة المِلْح.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s059",
-      "text_ar": "عُلْبَةُ المِلْحِ رَخيصَةٌ.",
+      "text_ar": "عُلْبَة المِلْح رَخيصَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s060",
-      "text_ar": "عُلْبَةُ المِلْحِ أَرْخَصُ مِنْ عُلْبَةِ الحَليبِ.",
+      "text_ar": "عُلْبَة المِلْح أَرْخَص مِنْ عُلْبَة الحَليب.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s061",
-      "text_ar": "أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
+      "text_ar": "أَنا بِحاجَة إِلى كيلو زَيْتون وَعُلْبَة مَكَرونَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s062",
-      "text_ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
+      "text_ar": "المَوْز بِعَشْر ليرات.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s063",
-      "text_ar": "المَوْزُ أَغْلى مِنَ المِشْمِشِ.",
+      "text_ar": "المَوْز أَغْلى مِن المِشْمِش.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s064",
-      "text_ar": "المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
+      "text_ar": "المِشْمِش أَرْخَص مِن المَوْز اليَوْم.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s065",
-      "text_ar": "أَذْهَبُ إِلى السّوقِ لِلتَّسَوُّقِ.",
+      "text_ar": "أَذْهَبُ إِلى السّوق لِلتَّسَوُّق.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s066",
-      "text_ar": "أَشْتَري الخُبْزَ والسُّكَّرَ والمِلْحَ مِنَ البَقّالَةِ.",
+      "text_ar": "أَشْتَري الخُبْز وَالسُّكَّر وَالمِلْح مِن البَقّالَة.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s067",
-      "text_ar": "أُريدُ كيلو تُفّاحٍ وكيلو بَطاطا.",
+      "text_ar": "أُريدُ كيلو تُفّاح وَكيلو بَطاطا.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s068",
-      "text_ar": "بِكَم كيلو المَوْزِ؟",
+      "text_ar": "بِكَم كيلو المَوْز؟",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s069",
-      "text_ar": "التُّفّاحُ أَرْخَصُ مِنَ المَوْزِ.",
+      "text_ar": "التُّفّاح أَرْخَص مِن المَوْز.",
       "type": "sentence",
       "path": null
     },
     {
       "audio_key": "u2_sentence_s070",
-      "text_ar": "أَنا بِحاجَةٍ إِلى عُلْبَةِ شايٍ أَيْضًا.",
+      "text_ar": "أَنا بِحاجَة إِلى عُلْبَة شاي أَيْضًا.",
       "type": "sentence",
       "path": null
     },
@@ -6855,7 +6855,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p001",
-      "text_ar": "{pronoun} بِحاجَةٍ إِلى {object}",
+      "text_ar": "{pronoun} بِحاجَة إِلى {object}",
       "type": "pattern",
       "path": null
     },
@@ -6891,13 +6891,13 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p007",
-      "text_ar": "كَم كيلوغرامًا تُريدُ مِنْ {item}؟",
+      "text_ar": "كَم كيلوغْرامًا تُريدُ مِنْ {item}؟",
       "type": "pattern",
       "path": null
     },
     {
       "audio_key": "u2_pattern_p008",
-      "text_ar": "أُريدُ {number} كيلوغراماتٍ مِنْ {item}",
+      "text_ar": "أُريدُ {number} كيلوغرامات مِنْ {item}",
       "type": "pattern",
       "path": null
     },
@@ -6915,7 +6915,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p011",
-      "text_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟",
+      "text_ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟",
       "type": "pattern",
       "path": null
     },
@@ -6927,7 +6927,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p013",
-      "text_ar": "{item1} أَرْخَصُ مِنْ {item2}",
+      "text_ar": "{item1} أَرْخَص مِنْ {item2}",
       "type": "pattern",
       "path": null
     },
@@ -6939,19 +6939,19 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p015",
-      "text_ar": "{item1} أَكْبَرُ/أَصْغَرُ مِنْ {item2}",
+      "text_ar": "{item1} أَكْبَر/أَصْغَر مِنْ {item2}",
       "type": "pattern",
       "path": null
     },
     {
       "audio_key": "u2_pattern_p016",
-      "text_ar": "{item1} أَخَفُّ/أَثْقَلُ مِنْ {item2}",
+      "text_ar": "{item1} أَخَفّ/أَثْقَل مِنْ {item2}",
       "type": "pattern",
       "path": null
     },
     {
       "audio_key": "u2_pattern_p017",
-      "text_ar": "مِنْ أَيْنَ اشْتَرَيْتَ؟",
+      "text_ar": "مِنْ أَيْن اشْتَرَيْتَ؟",
       "type": "pattern",
       "path": null
     },
@@ -6963,19 +6963,19 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_pattern_p019",
-      "text_ar": "إِلى أَيْنَ تَذْهَبُ لِلتَّسَوُّقِ؟",
+      "text_ar": "إِلى أَيْن تَذْهَبُ لِلتَّسَوُّق؟",
       "type": "pattern",
       "path": null
     },
     {
       "audio_key": "u2_pattern_p020",
-      "text_ar": "أُعِدُّ قائِمَةَ التَّسَوُّقِ",
+      "text_ar": "أُعِدُّ قائِمَة التَّسَوُّق",
       "type": "pattern",
       "path": null
     },
     {
       "audio_key": "u2_pattern_p021",
-      "text_ar": "شُكْرًا، مَعَ السَّلامَةِ",
+      "text_ar": "شُكْرًا، مَعَ السَّلامَة",
       "type": "pattern",
       "path": null
     },
@@ -6987,7 +6987,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d001_01",
-      "text_ar": "أَنا بِحاجَةٍ إِلى بَعْضِ الأَشْياءِ مِنَ البَقّالَةِ.",
+      "text_ar": "أَنا بِحاجَة إِلى بَعْض الأَشْياء مِن البَقّالَة.",
       "type": "dialogue_line",
       "dialogue_id": "d001",
       "line_no": 1,
@@ -7003,7 +7003,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d001_03",
-      "text_ar": "أَطْلُبُ مِنْكَ كيلو سُكَّرٍ، وعُلْبَةَ مِلْحٍ، وعُلْبَتَيْنِ مِنَ الشّايِ.",
+      "text_ar": "أَطْلُبُ مِنْكَ كيلو سُكَّر، وَعُلْبَة مِلْح، وَعُلْبَتَيْن مِن الشّاي.",
       "type": "dialogue_line",
       "dialogue_id": "d001",
       "line_no": 3,
@@ -7027,7 +7027,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d001_06",
-      "text_ar": "حَسَنًا، سَأَذْهَبُ الآنَ.",
+      "text_ar": "حَسَنًا، سَأَذْهَبُ الآن.",
       "type": "dialogue_line",
       "dialogue_id": "d001",
       "line_no": 6,
@@ -7035,7 +7035,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_01",
-      "text_ar": "أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟ ماذا تُريدينَ؟",
+      "text_ar": "أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟ ماذا تُريدينَ؟",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 1,
@@ -7043,7 +7043,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_02",
-      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى خَضْراواتٍ طازَجَةٍ.",
+      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى خَضْراوات طازَجَة.",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 2,
@@ -7051,7 +7051,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_03",
-      "text_ar": "عِنْدي طَماطِمُ، خِيارٌ، جَزَرٌ، باذِنْجانٌ، بَطاطا، بَصَلٌ، فُلْفُلٌ، وفاصوليا.",
+      "text_ar": "عِنْدي طَماطِم، خِيار، جَزَر، باذِنْجان، بَطاطا، بَصَل، فُلْفُل، وَفاصوليا.",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 3,
@@ -7059,7 +7059,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_04",
-      "text_ar": "جَميلٌ جِدًّا! وهَل عِنْدَكَ فَواكِهُ أَيْضًا؟",
+      "text_ar": "جَميل جِدًّا! وَهَل عِنْدَكَ فَواكِه أَيْضًا؟",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 4,
@@ -7067,7 +7067,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_05",
-      "text_ar": "نَعَم، عِنْدي تُفّاحٌ، بُرْتُقالٌ، مَوْزٌ، عِنَبٌ، كَرَزٌ، ومِشْمِشٌ.",
+      "text_ar": "نَعَم، عِنْدي تُفّاح، بُرْتُقال، مَوْز، عِنَب، كَرَز، وَمِشْمِش.",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 5,
@@ -7075,7 +7075,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d002_06",
-      "text_ar": "حَسَنًا، أُريدُ كيلوغرامًا واحِدًا مِنْ كُلِّ نَوْعٍ.",
+      "text_ar": "حَسَنًا، أُريدُ كيلوغْرامًا واحِدًا مِنْ كُلّ نَوْع.",
       "type": "dialogue_line",
       "dialogue_id": "d002",
       "line_no": 6,
@@ -7083,7 +7083,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d003_01",
-      "text_ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ يا سَيِّدي؟",
+      "text_ar": "أَهْلًا وَسَهْلًا! أَيّ خِدْمَة يا سَيِّدي؟",
       "type": "dialogue_line",
       "dialogue_id": "d003",
       "line_no": 1,
@@ -7091,7 +7091,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d003_02",
-      "text_ar": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْضَ الخُضَرِ، بِكَم الفاصوليا؟",
+      "text_ar": "أَهْلًا بِكَ، أُريدُ أَنْ أَشْتَري بَعْض الخُضَر، بِكَم الفاصوليا؟",
       "type": "dialogue_line",
       "dialogue_id": "d003",
       "line_no": 2,
@@ -7099,7 +7099,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d003_03",
-      "text_ar": "بِتِسْعِ ليراتٍ، هِيَ طازَجَةٌ جِدًّا.",
+      "text_ar": "بِتِسْع ليرات، هِيَ طازَجَة جِدًّا.",
       "type": "dialogue_line",
       "dialogue_id": "d003",
       "line_no": 3,
@@ -7107,7 +7107,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d003_04",
-      "text_ar": "لَكِنَّها غالِيَةٌ، وأَغْلى مِنَ البَطاطا. أُريدُ كيلوغرامًا واحِدًا فَقَطْ.",
+      "text_ar": "لَكِنَّها غالِيَة، وَأَغْلى مِن البَطاطا. أُريدُ كيلوغْرامًا واحِدًا فَقَطْ.",
       "type": "dialogue_line",
       "dialogue_id": "d003",
       "line_no": 4,
@@ -7115,7 +7115,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d003_05",
-      "text_ar": "العِنَبُ رَخيصٌ اليَوْمَ، وهُوَ أَرْخَصُ مِنَ التُّفّاحِ. هَل تُريدُ مِنْهُ؟",
+      "text_ar": "العِنَب رَخيص اليَوْم، وَهُوَ أَرْخَص مِن التُّفّاح. هَل تُريدُ مِنْه؟",
       "type": "dialogue_line",
       "dialogue_id": "d003",
       "line_no": 5,
@@ -7131,7 +7131,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_01",
-      "text_ar": "أَهْلًا وَسَهْلًا! أَيُّ خِدْمَةٍ؟",
+      "text_ar": "أَهْلًا وَسَهْلًا! أَيّ خِدْمَة؟",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 1,
@@ -7139,7 +7139,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_02",
-      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى كيلو زَيْتونٍ وعُلْبَةِ مَكَرونَةٍ.",
+      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى كيلو زَيْتون وَعُلْبَة مَكَرونَة.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 2,
@@ -7155,7 +7155,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_04",
-      "text_ar": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْزُ؟",
+      "text_ar": "نَعَم، أُريدُ أَنْ أَشْتَري مَوْزًا. بِكَم المَوْز؟",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 4,
@@ -7163,7 +7163,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_05",
-      "text_ar": "المَوْزُ بِعَشْرِ ليراتٍ.",
+      "text_ar": "المَوْز بِعَشْر ليرات.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 5,
@@ -7171,7 +7171,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_06",
-      "text_ar": "لَكِنَّهُ أَغْلى مِنَ المِشْمِشِ.",
+      "text_ar": "لَكِنَّه أَغْلى مِن المِشْمِش.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 6,
@@ -7179,7 +7179,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_07",
-      "text_ar": "نَعَم، المِشْمِشُ أَرْخَصُ مِنَ المَوْزِ اليَوْمَ.",
+      "text_ar": "نَعَم، المِشْمِش أَرْخَص مِن المَوْز اليَوْم.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 7,
@@ -7187,7 +7187,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_08",
-      "text_ar": "حَسَنًا، أُريدُ ثَلاثَةَ كيلوغراماتٍ مِنَ المِشْمِشِ.",
+      "text_ar": "حَسَنًا، أُريدُ ثَلاثَة كيلوغرامات مِن المِشْمِش.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 8,
@@ -7203,7 +7203,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d004_10",
-      "text_ar": "شُكْرًا، مَعَ السَّلامَةِ.",
+      "text_ar": "شُكْرًا، مَعَ السَّلامَة.",
       "type": "dialogue_line",
       "dialogue_id": "d004",
       "line_no": 10,
@@ -7211,7 +7211,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d005_01",
-      "text_ar": "أَهْلًا فاروق! أَيُّ خِدْمَةٍ؟",
+      "text_ar": "أَهْلًا فاروق! أَيّ خِدْمَة؟",
       "type": "dialogue_line",
       "dialogue_id": "d005",
       "line_no": 1,
@@ -7219,7 +7219,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d005_02",
-      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَةٍ إِلى حَليبٍ.",
+      "text_ar": "أَهْلًا بِكَ، أَنا بِحاجَة إِلى حَليب.",
       "type": "dialogue_line",
       "dialogue_id": "d005",
       "line_no": 2,
@@ -7227,7 +7227,7 @@ window.IHO_UNIT2_DATA = {
     },
     {
       "audio_key": "u2_dialogue_d005_03",
-      "text_ar": "حَسَنًا، كَم تُريدُ مِنَ الحَليبِ؟",
+      "text_ar": "حَسَنًا، كَم تُريدُ مِن الحَليب؟",
       "type": "dialogue_line",
       "dialogue_id": "d005",
       "line_no": 3,
@@ -7384,7 +7384,7 @@ window.IHO_UNIT2_DATA = {
           "e": "🧾"
         },
         {
-          "ar": "بِحاجَةٍ إِلى",
+          "ar": "بِحاجَة إِلى",
           "e": "🔎"
         },
         {
@@ -7438,15 +7438,15 @@ window.IHO_UNIT2_DATA = {
           "e": "⚖️"
         },
         {
-          "ar": "كيلوغرام",
+          "ar": "كيلوغْرام",
           "e": "⚖️"
         },
         {
-          "ar": "كيلوغرامان",
+          "ar": "كيلوغْرامان",
           "e": "⚖️"
         },
         {
-          "ar": "كيلوغرامات",
+          "ar": "كيلوغْرامات",
           "e": "⚖️"
         },
         {
@@ -7462,7 +7462,7 @@ window.IHO_UNIT2_DATA = {
           "e": "📦"
         },
         {
-          "ar": "ليرة",
+          "ar": "ليرَة",
           "e": "₺"
         },
         {
@@ -7506,7 +7506,7 @@ window.IHO_UNIT2_DATA = {
           "e": "💰"
         },
         {
-          "ar": "أَرْخَصُ مِن",
+          "ar": "أَرْخَص مِن",
           "e": "⬇️"
         },
         {
@@ -7522,11 +7522,11 @@ window.IHO_UNIT2_DATA = {
           "e": "🔹"
         },
         {
-          "ar": "أَكْبَرُ مِن",
+          "ar": "أَكْبَر مِن",
           "e": "↗️"
         },
         {
-          "ar": "أَصْغَرُ مِن",
+          "ar": "أَصْغَر مِن",
           "e": "↘️"
         },
         {
@@ -7538,11 +7538,11 @@ window.IHO_UNIT2_DATA = {
           "e": "🏋️"
         },
         {
-          "ar": "أَخَفُّ مِن",
+          "ar": "أَخَفّ مِن",
           "e": "🪶"
         },
         {
-          "ar": "أَثْقَلُ مِن",
+          "ar": "أَثْقَل مِن",
           "e": "🏋️"
         },
         {
@@ -7574,7 +7574,7 @@ window.IHO_UNIT2_DATA = {
           "e": "❓"
         },
         {
-          "ar": "أَيْنَ؟",
+          "ar": "أَيْن؟",
           "e": "❓"
         },
         {
@@ -7608,7 +7608,7 @@ window.IHO_UNIT2_DATA = {
       "البائِع": "",
       "المُشْتَري": "",
       "البَقّال": "bakkal / bakkal sahibi",
-      "قائِمَةُ التَّسَوُّق": "",
+      "قائِمَة التَّسَوُّق": "",
       "سَلَّة": "sepet",
       "عَرَبَة": "",
       "صُنْدوق": "",
@@ -7660,7 +7660,7 @@ window.IHO_UNIT2_DATA = {
       "أَشْتَري": "",
       "أُريدُ": "istiyorum",
       "أَطْلُبُ": "isterim / talep ederim",
-      "بِحاجَةٍ إِلى": "",
+      "بِحاجَة إِلى": "",
       "تُريدُ": "istiyor",
       "تُريدين": "",
       "عِنْدي": "",
@@ -7675,16 +7675,16 @@ window.IHO_UNIT2_DATA = {
       "طازَج": "taze",
       "رَخيص": "ucuz",
       "غالٍ": "",
-      "أَرْخَصُ مِن": "...den daha ucuz",
+      "أَرْخَص مِن": "...den daha ucuz",
       "أَغْلى مِن": "",
       "كَبير": "",
       "صَغير": "",
-      "أَكْبَرُ مِن": "",
-      "أَصْغَرُ مِن": "",
+      "أَكْبَر مِن": "",
+      "أَصْغَر مِن": "",
       "خَفيف": "hafif",
       "ثَقيل": "",
-      "أَخَفُّ مِن": "...den daha hafif",
-      "أَثْقَلُ مِن": "",
+      "أَخَفّ مِن": "...den daha hafif",
+      "أَثْقَل مِن": "",
       "أَخْضَر": "",
       "أَقَلّ": "daha az",
       "أَقْوى": "",
@@ -7692,7 +7692,7 @@ window.IHO_UNIT2_DATA = {
       "كَم؟": "",
       "ماذا؟": "ne?",
       "هَل؟": "mi?",
-      "أَيْنَ؟": "nerede? / nereye?",
+      "أَيْن؟": "nerede? / nereye?",
       "أَيّ؟": "hangi?",
       "مِن": "-den / -dan",
       "إِلى": "-e / -a",

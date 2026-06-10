@@ -96,11 +96,11 @@
         const cheaper = a.price < b.price ? a : b;
         const expensive = a.price > b.price ? a : b;
         // Tek doğru ifade + iki yanlış (önceki sürümde iki şık da doğruydu)
-        const correct = `${cheaper.ar} أَرْخَصُ مِنَ ${expensive.ar}`;
-        const wrong1  = `${cheaper.ar} أَغْلى مِنَ ${expensive.ar}`;
-        const wrong2  = `${expensive.ar} أَرْخَصُ مِنَ ${cheaper.ar}`;
+        const correct = `${cheaper.ar} أَرْخَص مِن ${expensive.ar}`;
+        const wrong1  = `${cheaper.ar} أَغْلى مِن ${expensive.ar}`;
+        const wrong2  = `${expensive.ar} أَرْخَص مِن ${cheaper.ar}`;
         const options = shuffle([correct, wrong1, wrong2], 'cmp'+idx);
-        return { id:'cmp_'+idx, q_ar:`أَيُّ جُمْلَةٍ صَحيحَة؟ (${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺)`, q_tr:'', options, answer:correct, items:[a,b] };
+        return { id:'cmp_'+idx, q_ar:`أَيّ جُمْلَة صَحيحَة؟ (${a.ar}: ${a.price}₺ / ${b.ar}: ${b.price}₺)`, q_tr:'', options, answer:correct, items:[a,b] };
       });
       return { type:'comparative_quiz', questions };
     },
@@ -173,7 +173,7 @@
       const prompt = {
         roles: config.roles || ['البائِع','المُشْتَري'],
         product_a: a, product_b: b,
-        must_use_ar: ['أَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ؟','بِكَم ...؟','... بِـ ... ليرات','أَرْخَصُ مِن / أَغْلى مِن','شُكْرًا، مَعَ السَّلامَةِ'],
+        must_use_ar: ['أَهْلًا وَسَهْلًا، أَيّ خِدْمَة؟','بِكَم ...؟','... بِـ ... ليرات','أَرْخَص مِن / أَغْلى مِن','شُكْرًا، مَعَ السَّلامَة'],
         prompt_tr: ''
       };
       return { type:'roleplay', prompt };

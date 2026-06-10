@@ -124,7 +124,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "🧾"
       },
       {
-        "ar": "بِحاجَةٍ إِلى",
+        "ar": "بِحاجَة إِلى",
         "e": "🔎"
       },
       {
@@ -156,7 +156,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "👌"
       },
       {
-        "ar": "شيء آخَر",
+        "ar": "شَيْء آخَر",
         "e": "➕"
       },
       {
@@ -178,15 +178,15 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "⚖️"
       },
       {
-        "ar": "كيلوغرام",
+        "ar": "كيلوغْرام",
         "e": "⚖️"
       },
       {
-        "ar": "كيلوغرامان",
+        "ar": "كيلوغْرامان",
         "e": "⚖️"
       },
       {
-        "ar": "كيلوغرامات",
+        "ar": "كيلوغْرامات",
         "e": "⚖️"
       },
       {
@@ -202,7 +202,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "📦"
       },
       {
-        "ar": "ليرة",
+        "ar": "ليرَة",
         "e": "₺"
       },
       {
@@ -246,7 +246,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "💰"
       },
       {
-        "ar": "أَرْخَصُ مِن",
+        "ar": "أَرْخَص مِن",
         "e": "⬇️"
       },
       {
@@ -262,11 +262,11 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "🔹"
       },
       {
-        "ar": "أَكْبَرُ مِن",
+        "ar": "أَكْبَر مِن",
         "e": "↗️"
       },
       {
-        "ar": "أَصْغَرُ مِن",
+        "ar": "أَصْغَر مِن",
         "e": "↘️"
       },
       {
@@ -278,11 +278,11 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "🏋️"
       },
       {
-        "ar": "أَخَفُّ مِن",
+        "ar": "أَخَفّ مِن",
         "e": "🪶"
       },
       {
-        "ar": "أَثْقَلُ مِن",
+        "ar": "أَثْقَل مِن",
         "e": "🏋️"
       },
       {
@@ -314,7 +314,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
         "e": "❓"
       },
       {
-        "ar": "أَيْنَ؟",
+        "ar": "أَيْن؟",
         "e": "❓"
       },
       {
@@ -348,7 +348,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
     "البائِع": "satıcı",
     "المُشْتَري": "müşteri / alıcı",
     "البَقّال": "bakkal / bakkal sahibi",
-    "قائِمَةُ التَّسَوُّق": "alışveriş listesi",
+    "قائِمَة التَّسَوُّق": "alışveriş listesi",
     "سَلَّة": "sepet",
     "عَرَبَة": "alışveriş arabası",
     "صُنْدوق": "kasa / sandık",
@@ -382,13 +382,13 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
     "فُلْفُل": "biber",
     "فاصوليا": "fasulye",
     "كيلو": "kilo",
-    "كيلوغرام": "kilogram",
-    "كيلوغرامان": "iki kilogram",
-    "كيلوغرامات": "kilogramlar",
+    "كيلوغْرام": "kilogram",
+    "كيلوغْرامان": "iki kilogram",
+    "كيلوغْرامات": "kilogramlar",
     "عُلْبَة": "kutu / paket",
     "عُلْبَتان": "iki kutu",
     "عُلَب": "kutular",
-    "ليرة": "lira",
+    "ليرَة": "lira",
     "ليرات": "liralar",
     "واحِد": "bir",
     "ثَلاثَة": "üç",
@@ -400,7 +400,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
     "أَشْتَري": "satın alırım",
     "أُريدُ": "istiyorum",
     "أَطْلُبُ": "isterim / talep ederim",
-    "بِحاجَةٍ إِلى": "...e ihtiyacı var",
+    "بِحاجَة إِلى": "...e ihtiyacı var",
     "تُريدُ": "istiyor",
     "تُريدين": "istiyorsun (kadın)",
     "عِنْدي": "bende var / yanımda var",
@@ -408,23 +408,23 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
     "شُكْرًا": "teşekkürler",
     "مَعَ السَّلامَة": "güle güle",
     "هذا كافٍ": "bu yeterli",
-    "شيء آخَر": "başka bir şey",
+    "شَيْء آخَر": "başka bir şey",
     "أَيْضًا": "ayrıca / de",
     "اليَوْم": "bugün",
     "الآن": "şimdi",
     "طازَج": "taze",
     "رَخيص": "ucuz",
     "غالٍ": "pahalı",
-    "أَرْخَصُ مِن": "...den daha ucuz",
+    "أَرْخَص مِن": "...den daha ucuz",
     "أَغْلى مِن": "...den daha pahalı",
     "كَبير": "büyük",
     "صَغير": "küçük",
-    "أَكْبَرُ مِن": "...den daha büyük",
-    "أَصْغَرُ مِن": "...den daha küçük",
+    "أَكْبَر مِن": "...den daha büyük",
+    "أَصْغَر مِن": "...den daha küçük",
     "خَفيف": "hafif",
     "ثَقيل": "ağır",
-    "أَخَفُّ مِن": "...den daha hafif",
-    "أَثْقَلُ مِن": "...den daha ağır",
+    "أَخَفّ مِن": "...den daha hafif",
+    "أَثْقَل مِن": "...den daha ağır",
     "أَخْضَر": "yeşil",
     "أَقَلّ": "daha az",
     "أَقْوى": "daha güçlü",
@@ -432,7 +432,7 @@ window.UNIT2_LEGACY_VOCAB_PATCH = {
     "كَم؟": "ne kadar? / kaç?",
     "ماذا؟": "ne?",
     "هَل؟": "mi?",
-    "أَيْنَ؟": "nerede? / nereye?",
+    "أَيْن؟": "nerede? / nereye?",
     "أَيّ؟": "hangi?",
     "مِن": "-den / -dan",
     "إِلى": "-e / -a",

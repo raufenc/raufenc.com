@@ -26,8 +26,8 @@ const video=$('#vid'), startScreen=$('#startScreen'), startTitle=$('#startTitle'
 let idx=0, correctCount=0, busy=false;
 
 function setup(){
-  if(!ACT){ startTitle.textContent='لا يوجد نشاط'; return; }
-  document.title=ACT.title||'نشاط';
+  if(!ACT){ startTitle.textContent='لا يوجَد نَشاط'; return; }
+  document.title=ACT.title||'نَشاط';
   startTitle.textContent=ACT.title||'';
   startSub.textContent=ACT.subtitle||'';
   const n=ACT.questions.length;
@@ -100,7 +100,7 @@ async function runQuestion(){
   updateHud();
   const q=ACT.questions[idx];
   const watching=playClip(q.watch);   // sessiz görsel
-  playVoice(ACT.ask);                 // üstüne sesli soru ("ما هذا؟" / "كم الساعة الآن؟")
+  playVoice(ACT.ask);                 // üstüne sesli soru ("ما هذا؟" / "كَم السّاعَة الآن؟")
   await watching;
   showOptions(q);
 }
@@ -128,7 +128,7 @@ async function choose(isCorrect,btn){
   } else {
     btn.classList.add('wrong');
     qOpts.querySelectorAll('.opt-btn').forEach(b=>{ if(b.textContent===q.options[q.correct]) b.classList.add('correct'); });
-    qFeedback.textContent='الإِجابَةُ الصَّحيحَةُ'; qFeedback.className='feedback show bad';
+    qFeedback.textContent='الإِجابَة الصَّحيحَة'; qFeedback.className='feedback show bad';
   }
   markDot(idx,isCorrect);
   await new Promise(r=>setTimeout(r,650));
@@ -145,8 +145,8 @@ function finish(){
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
   endMsg.textContent= pct===1?'مُمْتاز! ما شاءَ اللَّه'
-    : pct>=.75?'جَيِّدٌ جِدًّا'
-    : pct>=.5 ?'جَيِّدٌ، حاوِلْ مَرَّةً أُخْرى'
+    : pct>=.75?'جَيِّد جِدًّا'
+    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى'
     : 'تَدَرَّبْ ثُمَّ أَعِدْ';
   endScreen.classList.add('show');
 }

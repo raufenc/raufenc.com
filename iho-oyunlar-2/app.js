@@ -161,7 +161,7 @@ function renderFlashcards(game) {
   const counter = el("div", { class: "item-card muted" });
   const next = el("button", { class: "primary-btn", type: "button", text: "التّالي ←" });
   const prev = el("button", { class: "ghost-btn", type: "button", text: "→ السّابِق" });
-  const flip = el("button", { class: "ghost-btn", type: "button", text: "اقْلِب 🔄" });
+  const flip = el("button", { class: "ghost-btn", type: "button", text: "اِقْلِب 🔄" });
   const side = el("div", { class: "flash-side" }, [
     counter,
     el("div", { class: "nav-row" }, [prev, flip, next])
@@ -221,7 +221,7 @@ function renderMatching(game) {
       selected.right.disabled = true;
       tracker.mark(selected.left.dataset.id, true);
       note.className = "feedback ok";
-      note.textContent = "✅ أَحْسَنْت";
+      note.textContent = "✅ أَحْسَنْتَ";
       selected.left = null;
       selected.right = null;
     } else {
@@ -348,7 +348,7 @@ function questionCard(question, index, tracker) {
         if (Engine.isCorrect(question.answer, btn.dataset.value)) markNode(btn, true);
       });
       tracker.mark(question.id || `${index}-${question.answer}`, ok);
-      card.appendChild(feedback(ok ? "✅ صَحيح" : "❌ الجَوابُ الصَّحيح مُعَلَّم", ok));
+      card.appendChild(feedback(ok ? "✅ صَحيح" : "❌ الجَواب الصَّحيح مُعَلَّم", ok));
     });
     button.dataset.value = String(value);
     buttons.push(button);
@@ -379,15 +379,15 @@ function renderSentenceOrder(game) {
       });
       bank.appendChild(button);
     });
-    const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّق ✅" });
-    const reset = el("button", { class: "ghost-btn", type: "button", text: "إعادَة 🔄" });
+    const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّقْ ✅" });
+    const reset = el("button", { class: "ghost-btn", type: "button", text: "إِعادَة 🔄" });
     check.addEventListener("click", () => {
       const ok = Engine.isCorrect(item.answer_ar, chosen.join(" "));
       markNode(card, ok);
       tracker.mark(item.id, ok);
       check.disabled = true;
       bank.querySelectorAll("button").forEach(btn => { btn.disabled = true; });
-      card.appendChild(feedback(ok ? "✅ أَحْسَنْت" : item.answer_ar, ok));
+      card.appendChild(feedback(ok ? "✅ أَحْسَنْتَ" : item.answer_ar, ok));
     });
     reset.addEventListener("click", () => {
       chosen.length = 0;
@@ -410,8 +410,8 @@ function renderDialogueOrder(game) {
   const chosen = [];
   const chosenLines = el("div", { class: "chosen-lines" });
   const stack = el("div", { class: "line-stack" });
-  const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّق ✅" });
-  const reset = el("button", { class: "ghost-btn", type: "button", text: "إعادَة 🔄" });
+  const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّقْ ✅" });
+  const reset = el("button", { class: "ghost-btn", type: "button", text: "إِعادَة 🔄" });
 
   game.lines.forEach(line => {
     const button = el("button", { class: "line-button", type: "button" }, [
@@ -433,13 +433,13 @@ function renderDialogueOrder(game) {
     tracker.mark("dialogue", ok);
     check.disabled = true;
     markNode(chosenLines, ok);
-    gameArea.appendChild(feedback(ok ? "✅ التَّرتيبُ صَحيح" : "التَّرتيب: " + game.answer.join(" ← "), ok));
+    gameArea.appendChild(feedback(ok ? "✅ التَّرْتيب صَحيح" : "التَّرْتيب: " + game.answer.join(" ← "), ok));
   });
   reset.addEventListener("click", () => loadGame(activeGameId));
   gameArea.append(
     el("div", { class: "grid two" }, [
       el("div", { class: "item-card" }, [el("h3", { class: "ar", text: game.dialogue?.title_ar || "الحِوار" }), stack]),
-      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "التَّرتيب" }), chosenLines, el("div", { class: "nav-row" }, [check, reset])])
+      el("div", { class: "item-card" }, [el("h3", { class: "ar", text: "التَّرْتيب" }), chosenLines, el("div", { class: "nav-row" }, [check, reset])])
     ])
   );
 }
@@ -517,7 +517,7 @@ function renderMemory(game) {
 function renderOdd(game) {
   const mapped = game.items.map(item => ({
     ...item,
-    q_ar: "اختر الكلمة الغريبة",
+    q_ar: "اِخْتَر الكَلِمَة الغَريبَة",
     q_tr: "",
     options: item.choices,
     answer: item.odd
