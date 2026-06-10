@@ -128,7 +128,7 @@
         </div>
         <div class="u3-actions">
           <button class="u3-btn secondary" data-prev>→ السّابِق</button>
-          <button class="u3-btn" data-flip>اقْلِب 🔄</button>
+          <button class="u3-btn" data-flip>اِقْلِب 🔄</button>
           <button class="u3-btn secondary" data-speak>🔊</button>
           <button class="u3-btn orange" data-next>التّالي ←</button>
         </div>`;

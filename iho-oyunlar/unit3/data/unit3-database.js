@@ -701,7 +701,7 @@
       "emoji": "🟡",
       "forms": {
         "imperativeM": "اِسْتَعِدَّ",
-        "imperativeF": "اِسْتَعِدِّي"
+        "imperativeF": "اِسْتَعِدّي"
       },
       "note": "",
       "tags": []
