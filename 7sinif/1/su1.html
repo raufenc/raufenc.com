@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ماذا تُريد؟ — أداة الاستفهام "ماذا"</title>
+<title>ماذا تُريدُ؟ — أَداة الاسْتِفْهام "ماذا"</title>
 <style>
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -41,12 +41,12 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
-<h1>🍽️ ماذا تُريد؟ ماذا يَأكُل؟</h1>
-<div class="sub">السؤال بِـ "ماذا" — المَأكولات والمَشروبات (الكتاب: ص. ٢٦-٢٩)</div>
+<h1>🍽️ ماذا تُريدُ؟ ماذا يَأْكُلُ؟</h1>
+<div class="sub">السُّؤال بِـ "ماذا" — المَأْكولات وَالمَشْروبات (الكِتاب: ص. ٢٦-٢٩)</div>
 <div id="game">
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/10</span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>السُّؤال: <span id="qn">1</span>/10</span></div>
 <div class="q-card">
 <span class="badge" id="badge">ماذا تُريدُ؟</span>
 <div class="q-text" id="q"></div>
@@ -61,8 +61,8 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#5C6BC0;margin-bottom:14px"></div>
-<button class="btn" onclick="init()">إعادة 🔄</button>
-<button class="btn alt" onclick="location.href='./index.html'">القائمة ↩</button>
+<button class="btn" onclick="init()">إِعادَة 🔄</button>
+<button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
 </div>
 </div>
 <script>
@@ -78,18 +78,18 @@ var DRINKS=[
 ];
 
 var ALL=[
-{q:'ماذا تُريدُ مِنَ المَأكولات؟',ans:'كُفْتَة',exp:'أُريدُ الكُفْتَة والأُرُز',badge:'ماذا تُريد؟',pool:'f'},
-{q:'ماذا تُريدينَ مِنَ المَشروبات؟',ans:'شاي',exp:'أُريدُ الشّاي',badge:'ماذا تُريدين؟',pool:'d'},
-{q:'ماذا تَأكُلُ في الفَطور؟',ans:'عَسَل',exp:'آكُلُ العَسَل والزُبْدَة في الفَطور',badge:'ماذا تَأكُل؟',pool:'f'},
-{q:'ماذا تَأكُلُ في الغَداء؟',ans:'لَحْم',exp:'آكُلُ اللَّحْم والأُرُز في الغَداء',badge:'ماذا تَأكُل؟',pool:'f'},
-{q:'ماذا تَأكُلُ في العَشاء؟',ans:'سَمَك',exp:'آكُلُ السَّمَك والسَّلَطَة في العَشاء',badge:'ماذا تَأكُل؟',pool:'f'},
-{q:'ماذا تَشْرَبُ في الفَطور؟',ans:'حَليب',exp:'أَشْرَبُ الحَليب كَثيرًا في الفَطور',badge:'ماذا تَشْرَب؟',pool:'d'},
-{q:'ماذا تَشْرَبُ بَعْدَ الغَداء؟',ans:'قَهْوَة',exp:'أَشْرَبُ القَهْوَة قَليلًا بَعْدَ الغَداء',badge:'ماذا تَشْرَب؟',pool:'d'},
-{q:'ماذا يَأكُلُ عُثْمان مِنَ المَأكولات؟',ans:'زُبْدَة',exp:'هُوَ يَأكُلُ العَسَل والزُبْدَة',badge:'ماذا يَأكُل؟',pool:'f'},
-{q:'ماذا تَشْرَبُ شَيْماء مِنَ المَشروبات؟',ans:'حَليب',exp:'هِيَ تَشْرَبُ الحَليب',badge:'ماذا تَشْرَب؟',pool:'d'},
-{q:'ماذا تُريدُ في العَشاء؟',ans:'حَساء',exp:'أُريدُ الحَساء والسَّلَطَة في العَشاء',badge:'ماذا تُريد؟',pool:'f'},
-{q:'ماذا تَأكُلينَ في الغَداء يا زَيْنَب؟',ans:'سَمَك',exp:'آكُلُ السَّمَك والسَّلَطَة',badge:'ماذا تَأكُلين؟',pool:'f'},
-{q:'ماذا يَأكُلُ عُمَر مِنَ المَأكولات؟',ans:'دَجاج',exp:'هُوَ يَأكُلُ الدَّجاج',badge:'ماذا يَأكُل؟',pool:'f'}
+{q:'ماذا تُريدُ مِن المَأْكولات؟',ans:'كُفْتَة',exp:'أُريدُ الكُفْتَة وَالأُرُز',badge:'ماذا تُريدُ؟',pool:'f'},
+{q:'ماذا تُريدينَ مِن المَشْروبات؟',ans:'شاي',exp:'أُريدُ الشّاي',badge:'ماذا تُريدينَ؟',pool:'d'},
+{q:'ماذا تَأْكُلُ في الفَطور؟',ans:'عَسَل',exp:'آكُلُ العَسَل وَالزُّبْدَة في الفَطور',badge:'ماذا تَأْكُلُ؟',pool:'f'},
+{q:'ماذا تَأْكُلُ في الغَداء؟',ans:'لَحْم',exp:'آكُلُ اللَّحْم وَالأُرُز في الغَداء',badge:'ماذا تَأْكُلُ؟',pool:'f'},
+{q:'ماذا تَأْكُلُ في العَشاء؟',ans:'سَمَك',exp:'آكُلُ السَّمَك والسَّلَطَة في العَشاء',badge:'ماذا تَأْكُلُ؟',pool:'f'},
+{q:'ماذا تَشْرَبُ في الفَطور؟',ans:'حَليب',exp:'أَشْرَبُ الحَليب كَثيرًا في الفَطور',badge:'ماذا تَشْرَبُ؟',pool:'d'},
+{q:'ماذا تَشْرَبُ بَعْدَ الغَداء؟',ans:'قَهْوَة',exp:'أَشْرَبُ القَهْوَة قَليلًا بَعْدَ الغَداء',badge:'ماذا تَشْرَبُ؟',pool:'d'},
+{q:'ماذا يَأْكُلُ عُثْمان مِن المَأْكولات؟',ans:'زُبْدَة',exp:'هُوَ يَأْكُلُ العَسَل وَالزُّبْدَة',badge:'ماذا يَأْكُلُ؟',pool:'f'},
+{q:'ماذا تَشْرَبُ شَيْماء مِن المَشْروبات؟',ans:'حَليب',exp:'هِيَ تَشْرَبُ الحَليب',badge:'ماذا تَشْرَبُ؟',pool:'d'},
+{q:'ماذا تُريدُ في العَشاء؟',ans:'حَساء',exp:'أُريدُ الحَساء والسَّلَطَة في العَشاء',badge:'ماذا تُريدُ؟',pool:'f'},
+{q:'ماذا تَأْكُلينَ في الغَداء يا زَيْنَب؟',ans:'سَمَك',exp:'آكُلُ السَّمَك والسَّلَطَة',badge:'ماذا تَأْكُلينَ؟',pool:'f'},
+{q:'ماذا يَأْكُلُ عُمَر مِن المَأْكولات؟',ans:'دَجاج',exp:'هُوَ يَأْكُلُ الدَّجاج',badge:'ماذا يَأْكُلُ؟',pool:'f'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc;
@@ -129,7 +129,7 @@ var fs=Math.round(sc/(qs.length*10)*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>

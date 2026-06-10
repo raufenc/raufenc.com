@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>صنّف وسائط النقل — جوًّا/بحرًا/برًّا</title>
+<title>صَنِّفْ وَسائِط النَّقْل — جَوًّا/بَحْرًا/بَرًّا</title>
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -46,15 +46,15 @@ h1{text-align:center;color:#1B5E20;font-size:2.2em;margin-bottom:6px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
-<h1>📂 صَنِّفْ وَسائِطَ النَّقْل</h1>
-<div class="sub">اِسْحَبْ كُلَّ وَسيلَةٍ إلى نَوْعِها — جَوًّا، بَحْرًا، بَرًّا</div>
+<h1>📂 صَنِّفْ وَسائِط النَّقْل</h1>
+<div class="sub">اِسْحَبْ كُلّ وَسيلَة إِلى نَوْعِها — جَوًّا، بَحْرًا، بَرًّا</div>
 <div id="game">
 <div class="tip">
-<b>📘 الأَنْواع:</b> <b>جَوًّا</b> أَيْ مِنَ السَّماءِ — <b>بَرًّا</b> أَيْ عَلى الأَرْضِ — <b>بَحْرًا</b> أَيْ عَلى الماءِ. ٨ وَسائِل في ٣ مَجْموعات
+<b>📘 الأَنْواع:</b> <b>جَوًّا</b> أَيْ مِن السَّماء — <b>بَرًّا</b> أَيْ عَلى الأَرْض — <b>بَحْرًا</b> أَيْ عَلى الماء. ٨ وَسائِل في ٣ مَجْموعات
 </div>
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>المُتَبَقّي: <span id="left">12</span></span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>المُتَبَقّي: <span id="left">12</span></span></div>
 <div class="stage" id="stage"></div>
 <div class="cats">
   <div class="cat" data-cat="air"><div class="icon">✈️</div><div class="title">جَوًّا</div><div class="cat-items" id="cat-air"></div></div>
@@ -64,7 +64,7 @@ h1{text-align:center;color:#1B5E20;font-size:2.2em;margin-bottom:6px}
 <div class="fb" id="fb"></div>
 </div>
 <div id="result" class="result hidden">
-<h2 style="color:#1B5E20">🎉 أَحْسَنْت!</h2>
+<h2 style="color:#1B5E20">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#2E7D32;margin-bottom:14px"></div>
@@ -147,7 +147,7 @@ setTimeout(function(){document.getElementById('fb').textContent=''},700);
 cur++;setTimeout(showNext,500);
 }else{
 ds.target.classList.add('wrong-drop');setTimeout(function(){ds.target.classList.remove('wrong-drop')},420);
-document.getElementById('fb').textContent='❌ ليس هَذا النَّوْع';document.getElementById('fb').style.color='#F44336';
+document.getElementById('fb').textContent='❌ لَيْسَ هَذا النَّوْع';document.getElementById('fb').style.color='#F44336';
 setTimeout(function(){document.getElementById('fb').textContent=''},1100);
 }
 }
@@ -159,7 +159,7 @@ var fs=Math.round(sc/(ITEMS.length*10)*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>

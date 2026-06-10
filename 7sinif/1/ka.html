@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ماذا فعلت اليوم؟ - الوحدة الأولى</title>
+<title>ماذا فَعَلْتُ اليَوْم؟ - الوَحْدَة الأُولى</title>
 <style>
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal;font-style:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold;font-style:normal}
@@ -239,13 +239,13 @@ function sesDoğru() {
   _tone(523,0.1,'sine',0.3,0);
   _tone(659,0.1,'sine',0.3,0.1);
   _tone(784,0.25,'sine',0.3,0.2);
-  konuş(['أحسنت','ممتاز','رائع','بارك الله فيك'][Math.floor(Math.random()*4)]);
+  konuş(['أَحْسَنْتَ','مُمْتاز','رائِع','بارَكَ اللَّهُ فيكَ'][Math.floor(Math.random()*4)]);
 }
 
 function sesYanlış() {
   _tone(180,0.15,'sawtooth',0.25,0);
   _tone(150,0.2,'sawtooth',0.2,0.15);
-  konuş(['حاول مرة أخرى','خطأ، حاول ثانية','لا بأس'][Math.floor(Math.random()*3)]);
+  konuş(['حاوِلْ مَرَّةً أُخْرى','خَطَأ، حاوِلْ ثانِيَة','لا بَأْس'][Math.floor(Math.random()*3)]);
 }
 
 function sesTıkla() {
@@ -254,7 +254,7 @@ function sesTıkla() {
 
 function sesBitir() {
   [523,659,784,1047,1319].forEach((f,i)=>_tone(f,0.18,'sine',0.28,i*0.12));
-  setTimeout(()=>konuş('تهانينا! أحسنت'),200);
+  setTimeout(()=>konuş('تَهانينا! أَحْسَنْتَ'),200);
 }
 
 function sesBuzzer() {
@@ -300,54 +300,54 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== MENU ==================== -->
 <div id="menuScreen" class="menu-bg">
 <div class="menu-header">
-<div class="unit-badge">الوحدة الأولى - الصفّ السابع</div>
-<h1>ماذا فعلتُ اليوم؟</h1>
-<p>اختر لعبة للبدء</p>
+<div class="unit-badge">الوَحْدَة الأُولى - الصَّفّ السّابِع</div>
+<h1>ماذا فَعَلْتُ اليَوْم؟</h1>
+<p>اِخْتَرْ لُعْبَة لِلْبَدْء</p>
 </div>
 <div class="menu-stats">
-<div class="menu-stat"><div class="val" id="menuTotal">0%</div><div class="lbl">المعدّل العامّ</div></div>
-<div class="menu-stat"><div class="val" id="menuDone">0/6</div><div class="lbl">مكتمل</div></div>
+<div class="menu-stat"><div class="val" id="menuTotal">0%</div><div class="lbl">المُعَدَّل العامّ</div></div>
+<div class="menu-stat"><div class="val" id="menuDone">0/6</div><div class="lbl">مُكْتَمِل</div></div>
 </div>
 <div class="games-grid">
 <div class="game-card card1" onclick="startGame(1)">
 <div class="card-icon">🎯</div>
-<h3>لعبة المفردات</h3>
-<p>صِلْ بين الكلمة والصورة</p>
+<h3>لُعْبَة المُفْرَدات</h3>
+<p>صِلْ بَيْنَ الكَلِمَة وَالصّورَة</p>
 <div class="card-score" id="card1score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card1bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card2" onclick="startGame(2)">
 <div class="card-icon">📋</div>
-<h3>رتّب يومك</h3>
-<p>رتّب الأنشطة اليومية</p>
+<h3>رَتِّبْ يَوْمَك</h3>
+<p>رَتِّب الأَنْشِطَة اليَوْمِيَّة</p>
 <div class="card-score" id="card2score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card2bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card3" onclick="startGame(3)">
 <div class="card-icon">🕐</div>
-<h3>كم الساعة؟</h3>
-<p>تعلّم قراءة الساعة</p>
+<h3>كَم السّاعَة؟</h3>
+<p>تَعَلَّمْ قِراءَة السّاعَة</p>
 <div class="card-score" id="card3score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card3bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card4" onclick="startGame(4)">
 <div class="card-icon">📝</div>
-<h3>اختر الفعل الصحيح</h3>
+<h3>اِخْتَر الفِعْل الصَّحيح</h3>
 <p>هُوَ / هِيَ / أَنْتَ / أَنْتِ</p>
 <div class="card-score" id="card4score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card4bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card5" onclick="startGame(5)">
 <div class="card-icon">💬</div>
-<h3>أكمل الحوار</h3>
-<p>أكمل المحادثة</p>
+<h3>أَكْمِل الحِوار</h3>
+<p>أَكْمِل المُحادَثَة</p>
 <div class="card-score" id="card5score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card5bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card6" onclick="startGame(6)">
 <div class="card-icon">🧠</div>
-<h3>لعبة الذاكرة</h3>
-<p>اقلب البطاقات وجد الأزواج</p>
+<h3>لُعْبَة الذّاكِرَة</h3>
+<p>اِقْلِب البِطاقات وَجِد الأَزْواج</p>
 <div class="card-score" id="card6score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card6bar" style="width:0%"></div></div>
 </div>
@@ -355,25 +355,25 @@ function konuş(metin, hız=0.85) {
 </div>
 
 <!-- BACK BUTTON -->
-<button class="back-btn hidden" id="backBtn" onclick="goMenu()">→ القائمة الرئيسية</button>
+<button class="back-btn hidden" id="backBtn" onclick="goMenu()">→ القائِمَة الرَّئيسِيَّة</button>
 
 <!-- ==================== GAME 1 ==================== -->
 <div id="game1" class="game-screen g1-bg">
 <div class="g1-box">
-<h1>🎯 لعبة المفردات</h1>
-<div class="g1-sub">صِلْ بين الكلمة والصورة المناسبة</div>
+<h1>🎯 لُعْبَة المُفْرَدات</h1>
+<div class="g1-sub">صِلْ بَيْنَ الكَلِمَة وَالصّورَة المُناسِبَة</div>
 <div id="g1game">
-<div class="g1-sbar"><span>النتيجة: <span id="g1score">0</span></span><span>الجولة: <span id="g1round">1</span>/3</span><span>الصحيح: <span id="g1correct">0</span>/<span id="g1total">0</span></span></div>
+<div class="g1-sbar"><span>النَّتيجَة: <span id="g1score">0</span></span><span>الجَوْلَة: <span id="g1round">1</span>/3</span><span>الصَّحيح: <span id="g1correct">0</span>/<span id="g1total">0</span></span></div>
 <div class="g1-targets" id="g1targets"></div>
 <div class="g1-words" id="g1words"></div>
 </div>
 <div id="g1result" class="result-box hidden">
-<h2 style="color:#4a3f8a">🎉 أحسنت!</h2>
+<h2 style="color:#4a3f8a">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g1stars"></div>
 <div class="big-score" style="color:#667eea" id="g1final"></div>
 <div style="color:#7c6fbf;margin-bottom:20px" id="g1msg"></div>
-<button class="btn" style="background:#667eea" onclick="g1Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#667eea" onclick="g1Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -381,23 +381,23 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 2 ==================== -->
 <div id="game2" class="game-screen g2-bg">
 <div class="g2-box">
-<h1>📋 رتّب يومك</h1>
-<div class="g2-sub" id="g2sub">رتّب الأنشطة اليومية حسب التسلسل الصحيح</div>
+<h1>📋 رَتِّبْ يَوْمَك</h1>
+<div class="g2-sub" id="g2sub">رَتِّب الأَنْشِطَة اليَوْمِيَّة حَسَبَ التَّسَلْسُل الصَّحيح</div>
 <div id="g2game">
-<div class="g2-inst">اسحب الجمل وأعد ترتيبها، أو استخدم الأسهم</div>
+<div class="g2-inst">اِسْحَب الجُمَل وَأَعِدْ تَرْتيبَها، أَوِ اسْتَخْدِم الأَسْهُم</div>
 <div id="g2area"></div>
 <div class="btn-area">
-<button class="btn" style="background:#4caf50" onclick="g2Check()">تحقّق ✅</button>
-<button class="btn" style="background:#9c88ff" onclick="g2Shuffle()">خلط 🔀</button>
+<button class="btn" style="background:#4caf50" onclick="g2Check()">تَحَقَّقْ ✅</button>
+<button class="btn" style="background:#9c88ff" onclick="g2Shuffle()">خَلْط 🔀</button>
 </div>
 </div>
 <div id="g2result" class="result-box hidden">
-<h2 style="color:#c0392b">🎉 انتهت اللعبة!</h2>
+<h2 style="color:#c0392b">🎉 اِنْتَهَتِ اللُّعْبَة!</h2>
 <div class="stars" id="g2stars"></div>
 <div class="big-score" style="color:#f5576c" id="g2final"></div>
 <div style="color:#e74c3c;margin-bottom:20px" id="g2msg"></div>
-<button class="btn" style="background:#f5576c" onclick="g2Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#f5576c" onclick="g2Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -405,22 +405,22 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 3 ==================== -->
 <div id="game3" class="game-screen g3-bg">
 <div class="g3-box">
-<h1>🕐 كم الساعة؟</h1>
-<div class="g3-sub">اُنظر إلى الساعة واختر الإجابة الصحيحة</div>
+<h1>🕐 كَم السّاعَة؟</h1>
+<div class="g3-sub">اُنْظُرْ إِلى السّاعَة وَاخْتَر الإِجابَة الصَّحيحَة</div>
 <div id="g3game">
-<div class="g3-sbar"><span>النتيجة: <span id="g3score">0</span></span><span>السؤال: <span id="g3qnum">1</span>/10</span></div>
+<div class="g3-sbar"><span>النَّتيجَة: <span id="g3score">0</span></span><span>السُّؤال: <span id="g3qnum">1</span>/10</span></div>
 <div class="g3-pbar"><div class="g3-pfill" id="g3prog" style="width:0%"></div></div>
 <div class="g3-clock-wrap"><div class="g3-clock" id="g3clock"><div class="cd"></div><div class="hh" id="g3hh"></div><div class="mh" id="g3mh"></div></div></div>
 <div class="feedback" id="g3fb"></div>
 <div class="g3-opts" id="g3opts"></div>
 </div>
 <div id="g3result" class="result-box hidden">
-<h2 style="color:#0d7a6e">🎉 أحسنت!</h2>
+<h2 style="color:#0d7a6e">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g3stars"></div>
 <div class="big-score" style="color:#11998e" id="g3final"></div>
 <div style="color:#11998e;margin-bottom:20px" id="g3msg"></div>
-<button class="btn" style="background:#11998e" onclick="g3Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#11998e" onclick="g3Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -428,22 +428,22 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 4 ==================== -->
 <div id="game4" class="game-screen g4-bg">
 <div class="g4-box">
-<h1>📝 اختر الفعل الصحيح</h1>
-<div class="g4-sub">اختر الفعل المناسب للضمير</div>
+<h1>📝 اِخْتَر الفِعْل الصَّحيح</h1>
+<div class="g4-sub">اِخْتَر الفِعْل المُناسِب لِلضَّمير</div>
 <div id="g4game">
-<div class="g4-sbar"><span>النتيجة: <span id="g4score">0</span></span><span>السؤال: <span id="g4qnum">1</span>/10</span></div>
+<div class="g4-sbar"><span>النَّتيجَة: <span id="g4score">0</span></span><span>السُّؤال: <span id="g4qnum">1</span>/10</span></div>
 <div class="g4-pbar"><div class="g4-pfill" id="g4prog" style="width:0%"></div></div>
 <div class="g4-qcard"><div class="g4-badge" id="g4pro"></div><div class="g4-sent" id="g4sent"></div></div>
 <div class="feedback" id="g4fb"></div>
 <div class="g4-opts" id="g4opts"></div>
 </div>
 <div id="g4result" class="result-box hidden">
-<h2 style="color:#5b48a2">🎉 أحسنت!</h2>
+<h2 style="color:#5b48a2">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g4stars"></div>
 <div class="big-score" style="color:#764ba2" id="g4final"></div>
 <div style="color:#764ba2;margin-bottom:20px" id="g4msg"></div>
-<button class="btn" style="background:#764ba2" onclick="g4Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#764ba2" onclick="g4Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -451,26 +451,26 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 5 ==================== -->
 <div id="game5" class="game-screen g5-bg">
 <div class="g5-box">
-<h1>💬 أكمل الحوار</h1>
-<div class="g5-sub">اختر الكلمة المناسبة لإكمال الحوار</div>
+<h1>💬 أَكْمِل الحِوار</h1>
+<div class="g5-sub">اِخْتَر الكَلِمَة المُناسِبَة لِإِكْمال الحِوار</div>
 <div id="g5game">
-<div class="g5-sbar"><span>النتيجة: <span id="g5score">0</span></span><span>الحوار: <span id="g5dnum">1</span>/3</span></div>
+<div class="g5-sbar"><span>النَّتيجَة: <span id="g5score">0</span></span><span>الحِوار: <span id="g5dnum">1</span>/3</span></div>
 <div class="g5-dtitle" id="g5title"></div>
 <div class="g5-chat" id="g5chat"></div>
 <div class="g5-words" id="g5words"></div>
 <div class="feedback" id="g5fb"></div>
 <div class="btn-area">
-<button class="btn" style="background:#4caf50" id="g5checkBtn" onclick="g5Check()">تحقّق ✅</button>
-<button class="btn hidden" style="background:#ff9800" id="g5nextBtn" onclick="g5Next()">التالي ➡️</button>
+<button class="btn" style="background:#4caf50" id="g5checkBtn" onclick="g5Check()">تَحَقَّقْ ✅</button>
+<button class="btn hidden" style="background:#ff9800" id="g5nextBtn" onclick="g5Next()">التّالي ➡️</button>
 </div>
 </div>
 <div id="g5result" class="result-box hidden">
-<h2 style="color:#d63384">🎉 أحسنت!</h2>
+<h2 style="color:#d63384">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g5stars"></div>
 <div class="big-score" style="color:#d63384" id="g5final"></div>
 <div style="color:#d63384;margin-bottom:20px" id="g5msg"></div>
-<button class="btn" style="background:#d63384" onclick="g5Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#d63384" onclick="g5Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -478,21 +478,21 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 6 ==================== -->
 <div id="game6" class="game-screen g6-bg">
 <div class="g6-box">
-<h1>🧠 لعبة الذاكرة</h1>
-<div class="g6-sub">اقلب البطاقات وجد الأزواج المتطابقة</div>
+<h1>🧠 لُعْبَة الذّاكِرَة</h1>
+<div class="g6-sub">اِقْلِب البِطاقات وَجِد الأَزْواج المُتَطابِقَة</div>
 <div id="g6game">
-<div class="g6-sbar"><span>المحاولات: <span id="g6moves">0</span></span><span>الأزواج: <span id="g6pairs">0</span>/8</span></div>
+<div class="g6-sbar"><span>المُحاوَلات: <span id="g6moves">0</span></span><span>الأَزْواج: <span id="g6pairs">0</span>/8</span></div>
 <div class="g6-timer">⏱️ <span id="g6timer">0:00</span></div>
 <div class="g6-grid" id="g6grid"></div>
 </div>
 <div id="g6result" class="result-box hidden">
-<h2 style="color:#e65100">🎉 أحسنت!</h2>
+<h2 style="color:#e65100">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g6stars"></div>
 <div class="big-score" style="color:#f57c00" id="g6final"></div>
 <div style="color:#f57c00;margin-bottom:10px" id="g6msg"></div>
 <div style="color:#999;margin-bottom:20px" id="g6det"></div>
-<button class="btn" style="background:#f57c00" onclick="g6Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#f57c00" onclick="g6Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -588,7 +588,7 @@ var fs=Math.min(100,Math.round(g1Cor/(g1TR*g1PPR)*100));
 document.getElementById('g1game').classList.add('hidden');document.getElementById('g1result').classList.remove('hidden');
 document.getElementById('g1final').textContent=fs+'%';
 document.getElementById('g1stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('g1msg').textContent=fs>=90?'ممتاز!':fs>=70?'جيد جدًّا!':'حاول مرّة أخرى!';
+document.getElementById('g1msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 endGame(1,fs);
 }
 
@@ -613,7 +613,7 @@ var g2Acts,g2Ord,g2Att,g2Stage=0,g2ScoreP1=0;
 function g2Init(){g2Stage=0;g2ScoreP1=0;g2Att=0;document.getElementById('g2game').classList.remove('hidden');document.getElementById('g2result').classList.add('hidden');g2LoadPart()}
 function g2LoadPart(){
 g2Acts=g2Parts[g2Stage].acts;g2Att=0;
-var sub=document.getElementById('g2sub');if(sub)sub.textContent=g2Parts[g2Stage].name+' — رَتِّبْ من الأَوَّل إلى الأَخير';
+var sub=document.getElementById('g2sub');if(sub)sub.textContent=g2Parts[g2Stage].name+' — رَتِّبْ مِن الأَوَّل إِلى الأَخير';
 g2Shuffle();
 }
 function g2Shuffle(){g2Ord=shuffle([...g2Acts]);g2Render()}
@@ -646,7 +646,7 @@ function g2NextOrEnd(){
 var partScore=Math.max(10,100-Math.max(0,(g2Att-1)*10));
 if(g2Stage===0){
 g2ScoreP1=partScore;g2Stage=1;
-var sub=document.getElementById('g2sub');if(sub)sub.textContent='✅ أَحْسَنْتَ! انتقل إلى '+g2Parts[1].name;
+var sub=document.getElementById('g2sub');if(sub)sub.textContent='✅ أَحْسَنْتَ! اِنْتَقِلْ إِلى '+g2Parts[1].name;
 setTimeout(function(){g2LoadPart()},900);
 }else{
 g2End(partScore);
@@ -663,7 +663,7 @@ endGame(2,fs);
 }
 
 /* ===== GAME 3: CLOCK ===== */
-var g3Hours=[{h:1,a:"السّاعة الواحِدة"},{h:2,a:"السّاعة الثّانِيَة"},{h:3,a:"السّاعة الثّالِثَة"},{h:4,a:"السّاعة الرّابِعَة"},{h:5,a:"السّاعة الخامِسَة"},{h:6,a:"السّاعة السّادِسَة"},{h:7,a:"السّاعة السّابِعَة"},{h:8,a:"السّاعة الثّامِنَة"},{h:9,a:"السّاعة التّاسِعَة"},{h:10,a:"السّاعة العاشِرَة"},{h:11,a:"السّاعة الحادِيَة عَشْرَة"},{h:12,a:"السّاعة الثّانِيَة عَشْرَة"}];
+var g3Hours=[{h:1,a:"السّاعَة الواحِدَة"},{h:2,a:"السّاعَة الثّانِيَة"},{h:3,a:"السّاعَة الثّالِثَة"},{h:4,a:"السّاعَة الرّابِعَة"},{h:5,a:"السّاعَة الخامِسَة"},{h:6,a:"السّاعَة السّادِسَة"},{h:7,a:"السّاعَة السّابِعَة"},{h:8,a:"السّاعَة الثّامِنة"},{h:9,a:"السّاعَة التّاسِعَة"},{h:10,a:"السّاعَة العاشِرَة"},{h:11,a:"السّاعَة الحادِيَة عَشْرَة"},{h:12,a:"السّاعَة الثّانِيَة عَشْرَة"}];
 var g3Qs,g3Cur,g3Sc;
 function g3InitClock(){
 var c=document.getElementById('g3clock');c.querySelectorAll('.cn').forEach(function(n){n.remove()});
@@ -688,7 +688,7 @@ var b=document.createElement('div');b.className='g3-opt';b.textContent=o.a;
 b.onclick=function(){
 sesTıkla();
 document.querySelectorAll('.g3-opt').forEach(function(x){x.classList.add('disabled')});
-if(o.h===q.h){sesDoğru();b.classList.add('correct');g3Sc+=10;document.getElementById('g3score').textContent=g3Sc;document.getElementById('g3fb').textContent='✅ صحيح!';document.getElementById('g3fb').style.color='#4caf50'}
+if(o.h===q.h){sesDoğru();b.classList.add('correct');g3Sc+=10;document.getElementById('g3score').textContent=g3Sc;document.getElementById('g3fb').textContent='✅ صَحيح!';document.getElementById('g3fb').style.color='#4caf50'}
 else{sesYanlış();b.classList.add('wrong');document.querySelectorAll('.g3-opt').forEach(function(x){if(x.textContent===q.a)x.classList.add('correct')});document.getElementById('g3fb').textContent='❌ '+q.a;document.getElementById('g3fb').style.color='#f44336'}
 g3Cur++;if(g3Cur<10)setTimeout(g3LoadQ,1500);else setTimeout(g3End,1500);
 };el.appendChild(b);
@@ -699,7 +699,7 @@ sesBitir();
 document.getElementById('g3game').classList.add('hidden');document.getElementById('g3result').classList.remove('hidden');
 document.getElementById('g3final').textContent=g3Sc+'%';
 document.getElementById('g3stars').textContent=g3Sc>=90?'⭐⭐⭐':g3Sc>=70?'⭐⭐':'⭐';
-document.getElementById('g3msg').textContent=g3Sc>=90?'ممتاز!':g3Sc>=70?'جيد جدًّا!':'حاول مرّة أخرى!';
+document.getElementById('g3msg').textContent=g3Sc>=90?'مُمْتاز!':g3Sc>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 endGame(3,g3Sc);
 }
 
@@ -707,16 +707,16 @@ endGame(3,g3Sc);
 var g4All=[
 {p:"هُوَ",s:"_____ في الصَّباح مُبَكِّرًا.",c:"يَسْتَيْقِظُ",w:["تَسْتَيْقِظُ","تَسْتَيْقِظينَ","أَسْتَيْقِظُ"]},
 {p:"هِيَ",s:"_____ الفَجْر.",c:"تُصَلِّي",w:["يُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
-{p:"هُوَ",s:"_____ الفَطور مَعَ عائِلَتِهِ.",c:"يَتَناوَلُ",w:["تَتَناوَلُ","تَتَناوَلينَ","أَتَناوَلُ"]},
+{p:"هُوَ",s:"_____ الفَطور مَعَ عائِلَتِه.",c:"يَتَناوَلُ",w:["تَتَناوَلُ","تَتَناوَلينَ","أَتَناوَلُ"]},
 {p:"هِيَ",s:"_____ مَلابِسَها.",c:"تَلْبَسُ",w:["يَلْبَسُ","تَلْبَسينَ","أَلْبَسُ"]},
 {p:"أَنْتَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبينَ","أَذْهَبُ"]},
 {p:"أَنْتِ",s:"_____ إِلى البَيْت ظُهْرًا.",c:"تَرْجِعينَ",w:["تَرْجِعُ","يَرْجِعُ","أَرْجِعُ"]},
 {p:"أَنْتَ",s:"_____ أُمَّكَ في البَيْت.",c:"تُساعِدُ",w:["تُساعِدينَ","يُساعِدُ","أُساعِدُ"]},
-{p:"أَنْتِ",s:"_____ الدُروس مَساءً.",c:"تَدْرُسينَ",w:["تَدْرُسُ","يَدْرُسُ","أَدْرُسُ"]},
+{p:"أَنْتِ",s:"_____ الدُّروس مَساءً.",c:"تَدْرُسينَ",w:["تَدْرُسُ","يَدْرُسُ","أَدْرُسُ"]},
 {p:"هُوَ",s:"_____ العِشاء قَبْلَ النَّوْم.",c:"يُصَلِّي",w:["تُصَلِّي","تُصَلِّينَ","أُصَلِّي"]},
 {p:"أَنْتِ",s:"_____ لَيْلًا.",c:"تَنامينَ",w:["تَنامُ","يَنامُ","أَنامُ"]},
 {p:"هِيَ",s:"_____ أُمَّها في البَيْت.",c:"تُساعِدُ",w:["يُساعِدُ","تُساعِدينَ","أُساعِدُ"]},
-{p:"هُوَ",s:"_____ دُروسَهُ مَساءً.",c:"يَدْرُسُ",w:["تَدْرُسُ","تَدْرُسينَ","أَدْرُسُ"]},
+{p:"هُوَ",s:"_____ دُروسَه مَساءً.",c:"يَدْرُسُ",w:["تَدْرُسُ","تَدْرُسينَ","أَدْرُسُ"]},
 {p:"هِيَ",s:"_____ إِلى المَدْرَسَة.",c:"تَذْهَبُ",w:["يَذْهَبُ","تَذْهَبينَ","أَذْهَبُ"]},
 {p:"أَنْتِ",s:"_____ الفَطور مَعَ عائِلَتِكِ.",c:"تَتَناوَلينَ",w:["تَتَناوَلُ","يَتَناوَلُ","أَتَناوَلُ"]}
 ];
@@ -740,7 +740,7 @@ b.onclick=function(){
 sesTıkla();
 document.querySelectorAll('.g4-opt').forEach(function(x){x.classList.add('disabled')});
 var bl=document.querySelector('.g4-blank');
-if(o.ok){sesDoğru();b.classList.add('correct');g4Sc+=10;document.getElementById('g4score').textContent=g4Sc;document.getElementById('g4fb').textContent='✅ صحيح!';document.getElementById('g4fb').style.color='#4caf50';bl.textContent=q.c;bl.style.borderBottom='3px solid #4caf50';bl.style.color='#4caf50'}
+if(o.ok){sesDoğru();b.classList.add('correct');g4Sc+=10;document.getElementById('g4score').textContent=g4Sc;document.getElementById('g4fb').textContent='✅ صَحيح!';document.getElementById('g4fb').style.color='#4caf50';bl.textContent=q.c;bl.style.borderBottom='3px solid #4caf50';bl.style.color='#4caf50'}
 else{sesYanlış();b.classList.add('wrong');document.querySelectorAll('.g4-opt').forEach(function(x){if(x.textContent===q.c)x.classList.add('correct')});document.getElementById('g4fb').textContent='❌ '+q.c;document.getElementById('g4fb').style.color='#f44336';bl.textContent=q.c;bl.style.color='#f44336'}
 g4Cur++;if(g4Cur<10)setTimeout(g4LoadQ,1800);else setTimeout(g4End,1800);
 };el.appendChild(b);
@@ -751,42 +751,42 @@ sesBitir();
 document.getElementById('g4game').classList.add('hidden');document.getElementById('g4result').classList.remove('hidden');
 document.getElementById('g4final').textContent=g4Sc+'%';
 document.getElementById('g4stars').textContent=g4Sc>=90?'⭐⭐⭐':g4Sc>=70?'⭐⭐':'⭐';
-document.getElementById('g4msg').textContent=g4Sc>=90?'ممتاز!':g4Sc>=70?'جيد جدًّا!':'حاول مرّة أخرى!';
+document.getElementById('g4msg').textContent=g4Sc>=90?'مُمْتاز!':g4Sc>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 endGame(4,g4Sc);
 }
 
 /* ===== GAME 5: DIALOG ===== */
 var g5Dialogs=[
 {title:"🍽️ في المَطْعَم",lines:[
-{sp:"أحمد",side:"right",text:"ماذا تُريدُ مِنَ المَأكولات؟"},
-{sp:"فاتح",side:"left",text:"أُريدُ {0} والأُرُز.",blanks:["الكُفْتَة"]},
-{sp:"أحمد",side:"right",text:"ماذا تُريدينَ مِنَ المَشروبات؟"},
-{sp:"زينب",side:"left",text:"أُريدُ {0}.",blanks:["الشّاي"]},
-{sp:"أحمد",side:"right",text:"هَلْ تُحِبُّ الكُفْتَة؟"},
-{sp:"فاتح",side:"left",text:"نَعَمْ، {0} الكُفْتَة كَثيرًا.",blanks:["أُحِبُّ"]},
-{sp:"أحمد",side:"right",text:"هَلْ تُحِبِّينَ المَكَرونَة؟"},
-{sp:"زينب",side:"left",text:"لا، لا {0} المَكَرونَة.",blanks:["أُحِبُّ"]}
+{sp:"أَحْمَد",side:"right",text:"ماذا تُريدُ مِن المَأكولات؟"},
+{sp:"فاتِح",side:"left",text:"أُريدُ {0} وَالأُرُز.",blanks:["الكُفْتَة"]},
+{sp:"أَحْمَد",side:"right",text:"ماذا تُريدينَ مِن المَشروبات؟"},
+{sp:"زَيْنَب",side:"left",text:"أُريدُ {0}.",blanks:["الشّاي"]},
+{sp:"أَحْمَد",side:"right",text:"هَلْ تُحِبُّ الكُفْتَة؟"},
+{sp:"فاتِح",side:"left",text:"نَعَمْ، {0} الكُفْتَة كَثيرًا.",blanks:["أُحِبُّ"]},
+{sp:"أَحْمَد",side:"right",text:"هَلْ تُحِبِّينَ المَكَرونَة؟"},
+{sp:"زَيْنَب",side:"left",text:"لا، لا {0} المَكَرونَة.",blanks:["أُحِبُّ"]}
 ],words:["الكُفْتَة","الشّاي","أُحِبُّ","أُحِبُّ","الحَليب","أُريدُ"]},
-{title:"📅 يَوْم مِنْ حَياة فاتِح",lines:[
-{sp:"أحمد",side:"right",text:"مَتى تَتَناوَلُ الفَطور يا فاتِح؟"},
-{sp:"فاتح",side:"left",text:"أَتَناوَلُ الفَطور في السّاعة {0} صَباحًا.",blanks:["السّابِعَة"]},
-{sp:"أحمد",side:"right",text:"ماذا تَأكُلُ في الفَطور؟"},
-{sp:"فاتح",side:"left",text:"آكُلُ {0} والزُبْدَة في الفَطور.",blanks:["العَسَل"]},
-{sp:"أحمد",side:"right",text:"مَتى تَذْهَبُ إِلى المَدْرَسَة؟"},
-{sp:"فاتح",side:"left",text:"أَذْهَبُ إِلى المَدْرَسَة في السّاعة {0}.",blanks:["الثّامِنَة"]},
-{sp:"أحمد",side:"right",text:"مَتى تَنامُ؟"},
-{sp:"فاتح",side:"left",text:"أَنامُ في السّاعة {0} لَيْلًا.",blanks:["الحادِيَة عَشْرَة"]}
-],words:["السّابِعَة","العَسَل","الثّامِنَة","الحادِيَة عَشْرَة","التّاسِعَة","الجُبْن"]},
+{title:"📅 يَوْم مِنْ حَيَاة فاتِح",lines:[
+{sp:"أَحْمَد",side:"right",text:"مَتى تَتَناوَلُ الفَطور يا فاتِح؟"},
+{sp:"فاتِح",side:"left",text:"أَتَناوَلُ الفَطور في السّاعَة {0} صَباحًا.",blanks:["السّابِعَة"]},
+{sp:"أَحْمَد",side:"right",text:"ماذا تَأكُلُ في الفَطور؟"},
+{sp:"فاتِح",side:"left",text:"آكُلُ {0} وَالزُّبْدَة في الفَطور.",blanks:["العَسَل"]},
+{sp:"أَحْمَد",side:"right",text:"مَتى تَذْهَبُ إِلى المَدْرَسَة؟"},
+{sp:"فاتِح",side:"left",text:"أَذْهَبُ إِلى المَدْرَسَة في السّاعَة {0}.",blanks:["الثّامِنة"]},
+{sp:"أَحْمَد",side:"right",text:"مَتى تَنامُ؟"},
+{sp:"فاتِح",side:"left",text:"أَنامُ في السّاعَة {0} لَيْلًا.",blanks:["الحادِيَة عَشْرَة"]}
+],words:["السّابِعَة","العَسَل","الثّامِنة","الحادِيَة عَشْرَة","التّاسِعَة","الجُبْن"]},
 {title:"🏠 زَيْنَب في البَيْت",lines:[
 {sp:"مَرْوَة",side:"right",text:"مَتى تَتَناوَلينَ الغَداء يا زَيْنَب؟"},
-{sp:"زينب",side:"left",text:"أَتَناوَلُهُ في السّاعة {0} ظُهْرًا.",blanks:["الواحِدَة"]},
+{sp:"زَيْنَب",side:"left",text:"أَتَناوَلُه في السّاعَة {0} ظُهْرًا.",blanks:["الواحِدَة"]},
 {sp:"مَرْوَة",side:"right",text:"وَماذا تَأكُلينَ في الغَداء؟"},
-{sp:"زينب",side:"left",text:"آكُلُ {0} والسَلَطَة.",blanks:["السَمَك"]},
+{sp:"زَيْنَب",side:"left",text:"آكُلُ {0} وَالسَّلَطَة.",blanks:["السَّمَك"]},
 {sp:"مَرْوَة",side:"right",text:"هَلْ تَشْرَبينَ القَهْوَة بَعْدَ الغَداء؟"},
-{sp:"زينب",side:"left",text:"لا، أَشْرَبُ {0}.",blanks:["الشّاي"]},
+{sp:"زَيْنَب",side:"left",text:"لا، أَشْرَبُ {0}.",blanks:["الشّاي"]},
 {sp:"مَرْوَة",side:"right",text:"هَلْ تُساعِدينَ أُمَّكِ في البَيْت؟"},
-{sp:"زينب",side:"left",text:"نَعَمْ، أُساعِدُ أُمِّي وَ{0} غُرْفَتي.",blanks:["أُنَظِّفُ"]}
-],words:["الواحِدَة","السَمَك","الشّاي","أُنَظِّفُ","القَهْوَة","أَدْرُسُ"]}
+{sp:"زَيْنَب",side:"left",text:"نَعَمْ، أُساعِدُ أُمِّي وَ{0} غُرْفَتي.",blanks:["أُنَظِّفُ"]}
+],words:["الواحِدَة","السَّمَك","الشّاي","أُنَظِّفُ","القَهْوَة","أَدْرُسُ"]}
 ];
 var g5Cur,g5Cor,g5TotB,g5Ans,g5Active;
 function g5CountBlanks(){g5TotB=0;g5Dialogs.forEach(function(d){d.lines.forEach(function(l){if(l.blanks)g5TotB+=l.blanks.length})})}
@@ -828,14 +828,14 @@ function g5SelB(id){document.querySelectorAll('.g5-blank').forEach(function(b){b
 function g5Check(){
 var blanks=document.querySelectorAll('.g5-blank');var allF=true;
 blanks.forEach(function(b){if(!b.classList.contains('filled'))allF=false});
-if(!allF){document.getElementById('g5fb').textContent='⚠️ أكمل جميع الفراغات';document.getElementById('g5fb').style.color='#ff9800';return}
+if(!allF){document.getElementById('g5fb').textContent='⚠️ أَكْمِلْ جَميع الفَراغات';document.getElementById('g5fb').style.color='#ff9800';return}
 var dc=0;blanks.forEach(function(b){
 var ans=b.dataset.answer,ua=g5Ans[b.id];
 if(ua&&ua.w===ans){b.style.borderColor='#4caf50';b.style.background='#e8f5e9';b.style.color='#2e7d32';dc++;g5Cor++}
 else{b.classList.add('wrong-fill');b.textContent=ans;setTimeout(function(){b.style.borderColor='#4caf50';b.style.background='#e8f5e9';b.style.color='#2e7d32';b.classList.remove('wrong-fill')},1500)}
 });
 if(dc===blanks.length){sesDoğru();}else{sesYanlış();}
-document.getElementById('g5fb').textContent=dc===blanks.length?'✅ ممتاز!':'الصحيح: '+dc+'/'+blanks.length;
+document.getElementById('g5fb').textContent=dc===blanks.length?'✅ مُمْتاز!':'الصَّحيح: '+dc+'/'+blanks.length;
 document.getElementById('g5fb').style.color=dc===blanks.length?'#4caf50':'#ff9800';
 document.getElementById('g5score').textContent=g5TotB>0?Math.round(g5Cor/g5TotB*100):0;
 document.getElementById('g5checkBtn').classList.add('hidden');
@@ -849,7 +849,7 @@ var fs=g5TotB>0?Math.round(g5Cor/g5TotB*100):0;
 document.getElementById('g5game').classList.add('hidden');document.getElementById('g5result').classList.remove('hidden');
 document.getElementById('g5final').textContent=fs+'%';
 document.getElementById('g5stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('g5msg').textContent=fs>=90?'ممتاز!':fs>=70?'جيد جدًّا!':'حاول مرّة أخرى!';
+document.getElementById('g5msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 endGame(5,fs);
 }
 
@@ -860,7 +860,7 @@ var g6PairData=[
 {e:"🥚",w:"بَيْض"},{e:"🧆",w:"كُفْتَة"},{e:"☕",w:"قَهْوَة"},{e:"🍵",w:"شاي"},{e:"🥛",w:"حَليب"},
 {e:"💧",w:"ماء"},{e:"🧃",w:"عَصير"},
 {e:"🍴",w:"شَوْكَة"},{e:"🔪",w:"سِكّين"},{e:"🥄",w:"مِلْعَقَة"},{e:"🥃",w:"كَأْس"},{e:"🍽️",w:"طَبَق"},
-{e:"🕐",w:"السّاعة الواحِدة"},{e:"🕒",w:"السّاعة الثّالِثَة"},{e:"🕕",w:"السّاعة السّادِسَة"},{e:"🕘",w:"السّاعة التّاسِعَة"},{e:"🕛",w:"السّاعة الثّانِيَة عَشْرَة"}
+{e:"🕐",w:"السّاعَة الواحِدَة"},{e:"🕒",w:"السّاعَة الثّالِثَة"},{e:"🕕",w:"السّاعَة السّادِسَة"},{e:"🕘",w:"السّاعَة التّاسِعَة"},{e:"🕛",w:"السّاعَة الثّانِيَة عَشْرَة"}
 ];
 var g6Cards,g6Flipped,g6Matched,g6Moves,g6Started,g6Start,g6ti,g6NP=8,g6Lock;
 function g6Init(){
@@ -900,8 +900,8 @@ var fs=Math.max(10,Math.round(100*(1-(g6Moves-g6NP)/(g6NP*3))));
 document.getElementById('g6game').classList.add('hidden');document.getElementById('g6result').classList.remove('hidden');
 document.getElementById('g6final').textContent=fs+'%';
 document.getElementById('g6stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('g6msg').textContent=fs>=90?'ممتاز!':fs>=70?'جيد جدًّا!':'حاول مرّة أخرى!';
-document.getElementById('g6det').textContent='المحاولات: '+g6Moves+' | الوقت: '+Math.floor(elapsed/60)+':'+String(elapsed%60).padStart(2,'0');
+document.getElementById('g6msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('g6det').textContent='المُحاوَلات: '+g6Moves+' | الوَقْت: '+Math.floor(elapsed/60)+':'+String(elapsed%60).padStart(2,'0');
 endGame(6,fs);
 }
 
@@ -916,7 +916,7 @@ updateMenu();
 #hub-back:hover{background:rgba(0,0,0,.85)}
 #backBtn{display:none!important}
 </style>
-<a id="hub-back" href="./index.html">↩ القائمة</a>
+<a id="hub-back" href="./index.html">↩ القائِمَة</a>
 <script>
 window.goMenu=function(){location.href='./index.html'};
 </script>

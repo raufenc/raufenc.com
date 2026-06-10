@@ -38,8 +38,8 @@ let P=[{wins:0,correct:0},{wins:0,correct:0}];   /* 2 kişi skoru */
 let ans=[null,null], firstCorrect=null;          /* tur durumu (2 kişi) */
 
 function setup(){
-  if(!ACT){ startTitle.textContent='لا يوجد نشاط'; return; }
-  document.title=ACT.title||'نشاط';
+  if(!ACT){ startTitle.textContent='لا يوجَد نَشاط'; return; }
+  document.title=ACT.title||'نَشاط';
   startTitle.textContent=ACT.title||'';
   startSub.textContent=ACT.subtitle||'';
 }
@@ -139,7 +139,7 @@ async function chooseSolo(isCorrect,btn){
   } else {
     btn.classList.add('wrong');
     qOpts.querySelectorAll('.opt-btn').forEach(b=>{ if(b.textContent===q.options[q.correct]) b.classList.add('correct'); });
-    qFeedback.textContent='الإِجابَةُ الصَّحيحَةُ'; qFeedback.className='feedback show bad';
+    qFeedback.textContent='الإِجابَة الصَّحيحَة'; qFeedback.className='feedback show bad';
   }
   markDot(idx,isCorrect);
   await new Promise(r=>setTimeout(r,650));
@@ -155,8 +155,8 @@ function finishSolo(){
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
   endMsg.textContent= pct===1?'مُمْتاز! ما شاءَ اللَّه'
-    : pct>=.75?'جَيِّدٌ جِدًّا'
-    : pct>=.5 ?'جَيِّدٌ، حاوِلْ مَرَّةً أُخْرى'
+    : pct>=.75?'جَيِّد جِدًّا'
+    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى'
     : 'تَدَرَّبْ ثُمَّ أَعِدْ';
   endScreen.classList.add('show');
 }
@@ -230,14 +230,14 @@ async function maybeResolve2P(){
 }
 function finishDuo(){
   duel.classList.remove('show');
-  end2P1.innerHTML='<b>👤 اللّاعِبُ ١</b><br>⚡ '+toAr(P[0].wins)+' &nbsp; ✓ '+toAr(P[0].correct);
-  end2P2.innerHTML='<b>👤 اللّاعِبُ ٢</b><br>⚡ '+toAr(P[1].wins)+' &nbsp; ✓ '+toAr(P[1].correct);
+  end2P1.innerHTML='<b>👤 اللّاعِب ١</b><br>⚡ '+toAr(P[0].wins)+' &nbsp; ✓ '+toAr(P[0].correct);
+  end2P2.innerHTML='<b>👤 اللّاعِب ٢</b><br>⚡ '+toAr(P[1].wins)+' &nbsp; ✓ '+toAr(P[1].correct);
   const a=P[0], b=P[1];
   let p1win=false, p2win=false, msg;
-  if(a.wins>b.wins){ p1win=true; msg='فازَ اللّاعِبُ ١ 🏆'; }
-  else if(b.wins>a.wins){ p2win=true; msg='فازَ اللّاعِبُ ٢ 🏆'; }
-  else if(a.correct>b.correct){ p1win=true; msg='فازَ اللّاعِبُ ١ 🏆'; }   /* beraberlik → doğru sayısı */
-  else if(b.correct>a.correct){ p2win=true; msg='فازَ اللّاعِبُ ٢ 🏆'; }
+  if(a.wins>b.wins){ p1win=true; msg='فازَ اللّاعِب ١ 🏆'; }
+  else if(b.wins>a.wins){ p2win=true; msg='فازَ اللّاعِب ٢ 🏆'; }
+  else if(a.correct>b.correct){ p1win=true; msg='فازَ اللّاعِب ١ 🏆'; }   /* beraberlik → doğru sayısı */
+  else if(b.correct>a.correct){ p2win=true; msg='فازَ اللّاعِب ٢ 🏆'; }
   else { msg='تَعادُل! 🤝'; }
   end2Win.textContent=msg;
   end2P1.classList.toggle('win',p1win);

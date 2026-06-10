@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ابن الجملة — أَفْعالُ السَّفَر</title>
+<title>اِبْنِ الجُمْلَة — أَفْعال السَّفَر</title>
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -44,15 +44,15 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
 <h1>🏗️ ابْنِ الجُمْلَة<span class="edited-tag">✎ 1 كَلِمَة فائِضَة</span></h1>
-<div class="sub">رَتِّبِ الكَلِماتِ لِتُكَوِّنَ جُمْلَةً صَحيحَة (أَفْعالُ السَّفَر)</div>
+<div class="sub">رَتِّب الكَلِمات لِتُكَوِّنَ جُمْلَةً صَحيحَة (أَفْعال السَّفَر)</div>
 <div id="game">
 <div class="tip">
-<b>📘 الملاحَظَة:</b> في كُلِّ سُؤالٍ <b>كَلِمَة واحِدَة فَقَط زائِدَة</b> — اُنْظُرْ إلى الصورَة والسؤالِ ثُمَّ اخْتَرِ الكَلِماتِ المُناسِبَةَ بِالتَّرتيبِ.
+<b>📘 المُلاحَظَة:</b> في كُلّ سُؤال <b>كَلِمَة واحِدَة فَقَط زائِدَة</b> — اُنْظُرْ إِلى الصّورَة وَالسُّؤال ثُمَّ اخْتَر الكَلِمات المُناسِبَة بِالتَّرْتيب.
 </div>
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/12</span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>السُّؤال: <span id="qn">1</span>/12</span></div>
 <div class="q-card"><div class="em" id="em"></div><div class="quest" id="quest"></div></div>
 <div class="built" id="built"></div>
 <div class="pool" id="pool"></div>
@@ -61,7 +61,7 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 <div style="text-align:center;margin-top:8px"><button class="btn alt" onclick="clearBuilt()">مَسْح ↻</button></div>
 </div>
 <div id="result" class="result hidden">
-<h2 style="color:#1A237E">🎉 أَحْسَنْت!</h2>
+<h2 style="color:#1A237E">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#3F51B5;margin-bottom:14px"></div>
@@ -72,18 +72,18 @@ h1{text-align:center;color:#1A237E;font-size:2.2em;margin-bottom:6px}
 <script>
 
 var ALL=[
-{em:'🚌',q:'كَيْفَ أَذْهَبُ إِلى المَدْرَسَة؟',correct:['أَذْهَبُ','إِلى','المَدْرَسَة','بِالحافِلَة'],extra:['بِالطّائِرَة'],exp:'بِالحافِلَة'},
-{em:'🚆',q:'كَيْفَ تَرْجِعُ أُخْتي إِلى إِسْطَنْبول؟',correct:['تَرْجِعُ','إِلى','إِسْطَنْبول','بِالقِطار'],extra:['بَحْرًا'],exp:'بِالقِطار'},
+{em:'🚌',q:'كَيْف أَذْهَبُ إِلى المَدْرَسَة؟',correct:['أَذْهَبُ','إِلى','المَدْرَسَة','بِالحافِلَة'],extra:['بِالطّائِرَة'],exp:'بِالحافِلَة'},
+{em:'🚆',q:'كَيْف تَرْجِعُ أُخْتي إِلى إِسْطَنْبول؟',correct:['تَرْجِعُ','إِلى','إِسْطَنْبول','بِالقِطار'],extra:['بَحْرًا'],exp:'بِالقِطار'},
 {em:'✈️',q:'بِماذا يُسافِرُ أَبي إِلى أَنْقَرَة؟',correct:['يُسافِرُ','أَبي','إِلى','أَنْقَرَة','بِالطّائِرَة'],extra:['بَحْرًا'],exp:'بِالطّائِرَة'},
-{em:'🚢',q:'كَيْفَ يُسافِرُ إِلى بورْصَة؟',correct:['يُسافِرُ','إِلى','بورْصَة','بِالسَّفينَة'],extra:['جَوًّا'],exp:'بَحْرًا بِالسَّفينَة'},
+{em:'🚢',q:'كَيْف يُسافِرُ إِلى بورْصَة؟',correct:['يُسافِرُ','إِلى','بورْصَة','بِالسَّفينَة'],extra:['جَوًّا'],exp:'بَحْرًا بِالسَّفينَة'},
 {em:'🚗',q:'بِماذا تَذْهَبُ أُمّي إِلى المُسْتَشْفى؟',correct:['تَذْهَبُ','أُمّي','إِلى','المُسْتَشْفى','بِالسَّيّارَة'],extra:['بَحْرًا'],exp:'بِالسَّيّارَة'},
-{em:'➡️',q:'إِرْشادٌ: اِتَّجِهْ إِلى اليَمين',correct:['اِتَّجِهْ','إِلى','اليَمين'],extra:['اليَسار'],exp:'اِتَّجِهْ + اليَمين'},
-{em:'⬅️',q:'إِرْشادٌ: اِتَّجِهي إِلى اليَسار',correct:['اِتَّجِهي','إِلى','اليَسار'],extra:['اليَمين'],exp:'اِتَّجِهي + اليَسار'},
-{em:'🛑',q:'إِرْشادٌ: قِفْ عِنْدَ الضَّوْء',correct:['قِفْ','عِنْدَ','الضَّوْء','الأَحْمَر'],extra:['اِمْشِ'],exp:'قِفْ + الضَّوْء الأَحْمَر'},
+{em:'➡️',q:'إِرْشاد: اِتَّجِهْ إِلى اليَمين',correct:['اِتَّجِهْ','إِلى','اليَمين'],extra:['اليَسار'],exp:'اِتَّجِهْ + اليَمين'},
+{em:'⬅️',q:'إِرْشاد: اِتَّجِهي إِلى اليَسار',correct:['اِتَّجِهي','إِلى','اليَسار'],extra:['اليَمين'],exp:'اِتَّجِهي + اليَسار'},
+{em:'🛑',q:'إِرْشاد: قِفْ عِنْدَ الضَّوْء',correct:['قِفْ','عِنْدَ','الضَّوْء','الأَحْمَر'],extra:['اِمْشِ'],exp:'قِفْ + الضَّوْء الأَحْمَر'},
 {em:'🚦',q:'مَتى نَعْبُرُ الطَّريق؟',correct:['نَعْبُرُ','عِنْدَ','الضَّوْء','الأَخْضَر'],extra:['الأَحْمَر'],exp:'الضَّوْء الأَخْضَر'},
-{em:'🏃',q:'مُقارَنَة: أَيُّهُما أَسْرَع؟',correct:['القِطار','أَسْرَع','مِنَ','الحافِلَة'],extra:['أَبْطَأ'],exp:'القِطارُ أَسْرَعُ مِنَ الحافِلَةِ'},
-{em:'🐢',q:'مُقارَنَة: أَيُّهُما أَبْطَأ؟',correct:['الدَّرّاجَة','أَبْطَأ','مِنَ','السَّيّارَة'],extra:['أَسْرَع'],exp:'الدَّرّاجَة أَبْطَأ مِنَ السَّيّارَة'},
-{em:'📍',q:'سُؤالٌ عَنِ العُنْوان',correct:['أَيْنَ','عُنْوانُ','المَدْرَسَة'],extra:['كَيْفَ'],exp:'العُنْوان'}
+{em:'🏃',q:'مُقارَنَة: أَيُّهُما أَسْرَع؟',correct:['القِطار','أَسْرَع','مِن','الحافِلَة'],extra:['أَبْطَأ'],exp:'القِطار أَسْرَع مِن الحافِلَة'},
+{em:'🐢',q:'مُقارَنَة: أَيُّهُما أَبْطَأ؟',correct:['الدَّرّاجَة','أَبْطَأ','مِن','السَّيّارَة'],extra:['أَسْرَع'],exp:'الدَّرّاجَة أَبْطَأ مِن السَّيّارَة'},
+{em:'📍',q:'سُؤال عَن العُنْوان',correct:['أَيْن','عُنْوان','المَدْرَسَة'],extra:['كَيْف'],exp:'العُنْوان'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,built,pool;
@@ -123,7 +123,7 @@ document.getElementById('exp').textContent='💡 '+q.exp;
 cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1700);
 }else{
 document.getElementById('built').classList.add('wrong');
-document.getElementById('fb').textContent='❌ التَّرتيبُ غَيْرُ صَحيح';document.getElementById('fb').style.color='#F44336';
+document.getElementById('fb').textContent='❌ التَّرْتيب غَيْر صَحيح';document.getElementById('fb').style.color='#F44336';
 setTimeout(function(){clearBuilt();document.getElementById('fb').textContent=''},900);
 }
 }
@@ -132,7 +132,7 @@ var fs=Math.round(sc/(qs.length*10)*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ألعاب جديدة - ماذا فعلت اليوم؟</title>
+<title>أَلْعاب جَديدَة - ماذا فَعَلْتُ اليَوْم؟</title>
 <style>
 @font-face{font-family:'Arakom';src:url('Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -228,13 +228,13 @@ function sesDoğru() {
   _tone(523,0.1,'sine',0.3,0);
   _tone(659,0.1,'sine',0.3,0.1);
   _tone(784,0.25,'sine',0.3,0.2);
-  konuş(['أحسنت','ممتاز','رائع','بارك الله فيك'][Math.floor(Math.random()*4)]);
+  konuş(['أَحْسَنْتَ','مُمْتاز','رائِع','بارَكَ اللَّهُ فيكَ'][Math.floor(Math.random()*4)]);
 }
 
 function sesYanlış() {
   _tone(180,0.15,'sawtooth',0.25,0);
   _tone(150,0.2,'sawtooth',0.2,0.15);
-  konuş(['حاول مرة أخرى','خطأ، حاول ثانية','لا بأس'][Math.floor(Math.random()*3)]);
+  konuş(['حاوِلْ مَرَّةً أُخْرى','خَطَأ، حاوِلْ ثانِيَة','لا بَأْس'][Math.floor(Math.random()*3)]);
 }
 
 function sesTıkla() {
@@ -243,7 +243,7 @@ function sesTıkla() {
 
 function sesBitir() {
   [523,659,784,1047,1319].forEach((f,i)=>_tone(f,0.18,'sine',0.28,i*0.12));
-  setTimeout(()=>konuş('تهانينا! أحسنت'),200);
+  setTimeout(()=>konuş('تَهانينا! أَحْسَنْتَ'),200);
 }
 
 function sesBuzzer() {
@@ -289,66 +289,66 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== MENU ==================== -->
 <div id="menuScreen" class="menu-bg">
 <div class="menu-header">
-<div class="unit-badge">الوحدة الأولى - الصفّ السابع - المجموعة الثانية</div>
-<h1>ماذا فعلتُ اليوم؟ 🎮</h1>
-<p>ألعاب تعليمية جديدة - اختر لعبة للبدء</p>
+<div class="unit-badge">الوَحْدَة الأُولى - الصَّفّ السّابِع - المَجْموعَة الثّانِيَة</div>
+<h1>ماذا فَعَلْتُ اليَوْم؟ 🎮</h1>
+<p>أَلْعاب تَعْليمِيَّة جَديدَة - اِخْتَرْ لُعْبَة لِلْبَدْء</p>
 </div>
 <div class="menu-stats">
-<div class="menu-stat"><div class="val" id="menuTotal">0%</div><div class="lbl">المعدّل العامّ</div></div>
-<div class="menu-stat"><div class="val" id="menuDone">0/6</div><div class="lbl">مكتمل</div></div>
+<div class="menu-stat"><div class="val" id="menuTotal">0%</div><div class="lbl">المُعَدَّل العامّ</div></div>
+<div class="menu-stat"><div class="val" id="menuDone">0/6</div><div class="lbl">مُكْتَمِل</div></div>
 </div>
 <div class="games-grid">
 <div class="game-card card1" onclick="startGame(1)">
-<div class="card-icon">🔤</div><h3>كلمات مقلوبة</h3>
-<p>رتّب الحروف لتكوين الكلمة الصحيحة</p>
+<div class="card-icon">🔤</div><h3>كَلِمات مَقْلوبَة</h3>
+<p>رَتِّب الحُروف لِتَكْوين الكَلِمَة الصَّحيحَة</p>
 <div class="card-score" id="card1score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card1bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card2" onclick="startGame(2)">
-<div class="card-icon">📂</div><h3>صنِّف الطعام</h3>
-<p>ضع كلّ طعام في وجبته الصحيحة</p>
+<div class="card-icon">📂</div><h3>صَنِّف الطَّعام</h3>
+<p>ضَعْ كُلَّ طَعام في وَجْبَتِه الصَّحيحَة</p>
 <div class="card-score" id="card2score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card2bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card3" onclick="startGame(3)">
-<div class="card-icon">🏗️</div><h3>ابنِ الجملة</h3>
-<p>رتّب الكلمات لتكوين جملة صحيحة</p>
+<div class="card-icon">🏗️</div><h3>اِبْنِ الجُمْلَة</h3>
+<p>رَتِّب الكَلِمات لِتَكْوين جُمْلَة صَحيحَة</p>
 <div class="card-score" id="card3score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card3bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card4" onclick="startGame(4)">
-<div class="card-icon">🎯</div><h3>اقصف الخطأ</h3>
-<p>اختر الكلمة التي لا تنتمي للمجموعة</p>
+<div class="card-icon">🎯</div><h3>اِقْصِف الخَطَأ</h3>
+<p>اِخْتَر الكَلِمَة الَّتي لا تَنْتَمي لِلْمَجْموعَة</p>
 <div class="card-score" id="card4score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card4bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card5" onclick="startGame(5)">
-<div class="card-icon">⏱️</div><h3>الوقت يضغط</h3>
-<p>أجب بسرعة واجمع نقاطًا أكثر</p>
+<div class="card-icon">⏱️</div><h3>الوَقْت يَضْغَطُ</h3>
+<p>أَجِبْ بِسُرْعَة وَاجْمَعْ نِقاطًا أَكْثَر</p>
 <div class="card-score" id="card5score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card5bar" style="width:0%"></div></div>
 </div>
 <div class="game-card card6" onclick="startGame(6)">
-<div class="card-icon">🗺️</div><h3>رحلة اليوم</h3>
-<p>سافر مع فاتح في يومه وأجب عن الأسئلة</p>
+<div class="card-icon">🗺️</div><h3>رِحْلَة اليَوْم</h3>
+<p>سافِرْ مَعَ فاتِح في يَوْمِه وَأَجِبْ عَن الأَسْئِلَة</p>
 <div class="card-score" id="card6score"></div>
 <div class="card-bar"><div class="card-bar-fill" id="card6bar" style="width:0%"></div></div>
 </div>
 </div>
 </div>
 
-<button class="back-btn hidden" id="backBtn" onclick="goMenu()">→ القائمة الرئيسية</button>
+<button class="back-btn hidden" id="backBtn" onclick="goMenu()">→ القائِمَة الرَّئيسِيَّة</button>
 
 <!-- ==================== GAME 1: SCRAMBLE ==================== -->
 <div id="game1" class="game-screen g1-bg">
 <div class="g1-box">
-<h1>🔤 كلمات مقلوبة</h1>
-<div class="g1-sub">رتِّب الحروف لتكوين الكلمة الصحيحة</div>
+<h1>🔤 كَلِمات مَقْلوبَة</h1>
+<div class="g1-sub">رَتِّب الحُروف لِتَكْوين الكَلِمَة الصَّحيحَة</div>
 <div id="g1game">
 <div class="g1-topbar">
-<span>النتيجة: <span id="g1score">0</span></span>
-<span>الكلمة: <span id="g1wnum">1</span>/15</span>
-<span>الجولة: <span id="g1rnd">1</span>/3</span>
+<span>النَّتيجَة: <span id="g1score">0</span></span>
+<span>الكَلِمَة: <span id="g1wnum">1</span>/15</span>
+<span>الجَوْلَة: <span id="g1rnd">1</span>/3</span>
 </div>
 <div class="g1-timer-wrap"><div class="g1-timer-bar" id="g1tbar" style="width:100%"></div></div>
 <div class="g1-hint" id="g1emoji"></div>
@@ -357,16 +357,16 @@ function konuş(metin, hız=0.85) {
 <div id="g1fb" class="feedback"></div>
 <div class="g1-tiles" id="g1tiles"></div>
 <div class="btn-area">
-<button class="g1-hint-btn" onclick="g1UseHint()">💡 مساعدة (-5 نقاط)</button>
+<button class="g1-hint-btn" onclick="g1UseHint()">💡 مُساعَدَة (-5 نِقاط)</button>
 </div>
 </div>
 <div id="g1result" class="result-box hidden">
-<h2 style="color:#00838F">🎉 أحسنت!</h2>
+<h2 style="color:#00838F">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g1stars"></div>
 <div class="big-score" style="color:#00BCD4" id="g1final"></div>
 <div style="color:#00838F;margin-bottom:20px" id="g1msg"></div>
-<button class="btn" style="background:#00BCD4" onclick="g1Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#00BCD4" onclick="g1Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -374,13 +374,13 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 2: CATEGORY SORT ==================== -->
 <div id="game2" class="game-screen g2-bg">
 <div class="g2-box">
-<h1>📂 صنِّف الطعام</h1>
-<div class="g2-sub">اسحب كلّ طعام إلى وجبته الصحيحة</div>
+<h1>📂 صَنِّف الطَّعام</h1>
+<div class="g2-sub">اِسْحَبْ كُلَّ طَعام إِلى وَجْبَتِه الصَّحيحَة</div>
 <div id="g2game">
 <div class="g2-topbar">
-<span>النتيجة: <span id="g2score">0</span></span>
-<span>المتبقي: <span id="g2left">15</span></span>
-<span>الصحيح: <span id="g2cor">0</span>/15</span>
+<span>النَّتيجَة: <span id="g2score">0</span></span>
+<span>المُتَبَقّي: <span id="g2left">15</span></span>
+<span>الصَّحيح: <span id="g2cor">0</span>/15</span>
 </div>
 <div class="g2-combo" id="g2combo"></div>
 <div class="g2-stage" id="g2stage"></div>
@@ -401,12 +401,12 @@ function konuş(metin, hız=0.85) {
 <div id="g2fb" class="feedback"></div>
 </div>
 <div id="g2result" class="result-box hidden">
-<h2 style="color:#BF360C">🎉 انتهى التصنيف!</h2>
+<h2 style="color:#BF360C">🎉 اِنْتَهى التَّصْنيف!</h2>
 <div class="stars" id="g2stars"></div>
 <div class="big-score" style="color:#FF6B35" id="g2final"></div>
 <div style="color:#E64A19;margin-bottom:20px" id="g2msg"></div>
-<button class="btn" style="background:#FF6B35" onclick="g2Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#FF6B35" onclick="g2Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -414,30 +414,30 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 3: SENTENCE BUILDER ==================== -->
 <div id="game3" class="game-screen g3-bg">
 <div class="g3-box">
-<h1>🏗️ ابنِ الجملة</h1>
-<div class="g3-sub">اضغط على الكلمات بالترتيب الصحيح لبناء الجملة</div>
+<h1>🏗️ اِبْنِ الجُمْلَة</h1>
+<div class="g3-sub">اِضْغَطْ عَلى الكَلِمات بِالتَّرْتيب الصَّحيح لِبِناء الجُمْلَة</div>
 <div id="g3game">
 <div class="g3-topbar">
-<span>النتيجة: <span id="g3score">0</span></span>
-<span>السؤال: <span id="g3qnum">1</span>/12</span>
+<span>النَّتيجَة: <span id="g3score">0</span></span>
+<span>السُّؤال: <span id="g3qnum">1</span>/12</span>
 </div>
 <div class="g3-pbar"><div class="g3-pfill" id="g3prog" style="width:0%"></div></div>
 <div class="g3-emoji" id="g3emoji"></div>
-<div class="g3-question" id="g3quest">رتِّب الكلمات لتكوين الجملة الصحيحة</div>
+<div class="g3-question" id="g3quest">رَتِّب الكَلِمات لِتَكْوين الجُمْلَة الصَّحيحَة</div>
 <div class="g3-built" id="g3built"></div>
 <div id="g3fb" class="feedback"></div>
 <div class="g3-pool" id="g3pool"></div>
 <div class="btn-area">
-<button class="btn" style="background:#F44336" onclick="g3Clear()">مسح ✕</button>
+<button class="btn" style="background:#F44336" onclick="g3Clear()">مَسْح ✕</button>
 </div>
 </div>
 <div id="g3result" class="result-box hidden">
-<h2 style="color:#1A237E">🎉 أحسنت!</h2>
+<h2 style="color:#1A237E">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g3stars"></div>
 <div class="big-score" style="color:#3F51B5" id="g3final"></div>
 <div style="color:#3F51B5;margin-bottom:20px" id="g3msg"></div>
-<button class="btn" style="background:#3F51B5" onclick="g3Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#3F51B5" onclick="g3Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -445,12 +445,12 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 4: ODD ONE OUT ==================== -->
 <div id="game4" class="game-screen g4-bg">
 <div class="g4-box">
-<h1>🎯 اقصف الخطأ</h1>
-<div class="g4-sub">اختر الكلمة التي لا تنتمي للمجموعة قبل انتهاء الوقت</div>
+<h1>🎯 اِقْصِف الخَطَأ</h1>
+<div class="g4-sub">اِخْتَر الكَلِمَة الَّتي لا تَنْتَمي لِلْمَجْموعَة قَبْلَ انْتِهاء الوَقْت</div>
 <div id="g4game">
 <div class="g4-topbar">
-<span>النتيجة: <span id="g4score">0</span></span>
-<span>السؤال: <span id="g4qnum">1</span>/15</span>
+<span>النَّتيجَة: <span id="g4score">0</span></span>
+<span>السُّؤال: <span id="g4qnum">1</span>/15</span>
 </div>
 <div class="g4-timer-wrap"><div class="g4-timer-bar" id="g4tbar" style="width:100%"></div></div>
 <div class="g4-category" id="g4cat"></div>
@@ -459,12 +459,12 @@ function konuş(metin, hız=0.85) {
 <div class="g4-explain" id="g4explain"></div>
 </div>
 <div id="g4result" class="result-box hidden">
-<h2 style="color:#880E4F">🎉 انتهت اللعبة!</h2>
+<h2 style="color:#880E4F">🎉 اِنْتَهَتِ اللُّعْبَة!</h2>
 <div class="stars" id="g4stars"></div>
 <div class="big-score" style="color:#E91E63" id="g4final"></div>
 <div style="color:#AD1457;margin-bottom:20px" id="g4msg"></div>
-<button class="btn" style="background:#E91E63" onclick="g4Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#E91E63" onclick="g4Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -472,28 +472,28 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 5: SPEED QUIZ ==================== -->
 <div id="game5" class="game-screen g5-bg">
 <div class="g5-box">
-<h1>⏱️ الوقت يضغط</h1>
-<div class="g5-sub">أجب بسرعة واجمع نقاطًا أكثر!</div>
+<h1>⏱️ الوَقْت يَضْغَطُ</h1>
+<div class="g5-sub">أَجِبْ بِسُرْعَة وَاجْمَعْ نِقاطًا أَكْثَر!</div>
 <div id="g5game">
 <div class="g5-topbar">
-<span>النتيجة: <span id="g5score">0</span></span>
+<span>النَّتيجَة: <span id="g5score">0</span></span>
 <span class="g5-streak" id="g5streak"></span>
-<span>السؤال: <span id="g5qnum">1</span>/15</span>
+<span>السُّؤال: <span id="g5qnum">1</span>/15</span>
 </div>
 <div class="g5-timer-wrap"><div class="g5-timer-bar" id="g5tbar" style="width:100%"></div></div>
 <div class="g5-multiplier" id="g5multi"></div>
-<div class="g5-level-badge"><span id="g5level">المستوى الأول 🟢</span></div>
+<div class="g5-level-badge"><span id="g5level">المُسْتَوى الأَوَّل 🟢</span></div>
 <div class="g5-qcard" id="g5qcard"></div>
 <div id="g5fb" class="feedback"></div>
 <div class="g5-opts" id="g5opts"></div>
 </div>
 <div id="g5result" class="result-box hidden">
-<h2 style="color:#1B5E20">🎉 أحسنت!</h2>
+<h2 style="color:#1B5E20">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="g5stars"></div>
 <div class="big-score" style="color:#4CAF50" id="g5final"></div>
 <div style="color:#2E7D32;margin-bottom:20px" id="g5msg"></div>
-<button class="btn" style="background:#4CAF50" onclick="g5Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#4CAF50" onclick="g5Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -501,13 +501,13 @@ function konuş(metin, hız=0.85) {
 <!-- ==================== GAME 6: JOURNEY ==================== -->
 <div id="game6" class="game-screen g6-bg">
 <div class="g6-box">
-<h1>🗺️ رحلة اليوم</h1>
-<div class="g6-sub">سافر مع فاتح وأجب عن الأسئلة في كلّ محطّة</div>
+<h1>🗺️ رِحْلَة اليَوْم</h1>
+<div class="g6-sub">سافِرْ مَعَ فاتِح وَأَجِبْ عَن الأَسْئِلَة في كُلّ مَحَطَّة</div>
 <div id="g6game">
 <div class="g6-topbar">
-<span>النتيجة: <span id="g6score">0</span></span>
+<span>النَّتيجَة: <span id="g6score">0</span></span>
 <span>المحطّة: <span id="g6locnum">1</span>/5</span>
-<span>الصحيح: <span id="g6cor">0</span>/12</span>
+<span>الصَّحيح: <span id="g6cor">0</span>/12</span>
 </div>
 <div class="g6-road" id="g6road">
 <div class="g6-road-line"></div>
@@ -519,12 +519,12 @@ function konuş(metin, hız=0.85) {
 <div class="g6-progress" id="g6progress"></div>
 </div>
 <div id="g6result" class="result-box hidden">
-<h2 style="color:#4A148C">🎉 انتهت الرحلة!</h2>
+<h2 style="color:#4A148C">🎉 اِنْتَهَتِ الرِّحْلَة!</h2>
 <div class="stars" id="g6stars"></div>
 <div class="big-score" style="color:#9C27B0" id="g6final"></div>
 <div style="color:#7B1FA2;margin-bottom:20px" id="g6msg"></div>
-<button class="btn" style="background:#9C27B0" onclick="g6Init()">إعادة 🔄</button>
-<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائمة ↩</button>
+<button class="btn" style="background:#9C27B0" onclick="g6Init()">إِعادَة 🔄</button>
+<button class="btn" style="background:#9c88ff" onclick="goMenu()">القائِمَة ↩</button>
 </div>
 </div>
 </div>
@@ -574,28 +574,28 @@ function safeInterval(fn,ms){var id=setInterval(fn,ms);allTimers.push(id);return
 function safeTimeout(fn,ms){var id=setTimeout(fn,ms);allTimers.push(id);return id}
 function clearAllTimers(){allTimers.forEach(function(id){clearInterval(id);clearTimeout(id)});allTimers=[]}
 function stars(s){return s>=90?'⭐⭐⭐':s>=70?'⭐⭐':'⭐'}
-function msg(s){return s>=90?'ممتاز! 🏆':s>=70?'جيد جدًّا! 👍':'حاول مرّة أخرى! 💪'}
+function msg(s){return s>=90?'مُمْتاز! 🏆':s>=70?'جَيِّد جِدًّا! 👍':'حاوِلْ مَرَّةً أُخْرى! 💪'}
 function splitArabic(word){var m=word.match(/[\u0600-\u06FF\u0621-\u063A\u0641-\u064A][\u064B-\u065F\u0670]*/g);return m||[]}
 
 /* ============================================================
-   GAME 1: WORD SCRAMBLE - كلمات مقلوبة
+   GAME 1: WORD SCRAMBLE - كَلِمات مَقْلوبَة
    ============================================================ */
 var g1Data=[
-{w:'خُبْز',e:'🍞',hint:'طعام من القمح'},
-{w:'جُبْن',e:'🧀',hint:'طعام أبيض من الحليب'},
-{w:'أُرُز',e:'🍚',hint:'حبوب بيضاء'},
-{w:'عَسَل',e:'🍯',hint:'حلو من النحل'},
-{w:'شاي',e:'🍵',hint:'مشروب ساخن'},
-{w:'دَجاج',e:'🍗',hint:'لحم طائر'},
-{w:'لَحْم',e:'🥩',hint:'من البقر أو الغنم'},
-{w:'سَمَك',e:'🐟',hint:'حيوان من البحر'},
-{w:'بَيْض',e:'🥚',hint:'من الدجاجة'},
-{w:'زُبْدَة',e:'🧈',hint:'دهن أصفر من الحليب'},
-{w:'كُفْتَة',e:'🧆',hint:'طعام مشوي من اللحم المفروم'},
-{w:'حَساء',e:'🍲',hint:'طعام سائل ساخن'},
-{w:'حَليب',e:'🥛',hint:'مشروب أبيض من الأبقار'},
-{w:'قَهْوَة',e:'☕',hint:'مشروب بنّي ساخن'},
-{w:'عَصير',e:'🧃',hint:'مشروب من الفواكه'}
+{w:'خُبْز',e:'🍞',hint:'طَعام مِن القَمْح'},
+{w:'جُبْن',e:'🧀',hint:'طَعام أَبْيَض مِن الحَليب'},
+{w:'أُرُز',e:'🍚',hint:'حُبوب بَيْضاء'},
+{w:'عَسَل',e:'🍯',hint:'حُلْو مِن النَّحْل'},
+{w:'شاي',e:'🍵',hint:'مَشْروب ساخِن'},
+{w:'دَجاج',e:'🍗',hint:'لَحْم طائِر'},
+{w:'لَحْم',e:'🥩',hint:'مِن البَقَر أَوِ الغَنَم'},
+{w:'سَمَك',e:'🐟',hint:'حَيَوان مِن البَحْر'},
+{w:'بَيْض',e:'🥚',hint:'مِن الدَّجاجَة'},
+{w:'زُبْدَة',e:'🧈',hint:'دُهْن أَصْفَر مِن الحَليب'},
+{w:'كُفْتَة',e:'🧆',hint:'طَعام مَشْوِيّ مِن اللَّحْم المَفْروم'},
+{w:'حَساء',e:'🍲',hint:'طَعام سائِل ساخِن'},
+{w:'حَليب',e:'🥛',hint:'مَشْروب أَبْيَض مِن الأَبْقار'},
+{w:'قَهْوَة',e:'☕',hint:'مَشْروب بُنِّيّ ساخِن'},
+{w:'عَصير',e:'🧃',hint:'مَشْروب مِن الفَواكِه'}
 ];
 var g1Sets,g1Cur,g1Sc,g1WNum,g1Timer,g1TimeLeft,g1MaxT=20000,g1Slots,g1Tiles,g1HintUsed;
 
@@ -708,13 +708,13 @@ var bonus=Math.round(g1TimeLeft/g1MaxT*5);
 var pts=10+(g1HintUsed?0:bonus);
 g1Sc+=pts;
 document.getElementById('g1score').textContent=g1Sc;
-document.getElementById('g1fb').innerHTML='✅ صحيح! <span style="color:#FF9800">+'+pts+'</span>';
+document.getElementById('g1fb').innerHTML='✅ صَحيح! <span style="color:#FF9800">+'+pts+'</span>';
 safeTimeout(function(){g1NextWord(true)},900);
 }else{
 sesYanlış();
 var slotEls=document.getElementById('g1slots').querySelectorAll('.g1-slot');
 slotEls.forEach(function(s){s.classList.add('wrong')});
-document.getElementById('g1fb').textContent='❌ حاول مرّة أخرى';
+document.getElementById('g1fb').textContent='❌ حاوِلْ مَرَّةً أُخْرى';
 safeTimeout(function(){
 g1Slots=new Array(chars.length).fill(null);
 g1RenderSlots(chars.length);g1RenderTiles();
@@ -742,7 +742,7 @@ var chars=splitArabic(item.w);if(!chars||chars.length===0)chars=item.w.split('')
 if(g1Slots[0]===null){
 g1Slots[0]=chars[0];
 g1RenderSlots(chars.length);g1RenderTiles();
-document.getElementById('g1fb').textContent='💡 أُعطيت الحرف الأوّل';
+document.getElementById('g1fb').textContent='💡 أُعْطيتَ الحَرْف الأَوَّل';
 }
 }
 
@@ -759,7 +759,7 @@ endGame(1,fs);
 }
 
 /* ============================================================
-   GAME 2: CATEGORY SORT - صنّف الطعام
+   GAME 2: CATEGORY SORT - صنّف الطَّعام
    ============================================================ */
 /* Öğün sınıflandırması KİTAP s.24'e göre:
    - Fatour (Kahvaltı): zeytin+peynir+süt+ekmek+tereyağı
@@ -825,12 +825,12 @@ document.getElementById('g2score').textContent=g2Sc;
 document.getElementById('g2cor').textContent=g2Cor;
 catEl.classList.add('correct-drop');
 safeTimeout(function(){catEl.classList.remove('correct-drop')},600);
-if(g2Combo>=3)document.getElementById('g2combo').textContent='🔥 تتابع ×'+g2Combo+' +'+pts+'!';
+if(g2Combo>=3)document.getElementById('g2combo').textContent='🔥 تَتابُع ×'+g2Combo+' +'+pts+'!';
 else document.getElementById('g2combo').textContent='';
 // Add chip to cat
 var chip=document.createElement('div');chip.className='g2-cat-chip';chip.textContent=item.e+item.w;
 document.getElementById('g2cat'+cat+'items').appendChild(chip);
-document.getElementById('g2fb').innerHTML='✅ صحيح!';
+document.getElementById('g2fb').innerHTML='✅ صَحيح!';
 document.getElementById('g2fb').style.color='#4CAF50';
 g2CurIdx++;
 safeTimeout(function(){document.getElementById('g2fb').textContent='';g2ShowNext()},700);
@@ -839,7 +839,7 @@ sesYanlış();
 g2Combo=0;document.getElementById('g2combo').textContent='';
 catEl.classList.add('wrong-drop');
 safeTimeout(function(){catEl.classList.remove('wrong-drop')},600);
-document.getElementById('g2fb').textContent='❌ حاول مرّة أخرى!';
+document.getElementById('g2fb').textContent='❌ حاوِلْ مَرَّةً أُخْرى!';
 document.getElementById('g2fb').style.color='#F44336';
 safeTimeout(function(){document.getElementById('g2fb').textContent=''},1000);
 }
@@ -858,22 +858,22 @@ endGame(2,fs);
 }
 
 /* ============================================================
-   GAME 3: SENTENCE BUILDER - ابنِ الجملة
+   GAME 3: SENTENCE BUILDER - اِبْنِ الجُمْلَة
    ============================================================ */
 var g3Qs=[
-{e:'⏰',q:'الاستيقاظ في الصباح',correct:['أَسْتَيْقِظُ','في','الصَّباحِ','مُبَكِّرًا'],extra:['مَساءً','أَنامُ']},
-{e:'🕌',q:'صلاة الفجر',correct:['أُصَلِّي','الفَجْرَ','في','المَسْجِدِ'],extra:['العِشاءَ','أَنامُ']},
-{e:'🍳',q:'تناوُل الفطور',correct:['أَتَناوَلُ','الفَطورَ','مَعَ','عائِلَتي'],extra:['وَحْدي','الغَداءَ']},
-{e:'👔',q:'الذهاب للمدرسة',correct:['أَذْهَبُ','إِلى','المَدْرَسَةِ','صَباحًا'],extra:['البَيْتِ','مَساءً']},
-{e:'🏠',q:'العودة من المدرسة',correct:['أَرْجِعُ','إِلى','البَيْتِ','ظُهْرًا'],extra:['مَساءً','المَدْرَسَةِ']},
-{e:'🤝',q:'مساعدة الأم',correct:['أُساعِدُ','أُمِّي','في','البَيْتِ'],extra:['المَدْرَسَةِ','أَبي']},
-{e:'📚',q:'الدراسة في المساء',correct:['أَدْرُسُ','دُروسي','مَساءً'],extra:['صَباحًا','أَلعَبُ']},
-{e:'🌙',q:'صلاة العشاء',correct:['أُصَلِّي','العِشاءَ','قَبْلَ','النَّوْمِ'],extra:['الفَجْرَ','صَباحًا']},
-{e:'😴',q:'النوم في الليل',correct:['أَنامُ','مُبَكِّرًا','في','اللَّيْلِ'],extra:['الصَّباحِ','أَسْتَيْقِظُ']},
-{e:'🍯',q:'وجبة الفطور',correct:['آكُلُ','العَسَلَ','في','الفَطورِ'],extra:['العَشاءِ','السَّمَكَ']},
-{e:'🍗🍚',q:'طعام فاتح',correct:['يَتَناوَلُ','فاتِحٌ','الدَّجاجَ','والأُرُزَ'],accept:[['فاتِحٌ','يَتَناوَلُ','الدَّجاجَ','والأُرُزَ']],extra:['السَّمَكَ','زَيْنَبُ']},
-{e:'👩',q:'هي في الصباح',correct:['هِيَ','تَسْتَيْقِظُ','مُبَكِّرًا','في','الصَّباحِ'],extra:['لَيْلًا','هُوَ']},
-{e:'📖',q:'أنتِ في المساء',correct:['أَنْتِ','تَدْرُسينَ','دُروسَكِ','مَساءً'],extra:['صَباحًا','تَدْرُسُ']}
+{e:'⏰',q:'الاسْتيقاظ في الصَّباح',correct:['أَسْتَيْقِظُ','في','الصَّباحِ','مُبَكِّرًا'],extra:['مَساءً','أَنامُ']},
+{e:'🕌',q:'صَلاة الفَجْر',correct:['أُصَلِّي','الفَجْرَ','في','المَسْجِدِ'],extra:['العِشاءَ','أَنامُ']},
+{e:'🍳',q:'تَناوُل الفَطور',correct:['أَتَناوَلُ','الفَطورَ','مَعَ','عائِلَتي'],extra:['وَحْدي','الغَداءَ']},
+{e:'👔',q:'الذَّهاب لِلْمَدْرَسَة',correct:['أَذْهَبُ','إِلى','المَدْرَسَةِ','صَباحًا'],extra:['البَيْتِ','مَساءً']},
+{e:'🏠',q:'العَوْدَة مِن المَدْرَسَة',correct:['أَرْجِعُ','إِلى','البَيْتِ','ظُهْرًا'],extra:['مَساءً','المَدْرَسَةِ']},
+{e:'🤝',q:'مُساعَدَة الأُمّ',correct:['أُساعِدُ','أُمِّي','في','البَيْتِ'],extra:['المَدْرَسَةِ','أَبي']},
+{e:'📚',q:'الدِّراسَة في المَساء',correct:['أَدْرُسُ','دُروسي','مَساءً'],extra:['صَباحًا','أَلعَبُ']},
+{e:'🌙',q:'صَلاة العِشاء',correct:['أُصَلِّي','العِشاءَ','قَبْلَ','النَّوْمِ'],extra:['الفَجْرَ','صَباحًا']},
+{e:'😴',q:'النَّوْم في اللَّيْل',correct:['أَنامُ','مُبَكِّرًا','في','اللَّيْلِ'],extra:['الصَّباحِ','أَسْتَيْقِظُ']},
+{e:'🍯',q:'وَجْبَة الفَطور',correct:['آكُلُ','العَسَلَ','في','الفَطورِ'],extra:['العَشاءِ','السَّمَكَ']},
+{e:'🍗🍚',q:'طَعام فاتِح',correct:['يَتَناوَلُ','فاتِحٌ','الدَّجاجَ','والأُرُزَ'],accept:[['فاتِحٌ','يَتَناوَلُ','الدَّجاجَ','والأُرُزَ']],extra:['السَّمَكَ','زَيْنَبُ']},
+{e:'👩',q:'هِيَ في الصَّباح',correct:['هِيَ','تَسْتَيْقِظُ','مُبَكِّرًا','في','الصَّباحِ'],extra:['لَيْلًا','هُوَ']},
+{e:'📖',q:'أَنْتِ في المَساء',correct:['أَنْتِ','تَدْرُسينَ','دُروسَكِ','مَساءً'],extra:['صَباحًا','تَدْرُسُ']}
 ];
 var g3Cur,g3Sc,g3Built,g3Chips,g3Mistakes;
 
@@ -944,7 +944,7 @@ document.getElementById('g3built').classList.add('complete');
 var pts=g3Mistakes===0?10:g3Mistakes===1?7:5;
 g3Sc+=pts;
 document.getElementById('g3score').textContent=g3Sc;
-document.getElementById('g3fb').innerHTML='✅ ممتاز! +'+pts+' نقاط';
+document.getElementById('g3fb').innerHTML='✅ مُمْتاز! +'+pts+' نِقاط';
 document.getElementById('g3fb').style.color='#4CAF50';
 safeTimeout(function(){
 document.getElementById('g3built').classList.remove('complete');
@@ -955,7 +955,7 @@ if(g3Cur>=g3Qs.length)g3End();else g3LoadQ();
 sesYanlış();
 g3Mistakes++;
 document.getElementById('g3built').classList.add('wrong');
-document.getElementById('g3fb').textContent='❌ الترتيب غير صحيح، حاول مرّة أخرى';
+document.getElementById('g3fb').textContent='❌ التَّرْتيب غَيْر صَحيح، حاوِلْ مَرَّةً أُخْرى';
 document.getElementById('g3fb').style.color='#F44336';
 safeTimeout(function(){
 document.getElementById('g3built').classList.remove('wrong');
@@ -977,25 +977,25 @@ endGame(3,fs);
 }
 
 /* ============================================================
-   GAME 4: ODD ONE OUT - اقصف الخطأ
+   GAME 4: ODD ONE OUT - اِقْصِف الخَطَأ
    ============================================================ */
 var g4All=[
-{cat:'أطعمة الفطور',opts:['خُبْز','جُبْن','عَسَل','سَمَك'],odd:3,explain:'السمك طعام العشاء'},
-{cat:'أنشطة المساء',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَتَناوَلُ الفَطور'],odd:3,explain:'الفطور في الصباح'},
-{cat:'المشروبات',opts:['شاي','حَليب','عَصير','دَجاج'],odd:3,explain:'الدجاج طعام وليس مشروبًا'},
-{cat:'أنشطة الصباح',opts:['أَسْتَيْقِظُ','أَتَوَضَّأُ','أَتَناوَلُ الفَطور','أَنامُ'],odd:3,explain:'النوم في الليل'},
-{cat:'أدوات المائدة',opts:['شَوْكَة','سِكّين','مِلْعَقَة','حَليب'],odd:3,explain:'الحليب مشروب وليس أداة'},
-{cat:'أطعمة الغداء',opts:['أُرُز','دَجاج','كُفْتَة','خُبْز'],odd:3,explain:'الخبز طعام الفطور'},
-{cat:'أنشطة الليل',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَلْبَسُ مَلابِسي'],odd:3,explain:'لبس الملابس في الصباح'},
-{cat:'الأطعمة',opts:['خُبْز','عَسَل','جُبْن','مِلْعَقَة'],odd:3,explain:'الملعقة أداة وليست طعامًا'},
-{cat:'ظروف الزمان',opts:['صَباحًا','مُبَكِّرًا','في الصَباح','لَيْلًا'],odd:3,explain:'ليلًا عكس الصباح'},
-/* أسلوب الكتاب: الجملة الخاطئة — الطالب يقرأ جملاً كاملة ويجد الخطأ بنفسه */
-{cat:'الجُمْلَة الخَاطِئَة',opts:['هُوَ يَسْتَيْقِظُ مُبَكِّرًا.','هِيَ تُصَلِّي الفَجْر.','أَنا أَتَناوَلُ الفَطور.','هُوَ تَسْتَيْقِظُ لَيْلًا.'],odd:3,explain:'هُوَ + تَسْتَيْقِظُ لا يتناسبان'},
-{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَذْهَبُ إِلى المَدْرَسَة.','هُوَ يَرْجِعُ ظُهْرًا.','أَنا أُساعِدُ أُمِّي.','هِيَ يَتَناوَلُ الغَداء.'],odd:3,explain:'هِيَ + يَتَناوَلُ لا يتناسبان'},
-{cat:'الجُمْلَة الخَاطِئَة',opts:['أَنْتَ تَدْرُسُ مَساءً.','أَنْتِ تَنامينَ لَيْلًا.','هُوَ يُصَلِّي العِشاء.','أَنْتِ تَذْهَبُ إِلى البَيْت.'],odd:3,explain:'أَنْتِ + تَذْهَبُ غير صحيح — الصحيح: تَذْهَبينَ'},
-{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَلْبَسُ مَلابِسَها.','هُوَ يَذْهَبُ إِلى المَسْجِد.','أَنا أَنامُ بَعدَ العِشاء.','أَنْتَ تَدْرُسينَ دُروسَكَ.'],odd:3,explain:'أَنْتَ + تَدْرُسينَ — هذه صيغة أَنْتِ'},
-{cat:'الجُمْلَة الخَاطِئَة',opts:['أَنا أُصَلِّي الفَجْر مُبَكِّرًا.','هِيَ تُساعِدُ أُمَّها.','هُوَ يَرْجِعُ إِلى البَيْت.','هُوَ تَدْرُسُ دُروسَهُ.'],odd:3,explain:'هُوَ + تَدْرُسُ لا يتناسبان'},
-{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَشْرَبُ الحَليب.','أَنْتِ تَتَناوَلينَ الفَطور.','هُوَ يُصَلِّي الظُّهْر.','أَنْتِ تَشْرَبُ الشّاي.'],odd:3,explain:'أَنْتِ + تَشْرَبُ — الصحيح: تَشْرَبينَ'}
+{cat:'أَطْعِمَة الفَطور',opts:['خُبْز','جُبْن','عَسَل','سَمَك'],odd:3,explain:'السَّمَك طَعام العَشاء'},
+{cat:'أَنْشِطَة المَساء',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَتَناوَلُ الفَطور'],odd:3,explain:'الفَطور في الصَّباح'},
+{cat:'المَشْروبات',opts:['شاي','حَليب','عَصير','دَجاج'],odd:3,explain:'الدَّجاج طَعام وَلَيْسَ مَشْروبًا'},
+{cat:'أَنْشِطَة الصَّباح',opts:['أَسْتَيْقِظُ','أَتَوَضَّأُ','أَتَناوَلُ الفَطور','أَنامُ'],odd:3,explain:'النَّوْم في اللَّيْل'},
+{cat:'أَدَوات المائِدَة',opts:['شَوْكَة','سِكّين','مِلْعَقَة','حَليب'],odd:3,explain:'الحَليب مَشْروب وَلَيْسَ أَداة'},
+{cat:'أَطْعِمَة الغَداء',opts:['أُرُز','دَجاج','كُفْتَة','خُبْز'],odd:3,explain:'الخُبْز طَعام الفَطور'},
+{cat:'أَنْشِطَة اللَّيْل',opts:['أَدْرُسُ دُروسي','أُصَلِّي العِشاء','أَنامُ','أَلْبَسُ مَلابِسي'],odd:3,explain:'لُبْس المَلابِس في الصَّباح'},
+{cat:'الأَطْعِمَة',opts:['خُبْز','عَسَل','جُبْن','مِلْعَقَة'],odd:3,explain:'المِلْعَقَة أَداة وَلَيْسَتْ طَعامًا'},
+{cat:'ظُروف الزَّمان',opts:['صَباحًا','مُبَكِّرًا','في الصَّباح','لَيْلًا'],odd:3,explain:'لَيْلًا عَكْس الصَّباح'},
+/* أسلوب الكتاب: الجملة الخاطئة — الطالب يقرأ جملاً كاملة ويجد الخَطَأ بنفسه */
+{cat:'الجُمْلَة الخَاطِئَة',opts:['هُوَ يَسْتَيْقِظُ مُبَكِّرًا.','هِيَ تُصَلِّي الفَجْر.','أَنا أَتَناوَلُ الفَطور.','هُوَ تَسْتَيْقِظُ لَيْلًا.'],odd:3,explain:'هُوَ + تَسْتَيْقِظُ لا يَتَناسَبان'},
+{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَذْهَبُ إِلى المَدْرَسَة.','هُوَ يَرْجِعُ ظُهْرًا.','أَنا أُساعِدُ أُمِّي.','هِيَ يَتَناوَلُ الغَداء.'],odd:3,explain:'هِيَ + يَتَناوَلُ لا يَتَناسَبان'},
+{cat:'الجُمْلَة الخَاطِئَة',opts:['أَنْتَ تَدْرُسُ مَساءً.','أَنْتِ تَنامينَ لَيْلًا.','هُوَ يُصَلِّي العِشاء.','أَنْتِ تَذْهَبُ إِلى البَيْت.'],odd:3,explain:'أَنْتِ + تَذْهَبُ غَيْر صَحيح — الصَّحيح: تَذْهَبينَ'},
+{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَلْبَسُ مَلابِسَها.','هُوَ يَذْهَبُ إِلى المَسْجِد.','أَنا أَنامُ بَعْدَ العِشاء.','أَنْتَ تَدْرُسينَ دُروسَكَ.'],odd:3,explain:'أَنْتَ + تَدْرُسينَ — هذه صيغَة أَنْتِ'},
+{cat:'الجُمْلَة الخَاطِئَة',opts:['أَنا أُصَلِّي الفَجْر مُبَكِّرًا.','هِيَ تُساعِدُ أُمَّها.','هُوَ يَرْجِعُ إِلى البَيْت.','هُوَ تَدْرُسُ دُروسَه.'],odd:3,explain:'هُوَ + تَدْرُسُ لا يَتَناسَبان'},
+{cat:'الجُمْلَة الخَاطِئَة',opts:['هِيَ تَشْرَبُ الحَليب.','أَنْتِ تَتَناوَلينَ الفَطور.','هُوَ يُصَلِّي الظُّهْر.','أَنْتِ تَشْرَبُ الشّاي.'],odd:3,explain:'أَنْتِ + تَشْرَبُ — الصَّحيح: تَشْرَبينَ'}
 ];
 var g4Qs,g4Cur,g4Sc,g4Timer4,g4curOdd;
 var G4_TIME=20000;
@@ -1013,7 +1013,7 @@ function g4LoadQ(){
 clearInterval(g4Timer4);
 var q=g4Qs[g4Cur];
 document.getElementById('g4qnum').textContent=g4Cur+1;
-document.getElementById('g4cat').textContent='المجموعة: '+q.cat;
+document.getElementById('g4cat').textContent='المَجْموعَة: '+q.cat;
 document.getElementById('g4fb').textContent='';
 document.getElementById('g4explain').textContent='';
 var optsEl=document.getElementById('g4opts');optsEl.innerHTML='';
@@ -1048,14 +1048,14 @@ if(btn)btn.classList.add('correct');
 var timeLeft=parseInt(document.getElementById('g4tbar').style.width||'0');
 g4Sc+=10;
 document.getElementById('g4score').textContent=g4Sc;
-document.getElementById('g4fb').textContent='✅ صحيح!';
+document.getElementById('g4fb').textContent='✅ صَحيح!';
 document.getElementById('g4fb').style.color='#4CAF50';
 }else{
 sesYanlış();
 if(btn)btn.classList.add('wrong');
 var correctBtn=document.querySelectorAll('.g4-opt')[g4curOdd];
 if(correctBtn)correctBtn.classList.add('correct');
-document.getElementById('g4fb').textContent=idx===-1?'⏰ انتهى الوقت':'❌ خطأ';
+document.getElementById('g4fb').textContent=idx===-1?'⏰ اِنْتَهى الوَقْت':'❌ خَطَأ';
 document.getElementById('g4fb').style.color='#F44336';
 document.getElementById('g4explain').textContent='💡 '+q.explain;
 document.getElementById('g4explain').style.color='#880E4F';
@@ -1077,29 +1077,29 @@ endGame(4,fs);
 }
 
 /* ============================================================
-   GAME 5: SPEED QUIZ - الوقت يضغط
+   GAME 5: SPEED QUIZ - الوَقْت يَضْغَطُ
    ============================================================ */
 var g5Levels=[
-{label:'المستوى الأول 🟢',time:10000,qs:[
-{type:'vocab',emoji:'🍞',q:'ما هذا الطعام؟',opts:['خُبْز','جُبْن','شاي','أُرُز'],ans:0},
+{label:'المُسْتَوى الأَوَّل 🟢',time:10000,qs:[
+{type:'vocab',emoji:'🍞',q:'ما هذا الطَّعام؟',opts:['خُبْز','جُبْن','شاي','أُرُز'],ans:0},
 {type:'vocab',emoji:'🧀',q:'ما هذا؟',opts:['جُبْن','خُبْز','سَمَك','بَيْض'],ans:0},
 {type:'vocab',emoji:'🍯',q:'ما هذا؟',opts:['عَسَل','زُبْدَة','حَساء','كُفْتَة'],ans:0},
 {type:'vocab',emoji:'🍗',q:'ما هذا؟',opts:['دَجاج','لَحْم','سَمَك','أُرُز'],ans:0},
-{type:'vocab',emoji:'🥛',q:'ما هذا المشروب؟',opts:['حَليب','شاي','عَصير','قَهْوَة'],ans:0}
+{type:'vocab',emoji:'🥛',q:'ما هذا المَشْروب؟',opts:['حَليب','شاي','عَصير','قَهْوَة'],ans:0}
 ]},
-{label:'المستوى الثاني 🟡',time:8000,qs:[
-{type:'grammar',q:'هُوَ _____ في الصَباح مُبَكِّرًا.',opts:['يَسْتَيْقِظُ','تَسْتَيْقِظُ','أَسْتَيْقِظُ','تَسْتَيْقِظينَ'],ans:0},
+{label:'المُسْتَوى الثّاني 🟡',time:8000,qs:[
+{type:'grammar',q:'هُوَ _____ في الصَّباح مُبَكِّرًا.',opts:['يَسْتَيْقِظُ','تَسْتَيْقِظُ','أَسْتَيْقِظُ','تَسْتَيْقِظينَ'],ans:0},
 {type:'grammar',q:'هِيَ _____ الفَطور مَعَ عائِلَتِها.',opts:['تَتَناوَلُ','يَتَناوَلُ','أَتَناوَلُ','تَتَناوَلينَ'],ans:0},
 {type:'grammar',q:'أَنْتِ _____ إِلى المَدْرَسَة.',opts:['تَذْهَبينَ','تَذْهَبُ','يَذْهَبُ','أَذْهَبُ'],ans:0},
-{type:'grammar',q:'أَنْتَ _____ دُروسَك مَساءً.',opts:['تَدْرُسُ','يَدْرُسُ','تَدْرُسينَ','أَدْرُسُ'],ans:0},
-{type:'grammar',q:'هُوَ _____ أُمَّهُ في البَيْت.',opts:['يُساعِدُ','تُساعِدُ','أُساعِدُ','تُساعِدينَ'],ans:0}
+{type:'grammar',q:'أَنْتَ _____ دُروسَكَ مَساءً.',opts:['تَدْرُسُ','يَدْرُسُ','تَدْرُسينَ','أَدْرُسُ'],ans:0},
+{type:'grammar',q:'هُوَ _____ أُمَّه في البَيْت.',opts:['يُساعِدُ','تُساعِدُ','أُساعِدُ','تُساعِدينَ'],ans:0}
 ]},
-{label:'المستوى الثالث 🔴',time:6000,qs:[
+{label:'المُسْتَوى الثّالِث 🔴',time:6000,qs:[
 {type:'fill',q:'أَتَناوَلُ الفَطور _____ عائِلَتي.',opts:['مَعَ','في','مِن','إِلى'],ans:0},
-{type:'fill',q:'أَذْهَبُ إِلى المَدْرَسَة في السّاعة _____.',opts:['الثّامِنَة','الواحِدَة','الحادِيَة عَشْرَة','السّادِسَة'],ans:0},
-{type:'fill',q:'آكُلُ _____ وَالأُرُز في الغَداء.',opts:['الدَجاج','السَمَك','العَسَل','الجُبْن'],ans:0},
-{type:'fill',q:'أَنامُ في السّاعة الحادِيَة عَشْرَة _____.',opts:['لَيْلًا','صَباحًا','ظُهْرًا','مَساءً'],ans:0},
-{type:'fill',q:'ماذا _____ مِنَ المَشروبات؟',opts:['تُريدُ','تَأكُلُ','تَلبَسُ','تَذهَبُ'],ans:0}
+{type:'fill',q:'أَذْهَبُ إِلى المَدْرَسَة في السّاعَة _____.',opts:['الثّامِنَة','الواحِدَة','الحادِيَة عَشْرَة','السّادِسَة'],ans:0},
+{type:'fill',q:'آكُلُ _____ وَالأُرُز في الغَداء.',opts:['الدَّجاج','السَّمَك','العَسَل','الجُبْن'],ans:0},
+{type:'fill',q:'أَنامُ في السّاعَة الحادِيَة عَشْرَة _____.',opts:['لَيْلًا','صَباحًا','ظُهْرًا','مَساءً'],ans:0},
+{type:'fill',q:'ماذا _____ مِن المَشْروبات؟',opts:['تُريدُ','تَأْكُلُ','تَلْبَسُ','تَذْهَبُ'],ans:0}
 ]}
 ];
 var g5AllQs,g5Cur,g5Sc,g5Streak,g5Correct,g5Timer5;
@@ -1138,7 +1138,7 @@ optsEl.appendChild(b);
 });
 // Update multiplier display
 var mult=g5Streak>=6?3:g5Streak>=3?2:1;
-document.getElementById('g5multi').textContent=mult>1?'🔥 ×'+mult+' مضاعف!':'';
+document.getElementById('g5multi').textContent=mult>1?'🔥 ×'+mult+' مُضاعَف!':'';
 // Timer
 var start=Date.now();var timeEl=document.getElementById('g5tbar');
 g5Timer5=safeInterval(function(){
@@ -1161,7 +1161,7 @@ var mult=g5Streak>=6?3:g5Streak>=3?2:1;
 var pts=10*mult;g5Sc+=pts;
 document.getElementById('g5score').textContent=g5Sc;
 document.getElementById('g5streak').textContent='🔥'+g5Streak;
-document.getElementById('g5fb').textContent='✅ صحيح! +'+pts;
+document.getElementById('g5fb').textContent='✅ صَحيح! +'+pts;
 document.getElementById('g5fb').style.color='#4CAF50';
 }else{
 sesYanlış();
@@ -1169,7 +1169,7 @@ if(btn)btn.classList.add('wrong');
 g5Streak=0;
 document.getElementById('g5streak').textContent='';
 document.getElementById('g5multi').textContent='';
-document.getElementById('g5fb').textContent=btn?'❌ خطأ':'⏰ انتهى الوقت';
+document.getElementById('g5fb').textContent=btn?'❌ خَطَأ':'⏰ اِنْتَهى الوَقْت';
 document.getElementById('g5fb').style.color='#F44336';
 }
 g5Cur++;safeTimeout(g5LoadQ,1500);
@@ -1182,35 +1182,35 @@ document.getElementById('g5game').classList.add('hidden');
 document.getElementById('g5result').classList.remove('hidden');
 document.getElementById('g5final').textContent=fs+'%';
 document.getElementById('g5stars').textContent=stars(fs);
-document.getElementById('g5msg').textContent=msg(fs)+(g5Streak>0?' أفضل تتابع: '+g5Streak:'');
+document.getElementById('g5msg').textContent=msg(fs)+(g5Streak>0?' أَفْضَل تَتابُع: '+g5Streak:'');
 endGame(5,fs);
 }
 
 /* ============================================================
-   GAME 6: JOURNEY - رحلة اليوم
+   GAME 6: JOURNEY - رِحْلَة اليَوْم
    ============================================================ */
 var g6Locs=[
-{emoji:'🏠',title:'البَيت - الصَباح',color:'#E8F5E9',titleBg:'#C8E6C9',titleColor:'#1B5E20',qs:[
-{q:'ما أوَّل شيء يَفعَلُهُ فاتِح في الصَباح؟',opts:['يَسْتَيْقِظُ مُبَكِّرًا','يَنامُ','يَذْهَبُ للمَدرَسَة','يَتَناوَلُ الغَداء'],ans:0},
-{q:'ماذا يَتَناوَلُ فاتِح في الفَطور؟',opts:['العَسَل وَالزُبْدَة','السَمَك وَالأُرُز','الكُفتَة فَقَط','الدَجاج'],ans:0}
+{emoji:'🏠',title:'البَيْت - الصَّباح',color:'#E8F5E9',titleBg:'#C8E6C9',titleColor:'#1B5E20',qs:[
+{q:'ما أَوَّل شَيْء يَفْعَلُه فاتِح في الصَّباح؟',opts:['يَسْتَيْقِظُ مُبَكِّرًا','يَنامُ','يَذْهَبُ لِلْمَدْرَسَة','يَتَناوَلُ الغَداء'],ans:0},
+{q:'ماذا يَتَناوَلُ فاتِح في الفَطور؟',opts:['العَسَل وَالزُّبْدَة','السَّمَك وَالأُرُز','الكُفْتَة فَقَط','الدَّجاج'],ans:0}
 ]},
-{emoji:'🕌',title:'المَسجِد',color:'#E3F2FD',titleBg:'#BBDEFB',titleColor:'#0D47A1',qs:[
-{q:'في أي وَقتٍ يُصَلِّي فاتِح الفَجر؟',opts:['في الصَباح مُبَكِّرًا','في المَساء','عِندَ الظُهر','في اللَيل'],ans:0},
-{q:'أَتَوَضَّأُ، ثُمَّ أُصَلِّي الفَجر، ثُمَّ _____.',opts:['أَتَناوَلُ الفَطور','أَنامُ','أَذهَبُ للمَدرَسَة مُباشَرَةً','أَلبَسُ مَلابِسي'],ans:0}
+{emoji:'🕌',title:'المَسْجِد',color:'#E3F2FD',titleBg:'#BBDEFB',titleColor:'#0D47A1',qs:[
+{q:'في أَيّ وَقْت يُصَلِّي فاتِح الفَجْر؟',opts:['في الصَّباح مُبَكِّرًا','في المَساء','عِنْدَ الظُّهْر','في اللَّيْل'],ans:0},
+{q:'أَتَوَضَّأُ، ثُمَّ أُصَلِّي الفَجْر، ثُمَّ _____.',opts:['أَتَناوَلُ الفَطور','أَنامُ','أَذْهَبُ لِلْمَدْرَسَة مُباشَرَةً','أَلْبَسُ مَلابِسي'],ans:0}
 ]},
-{emoji:'🏫',title:'المَدرَسَة',color:'#FFF9C4',titleBg:'#FFF176',titleColor:'#F57F17',qs:[
-{q:'في أي ساعة يَذهَبُ فاتِح إِلى المَدرَسَة؟',opts:['الثّامِنَة','السّابِعَة','التّاسِعَة','السّادِسَة'],ans:0},
-{q:'مَتى يَرجِعُ فاتِح إِلى البَيت؟',opts:['ظُهرًا','صَباحًا','مَساءً','لَيلًا'],ans:0},
-{q:'ماذا يَعمَلُ فاتِح بَعدَ الرُجوع؟',opts:['يُساعِدُ أُمَّهُ في البَيت','يَنامُ مُباشَرَةً','يَلعَبُ خارِج البَيت','يَذهَبُ للمَطعَم'],ans:0}
+{emoji:'🏫',title:'المَدْرَسَة',color:'#FFF9C4',titleBg:'#FFF176',titleColor:'#F57F17',qs:[
+{q:'في أَيّ ساعَة يَذْهَبُ فاتِح إِلى المَدْرَسَة؟',opts:['الثّامِنَة','السّابِعَة','التّاسِعَة','السّادِسَة'],ans:0},
+{q:'مَتى يَرْجِعُ فاتِح إِلى البَيْت؟',opts:['ظُهرًا','صَباحًا','مَساءً','لَيلًا'],ans:0},
+{q:'ماذا يَعْمَلُ فاتِح بَعْدَ الرُّجوع؟',opts:['يُساعِدُ أُمَّه في البَيْت','يَنامُ مُباشَرَةً','يَلْعَبُ خارِج البَيْت','يَذْهَبُ لِلْمَطْعَم'],ans:0}
 ]},
-{emoji:'🍽️',title:'المَطعَم',color:'#FCE4EC',titleBg:'#F8BBD9',titleColor:'#880E4F',qs:[
-{q:'ماذا يُريدُ فاتِح مِنَ المَأكولات في المَطعَم؟',opts:['الكُفتَة وَالأُرُز','السَمَك فَقَط','العَسَل','الجُبن وَالزَيتون'],ans:0},
-{q:'هَل يُحِبُّ فاتِح الكُفتَة؟',opts:['نَعَم، يُحِبُّها كَثيرًا','لا، لا يُحِبُّها أَبَدًا','نَعَم، قَليلًا','لا يَعرِف'],ans:0}
+{emoji:'🍽️',title:'المَطْعَم',color:'#FCE4EC',titleBg:'#F8BBD9',titleColor:'#880E4F',qs:[
+{q:'ماذا يُريدُ فاتِح مِن المَأْكولات في المَطْعَم؟',opts:['الكُفْتَة وَالأُرُز','السَّمَك فَقَط','العَسَل','الجُبْن وَالزَّيْتون'],ans:0},
+{q:'هَل يُحِبُّ فاتِح الكُفْتَة؟',opts:['نَعَم، يُحِبُّها كَثيرًا','لا، لا يُحِبُّها أَبَدًا','نَعَم، قَليلًا','لا يَعْرِف'],ans:0}
 ]},
-{emoji:'🌙',title:'البَيت - المَساء',color:'#EDE7F6',titleBg:'#CE93D8',titleColor:'#4A148C',qs:[
-{q:'ماذا يَعمَلُ فاتِح في المَساء؟',opts:['يَدرُسُ دُروسَهُ','يَلعَبُ فَقَط','يَذهَبُ للمَطعَم','يَسبَحُ'],ans:0},
-{q:'ما آخِر شيء يَفعَلُهُ فاتِح قَبلَ النَوم؟',opts:['يُصَلِّي العِشاء','يَدرُسُ','يَتَناوَلُ العَشاء','يُساعِدُ أُمَّهُ'],ans:0},
-{q:'في أي ساعة يَنامُ فاتِح؟',opts:['الحادِيَة عَشرَة لَيلًا','الثّامِنَة','السّابِعَة','التّاسِعَة'],ans:0}
+{emoji:'🌙',title:'البَيْت - المَساء',color:'#EDE7F6',titleBg:'#CE93D8',titleColor:'#4A148C',qs:[
+{q:'ماذا يَعْمَلُ فاتِح في المَساء؟',opts:['يَدْرُسُ دُروسَه','يَلْعَبُ فَقَط','يَذْهَبُ لِلْمَطْعَم','يَسْبَحُ'],ans:0},
+{q:'ما آخِر شَيْء يَفْعَلُه فاتِح قَبْلَ النَّوْم؟',opts:['يُصَلِّي العِشاء','يَدْرُسُ','يَتَناوَلُ العَشاء','يُساعِدُ أُمَّه'],ans:0},
+{q:'في أَيّ ساعَة يَنامُ فاتِح؟',opts:['الحادِيَة عَشْرَة لَيلًا','الثّامِنَة','السّابِعَة','التّاسِعَة'],ans:0}
 ]}
 ];
 var g6CurLoc,g6CurQ,g6Cor,g6TotalQ,g6NodePositions;
@@ -1273,7 +1273,7 @@ g6LoadQ();
 function g6LoadQ(){
 var loc=g6Locs[g6CurLoc];var q=loc.qs[g6CurQ];
 var totalInLoc=loc.qs.length;
-document.getElementById('g6progress').textContent='السؤال '+(g6CurQ+1)+' من '+totalInLoc+' في هذه المحطّة';
+document.getElementById('g6progress').textContent='السُّؤال '+(g6CurQ+1)+' من '+totalInLoc+' في هذه المحطّة';
 document.getElementById('g6fb').textContent='';
 var card=document.getElementById('g6loccard');
 card.style.background=loc.color;
@@ -1297,7 +1297,7 @@ btn.classList.add('correct');g6Cor++;
 document.getElementById('g6cor').textContent=g6Cor;
 var sc=Math.round(g6Cor/g6TotalQ*100);
 document.getElementById('g6score').textContent=sc;
-document.getElementById('g6fb').textContent='✅ صحيح!';
+document.getElementById('g6fb').textContent='✅ صَحيح!';
 document.getElementById('g6fb').style.color='#4CAF50';
 safeTimeout(function(){
 document.getElementById('g6fb').textContent='';
@@ -1308,7 +1308,7 @@ g6CurLoc++;
 if(g6CurLoc>=5)g6End();
 else{
 // Brief transition
-document.getElementById('g6fb').textContent='✈️ انتقلنا إلى المحطة التالية!';
+document.getElementById('g6fb').textContent='✈️ اِنْتَقَلْنا إِلى المَحَطَّة التّالِيَة!';
 document.getElementById('g6fb').style.color='#9C27B0';
 safeTimeout(function(){document.getElementById('g6fb').textContent='';g6LoadLocation()},1200);
 }
@@ -1317,7 +1317,7 @@ safeTimeout(function(){document.getElementById('g6fb').textContent='';g6LoadLoca
 }else{
 sesYanlış();
 btn.classList.add('wrong');
-document.getElementById('g6fb').textContent='❌ حاول مرّة أخرى!';
+document.getElementById('g6fb').textContent='❌ حاوِلْ مَرَّةً أُخْرى!';
 document.getElementById('g6fb').style.color='#F44336';
 safeTimeout(function(){
 document.querySelectorAll('.g6-opt').forEach(function(b){b.classList.remove('disabled','wrong','correct')});
@@ -1335,7 +1335,7 @@ document.getElementById('g6game').classList.add('hidden');
 document.getElementById('g6result').classList.remove('hidden');
 document.getElementById('g6final').textContent=fs+'%';
 document.getElementById('g6stars').textContent=stars(fs);
-document.getElementById('g6msg').textContent='أنهيتَ رحلة اليوم مع فاتح! '+msg(fs);
+document.getElementById('g6msg').textContent='أَنْهَيْتَ رِحْلَة اليَوْم مَعَ فاتِح! '+msg(fs);
 endGame(6,fs);
 }
 
@@ -1350,7 +1350,7 @@ updateMenu();
 #hub-back:hover{background:rgba(0,0,0,.85)}
 #backBtn{display:none!important}
 </style>
-<a id="hub-back" href="./index.html">↩ القائمة</a>
+<a id="hub-back" href="./index.html">↩ القائِمَة</a>
 <script>
 window.goMenu=function(){location.href='./index.html'};
 </script>

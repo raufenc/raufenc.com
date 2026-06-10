@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>عَلامَةُ الأَسْعار — السِّعْر</title>
+<title>عَلامَة الأَسْعار — السِّعْر</title>
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -44,21 +44,21 @@ h1{text-align:center;color:#C2185B;font-size:2.2em;margin-bottom:6px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
-<h1>🏷️ عَلامَةُ الأَسْعار</h1>
-<div class="sub">اِسْحَبْ كُلَّ عَلامَةِ سِعْرٍ إلى المُنْتَجِ المُناسِبِ</div>
+<h1>🏷️ عَلامَة الأَسْعار</h1>
+<div class="sub">اِسْحَبْ كُلّ عَلامَة سِعْر إِلى المُنْتَج المُناسِب</div>
 <div id="game">
 <div class="tip">
-<b>📘 الأَرقام بِالعَرَبِيَّة:</b> ٥ = خَمْس · ٧ = سَبْع · ١٠ = عَشَر · ١٥ = خَمْس عَشْرَة · ٢٠ = عِشْرين — مَعَ كَلِمَة "لِيرات".
+<b>📘 الأَرْقام بِالعَرَبِيَّة:</b> ٥ = خَمْس · ٧ = سَبْع · ١٠ = عَشَر · ١٥ = خَمْس عَشْرَة · ٢٠ = عِشْرين — مَعَ كَلِمَة "لِيرات".
 </div>
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>المَرحَلَة: <span id="rnd">1</span>/3</span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>المَرْحَلَة: <span id="rnd">1</span>/3</span></div>
 <div class="shelf" id="shelf"></div>
 <div class="tags" id="tags"></div>
 <div class="fb" id="fb"></div>
 </div>
 <div id="result" class="result hidden">
-<h2 style="color:#C2185B">🎉 أَحْسَنْت!</h2>
+<h2 style="color:#C2185B">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#AD1457;margin-bottom:14px"></div>
@@ -164,7 +164,7 @@ else{setTimeout(loadRound,1100)}
 }
 }else{
 ds.target.classList.add('wrong');setTimeout(function(){ds.target.classList.remove('wrong')},420);
-document.getElementById('fb').textContent='❌ ليس هَذا السِّعْر';document.getElementById('fb').style.color='#F44336';
+document.getElementById('fb').textContent='❌ لَيْسَ هَذا السِّعْر';document.getElementById('fb').style.color='#F44336';
 setTimeout(function(){document.getElementById('fb').textContent=''},1100);
 }
 }
@@ -175,7 +175,7 @@ var fs=Math.round(sc/120*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>

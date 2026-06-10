@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>اقصف الخطأ — أَفْعالُ السَّفَر</title>
+<title>اِقْصِف الخَطَأ — أَفْعال السَّفَر</title>
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -40,15 +40,15 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
-<h1>💥 اقْصِفِ الخَطَأ<span class="edited-tag">✎ وَقْت ٢٠ث · سَفَر</span></h1>
-<div class="sub">اخْتَرْ الكَلِمَةَ الَّتي لا تَنْتَمي إلى المَجْموعَة (الوَقْت ٢٠ ثانِيَة)</div>
+<h1>💥 اقْصِف الخَطَأ<span class="edited-tag">✎ وَقْت ٢٠ث · سَفَر</span></h1>
+<div class="sub">اخْتَر الكَلِمَة الَّتي لا تَنْتَمي إِلى المَجْموعَة (الوَقْت ٢٠ ثانِيَة)</div>
 <div id="game">
 <div class="tip">
-<b>📘 التَّعْليمات:</b> في كُلِّ مَجْموعَةٍ كَلِمَةٌ واحِدَةٌ لا تُناسِبُ الباقِيَ — اِقْصِفْها قَبْلَ انْتِهاءِ الوَقْتِ!
+<b>📘 التَّعْليمات:</b> في كُلّ مَجْموعَة كَلِمَة واحِدَة لا تُناسِبُ الباقِي — اِقْصِفْها قَبْلَ انْتِهاء الوَقْت!
 </div>
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>السُّؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
 <div class="timer-wrap"><div class="timer-bar" id="tbar" style="width:100%"></div></div>
 <div class="cat" id="cat">…</div>
 <div class="opts" id="opts"></div>
@@ -56,7 +56,7 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 <div class="exp" id="exp"></div>
 </div>
 <div id="result" class="result hidden">
-<h2 style="color:#7B1FA2">🎉 أَحْسَنْت!</h2>
+<h2 style="color:#7B1FA2">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#9C27B0;margin-bottom:14px"></div>
@@ -69,17 +69,17 @@ var TIME=20000;  // 20 saniye
 
 var ALL=[
 
-{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
-{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة'},
-{cat:'وَسائِطُ النَّقْلِ البَرِّيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرِيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة'},
+{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرِيَّة — الباقي بَرّيَّة'},
 
-{cat:'كَلِماتُ المُقارَنَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','سَيّارَة'],odd:3,exp:'سَيّارَة اسْمٌ، والباقي صيَغُ تَفْضيلٍ (أَفْعَل)'},
+{cat:'كَلِمات المُقارَنَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','سَيّارَة'],odd:3,exp:'سَيّارَة اسْم، وَالباقي صيَغ تَفْضيل (أَفْعَل)'},
 
 {cat:'الضَّوْء وَإِشارات المُرور',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة'},
 
 {cat:'الاتِّجاهات',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة'},
 
-{cat:'الأَفْعالُ بِصيغَةِ الأَمْر',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ'}
+{cat:'الأَفْعال بِصيغَة الأَمْر',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,timerInt,curOdd;
@@ -124,7 +124,7 @@ var fs=Math.round(sc/(qs.length*10)*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتازٌ!':fs>=70?'جَيِّدٌ جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>
