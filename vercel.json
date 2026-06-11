@@ -27,12 +27,6 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "lab.raufenc.com" }],
-      "destination": "https://raufenc.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/5sinif",
       "destination": "/5sinif/",
       "permanent": false
@@ -149,6 +143,11 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "lab.raufenc.com" }],
+      "destination": "/deneme/index.html"
+    },
     {
       "source": "/iyilikakademi",
       "destination": "/iyilikakademi/index.html"
