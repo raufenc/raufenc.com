@@ -26,9 +26,9 @@ body{font-family:'Arakom','Segoe UI',system-ui,sans-serif;background:radial-grad
 .tile::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--g,var(--crimson))}
 .tile:hover{transform:translateY(-4px);border-color:var(--c,var(--crimson));box-shadow:0 14px 28px -8px var(--sh,rgba(229,23,107,.3))}
 .tile .tnum{position:absolute;top:6px;right:10px;font-size:11px;font-weight:800;color:#E3B9C8}
-.tile .ticon{font-size:clamp(24px,2.9vw,38px);line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
-.tile .tname{font-family:'Arakom',sans-serif;font-size:clamp(13px,1.45vw,1.15em);direction:rtl;font-weight:bold;color:var(--ink);line-height:1.18}
-.tile .tdo{font-size:clamp(9.5px,.92vw,11.5px);color:var(--ink-soft);line-height:1.25;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tile .ticon{font-size:clamp(24px,2.9vw,50px);line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+.tile .tname{font-family:'Arakom',sans-serif;font-size:clamp(13px,1.45vw,27px);direction:rtl;font-weight:bold;color:var(--ink);line-height:1.18}
+.tile .tdo{font-size:clamp(9.5px,.92vw,15px);color:var(--ink-soft);line-height:1.25;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .tile .tplay{display:none}
 .g-crimson,.g-pink,.g-red{--g:linear-gradient(90deg,#E5176B,#FF5A8A);--c:#E5176B;--sh:rgba(229,23,107,.3)}
 .g-orange{--g:linear-gradient(90deg,#F57C00,#FFB74D);--c:#F57C00;--sh:rgba(245,124,0,.3)}
@@ -36,9 +36,9 @@ body{font-family:'Arakom','Segoe UI',system-ui,sans-serif;background:radial-grad
 .g-teal,.g-green,.g-purple{--g:linear-gradient(90deg,#00897B,#4DB6AC);--c:#00897B;--sh:rgba(0,137,123,.3)}
 .tile.soon{background:repeating-linear-gradient(135deg,#fff,#fff 12px,#FFF1F5 12px,#FFF1F5 24px);border:2px dashed #F3C6D5;box-shadow:none;cursor:default}
 .tile.soon::before{display:none}.tile.soon:hover{transform:none;box-shadow:none;border-color:#F3C6D5}
-.tile.soon .splus{font-size:clamp(22px,2.6vw,34px);color:#E9A9BE;line-height:1}
-.tile.soon .stxt{font-size:clamp(10px,1vw,12px);color:#C98AA0;font-weight:700}
-.tile.soon .stxt-ar{font-family:'Arakom',sans-serif;direction:rtl;color:#D98FA8;font-size:clamp(11px,1.1vw,14px);font-weight:bold}
+.tile.soon .splus{font-size:clamp(22px,2.6vw,44px);color:#E9A9BE;line-height:1}
+.tile.soon .stxt{font-size:clamp(10px,1vw,14px);color:#C98AA0;font-weight:700}
+.tile.soon .stxt-ar{font-family:'Arakom',sans-serif;direction:rtl;color:#D98FA8;font-size:clamp(11px,1.1vw,17px);font-weight:bold}
 @media(max-width:860px){body{overflow:auto;height:auto;min-height:100dvh}.grid{grid-template-columns:repeat(2,1fr);grid-template-rows:none}.tile{min-height:130px}}
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 </style>
