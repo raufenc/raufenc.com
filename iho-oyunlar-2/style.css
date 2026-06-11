@@ -199,7 +199,7 @@ button{letter-spacing:0}
 }
 .game-kicker{margin:0 0 6px;color:var(--teal);font-size:13px;font-weight:800}
 .play-head h2{margin:0;font-size:28px;line-height:1.2}
-.game-instruction{margin:8px 0 0;color:var(--muted);font-size:15px;line-height:1.45}
+.game-instruction{margin:8px 0 0;color:var(--muted);font-size:clamp(14px,.7vw + 6px,22px);line-height:1.45}
 .play-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .score-pill{
   min-width:112px;
@@ -242,7 +242,7 @@ button{letter-spacing:0}
   font-size:27px;
   line-height:1.45;
 }
-.ar.small-ar{font-size:21px}
+.ar.small-ar{font-size:clamp(18px,1vw + 7px,30px)}
 .muted{color:var(--muted)}
 .feedback{margin-top:10px;font-weight:800;min-height:22px}
 .feedback.ok{color:var(--green)}
@@ -312,7 +312,7 @@ button{letter-spacing:0}
 .question-number{color:var(--muted);font-size:13px;font-weight:800}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .choice{text-align:center;font-weight:800}
-.choice .ar{font-size:22px}
+.choice .ar{font-size:clamp(20px,1.2vw + 8px,34px)}
 
 .sentence-output,.dialogue-output{
   min-height:58px;
@@ -343,12 +343,12 @@ button{letter-spacing:0}
   border-radius:7px;
   background:#fff;
   font-family:Arakom,serif;
-  font-size:21px;
+  font-size:clamp(18px,2.4vmin,28px);
   font-weight:700;
 }
 .word-grid td.found{background:#fde68a;border-color:#d97706;color:#78350f}
 .word-list{display:flex;gap:8px;flex-wrap:wrap}
-.word-chip{font-family:Arakom,serif;font-size:21px;background:#fff}
+.word-chip{font-family:Arakom,serif;font-size:clamp(18px,1vw + 7px,30px);background:#fff}
 
 .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .memory-card{
@@ -361,7 +361,7 @@ button{letter-spacing:0}
   place-items:center;
   padding:10px;
   text-align:center;
-  font-size:22px;
+  font-size:clamp(20px,1.2vw + 8px,34px);
 }
 .memory-card.open,.memory-card.correct{background:#fff;color:var(--ink)}
 .role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
