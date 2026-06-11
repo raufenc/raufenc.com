@@ -3,224 +3,319 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Erdem360 | İslam Ahlakı LMS</title>
-  <meta name="description" content="Ortaokul öğrencileri için İslam ahlakı 360 derece LMS pilot sistemi.">
-  <meta name="theme-color" content="#0f2f2f">
+  <title>Erdem360 | İslam Ahlakı LMS Kurulum Masası</title>
+  <meta name="description" content="Ortaokul için İslam ahlakı 360 derece LMS kurulum, müfredat, içerik ve uygulama panosu.">
+  <meta name="theme-color" content="#123c34">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="preload" href="./assets/erdem360-ecosystem.png" as="image">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">İçeriğe geç</a>
+
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Erdem360 gezinme">
-      <a class="brand" href="#dashboard" data-route="dashboard" aria-label="Erdem360 ana ekran">
-        <span class="brand-mark">E</span>
+    <aside class="sidebar" aria-label="Erdem360 menüsü">
+      <a class="brand" href="#command" data-route="command" aria-label="Erdem360 kurulum masası">
+        <span class="brand-mark">E360</span>
         <span>
           <strong>Erdem360</strong>
-          <small>İslam Ahlakı LMS</small>
+          <small>360 derece ahlak LMS</small>
         </span>
       </a>
 
       <nav class="nav-list" aria-label="Ana bölümler">
-        <button class="nav-item active" data-route="dashboard" type="button">Pano</button>
-        <button class="nav-item" data-route="learn" type="button">Öğrenme Yolu</button>
-        <button class="nav-item" data-route="scenario" type="button">Karar Senaryosu</button>
-        <button class="nav-item" data-route="game" type="button">Mini Oyun</button>
-        <button class="nav-item" data-route="portfolio" type="button">Portfolyo</button>
-        <button class="nav-item" data-route="family" type="button">Aile Kartı</button>
-        <button class="nav-item" data-route="teacher" type="button">Öğretmen</button>
-        <button class="nav-item" data-route="admin" type="button">Yönetim</button>
+        <button class="nav-item active" data-route="command" type="button">Komuta</button>
+        <button class="nav-item" data-route="curriculum" type="button">Müfredat</button>
+        <button class="nav-item" data-route="studio" type="button">Ders Stüdyosu</button>
+        <button class="nav-item" data-route="production" type="button">İçerik Fabrikası</button>
+        <button class="nav-item" data-route="classroom" type="button">Sınıf</button>
+        <button class="nav-item" data-route="family" type="button">Aile</button>
+        <button class="nav-item" data-route="media" type="button">Oyun ve Video</button>
+        <button class="nav-item" data-route="analytics" type="button">Ölçme</button>
+        <button class="nav-item" data-route="launch" type="button">Canlılaştırma</button>
       </nav>
 
-      <div class="sidebar-card">
-        <span class="eyebrow">Pilot sınıf</span>
-        <strong>6/A Güven Atölyesi</strong>
-        <span>12 haftalık MVP</span>
+      <div class="side-status">
+        <span class="eyebrow">Pilot hedef</span>
+        <strong>6. sınıf - 12 hafta</strong>
+        <span>Öğrenci, öğretmen, veli ve yönetim hattı</span>
       </div>
     </aside>
 
     <div class="main-column">
       <header class="topbar">
         <div>
-          <span class="eyebrow">Canlı MVP</span>
-          <h1 id="pageTitle">Pano</h1>
+          <span class="eyebrow">Kurulum masası</span>
+          <h1 id="pageTitle">Komuta</h1>
         </div>
-        <div class="role-switcher" aria-label="Rol seçimi">
-          <button class="role-btn active" data-role="student" type="button">Öğrenci</button>
-          <button class="role-btn" data-role="teacher" type="button">Öğretmen</button>
-          <button class="role-btn" data-role="parent" type="button">Veli</button>
-          <button class="role-btn" data-role="admin" type="button">Yönetim</button>
+        <div class="top-actions">
+          <a class="btn secondary" href="./assets/Islam_Ahlaki_360_LMS_Sistemi_Kapsamli_Kitapcik.docx">Kitapçık</a>
+          <button class="btn primary" id="downloadBrief" type="button">Sprint Özeti</button>
         </div>
       </header>
 
       <main id="main" tabindex="-1">
-        <section id="dashboard" class="view active" aria-labelledby="dashboardTitle">
-          <div class="hero-panel">
-            <div class="hero-copy">
-              <span class="eyebrow">Haftanın erdemi</span>
-              <h2 id="dashboardTitle">Emanet ve Güven</h2>
-              <p>Bana bırakılan şeyi, kimse görmese de korur muyum?</p>
-              <div class="hero-actions">
-                <button class="btn primary" data-route="learn" type="button">Modüle başla</button>
-                <a class="btn ghost" href="./assets/Islam_Ahlaki_360_LMS_Sistemi_Kapsamli_Kitapcik.docx">Kitapçık</a>
+        <section id="command" class="view active" aria-labelledby="commandTitle">
+          <div class="command-grid">
+            <section class="surface intro-panel">
+              <div>
+                <span class="eyebrow">Ürün omurgası</span>
+                <h2 id="commandTitle">İslam ahlakı eğitimi için tek merkezden işletilen LMS.</h2>
+                <p>Bu ekran öğrenciye gösterilecek bir vitrin değil; müfredat, ders, oyun, video, aile kartı, öğretmen takibi ve canlıya alma sürecini aynı yerden yöneten kurulum masasıdır.</p>
               </div>
-            </div>
-            <figure class="ecosystem-card">
               <img src="./assets/erdem360-ecosystem.png" alt="Erdem360 ekosistem haritası">
-            </figure>
-          </div>
-
-          <div class="metric-grid" aria-label="Sınıf özeti">
-            <article class="metric"><span>Tamamlanma</span><strong id="metricCompletion">0%</strong></article>
-            <article class="metric"><span>Portfolyo</span><strong id="metricPortfolio">0</strong></article>
-            <article class="metric"><span>Aile görevi</span><strong id="metricFamily">Bekliyor</strong></article>
-            <article class="metric"><span>Karar isabeti</span><strong id="metricScenario">-</strong></article>
-          </div>
-
-          <div class="two-column">
-            <section class="panel">
-              <div class="panel-head">
-                <span class="eyebrow">12 haftalık yol</span>
-                <h3>Modüller</h3>
-              </div>
-              <div id="moduleList" class="module-list"></div>
             </section>
-            <section class="panel">
-              <div class="panel-head">
-                <span class="eyebrow">Bugünkü akış</span>
-                <h3>Erdem-Değer-Eylem</h3>
-              </div>
-              <ol class="timeline">
-                <li><strong>Erdem</strong><span>Kavram, kaynak ve örnek.</span></li>
-                <li><strong>Değer</strong><span>Karar anı ve gerekçe.</span></li>
-                <li><strong>Eylem</strong><span>Aile görevi ve portfolyo.</span></li>
-              </ol>
+
+            <section class="surface focus-panel" aria-labelledby="focusTitle">
+              <span class="eyebrow">Bu haftanın paketi</span>
+              <h2 id="focusTitle">Emanet ve Güven</h2>
+              <dl class="definition-list">
+                <div><dt>Temel soru</dt><dd>Bana güvenildiğinde nasıl davranırım?</dd></div>
+                <div><dt>Öğrenci çıktısı</dt><dd>Emanet, mahremiyet ve telafi kararlarını gerekçelendirme.</dd></div>
+                <div><dt>Ürün seti</dt><dd>Mikro video, sınıf oyunu, çalışma sayfası, aile kartı, çizgi film bölümü.</dd></div>
+              </dl>
+              <button class="btn primary" data-route="studio" type="button">Dersi aç</button>
             </section>
           </div>
-        </section>
 
-        <section id="learn" class="view" aria-labelledby="learnTitle">
-          <div class="panel learning-panel">
-            <div class="panel-head split">
-              <div>
-                <span class="eyebrow">Mikro ders</span>
-                <h2 id="learnTitle">Emanet sadece eşya değildir</h2>
+          <div class="metric-grid" aria-label="Kurulum göstergeleri">
+            <article class="metric"><span>Hazırlık</span><strong id="readinessMetric">0%</strong></article>
+            <article class="metric"><span>Müfredat</span><strong>12 hafta</strong></article>
+            <article class="metric"><span>İçerik işi</span><strong id="queueMetric">0/0</strong></article>
+            <article class="metric"><span>Pilot kapsam</span><strong>4 rol</strong></article>
+          </div>
+
+          <div class="workflow" aria-label="360 derece üretim akışı">
+            <article><strong>1. Müfredat</strong><span>Kazanım, erdem, davranış kanıtı</span></article>
+            <article><strong>2. İçerik</strong><span>Video, kitapçık, oyun, çizgi film</span></article>
+            <article><strong>3. Uygulama</strong><span>Sınıf, ev, dijital görev</span></article>
+            <article><strong>4. Ölçme</strong><span>Rubrik, portfolyo, gözlem</span></article>
+            <article><strong>5. İyileştirme</strong><span>Haftalık öğretmen geri bildirimi</span></article>
+          </div>
+
+          <div class="split-grid">
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Sistem bileşenleri</span>
+                <h3>Boş demo yerine kurulacak gerçek parçalar</h3>
               </div>
-              <span class="pill" id="lessonStepLabel">1 / 5</span>
-            </div>
-            <div class="stepper" id="stepper"></div>
-            <article id="lessonContent" class="lesson-content"></article>
-            <div class="action-row">
-              <button class="btn ghost" id="prevLesson" type="button">Geri</button>
-              <button class="btn primary" id="nextLesson" type="button">Anladım</button>
-            </div>
-          </div>
-        </section>
-
-        <section id="scenario" class="view" aria-labelledby="scenarioTitle">
-          <div class="panel scenario-panel">
-            <div class="panel-head">
-              <span class="eyebrow">Karar senaryosu</span>
-              <h2 id="scenarioTitle">Arkadaşının tableti sende</h2>
-            </div>
-            <p class="lead">Arkadaşın tableti sana emanet etti. Bildirimler gelmeye başladı. Ekranda özel bir mesaj görünüyor.</p>
-            <div id="scenarioChoices" class="choice-grid"></div>
-            <div id="scenarioFeedback" class="feedback-box" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section id="game" class="view" aria-labelledby="gameTitle">
-          <div class="panel">
-            <div class="panel-head split">
-              <div>
-                <span class="eyebrow">Mini oyun</span>
-                <h2 id="gameTitle">Karar Terazisi</h2>
+              <div id="componentList" class="component-list"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Canlı veri modeli</span>
+                <h3>LMS kayıt omurgası</h3>
               </div>
-              <span class="pill" id="gameScore">0 / 0</span>
-            </div>
-            <p class="lead">Kartı oku, en uygun karar alanını seç.</p>
-            <div id="gameCard" class="game-card"></div>
-            <div class="triad" aria-label="Karar alanları">
-              <button class="decision-btn" data-zone="protect" type="button"><strong>Koru</strong><span>Emaneti sakla</span></button>
-              <button class="decision-btn" data-zone="ask" type="button"><strong>Sor</strong><span>İzin ve istişare</span></button>
-              <button class="decision-btn" data-zone="repair" type="button"><strong>Telafi et</strong><span>Hata sonrası adım</span></button>
-            </div>
-            <div id="gameFeedback" class="feedback-box" aria-live="polite"></div>
+              <div id="entityList" class="entity-list"></div>
+            </section>
           </div>
         </section>
 
-        <section id="portfolio" class="view" aria-labelledby="portfolioTitle">
-          <div class="panel">
-            <div class="panel-head">
-              <span class="eyebrow">Portfolyo</span>
-              <h2 id="portfolioTitle">Bu hafta bana emanet edilen şey</h2>
-            </div>
-            <label class="field-label" for="reflection">Yansıtma cevabı</label>
-            <textarea id="reflection" rows="8" placeholder="Bu hafta bana emanet edilen bir şeyi nasıl korudum? Zorlandığım an neydi?"></textarea>
-            <div class="action-row">
-              <button class="btn primary" id="saveReflection" type="button">Kaydet</button>
-              <button class="btn ghost" id="clearReflection" type="button">Temizle</button>
-            </div>
-            <div id="portfolioSaved" class="feedback-box" aria-live="polite"></div>
+        <section id="curriculum" class="view" aria-labelledby="curriculumTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">12 haftalık çekirdek müfredat</span>
+            <h2 id="curriculumTitle">Her hafta ders, uygulama, aile ve medya çıktısına bağlanır.</h2>
+          </div>
+          <div id="weekTabs" class="week-tabs" aria-label="Hafta seçimi"></div>
+          <div class="split-grid curriculum-layout">
+            <section class="surface">
+              <div id="moduleDetail" class="module-detail"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Tüm harita</span>
+                <h3>Hafta planı</h3>
+              </div>
+              <div id="curriculumTable" class="table-like"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="studio" class="view" aria-labelledby="studioTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">Ders stüdyosu</span>
+            <h2 id="studioTitle">Öğretmenin sınıfta doğrudan uygulayacağı akış.</h2>
+          </div>
+          <div class="studio-grid">
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Seçili modül</span>
+                <h3 id="studioModuleTitle"></h3>
+              </div>
+              <div id="lessonRun" class="run-list"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Öğrenci üretimi</span>
+                <h3>Portfolyo görevi</h3>
+              </div>
+              <label class="field-label" for="reflection">Demo öğrenci cevabı</label>
+              <textarea id="reflection" rows="8"></textarea>
+              <div class="action-row">
+                <button class="btn primary" id="saveReflection" type="button">Kaydet</button>
+                <button class="btn secondary" id="clearReflection" type="button">Temizle</button>
+              </div>
+              <p id="reflectionStatus" class="status-line" aria-live="polite"></p>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Karar simülasyonu</span>
+                <h3>Gerekçeli seçim</h3>
+              </div>
+              <p id="scenarioText" class="lead"></p>
+              <div id="scenarioChoices" class="choice-grid"></div>
+              <p id="scenarioFeedback" class="feedback-box" aria-live="polite"></p>
+            </section>
+          </div>
+        </section>
+
+        <section id="production" class="view" aria-labelledby="productionTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">İçerik fabrikası</span>
+            <h2 id="productionTitle">Video, kitapçık, oyun, çizgi film ve aile kartı üretim kuyruğu.</h2>
+          </div>
+          <div class="production-layout">
+            <section class="surface">
+              <div class="filter-row" id="assetFilters" aria-label="İçerik tipi filtreleri"></div>
+              <div id="assetBoard" class="asset-board"></div>
+            </section>
+            <section class="surface sticky-panel">
+              <div class="section-head">
+                <span class="eyebrow">Seçili üretim briefi</span>
+                <h3 id="assetTitle">İçerik seç</h3>
+              </div>
+              <div id="assetBrief" class="brief-box"></div>
+              <div class="action-row">
+                <button class="btn secondary" data-status="Taslak" type="button">Taslak</button>
+                <button class="btn secondary" data-status="Üretimde" type="button">Üretimde</button>
+                <button class="btn primary" data-status="Hazır" type="button">Hazır</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="classroom" class="view" aria-labelledby="classroomTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">Öğretmen çalışma alanı</span>
+            <h2 id="classroomTitle">Sınıf takibi davranış kanıtı, portfolyo ve aile dönüşü üzerinden yapılır.</h2>
+          </div>
+          <div class="metric-grid compact">
+            <article class="metric"><span>Sınıf</span><strong>6/A</strong></article>
+            <article class="metric"><span>Öğrenci</span><strong>28</strong></article>
+            <article class="metric"><span>Riskli kayıt</span><strong id="riskMetric">0</strong></article>
+            <article class="metric"><span>Portfolyo</span><strong id="portfolioMetric">0%</strong></article>
+          </div>
+          <div class="split-grid">
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Öğrenci listesi</span>
+                <h3>Örnek pilot kayıtları</h3>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr><th>Öğrenci</th><th>Durum</th><th>Kanıt</th><th>Öğretmen aksiyonu</th></tr>
+                  </thead>
+                  <tbody id="studentRows"></tbody>
+                </table>
+              </div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Rubrik</span>
+                <h3>Dindarlık puanı değil, davranış kanıtı</h3>
+              </div>
+              <div id="rubricList" class="rubric-list"></div>
+            </section>
           </div>
         </section>
 
         <section id="family" class="view" aria-labelledby="familyTitle">
-          <div class="family-card">
-            <span class="eyebrow">Aile kartı</span>
-            <h2 id="familyTitle">Haftanın erdemi: Emanet</h2>
-            <p><strong>Sohbet sorusu:</strong> Sana güvenildiğinde içinde nasıl bir his doğuyor?</p>
-            <p><strong>Mini görev:</strong> Bu hafta evde herkes küçük bir emaneti seçsin ve hafta sonunda nasıl koruduğunu anlatsın.</p>
-            <p><strong>Veliye not:</strong> Çocuğu sorgulamak yerine güven duyduğunuz bir davranışını açıkça takdir edin.</p>
-            <button class="btn primary" id="familyDone" type="button">Aile görevi yapıldı</button>
+          <div class="section-head wide">
+            <span class="eyebrow">Aile hattı</span>
+            <h2 id="familyTitle">Her modül eve baskı kurmadan sohbet ve gözlem kartı olarak gider.</h2>
           </div>
-        </section>
-
-        <section id="teacher" class="view" aria-labelledby="teacherTitle">
-          <div class="panel">
-            <div class="panel-head split">
-              <div>
-                <span class="eyebrow">Öğretmen paneli</span>
-                <h2 id="teacherTitle">6/A Güven Atölyesi</h2>
+          <div class="family-layout">
+            <section class="surface family-card-live">
+              <span class="eyebrow">Bu haftanın aile kartı</span>
+              <h3 id="familyCardTitle"></h3>
+              <div id="familyCardBody"></div>
+              <button class="btn primary" id="sendFamilyCard" type="button">Veliye gönderildi işaretle</button>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Kart arşivi</span>
+                <h3>12 haftalık aile akışı</h3>
               </div>
-              <button class="btn ghost" id="resetDemo" type="button">Demo sıfırla</button>
-            </div>
-            <div class="teacher-grid">
-              <article class="mini-panel"><span>Ders adımı</span><strong id="teacherLesson">1/5</strong></article>
-              <article class="mini-panel"><span>Senaryo</span><strong id="teacherScenario">Bekliyor</strong></article>
-              <article class="mini-panel"><span>Aile</span><strong id="teacherFamily">Bekliyor</strong></article>
-            </div>
-            <div class="table-wrap">
-              <table>
-                <thead><tr><th>Öğrenci</th><th>Durum</th><th>Kanıt</th><th>Öğretmen notu</th></tr></thead>
-                <tbody id="teacherRows"></tbody>
-              </table>
-            </div>
+              <div id="familyArchive" class="archive-list"></div>
+            </section>
           </div>
         </section>
 
-        <section id="admin" class="view" aria-labelledby="adminTitle">
-          <div class="panel">
-            <div class="panel-head">
-              <span class="eyebrow">Yönetim</span>
-              <h2 id="adminTitle">MVP yayın durumu</h2>
-            </div>
-            <div class="admin-grid">
-              <article><strong>Roller</strong><span>Öğrenci, öğretmen, veli, yönetim</span></article>
-              <article><strong>İçerik</strong><span>12 haftalık pilot iskeleti</span></article>
-              <article><strong>Veri</strong><span>Tarayıcı yerel kayıt</span></article>
-              <article><strong>Güvenlik</strong><span>Reklam, kamera, konum yok</span></article>
-            </div>
-            <div class="roadmap">
-              <h3>Sıradaki üretim sprinti</h3>
-              <ul>
-                <li>Gerçek kullanıcı girişi ve kurum/sınıf yönetimi</li>
-                <li>CMS taslak-onay-yayın akışı</li>
-                <li>12 haftalık video, çizgi film ve oyun paketleri</li>
-                <li>KVKK metinleri ve veli izin akışı</li>
-              </ul>
-            </div>
+        <section id="media" class="view" aria-labelledby="mediaTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">Oyun ve video sistemi</span>
+            <h2 id="mediaTitle">Her erdem için kısa medya, sınıf oyunu ve evde izleme paketi.</h2>
+          </div>
+          <div id="mediaLibrary" class="media-grid"></div>
+        </section>
+
+        <section id="analytics" class="view" aria-labelledby="analyticsTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">Ölçme ve güvenlik</span>
+            <h2 id="analyticsTitle">Ölçüm, mahremiyet ve pedagojik sınırlar en baştan sisteme konur.</h2>
+          </div>
+          <div class="analytics-grid">
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Göstergeler</span>
+                <h3>Ne ölçülür?</h3>
+              </div>
+              <div id="measurementList" class="component-list"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Mahremiyet kapıları</span>
+                <h3>Ne ölçülmez?</h3>
+              </div>
+              <div id="privacyList" class="component-list"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Olay günlüğü</span>
+                <h3>xAPI hazır izleme dili</h3>
+              </div>
+              <div id="eventLog" class="event-log"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="launch" class="view" aria-labelledby="launchTitle">
+          <div class="section-head wide">
+            <span class="eyebrow">Canlılaştırma</span>
+            <h2 id="launchTitle">Bu MVP, gerçek V1 için kurulum planı ve ürün kabuğudur.</h2>
+          </div>
+          <div class="launch-grid">
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Teknik mimari</span>
+                <h3>V1 üretim sistemi</h3>
+              </div>
+              <div id="architectureList" class="component-list"></div>
+            </section>
+            <section class="surface">
+              <div class="section-head">
+                <span class="eyebrow">Sprint planı</span>
+                <h3>Canlı ürüne giden iş listesi</h3>
+              </div>
+              <div id="sprintList" class="sprint-list"></div>
+            </section>
+            <section class="surface deployment-box">
+              <span class="eyebrow">Yayın</span>
+              <h3>raufenc.com/erdem360</h3>
+              <p>Bu rota Vercel production üzerinden yayında. Şimdiki sürüm statik kurulum masasıdır; kullanıcı hesabı, veritabanı ve CMS bir sonraki gerçek ürün sprintinde eklenecek.</p>
+              <button class="btn secondary" id="resetDemo" type="button">Demo verisini sıfırla</button>
+            </section>
           </div>
         </section>
       </main>

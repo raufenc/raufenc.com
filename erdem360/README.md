@@ -1,15 +1,7 @@
-# Erdem360 LMS
+# Erdem360 LMS Kurulum Masası
 
-Canlı MVP statik uygulaması. Yol: `/erdem360/`.
+Bu rota Erdem360 için canlıya alınmış statik ürün kabuğudur. Öğrenci demosu olmaktan çok, 12 haftalık İslam ahlakı LMS'inin müfredat, ders stüdyosu, içerik üretim kuyruğu, aile kartı, öğretmen takibi, ölçme ilkeleri ve V1 canlılaştırma planını aynı arayüzde gösterir.
 
-İçerik:
-- öğrenci panosu
-- öğrenme yolu
-- karar senaryosu
-- mini oyun
-- portfolyo
-- aile kartı
-- öğretmen paneli
-- yönetim görünümü
+## Sınır
 
-Veri bu sürümde tarayıcı `localStorage` üzerinde tutulur.
+Bu sürümde kullanıcı hesabı, veritabanı, gerçek CMS ve gerçek raporlama yoktur. Bunlar V1 ürün sprintinde eklenecek temel parçalardır.
