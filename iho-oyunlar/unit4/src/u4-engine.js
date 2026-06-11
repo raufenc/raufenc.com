@@ -34,6 +34,8 @@
   }
   function sample(arr, n){ return shuffle(arr || []).slice(0, n || arr.length); }
   function escapeHtml(s){ return String(s == null ? '' : s).replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch])); }
+  const AR_DIGITS = '٠١٢٣٤٥٦٧٨٩';
+  function arNum(n){ return String(n).replace(/[0-9]/g, d => AR_DIGITS[Number(d)]); }
   function stripHarakat(str){ return String(str || '').replace(/[\u064B-\u065F\u0670]/g,''); }
   function normalizeArabic(str){
     return stripHarakat(str)
@@ -94,7 +96,7 @@
     };
   }
   function setScore(shell, correct, total, current, max){
-    shell.score.textContent = `${correct} / ${total}`;
+    shell.score.textContent = `${arNum(correct)} / ${arNum(total)}`;
     const pct = max ? Math.round((current / max)*100) : (total ? Math.round((correct/total)*100) : 0);
     shell.progress.style.width = `${clamp(pct,0,100)}%`;
   }
@@ -107,8 +109,8 @@
     shell.body.innerHTML = `
       <div class="u4-card u4-center" style="flex-direction:column;gap:12px;text-align:center">
         <div style="font-size:56px">${pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘'}</div>
-        <div class="u4-title">${pct}%</div>
-        <div class="u4-muted">${correct} / ${total} ✅</div>
+        <div class="u4-title">${arNum(pct)}٪</div>
+        <div class="u4-muted">${arNum(correct)} / ${arNum(total)} ✅</div>
         <button class="u4-btn" data-restart>إِعادَة 🔄</button>
       </div>`;
     $('[data-restart]', shell.body).addEventListener('click', restart);
@@ -201,6 +203,7 @@
     let idx=0, correct=0, locked=false;
     function draw(){
       const q = items[idx]; locked=false;
+      feedback(shell, '', '');
       setScore(shell, correct, items.length, idx, items.length);
       const f = formatter(q);
       // Şıkları karıştır (>2 ise), doğru cevabın yeni konumunu hesapla → konum yanlılığını önler
@@ -210,7 +213,7 @@
       shell.body.innerHTML = `
         <div class="u4-card">
           ${f.visual || ''}
-          <div class="u4-mid-ar" dir="rtl">${escapeHtml(f.prompt)}</div>
+          <div class="u4-mid-ar" dir="rtl" style="text-align:center">${escapeHtml(f.prompt)}</div>
           ${f.hint ? `<div class="u4-muted">${escapeHtml(f.hint)}</div>` : ''}
         </div>
         <div class="u4-grid u4-grid-2" style="margin-top:14px">
@@ -224,10 +227,11 @@
       const chosen = Number(btn.dataset.index);
       const buttons = $all('.u4-option', shell.body);
       buttons.forEach((b,i)=>{ if(i===answerIndex) b.classList.add('correct'); if(i===chosen && i!==answerIndex) b.classList.add('wrong'); b.disabled = true; });
-      if(chosen === answerIndex){ correct++; feedback(shell, after || '✅ صَحيح', 'good'); }
-      else feedback(shell, after || '❌', 'bad');
+      const correctLabel = buttons[answerIndex] ? buttons[answerIndex].textContent : '';
+      if(chosen === answerIndex){ correct++; feedback(shell, `✅ ${correctLabel}${after ? ' — ' + after : ''}`, 'good'); }
+      else feedback(shell, `❌ الصَّحيح: ${correctLabel}${after ? ' — ' + after : ''}`, 'bad');
       setScore(shell, correct, items.length, idx+1, items.length);
-      setTimeout(() => { idx++; if(idx >= items.length) finalScreen(shell, correct, items.length, () => renderMCQGame(container, data, options, type, source, formatter)); else draw(); }, 950);
+      setTimeout(() => { idx++; if(idx >= items.length) finalScreen(shell, correct, items.length, () => renderMCQGame(container, data, options, type, source, formatter)); else draw(); }, 1250);
     }
     draw();
   }
@@ -240,7 +244,7 @@
     renderMCQGame(container, data, options, 'truefalse', src, q => ({prompt:q.statement, options:q.options, answerIndex:q.answerIndex, after:q.explanation}));
   }
   function renderOddOneOut(container, data, options){
-    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`حَدِّد الكَلِمَة المُخْتَلِفَة`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
+    renderMCQGame(container, data, options, 'oddOneOut', data.gameBanks.oddOneOut, q => ({prompt:`حَدِّد الكَلِمَة المُخْتَلِفَة.`, options:q.options, answerIndex:q.oddIndex, after:q.explanation}));
   }
   function clockSVG(h, m){
     const minAngle = m * 6;
@@ -299,6 +303,7 @@
     let idx=0, correct=0, answer=[];
     function draw(){
       const item = list[idx]; answer=[];
+      feedback(shell, '', '');
       const bank = shuffle(item.tokens.map((t,i)=>({t, i})));
       setScore(shell, correct, list.length, idx, list.length);
       shell.body.innerHTML = `
@@ -322,8 +327,8 @@
     }
     function check(item){
       const got = answer.map(x=>x.t).join(' ');
-      const expected = item.tokens.join(' ');
-      if(got === expected){
+      const valid = [item.tokens].concat(item.accept || []);
+      if(valid.some(t => t.join(' ') === got)){
         correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
         setScore(shell, correct, list.length, idx+1, list.length);
         setTimeout(()=>{ idx++; if(idx>=list.length) finalScreen(shell, correct, list.length, () => renderSentenceOrder(container,data,options)); else draw(); }, 900);
@@ -355,8 +360,8 @@
         moves++;
         const ok = open[0].data.id === open[1].data.id && open[0].data.kind !== open[1].data.kind;
         if(ok){
-          open.forEach(x=>{ x.data.done=true; x.el.classList.add('done'); }); done++; open=[]; feedback(shell,'✅ مُطابَق', 'good'); setScore(shell, done, pairs.length, done, pairs.length);
-          if(done===pairs.length) setTimeout(()=>finalScreen(shell, done, pairs.length, () => renderMemory(container,data,options)), 700);
+          open.forEach(x=>{ x.data.done=true; x.el.classList.add('done'); }); done++; open=[]; feedback(shell,'✅ مُطابِق', 'good'); setScore(shell, done, pairs.length, done, pairs.length);
+          if(done===pairs.length){ feedback(shell,'✅ أَحْسَنْت — اُنْظُر البِطاقات', 'good'); setTimeout(()=>finalScreen(shell, done, pairs.length, () => renderMemory(container,data,options)), 2400); }
         }else{
           open.forEach(x=>x.el.classList.add('miss')); feedback(shell,'❌', 'bad');
           setTimeout(()=>{ open.forEach(x=>{ x.el.classList.remove('miss'); x.el.classList.add('face-down'); x.el.classList.remove('u4-ar'); x.el.textContent='؟'; }); open=[]; }, 700);
@@ -387,12 +392,12 @@
           const c = Math.floor(Math.random() * (dir==='h' ? size - chars.length + 1 : size));
           let ok=true;
           for(let k=0;k<chars.length;k++){
-            const rr=r+(dir==='v'?k:0), cc=c+(dir==='h'?k:0);
+            const rr=r+(dir==='v'?k:0), cc=dir==='h' ? c+(chars.length-1-k) : c;
             if(occupied[rr][cc] && grid[rr][cc] !== chars[k]) ok=false;
           }
           if(ok){
             const cells=[];
-            for(let k=0;k<chars.length;k++){ const rr=r+(dir==='v'?k:0), cc=c+(dir==='h'?k:0); grid[rr][cc]=chars[k]; occupied[rr][cc]=true; cells.push([rr,cc]); }
+            for(let k=0;k<chars.length;k++){ const rr=r+(dir==='v'?k:0), cc=dir==='h' ? c+(chars.length-1-k) : c; grid[rr][cc]=chars[k]; occupied[rr][cc]=true; cells.push([rr,cc]); }
             placements[wi] = cells; placed=true;
           }
         }
@@ -401,9 +406,11 @@
     function draw(){
       if(!grid) makeGrid();
       const target = words[targetIdx];
+      feedback(shell, '', '');
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
+      const tEmoji = wsEmoji(target);
       shell.body.innerHTML = `
-        <div class="u4-card"><div class="u4-muted">الكَلِمَة المَطْلوبَة</div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u4-target-word u4-ar">${escapeHtml(target)}</div></div>
+        <div class="u4-card" style="text-align:center"><div class="u4-muted">الكَلِمَة المَطْلوبَة</div>${tEmoji === '🔤' ? '' : `<div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(tEmoji)}</div>`}<div class="u4-target-word u4-ar">${escapeHtml(target)}</div></div>
         <div class="u4-card" style="margin-top:14px"><div class="u4-wordsearch" style="grid-template-columns:repeat(${size},38px)">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u4-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
@@ -442,6 +449,7 @@
     }
     function draw(){
       const it = items[idx]; locked=false;
+      feedback(shell, '', '');
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u4-card" style="text-align:center">
@@ -481,6 +489,7 @@
     let idx=0, correct=0, answer=[];
     function draw(){
       const dlg = dialogues[idx]; answer=[];
+      feedback(shell, '', '');
       setScore(shell, correct, dialogues.length, idx, dialogues.length);
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
@@ -512,6 +521,7 @@
     const questions = sample(data.gameBanks.wheelQuestions, options.limit || 12);
     let asked=[], correct=0, current=null;
     function drawIntro(){
+      feedback(shell, '', '');
       setScore(shell, correct, questions.length, asked.length, questions.length);
       shell.body.innerHTML = `
         <div class="u4-wheel" data-wheel><span>🎡</span></div>
@@ -533,7 +543,7 @@
       const wOptions = wOrder.map(i => current.options[i]);
       const wAnswerIndex = wOrder.indexOf(current.answerIndex);
       shell.body.innerHTML = `
-        <div class="u4-card"><div class="u4-mid-ar" dir="rtl">${escapeHtml(current.prompt)}</div></div>
+        <div class="u4-card"><div class="u4-mid-ar" dir="rtl" style="text-align:center">${escapeHtml(current.prompt)}</div></div>
         <div class="u4-grid u4-grid-2" style="margin-top:14px">${wOptions.map((o,i)=>optionButton(o,i)).join('')}</div>`;
       $all('.u4-option', shell.body).forEach(btn => btn.addEventListener('click',()=>{
         const ok = Number(btn.dataset.index) === wAnswerIndex;
@@ -568,7 +578,7 @@
     let queue = shuffle(pool);
     let lives = maxLives, score = 0, locked = false;
     function hud(){
-      shell.score.textContent = `🏆 ${score} · ${'❤️'.repeat(lives)}${'🤍'.repeat(maxLives - lives)}`;
+      shell.score.textContent = `🏆 ${arNum(score)} · ${'❤️'.repeat(lives)}${'🤍'.repeat(maxLives - lives)}`;
       shell.progress.style.width = `${(lives / maxLives) * 100}%`;
     }
     function nextItem(){
@@ -577,13 +587,14 @@
     }
     function draw(){
       const item = nextItem(); locked = false;
+      feedback(shell, '', '');
       hud();
       const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 5))).slice(0,6);
       shell.body.innerHTML = `
         <div class="u4-card">
           <div class="u4-row" style="justify-content:space-between;align-items:center">
             <div class="u4-muted">فَرْقِع الكَلِمَة المُناسِبَة:</div>
-            <span class="u4-pill">أَفْضَل نَتيجَة: ${balloonBest()} 🏆</span>
+            <span class="u4-pill">أَفْضَل نَتيجَة: ${arNum(balloonBest())} 🏆</span>
           </div>
           <div style="text-align:center;font-size:80px">${escapeHtml(item.emoji || '🎈')}</div>
         </div>
@@ -596,8 +607,11 @@
           score++; b.classList.add('correct'); feedback(shell,'✅ أَحْسَنْت', 'good'); hud();
           setTimeout(draw, 700);
         } else {
-          lives--; b.classList.add('wrong'); feedback(shell,`❌ الصَّحيح: ${item.ar}`, 'bad'); hud();
-          setTimeout(()=>{ if(lives <= 0) gameOver(); else draw(); }, 950);
+          lives--; b.classList.add('wrong');
+          const okBtn = $all('.u4-balloon', shell.body).find(x => x.dataset.id === item.id);
+          if(okBtn) okBtn.classList.add('correct');
+          feedback(shell,`❌ الصَّحيح: ${item.ar}`, 'bad'); hud();
+          setTimeout(()=>{ if(lives <= 0) gameOver(); else draw(); }, 1800);
         }
       }));
     }
@@ -606,8 +620,8 @@
       shell.body.innerHTML = `
         <div class="u4-card u4-center" style="flex-direction:column;gap:12px;text-align:center">
           <div style="font-size:56px">🎈</div>
-          <div class="u4-title" dir="rtl">اِنْتَهَتِ اللُّعْبَة</div>
-          <div class="u4-big-ar">🏆 ${score}</div>
+          <div class="u4-title" dir="rtl">اِنْتَهَت اللُّعْبَة</div>
+          <div class="u4-big-ar">🏆 ${arNum(score)}</div>
           ${score > best ? `<div class="u4-pill" style="background:#fff7ed;border-color:#fdba74;color:#9a3412">رَقْم قِياسِيّ جَديد! 🎉</div>` : ''}
           <input class="u4-input" data-name placeholder="اِسْمُك" dir="rtl" maxlength="20" style="max-width:280px">
           <div class="u4-actions">
@@ -628,9 +642,9 @@
           <div class="u4-title" dir="rtl">لَوْحَة الأَبْطال 🏆</div>
           <div class="u4-records" dir="rtl">
             ${list.map((r,i)=>`<div class="u4-record-row">
-              <span class="u4-record-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)}</span>
+              <span class="u4-record-rank">${i===0?'🥇':i===1?'🥈':i===2?'🥉':arNum(i+1)}</span>
               <span class="u4-record-name u4-ar">${escapeHtml(r.n)}</span>
-              <span class="u4-record-score">${r.s}</span>
+              <span class="u4-record-score">${arNum(r.s)}</span>
             </div>`).join('')}
           </div>
           <div class="u4-actions"><button class="u4-btn orange" data-again>اِلْعَبْ مَرَّة أُخْرى 🎈</button></div>
@@ -647,6 +661,7 @@
     let idx=0, correct=0;
     function draw(){
       const item = items[idx];
+      feedback(shell, '', '');
       const letters = shuffle(Array.from(item.target));
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
@@ -664,9 +679,9 @@
       $('[data-clear]', shell.body).addEventListener('click',()=>{ input.value=''; $all('[data-ch]', shell.body).forEach(b=>b.classList.remove('used')); feedback(shell,'',''); });
       $('[data-check]', shell.body).addEventListener('click',()=>{
         if(normalizeArabic(input.value) === normalizeArabic(item.target)){
-          correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
+          correct++; feedback(shell, `✅ ${item.ar}`, 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
-          setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 800);
+          setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 1600);
         }else feedback(shell,`🔁 ${item.ar}`, 'bad');
       });
     }
@@ -680,6 +695,7 @@
     let idx=0, correct=0, locked=false;
     function draw(){
       const r = rounds[idx]; locked=false;
+      feedback(shell, '', '');
       setScore(shell, correct, rounds.length, idx, rounds.length);
       shell.body.innerHTML = `
         <div class="u4-card" style="text-align:center">
@@ -710,12 +726,13 @@
     let idx=0, correct=0, locked=false;
     const found = [];
     function slots(){
-      const cells = bank.letters.map((L,i) => `<span class="u4-slot${i < found.length ? ' filled' : ''}">${i < found.length ? escapeHtml(found[i]) : (i+1)}</span>`).join('');
+      const cells = bank.letters.map((L,i) => `<span class="u4-slot${i < found.length ? ' filled' : ''}">${i < found.length ? escapeHtml(found[i]) : arNum(i+1)}</span>`).join('');
       return `<div class="u4-secret-slots" dir="rtl">${cells}<span class="u4-slot given">${escapeHtml(bank.given)}</span></div>`;
     }
     function draw(){
       if(idx >= qs.length){ final(); return; }
       const q = qs[idx]; locked=false;
+      feedback(shell, '', '');
       const order = shuffle(q.options.map((_,i)=>i));
       const opts = order.map(i=>q.options[i]);
       const ans = order.indexOf(q.answerIndex);

@@ -53,21 +53,21 @@
 
     { "id": "kabira", "ar": "كَبيرَة", "tr": "", "category": "adjectives", "emoji": "🐳", "note": "", "tags": [] },
     { "id": "saghira", "ar": "صَغيرَة", "tr": "", "category": "adjectives", "emoji": "🐜", "note": "", "tags": [] },
-    { "id": "jamila", "ar": "جَميلَة", "tr": "", "category": "adjectives", "emoji": "🌸", "note": "", "tags": [] },
+    { "id": "jamila", "ar": "جَميلَة", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
     { "id": "mashhura", "ar": "مَشْهورَة", "tr": "", "category": "adjectives", "emoji": "⭐", "note": "", "tags": [] },
-    { "id": "ladhidha", "ar": "لَذيذَة", "tr": "", "category": "adjectives", "emoji": "😋", "note": "", "tags": [] },
-    { "id": "tarikhiyya", "ar": "تاريخِيَّة", "tr": "", "category": "adjectives", "emoji": "🏺", "note": "", "tags": [] },
-    { "id": "siyahiyya", "ar": "سِياحِيَّة", "tr": "", "category": "adjectives", "emoji": "🏖️", "note": "", "tags": [] },
+    { "id": "ladhidha", "ar": "لَذيذَة", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
+    { "id": "tarikhiyya", "ar": "تاريخِيَّة", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
+    { "id": "siyahiyya", "ar": "سِياحِيَّة", "tr": "", "category": "adjectives", "emoji": "🧳", "note": "", "tags": [] },
     { "id": "muzdahim", "ar": "مُزْدَحِم", "tr": "", "category": "adjectives", "emoji": "👥", "note": "", "tags": [] },
-    { "id": "jadid", "ar": "جَديد", "tr": "", "category": "adjectives", "emoji": "✨", "note": "", "tags": [] },
-    { "id": "qarib", "ar": "قَريب", "tr": "", "category": "adjectives", "emoji": "🤏", "note": "", "tags": [] },
-    { "id": "baid", "ar": "بَعيد", "tr": "", "category": "adjectives", "emoji": "🔭", "note": "", "tags": [] },
+    { "id": "jadid", "ar": "جَديد", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
+    { "id": "qarib", "ar": "قَريب", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
+    { "id": "baid", "ar": "بَعيد", "tr": "", "category": "adjectives", "emoji": "", "note": "", "tags": [] },
 
-    { "id": "shamal", "ar": "شَمال", "tr": "", "category": "directions", "emoji": "⬆️", "note": "", "tags": [] },
-    { "id": "janub", "ar": "جَنوب", "tr": "", "category": "directions", "emoji": "⬇️", "note": "", "tags": [] },
-    { "id": "sharq", "ar": "شَرْق", "tr": "", "category": "directions", "emoji": "➡️", "note": "", "tags": [] },
-    { "id": "gharb", "ar": "غَرْب", "tr": "", "category": "directions", "emoji": "⬅️", "note": "", "tags": [] },
-    { "id": "wasat", "ar": "وَسَط", "tr": "", "category": "directions", "emoji": "🎯", "note": "", "tags": [] },
+    { "id": "shamal", "ar": "شَمال", "tr": "", "category": "directions", "emoji": "", "note": "", "tags": [] },
+    { "id": "janub", "ar": "جَنوب", "tr": "", "category": "directions", "emoji": "", "note": "", "tags": [] },
+    { "id": "sharq", "ar": "شَرْق", "tr": "", "category": "directions", "emoji": "", "note": "", "tags": [] },
+    { "id": "gharb", "ar": "غَرْب", "tr": "", "category": "directions", "emoji": "", "note": "", "tags": [] },
+    { "id": "wasat", "ar": "وَسَط", "tr": "", "category": "directions", "emoji": "", "note": "", "tags": [] },
 
     { "id": "talib", "ar": "طالِب", "tr": "", "category": "people", "emoji": "👨‍🎓", "note": "", "tags": [] },
     { "id": "taliba", "ar": "طالِبَة", "tr": "", "category": "people", "emoji": "👩‍🎓", "note": "", "tags": [] },
@@ -78,9 +78,9 @@
     { "id": "sayyarat", "ar": "سَيّارات", "tr": "", "category": "people", "emoji": "🚗🚗", "note": "", "tags": [] },
 
     { "id": "saa", "ar": "ساعَة", "tr": "", "category": "time", "emoji": "⏰", "note": "", "tags": [] },
-    { "id": "nisf", "ar": "النِّصْف", "tr": "", "category": "time", "emoji": "½", "note": "", "tags": [] },
-    { "id": "rub", "ar": "الرُّبْع", "tr": "", "category": "time", "emoji": "¼", "note": "", "tags": [] },
-    { "id": "thuluth", "ar": "الثُّلُث", "tr": "", "category": "time", "emoji": "⅓", "note": "", "tags": [] },
+    { "id": "nisf", "ar": "النِّصْف", "tr": "", "category": "time", "emoji": "", "note": "", "tags": [] },
+    { "id": "rub", "ar": "الرُّبْع", "tr": "", "category": "time", "emoji": "", "note": "", "tags": [] },
+    { "id": "thuluth", "ar": "الثُّلُث", "tr": "", "category": "time", "emoji": "", "note": "", "tags": [] },
     { "id": "sabahan", "ar": "صَباحًا", "tr": "", "category": "time", "emoji": "🌅", "note": "", "tags": [] },
     { "id": "zuhran", "ar": "ظُهْرًا", "tr": "", "category": "time", "emoji": "☀️", "note": "", "tags": [] },
     { "id": "bad_zuhr", "ar": "بَعْد الظُّهْر", "tr": "", "category": "time", "emoji": "🌇", "note": "", "tags": [] },
@@ -180,7 +180,7 @@
       { "id": "mp005", "left": "قَيْصَري", "right": "المانْتي" },
       { "id": "mp006", "left": "أَفْيون", "right": "القِشْطَة" },
       { "id": "mp007", "left": "أَرْضُروم", "right": "كَباب جاغ" },
-      { "id": "mp008", "left": "باطْمان", "right": "حَسَنْكَيْف" },
+      { "id": "mp008", "left": "باطْمان", "right": "حَسَن كَيْف" },
       { "id": "mp009", "left": "وان", "right": "قَلْعَة وان" },
       { "id": "mp010", "left": "دِيارْبَكِر", "right": "الأَسْوار التّاريخِيَّة" }
     ],
@@ -193,7 +193,7 @@
       { "id": "q006", "type": "mcq", "prompt": "هَلْ حَيّ مُراد قَريب مِنْ مُتْحَف مَوْلانا؟", "options": ["لا، هُو بَعيد عَنْه", "نَعَمْ، هُو قَريب مِنْه"], "answerIndex": 0, "skill": "dialogue" },
       { "id": "q007", "type": "mcq", "prompt": "حَيّ مُراد قَريب مِن ...", "options": ["السّوق المَرْكَزِيّ", "مُتْحَف مَوْلانا", "مَسْجِد آياصوفْيا", "البَحْر"], "answerIndex": 0, "skill": "dialogue" },
       { "id": "q008", "type": "mcq", "prompt": "تَشْتَهِرُ بورْصَة بِـ...", "options": ["كَباب إِسْكَنْدَر", "المانْتي", "التّانْتوني", "القِشْطَة"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "q009", "type": "mcq", "prompt": "تَشْتَهِرُ قَيْصَري بِـ...", "options": ["المانْتي", "كَباب جاغ", "القِشْطَة", "حَسَنْكَيْف"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "q009", "type": "mcq", "prompt": "تَشْتَهِرُ قَيْصَري بِـ...", "options": ["المانْتي", "كَباب جاغ", "القِشْطَة", "حَسَن كَيْف"], "answerIndex": 0, "skill": "vocab" },
       { "id": "q010", "type": "mcq", "prompt": "مَدينَة وان مَشْهورَة بِـ...", "options": ["قَلْعَتِها التّاريخِيَّة", "جامِع أولو", "التّانْتوني", "كَباب إِسْكَنْدَر"], "answerIndex": 0, "skill": "vocab" },
       { "id": "q011", "type": "mcq", "prompt": "أَيْن تَعيشُ عائِشَة؟", "options": ["في إِسْطَنْبول", "في إِزْمير", "في وان", "في سينوب"], "answerIndex": 0, "skill": "reading" },
       { "id": "q012", "type": "mcq", "prompt": "بِماذا تَشْتَهِرُ مَدينَة عائِشَة؟", "options": ["بِالأَماكِن التّاريخِيَّة وَالسِّياحِيَّة", "بِكَباب جاغ", "بِالمانْتي", "بِالقِشْطَة"], "answerIndex": 0, "skill": "reading" },
@@ -244,14 +244,14 @@
     "sentenceOrder": [
       { "id": "so001", "sentence": "تُرْكِيا بَلَد كَبير وَجَميل.", "tokens": ["تُرْكِيا", "بَلَد", "كَبير", "وَجَميل"], "tr": "" },
       { "id": "so002", "sentence": "بورْصَة مَشْهورَة بِالأَماكِن التّاريخِيَّة.", "tokens": ["بورْصَة", "مَشْهورَة", "بِالأَماكِن", "التّاريخِيَّة"], "tr": "" },
-      { "id": "so003", "sentence": "حَيّي قَريب مِنْ مُتْحَف مَوْلانا.", "tokens": ["حَيّي", "قَريب", "مِنْ", "مُتْحَف", "مَوْلانا"], "tr": "" },
+      { "id": "so003", "sentence": "حَيّي قَريب مِنْ مُتْحَف مَوْلانا.", "tokens": ["حَيّي", "قَريب", "مِنْ", "مُتْحَف", "مَوْلانا"], "accept": [["مُتْحَف", "مَوْلانا", "قَريب", "مِنْ", "حَيّي"]], "tr": "" },
       { "id": "so004", "sentence": "إِسْطَنْبول مَدينَة تاريخِيَّة وَسِياحِيَّة.", "tokens": ["إِسْطَنْبول", "مَدينَة", "تاريخِيَّة", "وَسِياحِيَّة"], "tr": "" },
       { "id": "so005", "sentence": "أَسْكُنُ في حَيّ كَبير.", "tokens": ["أَسْكُنُ", "في", "حَيّ", "كَبير"], "tr": "" },
       { "id": "so006", "sentence": "مَرْسين مَشْهورَة بِالأَماكِن السِّياحِيَّة.", "tokens": ["مَرْسين", "مَشْهورَة", "بِالأَماكِن", "السِّياحِيَّة"], "tr": "" },
       { "id": "so007", "sentence": "لَبِسْتُ مَلابِسي في السّاعَة السّابِعَة وَالرُّبْع.", "tokens": ["لَبِسْتُ", "مَلابِسي", "في", "السّاعَة", "السّابِعَة", "وَالرُّبْع"], "tr": "" },
-      { "id": "so008", "sentence": "مُتْحَف مَوْلانا بَعيد عَنْ بَيْتي.", "tokens": ["مُتْحَف", "مَوْلانا", "بَعيد", "عَنْ", "بَيْتي"], "tr": "" },
-      { "id": "so009", "sentence": "تَقَعُ سينوب في شَمال تُرْكِيا.", "tokens": ["تَقَعُ", "سينوب", "في", "شَمال", "تُرْكِيا"], "tr": "" },
-      { "id": "so010", "sentence": "تَشْتَهِرُ وان بِقَلْعَتِها التّاريخِيَّة.", "tokens": ["تَشْتَهِرُ", "وان", "بِقَلْعَتِها", "التّاريخِيَّة"], "tr": "" }
+      { "id": "so008", "sentence": "مُتْحَف مَوْلانا بَعيد عَنْ بَيْتي.", "tokens": ["مُتْحَف", "مَوْلانا", "بَعيد", "عَنْ", "بَيْتي"], "accept": [["بَيْتي", "بَعيد", "عَنْ", "مُتْحَف", "مَوْلانا"]], "tr": "" },
+      { "id": "so009", "sentence": "تَقَعُ سينوب في شَمال تُرْكِيا.", "tokens": ["تَقَعُ", "سينوب", "في", "شَمال", "تُرْكِيا"], "accept": [["سينوب", "تَقَعُ", "في", "شَمال", "تُرْكِيا"]], "tr": "" },
+      { "id": "so010", "sentence": "تَشْتَهِرُ وان بِقَلْعَتِها التّاريخِيَّة.", "tokens": ["تَشْتَهِرُ", "وان", "بِقَلْعَتِها", "التّاريخِيَّة"], "accept": [["وان", "تَشْتَهِرُ", "بِقَلْعَتِها", "التّاريخِيَّة"]], "tr": "" }
     ],
     "oddOneOut": [
       { "id": "odd001", "category": "مُفْرَد وَجَمْع", "options": ["طالِبات", "طُلّاب", "سَيّارات", "طالِبَة"], "oddIndex": 3, "explanation": "«طالِبَة» مُفْرَد" },
@@ -263,7 +263,7 @@
       { "id": "odd007", "category": "المُدُن", "options": ["إِسْطَنْبول", "أَنْقَرَة", "بورْصَة", "تُرْكِيا"], "oddIndex": 3, "explanation": "«تُرْكِيا» بَلَد" },
       { "id": "odd008", "category": "الجِهات", "options": ["شَمال", "جَنوب", "شَرْق", "عاصِمَة"], "oddIndex": 3, "explanation": "«عاصِمَة» لَيْسَتْ جِهَة" },
       { "id": "odd009", "category": "السّاعَة", "options": ["النِّصْف", "الرُّبْع", "الثُّلُث", "السّوق"], "oddIndex": 3, "explanation": "«السّوق» مَكان" },
-      { "id": "odd010", "category": "المُدُن", "options": ["قونْيا", "مَرْسين", "وان", "حَسَنْكَيْف"], "oddIndex": 3, "explanation": "«حَسَنْكَيْف» مَكان في باطْمان" }
+      { "id": "odd010", "category": "المُدُن", "options": ["قونْيا", "مَرْسين", "وان", "حَسَن كَيْف"], "oddIndex": 3, "explanation": "«حَسَن كَيْف» مَكان في باطْمان" }
     ],
     "wordSearch": {
       "words": ["عاصمة", "شرق", "مدينة", "لذيذة", "تاريخية", "غرب", "سياحية", "مدن", "أطعمة", "حي"]
@@ -274,14 +274,11 @@
       { "ar": "سوق", "target": "سوق", "emoji": "🛒", "tr": "" },
       { "ar": "بَحْر", "target": "بحر", "emoji": "🌊", "tr": "" },
       { "ar": "قَلْعَة", "target": "قلعة", "emoji": "🏰", "tr": "" },
-      { "ar": "مُتْحَف", "target": "متحف", "emoji": "🖼️", "tr": "" },
-      { "ar": "عاصِمَة", "target": "عاصمة", "emoji": "🏛️", "tr": "" },
-      { "ar": "بَلَد", "target": "بلد", "emoji": "🌍", "tr": "" },
-      { "ar": "شَوارِع", "target": "شوارع", "emoji": "🛣️", "tr": "" },
-      { "ar": "مَساجِد", "target": "مساجد", "emoji": "🕌", "tr": "" },
-      { "ar": "أَماكِن", "target": "أماكن", "emoji": "📍", "tr": "" },
-      { "ar": "أَطْعِمَة", "target": "أطعمة", "emoji": "🍲", "tr": "" },
-      { "ar": "مُزْدَحِمَة", "target": "مزدحمة", "emoji": "👥", "tr": "" }
+      { "ar": "بَيْت", "target": "بيت", "emoji": "🏠", "tr": "" },
+      { "ar": "مَدْرَسَة", "target": "مدرسة", "emoji": "🏫", "tr": "" },
+      { "ar": "سَيّارَة", "target": "سيارة", "emoji": "🚗", "tr": "" },
+      { "ar": "ساعَة", "target": "ساعة", "emoji": "⏰", "tr": "" },
+      { "ar": "شَوارِع", "target": "شوارع", "emoji": "🛣️", "tr": "" }
     ],
     "wheelQuestions": [
       { "id": "wq001", "type": "mcq", "prompt": "ما مَعْنى «مَدينَة»؟", "options": ["🏙️", "🌊", "🕌", "🍲"], "answerIndex": 0, "skill": "vocab" },
@@ -293,10 +290,10 @@
       { "id": "wq007", "type": "mcq", "prompt": "أَيْن تَقَعُ سينوب؟", "options": ["في شَمال تُرْكِيا", "في جَنوب تُرْكِيا", "في شَرْق تُرْكِيا", "في غَرْب تُرْكِيا"], "answerIndex": 0, "skill": "map" },
       { "id": "wq008", "type": "mcq", "prompt": "أَيْن تَقَعُ وان؟", "options": ["في شَرْق تُرْكِيا", "في غَرْب تُرْكِيا", "في شَمال تُرْكِيا", "في وَسَط تُرْكِيا"], "answerIndex": 0, "skill": "map" },
       { "id": "wq009", "type": "mcq", "prompt": "بِماذا تَشْتَهِرُ أَفْيون؟", "options": ["بِالقِشْطَة", "بِالمانْتي", "بِكَباب جاغ", "بِالتّانْتوني"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq010", "type": "mcq", "prompt": "بِماذا تَشْتَهِرُ باطْمان؟", "options": ["بِحَسَنْكَيْف", "بِالقِشْطَة", "بِجامِع أولو", "بِالمانْتي"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq011", "type": "mcq", "prompt": "السّاعَة 3:30 — كَم السّاعَة؟", "options": ["الثّالِثَة وَالنِّصْف", "الثّالِثَة وَالرُّبْع", "الثّالِثَة وَالثُّلُث"], "answerIndex": 0, "skill": "time" },
-      { "id": "wq012", "type": "mcq", "prompt": "السّاعَة 9:15 — كَم السّاعَة؟", "options": ["التّاسِعَة وَالرُّبْع", "التّاسِعَة وَالنِّصْف", "التّاسِعَة وَالثُّلُث"], "answerIndex": 0, "skill": "time" },
-      { "id": "wq013", "type": "mcq", "prompt": "أَكْمِل: «رُوحِي ________ لِوَطَنِي»", "options": ["فِدَاءٌ", "كَبِيرٌ", "قَرِيبٌ"], "answerIndex": 0, "skill": "saying" }
+      { "id": "wq010", "type": "mcq", "prompt": "بِماذا تَشْتَهِرُ باطْمان؟", "options": ["بِحَسَن كَيْف", "بِالقِشْطَة", "بِجامِع أولو", "بِالمانْتي"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq011", "type": "mcq", "prompt": "كَم السّاعَة الآن؟\nالسّاعَة: ٣:٣٠", "options": ["الثّالِثَة وَالنِّصْف", "الثّالِثَة وَالرُّبْع", "الثّالِثَة وَالثُّلُث"], "answerIndex": 0, "skill": "time" },
+      { "id": "wq012", "type": "mcq", "prompt": "كَم السّاعَة الآن؟\nالسّاعَة: ٩:١٥", "options": ["التّاسِعَة وَالرُّبْع", "التّاسِعَة وَالنِّصْف", "التّاسِعَة وَالثُّلُث"], "answerIndex": 0, "skill": "time" },
+      { "id": "wq013", "type": "mcq", "prompt": "أَكْمِل: «رُوحِي ________ لِوَطَنِي».", "options": ["فِدَاء", "كَبير", "قَريب"], "answerIndex": 0, "skill": "saying" }
     ],
     "clockItems": [
       { "id": "ck001", "h": 1, "m": 30, "digital": "1:30", "ar": "السّاعَة الواحِدَة وَالنِّصْف" },
@@ -370,7 +367,7 @@
           { "text": "المانْتي", "cat": "A" },
           { "text": "جامِع أولو", "cat": "B" },
           { "text": "التّانْتوني", "cat": "A" },
-          { "text": "حَسَنْكَيْف", "cat": "B" },
+          { "text": "حَسَن كَيْف", "cat": "B" },
           { "text": "القِشْطَة", "cat": "A" },
           { "text": "أَسْوار دِيارْبَكِر", "cat": "B" },
           { "text": "كَباب إِسْكَنْدَر", "cat": "A" },
