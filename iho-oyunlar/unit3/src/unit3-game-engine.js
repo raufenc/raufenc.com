@@ -571,9 +571,6 @@
     typing: renderTyping
   };
 
-  const api = {
-    games: Object.keys(renderers),
-
   function fitToViewport(el){
     try{
       if(typeof matchMedia!=='undefined' && matchMedia('(orientation: portrait) and (max-width: 880px)').matches){ el.style.transform=''; return; }
@@ -586,6 +583,10 @@
       el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';
     }catch(e){}
   }
+
+  const api = {
+    games: Object.keys(renderers),
+
     mount(container, gameType, options){
       const el = containerOf(container);
       if(!el) throw new Error('container not found.');
