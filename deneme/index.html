@@ -763,6 +763,11 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.05;
+      color: var(--warm);
+    }
+    /* Degrade her karakterin kendi üstünde (transform'lu silindirlerle uyumlu) */
+    .stat-number .od-reel span,
+    .stat-number .od-s {
       background: linear-gradient(135deg, var(--warm) 25%, var(--warm-hi) 60%, var(--warm) 95%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -2505,7 +2510,7 @@
         html += '<span class="od-d"><span class="od-reel" data-final="' + c + '" style="--dd:' + (di * 90) + 'ms">' + reel + '</span></span>';
         di++;
       } else {
-        html += c;
+        html += '<span class="od-s">' + c + '</span>';
       }
     }
     el.innerHTML = html;
