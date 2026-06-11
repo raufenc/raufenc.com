@@ -121,10 +121,18 @@
       --font-display: 'Fraunces', Georgia, serif;
       --ghost-stroke: rgba(232,232,240,0.07);
       --glass: rgba(255,255,255,0.04);
+      /* Premium ince gradyan çerçeve renkleri */
+      --hair1: rgba(255,255,255,0.16);
+      --hair2: rgba(255,255,255,0.045);
+      --hair3: rgba(200,164,110,0.22);
+      --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.light {
       --ghost-stroke: rgba(26,26,46,0.08);
       --glass: rgba(10,10,20,0.03);
+      --hair1: rgba(20,20,45,0.16);
+      --hair2: rgba(20,20,45,0.05);
+      --hair3: rgba(160,120,60,0.3);
     }
     html { scroll-behavior: smooth; }
 
@@ -214,6 +222,16 @@
       transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
     .site-nav.scrolled { box-shadow: var(--shadow-sm); }
+    .site-nav::after {
+      content: '';
+      position: absolute; left: 0; right: 0; bottom: -1px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 5%, rgba(200,164,110,0.4), rgba(99,102,241,0.3), transparent 95%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .site-nav.scrolled::after { opacity: 1; }
     .site-nav .wrap {
       display: flex; align-items: center; justify-content: space-between;
       height: 58px;
@@ -440,7 +458,14 @@
       will-change: transform;
     }
     .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .btn-warm { background: var(--warm); color: #0a0a0f; }
+    .btn-warm {
+      background: linear-gradient(160deg, #e0bd86 0%, #c8a46e 45%, #b08850 100%);
+      color: #0a0a0f;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.15),
+        0 2px 8px rgba(200,164,110,0.25);
+    }
     .btn-warm::before {
       content: '';
       position: absolute; top: 0; left: -80%;
@@ -451,14 +476,25 @@
     }
     .btn-warm:hover::before { left: 130%; }
     .btn-warm:hover {
-      box-shadow: 0 6px 28px var(--warm-glow);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.45),
+        0 2px 6px rgba(200,164,110,0.3),
+        0 10px 32px var(--warm-glow);
       transform: translateY(-2px);
     }
     .btn-ghost {
-      background: transparent; color: var(--muted2);
-      border: 1px solid var(--border);
+      color: var(--muted2);
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        linear-gradient(165deg, var(--hair1), var(--hair2) 45%, var(--hair3) 100%) border-box;
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     }
-    .btn-ghost:hover { border-color: var(--warm); color: var(--text); transform: translateY(-2px); }
+    .btn-ghost:hover {
+      color: var(--text);
+      transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(200,164,110,0.4), 0 8px 24px rgba(0,0,0,0.25), 0 0 28px var(--warm-glow);
+    }
 
     /* Hero görsel kompozisyonu */
     .hero-visual {
@@ -476,8 +512,8 @@
       border-radius: 50%;
       overflow: hidden;
       border: 3px solid var(--border);
-      box-shadow: 0 0 70px var(--warm-glow), var(--shadow-lg);
-      transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s, border-color 0.5s;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12), 0 0 70px var(--warm-glow), var(--shadow-lg);
+      transition: transform 0.5s var(--ease-lux), box-shadow 0.5s, border-color 0.5s;
       z-index: 2;
     }
     .hero-photo-stack:hover .hero-photo-frame {
@@ -607,11 +643,14 @@
     .stat-item {
       position: relative;
       padding: 26px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        linear-gradient(165deg, var(--hair1), var(--hair2) 40%, var(--hair3) 100%) border-box;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, box-shadow 0.35s;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: transform 0.45s var(--ease-lux), box-shadow 0.45s var(--ease-lux);
     }
     .stat-item::before {
       content: '';
@@ -620,7 +659,14 @@
       opacity: 0; transition: opacity 0.3s;
       pointer-events: none;
     }
-    .stat-item:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: var(--shadow-md); }
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 2px 4px rgba(0,0,0,0.2),
+        0 14px 32px rgba(0,0,0,0.3),
+        0 0 30px var(--warm-glow);
+    }
     .stat-item:hover::before { opacity: 1; }
     .stat-icon { font-size: 19px; margin-bottom: 10px; opacity: 0.85; }
     .stat-number {
@@ -928,11 +974,24 @@
       text-decoration: none;
       color: var(--text);
       isolation: isolate;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      transition: border-color 0.3s, box-shadow 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border: 1px solid transparent;
+      background:
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        linear-gradient(165deg, var(--hair1), var(--hair2) 40%, var(--hair3) 100%) border-box;
+      transition: box-shadow 0.5s var(--ease-lux);
       transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0)) scale(var(--sc, 1));
       will-change: transform;
+    }
+    /* Cam iç halka — üst kenarda ışık yansıması */
+    .bento-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      z-index: 2;
+      border-radius: inherit;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        inset 0 0 0 1px rgba(255,255,255,0.045);
+      pointer-events: none;
     }
     html.js .bento-card {
       opacity: 0;
@@ -946,13 +1005,22 @@
       transition-delay: var(--d, 0ms), var(--d, 0ms), 0ms, 0ms;
     }
     .bento-card:hover {
-      --ty: -6px; --sc: 1.005;
-      border-color: var(--warm);
-      box-shadow: 0 28px 64px rgba(0,0,0,0.4), 0 0 44px var(--warm-glow);
+      --ty: -7px; --sc: 1.006;
+      box-shadow:
+        0 0 0 1px rgba(200,164,110,0.55),
+        0 2px 5px rgba(0,0,0,0.3),
+        0 16px 32px rgba(0,0,0,0.35),
+        0 40px 90px rgba(0,0,0,0.38),
+        0 0 56px var(--warm-glow);
       z-index: 2;
     }
     html.light .bento-card:hover {
-      box-shadow: 0 28px 64px rgba(0,0,0,0.16), 0 0 44px var(--warm-glow);
+      box-shadow:
+        0 0 0 1px rgba(176,136,84,0.6),
+        0 2px 5px rgba(0,0,0,0.08),
+        0 16px 32px rgba(0,0,0,0.12),
+        0 40px 90px rgba(0,0,0,0.14),
+        0 0 56px var(--warm-glow);
     }
 
     /* İmleç spotlight katmanı */
@@ -1017,10 +1085,10 @@
       z-index: 1;
       background:
         linear-gradient(180deg,
-          rgba(10,10,15,0.32) 0%,
-          rgba(10,10,15,0.02) 30%,
-          rgba(10,10,15,0.55) 68%,
-          rgba(10,10,15,0.93) 100%);
+          rgba(10,10,15,0.36) 0%,
+          rgba(10,10,15,0.0) 32%,
+          rgba(10,10,15,0.58) 66%,
+          rgba(10,10,15,0.95) 100%);
       pointer-events: none;
     }
 
@@ -1039,12 +1107,13 @@
       align-self: flex-start;
       font-size: 10px; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
-      padding: 4px 11px;
+      padding: 4px 12px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.13);
-      color: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(8,8,16,0.42);
+      color: rgba(255,255,255,0.96);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 2px 8px rgba(0,0,0,0.25);
       margin-bottom: 8px;
     }
     .bento-title {
@@ -1159,8 +1228,10 @@
     }
     .filter-btn:hover { border-color: var(--accent); color: var(--text); transform: translateY(-2px); }
     .filter-btn.active {
-      background: var(--accent); border-color: var(--accent);
-      color: white; box-shadow: 0 4px 16px var(--accent-glow);
+      background: linear-gradient(160deg, #7d84f8, #6366f1 55%, #5558e8);
+      border-color: transparent;
+      color: white;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 4px 18px var(--accent-glow);
       transform: translateY(-1px);
     }
 
@@ -1209,7 +1280,10 @@
       border-color: var(--accent);
       background: var(--surface2);
       transform: translateY(-5px);
-      box-shadow: 0 14px 36px var(--accent-glow);
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.2),
+        0 14px 36px var(--accent-glow),
+        0 28px 64px rgba(0,0,0,0.25);
     }
     .card:hover .card-glow { opacity: 1; }
     .card-icon-wrap {
@@ -1827,7 +1901,7 @@
       <a class="bento-card tilt b-noroterbiye" href="/noroterbiye/" aria-label="NöroTerbiye projesi">
         <div class="bento-media">
           <img class="video-fallback" src="/images/vitrin/noroterbiye.webp" alt="" width="720" height="1080" loading="eager">
-          <video autoplay loop muted playsinline preload="auto" poster="/images/vitrin/noroterbiye.webp">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/noroterbiye.webp">
             <source src="/noroterbiye/tanitim/noroterbiye-30s%2010.mp4" type="video/mp4">
           </video>
         </div>
@@ -1843,10 +1917,13 @@
         </div>
       </a>
 
-      <!-- 2. DİL & SÖZ (WIDE, görsel) -->
+      <!-- 2. DİL & SÖZ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-dil" href="/vitrin/dil/" aria-label="Dil ve Söz kategorisi">
         <div class="bento-media">
-          <img src="/images/vitrin/osmanlica.webp" alt="" loading="lazy">
+          <img class="video-fallback" src="/images/vitrin/video/dil-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/dil-poster.jpg">
+            <source src="/images/vitrin/video/dil.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">02</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -1860,12 +1937,13 @@
         </div>
       </a>
 
-      <!-- 3. PEYGAMBERİM & AHLÂK (MED, gradient) -->
+      <!-- 3. PEYGAMBERİM & AHLÂK (MED, video) -->
       <a class="bento-card tilt bento-med b-peygamberim" href="/vitrin/peygamberim/" aria-label="Peygamberim ve Ahlâk kategorisi">
         <div class="bento-media">
-          <div class="bento-bg-grad"></div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:160px;bottom:-30px;right:-10px;opacity:0.15;">☪︎</div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:90px;top:24px;right:24px;opacity:0.1;">۞</div>
+          <img class="video-fallback" src="/images/vitrin/video/peygamberim-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/peygamberim-poster.jpg">
+            <source src="/images/vitrin/video/peygamberim.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">04</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -1879,12 +1957,13 @@
         </div>
       </a>
 
-      <!-- 4. TARİH & MEDENİYET (WIDE, gradient) -->
+      <!-- 4. TARİH & MEDENİYET (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-tarih" href="/vitrin/tarih/" aria-label="Tarih ve Medeniyet kategorisi">
         <div class="bento-media">
-          <div class="bento-bg-grad"></div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:130px;bottom:-25px;right:-5px;">🏛️</div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:58px;top:22px;left:30px;opacity:0.15;">⚔️</div>
+          <img class="video-fallback" src="/images/vitrin/video/tarih-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/tarih-poster.jpg">
+            <source src="/images/vitrin/video/tarih.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">03</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -1898,12 +1977,13 @@
         </div>
       </a>
 
-      <!-- 5. DÜŞÜNCE PUSULASI (TALL, gradient) -->
+      <!-- 5. DÜŞÜNCE PUSULASI (TALL, video) -->
       <a class="bento-card tilt b-dusunce" href="/vitrin/dusunce/" aria-label="Düşünce Pusulası kategorisi">
         <div class="bento-media">
-          <div class="bento-bg-grad"></div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:200px;top:42%;left:50%;transform:translate(-50%,-50%);opacity:0.13;">🧭</div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:84px;bottom:120px;right:18px;opacity:0.14;">♡</div>
+          <img class="video-fallback" src="/images/vitrin/video/dusunce-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/dusunce-poster.jpg">
+            <source src="/images/vitrin/video/dusunce.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">05</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -1917,12 +1997,13 @@
         </div>
       </a>
 
-      <!-- 6. YAPAY ZEKÂ (WIDE, gradient) -->
+      <!-- 6. YAPAY ZEKÂ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-ai" href="/vitrin/ai/" aria-label="Yapay Zekâ kategorisi">
         <div class="bento-media">
-          <div class="bento-bg-grad"></div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:120px;bottom:-22px;right:0;opacity:0.18;">🤖</div>
-          <div class="bento-emoji" aria-hidden="true" style="font-size:52px;top:24px;left:30px;opacity:0.16;">🧬</div>
+          <img class="video-fallback" src="/images/vitrin/video/ai-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/ai-poster.jpg">
+            <source src="/images/vitrin/video/ai.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">07</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -1936,10 +2017,13 @@
         </div>
       </a>
 
-      <!-- 7. SINIF ATÖLYESİ (WIDE, görsel) -->
+      <!-- 7. SINIF ATÖLYESİ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-sinif" href="/vitrin/sinif/" aria-label="Sınıf Atölyesi kategorisi">
         <div class="bento-media">
-          <img src="/images/vitrin/program-rehberim.webp" alt="" loading="lazy">
+          <img class="video-fallback" src="/images/vitrin/video/sinif-poster.jpg" alt="" loading="lazy" decoding="async">
+          <video loop muted playsinline preload="none" poster="/images/vitrin/video/sinif-poster.jpg">
+            <source src="/images/vitrin/video/sinif.mp4" type="video/mp4">
+          </video>
         </div>
         <span class="bento-index" aria-hidden="true">06</span>
         <div class="spotlight" aria-hidden="true"></div>
@@ -2715,8 +2799,9 @@
   }
 
   // ── BENTO VIDEO LAZY-PLAY (autoplay block guard) ──
+  // preload="none": video ancak karta gelince yüklenir (sayfa yükü hafif kalır)
   var bentoVideos = document.querySelectorAll('.bento-card video');
-  if (bentoVideos.length) {
+  if (bentoVideos.length && !prefersReduced) {
     bentoVideos.forEach(function(v) {
       v.addEventListener('playing', function() { v.classList.add('is-playing'); });
       v.addEventListener('pause',   function() { v.classList.remove('is-playing'); });
@@ -2725,6 +2810,7 @@
     var videoObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var v = entry.target;
+        v.dataset.inview = entry.isIntersecting ? '1' : '';
         if (entry.isIntersecting) {
           v.muted = true;
           var p = v.play();
@@ -2740,7 +2826,10 @@
     var unlocked = false;
     function unlock() {
       if (unlocked) return; unlocked = true;
-      bentoVideos.forEach(function(v) { v.muted = true; v.play().catch(function(){}); });
+      bentoVideos.forEach(function(v) {
+        if (v.dataset.inview !== '1') return; // görünmeyen video yüklenmesin
+        v.muted = true; v.play().catch(function(){});
+      });
       ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev) {
         window.removeEventListener(ev, unlock);
       });
