@@ -574,3 +574,23 @@ const renderers = {
 renderMenu();
 const hashGame = location.hash.replace("#", "");
 loadGame(window.IHO_GAME_ID || hashGame || data.games[0].id);
+
+/* fit-to-viewport: oyun tek ekranda, scroll yok (tahta kuralı) */
+;(function(){
+  var ws=document.querySelector('.workspace'); if(!ws) return;
+  function fit(){
+    if(matchMedia('(orientation: portrait) and (max-width: 880px)').matches){ws.style.transform='';document.body.style.overflow='';return}
+    ws.style.transform='';
+    var top=ws.getBoundingClientRect().top;
+    var avail=Math.max(160,innerHeight-top-8);
+    var need=ws.scrollHeight;
+    var f=Math.min(1,avail/need);
+    ws.style.transformOrigin='top center';
+    ws.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';
+    document.body.style.overflow=(f<0.999)?'hidden':'';document.documentElement.style.overflow=(f<0.999)?'hidden':'';
+  }
+  try{ new MutationObserver(fit).observe(document.body,{childList:true,subtree:true});
+       addEventListener('resize',fit); setInterval(fit,900); }catch(e){}
+  try{ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit); }catch(e){}
+  fit();
+})();

@@ -573,6 +573,19 @@
 
   const api = {
     games: Object.keys(renderers),
+
+  function fitToViewport(el){
+    try{
+      if(typeof matchMedia!=='undefined' && matchMedia('(orientation: portrait) and (max-width: 880px)').matches){ el.style.transform=''; return; }
+      const p=el.parentElement||document.body;
+      el.style.transform='';
+      const avail=Math.max(140,(p.clientHeight||window.innerHeight)-8);
+      const need=el.scrollHeight;
+      const f=Math.min(1,avail/need);
+      el.style.transformOrigin='top center';
+      el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';
+    }catch(e){}
+  }
     mount(container, gameType, options){
       const el = containerOf(container);
       if(!el) throw new Error('container not found.');
@@ -580,6 +593,10 @@
       const type = gameType || 'quiz';
       if(!renderers[type]) throw new Error('Unknown type: ' + type);
       renderers[type](el, data, options || {});
+      const _fit=()=>fitToViewport(el);
+      try{ new MutationObserver(_fit).observe(el,{childList:true,subtree:true}); window.addEventListener('resize',_fit); setInterval(_fit,900); }catch(e){}
+      try{ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(_fit); }catch(e){}
+      _fit();
       return { destroy(){ el.innerHTML=''; el.classList.remove('u3-game'); } };
     },
     normalizeArabic,
