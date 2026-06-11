@@ -718,41 +718,6 @@
       50%      { transform: scaleY(0.55); opacity: 0.5; transform-origin: top; }
     }
 
-    /* ── MARQUEE ── */
-    .marquee {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-      padding: 14px 0;
-      z-index: 2;
-      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-    }
-    .marquee-track {
-      display: inline-flex; align-items: center; gap: 38px;
-      white-space: nowrap;
-      will-change: transform;
-    }
-    .marquee-track.ready { animation: marqueeSlide 46s linear infinite; }
-    .marquee:hover .marquee-track.ready { animation-play-state: paused; }
-    @keyframes marqueeSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-    .marquee-track span {
-      font-family: var(--font-display);
-      font-size: 22px; font-weight: 700;
-      letter-spacing: 0.02em;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--muted2);
-      transition: color 0.3s;
-      flex-shrink: 0;
-    }
-    .marquee-track span:hover { color: var(--warm); -webkit-text-stroke-color: var(--warm); }
-    .marquee-track i {
-      font-style: normal; color: var(--warm);
-      font-size: 13px; flex-shrink: 0;
-      animation: spin 7s linear infinite;
-      display: inline-block;
-    }
-
     /* ── STATS — asimetrik şerit ── */
     .stats-bar {
       position: relative; z-index: 2;
@@ -1686,7 +1651,6 @@
       .chip-3 { bottom: 0; left: 6%; }
       .chip-4 { bottom: 13%; right: 0; }
       .scroll-hint { display: none; }
-      .marquee-track span { font-size: 17px; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .stat-item { padding: 20px; }
       .journey-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -1758,8 +1722,7 @@
         transition-duration: 0.01ms !important;
       }
       html { scroll-behavior: auto; }
-      .marquee-track.ready { animation: none; }
-      .hero-ring, .hero-orbit, .marquee-track i { animation: none; }
+      .hero-ring, .hero-orbit { animation: none; }
       html.js .reveal, html.js .bento-card { opacity: 1; transform: none; translate: 0 0; filter: none; }
       html.js .motto-quote .w { opacity: 1; filter: none; transform: none; }
       .journey-timeline::before { transform: scaleY(1); }
@@ -1876,21 +1839,6 @@
           <span class="hero-chip chip-4"><b>⚙️</b> Mühendis</span>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- Proje marquee -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track" id="marquee-track">
-      <span>NöroTerbiye</span><i>✦</i>
-      <span>Sevgili Peygamberim</span><i>✦</i>
-      <span>Osmanlıca Lügat</span><i>✦</i>
-      <span>Kalbinin Haritası</span><i>✦</i>
-      <span>AI Atlası</span><i>✦</i>
-      <span>MUALLİMO</span><i>✦</i>
-      <span>İyilik Akademi</span><i>✦</i>
-      <span>Safsata Dedektifi</span><i>✦</i>
-      <span>Kayı</span><i>✦</i>
-      <span>İslam Bilim Yıldızları</span><i>✦</i>
     </div>
   </div>
 </section>
@@ -2629,13 +2577,6 @@
       }, 2400);
     }
     window.addEventListener('resize', sizeRot);
-  }
-
-  // ── MARQUEE ──
-  var marqueeTrack = document.getElementById('marquee-track');
-  if (marqueeTrack && !prefersReduced) {
-    marqueeTrack.innerHTML += marqueeTrack.innerHTML;
-    marqueeTrack.classList.add('ready');
   }
 
   // ── ÖZEL İMLEÇ ──
