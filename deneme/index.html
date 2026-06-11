@@ -14,7 +14,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
-  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#f6f2ea" media="(prefers-color-scheme: light)" />
 
   <!-- Canonical -->
   <link rel="canonical" href="https://raufenc.com/deneme/" />
@@ -114,6 +114,15 @@
   <link rel="stylesheet" href="/lib/design-system/animations.css" />
   <script src="/lib/design-system/theme.js"></script>
   <script>document.documentElement.classList.add('js');</script>
+  <script>
+  /* Açılış perdesi: oturumda bir kez, hareket azaltanlarda hiç */
+  try {
+    if (!sessionStorage.getItem('rauf-perde') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('with-curtain');
+      sessionStorage.setItem('rauf-perde', '1');
+    }
+  } catch (e) {}
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -125,18 +134,42 @@
       --hair1: rgba(255,255,255,0.16);
       --hair2: rgba(255,255,255,0.045);
       --hair3: rgba(200,164,110,0.22);
+      --warm-hi: var(--warm-hi); /* altın degradelerin parlak orta tonu */
       --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
       /* Okunabilirlik: koyu temada metin tonları aydınlatıldı */
       --muted: #5d5d7e;
       --muted2: #9b9bb8;
       --text-secondary: #b4b4cc;
     }
+    /* ── FİLDİŞİ KÂĞIT TEMASI — krem zemin, sepya mürekkep, derin altın ── */
     html.light {
-      --ghost-stroke: rgba(26,26,46,0.08);
-      --glass: rgba(10,10,20,0.03);
-      --hair1: rgba(20,20,45,0.16);
-      --hair2: rgba(20,20,45,0.05);
-      --hair3: rgba(160,120,60,0.3);
+      --bg:            #f6f2ea;
+      --bg-elevated:   #fffdf7;
+      --surface:       #fffdf7;
+      --surface2:      #efe9db;
+      --surface-hover: #e9e1d0;
+      --border:        #e3dac6;
+      --border-hover:  #cfc2a6;
+      --text:          #2b2317;
+      --text-secondary:#5d5240;
+      --muted:         #a89c84;
+      --muted2:        #786c54;
+      --warm:          #9c7a35;
+      --warm-soft:     rgba(156, 122, 53, 0.10);
+      --warm-glow:     rgba(156, 122, 53, 0.18);
+      --accent:        #5a55c9;
+      --accent-soft:   rgba(90, 85, 201, 0.08);
+      --accent-glow:   rgba(90, 85, 201, 0.15);
+      --nav-bg:        rgba(250, 247, 240, 0.88);
+      --shadow-sm:     0 2px 8px rgba(74, 56, 28, 0.07);
+      --shadow-md:     0 8px 24px rgba(74, 56, 28, 0.10);
+      --shadow-lg:     0 16px 48px rgba(74, 56, 28, 0.14);
+      --ghost-stroke:  rgba(74, 58, 32, 0.10);
+      --glass:         rgba(255, 253, 247, 0.55);
+      --hair1: rgba(90, 68, 34, 0.20);
+      --hair2: rgba(90, 68, 34, 0.06);
+      --hair3: rgba(156, 122, 53, 0.38);
+      --warm-hi: #bfa05a;
     }
     html { scroll-behavior: smooth; }
 
@@ -165,17 +198,29 @@
       to   { transform: translate3d(1.5%, 1.5%, 0) scale(1.05); }
     }
 
-    /* ── Noise texture ── */
+    /* ── Canlı film greni (koyu) / kâğıt dokusu (açık) ── */
     body::after {
       content: '';
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: -1;
-      opacity: 0.03;
+      position: fixed; inset: -40px;
+      pointer-events: none; z-index: 85;
+      opacity: 0.05;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-repeat: repeat;
       background-size: 200px 200px;
+      animation: grainShift 0.9s steps(1) infinite;
     }
-    html.light body::after { opacity: 0.015; }
+    @keyframes grainShift {
+      0%    { background-position: 0 0; }
+      12.5% { background-position: -34px 16px; }
+      25%   { background-position: 22px -28px; }
+      37.5% { background-position: -12px 38px; }
+      50%   { background-position: 40px 8px; }
+      62.5% { background-position: -28px -20px; }
+      75%   { background-position: 14px 30px; }
+      87.5% { background-position: -40px -6px; }
+      100%  { background-position: 0 0; }
+    }
+    html.light body::after { opacity: 0.045; animation: none; }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
@@ -185,6 +230,80 @@
       background: linear-gradient(90deg, var(--warm), var(--accent));
       z-index: 60;
       box-shadow: 0 0 12px var(--warm-glow);
+    }
+
+    /* ── AÇILIŞ PERDESİ ── */
+    .curtain { display: none; }
+    html.with-curtain .curtain {
+      display: block;
+      position: fixed; inset: 0; z-index: 200;
+      pointer-events: none;
+    }
+    html.with-curtain .curtain::before,
+    html.with-curtain .curtain::after {
+      content: '';
+      position: absolute; left: 0; right: 0; height: 50.5%;
+      background: var(--bg);
+      animation: curtainHalf 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0.5s forwards;
+    }
+    html.with-curtain .curtain::before { top: 0; transform-origin: top; }
+    html.with-curtain .curtain::after  { bottom: 0; transform-origin: bottom; }
+    @keyframes curtainHalf { to { transform: scaleY(0); } }
+    html.with-curtain .curtain-line {
+      position: absolute; top: 50%; left: 50%;
+      width: min(42vw, 300px); height: 2px;
+      transform: translate(-50%, -50%) scaleX(0);
+      background: linear-gradient(90deg, transparent, var(--warm), transparent);
+      box-shadow: 0 0 28px var(--warm-glow);
+      animation:
+        curtainLine 0.5s cubic-bezier(0.65, 0, 0.35, 1) forwards,
+        curtainLineOut 0.4s ease 0.62s forwards;
+    }
+    @keyframes curtainLine    { to { transform: translate(-50%, -50%) scaleX(1); } }
+    @keyframes curtainLineOut { to { opacity: 0; transform: translate(-50%, -50%) scaleX(1.35); } }
+    /* Perdeyle birlikte hero girişleri perde kalkarken başlasın */
+    html.with-curtain .hero-text        { animation-delay: 0.65s; }
+    html.with-curtain .hero h1 .lt      { animation-delay: calc(var(--i) * 45ms + 750ms); }
+    html.with-curtain .hero-line        { animation-delay: 1.05s; }
+    html.with-curtain .hero-desc        { animation-delay: 1.2s; }
+    html.with-curtain .hero-cta         { animation-delay: 1.35s; }
+    html.with-curtain .hero-visual      { animation-delay: 0.9s; }
+    html.with-curtain .hero-label::before { animation-delay: 0.85s; }
+
+    /* ── KENAR VİNYETİ — sinematik çerçeve ── */
+    .vignette {
+      position: fixed; inset: -2px;
+      pointer-events: none; z-index: 80;
+      background: radial-gradient(ellipse 115% 92% at 50% 44%, transparent 58%, rgba(0, 0, 0, 0.27) 100%);
+    }
+    html.light .vignette {
+      background: radial-gradient(ellipse 115% 92% at 50% 44%, transparent 62%, rgba(74, 56, 28, 0.13) 100%);
+    }
+
+    /* ── ODOMETRE SAYAÇLAR ── */
+    .od-d {
+      display: inline-flex;
+      height: 1em; overflow: hidden;
+      vertical-align: baseline;
+    }
+    .od-reel {
+      display: flex; flex-direction: column;
+      transform: translateY(calc(var(--dv, 0) * -1em));
+      transition: transform 1.5s var(--ease-lux);
+      transition-delay: var(--dd, 0ms);
+      will-change: transform;
+    }
+    .od-reel span { display: block; height: 1em; line-height: 1; }
+
+    /* ── FLIP filtre yardımcıları ── */
+    .card.card-out {
+      opacity: 0 !important;
+      transform: scale(0.95) !important;
+      transition: opacity 0.16s ease, transform 0.16s ease !important;
+    }
+    .card.card-in-new {
+      opacity: 0;
+      transform: translateY(16px) scale(0.96);
     }
 
     /* ── ÖZEL İMLEÇ ── */
@@ -407,7 +526,7 @@
       animation-delay: calc(var(--i) * 45ms + 150ms);
     }
     .hero h1 .lt.gold {
-      background: linear-gradient(135deg, var(--warm) 20%, #e8cfa0 55%, var(--warm) 90%);
+      background: linear-gradient(135deg, var(--warm) 20%, var(--warm-hi) 55%, var(--warm) 90%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -441,7 +560,7 @@
     .rot span {
       display: block; height: 1.5em; line-height: 1.5;
       font-style: italic; font-weight: 700;
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -679,7 +798,7 @@
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.05;
-      background: linear-gradient(135deg, var(--warm) 25%, #e3c896 60%, var(--warm) 95%);
+      background: linear-gradient(135deg, var(--warm) 25%, var(--warm-hi) 60%, var(--warm) 95%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -732,7 +851,7 @@
     }
     .section-title em {
       font-style: italic;
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1269,7 +1388,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      transition: border-color 0.25s, background 0.25s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+      transition: border-color 0.25s, background 0.25s, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s, opacity 0.4s ease;
       position: relative;
       overflow: hidden;
       animation: cardIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -1377,7 +1496,7 @@
     }
     html.js .motto-quote.lit .w { opacity: 1; filter: blur(0); transform: translateY(0); }
     .motto-quote .w.gold {
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1508,7 +1627,7 @@
       -webkit-text-stroke: 1.5px var(--ghost-stroke);
       user-select: none;
       margin-bottom: -8px;
-      background: linear-gradient(120deg, var(--warm), #e0c08a, var(--accent));
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi), var(--accent));
       -webkit-background-clip: text; background-clip: text;
       background-size: 0% 100%;
       background-repeat: no-repeat;
@@ -1656,6 +1775,12 @@
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body data-nav-skip="true">
+
+<!-- Açılış perdesi -->
+<div class="curtain" id="curtain" aria-hidden="true"><span class="curtain-line"></span></div>
+
+<!-- Sinematik vinyet -->
+<div class="vignette" aria-hidden="true"></div>
 
 <!-- Scroll progress -->
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
@@ -1868,7 +1993,7 @@
       </div>
       <div class="book-info">
         <span class="section-label">Kitap</span>
-        <h3>İçimizdeki Düşmanı <br/><em style="font-style:italic;background:linear-gradient(120deg,var(--warm),#e0c08a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Dosta Çevirmek</em></h3>
+        <h3>İçimizdeki Düşmanı <br/><em style="font-style:italic;background:linear-gradient(120deg,var(--warm),var(--warm-hi));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Dosta Çevirmek</em></h3>
         <p class="tagline">Neden hep aynı hataları tekrarlıyoruz?</p>
         <p>
           "Bunu neden yaptım?" diye pişmanlık duyduğun anlar ne kadar sık? Belki sabah "artık telefonumu azaltacağım" deyip akşamın nasıl geldiğini bile fark etmiyorsun. Nöroterbiye işte tam da bu döngüye ayna tutuyor.
@@ -2192,6 +2317,10 @@
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+  // ── PERDE TEMİZLİĞİ ──
+  var curtainEl = document.getElementById('curtain');
+  if (curtainEl) setTimeout(function() { curtainEl.remove(); }, 1700);
+
   // ── E-POSTA OBFUSCATION ──
   var _u = 'raufenc', _d = 'gmail.com', _e = _u + '@' + _d;
   var cForm = document.getElementById('contact-form');
@@ -2209,6 +2338,95 @@
   // ── DURUM ──
   var aktifTag = 'Tümü';
   var aramaMetni = '';
+  var allCards = [];
+  var flipTimer = null;
+
+  function eslesiyor(p) {
+    var q = aramaMetni.toLowerCase();
+    var tagOK = aktifTag === 'Tümü' || p.tag === aktifTag;
+    var aramaOK = !q ||
+      p.title.toLowerCase().indexOf(q) !== -1 ||
+      p.desc.toLowerCase().indexOf(q) !== -1 ||
+      p.tag.toLowerCase().indexOf(q) !== -1;
+    return tagOK && aramaOK;
+  }
+
+  function sayacYaz(adet) {
+    var countEl = document.getElementById('results-count');
+    countEl.textContent = (aktifTag === 'Tümü' && !aramaMetni)
+      ? PROJELER.length + ' proje'
+      : adet + ' / ' + PROJELER.length + ' proje';
+  }
+
+  // ── FLIP FİLTRE — kartlar yok olup yeniden doğmaz, yerlerine akar ──
+  function applyFilter(animate) {
+    var empty = document.getElementById('empty');
+    var adet = 0;
+    allCards.forEach(function(c) { c._match = eslesiyor(c._p); if (c._match) adet++; });
+    sayacYaz(adet);
+    empty.classList.toggle('show', adet === 0);
+
+    if (!animate || prefersReduced) {
+      allCards.forEach(function(c) {
+        c.classList.remove('card-out', 'card-in-new');
+        c.style.display = c._match ? '' : 'none';
+      });
+      return;
+    }
+
+    if (flipTimer) { clearTimeout(flipTimer); flipTimer = null; }
+
+    // FIRST: şu an görünen kartların konumları
+    var first = new Map();
+    allCards.forEach(function(c) {
+      if (c.style.display !== 'none') first.set(c, c.getBoundingClientRect());
+    });
+
+    // Çıkanlar hızlıca soluklaşır
+    allCards.forEach(function(c) {
+      c.classList.toggle('card-out', !c._match && c.style.display !== 'none');
+    });
+
+    flipTimer = setTimeout(function() {
+      flipTimer = null;
+      var entering = [];
+      allCards.forEach(function(c) {
+        c.classList.remove('card-out');
+        var gorunecek = c._match;
+        var gorunuyordu = c.style.display !== 'none';
+        c.style.display = gorunecek ? '' : 'none';
+        if (gorunecek && !gorunuyordu) { c.classList.add('card-in-new'); entering.push(c); }
+      });
+
+      // LAST + INVERT: kalanlar eski konumlarından yenilerine akar
+      allCards.forEach(function(c) {
+        if (!c._match) return;
+        var f = first.get(c);
+        if (!f) return;
+        var l = c.getBoundingClientRect();
+        var dx = f.left - l.left, dy = f.top - l.top;
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+        c.style.transition = 'none';
+        c.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+      });
+      document.getElementById('grid').getBoundingClientRect();
+      requestAnimationFrame(function() {
+        allCards.forEach(function(c) {
+          if (c.style.transform) {
+            c.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+            c.style.transform = '';
+          }
+        });
+        entering.forEach(function(c, i) {
+          c.style.transitionDelay = (80 + i * 35) + 'ms';
+          c.classList.remove('card-in-new');
+        });
+        setTimeout(function() {
+          allCards.forEach(function(c) { c.style.transition = ''; c.style.transitionDelay = ''; });
+        }, 750);
+      });
+    }, 170);
+  }
 
   // ── BASLAT ──
   function baslat() {
@@ -2228,24 +2446,26 @@
       filtersEl.appendChild(btn);
     });
 
+    var aramaZamani = null;
     document.getElementById('search').addEventListener('input', function(e) {
-      aramaMetni = e.target.value.trim();
-      renderCards();
-      updateClearBtn();
+      clearTimeout(aramaZamani);
+      aramaZamani = setTimeout(function() {
+        aramaMetni = e.target.value.trim();
+        applyFilter(true);
+        updateClearBtn();
+      }, 140);
     });
 
-    renderCards();
-  }
-
-  function filtrele() {
-    return PROJELER.filter(function(p) {
-      var tagOK = aktifTag === 'Tümü' || p.tag === aktifTag;
-      var aramaOK = !aramaMetni ||
-        p.title.toLowerCase().indexOf(aramaMetni.toLowerCase()) !== -1 ||
-        p.desc.toLowerCase().indexOf(aramaMetni.toLowerCase()) !== -1 ||
-        p.tag.toLowerCase().indexOf(aramaMetni.toLowerCase()) !== -1;
-      return tagOK && aramaOK;
+    var grid = document.getElementById('grid');
+    var loading = document.getElementById('grid-loading');
+    if (loading) loading.remove();
+    PROJELER.forEach(function(p, i) {
+      var c = createCard(p, i);
+      c._p = p;
+      allCards.push(c);
+      grid.appendChild(c);
     });
+    applyFilter(false);
   }
 
   window.setTag = function(tag) {
@@ -2253,7 +2473,7 @@
     document.querySelectorAll('.filter-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.tag === tag);
     });
-    renderCards();
+    applyFilter(true);
     updateClearBtn();
   };
 
@@ -2264,7 +2484,7 @@
     document.querySelectorAll('.filter-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.tag === 'Tümü');
     });
-    renderCards();
+    applyFilter(true);
     updateClearBtn();
   };
 
@@ -2314,30 +2534,6 @@
     return a;
   }
 
-  function renderCards() {
-    var sonuclar = filtrele();
-    var grid = document.getElementById('grid');
-    var empty = document.getElementById('empty');
-    var countEl = document.getElementById('results-count');
-    var loading = document.getElementById('grid-loading');
-    if (loading) loading.remove();
-
-    grid.querySelectorAll('.card').forEach(function(c) { c.remove(); });
-
-    var total = PROJELER.length;
-    var shown = sonuclar.length;
-    countEl.textContent = aktifTag === 'Tümü' && !aramaMetni
-      ? total + ' proje'
-      : shown + ' / ' + total + ' proje';
-
-    if (sonuclar.length === 0) { empty.classList.add('show'); return; }
-    empty.classList.remove('show');
-
-    sonuclar.forEach(function(p, i) {
-      grid.appendChild(createCard(p, i));
-    });
-  }
-
   baslat();
 
   // ── SAYAÇ ANİMASYONU ──
@@ -2345,21 +2541,31 @@
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
 
-  function animateNum(el) {
+  // Odometre: rakamlar silindir gibi kayarak oturur
+  function buildOdometer(el) {
     var target = parseInt(el.dataset.target);
     var plain = el.dataset.plain === 'true';
-    var suffix = plain ? '' : '+';
-    if (prefersReduced) { el.textContent = formatNum(target) + suffix; return; }
-    var duration = 1900;
-    var startTime = null;
-    function step(timestamp) {
-      if (!startTime) startTime = timestamp;
-      var progress = Math.min((timestamp - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = formatNum(Math.round(eased * target)) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
+    var finalStr = formatNum(target) + (plain ? '' : '+');
+    if (prefersReduced) { el.textContent = finalStr; return; }
+    var html = '';
+    var di = 0;
+    for (var i = 0; i < finalStr.length; i++) {
+      var c = finalStr[i];
+      if (c >= '0' && c <= '9') {
+        var reel = '';
+        for (var d = 0; d <= 9; d++) reel += '<span>' + d + '</span>';
+        html += '<span class="od-d"><span class="od-reel" data-final="' + c + '" style="--dd:' + (di * 90) + 'ms">' + reel + '</span></span>';
+        di++;
+      } else {
+        html += c;
+      }
     }
-    requestAnimationFrame(step);
+    el.innerHTML = html;
+    requestAnimationFrame(function() { requestAnimationFrame(function() {
+      el.querySelectorAll('.od-reel').forEach(function(r) {
+        r.style.setProperty('--dv', r.dataset.final);
+      });
+    }); });
   }
 
   // Proje sayısını tek kaynaktan (projeler.js) al
@@ -2374,7 +2580,7 @@
     var counterObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          animateNum(entry.target);
+          buildOdometer(entry.target);
           counterObserver.unobserve(entry.target);
         }
       });
