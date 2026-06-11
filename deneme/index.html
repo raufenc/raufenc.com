@@ -1587,33 +1587,44 @@
       .motto-mark { font-size: 130px; }
       .footer-links { gap: 16px; }
     }
-    /* Bento responsive */
+    /* Bento responsive — tablet: 2 sütunlu asimetri, dikey videolar dikey kalır */
     @media (max-width: 900px) {
       .bento-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(7, 168px);
+        grid-template-rows: repeat(6, 130px);
       }
-      .b-noroterbiye { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-      .b-dil         { grid-column: 1; grid-row: 3; }
-      .b-tarih       { grid-column: 2; grid-row: 3; }
-      .b-peygamberim { grid-column: 1 / span 2; grid-row: 4 / span 2; }
-      .b-dusunce     { grid-column: 1; grid-row: 6 / span 2; }
-      .b-sinif       { grid-column: 2; grid-row: 6; }
-      .b-ai          { grid-column: 2; grid-row: 7; }
+      .b-noroterbiye { grid-column: 1; grid-row: 1 / span 3; }
+      .b-dil         { grid-column: 2; grid-row: 1; }
+      .b-tarih       { grid-column: 2; grid-row: 2; }
+      .b-peygamberim { grid-column: 2; grid-row: 3 / span 2; }
+      .b-dusunce     { grid-column: 1; grid-row: 4 / span 3; }
+      .b-sinif       { grid-column: 2; grid-row: 5; }
+      .b-ai          { grid-column: 2; grid-row: 6; }
     }
+    /* Mobil: mini-bento mozaik — asimetri telefonda da sürer */
     @media (max-width: 560px) {
       .bento-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(7, 215px);
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(7, 118px);
+        gap: 12px;
       }
-      .b-noroterbiye { grid-column: 1; grid-row: 1; }
-      .b-dil         { grid-column: 1; grid-row: 2; }
-      .b-tarih       { grid-column: 1; grid-row: 3; }
-      .b-peygamberim { grid-column: 1; grid-row: 4; }
-      .b-dusunce     { grid-column: 1; grid-row: 5; }
-      .b-sinif       { grid-column: 1; grid-row: 6; }
-      .b-ai          { grid-column: 1; grid-row: 7; }
-      .bento-wide .bento-desc { display: block; }
+      .b-noroterbiye { grid-column: 1; grid-row: 1 / span 3; }
+      .b-dil         { grid-column: 2; grid-row: 1; }
+      .b-tarih       { grid-column: 2; grid-row: 2; }
+      .b-peygamberim { grid-column: 2; grid-row: 3 / span 3; }
+      .b-dusunce     { grid-column: 1; grid-row: 4 / span 3; }
+      .b-sinif       { grid-column: 2; grid-row: 6; }
+      .b-ai          { grid-column: 1 / span 2; grid-row: 7; }
+      .bento-card { border-radius: 16px; }
+      .bento-content { padding: 12px 13px; gap: 3px; }
+      .bento-title { font-size: 16px; }
+      .bento-wide .bento-title { font-size: 16px; }
+      .bento-desc { font-size: 11.5px; line-height: 1.45; max-width: none; }
+      .bento-tag { font-size: 8.5px; padding: 3px 8px; margin-bottom: 4px; letter-spacing: 0.08em; }
+      .bento-index { font-size: 11px; top: 10px; left: 12px; }
+      .bento-index::after { width: 14px; }
+      .bento-card .bento-arrow { width: 28px; height: 28px; top: 9px; right: 9px; }
+      .bento-card .bento-arrow svg { width: 12px; height: 12px; }
       #grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
       .social-row { grid-template-columns: 1fr; }
@@ -1924,7 +1935,7 @@
       <!-- 2. DİL & SÖZ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-dil" href="/vitrin/dil/" aria-label="Dil ve Söz kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/dil-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/dil-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/dil-poster.jpg">
             <source src="/images/vitrin/video/dil.mp4" type="video/mp4">
           </video>
@@ -1944,7 +1955,7 @@
       <!-- 3. PEYGAMBERİM & AHLÂK (MED, video) -->
       <a class="bento-card tilt bento-med b-peygamberim" href="/vitrin/peygamberim/" aria-label="Peygamberim ve Ahlâk kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/peygamberim-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/peygamberim-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/peygamberim-poster.jpg">
             <source src="/images/vitrin/video/peygamberim.mp4" type="video/mp4">
           </video>
@@ -1964,7 +1975,7 @@
       <!-- 4. TARİH & MEDENİYET (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-tarih" href="/vitrin/tarih/" aria-label="Tarih ve Medeniyet kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/tarih-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/tarih-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/tarih-poster.jpg">
             <source src="/images/vitrin/video/tarih.mp4" type="video/mp4">
           </video>
@@ -1984,7 +1995,7 @@
       <!-- 5. DÜŞÜNCE PUSULASI (TALL, video) -->
       <a class="bento-card tilt b-dusunce" href="/vitrin/dusunce/" aria-label="Düşünce Pusulası kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/dusunce-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/dusunce-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/dusunce-poster.jpg">
             <source src="/images/vitrin/video/dusunce.mp4" type="video/mp4">
           </video>
@@ -2004,7 +2015,7 @@
       <!-- 6. YAPAY ZEKÂ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-ai" href="/vitrin/ai/" aria-label="Yapay Zekâ kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/ai-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/ai-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/ai-poster.jpg">
             <source src="/images/vitrin/video/ai.mp4" type="video/mp4">
           </video>
@@ -2024,7 +2035,7 @@
       <!-- 7. SINIF ATÖLYESİ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-sinif" href="/vitrin/sinif/" aria-label="Sınıf Atölyesi kategorisi">
         <div class="bento-media">
-          <img class="video-fallback" src="/images/vitrin/video/sinif-poster.jpg" alt="" loading="lazy" decoding="async">
+          <img class="video-fallback" src="/images/vitrin/video/sinif-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/sinif-poster.jpg">
             <source src="/images/vitrin/video/sinif.mp4" type="video/mp4">
           </video>
