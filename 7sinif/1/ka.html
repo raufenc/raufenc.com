@@ -221,6 +221,28 @@ body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;font-size:clamp(20px,2.4v
 @media(max-width:400px){
 .games-grid{grid-template-columns:1fr}
 }
+
+/* yatay-öncelik (tahta) */
+@media (orientation:landscape) and (min-width:1000px){
+  .g1-box{max-width:min(1500px,94vw)}
+  .g2-box{max-width:min(1250px,92vw)}
+  .g3-box,.g4-box{max-width:min(1500px,94vw)}
+  #g3game,#g4game{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:22px;align-items:center}
+  #g3game>.g3-sbar,#g3game>.g3-pbar,#g3game>.feedback{grid-column:1/-1}
+  #g4game>.g4-sbar,#g4game>.g4-pbar,#g4game>.feedback{grid-column:1/-1}
+  #g3game>.g3-clock-wrap{grid-row:3;grid-column:1}
+  #g3game>.g3-opts{grid-row:3;grid-column:2}
+  #g3game>.feedback{grid-row:4}
+  #g4game>.g4-qcard{grid-row:3;grid-column:1}
+  #g4game>.g4-opts{grid-row:3;grid-column:2}
+  #g4game>.feedback{grid-row:4}
+  .g5-box{max-width:min(1550px,94vw)}
+  #g5game{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:22px;align-items:start}
+  #g5game>.g5-sbar,#g5game>.g5-dtitle,#g5game>.feedback,#g5game>.btn-area{grid-column:1/-1}
+  .g5-chat{max-height:52vh}
+  .g6-box{max-width:min(1500px,94vw)}
+  .g6-grid{grid-template-columns:repeat(8,1fr)}
+}
 </style>
 <script>
 // ── SES & KONUŞMA SİSTEMİ ──────────────────────────────────

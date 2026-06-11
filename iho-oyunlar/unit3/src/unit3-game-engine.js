@@ -192,6 +192,7 @@
 
   function renderMCQGame(container, data, options, type, source, formatter){
     const shell = makeShell(container, type, options);
+    shell.body.classList.add('u3-duo');
     const items = sample(source, options.limit || Math.min(12, source.length));
     let idx=0, correct=0, locked=false;
     function draw(){

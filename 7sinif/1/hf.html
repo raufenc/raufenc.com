@@ -208,6 +208,18 @@ body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;font-size:clamp(20px,2.4v
 .g1-tile,.g1-slot{min-width:44px;height:44px;font-size:1.2em}
 }
 @media(max-width:400px){.games-grid{grid-template-columns:1fr}}
+
+/* yatay-öncelik (tahta) */
+@media (orientation:landscape) and (min-width:1000px){
+  .g3-box{max-width:min(1430px,94vw)}
+  #g3game{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:22px}
+  #g3game>.g3-topbar,#g3game>.g3-pbar,#g3game>.feedback,#g3game>.btn-area{grid-column:1/-1}
+  #g3game>.g3-emoji{grid-column:1;align-self:end}
+  #g3game>.g3-question{grid-column:1;align-self:start}
+  #g3game>.g3-built{grid-column:2;grid-row:3}
+  #g3game>.g3-pool{grid-column:2;grid-row:4}
+  .g4-box{max-width:min(1380px,93vw)}
+}
 </style>
 <script>
 // ── SES & KONUŞMA SİSTEMİ ──────────────────────────────────
