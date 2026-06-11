@@ -126,6 +126,10 @@
       --hair2: rgba(255,255,255,0.045);
       --hair3: rgba(200,164,110,0.22);
       --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
+      /* Okunabilirlik: koyu temada metin tonları aydınlatıldı */
+      --muted: #5d5d7e;
+      --muted2: #9b9bb8;
+      --text-secondary: #b4b4cc;
     }
     html.light {
       --ghost-stroke: rgba(26,26,46,0.08);
@@ -442,7 +446,7 @@
       -webkit-text-fill-color: transparent;
     }
     .hero-desc {
-      font-size: 15.5px; color: var(--muted2); line-height: 1.9;
+      font-size: 16px; color: var(--text-secondary); line-height: 1.85;
       max-width: 470px;
       animation: fadeUp 0.7s ease 0.65s both;
     }
@@ -618,7 +622,7 @@
       font-size: 22px; font-weight: 700;
       letter-spacing: 0.02em;
       color: transparent;
-      -webkit-text-stroke: 1px var(--muted);
+      -webkit-text-stroke: 1px var(--muted2);
       transition: color 0.3s;
       flex-shrink: 0;
     }
@@ -912,7 +916,7 @@
       font-family: var(--font-display);
     }
     .book-info p {
-      font-size: 14.5px; color: var(--muted2);
+      font-size: 14.5px; color: var(--text-secondary);
       line-height: 1.85; margin-bottom: 26px;
       max-width: 56ch;
     }
@@ -1125,7 +1129,7 @@
     }
     .bento-wide .bento-title { font-size: 20px; }
     .bento-desc {
-      font-size: 13px; color: rgba(255,255,255,0.8);
+      font-size: 13px; color: rgba(255,255,255,0.88);
       line-height: 1.55;
       max-width: 30ch;
     }
@@ -1846,7 +1850,7 @@
         <div class="bk">
           <div class="bk-spine" aria-hidden="true"></div>
           <div class="bk-front">
-            <img src="images/noroterbiye.webp" alt="Nöroterbiye — Rauf Enç" width="230" />
+            <img src="/images/noroterbiye.webp" alt="Nöroterbiye — Rauf Enç" width="230" />
           </div>
           <div class="bk-pages" aria-hidden="true"></div>
         </div>
