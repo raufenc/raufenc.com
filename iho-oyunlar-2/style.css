@@ -198,7 +198,7 @@ button{letter-spacing:0}
   border-bottom:1px solid var(--line);
 }
 .game-kicker{margin:0 0 6px;color:var(--teal);font-size:13px;font-weight:800}
-.play-head h2{margin:0;font-size:28px;line-height:1.2}
+.play-head h2{margin:0;font-size:clamp(26px,1.2vw + 14px,40px);line-height:1.2}
 .game-instruction{margin:8px 0 0;color:var(--muted);font-size:clamp(14px,.7vw + 6px,22px);line-height:1.45}
 .play-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .score-pill{
@@ -229,7 +229,7 @@ button{letter-spacing:0}
 .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.item-card,.question-card,.choice,.token,.word-chip,.memory-card,.line-button,.category-row,.shelf-item{
+.item-card,.question-card,.choice,.token,.word-chip,.memory-card,.line-button,.category-row,.shelf-item{font-size:clamp(20px,1.2vw + 12px,40px);
   border:1px solid var(--line);
   border-radius:8px;
   background:#fff;
@@ -239,10 +239,10 @@ button{letter-spacing:0}
 .ar{
   direction:rtl;
   font-family:Arakom,serif;
-  font-size:27px;
+  font-size:clamp(24px,1.5vw + 16px,48px);
   line-height:1.45;
 }
-.ar.small-ar{font-size:clamp(18px,1vw + 7px,30px)}
+.ar.small-ar{font-size:clamp(20px,1vw + 10px,32px)}
 .muted{color:var(--muted)}
 .feedback{margin-top:10px;font-weight:800;min-height:22px}
 .feedback.ok{color:var(--green)}
@@ -305,16 +305,16 @@ button{letter-spacing:0}
 }
 .target-chip.done{background:#ecfdf3;border-style:solid;border-color:rgba(21,128,61,.45)}
 .shelf-item{text-align:center;min-height:92px}
-.shelf-item .emoji{font-size:28px;display:block}
+.shelf-item .emoji{font-size:clamp(28px,2.4vmin,40px);display:block}
 
 .question-list{display:grid;gap:14px}
 .question-top{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 .question-number{color:var(--muted);font-size:13px;font-weight:800}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .choice{text-align:center;font-weight:800}
-.choice .ar{font-size:clamp(20px,1.2vw + 8px,34px)}
+.choice .ar{font-size:clamp(22px,1.6vw + 14px,48px)}
 
-.sentence-output,.dialogue-output{
+.sentence-output,.dialogue-output{font-size:clamp(20px,1.2vw + 12px,40px);
   min-height:58px;
   padding:12px;
   border:1px dashed #aab4c4;
@@ -343,12 +343,12 @@ button{letter-spacing:0}
   border-radius:7px;
   background:#fff;
   font-family:Arakom,serif;
-  font-size:clamp(18px,2.4vmin,28px);
+  font-size:clamp(20px,2.8vmin,32px);
   font-weight:700;
 }
 .word-grid td.found{background:#fde68a;border-color:#d97706;color:#78350f}
 .word-list{display:flex;gap:8px;flex-wrap:wrap}
-.word-chip{font-family:Arakom,serif;font-size:clamp(18px,1vw + 7px,30px);background:#fff}
+.word-chip{font-family:Arakom,serif;font-size:clamp(20px,1.2vw + 10px,36px);background:#fff}
 
 .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .memory-card{
@@ -388,7 +388,7 @@ button{letter-spacing:0}
   .game-area{padding:14px}
   .title-block h1{font-size:32px}
   .play-head{display:grid}
-  .play-head h2{font-size:23px}
+  .play-head h2{font-size:clamp(24px,1vw + 12px,34px)}
   .game-list,.grid.two,.grid.three,.grid.four,.matching-board,.choices,.target-list,.shelf-grid,.role-grid{grid-template-columns:1fr}
   .hub-grid{grid-template-columns:1fr}
   .category-row{grid-template-columns:1fr}
