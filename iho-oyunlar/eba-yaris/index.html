@@ -5,73 +5,137 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <meta name="theme-color" content="#0f0c29">
 <title>شاهِدْ وَتَسابَقْ — العَرَبِيَّة ٧</title>
-<!-- İHO 7. Sınıf Arapça — EBA etkileşim + 2 kişilik hız yarışı. Klipler/font tek kaynaktan (../eba-etkilesim, ../). -->
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold;font-display:swap}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;height:100dvh;overflow:hidden}
 body{
   font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
   background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
-  color:#fff; min-height:100vh; min-height:100dvh; padding:28px 18px 48px; direction:rtl;
+  color:#fff;direction:rtl;
+  display:flex;flex-direction:column;
 }
-.wrap{max-width:1000px; margin:0 auto}
-.hub-title{font-size:clamp(28px,5vw,50px); font-weight:800; line-height:1.15; text-align:center;
-  background:linear-gradient(90deg,#f7971e,#ffd200); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
-.hub-sub{text-align:center; opacity:.6; font-size:clamp(15px,2.4vw,20px); margin:8px 0 10px}
-.mode-hint{text-align:center; font-size:clamp(13px,2vw,17px); opacity:.85; margin:0 0 24px;
-  display:inline-flex; gap:6px; justify-content:center; width:100%}
-.mode-hint b{font-weight:800}
-.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:16px}
-.card{
-  display:block; text-decoration:none; color:#fff;
-  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
-  border-radius:18px; padding:20px 18px; position:relative; overflow:hidden;
-  transition:transform .15s ease, background .15s ease, border-color .15s;
-  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+
+/* HEADER */
+.hdr{
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 20px 9px;
+  border-bottom:1px solid rgba(255,255,255,.07);
 }
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#f7971e,#ffd200);opacity:.65;transition:opacity .15s}
-.card:hover{transform:translateY(-3px); background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.28)}
-.card:hover::before{opacity:1}
-.card.u2::before{background:linear-gradient(90deg,#00b09b,#96c93d)}
-.card.u3::before{background:linear-gradient(90deg,#4facfe,#00f2fe)}
-.card.u4::before{background:linear-gradient(90deg,#e53935,#ff6d00)}
-.card .unit{font-size:13px; opacity:.65; margin-bottom:8px}
-.card .name{font-size:clamp(20px,2.6vw,26px); font-weight:700; line-height:1.35; margin-bottom:6px}
-.card .desc{font-size:14px; opacity:.7; line-height:1.5}
-.card .play{position:absolute; left:16px; bottom:14px; font-size:15px; letter-spacing:1px; opacity:.85}
-.card .play span{opacity:.4; margin:0 2px}
-.card .cnt{position:absolute; top:16px; left:18px; font-size:13px; opacity:.55}
-.back{display:inline-flex; align-items:center; gap:6px; color:#fff; opacity:.7; text-decoration:none; font-size:15px; margin-bottom:18px}
+.hdr-center{text-align:center;flex:1}
+.hdr-title{
+  font-size:clamp(18px,2.4vw,30px);font-weight:800;
+  background:linear-gradient(90deg,#f7971e,#ffd200);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1.2;
+}
+.hdr-sub{font-size:clamp(11px,1.1vw,14px);opacity:.6;margin-top:2px}
+.hdr-sub b{font-weight:800;opacity:.9}
+.back{color:#fff;opacity:.55;text-decoration:none;font-size:14px;white-space:nowrap;flex-shrink:0}
 .back:hover{opacity:1}
+.hdr-spacer{flex-shrink:0;min-width:90px}
+
+/* UNIT ROWS */
+.units{flex:1;display:flex;flex-direction:column;gap:8px;padding:8px 12px 10px;min-height:0}
+.unit-row{
+  flex:1;display:flex;
+  border-radius:14px;border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.035);overflow:hidden;min-height:0;
+}
+
+/* UNIT LABEL — appears on right in RTL (first in DOM) */
+.unit-lbl{
+  flex-shrink:0;width:128px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;padding:10px 8px;
+}
+.u1 .unit-lbl{background:linear-gradient(170deg,rgba(247,151,30,.22),rgba(247,151,30,.06));border-left:1px solid rgba(247,151,30,.22)}
+.u2 .unit-lbl{background:linear-gradient(170deg,rgba(0,176,155,.22),rgba(0,176,155,.06));border-left:1px solid rgba(0,176,155,.22)}
+.u3 .unit-lbl{background:linear-gradient(170deg,rgba(79,172,254,.22),rgba(79,172,254,.06));border-left:1px solid rgba(79,172,254,.22)}
+.u4 .unit-lbl{background:linear-gradient(170deg,rgba(229,57,53,.22),rgba(229,57,53,.06));border-left:1px solid rgba(229,57,53,.22)}
+.unit-num{font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1;opacity:.95}
+.u1 .unit-num{color:#f7971e}
+.u2 .unit-num{color:#00c9a7}
+.u3 .unit-num{color:#4facfe}
+.u4 .unit-num{color:#ff5252}
+.unit-name{font-size:clamp(10px,.95vw,13px);opacity:.55;text-align:center;line-height:1.4}
+
+/* CARDS GRID — appears on left in RTL (second in DOM) */
+.cards{flex:1;display:grid;align-items:stretch;gap:8px;padding:8px 10px 8px 8px;min-width:0}
+.u1 .cards{grid-template-columns:repeat(4,1fr)}
+.u2 .cards,.u3 .cards,.u4 .cards{grid-template-columns:repeat(3,1fr)}
+
+/* CARD */
+.card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  text-decoration:none;color:#fff;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+  border-radius:10px;padding:10px 12px 9px;
+  transition:transform .14s,background .14s,border-color .14s;
+}
+.card:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.22)}
+.card-pg{font-size:10px;opacity:.37;margin-bottom:3px;line-height:1}
+.card-title{
+  font-size:clamp(12px,1.35vw,18px);font-weight:700;line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.card-cnt{font-size:10px;opacity:.37}
+.card-mode{font-size:14px;letter-spacing:1px;opacity:.8}
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="hdr">
   <a class="back" href="/iho-oyunlar/index.html">→ كُلّ الأَلْعاب</a>
-  <h1 class="hub-title">شاهِدْ وَتَسابَقْ</h1>
-  <div class="hub-sub">شاهِدْ، أَجِبْ، ثُمَّ اسْتَمِعْ إِلى الجَواب — العَرَبِيَّة لِلصَّفّ السّابِع</div>
-  <div class="mode-hint"><span>👤 <b>تَدَرَّبْ وَحْدَك</b></span> &nbsp;·&nbsp; <span>👥 <b>تَسابَقْ مَعَ صَديقِك</b></span></div>
-  <div class="grid" id="grid"></div>
+  <div class="hdr-center">
+    <div class="hdr-title">شاهِدْ وَتَسابَقْ</div>
+    <div class="hdr-sub"><b>👤 تَدَرَّبْ وَحْدَك</b> &nbsp;·&nbsp; <b>👥 تَسابَقْ مَعَ صَديقِك</b></div>
+  </div>
+  <div class="hdr-spacer"></div>
 </div>
+
+<div class="units" id="units"></div>
 
 <script src="/iho-oyunlar/eba-etkilesim/activities.js"></script>
 <script>
-const UNIT_AR={1:'الوَحْدَة الأُولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
+const U_AR={1:'الوَحْدَة الأُولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
+const U_NUM={1:'١',2:'٢',3:'٣',4:'٤'};
 const AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
-const grid=document.getElementById('grid');
-(window.ACTIVITIES||[]).forEach(a=>{
-  const el=document.createElement('a');
-  el.className='card u'+a.unit; el.href='/iho-oyunlar/eba-yaris/player.html?id='+encodeURIComponent(a.id);
-  const pg=parseInt(a.id.slice(1),10);
-  el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سُؤال</div>
-    <div class="unit">${UNIT_AR[a.unit]||''} &middot; صَفْحَة ${toAr(pg)}</div>
-    <div class="name">${a.title}</div>
-    <div class="desc">${a.subtitle||''}</div>
-    <div class="play">👤<span>/</span>👥</div>`;
-  grid.appendChild(el);
+
+const byUnit={};
+(window.ACTIVITIES||[]).forEach(a=>{(byUnit[a.unit]||(byUnit[a.unit]=[])).push(a)});
+
+const units=document.getElementById('units');
+[1,2,3,4].forEach(u=>{
+  const acts=byUnit[u]||[];
+  const row=document.createElement('div');
+  row.className='unit-row u'+u;
+
+  const cards=acts.map(a=>{
+    const pg=parseInt(a.id.slice(1),10);
+    return `<a class="card" href="/iho-oyunlar/eba-yaris/player.html?id=${encodeURIComponent(a.id)}">
+      <div>
+        <div class="card-pg">صَفْحَة ${toAr(pg)}</div>
+        <div class="card-title">${a.title}</div>
+      </div>
+      <div class="card-foot">
+        <span class="card-cnt">${toAr(a.questions.length)} سُؤال</span>
+        <span class="card-mode">👤👥</span>
+      </div>
+    </a>`;
+  }).join('');
+
+  row.innerHTML=`
+    <div class="unit-lbl">
+      <span class="unit-num">${U_NUM[u]}</span>
+      <span class="unit-name">${U_AR[u]}</span>
+    </div>
+    <div class="cards">${cards}</div>`;
+  units.appendChild(row);
 });
 </script>
 </body>
