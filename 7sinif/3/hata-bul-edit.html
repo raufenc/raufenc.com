@@ -47,11 +47,11 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 <body>
 <a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
-<h1>💥 اقْصِف الخَطَأ<span class="edited-tag">✎ وَقْت ٢٠ث · سَفَر</span></h1>
+<h1>💥 اِقْصِف الخَطَأ<span class="edited-tag">✎ وَقْت ٢٠ث · سَفَر</span></h1>
 <div class="sub">اِخْتَر الكَلِمَة الَّتي لا تَنْتَمي إِلى المَجْموعَة (الوَقْت ٢٠ ثانِيَة)</div>
 <div id="game">
 <div class="tip">
-<b>📘 التَّعْليمات:</b> في كُلّ مَجْموعَة كَلِمَة واحِدَة لا تُناسِبُ الباقِي — اِقْصِفْها قَبْلَ انْتِهاء الوَقْت!
+<b>📘 التَّعْليمات:</b> في كُلّ مَجْموعَة كَلِمَة واحِدَة لا تُناسِبُ الباقي — اِقْصِفْها قَبْل انْتِهاء الوَقْت!
 </div>
 <div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>السُّؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
 <div class="timer-wrap"><div class="timer-bar" id="tbar" style="width:100%"></div></div>
@@ -65,7 +65,7 @@ h1{text-align:center;color:#7B1FA2;font-size:2.2em;margin-bottom:6px}
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#9C27B0;margin-bottom:14px"></div>
-<button class="btn" onclick="init()">إعادَة 🔄</button>
+<button class="btn" onclick="init()">إِعادَة 🔄</button>
 <button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
 </div>
 </div>
@@ -74,15 +74,15 @@ var TIME=20000;  // 20 saniye
 
 var ALL=[
 
-{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوّيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['طائِرَة','حافِلَة','قِطار','سَيّارَة'],odd:0,exp:'الطّائِرَة وَحْدَها جَوِّيَّة — الباقي بَرِّيَّة'},
 {cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['سَيّارَة','حافِلَة','قِطار','سَفينَة'],odd:3,exp:'السَّفينَة بَحْرِيَّة، وَالباقي بَرِّيَّة'},
-{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مَتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرِيَّة — الباقي بَرّيَّة'},
+{cat:'وَسائِط النَّقْل البَرِّيَّة',opts:['سَفينَة','دَرّاجَة','حافِلَة','مِتْرو'],odd:0,exp:'السَّفينَة وَحْدَها بَحْرِيَّة — الباقي بَرِّيَّة'},
 
-{cat:'كَلِمات المُقارَنَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','سَيّارَة'],odd:3,exp:'سَيّارَة اسْم، وَالباقي صيَغ تَفْضيل (أَفْعَل)'},
+{cat:'كَلِمات المُقارَنَة',opts:['أَسْرَع','أَبْطَأ','أَكْبَر','سَيّارَة'],odd:3,exp:'سَيّارَة اسْم، وَالباقي صِيَغ تَفْضيل (أَفْعَل)'},
 
 {cat:'الضَّوْء وَإِشارات المُرور',opts:['الضَّوْء الأَحْمَر','الضَّوْء الأَخْضَر','الضَّوْء الأَصْفَر','الحافِلَة'],odd:3,exp:'الحافِلَة وَسيلَة نَقْل، وَالباقي أَضْواء'},
 
-{cat:'الاتِّجاهات',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة وَسيلَة نَقْل، وَالباقي اتِّجاهات'},
+{cat:'الاِتِّجاهات',opts:['اليَمين','اليَسار','الأَمام','الطّائِرَة'],odd:3,exp:'الطّائِرَة وَسيلَة نَقْل، وَالباقي اتِّجاهات'},
 
 {cat:'الأَفْعال بِصيغَة الأَمْر',opts:['اِمْشِ','اِعْبُرْ','قِفْ','يَذْهَبُ'],odd:3,exp:'يَذْهَبُ فِعْل مُضارِع، وَالباقي أَفْعال أَمْر'},
 
@@ -126,7 +126,7 @@ if(idx===curOdd){if(b)b.classList.add('correct');sc+=10;document.getElementById(
 document.getElementById('fb').textContent='✅ صَحيح!';document.getElementById('fb').style.color='#4CAF50';}
 else{if(b)b.classList.add('wrong');
 var correctBtn=document.querySelectorAll('.opt')[curOdd];if(correctBtn)correctBtn.classList.add('correct');
-document.getElementById('fb').textContent=idx===-1?'⏰ انْتَهى الوَقْت':'❌ خَطَأ';document.getElementById('fb').style.color='#F44336';}
+document.getElementById('fb').textContent=idx===-1?'⏰ اِنْتَهى الوَقْت':'❌ خَطَأ';document.getElementById('fb').style.color='#F44336';}
 document.getElementById('exp').textContent='💡 '+q.exp;
 cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1900);
 }

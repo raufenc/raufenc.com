@@ -41,12 +41,12 @@ h1{text-align:center;color:#1A237E;font-size:2em;margin-bottom:4px}
 </style>
 </head>
 <body>
-<a href="./index.html" class="back">↩ القائمة</a>
+<a href="./index.html" class="back">↩ القائِمَة</a>
 <div class="box">
 <h1>🏗️ كَوِّنْ جُمْلَة</h1>
-<div class="sub">اِقْرَأِ السُّؤال، ثُمَّ رَتِّبِ الكَلِمات لِتُكَوِّنَ الجَواب — اِنْتَبِهْ: <b>كَلِمَة واحِدَة زائِدَة!</b></div>
+<div class="sub">اِقْرَأ السُّؤال، ثُمَّ رَتِّب الكَلِمات لِتُكَوِّنَ الجَواب — اِنْتَبِهْ: <b>كَلِمَة واحِدَة زائِدَة!</b></div>
 <div id="game">
-<div class="bar"><span>النَّتيجة: <span id="sc">0</span></span><span>السؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
+<div class="bar"><span>النَّتيجَة: <span id="sc">0</span></span><span>السُّؤال: <span id="qn">1</span>/<span id="tot">12</span></span></div>
 <div class="q-card"><div class="em" id="em"></div><div class="quest" id="quest"></div></div>
 <div class="built" id="built"></div>
 <div class="pool" id="pool"></div>
@@ -55,29 +55,29 @@ h1{text-align:center;color:#1A237E;font-size:2em;margin-bottom:4px}
 <div style="text-align:center;margin-top:8px"><button class="btn alt" onclick="clearBuilt()">مَسْح ↻</button></div>
 </div>
 <div id="result" class="result hidden">
-<h2 style="color:#1A237E">🎉 أَحْسَنْت!</h2>
+<h2 style="color:#1A237E">🎉 أَحْسَنْتَ!</h2>
 <div class="stars" id="stars"></div>
 <div class="score" id="final"></div>
 <div id="msg" style="color:#3F51B5;margin-bottom:14px"></div>
-<button class="btn" onclick="init()">إعادَة 🔄</button>
+<button class="btn" onclick="init()">إِعادَة 🔄</button>
 <button class="btn alt" onclick="location.href='./index.html'">القائِمَة ↩</button>
 </div>
 </div>
 <script>
 
 var ALL=[
-{em:'🚌',q:'كَيْفَ تَذْهَبُ إِلى المَدْرَسَة؟',correct:['أَذْهَبُ','إِلى','المَدْرَسَة','بِالحافِلَة'],extra:['بِالطّائِرَة'],exp:'أَذْهَبُ إِلى المَدْرَسَة بِالحافِلَة'},
+{em:'🚌',q:'كَيْف تَذْهَبُ إِلى المَدْرَسَة؟',correct:['أَذْهَبُ','إِلى','المَدْرَسَة','بِالحافِلَة'],extra:['بِالطّائِرَة'],exp:'أَذْهَبُ إِلى المَدْرَسَة بِالحافِلَة'},
 {em:'✈️',q:'بِماذا يُسافِرُ أَبوكَ إِلى أَنْقَرَة؟',correct:['يُسافِرُ','أَبي','إِلى','أَنْقَرَة','بِالطّائِرَة'],extra:['بَحْرًا'],exp:'يُسافِرُ أَبي إِلى أَنْقَرَة بِالطّائِرَة'},
 {em:'🚆',q:'بِماذا تَرْجِعُ أُخْتُكَ إِلى إِسْطَنْبول؟',correct:['تَرْجِعُ','أُخْتي','إِلى','إِسْطَنْبول','بِالقِطار'],extra:['جَوًّا'],exp:'تَرْجِعُ أُخْتي إِلى إِسْطَنْبول بِالقِطار'},
-{em:'🚢',q:'كَيْفَ تُسافِرُ إِلى بورْصَة؟',correct:['أُسافِرُ','إِلى','بورْصَة','بِالسَّفينَة'],extra:['بِالدَّرّاجَة'],exp:'أُسافِرُ إِلى بورْصَة بِالسَّفينَة'},
+{em:'🚢',q:'كَيْف تُسافِرُ إِلى بورْصَة؟',correct:['أُسافِرُ','إِلى','بورْصَة','بِالسَّفينَة'],extra:['بِالدَّرّاجَة'],exp:'أُسافِرُ إِلى بورْصَة بِالسَّفينَة'},
 {em:'🚗',q:'بِماذا تَذْهَبُ أُمُّكَ إِلى المُسْتَشْفى؟',correct:['تَذْهَبُ','أُمّي','إِلى','المُسْتَشْفى','بِالسَّيّارَة'],extra:['مَشْيًا'],exp:'تَذْهَبُ أُمّي إِلى المُسْتَشْفى بِالسَّيّارَة'},
-{em:'🚶',q:'كَيْفَ تَذْهَبُ إِلى المَكْتَبَة؟',correct:['أَذْهَبُ','إِلى','المَكْتَبَة','مَشْيًا'],extra:['بِالسَّفينَة'],exp:'أَذْهَبُ إِلى المَكْتَبَة مَشْيًا'},
+{em:'🚶',q:'كَيْف تَذْهَبُ إِلى المَكْتَبَة؟',correct:['أَذْهَبُ','إِلى','المَكْتَبَة','مَشْيًا'],extra:['بِالسَّفينَة'],exp:'أَذْهَبُ إِلى المَكْتَبَة مَشْيًا'},
 {em:'🚇',q:'بِماذا تَذْهَبُ إِلى السّوق؟',correct:['أَذْهَبُ','إِلى','السّوق','بِالمِتْرو'],extra:['جَوًّا'],exp:'أَذْهَبُ إِلى السّوق بِالمِتْرو'},
 {em:'🚲',q:'بِماذا تَذْهَبُ إِلى المَسْجِد؟',correct:['أَذْهَبُ','إِلى','المَسْجِد','بِالدَّرّاجَة'],extra:['بِالطّائِرَة'],exp:'أَذْهَبُ إِلى المَسْجِد بِالدَّرّاجَة'},
-{em:'🚦',q:'ماذا تَفْعَلُ عِنْدَ الضَّوْء الأَحْمَر؟',correct:['أَقِفُ','عِنْدَ','الضَّوْء','الأَحْمَر'],extra:['الأَخْضَر'],exp:'أَقِفُ عِنْدَ الضَّوْء الأَحْمَر'},
-{em:'🟢',q:'ماذا تَفْعَلُ عِنْدَ الضَّوْء الأَخْضَر؟',correct:['أَعْبُرُ','عِنْدَ','الضَّوْء','الأَخْضَر'],extra:['الأَحْمَر'],exp:'أَعْبُرُ عِنْدَ الضَّوْء الأَخْضَر'},
-{em:'⚡',q:'أَيُّهُما أَسْرَع؟',correct:['الطّائِرَة','أَسْرَع','مِنَ','السَّفينَة'],extra:['أَبْطَأ'],exp:'الطّائِرَة أَسْرَع مِنَ السَّفينَة'},
-{em:'🐢',q:'أَيُّهُما أَبْطَأ؟',correct:['الدَّرّاجَة','أَبْطَأ','مِنَ','القِطار'],extra:['أَسْرَع'],exp:'الدَّرّاجَة أَبْطَأ مِنَ القِطار'}
+{em:'🚦',q:'ماذا تَفْعَلُ عِنْد الضَّوْء الأَحْمَر؟',correct:['أَقِفُ','عِنْد','الضَّوْء','الأَحْمَر'],extra:['الأَخْضَر'],exp:'أَقِفُ عِنْد الضَّوْء الأَحْمَر'},
+{em:'🟢',q:'ماذا تَفْعَلُ عِنْد الضَّوْء الأَخْضَر؟',correct:['أَعْبُرُ','عِنْد','الضَّوْء','الأَخْضَر'],extra:['الأَحْمَر'],exp:'أَعْبُرُ عِنْد الضَّوْء الأَخْضَر'},
+{em:'⚡',q:'أَيُّهُما أَسْرَع؟',correct:['الطّائِرَة','أَسْرَع','مِن','السَّفينَة'],extra:['أَبْطَأ'],exp:'الطّائِرَة أَسْرَع مِن السَّفينَة'},
+{em:'🐢',q:'أَيُّهُما أَبْطَأ؟',correct:['الدَّرّاجَة','أَبْطَأ','مِن','القِطار'],extra:['أَسْرَع'],exp:'الدَّرّاجَة أَبْطَأ مِن القِطار'}
 ];
 function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
 var qs,cur,sc,built,pool;
@@ -117,7 +117,7 @@ document.getElementById('exp').textContent='💡 '+q.exp;
 cur++;setTimeout(function(){if(cur<qs.length)loadQ();else end()},1700);
 }else{
 document.getElementById('built').classList.add('wrong');
-document.getElementById('fb').textContent='❌ التَّرتيب غَيْر صَحيح';document.getElementById('fb').style.color='#F44336';
+document.getElementById('fb').textContent='❌ التَّرْتيب غَيْر صَحيح';document.getElementById('fb').style.color='#F44336';
 setTimeout(function(){clearBuilt();document.getElementById('fb').textContent=''},900);
 }
 }
@@ -126,7 +126,7 @@ var fs=Math.round(sc/(qs.length*10)*100);
 document.getElementById('game').classList.add('hidden');document.getElementById('result').classList.remove('hidden');
 document.getElementById('final').textContent=fs+'%';
 document.getElementById('stars').textContent=fs>=90?'⭐⭐⭐':fs>=70?'⭐⭐':'⭐';
-document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّة أُخْرى!';
+document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَيِّد جِدًّا!':'حاوِلْ مَرَّةً أُخْرى!';
 }
 init();
 </script>

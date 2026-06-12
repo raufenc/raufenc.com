@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>كَم السّاعَة؟ — الصَّفّ السّابِع · الوَحْدَة الرّابِعَة</title>
-<meta name="description" content="لُعْبَة السّاعَة — لاعِب واحِد أَو لاعِبان · رَقَمِيَّة وَعَقارِب">
+<meta name="description" content="لُعْبَة السّاعَة — لاعِب واحِد أَوْ لاعِبان · رَقَمِيَّة وَعَقارِب">
 <style>
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
 @font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
@@ -210,7 +210,7 @@ function _tone(f,d,t,v,dl){t=t||'sine';v=v||.3;dl=dl||0;try{const c=_ac(),o=c.cr
 let _arSes=null;
 if(typeof speechSynthesis!=='undefined')speechSynthesis.onvoiceschanged=function(){_arSes=null};
 function konuş(m){if(!('speechSynthesis' in window))return;if(!_arSes){const v=speechSynthesis.getVoices();_arSes=v.find(x=>x.lang==='ar-SA')||v.find(x=>x.lang&&x.lang.indexOf('ar')===0)||null}if(!_arSes)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(m);u.voice=_arSes;u.lang='ar-SA';u.rate=.85;u.volume=.95;speechSynthesis.speak(u)}
-function sesDoğru(){_tone(523,.1);_tone(659,.1,'sine',.3,.1);_tone(784,.25,'sine',.3,.2);konuş(['أحسنت','ممتاز','رائع'][Math.floor(Math.random()*3)])}
+function sesDoğru(){_tone(523,.1);_tone(659,.1,'sine',.3,.1);_tone(784,.25,'sine',.3,.2);konuş(['أَحْسَنْتَ','مُمْتاز','رائِع'][Math.floor(Math.random()*3)])}
 function sesYanlış(){_tone(180,.15,'sawtooth',.25);_tone(150,.2,'sawtooth',.2,.15)}
 function sesTıkla(){_tone(900,.04,'sine',.12)}
 function sesBitir(){[523,659,784,1047,1319].forEach((f,i)=>_tone(f,.18,'sine',.28,i*.12))}
