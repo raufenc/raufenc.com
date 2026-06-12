@@ -795,14 +795,16 @@
 
   function fitToViewport(el){
     try{
-      if(typeof matchMedia!=='undefined' && matchMedia('(orientation: portrait) and (max-width: 880px)').matches){ el.style.transform=''; return; }
       const p=el.parentElement||document.body;
       el.style.transform='';
-      const avail=Math.max(140,(p.clientHeight||window.innerHeight)-8);
-      const need=el.scrollHeight;
-      const f=Math.min(1,avail/need);
+      const availH=Math.max(120,(p.clientHeight||window.innerHeight)-8);
+      const availW=Math.max(160,(p.clientWidth||window.innerWidth)-8);
+      const needH=el.scrollHeight, needW=Math.max(el.scrollWidth, el.getBoundingClientRect().width);
+      const f=Math.min(1, availH/needH, availW/needW);
       el.style.transformOrigin='top center';
       el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';
+      document.documentElement.style.overflow='hidden';
+      document.body.style.overflow='hidden';
     }catch(e){}
   }
 
@@ -819,6 +821,7 @@
       const _fit=()=>fitToViewport(el);
       try{ new MutationObserver(_fit).observe(el,{childList:true,subtree:true}); window.addEventListener('resize',_fit); setInterval(_fit,900); }catch(e){}
       try{ if(document.fonts&&document.fonts.ready) document.fonts.ready.then(_fit); }catch(e){}
+      try{ new ResizeObserver(_fit).observe(el); if(window.visualViewport) visualViewport.addEventListener('resize',_fit); }catch(e){}
       _fit();
       return { destroy(){ el.innerHTML=''; el.classList.remove('u4-game'); } };
     },
