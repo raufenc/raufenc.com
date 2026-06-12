@@ -28,6 +28,12 @@ body{
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
 }
 .card:hover{transform:translateY(-3px); background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.28)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:.7;transition:opacity .15s}
+.card:hover::before{opacity:1}
+.card.u1::before{background:linear-gradient(90deg,#f7971e,#ffd200)}
+.card.u2::before{background:linear-gradient(90deg,#00b09b,#96c93d)}
+.card.u3::before{background:linear-gradient(90deg,#4facfe,#00f2fe)}
+.card.u4::before{background:linear-gradient(90deg,#e53935,#ff6d00)}
 .card .unit{font-size:13px; opacity:.65; margin-bottom:8px}
 .card .name{font-size:clamp(20px,2.6vw,26px); font-weight:700; line-height:1.35; margin-bottom:6px}
 .card .desc{font-size:14px; opacity:.7; line-height:1.5}
@@ -54,7 +60,7 @@ const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
 const grid=document.getElementById('grid');
 (window.ACTIVITIES||[]).forEach(a=>{
   const el=document.createElement('a');
-  el.className='card'; el.href='player.html?id='+encodeURIComponent(a.id);
+  el.className='card u'+a.unit; el.href='player.html?id='+encodeURIComponent(a.id);
   const pg=parseInt(a.id.slice(1),10);
   el.innerHTML=`<div class="cnt">${toAr(a.questions.length)} سُؤال</div>
     <div class="unit">${UNIT_AR[a.unit]||''} &middot; صَفْحَة ${toAr(pg)}</div>
