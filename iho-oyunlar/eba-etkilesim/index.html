@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#0f0c29">
+<meta name="theme-color" content="#FFF7F3">
 <title>أَنْشِطَة تَفاعُلِيَّة — العَرَبِيَّة ٧</title>
 <style>
 @font-face{font-family:'Arakom';src:url('../Arakom-Regular.ttf') format('truetype');font-weight:normal;font-display:swap}
@@ -12,85 +12,81 @@
 html,body{height:100%;height:100dvh;overflow:hidden}
 body{
   font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
-  background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
-  color:#fff;direction:rtl;
+  background:
+    radial-gradient(circle at 8% 6%, rgba(229,23,107,.08), transparent 24%),
+    radial-gradient(circle at 92% 8%, rgba(2,136,209,.06), transparent 20%),
+    #FFF7F3;
+  color:#2A2F45;direction:rtl;
   display:flex;flex-direction:column;
 }
-
-/* HEADER */
 .hdr{
   flex-shrink:0;
   display:flex;align-items:center;justify-content:space-between;
   padding:11px 20px 9px;
-  border-bottom:1px solid rgba(255,255,255,.07);
+  border-bottom:1px solid rgba(229,23,107,.1);
 }
 .hdr-center{text-align:center;flex:1}
 .hdr-title{
-  font-size:clamp(18px,2.4vw,30px);font-weight:800;
-  background:linear-gradient(90deg,#f7971e,#ffd200);
+  font-size:clamp(18px,2.4vw,30px);font-weight:800;line-height:1.2;
+  background:linear-gradient(100deg,#E5176B,#FF5A8A 45%,#C2185B);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  line-height:1.2;
 }
-.hdr-sub{font-size:clamp(11px,1.1vw,14px);opacity:.42;margin-top:1px}
-.back{color:#fff;opacity:.55;text-decoration:none;font-size:14px;white-space:nowrap;flex-shrink:0}
+.hdr-sub{font-size:clamp(11px,1.1vw,14px);opacity:.5;margin-top:1px;color:#6B7088}
+.back{color:#E5176B;opacity:.7;text-decoration:none;font-size:14px;white-space:nowrap;flex-shrink:0;font-weight:700}
 .back:hover{opacity:1}
 .hdr-spacer{flex-shrink:0;min-width:90px}
 
-/* UNIT ROWS */
 .units{flex:1;display:flex;flex-direction:column;gap:8px;padding:8px 12px 10px;min-height:0}
 .unit-row{
   flex:1;display:flex;
-  border-radius:14px;border:1px solid rgba(255,255,255,.09);
-  background:rgba(255,255,255,.035);overflow:hidden;min-height:0;
+  border-radius:14px;border:1px solid #F0DCE4;
+  background:#fff;overflow:hidden;min-height:0;
+  box-shadow:0 4px 16px rgba(229,23,107,.05);
 }
-
-/* UNIT LABEL — appears on right in RTL (first in DOM) */
 .unit-lbl{
   flex-shrink:0;width:128px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:4px;padding:10px 8px;
 }
-.u1 .unit-lbl{background:linear-gradient(170deg,rgba(247,151,30,.22),rgba(247,151,30,.06));border-left:1px solid rgba(247,151,30,.22)}
-.u2 .unit-lbl{background:linear-gradient(170deg,rgba(0,176,155,.22),rgba(0,176,155,.06));border-left:1px solid rgba(0,176,155,.22)}
-.u3 .unit-lbl{background:linear-gradient(170deg,rgba(79,172,254,.22),rgba(79,172,254,.06));border-left:1px solid rgba(79,172,254,.22)}
-.u4 .unit-lbl{background:linear-gradient(170deg,rgba(229,57,53,.22),rgba(229,57,53,.06));border-left:1px solid rgba(229,57,53,.22)}
-.unit-num{font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1;opacity:.95}
-.u1 .unit-num{color:#f7971e}
-.u2 .unit-num{color:#00c9a7}
-.u3 .unit-num{color:#4facfe}
-.u4 .unit-num{color:#ff5252}
-.unit-name{font-size:clamp(10px,.95vw,13px);opacity:.55;text-align:center;line-height:1.4}
+.u1 .unit-lbl{background:#FFEAF1;border-left:1px solid rgba(229,23,107,.15)}
+.u2 .unit-lbl{background:#FFF1E0;border-left:1px solid rgba(245,124,0,.15)}
+.u3 .unit-lbl{background:#E3F4FD;border-left:1px solid rgba(2,136,209,.15)}
+.u4 .unit-lbl{background:#E2F3F1;border-left:1px solid rgba(0,137,123,.15)}
+.unit-num{font-size:clamp(30px,4vw,52px);font-weight:800;line-height:1;opacity:.9}
+.u1 .unit-num{color:#E5176B}
+.u2 .unit-num{color:#E96B00}
+.u3 .unit-num{color:#0277BD}
+.u4 .unit-num{color:#00796B}
+.unit-name{font-size:clamp(10px,.95vw,13px);color:#6B7088;text-align:center;line-height:1.4}
 
-/* CARDS GRID — appears on left in RTL (second in DOM) */
 .cards{flex:1;display:grid;align-items:stretch;gap:8px;padding:8px 10px 8px 8px;min-width:0}
 .u1 .cards{grid-template-columns:repeat(4,1fr)}
 .u2 .cards,.u3 .cards,.u4 .cards{grid-template-columns:repeat(3,1fr)}
 
-/* CARD */
 .card{
   display:flex;flex-direction:column;justify-content:space-between;
-  text-decoration:none;color:#fff;
-  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.09);
+  text-decoration:none;color:#2A2F45;
+  background:#fff;border:1px solid #F0DCE4;
   border-radius:10px;padding:10px 12px 9px;
-  transition:transform .14s,background .14s,border-color .14s;
+  transition:transform .14s,box-shadow .14s,border-color .14s;
+  box-shadow:0 2px 8px rgba(229,23,107,.04);
 }
-.card:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.22)}
-.card-pg{font-size:10px;opacity:.37;margin-bottom:3px;line-height:1}
+.card:hover{transform:translateY(-2px);border-color:rgba(229,23,107,.35);box-shadow:0 8px 20px rgba(229,23,107,.1)}
+.card-pg{font-size:10px;color:#6B7088;opacity:.6;margin-bottom:3px;line-height:1}
 .card-title{
-  font-size:clamp(12px,1.35vw,18px);font-weight:700;line-height:1.35;
+  font-size:clamp(12px,1.35vw,18px);font-weight:700;line-height:1.35;color:#2A2F45;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
-.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
-.card-cnt{font-size:10px;opacity:.37}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:6px;border-top:1px solid #F0DCE4;padding-top:5px}
+.card-cnt{font-size:10px;color:#6B7088;opacity:.7}
 .card-play{
   width:26px;height:26px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#4f7cff,#6e5dff);
-  display:flex;align-items:center;justify-content:center;font-size:11px;
+  background:linear-gradient(135deg,#E5176B,#FF5A8A);
+  display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;
 }
 </style>
 </head>
 <body>
-
 <div class="hdr">
   <a class="back" href="../index.html">→ كُلّ الأَلْعاب</a>
   <div class="hdr-center">
@@ -99,25 +95,20 @@ body{
   </div>
   <div class="hdr-spacer"></div>
 </div>
-
 <div class="units" id="units"></div>
-
 <script src="activities.js"></script>
 <script>
 const U_AR={1:'الوَحْدَة الأُولى',2:'الوَحْدَة الثّانِيَة',3:'الوَحْدَة الثّالِثَة',4:'الوَحْدَة الرّابِعَة'};
 const U_NUM={1:'١',2:'٢',3:'٣',4:'٤'};
 const AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>AR[+c]??c).join('');
-
 const byUnit={};
 (window.ACTIVITIES||[]).forEach(a=>{(byUnit[a.unit]||(byUnit[a.unit]=[])).push(a)});
-
 const units=document.getElementById('units');
 [1,2,3,4].forEach(u=>{
   const acts=byUnit[u]||[];
   const row=document.createElement('div');
   row.className='unit-row u'+u;
-
   const cards=acts.map(a=>{
     const pg=parseInt(a.id.slice(1),10);
     return `<a class="card" href="player.html?id=${encodeURIComponent(a.id)}">
@@ -131,13 +122,7 @@ const units=document.getElementById('units');
       </div>
     </a>`;
   }).join('');
-
-  row.innerHTML=`
-    <div class="unit-lbl">
-      <span class="unit-num">${U_NUM[u]}</span>
-      <span class="unit-name">${U_AR[u]}</span>
-    </div>
-    <div class="cards">${cards}</div>`;
+  row.innerHTML=`<div class="unit-lbl"><span class="unit-num">${U_NUM[u]}</span><span class="unit-name">${U_AR[u]}</span></div><div class="cards">${cards}</div>`;
   units.appendChild(row);
 });
 </script>

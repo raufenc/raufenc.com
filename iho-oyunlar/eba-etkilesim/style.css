@@ -6,8 +6,12 @@
 html,body{height:100%}
 body{
   font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
-  background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
-  color:#fff; min-height:100vh; min-height:100dvh;
+  background:
+    radial-gradient(circle at 8% 6%, rgba(229,23,107,.08), transparent 24%),
+    radial-gradient(circle at 92% 8%, rgba(2,136,209,.06), transparent 20%),
+    #FFF7F3;
+  color:#2A2F45;
+  min-height:100vh; min-height:100dvh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   padding:14px; padding-top:max(14px,env(safe-area-inset-top));
   padding-bottom:max(14px,env(safe-area-inset-bottom)); gap:10px;
@@ -16,59 +20,58 @@ body{
 .back-btn{
   position:fixed; top:max(14px,env(safe-area-inset-top)); right:14px;
   width:42px; height:42px; border-radius:50%;
-  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  color:#fff; font-size:21px; cursor:pointer; z-index:50; text-decoration:none;
-  display:flex; align-items:center; justify-content:center; transition:background .15s, transform .15s;
+  background:#fff; border:2px solid rgba(229,23,107,.3);
+  color:#E5176B; font-size:21px; cursor:pointer; z-index:50; text-decoration:none;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, border-color .15s, transform .15s;
+  box-shadow:0 4px 14px rgba(229,23,107,.12);
 }
-.back-btn:hover,.back-btn:focus-visible{background:rgba(255,255,255,.22); transform:scale(1.05)}
+.back-btn:hover,.back-btn:focus-visible{background:#FFEAF1;border-color:#E5176B;transform:scale(1.05)}
 
 #hud{
   width:100%; max-width:880px;
   display:flex; align-items:center; justify-content:space-between; font-size:16px;
 }
 .dots{display:flex; gap:8px; flex-wrap:wrap}
-.dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.18); transition:all .25s ease}
-.dot.active{background:#4f7cff; transform:scale(1.25)}
+.dot{width:10px; height:10px; border-radius:50%; background:#F0DCE4; transition:all .25s ease}
+.dot.active{background:#E5176B; transform:scale(1.25)}
 .dot.ok{background:#2bb673}
 .dot.bad{background:#e74c3c}
-.counter{font-size:21px; font-weight:600; opacity:.92; letter-spacing:1px}
+.counter{font-size:21px; font-weight:600; color:#6B7088; letter-spacing:1px}
 
-/* Sahne — video. Yüksekliği sınırlı ki şıklara yer kalsın. */
 #stage{
   position:relative; width:100%; max-width:880px;
   aspect-ratio:16/9; max-height:50vh; background:#000;
-  border-radius:14px; overflow:hidden; box-shadow:0 16px 44px rgba(0,0,0,.45);
+  border-radius:14px; overflow:hidden; box-shadow:0 12px 36px rgba(229,23,107,.14);
   flex:0 0 auto;
 }
 video{width:100%; height:100%; display:block; object-fit:contain; background:#000}
 
-/* Başlat / Bitiş — sadece sahneyi kaplar */
 #startScreen,#endScreen{
   position:absolute; inset:0; z-index:20;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:18px; padding:22px; text-align:center; background:rgba(10,15,40,.95);
+  gap:18px; padding:22px; text-align:center; background:rgba(255,247,243,.97);
 }
 #startScreen.hide{display:none}
 #endScreen{display:none}
 #endScreen.show{display:flex; animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 #startScreen h1{margin:0; font-size:clamp(24px,4vw,42px); font-weight:700; line-height:1.3;
-  background:linear-gradient(90deg,#f7971e,#ffd200); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
-.start-sub{font-size:clamp(14px,2.1vw,19px); opacity:.72; direction:rtl; margin-top:-6px; max-width:560px}
+  background:linear-gradient(100deg,#E5176B,#FF5A8A 45%,#C2185B);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
+.start-sub{font-size:clamp(14px,2.1vw,19px); color:#6B7088; direction:rtl; margin-top:-6px; max-width:560px}
 .start-btn{
-  background:linear-gradient(135deg,#4f7cff,#6e5dff); border:none; color:#fff;
+  background:linear-gradient(135deg,#E5176B,#FF5A8A); border:none; color:#fff;
   padding:15px 54px; border-radius:999px; font-size:clamp(19px,2.6vw,25px); font-weight:600;
-  cursor:pointer; box-shadow:0 8px 24px rgba(79,124,255,.45); transition:transform .15s ease; font-family:inherit;
+  cursor:pointer; box-shadow:0 8px 24px rgba(229,23,107,.35); transition:transform .15s ease; font-family:inherit;
 }
 .start-btn:hover{transform:translateY(-2px)}
 .start-btn:active{transform:translateY(0)}
-.end-title{font-size:clamp(22px,4vw,36px); font-weight:700; margin:0; direction:rtl}
+.end-title{font-size:clamp(22px,4vw,36px); font-weight:700; margin:0; direction:rtl; color:#2A2F45}
 .end-score{font-size:clamp(42px,8vw,80px); font-weight:800; letter-spacing:4px; margin:0;
-  background:linear-gradient(135deg,#6ee7a8,#4f7cff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
-.end-msg{font-size:clamp(17px,2.3vw,25px); opacity:.92; margin:0; direction:rtl}
+  background:linear-gradient(135deg,#E5176B,#FF5A8A); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.end-msg{font-size:clamp(17px,2.3vw,25px); color:#2A2F45; margin:0; direction:rtl}
 
-/* Soru paneli — VİDEONUN ALTINDA, video görünür kalır */
 #qPanel{
   width:100%; max-width:720px; flex:0 1 auto;
   display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -77,23 +80,24 @@ video{width:100%; height:100%; display:block; object-fit:contain; background:#00
 #qPanel.show{opacity:1; transform:none; pointer-events:auto}
 .q-prompt{
   direction:rtl; text-align:center; width:100%;
-  font-size:clamp(20px,3vw,30px); font-weight:700; line-height:1.4; margin-bottom:2px;
+  font-size:clamp(20px,3vw,30px); font-weight:700; line-height:1.4; margin-bottom:2px; color:#2A2F45;
 }
 .opts{display:flex; flex-direction:column; gap:9px; width:100%}
 .opt-btn{
-  background:rgba(255,255,255,.10); border:2px solid rgba(255,255,255,.22);
-  color:#fff; padding:13px 22px; border-radius:13px;
+  background:#fff; border:2px solid #F0DCE4;
+  color:#2A2F45; padding:13px 22px; border-radius:13px;
   font-size:clamp(18px,2.4vw,25px); font-family:inherit; cursor:pointer; text-align:center; direction:rtl;
   transition:all .15s ease; line-height:1.5;
+  box-shadow:0 2px 8px rgba(229,23,107,.05);
 }
-.opt-btn:hover:not(:disabled){background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.42)}
+.opt-btn:hover:not(:disabled){background:#FFEAF1; border-color:#E5176B}
 .opt-btn:disabled{cursor:default}
-.opt-btn.correct{background:linear-gradient(135deg,#2bb673,#1f9d5f)!important; border-color:#2bb673!important; box-shadow:0 6px 20px rgba(43,182,115,.45)}
-.opt-btn.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b)!important; border-color:#e74c3c!important; box-shadow:0 6px 20px rgba(231,76,60,.45)}
+.opt-btn.correct{background:linear-gradient(135deg,#2bb673,#1f9d5f)!important; border-color:#2bb673!important; color:#fff!important; box-shadow:0 6px 20px rgba(43,182,115,.35)}
+.opt-btn.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b)!important; border-color:#e74c3c!important; color:#fff!important; box-shadow:0 6px 20px rgba(231,76,60,.35)}
 .feedback{min-height:24px; font-size:clamp(17px,2.5vw,26px); font-weight:600; opacity:0; transition:opacity .25s ease; direction:rtl}
 .feedback.show{opacity:1}
-.feedback.ok{color:#6ee7a8}
-.feedback.bad{color:#ffb3a8}
+.feedback.ok{color:#1a7d50}
+.feedback.bad{color:#c0392b}
 
 @media(max-width:540px){
   body{padding:8px; gap:8px}

@@ -6,8 +6,12 @@
 html,body{height:100%}
 body{
   font-family:'Arakom','Noto Sans Arabic','Geeza Pro',system-ui,sans-serif;
-  background:linear-gradient(135deg,#0f0c29 0%,#1a1035 40%,#0f1323 100%);
-  color:#fff; min-height:100vh; min-height:100dvh;
+  background:
+    radial-gradient(circle at 8% 6%, rgba(229,23,107,.08), transparent 24%),
+    radial-gradient(circle at 92% 8%, rgba(2,136,209,.06), transparent 20%),
+    #FFF7F3;
+  color:#2A2F45;
+  min-height:100vh; min-height:100dvh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   padding:14px; padding-top:max(14px,env(safe-area-inset-top));
   padding-bottom:max(14px,env(safe-area-inset-bottom)); gap:10px;
@@ -16,86 +20,83 @@ body{
 .back-btn{
   position:fixed; top:max(14px,env(safe-area-inset-top)); right:14px;
   width:42px; height:42px; border-radius:50%;
-  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.14);
-  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  color:#fff; font-size:21px; cursor:pointer; z-index:50; text-decoration:none;
-  display:flex; align-items:center; justify-content:center; transition:background .15s, transform .15s;
+  background:#fff; border:2px solid rgba(229,23,107,.3);
+  color:#E5176B; font-size:21px; cursor:pointer; z-index:50; text-decoration:none;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .15s, border-color .15s, transform .15s;
+  box-shadow:0 4px 14px rgba(229,23,107,.12);
 }
-.back-btn:hover,.back-btn:focus-visible{background:rgba(255,255,255,.22); transform:scale(1.05)}
+.back-btn:hover,.back-btn:focus-visible{background:#FFEAF1;border-color:#E5176B;transform:scale(1.05)}
 
-#hud{ width:100%; max-width:900px; }
+#hud{width:100%; max-width:900px;}
 #hudSolo{display:flex; align-items:center; justify-content:space-between; width:100%; font-size:16px}
 #hudDuo{display:none; align-items:center; justify-content:space-between; width:100%}
 .dots{display:flex; gap:8px; flex-wrap:wrap}
-.dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,.18); transition:all .25s ease}
-.dot.active{background:#4f7cff; transform:scale(1.25)}
+.dot{width:10px; height:10px; border-radius:50%; background:#F0DCE4; transition:all .25s ease}
+.dot.active{background:#E5176B; transform:scale(1.25)}
 .dot.ok{background:#2bb673}
 .dot.bad{background:#e74c3c}
-.counter{font-size:21px; font-weight:600; opacity:.92; letter-spacing:1px}
+.counter{font-size:21px; font-weight:600; color:#6B7088; letter-spacing:1px}
 .pill{font-weight:700; font-size:15px; padding:6px 13px; border-radius:100px; letter-spacing:.5px; white-space:nowrap}
-.pill.a{background:rgba(79,124,255,.18); color:#9db4ff; border:1px solid rgba(79,124,255,.4)}
-.pill.b{background:rgba(247,151,30,.18); color:#ffcf8a; border:1px solid rgba(247,151,30,.4)}
+.pill.a{background:#E3F4FD; color:#0277BD; border:1px solid rgba(2,136,209,.3)}
+.pill.b{background:#FFF1E0; color:#E96B00; border:1px solid rgba(245,124,0,.3)}
 
-/* Sahne — video. Yüksekliği sınırlı ki şıklara yer kalsın. */
 #stage{
   position:relative; width:100%; max-width:900px;
   aspect-ratio:16/9; max-height:50vh; background:#000;
-  border-radius:14px; overflow:hidden; box-shadow:0 16px 44px rgba(0,0,0,.45);
+  border-radius:14px; overflow:hidden; box-shadow:0 12px 36px rgba(229,23,107,.14);
   flex:0 0 auto;
 }
 video{width:100%; height:100%; display:block; object-fit:contain; background:#000}
 
-/* Başlat / Bitiş — sadece sahneyi kaplar */
 #startScreen,#endScreen,#endScreen2{
   position:absolute; inset:0; z-index:20;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:18px; padding:22px; text-align:center; background:rgba(10,15,40,.95);
+  gap:18px; padding:22px; text-align:center; background:rgba(255,247,243,.97);
 }
 #startScreen.hide{display:none}
 #endScreen,#endScreen2{display:none}
 #endScreen.show,#endScreen2.show{display:flex; animation:fadeIn .4s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 #startScreen h1{margin:0; font-size:clamp(22px,3.6vw,38px); font-weight:700; line-height:1.3;
-  background:linear-gradient(90deg,#f7971e,#ffd200); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
-.start-sub{font-size:clamp(14px,2.1vw,19px); opacity:.72; direction:rtl; margin-top:-6px; max-width:560px}
+  background:linear-gradient(100deg,#E5176B,#FF5A8A 45%,#C2185B);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text}
+.start-sub{font-size:clamp(14px,2.1vw,19px); color:#6B7088; direction:rtl; margin-top:-6px; max-width:560px}
 
-/* Mod seçimi */
 .mode-row{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
 .mode-btn{
-  background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.22); color:#fff;
+  background:#fff; border:2px solid #F0DCE4; color:#2A2F45;
   padding:15px 26px; border-radius:18px; font-family:inherit; cursor:pointer;
   font-size:clamp(17px,2.4vw,22px); font-weight:700;
   display:flex; flex-direction:column; align-items:center; gap:5px; min-width:150px;
   transition:transform .15s ease, background .15s, border-color .15s;
+  box-shadow:0 4px 14px rgba(0,0,0,.06);
 }
 .mode-btn .emo{font-size:30px; line-height:1}
-.mode-btn small{font-weight:500; opacity:.7; font-size:13px}
-.mode-btn.solo:hover,.mode-btn.solo:focus-visible{transform:translateY(-3px); background:rgba(79,124,255,.22); border-color:#4f7cff}
-.mode-btn.duo:hover,.mode-btn.duo:focus-visible{transform:translateY(-3px); background:rgba(247,151,30,.22); border-color:#f7971e}
+.mode-btn small{font-weight:500; color:#6B7088; font-size:13px}
+.mode-btn.solo:hover,.mode-btn.solo:focus-visible{transform:translateY(-3px); background:#E3F4FD; border-color:#0288D1; color:#0277BD}
+.mode-btn.duo:hover,.mode-btn.duo:focus-visible{transform:translateY(-3px); background:#FFF1E0; border-color:#F57C00; color:#E96B00}
 
 .start-btn{
-  background:linear-gradient(135deg,#4f7cff,#6e5dff); border:none; color:#fff;
+  background:linear-gradient(135deg,#E5176B,#FF5A8A); border:none; color:#fff;
   padding:14px 50px; border-radius:999px; font-size:clamp(19px,2.6vw,25px); font-weight:600;
-  cursor:pointer; box-shadow:0 8px 24px rgba(79,124,255,.45); transition:transform .15s ease; font-family:inherit;
+  cursor:pointer; box-shadow:0 8px 24px rgba(229,23,107,.35); transition:transform .15s ease; font-family:inherit;
 }
 .start-btn:hover{transform:translateY(-2px)}
 .start-btn:active{transform:translateY(0)}
-.end-title{font-size:clamp(22px,4vw,36px); font-weight:700; margin:0; direction:rtl}
+.end-title{font-size:clamp(22px,4vw,36px); font-weight:700; margin:0; direction:rtl; color:#2A2F45}
 .end-score{font-size:clamp(42px,8vw,80px); font-weight:800; letter-spacing:4px; margin:0;
-  background:linear-gradient(135deg,#6ee7a8,#4f7cff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
-.end-msg{font-size:clamp(17px,2.3vw,25px); opacity:.92; margin:0; direction:rtl}
+  background:linear-gradient(135deg,#E5176B,#FF5A8A); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.end-msg{font-size:clamp(17px,2.3vw,25px); color:#2A2F45; margin:0; direction:rtl}
 
-/* 2 kişi bitiş ekranı */
-.end2-win{font-size:clamp(22px,4vw,34px); font-weight:800; direction:rtl; margin:0;
-  background:linear-gradient(135deg,#f7971e,#ffd200); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent}
+.end2-win{font-size:clamp(22px,4vw,34px); font-weight:800; direction:rtl; margin:0; color:#2A2F45}
 .end2-grid{display:flex; gap:14px; justify-content:center; width:100%; max-width:460px}
-.end2-card{flex:1 1 0; padding:14px 10px; border-radius:14px; border:2px solid rgba(255,255,255,.15);
-  background:rgba(255,255,255,.05); font-size:clamp(15px,2.4vw,21px); line-height:1.7; direction:rtl}
-.end2-card.a{border-color:rgba(79,124,255,.4)}
-.end2-card.b{border-color:rgba(247,151,30,.4)}
-.end2-card.win{border-color:#ffd200; background:rgba(255,210,0,.12); box-shadow:0 8px 24px rgba(255,210,0,.22)}
+.end2-card{flex:1 1 0; padding:14px 10px; border-radius:14px; border:2px solid #F0DCE4;
+  background:#fff; font-size:clamp(15px,2.4vw,21px); line-height:1.7; direction:rtl; color:#2A2F45}
+.end2-card.a{border-color:rgba(2,136,209,.35)}
+.end2-card.b{border-color:rgba(245,124,0,.35)}
+.end2-card.win{border-color:#E5176B; background:#FFEAF1; box-shadow:0 8px 24px rgba(229,23,107,.18)}
 
-/* ===== 1 kişi: soru paneli — VİDEONUN ALTINDA ===== */
 #qPanel{
   width:100%; max-width:720px; flex:0 1 auto;
   display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -105,47 +106,46 @@ video{width:100%; height:100%; display:block; object-fit:contain; background:#00
 body.duo #qPanel{display:none}
 .q-prompt{
   direction:rtl; text-align:center; width:100%;
-  font-size:clamp(20px,3vw,30px); font-weight:700; line-height:1.4; margin-bottom:2px;
+  font-size:clamp(20px,3vw,30px); font-weight:700; line-height:1.4; margin-bottom:2px; color:#2A2F45;
 }
 .opts{display:flex; flex-direction:column; gap:9px; width:100%}
 .opt-btn{
-  background:rgba(255,255,255,.10); border:2px solid rgba(255,255,255,.22);
-  color:#fff; padding:13px 22px; border-radius:13px;
+  background:#fff; border:2px solid #F0DCE4;
+  color:#2A2F45; padding:13px 22px; border-radius:13px;
   font-size:clamp(18px,2.4vw,25px); font-family:inherit; cursor:pointer; text-align:center; direction:rtl;
   transition:all .15s ease; line-height:1.5;
+  box-shadow:0 2px 8px rgba(229,23,107,.05);
 }
-.opt-btn:hover:not(:disabled){background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.42)}
+.opt-btn:hover:not(:disabled){background:#FFEAF1; border-color:#E5176B}
 .opt-btn:disabled{cursor:default}
-.opt-btn.correct{background:linear-gradient(135deg,#2bb673,#1f9d5f)!important; border-color:#2bb673!important; box-shadow:0 6px 20px rgba(43,182,115,.45)}
-.opt-btn.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b)!important; border-color:#e74c3c!important; box-shadow:0 6px 20px rgba(231,76,60,.45)}
+.opt-btn.correct{background:linear-gradient(135deg,#2bb673,#1f9d5f)!important; border-color:#2bb673!important; color:#fff!important; box-shadow:0 6px 20px rgba(43,182,115,.35)}
+.opt-btn.wrong{background:linear-gradient(135deg,#e74c3c,#c0392b)!important; border-color:#e74c3c!important; color:#fff!important; box-shadow:0 6px 20px rgba(231,76,60,.35)}
 .feedback{min-height:24px; font-size:clamp(17px,2.5vw,26px); font-weight:600; opacity:0; transition:opacity .25s ease; direction:rtl}
 .feedback.show{opacity:1}
-.feedback.ok{color:#6ee7a8}
-.feedback.bad{color:#ffb3a8}
+.feedback.ok{color:#1a7d50}
+.feedback.bad{color:#c0392b}
 
-/* ===== 2 kişi: düello paneli — VİDEONUN ALTINDA, iki yarış şeridi ===== */
 #duel{
   width:100%; max-width:900px; flex:0 1 auto;
   display:none; flex-direction:column; align-items:center; gap:8px;
 }
 #duel.show{display:flex; animation:fadeIn .25s ease}
 .duel-prompt{direction:rtl; text-align:center; width:100%;
-  font-size:clamp(18px,2.7vw,28px); font-weight:700; line-height:1.4}
+  font-size:clamp(18px,2.7vw,28px); font-weight:700; line-height:1.4; color:#2A2F45}
 .lanes{display:flex; gap:10px; width:100%}
 .lane{
   flex:1 1 0; min-width:0; display:flex; flex-direction:column; gap:8px;
   padding:9px 9px 11px; border-radius:16px; border:2px solid; position:relative; overflow:hidden;
 }
-.lane.a{border-color:rgba(79,124,255,.45); background:rgba(79,124,255,.06)}
-.lane.b{border-color:rgba(247,151,30,.45); background:rgba(247,151,30,.06)}
+.lane.a{border-color:rgba(2,136,209,.35); background:#E3F4FD}
+.lane.b{border-color:rgba(245,124,0,.35); background:#FFF1E0}
 .lane-head{text-align:center; font-weight:800; font-size:15px; direction:rtl; letter-spacing:.3px}
-.lane.a .lane-head{color:#9db4ff}
-.lane.b .lane-head{color:#ffcf8a}
-.lane .opt-btn{font-size:clamp(15px,2vw,21px); padding:11px 10px}
-.lane.a .opt-btn:hover:not(:disabled){border-color:#4f7cff}
-.lane.b .opt-btn:hover:not(:disabled){border-color:#f7971e}
+.lane.a .lane-head{color:#0277BD}
+.lane.b .lane-head{color:#E96B00}
+.lane .opt-btn{font-size:clamp(15px,2vw,21px); padding:11px 10px; box-shadow:none}
+.lane.a .opt-btn:hover:not(:disabled){border-color:#0288D1; background:#E3F4FD}
+.lane.b .opt-btn:hover:not(:disabled){border-color:#F57C00; background:#FFF1E0}
 
-/* ===== Responsive ===== */
 @media(max-width:540px){
   body{padding:8px; gap:8px}
   #stage{max-height:40vh}
@@ -160,8 +160,6 @@ body.duo #qPanel{display:none}
 @media(min-width:900px) and (max-height:760px){
   #stage{max-height:44vh}
 }
-
-/* 2 kişide sahneyi biraz kısalt ki iki yarış şeridi sığsın */
 body.duo #stage{max-height:42vh}
 @media(max-width:540px){ body.duo #stage{max-height:30vh} }
 @media(min-width:1024px){ body.duo #stage{max-height:48vh} }
