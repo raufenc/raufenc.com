@@ -14,7 +14,7 @@
   const ADJ = { R:["C","I"], I:["R","A"], A:["I","S"], S:["A","E"], E:["S","C"], C:["E","R"] };
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   const colorVar = k => "var(--c-" + k + ")";
-  const FUN = { R:"Maker Kafası", I:"Mucit Kafası", A:"Sanatçı Ruhu", S:"İyi Kalp", E:"Lider Ruhu", C:"Planlama Dehası" };
+  const FUN = { R:"Üreten Zihin", I:"Mucit Kafası", A:"Sanatçı Ruhu", S:"İyi Kalp", E:"Lider Ruhu", C:"Planlama Dehası" };
   const CAREER_NEXT = {
     R:"Bir atölye, teknik gezi, model/prototip veya uygulamalı mini proje dene.",
     I:"Bir açık veri, deney, makale ya da belgesel seçip kısa bir araştırma notu çıkar.",
