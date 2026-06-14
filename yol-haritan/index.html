@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yol Haritan — Karakter & Meslek Uyumu Testi</title>
+<meta name="description" content="Karakterini keşfet, sana en uygun meslekleri ve üniversite bölümlerini bul. Bilimsel temelli (RIASEC + Beş Faktör), eğlenceli ve ücretsiz bir keşif testi. Liseliler için.">
+<meta name="theme-color" content="#0b1a2e">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://raufenc.com/yol-haritan/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="raufenc.com">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Yol Haritan">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="raufenc.com">
+<meta property="og:title" content="Yol Haritan — Karakter & Meslek Uyumu Testi">
+<meta property="og:description" content="Karakterini keşfet, sana en uygun meslekleri ve üniversite bölümlerini bul. Bilimsel temelli, eğlenceli, ücretsiz.">
+<meta property="og:url" content="https://raufenc.com/yol-haritan/">
+<meta property="og:image" content="https://raufenc.com/yol-haritan/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Yol Haritan — Karakter & Meslek Uyumu Testi">
+<meta name="twitter:description" content="Karakterini keşfet, sana en uygun meslekleri ve üniversite bölümlerini bul.">
+<meta name="twitter:image" content="https://raufenc.com/yol-haritan/og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Yol Haritan ana ekran">
+      <img src="favicon.svg" alt="">
+      <span>Yol Haritan<small>Karakter & meslek uyumu</small></span>
+    </a>
+    <a class="home" href="/" aria-label="raufenc.com ana sayfa"><span>raufenc.com</span></a>
+  </header>
+
+  <main class="wrap" id="main">
+
+    <section class="screen is-active" id="screen-intro" aria-labelledby="introTitle">
+      <div class="hero">
+        <div class="badge"><img class="compass-xl" src="favicon.svg" alt="Yol haritası"></div>
+        <h1 id="introTitle">Karakterini keşfet,<br><span class="grad">yolunu çiz.</span></h1>
+        <p class="lead">Sana en uygun meslekleri ve üniversite bölümlerini bulmana yardım eden, eğlenceli ve bilimsel bir keşif testi.</p>
+        <div class="hero-meta">
+          <span class="pill">⏱️ ~7 dakika</span>
+          <span class="pill" id="pill-count">🧩 — soru</span>
+          <span class="pill">🔒 Tamamen gizli</span>
+        </div>
+        <div class="intro-cta">
+          <button class="btn btn--gold btn--block" id="startBtn" style="max-width:340px">🚀 Teste Başla</button>
+          <span class="note">Kayıt yok · ücretsiz · sonucun cihazında kalır</span>
+        </div>
+      </div>
+
+      <div class="types-strip" aria-hidden="true" id="typesStrip"></div>
+
+      <div class="feature-grid">
+        <div class="feature"><div class="ico">🧭</div><h3>İlgi Haritan</h3><p>Neyi yapmaktan keyif aldığını ortaya çıkaran, dünyaca kabul görmüş Holland (RIASEC) modeli.</p></div>
+        <div class="feature"><div class="ico">✨</div><h3>Karakter Aynan</h3><p>Beş Faktör (Big Five) kişilik modeliyle senin nasıl biri olduğunu yansıtır.</p></div>
+        <div class="feature"><div class="ico">🎓</div><h3>Meslek & Bölüm</h3><p>Profiline en yakın Türkiye’deki üniversite bölümlerini ve meslekleri önerir.</p></div>
+        <div class="feature"><div class="ico">💬</div><h3>Konuşma Başlat</h3><p>Sonucunu ailen ve rehber öğretmeninle konuşman için hazır sorular verir.</p></div>
+      </div>
+
+      <p class="disclaimer" id="introDisclaimer"></p>
+    </section>
+
+    <section class="screen" id="screen-quiz" aria-labelledby="quizLive">
+      <div class="quiz-head">
+        <div class="segs" id="segs" aria-hidden="true"></div>
+        <div class="progress-meta"><span class="sect" id="sectLabel">—</span><span id="qCounter" aria-live="polite">0 / 0</span></div>
+      </div>
+      <div id="qContainer"></div>
+      <p class="sr-only" id="quizLive" aria-live="polite"></p>
+    </section>
+
+    <section class="screen" id="screen-calc">
+      <div class="calc"><div class="spinner"></div><h2>Yol haritan çiziliyor…</h2><p id="calcMsg">Cevapların analiz ediliyor</p></div>
+    </section>
+
+    <section class="screen" id="screen-result" aria-labelledby="resultTitle">
+      <div id="resultContainer"></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () { navigator.serviceWorker.register("./sw.js").catch(function () {}); });
+  }
+</script>
+</body>
+</html>
