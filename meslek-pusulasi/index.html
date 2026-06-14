@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meslek Pusulası — Karakter & Meslek Uyumu Keşfi</title>
+<meta name="description" content="Karakterini ve mesleki ilgilerini keşfet. RIASEC ve Beş Faktör çerçevesinden yararlanan, eğlenceli ve ücretsiz bir meslek uyumu keşif aracı. Liseliler için.">
+<meta name="theme-color" content="#1A1B4B">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://raufenc.com/meslek-pusulasi/">
+<meta name="robots" content="index, follow">
+<meta name="author" content="raufenc.com">
+
+<!-- İkonlar / PWA -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Meslek Pusulası">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="raufenc.com">
+<meta property="og:title" content="Meslek Pusulası — Karakter & Meslek Uyumu Keşfi">
+<meta property="og:description" content="Karakterini ve mesleki ilgilerini keşfet. RIASEC ve Beş Faktör çerçevesinden yararlanan eğlenceli bir rehber.">
+<meta property="og:url" content="https://raufenc.com/meslek-pusulasi/">
+<meta property="og:image" content="https://raufenc.com/meslek-pusulasi/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meslek Pusulası — Karakter & Meslek Uyumu Keşfi">
+<meta name="twitter:description" content="Karakterini ve mesleki ilgilerini keşfet; konuşulabilir bir meslek haritası çıkar.">
+<meta name="twitter:image" content="https://raufenc.com/meslek-pusulasi/icon-512.png">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+<div class="stars" id="stars" aria-hidden="true"></div>
+
+<div class="app">
+
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Meslek Pusulası ana ekran">
+      <img src="favicon.svg" alt="">
+      <span>Meslek Pusulası<small>Karakter & meslek uyumu</small></span>
+    </a>
+    <a class="home" href="/" aria-label="raufenc.com ana sayfa">
+      <span>raufenc.com</span>
+    </a>
+  </header>
+
+  <main class="wrap" id="main">
+
+    <!-- ======= KARŞILAMA ======= -->
+    <section class="screen is-active" id="screen-intro" aria-labelledby="introTitle">
+      <div class="hero">
+        <div class="badge">
+          <img class="compass-xl" src="favicon.svg" alt="Pusula">
+        </div>
+        <h1 id="introTitle">Karakterini keşfet,<br><span class="grad">yolunu bul.</span></h1>
+        <p class="lead">Mesleki ilgilerini, karakter eğilimlerini ve denemeye değer üniversite bölümlerini eğlenceli biçimde keşfet.</p>
+
+        <div class="hero-meta">
+          <span class="pill">⏱️ ~7 dakika</span>
+          <span class="pill" id="pill-count">🧩 — soru</span>
+          <span class="pill">🔒 Tamamen gizli</span>
+        </div>
+
+        <div class="intro-cta">
+          <button class="btn btn--gold btn--block" id="startBtn" style="max-width:340px">🚀 Teste Başla</button>
+          <span class="note">Kayıt yok · ücretsiz · sonucun cihazında kalır</span>
+        </div>
+      </div>
+
+      <div class="galaxy-stage" id="galaxyStage" aria-hidden="true"></div>
+      <div class="types-strip" aria-hidden="true" id="typesStrip"></div>
+
+      <div class="feature-grid">
+        <div class="feature"><div class="ico">🧭</div><h3>İlgi Pusulan</h3><p>Neyi yapmaktan keyif aldığını Holland/RIASEC mesleki ilgi çerçevesiyle görünür kılar.</p></div>
+        <div class="feature"><div class="ico">✨</div><h3>Karakter Aynan</h3><p>Beş Faktör (Big Five) dilinden yararlanarak çalışma tarzını anlamana yardım eder.</p></div>
+        <div class="feature"><div class="ico">🎓</div><h3>Meslek & Bölüm</h3><p>Profiline en yakın Türkiye’deki üniversite bölümlerini ve meslekleri önerir.</p></div>
+        <div class="feature"><div class="ico">💬</div><h3>Konuşma Başlat</h3><p>Sonucunu ailen ve rehber öğretmeninle konuşman için hazır sorular verir.</p></div>
+      </div>
+
+      <p class="disclaimer" id="introDisclaimer"></p>
+    </section>
+
+    <!-- ======= QUIZ ======= -->
+    <section class="screen" id="screen-quiz" aria-labelledby="quizLive">
+      <div class="quiz-head">
+        <div class="segs" id="segs" aria-hidden="true"></div>
+        <div class="progress-meta">
+          <span class="sect" id="sectLabel">—</span>
+          <span id="qCounter" aria-live="polite">0 / 0</span>
+        </div>
+      </div>
+      <div id="qContainer"></div>
+      <p class="sr-only" id="quizLive" aria-live="polite"></p>
+    </section>
+
+    <!-- ======= HESAPLAMA ======= -->
+    <section class="screen" id="screen-calc">
+      <div class="calc">
+        <div class="spinner"></div>
+        <h2>Pusulan ayarlanıyor…</h2>
+        <p id="calcMsg">Cevapların analiz ediliyor</p>
+      </div>
+    </section>
+
+    <!-- ======= SONUÇ ======= -->
+    <section class="screen" id="screen-result" aria-labelledby="resultTitle">
+      <div id="resultContainer"></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js").catch(function () {});
+    });
+  }
+</script>
+</body>
+</html>
