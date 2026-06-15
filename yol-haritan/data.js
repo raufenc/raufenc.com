@@ -41,8 +41,8 @@ window.YH = (function () {
          strengths:["Analitik düşünme","Merak","Mantık","Araştırma"] },
     A: { key:"A", name:"Sanatçı", classic:"Sanatçı", en:"Artistic", emoji:"🎨", hex:"#8E44AD",
          tagline:"Hayal kuran, tasarlayan, ifade eden.",
-         onet:"Özgün ifade, yaratıcılık, tasarım ve estetikten; kalıpların dışına çıkmaktan keyif alır.",
-         strengths:["Yaratıcılık","Estetik duygu","Özgünlük","Hayal gücü"] },
+         onet:"Özgün ifade, üretkenlik, tasarım ve estetikten; kalıpların dışına çıkmaktan keyif alır.",
+         strengths:["Üretkenlik","Estetik duygu","Özgünlük","Hayal gücü"] },
     S: { key:"S", name:"Yardımsever", classic:"Sosyal", en:"Social", emoji:"🤝", hex:"#27AE60",
          tagline:"İnsana dokunan, öğreten, destek olan.",
          onet:"İnsanlara yardım etme, öğretme, iyileştirme ve birlikte çalışmaktan keyif alır.",
@@ -59,7 +59,7 @@ window.YH = (function () {
 
   /* Big Five — N depolanır, "Duygusal Denge" (=100-N) gösterilir */
   const bigfive = {
-    O:  { key:"O",  name:"Açıklık & Merak", orig:"Openness", emoji:"🎨", poles:["Pratik-Somut","Meraklı-Yaratıcı"], strengths:["Yaratıcılık","Merak"],
+    O:  { key:"O",  name:"Açıklık & Merak", orig:"Openness", emoji:"🎨", poles:["Pratik-Somut","Meraklı-Özgün"], strengths:["Hayal gücü","Merak"],
           fb:{ high:"Yeni fikirlere ve farklı bakışlara açıksın; hayal gücün ve merakın seni sürekli keşfe iter.",
                mid:"Hem yeniliğe açıksın hem de denenmiş yöntemlere değer veriyorsun — dengeli bir yanın var.",
                low:"Somut, kanıtlanmış ve pratik olanı seversin; hayal peşinde koşmaktansa işe yarayanı tercih edersin." } },
@@ -83,7 +83,7 @@ window.YH = (function () {
 
   const turns = [
     { id:1, name:"Atölye & Laboratuvar", emoji:"🛠️", teaser:"Ellerin ve aklın neyi seviyor, görelim." },
-    { id:2, name:"Stüdyo & Topluluk",    emoji:"🎨", teaser:"Yaratıcı ve insancıl yanını yokluyoruz." },
+    { id:2, name:"Stüdyo & Topluluk",    emoji:"🎨", teaser:"Üretken ve insancıl yanını yokluyoruz." },
     { id:3, name:"Sahne & Düzen Masası",  emoji:"🚀", teaser:"Liderlik mi, düzen mi? Bakalım." },
     { id:4, name:"İçindeki Sen",          emoji:"✨", teaser:"Şimdi sıra karakterinde." },
     { id:5, name:"Yön (opsiyonel)",       emoji:"🧭", teaser:"Seni asıl yönlendiren değerler." }
@@ -207,7 +207,7 @@ window.YH = (function () {
     { id:2,  ad:"Sahadaki Usta",      emoji:"🧰", hex:"#C75B2E", primary:"R", def:"Bir işi titizlikle, sağlam ve eksiksiz bitirirsin. Sana güvenilir, çünkü dediğini yaparsın." },
     { id:3,  ad:"Sessiz Mucit",       emoji:"🔬", hex:"#2E86AB", primary:"I", def:"Bir problemi sessizce parçalara ayırıp çözmeye bayılıyorsun. Derinliğin, çoğu kişinin kaçırdığını yakalatıyor." },
     { id:4,  ad:"Meraklı Kâşif",      emoji:"🛰️", hex:"#1B6CA8", primary:"I", def:"Her şeyin “neden”ini merak ediyorsun. Yeni bilgi seni heyecanlandırıyor, durmak bilmiyorsun." },
-    { id:5,  ad:"Yaratıcı Kâşif",     emoji:"🎨", hex:"#8E44AD", primary:"A", def:"Hayal gücün hiç durmuyor; yeni fikirler ve farklı bakışlar senin doğal süper gücün." },
+    { id:5,  ad:"Özgün Kâşif",        emoji:"🎨", hex:"#8E44AD", primary:"A", def:"Hayal gücün hiç durmuyor; yeni fikirler ve farklı bakışlar senin doğal süper gücün." },
     { id:6,  ad:"Hikâye Anlatıcısı",  emoji:"🎭", hex:"#9B59B6", primary:"A", def:"Düşünceni bir hikâyeye, sahneye, içeriğe dönüştürüp insanlara ulaştırmak sana enerji veriyor." },
     { id:7,  ad:"Şefkatli Rehber",    emoji:"🤝", hex:"#27AE60", primary:"S", def:"Başkalarının nasıl hissettiğini hemen anlıyorsun; yardım etmek sana iyi geliyor. Yanında insanlar güvende hissediyor." },
     { id:8,  ad:"İlham Veren Öğretmen",emoji:"📣", hex:"#16A085", primary:"S", def:"Bir şeyi anlatıp birinin gözünde ışık yakmak senin işin. İnsanları bir araya getirmeyi seviyorsun." },
@@ -217,7 +217,7 @@ window.YH = (function () {
     { id:12, ad:"Güven Veren Analist", emoji:"📊", hex:"#2C3E50", primary:"C", def:"Sakin kafanla rakamları, detayları kontrol edersin. Kimsenin gözden kaçırdığı hatayı sen bulursun." },
     { id:13, ad:"Çok Yönlü Köprü",    emoji:"🧭", hex:"#7F8C8D", special:"lowdiff", def:"Birçok alana eşit ilgin var — bu bir kararsızlık değil, zenginlik. Farklı dünyaları birbirine bağlayabilirsin." },
     { id:14, ad:"Bilim-Mucit",        emoji:"⚙️", hex:"#117A8B", special:"IR", def:"Hem kafan hem ellerin çalışıyor: bir şeyi hem anlıyor hem yapıyorsun. Mucit kafası tam sende." },
-    { id:15, ad:"Sanat-Elçi",         emoji:"🌈", hex:"#AF7AC5", special:"AS", def:"Yaratıcılığını insanlara dokunmak için kullanıyorsun. Hem üretiyor hem iyileştiriyorsun." },
+    { id:15, ad:"Sanat-Elçi",         emoji:"🌈", hex:"#AF7AC5", special:"AS", def:"Üretkenliğini insanlara dokunmak için kullanıyorsun. Hem üretiyor hem iyileştiriyorsun." },
     { id:16, ad:"Strateji Ustası",    emoji:"♟️", hex:"#A04000", special:"EC", def:"Hem büyük resmi görüyor hem planı kuruyorsun. Bir hedefi adım adım gerçeğe çevirirsin." }
   ];
   const archetypeMap = {
@@ -230,7 +230,7 @@ window.YH = (function () {
     2:"Çevrendekiler hangi konuda 'bunu ona bırakalım, o titiz' diyor?",
     3:"Tek başına saatlerce uğraşmaktan keyif aldığın bir konu/problem var mı?",
     4:"Son zamanlarda seni en çok meraklandıran soru neydi?",
-    5:"Aklındaki bir fikri hayata geçirsen, ilk neyi yaratmak isterdin?",
+    5:"Aklındaki bir fikri hayata geçirsen, ilk neyi ortaya koymak isterdin?",
     6:"Bir konuyu anlatırken insanların gözünün parladığını ne zaman gördün?",
     7:"Birine yardım edip içini ısıtan son anını hatırlıyor musun?",
     8:"Bir şeyi öğretip 'anladım!' tepkisini aldığında ne hissettin?",
@@ -240,7 +240,7 @@ window.YH = (function () {
     12:"Kimsenin fark etmediği bir hatayı/detayı yakaladığın oldu mu?",
     13:"Birçok şeye ilgin var; hangileri arasında karar vermekte zorlanıyorsun?",
     14:"Bir şeyi hem anlamak hem de yapmak — ikisinden hangisi öne çıkıyor sende?",
-    15:"Yaratıcılığını birine iyilik için kullandığın bir an oldu mu?",
+    15:"Üretkenliğini birine iyilik için kullandığın bir an oldu mu?",
     16:"Bir hedefi adım adım plana dökmek mi, büyük resmi görmek mi sana daha kolay?"
   };
 
@@ -291,7 +291,7 @@ window.YH = (function () {
   const codeMessages = {
     IRC:"AYT Matematik+Fen'e yüklen; yapay zekâ ve siber güvenlik en hızlı büyüyen alanlar.",
     IRA:"Hem araştıran hem üreten bir profil; mühendislik ve temel bilimler sana kapı açar.",
-    ASE:"Hem yaratıcı hem insan odaklısın; dijital içerik ve iletişim yükselen alanlar.",
+    ASE:"Hem üretken hem insan odaklısın; dijital içerik ve iletişim yükselen alanlar.",
     AES:"İfade gücün yüksek; medya, tasarım ve sahne dünyası seni çağırıyor.",
     SEC:"İnsan odaklı + düzenli bir profil; PDR, öğretmenlik, İK ve işletme sana göre.",
     SAE:"İnsanlara dokunan, anlatan bir yanın var; eğitim ve iletişim alanları parlıyor.",
