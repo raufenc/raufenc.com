@@ -305,9 +305,9 @@
         '<div class="arche-code">' + sc.code + ' — ' + sc.top.map(k => D.types[k].name).join(" · ") + '</div>' +
         '<p class="arche-tag">' + arche.def + '</p></div>' +
       '<div class="section"><div class="card" style="--accent:' + accent + '"><h2 style="font-size:1.1rem;margin-bottom:10px">👋 Sen kısaca</h2>' + senKisaca(sc) + '</div></div>' +
-      '<div class="section"><h2>🧭 İlgi Haritan</h2><div class="sub">Hangi tür işlere yatkınsın? (RIASEC · 0–100)</div>' +
+      '<div class="section"><h2>🧭 İlgi Haritan</h2><div class="sub">Hangi tür işlere yatkınsın? — Holland mesleki ilgi modeli (RIASEC) · 0–100</div>' +
         '<div class="badges"><span class="mini-badge">Profil netliği: <b>' + sc.differentiation + '</b></span><span class="mini-badge">Tutarlılık: <b>' + sc.consistency + '</b></span></div>' +
-        '<div class="card radar-card"><div>' + buildRadar(sc.rPct) + '</div><div class="bars">' + sc.order.map(k => barRow(D.types[k].emoji + " " + D.types[k].name, sc.rPct[k], colorVar(k))).join("") + '</div></div></div>' +
+        '<div class="card radar-card"><div>' + buildRadar(sc.rPct) + '</div><div class="bars">' + sc.order.map(k => barRow(D.types[k].emoji + " " + D.types[k].name + (D.types[k].en ? ' <span class="en">(' + D.types[k].en + ')</span>' : ''), sc.rPct[k], colorVar(k))).join("") + '</div></div></div>' +
       '<div class="section"><h2>🪞 Karakter Aynan</h2><div class="sub">Beş Faktör (Big Five) kişilik profilin</div><div class="card">' + BFD.map(d => traitRow(d, sc.bf[d])).join("") + '</div></div>' +
       '<div class="section"><h2>⭐ İmza Güçlerin</h2><div class="sub">Profilinin öne çıkardığı güçlü yönler</div><div class="chips">' + sc.strengths.map(s => '<span class="chip">✦ ' + s + '</span>').join("") + '</div></div>' +
       '<div class="section"><h2>🎓 Keşfedebileceğin Yollar</h2><div class="sub">Profiline en uygun Türkiye’deki bölüm ve meslekler</div>' +
@@ -346,7 +346,7 @@
   }
   function traitRow(d, v) {
     const t = bfByDisplay(d); const lvl = v >= 65 ? "high" : v <= 40 ? "low" : "mid";
-    return '<div class="trait"><div class="thead"><span class="tname">' + t.emoji + ' ' + t.name + '</span><span class="tscore">' + v + '/100</span></div>' +
+    return '<div class="trait"><div class="thead"><span class="tname">' + t.emoji + ' ' + t.name + (t.orig ? ' <span class="en">(' + t.orig + ')</span>' : '') + '</span><span class="tscore">' + v + '/100</span></div>' +
       '<div class="poles"><span>' + t.poles[0] + '</span><span>' + t.poles[1] + '</span></div>' +
       '<span class="btrack"><span class="bfill" data-w="' + v + '" style="width:0;background:linear-gradient(90deg,var(--violet),var(--gold))"></span></span>' +
       '<div class="tdesc">' + t.fb[lvl] + '</div></div>';
