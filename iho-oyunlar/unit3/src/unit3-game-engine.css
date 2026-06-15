@@ -15,6 +15,7 @@
 .u3-game *{box-sizing:border-box}
 .u3-game{max-width:min(1720px,96vw);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--u3-text);background:linear-gradient(180deg,#f7fbff,#eef6ff);border:1px solid var(--u3-border);border-radius:var(--u3-radius);padding:18px;max-width:min(1720px,96vw);margin:0 auto;box-shadow:var(--u3-shadow)}
 .u3-game [dir="rtl"],.u3-ar{font-family:"Arial","Tahoma",sans-serif;direction:rtl;text-align:right;line-height:1.85}
+.u3-mid-ar{font-size:clamp(20px,1.7vw + 14px,46px);font-weight:800;text-align:center;direction:rtl;line-height:1.55;margin:6px 0;color:var(--u3-text)}
 .u3-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .u3-title{font-weight:800;font-size:clamp(22px,1.4vw + 14px,46px);margin:0;letter-spacing:.01em}.u3-subtitle{color:var(--u3-muted);margin:.2rem 0 0;font-size:clamp(13px,.5vw + 9px,20px)}
 .u3-pill{display:inline-flex;align-items:center;gap:6px;background:#eef5ff;border:1px solid #d8e8ff;color:#154d9e;border-radius:999px;padding:8px 12px;font-size:clamp(13px,.4vw + 8px,17px);font-weight:700}.u3-score{background:#fff7ed;border-color:#fed7aa;color:#9a3412}

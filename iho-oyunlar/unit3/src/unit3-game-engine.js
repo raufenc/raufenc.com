@@ -438,7 +438,7 @@
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
         <div class="u3-card"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطور الحِوار.</div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الحِوار</div><div data-answer></div></div>
+        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الحِوار</div><div class="u3-sentence-answer" data-answer></div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-grid">
           ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
         </div></div>
