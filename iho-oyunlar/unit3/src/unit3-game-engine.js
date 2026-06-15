@@ -98,6 +98,12 @@
     shell.feedback.textContent = text || '';
     shell.feedback.className = 'u3-feedback' + (cls ? ' ' + cls : '');
   }
+  function fbHint(ans){
+    const a = normalizeArabic(ans || '').replace(/[أإآ]/g,'ا');
+    const m = [['طائر','✈️'],['جو','✈️'],['سيار','🚗'],['سفين','🚢'],['بحر','🚢'],['مشي','🚶'],['يسار','⬅️'],['يمين','➡️'],['امام','⬆️'],['احمر','🔴'],['اخضر','🟢'],['اصفر','🟡'],['ابطا','🐢'],['اسرع','🚀'],['موقف','🚏'],['ثالث','🕒'],['اسكن','🏠'],['اذهب','🚶']];
+    for(const [k,e] of m) if(a.includes(k)) return `<div style="font-size:60px;text-align:center;line-height:1.1;margin-bottom:4px">${e}</div>`;
+    return '';
+  }
   function finalScreen(shell, correct, total, restart){
     const pct = total ? Math.round(correct*100/total) : 0;
     shell.body.innerHTML = `
@@ -248,7 +254,7 @@
     renderMCQGame(container, data, {...options, limit: options.limit || 9}, 'traffic', data.gameBanks.traffic.concat(data.gameBanks.traffic).concat(data.gameBanks.traffic), q => ({visual:trafficVisual(q.light), prompt:q.question, options:q.options, answerIndex:q.options.indexOf(q.answer), after:q.tr}));
   }
   function renderFillBlank(container, data, options){
-    renderMCQGame(container, data, options, 'fillBlank', data.gameBanks.fillBlanks, q => ({prompt:q.text, options:q.options, answerIndex:q.options.indexOf(q.answer), hint:''}));
+    renderMCQGame(container, data, options, 'fillBlank', data.gameBanks.fillBlanks, q => ({prompt:q.text, options:q.options, answerIndex:q.options.indexOf(q.answer), hint:'', visual: fbHint(q.answer)}));
   }
 
   function renderSentenceOrder(container, data, options){
@@ -332,6 +338,10 @@
     const size = options.size || 10;
     const filler = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي';
     let grid, placements, occupied, targetIdx=0, selected=[];
+    let _wsSec=0, _wsTid=null;
+    const _wsFmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    function _wsStart(){ if(_wsTid) return; _wsTid=setInterval(()=>{ _wsSec++; const e=$('[data-ws-timer]', shell.body); if(e) e.textContent='⏱️ '+_wsFmt(_wsSec); }, 1000); }
+    function _wsStop(){ if(_wsTid){ clearInterval(_wsTid); _wsTid=null; } }
     function makeGrid(){
       grid = Array.from({length:size}, () => Array.from({length:size}, () => filler[Math.floor(Math.random()*filler.length)]));
       occupied = Array.from({length:size}, () => Array.from({length:size}, () => false));
@@ -361,12 +371,13 @@
       const target = words[targetIdx];
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
       shell.body.innerHTML = `
-        <div class="u3-card"><div class="u3-muted">الكَلِمَة المَطْلوبَة</div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
+        <div class="u3-card"><div class="u3-muted">الكَلِمَة المَطْلوبَة — ${targetIdx+1} / ${words.length}&nbsp;&nbsp;<span data-ws-timer>⏱️ 0:00</span></div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
         <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},38px)">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u3-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
       $all('.u3-cell', shell.body).forEach(cell => cell.addEventListener('click', () => clickCell(cell)));
       markFoundCells();
+      _wsStart();
     }
     function markFoundCells(){
       for(let wi=0; wi<targetIdx; wi++) (placements[wi]||[]).forEach(([r,c]) => { const cell = $(`.u3-cell[data-r="${r}"][data-c="${c}"]`, shell.body); if(cell) cell.classList.add('found'); });
@@ -380,7 +391,7 @@
           selected.forEach(c=>{ c.classList.remove('active'); c.classList.add('found'); });
           feedback(shell,'✅ أَحْسَنْتَ', 'good');
           targetIdx++; selected=[];
-          if(targetIdx>=words.length) setTimeout(()=>finalScreen(shell, words.length, words.length, () => renderWordSearch(container,data,options)), 700);
+          if(targetIdx>=words.length){ _wsStop(); setTimeout(()=>finalScreen(shell, words.length, words.length, () => renderWordSearch(container,data,options)), 700); }
           else setTimeout(draw, 650);
         }
       }else{
@@ -527,7 +538,9 @@
     let idx=0, correct=0;
     function draw(){
       const item = items[idx];
-      const letters = shuffle(Array.from(item.target));
+      const _wl = Array.from(item.target);
+      const _ab = 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'.split('').filter(c=>!_wl.includes(c));
+      const letters = shuffle(_ab.length ? _wl.concat(_ab[Math.floor(Math.random()*_ab.length)]) : _wl);
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u3-card" style="text-align:center">

@@ -251,7 +251,7 @@
       "tr": "",
       "category": "places",
       "translit": "maktaba",
-      "emoji": "📚",
+      "emoji": "🏛️📚",
       "forms": {
         "definite": "المَكْتَبَة",
         "to": "إِلى المَكْتَبَة",
@@ -4254,7 +4254,7 @@
       {
         "ar": "مَكْتَبَة",
         "target": "مكتبة",
-        "emoji": "📚",
+        "emoji": "🏛️📚",
         "tr": ""
       },
       {
