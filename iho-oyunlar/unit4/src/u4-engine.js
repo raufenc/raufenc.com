@@ -589,7 +589,7 @@
       const item = nextItem(); locked = false;
       feedback(shell, '', '');
       hud();
-      const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 5))).slice(0,6);
+      const opts = shuffle([item].concat(sample(pool.filter(v=>v.id!==item.id), 3))).slice(0,4);
       shell.body.innerHTML = `
         <div class="u4-card">
           <div class="u4-row" style="justify-content:space-between;align-items:center">

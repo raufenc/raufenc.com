@@ -113,7 +113,7 @@ document.getElementById('fb').textContent='';document.getElementById('exp').text
 var pool=q.pool==='d'?DRINKS:FOODS;
 var correctItem=pool.find(function(x){return x.w===q.ans});
 document.getElementById('qemoji').textContent=correctItem?correctItem.e:'';
-var wrongs=shuf(pool.filter(function(x){return x.w!==q.ans})).slice(0,5);
+var wrongs=shuf(pool.filter(function(x){return x.w!==q.ans})).slice(0,3);
 var opts=shuf([correctItem].concat(wrongs));
 var el=document.getElementById('tray');el.innerHTML='';
 opts.forEach(function(o){
