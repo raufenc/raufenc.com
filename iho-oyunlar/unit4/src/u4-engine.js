@@ -16,7 +16,7 @@
     balloonPop: ['فَرْقَعَة البالونات', 'فَرْقِع البالون المُناسِب لِلصّورَة.'],
     typing: ['تَرْتيب الحُروف', 'رَتِّب الحُروف لِتَكْتُبَ الكَلِمَة.'],
     clock: ['كَم السّاعَة؟', 'اُنْظُر السّاعَة وَاخْتَر الجَواب الصَّحيح.'],
-    map: ['أَيْن تَقَعُ؟', 'اِضْغَطْ عَلى مَكان المَدينَة في الخَريطَة.'],
+    map: ['أَيْن تَقَعُ؟', 'اِضْغَطْ عَلى الاِتِّجاهِ الصَّحيح.'],
     classify: ['صَنِّف الكَلِمات', 'صَنِّف الكَلِمَة في المَجْموعَة المُناسِبَة.'],
     demonstrative: ['هَذا، هَذِه، هَؤُلاء', 'اِخْتَر اسْم الإِشارَة المُناسِب.'],
     secretWord: ['كَلِمَة السِّرّ', 'أَجِبْ عَن الأَسْئِلَة لِتَجِدَ كَلِمَة السِّرّ.']
@@ -454,7 +454,7 @@
       shell.body.innerHTML = `
         <div class="u4-card" style="text-align:center">
           <div class="u4-mid-ar" dir="rtl" style="text-align:center">أَيْن تَقَعُ ${escapeHtml(it.city)}؟</div>
-          <div class="u4-muted" dir="rtl" style="text-align:center">اِضْغَطْ عَلى الجَواب في خَريطَة تُرْكِيا 👇</div>
+          <div class="u4-muted" dir="rtl" style="text-align:center">اِضْغَطْ عَلى الاِتِّجاهِ الصَّحيحِ 👇</div>
         </div>
         <div class="u4-card" style="margin-top:14px">
           <svg viewBox="0 0 680 340" class="u4-map-tr" aria-label="خَريطَة تُرْكِيا">
