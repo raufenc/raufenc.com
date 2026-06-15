@@ -411,7 +411,7 @@
       const tEmoji = wsEmoji(target);
       shell.body.innerHTML = `
         <div class="u4-card" style="text-align:center"><div class="u4-muted">الكَلِمَة المَطْلوبَة</div>${tEmoji === '🔤' ? '' : `<div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(tEmoji)}</div>`}<div class="u4-target-word u4-ar">${escapeHtml(target)}</div></div>
-        <div class="u4-card" style="margin-top:14px"><div class="u4-wordsearch" style="grid-template-columns:repeat(${size},38px)">
+        <div class="u4-card" style="margin-top:14px"><div class="u4-wordsearch" style="grid-template-columns:repeat(${size},clamp(38px,5vmin,62px))">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u4-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
       $all('.u4-cell', shell.body).forEach(cell => cell.addEventListener('click', () => clickCell(cell)));
@@ -682,7 +682,7 @@
           correct++; feedback(shell, `✅ ${item.ar}`, 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
           setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 1600);
-        }else feedback(shell,`🔁 ${item.ar}`, 'bad');
+        }else feedback(shell,'🔁 حاوِلْ مَرَّةً أُخْرى', 'bad');
       });
     }
     draw();

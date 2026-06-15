@@ -23,7 +23,7 @@
 .u4-big-ar{font-size:clamp(28px,5vw,52px);font-weight:800;text-align:center;direction:rtl;line-height:1.4;margin:8px 0}.u4-mid-ar{font-size:clamp(22px,1.7vw + 14px,46px);font-weight:800;direction:rtl;line-height:1.75;white-space:pre-line}.u4-tr{text-align:center;color:var(--u4-muted);font-size:18px}.u4-emoji{font-size:46px;text-align:center}
 .u4-btn{appearance:none;border:0;border-radius:14px;padding:12px 15px;font-weight:800;font-size:clamp(15px,.7vw + 9px,26px);cursor:pointer;background:var(--u4-accent);color:#fff;box-shadow:0 5px 14px rgba(15,111,255,.22);transition:.15s transform,.15s opacity,.15s background}.u4-btn:hover{transform:translateY(-1px)}.u4-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}.u4-btn.secondary{background:#eef5ff;color:#174b91;box-shadow:none;border:1px solid #d8e8ff}.u4-btn.orange{background:var(--u4-accent-2)}.u4-btn.good{background:var(--u4-good)}.u4-btn.bad{background:var(--u4-bad)}
 .u4-option{background:#fff;border:2px solid var(--u4-border);border-radius:16px;padding:14px 16px;cursor:pointer;font-weight:800;font-size:clamp(20px,1.7vw + 14px,48px);text-align:center;min-height:54px;display:flex;align-items:center;justify-content:center;gap:8px;transition:.15s transform,.15s border,.15s background}.u4-option:hover{transform:translateY(-1px);border-color:#94c4ff}.u4-option.correct{background:#e9fbf5;border-color:#34d399;color:#047857}.u4-option.wrong{background:#fff0f2;border-color:#fb7185;color:#be123c}.u4-option.selected{border-color:var(--u4-accent);background:#eff6ff}.u4-option[draggable="true"]{user-select:none}
-.u4-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.u4-center{display:flex;justify-content:center;align-items:center}.u4-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}.u4-muted{color:var(--u4-muted)}.u4-feedback{font-weight:800;text-align:center;margin-top:12px;min-height:28px}.u4-feedback.good{color:var(--u4-good)}.u4-feedback.bad{color:var(--u4-bad)}
+.u4-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.u4-center{display:flex;justify-content:center;align-items:center}.u4-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}.u4-muted{color:var(--u4-muted)}.u4-feedback{font-weight:800;text-align:center;margin-top:12px;min-height:28px;font-size:clamp(18px,1vw + 10px,30px)}.u4-feedback.good{color:var(--u4-good)}.u4-feedback.bad{color:var(--u4-bad)}
 .u4-progress{height:10px;background:#e6eef8;border-radius:999px;overflow:hidden}.u4-progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--u4-accent),#38bdf8);width:0%;transition:width .25s}
 .u4-match-col{display:grid;gap:10px}.u4-match-target{min-height:58px;border:2px dashed #bcd3ef;border-radius:16px;background:#fbfdff;padding:12px;display:flex;align-items:center;justify-content:center;font-weight:800}.u4-match-target.filled{border-style:solid;border-color:#34d399;background:#ecfdf5}.u4-chip{background:#fff;border:2px solid var(--u4-border);border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;min-height:44px}.u4-chip.active{background:#eff6ff;border-color:#60a5fa}.u4-chip.used{opacity:.4;pointer-events:none}.u4-drop-hover{border-color:var(--u4-accent)!important;background:#eff6ff!important}
 .u4-memory-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}.u4-memory-card{min-height:86px;border-radius:16px;border:2px solid #cfe0f3;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;cursor:pointer;font-weight:900;font-size:clamp(30px,7vw,46px);text-align:center;line-height:1.2}.u4-memory-card.u4-ar{font-size:clamp(20px,1.3vw + 12px,40px)}.u4-memory-card.face-down{background:linear-gradient(135deg,#0f6fff,#38bdf8);color:#fff}.u4-memory-card.done{background:#e9fbf5;border-color:#34d399;color:#047857}.u4-memory-card.miss{background:#fff0f2;border-color:#fb7185}
@@ -52,3 +52,17 @@
   .u4-duo .u4-option{min-height:2.7em}
   .u4-map{max-width:min(840px,58vmin)}
 }
+
+/* === düzeltmeler: balon hareketi + görünür geri bildirim, kullanılmış şık === */
+@keyframes u4-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes u4-pop{0%{transform:scale(1)}45%{transform:scale(1.28)}100%{transform:scale(.2);opacity:0}}
+@keyframes u4-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}60%{transform:translateX(7px)}}
+.u4-balloon{animation:u4-float 3.2s ease-in-out infinite}
+.u4-balloon:nth-child(2n){animation-duration:3.8s;animation-delay:.4s}
+.u4-balloon:nth-child(3n){animation-duration:2.7s;animation-delay:.8s}
+.u4-balloon.correct{background:#dcfce7;border-color:#22c55e;color:#047857;animation:u4-pop .5s ease forwards;z-index:5}
+.u4-balloon.correct:after{border-top-color:#22c55e}
+.u4-balloon.wrong{background:#fee2e2;border-color:#ef4444;color:#be123c;animation:u4-shake .4s ease}
+.u4-balloon.wrong:after{border-top-color:#ef4444}
+.u4-option.used,.u4-option:disabled{opacity:.45;pointer-events:none;background:#f1f5f9;border-color:#cbd5e1}
+@media (prefers-reduced-motion:reduce){.u4-balloon{animation:none}}

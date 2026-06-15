@@ -92,16 +92,15 @@ body{font-family:'Arakom',Arial,sans-serif;background:linear-gradient(135deg,#0f
 .split-half.p2 .split-player-label{color:#ef233c}
 .split-list{list-style:none;margin-bottom:10px}
 .split-list li{font-family:'Arakom',sans-serif;padding:10px 8px;margin-bottom:4px;border-radius:10px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px}
-.split-list li .li-emoji{font-size:36px;line-height:1}
+.split-list li .li-emoji{font-size:clamp(36px,4.4vmin,56px);line-height:1}
 .split-list li .li-text{display:none}
-.split-list li .li-emoji{font-size:18px}
 .split-list li .li-text{flex:1;color:rgba(255,255,255,0.8)}
 .split-list li .li-check{font-size:18px;opacity:0;transition:all .3s}
 .split-list li.found .li-text{text-decoration:line-through;color:rgba(255,255,255,0.3)}
 .split-list li.found .li-check{opacity:1;color:#06d6a0}
 .split-shelf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;flex:1}
 .split-shelf-grid .shelf-card{min-height:80px;padding:12px 8px}
-.split-shelf-grid .shelf-card .shelf-ar{font-size:clamp(22px,3vw,30px)}
+.split-shelf-grid .shelf-card .shelf-ar{font-size:clamp(24px,3vw,40px)}
 
 /* ROUND COMPLETE */
 .round-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:900;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}

@@ -244,7 +244,7 @@ button{letter-spacing:0}
 }
 .ar.small-ar{font-size:clamp(20px,1vw + 10px,32px)}
 .muted{color:var(--muted)}
-.feedback{margin-top:10px;font-weight:800;min-height:22px}
+.feedback{margin-top:10px;font-weight:800;min-height:22px;font-size:clamp(18px,1vw + 10px,30px)}
 .feedback.ok{color:var(--green)}
 .feedback.no{color:var(--rose)}
 
@@ -345,8 +345,8 @@ button{letter-spacing:0}
   direction:rtl;
 }
 .word-grid td{
-  width:36px;
-  height:36px;
+  width:clamp(36px,5.2vmin,58px);
+  height:clamp(36px,5.2vmin,58px);
   text-align:center;
   vertical-align:middle;
   border:1px solid var(--line);

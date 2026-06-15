@@ -372,7 +372,7 @@
       setScore(shell, targetIdx, words.length, targetIdx, words.length);
       shell.body.innerHTML = `
         <div class="u3-card"><div class="u3-muted">الكَلِمَة المَطْلوبَة — ${targetIdx+1} / ${words.length}&nbsp;&nbsp;<span data-ws-timer>⏱️ 0:00</span></div><div style="font-size:52px;line-height:1.1;margin:4px 0">${escapeHtml(wsEmoji(target))}</div><div class="u3-target-word u3-ar">${escapeHtml(target)}</div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},38px)">
+        <div class="u3-card" style="margin-top:14px"><div class="u3-wordsearch" style="grid-template-columns:repeat(${size},clamp(38px,5vmin,62px))">
           ${grid.map((row,r)=>row.map((ch,c)=>`<button class="u3-cell" data-r="${r}" data-c="${c}">${escapeHtml(ch)}</button>`).join('')).join('')}
         </div></div>`;
       $all('.u3-cell', shell.body).forEach(cell => cell.addEventListener('click', () => clickCell(cell)));
@@ -555,12 +555,14 @@
       const input = $('[data-input]', shell.body);
       $all('[data-ch]', shell.body).forEach(btn => btn.addEventListener('click',()=>{ input.value += btn.dataset.ch; btn.classList.add('used'); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ input.value=''; $all('[data-ch]', shell.body).forEach(b=>b.classList.remove('used')); feedback(shell,'',''); });
+      let _tyLock=false;
       $('[data-check]', shell.body).addEventListener('click',()=>{
+        if(_tyLock) return;
         if(normalizeArabic(input.value) === normalizeArabic(item.target)){
-          correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good');
+          _tyLock=true; correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
           setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 800);
-        }else feedback(shell,`🔁 ${item.ar}`, 'bad');
+        }else feedback(shell,'🔁 حاوِلْ مَرَّةً أُخْرى', 'bad');
       });
     }
     draw();
