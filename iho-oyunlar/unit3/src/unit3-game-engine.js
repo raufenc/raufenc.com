@@ -594,7 +594,14 @@
       const needH=el.scrollHeight, needW=Math.max(el.scrollWidth, el.getBoundingClientRect().width);
       const f=Math.min(1, availH/needH, availW/needW);
       el.style.transformOrigin='top center';
-      el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';
+      if(f<0.999){
+        el.style.transform='scale('+f.toFixed(4)+')';
+        // küçülürken üstten hizala: dikey ortalama olursa başlık/soru ekranın üstünden taşıp görünmez olur
+        p.style.alignItems='flex-start';
+      }else{
+        el.style.transform='';
+        p.style.removeProperty('align-items');
+      }
       document.documentElement.style.overflow='hidden';
       document.body.style.overflow='hidden';
     }catch(e){}

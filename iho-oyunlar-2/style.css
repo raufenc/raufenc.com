@@ -314,6 +314,16 @@ button{letter-spacing:0}
 .choice{text-align:center;font-weight:800}
 .choice .ar{font-size:clamp(22px,1.6vw + 14px,48px)}
 
+/* tahta: sayfalı (tek soru) düzen — büyük punto, scroll yok */
+.paged-wrap{display:grid;gap:16px;max-width:1180px;margin:0 auto;width:100%}
+.paged-progress{text-align:center;font-weight:900;color:var(--muted);font-size:clamp(15px,.6vw + 8px,22px);letter-spacing:.05em}
+.paged-question{padding:24px}
+.paged-question .question-top{margin-bottom:18px}
+.paged-next{display:block;margin:16px auto 0;min-height:56px;padding:0 32px;font-size:clamp(18px,.8vw + 10px,26px)}
+.done-card{place-items:center;text-align:center;gap:16px;padding:52px 24px}
+.done-emoji{font-size:clamp(56px,7vw,104px);line-height:1}
+.done-text{font-weight:900;font-size:clamp(28px,2vw + 14px,52px);direction:rtl}
+
 .sentence-output,.dialogue-output{font-size:clamp(20px,1.2vw + 12px,40px);
   min-height:58px;
   padding:12px;

@@ -310,19 +310,48 @@ function renderShoppingList(game) {
   );
 }
 
-function renderQuestionList(game) {
-  const questions = game.questions || game.items || [];
-  const tracker = makeTracker(questions.length);
-  const list = el("div", { class: "question-list" });
-  questions.forEach((question, index) => list.appendChild(questionCard(question, index, tracker)));
-  gameArea.appendChild(list);
+// Tahta kuralı: bir ekranda tek soru göster (yığma yok → fitter küçültmez → punto tam boy).
+// Cevaplanınca "التّالي" tuşu çıkar; son soruda bitiş ekranı. Skor üst bardaki score-pill'de.
+function pagedGame(total, buildCard, doneText) {
+  const tracker = makeTracker(total);
+  let idx = 0;
+  function show() {
+    gameArea.innerHTML = "";
+    const wrap = el("div", { class: "paged-wrap" });
+    const prog = el("div", { class: "paged-progress", text: `${idx + 1} / ${total}` });
+    const card = buildCard(idx, tracker, () => {
+      const last = idx >= total - 1;
+      const next = el("button", { class: "primary-btn paged-next", type: "button", text: last ? "إِنْهاء 🏁" : "التّالي ➡" });
+      next.addEventListener("click", () => { if (last) finish(); else { idx += 1; show(); } });
+      card.appendChild(next);
+    });
+    wrap.append(prog, card);
+    gameArea.appendChild(wrap);
+  }
+  function finish() {
+    gameArea.innerHTML = "";
+    const done = el("div", { class: "paged-wrap done-card" }, [
+      el("div", { class: "done-emoji", text: "🎉" }),
+      el("div", { class: "ar done-text", text: doneText || "أَحْسَنْتَ" })
+    ]);
+    const again = el("button", { class: "primary-btn", type: "button", text: "مِنْ جَديد 🔄" });
+    again.addEventListener("click", () => { seedSalt += 1; loadGame(activeGameId); });
+    done.appendChild(again);
+    gameArea.appendChild(done);
+  }
+  show();
 }
 
-function questionCard(question, index, tracker) {
-  const card = el("div", { class: "question-card" });
+function renderQuestionList(game) {
+  const questions = game.questions || game.items || [];
+  pagedGame(questions.length, (idx, tracker, onAnswered) => questionCard(questions[idx], idx, tracker, onAnswered));
+}
+
+function questionCard(question, index, tracker, onAnswered) {
+  const card = el("div", { class: "question-card paged-question" });
   const top = el("div", { class: "question-top" }, [
     el("div", {}, [
-      ar(question.q_ar || question.sentence_ar || question.prompt_ar || "", true),
+      ar(question.q_ar || question.sentence_ar || question.prompt_ar || "", false),
       el("div", { class: "muted", text: question.q_tr || question.tr || "" })
     ]),
     el("div", { class: "question-number", text: String(index + 1) })
@@ -349,6 +378,7 @@ function questionCard(question, index, tracker) {
       });
       tracker.mark(question.id || `${index}-${question.answer}`, ok);
       card.appendChild(feedback(ok ? "✅ صَحيح" : "❌ الجَواب الصَّحيح مُعَلَّم", ok));
+      if (onAnswered) onAnswered();
     });
     button.dataset.value = String(value);
     buttons.push(button);
@@ -363,46 +393,46 @@ function renderFillBlank(game) {
 }
 
 function renderSentenceOrder(game) {
-  const tracker = makeTracker(game.items.length);
-  const list = el("div", { class: "question-list" });
-  game.items.forEach((item, index) => {
-    const card = el("div", { class: "question-card" });
-    const chosen = [];
-    const output = el("div", { class: "sentence-output ar small-ar" });
-    const bank = el("div", { class: "token-bank" });
-    item.shuffled.forEach(token => {
-      const button = el("button", { class: "token ar small-ar", type: "button", text: token });
-      button.addEventListener("click", () => {
-        chosen.push(token);
-        output.textContent = chosen.join(" ");
-        button.disabled = true;
-      });
-      bank.appendChild(button);
+  pagedGame(game.items.length, (idx, tracker, onAnswered) => sentenceCard(game.items[idx], idx, tracker, onAnswered));
+}
+
+function sentenceCard(item, index, tracker, onAnswered) {
+  const card = el("div", { class: "question-card paged-question" });
+  const chosen = [];
+  const output = el("div", { class: "sentence-output ar" });
+  const bank = el("div", { class: "token-bank" });
+  item.shuffled.forEach(token => {
+    const button = el("button", { class: "token ar", type: "button", text: token });
+    button.addEventListener("click", () => {
+      chosen.push(token);
+      output.textContent = chosen.join(" ");
+      button.disabled = true;
     });
-    const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّقْ ✅" });
-    const reset = el("button", { class: "ghost-btn", type: "button", text: "إِعادَة 🔄" });
-    check.addEventListener("click", () => {
-      const ok = Engine.isCorrect(item.answer_ar, chosen.join(" "));
-      markNode(card, ok);
-      tracker.mark(item.id, ok);
-      check.disabled = true;
-      bank.querySelectorAll("button").forEach(btn => { btn.disabled = true; });
-      card.appendChild(feedback(ok ? "✅ أَحْسَنْتَ" : item.answer_ar, ok));
-    });
-    reset.addEventListener("click", () => {
-      chosen.length = 0;
-      output.textContent = "";
-      bank.querySelectorAll("button").forEach(btn => { btn.disabled = false; btn.classList.remove("correct", "wrong"); });
-    });
-    card.append(
-      el("div", { class: "question-number", text: String(index + 1) }),
-      output,
-      bank,
-      el("div", { class: "nav-row" }, [check, reset])
-    );
-    list.appendChild(card);
+    bank.appendChild(button);
   });
-  gameArea.appendChild(list);
+  const check = el("button", { class: "primary-btn", type: "button", text: "تَحَقَّقْ ✅" });
+  const reset = el("button", { class: "ghost-btn", type: "button", text: "إِعادَة 🔄" });
+  check.addEventListener("click", () => {
+    const ok = Engine.isCorrect(item.answer_ar, chosen.join(" "));
+    markNode(card, ok);
+    tracker.mark(item.id, ok);
+    check.disabled = true;
+    bank.querySelectorAll("button").forEach(btn => { btn.disabled = true; });
+    card.appendChild(feedback(ok ? "✅ أَحْسَنْتَ" : item.answer_ar, ok));
+    if (onAnswered) onAnswered();
+  });
+  reset.addEventListener("click", () => {
+    chosen.length = 0;
+    output.textContent = "";
+    bank.querySelectorAll("button").forEach(btn => { btn.disabled = false; btn.classList.remove("correct", "wrong"); });
+  });
+  card.append(
+    el("div", { class: "question-number", text: String(index + 1) }),
+    output,
+    bank,
+    el("div", { class: "nav-row" }, [check, reset])
+  );
+  return card;
 }
 
 function renderDialogueOrder(game) {
