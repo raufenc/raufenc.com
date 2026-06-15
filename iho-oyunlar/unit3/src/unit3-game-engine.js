@@ -288,6 +288,7 @@
       const got = answer.map(x=>x.t).join(' ');
       const expected = item.tokens.join(' ');
       if(got === expected){
+        $('[data-check]', shell.body).disabled = true;
         correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good');
         setScore(shell, correct, list.length, idx+1, list.length);
         setTimeout(()=>{ idx++; if(idx>=list.length) finalScreen(shell, correct, list.length, () => renderSentenceOrder(container,data,options)); else draw(); }, 900);
@@ -432,7 +433,7 @@
     }
     function check(sc){
       const ok = answer.map(x=>x.i).join(',') === sc.steps.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
+      if(ok){ $('[data-check]', shell.body).disabled = true; correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=scenarios.length) finalScreen(shell, correct, scenarios.length, () => renderDirectionsMap(container,data,options)); else draw(); }, 900); }
       else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, scenarios.length, idx+1, scenarios.length);
     }
@@ -464,7 +465,7 @@
     }
     function check(dlg){
       const ok = answer.map(x=>x.i).join(',') === dlg.lines.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
+      if(ok){ $('[data-check]', shell.body).disabled = true; correct++; feedback(shell,'✅ أَحْسَنْتَ', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
       else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, dialogues.length, idx+1, dialogues.length);
     }

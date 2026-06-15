@@ -329,6 +329,7 @@
       const got = answer.map(x=>x.t).join(' ');
       const valid = [item.tokens].concat(item.accept || []);
       if(valid.some(t => t.join(' ') === got)){
+        $('[data-check]', shell.body).disabled = true;
         correct++; feedback(shell,'✅ أَحْسَنْت', 'good');
         setScore(shell, correct, list.length, idx+1, list.length);
         setTimeout(()=>{ idx++; if(idx>=list.length) finalScreen(shell, correct, list.length, () => renderSentenceOrder(container,data,options)); else draw(); }, 900);
@@ -509,7 +510,7 @@
     }
     function check(dlg){
       const ok = answer.map(x=>x.i).join(',') === dlg.lines.map((_,i)=>i).join(',');
-      if(ok){ correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
+      if(ok){ $('[data-check]', shell.body).disabled = true; correct++; feedback(shell,'✅ أَحْسَنْت', 'good'); setTimeout(()=>{ idx++; if(idx>=dialogues.length) finalScreen(shell, correct, dialogues.length, () => renderDialogueBuilder(container,data,options)); else draw(); }, 900); }
       else feedback(shell,'🔁 حاوِلْ ثانِيَة', 'bad');
       setScore(shell, correct, dialogues.length, idx+1, dialogues.length);
     }
@@ -677,9 +678,11 @@
       const input = $('[data-input]', shell.body);
       $all('[data-ch]', shell.body).forEach(btn => btn.addEventListener('click',()=>{ input.value += btn.dataset.ch; btn.classList.add('used'); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ input.value=''; $all('[data-ch]', shell.body).forEach(b=>b.classList.remove('used')); feedback(shell,'',''); });
+      let _tyLock=false;
       $('[data-check]', shell.body).addEventListener('click',()=>{
+        if(_tyLock) return;
         if(normalizeArabic(input.value) === normalizeArabic(item.target)){
-          correct++; feedback(shell, `✅ ${item.ar}`, 'good');
+          _tyLock=true; correct++; feedback(shell, `✅ ${item.ar}`, 'good');
           setScore(shell, correct, items.length, idx+1, items.length);
           setTimeout(()=>{ idx++; if(idx>=items.length) finalScreen(shell, correct, items.length, () => renderTyping(container,data,options)); else draw(); }, 1600);
         }else feedback(shell,'🔁 حاوِلْ مَرَّةً أُخْرى', 'bad');
