@@ -1,5 +1,5 @@
 /* Yol Haritan — Service Worker (çevrimdışı destek + güvenli güncelleme) */
-const CACHE = "yol-haritan-v1";
+const CACHE = "yol-haritan-v2";
 const ASSETS = ["./", "./index.html", "./styles.css", "./app.js", "./data.js", "./favicon.svg", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {

@@ -320,7 +320,9 @@
         '<div class="card dialogue-card"><div class="tabs" id="chatTabs">' +
           '<button class="tab is-on" data-tab="self">🧠 Kendine Sor</button><button class="tab" data-tab="family">👨‍👩‍👧 Ailenle</button><button class="tab" data-tab="counselor">🎓 Rehberinle</button></div>' +
         '<div id="tabBody"></div></div></div>' +
-      '<div class="section"><div class="share-row"><button class="btn btn--primary" id="shareBtn">🔗 Sonucu Paylaş</button><button class="btn btn--ghost" id="printBtn">🖨️ Kaydet / Yazdır</button><button class="btn btn--ghost" id="restartBtn">↻ Tekrar Çöz</button></div></div>' +
+      '<div class="section"><div class="share-row"><button class="btn btn--primary" id="shareBtn">🔗 Sonucu Paylaş</button><button class="btn btn--gold" id="summaryBtn">📋 Konuşma Özeti</button><button class="btn btn--ghost" id="printBtn">🖨️ Kaydet / Yazdır</button><button class="btn btn--ghost" id="restartBtn">↻ Tekrar Çöz</button></div>' +
+        '<textarea class="summary-box" id="summaryBox" readonly aria-label="Konuşma özeti — kopyalayıp ailen veya rehberinle paylaşabilirsin"></textarea>' +
+        '<p class="summary-hint" id="summaryHint" hidden>👆 Bu özeti kopyalayıp ailen ya da rehber öğretmeninle paylaşabilirsin.</p></div>' +
       '<p class="result-foot">' + D.texts.privacy + '<br><br><span class="muted" style="font-size:.76rem">' + D.texts.reliability + '</span></p>';
     $("#resultContainer").innerHTML = html;
     renderCareers(); renderTab("self");
@@ -328,6 +330,14 @@
     $$("#zonePick .zbtn").forEach(b => b.addEventListener("click", () => { state.jobZone = +b.dataset.z; $$("#zonePick .zbtn").forEach(x => x.classList.toggle("is-on", x === b)); renderCareers(); }));
     $$("#chatTabs .tab").forEach(b => b.addEventListener("click", () => { $$("#chatTabs .tab").forEach(x => x.classList.remove("is-on")); b.classList.add("is-on"); renderTab(b.dataset.tab); }));
     $("#shareBtn").addEventListener("click", () => shareResult(sc));
+    $("#summaryBtn").addEventListener("click", () => {
+      const txt = buildSummary(sc); const box = $("#summaryBox");
+      box.value = txt; box.classList.add("show"); $("#summaryHint").hidden = false;
+      box.scrollIntoView({ block: "nearest" }); box.focus(); box.select();
+      (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject())
+        .then(() => toast("📋 Özet panoya kopyalandı!"))
+        .catch(() => toast("Aşağıdaki metni seçip kopyalayabilirsin"));
+    });
     $("#printBtn").addEventListener("click", () => window.print());
     $("#restartBtn").addEventListener("click", restart);
   }
@@ -360,15 +370,22 @@
   function renderCareers() {
     const list = matchCareers(state.scores, state.jobZone || 5); const el = $("#careersList"); if (!el) return;
     if (!list.length) { el.innerHTML = '<p class="muted">Bu eğitim düzeyinde eşleşme bulunamadı, “Fark etmez”i dene.</p>'; return; }
-    el.innerHTML = list.map(c => { const lt = c.kod[0];
-      return '<div class="career" style="--accent:' + colorVar(lt) + '"><div class="cmatch ' + matchCls(c.r) + '">' + c.label + '</div>' +
+    el.innerHTML = list.map(c => { const lt = c.kod[0]; const hasDetail = c.next || c.watchout;
+      return '<div class="career' + (hasDetail ? ' has-detail' : '') + '" style="--accent:' + colorVar(lt) + '">' +
+        '<div class="cmatch ' + matchCls(c.r) + '">' + c.label + '</div>' +
         '<div class="cname">' + c.ad + (c.trend ? ' <span class="trend">⚡ yükselen</span>' : '') + '</div>' +
-        '<div class="cfields">' + (c.ornek || []).join(" · ") + '</div><span class="yks">YKS: ' + c.puanTuru + '</span></div>'; }).join("");
+        '<div class="cfields">' + (c.ornek || []).join(" · ") + '</div>' +
+        (c.why ? '<div class="cwhy">💡 ' + c.why + '</div>' : '') +
+        '<span class="yks">YKS: ' + c.puanTuru + '</span>' +
+        (hasDetail ? '<button class="cdetail-toggle" type="button">▾ Sonraki adım &amp; dikkat</button><div class="cdetail">' +
+          (c.next ? '<p>🧭 <b>İlk adım:</b> ' + c.next + '</p>' : '') +
+          (c.watchout ? '<p>⚠️ <b>Dikkat:</b> ' + c.watchout + '</p>' : '') + '</div>' : '') +
+      '</div>'; }).join("");
+    $$("#careersList .cdetail-toggle").forEach(b => b.addEventListener("click", () => b.parentElement.classList.toggle("is-open")));
   }
   function renderTab(tab) {
     const sc = state.scores, body = $("#tabBody"); if (!body) return;
-    const V = { arketip: sc.archetype.ad, baskin: D.types[sc.primary].name, ikincil: D.types[sc.secondary].name, dusuk: D.types[sc.order[5]].name, guc1: sc.strengths[0] || "güçlü yanın", meslek1: firstCareer(sc, 0), meslek2: firstCareer(sc, 1) };
-    const fill = s => s.replace(/\{(\w+)\}/g, (m, k) => V[k] || m);
+    const fill = s => fillVars(sc, s);
     let html = "";
     if (tab === "family") {
       html += '<div class="guide"><div class="guide-col"><b>✅ Yap</b><ul>' + D.dialogue.familyGuide.do.map(x => '<li>' + x + '</li>').join("") + '</ul></div>' +
@@ -383,6 +400,25 @@
     body.innerHTML = html;
   }
   function firstCareer(sc, idx) { const c = matchCareers(sc, 5)[idx]; return c ? (c.ornek && c.ornek[0] ? c.ornek[0] : c.ad) : "bir meslek"; }
+  function varMap(sc) { return { arketip: sc.archetype.ad, baskin: D.types[sc.primary].name, ikincil: D.types[sc.secondary].name, dusuk: D.types[sc.order[5]].name, guc1: sc.strengths[0] || "güçlü yanın", meslek1: firstCareer(sc, 0), meslek2: firstCareer(sc, 1) }; }
+  function fillVars(sc, s) { const V = varMap(sc); return s.replace(/\{(\w+)\}/g, (m, k) => V[k] || m); }
+  function buildSummary(sc) {
+    const a = sc.archetype;
+    const top3 = sc.top.map(k => D.types[k].name + " (" + D.types[k].en + ")").join(", ");
+    const careers = matchCareers(sc, state.jobZone || 5).slice(0, 4).map(c => c.ad).join(", ");
+    const bf = BFD.map(d => bfByDisplay(d).name.split(" & ")[0] + " " + sc.bf[d]).join(" · ");
+    const qs = D.dialogue.self.slice(0, 3).map(q => "• " + fillVars(sc, q)).join("\n");
+    return "YOL HARİTAN — Profil Özeti\n" +
+      "──────────────────\n" +
+      "Arketip: " + a.emoji + " " + a.ad + "\n" +
+      "İlgi kodu: " + sc.code + " — " + top3 + "\n" +
+      "Güçlü yönler: " + sc.strengths.join(", ") + "\n" +
+      "Karakter (0–100): " + bf + "\n" +
+      "Sana yakın alanlar: " + careers + "\n\n" +
+      "Birlikte konuşmak için:\n" + qs + "\n\n" +
+      "Not: Bu bir keşif aracıdır, kesin bir karar değil.\n" +
+      "raufenc.com/yol-haritan";
+  }
 
   function buildRadar(r) {
     const n = 6, cx = 130, cy = 130, R = 92;

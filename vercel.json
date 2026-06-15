@@ -26,6 +26,9 @@
     }
   ],
   "redirects": [
+    { "source": "/meslek-pusulasi", "destination": "/yol-haritan/", "permanent": false },
+    { "source": "/meslek-pusulasi/", "destination": "/yol-haritan/", "permanent": false },
+    { "source": "/meslek-pusulasi/:path*", "destination": "/yol-haritan/", "permanent": false },
     {
       "source": "/",
       "has": [{ "type": "host", "value": "lab.raufenc.com" }],
