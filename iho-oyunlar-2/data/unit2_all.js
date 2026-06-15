@@ -5665,7 +5665,7 @@ window.IHO_UNIT2_DATA = {
       "id": "g006_comparison_price",
       "type": "comparative_quiz",
       "title_tr": "",
-      "title_ar": "المُقارَنَة: أَرْخَص/أَغْلى",
+      "title_ar": "المُقارَنَة: أَرْخَص / أَغْلى",
       "instructions_tr": "",
       "config": {
         "price_set": "prices_page67",

@@ -666,7 +666,7 @@
       setScore(shell, correct, items.length, idx, items.length);
       shell.body.innerHTML = `
         <div class="u4-card" style="text-align:center">
-          <div class="u4-muted">اُنْظُر الصّورَة ثُمَّ رَتِّب الحُروف لِتَكْتُبَ الكَلِمَة</div>
+          <div class="u4-muted">اُنْظُر إِلى الصّورَة ثُمَّ رَتِّب الحُروف لِتَكْتُبَ الكَلِمَة</div>
           <div style="font-size:96px;line-height:1.1">${escapeHtml(item.emoji || '🔤')}</div>
         </div>
         <div class="u4-card" style="margin-top:14px">

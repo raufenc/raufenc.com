@@ -281,11 +281,11 @@
       { "ar": "شَوارِع", "target": "شوارع", "emoji": "🛣️", "tr": "" }
     ],
     "wheelQuestions": [
-      { "id": "wq001", "type": "mcq", "prompt": "ما مَعْنى «مَدينَة»؟", "options": ["🏙️", "🌊", "🕌", "🍲"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq002", "type": "mcq", "prompt": "ما مَعْنى «بَحْر»؟", "options": ["🌊", "🏰", "🛒", "🏠"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq003", "type": "mcq", "prompt": "ما مَعْنى «مَسْجِد»؟", "options": ["🕌", "🖼️", "🏫", "🛣️"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq004", "type": "mcq", "prompt": "ما مَعْنى «قَلْعَة»؟", "options": ["🏰", "🌊", "🛍️", "🏛️"], "answerIndex": 0, "skill": "vocab" },
-      { "id": "wq005", "type": "mcq", "prompt": "ما مَعْنى «سوق»؟", "options": ["🛒", "🏠", "🕌", "📍"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq001", "type": "mcq", "prompt": "اخْتَرْ صورَة «مَدينَة».", "options": ["🏙️", "🌊", "🕌", "🍲"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq002", "type": "mcq", "prompt": "اخْتَرْ صورَة «بَحْر».", "options": ["🌊", "🏰", "🛒", "🏠"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq003", "type": "mcq", "prompt": "اخْتَرْ صورَة «مَسْجِد».", "options": ["🕌", "🖼️", "🏫", "🛣️"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq004", "type": "mcq", "prompt": "اخْتَرْ صورَة «قَلْعَة».", "options": ["🏰", "🌊", "🛍️", "🏛️"], "answerIndex": 0, "skill": "vocab" },
+      { "id": "wq005", "type": "mcq", "prompt": "اخْتَرْ صورَة «سوق».", "options": ["🛒", "🏠", "🕌", "📍"], "answerIndex": 0, "skill": "vocab" },
       { "id": "wq006", "type": "mcq", "prompt": "ما عاصِمَة تُرْكِيا؟", "options": ["أَنْقَرَة", "إِسْطَنْبول", "إِزْمير", "بورْصَة"], "answerIndex": 0, "skill": "reading" },
       { "id": "wq007", "type": "mcq", "prompt": "أَيْن تَقَعُ سينوب؟", "options": ["في شَمال تُرْكِيا", "في جَنوب تُرْكِيا", "في شَرْق تُرْكِيا", "في غَرْب تُرْكِيا"], "answerIndex": 0, "skill": "map" },
       { "id": "wq008", "type": "mcq", "prompt": "أَيْن تَقَعُ وان؟", "options": ["في شَرْق تُرْكِيا", "في غَرْب تُرْكِيا", "في شَمال تُرْكِيا", "في وَسَط تُرْكِيا"], "answerIndex": 0, "skill": "map" },
