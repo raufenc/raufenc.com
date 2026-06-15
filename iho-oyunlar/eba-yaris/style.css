@@ -28,6 +28,21 @@ body{
 }
 .back-btn:hover,.back-btn:focus-visible{background:#FFEAF1;border-color:#E5176B;transform:scale(1.05)}
 
+/* Videolar arası yazısız gezinme okları (alt köşeler) */
+.vidnav-btn{
+  position:fixed; bottom:max(14px,env(safe-area-inset-bottom));
+  width:44px; height:44px; border-radius:50%;
+  background:#fff; border:2px solid rgba(229,23,107,.3);
+  color:#E5176B; font-size:26px; line-height:1; cursor:pointer; z-index:50;
+  display:flex; align-items:center; justify-content:center;
+  direction:ltr;  /* ok karakterleri RTL'de aynalanmasın */
+  transition:background .15s, border-color .15s, transform .15s;
+  box-shadow:0 4px 14px rgba(229,23,107,.12);
+}
+.vidnav-btn:hover,.vidnav-btn:focus-visible{background:#FFEAF1; border-color:#E5176B; transform:scale(1.08)}
+.vidnav-btn.prev{left:14px}   /* solda ‹ = önceki video */
+.vidnav-btn.next{right:14px}  /* sağda › = sonraki video */
+
 #hud{width:100%; max-width:900px;}
 #hudSolo{display:flex; align-items:center; justify-content:space-between; width:100%; font-size:16px}
 #hudDuo{display:none; align-items:center; justify-content:space-between; width:100%}

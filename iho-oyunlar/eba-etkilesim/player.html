@@ -41,7 +41,24 @@
   <div class="feedback" id="qFeedback"></div>
 </div>
 
+<!-- Videolar arası gezinme: yazısız ileri/geri (gözden geçirme için) -->
+<button class="vidnav-btn prev" id="prevVid" type="button" aria-label="الفيديو السّابِق">‹</button>
+<button class="vidnav-btn next" id="nextVid" type="button" aria-label="الفيديو التّالي">›</button>
+
 <script src="activities.js"></script>
 <script src="app.js"></script>
+<script>
+/* Aktif videonun ACTIVITIES sırasındaki komşularına geç (döngüsel) */
+(function(){
+  var acts=(window.ACTIVITIES||[]); if(!acts.length) return;
+  var id=new URLSearchParams(location.search).get('id');
+  var i=acts.findIndex(function(a){return a.id===id;}); if(i<0) i=0;
+  var n=acts.length;
+  var go=function(j){ location.href='player.html?id='+encodeURIComponent(acts[(j+n)%n].id); };
+  var nx=document.getElementById('nextVid'), pv=document.getElementById('prevVid');
+  if(nx) nx.addEventListener('click',function(){go(i+1);});
+  if(pv) pv.addEventListener('click',function(){go(i-1);});
+})();
+</script>
 </body>
 </html>
