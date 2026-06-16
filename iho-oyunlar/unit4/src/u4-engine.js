@@ -71,7 +71,7 @@
     const titles = DEFAULT_GAME_TITLES[type] || ['الوَحْدَة ٤', ''];
     const title = (options && options.title) || titles[0];
     const subtitle = (options && options.subtitle) || titles[1];
-    container.classList.add('u4-game');
+    container.classList.add('u4-game', 'u4-game-' + type);
     container.innerHTML = `
       <div class="u4-header">
         <div>
@@ -104,18 +104,39 @@
     shell.feedback.textContent = text || '';
     shell.feedback.className = 'u4-feedback' + (cls ? ' ' + cls : '');
   }
+  function confettiBurst(){
+    try{
+      const c = document.createElement('div'); c.className = 'u4-confetti';
+      const cols = ['#0f6fff','#46a0ff','#34d399','#f97316','#f6b400','#e5176b','#a855f7'];
+      for(let i=0;i<96;i++){
+        const p = document.createElement('i');
+        p.style.left = (Math.random()*100)+'%';
+        p.style.background = cols[Math.floor(Math.random()*cols.length)];
+        p.style.animationDuration = (1.8 + Math.random()*1.9)+'s';
+        p.style.animationDelay = (Math.random()*0.5)+'s';
+        p.style.transform = 'translateY(0) rotate('+(Math.random()*360)+'deg)';
+        c.appendChild(p);
+      }
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 4400);
+    }catch(e){}
+  }
   function finalScreen(shell, correct, total, restart){
     const pct = total ? Math.round(correct*100/total) : 0;
+    const medal = pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘';
+    const word = pct >= 80 ? 'مُمْتاز' : pct >= 50 ? 'أَحْسَنْتَ' : 'تَدَرَّبْ أَكْثَر';
     shell.body.innerHTML = `
-      <div class="u4-card u4-center" style="flex-direction:column;gap:12px;text-align:center">
-        <div style="font-size:56px">${pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘'}</div>
+      <div class="u4-card u4-center u4-final" style="flex-direction:column;gap:10px;text-align:center;animation:u4-rise .5s var(--u4-ease,ease) both">
+        <div style="font-size:clamp(54px,8vw,86px);line-height:1">${medal}</div>
+        <div class="u4-mid-ar" style="font-size:clamp(26px,2vw+14px,44px)">${word}</div>
         <div class="u4-title">${arNum(pct)}٪</div>
-        <div class="u4-muted">${arNum(correct)} / ${arNum(total)} ✅</div>
-        <button class="u4-btn" data-restart>إِعادَة 🔄</button>
+        <div class="u4-muted" style="font-size:clamp(16px,1vw+8px,24px)">${arNum(correct)} / ${arNum(total)} ✅</div>
+        <button class="u4-btn" data-restart style="margin-top:8px">إِعادَة 🔄</button>
       </div>`;
     $('[data-restart]', shell.body).addEventListener('click', restart);
     feedback(shell, '', '');
     setScore(shell, correct, total, total, total);
+    if(pct >= 50) confettiBurst();
   }
   function optionButton(label, index){ return `<button class="u4-option" data-index="${index}">${escapeHtml(label)}</button>`; }
 
@@ -493,11 +514,13 @@
       setScore(shell, correct, dialogues.length, idx, dialogues.length);
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
-        <div class="u4-card"><b class="u4-ar">${escapeHtml(dlg.title)}</b><div class="u4-muted">رَتِّبْ سُطور الحِوار.</div></div>
-        <div class="u4-card" style="margin-top:14px"><div class="u4-muted">الحِوار</div><div data-answer></div></div>
-        <div class="u4-card" style="margin-top:14px"><div class="u4-grid">
-          ${shuffled.map(x=>`<button class="u4-option u4-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
-        </div></div>
+        <div class="u4-card u4-dialogue-title"><b class="u4-ar">${escapeHtml(dlg.title)}</b><div class="u4-muted">رَتِّبْ سُطور الحِوار.</div></div>
+        <div class="u4-dialogue-board">
+          <div class="u4-card u4-dialogue-answer-card"><div class="u4-muted">الحِوار</div><div data-answer></div></div>
+          <div class="u4-card u4-dialogue-options-card"><div class="u4-grid u4-dialogue-options">
+            ${shuffled.map(x=>`<button class="u4-option u4-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
+          </div></div>
+        </div>
         <div class="u4-actions"><button class="u4-btn secondary" data-clear>مَسْح</button><button class="u4-btn" data-check>تَحَقَّقْ ✅</button></div>`;
       $all('.u4-option', shell.body).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); btn.disabled=true; answer.push({i:Number(btn.dataset.i), html:btn.innerHTML, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>{ x.source.disabled=false; x.source.classList.remove('used'); }); answer=[]; redraw(); feedback(shell,'',''); });

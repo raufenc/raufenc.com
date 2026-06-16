@@ -379,6 +379,43 @@ button{letter-spacing:0}
 .pattern-list{display:grid;gap:8px;margin-top:12px}
 .pattern-list span{padding:9px 10px;border-radius:8px;background:#f3f6fb;direction:rtl;font-family:Arakom,serif;font-size:20px}
 
+@media (orientation:landscape) and (min-width:900px){
+  html,body{height:100%;overflow:hidden}
+  body{min-height:100dvh}
+  .app-shell{width:100%;max-width:none;height:100dvh;padding:10px 14px;display:flex;flex-direction:column;overflow:hidden}
+  .topbar{flex:0 0 auto;grid-template-columns:112px minmax(0,1fr) auto;gap:10px;padding:10px 12px}
+  .back-link{min-height:34px;padding:0 10px}
+  .eyebrow{font-size:11px;margin-bottom:2px}
+  .title-block h1{font-size:clamp(24px,2.2vw,34px);line-height:1.05}
+  .title-block p:last-child{font-size:12px;margin-top:2px}
+  .summary-strip{gap:6px}
+  .summary-strip span{min-width:68px;padding:5px 7px;font-size:11px}
+  .summary-strip strong{font-size:15px}
+  .workspace{margin-top:10px;flex:1 1 auto;min-height:0;align-items:stretch}
+  .workspace.game-only{display:grid}
+  .play-full,.play-area{min-height:0;height:100%;display:flex;flex-direction:column;overflow:hidden}
+  .play-head{padding:12px 14px;flex:0 0 auto;align-items:center}
+  .game-instruction{margin-top:4px;line-height:1.25}
+  .score-pill{min-width:88px;padding:6px 8px}
+  .icon-btn{width:34px;height:34px;font-size:18px}
+  .game-area{flex:1 1 auto;min-height:0;overflow:hidden;padding:12px 14px}
+  .item-card,.question-card,.category-row{padding:10px}
+  .ar{line-height:1.25}
+  .feedback{margin-top:6px}
+  .choice,.token,.word-chip,.line-button,.shelf-item{min-height:40px;padding:8px 10px}
+  .target-list,.shelf-grid{gap:8px}
+  .target-chip{min-height:46px;padding:7px}
+  .shelf-item{min-height:64px}
+  .matching-board{gap:10px}
+  .match-col{gap:8px}
+  .nav-row{margin-top:10px}
+  .paged-wrap{gap:8px}
+  .paged-question{padding:14px}
+  .paged-next{min-height:42px;margin-top:10px}
+  .done-card{padding:24px}
+  .sentence-output,.dialogue-output{min-height:46px;margin:8px 0;padding:9px}
+}
+
 @media(max-width:1040px){
   .topbar{grid-template-columns:1fr}
   .title-block{text-align:left}

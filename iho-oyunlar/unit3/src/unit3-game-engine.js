@@ -65,7 +65,7 @@
     const titles = DEFAULT_GAME_TITLES[type] || ['الوَحْدَة ٣', ''];
     const title = (options && options.title) || titles[0];
     const subtitle = (options && options.subtitle) || titles[1];
-    container.classList.add('u3-game');
+    container.classList.add('u3-game', 'u3-game-' + type);
     container.innerHTML = `
       <div class="u3-header">
         <div>
@@ -448,11 +448,13 @@
       setScore(shell, correct, dialogues.length, idx, dialogues.length);
       const shuffled = shuffle(dlg.lines.map((l,i)=>({l,i})));
       shell.body.innerHTML = `
-        <div class="u3-card"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطور الحِوار.</div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-muted">الحِوار</div><div class="u3-sentence-answer" data-answer></div></div>
-        <div class="u3-card" style="margin-top:14px"><div class="u3-grid">
-          ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
-        </div></div>
+        <div class="u3-card u3-dialogue-title"><b class="u3-ar">${escapeHtml(dlg.title)}</b><div class="u3-muted">رَتِّبْ سُطور الحِوار.</div></div>
+        <div class="u3-dialogue-board">
+          <div class="u3-card u3-dialogue-answer-card"><div class="u3-muted">الحِوار</div><div class="u3-sentence-answer" data-answer></div></div>
+          <div class="u3-card u3-dialogue-options-card"><div class="u3-grid u3-dialogue-options">
+            ${shuffled.map(x=>`<button class="u3-option u3-ar" data-i="${x.i}"><b>${escapeHtml(x.l.speaker)}:</b>&nbsp;${escapeHtml(x.l.ar)}</button>`).join('')}
+          </div></div>
+        </div>
         <div class="u3-actions"><button class="u3-btn secondary" data-clear>مَسْح</button><button class="u3-btn" data-check>تَحَقَّقْ ✅</button></div>`;
       $all('.u3-option', shell.body).forEach(btn=>btn.addEventListener('click',()=>{ btn.classList.add('used'); btn.disabled=true; answer.push({i:Number(btn.dataset.i), html:btn.innerHTML, source:btn}); redraw(); }));
       $('[data-clear]', shell.body).addEventListener('click',()=>{ answer.forEach(x=>{ x.source.disabled=false; x.source.classList.remove('used'); }); answer=[]; redraw(); feedback(shell,'',''); });

@@ -48,3 +48,33 @@
 }
 
 .u3-option.used,.u3-option:disabled{opacity:.45;pointer-events:none;background:#f1f5f9;border-color:#cbd5e1}
+
+@media (orientation:landscape) and (min-width:1000px) and (max-height:1200px){
+  .u3-game{height:100%;max-height:100%;display:flex;flex-direction:column;padding:10px;overflow:hidden}
+  .u3-header{margin-bottom:8px;gap:8px}
+  .u3-title{font-size:clamp(20px,1.1vw + 12px,34px);line-height:1.1}
+  .u3-subtitle{font-size:clamp(12px,.45vw + 8px,17px)}
+  .u3-pill{padding:5px 9px;font-size:clamp(12px,.35vw + 7px,15px)}
+  .u3-progress{height:8px;flex:0 0 auto}
+  .u3-game [data-body]{flex:1 1 auto;min-height:0;margin-top:8px!important;overflow:hidden}
+  .u3-card{padding:10px;border-radius:14px}
+  .u3-actions{margin-top:8px}
+  .u3-feedback{min-height:20px;margin-top:6px;font-size:clamp(15px,.7vw + 9px,22px)}
+  .u3-footer-note{display:none}
+  .u3-big-ar,.u3-mid-ar{line-height:1.25;margin:4px 0}
+  .u3-option{padding:8px 10px;min-height:44px;font-size:clamp(17px,1.2vw + 10px,34px);line-height:1.35}
+  .u3-cell{width:clamp(30px,4.5vmin,50px);height:clamp(30px,4.5vmin,50px);font-size:clamp(18px,3vmin,32px)}
+  .u3-wordsearch{gap:4px}
+  .u3-wordsearch[style]{grid-template-columns:repeat(10,clamp(30px,4.5vmin,50px))!important}
+  .u3-target-word{font-size:clamp(22px,1.1vw + 12px,34px);margin:4px 0}
+  .u3-balloon-area{min-height:clamp(220px,36vmin,430px)}
+  .u3-game-dialogueBuilder [data-body]{display:flex;flex-direction:column;gap:8px}
+  .u3-dialogue-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+  .u3-dialogue-board{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:10px;min-height:0;flex:1 1 auto}
+  .u3-dialogue-answer-card,.u3-dialogue-options-card{min-height:0;overflow:hidden}
+  .u3-dialogue-options{gap:8px;align-content:start}
+  .u3-dialogue-options .u3-option{font-size:clamp(15px,1vw + 9px,28px);min-height:42px;padding:7px 9px}
+  .u3-sentence-answer{min-height:44px;max-height:100%;overflow:hidden;padding:8px;gap:6px}
+  .u3-dialogue-line{grid-template-columns:52px 1fr;gap:6px;margin:5px 0}
+  .u3-dialogue-line .u3-option{font-size:clamp(14px,.85vw + 8px,24px);min-height:38px;padding:6px 8px}
+}
