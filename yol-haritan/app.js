@@ -166,6 +166,7 @@
       '</div>';
     wire(q);
     $("#quizLive").textContent = q.text;
+    const _h = $(".q__text"); if (_h) setTimeout(() => { try { _h.focus({ preventScroll: true }); } catch (e) {} }, 30);
   }
   function hintFor(q) {
     if (q.layer === "riasec") return "Bu işi yapmak hoşuna gider mi? İçinden geldiği gibi seç.";
@@ -247,6 +248,7 @@
   function endOfQueue() { if (!state.valuesIncluded) return showValuesOffer(); finish(); }
   function showValuesOffer() {
     show("screen-quiz");
+    state.locking = false; clearTimeout(state.advTimer);
     $("#qContainer").innerHTML =
       '<div class="turn-intro q"><div class="turn-emoji">🧭</div><h2 tabindex="-1">Son bir bölüm ister misin?</h2>' +
         '<p class="muted">Seni asıl yönlendiren <strong>değerleri</strong> ekleyelim mi? Sonucunu zenginleştirir (12 soru · ~1,5 dk). İstemezsen sonucu hemen görebilirsin.</p>' +
@@ -263,6 +265,7 @@
     if (document.activeElement && /^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
     const q = state.queue[state.i]; if (!q) return;
     if (state.locking) return;
+    if (!$(".scale__opt") && !$(".choice__opt")) return; // ara/teklif ekranında tuş yok
     if (q.format === "scenario") {
       if (e.key >= "1" && e.key <= String(q.options.length)) { e.preventDefault(); clickByData(".choice__opt", "idx", +e.key - 1); }
     } else if (e.key >= "1" && e.key <= "5") { e.preventDefault(); clickByData(".scale__opt", "v", +e.key); }
@@ -404,13 +407,15 @@
       '<div class="section" id="sec-meslek"><h2>🎓 Keşfedebileceğin Yollar</h2><div class="sub">Profiline en uygun Türkiye’deki bölüm ve meslekler</div>' +
         '<div class="zone-pick" id="zonePick" role="group" aria-label="Eğitim düzeyi filtresi"><span class="zlabel">Ne kadar okumak istersin?</span>' + zoneBtn(5, "Fark etmez") + zoneBtn(4, "Lisans") + zoneBtn(3, "Kısa/Uygulamalı") + zoneBtn(2, "Teknik / Ön lisans") + '</div>' +
         '<div class="careers" id="careersList"></div>' + (D.codeMessages[sc.code] ? '<p class="code-msg">💡 ' + esc(D.codeMessages[sc.code]) + '</p>' : "") + '</div>' +
-      (sc.values ? '<div class="section"><h2>🧭 Seni Yönlendiren Değerler</h2><div class="sub">Bir meslek seçerken bunlara dikkat et</div><div class="chips">' + sc.values.top.map(v => '<span class="chip chip--gold">' + D.valueDims[v].emoji + ' ' + esc(D.valueDims[v].name) + '</span>').join("") + '</div><p class="muted" style="font-size:.86rem;margin-top:10px">Senin için öne çıkan: <b>' + sc.values.top.map(v => esc(D.valueDims[v].name)).join(" + ") + '</b>. İş ararken “' + esc(D.valueDims[sc.values.top[0]].desc) + '” sunan ortamları öncele.</p></div>' : "") +
+      (sc.values && sc.values.top.filter(v => D.valueDims[v]).length ? (function () { const vt = sc.values.top.filter(v => D.valueDims[v]); return '<div class="section"><h2>🧭 Seni Yönlendiren Değerler</h2><div class="sub">Bir meslek seçerken bunlara dikkat et</div><div class="chips">' + vt.map(v => '<span class="chip chip--gold">' + D.valueDims[v].emoji + ' ' + esc(D.valueDims[v].name) + '</span>').join("") + '</div><p class="muted" style="font-size:.86rem;margin-top:10px">Senin için öne çıkan: <b>' + vt.map(v => esc(D.valueDims[v].name)).join(" + ") + '</b>. İş ararken “' + esc(D.valueDims[vt[0]].desc) + '” sunan ortamları öncele.</p></div>'; })() : "") +
       '<div class="section"><h2>🌱 Henüz Keşfetmediklerin</h2><div class="sub">Zayıflık değil — istersen deneyebileceğin yeni kapılar</div><div class="card">' + growthHTML(sc) + '</div></div>' +
       '<div class="section"><h2>🚀 Sonraki Adımların</h2><div class="card"><div class="steps">' + D.steps.map(s => '<div class="step"><span class="si">' + s.icon + '</span><span><span class="st">' + esc(s.t) + '</span><br><span class="sd">' + esc(s.d) + '</span></span></div>').join("") + '</div></div></div>' +
       '<div class="section" id="sec-sohbet"><h2>💬 Sohbet Başlat</h2><div class="sub">Bu sonucu tek başına düşün ya da birlikte konuş</div>' +
         '<div class="card dialogue-card"><div class="tabs" id="chatTabs" role="tablist" aria-label="Sohbet sekmeleri">' +
-          '<button class="tab is-on" role="tab" aria-selected="true" data-tab="self">🧠 Kendine Sor</button><button class="tab" role="tab" aria-selected="false" data-tab="family">👨‍👩‍👧 Ailenle</button><button class="tab" role="tab" aria-selected="false" data-tab="counselor">🎓 Rehberinle</button></div>' +
-        '<div id="tabBody" role="tabpanel"></div></div></div>' +
+          '<button class="tab is-on" role="tab" id="tab-self" aria-controls="tabBody" aria-selected="true" tabindex="0" data-tab="self">🧠 Kendine Sor</button>' +
+          '<button class="tab" role="tab" id="tab-family" aria-controls="tabBody" aria-selected="false" tabindex="-1" data-tab="family">👨‍👩‍👧 Ailenle</button>' +
+          '<button class="tab" role="tab" id="tab-counselor" aria-controls="tabBody" aria-selected="false" tabindex="-1" data-tab="counselor">🎓 Rehberinle</button></div>' +
+        '<div id="tabBody" role="tabpanel" aria-labelledby="tab-self" tabindex="0"></div></div></div>' +
       '<div class="section"><div class="share-row"><button class="btn btn--primary" id="shareBtn">🔗 Sonucu Paylaş</button><button class="btn btn--gold" id="summaryBtn">📋 Konuşma Özeti</button><button class="btn btn--ghost" id="cardBtn">🖼️ Kart Görseli</button><button class="btn btn--ghost" id="printBtn">🖨️ Yazdır</button><button class="btn btn--ghost" id="restartBtn">↻ Tekrar Çöz</button></div>' +
         '<textarea class="summary-box" id="summaryBox" readonly aria-label="Konuşma özeti — kopyalayıp ailen veya rehberinle paylaşabilirsin"></textarea>' +
         '<p class="summary-hint" id="summaryHint" hidden>👆 Bu özeti kopyalayıp ailen ya da rehber öğretmeninle paylaşabilirsin.</p></div>' +
@@ -518,7 +523,7 @@
       });
     });
   }
-  function activateTab(b) { $$("#chatTabs .tab").forEach(x => { const on = x === b; x.classList.toggle("is-on", on); x.setAttribute("aria-selected", on); }); renderTab(b.dataset.tab); }
+  function activateTab(b) { $$("#chatTabs .tab").forEach(x => { const on = x === b; x.classList.toggle("is-on", on); x.setAttribute("aria-selected", on); x.setAttribute("tabindex", on ? "0" : "-1"); }); const tb = $("#tabBody"); if (tb) tb.setAttribute("aria-labelledby", b.id); renderTab(b.dataset.tab); }
   function renderTab(tab) {
     const sc = state.scores, body = $("#tabBody"); if (!body) return;
     const fill = s => fillVars(sc, s);
@@ -588,7 +593,11 @@
       if (o.r.some(n => typeof n !== "number" || isNaN(n)) || o.b.some(n => typeof n !== "number" || isNaN(n))) return null;
       const rPct = {}, bf = {}; RIASEC.forEach((k, i) => rPct[k] = clamp(Math.round(o.r[i]), 0, 100)); BFD.forEach((d, i) => bf[d] = clamp(Math.round(o.b[i]), 0, 100));
       const vobj = o.val || o.v; let values = null;
-      if (vobj && typeof vobj === "object" && !Array.isArray(vobj)) values = { out: vobj, top: Object.keys(vobj).sort((p, q) => vobj[q] - vobj[p]).slice(0, 2) };
+      if (vobj && typeof vobj === "object" && !Array.isArray(vobj)) {
+        const ALLOWED = ["AC", "IN", "RE", "RL", "SU", "WC"], clean = {};
+        ALLOWED.forEach(k => { if (typeof vobj[k] === "number" && !isNaN(vobj[k])) clean[k] = clamp(Math.round(vobj[k]), 0, 100); });
+        if (Object.keys(clean).length) values = { out: clean, top: Object.keys(clean).sort((p, q) => clean[q] - clean[p]).slice(0, 2) };
+      }
       return deriveAll(rPct, bf, values);
     } catch (e) { return null; }
   }

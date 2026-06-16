@@ -1,10 +1,11 @@
 /* Yol Haritan — Service Worker (çevrimdışı + güvenli güncelleme)
    Çekirdek (HTML/JS/CSS/data) AĞ-ÖNCELİKLİ (hep taze); fontlar/ikonlar stale-while-revalidate. */
-const CACHE = "yol-haritan-v3";
+const CACHE = "yol-haritan-v4";
 const CORE = ["./", "./index.html", "./styles.css", "./app.js", "./data.js"];
 const ASSETS = CORE.concat(["./favicon.svg", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./manifest.webmanifest"]);
 const FONTS = [
   "PlusJakartaSans-400-latin", "PlusJakartaSans-400-latin-ext", "PlusJakartaSans-500-latin", "PlusJakartaSans-500-latin-ext",
+  "PlusJakartaSans-600-latin", "PlusJakartaSans-600-latin-ext",
   "PlusJakartaSans-700-latin", "PlusJakartaSans-700-latin-ext", "PlusJakartaSans-800-latin", "PlusJakartaSans-800-latin-ext",
   "Sora-700-latin", "Sora-700-latin-ext", "Sora-800-latin", "Sora-800-latin-ext"
 ].map(function (f) { return "./fonts/" + f + ".woff2"; });

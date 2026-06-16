@@ -327,7 +327,15 @@ window.YH = (function () {
     { ad:"E-Ticaret ve Dijital Pazarlama", kod:"EAC", puanTuru:"EA/TYT", jobZone:3, trend:true, ornek:["E-ticaret uzmanı","Performans pazarlamacısı"],
       why:"İkna, özgün fikir, veri okuma ve hızlı deneme kültürünü birleştirir.",
       next:"Hayalî bir ürün seç; hedef kitle, kampanya metni ve basit bütçe planı oluştur.",
-      watchout:"Sonuç baskısı, hızlı değişen platformlar ve ölçüm takibi yoğun olabilir." }
+      watchout:"Sonuç baskısı, hızlı değişen platformlar ve ölçüm takibi yoğun olabilir." },
+    { ad:"Bilgisayar Programcılığı (Ön Lisans)", kod:"ICR", puanTuru:"TYT", jobZone:2, trend:true, ornek:["Programcı","Web geliştirici"] },
+    { ad:"Elektronik / Elektrik Teknolojisi (Ön Lisans)", kod:"RIC", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Elektronik teknikeri","Otomasyon teknikeri"] },
+    { ad:"Grafik Tasarımı (Ön Lisans)", kod:"AIE", puanTuru:"TYT/Yetenek", jobZone:2, trend:true, ornek:["Grafiker","Dijital tasarımcı"] },
+    { ad:"Çocuk Gelişimi (Ön Lisans)", kod:"SAE", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Çocuk gelişimci","Anaokulu eğitmeni"] },
+    { ad:"Tıbbi Dokümantasyon ve Sekreterlik (Ön Lisans)", kod:"CSI", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Tıbbi dokümantasyon uzmanı"] },
+    { ad:"Muhasebe ve Vergi Uygulamaları (Ön Lisans)", kod:"CEI", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Muhasebe uzmanı"] },
+    { ad:"Aşçılık / Gastronomi (Ön Lisans)", kod:"RAE", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Aşçı","Mutfak şefi"] },
+    { ad:"Halkla İlişkiler ve Tanıtım (Ön Lisans)", kod:"ESA", puanTuru:"TYT", jobZone:2, trend:false, ornek:["Halkla ilişkiler asistanı"] }
   ];
 
   const codeMessages = {
