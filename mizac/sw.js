@@ -1,7 +1,7 @@
 /* Dokuz Tip Mizaç Testi — Service Worker (offline + yüklenebilir PWA)
    Strateji: NETWORK-FIRST (çevrimiçiyken her zaman taze; deploy'lar anında ulaşır),
    çevrimdışında cache'e düşer. Cache adını her varlık değişikliğinde ARTIR. */
-var CACHE = 'mizac-v4';
+var CACHE = 'mizac-v5';
 var ASSETS = [
   './', './index.html', './app.js', './data.js', './style.css',
   './manifest.webmanifest', './favicon.svg',

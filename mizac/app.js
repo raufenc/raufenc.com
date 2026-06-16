@@ -40,7 +40,6 @@ var AUDIENCE = {
 };
 var LK_SELF = ['Hiç katılmıyorum','Pek katılmıyorum','Kararsızım','Katılıyorum','Tamamen katılıyorum'];
 var LK_CHILD = ['Hiç gözlemlemiyorum','Nadiren gözlemliyorum','Emin değilim','Sık gözlemliyorum','Çok belirgin'];
-var LK_SIGN  = ['−','–','·','+','＋'];
 
 /* ── Kısayollar ── */
 function $(id){ return document.getElementById(id); }
@@ -61,6 +60,10 @@ function isChild(){ return state.audience==='child'; }
 function likertLabels(){ return isChild() ? LK_CHILD : LK_SELF; }
 function questionText(q){ return isChild() ? (q.cocuk || q.metin) : q.metin; }
 function pctText(n){ return '%'+Math.round(n); }
+function clamp(n, min, max){ n=+n; if(!isFinite(n)) n=min; return Math.max(min, Math.min(max, n)); }
+function answerToPercent(v){ return v==null ? 50 : Math.round((clamp(v,1,5)-1)*25); }
+function percentToAnswer(p){ return Math.round((1 + clamp(p,0,100)/25)*100)/100; }
+function answerBucket(v){ return Math.max(1, Math.min(5, Math.round(clamp(v,1,5)))); }
 
 /* ── Kontrast: dolgu üstü metin rengi (WCAG AA) ── */
 function relLum(hex){
@@ -193,6 +196,7 @@ function updateAudienceCopy(){
   if($('audience-note')) $('audience-note').textContent=a.note;
   if($('intro-note')) $('intro-note').textContent=isChild() ? 'Çocuk modu bir teşhis değil; ebeveyn gözlemine dayalı rehberliktir.' : 'Bu bir teşhis değil; kendini tanımak için yapılandırılmış bir aynadır.';
   if($('lk-left')) $('lk-left').textContent=likertLabels()[0];
+  if($('lk-mid')) $('lk-mid').textContent=likertLabels()[2];
   if($('lk-right')) $('lk-right').textContent=likertLabels()[4];
   if($('skip-btn')) $('skip-btn').innerHTML=(isChild()?'Emin değilim':'Kararsızım')+' <span aria-hidden="true">→</span>';
   document.documentElement.setAttribute('data-audience', state.audience);
@@ -266,27 +270,54 @@ function start(){
 function buildLikert(){
   var box=$('likert'), labels=likertLabels(); box.innerHTML='';
   if($('lk-left')) $('lk-left').textContent=labels[0];
+  if($('lk-mid')) $('lk-mid').textContent=labels[2];
   if($('lk-right')) $('lk-right').textContent=labels[4];
-  for(var v=1;v<=5;v++){ (function(val){
-    var b=el('button','lk'+(val<3?' disagree':'')+(val>3?' agree':''));
-    b.type='button';
-    b.setAttribute('role','radio');
-    b.setAttribute('aria-checked','false');
-    b.setAttribute('aria-label', val+' — '+labels[val-1]);
-    b.setAttribute('data-v', val);
-    b.setAttribute('tabindex', val===1?'0':'-1');
-    b.innerHTML='<span class="lk-sign" aria-hidden="true">'+LK_SIGN[val-1]+'</span>';
-    b.addEventListener('click', function(){ answer(val); });
-    box.appendChild(b);
-  })(v); }
+  var read=el('div','scale-readout');
+  read.id='scale-readout';
+  var shell=el('div','scale-shell');
+  shell.id='scale-shell';
+  shell.innerHTML='<input id="scale-range" class="scale-range" type="range" min="0" max="100" step="1" value="50" aria-labelledby="q-text" />';
+  box.appendChild(read);
+  box.appendChild(shell);
+  var range=$('scale-range');
+  function sync(){ updateScaleUI(+range.value); }
+  range.addEventListener('input', sync);
+  range.addEventListener('change', function(){ answer(percentToAnswer(range.value)); });
+  range.addEventListener('keydown', function(e){
+    if(e.key>='1' && e.key<='5'){
+      e.preventDefault(); e.stopPropagation();
+      range.value=(+e.key-1)*25;
+      updateScaleUI(+range.value);
+      answer(+e.key);
+    } else if(e.key===' ' || e.key==='Enter'){
+      e.preventDefault(); e.stopPropagation();
+      answer(percentToAnswer(range.value));
+    }
+  });
+  sync();
+}
+function scaleLabel(percent){
+  var labels=likertLabels(), p=clamp(percent,0,100);
+  if(p<13) return labels[0];
+  if(p<38) return labels[1];
+  if(p<=62) return labels[2];
+  if(p<=87) return labels[3];
+  return labels[4];
+}
+function updateScaleUI(percent){
+  var range=$('scale-range'), read=$('scale-readout'), shell=$('scale-shell');
+  var p=Math.round(clamp(percent,0,100));
+  var text=scaleLabel(p)+' · %'+p;
+  if(shell) shell.style.setProperty('--pos', p+'%');
+  if(read) read.textContent=text;
+  if(range){
+    range.value=p;
+    range.setAttribute('aria-valuetext', text);
+  }
 }
 function updateLikertSelection(val){
-  $('likert').querySelectorAll('.lk').forEach(function(b){
-    var bv=+b.getAttribute('data-v'), on=(val!=null && bv===val);
-    b.classList.toggle('sel', on);
-    b.setAttribute('aria-checked', on?'true':'false');
-    b.setAttribute('tabindex', val!=null ? (on?'0':'-1') : (bv===1?'0':'-1'));
-  });
+  var range=$('scale-range');
+  if(range){ updateScaleUI(answerToPercent(val)); }
 }
 function updateProgress(){
   var n=state.sorular.length, i=state.idx;
@@ -325,11 +356,12 @@ function transitionTo(dir, fn){
 }
 function answer(val){
   if(state.locking || state.finishing) return;
+  val=clamp(val,1,5);
   state.answers[state.idx]=val;
   state.answerTimes[state.idx]=Math.max(0, Date.now()-state.questionSeenAt);
   updateLikertSelection(val);
-  var sel=$('likert').querySelector('.lk.sel');
-  if(sel && !RM){ sel.classList.remove('likert-pulse'); void sel.offsetWidth; sel.classList.add('likert-pulse'); }
+  var shell=$('scale-shell');
+  if(shell && !RM){ shell.classList.remove('scale-pulse'); void shell.offsetWidth; shell.classList.add('scale-pulse'); }
   clearTimeout(state.advTimer);
   state.advTimer=setTimeout(function(){
     if(state.idx>=state.sorular.length-1) finish();
@@ -352,6 +384,7 @@ function prev(){
 function longestRun(vals){
   var best=0, cur=0, last=null;
   vals.forEach(function(v){
+    v=answerBucket(v);
     if(v===last) cur++; else { last=v; cur=1; }
     if(cur>best) best=cur;
   });
@@ -359,7 +392,7 @@ function longestRun(vals){
 }
 function responseQuality(vals, times, gap, spread){
   var total=vals.length || 1, counts={}, flags=[];
-  vals.forEach(function(v){ counts[v]=(counts[v]||0)+1; });
+  vals.forEach(function(v){ var b=answerBucket(v); counts[b]=(counts[b]||0)+1; });
   var neutral=counts[3]||0, maxSame=0;
   Object.keys(counts).forEach(function(k){ if(counts[k]>maxSame) maxSame=counts[k]; });
   var validTimes=(times||[]).filter(function(t){ return typeof t==='number' && isFinite(t) && t>=0; });
@@ -842,10 +875,11 @@ function showScreen(id){
 var toastTimer;
 function showToast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove('show'); }, 2800); }
 
-/* Likert radiogroup klavye gezinmesi */
+/* Eski radiogroup fallback'i için klavye gezinmesi */
 function likertKeydown(e){
   var box=$('likert'); if(!box) return;
   var radios=Array.prototype.slice.call(box.querySelectorAll('.lk'));
+  if(!radios.length) return;
   var cur=radios.indexOf(document.activeElement); if(cur<0) cur=0;
   var next=cur, act=false;
   switch(e.key){
