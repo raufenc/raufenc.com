@@ -1,5 +1,7 @@
-/* Dokuz Tip Mizaç Testi — Service Worker (offline + yüklenebilir PWA) */
-var CACHE = 'mizac-v1';
+/* Dokuz Tip Mizaç Testi — Service Worker (offline + yüklenebilir PWA)
+   Strateji: NETWORK-FIRST (çevrimiçiyken her zaman taze; deploy'lar anında ulaşır),
+   çevrimdışında cache'e düşer. Cache adını her varlık değişikliğinde ARTIR. */
+var CACHE = 'mizac-v2';
 var ASSETS = [
   './', './index.html', './app.js', './data.js', './style.css',
   './manifest.webmanifest', './favicon.svg',
@@ -10,7 +12,6 @@ var ASSETS = [
 self.addEventListener('install', function (e) {
   e.waitUntil(
     caches.open(CACHE).then(function (c) {
-      // tek tek ekle: biri 404 olsa bile kurulum bozulmasın
       return Promise.all(ASSETS.map(function (u) { return c.add(u).catch(function () {}); }));
     }).then(function () { return self.skipWaiting(); })
   );
@@ -32,20 +33,18 @@ self.addEventListener('fetch', function (e) {
   if (url.origin !== self.location.origin) return;       // dış kaynaklar (fontlar) tarayıcıya
   if (url.pathname.indexOf('/api/') === 0) return;        // serverless'ı asla cache'leme
 
-  if (req.mode === 'navigate') {
-    e.respondWith(fetch(req).catch(function () { return caches.match('./index.html'); }));
-    return;
-  }
+  // Network-first: önce ağ (taze), başarısızsa cache (çevrimdışı)
   e.respondWith(
-    caches.match(req).then(function (cached) {
-      var net = fetch(req).then(function (res) {
-        if (res && res.status === 200 && res.type === 'basic') {
-          var cl = res.clone();
-          caches.open(CACHE).then(function (c) { c.put(req, cl); });
-        }
-        return res;
-      }).catch(function () { return cached; });
-      return cached || net;
+    fetch(req).then(function (res) {
+      if (res && res.status === 200 && res.type === 'basic') {
+        var cl = res.clone();
+        caches.open(CACHE).then(function (c) { c.put(req, cl); });
+      }
+      return res;
+    }).catch(function () {
+      return caches.match(req).then(function (cached) {
+        return cached || (req.mode === 'navigate' ? caches.match('./index.html') : undefined);
+      });
     })
   );
 });

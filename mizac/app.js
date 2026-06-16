@@ -277,11 +277,13 @@ function answer(val){
 }
 function nextManual(){
   if(state.locking || state.finishing) return;
+  clearTimeout(state.advTimer);          // bekleyen otomatik ilerlemeyi iptal et
   if(state.idx>=state.sorular.length-1) finish();
   else transitionTo(1, function(){ state.idx++; });
 }
 function prev(){
   if(state.locking || state.finishing) return;
+  clearTimeout(state.advTimer);          // bekleyen otomatik ilerlemeyi iptal et
   if(state.idx>0) transitionTo(-1, function(){ state.idx--; });
 }
 
@@ -310,7 +312,7 @@ function computeScores(){
 
 /* ════════════════ HESAPLAMA ANİMASYONU ════════════════ */
 function finish(){
-  if(state.finishing) return;
+  if(state.finishing || state.locking) return;   // geçiş animasyonu sırasında tetiklenirse yoksay
   state.finishing=true;
   clearTimeout(state.advTimer);
   computeScores();
