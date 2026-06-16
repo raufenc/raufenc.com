@@ -1,6 +1,6 @@
 /* Yol Haritan — Service Worker (çevrimdışı + güvenli güncelleme)
    Çekirdek (HTML/JS/CSS/data) AĞ-ÖNCELİKLİ (hep taze); fontlar/ikonlar stale-while-revalidate. */
-const CACHE = "yol-haritan-v4";
+const CACHE = "yol-haritan-v5";
 const CORE = ["./", "./index.html", "./styles.css", "./app.js", "./data.js"];
 const ASSETS = CORE.concat(["./favicon.svg", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./manifest.webmanifest"]);
 const FONTS = [

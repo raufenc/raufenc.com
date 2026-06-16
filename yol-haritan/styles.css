@@ -320,8 +320,13 @@ body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-even
 @keyframes dotPop { 0% { transform: scale(.5); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
 .scale--react .scale__opt.is-on { transform: translateY(-2px); }
 .choice__opt { transition: transform var(--t), border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast); }
-.kbd { margin-left: auto; min-width: 22px; height: 22px; display: inline-grid; place-items: center; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); font-size: .72rem; font-weight: 700; color: var(--ink-mute); }
+.kbd { margin-left: auto; min-width: 22px; height: 22px; display: none; place-items: center; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); font-size: .72rem; font-weight: 700; color: var(--ink-mute); }
+/* Klavye kısayolu rozetleri: yalnız klavye/ince-işaretleyici kullanıcısına görünür (dokunmatikte gizli) */
+body.has-kbd .scale:not(.scale--react) .kbd { display: inline-grid; }
+body.has-kbd .choice__opt .kbd { display: inline-grid; position: absolute; top: 14px; right: 14px; margin: 0; }
+.choice__opt { position: relative; }
 .scale--react .kbd { display: none; }
+.btn:disabled, .btn[disabled] { opacity: .45; cursor: default; pointer-events: none; }
 .kb-hint { margin-top: 14px; font-size: .8rem; color: var(--ink-mute); text-align: center; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--r-md); padding: 9px 12px; }
 
 /* kaldığın yerden devam kartı */

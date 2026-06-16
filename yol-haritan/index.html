@@ -82,7 +82,7 @@
       <p class="disclaimer" id="introDisclaimer"></p>
     </section>
 
-    <section class="screen" id="screen-quiz" aria-labelledby="quizLive">
+    <section class="screen" id="screen-quiz" aria-label="Test soruları">
       <div class="quiz-head">
         <div class="segs" id="segs" aria-hidden="true"></div>
         <div class="progress-meta"><span class="sect" id="sectLabel">—</span><span id="qCounter" aria-live="polite">0 / 0</span></div>
@@ -91,7 +91,7 @@
       <p class="sr-only" id="quizLive" aria-live="polite"></p>
     </section>
 
-    <section class="screen" id="screen-calc">
+    <section class="screen" id="screen-calc" aria-labelledby="calcTitle">
       <div class="calc">
         <div class="calc-compass" aria-hidden="true">
           <svg viewBox="0 0 100 100">
@@ -100,8 +100,9 @@
             <circle cx="50" cy="50" r="6" fill="#fff"/><circle cx="50" cy="50" r="2.6" fill="var(--bg-2)"/>
           </svg>
         </div>
-        <h2 tabindex="-1">Yol haritan çiziliyor…</h2>
+        <h2 id="calcTitle" tabindex="-1">Yol haritan çiziliyor…</h2>
         <div class="calc-steps" id="calcSteps"></div>
+        <p class="sr-only" id="calcLive" aria-live="polite"></p>
       </div>
     </section>
 

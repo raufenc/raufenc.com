@@ -41,6 +41,9 @@
     $("#pill-count").textContent = "🧩 " + mandatory().length + " soru";
     $("#startBtn").addEventListener("click", startQuiz);
     document.addEventListener("keydown", onKey);
+    // Klavye kısayolu rozetleri: ince işaretleyicide hemen, yoksa ilk klavye kullanımında görünür
+    if (FINE) document.body.classList.add("has-kbd");
+    else { const fk = e => { if (e.key === "Tab" || /^[0-9]$/.test(e.key) || e.key.slice(0, 5) === "Arrow") { document.body.classList.add("has-kbd"); document.removeEventListener("keydown", fk, true); } }; document.addEventListener("keydown", fk, true); }
 
     const shared = readShared();
     if (shared) { state.scores = shared; renderResult(shared, true); show("screen-result"); return; }
@@ -150,7 +153,7 @@
     else body = scaleHTML(q, "list");
 
     const hintTip = (FINE && state.i === 0 && !sessionStorage.getItem("yh_kbhint"))
-      ? '<div class="kb-hint">⌨️ İpucu: 1–5 tuşlarıyla da seçebilir, ← ile geri gidebilirsin.</div>' : "";
+      ? '<div class="kb-hint">⌨️ İpucu: rakam tuşlarıyla da seçebilir, ← ile geri gidebilirsin.</div>' : "";
     if (FINE && state.i === 0) try { sessionStorage.setItem("yh_kbhint", "1"); } catch (e) {}
 
     $("#qContainer").innerHTML =
@@ -162,10 +165,11 @@
         '<div class="q-nav">' +
           (state.i > 0 ? '<button class="btn btn--ghost btn--sm" id="prevBtn">‹ Geri</button>' : '<span></span>') +
           '<span class="spacer"></span>' +
+          (RM ? '<button class="btn btn--gold btn--sm" id="nextBtn"' + (state.answers[q.id] != null ? '' : ' disabled') + '>Devam ›</button>' : '') +
         '</div>' +
       '</div>';
     wire(q);
-    $("#quizLive").textContent = q.text;
+    // Soru metni odaklanan h2 ile, ilerleme #qCounter (aria-live) ile duyurulur — burada tekrar etme
     const _h = $(".q__text"); if (_h) setTimeout(() => { try { _h.focus({ preventScroll: true }); } catch (e) {} }, 30);
   }
   function hintFor(q) {
@@ -176,16 +180,17 @@
   function scaleHTML(q, layout) {
     const opts = D.scales[q.scale]; const cur = state.answers[q.id];
     const cls = layout === "react" ? "scale scale--react" : "scale";
-    return '<div class="' + cls + '" role="group" aria-label="' + esc(q.text) + '">' + opts.map(o =>
-      '<button class="scale__opt' + (cur === o.v ? ' is-on' : '') + '" data-v="' + o.v + '" aria-pressed="' + (cur === o.v) + '">' +
+    return '<div class="' + cls + '" role="radiogroup" aria-label="' + esc(q.text) + '">' + opts.map(o =>
+      '<button class="scale__opt' + (cur === o.v ? ' is-on' : '') + '" data-v="' + o.v + '" role="radio" aria-checked="' + (cur === o.v) + '">' +
         '<span class="emoji" aria-hidden="true">' + o.e + '</span>' + (layout === "react" ? '' : '<span class="dot" aria-hidden="true"></span>') +
-        '<span class="lbl">' + esc(o.l) + '</span>' + (FINE ? '<span class="kbd" aria-hidden="true">' + o.v + '</span>' : '') + '</button>').join("") + '</div>';
+        '<span class="lbl">' + esc(o.l) + '</span><span class="kbd" aria-hidden="true">' + o.v + '</span></button>').join("") + '</div>';
   }
   function scenarioHTML(q) {
     const cur = state.answers[q.id];
-    return '<div class="choice" role="group" aria-label="' + esc(q.text) + '">' + q.options.map((o, idx) =>
-      '<button class="choice__opt' + (cur === idx ? ' is-on' : '') + '" data-idx="' + idx + '" aria-pressed="' + (cur === idx) + '">' +
+    return '<div class="choice" role="radiogroup" aria-label="' + esc(q.text) + '">' + q.options.map((o, idx) =>
+      '<button class="choice__opt' + (cur === idx ? ' is-on' : '') + '" data-idx="' + idx + '" role="radio" aria-checked="' + (cur === idx) + '">' +
         '<span class="emoji" aria-hidden="true">' + o.emoji + '</span><span class="t">' + esc(o.t) + '</span>' + (o.d ? '<span class="d">' + esc(o.d) + '</span>' : '') +
+        '<span class="kbd" aria-hidden="true">' + (idx + 1) + '</span>' +
       '</button>').join("") + '</div>';
   }
   function wire(q) {
@@ -195,26 +200,28 @@
       $$(".scale__opt").forEach(b => b.addEventListener("click", () => pick(q, parseInt(b.dataset.v, 10), b, ".scale__opt")));
     }
     $("#prevBtn") && $("#prevBtn").addEventListener("click", prev);
+    $("#nextBtn") && $("#nextBtn").addEventListener("click", () => { if (state.answers[q.id] != null) next(); });
   }
   function pick(q, val, btn, sel) {
     if (state.locking) return;
     state.answers[q.id] = val;
-    $$(sel).forEach(x => { x.classList.remove("is-on"); x.setAttribute("aria-pressed", "false"); });
-    if (btn) { btn.classList.add("is-on"); btn.setAttribute("aria-pressed", "true"); }
+    $$(sel).forEach(x => { x.classList.remove("is-on"); x.setAttribute("aria-checked", "false"); });
+    if (btn) { btn.classList.add("is-on"); btn.setAttribute("aria-checked", "true"); }
     persist();
-    advance();
+    if (RM) { const nb = $("#nextBtn"); if (nb) nb.removeAttribute("disabled"); } // hareketi azalt: otomatik geçiş yok
+    else advance();
   }
   function advance() {
-    // düzeltilebilir: kullanıcı kısa süre içinde başka seçeneğe basarsa pick() tekrar çağrılır,
-    // burada önceki timer iptal edilir (state.locking henüz true değil)
+    // Yalnız hareket-açık modda otomatik geçiş; kullanıcı 340ms içinde başka seçeneğe basarsa timer iptal edilir.
+    // (Hareketi azaltma tercihinde otomatik geçiş kapalıdır; kullanıcı "Devam" ile ilerler — bkz. pick/renderItem.)
     clearTimeout(state.advTimer);
     state.advTimer = setTimeout(() => {
       state.locking = true;
       const qEl = $(".q");
-      if (RM || !qEl) { next(); return; }
+      if (!qEl) { next(); return; }
       qEl.classList.add("is-leaving");
       state.advTimer = setTimeout(next, 180);
-    }, RM ? 60 : 340);
+    }, 340);
   }
   function next() {
     clearTimeout(state.advTimer);
@@ -270,6 +277,7 @@
       if (e.key >= "1" && e.key <= String(q.options.length)) { e.preventDefault(); clickByData(".choice__opt", "idx", +e.key - 1); }
     } else if (e.key >= "1" && e.key <= "5") { e.preventDefault(); clickByData(".scale__opt", "v", +e.key); }
     if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
+    else if (RM && e.key === "ArrowRight" && state.answers[q.id] != null) { e.preventDefault(); next(); } // hareket-azalt: manuel ileri
   }
   function clickByData(sel, attr, val) { const b = $$(sel).find(x => +x.dataset[attr] === val); if (b) b.click(); }
   function persist() {
@@ -282,9 +290,11 @@
     const steps = [["🧩", "Cevapların okunuyor"], ["🧭", "İlgi haritan çiziliyor"], ["🪞", "Karakter aynan parlatılıyor"], ["🎓", "Meslekler eşleştiriliyor"]];
     const wrap = $("#calcSteps");
     if (wrap) wrap.innerHTML = steps.map((s, i) => '<div class="calc-step" data-i="' + i + '"><span class="cs-ico">' + s[0] + '</span><span class="cs-tx">' + s[1] + '</span><span class="cs-chk">✓</span></div>').join("");
+    const live = $("#calcLive");
     const total = RM ? 500 : 1400; const each = total / steps.length;
-    steps.forEach((s, i) => setTimeout(() => { const el = wrap && wrap.querySelector('.calc-step[data-i="' + i + '"]'); if (el) el.classList.add("done"); }, each * (i + 1)));
+    steps.forEach((s, i) => setTimeout(() => { const el = wrap && wrap.querySelector('.calc-step[data-i="' + i + '"]'); if (el) el.classList.add("done"); if (live) live.textContent = s[1] + " — tamam"; }, each * (i + 1)));
     setTimeout(() => {
+      if (live) live.textContent = "Yol haritan hazır, sonuçların gösteriliyor.";
       const sc = computeScores(); state.scores = sc;
       try { localStorage.removeItem("yh_save"); } catch (e) {}
       renderResult(sc, false); show("screen-result");
@@ -360,8 +370,10 @@
     RIASEC.forEach(k => { const x = a[k] - ma, y = b[k] - mb; num += x * y; da += x * x; db += y * y; });
     const den = Math.sqrt(da * db); return den ? num / den : 0;
   }
+  let _mc = { sc: null, zone: null, list: null };
   function matchCareers(sc, zone) {
-    return D.careers.map(c => {
+    if (_mc.sc === sc && _mc.zone === zone && _mc.list) return _mc.list; // aynı render içinde tekrar-hesabı önle
+    const list = D.careers.map(c => {
       let r = pearson(sc.bridgeFinal, careerVec(c.kod));
       // ikincil/üçüncül baskın tip kodla eşleşiyorsa küçük tie-break bonusu
       if (c.kod.indexOf(sc.secondary) >= 0) r += 0.012;
@@ -371,6 +383,8 @@
       return Object.assign({}, c, { r: r });
     }).filter(c => c.jobZone <= zone).sort((a, b) => b.r - a.r).slice(0, 8)
       .map(c => Object.assign(c, { label: c.r >= 0.73 ? "mükemmel uyum" : c.r >= 0.61 ? "güçlü uyum" : c.r >= 0.40 ? "olası uyum" : "keşfet" }));
+    _mc = { sc: sc, zone: zone, list: list };
+    return list;
   }
 
   /* ---------- sonuç render ---------- */
@@ -569,10 +583,10 @@
       const [lx, ly] = pt(i, R + 18); labels += '<text x="' + lx + '" y="' + (ly + 5) + '" text-anchor="middle" font-size="16" fill="' + colorVar(k) + '">' + D.types[k].emoji + '</text>'; });
     const dpts = RIASEC.map((k, i) => pt(i, R * (r[k] / 100)).join(",")).join(" ");
     const dots = RIASEC.map((k, i) => { const [x, y] = pt(i, R * (r[k] / 100)); return '<circle cx="' + x + '" cy="' + y + '" r="3.4" fill="' + colorVar(k) + '" class="radar-dot"/>'; }).join("");
-    const desc = "İlgi profili: " + RIASEC.map(k => D.types[k].name + " yüzde " + r[k]).join(", ") + ".";
+    // Sayısal profil ekran okuyucuya yalnız tabloyla bir kez verilir; SVG tamamen dekoratif (aria-hidden).
     const table = '<table class="sr-only"><caption>İlgi profili (RIASEC, 0–100)</caption><thead><tr><th>Alan</th><th>Puan</th></tr></thead><tbody>' +
       RIASEC.map(k => '<tr><td>' + esc(D.types[k].name) + '</td><td>' + r[k] + '</td></tr>').join("") + '</tbody></table>';
-    return '<svg class="radar-svg" viewBox="0 0 260 260" role="img" aria-label="' + esc(desc) + '"><title>İlgi profili radar grafiği</title><desc>' + esc(desc) + '</desc>' +
+    return '<svg class="radar-svg" viewBox="0 0 260 260" aria-hidden="true" focusable="false">' +
       grid + axes + '<polygon class="radar-poly" points="' + dpts + '" fill="color-mix(in srgb, var(--accent) 26%, transparent)" stroke="var(--accent)" stroke-width="2"/>' + dots + labels + '</svg>' + table;
   }
 
