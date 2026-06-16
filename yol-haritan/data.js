@@ -32,27 +32,27 @@ window.YH = (function () {
 
   const types = {
     R: { key:"R", name:"Yapıcı", classic:"Gerçekçi", en:"Realistic", emoji:"🛠️", hex:"#E8743B",
-         tagline:"Eliyle iş yapan, üreten, çözen.",
+         tagline:"Eliyle iş yapan, üreten, çözen.", taglineYou:"elinle iş yapmayı, üretmeyi ve sorun çözmeyi seviyorsun.",
          onet:"Somut, pratik, elle yapılan işlerden; araç, makine, doğa ve sahadan keyif alır.",
          strengths:["Pratik zekâ","El becerisi","Dayanıklılık","Çözüm üretme"] },
     I: { key:"I", name:"Araştırmacı", classic:"Araştırıcı", en:"Investigative", emoji:"🔬", hex:"#1B6CA8",
-         tagline:"Soru soran, çözümleyen, anlamak isteyen.",
+         tagline:"Soru soran, çözümleyen, anlamak isteyen.", taglineYou:"soru sormayı, çözümlemeyi ve işin aslını anlamayı seviyorsun.",
          onet:"Gözlem, araştırma, analiz ve fikirlerle uğraşmaktan; 'neden-nasıl' sorularından keyif alır.",
          strengths:["Analitik düşünme","Merak","Mantık","Araştırma"] },
     A: { key:"A", name:"Sanatçı", classic:"Sanatçı", en:"Artistic", emoji:"🎨", hex:"#8E44AD",
-         tagline:"Hayal kuran, tasarlayan, ifade eden.",
+         tagline:"Hayal kuran, tasarlayan, ifade eden.", taglineYou:"hayal kurmayı, tasarlamayı ve kendini özgün biçimde ifade etmeyi seviyorsun.",
          onet:"Özgün ifade, üretkenlik, tasarım ve estetikten; kalıpların dışına çıkmaktan keyif alır.",
          strengths:["Üretkenlik","Estetik duygu","Özgünlük","Hayal gücü"] },
     S: { key:"S", name:"Yardımsever", classic:"Sosyal", en:"Social", emoji:"🤝", hex:"#27AE60",
-         tagline:"İnsana dokunan, öğreten, destek olan.",
+         tagline:"İnsana dokunan, öğreten, destek olan.", taglineYou:"insana dokunmayı, öğretmeyi ve destek olmayı seviyorsun.",
          onet:"İnsanlara yardım etme, öğretme, iyileştirme ve birlikte çalışmaktan keyif alır.",
          strengths:["Empati","İletişim","Öğretme","İş birliği"] },
     E: { key:"E", name:"Girişimci", classic:"İkna Edici", en:"Enterprising", emoji:"🚀", hex:"#E74C3C",
-         tagline:"Liderlik eden, ikna eden, başlatan.",
+         tagline:"Liderlik eden, ikna eden, başlatan.", taglineYou:"liderlik etmeyi, ikna etmeyi ve bir işi başlatmayı seviyorsun.",
          onet:"Liderlik, ikna, girişim ve hedefe yönlendirmekten; inisiyatif almaktan keyif alır.",
          strengths:["Liderlik","İkna","Girişimcilik","Kararlılık"] },
     C: { key:"C", name:"Düzenleyici", classic:"Geleneksel", en:"Conventional", emoji:"🗂️", hex:"#34495E",
-         tagline:"Planlayan, düzenleyen, güvenilir kılan.",
+         tagline:"Planlayan, düzenleyen, güvenilir kılan.", taglineYou:"planlamayı, düzenlemeyi ve işleri güvenilir biçimde yürütmeyi seviyorsun.",
          onet:"Düzen, kesinlik, sistem, veri ve kurallarla çalışmaktan; işleri tıkır tıkır yürütmekten keyif alır.",
          strengths:["Düzen","Dikkat","Güvenilirlik","Sistematiklik"] }
   };
@@ -164,14 +164,14 @@ window.YH = (function () {
     { id:"N_1", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"N", text:"Küçük bir aksilikte bile moralim hızla bozulur." },
     { id:"E_3", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"E", reverse:true, text:"Topluluk içinde genelde geri planda, sessiz kalmayı tercih ederim." },
     { id:"C_2", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"C", text:"Çantam, masam ve eşyalarım düzenli durur; her şeyin yeri bellidir." },
-    { id:"O_2", turn:4, format:"slider", scale:"bigfive", layer:"bigfive", dim:"O", text:"Hayal gücün ne kadar geniş?", minLabel:"Çok pratiğim", maxLabel:"Sürekli hayal kurarım" },
+    { id:"O_2", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"O", text:"Sanat, farklı kültürler ya da alışılmadık fikirler ilgimi çeker." },
     { id:"A_3", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"A", reverse:true, text:"Açıkçası başkalarının sorunları pek ilgimi çekmez." },
     { id:"N_3", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"N", reverse:true, text:"Çoğu zaman sakin ve rahatımdır." },
     { id:"E_2", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"E", text:"Bir grupta çoğu zaman ortamın enerjisini yükselten kişi benimdir." },
     { id:"C_3", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"C", reverse:true, text:"Eşyalarımı sık sık dağıtır, yerine koymayı unuturum." },
     { id:"O_3", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"O", text:"Kafamda sürekli yeni fikirler ve hayaller tasarlarım." },
     { id:"A_2", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"A", text:"Başkalarının dertlerini dinlemek ve yardım etmek bana iyi gelir." },
-    { id:"N_2", turn:4, format:"slider", scale:"bigfive", layer:"bigfive", dim:"N", text:"Stres seni ne kadar etkiler?", minLabel:"Pek etkilemez", maxLabel:"Çok etkiler" },
+    { id:"N_2", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"N", text:"Stres ve baskı altında kaygım kolayca yükselir." },
     { id:"E_4", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"E", reverse:true, text:"Kalabalık etkinlikler beni yorar, az kişiyle olmayı severim." },
     { id:"C_4", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"C", reverse:true, text:"Görevleri erteler, son ana kadar başlamam." },
     { id:"N_4", turn:4, format:"likert", scale:"bigfive", layer:"bigfive", dim:"N", reverse:true, text:"Zor durumlarda soğukkanlılığımı korurum." },
@@ -276,7 +276,7 @@ window.YH = (function () {
     { ad:"Öğretmenlik (branşa göre)", kod:"SAE", puanTuru:"EA/SÖZ/SAY", jobZone:4, trend:false, ornek:["Öğretmen"] },
     { ad:"Hemşirelik / Fizyoterapi / Ebelik", kod:"SIR", puanTuru:"SAY", jobZone:4, trend:false, ornek:["Hemşire","Fizyoterapist"] },
     { ad:"Sosyal Hizmet / Çocuk Gelişimi", kod:"SEC", puanTuru:"EA/SÖZ", jobZone:3, trend:false, ornek:["Sosyal hizmet uzmanı"] },
-    { ad:"Sosyoloji", kod:"SIE", puanTuru:"EA/SÖZ", jobZone:4, trend:false, ornek:["Sosyolog","Araştırmacı"] },
+    { ad:"Sosyoloji", kod:"SIE", puanTuru:"EA", jobZone:4, trend:false, ornek:["Sosyolog","Araştırmacı"] },
     { ad:"İşletme / Uluslararası Ticaret", kod:"ECS", puanTuru:"EA", jobZone:4, trend:false, ornek:["Yönetici","Girişimci"] },
     { ad:"Hukuk", kod:"ESC", puanTuru:"EA", jobZone:5, trend:false, ornek:["Avukat","Hâkim","Savcı"] },
     { ad:"Siyaset Bilimi ve Uluslararası İlişkiler", kod:"ESA", puanTuru:"EA/SÖZ", jobZone:4, trend:false, ornek:["Diplomat","Uzman"] },
@@ -358,7 +358,7 @@ window.YH = (function () {
     family: [
       "Anne/baba, beni en çok hangi anımda 'işte bu o' diye hatırlıyorsun? Sonuç {guc1} diyor — sen bunu bende nerede gördün?",
       "Senin benim yaşımdayken hayalin neydi, ne oldu? Hangi kararı bugün farklı verirdin?",
-      "Bir haftalığına istediğin biriyle hayat değiştirebilsen kimi seçerdin, onun hayatının neyi çekici geliyor?",
+      "Bir haftalığına istediğin biriyle yer değiştirebilsen kimi seçerdin? Onun hayatının neresi sana çekici geliyor?",
       "Dünyada çözülmesini en çok istediğin sorun ne? {ikincil} yanım bunda bana nasıl yardımcı olabilir sence?"
     ],
     counselor: [
@@ -377,7 +377,7 @@ window.YH = (function () {
 
   const texts = {
     intro:"Bu test bir kişilik etiketi değil, kendini tanıman için eğlenceli bir <strong>keşif aracı</strong>. Doğru ya da yanlış cevap yok — sadece neyi sevip sevmediğini işaretle. Sonuçlar geleceğini belirlemez; sana yeni fikirler ve denenecek alanlar sunar. İlgilerin zamanla değişir, bu çok normal. 🤍",
-    resultTop:"<strong>Senin yol haritan.</strong> Bu sonuçlar bugünkü ilgilerinin bir fotoğrafı — kesin bir kader değil. Şu alanlara ilgi duyuyor <em>olabilirsin</em>. En iyisi: birkaçını gerçek hayatta dene, öğretmenine/ailene danış. Fikrini değiştirmekte özgürsün.",
+    resultTop:"<strong>Senin yol haritan.</strong> Bu sonuçlar bugünkü ilgilerinin bir fotoğrafı — değişmez bir etiket değil. Şu alanlara ilgi duyuyor <em>olabilirsin</em>. En iyisi: birkaçını gerçek hayatta dene, öğretmenine/ailene danış. Fikrini değiştirmekte özgürsün.",
     privacy:"🔒 <strong>Gizliliğin önemli.</strong> Cevapların ve sonucun yalnızca bu cihazda, senin ekranında kalır — hiçbir sunucuya gönderilmez, kaydedilmez. İstersen ekran görüntüsü/PDF alıp ailen veya rehber öğretmeninle konuşabilirsin.",
     reliability:"Bu kısa bir testtir; uzun, klinik testler kadar kesin değildir ve bir uzman değerlendirmesinin yerini tutmaz. Onu bir başlangıç noktası, bir sohbet açıcı olarak gör. Okul/bölüm gibi önemli kararlarda rehber öğretmenine ya da RAM'a da danış."
   };

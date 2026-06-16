@@ -33,13 +33,13 @@
 <meta name="twitter:description" content="Karakterini keşfet, sana en uygun meslekleri ve üniversite bölümlerini bul.">
 <meta name="twitter:image" content="https://raufenc.com/yol-haritan/og.png">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/PlusJakartaSans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/PlusJakartaSans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<a class="skip-link" href="#main">İçeriğe atla</a>
 <div class="bg" aria-hidden="true"></div>
 <div class="stars" id="stars" aria-hidden="true"></div>
 
@@ -92,7 +92,17 @@
     </section>
 
     <section class="screen" id="screen-calc">
-      <div class="calc"><div class="spinner"></div><h2>Yol haritan çiziliyor…</h2><p id="calcMsg">Cevapların analiz ediliyor</p></div>
+      <div class="calc">
+        <div class="calc-compass" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--surface-3)" stroke-width="3"/>
+            <g class="needle"><polygon points="50,13 43,50 57,50" fill="var(--gold)"/><polygon points="50,87 43,50 57,50" fill="var(--ink-soft)"/></g>
+            <circle cx="50" cy="50" r="6" fill="#fff"/><circle cx="50" cy="50" r="2.6" fill="var(--bg-2)"/>
+          </svg>
+        </div>
+        <h2 tabindex="-1">Yol haritan çiziliyor…</h2>
+        <div class="calc-steps" id="calcSteps"></div>
+      </div>
     </section>
 
     <section class="screen" id="screen-result" aria-labelledby="resultTitle">
@@ -102,7 +112,7 @@
   </main>
 </div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="toast" id="toast" role="status"></div>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
