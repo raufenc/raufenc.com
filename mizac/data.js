@@ -356,5 +356,111 @@ var SORULAR = [
   { tip: 9, ters: true, metin: 'Karar verince oyalanmadan hemen harekete geçerim.' }
 ];
 
+/* Çocuk modu: aynı maddelerin ebeveyn gözlemine uygun karşılıkları.
+   İçsel niyet bildiren ifadeler, doğrudan teşhis dili yerine gözlenen davranış
+   ve çocuğun söylediği/işaret ettiği örüntüler üzerinden yazılır. */
+var COCUK_METINLER = [
+  'Çocuğum bir işi yapacaksa doğru ve eksiksiz yapmaya çalışır; "idare eder" hali onu rahatsız eder.',
+  'Çocuğum yaptığı işlerde sık sık "daha iyi olabilirdi" diye düşünür veya bunu belli eder.',
+  'Çocuğum çevresindeki yanlışları ve düzensizlikleri çabuk fark eder; düzeltmek ister.',
+  'Çocuğum doğru bildiği şeyden kolay kolay vazgeçmez; kuralları ve ilkeleri savunur.',
+  'Çocuğum kendine karşı yaşıtlarına göre daha katı ve disiplinli davranır.',
+  'Çocuğum söz verdiği şeyi yapmaya ve kurallara sadık kalmaya önem verir.',
+  'Bir şey olması gerektiği gibi olmadığında çocuğumda belirgin bir gerginlik oluşur.',
+  'Çocuğum zamanını, eşyalarını veya görevlerini düzenlemeye çalışır; savsaklamaktan rahatsız olur.',
+  'Çocuğum çoğu konuda "yeterince iyi" ile rahat eder; ayrıntılara fazla takılmaz.',
+  'Çocuğum hata yapmayı ya da kuralların dışına çıkmayı genelde çok sorun etmez.',
+
+  'Çocuğum başkalarının ihtiyaçlarını çoğu zaman kendi ihtiyacından önce fark eder.',
+  'Çocuğum insanlara yardım etmeyi ve gerektiğinde fedakarlık yapmayı sever.',
+  'Çocuğum sevilmek ve istenmek konusunda hassastır; reddedilince kolay incinir.',
+  'Çocuğum ilişkilerde verici davranır; bazen kendi ihtiyacını ikinci plana atar.',
+  'Çocuğum birinin hayatında gerekli ve önemli olduğunu hissettiğinde mutlu olur.',
+  'Çocuğum insanlar ona dertlerini açtığında veya güven duyduğunda bundan hoşlanır.',
+  'Çocuğum sevdikleri için sınırlarını zorlar; "hayır" demekte zorlanır.',
+  'Çocuğum yardımının ya da emeğinin fark edilmemesine derinden üzülür.',
+  'Çocuğum çoğu zaman başkalarının ihtiyaçlarından çok kendi ihtiyaçlarına odaklanır.',
+  'Çocuğum başkalarının ona ihtiyaç duymasından veya yardım istemesinden rahatsız olur; mesafesini korur.',
+
+  'Çocuğum hedef koyduğunda başarmak için güçlü biçimde çalışır.',
+  'Çocuğum başarılı ve değerli görünmeye önem verir.',
+  'Çocuğum verimli olmayı sever; zamanı boşa harcamak onu huzursuz eder.',
+  'Çocuğum ortama göre kendini iyi sunmayı ve öne çıkmayı bilir.',
+  'Çocuğum başarısız ya da yetersiz görünmekten belirgin biçimde rahatsız olur.',
+  'Çocuğum bir işe girişince en iyilerden biri olmak ister.',
+  'Çocuğum nasıl algılandığına ve imajına dikkat eder.',
+  'Çocuğum boş durmayı sevmez; sürekli bir şey üretmek veya başarmak ister.',
+  'Başarı ve başkalarının onu nasıl gördüğü çocuğumu pek ilgilendirmez.',
+  'Çocuğum hedef peşinde koşmaktansa bulunduğu yerde sakin kalmayı tercih eder.',
+
+  'Çocuğum kendini başkalarından farklı veya anlaşılması zor biri gibi hisseder/gösterir.',
+  'Çocuğum duyguları derin yaşayan, özgün ve sıradan olmayan şeylere yönelen bir yapıdadır.',
+  'Çocuğum başkalarında olup kendisinde eksikmiş gibi hissettiği şeylerden sık söz eder.',
+  'Çocuğum özlem, hüzün ve hayal kurma hallerine kolay girer.',
+  'Çocuğum kendini ve duygularını yaratıcı ya da sanatsal yollarla ifade etmek ister.',
+  'Çocuğum sıradan ve herkes gibi görünmekten hoşlanmaz.',
+  'Çocuğumda sık sık bir özlem veya "bir şey eksik" duygusu sezilir.',
+  'Güzellik, sanat ve yoğun duygular çocuğumu belirgin biçimde canlandırır.',
+  'Çocuğum kendini oldukça sıradan ve herkes gibi görür; bundan rahatsız olmaz.',
+  'Çocuğum duygusal derinlikten çok somut ve pratik gerçeklerle ilgilenir.',
+
+  'Çocuğum bir konuyu derinlemesine anlamaktan ve onda ustalaşmaktan büyük tatmin duyar.',
+  'Kalabalık ve aşırı talep çocuğumu yorar; kendi alanına çekilip enerji toplar.',
+  'Çocuğum duygularını hemen yaşamaktansa önce gözlemleyip mantıkla anlamaya çalışır.',
+  'Çocuğum bağımsızlığına ve özel alanına çok önem verir; ondan çok şey istenmesinden hoşlanmaz.',
+  'Çocuğum bir ortama katılmadan önce izler, bilgi toplar ve hazır hissetmek ister.',
+  'Çocuğum sosyalleşmek yerine kitap, araştırma, oyun, hobi veya kendi düşünceleriyle kalmayı seçer.',
+  'Çocuğum bilmediği konuda konuşmaktan rahatsız olur; önce iyice öğrenmek ister.',
+  'Çocuğum duygularını paylaşmaktansa çoğu zaman kendi içinde işlemeyi tercih eder.',
+  'Çocuğum uzun araştırmadan, içinden geldiği gibi atılıp harekete geçer.',
+  'İnsanlarla bol vakit geçirmek çocuğumu yormaz; aksine ona enerji verir.',
+
+  'Çocuğum olası tehlikeleri ve kötü senaryoları önceden düşünür; tedbir almak ister.',
+  'Çocuğum güvendiği insanlara ve gruplara çok sadıktır.',
+  'Önemli kararlardan önce çocuğumun kafasında birçok "ya şöyle olursa" senaryosu döner.',
+  'Çocuğum yeni bir şeye güvenmeden önce onu test eder, sorgular veya garanti arar.',
+  'Belirsizlik ve tehdit karşısında çocuğum tetikte ve temkinli olur.',
+  'Çocuğuma "her şey yolunda" dense bile içinde bir tedirginlik kalabilir.',
+  'Çocuğum karar verirken güvendiği birine danışınca rahatlar.',
+  'Sadakat çocuğum için önemlidir; tarafını veya grubunu kolay değiştirmez.',
+  'Çocuğum geleceği pek dert etmez; işlerin yoluna gireceğini düşünür.',
+  'Çocuğum yeni insanlara ve durumlara kuşkuyla değil, rahatça güvenir.',
+
+  'Yeni deneyimler, seçenekler ve heyecan çocuğumu canlandırır; sıkılmaktan kaçar.',
+  'Çocuğumun aklı sık sık gelecekteki keyifli planlara ve yeni fikirlere atlar.',
+  'Çocuğum sıkıntı ve olumsuzlukla uğraşmaktansa olumlu tarafa odaklanır.',
+  'Çocuğum kısıtlanmış veya tek bir seçeneğe mahkum hissetmekten hoşlanmaz.',
+  'Çocuğum enerjik ve iyimserdir; hayatı dolu dolu yaşamak ister.',
+  'Bir planın iptal olması ya da seçeneklerinin azalması çocuğumun canını sıkar.',
+  'Çocuğum sohbetlerde konudan konuya atlar; yeni fikirlerle kolayca heyecanlanır.',
+  'Çocuğum olumsuz düşünceleri uzun süre taşımak yerine hızla moralini toparlar.',
+  'Çocuğum tek bir işe uzun süre odaklanmakta zorlanmaz; sakinlikten hoşlanır.',
+  'Çocuğum yeni heyecanlar aramaktansa tanıdık, sade ve oturmuş bir düzeni tercih eder.',
+
+  'Çocuğum güçlü olmak ve kendi hayatının kontrolünde olmak ister.',
+  'Çocuğum haksızlık karşısında çekinmeden ve doğrudan tavır alır.',
+  'Kontrolün başkasında olması veya ona hükmedilmesi çocuğumu rahatsız eder.',
+  'Çocuğum açık sözlü ve doğrudandır; ne düşündüğünü söylemekten çekinmez.',
+  'Çocuğum zayıf ya da savunmasız görünmektense güçlü durmayı tercih eder.',
+  'Çocuğum bir ortamda doğal olarak sorumluluk veya liderlik üstlenir.',
+  'Çocuğum gücü olanın güçsüzü ezmesine tahammül edemez; zayıfın yanında durur.',
+  'Çocuğum kararlıdır; bir şeye inandığında engellere rağmen üstüne gider.',
+  'Çocuğum çatışmadan kaçınır ve kontrolü başkasına bırakmakta zorlanmaz.',
+  'Çocuğum sertlik yerine yumuşaklıkla yaklaşmayı daha doğal bulur.',
+
+  'Çocuğum çatışma ve gerginlikten kaçınır; ortamı yumuşatmaya çalışır.',
+  'Çocuğum çevresindekilerle uyum ve huzur içinde olmaya çok değer verir.',
+  'Çocuğum kendi isteğini öne çıkarmak yerine akışa uyum sağlamayı tercih eder.',
+  'Çocuğum bazen önemli işleri erteler; rahatını bozmamak için oyalanır.',
+  'Çocuğum sakin, hoşgörülü ve uzlaşmacıdır; kimseyi kırmak istemez.',
+  'Tartışma çıkacağını sezdiğinde çocuğum geri çekilir veya konuyu değiştirir.',
+  'Çocuğum başkalarının görüşlerine kolayca uyum sağlar ve kendi isteğini erteler.',
+  'Çocuğum huzurunu bozacak ani değişikliklerden hoşlanmaz.',
+  'Çocuğum kendi isteğini net biçimde ortaya koyar ve gerekirse çatışmayı göze alır.',
+  'Çocuğum karar verince oyalanmadan hemen harekete geçer.'
+];
+
+SORULAR.forEach(function(q, i){ q.cocuk = COCUK_METINLER[i] || q.metin; });
+
 /* Dışa aç (modül değiliz; global) */
 window.MIZAC = { TIPLER: TIPLER, SORULAR: SORULAR, MERKEZLER: MERKEZLER, OKLAR: OKLAR, KANATLAR: KANATLAR, GLYPH: GLYPH };
