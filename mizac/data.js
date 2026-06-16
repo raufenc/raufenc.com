@@ -3,9 +3,10 @@
    data.js  ·  Rauf Enç  ·  raufenc.com/mizac
    ------------------------------------------------------------
    DTMM (Dokuz Tip Mizaç Modeli) / Enneagram temelli, seküler
-   ve bilimsel mizaç çerçevesi. Mistik / falcı dil yoktur;
+   ve reflektif bir mizaç çerçevesi. Mistik / falcı dil yoktur;
    mizaç "doğuştan gelen, değişmeyen huy çekirdeği" olarak ele
    alınır. Tutku/erdem, nefs terbiyesi diliyle reflektif sunulur.
+   Bu bir teşhis değil; kendini tanımak için bir aynadır.
    ============================================================ */
 
 /* ── ÜÇ MERKEZ (TRİAD) ───────────────────────────────────── */
@@ -16,7 +17,7 @@ var MERKEZLER = {
     tipler: [8, 9, 1],
     duygu: 'Öfke',
     renk: '#c0703a',
-    aciklama: 'Dünyayı bedensel sezgi ve içgüdüyle okur. Asıl mesele otonomi, sınır ve kontroldür; bastırılan temel duygu öfkedir.'
+    aciklama: 'Dünyayı bedensel sezgi ve içgüdüyle okur; asıl mesele otonomi, sınır ve kontroldür. Çekirdek duygusu öfkedir — ama her tip onunla farklı baş eder: Tip 1 içe bastırır, Tip 9 uyuşturup örtbas eder, Tip 8 doğrudan dışa vurur.'
   },
   kalp: {
     ad: 'Kalp Merkezi',
@@ -24,7 +25,7 @@ var MERKEZLER = {
     tipler: [2, 3, 4],
     duygu: 'Utanç',
     renk: '#d65f86',
-    aciklama: 'Dünyayı duygular ve ilişkiler üzerinden okur. Asıl mesele kimlik, değer ve imajdır; bastırılan temel duygu utançtır.'
+    aciklama: 'Dünyayı duygular ve ilişkiler üzerinden okur; asıl mesele kimlik, değer ve imajdır. Çekirdek duygusu utançtır — Tip 2 başkasına dönüp örter, Tip 3 başarıyla saklar, Tip 4 içine dönüp derinden yaşar.'
   },
   zihin: {
     ad: 'Zihin Merkezi',
@@ -32,7 +33,7 @@ var MERKEZLER = {
     tipler: [5, 6, 7],
     duygu: 'Korku',
     renk: '#4f6dbf',
-    aciklama: 'Dünyayı zihin, plan ve analizle okur. Asıl mesele güvenlik ve zihinsel berraklıktır; bastırılan temel duygu korkudur.'
+    aciklama: 'Dünyayı zihin, plan ve analizle okur; asıl mesele güvenlik ve zihinsel berraklıktır. Çekirdek duygusu korkudur — Tip 5 geri çekilerek, Tip 6 tedbir ve sorgulamayla, Tip 7 olumluya kaçarak baş eder.'
   }
 };
 
@@ -62,29 +63,31 @@ var GLYPH = {
 };
 
 /* ── DOKUZ MİZAÇ TİPİ ────────────────────────────────────── */
+/* renkText    : açık temada vurgu metni rengi (AA, açık zeminde)
+   renkTextDark: koyu temada vurgu metni rengi (AA, koyu zeminde) */
 var TIPLER = {
   1: {
     no: 1, ad: 'Mükemmeliyetçi', unvan: 'İlkeli Islahatçı',
-    renk: '#2a9d8f', renkSoft: 'rgba(42,157,143,.14)', renkText: '#1e7a6f',
+    renk: '#2a9d8f', renkSoft: 'rgba(42,157,143,.14)', renkText: '#1e7a6f', renkTextDark: '#5fd0c0',
     merkez: 'beden',
     ozet: 'Doğru, düzenli ve ilkeli olmaya adanmış; her şeyin "olması gerektiği gibi" olmasını ister.',
     temelArzu: 'İyi, dürüst ve dengeli olmak; bir bütünlük ve doğruluk duygusuna sahip olmak.',
     temelKorku: 'Bozuk, kusurlu, ahlaken yanlış ya da yozlaşmış olmak.',
     motivasyon: 'Haklı olmak, her şeyi iyileştirmek, ilkeleriyle tutarlı kalmak ve eleştirinin ötesinde olmak ister. İçinde sürekli değerlendiren bir "iç eleştirmen" taşır.',
-    tutku: 'Öfke (bastırılmış)', erdem: 'Sabır / Sükûnet',
+    tutku: 'Öfke (içe bastırılmış)', erdem: 'Sabır / Sükûnet',
     golge: 'Hatasız olma baskısı içte birikmiş bir kızgınlığa dönüşebilir; "doğru tek yol benimki" katılığına kapılır.',
     gucluYonler: ['Yüksek dürüstlük ve adalet duygusu', 'Disiplin, sorumluluk, güvenilirlik', 'Detaya ve kaliteye gösterilen özen', 'İlkelerinden taviz vermeyen tutarlılık', 'Bir şeyi daha iyiye taşıma becerisi'],
     zorluklar: ['Aşırı eleştirellik (önce kendine)', 'Esneklik ve hata payı tanımakta zorlanma', 'Bastırılmış öfke ve gerginlik', 'Siyah-beyaz, "doğru-yanlış" katılığı', 'Rahatlamayı, oyunu erteleme'],
     stres: { hedef: 4, metin: 'Stres altında Tip 4\'e kayar: içe kapanır, kendini yetersiz ve anlaşılmamış hisseder, melankoliye ve duygusal dalgalanmaya açılır.' },
     gelisim: { hedef: 7, metin: 'Geliştiğinde Tip 7\'nin neşesini alır: katılığı bırakır, hayatın spontane ve keyifli yanına açılır, "yeterince iyi"yi kabullenir.' },
-    iliskiler: 'İlişkide sadık, dürüst ve adanmıştır; ama beklentileri yüksektir ve eleştirisi sevdiğini incitebilir. En çok, kendine ve karşısındakine "kusurlu olmak da insanca" diyebildiğinde rahatlar.',
+    iliskiler: 'İlişkide sadık, dürüst ve adanmıştır; ama beklentileri yüksektir ve eleştirisi sevdiğini incitebilir. Sıcaklık, kendine ve karşısındakine "kusurlu olmak da insanca" diyebildiğinde gelir.',
     is: 'Kalite, etik ve düzen gerektiren işlerde parlar: eğitim, hukuk, denetim, editörlük, sağlık, mühendislik. Süreçleri iyileştirir, standardı yükseltir.',
     buyume: ['İç eleştirmenin sesini fark et; onu bir düşman değil, dindirilecek bir alışkanlık olarak gör.', '"Mükemmel" yerine "yeterince iyi"yi bilinçli olarak seç.', 'Öfkeni bastırmak yerine sağlıklı yollarla ifade et.', 'Kendine de başkalarına tanıdığın hata payını tanı; oyuna ve dinlenmeye izin ver.'],
     roller: 'Öğretmen, hâkim, kalite denetçisi, editör, reformcu, zanaatkâr'
   },
   2: {
     no: 2, ad: 'Yardımsever', unvan: 'Şefkatli Veren',
-    renk: '#ef6f81', renkSoft: 'rgba(239,111,129,.14)', renkText: '#d4566c',
+    renk: '#ef6f81', renkSoft: 'rgba(239,111,129,.14)', renkText: '#d4566c', renkTextDark: '#f4909e',
     merkez: 'kalp',
     ozet: 'Başkalarının ihtiyacına duyarlı, sıcak ve verici; sevgi ve yakınlık üzerinden var olur.',
     temelArzu: 'Sevilmek, istenmek ve başkalarının hayatında gerekli, kıymetli biri olmak.',
@@ -96,14 +99,14 @@ var TIPLER = {
     zorluklar: ['Kendi ihtiyaçlarını görmezden gelme', 'Onaya ve sevgiye aşırı bağımlılık', 'Sınır koymakta zorlanma', 'Karşılık görmeyince kırgınlık', 'Dolaylı yoldan ihtiyaç belli etme'],
     stres: { hedef: 8, metin: 'Stres altında Tip 8\'e kayar: bastırdığı öfke patlar, talepkâr ve kontrolcü olur, "bunca verdim, hani karşılığı?" der.' },
     gelisim: { hedef: 4, metin: 'Geliştiğinde Tip 4\'ün içe dönüşünü alır: kendi duygu ve ihtiyaçlarını sahiplenir, karşılık beklemeden, kendini de doyurarak sevmeyi öğrenir.' },
-    iliskiler: 'İlişkilerin kalbidir: besler, sarmalar, hatırlar. Ama "kendini unutma" eğilimi yüzünden dengesiz bir veriş kurabilir. Sağlığı, "almaya" da izin verdiğinde gelir.',
+    iliskiler: 'İlişkilerin kalbidir: besler, sarmalar, hatırlar. Peki ya "kendini unutma" eğilimi dengesiz bir verişe dönüştüğünde? Sağlık, "almaya" da izin verdiğinde gelir.',
     is: 'İnsanla temas eden alanlarda parlar: rehberlik, hemşirelik, öğretmenlik, sosyal hizmet, insan kaynakları, gönüllülük. Takımın moral ve bağ dokusudur.',
     buyume: ['"Benim ihtiyacım ne?" sorusunu günlük olarak sor.', 'Vermeyi karşılık beklemeden, gerçekten karşılıksız yapmayı dene.', '"Hayır" demeyi bir reddediş değil, sağlıklı bir sınır olarak gör.', 'Sevginin, sen kendini de doyurduğunda daha temiz aktığını fark et.'],
     roller: 'Rehber, hemşire, öğretmen, danışman, gönüllü, ev sahibi'
   },
   3: {
     no: 3, ad: 'Başaran', unvan: 'Hedef Odaklı Yıldız',
-    renk: '#e0941f', renkSoft: 'rgba(224,148,31,.14)', renkText: '#b9780f',
+    renk: '#e0941f', renkSoft: 'rgba(224,148,31,.14)', renkText: '#b9780f', renkTextDark: '#f0b54e',
     merkez: 'kalp',
     ozet: 'Hedefe kilitli, verimli ve uyum sağlayan; başarı ve takdir üzerinden değer arar.',
     temelArzu: 'Değerli ve kıymetli hissetmek; başardıklarıyla saygı görmek.',
@@ -122,7 +125,7 @@ var TIPLER = {
   },
   4: {
     no: 4, ad: 'Özgün', unvan: 'Derin Romantik',
-    renk: '#9b6dd6', renkSoft: 'rgba(155,109,214,.14)', renkText: '#7d4fc0',
+    renk: '#9b6dd6', renkSoft: 'rgba(155,109,214,.14)', renkText: '#7d4fc0', renkTextDark: '#b89ae6',
     merkez: 'kalp',
     ozet: 'Duygusal derinliği, özgünlüğü ve anlamı arayan; sıradanlıktan kaçan hassas ruh.',
     temelArzu: 'Kendine has bir kimlik bulmak; derin, özgün ve anlamlı bir hayat yaşamak.',
@@ -141,7 +144,7 @@ var TIPLER = {
   },
   5: {
     no: 5, ad: 'Araştırmacı', unvan: 'Bilge Gözlemci',
-    renk: '#4361b5', renkSoft: 'rgba(67,97,181,.14)', renkText: '#34509c',
+    renk: '#4361b5', renkSoft: 'rgba(67,97,181,.14)', renkText: '#34509c', renkTextDark: '#8aa3e6',
     merkez: 'zihin',
     ozet: 'Bilgiye, anlamaya ve bağımsızlığa adanmış; mesafeli, derin ve gözlemci zihin.',
     temelArzu: 'Yetkin ve yeterli olmak; dünyayı anlayıp kendi ayakları üzerinde durabilmek.',
@@ -160,7 +163,7 @@ var TIPLER = {
   },
   6: {
     no: 6, ad: 'Sadık', unvan: 'Sadık Sorgulayıcı',
-    renk: '#6b8cae', renkSoft: 'rgba(107,140,174,.16)', renkText: '#4f6f90',
+    renk: '#6b8cae', renkSoft: 'rgba(107,140,174,.16)', renkText: '#4f6f90', renkTextDark: '#a8c2dd',
     merkez: 'zihin',
     ozet: 'Güvenlik, sadakat ve hazırlık arayan; tehlikeyi önceden sezen tedbirli zihin.',
     temelArzu: 'Güvende olmak; destek, rehberlik ve sağlam bir zemin bulmak.',
@@ -179,7 +182,7 @@ var TIPLER = {
   },
   7: {
     no: 7, ad: 'Maceracı', unvan: 'Coşkulu Kâşif',
-    renk: '#f0833a', renkSoft: 'rgba(240,131,58,.14)', renkText: '#d56c25',
+    renk: '#f0833a', renkSoft: 'rgba(240,131,58,.14)', renkText: '#d56c25', renkTextDark: '#f5a36b',
     merkez: 'zihin',
     ozet: 'Heyecan, özgürlük ve olasılık peşinde; neşeli, hareketli ve fikir dolu zihin.',
     temelArzu: 'Mutlu, özgür ve tatmin olmuş olmak; hayatın bütün imkânlarını yaşamak.',
@@ -198,13 +201,13 @@ var TIPLER = {
   },
   8: {
     no: 8, ad: 'Lider', unvan: 'Güçlü Koruyucu',
-    renk: '#d6453c', renkSoft: 'rgba(214,69,60,.14)', renkText: '#b6362e',
+    renk: '#d6453c', renkSoft: 'rgba(214,69,60,.14)', renkText: '#b6362e', renkTextDark: '#e8867f',
     merkez: 'beden',
     ozet: 'Güç, adalet ve kontrol arayan; doğrudan, korkusuz ve koruyucu irade.',
     temelArzu: 'Kendi hayatının ve kaderinin kontrolünde olmak; güçlü ve bağımsız kalmak.',
     temelKorku: 'Zarar görmek, kontrol edilmek, başkalarının insafına kalmak; ihanete uğramak.',
     motivasyon: 'Güçlü olmak ve kontrolü elde tutmak ister. Haksızlığa tahammülü yoktur, zayıfı korur. Yumuşaklığını bir kale ardında saklar; zayıf görünmekten kaçınır.',
-    tutku: 'Aşırılık / Şehvetli güç (dürtüsellik)', erdem: 'Masumiyet / Şefkat',
+    tutku: 'Doymak bilmez güç arzusu (dürtüsellik)', erdem: 'Masumiyet / Şefkat',
     golge: 'Yumuşaklığı zayıflık sanıp duvar örme; "ya hükmederim ya hükmedilirim" katılığı, gücü incitmek için kullanma.',
     gucluYonler: ['Güçlü irade ve liderlik', 'Cesaret, kararlılık, doğrudanlık', 'Zayıfı ve haklıyı koruma', 'Zorlukta sarsılmaz duruş', 'Adalet ve dürüstlük duygusu'],
     zorluklar: ['Kontrol ve baskınlık ihtiyacı', 'Öfkenin sertliğe dönüşmesi', 'Yumuşaklığı/zaafı gizleme', 'Aşırılık, "ya hep ya hiç"', 'İncinmeyi kabullenmekte zorluk'],
@@ -217,7 +220,7 @@ var TIPLER = {
   },
   9: {
     no: 9, ad: 'Barışçı', unvan: 'Huzurlu Arabulucu',
-    renk: '#5fa882', renkSoft: 'rgba(95,168,130,.16)', renkText: '#458a67',
+    renk: '#5fa882', renkSoft: 'rgba(95,168,130,.16)', renkText: '#458a67', renkTextDark: '#8fcfac',
     merkez: 'beden',
     ozet: 'Uyum, huzur ve içsel dinginlik arayan; sakin, hoşgörülü ve birleştirici varlık.',
     temelArzu: 'İçsel ve dışsal huzura kavuşmak; çevresiyle uyum ve denge içinde olmak.',
@@ -236,92 +239,121 @@ var TIPLER = {
   }
 };
 
-/* ── 45 SORU (her tip için 5) ────────────────────────────── */
-/* Birinci tekil şahıs, katılım ölçeği (1–5). tip alanı puanlanan tipi verir. */
+/* ── SORU HAVUZU ──────────────────────────────────────────
+   Birinci tekil şahıs, 5'li katılım ölçeği (1–5).
+   tip   : puanlanan tip (1–9)
+   ters  : true ise ters-puanlı madde (katılım = tipe DÜŞÜK puan).
+           Evetleme yanlılığını (her şeye "katılıyorum" deme) kırar.
+   Her tip için ~10 madde (2'si ters). Havuzdan moda göre örneklenir.
+   ──────────────────────────────────────────────────────── */
 var SORULAR = [
-  /* Tip 1 */
+  /* Tip 1 — Mükemmeliyetçi */
   { tip: 1, metin: 'Bir işi yapacaksam doğru ve eksiksiz yapmalıyım; "idare eder" beni rahatsız eder.' },
   { tip: 1, metin: 'İçimde sürekli "daha iyi olabilirdi" diyen bir eleştiri sesi var.' },
-  { tip: 1, metin: 'Etrafımdaki düzensizlik, hata ve haksızlık gözüme batar; düzeltme isteği duyarım.' },
+  { tip: 1, metin: 'Etrafımdaki yanlışlar ve düzensizlikler gözüme batar; düzeltme isteği duyarım.' },
   { tip: 1, metin: 'İlkelerimden kolay kolay ödün vermem; doğru bildiğimi savunurum.' },
   { tip: 1, metin: 'Kendime karşı çoğu insandan daha katı ve disiplinliyimdir.' },
-  /* Tip 2 */
+  { tip: 1, metin: 'Söz verdiğim şeyi mutlaka yaparım; sözüme ve kurallara sadık kalırım.' },
+  { tip: 1, metin: 'Bir şeyin "olması gerektiği gibi" olmaması içimde gerginlik yaratır.' },
+  { tip: 1, metin: 'Zamanımı ve görevlerimi titizlikle düzenler, savsaklamaktan rahatsız olurum.' },
+  { tip: 1, ters: true, metin: 'Çoğu konuda "yeterince iyi" benim için yeterlidir; ayrıntılara fazla takılmam.' },
+  { tip: 1, ters: true, metin: 'Hata yapmak ya da kuralların dışına çıkmak beni pek rahatsız etmez.' },
+
+  /* Tip 2 — Yardımsever */
   { tip: 2, metin: 'Başkalarının ihtiyaçlarını çoğu zaman kendiminkilerden önce fark ederim.' },
   { tip: 2, metin: 'İnsanlara yardım etmek, gerektiğinde fedakârlık yapmak bana iyi hissettirir.' },
   { tip: 2, metin: 'Sevilmek ve istenmek benim için çok önemlidir; reddedilmekten kolay incinirim.' },
   { tip: 2, metin: 'İlişkilerde verici olurum; bazen kendi ihtiyaçlarımı görmezden gelirim.' },
   { tip: 2, metin: 'Birinin hayatında gerekli ve önemli biri olduğumu hissetmek beni mutlu eder.' },
-  /* Tip 3 */
+  { tip: 2, metin: 'İnsanlar dertlerini bana açar; güvenilir bir sığınak gibi görülmek hoşuma gider.' },
+  { tip: 2, metin: 'Sevdiklerim için sınırlarımı zorlar, "hayır" demekte zorlanırım.' },
+  { tip: 2, metin: 'Birinin takdir etmemesi ya da görmezden gelmesi beni derinden üzer.' },
+  { tip: 2, ters: true, metin: 'Başkalarının ihtiyaçlarından çok kendi ihtiyaçlarıma odaklanırım.' },
+  { tip: 2, ters: true, metin: 'Yardım istemek ya da bana muhtaç olunması beni rahatsız eder; mesafemi korurum.' },
+
+  /* Tip 3 — Başaran */
   { tip: 3, metin: 'Hedef koyar, başarmak için kendimi sonuna kadar çalıştırırım.' },
   { tip: 3, metin: 'Başkalarının gözünde başarılı ve değerli görünmek benim için önemlidir.' },
   { tip: 3, metin: 'Verimli olmayı severim; zamanı boşa harcamak beni huzursuz eder.' },
   { tip: 3, metin: 'Ortama göre kendimi en iyi şekilde sunmayı, "kazanan" tarafta olmayı bilirim.' },
   { tip: 3, metin: 'Başarısız ya da değersiz görünmek en sevmediğim şeylerdendir.' },
-  /* Tip 4 */
+  { tip: 3, metin: 'Bir işe girişince en iyisi, en başarılısı olmak isterim.' },
+  { tip: 3, metin: 'İmajıma ve insanlar tarafından nasıl algılandığıma çok dikkat ederim.' },
+  { tip: 3, metin: 'Boş durmak bana zaman kaybı gibi gelir; sürekli üretmek isterim.' },
+  { tip: 3, ters: true, metin: 'Başarı ve başkalarının beni nasıl gördüğü beni pek ilgilendirmez.' },
+  { tip: 3, ters: true, metin: 'Hedef peşinde koşmaktansa olduğum yerde sakin kalmayı yeğlerim.' },
+
+  /* Tip 4 — Özgün */
   { tip: 4, metin: 'Kendimi başkalarından farklı, biraz da "bu dünyaya ait olmayan" biri gibi hissederim.' },
   { tip: 4, metin: 'Duygularım derin ve yoğundur; sıradanlıktan kaçar, özgün olanı ararım.' },
   { tip: 4, metin: 'Başkalarında olan bir şeyin bende eksik olduğu duygusunu sık sık yaşarım.' },
   { tip: 4, metin: 'Melankoli, özlem ve hayal kurmak iç dünyamın doğal parçalarıdır.' },
   { tip: 4, metin: 'Kendimi ve duygularımı yaratıcı/sanatsal yollarla ifade etmek isterim.' },
-  /* Tip 5 */
+  { tip: 4, metin: 'Sıradan ve herkes gibi olmak benim için en sevimsiz ihtimallerden biridir.' },
+  { tip: 4, metin: 'İçimde sık sık bir özlem, bir "bir şey eksik" duygusu taşırım.' },
+  { tip: 4, metin: 'Güzellik, sanat ve derin duygular beni en çok canlı hissettiren şeylerdir.' },
+  { tip: 4, ters: true, metin: 'Kendimi oldukça sıradan, herkes gibi hissederim ve bundan rahatsız olmam.' },
+  { tip: 4, ters: true, metin: 'Duyguların derinliğinden çok, somut ve pratik gerçeklerle ilgilenirim.' },
+
+  /* Tip 5 — Araştırmacı */
   { tip: 5, metin: 'Bir konuyu derinlemesine anlamak ve ustalaşmak beni en çok tatmin eden şeydir.' },
   { tip: 5, metin: 'Kalabalık ve aşırı talep beni yorar; kendi alanıma çekilip enerji toplarım.' },
   { tip: 5, metin: 'Duygularımı anında yaşamak yerine önce gözlemler, mantıkla analiz ederim.' },
   { tip: 5, metin: 'Bağımsızlığım ve özel alanım benim için çok kıymetli; çok şey istenmesinden hoşlanmam.' },
   { tip: 5, metin: 'Bir ortama girmeden önce izler, biriktirir, hazır hissedince katılırım.' },
-  /* Tip 6 */
+  { tip: 5, metin: 'Sosyalleşmek yerine kitap, araştırma ya da kendi düşüncelerimle baş başa kalmayı yeğlerim.' },
+  { tip: 5, metin: 'Bilmediğim bir konuda konuşmaktan rahatsız olurum; önce iyice öğrenmem gerekir.' },
+  { tip: 5, metin: 'Duygularımı paylaşmaktansa kendi içimde işlemeyi tercih ederim.' },
+  { tip: 5, ters: true, metin: 'Uzun uzun araştırmadan, içime doğduğu gibi atılıp harekete geçerim.' },
+  { tip: 5, ters: true, metin: 'İnsanlarla bol vakit geçirmek beni yormaz, aksine enerji verir.' },
+
+  /* Tip 6 — Sadık */
   { tip: 6, metin: 'Olası tehlikeleri ve kötü senaryoları önceden düşünür, tedbir alırım.' },
   { tip: 6, metin: 'Güvendiğim insanlara ve gruplara çok sadığımdır.' },
   { tip: 6, metin: 'Önemli kararlardan önce kafamda birçok "ya şöyle olursa" senaryosu döner.' },
   { tip: 6, metin: 'Yeni bir şeye güvenmeden önce test eder, sorgular, garantisini ararım.' },
   { tip: 6, metin: 'Belirsizlik ve tehdit karşısında tetikte ve temkinli olurum.' },
-  /* Tip 7 */
+  { tip: 6, metin: 'Bana "her şey yolunda" dense bile içimde bir tedirginlik kalabilir.' },
+  { tip: 6, metin: 'Karar verirken güvendiğim birine danışmak içimi rahatlatır.' },
+  { tip: 6, metin: 'Sadakat benim için çok önemli; kolay kolay taraf ya da grup değiştirmem.' },
+  { tip: 6, ters: true, metin: 'Geleceği pek dert etmem; işler nasıl olsa yoluna girer diye düşünürüm.' },
+  { tip: 6, ters: true, metin: 'Yeni insanlara ve durumlara kuşkuyla değil, rahatça güvenirim.' },
+
+  /* Tip 7 — Maceracı */
   { tip: 7, metin: 'Yeni deneyimler, seçenekler ve heyecan beni canlandırır; sıkılmaktan kaçarım.' },
   { tip: 7, metin: 'Aklım sürekli gelecekteki keyifli planlara ve yeni fikirlere atlar.' },
   { tip: 7, metin: 'Sıkıntı ve olumsuzlukla uğraşmaktansa olumlu tarafa odaklanmayı seçerim.' },
   { tip: 7, metin: 'Kendimi kısıtlanmış, tek bir seçeneğe mahkûm hissetmekten hoşlanmam.' },
   { tip: 7, metin: 'Enerjik ve iyimserimdir; hayatı dolu dolu yaşamak isterim.' },
-  /* Tip 8 */
+  { tip: 7, metin: 'Bir planın iptal olması ya da seçeneklerimin azalması canımı sıkar.' },
+  { tip: 7, metin: 'Sohbetlerde konudan konuya atlar, yeni fikirlerle kolayca heyecanlanırım.' },
+  { tip: 7, metin: 'Olumsuz düşünceleri uzun süre taşımak yerine hızla moralimi toparlarım.' },
+  { tip: 7, ters: true, metin: 'Tek bir işe uzun süre odaklanmak bana zor gelmez; sükûnetten hoşlanırım.' },
+  { tip: 7, ters: true, metin: 'Yeni heyecanlar aramaktansa tanıdık, sade ve oturmuş bir hayatı tercih ederim.' },
+
+  /* Tip 8 — Lider */
   { tip: 8, metin: 'Güçlü olmak ve kendi hayatımın kontrolünde olmak benim için esastır.' },
-  { tip: 8, metin: 'Haksızlık karşısında doğrudan, çekinmeden tavır alırım; zayıfı korurum.' },
+  { tip: 8, metin: 'Haksızlık karşısında çekinmeden, doğrudan tavır alırım.' },
   { tip: 8, metin: 'Kontrolün başkasında olması, bana hükmedilmesi beni rahatsız eder.' },
   { tip: 8, metin: 'Açık sözlü ve doğrudanımdır; ne düşündüğümü söylemekten çekinmem.' },
   { tip: 8, metin: 'Zayıf ya da savunmasız görünmektense güçlü durmayı yeğlerim.' },
-  /* Tip 9 */
+  { tip: 8, metin: 'Bir ortamda doğal olarak sorumluluğu ve liderliği üstlenirim.' },
+  { tip: 8, metin: 'Gücü olanın güçsüzü ezmesine tahammül edemem; zayıfın yanında dururum.' },
+  { tip: 8, metin: 'Kararlıyımdır; bir şeye inandığımda engellere rağmen üstüne giderim.' },
+  { tip: 8, ters: true, metin: 'Çatışmadan kaçınır, kontrolü başkasına bırakmakta zorlanmam.' },
+  { tip: 8, ters: true, metin: 'Sertlik yerine yumuşaklıkla yaklaşmayı daha doğal bulurum.' },
+
+  /* Tip 9 — Barışçı */
   { tip: 9, metin: 'Çatışma ve gerginlikten kaçınır, ortamı yumuşatmaya çalışırım.' },
   { tip: 9, metin: 'Çevremdekilerle uyum ve huzur içinde olmak benim için çok değerlidir.' },
   { tip: 9, metin: 'Kendi isteğimi öne çıkarmak yerine akışa uyum sağlamayı tercih ederim.' },
   { tip: 9, metin: 'Bazen önemli işleri erteler, rahatımı bozmamak için oyalanırım.' },
   { tip: 9, metin: 'Sakin, hoşgörülü ve uzlaşmacı biriyimdir; kimseyi kırmak istemem.' },
-
-  /* ── Ek havuz (derin mod için, her tipe +3) ── */
-  { tip: 1, metin: 'Söz verdiğim şeyi mutlaka yaparım; sözüme ve kurallara sadık kalırım.' },
-  { tip: 1, metin: 'Bir şeyin "olması gerektiği gibi" olmaması içimde gerginlik yaratır.' },
-  { tip: 1, metin: 'Zamanımı ve görevlerimi titizlikle düzenler, savsaklamaktan rahatsız olurum.' },
-  { tip: 2, metin: 'İnsanlar dertlerini bana açar; güvenilir bir sığınak gibi görülmek hoşuma gider.' },
-  { tip: 2, metin: 'Birinin beni takdir etmemesi ya da görmezden gelmesi beni derinden üzer.' },
-  { tip: 2, metin: 'Sevdiklerim için sınırlarımı zorlar, "hayır" demekte zorlanırım.' },
-  { tip: 3, metin: 'Bir işe girişince en iyisi, en başarılısı olmak isterim.' },
-  { tip: 3, metin: 'İmajıma ve insanlar tarafından nasıl algılandığıma çok dikkat ederim.' },
-  { tip: 3, metin: 'Boş durmak bana zaman kaybı gibi gelir; sürekli üretmek isterim.' },
-  { tip: 4, metin: 'Sıradan ve herkes gibi olmak benim için en sevimsiz ihtimallerden biridir.' },
-  { tip: 4, metin: 'İçimde sık sık bir özlem, bir "bir şey eksik" duygusu taşırım.' },
-  { tip: 4, metin: 'Güzellik, sanat ve derin duygular beni en çok canlı hissettiren şeylerdir.' },
-  { tip: 5, metin: 'Sosyalleşmek yerine kitap, araştırma ya da kendi düşüncelerimle baş başa kalmayı yeğlerim.' },
-  { tip: 5, metin: 'Bilmediğim bir konuda konuşmaktan rahatsız olurum; önce iyice öğrenmem gerekir.' },
-  { tip: 5, metin: 'Duygularımı paylaşmaktansa kendi içimde işlemeyi tercih ederim.' },
-  { tip: 6, metin: 'Bana "her şey yolunda" dense bile içimde bir tedirginlik kalabilir.' },
-  { tip: 6, metin: 'Karar verirken güvendiğim birine danışmak içimi rahatlatır.' },
-  { tip: 6, metin: 'Sadakat benim için çok önemli; kolay kolay taraf ya da grup değiştirmem.' },
-  { tip: 7, metin: 'Bir planın iptal olması ya da seçeneklerimin azalması canımı sıkar.' },
-  { tip: 7, metin: 'Sohbetlerde konudan konuya atlar, yeni fikirlerle kolayca heyecanlanırım.' },
-  { tip: 7, metin: 'Olumsuz düşünceleri uzun süre taşımak yerine hızla moralimi toparlarım.' },
-  { tip: 8, metin: 'Bir ortamda doğal olarak sorumluluğu ve liderliği üstlenirim.' },
-  { tip: 8, metin: 'Birinin beni kandırmaya ya da kullanmaya çalışması beni çok öfkelendirir.' },
-  { tip: 8, metin: 'Kararlıyımdır; bir şeye inandığımda engellere rağmen üstüne giderim.' },
   { tip: 9, metin: 'Tartışma çıkacağını sezdiğimde geri çekilir ya da konuyu değiştiririm.' },
   { tip: 9, metin: 'Başkalarının görüşlerine kolayca uyum sağlar, kendi isteğimi ertelerim.' },
-  { tip: 9, metin: 'Huzurumu bozacak ani değişikliklerden hoşlanmam.' }
+  { tip: 9, metin: 'Huzurumu bozacak ani değişikliklerden hoşlanmam.' },
+  { tip: 9, ters: true, metin: 'Kendi isteğimi net biçimde ortaya koyar, gerekirse çatışmayı göze alırım.' },
+  { tip: 9, ters: true, metin: 'Karar verince oyalanmadan hemen harekete geçerim.' }
 ];
 
 /* Dışa aç (modül değiliz; global) */
