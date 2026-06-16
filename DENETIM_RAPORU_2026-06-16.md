@@ -245,3 +245,35 @@ Yaygın: `index.html:1809` (kitap kapağı height yok), `deneme:1942/2016`, `dka
 7. **Bölüm 5** cila; **Bölüm 6** kullanıcı onayı bekler.
 
 **Bütünlük notu (Bölüm 7):** Tüm bölümlerde İslâmî içerik/hareke/honorific kasıtlı denetlenmedi (kural gereği) — ikinci tur içerik denetimi gerekebilir. `_alim-sablonu` türevi (imam-buhari/fatih) ve `lib/kelime-app/*` paylaşılan dosyalar: düzeltmeler ŞABLON/LİB'de yapılırsa tüm türevlere yayılır ama mevcut kopyalara elle de uygulanmalı. `meslek-pusulasi/` klasörü artık yok (→ `yol-haritan/`); tek kalıntı referanslar sitemap+vercel.json. JSON bütünlüğü (4636 dosya), canlı sağlık (55 URL 200), ve çoğu bölümün CSP'si TEMİZ doğrulandı. Paralel-ajan çakışması riski (aynı dosyalar) ve iCloud .git tuzakları nedeniyle deploy daima path-scoped + `pull --rebase` ile yapılmalı.
+
+---
+
+## UYGULAMA GÜNLÜĞÜ (2026-06-16, canlı düzeltme oturumu)
+
+### ✅ Batch 1 — Sıfır-hata (deploy edildi, canlıda 8/8 doğrulandı)
+- **islam-bilim-yildizlari** (C1/C2): `BOLGELER` dizi-uyumu + `BOLGE_EMOJI` kaldırıldı → Keşfet 126 kart, Harita 6 bölge+11 işaretçi (önce TAMAMEN boştu). Tarayıcıda doğrulandı.
+- **endulus** (C3): 'Devam' butonu `escapeJson` → tek-seçenekli sahneler ilerliyor.
+- **davetmektubu** (C4+E8): WhatsApp paylaşım backtick + hero 81→82.
+- **sunumlar** (A1+E16): nav `/bilim`→`/sunumlar/bilim/`; 56→64 slayt (×2).
+- **kayi-atlasi** (A2+E10+E11+E12): kırık wikimedia hero kaldırıldı; `loc.not_`→`loc.not` (editoryal not görünür); sayaç -2 düzeltildi (215); fetch `.catch`+`r.ok`.
+- **iho-oyunlar** (E9): 29/31→33 oyun.
+- **arapca/ingilizce-kelime** (A3/A4/E13): eksik 169.wav/Baby.wav ses referansları + 'Red(1)' çöp kaydı silindi.
+- **noroterbiye** (E1/E2/E3/E4): sozluk/kisa-bilgiler/sorular placeholder şablon kayıtları silindi → 131/85/100; sahte kart/filtre/sayaç gitti (tarayıcıda doğrulandı).
+- **beyin-ve-yapay-zeka** (E7): 9→11 kategori (veriden doğrulandı).
+- **kayi** (E14): hero+meta+section 51/57/40→48/44/34 (gerçek veri: TIMELINE_EVENTS=48, PERSONS=44, PLACES=34).
+- **islam-bilim-yildizlari** (E17): 85→126 (basarimlar.js + alimler.html).
+- **sinav** (B1): jsdelivr QR→cdnjs; ANCAK sinav/ yarım-tracking bozuk sayfa yapardı → tekrar yayından çıkarıldı (CSP düzeltmesi dosyada, tam deploy için hazır).
+
+### ✅ Batch 1b — tarih/* veri-anahtarı uyuşmazlıkları (deploy edildi, tarayıcıda doğrulandı)
+- **D1** app.js: gövde fallback genişletildi (full_text/body_text/article_text/content_text + sections-metin önceliği) → 6 veritabanının da gövdesi render oluyor (önce ~1360 madde boştu). 6/6 DB doğrulandı.
+- **D2** dynasty-explorer.js: init'te `name`/`db` normalize (id/title/slug'dan) → 88 hanedan linki `/tarih/devletler/<slug>` (önce `/tarih/null/undefined`). 88/88 dosya eşleşti.
+- **D3** timeline-engine.js: `slug` entry_id'den türetildi → 811 kronoloji linki çalışıyor (811/811 dosya). 
+- **D4** map-engine.js: string-id ayrıştırma (çok-tireli db güvenli) → 75 konum popup linki (401/401 örnek dosya eşleşti).
+
+### ⏸️ Karar bekleyen (yazar teyidi gerek — yanlış sayı koymamak için DOKUNULMADI)
+- **E5/E6** beyin "Alan Dağılımı" SVG kırılımı (kendi içinde 48 vs ilan 50 tutarsız; doğru dağılım sınıflandırma niyetine bağlı).
+- **E15** muallimo "2.199 kart" (temiz manifest yok; gerçek sayı ≈2197 olabilir).
+- **E18** tarih "2.765+ madde" (gerçek dosya sayısı 1841; doğru gösterim yazarın sayım tanımına bağlı, ana sayfa↔index çelişkisi var).
+- **E19** islami-egitim %11.7 vs %11.8 (yuvarlama; marjinal).
+- **E20** deneme bento numara sırası (noindex test sayfası, paralel tasarım yüzeyi).
+- Bölüm 6'daki tüm içerik/yapı kararları (dual-domain, 7sinif orphan, iCloud temizliği) önceki gibi kullanıcı onayı bekliyor.

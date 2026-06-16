@@ -20,7 +20,13 @@ const DynastyExplorer = {
         this.data = await loadJSON('data/dynasties.json');
 
         if (this.data) {
-            this.allDynasties = Array.isArray(this.data) ? this.data : (this.data.dynasties || []);
+            const raw = Array.isArray(this.data) ? this.data : (this.data.dynasties || []);
+            // dynasties.json id/title/slug taşır; renderer name/db bekler — normalize et
+            this.allDynasties = raw.map(d => ({
+                ...d,
+                name: d.name || d.title || '',
+                db: d.db || (d.id || '').split('-')[0] || 'devletler',
+            }));
         }
 
         if (this.allDynasties.length === 0) {

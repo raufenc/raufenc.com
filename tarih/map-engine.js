@@ -189,8 +189,12 @@ const MapEngine = {
             entriesHtml = `
                 <div class="map-popup-entries">
                     ${entries.slice(0, 15).map(e => {
-                        const db = e.db || place.db || '';
-                        return `<a href="/tarih/${db}/${e.slug}" class="map-popup-entry" data-link>${escapeHtml(e.title || e.name || '')}</a>`;
+                        const id = typeof e === 'string' ? e : (e.id || '');
+                        const db = (typeof e === 'object' && e.db) || place.db || Object.keys(APP.databases).find(k => id === k || id.startsWith(k + '-')) || '';
+                        const slug = (typeof e === 'object' && e.slug) || (db && id.startsWith(db + '-') ? id.slice(db.length + 1) : id);
+                        if (!db || !slug) return '';
+                        const label = (typeof e === 'object' && (e.title || e.name)) || slug.replace(/-/g, ' ').replace(/(^|\s)\p{L}/gu, c => c.toLocaleUpperCase('tr'));
+                        return `<a href="/tarih/${db}/${slug}" class="map-popup-entry" data-link>${escapeHtml(label)}</a>`;
                     }).join('')}
                     ${entries.length > 15 ? `<div style="padding:4px 0;color:var(--text-500);font-size:0.8rem">...ve ${entries.length - 15} madde daha</div>` : ''}
                 </div>

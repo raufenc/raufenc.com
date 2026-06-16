@@ -565,19 +565,19 @@ async function renderEntry(db, slug) {
     const volume = entry.volume || entry.cilt || '';
     const pages = entry.pages || entry.sayfa || '';
 
-    // Build sections from body
+    // Build body (gövde alan adı veritabanına göre değişir: full_text / body_text / article_text / content_text)
     let bodyHtml = '';
-    if (entry.body) {
-        bodyHtml = formatArticleBody(entry.body);
-    } else if (entry.content) {
-        bodyHtml = formatArticleBody(entry.content);
-    } else if (entry.sections) {
-        bodyHtml = entry.sections.map(s => `
-            <h2>${escapeHtml(s.title || s.heading || '')}</h2>
-            ${formatArticleBody(s.text || s.content || '')}
-        `).join('');
-    } else if (entry.text) {
-        bodyHtml = formatArticleBody(entry.text);
+    const sections = Array.isArray(entry.sections) ? entry.sections : null;
+    const sectionsHaveText = sections && sections.some(s => s && (s.text || s.content));
+    const fullText = entry.body || entry.content || entry.full_text || entry.article_text || entry.body_text || entry.content_text || entry.text || '';
+    if (sectionsHaveText) {
+        bodyHtml = sections.map(s => {
+            const h = s.title || s.heading || '';
+            const t = s.text || s.content || '';
+            return `${h ? `<h2>${escapeHtml(h)}</h2>` : ''}${formatArticleBody(t)}`;
+        }).join('');
+    } else if (fullText) {
+        bodyHtml = formatArticleBody(fullText);
     }
 
     // Extra fields for specific databases

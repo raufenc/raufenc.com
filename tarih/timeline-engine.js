@@ -274,6 +274,10 @@ const TimelineEngine = {
         const dbInfo = APP.databases[item.db] || {};
         const typeInfo = APP.types[item.type] || {};
         const dateStr = item.year || formatDate(item.dates);
+        // slug verisi yok; entry_id'den (db- öneki) türet
+        const slug = item.slug || (item.entry_id && item.db && item.entry_id.startsWith(item.db + '-')
+            ? item.entry_id.slice(item.db.length + 1)
+            : (item.entry_id || ''));
 
         return `
             <div class="timeline-item" data-index="${index}">
@@ -281,7 +285,7 @@ const TimelineEngine = {
                 <div class="timeline-item-content">
                     <div class="timeline-date">${dateStr}</div>
                     <div class="timeline-item-title">
-                        <a href="/tarih/${item.db}/${item.slug}" data-link>${escapeHtml(item.title)}</a>
+                        <a href="/tarih/${item.db}/${slug}" data-link>${escapeHtml(item.title)}</a>
                     </div>
                     ${item.summary ? `<div class="timeline-item-summary">${escapeHtml(truncate(item.summary, 120))}</div>` : ''}
                     <div class="entry-card-badges" style="margin-top:6px">
