@@ -76,13 +76,13 @@ function txtOn(hex){
   var cDark=(L+0.05)/(relLum('#16161d')+0.05);
   return cWhite>=cDark ? '#ffffff' : '#16161d';
 }
-function isDark(){ return !document.documentElement.classList.contains('light'); }
+function isDark(){ return !document.documentElement.classList.contains('light') && !document.documentElement.classList.contains('mizac-light'); }
 
 /* ── Aktif rengi ayarla (tema duyarlı) ── */
 function setAccent(no){
   var r=document.documentElement.style;
   if(!no || !T[no]){
-    r.setProperty('--c','#c8a46e'); r.setProperty('--c-soft','rgba(200,164,110,.14)'); r.setProperty('--c-text','#c8a46e');
+    r.setProperty('--c','#2f8e9e'); r.setProperty('--c-soft','rgba(47,142,158,.12)'); r.setProperty('--c-text','#256f7e');
     return;
   }
   var t=T[no];
