@@ -9,9 +9,9 @@ const map = L.map('map-container', { zoomControl: true, scrollWheelZoom: true })
 L.tileLayer(tileUrl, { attribution: '© OpenStreetMap, © CARTO', maxZoom: 18, subdomains: 'abcd' }).addTo(map);
 
 // Region stats
-const bk = Object.keys(BOLGELER).sort((a,b) => BOLGELER[b].length - BOLGELER[a].length);
-document.getElementById('map-stats').innerHTML = bk.slice(0, 6).map(b =>
-  `<div class="map-stat">${BOLGE_EMOJI[b]||'🌍'} <strong>${BOLGELER[b].length}</strong> ${b}</div>`
+const bk = [...BOLGELER].sort((a,b) => b.bilginIds.length - a.bilginIds.length);
+document.getElementById('map-stats').innerHTML = bk.slice(0, 6).map(bo =>
+  `<div class="map-stat">${bo.emoji||'🌍'} <strong>${bo.bilginIds.length}</strong> ${bo.isim}</div>`
 ).join('');
 
 // MarkerCluster

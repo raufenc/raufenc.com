@@ -967,7 +967,7 @@ function renderScene(sceneId) {
     <div class="scene-text">${scene.text}</div>
     <div class="choices">
       ${scene.isContinue
-        ? `<button class="continue-btn" onclick="handleChoice(${JSON.stringify(choices[0])})">Devam →</button>`
+        ? `<button class="continue-btn" onclick="handleChoice(${escapeJson(choices[0])})">Devam →</button>`
         : choices.map((c, i) => `
           <button class="choice-btn ${c.locked ? 'disabled' : ''}" onclick="handleChoice(${escapeJson(c)})">
             ${c.text}

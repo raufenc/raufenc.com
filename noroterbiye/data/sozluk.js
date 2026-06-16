@@ -1,14 +1,5 @@
 const SOZLUK_DATA = [
  {
-  "id": "ID",
-  "terim": "Terim",
-  "kategori": "Kategori",
-  "tanim": "Basit Tanım",
-  "kitapBaglami": "Kitap Bağlamı",
-  "kitapKaynagi": "Kitap Kaynağı",
-  "slug": "Slug"
- },
- {
   "id": "T001",
   "terim": "Nöroterbiye",
   "kategori": "Çekirdek",

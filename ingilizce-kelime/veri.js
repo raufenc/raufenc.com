@@ -851,7 +851,6 @@ const KATEGORILER = [
     "items": [
       {
         "gorsel": "Baby.webp",
-        "ses": "Baby.wav",
         "kelime": "Baby",
         "anlam": "Bebek"
       },
@@ -980,12 +979,6 @@ const KATEGORILER = [
         "ses": "Rectangle.wav",
         "kelime": "Rectangle",
         "anlam": "Dikdörtgen"
-      },
-      {
-        "gorsel": "Red(1).webp",
-        "ses": "Red(1).wav",
-        "kelime": "Red(1)",
-        "anlam": ""
       },
       {
         "gorsel": "Red.webp",

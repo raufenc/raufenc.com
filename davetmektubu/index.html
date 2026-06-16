@@ -2295,7 +2295,7 @@ function renderAna(){
       <!-- İstatistikler -->
       <div class="hero-stats-row" style="margin-bottom:44px;animation:fadeUp .6s var(--e) .55s both">
         <div style="text-align:center">
-          <span class="hero-stat-num" style="color:${PR.ateist.parlak}">81</span>
+          <span class="hero-stat-num" style="color:${PR.ateist.parlak}">82</span>
           <span class="hero-stat-label" style="color:${c.soluk}">mektup</span>
         </div>
         <div class="hero-stat-div" style="background:${c.cerç}"></div>
@@ -3082,7 +3082,7 @@ function shareWithAPI(encodedText){
     }
     // Fallback: WA web + download
     downloadImg();
-    setTimeout(()=>window.open(`https://wa.me/?text=${encodeURIComponent(text)},"_blank"`),500);
+    setTimeout(()=>window.open(`https://wa.me/?text=${encodeURIComponent(text)}`,"_blank"),500);
   },"image/png");
 }
 

@@ -28,9 +28,9 @@ function buildFilters() {
 
   // Bolge filter
   const bolgeRow = document.getElementById('filter-bolge-row');
-  const bolgeKeys = Object.keys(BOLGELER).sort((a,b) => BOLGELER[b].length - BOLGELER[a].length);
+  const bolgeler = [...BOLGELER].sort((a,b) => b.bilginIds.length - a.bilginIds.length);
   bolgeRow.innerHTML = '<span class="filter-label">Bölge:</span>' +
-    bolgeKeys.map(b => `<button class="filter-btn" data-type="bolge" data-val="${b}">${BOLGE_EMOJI[b]||''} ${b} (${BOLGELER[b].length})</button>`).join('');
+    bolgeler.map(bo => `<button class="filter-btn" data-type="bolge" data-val="${bo.isim}">${bo.emoji||''} ${bo.isim} (${bo.bilginIds.length})</button>`).join('');
 }
 
 // Filter button click handler
@@ -171,7 +171,7 @@ function render() {
     if (favFilterActive && !favs.includes(b.id)) return false;
     if (filterAlan && !b.alanlar.includes(filterAlan)) return false;
     if (filterDonem && b.donem !== filterDonem) return false;
-    if (filterBolge && !BOLGELER[filterBolge]?.includes(b.id)) return false;
+    if (filterBolge) { const _ab = BOLGELER.find(x => x.isim === filterBolge); if (!_ab || !_ab.bilginIds.includes(b.id)) return false; }
     if (q) {
       const haystack = [b.isim, b.ozet, b.hook, b.yer, b.donem, ...b.alanlar, ...(b.eserler||[]), ...(b.katkilar||[])].join(' ').toLowerCase();
       if (!haystack.includes(q)) return false;

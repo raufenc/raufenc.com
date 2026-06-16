@@ -1,18 +1,5 @@
 const SORU_BANKASI_DATA = [
  {
-  "id": "Soru ID",
-  "tema": "Tema",
-  "seviye": "Seviye",
-  "tip": "Tip",
-  "soru": "Soru",
-  "dogru": "Doğru",
-  "aciklama": "Açıklama",
-  "secenekler": {
-   "A": "A",
-   "B": "B"
-  }
- },
- {
   "id": "QB001",
   "tema": "Dopamin",
   "seviye": "Kolay",

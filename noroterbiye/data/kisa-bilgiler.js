@@ -1,13 +1,5 @@
 const KISA_BILGILER_DATA = [
  {
-  "id": "ID",
-  "tema": "Tema",
-  "baslik": "Kart Başlığı",
-  "kisaBilgi": "Kısa Bilgi",
-  "aciklama": "Açıklama",
-  "ilgiliKavram": "İlgili Kavram"
- },
- {
   "id": "K001",
   "tema": "Biyoloji",
   "baslik": "Dopamin sadece sonuç değildir",

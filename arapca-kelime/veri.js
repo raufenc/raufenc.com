@@ -1114,7 +1114,6 @@ const KATEGORILER = [
       },
       {
         "gorsel": "169.webp",
-        "ses": "169.wav",
         "kelime": "\"Altı, yedi, sekiz, dokuz, on\""
       }
     ]
