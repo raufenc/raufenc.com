@@ -39,6 +39,8 @@ let ans=[null,null], firstCorrect=null;          /* tur durumu (2 kişi) */
 
 function setup(){
   if(!ACT){ startTitle.textContent='لا يوجَد نَشاط'; return; }
+  document.body.dataset.unit=String(ACT.unit||'');
+  document.body.dataset.activity=ACT.id||'';
   document.title=ACT.title||'نَشاط';
   startTitle.textContent=ACT.title||'';
   startSub.textContent=ACT.subtitle||'';
