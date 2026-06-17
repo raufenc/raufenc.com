@@ -41,8 +41,8 @@
 .u4-records{display:flex;flex-direction:column;gap:6px;max-width:420px;margin:14px auto 4px}.u4-record-row{display:grid;grid-template-columns:44px 1fr 60px;align-items:center;gap:10px;background:#fbfdff;border:1px solid #dbe7f3;border-radius:12px;padding:8px 12px}.u4-record-row:nth-child(1){background:#fff9e6;border-color:#fde68a}.u4-record-row:nth-child(2){background:#f6f8fb;border-color:#d7dee8}.u4-record-row:nth-child(3){background:#fdf3ec;border-color:#f5cbA8}.u4-record-rank{font-size:20px;font-weight:900;text-align:center}.u4-record-name{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.u4-record-score{font-weight:900;color:#0f6fff;text-align:left;font-size:18px}
 
 /* tahta: içerik öğeleri */
-.u4-chip{font-size:clamp(20px,1.3vw + 12px,40px)}
-.u4-token{font-size:clamp(20px,1.45vw + 11px,42px)}
+.u4-chip{font-size:clamp(26px,1.7vw + 14px,50px)}
+.u4-token{font-size:clamp(26px,1.9vw + 13px,52px)}
 
 /* yatay-öncelik: MCQ iki panel (kart sol, şıklar sağ) */
 @media (orientation:landscape) and (min-width:1000px){
@@ -131,36 +131,38 @@
 .u4-confetti i{position:absolute;top:-14px;width:11px;height:15px;border-radius:2px;opacity:.95;animation:u4-fall linear forwards}
 @keyframes u4-fall{to{transform:translateY(108vh) rotate(720deg);opacity:.9}}
 @media(prefers-reduced-motion:reduce){.u4-option,.u4-mid-ar,.u4-big-ar,.u4-feedback:not(:empty),.u4-progress>span::after,.u4-confetti i{animation:none}}
+/* Arakom: buton tabanlı içerik font-family miras ALMAZ (UA varsayılanı) → zorla Arakom */
+.u4-btn,.u4-option,.u4-token,.u4-chip,.u4-memory-card,.u4-cell,.u4-balloon,.u4-input,.u4-slot,.u4-match-target,.u4-cat,.u4-wheel span,.u4-target-word,.u4-secret-slots .u4-slot{font-family:'Arakom',"Arial","Tahoma",sans-serif}
 
 @media (orientation:landscape) and (min-width:1000px) and (max-height:1200px){
   .u4-game{height:100%;max-height:100%;display:flex;flex-direction:column;padding:10px;overflow:hidden}
   .u4-header{margin-bottom:8px;gap:8px}
-  .u4-title{font-size:clamp(20px,1.1vw + 12px,34px);line-height:1.1}
-  .u4-subtitle{font-size:clamp(12px,.45vw + 8px,17px)}
+  .u4-title{font-size:clamp(26px,1.5vw + 14px,44px);line-height:1.1}
+  .u4-subtitle{font-size:clamp(14px,.55vw + 9px,22px)}
   .u4-pill{padding:5px 9px;font-size:clamp(12px,.35vw + 7px,15px)}
   .u4-progress{height:8px;flex:0 0 auto}
-  .u4-game [data-body]{flex:1 1 auto;min-height:0;margin-top:8px!important;overflow:hidden}
+  .u4-game [data-body]{flex:1 1 auto;min-height:0;margin-top:8px!important;display:flex;flex-direction:column;justify-content:center}
   .u4-card{padding:10px;border-radius:14px}
   .u4-actions{margin-top:8px}
-  .u4-feedback{min-height:20px;margin-top:6px;font-size:clamp(15px,.7vw + 9px,22px)}
+  .u4-feedback{min-height:22px;margin-top:6px;font-size:clamp(20px,1vw + 12px,32px)}
   .u4-footer-note{display:none}
-  .u4-big-ar,.u4-mid-ar{line-height:1.25;margin:4px 0}
-  .u4-option{padding:8px 10px;min-height:44px;font-size:clamp(17px,1.2vw + 10px,34px);line-height:1.35}
-  .u4-cell{width:clamp(30px,4.5vmin,50px);height:clamp(30px,4.5vmin,50px);font-size:clamp(18px,3vmin,32px)}
-  .u4-wordsearch{gap:4px}
-  .u4-wordsearch[style]{grid-template-columns:repeat(10,clamp(30px,4.5vmin,50px))!important}
-  .u4-target-word{font-size:clamp(22px,1.1vw + 12px,34px);margin:4px 0}
+  .u4-big-ar,.u4-mid-ar{line-height:1.2;margin:4px 0;font-size:clamp(34px,2.7vw + 16px,68px)}
+  .u4-option{padding:12px 18px;min-height:56px;font-size:clamp(30px,2.3vw + 16px,60px);line-height:1.2}
+  .u4-cell{width:clamp(36px,5.4vmin,64px);height:clamp(36px,5.4vmin,64px);font-size:clamp(24px,3.8vmin,46px)}
+  .u4-wordsearch{gap:5px}
+  .u4-wordsearch[style]{grid-template-columns:repeat(10,clamp(36px,5.4vmin,64px))!important}
+  .u4-target-word{font-size:clamp(34px,1.9vw + 18px,58px);margin:6px 0}
   .u4-balloon-area{min-height:clamp(220px,36vmin,430px)}
   .u4-game-map [data-body]{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:10px;align-items:stretch}
   .u4-game-map [data-body]>.u4-card{margin-top:0!important;min-height:0;display:flex;flex-direction:column;justify-content:center}
   .u4-game-map .u4-map-tr{max-height:min(520px,calc(100dvh - 190px))}
-  .u4-game-map .u4-mid-ar{font-size:clamp(22px,1.2vw + 12px,36px)}
+  .u4-game-map .u4-mid-ar{font-size:clamp(30px,2vw + 14px,54px)}
   .u4-game-dialogueBuilder [data-body]{display:flex;flex-direction:column;gap:8px}
   .u4-dialogue-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
   .u4-dialogue-board{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:10px;min-height:0;flex:1 1 auto}
   .u4-dialogue-answer-card,.u4-dialogue-options-card{min-height:0;overflow:hidden}
   .u4-dialogue-options{gap:8px;align-content:start}
-  .u4-dialogue-options .u4-option{font-size:clamp(15px,1vw + 9px,28px);min-height:42px;padding:7px 9px}
+  .u4-dialogue-options .u4-option{font-size:clamp(20px,1.4vw + 11px,40px);min-height:42px;padding:7px 9px}
   .u4-dialogue-line{grid-template-columns:52px 1fr;gap:6px;margin:5px 0}
-  .u4-dialogue-line .u4-option{font-size:clamp(14px,.85vw + 8px,24px);min-height:38px;padding:6px 8px}
+  .u4-dialogue-line .u4-option{font-size:clamp(18px,1.1vw + 10px,34px);min-height:38px;padding:6px 8px}
 }

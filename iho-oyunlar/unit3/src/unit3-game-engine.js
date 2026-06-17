@@ -104,18 +104,39 @@
     for(const [k,e] of m) if(a.includes(k)) return `<div style="font-size:60px;text-align:center;line-height:1.1;margin-bottom:4px">${e}</div>`;
     return '';
   }
+  function confettiBurst(){
+    try{
+      const c = document.createElement('div'); c.className = 'u3-confetti';
+      const cols = ['#0f6fff','#46a0ff','#34d399','#f97316','#f6b400','#e5176b','#a855f7'];
+      for(let i=0;i<96;i++){
+        const p = document.createElement('i');
+        p.style.left = (Math.random()*100)+'%';
+        p.style.background = cols[Math.floor(Math.random()*cols.length)];
+        p.style.animationDuration = (1.8 + Math.random()*1.9)+'s';
+        p.style.animationDelay = (Math.random()*0.5)+'s';
+        p.style.transform = 'translateY(0) rotate('+(Math.random()*360)+'deg)';
+        c.appendChild(p);
+      }
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 4400);
+    }catch(e){}
+  }
   function finalScreen(shell, correct, total, restart){
     const pct = total ? Math.round(correct*100/total) : 0;
+    const medal = pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘';
+    const word = pct >= 80 ? 'مُمْتاز' : pct >= 50 ? 'أَحْسَنْتَ' : 'تَدَرَّبْ أَكْثَر';
     shell.body.innerHTML = `
-      <div class="u3-card u3-center" style="flex-direction:column;gap:12px;text-align:center">
-        <div style="font-size:56px">${pct >= 80 ? '🏆' : pct >= 50 ? '🌟' : '📘'}</div>
+      <div class="u3-card u3-center" style="flex-direction:column;gap:10px;text-align:center;animation:u3-rise .5s var(--u3-ease,ease) both">
+        <div style="font-size:clamp(54px,8vw,86px);line-height:1">${medal}</div>
+        <div class="u3-mid-ar" style="font-size:clamp(26px,2vw + 14px,44px)">${word}</div>
         <div class="u3-title">${pct}%</div>
-        <div class="u3-muted">${correct} / ${total} ✅</div>
-        <button class="u3-btn" data-restart>إِعادَة 🔄</button>
+        <div class="u3-muted" style="font-size:clamp(16px,1vw + 8px,24px)">${correct} / ${total} ✅</div>
+        <button class="u3-btn" data-restart style="margin-top:8px">إِعادَة 🔄</button>
       </div>`;
     $('[data-restart]', shell.body).addEventListener('click', restart);
     feedback(shell, '', '');
     setScore(shell, correct, total, total, total);
+    if(pct >= 50) confettiBurst();
   }
   function optionButton(label, index){ return `<button class="u3-option" data-index="${index}">${escapeHtml(label)}</button>`; }
 
