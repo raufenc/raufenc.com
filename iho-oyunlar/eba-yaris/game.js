@@ -45,6 +45,35 @@ function setup(){
 }
 
 /* ---------- Paylaşılan medya yardımcıları (orijinalle aynı davranış) ---------- */
+let tapLayer=null;
+function getTapLayer(){
+  if(tapLayer) return tapLayer;
+  tapLayer=document.createElement('button');
+  tapLayer.type='button';
+  tapLayer.className='media-tap';
+  tapLayer.setAttribute('aria-label','تَشْغيل الفِيديو');
+  tapLayer.textContent='▶';
+  tapLayer.addEventListener('click',function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    tryStartVideo();
+  });
+  const stage=document.getElementById('stage');
+  if(stage) stage.appendChild(tapLayer);
+  return tapLayer;
+}
+function showTapLayer(){ getTapLayer().classList.add('show'); }
+function hideTapLayer(){ if(tapLayer) tapLayer.classList.remove('show'); }
+function isTapLayerVisible(){ return !!(tapLayer&&tapLayer.classList.contains('show')); }
+function tryStartVideo(){
+  hideTapLayer();
+  try{
+    const p=video.play();
+    if(p&&p.catch) p.catch(function(){ showTapLayer(); });
+  }catch(e){
+    showTapLayer();
+  }
+}
 const voice=new Audio();
 function playVoice(file){            /* file yoksa hemen çözer; varsa bitince çözer */
   return new Promise(res=>{
@@ -60,18 +89,25 @@ function playVoice(file){            /* file yoksa hemen çözer; varsa bitince 
 function playClip(file){            /* src değiştir → canplay'de baştan sona oynat → ended'de çöz (atlama yok) */
   return new Promise(resolve=>{
     let done=false;
-    const tryPlay=()=>{ const p=video.play(); if(p&&p.catch)p.catch(()=>{}); };
+    hideTapLayer();
     const finish=()=>{ if(done)return; done=true;
       video.removeEventListener('ended',finish);
       video.removeEventListener('error',finish);
-      video.removeEventListener('canplay',tryPlay);
+      video.removeEventListener('canplay',tryStartVideo);
+      video.removeEventListener('loadedmetadata',tryStartVideo);
+      hideTapLayer();
       resolve(); };
+    video.playsInline=true;
+    video.setAttribute('playsinline','');
+    video.setAttribute('webkit-playsinline','');
     video.addEventListener('ended',finish);
     video.addEventListener('error',finish);
-    video.addEventListener('canplay',tryPlay);
+    video.addEventListener('canplay',tryStartVideo);
+    video.addEventListener('loadedmetadata',tryStartVideo);
     video.src=DIR+file+VER;
-    if(video.readyState>=3) tryPlay();
-    setTimeout(finish,20000);       /* güvenlik backstop (klipler ≤8sn) */
+    try{ video.load(); }catch(e){}
+    tryStartVideo();                /* iPad Safari: kullanıcı dokunuşu içindeyken play isteğini hemen gönder */
+    setTimeout(function(){ if(!isTapLayerVisible()) finish(); },30000); /* güvenlik backstop */
   });
 }
 function shuffled(q){
@@ -142,10 +178,11 @@ async function chooseSolo(isCorrect,btn){
     qFeedback.textContent='الإِجابَة الصَّحيحَة'; qFeedback.className='feedback show bad';
   }
   markDot(idx,isCorrect);
+  const mediaDone=q.say ? playVoice(q.say)
+    : q.answer ? playClip(q.answer)
+    : new Promise(r=>setTimeout(r,500));
   await new Promise(r=>setTimeout(r,650));
-  if(q.say) await playVoice(q.say);
-  else if(q.answer) await playClip(q.answer);
-  else await new Promise(r=>setTimeout(r,500));
+  await mediaDone;
   idx++;
   setTimeout(runQuestion,250);
 }
@@ -221,10 +258,11 @@ async function maybeResolve2P(){
   [optsA,optsB].forEach(c=>c.querySelectorAll('.opt-btn').forEach(b=>{   /* iki tarafta da doğruyu göster (öğreticilik) */
     if(b.textContent===q.options[q.correct]) b.classList.add('correct');
   }));
+  const mediaDone=q.say ? playVoice(q.say)
+    : q.answer ? playClip(q.answer)              /* cevabı videodan ikisi de duyar */
+    : new Promise(r=>setTimeout(r,500));
   await new Promise(r=>setTimeout(r,700));
-  if(q.say) await playVoice(q.say);
-  else if(q.answer) await playClip(q.answer);   /* cevabı videodan ikisi de duyar */
-  else await new Promise(r=>setTimeout(r,500));
+  await mediaDone;
   idx++;
   setTimeout(runRound2P,250);
 }
