@@ -18,9 +18,9 @@
     "🚶":"37-yurumek","🤝":"38-yardim"
   };
 
-  // Görseller /iho-oyunlar/img/kelime/ altında tek kaynak olarak duruyor.
+  // Görseller /7sinif/oyunlar/img/kelime/ altında tek kaynak olarak duruyor.
   // Bu klasörün kendi img/ kopyası yok; absolute path ile referansla.
-  const BASE = "/iho-oyunlar/img/kelime/";
+  const BASE = "/7sinif/oyunlar/img/kelime/";
 
   // Escape for regex, build alternation from longest first (variation selectors first).
   const keys = Object.keys(MAP).sort((a,b) => b.length - a.length);

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>كَوِّنْ جُمْلَة — أَفْعال السَّفَر</title>
 <style>
-@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
-@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Arakom','Segoe UI',Tahoma,sans-serif;background:linear-gradient(135deg,#0c1d3a,#102a52,#3F51B5);min-height:100vh;color:#0c1d3a;padding:16px;font-size:clamp(20px,2.3vw,30px)}
 .box{background:#fff;border-radius:24px;padding:22px 24px;max-width:880px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
@@ -130,7 +130,7 @@ document.getElementById('msg').textContent=fs>=90?'مُمْتاز!':fs>=70?'جَ
 }
 init();
 </script>
-<script src="/iho-oyunlar/intro.js" defer></script>
+<script src="/7sinif/oyunlar/intro.js" defer></script>
 <script>/* tek-ekran sigdirma v3: HER ZAMAN ekrana tam uyar, scroll kilitli */(function(){var SEL='.box';function tgt(){var a=document.querySelector('.game-screen.active');if(a)return a.firstElementChild;var els=document.querySelectorAll(SEL);for(var i=0;i<els.length;i++){if(els[i].offsetParent)return els[i]}return null}function fit(){var el=tgt();if(!el)return;el.style.transform='';var r=el.getBoundingClientRect();var availH=innerHeight-Math.max(6,r.top)-8;var availW=innerWidth-12;var needW=Math.max(el.scrollWidth,r.width);var f=Math.min(1,availH/Math.max(1,r.height),availW/Math.max(1,needW));el.style.transformOrigin='top center';el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}try{new MutationObserver(fit).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});addEventListener('resize',fit);addEventListener('load',fit);setInterval(fit,700);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);if(window.visualViewport)visualViewport.addEventListener('resize',fit)}catch(e){}fit();setTimeout(fit,250);setTimeout(fit,900)})();</script>
 </body>
 </html>

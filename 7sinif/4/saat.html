@@ -6,8 +6,8 @@
 <title>كَم السّاعَة؟ — الصَّفّ السّابِع · الوَحْدَة الرّابِعَة</title>
 <meta name="description" content="لُعْبَة السّاعَة — لاعِب واحِد أَوْ لاعِبان · رَقَمِيَّة وَعَقارِب">
 <style>
-@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
-@font-face{font-family:'Arakom';src:url('/iho-oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:normal}
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:bold}
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --crimson:#E5176B;--crimson-d:#C2185B;--blue:#0288D1;--blue-d:#0277BD;
@@ -416,7 +416,7 @@ function playAgain(){
  if(mode==='single')startSingle();else startDuel();
 }
 </script>
-<script src="/iho-oyunlar/intro.js" defer></script>
+<script src="/7sinif/oyunlar/intro.js" defer></script>
 <script>/* tek-ekran sigdirma v3: HER ZAMAN ekrana tam uyar, scroll kilitli */(function(){var SEL='#startScreen,#singleGame,#duelGame';function tgt(){var a=document.querySelector('.game-screen.active');if(a)return a.firstElementChild;var els=document.querySelectorAll(SEL);for(var i=0;i<els.length;i++){if(els[i].offsetParent)return els[i]}return null}function fit(){var el=tgt();if(!el)return;el.style.transform='';var r=el.getBoundingClientRect();var availH=innerHeight-Math.max(6,r.top)-8;var availW=innerWidth-12;var needW=Math.max(el.scrollWidth,r.width);var f=Math.min(1,availH/Math.max(1,r.height),availW/Math.max(1,needW));el.style.transformOrigin='top center';el.style.transform=(f<0.999)?('scale('+f.toFixed(4)+')'):'';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden'}try{new MutationObserver(fit).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});addEventListener('resize',fit);addEventListener('load',fit);setInterval(fit,700);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);if(window.visualViewport)visualViewport.addEventListener('resize',fit)}catch(e){}fit();setTimeout(fit,250);setTimeout(fit,900)})();</script>
 </body>
 </html>

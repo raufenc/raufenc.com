@@ -26,6 +26,8 @@
     }
   ],
   "redirects": [
+    { "source": "/iho-oyunlar-2/:path*", "destination": "/7sinif/oyunlar2/:path*", "permanent": false },
+    { "source": "/iho-oyunlar/:path*", "destination": "/7sinif/oyunlar/:path*", "permanent": false },
     { "source": "/meslek-pusulasi", "destination": "/yol-haritan/", "permanent": false },
     { "source": "/meslek-pusulasi/", "destination": "/yol-haritan/", "permanent": false },
     { "source": "/meslek-pusulasi/:path*", "destination": "/yol-haritan/", "permanent": false },
