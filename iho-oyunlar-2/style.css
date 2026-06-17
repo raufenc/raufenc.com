@@ -445,3 +445,43 @@ button{letter-spacing:0}
   .word-grid{width:100%;table-layout:fixed;border-spacing:1px}
   .word-grid td{width:auto;height:24px;font-size:14px}
 }
+
+/* ════════════════════════════════════════════════════════════
+   PREMIUM STANDARDI — Arakom + mavi + KOCAMAN punto (motorlarla aynı)
+   ════════════════════════════════════════════════════════════ */
+:root{--teal:#0f6fff;--blue:#2f86ff;--ease2:cubic-bezier(.22,.72,.24,1)}
+/* —— büyük içerik (oyun alanı) —— */
+.play-area .ar:not(.small-ar),.play-area .choice .ar{font-size:clamp(30px,2.3vw + 16px,62px);line-height:1.25}
+.play-area .ar.small-ar{font-size:clamp(24px,1.4vw + 13px,44px)}
+.play-area .choice .ar,.play-area .choice .ar.small-ar{font-size:clamp(30px,2.3vw + 16px,62px);line-height:1.22}
+.play-area .token{font-size:clamp(26px,1.9vw + 13px,52px)}
+.play-area .word-chip{font-size:clamp(24px,1.6vw + 12px,46px)}
+.play-area .memory-card{font-size:clamp(26px,1.7vw + 12px,50px)}
+.play-area .sentence-output{font-size:clamp(26px,1.8vw + 13px,54px)}
+.play-area .shelf-item .emoji{font-size:clamp(34px,3vmin,52px)}
+.play-head h2{font-size:clamp(30px,1.6vw + 16px,52px)}
+.game-instruction{font-size:clamp(15px,.6vw + 9px,22px)}
+.paged-progress{font-size:clamp(16px,.7vw + 10px,24px)}
+.word-grid td{font-size:clamp(26px,3.6vmin,46px)}
+/* —— premium yüzeyler —— */
+.play-area{background:radial-gradient(1100px 560px at 50% -10%,#ffffff,#eef5ff 60%,#e7f0fb);box-shadow:0 2px 8px rgba(20,55,95,.06),0 18px 42px -14px rgba(20,55,95,.2)}
+.question-card,.item-card,.role-card,.paged-question{background:linear-gradient(180deg,#ffffff,#fbfdff);border-color:#e9f0fa;border-radius:18px;box-shadow:0 1px 2px rgba(20,55,95,.05),0 8px 22px -8px rgba(20,55,95,.16)}
+.choice,.token,.word-chip,.memory-card,.line-button,.shelf-item,.target-chip{background:linear-gradient(180deg,#ffffff,#f8fbff);box-shadow:0 1px 2px rgba(20,55,95,.05),0 6px 16px rgba(20,55,95,.06);transition:transform .14s var(--ease2),border-color .14s,box-shadow .2s,background .2s}
+.play-area .choice,.play-area .token,.play-area .word-chip{animation:u2-rise .42s var(--ease2) both}
+.choice:hover,.token:hover,.word-chip:hover,.shelf-item:hover{transform:translateY(-3px);border-color:#7fb4ff;box-shadow:0 10px 24px rgba(15,111,255,.16)}
+.choice:active,.token:active{transform:scale(.98)}
+.choice.correct,.token.correct,.word-chip.correct,.memory-card.correct,.category-row.correct,.shelf-item.correct{background:linear-gradient(180deg,#ecfdf5,#dcfce7)!important;box-shadow:0 0 0 4px rgba(52,211,153,.28),0 12px 28px rgba(16,185,129,.2)!important;animation:u2-correct .55s var(--ease2)}
+.choice.wrong,.token.wrong,.line-button.wrong{background:linear-gradient(180deg,#fff1f3,#ffe4e8)!important;animation:u2-shake .42s}
+.choices{gap:14px}.choice{padding:14px 18px;min-height:60px}
+/* —— butonlar (mavi) —— */
+.primary-btn{background:linear-gradient(135deg,#2f86ff,#0f6fff 55%,#0a5be0);border-color:transparent;color:#fff;box-shadow:0 2px 0 rgba(8,70,160,.3),0 9px 22px rgba(15,111,255,.26);transition:transform .13s var(--ease2),box-shadow .18s,filter .18s;min-height:54px;padding:0 26px;font-size:clamp(18px,.8vw + 10px,26px)}
+.primary-btn:hover{transform:translateY(-2px);filter:brightness(1.05)}.primary-btn:active{transform:translateY(0) scale(.97)}
+.score-pill{background:linear-gradient(180deg,#eaf3ff,#dcecff);color:#0a5be0;border-color:#bcd8ff}
+.eyebrow,.game-kicker{color:#0f6fff}
+.progress-bar>span,.prog>span{background:linear-gradient(90deg,#0f6fff,#4aa3ff)}
+.paged-next{display:block;margin:16px auto 0}
+.done-emoji{font-size:clamp(56px,7vw,104px)}.done-text{font-size:clamp(30px,2vw + 14px,52px);font-weight:900}
+@keyframes u2-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes u2-correct{0%{transform:scale(1)}38%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes u2-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}60%{transform:translateX(7px)}}
+@media(prefers-reduced-motion:reduce){.play-area .choice,.play-area .token,.play-area .word-chip,.choice.correct,.choice.wrong{animation:none}}
