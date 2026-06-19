@@ -12,7 +12,7 @@
 const ARABIC_DIGITS=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>ARABIC_DIGITS[+c]??c).join('');
 const DIR='/7sinif/oyunlar/eba-etkilesim/vid/clips/';
-const VER='?v=2';   /* cache-busting: demucs ile müziği temizlenmiş kliplerin taze çekilmesi (eski müzikli önbelleği atla) */
+const VER='?v=20260619-media';   /* cache-busting: güncel kesilmiş kliplerin taze çekilmesi */
 
 const params=new URLSearchParams(location.search);
 const ACT=(window.ACTIVITIES||[]).find(a=>a.id===params.get('id'))||(window.ACTIVITIES||[])[0];
@@ -173,7 +173,7 @@ async function chooseSolo(isCorrect,btn){
   qOpts.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
   if(isCorrect){
     btn.classList.add('correct'); correctCount++;
-    qFeedback.textContent='أَحْسَنْتَ'; qFeedback.className='feedback show ok';
+    qFeedback.textContent='أَحْسَنْتَ.'; qFeedback.className='feedback show ok';
   } else {
     btn.classList.add('wrong');
     qOpts.querySelectorAll('.opt-btn').forEach(b=>{ if(b.textContent===q.options[q.correct]) b.classList.add('correct'); });
@@ -193,10 +193,10 @@ function finishSolo(){
   const n=ACT.questions.length;
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
-  endMsg.textContent= pct===1?'مُمْتاز! ما شاءَ اللَّه'
-    : pct>=.75?'جَيِّد جِدًّا'
-    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى'
-    : 'تَدَرَّبْ ثُمَّ أَعِدْ';
+  endMsg.textContent= pct===1?'مُمْتاز، ما شاءَ اللَّه.'
+    : pct>=.75?'جَيِّد جِدًّا.'
+    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى.'
+    : 'تَدَرَّبْ ثُمَّ أَعِدْ.';
   endScreen.classList.add('show');
 }
 
@@ -274,11 +274,11 @@ function finishDuo(){
   end2P2.innerHTML='<b>👤 اللّاعِب ٢</b><br>⚡ '+toAr(P[1].wins)+' &nbsp; ✓ '+toAr(P[1].correct);
   const a=P[0], b=P[1];
   let p1win=false, p2win=false, msg;
-  if(a.wins>b.wins){ p1win=true; msg='فازَ اللّاعِب ١ 🏆'; }
-  else if(b.wins>a.wins){ p2win=true; msg='فازَ اللّاعِب ٢ 🏆'; }
-  else if(a.correct>b.correct){ p1win=true; msg='فازَ اللّاعِب ١ 🏆'; }   /* beraberlik → doğru sayısı */
-  else if(b.correct>a.correct){ p2win=true; msg='فازَ اللّاعِب ٢ 🏆'; }
-  else { msg='تَعادُل! 🤝'; }
+  if(a.wins>b.wins){ p1win=true; msg='فازَ اللّاعِب ١. 🏆'; }
+  else if(b.wins>a.wins){ p2win=true; msg='فازَ اللّاعِب ٢. 🏆'; }
+  else if(a.correct>b.correct){ p1win=true; msg='فازَ اللّاعِب ١. 🏆'; }   /* beraberlik → doğru sayısı */
+  else if(b.correct>a.correct){ p2win=true; msg='فازَ اللّاعِب ٢. 🏆'; }
+  else { msg='تَعادُل 🤝'; }
   end2Win.textContent=msg;
   end2P1.classList.toggle('win',p1win);
   end2P2.classList.toggle('win',p2win);

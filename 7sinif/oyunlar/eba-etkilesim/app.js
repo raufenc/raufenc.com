@@ -12,6 +12,7 @@
 const ARABIC_DIGITS=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>ARABIC_DIGITS[+c]??c).join('');
 const DIR='vid/clips/';
+const VER='?v=20260619-media';
 
 const params=new URLSearchParams(location.search);
 const ACT=(window.ACTIVITIES||[]).find(a=>a.id===params.get('id'))||(window.ACTIVITIES||[])[0];
@@ -51,7 +52,7 @@ function playVoice(file){           // file yoksa hemen çözer; varsa bitince �
     let done=false;
     const fin=()=>{ if(done)return; done=true; voice.removeEventListener('ended',fin); voice.removeEventListener('error',fin); res(); };
     voice.addEventListener('ended',fin); voice.addEventListener('error',fin);
-    try{ voice.src=DIR+file; voice.currentTime=0; const p=voice.play(); if(p&&p.catch)p.catch(()=>{}); }
+    try{ voice.src=DIR+file+VER; voice.currentTime=0; const p=voice.play(); if(p&&p.catch)p.catch(()=>{}); }
     catch(e){ fin(); return; }
     setTimeout(fin,9000);
   });
@@ -71,7 +72,7 @@ function playClip(file){
     video.addEventListener('ended',finish);
     video.addEventListener('error',finish);
     video.addEventListener('canplay',tryPlay);
-    video.src=DIR+file;
+    video.src=DIR+file+VER;
     if(video.readyState>=3) tryPlay();
     setTimeout(finish,20000); // güvenlik backstop (klipler ≤8sn)
   });
@@ -124,7 +125,7 @@ async function choose(isCorrect,btn){
   qOpts.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
   if(isCorrect){
     btn.classList.add('correct'); correctCount++;
-    qFeedback.textContent='أَحْسَنْتَ'; qFeedback.className='feedback show ok';
+    qFeedback.textContent='أَحْسَنْتَ.'; qFeedback.className='feedback show ok';
   } else {
     btn.classList.add('wrong');
     qOpts.querySelectorAll('.opt-btn').forEach(b=>{ if(b.textContent===q.options[q.correct]) b.classList.add('correct'); });
@@ -144,10 +145,10 @@ function finish(){
   const n=ACT.questions.length;
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
-  endMsg.textContent= pct===1?'مُمْتاز! ما شاءَ اللَّه'
-    : pct>=.75?'جَيِّد جِدًّا'
-    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى'
-    : 'تَدَرَّبْ ثُمَّ أَعِدْ';
+  endMsg.textContent= pct===1?'مُمْتاز، ما شاءَ اللَّه.'
+    : pct>=.75?'جَيِّد جِدًّا.'
+    : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى.'
+    : 'تَدَرَّبْ ثُمَّ أَعِدْ.';
   endScreen.classList.add('show');
 }
 
