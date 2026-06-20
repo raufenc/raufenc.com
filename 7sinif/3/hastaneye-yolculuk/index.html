@@ -74,7 +74,7 @@ body.mode-2 .scores2{display:flex}
 /* overlays */
 .overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;gap:clamp(14px,2vh,26px);padding:24px;
-  background:radial-gradient(900px 500px at 50% 30%,rgba(255,247,243,.97),rgba(255,237,244,.97));color:var(--ink);transition:.35s;z-index:6}
+  background:radial-gradient(900px 500px at 50% 30%,rgba(255,247,243,.97),rgba(255,237,244,.97));color:var(--ink);transition:.35s;z-index:6;opacity:1;visibility:visible}
 .overlay.hide{opacity:0;visibility:hidden}
 .ov-title{font-size:clamp(34px,5.5vw,86px);font-weight:700;color:var(--bordo);line-height:1.1}
 .ov-sub{font-size:clamp(20px,2.4vw,38px);color:var(--ink);max-width:24ch;line-height:1.45}
@@ -160,7 +160,7 @@ body.mode-2 #panel2p{display:flex}
     <div id="introCap"></div>
     <div id="fb"></div>
 
-    <div class="overlay" id="startScreen">
+    <div class="overlay hide" id="startScreen">
       <div class="ov-title">هَيَّا نُساعِدْ أَحْمَد!</div>
       <div class="ov-sub">أَحْمَد يَذْهَبُ إِلى المُسْتَشْفى.<br>ساعِدْهُ في الوُصول إِلى المُسْتَشْفى.</div>
       <div class="mode-row">
@@ -296,19 +296,24 @@ function playIntro(){
     sitEl.classList.remove('show');
     cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
     vid.src=DIR+INTRO_CLIP+VER; vid.load();
-    var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+    var p=vid.play(); if(p&&p.catch)p.catch(function(){ fin(); }); // autoplay engellenirse mod seçimine geç
     setTimeout(fin,12000);
   });
 }
 
-/* ===== başlat ===== */
-async function startMode(m){
+/* açılışta: intro videosu kendiliğinden oynar → bitince mod seçimi gelir */
+function bootIntro(){
+  startScreen.classList.add('hide'); endScreen.classList.add('hide');
+  playIntro().then(function(){ startScreen.classList.remove('hide'); });
+}
+
+/* ===== başlat (mod seçilince, doğrudan sorulara) ===== */
+function startMode(m){
   mode=m; idx=0; score=0; triedWrong=false; s1=0; s2=0;
   document.body.className='mode-'+m;
   sc1El.textContent='٠'; sc2El.textContent='٠';
   resetDots();
   startScreen.classList.add('hide'); endScreen.classList.add('hide');
-  await playIntro();
   runStep();
 }
 
@@ -421,6 +426,7 @@ function finish(){
 replayBtn.addEventListener('click',function(){ endScreen.classList.add('hide'); startScreen.classList.remove('hide'); });
 
 buildDots();
+bootIntro();   // açılışta intro videosu oynar, sonra mod seçimi
 })();
 </script>
 </body>
