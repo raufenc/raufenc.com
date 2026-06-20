@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#FFF7F3">
+<title>إِلى المُسْتَشْفى</title>
+<!-- İHO 7. Sınıf Arapça — Ünite 3 · Etkileşimli yolculuk.
+     "ماذا يَفْعَلُ الآن؟" → çocuk doğru seçeneği seçer → o adımın videosu oynar → sonraki adım.
+     İki mod: tek oyuncu (alıştırma) + iki oyuncu (yarış, aynı yolculuk, hızlı doğru kazanır).
+     İçerik (kalıp/kelime/hareke) 3. üniteden. Akıllı tahta öncelikli, scrollsuz. Klip yolları göreli → SCORM'a hazır. -->
+<style>
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{
+  --bg:#FFF7F3; --ink:#2A1A20; --muted:#6E5B62;
+  --bordo:#E5176B; --blue:#0288D1; --gold:#F4A400;
+  --green:#2E9E5B; --red:#E23B3B; --card:#FFFFFF; --line:#F2D9E4;
+  --p1:#E5176B; --p2:#0288D1;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Arakom','Segoe UI',system-ui,sans-serif;
+  background:radial-gradient(1200px 700px at 50% -10%,#FFFFFF 0%,var(--bg) 60%);
+  color:var(--ink); direction:rtl;
+}
+#app{height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+
+/* ===== HUD ===== */
+#hud{flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px clamp(14px,2vw,28px)}
+.back-btn{text-decoration:none;color:var(--bordo);font-size:clamp(22px,2vw,30px);font-weight:700;
+  width:clamp(40px,4vw,52px);height:clamp(40px,4vw,52px);display:grid;place-items:center;
+  background:var(--card);border:2px solid var(--line);border-radius:14px;box-shadow:0 3px 10px rgba(229,23,107,.12)}
+.dots{display:flex;gap:clamp(7px,.8vw,12px);flex:1;justify-content:center}
+.dot{width:clamp(12px,1.2vw,18px);height:clamp(12px,1.2vw,18px);border-radius:50%;background:#EAD3DD;transition:.25s;border:2px solid transparent}
+.dot.active{background:var(--gold);transform:scale(1.18);box-shadow:0 0 0 4px rgba(244,164,0,.18)}
+.dot.ok{background:var(--green)} .dot.bad{background:var(--red)}
+.counter{font-weight:700;font-size:clamp(18px,1.8vw,26px);color:var(--muted);
+  background:var(--card);border:2px solid var(--line);border-radius:14px;padding:4px clamp(10px,1.2vw,16px);min-width:84px;text-align:center}
+.scores2{display:none;gap:10px;align-items:center}
+body.mode-2 .counter{display:none}
+body.mode-2 .scores2{display:flex}
+.pchip{display:flex;align-items:center;gap:8px;font-weight:700;color:#fff;border-radius:14px;
+  padding:5px clamp(10px,1.2vw,16px);font-size:clamp(16px,1.6vw,24px)}
+.pchip.p1{background:linear-gradient(135deg,var(--p1),#ff5fa0)}
+.pchip.p2{background:linear-gradient(135deg,var(--p2),#46c0f5)}
+.pchip b{font-size:clamp(20px,2vw,30px);min-width:1.3em;text-align:center}
+
+/* ===== STAGE ===== */
+#stage{position:relative;flex:1 1 auto;min-height:0;margin:0 clamp(10px,2vw,28px);
+  border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0d1b2a,#16324a);
+  box-shadow:0 14px 40px rgba(20,30,50,.28),inset 0 0 0 4px rgba(255,255,255,.06)}
+#vid{width:100%;height:100%;object-fit:contain;display:block;background:#0d1b2a}
+#sit{position:absolute;top:14px;left:50%;transform:translateX(-50%);max-width:92%;padding:9px clamp(16px,2vw,26px);
+  background:rgba(13,27,42,.78);color:#fff;border-radius:999px;font-size:clamp(18px,2vw,30px);font-weight:700;
+  white-space:nowrap;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;transition:.3s}
+#sit.show{opacity:1}
+#fb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.6);padding:14px clamp(26px,3vw,46px);
+  border-radius:18px;font-size:clamp(30px,4vw,64px);font-weight:700;color:#fff;opacity:0;pointer-events:none;
+  transition:.25s;box-shadow:0 10px 30px rgba(0,0,0,.35);z-index:4}
+#fb.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#fb.ok{background:var(--green)} #fb.bad{background:var(--red)}
+#fb.p1{background:linear-gradient(135deg,var(--p1),#ff5fa0)} #fb.p2{background:linear-gradient(135deg,var(--p2),#46c0f5)}
+
+/* intro alt-yazı (başlangıç videosu üstünde "hadi Kerim'e yardım edelim") */
+#introCap{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);max-width:92%;
+  padding:12px clamp(20px,2.6vw,38px);background:rgba(229,23,107,.92);color:#fff;border-radius:18px;
+  font-size:clamp(24px,3vw,54px);font-weight:700;text-align:center;white-space:nowrap;
+  opacity:0;transition:.4s;box-shadow:0 8px 24px rgba(0,0,0,.32);z-index:4}
+#introCap.show{opacity:1}
+@media (max-width:760px){ #introCap{white-space:normal} }
+
+/* overlays */
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:clamp(14px,2vh,26px);padding:24px;
+  background:radial-gradient(900px 500px at 50% 30%,rgba(255,247,243,.97),rgba(255,237,244,.97));color:var(--ink);transition:.35s;z-index:6}
+.overlay.hide{opacity:0;visibility:hidden}
+.ov-title{font-size:clamp(34px,5.5vw,86px);font-weight:700;color:var(--bordo);line-height:1.1}
+.ov-sub{font-size:clamp(20px,2.4vw,38px);color:var(--ink);max-width:24ch;line-height:1.45}
+.ov-score{font-size:clamp(40px,6.5vw,96px);font-weight:700;color:var(--blue)}
+.ov-msg{font-size:clamp(22px,2.6vw,40px);color:var(--muted)}
+.mode-row{display:flex;gap:clamp(14px,2vw,28px);flex-wrap:wrap;justify-content:center}
+.two-scores{display:flex;gap:clamp(20px,4vw,60px);align-items:center;justify-content:center}
+.ts{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ts .lbl{font-size:clamp(18px,2vw,30px);font-weight:700}
+.ts .num{font-size:clamp(40px,6vw,90px);font-weight:700}
+.ts.p1 .lbl,.ts.p1 .num{color:var(--p1)} .ts.p2 .lbl,.ts.p2 .num{color:var(--p2)}
+.big-btn{font-family:inherit;cursor:pointer;border:none;color:#fff;font-weight:700;
+  font-size:clamp(22px,2.6vw,42px);padding:clamp(12px,1.6vh,20px) clamp(26px,3.4vw,56px);border-radius:999px;
+  background:linear-gradient(135deg,var(--bordo),#ff5fa0);box-shadow:0 10px 26px rgba(229,23,107,.4);transition:transform .15s,box-shadow .15s}
+.big-btn:hover{transform:translateY(-2px) scale(1.03)} .big-btn:active{transform:translateY(1px) scale(.99)}
+.big-btn.blue{background:linear-gradient(135deg,var(--blue),#46c0f5);box-shadow:0 10px 26px rgba(2,136,209,.4)}
+
+/* ===== bottom panel ===== */
+#panel{flex:0 0 auto;padding:clamp(8px,1.4vh,16px) clamp(12px,2vw,28px) clamp(10px,1.6vh,18px)}
+#prompt{text-align:center;font-size:clamp(24px,3vw,50px);font-weight:700;color:var(--ink);margin-bottom:clamp(8px,1.2vh,14px);min-height:1.2em}
+
+/* 1P options */
+.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,16px);max-width:1700px;margin:0 auto}
+body.mode-2 #opts1p{display:none}
+.opt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
+  font-size:clamp(20px,2.1vw,38px);font-weight:700;line-height:1.25;padding:clamp(12px,1.8vh,24px) clamp(8px,1vw,18px);
+  border-radius:18px;box-shadow:0 5px 16px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(54px,9vh,108px)}
+.opt:hover:not(:disabled){transform:translateY(-3px);border-color:var(--blue)}
+.opt:disabled{cursor:default}
+.opt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
+.opt.wrong{background:#fdeaea;border-color:var(--red);color:#a32626;animation:shake .4s}
+.opt.dim{opacity:.4}
+
+/* 2P panels */
+#panel2p{display:none;gap:clamp(8px,1.4vw,20px);align-items:stretch}
+body.mode-2 #panel2p{display:flex}
+.pcol{flex:1;min-width:0;border-radius:18px;padding:clamp(6px,1vh,12px);border:3px solid transparent}
+.pcol.p1{background:rgba(229,23,107,.06);border-color:rgba(229,23,107,.25)}
+.pcol.p2{background:rgba(2,136,209,.06);border-color:rgba(2,136,209,.25)}
+.pcol-head{text-align:center;font-weight:700;font-size:clamp(15px,1.5vw,22px);margin-bottom:6px}
+.pcol.p1 .pcol-head{color:var(--p1)} .pcol.p2 .pcol-head{color:var(--p2)}
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(6px,.8vw,12px)}
+.popt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
+  font-size:clamp(15px,1.55vw,30px);font-weight:700;line-height:1.2;padding:clamp(8px,1.3vh,18px) clamp(4px,.6vw,12px);
+  border-radius:14px;box-shadow:0 4px 12px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(46px,7.5vh,92px)}
+.popt:hover:not(:disabled){transform:translateY(-2px)}
+.popt:disabled{cursor:default}
+.popt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
+.popt.wrong{background:#fdeaea;border-color:var(--red);color:#a32626;animation:shake .4s}
+.popt.dim{opacity:.4}
+.pcol.locked{opacity:.55;filter:grayscale(.3)}
+
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
+.confetti{position:absolute;top:-12px;width:11px;height:16px;border-radius:2px;opacity:.9;z-index:7;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(680deg);opacity:.85}}
+
+@media (max-aspect-ratio:1/1),(max-width:760px){
+  .opts{grid-template-columns:repeat(2,1fr)}
+  #sit{white-space:normal}
+}
+</style>
+</head>
+<body class="mode-1">
+<div id="app">
+
+  <div id="hud">
+    <a class="back-btn" href="/7sinif/3/" aria-label="رُجوع">→</a>
+    <div class="dots" id="dots"></div>
+    <div class="counter"><span id="cur">١</span> / <span id="tot">٦</span></div>
+    <div class="scores2">
+      <div class="pchip p2"><span>اللّاعِب ٢</span><b id="sc2">٠</b></div>
+      <div class="pchip p1"><span>اللّاعِب ١</span><b id="sc1">٠</b></div>
+    </div>
+  </div>
+
+  <div id="stage">
+    <video id="vid" preload="auto" muted playsinline></video>
+    <div id="sit"></div>
+    <div id="introCap"></div>
+    <div id="fb"></div>
+
+    <div class="overlay" id="startScreen">
+      <div class="ov-title">هَيَّا نُساعِدْ أَحْمَد!</div>
+      <div class="ov-sub">أَحْمَد يَذْهَبُ إِلى المُسْتَشْفى.<br>ساعِدْهُ في الوُصول إِلى المُسْتَشْفى.</div>
+      <div class="mode-row">
+        <button class="big-btn" data-mode="1">لاعِب واحِد ▶</button>
+        <button class="big-btn blue" data-mode="2">لاعِبانِ ⚔</button>
+      </div>
+    </div>
+
+    <div class="overlay hide" id="endScreen">
+      <div class="ov-title" id="endTitle"></div>
+      <div class="ov-score" id="endScore"></div>
+      <div class="two-scores" id="endTwo" style="display:none">
+        <div class="ts p1"><span class="lbl">اللّاعِب ١</span><span class="num" id="endN1">٠</span></div>
+        <div class="ts p2"><span class="lbl">اللّاعِب ٢</span><span class="num" id="endN2">٠</span></div>
+      </div>
+      <div class="ov-msg" id="endMsg"></div>
+      <button class="big-btn blue" id="replayBtn">مَرَّةً أُخْرى ↻</button>
+    </div>
+  </div>
+
+  <div id="panel">
+    <div id="prompt"></div>
+    <!-- tek oyuncu -->
+    <div class="opts" id="opts1p"></div>
+    <!-- iki oyuncu -->
+    <div id="panel2p">
+      <div class="pcol p2"><div class="pcol-head">اللّاعِب ٢</div><div class="pgrid" id="grid2"></div></div>
+      <div class="pcol p1"><div class="pcol-head">اللّاعِب ١</div><div class="pgrid" id="grid1"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ===== İÇERİK — Ünite 3 kalıp/kelime/hareke ===== */
+/* Tüm kalıp/kelime 3. ünite ders kitabından (imperatif yön tarifi);
+   hareke 11 kurala göre normalize. "Bekle" kitapta yok → قِفْ عِنْد المَوْقِف (kitap kelimeleri). */
+var STEPS=[
+  { sit:"في الطَّريق إِلى المُسْتَشْفى", prompt:"ماذا أَفْعَلُ الآن؟", clip:"01-yamshi.mp4",
+    correct:"اِمْشِ إِلى الأَمام قَليلًا",
+    distractors:["اُعْبُر الطَّريق","اِرْكَب الحافِلَة مِن المَوْقِف","اِنْزِلْ أَمام المُسْتَشْفى"] },
+
+  { sit:"عِنْد الطَّريق", prompt:"ماذا أَفْعَلُ الآن؟", clip:"02-yaubur.mp4",
+    correct:"اُعْبُر الطَّريق",
+    distractors:["اِمْشِ إِلى الأَمام قَليلًا","قِفْ عِنْد المَوْقِف","اِرْكَب الحافِلَة مِن المَوْقِف"] },
+
+  { sit:"في المَوْقِف", prompt:"ماذا أَفْعَلُ الآن؟", clip:"03-yaqif.mp4",
+    correct:"قِفْ عِنْد المَوْقِف",
+    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","اُعْبُر الطَّريق","اِنْزِلْ أَمام المُسْتَشْفى"] },
+
+  { sit:"الحافِلَة في المَوْقِف", prompt:"ماذا أَفْعَلُ الآن؟", clip:"04-yarkab.mp4",
+    correct:"اِرْكَب الحافِلَة مِن المَوْقِف",
+    distractors:["اِنْزِلْ أَمام المُسْتَشْفى","قِفْ عِنْد المَوْقِف","اُعْبُر الطَّريق"] },
+
+  { sit:"هُوَ في الحافِلَة", prompt:"ماذا أَفْعَلُ الآن؟", clip:"05-yanzil.mp4",
+    correct:"اِنْزِلْ أَمام المُسْتَشْفى",
+    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","قِفْ عِنْد المَوْقِف","اِمْشِ إِلى الأَمام قَليلًا"] },
+
+  { sit:"", prompt:"أَيْن المُسْتَشْفى؟", clip:"06-yamin.mp4",
+    correct:"عَلى اليَمين",
+    distractors:["عَلى اليَسار","أَمام المَوْقِف","خَلْف المَسْجِد"] }
+];
+
+var DIR="clips/", VER="?v=20260620b";
+var INTRO_CLIP="00-intro.mp4";   // başlangıç videosu (boş bırakılırsa atlanır)
+var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+var toAr=function(n){return String(n).split('').map(function(c){return AR[+c]!=null?AR[+c]:c;}).join('');};
+var $=function(s){return document.querySelector(s);};
+
+var vid=$('#vid'), sitEl=$('#sit'), fbEl=$('#fb'), promptEl=$('#prompt'),
+    opts1p=$('#opts1p'), grid1=$('#grid1'), grid2=$('#grid2'),
+    dotsEl=$('#dots'), curEl=$('#cur'), totEl=$('#tot'), sc1El=$('#sc1'), sc2El=$('#sc2'),
+    startScreen=$('#startScreen'), endScreen=$('#endScreen'),
+    endTitle=$('#endTitle'), endScore=$('#endScore'), endTwo=$('#endTwo'), endN1=$('#endN1'), endN2=$('#endN2'),
+    endMsg=$('#endMsg'), replayBtn=$('#replayBtn'), stage=$('#stage');
+
+var mode=1, idx=0;
+var score=0, triedWrong=false;                 // tek oyuncu
+var s1=0, s2=0, stepWon=false, lockP={1:false,2:false}; // iki oyuncu
+var locked=false;
+
+function buildDots(){
+  dotsEl.innerHTML='';
+  for(var i=0;i<STEPS.length;i++){ var d=document.createElement('span'); d.className='dot'+(i===0?' active':''); dotsEl.appendChild(d); }
+  totEl.textContent=toAr(STEPS.length);
+}
+function resetDots(){ [].forEach.call(dotsEl.children,function(d,i){ d.className='dot'+(i===0?' active':''); }); }
+function setDot(i,cls){ var d=dotsEl.children[i]; if(d){ d.classList.remove('active'); d.classList.add(cls); } }
+function activeDot(i){ [].forEach.call(dotsEl.children,function(d,j){
+  if(d.classList.contains('ok')||d.classList.contains('bad')) return; d.classList.toggle('active', j===i); }); }
+
+function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function optionSet(s){ return shuffle([{t:s.correct,ok:true}].concat(s.distractors.map(function(t){return {t:t,ok:false};}))); }
+
+function loadPoster(file){
+  return new Promise(function(res){
+    var done=false, fin=function(){ if(done)return; done=true; res(); };
+    var onReady=function(){ try{vid.pause();vid.currentTime=0;}catch(e){} fin(); };
+    vid.addEventListener('loadeddata',onReady,{once:true});
+    vid.addEventListener('error',fin,{once:true});
+    vid.src=DIR+file+VER; vid.load();
+    setTimeout(fin,6000);
+  });
+}
+function playClip(){
+  return new Promise(function(res){
+    var done=false, fin=function(){ if(done)return; done=true;
+      vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); res(); };
+    vid.addEventListener('ended',fin); vid.addEventListener('error',fin);
+    try{ vid.currentTime=0; }catch(e){}
+    var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+    setTimeout(fin,15000);
+  });
+}
+function showFb(text,cls){
+  fbEl.textContent=text; fbEl.className=cls; void fbEl.offsetWidth; fbEl.classList.add('show');
+  setTimeout(function(){ fbEl.classList.remove('show'); },900);
+}
+
+/* başlangıç videosu — bittiğinde (veya dokununca) sorulara geç */
+function playIntro(){
+  return new Promise(function(res){
+    var cap=document.getElementById('introCap');
+    if(!INTRO_CLIP){ res(); return; }
+    var done=false, fin=function(){ if(done)return; done=true; cap.classList.remove('show');
+      vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); stage.removeEventListener('click',skip); res(); };
+    var skip=function(){ fin(); };
+    vid.addEventListener('ended',fin); vid.addEventListener('error',fin); stage.addEventListener('click',skip);
+    promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
+    sitEl.classList.remove('show');
+    cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
+    vid.src=DIR+INTRO_CLIP+VER; vid.load();
+    var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+    setTimeout(fin,12000);
+  });
+}
+
+/* ===== başlat ===== */
+async function startMode(m){
+  mode=m; idx=0; score=0; triedWrong=false; s1=0; s2=0;
+  document.body.className='mode-'+m;
+  sc1El.textContent='٠'; sc2El.textContent='٠';
+  resetDots();
+  startScreen.classList.add('hide'); endScreen.classList.add('hide');
+  await playIntro();
+  runStep();
+}
+
+async function runStep(){
+  if(idx>=STEPS.length){ finish(); return; }
+  locked=true; triedWrong=false; stepWon=false; lockP[1]=false; lockP[2]=false;
+  var s=STEPS[idx];
+  curEl.textContent=toAr(idx+1);
+  activeDot(idx);
+  promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
+  document.querySelector('.pcol.p1').classList.remove('locked');
+  document.querySelector('.pcol.p2').classList.remove('locked');
+  sitEl.classList.remove('show');
+  await loadPoster(s.clip);
+  if(s.sit){ sitEl.textContent=s.sit; sitEl.classList.add('show'); } else { sitEl.classList.remove('show'); }
+  promptEl.textContent=s.prompt||'';
+
+  if(mode===1){
+    optionSet(s).forEach(function(o){
+      var b=document.createElement('button'); b.className='opt'; b.type='button'; b.textContent=o.t;
+      b.onclick=function(){ choose1(o.ok,b); }; opts1p.appendChild(b);
+    });
+  } else {
+    buildPlayerGrid(grid1,1,optionSet(s));
+    buildPlayerGrid(grid2,2,optionSet(s));
+  }
+  locked=false;
+}
+
+/* ===== tek oyuncu ===== */
+async function choose1(ok,btn){
+  if(locked) return;
+  if(!ok){ triedWrong=true; btn.classList.add('wrong','dim'); btn.disabled=true; showFb('حاوِلْ مَرَّةً أُخْرى','bad'); return; }
+  locked=true;
+  [].forEach.call(opts1p.querySelectorAll('.opt'),function(b){ b.disabled=true; if(b!==btn) b.classList.add('dim'); });
+  btn.classList.remove('dim'); btn.classList.add('correct');
+  if(!triedWrong){ score++; setDot(idx,'ok'); } else { setDot(idx,'bad'); }
+  showFb('أَحْسَنْتَ','ok');
+  await afterCorrect();
+}
+
+/* ===== iki oyuncu ===== */
+function buildPlayerGrid(grid,player,opts){
+  opts.forEach(function(o){
+    var b=document.createElement('button'); b.className='popt'; b.type='button'; b.textContent=o.t;
+    b.onclick=function(){ choose2(player,o.ok,b); }; grid.appendChild(b);
+  });
+}
+async function choose2(player,ok,btn){
+  if(locked||stepWon||lockP[player]) return;
+  if(!ok){
+    btn.classList.add('wrong','dim'); btn.disabled=true;
+    lockP[player]=true;
+    var col=document.querySelector('.pcol.p'+player); col.classList.add('locked');
+    showFb('لِلّاعِب '+toAr(player)+' : حاوِلْ','p'+player);
+    setTimeout(function(){ lockP[player]=false; col.classList.remove('locked'); },1100);
+    return;
+  }
+  // ilk doğru → adımı kazanır
+  stepWon=true; locked=true;
+  [].forEach.call(document.querySelectorAll('.popt'),function(b){ b.disabled=true; });
+  btn.classList.remove('dim'); btn.classList.add('correct');
+  if(player===1){ s1++; sc1El.textContent=toAr(s1); } else { s2++; sc2El.textContent=toAr(s2); }
+  setDot(idx, 'ok');
+  showFb('اللّاعِب '+toAr(player)+' ✓','p'+player);
+  await afterCorrect();
+}
+
+async function afterCorrect(){
+  sitEl.classList.remove('show');
+  await new Promise(function(r){ setTimeout(r,650); });
+  await playClip();
+  await new Promise(function(r){ setTimeout(r,250); });
+  idx++; runStep();
+}
+
+/* ===== bitiş ===== */
+function confettiBurst(){
+  var colors=['#E5176B','#0288D1','#F4A400','#2E9E5B','#ff5fa0'];
+  for(var i=0;i<70;i++){ (function(k){
+    var c=document.createElement('div'); c.className='confetti';
+    c.style.left=(Math.random()*100)+'%'; c.style.background=colors[k%colors.length];
+    c.style.animationDuration=(2.4+Math.random()*1.8)+'s'; c.style.animationDelay=(Math.random()*0.5)+'s';
+    c.style.transform='rotate('+(Math.random()*360)+'deg)'; stage.appendChild(c);
+    setTimeout(function(){ c.remove(); },4800);
+  })(i); }
+}
+function finish(){
+  sitEl.classList.remove('show'); promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
+  if(mode===1){
+    var n=STEPS.length, pct=score/n;
+    endTwo.style.display='none'; endScore.style.display='';
+    endTitle.textContent='أَحْمَد في المُسْتَشْفى!';
+    endScore.textContent=toAr(score)+' / '+toAr(n);
+    endMsg.textContent = pct===1?'مُمْتاز، ما شاءَ اللَّه.':pct>=.75?'جَيِّد جِدًّا.':pct>=.5?'جَيِّد، حاوِلْ مَرَّةً أُخْرى.':'تَدَرَّبْ ثُمَّ أَعِدْ.';
+  } else {
+    endScore.style.display='none'; endTwo.style.display='flex';
+    endN1.textContent=toAr(s1); endN2.textContent=toAr(s2);
+    if(s1>s2){ endTitle.textContent='الفائِز: اللّاعِب ١'; endMsg.textContent='أَحْسَنْتَ، ما شاءَ اللَّه.'; }
+    else if(s2>s1){ endTitle.textContent='الفائِز: اللّاعِب ٢'; endMsg.textContent='أَحْسَنْتَ، ما شاءَ اللَّه.'; }
+    else { endTitle.textContent='تَعادُل'; endMsg.textContent='لَعِبْتُما جَيِّدًا.'; }
+  }
+  endScreen.classList.remove('hide');
+  confettiBurst();
+}
+
+[].forEach.call(document.querySelectorAll('[data-mode]'),function(b){
+  b.addEventListener('click',function(){ startMode(+b.getAttribute('data-mode')); });
+});
+replayBtn.addEventListener('click',function(){ endScreen.classList.add('hide'); startScreen.classList.remove('hide'); });
+
+buildDots();
+})();
+</script>
+</body>
+</html>
