@@ -115,6 +115,7 @@ body.mode-2 .scores2{display:flex}
   background:linear-gradient(135deg,var(--bordo),#ff5fa0);box-shadow:0 10px 26px rgba(229,23,107,.4);transition:transform .15s,box-shadow .15s}
 .big-btn:hover{transform:translateY(-2px) scale(1.03)} .big-btn:active{transform:translateY(1px) scale(.99)}
 .big-btn.blue{background:linear-gradient(135deg,var(--blue),#46c0f5);box-shadow:0 10px 26px rgba(2,136,209,.4)}
+.big-btn.gold{background:linear-gradient(135deg,#F4A400,#ffce5a);box-shadow:0 10px 26px rgba(244,164,0,.4);color:#3a2600}
 
 /* ===== bottom panel ===== */
 #panel{flex:0 0 auto;padding:clamp(6px,1.1vh,13px) clamp(12px,2vw,28px) clamp(8px,1.4vh,16px)}
@@ -122,7 +123,7 @@ body.mode-2 .scores2{display:flex}
 
 /* 1P options — 4 satır (tek sütun, ortalı) */
 .opts{display:grid;grid-template-columns:1fr;gap:clamp(7px,1vh,13px);max-width:min(960px,95%);margin:0 auto}
-body.mode-2 #opts1p{display:none}
+body.mode-2 #opts1p,body.mode-3 #opts1p{display:none}
 .opt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
   font-size:clamp(21px,2.2vw,40px);font-weight:700;line-height:1.25;padding:clamp(10px,1.6vh,22px) clamp(8px,1vw,18px);
   border-radius:18px;box-shadow:0 5px 16px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
@@ -152,6 +153,22 @@ body.mode-2 #panel2p{display:flex}
 .popt.wrong{background:#fdeaea;border-color:var(--red);color:#a32626;animation:shake .4s}
 .popt.dim{opacity:.4}
 .pcol.locked{opacity:.55;filter:grayscale(.3)}
+
+/* ===== CÜMLE KURMA MODU (dokun-sırala) ===== */
+#panelBuild{display:none;max-width:min(1000px,96%);margin:0 auto}
+body.mode-3 #panelBuild{display:block}
+.build-line{min-height:clamp(52px,9vh,92px);border:3px dashed #E3B9C8;border-radius:18px;
+  display:flex;flex-direction:row-reverse;flex-wrap:wrap;gap:clamp(6px,.8vw,12px);align-items:center;justify-content:center;
+  padding:8px clamp(10px,1.5vw,20px);margin-bottom:clamp(8px,1.4vh,16px);background:rgba(255,255,255,.55)}
+.build-line.bad{animation:shake .4s;border-color:var(--red)}
+.build-line:empty::before{content:"…";color:#CBA6B6;font-size:clamp(22px,3vw,40px)}
+.chip-pool{display:flex;flex-direction:row-reverse;flex-wrap:wrap;gap:clamp(8px,1vw,16px);align-items:center;justify-content:center}
+.chip{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
+  font-size:clamp(20px,2.2vw,40px);font-weight:700;line-height:1.2;padding:clamp(9px,1.4vh,18px) clamp(14px,1.8vw,30px);
+  border-radius:16px;box-shadow:0 5px 14px rgba(120,60,90,.12);transition:transform .12s,border-color .15s,background .15s}
+.chip:hover:not(:disabled){transform:translateY(-3px);border-color:var(--blue)}
+.chip.placed{background:linear-gradient(135deg,#fff,#fbeef3);border-color:var(--bordo);color:var(--bordo)}
+.chip:disabled{cursor:default}
 
 @keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
@@ -199,6 +216,7 @@ body.mode-2 #panel2p{display:flex}
       <div class="mode-row">
         <button class="big-btn" data-mode="1">لاعِب واحِد ▶</button>
         <button class="big-btn blue" data-mode="2">لاعِبانِ ⚔</button>
+        <button class="big-btn gold" data-mode="3">كَوِّنْ جُمْلَة ✦</button>
       </div>
     </div>
 
@@ -223,6 +241,11 @@ body.mode-2 #panel2p{display:flex}
       <div class="pcol p2"><div class="pcol-head">اللّاعِب ٢</div><div class="pgrid" id="grid2"></div></div>
       <div class="pcol p1"><div class="pcol-head">اللّاعِب ١</div><div class="pgrid" id="grid1"></div></div>
     </div>
+    <!-- cümle kurma modu: kelimeleri dokunup sıraya diz -->
+    <div id="panelBuild">
+      <div id="buildLine" class="build-line" aria-label="cümle"></div>
+      <div id="chipPool" class="chip-pool"></div>
+    </div>
   </div>
 
 </div>
@@ -237,27 +260,33 @@ body.mode-2 #panel2p{display:flex}
 var STEPS=[
   { sit:"في الطَّريق إِلى المُسْتَشْفى", prompt:"ماذا أَفْعَلُ الآن؟", clip:"01-yamshi.mp4",
     correct:"اِمْشِ إِلى الأَمام قَليلًا",
-    distractors:["اُعْبُر الطَّريق","اِرْكَب الحافِلَة مِن المَوْقِف","اِنْزِلْ أَمام المُسْتَشْفى"] },
+    distractors:["اُعْبُر الطَّريق","اِرْكَب الحافِلَة مِن المَوْقِف","اِنْزِلْ أَمام المُسْتَشْفى"],
+    chunks:["اِمْشِ","إِلى الأَمام","قَليلًا"], decoy:"الحافِلَة" },
 
   { sit:"عِنْد الطَّريق", prompt:"ماذا أَفْعَلُ الآن؟", clip:"02-yaubur.mp4",
     correct:"اُعْبُر الطَّريق",
-    distractors:["اِمْشِ إِلى الأَمام قَليلًا","قِفْ عِنْد المَوْقِف","اِرْكَب الحافِلَة مِن المَوْقِف"] },
+    distractors:["اِمْشِ إِلى الأَمام قَليلًا","قِفْ عِنْد المَوْقِف","اِرْكَب الحافِلَة مِن المَوْقِف"],
+    chunks:["اُعْبُر","الطَّريق"], decoy:"المَوْقِف" },
 
   { sit:"في المَوْقِف", prompt:"ماذا أَفْعَلُ الآن؟", clip:"03-yaqif.mp4",
     correct:"قِفْ عِنْد المَوْقِف",
-    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","اُعْبُر الطَّريق","اِنْزِلْ أَمام المُسْتَشْفى"] },
+    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","اُعْبُر الطَّريق","اِنْزِلْ أَمام المُسْتَشْفى"],
+    chunks:["قِفْ","عِنْد","المَوْقِف"], decoy:"الطَّريق" },
 
   { sit:"الحافِلَة في المَوْقِف", prompt:"ماذا أَفْعَلُ الآن؟", clip:"04-yarkab.mp4",
     correct:"اِرْكَب الحافِلَة مِن المَوْقِف",
-    distractors:["اِنْزِلْ أَمام المُسْتَشْفى","قِفْ عِنْد المَوْقِف","اُعْبُر الطَّريق"] },
+    distractors:["اِنْزِلْ أَمام المُسْتَشْفى","قِفْ عِنْد المَوْقِف","اُعْبُر الطَّريق"],
+    chunks:["اِرْكَب","الحافِلَة","مِن المَوْقِف"], decoy:"المُسْتَشْفى" },
 
   { sit:"هُوَ في الحافِلَة", prompt:"ماذا أَفْعَلُ الآن؟", clip:"05-yanzil.mp4",
     correct:"اِنْزِلْ أَمام المُسْتَشْفى",
-    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","قِفْ عِنْد المَوْقِف","اِمْشِ إِلى الأَمام قَليلًا"] },
+    distractors:["اِرْكَب الحافِلَة مِن المَوْقِف","قِفْ عِنْد المَوْقِف","اِمْشِ إِلى الأَمام قَليلًا"],
+    chunks:["اِنْزِلْ","أَمام","المُسْتَشْفى"], decoy:"المَوْقِف" },
 
   { sit:"", prompt:"أَيْن المُسْتَشْفى؟", clip:"06-yamin.mp4",
     correct:"عَلى اليَمين",
-    distractors:["عَلى اليَسار","أَمام المَوْقِف","خَلْف المَسْجِد"] }
+    distractors:["عَلى اليَسار","أَمام المَوْقِف","خَلْف المَسْجِد"],
+    chunks:["عَلى","اليَمين"], decoy:"اليَسار" }
 ];
 
 var DIR="clips/", VER="?v=20260620b";
@@ -272,7 +301,8 @@ var vid=$('#vid'), vidBg=$('#vidBg'), posterEl=$('#poster'), posterBg=$('#poster
     startScreen=$('#startScreen'), endScreen=$('#endScreen'),
     endTitle=$('#endTitle'), endScore=$('#endScore'), endTwo=$('#endTwo'), endN1=$('#endN1'), endN2=$('#endN2'),
     endMsg=$('#endMsg'), replayBtn=$('#replayBtn'), stage=$('#stage'),
-    trkNodes=$('#trkNodes'), trkFill=$('#trkFill');
+    trkNodes=$('#trkNodes'), trkFill=$('#trkFill'),
+    panelBuild=$('#panelBuild'), buildLine=$('#buildLine'), chipPool=$('#chipPool');
 
 var VDIR="ses/", VVER="?v=ses1";     // Arapça seslendirme (Gemini TTS)
 var voiceEl=new Audio();
@@ -446,6 +476,7 @@ async function runStep(){
   curEl.textContent=toAr(idx+1);
   activeDot(idx); updateProgress(idx);
   promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
+  buildLine.innerHTML=''; chipPool.innerHTML=''; buildLine.className='build-line';
   document.querySelector('.pcol.p1').classList.remove('locked');
   document.querySelector('.pcol.p2').classList.remove('locked');
   sitEl.classList.remove('show');
@@ -458,12 +489,52 @@ async function runStep(){
       var b=document.createElement('button'); b.className='opt'; b.type='button'; b.textContent=o.t;
       b.onclick=function(){ choose1(o.ok,b); }; opts1p.appendChild(b);
     });
-  } else {
+  } else if(mode===2){
     buildPlayerGrid(grid1,1,optionSet(s));
     buildPlayerGrid(grid2,2,optionSet(s));
+  } else {
+    renderBuild(s);   // cümle kurma modu
   }
   playVoice((idx===STEPS.length-1?'q-ayna':'q-amal')+'.mp3');  // soruyu seslendir
   locked=false;
+}
+
+/* ===== cümle kurma modu (dokun-sırala) ===== */
+function renderBuild(s){
+  var pool=shuffle(s.chunks.concat(s.decoy?[s.decoy]:[]));
+  pool.forEach(function(txt){
+    var c=document.createElement('button'); c.className='chip'; c.type='button'; c.textContent=txt;
+    c.onclick=function(){ toggleChip(c,s); };
+    chipPool.appendChild(c);
+  });
+}
+function toggleChip(c,s){
+  if(locked) return;
+  if(c.parentNode===chipPool){
+    if(buildLine.children.length>=s.chunks.length) return;   // satır dolu
+    buildLine.appendChild(c); c.classList.add('placed');
+    if(buildLine.children.length===s.chunks.length) checkBuild(s);
+  } else {
+    chipPool.appendChild(c); c.classList.remove('placed');
+  }
+}
+async function checkBuild(s){
+  var got=[].map.call(buildLine.children,function(c){return c.textContent;}).join(' ');
+  if(got===s.correct){
+    locked=true;
+    [].forEach.call(buildLine.children,function(c){ c.disabled=true; });
+    [].forEach.call(chipPool.children,function(c){ c.disabled=true; });
+    if(!triedWrong){ score++; setDot(idx,'ok'); } else { setDot(idx,'bad'); }
+    sfx('ok');
+    await afterCorrect();
+  } else {
+    triedWrong=true; sfx('no');
+    buildLine.classList.add('bad'); showFb('حاوِلْ مَرَّةً أُخْرى','bad');
+    setTimeout(function(){
+      buildLine.classList.remove('bad');
+      [].slice.call(buildLine.children).forEach(function(c){ chipPool.appendChild(c); c.classList.remove('placed'); });
+    },750);
+  }
 }
 
 /* ===== tek oyuncu ===== */
@@ -474,7 +545,7 @@ async function choose1(ok,btn){
   [].forEach.call(opts1p.querySelectorAll('.opt'),function(b){ b.disabled=true; if(b!==btn) b.classList.add('dim'); });
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(!triedWrong){ score++; setDot(idx,'ok'); } else { setDot(idx,'bad'); }
-  sfx('ok'); confettiBurst(18);   // ekran-üstü "أحسنت" yazısı kaldırıldı (ses + konfeti yeterli)
+  sfx('ok');   // doğru: ses + yeşil işaret + klibin oynaması (konfeti kaldırıldı)
   await afterCorrect();
 }
 
@@ -501,7 +572,7 @@ async function choose2(player,ok,btn){
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(player===1){ s1++; sc1El.textContent=toAr(s1); } else { s2++; sc2El.textContent=toAr(s2); }
   setDot(idx, 'ok');
-  sfx('ok'); confettiBurst(18);   // ekran-üstü kazanan yazısı kaldırıldı (skor + konfeti yeterli)
+  sfx('ok');   // konfeti kaldırıldı
   await afterCorrect();
 }
 
@@ -543,7 +614,6 @@ function finish(){
     else { endTitle.textContent='تَعادُل'; endMsg.textContent='لَعِبْتُما جَيِّدًا.'; }
   }
   endScreen.classList.remove('hide');
-  confettiBurst();
 }
 
 [].forEach.call(document.querySelectorAll('[data-mode]'),function(b){
