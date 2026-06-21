@@ -69,6 +69,9 @@ body.mode-2 .scores2{display:flex}
 #vidBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   filter:blur(28px) brightness(.62) saturate(1.2);transform:scale(1.15);z-index:0;pointer-events:none}
 #vid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:1}
+/* SİNEMA MODU — intro/klip oynarken video TÜM EKRANI kaplar, soru anında küçülüp yerine döner (video-oyun hissi) */
+#stage.cinema{position:fixed;inset:0;margin:0;border-radius:0;z-index:95;background:#000;box-shadow:none;animation:cinemaIn .32s ease}
+@keyframes cinemaIn{from{opacity:.45;clip-path:inset(6% round 22px)}to{opacity:1;clip-path:inset(0 round 0)}}
 #sit{position:absolute;top:14px;left:50%;transform:translateX(-50%);max-width:92%;padding:9px clamp(16px,2vw,26px);
   background:rgba(13,27,42,.78);color:#fff;border-radius:999px;font-size:clamp(18px,2vw,30px);font-weight:700;
   white-space:nowrap;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;transition:.3s}
@@ -110,16 +113,16 @@ body.mode-2 .scores2{display:flex}
 .big-btn.blue{background:linear-gradient(135deg,var(--blue),#46c0f5);box-shadow:0 10px 26px rgba(2,136,209,.4)}
 
 /* ===== bottom panel ===== */
-#panel{flex:0 0 auto;padding:clamp(4px,0.8vh,9px) clamp(12px,2vw,28px) clamp(6px,1vh,11px)}
-#prompt{text-align:center;font-size:clamp(21px,2.5vw,40px);font-weight:700;color:var(--ink);margin-bottom:clamp(3px,0.6vh,8px);min-height:1.1em}
+#panel{flex:0 0 auto;padding:clamp(6px,1.1vh,13px) clamp(12px,2vw,28px) clamp(8px,1.4vh,16px)}
+#prompt{text-align:center;font-size:clamp(23px,2.8vw,46px);font-weight:700;color:var(--ink);margin-bottom:clamp(6px,1vh,12px);min-height:1.2em}
 
 /* 1P options — 4 satır (tek sütun, ortalı) */
-.opts{display:grid;grid-template-columns:1fr;gap:clamp(5px,.7vh,10px);max-width:min(940px,94%);margin:0 auto}
+.opts{display:grid;grid-template-columns:1fr;gap:clamp(7px,1vh,13px);max-width:min(960px,95%);margin:0 auto}
 body.mode-2 #opts1p{display:none}
 .opt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
-  font-size:clamp(20px,2.1vw,38px);font-weight:700;line-height:1.15;padding:clamp(4px,.7vh,9px) clamp(8px,1vw,18px);
-  border-radius:15px;box-shadow:0 5px 16px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
-  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(34px,4vh,50px)}
+  font-size:clamp(21px,2.2vw,40px);font-weight:700;line-height:1.25;padding:clamp(10px,1.6vh,22px) clamp(8px,1vw,18px);
+  border-radius:18px;box-shadow:0 5px 16px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(48px,7vh,82px)}
 .opt:hover:not(:disabled){transform:translateY(-3px);border-color:var(--blue)}
 .opt:disabled{cursor:default}
 .opt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
@@ -129,16 +132,16 @@ body.mode-2 #opts1p{display:none}
 /* 2P panels */
 #panel2p{display:none;gap:clamp(8px,1.4vw,20px);align-items:stretch}
 body.mode-2 #panel2p{display:flex}
-.pcol{flex:1;min-width:0;border-radius:16px;padding:clamp(4px,.7vh,8px);border:3px solid transparent}
+.pcol{flex:1;min-width:0;border-radius:18px;padding:clamp(6px,1vh,12px);border:3px solid transparent}
 .pcol.p1{background:rgba(229,23,107,.06);border-color:rgba(229,23,107,.25)}
 .pcol.p2{background:rgba(2,136,209,.06);border-color:rgba(2,136,209,.25)}
-.pcol-head{text-align:center;font-weight:700;font-size:clamp(14px,1.4vw,20px);margin-bottom:3px}
+.pcol-head{text-align:center;font-weight:700;font-size:clamp(15px,1.5vw,22px);margin-bottom:6px}
 .pcol.p1 .pcol-head{color:var(--p1)} .pcol.p2 .pcol-head{color:var(--p2)}
-.pgrid{display:grid;grid-template-columns:1fr;gap:clamp(4px,.6vh,8px)}
+.pgrid{display:grid;grid-template-columns:1fr;gap:clamp(5px,.8vh,11px)}
 .popt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
-  font-size:clamp(15px,1.55vw,30px);font-weight:700;line-height:1.15;padding:clamp(3px,.45vh,7px) clamp(4px,.6vw,12px);
-  border-radius:12px;box-shadow:0 4px 12px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
-  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(26px,3vh,42px)}
+  font-size:clamp(16px,1.6vw,30px);font-weight:700;line-height:1.2;padding:clamp(8px,1.3vh,16px) clamp(4px,.6vw,12px);
+  border-radius:14px;box-shadow:0 4px 12px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(42px,5.8vh,68px)}
 .popt:hover:not(:disabled){transform:translateY(-2px)}
 .popt:disabled{cursor:default}
 .popt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
@@ -327,8 +330,10 @@ function loadPoster(file){
 function playClip(){
   return new Promise(function(res){
     var done=false, fin=function(){ if(done)return; done=true;
+      stage.classList.remove('cinema');                 // sinema modundan çık → soru ekranına dön
       vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); res(); };
     vid.addEventListener('ended',fin); vid.addEventListener('error',fin);
+    stage.classList.add('cinema');                       // ← klip TAM EKRAN oynar
     try{ vid.currentTime=0; vid.muted=false; }catch(e){}  // yolculuk klipleri SESLİ (motor/kuş)
     try{ vidBg.currentTime=0; vidBg.muted=true; var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
     var p=vid.play(); if(p&&p.catch)p.catch(function(){});
@@ -366,13 +371,18 @@ function playIntro(){
     var cap=document.getElementById('introCap');
     if(!INTRO_CLIP){ res(); return; }
     var done=false, fin=function(){ if(done)return; done=true; cap.classList.remove('show');
+      stage.classList.remove('cinema');                 // intro bitince sinema modundan çık
       vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); stage.removeEventListener('click',skip); res(); };
     var skip=function(){ fin(); };
-    vid.addEventListener('ended',fin); vid.addEventListener('error',fin); stage.addEventListener('click',skip);
+    vid.addEventListener('ended',fin); vid.addEventListener('error',fin);
+    /* skip dinleyicisi GECİKMELİ — mod butonu #stage içinde olduğundan tıklama stage'e baloncuklanıp intro'yu anında atlıyordu */
+    setTimeout(function(){ stage.addEventListener('click',skip); }, 800);
     promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
     sitEl.classList.remove('show');
+    stage.classList.add('cinema');                       // ← intro TAM EKRAN
     cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
-    vid.muted=true;   // intro açılışta sessiz oto-oynar (tarayıcı sesli oto-oynatmaya izin vermez); yolculuk klipleri sesli
+    playVoice('intro.mp3');                               // ← "هيا نساعد أحمد" seslendirmesi (mod tıklamasından sonra → tarayıcı izinli)
+    vid.muted=true;   // intro videosu sessiz; seslendirme intro.mp3'ten gelir
     vid.src=DIR+INTRO_CLIP+VER; vid.load();
     try{ vidBg.src=DIR+INTRO_CLIP+VER; vidBg.muted=true; vidBg.load(); var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
     var p=vid.play(); if(p&&p.catch)p.catch(function(){ fin(); }); // autoplay engellenirse mod seçimine geç
@@ -380,10 +390,11 @@ function playIntro(){
   });
 }
 
-/* açılışta: intro videosu kendiliğinden oynar → bitince mod seçimi gelir */
+/* açılışta DOĞRUDAN mod seçimi (başlık "هَيَّا نُساعِدْ أَحْمَد!"); mod seçilince intro tam-ekran + sesle oynar.
+   (Ses, tarayıcı kuralı gereği ancak kullanıcı tıklamasından sonra çalar → intro mod seçiminden sonra.) */
 function bootIntro(){
-  startScreen.classList.add('hide'); endScreen.classList.add('hide');
-  playIntro().then(function(){ startScreen.classList.remove('hide'); });
+  endScreen.classList.add('hide');
+  startScreen.classList.remove('hide');
 }
 
 /* ===== başlat (mod seçilince, doğrudan sorulara) ===== */
@@ -393,7 +404,7 @@ function startMode(m){
   sc1El.textContent='٠'; sc2El.textContent='٠';
   resetDots();
   startScreen.classList.add('hide'); endScreen.classList.add('hide');
-  runStep();
+  playIntro().then(runStep);   // önce intro (tam ekran + "هيا نساعد أحمد" sesi), sonra sorular
 }
 
 async function runStep(){
@@ -431,7 +442,7 @@ async function choose1(ok,btn){
   [].forEach.call(opts1p.querySelectorAll('.opt'),function(b){ b.disabled=true; if(b!==btn) b.classList.add('dim'); });
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(!triedWrong){ score++; setDot(idx,'ok'); } else { setDot(idx,'bad'); }
-  sfx('ok'); confettiBurst(18); showFb('أَحْسَنْتَ','ok');
+  sfx('ok'); confettiBurst(18);   // ekran-üstü "أحسنت" yazısı kaldırıldı (ses + konfeti yeterli)
   await afterCorrect();
 }
 
@@ -458,7 +469,7 @@ async function choose2(player,ok,btn){
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(player===1){ s1++; sc1El.textContent=toAr(s1); } else { s2++; sc2El.textContent=toAr(s2); }
   setDot(idx, 'ok');
-  sfx('ok'); confettiBurst(18); showFb('اللّاعِب '+toAr(player)+' ✓','p'+player);
+  sfx('ok'); confettiBurst(18);   // ekran-üstü kazanan yazısı kaldırıldı (skor + konfeti yeterli)
   await afterCorrect();
 }
 
