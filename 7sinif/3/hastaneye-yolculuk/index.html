@@ -63,9 +63,12 @@ body.mode-2 .scores2{display:flex}
 
 /* ===== STAGE ===== */
 #stage{position:relative;flex:1 1 auto;min-height:0;margin:0 clamp(10px,2vw,28px);
-  border-radius:22px;overflow:hidden;background:linear-gradient(160deg,#0d1b2a,#16324a);
+  border-radius:22px;overflow:hidden;background:#0d1b2a;
   box-shadow:0 14px 40px rgba(20,30,50,.28),inset 0 0 0 4px rgba(255,255,255,.06)}
-#vid{width:100%;height:100%;object-fit:contain;display:block;background:#0d1b2a}
+/* bulanık ambiyans arka planı — videonun boş yanlarını doldurur (kırpmadan) */
+#vidBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:blur(28px) brightness(.62) saturate(1.2);transform:scale(1.15);z-index:0;pointer-events:none}
+#vid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;z-index:1}
 #sit{position:absolute;top:14px;left:50%;transform:translateX(-50%);max-width:92%;padding:9px clamp(16px,2vw,26px);
   background:rgba(13,27,42,.78);color:#fff;border-radius:999px;font-size:clamp(18px,2vw,30px);font-weight:700;
   white-space:nowrap;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;transition:.3s}
@@ -110,13 +113,13 @@ body.mode-2 .scores2{display:flex}
 #panel{flex:0 0 auto;padding:clamp(8px,1.4vh,16px) clamp(12px,2vw,28px) clamp(10px,1.6vh,18px)}
 #prompt{text-align:center;font-size:clamp(24px,3vw,50px);font-weight:700;color:var(--ink);margin-bottom:clamp(8px,1.2vh,14px);min-height:1.2em}
 
-/* 1P options */
-.opts{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,16px);max-width:1700px;margin:0 auto}
+/* 1P options — 4 satır (tek sütun, ortalı) */
+.opts{display:grid;grid-template-columns:1fr;gap:clamp(7px,1vh,14px);max-width:min(940px,94%);margin:0 auto}
 body.mode-2 #opts1p{display:none}
 .opt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
   font-size:clamp(20px,2.1vw,38px);font-weight:700;line-height:1.25;padding:clamp(12px,1.8vh,24px) clamp(8px,1vw,18px);
   border-radius:18px;box-shadow:0 5px 16px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
-  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(54px,9vh,108px)}
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(46px,8vh,84px)}
 .opt:hover:not(:disabled){transform:translateY(-3px);border-color:var(--blue)}
 .opt:disabled{cursor:default}
 .opt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
@@ -131,11 +134,11 @@ body.mode-2 #panel2p{display:flex}
 .pcol.p2{background:rgba(2,136,209,.06);border-color:rgba(2,136,209,.25)}
 .pcol-head{text-align:center;font-weight:700;font-size:clamp(15px,1.5vw,22px);margin-bottom:6px}
 .pcol.p1 .pcol-head{color:var(--p1)} .pcol.p2 .pcol-head{color:var(--p2)}
-.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(6px,.8vw,12px)}
+.pgrid{display:grid;grid-template-columns:1fr;gap:clamp(5px,.8vh,11px)}
 .popt{font-family:inherit;cursor:pointer;border:3px solid var(--line);background:var(--card);color:var(--ink);
   font-size:clamp(15px,1.55vw,30px);font-weight:700;line-height:1.2;padding:clamp(8px,1.3vh,18px) clamp(4px,.6vw,12px);
   border-radius:14px;box-shadow:0 4px 12px rgba(120,60,90,.1);transition:transform .12s,border-color .15s,background .15s;
-  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(46px,7.5vh,92px)}
+  display:flex;align-items:center;justify-content:center;text-align:center;min-height:clamp(40px,6.6vh,74px)}
 .popt:hover:not(:disabled){transform:translateY(-2px)}
 .popt:disabled{cursor:default}
 .popt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
@@ -150,7 +153,6 @@ body.mode-2 #panel2p{display:flex}
 @keyframes fall{to{transform:translateY(115vh) rotate(680deg);opacity:.85}}
 
 @media (max-aspect-ratio:1/1),(max-width:760px){
-  .opts{grid-template-columns:repeat(2,1fr)}
   #sit{white-space:normal}
 }
 </style>
@@ -174,6 +176,7 @@ body.mode-2 #panel2p{display:flex}
   </div></div>
 
   <div id="stage">
+    <video id="vidBg" preload="auto" muted playsinline aria-hidden="true"></video>
     <video id="vid" preload="auto" playsinline></video>
     <div id="sit"></div>
     <div id="introCap"></div>
@@ -252,7 +255,7 @@ var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 var toAr=function(n){return String(n).split('').map(function(c){return AR[+c]!=null?AR[+c]:c;}).join('');};
 var $=function(s){return document.querySelector(s);};
 
-var vid=$('#vid'), sitEl=$('#sit'), fbEl=$('#fb'), promptEl=$('#prompt'),
+var vid=$('#vid'), vidBg=$('#vidBg'), sitEl=$('#sit'), fbEl=$('#fb'), promptEl=$('#prompt'),
     opts1p=$('#opts1p'), grid1=$('#grid1'), grid2=$('#grid2'),
     dotsEl=$('#dots'), curEl=$('#cur'), totEl=$('#tot'), sc1El=$('#sc1'), sc2El=$('#sc2'),
     startScreen=$('#startScreen'), endScreen=$('#endScreen'),
@@ -317,6 +320,7 @@ function loadPoster(file){
     vid.addEventListener('loadeddata',onReady,{once:true});
     vid.addEventListener('error',fin,{once:true});
     vid.src=DIR+file+VER; vid.load();
+    try{ vidBg.src=DIR+file+VER; vidBg.muted=true; vidBg.load(); }catch(e){}
     setTimeout(fin,6000);
   });
 }
@@ -326,6 +330,7 @@ function playClip(){
       vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); res(); };
     vid.addEventListener('ended',fin); vid.addEventListener('error',fin);
     try{ vid.currentTime=0; vid.muted=false; }catch(e){}  // yolculuk klipleri SESLİ (motor/kuş)
+    try{ vidBg.currentTime=0; vidBg.muted=true; var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
     var p=vid.play(); if(p&&p.catch)p.catch(function(){});
     setTimeout(fin,15000);
   });
@@ -333,6 +338,26 @@ function playClip(){
 function showFb(text,cls){
   fbEl.textContent=text; fbEl.className=cls; void fbEl.offsetWidth; fbEl.classList.add('show');
   setTimeout(function(){ fbEl.classList.remove('show'); },900);
+}
+
+/* nazik efekt sesi (WebAudio — dış dosya yok, çalgısız UI tonu) */
+var _actx;
+function sfx(type){
+  try{
+    _actx=_actx||new (window.AudioContext||window.webkitAudioContext)();
+    if(_actx.state==='suspended'){ _actx.resume(); }
+    var t=_actx.currentTime;
+    var mk=function(freq,start,dur,vol){
+      var o=_actx.createOscillator(), g=_actx.createGain();
+      o.type='sine'; o.frequency.value=freq; o.connect(g); g.connect(_actx.destination);
+      g.gain.setValueAtTime(0.0001,t+start);
+      g.gain.exponentialRampToValueAtTime(vol,t+start+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+start+dur);
+      o.start(t+start); o.stop(t+start+dur+0.03);
+    };
+    if(type==='ok'){ mk(660,0,0.18,0.12); mk(990,0.10,0.24,0.12); }   // yükselen, neşeli
+    else { mk(320,0,0.20,0.09); mk(220,0.12,0.22,0.09); }            // yumuşak, alçalan
+  }catch(e){}
 }
 
 /* başlangıç videosu — bittiğinde (veya dokununca) sorulara geç */
@@ -349,6 +374,7 @@ function playIntro(){
     cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
     vid.muted=true;   // intro açılışta sessiz oto-oynar (tarayıcı sesli oto-oynatmaya izin vermez); yolculuk klipleri sesli
     vid.src=DIR+INTRO_CLIP+VER; vid.load();
+    try{ vidBg.src=DIR+INTRO_CLIP+VER; vidBg.muted=true; vidBg.load(); var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
     var p=vid.play(); if(p&&p.catch)p.catch(function(){ fin(); }); // autoplay engellenirse mod seçimine geç
     setTimeout(fin,12000);
   });
@@ -400,12 +426,12 @@ async function runStep(){
 /* ===== tek oyuncu ===== */
 async function choose1(ok,btn){
   if(locked) return;
-  if(!ok){ triedWrong=true; btn.classList.add('wrong','dim'); btn.disabled=true; showFb('حاوِلْ مَرَّةً أُخْرى','bad'); return; }
+  if(!ok){ triedWrong=true; btn.classList.add('wrong','dim'); btn.disabled=true; sfx('no'); showFb('حاوِلْ مَرَّةً أُخْرى','bad'); return; }
   locked=true;
   [].forEach.call(opts1p.querySelectorAll('.opt'),function(b){ b.disabled=true; if(b!==btn) b.classList.add('dim'); });
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(!triedWrong){ score++; setDot(idx,'ok'); } else { setDot(idx,'bad'); }
-  showFb('أَحْسَنْتَ','ok');
+  sfx('ok'); confettiBurst(18); showFb('أَحْسَنْتَ','ok');
   await afterCorrect();
 }
 
@@ -420,7 +446,7 @@ async function choose2(player,ok,btn){
   if(locked||stepWon||lockP[player]) return;
   if(!ok){
     btn.classList.add('wrong','dim'); btn.disabled=true;
-    lockP[player]=true;
+    lockP[player]=true; sfx('no');
     var col=document.querySelector('.pcol.p'+player); col.classList.add('locked');
     showFb('لِلّاعِب '+toAr(player)+' : حاوِلْ','p'+player);
     setTimeout(function(){ lockP[player]=false; col.classList.remove('locked'); },1100);
@@ -432,23 +458,24 @@ async function choose2(player,ok,btn){
   btn.classList.remove('dim'); btn.classList.add('correct');
   if(player===1){ s1++; sc1El.textContent=toAr(s1); } else { s2++; sc2El.textContent=toAr(s2); }
   setDot(idx, 'ok');
-  showFb('اللّاعِب '+toAr(player)+' ✓','p'+player);
+  sfx('ok'); confettiBurst(18); showFb('اللّاعِب '+toAr(player)+' ✓','p'+player);
   await afterCorrect();
 }
 
 async function afterCorrect(){
   sitEl.classList.remove('show');
-  await new Promise(function(r){ setTimeout(r,500); });
-  await playVoice('a'+(idx+1)+'.mp3');   // doğru cevabı Arapça seslendir
+  await new Promise(function(r){ setTimeout(r,150); });
+  playVoice('a'+(idx+1)+'.mp3');   // seslendirme + video AYNI ANDA (önce-konuş-sonra-video YOK)
   await playClip();
-  await new Promise(function(r){ setTimeout(r,250); });
+  await new Promise(function(r){ setTimeout(r,200); });
   idx++; runStep();
 }
 
 /* ===== bitiş ===== */
-function confettiBurst(){
+function confettiBurst(n){
+  n=n||70;
   var colors=['#E5176B','#0288D1','#F4A400','#2E9E5B','#ff5fa0'];
-  for(var i=0;i<70;i++){ (function(k){
+  for(var i=0;i<n;i++){ (function(k){
     var c=document.createElement('div'); c.className='confetti';
     c.style.left=(Math.random()*100)+'%'; c.style.background=colors[k%colors.length];
     c.style.animationDuration=(2.4+Math.random()*1.8)+'s'; c.style.animationDelay=(Math.random()*0.5)+'s';
