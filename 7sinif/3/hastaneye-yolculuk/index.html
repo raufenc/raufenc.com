@@ -151,6 +151,7 @@ body.mode-2 #panel2p{display:flex}
 .popt:disabled{cursor:default}
 .popt.correct{background:linear-gradient(135deg,#e9fbf0,#d2f5e0);border-color:var(--green);color:#1d6b3e;animation:pop .35s}
 .popt.wrong{background:#fdeaea;border-color:var(--red);color:#a32626;animation:shake .4s}
+.popt.chosen{border-color:var(--gold);background:#FFF6E0;box-shadow:0 0 0 3px rgba(244,164,0,.22)}
 .popt.dim{opacity:.4}
 .pcol.locked{opacity:.55;filter:grayscale(.3)}
 
@@ -211,8 +212,8 @@ body.mode-3 #panelBuild{display:block}
     <div id="fb"></div>
 
     <div class="overlay hide" id="startScreen">
-      <div class="ov-title">هَيَّا نُساعِدْ أَحْمَد!</div>
-      <div class="ov-sub">أَحْمَد يَذْهَبُ إِلى المُسْتَشْفى.<br>ساعِدْهُ في الوُصول إِلى المُسْتَشْفى.</div>
+      <div class="ov-title">هَيَّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!</div>
+      <div class="ov-sub">أَحْمَد يَذْهَبُ إِلى المُسْتَشْفى.</div>
       <div class="mode-row">
         <button class="big-btn" data-mode="1">لاعِب واحِد ▶</button>
         <button class="big-btn blue" data-mode="2">لاعِبانِ ⚔</button>
@@ -303,7 +304,7 @@ var vid=$('#vid'), vidBg=$('#vidBg'), posterEl=$('#poster'), posterBg=$('#poster
     trkNodes=$('#trkNodes'), trkFill=$('#trkFill'),
     panelBuild=$('#panelBuild'), buildLine=$('#buildLine'), chipPool=$('#chipPool');
 
-var VDIR="ses/", VVER="?v=ses2";     // Arapça seslendirme (ElevenLabs - Elena)
+var VDIR="ses/", VVER="?v=ses3";     // Arapça seslendirme (ElevenLabs - Elena); intro uzun cümle
 var voiceEl=new Audio();
 function playVoice(file){
   return new Promise(function(res){
@@ -337,7 +338,7 @@ function updateProgress(active){
 
 var mode=1, idx=0;
 var score=0, triedWrong=false;                 // tek oyuncu
-var s1=0, s2=0, stepWon=false, lockP={1:false,2:false}; // iki oyuncu
+var s1=0, s2=0, firstCorrect=null, pAns={1:null,2:null}; // iki oyuncu (her oyuncu tek hak; kazanan ilk doğru)
 var locked=false;
 
 function buildDots(){
@@ -418,6 +419,7 @@ function sfx(type){
       o.start(t+start); o.stop(t+start+dur+0.03);
     };
     if(type==='ok'){ mk(660,0,0.18,0.12); mk(990,0.10,0.24,0.12); }   // yükselen, neşeli
+    else if(type==='tap'){ mk(520,0,0.08,0.08); }                     // nötr dokunma (doğru/yanlış belli etmez)
     else { mk(320,0,0.20,0.09); mk(220,0.12,0.22,0.09); }            // yumuşak, alçalan
   }catch(e){}
 }
@@ -438,7 +440,7 @@ function playIntro(){
     sitEl.classList.remove('show');
     setMode('video');                                    // intro videosunu göster (poster gizli)
     stage.classList.add('cinema');                       // ← intro TAM EKRAN
-    cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
+    cap.textContent='هَيَّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!'; cap.classList.add('show');
     playVoice('intro.mp3');                               // ← "هيا نساعد أحمد" seslendirmesi (mod tıklamasından sonra → tarayıcı izinli)
     vid.muted=true;   // intro videosu sessiz; seslendirme intro.mp3'ten gelir
     /* video HAZIR olunca oynat (canplay) — load()+play() yarışındaki AbortError'ı önler (yoksa intro atlanıyordu) */
@@ -470,7 +472,7 @@ function startMode(m){
 
 async function runStep(){
   if(idx>=STEPS.length){ finish(); return; }
-  locked=true; triedWrong=false; stepWon=false; lockP[1]=false; lockP[2]=false;
+  locked=true; triedWrong=false; firstCorrect=null; pAns={1:null,2:null};
   var s=STEPS[idx];
   curEl.textContent=toAr(idx+1);
   activeDot(idx); updateProgress(idx);
@@ -556,22 +558,27 @@ function buildPlayerGrid(grid,player,opts){
   });
 }
 async function choose2(player,ok,btn){
-  if(locked||stepWon||lockP[player]) return;
-  if(!ok){
-    btn.classList.add('wrong','dim'); btn.disabled=true;
-    lockP[player]=true; sfx('no');
-    var col=document.querySelector('.pcol.p'+player); col.classList.add('locked');
-    showFb('لِلّاعِب '+toAr(player)+' : حاوِلْ','p'+player);
-    setTimeout(function(){ lockP[player]=false; col.classList.remove('locked'); },1100);
-    return;
-  }
-  // ilk doğru → adımı kazanır
-  stepWon=true; locked=true;
-  [].forEach.call(document.querySelectorAll('.popt'),function(b){ b.disabled=true; });
-  btn.classList.remove('dim'); btn.classList.add('correct');
-  if(player===1){ s1++; sc1El.textContent=toAr(s1); } else { s2++; sc2El.textContent=toAr(s2); }
-  setDot(idx, 'ok');
-  sfx('ok');   // konfeti kaldırıldı
+  if(locked || pAns[player]) return;                 // her oyuncu TEK kez cevaplar (ikinci hak YOK)
+  pAns[player]={btn:btn,ok:ok};
+  if(ok && firstCorrect===null) firstCorrect=player; // kazanan = ilk doğruyu işaretleyen
+  var grid=(player===1?grid1:grid2);
+  [].forEach.call(grid.querySelectorAll('.popt'),function(b){ b.disabled=true; });
+  btn.classList.add('chosen');                       // NÖTR işaret: doğru/yanlış henüz gizli (rakip kopyalamasın)
+  document.querySelector('.pcol.p'+player).classList.add('locked');  // cevap verdi → diğerini bekliyor
+  sfx('tap');
+  if(!(pAns[1] && pAns[2])) return;                  // ↑ DİĞER OYUNCUYU BEKLE (video büyümez)
+  // ↓ İKİSİ DE CEVAPLADI → doğruyu göster, kazananı belirle, SONRA video
+  locked=true;
+  document.querySelector('.pcol.p1').classList.remove('locked');
+  document.querySelector('.pcol.p2').classList.remove('locked');
+  [1,2].forEach(function(p){ var a=pAns[p]; a.btn.classList.remove('chosen'); a.btn.classList.add(a.ok?'correct':'wrong'); if(!a.ok) a.btn.classList.add('dim'); });
+  [].forEach.call(document.querySelectorAll('.popt'),function(b){ if(b.textContent===STEPS[idx].correct) b.classList.add('correct'); });  // doğru cevabı iki tarafta da göster
+  if(firstCorrect===1){ s1++; sc1El.textContent=toAr(s1); setDot(idx,'ok'); }
+  else if(firstCorrect===2){ s2++; sc2El.textContent=toAr(s2); setDot(idx,'ok'); }
+  else setDot(idx,'bad');
+  sfx(firstCorrect?'ok':'no');
+  showFb(firstCorrect? ('اللّاعِب '+toAr(firstCorrect)+' ✓') : 'الإِجابَة الصَّحيحَة', firstCorrect?('p'+firstCorrect):'bad');
+  await new Promise(function(r){ setTimeout(r,1400); });   // çocuklar doğruyu görsün, sonra video
   await afterCorrect();
 }
 
