@@ -72,6 +72,10 @@ body.mode-2 .scores2{display:flex}
 /* SİNEMA MODU — intro/klip oynarken video TÜM EKRANI kaplar, soru anında küçülüp yerine döner (video-oyun hissi) */
 #stage.cinema{position:fixed;inset:0;margin:0;border-radius:0;z-index:95;background:#000;box-shadow:none;animation:cinemaIn .32s ease}
 @keyframes cinemaIn{from{opacity:.45;clip-path:inset(6% round 22px)}to{opacity:1;clip-path:inset(0 round 0)}}
+/* soru ekranındaki donmuş kare = RESİM (anında) — videonun yükleme flaşını önler */
+#posterBg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:blur(28px) brightness(.62) saturate(1.2);transform:scale(1.15);z-index:0;pointer-events:none;display:none}
+#poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:none;z-index:1}
 #sit{position:absolute;top:14px;left:50%;transform:translateX(-50%);max-width:92%;padding:9px clamp(16px,2vw,26px);
   background:rgba(13,27,42,.78);color:#fff;border-radius:999px;font-size:clamp(18px,2vw,30px);font-weight:700;
   white-space:nowrap;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;transition:.3s}
@@ -181,6 +185,10 @@ body.mode-2 #panel2p{display:flex}
   <div id="stage">
     <video id="vidBg" preload="auto" muted playsinline aria-hidden="true"></video>
     <video id="vid" preload="auto" playsinline></video>
+    <!-- soru ekranında DONMUŞ KARE = anında yüklenen resim (video yükleme flaşı olmaz); klip arkada önden yüklenir -->
+    <img id="posterBg" alt="" aria-hidden="true">
+    <img id="poster" alt="">
+
     <div id="sit"></div>
     <div id="introCap"></div>
     <div id="fb"></div>
@@ -258,7 +266,7 @@ var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 var toAr=function(n){return String(n).split('').map(function(c){return AR[+c]!=null?AR[+c]:c;}).join('');};
 var $=function(s){return document.querySelector(s);};
 
-var vid=$('#vid'), vidBg=$('#vidBg'), sitEl=$('#sit'), fbEl=$('#fb'), promptEl=$('#prompt'),
+var vid=$('#vid'), vidBg=$('#vidBg'), posterEl=$('#poster'), posterBg=$('#posterBg'), sitEl=$('#sit'), fbEl=$('#fb'), promptEl=$('#prompt'),
     opts1p=$('#opts1p'), grid1=$('#grid1'), grid2=$('#grid2'),
     dotsEl=$('#dots'), curEl=$('#cur'), totEl=$('#tot'), sc1El=$('#sc1'), sc2El=$('#sc2'),
     startScreen=$('#startScreen'), endScreen=$('#endScreen'),
@@ -316,6 +324,23 @@ function activeDot(i){ [].forEach.call(dotsEl.children,function(d,j){
 function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
 function optionSet(s){ return shuffle([{t:s.correct,ok:true}].concat(s.distractors.map(function(t){return {t:t,ok:false};}))); }
 
+/* ===== POSTER (donmuş kare = resim) — video yükleme flaşını yok eder ===== */
+var POSTERDIR="posters/", PVER="?v=1";
+function posterFor(clip){ return POSTERDIR + clip.replace(/\.mp4$/,'.jpg') + PVER; }
+function setMode(m){           // 'poster' = anında resim | 'video' = oynar/cinema video
+  var p=(m==='poster');
+  posterEl.style.display=p?'block':'none'; posterBg.style.display=p?'block':'none';
+  vid.style.display=p?'none':'block'; vidBg.style.display=p?'none':'block';
+}
+function showPoster(s){        // soru ekranı: donmuş kareyi RESİMDEN göster (anında) + klibi ARKADA önden yükle
+  var pj=posterFor(s.clip);
+  posterEl.src=pj; posterBg.src=pj;
+  setMode('poster');
+  try{ vid.src=DIR+s.clip+VER; vid.muted=false; vid.load(); }catch(e){}   // klip önden yüklenir → cevapta anında oynar
+  try{ vidBg.src=DIR+s.clip+VER; vidBg.muted=true; vidBg.load(); }catch(e){}
+}
+function preloadPosters(){ STEPS.forEach(function(s){ var im=new Image(); im.src=posterFor(s.clip); }); }
+
 function loadPoster(file){
   return new Promise(function(res){
     var done=false, fin=function(){ if(done)return; done=true; res(); };
@@ -329,14 +354,17 @@ function loadPoster(file){
 }
 function playClip(){
   return new Promise(function(res){
-    var done=false, fin=function(){ if(done)return; done=true;
+    var done=false;
+    var playNow=function(){ if(done)return; var pp=vid.play(); if(pp&&pp.catch)pp.catch(function(){}); };
+    var fin=function(){ if(done)return; done=true;
       stage.classList.remove('cinema');                 // sinema modundan çık → soru ekranına dön
-      vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); res(); };
-    vid.addEventListener('ended',fin); vid.addEventListener('error',fin);
+      vid.removeEventListener('ended',fin); vid.removeEventListener('error',fin); vid.removeEventListener('canplay',playNow); res(); };
+    vid.addEventListener('ended',fin); vid.addEventListener('error',fin); vid.addEventListener('canplay',playNow);
+    setMode('video');                                    // ← oynar videoyu göster (donmuş resmi gizle)
     stage.classList.add('cinema');                       // ← klip TAM EKRAN oynar
     try{ vid.currentTime=0; vid.muted=false; }catch(e){}  // yolculuk klipleri SESLİ (motor/kuş)
     try{ vidBg.currentTime=0; vidBg.muted=true; var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
-    var p=vid.play(); if(p&&p.catch)p.catch(function(){});
+    playNow();   // hazırsa hemen oynat; hazır değilse (çok hızlı cevap) canplay'de → AbortError olmaz
     setTimeout(fin,15000);
   });
 }
@@ -379,13 +407,17 @@ function playIntro(){
     setTimeout(function(){ stage.addEventListener('click',skip); }, 800);
     promptEl.textContent=''; opts1p.innerHTML=''; grid1.innerHTML=''; grid2.innerHTML='';
     sitEl.classList.remove('show');
+    setMode('video');                                    // intro videosunu göster (poster gizli)
     stage.classList.add('cinema');                       // ← intro TAM EKRAN
     cap.textContent='هَيَّا نُساعِدْ أَحْمَد!'; cap.classList.add('show');
     playVoice('intro.mp3');                               // ← "هيا نساعد أحمد" seslendirmesi (mod tıklamasından sonra → tarayıcı izinli)
     vid.muted=true;   // intro videosu sessiz; seslendirme intro.mp3'ten gelir
+    /* video HAZIR olunca oynat (canplay) — load()+play() yarışındaki AbortError'ı önler (yoksa intro atlanıyordu) */
+    var playWhenReady=function(){ if(done)return; var p=vid.play(); if(p&&p.catch)p.catch(function(){}); };
+    vid.addEventListener('canplay',playWhenReady,{once:true});
     vid.src=DIR+INTRO_CLIP+VER; vid.load();
+    if(vid.readyState>=3) playWhenReady();
     try{ vidBg.src=DIR+INTRO_CLIP+VER; vidBg.muted=true; vidBg.load(); var pb=vidBg.play(); if(pb&&pb.catch)pb.catch(function(){}); }catch(e){}
-    var p=vid.play(); if(p&&p.catch)p.catch(function(){ fin(); }); // autoplay engellenirse mod seçimine geç
     setTimeout(fin,12000);
   });
 }
@@ -417,7 +449,7 @@ async function runStep(){
   document.querySelector('.pcol.p1').classList.remove('locked');
   document.querySelector('.pcol.p2').classList.remove('locked');
   sitEl.classList.remove('show');
-  await loadPoster(s.clip);
+  showPoster(s);   // anında donmuş kare (resim); klip ARKADA önden yüklenir → soruya geçişte yükleme flaşı YOK
   if(s.sit){ sitEl.textContent=s.sit; sitEl.classList.add('show'); } else { sitEl.classList.remove('show'); }
   promptEl.textContent=s.prompt||'';
 
@@ -521,7 +553,8 @@ replayBtn.addEventListener('click',function(){ endScreen.classList.add('hide'); 
 
 buildDots();
 buildTrack(); updateProgress(0);
-bootIntro();   // açılışta intro videosu oynar, sonra mod seçimi
+preloadPosters();   // poster resimlerini önden yükle → soruya geçişte yükleme flaşı olmaz
+bootIntro();   // açılışta mod seçimi; mod seçilince intro tam-ekran+sesle oynar
 })();
 </script>
 </body>
