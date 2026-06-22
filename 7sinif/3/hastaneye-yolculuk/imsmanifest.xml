@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="HASTANEYE_YOLCULUK_V1"
+          version="1.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="ORG_HASTANEYE">
+    <organization identifier="ORG_HASTANEYE">
+      <title>İHO 7. Sınıf Arapça — Hastaneye Yolculuk (Etkileşimli Video)</title>
+      <item identifier="item-hastaneye" identifierref="res-hastaneye">
+        <title>إِلى المُسْتَشْفى — Hastaneye Yolculuk</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="res-hastaneye"
+              type="webcontent"
+              adlcp:scormtype="sco"
+              href="index.html">
+      <file href="clips/00-intro.mp4"/>
+      <file href="clips/01-yamshi.mp4"/>
+      <file href="clips/02-yaubur.mp4"/>
+      <file href="clips/03-yaqif.mp4"/>
+      <file href="clips/04-yarkab.mp4"/>
+      <file href="clips/05-yanzil.mp4"/>
+      <file href="clips/06-yamin.mp4"/>
+      <file href="fonts/Arakom-Bold.ttf"/>
+      <file href="fonts/Arakom-Regular.ttf"/>
+      <file href="index.html"/>
+      <file href="js/scorm.js"/>
+      <file href="posters/01-yamshi.jpg"/>
+      <file href="posters/02-yaubur.jpg"/>
+      <file href="posters/03-yaqif.jpg"/>
+      <file href="posters/04-yarkab.jpg"/>
+      <file href="posters/05-yanzil.jpg"/>
+      <file href="posters/06-yamin.jpg"/>
+      <file href="ses/a1.mp3"/>
+      <file href="ses/a2.mp3"/>
+      <file href="ses/a3.mp3"/>
+      <file href="ses/a4.mp3"/>
+      <file href="ses/a5.mp3"/>
+      <file href="ses/a6.mp3"/>
+      <file href="ses/intro.mp3"/>
+      <file href="ses/q-amal.mp3"/>
+      <file href="ses/q-ayna.mp3"/>
+    </resource>
+  </resources>
+
+</manifest>

@@ -10,8 +10,8 @@
      İki mod: tek oyuncu (alıştırma) + iki oyuncu (yarış, aynı yolculuk, hızlı doğru kazanır).
      İçerik (kalıp/kelime/hareke) 3. üniteden. Akıllı tahta öncelikli, scrollsuz. Klip yolları göreli → SCORM'a hazır. -->
 <style>
-@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:'Arakom';src:url('/7sinif/oyunlar/Arakom-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Arakom';src:url('fonts/Arakom-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Arakom';src:url('fonts/Arakom-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
 :root{
   --bg:#FFF7F3; --ink:#2A1A20; --muted:#6E5B62;
   --bordo:#E5176B; --blue:#0288D1; --gold:#F4A400;
@@ -250,6 +250,7 @@ body.mode-3 #panelBuild{display:block}
 
 </div>
 
+<script src="js/scorm.js"></script>
 <script>
 (function(){
 'use strict';
@@ -624,6 +625,8 @@ function finish(){
     else { endTitle.textContent='تَعادُل'; endMsg.textContent='لَعِبْتُما جَيِّدًا.'; }
   }
   endScreen.classList.remove('hide');
+  /* SCORM: yolculuk tamamlandı → LMS'e bildir (LMS yoksa no-op) */
+  if(window.SCORM){ if(mode===1) SCORM.setScore(Math.round(score/STEPS.length*100),100,0); SCORM.setStatus('completed'); SCORM.commit(); }
 }
 
 [].forEach.call(document.querySelectorAll('[data-mode]'),function(b){
@@ -633,6 +636,7 @@ replayBtn.addEventListener('click',function(){ endScreen.classList.add('hide'); 
 
 buildDots();
 buildTrack(); updateProgress(0);
+if(window.SCORM && SCORM.init()){ var _bb=document.querySelector('.back-btn'); if(_bb) _bb.style.display='none'; }   // LMS'te (SCORM): geri-menü butonunu gizle
 preloadPosters();   // poster resimlerini önden yükle → soruya geçişte yükleme flaşı olmaz
 bootIntro();   // açılışta mod seçimi; mod seçilince intro tam-ekran+sesle oynar
 })();
