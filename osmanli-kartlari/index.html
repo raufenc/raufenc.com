@@ -81,6 +81,30 @@ button{font-family:inherit;cursor:pointer;border:none}
 .hero-stat .num{font-size:1.5rem;font-weight:800;color:var(--gold)}
 .hero-stat .lbl{font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
 
+/* ── SATIN AL CTA ──────────────────────────────────────────── */
+.satin-al-cta{display:flex;align-items:center;gap:16px;
+  width:min(560px,calc(100% - 32px));margin:18px auto 8px;padding:18px 22px;
+  border-radius:var(--radius);color:#1a1a14;font-family:var(--font);
+  background:linear-gradient(135deg,#b8860b,#d4a24e 45%,#f5deb3 80%,#d4a24e);
+  background-size:200% 100%;box-shadow:0 10px 30px rgba(212,162,78,.4);
+  position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s;
+  animation:satinShine 6s ease-in-out infinite}
+.satin-al-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(212,162,78,.55)}
+.satin-al-cta::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);animation:satinSweep 5s ease-in-out infinite}
+@keyframes satinShine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes satinSweep{0%,55%{left:-60%}80%,100%{left:130%}}
+.satin-al-cta .sa-icon{font-size:2.1rem;flex-shrink:0;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}
+.satin-al-cta .sa-text{display:flex;flex-direction:column;gap:3px;text-align:left;flex:1;min-width:0}
+.satin-al-cta .sa-title{font-size:1.15rem;font-weight:800;line-height:1.15;letter-spacing:.01em}
+.satin-al-cta .sa-sub{font-size:.74rem;font-weight:600;opacity:.78;line-height:1.2}
+.satin-al-cta .sa-arrow{font-size:1.6rem;font-weight:800;flex-shrink:0;
+  transition:transform .18s;position:relative}
+.satin-al-cta:hover .sa-arrow{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){
+  .satin-al-cta{animation:none}.satin-al-cta::after{animation:none;display:none}}
+
 /* Module Grid */
 .mod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding:0 16px 24px}
 .mod-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
@@ -426,6 +450,15 @@ button{font-family:inherit;cursor:pointer;border:none}
       <div class="hero-stat"><div class="num" id="home-xp">0</div><div class="lbl">XP</div></div>
     </div>
   </div>
+
+  <a class="satin-al-cta" href="https://hediyekitap.com/kitap/osmanli-padisahlari-kart-seti/" target="_blank" rel="noopener noreferrer">
+    <span class="sa-icon">🛒</span>
+    <span class="sa-text">
+      <span class="sa-title">Kart Setini Satın Al</span>
+      <span class="sa-sub">Osmanlı Padişahları fiziksel kart seti — hediyekitap.com</span>
+    </span>
+    <span class="sa-arrow">→</span>
+  </a>
 
   <div class="sec-title">Keşfet</div>
   <div class="mod-grid">
