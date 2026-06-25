@@ -290,7 +290,7 @@ var STEPS=[
     chunks:["عَلى","اليَمين"], decoy:"اليَسار" }
 ];
 
-var DIR="clips/", VER="?v=20260620b";
+var DIR="clips/", VER="?v=20260625";
 var INTRO_CLIP="00-intro.mp4";   // başlangıç videosu (boş bırakılırsa atlanır)
 var AR=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 var toAr=function(n){return String(n).split('').map(function(c){return AR[+c]!=null?AR[+c]:c;}).join('');};
@@ -356,7 +356,7 @@ function shuffle(a){ for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random(
 function optionSet(s){ return shuffle([{t:s.correct,ok:true}].concat(s.distractors.map(function(t){return {t:t,ok:false};}))); }
 
 /* ===== POSTER (donmuş kare = resim) — video yükleme flaşını yok eder ===== */
-var POSTERDIR="posters/", PVER="?v=1";
+var POSTERDIR="posters/", PVER="?v=2";
 function posterFor(clip){ return POSTERDIR + clip.replace(/\.mp4$/,'.jpg') + PVER; }
 function setMode(m){           // 'poster' = anında resim | 'video' = oynar/cinema video
   var p=(m==='poster');
