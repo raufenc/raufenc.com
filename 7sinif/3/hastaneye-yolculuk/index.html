@@ -212,11 +212,11 @@ body.mode-3 #panelBuild{display:block}
     <div id="fb"></div>
 
     <div class="overlay hide" id="startScreen">
-      <div class="ov-title">هَيَّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!</div>
+      <div class="ov-title">هَيّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!</div>
       <div class="ov-sub">أَحْمَد يَذْهَبُ إِلى المُسْتَشْفى.</div>
       <div class="mode-row">
         <button class="big-btn" data-mode="1">لاعِب واحِد ▶</button>
-        <button class="big-btn blue" data-mode="2">لاعِبانِ ⚔</button>
+        <button class="big-btn blue" data-mode="2">لاعِبان ⚔</button>
       </div>
     </div>
 
@@ -441,7 +441,7 @@ function playIntro(){
     sitEl.classList.remove('show');
     setMode('video');                                    // intro videosunu göster (poster gizli)
     stage.classList.add('cinema');                       // ← intro TAM EKRAN
-    cap.textContent='هَيَّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!'; cap.classList.add('show');
+    cap.textContent='هَيّا نُساعِدْ أَحْمَد في الوُصول إِلى المُسْتَشْفى!'; cap.classList.add('show');
     playVoice('intro.mp3');                               // ← "هيا نساعد أحمد" seslendirmesi (mod tıklamasından sonra → tarayıcı izinli)
     vid.muted=true;   // intro videosu sessiz; seslendirme intro.mp3'ten gelir
     /* video HAZIR olunca oynat (canplay) — load()+play() yarışındaki AbortError'ı önler (yoksa intro atlanıyordu) */
@@ -454,7 +454,7 @@ function playIntro(){
   });
 }
 
-/* açılışta DOĞRUDAN mod seçimi (başlık "هَيَّا نُساعِدْ أَحْمَد!"); mod seçilince intro tam-ekran + sesle oynar.
+/* açılışta DOĞRUDAN mod seçimi (başlık "هَيّا نُساعِدْ أَحْمَد!"); mod seçilince intro tam-ekran + sesle oynar.
    (Ses, tarayıcı kuralı gereği ancak kullanıcı tıklamasından sonra çalar → intro mod seçiminden sonra.) */
 function bootIntro(){
   endScreen.classList.add('hide');
