@@ -1,7 +1,32 @@
-// Vercel Edge Middleware — panel.html JWT doğrulaması
+// Vercel Edge Middleware — hassas dosya engeli + panel.html JWT dogrulamasi
 export const config = {
-  matcher: '/birlikteiyilik-v2/yonetim/panel.html',
+  matcher: '/:path*',
 };
+
+const PANEL_PATH = '/birlikteiyilik-v2/yonetim/panel.html';
+
+function notFound() {
+  return new Response('Not found', {
+    status: 404,
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'Cache-Control': 'no-store',
+      'X-Robots-Tag': 'noindex, nofollow, noarchive',
+    },
+  });
+}
+
+function isSensitivePath(pathname) {
+  let path = pathname;
+  try { path = decodeURIComponent(pathname); } catch (_) {}
+
+  if (path === '/.well-known/security.txt') return false;
+  if (/(^|\/)\.(?!well-known\/)/.test(path)) return true;
+  if (/\.(?:bak|backup|old|orig|sql|env|log|map|zip|tar|tgz|gz|rar|7z)$/i.test(path)) return true;
+  if (/(^|\/)(?:scripts|tests|\.claude)(?:\/|$)/i.test(path)) return true;
+  if (/(^|\/)(?:DENETIM_RAPORU_|.*PROMPT.*\.md$|README(?:\s+\d+)?\.md$)/i.test(path)) return true;
+  return false;
+}
 
 async function verifyJWT(token, secret) {
   try {
@@ -28,6 +53,16 @@ async function verifyJWT(token, secret) {
 }
 
 export default async function middleware(req) {
+  const { pathname } = new URL(req.url);
+
+  if (isSensitivePath(pathname)) {
+    return notFound();
+  }
+
+  if (pathname !== PANEL_PATH) {
+    return;
+  }
+
   const JWT_SECRET = process.env.BIA_JWT_SECRET || process.env.BIA_ADMIN_PASSWORD || '';
 
   // Güvenlik: secret yoksa giriş sayfasına yönlendir

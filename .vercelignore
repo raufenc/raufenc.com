@@ -1,2 +1,35 @@
+# Build/dev artifacts
 hikmetler/scripts/
 hikmetler/.build-hash.json
+scripts/
+tests/
+.claude/
+.git/
+.DS_Store
+**/.DS_Store
+
+# Secrets, backups, generated reports
+*.env
+*.env.*
+**/*.bak
+**/*.backup
+**/*.old
+**/*.orig
+**/*.log
+**/*.map
+**/*.sql
+**/*.zip
+**/*.tar
+**/*.tgz
+**/*.gz
+DENETIM_RAPORU_*.md
+.denetim-*.json
+**/*PROMPT*.md
+**/*PROMPTU*.md
+
+# Documentation is not needed in the public static deploy
+**/README*.md
+**/*.md
+
+# Local duplicate/export folders
+sinav 2/

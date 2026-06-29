@@ -16,7 +16,7 @@ function originOk(req) {
   const o = req.headers.get('origin') || '';
   const ref = req.headers.get('referer') || '';
   const host = o || ref;
-  if (!host) return true; // bazı tarayıcılar same-origin GET/POST'ta origin göndermez
+  if (!host) return false;
   if (ALLOWED.some(a => host.indexOf(a) === 0)) return true;
   if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/.test(host)) return true;
   if (/^https:\/\/[a-z0-9-]+\.vercel\.app/.test(host)) return true;
@@ -97,6 +97,8 @@ export default async function handler(req) {
   if (req.method !== 'POST') return json({ fallback: true }, 405);
   if (!originOk(req)) return json({ error: 'forbidden' }, 403);
   if (rateLimited(req)) return new Response(JSON.stringify({ error: 'rate' }), { status: 429, headers: { 'content-type': 'application/json', 'retry-after': '30' } });
+  const contentLength = Number(req.headers.get('content-length') || '0');
+  if (contentLength > 12000) return json({ error: 'payload_too_large' }, 413);
 
   let d;
   try { d = await req.json(); } catch (e) { return json({ fallback: true }, 400); }

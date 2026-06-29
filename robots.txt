@@ -2,5 +2,16 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /lib/
+Disallow: /scripts/
+Disallow: /tests/
+Disallow: /*.bak$
+Disallow: /*.backup$
+Disallow: /*.old$
+Disallow: /*.orig$
+Disallow: /*.sql$
+Disallow: /*.env$
+Disallow: /*.zip$
+Disallow: /*PROMPT*.md$
+Disallow: /DENETIM_RAPORU_*.md$
 
 Sitemap: https://raufenc.com/sitemap.xml

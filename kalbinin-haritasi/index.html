@@ -832,7 +832,7 @@ function screenResult(){
     ?`<div class="card mt-8 text-center">
        <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sıradaki Adım</p>
        <h3 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">${TESTS[S.gemini.sonraki_test.key].concepts.fazilet}</h3>
-       <p class="text-sm mb-4" style="color:var(--text-muted)">${S.gemini.sonraki_test.gerekce}</p>
+       <p class="text-sm mb-4" style="color:var(--text-muted)">${escapeHtml(S.gemini.sonraki_test.gerekce)}</p>
        <button class="btn btn-emerald" data-action="startTest" data-key="${S.gemini.sonraki_test.key}">Teste Başla</button>
      </div>`:'';
 
@@ -956,8 +956,18 @@ function screenHistory(){
 /* ═══════════════════════════════════════════════
    UTILITIES
    ═══════════════════════════════════════════════ */
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[ch]));
+}
+
 function renderGeminiText(text){
-  return text
+  return escapeHtml(text)
     .replace(/\*\*(.+?)\*\*/g,'<strong class="font-display text-lg block mt-5 mb-1" style="color:var(--gold)">$1</strong>')
     .replace(/\n/g,'<br>');
 }
@@ -1030,7 +1040,7 @@ async function fetchGemini(scores){
       if(nextCard) nextCard.innerHTML=`<div class="card mt-8 text-center">
         <p class="text-xs uppercase tracking-widest mb-2" style="color:var(--gold);opacity:0.6">Sıradaki Adım</p>
         <h3 class="font-display text-xl font-bold mb-3" style="color:var(--gold-light)">${nTest.concepts.fazilet}</h3>
-        <p class="text-sm mb-4" style="color:var(--text-muted)">${S.gemini.sonraki_test.gerekce}</p>
+        <p class="text-sm mb-4" style="color:var(--text-muted)">${escapeHtml(S.gemini.sonraki_test.gerekce)}</p>
         <button class="btn btn-emerald" data-action="startTest" data-key="${S.gemini.sonraki_test.key}">Teste Başla</button>
       </div>`;
     }

@@ -2,8 +2,30 @@
 .DS_Store
 **/.DS_Store
 
-# Büyük dosyalar
+# Büyük dosyalar ve arşivler
 *.zip
+*.tar
+*.tgz
+*.gz
+
+# Gizli/yerel dosyalar
+.env
+.env.*
+*.log
+*.bak
+*.backup
+*.old
+*.orig
+*.map
+
+# Public deploy'a girmemesi gereken çalışma çıktıları
+scripts/
+tests/
+DENETIM_RAPORU_*.md
+.denetim-*.json
+**/*PROMPT*.md
+**/*PROMPTU*.md
+sinav 2/
 
 # Muallimo resim dosyaları (CDN'de tutulur, repo'ya eklenmez)
 muallimo/WEBP_Final/

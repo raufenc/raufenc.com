@@ -13,6 +13,23 @@ const FILES = {
   programs: BASE + 'programs.json',
 };
 const IMAGES_PATH = 'birlikteiyilik-site/static/images/';
+const LOGIN_HITS = new Map();
+const WRITE_HITS = new Map();
+const MAX_JSON_BYTES = 4_000_000;
+const MAX_IMAGE_BASE64_BYTES = 3_000_000;
+
+function clientIp(req) {
+  return (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
+}
+
+function rateLimited(store, key, limit, windowMs) {
+  const now = Date.now();
+  const hits = (store.get(key) || []).filter(t => now - t < windowMs);
+  hits.push(now);
+  store.set(key, hits);
+  if (store.size > 5000) store.clear();
+  return hits.length > limit;
+}
 
 // ── JWT helpers (Web Crypto API — Edge uyumlu) ──
 async function signJWT(payload, secret) {
@@ -69,7 +86,7 @@ export default async function handler(req) {
   }
 
   // CORS: yalnızca kendi origin'lerimize izin ver
-  const allowedOrigins = ['https://raufenc.com', 'https://birlikteiyilik.com', 'https://www.birlikteiyilik.com'];
+  const allowedOrigins = ['https://raufenc.com', 'https://www.raufenc.com', 'https://birlikteiyilik.com', 'https://www.birlikteiyilik.com'];
   const reqOrigin = req.headers.get('origin') || '';
   const origin = allowedOrigins.includes(reqOrigin) ? reqOrigin : null;
 
@@ -135,11 +152,26 @@ export default async function handler(req) {
   }
 
   if (req.method === 'POST') {
-    const body = await req.json();
+    const contentLength = Number(req.headers.get('content-length') || '0');
+    if (contentLength > MAX_JSON_BYTES) {
+      return json({ error: 'Istek cok buyuk' }, 413);
+    }
+
+    let body;
+    try {
+      body = await req.json();
+    } catch (_) {
+      return json({ error: 'Gecersiz JSON' }, 400);
+    }
 
     // ── Giriş endpoint'i ──
     if (body.action === 'login') {
       const { username = 'admin', password } = body;
+      const loginKey = `${clientIp(req)}:${String(username).slice(0, 80)}`;
+      if (rateLimited(LOGIN_HITS, loginKey, 8, 10 * 60 * 1000)) {
+        return json({ error: 'Cok fazla deneme. Biraz sonra tekrar deneyin.' }, 429);
+      }
+
       let user = null;
 
       if (BIA_USERS) {
@@ -170,11 +202,17 @@ export default async function handler(req) {
     // ── Diğer tüm işlemler için auth kontrolü ──
     const auth = await checkAuth(req, body, ADMIN_PW, JWT_SECRET);
     if (!auth.valid) return json({ error: 'Yanlış şifre' }, 401);
+    if (rateLimited(WRITE_HITS, clientIp(req), 60, 60 * 1000)) {
+      return json({ error: 'Cok fazla istek' }, 429);
+    }
 
     // Görsel yükleme
     if (body.type === 'upload') {
       const { filename, content: imgBase64 } = body;
       if (!filename || !imgBase64) return json({ error: 'filename ve content gerekli' }, 400);
+      if (String(imgBase64).length > MAX_IMAGE_BASE64_BYTES) {
+        return json({ error: 'Gorsel cok buyuk' }, 413);
+      }
 
       // Server-side MIME doğrulaması (magic bytes)
       const ALLOWED_MAGIC = { '/9j/': 'jpg', 'iVBOR': 'png', 'R0lGO': 'gif', 'UklGR': 'webp' };
@@ -184,7 +222,12 @@ export default async function handler(req) {
       }
 
       // Dosya adı güvenliği: çift uzantı ve tehlikeli uzantıları engelle
-      const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_').replace(/\.(html|htm|svg|js|php)$/i, '.blocked');
+      const rawName = String(filename).split(/[\\/]/).pop().slice(0, 120);
+      const safeName = rawName
+        .replace(/^\.+/, '')
+        .replace(/[^a-zA-Z0-9._-]/g, '_')
+        .replace(/\.(html|htm|svg|js|mjs|php|json|txt)$/i, '.blocked');
+      if (!safeName || safeName === 'blocked') return json({ error: 'Gecersiz dosya adi' }, 400);
       const filePath = IMAGES_PATH + safeName;
       let existingSha = '';
       try {

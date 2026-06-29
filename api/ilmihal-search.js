@@ -1,5 +1,40 @@
 export const config = { runtime: 'edge' };
 
+const ALLOWED_ORIGINS = [
+  'https://ilmihal.org',
+  'https://www.ilmihal.org',
+  'http://localhost:8086',
+  'http://localhost:8084',
+  'http://localhost',
+];
+const HITS = new Map();
+
+function isAllowedOrigin(origin) {
+  return ALLOWED_ORIGINS.some(allowed => origin === allowed || origin.startsWith(`${allowed}/`));
+}
+
+function corsHeaders(origin) {
+  return {
+    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '600',
+    'Vary': 'Origin',
+  };
+}
+
+function rateLimited(req) {
+  const ip = (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
+  const now = Date.now();
+  const windowMs = 60000;
+  const maxHits = 12;
+  const hits = (HITS.get(ip) || []).filter(t => now - t < windowMs);
+  hits.push(now);
+  HITS.set(ip, hits);
+  if (HITS.size > 5000) HITS.clear();
+  return hits.length > maxHits;
+}
+
 const MADDE_LISTESI = `
 1/1: Muhammed aleyhisselâma uymak, se'âdete kavuşdurur [peygambere uymak, saadet, mutluluk, kurtuluş, Resule itaat, hidayet, sünnet, islam, iman, seadet, Hz Muhammed, tabi olmak] #iman
 1/2: Allahü teâlâya itâ'at için, Resûlüne itâ'at lâzımdır [itaat, Allah'a itaat, peygambere itaat, emre uymak, taat, kulluk, ibadet, Resule uymak, farz] #iman
@@ -266,21 +301,36 @@ ${MADDE_LISTESI}`;
 
 export default async function handler(req) {
   const origin = req.headers.get('origin') || '';
-  const allowedOrigins = ['https://ilmihal.org', 'https://www.ilmihal.org', 'http://localhost:8086', 'http://localhost:8084', 'http://localhost'];
-  const corsOrigin = allowedOrigins.find(o => origin.startsWith(o)) ? origin : allowedOrigins[0];
+  if (!isAllowedOrigin(origin)) {
+    return new Response(JSON.stringify({ error: 'forbidden' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+    });
+  }
 
-  const corsHeaders = {
-    'Access-Control-Allow-Origin': corsOrigin,
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  };
+  const headers = corsHeaders(origin);
 
   if (req.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers: corsHeaders });
+    return new Response(null, { status: 204, headers });
   }
 
   if (req.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405, headers: corsHeaders });
+    return new Response('Method not allowed', { status: 405, headers });
+  }
+
+  if (rateLimited(req)) {
+    return new Response(JSON.stringify({ error: 'rate_limited' }), {
+      status: 429,
+      headers: { ...headers, 'Content-Type': 'application/json', 'Retry-After': '30' }
+    });
+  }
+
+  const contentLength = Number(req.headers.get('content-length') || '0');
+  if (contentLength > 2000) {
+    return new Response(JSON.stringify({ error: 'Payload too large' }), {
+      status: 413,
+      headers: { ...headers, 'Content-Type': 'application/json' }
+    });
   }
 
   try {
@@ -288,7 +338,14 @@ export default async function handler(req) {
     if (!query || query.length < 3 || query.length > 500) {
       return new Response(JSON.stringify({ error: 'Invalid query' }), {
         status: 400,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        headers: { ...headers, 'Content-Type': 'application/json' }
+      });
+    }
+
+    if (!process.env.OPENAI_API_KEY) {
+      return new Response(JSON.stringify({ error: 'Service unavailable' }), {
+        status: 503,
+        headers: { ...headers, 'Content-Type': 'application/json' }
       });
     }
 
@@ -310,10 +367,9 @@ export default async function handler(req) {
     });
 
     if (!response.ok) {
-      const err = await response.text();
-      return new Response(JSON.stringify({ error: 'API error', detail: err }), {
+      return new Response(JSON.stringify({ error: 'API error' }), {
         status: 502,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        headers: { ...headers, 'Content-Type': 'application/json' }
       });
     }
 
@@ -329,13 +385,13 @@ export default async function handler(req) {
     }
 
     return new Response(JSON.stringify({ results, source: 'ai' }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      headers: { ...headers, 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
     });
 
   } catch (err) {
-    return new Response(JSON.stringify({ error: err.message }), {
+    return new Response(JSON.stringify({ error: 'Internal error' }), {
       status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      headers: { ...headers, 'Content-Type': 'application/json' }
     });
   }
 }
