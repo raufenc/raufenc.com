@@ -98,7 +98,17 @@ export default async function handler(req) {
     ? { ...corsBase, 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization' }
     : corsBase;
 
-  if (req.method === 'OPTIONS') return new Response(null, { headers: cors });
+  if (req.method === 'OPTIONS') {
+    if (!origin) return new Response(JSON.stringify({ error: 'forbidden' }), { status: 403, headers: corsBase });
+    return new Response(null, { status: 204, headers: cors });
+  }
+
+  if (!TOKEN) {
+    return new Response(JSON.stringify({ error: 'Sunucu yapilandirma hatasi' }), {
+      status: 503,
+      headers: cors,
+    });
+  }
 
   const gh = async (path, method = 'GET', data = null) => {
     const r = await fetch(`${GH_API}${path}`, {
