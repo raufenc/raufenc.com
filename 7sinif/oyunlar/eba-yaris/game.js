@@ -193,7 +193,7 @@ function finishSolo(){
   const n=ACT.questions.length;
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
-  endMsg.textContent= pct===1?'مُمْتاز، ما شاءَ اللَّه.'
+  endMsg.textContent= pct===1?'مُمْتاز، ما شاءَ الله.'
     : pct>=.75?'جَيِّد جِدًّا.'
     : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى.'
     : 'تَدَرَّبْ ثُمَّ أَعِدْ.';
