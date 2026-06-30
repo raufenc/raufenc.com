@@ -251,6 +251,24 @@
   @keyframes logGir{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   @keyframes donme{to{transform:rotate(360deg)}}
 
+  /* ---------- PREMIUM + 3D MASA ---------- */
+  .tahta-saran{position:relative;transition:transform .5s ease}
+  #tahta{box-shadow:0 22px 55px var(--golge), inset 0 0 0 2.5px var(--altin), inset 0 0 0 7px var(--parsomen), inset 0 0 26px rgba(110,79,23,.28)}
+  .d3 .tahta-saran{perspective:1650px;perspective-origin:50% 26%;padding:6px 0 34px}
+  .d3 #tahta{transform:rotateX(var(--egim,21deg));transform-style:preserve-3d;border-width:11px;
+    box-shadow:0 54px 70px -18px rgba(0,0,0,.62), 0 26px 36px rgba(0,0,0,.32), inset 0 0 0 2.5px var(--altin), inset 0 0 30px rgba(110,79,23,.3)}
+  .d3 .merkez,.d3 .kare{transform-style:preserve-3d}
+  .d3 .merkez-ic{transform:translateZ(16px)}
+  .d3 .sefer-mini,.d3 .deste{transform:translateZ(10px)}
+  .d3 .pawn{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(13px) translateY(-7px);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 9px 7px -2px rgba(0,0,0,.55)}
+  .d3 .pawn-hareket{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(22px) translateY(-12px) scale(1.16);
+    box-shadow:0 0 0 1.5px #fff, 0 0 14px 3px var(--altin2), 0 12px 9px -2px rgba(0,0,0,.6)}
+  .d3 .imar-bina{display:inline-block;transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(11px);filter:drop-shadow(0 7px 4px rgba(0,0,0,.45))}
+  .d3 .imar-bina.kulliye{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(16px)}
+  .d3 .kare:hover{transform:translateZ(8px)}
+  #d3-btn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin));color:#22180a;border:none}
+
   /* ---------- MOBİL ---------- */
   @media(max-width:680px){
     body::before{opacity:.03}
@@ -258,6 +276,8 @@
     #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 24px}
     .tahta-saran{display:flex; justify-content:center}
     #tahta{width:min(97vw,97vmin)}
+    .d3 #tahta{--egim:15deg}
+    .d3 .tahta-saran{perspective:1100px;padding-bottom:20px}
     .panel{max-width:100%; min-width:0; width:100%}
     #oyuncular{grid-template-columns:1fr 1fr; gap:8px}
     .ok-para{font-size:16px} #log{height:110px}
@@ -284,7 +304,7 @@
 </style>
 </head>
 <body>
-<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v8 · yükleniyor…</div>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v9 · yükleniyor…</div>
 <header>
   <div class="marka">٭ TÜRK-İSLAM MEDENİYETİ STRATEJİ OYUNU ٭</div>
   <h1>BEYLİKTEN <span class="ana">CİHANA</span></h1>
@@ -332,6 +352,7 @@
     <div class="panel-kart"><div id="oyuncular"></div></div>
     <div class="panel-kart"><div id="log"></div></div>
     <div class="panel-alt">
+      <button id="d3-btn" class="akbtn">🧊 3D</button>
       <button id="skor-btn" class="akbtn">📊 Servet</button>
       <button id="ses-btn" class="akbtn">🔊 Ses</button>
       <button id="kurallar-btn" class="akbtn">📖 Kurallar</button>
@@ -2712,6 +2733,11 @@ window.OYUN_VERISI = {
     setBg(".deste-vakca", "linear-gradient(180deg,#2f8870,#175040)", "#bfe0d2");
     setBg("#sefer-mini", "linear-gradient(180deg,#f8ecc8,#e6cf94)", "#b7950b", "0.42");
   }
+  function set3D(on) {
+    var o = document.getElementById("oyun"); if (o) o.classList.toggle("d3", !!on);
+    var b = document.getElementById("d3-btn"); if (b) { b.textContent = on ? "🧊 3D ✓" : "🗺️ Düz"; b.classList.toggle("acik", !!on); }
+    try { localStorage.setItem("bc_3d", on ? "1" : "0"); } catch (e) {}
+  }
 
   // ---------- yardımcılar ----------
   function $(s) { return document.querySelector(s); }
@@ -2780,6 +2806,8 @@ window.OYUN_VERISI = {
     Ses.init();
     $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
     tahtaKur(); desenUygula(); render();
+    var d3pref = true; try { d3pref = localStorage.getItem("bc_3d") !== "0"; } catch (e) {}
+    set3D(d3pref);
     logla("<b>Oyun başladı!</b> " + oyuncular.map(function (o) { return o.ad + (o.bot ? " 🤖" : ""); }).join(", ") + ". Hayırlı seferler!", "vurgu");
     if (aktif().bot) bekle(botTuru, 900);
   }
@@ -2804,6 +2832,8 @@ window.OYUN_VERISI = {
       Ses.init();
       $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
       tahtaKur(); desenUygula(); render();
+      var d3p = true; try { d3p = localStorage.getItem("bc_3d") !== "0"; } catch (e) {}
+      set3D(d3p);
       logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
       if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
       return true;
@@ -3581,12 +3611,13 @@ window.OYUN_VERISI = {
     $("#basla").addEventListener("click", oyunBaslat);
     $("#skor-btn").addEventListener("click", skorGoster);
     $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
+    $("#d3-btn").addEventListener("click", function () { set3D(!document.getElementById("oyun").classList.contains("d3")); });
     $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
     $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
-    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v8 ✓ hazır";
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v9 ✓ hazır · 3D";
   }
   // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
   if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
