@@ -153,7 +153,7 @@
   .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
   .kart-ogren{margin-top:12px; font-size:14.5px; background:#fff7e3; border-left:5px solid var(--altin); padding:10px 12px; border-radius:0 9px 9px 0; color:#5a4a22; line-height:1.55}
   .sefer-buyuk{text-align:center; margin:10px 0 4px}
-  .sb-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(56px,13vw,84px); line-height:1; color:#7a5b1a; text-shadow:0 2px 0 #e6cf94; display:inline-block; animation:flipNo .5s cubic-bezier(.2,1.2,.4,1)}
+  .sb-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(56px,13vw,84px); line-height:1; color:#7a5b1a; text-shadow:0 2px 0 #e6cf94; display:inline-block; animation:popIn .3s ease-out}
   .sb-alt{font-size:15px; color:#8a6f2a; letter-spacing:.06em}
   .soru-metin{font-size:18px; line-height:1.5; font-weight:700; color:#33291a; margin:8px 0 14px}
   .siklar{display:flex; flex-direction:column; gap:10px}
@@ -232,7 +232,38 @@
   @keyframes logGir{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
   @keyframes donme{to{transform:rotate(360deg)}}
 
-  @media(max-width:560px){ .panel{max-width:100%} #oyuncular{grid-template-columns:1fr 1fr} }
+  /* ---------- MOBİL ---------- */
+  @media(max-width:680px){
+    body::before{opacity:.03}
+    header{padding:10px 8px 4px} header h1{font-size:clamp(26px,8vw,38px)} header .marka{font-size:11px} header .alt{font-size:12px}
+    #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 96px}
+    .tahta-saran{display:flex; justify-content:center}
+    #tahta{width:min(97vw,97vmin)}
+    .panel{max-width:100%; min-width:0; width:100%}
+    #oyuncular{grid-template-columns:1fr 1fr; gap:8px}
+    .ok-para{font-size:16px} #log{height:110px}
+    /* aksiyon panelini ekranın altına sabitle — kontroller hep elde */
+    #oyun .panel .panel-kart:first-child{position:fixed; left:7px; right:7px; bottom:7px; z-index:30; margin:0; padding:11px 12px;
+      background:linear-gradient(180deg,rgba(16,67,57,.97),rgba(9,46,40,.99)); border:1.5px solid var(--altin);
+      box-shadow:0 -6px 22px rgba(0,0,0,.55); max-height:44vh; overflow-y:auto}
+    #sira-bilgi{font-size:16px} #aksiyon-bar{margin-top:9px; gap:8px}
+    .akbtn{font-size:15.5px; padding:13px 14px; flex:1 1 auto; min-height:46px; display:flex; align-items:center; justify-content:center}
+    .panel-alt .akbtn{min-height:42px}
+    /* kurulum */
+    #kurulum{padding:16px; margin:14px 7px}
+    #kapak{margin-bottom:12px}
+    .kur-row-ust{flex-direction:column; align-items:stretch; gap:9px}
+    .kur-row-ust label{display:flex; justify-content:space-between; align-items:center} .kur-row-ust select{flex:0 0 auto}
+    .kur-row{flex-wrap:wrap} .kur-row input[type=text]{min-width:0; flex:1 1 110px} .tip-toggle{flex:0 0 auto}
+    .btn-buyuk{font-size:18px; padding:15px}
+    /* modaller */
+    .modal-kutu{padding:15px; width:96vw} .modal-kutu.genis{width:96vw}
+    .modal-kutu h2{font-size:21px} .m-bilgi{font-size:15px} .m-gorsel{max-width:260px}
+    .takas-grid{grid-template-columns:1fr; gap:9px}
+    .m-btnlar{gap:8px} .m-btnlar .akbtn{flex:1 1 auto}
+    .zafer{height:170px} .zafer-ad{font-size:27px}
+  }
+  @media(max-width:380px){ #oyuncular{grid-template-columns:1fr} .sb-no{font-size:60px} }
 </style>
 </head>
 <body>

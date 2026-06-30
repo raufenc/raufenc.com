@@ -301,16 +301,12 @@
       else if (oz.tur === "isinla") { bigNo = "➜"; altYazi = "ışınlan"; btnLbl = "✨ Işınlan"; renk = "#5b3a8a"; }
       else if (oz.tur === "sakaci") { bigNo = "✦"; altYazi = "özel olay"; btnLbl = "✦ Uygula"; renk = "#8a5a13"; }
     }
-    modalAc('<div class="kart-ust" style="background:#7a5b1a">🏇 SEFER KARTI</div>' +
-      '<div class="flip" id="flip"><div class="flip-ic">' +
-        '<div class="flip-yuz flip-arka">' + desen(renk, "#dcbb63", "0.55") + '</div>' +
-        '<div class="flip-yuz flip-on"><div class="fn">' + bigNo + '</div><div class="fa">' + altYazi + '</div></div>' +
-      '</div></div>' +
+    modalAc('<div class="kart-ust" style="background:' + (oz ? renk : "#7a5b1a") + '">🏇 SEFER KARTI</div>' +
+      '<div class="sefer-buyuk"><div class="sb-no">' + bigNo + '</div><div class="sb-alt">' + altYazi + '</div></div>' +
       '<h2 style="text-align:center;margin:.3em 0">' + kart.baslik + '</h2>' +
       '<div class="kart-ogren">💡 ' + kart.bilgi + '</div>' +
       '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">' + btnLbl + '</button></div>');
     Ses.cek();
-    setTimeout(function () { var fl = $("#flip"); if (fl) { fl.classList.add("acik"); Ses.kart(); } }, 380);
     $("#m-ilerle").onclick = function () {
       modalKapat(); oyun.hareketYapildi = true;
       logla("🏇 " + o.ad + " — " + kart.baslik, "");
