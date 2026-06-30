@@ -236,16 +236,14 @@
   @media(max-width:680px){
     body::before{opacity:.03}
     header{padding:10px 8px 4px} header h1{font-size:clamp(26px,8vw,38px)} header .marka{font-size:11px} header .alt{font-size:12px}
-    #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 96px}
+    #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 24px}
     .tahta-saran{display:flex; justify-content:center}
     #tahta{width:min(97vw,97vmin)}
     .panel{max-width:100%; min-width:0; width:100%}
     #oyuncular{grid-template-columns:1fr 1fr; gap:8px}
     .ok-para{font-size:16px} #log{height:110px}
-    /* aksiyon panelini ekranın altına sabitle — kontroller hep elde */
-    #oyun .panel .panel-kart:first-child{position:fixed; left:7px; right:7px; bottom:7px; z-index:30; margin:0; padding:11px 12px;
-      background:linear-gradient(180deg,rgba(16,67,57,.97),rgba(9,46,40,.99)); border:1.5px solid var(--altin);
-      box-shadow:0 -6px 22px rgba(0,0,0,.55); max-height:44vh; overflow-y:auto}
+    /* aksiyon paneli tahtanın hemen altında, vurgulu (sabit DEĞİL — telefon tarayıcısıyla uyumlu) */
+    #oyun .panel .panel-kart:first-child{border:1.5px solid var(--altin); box-shadow:0 6px 20px rgba(0,0,0,.4)}
     #sira-bilgi{font-size:16px} #aksiyon-bar{margin-top:9px; gap:8px}
     .akbtn{font-size:15.5px; padding:13px 14px; flex:1 1 auto; min-height:46px; display:flex; align-items:center; justify-content:center}
     .panel-alt .akbtn{min-height:42px}
