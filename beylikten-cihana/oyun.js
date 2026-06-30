@@ -314,11 +314,11 @@
   }
 
   function serefKare(o) {
-    var bereket = 2000;
-    o.para += bereket; o.seref = (o.seref || 0) + 1;
-    logla("❖ " + o.ad + ", " + K[o.pos].ad + "'e saygıyla uğradı — bankadan <b>+" + fmt(bereket) + "</b> hizmet bereketi.", "iyi");
-    Ses.al(); render();
     var k = K[o.pos];
+    var bereket = (k.ad === "Haremeyn") ? 500 : 200;
+    o.para += bereket; o.seref = (o.seref || 0) + 1;
+    logla("❖ " + o.ad + ", " + k.ad + "'e saygıyla uğradı — bankadan <b>+" + fmt(bereket) + "</b> hizmet bereketi.", "iyi");
+    Ses.al(); render();
     modalAc(gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF · KUTSAL BELDE</div><h2>' + k.ad + '</h2>' +
       '<div class="seref-bereket">🏦 Bankadan <b>+' + fmt(bereket) + '</b> hizmet bereketi aldın</div>' +
       '<p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
