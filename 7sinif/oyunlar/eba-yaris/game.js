@@ -120,6 +120,7 @@ function shuffled(q){
 
 /* ======================= BAŞLAT ======================= */
 function start(m){
+  document.body.classList.remove('is-finished');
   mode=m; idx=0; correctCount=0;
   P=[{wins:0,correct:0},{wins:0,correct:0}];
   startScreen.classList.add('hide');
@@ -177,7 +178,7 @@ async function chooseSolo(isCorrect,btn){
   } else {
     btn.classList.add('wrong');
     qOpts.querySelectorAll('.opt-btn').forEach(b=>{ if(b.textContent===q.options[q.correct]) b.classList.add('correct'); });
-    qFeedback.textContent='الإِجابَة الصَّحيحَة'; qFeedback.className='feedback show bad';
+    qFeedback.textContent=''; qFeedback.className='feedback';
   }
   markDot(idx,isCorrect);
   const mediaDone=q.say ? playVoice(q.say)
@@ -189,7 +190,9 @@ async function chooseSolo(isCorrect,btn){
   setTimeout(runQuestion,250);
 }
 function finishSolo(){
+  document.body.classList.add('is-finished');
   qPanel.classList.remove('show');
+  qPrompt.textContent=''; qOpts.innerHTML=''; qFeedback.textContent=''; qFeedback.className='feedback';
   const n=ACT.questions.length;
   finalScore.textContent=toAr(correctCount)+' / '+toAr(n);
   const pct=correctCount/n;
@@ -269,6 +272,7 @@ async function maybeResolve2P(){
   setTimeout(runRound2P,250);
 }
 function finishDuo(){
+  document.body.classList.add('is-finished');
   duel.classList.remove('show');
   end2P1.innerHTML='<b>👤 اللّاعِب ١</b><br>⚡ '+toAr(P[0].wins)+' &nbsp; ✓ '+toAr(P[0].correct);
   end2P2.innerHTML='<b>👤 اللّاعِب ٢</b><br>⚡ '+toAr(P[1].wins)+' &nbsp; ✓ '+toAr(P[1].correct);
