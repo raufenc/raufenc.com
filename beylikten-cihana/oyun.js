@@ -932,7 +932,7 @@
     $("#m-kapat").onclick = modalKapat;
   }
 
-  window.addEventListener("DOMContentLoaded", function () {
+  function arayuzKur() {
     $("#oyuncu-sayisi").addEventListener("change", kurulumEkrani);
     $("#basla").addEventListener("click", oyunBaslat);
     $("#skor-btn").addEventListener("click", skorGoster);
@@ -942,7 +942,10 @@
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
-    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v5 ✓ hazır";
-  });
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v6 ✓ hazır";
+  }
+  // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
+  if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
+  else arayuzKur();
   window.BC = { get oyun() { return oyun; }, botTuru: function () { botTuru(); } };
 })();
