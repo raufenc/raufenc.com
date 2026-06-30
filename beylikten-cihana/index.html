@@ -4,6 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beylikten Cihana — Türk-İslam Medeniyeti Strateji Oyunu</title>
+<script>
+  // Görünür hata yakalayıcı (özellikle mobil tarayıcılarda sorunu tespit için)
+  window.addEventListener('error', function (e) {
+    try {
+      var d = document.getElementById('hata-kutu');
+      if (!d) { d = document.createElement('div'); d.id = 'hata-kutu';
+        d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#7d2b2b;color:#fff;font:12px/1.45 ui-monospace,monospace;padding:10px 12px;white-space:pre-wrap;max-height:45vh;overflow:auto;box-shadow:0 -4px 16px rgba(0,0,0,.5)';
+        (document.body || document.documentElement).appendChild(d); }
+      d.textContent = '⚠️ Bir hata oluştu (lütfen ekran görüntüsü al):\n' + (e.message || e) + '\n' + (e.filename || '') + ' satır ' + (e.lineno || '?') + ':' + (e.colno || '?');
+    } catch (x) {}
+  });
+</script>
 <style>
   :root{
     --koyu:#0c3b33; --koyu2:#082420; --altin:#c9a227; --altin2:#edc75a; --altin3:#f5e2a3;
@@ -350,7 +362,7 @@
   </div>
 </div>
 
-<script src="icerik.js"></script>
-<script src="oyun.js"></script>
+<script src="icerik.js?v=3" charset="utf-8"></script>
+<script src="oyun.js?v=3" charset="utf-8"></script>
 </body>
 </html>
