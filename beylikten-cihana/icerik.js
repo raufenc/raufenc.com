@@ -767,23 +767,6 @@ window.OYUN_VERISI = {
   },
   {
    "pos": 37,
-   "tip": "seref",
-   "ad": "Haremeyn",
-   "tarih": "Osmanlı hâkimiyeti: 1517",
-   "bilgi": "Haremeyn, İslam'ın iki kutsal şehri Mekke ve Medine'yi birlikte ifade eden terimdir. Yavuz Sultan Selim'in 1517'de Memlük Devleti'ne son vermesiyle bu kutsal toprakların korunması Osmanlı'ya geçti ve padişahlar bundan sonra 'Hâdimü'l-Haremeyni'ş-Şerifeyn' (İki Kutsal Şehrin Hizmetkârı) unvanını kullandı. Surre alayları ile her yıl bu bölgeye yardımlar gönderilir, hac yolları güvence altına alınırdı.",
-   "neden": "Haremeyn'in korunması Osmanlı padişahına İslam dünyasında manevi liderlik ve hilafet meşruiyeti kazandırmıştır.",
-   "gorsel": "img/haremeyn.webp",
-   "kural": "Kutsal belde — alınıp satılmaz, üzerine imar yapılmaz. Buraya saygıyla uğrayan, hizmet şerefi (Hâdimü'l-Harameyn) kazanır; bu şeref oyun sonu servetine katkı sağlar."
-  },
-  {
-   "pos": 38,
-   "tip": "vergi",
-   "ad": "Gümrük (Cizye)",
-   "tutar": 1000,
-   "aciklama": "Gümrük (öşür/bâc), sınırlardan ve pazarlardan geçen mallardan alınan ticaret vergisidir."
-  },
-  {
-   "pos": 39,
    "tip": "sehir",
    "ad": "İstanbul",
    "grupKey": "tac",
@@ -809,6 +792,23 @@ window.OYUN_VERISI = {
    "sahip": null,
    "imar": 0,
    "ipotekli": false
+  },
+  {
+   "pos": 38,
+   "tip": "vergi",
+   "ad": "Gümrük (Cizye)",
+   "tutar": 1000,
+   "aciklama": "Gümrük (öşür/bâc), sınırlardan ve pazarlardan geçen mallardan alınan ticaret vergisidir."
+  },
+  {
+   "pos": 39,
+   "tip": "seref",
+   "ad": "Haremeyn",
+   "tarih": "Osmanlı hâkimiyeti: 1517",
+   "bilgi": "Haremeyn, İslam'ın iki kutsal şehri Mekke ve Medine'yi birlikte ifade eden terimdir. Yavuz Sultan Selim'in 1517'de Memlük Devleti'ne son vermesiyle bu kutsal toprakların korunması Osmanlı'ya geçti ve padişahlar bundan sonra 'Hâdimü'l-Haremeyni'ş-Şerifeyn' (İki Kutsal Şehrin Hizmetkârı) unvanını kullandı. Surre alayları ile her yıl bu bölgeye yardımlar gönderilir, hac yolları güvence altına alınırdı.",
+   "neden": "Haremeyn'in korunması Osmanlı padişahına İslam dünyasında manevi liderlik ve hilafet meşruiyeti kazandırmıştır.",
+   "gorsel": "img/haremeyn.webp",
+   "kural": "Kutsal belde — alınıp satılmaz, üzerine imar yapılmaz. Buraya saygıyla uğrayan, hizmet şerefi (Hâdimü'l-Harameyn) kazanır; bu şeref oyun sonu servetine katkı sağlar."
   }
  ],
  "ferman": [

@@ -6,10 +6,10 @@
   var K = V.kareler;
 
   var RENKLER = [
-    { ad: "Yeşil Sancak", renk: "#1e8449" },
-    { ad: "Al Bayrak", renk: "#c0392b" },
-    { ad: "Mavi Tuğra", renk: "#2471a3" },
-    { ad: "Altın Hilal", renk: "#b7950b" },
+    { ad: "Yeşil Sancak", renk: "#1e8449", amblem: "🐎" },
+    { ad: "Al Bayrak", renk: "#b8332b", amblem: "🦅" },
+    { ad: "Mavi Tuğra", renk: "#2471a3", amblem: "🌙" },
+    { ad: "Altın Hilal", renk: "#b7950b", amblem: "⚔️" },
   ];
   var BINA_IKON = ["🏨", "♨️", "🏫", "🕌", "🏛️"]; // Han, Hamam, Medrese, Cami, Külliye
 
@@ -120,7 +120,7 @@
       var bot = rows[i].querySelector(".tip-toggle").dataset.bot === "1";
       oyuncular.push({
         id: i, ad: rows[i].querySelector("input").value.trim() || (bot ? "Bot " + i : "Oyuncu " + (i + 1)),
-        renk: RENKLER[i].renk, sancak: RENKLER[i].ad, bot: bot,
+        renk: RENKLER[i].renk, sancak: RENKLER[i].ad, amblem: RENKLER[i].amblem, bot: bot,
         para: V.ayarlar.baslangicPara, pos: 0, esaret: false, esaretTur: 0, esaretKarti: 0, iflas: false, mulkler: [],
       });
     }
@@ -163,7 +163,7 @@
     var ic = el("div", "kare-ic");
     if (k.tip === "sehir") ic.innerHTML = '<div class="serit" style="background:' + k.grup.renk + '"></div><div class="kare-ad">' + k.ad + '</div><div class="imar-rozet" data-imar="' + k.pos + '"></div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
     else if (k.tip === "liman") ic.innerHTML = '<div class="kare-ikon">⚓</div><div class="kare-ad">' + k.kisa + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "utility") ic.innerHTML = '<div class="kare-ikon">' + (k.ad === "Darphane" ? "🪙" : "🕌") + '</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
+    else if (k.tip === "utility") ic.innerHTML = '<div class="kare-ikon">' + (k.ad === "Darphane" ? "🪙" : "💠") + '</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
     else if (k.tip === "vergi") ic.innerHTML = '<div class="kare-ikon">💰</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat">' + k.tutar + '</div>';
     else if (k.tip === "ferman") ic.innerHTML = '<div class="kare-ikon">📜</div><div class="kare-ad">Ferman</div>';
     else if (k.tip === "vakca") ic.innerHTML = '<div class="kare-ikon">✴️</div><div class="kare-ad">Vak\'a</div>';
@@ -184,7 +184,7 @@
       var degisti = oyun._para[o.id] != null && oyun._para[o.id] !== o.para;
       var yon = degisti ? (o.para > oyun._para[o.id] ? " arti" : " eksi") : "";
       d.innerHTML =
-        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '"></span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
+        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
         '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
         '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>';
       pano.appendChild(d);
@@ -212,7 +212,7 @@
     oyun.oyuncular.forEach(function (o) {
       if (o.iflas) return;
       var layer = document.querySelector('.pawnlar[data-pawn="' + o.pos + '"]');
-      if (layer) { var pw = el("span", "pawn" + (o.bot ? " bot" : "") + (o.id === oyun.hareketEden ? " pawn-hareket" : "")); pw.style.background = o.renk; pw.title = o.ad; layer.appendChild(pw); }
+      if (layer) { var pw = el("span", "pawn" + (o.id === oyun.hareketEden ? " pawn-hareket" : ""), o.amblem || ""); pw.style.background = o.renk; pw.title = o.ad; layer.appendChild(pw); }
     });
     var sn = $("#sefer-no"); if (sn) sn.textContent = oyun.sonHareket || "?";
     butonlariGuncelle();
@@ -314,10 +314,16 @@
   }
 
   function serefKare(o) {
-    var bereket = 1500;
+    var bereket = 2000;
     o.para += bereket; o.seref = (o.seref || 0) + 1;
-    logla("❖ " + o.ad + ", " + K[o.pos].ad + "'e saygıyla uğradı — hizmet bereketi +" + fmt(bereket) + ".", "iyi");
-    Ses.al(); render(); kareBilgiModal(o.pos);
+    logla("❖ " + o.ad + ", " + K[o.pos].ad + "'e saygıyla uğradı — bankadan <b>+" + fmt(bereket) + "</b> hizmet bereketi.", "iyi");
+    Ses.al(); render();
+    var k = K[o.pos];
+    modalAc(gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF · KUTSAL BELDE</div><h2>' + k.ad + '</h2>' +
+      '<div class="seref-bereket">🏦 Bankadan <b>+' + fmt(bereket) + '</b> hizmet bereketi aldın</div>' +
+      '<p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Âmin 🤲</button></div>');
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
   }
   function esareteGonder(o) { o.pos = 10; o.esaret = true; o.esaretTur = 0; Ses.esaret(); render(); }
 
@@ -618,7 +624,7 @@
     } else if (k.tip === "liman") {
       html = '<div class="m-ikon">⚓</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Kira (liman sayısına göre): ' + k.kira.join(" / ") + '</div>';
     } else if (k.tip === "utility") {
-      html = '<div class="m-ikon">' + (k.ad === "Darphane" ? "🪙" : "🕌") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Kira = son Sefer sayısı × ' + k.carpan[0] + ' (tek) / ×' + k.carpan[1] + ' (iki tesis)</div>';
+      html = '<div class="m-ikon">' + (k.ad === "Darphane" ? "🪙" : "💠") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Kira = son Sefer sayısı × ' + k.carpan[0] + ' (tek) / ×' + k.carpan[1] + ' (iki tesis)</div>';
     } else if (k.tip === "seref") {
       html = gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF · KUTSAL BELDE</div><h2>' + k.ad + '</h2><div class="m-tarih">🗓️ ' + (k.tarih || "") + '</div><p class="m-bilgi">' + (k.bilgi || "") + '</p><div class="m-eko">' + (k.kural || "") + '</div>';
     } else html = '<div class="m-ikon">' + ({ baslangic: "🏇", esaret: "⛓️", kervansaray: "🏕️", surgun: "🚷", ferman: "📜", vakca: "✴️", vergi: "💰" }[k.tip] || "") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + (k.aciklama || "") + '</p>' + (k.kural ? '<div class="m-eko">' + k.kural + '</div>' : '');
