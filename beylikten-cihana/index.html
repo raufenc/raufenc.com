@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Beylikten Cihana — Türk-İslam Medeniyeti Strateji Oyunu</title>
+<style>
+  :root{
+    --koyu:#0c3b33; --koyu2:#0a2e28; --altin:#c9a227; --altin2:#e6c35a;
+    --parsomen:#f4ead0; --parsomen2:#ece0c2; --metin:#2c2417; --kirmizi:#8a2b2b; --yesil:#1e6b4f;
+    --golge:rgba(0,0,0,.28);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,sans-serif; color:#eadfc6; min-height:100vh;
+    background:
+      radial-gradient(1200px 800px at 50% -10%, #14564a 0%, var(--koyu) 45%, var(--koyu2) 100%);
+  }
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif}
+  .gizli{display:none !important}
+
+  /* ---------- başlık ---------- */
+  header{text-align:center; padding:14px 10px 6px}
+  header .marka{font-family:Georgia,serif; letter-spacing:.18em; font-size:13px; color:var(--altin2)}
+  header h1{margin:.1em 0; font-size:clamp(22px,4.5vw,40px); color:#fff; text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  header h1 .ana{color:var(--altin)}
+  header .alt{font-size:12px; color:#bfae86; letter-spacing:.05em}
+
+  /* ---------- kurulum ---------- */
+  #kurulum{max-width:520px; margin:24px auto; background:rgba(255,255,255,.05); border:1px solid rgba(201,162,39,.4);
+    border-radius:16px; padding:22px; box-shadow:0 10px 40px var(--golge)}
+  #kurulum h2{margin:.2em 0 .6em; color:var(--altin2); text-align:center}
+  .kur-row{display:flex; gap:8px; align-items:center; margin:6px 0}
+  .kur-sw{width:22px;height:22px;border-radius:50%; flex:0 0 auto; box-shadow:inset 0 0 0 2px rgba(255,255,255,.4)}
+  #kurulum input[type=text]{flex:1; padding:9px 12px; border-radius:9px; border:1px solid #2b4f47; background:#0c2c27; color:#fff; font-size:15px}
+  #kurulum select{padding:8px 10px; border-radius:9px; background:#0c2c27; color:#fff; border:1px solid #2b4f47; font-size:15px}
+  .kur-row-ust{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px}
+  .btn-buyuk{display:block; width:100%; margin-top:16px; padding:13px; font-size:18px; font-weight:700;
+    border:none; border-radius:11px; cursor:pointer; color:#22180a; background:linear-gradient(180deg,var(--altin2),var(--altin)); box-shadow:0 4px 0 #8a6f17}
+  .btn-buyuk:active{transform:translateY(2px); box-shadow:0 2px 0 #8a6f17}
+  .kurallar-ozet{margin-top:14px; font-size:12.5px; line-height:1.5; color:#cdbf9c}
+  .kurallar-ozet b{color:var(--altin2)}
+
+  /* ---------- oyun yerleşimi ---------- */
+  #oyun{display:flex; gap:18px; align-items:flex-start; justify-content:center; padding:6px 14px 30px; flex-wrap:wrap}
+  .tahta-saran{flex:0 0 auto}
+  #tahta{
+    width:min(92vmin, 760px); aspect-ratio:1/1; display:grid;
+    grid-template-columns:repeat(11,1fr); grid-template-rows:repeat(11,1fr);
+    background:var(--parsomen); border:10px solid #7a5b1a; border-radius:10px; padding:5px; gap:2px;
+    box-shadow:0 18px 50px var(--golge), inset 0 0 0 2px var(--altin);
+  }
+  .kare{position:relative; background:#fbf6ea; border:1px solid #d9c9a3; border-radius:4px; overflow:hidden;
+    display:flex; flex-direction:column; cursor:pointer; min-width:0}
+  .kare:hover{outline:2px solid var(--altin)}
+  .kare-ic{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1px; min-width:0}
+  .serit{height:22%; min-height:8px; width:100%; position:absolute; top:0; left:0}
+  .kare-sehir .kare-ic{padding-top:22%}
+  .kare-ad{font-size:clamp(6px,1.15vmin,11px); font-weight:600; line-height:1.05; color:var(--metin); padding:0 1px;
+    overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
+  .kare-fiyat{font-size:clamp(5px,1vmin,9px); color:#6b5a33; margin-top:1px}
+  .kare-ikon{font-size:clamp(11px,2.4vmin,22px); line-height:1}
+  .imar-rozet{font-size:clamp(5px,1vmin,9px); color:#1e6b4f; height:9px; letter-spacing:1px}
+  .imar-rozet .kulliye{color:#b7411e; font-weight:700}
+  .kose .kare-ad{font-size:clamp(6px,1.3vmin,12px)}
+  .kare-baslangic{background:#fdf1d4} .kare-esaret{background:#efe1e1}
+  .kare-kervansaray{background:#e7f0e6} .kare-surgun{background:#efe1e1}
+  .kare-ferman{background:#f6e6df} .kare-vakca{background:#e3efe9}
+  .kare-vergi{background:#f3ecd6} .kare-liman{background:#e8eef4} .kare-utility{background:#f1ecf4}
+  .kare.sahipli .kare-fiyat{font-weight:700; color:#3a2d12}
+  .kare.ipotekli{filter:grayscale(.5) opacity(.8)}
+
+  .merkez{grid-row:2 / 11; grid-column:2 / 11; background:
+    radial-gradient(circle at 50% 35%, #1a5e4e, #0e3f35 70%); border-radius:8px; border:2px solid var(--altin);
+    display:flex; align-items:center; justify-content:center; box-shadow:inset 0 0 40px rgba(0,0,0,.5)}
+  .merkez-ic{text-align:center; color:#f0e3c2; padding:6px}
+  .logo-ust{font-family:Georgia,serif; letter-spacing:.32em; font-size:clamp(10px,2vmin,18px); color:var(--altin2)}
+  .logo-orta{font-family:Georgia,serif; font-weight:700; font-size:clamp(22px,6vmin,52px); color:#fff; line-height:1; text-shadow:0 3px 12px rgba(0,0,0,.6)}
+  .logo-alt{font-size:clamp(7px,1.4vmin,12px); color:#bda874; margin-top:4px; letter-spacing:.04em}
+  .deste-kutu{display:flex; gap:10px; justify-content:center; align-items:center; margin:14px 0}
+  .deste{font-family:Georgia,serif; font-size:clamp(8px,1.5vmin,13px); letter-spacing:.12em; color:#fff; padding:8px 12px; border-radius:6px;
+    box-shadow:0 4px 0 rgba(0,0,0,.35), 0 6px 14px rgba(0,0,0,.4); transform:rotate(-4deg)}
+  .deste-ferman{background:linear-gradient(180deg,#9c3a3a,#732424)} .deste-vakca{background:linear-gradient(180deg,#2a7d68,#175040); transform:rotate(4deg)}
+  .sefer-mini{width:clamp(44px,8.5vmin,78px); min-height:clamp(54px,10.5vmin,96px); background:linear-gradient(180deg,#f6e8c4,#e6cf94);
+    color:#5a3d10; border:2px solid #b7950b; border-radius:9px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 5px 12px rgba(0,0,0,.45); transform:rotate(-3deg)}
+  .sm-no{font-family:Georgia,serif; font-weight:700; font-size:clamp(20px,4.8vmin,42px); line-height:1}
+  .sm-et{font-size:clamp(6px,1.1vmin,9px); letter-spacing:.08em; color:#7a5b1a; margin-top:3px; text-align:center; line-height:1.1}
+  .sefer-buyuk{text-align:center; margin:8px 0 2px}
+  .sb-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(48px,11vw,72px); line-height:1; color:#7a5b1a; text-shadow:0 2px 0 #e6cf94}
+  .sb-alt{font-size:13px; color:#8a6f2a; letter-spacing:.06em}
+
+  .pawnlar{position:absolute; bottom:1px; right:1px; left:1px; display:flex; flex-wrap:wrap; gap:1px; justify-content:center; pointer-events:none}
+  .pawn{width:clamp(6px,1.3vmin,12px); height:clamp(6px,1.3vmin,12px); border-radius:50%; box-shadow:0 0 0 1.5px #fff, 0 1px 3px rgba(0,0,0,.5)}
+
+  /* ---------- yan panel ---------- */
+  .panel{flex:1 1 280px; max-width:380px; min-width:260px; display:flex; flex-direction:column; gap:12px}
+  .panel-kart{background:rgba(255,255,255,.06); border:1px solid rgba(201,162,39,.35); border-radius:14px; padding:12px}
+  #sira-bilgi{font-size:16px; color:#fff} #sira-bilgi .sw{display:inline-block; width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:4px}
+  #aksiyon-bar{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+  .akbtn{padding:9px 12px; border-radius:9px; border:1px solid rgba(201,162,39,.5); background:rgba(255,255,255,.08);
+    color:#f0e6cd; font-size:14px; cursor:pointer; font-weight:600}
+  .akbtn:hover{background:rgba(255,255,255,.15)}
+  .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin2),var(--altin)); color:#22180a; border:none; box-shadow:0 3px 0 #8a6f17}
+  .akbtn.btn-ana:active{transform:translateY(2px); box-shadow:0 1px 0 #8a6f17}
+  .akbtn.btn-pasif,.akbtn:disabled{opacity:.45; cursor:not-allowed}
+  #oyuncular{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+  .oyuncu-kart{background:rgba(0,0,0,.22); border:2px solid; border-radius:11px; padding:8px 9px}
+  .oyuncu-kart.aktif{box-shadow:0 0 0 2px var(--altin2), 0 0 18px rgba(230,195,90,.4)}
+  .oyuncu-kart.iflas{opacity:.45; filter:grayscale(1)}
+  .ok-bas{display:flex; align-items:center; gap:5px; font-size:13px; font-weight:700; color:#fff}
+  .ok-sw{width:12px;height:12px;border-radius:50%}
+  .ok-para{font-size:15px; color:var(--altin2); font-weight:700; margin:2px 0}
+  .ok-alt{font-size:11px; color:#c3b491}
+  #log{height:170px; overflow-y:auto; font-size:12.5px; line-height:1.5}
+  .log-satir{padding:3px 0; border-bottom:1px dashed rgba(255,255,255,.08); color:#d8cba9}
+  .log-satir.iyi{color:#7fe0b0} .log-satir.kotu{color:#f0a3a3} .log-satir.vurgu{color:var(--altin2); font-weight:700}
+  .panel-alt{display:flex; gap:8px}
+  .panel-alt .akbtn{flex:1; text-align:center; font-size:13px}
+
+  /* ---------- modal ---------- */
+  #modal,#kurallar-modal{position:fixed; inset:0; background:rgba(8,20,17,.72); display:none; align-items:center; justify-content:center; z-index:50; padding:16px}
+  .modal-kutu{background:var(--parsomen); color:var(--metin); width:min(440px,94vw); max-height:90vh; overflow-y:auto;
+    border-radius:14px; padding:18px; border:3px solid var(--altin); box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  .modal-kutu.genis{width:min(560px,95vw)}
+  .modal-kutu h2{margin:.2em 0; color:#3a2d12}
+  .m-serit{height:8px; border-radius:4px; margin:-6px -6px 8px}
+  .m-bolge{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#8a6f2a; font-weight:700}
+  .m-tarih{font-size:13px; color:#6b5a33; margin:2px 0 8px}
+  .m-bilgi{font-size:14.5px; line-height:1.55; color:#3a3120}
+  .m-eko{margin-top:10px; font-size:12.5px; background:rgba(0,0,0,.05); border-radius:8px; padding:8px; line-height:1.6}
+  .m-ikon{font-size:34px; text-align:center}
+  .m-btnlar{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; justify-content:flex-end}
+  .kart-ust{color:#fff; padding:7px 12px; border-radius:8px; font-family:Georgia,serif; letter-spacing:.1em; margin:-6px -6px 10px; text-align:center; font-size:15px}
+  .kart-ogren{margin-top:10px; font-size:13px; background:#fff7e3; border-left:4px solid var(--altin); padding:8px 10px; border-radius:0 8px 8px 0; color:#5a4a22; line-height:1.5}
+  .soru-metin{font-size:16px; line-height:1.5; font-weight:600; color:#33291a; margin:6px 0 12px}
+  .siklar{display:flex; flex-direction:column; gap:8px}
+  .sik{text-align:left; padding:10px 12px; border-radius:9px; border:1.5px solid #cdb98a; background:#fff; cursor:pointer; font-size:14.5px; color:#33291a}
+  .sik:hover{background:#fff6df} .sik.dogru{background:#d6f3df; border-color:#3fae6e; font-weight:700} .sik.yanlis{background:#f7d9d9; border-color:#c0504d}
+  .soru-acik{margin-top:12px; font-size:13.5px; padding:10px; border-radius:8px; line-height:1.5}
+  .soru-acik.iyi{background:#e3f6ea; color:#1c6b41} .soru-acik.kotu{background:#f7e4e4; color:#9a3b3b}
+  .sev{font-size:11px; padding:2px 7px; border-radius:10px; margin-left:6px; vertical-align:1px}
+  .sev-kolay{background:#cdeccd; color:#2c6b2c} .sev-orta{background:#fce6c0; color:#8a5a13} .sev-zor{background:#f4cccc; color:#a02d2d}
+  .imar-liste{display:flex; flex-direction:column; gap:7px; margin:10px 0}
+  .imar-row{display:flex; align-items:center; justify-content:space-between; gap:8px; font-size:14px; background:rgba(0,0,0,.04); padding:7px 9px; border-radius:8px}
+  .imar-row .imbtn{font-size:12.5px; padding:6px 9px}
+  .msw{width:12px;height:12px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
+  .ipt{color:#a33; font-size:11px} .bitti-rozet{font-size:12px;color:#1e6b4f;font-weight:700}
+  .modal-kutu .akbtn{border:1px solid #b89a4e; background:#eaddbf; color:#3a2d12}
+  .modal-kutu .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin2),var(--altin)); color:#22180a; border:none}
+  .modal-kutu .akbtn.btn-pasif{background:#e2d6ba}
+
+  /* kurallar modal içerik */
+  .kurallar-icerik{font-size:13.5px; line-height:1.6; color:#3a3120}
+  .kurallar-icerik h3{color:#7a5b1a; margin:14px 0 4px} .kurallar-icerik ul{margin:4px 0; padding-left:18px}
+  .kurallar-icerik li{margin:3px 0}
+
+  @media(max-width:560px){
+    #oyuncular{grid-template-columns:1fr 1fr}
+    .panel{max-width:100%}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="marka">٭ TÜRK-İSLAM MEDENİYETİ STRATEJİ OYUNU ٭</div>
+  <h1>BEYLİKTEN <span class="ana">CİHANA</span></h1>
+  <div class="alt">Söğüt'ten İstanbul'a — fethet, imar et, medeniyet kur</div>
+</header>
+
+<!-- KURULUM -->
+<section id="kurulum">
+  <h2>Oyuncular</h2>
+  <div class="kur-row-ust">
+    <label>Oyuncu sayısı:
+      <select id="oyuncu-sayisi">
+        <option value="2">2</option><option value="3">3</option><option value="4" selected>4</option>
+      </select>
+    </label>
+    <span style="font-size:12px;color:#bda874">Aynı cihazda sırayla oynanır</span>
+  </div>
+  <div id="kurulum-oyuncular"></div>
+  <button id="basla" class="btn-buyuk">⚔️ Sefere Çık — Oyunu Başlat</button>
+  <div class="kurallar-ozet">
+    <b>Zar yok:</b> her tur bir <b>Sefer Kartı</b> çekersin — üstündeki 1–12 sayısı kadar ilerler, altındaki tarih bilgisini öğrenirsin.
+    <b>Akçe</b> ile şehir fetheder, <b>Han→Külliye</b> imar eder, rakipler düşünce vergi toplarsın.
+    Olay kartları senin mülklerine işler; en güçlü medeniyeti kuran kazanır. Her kare ve kart bir tarih dersi verir.
+  </div>
+</section>
+
+<!-- OYUN -->
+<section id="oyun" class="gizli">
+  <div class="tahta-saran"><div id="tahta"></div></div>
+  <div class="panel">
+    <div class="panel-kart">
+      <div id="sira-bilgi"></div>
+      <div id="aksiyon-bar"></div>
+    </div>
+    <div class="panel-kart"><div id="oyuncular"></div></div>
+    <div class="panel-kart"><div id="log"></div></div>
+    <div class="panel-alt">
+      <button id="skor-btn" class="akbtn">📊 Servet</button>
+      <button id="kurallar-btn" class="akbtn">📖 Kurallar</button>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal"></div>
+
+<!-- KURALLAR MODAL -->
+<div id="kurallar-modal">
+  <div class="modal-kutu genis">
+    <div class="kart-ust" style="background:#7a5b1a">📖 OYUN KURALLARI</div>
+    <div class="kurallar-icerik">
+      <p><b>Beylikten Cihana</b>, Türk-İslam medeniyetinin yükselişini bir tahta üzerinde yeniden yaşatan eğitsel strateji oyunudur.</p>
+      <h3>Amaç</h3>
+      <ul><li>Şehirleri fethedip imar ederek servetini büyüt. Diğer herkes iflas ettiğinde <b>son ayakta kalan kazanır</b>. İstediğin an “Servet” ile sıralamaya bakabilirsin.</li></ul>
+      <h3>Tur akışı — zar yok!</h3>
+      <ul>
+        <li><b>Sefer Kartı çek.</b> Kartın üstünde 1–12 arası bir sayı vardır; o kadar ilerlersin. Altındaki <b>tarih bilgisi</b> o sayıya bağlıdır (örn. <i>III. Mustafa → 3</i>, <i>Yedikule'nin 7 kulesi → 7</i>, <i>12 Hayvanlı Türk Takvimi → 12</i>). Her çekiş bir mini tarih dersi.</li>
+        <li>Sefer Meydanı'ndan her geçişte <b>2.000 akçe ulûfe</b> alırsın.</li>
+        <li>Boş bir şehre düşersen <b>fethedebilir</b> (satın al) ya da <b>Bilgi sorusu</b> ile %25 indirimli alabilirsin.</li>
+        <li>Başkasının şehrine düşersen <b>vergi (kira)</b> ödersin; imar arttıkça vergi katlanır.</li>
+      </ul>
+      <h3>İmar</h3>
+      <ul><li>Bir <b>bölgenin (renk grubu) tüm şehirleri</b> sende ise imar başlar: <b>Han → Hamam → Medrese → Cami → Külliye</b>. İmar arttıkça vergi katlanır. İmar dengeli yapılır.</li></ul>
+      <h3>Özel kareler</h3>
+      <ul>
+        <li><b>Ferman</b> & <b>Vak'a</b>: tarihî bir olay kartı çekersin. Etkisi <b>senin mülklerine</b> bağlanır — örn. "1347 Kara Veba → imarlı her yapından gelir kaybı", "deniz zaferi → her limanın için kazanç".</li>
+        <li><b>Esaret (Yedikule)</b>: çıkmak için 500 akçe fidye öde, Ferman kartı kullan ya da bir Bilgi sorusunu doğru cevapla.</li>
+        <li><b>Limanlar</b>: kaç limanın varsa kira artar. <b>Darphane/Vakıf</b>: kira = zar × çarpan. <b>Vergi kareleri</b>: hazineye ödeme.</li>
+      </ul>
+      <h3>İpotek</h3>
+      <ul><li>Paran biterse “Mülklerim”den şehirlerini ipotek edip nakit alabilirsin (önce imarı satılmalı). Borcunu ödeyemezsen iflas edersin.</li></ul>
+      <p style="margin-top:12px;font-size:12px;color:#7a6a44">Her karedeki şehre ve her karta tıklayarak tarihî bilgiyi okuyabilirsin. Oynarken öğrenirsin. 📜</p>
+    </div>
+    <div class="m-btnlar"><button id="kurallar-kapat" class="akbtn btn-ana">Kapat</button></div>
+  </div>
+</div>
+
+<script src="icerik.js"></script>
+<script src="oyun.js"></script>
+</body>
+</html>
