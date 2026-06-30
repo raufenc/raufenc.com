@@ -12,7 +12,7 @@
 const ARABIC_DIGITS=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>ARABIC_DIGITS[+c]??c).join('');
 const DIR='/7sinif/oyunlar/eba-etkilesim/vid/clips/';
-const VER='?v=20260619-media';   /* cache-busting: güncel kesilmiş kliplerin taze çekilmesi */
+const VER='?v=20260630-s102';   /* cache-busting: güncel kesilmiş kliplerin taze çekilmesi */
 
 const params=new URLSearchParams(location.search);
 const ACT=(window.ACTIVITIES||[]).find(a=>a.id===params.get('id'))||(window.ACTIVITIES||[])[0];
