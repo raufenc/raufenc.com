@@ -336,8 +336,15 @@
     return 0;
   }
   function odeVeyaIflas(o, miktar, alacakli, mesaj) {
-    if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj, alacakli ? "" : "kotu"); if (miktar > 0) Ses.ode(); }
-    else { logla(mesaj + " — fakat parası yetmedi!", "kotu"); iflasEt(o, alacakli); }
+    if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj, alacakli ? "" : "kotu"); if (miktar > 0) Ses.ode(); return; }
+    if (o.bot) {
+      botLikidite(o, miktar);
+      if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj + " (mülk satarak ödedi)", ""); Ses.ode(); }
+      else { logla(mesaj + " — ödeyemedi, iflas!", "kotu"); iflasEt(o, alacakli); }
+      return;
+    }
+    logla(mesaj + " — nakit yetersiz, mülk satıp ödeyebilirsin.", "kotu");
+    borcModal(o, miktar, alacakli);
   }
   function iflasEt(o, alacakli) {
     o.iflas = true;
@@ -674,33 +681,116 @@
     document.querySelectorAll(".imbtn").forEach(function (b) { b.onclick = function () { imarYap(parseInt(b.dataset.pos, 10)); }; });
     $("#m-kapat").onclick = function () { modalKapat(); render(); };
   }
+  // ---------- varlık yönetimi (yapı sat / ipotek) ----------
+  function imarSatBir(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.tip !== "sehir" || k.imar <= 0) return;
+    var maxi = Math.max.apply(null, grupKareler(k.grupKey).map(function (g) { return g.imar; }));
+    if (k.imar < maxi) { logla("Önce daha çok imarlı şehirden sat (dengeli).", "kotu"); return; }
+    var geri = Math.round(k.imarBedeli / 2); k.imar--; o.para += geri;
+    logla("🏚️ " + o.ad + ", " + k.ad + "'deki yapıyı sattı: +" + fmt(geri), ""); render();
+  }
+  function ipotekEt(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.ipotekli) return;
+    if (k.tip === "sehir" && grupKareler(k.grupKey).some(function (g) { return g.imar > 0; })) { logla("Önce bu bölgedeki yapıları sat.", "kotu"); return; }
+    k.ipotekli = true; o.para += k.ipotek; logla("🏦 " + k.ad + " ipotek edildi: +" + fmt(k.ipotek), ""); render();
+  }
+  function ipotekKaldir(pos) {
+    var o = aktif(), k = K[pos], bedel = Math.round(k.ipotek * 1.1);
+    if (o.para < bedel) { logla("İpoteği kaldıracak akçe yok.", "kotu"); return; }
+    o.para -= bedel; k.ipotekli = false; logla("🏦 " + k.ad + " ipoteği kaldırıldı: -" + fmt(bedel), ""); render();
+  }
+  function nakdeCevrilebilir(o) {
+    var t = 0;
+    K.forEach(function (k) {
+      if (k.sahip !== o.id) return;
+      if (k.tip === "sehir") t += k.imar * Math.round(k.imarBedeli / 2);
+      if (!k.ipotekli) t += k.ipotek;
+    });
+    return t;
+  }
+  function varlikSatir(o) {
+    if (!o.mulkler.length) return "<p>Mülkün yok — satacak bir şeyin yok.</p>";
+    return o.mulkler.map(function (pos) {
+      var k = K[pos];
+      var serit = '<span class="msw" style="background:' + (k.tip === "sehir" ? k.grup.renk : "#888") + '"></span>';
+      var btn;
+      if (k.tip === "sehir" && k.imar > 0) btn = '<button class="akbtn imbtn" data-act="sat" data-pos="' + pos + '">🏚️ Yapı Sat (+' + fmt(Math.round(k.imarBedeli / 2)) + ')</button>';
+      else if (!k.ipotekli) btn = '<button class="akbtn imbtn" data-act="ipotek" data-pos="' + pos + '">🏦 İpotek (+' + fmt(k.ipotek) + ')</button>';
+      else btn = '<button class="akbtn imbtn" data-act="kaldir" data-pos="' + pos + '">İpotek Kaldır (' + fmt(Math.round(k.ipotek * 1.1)) + ')</button>';
+      var durum = k.ipotekli ? ' <span class="ipt">ipotekli</span>' : (k.tip === "sehir" && k.imar ? ' · ' + BINA_IKON[k.imar - 1] : '');
+      return '<div class="imar-row">' + serit + '<span><b>' + k.ad + '</b>' + durum + '</span>' + btn + '</div>';
+    }).join("");
+  }
+  function varlikBind(yenidenCiz) {
+    document.querySelectorAll(".imbtn").forEach(function (b) {
+      b.onclick = function () {
+        var pos = parseInt(b.dataset.pos, 10), act = b.dataset.act;
+        if (act === "sat") imarSatBir(pos); else if (act === "ipotek") ipotekEt(pos); else if (act === "kaldir") ipotekKaldir(pos);
+        yenidenCiz();
+      };
+    });
+  }
   function mulklerModal() {
     var o = aktif();
-    var liste = o.mulkler.map(function (pos) {
-      var k = K[pos], durum = k.ipotekli ? '<span class="ipt">ipotekli</span>' : "", bt = k.ipotekli ? "İpoteği Kaldır (" + fmt(Math.round(k.ipotek * 1.1)) + ")" : "İpotek Et (+" + fmt(k.ipotek) + ")";
-      var serit = '<span class="msw" style="background:' + (k.tip === "sehir" ? k.grup.renk : "#888") + '"></span>';
-      return '<div class="imar-row">' + serit + '<span><b>' + k.ad + '</b> ' + durum + (k.tip === "sehir" && k.imar ? " · " + BINA_IKON[k.imar - 1] : "") + '</span><button class="akbtn imbtn" data-pos="' + pos + '"' + (k.tip === "sehir" && k.imar > 0 ? " disabled" : "") + '>' + bt + '</button></div>';
-    }).join("") || "<p>Henüz mülkün yok.</p>";
-    modalAc('<div class="kart-ust" style="background:#34495e">🏛️ MÜLKLERİM</div><div class="imar-liste">' + liste + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
-    document.querySelectorAll(".imbtn").forEach(function (b) { b.onclick = function () { ipotekDegistir(parseInt(b.dataset.pos, 10)); }; });
+    modalAc('<div class="kart-ust" style="background:#34495e">🏛️ MÜLKLERİM · ' + fmt(o.para) + '</div><p class="m-bilgi" style="font-size:13.5px">Yapı satabilir (yarı fiyat) veya şehir ipotek edebilirsin. İpotek için önce bölgenin yapıları satılır.</p><div class="imar-liste">' + varlikSatir(o) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    varlikBind(mulklerModal);
     $("#m-kapat").onclick = function () { modalKapat(); render(); };
   }
-  function ipotekDegistir(pos) {
-    var o = aktif(), k = K[pos];
-    if (!k.ipotekli) { k.ipotekli = true; o.para += k.ipotek; logla("🏦 " + k.ad + " ipotek edildi: +" + fmt(k.ipotek), ""); }
-    else { var bedel = Math.round(k.ipotek * 1.1); if (o.para < bedel) { logla("İpoteği kaldıracak akçe yok.", "kotu"); return; } o.para -= bedel; k.ipotekli = false; logla("🏦 " + k.ad + " ipoteği kaldırıldı: -" + fmt(bedel), ""); }
-    render(); mulklerModal();
+  function borcModal(o, miktar, alacakli) {
+    function ciz() {
+      var yeter = o.para >= miktar;
+      modalAc('<div class="kart-ust" style="background:#7d2b2b">⚠️ BORÇ · ' + fmt(miktar) + '</div>' +
+        '<p class="m-bilgi">Ödemen gereken <b>' + fmt(miktar) + '</b>, nakdin <b style="color:' + (yeter ? "#1c6b41" : "#9a3b3b") + '">' + fmt(o.para) + '</b>. Yapı satıp şehirlerini ipotek ederek nakit topla, sonra <b>borcu öde</b>.</p>' +
+        '<div class="imar-liste">' + varlikSatir(o) + '</div>' +
+        '<div class="m-btnlar">' +
+        (yeter ? '<button class="akbtn btn-ana" id="b-ode">💰 Borcu Öde (' + fmt(miktar) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetersiz</button>') +
+        '<button class="akbtn" id="b-teslim">🏳️ Teslim Ol</button></div>', true);
+      varlikBind(ciz);
+      var b;
+      if ((b = $("#b-ode"))) b.onclick = function () { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla("💸 " + o.ad + " borcunu ödedi: -" + fmt(miktar), alacakli ? "" : "kotu"); Ses.ode(); modalKapat(); render(); galibiyetKontrol(); };
+      $("#b-teslim").onclick = function () { logla("🏳️ " + o.ad + " borcu ödeyemedi, teslim oldu.", "kotu"); modalKapat(); iflasEt(o, alacakli); render(); };
+    }
+    ciz();
+  }
+  function botLikidite(o, hedef) {
+    var guard = 0;
+    while (o.para < hedef && guard++ < 80) {
+      var yapi = null;
+      K.forEach(function (x) { if (x.tip === "sehir" && x.sahip === o.id && x.imar > 0) { var maxi = Math.max.apply(null, grupKareler(x.grupKey).map(function (g) { return g.imar; })); if (x.imar >= maxi && (!yapi || x.imar > yapi.imar)) yapi = x; } });
+      if (yapi) { o.para += Math.round(yapi.imarBedeli / 2); yapi.imar--; continue; }
+      var m = null;
+      K.forEach(function (x) { if ((x.tip === "sehir" || x.tip === "liman" || x.tip === "utility") && x.sahip === o.id && !x.ipotekli && (x.tip !== "sehir" || x.imar === 0) && !m) m = x; });
+      if (m) { m.ipotekli = true; o.para += m.ipotek; continue; }
+      break;
+    }
+  }
+  function siralamaSatir(sirali, vurgu) {
+    return sirali.map(function (o, i) {
+      var madalya = ["🥇", "🥈", "🥉"][i] || (i + 1) + ".";
+      return '<div class="sira-row' + (vurgu && i === 0 ? " kazanan" : "") + (o.iflas ? " iflas" : "") + '">' +
+        '<span class="sr-rank">' + madalya + '</span>' +
+        '<span class="sr-amblem" style="background:' + o.renk + '">' + (o.amblem || "") + '</span>' +
+        '<span class="sr-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " · iflas" : "") + '</span>' +
+        '<span class="sr-servet">' + fmt(servet(o)) + '</span></div>';
+    }).join("");
   }
   function sonucModal(g) {
     Ses.kazan();
-    var s = oyun.oyuncular.slice().sort(function (a, b) { return servet(b) - servet(a); });
-    var liste = s.map(function (o, i) { return '<div class="imar-row"><span>' + (i + 1) + '. <b style="color:' + o.renk + '">' + o.ad + '</b>' + (o.bot ? " 🤖" : "") + (o.iflas ? " (iflas)" : "") + '</span><span>' + fmt(servet(o)) + '</span></div>'; }).join("");
-    modalAc('<div class="kart-ust" style="background:#b7950b">🏆 CİHANA ULAŞAN</div><h2 style="text-align:center">' + (g ? g.ad : "—") + '</h2><p class="m-bilgi" style="text-align:center">Beylikten cihana giden yolda zafer senin! Servet sıralaması:</p><div class="imar-liste">' + liste + '</div><div class="m-btnlar"><button class="akbtn btn-ana" onclick="location.reload()">🔄 Yeni Oyun</button></div>', true);
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    var kz = g || sirali[0];
+    modalAc('<div class="zafer">' + gorselImg("kapak", "zafer-bg") + '<div class="zafer-perde"></div>' +
+      '<div class="zafer-ic"><div class="zafer-amblem" style="background:' + (kz ? kz.renk : "#888") + '">' + (kz ? (kz.amblem || "🏆") : "🏆") + '</div>' +
+      '<div class="zafer-ust">🏆 CİHANA ULAŞAN</div><div class="zafer-ad">' + (kz ? kz.ad : "—") + '</div>' +
+      '<div class="zafer-alt">Beylikten cihana giden yolda zafer senindir!</div></div></div>' +
+      '<div class="sira-liste">' + siralamaSatir(sirali, true) + '</div>' +
+      '<div class="m-btnlar"><button class="akbtn" id="m-kapat">👁️ Tahtayı Gör</button><button class="akbtn btn-ana" onclick="location.reload()">🔄 Yeni Oyun</button></div>', true);
+    $("#m-kapat").onclick = modalKapat;
   }
   function skorGoster() {
-    var s = oyun.oyuncular.slice().sort(function (a, b) { return servet(b) - servet(a); });
-    var liste = s.map(function (o, i) { return '<div class="imar-row"><span>' + (i + 1) + '. <b style="color:' + o.renk + '">' + o.ad + '</b>' + (o.bot ? " 🤖" : "") + '</span><span>' + fmt(servet(o)) + '</span></div>'; }).join("");
-    modalAc('<div class="kart-ust" style="background:#34495e">📊 SERVET DURUMU</div><div class="imar-liste">' + liste + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    modalAc('<div class="kart-ust" style="background:#34495e">📊 SERVET SIRALAMASI</div><p class="m-bilgi" style="font-size:13.5px">Servet = nakit + mülk değeri + imar yapıları.</p><div class="sira-liste">' + siralamaSatir(sirali, false) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
     $("#m-kapat").onclick = modalKapat;
   }
 
