@@ -1463,6 +1463,127 @@ window.OYUN_VERISI = {
    "sayi": 12,
    "baslik": "Yılın On İki Ayı ve Nevruz",
    "bilgi": "Türklerde yılın on iki ayı güneş takvimine göre düzenlenir, yeni yıl ise gece ile gündüzün eşitlendiği 21 Mart Nevruz'unda başlardı. Selçuklu Sultanı Melikşah döneminde Ömer Hayyam'ın da içinde bulunduğu astronomlar, 1079'da düzenledikleri Celâlî Takvimi ile yılı on iki aya büyük bir hassasiyetle bölmüş, bu takvim Gregoryen takviminden bile daha küçük bir hata payına sahip olmuştur."
+  },
+  {
+   "sayi": 2,
+   "baslik": "Menzil Teşkilatı",
+   "bilgi": "Menzilhanelerde at değiştiren ulaklar haberi şimşek hızıyla taşırdı. Hızın sayesinde 2 ilerle ve TEKRAR Sefer Kartı çek!",
+   "ozel": {
+    "tur": "tekrar"
+   }
+  },
+  {
+   "sayi": 3,
+   "baslik": "Sefer-i Hümayun Coşkusu",
+   "bilgi": "Padişah ordunun başında sefere çıktı; ordu şevkle ilerledi. 3 ilerle ve tekrar oyna!",
+   "ozel": {
+    "tur": "tekrar"
+   }
+  },
+  {
+   "sayi": 1,
+   "baslik": "Acele Ferman",
+   "bilgi": "Saraydan acele ferman geldi, hızlıca yola koyul. 1 ilerle ve tekrar çek!",
+   "ozel": {
+    "tur": "tekrar"
+   }
+  },
+  {
+   "sayi": 4,
+   "baslik": "Akıncı Hızı",
+   "bilgi": "Uç beylerinin akıncıları yıldırım gibi ilerlerdi. 4 ilerle ve tekrar oyna!",
+   "ozel": {
+    "tur": "tekrar"
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "İstanbul'un Fethi",
+   "bilgi": "1453'te surlar aşıldı, payitaht senin oldu! Doğruca İstanbul'a git.",
+   "ozel": {
+    "tur": "isinla",
+    "hedef": 37
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Donanma Seferi",
+   "bilgi": "Kaptan-ı Derya donanmayı denize açtı; gemiyle en yakın limana taşındın.",
+   "ozel": {
+    "tur": "isinla",
+    "hedef": "liman"
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Sefere Çağrı",
+   "bilgi": "Tuğlar dikildi, ordu Sefer Meydanı'nda toplanıyor. Başa dön ve ulûfeni al!",
+   "ozel": {
+    "tur": "isinla",
+    "hedef": 0
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Surre Alayı",
+   "bilgi": "Hac kervanına katıldın, kutsal beldeye yöneldin. Haremeyn'e git.",
+   "ozel": {
+    "tur": "isinla",
+    "hedef": 39
+   }
+  },
+  {
+   "sayi": 3,
+   "baslik": "Kış Bastırdı",
+   "bilgi": "Sefer mevsimi bitti, ordu kışlağa çekildi. 3 kare geri git.",
+   "ozel": {
+    "tur": "geri"
+   }
+  },
+  {
+   "sayi": 2,
+   "baslik": "Yollar Kapandı",
+   "bilgi": "Sel ve çamur yolları kapattı; geri dönmek zorunda kaldın. 2 kare geri.",
+   "ozel": {
+    "tur": "geri"
+   }
+  },
+  {
+   "sayi": 4,
+   "baslik": "Kuşatma Bozgunu",
+   "bilgi": "Uzun kuşatma sonuç vermedi, ordu geri çekildi. 4 kare geri git.",
+   "ozel": {
+    "tur": "geri"
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Casus Oyunu",
+   "bilgi": "Bir casus seni yanlış yola sürükledi; önündeki en yakın rakiple yer değiştirdin!",
+   "ozel": {
+    "tur": "sakaci",
+    "alt": "yer_degis"
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Ani Baskın",
+   "bilgi": "Sınır boyunda ani bir akın düzenledin; en yakın rakipten 500 akçe ganimet aldın.",
+   "ozel": {
+    "tur": "sakaci",
+    "alt": "yakindan_al",
+    "deger": 500
+   }
+  },
+  {
+   "sayi": 0,
+   "baslik": "Şehzade Şenliği",
+   "bilgi": "Sarayda şehzade doğdu, şenlik var! Her rakipten 200 akçe sevinç ihsanı topladın.",
+   "ozel": {
+    "tur": "sakaci",
+    "alt": "herkesten",
+    "deger": 200
+   }
   }
  ],
  "sorular": [

@@ -130,12 +130,40 @@
       seferDeste: karistir(SEFER.length), si: 0, fermanDeste: karistir(V.ferman.length), fi: 0,
       vakcaDeste: karistir(V.vakca.length), vi: 0, bitti: false,
       botZorluk: ($("#bot-zorluk") ? $("#bot-zorluk").value : "orta"),
+      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0,
+      turLimiti: ($("#tur-limiti") ? parseInt($("#tur-limiti").value, 10) : 0),
     };
     Ses.init();
     $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
     tahtaKur(); desenUygula(); render();
     logla("<b>Oyun başladı!</b> " + oyuncular.map(function (o) { return o.ad + (o.bot ? " 🤖" : ""); }).join(", ") + ". Hayırlı seferler!", "vurgu");
     if (aktif().bot) bekle(botTuru, 900);
+  }
+
+  // ---------- kaydet / devam ----------
+  function kaydet() {
+    try {
+      if (!oyun || oyun.bitti) return;
+      var kareDurum = K.map(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") ? { s: k.sahip, i: k.imar || 0, p: !!k.ipotekli } : null; });
+      localStorage.setItem("bc_kayit", JSON.stringify({ oyun: oyun, kd: kareDurum, t: 1 }));
+    } catch (e) {}
+  }
+  function kayitVarMi() { try { return !!localStorage.getItem("bc_kayit"); } catch (e) { return false; } }
+  function temizleKayit() { try { localStorage.removeItem("bc_kayit"); } catch (e) {} }
+  function yukle() {
+    try {
+      var snap = JSON.parse(localStorage.getItem("bc_kayit"));
+      if (!snap || !snap.oyun) return false;
+      oyun = snap.oyun;
+      snap.kd.forEach(function (d, i) { if (d) { K[i].sahip = d.s; K[i].imar = d.i; K[i].ipotekli = d.p; } });
+      oyun.hareketEden = null; oyun._para = {}; oyun._yeniImar = -1;
+      Ses.init();
+      $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
+      tahtaKur(); desenUygula(); render();
+      logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
+      if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
+      return true;
+    } catch (e) { return false; }
   }
 
   // ---------- tahta DOM ----------
@@ -169,7 +197,7 @@
     else if (k.tip === "vakca") ic.innerHTML = '<div class="kare-ikon">✴️</div><div class="kare-ad">Vak\'a</div>';
     else if (k.tip === "baslangic") ic.innerHTML = '<div class="kare-ikon">🏇</div><div class="kare-ad">Sefer<br>Meydanı</div>';
     else if (k.tip === "esaret") ic.innerHTML = '<div class="kare-ikon">⛓️</div><div class="kare-ad">Esaret<br>Yedikule</div>';
-    else if (k.tip === "kervansaray") ic.innerHTML = '<div class="kare-ikon">🏕️</div><div class="kare-ad">Kervansaray</div>';
+    else if (k.tip === "kervansaray") ic.innerHTML = '<div class="kare-ikon">🏕️</div><div class="kare-ad">Kervansaray</div><div class="kare-fiyat" data-hazine style="color:#1e8449;font-weight:800"></div>';
     else if (k.tip === "surgun") ic.innerHTML = '<div class="kare-ikon">🚷</div><div class="kare-ad">Sürgün</div>';
     else if (k.tip === "seref") ic.innerHTML = '<div class="kare-ikon" style="color:#b7950b">❖</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" style="color:#b7950b;font-weight:700">Şeref</div>';
     return ic;
@@ -184,7 +212,7 @@
       var degisti = oyun._para[o.id] != null && oyun._para[o.id] !== o.para;
       var yon = degisti ? (o.para > oyun._para[o.id] ? " arti" : " eksi") : "";
       d.innerHTML =
-        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
+        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.id === hunkarId() ? " 👑" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
         '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
         '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>';
       pano.appendChild(d);
@@ -215,6 +243,7 @@
       if (layer) { var pw = el("span", "pawn" + (o.id === oyun.hareketEden ? " pawn-hareket" : ""), o.amblem || ""); pw.style.background = o.renk; pw.title = o.ad; layer.appendChild(pw); }
     });
     var sn = $("#sefer-no"); if (sn) sn.textContent = oyun.sonHareket || "?";
+    var hz = document.querySelector("[data-hazine]"); if (hz) hz.textContent = oyun.hazine > 0 ? "💰" + oyun.hazine : "";
     butonlariGuncelle();
   }
   function vurgulaKare(pos) {
@@ -224,7 +253,9 @@
 
   function butonlariGuncelle() {
     var o = aktif(), k = K[o.pos], bar = $("#aksiyon-bar"); bar.innerHTML = "";
-    $("#sira-bilgi").innerHTML = '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + ' · ' + fmt(o.para);
+    $("#sira-bilgi").innerHTML = '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
+      (oyun.turLimiti ? ' · ⏳ Tur ' + (Math.floor(oyun.elGecti / oyun.oyuncular.length) + 1) + '/' + oyun.turLimiti : '') +
+      (oyun.hazine > 0 ? ' · 🏕️ ' + fmt(oyun.hazine) : '');
     if (oyun.bitti) { bar.appendChild(btn("🔄 Yeni Oyun", "btn-ana", function () { location.reload(); })); return; }
     if (o.bot) { bar.appendChild(el("div", "bot-oynuyor", '<span class="bot-spinner"></span>🤖 ' + o.ad + ' oynuyor…')); return; }
 
@@ -263,35 +294,80 @@
   }
   function seferModal(kart, bitince) {
     var o = aktif();
+    var oz = kart.ozel, bigNo = kart.sayi, altYazi = "kare ilerle", btnLbl = "➡️ " + kart.sayi + " kare ilerle", renk = "#5e4216";
+    if (oz) {
+      if (oz.tur === "tekrar") { altYazi = "ilerle + 🔁 TEKRAR"; btnLbl = "🔁 " + kart.sayi + " ilerle ve tekrar çek"; renk = "#1f6b4f"; }
+      else if (oz.tur === "geri") { bigNo = "−" + kart.sayi; altYazi = "kare GERİ"; btnLbl = "↩️ " + kart.sayi + " kare geri git"; renk = "#7d2b2b"; }
+      else if (oz.tur === "isinla") { bigNo = "➜"; altYazi = "ışınlan"; btnLbl = "✨ Işınlan"; renk = "#5b3a8a"; }
+      else if (oz.tur === "sakaci") { bigNo = "✦"; altYazi = "özel olay"; btnLbl = "✦ Uygula"; renk = "#8a5a13"; }
+    }
     modalAc('<div class="kart-ust" style="background:#7a5b1a">🏇 SEFER KARTI</div>' +
       '<div class="flip" id="flip"><div class="flip-ic">' +
-        '<div class="flip-yuz flip-arka">' + desen("#5e4216", "#dcbb63", "0.55") + '</div>' +
-        '<div class="flip-yuz flip-on"><div class="fn">' + kart.sayi + '</div><div class="fa">kare ilerle</div></div>' +
+        '<div class="flip-yuz flip-arka">' + desen(renk, "#dcbb63", "0.55") + '</div>' +
+        '<div class="flip-yuz flip-on"><div class="fn">' + bigNo + '</div><div class="fa">' + altYazi + '</div></div>' +
       '</div></div>' +
       '<h2 style="text-align:center;margin:.3em 0">' + kart.baslik + '</h2>' +
       '<div class="kart-ogren">💡 ' + kart.bilgi + '</div>' +
-      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">➡️ ' + kart.sayi + ' kare ilerle</button></div>');
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">' + btnLbl + '</button></div>');
     Ses.cek();
     setTimeout(function () { var fl = $("#flip"); if (fl) { fl.classList.add("acik"); Ses.kart(); } }, 380);
     $("#m-ilerle").onclick = function () {
-      modalKapat(); oyun.hareketYapildi = true; oyun.sonHareket = kart.sayi;
-      logla("🏇 " + o.ad + " <b>" + kart.sayi + "</b> ilerledi — " + kart.baslik, "");
-      ilerle(o, kart.sayi, true, bitince);
+      modalKapat(); oyun.hareketYapildi = true;
+      logla("🏇 " + o.ad + " — " + kart.baslik, "");
+      if (oz) seferOzel(kart, o, bitince);
+      else { oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); }
     };
     if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b) b.click(); }, 1800);
+  }
+  function enYakinLiman(pos) { var L = [5, 15, 25, 35], i; for (i = 0; i < L.length; i++) if (L[i] > pos) return L[i]; return L[0]; }
+  function seferOzel(kart, o, bitince) {
+    var e = kart.ozel;
+    if (e.tur === "tekrar") { oyun.tekrarHak = true; oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); return; }
+    if (e.tur === "geri") { oyun.sonHareket = kart.sayi; ilerle(o, -kart.sayi, false, bitince); return; }
+    if (e.tur === "isinla") {
+      var hedef = (e.hedef === "liman") ? enYakinLiman(o.pos) : e.hedef;
+      var adim = (((hedef - o.pos) % 40) + 40) % 40;
+      if (adim === 0) { render(); kareyeDus(o, bitince); } else { oyun.sonHareket = adim; ilerle(o, adim, true, bitince); }
+      return;
+    }
+    if (e.tur === "sakaci") {
+      if (e.alt === "yer_degis") {
+        var en = null, az = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = (((p.pos - o.pos) % 40) + 40) % 40; if (d > 0 && d < az) { az = d; en = p; } } });
+        if (en) { var t = o.pos; o.pos = en.pos; en.pos = t; logla("🕵️ " + o.ad + " ile " + en.ad + " yer değiştirdi!", "vurgu"); render(); kareyeDus(o, bitince); return; }
+        logla("🕵️ Yer değişecek rakip yok.", "");
+      } else if (e.alt === "yakindan_al") {
+        var en2 = null, az2 = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = Math.min((((p.pos - o.pos) % 40) + 40) % 40, (((o.pos - p.pos) % 40) + 40) % 40); if (d < az2) { az2 = d; en2 = p; } } });
+        if (en2) { var m = Math.min(en2.para, e.deger); en2.para -= m; o.para += m; logla("⚔️ " + o.ad + ", " + en2.ad + "'den " + fmt(m) + " ganimet aldı.", "iyi"); }
+      } else if (e.alt === "herkesten") {
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var m = Math.min(p.para, e.deger); p.para -= m; o.para += m; } });
+        logla("🎉 " + o.ad + " herkesten " + e.deger + " akçe ihsan topladı.", "iyi");
+      }
+      render(); if (bitince) bekle(bitince, 700);
+      return;
+    }
   }
 
   function ilerle(o, adim, maasVar, bitince) {
     oyun.hareketEden = o.id;
-    var kalan = adim;
+    var yon = adim >= 0 ? 1 : -1, kalan = Math.abs(adim);
+    if (kalan === 0) { oyun.hareketEden = null; setTimeout(function () { kareyeDus(o, bitince); }, 120); return; }
     (function adimAt() {
-      o.pos = (o.pos + 1) % 40; Ses.adim();
-      if (o.pos === 0 && maasVar) { o.para += V.ayarlar.maas; logla("💰 " + o.ad + " Sefer Meydanı'ndan geçti: +" + fmt(V.ayarlar.maas) + " ulûfe.", "iyi"); }
+      o.pos = (((o.pos + yon) % 40) + 40) % 40; Ses.adim();
+      if (yon > 0 && o.pos === 0 && maasVar) { var ul = V.ayarlar.maas + (isHunkar(o) ? 500 : 0); o.para += ul; logla("💰 " + o.ad + " Sefer Meydanı'ndan geçti: +" + fmt(ul) + " ulûfe" + (isHunkar(o) ? " (👑 Hünkâr +500)" : "") + ".", "iyi"); }
       render();
       if (--kalan > 0) setTimeout(adimAt, 135);
       else { oyun.hareketEden = null; render(); setTimeout(function () { kareyeDus(o, bitince); }, 220); }
     })();
   }
+  function hunkarId() {
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (ayakta.length < 2) return null;
+    var en = ayakta[0]; ayakta.forEach(function (p) { if (servet(p) > servet(en)) en = p; });
+    return en.id;
+  }
+  function isHunkar(o) { return o.id === hunkarId(); }
 
   function kareyeDus(o, bitince) {
     var k = K[o.pos]; vurgulaKare(o.pos);
@@ -300,11 +376,15 @@
       if (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") {
         if (k.sahip == null) {
           kareBilgiModal(o.pos, true);
-          if (bot) bekle(function () { botAlKarar(o, k); bekle(bitince, 800); }, 1300);
+          if (bot) bekle(function () { botAlKarar(o, k, bitince); }, 1300);
         } else if (k.sahip !== o.id && !k.ipotekli) { kiraOde(o, k); render(); if (bot) bekle(bitince, 600); }
         else { render(); if (bot) bekle(bitince, 300); }
       } else if (k.tip === "vergi") {
-        odeVeyaIflas(o, k.tutar, null, "💸 " + o.ad + " " + k.ad + " ödedi: -" + fmt(k.tutar)); render(); if (bot) bekle(bitince, 600);
+        odeVeyaIflas(o, k.tutar, null, "💸 " + o.ad + " " + k.ad + " ödedi: -" + fmt(k.tutar)); oyun.hazine += k.tutar; render(); if (bot) bekle(bitince, 600);
+      } else if (k.tip === "kervansaray") {
+        if (oyun.hazine > 0) { var h = oyun.hazine; o.para += h; oyun.hazine = 0; logla("🏕️ " + o.ad + " Kervansaray Hazinesini topladı: +" + fmt(h) + "!", "iyi"); Ses.al(); }
+        else logla("🏕️ " + o.ad + " kervansarayda dinlendi.", "");
+        render(); if (bot) bekle(bitince, 500);
       } else if (k.tip === "ferman") { kartCek("ferman", o, bitince); }
       else if (k.tip === "vakca") { kartCek("vakca", o, bitince); }
       else if (k.tip === "surgun") { logla("🚷 " + o.ad + " sürgün edildi!", "kotu"); esareteGonder(o); render(); if (bot) bekle(bitince, 600); }
@@ -362,6 +442,54 @@
     Ses.al(); modalKapat(); render();
   }
 
+  // ---------- açık artırma (mezat) ----------
+  function grupTamamlarMi(k, p) {
+    if (k.tip === "sehir") return grupKareler(k.grupKey).every(function (g) { return g.pos === k.pos || g.sahip === p.id; });
+    if (k.tip === "liman") return sahipLimanSayisi(p.id) >= 1;
+    return false;
+  }
+  function mezat(pos, bitince) {
+    var k = K[pos];
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (!ayakta.length) { if (bitince) bekle(bitince, 300); return; }
+    var d = { pos: pos, yuksek: 0, yuksekId: null, aktif: ayakta.map(function (p) { return p.id; }), step: Math.max(50, Math.round(k.fiyat * 0.1)), sira: 0, bitince: bitince };
+    logla("🔨 <b>" + k.ad + "</b> açık artırmaya çıktı!", "vurgu");
+    mezatTur(d);
+  }
+  function mezatTur(d) {
+    if (d.aktif.length <= 1) { mezatBitir(d); return; }
+    if (d.sira >= d.aktif.length) d.sira = 0;
+    var id = d.aktif[d.sira];
+    if (id === d.yuksekId) { d.sira++; mezatTur(d); return; }
+    var p = sahipOyuncu(id), k = K[d.pos], yeni = d.yuksek + d.step;
+    if (p.bot) {
+      var maks = Math.round(k.fiyat * (grupTamamlarMi(k, p) ? 1.4 : 0.85));
+      if (yeni <= maks && yeni <= p.para) { d.yuksek = yeni; d.yuksekId = id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); d.sira++; bekle(function () { mezatTur(d); }, 650); }
+      else { d.aktif.splice(d.sira, 1); logla("🔨 " + p.ad + " çekildi.", ""); bekle(function () { mezatTur(d); }, 450); }
+    } else mezatModal(d, p, yeni);
+  }
+  function mezatModal(d, p, yeni) {
+    var k = K[d.pos], verebilir = yeni <= p.para;
+    modalAc('<div class="kart-ust" style="background:#6b4d1f">🔨 AÇIK ARTIRMA — ' + k.ad + '</div>' +
+      (k.tip === "sehir" ? gorselImg(k.ad) : '') +
+      '<p class="m-bilgi">Liste fiyatı <b>' + fmt(k.fiyat) + '</b>. En yüksek teklif: <b>' + (d.yuksek ? fmt(d.yuksek) + " (" + sahipOyuncu(d.yuksekId).ad + ")" : "yok") + '</b><br>Sıra sende — nakdin: <b>' + fmt(p.para) + '</b></p>' +
+      '<div class="m-btnlar">' +
+      (verebilir ? '<button class="akbtn btn-ana" id="mz-teklif">🔨 Teklif Ver (' + fmt(yeni) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetmez</button>') +
+      '<button class="akbtn" id="mz-cekil">🚪 Çekil</button></div>', true);
+    var b;
+    if ((b = $("#mz-teklif"))) b.onclick = function () { d.yuksek = yeni; d.yuksekId = p.id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); modalKapat(); d.sira++; mezatTur(d); };
+    $("#mz-cekil").onclick = function () { var i = d.aktif.indexOf(p.id); if (i >= 0) d.aktif.splice(i, 1); logla("🔨 " + p.ad + " çekildi.", ""); modalKapat(); mezatTur(d); };
+  }
+  function mezatBitir(d) {
+    var k = K[d.pos];
+    if (d.yuksekId != null && d.yuksek > 0) {
+      var p = sahipOyuncu(d.yuksekId);
+      p.para -= d.yuksek; k.sahip = p.id; p.mulkler.push(d.pos); p.mulkler.sort(function (a, b) { return a - b; });
+      logla("🔨 <b>" + k.ad + "</b>, " + fmt(d.yuksek) + " ile " + p.ad + "'e satıldı!", "iyi"); Ses.al();
+    } else logla("🔨 " + k.ad + " alıcı bulamadı, boş kaldı.", "");
+    modalKapat(); render(); if (d.bitince) bekle(d.bitince, 400);
+  }
+
   // ---------- imar ----------
   function grupKareler(key) { return K.filter(function (k) { return k.tip === "sehir" && k.grupKey === key; }); }
   function grupTamMi(key, id) { return grupKareler(key).every(function (k) { return k.sahip === id && !k.ipotekli; }); }
@@ -389,7 +517,7 @@
     var e = kart.etki, n;
     switch (e.tur) {
       case "para_al": o.para += e.deger; logla("📜 " + o.ad + ": +" + fmt(e.deger), "iyi"); break;
-      case "para_ver": odeVeyaIflas(o, e.deger, null, "📜 " + o.ad + ": -" + fmt(e.deger)); break;
+      case "para_ver": odeVeyaIflas(o, e.deger, null, "📜 " + o.ad + ": -" + fmt(e.deger)); oyun.hazine += e.deger; break;
       case "mulk_basina_al": n = o.mulkler.length * e.deger; o.para += n; logla("📜 " + o.ad + " " + o.mulkler.length + " mülkünden +" + fmt(n), "iyi"); break;
       case "mulk_basina_ver": n = o.mulkler.length * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " " + o.mulkler.length + " mülkü için: -" + fmt(n)); break;
       case "imar_basina_al": n = imarToplam(o.id) * e.deger; o.para += n; logla("📜 " + o.ad + " " + imarToplam(o.id) + " imardan +" + fmt(n), "iyi"); break;
@@ -446,11 +574,11 @@
     else if (o.para >= V.ayarlar.esaretCikisBedeli + 1500) { fidyeOde(); bekle(function () { seferKartiCek(botCozum); }, 800); }
     else { esaretGec(); bekle(turuBitir, 800); }
   }
-  function botAlKarar(o, k) {
+  function botAlKarar(o, k, bitince) {
     var iste = o.para - k.fiyat >= botRezerv();
-    if (iste && oyun.botZorluk === "kolay" && Math.random() < 0.3) iste = false; // kolay bot bazen almaz
-    if (iste) satinAl(o.pos, 1);
-    else { modalKapat(); render(); logla("🤖 " + o.ad + ", " + k.ad + "'i almadı (akçe biriktiriyor).", ""); }
+    if (iste && oyun.botZorluk === "kolay" && Math.random() < 0.3) iste = false;
+    if (iste) { satinAl(o.pos, 1); if (bitince) bekle(bitince, 700); }
+    else { modalKapat(); render(); logla("🤖 " + o.ad + ", " + k.ad + "'i almadı — açık artırmaya!", ""); mezat(o.pos, bitince); }
   }
   function botCozum() {
     bekle(function () {
@@ -473,14 +601,23 @@
 
   // ---------- tur ----------
   function turuBitir() {
+    if (oyun.tekrarHak && !aktif().iflas) {
+      oyun.tekrarHak = false; oyun.tekrarSayac = (oyun.tekrarSayac || 0) + 1;
+      if (oyun.tekrarSayac >= 3) { oyun.tekrarSayac = 0; logla("🔁 " + aktif().ad + " üst üste 3 tekrar — yorgun düşüp esarete uğradı!", "kotu"); esareteGonder(aktif()); }
+      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot) bekle(botTuru, 650); return; }
+    } else oyun.tekrarSayac = 0;
+    oyun.elGecti = (oyun.elGecti || 0) + 1;
+    if (oyun.turLimiti && Math.floor(oyun.elGecti / oyun.oyuncular.length) >= oyun.turLimiti) {
+      oyun.bitti = true; temizleKayit(); logla("⏳ Tur limiti doldu! En zengin medeniyet kazanır.", "vurgu"); sonucModal(null); return;
+    }
     var n = oyun.oyuncular.length, sayac = 0;
     do { oyun.sira = (oyun.sira + 1) % n; sayac++; } while (oyun.oyuncular[oyun.sira].iflas && sayac <= n);
-    oyun.hareketYapildi = false; oyun.sonHareket = 0; render();
+    oyun.hareketYapildi = false; oyun.sonHareket = 0; kaydet(); render();
     if (!oyun.bitti && aktif().bot) bekle(botTuru, 650);
   }
   function galibiyetKontrol() {
     var ayakta = oyun.oyuncular.filter(function (o) { return !o.iflas; });
-    if (ayakta.length <= 1 && oyun.oyuncular.length > 1) { oyun.bitti = true; sonucModal(ayakta[0]); }
+    if (ayakta.length <= 1 && oyun.oyuncular.length > 1) { oyun.bitti = true; temizleKayit(); sonucModal(ayakta[0]); }
   }
   function servet(o) { var s = o.para; o.mulkler.forEach(function (pos) { var k = K[pos]; s += k.ipotekli ? k.ipotek : k.fiyat; if (k.tip === "sehir") s += k.imar * k.imarBedeli; }); return s; }
 
@@ -644,7 +781,7 @@
     var b;
     if ((b = $("#m-al"))) b.onclick = function () { satinAl(pos, 1); };
     if ((b = $("#m-bilgi"))) b.onclick = function () { soruModal("fetih"); };
-    if ((b = $("#m-vazgec"))) b.onclick = function () { modalKapat(); render(); };
+    if ((b = $("#m-vazgec"))) b.onclick = function () { modalKapat(); render(); mezat(pos, null); };
     if ((b = $("#m-kapat"))) b.onclick = function () { modalKapat(); render(); };
   }
 
@@ -777,14 +914,19 @@
     }).join("");
   }
   function sonucModal(g) {
-    Ses.kazan();
+    Ses.kazan(); temizleKayit();
     var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
     var kz = g || sirali[0];
+    var enSehir = oyun.oyuncular.slice().sort(function (a, b) { return b.mulkler.length - a.mulkler.length; })[0];
+    var enSeref = oyun.oyuncular.slice().sort(function (a, b) { return (b.seref || 0) - (a.seref || 0); })[0];
+    var ozet = '<div class="ozet-kutu">📜 ' + (oyun.elGecti ? '<b>' + Math.ceil(oyun.elGecti / oyun.oyuncular.length) + '</b> tur · ' : '') +
+      'en çok şehir: <b>' + enSehir.ad + '</b> (' + enSehir.mulkler.length + ')' +
+      (enSeref && enSeref.seref ? ' · en çok kutsal ziyaret: <b>' + enSeref.ad + '</b> (❖' + enSeref.seref + ')' : '') + '</div>';
     modalAc('<div class="zafer">' + gorselImg("kapak", "zafer-bg") + '<div class="zafer-perde"></div>' +
       '<div class="zafer-ic"><div class="zafer-amblem" style="background:' + (kz ? kz.renk : "#888") + '">' + (kz ? (kz.amblem || "🏆") : "🏆") + '</div>' +
       '<div class="zafer-ust">🏆 CİHANA ULAŞAN</div><div class="zafer-ad">' + (kz ? kz.ad : "—") + '</div>' +
       '<div class="zafer-alt">Beylikten cihana giden yolda zafer senindir!</div></div></div>' +
-      '<div class="sira-liste">' + siralamaSatir(sirali, true) + '</div>' +
+      '<div class="sira-liste">' + siralamaSatir(sirali, true) + '</div>' + ozet +
       '<div class="m-btnlar"><button class="akbtn" id="m-kapat">👁️ Tahtayı Gör</button><button class="akbtn btn-ana" onclick="location.reload()">🔄 Yeni Oyun</button></div>', true);
     $("#m-kapat").onclick = modalKapat;
   }
@@ -801,6 +943,8 @@
     $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
     $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
     $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
+    var dv = $("#devam-btn");
+    if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
   });
   window.BC = { get oyun() { return oyun; }, botTuru: function () { botTuru(); } };

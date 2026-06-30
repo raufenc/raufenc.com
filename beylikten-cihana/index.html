@@ -185,6 +185,7 @@
   .zafer-ust{font-family:Georgia,serif;letter-spacing:.16em;color:var(--altin2);font-size:14px;text-shadow:0 2px 9px rgba(0,0,0,.7)}
   .zafer-ad{font-family:Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;text-shadow:0 3px 13px rgba(0,0,0,.75)}
   .zafer-alt{font-size:13px;color:#ecdfbb;margin-top:4px;text-shadow:0 1px 7px rgba(0,0,0,.75)}
+  .ozet-kutu{background:rgba(0,0,0,.05);border-radius:10px;padding:10px 12px;font-size:13.5px;color:#5a4a22;line-height:1.55;margin-top:6px}
   .modal-kutu .akbtn{border:1px solid #b89a4e; background:#eaddbf; color:#3a2d12}
   .modal-kutu .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
   .modal-kutu .akbtn.btn-pasif{background:#e2d6ba}
@@ -255,8 +256,14 @@
         <option value="kolay">Kolay</option><option value="orta" selected>Orta</option><option value="zor">Zor</option>
       </select>
     </label>
+    <label style="font-size:16px">Tur limiti:
+      <select id="tur-limiti">
+        <option value="0" selected>Yok (son kalan)</option><option value="15">15 tur</option><option value="20">20 tur</option><option value="30">30 tur</option>
+      </select>
+    </label>
   </div>
-  <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin</div>
+  <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin · tur limitinde süre dolunca en zengin kazanır</div>
+  <button id="devam-btn" class="btn-buyuk gizli" style="margin-top:0;margin-bottom:10px;background:linear-gradient(180deg,#7fc9a8,#1e8449)">▶️ Kayıtlı Oyuna Devam Et</button>
   <div id="kurulum-oyuncular"></div>
   <button id="basla" class="btn-buyuk">⚔️ Sefere Çık — Oyunu Başlat</button>
   <div class="kurallar-ozet">
