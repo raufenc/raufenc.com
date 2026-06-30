@@ -145,6 +145,8 @@
   .m-eko{margin-top:12px; font-size:14px; background:rgba(0,0,0,.05); border-radius:10px; padding:11px; line-height:1.7}
   .m-eko .bina-satir{display:flex;align-items:center;gap:6px;justify-content:space-between;padding:1px 0}
   .m-ikon{font-size:42px; text-align:center}
+  .m-gorsel{width:100%; max-width:340px; display:block; margin:-2px auto 12px; border-radius:11px; box-shadow:0 5px 16px rgba(0,0,0,.28)}
+  #kapak{display:block; width:100%; margin:0 auto 16px; border-radius:14px; box-shadow:0 12px 34px rgba(0,0,0,.45); border:1.5px solid rgba(201,162,39,.5)}
   .m-btnlar{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; justify-content:flex-end}
   .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
   .kart-ogren{margin-top:12px; font-size:14.5px; background:#fff7e3; border-left:5px solid var(--altin); padding:10px 12px; border-radius:0 9px 9px 0; color:#5a4a22; line-height:1.55}
@@ -172,6 +174,33 @@
   .kurallar-icerik h3{color:#7a5b1a; margin:16px 0 5px; font-size:18px} .kurallar-icerik ul,.kurallar-icerik ol{margin:5px 0; padding-left:20px}
   .kurallar-icerik li{margin:4px 0}
 
+  /* ---------- takas + şeref ---------- */
+  .kare-seref{background:linear-gradient(135deg,#f8efce,#efe0b3)}
+  .takas-grid{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin:10px 0}
+  .takas-col{background:rgba(0,0,0,.045); border-radius:11px; padding:10px}
+  .takas-bas{font-weight:800; font-size:14.5px; margin-bottom:7px; text-align:center; color:#3a2d12}
+  .takas-bas select{font-size:13.5px; padding:4px 7px; border-radius:8px; border:1px solid #b89a4e; background:#fff}
+  .takas-mulk{display:flex; align-items:center; gap:6px; font-size:14px; padding:5px 3px; cursor:pointer; border-radius:6px}
+  .takas-mulk:hover{background:rgba(201,162,39,.12)}
+  .takas-mulk input{width:17px; height:17px; cursor:pointer}
+  .takas-fy{color:#8a6f2a; font-size:12px; margin-left:auto}
+  .takas-para{font-size:13.5px; margin-top:7px; color:#3a2d12}
+  .takas-para input{width:84px; padding:5px 7px; border-radius:7px; border:1px solid #cdb98a; font-size:13.5px}
+  .takas-bos{font-size:13px; color:#9a8a60; font-style:italic; padding:7px 0}
+  .takas-ozet{background:rgba(0,0,0,.05); border-radius:10px; padding:11px 13px; font-size:15px; line-height:1.65}
+
+  /* ---------- kart çevirme + desen ---------- */
+  .flip{perspective:1000px;margin:8px auto 4px;width:150px;height:158px}
+  .flip-ic{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.1,.35,1)}
+  .flip.acik .flip-ic{transform:rotateY(180deg)}
+  .flip-yuz{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2.5px solid #b7950b;box-shadow:0 7px 18px rgba(0,0,0,.32)}
+  .flip-arka{background:#5e4216}.flip-arka svg{width:100%;height:100%}
+  .flip-on{transform:rotateY(180deg);background:linear-gradient(180deg,#f8ecc8,#e6cf94);flex-direction:column;color:#7a5b1a}
+  .flip-on .fn{font-family:Georgia,serif;font-weight:800;font-size:66px;line-height:1;text-shadow:0 2px 0 #f6e2a8}
+  .flip-on .fa{font-size:12.5px;color:#8a6f2a;letter-spacing:.05em;margin-top:2px}
+  .desenli{position:relative}.desenli > *{position:relative;z-index:1}
+  .desen-bg{position:absolute;inset:0;z-index:0;opacity:.5;border-radius:inherit;overflow:hidden}
+
   /* ---------- animasyonlar ---------- */
   @keyframes popIn{from{transform:scale(.86);opacity:0}to{transform:scale(1);opacity:1}}
   @keyframes flipNo{from{transform:rotateX(85deg) scale(.7);opacity:0}to{transform:rotateX(0) scale(1);opacity:1}}
@@ -194,6 +223,7 @@
 </header>
 
 <section id="kurulum">
+  <img id="kapak" src="img/kapak.webp" alt="Beylikten Cihana" onerror="this.style.display='none'">
   <h2>Oyuncular</h2>
   <div class="kur-row-ust">
     <label style="font-size:16px">Koltuk sayısı:
@@ -201,8 +231,13 @@
         <option value="2">2</option><option value="3">3</option><option value="4" selected>4</option>
       </select>
     </label>
-    <span style="font-size:13px;color:#c2ad77">Her koltuk: <b>Sen</b> ya da <b>Bot</b></span>
+    <label style="font-size:16px">Bot zorluğu:
+      <select id="bot-zorluk">
+        <option value="kolay">Kolay</option><option value="orta" selected>Orta</option><option value="zor">Zor</option>
+      </select>
+    </label>
   </div>
+  <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin</div>
   <div id="kurulum-oyuncular"></div>
   <button id="basla" class="btn-buyuk">⚔️ Sefere Çık — Oyunu Başlat</button>
   <div class="kurallar-ozet">
@@ -223,6 +258,7 @@
     <div class="panel-kart"><div id="log"></div></div>
     <div class="panel-alt">
       <button id="skor-btn" class="akbtn">📊 Servet</button>
+      <button id="ses-btn" class="akbtn">🔊 Ses</button>
       <button id="kurallar-btn" class="akbtn">📖 Kurallar</button>
     </div>
   </div>

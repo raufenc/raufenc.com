@@ -92,6 +92,7 @@ window.OYUN_VERISI = {
    "tarih": "Beyliğin doğuşu: 13. yüzyıl sonu",
    "bilgi": "Söğüt, Osmanlı Beyliği'nin doğduğu yer olarak kabul edilir. Ertuğrul Gazi önderliğindeki Kayı boyu bu bölgeye yerleşmiş, oğlu Osman Bey döneminde beyliğin merkezi haline gelmiştir. Ertuğrul Gazi'nin türbesi bugün de Söğüt'tedir.",
    "neden": "Söğüt, küçük bir uç beyliğinin nasıl bir cihan devletine dönüşebileceğini ve her büyük gücün mütevazı bir başlangıcı olduğunu öğretir.",
+   "gorsel": "img/sogut.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -124,6 +125,7 @@ window.OYUN_VERISI = {
    "tarih": "Kayı yaylağı: 13.-14. yüzyıl",
    "bilgi": "Domaniç, Kayı boyunun yaylak olarak kullandığı dağlık bölgedir. Osmanlı geleneğine göre kışlağı Söğüt, yazlağı ise Domaniç yaylalarıydı. Bölge, beyliğin ilk büyüme döneminde önemli bir yerleşim ve hayvancılık alanı olmuştur.",
    "neden": "Domaniç, konargöçer Türkmen yaşam biçimini ve toprağa yerleşme sürecinin beyliğin temelini nasıl oluşturduğunu gösterir.",
+   "gorsel": "img/domanic.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -175,6 +177,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: yaklaşık 1299",
    "bilgi": "Bilecik, Osman Bey döneminde Bizans'tan alınan ilk önemli yerleşim merkezlerindendir. Beyliğin Söğüt çevresinden çıkıp genişlemesinin ilk somut adımlarından sayılır; yerel tekfurlarla kurulan ilişkiler fethi kolaylaştırmıştır.",
    "neden": "Osmanlı'nın bir aşiretten devlete dönüşürken ilk topraklarını nasıl genişlettiğini gösterir.",
+   "gorsel": "img/bilecik.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -207,6 +210,7 @@ window.OYUN_VERISI = {
    "tarih": "Osman Bey'in ilk merkezi (14. yy başı)",
    "bilgi": "Yenişehir, Osman Bey döneminde fethedilip beyliğin batıya, Bursa ve İznik'e ilerleyişinde ileri üs ve ilk gerçek idare merkezi işlevi gördü. Bursa kuşatmasının lojistik üssü oldu; adı 'yeni şehir' anlamına gelir.",
    "neden": "Göçebe kökenli bir beyliğin sabit bir yönetim merkezi kurarak devletleşmesini temsil eder.",
+   "gorsel": "img/yenisehir.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -234,6 +238,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1331 (Orhan Bey)",
    "bilgi": "Antik adı Nikaia olan İznik, surlarla çevrili stratejik bir Bizans şehriydi; Orhan Bey döneminde uzun bir kuşatmanın ardından (1331) Osmanlı'ya katıldı. Burada kurulan ilk Osmanlı medresesi ve ünlü çinileriyle önemli bir ilim ve sanat merkezine dönüştü.",
    "neden": "Fethin yalnızca askerî değil, medrese ve kültür kurumlarıyla kalıcı bir uygarlık inşası olduğunu öğretir.",
+   "gorsel": "img/iznik.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -268,6 +273,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1326",
    "bilgi": "Orhan Gazi döneminde 1326'da fethedilen Bursa, beylikten devlete geçen Osmanlı'nın ilk büyük başkenti oldu. Ulu Cami, Yeşil Cami ve Yeşil Türbe gibi erken Osmanlı eserlerinin merkezidir; ipek ticaretiyle de önemli bir ekonomik merkezdi. Birçok ilk dönem padişahın türbesi buradadır.",
    "neden": "Bir uç beyliğinin kalıcı bir devlet başkentine dönüşerek kurumsallaşmasını oyuncuya gösterir.",
+   "gorsel": "img/bursa.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -309,6 +315,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1361 (başkent ~1363)",
    "bilgi": "I. Murad döneminde fethedilen Edirne, Osmanlı'nın Rumeli'ye ve Avrupa'ya açılan başkenti haline geldi. Yaklaşık bir asır boyunca devlete merkezlik etti ve İstanbul'un fethi de buradan hazırlandı; Selimiye Camii gibi şaheserlerle klasik mimarinin doruğunu temsil eder. Şehir, Balkan fetihlerinin lojistik ve siyasi üssüydü.",
    "neden": "Devletin yönünü Anadolu'dan Avrupa'ya çevirerek bir imparatorluğa dönüşme sürecini vurgular.",
+   "gorsel": "img/edirne.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -336,6 +343,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1363 (Lala Şahin Paşa)",
    "bilgi": "Bugün Bulgaristan'da bulunan Filibe (Plovdiv), Rumeli'nin erken dönemde fethedilen önemli bir şehri olup uzun süre Rumeli Beylerbeyliği'nin merkezi olarak yönetildi. Meriç vadisindeki konumu sayesinde Balkanlar'a yapılan akınların ve iskân siyasetinin kilit durağıydı. Osmanlı'nın bölgedeki idari ve askeri örgütlenmesinin temel taşlarından biriydi.",
    "neden": "Fethedilen Balkan topraklarının kalıcı idari merkezlerle yönetilip yurt haline getirilmesini öğretir.",
+   "gorsel": "img/filibe.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -380,6 +388,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1392",
    "bilgi": "Vardar Nehri kıyısındaki Üsküp, 1392'de Osmanlı idaresine girdi ve Rumeli fetihlerinde ileri üs ile akıncı faaliyetlerinin merkezi oldu. Çarşısı, hanları ve hamamlarıyla önemli bir Balkan kültür ve ticaret şehri olarak gelişti.",
    "neden": "Rumeli'deki ilerleyişte Üsküp'ün ileri üs olarak stratejik önemini öğretir.",
+   "gorsel": "img/uskup.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -412,6 +421,7 @@ window.OYUN_VERISI = {
    "tarih": "Bosna'nın fethi: 1463",
    "bilgi": "Bosna'nın fethinin (1463) ardından Saraybosna, vali İsa Bey İshakoviç'in kurduğu külliye, çarşı ve köprülerle bir şehir olarak gelişti; adı 'saray' kelimesinden gelir. Gazi Hüsrev Bey'in eserleriyle Bosna'nın idari ve kültürel merkezi oldu.",
    "neden": "Osmanlı'nın bir şehri külliye ve vakıf kurumlarıyla nasıl inşa edip kalkındırdığını gösterir.",
+   "gorsel": "img/saraybosna.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -439,6 +449,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1521 (Kanuni)",
    "bilgi": "Tuna ile Sava'nın birleştiği noktadaki Belgrad, Macar Krallığı'nın güneydeki önemli kalesiydi. Fatih 1456'da alamadı; şehir ancak Kanuni Sultan Süleyman tarafından 1521'de fethedildi ve Orta Avrupa'ya açılan kapı oldu.",
    "neden": "Bir kalenin stratejik konumunun fethi neden kritik kıldığını öğretir.",
+   "gorsel": "img/belgrad.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -473,6 +484,7 @@ window.OYUN_VERISI = {
    "tarih": "Selçuklu başkenti (13. yy)",
    "bilgi": "Konya, Anadolu Selçuklu Devleti'ne uzun süre başkentlik yapmış ve devletin siyasi-kültürel merkezi olmuştur. Sultan I. Alâeddin Keykubad döneminde mimari ve ilim açısından zirveye ulaşmış, Mevlânâ Celâleddin Rûmî'nin yaşayıp vefat ettiği şehir olarak tasavvuf kültürünün de başkenti sayılmıştır.",
    "neden": "Anadolu'nun Türkleşmesinde Selçuklu siyasi ve kültürel merkezinin nasıl şekillendiğini öğretir.",
+   "gorsel": "img/konya.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -505,6 +517,7 @@ window.OYUN_VERISI = {
    "tarih": "Selçuklu-Osmanlı dönüşümü (13.-15. yy)",
    "bilgi": "Kayseri, Anadolu Selçukluları döneminde önemli bir ticaret, ilim ve sanat merkezi olmuş; Gevher Nesibe Şifahanesi ve Tıp Medresesi gibi öncü kurumlara ev sahipliği yapmıştır. Selçuklu sonrası Eretnaoğulları, Kadı Burhaneddin ve Dulkadiroğulları gibi güçlerin denetimine girmiş, Karamanoğulları'nın elindeyken Fatih Sultan Mehmed döneminde (1474) kesin olarak Osmanlı topraklarına katılmıştır.",
    "neden": "Bir şehrin medrese ve şifahaneleriyle bilim ve ticaret merkezine dönüşmesini örneklendirir.",
+   "gorsel": "img/kayseri.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -532,6 +545,7 @@ window.OYUN_VERISI = {
    "tarih": "Selçuklu ilim merkezi; Osmanlı'ya katılım (1398)",
    "bilgi": "Sivas, Anadolu Selçukluları ve İlhanlı döneminde Gök Medrese ve Çifte Minareli Medrese gibi anıtsal eserlerle önemli bir ilim ve kervan yolu merkezi olmuştur. Yıldırım Bayezid döneminde Osmanlı'ya katılmış, daha sonra Millî Mücadele'de toplanan Sivas Kongresi (1919) ile Türk tarihinde yeniden öne çıkmıştır.",
    "neden": "Bir kentin ortaçağ medrese geleneğinden milli mücadeleye uzanan tarihsel sürekliliğini gösterir.",
+   "gorsel": "img/sivas.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -576,6 +590,7 @@ window.OYUN_VERISI = {
    "tarih": "Osmanlı fethi: 1516",
    "bilgi": "Halep, 1516 Mercidabık Savaşı'nın ardından Yavuz Sultan Selim döneminde Memlûklerden alınarak Osmanlı topraklarına katıldı ve yüzyıllarca önemli bir eyalet merkezi oldu. Daha öncesinde Zengî atabeyi Nureddin Mahmud'un başkenti olarak Haçlılara karşı mücadelenin merkezlerinden biriydi. Kervan yolları üzerindeki konumu sayesinde Osmanlı döneminde Doğu Akdeniz ticaretinin en canlı şehirlerinden biri haline geldi.",
    "neden": "Bir şehrin ticaret yolları üzerindeki konumunun onu hem zenginlik hem de stratejik bir merkez yaptığını öğretir.",
+   "gorsel": "img/halep.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -603,6 +618,7 @@ window.OYUN_VERISI = {
    "tarih": "Osmanlı fethi: 1516",
    "bilgi": "Şam, 1516'da Yavuz Sultan Selim'in Suriye'yi fethiyle Osmanlı yönetimine girdi ve Şam Eyaleti'nin merkezi oldu. Her yıl buradan yola çıkan Surre alayları ve hac kervanları nedeniyle 'hac yolunun kapısı' olarak büyük dinî ve idari öneme sahipti. Emevî Camii ve köklü ilim geleneğiyle İslam dünyasının önemli kültür merkezlerinden biri olmayı sürdürdü.",
    "neden": "Bir şehrin dinî ve idari işlevinin (hac kervanlarının toplanma noktası olması) onu imparatorluk için ne kadar değerli kıldığını gösterir.",
+   "gorsel": "img/sam.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -623,30 +639,13 @@ window.OYUN_VERISI = {
   },
   {
    "pos": 29,
-   "tip": "sehir",
+   "tip": "seref",
    "ad": "Kudüs",
-   "grupKey": "samcezire",
-   "grup": {
-    "ad": "Şam ve Cezîre",
-    "renk": "#caa000"
-   },
-   "fiyat": 2800,
-   "ipotek": 1400,
-   "imarBedeli": 1500,
-   "kira": [
-    280,
-    1400,
-    4200,
-    12600,
-    18200,
-    22400
-   ],
    "tarih": "Osmanlı fethi: 1516-1517",
    "bilgi": "Kudüs, 1516-1517 seferiyle Yavuz Sultan Selim döneminde Osmanlı topraklarına katıldı ve dört yüzyıl boyunca Osmanlı yönetiminde kaldı. Kanuni Sultan Süleyman, şehrin bugün hâlâ ayakta olan surlarını yeniden inşa ettirerek Kudüs'e büyük önem verdi. Üç semavi din için kutsal sayılan şehir, Osmanlı'nın farklı inançları bir arada yönetme anlayışının önemli bir örneğiydi.",
    "neden": "Üç din için kutsal bir şehri yönetmenin, hoşgörü ve farklı toplulukları bir arada tutma becerisi gerektirdiğini öğretir.",
-   "sahip": null,
-   "imar": 0,
-   "ipotekli": false
+   "gorsel": "img/kudus.webp",
+   "kural": "Kutsal belde — alınıp satılmaz, üzerine imar yapılmaz. Buraya saygıyla uğrayan, hizmet şerefi (Hâdimü'l-Harameyn) kazanır; bu şeref oyun sonu servetine katkı sağlar."
   },
   {
    "pos": 30,
@@ -678,6 +677,7 @@ window.OYUN_VERISI = {
    "tarih": "Osmanlı'ya katılışı: 1517",
    "bilgi": "Fatımîler tarafından kurulan Kahire, sonradan Memlûk Devleti'nin başkenti ve İslam dünyasının en önemli ilim merkezlerinden biri oldu. 1517'de Yavuz Sultan Selim'in Mısır seferiyle Osmanlı topraklarına katıldı ve halifeliğin Osmanlı'ya geçmesinde dönüm noktası oldu. El-Ezher medresesiyle yüzyıllarca İslam ilminin kalbi sayıldı.",
    "neden": "Mısır'ın fethi Osmanlı'yı İslam dünyasının lideri konumuna taşıyan stratejik bir kazanımdır.",
+   "gorsel": "img/kahire.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -705,6 +705,7 @@ window.OYUN_VERISI = {
    "tarih": "IV. Murad'ın fethi: 1638",
    "bilgi": "Abbasî Devleti'nin başkenti olarak kurulan Bağdat, Beytülhikme (Bilgelik Evi) ile İslam'ın altın çağında bilim ve tercüme faaliyetlerinin merkeziydi. 1258'de Moğol istilasıyla büyük yıkım yaşadı; uzun bir Safevî-Osmanlı çekişmesinin ardından 1638'de IV. Murad tarafından kesin olarak Osmanlı'ya bağlandı. Doğu seferlerinde sınır şehri olarak askerî önem taşıdı.",
    "neden": "Bağdat, Osmanlı-Safevî mücadelesinde doğu sınırının kilit şehri ve İslam ilim mirasının sembolüdür.",
+   "gorsel": "img/bagdat.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -737,6 +738,7 @@ window.OYUN_VERISI = {
    "tarih": "Osmanlı'ya katılışı: 1538",
    "bilgi": "Hz. Ömer döneminde kurulan Basra, Basra Körfezi'ne yakın konumuyla erken İslam tarihinde önemli bir ticaret ve ilim merkeziydi. 1538'de Kanunî Sultan Süleyman döneminde Osmanlı egemenliğine girdi ve Hint Okyanusu ticaret yollarının kontrolünde stratejik bir üs oldu. Portekiz'le Basra Körfezi'ndeki rekabette Osmanlı'nın güney kapısını oluşturdu.",
    "neden": "Basra, Osmanlı'nın körfez ticaretine ve deniz gücüne açılan güney limanı olarak önemini öğretir.",
+   "gorsel": "img/basra.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
@@ -765,30 +767,13 @@ window.OYUN_VERISI = {
   },
   {
    "pos": 37,
-   "tip": "sehir",
+   "tip": "seref",
    "ad": "Haremeyn",
-   "grupKey": "tac",
-   "grup": {
-    "ad": "Devletin Tâcı",
-    "renk": "#1f3a93"
-   },
-   "fiyat": 3500,
-   "ipotek": 1750,
-   "imarBedeli": 2000,
-   "kira": [
-    350,
-    1750,
-    5250,
-    15750,
-    22750,
-    28000
-   ],
    "tarih": "Osmanlı hâkimiyeti: 1517",
    "bilgi": "Haremeyn, İslam'ın iki kutsal şehri Mekke ve Medine'yi birlikte ifade eden terimdir. Yavuz Sultan Selim'in 1517'de Memlük Devleti'ne son vermesiyle bu kutsal toprakların korunması Osmanlı'ya geçti ve padişahlar bundan sonra 'Hâdimü'l-Haremeyni'ş-Şerifeyn' (İki Kutsal Şehrin Hizmetkârı) unvanını kullandı. Surre alayları ile her yıl bu bölgeye yardımlar gönderilir, hac yolları güvence altına alınırdı.",
    "neden": "Haremeyn'in korunması Osmanlı padişahına İslam dünyasında manevi liderlik ve hilafet meşruiyeti kazandırmıştır.",
-   "sahip": null,
-   "imar": 0,
-   "ipotekli": false
+   "gorsel": "img/haremeyn.webp",
+   "kural": "Kutsal belde — alınıp satılmaz, üzerine imar yapılmaz. Buraya saygıyla uğrayan, hizmet şerefi (Hâdimü'l-Harameyn) kazanır; bu şeref oyun sonu servetine katkı sağlar."
   },
   {
    "pos": 38,
@@ -820,6 +805,7 @@ window.OYUN_VERISI = {
    "tarih": "Fetih: 1453",
    "bilgi": "İstanbul, 1453'te Fatih Sultan Mehmed tarafından fethedilerek Bizans İmparatorluğu'na son verildi ve Osmanlı Devleti'nin başkenti oldu. Topkapı Sarayı, kapalıçarşı ve Süleymaniye gibi yapılarla devletin siyasi, ekonomik ve kültürel merkezi hâline geldi. Boğaz'ın iki kıtayı birleştiren konumu sayesinde yüzyıllarca dünya ticaretinin ve diplomasisinin kalbi olarak öne çıktı.",
    "neden": "İstanbul'un fethi bir çağı kapatıp yenisini açmış, şehri imparatorluğun gücünün ve sürekliliğinin sembolü hâline getirmiştir.",
+   "gorsel": "img/istanbul.webp",
    "sahip": null,
    "imar": 0,
    "ipotekli": false
