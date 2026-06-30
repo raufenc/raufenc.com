@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Beylikten Cihana — Türk-İslam Medeniyeti Strateji Oyunu</title>
 <script>
+  // Eski service worker / önbelleği temizle (çok projeli sitede bayat içerik sorununu çözer)
+  try {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations)
+      navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); }).catch(function () {});
+    if (window.caches && caches.keys)
+      caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); }).catch(function () {});
+  } catch (e) {}
   // Görünür hata yakalayıcı (özellikle mobil tarayıcılarda sorunu tespit için)
   window.addEventListener('error', function (e) {
     try {
@@ -277,6 +284,7 @@
 </style>
 </head>
 <body>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v5 · yükleniyor…</div>
 <header>
   <div class="marka">٭ TÜRK-İSLAM MEDENİYETİ STRATEJİ OYUNU ٭</div>
   <h1>BEYLİKTEN <span class="ana">CİHANA</span></h1>
@@ -362,7 +370,7 @@
   </div>
 </div>
 
-<script src="icerik.js?v=3" charset="utf-8"></script>
-<script src="oyun.js?v=3" charset="utf-8"></script>
+<script src="icerik.js?v=5" charset="utf-8"></script>
+<script src="oyun.js?v=5" charset="utf-8"></script>
 </body>
 </html>

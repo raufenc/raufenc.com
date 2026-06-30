@@ -942,6 +942,7 @@
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v5 ✓ hazır";
   });
   window.BC = { get oyun() { return oyun; }, botTuru: function () { botTuru(); } };
 })();
