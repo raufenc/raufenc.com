@@ -6,6 +6,11 @@
 <meta name="theme-color" content="#F5EDE0">
 <title>Vicdan — Kart Kaydırma Oyunu</title>
 <meta name="description" content="Hayal Ortaokulu'nda beş hafta: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
+<meta property="og:title" content="Vicdan — Kart Kaydırma Oyunu">
+<meta property="og:description" content="Hayal Ortaokulu'nda beş hafta: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://raufenc.com/oyunlar/vicdan/">
+<meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/vicdan.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,10 +54,41 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .tanitim{font-size:.95rem;line-height:1.65;color:rgba(43,33,24,.82);max-width:340px}
 .dugmeler{display:flex;flex-direction:column;gap:12px;width:min(260px,100%)}
 
+/* ---------- Kapak (açılış) ---------- */
+.kapak{
+  position:relative;width:min(280px,80%);border-radius:18px;overflow:hidden;
+  background:linear-gradient(135deg,#4A7C59,#D9A441);
+  box-shadow:0 14px 30px rgba(43,33,24,.18);
+  outline:1px solid rgba(217,164,65,.45);outline-offset:-1px;
+}
+.kapak::before{content:"";display:block;padding-top:66.66%} /* 3:2 oran */
+.kapak-yedek{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:52px}
+.kapak img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+@media (max-height:700px){.kapak{width:min(220px,70%)}} /* kısa ekranlarda taşmayı önle */
+
+/* ---------- Denge şeridi (açılış) ---------- */
+.denge-serit{
+  display:flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;
+  background:rgba(255,253,248,.85);border:1px solid rgba(217,164,65,.4);
+  box-shadow:0 3px 10px rgba(43,33,24,.07);
+}
+.denge-serit span{font-size:.95rem;line-height:1}
+.denge-serit em{font-style:normal;font-size:.68rem;font-weight:600;letter-spacing:.05em;color:rgba(43,33,24,.55)}
+
+/* ---------- Bölüm filigranı ---------- */
+#ekran-bolum{position:relative;overflow:hidden}
+#ekran-bolum > *:not(.bolum-filigran){position:relative;z-index:1}
+.bolum-filigran{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-58%);
+  font-family:'Fraunces',Georgia,serif;font-weight:700;line-height:1;
+  font-size:clamp(220px,70vw,320px);color:rgba(43,33,24,.055);
+  pointer-events:none;user-select:none;-webkit-user-select:none;
+}
+
 /* ---------- Butonlar ---------- */
 .btn{
   min-height:50px;padding:13px 30px;border:none;border-radius:16px;cursor:pointer;
-  background:#4A7C59;color:#FFFDF8;font-weight:700;font-size:1rem;
+  background:linear-gradient(180deg,#548863,#4A7C59);color:#FFFDF8;font-weight:700;font-size:1rem;
   box-shadow:0 8px 20px rgba(74,124,89,.32);transition:transform .12s ease;
 }
 .btn:active{transform:scale(.96)}
@@ -68,6 +104,19 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .g-ad{font-size:.6rem;font-weight:600;color:rgba(43,33,24,.6)}
 .gosterge.degisti .g-ikon{animation:zipla .55s ease}
 @keyframes zipla{35%{transform:translateY(-4px) scale(1.25)}}
+
+/* Seçim sonrası uçuşan yön işareti (▲/▼) */
+.uc-isaret{
+  position:absolute;top:-4px;left:50%;font-size:.7rem;font-weight:800;line-height:1;
+  pointer-events:none;z-index:5;animation:isaretUc .8s ease-out forwards;
+}
+.uc-isaret.artis{color:#4A7C59}
+.uc-isaret.azalis{color:#C4574A}
+@keyframes isaretUc{
+  0%{opacity:0;transform:translate(-50%,5px)}
+  25%{opacity:1;transform:translate(-50%,0)}
+  100%{opacity:0;transform:translate(-50%,-15px)}
+}
 
 .ilerleme{
   display:flex;justify-content:space-between;width:min(340px,100%);
@@ -87,7 +136,11 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .kart{
   position:relative;width:min(340px,100%);
   height:clamp(340px,50vh,440px);height:clamp(340px,50dvh,440px);
-  background:#FFFDF8;border-radius:22px;overflow:hidden;
+  background:
+    linear-gradient(160deg,rgba(217,164,65,.05),rgba(217,164,65,0) 45%),
+    repeating-linear-gradient(0deg,rgba(43,33,24,.014) 0,rgba(43,33,24,.014) 1px,transparent 1px,transparent 3px),
+    #FFFDF8; /* hafif kâğıt dokusu */
+  border-radius:22px;overflow:hidden;
   box-shadow:0 14px 34px rgba(43,33,24,.16);
   touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
   cursor:grab;will-change:transform;
@@ -99,7 +152,11 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .portre-yedek{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px}
 .portre img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
 .kart-govde{height:56%;padding:14px 18px 16px;display:flex;flex-direction:column;gap:8px}
-.karakter-adi{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.02rem;color:#4A7C59}
+.karakter-adi{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.02rem;color:#4A7C59;position:relative;padding-bottom:7px}
+.karakter-adi::after{ /* isim şeridinde ince altın çizgi */
+  content:"";position:absolute;left:0;bottom:0;width:46px;height:2px;border-radius:1px;
+  background:linear-gradient(90deg,#D9A441,rgba(217,164,65,.1));
+}
 .kart-metin{font-size:.92rem;line-height:1.5;color:rgba(43,33,24,.9)}
 .etiket{
   position:absolute;top:14px;z-index:5;max-width:62%;
@@ -122,13 +179,20 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .secim:active{transform:scale(.96)}
 .ipucu{font-size:.7rem;color:rgba(43,33,24,.45)}
 
-/* ---------- Küpe ---------- */
+/* ---------- Küpe (özlü söz kartpostalı) ---------- */
 .kupe-kart{
-  width:min(340px,100%);background:#FFFDF8;border:2px solid #D9A441;border-radius:20px;
-  padding:30px 22px;box-shadow:0 12px 28px rgba(217,164,65,.22);
+  position:relative;width:min(340px,100%);
+  background:linear-gradient(160deg,rgba(217,164,65,.07),rgba(217,164,65,0) 55%),#FFFDF8;
+  border:2px solid #D9A441;border-radius:20px;
+  padding:26px 24px 24px;box-shadow:0 12px 28px rgba(217,164,65,.22);
 }
+.kupe-kart::before{ /* altın iç çerçeve (çift çerçeve etkisi) */
+  content:"";position:absolute;inset:7px;border:1px solid rgba(217,164,65,.5);
+  border-radius:13px;pointer-events:none;
+}
+.kupe-ikon{font-size:1.6rem;line-height:1;margin-bottom:12px}
 .kupe-soz{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.22rem;line-height:1.55}
-.kupe-kaynak{margin-top:14px;font-size:.8rem;font-weight:600;color:rgba(43,33,24,.6)}
+.kupe-kaynak{margin-top:14px;font-size:.8rem;font-weight:600;color:rgba(43,33,24,.6);text-align:right}
 
 /* ---------- Son ekranı ---------- */
 .son-gorsel{display:flex;align-items:flex-end;gap:12px}
@@ -138,11 +202,19 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
 /* ---------- Final karne ---------- */
 #ekran-final{position:relative;overflow:hidden}
+#ekran-final h2{animation:karnePop .55s cubic-bezier(.34,1.56,.64,1)}
+@keyframes karnePop{from{transform:scale(.72);opacity:0}}
 .karne{display:flex;flex-direction:column;gap:10px;width:min(320px,100%);z-index:1}
 .karne-satir{
   display:flex;align-items:center;gap:10px;background:#FFFDF8;
   border-radius:14px;padding:10px 14px;box-shadow:0 4px 12px rgba(43,33,24,.07);
+  animation:satirGel .45s ease backwards;
 }
+.karne-satir:nth-child(1){animation-delay:.08s}
+.karne-satir:nth-child(2){animation-delay:.24s}
+.karne-satir:nth-child(3){animation-delay:.4s}
+.karne-satir:nth-child(4){animation-delay:.56s}
+@keyframes satirGel{from{opacity:0;transform:translateX(-12px)}}
 .karne-satir.vurgulu{border:2px solid #D9A441}
 .karne-ikon{font-size:1.15rem}
 .karne-ad{font-size:.78rem;font-weight:600;width:74px;text-align:left}
@@ -153,7 +225,9 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   width:min(340px,100%);background:#FFFDF8;border-radius:16px;padding:16px 18px;
   font-size:.88rem;line-height:1.6;color:rgba(43,33,24,.85);
   box-shadow:0 6px 16px rgba(43,33,24,.08);z-index:1;
+  animation:yorumGel .6s ease 1.1s backwards;
 }
+@keyframes yorumGel{from{opacity:0;transform:translateY(10px)}}
 .konfeti{position:absolute;top:-16px;z-index:0;pointer-events:none;animation:konfetiDus linear forwards;opacity:.95}
 @keyframes konfetiDus{to{transform:translateY(105vh) rotate(720deg);opacity:.15}}
 
@@ -178,9 +252,17 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
   <!-- Açılış -->
   <section id="ekran-acilis" class="ekran orta">
+    <div class="kapak" aria-hidden="true">
+      <span class="kapak-yedek">📿</span>
+      <img src="../assets/kapak/vicdan.jpg" alt="" draggable="false" onerror="this.remove()">
+    </div>
     <div class="ust-baslik">Hayal Ortaokulu</div>
     <h1 class="oyun-adi">Vicdan</h1>
     <p class="tanitim">Beş hafta, onlarca seçim. Kartı sola ya da sağa kaydır; her karar vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.</p>
+    <div class="denge-serit" aria-hidden="true">
+      <span>❤️</span><span>🤝</span><span>🏠</span><span>⭐</span>
+      <em>bunları dengede tut</em>
+    </div>
     <div class="dugmeler">
       <button id="btn-basla" class="btn">Başla</button>
       <button id="btn-devam" class="btn ikincil gizli">Devam Et</button>
@@ -189,6 +271,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
   <!-- Bölüm girişi -->
   <section id="ekran-bolum" class="ekran orta">
+    <div class="bolum-filigran" id="bolum-filigran" aria-hidden="true"></div>
     <div class="ust-baslik" id="bolum-no"></div>
     <h2 id="bolum-ad" style="font-size:2.1rem"></h2>
     <p class="tanitim" id="bolum-giris"></p>
@@ -209,8 +292,9 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
   <!-- Kulağına Küpe -->
   <section id="ekran-kupe" class="ekran orta">
-    <h2 style="font-size:1.7rem">Kulağına Küpe 📿</h2>
+    <h2 style="font-size:1.7rem">Kulağına Küpe</h2>
     <div class="kupe-kart">
+      <div class="kupe-ikon" aria-hidden="true">📿</div>
       <p class="kupe-soz" id="kupe-soz"></p>
       <p class="kupe-kaynak" id="kupe-kaynak"></p>
     </div>
@@ -310,7 +394,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
       if (!h) return null;
       var k = JSON.parse(h);
       if (!k || typeof k.bolumIdx !== "number" || !k.stats) return null;
-      if (k.bolumIdx < 0 || k.bolumIdx >= ICERIK.bolumler.length) return null;
+      if (k.bolumIdx < 0 || k.bolumIdx > ICERIK.bolumler.length) return null; /* === length: final karnesi bekliyor, geçerli */
       /* içerik değişmiş olabilir: bilinmeyen kart id'lerini ayıkla */
       if (Array.isArray(k.deste)) {
         k.deste = k.deste.filter(function(id){ return kartMap.has(id); });
@@ -365,6 +449,12 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
       if (secenek && secenek[s.k]) {
         gRef[s.k].kok.classList.add("degisti");
         (function(kok){ setTimeout(function(){ kok.classList.remove("degisti"); }, 650); })(gRef[s.k].kok);
+        /* Görsel: yönü belli eden uçuşan işaret (miktar gösterilmez) */
+        var isr = document.createElement("span");
+        isr.className = "uc-isaret " + (secenek[s.k] > 0 ? "artis" : "azalis");
+        isr.textContent = secenek[s.k] > 0 ? "▲" : "▼";
+        gRef[s.k].kok.appendChild(isr);
+        (function(n){ setTimeout(function(){ n.remove(); }, 900); })(isr);
       }
     });
   }
@@ -395,6 +485,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     el("bolum-no").textContent = b.no + ". Hafta";
     el("bolum-ad").textContent = b.ad;
     el("bolum-giris").textContent = b.giris;
+    el("bolum-filigran").textContent = b.no; /* görsel: dev filigran */
     ekranGoster("ekran-bolum");
   }
 
@@ -611,7 +702,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     durum.deste = null;
     durum.desteBoy = 0;
     kupeSonrasi = durum.bolumIdx >= ICERIK.bolumler.length ? "final" : "bolum";
-    if (kupeSonrasi === "bolum") kaydet(); else kayitSil();
+    kaydet(); /* final dalında da kaydet: sayfa yenilenirse karne kaybolmasın (kayitSil yalnız finalGoster'da) */
     ekranGoster("ekran-kupe");
   }
 
@@ -642,7 +733,10 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     ekranGoster("ekran-final");
     requestAnimationFrame(function(){
       requestAnimationFrame(function(){
-        dolular.forEach(function(d){ d.el.style.width = d.v + "%"; });
+        dolular.forEach(function(d, i){
+          d.el.style.transitionDelay = (0.3 + i * 0.25).toFixed(2) + "s"; /* sırayla dolum */
+          d.el.style.width = d.v + "%";
+        });
       });
     });
     konfetiYap(el("ekran-final"));
@@ -690,6 +784,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     var k = kayitOku();
     if (!k) { yeniOyun(); return; }
     durum = k;
+    if (durum.bolumIdx >= ICERIK.bolumler.length) { finalGoster(); return; }
     if (durum.deste && durum.deste.length) oyunaGir();
     else bolumIntroGoster();
   });

@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hayal Ortaokulu — Değer Oyunları</title>
 <meta name="description" content="Ortaokul öğrencileri için oyunla ahlak eğitimi: Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi. Dürüstlük, adalet, sabır ve daha fazlası — oynayarak öğren.">
+<meta property="og:title" content="Hayal Ortaokulu — Değer Oyunları">
+<meta property="og:description" content="Ortaokul öğrencileri için oyunla ahlak eğitimi: Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi. Dürüstlük, adalet, sabır ve daha fazlası — oynayarak öğren.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/vicdan.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -16,9 +20,9 @@
     --kiremit: #C4574A;
     --altin: #D9A441;
     --kart-bg: #FFFDF8;
-    --radius: 20px;
-    --golge: 0 6px 24px rgba(43, 33, 24, 0.10);
-    --golge-hover: 0 10px 32px rgba(43, 33, 24, 0.16);
+    --radius: 22px;
+    --golge: 0 10px 30px rgba(43, 33, 24, 0.22), 0 2px 8px rgba(43, 33, 24, 0.12);
+    --golge-hover: 0 20px 48px rgba(43, 33, 24, 0.32), 0 4px 12px rgba(43, 33, 24, 0.16);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +30,14 @@
   html { -webkit-text-size-adjust: 100%; }
 
   body {
-    background: var(--krem);
+    background-color: var(--krem);
+    /* Kâğıt dokusu hissi: yalnız CSS degradelerle, görsel dosyasız */
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(217, 164, 65, 0.07), transparent 42%),
+      radial-gradient(circle at 88% 8%,  rgba(74, 124, 89, 0.06),  transparent 46%),
+      radial-gradient(circle at 72% 85%, rgba(196, 87, 74, 0.05),  transparent 44%),
+      repeating-linear-gradient(0deg,  rgba(43, 33, 24, 0.014) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(43, 33, 24, 0.010) 0 1px, transparent 1px 3px);
     color: var(--kahve);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 16px;
@@ -43,14 +54,16 @@
   /* ---------- Başlık ---------- */
   header {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 38px;
   }
 
   .okul-rozeti {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(74, 124, 89, 0.12);
+    background: rgba(255, 253, 248, 0.75);
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    box-shadow: 0 2px 8px rgba(43, 33, 24, 0.08);
     color: var(--yesil);
     font-size: 13px;
     font-weight: 600;
@@ -64,12 +77,17 @@
   h1 {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 700;
-    font-size: clamp(30px, 8vw, 42px);
+    font-size: clamp(30px, 8vw, 46px);
     line-height: 1.15;
     margin-bottom: 14px;
   }
 
-  h1 .vurgu { color: var(--yesil); }
+  h1 .vurgu {
+    color: var(--yesil);
+    background: linear-gradient(transparent 70%, rgba(217, 164, 65, 0.35) 70%);
+    border-radius: 4px;
+    padding: 0 3px;
+  }
 
   .alt-baslik {
     font-size: 16px;
@@ -82,25 +100,40 @@
   .oyunlar {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 26px;
     margin-bottom: 48px;
   }
 
   .oyun-karti {
-    display: block;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 430px;
     text-decoration: none;
-    color: inherit;
-    background: var(--kart-bg);
+    color: var(--krem);
+    background: var(--kahve);
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--golge);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     -webkit-tap-highlight-color: transparent;
+    /* Açılışta sırayla belirme (backwards: bitince stil bırakmaz, hover bozulmaz) */
+    animation: kartBelir 0.65s cubic-bezier(0.22, 0.8, 0.35, 1) backwards;
+  }
+
+  .oyun-karti:nth-child(1) { animation-delay: 0.08s; }
+  .oyun-karti:nth-child(2) { animation-delay: 0.22s; }
+  .oyun-karti:nth-child(3) { animation-delay: 0.36s; }
+
+  @keyframes kartBelir {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .oyun-karti:hover,
   .oyun-karti:focus-visible {
-    transform: translateY(-3px);
+    transform: translateY(-6px);
     box-shadow: var(--golge-hover);
   }
 
@@ -109,9 +142,10 @@
     outline-offset: 3px;
   }
 
+  /* Kapak: tam boy kart sanatı */
   .kapak {
-    position: relative;
-    aspect-ratio: 16 / 9;
+    position: absolute;
+    inset: 0;
     overflow: hidden;
   }
 
@@ -120,6 +154,25 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transform: scale(1.001);
+    transition: transform 0.5s ease;
+  }
+
+  .oyun-karti:hover .kapak img,
+  .oyun-karti:focus-visible .kapak img {
+    transform: scale(1.03);
+  }
+
+  /* Alta doğru mürekkep tonlu degrade bindirme */
+  .kapak::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(43, 33, 24, 0)    32%,
+      rgba(43, 33, 24, 0.38) 58%,
+      rgba(43, 33, 24, 0.90) 100%);
+    pointer-events: none;
   }
 
   /* Görsel yüklenemezse gradyan + emoji fallback */
@@ -129,7 +182,8 @@
     display: none;
     align-items: center;
     justify-content: center;
-    font-size: 64px;
+    padding-bottom: 130px;
+    font-size: 72px;
   }
 
   .kapak.yedek-goster img { display: none; }
@@ -140,7 +194,8 @@
   .yedek-mahkeme  { background: linear-gradient(135deg, #D9A441 0%, #A5762A 100%); }
 
   .kart-icerik {
-    padding: 20px 22px 24px;
+    position: relative;
+    padding: 22px 22px 24px;
   }
 
   .kart-ust {
@@ -154,8 +209,10 @@
   h2 {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 26px;
     line-height: 1.2;
+    color: #FFFDF8;
+    text-shadow: 0 1px 6px rgba(43, 33, 24, 0.5);
   }
 
   .oyna-ok {
@@ -168,6 +225,7 @@
     border-radius: 50%;
     font-size: 20px;
     color: #fff;
+    box-shadow: 0 3px 10px rgba(43, 33, 24, 0.35);
     transition: transform 0.2s ease;
   }
 
@@ -179,7 +237,8 @@
 
   .kart-aciklama {
     font-size: 15px;
-    color: rgba(43, 33, 24, 0.78);
+    color: rgba(245, 237, 224, 0.92);
+    text-shadow: 0 1px 4px rgba(43, 33, 24, 0.45);
     margin-bottom: 14px;
   }
 
@@ -195,30 +254,44 @@
     padding: 5px 12px;
     border-radius: 999px;
     white-space: nowrap;
+    background: rgba(245, 237, 224, 0.16);
+    border: 1px solid rgba(245, 237, 224, 0.28);
+    color: #F5EDE0;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
-
-  .rozet-kiremit { background: rgba(196, 87, 74, 0.12);  color: #A03F34; }
-  .rozet-yesil   { background: rgba(74, 124, 89, 0.14);  color: #386145; }
-  .rozet-altin   { background: rgba(217, 164, 65, 0.18); color: #8A6220; }
 
   /* ---------- Öğretmen / Veli Bölümü ---------- */
   .ogretmen {
     background: var(--kart-bg);
+    border: 1px solid rgba(43, 33, 24, 0.12);
+    border-left: 6px solid var(--yesil);
     border-radius: var(--radius);
-    box-shadow: var(--golge);
+    box-shadow: 0 6px 24px rgba(43, 33, 24, 0.10);
     padding: 26px 22px;
     margin-bottom: 40px;
-    border-top: 5px solid var(--yesil);
   }
 
   .ogretmen h3 {
     font-family: 'Fraunces', Georgia, serif;
     font-weight: 600;
     font-size: 21px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .ogretmen .ikon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    font-size: 22px;
+    border-radius: 12px;
+    background: rgba(217, 164, 65, 0.18);
   }
 
   .ogretmen p {
@@ -260,9 +333,25 @@
     .sarici { max-width: 1020px; padding-top: 48px; }
     .oyunlar {
       grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
+      gap: 28px;
     }
+    .oyun-karti { min-height: 460px; }
     .ogretmen { padding: 32px 34px; }
+  }
+
+  /* ---------- Hareket Azaltma ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .oyun-karti { animation: none; }
+    .oyun-karti,
+    .kapak img,
+    .oyna-ok {
+      transition: none;
+    }
+    .oyun-karti:hover,
+    .oyun-karti:focus-visible { transform: none; }
+    .oyun-karti:hover .kapak img,
+    .oyun-karti:focus-visible .kapak img { transform: none; }
+    .oyun-karti:hover .oyna-ok { transform: none; }
   }
 </style>
 </head>
@@ -291,11 +380,11 @@
         </div>
         <p class="kart-aciklama">Kartları kaydır, kararını ver. Vicdanın, arkadaşların, ailen ve özgüvenin dengede kalsın.</p>
         <div class="rozetler">
-          <span class="rozet rozet-kiremit">Dürüstlük</span>
-          <span class="rozet rozet-kiremit">Kul Hakkı</span>
-          <span class="rozet rozet-kiremit">Adalet</span>
-          <span class="rozet rozet-kiremit">Sabır</span>
-          <span class="rozet rozet-kiremit">Cömertlik</span>
+          <span class="rozet">Dürüstlük</span>
+          <span class="rozet">Kul Hakkı</span>
+          <span class="rozet">Adalet</span>
+          <span class="rozet">Sabır</span>
+          <span class="rozet">Cömertlik</span>
         </div>
       </div>
     </a>
@@ -314,7 +403,7 @@
         </div>
         <p class="kart-aciklama">Bir seçim yap, 5 yıl sonrasına git, sonucunu kendi gözünle gör.</p>
         <div class="rozetler">
-          <span class="rozet rozet-yesil">Seçimler ve Sonuçları</span>
+          <span class="rozet">Seçimler ve Sonuçları</span>
         </div>
       </div>
     </a>
@@ -333,8 +422,8 @@
         </div>
         <p class="kart-aciklama">Kürsü senin. İfadeleri dinle, delilleri incele, adil hükmü ver.</p>
         <div class="rozetler">
-          <span class="rozet rozet-altin">Hüsn-ü Zan</span>
-          <span class="rozet rozet-altin">Adalet</span>
+          <span class="rozet">Hüsn-ü Zan</span>
+          <span class="rozet">Adalet</span>
         </div>
       </div>
     </a>
@@ -342,7 +431,7 @@
   </main>
 
   <section class="ogretmen">
-    <h3><span aria-hidden="true">🍎</span> Öğretmenler ve Veliler İçin</h3>
+    <h3><span class="ikon" aria-hidden="true">📚</span> Öğretmenler ve Veliler İçin</h3>
     <p>Bu oyunlar birer ders anlatımı değil, birer sohbet kapısıdır. Her oyun 10-15 dakikada oynanır ve öğrencinin gerçek bir ikilemle baş başa kalmasını sağlar; verdiği kararlar sınıf içi tartışma için doğal bir başlangıç noktası oluşturur.</p>
     <p>Oyun bittikten sonra en değerli an başlar: <span class="soru">"Sen olsan ne yapardın? Neden?"</span> sorusuyla açılan sohbet, oyundaki seçimleri öğrencinin kendi hayatına taşır. Doğru cevabı söylemek yerine, farklı seçimlerin sonuçlarını birlikte konuşmayı deneyin — değerler böyle içselleşir.</p>
   </section>

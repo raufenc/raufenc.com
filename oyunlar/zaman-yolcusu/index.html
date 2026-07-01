@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Zaman Yolcusu — Seçimlerinin 5 Yıl Sonrasını Gör</title>
 <meta name="description" content="Hayal Ortaokulu'nda geçen etkileşimli değerler oyunu: her seçiminden sonra köstekli saatle 5 yıl ileri git, kararlarının geleceğini kendi gözlerinle izle.">
+<meta property="og:title" content="Zaman Yolcusu — Seçimlerinin 5 Yıl Sonrasını Gör">
+<meta property="og:description" content="Hayal Ortaokulu'nda geçen etkileşimli değerler oyunu: her seçiminden sonra köstekli saatle 5 yıl ileri git, kararlarının geleceğini kendi gözlerinle izle.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/zaman-yolcusu.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌚</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,11 +67,21 @@ header{
 .puan-rozet b{ font-variant-numeric:tabular-nums; }
 .noktalar{ display:flex; gap:5px; }
 .nokta{
-  width:9px; height:9px; border-radius:50%;
+  position:relative; width:11px; height:11px; border-radius:50%;
   background:transparent; border:1.5px solid rgba(43,33,24,.30);
   transition:all .3s;
 }
-.nokta.tam{ background:var(--altin); border-color:var(--altin); }
+/* Tamamlanan durak: minik köstekli saat kadranı (saf CSS ibreler) */
+.nokta.tam{
+  background:radial-gradient(circle at 35% 30%, #fff9ea, #eed9a8 75%);
+  border-color:#b9852f;
+}
+.nokta.tam::before,.nokta.tam::after{
+  content:""; position:absolute; left:50%; bottom:50%;
+  background:var(--murekkep); transform-origin:50% 100%; border-radius:1px;
+}
+.nokta.tam::before{ width:1.5px; height:3px; margin-left:-.75px; transform:rotate(-40deg); }  /* akrep */
+.nokta.tam::after{ width:1px; height:4px; margin-left:-.5px; transform:rotate(120deg); }      /* yelkovan */
 .nokta.cift{ box-shadow:0 0 0 2.5px rgba(74,124,89,.35); }
 .nokta.simdi{ border-color:var(--murekkep); transform:scale(1.35); }
 
@@ -160,7 +174,25 @@ main{
 .klavye-ipucu{ margin:14px 0 0; text-align:center; font-size:.72rem; color:var(--soluk); }
 
 /* ====== Köstekli saat (giriş, saf CSS) ====== */
-.kostek{ display:flex; flex-direction:column; align-items:center; margin:6px 0 18px; }
+.kostek{ position:relative; display:flex; flex-direction:column; align-items:center; margin:6px 0 18px; }
+.kostek::before{ /* saatin arkasında yumuşak altın ışık halkası */
+  content:""; position:absolute; left:50%; bottom:-42px;
+  width:230px; height:230px; border-radius:50%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(217,164,65,.42), rgba(217,164,65,.16) 45%, transparent 68%);
+  pointer-events:none; z-index:0;
+  animation:isikSolu 3.6s ease-in-out infinite alternate;
+}
+.kostek > *{ position:relative; z-index:1; }
+@keyframes isikSolu{
+  from{ opacity:.65; transform:translateX(-50%) scale(.94); }
+  to{ opacity:1; transform:translateX(-50%) scale(1.06); }
+}
+/* Açılış kartı: ince altın çerçeve */
+.giris-kart{
+  border:1px solid rgba(217,164,65,.6);
+  box-shadow:var(--golge), inset 0 0 0 1px rgba(217,164,65,.22);
+}
 .kostek .zincir{
   width:3px; height:34px; border-radius:2px;
   background:repeating-linear-gradient(to bottom,var(--altin) 0 5px,transparent 5px 9px);
@@ -196,7 +228,7 @@ main{
 
 /* ====== Zaman geçişi katmanı ====== */
 .gecis{
-  position:fixed; inset:0; z-index:50;
+  position:fixed; inset:0; z-index:50; overflow:hidden;
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
   background:radial-gradient(circle at 50% 42%, rgba(90,66,40,.94), rgba(30,23,16,.97));
   opacity:0; pointer-events:none; transition:opacity .35s ease;
@@ -204,18 +236,56 @@ main{
 .gecis.acik{ opacity:1; pointer-events:auto; }
 .gecis .kadran{ width:150px; height:150px; }
 .gecis .akrep,.gecis .yelkovan{ animation:none; }
-.gecis.acik .yelkovan{ animation:hizliTur 1.4s cubic-bezier(.45,.05,.45,1) both; }
-.gecis.acik .akrep{ animation:yarimTur 1.4s cubic-bezier(.45,.05,.45,1) both; }
+.gecis.acik .yelkovan{ animation:hizliTur 1.7s cubic-bezier(.45,.05,.45,1) both; }
+.gecis.acik .akrep{ animation:yarimTur 1.7s cubic-bezier(.45,.05,.45,1) both; }
 .gecis.acik.geri .yelkovan,.gecis.acik.geri .akrep{ animation-direction:reverse; }
 @keyframes hizliTur{ to{ transform:rotate(1080deg); } }
 @keyframes yarimTur{ to{ transform:rotate(360deg); } }
-.gecis .halka{
-  position:absolute; left:50%; top:42%; width:150px; height:150px; margin:-75px 0 0 -75px;
+.gecis .halka{ /* kadran içinde: her zaman kadran merkezine hizalı */
+  position:absolute; left:50%; top:50%; width:150px; height:150px; margin:-75px 0 0 -75px;
   border:2px solid rgba(245,237,224,.5); border-radius:50%; opacity:0;
 }
-.gecis.acik .halka{ animation:dalgaHalka 1.5s ease-out both; }
+.gecis.acik .halka{ animation:dalgaHalka 1.7s ease-out both; }
 .gecis.acik .halka.h2{ animation-delay:.35s; }
 @keyframes dalgaHalka{ 0%{ transform:scale(.8); opacity:.8; } 100%{ transform:scale(3.4); opacity:0; } }
+/* Kadranın etrafında dönen altın girdap (conic-gradient halkası) */
+.gecis .girdap{
+  position:absolute; left:50%; top:50%;
+  width:240px; height:240px; margin:-120px 0 0 -120px;
+  border-radius:50%; opacity:0;
+  background:conic-gradient(from 0deg,
+    transparent 0deg, rgba(217,164,65,.55) 40deg, transparent 95deg,
+    rgba(232,189,106,.35) 150deg, transparent 205deg,
+    rgba(217,164,65,.5) 265deg, transparent 330deg);
+  -webkit-mask:radial-gradient(circle closest-side, transparent 70%, #000 74%, #000 96%, transparent 100%);
+          mask:radial-gradient(circle closest-side, transparent 70%, #000 74%, #000 96%, transparent 100%);
+}
+.gecis.acik .girdap{ animation:girdapDon 1.8s cubic-bezier(.3,.1,.4,1) both; }
+@keyframes girdapDon{
+  0%{ transform:rotate(0deg) scale(.8); opacity:0; }
+  15%{ opacity:.95; }
+  80%{ opacity:.8; }
+  100%{ transform:rotate(720deg) scale(1.15); opacity:0; }
+}
+/* Savrulan yıldız/parçacık noktaları */
+.gecis .parcacik{
+  position:absolute; left:50%; top:50%;
+  width:5px; height:5px; margin:-2.5px 0 0 -2.5px;
+  border-radius:50%; background:var(--altin);
+  box-shadow:0 0 8px 2px rgba(217,164,65,.5);
+  opacity:0;
+}
+.gecis .parcacik.yildiz{ background:transparent; box-shadow:none; }
+.gecis .parcacik.yildiz::before{
+  content:"✦"; position:absolute; left:50%; top:50%;
+  transform:translate(-50%,-50%); color:#f2d38b; font-size:11px; line-height:1;
+}
+.gecis.acik .parcacik{ animation:savrul 1.6s ease-out both; animation-delay:var(--g,0s); }
+@keyframes savrul{
+  0%{ transform:rotate(var(--a,0deg)) translateY(calc(var(--m,140px) * -.45)) scale(.3); opacity:0; }
+  25%{ opacity:1; }
+  100%{ transform:rotate(calc(var(--a,0deg) + 170deg)) translateY(calc(var(--m,140px) * -1)) scale(1); opacity:0; }
+}
 .gecis-metin{
   color:var(--krem); font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600;
   text-align:center; padding:0 24px; letter-spacing:.02em;
@@ -227,14 +297,56 @@ main{
   70%{ filter:blur(1px); } 100%{ filter:none; transform:none; }
 }
 
-/* ====== Yolcunun Defteri (ders kartı) ====== */
+/* ====== Yolcunun Defteri (ders kartı): deri defter görünümü ====== */
 .defter{
-  margin-top:16px; padding:16px 18px;
-  background:linear-gradient(135deg,#fdf6e4,#f6ecd2);
-  border:1.5px dashed rgba(217,164,65,.7); border-radius:16px;
+  position:relative; margin-top:16px; padding:14px;
+  background:linear-gradient(135deg,#5b4126,#3e2c19);
+  border-radius:16px;
+  box-shadow:0 10px 24px rgba(43,33,24,.28), inset 0 1px 0 rgba(255,255,255,.08);
 }
-.defter h3{ font-size:1rem; display:flex; align-items:center; gap:8px; }
-.defter p{ margin:8px 0 0; font-size:.93rem; }
+.defter::before{ /* deri kenarında dikiş izi */
+  content:""; position:absolute; inset:6px;
+  border:1.5px dashed rgba(217,164,65,.55); border-radius:11px;
+  pointer-events:none;
+}
+.defter h3{
+  position:relative; font-size:1rem; display:flex; align-items:center; gap:8px;
+  color:#f2d9a6; padding:2px 6px 10px; margin:0;
+}
+.defter .sayfa{
+  position:relative; background:linear-gradient(#fdf6e4,#f8efd8);
+  border-radius:8px; padding:12px 14px;
+  box-shadow:inset 0 0 12px rgba(43,33,24,.08);
+}
+.defter .sayfa p, .defter p{
+  margin:0; font-family:'Fraunces',Georgia,serif; font-style:italic;
+  font-size:.95rem; line-height:1.6; color:#4a3a28;
+}
+
+/* ====== Gelecek ekranı: dala göre renklenen çerçeve ====== */
+.gelecek-kart{ position:relative; overflow:hidden; padding-top:46px; }
+.gelecek-kart::before{
+  content:""; position:absolute; top:0; left:0; right:0; height:28px;
+  display:flex; align-items:center; justify-content:center; font-size:13px; line-height:28px;
+  text-align:center;
+}
+.gelecek-kart.dal-iyi::before{
+  content:"☀️";
+  background:linear-gradient(90deg, rgba(74,124,89,.16), rgba(217,164,65,.30), rgba(74,124,89,.16));
+}
+.gelecek-kart.dal-kotu::before{
+  content:"🌫️";
+  background:linear-gradient(90deg, rgba(100,110,125,.14), rgba(140,150,165,.28), rgba(100,110,125,.14));
+}
+.gelecek-kart.dal-iyi{ border-color:rgba(74,124,89,.45); }
+.gelecek-kart.dal-kotu{ border-color:rgba(110,122,138,.45); }
+.gelecek-kart.dal-iyi .gorsel-kap{
+  box-shadow:0 0 0 1.5px var(--altin), 0 0 0 4px rgba(74,124,89,.40), 0 8px 20px rgba(74,124,89,.18);
+}
+.gelecek-kart.dal-kotu .gorsel-kap{
+  box-shadow:0 0 0 1.5px #98a3ad, 0 0 0 4px rgba(90,105,120,.30), 0 8px 20px rgba(70,82,96,.18);
+}
+.gelecek-kart.dal-kotu .gorsel-kap img{ filter:saturate(.82) contrast(.98); }
 
 /* ====== İstatistik çipleri (final) ====== */
 .cipler{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
@@ -250,9 +362,10 @@ main{
   position:fixed; inset:0; z-index:60;
   display:flex; align-items:center; justify-content:center; padding:20px;
   background:rgba(43,33,24,.5);
-  opacity:0; pointer-events:none; transition:opacity .25s;
+  opacity:0; visibility:hidden; pointer-events:none;
+  transition:opacity .25s, visibility 0s .25s;
 }
-.modal-arka.acik{ opacity:1; pointer-events:auto; }
+.modal-arka.acik{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity .25s; }
 .modal{
   width:100%; max-width:420px; background:var(--kart);
   border-radius:var(--radius); padding:22px; box-shadow:0 20px 50px rgba(43,33,24,.35);
@@ -284,6 +397,11 @@ main{
 
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  /* Zaman geçişi: girdap/parçacık/halka yok, yalnız yumuşak bir fade */
+  .gecis{ transition:opacity .3s ease !important; transition-duration:.3s !important; }
+  .gecis .girdap, .gecis .parcacik, .gecis .halka{ display:none !important; }
+  .kostek::before{ animation:none !important; }
+  .dalga{ animation:none !important; filter:none !important; }
 }
 </style>
 </head>
@@ -301,9 +419,20 @@ main{
 
 <!-- Zaman geçişi animasyon katmanı -->
 <div class="gecis" id="gecis" aria-hidden="true">
-  <div class="halka h1"></div>
-  <div class="halka h2"></div>
   <div class="kadran">
+    <div class="halka h1"></div>
+    <div class="halka h2"></div>
+    <div class="girdap" aria-hidden="true"></div>
+    <span class="parcacik" style="--a:12deg;--m:120px"></span>
+    <span class="parcacik yildiz" style="--a:52deg;--m:155px;--g:.12s"></span>
+    <span class="parcacik" style="--a:88deg;--m:135px;--g:.05s"></span>
+    <span class="parcacik" style="--a:126deg;--m:165px;--g:.22s"></span>
+    <span class="parcacik yildiz" style="--a:161deg;--m:125px;--g:.08s"></span>
+    <span class="parcacik" style="--a:198deg;--m:150px;--g:.18s"></span>
+    <span class="parcacik" style="--a:232deg;--m:130px;--g:.02s"></span>
+    <span class="parcacik yildiz" style="--a:268deg;--m:160px;--g:.26s"></span>
+    <span class="parcacik" style="--a:305deg;--m:140px;--g:.10s"></span>
+    <span class="parcacik" style="--a:341deg;--m:170px;--g:.15s"></span>
     <div class="akrep"></div>
     <div class="yelkovan"></div>
     <div class="mil"></div>
@@ -441,7 +570,7 @@ main{
     window.scrollTo(0, 0);
   }
 
-  /* ---------- Zaman geçişi animasyonu (~1.5 sn, saf CSS) ---------- */
+  /* ---------- Zaman geçişi animasyonu (~1.85 sn, saf CSS) ---------- */
   function zamanGecisi(geriMi, metin, sonra){
     kilit = true;
     var g = document.getElementById('gecis');
@@ -449,14 +578,14 @@ main{
     document.getElementById('gecisMetin').textContent = metin;
     g.classList.add('acik');
     g.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('dalga');
-    setTimeout(function(){ sonra(); }, 1200);                    // yeni ekran perde arkasında hazırlanır
+    sahne.classList.add('dalga');   // body'ye uygulanırsa filter, position:fixed .gecis'i belgeye bağlar
+    setTimeout(function(){ sonra(); }, 1400);                    // yeni ekran perde arkasında hazırlanır
     setTimeout(function(){
       g.classList.remove('acik');
       g.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('dalga');
+      sahne.classList.remove('dalga');
       kilit = false;
-    }, 1550);
+    }, 1850);
   }
 
   /* Animasyonsuz ekran geçişlerinde kısa kilit: hızlı çift dokunuşta
@@ -493,7 +622,7 @@ main{
         '<h1 class="buyuk-baslik">' + esc(ICERIK.oyunAdi) + '</h1>' +
         '<p class="etiket" style="margin-top:6px">Hayal Ortaokulu · 8 Durak</p>' +
       '</div>' +
-      '<div class="kart" style="margin-top:18px">' +
+      '<div class="kart giris-kart" style="margin-top:18px">' +
         '<h2 style="font-size:1.15rem">🕰️ ' + esc(ICERIK.giris.baslik) + '</h2>' +
         '<p class="metin">' + esc(ICERIK.giris.metin) + '</p>' +
         '<div class="buton-grubu">' + butonlar + '</div>' +
@@ -589,7 +718,7 @@ main{
     var altKisim;
     if (ikisiDe){
       altKisim =
-        '<div class="defter"><h3>🧭 Yolcunun Defteri</h3><p>' + esc(s.ders) + '</p></div>' +
+        '<div class="defter"><h3>🧭 Yolcunun Defteri</h3><div class="sayfa"><p>' + esc(s.ders) + '</p></div></div>' +
         '<button class="btn birincil" id="btnSonraki">' + ileriYazi + '</button>';
     } else {
       altKisim =
@@ -602,7 +731,7 @@ main{
         '<span class="etiket">📍 Durak ' + (durum.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</span>' +
         '<span class="deger-rozet">✨ ' + esc(s.deger) + '</span>' +
       '</div>' +
-      '<div class="kart">' +
+      '<div class="kart gelecek-kart ' + (dal.tip === 'iyi' ? 'dal-iyi' : 'dal-kotu') + '">' +
         '<div id="gorselYeri"></div>' +
         '<span class="zaman-cip">📅 Beş yıl sonra</span>' +
         '<div class="secim-ozet">“' + esc(dal.metin) + '”</div>' +
@@ -677,14 +806,20 @@ main{
     modalArka.classList.add('acik');
     document.getElementById('modalGor').focus();
   }
-  function modalKapat(){ modalArka.classList.remove('acik'); }
+  function modalKapat(){
+    modalArka.classList.remove('acik');
+    var geriDon = document.getElementById('btnSonraki');
+    if (geriDon) geriDon.focus();   // odak görünmez modalda kalmasın
+  }
 
   document.getElementById('modalGor').addEventListener('click', function(){
+    if (!modalArka.classList.contains('acik')) return;
     if (kilit) return;
     modalKapat();
     digerDaliGor();
   });
   document.getElementById('modalDevam').addEventListener('click', function(){
+    if (!modalArka.classList.contains('acik')) return;
     if (kilit) return;
     modalKapat();
     sonrakiDurak();

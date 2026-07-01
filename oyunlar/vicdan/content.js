@@ -471,7 +471,7 @@ const ICERIK = {
     },
     {
       id: "f04", bolum: 4, kosul: "dedikoduYaydin", karakter: "burak",
-      metin: "Burak önünü kesiyor: 'Dershane dedikodusunu senin gruba yazdığını söylediler.' Yumrukları sıkılı ama gözleri kırgın.",
+      metin: "Burak önünü kesiyor: 'Eski okulumla ilgili dedikoduya senin de ortak olduğunu söylediler.' Yumrukları sıkılı ama gözleri kırgın.",
       sol: { etiket: "Emir başlattı, derim", sonuc: "Topu arkadaşına atarsın. Burak 'hepiniz aynısınız' der; haksız sayılmaz.", vicdan: -12, arkadaslik: -6, aile: 0, ozguven: -3 },
       sag: { etiket: "Payım var, özür dilerim", sonuc: "Burak uzun uzun bakar: 'İlk kez biri düzgünce özür diledi.' Yumruklar yavaşça çözülür.", vicdan: 14, arkadaslik: 4, aile: 0, ozguven: -2 }
     },

@@ -149,7 +149,7 @@ const ICERIK = {
       ifadeler: {
         emir: [
           { soru: 'Selim\'in tam arkasındaydın. Parayı gördün mü?', cevap: 'Görmedim hâkimim, vallahi görmedim! Kuyrukta önüme arkama üç kişi girdi çıktı, ben tostuma bakıyordum. Elimi cebimden bile çıkarmadım.' },
-          { soru: 'Peki sence neden herkes senden şüpheleniyor?', cevap: 'Kitap yüzünden... O olayda hata yaptım, sakladım, özür de diledim, kitabın yenisini de aldım. Ama demek ki silinmiyor. Bir kere hata yaptım diye artık okulda ne kaybolsa "Emir mi acaba?" mı diyecekler? Bu... bu çok ağır hâkimim.' }
+          { soru: 'Peki sence neden herkes senden şüpheleniyor?', cevap: 'Kitap yüzünden... O olayda hata yaptım, sakladım ama sonunda her şeyi kabul edip elimden geleni yaptım. Ama demek ki silinmiyor. Bir kere hata yaptım diye artık okulda ne kaybolsa "Emir mi acaba?" mı diyecekler? Bu... bu çok ağır hâkimim.' }
         ],
         selim: [
           { soru: 'Parayı en son ne zaman gördün?', cevap: 'Elimde tutuyordum, sıkı sıkı. Kuyruk birden itişti, ben öne savruldum, tezgâha tutundum... Sonra baktım, elim boş. Emir tam arkamdaydı, onu biliyorum.' },
