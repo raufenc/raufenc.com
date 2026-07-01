@@ -796,7 +796,7 @@ window.OYUN_VERISI = {
   {
    "pos": 38,
    "tip": "vergi",
-   "ad": "Gümrük (Cizye)",
+   "ad": "Gümrük Vergisi",
    "tutar": 1000,
    "aciklama": "Gümrük (öşür/bâc), sınırlardan ve pazarlardan geçen mallardan alınan ticaret vergisidir."
   },
@@ -1494,15 +1494,6 @@ window.OYUN_VERISI = {
    "bilgi": "Uç beylerinin akıncıları yıldırım gibi ilerlerdi. 4 ilerle ve tekrar oyna!",
    "ozel": {
     "tur": "tekrar"
-   }
-  },
-  {
-   "sayi": 0,
-   "baslik": "İstanbul'un Fethi",
-   "bilgi": "1453'te surlar aşıldı, payitaht senin oldu! Doğruca İstanbul'a git.",
-   "ozel": {
-    "tur": "isinla",
-    "hedef": 37
    }
   },
   {

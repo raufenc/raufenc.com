@@ -68,6 +68,34 @@
     setBg(".deste-vakca", "linear-gradient(180deg,#2f8870,#175040)", "#bfe0d2");
     setBg("#sefer-mini", "linear-gradient(180deg,#f8ecc8,#e6cf94)", "#b7950b", "0.42");
   }
+  function set3D(on) {
+    var o = document.getElementById("oyun"); if (o) o.classList.toggle("d3", !!on);
+    var b = document.getElementById("d3-btn"); if (b) { b.textContent = on ? "🧊 3D ✓" : "🗺️ Düz"; b.classList.toggle("acik", !!on); }
+    try { localStorage.setItem("bc_3d", on ? "1" : "0"); } catch (e) {}
+  }
+  function duraklatDegis() {
+    if (!oyun) return;
+    oyun.duraklat = !oyun.duraklat;
+    var b = document.getElementById("duraklat-btn");
+    if (b) { b.textContent = oyun.duraklat ? "▶️ Devam" : "⏸️ Duraklat"; b.classList.toggle("acik", oyun.duraklat); }
+    logla(oyun.duraklat ? "⏸️ Oyun duraklatıldı." : "▶️ Oyun devam ediyor.", "vurgu");
+    render();
+    if (!oyun.duraklat && !oyun.bitti && aktif().bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function koltukDegis(id) {
+    var o = sahipOyuncu(id); if (!o || o.iflas || oyun.bitti) return;
+    o.bot = !o.bot;
+    logla("🔄 " + o.ad + " artık " + (o.bot ? "🤖 Bot" : "👤 Sen") + ".", "vurgu");
+    render();
+    if (o.id === oyun.sira && !oyun.duraklat && o.bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function hizDegis() {
+    var s = [{ h: 0.5, ad: "Hızlı" }, { h: 1, ad: "Normal" }, { h: 1.8, ad: "Yavaş" }];
+    var i = 1; s.forEach(function (x, j) { if (x.h === BOT_HIZ) i = j; });
+    i = (i + 1) % s.length; BOT_HIZ = s[i].h;
+    var b = document.getElementById("hiz-btn"); if (b) b.textContent = "⚡ " + s[i].ad;
+    try { localStorage.setItem("bc_hiz", "" + BOT_HIZ); } catch (e) {}
+  }
 
   // ---------- yardımcılar ----------
   function $(s) { return document.querySelector(s); }
@@ -130,12 +158,14 @@
       seferDeste: karistir(SEFER.length), si: 0, fermanDeste: karistir(V.ferman.length), fi: 0,
       vakcaDeste: karistir(V.vakca.length), vi: 0, bitti: false,
       botZorluk: ($("#bot-zorluk") ? $("#bot-zorluk").value : "orta"),
-      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0,
+      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0, duraklat: false,
       turLimiti: ($("#tur-limiti") ? parseInt($("#tur-limiti").value, 10) : 0),
     };
     Ses.init();
     $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
     tahtaKur(); desenUygula(); render();
+    var d3pref = true; try { d3pref = localStorage.getItem("bc_3d") !== "0"; } catch (e) {}
+    set3D(d3pref);
     logla("<b>Oyun başladı!</b> " + oyuncular.map(function (o) { return o.ad + (o.bot ? " 🤖" : ""); }).join(", ") + ". Hayırlı seferler!", "vurgu");
     if (aktif().bot) bekle(botTuru, 900);
   }
@@ -160,6 +190,8 @@
       Ses.init();
       $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
       tahtaKur(); desenUygula(); render();
+      var d3p = true; try { d3p = localStorage.getItem("bc_3d") !== "0"; } catch (e) {}
+      set3D(d3p);
       logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
       if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
       return true;
@@ -187,19 +219,31 @@
       t.appendChild(c);
     });
   }
+  function kareGorSlug(k) {
+    if (k.tip === "sehir" || k.tip === "seref") return slug(k.ad);
+    if (k.tip === "liman") return slug(k.kisa);
+    if (k.tip === "utility") return k.ad === "Darphane" ? "darphane" : "buyukvakif";
+    var m = { baslangic: "sefermeydani", esaret: "yedikule", kervansaray: "kervansaray", surgun: "surgun", ferman: "ferman", vakca: "vaka", vergi: "vergi" };
+    return m[k.tip] || "";
+  }
   function kareIc(k) {
     var ic = el("div", "kare-ic");
-    if (k.tip === "sehir") ic.innerHTML = '<div class="serit" style="background:' + k.grup.renk + '"></div><div class="kare-ad">' + k.ad + '</div><div class="imar-rozet" data-imar="' + k.pos + '"></div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "liman") ic.innerHTML = '<div class="kare-ikon">⚓</div><div class="kare-ad">' + k.kisa + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "utility") ic.innerHTML = '<div class="kare-ikon">' + (k.ad === "Darphane" ? "🪙" : "💠") + '</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "vergi") ic.innerHTML = '<div class="kare-ikon">💰</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat">' + k.tutar + '</div>';
-    else if (k.tip === "ferman") ic.innerHTML = '<div class="kare-ikon">📜</div><div class="kare-ad">Ferman</div>';
-    else if (k.tip === "vakca") ic.innerHTML = '<div class="kare-ikon">✴️</div><div class="kare-ad">Vak\'a</div>';
-    else if (k.tip === "baslangic") ic.innerHTML = '<div class="kare-ikon">🏇</div><div class="kare-ad">Sefer<br>Meydanı</div>';
-    else if (k.tip === "esaret") ic.innerHTML = '<div class="kare-ikon">⛓️</div><div class="kare-ad">Esaret<br>Yedikule</div>';
-    else if (k.tip === "kervansaray") ic.innerHTML = '<div class="kare-ikon">🏕️</div><div class="kare-ad">Kervansaray</div><div class="kare-fiyat" data-hazine style="color:#1e8449;font-weight:800"></div>';
-    else if (k.tip === "surgun") ic.innerHTML = '<div class="kare-ikon">🚷</div><div class="kare-ad">Sürgün</div>';
-    else if (k.tip === "seref") ic.innerHTML = '<div class="kare-ikon" style="color:#b7950b">❖</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" style="color:#b7950b;font-weight:700">Şeref</div>';
+    var img = '<img class="kgor" src="img/' + kareGorSlug(k) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+    if ([0, 10, 20, 30].indexOf(k.pos) >= 0) {
+      var koseAd = { baslangic: ["Sefer Meydanı", "🏇"], esaret: ["Esaret · Yedikule", "⛓️"], kervansaray: ["Kervansaray", "🏕️"], surgun: ["Sürgün", "🚷"] }[k.tip] || [k.ad, "❖"];
+      ic.innerHTML = img + '<div class="kperde"></div><div class="kose-rozet">' + koseAd[1] + '</div><div class="kose-ad">' + koseAd[0] + '</div>' +
+        (k.tip === "kervansaray" ? '<div class="kfoot" data-hazine style="color:#1e8449"></div>' : '');
+      return ic;
+    }
+    var band = "", foot = "", extra = "";
+    if (k.tip === "sehir") { band = '<div class="kband" style="background:' + k.grup.renk + '">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; extra = '<div class="imar-rozet" data-imar="' + k.pos + '"></div>'; }
+    else if (k.tip === "liman") { band = '<div class="kband" style="background:#0f6b5c">' + k.kisa + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">⚓ ' + k.fiyat + '</div>'; }
+    else if (k.tip === "utility") { band = '<div class="kband" style="background:#5b3f86">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; }
+    else if (k.tip === "vergi") { band = '<div class="kband" style="background:#9a6314">' + k.ad + '</div>'; foot = '<div class="kfoot">' + k.tutar + '</div>'; }
+    else if (k.tip === "ferman") { band = '<div class="kband" style="background:#8f2f2f">Ferman</div>'; foot = '<div class="kfoot" style="color:#8f2f2f">☞ Kart</div>'; }
+    else if (k.tip === "vakca") { band = '<div class="kband" style="background:#1f6b58">Vak\'a</div>'; foot = '<div class="kfoot" style="color:#1f6b58">☞ Kart</div>'; }
+    else if (k.tip === "seref") { band = '<div class="kband" style="background:#b0880a">' + k.ad + '</div>'; foot = '<div class="kfoot" style="color:#8a6410;font-weight:800">❖ Şeref</div>'; }
+    ic.innerHTML = band + img + foot + extra;
     return ic;
   }
 
@@ -214,10 +258,12 @@
       d.innerHTML =
         '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.id === hunkarId() ? " 👑" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
         '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
-        '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>';
+        '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>' +
+        (o.iflas ? '' : '<button class="koltuk-btn" data-id="' + o.id + '" title="Sen ↔ Bot">' + (o.bot ? '🤖' : '👤') + '</button>');
       pano.appendChild(d);
       oyun._para[o.id] = o.para;
     });
+    pano.querySelectorAll(".koltuk-btn").forEach(function (b) { b.onclick = function () { koltukDegis(parseInt(b.dataset.id, 10)); }; });
     K.forEach(function (k) {
       if (k.tip !== "sehir" && k.tip !== "liman" && k.tip !== "utility") return;
       var cell = document.querySelector('.kare[data-pos="' + k.pos + '"]'); if (!cell) return;
@@ -253,7 +299,7 @@
 
   function butonlariGuncelle() {
     var o = aktif(), k = K[o.pos], bar = $("#aksiyon-bar"); bar.innerHTML = "";
-    $("#sira-bilgi").innerHTML = '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
+    $("#sira-bilgi").innerHTML = (oyun.duraklat ? '⏸️ <b style="color:#f2a8a8">DURAKLATILDI</b> · ' : '') + '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
       (oyun.turLimiti ? ' · ⏳ Tur ' + (Math.floor(oyun.elGecti / oyun.oyuncular.length) + 1) + '/' + oyun.turLimiti : '') +
       (oyun.hazine > 0 ? ' · 🏕️ ' + fmt(oyun.hazine) : '');
     if (oyun.bitti) { bar.appendChild(btn("🔄 Yeni Oyun", "btn-ana", function () { location.reload(); })); return; }
@@ -313,7 +359,7 @@
       if (oz) seferOzel(kart, o, bitince);
       else { oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); }
     };
-    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b) b.click(); }, 1800);
+    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b && aktif().bot) b.click(); }, 1800);
   }
   function enYakinLiman(pos) { var L = [5, 15, 25, 35], i; for (i = 0; i < L.length; i++) if (L[i] > pos) return L[i]; return L[0]; }
   function seferOzel(kart, o, bitince) {
@@ -539,7 +585,7 @@
       (etki ? '<div class="m-eko" style="text-align:center;font-weight:700">▶ ' + etki + '</div>' : '') +
       '<div class="kart-ogren">💡 ' + kart.ogren + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-uygula">Uygula</button></div>');
     $("#m-uygula").onclick = function () { kartUygula(kart, o, bitince); };
-    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b) b.click(); }, 1600);
+    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b && aktif().bot) b.click(); }, 1600);
   }
   function etkiOzet(e) {
     var t = { mulk_basina_al: "Her mülkün için al", mulk_basina_ver: "Her mülkün için öde", imar_basina_al: "Her imar yapın için al", imar_basina_ver: "Her imar yapın için öde", liman_basina_al: "Her limanın için al", liman_basina_ver: "Her limanın için öde", en_degerli_imar_yik: "En değerli yapın yıkılır", para_al: "Hazineden al", para_ver: "Hazineye öde", herkesten_al: "Herkesten al", herkese_ver: "Herkese ver" }[e.tur];
@@ -560,7 +606,7 @@
   // ---------- BOTLAR ----------
   function botRezerv() { return { kolay: 4500, orta: 2500, zor: 1200 }[oyun.botZorluk] || 2500; }
   function botTuru() {
-    var o = aktif(); if (!o || !o.bot || oyun.bitti) return;
+    var o = aktif(); if (!o || !o.bot || oyun.bitti || oyun.duraklat) return;
     if (o.esaret) { bekle(botEsaret, 900); return; }
     bekle(function () { seferKartiCek(botCozum); }, 700);
   }
@@ -600,7 +646,7 @@
     if (oyun.tekrarHak && !aktif().iflas) {
       oyun.tekrarHak = false; oyun.tekrarSayac = (oyun.tekrarSayac || 0) + 1;
       if (oyun.tekrarSayac >= 3) { oyun.tekrarSayac = 0; logla("🔁 " + aktif().ad + " üst üste 3 tekrar — yorgun düşüp esarete uğradı!", "kotu"); esareteGonder(aktif()); }
-      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot) bekle(botTuru, 650); return; }
+      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot && !oyun.duraklat) bekle(botTuru, 650); return; }
     } else oyun.tekrarSayac = 0;
     oyun.elGecti = (oyun.elGecti || 0) + 1;
     if (oyun.turLimiti && Math.floor(oyun.elGecti / oyun.oyuncular.length) >= oyun.turLimiti) {
@@ -609,7 +655,7 @@
     var n = oyun.oyuncular.length, sayac = 0;
     do { oyun.sira = (oyun.sira + 1) % n; sayac++; } while (oyun.oyuncular[oyun.sira].iflas && sayac <= n);
     oyun.hareketYapildi = false; oyun.sonHareket = 0; kaydet(); render();
-    if (!oyun.bitti && aktif().bot) bekle(botTuru, 650);
+    if (!oyun.bitti && aktif().bot && !oyun.duraklat) bekle(botTuru, 650);
   }
   function galibiyetKontrol() {
     var ayakta = oyun.oyuncular.filter(function (o) { return !o.iflas; });
@@ -748,7 +794,7 @@
   }
 
   // ---------- modallar ----------
-  function modalAc(html, genis) { var ov = $("#modal"); ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + '">' + html + '</div>'; ov.style.display = "flex"; }
+  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; }
   function modalKapat() { $("#modal").style.display = "none"; $("#modal").innerHTML = ""; }
 
   function kiraTablosu(k) {
@@ -909,8 +955,23 @@
         '<span class="sr-servet">' + fmt(servet(o)) + '</span></div>';
     }).join("");
   }
+  function konfeti() {
+    var c = document.getElementById("konfeti");
+    if (!c) { c = document.createElement("canvas"); c.id = "konfeti"; document.body.appendChild(c); }
+    var ctx = c.getContext("2d"); c.width = window.innerWidth; c.height = window.innerHeight;
+    var renkler = ["#edc75a", "#c9a227", "#f5e2a3", "#1e8449", "#b8332b", "#f6edd6"], P = [], i;
+    for (i = 0; i < 150; i++) P.push({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * .5, w: 6 + Math.random() * 7, h: 8 + Math.random() * 8, r: Math.random() * 6.28, vr: (Math.random() - .5) * .3, vy: 2 + Math.random() * 3.5, vx: (Math.random() - .5) * 2, renk: renkler[Math.floor(Math.random() * renkler.length)] });
+    var bas = null;
+    function ciz(t) {
+      if (bas == null) bas = t;
+      ctx.clearRect(0, 0, c.width, c.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += .03; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.renk; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore(); });
+      if (t - bas < 3900) requestAnimationFrame(ciz); else if (c.parentNode) c.parentNode.removeChild(c);
+    }
+    requestAnimationFrame(ciz);
+  }
   function sonucModal(g) {
-    Ses.kazan(); temizleKayit();
+    Ses.kazan(); temizleKayit(); try { konfeti(); } catch (e) {}
     var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
     var kz = g || sirali[0];
     var enSehir = oyun.oyuncular.slice().sort(function (a, b) { return b.mulkler.length - a.mulkler.length; })[0];
@@ -937,12 +998,17 @@
     $("#basla").addEventListener("click", oyunBaslat);
     $("#skor-btn").addEventListener("click", skorGoster);
     $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
+    $("#d3-btn").addEventListener("click", function () { set3D(!document.getElementById("oyun").classList.contains("d3")); });
+    $("#duraklat-btn").addEventListener("click", duraklatDegis);
+    $("#hiz-btn").addEventListener("click", hizDegis);
+    try { var h = parseFloat(localStorage.getItem("bc_hiz")); if (h) BOT_HIZ = h; } catch (e) {}
+    var hb = $("#hiz-btn"); if (hb) hb.textContent = "⚡ " + (BOT_HIZ === 0.5 ? "Hızlı" : BOT_HIZ === 1.8 ? "Yavaş" : "Normal");
     $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
     $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
-    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v6 ✓ hazır";
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v11 ✓ hazır";
   }
   // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
   if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);

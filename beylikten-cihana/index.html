@@ -81,24 +81,26 @@
   .kare{position:relative; background:linear-gradient(180deg,#fffdf6,#f6efdd); border:1px solid #d6c49b; border-radius:5px; overflow:hidden;
     display:flex; flex-direction:column; cursor:pointer; min-width:0; transition:transform .12s}
   .kare:hover{outline:2px solid var(--altin); z-index:5; transform:scale(1.04)}
-  .kare-ic{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2px 1px; min-width:0}
-  .serit{height:26%; min-height:11px; width:100%; position:absolute; top:0; left:0; border-bottom:1px solid rgba(0,0,0,.18)}
-  .kare-sehir .kare-ic{padding-top:27%}
-  .kare-ad{font-size:clamp(7.5px,1.5vmin,14px); font-weight:700; line-height:1.08; color:var(--metin); padding:0 1px;
-    overflow:hidden; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical}
-  .kare-fiyat{font-size:clamp(6.5px,1.2vmin,11px); color:#7a6326; margin-top:1px; font-weight:600}
-  .kare-ikon{font-size:clamp(13px,2.9vmin,27px); line-height:1; filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}
-  .imar-rozet{height:clamp(11px,2.1vmin,20px); display:flex; align-items:center; justify-content:center; gap:1px; margin-top:1px}
-  .imar-bina{font-size:clamp(9px,1.9vmin,17px); line-height:1}
-  .imar-bina.kulliye{filter:drop-shadow(0 0 3px var(--altin))}
+  .kare-ic{flex:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:0}
+  .kband{color:#fff; font-family:var(--imp); font-weight:700; font-size:clamp(6px,1.28vmin,12px); text-align:center; padding:2px 1px 2.5px;
+    line-height:1; text-transform:uppercase; letter-spacing:.004em; text-shadow:0 1px 1px rgba(0,0,0,.45); z-index:2; overflow:hidden;
+    white-space:nowrap; text-overflow:ellipsis; box-shadow:inset 0 -2px 3px rgba(0,0,0,.22)}
+  .kgor{flex:1; width:100%; object-fit:cover; min-height:0; display:block}
+  .kfoot{font-family:var(--imp); font-size:clamp(6px,1.08vmin,10px); font-weight:700; text-align:center; color:#5a3d10;
+    background:linear-gradient(rgba(251,244,222,.96),rgba(242,230,194,.96)); padding:1px 1px 1.5px; z-index:2; border-top:1px solid rgba(214,196,143,.7)}
+  .kperde{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(6,26,22,.24),transparent 38%,rgba(6,26,22,.66))}
+  .kose-ad{position:absolute; left:1px; right:1px; bottom:2px; z-index:2; color:#f6ead0; font-family:var(--imp); font-weight:700;
+    font-size:clamp(7px,1.5vmin,13px); text-align:center; line-height:1.04; text-shadow:0 1px 3px rgba(0,0,0,.9)}
+  .kose-rozet{position:absolute; top:2px; left:0; right:0; z-index:2; text-align:center; font-size:clamp(11px,2.4vmin,20px); filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-rozet{position:absolute; left:0; right:0; top:36%; transform:translateY(-30%); z-index:3; display:flex; align-items:center; justify-content:center; gap:1px; pointer-events:none}
+  .imar-bina{font-size:clamp(10px,2.1vmin,18px); line-height:1; filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-bina.kulliye{filter:drop-shadow(0 0 4px var(--altin))}
   .imar-yeni{animation:buildPop .4s cubic-bezier(.2,1.6,.4,1)}
-  .kose .kare-ad{font-size:clamp(8px,1.7vmin,15px)}
-  .kose .kare-ikon{font-size:clamp(16px,3.4vmin,32px)}
   .kare-baslangic{background:linear-gradient(135deg,#fdf3d6,#f7e7bd)} .kare-esaret{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
   .kare-kervansaray{background:linear-gradient(135deg,#e7f1e6,#d9ead7)} .kare-surgun{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
   .kare-ferman{background:linear-gradient(135deg,#f8e9e2,#f1d9cf)} .kare-vakca{background:linear-gradient(135deg,#e4f0ea,#d6e8df)}
   .kare-vergi{background:linear-gradient(135deg,#f5eeda,#efe4c6)} .kare-liman{background:linear-gradient(135deg,#e9eff5,#dbe6f1)} .kare-utility{background:linear-gradient(135deg,#f2edf6,#e8dff1)}
-  .kare.sahipli .kare-fiyat{font-weight:800; color:#3a2d12}
+  .kare.sahipli .kfoot{font-weight:800; color:#3a2d12}
   .kare.ipotekli{filter:grayscale(.55) opacity(.78)}
   .kare.vurgu{animation:karePulse 1.1s ease-out}
 
@@ -175,6 +177,15 @@
   .m-eko .bina-satir{display:flex;align-items:center;gap:6px;justify-content:space-between;padding:1px 0}
   .m-ikon{font-size:42px; text-align:center}
   .m-gorsel{width:100%; max-width:340px; display:block; margin:-2px auto 12px; border-radius:11px; box-shadow:0 5px 16px rgba(0,0,0,.28)}
+  /* Yatay ekran: mekan kartı yatay düzen — resim solda (yatay 3:2 kırpım), metin sağda */
+  @media (orientation:landscape) and (min-width:640px){
+    .modal-kutu.resimli{width:min(860px,96vw); max-height:90vh}
+    .modal-kutu.resimli::after{content:""; display:block; clear:both}
+    .modal-kutu.resimli .m-gorsel{float:left; width:46%; max-width:400px; aspect-ratio:3/2; height:auto;
+      object-fit:cover; margin:0 18px 12px 0}
+    .modal-kutu.resimli .m-serit{margin:2px 0 8px; float:none}
+    .modal-kutu.resimli .m-btnlar,.modal-kutu.resimli .m-eko{clear:both}
+  }
   #kapak{display:block; width:100%; margin:0 auto 16px; border-radius:14px; box-shadow:0 12px 34px rgba(0,0,0,.45); border:1.5px solid rgba(201,162,39,.5)}
   .m-btnlar{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; justify-content:flex-end}
   .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
@@ -1233,7 +1244,7 @@ window.OYUN_VERISI = {
   {
    "pos": 38,
    "tip": "vergi",
-   "ad": "Gümrük (Cizye)",
+   "ad": "Gümrük Vergisi",
    "tutar": 1000,
    "aciklama": "Gümrük (öşür/bâc), sınırlardan ve pazarlardan geçen mallardan alınan ticaret vergisidir."
   },
@@ -2918,19 +2929,31 @@ window.OYUN_VERISI = {
       t.appendChild(c);
     });
   }
+  function kareGorSlug(k) {
+    if (k.tip === "sehir" || k.tip === "seref") return slug(k.ad);
+    if (k.tip === "liman") return slug(k.kisa);
+    if (k.tip === "utility") return k.ad === "Darphane" ? "darphane" : "buyukvakif";
+    var m = { baslangic: "sefermeydani", esaret: "yedikule", kervansaray: "kervansaray", surgun: "surgun", ferman: "ferman", vakca: "vaka", vergi: "vergi" };
+    return m[k.tip] || "";
+  }
   function kareIc(k) {
     var ic = el("div", "kare-ic");
-    if (k.tip === "sehir") ic.innerHTML = '<div class="serit" style="background:' + k.grup.renk + '"></div><div class="kare-ad">' + k.ad + '</div><div class="imar-rozet" data-imar="' + k.pos + '"></div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "liman") ic.innerHTML = '<div class="kare-ikon">⚓</div><div class="kare-ad">' + k.kisa + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "utility") ic.innerHTML = '<div class="kare-ikon">' + (k.ad === "Darphane" ? "🪙" : "💠") + '</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>';
-    else if (k.tip === "vergi") ic.innerHTML = '<div class="kare-ikon">💰</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat">' + k.tutar + '</div>';
-    else if (k.tip === "ferman") ic.innerHTML = '<div class="kare-ikon">📜</div><div class="kare-ad">Ferman</div>';
-    else if (k.tip === "vakca") ic.innerHTML = '<div class="kare-ikon">✴️</div><div class="kare-ad">Vak\'a</div>';
-    else if (k.tip === "baslangic") ic.innerHTML = '<div class="kare-ikon">🏇</div><div class="kare-ad">Sefer<br>Meydanı</div>';
-    else if (k.tip === "esaret") ic.innerHTML = '<div class="kare-ikon">⛓️</div><div class="kare-ad">Esaret<br>Yedikule</div>';
-    else if (k.tip === "kervansaray") ic.innerHTML = '<div class="kare-ikon">🏕️</div><div class="kare-ad">Kervansaray</div><div class="kare-fiyat" data-hazine style="color:#1e8449;font-weight:800"></div>';
-    else if (k.tip === "surgun") ic.innerHTML = '<div class="kare-ikon">🚷</div><div class="kare-ad">Sürgün</div>';
-    else if (k.tip === "seref") ic.innerHTML = '<div class="kare-ikon" style="color:#b7950b">❖</div><div class="kare-ad">' + k.ad + '</div><div class="kare-fiyat" style="color:#b7950b;font-weight:700">Şeref</div>';
+    var img = '<img class="kgor" src="img/' + kareGorSlug(k) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+    if ([0, 10, 20, 30].indexOf(k.pos) >= 0) {
+      var koseAd = { baslangic: ["Sefer Meydanı", "🏇"], esaret: ["Esaret · Yedikule", "⛓️"], kervansaray: ["Kervansaray", "🏕️"], surgun: ["Sürgün", "🚷"] }[k.tip] || [k.ad, "❖"];
+      ic.innerHTML = img + '<div class="kperde"></div><div class="kose-rozet">' + koseAd[1] + '</div><div class="kose-ad">' + koseAd[0] + '</div>' +
+        (k.tip === "kervansaray" ? '<div class="kfoot" data-hazine style="color:#1e8449"></div>' : '');
+      return ic;
+    }
+    var band = "", foot = "", extra = "";
+    if (k.tip === "sehir") { band = '<div class="kband" style="background:' + k.grup.renk + '">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; extra = '<div class="imar-rozet" data-imar="' + k.pos + '"></div>'; }
+    else if (k.tip === "liman") { band = '<div class="kband" style="background:#0f6b5c">' + k.kisa + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">⚓ ' + k.fiyat + '</div>'; }
+    else if (k.tip === "utility") { band = '<div class="kband" style="background:#5b3f86">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; }
+    else if (k.tip === "vergi") { band = '<div class="kband" style="background:#9a6314">' + k.ad + '</div>'; foot = '<div class="kfoot">' + k.tutar + '</div>'; }
+    else if (k.tip === "ferman") { band = '<div class="kband" style="background:#8f2f2f">Ferman</div>'; foot = '<div class="kfoot" style="color:#8f2f2f">☞ Kart</div>'; }
+    else if (k.tip === "vakca") { band = '<div class="kband" style="background:#1f6b58">Vak\'a</div>'; foot = '<div class="kfoot" style="color:#1f6b58">☞ Kart</div>'; }
+    else if (k.tip === "seref") { band = '<div class="kband" style="background:#b0880a">' + k.ad + '</div>'; foot = '<div class="kfoot" style="color:#8a6410;font-weight:800">❖ Şeref</div>'; }
+    ic.innerHTML = band + img + foot + extra;
     return ic;
   }
 
@@ -3481,7 +3504,7 @@ window.OYUN_VERISI = {
   }
 
   // ---------- modallar ----------
-  function modalAc(html, genis) { var ov = $("#modal"); ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + '">' + html + '</div>'; ov.style.display = "flex"; }
+  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; }
   function modalKapat() { $("#modal").style.display = "none"; $("#modal").innerHTML = ""; }
 
   function kiraTablosu(k) {
