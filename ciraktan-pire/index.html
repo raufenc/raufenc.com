@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Çıraktan Pîre — Ahilik ve Meslek Ahlâkı Oyunu</title>
+<script>
+  // Eski service worker / önbelleği temizle (çok projeli sitede bayat içerik sorununu çözer)
+  try {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations)
+      navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); }).catch(function () {});
+    if (window.caches && caches.keys)
+      caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); }).catch(function () {});
+  } catch (e) {}
+  // Görünür hata yakalayıcı (özellikle mobil tarayıcılarda sorunu tespit için)
+  window.addEventListener('error', function (e) {
+    try {
+      var d = document.getElementById('hata-kutu');
+      if (!d) { d = document.createElement('div'); d.id = 'hata-kutu';
+        d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#7d2b2b;color:#fff;font:12px/1.45 ui-monospace,monospace;padding:10px 12px;white-space:pre-wrap;max-height:45vh;overflow:auto;box-shadow:0 -4px 16px rgba(0,0,0,.5)';
+        (document.body || document.documentElement).appendChild(d); }
+      d.textContent = '⚠️ Bir hata oluştu (lütfen ekran görüntüsü al):\n' + (e.message || e) + '\n' + (e.filename || '') + ' satır ' + (e.lineno || '?') + ':' + (e.colno || '?');
+    } catch (x) {}
+  });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --koyu:#0c3b33; --koyu2:#082420; --altin:#c9a227; --altin2:#edc75a; --altin3:#f5e2a3;
+    --parsomen:#f6edd6; --parsomen2:#ece0c2; --metin:#2c2417; --kirmizi:#8a2b2b; --yesil:#1e6b4f;
+    --golge:rgba(0,0,0,.30);
+    --imp:'Cinzel', Georgia, 'Times New Roman', serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,sans-serif; color:#eadfc6; min-height:100vh;
+    background:
+      radial-gradient(1300px 820px at 50% -8%, #18675a 0%, var(--koyu) 46%, var(--koyu2) 100%);
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:0;
+    background-image:radial-gradient(circle at 25% 25%, #fff 1.5px, transparent 1.6px);background-size:34px 34px}
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif}
+  .gizli{display:none !important}
+
+  header{text-align:center; padding:16px 10px 8px; position:relative; z-index:1}
+  header .marka{font-family:Georgia,serif; letter-spacing:.2em; font-size:13px; color:var(--altin2)}
+  header h1{margin:.08em 0; font-size:clamp(26px,5vw,46px); color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.55); letter-spacing:.01em}
+  header h1 .ana{color:var(--altin); text-shadow:0 2px 14px rgba(201,162,39,.5)}
+  header .alt{font-size:13.5px; color:#cdbb8f; letter-spacing:.04em}
+
+  /* ---------- kurulum ---------- */
+  #kurulum{max-width:560px; margin:22px auto; background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+    border:1.5px solid rgba(201,162,39,.45); border-radius:18px; padding:24px; box-shadow:0 14px 50px var(--golge); position:relative; z-index:1}
+  #kurulum h2{margin:.1em 0 .5em; color:var(--altin2); text-align:center; font-size:24px}
+  .kur-row-ust{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px}
+  #kurulum select{padding:9px 12px; border-radius:10px; background:#0c2c27; color:#fff; border:1px solid #2b4f47; font-size:16px}
+  .kur-row{display:flex; gap:10px; align-items:center; margin:9px 0; background:rgba(0,0,0,.18); padding:8px 10px; border-radius:12px}
+  .kur-sw{width:26px;height:26px;border-radius:50%; flex:0 0 auto; box-shadow:inset 0 0 0 2px rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.4)}
+  #kurulum input[type=text]{flex:1; min-width:90px; padding:10px 12px; border-radius:10px; border:1px solid #2b4f47; background:#0c2c27; color:#fff; font-size:16px}
+  .tip-toggle{display:flex; border:1px solid #2b4f47; border-radius:10px; overflow:hidden; flex:0 0 auto}
+  .tip-toggle button{padding:9px 12px; background:#0c2c27; color:#9fb3ac; border:none; cursor:pointer; font-size:14px; font-weight:600}
+  .tip-toggle button.sec{background:linear-gradient(180deg,var(--altin2),var(--altin)); color:#22180a}
+  .btn-buyuk{display:block; width:100%; margin-top:18px; padding:15px; font-size:19px; font-weight:800;
+    border:none; border-radius:13px; cursor:pointer; color:#22180a; background:linear-gradient(180deg,var(--altin3),var(--altin)); box-shadow:0 5px 0 #8a6f17, 0 8px 22px rgba(0,0,0,.35); letter-spacing:.02em}
+  .btn-buyuk:active{transform:translateY(3px); box-shadow:0 2px 0 #8a6f17}
+  .kurallar-ozet{margin-top:16px; font-size:13.5px; line-height:1.6; color:#d3c5a0}
+  .kurallar-ozet b{color:var(--altin2)}
+
+  /* ---------- oyun yerleşimi ---------- */
+  #oyun{display:flex; gap:20px; align-items:flex-start; justify-content:center; padding:6px 16px 34px; flex-wrap:wrap; position:relative; z-index:1}
+  .tahta-saran{flex:0 0 auto}
+  #tahta{
+    width:min(96vmin, 880px); aspect-ratio:1/1; display:grid;
+    grid-template-columns:repeat(11,1fr); grid-template-rows:repeat(11,1fr);
+    background:var(--parsomen); border:7px solid #6e4f17; border-radius:12px; padding:6px; gap:2.5px;
+    box-shadow:0 20px 56px var(--golge), inset 0 0 0 2.5px var(--altin), inset 0 0 0 6px var(--parsomen);
+  }
+  .kare{position:relative; background:linear-gradient(180deg,#fffdf6,#f6efdd); border:1px solid #d6c49b; border-radius:5px; overflow:hidden;
+    display:flex; flex-direction:column; cursor:pointer; min-width:0; transition:transform .12s}
+  .kare:hover{outline:2px solid var(--altin); z-index:5; transform:scale(1.04)}
+  .kare-ic{flex:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:0}
+  .kband{color:#fff; font-family:var(--imp); font-weight:700; font-size:clamp(6px,1.28vmin,12px); text-align:center; padding:2px 1px 2.5px;
+    line-height:1; text-transform:uppercase; letter-spacing:.004em; text-shadow:0 1px 1px rgba(0,0,0,.45); z-index:2; overflow:hidden;
+    white-space:nowrap; text-overflow:ellipsis; box-shadow:inset 0 -2px 3px rgba(0,0,0,.22)}
+  .kgor{flex:1; width:100%; object-fit:cover; min-height:0; display:block}
+  .kfoot{font-family:var(--imp); font-size:clamp(6px,1.08vmin,10px); font-weight:700; text-align:center; color:#5a3d10;
+    background:linear-gradient(rgba(251,244,222,.96),rgba(242,230,194,.96)); padding:1px 1px 1.5px; z-index:2; border-top:1px solid rgba(214,196,143,.7)}
+  .kperde{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(6,26,22,.24),transparent 38%,rgba(6,26,22,.66))}
+  .kose-ad{position:absolute; left:1px; right:1px; bottom:2px; z-index:2; color:#f6ead0; font-family:var(--imp); font-weight:700;
+    font-size:clamp(7px,1.5vmin,13px); text-align:center; line-height:1.04; text-shadow:0 1px 3px rgba(0,0,0,.9)}
+  .kose-rozet{position:absolute; top:2px; left:0; right:0; z-index:2; text-align:center; font-size:clamp(11px,2.4vmin,20px); filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-rozet{position:absolute; left:0; right:0; top:36%; transform:translateY(-30%); z-index:3; display:flex; align-items:center; justify-content:center; gap:1px; pointer-events:none}
+  .imar-bina{font-size:clamp(10px,2.1vmin,18px); line-height:1; filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-bina.kulliye{filter:drop-shadow(0 0 4px var(--altin))}
+  .imar-yeni{animation:buildPop .4s cubic-bezier(.2,1.6,.4,1)}
+  .kare-baslangic{background:linear-gradient(135deg,#fdf3d6,#f7e7bd)} .kare-esaret{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
+  .kare-kervansaray{background:linear-gradient(135deg,#e7f1e6,#d9ead7)} .kare-surgun{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
+  .kare-ferman{background:linear-gradient(135deg,#f8e9e2,#f1d9cf)} .kare-vakca{background:linear-gradient(135deg,#e4f0ea,#d6e8df)}
+  .kare-vergi{background:linear-gradient(135deg,#f5eeda,#efe4c6)} .kare-liman{background:linear-gradient(135deg,#e9eff5,#dbe6f1)} .kare-utility{background:linear-gradient(135deg,#f2edf6,#e8dff1)}
+  .kare.sahipli .kfoot{font-weight:800; color:#3a2d12}
+  .kare.ipotekli{filter:grayscale(.55) opacity(.78)}
+  .kare.vurgu{animation:karePulse 1.1s ease-out}
+
+  .merkez{grid-row:2 / 11; grid-column:2 / 11; border-radius:9px; border:2.5px solid var(--altin);
+    background:radial-gradient(circle at 50% 32%, #1c6353, #0e3f35 72%); position:relative;
+    display:flex; align-items:center; justify-content:center; box-shadow:inset 0 0 50px rgba(0,0,0,.5)}
+  .merkez::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,162,39,.35);border-radius:6px;pointer-events:none}
+  .merkez-ic{text-align:center; color:#f0e3c2; padding:8px; position:relative}
+  .logo-ust{font-family:Georgia,serif; letter-spacing:.34em; font-size:clamp(11px,2.1vmin,20px); color:var(--altin2)}
+  .logo-orta{font-family:Georgia,serif; font-weight:800; font-size:clamp(26px,6.6vmin,58px); color:#fff; line-height:1; text-shadow:0 3px 14px rgba(0,0,0,.6)}
+  .logo-alt{font-size:clamp(8px,1.5vmin,13px); color:#c2ad77; margin-top:5px; letter-spacing:.05em}
+  .deste-kutu{display:flex; gap:11px; justify-content:center; align-items:center; margin:14px 0 4px}
+  .deste{font-family:Georgia,serif; font-size:clamp(8px,1.5vmin,13px); letter-spacing:.12em; color:#fff; padding:9px 13px; border-radius:7px;
+    box-shadow:0 4px 0 rgba(0,0,0,.35), 0 7px 16px rgba(0,0,0,.4)}
+  .deste-ferman{background:linear-gradient(180deg,#a64141,#732424); transform:rotate(-4deg)} .deste-vakca{background:linear-gradient(180deg,#2f8870,#175040); transform:rotate(4deg)}
+  .sefer-mini{width:clamp(46px,8.8vmin,82px); min-height:clamp(56px,11vmin,100px); background:linear-gradient(180deg,#f8ecc8,#e6cf94);
+    color:#5a3d10; border:2.5px solid #b7950b; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(0,0,0,.45); transform:rotate(-3deg)}
+  .sm-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(22px,5vmin,46px); line-height:1}
+  .sm-et{font-size:clamp(6.5px,1.15vmin,9.5px); letter-spacing:.08em; color:#7a5b1a; margin-top:3px; text-align:center; line-height:1.1}
+
+  .pawnlar{position:absolute; bottom:2px; right:2px; left:2px; display:flex; flex-wrap:wrap; gap:2px; justify-content:center; pointer-events:none}
+  .pawn{width:clamp(24px,4vmin,38px); height:clamp(24px,4vmin,38px); border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(14px,2.4vmin,22px); border:1.5px solid rgba(255,255,255,.6);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 0 0 2.5px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.5)}
+  .pawn-hareket{animation:zipla .24s ease-out; z-index:9; box-shadow:0 0 0 1.5px #fff, 0 0 13px 3px var(--altin2), 0 3px 8px rgba(0,0,0,.55)}
+
+  /* ---------- yan panel ---------- */
+  .panel{flex:1 1 320px; max-width:420px; min-width:288px; display:flex; flex-direction:column; gap:14px}
+  .panel-kart{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04)); border:1.5px solid rgba(201,162,39,.4); border-radius:16px; padding:14px}
+  #sira-bilgi{font-size:18px; color:#fff} #sira-bilgi .sw{display:inline-block; width:16px;height:16px;border-radius:50%;vertical-align:-3px;margin-right:5px}
+  .bot-rozet{display:inline-block;font-size:11px;background:#2471a3;color:#fff;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:2px;font-weight:700}
+  #aksiyon-bar{display:flex; flex-wrap:wrap; gap:9px; margin-top:12px; min-height:44px}
+  .akbtn{padding:11px 14px; border-radius:11px; border:1px solid rgba(201,162,39,.55); background:rgba(255,255,255,.09);
+    color:#f3ead2; font-size:15.5px; cursor:pointer; font-weight:700; transition:transform .1s, background .15s}
+  .akbtn:hover{background:rgba(255,255,255,.18)}
+  .akbtn:active{transform:translateY(2px)}
+  .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none; box-shadow:0 4px 0 #8a6f17}
+  .akbtn.btn-ana:active{box-shadow:0 1px 0 #8a6f17}
+  .akbtn.btn-pasif,.akbtn:disabled{opacity:.45; cursor:not-allowed}
+  .bot-oynuyor{font-size:16px;color:var(--altin2);font-weight:700;display:flex;align-items:center;gap:9px}
+  .bot-spinner{width:16px;height:16px;border:2.5px solid rgba(201,162,39,.3);border-top-color:var(--altin2);border-radius:50%;animation:donme .8s linear infinite}
+  #oyuncular{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .oyuncu-kart{background:rgba(0,0,0,.24); border:2.5px solid; border-radius:13px; padding:10px 30px 10px 11px; transition:box-shadow .2s; position:relative}
+  .koltuk-btn{position:absolute; top:7px; right:7px; width:26px; height:26px; border-radius:8px; border:1px solid rgba(201,162,39,.5);
+    background:rgba(255,255,255,.09); color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1}
+  .koltuk-btn:hover{background:rgba(255,255,255,.2)}
+  .akbtn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
+  .oyuncu-kart.aktif{box-shadow:0 0 0 2.5px var(--altin2), 0 0 22px rgba(237,199,90,.45)}
+  .oyuncu-kart.iflas{opacity:.42; filter:grayscale(1)}
+  .ok-bas{display:flex; align-items:center; gap:6px; font-size:15px; font-weight:800; color:#fff}
+  .ok-sw{width:21px;height:21px;border-radius:50%; flex:0 0 auto; display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 0 1.5px rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.4)}
+  .seref-bereket{text-align:center;font-size:18px;color:#1c6b41;background:#e3f6ea;border:1.5px solid #9bd3b0;border-radius:11px;padding:12px;margin:4px 0;font-weight:600}
+  .ok-para{font-size:18px; color:var(--altin2); font-weight:800; margin:3px 0; transition:color .2s}
+  .ok-para.arti{animation:flashIyi .9s} .ok-para.eksi{animation:flashKotu .9s}
+  .ok-alt{font-size:12.5px; color:#c9ba93}
+  #log{height:184px; overflow-y:auto; font-size:14px; line-height:1.55}
+  .log-satir{padding:4px 0; border-bottom:1px dashed rgba(255,255,255,.09); color:#ddd0ad; animation:logGir .3s}
+  .log-satir.iyi{color:#85e4b6} .log-satir.kotu{color:#f2a8a8} .log-satir.vurgu{color:var(--altin2); font-weight:700}
+  .panel-alt{display:flex; gap:8px; flex-wrap:wrap}
+  .panel-alt .akbtn{flex:1; text-align:center; font-size:14.5px}
+
+  /* ---------- modal ---------- */
+  #modal,#kurallar-modal{position:fixed; inset:0; background:rgba(6,18,15,.74); display:none; align-items:center; justify-content:center; z-index:50; padding:16px; backdrop-filter:blur(2px)}
+  .modal-kutu{background:var(--parsomen); color:var(--metin); width:min(480px,95vw); max-height:92vh; overflow-y:auto;
+    border-radius:16px; padding:20px; border:3px solid var(--altin); box-shadow:0 22px 64px rgba(0,0,0,.6); animation:popIn .28s cubic-bezier(.2,1.3,.4,1)}
+  .modal-kutu.genis{width:min(580px,96vw)}
+  .modal-kutu h2{margin:.15em 0; color:#3a2d12; font-size:23px}
+  .m-serit{height:10px; border-radius:5px; margin:-8px -8px 10px}
+  .m-bolge{font-size:13px; letter-spacing:.13em; text-transform:uppercase; color:#8a6f2a; font-weight:800}
+  .m-tarih{font-size:14px; color:#6b5a33; margin:3px 0 9px; font-weight:600}
+  .m-bilgi{font-size:16px; line-height:1.6; color:#33291a}
+  .m-eko{margin-top:12px; font-size:14px; background:rgba(0,0,0,.05); border-radius:10px; padding:11px; line-height:1.7}
+  .m-eko .bina-satir{display:flex;align-items:center;gap:6px;justify-content:space-between;padding:1px 0}
+  .m-ikon{font-size:42px; text-align:center}
+  .m-gorsel{width:100%; max-width:340px; display:block; margin:-2px auto 12px; border-radius:11px; box-shadow:0 5px 16px rgba(0,0,0,.28)}
+  /* Yatay ekran: mekan kartı yatay düzen — resim solda (yatay 3:2 kırpım), metin sağda */
+  @media (orientation:landscape) and (min-width:640px){
+    .modal-kutu.resimli{width:min(860px,96vw); max-height:90vh}
+    .modal-kutu.resimli::after{content:""; display:block; clear:both}
+    .modal-kutu.resimli .m-gorsel{float:left; width:46%; max-width:400px; aspect-ratio:3/2; height:auto;
+      object-fit:cover; margin:0 18px 12px 0}
+    .modal-kutu.resimli .m-serit{margin:2px 0 8px; float:none}
+    .modal-kutu.resimli .m-btnlar,.modal-kutu.resimli .m-eko{clear:both}
+  }
+  #kapak{display:block; width:100%; margin:0 auto 16px; border-radius:14px; box-shadow:0 12px 34px rgba(0,0,0,.45); border:1.5px solid rgba(201,162,39,.5)}
+  .m-btnlar{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; justify-content:flex-end}
+  .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
+  .kart-ogren{margin-top:12px; font-size:14.5px; background:#fff7e3; border-left:5px solid var(--altin); padding:10px 12px; border-radius:0 9px 9px 0; color:#5a4a22; line-height:1.55}
+  .sefer-buyuk{text-align:center; margin:10px 0 4px}
+  .sb-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(56px,13vw,84px); line-height:1; color:#7a5b1a; text-shadow:0 2px 0 #e6cf94; display:inline-block; animation:popIn .3s ease-out}
+  .sb-alt{font-size:15px; color:#8a6f2a; letter-spacing:.06em}
+  .soru-metin{font-size:18px; line-height:1.5; font-weight:700; color:#33291a; margin:8px 0 14px}
+  .siklar{display:flex; flex-direction:column; gap:10px}
+  .sik{text-align:left; padding:12px 14px; border-radius:11px; border:1.5px solid #cdb98a; background:#fff; cursor:pointer; font-size:16px; color:#33291a; transition:background .12s, transform .1s}
+  .sik:hover{background:#fff6df; transform:translateX(3px)} .sik.dogru{background:#d6f3df; border-color:#3fae6e; font-weight:700} .sik.yanlis{background:#f7d9d9; border-color:#c0504d}
+  .soru-acik{margin-top:14px; font-size:15px; padding:12px; border-radius:10px; line-height:1.55}
+  .soru-acik.iyi{background:#e3f6ea; color:#1c6b41} .soru-acik.kotu{background:#f7e4e4; color:#9a3b3b}
+  .sev{font-size:12px; padding:2px 9px; border-radius:11px; margin-left:8px; vertical-align:2px; font-weight:700}
+  .sev-kolay{background:#cdeccd; color:#2c6b2c} .sev-orta{background:#fce6c0; color:#8a5a13} .sev-zor{background:#f4cccc; color:#a02d2d}
+  .imar-liste{display:flex; flex-direction:column; gap:8px; margin:11px 0}
+  .imar-row{display:flex; align-items:center; justify-content:space-between; gap:9px; font-size:15px; background:rgba(0,0,0,.045); padding:9px 11px; border-radius:10px}
+  .imar-row .imbtn{font-size:13.5px; padding:8px 11px}
+  .msw{width:14px;height:14px;border-radius:4px;display:inline-block;margin-right:5px;vertical-align:-2px}
+  .ipt{color:#a33; font-size:12px} .bitti-rozet{font-size:13px;color:#1e6b4f;font-weight:700}
+  /* sonuç / sıralama */
+  .sira-liste{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+  .sira-row{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.05);border-radius:11px;padding:9px 11px;font-size:15px}
+  .sira-row.kazanan{background:linear-gradient(180deg,#fff7e0,#f5e6bd);box-shadow:0 0 0 2px var(--altin);font-weight:700}
+  .sira-row.iflas{opacity:.5}
+  .sr-rank{font-size:18px;width:26px;text-align:center;flex:0 0 auto}
+  .sr-amblem{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto;box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 1px 3px rgba(0,0,0,.35)}
+  .sr-ad{flex:1;font-weight:700;color:#33291a}
+  .sr-servet{font-weight:800;color:#7a5b1a;white-space:nowrap}
+  .zafer{position:relative;border-radius:13px;overflow:hidden;margin:-8px -8px 12px;height:210px}
+  .zafer-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;margin:0;border-radius:0;box-shadow:none;display:block}
+  .zafer-perde{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,26,.42),rgba(8,30,26,.8))}
+  .zafer-ic{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:10px}
+  .zafer-amblem{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 0 3px #fff,0 0 20px rgba(237,199,90,.75);margin-bottom:7px;animation:popIn .5s cubic-bezier(.2,1.4,.4,1)}
+  .zafer-ust{font-family:Georgia,serif;letter-spacing:.16em;color:var(--altin2);font-size:14px;text-shadow:0 2px 9px rgba(0,0,0,.7)}
+  .zafer-ad{font-family:Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;text-shadow:0 3px 13px rgba(0,0,0,.75)}
+  .zafer-alt{font-size:13px;color:#ecdfbb;margin-top:4px;text-shadow:0 1px 7px rgba(0,0,0,.75)}
+  .ozet-kutu{background:rgba(0,0,0,.05);border-radius:10px;padding:10px 12px;font-size:13.5px;color:#5a4a22;line-height:1.55;margin-top:6px}
+  .modal-kutu .akbtn{border:1px solid #b89a4e; background:#eaddbf; color:#3a2d12}
+  .modal-kutu .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
+  .modal-kutu .akbtn.btn-pasif{background:#e2d6ba}
+
+  .kurallar-icerik{font-size:15px; line-height:1.65; color:#3a3120}
+  .kurallar-icerik h3{color:#7a5b1a; margin:16px 0 5px; font-size:18px} .kurallar-icerik ul,.kurallar-icerik ol{margin:5px 0; padding-left:20px}
+  .kurallar-icerik li{margin:4px 0}
+
+  /* ---------- takas + şeref ---------- */
+  .kare-seref{background:linear-gradient(135deg,#f8efce,#efe0b3)}
+  .takas-grid{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin:10px 0}
+  .takas-col{background:rgba(0,0,0,.045); border-radius:11px; padding:10px}
+  .takas-bas{font-weight:800; font-size:14.5px; margin-bottom:7px; text-align:center; color:#3a2d12}
+  .takas-bas select{font-size:13.5px; padding:4px 7px; border-radius:8px; border:1px solid #b89a4e; background:#fff}
+  .takas-mulk{display:flex; align-items:center; gap:6px; font-size:14px; padding:5px 3px; cursor:pointer; border-radius:6px}
+  .takas-mulk:hover{background:rgba(201,162,39,.12)}
+  .takas-mulk input{width:17px; height:17px; cursor:pointer}
+  .takas-fy{color:#8a6f2a; font-size:12px; margin-left:auto}
+  .takas-para{font-size:13.5px; margin-top:7px; color:#3a2d12}
+  .takas-para input{width:84px; padding:5px 7px; border-radius:7px; border:1px solid #cdb98a; font-size:13.5px}
+  .takas-bos{font-size:13px; color:#9a8a60; font-style:italic; padding:7px 0}
+  .takas-ozet{background:rgba(0,0,0,.05); border-radius:10px; padding:11px 13px; font-size:15px; line-height:1.65}
+
+  /* ---------- kart çevirme + desen ---------- */
+  .flip{perspective:1000px;margin:8px auto 4px;width:150px;height:158px}
+  .flip-ic{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.1,.35,1)}
+  .flip.acik .flip-ic{transform:rotateY(180deg)}
+  .flip-yuz{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2.5px solid #b7950b;box-shadow:0 7px 18px rgba(0,0,0,.32)}
+  .flip-arka{background:#5e4216}.flip-arka svg{width:100%;height:100%}
+  .flip-on{transform:rotateY(180deg);background:linear-gradient(180deg,#f8ecc8,#e6cf94);flex-direction:column;color:#7a5b1a}
+  .flip-on .fn{font-family:Georgia,serif;font-weight:800;font-size:66px;line-height:1;text-shadow:0 2px 0 #f6e2a8}
+  .flip-on .fa{font-size:12.5px;color:#8a6f2a;letter-spacing:.05em;margin-top:2px}
+  .desenli{position:relative}.desenli > *{position:relative;z-index:1}
+  .desen-bg{position:absolute;inset:0;z-index:0;opacity:.5;border-radius:inherit;overflow:hidden}
+
+  /* ---------- animasyonlar ---------- */
+  @keyframes popIn{from{transform:scale(.86);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes flipNo{from{transform:rotateX(85deg) scale(.7);opacity:0}to{transform:rotateX(0) scale(1);opacity:1}}
+  @keyframes zipla{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-10px) scale(1.22)}72%{transform:translateY(-2px) scale(1.08)}100%{transform:translateY(0) scale(1)}}
+  @keyframes buildPop{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+  @keyframes karePulse{0%{box-shadow:inset 0 0 0 0 var(--altin)}40%{box-shadow:inset 0 0 0 4px var(--altin2)}100%{box-shadow:inset 0 0 0 0 rgba(201,162,39,0)}}
+  @keyframes flashIyi{0%{color:#fff;text-shadow:0 0 12px #7fe0b0}45%{color:#7fe0b0}100%{color:var(--altin2)}}
+  @keyframes flashKotu{0%{color:#fff;text-shadow:0 0 12px #f2a8a8}45%{color:#f2a8a8}100%{color:var(--altin2)}}
+  @keyframes logGir{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  @keyframes donme{to{transform:rotate(360deg)}}
+
+  /* ---------- PREMIUM + 3D MASA ---------- */
+  .tahta-saran{position:relative;transition:transform .5s ease}
+  #tahta{box-shadow:0 22px 55px var(--golge), inset 0 0 0 2.5px var(--altin), inset 0 0 0 7px var(--parsomen), inset 0 0 26px rgba(110,79,23,.28)}
+  .d3 .tahta-saran{perspective:1650px;perspective-origin:50% 26%;padding:6px 0 34px}
+  .d3 #tahta{transform:rotateX(var(--egim,21deg));transform-style:preserve-3d;border-width:11px;
+    box-shadow:0 54px 70px -18px rgba(0,0,0,.62), 0 26px 36px rgba(0,0,0,.32), inset 0 0 0 2.5px var(--altin), inset 0 0 30px rgba(110,79,23,.3)}
+  .d3 .merkez,.d3 .kare{transform-style:preserve-3d}
+  .d3 .merkez-ic{transform:translateZ(16px)}
+  .d3 .sefer-mini,.d3 .deste{transform:translateZ(10px)}
+  .d3 .pawn{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(13px) translateY(-7px);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 9px 7px -2px rgba(0,0,0,.55)}
+  .d3 .pawn-hareket{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(22px) translateY(-12px) scale(1.16);
+    box-shadow:0 0 0 1.5px #fff, 0 0 14px 3px var(--altin2), 0 12px 9px -2px rgba(0,0,0,.6)}
+  .d3 .imar-bina{display:inline-block;transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(11px);filter:drop-shadow(0 7px 4px rgba(0,0,0,.45))}
+  .d3 .imar-bina.kulliye{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(16px)}
+  .d3 .kare:hover{transform:translateZ(8px)}
+  #d3-btn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin));color:#22180a;border:none}
+
+  /* ---------- LÜKS DOKUNUŞLAR ---------- */
+  header h1,.logo-ust,.logo-orta,.marka,.zafer-ust,.zafer-ad,.kart-ust,#kurulum h2{font-family:var(--imp);letter-spacing:.02em}
+  header h1{font-weight:900}.logo-orta{font-weight:900}
+  body{background:radial-gradient(1300px 920px at 50% 8%, #1d7161 0%, #0e463c 40%, #072620 100%)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(130% 92% at 50% 32%, transparent 52%, rgba(0,0,0,.5) 100%)}
+  header,#oyun,#kurulum{position:relative;z-index:1}
+  header h1 .ana{background:linear-gradient(100deg,#a9781a 18%,#ffe9a8 44%,#f5cf5e 52%,#a9781a 74%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background-size:220% auto;animation:parla 5s linear infinite;text-shadow:0 2px 18px rgba(201,162,39,.3)}
+  @keyframes parla{to{background-position:220% center}}
+  .panel-kart{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+    backdrop-filter:blur(9px) saturate(1.15);-webkit-backdrop-filter:blur(9px) saturate(1.15);
+    border:1.5px solid rgba(201,162,39,.45);box-shadow:0 12px 34px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.10)}
+  #kurulum{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 55px var(--golge), inset 0 1px 0 rgba(255,255,255,.1)}
+  .pawn{background-image:radial-gradient(circle at 34% 28%, rgba(255,255,255,.55), rgba(255,255,255,0) 46%);
+    box-shadow:0 0 0 1.6px #f4ead0, 0 0 0 2.6px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.55), inset 0 -3px 5px rgba(0,0,0,.35)}
+  .d3 #tahta{border-width:13px;box-shadow:0 62px 84px -22px rgba(0,0,0,.72), 0 30px 42px rgba(0,0,0,.36), inset 0 0 0 2.5px var(--altin), inset 0 0 34px rgba(110,79,23,.34)}
+  .d3 .tahta-saran::after{content:"";position:absolute;left:10%;right:10%;bottom:20px;height:46px;z-index:-1;background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 72%);filter:blur(10px)}
+  .akbtn.btn-ana,.btn-buyuk{position:relative;overflow:hidden}
+  .akbtn.btn-ana::after,.btn-buyuk::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:kayar 5.5s ease-in-out infinite;pointer-events:none}
+  @keyframes kayar{0%,72%{left:-60%}88%{left:130%}100%{left:130%}}
+  /* konfeti tuvali */
+  #konfeti{position:fixed;inset:0;pointer-events:none;z-index:60}
+
+  /* ---------- MOBİL ---------- */
+  @media(max-width:680px){
+    body::before{opacity:.03}
+    header{padding:10px 8px 4px} header h1{font-size:clamp(26px,8vw,38px)} header .marka{font-size:11px} header .alt{font-size:12px}
+    #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 24px}
+    .tahta-saran{display:flex; justify-content:center}
+    #tahta{width:min(97vw,97vmin)}
+    .d3 #tahta{--egim:15deg}
+    .d3 .tahta-saran{perspective:1100px;padding-bottom:20px}
+    .panel{max-width:100%; min-width:0; width:100%}
+    #oyuncular{grid-template-columns:1fr 1fr; gap:8px}
+    .ok-para{font-size:16px} #log{height:110px}
+    /* aksiyon paneli tahtanın hemen altında, vurgulu (sabit DEĞİL — telefon tarayıcısıyla uyumlu) */
+    #oyun .panel .panel-kart:first-child{border:1.5px solid var(--altin); box-shadow:0 6px 20px rgba(0,0,0,.4)}
+    #sira-bilgi{font-size:16px} #aksiyon-bar{margin-top:9px; gap:8px}
+    .akbtn{font-size:15.5px; padding:13px 14px; flex:1 1 auto; min-height:46px; display:flex; align-items:center; justify-content:center}
+    .panel-alt .akbtn{min-height:42px}
+    /* kurulum */
+    #kurulum{padding:16px; margin:14px 7px}
+    #kapak{margin-bottom:12px}
+    .kur-row-ust{flex-direction:column; align-items:stretch; gap:9px}
+    .kur-row-ust label{display:flex; justify-content:space-between; align-items:center} .kur-row-ust select{flex:0 0 auto}
+    .kur-row{flex-wrap:wrap} .kur-row input[type=text]{min-width:0; flex:1 1 110px} .tip-toggle{flex:0 0 auto}
+    .btn-buyuk{font-size:18px; padding:15px}
+    /* modaller */
+    .modal-kutu{padding:15px; width:96vw} .modal-kutu.genis{width:96vw}
+    .modal-kutu h2{font-size:21px} .m-bilgi{font-size:15px} .m-gorsel{max-width:260px}
+    .takas-grid{grid-template-columns:1fr; gap:9px}
+    .m-btnlar{gap:8px} .m-btnlar .akbtn{flex:1 1 auto}
+    .zafer{height:170px} .zafer-ad{font-size:27px}
+  }
+  @media(max-width:380px){ #oyuncular{grid-template-columns:1fr} .sb-no{font-size:60px} }
+</style>
+</head>
+<body>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v11 · yükleniyor…</div>
+<header>
+  <div class="marka">٭ AHİLİK VE MESLEK AHLÂKI OYUNU ٭</div>
+  <h1>ÇIRAKTAN <span class="ana">PÎRE</span></h1>
+  <div class="alt">Çarşıda dükkân aç, rütbe yüksel — eline, diline, beline sahip ol</div>
+</header>
+
+<section id="kurulum">
+  <img id="kapak" src="img/kapak.webp" alt="Çıraktan Pîre" onerror="this.style.display='none'">
+  <h2>Oyuncular</h2>
+  <div class="kur-row-ust">
+    <label style="font-size:16px">Koltuk sayısı:
+      <select id="oyuncu-sayisi">
+        <option value="2">2</option><option value="3">3</option><option value="4" selected>4</option>
+      </select>
+    </label>
+    <label style="font-size:16px">Bot zorluğu:
+      <select id="bot-zorluk">
+        <option value="kolay">Kolay</option><option value="orta" selected>Orta</option><option value="zor">Zor</option>
+      </select>
+    </label>
+    <label style="font-size:16px">Tur limiti:
+      <select id="tur-limiti">
+        <option value="0" selected>Yok (son kalan)</option><option value="15">15 tur</option><option value="20">20 tur</option><option value="30">30 tur</option>
+      </select>
+    </label>
+  </div>
+  <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin · tur limitinde süre dolunca en zengin kazanır</div>
+  <button id="devam-btn" class="btn-buyuk gizli" style="margin-top:0;margin-bottom:10px;background:linear-gradient(180deg,#7fc9a8,#1e8449)">▶️ Kayıtlı Oyuna Devam Et</button>
+  <div id="kurulum-oyuncular"></div>
+  <button id="basla" class="btn-buyuk">🔨 Yola Çık — Oyunu Başlat</button>
+  <div class="kurallar-ozet">
+    <b>Zar yok:</b> her tur bir <b>Yol Kartı</b> çekersin — üstündeki 1–12 sayısı kadar ilerler, altındaki Ahilik bilgisini öğrenirsin.
+    <b>Akçe</b> ile dükkân açar, <b>Yamak→Ahi Baba</b> rütbesi yükseltir, uğrayan rakiplerden sipariş bedeli toplarsın.
+    İstersen tek başına <b>botlara</b> karşı oynayabilirsin. Her kare ve kart bir Ahilik dersi verir.
+  </div>
+  <div style="text-align:center;margin-top:12px;font-size:13px;color:#c2ad77">✦ Cihan Serisi'nin diğer oyunu: <a href="/beylikten-cihana/" style="color:#edc75a">Beylikten Cihana — Osmanlı Tarihi Oyunu</a></div>
+</section>
+
+<section id="oyun" class="gizli">
+  <div class="tahta-saran"><div id="tahta"></div></div>
+  <div class="panel">
+    <div class="panel-kart">
+      <div id="sira-bilgi"></div>
+      <div id="aksiyon-bar"></div>
+    </div>
+    <div class="panel-kart"><div id="oyuncular"></div></div>
+    <div class="panel-kart"><div id="log"></div></div>
+    <div class="panel-alt">
+      <button id="duraklat-btn" class="akbtn">⏸️ Duraklat</button>
+      <button id="hiz-btn" class="akbtn">⚡ Normal</button>
+      <button id="d3-btn" class="akbtn">🧊 3D</button>
+      <button id="skor-btn" class="akbtn">📊 Servet</button>
+      <button id="ses-btn" class="akbtn">🔊 Ses</button>
+      <button id="kurallar-btn" class="akbtn">📖 Kurallar</button>
+    </div>
+  </div>
+</section>
+
+<div id="modal"></div>
+
+<div id="kurallar-modal">
+  <div class="modal-kutu genis">
+    <div class="kart-ust" style="background:#7a5b1a">📖 OYUN KURALLARI</div>
+    <div class="kurallar-icerik">
+      <p><b>Çıraktan Pîre</b>, Ahilik'in çarşı hayatını ve meslek ahlâkını bir tahta üzerinde yaşatan eğitsel strateji oyunudur: yamaklıktan pîrliğe uzanan yol.</p>
+      <h3>Amaç</h3>
+      <ul><li>Dükkânlar açıp rütbe yükselterek servetini ve itibarını büyüt. Diğer herkes iflas ettiğinde <b>son ayakta kalan kazanır</b>. Tur limiti seçildiyse süre dolunca <b>en zengin</b> kazanır.</li></ul>
+      <h3>Tur akışı — ZAR YOK</h3>
+      <ul>
+        <li><b>Yol Kartı çek.</b> Üstündeki 1–12 sayısı kadar ilerlersin; altındaki Ahilik bilgisi o sayıya bağlıdır (<i>eline, diline, beline → 3</i> gibi).</li>
+        <li>Çarşı Meydanı'ndan her geçişte <b>2.000 akçe emek kazancı</b> (Kethüdâ isen +500).</li>
+        <li>Boş dükkâna düşersen <b>aç</b>, <b>Bilgi sorusu</b> ile %25 indirimli al, ya da <b>vazgeç → açık artırma</b> başlar (herkes teklif verir, en yükseği alır).</li>
+        <li>Başkasının dükkânına uğrarsan <b>sipariş bedeli (kira)</b> ödersin; rütbe arttıkça bedel katlanır.</li>
+      </ul>
+      <h3>Özel Yol Kartları</h3>
+      <ul><li>Bazı kartlar farklıdır: <b>🔁 Tekrar</b> (ilerle + yeniden çek), <b>↩️ Geri</b> (geri git), <b>✨ Davet</b> (en yakın panayıra / Çarşı Meydanı'na / Ahi Evran Ocağı'na), <b>✦ Şakacı</b> (rakiple yer değiştir / tazminat al).</li></ul>
+      <h3>Rütbe — Yamak 🧹 → Çırak 🔨 → Kalfa 🛠️ → Usta 🏅 → Ahi Baba 🏵️</h3>
+      <ul><li>Bir <b>sektörün (renk grubu) tüm dükkânları</b> sende ise rütbe yükseltmeye başlarsın. Rütbe arttıkça sipariş bedeli katlanır; en üst kademe Ahi Baba'dır.</li></ul>
+      <h3>Nakit sıkışınca — iflas etme!</h3>
+      <ul><li>Bir ödemeyi karşılayamazsan bir <b>borç ekranı</b> açılır: <b>rütbe sat</b> (yarı fiyat) veya <b>dükkân ipotek et</b>, nakdi topla, borcu öde, devam et. "Mülklerim"den istediğinde de satabilirsin.</li></ul>
+      <h3>Kartlar & özel kareler</h3>
+      <ul>
+        <li><b>Fütüvvet</b> & <b>Çarşı Vak'ası</b>: değer ve olay kartları; etkisi <b>senin mülklerine</b> bağlanır (çarşı yangını → rütbe başına kayıp, panayır bereketi → panayır başına kazanç).</li>
+        <li><b>🏕️ Kervansaray Hazinesi:</b> ödenen vergiler ortada birikir; buraya düşen tüm havuzu kapar.</li>
+        <li><b>❖ Şeref (Ahi Evran Ocağı / Fütüvvetnâme):</b> alınıp satılmaz; uğrayan bankadan <b>bereket</b> alır (Ocak +500, Fütüvvetnâme +200).</li>
+        <li><b>👑 Kethüdâ:</b> en zengin oyuncu esnafın temsilcisi unvanını kapar, geçişte +500 alır.</li>
+        <li><b>👞 Pabucu Dama:</b> kalitesiz mal cezası! Çıkmak için 500 akçe telafi bedeli, Kefalet kartı ya da doğru Bilgi cevabı.</li>
+      </ul>
+      <h3>🤝 Takas</h3>
+      <ul><li>İstediğin oyuncuyla <b>dükkân + akçe + Kefalet kartı</b> takas edebilirsin; botlar da teklif başlatır. (Rütbeli dükkân takas edilmez.)</li></ul>
+      <h3>Kontroller</h3>
+      <ul><li><b>⏸️ Duraklat</b> oyunu durdurur. Her oyuncu kartındaki <b>👤/🤖</b> düğmesiyle o koltuğu <b>oyun ortasında Sen ↔ Bot</b> yapabilirsin. <b>⚡ Hız</b> botların oynama hızını, <b>🧊 3D</b> masa görünümünü ayarlar.</li></ul>
+    </div>
+    <div class="m-btnlar"><button id="kurallar-kapat" class="akbtn btn-ana">Kapat</button></div>
+  </div>
+</div>
+
+<script>
+/* ÇIRAKTAN PÎRE — oyun verisi (çok-ajanlı üretildi, Ahilik denetimli) */
+window.OYUN_VERISI = {"ayarlar": {"maas": 2000, "baslangicPara": 15000, "esaretCikisBedeli": 500}, "gruplar": {"gida": {"ad": "Gıda Esnafı", "renk": "#a9743a"}, "toprakates": {"ad": "Toprak ve Ateş", "renk": "#b3552e"}, "ahsap": {"ad": "Ahşap İşleri", "renk": "#8a6f4d"}, "dokuma": {"ad": "Dokuma", "renk": "#256a86"}, "giyim": {"ad": "Giyim-Kuşam", "renk": "#7a4a86"}, "maden": {"ad": "Demir Ocağı", "renk": "#4a5a6b"}, "ince": {"ad": "İnce Sanatlar", "renk": "#9b2d5e"}, "pir": {"ad": "Pîr Mesleği", "renk": "#b7950b"}}, "imarKademeleri": [{"ad": "Yamak", "aciklama": "Ustanın yanında işe yeni başlayan; süpürür, taşır, gözlem yapar."}, {"ad": "Çırak", "aciklama": "Mesleği öğrenmeye başlayan genç; törenle yola kabul edilir."}, {"ad": "Kalfa", "aciklama": "Zanaati öğrenmiş, ustalığa hazırlanan ara kademe."}, {"ad": "Usta", "aciklama": "Şed kuşanıp kendi dükkânını açma hakkı kazanan zanaatkâr."}, {"ad": "Ahi Baba", "aciklama": "Esnafın önderi; çarşının düzeninden ve ahlâkından sorumlu."}], "kareler": [{"pos": 0, "tip": "baslangic", "ad": "Çarşı Meydanı", "aciklama": "Çarşı Meydanı, esnafın her sabah dükkânlarını dualarla açtığı, alışverişin başladığı yerdir. Ahilikte gün, helal kazanç niyetiyle başlar; akşam da herkes kazancına şükrederek dükkânını kapatır.", "kural": "Oyun bu kareden başlar. Çarşı Meydanı'ndan her geçişte bankadan 2.000 akçe emek kazancı al."}, {"pos": 1, "tip": "sehir", "ad": "Fırıncı", "grupKey": "kurulus", "grup": {"ad": "Gıda Esnafı", "renk": "#a9743a"}, "fiyat": 600, "ipotek": 300, "imarBedeli": 500, "kira": [60, 300, 900, 2700, 3900, 4800], "tarih": "", "bilgi": "Fırıncı (ekmekçi), halkın günlük ekmeğini pişiren esnaftır. Ekmek en temel yiyecek olduğu için fırınlar çarşı denetiminin en sıkı uğrak yeriydi. Eksik gramajlı ekmek satan fırıncı ağır ceza alırdı.", "neden": "Söğüt, küçük bir uç beyliğinin nasıl bir cihan devletine dönüşebileceğini ve her büyük gücün mütevazı bir başlangıcı olduğunu öğretir.", "gorsel": "img/sogut.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Fırıncı (ekmekçi), halkın günlük ekmeğini pişiren esnaftır. Ekmek en temel yiyecek olduğu için fırınlar çarşı denetiminin en sıkı uğrak yeriydi. Eksik gramajlı ekmek satan fırıncı ağır ceza alırdı.", "kural": ""}, {"pos": 2, "tip": "vakca", "ad": "Vak'a"}, {"pos": 3, "tip": "sehir", "ad": "Helvacı", "grupKey": "kurulus", "grup": {"ad": "Gıda Esnafı", "renk": "#a9743a"}, "fiyat": 600, "ipotek": 300, "imarBedeli": 500, "kira": [60, 300, 900, 2700, 3900, 4800], "tarih": "", "bilgi": "Helvacı; un, şeker ve yağla helva ve tatlı yapan esnaftır. Helva, bayramların ve özel günlerin vazgeçilmez ikramıydı. Esnaf loncalarının 'helva sohbeti' denen kış toplantıları da bu tatlının adıyla anılırdı.", "neden": "Domaniç, konargöçer Türkmen yaşam biçimini ve toprağa yerleşme sürecinin beyliğin temelini nasıl oluşturduğunu gösterir.", "gorsel": "img/domanic.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Helvacı; un, şeker ve yağla helva ve tatlı yapan esnaftır. Helva, bayramların ve özel günlerin vazgeçilmez ikramıydı. Esnaf loncalarının 'helva sohbeti' denen kış toplantıları da bu tatlının adıyla anılırdı.", "kural": ""}, {"pos": 4, "tip": "vergi", "ad": "İhtisap Resmi", "tutar": 2000, "aciklama": "İhtisap, çarşı ve pazarın denetlenmesi demektir. Muhtesib adlı görevli fiyatları, terazileri ve malların kalitesini kontrol ederdi. Bu düzenin masrafı için esnaftan alınan vergiye İhtisap Resmi denirdi. 2.000 akçe öde."}, {"pos": 5, "tip": "liman", "ad": "Yabanlu Pazarı", "kisa": "Yabanlu", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Anadolu Selçuklu döneminde Kayseri yakınlarında kurulan büyük milletlerarası pazardır. Her yıl haftalarca süren pazara uzak ülkelerden tüccarlar gelir; kumaş, at ve kürk gibi mallar alınıp satılırdı.", "sahip": null, "ipotekli": false, "aciklama": "Anadolu Selçuklu döneminde Kayseri yakınlarında kurulan büyük milletlerarası pazardır. Her yıl haftalarca süren pazara uzak ülkelerden tüccarlar gelir; kumaş, at ve kürk gibi mallar alınıp satılırdı."}, {"pos": 6, "tip": "sehir", "ad": "Çömlekçi", "grupKey": "erkenanadolu", "grup": {"ad": "Toprak ve Ateş", "renk": "#b3552e"}, "fiyat": 1000, "ipotek": 500, "imarBedeli": 500, "kira": [100, 500, 1500, 4500, 6500, 8000], "tarih": "", "bilgi": "Çömlekçi, çamuru çarkta şekillendirip fırında pişirerek testi, çömlek ve küp yapan ustadır. Su ve yiyecek saklamak için herkes çömlekçiye uğrardı. Çarkın başında sabırla dönen çamur, ustalığın simgesiydi.", "neden": "Osmanlı'nın bir aşiretten devlete dönüşürken ilk topraklarını nasıl genişlettiğini gösterir.", "gorsel": "img/bilecik.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Çömlekçi, çamuru çarkta şekillendirip fırında pişirerek testi, çömlek ve küp yapan ustadır. Su ve yiyecek saklamak için herkes çömlekçiye uğrardı. Çarkın başında sabırla dönen çamur, ustalığın simgesiydi.", "kural": ""}, {"pos": 7, "tip": "ferman", "ad": "Ferman"}, {"pos": 8, "tip": "sehir", "ad": "Mumcu", "grupKey": "erkenanadolu", "grup": {"ad": "Toprak ve Ateş", "renk": "#b3552e"}, "fiyat": 1000, "ipotek": 500, "imarBedeli": 500, "kira": [100, 500, 1500, 4500, 6500, 8000], "tarih": "", "bilgi": "Mumcu, balmumu ve içyağından mum döken esnaftır. Elektriğin olmadığı dönemde evler, dükkânlar ve sokaklar mumla aydınlanırdı. Kaliteli mum uzun yanar, az is bırakırdı; mumcunun namusu buydu.", "neden": "Göçebe kökenli bir beyliğin sabit bir yönetim merkezi kurarak devletleşmesini temsil eder.", "gorsel": "img/yenisehir.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Mumcu, balmumu ve içyağından mum döken esnaftır. Elektriğin olmadığı dönemde evler, dükkânlar ve sokaklar mumla aydınlanırdı. Kaliteli mum uzun yanar, az is bırakırdı; mumcunun namusu buydu.", "kural": ""}, {"pos": 9, "tip": "sehir", "ad": "Kalaycı", "grupKey": "erkenanadolu", "grup": {"ad": "Toprak ve Ateş", "renk": "#b3552e"}, "fiyat": 1200, "ipotek": 600, "imarBedeli": 1000, "kira": [120, 600, 1800, 5400, 7800, 9600], "tarih": "", "bilgi": "Kalaycı, bakır kapların içini kalayla kaplayan ustadır. Kalaysız bakır kapta yemek pişirmek sağlıksız olurdu; bu yüzden kalaycılar çarşı çarşı, köy köy dolaşırdı. Parlak ve düzgün kalay, ustalığın ölçüsüydü.", "neden": "Fethin yalnızca askerî değil, medrese ve kültür kurumlarıyla kalıcı bir uygarlık inşası olduğunu öğretir.", "gorsel": "img/iznik.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Kalaycı, bakır kapların içini kalayla kaplayan ustadır. Kalaysız bakır kapta yemek pişirmek sağlıksız olurdu; bu yüzden kalaycılar çarşı çarşı, köy köy dolaşırdı. Parlak ve düzgün kalay, ustalığın ölçüsüydü.", "kural": ""}, {"pos": 10, "tip": "esaret", "ad": "Pabucu Dama", "aciklama": "Ahi geleneğinde kalitesiz mal üreten esnaf uyarılırdı; düzelmezse kusurlu malı (örneğin sağlam olmayan pabucu) herkes görsün diye damın üstüne atılırdı. 'Pabucu dama atılmak' deyimi bu gelenekten gelir. Amaç ceza değil, esnafı dürüstlüğe döndürmekti.", "kural": "Pabucun dama atıldı, dükkânın kapalı; sıra sana gelince bekle. Çıkmak için: 500 akçe telafi bedeli öde, tekrar hakkı veren bir Yol Kartı kullan ya da bir Bilgi sorusunu doğru cevapla."}, {"pos": 11, "tip": "sehir", "ad": "Sepetçi", "grupKey": "ilkbaskent", "grup": {"ad": "Ahşap İşleri", "renk": "#8a6f4d"}, "fiyat": 1400, "ipotek": 700, "imarBedeli": 1000, "kira": [140, 700, 2100, 6300, 9100, 11200], "tarih": "", "bilgi": "Sepetçi, söğüt ve kamış dallarını örerek sepet, küfe ve hasır eşya yapan ustadır. Pazara giden herkesin elinde bir sepet olurdu. Sık ve sağlam örgü, sepetçinin imzası sayılırdı.", "neden": "Bir uç beyliğinin kalıcı bir devlet başkentine dönüşerek kurumsallaşmasını oyuncuya gösterir.", "gorsel": "img/bursa.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Sepetçi, söğüt ve kamış dallarını örerek sepet, küfe ve hasır eşya yapan ustadır. Pazara giden herkesin elinde bir sepet olurdu. Sık ve sağlam örgü, sepetçinin imzası sayılırdı.", "kural": ""}, {"pos": 12, "tip": "utility", "ad": "Orta Sandığı", "fiyat": 1500, "ipotek": 750, "carpan": [4, 10], "bilgi": "Orta Sandığı, esnafın ortak yardım kasasıdır. Her esnaf gücüne göre para koyar; hastalanan, dükkânı zarar gören ya da darda kalan esnafa bu sandıktan destek verilirdi. Ahilikteki dayanışmanın en somut örneğidir.", "sahip": null, "ipotekli": false, "aciklama": "Orta Sandığı, esnafın ortak yardım kasasıdır. Her esnaf gücüne göre para koyar; hastalanan, dükkânı zarar gören ya da darda kalan esnafa bu sandıktan destek verilirdi. Ahilikteki dayanışmanın en somut örneğidir."}, {"pos": 13, "tip": "sehir", "ad": "Semerci", "grupKey": "ilkbaskent", "grup": {"ad": "Ahşap İşleri", "renk": "#8a6f4d"}, "fiyat": 1400, "ipotek": 700, "imarBedeli": 1000, "kira": [140, 700, 2100, 6300, 9100, 11200], "tarih": "", "bilgi": "Semerci, yük hayvanlarının sırtına konan semerleri yapan ustadır. Semerin ölçüsü hayvanı incitmeyecek kadar özenli olmalıydı. Saraçlarla birlikte çarşının deri ve koşum işlerini onlar görürdü.", "neden": "Devletin yönünü Anadolu'dan Avrupa'ya çevirerek bir imparatorluğa dönüşme sürecini vurgular.", "gorsel": "img/edirne.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Semerci, yük hayvanlarının sırtına konan semerleri yapan ustadır. Semerin ölçüsü hayvanı incitmeyecek kadar özenli olmalıydı. Saraçlarla birlikte çarşının deri ve koşum işlerini onlar görürdü.", "kural": ""}, {"pos": 14, "tip": "sehir", "ad": "Marangoz", "grupKey": "ilkbaskent", "grup": {"ad": "Ahşap İşleri", "renk": "#8a6f4d"}, "fiyat": 1600, "ipotek": 800, "imarBedeli": 1000, "kira": [160, 800, 2400, 7200, 10400, 12800], "tarih": "Pîri: Geleneğe göre marangoz ve dülgerlerin piri, gemi yapan Nûh peygamberdir.", "bilgi": "Marangoz, ahşabı işleyerek kapı, pencere, sandık ve mobilya yapan ustadır. Evlerin ve dükkânların çoğu ahşap olduğu için marangozluk çarşının temel zanaatlarındandı. İyi marangoz ağacı israf etmez, her parçayı değerlendirirdi.", "neden": "Fethedilen Balkan topraklarının kalıcı idari merkezlerle yönetilip yurt haline getirilmesini öğretir.", "gorsel": "img/filibe.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Marangoz, ahşabı işleyerek kapı, pencere, sandık ve mobilya yapan ustadır. Evlerin ve dükkânların çoğu ahşap olduğu için marangozluk çarşının temel zanaatlarındandı. İyi marangoz ağacı israf etmez, her parçayı değerlendirirdi.", "kural": ""}, {"pos": 15, "tip": "liman", "ad": "Zile Panayırı", "kisa": "Zile", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Tokat'ın Zile ilçesinde kurulan, Anadolu'nun en ünlü tarihî panayırlarındandır. Evliya Çelebi de seyahatnamesinde bu kalabalık panayırdan söz eder.", "sahip": null, "ipotekli": false, "aciklama": "Tokat'ın Zile ilçesinde kurulan, Anadolu'nun en ünlü tarihî panayırlarındandır. Evliya Çelebi de seyahatnamesinde bu kalabalık panayırdan söz eder."}, {"pos": 16, "tip": "sehir", "ad": "Keçeci", "grupKey": "rumeli", "grup": {"ad": "Dokuma", "renk": "#256a86"}, "fiyat": 1800, "ipotek": 900, "imarBedeli": 1000, "kira": [180, 900, 2700, 8100, 11700, 14400], "tarih": "", "bilgi": "Keçeci, yünü su ve sabunla döverek keçe yapan ustadır. Keçeden çoban kepeneği, başlık, yaygı ve çizme yapılırdı. Sabır isteyen bu zanaat, Anadolu'nun en eski el sanatlarındandır.", "neden": "Rumeli'deki ilerleyişte Üsküp'ün ileri üs olarak stratejik önemini öğretir.", "gorsel": "img/uskup.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Keçeci, yünü su ve sabunla döverek keçe yapan ustadır. Keçeden çoban kepeneği, başlık, yaygı ve çizme yapılırdı. Sabır isteyen bu zanaat, Anadolu'nun en eski el sanatlarındandır.", "kural": ""}, {"pos": 17, "tip": "vakca", "ad": "Vak'a"}, {"pos": 18, "tip": "sehir", "ad": "Çulha", "grupKey": "rumeli", "grup": {"ad": "Dokuma", "renk": "#256a86"}, "fiyat": 1800, "ipotek": 900, "imarBedeli": 1000, "kira": [180, 900, 2700, 8100, 11700, 14400], "tarih": "Pîri: Geleneğe göre dokumacıların piri Şît peygamberdir.", "bilgi": "Çulha, tezgâhında iplikten kumaş ve bez dokuyan ustadır. Anadolu'nun pamuklu ve yünlü kumaşları hem çarşıda satılır hem uzak ülkelere gönderilirdi. Ahi denetçileri kumaşın sık ve düzgün dokunup dokunmadığını sıkı sıkı kontrol ederdi.", "neden": "Osmanlı'nın bir şehri külliye ve vakıf kurumlarıyla nasıl inşa edip kalkındırdığını gösterir.", "gorsel": "img/saraybosna.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Çulha, tezgâhında iplikten kumaş ve bez dokuyan ustadır. Anadolu'nun pamuklu ve yünlü kumaşları hem çarşıda satılır hem uzak ülkelere gönderilirdi. Ahi denetçileri kumaşın sık ve düzgün dokunup dokunmadığını sıkı sıkı kontrol ederdi.", "kural": ""}, {"pos": 19, "tip": "sehir", "ad": "Boyacı", "grupKey": "rumeli", "grup": {"ad": "Dokuma", "renk": "#256a86"}, "fiyat": 2000, "ipotek": 1000, "imarBedeli": 1000, "kira": [200, 1000, 3000, 9000, 13000, 16000], "tarih": "", "bilgi": "Boyacı, iplik ve kumaşları kök boyalarla renklendiren ustadır. Kırmızıyı kökboyadan, maviyi çivit otundan elde ederdi. Yıkandıkça solmayan renk, boyacının namusu sayılırdı.", "neden": "Bir kalenin stratejik konumunun fethi neden kritik kıldığını öğretir.", "gorsel": "img/belgrad.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Boyacı, iplik ve kumaşları kök boyalarla renklendiren ustadır. Kırmızıyı kökboyadan, maviyi çivit otundan elde ederdi. Yıkandıkça solmayan renk, boyacının namusu sayılırdı.", "kural": ""}, {"pos": 20, "tip": "kervansaray", "ad": "Kervansaray", "aciklama": "Kervansaraylar, ticaret yolları üzerinde kervanların güvenle konakladığı büyük yapılardır. Yolcular burada dinlenir, hayvanlar bakılır, mallar korunurdu. Anadolu Selçukluları yol boyunca bir günlük mesafelerle kervansaraylar yaptırmıştır.", "kural": "Burada dinlen; bu tur sana bir şey olmaz. Ortada birikmiş vergi varsa hepsini sen alırsın."}, {"pos": 21, "tip": "sehir", "ad": "Terzi", "grupKey": "anadolu", "grup": {"ad": "Giyim-Kuşam", "renk": "#7a4a86"}, "fiyat": 2200, "ipotek": 1100, "imarBedeli": 1500, "kira": [220, 1100, 3300, 9900, 14300, 17600], "tarih": "Pîri: Geleneğe göre terzilerin piri İdrîs peygamberdir.", "bilgi": "Terzi, kumaşı ölçüp biçerek elbise diken zanaatkârdır. Osmanlı çarşısında herkesin kıyafeti terzi elinden çıkardı. İğnesi ince, sözü doğru terzi çarşıda çok itibar görürdü.", "neden": "Anadolu'nun Türkleşmesinde Selçuklu siyasi ve kültürel merkezinin nasıl şekillendiğini öğretir.", "gorsel": "img/konya.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Terzi, kumaşı ölçüp biçerek elbise diken zanaatkârdır. Osmanlı çarşısında herkesin kıyafeti terzi elinden çıkardı. İğnesi ince, sözü doğru terzi çarşıda çok itibar görürdü.", "kural": ""}, {"pos": 22, "tip": "ferman", "ad": "Ferman"}, {"pos": 23, "tip": "sehir", "ad": "Pabuççu", "grupKey": "anadolu", "grup": {"ad": "Giyim-Kuşam", "renk": "#7a4a86"}, "fiyat": 2200, "ipotek": 1100, "imarBedeli": 1500, "kira": [220, 1100, 3300, 9900, 14300, 17600], "tarih": "", "bilgi": "Pabuççu, deriden ayakkabı, çizme ve mest diken esnaftır. Kalitesiz pabuç yapan esnafın pabucu ceza olarak dama atılır, herkes ayıbını görürdü. 'Pabucu dama atılmak' deyimi bu gelenekten gelir.", "neden": "Bir şehrin medrese ve şifahaneleriyle bilim ve ticaret merkezine dönüşmesini örneklendirir.", "gorsel": "img/kayseri.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Pabuççu, deriden ayakkabı, çizme ve mest diken esnaftır. Kalitesiz pabuç yapan esnafın pabucu ceza olarak dama atılır, herkes ayıbını görürdü. 'Pabucu dama atılmak' deyimi bu gelenekten gelir.", "kural": ""}, {"pos": 24, "tip": "sehir", "ad": "Kürkçü", "grupKey": "anadolu", "grup": {"ad": "Giyim-Kuşam", "renk": "#7a4a86"}, "fiyat": 2400, "ipotek": 1200, "imarBedeli": 1500, "kira": [240, 1200, 3600, 10800, 15600, 19200], "tarih": "", "bilgi": "Kürkçü, kürk ve postları işleyip kışlık kaftan ve yakalık yapan esnaftır. Soğuk kış günlerinde kürkçü çarşısı dolup taşardı. Dürüst kürkçü, malın cinsini olduğu gibi söylerdi.", "neden": "Bir kentin ortaçağ medrese geleneğinden milli mücadeleye uzanan tarihsel sürekliliğini gösterir.", "gorsel": "img/sivas.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Kürkçü, kürk ve postları işleyip kışlık kaftan ve yakalık yapan esnaftır. Soğuk kış günlerinde kürkçü çarşısı dolup taşardı. Dürüst kürkçü, malın cinsini olduğu gibi söylerdi.", "kural": ""}, {"pos": 25, "tip": "liman", "ad": "Yapraklı Panayırı", "kisa": "Yapraklı", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Çankırı'nın Yapraklı ilçesinde kurulan tarihî bir panayırdır. Osmanlı döneminde çevre illerden gelen tüccar ve üreticilerin buluştuğu büyük bir alışveriş merkeziydi.", "sahip": null, "ipotekli": false, "aciklama": "Çankırı'nın Yapraklı ilçesinde kurulan tarihî bir panayırdır. Osmanlı döneminde çevre illerden gelen tüccar ve üreticilerin buluştuğu büyük bir alışveriş merkeziydi."}, {"pos": 26, "tip": "sehir", "ad": "Nalbant", "grupKey": "samcezire", "grup": {"ad": "Demir Ocağı", "renk": "#4a5a6b"}, "fiyat": 2600, "ipotek": 1300, "imarBedeli": 1500, "kira": [260, 1300, 3900, 11700, 16900, 20800], "tarih": "", "bilgi": "Nalbant, at, katır ve eşeklerin tırnaklarına nal çakan ustadır. Yük ve yolculuk hayvan gücüne dayandığı için nalbantsız bir çarşı düşünülemezdi. İyi nalbant hayvanı incitmeden, ölçülü çalışırdı.", "neden": "Bir şehrin ticaret yolları üzerindeki konumunun onu hem zenginlik hem de stratejik bir merkez yaptığını öğretir.", "gorsel": "img/halep.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Nalbant, at, katır ve eşeklerin tırnaklarına nal çakan ustadır. Yük ve yolculuk hayvan gücüne dayandığı için nalbantsız bir çarşı düşünülemezdi. İyi nalbant hayvanı incitmeden, ölçülü çalışırdı.", "kural": ""}, {"pos": 27, "tip": "sehir", "ad": "Demirci", "grupKey": "samcezire", "grup": {"ad": "Demir Ocağı", "renk": "#4a5a6b"}, "fiyat": 2600, "ipotek": 1300, "imarBedeli": 1500, "kira": [260, 1300, 3900, 11700, 16900, 20800], "tarih": "Pîri: Geleneğe göre demircilerin piri Dâvûd peygamberdir.", "bilgi": "Demirci, ocakta kızdırdığı demiri örs üzerinde döverek alet ve araç yapan ustadır. Pulluktan kapı menteşesine kadar çarşıdaki hemen her esnaf demirciye muhtaçtı. Demirci dükkânının çekiç sesi, çarşının kalp atışı sayılırdı.", "neden": "Bir şehrin dinî ve idari işlevinin (hac kervanlarının toplanma noktası olması) onu imparatorluk için ne kadar değerli kıldığını gösterir.", "gorsel": "img/sam.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Demirci, ocakta kızdırdığı demiri örs üzerinde döverek alet ve araç yapan ustadır. Pulluktan kapı menteşesine kadar çarşıdaki hemen her esnaf demirciye muhtaçtı. Demirci dükkânının çekiç sesi, çarşının kalp atışı sayılırdı.", "kural": ""}, {"pos": 28, "tip": "utility", "ad": "Bedesten", "fiyat": 1500, "ipotek": 750, "carpan": [4, 10], "bilgi": "Bedesten, çarşının ortasındaki kalın duvarlı, kubbeli ve kapıları kilitlenen taş binadır. Kumaş, mücevher gibi en değerli mallar burada satılır; tüccarlar paralarını ve kıymetli eşyalarını burada emanete bırakırdı. Şehrin kasası gibiydi.", "sahip": null, "ipotekli": false, "aciklama": "Bedesten, çarşının ortasındaki kalın duvarlı, kubbeli ve kapıları kilitlenen taş binadır. Kumaş, mücevher gibi en değerli mallar burada satılır; tüccarlar paralarını ve kıymetli eşyalarını burada emanete bırakırdı. Şehrin kasası gibiydi."}, {"pos": 29, "tip": "seref", "ad": "Fütüvvetnâme", "tarih": "", "bilgi": "Fütüvvetnâme, Ahilerin uyması gereken ahlak ve görgü kurallarını anlatan kitaptır. Cömertlik, dürüstlük, alın teri ile kazanmak ve eli, sofrası, kapısı açık olmak bu kitabın temel öğütleridir.", "neden": "Üç din için kutsal bir şehri yönetmenin, hoşgörü ve farklı toplulukları bir arada tutma becerisi gerektirdiğini öğretir.", "gorsel": "img/kudus.webp", "kural": "Bu kare alınmaz, satılmaz. Fütüvvetnâme'ye uğrayan her oyuncu bankadan 200 akçe bereket alır.", "aciklama": "Fütüvvetnâme, Ahilerin uyması gereken ahlak ve görgü kurallarını anlatan kitaptır. Cömertlik, dürüstlük, alın teri ile kazanmak ve eli, sofrası, kapısı açık olmak bu kitabın temel öğütleridir."}, {"pos": 30, "tip": "surgun", "ad": "Yolsuz Kaldın", "aciklama": "Ahilikte dürüstlükten ayrılan, müşteriyi aldatan ya da fütüvvet kurallarını çiğneyen esnafa 'yolsuz' denirdi. Yolsuz sayılan kişi esnaf topluluğundan uzaklaştırılır, düzelene kadar aralarına alınmazdı.", "kural": "Fütüvvet yoluna aykırı davrandın: doğruca Pabucu Dama karesine git. Çarşı Meydanı'ndan geçsen bile emek kazancı alamazsın."}, {"pos": 31, "tip": "sehir", "ad": "Nakkaş", "grupKey": "buyuksehir", "grup": {"ad": "İnce Sanatlar", "renk": "#9b2d5e"}, "fiyat": 3000, "ipotek": 1500, "imarBedeli": 2000, "kira": [300, 1500, 4500, 13500, 19500, 24000], "tarih": "", "bilgi": "Nakkaş, kitap sayfalarını, tavanları ve eşyaları ince desenlerle süsleyen sanatkârdır. Altın yaldız ve parlak boyalarla çalışırdı. Sabır ve göz nuru, nakkaşlığın temeliydi.", "neden": "Mısır'ın fethi Osmanlı'yı İslam dünyasının lideri konumuna taşıyan stratejik bir kazanımdır.", "gorsel": "img/kahire.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Nakkaş, kitap sayfalarını, tavanları ve eşyaları ince desenlerle süsleyen sanatkârdır. Altın yaldız ve parlak boyalarla çalışırdı. Sabır ve göz nuru, nakkaşlığın temeliydi.", "kural": ""}, {"pos": 32, "tip": "sehir", "ad": "Halıcı", "grupKey": "buyuksehir", "grup": {"ad": "İnce Sanatlar", "renk": "#9b2d5e"}, "fiyat": 3000, "ipotek": 1500, "imarBedeli": 2000, "kira": [300, 1500, 4500, 13500, 19500, 24000], "tarih": "", "bilgi": "Halıcı, düğüm düğüm halı ve kilim dokuyan ustadır. Anadolu halıları desenleriyle dünyaca ünlüdür. Bir halının değeri, düğümünün sıklığından ve boyasının sağlamlığından anlaşılırdı.", "neden": "Bağdat, Osmanlı-Safevî mücadelesinde doğu sınırının kilit şehri ve İslam ilim mirasının sembolüdür.", "gorsel": "img/bagdat.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Halıcı, düğüm düğüm halı ve kilim dokuyan ustadır. Anadolu halıları desenleriyle dünyaca ünlüdür. Bir halının değeri, düğümünün sıklığından ve boyasının sağlamlığından anlaşılırdı.", "kural": ""}, {"pos": 33, "tip": "vakca", "ad": "Vak'a"}, {"pos": 34, "tip": "sehir", "ad": "Kuyumcu", "grupKey": "buyuksehir", "grup": {"ad": "İnce Sanatlar", "renk": "#9b2d5e"}, "fiyat": 3200, "ipotek": 1600, "imarBedeli": 2000, "kira": [320, 1600, 4800, 14400, 20800, 25600], "tarih": "", "bilgi": "Kuyumcu; altın ve gümüşü işleyerek bilezik, yüzük ve takı yapan ince zanaat ustasıdır. Değerli madenle çalıştığı için dürüstlüğü herkesçe bilinmek zorundaydı. Ayarı bozuk mal satan kuyumcu esnaflıktan atılırdı.", "neden": "Basra, Osmanlı'nın körfez ticaretine ve deniz gücüne açılan güney limanı olarak önemini öğretir.", "gorsel": "img/basra.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Kuyumcu; altın ve gümüşü işleyerek bilezik, yüzük ve takı yapan ince zanaat ustasıdır. Değerli madenle çalıştığı için dürüstlüğü herkesçe bilinmek zorundaydı. Ayarı bozuk mal satan kuyumcu esnaflıktan atılırdı.", "kural": ""}, {"pos": 35, "tip": "liman", "ad": "Uzuncaabâd Panayırı", "kisa": "Uzuncaabâd", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Rumeli'de, Hasköy yakınlarında kurulan ve Osmanlı Avrupası'nın en büyüklerinden sayılan panayırdır. Balkanlar'ın dört bir yanından tüccarlar burada buluşurdu.", "sahip": null, "ipotekli": false, "aciklama": "Rumeli'de, Hasköy yakınlarında kurulan ve Osmanlı Avrupası'nın en büyüklerinden sayılan panayırdır. Balkanlar'ın dört bir yanından tüccarlar burada buluşurdu."}, {"pos": 36, "tip": "ferman", "ad": "Ferman"}, {"pos": 37, "tip": "sehir", "ad": "Debbağ", "grupKey": "tac", "grup": {"ad": "Pîr Mesleği", "renk": "#b7950b"}, "fiyat": 4000, "ipotek": 2000, "imarBedeli": 2000, "kira": [400, 2000, 6000, 18000, 26000, 32000], "tarih": "Pîri: Geleneğe göre Ahi Evran, debbağların piri kabul edilir.", "bilgi": "Debbağ, ham deriyi işleyip kullanılabilir hâle getiren ustadır. Deri; ayakkabıdan su tulumuna kadar birçok eşyanın ham maddesiydi, bu yüzden debbağlar çarşının en önemli esnafındandı. Ahiliğin merkez zanaatı sayılır; teşkilatın kurucusu kabul edilen Ahi Evran da debbağdı.", "neden": "İstanbul'un fethi bir çağı kapatıp yenisini açmış, şehri imparatorluğun gücünün ve sürekliliğinin sembolü hâline getirmiştir.", "gorsel": "img/istanbul.webp", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Debbağ, ham deriyi işleyip kullanılabilir hâle getiren ustadır. Deri; ayakkabıdan su tulumuna kadar birçok eşyanın ham maddesiydi, bu yüzden debbağlar çarşının en önemli esnafındandı. Ahiliğin merkez zanaatı sayılır; teşkilatın kurucusu kabul edilen Ahi Evran da debbağdı.", "kural": ""}, {"pos": 38, "tip": "vergi", "ad": "Damga Resmi", "tutar": 1000, "aciklama": "Damga, bir malın kalitesinin devletçe onaylandığını gösteren mühürdür. Kumaş ve değerli eşya bu mühür olmadan satılamazdı. Mühürleme karşılığında alınan vergiye Damga Resmi denirdi. 1.000 akçe öde."}, {"pos": 39, "tip": "seref", "ad": "Ahi Evran Ocağı", "tarih": "", "bilgi": "Ahi Evran, 13. yüzyılda Kırşehir'de yaşamış, Ahilik teşkilatının kurucusu kabul edilen büyük esnaf önderidir. Kendisi debbağlık yapar, esnafa hem zanaat hem ahlak öğretirdi. Kırşehir'deki ocağı, Ahiliğin kalbi sayılır.", "neden": "Haremeyn'in korunması Osmanlı padişahına İslam dünyasında manevi liderlik ve hilafet meşruiyeti kazandırmıştır.", "gorsel": "img/haremeyn.webp", "kural": "Bu kare alınmaz, satılmaz. Ahi Evran Ocağı'na uğrayan her oyuncu bankadan 500 akçe bereket alır.", "aciklama": "Ahi Evran, 13. yüzyılda Kırşehir'de yaşamış, Ahilik teşkilatının kurucusu kabul edilen büyük esnaf önderidir. Kendisi debbağlık yapar, esnafa hem zanaat hem ahlak öğretirdi. Kırşehir'deki ocağı, Ahiliğin kalbi sayılır."}], "ferman": [{"baslik": "Açık Sofra", "metin": "Zaviyende (Ahi ocak evinde) sofra kurdun, yoldan geçen misafiri boş çevirmedin. Ahi Baban seni ödüllendirdi: bankadan 1.500 akçe al.", "etki": {"tur": "para_al", "deger": 1500}, "ogren": "Ahi zaviyelerinde misafirler ücretsiz ağırlanırdı. Gezgin İbn Battûta bu cömertliği övgüyle anlatır."}, {"baslik": "Diline Sahip Olmadın", "metin": "Müşterine malın kusurunu söylemedin. Fütüvvet yolunda yalanın yeri yok! Ceza olarak 1.500 akçe öde.", "etki": {"tur": "para_ver", "deger": 1500}, "ogren": "Ahilikte doğruluk esastı. Esnaf, sattığı malın kusurunu gizlerse ağır ayıp işlemiş sayılırdı."}, {"baslik": "Orta Sandığına Bağış", "metin": "Zor durumdaki bir esnaf arkadaşın için orta sandığına 1.000 akçe bağış yaptın. Helal olsun!", "etki": {"tur": "para_ver", "deger": 1000}, "ogren": "Orta sandığı, esnafın ortak yardım kasasıydı. Hastalanan ya da zarara uğrayan esnafa buradan destek verilirdi."}, {"baslik": "Kefalet Kartı", "metin": "Ahi Baban sana kefil oldu! Bu kartı sakla. Pabucun dama atılırsa bu kartla hemen kurtulursun.", "etki": {"tur": "esaretten_cik_karti", "deger": 0}, "ogren": "Ahilikte usta, yetiştirdiği çırağa kefil sayılırdı. Birinin kusuru, kefilinin de sorumluluğuydu."}, {"baslik": "Eksik Tarttın!", "metin": "Terazin eksik tartıyor, müşterin hakkını yedin. Pabucun dama! Doğruca Pabucu Dama karesine git.", "etki": {"tur": "esarete_git", "deger": 0}, "ogren": "Kalitesiz iş yapan esnafın pabucu dama atılır, ayıbı bütün çarşıya duyurulurdu. 'Pabucu dama atıldı' sözü buradan gelir."}, {"baslik": "Şed Kuşandın", "metin": "Ustalık törenin yapıldı, beline şed kuşatıldı! Çarşı Meydanı'na git ve 2.000 akçe emek kazancını al.", "etki": {"tur": "basa_git_maas_al", "deger": 2000}, "ogren": "Şed kuşanma, kalfanın ustalığa geçişinde beline kuşak bağlanan törendir. Ahiliğin en önemli törenlerindendir."}, {"baslik": "Çırak Yetiştirdin", "metin": "Dükkânlarında çırak yetiştirdin, mesleği gelecek kuşağa aktardın. Her rütben için bankadan 300 akçe al.", "etki": {"tur": "imar_basina_al", "deger": 300}, "ogren": "Ahilikte her usta çırak yetiştirmekle görevliydi. Meslek bilgisi kuşaktan kuşağa böyle aktarılırdı."}, {"baslik": "Eline, Diline, Beline", "metin": "Ahiliğin öğüdünü tuttun: elinle haram tutmadın, dilinle kötü söz söylemedin. Ödül olarak 1.000 akçe al.", "etki": {"tur": "para_al", "deger": 1000}, "ogren": "'Eline, diline, beline sahip ol' Ahiliğin temel öğüdüdür: haksızlık yapma, yalan söyleme, kötülükten uzak dur."}, {"baslik": "Komşum Siftah Etmedi", "metin": "'Ben bugün sattım, komşum daha siftah etmedi' diyip müşteriyi yandaki dükkâna gönderdin. Bereket sana: 1.000 akçe al.", "etki": {"tur": "para_al", "deger": 1000}, "ogren": "Ahi esnafı, siftah eden komşusunu düşünür, ikinci müşteriyi henüz satış yapmayan dükkâna yönlendirirdi."}, {"baslik": "Kibre Kapıldın", "metin": "'Bu çarşının en iyi ustası benim!' diye övündün. Fütüvvet yolunda kibre yer yok. 1.000 akçe öde.", "etki": {"tur": "para_ver", "deger": 1000}, "ogren": "Fütüvvetnâmeler alçakgönüllülüğü över. Ahi, hünerini işiyle gösterir, diliyle övünmezdi."}, {"baslik": "Zaviye Sofrası", "metin": "Zaviyede büyük bir yemek düzenledin, bütün çarşı davetli. Gelenek gereği her oyuncu sana 300 akçe katkı verir.", "etki": {"tur": "herkesten_al", "deger": 300}, "ogren": "Ahi zaviyelerinde ortak sofralar kurulurdu. Esnaf kazancının bir bölümünü bu sofralara katardı."}, {"baslik": "Tezgâhı Savsakladın", "metin": "Sabah erken kalkmadın, dükkânların geç açıldı, siparişler gecikti. Her dükkânın için 200 akçe telafi öde.", "etki": {"tur": "mulk_basina_ver", "deger": 200}, "ogren": "Ahilikte işe erken başlamak ve işi sağlam yapmak esastı. Tembellik, esnafa yakışmayan bir kusur sayılırdı."}, {"baslik": "Panayırda Dürüst Satış", "metin": "Panayırda malının kusurunu açıkça söyledin, yine de herkes senden aldı. Her panayırın için 400 akçe al.", "etki": {"tur": "liman_basina_al", "deger": 400}, "ogren": "Ahi esnafı malın kusurunu gizlemezdi. Bu dürüstlük, Ahi damgasını bir kalite güvencesi hâline getirdi."}, {"baslik": "Yaren Sohbeti", "metin": "Akşam zaviyedeki sohbete katıldın; hem meslek inceliği hem güzel ahlak öğrendin. Bankadan 500 akçe al.", "etki": {"tur": "para_al", "deger": 500}, "ogren": "Ahiler gündüz çarşıda çalışır, akşam zaviyede toplanırdı. Sohbetlerde meslek ve ahlak eğitimi bir arada verilirdi."}, {"baslik": "Kazancını Paylaştın", "metin": "Bu ayki kazancın bol geldi; fütüvvet gereği paylaştın. Her oyuncuya 200 akçe dağıt.", "etki": {"tur": "herkese_ver", "deger": 200}, "ogren": "Fütüvvet anlayışında kazanç yalnız kişinin değildir. Cömertlik, yiğitliğin en önemli işareti sayılırdı."}, {"baslik": "Temiz Tezgâh", "metin": "Tezgâhını temiz, malını düzenli tuttun; müşterin arttı. Her dükkânın için bankadan 200 akçe al.", "etki": {"tur": "mulk_basina_al", "deger": 200}, "ogren": "Ahilikte temizlik ve düzen işin bir parçasıydı. Dağınık tezgâh, özensiz iş anlamına gelirdi."}], "vakca": [{"baslik": "Çarşıda Yangın!", "metin": "Ahşap çarşıda yangın çıktı, alevler en değerli dükkânına sıçradı! En değerli dükkânındaki rütben bir basamak düşer.", "etki": {"tur": "en_degerli_imar_yik", "deger": 1}, "ogren": "Eski çarşılar çoğunlukla ahşaptı; yangın esnafın en korktuğu felaketti. Bu yüzden bedestenler taştan yapılırdı."}, {"baslik": "İhtisap Denetimi", "metin": "Muhtesip çarşıya geldi; terazileri, fiyatları ve malları denetliyor. Her rütben için 300 akçe denetim harcı öde.", "etki": {"tur": "imar_basina_ver", "deger": 300}, "ogren": "Muhtesip, çarşıda fiyatları, ölçüleri ve mal kalitesini denetleyen görevliydi. Hile yapan esnaf cezalandırılırdı."}, {"baslik": "Kervan Geldi!", "metin": "Uzak diyarlardan büyük bir kervan geldi; çarşı alıcıyla doldu. Her dükkânın için bankadan 300 akçe al.", "etki": {"tur": "mulk_basina_al", "deger": 300}, "ogren": "Kervanlar şehirlere baharat, kumaş ve değerli mallar taşırdı. Kervanın gelişi çarşı için bayram demekti."}, {"baslik": "Panayır Bereketi", "metin": "Bu yılın panayırı çok kalabalık geçti; tezgâhlar boşaldı, keseler doldu. Her panayırın için 500 akçe al.", "etki": {"tur": "liman_basina_al", "deger": 500}, "ogren": "Panayırlar yılın belli günlerinde kurulan büyük pazarlardı. Çevre şehirlerden tüccarlar ve alıcılar akın ederdi."}, {"baslik": "Kurak Yıl", "metin": "Yağmur yağmadı, hammadde pahalandı; deri, yün ve tahıl bulmak zorlaştı. Her dükkânın için 300 akçe öde.", "etki": {"tur": "mulk_basina_ver", "deger": 300}, "ogren": "Kıtlık yıllarında yöneticiler narh koyarak fiyatları denetler, karaborsayı engellemeye çalışırdı."}, {"baslik": "Narh İndirimi", "metin": "Kadı, temel malların narhını indirdi; halk sevindi ama bu ay kârın azaldı. Her dükkânın için 200 akçe öde.", "etki": {"tur": "mulk_basina_ver", "deger": 200}, "ogren": "Narh, temel malların tavan fiyatının devletçe belirlenmesidir. Amaç halkı aşırı pahalılıktan korumaktı."}, {"baslik": "Orta Sandığı Yetişti", "metin": "Zor bir ay geçirdin; orta sandığı seni yalnız bırakmadı. Bankadan 1.500 akçe yardım al.", "etki": {"tur": "para_al", "deger": 1500}, "ogren": "Orta sandığı esnafın dayanışma kasasıydı. Toplanan paralarla darda kalan esnafa destek verilirdi."}, {"baslik": "Kalfa Göçü", "metin": "Ustalık iznini (icazet) alan kalfalar, kendi dükkânlarını açmak için başka şehirlere göçtü. Her rütben için 200 akçe eleman gideri öde.", "etki": {"tur": "imar_basina_ver", "deger": 200}, "ogren": "Kalfa, ustalık iznini alınca kendi dükkânını açabilirdi. Böylece meslek yeni şehirlere yayılırdı."}, {"baslik": "Bedesten Günü", "metin": "Bedestende değerli malın açık artırmayla iyi fiyata satıldı. Bankadan 1.000 akçe al.", "etki": {"tur": "para_al", "deger": 1000}, "ogren": "Bedesten, çarşının kalbinde kumaş ve mücevher gibi değerli malların satıldığı sağlam taş yapıdır."}, {"baslik": "Ünün Yayıldı", "metin": "Ustalığın dillere düştü; komşu şehirlerden bile sipariş yağıyor. Her rütben için bankadan 400 akçe al.", "etki": {"tur": "imar_basina_al", "deger": 400}, "ogren": "Ahi çarşısında ustanın damgası kalite güvencesiydi. İyi ustanın ünü şehirden şehre yayılırdı."}, {"baslik": "Çarşı Kapısı Onarımı", "metin": "Çarşının büyük kapısı eskidi; onarım için esnaftan pay toplanıyor. Payın olan 1.000 akçeyi öde.", "etki": {"tur": "para_ver", "deger": 1000}, "ogren": "Çarşının ortak giderleri esnaf arasında paylaşılırdı. Ortak mekân, ortak sorumluluk demekti."}, {"baslik": "Esnaf Şenliği", "metin": "Bayram şenliğinde yarışmayı senin tezgâhın kazandı! Her oyuncu sana 200 akçe kutlama payı verir.", "etki": {"tur": "herkesten_al", "deger": 200}, "ogren": "Ahi esnafı bayram günlerinde bir araya gelir, şenlikler düzenlerdi. Bu buluşmalar dayanışmayı güçlendirirdi."}, {"baslik": "Yollar Çamur", "metin": "Sağanak yağmur panayır yollarını bozdu; tüccarlar gecikti. Her panayırın için 300 akçe onarım payı öde.", "etki": {"tur": "liman_basina_ver", "deger": 300}, "ogren": "Panayırlar açık alanlarda kurulurdu. Yolların durumu ve hava şartları ticareti doğrudan etkilerdi."}, {"baslik": "Damga Resmi İadesi", "metin": "Hesap yeniden yapıldı: Damga Resmi'ni fazla ödemişsin. Kâtip farkı iade etti; bankadan 1.000 akçe al.", "etki": {"tur": "para_al", "deger": 1000}, "ogren": "Damga, malın denetimden geçip onaylandığını gösteren işaretti. Damgasız mal çarşıda satılamazdı."}, {"baslik": "Kervan Yolu Onarıldı", "metin": "Kervan yolu ve köprüler onarıldı; panayırlarına gelen tüccar sayısı arttı. Her panayırın için 400 akçe al.", "etki": {"tur": "liman_basina_al", "deger": 400}, "ogren": "Yol boyundaki kervansaraylarda yolcular konaklardı; geleneğe göre üç güne kadar ücretsiz ağırlanırlardı."}, {"baslik": "Ucuz Hammadde", "metin": "Debbağhaneden toplu ve ucuz deri aldın; bütün dükkânların kârlı çıktı. Her dükkânın için 200 akçe al.", "etki": {"tur": "mulk_basina_al", "deger": 200}, "ogren": "Ahi Evran, 13. yüzyılda Kırşehir'de yaşamıştır ve debbağların (dericilerin) piri kabul edilir."}], "ilerlemeKartlari": [{"sayi": 1, "baslik": "Kanaat Sahibi Esnaf", "bilgi": "Ahilikte kanaat esastır: bir esnaf tek (1) dükkânla yetinir, komşusunun kısmetine göz dikmezdi. 1 ilerle!"}, {"sayi": 1, "baslik": "Birinci Padişah", "bilgi": "Osman Gazi Osmanlı'nın 1. padişahıdır. Kayınpederi Şeyh Edebali'nin bir Ahi büyüğü olduğu rivayet edilir. 1 ilerle!"}, {"sayi": 1, "baslik": "Kapalıçarşı'nın Çekirdeği", "bilgi": "İstanbul Kapalıçarşısı'nın çekirdeği olan bedesten, 1461'de Fatih döneminde yapıldı. Son rakam 1: 1 ilerle!"}, {"sayi": 1, "baslik": "Yol Atası", "bilgi": "Ahiliğe giren gence yol göstermesi için 1 yol atası seçilirdi; genç ondan hem meslek hem ahlak öğrenirdi. 1 ilerle!"}, {"sayi": 1, "baslik": "Narh: Tek Fiyat", "bilgi": "Çarşıda bir malın tek (1) fiyatı olurdu. Kadı adlı görevlinin belirlediği bu tavan fiyata 'narh' denir; kimse üstünde satamazdı. 1 ilerle!"}, {"sayi": 1, "baslik": "Pîrin Vedası", "bilgi": "Rivayete göre Ahi Evran 1261'de Kırşehir'de vefat etti; adı bugün okullarda ve meydanlarda yaşıyor. Son rakam 1: 1 ilerle!"}, {"sayi": 2, "baslik": "Yol Kardeşleri", "bilgi": "Ahiliğe giren gence 2 yol kardeşi verilirdi; iyi günde kötü günde birbirlerine destek olurlardı. 2 ilerle!"}, {"sayi": 2, "baslik": "İkinci Padişah", "bilgi": "Orhan Bey 2. Osmanlı padişahıdır; ahilere destek oldu, esnafı ve çarşıları güçlendirdi. 2 ilerle!"}, {"sayi": 2, "baslik": "Türk Düğümü", "bilgi": "Anadolu halısını sağlam kılan Türk (Gördes) düğümü, ipin 2 çözgü ipliğine birden sarılmasıyla atılır. 2 ilerle!"}, {"sayi": 2, "baslik": "Yamaklık Yılları", "bilgi": "Geleneğe göre mesleğe yeni giren çocuk yaklaşık 2 yıl yamaklık yapar, işi gözleyerek öğrenirdi. 2 ilerle!"}, {"sayi": 2, "baslik": "Çarşının İki Denetçisi", "bilgi": "Çarşıyı 2 görevli denetlerdi: kadı ve muhtesip. Eksik tartan, kalitesiz mal satan esnaf hemen uyarılırdı. 2 ilerle!"}, {"sayi": 2, "baslik": "İlk Standart Yasası", "bilgi": "1502 tarihli Bursa İhtisab Kanunnâmesi, dünyanın ilk standart yasalarından sayılır; malın kalitesini kurala bağladı. Son rakam 2: 2 ilerle!"}, {"sayi": 2, "baslik": "Otuz İki Meslek", "bilgi": "Geleneğe göre Ahi Evran 32 meslek kolunu örgütledi; her kolun kendi düzeni vardı. 32'nin son rakamı 2: 2 ilerle!"}, {"sayi": 3, "baslik": "Üç Öğüt", "bilgi": "Ahiliğin özü üç öğüttür: eline, diline, beline sahip ol. 3 ilerle!"}, {"sayi": 3, "baslik": "Üçü Açık", "bilgi": "Ahinin 3 şeyi açıktır: eli (cömerttir), kapısı (konukseverdir), sofrası (ikram eder). 3 ilerle!"}, {"sayi": 3, "baslik": "Üçü Kapalı", "bilgi": "Ahinin 3 şeyi kapalıdır: gözü (kimseye kötü gözle bakmaz), dili (kötü söz etmez), beli (kimsenin hakkına uzanmaz). 3 ilerle!"}, {"sayi": 3, "baslik": "Kervansaray Konukluğu", "bilgi": "Selçuklu kervansaraylarında yolcular 3 gün ücretsiz konaklar, yemek yerdi. 3 ilerle!"}, {"sayi": 3, "baslik": "Ahi Padişah", "bilgi": "Kaynaklara göre 3. Osmanlı padişahı I. Murad, ahi şeddi kuşanmıştı. 3 ilerle!"}, {"sayi": 3, "baslik": "Kayseri Savunması", "bilgi": "1243 Kösedağ yenilgisinden sonra Kayseri'yi ahiler ve Anadolu Bacıları (Bacıyân-ı Rûm) savundu. Son rakam 3: 3 ilerle!"}, {"sayi": 3, "baslik": "Ekonominin Üç Halkası", "bilgi": "Üretim, dağıtım ve tüketim ekonominin 3 halkasıdır; ahi çarşısında üçü bir aradaydı. 3 ilerle!"}, {"sayi": 4, "baslik": "Bedestenin Kapıları", "bilgi": "İstanbul'daki tarihî bedestenin 4 kapısı dört ayrı yöne açılır; en değerli mallar burada korunurdu. 4 ilerle!"}, {"sayi": 4, "baslik": "Dükkânda Dört Basamak", "bilgi": "Bir dükkânda meslek yolu 4 basamaktır: yamak, çırak, kalfa, usta. Her basamak sabır ister. 4 ilerle!"}, {"sayi": 4, "baslik": "Gezginin Övgüsü", "bilgi": "İbn Battûta 14. yüzyılda Anadolu'yu gezdi; ahilerin konukseverliğini öve öve bitiremedi. 14'ün 4'ü: 4 ilerle!"}, {"sayi": 4, "baslik": "Kırşehir 40", "bilgi": "Ahiliğin merkezi Kırşehir'in bugünkü plaka kodu 40'tır. 40'ın ilk rakamı 4: 4 ilerle!"}, {"sayi": 4, "baslik": "Orhan Bey Başa Geçiyor", "bilgi": "Orhan Bey yaklaşık 1324'te beyliğin başına geçti; döneminde ahiler kuruluşa güç verdi. Son rakam 4: 4 ilerle!"}, {"sayi": 4, "baslik": "Panayır Yolları", "bilgi": "Anadolu'da kervanların buluştuğu büyük panayırlar kurulurdu; bu çarşıda da 4 panayır seni bekliyor. 4 ilerle!"}, {"sayi": 5, "baslik": "Rütbe Yolu", "bilgi": "Bu oyunda rütbe yolu 5 basamaktır: Yamak, Çırak, Kalfa, Usta, Ahi Baba. 5 ilerle!"}, {"sayi": 5, "baslik": "Beş Parmak Dayanışması", "bilgi": "Çarşı esnafı bir elin 5 parmağı gibiydi: biri zora düşünce orta sandığı yardıma koşardı. 5 ilerle!"}, {"sayi": 5, "baslik": "Kırşehir'e Yerleşme", "bilgi": "Rivayete göre Ahi Evran 1245 dolayında Kırşehir'e yerleşti ve teşkilatını oradan yönetti. Son rakam 5: 5 ilerle!"}, {"sayi": 5, "baslik": "On Beş Kubbe", "bilgi": "Kapalıçarşı'nın en eski bölümü İç Bedesten'i 15 kubbe örter. 15'in 5'i: 5 ilerle!"}, {"sayi": 5, "baslik": "Alın Teri Sermayesi", "bilgi": "Oyuna 15.000 akçeyle başladın; ahiye göre en temiz kazanç alın teridir. 15'in 5'i: 5 ilerle!"}, {"sayi": 5, "baslik": "Telafi Bedeli", "bilgi": "Kalitesiz mal üretenin pabucu dama atılırdı; bu oyunda o ayıptan kurtulmanın bedeli 500 akçedir. 500'ün 5'i: 5 ilerle!"}, {"sayi": 6, "baslik": "Altı İlke", "bilgi": "Ahinin üçü açık (el, kapı, sofra), üçü kapalı (göz, dil, bel) toplam 6 ilkesi vardır. 6 ilerle!"}, {"sayi": 6, "baslik": "Bursa'nın Fethi", "bilgi": "Orhan Bey Bursa'yı 1326'da fethetti; şehir hanları ve bedesteniyle ünlü bir ticaret merkezi oldu. Son rakam 6: 6 ilerle!"}, {"sayi": 6, "baslik": "Adı Üniversitede", "bilgi": "Kırşehir'deki üniversite 2006'da kuruldu; adını Ahi Evran'dan alır — pîrin adı bugün bir bilim yuvasında yaşıyor. Son rakam 6: 6 ilerle!"}, {"sayi": 6, "baslik": "Yarım Düzine", "bilgi": "Yarım düzine 6 adettir; çarşıda fincan, kaşık gibi mallar düzine hesabıyla sayılıp satılırdı. 6 ilerle!"}, {"sayi": 6, "baslik": "Bilge Hoca", "bilgi": "Rivayete göre Osman Gazi ile hocası Şeyh Edebali aynı yıl, 1326'da vefat etti. Son rakam 6: 6 ilerle!"}, {"sayi": 7, "baslik": "İlk Akçe", "bilgi": "İlk Osmanlı gümüş akçesi 1327'de Orhan Bey döneminde basıldı. Son rakam 7: 7 ilerle!"}, {"sayi": 7, "baslik": "Okulda Ahilik", "bilgi": "Ahiliği okulda 7. sınıf sosyal bilgiler dersinde öğrenirsin. 7 ilerle!"}, {"sayi": 7, "baslik": "Haftalık Pazar", "bilgi": "Pazarlar 7 günde bir kurulurdu; köylü ürününü satar, ihtiyacını çarşıdan alırdı. 7 ilerle!"}, {"sayi": 7, "baslik": "Yedi İklimden Mallar", "bilgi": "'Yedi iklim' deyimi dünyanın her yanı demektir; panayırlara yedi iklimden kervanlar mal getirirdi. 7 ilerle!"}, {"sayi": 7, "baslik": "Kervan Durağı", "bilgi": "Aksaray'daki Ağzıkara Han yaklaşık 1237'de tamamlandı; kervanlar burada güvenle konakladı. Son rakam 7: 7 ilerle!"}, {"sayi": 7, "baslik": "Çağdaş Bilge", "bilgi": "Ahi Evran ile aynı çağda yaşayan Mevlânâ 1207'de doğdu; Konya çarşısının esnafı onu yakından tanırdı. Son rakam 7: 7 ilerle!"}, {"sayi": 8, "baslik": "Ahilik Haftası Doğuyor", "bilgi": "Ahilik Haftası kutlamaları ilk kez 1988'de Kırşehir'de yapıldı; bugün yurdun her yerinde kutlanır. Son rakam 8: 8 ilerle!"}, {"sayi": 8, "baslik": "Arşın Ölçüsü", "bilgi": "Çarşıda kumaş arşınla ölçülürdü; 1 arşın yaklaşık 68 santimetredir. 68'in 8'i: 8 ilerle!"}, {"sayi": 8, "baslik": "Gedik Belgesi", "bilgi": "18. yüzyılda esnaf, 'gedik' denen ustalık ruhsatını alarak dükkân açabildi. 18'in 8'i: 8 ilerle!"}, {"sayi": 8, "baslik": "İlk Altın Para", "bilgi": "İlk Osmanlı altın parası 'sultânî' 1478'de Fatih döneminde basıldı. Son rakam 8: 8 ilerle!"}, {"sayi": 8, "baslik": "Fütüvvet Anadolu'da", "bilgi": "Bağdat 1258'de Moğollarca yıkılınca fütüvvet geleneği Anadolu'da Ahilikle yaşamaya devam etti. Son rakam 8: 8 ilerle!"}, {"sayi": 8, "baslik": "Kuruluşun Omuzdaşları", "bilgi": "Osman Gazi Karacahisar'ı 1288'de fethetti; kuruluş yıllarında gaziler ve ahiler omuz omuzaydı. Son rakam 8: 8 ilerle!"}, {"sayi": 9, "baslik": "Eylül Kutlaması", "bilgi": "Ahilik Haftası her yıl yılın 9. ayı eylülde kutlanır; esnaf ve öğrenciler törenlerde buluşur. 9 ilerle!"}, {"sayi": 9, "baslik": "Dokuz Mertebe", "bilgi": "Geleneğe göre Ahilikte yamaklıktan şeyhliğe uzanan 9 mertebe vardır; her biri emekle kazanılır. 9 ilerle!"}, {"sayi": 9, "baslik": "Kuruluş Yılı", "bilgi": "Osmanlı Devleti'nin kuruluşu 1299 kabul edilir; Şeyh Edebali'nin öğütleri Osman Gazi'ye yol gösterdi. Son rakam 9: 9 ilerle!"}, {"sayi": 9, "baslik": "Sultanhanı", "bilgi": "Anadolu'nun en büyük kervansarayı Sultanhanı, Aksaray yolu üzerinde 1229'da yapıldı. Son rakam 9: 9 ilerle!"}, {"sayi": 9, "baslik": "Uzun Ömürlü Pîr", "bilgi": "Rivayete göre Ahi Evran 93 yıl gibi uzun bir ömür sürdüğü anlatılır; ömrünü zanaata ve teşkilata adadı. 93'ün 9'u: 9 ilerle!"}, {"sayi": 9, "baslik": "Ahi Padişahın Vedası", "bilgi": "Ahi şeddi kuşanan I. Murad, 1389'da Kosova Savaşı'nda vefat etti. Son rakam 9: 9 ilerle!"}, {"sayi": 10, "baslik": "Öşür Vergisi", "bilgi": "Öşür, tarım ürününün onda biri (1/10) oranında alınan vergiydi. 10 ilerle!"}, {"sayi": 10, "baslik": "On Ciltlik Seyahat", "bilgi": "Evliya Çelebi çarşıları ve esnaf alaylarını 10 ciltlik Seyahatnâme'sinde anlattı. 10 ilerle!"}, {"sayi": 10, "baslik": "On Parmakta On Marifet", "bilgi": "Usta zanaatkâr için 'on parmağında on marifet var' denir; bu söz el becerisinin övgüsüdür. 10 ilerle!"}, {"sayi": 10, "baslik": "İnce İşçilik", "bilgi": "En ince ipek halılarda ustalar 1 santimetrekareye 10×10 düğüm sığdırır. 10 ilerle!"}, {"sayi": 10, "baslik": "Kâr Sınırı", "bilgi": "Narh düzeninde esnafın kârı çoğu malda yaklaşık yüzde 10 ile sınırlıydı; aşan cezalandırılırdı. 10 ilerle!"}, {"sayi": 10, "baslik": "Fütüvvetin Kaynağı", "bilgi": "Yiğitlik ve cömertlik ülküsü fütüvvet, 10. yüzyılda Horasan'da yaygındı; Anadolu'ya oradan taşındı. 10 ilerle!"}, {"sayi": 11, "baslik": "Kuşak Kuşanan Sultan", "bilgi": "1211'de tahta çıkan Selçuklu Sultanı I. İzzeddin Keykâvus, halifeden fütüvvet kuşağı kuşandı. 1211'in 11'i: 11 ilerle!"}, {"sayi": 11, "baslik": "Edebali'nin Şehri", "bilgi": "Şeyh Edebali ocağını Bilecik'te kurdu; Bilecik'in bugünkü plaka kodu 11'dir. 11 ilerle!"}, {"sayi": 11, "baslik": "Panayır Mevsimi", "bilgi": "Kasım yılın 11. ayıdır; kışa girerken yollar zorlaşırdı. Bu yüzden büyük panayırlar bahar ve yaz aylarında kurulurdu. 11 ilerle!"}, {"sayi": 11, "baslik": "On Bir Bin Beyit", "bilgi": "Kırşehirli Âşık Paşa, yaklaşık 11 bin beyitlik Garibnâme'yi Türkçe yazdı; Türkçenin değerini savundu. 11 ilerle!"}, {"sayi": 11, "baslik": "Bölünen Ülke", "bilgi": "Selçuklu Sultanı II. Kılıç Arslan ülkesini 11 oğluna paylaştırdı; birlik bozulunca ticaret de zarar gördü. 11 ilerle!"}, {"sayi": 12, "baslik": "Bir Düzine", "bilgi": "Düzine 12 adettir; çarşıda düğme, fincan gibi küçük mallar düzineyle sayılıp satılırdı. 12 ilerle!"}, {"sayi": 12, "baslik": "Pîrin Doğduğu Yüzyıl", "bilgi": "Rivayete göre Ahi Evran 12. yüzyılın sonlarında (1171) doğdu. 12 ilerle!"}, {"sayi": 12, "baslik": "Demir Tavında Dövülür", "bilgi": "'Demir tavında dövülür': demir yaklaşık 1200 derecede kor hâline gelir; usta tam o anda şekil verir. 1200'ün 12'si: 12 ilerle!"}, {"sayi": 12, "baslik": "On İki Hayvanlı Takvim", "bilgi": "Eski Türkler 12 Hayvanlı Takvim kullandı; her yıl bir hayvan adıyla anılırdı. 12 ilerle!"}, {"sayi": 12, "baslik": "İlk Kervansaraylar", "bilgi": "Anadolu'daki ilk Selçuklu kervansarayları 12. yüzyılın sonlarında yapıldı; ticaret yolları güvene kavuştu. 12 ilerle!"}, {"sayi": 12, "baslik": "Zanaatkâr Şehzadeler", "bilgi": "Şehzadeler de zanaat öğrenirdi; rivayete göre kuyumculuk öğrenen Yavuz Sultan Selim 1512'de tahta çıktı. 1512'nin 12'si: 12 ilerle!"}, {"sayi": 2, "baslik": "Usta Duası", "bilgi": "İşini özenle bitirdin, ustanın hayır duasını aldın. 'Bir elin nesi var, iki elin sesi var!' 2 ilerle ve TEKRAR Yol Kartı çek!", "ozel": {"sayi": 2, "tur": "tekrar"}}, {"sayi": 3, "baslik": "Örnek Çırak", "bilgi": "Eline, diline, beline sahip oldun; ustan seni bütün çarşıya örnek gösterdi. 3 ilerle ve TEKRAR Yol Kartı çek!", "ozel": {"sayi": 3, "tur": "tekrar"}}, {"sayi": 1, "baslik": "İlk Büyük Sipariş", "bilgi": "Dükkânına ilk (1) büyük sipariş geldi; şevkle işe koyul! 1 ilerle ve TEKRAR Yol Kartı çek!", "ozel": {"sayi": 1, "tur": "tekrar"}}, {"sayi": 4, "baslik": "Dört Basamak Hedefi", "bilgi": "Çalışkanlığınla yamak, çırak, kalfa, usta — 4 basamağı da gözüne kestirdin. 4 ilerle ve TEKRAR Yol Kartı çek!", "ozel": {"sayi": 4, "tur": "tekrar"}}, {"sayi": 0, "baslik": "Panayıra Davet", "bilgi": "Kervanbaşı seni büyük panayıra davet etti; mallarını yükle, yollar açık! En yakın panayıra taşındın.", "ozel": {"tur": "isinla", "hedef": "liman"}}, {"sayi": 0, "baslik": "Çarşı Meydanı'na Çağrı", "bilgi": "Esnaf şeyhi bütün loncaları topluyor. Çarşı Meydanı'na dön ve emek kazancını al!", "ozel": {"tur": "isinla", "hedef": 0}}, {"sayi": 0, "baslik": "Pîrin Ocağına Ziyaret", "bilgi": "Kırşehir'den davet geldi: pîrin ocağını ziyaret edeceksin, yol boyu bereket seninle. Ahi Evran Ocağı'na git!", "ozel": {"tur": "isinla", "hedef": 39}}, {"sayi": 3, "baslik": "Yağmur Çarşıyı Bastı", "bilgi": "Sağanak bastırdı, çarşıyı su aldı! Tezgâhını kurtarmak için döndün. 3 kare geri git.", "ozel": {"sayi": 3, "tur": "geri"}}, {"sayi": 2, "baslik": "Devrilen Yük", "bilgi": "Kervandaki yükün yolda devrildi; malını toplamak için geri döndün. 2 kare geri git.", "ozel": {"sayi": 2, "tur": "geri"}}, {"sayi": 4, "baslik": "Kapanan Köprü", "bilgi": "Sel köprüyü yıktı, kervan yolu kapandı; başka yol aramak zorundasın. 4 kare geri git.", "ozel": {"sayi": 4, "tur": "geri"}}, {"sayi": 0, "baslik": "Dükkân Değişimi", "bilgi": "Lonca kurulu çarşı düzenini yeniledi; önündeki en yakın oyuncuyla yer değiştirdin!", "ozel": {"tur": "sakaci", "alt": "yer_degis"}}, {"sayi": 0, "baslik": "Kusurlu Mal Tazminatı", "bilgi": "Sana kusurlu mal satılmış! Lonca kararıyla en yakın rakipten 500 akçe tazminat aldın.", "ozel": {"tur": "sakaci", "alt": "yakindan_al", "deger": 500}}, {"sayi": 0, "baslik": "Şed Kuşanma Hediyesi", "bilgi": "Şed kuşanıp ustalığa yükseldin! Törende her rakip sana 200 akçe hediye verdi.", "ozel": {"tur": "sakaci", "alt": "herkesten", "deger": 200}}], "sorular": [{"soru": "Ahilik teşkilatı en iyi hangi ifadeyle tanımlanır?", "secenekler": ["Askerî bir ocak", "Esnaf ve sanatkârlar birliği", "Bir denizcilik filosu", "Vergi toplama dairesi"], "dogru": 1, "aciklama": "Ahilik, Anadolu'da esnaf ve sanatkârları bir araya getiren ahlak ve dayanışma teşkilatıdır.", "konu": "ahilik-nedir", "seviye": "kolay"}, {"soru": "Ahilik teşkilatının kurucusu kabul edilen kişi kimdir?", "secenekler": ["Ahi Evran", "Yunus Emre", "Hacı Bektaş Veli", "Kâtip Çelebi"], "dogru": 0, "aciklama": "Ahiliğin kurucusu, Kırşehir'de yaşamış olan Ahi Evran kabul edilir.", "konu": "kurucu", "seviye": "kolay"}, {"soru": "Ahi Evran'ın türbesi hangi ilimizde bulunur?", "secenekler": ["Konya", "Bursa", "Kırşehir", "Ankara"], "dogru": 2, "aciklama": "Ahi Evran Kırşehir'de yaşamıştır; türbesi de bu şehirdedir.", "konu": "kurucu", "seviye": "kolay"}, {"soru": "Ahilikte meslek basamaklarının doğru sıralaması hangisidir?", "secenekler": ["Çırak - Kalfa - Usta", "Kalfa - Çırak - Usta", "Usta - Kalfa - Çırak", "Çırak - Usta - Kalfa"], "dogru": 0, "aciklama": "Mesleğe çırak olarak başlanır, kalfalığa yükselinir, en son usta olunur.", "konu": "cirak-kalfa-usta", "seviye": "kolay"}, {"soru": "Kalfa ustalığa yükselirken yapılan törende beline ne bağlanırdı?", "secenekler": ["Kılıç", "Şed adı verilen kuşak", "Madalya", "Anahtar"], "dogru": 1, "aciklama": "Şed kuşanma töreninde yeni ustanın beline dürüstlük sözü eşliğinde kuşak bağlanırdı.", "konu": "sed-kusanma", "seviye": "kolay"}, {"soru": "Kalitesiz mal üreten esnaf için kullanılan deyim hangisidir?", "secenekler": ["Etekleri zil çalmak", "Ağzı kulaklarına varmak", "Kulak misafiri olmak", "Pabucu dama atılmak"], "dogru": 3, "aciklama": "Kalitesiz mal üreten esnafın pabucu dama atılırdı; deyim bu gelenekten doğmuştur.", "konu": "pabucu-dama", "seviye": "kolay"}, {"soru": "Orta sandığında biriken para öncelikle ne için kullanılırdı?", "secenekler": ["Saray süslemek", "Zor durumdaki esnafa yardım etmek", "Ordu kurmak", "Yabancı tüccarlara borç vermek"], "dogru": 1, "aciklama": "Orta sandığı, hastalanan veya zarara uğrayan esnafa destek olan yardım sandığıydı.", "konu": "orta-sandigi", "seviye": "kolay"}, {"soru": "Aşağıdakilerden hangisi Ahilik değerlerinden biri DEĞİLDİR?", "secenekler": ["Doğruluk", "Cömertlik", "Bencillik", "Dayanışma"], "dogru": 2, "aciklama": "Ahilik paylaşmayı ve yardımlaşmayı öğütler; bencillik bu değerlere aykırıdır.", "konu": "futuvvet-degerler", "seviye": "kolay"}, {"soru": "\"Eline, diline, beline sahip ol\" sözü ahiye neyi öğütler?", "secenekler": ["Çok para kazanmayı", "Dürüst ve ahlaklı yaşamayı", "Hızlı çalışmayı", "Ucuza mal satmayı"], "dogru": 1, "aciklama": "Bu söz; haramdan, kötü sözden ve kötü davranıştan uzak durmayı öğütler.", "konu": "futuvvet-degerler", "seviye": "kolay"}, {"soru": "Değerli malların ve kumaşların satıldığı üstü kapalı çarşıya ne denir?", "secenekler": ["Bedesten", "Kervansaray", "Hamam", "Medrese"], "dogru": 0, "aciklama": "Bedesten, değerli malların güven içinde satıldığı kapalı çarşıdır.", "konu": "bedesten-carsi", "seviye": "kolay"}, {"soru": "Osmanlı Devleti'nde kullanılan gümüş paranın adı nedir?", "secenekler": ["Florin", "Akçe", "Drahmi", "Ruble"], "dogru": 1, "aciklama": "Osmanlı'nın temel gümüş para birimi akçedir.", "konu": "carsi-ekonomi", "seviye": "kolay"}, {"soru": "Narh ne demektir?", "secenekler": ["Esnafın ödediği dükkân kirası", "Çıraklara verilen harçlık", "Bir mal için belirlenen en yüksek satış fiyatı", "Pazarda kurulan çadır"], "dogru": 2, "aciklama": "Narh, bir malın satılabileceği en yüksek fiyatın resmen belirlenmesidir.", "konu": "narh-ihtisap", "seviye": "kolay"}, {"soru": "Çarşıda fiyatları, ölçüleri ve mal kalitesini denetleyen görevli kimdir?", "secenekler": ["Nişancı", "Muhtesip", "Defterdar", "Reisülküttap"], "dogru": 1, "aciklama": "Muhtesip, çarşı ve pazarda ölçü, fiyat ve kalite denetimi yapan görevlidir.", "konu": "narh-ihtisap", "seviye": "kolay"}, {"soru": "Ahilikte kendi dükkânını açma hakkını kazanan kişi hangi basamaktadır?", "secenekler": ["Yamak", "Çırak", "Kalfa", "Usta"], "dogru": 3, "aciklama": "Ancak ustalığa yükselen kişi kendi dükkânını açabilirdi.", "konu": "cirak-kalfa-usta", "seviye": "kolay"}, {"soru": "Kanaat kavramı ne anlama gelir?", "secenekler": ["Elindekiyle yetinmeyi bilmek", "Sürekli daha fazlasını istemek", "Malını herkesten saklamak", "Yüksek faizle borç vermek"], "dogru": 0, "aciklama": "Kanaat, elindeki kazançla yetinmek ve açgözlü olmamaktır.", "konu": "futuvvet-degerler", "seviye": "kolay"}, {"soru": "Günümüzde Ahilik Haftası kutlamalarının merkezi hangi şehirdir?", "secenekler": ["İstanbul", "Kırşehir", "İzmir", "Trabzon"], "dogru": 1, "aciklama": "Ahilik Haftası'nın merkezi, Ahi Evran'ın şehri olan Kırşehir'dir.", "konu": "gunumuzde-ahilik", "seviye": "kolay"}, {"soru": "Günümüzde Ahiliğin devamı sayılabilecek kuruluşlar hangileridir?", "secenekler": ["Esnaf ve sanatkâr odaları", "Futbol kulüpleri", "Bankalar", "Sinema salonları"], "dogru": 0, "aciklama": "Esnaf ve sanatkâr odaları, Ahilikteki dayanışma geleneğini bugün sürdürür.", "konu": "gunumuzde-ahilik", "seviye": "kolay"}, {"soru": "Cömertlik aşağıdakilerden hangisiyle en iyi açıklanır?", "secenekler": ["Malını kimseyle paylaşmamak", "İhtiyacı olanlarla elindekini paylaşmak", "Sadece kendi kazancını düşünmek", "En ucuz malı almak"], "dogru": 1, "aciklama": "Cömertlik, elindekini ihtiyaç sahipleriyle gönülden paylaşmaktır.", "konu": "futuvvet-degerler", "seviye": "kolay"}, {"soru": "Üretim ne demektir?", "secenekler": ["İhtiyaçları karşılayacak mal ve hizmet meydana getirmek", "Malları depoda bekletmek", "Ürünleri yurt dışından almak", "Parayı bankada saklamak"], "dogru": 0, "aciklama": "Üretim, insan ihtiyaçlarını karşılayan mal ve hizmetlerin ortaya konmasıdır.", "konu": "uretim-dagitim-tuketim", "seviye": "kolay"}, {"soru": "Tüketim ne demektir?", "secenekler": ["Mal üretmek", "Ürünleri taşımak", "Mal ve hizmetleri ihtiyaçları karşılamak için kullanmak", "Fiyat belirlemek"], "dogru": 2, "aciklama": "Tüketim, üretilen mal ve hizmetlerin ihtiyaçlar için kullanılmasıdır.", "konu": "uretim-dagitim-tuketim", "seviye": "kolay"}, {"soru": "Üretilen malların tüketiciye ulaştırılmasına ne ad verilir?", "secenekler": ["Üretim", "Tüketim", "Tasarruf", "Dağıtım"], "dogru": 3, "aciklama": "Dağıtım, ürünlerin üreticiden tüketiciye ulaştırılması aşamasıdır.", "konu": "uretim-dagitim-tuketim", "seviye": "kolay"}, {"soru": "\"Ahi\" kelimesinin Arapçadaki anlamı nedir?", "secenekler": ["Kardeşim", "Ustam", "Tüccar", "Yolcu"], "dogru": 0, "aciklama": "Ahi, Arapçada \"kardeşim\" demektir; Türkçe \"akı\" (cömert) sözünden geldiği görüşü de vardır.", "konu": "ahilik-nedir", "seviye": "kolay"}, {"soru": "Dayanışma kavramını en iyi hangi davranış anlatır?", "secenekler": ["Rakibin müşterisini kandırmak", "Malını olabildiğince pahalıya satmak", "Dükkânı zarar gören esnafa hep birlikte yardım etmek", "Herkesten ayrı, tek başına çalışmak"], "dogru": 2, "aciklama": "Dayanışma, zor günde birlik olup birbirine destek olmaktır.", "konu": "futuvvet-degerler", "seviye": "kolay"}, {"soru": "Aynı meslekten dükkânların yan yana sıralandığı çarşı bölümüne ne denir?", "secenekler": ["Arasta", "Külliye", "İmarethane", "Darphane"], "dogru": 0, "aciklama": "Arasta, aynı meslek dükkânlarının sıralandığı çarşıdır.", "konu": "bedesten-carsi", "seviye": "kolay"}, {"soru": "Ahilikte çırağa mesleği ve ahlakı öğretmekten kim sorumludur?", "secenekler": ["Kadı", "Ustası", "Padişah", "Kervancı"], "dogru": 1, "aciklama": "Usta, çırağına hem mesleğin inceliklerini hem de güzel ahlakı öğretirdi.", "konu": "cirak-kalfa-usta", "seviye": "kolay"}, {"soru": "Ahilik teşkilatı ilk olarak nerede ortaya çıkıp yayılmıştır?", "secenekler": ["Balkanlar", "Orta Asya", "Anadolu", "Kuzey Afrika"], "dogru": 2, "aciklama": "Ahilik, Anadolu'da doğup Anadolu şehirlerinde yayılmış bir teşkilattır.", "konu": "ahilik-nedir", "seviye": "kolay"}, {"soru": "Ahilik, Anadolu'da hangi yüzyılda kurulup yayılmıştır?", "secenekler": ["11. yüzyıl", "13. yüzyıl", "16. yüzyıl", "19. yüzyıl"], "dogru": 1, "aciklama": "Ahilik, 13. yüzyılda Anadolu Selçukluları döneminde kurulup yayılmıştır.", "konu": "ahilik-nedir", "seviye": "orta"}, {"soru": "Fütüvvet kelimesi hangi değerleri ifade eder?", "secenekler": ["Zenginlik ve güç", "Korku ve itaat", "Hız ve rekabet", "Yiğitlik ve cömertlik"], "dogru": 3, "aciklama": "Fütüvvet; yiğitlik, cömertlik ve mertlik gibi değerleri ifade eder.", "konu": "futuvvet-degerler", "seviye": "orta"}, {"soru": "Fütüvvetnâme nedir?", "secenekler": ["Vergi kayıt defteri", "Savaş planlarını içeren belge", "Ahilerin uyacağı ahlak ve görgü kurallarını anlatan kitap", "Yemek tarifleri kitabı"], "dogru": 2, "aciklama": "Fütüvvetnâmeler, ahilerin uyması gereken ahlak ve görgü kurallarını anlatır.", "konu": "futuvvet-degerler", "seviye": "orta"}, {"soru": "Yamak kimdir?", "secenekler": ["İşe yeni başlayan, çıraklıktan önceki basamaktaki kişi", "Dükkân sahibi usta", "Çarşıyı denetleyen görevli", "Kervan sahibi tüccar"], "dogru": 0, "aciklama": "Yamak, mesleğe yeni başlayan ve çıraklığa hazırlanan kişidir.", "konu": "cirak-kalfa-usta", "seviye": "orta"}, {"soru": "Bâcıyân-ı Rûm hangi topluluğu ifade eder?", "secenekler": ["Deniz tüccarlarını", "Saray muhafızlarını", "Kervan rehberlerini", "Anadolu'daki kadınlar teşkilatını"], "dogru": 3, "aciklama": "Bâcıyân-ı Rûm, \"Anadolu Bacıları\" denilen kadınlar teşkilatıdır.", "konu": "baciyan-i-rum", "seviye": "orta"}, {"soru": "Geleneğe göre Bâcıyân-ı Rûm'un öncüsü kabul edilen kişi kimdir?", "secenekler": ["Fatma Bacı", "Nene Hatun", "Mihri Hatun", "Kösem Sultan"], "dogru": 0, "aciklama": "Geleneğe göre teşkilatın öncüsü, Ahi Evran'ın eşi Fatma Bacı'dır.", "konu": "baciyan-i-rum", "seviye": "orta"}, {"soru": "Ahi Evran geleneğe göre hangi mesleğin piri sayılır?", "secenekler": ["Demircilik", "Dericilik (debbağlık)", "Terzilik", "Fırıncılık"], "dogru": 1, "aciklama": "Ahi Evran debbağlık yani dericilik yapmıştır; geleneğe göre dericilerin piridir.", "konu": "meslekler-pirler", "seviye": "orta"}, {"soru": "Osman Gazi'nin kayınpederi olan ve Ahilikle ilişkilendirilen kişi kimdir?", "secenekler": ["Mevlânâ", "Şeyh Edebali", "Hacı Bayram Veli", "Akşemseddin"], "dogru": 1, "aciklama": "Rivayete göre Osman Gazi'nin kayınpederi Şeyh Edebali, ahilerin ileri gelenlerindendi.", "konu": "osmanli-kurulus", "seviye": "orta"}, {"soru": "Ahilerin Osmanlı Devleti'nin kuruluş dönemindeki rolü nedir?", "secenekler": ["Beyliğe destek olmuş, şehirlerde birlik ve düzeni sağlamışlardır", "Kuruluşa karşı çıkmışlardır", "Sadece ticaretle uğraşıp uzak durmuşlardır", "Bizans'ı desteklemişlerdir"], "dogru": 0, "aciklama": "Ahiler kuruluş döneminde Osmanlı Beyliği'ne destek olmuş, şehirlerde düzeni sağlamıştır.", "konu": "osmanli-kurulus", "seviye": "orta"}, {"soru": "Orta sandığının gelirleri nereden sağlanırdı?", "secenekler": ["Savaş ganimetlerinden", "Yabancı devlet yardımlarından", "Esnafın aidat ve bağışlarından", "Piyango satışından"], "dogru": 2, "aciklama": "Orta sandığı, esnafın düzenli aidatları ve bağışlarıyla doldurulurdu.", "konu": "orta-sandigi", "seviye": "orta"}, {"soru": "Pabucu dama atılan esnaf için en büyük kayıp neydi?", "secenekler": ["İtibarını ve müşterilerinin güvenini kaybetmesi", "Evinin satılması", "Ailesinin şehirden kovulması", "Çıraklarının maaşının artması"], "dogru": 0, "aciklama": "Pabucu dama atılan esnaf herkesin gözünde itibarını ve müşteri güvenini yitirirdi.", "konu": "pabucu-dama", "seviye": "orta"}, {"soru": "Çarşı ve pazar denetimiyle ilgili alınan verginin adı nedir?", "secenekler": ["Aşar", "Cizye", "Haraç", "İhtisap resmi"], "dogru": 3, "aciklama": "İhtisap resmi, çarşı-pazar denetimi kapsamında alınan vergidir.", "konu": "narh-ihtisap", "seviye": "orta"}, {"soru": "Osmanlı döneminde Ahiliğin devamı niteliğindeki esnaf teşkilatı hangisidir?", "secenekler": ["Lonca", "Divan", "Enderun", "Tımar"], "dogru": 0, "aciklama": "Osmanlı'da esnaf, Ahilik geleneğini sürdüren lonca teşkilatında örgütlenmiştir.", "konu": "bedesten-carsi", "seviye": "orta"}, {"soru": "Şed kuşanma töreninde yeni usta neye söz verirdi?", "secenekler": ["Vergi ödememeye", "Sadece zenginlere mal satmaya", "Dürüst çalışıp mesleğinin kurallarına uymaya", "Başka bir şehre taşınmaya"], "dogru": 2, "aciklama": "Yeni usta, dürüst çalışacağına ve meslek ahlakına uyacağına söz verirdi.", "konu": "sed-kusanma", "seviye": "orta"}, {"soru": "Geleneğe göre terzilerin piri kabul edilen peygamber kimdir?", "secenekler": ["Hz. İdris", "Hz. Nuh", "Hz. Davud", "Hz. Musa"], "dogru": 0, "aciklama": "Geleneğe göre ilk kez elbise diktiğine inanılan Hz. İdris, terzilerin piri sayılır.", "konu": "meslekler-pirler", "seviye": "orta"}, {"soru": "Geleneğe göre marangozların ve gemi yapımcılarının piri kimdir?", "secenekler": ["Hz. Davud", "Hz. Nuh", "Hz. İdris", "Hz. Âdem"], "dogru": 1, "aciklama": "Geleneğe göre gemi yapan Hz. Nuh, marangozların ve gemicilerin piri kabul edilir.", "konu": "meslekler-pirler", "seviye": "orta"}, {"soru": "Hangi davranış bir ahinin teşkilattan çıkarılmasına (yolsuz sayılmasına) neden olurdu?", "secenekler": ["Sabah erken kalkmak", "Çırak yetiştirmek", "Komşu esnafa yardım etmek", "Müşteriye hileli mal satmak"], "dogru": 3, "aciklama": "Hile yapmak fütüvvet yoluna aykırıdır; hile yapan ahi teşkilattan çıkarılırdı.", "konu": "futuvvet-degerler", "seviye": "orta"}, {"soru": "Narh uygulamasının temel amacı nedir?", "secenekler": ["Esnafı daha çok zengin etmek", "Vergileri artırmak", "Halkı aşırı yüksek fiyatlardan korumak", "İthalatı yasaklamak"], "dogru": 2, "aciklama": "Narh, halkın aşırı fiyatla mağdur edilmesini önlemek için konurdu.", "konu": "narh-ihtisap", "seviye": "orta"}, {"soru": "Rivayete göre Ahi Evran'ın asıl adı nedir?", "secenekler": ["Nasîrüddin Mahmud", "Muhyiddin İbrahim", "Bahaeddin Veled", "Celaleddin Karatay"], "dogru": 0, "aciklama": "Kaynaklara göre Ahi Evran'ın asıl adı Şeyh Nasîrüddin Mahmud'dur.", "konu": "kurucu", "seviye": "zor"}, {"soru": "Damga resmi hangi işlem karşılığında alınan bir vergiydi?", "secenekler": ["Şehre giriş izni verilmesi", "Su kullanma hakkı", "Malın denetlenip damgalanması", "Askerlikten muaf tutulma"], "dogru": 2, "aciklama": "Damga resmi, denetimden geçen mala resmî damga vurulması karşılığında alınırdı.", "konu": "narh-ihtisap", "seviye": "zor"}, {"soru": "Osmanlı'da esnafa tanınan dükkân açma ve meslek yapma hakkına ne ad verilirdi?", "secenekler": ["Tımar", "Gedik", "Zeamet", "Mukataa"], "dogru": 1, "aciklama": "Gedik, esnafa tanınan dükkân açma ve mesleği icra etme hakkıdır.", "konu": "bedesten-carsi", "seviye": "zor"}, {"soru": "Ahi zaviyelerinde akşamları yapılan sohbetlerin temel amacı neydi?", "secenekler": ["Yeni vergiler belirlemek", "Gençlere meslek ahlakı ve görgü kuralları öğretmek", "Askerî talim yapmak", "Fiyatları gizlice yükseltmek"], "dogru": 1, "aciklama": "Zaviye sohbetlerinde gençlere ahlak, edep ve görgü kuralları öğretilirdi.", "konu": "futuvvet-degerler", "seviye": "zor"}, {"soru": "Fütüvvetnâmelere göre ahinin \"üç şeyi açık\" olmalıdır. Bunlar hangileridir?", "secenekler": ["Eli, sofrası ve kapısı", "Gözü, dili ve beli", "Defteri, kasası ve deposu", "Yolu, atı ve heybesi"], "dogru": 0, "aciklama": "Ahinin eli (cömertlik), sofrası (ikram) ve kapısı (konukseverlik) açık olmalıdır.", "konu": "futuvvet-degerler", "seviye": "zor"}, {"soru": "Kaynaklara göre ahi kuşağı (şed) kuşanan Osmanlı padişahı kimdir?", "secenekler": ["Fatih Sultan Mehmet", "Yavuz Sultan Selim", "Kanuni Sultan Süleyman", "Sultan I. Murad"], "dogru": 3, "aciklama": "Kaynaklara göre Sultan I. Murad ahi şedi kuşanmış ve teşkilata destek vermiştir.", "konu": "osmanli-kurulus", "seviye": "zor"}, {"soru": "Bir şehirdeki ahi teşkilatının en üst yöneticisine ne ad verilirdi?", "secenekler": ["Yiğitbaşı", "Şehremini", "Ahi Baba", "Lala"], "dogru": 2, "aciklama": "Şehirdeki ahi teşkilatının başında Ahi Baba bulunurdu; yiğitbaşı ise yardımcı görevliydi.", "konu": "ahilik-nedir", "seviye": "zor"}, {"soru": "Geleneğe göre Ahiliğe yeni katılan gence teşkilat içinde kimler rehberlik ederdi?", "secenekler": ["Bir kadı ve iki asker", "Bir vezir ve iki kâtip", "Bir tüccar ve iki kervancı", "Bir yol atası ve iki yol kardeşi"], "dogru": 3, "aciklama": "Geleneğe göre yeni üyeye bir yol atası ile iki yol kardeşi rehberlik ederdi.", "konu": "futuvvet-degerler", "seviye": "zor"}], "placeholder": false};
+
+</script>
+<script>
+/* ÇIRAKTAN PÎRE — oyun motoru (zarsız Yol Kartı, botlar, animasyonlar) */
+(function () {
+  "use strict";
+
+  var V = window.OYUN_VERISI;
+  var K = V.kareler;
+
+  var RENKLER = [
+    { ad: "Yeşil Sancak", renk: "#1e8449", amblem: "🐎" },
+    { ad: "Al Bayrak", renk: "#b8332b", amblem: "🦅" },
+    { ad: "Mavi Tuğra", renk: "#2471a3", amblem: "🌙" },
+    { ad: "Altın Hilal", renk: "#b7950b", amblem: "⚔️" },
+  ];
+  var BINA_IKON = ["🧹", "🔨", "🛠️", "🏅", "🏵️"]; // Yamak, Çırak, Kalfa, Usta, Ahi Baba
+
+  var SEFER = (V.ilerlemeKartlari && V.ilerlemeKartlari.length) ? V.ilerlemeKartlari : yedekSefer();
+  function yedekSefer() { var a = [], i; for (i = 1; i <= 12; i++) { a.push({ sayi: i, baslik: "Sefer (" + i + ")", bilgi: i + " kare ilerle." }); a.push({ sayi: i, baslik: "Sefer (" + i + ")", bilgi: i + " kare ilerle." }); } return a; }
+
+  var oyun = null;
+  var BOT_HIZ = 1; // gecikme çarpanı
+
+  // ---------- ses (WebAudio, dosyasız) ----------
+  var Ses = (function () {
+    var ctx = null, kapali = false;
+    function ac() { if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } } if (ctx && ctx.state === "suspended") ctx.resume(); return ctx; }
+    function ton(f, dur, tip, vol, kayma) {
+      if (kapali) return; var c = ac(); if (!c) return;
+      var o = c.createOscillator(), g = c.createGain(), t = c.currentTime;
+      o.type = tip || "sine"; o.frequency.setValueAtTime(f, t);
+      if (kayma) o.frequency.exponentialRampToValueAtTime(kayma, t + dur);
+      g.gain.setValueAtTime(vol || 0.1, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur);
+    }
+    function dizi(ns) { ns.forEach(function (n, i) { setTimeout(function () { ton(n.f, n.d || 0.14, n.t || "triangle", n.v || 0.1, n.k); }, i * (n.gap || 110)); }); }
+    return {
+      init: function () { ac(); }, sustur: function (v) { kapali = v; }, kapaliMi: function () { return kapali; },
+      cek: function () { ton(300, 0.2, "triangle", 0.09, 720); },
+      adim: function () { ton(200, 0.045, "square", 0.03); },
+      kart: function () { ton(520, 0.07, "sine", 0.06, 320); },
+      al: function () { dizi([{ f: 523 }, { f: 784, d: 0.18, gap: 95 }]); },
+      ode: function () { ton(200, 0.24, "sawtooth", 0.08, 110); },
+      imar: function () { dizi([{ f: 440, t: "square", v: 0.07 }, { f: 660, d: 0.13, gap: 75 }]); },
+      esaret: function () { ton(150, 0.32, "sawtooth", 0.1, 80); },
+      kazan: function () { dizi([{ f: 523, gap: 150 }, { f: 659, gap: 150 }, { f: 784, gap: 150 }, { f: 1046, d: 0.34, v: 0.13, gap: 150 }]); },
+    };
+  })();
+
+  // ---------- Osmanlı geometrik deseni (SVG) ----------
+  function desen(bg, stroke, op) {
+    stroke = stroke || "#dcbb63"; op = op || "0.5";
+    var m = "<rect x='12' y='12' width='40' height='40'/><path d='M32 12 L52 32 L32 52 L12 32 Z'/><circle cx='32' cy='32' r='6'/><rect x='-20' y='-20' width='40' height='40'/><path d='M0 -20 L20 0 L0 20 L-20 0 Z'/><rect x='44' y='-20' width='40' height='40'/><path d='M64 -20 L84 0 L64 20 L44 0 Z'/><rect x='-20' y='44' width='40' height='40'/><path d='M0 44 L20 64 L0 84 L-20 64 Z'/><rect x='44' y='44' width='40' height='40'/><path d='M64 44 L84 64 L64 84 L44 64 Z'/>";
+    var id = "om" + bg.replace("#", "");
+    return "<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' preserveAspectRatio='xMidYMid slice' viewBox='0 0 256 270'><defs><pattern id='" + id + "' width='64' height='64' patternUnits='userSpaceOnUse'><g fill='none' stroke='" + stroke + "' stroke-width='1.5' opacity='" + op + "'>" + m + "</g></pattern></defs><rect width='256' height='270' fill='" + bg + "'/><rect width='256' height='270' fill='url(#" + id + ")'/></svg>";
+  }
+
+  function desenKaro(stroke, op) {
+    var m = "<rect x='12' y='12' width='40' height='40'/><path d='M32 12 L52 32 L32 52 L12 32 Z'/><circle cx='32' cy='32' r='6'/><rect x='-20' y='-20' width='40' height='40'/><path d='M0 -20 L20 0 L0 20 L-20 0 Z'/><rect x='44' y='-20' width='40' height='40'/><path d='M64 -20 L84 0 L64 20 L44 0 Z'/><rect x='-20' y='44' width='40' height='40'/><path d='M0 44 L20 64 L0 84 L-20 64 Z'/><rect x='44' y='44' width='40' height='40'/><path d='M64 44 L84 64 L64 84 L44 64 Z'/>";
+    return "<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='" + stroke + "' stroke-width='1.6' opacity='" + op + "'>" + m + "</g></svg>";
+  }
+  function desenUygula() {
+    function setBg(sel, grad, stroke, op) {
+      var e = document.querySelector(sel); if (!e) return;
+      var uri = "data:image/svg+xml;utf8," + encodeURIComponent(desenKaro(stroke, op || "0.5"));
+      e.style.backgroundImage = "url(\"" + uri + "\"), " + grad;
+      e.style.backgroundSize = "30px 30px, cover"; e.style.backgroundRepeat = "repeat, no-repeat";
+    }
+    setBg(".deste-ferman", "linear-gradient(180deg,#a64141,#732424)", "#e7c98a");
+    setBg(".deste-vakca", "linear-gradient(180deg,#2f8870,#175040)", "#bfe0d2");
+    setBg("#sefer-mini", "linear-gradient(180deg,#f8ecc8,#e6cf94)", "#b7950b", "0.42");
+  }
+  function set3D(on) {
+    var o = document.getElementById("oyun"); if (o) o.classList.toggle("d3", !!on);
+    var b = document.getElementById("d3-btn"); if (b) { b.textContent = on ? "🧊 3D ✓" : "🗺️ Düz"; b.classList.toggle("acik", !!on); }
+    try { localStorage.setItem("cp_3d", on ? "1" : "0"); } catch (e) {}
+  }
+  function duraklatDegis() {
+    if (!oyun) return;
+    oyun.duraklat = !oyun.duraklat;
+    var b = document.getElementById("duraklat-btn");
+    if (b) { b.textContent = oyun.duraklat ? "▶️ Devam" : "⏸️ Duraklat"; b.classList.toggle("acik", oyun.duraklat); }
+    logla(oyun.duraklat ? "⏸️ Oyun duraklatıldı." : "▶️ Oyun devam ediyor.", "vurgu");
+    render();
+    if (!oyun.duraklat && !oyun.bitti && aktif().bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function koltukDegis(id) {
+    var o = sahipOyuncu(id); if (!o || o.iflas || oyun.bitti) return;
+    o.bot = !o.bot;
+    logla("🔄 " + o.ad + " artık " + (o.bot ? "🤖 Bot" : "👤 Sen") + ".", "vurgu");
+    render();
+    if (o.id === oyun.sira && !oyun.duraklat && o.bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function hizDegis() {
+    var s = [{ h: 0.5, ad: "Hızlı" }, { h: 1, ad: "Normal" }, { h: 1.8, ad: "Yavaş" }];
+    var i = 1; s.forEach(function (x, j) { if (x.h === BOT_HIZ) i = j; });
+    i = (i + 1) % s.length; BOT_HIZ = s[i].h;
+    var b = document.getElementById("hiz-btn"); if (b) b.textContent = "⚡ " + s[i].ad;
+    try { localStorage.setItem("cp_hiz", "" + BOT_HIZ); } catch (e) {}
+  }
+
+  // ---------- yardımcılar ----------
+  function $(s) { return document.querySelector(s); }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function fmt(n) { return n.toLocaleString("tr-TR") + " akçe"; }
+  function aktif() { return oyun.oyuncular[oyun.sira]; }
+  function bekle(fn, ms) { return setTimeout(fn, ms * BOT_HIZ); }
+  function gridYeri(pos) {
+    if (pos === 0) return { r: 11, c: 11 };
+    if (pos < 10) return { r: 11, c: 11 - pos };
+    if (pos === 10) return { r: 11, c: 1 };
+    if (pos < 20) return { r: 11 - (pos - 10), c: 1 };
+    if (pos === 20) return { r: 1, c: 1 };
+    if (pos < 30) return { r: 1, c: 1 + (pos - 20) };
+    if (pos === 30) return { r: 1, c: 11 };
+    return { r: 1 + (pos - 30), c: 11 };
+  }
+  function sahipOyuncu(id) { for (var i = 0; i < oyun.oyuncular.length; i++) if (oyun.oyuncular[i].id === id) return oyun.oyuncular[i]; return null; }
+  function karistir(n) { var a = [], i, j, t; for (i = 0; i < n; i++) a.push(i); for (i = a.length - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function slug(s) { var t = { "İ": "i", "I": "i", "ı": "i", "Ş": "s", "ş": "s", "Ç": "c", "ç": "c", "Ğ": "g", "ğ": "g", "Ö": "o", "ö": "o", "Ü": "u", "ü": "u", "Â": "a", "â": "a", "Î": "i", "î": "i", "Û": "u", "û": "u" }; return s.split("").map(function (c) { return t[c] || c; }).join("").toLowerCase().replace(/[^a-z0-9]/g, ""); }
+  function gorselImg(ad, cls) { return '<img class="' + (cls || "m-gorsel") + '" src="img/' + slug(ad) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">'; }
+  function logla(msg, sinif) { var box = $("#log"); box.insertBefore(el("div", "log-satir" + (sinif ? " " + sinif : ""), msg), box.firstChild); }
+
+  // ---------- kurulum ----------
+  function kurulumEkrani() {
+    var s = $("#kurulum-oyuncular"); s.innerHTML = "";
+    var n = parseInt($("#oyuncu-sayisi").value, 10);
+    for (var i = 0; i < n; i++) {
+      var row = el("div", "kur-row");
+      var sw = el("span", "kur-sw"); sw.style.background = RENKLER[i].renk;
+      var inp = el("input"); inp.type = "text"; inp.maxLength = 16; inp.value = i === 0 ? "Sen" : "Bot " + i;
+      inp.dataset.i = i;
+      var tog = el("div", "tip-toggle");
+      var bSen = el("button", i === 0 ? "sec" : "", "👤 Sen"); bSen.dataset.tip = "insan";
+      var bBot = el("button", i === 0 ? "" : "sec", "🤖 Bot"); bBot.dataset.tip = "bot";
+      tog.dataset.bot = i === 0 ? "0" : "1";
+      bSen.addEventListener("click", function (e) { var t = e.target.parentNode; t.dataset.bot = "0"; t.children[0].classList.add("sec"); t.children[1].classList.remove("sec"); });
+      bBot.addEventListener("click", function (e) { var t = e.target.parentNode; t.dataset.bot = "1"; t.children[1].classList.add("sec"); t.children[0].classList.remove("sec"); });
+      tog.appendChild(bSen); tog.appendChild(bBot);
+      row.appendChild(sw); row.appendChild(inp); row.appendChild(tog);
+      s.appendChild(row);
+    }
+  }
+
+  function oyunBaslat() {
+    var n = parseInt($("#oyuncu-sayisi").value, 10);
+    var rows = document.querySelectorAll("#kurulum-oyuncular .kur-row");
+    var oyuncular = [];
+    for (var i = 0; i < n; i++) {
+      var bot = rows[i].querySelector(".tip-toggle").dataset.bot === "1";
+      oyuncular.push({
+        id: i, ad: rows[i].querySelector("input").value.trim() || (bot ? "Bot " + i : "Oyuncu " + (i + 1)),
+        renk: RENKLER[i].renk, sancak: RENKLER[i].ad, amblem: RENKLER[i].amblem, bot: bot,
+        para: V.ayarlar.baslangicPara, pos: 0, esaret: false, esaretTur: 0, esaretKarti: 0, iflas: false, mulkler: [],
+      });
+    }
+    K.forEach(function (k) { if (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") { k.sahip = null; k.imar = 0; k.ipotekli = false; } });
+    oyun = {
+      oyuncular: oyuncular, sira: 0, hareketYapildi: false, sonHareket: 0, hareketEden: null, _para: {}, _yeniImar: -1,
+      seferDeste: karistir(SEFER.length), si: 0, fermanDeste: karistir(V.ferman.length), fi: 0,
+      vakcaDeste: karistir(V.vakca.length), vi: 0, bitti: false,
+      botZorluk: ($("#bot-zorluk") ? $("#bot-zorluk").value : "orta"),
+      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0, duraklat: false,
+      turLimiti: ($("#tur-limiti") ? parseInt($("#tur-limiti").value, 10) : 0),
+    };
+    Ses.init();
+    $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
+    tahtaKur(); desenUygula(); render();
+    var d3pref = true; try { d3pref = localStorage.getItem("cp_3d") !== "0"; } catch (e) {}
+    set3D(d3pref);
+    logla("<b>Oyun başladı!</b> " + oyuncular.map(function (o) { return o.ad + (o.bot ? " 🤖" : ""); }).join(", ") + ". Hayırlı seferler!", "vurgu");
+    if (aktif().bot) bekle(botTuru, 900);
+  }
+
+  // ---------- kaydet / devam ----------
+  function kaydet() {
+    try {
+      if (!oyun || oyun.bitti) return;
+      var kareDurum = K.map(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") ? { s: k.sahip, i: k.imar || 0, p: !!k.ipotekli } : null; });
+      localStorage.setItem("cp_kayit", JSON.stringify({ oyun: oyun, kd: kareDurum, t: 1 }));
+    } catch (e) {}
+  }
+  function kayitVarMi() { try { return !!localStorage.getItem("cp_kayit"); } catch (e) { return false; } }
+  function temizleKayit() { try { localStorage.removeItem("cp_kayit"); } catch (e) {} }
+  function yukle() {
+    try {
+      var snap = JSON.parse(localStorage.getItem("cp_kayit"));
+      if (!snap || !snap.oyun) return false;
+      oyun = snap.oyun;
+      snap.kd.forEach(function (d, i) { if (d) { K[i].sahip = d.s; K[i].imar = d.i; K[i].ipotekli = d.p; } });
+      oyun.hareketEden = null; oyun._para = {}; oyun._yeniImar = -1;
+      Ses.init();
+      $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
+      tahtaKur(); desenUygula(); render();
+      var d3p = true; try { d3p = localStorage.getItem("cp_3d") !== "0"; } catch (e) {}
+      set3D(d3p);
+      logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
+      if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // ---------- tahta DOM ----------
+  function tahtaKur() {
+    var t = $("#tahta"); t.innerHTML = "";
+    var merkez = el("div", "merkez");
+    merkez.innerHTML =
+      '<div class="merkez-ic"><div class="logo-ust">ÇIRAKTAN</div><div class="logo-orta">PÎRE</div>' +
+      '<div class="logo-alt">Ahilik ve Meslek Ahlâkı Oyunu</div>' +
+      '<div class="deste-kutu"><div class="sefer-mini" id="sefer-mini"><div class="sm-no" id="sefer-no">?</div><div class="sm-et">YOL<br>KARTI</div></div>' +
+      '<div class="deste deste-ferman">FÜTÜVVET</div><div class="deste deste-vakca">VAK\'A</div></div></div>';
+    t.appendChild(merkez);
+    K.forEach(function (k) {
+      var g = gridYeri(k.pos);
+      var c = el("div", "kare kare-" + k.tip);
+      c.style.gridRow = g.r; c.style.gridColumn = g.c; c.dataset.pos = k.pos;
+      if ([0, 10, 20, 30].indexOf(k.pos) >= 0) c.classList.add("kose");
+      c.appendChild(kareIc(k));
+      var pl = el("div", "pawnlar"); pl.dataset.pawn = k.pos; c.appendChild(pl);
+      c.addEventListener("click", function () { kareBilgiModal(k.pos); });
+      t.appendChild(c);
+    });
+  }
+  function kareGorSlug(k) {
+    if (k.tip === "sehir" || k.tip === "seref") return slug(k.ad);
+    if (k.tip === "liman") return slug(k.kisa);
+    if (k.tip === "utility") return k.ad === "Orta Sandığı" ? "ortasandigi" : "bedesten";
+    var m = { baslangic: "carsimeydani", esaret: "pabucudama", kervansaray: "kervansaray", surgun: "surgun", ferman: "ferman", vakca: "vaka", vergi: "vergi" };
+    return m[k.tip] || "";
+  }
+  function kareIc(k) {
+    var ic = el("div", "kare-ic");
+    var img = '<img class="kgor" src="img/' + kareGorSlug(k) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+    if ([0, 10, 20, 30].indexOf(k.pos) >= 0) {
+      var koseAd = { baslangic: ["Çarşı Meydanı", "⚖️"], esaret: ["Pabucu Dama", "👞"], kervansaray: ["Kervansaray", "🏕️"], surgun: ["Yolsuz Kaldın", "🚷"] }[k.tip] || [k.ad, "❖"];
+      ic.innerHTML = img + '<div class="kperde"></div><div class="kose-rozet">' + koseAd[1] + '</div><div class="kose-ad">' + koseAd[0] + '</div>' +
+        (k.tip === "kervansaray" ? '<div class="kfoot" data-hazine style="color:#1e8449"></div>' : '');
+      return ic;
+    }
+    var band = "", foot = "", extra = "";
+    if (k.tip === "sehir") { band = '<div class="kband" style="background:' + k.grup.renk + '">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; extra = '<div class="imar-rozet" data-imar="' + k.pos + '"></div>'; }
+    else if (k.tip === "liman") { band = '<div class="kband" style="background:#0f6b5c">' + k.kisa + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">⚓ ' + k.fiyat + '</div>'; }
+    else if (k.tip === "utility") { band = '<div class="kband" style="background:#5b3f86">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; }
+    else if (k.tip === "vergi") { band = '<div class="kband" style="background:#9a6314">' + k.ad + '</div>'; foot = '<div class="kfoot">' + k.tutar + '</div>'; }
+    else if (k.tip === "ferman") { band = '<div class="kband" style="background:#8f2f2f">Fütüvvet</div>'; foot = '<div class="kfoot" style="color:#8f2f2f">☞ Kart</div>'; }
+    else if (k.tip === "vakca") { band = '<div class="kband" style="background:#1f6b58">Vak\'a</div>'; foot = '<div class="kfoot" style="color:#1f6b58">☞ Kart</div>'; }
+    else if (k.tip === "seref") { band = '<div class="kband" style="background:#b0880a">' + k.ad + '</div>'; foot = '<div class="kfoot" style="color:#8a6410;font-weight:800">❖ Şeref</div>'; }
+    ic.innerHTML = band + img + foot + extra;
+    return ic;
+  }
+
+  // ---------- render ----------
+  function render() {
+    var pano = $("#oyuncular"); pano.innerHTML = "";
+    oyun.oyuncular.forEach(function (o) {
+      var d = el("div", "oyuncu-kart" + (o.id === oyun.sira ? " aktif" : "") + (o.iflas ? " iflas" : ""));
+      d.style.borderColor = o.renk;
+      var degisti = oyun._para[o.id] != null && oyun._para[o.id] !== o.para;
+      var yon = degisti ? (o.para > oyun._para[o.id] ? " arti" : " eksi") : "";
+      d.innerHTML =
+        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.id === hunkarId() ? " 👑" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
+        '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
+        '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>' +
+        (o.iflas ? '' : '<button class="koltuk-btn" data-id="' + o.id + '" title="Sen ↔ Bot">' + (o.bot ? '🤖' : '👤') + '</button>');
+      pano.appendChild(d);
+      oyun._para[o.id] = o.para;
+    });
+    pano.querySelectorAll(".koltuk-btn").forEach(function (b) { b.onclick = function () { koltukDegis(parseInt(b.dataset.id, 10)); }; });
+    K.forEach(function (k) {
+      if (k.tip !== "sehir" && k.tip !== "liman" && k.tip !== "utility") return;
+      var cell = document.querySelector('.kare[data-pos="' + k.pos + '"]'); if (!cell) return;
+      cell.classList.toggle("sahipli", k.sahip != null);
+      cell.classList.toggle("ipotekli", !!k.ipotekli);
+      var sahip = k.sahip != null ? sahipOyuncu(k.sahip) : null;
+      cell.style.boxShadow = sahip ? "inset 0 0 0 3px " + sahip.renk : "";
+      var fiyatEl = cell.querySelector("[data-fiyat]");
+      if (fiyatEl) fiyatEl.textContent = sahip ? (k.ipotekli ? "ipotek" : (sahip.ad.length > 9 ? sahip.ad.slice(0, 9) : sahip.ad)) : k.fiyat;
+      if (k.tip === "sehir") {
+        var rozet = cell.querySelector("[data-imar]");
+        if (rozet) {
+          if (k.imar > 0) rozet.innerHTML = '<span class="imar-bina' + (k.imar >= 5 ? " kulliye" : "") + (k.pos === oyun._yeniImar ? " imar-yeni" : "") + '">' + BINA_IKON[k.imar - 1] + '</span>';
+          else rozet.innerHTML = "";
+        }
+      }
+    });
+    oyun._yeniImar = -1;
+    document.querySelectorAll(".pawnlar").forEach(function (p) { p.innerHTML = ""; });
+    oyun.oyuncular.forEach(function (o) {
+      if (o.iflas) return;
+      var layer = document.querySelector('.pawnlar[data-pawn="' + o.pos + '"]');
+      if (layer) { var pw = el("span", "pawn" + (o.id === oyun.hareketEden ? " pawn-hareket" : ""), o.amblem || ""); pw.style.background = o.renk; pw.title = o.ad; layer.appendChild(pw); }
+    });
+    var sn = $("#sefer-no"); if (sn) sn.textContent = oyun.sonHareket || "?";
+    var hz = document.querySelector("[data-hazine]"); if (hz) hz.textContent = oyun.hazine > 0 ? "💰" + oyun.hazine : "";
+    butonlariGuncelle();
+  }
+  function vurgulaKare(pos) {
+    var c = document.querySelector('.kare[data-pos="' + pos + '"]');
+    if (c) { c.classList.remove("vurgu"); void c.offsetWidth; c.classList.add("vurgu"); setTimeout(function () { c.classList.remove("vurgu"); }, 1200); }
+  }
+
+  function butonlariGuncelle() {
+    var o = aktif(), k = K[o.pos], bar = $("#aksiyon-bar"); bar.innerHTML = "";
+    $("#sira-bilgi").innerHTML = (oyun.duraklat ? '⏸️ <b style="color:#f2a8a8">DURAKLATILDI</b> · ' : '') + '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
+      (oyun.turLimiti ? ' · ⏳ Tur ' + (Math.floor(oyun.elGecti / oyun.oyuncular.length) + 1) + '/' + oyun.turLimiti : '') +
+      (oyun.hazine > 0 ? ' · 🏕️ ' + fmt(oyun.hazine) : '');
+    if (oyun.bitti) { bar.appendChild(btn("🔄 Yeni Oyun", "btn-ana", function () { location.reload(); })); return; }
+    if (o.bot) { bar.appendChild(el("div", "bot-oynuyor", '<span class="bot-spinner"></span>🤖 ' + o.ad + ' oynuyor…')); return; }
+
+    if (o.esaret) {
+      if (!oyun.hareketYapildi) {
+        if (o.para >= V.ayarlar.esaretCikisBedeli) bar.appendChild(btn("💰 Telafi Bedeli (" + V.ayarlar.esaretCikisBedeli + ")", "btn-ana", function () { fidyeOde(); }));
+        if (o.esaretKarti > 0) bar.appendChild(btn("📜 Kefalet Kullan", "", fermanCikis));
+        bar.appendChild(btn("📚 Bilgiyle Çık", "", function () { soruModal("esaret"); }));
+        bar.appendChild(btn("⏭️ Bu Turu Geç", "", function () { esaretGec(); }));
+      } else bar.appendChild(btn("➡️ Turu Bitir", "btn-ana", turuBitir));
+      return;
+    }
+    if (!oyun.hareketYapildi) {
+      bar.appendChild(btn("🧭 Yol Kartı Çek", "btn-ana", function () { seferKartiCek(); }));
+      if (rakipVar(o)) bar.appendChild(btn("🤝 Takas", "", takasModal));
+      bar.appendChild(btn("🏛️ Mülklerim", "", mulklerModal));
+      return;
+    }
+    var alinabilir = (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip == null && !k.ipotekli;
+    if (alinabilir && o.para >= k.fiyat) {
+      bar.appendChild(btn("🏪 Dükkân Aç (" + fmt(k.fiyat) + ")", "btn-ana", function () { satinAl(k.pos, 1); }));
+      bar.appendChild(btn("📚 Bilgiyle Aç (-%25)", "", function () { soruModal("fetih"); }));
+    } else if (alinabilir) bar.appendChild(btn("🏰 Param yetmiyor", "btn-pasif", null, true));
+    if (imarYapilabilirVarMi(o)) bar.appendChild(btn("🏗️ İmar Yap", "", imarModal));
+    if (rakipVar(o)) bar.appendChild(btn("🤝 Takas", "", takasModal));
+    if (o.mulkler.length) bar.appendChild(btn("🏛️ Mülklerim", "", mulklerModal));
+    bar.appendChild(btn("➡️ Turu Bitir", "btn-ana", turuBitir));
+  }
+  function btn(text, cls, fn, pasif) { var b = el("button", "akbtn " + (cls || ""), text); if (pasif) b.disabled = true; if (fn) b.addEventListener("click", fn); return b; }
+
+  // ---------- Yol Kartı ----------
+  function seferKartiCek(bitince) {
+    if (oyun.si >= oyun.seferDeste.length) { oyun.seferDeste = karistir(SEFER.length); oyun.si = 0; }
+    var kart = SEFER[oyun.seferDeste[oyun.si]]; oyun.si++;
+    seferModal(kart, bitince);
+  }
+  function seferModal(kart, bitince) {
+    var o = aktif();
+    var oz = kart.ozel, bigNo = kart.sayi, altYazi = "kare ilerle", btnLbl = "➡️ " + kart.sayi + " kare ilerle", renk = "#5e4216";
+    if (oz) {
+      if (oz.tur === "tekrar") { altYazi = "ilerle + 🔁 TEKRAR"; btnLbl = "🔁 " + kart.sayi + " ilerle ve tekrar çek"; renk = "#1f6b4f"; }
+      else if (oz.tur === "geri") { bigNo = "−" + kart.sayi; altYazi = "kare GERİ"; btnLbl = "↩️ " + kart.sayi + " kare geri git"; renk = "#7d2b2b"; }
+      else if (oz.tur === "isinla") { bigNo = "➜"; altYazi = "ışınlan"; btnLbl = "✨ Işınlan"; renk = "#5b3a8a"; }
+      else if (oz.tur === "sakaci") { bigNo = "✦"; altYazi = "özel olay"; btnLbl = "✦ Uygula"; renk = "#8a5a13"; }
+    }
+    modalAc('<div class="kart-ust" style="background:' + (oz ? renk : "#7a5b1a") + '">🧭 YOL KARTI</div>' +
+      '<div class="sefer-buyuk"><div class="sb-no">' + bigNo + '</div><div class="sb-alt">' + altYazi + '</div></div>' +
+      '<h2 style="text-align:center;margin:.3em 0">' + kart.baslik + '</h2>' +
+      '<div class="kart-ogren">💡 ' + kart.bilgi + '</div>' +
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">' + btnLbl + '</button></div>');
+    Ses.cek();
+    $("#m-ilerle").onclick = function () {
+      modalKapat(); oyun.hareketYapildi = true;
+      logla("🏇 " + o.ad + " — " + kart.baslik, "");
+      if (oz) seferOzel(kart, o, bitince);
+      else { oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); }
+    };
+    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b && aktif().bot) b.click(); }, 1800);
+  }
+  function enYakinLiman(pos) { var L = [5, 15, 25, 35], i; for (i = 0; i < L.length; i++) if (L[i] > pos) return L[i]; return L[0]; }
+  function seferOzel(kart, o, bitince) {
+    var e = kart.ozel;
+    if (e.tur === "tekrar") { oyun.tekrarHak = true; oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); return; }
+    if (e.tur === "geri") { oyun.sonHareket = kart.sayi; ilerle(o, -kart.sayi, false, bitince); return; }
+    if (e.tur === "isinla") {
+      var hedef = (e.hedef === "liman") ? enYakinLiman(o.pos) : e.hedef;
+      var adim = (((hedef - o.pos) % 40) + 40) % 40;
+      if (adim === 0) { render(); kareyeDus(o, bitince); } else { oyun.sonHareket = adim; ilerle(o, adim, true, bitince); }
+      return;
+    }
+    if (e.tur === "sakaci") {
+      if (e.alt === "yer_degis") {
+        var en = null, az = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = (((p.pos - o.pos) % 40) + 40) % 40; if (d > 0 && d < az) { az = d; en = p; } } });
+        if (en) { var t = o.pos; o.pos = en.pos; en.pos = t; logla("🕵️ " + o.ad + " ile " + en.ad + " yer değiştirdi!", "vurgu"); render(); kareyeDus(o, bitince); return; }
+        logla("🕵️ Yer değişecek rakip yok.", "");
+      } else if (e.alt === "yakindan_al") {
+        var en2 = null, az2 = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = Math.min((((p.pos - o.pos) % 40) + 40) % 40, (((o.pos - p.pos) % 40) + 40) % 40); if (d < az2) { az2 = d; en2 = p; } } });
+        if (en2) { var m = Math.min(en2.para, e.deger); en2.para -= m; o.para += m; logla("⚔️ " + o.ad + ", " + en2.ad + "'den " + fmt(m) + " ganimet aldı.", "iyi"); }
+      } else if (e.alt === "herkesten") {
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var m = Math.min(p.para, e.deger); p.para -= m; o.para += m; } });
+        logla("🎉 " + o.ad + " herkesten " + e.deger + " akçe ihsan topladı.", "iyi");
+      }
+      render(); if (bitince) bekle(bitince, 700);
+      return;
+    }
+  }
+
+  function ilerle(o, adim, maasVar, bitince) {
+    oyun.hareketEden = o.id;
+    var yon = adim >= 0 ? 1 : -1, kalan = Math.abs(adim);
+    if (kalan === 0) { oyun.hareketEden = null; setTimeout(function () { kareyeDus(o, bitince); }, 120); return; }
+    (function adimAt() {
+      o.pos = (((o.pos + yon) % 40) + 40) % 40; Ses.adim();
+      if (yon > 0 && o.pos === 0 && maasVar) { var ul = V.ayarlar.maas + (isHunkar(o) ? 500 : 0); o.para += ul; logla("💰 " + o.ad + " Çarşı Meydanı'ndan geçti: +" + fmt(ul) + " emek kazancı" + (isHunkar(o) ? " (👑 Kethüdâ +500)" : "") + ".", "iyi"); }
+      render();
+      if (--kalan > 0) setTimeout(adimAt, 135);
+      else { oyun.hareketEden = null; render(); setTimeout(function () { kareyeDus(o, bitince); }, 220); }
+    })();
+  }
+  function hunkarId() {
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (ayakta.length < 2) return null;
+    var en = ayakta[0]; ayakta.forEach(function (p) { if (servet(p) > servet(en)) en = p; });
+    return en.id;
+  }
+  function isHunkar(o) { return o.id === hunkarId(); }
+
+  function kareyeDus(o, bitince) {
+    var k = K[o.pos]; vurgulaKare(o.pos);
+    setTimeout(function () {
+      var bot = !!bitince;
+      if (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") {
+        if (k.sahip == null) {
+          kareBilgiModal(o.pos, true);
+          if (bot) bekle(function () { botAlKarar(o, k, bitince); }, 1300);
+        } else if (k.sahip !== o.id && !k.ipotekli) { kiraOde(o, k); render(); if (bot) bekle(bitince, 600); }
+        else { render(); if (bot) bekle(bitince, 300); }
+      } else if (k.tip === "vergi") {
+        odeVeyaIflas(o, k.tutar, null, "💸 " + o.ad + " " + k.ad + " ödedi: -" + fmt(k.tutar)); oyun.hazine += k.tutar; render(); if (bot) bekle(bitince, 600);
+      } else if (k.tip === "kervansaray") {
+        if (oyun.hazine > 0) { var h = oyun.hazine; o.para += h; oyun.hazine = 0; logla("🏕️ " + o.ad + " Kervansaray Hazinesini topladı: +" + fmt(h) + "!", "iyi"); Ses.al(); }
+        else logla("🏕️ " + o.ad + " kervansarayda dinlendi.", "");
+        render(); if (bot) bekle(bitince, 500);
+      } else if (k.tip === "ferman") { kartCek("ferman", o, bitince); }
+      else if (k.tip === "vakca") { kartCek("vakca", o, bitince); }
+      else if (k.tip === "surgun") { logla("🚷 " + o.ad + " sürgün edildi!", "kotu"); esareteGonder(o); render(); if (bot) bekle(bitince, 600); }
+      else if (k.tip === "seref") { serefKare(o); if (bot) bekle(function () { modalKapat(); bitince(); }, 1200); }
+      else { render(); if (bot) bekle(bitince, 300); }
+    }, 280);
+  }
+
+  function serefKare(o) {
+    var k = K[o.pos];
+    var bereket = (k.ad === "Ahi Evran Ocağı") ? 500 : 200;
+    o.para += bereket; o.seref = (o.seref || 0) + 1;
+    logla("❖ " + o.ad + ", " + k.ad + "'e saygıyla uğradı — bankadan <b>+" + fmt(bereket) + "</b> hizmet bereketi.", "iyi");
+    Ses.al(); render();
+    modalAc(gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF OCAĞI</div><h2>' + k.ad + '</h2>' +
+      '<div class="seref-bereket">🏦 Bankadan <b>+' + fmt(bereket) + '</b> hizmet bereketi aldın</div>' +
+      '<p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Eyvallah 🙏</button></div>');
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function esareteGonder(o) { o.pos = 10; o.esaret = true; o.esaretTur = 0; Ses.esaret(); render(); }
+
+  // ---------- kira & para ----------
+  function kiraOde(o, k) { var sahip = sahipOyuncu(k.sahip), m = kiraHesap(k, sahip); odeVeyaIflas(o, m, sahip, "🏰 " + o.ad + ", " + sahip.ad + "'in " + k.ad + " dükkânına uğradı: -" + fmt(m)); render(); }
+  function kiraHesap(k, sahip) {
+    if (k.tip === "sehir") { if (k.imar > 0) return k.kira[k.imar]; return grupTamMi(k.grupKey, sahip.id) ? k.kira[0] * 2 : k.kira[0]; }
+    if (k.tip === "liman") return k.kira[Math.max(0, sahipLimanSayisi(sahip.id) - 1)];
+    if (k.tip === "utility") return (oyun.sonHareket || 6) * k.carpan[Math.min(1, sahipUtilSayisi(sahip.id) - 1)];
+    return 0;
+  }
+  function odeVeyaIflas(o, miktar, alacakli, mesaj) {
+    if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj, alacakli ? "" : "kotu"); if (miktar > 0) Ses.ode(); return; }
+    if (o.bot) {
+      botLikidite(o, miktar);
+      if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj + " (mülk satarak ödedi)", ""); Ses.ode(); }
+      else { logla(mesaj + " — ödeyemedi, iflas!", "kotu"); iflasEt(o, alacakli); }
+      return;
+    }
+    logla(mesaj + " — nakit yetersiz, mülk satıp ödeyebilirsin.", "kotu");
+    borcModal(o, miktar, alacakli);
+  }
+  function iflasEt(o, alacakli) {
+    o.iflas = true;
+    o.mulkler.forEach(function (pos) { var k = K[pos]; k.sahip = alacakli ? alacakli.id : null; k.imar = 0; k.ipotekli = false; if (alacakli) alacakli.mulkler.push(pos); });
+    if (alacakli) alacakli.para += Math.max(0, o.para);
+    o.mulkler = []; o.para = 0;
+    logla("🏳️ <b>" + o.ad + " iflas etti!</b> Mülkleri " + (alacakli ? alacakli.ad + "'e geçti." : "hazineye döndü."), "kotu");
+    galibiyetKontrol();
+  }
+  function satinAl(pos, oran) {
+    var o = aktif(), k = K[pos], fiyat = Math.round(k.fiyat * oran);
+    if (o.para < fiyat) { logla("Yetersiz akçe.", "kotu"); return; }
+    o.para -= fiyat; k.sahip = o.id; o.mulkler.push(pos); o.mulkler.sort(function (a, b) { return a - b; });
+    logla("🏰 " + o.ad + ", <b>" + k.ad + "</b> dükkânını açtı: -" + fmt(fiyat) + (oran < 1 ? " (bilgi indirimi!)" : ""), "iyi");
+    Ses.al(); modalKapat(); render();
+  }
+
+  // ---------- açık artırma (mezat) ----------
+  function grupTamamlarMi(k, p) {
+    if (k.tip === "sehir") return grupKareler(k.grupKey).every(function (g) { return g.pos === k.pos || g.sahip === p.id; });
+    if (k.tip === "liman") return sahipLimanSayisi(p.id) >= 1;
+    return false;
+  }
+  function mezat(pos, bitince) {
+    var k = K[pos];
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (!ayakta.length) { if (bitince) bekle(bitince, 300); return; }
+    var d = { pos: pos, yuksek: 0, yuksekId: null, aktif: ayakta.map(function (p) { return p.id; }), step: Math.max(50, Math.round(k.fiyat * 0.1)), sira: 0, bitince: bitince };
+    logla("🔨 <b>" + k.ad + "</b> açık artırmaya çıktı!", "vurgu");
+    mezatTur(d);
+  }
+  function mezatTur(d) {
+    if (d.aktif.length <= 1) { mezatBitir(d); return; }
+    if (d.sira >= d.aktif.length) d.sira = 0;
+    var id = d.aktif[d.sira];
+    if (id === d.yuksekId) { d.sira++; mezatTur(d); return; }
+    var p = sahipOyuncu(id), k = K[d.pos], yeni = d.yuksek + d.step;
+    if (p.bot) {
+      var maks = Math.round(k.fiyat * (grupTamamlarMi(k, p) ? 1.4 : 0.85));
+      if (yeni <= maks && yeni <= p.para) { d.yuksek = yeni; d.yuksekId = id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); d.sira++; bekle(function () { mezatTur(d); }, 650); }
+      else { d.aktif.splice(d.sira, 1); logla("🔨 " + p.ad + " çekildi.", ""); bekle(function () { mezatTur(d); }, 450); }
+    } else mezatModal(d, p, yeni);
+  }
+  function mezatModal(d, p, yeni) {
+    var k = K[d.pos], verebilir = yeni <= p.para;
+    modalAc('<div class="kart-ust" style="background:#6b4d1f">🔨 AÇIK ARTIRMA — ' + k.ad + '</div>' +
+      (k.tip === "sehir" ? gorselImg(k.ad) : '') +
+      '<p class="m-bilgi">Liste fiyatı <b>' + fmt(k.fiyat) + '</b>. En yüksek teklif: <b>' + (d.yuksek ? fmt(d.yuksek) + " (" + sahipOyuncu(d.yuksekId).ad + ")" : "yok") + '</b><br>Sıra sende — nakdin: <b>' + fmt(p.para) + '</b></p>' +
+      '<div class="m-btnlar">' +
+      (verebilir ? '<button class="akbtn btn-ana" id="mz-teklif">🔨 Teklif Ver (' + fmt(yeni) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetmez</button>') +
+      '<button class="akbtn" id="mz-cekil">🚪 Çekil</button></div>', true);
+    var b;
+    if ((b = $("#mz-teklif"))) b.onclick = function () { d.yuksek = yeni; d.yuksekId = p.id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); modalKapat(); d.sira++; mezatTur(d); };
+    $("#mz-cekil").onclick = function () { var i = d.aktif.indexOf(p.id); if (i >= 0) d.aktif.splice(i, 1); logla("🔨 " + p.ad + " çekildi.", ""); modalKapat(); mezatTur(d); };
+  }
+  function mezatBitir(d) {
+    var k = K[d.pos];
+    if (d.yuksekId != null && d.yuksek > 0) {
+      var p = sahipOyuncu(d.yuksekId);
+      p.para -= d.yuksek; k.sahip = p.id; p.mulkler.push(d.pos); p.mulkler.sort(function (a, b) { return a - b; });
+      logla("🔨 <b>" + k.ad + "</b>, " + fmt(d.yuksek) + " ile " + p.ad + "'e satıldı!", "iyi"); Ses.al();
+    } else logla("🔨 " + k.ad + " alıcı bulamadı, boş kaldı.", "");
+    modalKapat(); render(); if (d.bitince) bekle(d.bitince, 400);
+  }
+
+  // ---------- imar ----------
+  function grupKareler(key) { return K.filter(function (k) { return k.tip === "sehir" && k.grupKey === key; }); }
+  function grupTamMi(key, id) { return grupKareler(key).every(function (k) { return k.sahip === id && !k.ipotekli; }); }
+  function sahipLimanSayisi(id) { return K.filter(function (k) { return k.tip === "liman" && k.sahip === id; }).length; }
+  function sahipUtilSayisi(id) { return K.filter(function (k) { return k.tip === "utility" && k.sahip === id; }).length; }
+  function imarYapilabilirVarMi(o) { return K.some(function (k) { return k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id) && k.imar < 5 && o.para >= k.imarBedeli && imarDengeli(k, 1); }); }
+  function imarDengeli(k, art) { var g = grupKareler(k.grupKey), min = Math.min.apply(null, g.map(function (x) { return x.imar; })); return (k.imar + art) - min <= 1; }
+  function imarYap(pos) {
+    var o = aktif(), k = K[pos];
+    if (!grupTamMi(k.grupKey, o.id) || k.imar >= 5 || !imarDengeli(k, 1) || o.para < k.imarBedeli) { logla("İmar koşulu sağlanmadı.", "kotu"); return; }
+    o.para -= k.imarBedeli; k.imar++; oyun._yeniImar = pos;
+    logla("🏗️ " + o.ad + ", " + k.ad + "'e <b>" + V.imarKademeleri[k.imar - 1].ad + "</b> yaptırdı: -" + fmt(k.imarBedeli), "iyi");
+    Ses.imar(); render(); imarModal();
+  }
+
+  // ---------- olay kartları ----------
+  function kartCek(tur, o, bitince) {
+    var deste = tur === "ferman" ? V.ferman : V.vakca, sira = tur === "ferman" ? oyun.fermanDeste : oyun.vakcaDeste, ref = tur === "ferman" ? "fi" : "vi";
+    if (oyun[ref] >= sira.length) oyun[ref] = 0;
+    var kart = deste[sira[oyun[ref]]]; oyun[ref]++;
+    kartModal(tur, kart, o, bitince);
+  }
+  function imarToplam(id) { return K.filter(function (k) { return k.tip === "sehir" && k.sahip === id; }).reduce(function (s, k) { return s + k.imar; }, 0); }
+  function kartUygula(kart, o, bitince) {
+    var e = kart.etki, n;
+    switch (e.tur) {
+      case "para_al": o.para += e.deger; logla("📜 " + o.ad + ": +" + fmt(e.deger), "iyi"); break;
+      case "para_ver": odeVeyaIflas(o, e.deger, null, "📜 " + o.ad + ": -" + fmt(e.deger)); oyun.hazine += e.deger; break;
+      case "mulk_basina_al": n = o.mulkler.length * e.deger; o.para += n; logla("📜 " + o.ad + " " + o.mulkler.length + " mülkünden +" + fmt(n), "iyi"); break;
+      case "mulk_basina_ver": n = o.mulkler.length * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " " + o.mulkler.length + " mülkü için: -" + fmt(n)); break;
+      case "imar_basina_al": n = imarToplam(o.id) * e.deger; o.para += n; logla("📜 " + o.ad + " " + imarToplam(o.id) + " imardan +" + fmt(n), "iyi"); break;
+      case "imar_basina_ver": n = imarToplam(o.id) * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " " + imarToplam(o.id) + " imar yapısı için: -" + fmt(n)); break;
+      case "liman_basina_al": n = sahipLimanSayisi(o.id) * e.deger; o.para += n; logla("📜 " + o.ad + " " + sahipLimanSayisi(o.id) + " limandan +" + fmt(n), "iyi"); break;
+      case "liman_basina_ver": n = sahipLimanSayisi(o.id) * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " limanları için: -" + fmt(n)); break;
+      case "en_degerli_imar_yik":
+        var h = null; K.forEach(function (k) { if (k.tip === "sehir" && k.sahip === o.id && k.imar > 0 && (!h || k.imar > h.imar || (k.imar === h.imar && k.fiyat > h.fiyat))) h = k; });
+        if (h) { h.imar--; oyun._yeniImar = -1; logla("📜 " + o.ad + " — " + h.ad + "'de bir yapı yıkıldı.", "kotu"); } else logla("📜 " + o.ad + " — yıkılacak imar yok, etkisiz.", ""); break;
+      case "herkesten_al": oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var m = Math.min(p.para, e.deger); p.para -= m; o.para += m; } }); logla("📜 " + o.ad + " herkesten " + e.deger + " akçe topladı.", "iyi"); break;
+      case "herkese_ver": oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) odeVeyaIflas(o, e.deger, p, "📜 " + o.ad + " → " + p.ad + ": " + e.deger); }); break;
+      case "basa_git_maas_al": o.pos = 0; o.para += V.ayarlar.maas; logla("📜 " + o.ad + " Çarşı Meydanı'na döndü: +" + fmt(V.ayarlar.maas), "iyi"); break;
+      case "esarete_git": esareteGonder(o); logla("📜 " + o.ad + " Pabucu Dama'ya düştü.", "kotu"); break;
+      case "esaretten_cik_karti": o.esaretKarti++; logla("📜 " + o.ad + " bir 'Kefalet' kartı aldı — Pabucu Dama'dan kurtarır.", "iyi"); break;
+      case "ilerle_kareye": o.pos = ((e.deger % 40) + 40) % 40; modalKapat(); render(); kareyeDus(o, bitince); return;
+    }
+    modalKapat(); render(); if (bitince) bekle(bitince, 600);
+  }
+  function kartModal(tur, kart, o, bitince) {
+    var renk = tur === "ferman" ? "#7d2b2b" : "#1f5c4d", etiket = tur === "ferman" ? "FÜTÜVVET" : "ÇARŞI VAK'ASI";
+    var etki = etkiOzet(kart.etki);
+    modalAc('<div class="kart-ust" style="background:' + renk + '">' + (tur === "ferman" ? "📜 " : "✴️ ") + etiket + '</div><h2>' + kart.baslik + '</h2><p class="m-bilgi">' + kart.metin + '</p>' +
+      (etki ? '<div class="m-eko" style="text-align:center;font-weight:700">▶ ' + etki + '</div>' : '') +
+      '<div class="kart-ogren">💡 ' + kart.ogren + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-uygula">Uygula</button></div>');
+    $("#m-uygula").onclick = function () { kartUygula(kart, o, bitince); };
+    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b && aktif().bot) b.click(); }, 1600);
+  }
+  function etkiOzet(e) {
+    var t = { mulk_basina_al: "Her mülkün için al", mulk_basina_ver: "Her mülkün için öde", imar_basina_al: "Her imar yapın için al", imar_basina_ver: "Her imar yapın için öde", liman_basina_al: "Her limanın için al", liman_basina_ver: "Her limanın için öde", en_degerli_imar_yik: "En değerli yapın yıkılır", para_al: "Hazineden al", para_ver: "Hazineye öde", herkesten_al: "Herkesten al", herkese_ver: "Herkese ver" }[e.tur];
+    if (!t) return "";
+    return e.deger ? t + " · " + fmt(e.deger) : t;
+  }
+
+  // ---------- esaret ----------
+  function fidyeOde(zorunlu) { var o = aktif(); odeVeyaIflas(o, V.ayarlar.esaretCikisBedeli, null, "💰 " + o.ad + " fidye ödedi (" + fmt(V.ayarlar.esaretCikisBedeli) + "), serbest."); o.esaret = false; render(); }
+  function fermanCikis() { var o = aktif(); o.esaretKarti--; o.esaret = false; logla("📜 " + o.ad + " fermanla esaretten çıktı.", "iyi"); render(); }
+  function esaretGec() {
+    var o = aktif(); o.esaretTur++;
+    if (o.esaretTur >= 3 && o.para >= V.ayarlar.esaretCikisBedeli) { logla(o.ad + " 3. turda fidye ödemek zorunda kaldı.", "kotu"); fidyeOde(true); o.esaret = false; }
+    else logla("⛓️ " + o.ad + " esarette bekliyor (" + o.esaretTur + "/3).", "");
+    oyun.hareketYapildi = true; render();
+  }
+
+  // ---------- BOTLAR ----------
+  function botRezerv() { return { kolay: 4500, orta: 2500, zor: 1200 }[oyun.botZorluk] || 2500; }
+  function botTuru() {
+    var o = aktif(); if (!o || !o.bot || oyun.bitti || oyun.duraklat) return;
+    if (o.esaret) { bekle(botEsaret, 900); return; }
+    bekle(function () { seferKartiCek(botCozum); }, 700);
+  }
+  function botEsaret() {
+    var o = aktif();
+    if (o.esaretKarti > 0) { fermanCikis(); bekle(function () { seferKartiCek(botCozum); }, 800); }
+    else if (o.para >= V.ayarlar.esaretCikisBedeli + 1500) { fidyeOde(); bekle(function () { seferKartiCek(botCozum); }, 800); }
+    else { esaretGec(); bekle(turuBitir, 800); }
+  }
+  function botAlKarar(o, k, bitince) {
+    var iste = o.para - k.fiyat >= botRezerv();
+    if (iste && oyun.botZorluk === "kolay" && Math.random() < 0.3) iste = false;
+    if (iste) { satinAl(o.pos, 1); if (bitince) bekle(bitince, 700); }
+    else { modalKapat(); render(); logla("🤖 " + o.ad + ", " + k.ad + "'i almadı — açık artırmaya!", ""); mezat(o.pos, bitince); }
+  }
+  function botCozum() {
+    bekle(function () {
+      var o = aktif();
+      var limit = { kolay: 1, orta: 3, zor: 6 }[oyun.botZorluk] || 3, sayac = 0;
+      while (sayac < limit) {
+        var aday = null;
+        K.forEach(function (k) { if (k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id) && k.imar < 5 && imarDengeli(k, 1) && o.para - k.imarBedeli >= botRezerv()) { if (!aday || k.imarBedeli < aday.imarBedeli) aday = k; } });
+        if (!aday) break;
+        o.para -= aday.imarBedeli; aday.imar++; oyun._yeniImar = aday.pos;
+        logla("🏗️ " + o.ad + ", " + aday.ad + "'e " + V.imarKademeleri[aday.imar - 1].ad + " yaptırdı.", "iyi");
+        sayac++;
+      }
+      if (sayac > 0) Ses.imar();
+      render();
+      var devam = function () { render(); bekle(turuBitir, 650); };
+      if (!botTakasDene(o, devam)) devam();
+    }, 500);
+  }
+
+  // ---------- tur ----------
+  function turuBitir() {
+    if (oyun.tekrarHak && !aktif().iflas) {
+      oyun.tekrarHak = false; oyun.tekrarSayac = (oyun.tekrarSayac || 0) + 1;
+      if (oyun.tekrarSayac >= 3) { oyun.tekrarSayac = 0; logla("🔁 " + aktif().ad + " üst üste 3 tekrar — yorgun düşüp esarete uğradı!", "kotu"); esareteGonder(aktif()); }
+      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot && !oyun.duraklat) bekle(botTuru, 650); return; }
+    } else oyun.tekrarSayac = 0;
+    oyun.elGecti = (oyun.elGecti || 0) + 1;
+    if (oyun.turLimiti && Math.floor(oyun.elGecti / oyun.oyuncular.length) >= oyun.turLimiti) {
+      oyun.bitti = true; temizleKayit(); logla("⏳ Tur limiti doldu! En zengin medeniyet kazanır.", "vurgu"); sonucModal(null); return;
+    }
+    var n = oyun.oyuncular.length, sayac = 0;
+    do { oyun.sira = (oyun.sira + 1) % n; sayac++; } while (oyun.oyuncular[oyun.sira].iflas && sayac <= n);
+    oyun.hareketYapildi = false; oyun.sonHareket = 0; kaydet(); render();
+    if (!oyun.bitti && aktif().bot && !oyun.duraklat) bekle(botTuru, 650);
+  }
+  function galibiyetKontrol() {
+    var ayakta = oyun.oyuncular.filter(function (o) { return !o.iflas; });
+    if (ayakta.length <= 1 && oyun.oyuncular.length > 1) { oyun.bitti = true; temizleKayit(); sonucModal(ayakta[0]); }
+  }
+  function servet(o) { var s = o.para; o.mulkler.forEach(function (pos) { var k = K[pos]; s += k.ipotekli ? k.ipotek : k.fiyat; if (k.tip === "sehir") s += k.imar * k.imarBedeli; }); return s; }
+
+  // ---------- TAKAS ----------
+  function rakipVar(o) { return oyun.oyuncular.some(function (p) { return p.id !== o.id && !p.iflas; }); }
+  function arrCikar(a, x) { var i = a.indexOf(x); if (i >= 0) a.splice(i, 1); }
+  function takasEdilebilir(k) {
+    if (k.sahip == null || k.ipotekli) return false;
+    if (k.tip === "sehir") { if (k.imar > 0) return false; return grupKareler(k.grupKey).every(function (g) { return g.imar === 0; }); }
+    return k.tip === "liman" || k.tip === "utility";
+  }
+  function oyuncuMulkleri(id) { return K.filter(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip === id && takasEdilebilir(k); }); }
+  function takasDeger(poslar) { return poslar.reduce(function (s, pos) { return s + (K[pos].ipotekli ? K[pos].ipotek : K[pos].fiyat); }, 0); }
+
+  function takasModal() {
+    var o = aktif();
+    var rakipler = oyun.oyuncular.filter(function (p) { return p.id !== o.id && !p.iflas; });
+    if (!rakipler.length) return;
+    takasCiz(o, rakipler, rakipler[0].id);
+  }
+  function takasCiz(o, rakipler, hedefId) {
+    var T = sahipOyuncu(hedefId);
+    function mulkListe(p, taraf) {
+      var liste = oyuncuMulkleri(p.id);
+      if (!liste.length) return '<div class="takas-bos">(takasa uygun mülk yok)</div>';
+      return liste.map(function (k) {
+        var renk = k.tip === "sehir" ? k.grup.renk : "#888";
+        return '<label class="takas-mulk"><input type="checkbox" data-taraf="' + taraf + '" data-pos="' + k.pos + '"><span class="msw" style="background:' + renk + '"></span>' + k.ad + ' <span class="takas-fy">' + k.fiyat + '</span></label>';
+      }).join("");
+    }
+    var rakipSec = rakipler.length > 1
+      ? '<select id="takas-hedef">' + rakipler.map(function (r) { return '<option value="' + r.id + '"' + (r.id === hedefId ? " selected" : "") + '>' + r.ad + (r.bot ? " 🤖" : "") + '</option>'; }).join("") + '</select>'
+      : '<b>' + T.ad + (T.bot ? " 🤖" : "") + '</b>';
+    var html = '<div class="kart-ust" style="background:#34495e">🤝 TAKAS TEKLİFİ</div>' +
+      '<div class="takas-grid">' +
+        '<div class="takas-col"><div class="takas-bas" style="color:' + o.renk + '">SEN verirsin</div>' + mulkListe(o, "ver") +
+          '<div class="takas-para">💰 <input type="number" id="ver-akce" min="0" max="' + o.para + '" value="0"> akçe</div>' +
+          (o.esaretKarti > 0 ? '<div class="takas-para">📜 <input type="number" id="ver-ferman" min="0" max="' + o.esaretKarti + '" value="0"> ferman</div>' : "") +
+        '</div>' +
+        '<div class="takas-col"><div class="takas-bas">' + rakipSec + ' verir</div>' + mulkListe(T, "al") +
+          '<div class="takas-para">💰 <input type="number" id="al-akce" min="0" max="' + T.para + '" value="0"> akçe</div>' +
+          (T.esaretKarti > 0 ? '<div class="takas-para">📜 <input type="number" id="al-ferman" min="0" max="' + T.esaretKarti + '" value="0"> ferman</div>' : "") +
+        '</div>' +
+      '</div>' +
+      '<div class="m-btnlar"><button class="akbtn" id="takas-iptal">Vazgeç</button><button class="akbtn btn-ana" id="takas-gonder">Teklifi Gönder</button></div>';
+    modalAc(html, true);
+    if ($("#takas-hedef")) $("#takas-hedef").onchange = function () { takasCiz(o, rakipler, parseInt(this.value, 10)); };
+    $("#takas-iptal").onclick = function () { modalKapat(); render(); };
+    $("#takas-gonder").onclick = function () {
+      var teklif = takasTopla(o, T);
+      if (teklif.ver.mulkler.length + teklif.al.mulkler.length + teklif.ver.akce + teklif.al.akce + teklif.ver.ferman + teklif.al.ferman === 0) { logla("Boş teklif gönderilemez.", "kotu"); return; }
+      takasGonder(teklif);
+    };
+  }
+  function takasTopla(o, T) {
+    function sel(taraf) { return [].slice.call(document.querySelectorAll('input[data-taraf="' + taraf + '"]:checked')).map(function (c) { return parseInt(c.dataset.pos, 10); }); }
+    function num(id) { var e = $("#" + id); return e ? Math.max(0, parseInt(e.value, 10) || 0) : 0; }
+    return { verenId: o.id, alanId: T.id,
+      ver: { mulkler: sel("ver"), akce: Math.min(num("ver-akce"), o.para), ferman: Math.min(num("ver-ferman"), o.esaretKarti) },
+      al: { mulkler: sel("al"), akce: Math.min(num("al-akce"), T.para), ferman: Math.min(num("al-ferman"), T.esaretKarti) } };
+  }
+  function takasOzet(teklif) {
+    var V1 = sahipOyuncu(teklif.verenId), A = sahipOyuncu(teklif.alanId);
+    function liste(t) { var p = []; t.mulkler.forEach(function (pos) { p.push(K[pos].ad); }); if (t.akce) p.push(fmt(t.akce)); if (t.ferman) p.push("📜×" + t.ferman); return p.length ? p.join(", ") : "—"; }
+    return '<div class="takas-ozet"><b style="color:' + V1.renk + '">' + V1.ad + '</b> verir: ' + liste(teklif.ver) + '<br><b style="color:' + A.renk + '">' + A.ad + '</b> verir: ' + liste(teklif.al) + '</div>';
+  }
+  function takasGonder(teklif) {
+    var A = sahipOyuncu(teklif.alanId);
+    if (A.bot) takasSonucModal(teklif, takasDegerlendir(teklif, A));
+    else takasOnayModal(teklif, null);
+  }
+  function takasOnayModal(teklif, devam) {
+    var A = sahipOyuncu(teklif.alanId), V1 = sahipOyuncu(teklif.verenId);
+    modalAc('<div class="kart-ust" style="background:#34495e">🤝 TAKAS TEKLİFİ</div><p class="m-bilgi"><b>' + V1.ad + '</b> takas teklif ediyor:</p>' + takasOzet(teklif) + '<p class="m-bilgi" style="margin-top:10px"><b style="color:' + A.renk + '">' + A.ad + '</b>, kabul ediyor musun?</p><div class="m-btnlar"><button class="akbtn" id="takas-ret">✗ Ret</button><button class="akbtn btn-ana" id="takas-kabul">✓ Kabul</button></div>', true);
+    $("#takas-kabul").onclick = function () { takasUygula(teklif); logla("🤝 " + A.ad + " takası kabul etti.", "iyi"); modalKapat(); if (devam) devam(); else render(); };
+    $("#takas-ret").onclick = function () { logla("🤝 " + A.ad + " takası reddetti.", ""); modalKapat(); if (devam) devam(); else render(); };
+  }
+  function takasSonucModal(teklif, kabul) {
+    var A = sahipOyuncu(teklif.alanId);
+    if (kabul) takasUygula(teklif);
+    modalAc('<div class="kart-ust" style="background:' + (kabul ? "#1f6b4f" : "#7d2b2b") + '">🤝 TAKAS</div>' + takasOzet(teklif) + '<p class="m-bilgi" style="text-align:center;margin-top:12px">' + (kabul ? "✓ <b>" + A.ad + "</b> teklifi kabul etti!" : "✗ <b>" + A.ad + "</b> teklifi reddetti.") + '</p><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Tamam</button></div>');
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function takasUygula(teklif) {
+    var V1 = sahipOyuncu(teklif.verenId), A = sahipOyuncu(teklif.alanId);
+    teklif.ver.mulkler.forEach(function (pos) { K[pos].sahip = A.id; arrCikar(V1.mulkler, pos); A.mulkler.push(pos); });
+    teklif.al.mulkler.forEach(function (pos) { K[pos].sahip = V1.id; arrCikar(A.mulkler, pos); V1.mulkler.push(pos); });
+    V1.para += teklif.al.akce - teklif.ver.akce; A.para += teklif.ver.akce - teklif.al.akce;
+    V1.esaretKarti += teklif.al.ferman - teklif.ver.ferman; A.esaretKarti += teklif.ver.ferman - teklif.al.ferman;
+    V1.mulkler.sort(function (a, b) { return a - b; }); A.mulkler.sort(function (a, b) { return a - b; });
+    Ses.al();
+  }
+  function takasDegerlendir(teklif, bot) {
+    if (teklif.al.akce > bot.para - 300) return false;
+    var alinan = takasDeger(teklif.ver.mulkler) + teklif.ver.akce + teklif.ver.ferman * 500;
+    var verilen = takasDeger(teklif.al.mulkler) + teklif.al.akce + teklif.al.ferman * 500;
+    var bonus = 0, ceza = 0;
+    teklif.ver.mulkler.forEach(function (pos) {
+      var k = K[pos]; if (k.tip !== "sehir") return;
+      var grup = grupKareler(k.grupKey);
+      if (grup.every(function (g) { return g.pos === pos || g.sahip === bot.id; })) bonus += takasDeger(grup.map(function (g) { return g.pos; })) * 0.8;
+    });
+    teklif.al.mulkler.forEach(function (pos) {
+      var k = K[pos]; if (k.tip === "sehir" && grupTamMi(k.grupKey, bot.id)) ceza += takasDeger(grupKareler(k.grupKey).map(function (g) { return g.pos; })) * 0.8;
+    });
+    return (alinan + bonus) - (verilen + ceza) >= 0;
+  }
+  function botTakasDene(o, devam) {
+    var hedef = null;
+    var anahtarlar = Object.keys(V.gruplar);
+    for (var i = 0; i < anahtarlar.length; i++) {
+      var grup = grupKareler(anahtarlar[i]); if (!grup.length) continue;
+      var benim = grup.filter(function (g) { return g.sahip === o.id; }).length;
+      if (benim === grup.length - 1) {
+        var eksik = null; grup.forEach(function (g) { if (g.sahip !== o.id) eksik = g; });
+        if (eksik && eksik.sahip != null && !eksik.ipotekli && eksik.imar === 0) {
+          var fiyat = Math.round(eksik.fiyat * 1.4);
+          if (o.para - fiyat >= 1500) { hedef = { X: eksik, T: sahipOyuncu(eksik.sahip), fiyat: fiyat }; break; }
+        }
+      }
+    }
+    if (!hedef) return false;
+    var teklif = { verenId: o.id, alanId: hedef.T.id, ver: { mulkler: [], akce: hedef.fiyat, ferman: 0 }, al: { mulkler: [hedef.X.pos], akce: 0, ferman: 0 } };
+    if (hedef.T.bot) {
+      if (takasDegerlendir(teklif, hedef.T)) { takasUygula(teklif); logla("🤝 " + o.ad + ", " + hedef.T.ad + " ile takas yaptı: " + hedef.X.ad + " ↔ " + fmt(hedef.fiyat), "iyi"); }
+      else logla("🤝 " + hedef.T.ad + ", " + o.ad + "'in " + hedef.X.ad + " teklifini reddetti.", "");
+      return false;
+    }
+    logla("🤝 " + o.ad + " sana " + hedef.X.ad + " için " + fmt(hedef.fiyat) + " teklif ediyor!", "vurgu");
+    takasOnayModal(teklif, devam);
+    return true;
+  }
+
+  // ---------- modallar ----------
+  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; }
+  function modalKapat() { $("#modal").style.display = "none"; $("#modal").innerHTML = ""; }
+
+  function kiraTablosu(k) {
+    var r = "";
+    for (var i = 0; i < 5; i++) r += '<div class="bina-satir"><span>' + BINA_IKON[i] + ' ' + V.imarKademeleri[i].ad + '</span><b>' + k.kira[i + 1] + '</b></div>';
+    return '<div class="bina-satir"><span>Boş arsa</span><b>' + k.kira[0] + '</b></div>' + r;
+  }
+  function kareBilgiModal(pos, dustu) {
+    var k = K[pos], html = "", o = aktif();
+    if (k.tip === "sehir") {
+      html = gorselImg(k.ad) + '<div class="m-serit" style="background:' + k.grup.renk + '"></div><div class="m-bolge">' + k.grup.ad + '</div><h2>' + k.ad + '</h2><div class="m-tarih">🗓️ ' + (k.tarih || "") + '</div><p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
+        '<div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + ' · İmar/kademe: ' + fmt(k.imarBedeli) + '<br><div style="margin-top:6px"><b>Vergi (kira):</b>' + kiraTablosu(k) + '</div></div>';
+    } else if (k.tip === "liman") {
+      html = '<div class="m-ikon">⚓</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Kira (liman sayısına göre): ' + k.kira.join(" / ") + '</div>';
+    } else if (k.tip === "utility") {
+      html = '<div class="m-ikon">' + (k.ad === "Darphane" ? "🪙" : "💠") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Kira = son Sefer sayısı × ' + k.carpan[0] + ' (tek) / ×' + k.carpan[1] + ' (iki tesis)</div>';
+    } else if (k.tip === "seref") {
+      html = gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF OCAĞI</div><h2>' + k.ad + '</h2><div class="m-tarih">🗓️ ' + (k.tarih || "") + '</div><p class="m-bilgi">' + (k.bilgi || "") + '</p><div class="m-eko">' + (k.kural || "") + '</div>';
+    } else html = '<div class="m-ikon">' + ({ baslangic: "⚖️", esaret: "👞", kervansaray: "🏕️", surgun: "🚷", ferman: "📜", vakca: "✴️", vergi: "💰" }[k.tip] || "") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + (k.aciklama || "") + '</p>' + (k.kural ? '<div class="m-eko">' + k.kural + '</div>' : '');
+    var alt = '<div class="m-btnlar">';
+    if (dustu && (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip == null) {
+      if (o.para >= k.fiyat) alt += '<button class="akbtn btn-ana" id="m-al">🏪 Dükkân Aç (' + fmt(k.fiyat) + ')</button>';
+      if (!o.bot) alt += '<button class="akbtn" id="m-bilgi">📚 Bilgiyle Aç (-%25)</button><button class="akbtn btn-pasif" id="m-vazgec">Vazgeç</button>';
+    } else alt += '<button class="akbtn btn-ana" id="m-kapat">Kapat</button>';
+    alt += '</div>'; modalAc(html + alt);
+    var b;
+    if ((b = $("#m-al"))) b.onclick = function () { satinAl(pos, 1); };
+    if ((b = $("#m-bilgi"))) b.onclick = function () { soruModal("fetih"); };
+    if ((b = $("#m-vazgec"))) b.onclick = function () { modalKapat(); render(); mezat(pos, null); };
+    if ((b = $("#m-kapat"))) b.onclick = function () { modalKapat(); render(); };
+  }
+
+  function soruModal(amac) {
+    var s = V.sorular[Math.floor(Math.random() * V.sorular.length)];
+    var siklar = s.secenekler.map(function (sk, i) { return '<button class="sik" data-i="' + i + '">' + String.fromCharCode(65 + i) + ') ' + sk + '</button>'; }).join("");
+    modalAc('<div class="kart-ust" style="background:#5b3a8a">📚 BİLGİ SORUSU <span class="sev sev-' + s.seviye + '">' + s.seviye + '</span></div><p class="soru-metin">' + s.soru + '</p><div class="siklar">' + siklar + '</div><div id="soru-sonuc"></div>');
+    document.querySelectorAll(".sik").forEach(function (b) {
+      b.onclick = function () {
+        var i = parseInt(b.dataset.i, 10), dogru = (i === s.dogru);
+        document.querySelectorAll(".sik").forEach(function (x) { x.disabled = true; });
+        document.querySelectorAll(".sik")[s.dogru].classList.add("dogru");
+        if (!dogru) b.classList.add("yanlis");
+        $("#soru-sonuc").innerHTML = '<div class="soru-acik ' + (dogru ? "iyi" : "kotu") + '">' + (dogru ? "✓ Doğru! " : "✗ Yanlış. ") + s.aciklama + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-devam">Devam</button></div>';
+        $("#m-devam").onclick = function () { soruSonuc(amac, dogru); };
+      };
+    });
+  }
+  function soruSonuc(amac, dogru) {
+    var o = aktif();
+    if (amac === "fetih") { var k = K[o.pos]; if (dogru) { logla("📚✓ " + o.ad + " doğru cevapladı, " + k.ad + " %25 indirimli!", "iyi"); satinAl(o.pos, 0.75); } else { logla("📚✗ Yanlış. " + k.ad + " tam fiyattan alınabilir.", "kotu"); modalKapat(); render(); } }
+    else if (amac === "esaret") { if (dogru) { o.esaret = false; logla("📚✓ " + o.ad + " bilgiyle esaretten çıktı!", "iyi"); } else { o.esaretTur++; logla("📚✗ Yanlış, esaret sürüyor.", "kotu"); } modalKapat(); render(); }
+  }
+
+  function imarModal() {
+    var o = aktif();
+    var sh = K.filter(function (k) { return k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id); });
+    var liste = sh.map(function (k) {
+      var ust = k.imar >= 5, sonraki = ust ? "—" : (BINA_IKON[k.imar] + " " + V.imarKademeleri[k.imar].ad), ok = !ust && imarDengeli(k, 1) && o.para >= k.imarBedeli;
+      var simdi = k.imar > 0 ? BINA_IKON[k.imar - 1] + " " + V.imarKademeleri[k.imar - 1].ad : "boş arsa";
+      return '<div class="imar-row"><span><b>' + k.ad + '</b> · ' + simdi + '</span>' + (ust ? '<span class="bitti-rozet">Ahi Baba ★</span>' : '<button class="akbtn imbtn" data-pos="' + k.pos + '"' + (ok ? "" : " disabled") + '>+ ' + sonraki + ' (' + fmt(k.imarBedeli) + ')</button>') + '</div>';
+    }).join("") || "<p>İmar için bir bölgenin tamamına sahip olmalısın.</p>";
+    modalAc('<div class="kart-ust" style="background:#6b4d1f">🏗️ RÜTBE</div><p class="m-bilgi">Sektörün tüm dükkânları sendeyse rütbe yükselt: Yamak🧹→Çırak🔨→Kalfa🛠️→Usta🏅→Ahi Baba🏵️.</p><div class="imar-liste">' + liste + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    document.querySelectorAll(".imbtn").forEach(function (b) { b.onclick = function () { imarYap(parseInt(b.dataset.pos, 10)); }; });
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  // ---------- varlık yönetimi (yapı sat / ipotek) ----------
+  function imarSatBir(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.tip !== "sehir" || k.imar <= 0) return;
+    var maxi = Math.max.apply(null, grupKareler(k.grupKey).map(function (g) { return g.imar; }));
+    if (k.imar < maxi) { logla("Önce daha yüksek rütbeli dükkândan sat (dengeli).", "kotu"); return; }
+    var geri = Math.round(k.imarBedeli / 2); k.imar--; o.para += geri;
+    logla("🏚️ " + o.ad + ", " + k.ad + "'deki yapıyı sattı: +" + fmt(geri), ""); render();
+  }
+  function ipotekEt(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.ipotekli) return;
+    if (k.tip === "sehir" && grupKareler(k.grupKey).some(function (g) { return g.imar > 0; })) { logla("Önce bu bölgedeki yapıları sat.", "kotu"); return; }
+    k.ipotekli = true; o.para += k.ipotek; logla("🏦 " + k.ad + " ipotek edildi: +" + fmt(k.ipotek), ""); render();
+  }
+  function ipotekKaldir(pos) {
+    var o = aktif(), k = K[pos], bedel = Math.round(k.ipotek * 1.1);
+    if (o.para < bedel) { logla("İpoteği kaldıracak akçe yok.", "kotu"); return; }
+    o.para -= bedel; k.ipotekli = false; logla("🏦 " + k.ad + " ipoteği kaldırıldı: -" + fmt(bedel), ""); render();
+  }
+  function nakdeCevrilebilir(o) {
+    var t = 0;
+    K.forEach(function (k) {
+      if (k.sahip !== o.id) return;
+      if (k.tip === "sehir") t += k.imar * Math.round(k.imarBedeli / 2);
+      if (!k.ipotekli) t += k.ipotek;
+    });
+    return t;
+  }
+  function varlikSatir(o) {
+    if (!o.mulkler.length) return "<p>Mülkün yok — satacak bir şeyin yok.</p>";
+    return o.mulkler.map(function (pos) {
+      var k = K[pos];
+      var serit = '<span class="msw" style="background:' + (k.tip === "sehir" ? k.grup.renk : "#888") + '"></span>';
+      var btn;
+      if (k.tip === "sehir" && k.imar > 0) btn = '<button class="akbtn imbtn" data-act="sat" data-pos="' + pos + '">🏚️ Yapı Sat (+' + fmt(Math.round(k.imarBedeli / 2)) + ')</button>';
+      else if (!k.ipotekli) btn = '<button class="akbtn imbtn" data-act="ipotek" data-pos="' + pos + '">🏦 İpotek (+' + fmt(k.ipotek) + ')</button>';
+      else btn = '<button class="akbtn imbtn" data-act="kaldir" data-pos="' + pos + '">İpotek Kaldır (' + fmt(Math.round(k.ipotek * 1.1)) + ')</button>';
+      var durum = k.ipotekli ? ' <span class="ipt">ipotekli</span>' : (k.tip === "sehir" && k.imar ? ' · ' + BINA_IKON[k.imar - 1] : '');
+      return '<div class="imar-row">' + serit + '<span><b>' + k.ad + '</b>' + durum + '</span>' + btn + '</div>';
+    }).join("");
+  }
+  function varlikBind(yenidenCiz) {
+    document.querySelectorAll(".imbtn").forEach(function (b) {
+      b.onclick = function () {
+        var pos = parseInt(b.dataset.pos, 10), act = b.dataset.act;
+        if (act === "sat") imarSatBir(pos); else if (act === "ipotek") ipotekEt(pos); else if (act === "kaldir") ipotekKaldir(pos);
+        yenidenCiz();
+      };
+    });
+  }
+  function mulklerModal() {
+    var o = aktif();
+    modalAc('<div class="kart-ust" style="background:#34495e">🏛️ MÜLKLERİM · ' + fmt(o.para) + '</div><p class="m-bilgi" style="font-size:13.5px">Rütbe satabilir (yarı fiyat) veya dükkân ipotek edebilirsin. İpotek için önce sektörün rütbeleri satılır.</p><div class="imar-liste">' + varlikSatir(o) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    varlikBind(mulklerModal);
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function borcModal(o, miktar, alacakli) {
+    function ciz() {
+      var yeter = o.para >= miktar;
+      modalAc('<div class="kart-ust" style="background:#7d2b2b">⚠️ BORÇ · ' + fmt(miktar) + '</div>' +
+        '<p class="m-bilgi">Ödemen gereken <b>' + fmt(miktar) + '</b>, nakdin <b style="color:' + (yeter ? "#1c6b41" : "#9a3b3b") + '">' + fmt(o.para) + '</b>. Rütbe satıp dükkânlarını ipotek ederek nakit topla, sonra <b>borcu öde</b>.</p>' +
+        '<div class="imar-liste">' + varlikSatir(o) + '</div>' +
+        '<div class="m-btnlar">' +
+        (yeter ? '<button class="akbtn btn-ana" id="b-ode">💰 Borcu Öde (' + fmt(miktar) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetersiz</button>') +
+        '<button class="akbtn" id="b-teslim">🏳️ Teslim Ol</button></div>', true);
+      varlikBind(ciz);
+      var b;
+      if ((b = $("#b-ode"))) b.onclick = function () { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla("💸 " + o.ad + " borcunu ödedi: -" + fmt(miktar), alacakli ? "" : "kotu"); Ses.ode(); modalKapat(); render(); galibiyetKontrol(); };
+      $("#b-teslim").onclick = function () { logla("🏳️ " + o.ad + " borcu ödeyemedi, teslim oldu.", "kotu"); modalKapat(); iflasEt(o, alacakli); render(); };
+    }
+    ciz();
+  }
+  function botLikidite(o, hedef) {
+    var guard = 0;
+    while (o.para < hedef && guard++ < 80) {
+      var yapi = null;
+      K.forEach(function (x) { if (x.tip === "sehir" && x.sahip === o.id && x.imar > 0) { var maxi = Math.max.apply(null, grupKareler(x.grupKey).map(function (g) { return g.imar; })); if (x.imar >= maxi && (!yapi || x.imar > yapi.imar)) yapi = x; } });
+      if (yapi) { o.para += Math.round(yapi.imarBedeli / 2); yapi.imar--; continue; }
+      var m = null;
+      K.forEach(function (x) { if ((x.tip === "sehir" || x.tip === "liman" || x.tip === "utility") && x.sahip === o.id && !x.ipotekli && (x.tip !== "sehir" || x.imar === 0) && !m) m = x; });
+      if (m) { m.ipotekli = true; o.para += m.ipotek; continue; }
+      break;
+    }
+  }
+  function siralamaSatir(sirali, vurgu) {
+    return sirali.map(function (o, i) {
+      var madalya = ["🥇", "🥈", "🥉"][i] || (i + 1) + ".";
+      return '<div class="sira-row' + (vurgu && i === 0 ? " kazanan" : "") + (o.iflas ? " iflas" : "") + '">' +
+        '<span class="sr-rank">' + madalya + '</span>' +
+        '<span class="sr-amblem" style="background:' + o.renk + '">' + (o.amblem || "") + '</span>' +
+        '<span class="sr-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " · iflas" : "") + '</span>' +
+        '<span class="sr-servet">' + fmt(servet(o)) + '</span></div>';
+    }).join("");
+  }
+  function konfeti() {
+    var c = document.getElementById("konfeti");
+    if (!c) { c = document.createElement("canvas"); c.id = "konfeti"; document.body.appendChild(c); }
+    var ctx = c.getContext("2d"); c.width = window.innerWidth; c.height = window.innerHeight;
+    var renkler = ["#edc75a", "#c9a227", "#f5e2a3", "#1e8449", "#b8332b", "#f6edd6"], P = [], i;
+    for (i = 0; i < 150; i++) P.push({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * .5, w: 6 + Math.random() * 7, h: 8 + Math.random() * 8, r: Math.random() * 6.28, vr: (Math.random() - .5) * .3, vy: 2 + Math.random() * 3.5, vx: (Math.random() - .5) * 2, renk: renkler[Math.floor(Math.random() * renkler.length)] });
+    var bas = null;
+    function ciz(t) {
+      if (bas == null) bas = t;
+      ctx.clearRect(0, 0, c.width, c.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += .03; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.renk; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore(); });
+      if (t - bas < 3900) requestAnimationFrame(ciz); else if (c.parentNode) c.parentNode.removeChild(c);
+    }
+    requestAnimationFrame(ciz);
+  }
+  function sonucModal(g) {
+    Ses.kazan(); temizleKayit(); try { konfeti(); } catch (e) {}
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    var kz = g || sirali[0];
+    var enSehir = oyun.oyuncular.slice().sort(function (a, b) { return b.mulkler.length - a.mulkler.length; })[0];
+    var enSeref = oyun.oyuncular.slice().sort(function (a, b) { return (b.seref || 0) - (a.seref || 0); })[0];
+    var ozet = '<div class="ozet-kutu">📜 ' + (oyun.elGecti ? '<b>' + Math.ceil(oyun.elGecti / oyun.oyuncular.length) + '</b> tur · ' : '') +
+      'en çok dükkân: <b>' + enSehir.ad + '</b> (' + enSehir.mulkler.length + ')' +
+      (enSeref && enSeref.seref ? ' · en çok kutsal ziyaret: <b>' + enSeref.ad + '</b> (❖' + enSeref.seref + ')' : '') + '</div>';
+    modalAc('<div class="zafer">' + gorselImg("kapak", "zafer-bg") + '<div class="zafer-perde"></div>' +
+      '<div class="zafer-ic"><div class="zafer-amblem" style="background:' + (kz ? kz.renk : "#888") + '">' + (kz ? (kz.amblem || "🏆") : "🏆") + '</div>' +
+      '<div class="zafer-ust">🏆 PÎRLİĞE ERİŞEN</div><div class="zafer-ad">' + (kz ? kz.ad : "—") + '</div>' +
+      '<div class="zafer-alt">Çıraklıktan pîrliğe giden yolda zafer senindir!</div></div></div>' +
+      '<div class="sira-liste">' + siralamaSatir(sirali, true) + '</div>' + ozet +
+      '<div class="m-btnlar"><button class="akbtn" id="m-kapat">👁️ Tahtayı Gör</button><button class="akbtn btn-ana" onclick="location.reload()">🔄 Yeni Oyun</button></div>', true);
+    $("#m-kapat").onclick = modalKapat;
+  }
+  function skorGoster() {
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    modalAc('<div class="kart-ust" style="background:#34495e">📊 SERVET SIRALAMASI</div><p class="m-bilgi" style="font-size:13.5px">Servet = nakit + mülk değeri + imar yapıları.</p><div class="sira-liste">' + siralamaSatir(sirali, false) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    $("#m-kapat").onclick = modalKapat;
+  }
+
+  function arayuzKur() {
+    $("#oyuncu-sayisi").addEventListener("change", kurulumEkrani);
+    $("#basla").addEventListener("click", oyunBaslat);
+    $("#skor-btn").addEventListener("click", skorGoster);
+    $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
+    $("#d3-btn").addEventListener("click", function () { set3D(!document.getElementById("oyun").classList.contains("d3")); });
+    $("#duraklat-btn").addEventListener("click", duraklatDegis);
+    $("#hiz-btn").addEventListener("click", hizDegis);
+    try { var h = parseFloat(localStorage.getItem("cp_hiz")); if (h) BOT_HIZ = h; } catch (e) {}
+    var hb = $("#hiz-btn"); if (hb) hb.textContent = "⚡ " + (BOT_HIZ === 0.5 ? "Hızlı" : BOT_HIZ === 1.8 ? "Yavaş" : "Normal");
+    $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
+    $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
+    var dv = $("#devam-btn");
+    if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
+    kurulumEkrani();
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v11 ✓ hazır";
+  }
+  // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
+  if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
+  else arayuzKur();
+  window.BC = { get oyun() { return oyun; }, botTuru: function () { botTuru(); } };
+})();
+
+</script>
+</body>
+</html>
