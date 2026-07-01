@@ -186,6 +186,32 @@
     .modal-kutu.resimli .m-serit{margin:2px 0 8px; float:none}
     .modal-kutu.resimli .m-btnlar,.modal-kutu.resimli .m-eko{clear:both}
   }
+  /* ===== Premium kart modalları (illüstrasyonlu başlıklar) ===== */
+  .yk-head{position:relative; height:150px; overflow:hidden; border-radius:13px 13px 0 0; margin:-20px -20px 36px}
+  .yk-img,.ok-img{width:100%; height:100%; object-fit:cover; display:block}
+  .yk-perde{position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,26,22,.55),rgba(6,26,22,.06) 45%,rgba(6,26,22,.62))}
+  .yk-ust{position:absolute; top:9px; left:0; right:0; text-align:center; font-family:var(--imp); font-size:12px; letter-spacing:.22em; color:#ffe9b8; text-shadow:0 1px 4px rgba(0,0,0,.85)}
+  .yk-tema{position:absolute; top:27px; left:0; right:0; text-align:center; font-family:var(--imp); font-weight:700; font-size:13.5px; letter-spacing:.08em; text-transform:uppercase; color:#ffe9b8; text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .yk-no{position:absolute; left:50%; bottom:-27px; transform:translateX(-50%); width:66px; height:66px; border-radius:50%; z-index:3;
+    background:radial-gradient(#fff9ec,#f2e2ba); border:3px solid var(--yk,#c9a227); box-shadow:0 4px 14px rgba(0,0,0,.4), inset 0 0 0 2px #fff;
+    display:flex; align-items:center; justify-content:center; font-family:var(--imp); font-weight:800; font-size:30px; color:var(--yk,#7a5b1a); line-height:1}
+  .yk-no.sym{font-size:24px}
+  .yk-altyazi{text-align:center; font-family:var(--imp); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:#8a6f2a; margin:0 0 4px}
+  .yk-baslik{text-align:center; font-family:var(--imp); margin:.15em 0 .35em}
+  .ok-head{position:relative; height:118px; overflow:hidden; border-radius:13px 13px 0 0; margin:-20px -20px 14px}
+  .ok-etiket{position:absolute; bottom:9px; left:0; right:0; text-align:center; font-family:var(--imp); font-weight:700; font-size:16px; letter-spacing:.16em; color:#ffe9b8; text-shadow:0 1px 5px rgba(0,0,0,.9)}
+  .ok-etki{text-align:center; font-family:var(--imp); font-weight:700; color:#fff; background:var(--ok,#7d2b2b); border-radius:9px; padding:9px 12px; margin-top:10px; font-size:14px; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
+  .bs-head{display:flex; align-items:center; gap:11px; border-radius:13px 13px 0 0; margin:-20px -20px 14px; padding:12px 16px; min-height:64px;
+    background:linear-gradient(135deg,var(--bs,#5b3a8a),rgba(0,0,0,.3)); color:#fff}
+  .bs-badge{flex:0 0 46px; width:46px; height:46px; border-radius:50%; overflow:hidden; box-shadow:0 0 0 2.5px #f2e2b0, 0 0 0 5px rgba(0,0,0,.22)}
+  .bs-badge img{width:100%; height:100%; object-fit:cover; display:block}
+  .bs-tx b{display:block; font-family:var(--imp); font-size:16px; letter-spacing:.02em; text-shadow:0 1px 2px rgba(0,0,0,.5)}
+  .bs-tx small{font-family:var(--imp); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; opacity:.92}
+  @media (max-width:520px){ .yk-head,.ok-head,.bs-head{margin-left:-15px;margin-right:-15px} .yk-head{margin-top:-15px} .ok-head,.bs-head{margin-top:-15px} }
+  .merkez{overflow:hidden}
+  .merkez-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .merkez-perde{position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,26,22,.74),rgba(6,26,22,.42) 46%,rgba(6,26,22,.8))}
+  .merkez-ic{z-index:2}
   #kapak{display:block; width:100%; margin:0 auto 16px; border-radius:14px; box-shadow:0 12px 34px rgba(0,0,0,.45); border:1.5px solid rgba(201,162,39,.5)}
   .m-btnlar{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; justify-content:flex-end}
   .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
@@ -1268,7 +1294,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 300
    },
-   "ogren": "1453'te II. Mehmed İstanbul'u fethederek Bizans'a son verdi ve şehri Osmanlı başkenti yaptı."
+   "ogren": "1453'te II. Mehmed İstanbul'u fethederek Bizans'a son verdi ve şehri Osmanlı başkenti yaptı.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   },
   {
    "baslik": "Kara Veba Salgını",
@@ -1277,7 +1304,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_ver",
     "deger": 200
    },
-   "ogren": "1347-1348 Kara Veba (taun) salgını Avrupa ve Yakındoğu'da nüfusun büyük bölümünü yok etti."
+   "ogren": "1347-1348 Kara Veba (taun) salgını Avrupa ve Yakındoğu'da nüfusun büyük bölümünü yok etti.",
+   "gorsel": "ferman-muhur-kordon.webp"
   },
   {
    "baslik": "Preveze Deniz Zaferi",
@@ -1286,7 +1314,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_al",
     "deger": 400
    },
-   "ogren": "1538 Preveze Deniz Zaferi ile Osmanlı, Barbaros komutasında Akdeniz'de üstünlük kazandı."
+   "ogren": "1538 Preveze Deniz Zaferi ile Osmanlı, Barbaros komutasında Akdeniz'de üstünlük kazandı.",
+   "gorsel": "ferman-altin-divit-kalem.webp"
   },
   {
    "baslik": "Küçük Kıyamet Depremi",
@@ -1295,7 +1324,8 @@ window.OYUN_VERISI = {
     "tur": "en_degerli_imar_yik",
     "deger": 0
    },
-   "ogren": "10 Eylül 1509 İstanbul depremi 'Küçük Kıyamet' (Kıyamet-i Suğra) olarak bilinir ve şehirde büyük yıkıma yol açmıştır."
+   "ogren": "10 Eylül 1509 İstanbul depremi 'Küçük Kıyamet' (Kıyamet-i Suğra) olarak bilinir ve şehirde büyük yıkıma yol açmıştır.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   },
   {
    "baslik": "Mohaç Meydan Muharebesi",
@@ -1304,7 +1334,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 350
    },
-   "ogren": "1526 Mohaç Meydan Muharebesi'nde Kanuni, Macaristan ordusunu yenerek Orta Avrupa'da ilerledi."
+   "ogren": "1526 Mohaç Meydan Muharebesi'nde Kanuni, Macaristan ordusunu yenerek Orta Avrupa'da ilerledi.",
+   "gorsel": "ferman-muhur-kordon.webp"
   },
   {
    "baslik": "Çaldıran ve Devşirme Ordusu",
@@ -1313,7 +1344,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 300
    },
-   "ogren": "1514 Çaldıran Savaşı'nda Osmanlı, top ve tüfek gibi ateşli silah üstünlüğüyle Safevi ordusunu yendi; askerler devşirme sistemiyle yetişirdi."
+   "ogren": "1514 Çaldıran Savaşı'nda Osmanlı, top ve tüfek gibi ateşli silah üstünlüğüyle Safevi ordusunu yendi; askerler devşirme sistemiyle yetişirdi.",
+   "gorsel": "ferman-altin-divit-kalem.webp"
   },
   {
    "baslik": "Cizye Gelirinin Toplanması",
@@ -1322,7 +1354,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 250
    },
-   "ogren": "Cizye, Osmanlı Devleti'nde gayrimüslim erkeklerden alınan ve hazineye önemli gelir sağlayan bir vergiydi."
+   "ogren": "Cizye, Osmanlı Devleti'nde gayrimüslim erkeklerden alınan ve hazineye önemli gelir sağlayan bir vergiydi.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   },
   {
    "baslik": "Avarız Vergisi Salındı",
@@ -1331,7 +1364,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_ver",
     "deger": 250
    },
-   "ogren": "Avarız, Osmanlı'da savaş ve olağanüstü ihtiyaçlar için halktan alınan, zamanla sürekli hale gelen bir vergiydi."
+   "ogren": "Avarız, Osmanlı'da savaş ve olağanüstü ihtiyaçlar için halktan alınan, zamanla sürekli hale gelen bir vergiydi.",
+   "gorsel": "ferman-muhur-kordon.webp"
   },
   {
    "baslik": "Sikke Tağşişi ve Enflasyon",
@@ -1340,7 +1374,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_ver",
     "deger": 200
    },
-   "ogren": "1585-1586'da akçenin gümüş içeriği yarıya yakın düşürülerek (tağşiş) Osmanlı'da ağır bir enflasyon başlamıştır."
+   "ogren": "1585-1586'da akçenin gümüş içeriği yarıya yakın düşürülerek (tağşiş) Osmanlı'da ağır bir enflasyon başlamıştır.",
+   "gorsel": "ferman-altin-divit-kalem.webp"
   },
   {
    "baslik": "Kanunname İlan Edildi",
@@ -1349,7 +1384,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 300
    },
-   "ogren": "Kanunnameler, Osmanlı'da örfi hukuku düzenleyen ve özellikle Fatih ile Kanuni döneminde sistemleştirilen kanun derlemeleriydi."
+   "ogren": "Kanunnameler, Osmanlı'da örfi hukuku düzenleyen ve özellikle Fatih ile Kanuni döneminde sistemleştirilen kanun derlemeleriydi.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   },
   {
    "baslik": "Bereketli Hasat Yılı",
@@ -1358,7 +1394,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 350
    },
-   "ogren": "Tımar sisteminde tarımsal üretim, sipahinin ve hazinenin gelirinin temel kaynağıydı; bereketli yıllar geliri artırırdı."
+   "ogren": "Tımar sisteminde tarımsal üretim, sipahinin ve hazinenin gelirinin temel kaynağıydı; bereketli yıllar geliri artırırdı.",
+   "gorsel": "ferman-muhur-kordon.webp"
   },
   {
    "baslik": "Büyük Şehir Yangını",
@@ -1367,7 +1404,8 @@ window.OYUN_VERISI = {
     "tur": "en_degerli_imar_yik",
     "deger": 0
    },
-   "ogren": "Ahşap mimarinin yaygın olduğu Osmanlı şehirlerinde büyük yangınlar sıktır ve geniş yıkımlara yol açardı."
+   "ogren": "Ahşap mimarinin yaygın olduğu Osmanlı şehirlerinde büyük yangınlar sıktır ve geniş yıkımlara yol açardı.",
+   "gorsel": "ferman-altin-divit-kalem.webp"
   },
   {
    "baslik": "Tersane ve Liman Yatırımı",
@@ -1376,7 +1414,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_al",
     "deger": 350
    },
-   "ogren": "Osmanlı, Haliç Tersanesi başta olmak üzere liman ve tersane yatırımlarıyla deniz gücünü ve ticaretini geliştirdi."
+   "ogren": "Osmanlı, Haliç Tersanesi başta olmak üzere liman ve tersane yatırımlarıyla deniz gücünü ve ticaretini geliştirdi.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   },
   {
    "baslik": "Korsan Baskını Limanları Vurdu",
@@ -1385,7 +1424,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_ver",
     "deger": 300
    },
-   "ogren": "Akdeniz'de korsanlık, hem Osmanlı hem Avrupa sahillerinde ticareti tehdit eden sürekli bir sorundu."
+   "ogren": "Akdeniz'de korsanlık, hem Osmanlı hem Avrupa sahillerinde ticareti tehdit eden sürekli bir sorundu.",
+   "gorsel": "ferman-muhur-kordon.webp"
   },
   {
    "baslik": "Padişah Affı: Ulufe Dağıtıldı",
@@ -1394,7 +1434,8 @@ window.OYUN_VERISI = {
     "tur": "esaretten_cik_karti",
     "deger": 0
    },
-   "ogren": "Cülûs bahşişi, yeni tahta çıkan Osmanlı padişahının kapıkulu askerlerine dağıttığı geleneksel bir ödemeydi."
+   "ogren": "Cülûs bahşişi, yeni tahta çıkan Osmanlı padişahının kapıkulu askerlerine dağıttığı geleneksel bir ödemeydi.",
+   "gorsel": "ferman-altin-divit-kalem.webp"
   },
   {
    "baslik": "İnebahtı Bozgunu",
@@ -1403,7 +1444,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_ver",
     "deger": 300
    },
-   "ogren": "1571 İnebahtı Deniz Savaşı'nda Osmanlı donanması büyük kayıp verdi, ancak filo kısa sürede yeniden inşa edildi."
+   "ogren": "1571 İnebahtı Deniz Savaşı'nda Osmanlı donanması büyük kayıp verdi, ancak filo kısa sürede yeniden inşa edildi.",
+   "gorsel": "ferman-tugrali-tomar.webp"
   }
  ],
  "vakca": [
@@ -1414,7 +1456,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_al",
     "deger": 300
    },
-   "ogren": "Mimar Sinan, Selimiye Camii'ni 1574'te Edirne'de tamamladı ve onu kendi ustalık eseri saydı."
+   "ogren": "Mimar Sinan, Selimiye Camii'ni 1574'te Edirne'de tamamladı ve onu kendi ustalık eseri saydı.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   },
   {
    "baslik": "Kara Veba Salgını (1347)",
@@ -1423,7 +1466,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_ver",
     "deger": 250
    },
-   "ogren": "1347-1351 Kara Veba salgını Avrupa ve Akdeniz nüfusunun büyük bölümünü yok etti."
+   "ogren": "1347-1351 Kara Veba salgını Avrupa ve Akdeniz nüfusunun büyük bölümünü yok etti.",
+   "gorsel": "vakca-minyaturlu-sayfa.webp"
   },
   {
    "baslik": "Büyük İstanbul Yangını",
@@ -1432,7 +1476,8 @@ window.OYUN_VERISI = {
     "tur": "en_degerli_imar_yik",
     "deger": 0
    },
-   "ogren": "Osmanlı şehirlerinde ahşap mimari yaygınlığı nedeniyle yangınlar sıklıkla büyük yıkıma yol açardı."
+   "ogren": "Osmanlı şehirlerinde ahşap mimari yaygınlığı nedeniyle yangınlar sıklıkla büyük yıkıma yol açardı.",
+   "gorsel": "vakca-divit-hokka-usturlab.webp"
   },
   {
    "baslik": "Preveze Deniz Zaferi (1538)",
@@ -1441,7 +1486,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_al",
     "deger": 400
    },
-   "ogren": "1538 Preveze Deniz Zaferi ile Osmanlı, 16. yüzyılda Akdeniz'de üstünlüğü ele geçirdi."
+   "ogren": "1538 Preveze Deniz Zaferi ile Osmanlı, 16. yüzyılda Akdeniz'de üstünlüğü ele geçirdi.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   },
   {
    "baslik": "Bereketli Hasat Yılı",
@@ -1450,7 +1496,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 200
    },
-   "ogren": "Osmanlı ekonomisi büyük ölçüde tarıma dayalıydı; iyi hasat yılları hazine gelirini doğrudan artırırdı."
+   "ogren": "Osmanlı ekonomisi büyük ölçüde tarıma dayalıydı; iyi hasat yılları hazine gelirini doğrudan artırırdı.",
+   "gorsel": "vakca-minyaturlu-sayfa.webp"
   },
   {
    "baslik": "Kuraklık ve Kıtlık",
@@ -1459,7 +1506,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_ver",
     "deger": 200
    },
-   "ogren": "16. yüzyıl sonu kuraklık ve kıtlıkları, Anadolu'daki Celali huzursuzluklarının zeminini hazırladı."
+   "ogren": "16. yüzyıl sonu kuraklık ve kıtlıkları, Anadolu'daki Celali huzursuzluklarının zeminini hazırladı.",
+   "gorsel": "vakca-divit-hokka-usturlab.webp"
   },
   {
    "baslik": "Sahaflar Çarşısı Vakfı",
@@ -1468,7 +1516,8 @@ window.OYUN_VERISI = {
     "tur": "para_al",
     "deger": 500
    },
-   "ogren": "Vakıf sistemi, Osmanlı'da eğitim ve hayır hizmetlerinin finansmanının temel kurumuydu."
+   "ogren": "Vakıf sistemi, Osmanlı'da eğitim ve hayır hizmetlerinin finansmanının temel kurumuydu.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   },
   {
    "baslik": "Lonca Kalfalık Töreni",
@@ -1477,7 +1526,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_al",
     "deger": 150
    },
-   "ogren": "Lonca ve ahi teşkilatları, Osmanlı şehir ekonomisinde üretimi ve esnaf ahlakını düzenlerdi."
+   "ogren": "Lonca ve ahi teşkilatları, Osmanlı şehir ekonomisinde üretimi ve esnaf ahlakını düzenlerdi.",
+   "gorsel": "vakca-minyaturlu-sayfa.webp"
   },
   {
    "baslik": "Şahane Çarşı Vergisi",
@@ -1486,7 +1536,8 @@ window.OYUN_VERISI = {
     "tur": "imar_basina_ver",
     "deger": 180
    },
-   "ogren": "Avarız, olağanüstü durumlarda halktan toplanan ek vergiydi; zamanla sürekli hale geldi."
+   "ogren": "Avarız, olağanüstü durumlarda halktan toplanan ek vergiydi; zamanla sürekli hale geldi.",
+   "gorsel": "vakca-divit-hokka-usturlab.webp"
   },
   {
    "baslik": "Kervansaray Konaklaması",
@@ -1495,7 +1546,8 @@ window.OYUN_VERISI = {
     "tur": "mulk_basina_al",
     "deger": 250
    },
-   "ogren": "Selçuklu ve Osmanlı kervansarayları tüccarı ücretsiz ağırlar, böylece ticaret yollarını canlı tutardı."
+   "ogren": "Selçuklu ve Osmanlı kervansarayları tüccarı ücretsiz ağırlar, böylece ticaret yollarını canlı tutardı.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   },
   {
    "baslik": "Korsan Baskını",
@@ -1504,7 +1556,8 @@ window.OYUN_VERISI = {
     "tur": "liman_basina_ver",
     "deger": 300
    },
-   "ogren": "Akdeniz'de korsanlık, 16. yüzyılda hem Hristiyan hem Müslüman taraflarca sürdürülen yaygın bir tehditti."
+   "ogren": "Akdeniz'de korsanlık, 16. yüzyılda hem Hristiyan hem Müslüman taraflarca sürdürülen yaygın bir tehditti.",
+   "gorsel": "vakca-minyaturlu-sayfa.webp"
   },
   {
    "baslik": "Esir Pazarında Tutsak",
@@ -1513,7 +1566,8 @@ window.OYUN_VERISI = {
     "tur": "esarete_git",
     "deger": 0
    },
-   "ogren": "Hudut bölgelerinde akınlar sırasında esir alıp fidye karşılığı serbest bırakmak yaygın bir uygulamaydı."
+   "ogren": "Hudut bölgelerinde akınlar sırasında esir alıp fidye karşılığı serbest bırakmak yaygın bir uygulamaydı.",
+   "gorsel": "vakca-divit-hokka-usturlab.webp"
   },
   {
    "baslik": "Padişah Fermanıyla Af",
@@ -1522,7 +1576,8 @@ window.OYUN_VERISI = {
     "tur": "esaretten_cik_karti",
     "deger": 0
    },
-   "ogren": "Yeni padişahlar tahta çıkışlarında cülus bahşişi dağıtır ve bazı aflar ilan ederlerdi."
+   "ogren": "Yeni padişahlar tahta çıkışlarında cülus bahşişi dağıtır ve bazı aflar ilan ederlerdi.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   },
   {
    "baslik": "Sadaka Taşı Geleneği",
@@ -1531,7 +1586,8 @@ window.OYUN_VERISI = {
     "tur": "herkese_ver",
     "deger": 200
    },
-   "ogren": "Sadaka taşı, veren ile alanı karşılaştırmadan yardımı sağlayan Osmanlı sosyal dayanışma uygulamasıydı."
+   "ogren": "Sadaka taşı, veren ile alanı karşılaştırmadan yardımı sağlayan Osmanlı sosyal dayanışma uygulamasıydı.",
+   "gorsel": "vakca-minyaturlu-sayfa.webp"
   },
   {
    "baslik": "Surre Alayı Bağışı",
@@ -1540,7 +1596,8 @@ window.OYUN_VERISI = {
     "tur": "herkesten_al",
     "deger": 150
    },
-   "ogren": "Surre alayı, Osmanlı padişahlarının her yıl Mekke ve Medine halkına gönderdiği para ve hediye kervanıydı."
+   "ogren": "Surre alayı, Osmanlı padişahlarının her yıl Mekke ve Medine halkına gönderdiği para ve hediye kervanıydı.",
+   "gorsel": "vakca-divit-hokka-usturlab.webp"
   },
   {
    "baslik": "Cihana Dönüş ve Maaş",
@@ -1549,369 +1606,730 @@ window.OYUN_VERISI = {
     "tur": "basa_git_maas_al",
     "deger": 0
    },
-   "ogren": "Ulufe, Yeniçerilere ve kapıkulu askerlerine üç ayda bir ödenen düzenli maaşın adıydı."
+   "ogren": "Ulufe, Yeniçerilere ve kapıkulu askerlerine üç ayda bir ödenen düzenli maaşın adıydı.",
+   "gorsel": "vakca-acik-vekayiname.webp"
   }
  ],
  "ilerlemeKartlari": [
   {
    "sayi": 1,
    "baslik": "I. Murad: Hüdavendigâr",
-   "bilgi": "Osmanlı'nın BİRİNCİ Murad'ı (Murad Hüdavendigâr), 1362'de tahta çıktı ve devleti bir beylikten aşarak Rumeli'de geniş topraklara yayılan bir güce dönüştürdü. 1389 Kosova Savaşı'nı kazanan ama savaş alanında şehit düşen İLK Osmanlı padişahı olarak tarihe geçti."
+   "bilgi": "Osmanlı'nın BİRİNCİ Murad'ı (Murad Hüdavendigâr), 1362'de tahta çıktı ve devleti bir beylikten aşarak Rumeli'de geniş topraklara yayılan bir güce dönüştürdü. 1389 Kosova Savaşı'nı kazanan ama savaş alanında şehit düşen İLK Osmanlı padişahı olarak tarihe geçti.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 1,
    "baslik": "Bursa: İlk Gerçek Başkent",
-   "bilgi": "Orhan Bey döneminde 1326'da fethedilen Bursa, Osmanlı Devleti'nin yerleşik İLK başkenti oldu ve Söğüt'ten sonra devletin ağırlık merkezini oluşturdu. Burada inşa edilen Orhan Camii ve külliyesi, şehri bir yönetim ve ticaret merkezine dönüştüren tek bir çekirdek gibi gelişti."
+   "bilgi": "Orhan Bey döneminde 1326'da fethedilen Bursa, Osmanlı Devleti'nin yerleşik İLK başkenti oldu ve Söğüt'ten sonra devletin ağırlık merkezini oluşturdu. Burada inşa edilen Orhan Camii ve külliyesi, şehri bir yönetim ve ticaret merkezine dönüştüren tek bir çekirdek gibi gelişti.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 1,
    "baslik": "İznik: İlk Osmanlı Medresesi",
-   "bilgi": "Osmanlı'nın BİRİNCİ medresesi, 1331'de İznik'in fethinin ardından Orhan Bey tarafından kuruldu. Başına âlim Dâvûd-ı Kayserî'nin getirildiği bu tek kurum, beyliğe ilmî bir omurga kazandırarak sonraki yüzyılların medrese geleneğine zemin hazırladı."
+   "bilgi": "Osmanlı'nın BİRİNCİ medresesi, 1331'de İznik'in fethinin ardından Orhan Bey tarafından kuruldu. Başına âlim Dâvûd-ı Kayserî'nin getirildiği bu tek kurum, beyliğe ilmî bir omurga kazandırarak sonraki yüzyılların medrese geleneğine zemin hazırladı.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 1,
    "baslik": "İlk Osmanlı Akçesi",
-   "bilgi": "Osmanlı'nın kendi adına basılan İLK madenî parası olan gümüş akçe, 1326'da Orhan Bey döneminde basıldı. Bir beyliğin kendi sikkesini basması bağımsızlığın tek başına en güçlü nişanesi sayılırdı ve bu adım Osmanlı'nın siyasi olgunluğunu gösterdi."
+   "bilgi": "Osmanlı'nın kendi adına basılan İLK madenî parası olan gümüş akçe, 1326'da Orhan Bey döneminde basıldı. Bir beyliğin kendi sikkesini basması bağımsızlığın tek başına en güçlü nişanesi sayılırdı ve bu adım Osmanlı'nın siyasi olgunluğunu gösterdi.",
+   "tema": {
+    "ad": "Sikke ve Darphane",
+    "renk": "#8A6D1B"
+   },
+   "gorsel": "tema-sikke-darphane.webp"
   },
   {
    "sayi": 1,
    "baslik": "Osman Bey: Tek Bir Çekirdekten",
-   "bilgi": "Devlete adını veren Osman Gazi, 13. yüzyıl sonunda Söğüt çevresindeki tek bir uç beyliğini bağımsız bir siyasi yapıya çevirdi. 1299 dolaylarında Selçuklu otoritesinin çözülmesiyle hutbeyi kendi adına okutmaya yönelen bu BİRİNCİ lider, hanedanın kurucu atası oldu."
+   "bilgi": "Devlete adını veren Osman Gazi, 13. yüzyıl sonunda Söğüt çevresindeki tek bir uç beyliğini bağımsız bir siyasi yapıya çevirdi. 1299 dolaylarında Selçuklu otoritesinin çözülmesiyle hutbeyi kendi adına okutmaya yönelen bu BİRİNCİ lider, hanedanın kurucu atası oldu.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 1,
    "baslik": "Tuğra: Tek Bir İmza",
-   "bilgi": "Osmanlı padişahlarının fermanlarını onayladığı tek mührü olan tuğra, her hükümdara ait eşsiz bir imza niteliğindeydi. Bilinen İLK Osmanlı tuğrası Orhan Bey'e aittir; bu tek işaret, bir belgenin doğrudan padişahın iradesini taşıdığını gösteren en yüksek yetki simgesiydi."
+   "bilgi": "Osmanlı padişahlarının fermanlarını onayladığı tek mührü olan tuğra, her hükümdara ait eşsiz bir imza niteliğindeydi. Bilinen İLK Osmanlı tuğrası Orhan Bey'e aittir; bu tek işaret, bir belgenin doğrudan padişahın iradesini taşıdığını gösteren en yüksek yetki simgesiydi.",
+   "tema": {
+    "ad": "Hat, Tuğra ve Ferman",
+    "renk": "#3B2E6B"
+   },
+   "gorsel": "tema-hat-tugra-ferman.webp"
   },
   {
    "sayi": 2,
    "baslik": "Fatih'in İki Saltanatı",
-   "bilgi": "II. Mehmed, 1453'te İstanbul'u fethederek Fatih unvanını aldı ve çağdaşlarınca 'Kayser-i Rum' olarak da anıldı. Adındaki 'II.' sayısı, onu kendisinden önceki I. Mehmed'den (Çelebi Mehmed) ayırır; böylece o, Osmanlı tahtına çıkan ikinci Mehmed'dir. Sayı 2."
+   "bilgi": "II. Mehmed, 1453'te İstanbul'u fethederek Fatih unvanını aldı ve çağdaşlarınca 'Kayser-i Rum' olarak da anıldı. Adındaki 'II.' sayısı, onu kendisinden önceki I. Mehmed'den (Çelebi Mehmed) ayırır; böylece o, Osmanlı tahtına çıkan ikinci Mehmed'dir. Sayı 2.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 2,
    "baslik": "İki Kıtanın Şehri",
-   "bilgi": "İstanbul, Avrupa ve Asya olmak üzere iki kıtada birden kurulu dünyadaki nadir şehirlerden biridir; ikisini İstanbul Boğazı ayırır. Osmanlı başkenti olarak hem Rumeli hem Anadolu yakasını içeren bu yapı, şehrin '2 kıta' ile özdeşleşmesini sağlar. Sayı 2."
+   "bilgi": "İstanbul, Avrupa ve Asya olmak üzere iki kıtada birden kurulu dünyadaki nadir şehirlerden biridir; ikisini İstanbul Boğazı ayırır. Osmanlı başkenti olarak hem Rumeli hem Anadolu yakasını içeren bu yapı, şehrin '2 kıta' ile özdeşleşmesini sağlar. Sayı 2.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 2,
    "baslik": "Çift Başlı Kartal",
-   "bilgi": "Anadolu Selçuklu Devleti, iki yöne bakan çift başlı kartalı bir hâkimiyet simgesi olarak kullandı; bu motif Osmanlı öncesi Türk-İslam mimarisinde de görülür. Bir gövde üzerinde iki baş, doğu ile batı üzerindeki hâkimiyet iddiasını temsil eder. Sayı 2."
+   "bilgi": "Anadolu Selçuklu Devleti, iki yöne bakan çift başlı kartalı bir hâkimiyet simgesi olarak kullandı; bu motif Osmanlı öncesi Türk-İslam mimarisinde de görülür. Bir gövde üzerinde iki baş, doğu ile batı üzerindeki hâkimiyet iddiasını temsil eder. Sayı 2.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 2,
    "baslik": "Genç Osman'ın İkinciliği",
-   "bilgi": "II. Osman, yani Genç Osman, 14 yaşında tahta çıkmış ve yeniçerilerin gücünü sınırlamaya çalışması nedeniyle 1622'de bir ayaklanmayla tahttan indirilmiştir. Adındaki 'II.' sayısı onu Osmanlı Devleti'nin kurucusu Osman Gazi'den ayırır. Sayı 2."
+   "bilgi": "II. Osman, yani Genç Osman, 14 yaşında tahta çıkmış ve yeniçerilerin gücünü sınırlamaya çalışması nedeniyle 1622'de bir ayaklanmayla tahttan indirilmiştir. Adındaki 'II.' sayısı onu Osmanlı Devleti'nin kurucusu Osman Gazi'den ayırır. Sayı 2.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 2,
    "baslik": "Bayezid'in Hesaplaşması",
-   "bilgi": "II. Bayezid, babası Fatih'in ölümünden sonra kardeşi Cem Sultan ile taht için mücadele etmiş ve 1481'de tahta geçmiştir. Tahta çıkmadan önce iki kardeşin rekabeti, onun 'II.' unvanıyla birlikte hatırlanır. Sayı 2."
+   "bilgi": "II. Bayezid, babası Fatih'in ölümünden sonra kardeşi Cem Sultan ile taht için mücadele etmiş ve 1481'de tahta geçmiştir. Tahta çıkmadan önce iki kardeşin rekabeti, onun 'II.' unvanıyla birlikte hatırlanır. Sayı 2.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 2,
    "baslik": "Mahmud'un İki Kurumu",
-   "bilgi": "II. Mahmud, 1826'da Yeniçeri Ocağı'nı kaldırıp yerine 'Asakir-i Mansure-i Muhammediye' ordusunu kurarak eski ve yeni iki askerî düzen arasında bir dönüm noktası oluşturdu. Onun 'II.' sayısı, kendisinden önceki I. Mahmud'dan ayrıldığını gösterir. Sayı 2."
+   "bilgi": "II. Mahmud, 1826'da Yeniçeri Ocağı'nı kaldırıp yerine 'Asakir-i Mansure-i Muhammediye' ordusunu kurarak eski ve yeni iki askerî düzen arasında bir dönüm noktası oluşturdu. Onun 'II.' sayısı, kendisinden önceki I. Mahmud'dan ayrıldığını gösterir. Sayı 2.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 3,
    "baslik": "III. Selim ve Nizam-ı Cedid",
-   "bilgi": "III. Selim, 1789'da tahta çıkan reformcu padişahtır. Adındaki 'III.' (üçüncü) seni 3 kare ileri taşır. Avrupa tarzı yeni bir ordu olan Nizam-ı Cedid'i kurdu; aynı zamanda iyi bir bestekârdı ve 'Suzidilârâ' makamını kendisi geliştirdi."
+   "bilgi": "III. Selim, 1789'da tahta çıkan reformcu padişahtır. Adındaki 'III.' (üçüncü) seni 3 kare ileri taşır. Avrupa tarzı yeni bir ordu olan Nizam-ı Cedid'i kurdu; aynı zamanda iyi bir bestekârdı ve 'Suzidilârâ' makamını kendisi geliştirdi.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 3,
    "baslik": "III. Ahmed ve Lale Devri",
-   "bilgi": "III. Ahmed dönemi (1718-1730), zarafet ve sanatın öne çıktığı Lale Devri olarak anılır. Padişahın adındaki 'üçüncü' rakamı seni 3 kare ileri götürür. Bu dönemde İbrahim Müteferrika ilk Türk matbaasını 1727'de kurdu."
+   "bilgi": "III. Ahmed dönemi (1718-1730), zarafet ve sanatın öne çıktığı Lale Devri olarak anılır. Padişahın adındaki 'üçüncü' rakamı seni 3 kare ileri götürür. Bu dönemde İbrahim Müteferrika ilk Türk matbaasını 1727'de kurdu.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 3,
    "baslik": "III. Murad ve Doğudaki En Geniş Sınırlar",
-   "bilgi": "III. Murad döneminde (1574-1595) Osmanlı Devleti doğuda İran (Safevî), batıda Avrupa cephelerinde savaştı ve 1590 Ferhat Paşa Antlaşması ile doğuda Hazar Denizi'ne kadar uzanan en geniş sınırlarına ulaştı. Adındaki 'III.' seni 3 kare ilerletir. Takiyüddin'in İstanbul Rasathanesi de bu dönemde kuruldu."
+   "bilgi": "III. Murad döneminde (1574-1595) Osmanlı Devleti doğuda İran (Safevî), batıda Avrupa cephelerinde savaştı ve 1590 Ferhat Paşa Antlaşması ile doğuda Hazar Denizi'ne kadar uzanan en geniş sınırlarına ulaştı. Adındaki 'III.' seni 3 kare ilerletir. Takiyüddin'in İstanbul Rasathanesi de bu dönemde kuruldu.",
+   "tema": {
+    "ad": "Takvim ve Astronomi",
+    "renk": "#1E3A5F"
+   },
+   "gorsel": "tema-takvim-astronomi.webp"
   },
   {
    "sayi": 3,
    "baslik": "III. Mustafa ve Modernleşme Çabaları",
-   "bilgi": "III. Mustafa (1757-1774) ordunun modernleşmesi için Avrupalı uzmanlardan yararlandı ve Baron de Tott'a topçu okulu kurdurdu. Adındaki üçüncü rakamı seni 3 kare öteye taşır. Döneminde Laleli Camii inşa edildi."
+   "bilgi": "III. Mustafa (1757-1774) ordunun modernleşmesi için Avrupalı uzmanlardan yararlandı ve Baron de Tott'a topçu okulu kurdurdu. Adındaki üçüncü rakamı seni 3 kare öteye taşır. Döneminde Laleli Camii inşa edildi.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 3,
    "baslik": "III. Osman ve Kısa Saltanat",
-   "bilgi": "III. Osman 1754-1757 arasında yalnızca yaklaşık üç yıl tahtta kaldı. Hem adındaki 'III.' hem de kısa saltanatı 3 sayısını çağrıştırır ve seni 3 kare ilerletir. Şehzadeliğini uzun yıllar kafes usulü denen sarayda kapalı geçirmiştir."
+   "bilgi": "III. Osman 1754-1757 arasında yalnızca yaklaşık üç yıl tahtta kaldı. Hem adındaki 'III.' hem de kısa saltanatı 3 sayısını çağrıştırır ve seni 3 kare ilerletir. Şehzadeliğini uzun yıllar kafes usulü denen sarayda kapalı geçirmiştir.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 3,
    "baslik": "Üç Kıtada İmparatorluk",
-   "bilgi": "Osmanlı Devleti yüzyıllar boyunca Asya, Avrupa ve Afrika olmak üzere üç kıtaya yayılan bir imparatorluktu. Bu 'üç kıta' ifadesi seni 3 kare ileri götürür. Bu konum, İpek ve Baharat yolları gibi önemli ticaret güzergâhlarını kontrol etmesini sağladı."
+   "bilgi": "Osmanlı Devleti yüzyıllar boyunca Asya, Avrupa ve Afrika olmak üzere üç kıtaya yayılan bir imparatorluktu. Bu 'üç kıta' ifadesi seni 3 kare ileri götürür. Bu konum, İpek ve Baharat yolları gibi önemli ticaret güzergâhlarını kontrol etmesini sağladı.",
+   "tema": {
+    "ad": "Kervan ve Ticaret Yolu",
+    "renk": "#9C6B30"
+   },
+   "gorsel": "tema-kervan-ticaret-yolu.webp"
   },
   {
    "sayi": 4,
    "baslik": "Bağdat Fatihi IV. Murad",
-   "bilgi": "Osmanlı tahtının 17. padişahı olan IV. Murad, 1638'de Bağdat'ı Safevilerden geri aldığı için 'Bağdat Fatihi' unvanıyla anılır. Adındaki 'IV.' (dördüncü) rakamı, onu bu sayının temsilcisi yapar. Seferde 4 kare ilerle."
+   "bilgi": "Osmanlı tahtının 17. padişahı olan IV. Murad, 1638'de Bağdat'ı Safevilerden geri aldığı için 'Bağdat Fatihi' unvanıyla anılır. Adındaki 'IV.' (dördüncü) rakamı, onu bu sayının temsilcisi yapar. Seferde 4 kare ilerle.",
+   "tema": {
+    "ad": "Fetih ve Kuşatma",
+    "renk": "#B03A2E"
+   },
+   "gorsel": "tema-fetih-kusatma.webp"
   },
   {
    "sayi": 4,
    "baslik": "Dört Büyük Halife",
-   "bilgi": "Hz. Peygamber'in vefatından sonra İslam toplumunu yöneten ilk dört halife (Hz. Ebû Bekir, Hz. Ömer, Hz. Osman, Hz. Ali) 'Hulefâ-i Râşidîn' yani 'Doğru Yolu Bulan Halifeler' olarak bilinir. Tam dört kişi oldukları için sayın 4. Dört kare ilerle."
+   "bilgi": "Hz. Peygamber'in vefatından sonra İslam toplumunu yöneten ilk dört halife (Hz. Ebû Bekir, Hz. Ömer, Hz. Osman, Hz. Ali) 'Hulefâ-i Râşidîn' yani 'Doğru Yolu Bulan Halifeler' olarak bilinir. Tam dört kişi oldukları için sayın 4. Dört kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 4,
    "baslik": "Avcı IV. Mehmed",
-   "bilgi": "Yedi yaşında tahta çıkan IV. Mehmed, ava olan tutkusu nedeniyle 'Avcı' lakabıyla anılır; saltanatı döneminde Köprülü vezirleri devleti toparlamıştır. Adındaki 'IV.' rakamı onu dörde bağlar. Dört kare ilerle."
+   "bilgi": "Yedi yaşında tahta çıkan IV. Mehmed, ava olan tutkusu nedeniyle 'Avcı' lakabıyla anılır; saltanatı döneminde Köprülü vezirleri devleti toparlamıştır. Adındaki 'IV.' rakamı onu dörde bağlar. Dört kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 4,
    "baslik": "Dört Hak Mezhep",
-   "bilgi": "Sünni İslam'da fıkıh (hukuk) alanında dört büyük mezhep gelişmiştir: Hanefî, Şâfiî, Mâlikî ve Hanbelî. Osmanlı Devleti resmî olarak Hanefî mezhebini benimsemiştir. Mezhep sayısı dört olduğu için sayın 4. Dört kare ilerle."
+   "bilgi": "Sünni İslam'da fıkıh (hukuk) alanında dört büyük mezhep gelişmiştir: Hanefî, Şâfiî, Mâlikî ve Hanbelî. Osmanlı Devleti resmî olarak Hanefî mezhebini benimsemiştir. Mezhep sayısı dört olduğu için sayın 4. Dört kare ilerle.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 4,
    "baslik": "Dört Eyvanlı Medrese",
-   "bilgi": "Selçuklu ve sonrası Türk-İslam mimarisinde medreseler çoğunlukla 'dört eyvanlı' plana göre inşa edilmiştir; orta avlunun dört yönüne açılan tonozlu mekânlara eyvan denir. Eyvan sayısı dört olduğu için sayın 4. Dört kare ilerle."
+   "bilgi": "Selçuklu ve sonrası Türk-İslam mimarisinde medreseler çoğunlukla 'dört eyvanlı' plana göre inşa edilmiştir; orta avlunun dört yönüne açılan tonozlu mekânlara eyvan denir. Eyvan sayısı dört olduğu için sayın 4. Dört kare ilerle.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 4,
    "baslik": "Cennetle Müjdelenenler ve Dört Köşe Kâbe",
-   "bilgi": "İslam mimarisinin merkezi olan Kâbe, dört köşeli (kübik) yapısıyla bilinir ve her köşesinin kendine ait bir adı vardır: Hacerü'l-Esved köşesi, Irak köşesi, Şam köşesi ve Yemen köşesi. Köşe sayısı dört olduğu için sayın 4. Dört kare ilerle."
+   "bilgi": "İslam mimarisinin merkezi olan Kâbe, dört köşeli (kübik) yapısıyla bilinir ve her köşesinin kendine ait bir adı vardır: Hacerü'l-Esved köşesi, Irak köşesi, Şam köşesi ve Yemen köşesi. Köşe sayısı dört olduğu için sayın 4. Dört kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beş Şartın Tahtı: I. Murad'ın Devleti",
-   "bilgi": "İslam'ın beş şartından biri olan namaz, Osmanlı sultanlarının günlük hayatının merkezindeydi ve beş vakit eda edilirdi. I. Murad'ın 1389'daki Kosova Savaşı'nın ardından şehit düşmesi, devletin namaz ve cihat anlayışını sembolleştiren bir olay olarak anlatılır. İslam'ın beş şartı gibi, bu kart da seni beş kare ileri taşır."
+   "bilgi": "İslam'ın beş şartından biri olan namaz, Osmanlı sultanlarının günlük hayatının merkezindeydi ve beş vakit eda edilirdi. I. Murad'ın 1389'daki Kosova Savaşı'nın ardından şehit düşmesi, devletin namaz ve cihat anlayışını sembolleştiren bir olay olarak anlatılır. İslam'ın beş şartı gibi, bu kart da seni beş kare ileri taşır.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beş Vakit Namaz ve Selâtin Camileri",
-   "bilgi": "Osmanlı'da padişahlar tarafından yaptırılan büyük selâtin camileri, halkın beş vakit namazını cemaatle kılması için şehrin merkezine inşa edilirdi. Mimar Sinan'ın eseri olan Süleymaniye Camii (1557'de tamamlandı) bu camilerin en görkemlilerindendir. Beş vakit namazın hatırına ilerle: beş kare."
+   "bilgi": "Osmanlı'da padişahlar tarafından yaptırılan büyük selâtin camileri, halkın beş vakit namazını cemaatle kılması için şehrin merkezine inşa edilirdi. Mimar Sinan'ın eseri olan Süleymaniye Camii (1557'de tamamlandı) bu camilerin en görkemlilerindendir. Beş vakit namazın hatırına ilerle: beş kare.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beşinci Padişah: Çelebi Mehmed",
-   "bilgi": "Osmanlı Devleti'nin beşinci padişahı Çelebi Mehmed (I. Mehmed), 1402 Ankara Savaşı sonrası yaşanan Fetret Devri'ni sona erdirerek dağılan devleti yeniden birleştirdi. Bu yüzden tarihte adeta devletin ikinci kurucusu olarak anılır. Beşinci padişah, sana beşinci kareyi gösterir: beş ilerle."
+   "bilgi": "Osmanlı Devleti'nin beşinci padişahı Çelebi Mehmed (I. Mehmed), 1402 Ankara Savaşı sonrası yaşanan Fetret Devri'ni sona erdirerek dağılan devleti yeniden birleştirdi. Bu yüzden tarihte adeta devletin ikinci kurucusu olarak anılır. Beşinci padişah, sana beşinci kareyi gösterir: beş ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beş Parmak: Pençe-i Âl-i Abâ",
-   "bilgi": "Osmanlı kültüründe beşli el motifi olan pençe, Hz. Muhammed, Hz. Ali, Hz. Fatıma, Hz. Hasan ve Hz. Hüseyin'i temsil eden 'pençe-i âl-i abâ' inancıyla bayraklarda ve nişanlarda kullanılmıştır. Bu beş parmaklık motif, özellikle yeniçerilerin ve tarikatların sembollerinde görülürdü. Pençenin beş parmağı gibi, beş kare ilerle."
+   "bilgi": "Osmanlı kültüründe beşli el motifi olan pençe, Hz. Muhammed, Hz. Ali, Hz. Fatıma, Hz. Hasan ve Hz. Hüseyin'i temsil eden 'pençe-i âl-i abâ' inancıyla bayraklarda ve nişanlarda kullanılmıştır. Bu beş parmaklık motif, özellikle yeniçerilerin ve tarikatların sembollerinde görülürdü. Pençenin beş parmağı gibi, beş kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beşinci Sultan Murad'ın Kısa Saltanatı",
-   "bilgi": "Beşinci Murad (V. Murad), 1876'da tahta çıkan ancak sağlık sorunları nedeniyle yalnızca yaklaşık üç ay hüküm sürüp tahttan indirilen padişahtı. Onun yerine kardeşi II. Abdülhamid geçti ve ilk Meşrutiyet ilan edildi. 'Beşinci' Murad'ın hatırına sayının beşi: beş kare ilerle."
+   "bilgi": "Beşinci Murad (V. Murad), 1876'da tahta çıkan ancak sağlık sorunları nedeniyle yalnızca yaklaşık üç ay hüküm sürüp tahttan indirilen padişahtı. Onun yerine kardeşi II. Abdülhamid geçti ve ilk Meşrutiyet ilan edildi. 'Beşinci' Murad'ın hatırına sayının beşi: beş kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 5,
    "baslik": "Beşinci Donanma Adımı: Preveze'ye Giden Yol",
-   "bilgi": "Kanuni dönemi denizcisi Barbaros Hayreddin Paşa, 1538 Preveze Deniz Zaferi'yle Akdeniz'i bir Osmanlı gölü haline getirdi ve Haçlı donanmasını bozguna uğrattı. Bu zaferin yıl dönümü olan 27 Eylül, bugün Türkiye'de Deniz Kuvvetleri Günü olarak kutlanır. Zafere giden beşinci adım gibi, beş kare ilerle."
+   "bilgi": "Kanuni dönemi denizcisi Barbaros Hayreddin Paşa, 1538 Preveze Deniz Zaferi'yle Akdeniz'i bir Osmanlı gölü haline getirdi ve Haçlı donanmasını bozguna uğrattı. Bu zaferin yıl dönümü olan 27 Eylül, bugün Türkiye'de Deniz Kuvvetleri Günü olarak kutlanır. Zafere giden beşinci adım gibi, beş kare ilerle.",
+   "tema": {
+    "ad": "Denizcilik ve Donanma",
+    "renk": "#1F5F7A"
+   },
+   "gorsel": "tema-denizcilik-donanma.webp"
   },
   {
    "sayi": 6,
    "baslik": "Son Padişah VI. Mehmed",
-   "bilgi": "Osmanlı tahtına çıkan son hükümdar VI. Mehmed Vahdettin'di; adındaki 'VI.' rakamı onun altıncı Mehmed olduğunu gösterir. 1918'de tahta çıktı ve saltanatın kaldırıldığı 1922'ye kadar hüküm sürdü. Taht numarası 6 olduğu için bu kart seni 6 kare ilerletir."
+   "bilgi": "Osmanlı tahtına çıkan son hükümdar VI. Mehmed Vahdettin'di; adındaki 'VI.' rakamı onun altıncı Mehmed olduğunu gösterir. 1918'de tahta çıktı ve saltanatın kaldırıldığı 1922'ye kadar hüküm sürdü. Taht numarası 6 olduğu için bu kart seni 6 kare ilerletir.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 6,
    "baslik": "Yaklaşık Altı Asırlık Devlet",
-   "bilgi": "Osmanlı Devleti 1299'da kurulup 1922'de saltanatın kaldırılmasıyla sona erdiğinde arkasında yaklaşık 600 yıllık, yani altı asırlık bir tarih bırakmıştı. Tek bir hanedanın bu denli uzun süre hüküm sürmesi dünya tarihinde ender görülen bir durumdur. Altı asır, seni 6 kare ileri taşır."
+   "bilgi": "Osmanlı Devleti 1299'da kurulup 1922'de saltanatın kaldırılmasıyla sona erdiğinde arkasında yaklaşık 600 yıllık, yani altı asırlık bir tarih bırakmıştı. Tek bir hanedanın bu denli uzun süre hüküm sürmesi dünya tarihinde ender görülen bir durumdur. Altı asır, seni 6 kare ileri taşır.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 6,
    "baslik": "Altıgen Yıldız Çini",
-   "bilgi": "Klasik Osmanlı çini ve tezyinatında en sevilen geometrik motiflerden biri altı kollu yıldız ve altıgen (altıgen) örgülerdir; İznik çinilerinde bu altıgen geometriler sıkça işlenmiştir. Geometrik desenler, sonsuzluğu ve birliği simgelediği için tercih edilirdi. Altıgenin altı köşesi seni 6 kare ileri götürür."
+   "bilgi": "Klasik Osmanlı çini ve tezyinatında en sevilen geometrik motiflerden biri altı kollu yıldız ve altıgen (altıgen) örgülerdir; İznik çinilerinde bu altıgen geometriler sıkça işlenmiştir. Geometrik desenler, sonsuzluğu ve birliği simgelediği için tercih edilirdi. Altıgenin altı köşesi seni 6 kare ileri götürür.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 6,
    "baslik": "II. Abdülhamid'in Tahta Çıkış Yılı",
-   "bilgi": "II. Abdülhamid, babası Sultan Abdülmecid'in çocukları arasında dünyaya geldiğinde tahta uzak görünüyordu; ancak ağabeyi V. Murad'ın tahttan indirilmesinin ardından 1876'da tahta çıktı. Otuz üç yıl süren uzun saltanatı Osmanlı'nın son güçlü merkezî dönemiydi. Tahta çıkış yılı olan 1876'nın son hanesi '6', seni 6 kare ilerletir."
+   "bilgi": "II. Abdülhamid, babası Sultan Abdülmecid'in çocukları arasında dünyaya geldiğinde tahta uzak görünüyordu; ancak ağabeyi V. Murad'ın tahttan indirilmesinin ardından 1876'da tahta çıktı. Otuz üç yıl süren uzun saltanatı Osmanlı'nın son güçlü merkezî dönemiydi. Tahta çıkış yılı olan 1876'nın son hanesi '6', seni 6 kare ilerletir.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 6,
    "baslik": "Altı Köşeli Mührü Süleyman",
-   "bilgi": "Osmanlı tezyinatında ve özellikle sancak ile alemlerde sıkça görülen 'Mührü Süleyman', iç içe geçmiş iki üçgenin oluşturduğu altı köşeli bir yıldız motifidir; koruyucu ve mübarek bir sembol olarak kullanılırdı. Bu altı köşeli yıldızın köşeleri seni 6 kare ilerletir."
+   "bilgi": "Osmanlı tezyinatında ve özellikle sancak ile alemlerde sıkça görülen 'Mührü Süleyman', iç içe geçmiş iki üçgenin oluşturduğu altı köşeli bir yıldız motifidir; koruyucu ve mübarek bir sembol olarak kullanılırdı. Bu altı köşeli yıldızın köşeleri seni 6 kare ilerletir.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 6,
    "baslik": "V. Murad'ın Kısa Saltanatı",
-   "bilgi": "V. Murad Osmanlı'nın beşinci Murad'ı olup, 1876'da tahta çıkmış ancak yalnızca yaklaşık üç ay tahtta kalıp sağlık gerekçesiyle indirilmiştir. Bu kısa dönem, bir yılı bile bulmadan biten ender saltanatlardandır. Tahta çıkış ve iniş yılı 1876'nın son hanesi 6 olduğu için 6 kare ilerlersin."
+   "bilgi": "V. Murad Osmanlı'nın beşinci Murad'ı olup, 1876'da tahta çıkmış ancak yalnızca yaklaşık üç ay tahtta kalıp sağlık gerekçesiyle indirilmiştir. Bu kısa dönem, bir yılı bile bulmadan biten ender saltanatlardandır. Tahta çıkış ve iniş yılı 1876'nın son hanesi 6 olduğu için 6 kare ilerlersin.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedikule Hisarı'nın Surları",
-   "bilgi": "Fatih Sultan Mehmed, İstanbul'u fethettikten sonra Bizans'ın Altın Kapı bölgesindeki üç kuleye dört kule daha ekleterek toplam yedi kuleli bir hisar inşa ettirdi. Bu yüzden yapıya 'Yedikule' adı verildi; uzun yıllar hem hazine deposu hem de devlet zindanı olarak kullanıldı."
+   "bilgi": "Fatih Sultan Mehmed, İstanbul'u fethettikten sonra Bizans'ın Altın Kapı bölgesindeki üç kuleye dört kule daha ekleterek toplam yedi kuleli bir hisar inşa ettirdi. Bu yüzden yapıya 'Yedikule' adı verildi; uzun yıllar hem hazine deposu hem de devlet zindanı olarak kullanıldı.",
+   "tema": {
+    "ad": "Fetih ve Kuşatma",
+    "renk": "#B03A2E"
+   },
+   "gorsel": "tema-fetih-kusatma.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedi Tepeli Şehir",
-   "bilgi": "İstanbul, tıpkı eski Roma gibi yedi tepe üzerine kurulu kabul edilir ve Osmanlılar tepelere büyük selâtin camileri kondurmuştur. Fatih, Beyazıt ve Süleymaniye camileri bu tepeleri taçlandırır; şehrin 'yedi tepesi' Osmanlı silüetinin simgesi hâline gelmiştir."
+   "bilgi": "İstanbul, tıpkı eski Roma gibi yedi tepe üzerine kurulu kabul edilir ve Osmanlılar tepelere büyük selâtin camileri kondurmuştur. Fatih, Beyazıt ve Süleymaniye camileri bu tepeleri taçlandırır; şehrin 'yedi tepesi' Osmanlı silüetinin simgesi hâline gelmiştir.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedi İklimin Hükümdarı",
-   "bilgi": "Eski coğrafyada dünya 'yedi iklim' diye yedi kuşağa ayrılırdı ve geniş topraklara hükmeden hükümdarlar 'yedi iklimin sultanı' unvanıyla anılırdı. Kanunî Sultan Süleyman dönemi şairleri, padişahın üç kıtaya yayılan hâkimiyetini bu yedi iklim ifadesiyle övmüştür."
+   "bilgi": "Eski coğrafyada dünya 'yedi iklim' diye yedi kuşağa ayrılırdı ve geniş topraklara hükmeden hükümdarlar 'yedi iklimin sultanı' unvanıyla anılırdı. Kanunî Sultan Süleyman dönemi şairleri, padişahın üç kıtaya yayılan hâkimiyetini bu yedi iklim ifadesiyle övmüştür.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedi Düvele Karşı",
-   "bilgi": "Osmanlı halk dilinde Avrupa'nın büyük devletlerini topluca anlatmak için 'yedi düvel' deyimi kullanılırdı. Özellikle Millî Mücadele yıllarında Anadolu halkı, kendisine karşı birleşmiş güçleri 'yedi düvele karşı savaştık' sözüyle ifade etmiştir."
+   "bilgi": "Osmanlı halk dilinde Avrupa'nın büyük devletlerini topluca anlatmak için 'yedi düvel' deyimi kullanılırdı. Özellikle Millî Mücadele yıllarında Anadolu halkı, kendisine karşı birleşmiş güçleri 'yedi düvele karşı savaştık' sözüyle ifade etmiştir.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedinci Padişah: Fatih",
-   "bilgi": "İstanbul'u 1453'te fethederek çağ kapatıp çağ açan Fatih Sultan Mehmed, Osmanlı tahtına çıkan yedinci padişahtır. Osman Gazi, Orhan Gazi, I. Murad, I. Bayezid, I. Mehmed (Çelebi) ve II. Murad'dan sonra tahta geçen Fatih, fethiyle Osmanlı Beyliği'ni gerçek bir imparatorluğa, İstanbul'u ise yeni payitahta dönüştürmüştür."
+   "bilgi": "İstanbul'u 1453'te fethederek çağ kapatıp çağ açan Fatih Sultan Mehmed, Osmanlı tahtına çıkan yedinci padişahtır. Osman Gazi, Orhan Gazi, I. Murad, I. Bayezid, I. Mehmed (Çelebi) ve II. Murad'dan sonra tahta geçen Fatih, fethiyle Osmanlı Beyliği'ni gerçek bir imparatorluğa, İstanbul'u ise yeni payitahta dönüştürmüştür.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 7,
    "baslik": "Yedi Kıta Mehter (Nevbet)",
-   "bilgi": "Osmanlı'da hükümdarlık alameti sayılan mehterhane, eski Türk-İslâm geleneğinde günde belirli vakitlerde 'nevbet' vururdu; nevbetin günde yedi kez çalınması ise en yüksek hükümdarlık derecesinin nişanesi kabul edilirdi. Bir beye taht ve tuğ verildiğinde mehterin nevbet çalması, o beyliğin artık bağımsız bir devlet sayıldığını ilan ederdi."
+   "bilgi": "Osmanlı'da hükümdarlık alameti sayılan mehterhane, eski Türk-İslâm geleneğinde günde belirli vakitlerde 'nevbet' vururdu; nevbetin günde yedi kez çalınması ise en yüksek hükümdarlık derecesinin nişanesi kabul edilirdi. Bir beye taht ve tuğ verildiğinde mehterin nevbet çalması, o beyliğin artık bağımsız bir devlet sayıldığını ilan ederdi.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 8,
    "baslik": "Sahn-ı Seman'ın Sekiz Medresesi",
-   "bilgi": "Fatih Sultan Mehmed, fethettiği İstanbul'da bugünkü Fatih Camii çevresinde Sahn-ı Seman ('Sekiz Avlulu') adıyla bilinen sekiz yüksek medrese kurdurdu. Bu sekiz medrese, Osmanlı'nın en üst düzey ilim merkezi olarak hukuk, kelam ve aklî ilimlerin öğretildiği bir kampüs işlevi gördü. 'Seman' kelimesi Arapçada sekiz demektir."
+   "bilgi": "Fatih Sultan Mehmed, fethettiği İstanbul'da bugünkü Fatih Camii çevresinde Sahn-ı Seman ('Sekiz Avlulu') adıyla bilinen sekiz yüksek medrese kurdurdu. Bu sekiz medrese, Osmanlı'nın en üst düzey ilim merkezi olarak hukuk, kelam ve aklî ilimlerin öğretildiği bir kampüs işlevi gördü. 'Seman' kelimesi Arapçada sekiz demektir.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 8,
    "baslik": "Dokuzuncu Padişah Yavuz",
-   "bilgi": "Yavuz Sultan Selim, Osmanlı tahtına çıkan dokuzuncu padişahtı. Sekiz yıllık kısa saltanatında (1512-1520) Çaldıran'da Safevileri, Mercidabık ve Ridaniye'de Memlûkleri yenerek devletin sınırlarını Mısır ve Hicaz'a kadar genişletti. Onunla birlikte halifelik Osmanlı hanedanına geçmiştir. Saltanatının sekiz yıl sürmesi, onu sekiz sayısıyla anılır kılar."
+   "bilgi": "Yavuz Sultan Selim, Osmanlı tahtına çıkan dokuzuncu padişahtı. Sekiz yıllık kısa saltanatında (1512-1520) Çaldıran'da Safevileri, Mercidabık ve Ridaniye'de Memlûkleri yenerek devletin sınırlarını Mısır ve Hicaz'a kadar genişletti. Onunla birlikte halifelik Osmanlı hanedanına geçmiştir. Saltanatının sekiz yıl sürmesi, onu sekiz sayısıyla anılır kılar.",
+   "tema": {
+    "ad": "Fetih ve Kuşatma",
+    "renk": "#B03A2E"
+   },
+   "gorsel": "tema-fetih-kusatma.webp"
   },
   {
    "sayi": 8,
    "baslik": "Sekiz Cennet Kapısı",
-   "bilgi": "İslam inancında cennetin sekiz kapısı olduğu kabul edilir ve Osmanlı mimarisinde bu sembol sık işlenmiştir. Edirne'deki II. Bayezid Külliyesi gibi yapılarda ve birçok türbede sekizgen planlar bu inancı yansıtır. Mimar Sinan da bazı sebil ve çeşmelerini sekizgen formda tasarlamıştır."
+   "bilgi": "İslam inancında cennetin sekiz kapısı olduğu kabul edilir ve Osmanlı mimarisinde bu sembol sık işlenmiştir. Edirne'deki II. Bayezid Külliyesi gibi yapılarda ve birçok türbede sekizgen planlar bu inancı yansıtır. Mimar Sinan da bazı sebil ve çeşmelerini sekizgen formda tasarlamıştır.",
+   "tema": {
+    "ad": "Hayır, Vakıf ve Dayanışma",
+    "renk": "#2F7A6B"
+   },
+   "gorsel": "tema-hayir-vakif-dayanisma.webp"
   },
   {
    "sayi": 8,
    "baslik": "Sekizgen Sebiller",
-   "bilgi": "Klasik Osmanlı mimarisinde sebiller (su dağıtım yapıları) çoğunlukla sekizgen planda inşa edilirdi; III. Ahmed Çeşmesi'nin köşesindeki sebil bunun bilinen örneğidir. Sekizgen form, hem yapısal denge hem de cennetin sekiz kapısına yapılan sembolik gönderme nedeniyle tercih edilmiştir. Su dağıtmak, Osmanlı'da en makbul hayır işlerinden sayılırdı."
+   "bilgi": "Klasik Osmanlı mimarisinde sebiller (su dağıtım yapıları) çoğunlukla sekizgen planda inşa edilirdi; III. Ahmed Çeşmesi'nin köşesindeki sebil bunun bilinen örneğidir. Sekizgen form, hem yapısal denge hem de cennetin sekiz kapısına yapılan sembolik gönderme nedeniyle tercih edilmiştir. Su dağıtmak, Osmanlı'da en makbul hayır işlerinden sayılırdı.",
+   "tema": {
+    "ad": "Hayır, Vakıf ve Dayanışma",
+    "renk": "#2F7A6B"
+   },
+   "gorsel": "tema-hayir-vakif-dayanisma.webp"
   },
   {
    "sayi": 8,
    "baslik": "Tuğrada Üç Tuğ Çizgisi",
-   "bilgi": "Osmanlı padişahlarının imzası olan tuğranın gelişmiş biçimi, 'tuğ' adı verilen ve yukarı doğru uzanan dikey çizgilerle tanınır. Olgun tuğralarda bu dikey unsurların sayısı gelenekle üç adettir; tuğranın tüm bölümleriyle (sere, beyze, kol, zülfe) çok parçalı yapısı hat sanatında özenli bir denge gerektirir. Tuğra, Orhan Bey'den itibaren kullanılmıştır."
+   "bilgi": "Osmanlı padişahlarının imzası olan tuğranın gelişmiş biçimi, 'tuğ' adı verilen ve yukarı doğru uzanan dikey çizgilerle tanınır. Olgun tuğralarda bu dikey unsurların sayısı gelenekle üç adettir; tuğranın tüm bölümleriyle (sere, beyze, kol, zülfe) çok parçalı yapısı hat sanatında özenli bir denge gerektirir. Tuğra, Orhan Bey'den itibaren kullanılmıştır.",
+   "tema": {
+    "ad": "Hat, Tuğra ve Ferman",
+    "renk": "#3B2E6B"
+   },
+   "gorsel": "tema-hat-tugra-ferman.webp"
   },
   {
    "sayi": 8,
    "baslik": "Altı Yüzyılı Devirmek",
-   "bilgi": "Osmanlı Devleti, 1299'da Osman Bey'in beyliğiyle başlayıp 1922'de saltanatın kaldırılmasıyla son buldu ve böylece yaklaşık altı yüzyıl ayakta kaldı; tarihin en uzun ömürlü hanedanlarından biridir. Devlet, kuruluş döneminde Söğüt ve Domaniç çevresindeki küçük bir uç beyliğinden cihan devletine dönüşmüştür. Bu yükselişte Sahn-ı Seman'ın sekiz medresesi gibi eğitim kurumları önemli rol oynadı."
+   "bilgi": "Osmanlı Devleti, 1299'da Osman Bey'in beyliğiyle başlayıp 1922'de saltanatın kaldırılmasıyla son buldu ve böylece yaklaşık altı yüzyıl ayakta kaldı; tarihin en uzun ömürlü hanedanlarından biridir. Devlet, kuruluş döneminde Söğüt ve Domaniç çevresindeki küçük bir uç beyliğinden cihan devletine dönüşmüştür. Bu yükselişte Sahn-ı Seman'ın sekiz medresesi gibi eğitim kurumları önemli rol oynadı.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuz Tuğlu Padişahın Nişanı",
-   "bilgi": "Osmanlı geleneğinde sancakbeyi, beylerbeyi, vezir ve padişahın tuğ sayıları rütbeye göre artardı; sancakbeyi bir, beylerbeyi iki, vezir üç, sadrazam beş tuğ taşırken en yüksek rütbe olan padişaha dokuz tuğ yakıştırılırdı. Eski Türk hakanlık geleneğinden gelen tuğ, at kuyruğundan yapılan bir hükümdarlık alametiydi; dokuz tuğ, eski Türk inanışındaki dokuz kat göğü ve en yüce egemenliği simgelerdi."
+   "bilgi": "Osmanlı geleneğinde sancakbeyi, beylerbeyi, vezir ve padişahın tuğ sayıları rütbeye göre artardı; sancakbeyi bir, beylerbeyi iki, vezir üç, sadrazam beş tuğ taşırken en yüksek rütbe olan padişaha dokuz tuğ yakıştırılırdı. Eski Türk hakanlık geleneğinden gelen tuğ, at kuyruğundan yapılan bir hükümdarlık alametiydi; dokuz tuğ, eski Türk inanışındaki dokuz kat göğü ve en yüce egemenliği simgelerdi.",
+   "tema": {
+    "ad": "Orta Asya Türk Kökleri",
+    "renk": "#6B4A2B"
+   },
+   "gorsel": "tema-orta-asya-turk-kokleri.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuz Oğuz (Tokuz Oğuz) Birliği",
-   "bilgi": "Tarihte 'Dokuz Oğuz' (Tokuz Oğuz) adıyla anılan, dokuz boydan oluşan büyük bir Türk boy birliği bulunurdu; Orhun Yazıtları'nda da bu birlikten söz edilir. Oğuz geleneğinde dokuz sayısı kutlu sayılırdı: hükümdarın dokuz tuğu, dokuz kat gök ve dokuzlu armağan düzeni gibi pek çok unsurda dokuz, en yüce ve eksiksiz olanı temsil ederdi. Osmanlı hanedanının mensup olduğu Kayı boyu da Oğuzların Bozok kolundan gelir."
+   "bilgi": "Tarihte 'Dokuz Oğuz' (Tokuz Oğuz) adıyla anılan, dokuz boydan oluşan büyük bir Türk boy birliği bulunurdu; Orhun Yazıtları'nda da bu birlikten söz edilir. Oğuz geleneğinde dokuz sayısı kutlu sayılırdı: hükümdarın dokuz tuğu, dokuz kat gök ve dokuzlu armağan düzeni gibi pek çok unsurda dokuz, en yüce ve eksiksiz olanı temsil ederdi. Osmanlı hanedanının mensup olduğu Kayı boyu da Oğuzların Bozok kolundan gelir.",
+   "tema": {
+    "ad": "Orta Asya Türk Kökleri",
+    "renk": "#6B4A2B"
+   },
+   "gorsel": "tema-orta-asya-turk-kokleri.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuz Kubbeli Edirne Eski Camii",
-   "bilgi": "Edirne'de Çelebi Mehmed döneminde 1414 yılında tamamlanan Eski Cami, üç sıra hâlinde dizilmiş dokuz eşit kubbeyle örtülü çok kubbeli (ulu cami) planının en bilinen örneklerindendir. Dört fil ayağına benzer kalın payelerin taşıdığı dokuz kubbeli düzen, erken dönem Osmanlı mimarisinin sade ve görkemli anlayışını yansıtır; iç duvarlarındaki büyük hat yazılarıyla da ün kazanmıştır."
+   "bilgi": "Edirne'de Çelebi Mehmed döneminde 1414 yılında tamamlanan Eski Cami, üç sıra hâlinde dizilmiş dokuz eşit kubbeyle örtülü çok kubbeli (ulu cami) planının en bilinen örneklerindendir. Dört fil ayağına benzer kalın payelerin taşıdığı dokuz kubbeli düzen, erken dönem Osmanlı mimarisinin sade ve görkemli anlayışını yansıtır; iç duvarlarındaki büyük hat yazılarıyla da ün kazanmıştır.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuzuncu Padişah Yavuz Sultan Selim",
-   "bilgi": "Osmanlı tahtına çıkış sırasına göre dokuzuncu padişah olan I. Selim (Yavuz), 1512-1520 yılları arasında hüküm sürdü. 1517'de Memlük Devleti'ni ortadan kaldırarak hilafeti Osmanlı hanedanına taşıdı ve Mukaddes Emanetleri İstanbul'a getirdi; sekiz yıllık kısa saltanatına çok geniş fetihler sığdırdı."
+   "bilgi": "Osmanlı tahtına çıkış sırasına göre dokuzuncu padişah olan I. Selim (Yavuz), 1512-1520 yılları arasında hüküm sürdü. 1517'de Memlük Devleti'ni ortadan kaldırarak hilafeti Osmanlı hanedanına taşıdı ve Mukaddes Emanetleri İstanbul'a getirdi; sekiz yıllık kısa saltanatına çok geniş fetihler sığdırdı.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuz Hane Bir Köy: Defter Düzeni",
-   "bilgi": "Osmanlı malî teşkilatının temel kayıt birimi olan defter, gelir ve giderlerin tutulduğu hazine düzeninin belkemiğiydi. Tahrir defterleri, ülkenin nüfusunu ve vergi kaynaklarını belirli aralıklarla kayıt altına alır; bu sayım ve kayıt geleneği devletin merkezî maliyesini ayakta tutan en önemli unsurlardan biriydi. Dokuz hane kadar küçük bir yerleşimin bile köy sayılıp deftere işlenmesi, bu kayıt geleneğindeki titizliğin güzel bir göstergesiydi."
+   "bilgi": "Osmanlı malî teşkilatının temel kayıt birimi olan defter, gelir ve giderlerin tutulduğu hazine düzeninin belkemiğiydi. Tahrir defterleri, ülkenin nüfusunu ve vergi kaynaklarını belirli aralıklarla kayıt altına alır; bu sayım ve kayıt geleneği devletin merkezî maliyesini ayakta tutan en önemli unsurlardan biriydi. Dokuz hane kadar küçük bir yerleşimin bile köy sayılıp deftere işlenmesi, bu kayıt geleneğindeki titizliğin güzel bir göstergesiydi.",
+   "tema": {
+    "ad": "Maliye, Defter ve Teşkilat",
+    "renk": "#4A5240"
+   },
+   "gorsel": "tema-maliye-defter-teskilat.webp"
   },
   {
    "sayi": 9,
    "baslik": "Dokuz Yaşında Şehzade Eğitimi",
-   "bilgi": "Osmanlı şehzadeleri küçük yaşlardan itibaren lala denilen tecrübeli devlet adamlarının gözetiminde yetiştirilir, belirli bir yaşa geldiklerinde sancağa çıkarılarak yöneticilik tecrübesi kazanırdı. Şehzadeler daha çocuk yaştayken bed-i besmele töreniyle eğitime başlar; saray hocaları elinde dinî ilimler, dil, hat ve binicilik gibi alanlarda yetiştirilir, dokuz on yaşlarına geldiklerinde bu eğitim iyice yoğunlaşırdı."
+   "bilgi": "Osmanlı şehzadeleri küçük yaşlardan itibaren lala denilen tecrübeli devlet adamlarının gözetiminde yetiştirilir, belirli bir yaşa geldiklerinde sancağa çıkarılarak yöneticilik tecrübesi kazanırdı. Şehzadeler daha çocuk yaştayken bed-i besmele töreniyle eğitime başlar; saray hocaları elinde dinî ilimler, dil, hat ve binicilik gibi alanlarda yetiştirilir, dokuz on yaşlarına geldiklerinde bu eğitim iyice yoğunlaşırdı.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 10,
    "baslik": "Mete Han ve Onlu Ordu",
-   "bilgi": "Büyük Hun Hükümdarı Mete Han, orduyu 10'lu sayma düzenine göre teşkilatlandırdı: on, yüz, bin ve on bin (tümen) birlikleri. Bu onlu askerî sistem sonraki Türk devletlerine ve dünya ordularına örnek oldu. Sayı 10, bu onlu teşkilatın temel basamağıdır."
+   "bilgi": "Büyük Hun Hükümdarı Mete Han, orduyu 10'lu sayma düzenine göre teşkilatlandırdı: on, yüz, bin ve on bin (tümen) birlikleri. Bu onlu askerî sistem sonraki Türk devletlerine ve dünya ordularına örnek oldu. Sayı 10, bu onlu teşkilatın temel basamağıdır.",
+   "tema": {
+    "ad": "Orta Asya Türk Kökleri",
+    "renk": "#6B4A2B"
+   },
+   "gorsel": "tema-orta-asya-turk-kokleri.webp"
   },
   {
    "sayi": 10,
    "baslik": "Onuncu Padişah Kanuni",
-   "bilgi": "Osmanlı'nın yükseliş dönemi sayılan dönem güçlü sultanlar çağıdır; Fatih, II. Bayezid, Yavuz ve Kanuni gibi hükümdarlar imparatorluğu zirveye taşıdı. Bunlar arasında Kanuni Sultan Süleyman, Osmanlı tahtına çıkan 10. padişahtır. Sayı 10, Kanuni'nin sıra numarasını hatırlatır."
+   "bilgi": "Osmanlı'nın yükseliş dönemi sayılan dönem güçlü sultanlar çağıdır; Fatih, II. Bayezid, Yavuz ve Kanuni gibi hükümdarlar imparatorluğu zirveye taşıdı. Bunlar arasında Kanuni Sultan Süleyman, Osmanlı tahtına çıkan 10. padişahtır. Sayı 10, Kanuni'nin sıra numarasını hatırlatır.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 10,
    "baslik": "Enderun'da Kademeli Yükseliş",
-   "bilgi": "Osmanlı sarayında Enderun, devlet adamı ve komutan yetiştiren bir okuldu; öğrenciler kademeli odalarda eğitim görürdü. Disiplin ve liyakat esaslı bu sistem, en yetenekli devşirme gençlerini sadrazamlığa kadar yükseltebiliyordu. Eğitimin kademeli ilerleyişi, 10'lu basamak gibi adım adım yükselmeyi andırır."
+   "bilgi": "Osmanlı sarayında Enderun, devlet adamı ve komutan yetiştiren bir okuldu; öğrenciler kademeli odalarda eğitim görürdü. Disiplin ve liyakat esaslı bu sistem, en yetenekli devşirme gençlerini sadrazamlığa kadar yükseltebiliyordu. Eğitimin kademeli ilerleyişi, 10'lu basamak gibi adım adım yükselmeyi andırır.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 10,
    "baslik": "Onuncu Hükümdar Kanuni",
-   "bilgi": "Kanuni Sultan Süleyman, Osmanlı tahtına çıkan 10. padişahtır ve 46 yıl hüküm sürerek en uzun saltanat süren sultan oldu. Döneminde hukuk alanında yaptığı düzenlemeler nedeniyle Batı'da 'Muhteşem', Doğu'da 'Kanuni' unvanıyla anıldı. Sayı 10, Kanuni'nin tahttaki sırasını gösterir."
+   "bilgi": "Kanuni Sultan Süleyman, Osmanlı tahtına çıkan 10. padişahtır ve 46 yıl hüküm sürerek en uzun saltanat süren sultan oldu. Döneminde hukuk alanında yaptığı düzenlemeler nedeniyle Batı'da 'Muhteşem', Doğu'da 'Kanuni' unvanıyla anıldı. Sayı 10, Kanuni'nin tahttaki sırasını gösterir.",
+   "tema": {
+    "ad": "İlim ve Medrese",
+    "renk": "#2E6B4F"
+   },
+   "gorsel": "tema-ilim-medrese.webp"
   },
   {
    "sayi": 10,
    "baslik": "On Bin Kişilik Tümen",
-   "bilgi": "Türk askerî tarihinde 'tümen' on bin askerden oluşan en büyük birliği ifade eder ve bu kelime bugün de orduda kullanılır. Mete Han'ın onlu teşkilatında tümen, sistemin en üst basamağını oluşturuyordu. Sayı 10, on bin kişilik tümeni meydana getiren onlu çarpan düzenine bağlanır."
+   "bilgi": "Türk askerî tarihinde 'tümen' on bin askerden oluşan en büyük birliği ifade eder ve bu kelime bugün de orduda kullanılır. Mete Han'ın onlu teşkilatında tümen, sistemin en üst basamağını oluşturuyordu. Sayı 10, on bin kişilik tümeni meydana getiren onlu çarpan düzenine bağlanır.",
+   "tema": {
+    "ad": "Orta Asya Türk Kökleri",
+    "renk": "#6B4A2B"
+   },
+   "gorsel": "tema-orta-asya-turk-kokleri.webp"
   },
   {
    "sayi": 10,
    "baslik": "Onlu Sayma Düzeni",
-   "bilgi": "Eski Türkler astronomide ve takvim hesaplarında usta olup On İki Hayvanlı Takvim'i kullanmış, sayma ve teşkilatlanmada onlu düzeni benimsemişlerdir. Ordularını on, yüz, bin diye bölmeleri yönetimde sayısal disiplin sağlıyordu. Sayı 10, Türklerin teşkilatçılıkta esas aldığı onlu sistemin çekirdeğidir."
+   "bilgi": "Eski Türkler astronomide ve takvim hesaplarında usta olup On İki Hayvanlı Takvim'i kullanmış, sayma ve teşkilatlanmada onlu düzeni benimsemişlerdir. Ordularını on, yüz, bin diye bölmeleri yönetimde sayısal disiplin sağlıyordu. Sayı 10, Türklerin teşkilatçılıkta esas aldığı onlu sistemin çekirdeğidir.",
+   "tema": {
+    "ad": "Orta Asya Türk Kökleri",
+    "renk": "#6B4A2B"
+   },
+   "gorsel": "tema-orta-asya-turk-kokleri.webp"
   },
   {
    "sayi": 11,
    "baslik": "Malazgirt'in Kapısı",
-   "bilgi": "1071 Malazgirt Savaşı, Sultan Alparslan komutasındaki Büyük Selçuklu ordusunun Bizans İmparatoru Romanos Diogenes'i yendiği savaştır. Anadolu'nun Türklere açıldığı bu dönüm noktası 11. yüzyılda yaşanmıştır; 1071 yılı 11. yüzyıla aittir. Sen de 11 kare ilerle."
+   "bilgi": "1071 Malazgirt Savaşı, Sultan Alparslan komutasındaki Büyük Selçuklu ordusunun Bizans İmparatoru Romanos Diogenes'i yendiği savaştır. Anadolu'nun Türklere açıldığı bu dönüm noktası 11. yüzyılda yaşanmıştır; 1071 yılı 11. yüzyıla aittir. Sen de 11 kare ilerle.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 11,
    "baslik": "Kanuni'nin Uzun Saltanatı",
-   "bilgi": "Kanuni Sultan Süleyman, Osmanlı tahtında en uzun süre kalan padişahtır; 1520'den 1566'ya kadar yaklaşık 46 yıl hüküm sürmüştür. Kendisi Osmanlı'nın 10. padişahıdır ve ondan sonra tahta çıkan oğlu II. Selim 11. padişah olmuştur. 11. padişaha ulaşan halkayı temsilen 11 kare ilerle."
+   "bilgi": "Kanuni Sultan Süleyman, Osmanlı tahtında en uzun süre kalan padişahtır; 1520'den 1566'ya kadar yaklaşık 46 yıl hüküm sürmüştür. Kendisi Osmanlı'nın 10. padişahıdır ve ondan sonra tahta çıkan oğlu II. Selim 11. padişah olmuştur. 11. padişaha ulaşan halkayı temsilen 11 kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 11,
    "baslik": "On Birinci Padişah II. Selim",
-   "bilgi": "II. Selim, babası Kanuni Sultan Süleyman'ın 1566'da vefatı üzerine tahta çıkan ve Osmanlı'nın 11. padişahı olan hükümdardır. Sıralamada Osman Bey'den itibaren tam on birinci halkayı oluşturur; onun cülusunu temsilen 11 kare ilerle."
+   "bilgi": "II. Selim, babası Kanuni Sultan Süleyman'ın 1566'da vefatı üzerine tahta çıkan ve Osmanlı'nın 11. padişahı olan hükümdardır. Sıralamada Osman Bey'den itibaren tam on birinci halkayı oluşturur; onun cülusunu temsilen 11 kare ilerle.",
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 11,
    "baslik": "Kuruluşun 11. Yılı",
-   "bilgi": "Osmanlı Beyliği'nin kuruluşu genel kabulle 1299 yılına dayandırılır. Buna göre beyliğin kuruluşunun 11. yılı 1310 yılına denk gelir; bu sıralarda Osman Bey, Bursa ve İznik çevresindeki Bizans tekfurluklarına yönelik kuşatma ve akınlarını sürdürüyordu. Kuruluşun ilk on bir yılını anarak 11 kare ilerle."
+   "bilgi": "Osmanlı Beyliği'nin kuruluşu genel kabulle 1299 yılına dayandırılır. Buna göre beyliğin kuruluşunun 11. yılı 1310 yılına denk gelir; bu sıralarda Osman Bey, Bursa ve İznik çevresindeki Bizans tekfurluklarına yönelik kuşatma ve akınlarını sürdürüyordu. Kuruluşun ilk on bir yılını anarak 11 kare ilerle.",
+   "tema": {
+    "ad": "Fetih ve Kuşatma",
+    "renk": "#B03A2E"
+   },
+   "gorsel": "tema-fetih-kusatma.webp"
   },
   {
    "sayi": 11,
    "baslik": "Otlukbeli'nin Galibi",
-   "bilgi": "Fatih Sultan Mehmed, 1473 Otlukbeli Savaşı'nda Akkoyunlu hükümdarı Uzun Hasan'ı kesin bir yenilgiye uğratarak Osmanlı'nın doğu sınırını güvence altına almıştır. Bu zaferin kazanıldığı 1473 yılı, Anadolu'nun kapısının açıldığı Malazgirt'in (1071) yer aldığı 11. yüzyılın bir devamıdır; o yüzyıla atfen 11 kare ilerle."
+   "bilgi": "Fatih Sultan Mehmed, 1473 Otlukbeli Savaşı'nda Akkoyunlu hükümdarı Uzun Hasan'ı kesin bir yenilgiye uğratarak Osmanlı'nın doğu sınırını güvence altına almıştır. Bu zaferin kazanıldığı 1473 yılı, Anadolu'nun kapısının açıldığı Malazgirt'in (1071) yer aldığı 11. yüzyılın bir devamıdır; o yüzyıla atfen 11 kare ilerle.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 11,
    "baslik": "Mohaç'ta İki Saatlik Zafer",
-   "bilgi": "1526 Mohaç Meydan Muharebesi'nde Kanuni Sultan Süleyman, Macar Kralı II. Lajos'un ordusunu yaklaşık iki saatte bozguna uğratmış ve Macaristan'ın büyük bölümü Osmanlı etkisine girmiştir. Bu zaferi kazanan Kanuni, Osmanlı'nın 10. padişahıdır; ondan sonra tahta geçecek olan oğlu II. Selim ise 11. padişahtır. Bu 11. halkayı düşünerek 11 kare ilerle."
+   "bilgi": "1526 Mohaç Meydan Muharebesi'nde Kanuni Sultan Süleyman, Macar Kralı II. Lajos'un ordusunu yaklaşık iki saatte bozguna uğratmış ve Macaristan'ın büyük bölümü Osmanlı etkisine girmiştir. Bu zaferi kazanan Kanuni, Osmanlı'nın 10. padişahıdır; ondan sonra tahta geçecek olan oğlu II. Selim ise 11. padişahtır. Bu 11. halkayı düşünerek 11 kare ilerle.",
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 12,
    "baslik": "On İki Hayvanlı Türk Takvimi",
-   "bilgi": "Eski Türkler, Çin etkisinden de izler taşıyan ve her yılı bir hayvanla anılan on iki yıllık bir döngüye dayanan takvim kullanırlardı: sıçan, sığır, pars, tavşan, ejder (lu), yılan, at, koyun, maymun, tavuk, köpek ve domuz. Kaşgarlı Mahmud'un Dîvânu Lugâti't-Türk adlı eseri (11. yüzyıl) bu on iki hayvanlı takvimi ve hayvanların sırasını ayrıntılı biçimde aktarır."
+   "bilgi": "Eski Türkler, Çin etkisinden de izler taşıyan ve her yılı bir hayvanla anılan on iki yıllık bir döngüye dayanan takvim kullanırlardı: sıçan, sığır, pars, tavşan, ejder (lu), yılan, at, koyun, maymun, tavuk, köpek ve domuz. Kaşgarlı Mahmud'un Dîvânu Lugâti't-Türk adlı eseri (11. yüzyıl) bu on iki hayvanlı takvimi ve hayvanların sırasını ayrıntılı biçimde aktarır.",
+   "tema": {
+    "ad": "Takvim ve Astronomi",
+    "renk": "#1E3A5F"
+   },
+   "gorsel": "tema-takvim-astronomi.webp"
   },
   {
    "sayi": 12,
    "baslik": "On İki Ana Makam",
-   "bilgi": "Klasik Türk-İslam mûsikîsi kuramında, makamların düzenlendiği edvâr geleneğinde on iki ana (asıl) makam sayılırdı. Sistemci ekolün öncüsü Safiyüddîn Urmevî'nin 13. yüzyılda kaleme aldığı Kitâbü'l-Edvâr adlı eserinde uşşak, nevâ, bûselik, rast, ırak, isfahan gibi makamlar bu on iki temel makam çerçevesinde tasnif edilmiş; bu kuram, Osmanlı mûsikîsinin asırlarca süren makam anlayışına temel oluşturmuştur."
+   "bilgi": "Klasik Türk-İslam mûsikîsi kuramında, makamların düzenlendiği edvâr geleneğinde on iki ana (asıl) makam sayılırdı. Sistemci ekolün öncüsü Safiyüddîn Urmevî'nin 13. yüzyılda kaleme aldığı Kitâbü'l-Edvâr adlı eserinde uşşak, nevâ, bûselik, rast, ırak, isfahan gibi makamlar bu on iki temel makam çerçevesinde tasnif edilmiş; bu kuram, Osmanlı mûsikîsinin asırlarca süren makam anlayışına temel oluşturmuştur.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 12,
    "baslik": "On İki Aylık Mali Yıl ve Rumî Takvim",
-   "bilgi": "Osmanlı Devleti, vergi ve maaş gibi mali işlerini güneş yılına dayanan on iki aylık Rumî takvime göre yürütürdü; çünkü on bir gün kısa olan kamerî (hicrî) yıl, tarımsal hasat ve maliye düzeniyle uyuşmuyordu. Mali yılın başlangıcı, ilkbaharda tarım gelirlerinin toplanmaya başladığı Mart ayına denk getirilmişti."
+   "bilgi": "Osmanlı Devleti, vergi ve maaş gibi mali işlerini güneş yılına dayanan on iki aylık Rumî takvime göre yürütürdü; çünkü on bir gün kısa olan kamerî (hicrî) yıl, tarımsal hasat ve maliye düzeniyle uyuşmuyordu. Mali yılın başlangıcı, ilkbaharda tarım gelirlerinin toplanmaya başladığı Mart ayına denk getirilmişti.",
+   "tema": {
+    "ad": "Takvim ve Astronomi",
+    "renk": "#1E3A5F"
+   },
+   "gorsel": "tema-takvim-astronomi.webp"
   },
   {
    "sayi": 12,
    "baslik": "Lale Devri ve On İki Burç İnceliği",
-   "bilgi": "III. Ahmed döneminde (1718-1730) yaşanan Lale Devri'nde sanat, mimari ve süsleme alanında büyük bir incelik gelişmiş; çini, minyatür ve takvim sanatında on iki burcu betimleyen bezemeler de rağbet görmüştür. Bu dönemde İbrahim Müteferrika ilk Türkçe matbaayı kurarak 1729'da ilk basılı kitabı (Vankulu Lügatı) üretmiştir."
+   "bilgi": "III. Ahmed döneminde (1718-1730) yaşanan Lale Devri'nde sanat, mimari ve süsleme alanında büyük bir incelik gelişmiş; çini, minyatür ve takvim sanatında on iki burcu betimleyen bezemeler de rağbet görmüştür. Bu dönemde İbrahim Müteferrika ilk Türkçe matbaayı kurarak 1729'da ilk basılı kitabı (Vankulu Lügatı) üretmiştir.",
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   },
   {
    "sayi": 12,
    "baslik": "On İki Hayvandan Pars Yılı",
-   "bilgi": "On iki hayvanlı Türk takviminde üçüncü sırada yer alan pars (bars), Türk hükümdarlık geleneğinde güç ve cesaretin simgesi sayılırdı. Orta Asya Türk devletlerinde hükümdarlar, doğdukları ya da tahta çıktıkları yılı bu on iki hayvandan birinin adıyla anar, yazışmalarda ve kitabelerde yıl bu şekilde belirtilirdi."
+   "bilgi": "On iki hayvanlı Türk takviminde üçüncü sırada yer alan pars (bars), Türk hükümdarlık geleneğinde güç ve cesaretin simgesi sayılırdı. Orta Asya Türk devletlerinde hükümdarlar, doğdukları ya da tahta çıktıkları yılı bu on iki hayvandan birinin adıyla anar, yazışmalarda ve kitabelerde yıl bu şekilde belirtilirdi.",
+   "tema": {
+    "ad": "Takvim ve Astronomi",
+    "renk": "#1E3A5F"
+   },
+   "gorsel": "tema-takvim-astronomi.webp"
   },
   {
    "sayi": 12,
    "baslik": "Yılın On İki Ayı ve Nevruz",
-   "bilgi": "Türklerde yılın on iki ayı güneş takvimine göre düzenlenir, yeni yıl ise gece ile gündüzün eşitlendiği 21 Mart Nevruz'unda başlardı. Selçuklu Sultanı Melikşah döneminde Ömer Hayyam'ın da içinde bulunduğu astronomlar, 1079'da düzenledikleri Celâlî Takvimi ile yılı on iki aya büyük bir hassasiyetle bölmüş, bu takvim Gregoryen takviminden bile daha küçük bir hata payına sahip olmuştur."
+   "bilgi": "Türklerde yılın on iki ayı güneş takvimine göre düzenlenir, yeni yıl ise gece ile gündüzün eşitlendiği 21 Mart Nevruz'unda başlardı. Selçuklu Sultanı Melikşah döneminde Ömer Hayyam'ın da içinde bulunduğu astronomlar, 1079'da düzenledikleri Celâlî Takvimi ile yılı on iki aya büyük bir hassasiyetle bölmüş, bu takvim Gregoryen takviminden bile daha küçük bir hata payına sahip olmuştur.",
+   "tema": {
+    "ad": "Takvim ve Astronomi",
+    "renk": "#1E3A5F"
+   },
+   "gorsel": "tema-takvim-astronomi.webp"
   },
   {
    "sayi": 2,
@@ -1919,7 +2337,12 @@ window.OYUN_VERISI = {
    "bilgi": "Menzilhanelerde at değiştiren ulaklar haberi şimşek hızıyla taşırdı. Hızın sayesinde 2 ilerle ve TEKRAR Sefer Kartı çek!",
    "ozel": {
     "tur": "tekrar"
-   }
+   },
+   "tema": {
+    "ad": "Kervan ve Ticaret Yolu",
+    "renk": "#9C6B30"
+   },
+   "gorsel": "tema-kervan-ticaret-yolu.webp"
   },
   {
    "sayi": 3,
@@ -1927,7 +2350,12 @@ window.OYUN_VERISI = {
    "bilgi": "Padişah ordunun başında sefere çıktı; ordu şevkle ilerledi. 3 ilerle ve tekrar oyna!",
    "ozel": {
     "tur": "tekrar"
-   }
+   },
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 1,
@@ -1935,7 +2363,12 @@ window.OYUN_VERISI = {
    "bilgi": "Saraydan acele ferman geldi, hızlıca yola koyul. 1 ilerle ve tekrar çek!",
    "ozel": {
     "tur": "tekrar"
-   }
+   },
+   "tema": {
+    "ad": "Hat, Tuğra ve Ferman",
+    "renk": "#3B2E6B"
+   },
+   "gorsel": "tema-hat-tugra-ferman.webp"
   },
   {
    "sayi": 4,
@@ -1943,7 +2376,12 @@ window.OYUN_VERISI = {
    "bilgi": "Uç beylerinin akıncıları yıldırım gibi ilerlerdi. 4 ilerle ve tekrar oyna!",
    "ozel": {
     "tur": "tekrar"
-   }
+   },
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan.webp"
   },
   {
    "sayi": 0,
@@ -1952,7 +2390,12 @@ window.OYUN_VERISI = {
    "ozel": {
     "tur": "isinla",
     "hedef": "liman"
-   }
+   },
+   "tema": {
+    "ad": "Denizcilik ve Donanma",
+    "renk": "#1F5F7A"
+   },
+   "gorsel": "tema-denizcilik-donanma.webp"
   },
   {
    "sayi": 0,
@@ -1961,7 +2404,12 @@ window.OYUN_VERISI = {
    "ozel": {
     "tur": "isinla",
     "hedef": 0
-   }
+   },
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 0,
@@ -1970,7 +2418,12 @@ window.OYUN_VERISI = {
    "ozel": {
     "tur": "isinla",
     "hedef": 39
-   }
+   },
+   "tema": {
+    "ad": "Hayır, Vakıf ve Dayanışma",
+    "renk": "#2F7A6B"
+   },
+   "gorsel": "tema-hayir-vakif-dayanisma.webp"
   },
   {
    "sayi": 3,
@@ -1978,7 +2431,12 @@ window.OYUN_VERISI = {
    "bilgi": "Sefer mevsimi bitti, ordu kışlağa çekildi. 3 kare geri git.",
    "ozel": {
     "tur": "geri"
-   }
+   },
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi.webp"
   },
   {
    "sayi": 2,
@@ -1986,7 +2444,12 @@ window.OYUN_VERISI = {
    "bilgi": "Sel ve çamur yolları kapattı; geri dönmek zorunda kaldın. 2 kare geri.",
    "ozel": {
     "tur": "geri"
-   }
+   },
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-2.webp"
   },
   {
    "sayi": 4,
@@ -1994,7 +2457,12 @@ window.OYUN_VERISI = {
    "bilgi": "Uzun kuşatma sonuç vermedi, ordu geri çekildi. 4 kare geri git.",
    "ozel": {
     "tur": "geri"
-   }
+   },
+   "tema": {
+    "ad": "Fetih ve Kuşatma",
+    "renk": "#B03A2E"
+   },
+   "gorsel": "tema-fetih-kusatma.webp"
   },
   {
    "sayi": 0,
@@ -2003,7 +2471,12 @@ window.OYUN_VERISI = {
    "ozel": {
     "tur": "sakaci",
     "alt": "yer_degis"
-   }
+   },
+   "tema": {
+    "ad": "Kuruluş ve Hanedan",
+    "renk": "#7B1E27"
+   },
+   "gorsel": "tema-kurulus-hanedan-3.webp"
   },
   {
    "sayi": 0,
@@ -2013,7 +2486,12 @@ window.OYUN_VERISI = {
     "tur": "sakaci",
     "alt": "yakindan_al",
     "deger": 500
-   }
+   },
+   "tema": {
+    "ad": "Meydan Muharebesi",
+    "renk": "#8C2D19"
+   },
+   "gorsel": "tema-meydan-muharebesi-2.webp"
   },
   {
    "sayi": 0,
@@ -2023,7 +2501,12 @@ window.OYUN_VERISI = {
     "tur": "sakaci",
     "alt": "herkesten",
     "deger": 200
-   }
+   },
+   "tema": {
+    "ad": "Lale Devri ve Sanat",
+    "renk": "#9B2D5E"
+   },
+   "gorsel": "tema-lale-devri-sanat.webp"
   }
  ],
  "sorular": [
@@ -2038,7 +2521,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Osmanlı Devleti 1299 yılında Osman Bey tarafından kurulmuştur; devlet adını bu kurucu beyden alır.",
    "konu": "Kuruluş",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "İstanbul'u 1453'te fethederek Osmanlı Devleti'ni imparatorluğa dönüştüren padişah hangisidir?",
@@ -2051,7 +2539,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "II. Mehmed, 1453'te İstanbul'u fethederek 'Fatih' unvanını almış ve Bizans'a son vermiştir.",
    "konu": "Fetihler",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nde 'Kanuni' lakabıyla anılan ve uzun saltanatı döneminde devletin en parlak çağını yaşatan padişah kimdir?",
@@ -2064,7 +2557,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "I. Süleyman, çıkardığı kanunlar ve adalet anlayışı nedeniyle 'Kanuni' olarak anılmış, Batı'da ise 'Muhteşem' lakabıyla tanınmıştır.",
    "konu": "Yükseliş",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Osmanlı ordusunda devşirme sistemiyle yetiştirilen, padişaha bağlı yaya piyade asker ocağına ne ad verilir?",
@@ -2077,7 +2575,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Yeniçeri Ocağı, devşirilen çocukların eğitilmesiyle oluşturulan, padişaha doğrudan bağlı daimi piyade ordusudur.",
    "konu": "Kurumlar",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nde devlet işlerinin görüldüğü, sadrazamın başkanlık ettiği en yüksek yönetim ve danışma kuruluna ne denir?",
@@ -2090,7 +2593,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Divan-ı Hümayun, devlet meselelerinin görüşülüp karara bağlandığı en üst yönetim organıdır.",
    "konu": "Kurumlar",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "1517'de Mısır Seferi sonrasında hilafeti Osmanlı'ya getiren padişah hangisidir?",
@@ -2103,7 +2611,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Yavuz Sultan Selim, 1517'de Memlûk Devleti'ni yenerek Mısır'ı fethetmiş ve hilafet Osmanlı padişahlarına geçmiştir.",
    "konu": "Yükseliş",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Mimar Sinan'ın 'ustalık eserim' dediği, Edirne'de bulunan ünlü camii hangisidir?",
@@ -2116,7 +2629,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Mimar Sinan, Edirne'deki Selimiye Camii için 'ustalık eserim' demiştir; cami Osmanlı mimarisinin zirvelerinden biridir.",
    "konu": "Kültür-Medeniyet",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "İlim, Kültür ve Sanat",
+    "renk": "#C89B3C",
+    "gorsel": "kat-ilim-kultur-sanat.webp"
+   }
   },
   {
    "soru": "Osmanlı öncesi Türk-İslam tarihinde Malazgirt Savaşı'nı 1071'de kazanarak Anadolu'nun kapılarını Türklere açan Büyük Selçuklu sultanı kimdir?",
@@ -2129,7 +2647,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Sultan Alparslan, 1071 Malazgirt Savaşı'nda Bizans'ı yenerek Anadolu'nun Türkleşmesinin önünü açmıştır.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nde şehzadelerin eğitildiği ve devlet adamlarının yetiştirildiği saray okuluna ne ad verilir?",
@@ -2142,7 +2665,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Enderun, Topkapı Sarayı içinde yer alan, yetenekli öğrencilerin devlet hizmetine hazırlandığı saray okuludur.",
    "konu": "Kurumlar",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "İlk Türk-İslam devletlerinden olan ve 'kalıcı ilk Türk-İslam devleti' kabul edilen, Satuk Buğra Han döneminde İslamiyet'i resmen benimseyen devlet hangisidir?",
@@ -2155,7 +2683,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Karahanlılar, Satuk Buğra Han döneminde İslamiyet'i kabul eden ilk Müslüman Türk devleti olarak kabul edilir.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nde toprak ve vergi gelirlerinin asker yetiştirme karşılığında dağıtılmasına dayanan toprak sistemine ne ad verilir?",
@@ -2168,7 +2701,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Tımar Sistemi'nde sipahilere verilen toprak gelirleri karşılığında asker beslenmesi ve tarımsal üretimin sürdürülmesi sağlanmıştır.",
    "konu": "Kurumlar",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Birinci Kosova Savaşı'nı kazanan ancak savaş alanında şehit edilen Osmanlı padişahı kimdir?",
@@ -2181,7 +2719,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "I. Murad (Hüdavendigâr), 1389 Birinci Kosova Savaşı'nı kazanmış, ancak savaş sonrası şehit edilmiştir.",
    "konu": "Fetihler",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nin ilk başkenti hangi şehirdir?",
@@ -2194,7 +2737,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Osmanlı Beyliği Söğüt ve çevresinde kurulmuş olsa da, ilk başkent kabul edilen şehir 1326'da fethedilen Bursa'dır. Daha sonra Edirne başkent olmuştur.",
    "konu": "Kuruluş",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "Ankara Savaşı'nda (1402) Timur'a yenilerek esir düşen ve bu yenilgiyle Osmanlı'da Fetret Devri'ni başlatan padişah kimdir?",
@@ -2207,7 +2755,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Yıldırım Bayezid, 1402 Ankara Savaşı'nda Timur'a yenilip esir düşmüş, ardından taht kavgalarıyla Fetret Devri başlamıştır.",
    "konu": "Yükseliş",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Büyük Selçuklu Devleti'nde medreseler kuran ve 'Siyasetname' adlı eseriyle tanınan ünlü vezir kimdir?",
@@ -2220,7 +2773,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Nizamülmülk, Büyük Selçuklu veziri olarak Nizamiye Medreselerini kurmuş ve devlet yönetimine dair 'Siyasetname'yi yazmıştır.",
    "konu": "Önemli Şahsiyetler",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Önemli Şahsiyetler",
+    "renk": "#8C5A2B",
+    "gorsel": "kat-sahsiyetler.webp"
+   }
   },
   {
    "soru": "Karlofça Antlaşması (1699) Osmanlı tarihinde hangi dönemin başlangıcı kabul edilir?",
@@ -2233,7 +2791,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Karlofça Antlaşması ile Osmanlı ilk kez geniş topraklar kaybetmiş, bu antlaşma gerileme döneminin başlangıcı sayılmıştır.",
    "konu": "Önemli Olaylar",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Önemli Şahsiyetler",
+    "renk": "#8C5A2B",
+    "gorsel": "kat-sahsiyetler.webp"
+   }
   },
   {
    "soru": "Kaşgarlı Mahmud'un Türkçeyi Araplara öğretmek ve Türk dilinin zenginliğini göstermek amacıyla yazdığı ünlü sözlük-eser hangisidir?",
@@ -2246,7 +2809,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Kaşgarlı Mahmud'un yazdığı Divanü Lugati't-Türk, Türkçenin ilk sözlüğü ve Türk kültürünün önemli bir kaynağıdır.",
    "konu": "Kültür-Medeniyet",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "İlim, Kültür ve Sanat",
+    "renk": "#C89B3C",
+    "gorsel": "kat-ilim-kultur-sanat.webp"
+   }
   },
   {
    "soru": "Osmanlı donanmasının ünlü amirali olup 'Kitab-ı Bahriye' adlı denizcilik eserini yazan ve haritalarıyla tanınan denizci kimdir?",
@@ -2259,7 +2827,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Piri Reis, ünlü dünya haritasını çizen ve 'Kitab-ı Bahriye' adlı denizcilik kılavuzunu yazan Osmanlı denizcisidir.",
    "konu": "Önemli Şahsiyetler",
-   "seviye": "kolay"
+   "seviye": "kolay",
+   "kat": {
+    "ad": "Önemli Şahsiyetler",
+    "renk": "#8C5A2B",
+    "gorsel": "kat-sahsiyetler.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nin kurucusu Osman Gazi'nin bağlı olduğu Anadolu Selçuklu Devleti'nin uç beyliği hangi bölgede konumlanmıştı?",
@@ -2272,7 +2845,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Osmanlılar, Anadolu Selçuklu Devleti'nin Bizans sınırındaki bir uç (sınır) beyliğiydi. Söğüt ve Domaniç bölgesinde yerleşen bu beylik, Bizans'a komşu olması sayesinde fetih ve gaza imkânı bularak hızla büyüdü.",
    "konu": "Kuruluş Dönemi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nin Rumeli'deki ilk kalıcı toprağı olan ve Avrupa'ya geçişte üs olarak kullanılan kale hangisidir?",
@@ -2285,7 +2863,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Orhan Bey döneminde, oğlu Süleyman Paşa komutasındaki kuvvetler 1353'te Çimpe Kalesi'ni ele geçirdi. Bu kale, Osmanlıların Rumeli'deki ilk toprağı oldu ve Balkanlara yönelik fetihlerin üssü hâline geldi.",
    "konu": "Rumeli'ye Geçiş",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "I. Murad döneminde gerçekleşen ve Haçlı ordusuna karşı kazanılan, Balkanlardaki Osmanlı hâkimiyetini pekiştiren savaş hangisidir?",
@@ -2298,7 +2881,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1364'teki Sırpsındığı Savaşı'nda I. Murad'ın kuvvetleri Sırp, Bulgar ve Macarlardan oluşan Haçlı ordusunu yenilgiye uğrattı. Bu zafer, Osmanlıların Balkanlardaki ilerleyişini kalıcı hâle getirdi.",
    "konu": "Yükselişe Geçiş",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "Yıldırım Bayezid'in Timur'a yenilerek esir düştüğü ve ardından Osmanlı'da Fetret Devri'nin başladığı savaş hangisidir?",
@@ -2311,7 +2899,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1402'deki Ankara Savaşı'nda Timur, Yıldırım Bayezid'i yenip esir aldı. Bu yenilgi sonrası şehzadeler arasında taht kavgaları başladı ve yaklaşık 11 yıl süren Fetret Devri (1402-1413) yaşandı.",
    "konu": "Fetret Devri",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "İstanbul'un fethi sırasında (1453) Bizans surlarını aşmak için kullanılan büyük topu döken Macar asıllı top dökümcüsü kimdir?",
@@ -2324,7 +2917,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "İstanbul kuşatmasında, Macar asıllı top ustası Urban tarafından dökülen dev toplar Bizans surlarını dövmek için kullanıldı. Bu büyük toplar, kuşatmada Osmanlı'nın teknolojik üstünlüğünü gösterdi.",
    "konu": "İstanbul'un Fethi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Fatih Sultan Mehmed'in çıkardığı ve devlet düzenini, protokol kurallarını ve kanunları düzenleyen, kardeş katlini de hukuki dayanağa bağlayan kanun derlemesi hangisidir?",
@@ -2337,7 +2935,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Fatih Sultan Mehmed, devletin merkezî yapısını güçlendirmek için Kanunname-i Âl-i Osman'ı düzenletti. Bu kanunnamede devlet teşkilatı, saray protokolü ve 'nizam-ı âlem' için kardeş katli gibi konular hükme bağlandı.",
    "konu": "Fatih Dönemi ve Kurumlar",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Yavuz Sultan Selim'in 1517'de Memlûk Devleti'ni yıkmasının ardından halifelik makamının Osmanlı'ya geçmesi hangi gelişmeyle ilişkilendirilir?",
@@ -2350,7 +2953,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Yavuz Sultan Selim, Mercidabık ve Ridaniye savaşlarıyla Memlûk Devleti'ni yıkıp Mısır'ı fethetti (1517). Bu fetihle kutsal emanetler ve halifelik makamı Osmanlı'ya geçti; Osmanlı padişahları İslam dünyasının lideri konumuna yükseldi.",
    "konu": "Yavuz Dönemi Fetihleri",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Kanuni Sultan Süleyman döneminde, 1526'da Macaristan'ın büyük bölümünün Osmanlı hâkimiyetine girmesini sağlayan ve yaklaşık iki saatte kazanılan meydan savaşı hangisidir?",
@@ -2363,7 +2971,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1526'daki Mohaç Meydan Savaşı'nda Kanuni Sultan Süleyman, Macar ordusunu kısa sürede yenilgiye uğrattı. Bu zaferle Macaristan'ın büyük kısmı Osmanlı kontrolüne girdi ve Orta Avrupa'ya kapı açıldı.",
    "konu": "Kanuni Dönemi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Barbaros Hayreddin Paşa komutasındaki Osmanlı donanmasının 1538'de Haçlı donanmasını yenerek Akdeniz'de üstünlük kurmasını sağlayan deniz savaşı hangisidir?",
@@ -2376,7 +2989,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1538'deki Preveze Deniz Savaşı'nda Barbaros Hayreddin Paşa, Andrea Doria komutasındaki Haçlı donanmasını yendi. Bu zafer Akdeniz'in bir 'Türk gölü' hâline gelmesinin başlangıcı sayılır ve deniz hâkimiyetini perçinledi.",
    "konu": "Denizcilik ve Akdeniz",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Denizcilik ve Akdeniz",
+    "renk": "#1F6E8C",
+    "gorsel": "kat-denizcilik.webp"
+   }
   },
   {
    "soru": "Osmanlı klasik döneminde devletin en yüksek karar organı olan ve devlet işlerinin görüşüldüğü kurulun adı nedir?",
@@ -2389,7 +3007,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Divan-ı Hümayun, Osmanlı'da idari, askeri, mali ve hukuki işlerin görüşülüp karara bağlandığı en yüksek devlet kuruludur. Sadrazam, kazaskerler, defterdarlar ve nişancı gibi üyelerden oluşur; padişah adına devleti yönetirdi.",
    "konu": "Devlet Teşkilatı",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Osmanlı'da devşirme sistemiyle alınan çocukların yetiştirildiği ve devlet adamı olarak yetiştikleri saray okulu hangisidir?",
@@ -2402,7 +3025,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Enderun, Osmanlı sarayında devşirme yoluyla alınan yetenekli gençlerin eğitildiği bir okuldu. Burada hem ilim hem askerlik öğretilir, başarılı olanlar vezirliğe kadar yükselen devlet adamları olarak yetiştirilirdi.",
    "konu": "Eğitim Kurumları",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "İlim, Kültür ve Sanat",
+    "renk": "#C89B3C",
+    "gorsel": "kat-ilim-kultur-sanat.webp"
+   }
   },
   {
    "soru": "Osmanlı toprak sisteminde, vergi gelirleri karşılığında devlete asker (cebelü) yetiştirmekle yükümlü olan dirlik sahibi sipahilerin uygulamasına ne ad verilir?",
@@ -2415,7 +3043,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Tımar sisteminde, devlet belirli bölgelerin vergi gelirlerini sipahilere bırakırdı. Sipahiler bu gelir karşılığında savaşa hazır atlı askerler (cebelü) beslemek ve bölgenin güvenliğini sağlamakla yükümlüydü. Bu sistem hem orduyu hem üretimi destekledi.",
    "konu": "Toprak ve Ordu Sistemi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Osmanlı'da farklı din ve mezhepten toplulukların kendi inanç, dil ve hukuk işlerinde özerk olarak örgütlendiği sisteme ne ad verilir?",
@@ -2428,7 +3061,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Millet sistemi, Osmanlı'da gayrimüslim toplulukların (Rum, Ermeni, Yahudi gibi) din temelinde örgütlenip kendi ibadet, eğitim ve aile hukuku işlerini yürütebilmesine dayanıyordu. Bu sistem, çok dinli yapının uzun süre bir arada yaşamasını sağladı.",
    "konu": "Toplum Yapısı",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Osmanlı mimarisinin zirvesi sayılan Süleymaniye ve Selimiye camilerini inşa eden, dönemin baş mimarı kimdir?",
@@ -2441,7 +3079,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Mimar Sinan, Kanuni ve sonrasındaki dönemde Osmanlı baş mimarı olarak yüzlerce esere imza attı. Şehzade Camii'ni çıraklık, Süleymaniye'yi kalfalık, Edirne'deki Selimiye'yi ise ustalık eseri olarak nitelendirmiştir.",
    "konu": "Kültür ve Medeniyet",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "İlim, Kültür ve Sanat",
+    "renk": "#C89B3C",
+    "gorsel": "kat-ilim-kultur-sanat.webp"
+   }
   },
   {
    "soru": "Türk-İslam tarihinde, Talas Savaşı (751) sonrasında Türklerin kitleler hâlinde İslamiyet'i kabul etme sürecini hızlandıran önemli gelişme nedir?",
@@ -2454,7 +3097,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "751'deki Talas Savaşı'nda Müslüman Araplar ile Karluk Türkleri, Çin'e (Tang ordusuna) karşı birlikte savaştı. Bu yakınlaşma, Türkler ile Müslümanlar arasındaki ilişkileri geliştirdi ve Türklerin kitleler hâlinde İslamiyet'i benimsemesinin önünü açtı.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Büyük Selçuklu Devleti'nde medreseler kuran, Nizamiye Medreseleri'ni açan ve 'Siyasetname' adlı eseri yazan ünlü vezir kimdir?",
@@ -2467,7 +3115,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Nizamülmülk, Alparslan ve Melikşah dönemlerinde Büyük Selçuklu veziri olarak devlet teşkilatını düzenledi. Bağdat ve diğer şehirlerde açtığı Nizamiye Medreseleri eğitime büyük katkı sağladı; 'Siyasetname' adlı eserinde devlet yönetimine dair görüşlerini aktardı.",
    "konu": "Türk-İslam Devletleri",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Anadolu'nun Türklere kapılarının açılmasını sağlayan, 1071'de Sultan Alparslan'ın Bizans İmparatoru Romanos Diogenes'i yendiği savaş hangisidir?",
@@ -2480,7 +3133,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1071'deki Malazgirt Savaşı'nda Büyük Selçuklu Sultanı Alparslan, Bizans ordusunu yenip imparator Romanos Diogenes'i esir aldı. Bu zaferle Anadolu'nun kapıları Türklere açıldı ve Anadolu'nun Türkleşmesi süreci başladı.",
    "konu": "Anadolu'nun Türkleşmesi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Osmanlı Devleti'nin Avrupa'da gerilemesinin ve toprak kaybetmeye başlamasının resmî başlangıcı kabul edilen, 1699'da imzalanan antlaşma hangisidir?",
@@ -2493,7 +3151,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "II. Viyana Kuşatması'nın başarısızlığı ve ardından gelen savaşların sonunda 1699'da imzalanan Karlofça Antlaşması ile Osmanlı, ilk kez büyük çapta toprak kaybetti (Macaristan vb.). Bu antlaşma, Osmanlı'nın Avrupa'da gerileme döneminin başlangıcı sayılır.",
    "konu": "Gerileme Dönemi",
-   "seviye": "orta"
+   "seviye": "orta",
+   "kat": {
+    "ad": "Duraklama ve Gerileme",
+    "renk": "#7A6A55",
+    "gorsel": "kat-duraklama-gerileme.webp"
+   }
   },
   {
    "soru": "Osmanlı Beyliği'nin kuruluş döneminde Bizans'a karşı verilen ve Osman Bey'in nüfuzunu önemli ölçüde artıran 1302 tarihli muharebe hangisidir?",
@@ -2506,7 +3169,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1302'deki Koyunhisar (Bafeus) Muharebesi, Osman Bey'in Bizans ordusunu yenerek bölgedeki gücünü pekiştirdiği ilk büyük meydan savaşıdır; Pelekanon (1329) ise Orhan Bey dönemine aittir.",
    "konu": "Kuruluş Dönemi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "Osmanlı'da tımar sisteminin temelini oluşturan ve fethedilen toprakların gelir kaynaklarının kaydedildiği defterlere ne ad verilirdi?",
@@ -2519,7 +3187,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Tahrir defterleri, fethedilen bölgelerdeki vergi yükümlüsü nüfus ve gelir kaynaklarının ayrıntılı (mufassal) ve özet (icmal) olarak kaydedildiği defterlerdir; tımar dağıtımının esasını oluştururdu. Mühimme defterleri ise Divan kararlarını içerirdi.",
    "konu": "Kurumlar",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Ankara Savaşı (1402) sonrası yaşanan Fetret Devri'ni sona erdirerek devlet birliğini yeniden sağlayan padişah kimdir?",
@@ -2532,7 +3205,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "1402 Ankara Savaşı'nda Timur'a yenilen Yıldırım Bayezid'in oğulları arasındaki taht mücadelesi (Fetret Devri) 1413'te Çelebi Mehmed'in (I. Mehmed) kardeşlerini bertaraf ederek birliği sağlamasıyla sona ermiştir.",
    "konu": "Kuruluş Dönemi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   },
   {
    "soru": "İstanbul'un fethinde (1453) Osmanlı donanmasının Haliç'i kapatan zinciri aşmak için karadan gemilerin yürütülmesi olayı, hangi stratejik zorunluluktan kaynaklanmıştır?",
@@ -2545,7 +3223,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Bizans, Haliç'in girişini büyük bir zincirle kapatmıştı. II. Mehmed, donanmayı Haliç'e sokup surları iki yönden baskı altına almak için gemileri Galata sırtlarından karadan yürüterek Haliç'e indirdi.",
    "konu": "Fetihler",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Yavuz Sultan Selim'in 1517'de Memlük Devleti'ni yıkmasıyla Osmanlı'ya geçen ve halifelik makamının Osmanlı'ya intikaliyle ilişkilendirilen kutsal emanetlerin korunduğu kentler arasında öncelikli olan hangisidir?",
@@ -2558,7 +3241,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "1517 Mısır Seferi sonrası Mekke ve Medine'yi kapsayan Haremeyn'in himayesi Osmanlı'ya geçti; padişah 'Hâdimü'l-Haremeyn' unvanını aldı. Bu durum Osmanlı'nın İslam dünyasındaki nüfuzunu pekiştirdi.",
    "konu": "Yükselme Dönemi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Fetihler ve Ordu",
+    "renk": "#B23A3A",
+    "gorsel": "kat-fetihler-ordu.webp"
+   }
   },
   {
    "soru": "Kanuni Sultan Süleyman döneminde hukuki düzenlemeleri sistematize ederek 'kanunname' geleneğini zirveye taşıyan ve 'Şeyhülislam' olarak görev yapan ünlü hukukçu kimdir?",
@@ -2571,7 +3259,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Ebussuud Efendi, Kanuni döneminde örfi hukuk ile şer'i hukuku uzlaştıran fetvalarıyla ve kanunname düzenlemeleriyle Osmanlı hukuk sisteminin sistematikleşmesinde merkezî rol oynamıştır.",
    "konu": "Önemli Şahsiyetler",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Önemli Şahsiyetler",
+    "renk": "#8C5A2B",
+    "gorsel": "kat-sahsiyetler.webp"
+   }
   },
   {
    "soru": "Osmanlı merkez teşkilatında Divan-ı Hümayun'da maliye işlerinden sorumlu olan ve hazine ile bütçeyi yöneten görevli hangisidir?",
@@ -2584,7 +3277,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Defterdar, Divan-ı Hümayun'da devletin mali işlerinden, hazineden ve bütçeden sorumluydu. Nişancı tuğra ve kanunlardan, Kazasker büyük davalar ve kadı atamalarından, Reisülküttab ise yazışmalardan sorumluydu.",
    "konu": "Kurumlar",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Karahanlı hükümdarı Satuk Buğra Han'ın İslam'ı kabulüyle önemli bir dönüm noktası yaşanmıştır. Karahanlıların Türk-İslam tarihindeki en önemli özelliği nedir?",
@@ -2597,7 +3295,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "Karahanlılar, topluca İslam'ı kabul eden ilk büyük Türk devleti olup yönetim ve edebiyatta Türkçeyi kullanmalarıyla (Kutadgu Bilig, Divanü Lügati't-Türk bu dönemin ürünleridir) öne çıkar.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Büyük Selçuklu Devleti'nde Nizamülmülk tarafından kurulan ve Sünni İslam eğitimi ile devlet memuru yetiştiren medrese sistemine ne ad verilir?",
@@ -2610,7 +3313,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Nizamülmülk'ün kurduğu Nizamiye Medreseleri, Bağdat başta olmak üzere çeşitli şehirlerde Sünni eğitim veren, Şii-Batıni propagandasına karşı koyan ve devlet kadrolarını yetiştiren kurumlardı.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "1071 Malazgirt Savaşı'nın Türk tarihi açısından en kalıcı sonucu aşağıdakilerden hangisidir?",
@@ -2623,7 +3331,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Alparslan'ın Bizans imparatoru Romanos Diogenes'i yendiği Malazgirt Savaşı, Anadolu'nun kapılarını Türklere açmış ve Anadolu'nun yurt edinilmesi (Türkleşmesi) sürecini başlatmıştır.",
    "konu": "Türk-İslam Tarihi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Türk-İslam Kökler",
+    "renk": "#2E7D6B",
+    "gorsel": "kat-turk-islam-kokler.webp"
+   }
   },
   {
    "soru": "Osmanlı'da devşirme sistemiyle alınan çocukların eğitildiği ve sarayda üst düzey yönetici yetiştiren okul hangisidir?",
@@ -2636,7 +3349,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Enderun, devşirme yöntemiyle seçilen yetenekli gençlerin saray içinde eğitilerek vezir, beylerbeyi gibi üst düzey devlet adamı olarak yetiştirildiği saray okuluydu. Sahn-ı Seman ise Fatih'in kurduğu yüksek medrese idi.",
    "konu": "Kurumlar",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Osmanlı'nın Avrupa'da kalıcı yenilgiler dönemine girmesinin başlangıcı sayılan ve toprak kaybeden ilk antlaşma olarak nitelenen 1699 antlaşması hangisidir?",
@@ -2649,7 +3367,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1699 Karlofça Antlaşması, II. Viyana bozgunu sonrası Kutsal İttifak'a karşı imzalanmış olup Osmanlı'nın büyük çapta toprak kaybettiği ilk antlaşmadır ve Gerileme Dönemi'nin başlangıcı kabul edilir.",
    "konu": "Duraklama-Gerileme",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Duraklama ve Gerileme",
+    "renk": "#7A6A55",
+    "gorsel": "kat-duraklama-gerileme.webp"
+   }
   },
   {
    "soru": "Türk-İslam edebiyatının ilk eserlerinden olan ve Yusuf Has Hacip tarafından yazılan, ideal devlet yönetimini sembolik karakterlerle anlatan eser hangisidir?",
@@ -2662,7 +3385,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Yusuf Has Hacip'in 1069-1070'te Karahanlı hükümdarına sunduğu Kutadgu Bilig ('Mutluluk Veren Bilgi'), siyasetname türünde olup adalet, devlet, akıl ve kanaati temsil eden karakterlerle ideal yönetimi anlatır.",
    "konu": "Kültür-Medeniyet",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "İlim, Kültür ve Sanat",
+    "renk": "#C89B3C",
+    "gorsel": "kat-ilim-kultur-sanat.webp"
+   }
   },
   {
    "soru": "Osmanlı toprak sisteminde devlete ait olup geliri belirli hizmetlere veya kişilere tahsis edilen ve mülkiyeti devlette kalan toprak türü hangisidir?",
@@ -2675,7 +3403,12 @@ window.OYUN_VERISI = {
    "dogru": 2,
    "aciklama": "Miri arazi, mülkiyeti devlete ait olan ve kullanım hakkı (tasarruf) çiftçilere bırakılan toprak türüdür; tımar sisteminin temelini oluşturur. Mülk arazi özel mülkiyete, vakıf arazi ise hayır kurumlarına tahsis edilirdi.",
    "konu": "Kurumlar",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "Fatih Sultan Mehmed'in çıkardığı ve devletin bekası gerekçesiyle kardeş katlini hukuki zemine oturtan düzenlemeyi içeren kanun metni hangisidir?",
@@ -2688,7 +3421,12 @@ window.OYUN_VERISI = {
    "dogru": 1,
    "aciklama": "Fatih'in Kanunname-i Âl-i Osman'ı, devlet teşkilatını, protokolü ve saltanat veraset usullerini düzenlemiş; nizam-ı âlem (devletin düzeni) gerekçesiyle kardeş katline dair hükmü de içermiştir.",
    "konu": "Kurumlar",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Devlet ve Teşkilat",
+    "renk": "#5E4B8B",
+    "gorsel": "kat-devlet-teskilat.webp"
+   }
   },
   {
    "soru": "1389 I. Kosova Savaşı'nın Osmanlı açısından hem zafer hem de trajik bir kayıpla anılmasının nedeni nedir?",
@@ -2701,7 +3439,12 @@ window.OYUN_VERISI = {
    "dogru": 0,
    "aciklama": "1389 I. Kosova Savaşı Osmanlı zaferiyle sonuçlanmış, ancak savaş alanında I. Murad (Hüdavendigar) bir Sırp tarafından şehit edilmiştir; bu, savaş meydanında şehit düşen tek Osmanlı padişahı olmasıyla anılır.",
    "konu": "Kuruluş Dönemi",
-   "seviye": "zor"
+   "seviye": "zor",
+   "kat": {
+    "ad": "Kuruluş ve Beylik",
+    "renk": "#6B8E4E",
+    "gorsel": "kat-kurulus-beylik.webp"
+   }
   }
  ],
  "placeholder": false
@@ -2914,6 +3657,7 @@ window.OYUN_VERISI = {
     var t = $("#tahta"); t.innerHTML = "";
     var merkez = el("div", "merkez");
     merkez.innerHTML =
+      '<img class="merkez-bg" src="img/kapak.webp" alt="" onerror="this.style.display=\'none\'"><div class="merkez-perde"></div>' +
       '<div class="merkez-ic"><div class="logo-ust">BEYLİKTEN</div><div class="logo-orta">CİHANA</div>' +
       '<div class="logo-alt">Türk-İslam Medeniyeti Strateji Oyunu</div>' +
       '<div class="deste-kutu"><div class="sefer-mini" id="sefer-mini"><div class="sm-no" id="sefer-no">?</div><div class="sm-et">SEFER<br>KARTI</div></div>' +
@@ -3058,10 +3802,16 @@ window.OYUN_VERISI = {
       else if (oz.tur === "isinla") { bigNo = "➜"; altYazi = "ışınlan"; btnLbl = "✨ Işınlan"; renk = "#5b3a8a"; }
       else if (oz.tur === "sakaci") { bigNo = "✦"; altYazi = "özel olay"; btnLbl = "✦ Uygula"; renk = "#8a5a13"; }
     }
-    modalAc('<div class="kart-ust" style="background:' + (oz ? renk : "#7a5b1a") + '">🏇 SEFER KARTI</div>' +
-      '<div class="sefer-buyuk"><div class="sb-no">' + bigNo + '</div><div class="sb-alt">' + altYazi + '</div></div>' +
-      '<h2 style="text-align:center;margin:.3em 0">' + kart.baslik + '</h2>' +
-      '<div class="kart-ogren">💡 ' + kart.bilgi + '</div>' +
+    var trenk = oz ? renk : ((kart.tema && kart.tema.renk) || "#7a5b1a");
+    var tad = (kart.tema && kart.tema.ad) || "Sefer";
+    var tgor = kart.gorsel ? '<img class="yk-img" src="img/' + kart.gorsel + '" alt="" onerror="this.style.display=\'none\'">' : '<div class="yk-img" style="background:linear-gradient(135deg,' + trenk + ',#22180a)"></div>';
+    var sym = (oz && (oz.tur === "isinla" || oz.tur === "sakaci")) ? " sym" : "";
+    modalAc('<div class="yk-head" style="--yk:' + trenk + '">' + tgor + '<div class="yk-perde"></div>' +
+      '<div class="yk-ust">🏇 SEFER KARTI</div><div class="yk-tema">' + tad + '</div>' +
+      '<div class="yk-no' + sym + '">' + bigNo + '</div></div>' +
+      '<div class="yk-altyazi">' + altYazi + '</div>' +
+      '<h2 class="yk-baslik">' + kart.baslik + '</h2>' +
+      '<div class="kart-ogren" style="border-left-color:' + trenk + '">💡 ' + kart.bilgi + '</div>' +
       '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">' + btnLbl + '</button></div>');
     Ses.cek();
     $("#m-ilerle").onclick = function () {
@@ -3292,8 +4042,11 @@ window.OYUN_VERISI = {
   function kartModal(tur, kart, o, bitince) {
     var renk = tur === "ferman" ? "#7d2b2b" : "#1f5c4d", etiket = tur === "ferman" ? "FERMAN" : "VAK'A";
     var etki = etkiOzet(kart.etki);
-    modalAc('<div class="kart-ust" style="background:' + renk + '">' + (tur === "ferman" ? "📜 " : "✴️ ") + etiket + '</div><h2>' + kart.baslik + '</h2><p class="m-bilgi">' + kart.metin + '</p>' +
-      (etki ? '<div class="m-eko" style="text-align:center;font-weight:700">▶ ' + etki + '</div>' : '') +
+    var ogor = kart.gorsel ? '<img class="ok-img" src="img/' + kart.gorsel + '" alt="" onerror="this.style.display=\'none\'">' : '<div class="ok-img" style="background:linear-gradient(135deg,' + renk + ',#1a0d0d)"></div>';
+    modalAc('<div class="ok-head" style="--ok:' + renk + '">' + ogor + '<div class="yk-perde"></div>' +
+      '<div class="ok-etiket">' + (tur === "ferman" ? "📜 " : "✴️ ") + etiket + '</div></div>' +
+      '<h2 class="yk-baslik">' + kart.baslik + '</h2><p class="m-bilgi">' + kart.metin + '</p>' +
+      (etki ? '<div class="ok-etki" style="--ok:' + renk + ';background:' + renk + '">⚜ ' + etki + '</div>' : '') +
       '<div class="kart-ogren">💡 ' + kart.ogren + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-uygula">Uygula</button></div>');
     $("#m-uygula").onclick = function () { kartUygula(kart, o, bitince); };
     if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b && aktif().bot) b.click(); }, 1600);
@@ -3541,7 +4294,11 @@ window.OYUN_VERISI = {
   function soruModal(amac) {
     var s = V.sorular[Math.floor(Math.random() * V.sorular.length)];
     var siklar = s.secenekler.map(function (sk, i) { return '<button class="sik" data-i="' + i + '">' + String.fromCharCode(65 + i) + ') ' + sk + '</button>'; }).join("");
-    modalAc('<div class="kart-ust" style="background:#5b3a8a">📚 BİLGİ SORUSU <span class="sev sev-' + s.seviye + '">' + s.seviye + '</span></div><p class="soru-metin">' + s.soru + '</p><div class="siklar">' + siklar + '</div><div id="soru-sonuc"></div>');
+    var kt = s.kat || {};
+    var kbadge = kt.gorsel ? '<span class="bs-badge"><img src="img/' + kt.gorsel + '" alt="" onerror="this.parentNode.style.display=\'none\'"></span>' : '';
+    modalAc('<div class="bs-head" style="--bs:' + (kt.renk || "#5b3a8a") + ';background:linear-gradient(135deg,' + (kt.renk || "#5b3a8a") + ',rgba(0,0,0,.3))">' + kbadge +
+      '<span class="bs-tx"><b>' + (kt.ad || "Bilgi Sorusu") + '</b><small>📚 Bilgi · ' + s.seviye + '</small></span></div>' +
+      '<p class="soru-metin">' + s.soru + '</p><div class="siklar">' + siklar + '</div><div id="soru-sonuc"></div>');
     document.querySelectorAll(".sik").forEach(function (b) {
       b.onclick = function () {
         var i = parseInt(b.dataset.i, 10), dogru = (i === s.dogru);
