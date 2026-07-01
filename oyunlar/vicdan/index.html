@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5EDE0">
+<title>Vicdan — Kart Kaydırma Oyunu</title>
+<meta name="description" content="Hayal Ortaokulu'nda beş hafta: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---------- Temel ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:radial-gradient(900px 500px at 50% -180px,#FBF4E6,rgba(251,244,230,0)),#F5EDE0;
+  color:#2B2118;
+  min-height:100vh;  /* eski Safari için yedek */
+  min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700}
+button{font-family:inherit;color:inherit}
+.gizli{display:none!important}
+
+/* ---------- Geri linki ---------- */
+.geri{
+  position:fixed;top:10px;left:10px;z-index:60;
+  font-size:.82rem;font-weight:600;text-decoration:none;color:#4A7C59;
+  padding:10px 12px;border-radius:12px;background:rgba(255,253,248,.75);
+  box-shadow:0 2px 8px rgba(43,33,24,.08);
+}
+
+/* ---------- Ekran iskeleti ---------- */
+main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center}
+.ekran{
+  display:none;width:min(420px,100%);flex:1;
+  padding:60px 18px calc(20px + env(safe-area-inset-bottom));
+  flex-direction:column;align-items:center;gap:14px;
+}
+.ekran.aktif{display:flex}
+.ekran.orta{justify-content:center;text-align:center;gap:20px}
+
+.oyun-adi{font-size:3.2rem;letter-spacing:.01em}
+.ust-baslik{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C4574A}
+.tanitim{font-size:.95rem;line-height:1.65;color:rgba(43,33,24,.82);max-width:340px}
+.dugmeler{display:flex;flex-direction:column;gap:12px;width:min(260px,100%)}
+
+/* ---------- Butonlar ---------- */
+.btn{
+  min-height:50px;padding:13px 30px;border:none;border-radius:16px;cursor:pointer;
+  background:#4A7C59;color:#FFFDF8;font-weight:700;font-size:1rem;
+  box-shadow:0 8px 20px rgba(74,124,89,.32);transition:transform .12s ease;
+}
+.btn:active{transform:scale(.96)}
+.btn.ikincil{background:#FFFDF8;color:#2B2118;border:2px solid rgba(43,33,24,.22);box-shadow:0 4px 12px rgba(43,33,24,.08)}
+
+/* ---------- Göstergeler ---------- */
+.gostergeler{display:flex;justify-content:space-between;gap:8px;width:min(340px,100%)}
+.gosterge{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;padding-top:11px}
+.nokta{position:absolute;top:1px;width:7px;height:7px;border-radius:50%;background:#C4574A;opacity:0;transition:opacity .12s linear}
+.g-ikon{font-size:1.1rem;line-height:1}
+.bar{width:7px;height:38px;background:rgba(43,33,24,.13);border-radius:4px;position:relative;overflow:hidden}
+.bar-dolu{position:absolute;bottom:0;left:0;width:100%;height:50%;background:#4A7C59;border-radius:4px;transition:height .55s ease}
+.g-ad{font-size:.6rem;font-weight:600;color:rgba(43,33,24,.6)}
+.gosterge.degisti .g-ikon{animation:zipla .55s ease}
+@keyframes zipla{35%{transform:translateY(-4px) scale(1.25)}}
+
+.ilerleme{
+  display:flex;justify-content:space-between;width:min(340px,100%);
+  font-size:.72rem;font-weight:600;color:rgba(43,33,24,.55);
+}
+
+/* ---------- Kart ---------- */
+.kart-alan{
+  position:relative;flex:1;min-height:330px;width:100%;
+  display:flex;align-items:center;justify-content:center;
+}
+.kart-alan::before{ /* dekoratif arka kart */
+  content:"";position:absolute;width:min(310px,84%);height:86%;
+  background:#EBDFC9;border-radius:22px;transform:rotate(3.5deg);
+  box-shadow:0 8px 20px rgba(43,33,24,.08);
+}
+.kart{
+  position:relative;width:min(340px,100%);
+  height:clamp(340px,50vh,440px);height:clamp(340px,50dvh,440px);
+  background:#FFFDF8;border-radius:22px;overflow:hidden;
+  box-shadow:0 14px 34px rgba(43,33,24,.16);
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
+  cursor:grab;will-change:transform;
+  animation:kartGel .35s ease;
+}
+.kart.tutuluyor{transition:none!important;cursor:grabbing}
+@keyframes kartGel{from{transform:translateY(20px) scale(.95);opacity:0}}
+.portre{height:44%;position:relative}
+.portre-yedek{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px}
+.portre img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.kart-govde{height:56%;padding:14px 18px 16px;display:flex;flex-direction:column;gap:8px}
+.karakter-adi{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.02rem;color:#4A7C59}
+.kart-metin{font-size:.92rem;line-height:1.5;color:rgba(43,33,24,.9)}
+.etiket{
+  position:absolute;top:14px;z-index:5;max-width:62%;
+  padding:8px 12px;border:2px solid #D9A441;border-radius:12px;
+  background:rgba(255,253,248,.94);color:#8A6414;
+  font-weight:700;font-size:.84rem;line-height:1.25;
+  opacity:0;pointer-events:none;
+}
+.etiket-sol{left:12px;transform:rotate(-6deg)}
+.etiket-sag{right:12px;transform:rotate(6deg)}
+
+/* ---------- Seçim butonları ---------- */
+.secimler{display:flex;gap:10px;width:min(340px,100%)}
+.secim{
+  flex:1;min-height:52px;padding:9px 10px;cursor:pointer;
+  border:2px solid rgba(43,33,24,.22);border-radius:14px;background:#FFFDF8;
+  font-weight:600;font-size:.8rem;line-height:1.3;
+  box-shadow:0 4px 10px rgba(43,33,24,.07);transition:transform .12s ease;
+}
+.secim:active{transform:scale(.96)}
+.ipucu{font-size:.7rem;color:rgba(43,33,24,.45)}
+
+/* ---------- Küpe ---------- */
+.kupe-kart{
+  width:min(340px,100%);background:#FFFDF8;border:2px solid #D9A441;border-radius:20px;
+  padding:30px 22px;box-shadow:0 12px 28px rgba(217,164,65,.22);
+}
+.kupe-soz{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.22rem;line-height:1.55}
+.kupe-kaynak{margin-top:14px;font-size:.8rem;font-weight:600;color:rgba(43,33,24,.6)}
+
+/* ---------- Son ekranı ---------- */
+.son-gorsel{display:flex;align-items:flex-end;gap:12px}
+.son-ikon{font-size:56px;line-height:1}
+.son-bar{height:64px;width:10px}
+#son-baslik{color:#C4574A}
+
+/* ---------- Final karne ---------- */
+#ekran-final{position:relative;overflow:hidden}
+.karne{display:flex;flex-direction:column;gap:10px;width:min(320px,100%);z-index:1}
+.karne-satir{
+  display:flex;align-items:center;gap:10px;background:#FFFDF8;
+  border-radius:14px;padding:10px 14px;box-shadow:0 4px 12px rgba(43,33,24,.07);
+}
+.karne-satir.vurgulu{border:2px solid #D9A441}
+.karne-ikon{font-size:1.15rem}
+.karne-ad{font-size:.78rem;font-weight:600;width:74px;text-align:left}
+.karne-bar{flex:1;height:12px;background:rgba(43,33,24,.12);border-radius:6px;overflow:hidden}
+.karne-dolu{height:100%;width:0;border-radius:6px;transition:width 1s ease .25s}
+.karne-deger{font-size:.78rem;font-weight:700;width:26px;text-align:right}
+.final-yorum{
+  width:min(340px,100%);background:#FFFDF8;border-radius:16px;padding:16px 18px;
+  font-size:.88rem;line-height:1.6;color:rgba(43,33,24,.85);
+  box-shadow:0 6px 16px rgba(43,33,24,.08);z-index:1;
+}
+.konfeti{position:absolute;top:-16px;z-index:0;pointer-events:none;animation:konfetiDus linear forwards;opacity:.95}
+@keyframes konfetiDus{to{transform:translateY(105vh) rotate(720deg);opacity:.15}}
+
+/* ---------- Toast ---------- */
+#toast{
+  position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));z-index:100;
+  transform:translate(-50%,16px);max-width:min(360px,calc(100% - 28px));
+  background:#2B2118;color:#F5EDE0;padding:12px 16px;border-radius:14px;
+  font-size:.86rem;line-height:1.45;opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+#toast.goster{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="geri" href="../">← Oyunlar</a>
+<main>
+
+  <!-- Açılış -->
+  <section id="ekran-acilis" class="ekran orta">
+    <div class="ust-baslik">Hayal Ortaokulu</div>
+    <h1 class="oyun-adi">Vicdan</h1>
+    <p class="tanitim">Beş hafta, onlarca seçim. Kartı sola ya da sağa kaydır; her karar vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.</p>
+    <div class="dugmeler">
+      <button id="btn-basla" class="btn">Başla</button>
+      <button id="btn-devam" class="btn ikincil gizli">Devam Et</button>
+    </div>
+  </section>
+
+  <!-- Bölüm girişi -->
+  <section id="ekran-bolum" class="ekran orta">
+    <div class="ust-baslik" id="bolum-no"></div>
+    <h2 id="bolum-ad" style="font-size:2.1rem"></h2>
+    <p class="tanitim" id="bolum-giris"></p>
+    <button id="btn-bolum-basla" class="btn">Haftaya Başla</button>
+  </section>
+
+  <!-- Oyun -->
+  <section id="ekran-oyun" class="ekran">
+    <div class="gostergeler" id="gostergeler"></div>
+    <div class="ilerleme"><span id="ilerleme-hafta"></span><span id="ilerleme-kart"></span></div>
+    <div class="kart-alan" id="kart-alan"></div>
+    <div class="secimler">
+      <button id="btn-sol" class="secim"></button>
+      <button id="btn-sag" class="secim"></button>
+    </div>
+    <div class="ipucu">Kartı sürükle, ok tuşlarını kullan ya da butonlara dokun</div>
+  </section>
+
+  <!-- Kulağına Küpe -->
+  <section id="ekran-kupe" class="ekran orta">
+    <h2 style="font-size:1.7rem">Kulağına Küpe 📿</h2>
+    <div class="kupe-kart">
+      <p class="kupe-soz" id="kupe-soz"></p>
+      <p class="kupe-kaynak" id="kupe-kaynak"></p>
+    </div>
+    <button id="btn-kupe-devam" class="btn">Devam</button>
+  </section>
+
+  <!-- Erken son -->
+  <section id="ekran-son" class="ekran orta">
+    <div class="son-gorsel">
+      <span class="son-ikon" id="son-ikon"></span>
+      <span class="bar son-bar"><span class="bar-dolu" id="son-bar-dolu" style="transition:height 1s ease .3s"></span></span>
+    </div>
+    <h2 id="son-baslik" style="font-size:1.8rem"></h2>
+    <p class="tanitim" id="son-metin"></p>
+    <button id="btn-son-bastan" class="btn">Baştan Başla</button>
+  </section>
+
+  <!-- Final karnesi -->
+  <section id="ekran-final" class="ekran orta">
+    <h2 style="font-size:1.9rem;z-index:1">Dönem Karnesi 🎓</h2>
+    <p class="tanitim" id="final-genel" style="z-index:1"></p>
+    <div class="karne" id="karne"></div>
+    <div class="final-yorum" id="final-yorum"></div>
+    <button id="btn-final-tekrar" class="btn" style="z-index:1">Tekrar Oyna</button>
+  </section>
+
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="content.js"></script>
+<script>
+"use strict";
+(function(){
+
+  /* İçerik dosyası yüklenemediyse sessizce bilgilendir */
+  if (typeof ICERIK === "undefined") {
+    var p = document.querySelector("#ekran-acilis .tanitim");
+    if (p) p.textContent = "İçerik dosyası (content.js) yüklenemedi. Dosyanın index.html ile aynı klasörde olduğundan emin olun.";
+    document.getElementById("ekran-acilis").classList.add("aktif");
+    return;
+  }
+
+  /* ---------- Sabitler ---------- */
+  var STATLAR = [
+    { k:"vicdan",     ad:"Vicdan",     ikon:"❤️", renk:"#C4574A" },
+    { k:"arkadaslik", ad:"Arkadaşlık", ikon:"🤝", renk:"#4A7C59" },
+    { k:"aile",       ad:"Aile",       ikon:"🏠", renk:"#D9A441" },
+    { k:"ozguven",    ad:"Özgüven",    ikon:"⭐", renk:"#7A5C43" }
+  ];
+
+  /* Karakter görünümü: ad, yedek emoji ve gradyan (görsel yoksa) */
+  var KARAKTERLER = {
+    ogretmen: { ad:"Nazan Öğretmen",          emoji:"👩‍🏫", g:["#4A7C59","#A9C5A0"] },
+    mudur:    { ad:"Kemal Bey · Müdür",        emoji:"👨‍💼", g:["#7A5C43","#B99B7C"] },
+    rehber:   { ad:"Murat Bey · Rehber Öğr.",  emoji:"🧑‍🏫", g:["#4A7C59","#D9A441"] },
+    anne:     { ad:"Annen",                    emoji:"👩",   g:["#C4574A","#E2A099"] },
+    baba:     { ad:"Baban",                    emoji:"👨",   g:["#7A5C43","#D9A441"] },
+    kardes:   { ad:"Yusuf · Kardeşin",         emoji:"👦",   g:["#D9A441","#EFD09A"] },
+    dede:     { ad:"Deden",                    emoji:"👴",   g:["#4A7C59","#B99B7C"] },
+    emir:     { ad:"Emir",                     emoji:"😎",   g:["#C4574A","#D9A441"] },
+    zeynep:   { ad:"Zeynep",                   emoji:"🙋‍♀️", g:["#D9A441","#A9C5A0"] },
+    elif:     { ad:"Elif",                     emoji:"🌷",   g:["#E2A099","#EFD09A"] },
+    burak:    { ad:"Burak",                    emoji:"😐",   g:["#7A5C43","#8C8A85"] },
+    selim:    { ad:"Selim",                    emoji:"😊",   g:["#A9C5A0","#EFD09A"] },
+    kantinci: { ad:"İsmail Abi · Kantinci",    emoji:"🧑‍🍳", g:["#C4574A","#B99B7C"] },
+    bakkal:   { ad:"Hasan Amca · Bakkal",      emoji:"👨‍🦳", g:["#4A7C59","#EFD09A"] },
+    komsu:    { ad:"Saliha Teyze · Komşu",     emoji:"👵",   g:["#E2A099","#A9C5A0"] },
+    hademe:   { ad:"Ramazan Amca · Hademe",    emoji:"🧹",   g:["#7A5C43","#A9C5A0"] }
+  };
+
+  var KAYIT_ANAHTARI = "vicdan_kayit_v1";
+  var ESIK_ORANI = 0.3;          // kart genişliğinin %30'u aşılırsa seçim
+  var kartMap = new Map();
+  ICERIK.kartlar.forEach(function(k){ kartMap.set(k.id, k); });
+
+  /* ---------- Eleman referansları ---------- */
+  function el(id){ return document.getElementById(id); }
+  var kartAlan = el("kart-alan"), btnSol = el("btn-sol"), btnSag = el("btn-sag");
+  var toastEl = el("toast"), gostergelerEl = el("gostergeler");
+  var gRef = {};
+
+  /* ---------- Durum ---------- */
+  var durum = null;        // {bolumIdx, stats, flags, deste, desteBoy, gosterilen}
+  var suanki = null;       // ekrandaki kart verisi
+  var kartEl = null, etSol = null, etSag = null;
+  var kilitli = true;      // animasyon/geçiş sırasında girişi kilitle
+  var kupeSonrasi = "bolum";
+  var toastZaman = null;
+  var resimYok = {};       // 404 tekrarını önlemek için
+
+  /* ---------- Kayıt (localStorage, try/catch içinde) ---------- */
+  function kaydet(){ try { localStorage.setItem(KAYIT_ANAHTARI, JSON.stringify(durum)); } catch(e){} }
+  function kayitSil(){ try { localStorage.removeItem(KAYIT_ANAHTARI); } catch(e){} }
+  function kayitOku(){
+    try {
+      var h = localStorage.getItem(KAYIT_ANAHTARI);
+      if (!h) return null;
+      var k = JSON.parse(h);
+      if (!k || typeof k.bolumIdx !== "number" || !k.stats) return null;
+      if (k.bolumIdx < 0 || k.bolumIdx >= ICERIK.bolumler.length) return null;
+      /* içerik değişmiş olabilir: bilinmeyen kart id'lerini ayıkla */
+      if (Array.isArray(k.deste)) {
+        k.deste = k.deste.filter(function(id){ return kartMap.has(id); });
+        if (!k.deste.length) k.deste = null;
+      } else k.deste = null;
+      k.flags = k.flags || {};
+      k.gosterilen = Array.isArray(k.gosterilen) ? k.gosterilen : [];
+      STATLAR.forEach(function(s){
+        var v = Number(k.stats[s.k]);
+        k.stats[s.k] = isNaN(v) ? 50 : Math.max(0, Math.min(100, v));
+      });
+      k.desteBoy = Math.max(Number(k.desteBoy) || 0, k.deste ? k.deste.length : 0);
+      return k;
+    } catch(e){ return null; }
+  }
+
+  /* ---------- Yardımcılar ---------- */
+  function karistir(dizi){
+    for (var i = dizi.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = dizi[i]; dizi[i] = dizi[j]; dizi[j] = t;
+    }
+  }
+  function ekranGoster(id){
+    document.querySelectorAll(".ekran").forEach(function(e){ e.classList.remove("aktif"); });
+    el(id).classList.add("aktif");
+    window.scrollTo(0, 0);
+  }
+  function toastGoster(metin){
+    toastEl.textContent = metin;
+    toastEl.classList.add("goster");
+    if (toastZaman) clearTimeout(toastZaman);
+    toastZaman = setTimeout(function(){ toastEl.classList.remove("goster"); }, 3400);
+  }
+
+  /* ---------- Göstergeler ---------- */
+  function gostergeleriKur(){
+    STATLAR.forEach(function(s){
+      var g = document.createElement("div");
+      g.className = "gosterge";
+      g.innerHTML = '<span class="nokta"></span><span class="g-ikon">' + s.ikon +
+        '</span><span class="bar"><span class="bar-dolu"></span></span><span class="g-ad">' + s.ad + '</span>';
+      gostergelerEl.appendChild(g);
+      gRef[s.k] = { kok:g, nokta:g.querySelector(".nokta"), dolu:g.querySelector(".bar-dolu") };
+      gRef[s.k].dolu.style.background = s.renk;
+    });
+  }
+  function statlariCiz(secenek){
+    STATLAR.forEach(function(s){
+      gRef[s.k].dolu.style.height = durum.stats[s.k] + "%";
+      gRef[s.k].kok.setAttribute("aria-label", s.ad + " " + durum.stats[s.k] + "/100");
+      if (secenek && secenek[s.k]) {
+        gRef[s.k].kok.classList.add("degisti");
+        (function(kok){ setTimeout(function(){ kok.classList.remove("degisti"); }, 650); })(gRef[s.k].kok);
+      }
+    });
+  }
+  /* Sürükleme sırasında: etkilenecek statların üstünde nokta (yön/miktar gizli) */
+  function noktalariGoster(yon, opaklik){
+    var sec = (yon && suanki) ? suanki[yon] : null;
+    STATLAR.forEach(function(s){
+      gRef[s.k].nokta.style.opacity = (sec && sec[s.k]) ? Math.min(opaklik + 0.15, 1) : 0;
+    });
+  }
+  function noktalariGizle(){ noktalariGoster(null, 0); }
+
+  /* ---------- Oyun kurulumu ---------- */
+  function yeniOyun(){
+    durum = {
+      bolumIdx: 0,
+      stats: { vicdan:50, arkadaslik:50, aile:50, ozguven:50 },
+      flags: {},
+      deste: null, desteBoy: 0,
+      gosterilen: []
+    };
+    kaydet();
+    bolumIntroGoster();
+  }
+
+  function bolumIntroGoster(){
+    var b = ICERIK.bolumler[durum.bolumIdx];
+    el("bolum-no").textContent = b.no + ". Hafta";
+    el("bolum-ad").textContent = b.ad;
+    el("bolum-giris").textContent = b.giris;
+    ekranGoster("ekran-bolum");
+  }
+
+  /* Bölüm destesi: normal kartlar karıştırılır; flag'i konmuş koşullu kartlar
+     kendi bölümünde (ya da sonraki ilk fırsatta) rastgele bir yere eklenir */
+  function bolumBaslat(){
+    var b = ICERIK.bolumler[durum.bolumIdx];
+    var deste = ICERIK.kartlar
+      .filter(function(k){ return !k.kosul && k.bolum === b.no; })
+      .map(function(k){ return k.id; });
+    karistir(deste);
+    ICERIK.kartlar.forEach(function(k){
+      if (k.kosul && durum.flags[k.kosul] && k.bolum <= b.no && durum.gosterilen.indexOf(k.id) < 0) {
+        deste.splice(Math.floor(Math.random() * (deste.length + 1)), 0, k.id);
+        durum.gosterilen.push(k.id);
+      }
+    });
+    durum.deste = deste;
+    durum.desteBoy = deste.length;
+    kaydet();
+    oyunaGir();
+  }
+
+  function oyunaGir(){
+    ekranGoster("ekran-oyun");
+    statlariCiz(null);
+    kartCiz();
+  }
+
+  /* Oyun ortasında flag konursa: koşullu kart bu bölüme aitse hemen desteye gir */
+  function kosulluEkle(flag){
+    var no = ICERIK.bolumler[durum.bolumIdx].no;
+    ICERIK.kartlar.forEach(function(k){
+      if (k.kosul === flag && k.bolum <= no &&
+          durum.gosterilen.indexOf(k.id) < 0 && durum.deste.indexOf(k.id) < 0) {
+        durum.deste.splice(Math.floor(Math.random() * (durum.deste.length + 1)), 0, k.id);
+        durum.gosterilen.push(k.id);
+        durum.desteBoy++;
+      }
+    });
+  }
+
+  /* ---------- Kart çizimi ---------- */
+  function kartCiz(){
+    var kart = kartMap.get(durum.deste[0]);
+    suanki = kart;
+
+    var b = ICERIK.bolumler[durum.bolumIdx];
+    el("ilerleme-hafta").textContent = b.no + ". Hafta · " + b.ad;
+    el("ilerleme-kart").textContent = "Kart " + (durum.desteBoy - durum.deste.length + 1) + " / " + durum.desteBoy;
+    btnSol.textContent = "← " + kart.sol.etiket;
+    btnSag.textContent = kart.sag.etiket + " →";
+
+    var kr = KARAKTERLER[kart.karakter] || { ad:kart.karakter, emoji:"🙂", g:["#4A7C59","#D9A441"] };
+
+    kartAlan.innerHTML = "";
+    kartEl = document.createElement("div");
+    kartEl.className = "kart";
+
+    etSol = document.createElement("div");
+    etSol.className = "etiket etiket-sol";
+    etSol.textContent = kart.sol.etiket;
+    etSag = document.createElement("div");
+    etSag.className = "etiket etiket-sag";
+    etSag.textContent = kart.sag.etiket;
+
+    var portre = document.createElement("div");
+    portre.className = "portre";
+    var yedek = document.createElement("div");
+    yedek.className = "portre-yedek";
+    yedek.style.background = "linear-gradient(135deg," + kr.g[0] + "," + kr.g[1] + ")";
+    yedek.innerHTML = "<span>" + kr.emoji + "</span>";
+    portre.appendChild(yedek);
+    if (!resimYok[kart.karakter]) {
+      var img = document.createElement("img");
+      img.alt = "";
+      img.draggable = false;
+      img.onerror = function(){ resimYok[kart.karakter] = true; img.remove(); };
+      img.src = "../assets/karakter/" + kart.karakter + ".jpg";
+      portre.appendChild(img);
+    }
+
+    var govde = document.createElement("div");
+    govde.className = "kart-govde";
+    var adEl = document.createElement("div");
+    adEl.className = "karakter-adi";
+    adEl.textContent = kr.ad;
+    var metinEl = document.createElement("p");
+    metinEl.className = "kart-metin";
+    metinEl.textContent = kart.metin;
+    govde.appendChild(adEl);
+    govde.appendChild(metinEl);
+
+    kartEl.appendChild(etSol);
+    kartEl.appendChild(etSag);
+    kartEl.appendChild(portre);
+    kartEl.appendChild(govde);
+    kartAlan.appendChild(kartEl);
+
+    kartEl.addEventListener("pointerdown", dragBasla);
+    kartEl.addEventListener("pointermove", dragSur);
+    kartEl.addEventListener("pointerup", dragBirak);
+    kartEl.addEventListener("pointercancel", dragBirak);
+
+    kilitli = false;
+  }
+
+  /* ---------- Sürükleme (dokunma + fare, pointer events) ---------- */
+  var drag = null;
+  function dragBasla(e){
+    if (kilitli || drag || !e.isPrimary) return;
+    drag = { id:e.pointerId, x:e.clientX, y:e.clientY, dx:0 };
+    kartEl.classList.add("tutuluyor");
+    try { kartEl.setPointerCapture(e.pointerId); } catch(err){}
+    e.preventDefault();
+  }
+  function dragSur(e){
+    if (!drag || e.pointerId !== drag.id || kilitli) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+    drag.dx = dx;
+    kartEl.style.transform = "translate(" + dx + "px," + (dy * 0.18) + "px) rotate(" + (dx * 0.08) + "deg)";
+    var esik = kartEl.offsetWidth * ESIK_ORANI;
+    var opa = Math.min(Math.abs(dx) / esik, 1);
+    etSol.style.opacity = dx < -6 ? opa : 0;
+    etSag.style.opacity = dx > 6 ? opa : 0;
+    noktalariGoster(dx < -6 ? "sol" : (dx > 6 ? "sag" : null), opa);
+  }
+  function dragBirak(e){
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = drag.dx;
+    drag = null;
+    if (kilitli) return;
+    kartEl.classList.remove("tutuluyor");
+    if (Math.abs(dx) >= kartEl.offsetWidth * ESIK_ORANI) { ucur(dx < 0 ? "sol" : "sag"); return; }
+    kartEl.style.transition = "transform .25s ease";
+    kartEl.style.transform = "";
+    etSol.style.opacity = 0;
+    etSag.style.opacity = 0;
+    noktalariGizle();
+    setTimeout(function(){ if (kartEl) kartEl.style.transition = ""; }, 270);
+  }
+
+  /* ---------- Seçim ---------- */
+  function ucur(yon){
+    if (kilitli || !kartEl) return;
+    kilitli = true;
+    drag = null;
+    var isaret = yon === "sol" ? -1 : 1;
+    kartEl.classList.remove("tutuluyor");
+    kartEl.style.transition = "transform .38s ease-in, opacity .38s ease-in";
+    kartEl.style.transform = "translate(" + (isaret * (window.innerWidth * 0.75 + 180)) + "px,-40px) rotate(" + (isaret * 30) + "deg)";
+    kartEl.style.opacity = "0";
+    (yon === "sol" ? etSol : etSag).style.opacity = "1";
+    noktalariGizle();
+    setTimeout(function(){ cozumle(yon); }, 380);
+  }
+
+  function cozumle(yon){
+    var kart = suanki;
+    durum.deste.shift();
+    var sec = kart[yon];
+
+    if (sec.flag && !durum.flags[sec.flag]) {
+      durum.flags[sec.flag] = true;
+      kosulluEkle(sec.flag);
+    }
+    STATLAR.forEach(function(s){
+      durum.stats[s.k] = Math.max(0, Math.min(100, durum.stats[s.k] + (sec[s.k] || 0)));
+    });
+    kaydet();
+    statlariCiz(sec);
+    toastGoster(sec.sonuc);
+
+    var son = sonKontrol();
+    if (son) { setTimeout(function(){ sonGoster(son); }, 1200); return; }
+    if (!durum.deste.length) { setTimeout(kupeGoster, 1600); return; }
+    setTimeout(kartCiz, 320);
+  }
+
+  /* Herhangi bir stat 0'a düşerse ya da arkadaşlık/özgüven 100'ü bulursa oyun biter
+     (vicdan ve aile 100'de sessizce durur) */
+  function sonKontrol(){
+    var s = durum.stats, so = ICERIK.sonlar;
+    if (s.vicdan <= 0)      return { tip:"vicdan",     veri:so.vicdan0,       deger:0 };
+    if (s.arkadaslik <= 0)  return { tip:"arkadaslik", veri:so.arkadaslik0,   deger:0 };
+    if (s.aile <= 0)        return { tip:"aile",       veri:so.aile0,         deger:0 };
+    if (s.ozguven <= 0)     return { tip:"ozguven",    veri:so.ozguven0,      deger:0 };
+    if (s.arkadaslik >= 100) return { tip:"arkadaslik", veri:so.arkadaslik100, deger:100 };
+    if (s.ozguven >= 100)    return { tip:"ozguven",    veri:so.ozguven100,    deger:100 };
+    return null;
+  }
+
+  function sonGoster(son){
+    kayitSil();
+    var s = STATLAR.filter(function(x){ return x.k === son.tip; })[0];
+    el("son-ikon").textContent = s.ikon;
+    var dolu = el("son-bar-dolu");
+    dolu.style.background = son.deger === 0 ? "#C4574A" : "#D9A441";
+    dolu.style.height = "50%";
+    el("son-baslik").textContent = son.veri.baslik;
+    el("son-metin").textContent = son.veri.metin;
+    ekranGoster("ekran-son");
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ dolu.style.height = son.deger + "%"; });
+    });
+  }
+
+  /* ---------- Bölüm sonu: Kulağına Küpe ---------- */
+  function kupeGoster(){
+    var b = ICERIK.bolumler[durum.bolumIdx];
+    el("kupe-soz").textContent = "“" + b.kupe.soz + "”";
+    el("kupe-kaynak").textContent = "— " + b.kupe.kaynak;
+    durum.bolumIdx++;
+    durum.deste = null;
+    durum.desteBoy = 0;
+    kupeSonrasi = durum.bolumIdx >= ICERIK.bolumler.length ? "final" : "bolum";
+    if (kupeSonrasi === "bolum") kaydet(); else kayitSil();
+    ekranGoster("ekran-kupe");
+  }
+
+  /* ---------- Final karnesi ---------- */
+  function finalGoster(){
+    kayitSil();
+    el("final-genel").textContent = ICERIK.sonlar.final.genel;
+
+    var enIyi = STATLAR[0];
+    STATLAR.forEach(function(s){ if (durum.stats[s.k] > durum.stats[enIyi.k]) enIyi = s; });
+
+    var karne = el("karne");
+    karne.innerHTML = "";
+    var dolular = [];
+    STATLAR.forEach(function(s){
+      var satir = document.createElement("div");
+      satir.className = "karne-satir" + (s === enIyi ? " vurgulu" : "");
+      satir.innerHTML =
+        '<span class="karne-ikon">' + s.ikon + '</span>' +
+        '<span class="karne-ad">' + s.ad + '</span>' +
+        '<span class="karne-bar"><span class="karne-dolu" style="background:' + s.renk + '"></span></span>' +
+        '<span class="karne-deger">' + durum.stats[s.k] + '</span>';
+      karne.appendChild(satir);
+      dolular.push({ el:satir.querySelector(".karne-dolu"), v:durum.stats[s.k] });
+    });
+    el("final-yorum").textContent = ICERIK.sonlar.final.yorumlar[enIyi.k];
+
+    ekranGoster("ekran-final");
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        dolular.forEach(function(d){ d.el.style.width = d.v + "%"; });
+      });
+    });
+    konfetiYap(el("ekran-final"));
+  }
+
+  function konfetiYap(kap){
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var renkler = ["#4A7C59", "#C4574A", "#D9A441", "#A9C5A0", "#EFD09A"];
+    for (var i = 0; i < 28; i++) {
+      var p = document.createElement("i");
+      p.className = "konfeti";
+      p.style.left = (Math.random() * 100) + "%";
+      p.style.background = renkler[i % renkler.length];
+      var boy = (6 + Math.random() * 6).toFixed(0) + "px";
+      p.style.width = boy; p.style.height = boy;
+      if (i % 3 === 0) p.style.borderRadius = "50%";
+      p.style.animationDuration = (2.6 + Math.random() * 2).toFixed(2) + "s";
+      p.style.animationDelay = (Math.random() * 1.2).toFixed(2) + "s";
+      kap.appendChild(p);
+    }
+    setTimeout(function(){
+      kap.querySelectorAll(".konfeti").forEach(function(k){ k.remove(); });
+    }, 6500);
+  }
+
+  /* ---------- Girdi bağlantıları ---------- */
+  btnSol.addEventListener("click", function(){ ucur("sol"); });
+  btnSag.addEventListener("click", function(){ ucur("sag"); });
+
+  document.addEventListener("keydown", function(e){
+    if (!el("ekran-oyun").classList.contains("aktif") || kilitli) return;
+    if (e.key === "ArrowLeft")  { e.preventDefault(); ucur("sol"); }
+    if (e.key === "ArrowRight") { e.preventDefault(); ucur("sag"); }
+  });
+
+  el("btn-basla").addEventListener("click", yeniOyun);
+  el("btn-bolum-basla").addEventListener("click", bolumBaslat);
+  el("btn-kupe-devam").addEventListener("click", function(){
+    if (kupeSonrasi === "final") finalGoster(); else bolumIntroGoster();
+  });
+  el("btn-son-bastan").addEventListener("click", yeniOyun);
+  el("btn-final-tekrar").addEventListener("click", yeniOyun);
+
+  el("btn-devam").addEventListener("click", function(){
+    var k = kayitOku();
+    if (!k) { yeniOyun(); return; }
+    durum = k;
+    if (durum.deste && durum.deste.length) oyunaGir();
+    else bolumIntroGoster();
+  });
+
+  /* ---------- Başlangıç ---------- */
+  gostergeleriKur();
+  var eskiKayit = kayitOku();
+  if (eskiKayit) {
+    el("btn-devam").classList.remove("gizli");
+    el("btn-basla").textContent = "Baştan Başla";
+  }
+  ekranGoster("ekran-acilis");
+
+})();
+</script>
+</body>
+</html>

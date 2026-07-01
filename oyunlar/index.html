@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hayal Ortaokulu — Değer Oyunları</title>
+<meta name="description" content="Ortaokul öğrencileri için oyunla ahlak eğitimi: Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi. Dürüstlük, adalet, sabır ve daha fazlası — oynayarak öğren.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --krem: #F5EDE0;
+    --kahve: #2B2118;
+    --yesil: #4A7C59;
+    --kiremit: #C4574A;
+    --altin: #D9A441;
+    --kart-bg: #FFFDF8;
+    --radius: 20px;
+    --golge: 0 6px 24px rgba(43, 33, 24, 0.10);
+    --golge-hover: 0 10px 32px rgba(43, 33, 24, 0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--krem);
+    color: var(--kahve);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .sarici {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px 48px;
+  }
+
+  /* ---------- Başlık ---------- */
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .okul-rozeti {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(74, 124, 89, 0.12);
+    color: var(--yesil);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+
+  h1 .vurgu { color: var(--yesil); }
+
+  .alt-baslik {
+    font-size: 16px;
+    color: rgba(43, 33, 24, 0.75);
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Oyun Kartları ---------- */
+  .oyunlar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .oyun-karti {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--kart-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--golge);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .oyun-karti:hover,
+  .oyun-karti:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: var(--golge-hover);
+  }
+
+  .oyun-karti:focus-visible {
+    outline: 3px solid var(--altin);
+    outline-offset: 3px;
+  }
+
+  .kapak {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .kapak img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Görsel yüklenemezse gradyan + emoji fallback */
+  .kapak-yedek {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+  }
+
+  .kapak.yedek-goster img { display: none; }
+  .kapak.yedek-goster .kapak-yedek { display: flex; }
+
+  .yedek-vicdan   { background: linear-gradient(135deg, #C4574A 0%, #8E3A30 100%); }
+  .yedek-zaman    { background: linear-gradient(135deg, #4A7C59 0%, #2E5540 100%); }
+  .yedek-mahkeme  { background: linear-gradient(135deg, #D9A441 0%, #A5762A 100%); }
+
+  .kart-icerik {
+    padding: 20px 22px 24px;
+  }
+
+  .kart-ust {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .oyna-ok {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+    transition: transform 0.2s ease;
+  }
+
+  .oyun-karti:hover .oyna-ok { transform: translateX(3px); }
+
+  .ok-kiremit { background: var(--kiremit); }
+  .ok-yesil   { background: var(--yesil); }
+  .ok-altin   { background: var(--altin); }
+
+  .kart-aciklama {
+    font-size: 15px;
+    color: rgba(43, 33, 24, 0.78);
+    margin-bottom: 14px;
+  }
+
+  .rozetler {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rozet {
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .rozet-kiremit { background: rgba(196, 87, 74, 0.12);  color: #A03F34; }
+  .rozet-yesil   { background: rgba(74, 124, 89, 0.14);  color: #386145; }
+  .rozet-altin   { background: rgba(217, 164, 65, 0.18); color: #8A6220; }
+
+  /* ---------- Öğretmen / Veli Bölümü ---------- */
+  .ogretmen {
+    background: var(--kart-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--golge);
+    padding: 26px 22px;
+    margin-bottom: 40px;
+    border-top: 5px solid var(--yesil);
+  }
+
+  .ogretmen h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 21px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ogretmen p {
+    font-size: 15px;
+    color: rgba(43, 33, 24, 0.8);
+  }
+
+  .ogretmen p + p { margin-top: 10px; }
+
+  .ogretmen .soru {
+    font-style: italic;
+    color: var(--yesil);
+    font-weight: 500;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    font-size: 14px;
+    color: rgba(43, 33, 24, 0.6);
+  }
+
+  footer a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 16px;
+    color: var(--yesil);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  /* ---------- Geniş Ekran ---------- */
+  @media (min-width: 720px) {
+    .sarici { max-width: 1020px; padding-top: 48px; }
+    .oyunlar {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+    .ogretmen { padding: 32px 34px; }
+  }
+</style>
+</head>
+<body>
+<div class="sarici">
+
+  <header>
+    <span class="okul-rozeti">🏫 Hayal Ortaokulu</span>
+    <h1>Değer <span class="vurgu">Oyunları</span></h1>
+    <p class="alt-baslik">Ortaokul öğrencileri için oyunla ahlak eğitimi. Her oyunda bir karar senin; dürüstlüğü, adaleti ve vicdanı oynayarak keşfet.</p>
+  </header>
+
+  <main class="oyunlar">
+
+    <!-- Vicdan -->
+    <a class="oyun-karti" href="./vicdan/" aria-label="Vicdan oyununu oyna">
+      <div class="kapak">
+        <img src="./assets/kapak/vicdan.jpg" alt="Vicdan oyunu kapak görseli" loading="lazy"
+             onerror="this.parentElement.classList.add('yedek-goster')">
+        <div class="kapak-yedek yedek-vicdan" aria-hidden="true">❤️</div>
+      </div>
+      <div class="kart-icerik">
+        <div class="kart-ust">
+          <h2>Vicdan</h2>
+          <span class="oyna-ok ok-kiremit" aria-hidden="true">→</span>
+        </div>
+        <p class="kart-aciklama">Kartları kaydır, kararını ver. Vicdanın, arkadaşların, ailen ve özgüvenin dengede kalsın.</p>
+        <div class="rozetler">
+          <span class="rozet rozet-kiremit">Dürüstlük</span>
+          <span class="rozet rozet-kiremit">Kul Hakkı</span>
+          <span class="rozet rozet-kiremit">Adalet</span>
+          <span class="rozet rozet-kiremit">Sabır</span>
+          <span class="rozet rozet-kiremit">Cömertlik</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Zaman Yolcusu -->
+    <a class="oyun-karti" href="./zaman-yolcusu/" aria-label="Zaman Yolcusu oyununu oyna">
+      <div class="kapak">
+        <img src="./assets/kapak/zaman-yolcusu.jpg" alt="Zaman Yolcusu oyunu kapak görseli" loading="lazy"
+             onerror="this.parentElement.classList.add('yedek-goster')">
+        <div class="kapak-yedek yedek-zaman" aria-hidden="true">⌚</div>
+      </div>
+      <div class="kart-icerik">
+        <div class="kart-ust">
+          <h2>Zaman Yolcusu</h2>
+          <span class="oyna-ok ok-yesil" aria-hidden="true">→</span>
+        </div>
+        <p class="kart-aciklama">Bir seçim yap, 5 yıl sonrasına git, sonucunu kendi gözünle gör.</p>
+        <div class="rozetler">
+          <span class="rozet rozet-yesil">Seçimler ve Sonuçları</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Vicdan Mahkemesi -->
+    <a class="oyun-karti" href="./vicdan-mahkemesi/" aria-label="Vicdan Mahkemesi oyununu oyna">
+      <div class="kapak">
+        <img src="./assets/kapak/vicdan-mahkemesi.jpg" alt="Vicdan Mahkemesi oyunu kapak görseli" loading="lazy"
+             onerror="this.parentElement.classList.add('yedek-goster')">
+        <div class="kapak-yedek yedek-mahkeme" aria-hidden="true">⚖️</div>
+      </div>
+      <div class="kart-icerik">
+        <div class="kart-ust">
+          <h2>Vicdan Mahkemesi</h2>
+          <span class="oyna-ok ok-altin" aria-hidden="true">→</span>
+        </div>
+        <p class="kart-aciklama">Kürsü senin. İfadeleri dinle, delilleri incele, adil hükmü ver.</p>
+        <div class="rozetler">
+          <span class="rozet rozet-altin">Hüsn-ü Zan</span>
+          <span class="rozet rozet-altin">Adalet</span>
+        </div>
+      </div>
+    </a>
+
+  </main>
+
+  <section class="ogretmen">
+    <h3><span aria-hidden="true">🍎</span> Öğretmenler ve Veliler İçin</h3>
+    <p>Bu oyunlar birer ders anlatımı değil, birer sohbet kapısıdır. Her oyun 10-15 dakikada oynanır ve öğrencinin gerçek bir ikilemle baş başa kalmasını sağlar; verdiği kararlar sınıf içi tartışma için doğal bir başlangıç noktası oluşturur.</p>
+    <p>Oyun bittikten sonra en değerli an başlar: <span class="soru">"Sen olsan ne yapardın? Neden?"</span> sorusuyla açılan sohbet, oyundaki seçimleri öğrencinin kendi hayatına taşır. Doğru cevabı söylemek yerine, farklı seçimlerin sonuçlarını birlikte konuşmayı deneyin — değerler böyle içselleşir.</p>
+  </section>
+
+  <footer>
+    <a href="https://raufenc.com/">raufenc.com</a>
+  </footer>
+
+</div>
+</body>
+</html>

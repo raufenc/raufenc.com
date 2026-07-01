@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zaman Yolcusu — Seçimlerinin 5 Yıl Sonrasını Gör</title>
+<meta name="description" content="Hayal Ortaokulu'nda geçen etkileşimli değerler oyunu: her seçiminden sonra köstekli saatle 5 yıl ileri git, kararlarının geleceğini kendi gözlerinle izle.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌚</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ====== Ortak tasarım dili: krem zemin, sıcak ton, yumuşak gölgeler ====== */
+:root{
+  --krem:#F5EDE0;
+  --murekkep:#2B2118;
+  --yesil:#4A7C59;
+  --kiremit:#C4574A;
+  --altin:#D9A441;
+  --kart:#FFFBF2;
+  --cizgi:rgba(43,33,24,.14);
+  --soluk:rgba(43,33,24,.62);
+  --golge:0 10px 30px rgba(43,33,24,.10);
+  --radius:20px;
+}
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--krem);
+  color:var(--murekkep);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  line-height:1.55;
+  min-height:100vh;
+  min-height:100dvh; /* iOS Safari için dvh */
+  overflow-x:hidden;
+}
+h1,h2,h3{ font-family:'Fraunces',Georgia,serif; line-height:1.2; margin:0; }
+button{ font-family:inherit; touch-action:manipulation; }
+a{ touch-action:manipulation; }
+[hidden]{ display:none !important; }
+
+/* ====== Üst çubuk ====== */
+header{
+  position:sticky; top:0; z-index:20;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 14px calc(10px);
+  background:rgba(245,237,224,.92);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--cizgi);
+}
+.geri-link{
+  display:inline-flex; align-items:center; min-height:44px; padding:0 10px;
+  color:var(--soluk); text-decoration:none; font-size:.85rem; font-weight:600;
+  border-radius:12px;
+}
+.geri-link:hover,.geri-link:focus-visible{ color:var(--murekkep); background:rgba(43,33,24,.06); }
+.durum-grubu{ display:flex; align-items:center; gap:10px; }
+.puan-rozet{
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--kart); border:1px solid var(--cizgi); border-radius:999px;
+  padding:5px 12px; font-size:.82rem; font-weight:600; box-shadow:var(--golge);
+}
+.puan-rozet b{ font-variant-numeric:tabular-nums; }
+.noktalar{ display:flex; gap:5px; }
+.nokta{
+  width:9px; height:9px; border-radius:50%;
+  background:transparent; border:1.5px solid rgba(43,33,24,.30);
+  transition:all .3s;
+}
+.nokta.tam{ background:var(--altin); border-color:var(--altin); }
+.nokta.cift{ box-shadow:0 0 0 2.5px rgba(74,124,89,.35); }
+.nokta.simdi{ border-color:var(--murekkep); transform:scale(1.35); }
+
+/* ====== Ana sahne ====== */
+main{
+  max-width:560px; margin:0 auto;
+  padding:18px 16px calc(32px + env(safe-area-inset-bottom));
+  animation:belirme .4s ease both;
+}
+@keyframes belirme{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:none;} }
+
+.kart{
+  background:var(--kart); border:1px solid var(--cizgi);
+  border-radius:var(--radius); box-shadow:var(--golge);
+  padding:20px;
+}
+.etiket{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:.75rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--soluk);
+}
+.deger-rozet{
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(217,164,65,.16); color:#8a6420;
+  border:1px solid rgba(217,164,65,.45);
+  border-radius:999px; padding:5px 12px; font-size:.78rem; font-weight:600;
+}
+.metin{ font-size:.98rem; margin:12px 0 0; white-space:pre-line; }
+.metin-soluk{ color:var(--soluk); }
+
+/* ====== Görsel + zarif yedek ====== */
+.gorsel-kap{
+  position:relative; width:100%; aspect-ratio:16/9;
+  border-radius:16px; overflow:hidden; margin-bottom:14px;
+  background:linear-gradient(135deg,#e9dcc3,#d9c9a8);
+}
+.gorsel-kap img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+}
+.gorsel-yedek{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  font-size:56px; user-select:none;
+}
+.ton-sahne{ background:linear-gradient(135deg,#efe2c8,#dcc9a2); }
+.ton-iyi{ background:linear-gradient(135deg,#dcebdc,#a9c9ae); }
+.ton-kotu{ background:linear-gradient(135deg,#f0ddc8,#d3a98c); }
+
+/* ====== Butonlar (dokunma hedefi ≥ 44px) ====== */
+.btn{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  width:100%; min-height:52px; padding:13px 18px; margin-top:12px;
+  border:none; border-radius:16px; cursor:pointer;
+  font-size:.98rem; font-weight:600; line-height:1.35;
+  transition:transform .12s, box-shadow .2s, background .2s;
+}
+.btn:active{ transform:scale(.98); }
+.btn:focus-visible{ outline:3px solid var(--altin); outline-offset:2px; }
+.btn:disabled{ opacity:.55; cursor:default; }
+.btn.birincil{ background:var(--yesil); color:#fff; box-shadow:0 6px 18px rgba(74,124,89,.35); }
+.btn.birincil:hover{ background:#3f6b4d; }
+.btn.altin{ background:var(--altin); color:#3a2a10; box-shadow:0 6px 18px rgba(217,164,65,.35); }
+.btn.altin:hover{ background:#c9932f; }
+.btn.ikincil{
+  background:transparent; color:var(--murekkep);
+  border:1.5px solid var(--cizgi); box-shadow:none;
+}
+.btn.ikincil:hover{ background:rgba(43,33,24,.05); }
+.btn.tehlike{ background:transparent; color:var(--kiremit); border:1.5px solid rgba(196,87,74,.4); }
+.btn.tehlike:hover{ background:rgba(196,87,74,.08); }
+
+/* Seçenek butonları */
+.secenek{
+  display:flex; align-items:flex-start; gap:12px; text-align:left;
+  width:100%; min-height:56px; padding:14px 16px; margin-top:12px;
+  background:var(--kart); color:var(--murekkep);
+  border:1.5px solid var(--cizgi); border-radius:16px; cursor:pointer;
+  font-size:.95rem; font-weight:500; line-height:1.45;
+  box-shadow:var(--golge);
+  transition:transform .12s, border-color .2s, background .2s;
+}
+.secenek:hover{ border-color:var(--altin); background:#fff7e6; }
+.secenek:active{ transform:scale(.985); }
+.secenek:focus-visible{ outline:3px solid var(--altin); outline-offset:2px; }
+.harf{
+  flex:0 0 auto; display:flex; align-items:center; justify-content:center;
+  width:30px; height:30px; border-radius:10px; margin-top:1px;
+  background:var(--murekkep); color:var(--krem);
+  font-family:'Fraunces',serif; font-weight:700; font-size:.95rem;
+}
+.klavye-ipucu{ margin:14px 0 0; text-align:center; font-size:.72rem; color:var(--soluk); }
+
+/* ====== Köstekli saat (giriş, saf CSS) ====== */
+.kostek{ display:flex; flex-direction:column; align-items:center; margin:6px 0 18px; }
+.kostek .zincir{
+  width:3px; height:34px; border-radius:2px;
+  background:repeating-linear-gradient(to bottom,var(--altin) 0 5px,transparent 5px 9px);
+}
+.kostek .tepe{
+  width:16px; height:12px; border-radius:6px 6px 3px 3px;
+  background:linear-gradient(#e8bd6a,#b9852f); margin-bottom:-3px; z-index:2;
+}
+.kadran{
+  position:relative; width:132px; height:132px; border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #fffdf6, #f2e6cd 62%, #e4d2ae);
+  border:7px solid; border-color:#e2b25c #b9852f #a67526 #e2b25c;
+  box-shadow:0 12px 28px rgba(43,33,24,.25), inset 0 2px 6px rgba(255,255,255,.7);
+}
+.kadran::before{ /* saat çizgileri */
+  content:""; position:absolute; inset:7px; border-radius:50%;
+  background:
+    repeating-conic-gradient(from -1.5deg, rgba(43,33,24,.55) 0 3deg, transparent 3deg 30deg);
+  -webkit-mask:radial-gradient(circle, transparent 62%, #000 63%);
+          mask:radial-gradient(circle, transparent 62%, #000 63%);
+}
+.akrep,.yelkovan{
+  position:absolute; left:50%; bottom:50%; transform-origin:50% 100%;
+  border-radius:4px; background:var(--murekkep);
+}
+.akrep{ width:5px; height:32px; margin-left:-2.5px; animation:geriTik 24s linear infinite reverse; }
+.yelkovan{ width:3.5px; height:46px; margin-left:-1.75px; background:#6b4f33; animation:geriTik 4s linear infinite reverse; }
+.mil{
+  position:absolute; left:50%; top:50%; width:11px; height:11px; margin:-5.5px 0 0 -5.5px;
+  border-radius:50%; background:var(--altin); border:2px solid var(--murekkep);
+}
+@keyframes geriTik{ to{ transform:rotate(360deg); } }
+
+/* ====== Zaman geçişi katmanı ====== */
+.gecis{
+  position:fixed; inset:0; z-index:50;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
+  background:radial-gradient(circle at 50% 42%, rgba(90,66,40,.94), rgba(30,23,16,.97));
+  opacity:0; pointer-events:none; transition:opacity .35s ease;
+}
+.gecis.acik{ opacity:1; pointer-events:auto; }
+.gecis .kadran{ width:150px; height:150px; }
+.gecis .akrep,.gecis .yelkovan{ animation:none; }
+.gecis.acik .yelkovan{ animation:hizliTur 1.4s cubic-bezier(.45,.05,.45,1) both; }
+.gecis.acik .akrep{ animation:yarimTur 1.4s cubic-bezier(.45,.05,.45,1) both; }
+.gecis.acik.geri .yelkovan,.gecis.acik.geri .akrep{ animation-direction:reverse; }
+@keyframes hizliTur{ to{ transform:rotate(1080deg); } }
+@keyframes yarimTur{ to{ transform:rotate(360deg); } }
+.gecis .halka{
+  position:absolute; left:50%; top:42%; width:150px; height:150px; margin:-75px 0 0 -75px;
+  border:2px solid rgba(245,237,224,.5); border-radius:50%; opacity:0;
+}
+.gecis.acik .halka{ animation:dalgaHalka 1.5s ease-out both; }
+.gecis.acik .halka.h2{ animation-delay:.35s; }
+@keyframes dalgaHalka{ 0%{ transform:scale(.8); opacity:.8; } 100%{ transform:scale(3.4); opacity:0; } }
+.gecis-metin{
+  color:var(--krem); font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600;
+  text-align:center; padding:0 24px; letter-spacing:.02em;
+}
+/* Geçiş sırasında sayfada hafif dalgalanma */
+.dalga{ animation:dalgalan 1.5s ease both; }
+@keyframes dalgalan{
+  0%{ filter:none; } 30%{ filter:blur(2px) saturate(1.2); transform:scale(1.01); }
+  70%{ filter:blur(1px); } 100%{ filter:none; transform:none; }
+}
+
+/* ====== Yolcunun Defteri (ders kartı) ====== */
+.defter{
+  margin-top:16px; padding:16px 18px;
+  background:linear-gradient(135deg,#fdf6e4,#f6ecd2);
+  border:1.5px dashed rgba(217,164,65,.7); border-radius:16px;
+}
+.defter h3{ font-size:1rem; display:flex; align-items:center; gap:8px; }
+.defter p{ margin:8px 0 0; font-size:.93rem; }
+
+/* ====== İstatistik çipleri (final) ====== */
+.cipler{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+.cip{
+  flex:1 1 140px; background:var(--kart); border:1px solid var(--cizgi);
+  border-radius:16px; padding:12px 14px; text-align:center; box-shadow:var(--golge);
+}
+.cip .buyuk{ font-family:'Fraunces',serif; font-size:1.5rem; font-weight:700; }
+.cip .kucuk{ font-size:.74rem; color:var(--soluk); margin-top:2px; }
+
+/* ====== Modal ====== */
+.modal-arka{
+  position:fixed; inset:0; z-index:60;
+  display:flex; align-items:center; justify-content:center; padding:20px;
+  background:rgba(43,33,24,.5);
+  opacity:0; pointer-events:none; transition:opacity .25s;
+}
+.modal-arka.acik{ opacity:1; pointer-events:auto; }
+.modal{
+  width:100%; max-width:420px; background:var(--kart);
+  border-radius:var(--radius); padding:22px; box-shadow:0 20px 50px rgba(43,33,24,.35);
+  transform:translateY(12px); transition:transform .25s;
+}
+.modal-arka.acik .modal{ transform:none; }
+.modal p{ margin:0; font-size:.97rem; font-weight:500; }
+.modal .not{ margin-top:6px; font-size:.85rem; color:var(--soluk); font-weight:400; }
+
+/* Küçük yardımcılar */
+.ust-satir{ display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.secim-ozet{
+  margin-top:12px; padding:12px 14px; border-left:4px solid var(--altin);
+  background:rgba(217,164,65,.10); border-radius:0 12px 12px 0;
+  font-size:.9rem; font-style:italic; color:var(--soluk);
+}
+.zaman-cip{
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--murekkep); color:var(--krem);
+  border-radius:999px; padding:5px 13px; font-size:.78rem; font-weight:600;
+}
+.buton-grubu{ margin-top:6px; }
+.orta{ text-align:center; }
+.buyuk-baslik{ font-size:1.7rem; }
+.puan-final{
+  font-family:'Fraunces',serif; font-size:3rem; font-weight:700; color:var(--yesil);
+  line-height:1;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="geri-link" href="../">← Oyunlar</a>
+  <div class="durum-grubu" id="durumGrubu" hidden>
+    <span class="puan-rozet" title="Karakter Puanı">🧭 <b id="puanDeger">0</b></span>
+    <div class="noktalar" id="noktalar" aria-label="Durak ilerlemesi"></div>
+  </div>
+</header>
+
+<main id="sahne" aria-live="polite"></main>
+
+<!-- Zaman geçişi animasyon katmanı -->
+<div class="gecis" id="gecis" aria-hidden="true">
+  <div class="halka h1"></div>
+  <div class="halka h2"></div>
+  <div class="kadran">
+    <div class="akrep"></div>
+    <div class="yelkovan"></div>
+    <div class="mil"></div>
+  </div>
+  <div class="gecis-metin" id="gecisMetin"></div>
+</div>
+
+<!-- Nazik onay penceresi -->
+<div class="modal-arka" id="modalArka" role="dialog" aria-modal="true" aria-labelledby="modalMetin">
+  <div class="modal">
+    <p id="modalMetin">Diğer geleceği görmeden devam etmek istediğine emin misin?</p>
+    <p class="not">Her seçimin başka bir yarını var; istersen önce ona da göz atabilirsin.</p>
+    <button class="btn birincil" id="modalGor">◀ Önce diğer geleceği gör</button>
+    <button class="btn ikincil" id="modalDevam">Yine de devam et ▶</button>
+  </div>
+</div>
+
+<script src="content.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- Sabitler ve durum ---------- */
+  var KAYIT_ANAHTARI = 'zamanYolcusu.v1';
+  var GORSEL_YOLU = '../assets/zaman/';
+  // Görsel yüklenemezse gösterilecek senaryo emojileri
+  var SENARYO_EMOJI = { s1:'📝', s2:'📱', s3:'🪙', s4:'⚽', s5:'🎮', s6:'🛍️', s7:'🥪', s8:'📷' };
+
+  var sahne = document.getElementById('sahne');
+  var durum;                 // kalıcı oyun durumu (localStorage)
+  var aktifSecim = null;     // şu an izlenen dal: 'a' | 'b'
+  var ekranAdi = 'giris';    // klavye kısayolları için
+  var kilit = false;         // geçiş sırasında girişleri kilitle (çift tetiklemeyi de önler)
+
+  if (typeof ICERIK === 'undefined'){
+    sahne.innerHTML = '<div class="kart orta"><h2>İçerik yüklenemedi</h2>' +
+      '<p class="metin">content.js dosyası bulunamadı. Lütfen oyun dosyalarının eksiksiz olduğundan emin olun.</p></div>';
+    return;
+  }
+
+  /* ---------- Yardımcılar ---------- */
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+  function bosDurum(){
+    return { idx:0, bitti:false, senaryo:{} };
+  }
+  function kaydet(){
+    try{ localStorage.setItem(KAYIT_ANAHTARI, JSON.stringify(durum)); }catch(e){ /* özel modda sessizce geç */ }
+  }
+  function kayitOku(){
+    try{
+      var h = localStorage.getItem(KAYIT_ANAHTARI);
+      if (!h) return null;
+      var d = JSON.parse(h);
+      if (!d || typeof d.idx !== 'number' || !d.senaryo) return null;
+      // idx tam sayı ve senaryo dizisi sınırları içinde olmalı
+      // (öğretmen content.js'de senaryo silmiş ya da kayıt bozulmuş olabilir)
+      if (d.idx !== Math.floor(d.idx) || d.idx < 0 || d.idx >= ICERIK.senaryolar.length) return null;
+      // Artık mevcut olmayan senaryo id'lerine ait kayıtları at
+      var gecerli = {};
+      ICERIK.senaryolar.forEach(function(s){
+        if (d.senaryo[s.id]) gecerli[s.id] = d.senaryo[s.id];
+      });
+      d.senaryo = gecerli;
+      return d;
+    }catch(e){ return null; }
+  }
+  function kayitSil(){
+    try{ localStorage.removeItem(KAYIT_ANAHTARI); }catch(e){}
+  }
+  function senKaydi(id){
+    if (!durum.senaryo[id]) durum.senaryo[id] = { ilk:null, gorulen:[] };
+    return durum.senaryo[id];
+  }
+  function puanHesapla(){
+    var p = 0;
+    ICERIK.senaryolar.forEach(function(s){
+      var k = durum.senaryo[s.id];
+      if (k && k.ilk && s[k.ilk].tip === 'iyi') p += 10;
+    });
+    return p;
+  }
+  function ciftDalSayisi(){
+    var n = 0;
+    ICERIK.senaryolar.forEach(function(s){
+      var k = durum.senaryo[s.id];
+      if (k && k.gorulen.length === 2) n++;
+    });
+    return n;
+  }
+
+  /* Üst çubuğu (puan + 8 nokta) güncelle */
+  function durumGuncelle(gizle){
+    var grup = document.getElementById('durumGrubu');
+    grup.hidden = !!gizle;
+    if (gizle) return;
+    document.getElementById('puanDeger').textContent = puanHesapla();
+    var kutu = document.getElementById('noktalar');
+    kutu.innerHTML = '';
+    ICERIK.senaryolar.forEach(function(s, i){
+      var n = document.createElement('span');
+      n.className = 'nokta';
+      var k = durum.senaryo[s.id];
+      if (k && k.gorulen.length === 2) n.classList.add('cift');
+      if (i < durum.idx || durum.bitti) n.classList.add('tam');
+      if (i === durum.idx && !durum.bitti) n.classList.add('simdi');
+      kutu.appendChild(n);
+    });
+  }
+
+  /* Görsel + zarif yedek: yüklenemezse gradyan zemin üzerinde emoji kalır */
+  function gorselKap(dosya, emoji, ton){
+    var kap = document.createElement('div');
+    kap.className = 'gorsel-kap ton-' + ton;
+    var yedek = document.createElement('div');
+    yedek.className = 'gorsel-yedek';
+    yedek.textContent = emoji;
+    kap.appendChild(yedek);
+    var img = new Image();
+    img.alt = '';
+    img.onerror = function(){ img.remove(); };
+    img.src = GORSEL_YOLU + dosya;
+    kap.appendChild(img);
+    return kap;
+  }
+
+  function ciz(html){
+    sahne.innerHTML = html;
+    sahne.style.animation = 'none';
+    void sahne.offsetWidth;       /* giriş animasyonunu yeniden tetikle */
+    sahne.style.animation = '';
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- Zaman geçişi animasyonu (~1.5 sn, saf CSS) ---------- */
+  function zamanGecisi(geriMi, metin, sonra){
+    kilit = true;
+    var g = document.getElementById('gecis');
+    g.classList.toggle('geri', !!geriMi);
+    document.getElementById('gecisMetin').textContent = metin;
+    g.classList.add('acik');
+    g.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('dalga');
+    setTimeout(function(){ sonra(); }, 1200);                    // yeni ekran perde arkasında hazırlanır
+    setTimeout(function(){
+      g.classList.remove('acik');
+      g.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('dalga');
+      kilit = false;
+    }, 1550);
+  }
+
+  /* Animasyonsuz ekran geçişlerinde kısa kilit: hızlı çift dokunuşta
+     ikinci basışın yeni ekrandaki A/B butonlarına düşmesini önler */
+  function kisaKilit(){
+    kilit = true;
+    setTimeout(function(){ kilit = false; }, 300);
+  }
+
+  /* ---------- Ekranlar ---------- */
+  function ekranGiris(){
+    ekranAdi = 'giris';
+    durumGuncelle(true);
+    var kayit = kayitOku();
+    var butonlar = '';
+    if (kayit && !kayit.bitti && (kayit.idx > 0 || Object.keys(kayit.senaryo).length > 0)){
+      butonlar =
+        '<button class="btn birincil" id="btnDevam">Devam Et — Durak ' + (kayit.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</button>' +
+        '<button class="btn tehlike" id="btnSifirla">↺ Baştan Başla</button>';
+    } else if (kayit && kayit.bitti){
+      butonlar =
+        '<button class="btn birincil" id="btnYeniden">🔁 Tekrar Oyna</button>' +
+        '<button class="btn ikincil" id="btnSonuc">Son Yolculuğun Sonucunu Gör</button>';
+    } else {
+      butonlar = '<button class="btn birincil" id="btnBasla">⌚ Yolculuğa Başla</button>';
+    }
+
+    ciz(
+      '<div class="orta">' +
+        '<div class="kostek" aria-hidden="true">' +
+          '<div class="zincir"></div><div class="tepe"></div>' +
+          '<div class="kadran"><div class="akrep"></div><div class="yelkovan"></div><div class="mil"></div></div>' +
+        '</div>' +
+        '<h1 class="buyuk-baslik">' + esc(ICERIK.oyunAdi) + '</h1>' +
+        '<p class="etiket" style="margin-top:6px">Hayal Ortaokulu · 8 Durak</p>' +
+      '</div>' +
+      '<div class="kart" style="margin-top:18px">' +
+        '<h2 style="font-size:1.15rem">🕰️ ' + esc(ICERIK.giris.baslik) + '</h2>' +
+        '<p class="metin">' + esc(ICERIK.giris.metin) + '</p>' +
+        '<div class="buton-grubu">' + butonlar + '</div>' +
+      '</div>'
+    );
+
+    var b;
+    if ((b = document.getElementById('btnBasla')))  b.addEventListener('click', function(){ if (kilit) return; durum = bosDurum(); kaydet(); ekranSenaryo(); });
+    if ((b = document.getElementById('btnDevam')))  b.addEventListener('click', function(){ if (kilit) return; durum = kayit; ekranSenaryo(); });
+    if ((b = document.getElementById('btnSifirla'))) b.addEventListener('click', function(){ if (kilit) return; kayitSil(); durum = bosDurum(); kaydet(); ekranSenaryo(); });
+    if ((b = document.getElementById('btnYeniden'))) b.addEventListener('click', function(){ if (kilit) return; kayitSil(); durum = bosDurum(); kaydet(); ekranSenaryo(); });
+    if ((b = document.getElementById('btnSonuc')))  b.addEventListener('click', function(){ if (kilit) return; durum = kayit; ekranFinal(); });
+  }
+
+  function ekranSenaryo(){
+    ekranAdi = 'senaryo';
+    aktifSecim = null;
+    kisaKilit();               // bu ekran hep animasyonsuz açılır; istemsiz çift dokunuşu engelle
+    durumGuncelle(false);
+    var s = ICERIK.senaryolar[durum.idx];
+
+    ciz(
+      '<div class="ust-satir">' +
+        '<span class="etiket">📍 Durak ' + (durum.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</span>' +
+        '<span class="deger-rozet">✨ ' + esc(s.deger) + '</span>' +
+      '</div>' +
+      '<div class="kart">' +
+        '<div id="gorselYeri"></div>' +
+        '<h2 style="font-size:1.25rem">' + esc(s.baslik) + '</h2>' +
+        '<p class="metin">' + esc(s.sahne) + '</p>' +
+      '</div>' +
+      '<div class="buton-grubu" style="margin-top:14px">' +
+        '<button class="secenek" id="secA"><span class="harf">A</span><span>' + esc(s.a.metin) + '</span></button>' +
+        '<button class="secenek" id="secB"><span class="harf">B</span><span>' + esc(s.b.metin) + '</span></button>' +
+      '</div>' +
+      '<p class="klavye-ipucu">Klavyede A / B tuşlarıyla da seçebilirsin</p>'
+    );
+
+    document.getElementById('gorselYeri').appendChild(gorselKap(s.gorsel, SENARYO_EMOJI[s.id] || '🎬', 'sahne'));
+    document.getElementById('secA').addEventListener('click', function(){ secimYap('a'); });
+    document.getElementById('secB').addEventListener('click', function(){ secimYap('b'); });
+  }
+
+  function secimYap(sec){
+    if (kilit || ekranAdi !== 'senaryo') return;
+    var s = ICERIK.senaryolar[durum.idx];
+    var k = senKaydi(s.id);
+    if (!k.ilk){ k.ilk = sec; kaydet(); durumGuncelle(false); }  // puan yalnız İLK seçime bakar
+    aktifSecim = sec;
+    ekranKisaVade(false);
+  }
+
+  function ekranKisaVade(geriDonusMu){
+    ekranAdi = 'kisaVade';
+    var s = ICERIK.senaryolar[durum.idx];
+    var dal = s[aktifSecim];
+    var girisNotu = geriDonusMu
+      ? '<p class="metin metin-soluk" style="margin-top:0">Saatin kapağını ters çevirdin ve aynı ana geri döndün. Bu kez öbür yolu seçiyorsun:</p>'
+      : '';
+
+    ciz(
+      '<div class="ust-satir">' +
+        '<span class="etiket">📍 Durak ' + (durum.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</span>' +
+        '<span class="deger-rozet">✨ ' + esc(s.deger) + '</span>' +
+      '</div>' +
+      '<div class="kart">' +
+        girisNotu +
+        '<span class="zaman-cip">🕐 Hemen ardından</span>' +
+        '<div class="secim-ozet">“' + esc(dal.metin) + '”</div>' +
+        '<p class="metin">' + esc(dal.kisaVade) + '</p>' +
+        '<button class="btn altin" id="btnIleri">⏳ 5 yıl sonrasına git</button>' +
+      '</div>'
+    );
+
+    document.getElementById('btnIleri').addEventListener('click', function(){
+      if (kilit) return;
+      zamanGecisi(false, '⏳ Beş yıl ileri gidiliyor…', ekranGelecek);
+    });
+  }
+
+  function ekranGelecek(){
+    ekranAdi = 'gelecek';
+    var s = ICERIK.senaryolar[durum.idx];
+    var dal = s[aktifSecim];
+    var k = senKaydi(s.id);
+    if (k.gorulen.indexOf(aktifSecim) === -1){ k.gorulen.push(aktifSecim); kaydet(); }
+    durumGuncelle(false);
+
+    var ikisiDe = k.gorulen.length === 2;
+    var sonDurakMi = durum.idx === ICERIK.senaryolar.length - 1;
+    var ileriYazi = sonDurakMi ? 'Yolculuğu Tamamla ▶' : 'Sonraki Durak ▶';
+
+    var altKisim;
+    if (ikisiDe){
+      altKisim =
+        '<div class="defter"><h3>🧭 Yolcunun Defteri</h3><p>' + esc(s.ders) + '</p></div>' +
+        '<button class="btn birincil" id="btnSonraki">' + ileriYazi + '</button>';
+    } else {
+      altKisim =
+        '<button class="btn birincil" id="btnGeriDon">◀ Zamanda geri dön — diğer seçimi de gör</button>' +
+        '<button class="btn ikincil" id="btnSonraki">' + ileriYazi + '</button>';
+    }
+
+    ciz(
+      '<div class="ust-satir">' +
+        '<span class="etiket">📍 Durak ' + (durum.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</span>' +
+        '<span class="deger-rozet">✨ ' + esc(s.deger) + '</span>' +
+      '</div>' +
+      '<div class="kart">' +
+        '<div id="gorselYeri"></div>' +
+        '<span class="zaman-cip">📅 Beş yıl sonra</span>' +
+        '<div class="secim-ozet">“' + esc(dal.metin) + '”</div>' +
+        '<p class="metin">' + esc(dal.gelecek) + '</p>' +
+        altKisim +
+      '</div>'
+    );
+
+    document.getElementById('gorselYeri').appendChild(
+      gorselKap(dal.gorsel, SENARYO_EMOJI[s.id] || '🎬', dal.tip === 'iyi' ? 'iyi' : 'kotu')
+    );
+
+    var geriBtn = document.getElementById('btnGeriDon');
+    if (geriBtn) geriBtn.addEventListener('click', digerDaliGor);
+    document.getElementById('btnSonraki').addEventListener('click', function(){
+      if (kilit) return;
+      if (!ikisiDe){ modalAc(); } else { sonrakiDurak(); }
+    });
+  }
+
+  function digerDaliGor(){
+    if (kilit) return;
+    aktifSecim = (aktifSecim === 'a') ? 'b' : 'a';
+    zamanGecisi(true, '⏪ Zaman geri sarılıyor…', function(){ ekranKisaVade(true); });
+  }
+
+  function sonrakiDurak(){
+    if (durum.idx >= ICERIK.senaryolar.length - 1){
+      durum.bitti = true; kaydet();
+      zamanGecisi(false, '🕰️ Saat son tıkırtısını atıyor…', ekranFinal);
+    } else {
+      durum.idx++; kaydet();
+      ekranSenaryo();
+    }
+  }
+
+  function ekranFinal(){
+    ekranAdi = 'final';
+    durumGuncelle(false);
+    var puan = puanHesapla();
+    var cift = ciftDalSayisi();
+    var toplam = ICERIK.senaryolar.length;
+
+    ciz(
+      '<div class="orta" style="margin-top:8px">' +
+        '<span class="etiket">Yolculuğun Sonu</span>' +
+        '<h1 style="font-size:1.5rem; margin-top:6px">🕰️ ' + esc(ICERIK.final.baslik) + '</h1>' +
+        '<div class="puan-final" style="margin-top:14px">' + puan + '</div>' +
+        '<p class="etiket" style="margin-top:2px">Karakter Puanı / ' + (toplam * 10) + '</p>' +
+      '</div>' +
+      '<div class="cipler">' +
+        '<div class="cip"><div class="buyuk">' + (puan / 10) + '/' + toplam + '</div><div class="kucuk">İlk seçimi güzel gelecek</div></div>' +
+        '<div class="cip"><div class="buyuk">' + cift + '/' + toplam + '</div><div class="kucuk">İki geleceği de izlenen durak</div></div>' +
+      '</div>' +
+      '<div class="kart" style="margin-top:14px">' +
+        '<p class="metin" style="margin-top:0">' + esc(ICERIK.final.metin) + '</p>' +
+        '<button class="btn birincil" id="btnTekrar">🔁 Tekrar Oyna</button>' +
+        '<a class="btn ikincil" href="../" style="text-decoration:none">← Oyunlara Dön</a>' +
+      '</div>'
+    );
+
+    document.getElementById('btnTekrar').addEventListener('click', function(){
+      if (kilit) return;
+      kayitSil(); durum = bosDurum(); kaydet();
+      ekranSenaryo();
+    });
+  }
+
+  /* ---------- Nazik onay penceresi ---------- */
+  var modalArka = document.getElementById('modalArka');
+  function modalAc(){
+    modalArka.classList.add('acik');
+    document.getElementById('modalGor').focus();
+  }
+  function modalKapat(){ modalArka.classList.remove('acik'); }
+
+  document.getElementById('modalGor').addEventListener('click', function(){
+    if (kilit) return;
+    modalKapat();
+    digerDaliGor();
+  });
+  document.getElementById('modalDevam').addEventListener('click', function(){
+    if (kilit) return;
+    modalKapat();
+    sonrakiDurak();
+  });
+  modalArka.addEventListener('click', function(ev){
+    if (ev.target === modalArka) modalKapat();   // dışına dokununca kapan
+  });
+
+  /* ---------- Klavye desteği ---------- */
+  document.addEventListener('keydown', function(ev){
+    if (ev.repeat) return;
+    if (ev.key === 'Escape' && modalArka.classList.contains('acik')){ modalKapat(); return; }
+    if (kilit || modalArka.classList.contains('acik')) return;
+    // Odaklı buton/bağlantıda Enter-Boşluk yerli davranışa bırakılır (çift tetikleme olmasın)
+    var hedef = ev.target;
+    if (hedef && (hedef.tagName === 'BUTTON' || hedef.tagName === 'A') && (ev.key === 'Enter' || ev.key === ' ')) return;
+
+    var t = ev.key.toLowerCase();
+    if (ekranAdi === 'senaryo'){
+      if (t === 'a' || t === '1'){ secimYap('a'); }
+      else if (t === 'b' || t === '2'){ secimYap('b'); }
+    } else if (ev.key === 'Enter'){
+      var birincil = sahne.querySelector('.btn.birincil, .btn.altin');
+      if (birincil) birincil.click();
+    }
+  });
+
+  /* ---------- Başlat ---------- */
+  durum = kayitOku() || bosDurum();
+  ekranGiris();
+})();
+</script>
+</body>
+</html>
