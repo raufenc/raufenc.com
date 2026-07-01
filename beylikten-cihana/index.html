@@ -121,9 +121,9 @@
   .sm-et{font-size:clamp(6.5px,1.15vmin,9.5px); letter-spacing:.08em; color:#7a5b1a; margin-top:3px; text-align:center; line-height:1.1}
 
   .pawnlar{position:absolute; bottom:2px; right:2px; left:2px; display:flex; flex-wrap:wrap; gap:2px; justify-content:center; pointer-events:none}
-  .pawn{width:clamp(15px,2.5vmin,23px); height:clamp(15px,2.5vmin,23px); border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-size:clamp(9px,1.5vmin,14px); border:1px solid rgba(255,255,255,.55);
-    box-shadow:0 0 0 1.5px #f4ead0, 0 0 0 2.5px rgba(0,0,0,.35), 0 2px 5px rgba(0,0,0,.5)}
+  .pawn{width:clamp(24px,4vmin,38px); height:clamp(24px,4vmin,38px); border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(14px,2.4vmin,22px); border:1.5px solid rgba(255,255,255,.6);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 0 0 2.5px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.5)}
   .pawn-hareket{animation:zipla .24s ease-out; z-index:9; box-shadow:0 0 0 1.5px #fff, 0 0 13px 3px var(--altin2), 0 3px 8px rgba(0,0,0,.55)}
 
   /* ---------- yan panel ---------- */
@@ -142,7 +142,11 @@
   .bot-oynuyor{font-size:16px;color:var(--altin2);font-weight:700;display:flex;align-items:center;gap:9px}
   .bot-spinner{width:16px;height:16px;border:2.5px solid rgba(201,162,39,.3);border-top-color:var(--altin2);border-radius:50%;animation:donme .8s linear infinite}
   #oyuncular{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-  .oyuncu-kart{background:rgba(0,0,0,.24); border:2.5px solid; border-radius:13px; padding:10px 11px; transition:box-shadow .2s}
+  .oyuncu-kart{background:rgba(0,0,0,.24); border:2.5px solid; border-radius:13px; padding:10px 30px 10px 11px; transition:box-shadow .2s; position:relative}
+  .koltuk-btn{position:absolute; top:7px; right:7px; width:26px; height:26px; border-radius:8px; border:1px solid rgba(201,162,39,.5);
+    background:rgba(255,255,255,.09); color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1}
+  .koltuk-btn:hover{background:rgba(255,255,255,.2)}
+  .akbtn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
   .oyuncu-kart.aktif{box-shadow:0 0 0 2.5px var(--altin2), 0 0 22px rgba(237,199,90,.45)}
   .oyuncu-kart.iflas{opacity:.42; filter:grayscale(1)}
   .ok-bas{display:flex; align-items:center; gap:6px; font-size:15px; font-weight:800; color:#fff}
@@ -154,7 +158,7 @@
   #log{height:184px; overflow-y:auto; font-size:14px; line-height:1.55}
   .log-satir{padding:4px 0; border-bottom:1px dashed rgba(255,255,255,.09); color:#ddd0ad; animation:logGir .3s}
   .log-satir.iyi{color:#85e4b6} .log-satir.kotu{color:#f2a8a8} .log-satir.vurgu{color:var(--altin2); font-weight:700}
-  .panel-alt{display:flex; gap:9px}
+  .panel-alt{display:flex; gap:8px; flex-wrap:wrap}
   .panel-alt .akbtn{flex:1; text-align:center; font-size:14.5px}
 
   /* ---------- modal ---------- */
@@ -333,7 +337,7 @@
 </style>
 </head>
 <body>
-<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v10 · yükleniyor…</div>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v11 · yükleniyor…</div>
 <header>
   <div class="marka">٭ TÜRK-İSLAM MEDENİYETİ STRATEJİ OYUNU ٭</div>
   <h1>BEYLİKTEN <span class="ana">CİHANA</span></h1>
@@ -381,6 +385,8 @@
     <div class="panel-kart"><div id="oyuncular"></div></div>
     <div class="panel-kart"><div id="log"></div></div>
     <div class="panel-alt">
+      <button id="duraklat-btn" class="akbtn">⏸️ Duraklat</button>
+      <button id="hiz-btn" class="akbtn">⚡ Normal</button>
       <button id="d3-btn" class="akbtn">🧊 3D</button>
       <button id="skor-btn" class="akbtn">📊 Servet</button>
       <button id="ses-btn" class="akbtn">🔊 Ses</button>
@@ -397,24 +403,32 @@
     <div class="kurallar-icerik">
       <p><b>Beylikten Cihana</b>, Türk-İslam medeniyetinin yükselişini bir tahta üzerinde yeniden yaşatan eğitsel strateji oyunudur.</p>
       <h3>Amaç</h3>
-      <ul><li>Şehirleri fethedip imar ederek servetini büyüt. Diğer herkes iflas ettiğinde <b>son ayakta kalan kazanır</b>.</li></ul>
-      <h3>Tur akışı — zar yok!</h3>
+      <ul><li>Şehirleri fethedip imar ederek servetini büyüt. Diğer herkes iflas ettiğinde <b>son ayakta kalan kazanır</b>. Tur limiti seçildiyse süre dolunca <b>en zengin</b> kazanır.</li></ul>
+      <h3>Tur akışı — ZAR YOK</h3>
       <ul>
-        <li><b>Sefer Kartı çek.</b> Üstündeki 1–12 sayısı kadar ilerlersin; altındaki tarih bilgisi o sayıya bağlıdır (örn. <i>III. Mustafa → 3</i>, <i>Yedikule'nin 7 kulesi → 7</i>, <i>12 Hayvanlı Türk Takvimi → 12</i>).</li>
-        <li>Sefer Meydanı'ndan her geçişte <b>2.000 akçe ulûfe</b> alırsın.</li>
-        <li>Boş şehre düşersen <b>fethedebilir</b> ya da <b>Bilgi sorusu</b> ile %25 indirimli alabilirsin.</li>
+        <li><b>Sefer Kartı çek.</b> Üstündeki 1–12 sayısı kadar ilerlersin; altındaki tarih bilgisi o sayıya bağlıdır (<i>III. Mustafa → 3</i>, <i>Yedikule'nin 7 kulesi → 7</i>, <i>12 Hayvanlı Türk Takvimi → 12</i>).</li>
+        <li>Sefer Meydanı'ndan her geçişte <b>2.000 akçe ulûfe</b> (Hünkâr isen +500).</li>
+        <li>Boş şehre düşersen <b>fethet</b>, <b>Bilgi sorusu</b> ile %25 indirimli al, ya da <b>vazgeç → açık artırma</b> başlar (herkes teklif verir, en yükseği alır).</li>
         <li>Başkasının şehrine düşersen <b>vergi (kira)</b> ödersin; imar arttıkça vergi katlanır.</li>
       </ul>
+      <h3>Özel Sefer Kartları</h3>
+      <ul><li>Bazı kartlar farklıdır: <b>🔁 Tekrar</b> (ilerle + yeniden çek), <b>↩️ Geri</b> (geri git), <b>✨ Işınlanma</b> (en yakın limana / başa / Haremeyn'e), <b>✦ Şakacı</b> (rakiple yer değiştir / ganimet al).</li></ul>
       <h3>İmar — Han 🏨 → Hamam ♨️ → Medrese 🏫 → Cami 🕌 → Külliye 🏛️</h3>
       <ul><li>Bir <b>bölgenin (renk grubu) tüm şehirleri</b> sende ise imar başlar. İmar arttıkça vergi katlanır; en üst kademe Külliye'dir.</li></ul>
-      <h3>Özel kareler</h3>
+      <h3>Nakit sıkışınca — iflas etme!</h3>
+      <ul><li>Bir ödemeyi karşılayamazsan bir <b>borç ekranı</b> açılır: <b>yapı sat</b> (yarı fiyat) veya <b>şehir ipotek et</b>, nakdi topla, borcu öde, devam et. "Mülklerim"den istediğinde de satabilirsin.</li></ul>
+      <h3>Kartlar & özel kareler</h3>
       <ul>
-        <li><b>Ferman</b> & <b>Vak'a</b>: tarihî olay kartı. Etkisi <b>senin mülklerine</b> bağlanır — "1347 Kara Veba → imarlı her yapından gelir kaybı", "deniz zaferi → her limanın için kazanç".</li>
-        <li><b>Esaret (Yedikule)</b>: çıkmak için 500 akçe fidye, Ferman kartı ya da bir Bilgi sorusunu doğru cevapla.</li>
-        <li><b>Limanlar/Darphane/Vakıf/vergiler:</b> kendi kurallarını uygular.</li>
+        <li><b>Ferman</b> & <b>Vak'a</b>: tarihî olay kartı; etkisi <b>senin mülklerine</b> bağlanır (Kara Veba → imar başına kayıp, Preveze → liman başına kazanç).</li>
+        <li><b>🏕️ Kervansaray Hazinesi:</b> ödenen vergiler ortada birikir; buraya düşen tüm havuzu kapar.</li>
+        <li><b>❖ Şeref (Haremeyn/Kudüs):</b> kutsal beldeler; alınıp satılmaz, bankadan <b>hizmet bereketi</b> alırsın (Haremeyn +500, Kudüs +200).</li>
+        <li><b>👑 Hünkâr:</b> en zengin oyuncu unvanı kapar, geçişte +500 ulûfe alır.</li>
+        <li><b>Esaret (Yedikule):</b> çıkmak için 500 fidye, Ferman kartı ya da doğru Bilgi cevabı.</li>
       </ul>
-      <h3>Botlar</h3>
-      <ul><li>Kurulumda her koltuğu <b>Sen</b> ya da <b>Bot</b> yapabilirsin. Tek kişi botlara karşı oynayabilir; botlar otomatik karar verir.</li></ul>
+      <h3>🤝 Takas</h3>
+      <ul><li>İstediğin oyuncuyla <b>şehir + akçe + Ferman kartı</b> takas edebilirsin; botlar da teklif başlatır. (İmarlı şehir takas edilmez.)</li></ul>
+      <h3>Kontroller</h3>
+      <ul><li><b>⏸️ Duraklat</b> oyunu durdurur. Her oyuncu kartındaki <b>👤/🤖</b> düğmesiyle o koltuğu <b>oyun ortasında Sen ↔ Bot</b> yapabilirsin. <b>⚡ Hız</b> botların oynama hızını, <b>🧊 3D</b> masa görünümünü ayarlar.</li></ul>
     </div>
     <div class="m-btnlar"><button id="kurallar-kapat" class="akbtn btn-ana">Kapat</button></div>
   </div>
@@ -1921,15 +1935,6 @@ window.OYUN_VERISI = {
   },
   {
    "sayi": 0,
-   "baslik": "İstanbul'un Fethi",
-   "bilgi": "1453'te surlar aşıldı, payitaht senin oldu! Doğruca İstanbul'a git.",
-   "ozel": {
-    "tur": "isinla",
-    "hedef": 37
-   }
-  },
-  {
-   "sayi": 0,
    "baslik": "Donanma Seferi",
    "bilgi": "Kaptan-ı Derya donanmayı denize açtı; gemiyle en yakın limana taşındın.",
    "ozel": {
@@ -2767,6 +2772,29 @@ window.OYUN_VERISI = {
     var b = document.getElementById("d3-btn"); if (b) { b.textContent = on ? "🧊 3D ✓" : "🗺️ Düz"; b.classList.toggle("acik", !!on); }
     try { localStorage.setItem("bc_3d", on ? "1" : "0"); } catch (e) {}
   }
+  function duraklatDegis() {
+    if (!oyun) return;
+    oyun.duraklat = !oyun.duraklat;
+    var b = document.getElementById("duraklat-btn");
+    if (b) { b.textContent = oyun.duraklat ? "▶️ Devam" : "⏸️ Duraklat"; b.classList.toggle("acik", oyun.duraklat); }
+    logla(oyun.duraklat ? "⏸️ Oyun duraklatıldı." : "▶️ Oyun devam ediyor.", "vurgu");
+    render();
+    if (!oyun.duraklat && !oyun.bitti && aktif().bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function koltukDegis(id) {
+    var o = sahipOyuncu(id); if (!o || o.iflas || oyun.bitti) return;
+    o.bot = !o.bot;
+    logla("🔄 " + o.ad + " artık " + (o.bot ? "🤖 Bot" : "👤 Sen") + ".", "vurgu");
+    render();
+    if (o.id === oyun.sira && !oyun.duraklat && o.bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function hizDegis() {
+    var s = [{ h: 0.5, ad: "Hızlı" }, { h: 1, ad: "Normal" }, { h: 1.8, ad: "Yavaş" }];
+    var i = 1; s.forEach(function (x, j) { if (x.h === BOT_HIZ) i = j; });
+    i = (i + 1) % s.length; BOT_HIZ = s[i].h;
+    var b = document.getElementById("hiz-btn"); if (b) b.textContent = "⚡ " + s[i].ad;
+    try { localStorage.setItem("bc_hiz", "" + BOT_HIZ); } catch (e) {}
+  }
 
   // ---------- yardımcılar ----------
   function $(s) { return document.querySelector(s); }
@@ -2829,7 +2857,7 @@ window.OYUN_VERISI = {
       seferDeste: karistir(SEFER.length), si: 0, fermanDeste: karistir(V.ferman.length), fi: 0,
       vakcaDeste: karistir(V.vakca.length), vi: 0, bitti: false,
       botZorluk: ($("#bot-zorluk") ? $("#bot-zorluk").value : "orta"),
-      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0,
+      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0, duraklat: false,
       turLimiti: ($("#tur-limiti") ? parseInt($("#tur-limiti").value, 10) : 0),
     };
     Ses.init();
@@ -2917,10 +2945,12 @@ window.OYUN_VERISI = {
       d.innerHTML =
         '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.id === hunkarId() ? " 👑" : "") + (o.iflas ? " (iflas)" : "") + '</span></div>' +
         '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
-        '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>';
+        '<div class="ok-alt">' + o.mulkler.length + ' mülk' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>' +
+        (o.iflas ? '' : '<button class="koltuk-btn" data-id="' + o.id + '" title="Sen ↔ Bot">' + (o.bot ? '🤖' : '👤') + '</button>');
       pano.appendChild(d);
       oyun._para[o.id] = o.para;
     });
+    pano.querySelectorAll(".koltuk-btn").forEach(function (b) { b.onclick = function () { koltukDegis(parseInt(b.dataset.id, 10)); }; });
     K.forEach(function (k) {
       if (k.tip !== "sehir" && k.tip !== "liman" && k.tip !== "utility") return;
       var cell = document.querySelector('.kare[data-pos="' + k.pos + '"]'); if (!cell) return;
@@ -2956,7 +2986,7 @@ window.OYUN_VERISI = {
 
   function butonlariGuncelle() {
     var o = aktif(), k = K[o.pos], bar = $("#aksiyon-bar"); bar.innerHTML = "";
-    $("#sira-bilgi").innerHTML = '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
+    $("#sira-bilgi").innerHTML = (oyun.duraklat ? '⏸️ <b style="color:#f2a8a8">DURAKLATILDI</b> · ' : '') + '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
       (oyun.turLimiti ? ' · ⏳ Tur ' + (Math.floor(oyun.elGecti / oyun.oyuncular.length) + 1) + '/' + oyun.turLimiti : '') +
       (oyun.hazine > 0 ? ' · 🏕️ ' + fmt(oyun.hazine) : '');
     if (oyun.bitti) { bar.appendChild(btn("🔄 Yeni Oyun", "btn-ana", function () { location.reload(); })); return; }
@@ -3016,7 +3046,7 @@ window.OYUN_VERISI = {
       if (oz) seferOzel(kart, o, bitince);
       else { oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); }
     };
-    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b) b.click(); }, 1800);
+    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b && aktif().bot) b.click(); }, 1800);
   }
   function enYakinLiman(pos) { var L = [5, 15, 25, 35], i; for (i = 0; i < L.length; i++) if (L[i] > pos) return L[i]; return L[0]; }
   function seferOzel(kart, o, bitince) {
@@ -3242,7 +3272,7 @@ window.OYUN_VERISI = {
       (etki ? '<div class="m-eko" style="text-align:center;font-weight:700">▶ ' + etki + '</div>' : '') +
       '<div class="kart-ogren">💡 ' + kart.ogren + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-uygula">Uygula</button></div>');
     $("#m-uygula").onclick = function () { kartUygula(kart, o, bitince); };
-    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b) b.click(); }, 1600);
+    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b && aktif().bot) b.click(); }, 1600);
   }
   function etkiOzet(e) {
     var t = { mulk_basina_al: "Her mülkün için al", mulk_basina_ver: "Her mülkün için öde", imar_basina_al: "Her imar yapın için al", imar_basina_ver: "Her imar yapın için öde", liman_basina_al: "Her limanın için al", liman_basina_ver: "Her limanın için öde", en_degerli_imar_yik: "En değerli yapın yıkılır", para_al: "Hazineden al", para_ver: "Hazineye öde", herkesten_al: "Herkesten al", herkese_ver: "Herkese ver" }[e.tur];
@@ -3263,7 +3293,7 @@ window.OYUN_VERISI = {
   // ---------- BOTLAR ----------
   function botRezerv() { return { kolay: 4500, orta: 2500, zor: 1200 }[oyun.botZorluk] || 2500; }
   function botTuru() {
-    var o = aktif(); if (!o || !o.bot || oyun.bitti) return;
+    var o = aktif(); if (!o || !o.bot || oyun.bitti || oyun.duraklat) return;
     if (o.esaret) { bekle(botEsaret, 900); return; }
     bekle(function () { seferKartiCek(botCozum); }, 700);
   }
@@ -3303,7 +3333,7 @@ window.OYUN_VERISI = {
     if (oyun.tekrarHak && !aktif().iflas) {
       oyun.tekrarHak = false; oyun.tekrarSayac = (oyun.tekrarSayac || 0) + 1;
       if (oyun.tekrarSayac >= 3) { oyun.tekrarSayac = 0; logla("🔁 " + aktif().ad + " üst üste 3 tekrar — yorgun düşüp esarete uğradı!", "kotu"); esareteGonder(aktif()); }
-      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot) bekle(botTuru, 650); return; }
+      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " tekrar sefere çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot && !oyun.duraklat) bekle(botTuru, 650); return; }
     } else oyun.tekrarSayac = 0;
     oyun.elGecti = (oyun.elGecti || 0) + 1;
     if (oyun.turLimiti && Math.floor(oyun.elGecti / oyun.oyuncular.length) >= oyun.turLimiti) {
@@ -3312,7 +3342,7 @@ window.OYUN_VERISI = {
     var n = oyun.oyuncular.length, sayac = 0;
     do { oyun.sira = (oyun.sira + 1) % n; sayac++; } while (oyun.oyuncular[oyun.sira].iflas && sayac <= n);
     oyun.hareketYapildi = false; oyun.sonHareket = 0; kaydet(); render();
-    if (!oyun.bitti && aktif().bot) bekle(botTuru, 650);
+    if (!oyun.bitti && aktif().bot && !oyun.duraklat) bekle(botTuru, 650);
   }
   function galibiyetKontrol() {
     var ayakta = oyun.oyuncular.filter(function (o) { return !o.iflas; });
@@ -3656,12 +3686,16 @@ window.OYUN_VERISI = {
     $("#skor-btn").addEventListener("click", skorGoster);
     $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
     $("#d3-btn").addEventListener("click", function () { set3D(!document.getElementById("oyun").classList.contains("d3")); });
+    $("#duraklat-btn").addEventListener("click", duraklatDegis);
+    $("#hiz-btn").addEventListener("click", hizDegis);
+    try { var h = parseFloat(localStorage.getItem("bc_hiz")); if (h) BOT_HIZ = h; } catch (e) {}
+    var hb = $("#hiz-btn"); if (hb) hb.textContent = "⚡ " + (BOT_HIZ === 0.5 ? "Hızlı" : BOT_HIZ === 1.8 ? "Yavaş" : "Normal");
     $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
     $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
-    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v10 ✓ hazır";
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v11 ✓ hazır";
   }
   // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
   if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
