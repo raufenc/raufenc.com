@@ -23,11 +23,15 @@
     } catch (x) {}
   });
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --koyu:#0c3b33; --koyu2:#082420; --altin:#c9a227; --altin2:#edc75a; --altin3:#f5e2a3;
     --parsomen:#f6edd6; --parsomen2:#ece0c2; --metin:#2c2417; --kirmizi:#8a2b2b; --yesil:#1e6b4f;
     --golge:rgba(0,0,0,.30);
+    --imp:'Cinzel', Georgia, 'Times New Roman', serif;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -269,6 +273,31 @@
   .d3 .kare:hover{transform:translateZ(8px)}
   #d3-btn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin));color:#22180a;border:none}
 
+  /* ---------- LÜKS DOKUNUŞLAR ---------- */
+  header h1,.logo-ust,.logo-orta,.marka,.zafer-ust,.zafer-ad,.kart-ust,#kurulum h2{font-family:var(--imp);letter-spacing:.02em}
+  header h1{font-weight:900}.logo-orta{font-weight:900}
+  body{background:radial-gradient(1300px 920px at 50% 8%, #1d7161 0%, #0e463c 40%, #072620 100%)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(130% 92% at 50% 32%, transparent 52%, rgba(0,0,0,.5) 100%)}
+  header,#oyun,#kurulum{position:relative;z-index:1}
+  header h1 .ana{background:linear-gradient(100deg,#a9781a 18%,#ffe9a8 44%,#f5cf5e 52%,#a9781a 74%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background-size:220% auto;animation:parla 5s linear infinite;text-shadow:0 2px 18px rgba(201,162,39,.3)}
+  @keyframes parla{to{background-position:220% center}}
+  .panel-kart{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+    backdrop-filter:blur(9px) saturate(1.15);-webkit-backdrop-filter:blur(9px) saturate(1.15);
+    border:1.5px solid rgba(201,162,39,.45);box-shadow:0 12px 34px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.10)}
+  #kurulum{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 55px var(--golge), inset 0 1px 0 rgba(255,255,255,.1)}
+  .pawn{background-image:radial-gradient(circle at 34% 28%, rgba(255,255,255,.55), rgba(255,255,255,0) 46%);
+    box-shadow:0 0 0 1.6px #f4ead0, 0 0 0 2.6px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.55), inset 0 -3px 5px rgba(0,0,0,.35)}
+  .d3 #tahta{border-width:13px;box-shadow:0 62px 84px -22px rgba(0,0,0,.72), 0 30px 42px rgba(0,0,0,.36), inset 0 0 0 2.5px var(--altin), inset 0 0 34px rgba(110,79,23,.34)}
+  .d3 .tahta-saran::after{content:"";position:absolute;left:10%;right:10%;bottom:20px;height:46px;z-index:-1;background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 72%);filter:blur(10px)}
+  .akbtn.btn-ana,.btn-buyuk{position:relative;overflow:hidden}
+  .akbtn.btn-ana::after,.btn-buyuk::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:kayar 5.5s ease-in-out infinite;pointer-events:none}
+  @keyframes kayar{0%,72%{left:-60%}88%{left:130%}100%{left:130%}}
+  /* konfeti tuvali */
+  #konfeti{position:fixed;inset:0;pointer-events:none;z-index:60}
+
   /* ---------- MOBİL ---------- */
   @media(max-width:680px){
     body::before{opacity:.03}
@@ -304,7 +333,7 @@
 </style>
 </head>
 <body>
-<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v9 · yükleniyor…</div>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v10 · yükleniyor…</div>
 <header>
   <div class="marka">٭ TÜRK-İSLAM MEDENİYETİ STRATEJİ OYUNU ٭</div>
   <h1>BEYLİKTEN <span class="ana">CİHANA</span></h1>
@@ -3583,8 +3612,23 @@ window.OYUN_VERISI = {
         '<span class="sr-servet">' + fmt(servet(o)) + '</span></div>';
     }).join("");
   }
+  function konfeti() {
+    var c = document.getElementById("konfeti");
+    if (!c) { c = document.createElement("canvas"); c.id = "konfeti"; document.body.appendChild(c); }
+    var ctx = c.getContext("2d"); c.width = window.innerWidth; c.height = window.innerHeight;
+    var renkler = ["#edc75a", "#c9a227", "#f5e2a3", "#1e8449", "#b8332b", "#f6edd6"], P = [], i;
+    for (i = 0; i < 150; i++) P.push({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * .5, w: 6 + Math.random() * 7, h: 8 + Math.random() * 8, r: Math.random() * 6.28, vr: (Math.random() - .5) * .3, vy: 2 + Math.random() * 3.5, vx: (Math.random() - .5) * 2, renk: renkler[Math.floor(Math.random() * renkler.length)] });
+    var bas = null;
+    function ciz(t) {
+      if (bas == null) bas = t;
+      ctx.clearRect(0, 0, c.width, c.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += .03; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.renk; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore(); });
+      if (t - bas < 3900) requestAnimationFrame(ciz); else if (c.parentNode) c.parentNode.removeChild(c);
+    }
+    requestAnimationFrame(ciz);
+  }
   function sonucModal(g) {
-    Ses.kazan(); temizleKayit();
+    Ses.kazan(); temizleKayit(); try { konfeti(); } catch (e) {}
     var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
     var kz = g || sirali[0];
     var enSehir = oyun.oyuncular.slice().sort(function (a, b) { return b.mulkler.length - a.mulkler.length; })[0];
@@ -3617,7 +3661,7 @@ window.OYUN_VERISI = {
     var dv = $("#devam-btn");
     if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
     kurulumEkrani();
-    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v9 ✓ hazır · 3D";
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v10 ✓ hazır";
   }
   // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
   if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
