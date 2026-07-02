@@ -24,7 +24,9 @@ var PROJELER = [
   { emoji: '\u{2709}\u{FE0F}', title: 'Davet Mektubu', desc: 'Ateist bir mühendise ne yazarsın? Agnostik bir doktora? 27 mesleğe özel, düşündürücü mektuplar.', tag: 'Uygulama', href: 'https://davetmektubu.com/', external: true, kategori: 'dusunce' },
   { emoji: '\u{1F3F9}', title: 'Kayı I — Ertuğrul\'un Ocağı', desc: 'Bir uç beyliğinden cihan devletine — Osmanlı\'nın kuruluş destanını kişiler, olaylar ve haritalarla keşfet.', tag: 'Ansiklopedi', href: '/kayi/', kategori: 'tarih' },
   { emoji: '\u{1F331}', title: 'İyilik Akademi', desc: 'Çocuklara güzel ahlakı nasıl öğretirsin? 40 derslik interaktif bir yolculukla — oyunlaştırılmış, quizlerle dolu.', tag: 'Uygulama', href: '/iyilikakademi/', kategori: 'peygamberim' },
-  { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', kategori: 'sinif', featured: true }
+  { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', kategori: 'sinif', featured: true },
+  { emoji: '\u{1F3F0}', title: 'Beylikten Cihana', desc: 'Zar yok, tarih var. Söğüt\'ten İstanbul\'a şehir fethet, imar et, rakiplerini alt et. 85 sefer kartı, dijital + evde basılabilir fiziksel set.', tag: 'Oyun', href: '/beylikten-cihana/', kategori: 'tarih', featured: true },
+  { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'sinif', featured: true }
 ];
 
 var SINIF_ARACLARI = [];
