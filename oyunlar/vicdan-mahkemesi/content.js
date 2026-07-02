@@ -49,7 +49,14 @@ const ICERIK = {
       ],
       dogruHukum: 'sucsuz',
       gercek: 'Kutuyu kimse çalmadı. Ramazan Amca sıraları pencere kenarına çekerken kutu Zeynep\'in sırasından yere düştü; Ramazan Amca da onu en yakındaki boş sıra gözüne — yani Selim\'in sırasına — özenle yerleştirdi. Selim\'in tek "suçu", bağcığı koptuğu için sınıftan en son çıkmak ve okulun en yeni öğrencisi olmaktı.',
-      ders: 'Bir eşyanın birinin sırasında bulunması, onu o kişinin aldığını göstermez; görünüş delil değildir. Hüsn-ü zan, "acaba başka bir açıklaması olabilir mi?" diye sormaktır — hele karşındaki, kendini savunacak bir dostu bile olmayan yeni bir öğrenciyse.'
+      ders: 'Bir eşyanın birinin sırasında bulunması, onu o kişinin aldığını göstermez; görünüş delil değildir. Hüsn-ü zan, "acaba başka bir açıklaması olabilir mi?" diye sormaktır — hele karşındaki, kendini savunacak bir dostu bile olmayan yeni bir öğrenciyse.',
+      sanikGozundenKarakter: 'selim',
+      sanikGozunden: [
+        { metin: 'Ayakkabı bağcığım kopunca sınıfta tek başıma kaldım; düğümü atarken içimden "keşke bugün de kimseyle konuşmasam" diye geçirdim. Yeni okulda göze batmamak en büyük hayalimdi.' },
+        { metin: 'Öğle arası "kalem kutusu sırasında bulundu" dediklerinde önce ne dediklerini anlamadım. Sonra herkesin gözü birden bana çevrildi; sanki sırtımda görünmez bir tabela vardı: "Yeni gelen — ona bakın."' },
+        { metin: '"Açıklayamıyorum" derken sesim titredi, çünkü gerçekten bir açıklamam yoktu. Beni tanıyan tek bir kişi olsa "o böyle bir şey yapmaz" derdi belki. Ama kimse beni tanımıyordu ki.' },
+        { metin: 'Hâkim "suçsuz" deyip tokmağı vurunca dizlerim çözüldü. Kimse fark etmedi ama bir haftadır ilk kez rahat nefes aldım — meğer masumiyetin de bir ağırlığı varmış, sırtımdan indi.' }
+      ]
     },
 
     // ------------------------------------------------------------
@@ -92,7 +99,14 @@ const ICERIK = {
         { metin: 'Emir kütüphaneden ve Zeynep\'ten özür dilesin; biriktirdiği harçlıkla kitabın yenisini alsın ve iki hafta kütüphane koluna katılıp yıpranan kitapları kaplasın.', tip: 'onarici' },
         { metin: 'Emir bir dönem boyunca kütüphaneye adım atamasın ve yaptığını bütün okulun önünde, bayrak töreninde anlatsın.', tip: 'intikamci' }
       ],
-      ders: 'Kaza suç değildir; ama kazayı saklamak, emanete ikinci kez zarar vermektir. "Islattım, ne yapabilirim?" diyen bir Emir belki hiç sanık olmayacaktı. Ceza da yaranın üstüne tuz basmak için değil, yarayı sarmak için verilir — kütüphaneden koparılan Emir düzelmez, kütüphaneye emek veren Emir düzelir.'
+      ders: 'Kaza suç değildir; ama kazayı saklamak, emanete ikinci kez zarar vermektir. "Islattım, ne yapabilirim?" diyen bir Emir belki hiç sanık olmayacaktı. Ceza da yaranın üstüne tuz basmak için değil, yarayı sarmak için verilir — kütüphaneden koparılan Emir düzelmez, kütüphaneye emek veren Emir düzelir.',
+      sanikGozundenKarakter: 'emir',
+      sanikGozunden: [
+        { metin: 'Çantamın altından su sızdığını görünce midem bulandı. "Lütfen kitap olmasın, lütfen kitap olmasın" diye dua ettim ama fermuarı açtığımda "Çocuk Kalbi"nin kapağı sırılsıklamdı.' },
+        { metin: 'Kaloriferin üstüne koyup kuruturken elim ayağım titriyordu. Sayfalar dalgalandıkça sanki ben de içeriden dalgalanıyordum: "Şimdi ne yapacağım, kime söyleyeceğim?"' },
+        { metin: 'Rafa bırakırken kimsenin görmediğinden emin oldum — o an rahatladığımı sandım ama aslında sadece korkuyu erteledim. Eve giderken hiçbir şey tatmadı, hiçbir şey duymadım.' },
+        { metin: 'Mahkemede gerçek ortaya çıkınca aslında içim ferahladı. Saklamak, ıslatmaktan çok daha ağırmış meğer. "Islattım" demek bu kadar zor olmamalıydı.' }
+      ]
     },
 
     // ------------------------------------------------------------
@@ -130,7 +144,14 @@ const ICERIK = {
       ],
       dogruHukum: 'sucsuz',
       gercek: 'Suçlu bir öğrenci değil, açık pencereden dolan poyrazdı. Rüzgâr afişin alt ucunu havalandırdı, afiş üst raptiyelerde asılı kalıp ortadan yırtıldı. Burak sınıfa girdiğinde kâğıdın düştüğünü gördü ve son parçayı havada yakaladı — yani sınıfın "suç kanıtı" dediği şey, aslında bir iyilik anının fotoğrafıydı.',
-      ders: 'İnsanları görünüşüne göre yargılamak, delilsiz hüküm vermenin en sinsi hâlidir; "kesin odur" cümlesi çoğu zaman "onu hiç sevmedim" cümlesinin kılık değiştirmişidir. Bir de şunu unutma: Elif gibi, kendi zararına rağmen "ben görmedim" diyebilen bir şahit, mahkemenin en değerli hazinesidir.'
+      ders: 'İnsanları görünüşüne göre yargılamak, delilsiz hüküm vermenin en sinsi hâlidir; "kesin odur" cümlesi çoğu zaman "onu hiç sevmedim" cümlesinin kılık değiştirmişidir. Bir de şunu unutma: Elif gibi, kendi zararına rağmen "ben görmedim" diyebilen bir şahit, mahkemenin en değerli hazinesidir.',
+      sanikGozundenKarakter: 'burak',
+      sanikGozunden: [
+        { metin: 'Kapıdan girer girmez afişin köşesinin havalandığını gördüm. Düşünmeden elimi uzattım, koca bir parçayı havada yakaladım — o an aklımdan geçen tek şey "üç haftalık emek yere düşmesin"di.' },
+        { metin: 'Arkamı döndüğümde sınıf çoktan bağırıyordu: "Kesin Burak!" Elimdeki kâğıda baktım, sonra onlara baktım. Açıklayacak bir kelime bulamadım, sanki dilim de rüzgârla birlikte uçup gitmişti.' },
+        { metin: 'Alıştım sandığım bir şeye o gün yeniden alışamadığımı fark ettim: "iri olan", "suratsız olan" hep önce ben oluyorum. Bir kere bile "ne oldu Burak?" diye sormadılar, hemen "yaptı" dediler.' },
+        { metin: 'Hâkim "suçsuz" deyip pencereyi, raptiyeleri, yırtığın yönünü anlatınca sınıf sustu. O sessizlikte hissettiğim şey zafer değildi; sadece biri sonunda bana bakmış gibi hissettim.' }
+      ]
     },
 
     // ------------------------------------------------------------
@@ -168,7 +189,14 @@ const ICERIK = {
       ],
       dogruHukum: 'delilYetersiz',
       gercek: 'Bu dosyanın perde arkası hiç aydınlanamadı. Para büyük ihtimalle itiş kakışta yere düştü ve onlarca ayağın altında kim bilir nereye sürüklendi; belki de biri bulup sesini çıkarmadı. Kesin olan tek şey şu: eldeki hiçbir delil Emir\'i göstermiyordu — onu gösteren tek şey, geçmişteki bir hatasının gölgesiydi.',
-      ders: 'Delil yoksa hüküm de yoktur; şüphe ne kadar kalabalıksa kalabalıklaşsın, tek bir kanıtın yerini tutamaz. Ve bir insanın geçmiş hatası delil değildir — dün düşen birini bugün de itersen, ayağa kalkmayı ona hiç öğretemezsin.'
+      ders: 'Delil yoksa hüküm de yoktur; şüphe ne kadar kalabalıksa kalabalıklaşsın, tek bir kanıtın yerini tutamaz. Ve bir insanın geçmiş hatası delil değildir — dün düşen birini bugün de itersen, ayağa kalkmayı ona hiç öğretemezsin.',
+      sanikGozundenKarakter: 'emir',
+      sanikGozunden: [
+        { metin: 'Kuyrukta "para kayboldu" lafı duyulur duyulmaz midem kasıldı. Daha kimse adımı söylememişti ama ben şimdiden içimden "yine mi ben" diye geçirdim.' },
+        { metin: 'Fısıltılar başlayınca en çok kitap olayının adını duymak canımı yaktı. O olayda hatamı kabul etmiştim, bedelini ödemiştim — ama demek ki bir leke bir kere düşünce hiç çıkmıyormuş.' },
+        { metin: 'Ceplerimi, çantamı kendim boşalttım herkesin önünde. "Bakın, hiçbir şeyim yok" derken sesim titredi; masum olmak bile beni temize çıkarmaya yetmeyebilirdi, çünkü kimse "gördüm" demiyor ama herkes "yine de" diyordu.' },
+        { metin: 'Hâkim "delil yetersiz, geçmiş hata delil sayılmaz" deyince içim biraz açıldı ama tam da rahatlamadım — çünkü hüküm beraat değildi, sadece "bilmiyoruz" idi. Yine de bu, hiç kimsenin bana bakmadığı günlerden sonra bana da bir şans tanınması gibiydi.' }
+      ]
     },
 
     // ------------------------------------------------------------
@@ -210,7 +238,14 @@ const ICERIK = {
         { metin: 'Şakaydı işte, gençlik hâli; kâğıdı çöpe atalım, kimse büyütmesin bu meseleyi.', tip: 'gevsek' },
         { metin: 'Burak, Zeynep\'ten sınıfın önünde — yani güldükleri yerde — özür dilesin; bu kez Zeynep\'in emeğini anlatan güzel bir resim çizip aynı panoya assın. Zeynep de proje grubunda Burak\'a bir görev versin.', tip: 'onarici' }
       ],
-      ders: 'Karşındaki gülmüyorsa, o artık şaka değildir; bir insanın onuru, sınıfı güldürmek için harcanamaz. Ve dikkat et: özrün panoya asılması boşuna değil — kırık nerede yaşandıysa, onarım da orada yapılır.'
+      ders: 'Karşındaki gülmüyorsa, o artık şaka değildir; bir insanın onuru, sınıfı güldürmek için harcanamaz. Ve dikkat et: özrün panoya asılması boşuna değil — kırık nerede yaşandıysa, onarım da orada yapılır.',
+      sanikGozundenKarakter: 'burak',
+      sanikGozunden: [
+        { metin: '"Sen zaten çalışmazsın" sözünü herkesin içinde duyunca yüzüm kızardı ama hiçbir şey söyleyemedim. Eve gidene kadar o cümle kafamda dönüp durdu.' },
+        { metin: 'Kömür kalemimi elime alınca içimden "onları güldüreyim, belki böyle beni severler" diye geçirdi. Çizerken bile bir yandan kendimi haklı çıkarmaya çalışıyordum: "Sadece komik, kimse ciddiye almaz."' },
+        { metin: 'Sabah panoya astığımda gülüşmeleri duyunca bir an gurur duydum — ta ki Zeynep\'in yüzünü, gerçek yüzünü görene kadar. Gülen ben değildim artık, o tuvalette ağlıyordu.' },
+        { metin: 'Mahkemede "ben çizdim" derken sesim titremedi ama içim titredi. Alay ettiğim an bana komik gelmişti; şimdi o kâğıdı düşününce içimde hiç komik bir şey kalmadı, sadece "keşke" var.' }
+      ]
     },
 
     // ------------------------------------------------------------
@@ -253,6 +288,13 @@ const ICERIK = {
       ],
       dogruHukum: 'suclu',
       gercek: 'Nazan Öğretmen sınavda Elif\'in kâğıdına uzun bakmıştı — çünkü cevabı o kadar güzeldi ki dönüp bir daha okumuştu. Zeynep bu masum ânı şüpheyle yorumladı ve "bence bir şeyler dönüyor" notuyla tohumu toprağa attı; Emir "olabilir"i "çekmiş" yaparak suladı; okul da üç günde hasadını kaldırdı. Zeynep mahkemede notu görünce sesi kısıldı: "Ben sadece bir cümle yazmıştım..." Evet — çığ da tek bir kar tanesiyle başlar.',
+      sanikGozundenKarakter: 'zeynep',
+      sanikGozunden: [
+        { metin: 'Öğretmenin Elif\'in kâğıdının başında iki kere durduğunu görünce içimde bir şüphe kıvılcımı çaktı. "Sınıf başkanıyım, bir haksızlık varsa fark etmeliyim" diye düşündüm — ama fark ettiğim şey aslında hiçbir şey değildi.' },
+        { metin: 'Teneffüste Emir\'e notu uzatırken "sadece arkadaşça bir gözlem" sanıyordum kendimi. "Bence bir şeyler dönüyor" yazarken elim hiç titremedi, çünkü ne yaptığımın farkında bile değildim.' },
+        { metin: 'Dedikodu okulu sarınca önce şaşırdım, sonra ürktüm: "Bu kadar büyümesini istememiştim." Ama geri almak, bir yastığın tüylerini rüzgârdan toplamaya benziyordu — elimden hiçbir şey gelmiyordu.' },
+        { metin: 'Mahkemede kendi notumu önümde görünce sesim kısıldı. "Ben sadece bir cümle yazmıştım" derken fark ettim ki bazı cümleler küçük başlar ama koca bir çığ olup birinin üstüne çöker. Elif\'in yüzüne bakmaya utandım.' }
+      ],
       cezalar: [
         { metin: 'Zeynep, Elif\'in adını temizleyen açıklamayı kendi sesiyle sınıfın önünde okusun, Elif\'ten özür dilesin; zincirin ikinci halkası Emir de yanında dursun ve payını üstlensin. İkisi birlikte, dedikoduyu ulaştırdıkları herkese tek tek gidip "yanılmışız" desin.', tip: 'onarici' },
         { metin: 'Zeynep sınıf başkanlığından derhâl alınsın ve bir dönem teneffüslerde konuşma yasağı cezası çeksin — bakalım fısıldamak neymiş anlasın.', tip: 'intikamci' },

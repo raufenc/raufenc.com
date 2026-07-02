@@ -425,6 +425,27 @@ body.sinif-modu .adim-ad{ font-size:12.5px; }
   font-size:14.5px; box-shadow:var(--golge); transition:transform .12s ease;
 }
 .ceza-sec:active{ transform:scale(.98); }
+
+/* ============ Rol Değiştir ============ */
+.rol-degistir-btn{
+  background:var(--kagit); color:var(--kahve); border:2px dashed rgba(217,164,65,.6);
+  box-shadow:none;
+}
+.rol-sahne-kart{ text-align:center; }
+.rol-sahne-ust{ display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:4px; }
+.rol-sahne-ust .portre{ width:72px; height:72px; }
+.rol-sahne-ust .portre-emoji{ font-size:36px; }
+.rol-sahne-ad{ font-size:15px; font-weight:700; font-family:"Fraunces",serif; color:var(--soluk); }
+.rol-sahne-metin{
+  text-align:left; font-family:"Fraunces",Georgia,serif; font-style:italic;
+  font-size:16px; line-height:1.65; margin:10px 0 2px; color:var(--kahve);
+}
+.rol-sahne-ilerleme{ display:flex; justify-content:center; gap:6px; margin:14px 0 2px; }
+.rol-sahne-ilerleme span{ width:7px; height:7px; border-radius:50%; background:var(--cizgi); }
+.rol-sahne-ilerleme span.dolu{ background:var(--altin); }
+.rol-soru-kart{ text-align:center; }
+.rol-soru-kart h3{ font-size:19px; }
+.rol-soru-butonlar{ display:flex; flex-direction:column; gap:8px; margin-top:8px; }
 .degerlendirme{ border-radius:18px; padding:16px 18px; margin-bottom:14px; box-shadow:var(--golge); }
 .degerlendirme.iyi{ background:rgba(74,124,89,.13); border:1.5px solid rgba(74,124,89,.4); }
 .degerlendirme.kotu{ background:rgba(196,87,74,.1); border:1.5px solid rgba(196,87,74,.35); }
@@ -577,6 +598,7 @@ var KAYIT_ANAHTARI = 'vicdan-mahkemesi-kayit-v1';
 var HUKUM_PUANI = 20;   // doğru hüküm
 var CEZA_PUANI  = 10;   // onarıcı ceza seçimi
 var OZET_ANAHTARI = 'hayalOrtaokulu_ozet_v1'; // cross-game ortak özet
+var YANSIMA_ANAHTARI = 'mahkeme_hukum_yansima_v1'; // "Rol Değiştir" sonrası nazik istatistik (puanı etkilemez)
 
 /* Gerekçe adımı — hüküm verildikten hemen sonra sorulan tek dokunuşlu mini-adım.
    Vakaların yarısında (tek numaralı dosyalarda: 1,3,5) sorulur, akış yorulmasın. */
@@ -648,7 +670,8 @@ var SINIF_MODU = (function(){
 })();
 function tazeVaka(){
   return { adim:'olay', faz: SINIF_MODU ? 'juri' : 'secim', sorulan:{}, incelenen:[], uyariVerildi:false,
-           hukum:null, hukumPuan:0, cezaTip:null, cezaPuan:0, acikKarakter:null, gerekce:null, gerekceSonraki:null };
+           hukum:null, hukumPuan:0, cezaTip:null, cezaPuan:0, acikKarakter:null, gerekce:null, gerekceSonraki:null,
+           rolSahne:0, rolCevap:null, rolSonraki:null };
 }
 function tazeState(){
   return { surum:1, ekran:'acilis', vakaIndex:0, puan:0, sonuclar:[], vaka:tazeVaka(),
@@ -670,8 +693,12 @@ function kayitYukle(){
     if(s.ekran !== 'final' &&
        (typeof s.vakaIndex !== 'number' || s.vakaIndex < 0 || s.vakaIndex >= ICERIK.vakalar.length)) return null;
     if(s.vaka && s.vaka.faz === 'juri' && !SINIF_MODU) s.vaka.faz = 'secim';
+    if(s.vaka && (s.vaka.faz === 'rolsahne' || s.vaka.faz === 'rolsoru')) s.vaka.faz = 'sonuc';
     if(s.vaka && typeof s.vaka.gerekce === 'undefined') s.vaka.gerekce = null;
     if(s.vaka && typeof s.vaka.gerekceSonraki === 'undefined') s.vaka.gerekceSonraki = null;
+    if(s.vaka && typeof s.vaka.rolSahne === 'undefined') s.vaka.rolSahne = 0;
+    if(s.vaka && typeof s.vaka.rolCevap === 'undefined') s.vaka.rolCevap = null;
+    if(s.vaka && typeof s.vaka.rolSonraki === 'undefined') s.vaka.rolSonraki = null;
     if(!s.gerekceSayaci) s.gerekceSayaci = { delil:0, izlenim:0, vicdan:0 };
     return s;
   }catch(e){ return null; }
@@ -737,6 +764,22 @@ function ozetYaz(){
     };
     localStorage.setItem(OZET_ANAHTARI, JSON.stringify(ozet));
   }catch(e){ /* localStorage başarısız olursa oyun akışı bozulmasın */ }
+}
+/* "Rol Değiştir" yansıma sayacı — vaka sonucunu/puanını etkilemez, yalnız nazik bir istatistik */
+function yansimaOkuVeYaz(degistiMi){
+  try{
+    var y = JSON.parse(localStorage.getItem(YANSIMA_ANAHTARI) || '{}');
+    if(typeof y.degisti !== 'number') y.degisti = 0;
+    if(typeof y.ayni !== 'number') y.ayni = 0;
+    if(degistiMi) y.degisti++; else y.ayni++;
+    localStorage.setItem(YANSIMA_ANAHTARI, JSON.stringify(y));
+  }catch(e){ /* sessizce geç */ }
+}
+function yansimaDegistiSayisi(){
+  try{
+    var y = JSON.parse(localStorage.getItem(YANSIMA_ANAHTARI) || '{}');
+    return typeof y.degisti === 'number' ? y.degisti : 0;
+  }catch(e){ return 0; }
 }
 /* "🧭 Nasıl Hükmettin?" özeti — gerekçe sayaçlarına göre vaazsız bir yansıtma cümlesi */
 function nasilHukmettinHTML(){
@@ -838,7 +881,7 @@ function adimlarHTML(v){
     var tamam = false;
     if(a.id === 'ifadeler') tamam = sorulanSayisi() >= toplamSoru(v);
     if(a.id === 'deliller') tamam = state.vaka.incelenen.length >= v.deliller.length;
-    if(a.id === 'hukum')    tamam = (state.vaka.faz === 'sonuc' || state.vaka.faz === 'gerekce' || state.vaka.faz === 'ceza' || state.vaka.faz === 'ders');
+    if(a.id === 'hukum')    tamam = (state.vaka.faz === 'sonuc' || state.vaka.faz === 'gerekce' || state.vaka.faz === 'rolsahne' || state.vaka.faz === 'rolsoru' || state.vaka.faz === 'ceza' || state.vaka.faz === 'ders');
     html += '<button class="adim' + (aktif?' aktif':'') + (tamam?' tamam':'') + '" ' +
       'data-eylem="adim" data-adim="' + a.id + '"' + (aktif?' aria-current="step"':'') + '>' +
       '<span class="adim-ikon">' + a.ikon + '</span><span class="adim-ad">' + a.ad + '</span></button>';
@@ -964,6 +1007,10 @@ function hukumHTML(v){
     }
     html2 += '<div class="perde"><h4>🎭 Perde Arkası</h4><p>' + esc(v.gercek) + '</p></div>';
     var sonrakiFaz = (dogru && v.dogruHukum === 'suclu' && v.cezalar && v.cezalar.length) ? 'ceza' : 'ders';
+    if(v.sanikGozunden && v.sanikGozunden.length && state.vaka.rolCevap === null){
+      var rk = karakterGetir(v.sanikGozundenKarakter);
+      html2 += '<button class="btn ikincil rol-degistir-btn" data-eylem="faz" data-faz="rolsahne" data-sonraki="' + sonrakiFaz + '">👤 ' + esc(rk.ad) + '\'in Gözünden Gör</button>';
+    }
     if(gerekceSorulsunMu() && !state.vaka.gerekce){
       html2 += '<button class="btn birincil" data-eylem="faz" data-faz="gerekce" data-sonraki="' + sonrakiFaz + '">Devam Et ▸</button>';
     }else if(sonrakiFaz === 'ceza'){
@@ -972,6 +1019,36 @@ function hukumHTML(v){
       html2 += '<button class="btn birincil" data-eylem="faz" data-faz="ders">📜 Hâkimin Notu ▸</button>';
     }
     return html2;
+  }
+
+  /* 2.3) Rol Değiştir — iç-monolog sahneleri, sırayla "Devam" ile ilerlenir */
+  if(faz === 'rolsahne'){
+    var rk2 = karakterGetir(v.sanikGozundenKarakter);
+    var sahneler = v.sanikGozunden || [];
+    var i2 = Math.min(state.vaka.rolSahne, sahneler.length - 1);
+    var sahne = sahneler[i2] || { metin:'' };
+    var noktalar = '';
+    sahneler.forEach(function(s,k){ noktalar += '<span class="' + (k<=i2?'dolu':'') + '"></span>'; });
+    var htmlR = '<div class="kart rol-sahne-kart">' +
+        '<div class="rol-sahne-ust">' + portreHTML(v.sanikGozundenKarakter) +
+        '<span class="rol-sahne-ad">' + esc(rk2.ad) + '\'in gözünden</span></div>' +
+        '<p class="rol-sahne-metin">' + esc(sahne.metin) + '</p>' +
+        '<div class="rol-sahne-ilerleme">' + noktalar + '</div>' +
+      '</div>' +
+      '<button class="btn birincil" data-eylem="rol-sahne-devam">Devam ▸</button>';
+    return htmlR;
+  }
+
+  /* 2.4) Rol Değiştir sonrası yansıma sorusu — vaka sonucunu/puanını değiştirmez */
+  if(faz === 'rolsoru'){
+    return '<div class="kart rol-soru-kart">' +
+      '<span class="gerekce-emoji" aria-hidden="true">🤔</span>' +
+      '<h3 class="adim-baslik">Hükmünü şimdi değiştirir miydin?</h3>' +
+      '<p style="font-size:14.5px;color:var(--soluk)">Bu sadece bir düşünme anı — cevabın dosyanın sonucunu değiştirmez.</p>' +
+      '<div class="rol-soru-butonlar">' +
+        '<button class="btn ikincil" data-eylem="rol-cevap" data-cevap="evet">Evet, değiştirirdim</button>' +
+        '<button class="btn ikincil" data-eylem="rol-cevap" data-cevap="hayir">Hayır, kararımın arkasındayım</button>' +
+      '</div></div>';
   }
 
   /* 2.5) Gerekçe adımı — hüküm verildikten hemen sonra, tek dokunuşlu mini-adım */
@@ -1029,6 +1106,14 @@ function ekranOyun(){
   '</section>';
 }
 
+/* "Rol Değiştir" sonrası nazik, yargısız bir yansıma notu — hangi vakalarda değiştiği gösterilmez */
+function yansimaNotuHTML(){
+  var n = yansimaDegistiSayisi();
+  if(n <= 0) return '';
+  return '<div class="not-kart"><h4>🔁 Rolleri Değiştirdiğinde</h4>' +
+    '<p style="font-family:inherit;font-style:normal;font-size:14.5px;color:var(--soluk)">' +
+    esc(n + ' vakada rolleri değiştirip düşündün.') + '</p></div>';
+}
 function ekranFinal(){
   var r = rutbeBul(state.puan);
   var satirlar = '';
@@ -1053,6 +1138,7 @@ function ekranFinal(){
       '<p class="rutbe-metin">' + r.metin + '</p>' +
     '</div>' +
     nasilHukmettinHTML() +
+    yansimaNotuHTML() +
     '<h3 class="ozet-baslik">📋 Dosya Özeti</h3>' +
     '<div class="ozet-tablo">' + satirlar + '</div>' +
     '<button class="btn birincil" data-eylem="tekrar">Tekrar Oyna ↺</button>' +
@@ -1231,6 +1317,33 @@ function gerekceSec(id, sonraki){
   state.vaka.faz = sonraki || state.vaka.gerekceSonraki || 'ders';
   kaydet(); render(true);
 }
+/* Rol Değiştir sahnelerinde "Devam" — son sahneden sonra yansıma sorusuna geçer */
+function rolSahneDevam(){
+  if(state.vaka.faz !== 'rolsahne') return;
+  var v = vakaGetir();
+  var sahneler = v.sanikGozunden || [];
+  if(state.vaka.rolSahne < sahneler.length - 1){
+    state.vaka.rolSahne++;
+    kaydet(); render(true);
+  }else{
+    state.vaka.faz = 'rolsoru';
+    kaydet(); render(true);
+  }
+}
+/* Yansıma cevabı — vaka SONUCUNU/puanını değiştirmez, yalnız localStorage'da nazik bir sayaç tutar */
+function rolCevapVer(cevap){
+  if(state.vaka.faz !== 'rolsoru' || state.vaka.rolCevap) return;
+  state.vaka.rolCevap = cevap;
+  yansimaOkuVeYaz(cevap === 'evet');
+  /* Rol Değiştir'e gerekçe adımından önce girilmiş olabilir; henüz sorulmadıysa oraya uğra */
+  if(gerekceSorulsunMu() && !state.vaka.gerekce){
+    state.vaka.gerekceSonraki = state.vaka.rolSonraki || 'ders';
+    state.vaka.faz = 'gerekce';
+  }else{
+    state.vaka.faz = state.vaka.rolSonraki || 'ders';
+  }
+  kaydet(); render(true);
+}
 function cezaVer(i){
   if(state.vaka.faz !== 'ceza') return;
   var v = vakaGetir(), c = v.cezalar && v.cezalar[i];
@@ -1295,9 +1408,12 @@ document.addEventListener('click', function(e){
     case 'ceza-sec':     cezaVer(parseInt(el.dataset.i, 10)); break;
     case 'faz':
       if(el.dataset.faz === 'gerekce') state.vaka.gerekceSonraki = el.dataset.sonraki || 'ders';
+      if(el.dataset.faz === 'rolsahne'){ state.vaka.rolSonraki = el.dataset.sonraki || 'ders'; state.vaka.rolSahne = 0; }
       state.vaka.faz = el.dataset.faz; kaydet(); render(true);
       break;
     case 'gerekce-sec':  gerekceSec(el.dataset.id, el.dataset.sonraki); break;
+    case 'rol-sahne-devam': rolSahneDevam(); break;
+    case 'rol-cevap':    rolCevapVer(el.dataset.cevap); break;
     case 'sonraki-vaka': sonrakiVaka(); break;
     case 'tekrar':       oyunaBasla(); break;
     case 'beraet-yazdir':

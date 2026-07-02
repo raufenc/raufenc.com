@@ -353,7 +353,7 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
 @media print{
   body *{visibility:hidden}
   #ekran-final, #ekran-final *{visibility:visible}
-  .geri, #btn-final-tekrar, #btn-final-yazdir, .konfeti{display:none!important}
+  .geri, #btn-final-tekrar, #btn-final-yazdir, #btn-final-hayatta-kal, .konfeti{display:none!important}
   #ekran-final{
     position:absolute;left:0;top:0;width:100%;padding:0;background:#fff!important;
     display:flex!important;
@@ -459,6 +459,33 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     </div>
     <button id="btn-final-tekrar" class="btn" style="z-index:1">Tekrar Oyna</button>
     <button id="btn-final-yazdir" class="btn ikincil" style="z-index:1">🖨 Karneyi Yazdır</button>
+    <button id="btn-final-hayatta-kal" class="btn ikincil" style="z-index:1">🔥 Hayatta Kal Modunu Dene</button>
+  </section>
+
+  <!-- Hayatta Kal Modu: oyun ekranı -->
+  <section id="ekran-hk-oyun" class="ekran">
+    <div class="ust-baslik" id="hk-gosterge" style="align-self:center">🔥 Hayatta Kal · 1. Kart</div>
+    <div class="gostergeler" id="hk-gostergeler"></div>
+    <div class="kart-alan" id="hk-kart-alan" aria-live="polite"></div>
+    <div class="secimler" id="hk-secimler-kutu">
+      <button id="hk-btn-sol" class="secim"></button>
+      <button id="hk-btn-sag" class="secim"></button>
+    </div>
+    <div class="ipucu">Kartı sürükle, ok tuşlarını kullan ya da butonlara dokun</div>
+  </section>
+
+  <!-- Hayatta Kal Modu: bitiş ekranı -->
+  <section id="ekran-hk-son" class="ekran orta">
+    <div class="son-gorsel">
+      <span class="son-ikon" id="hk-son-ikon">💔</span>
+    </div>
+    <h2 id="hk-son-baslik" style="font-size:1.8rem">Hayatta Kalamadın</h2>
+    <p class="tanitim" id="hk-son-metin"></p>
+    <p class="tanitim" id="hk-son-rekor"></p>
+    <div class="dugmeler">
+      <button id="btn-hk-bastan" class="btn">🔥 Baştan Dene</button>
+      <button id="btn-hk-normale-don" class="btn ikincil">Normal Moda Dön</button>
+    </div>
   </section>
 
 </main>
@@ -1220,6 +1247,233 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     });
     sesDugmesiGuncelle();
   }
+
+  /* ================= Hayatta Kal Modu ================= */
+  /* Final ekranından açılan, TÜM kartları (114, bölüm ayrımı yok) tek karışık
+     havuzda kullanan basitleştirilmiş alternatif mod: kader/gerekçe/yankı/sınıf
+     modu/son-galerisi kaydı YOK — yalnız kart göster → seç → stat güncelle → sonraki kart. */
+  var HK_REKOR_ANAHTARI = "vicdan_hayatta_kal_rekor_v1";
+  var hk = null;            // {stats, deste, sayac}
+  var hkSuanki = null;
+  var hkKartEl = null, hkEtSol = null, hkEtSag = null;
+  var hkKilitli = true;
+  var hkGRef = {};
+  var hkResimYok = {};
+  var hkKartAlan = el("hk-kart-alan"), hkBtnSol = el("hk-btn-sol"), hkBtnSag = el("hk-btn-sag");
+
+  function hkGostergeleriKur(){
+    var kap = el("hk-gostergeler");
+    if (kap.children.length) return; /* zaten kurulu */
+    STATLAR.forEach(function(s){
+      var g = document.createElement("div");
+      g.className = "gosterge";
+      g.innerHTML = '<span class="nokta"></span><span class="g-ikon">' + s.ikon +
+        '</span><span class="bar"><span class="bar-dolu"></span></span><span class="g-ad">' + s.ad + '</span>';
+      kap.appendChild(g);
+      hkGRef[s.k] = { kok:g, nokta:g.querySelector(".nokta"), dolu:g.querySelector(".bar-dolu") };
+      hkGRef[s.k].dolu.style.background = s.renk;
+    });
+  }
+  function hkStatlariCiz(secenek){
+    STATLAR.forEach(function(s){
+      var v = Math.max(0, Math.min(100, hk.stats[s.k]));
+      hkGRef[s.k].dolu.style.height = v + "%";
+      hkGRef[s.k].kok.setAttribute("aria-label", s.ad + " " + v + "/100");
+      if (secenek && secenek[s.k]) {
+        hkGRef[s.k].kok.classList.add("degisti");
+        (function(kok){ setTimeout(function(){ kok.classList.remove("degisti"); }, 650); })(hkGRef[s.k].kok);
+        var isr = document.createElement("span");
+        isr.className = "uc-isaret " + (secenek[s.k] > 0 ? "artis" : "azalis");
+        isr.textContent = secenek[s.k] > 0 ? "▲" : "▼";
+        hkGRef[s.k].kok.appendChild(isr);
+        (function(n){ setTimeout(function(){ n.remove(); }, 900); })(isr);
+      }
+    });
+  }
+  function hkNoktalariGoster(yon, opaklik){
+    var sec = (yon && hkSuanki) ? hkSuanki[yon] : null;
+    STATLAR.forEach(function(s){
+      hkGRef[s.k].nokta.style.opacity = (sec && sec[s.k]) ? Math.min(opaklik + 0.15, 1) : 0;
+    });
+  }
+  function hkNoktalariGizle(){ hkNoktalariGoster(null, 0); }
+
+  function hkRekorOku(){
+    try { var v = Number(localStorage.getItem(HK_REKOR_ANAHTARI)); return isNaN(v) ? 0 : v; } catch(e){ return 0; }
+  }
+  function hkRekorYaz(v){ try { localStorage.setItem(HK_REKOR_ANAHTARI, String(v)); } catch(e){} }
+
+  function hkBaslat(){
+    var deste = ICERIK.kartlar.map(function(k){ return k.id; });
+    karistir(deste);
+    hk = { stats: { vicdan:40, arkadaslik:40, aile:40, ozguven:40 }, deste: deste, sayac: 0 };
+    hkGostergeleriKur();
+    ekranGoster("ekran-hk-oyun");
+    hkStatlariCiz(null);
+    hkKartCiz();
+  }
+
+  function hkKartCiz(){
+    if (!hk.deste.length) { karistir(hk.deste = ICERIK.kartlar.map(function(k){ return k.id; })); }
+    var kart = kartMap.get(hk.deste[0]);
+    hkSuanki = kart;
+    hk.sayac++;
+    el("hk-gosterge").textContent = "🔥 Hayatta Kal · " + hk.sayac + ". Kart";
+    hkBtnSol.textContent = "← " + kart.sol.etiket;
+    hkBtnSag.textContent = kart.sag.etiket + " →";
+
+    var kr = KARAKTERLER[kart.karakter] || { ad:kart.karakter, emoji:"🙂", g:["#4A7C59","#D9A441"] };
+
+    hkKartAlan.innerHTML = "";
+    hkKartEl = document.createElement("div");
+    hkKartEl.className = "kart";
+
+    hkEtSol = document.createElement("div");
+    hkEtSol.className = "etiket etiket-sol";
+    hkEtSol.textContent = kart.sol.etiket;
+    hkEtSag = document.createElement("div");
+    hkEtSag.className = "etiket etiket-sag";
+    hkEtSag.textContent = kart.sag.etiket;
+
+    var portre = document.createElement("div");
+    portre.className = "portre";
+    var yedek = document.createElement("div");
+    yedek.className = "portre-yedek";
+    yedek.style.background = "linear-gradient(135deg," + kr.g[0] + "," + kr.g[1] + ")";
+    yedek.innerHTML = "<span>" + kr.emoji + "</span>";
+    portre.appendChild(yedek);
+    if (!hkResimYok[kart.karakter]) {
+      var img = document.createElement("img");
+      img.alt = "";
+      img.draggable = false;
+      img.onerror = function(){ hkResimYok[kart.karakter] = true; img.remove(); };
+      img.src = "../assets/karakter/" + kart.karakter + ".jpg";
+      portre.appendChild(img);
+    }
+
+    var govde = document.createElement("div");
+    govde.className = "kart-govde";
+    var adEl = document.createElement("div");
+    adEl.className = "karakter-adi";
+    adEl.textContent = kr.ad;
+    var metinEl = document.createElement("p");
+    metinEl.className = "kart-metin";
+    metinEl.textContent = kart.metin;
+    govde.appendChild(adEl);
+    govde.appendChild(metinEl);
+
+    hkKartEl.appendChild(hkEtSol);
+    hkKartEl.appendChild(hkEtSag);
+    hkKartEl.appendChild(portre);
+    hkKartEl.appendChild(govde);
+    hkKartAlan.appendChild(hkKartEl);
+
+    hkKartEl.addEventListener("pointerdown", hkDragBasla);
+    hkKartEl.addEventListener("pointermove", hkDragSur);
+    hkKartEl.addEventListener("pointerup", hkDragBirak);
+    hkKartEl.addEventListener("pointercancel", hkDragBirak);
+
+    el("hk-secimler-kutu").classList.remove("pasif");
+    hkKilitli = false;
+  }
+
+  /* ---------- Hayatta Kal: sürükleme (normal moddaki dragBasla/Sur/Birak ile aynı mantık) ---------- */
+  var hkDrag = null;
+  function hkDragBasla(e){
+    if (hkKilitli || hkDrag || !e.isPrimary) return;
+    hkDrag = { id:e.pointerId, x:e.clientX, y:e.clientY, dx:0 };
+    hkKartEl.classList.add("tutuluyor");
+    try { hkKartEl.setPointerCapture(e.pointerId); } catch(err){}
+    e.preventDefault();
+  }
+  function hkDragSur(e){
+    if (!hkDrag || e.pointerId !== hkDrag.id || hkKilitli) return;
+    var dx = e.clientX - hkDrag.x, dy = e.clientY - hkDrag.y;
+    hkDrag.dx = dx;
+    hkKartEl.style.transform = "translate(" + dx + "px," + (dy * 0.18) + "px) rotate(" + (dx * 0.08) + "deg)";
+    var esik = hkKartEl.offsetWidth * ESIK_ORANI;
+    var opa = Math.min(Math.abs(dx) / esik, 1);
+    hkEtSol.style.opacity = dx < -6 ? opa : 0;
+    hkEtSag.style.opacity = dx > 6 ? opa : 0;
+    hkNoktalariGoster(dx < -6 ? "sol" : (dx > 6 ? "sag" : null), opa);
+  }
+  function hkDragBirak(e){
+    if (!hkDrag || e.pointerId !== hkDrag.id) return;
+    var dx = hkDrag.dx;
+    hkDrag = null;
+    if (hkKilitli) return;
+    hkKartEl.classList.remove("tutuluyor");
+    if (Math.abs(dx) >= hkKartEl.offsetWidth * ESIK_ORANI) { hkUcur(dx < 0 ? "sol" : "sag"); return; }
+    hkKartEl.style.transition = "transform .25s ease";
+    hkKartEl.style.transform = "";
+    hkEtSol.style.opacity = 0;
+    hkEtSag.style.opacity = 0;
+    hkNoktalariGizle();
+    setTimeout(function(){ if (hkKartEl) hkKartEl.style.transition = ""; }, 270);
+  }
+
+  function hkUcur(yon){
+    if (hkKilitli || !hkKartEl) return;
+    hkKilitli = true;
+    hkDrag = null;
+    var isaret = yon === "sol" ? -1 : 1;
+    hkKartEl.classList.remove("tutuluyor");
+    hkKartEl.style.transition = "transform .38s ease-in, opacity .38s ease-in";
+    hkKartEl.style.transform = "translate(" + (isaret * (window.innerWidth * 0.75 + 180)) + "px,-40px) rotate(" + (isaret * 30) + "deg)";
+    hkKartEl.style.opacity = "0";
+    (yon === "sol" ? hkEtSol : hkEtSag).style.opacity = "1";
+    hkNoktalariGizle();
+    setTimeout(function(){ hkCozumle(yon); }, 380);
+  }
+
+  function hkCozumle(yon){
+    var kart = hkSuanki;
+    hk.deste.shift();
+    var sec = kart[yon];
+
+    if (window.HOSes && typeof window.HOSes.kartHisirti === "function") HOSes.kartHisirti();
+
+    var bitirenStat = null;
+    STATLAR.forEach(function(s){
+      hk.stats[s.k] = Math.max(0, Math.min(100, hk.stats[s.k] + (sec[s.k] || 0)));
+      if (hk.stats[s.k] <= 0 && !bitirenStat) bitirenStat = s;
+    });
+    hkStatlariCiz(sec);
+
+    if (bitirenStat) {
+      toastGoster(sec.sonuc);
+      toastSonrasiDevam(function(){ hkSonGoster(bitirenStat); });
+      return;
+    }
+    toastGoster(sec.sonuc);
+    toastSonrasiDevam(hkKartCiz);
+  }
+
+  function hkSonGoster(bitirenStat){
+    var hayattaKalinan = Math.max(0, hk.sayac - 1); /* biten kart hariç, önceki kart sayısı */
+    var rekor = hkRekorOku();
+    var yeniRekor = hayattaKalinan > rekor;
+    if (yeniRekor) hkRekorYaz(hayattaKalinan);
+
+    el("hk-son-baslik").textContent = hayattaKalinan + " Kart Hayatta Kaldın!";
+    el("hk-son-metin").textContent = bitirenStat.ikon + " " + bitirenStat.ad + " sıfırlandı; yolculuğun burada bitti.";
+    el("hk-son-rekor").textContent = yeniRekor
+      ? "🏆 Yeni Rekor!"
+      : "En iyi: " + Math.max(rekor, hayattaKalinan) + " kart";
+    ekranGoster("ekran-hk-son");
+  }
+
+  hkBtnSol.addEventListener("click", function(){ hkUcur("sol"); });
+  hkBtnSag.addEventListener("click", function(){ hkUcur("sag"); });
+  document.addEventListener("keydown", function(e){
+    if (!el("ekran-hk-oyun").classList.contains("aktif") || hkKilitli) return;
+    if (e.key === "ArrowLeft")  { e.preventDefault(); hkUcur("sol"); }
+    if (e.key === "ArrowRight") { e.preventDefault(); hkUcur("sag"); }
+  });
+
+  el("btn-final-hayatta-kal").addEventListener("click", hkBaslat);
+  el("btn-hk-bastan").addEventListener("click", hkBaslat);
+  el("btn-hk-normale-don").addEventListener("click", finalGoster);
 
   el("btn-sonlar-rozet").addEventListener("click", sonlarModalAc);
   el("btn-modal-sonlar-kapat").addEventListener("click", sonlarModalKapat);
