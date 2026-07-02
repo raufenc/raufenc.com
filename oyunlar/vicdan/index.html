@@ -17,7 +17,7 @@
 <style>
 /* ---------- Temel ---------- */
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   font-family:'Inter',system-ui,-apple-system,sans-serif;
   background:radial-gradient(900px 500px at 50% -180px,#FBF4E6,rgba(251,244,230,0)),#F5EDE0;
@@ -101,7 +101,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .g-ikon{font-size:1.1rem;line-height:1}
 .bar{width:7px;height:38px;background:rgba(43,33,24,.13);border-radius:4px;position:relative;overflow:hidden}
 .bar-dolu{position:absolute;bottom:0;left:0;width:100%;height:50%;background:#4A7C59;border-radius:4px;transition:height .55s ease}
-.g-ad{font-size:.6rem;font-weight:600;color:rgba(43,33,24,.6)}
+.g-ad{font-size:.6rem;font-weight:600;color:rgba(43,33,24,.68)}
 .gosterge.degisti .g-ikon{animation:zipla .55s ease}
 @keyframes zipla{35%{transform:translateY(-4px) scale(1.25)}}
 
@@ -120,7 +120,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
 .ilerleme{
   display:flex;justify-content:space-between;width:min(340px,100%);
-  font-size:.72rem;font-weight:600;color:rgba(43,33,24,.55);
+  font-size:.72rem;font-weight:600;color:rgba(43,33,24,.68);
 }
 
 /* ---------- Kart ---------- */
@@ -177,7 +177,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   box-shadow:0 4px 10px rgba(43,33,24,.07);transition:transform .12s ease;
 }
 .secim:active{transform:scale(.96)}
-.ipucu{font-size:.7rem;color:rgba(43,33,24,.45)}
+.ipucu{font-size:.7rem;color:rgba(43,33,24,.68)}
 
 /* ---------- Küpe (özlü söz kartpostalı) ---------- */
 .kupe-kart{
@@ -192,7 +192,8 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 }
 .kupe-ikon{font-size:1.6rem;line-height:1;margin-bottom:12px}
 .kupe-soz{font-family:'Fraunces',Georgia,serif;font-style:italic;font-size:1.22rem;line-height:1.55}
-.kupe-kaynak{margin-top:14px;font-size:.8rem;font-weight:600;color:rgba(43,33,24,.6);text-align:right}
+.kupe-kaynak{margin-top:14px;font-size:.8rem;font-weight:600;color:rgba(43,33,24,.68);text-align:right}
+.kupe-kisa-kaynak{margin-top:4px;font-size:.7rem;font-weight:500;color:rgba(43,33,24,.55);text-align:right}
 
 /* ---------- Son ekranı ---------- */
 .son-gorsel{display:flex;align-items:flex-end;gap:12px}
@@ -240,10 +241,90 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   transition:opacity .3s ease,transform .3s ease;
 }
 #toast.goster{opacity:1;transform:translate(-50%,0)}
+#toast .toast-devam{
+  display:block;margin-top:8px;min-height:32px;padding:6px 14px;border:none;border-radius:10px;
+  cursor:pointer;background:#D9A441;color:#2B2118;font-weight:700;font-size:.78rem;
+}
+
+/* ---------- Sınıf modu (?sinif=1) ---------- */
+html.sinif-modu .kart-metin{font-size:1.1rem;line-height:1.55}
+html.sinif-modu .secim{font-size:.96rem}
+html.sinif-modu .karakter-adi{font-size:1.16rem}
+
+/* ---------- Sınıfa Sor kutusu (yalnız sınıf modunda, tartisma:true kartlarda) ---------- */
+.sinifa-sor{
+  width:min(340px,100%);background:#FFFDF8;border:2px dashed #4A7C59;border-radius:16px;
+  padding:12px 14px;font-size:.85rem;line-height:1.45;color:rgba(43,33,24,.9);
+}
+.sinifa-sor-baslik{font-weight:700;margin-bottom:6px}
+.sinifa-sor button{
+  margin-top:10px;min-height:44px;padding:8px 16px;border:none;border-radius:12px;cursor:pointer;
+  background:#4A7C59;color:#FFFDF8;font-weight:700;font-size:.8rem;
+}
+.secimler.pasif{opacity:.35;pointer-events:none}
+
+/* ---------- Kader kartı (ozelTip:"kader") ---------- */
+.kart.kader-sallanir{animation:kaderSallan 1.4s ease forwards}
+@keyframes kaderSallan{
+  0%{transform:rotate(0)}
+  20%{transform:rotate(-3deg)}
+  40%{transform:rotate(3deg)}
+  60%{transform:rotate(-2deg)}
+  80%{transform:rotate(2deg) translateY(4px)}
+  100%{transform:rotate(0) translateY(30px);opacity:0}
+}
+
+/* ---------- Son galerisi rozeti + modal (açılış ekranı) ---------- */
+.sonlar-rozet{
+  min-height:44px;display:flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;
+  background:rgba(255,253,248,.85);border:1px solid rgba(217,164,65,.4);cursor:pointer;
+  font-size:.78rem;font-weight:700;color:#2B2118;box-shadow:0 3px 10px rgba(43,33,24,.07);
+}
+.ogretmen-linki{
+  font-size:.78rem;font-weight:600;color:rgba(43,33,24,.68);text-decoration:none;
+  padding:8px 10px;min-height:44px;display:inline-flex;align-items:center;
+}
+.modal-katman{
+  position:fixed;inset:0;z-index:200;background:rgba(43,33,24,.55);
+  display:flex;align-items:center;justify-content:center;padding:18px;
+}
+.modal-katman.gizli{display:none}
+.modal-kutu{
+  width:min(380px,100%);max-height:min(560px,84vh);overflow-y:auto;
+  background:#F5EDE0;border-radius:20px;padding:20px 18px;
+  box-shadow:0 20px 50px rgba(43,33,24,.3);
+}
+.modal-baslik{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.modal-baslik h3{font-size:1.2rem}
+.modal-kapat{
+  min-width:44px;min-height:44px;border:none;border-radius:12px;cursor:pointer;
+  background:#FFFDF8;font-size:1.1rem;font-weight:700;color:#2B2118;
+}
+.son-liste{display:flex;flex-direction:column;gap:10px}
+.son-liste-oge{
+  border-radius:14px;padding:10px 12px;background:#FFFDF8;box-shadow:0 3px 8px rgba(43,33,24,.06);
+}
+.son-liste-oge.kilitli{color:rgba(43,33,24,.5);background:repeating-linear-gradient(135deg,#EBDFC9,#EBDFC9 8px,#E3D5BA 8px,#E3D5BA 16px)}
+.son-liste-oge-baslik{font-weight:700;font-size:.88rem;margin-bottom:2px}
+.son-liste-oge-ozet{font-size:.78rem;line-height:1.4;color:rgba(43,33,24,.72)}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+
+/* ---------- Yazdırılabilir vicdan karnesi ---------- */
+@media print{
+  body *{visibility:hidden}
+  #ekran-final, #ekran-final *{visibility:visible}
+  .geri, #btn-final-tekrar, #btn-final-yazdir, .konfeti{display:none!important}
+  #ekran-final{
+    position:absolute;left:0;top:0;width:100%;padding:0;background:#fff!important;
+    display:flex!important;
+  }
+  .yazdirma-basligi{display:block!important;width:100%;font-size:1rem;margin-bottom:18px;border-bottom:1px solid #000;padding-bottom:10px}
+  .karne-satir, .final-yorum{box-shadow:none;border:1px solid #999}
+}
+.yazdirma-basligi{display:none}
 </style>
 </head>
 <body>
@@ -267,7 +348,20 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
       <button id="btn-basla" class="btn">Başla</button>
       <button id="btn-devam" class="btn ikincil gizli">Devam Et</button>
     </div>
+    <button id="btn-sonlar-rozet" class="sonlar-rozet" type="button" aria-haspopup="dialog">🖼 <span id="sonlar-rozet-metin">Sonlar 0/0</span></button>
+    <a class="ogretmen-linki" href="./ogretmen/">📚 Öğretmenler İçin</a>
   </section>
+
+  <!-- Sonlar galerisi (modal) -->
+  <div id="modal-sonlar" class="modal-katman gizli" role="dialog" aria-modal="true" aria-labelledby="modal-sonlar-baslik">
+    <div class="modal-kutu">
+      <div class="modal-baslik">
+        <h3 id="modal-sonlar-baslik">🖼 Gördüğün Sonlar</h3>
+        <button id="btn-modal-sonlar-kapat" class="modal-kapat" type="button" aria-label="Kapat">✕</button>
+      </div>
+      <div class="son-liste" id="son-liste"></div>
+    </div>
+  </div>
 
   <!-- Bölüm girişi -->
   <section id="ekran-bolum" class="ekran orta">
@@ -282,8 +376,9 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   <section id="ekran-oyun" class="ekran">
     <div class="gostergeler" id="gostergeler"></div>
     <div class="ilerleme"><span id="ilerleme-hafta"></span><span id="ilerleme-kart"></span></div>
-    <div class="kart-alan" id="kart-alan"></div>
-    <div class="secimler">
+    <div class="kart-alan" id="kart-alan" aria-live="polite"></div>
+    <div id="sinifa-sor-kutu"></div>
+    <div class="secimler" id="secimler-kutu">
       <button id="btn-sol" class="secim"></button>
       <button id="btn-sag" class="secim"></button>
     </div>
@@ -297,6 +392,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
       <div class="kupe-ikon" aria-hidden="true">📿</div>
       <p class="kupe-soz" id="kupe-soz"></p>
       <p class="kupe-kaynak" id="kupe-kaynak"></p>
+      <p class="kupe-kisa-kaynak" id="kupe-kisa-kaynak"></p>
     </div>
     <button id="btn-kupe-devam" class="btn">Devam</button>
   </section>
@@ -314,11 +410,13 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
   <!-- Final karnesi -->
   <section id="ekran-final" class="ekran orta">
+    <p class="yazdirma-basligi">Ad Soyad: ____________________&nbsp;&nbsp;&nbsp;&nbsp;Sınıf: ______</p>
     <h2 style="font-size:1.9rem;z-index:1">Dönem Karnesi 🎓</h2>
     <p class="tanitim" id="final-genel" style="z-index:1"></p>
     <div class="karne" id="karne"></div>
     <div class="final-yorum" id="final-yorum"></div>
     <button id="btn-final-tekrar" class="btn" style="z-index:1">Tekrar Oyna</button>
+    <button id="btn-final-yazdir" class="btn ikincil" style="z-index:1">🖨 Karneyi Yazdır</button>
   </section>
 
 </main>
@@ -362,13 +460,28 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     kantinci: { ad:"İsmail Abi · Kantinci",    emoji:"🧑‍🍳", g:["#C4574A","#B99B7C"] },
     bakkal:   { ad:"Hasan Amca · Bakkal",      emoji:"👨‍🦳", g:["#4A7C59","#EFD09A"] },
     komsu:    { ad:"Saliha Teyze · Komşu",     emoji:"👵",   g:["#E2A099","#A9C5A0"] },
-    hademe:   { ad:"Ramazan Amca · Hademe",    emoji:"🧹",   g:["#7A5C43","#A9C5A0"] }
+    hademe:   { ad:"Ramazan Amca · Hademe",    emoji:"🧹",   g:["#7A5C43","#A9C5A0"] },
+    kagan:    { ad:"Kağan",                    emoji:"🙂",   g:["#4A7C59","#D9A441"] }
   };
 
   var KAYIT_ANAHTARI = "vicdan_kayit_v1";
+  var SONLAR_ANAHTARI = "vicdan_gorulen_sonlar_v1"; /* kalıcı: kayitSil() bunu SİLMEZ */
   var ESIK_ORANI = 0.3;          // kart genişliğinin %30'u aşılırsa seçim
   var kartMap = new Map();
   ICERIK.kartlar.forEach(function(k){ kartMap.set(k.id, k); });
+
+  /* Sınıf modu: ?sinif=1 URL parametresiyle açılır */
+  var SINIF_MODU = false;
+  try { SINIF_MODU = new URLSearchParams(window.location.search).get("sinif") === "1"; } catch(e){}
+  if (SINIF_MODU) document.documentElement.classList.add("sinif-modu");
+
+  /* Tüm olası son id'leri (galeri için): erken sonlar + her bölümün "final" varış noktası */
+  var TUM_SON_IDLER = ["vicdan0", "arkadaslik0", "aile0", "ozguven0", "arkadaslik100", "ozguven100", "final"];
+  var SON_ETIKETLERI = {
+    vicdan0: "Vicdanın Sesi Kısıldı", arkadaslik0: "Koridorlar Sessiz", aile0: "Evin Işığı Loş",
+    ozguven0: "Gölgene Saklandın", arkadaslik100: "Evet Makinesi", ozguven100: "Burnun Bulutlarda",
+    final: "Dönem Karnesi"
+  };
 
   /* ---------- Eleman referansları ---------- */
   function el(id){ return document.getElementById(id); }
@@ -388,6 +501,21 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   /* ---------- Kayıt (localStorage, try/catch içinde) ---------- */
   function kaydet(){ try { localStorage.setItem(KAYIT_ANAHTARI, JSON.stringify(durum)); } catch(e){} }
   function kayitSil(){ try { localStorage.removeItem(KAYIT_ANAHTARI); } catch(e){} }
+
+  /* ---------- Görülen sonlar (kalıcı ilerleme, ayrı anahtar, kayitSil ile SİLİNMEZ) ---------- */
+  function gorulenSonlariOku(){
+    try {
+      var h = localStorage.getItem(SONLAR_ANAHTARI);
+      var d = h ? JSON.parse(h) : [];
+      return Array.isArray(d) ? d : [];
+    } catch(e){ return []; }
+  }
+  function gorulenSonEkle(id){
+    try {
+      var d = gorulenSonlariOku();
+      if (d.indexOf(id) < 0) { d.push(id); localStorage.setItem(SONLAR_ANAHTARI, JSON.stringify(d)); }
+    } catch(e){}
+  }
   function kayitOku(){
     try {
       var h = localStorage.getItem(KAYIT_ANAHTARI);
@@ -424,11 +552,35 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     window.scrollTo(0, 0);
   }
   function toastGoster(metin){
+    toastEl.innerHTML = "";
     toastEl.textContent = metin;
     toastEl.classList.add("goster");
     if (toastZaman) clearTimeout(toastZaman);
     toastZaman = setTimeout(function(){ toastEl.classList.remove("goster"); }, 3400);
   }
+  /* Erişilebilirlik: seçim sonucu gösterildikten sonra bir sonraki kart otomatik
+     gelmez; kullanıcı toast'ı okuyup "Devam →" ile ilerler. Toast görünürken
+     devamKuyrugu doldurulur, kart render'ı yalnız düğmeye basılınca çalışır. */
+  var devamKuyrugu = null;
+  function toastSonrasiDevam(devamFn){
+    devamKuyrugu = devamFn;
+    if (toastZaman) clearTimeout(toastZaman);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "toast-devam";
+    btn.textContent = "Devam →";
+    btn.addEventListener("click", devamSonrasiCalistir);
+    toastEl.appendChild(btn);
+    btn.focus();
+  }
+  function devamSonrasiCalistir(){
+    toastEl.classList.remove("goster");
+    var fn = devamKuyrugu;
+    devamKuyrugu = null;
+    if (fn) fn();
+  }
+  /* Klavye/kart etkileşimiyle karışmasın diye: toast "Devam" bekliyorsa
+     ok tuşları ve sürükleme yeni kart getirmez (kilitli zaten true kalır) */
 
   /* ---------- Göstergeler ---------- */
   function gostergeleriKur(){
@@ -590,7 +742,59 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     kartEl.addEventListener("pointerup", dragBirak);
     kartEl.addEventListener("pointercancel", dragBirak);
 
-    kilitli = false;
+    /* Sınıfa Sor kutusu: yalnız sınıf modunda ve tartisma:true kartlarda */
+    sinifaSorKur(kart);
+
+    /* Kader kartı (ozelTip:"kader"): kontrol oyuncuda değil, seçenekler pasifleşir
+       ve kart kendiliğinden akıp gider */
+    if (kart.ozelTip === "kader") {
+      el("secimler-kutu").classList.add("pasif");
+      kilitli = true;
+      setTimeout(function(){
+        if (!kartEl) return;
+        kartEl.classList.add("kader-sallanir");
+        setTimeout(function(){ kaderCozumle(kart); }, 1500);
+      }, 1500);
+    } else {
+      el("secimler-kutu").classList.remove("pasif");
+      kilitli = false;
+    }
+  }
+
+  /* ---------- Sınıfa Sor kutusu ---------- */
+  function sinifaSorKur(kart){
+    var kutu = el("sinifa-sor-kutu");
+    kutu.innerHTML = "";
+    if (!SINIF_MODU || !kart.tartisma) return;
+    var kap = document.createElement("div");
+    kap.className = "sinifa-sor";
+    kap.innerHTML =
+      '<div class="sinifa-sor-baslik">👥 Sınıfa Sor: Sen olsan hangisini seçerdin? Neden?</div>' +
+      '<div>Birkaç öğrenciye söz verin, kısaca tartışın.</div>';
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Tartışma bitti, oyla →";
+    btn.addEventListener("click", function(){ kutu.innerHTML = ""; });
+    kap.appendChild(btn);
+    kutu.appendChild(kap);
+  }
+
+  /* Kader kartı çözümü: iki seçenek de aynı sonuca gider, oyuncu seçim yapmaz */
+  function kaderCozumle(kart){
+    durum.deste.shift();
+    var sec = kart.sol; /* sol ve sag aynı etkiye sahip olacak şekilde yazılmıştır */
+    STATLAR.forEach(function(s){
+      durum.stats[s.k] = Math.max(0, Math.min(100, durum.stats[s.k] + (sec[s.k] || 0)));
+    });
+    kaydet();
+    statlariCiz(sec);
+    el("secimler-kutu").classList.remove("pasif");
+    toastGoster(sec.sonuc);
+
+    var son = sonKontrol();
+    if (son) { toastSonrasiDevam(function(){ sonGoster(son); }); return; }
+    if (!durum.deste.length) { toastSonrasiDevam(kupeGoster); return; }
+    toastSonrasiDevam(kartCiz);
   }
 
   /* ---------- Sürükleme (dokunma + fare, pointer events) ---------- */
@@ -660,9 +864,9 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     toastGoster(sec.sonuc);
 
     var son = sonKontrol();
-    if (son) { setTimeout(function(){ sonGoster(son); }, 1200); return; }
-    if (!durum.deste.length) { setTimeout(kupeGoster, 1600); return; }
-    setTimeout(kartCiz, 320);
+    if (son) { toastSonrasiDevam(function(){ sonGoster(son); }); return; }
+    if (!durum.deste.length) { toastSonrasiDevam(kupeGoster); return; }
+    toastSonrasiDevam(kartCiz);
   }
 
   /* Herhangi bir stat 0'a düşerse ya da arkadaşlık/özgüven 100'ü bulursa oyun biter
@@ -680,6 +884,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
   function sonGoster(son){
     kayitSil();
+    gorulenSonEkle(son.tip + (son.deger === 0 ? "0" : "100"));
     var s = STATLAR.filter(function(x){ return x.k === son.tip; })[0];
     el("son-ikon").textContent = s.ikon;
     var dolu = el("son-bar-dolu");
@@ -698,6 +903,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     var b = ICERIK.bolumler[durum.bolumIdx];
     el("kupe-soz").textContent = "“" + b.kupe.soz + "”";
     el("kupe-kaynak").textContent = "— " + b.kupe.kaynak;
+    el("kupe-kisa-kaynak").textContent = b.kupe.kisaKaynak ? "(" + b.kupe.kisaKaynak + ")" : "";
     durum.bolumIdx++;
     durum.deste = null;
     durum.desteBoy = 0;
@@ -709,6 +915,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   /* ---------- Final karnesi ---------- */
   function finalGoster(){
     kayitSil();
+    gorulenSonEkle("final");
     el("final-genel").textContent = ICERIK.sonlar.final.genel;
 
     var enIyi = STATLAR[0];
@@ -762,6 +969,45 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     }, 6500);
   }
 
+  /* ---------- Sonlar galerisi (açılış rozeti + modal) ---------- */
+  function sonBasligi(id){
+    if (id === "final") return "Dönem Karnesi";
+    var so = ICERIK.sonlar[id];
+    return so ? so.baslik : SON_ETIKETLERI[id] || id;
+  }
+  function sonOzeti(id){
+    if (id === "final") return ICERIK.sonlar.final.genel;
+    var so = ICERIK.sonlar[id];
+    return so ? so.metin : "";
+  }
+  function sonlarRozetiGuncelle(){
+    var gorulen = gorulenSonlariOku();
+    var sayi = TUM_SON_IDLER.filter(function(id){ return gorulen.indexOf(id) >= 0; }).length;
+    el("sonlar-rozet-metin").textContent = "Sonlar " + sayi + "/" + TUM_SON_IDLER.length;
+  }
+  function sonlarModalDoldur(){
+    var gorulen = gorulenSonlariOku();
+    var liste = el("son-liste");
+    liste.innerHTML = "";
+    TUM_SON_IDLER.forEach(function(id){
+      var goruldu = gorulen.indexOf(id) >= 0;
+      var oge = document.createElement("div");
+      oge.className = "son-liste-oge" + (goruldu ? "" : " kilitli");
+      if (goruldu) {
+        oge.innerHTML =
+          '<div class="son-liste-oge-baslik">' + sonBasligi(id) + '</div>' +
+          '<div class="son-liste-oge-ozet">' + sonOzeti(id).slice(0, 90) + (sonOzeti(id).length > 90 ? "…" : "") + '</div>';
+      } else {
+        oge.innerHTML =
+          '<div class="son-liste-oge-baslik">🔒 ??????</div>' +
+          '<div class="son-liste-oge-ozet">Henüz görülmedi.</div>';
+      }
+      liste.appendChild(oge);
+    });
+  }
+  function sonlarModalAc(){ sonlarModalDoldur(); el("modal-sonlar").classList.remove("gizli"); }
+  function sonlarModalKapat(){ el("modal-sonlar").classList.add("gizli"); }
+
   /* ---------- Girdi bağlantıları ---------- */
   btnSol.addEventListener("click", function(){ ucur("sol"); });
   btnSag.addEventListener("click", function(){ ucur("sag"); });
@@ -779,6 +1025,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
   });
   el("btn-son-bastan").addEventListener("click", yeniOyun);
   el("btn-final-tekrar").addEventListener("click", yeniOyun);
+  el("btn-final-yazdir").addEventListener("click", function(){ window.print(); });
 
   el("btn-devam").addEventListener("click", function(){
     var k = kayitOku();
@@ -789,8 +1036,18 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
     else bolumIntroGoster();
   });
 
+  el("btn-sonlar-rozet").addEventListener("click", sonlarModalAc);
+  el("btn-modal-sonlar-kapat").addEventListener("click", sonlarModalKapat);
+  el("modal-sonlar").addEventListener("click", function(e){
+    if (e.target === el("modal-sonlar")) sonlarModalKapat();
+  });
+  document.addEventListener("keydown", function(e){
+    if (e.key === "Escape" && !el("modal-sonlar").classList.contains("gizli")) sonlarModalKapat();
+  });
+
   /* ---------- Başlangıç ---------- */
   gostergeleriKur();
+  sonlarRozetiGuncelle();
   var eskiKayit = kayitOku();
   if (eskiKayit) {
     el("btn-devam").classList.remove("gizli");

@@ -93,7 +93,70 @@
     font-size: 16px;
     color: rgba(43, 33, 24, 0.75);
     max-width: 460px;
-    margin: 0 auto;
+    margin: 0 auto 22px;
+  }
+
+  /* ---------- Paylaş Butonu ---------- */
+  .paylas-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 20px;
+    background: var(--kart-bg);
+    border: 1px solid rgba(74, 124, 89, 0.35);
+    box-shadow: 0 2px 8px rgba(43, 33, 24, 0.08);
+    color: var(--yesil);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .paylas-btn:hover,
+  .paylas-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(43, 33, 24, 0.14);
+  }
+
+  .paylas-btn:focus-visible {
+    outline: 3px solid var(--altin);
+    outline-offset: 2px;
+  }
+
+  .paylas-btn:active { transform: translateY(0); }
+
+  .paylas-bildirim {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(12px);
+    background: var(--kahve);
+    color: var(--krem);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(43, 33, 24, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 100;
+  }
+
+  .paylas-bildirim.goster {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .paylas-btn { transition: none; }
+    .paylas-btn:hover, .paylas-btn:focus-visible { transform: none; }
+    .paylas-bildirim { transition: none; }
   }
 
   /* ---------- Oyun Kartları ---------- */
@@ -328,6 +391,15 @@
 
   footer a:hover { text-decoration: underline; }
 
+  .lisans-notu {
+    display: block;
+    max-width: 480px;
+    margin: 14px auto 0;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: rgba(43, 33, 24, 0.55);
+  }
+
   /* ---------- Geniş Ekran ---------- */
   @media (min-width: 720px) {
     .sarici { max-width: 1020px; padding-top: 48px; }
@@ -362,6 +434,7 @@
     <span class="okul-rozeti">🏫 Hayal Ortaokulu</span>
     <h1>Değer <span class="vurgu">Oyunları</span></h1>
     <p class="alt-baslik">Ortaokul öğrencileri için oyunla ahlak eğitimi. Her oyunda bir karar senin; dürüstlüğü, adaleti ve vicdanı oynayarak keşfet.</p>
+    <button type="button" class="paylas-btn" id="paylas-btn">🔗 Öğretmen arkadaşına gönder</button>
   </header>
 
   <main class="oyunlar">
@@ -438,8 +511,68 @@
 
   <footer>
     <a href="https://raufenc.com/">raufenc.com</a>
+    <span class="lisans-notu">Bu oyunlar CC BY-NC-SA lisansıyla paylaşılır — öğretmenler sınıflarında özgürce kullanabilir, çoğaltabilir.</span>
   </footer>
 
 </div>
+
+<div class="paylas-bildirim" id="paylas-bildirim" role="status" aria-live="polite">Bağlantı kopyalandı</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('paylas-btn');
+    var bildirim = document.getElementById('paylas-bildirim');
+    var bildirimZamanlayici = null;
+
+    function bildirimGoster(mesaj) {
+      bildirim.textContent = mesaj;
+      bildirim.classList.add('goster');
+      if (bildirimZamanlayici) { clearTimeout(bildirimZamanlayici); }
+      bildirimZamanlayici = setTimeout(function () {
+        bildirim.classList.remove('goster');
+      }, 2200);
+    }
+
+    function panoyaKopyala(metin) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(metin).then(function () {
+          bildirimGoster('Bağlantı kopyalandı');
+        }).catch(function () {
+          bildirimGoster('Kopyalanamadı, bağlantı: ' + metin);
+        });
+      } else {
+        var gecici = document.createElement('textarea');
+        gecici.value = metin;
+        gecici.style.position = 'fixed';
+        gecici.style.opacity = '0';
+        document.body.appendChild(gecici);
+        gecici.focus();
+        gecici.select();
+        try {
+          document.execCommand('copy');
+          bildirimGoster('Bağlantı kopyalandı');
+        } catch (e) {
+          bildirimGoster('Kopyalanamadı, bağlantı: ' + metin);
+        }
+        document.body.removeChild(gecici);
+      }
+    }
+
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var url = 'https://raufenc.com/oyunlar/';
+        var baslik = 'Hayal Ortaokulu Değer Oyunları';
+        if (navigator.share) {
+          navigator.share({ title: baslik, url: url }).catch(function () {
+            /* Kullanıcı iptal etti ya da paylaşım desteklenmedi — sessiz geç */
+          });
+        } else {
+          panoyaKopyala(url);
+        }
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>

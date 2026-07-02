@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5EDE0">
+<title>Zaman Yolcusu — Öğretmen Köşesi</title>
+<meta name="description" content="Zaman Yolcusu oyunu için öğretmenlere ders akışı, tartışma soruları, kazanım eşleştirmesi ve veli mektubu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:radial-gradient(900px 500px at 50% -180px,#FBF4E6,rgba(251,244,230,0)),#F5EDE0;
+  color:#2B2118;
+  min-height:100vh;min-height:100dvh;
+  -webkit-tap-highlight-color:transparent;
+  line-height:1.6;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700}
+a{color:#4A7C59}
+.geri{
+  position:fixed;top:10px;left:10px;z-index:60;
+  font-size:.82rem;font-weight:600;text-decoration:none;color:#4A7C59;
+  padding:10px 12px;border-radius:12px;background:rgba(255,253,248,.85);
+  box-shadow:0 2px 8px rgba(43,33,24,.08);
+}
+main{max-width:820px;margin:0 auto;padding:70px 20px 60px;display:flex;flex-direction:column;gap:34px}
+header.baslik{text-align:center;display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
+.ust-baslik{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C4574A}
+h1.ana{font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15}
+.alt-aciklama{color:rgba(43,33,24,.7);font-size:.95rem;max-width:520px;margin:0 auto}
+
+section.kart{
+  background:#FFFDF8;border-radius:20px;padding:26px 24px;
+  box-shadow:0 8px 22px rgba(43,33,24,.08);
+  border:1px solid rgba(217,164,65,.25);
+}
+section.kart h2{font-size:1.4rem;margin-bottom:14px;color:#4A7C59;display:flex;align-items:center;gap:9px}
+section.kart h2 .ikon{font-size:1.3rem}
+section.kart p{margin-bottom:10px;font-size:.96rem}
+section.kart p:last-child{margin-bottom:0}
+
+.akis{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.akis-adim{display:flex;gap:14px;align-items:flex-start}
+.akis-sure{
+  flex:0 0 auto;min-width:64px;text-align:center;font-weight:700;font-size:.82rem;
+  color:#8A6414;background:rgba(217,164,65,.14);border:1px solid rgba(217,164,65,.4);
+  border-radius:10px;padding:6px 8px;
+}
+.akis-icerik{flex:1}
+.akis-icerik b{display:block;font-size:.96rem;margin-bottom:3px}
+.akis-icerik span{font-size:.88rem;color:rgba(43,33,24,.78)}
+
+.sorular{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:4px}
+.sorular li{
+  display:flex;gap:12px;align-items:flex-start;font-size:.95rem;
+  background:rgba(74,124,89,.06);border-left:3px solid #4A7C59;border-radius:0 12px 12px 0;
+  padding:12px 14px;
+}
+.sorular li .no{font-family:'Fraunces',Georgia,serif;font-weight:700;color:#4A7C59;font-size:1.1rem;line-height:1}
+
+.tablo-sarici{overflow-x:auto;margin-top:6px;border-radius:14px;border:1px solid rgba(43,33,24,.12)}
+table{border-collapse:collapse;width:100%;font-size:.85rem;background:#FFFDF8}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(43,33,24,.09);vertical-align:top}
+th{background:rgba(74,124,89,.1);font-weight:700;color:#2B2118;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+td.deger{color:#C4574A;font-weight:600;white-space:nowrap}
+td.kazanim{color:rgba(43,33,24,.7);font-size:.82rem}
+
+.mektup{
+  background:linear-gradient(160deg,rgba(217,164,65,.06),rgba(217,164,65,0) 55%),#FFFDF8;
+  border:2px solid #D9A441;border-radius:18px;padding:24px 22px;position:relative;
+}
+.mektup h3{font-size:1.15rem;color:#8A6414;margin-bottom:12px}
+.mektup p{font-size:.94rem;margin-bottom:10px}
+.mektup .imza{margin-top:14px;font-style:italic;color:rgba(43,33,24,.7)}
+.btn-yazdir{
+  margin-top:16px;min-height:46px;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;
+  background:linear-gradient(180deg,#548863,#4A7C59);color:#FFFDF8;font-weight:700;font-size:.92rem;
+  box-shadow:0 6px 16px rgba(74,124,89,.3);
+}
+.btn-yazdir:active{transform:scale(.97)}
+
+.paylas-kutu{
+  display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  padding:22px 20px;
+}
+.btn-paylas{
+  min-height:48px;padding:12px 26px;border:none;border-radius:14px;cursor:pointer;
+  background:#FFFDF8;color:#2B2118;border:2px solid rgba(43,33,24,.22);font-weight:700;font-size:.92rem;
+  box-shadow:0 4px 12px rgba(43,33,24,.08);
+}
+.btn-paylas:active{transform:scale(.97)}
+#kopya-durum{font-size:.82rem;color:#4A7C59;font-weight:600;min-height:1.2em}
+
+footer{text-align:center;font-size:.78rem;color:rgba(43,33,24,.5);padding:10px 0 30px}
+
+@media (min-width:640px){
+  main{padding-top:80px}
+}
+
+@media print{
+  body *{visibility:hidden}
+  .mektup, .mektup *{visibility:visible}
+  .mektup{position:absolute;top:0;left:0;width:100%;border:none;box-shadow:none;padding:20px}
+  .btn-yazdir{display:none}
+  .geri{display:none}
+}
+</style>
+</head>
+<body>
+<a class="geri" href="../">← Oyuna Dön</a>
+<main>
+
+  <header class="baslik">
+    <div class="ust-baslik">Hayal Ortaokulu · Zaman Yolcusu</div>
+    <h1 class="ana">Zaman Yolcusu — Öğretmen Köşesi</h1>
+    <p class="alt-aciklama">Bir seçimin beş yıl sonraki yansımasını gösteren bu oyunu sınıfta kullanmak için hazır bir ders akışı, tartışma soruları, kazanım eşleştirmesi ve yazdırılabilir bir veli mektubu.</p>
+  </header>
+
+  <section class="kart">
+    <h2><span class="ikon">🕐</span> 40 Dakikalık Ders Akışı</h2>
+    <div class="akis">
+      <div class="akis-adim">
+        <div class="akis-sure">0–10 dk</div>
+        <div class="akis-icerik">
+          <b>Oyunu oynayın</b>
+          <span>Projeksiyonda oynatacaksanız <code>?sinif=1</code> parametresiyle sınıf moduna geçin ve öğrencilere oy verdirerek bir ya da iki senaryoyu (ör. "Gözünün Ucundaki Kâğıt" ve "Bir Tık Uzakta") birlikte seçin. Bireysel çalışmada her öğrenci kendi cihazında 8 senaryodan istediği kadarını 10 dakikada oynayabilir; her seçimde hem "kısa vade" hem "5 yıl sonra" sonucunu görürler.</span>
+        </div>
+      </div>
+      <div class="akis-adim">
+        <div class="akis-sure">10–30 dk</div>
+        <div class="akis-icerik">
+          <b>Tartışma çemberi</b>
+          <span>Oynanan senaryonun iki farklı yolunu (a ve b) tahtaya iki sütun hâlinde yazın: "kısa vadede ne oldu", "5 yıl sonra ne oldu". Öğrencilerden hangi seçimi neden yaptıklarını, kısa vadeli sonucun mu yoksa uzun vadeli sonucun mu onları daha çok şaşırttığını sorun. Aşağıdaki tartışma sorularını senaryoya göre uyarlayın.</span>
+        </div>
+      </div>
+      <div class="akis-adim">
+        <div class="akis-sure">30–40 dk</div>
+        <div class="akis-icerik">
+          <b>Yazılı/sözlü değerlendirme</b>
+          <span>Öğrencilerden oynadıkları senaryonun sonundaki "ders" cümlesini defterlerine yazıp, kendi hayatlarında "beş yıl sonra kendime teşekkür edeceğim" dedikleri küçük bir kararı bir cümleyle yazmalarını isteyin. İsteyenler sınıfla paylaşsın.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kart">
+    <h2><span class="ikon">💬</span> Tartışma Soruları</h2>
+    <ol class="sorular">
+      <li><span class="no">1</span> "Gözünün Ucundaki Kâğıt" senaryosunda Emir'in kopya kâğıdını almak seni o an nasıl hissettirirdi? Beş yıl sonrasını hayal edebilir miydin o anda?</li>
+      <li><span class="no">2</span> Selim'in düşerken çekilen fotoğrafını (Bir Tık Uzakta) paylaşmadan önce hangi soruyu kendine sormalısın? Sosyal medyada bunu hiç düşünmeden yaptığın bir an oldu mu?</li>
+      <li><span class="no">3</span> Kısa vadede "kötü" seçim bazen daha eğlenceli ya da kolay görünüyor. Sence insanlar neden çoğu zaman kısa vadeyi uzun vadeye tercih eder?</li>
+      <li><span class="no">4</span> "Camdaki Çatlak" senaryosunda suçu üstlenmek Kemal Bey'in tepkisinden korkulacak bir şey gibi görünüyor. Senin hatanı itiraf etmeni zorlaştıran şey genelde nedir?</li>
+      <li><span class="no">5</span> Oyundaki "kötü" gelecekler hep bir umut kapısı bırakıyor — kimse asla "artık çok geç" demiyor. Sence bu neden önemli? Geçmiş bir hatayı telafi ettiğin bir anı hatırlıyor musun?</li>
+    </ol>
+  </section>
+
+  <section class="kart">
+    <h2><span class="ikon">🎯</span> Kazanım Eşleştirmesi</h2>
+    <div class="tablo-sarici">
+      <table>
+        <thead>
+          <tr><th>Senaryo</th><th>İşlediği Değer</th><th>Genel Kazanım Alanı</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Gözünün Ucundaki Kâğıt</td><td class="deger">Dürüstlük ve emek</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: dürüstlük</td></tr>
+          <tr><td>Bir Tık Uzakta</td><td class="deger">Arkadaşlık ve mahremiyet</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: başkasının hakkına saygı</td></tr>
+          <tr><td>Defterdeki Küçük Rakam</td><td class="deger">Sözünde durmak</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: güvenilirlik</td></tr>
+          <tr><td>Camdaki Çatlak</td><td class="deger">Sorumluluk ve cesaret</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: sorumluluk</td></tr>
+          <tr><td>Bir Bölüm Daha</td><td class="deger">Öz disiplin ve denge</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: öz denetim</td></tr>
+          <tr><td>Poşetler ve Düdük Sesi</td><td class="deger">Yardımlaşma ve komşuluk</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: yardımseverlik</td></tr>
+          <tr><td>Avucundaki Fazlalık</td><td class="deger">Kul hakkı ve dürüstlük</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: kul hakkı</td></tr>
+          <tr><td>Kumbaranın Sabrı</td><td class="deger">Tutumluluk ve sabır</td><td class="kazanim">İlgili ahlak/İHO kazanım alanı: sabır</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="kart mektup" id="mektup-alani">
+    <h3>📩 Veli Mektubu</h3>
+    <p><b>Sevgili Veli,</b></p>
+    <p>Çocuğunuz bu hafta okulda <b>"Zaman Yolcusu"</b> adlı bir oyun oynadı (veya oynayacak). Oyunda öğrenci, dedesinin tavan arasında bulduğu hayali bir saat sayesinde günlük hayattan seçtiği bir kararın hem "hemen sonrasını" hem de "beş yıl sonrasını" görüyor — sınavda kopya çekmek mi, kendi emeğiyle çözmek mi; bir arkadaşının mahcup anını paylaşmak mı, ona el uzatmak mı gibi.</p>
+    <p>Amacımız çocuğunuzu korkutmak değil, küçük kararların zamanla nasıl büyük sonuçlara dönüştüğünü kendi gözleriyle görmesini sağlamak. Oyundaki "kötü" sonlar bile hep bir umut kapısı bırakır; hiçbir hata için "artık çok geç" denmez.</p>
+    <p>Merak etmeyin: bu oyun hiçbir kişisel veri toplamaz, hiçbir sunucuya bilgi göndermez. Yalnızca çocuğunuzun kendi cihazında, tarayıcının hafızasında (localStorage) kaldığı yerden devam edebilmesi için ilerlemesini saklar. İsterseniz akşam sofrasında "sen olsan hangi yolu seçerdin?" diye sorup birlikte bir senaryo konuşabilirsiniz.</p>
+    <p class="imza">Sevgiyle,<br>Sınıf Öğretmeniniz</p>
+    <button class="btn-yazdir" onclick="window.print()">🖨 Mektubu Yazdır</button>
+  </section>
+
+  <section class="kart paylas-kutu">
+    <div style="font-size:1.6rem">🔗</div>
+    <p style="max-width:380px">Bu sayfayı meslektaşınla paylaş; belki o da sınıfında kullanmak ister.</p>
+    <button class="btn-paylas" id="btn-paylas">Sayfayı Paylaş</button>
+    <div id="kopya-durum"></div>
+  </section>
+
+  <footer>Zaman Yolcusu · Hayal Ortaokulu — Öğretmen Köşesi</footer>
+
+</main>
+
+<script>
+"use strict";
+(function(){
+  var btn = document.getElementById("btn-paylas");
+  var durum = document.getElementById("kopya-durum");
+  btn.addEventListener("click", function(){
+    var url = window.location.href;
+    var veri = { title: "Zaman Yolcusu — Öğretmen Köşesi", text: "Zaman Yolcusu oyunu için öğretmen kaynakları", url: url };
+    if (navigator.share) {
+      navigator.share(veri).catch(function(){});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function(){
+        durum.textContent = "Bağlantı panoya kopyalandı ✓";
+        setTimeout(function(){ durum.textContent = ""; }, 3000);
+      }).catch(function(){
+        durum.textContent = "Kopyalanamadı, adres çubuğundan kopyalayabilirsiniz.";
+      });
+    } else {
+      durum.textContent = "Adres çubuğundan bağlantıyı kopyalayabilirsiniz.";
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -149,7 +149,7 @@ main{
   border:1.5px solid var(--cizgi); box-shadow:none;
 }
 .btn.ikincil:hover{ background:rgba(43,33,24,.05); }
-.btn.tehlike{ background:transparent; color:var(--kiremit); border:1.5px solid rgba(196,87,74,.4); }
+.btn.tehlike{ background:transparent; color:#A83F33; border:1.5px solid rgba(196,87,74,.4); } /* WCAG AA: krem zeminde 5.3:1 kontrast */
 .btn.tehlike:hover{ background:rgba(196,87,74,.08); }
 
 /* Seçenek butonları */
@@ -403,6 +403,73 @@ main{
   .kostek::before{ animation:none !important; }
   .dalga{ animation:none !important; filter:none !important; }
 }
+
+/* ====== Sınıf Modu (?sinif=1): büyütülmüş, projeksiyondan okunabilir yazı ====== */
+body.sinif-modu .metin{ font-size:1.18rem; line-height:1.65; }
+body.sinif-modu .secenek{ font-size:1.1rem; min-height:60px; }
+body.sinif-modu h1,body.sinif-modu h2,body.sinif-modu h3{ font-size:1.18em; }
+body.sinif-modu .btn{ font-size:1.08rem; min-height:56px; }
+body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
+
+/* ====== Sınıfa Sor ara ekranı ====== */
+.sinifa-sor{
+  margin-top:14px; padding:14px; border-radius:16px;
+  background:rgba(74,124,89,.10); border:1.5px dashed rgba(74,124,89,.5);
+}
+.sinifa-sor h3{ font-size:1rem; color:var(--yesil); }
+.sinifa-sor p{ margin:8px 0 0; font-size:.92rem; }
+
+/* ====== Mühür rozeti (açılış + ilerleme) ====== */
+.muhur-rozet{
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--kart); border:1px solid var(--cizgi); border-radius:999px;
+  padding:5px 12px; font-size:.8rem; font-weight:600; box-shadow:var(--golge);
+  color:#8a6420;
+}
+.rozet-bilge{
+  display:inline-flex; align-items:center; gap:8px; margin-top:12px;
+  background:linear-gradient(135deg,#f6e6b8,#e8c473);
+  border:1px solid rgba(217,164,65,.6); border-radius:999px;
+  padding:9px 18px; font-size:.95rem; font-weight:700; color:#5c4210;
+  box-shadow:0 6px 16px rgba(217,164,65,.35);
+}
+
+/* ====== Kulağına Küpe kutusu ====== */
+.kupe-kutu{
+  margin-top:12px; padding:12px 14px; border-radius:14px;
+  background:rgba(196,87,74,.08); border:1px solid rgba(196,87,74,.3);
+}
+.kupe-kutu .kupe-baslik{
+  display:flex; align-items:center; gap:6px;
+  font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+  color:var(--kiremit);
+}
+.kupe-kutu p{ margin:8px 0 0; font-size:.92rem; font-style:italic; color:var(--murekkep); }
+.kupe-kutu .kupe-kaynak{ margin-top:4px; font-size:.78rem; font-style:normal; color:var(--soluk); }
+
+/* ====== Öğretmen köşesi linki (açılış) ====== */
+.ogretmen-link{
+  display:inline-flex; align-items:center; gap:6px; margin-top:14px;
+  min-height:44px; padding:0 6px;
+  color:var(--soluk); text-decoration:none; font-size:.85rem; font-weight:600;
+}
+.ogretmen-link:hover,.ogretmen-link:focus-visible{ color:var(--murekkep); }
+
+/* ====== Pusula yazdırma ====== */
+.pusula-ad-satir{ display:none; }
+@media print{
+  body *{ visibility:hidden; }
+  #finalYazdirAlani, #finalYazdirAlani *{ visibility:visible; }
+  #finalYazdirAlani{
+    position:absolute; left:0; top:0; width:100%;
+    background:#fff; color:#000; padding:24px;
+  }
+  header, .btn, .geri-link, .kostek::before{ display:none !important; }
+  .pusula-ad-satir{
+    display:block; margin-top:28px; padding-top:14px;
+    border-top:1px solid #000; font-size:1rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -415,7 +482,7 @@ main{
   </div>
 </header>
 
-<main id="sahne" aria-live="polite"></main>
+<main id="sahne" aria-live="polite" tabindex="-1"></main>
 
 <!-- Zaman geçişi animasyon katmanı -->
 <div class="gecis" id="gecis" aria-hidden="true">
@@ -457,6 +524,7 @@ main{
 
   /* ---------- Sabitler ve durum ---------- */
   var KAYIT_ANAHTARI = 'zamanYolcusu.v1';
+  var MUHUR_ANAHTARI = 'zaman_muhur_v1';   // "iki dalı da gördüm" mühürleri — oyun sıfırlansa da SİLİNMEZ
   var GORSEL_YOLU = '../assets/zaman/';
   // Görsel yüklenemezse gösterilecek senaryo emojileri
   var SENARYO_EMOJI = { s1:'📝', s2:'📱', s3:'🪙', s4:'⚽', s5:'🎮', s6:'🛍️', s7:'🥪', s8:'📷' };
@@ -466,6 +534,11 @@ main{
   var aktifSecim = null;     // şu an izlenen dal: 'a' | 'b'
   var ekranAdi = 'giris';    // klavye kısayolları için
   var kilit = false;         // geçiş sırasında girişleri kilitle (çift tetiklemeyi de önler)
+  var oncekiOdak = null;     // modal açılmadan önce odaklı elemanı hatırla (kapanınca geri dön)
+
+  /* Sınıf Modu: ?sinif=1 ile büyük yazı + "Sınıfa Sor" ara ekranı */
+  var SINIF_MODU = /(^|[?&])sinif=1(&|$)/.test(window.location.search);
+  if (SINIF_MODU) document.body.classList.add('sinif-modu');
 
   if (typeof ICERIK === 'undefined'){
     sahne.innerHTML = '<div class="kart orta"><h2>İçerik yüklenemedi</h2>' +
@@ -527,6 +600,47 @@ main{
     return n;
   }
 
+  /* ---------- Mühür Koleksiyonu (ayrı, kalıcı localStorage) ----------
+     "İki dalı da gördüm" başarısı senaryo bazında kalıcı işlenir;
+     zamanYolcusu.v1 sıfırlansa/tekrar oynansa bile mühürler silinmez. */
+  function muhurOku(){
+    try{
+      var h = localStorage.getItem(MUHUR_ANAHTARI);
+      var d = h ? JSON.parse(h) : null;
+      if (!d || typeof d !== 'object') d = {};
+      return d;
+    }catch(e){ return {}; }
+  }
+  function muhurKaydet(m){
+    try{ localStorage.setItem(MUHUR_ANAHTARI, JSON.stringify(m)); }catch(e){ /* özel modda sessizce geç */ }
+  }
+  function muhurIsle(senaryoId){
+    var m = muhurOku();
+    if (!m[senaryoId]){
+      m[senaryoId] = true;
+      muhurKaydet(m);
+    }
+  }
+  function muhurSayisi(){
+    var m = muhurOku();
+    var n = 0;
+    ICERIK.senaryolar.forEach(function(s){ if (m[s.id]) n++; });
+    return n;
+  }
+
+  /* ---------- Görsel ön yükleme ----------
+     Kısa vade ekranı gösterilirken, o senaryonun HEM iyi HEM kötü dal
+     görselini arka planda tarayıcı önbelleğine alır. */
+  var onYuklenenSenaryo = null;
+  function gorselOnYukle(s){
+    if (onYuklenenSenaryo === s.id) return;   // aynı senaryo için tekrar tetikleme
+    onYuklenenSenaryo = s.id;
+    ['a','b'].forEach(function(k){
+      var dal = s[k];
+      if (dal && dal.gorsel){ new Image().src = GORSEL_YOLU + dal.gorsel; }
+    });
+  }
+
   /* Üst çubuğu (puan + 8 nokta) güncelle */
   function durumGuncelle(gizle){
     var grup = document.getElementById('durumGrubu');
@@ -563,11 +677,17 @@ main{
   }
 
   function ciz(html){
+    // Odak, artık DOM'da olmayacak eski bir sahne elemanındaysa (ör. modal
+    // kapanır kapanmaz ekran değiştiğinde) yeni sahne çizilmeden önce not al;
+    // aksi hâlde tarayıcı odağı sessizce body'ye düşürür ve klavye/okuyucu
+    // kullanıcısı "kayboluyor".
+    var odakEskiSahnedeydi = sahne.contains(document.activeElement) || document.activeElement === document.body;
     sahne.innerHTML = html;
     sahne.style.animation = 'none';
     void sahne.offsetWidth;       /* giriş animasyonunu yeniden tetikle */
     sahne.style.animation = '';
     window.scrollTo(0, 0);
+    if (odakEskiSahnedeydi) sahne.focus({ preventScroll:true });   // odağı yeni sahnenin köküne taşı
   }
 
   /* ---------- Zaman geçişi animasyonu (~1.85 sn, saf CSS) ---------- */
@@ -613,6 +733,9 @@ main{
       butonlar = '<button class="btn birincil" id="btnBasla">⌚ Yolculuğa Başla</button>';
     }
 
+    var toplamMuhur = ICERIK.senaryolar.length;
+    var kazanilanMuhur = muhurSayisi();
+
     ciz(
       '<div class="orta">' +
         '<div class="kostek" aria-hidden="true">' +
@@ -621,11 +744,17 @@ main{
         '</div>' +
         '<h1 class="buyuk-baslik">' + esc(ICERIK.oyunAdi) + '</h1>' +
         '<p class="etiket" style="margin-top:6px">Hayal Ortaokulu · 8 Durak</p>' +
+        '<div style="margin-top:10px">' +
+          '<span class="muhur-rozet">⏱ ' + kazanilanMuhur + '/' + toplamMuhur + ' mühür</span>' +
+        '</div>' +
       '</div>' +
       '<div class="kart giris-kart" style="margin-top:18px">' +
         '<h2 style="font-size:1.15rem">🕰️ ' + esc(ICERIK.giris.baslik) + '</h2>' +
         '<p class="metin">' + esc(ICERIK.giris.metin) + '</p>' +
         '<div class="buton-grubu">' + butonlar + '</div>' +
+      '</div>' +
+      '<div class="orta">' +
+        '<a class="ogretmen-link" href="./ogretmen/">📚 Öğretmenler İçin</a>' +
       '</div>'
     );
 
@@ -697,7 +826,36 @@ main{
       '</div>'
     );
 
+    // Arka planda: bu senaryonun hem iyi hem kötü dal görselini önbelleğe al
+    gorselOnYukle(s);
+
     document.getElementById('btnIleri').addEventListener('click', function(){
+      if (kilit) return;
+      if (SINIF_MODU){ ekranSinifaSor(); } else { zamanGecisi(false, '⏳ Beş yıl ileri gidiliyor…', ekranGelecek); }
+    });
+  }
+
+  /* Sınıf Modu ara ekranı: kısa vade sonrası, geleceğe gitmeden önce tartışma molası */
+  function ekranSinifaSor(){
+    ekranAdi = 'sinifaSor';
+    var s = ICERIK.senaryolar[durum.idx];
+    kisaKilit();
+
+    ciz(
+      '<div class="ust-satir">' +
+        '<span class="etiket">📍 Durak ' + (durum.idx + 1) + ' / ' + ICERIK.senaryolar.length + '</span>' +
+        '<span class="deger-rozet">✨ ' + esc(s.deger) + '</span>' +
+      '</div>' +
+      '<div class="kart">' +
+        '<div class="sinifa-sor">' +
+          '<h3>👥 Sınıfa Sor</h3>' +
+          '<p>Siz olsanız bu seçimi yapar mıydınız? Neden?</p>' +
+        '</div>' +
+        '<button class="btn birincil" id="btnTartismaBitti">Tartışma bitti, geleceği gör →</button>' +
+      '</div>'
+    );
+
+    document.getElementById('btnTartismaBitti').addEventListener('click', function(){
       if (kilit) return;
       zamanGecisi(false, '⏳ Beş yıl ileri gidiliyor…', ekranGelecek);
     });
@@ -712,13 +870,25 @@ main{
     durumGuncelle(false);
 
     var ikisiDe = k.gorulen.length === 2;
+    if (ikisiDe) muhurIsle(s.id);   // "iki dalı da gördüm" başarısı kalıcı mühür koleksiyonuna işlenir
     var sonDurakMi = durum.idx === ICERIK.senaryolar.length - 1;
     var ileriYazi = sonDurakMi ? 'Yolculuğu Tamamla ▶' : 'Sonraki Durak ▶';
+
+    var kupeHtml = '';
+    if (s.kupe && s.kupe.soz){
+      kupeHtml =
+        '<div class="kupe-kutu">' +
+          '<div class="kupe-baslik">📿 Kulağına Küpe</div>' +
+          '<p>“' + esc(s.kupe.soz) + '”</p>' +
+          '<p class="kupe-kaynak">— ' + esc(s.kupe.kaynak) + (s.kupe.kisaKaynak ? ' <em>(' + esc(s.kupe.kisaKaynak) + ')</em>' : '') + '</p>' +
+        '</div>';
+    }
 
     var altKisim;
     if (ikisiDe){
       altKisim =
         '<div class="defter"><h3>🧭 Yolcunun Defteri</h3><div class="sayfa"><p>' + esc(s.ders) + '</p></div></div>' +
+        kupeHtml +
         '<button class="btn birincil" id="btnSonraki">' + ileriYazi + '</button>';
     } else {
       altKisim =
@@ -774,6 +944,10 @@ main{
     var puan = puanHesapla();
     var cift = ciftDalSayisi();
     var toplam = ICERIK.senaryolar.length;
+    var kazanilanMuhur = muhurSayisi();
+    var bilgeRozeti = (kazanilanMuhur >= toplam)
+      ? '<div class="orta"><span class="rozet-bilge">🏅 Zaman Bilgesi</span></div>'
+      : '';
 
     ciz(
       '<div class="orta" style="margin-top:8px">' +
@@ -781,14 +955,22 @@ main{
         '<h1 style="font-size:1.5rem; margin-top:6px">🕰️ ' + esc(ICERIK.final.baslik) + '</h1>' +
         '<div class="puan-final" style="margin-top:14px">' + puan + '</div>' +
         '<p class="etiket" style="margin-top:2px">Karakter Puanı / ' + (toplam * 10) + '</p>' +
+        bilgeRozeti +
       '</div>' +
-      '<div class="cipler">' +
-        '<div class="cip"><div class="buyuk">' + (puan / 10) + '/' + toplam + '</div><div class="kucuk">İlk seçimi güzel gelecek</div></div>' +
-        '<div class="cip"><div class="buyuk">' + cift + '/' + toplam + '</div><div class="kucuk">İki geleceği de izlenen durak</div></div>' +
+      '<div id="finalYazdirAlani">' +
+        '<div class="cipler">' +
+          '<div class="cip"><div class="buyuk">' + (puan / 10) + '/' + toplam + '</div><div class="kucuk">İlk seçimi güzel gelecek</div></div>' +
+          '<div class="cip"><div class="buyuk">' + cift + '/' + toplam + '</div><div class="kucuk">İki geleceği de izlenen durak</div></div>' +
+          '<div class="cip"><div class="buyuk">⏱ ' + kazanilanMuhur + '/' + toplam + '</div><div class="kucuk">Kazanılan mühür</div></div>' +
+        '</div>' +
+        '<div class="kart" style="margin-top:14px">' +
+          '<p class="metin" style="margin-top:0">' + esc(ICERIK.final.metin) + '</p>' +
+          '<p class="pusula-ad-satir">Ad Soyad: ________________________</p>' +
+        '</div>' +
       '</div>' +
       '<div class="kart" style="margin-top:14px">' +
-        '<p class="metin" style="margin-top:0">' + esc(ICERIK.final.metin) + '</p>' +
         '<button class="btn birincil" id="btnTekrar">🔁 Tekrar Oyna</button>' +
+        '<button class="btn ikincil" id="btnYazdir">🖨 Pusulayı Yazdır</button>' +
         '<a class="btn ikincil" href="../" style="text-decoration:none">← Oyunlara Dön</a>' +
       '</div>'
     );
@@ -798,18 +980,26 @@ main{
       kayitSil(); durum = bosDurum(); kaydet();
       ekranSenaryo();
     });
+    document.getElementById('btnYazdir').addEventListener('click', function(){
+      window.print();
+    });
   }
 
   /* ---------- Nazik onay penceresi ---------- */
   var modalArka = document.getElementById('modalArka');
   function modalAc(){
+    oncekiOdak = document.activeElement;   // kapanınca odağı buraya döndür
     modalArka.classList.add('acik');
     document.getElementById('modalGor').focus();
   }
   function modalKapat(){
     modalArka.classList.remove('acik');
-    var geriDon = document.getElementById('btnSonraki');
-    if (geriDon) geriDon.focus();   // odak görünmez modalda kalmasın
+    // Modalı tetikleyen buton hâlâ DOM'daysa oraya, modal kapanırken ekran da
+    // değiştiyse (ör. sonrakiDurak) yeni sahnenin köküne odaklan — odak asla
+    // görünmez modalda ya da body'de boşlukta kalmasın.
+    var hedef = (oncekiOdak && document.body.contains(oncekiOdak)) ? oncekiOdak : (document.getElementById('btnSonraki') || sahne);
+    if (hedef) hedef.focus();
+    oncekiOdak = null;
   }
 
   document.getElementById('modalGor').addEventListener('click', function(){

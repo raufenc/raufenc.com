@@ -18,31 +18,31 @@ const ICERIK = {
       no: 1,
       ad: "Dürüstlük",
       giris: "Hayal Ortaokulu'nda yeni bir hafta başlıyor. Küçük bir yalan bazen kocaman bir çantadan daha ağırdır. Bakalım bu hafta çantanda ne taşıyacaksın?",
-      kupe: { soz: "Doğruluk iyiliğe götürür, iyilik de cennete götürür.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)" }
+      kupe: { soz: "Doğruluk iyiliğe götürür, iyilik de cennete götürür.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)", kisaKaynak: "Buhârî, Edeb 69" }
     },
     {
       no: 2,
       ad: "Kul Hakkı",
       giris: "Kul hakkı görünmez bir çizgidir: sıradaki yerin, bir emeğin, hatta bir dilim kekin bile sahibi var. Bu hafta o çizgiye basmadan yürümeyi deneyeceksin.",
-      kupe: { soz: "Müslüman, elinden ve dilinden emin olunan kimsedir.", kaynak: "Hadis-i şerif (Buhârî)" }
+      kupe: { soz: "Müslüman, elinden ve dilinden emin olunan kimsedir.", kaynak: "Hadis-i şerif (Buhârî)", kisaKaynak: "Buhârî, Îmân 4" }
     },
     {
       no: 3,
       ad: "Adalet",
       giris: "Adalet bir terazidir: bir kefesine arkadaşını, öbürüne doğruyu koyunca iş zorlaşır. Bu hafta terazi senin elinde. Elin titreyecek, orası kesin.",
-      kupe: { soz: "Hiçbiriniz kendisi için istediğini kardeşi için de istemedikçe iman etmiş olmaz.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)" }
+      kupe: { soz: "Hiçbiriniz kendisi için istediğini kardeşi için de istemedikçe iman etmiş olmaz.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)", kisaKaynak: "Buhârî, Îmân 7" }
     },
     {
       no: 4,
       ad: "Sabır ve Öfke",
       giris: "Öfke bir kibrit gibidir: çakması bir saniye, söndürmesi bazen haftalar sürer. Bu hafta herkesin cebinde bir kutu kibrit var. Bakalım kim çakacak?",
-      kupe: { soz: "Gerçek pehlivan, güreşte rakibini yenen değil, öfkelendiği zaman kendine hâkim olandır.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)" }
+      kupe: { soz: "Gerçek pehlivan, güreşte rakibini yenen değil, öfkelendiği zaman kendine hâkim olandır.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)", kisaKaynak: "Buhârî, Edeb 76" }
     },
     {
       no: 5,
       ad: "Cömertlik ve Fedakârlık",
       giris: "Cömertlik cüzdanla değil, yürekle ölçülür. Bazen bir tostun yarısı, bazen bir cumartesi sabahıdır. Bu hafta bakalım sen neyi bölüşeceksin?",
-      kupe: { soz: "Veren el, alan elden üstündür.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)" }
+      kupe: { soz: "Veren el, alan elden üstündür.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)", kisaKaynak: "Buhârî, Zekât 18" }
     }
   ],
 
@@ -57,7 +57,7 @@ const ICERIK = {
       sag: { etiket: "Öğretmene söylerim", sonuc: "Nazan Öğretmen şaşırır: 'Sınıfta bir dürüstlük kahramanı varmış.' Emir 'notunu düşürttün, inanamıyorum' der.", vicdan: 12, arkadaslik: -3, aile: 0, ozguven: 3 }
     },
     {
-      id: "d02", bolum: 1, karakter: "emir",
+      id: "d02", bolum: 1, karakter: "emir", tartisma: true,
       metin: "Sınavın ortası. Emir gözleriyle yalvarıyor: kağıdını biraz kaydırmanı istiyor. Öğretmen pencereden bahçeye bakıyor.",
       sol: { etiket: "Kağıdımı açarım", sonuc: "Emir rahatlar, sana 'ömürlük borçluyum' işareti yapar. İçinde ince bir sızı.", vicdan: -10, arkadaslik: 8, aile: 0, ozguven: 0, flag: "kopyaVerdin" },
       sag: { etiket: "Kağıdımı kapatırım", sonuc: "Emir dudak büker. Teneffüste 'bencilsin' der; sen 'ikimiz için yapmadım' dersin ama duymaz.", vicdan: 10, arkadaslik: -8, aile: 0, ozguven: 3 }
@@ -144,7 +144,7 @@ const ICERIK = {
       sag: { etiket: "Sıramı beklerim", sonuc: "Emir 'amma dürüstsün' diye söylenir. Arkandaki beşinci sınıflı sana kocaman gülümser.", vicdan: 8, arkadaslik: -4, aile: 0, ozguven: 2 }
     },
     {
-      id: "k02", bolum: 2, karakter: "emir",
+      id: "k02", bolum: 2, karakter: "emir", tartisma: true,
       metin: "Emir kulağına eğiliyor: 'Burak eski okulundan uzaklaştırma almış diye duydum. Gruba yazıyorum, bomba haber!'",
       sol: { etiket: "Yaz, görsünler", sonuc: "Grup kahkahaya boğulur. Mesaj yayılır; Burak'ın sırtındaki görünmez yük büyür.", vicdan: -14, arkadaslik: 5, aile: 0, ozguven: 0, flag: "dedikoduYaydin" },
       sag: { etiket: "Bizi ilgilendirmez", sonuc: "'Doğru mu bilmiyoruz bile' dersin. Emir 'sıkıcısın' der ama telefonu cebine koyar.", vicdan: 12, arkadaslik: -5, aile: 0, ozguven: 3 }
@@ -168,7 +168,7 @@ const ICERIK = {
       sag: { etiket: "Ben bölerim, o seçsin", sonuc: "Eski usul adalet: bölen sen, seçen o. Yusuf tabii ki milimetrik büyük olanı seçer; gülersin.", vicdan: 8, arkadaslik: 0, aile: 5, ozguven: 0 }
     },
     {
-      id: "k06", bolum: 2, karakter: "selim",
+      id: "k06", bolum: 2, karakter: "selim", tartisma: true,
       metin: "Kalemin tam sınav öncesi bitti. Selim tuvalette; sırasında yepyeni bir kalem seti duruyor. 'Bir tane alsam fark etmez ki...'",
       sol: { etiket: "Sessizce alırım", sonuc: "Kalem yazıyor ama sanki mürekkebi biraz buruk. Selim dönünce setini sayar gibi bakar.", vicdan: -10, arkadaslik: 0, aile: 0, ozguven: -2 },
       sag: { etiket: "Dönünce isterim", sonuc: "Selim kalemi uzatırken ilk kez gülümser: 'İstediğin zaman.' Bugün biriyle ilk kez konuşmuş.", vicdan: 8, arkadaslik: 3, aile: 0, ozguven: 0 }
@@ -215,11 +215,17 @@ const ICERIK = {
       sol: { etiket: "İkinciyi kaparım", sonuc: "En son gelen Selim'e su kalmaz. Elindeki ikinci kutunun tadı bir tuhaf.", vicdan: -8, arkadaslik: -2, aile: 0, ozguven: 0 },
       sag: { etiket: "Bir tane yeter", sonuc: "Son kutu Selim'e kalır. Kimse bilmez; bilmese de olur zaten.", vicdan: 6, arkadaslik: 0, aile: 0, ozguven: 2 }
     },
+    {
+      id: "k14", bolum: 2, karakter: "kagan",
+      metin: "Koridorda kalabalık; Kağan'ın tekerlekli sandalyesinin önünde birkaç bisiklet çantası bırakılmış, geçecek yer daralmış. Onu görmezden gelip yürüyebilirsin, kimse fark etmez.",
+      sol: { etiket: "Kenardan geçip giderim", sonuc: "Kağan çantaların arasında dönüp durur, zil çalar, hâlâ oradadır.", vicdan: -6, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Çantaları kenara çekerim", sonuc: "İki saniye sürer. Kağan 'sağ ol' der geçerken; sen 'bir şey değil' dersin, gerçekten de değildir.", vicdan: 8, arkadaslik: 3, aile: 0, ozguven: 0 }
+    },
 
     /* ---------- BÖLÜM 3: ADALET ---------- */
 
     {
-      id: "a01", bolum: 3, karakter: "emir",
+      id: "a01", bolum: 3, karakter: "emir", tartisma: true,
       metin: "Teneffüs maçında hakem sensin. Emir ceza sahasında topu elle kesti. Tam göremeyen oldu ama sen gördün. Herkes sana bakıyor.",
       sol: { etiket: "Devam, derim", sonuc: "Emir'in takımı kazanır. Karşı takımdan biri 'hakem taraflı' diye söylenir; haksız da değil.", vicdan: -10, arkadaslik: 5, aile: 0, ozguven: -2 },
       sag: { etiket: "Penaltı veririm", sonuc: "Emir 'Ben senin arkadaşın değil miyim?' der. Maç biter; 'iyi hakemdin' demek zorunda kalır.", vicdan: 12, arkadaslik: -6, aile: 0, ozguven: 4 }
@@ -237,19 +243,19 @@ const ICERIK = {
       sag: { etiket: "İlk turda Selim'i seçerim", sonuc: "Selim şaşkınlıktan yerinden fırlar. Takım homurdanır; ama o gün Selim hayatının maçını çıkarır.", vicdan: 12, arkadaslik: -4, aile: 0, ozguven: 0 }
     },
     {
-      id: "a04", bolum: 3, karakter: "burak",
+      id: "a04", bolum: 3, karakter: "burak", tartisma: true,
       metin: "Kantinde para kaybolmuş. Biri 'Kesin Burak almıştır' diyor; herkes başını sallıyor. Ama sen Burak'ın o saatte kütüphanede olduğunu gördün.",
       sol: { etiket: "Karışmam, uzak dururum", sonuc: "Burak'ın 'zaten hep ben' bakışı içine oturur. Sessizlik de bir oydur; sen oyunu kullandın.", vicdan: -12, arkadaslik: 0, aile: 0, ozguven: -3 },
       sag: { etiket: "Burak orada değildi, derim", sonuc: "Kalabalığa karşı konuşmak zor; sesin biraz titrer ama çıkar. Para sonra çantanın astarından çıkar.", vicdan: 14, arkadaslik: -2, aile: 0, ozguven: 4 }
     },
     {
-      id: "a05", bolum: 3, karakter: "elif",
+      id: "a05", bolum: 3, karakter: "elif", tartisma: true,
       metin: "Nazan Öğretmen Elif'in ödevini kayıp sanıp düşük not verdi. Oysa Elif teslim ederken sen oradaydın. Elif itiraz edemiyor; sesi titriyor.",
       sol: { etiket: "Elif kendi halletsin", sonuc: "Elif bir şey diyemez, not öyle kalır. Sana bakışında bir soru var: 'Sen de mi?'", vicdan: -8, arkadaslik: -3, aile: 0, ozguven: 0 },
       sag: { etiket: "Parmak kaldırıp anlatırım", sonuc: "'Elif teslim etti, ben şahidim.' Ödev başka dosyadan çıkar. Elif'in bakışını ömrünce unutmazsın.", vicdan: 12, arkadaslik: 4, aile: 0, ozguven: 3, flag: "elifiSavundun" }
     },
     {
-      id: "a06", bolum: 3, karakter: "mudur",
+      id: "a06", bolum: 3, karakter: "mudur", tartisma: true,
       metin: "Koridorda iki kişi koşuyordu: Burak ve Emir. Kemal Bey sadece Burak'ı yakaladı. Sana soruyor: 'Yalnız mıydı?'",
       sol: { etiket: "Yalnızdı derim", sonuc: "Emir kurtulur, sana 'kardeşimsin' der. Cezayı tek başına yiyen Burak'ın bakışı ise ağır.", vicdan: -14, arkadaslik: 6, aile: 0, ozguven: 0 },
       sag: { etiket: "İkisi de koşuyordu", sonuc: "Emir kızarır ama ceza ikiye bölününce hafifler. Çıkışta mırıldanır: 'Doğrusu buydu galiba.'", vicdan: 12, arkadaslik: -8, aile: 0, ozguven: 2 }
@@ -273,7 +279,7 @@ const ICERIK = {
       sag: { etiket: "Gördüğümü söylerim", sonuc: "Kulaklık spor salonunda bulunur. Ramazan Amca çay ısmarlamak ister; çayı yok ama gülümsemesi kocaman.", vicdan: 12, arkadaslik: 0, aile: 0, ozguven: 3 }
     },
     {
-      id: "a10", bolum: 3, karakter: "emir",
+      id: "a10", bolum: 3, karakter: "emir", tartisma: true,
       metin: "Grupta Selim'in konuşmasını taklit eden bir video dönüyor. Emir atmış. Herkes gülücük emojisi yağdırıyor. Sıra sende.",
       sol: { etiket: "Ben de gülerim", sonuc: "Akışa uyarsın. Selim ertesi gün derste hiç konuşmaz; taklit edilecek ses de kalmaz.", vicdan: -12, arkadaslik: 4, aile: 0, ozguven: 0 },
       sag: { etiket: "Bu alay, yazarım", sonuc: "'Komik değil, alay bu' yazarsın. Grup sessizleşir. Biri daha yazar: 'Katılıyorum.' Sonra biri daha.", vicdan: 14, arkadaslik: -6, aile: 0, ozguven: 4 }
@@ -289,6 +295,12 @@ const ICERIK = {
       metin: "Kural net: antrenmana geç kalan maçta oynayamaz. Burak yine geç kaldı. Zeynep sana danışıyor: 'Kural kuraldır, değil mi?'",
       sol: { etiket: "Kural herkese eşit", sonuc: "Burak oynamaz. Kural işledi; ama Burak'ın neden geç kaldığını hâlâ kimse bilmiyor.", vicdan: 0, arkadaslik: -4, aile: 0, ozguven: 3 },
       sag: { etiket: "Önce sebebini soralım", sonuc: "Meğer Burak kardeşini kreşe bırakıyormuş. Kural değil, çözüm konuşulur: ona esnek saat.", vicdan: 8, arkadaslik: 4, aile: 0, ozguven: 0 }
+    },
+    {
+      id: "a13", bolum: 3, karakter: "kagan",
+      metin: "Sınıf gezisi oylaması: bir grup eski kaleyi önerdi, ama girişi merdivenli; Kağan'ın tekerlekli sandalyesi çıkamaz. Diğer seçenek biraz daha sıradan ama herkes rahatça geziyor.",
+      sol: { etiket: "Kaleyi öneririm, manzarası harika", sonuc: "Oylama kaleden yana çıkar. Gezi günü Kağan otobüste, sınıf fotoğrafını telefonundan izler.", vicdan: -8, arkadaslik: -4, aile: 0, ozguven: 2 },
+      sag: { etiket: "Herkesin gezebileceği yeri öneririm", sonuc: "Kağan gezi boyunca ilk kez herkesle aynı fotoğrafta. 'Bu sefer dışarıda kalmadım' der, gülerek.", vicdan: 10, arkadaslik: 6, aile: 0, ozguven: 0 }
     },
 
     /* ---------- BÖLÜM 4: SABIR VE ÖFKE ---------- */
@@ -371,6 +383,12 @@ const ICERIK = {
       sol: { etiket: "Emir'e katılırım", sonuc: "Termometre çantanın dibine iner. Hafta içinde iki kez lazım olur; çantanın dibinde kalır.", vicdan: -4, arkadaslik: 3, aile: 0, ozguven: -2 },
       sag: { etiket: "Denemeden bilemem", sonuc: "Hafta sonunda termometrende üç 'söndürülmüş yangın' işareti var. Murat Bey'le kutlarsınız.", vicdan: 6, arkadaslik: 0, aile: 0, ozguven: 4 }
     },
+    {
+      id: "s14", bolum: 4, karakter: "ogretmen", ozelTip: "kader",
+      metin: "Haftalardır çalıştığın sınav son anda idari bir kararla iptal edildi; yeni tarih üç hafta sonraya kaldı. Elinden hiçbir şey gelmiyor.",
+      sol: { etiket: "Boşver", sonuc: "Bazı şeyler senin elinde değil; elinde olan, ona nasıl karşılık verdiğin.", vicdan: 0, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Ne yapabilirim ki", sonuc: "Bazı şeyler senin elinde değil; elinde olan, ona nasıl karşılık verdiğin.", vicdan: 0, arkadaslik: 0, aile: 0, ozguven: 0 }
+    },
 
     /* ---------- BÖLÜM 5: CÖMERTLİK VE FEDAKÂRLIK ---------- */
 
@@ -405,7 +423,7 @@ const ICERIK = {
       sag: { etiket: "Cumartesi Emir'le çalışırım", sonuc: "Kapıda mahcup sırıtır: 'Sana dondurma borcum ömürlük.' Sınavdan geçer; dondurma çıkar.", vicdan: 10, arkadaslik: 6, aile: 0, ozguven: 0 }
     },
     {
-      id: "c06", bolum: 5, karakter: "ogretmen",
+      id: "c06", bolum: 5, karakter: "ogretmen", tartisma: true,
       metin: "Resim yarışmasında tek kontenjan kaldı. Nazan Öğretmen önceliği sana verdi. Ama Elif'in resmi... sen de gördün, bambaşka.",
       sol: { etiket: "Hakkımı kullanırım", sonuc: "Yarışmaya sen katılırsın; bu senin hakkındı, kimse kızamaz. Elif resmini dosyasına kaldırır.", vicdan: 0, arkadaslik: -2, aile: 0, ozguven: 4 },
       sag: { etiket: "Yerimi Elif'e bırakırım", sonuc: "Elif'in resmi il sergisine seçilir. İçinde küçük bir 'keşke ben' sızısı; üstünde büyük bir gurur.", vicdan: 8, arkadaslik: 4, aile: 0, ozguven: -3 }
@@ -427,6 +445,12 @@ const ICERIK = {
       metin: "Murat Bey kütüphaneyi düzenlemek için gönüllü arıyor: bir haftalık teneffüsler feda. Zeynep çoktan yazıldı; sana bakıyor.",
       sol: { etiket: "Teneffüsümden olmam", sonuc: "Bahçe maçları devam eder. Kütüphane de bir hafta daha 'aranan kitap bulunamadı' modunda kalır.", vicdan: -3, arkadaslik: 2, aile: 0, ozguven: 0 },
       sag: { etiket: "Ben de yazılırım", sonuc: "Bir hafta sonra raflar ordu gibi dizili. Murat Bey ilk üyelik kartlarını uzatır: 001 Zeynep, 002 sen.", vicdan: 6, arkadaslik: 3, aile: 0, ozguven: 3 }
+    },
+    {
+      id: "c13", bolum: 5, karakter: "kagan",
+      metin: "Grup projesinde sunumu kimin yapacağını konuşuyorsunuz. Kağan 'ben de anlatmak isterim' diyor ama sınıf kürsüsüne çıkış rampasız, iki basamaklı.",
+      sol: { etiket: "Başka biri anlatsın, daha kolay olur", sonuc: "Sunumu Zeynep yapar, iş akar gider. Kağan notlarını Zeynep'e fısıldar, ama sesi hiç duyulmaz.", vicdan: -6, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Kürsüye değil, aramıza gelsin öğretmene söyleriz", sonuc: "Nazan Öğretmen düzeni değiştirir, sunum sınıfın ortasında yapılır. Kağan ilk kez kürsüsüz de olsa herkesin gözünün içine bakarak anlatır.", vicdan: 10, arkadaslik: 6, aile: 0, ozguven: 0 }
     },
     {
       id: "c10", bolum: 5, karakter: "anne",
@@ -470,7 +494,7 @@ const ICERIK = {
       sag: { etiket: "Benim, özür dilerim", sonuc: "'Yenisini alacağım' dersin. Elif derin nefes alır: 'Keşke baştan söyleseydin.' Üç haftalık harçlık gider; yük biter.", vicdan: 14, arkadaslik: 4, aile: 0, ozguven: 2 }
     },
     {
-      id: "f04", bolum: 4, kosul: "dedikoduYaydin", karakter: "burak",
+      id: "f04", bolum: 4, kosul: "dedikoduYaydin", karakter: "burak", tartisma: true,
       metin: "Burak önünü kesiyor: 'Eski okulumla ilgili dedikoduya senin de ortak olduğunu söylediler.' Yumrukları sıkılı ama gözleri kırgın.",
       sol: { etiket: "Emir başlattı, derim", sonuc: "Topu arkadaşına atarsın. Burak 'hepiniz aynısınız' der; haksız sayılmaz.", vicdan: -12, arkadaslik: -6, aile: 0, ozguven: -3 },
       sag: { etiket: "Payım var, özür dilerim", sonuc: "Burak uzun uzun bakar: 'İlk kez biri düzgünce özür diledi.' Yumruklar yavaşça çözülür.", vicdan: 14, arkadaslik: 4, aile: 0, ozguven: -2 }

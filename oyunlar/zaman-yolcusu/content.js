@@ -49,7 +49,12 @@ const ICERIK = {
         tip: "iyi",
         gorsel: "s1-iyi.jpg"
       },
-      ders: "Not bir günün, öğrenmek ömrün karnesidir. Emekle kazanılan bilgi kimseden ödünç alınmaz; hep senin kalır."
+      ders: "Not bir günün, öğrenmek ömrün karnesidir. Emekle kazanılan bilgi kimseden ödünç alınmaz; hep senin kalır.",
+      kupe: {
+        soz: "Emek olmadan yemek olmaz.",
+        kaynak: "Türk Atasözü",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -72,7 +77,12 @@ const ICERIK = {
         tip: "kotu",
         gorsel: "s2-kotu.jpg"
       },
-      ders: "Ekranda bir saniye süren şey, birinin içinde yıllarca sürebilir. Paylaşmadan önce tek soru yeter: Bu benim fotoğrafım olsaydı ne isterdim?"
+      ders: "Ekranda bir saniye süren şey, birinin içinde yıllarca sürebilir. Paylaşmadan önce tek soru yeter: Bu benim fotoğrafım olsaydı ne isterdim?",
+      kupe: {
+        soz: "Kendine yapılmasını istemediğin bir şeyi başkasına yapma.",
+        kaynak: "Yazarı Bilinmeyen Özdeyiş",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -95,7 +105,12 @@ const ICERIK = {
         tip: "kotu",
         gorsel: "s3-kotu.jpg"
       },
-      ders: "Borç küçük olabilir ama söz büyüktür. Güven bir günde kazanılmaz; tutulan küçük sözlerle ilmek ilmek örülür."
+      ders: "Borç küçük olabilir ama söz büyüktür. Güven bir günde kazanılmaz; tutulan küçük sözlerle ilmek ilmek örülür.",
+      kupe: {
+        soz: "Sözünde durmayanın yüzüne bakılmaz.",
+        kaynak: "Yazarı Bilinmeyen Özdeyiş",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -118,7 +133,12 @@ const ICERIK = {
         tip: "iyi",
         gorsel: "s4-iyi.jpg"
       },
-      ders: "Kaza herkesin başına gelir; seni anlatan şey kaza değil, sonrasında verdiğin karardır. Suçu atmak bir anlık rahatlık, üstlenmek ömürlük bir duruştur."
+      ders: "Kaza herkesin başına gelir; seni anlatan şey kaza değil, sonrasında verdiğin karardır. Suçu atmak bir anlık rahatlık, üstlenmek ömürlük bir duruştur.",
+      kupe: {
+        soz: "Yalanın belini bükmüşler, doğruluk çıkmış ortaya.",
+        kaynak: "Yazarı Bilinmeyen Özdeyiş",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -141,7 +161,12 @@ const ICERIK = {
         tip: "iyi",
         gorsel: "s5-iyi.jpg"
       },
-      ders: "Oyun düşman değildir; plansızlık düşmandır. Dengeyi kuran hem oynar hem kazanır, üstelik ikisinin de tadını çıkararak."
+      ders: "Oyun düşman değildir; plansızlık düşmandır. Dengeyi kuran hem oynar hem kazanır, üstelik ikisinin de tadını çıkararak.",
+      kupe: {
+        soz: "Bugünün işini yarına bırakma.",
+        kaynak: "Türk Atasözü",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -164,7 +189,12 @@ const ICERIK = {
         tip: "kotu",
         gorsel: "s6-kotu.jpg"
       },
-      ders: "Maçlar biter, skorlar unutulur; bir komşunun duası ve güveni yıllarca seninle yürür. İyilik, ertelemeye gelmeyen bir randevudur."
+      ders: "Maçlar biter, skorlar unutulur; bir komşunun duası ve güveni yıllarca seninle yürür. İyilik, ertelemeye gelmeyen bir randevudur.",
+      kupe: {
+        soz: "Komşu komşunun külüne muhtaçtır.",
+        kaynak: "Türk Atasözü",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -187,7 +217,12 @@ const ICERIK = {
         tip: "iyi",
         gorsel: "s7-iyi.jpg"
       },
-      ders: "Kul hakkı gramla ölçülmez; en küçüğü bile vicdan terazisinde ağır çeker. Helalinden az, haramdan çoktan her zaman iyidir."
+      ders: "Kul hakkı gramla ölçülmez; en küçüğü bile vicdan terazisinde ağır çeker. Helalinden az, haramdan çoktan her zaman iyidir.",
+      kupe: {
+        soz: "Helal kazanç, az da olsa bereketlidir.",
+        kaynak: "Yazarı Bilinmeyen Özdeyiş",
+        kisaKaynak: ""
+      }
     },
 
     {
@@ -210,7 +245,12 @@ const ICERIK = {
         tip: "kotu",
         gorsel: "s8-kotu.jpg"
       },
-      ders: "Bugünün küçük vazgeçişleri, yarının büyük 'iyi ki'leridir. Sabır, kâr oranı en yüksek kumbaradır."
+      ders: "Bugünün küçük vazgeçişleri, yarının büyük 'iyi ki'leridir. Sabır, kâr oranı en yüksek kumbaradır.",
+      kupe: {
+        soz: "Damlaya damlaya göl olur.",
+        kaynak: "Türk Atasözü",
+        kisaKaynak: ""
+      }
     }
 
   ],

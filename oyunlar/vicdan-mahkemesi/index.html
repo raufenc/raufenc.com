@@ -25,7 +25,7 @@
   --altin:#D9A441;
   --kagit:#FFFDF7;
   --cizgi:rgba(43,33,24,.14);
-  --soluk:rgba(43,33,24,.62);
+  --soluk:rgba(43,33,24,.70); /* WCAG AA metin kontrastı için .62'den yükseltildi */
   --golge:0 10px 30px rgba(43,33,24,.10);
 }
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
@@ -49,6 +49,18 @@ img{ max-width:100%; }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
 }
+/* ============ Sınıf Modu (?sinif=1) — büyük yazı, projeksiyon için ============ */
+body.sinif-modu{ font-size:19px; }
+body.sinif-modu h2{ font-size:26px; }
+body.sinif-modu .adim-baslik{ font-size:23px; }
+body.sinif-modu .balon,
+body.sinif-modu .soru,
+body.sinif-modu .ceza-sec,
+body.sinif-modu .not-kart p,
+body.sinif-modu .perde p{ font-size:17.5px; }
+body.sinif-modu .btn,
+body.sinif-modu .hukum-btn{ font-size:19px; }
+body.sinif-modu .adim-ad{ font-size:12.5px; }
 
 /* ============ Üst şerit ============ */
 .ust{
@@ -434,6 +446,57 @@ img{ max-width:100%; }
 @keyframes modalGel{ from{ opacity:0; transform:translateY(14px) scale(.97); } }
 .modal-kutu h3{ font-size:19px; }
 .modal-kutu p{ font-size:14.5px; }
+
+/* ============ Sınıf Jürisi ara ekranı ============ */
+.juri-kart{ text-align:center; }
+.juri-kart .juri-emoji{ font-size:44px; display:block; margin-bottom:8px; }
+.juri-kart h3{ font-size:20px; }
+.juri-kart p{ font-size:15px; text-align:left; }
+.juri-secenekler{
+  display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:12px 0 4px;
+}
+.juri-secenekler span{
+  background:rgba(74,124,89,.1); color:var(--yesil); border:1.5px solid rgba(74,124,89,.3);
+  border-radius:999px; padding:8px 14px; font-weight:700; font-size:13.5px;
+}
+
+/* ============ Ayet kutusu ============ */
+.ayet-kutu{
+  border-left:6px solid var(--yesil); background:rgba(74,124,89,.08);
+  border-radius:16px; padding:16px 18px; margin:0 0 14px;
+}
+.ayet-kutu p{
+  font-family:"Fraunces",Georgia,serif; font-style:italic; font-size:15.5px; line-height:1.65; margin:0 0 6px;
+  color:var(--kahve);
+}
+.ayet-kaynak{ font-size:12.5px; color:var(--soluk); font-weight:600; font-style:normal; }
+
+/* ============ Öğretmen köşesi linki ============ */
+.ogretmen-link{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-height:44px; padding:10px 16px; margin:4px 0 0; font-weight:600; font-size:14.5px;
+  border-radius:14px; text-decoration:none; color:var(--yesil);
+  border:1.5px dashed rgba(74,124,89,.4);
+}
+.ogretmen-link:hover{ background:rgba(74,124,89,.08); }
+
+/* ============ Berat yazdırma ============ */
+.beraet-yazdir-btn{ background:var(--altin); color:#4A3410; box-shadow:0 8px 20px rgba(217,164,65,.3); }
+#beraet-yazdir-alani{ display:none; }
+@media print{
+  body *{ visibility:hidden; }
+  .ust, .modal-katman{ display:none !important; }
+  #beraet-yazdir-alani, #beraet-yazdir-alani *{ visibility:visible; }
+  #beraet-yazdir-alani{
+    display:block; position:absolute; left:0; top:0; width:100%; padding:24px;
+    font-family:"Fraunces",Georgia,serif; color:#000;
+  }
+  #beraet-yazdir-alani h1{ font-size:26px; text-align:center; margin-bottom:4px; }
+  #beraet-yazdir-alani .beraet-alt{ text-align:center; font-size:14px; margin-bottom:18px; }
+  #beraet-yazdir-alani .beraet-ad-satiri{ margin:22px 0; font-size:15px; }
+  #beraet-yazdir-alani table{ width:100%; border-collapse:collapse; font-size:12.5px; margin-top:10px; }
+  #beraet-yazdir-alani th, #beraet-yazdir-alani td{ border:1px solid #999; padding:6px 8px; text-align:left; }
+}
 </style>
 </head>
 <body>
@@ -457,6 +520,8 @@ img{ max-width:100%; }
     <div id="modal-butonlar"></div>
   </div>
 </div>
+
+<div id="beraet-yazdir-alani" aria-hidden="true"></div>
 
 <script src="content.js"></script>
 <script>
@@ -528,8 +593,15 @@ var MAX_PUAN = ICERIK.vakalar.reduce(function(t,v){
 }, 0);
 
 /* ============ Durum ============ */
+/* Sınıf Modu: ?sinif=1 ile açılır. Hüküm adımına girerken (Delillerden sonra)
+   bir "Sınıf Jürisi" ara ekranı gösterilir; normal modda hiç görünmez. */
+var SINIF_MODU = (function(){
+  try{
+    return /[?&]sinif=1(&|$)/.test(window.location.search);
+  }catch(e){ return false; }
+})();
 function tazeVaka(){
-  return { adim:'olay', faz:'secim', sorulan:{}, incelenen:[], uyariVerildi:false,
+  return { adim:'olay', faz: SINIF_MODU ? 'juri' : 'secim', sorulan:{}, incelenen:[], uyariVerildi:false,
            hukum:null, hukumPuan:0, cezaTip:null, cezaPuan:0, acikKarakter:null };
 }
 function tazeState(){
@@ -546,6 +618,7 @@ function kayitYukle(){
     if(!s || s.surum !== 1 || !s.vaka || !Array.isArray(s.sonuclar)) return null;
     if(s.ekran !== 'final' &&
        (typeof s.vakaIndex !== 'number' || s.vakaIndex < 0 || s.vakaIndex >= ICERIK.vakalar.length)) return null;
+    if(s.vaka && s.vaka.faz === 'juri' && !SINIF_MODU) s.vaka.faz = 'secim';
     return s;
   }catch(e){ return null; }
 }
@@ -625,7 +698,10 @@ function ekranAcilis(){
     '</div>' +
     '<p class="oyun-alt">' + esc(ICERIK.giris.baslik) + '</p>' +
     '<div class="kart giris-kart"><p>' + esc(ICERIK.giris.metin) + '</p></div>' +
+    '<div class="ayet-kutu"><p>"…İnsanlar arasında hükmettiğiniz zaman adaletle hükmetmenizi emrediyor."</p>' +
+      '<span class="ayet-kaynak">— Nisâ Sûresi, 4:58 (meal)</span></div>' +
     butonlar +
+    '<a class="ogretmen-link" href="./ogretmen/">📚 Öğretmenler İçin</a>' +
   '</section>';
 }
 
@@ -656,7 +732,7 @@ function adimlarHTML(v){
     var tamam = false;
     if(a.id === 'ifadeler') tamam = sorulanSayisi() >= toplamSoru(v);
     if(a.id === 'deliller') tamam = state.vaka.incelenen.length >= v.deliller.length;
-    if(a.id === 'hukum')    tamam = state.vaka.faz !== 'secim';
+    if(a.id === 'hukum')    tamam = (state.vaka.faz === 'sonuc' || state.vaka.faz === 'ceza' || state.vaka.faz === 'ders');
     html += '<button class="adim' + (aktif?' aktif':'') + (tamam?' tamam':'') + '" ' +
       'data-eylem="adim" data-adim="' + a.id + '"' + (aktif?' aria-current="step"':'') + '>' +
       '<span class="adim-ikon">' + a.ikon + '</span><span class="adim-ad">' + a.ad + '</span></button>';
@@ -708,7 +784,7 @@ function ifadelerHTML(v){
           '<span aria-hidden="true">' + (soruldu?'✓':'❓') + '</span><span>' + esc(s.soru) + '</span></button>';
         if(soruldu){
           var yeni = sonSoru === t.karakter + ':' + i;
-          html += '<div class="balon' + (yeni?' balon-yeni':'') + '">' +
+          html += '<div class="balon' + (yeni?' balon-yeni':'') + '" role="status" aria-live="polite">' +
             portreHTML(t.karakter,'balon-portre') +
             '<div class="balon-icerik"><span class="balon-ad">' + esc(k.ad) + '</span>' +
             '<p>' + esc(s.cevap) + '</p></div></div>';
@@ -738,6 +814,17 @@ function delillerHTML(v){
 
 function hukumHTML(v){
   var faz = state.vaka.faz;
+
+  /* 0) Sınıf Modu — Jüri Oylaması ara ekranı (yalnız ?sinif=1 ile) */
+  if(faz === 'juri' && SINIF_MODU){
+    return '<div class="kart juri-kart">' +
+        '<span class="juri-emoji" aria-hidden="true">👥</span>' +
+        '<h3 class="adim-baslik">Sınıf Jürisi</h3>' +
+        '<p>Öğretmenin sınıfa sorsun — el kaldırarak oy verin: <b>Suçlu mu, Suçsuz mu, Delil Yetersiz mi?</b> Sonra hâkim kürsüden hükmünü versin.</p>' +
+        '<div class="juri-secenekler"><span>⚖️ Suçlu</span><span>🕊️ Suçsuz</span><span>📂 Delil Yetersiz</span></div>' +
+      '</div>' +
+      '<button class="btn birincil" data-eylem="faz" data-faz="secim">Oylama bitti, hükmü ver ▸</button>';
+  }
 
   /* 1) Hüküm seçimi */
   if(faz === 'secim'){
@@ -845,7 +932,30 @@ function ekranFinal(){
     '<h3 class="ozet-baslik">📋 Dosya Özeti</h3>' +
     '<div class="ozet-tablo">' + satirlar + '</div>' +
     '<button class="btn birincil" data-eylem="tekrar">Tekrar Oyna ↺</button>' +
+    '<button class="btn beraet-yazdir-btn" data-eylem="beraet-yazdir">🖨 Beratı Yazdır</button>' +
   '</section>';
+}
+
+/* Yazdırma için ayrı, sade bir berat metni oluşturur (ekran görünümünü etkilemez) */
+function beraetYazdirHazirla(){
+  var r = rutbeBul(state.puan);
+  var satirlar = '';
+  state.sonuclar.forEach(function(s,i){
+    var v = ICERIK.vakalar[i];
+    if(!v) return;
+    var sen = HUKUMLER[s.hukum] || { etiket:'—', emoji:'' };
+    var dog = HUKUMLER[v.dogruHukum];
+    satirlar += '<tr><td>' + (i+1) + '</td><td>' + esc(v.baslik) + '</td>' +
+      '<td>' + esc(sen.etiket) + '</td><td>' + esc(dog.etiket) + '</td>' +
+      '<td>' + (s.dogru ? 'Doğru' : 'Farklı') + '</td></tr>';
+  });
+  var alan = document.getElementById('beraet-yazdir-alani');
+  alan.innerHTML =
+    '<h1>' + esc(ICERIK.oyunAdi) + ' — Hâkimlik Beratı</h1>' +
+    '<p class="beraet-alt">Rütbe: ' + esc(r.emoji) + ' ' + esc(r.ad) + ' · ⚖️ ' + state.puan + ' / ' + MAX_PUAN + ' Adalet Puanı</p>' +
+    '<p class="beraet-ad-satiri">Ad Soyad: ________________________________</p>' +
+    '<table><thead><tr><th>#</th><th>Dosya</th><th>Hükmün</th><th>Doğrusu</th><th>Sonuç</th></tr></thead>' +
+    '<tbody>' + satirlar + '</tbody></table>';
 }
 
 /* ============ Çizim ============ */
@@ -860,7 +970,16 @@ function render(basaKaydir){
   app.innerHTML = html;
   sonSoru = null;
   ustGuncelle();
-  if(basaKaydir) window.scrollTo(0,0);
+  if(basaKaydir){
+    window.scrollTo(0,0);
+    /* Erişilebilirlik: adım/ekran değişince odağı ekranın başlığına taşı,
+       klavye ve ekran okuyucu kullanıcıları yeni içeriğin başında kalsın. */
+    var odakHedefi = app.querySelector('h1, h2, .adim-baslik, h3');
+    if(odakHedefi){
+      if(!odakHedefi.hasAttribute('tabindex')) odakHedefi.setAttribute('tabindex','-1');
+      odakHedefi.focus({ preventScroll:true });
+    }
+  }
 }
 function ustGuncelle(){
   var cip = document.getElementById('puanCip');
@@ -1035,6 +1154,10 @@ document.addEventListener('click', function(e){
     case 'faz':          state.vaka.faz = el.dataset.faz; kaydet(); render(true); break;
     case 'sonraki-vaka': sonrakiVaka(); break;
     case 'tekrar':       oyunaBasla(); break;
+    case 'beraet-yazdir':
+      beraetYazdirHazirla();
+      window.print();
+      break;
     case 'sifirla-sor':  sifirlaSor(); break;
     case 'modal-kapat':  if(modalKapatilabilir) modalKapat(); break;
   }
@@ -1046,6 +1169,7 @@ document.addEventListener('keydown', function(e){
 });
 
 /* ============ Başlat ============ */
+if(SINIF_MODU) document.body.classList.add('sinif-modu');
 render(true);
 })();
 </script>
