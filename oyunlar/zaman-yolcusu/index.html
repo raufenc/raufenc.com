@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/zaman-yolcusu.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌚</text></svg>">
+<link rel="manifest" href="./manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -58,6 +59,15 @@ header{
   border-radius:12px;
 }
 .geri-link:hover,.geri-link:focus-visible{ color:var(--murekkep); background:rgba(43,33,24,.06); }
+.ust-sol{ display:flex; align-items:center; gap:4px; }
+.ses-dugme{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:44px; min-height:44px; padding:0;
+  background:transparent; border:1.5px solid transparent; border-radius:12px;
+  color:var(--soluk); font-size:1.1rem; cursor:pointer;
+}
+.ses-dugme:hover,.ses-dugme:focus-visible{ color:var(--murekkep); background:rgba(43,33,24,.06); }
+.ses-dugme:focus-visible{ outline:3px solid var(--altin); outline-offset:2px; }
 .durum-grubu{ display:flex; align-items:center; gap:10px; }
 .puan-rozet{
   display:inline-flex; align-items:center; gap:5px;
@@ -475,7 +485,10 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
 <body>
 
 <header>
-  <a class="geri-link" href="../">← Oyunlar</a>
+  <div class="ust-sol">
+    <a class="geri-link" href="../">← Oyunlar</a>
+    <button class="ses-dugme" id="sesDugme" type="button" aria-label="Ses efektlerini aç/kapat" title="Ses efektlerini aç/kapat">🔇</button>
+  </div>
   <div class="durum-grubu" id="durumGrubu" hidden>
     <span class="puan-rozet" title="Karakter Puanı">🧭 <b id="puanDeger">0</b></span>
     <div class="noktalar" id="noktalar" aria-label="Durak ilerlemesi"></div>
@@ -517,6 +530,7 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
   </div>
 </div>
 
+<script src="../lib/ses.js"></script>
 <script src="content.js"></script>
 <script>
 (function(){
@@ -525,6 +539,7 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
   /* ---------- Sabitler ve durum ---------- */
   var KAYIT_ANAHTARI = 'zamanYolcusu.v1';
   var MUHUR_ANAHTARI = 'zaman_muhur_v1';   // "iki dalı da gördüm" mühürleri — oyun sıfırlansa da SİLİNMEZ
+  var OZET_ANAHTARI = 'hayalOrtaokulu_ozet_v1';   // 3 oyun ortak cross-game özet (origin paylaşılır)
   var GORSEL_YOLU = '../assets/zaman/';
   // Görsel yüklenemezse gösterilecek senaryo emojileri
   var SENARYO_EMOJI = { s1:'📝', s2:'📱', s3:'🪙', s4:'⚽', s5:'🎮', s6:'🛍️', s7:'🥪', s8:'📷' };
@@ -628,6 +643,39 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
     return n;
   }
 
+  /* ---------- Cross-game özet hook (ORTAK: hayalOrtaokulu_ozet_v1) ----------
+     Final ekranına ulaşılınca OKU-GÜNCELLE-YAZ deseniyle yalnız "zamanYolcusu"
+     anahtarını günceller; diğer oyunların verisine dokunmaz. */
+  function ozetYaz(){
+    try{
+      var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || '{}');
+      ozet.zamanYolcusu = {
+        tamamlandi: true,
+        muhurSayisi: muhurSayisi(),
+        karakterPuani: puanHesapla(),
+        tarih: new Date().toISOString().slice(0, 10)
+      };
+      localStorage.setItem(OZET_ANAHTARI, JSON.stringify(ozet));
+    }catch(e){ /* localStorage başarısız olursa oyun akışı bozulmasın */ }
+  }
+
+  /* ---------- Yankı metni: diğer oyunlardan (Vicdan) gelen izin varsa
+     açılış metninin altına küçük, silik bir ek cümle ekler. Koşul
+     sağlanmazsa sessizce boş string döner, hiçbir şey eklenmez. */
+  function yankiMetniHtml(){
+    try{
+      var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || '{}');
+      var vicdan = ozet && ozet.vicdan;
+      if (vicdan && vicdan.tamamlandi && typeof vicdan.finalStatlar === 'object' &&
+          vicdan.finalStatlar && Number(vicdan.finalStatlar.vicdan) >= 70){
+        return '<p class="metin metin-soluk" style="font-size:.85rem; margin-top:10px">' +
+          esc('Saat sanki seni tanıyor gibi parlıyor — daha önce de doğru seçimler yaptığını biliyor.') +
+          '</p>';
+      }
+    }catch(e){ /* sessizce atla */ }
+    return '';
+  }
+
   /* ---------- Görsel ön yükleme ----------
      Kısa vade ekranı gösterilirken, o senaryonun HEM iyi HEM kötü dal
      görselini arka planda tarayıcı önbelleğine alır. */
@@ -693,6 +741,7 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
   /* ---------- Zaman geçişi animasyonu (~1.85 sn, saf CSS) ---------- */
   function zamanGecisi(geriMi, metin, sonra){
     kilit = true;
+    if (window.HOSes && typeof window.HOSes.tikVinilti === 'function') window.HOSes.tikVinilti();
     var g = document.getElementById('gecis');
     g.classList.toggle('geri', !!geriMi);
     document.getElementById('gecisMetin').textContent = metin;
@@ -751,6 +800,7 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
       '<div class="kart giris-kart" style="margin-top:18px">' +
         '<h2 style="font-size:1.15rem">🕰️ ' + esc(ICERIK.giris.baslik) + '</h2>' +
         '<p class="metin">' + esc(ICERIK.giris.metin) + '</p>' +
+        yankiMetniHtml() +
         '<div class="buton-grubu">' + butonlar + '</div>' +
       '</div>' +
       '<div class="orta">' +
@@ -941,6 +991,7 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
   function ekranFinal(){
     ekranAdi = 'final';
     durumGuncelle(false);
+    ozetYaz();
     var puan = puanHesapla();
     var cift = ciftDalSayisi();
     var toplam = ICERIK.senaryolar.length;
@@ -1037,10 +1088,31 @@ body.sinif-modu .etiket,body.sinif-modu .deger-rozet{ font-size:.92rem; }
     }
   });
 
+  /* ---------- Ses aç/kapa düğmesi ---------- */
+  var sesDugme = document.getElementById('sesDugme');
+  function sesIkonuGuncelle(){
+    var acik = window.HOSes && typeof window.HOSes.acikMi === 'function' && window.HOSes.acikMi();
+    sesDugme.textContent = acik ? '🔊' : '🔇';
+    sesDugme.setAttribute('aria-pressed', acik ? 'true' : 'false');
+  }
+  if (sesDugme){
+    sesDugme.addEventListener('click', function(){
+      if (window.HOSes && typeof window.HOSes.acKapa === 'function') window.HOSes.acKapa();
+      sesIkonuGuncelle();
+    });
+    sesIkonuGuncelle();
+  }
+
   /* ---------- Başlat ---------- */
   durum = kayitOku() || bosDurum();
   ekranGiris();
 })();
+</script>
+<script>
+/* PWA / çevrimdışı destek: opsiyonel katman, hata olsa da oyunu bozmaz */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
+}
 </script>
 </body>
 </html>

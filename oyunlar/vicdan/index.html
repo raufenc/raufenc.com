@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F5EDE0">
 <title>Vicdan — Kart Kaydırma Oyunu</title>
-<meta name="description" content="Hayal Ortaokulu'nda beş hafta: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
+<meta name="description" content="Hayal Ortaokulu'nda bir dönem: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
 <meta property="og:title" content="Vicdan — Kart Kaydırma Oyunu">
-<meta property="og:description" content="Hayal Ortaokulu'nda beş hafta: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
+<meta property="og:description" content="Hayal Ortaokulu'nda bir dönem: kartı sola ya da sağa kaydır. Her seçim vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://raufenc.com/oyunlar/vicdan/">
 <meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/vicdan.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.webmanifest">
 <style>
 /* ---------- Temel ---------- */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -37,6 +38,14 @@ button{font-family:inherit;color:inherit}
   font-size:.82rem;font-weight:600;text-decoration:none;color:#4A7C59;
   padding:10px 12px;border-radius:12px;background:rgba(255,253,248,.75);
   box-shadow:0 2px 8px rgba(43,33,24,.08);
+}
+
+/* ---------- Ses aç/kapa düğmesi ---------- */
+.ses-dugme{
+  position:fixed;top:10px;right:10px;z-index:60;
+  min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:1.15rem;border:none;border-radius:12px;cursor:pointer;
+  background:rgba(255,253,248,.75);box-shadow:0 2px 8px rgba(43,33,24,.08);
 }
 
 /* ---------- Ekran iskeleti ---------- */
@@ -263,6 +272,34 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
 }
 .secimler.pasif{opacity:.35;pointer-events:none}
 
+/* ---------- Gerekçe adımı (mini-adım: "Bu seçimi neden yaptın?") ---------- */
+.gerekce-katman{
+  position:fixed;inset:0;z-index:150;background:rgba(43,33,24,.5);
+  display:flex;align-items:flex-end;justify-content:center;padding:0 14px calc(14px + env(safe-area-inset-bottom));
+}
+.gerekce-katman.gizli{display:none}
+.gerekce-kutu{
+  width:min(400px,100%);background:#F5EDE0;border-radius:20px 20px 14px 14px;
+  padding:18px 18px 16px;box-shadow:0 -8px 30px rgba(43,33,24,.25);
+  animation:gerekceYukari .3s ease;
+}
+@keyframes gerekceYukari{from{transform:translateY(24px);opacity:0}}
+.gerekce-baslik{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.05rem;margin-bottom:12px;text-align:center}
+.gerekce-secenekler{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.gerekce-chip{
+  min-height:44px;padding:9px 16px;border:2px solid rgba(43,33,24,.18);border-radius:999px;
+  background:#FFFDF8;font-weight:600;font-size:.85rem;cursor:pointer;transition:transform .12s ease;
+}
+.gerekce-chip:active{transform:scale(.95)}
+
+/* ---------- Final: Neden Seçtin özeti ---------- */
+.neden-sectin{
+  width:min(340px,100%);background:#FFFDF8;border-radius:16px;padding:14px 16px;
+  font-size:.85rem;line-height:1.55;color:rgba(43,33,24,.85);
+  box-shadow:0 6px 16px rgba(43,33,24,.08);z-index:1;
+}
+.neden-sectin-baslik{font-weight:700;margin-bottom:4px}
+
 /* ---------- Kader kartı (ozelTip:"kader") ---------- */
 .kart.kader-sallanir{animation:kaderSallan 1.4s ease forwards}
 @keyframes kaderSallan{
@@ -329,6 +366,7 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
 </head>
 <body>
 <a class="geri" href="../">← Oyunlar</a>
+<button id="btn-ses" class="ses-dugme" type="button" aria-label="Sesi aç/kapat">🔇</button>
 <main>
 
   <!-- Açılış -->
@@ -339,7 +377,7 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     </div>
     <div class="ust-baslik">Hayal Ortaokulu</div>
     <h1 class="oyun-adi">Vicdan</h1>
-    <p class="tanitim">Beş hafta, onlarca seçim. Kartı sola ya da sağa kaydır; her karar vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.</p>
+    <p class="tanitim">Bir dönem, onlarca seçim. Kartı sola ya da sağa kaydır; her karar vicdanında, arkadaşlıklarında, ailende ve özgüveninde bir iz bırakır.</p>
     <div class="denge-serit" aria-hidden="true">
       <span>❤️</span><span>🤝</span><span>🏠</span><span>⭐</span>
       <em>bunları dengede tut</em>
@@ -415,6 +453,10 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     <p class="tanitim" id="final-genel" style="z-index:1"></p>
     <div class="karne" id="karne"></div>
     <div class="final-yorum" id="final-yorum"></div>
+    <div class="neden-sectin gizli" id="neden-sectin">
+      <div class="neden-sectin-baslik">🧭 Neden Seçtin?</div>
+      <div id="neden-sectin-metin"></div>
+    </div>
     <button id="btn-final-tekrar" class="btn" style="z-index:1">Tekrar Oyna</button>
     <button id="btn-final-yazdir" class="btn ikincil" style="z-index:1">🖨 Karneyi Yazdır</button>
   </section>
@@ -422,6 +464,20 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
 </main>
 <div id="toast" role="status" aria-live="polite"></div>
 
+<!-- Gerekçe adımı: "Bu seçimi neden yaptın?" mini-sorusu -->
+<div id="gerekce-katman" class="gerekce-katman gizli" role="dialog" aria-modal="true" aria-labelledby="gerekce-baslik">
+  <div class="gerekce-kutu">
+    <div class="gerekce-baslik" id="gerekce-baslik">Bu seçimi neden yaptın?</div>
+    <div class="gerekce-secenekler">
+      <button type="button" class="gerekce-chip" data-gerekce="kural">Kural öyle diyor</button>
+      <button type="button" class="gerekce-chip" data-gerekce="iliski">Arkadaşım/ailem için</button>
+      <button type="button" class="gerekce-chip" data-gerekce="vicdan">İçimden öyle geldi</button>
+      <button type="button" class="gerekce-chip" data-gerekce="korku">Ceza almamak için</button>
+    </div>
+  </div>
+</div>
+
+<script src="../lib/ses.js"></script>
 <script src="content.js"></script>
 <script>
 "use strict";
@@ -469,6 +525,47 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   var ESIK_ORANI = 0.3;          // kart genişliğinin %30'u aşılırsa seçim
   var kartMap = new Map();
   ICERIK.kartlar.forEach(function(k){ kartMap.set(k.id, k); });
+
+  /* ---------- Cross-game özet şeması ---------- */
+  var OZET_ANAHTARI = "hayalOrtaokulu_ozet_v1";
+
+  /* ---------- Gerekçe adımı ---------- */
+  var GEREKCE_ANAHTARI = "vicdan_gerekce_sayaci_v1";
+  var gerekceBekleyenDevam = null; /* seçim sonrası gerekçe modalı kapanınca çalışacak devam fonksiyonu */
+  var GEREKCE_ETIKETLERI = {
+    kural: "Kural öyle diyor", iliski: "Arkadaşım/ailem için",
+    vicdan: "İçimden öyle geldi", korku: "Ceza almamak için"
+  };
+  function gerekceSayaciOku(){
+    try {
+      var h = localStorage.getItem(GEREKCE_ANAHTARI);
+      var d = h ? JSON.parse(h) : {};
+      return (d && typeof d === "object") ? d : {};
+    } catch(e){ return {}; }
+  }
+  function gerekceSayaciYaz(d){ try { localStorage.setItem(GEREKCE_ANAHTARI, JSON.stringify(d)); } catch(e){} }
+  function gerekceKartMi(kartId){
+    /* Basit, deterministik örüntü: id'nin karakter kodlarının toplamı 4'e bölününce 0 kalırsa sor.
+       Bu, içerik dosyasına dokunmadan ~15-18 kart civarı bir seçim sağlar (id sayısı sabit). */
+    var toplam = 0;
+    for (var i = 0; i < kartId.length; i++) toplam += kartId.charCodeAt(i);
+    return (toplam % 4) === 0;
+  }
+  function gerekceGoster(devamFn){
+    gerekceBekleyenDevam = devamFn;
+    el("gerekce-katman").classList.remove("gizli");
+  }
+  function gerekceKapat(sec){
+    el("gerekce-katman").classList.add("gizli");
+    if (sec) {
+      var d = gerekceSayaciOku();
+      d[sec] = (d[sec] || 0) + 1;
+      gerekceSayaciYaz(d);
+    }
+    var fn = gerekceBekleyenDevam;
+    gerekceBekleyenDevam = null;
+    if (fn) fn();
+  }
 
   /* Sınıf modu: ?sinif=1 URL parametresiyle açılır */
   var SINIF_MODU = false;
@@ -619,6 +716,22 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   }
   function noktalariGizle(){ noktalariGoster(null, 0); }
 
+  /* ---------- Yankı kartı: Mahkeme oyununda kazanılmış rütbeye göre runtime'da üretilir ---------- */
+  function yankiKartiKurGirisim(){
+    if (kartMap.has("yanki01")) return; /* zaten kurulu */
+    try {
+      var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || "{}");
+      var rutbe = ozet && ozet.vicdanMahkemesi && ozet.vicdanMahkemesi.rutbe;
+      if (!rutbe) return;
+      kartMap.set("yanki01", {
+        id: "yanki01", bolum: 1, karakter: "ogretmen",
+        metin: "Duydum ki sınıf mahkemesinde adil bir hâkimmişsin... " + rutbe + " rütbesini hak etmişsin. Vicdanın orada da, burada da seninle.",
+        sol: { etiket: "Elimden geleni yaparım", sonuc: "Nazan Öğretmen gülümser: 'Adalet bir yerde öğrenilince her yerde iz bırakır.'", vicdan: 4, arkadaslik: 2, aile: 0, ozguven: 3 },
+        sag: { etiket: "Umarım öyle olur", sonuc: "'Sen zaten öylesin' der Nazan Öğretmen, gözlerinde bir gurur.", vicdan: 3, arkadaslik: 2, aile: 0, ozguven: 4 }
+      });
+    } catch(e){}
+  }
+
   /* ---------- Oyun kurulumu ---------- */
   function yeniOyun(){
     durum = {
@@ -655,6 +768,11 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
         durum.gosterilen.push(k.id);
       }
     });
+    /* Yankı kartı: yalnız bölüm 1'de, yalnız Mahkeme oyunu daha önce oynanmışsa, deste kurulurken eklenir */
+    if (b.no === 1) {
+      yankiKartiKurGirisim();
+      if (kartMap.has("yanki01")) deste.splice(Math.floor(Math.random() * (deste.length + 1)), 0, "yanki01");
+    }
     durum.deste = deste;
     durum.desteBoy = deste.length;
     kaydet();
@@ -782,6 +900,7 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   /* Kader kartı çözümü: iki seçenek de aynı sonuca gider, oyuncu seçim yapmaz */
   function kaderCozumle(kart){
     durum.deste.shift();
+    durum.flags.kaderGorundu = true;
     var sec = kart.sol; /* sol ve sag aynı etkiye sahip olacak şekilde yazılmıştır */
     STATLAR.forEach(function(s){
       durum.stats[s.k] = Math.max(0, Math.min(100, durum.stats[s.k] + (sec[s.k] || 0)));
@@ -852,6 +971,8 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     durum.deste.shift();
     var sec = kart[yon];
 
+    if (window.HOSes && typeof window.HOSes.kartHisirti === "function") HOSes.kartHisirti();
+
     if (sec.flag && !durum.flags[sec.flag]) {
       durum.flags[sec.flag] = true;
       kosulluEkle(sec.flag);
@@ -861,12 +982,18 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     });
     kaydet();
     statlariCiz(sec);
-    toastGoster(sec.sonuc);
 
-    var son = sonKontrol();
-    if (son) { toastSonrasiDevam(function(){ sonGoster(son); }); return; }
-    if (!durum.deste.length) { toastSonrasiDevam(kupeGoster); return; }
-    toastSonrasiDevam(kartCiz);
+    function devamEt(){
+      toastGoster(sec.sonuc);
+      var son = sonKontrol();
+      if (son) { toastSonrasiDevam(function(){ sonGoster(son); }); return; }
+      if (!durum.deste.length) { toastSonrasiDevam(kupeGoster); return; }
+      toastSonrasiDevam(kartCiz);
+    }
+
+    /* Gerekçe adımı: bazı kartlarda seçimden hemen sonra, toast'tan önce sorulur */
+    if (gerekceKartMi(kart.id)) gerekceGoster(devamEt);
+    else devamEt();
   }
 
   /* Herhangi bir stat 0'a düşerse ya da arkadaşlık/özgüven 100'ü bulursa oyun biter
@@ -936,6 +1063,26 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
       dolular.push({ el:satir.querySelector(".karne-dolu"), v:durum.stats[s.k] });
     });
     el("final-yorum").textContent = ICERIK.sonlar.final.yorumlar[enIyi.k];
+
+    /* Neden Seçtin özeti: en sık seçilen gerekçe kategorisini nazikçe yansıt */
+    nedenSectinGoster();
+
+    /* Cross-game özet: oku-güncelle-yaz, yalnız "vicdan" anahtarını değiştir */
+    try {
+      var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || "{}");
+      var gorulenSayisi = gorulenSonlariOku().length;
+      ozet.vicdan = {
+        tamamlandi: true,
+        finalStatlar: {
+          vicdan: durum.stats.vicdan, arkadaslik: durum.stats.arkadaslik,
+          aile: durum.stats.aile, ozguven: durum.stats.ozguven
+        },
+        sonlarGorulenSayisi: gorulenSayisi,
+        kaderKartiGorundu: !!(durum.flags && durum.flags.kaderGorundu),
+        tarih: new Date().toISOString().slice(0, 10)
+      };
+      localStorage.setItem(OZET_ANAHTARI, JSON.stringify(ozet));
+    } catch(e){}
 
     ekranGoster("ekran-final");
     requestAnimationFrame(function(){
@@ -1008,6 +1155,25 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   function sonlarModalAc(){ sonlarModalDoldur(); el("modal-sonlar").classList.remove("gizli"); }
   function sonlarModalKapat(){ el("modal-sonlar").classList.add("gizli"); }
 
+  /* ---------- Neden Seçtin özeti (final ekranı) ---------- */
+  var GEREKCE_YORUMLARI = {
+    kural: "Çoğu zaman kuralları önemsedin; sınırları bilmek de bir erdemdir.",
+    iliski: "Çoğu zaman sevdiklerini düşünerek seçtin; ilişkiler senin için değerli.",
+    vicdan: "Çoğu zaman içinden geleni dinledin.",
+    korku: "Çoğu zaman sonuçları düşünerek seçtin; bu da bir çeşit sorumluluktur."
+  };
+  function nedenSectinGoster(){
+    var kutu = el("neden-sectin");
+    if (!kutu) return;
+    var d = gerekceSayaciOku();
+    var anahtarlar = Object.keys(d);
+    if (!anahtarlar.length) { kutu.classList.add("gizli"); return; }
+    var enCok = anahtarlar[0];
+    anahtarlar.forEach(function(k){ if (d[k] > d[enCok]) enCok = k; });
+    el("neden-sectin-metin").textContent = GEREKCE_YORUMLARI[enCok] || "";
+    kutu.classList.remove("gizli");
+  }
+
   /* ---------- Girdi bağlantıları ---------- */
   btnSol.addEventListener("click", function(){ ucur("sol"); });
   btnSag.addEventListener("click", function(){ ucur("sag"); });
@@ -1036,6 +1202,25 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
     else bolumIntroGoster();
   });
 
+  document.querySelectorAll(".gerekce-chip").forEach(function(btn){
+    btn.addEventListener("click", function(){ gerekceKapat(btn.getAttribute("data-gerekce")); });
+  });
+
+  /* ---------- Ses aç/kapa düğmesi ---------- */
+  function sesDugmesiGuncelle(){
+    var btn = el("btn-ses");
+    if (!btn || !window.HOSes) return;
+    btn.textContent = HOSes.acikMi() ? "🔊" : "🔇";
+  }
+  var btnSes = el("btn-ses");
+  if (btnSes) {
+    btnSes.addEventListener("click", function(){
+      if (window.HOSes) HOSes.acKapa();
+      sesDugmesiGuncelle();
+    });
+    sesDugmesiGuncelle();
+  }
+
   el("btn-sonlar-rozet").addEventListener("click", sonlarModalAc);
   el("btn-modal-sonlar-kapat").addEventListener("click", sonlarModalKapat);
   el("modal-sonlar").addEventListener("click", function(e){
@@ -1048,6 +1233,7 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   /* ---------- Başlangıç ---------- */
   gostergeleriKur();
   sonlarRozetiGuncelle();
+  yankiKartiKurGirisim(); /* devam kaydında yanki01 varsa kayitOku() filtrelemesin diye önceden kur */
   var eskiKayit = kayitOku();
   if (eskiKayit) {
     el("btn-devam").classList.remove("gizli");
@@ -1056,6 +1242,12 @@ html.sinif-modu .karakter-adi{font-size:1.16rem}
   ekranGoster("ekran-acilis");
 
 })();
+</script>
+<script>
+"use strict";
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").catch(function(){});
+}
 </script>
 </body>
 </html>

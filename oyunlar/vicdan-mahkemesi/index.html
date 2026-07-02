@@ -12,6 +12,7 @@
 <meta property="og:image" content="https://raufenc.com/oyunlar/assets/kapak/vicdan-mahkemesi.jpg">
 <meta name="theme-color" content="#F5EDE0">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+<link rel="manifest" href="./manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -82,6 +83,40 @@ body.sinif-modu .adim-ad{ font-size:12.5px; }
 .sifirla{
   width:44px; height:44px; border-radius:14px; font-size:19px;
   background:var(--kagit); border:1px solid var(--cizgi); box-shadow:var(--golge);
+}
+.ses-btn{
+  width:44px; height:44px; border-radius:14px; font-size:19px;
+  background:var(--kagit); border:1px solid var(--cizgi); box-shadow:var(--golge);
+  display:inline-flex; align-items:center; justify-content:center;
+}
+
+/* ============ Gerekçe adımı ============ */
+.gerekce-kart{ text-align:center; }
+.gerekce-kart .gerekce-emoji{ font-size:34px; display:block; margin-bottom:6px; }
+.gerekce-kart h3{ font-size:19px; }
+.gerekce-kart p{ font-size:14.5px; color:var(--soluk); }
+.gerekce-secenekler{ display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+.gerekce-sec{
+  display:block; width:100%; text-align:left; padding:14px 16px; min-height:54px;
+  background:var(--kagit); border:2px solid var(--cizgi); border-radius:16px;
+  font-size:14.5px; font-weight:600; box-shadow:var(--golge); transition:transform .12s ease;
+}
+.gerekce-sec:active{ transform:scale(.98); }
+
+/* ============ Yankı kartı (açılışta önceki oyun izi) ============ */
+.yanki-kart{
+  border-left:6px solid var(--altin); background:rgba(217,164,65,.1);
+  border-radius:14px; padding:12px 16px; margin:0 0 14px; font-size:14px; color:var(--kahve);
+}
+
+/* ============ Nasıl Hükmettin özeti (final) ============ */
+.pusula-kart{ text-align:center; }
+.pusula-kart h4{ font-size:16px; }
+.pusula-kart p{ font-size:14.5px; color:var(--soluk); margin:0; }
+.pusula-satirlar{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin:10px 0 4px; }
+.pusula-satirlar span{
+  background:rgba(74,124,89,.1); color:var(--yesil); border:1.5px solid rgba(74,124,89,.3);
+  border-radius:999px; padding:6px 12px; font-weight:700; font-size:13px;
 }
 
 /* ============ Sayfa ============ */
@@ -505,6 +540,7 @@ body.sinif-modu .adim-ad{ font-size:12.5px; }
   <a class="geri" href="../">← Oyunlar</a>
   <div class="ust-sag">
     <span class="puan-cip" id="puanCip" hidden>⚖️ 0</span>
+    <button class="ses-btn" id="btnSes" data-eylem="ses-degistir" title="Sesi Aç/Kapat" aria-label="Sesi Aç/Kapat">🔇</button>
     <button class="sifirla" id="btnSifirla" data-eylem="sifirla-sor" title="Baştan Başla" aria-label="Baştan Başla" hidden>↺</button>
   </div>
 </header>
@@ -523,6 +559,7 @@ body.sinif-modu .adim-ad{ font-size:12.5px; }
 
 <div id="beraet-yazdir-alani" aria-hidden="true"></div>
 
+<script src="../lib/ses.js"></script>
 <script src="content.js"></script>
 <script>
 (function(){
@@ -539,6 +576,15 @@ if (typeof ICERIK === 'undefined' || !ICERIK.vakalar || !ICERIK.vakalar.length){
 var KAYIT_ANAHTARI = 'vicdan-mahkemesi-kayit-v1';
 var HUKUM_PUANI = 20;   // doğru hüküm
 var CEZA_PUANI  = 10;   // onarıcı ceza seçimi
+var OZET_ANAHTARI = 'hayalOrtaokulu_ozet_v1'; // cross-game ortak özet
+
+/* Gerekçe adımı — hüküm verildikten hemen sonra sorulan tek dokunuşlu mini-adım.
+   Vakaların yarısında (tek numaralı dosyalarda: 1,3,5) sorulur, akış yorulmasın. */
+var GEREKCE_SECENEKLERI = [
+  { id:'delil',   etiket:'Delillere göre karar verdim' },
+  { id:'izlenim', etiket:'İlk izlenimime güvendim' },
+  { id:'vicdan',  etiket:'Vicdanım öyle dedi' }
+];
 
 var KARAKTERLER = {
   selim:    { ad:'Selim',        unvan:'Okulun yeni öğrencisi',  emoji:'🧒', g1:'#DEEBE0', g2:'#B9D2C1' },
@@ -602,10 +648,15 @@ var SINIF_MODU = (function(){
 })();
 function tazeVaka(){
   return { adim:'olay', faz: SINIF_MODU ? 'juri' : 'secim', sorulan:{}, incelenen:[], uyariVerildi:false,
-           hukum:null, hukumPuan:0, cezaTip:null, cezaPuan:0, acikKarakter:null };
+           hukum:null, hukumPuan:0, cezaTip:null, cezaPuan:0, acikKarakter:null, gerekce:null, gerekceSonraki:null };
 }
 function tazeState(){
-  return { surum:1, ekran:'acilis', vakaIndex:0, puan:0, sonuclar:[], vaka:tazeVaka() };
+  return { surum:1, ekran:'acilis', vakaIndex:0, puan:0, sonuclar:[], vaka:tazeVaka(),
+           gerekceSayaci:{ delil:0, izlenim:0, vicdan:0 } };
+}
+/* Bu dosyada gerekçe adımı sorulacak mı? Vakaların yarısında (tek numaralı: 1,3,5) sorulur. */
+function gerekceSorulsunMu(){
+  return (state.vakaIndex % 2) === 0;
 }
 function kaydet(){
   try{ localStorage.setItem(KAYIT_ANAHTARI, JSON.stringify(state)); }catch(e){ /* özel mod vb. — sessizce geç */ }
@@ -619,6 +670,9 @@ function kayitYukle(){
     if(s.ekran !== 'final' &&
        (typeof s.vakaIndex !== 'number' || s.vakaIndex < 0 || s.vakaIndex >= ICERIK.vakalar.length)) return null;
     if(s.vaka && s.vaka.faz === 'juri' && !SINIF_MODU) s.vaka.faz = 'secim';
+    if(s.vaka && typeof s.vaka.gerekce === 'undefined') s.vaka.gerekce = null;
+    if(s.vaka && typeof s.vaka.gerekceSonraki === 'undefined') s.vaka.gerekceSonraki = null;
+    if(!s.gerekceSayaci) s.gerekceSayaci = { delil:0, izlenim:0, vicdan:0 };
     return s;
   }catch(e){ return null; }
 }
@@ -654,6 +708,58 @@ function sorulanSayisi(){
 function rutbeBul(p){
   for(var i=0;i<RUTBELER.length;i++){ if(p >= RUTBELER[i].min) return RUTBELER[i]; }
   return RUTBELER[RUTBELER.length-1];
+}
+
+/* ============ Cross-game özet: yankı metni (açılış) ve final hook ============ */
+/* Açılışta "Vicdan" oyunundan (oyunlar/vicdan) gelen tamamlanma izini oku;
+   yoksa sessizce atla, oyunu bozma. */
+function yankiMetniAl(){
+  try{
+    var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || '{}');
+    if(ozet && ozet.vicdan && ozet.vicdan.tamamlandi){
+      return '<div class="yanki-kart">' +
+        esc('Sınıfta vicdanlı biri olarak tanınıyorsun; bugün o vicdanı kürsüde kullanacaksın.') + '</div>';
+    }
+  }catch(e){ /* sessizce atla */ }
+  return '';
+}
+/* Final ekranına ulaşılınca OKU-GÜNCELLE-YAZ deseniyle yalnız "vicdanMahkemesi"
+   anahtarını günceller; diğer oyunların verisine dokunmaz. */
+function ozetYaz(){
+  try{
+    var r = rutbeBul(state.puan);
+    var ozet = JSON.parse(localStorage.getItem(OZET_ANAHTARI) || '{}');
+    ozet.vicdanMahkemesi = {
+      tamamlandi: true,
+      adaletPuani: state.puan,
+      rutbe: r.ad,
+      tarih: new Date().toISOString().slice(0,10)
+    };
+    localStorage.setItem(OZET_ANAHTARI, JSON.stringify(ozet));
+  }catch(e){ /* localStorage başarısız olursa oyun akışı bozulmasın */ }
+}
+/* "🧭 Nasıl Hükmettin?" özeti — gerekçe sayaçlarına göre vaazsız bir yansıtma cümlesi */
+function nasilHukmettinHTML(){
+  var g = state.gerekceSayaci || { delil:0, izlenim:0, vicdan:0 };
+  var toplam = g.delil + g.izlenim + g.vicdan;
+  if(toplam === 0) return '';
+  var metin;
+  if(g.delil >= g.izlenim && g.delil >= g.vicdan){
+    metin = 'Çoğu zaman delillere yaslandın — sağlam bir hâkim alışkanlığı.';
+  }else if(g.vicdan >= g.izlenim){
+    metin = 'Çoğu zaman vicdanının sesini dinledin — bunu delillerle taçlandırmayı da unutma.';
+  }else{
+    metin = 'Çoğu zaman ilk izlenimine güvendin — bir sonraki duruşmada delillere biraz daha zaman ayır.';
+  }
+  return '<div class="kart pusula-kart">' +
+    '<h4>🧭 Nasıl Hükmettin?</h4>' +
+    '<div class="pusula-satirlar">' +
+      '<span>🔍 Delil ' + g.delil + '</span>' +
+      '<span>👁️ İzlenim ' + g.izlenim + '</span>' +
+      '<span>💛 Vicdan ' + g.vicdan + '</span>' +
+    '</div>' +
+    '<p>' + esc(metin) + '</p>' +
+  '</div>';
 }
 /* Portre: görsel yoksa gradyan + emoji görünür kalır */
 function portreHTML(id, sinif){
@@ -697,7 +803,7 @@ function ekranAcilis(){
       '<span class="oyun-adi-cizgi" aria-hidden="true"></span></div>' +
     '</div>' +
     '<p class="oyun-alt">' + esc(ICERIK.giris.baslik) + '</p>' +
-    '<div class="kart giris-kart"><p>' + esc(ICERIK.giris.metin) + '</p></div>' +
+    '<div class="kart giris-kart"><p>' + esc(ICERIK.giris.metin) + '</p>' + yankiMetniAl() + '</div>' +
     '<div class="ayet-kutu"><p>"…İnsanlar arasında hükmettiğiniz zaman adaletle hükmetmenizi emrediyor."</p>' +
       '<span class="ayet-kaynak">— Nisâ Sûresi, 4:58 (meal)</span></div>' +
     butonlar +
@@ -732,7 +838,7 @@ function adimlarHTML(v){
     var tamam = false;
     if(a.id === 'ifadeler') tamam = sorulanSayisi() >= toplamSoru(v);
     if(a.id === 'deliller') tamam = state.vaka.incelenen.length >= v.deliller.length;
-    if(a.id === 'hukum')    tamam = (state.vaka.faz === 'sonuc' || state.vaka.faz === 'ceza' || state.vaka.faz === 'ders');
+    if(a.id === 'hukum')    tamam = (state.vaka.faz === 'sonuc' || state.vaka.faz === 'gerekce' || state.vaka.faz === 'ceza' || state.vaka.faz === 'ders');
     html += '<button class="adim' + (aktif?' aktif':'') + (tamam?' tamam':'') + '" ' +
       'data-eylem="adim" data-adim="' + a.id + '"' + (aktif?' aria-current="step"':'') + '>' +
       '<span class="adim-ikon">' + a.ikon + '</span><span class="adim-ad">' + a.ad + '</span></button>';
@@ -857,12 +963,29 @@ function hukumHTML(v){
         '<span class="puan-kazanc kayip">Bu dosyadan puan yok</span>';
     }
     html2 += '<div class="perde"><h4>🎭 Perde Arkası</h4><p>' + esc(v.gercek) + '</p></div>';
-    if(dogru && v.dogruHukum === 'suclu' && v.cezalar && v.cezalar.length){
+    var sonrakiFaz = (dogru && v.dogruHukum === 'suclu' && v.cezalar && v.cezalar.length) ? 'ceza' : 'ders';
+    if(gerekceSorulsunMu() && !state.vaka.gerekce){
+      html2 += '<button class="btn birincil" data-eylem="faz" data-faz="gerekce" data-sonraki="' + sonrakiFaz + '">Devam Et ▸</button>';
+    }else if(sonrakiFaz === 'ceza'){
       html2 += '<button class="btn birincil" data-eylem="faz" data-faz="ceza">Cezayı Belirle ▸</button>';
     }else{
       html2 += '<button class="btn birincil" data-eylem="faz" data-faz="ders">📜 Hâkimin Notu ▸</button>';
     }
     return html2;
+  }
+
+  /* 2.5) Gerekçe adımı — hüküm verildikten hemen sonra, tek dokunuşlu mini-adım */
+  if(faz === 'gerekce'){
+    var htmlG = '<div class="kart gerekce-kart">' +
+      '<span class="gerekce-emoji" aria-hidden="true">🧭</span>' +
+      '<h3 class="adim-baslik">Bu hükmü nasıl verdin?</h3>' +
+      '<p>Kısaca kendine sor — doğru ya da yanlış cevap yok, sadece bir yansıma.</p>' +
+      '<div class="gerekce-secenekler">';
+    GEREKCE_SECENEKLERI.forEach(function(g){
+      htmlG += '<button class="gerekce-sec" data-eylem="gerekce-sec" data-id="' + g.id + '" data-sonraki="' + state.vaka.gerekceSonraki + '">' + esc(g.etiket) + '</button>';
+    });
+    htmlG += '</div></div>';
+    return htmlG;
   }
 
   /* 3) Ceza seçimi (yalnız doğru "suçlu" hükmünde) */
@@ -929,6 +1052,7 @@ function ekranFinal(){
       '<div class="rutbe-puan">⚖️ ' + state.puan + ' / ' + MAX_PUAN + ' Adalet Puanı</div>' +
       '<p class="rutbe-metin">' + r.metin + '</p>' +
     '</div>' +
+    nasilHukmettinHTML() +
     '<h3 class="ozet-baslik">📋 Dosya Özeti</h3>' +
     '<div class="ozet-tablo">' + satirlar + '</div>' +
     '<button class="btn birincil" data-eylem="tekrar">Tekrar Oyna ↺</button>' +
@@ -988,6 +1112,13 @@ function ustGuncelle(){
   cip.hidden = !goster;
   btn.hidden = !goster;
   cip.textContent = '⚖️ ' + state.puan;
+  sesBtnGuncelle();
+}
+function sesBtnGuncelle(){
+  var sesBtn = document.getElementById('btnSes');
+  if(!sesBtn) return;
+  var acik = window.HOSes && HOSes.acikMi();
+  sesBtn.textContent = acik ? '🔊' : '🔇';
 }
 
 /* ============ Modal ============ */
@@ -1060,6 +1191,7 @@ function delilIncele(i){
   if(!d) return;
   if(state.vaka.incelenen.indexOf(i) === -1){
     state.vaka.incelenen.push(i);
+    if(window.HOSes) HOSes.kartHisirti();
     kaydet(); render(false);
   }
   modalAc('<div class="delil-detay"><span class="delil-detay-emoji">' + d.emoji + '</span>' +
@@ -1088,7 +1220,16 @@ function hukumVer(h){
   state.puan += state.vaka.hukumPuan;
   state.vaka.faz = 'sonuc';
   kaydet();
+  if(window.HOSes) HOSes.tokmak();
   tokmakCal(function(){ render(true); });
+}
+function gerekceSec(id, sonraki){
+  if(state.vaka.faz !== 'gerekce' || state.vaka.gerekce) return;
+  state.vaka.gerekce = id;
+  if(!state.gerekceSayaci) state.gerekceSayaci = { delil:0, izlenim:0, vicdan:0 };
+  if(typeof state.gerekceSayaci[id] === 'number') state.gerekceSayaci[id]++;
+  state.vaka.faz = sonraki || state.vaka.gerekceSonraki || 'ders';
+  kaydet(); render(true);
 }
 function cezaVer(i){
   if(state.vaka.faz !== 'ceza') return;
@@ -1112,6 +1253,7 @@ function sonrakiVaka(){
   state.vakaIndex++;
   if(state.vakaIndex >= ICERIK.vakalar.length){
     state.ekran = 'final';
+    ozetYaz();
   }else{
     state.vaka = tazeVaka();
     state.ekran = 'dosya';
@@ -1151,7 +1293,11 @@ document.addEventListener('click', function(e){
     case 'delil':        delilIncele(parseInt(el.dataset.i, 10)); break;
     case 'hukum-sec':    hukumVer(el.dataset.hukum); break;
     case 'ceza-sec':     cezaVer(parseInt(el.dataset.i, 10)); break;
-    case 'faz':          state.vaka.faz = el.dataset.faz; kaydet(); render(true); break;
+    case 'faz':
+      if(el.dataset.faz === 'gerekce') state.vaka.gerekceSonraki = el.dataset.sonraki || 'ders';
+      state.vaka.faz = el.dataset.faz; kaydet(); render(true);
+      break;
+    case 'gerekce-sec':  gerekceSec(el.dataset.id, el.dataset.sonraki); break;
     case 'sonraki-vaka': sonrakiVaka(); break;
     case 'tekrar':       oyunaBasla(); break;
     case 'beraet-yazdir':
@@ -1159,6 +1305,10 @@ document.addEventListener('click', function(e){
       window.print();
       break;
     case 'sifirla-sor':  sifirlaSor(); break;
+    case 'ses-degistir':
+      if(window.HOSes) HOSes.acKapa();
+      sesBtnGuncelle();
+      break;
     case 'modal-kapat':  if(modalKapatilabilir) modalKapat(); break;
   }
 });
@@ -1172,6 +1322,9 @@ document.addEventListener('keydown', function(e){
 if(SINIF_MODU) document.body.classList.add('sinif-modu');
 render(true);
 })();
+</script>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('./sw.js').catch(function(){}); }
 </script>
 </body>
 </html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hayal Ortaokulu Karnesi</title>
+<meta name="description" content="Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi oyunlarındaki yolculuğunun özeti: rozetler, karakter albümü ve onur belgesi.">
+<meta property="og:title" content="Hayal Ortaokulu Karnesi">
+<meta property="og:description" content="Üç oyundaki yolculuğunun özeti: rozetler, karakter albümü ve onur belgesi.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://raufenc.com/oyunlar/karne/">
+<meta name="theme-color" content="#F5EDE0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --krem:#F5EDE0;
+  --kahve:#2B2118;
+  --yesil:#4A7C59;
+  --kiremit:#C4574A;
+  --altin:#D9A441;
+  --kagit:#FFFDF7;
+  --cizgi:rgba(43,33,24,.14);
+  --soluk:rgba(43,33,24,.70);
+  --golge:0 10px 30px rgba(43,33,24,.10);
+}
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html{ overflow-x:hidden; }
+body{
+  margin:0; min-height:100vh; min-height:100dvh;
+  background:var(--krem); color:var(--kahve);
+  font:400 16px/1.6 "Inter",system-ui,sans-serif;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{ font-family:"Fraunces",Georgia,serif; line-height:1.25; margin:0 0 8px; }
+p{ margin:0 0 12px; }
+button{ font:inherit; color:inherit; border:none; background:none; cursor:pointer; touch-action:manipulation; -webkit-user-select:none; user-select:none; }
+a{ color:var(--yesil); touch-action:manipulation; }
+img{ max-width:100%; }
+:focus-visible{ outline:3px solid var(--altin); outline-offset:2px; border-radius:8px; }
+[hidden]{ display:none !important; }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+
+.ust{
+  position:sticky; top:0; z-index:20;
+  display:flex; justify-content:space-between; align-items:center; gap:8px;
+  max-width:640px; margin:0 auto; padding:10px 14px;
+  background:linear-gradient(var(--krem) 78%, rgba(245,237,224,0));
+}
+.geri{
+  display:inline-flex; align-items:center; min-height:44px; padding:0 10px;
+  font-weight:600; font-size:14px; text-decoration:none; color:var(--soluk); border-radius:12px;
+}
+.geri:hover{ color:var(--kahve); }
+
+.sayfa{ max-width:640px; margin:0 auto; padding:4px 16px 56px; }
+.ekran{ animation:ekranGel .35s ease; }
+@keyframes ekranGel{ from{ opacity:0; transform:translateY(10px); } }
+
+.tepe{ text-align:center; padding:14px 0 8px; }
+.tepe-emoji{ font-size:46px; display:block; margin-bottom:8px; }
+.tepe h1{ font-size:clamp(26px,7vw,34px); }
+.tepe p{ color:var(--soluk); font-size:15px; max-width:440px; margin:0 auto 12px; }
+
+.kart{ background:var(--kagit); border-radius:20px; padding:18px; box-shadow:var(--golge); margin:0 0 14px; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:48px; padding:12px 20px; margin:6px 4px 0 0;
+  border-radius:16px; font-weight:600; font-size:15px; text-align:center;
+  transition:transform .12s ease, box-shadow .12s ease; text-decoration:none;
+}
+.btn:active{ transform:scale(.98); }
+.btn.birincil{ background:var(--yesil); color:#fff; box-shadow:0 8px 20px rgba(74,124,89,.32); }
+.btn.ikincil{ background:transparent; color:var(--kahve); border:2px solid var(--cizgi); }
+.btn.altin{ background:var(--altin); color:#4A3410; box-shadow:0 8px 20px rgba(217,164,65,.32); }
+
+/* ============ Boş durum ============ */
+.bos-durum{ text-align:center; padding:22px 0; }
+.bos-durum .emoji{ font-size:44px; display:block; margin-bottom:10px; }
+.bos-durum-linkler{ display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:10px; }
+
+/* ============ Oyun kartları ============ */
+.oyun-izgara{ display:grid; grid-template-columns:1fr; gap:14px; margin:0 0 20px; }
+@media (min-width:620px){ .oyun-izgara{ grid-template-columns:repeat(3,1fr); } }
+.oyun-kart{ position:relative; overflow:hidden; }
+.oyun-kart.kilitli{ opacity:.72; }
+.oyun-kart-baslik{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.oyun-kart-emoji{
+  flex:none; width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+  font-size:22px; background:rgba(74,124,89,.12);
+}
+.oyun-kart h3{ font-size:17px; margin:0; }
+.oyun-kart .durum-etiket{ font-size:12px; color:var(--soluk); font-weight:600; }
+.kilit-mesaj{ font-size:14px; color:var(--soluk); margin:6px 0 4px; }
+
+/* stat barlar (vicdan) */
+.stat-satir{ margin:8px 0; }
+.stat-ust{ display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px; }
+.stat-bar{ height:10px; border-radius:999px; background:rgba(43,33,24,.08); overflow:hidden; }
+.stat-dolu{ height:100%; border-radius:999px; background:var(--yesil); }
+
+/* muhur (zaman yolcusu) */
+.muhur-satir{ display:flex; align-items:center; gap:10px; margin:8px 0 4px; }
+.muhur-sayi{ font-size:26px; font-weight:900; font-family:"Fraunces",serif; color:var(--yesil); }
+.muhur-izgara{ display:grid; grid-template-columns:repeat(8,1fr); gap:5px; margin-top:6px; }
+.muhur-hucre{
+  aspect-ratio:1; border-radius:8px; display:flex; align-items:center; justify-content:center;
+  font-size:14px; background:rgba(217,164,65,.14); border:1.5px solid rgba(217,164,65,.35);
+}
+.muhur-hucre.bos{ background:rgba(43,33,24,.05); border-color:var(--cizgi); opacity:.5; }
+
+/* mahkeme */
+.rutbe-satir{ display:flex; align-items:center; gap:12px; margin:6px 0 4px; }
+.rutbe-emoji-buyuk{ font-size:38px; line-height:1; }
+.rutbe-ad-buyuk{ font-size:19px; font-weight:800; font-family:"Fraunces",serif; }
+.rutbe-puan-kucuk{ font-size:13.5px; color:var(--soluk); }
+
+/* ============ Rozetler ============ */
+.bolum-baslik{ font-size:20px; margin:22px 0 10px; }
+.rozet-izgara{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+@media (min-width:520px){ .rozet-izgara{ grid-template-columns:repeat(3,1fr); } }
+.rozet{
+  position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
+  min-height:118px; padding:14px 10px; background:var(--kagit); border-radius:18px;
+  border:2px solid transparent; box-shadow:var(--golge); justify-content:center;
+}
+.rozet.kazanildi{ border-color:var(--altin); }
+.rozet.kilitli{ opacity:.55; filter:grayscale(.5); }
+.rozet-emoji{ font-size:32px; }
+.rozet-ad{ font-size:12.5px; font-weight:700; line-height:1.3; }
+.rozet-kilit{ position:absolute; top:8px; right:8px; font-size:13px; }
+.rozet-aciklama{ font-size:11px; color:var(--soluk); line-height:1.35; }
+
+/* ============ Onur belgesi ============ */
+.belge-kutu{
+  border:3px double var(--altin); border-radius:20px; padding:22px; text-align:center;
+  background:linear-gradient(165deg,#FAF1D8,#F0DFB4 70%,#E9D4A2); margin:20px 0;
+  box-shadow:var(--golge);
+}
+.belge-kutu h2{ font-size:22px; color:#8A6414; margin-bottom:4px; }
+.belge-kutu p{ font-size:14px; color:var(--soluk); }
+.belge-ad-alani{
+  width:100%; max-width:340px; margin:14px auto; padding:12px 16px; text-align:center;
+  font-family:"Fraunces",Georgia,serif; font-size:18px; font-weight:700; color:var(--kahve);
+  background:var(--kagit); border:1.5px solid rgba(122,86,40,.35); border-radius:14px;
+}
+#belge-yazdir-alani{ display:none; }
+@media print{
+  body *{ visibility:hidden; }
+  .ust{ display:none !important; }
+  #belge-yazdir-alani, #belge-yazdir-alani *{ visibility:visible; }
+  #belge-yazdir-alani{
+    display:block; position:absolute; left:0; top:0; width:100%; padding:40px;
+    font-family:"Fraunces",Georgia,serif; color:#000; text-align:center;
+  }
+  #belge-yazdir-alani h1{ font-size:30px; margin-bottom:6px; }
+  #belge-yazdir-alani .belge-alt{ font-size:15px; margin-bottom:26px; }
+  #belge-yazdir-alani .belge-ad-satiri{ margin:30px 0; font-size:20px; font-weight:700; }
+  #belge-yazdir-alani .belge-rozetler{ font-size:14px; margin-top:24px; }
+  #belge-yazdir-alani .belge-tarih{ font-size:12px; margin-top:30px; color:#555; }
+}
+
+/* ============ Karakter albümü ============ */
+.karakter-izgara{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+@media (min-width:520px){ .karakter-izgara{ grid-template-columns:repeat(6,1fr); } }
+.karakter{ display:flex; flex-direction:column; align-items:center; gap:5px; text-align:center; }
+.karakter-portre{
+  position:relative; width:56px; height:56px; border-radius:50%; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  border:2px solid rgba(217,164,65,.55); box-shadow:0 2px 8px rgba(43,33,24,.14);
+  background:linear-gradient(135deg,#EDE4D3,#D8CBB4);
+}
+.karakter-portre img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.karakter.kilitli .karakter-portre{ filter:grayscale(1); opacity:.45; }
+.karakter-portre-emoji{ font-size:24px; }
+.karakter-ad{ font-size:11.5px; font-weight:600; line-height:1.25; }
+.karakter.kilitli .karakter-ad{ color:var(--soluk); }
+
+.kaynak-not{ font-size:12px; color:var(--soluk); text-align:center; margin-top:18px; }
+</style>
+</head>
+<body>
+
+<header class="ust">
+  <a class="geri" href="../">← Oyunlar</a>
+</header>
+
+<main class="sayfa" id="uygulama">
+  <noscript><p>Bu sayfa için JavaScript gereklidir. Lütfen tarayıcınızda JavaScript'i açın.</p></noscript>
+</main>
+
+<div id="belge-yazdir-alani" aria-hidden="true"></div>
+
+<script>
+(function(){
+'use strict';
+
+var OZET_ANAHTARI = 'hayalOrtaokulu_ozet_v1';
+
+/* ============ KADRO — tüm oyunlarda geçebilecek karakterler ============ */
+var KADRO = {
+  ogretmen: { ad:'Nazan Öğretmen',       emoji:'👩‍🏫' },
+  mudur:    { ad:'Kemal Bey · Müdür',    emoji:'👨‍💼' },
+  rehber:   { ad:'Murat Bey · Rehber',   emoji:'🧑‍🏫' },
+  anne:     { ad:'Annen',                emoji:'👩' },
+  baba:     { ad:'Baban',                emoji:'👨' },
+  kardes:   { ad:'Yusuf · Kardeşin',     emoji:'👦' },
+  dede:     { ad:'Deden',                emoji:'👴' },
+  emir:     { ad:'Emir',                 emoji:'😎' },
+  zeynep:   { ad:'Zeynep',               emoji:'🙋‍♀️' },
+  elif:     { ad:'Elif',                 emoji:'🌷' },
+  burak:    { ad:'Burak',                emoji:'😐' },
+  selim:    { ad:'Selim',                emoji:'😊' },
+  kantinci: { ad:'İsmail Abi · Kantinci',emoji:'🧑‍🍳' },
+  bakkal:   { ad:'Hasan Amca · Bakkal',  emoji:'👨‍🦳' },
+  komsu:    { ad:'Saliha Teyze · Komşu', emoji:'👵' },
+  hademe:   { ad:'Ramazan Amca · Hademe',emoji:'🧹' },
+  kagan:    { ad:'Kağan',                emoji:'🙂' }
+};
+/* Zaman Yolcusu content.js'inde karakterler yapılandırılmış "karakter:" alanı
+   yerine serbest metinde adlarıyla geçiyor; bu yüzden ada göre de eşleştiriyoruz. */
+var AD_ESLEME = {
+  'nazan öğretmen':'ogretmen', 'kemal bey':'mudur', 'murat bey':'rehber',
+  'annen':'anne', 'babana':'baba', 'babanın':'baba', 'babandan':'baba', 'babanla':'baba',
+  'yusuf':'kardes', 'deden':'dede', 'dedenin':'dede',
+  'emir':'emir', 'zeynep':'zeynep', 'elif':'elif', 'burak':'burak', 'selim':'selim',
+  'i̇smail abi':'kantinci', 'ismail abi':'kantinci',
+  'hasan amca':'bakkal', 'saliha teyze':'komsu', 'ramazan amca':'hademe', 'kağan':'kagan'
+};
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function ozetOku(){
+  try{
+    var ham = localStorage.getItem(OZET_ANAHTARI);
+    if(!ham) return {};
+    var o = JSON.parse(ham);
+    return (o && typeof o === 'object') ? o : {};
+  }catch(e){ return {}; }
+}
+
+var ozet = ozetOku();
+var vicdan = ozet.vicdan;
+var zamanYolcusu = ozet.zamanYolcusu;
+var mahkeme = ozet.vicdanMahkemesi;
+
+var hicOynanmadi = !(vicdan && vicdan.tamamlandi) && !(zamanYolcusu && zamanYolcusu.tamamlandi) && !(mahkeme && mahkeme.tamamlandi);
+
+/* ============ Rozet tanımları ============ */
+function statlarDengeliMi(fs){
+  if(!fs) return false;
+  var anahtarlar = ['vicdan','arkadaslik','aile','ozguven'];
+  for(var i=0;i<anahtarlar.length;i++){
+    var v = fs[anahtarlar[i]];
+    if(typeof v !== 'number' || v < 40 || v > 75) return false;
+  }
+  return true;
+}
+/* vicdan-mahkemesi/index.html'deki RUTBELER dizisiyle birebir aynı eşik: Adalet Ustası min:140 */
+var ADALET_USTASI_ESIK = 140;
+
+var ROZETLER = [
+  { id:'terazi', ad:'Terazi Hiç Şaşmadı', emoji:'⚖️',
+    aciklama:'Vicdan\'da vicdan statı 70+',
+    kazanildi: !!(vicdan && vicdan.finalStatlar && vicdan.finalStatlar.vicdan >= 70) },
+  { id:'denge', ad:'Denge Ustası', emoji:'🧘',
+    aciklama:'Vicdan\'da 4 stat da 40-75 arası',
+    kazanildi: !!(vicdan && statlarDengeliMi(vicdan.finalStatlar)) },
+  { id:'dost', ad:'Dost Canlısı', emoji:'🤝',
+    aciklama:'Vicdan\'da arkadaşlık statı 70+',
+    kazanildi: !!(vicdan && vicdan.finalStatlar && vicdan.finalStatlar.arkadaslik >= 70) },
+  { id:'aile', ad:'Aile Bağı Güçlü', emoji:'🏡',
+    aciklama:'Vicdan\'da aile statı 70+',
+    kazanildi: !!(vicdan && vicdan.finalStatlar && vicdan.finalStatlar.aile >= 70) },
+  { id:'ozguven', ad:'Kendine Güvenen', emoji:'💪',
+    aciklama:'Vicdan\'da özgüven statı 70+',
+    kazanildi: !!(vicdan && vicdan.finalStatlar && vicdan.finalStatlar.ozguven >= 70) },
+  { id:'hikaye', ad:'Hikâye Avcısı', emoji:'📖',
+    aciklama:'Vicdan\'da 5+ farklı son görüldü',
+    kazanildi: !!(vicdan && typeof vicdan.sonlarGorulenSayisi === 'number' && vicdan.sonlarGorulenSayisi >= 5) },
+  { id:'zaman', ad:'Zaman Bilgesi', emoji:'⏳',
+    aciklama:'Zaman Yolcusu\'nda 8/8 mühür',
+    kazanildi: !!(zamanYolcusu && zamanYolcusu.muhurSayisi === 8) },
+  { id:'adalet', ad:'Adalet Ustası', emoji:'🏛️',
+    aciklama:'Mahkeme\'de ' + ADALET_USTASI_ESIK + '+ Adalet Puanı',
+    kazanildi: !!(mahkeme && typeof mahkeme.adaletPuani === 'number' && mahkeme.adaletPuani >= ADALET_USTASI_ESIK) },
+  { id:'sabir', ad:'Sabırlı Yolcu', emoji:'🕰️',
+    aciklama:'Vicdan\'da Kader Kartı görüldü',
+    kazanildi: !!(vicdan && vicdan.kaderKartiGorundu === true) },
+  { id:'kahraman', ad:'Üç Oyunun Kahramanı', emoji:'🏆',
+    aciklama:'Üç oyun da tamamlandı',
+    kazanildi: !!(vicdan && vicdan.tamamlandi && zamanYolcusu && zamanYolcusu.tamamlandi && mahkeme && mahkeme.tamamlandi) }
+];
+var kahramanRozeti = ROZETLER[ROZETLER.length-1];
+
+/* ============ Oyun kartları ============ */
+function vicdanKartHTML(){
+  if(!(vicdan && vicdan.tamamlandi)){
+    return '<div class="kart oyun-kart kilitli">' +
+      '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">🧭</span>' +
+      '<div><h3>Vicdan</h3><span class="durum-etiket">🔒 Henüz oynanmadı</span></div></div>' +
+      '<p class="kilit-mesaj">Bu oyunu oynayınca değerler karnendeki 4 stat burada görünecek.</p>' +
+      '<a class="btn ikincil" href="../vicdan/">Oyuna Git ▸</a>' +
+    '</div>';
+  }
+  var fs = vicdan.finalStatlar || {};
+  var statlar = [
+    { k:'vicdan', ad:'Vicdan', renk:'var(--yesil)' },
+    { k:'arkadaslik', ad:'Arkadaşlık', renk:'var(--altin)' },
+    { k:'aile', ad:'Aile', renk:'var(--kiremit)' },
+    { k:'ozguven', ad:'Özgüven', renk:'var(--yesil)' }
+  ];
+  var barlar = statlar.map(function(s){
+    var v = Math.max(0, Math.min(100, fs[s.k] || 0));
+    return '<div class="stat-satir"><div class="stat-ust"><span>' + s.ad + '</span><span>' + v + '</span></div>' +
+      '<div class="stat-bar"><div class="stat-dolu" style="width:' + v + '%;background:' + s.renk + '"></div></div></div>';
+  }).join('');
+  return '<div class="kart oyun-kart">' +
+    '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">🧭</span>' +
+    '<div><h3>Vicdan</h3><span class="durum-etiket">✓ Tamamlandı</span></div></div>' +
+    barlar +
+    '<a class="btn ikincil" href="../vicdan/">Tekrar Oyna ▸</a>' +
+  '</div>';
+}
+
+function zamanKartHTML(){
+  if(!(zamanYolcusu && zamanYolcusu.tamamlandi)){
+    return '<div class="kart oyun-kart kilitli">' +
+      '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">⏳</span>' +
+      '<div><h3>Zaman Yolcusu</h3><span class="durum-etiket">🔒 Henüz oynanmadı</span></div></div>' +
+      '<p class="kilit-mesaj">Bu oyunu oynayınca kazandığın mühürler burada görünecek.</p>' +
+      '<a class="btn ikincil" href="../zaman-yolcusu/">Oyuna Git ▸</a>' +
+    '</div>';
+  }
+  var m = typeof zamanYolcusu.muhurSayisi === 'number' ? zamanYolcusu.muhurSayisi : 0;
+  var hucreler = '';
+  for(var i=0;i<8;i++){
+    hucreler += '<span class="muhur-hucre' + (i < m ? '' : ' bos') + '">' + (i < m ? '🔆' : '') + '</span>';
+  }
+  return '<div class="kart oyun-kart">' +
+    '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">⏳</span>' +
+    '<div><h3>Zaman Yolcusu</h3><span class="durum-etiket">✓ Tamamlandı</span></div></div>' +
+    '<div class="muhur-satir"><span class="muhur-sayi">' + m + '/8</span><span>mühür kazanıldı</span></div>' +
+    '<div class="muhur-izgara">' + hucreler + '</div>' +
+    '<a class="btn ikincil" href="../zaman-yolcusu/">Tekrar Oyna ▸</a>' +
+  '</div>';
+}
+
+function mahkemeKartHTML(){
+  if(!(mahkeme && mahkeme.tamamlandi)){
+    return '<div class="kart oyun-kart kilitli">' +
+      '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">⚖️</span>' +
+      '<div><h3>Vicdan Mahkemesi</h3><span class="durum-etiket">🔒 Henüz oynanmadı</span></div></div>' +
+      '<p class="kilit-mesaj">Bu oyunu oynayınca rütben ve Adalet Puanın burada görünecek.</p>' +
+      '<a class="btn ikincil" href="../vicdan-mahkemesi/">Oyuna Git ▸</a>' +
+    '</div>';
+  }
+  var rutbeEmoji = { 'Adalet Ustası':'🏛️', 'Bilge Hâkim':'🦉', 'Adil Hâkim':'⚖️', 'Çırak Hâkim':'📜' };
+  var emoji = rutbeEmoji[mahkeme.rutbe] || '⚖️';
+  return '<div class="kart oyun-kart">' +
+    '<div class="oyun-kart-baslik"><span class="oyun-kart-emoji">⚖️</span>' +
+    '<div><h3>Vicdan Mahkemesi</h3><span class="durum-etiket">✓ Tamamlandı</span></div></div>' +
+    '<div class="rutbe-satir"><span class="rutbe-emoji-buyuk">' + emoji + '</span>' +
+    '<div><div class="rutbe-ad-buyuk">' + esc(mahkeme.rutbe || '') + '</div>' +
+    '<div class="rutbe-puan-kucuk">' + esc(mahkeme.adaletPuani != null ? mahkeme.adaletPuani : '') + ' Adalet Puanı</div></div></div>' +
+    '<a class="btn ikincil" href="../vicdan-mahkemesi/">Tekrar Oyna ▸</a>' +
+  '</div>';
+}
+
+/* ============ Rozetler ============ */
+function rozetlerHTML(){
+  var kartlar = ROZETLER.map(function(r){
+    var sinif = 'rozet' + (r.kazanildi ? ' kazanildi' : ' kilitli');
+    return '<div class="' + sinif + '">' +
+      (r.kazanildi ? '' : '<span class="rozet-kilit" aria-hidden="true">🔒</span>') +
+      '<span class="rozet-emoji" aria-hidden="true">' + (r.kazanildi ? r.emoji : '🔒') + '</span>' +
+      '<span class="rozet-ad">' + esc(r.ad) + '</span>' +
+      '<span class="rozet-aciklama">' + esc(r.aciklama) + '</span>' +
+    '</div>';
+  }).join('');
+  return '<h2 class="bolum-baslik">🎖️ Rozetler</h2>' +
+    '<div class="rozet-izgara">' + kartlar + '</div>';
+}
+
+/* ============ Onur Belgesi ============ */
+function belgeHTML(){
+  if(!kahramanRozeti.kazanildi) return '';
+  return '<div class="belge-kutu" id="belge-kutu">' +
+    '<h2>🏆 Onur Belgesi</h2>' +
+    '<p>Hayal Ortaokulu üç oyunu da tamamladığını onurla belgeler.</p>' +
+    '<input type="text" id="belge-ad-girisi" class="belge-ad-alani" placeholder="Adını buraya yaz" maxlength="60">' +
+    '<div><button class="btn altin" id="belge-yazdir-btn">🖨️ Belgeyi Yazdır</button></div>' +
+  '</div>';
+}
+
+function belgeYazdirHTMLOlustur(){
+  var ad = (document.getElementById('belge-ad-girisi') || {}).value || '';
+  var tarih = new Date().toLocaleDateString('tr-TR');
+  var rozetAdlari = ROZETLER.filter(function(r){ return r.kazanildi; }).map(function(r){ return r.emoji + ' ' + r.ad; }).join(' · ');
+  document.getElementById('belge-yazdir-alani').innerHTML =
+    '<h1>🏆 Onur Belgesi</h1>' +
+    '<div class="belge-alt">Hayal Ortaokulu — Üç Oyunun Kahramanı</div>' +
+    '<div class="belge-ad-satiri">' + esc(ad || '____________________') + '</div>' +
+    '<p>Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi oyunlarını başarıyla tamamlamıştır.</p>' +
+    '<div class="belge-rozetler">' + esc(rozetAdlari) + '</div>' +
+    '<div class="belge-tarih">' + esc(tarih) + '</div>';
+}
+
+/* ============ Karakter Albümü ============ */
+function metindenKarakterIdleriCikar(icerikMetni){
+  var bulunanlar = {};
+  /* 1) Yapılandırılmış "karakter: 'id'" veya "karakter:\"id\"" alanı (vicdan, vicdan-mahkemesi) */
+  var re = /karakter\s*:\s*["']([a-zA-Z]+)["']/g;
+  var m;
+  while((m = re.exec(icerikMetni))){
+    var id = m[1];
+    if(KADRO[id]) bulunanlar[id] = true;
+  }
+  /* 2) Serbest metinde geçen isimler (zaman-yolcusu gibi karakter alanı olmayan içerikler) */
+  var kucukMetin = icerikMetni.toLowerCase();
+  for(var ad in AD_ESLEME){
+    if(Object.prototype.hasOwnProperty.call(AD_ESLEME, ad) && kucukMetin.indexOf(ad) !== -1){
+      bulunanlar[AD_ESLEME[ad]] = true;
+    }
+  }
+  return Object.keys(bulunanlar);
+}
+
+function karakterAlbumuOlustur(){
+  var kaynaklar = [
+    { yol: '../vicdan/content.js', tamamlandi: !!(vicdan && vicdan.tamamlandi) },
+    { yol: '../zaman-yolcusu/content.js', tamamlandi: !!(zamanYolcusu && zamanYolcusu.tamamlandi) },
+    { yol: '../vicdan-mahkemesi/content.js', tamamlandi: !!(mahkeme && mahkeme.tamamlandi) }
+  ];
+  var gorulenler = {};
+  var istekler = kaynaklar.map(function(kaynak){
+    return fetch(kaynak.yol).then(function(r){ return r.ok ? r.text() : ''; }).then(function(metin){
+      if(!metin) return;
+      var idler = metindenKarakterIdleriCikar(metin);
+      idler.forEach(function(id){
+        if(kaynak.tamamlandi) gorulenler[id] = true;
+        else if(!(id in gorulenler)) gorulenler[id] = false;
+      });
+    }).catch(function(){ /* fetch başarısız olursa albüm sessizce boş kalır */ });
+  });
+  Promise.all(istekler).then(function(){
+    var kutu = document.getElementById('karakter-albumu-icerik');
+    if(!kutu) return;
+    var idler = Object.keys(gorulenler).sort(function(a,b){
+      return (KADRO[a] ? KADRO[a].ad : a).localeCompare(KADRO[b] ? KADRO[b].ad : b, 'tr');
+    });
+    if(!idler.length){
+      kutu.innerHTML = '<p class="kilit-mesaj">Henüz kimseyle tanışmadın. Bir oyunu tamamlayınca karakterler burada belirir.</p>';
+      return;
+    }
+    kutu.innerHTML = idler.map(function(id){
+      var k = KADRO[id] || { ad:id, emoji:'🙂' };
+      var gorundu = gorulenler[id];
+      return '<div class="karakter' + (gorundu ? '' : ' kilitli') + '">' +
+        '<span class="karakter-portre">' +
+          (gorundu ? '<img src="../assets/karakter/' + esc(id) + '.jpg" alt="" loading="lazy" onerror="this.style.display=\'none\'">' : '') +
+          '<span class="karakter-portre-emoji" aria-hidden="true">' + (gorundu ? k.emoji : '🔒') + '</span>' +
+        '</span>' +
+        '<span class="karakter-ad">' + esc(gorundu ? k.ad : '???') + '</span>' +
+      '</div>';
+    }).join('');
+  });
+}
+
+/* ============ Ana çizim ============ */
+function ciz(){
+  var kok = document.getElementById('uygulama');
+  if(hicOynanmadi){
+    kok.innerHTML =
+      '<div class="tepe"><span class="tepe-emoji">🎓</span><h1>Hayal Ortaokulu Karnesi</h1>' +
+      '<p>Vicdan, Zaman Yolcusu ve Vicdan Mahkemesi oyunlarındaki yolculuğunun özetini burada göreceksin.</p></div>' +
+      '<div class="kart bos-durum">' +
+        '<span class="emoji">🌱</span>' +
+        '<h3>Henüz hiç oyun oynanmamış</h3>' +
+        '<p>Başlamak için bir oyun seç:</p>' +
+        '<div class="bos-durum-linkler">' +
+          '<a class="btn birincil" href="../vicdan/">🧭 Vicdan</a>' +
+          '<a class="btn birincil" href="../zaman-yolcusu/">⏳ Zaman Yolcusu</a>' +
+          '<a class="btn birincil" href="../vicdan-mahkemesi/">⚖️ Vicdan Mahkemesi</a>' +
+        '</div>' +
+      '</div>';
+    return;
+  }
+
+  var html = '<div class="tepe"><span class="tepe-emoji">🎓</span><h1>Hayal Ortaokulu Karnesi</h1>' +
+    '<p>Üç oyundaki yolculuğunun özeti burada.</p></div>';
+
+  html += '<div class="oyun-izgara">' + vicdanKartHTML() + zamanKartHTML() + mahkemeKartHTML() + '</div>';
+  html += rozetlerHTML();
+  html += belgeHTML();
+  html += '<h2 class="bolum-baslik">🖼️ Karakter Albümü</h2>' +
+    '<div class="kart"><div class="karakter-izgara" id="karakter-albumu-icerik">' +
+      '<p class="kilit-mesaj">Yükleniyor…</p>' +
+    '</div></div>';
+  html += '<p class="kaynak-not">Rozetler ve albüm, tarayıcında saklanan oyun özetlerinden otomatik hesaplanır.</p>';
+
+  kok.innerHTML = html;
+
+  if(kahramanRozeti.kazanildi){
+    var yazdirBtn = document.getElementById('belge-yazdir-btn');
+    if(yazdirBtn){
+      yazdirBtn.addEventListener('click', function(){
+        belgeYazdirHTMLOlustur();
+        window.print();
+      });
+    }
+  }
+
+  karakterAlbumuOlustur();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', ciz);
+}else{
+  ciz();
+}
+
+})();
+</script>
+</body>
+</html>

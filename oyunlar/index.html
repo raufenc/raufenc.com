@@ -159,6 +159,144 @@
     .paylas-bildirim { transition: none; }
   }
 
+  /* ---------- Günün İkilemi ---------- */
+  .gunun-ikilemi {
+    background: var(--kart-bg);
+    border: 1px solid rgba(43, 33, 24, 0.12);
+    border-radius: var(--radius);
+    box-shadow: var(--golge);
+    padding: 22px 20px;
+    margin-bottom: 34px;
+    animation: kartBelir 0.6s cubic-bezier(0.22, 0.8, 0.35, 1) backwards;
+    animation-delay: 0.02s;
+  }
+
+  .gi-baslik-satir {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .gi-baslik {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gi-seri {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--kiremit);
+    background: rgba(196, 87, 74, 0.1);
+    border-radius: 999px;
+    padding: 5px 12px;
+    white-space: nowrap;
+  }
+
+  .gi-govde {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .gi-portre {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(43, 33, 24, 0.18);
+    overflow: hidden;
+  }
+  .gi-portre img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .gi-icerik { flex: 1; min-width: 0; }
+
+  .gi-karakter-adi {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--yesil);
+    margin-bottom: 4px;
+  }
+
+  .gi-metin {
+    font-size: 15px;
+    color: rgba(43, 33, 24, 0.88);
+    margin-bottom: 14px;
+  }
+
+  .gi-secenekler {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .gi-secenek {
+    min-height: 44px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 16px;
+    background: var(--krem);
+    border: 1px solid rgba(74, 124, 89, 0.3);
+    border-radius: 14px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--kahve);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .gi-secenek:hover,
+  .gi-secenek:focus-visible {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(43, 33, 24, 0.12);
+  }
+
+  .gi-secenek:focus-visible {
+    outline: 3px solid var(--altin);
+    outline-offset: 2px;
+  }
+
+  .gi-secenek:active { transform: translateY(0); }
+
+  .gi-sonuc {
+    font-size: 14.5px;
+    color: rgba(43, 33, 24, 0.85);
+    background: rgba(74, 124, 89, 0.08);
+    border-left: 4px solid var(--yesil);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 4px;
+    animation: kartBelir 0.4s ease backwards;
+  }
+
+  .gi-yarin-notu {
+    display: block;
+    font-size: 13px;
+    color: rgba(43, 33, 24, 0.55);
+    margin-top: 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gunun-ikilemi { animation: none; }
+    .gi-secenek { transition: none; }
+    .gi-secenek:hover, .gi-secenek:focus-visible { transform: none; }
+    .gi-sonuc { animation: none; }
+  }
+
   /* ---------- Oyun Kartları ---------- */
   .oyunlar {
     display: grid;
@@ -437,6 +575,21 @@
     <button type="button" class="paylas-btn" id="paylas-btn">🔗 Öğretmen arkadaşına gönder</button>
   </header>
 
+  <section class="gunun-ikilemi" id="gunun-ikilemi" aria-live="polite">
+    <div class="gi-baslik-satir">
+      <span class="gi-baslik">🗓️ Günün İkilemi</span>
+      <span class="gi-seri" id="gi-seri" hidden></span>
+    </div>
+    <div class="gi-govde" id="gi-govde">
+      <span class="gi-portre" id="gi-portre" aria-hidden="true"></span>
+      <div class="gi-icerik">
+        <p class="gi-karakter-adi" id="gi-karakter-adi"></p>
+        <p class="gi-metin" id="gi-metin">Yükleniyor…</p>
+        <div class="gi-secenekler" id="gi-secenekler"></div>
+      </div>
+    </div>
+  </section>
+
   <main class="oyunlar">
 
     <!-- Vicdan -->
@@ -571,6 +724,206 @@
         }
       });
     }
+  })();
+</script>
+
+<script>
+  /* ================================================================
+     GÜNÜN İKİLEMİ
+     Vicdan oyununun kart havuzundan (./vicdan/content.js) günün
+     tarihine göre deterministik bir kart seçer, küçük bir kutuda
+     gösterir. Stat takibi YOK — sadece o günün tek kartı + sonucu.
+     content.js bir ES module değil; kendi sunucumuzdan fetch edilip
+     metin olarak alınıyor ve `const ICERIK = {...}` gövdesi izole bir
+     Function içinde çalıştırılıp döndürülüyor (bu dosya bize ait ve
+     güvenilir; dışarıdan veri kabul edilmiyor, sadece kendi statik
+     dosyamız parse ediliyor).
+     ================================================================ */
+  (function () {
+    var govde = document.getElementById('gunun-ikilemi');
+    var portreEl = document.getElementById('gi-portre');
+    var karakterAdiEl = document.getElementById('gi-karakter-adi');
+    var metinEl = document.getElementById('gi-metin');
+    var seceneklerEl = document.getElementById('gi-secenekler');
+    var seriEl = document.getElementById('gi-seri');
+
+    if (!govde) { return; }
+
+    var KARAKTERLER = {
+      ogretmen: { ad: "Nazan Öğretmen",         emoji: "👩‍🏫", g: ["#4A7C59", "#A9C5A0"] },
+      mudur:    { ad: "Kemal Bey · Müdür",       emoji: "👨‍💼", g: ["#7A5C43", "#B99B7C"] },
+      rehber:   { ad: "Murat Bey · Rehber Öğr.", emoji: "🧑‍🏫", g: ["#4A7C59", "#D9A441"] },
+      anne:     { ad: "Annen",                   emoji: "👩",   g: ["#C4574A", "#E2A099"] },
+      baba:     { ad: "Baban",                   emoji: "👨",   g: ["#7A5C43", "#D9A441"] },
+      kardes:   { ad: "Yusuf · Kardeşin",        emoji: "👦",   g: ["#D9A441", "#EFD09A"] },
+      dede:     { ad: "Deden",                   emoji: "👴",   g: ["#4A7C59", "#B99B7C"] },
+      emir:     { ad: "Emir",                    emoji: "😎",   g: ["#C4574A", "#D9A441"] },
+      zeynep:   { ad: "Zeynep",                  emoji: "🙋‍♀️", g: ["#D9A441", "#A9C5A0"] },
+      elif:     { ad: "Elif",                    emoji: "🌷",   g: ["#E2A099", "#EFD09A"] },
+      burak:    { ad: "Burak",                   emoji: "😐",   g: ["#7A5C43", "#8C8A85"] },
+      selim:    { ad: "Selim",                   emoji: "😊",   g: ["#A9C5A0", "#EFD09A"] },
+      kantinci: { ad: "İsmail Abi · Kantinci",   emoji: "🧑‍🍳", g: ["#C4574A", "#B99B7C"] },
+      bakkal:   { ad: "Hasan Amca · Bakkal",     emoji: "👨‍🦳", g: ["#4A7C59", "#EFD09A"] },
+      komsu:    { ad: "Saliha Teyze · Komşu",    emoji: "👵",   g: ["#E2A099", "#A9C5A0"] },
+      hademe:   { ad: "Ramazan Amca · Hademe",   emoji: "🧹",   g: ["#7A5C43", "#A9C5A0"] },
+      kagan:    { ad: "Kağan",                   emoji: "🙂",   g: ["#4A7C59", "#D9A441"] }
+    };
+
+    function karakterGoster(kartKarakter) {
+      var kr = KARAKTERLER[kartKarakter] || { ad: kartKarakter || "?", emoji: "🙂", g: ["#4A7C59", "#D9A441"] };
+      portreEl.style.background = 'linear-gradient(135deg, ' + kr.g[0] + ', ' + kr.g[1] + ')';
+      portreEl.innerHTML = '';
+      if (kartKarakter) {
+        var img = document.createElement('img');
+        img.src = './assets/karakter/' + kartKarakter + '.jpg';
+        img.alt = '';
+        img.onerror = function () { portreEl.innerHTML = ''; portreEl.textContent = kr.emoji; };
+        portreEl.appendChild(img);
+      } else {
+        portreEl.textContent = kr.emoji;
+      }
+      karakterAdiEl.textContent = kr.ad;
+    }
+
+    /* ---------- Tarih-seed: yyyymmdd sayısını kart sayısına mod'la ---------- */
+    function bugununTarihDamgasi() {
+      var d = new Date();
+      var yyyy = d.getFullYear();
+      var mm = String(d.getMonth() + 1).padStart(2, '0');
+      var dd = String(d.getDate()).padStart(2, '0');
+      return yyyy + '-' + mm + '-' + dd;
+    }
+
+    function tarihSeed(tarihDamgasi) {
+      return parseInt(tarihDamgasi.replace(/-/g, ''), 10);
+    }
+
+    /* ---------- Seri sayacı (localStorage) ---------- */
+    var GI_ANAHTAR_TARIH = 'gunlukSeriSonTarih';
+    var GI_ANAHTAR_SAYI = 'gunlukSeriSayisi';
+
+    function bir_gun_farkli_mi(oncekiTarih, bugun) {
+      try {
+        var a = new Date(oncekiTarih + 'T00:00:00');
+        var b = new Date(bugun + 'T00:00:00');
+        var farkGun = Math.round((b - a) / 86400000);
+        return farkGun === 1;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function seriGuncelleVeGoster() {
+      var bugun = bugununTarihDamgasi();
+      var sayi = 1;
+      try {
+        var oncekiTarih = localStorage.getItem(GI_ANAHTAR_TARIH);
+        var oncekiSayi = parseInt(localStorage.getItem(GI_ANAHTAR_SAYI), 10) || 0;
+
+        if (oncekiTarih === bugun) {
+          /* Bugün zaten ziyaret edilmiş, sayaç aynı kalır */
+          sayi = oncekiSayi || 1;
+        } else if (oncekiTarih && bir_gun_farkli_mi(oncekiTarih, bugun)) {
+          sayi = oncekiSayi + 1;
+        } else {
+          sayi = 1;
+        }
+
+        localStorage.setItem(GI_ANAHTAR_TARIH, bugun);
+        localStorage.setItem(GI_ANAHTAR_SAYI, String(sayi));
+      } catch (e) {
+        /* localStorage kapalı olabilir (gizli sekme vb.) — sessiz geç */
+        sayi = 1;
+      }
+
+      if (sayi > 1 && seriEl) {
+        seriEl.textContent = '🔥 ' + sayi + ' gündür uğruyorsun';
+        seriEl.hidden = false;
+      }
+    }
+
+    /* ---------- content.js'i çek ve ICERIK'i çıkar ---------- */
+    function icerikYukle() {
+      return fetch('./vicdan/content.js')
+        .then(function (yanit) {
+          if (!yanit.ok) { throw new Error('content.js alınamadı'); }
+          return yanit.text();
+        })
+        .then(function (metin) {
+          /* content.js kendi statik dosyamız: `const ICERIK = {...}` içerir.
+             İzole bir Function kapsamında çalıştırıp ICERIK'i geri döndürüyoruz;
+             dışarıdan kullanıcı verisi değil, güvendiğimiz kendi kaynağımız. */
+          var fabrika = new Function(metin + '\nreturn ICERIK;');
+          return fabrika();
+        });
+    }
+
+    function duzKartListesi(icerik) {
+      return (icerik && Array.isArray(icerik.kartlar)) ? icerik.kartlar : [];
+    }
+
+    function gununKartiniSec(kartlar) {
+      if (!kartlar.length) { return null; }
+      var seed = tarihSeed(bugununTarihDamgasi());
+      var index = seed % kartlar.length;
+      return kartlar[index];
+    }
+
+    function secimGoster(kart, tarafAnahtari) {
+      var taraf = kart[tarafAnahtari];
+      if (!taraf) { return; }
+
+      seceneklerEl.innerHTML = '';
+
+      var sonucKutu = document.createElement('p');
+      sonucKutu.className = 'gi-sonuc';
+      sonucKutu.textContent = taraf.sonuc || '';
+
+      var not = document.createElement('span');
+      not.className = 'gi-yarin-notu';
+      not.textContent = 'Yarın yeni bir ikilem seni bekliyor.';
+
+      seceneklerEl.appendChild(sonucKutu);
+      seceneklerEl.appendChild(not);
+    }
+
+    function kartGoster(kart) {
+      karakterGoster(kart.karakter);
+      metinEl.textContent = kart.metin || '';
+      seceneklerEl.innerHTML = '';
+
+      ['sol', 'sag'].forEach(function (tarafAnahtari) {
+        var taraf = kart[tarafAnahtari];
+        if (!taraf || !taraf.etiket) { return; }
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gi-secenek';
+        btn.textContent = taraf.etiket;
+        btn.addEventListener('click', function () {
+          secimGoster(kart, tarafAnahtari);
+        });
+        seceneklerEl.appendChild(btn);
+      });
+    }
+
+    function hataGoster() {
+      metinEl.textContent = 'Bugünün ikilemi şu an yüklenemedi. Vicdan oyununu oynayarak daha fazlasını keşfedebilirsin.';
+      seceneklerEl.innerHTML = '';
+      portreEl.style.background = 'linear-gradient(135deg, #4A7C59, #D9A441)';
+      portreEl.textContent = '🗓️';
+    }
+
+    icerikYukle()
+      .then(function (icerik) {
+        var kartlar = duzKartListesi(icerik);
+        var kart = gununKartiniSec(kartlar);
+        if (!kart) { throw new Error('Kart bulunamadı'); }
+        kartGoster(kart);
+        seriGuncelleVeGoster();
+      })
+      .catch(function () {
+        hataGoster();
+      });
   })();
 </script>
 

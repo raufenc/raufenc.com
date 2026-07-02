@@ -43,6 +43,24 @@ const ICERIK = {
       ad: "Cömertlik ve Fedakârlık",
       giris: "Cömertlik cüzdanla değil, yürekle ölçülür. Bazen bir tostun yarısı, bazen bir cumartesi sabahıdır. Bu hafta bakalım sen neyi bölüşeceksin?",
       kupe: { soz: "Veren el, alan elden üstündür.", kaynak: "Hadis-i şerif (Buhârî ve Müslim)", kisaKaynak: "Buhârî, Zekât 18" }
+    },
+    {
+      no: 6,
+      ad: "Şükür ve Kanaat",
+      giris: "Elindekini görmek, elindeki olmayanı görmekten çok daha zordur bazen. Bu hafta gözünü başkasının tabağından kendi tabağına çevirmeyi deneyeceksin.",
+      kupe: { soz: "Az ile yetinmeyen çoğa da kanaat etmez.", kaynak: "Atasözü", kisaKaynak: "" }
+    },
+    {
+      no: 7,
+      ad: "Emanet ve Çevre",
+      giris: "Üstünde durduğun toprak, içtiğin su, kullandığın ışık; hepsi sana emanet. Bu hafta emanete nasıl davrandığına bakacaksın.",
+      kupe: { soz: "Veren el olmadan önce koruyan el ol.", kaynak: "Atasözü", kisaKaynak: "" }
+    },
+    {
+      no: 8,
+      ad: "Ekran Ahlakı",
+      giris: "Ekranın içi de gerçek bir dünya; orada da bir kapı çalınır, orada da bir söz kırılır. Bu hafta parmaklarının nereye dokunduğuna dikkat edeceksin.",
+      kupe: { soz: "Dilinden çıkan, elinden çıkandan çabuk gider ama iz bırakır aynı şekilde.", kaynak: "Atasözü", kisaKaynak: "" }
     }
   ],
 
@@ -471,6 +489,243 @@ const ICERIK = {
       sag: { etiket: "Bütün gün masada çalışırım", sonuc: "Akşam ayakların sızlar ama kasadaki rakamda senin de emeğin var.", vicdan: 8, arkadaslik: 4, aile: 0, ozguven: 0 }
     },
 
+    /* ---------- BÖLÜM 6: ŞÜKÜR VE KANAAT ---------- */
+
+    {
+      id: "sk01", bolum: 6, karakter: "emir",
+      metin: "Emir teneffüste yeni telefonunu gösteriyor: 'Bak, en son model!' Senin telefonun eski, ekranı çizik. İçinde bir şey kıpırdıyor.",
+      sol: { etiket: "Benimki de olsa, diye içim yanar", sonuc: "Emir'in telefonuna bakıp kendi cebindekini bir tuhaf tartarsın. Elindeki telefon aynı telefon; ama artık sana küçük geliyor.", vicdan: -6, arkadaslik: 0, aile: -3, ozguven: -4 },
+      sag: { etiket: "Benimki de işimi görüyor derim", sonuc: "Emir omuz silker, sen cebindeki eski telefonla mesaj atarsın; mesaj yine de gider, yine de gülersin.", vicdan: 8, arkadaslik: 2, aile: 0, ozguven: 6 }
+    },
+    {
+      id: "sk02", bolum: 6, karakter: "zeynep",
+      metin: "Zeynep harçlığını anlatıyor: 'Bana haftalık 200 lira veriyorlar, senin kaç?' Senin harçlığın daha az. Sesini alçaltmak mı, değiştirmek mi istiyorsun?",
+      sol: { etiket: "Kıyaslayıp üzülürüm", sonuc: "Cebindeki para birden küçülür gibi olur; oysa dün aynı parayla mutluydun.", vicdan: -4, arkadaslik: 0, aile: -4, ozguven: -3 },
+      sag: { etiket: "Herkesin durumu farklı derim", sonuc: "'Benimki bana yeter' dersin. Zeynep şaşırır: 'Sen hiç kıskanmıyor musun?' Sen de kendine şaşırırsın: hayır, kıskanmıyorsun.", vicdan: 8, arkadaslik: 2, aile: 3, ozguven: 5 }
+    },
+    {
+      id: "sk03", bolum: 6, karakter: "anne",
+      metin: "Akşam yemeğinde yine mercimek çorbası. Annen 'Bugün başka bir şey pişiremedim, yorgundum' diyor. Kaşığı eline alıyorsun.",
+      sol: { etiket: "Yine mi bu, diye söylenirim", sonuc: "Annenin yüzü düşer. Çorba aynı çorba ama artık masada bir ağırlık var.", vicdan: -8, arkadaslik: 0, aile: -6, ozguven: 0 },
+      sag: { etiket: "Elinize sağlık derim", sonuc: "Annen gülümser, omuzları biraz iner. Çorba aslında hiç fena değilmiş, öyle bakınca.", vicdan: 8, arkadaslik: 0, aile: 7, ozguven: 0 }
+    },
+    {
+      id: "sk04", bolum: 6, karakter: "burak",
+      metin: "Burak'ın çantası eski, fermuarı ilaçla tutuyor. Senin çantan da orta hâlli ama Burak'ınkini görünce içinden bir kıyas geçiyor.",
+      sol: { etiket: "İyi ki benimki değil, diye düşünürüm", sonuc: "Rahatlarsın ama o rahatlık bir tuhaf; başkasının eksiğiyle kendi hâlini ölçmek hiç iyi hissettirmiyor.", vicdan: -8, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Elimdekine şükrederim", sonuc: "Çantana bakarsın: yırtık yok, fermuar sağlam. Fark ettiğinde içinde sessiz bir teşekkür kabarır.", vicdan: 8, arkadaslik: 0, aile: 0, ozguven: 5 }
+    },
+    {
+      id: "sk05", bolum: 6, karakter: "dede",
+      metin: "Dede eski bir fotoğraf gösteriyor: 'Senin yaşındayken tek oyuncağım bir topaçtı. Ama o topaçla koca bir yaz geçirdim.' Sana bakıyor.",
+      sol: { etiket: "Şimdi öyle olmaz dede derim", sonuc: "Dede güler ama gözlerinde küçük bir hüzün: 'Belki de mesele oyuncak sayısı değildi hiç.'", vicdan: -3, arkadaslik: 0, aile: -3, ozguven: 0 },
+      sag: { etiket: "Bir tek şeyle bile mutlu olunurmuş derim", sonuc: "Dede başını sallar, elini omzuna koyar: 'Sen anlamışsın, ben de senin yaşındayken anlamamıştım.'", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 0 }
+    },
+    {
+      id: "sk06", bolum: 6, karakter: "selim",
+      metin: "Selim'in ayakkabıları eskimiş ama o hiç şikayet etmiyor, hep aynı neşeyle koşuyor. Sen yeni ayakkabılarınla ona bakıyorsun.",
+      sol: { etiket: "Ne kadar şanslıyım diye böbürlenirim", sonuc: "'Bak benimkiler yeni' dersin. Selim bir şey demez ama gözleri yere kayar.", vicdan: -10, arkadaslik: -5, aile: 0, ozguven: 3 },
+      sag: { etiket: "Onun neşesine imrenirim", sonuc: "Selim'in ayakkabısı eski ama gülüşü hiç eskimiyor. Belki asıl zenginlik ondaymış, diye düşünürsün.", vicdan: 8, arkadaslik: 5, aile: 0, ozguven: 2 }
+    },
+    {
+      id: "sk07", bolum: 6, karakter: "kantinci",
+      metin: "İsmail Abi'nin kantininde bugün senin sevdiğin tost yok, sade peynirli var. 'Yeter mi?' diye soruyor, biraz mahcup.",
+      sol: { etiket: "Olmaz, başka bir şey isterim", sonuc: "İsmail Abi'nin yüzü asılır. Sade peynirli tost aslında hiç fena değilmiş, tatmadan bile bilemezsin.", vicdan: -5, arkadaslik: -3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Yeter abi, teşekkürler derim", sonuc: "İsmail Abi rahatlar, tostu fazladan bir dilim peynirle uzatır: 'Sağ ol evlat, gönlün bol olsun.'", vicdan: 6, arkadaslik: 4, aile: 0, ozguven: 0 }
+    },
+    {
+      id: "sk08", bolum: 6, karakter: "kagan",
+      metin: "Kağan'la konuşuyorsunuz; o merdivenlerden çıkamadığı için üzülmüyor bile, 'Bugün güneş çok güzel' diyor pencereye bakarak. Sen de bir şeyden şikayet etmek üzereydin.",
+      sol: { etiket: "Yine de şikayetimi söylerim", sonuc: "Küçük bir dertten söz edersin; Kağan dinler ama içinden geçen düşünce belli: 'Keşke benim derdim bu kadar küçük olsa.'", vicdan: -4, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Şikayetimi içime atarım, güneşe bakarım", sonuc: "İkiniz sessizce güneşe bakarsınız. Bazen söylemeyecek olmak da bir olgunluktur.", vicdan: 6, arkadaslik: 4, aile: 0, ozguven: 3 }
+    },
+    {
+      id: "sk09", bolum: 6, karakter: "baba",
+      metin: "Baban akşam yorgun geliyor, elinde küçük bir poşet: 'Bugün sana bir şey alamadım, kusura bakma.' Bekliyor muydun aslında bir şey?",
+      sol: { etiket: "Hep böyle, diye somurtur", sonuc: "Babanın omuzları biraz daha çöker. Beklenti bazen en yorgun anı daha da ağırlaştırır.", vicdan: -8, arkadaslik: 0, aile: -7, ozguven: 0 },
+      sag: { etiket: "Sorun değil, sen yeterlisin derim", sonuc: "Baban şaşırır, sonra gülümser: 'Sen benim en büyük hediyemsin zaten.' İkiniz de bunu hissedersiniz.", vicdan: 8, arkadaslik: 0, aile: 8, ozguven: 0 }
+    },
+    {
+      id: "sk10", bolum: 6, karakter: "elif",
+      metin: "Elif'in çizdiği resimler hep beğeniliyor, senin resmin ise fark edilmedi. İçinde ufak bir kıskançlık kıvılcımı çakıyor.",
+      sol: { etiket: "Kıskanır, surat asarım", sonuc: "Elif'in başarısı gölgende büyür; kendi elinde ne olduğunu unutursun.", vicdan: -6, arkadaslik: -4, aile: 0, ozguven: -3 },
+      sag: { etiket: "Kendi çizgimi geliştiririm", sonuc: "Elif'i tebrik edip kendi defterine dönersin. Bir hafta sonra senin resmin de biraz daha iyi.", vicdan: 8, arkadaslik: 4, aile: 0, ozguven: 5 }
+    },
+    {
+      id: "sk11", bolum: 6, karakter: "hademe",
+      metin: "Ramazan Amca'nın küçük bir bahçesi var okulun arkasında, iki saksı domates. 'Bak evlat, bununla mutluyum' diyor gururla.",
+      sol: { etiket: "Bu kadarla mı, diye şaşırırım", sonuc: "Ramazan Amca'nın gülümsemesi biraz küçülür. Sözlerin bazen bilmeden batıyor.", vicdan: -6, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Çok güzel değil mi derim", sonuc: "Ramazan Amca bir domates koparıp uzatır: 'Al, kendi elimle yetiştirdim.' Tadı dükkândakinden başka geliyor.", vicdan: 8, arkadaslik: 3, aile: 0, ozguven: 0 }
+    },
+    {
+      id: "sk12", bolum: 6, karakter: "rehber",
+      metin: "Murat Bey sınıfa soruyor: 'Bugün size verilmiş üç güzel şeyi sayın.' Kimi sıkılır, kimi düşünmeye başlar. Sen ne yaparsın?",
+      sol: { etiket: "Aklıma bir şey gelmiyor derim", sonuc: "Boş kağıda bakarsın; oysa saymaya başlasan bitmeyecek bir liste çıkardı belki de.", vicdan: -3, arkadaslik: 0, aile: 0, ozguven: -2 },
+      sag: { etiket: "Ailem, sağlığım, arkadaşlarım derim", sonuc: "Kağıda yazarken içinde ılık bir şey büyür. Küçük bir alıştırma, büyük bir fark yaratır.", vicdan: 8, arkadaslik: 2, aile: 4, ozguven: 4 }
+    },
+    {
+      id: "sk13", bolum: 6, karakter: "komsu",
+      metin: "Saliha Teyze küçük balkonundaki çiçekleri gösteriyor: 'Büyük bahçem yok ama bu üç saksı bana yetiyor evlat.' Yüzünde huzur var.",
+      sol: { etiket: "Keşke büyük bahçeniz olsa derim", sonuc: "Saliha Teyze içini çeker: 'Belki de olmayanı değil, olanı sevmeyi öğrenmek gerek.'", vicdan: -4, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Bu üç saksı çok güzel derim", sonuc: "Saliha Teyze gülümser, bir çiçeği koparıp saçına takar: 'Sen de anlıyorsun demek küçük şeylerin kıymetini.'", vicdan: 6, arkadaslik: 3, aile: 0, ozguven: 0 }
+    },
+
+    /* ---------- BÖLÜM 7: EMANET VE ÇEVRE ---------- */
+
+    {
+      id: "ec01", bolum: 7, karakter: "ogretmen",
+      metin: "Nazan Öğretmen su şişeni görüyor: yarısı dolu ama atmak üzeresin, yenisini almak daha kolay geliyor. 'Boşaltıp yıkasan olmaz mı?' diye soruyor.",
+      sol: { etiket: "Yenisini alırım, daha kolay", sonuc: "Çöpe giden şişe biraz ağırlaşır içinde; israf küçük görünür ama küçük değildir.", vicdan: -8, arkadaslik: 0, aile: -3, ozguven: 0 },
+      sag: { etiket: "Yıkar, tekrar kullanırım", sonuc: "Şişe temizlenir, çantana geri döner. Nazan Öğretmen 'Aferin' der; küçük bir alışkanlık, büyük bir fark.", vicdan: 8, arkadaslik: 0, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ec02", bolum: 7, karakter: "kardes",
+      metin: "Yusuf tuvaletten çıkarken musluğu tam kapatmamış, su akıyor. 'Fark etmez ki' diyor omuz silkerek.",
+      sol: { etiket: "Fark etmez, geçerim", sonuc: "Su akmaya devam eder. Küçük bir damla, büyük bir alışkanlığın habercisidir.", vicdan: -8, arkadaslik: 0, aile: -3, ozguven: 0 },
+      sag: { etiket: "Kapatır, Yusuf'a anlatırım", sonuc: "Musluğu kapatırsın: 'Her damla bir yerden geliyor, boşa akmasın.' Yusuf başını sallar, öğrenir.", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 0 }
+    },
+    {
+      id: "ec03", bolum: 7, karakter: "emir",
+      metin: "Emir elindeki paket kağıdını sokağa fırlatıyor: 'Bir tane, ne olacak ki.' Rüzgar kağıdı biraz öteye sürüklüyor.",
+      sol: { etiket: "Ben de öyle düşünürüm", sonuc: "Bir kağıt daha yere düşer. Sokak, herkesin 'bir tane'sinden birikiyor aslında.", vicdan: -8, arkadaslik: 3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Eğilip alırım, çöpe atarım", sonuc: "Emir şaşkın bakar: 'Neden uğraşıyorsun?' 'Çünkü burada da yaşıyoruz' dersin. Bir şey söylemez ama düşünür.", vicdan: 10, arkadaslik: -2, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ec04", bolum: 7, karakter: "burak",
+      metin: "Okul bahçesinde aç bir kedi dolaşıyor, kimse ilgilenmiyor. Burak 'hayvan bunlar, kendi başlarının çaresine bakarlar' diyor.",
+      sol: { etiket: "Burak'a katılırım, geçerim", sonuc: "Kedi bahçenin köşesinde umutsuzca dolaşmaya devam eder. Görmezden gelmek de bir seçimdir.", vicdan: -10, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Yanımdaki ekmeği veririm", sonuc: "Kedi ekmeği kapar, sana bir an bakar. Küçük bir emanet, küçük bir teşekkür.", vicdan: 10, arkadaslik: -2, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ec05", bolum: 7, karakter: "baba",
+      metin: "Evde ışıklar boş odalarda hep açık kalıyor. Baban 'Sayaç dönüyor, önemi yok bizim için' dese de sen bir şey fark ediyorsun.",
+      sol: { etiket: "Baban öyle diyorsa sorun değil derim", sonuc: "Işıklar boş odalarda yanmaya devam eder. Kimsenin fark etmediği bir israf, sessizce büyür.", vicdan: -6, arkadaslik: 0, aile: -2, ozguven: 0 },
+      sag: { etiket: "Kapatırım, boşuna yanmasın derim", sonuc: "Işıkları tek tek kapatırsın. Baban fark eder: 'Haklısın, alışkanlık meselesi bu.'", vicdan: 8, arkadaslik: 0, aile: 5, ozguven: 3 }
+    },
+    {
+      id: "ec06", bolum: 7, karakter: "mudur",
+      metin: "Kemal Bey okul bahçesinde geri dönüşüm kutuları koydurmuş ama kimse ayrım yapmadan atıyor. Elindeki plastik şişeyle kutuların önündesin.",
+      sol: { etiket: "Hangisi olursa olsun atarım", sonuc: "Şişe karışık çöpe gider. Kutular orada durur ama kimse onlara bakmaz.", vicdan: -4, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Doğru kutuya ayırıp atarım", sonuc: "Kemal Bey seni görür, gülümser: 'İşte tam da bunun için koydurdum bunları.'", vicdan: 8, arkadaslik: 0, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ec07", bolum: 7, karakter: "hademe",
+      metin: "Ramazan Amca kantin önündeki çöpleri tek tek toplarken bir kedi yavrusuna takılıyor gözü: 'Bu da kimsesiz galiba, üşüyor.'",
+      sol: { etiket: "Bizim işimiz değil derim", sonuc: "Yavru kedi soğukta titremeye devam eder. Ramazan Amca'nın omuzları biraz daha düşer.", vicdan: -8, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Ceketimi üstüne örterim", sonuc: "Yavru kedi ceketin altında ısınır, mırıldar. Ramazan Amca 'Sağ ol evlat' der, gözleri dolar.", vicdan: 10, arkadaslik: 0, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ec08", bolum: 7, karakter: "anne",
+      metin: "Annen mutfakta bayat ekmekleri atmak üzere; sen de bunu doğal karşılıyordun ama bugün bir şey içine takılıyor.",
+      sol: { etiket: "Atsın, zaten bayat derim", sonuc: "Ekmekler çöpe gider. Bir lokma emek, bir anda kaybolur.", vicdan: -6, arkadaslik: 0, aile: -2, ozguven: 0 },
+      sag: { etiket: "Kuşlara verelim derim", sonuc: "Balkona serptiğiniz ekmek kırıntılarına sabah serçeler üşüşür. Annen gülümser: 'Güzel fikir.'", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 0 }
+    },
+    {
+      id: "ec09", bolum: 7, karakter: "zeynep",
+      metin: "Zeynep okul kitaplarını yıl sonunda çöpe atacağını söylüyor: 'Yeni yıl yeni kitap, ne gerek var saklamaya?'",
+      sol: { etiket: "Haklısın derim", sonuc: "Kitaplar çöpe gider. Oysa bir alt sınıftaki biri belki de o kitaplara muhtaçtı.", vicdan: -6, arkadaslik: 2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Bağışlayalım deriz", sonuc: "Kitaplar okul kütüphanesine gider. Zeynep 'İyi fikirmiş, hiç düşünmemiştim' der.", vicdan: 8, arkadaslik: 4, aile: 0, ozguven: 2 }
+    },
+    {
+      id: "ec10", bolum: 7, karakter: "kagan",
+      metin: "Kağan okul bahçesindeki ağaçlara bakıyor: 'Keşke herkes bir tane dikse, otuz yıl sonra koca bir orman olurdu.' Gözlerinde bir hayal var.",
+      sol: { etiket: "Uzak bir hayal bu derim", sonuc: "Kağan'ın gözlerindeki ışık biraz söner. 'Belki de haklısın' der, ama içinden geçmez o hayal.", vicdan: -4, arkadaslik: -3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Ben de bir fidan dikerim derim", sonuc: "Öğretmene söylersiniz, okul bahçesine küçük bir fidan dikilir. Kağan'ın gözlerinde yıllar sonrasının ormanı parlıyor.", vicdan: 10, arkadaslik: 5, aile: 0, ozguven: 3 }
+    },
+    {
+      id: "ec11", bolum: 7, karakter: "selim",
+      metin: "Selim'in defteri neredeyse doldu ama hâlâ birkaç boş sayfa var. 'Yeni defter alacağım' diyor, elindekini çantasının dibine atmadan önce.",
+      sol: { etiket: "Yenisini al, daha rahat derim", sonuc: "Eski defter çöpe gider, boş sayfalarıyla birlikte. Kimse fark etmez ama israf sessizce büyür.", vicdan: -4, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Boş sayfaları taslak için kullan derim", sonuc: "Selim gülümser: 'İyi fikir, çizim defterim olur.' Kâğıt israf olmaz, yeniden hayat bulur.", vicdan: 6, arkadaslik: 3, aile: 0, ozguven: 2 }
+    },
+    {
+      id: "ec12", bolum: 7, karakter: "dede",
+      metin: "Dede bahçede yağmur suyunu bir bidona topluyor: 'Bu suyla çiçekleri sularım, boşa akıp gitmesin.' Sana da bir bidon uzatıyor.",
+      sol: { etiket: "Musluk suyu yeter dede derim", sonuc: "Bidon boş kalır, yağmur suyu oluktan akıp gider. Dede bir şey demez ama üzülür.", vicdan: -4, arkadaslik: 0, aile: -3, ozguven: 0 },
+      sag: { etiket: "Ben de toplarım derim", sonuc: "İkiniz bidonları doldurursunuz. Dede gülümser: 'Toprağın hakkını böyle veririz işte.'", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 0 }
+    },
+    {
+      id: "ec13", bolum: 7, karakter: "bakkal",
+      metin: "Hasan Amca poşet uzatıyor ama sende zaten bir file çanta var. 'Poşete gerek yok, bu yeter' diyebilirsin ya da almayı kabul edebilirsin.",
+      sol: { etiket: "Poşeti de alırım, evde lazım olur", sonuc: "Bir poşet daha çekmecede birikir. Zaten elindeki file çanta yeterliydi.", vicdan: -3, arkadaslik: 0, aile: 0, ozguven: 0 },
+      sag: { etiket: "Gerek yok, file çantam var derim", sonuc: "Hasan Amca gülümser: 'Aferin, senin gibiler oldukça poşetler azalır.'", vicdan: 6, arkadaslik: 0, aile: 0, ozguven: 3 }
+    },
+
+    /* ---------- BÖLÜM 8: EKRAN AHLAKI ---------- */
+
+    {
+      id: "ea01", bolum: 8, karakter: "anne",
+      metin: "Saat gece yarısını geçmiş, hâlâ telefonla oyun oynuyorsun. Annen kapıyı aralıyor: 'Hâlâ uyumadın mı?'",
+      sol: { etiket: "Beş dakika daha derim", sonuc: "Beş dakika yarım saate döner. Sabah gözlerin ağır, ders dinlemek zorlaşır.", vicdan: -6, arkadaslik: 0, aile: -6, ozguven: -3 },
+      sag: { etiket: "Kapatırım, uyurum", sonuc: "Telefonu bırakırsın. Sabah gözlerin açık, kafan berrak; annen de rahat bir gülümsemeyle uyandırır.", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 4 }
+    },
+    {
+      id: "ea02", bolum: 8, karakter: "emir",
+      metin: "Emir'in telefonu masada, mesaj geliyor; ekranda başlığı görüyorsun. Emir tuvalette, telefon senin elinin altında.",
+      sol: { etiket: "Açıp okurum", sonuc: "Mesajı okursun; içinde bilmemen gereken bir şey var. Bilgi bazen taşınamayacak kadar ağırdır.", vicdan: -12, arkadaslik: -3, aile: 0, ozguven: -4 },
+      sag: { etiket: "Telefona dokunmam", sonuc: "Emir dönünce telefonunu olduğu gibi bulur, hiç şüphelenmez bile. İçin rahat, güven sağlam.", vicdan: 12, arkadaslik: 4, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ea03", bolum: 8, karakter: "zeynep",
+      metin: "Zeynep'in beceriksizce düştüğü bir video elinde; gruba atıp herkesi güldürebilirsin. Zeynep henüz bundan haberi yok.",
+      sol: { etiket: "Gruba atarım, çok komik", sonuc: "Video yayılır, herkes güler. Zeynep okula geldiğinde neden herkesin kendine farklı baktığını anlar.", vicdan: -14, arkadaslik: 3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Silerim, kimseye göstermem", sonuc: "Videoyu silersin. Zeynep hiçbir şey bilmez ama sen içten içe doğru olanı yaptığını bilirsin.", vicdan: 12, arkadaslik: 2, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ea04", bolum: 8, karakter: "burak",
+      metin: "Online oyunda takımın kaybediyor, sinirler gerginleşiyor. Burak mikrofona bağırıyor, sen de aynı şekilde küfürlü cevap vermek üzeresin.",
+      sol: { etiket: "Ben de kaba konuşurum", sonuc: "Oyun biter ama ortam gerilmiş kalır. Ekranın arkasında da gerçek biri var, unutma.", vicdan: -8, arkadaslik: -4, aile: 0, ozguven: 0 },
+      sag: { etiket: "Sakin kalırım, kaba konuşmam", sonuc: "'Sakin ol, bir sonraki turda toparlarız' dersin. Burak biraz sakinleşir; mikrofon sakinliği de taşıyabiliyormuş.", vicdan: 10, arkadaslik: 4, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ea05", bolum: 8, karakter: "baba",
+      metin: "Baban akşam yemeğinde konuşuyor ama sen telefonuna bakmaya devam ediyorsun. 'Beni dinliyor musun?' diye soruyor, sesi biraz kırgın.",
+      sol: { etiket: "Telefona bakmaya devam ederim", sonuc: "Baban konuşmayı yarıda keser. Ekrandaki mesaj önemliydi belki ama karşındaki insan daha önemliydi.", vicdan: -6, arkadaslik: 0, aile: -7, ozguven: 0 },
+      sag: { etiket: "Telefonu bırakır, dinlerim", sonuc: "Telefonu masaya koyarsın. Baban rahatlar, anlattığı hikâye aslında oldukça komikmiş.", vicdan: 8, arkadaslik: 0, aile: 7, ozguven: 0 }
+    },
+    {
+      id: "ea06", bolum: 8, karakter: "selim",
+      metin: "Selim'in oyun içi karakterini yenince grup sohbetinde alay etmeye başlıyorlar. Sen de bir söz eklemek için parmaklarını klavyeye götürüyorsun.",
+      sol: { etiket: "Ben de dalga geçerim", sonuc: "Selim sohbetten çıkar, bir daha o oyuna girmez. Ekrandaki gülüşmeler, gerçek bir üzüntüye dönüşür.", vicdan: -10, arkadaslik: 3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Yeter, bırakın derim", sonuc: "Grup susar. Selim özel mesaj atar: 'Sağ ol, kimse böyle demezdi normalde.'", vicdan: 12, arkadaslik: 3, aile: 0, ozguven: 5 }
+    },
+    {
+      id: "ea07", bolum: 8, karakter: "kardes",
+      metin: "Yusuf senin tabletini istiyor, sen de ekran süreni bitirmek üzeresin ama devam etmek istiyorsun. Anlaşma saatiniz çoktan geçti.",
+      sol: { etiket: "Biraz daha kullanırım, o bekler", sonuc: "Yusuf kapıda bekler durur. Anlaşma bir kere bozulunca ikinci kez bozmak kolaylaşıyor.", vicdan: -6, arkadaslik: 0, aile: -5, ozguven: 0 },
+      sag: { etiket: "Sözümü tutar, veririm", sonuc: "Tableti uzatırsın. Yusuf sevinçle kapar: 'Sağ ol abi... abla, sözünü tuttun.'", vicdan: 8, arkadaslik: 0, aile: 6, ozguven: 3 }
+    },
+    {
+      id: "ea08", bolum: 8, karakter: "ogretmen",
+      metin: "Nazan Öğretmen ders sırasında telefonların kapalı olmasını istedi ama senin telefonun titriyor, sıra altında gizlice bakmak çok kolay.",
+      sol: { etiket: "Sıra altında gizlice bakarım", sonuc: "Mesajı okursun ama dersin yarısı kaçmış. Öğretmen fark etmese de sen bir şey kaybettiğini hissedersin.", vicdan: -6, arkadaslik: 0, aile: 0, ozguven: -2 },
+      sag: { etiket: "Ders bitince bakarım", sonuc: "Dersi baştan sona dinlersin. Teneffüste mesaja bakarsın; zaten acil bir şey değilmiş.", vicdan: 6, arkadaslik: 0, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ea09", bolum: 8, karakter: "elif",
+      metin: "Elif'in sosyal medya hesabında paylaştığı bir fotoğrafın altına kötü bir yorum yazılmış. Sen de yorum yazabilirsin ya da sessiz kalabilirsin.",
+      sol: { etiket: "Karışmam, kaydırıp geçerim", sonuc: "Kötü yorum orada durmaya devam eder. Elif ekranı kapatıp üzgün bir şekilde uzaklaşır.", vicdan: -8, arkadaslik: -3, aile: 0, ozguven: 0 },
+      sag: { etiket: "Altına güzel bir yorum yazarım", sonuc: "'Fotoğraf çok güzel olmuş' yazarsın. Elif sana mesaj atar: 'Tam da o an ihtiyacım olan buydu, sağ ol.'", vicdan: 10, arkadaslik: 5, aile: 0, ozguven: 3 }
+    },
+    {
+      id: "ea10", bolum: 8, karakter: "rehber",
+      metin: "Murat Bey sınıfa soruyor: 'Bir şeyi paylaşmadan önce kendinize hangi soruyu sormalısınız?' Emir 'Kimseyi ilgilendirmez' diye mırıldanıyor.",
+      sol: { etiket: "Emir'e katılırım, önemli değil derim", sonuc: "Soru havada asılı kalır. Oysa bir tık atmadan önce durup düşünmek, çoğu zaman en zor ama en değerli adımdır.", vicdan: -4, arkadaslik: 2, aile: 0, ozguven: -2 },
+      sag: { etiket: "Bu kişiyi üzer mi diye sorarım derim", sonuc: "Murat Bey gülümser: 'İşte tam da bunu duymak istiyordum.' Sınıfta küçük bir sessizlik, büyük bir öğreniş olur.", vicdan: 8, arkadaslik: 0, aile: 0, ozguven: 4 }
+    },
+    {
+      id: "ea11", bolum: 8, karakter: "kagan",
+      metin: "Kağan'ın paylaştığı bir video az izlenmiş, sen de görmüşsün ama henüz beğenmemişsin. Küçük bir dokunuş, onun için büyük olabilir.",
+      sol: { etiket: "Önemli değil, atlarım", sonuc: "Video az izlenmeye devam eder. Kağan ekranına bakıp bakıp sayıları kontrol eder, sessizce.", vicdan: -3, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Beğenir, güzel yorum yazarım", sonuc: "Kağan'ın telefonu titrer, yüzü aydınlanır. Küçük bir kalp işareti, koca bir gülümseme yaratmış.", vicdan: 6, arkadaslik: 4, aile: 0, ozguven: 0 }
+    },
+    {
+      id: "ea12", bolum: 8, karakter: "kantinci",
+      metin: "İsmail Abi kantinde telefonuna dalmış bir öğrenciyi görünce sana dönüyor: 'Sizin nesil hep ekrana bakıyor, hiç konuşmuyorsunuz.' Sen de telefonunu cebine mi atarsın, savunma mı yaparsın?",
+      sol: { etiket: "Öyle değil abi diye tartışırım", sonuc: "Kısa bir tartışma olur, kimse ikna olmaz. Elindeki telefon hâlâ orada, cevap da havada kalır.", vicdan: -3, arkadaslik: -2, aile: 0, ozguven: 0 },
+      sag: { etiket: "Telefonu cebe atıp sohbet ederim", sonuc: "İsmail Abi'yle beş dakika sohbet edersin; gülersiniz. 'İşte böyle' der, gülümseyerek.", vicdan: 8, arkadaslik: 3, aile: 0, ozguven: 3 }
+    },
+
     /* ---------- KOŞULLU TAKİP KARTLARI ----------
        Bu kartlar yalnız ilgili flag konmuşsa desteye girer:
        geçmişteki bir seçim, ileride kapıyı çalar. */
@@ -551,7 +806,7 @@ const ICERIK = {
       metin: "Kendine güvenmen güzeldi; ama doz kaçtı. Artık aynada senden başkası görünmüyor, hatalar hep başkasının. Unutma: en yüksekte uçan uçurtmanın bile ipi yerde durur. Baştan dene; bu kez ipi elinden bırakma."
     },
     final: {
-      genel: "Beş hafta, onlarca seçim... Hayal Ortaokulu'nda bir dönem bitti. Kimi gün kibrit çaktın, kimi gün su oldun; kimi gün çizgiye bastın, kimi gün silip yeniden çizdin. Vicdan bir kas gibidir: kullandıkça güçlenir. Al bakalım karneni.",
+      genel: "Onlarca seçim... Hayal Ortaokulu'nda bir dönem bitti. Kimi gün kibrit çaktın, kimi gün su oldun; kimi gün çizgiye bastın, kimi gün silip yeniden çizdin. Vicdan bir kas gibidir: kullandıkça güçlenir. Al bakalım karneni.",
       yorumlar: {
         vicdan: "İçindeki ses bu dönem gür çıktı. Her zaman alkış almadın, bazen yalnız kaldın; ama akşam başını yastığa koyduğunda için rahattı. Bu, dünyanın en sessiz ödülüdür ve en kıymetlisi.",
         arkadaslik: "Dostluk karnen pekiyi! İnsanlar seni seviyor; çünkü yanlarında olduğunu biliyorlar. Tek bir not düşelim: bazen 'hayır' demek de bir dostluk görevidir. Onu da öğrenince tadından yenmeyeceksin.",
