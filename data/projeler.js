@@ -26,7 +26,8 @@ var PROJELER = [
   { emoji: '\u{1F331}', title: 'İyilik Akademi', desc: 'Çocuklara güzel ahlakı nasıl öğretirsin? 40 derslik interaktif bir yolculukla — oyunlaştırılmış, quizlerle dolu.', tag: 'Uygulama', href: '/iyilikakademi/', kategori: 'peygamberim' },
   { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', kategori: 'sinif', featured: true },
   { emoji: '\u{1F3F0}', title: 'Beylikten Cihana', desc: 'Zar yok, tarih var. Söğüt\'ten İstanbul\'a şehir fethet, imar et, rakiplerini alt et. 85 sefer kartı, dijital + evde basılabilir fiziksel set.', tag: 'Oyun', href: '/beylikten-cihana/', kategori: 'tarih', featured: true },
-  { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'sinif', featured: true }
+  { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'sinif', featured: true },
+  { emoji: '\u{2696}\u{FE0F}', title: 'Değer Oyunları', desc: 'Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.', tag: 'Oyun', href: '/oyunlar/', kategori: 'sinif', featured: true }
 ];
 
 var SINIF_ARACLARI = [];

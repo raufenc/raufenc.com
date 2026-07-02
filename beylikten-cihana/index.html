@@ -121,6 +121,9 @@
   .kare.sahipli .kfoot{font-weight:800; color:#3a2d12}
   .kare.ipotekli{filter:grayscale(.55) opacity(.78)}
   .kare.vurgu{animation:karePulse 1.1s ease-out}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
 
   .merkez{grid-row:2 / 11; grid-column:2 / 11; border-radius:9px; border:2.5px solid var(--altin);
     background:radial-gradient(circle at 50% 32%, #1c6353, #0e3f35 72%); position:relative;
@@ -141,7 +144,7 @@
   .sm-et{font-size:clamp(6.5px,1.15vmin,9.5px); letter-spacing:.08em; color:#7a5b1a; margin-top:3px; text-align:center; line-height:1.1}
 
   .pawnlar{position:absolute; bottom:2px; right:2px; left:2px; display:flex; flex-wrap:wrap; gap:2px; justify-content:center; pointer-events:none}
-  .pawn{width:clamp(24px,4vmin,38px); height:clamp(24px,4vmin,38px); border-radius:50%; display:flex; align-items:center; justify-content:center;
+  .pawn{width:clamp(28px,4.4vmin,38px); height:clamp(28px,4.4vmin,38px); border-radius:50%; display:flex; align-items:center; justify-content:center;
     font-size:clamp(14px,2.4vmin,22px); border:1.5px solid rgba(255,255,255,.6);
     box-shadow:0 0 0 1.5px #f4ead0, 0 0 0 2.5px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.5)}
   .pawn-hareket{animation:zipla .24s ease-out; z-index:9; box-shadow:0 0 0 1.5px #fff, 0 0 13px 3px var(--altin2), 0 3px 8px rgba(0,0,0,.55)}
@@ -163,7 +166,7 @@
   .bot-spinner{width:16px;height:16px;border:2.5px solid rgba(201,162,39,.3);border-top-color:var(--altin2);border-radius:50%;animation:donme .8s linear infinite}
   #oyuncular{display:grid; grid-template-columns:1fr 1fr; gap:10px}
   .oyuncu-kart{background:rgba(0,0,0,.24); border:2.5px solid; border-radius:13px; padding:10px 30px 10px 11px; transition:box-shadow .2s; position:relative}
-  .koltuk-btn{position:absolute; top:7px; right:7px; width:26px; height:26px; border-radius:8px; border:1px solid rgba(201,162,39,.5);
+  .koltuk-btn{position:absolute; top:6px; right:6px; width:32px; height:32px; border-radius:8px; border:1px solid rgba(201,162,39,.5);
     background:rgba(255,255,255,.09); color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1}
   .koltuk-btn:hover{background:rgba(255,255,255,.2)}
   .akbtn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
@@ -421,6 +424,7 @@
   </div>
   <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin · tur limitinde süre dolunca en zengin kazanır</div>
   <button id="devam-btn" class="btn-buyuk gizli" style="margin-top:0;margin-bottom:10px;background:linear-gradient(180deg,#7fc9a8,#1e8449)">▶️ Kayıtlı Oyuna Devam Et</button>
+  <div id="kayit-hata" class="gizli" style="text-align:center;font-size:13px;color:#f2a8a8;margin:-4px 0 10px">⚠️ Kayıtlı oyun okunamadı ya da eski bir sürümden kalma — yeniden başlayabilirsin.</div>
   <div id="kurulum-oyuncular"></div>
   <button id="basla" class="btn-buyuk">⚔️ Sefere Çık — Oyunu Başlat</button>
   <div class="kurallar-ozet">
@@ -451,7 +455,7 @@
   </div>
 </section>
 
-<div id="modal"></div>
+<div id="modal" role="dialog" aria-modal="true"></div>
 
 <div id="kurallar-modal">
   <div class="modal-kutu genis">
@@ -3589,7 +3593,7 @@ window.OYUN_VERISI = {
   function karistir(n) { var a = [], i, j, t; for (i = 0; i < n; i++) a.push(i); for (i = a.length - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function slug(s) { var t = { "İ": "i", "I": "i", "ı": "i", "Ş": "s", "ş": "s", "Ç": "c", "ç": "c", "Ğ": "g", "ğ": "g", "Ö": "o", "ö": "o", "Ü": "u", "ü": "u" }; return s.split("").map(function (c) { return t[c] || c; }).join("").toLowerCase().replace(/[^a-z0-9]/g, ""); }
   function gorselImg(ad, cls) { return '<img class="' + (cls || "m-gorsel") + '" src="img/' + slug(ad) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">'; }
-  function logla(msg, sinif) { var box = $("#log"); box.insertBefore(el("div", "log-satir" + (sinif ? " " + sinif : ""), msg), box.firstChild); }
+  function logla(msg, sinif) { var box = $("#log"); box.insertBefore(el("div", "log-satir" + (sinif ? " " + sinif : ""), msg), box.firstChild); box.scrollTop = 0; }
 
   // ---------- kurulum ----------
   function kurulumEkrani() {
@@ -3643,19 +3647,20 @@ window.OYUN_VERISI = {
   }
 
   // ---------- kaydet / devam ----------
+  var KAYIT_SURUMU = 2;
   function kaydet() {
     try {
       if (!oyun || oyun.bitti) return;
       var kareDurum = K.map(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") ? { s: k.sahip, i: k.imar || 0, p: !!k.ipotekli } : null; });
-      localStorage.setItem("bc_kayit", JSON.stringify({ oyun: oyun, kd: kareDurum, t: 1 }));
-    } catch (e) {}
+      localStorage.setItem("bc_kayit", JSON.stringify({ oyun: oyun, kd: kareDurum, t: KAYIT_SURUMU }));
+    } catch (e) { console.warn("Kayıt yazılamadı:", e); }
   }
   function kayitVarMi() { try { return !!localStorage.getItem("bc_kayit"); } catch (e) { return false; } }
   function temizleKayit() { try { localStorage.removeItem("bc_kayit"); } catch (e) {} }
   function yukle() {
     try {
       var snap = JSON.parse(localStorage.getItem("bc_kayit"));
-      if (!snap || !snap.oyun) return false;
+      if (!snap || !snap.oyun || snap.t !== KAYIT_SURUMU) { temizleKayit(); return false; }
       oyun = snap.oyun;
       snap.kd.forEach(function (d, i) { if (d) { K[i].sahip = d.s; K[i].imar = d.i; K[i].ipotekli = d.p; } });
       oyun.hareketEden = null; oyun._para = {}; oyun._yeniImar = -1;
@@ -3667,7 +3672,7 @@ window.OYUN_VERISI = {
       logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
       if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
       return true;
-    } catch (e) { return false; }
+    } catch (e) { console.warn("Kayıt yüklenemedi:", e); temizleKayit(); return false; }
   }
 
   // ---------- tahta DOM ----------
@@ -4276,7 +4281,7 @@ window.OYUN_VERISI = {
   }
 
   // ---------- modallar ----------
-  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; }
+  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; var ilkBtn = ov.querySelector("button"); if (ilkBtn) bekle(function () { ilkBtn.focus(); }, 60); }
   function modalKapat() { $("#modal").style.display = "none"; $("#modal").innerHTML = ""; }
 
   function kiraTablosu(k) {
@@ -4492,7 +4497,7 @@ window.OYUN_VERISI = {
     $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
     $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
     var dv = $("#devam-btn");
-    if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { yukle(); }); }
+    if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { if (!yukle()) { dv.classList.add("gizli"); var h = $("#kayit-hata"); if (h) h.classList.remove("gizli"); } }); }
     kurulumEkrani();
     var sr = $("#surum-rozet"); if (sr) sr.textContent = "v11 ✓ hazır";
   }
