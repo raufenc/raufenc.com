@@ -163,32 +163,33 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
 /* ---------- Kart alanı ---------- */
 .kart-alan{
-  position:relative;flex:1;min-height:300px;width:100%;
+  position:relative;flex:1;min-height:440px;width:100%;
   display:flex;align-items:center;justify-content:center;
 }
 .kart-alan::before{
-  content:"";position:absolute;width:min(320px,86%);height:80%;
-  background:rgba(255,253,248,.06);border-radius:22px;transform:rotate(3deg);
+  content:"";position:absolute;width:min(320px,86%);height:88%;
+  background:rgba(217,164,65,.07);border-radius:26px;transform:rotate(3deg);
 }
 .kart{
-  position:relative;width:min(340px,100%);
-  height:clamp(260px,42vh,360px);height:clamp(260px,42dvh,360px);
-  background:
-    linear-gradient(160deg,rgba(217,164,65,.06),rgba(217,164,65,0) 45%),
-    repeating-linear-gradient(0deg,rgba(43,33,24,.014) 0,rgba(43,33,24,.014) 1px,transparent 1px,transparent 3px),
-    var(--kagit);
-  border-radius:22px;overflow:hidden;
-  box-shadow:0 14px 34px rgba(0,0,0,.35);
+  position:relative;width:min(320px,88%);
+  height:clamp(440px,64vh,540px);height:clamp(440px,64dvh,540px);
+  background:linear-gradient(160deg,var(--gece),#0e1830);
+  border-radius:26px;overflow:hidden;
+  box-shadow:0 14px 34px rgba(0,0,0,.4);
   touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;
   cursor:grab;will-change:transform;
   animation:kartGel .35s ease;
-  display:flex;align-items:center;justify-content:center;padding:26px 22px;
   border:3px solid transparent;
+}
+.kart-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}
+.kart-scrim{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(14,24,48,0) 28%,rgba(14,24,48,.5) 52%,rgba(14,24,48,.94) 82%);
 }
 .kart.tutuluyor{transition:none!important;cursor:grabbing}
 @keyframes kartGel{from{transform:translateY(20px) scale(.95);opacity:0}}
 .kart.dogru-parlama::after{
-  content:"";position:absolute;inset:0;border-radius:19px;
+  content:"";position:absolute;inset:0;border-radius:23px;z-index:3;
   background:radial-gradient(circle at 50% 50%,rgba(74,124,89,.55),rgba(74,124,89,0) 70%);
   animation:parla .3s ease;
 }
@@ -204,17 +205,22 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .kart.yanlis-flas{border-color:var(--kiremit)}
 .kart.yanlis-soluk{opacity:.55}
 
-.kart-govde{width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
-.kart-maskot{width:72px;height:72px;object-fit:cover;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.28);flex-shrink:0}
-.kart-cumle{font-family:'Fraunces',Georgia,serif;font-size:1.18rem;line-height:1.55;color:var(--murekkep)}
+.kart-govde{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  width:100%;text-align:center;padding:18px 20px 22px;box-sizing:border-box;
+}
+.kart-cumle{font-family:'Fraunces',Georgia,serif;font-size:1.18rem;line-height:1.55;color:var(--fildisi);text-shadow:0 2px 8px rgba(0,0,0,.55)}
 .slot{
-  display:inline-block;min-width:64px;padding:2px 8px;border-bottom:3px solid rgba(43,33,24,.35);
+  display:inline-block;min-width:64px;padding:2px 8px;border-bottom:3px solid rgba(245,237,224,.5);
   font-weight:700;color:transparent;position:relative;
 }
 .slot .hayalet{
-  position:absolute;left:0;right:0;top:0;color:var(--murekkep);opacity:0;white-space:nowrap;
+  position:absolute;left:0;right:0;top:0;color:var(--altin);opacity:0;white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.55);
 }
-.kart-etiket-ust{position:absolute;top:12px;left:14px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(43,33,24,.4)}
+.kart-etiket-ust{
+  position:absolute;top:14px;left:14px;z-index:2;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--fildisi);background:rgba(14,24,48,.55);backdrop-filter:blur(3px);padding:5px 10px;border-radius:999px;
+}
 
 /* Sürüklerken kenarda beliren yön etiketi */
 .etiket{
@@ -241,7 +247,6 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
 /* Sınıf modunda büyütme */
 html.sinif-modu .kart-cumle{font-size:1.6rem}
-html.sinif-modu .kart-maskot{width:54px;height:54px}
 html.sinif-modu .secim{font-size:1.1rem}
 
 /* ---------- Konfeti (mini, doğru cevap) ---------- */
@@ -335,7 +340,7 @@ html.sinif-modu .secim{font-size:1.1rem}
         <span class="kapak-yedek">🕋</span>
         <img src="./assets/kapak.jpg" alt="" draggable="false" onerror="this.remove()">
       </div>
-      <img class="kapak-maskot maskot-canli" src="./assets/maskot/hero-karsilama.jpg" alt="" draggable="false" onerror="this.remove()">
+      <img class="kapak-maskot maskot-canli" src="./assets/maskot3d/hero-karsilama.jpg" alt="" draggable="false" onerror="this.remove()">
     </div>
     <div class="ust-baslik">Din Bilgisi</div>
     <h1 class="oyun-adi">Doğru Taraf</h1>
@@ -365,7 +370,7 @@ html.sinif-modu .secim{font-size:1.1rem}
   <!-- Kategori seçimi (yalnız Serbest mod) -->
   <section id="ekran-kategori" class="ekran">
     <div class="ust-baslik">Serbest Mod</div>
-    <img class="baslik-maskot maskot-canli" src="./assets/maskot/maskot-19.jpg" alt="" draggable="false" onerror="this.remove()">
+    <img class="baslik-maskot maskot-canli" src="./assets/maskot3d/hero-dusun.jpg" alt="" draggable="false" onerror="this.remove()">
     <h2 style="font-size:1.6rem">Kategori Seç</h2>
     <div class="kategori-izgara" id="kategori-izgara"></div>
     <button id="btn-kategori-geri" class="btn ikincil" type="button">← Geri</button>
@@ -415,7 +420,7 @@ html.sinif-modu .secim{font-size:1.1rem}
 
 <div id="aciklama-katman" class="aciklama-katman gizli" role="dialog" aria-modal="true" aria-labelledby="aciklama-baslik">
   <div class="aciklama-kutu">
-    <img class="aciklama-maskot maskot-canli" src="./assets/maskot/maskot-05.jpg" alt="" draggable="false" onerror="this.remove()">
+    <img class="aciklama-maskot maskot-canli" src="./assets/maskot3d/hero-dusun.jpg" alt="" draggable="false" onerror="this.remove()">
     <div class="aciklama-baslik" id="aciklama-baslik"></div>
     <p class="aciklama-cumle" id="aciklama-cumle"></p>
     <p class="aciklama-metin" id="aciklama-metin"></p>
@@ -880,14 +885,16 @@ html.sinif-modu .secim{font-size:1.1rem}
   }
 
   /* ---------- Kart çizimi ---------- */
-  /* Her soru resimli: 24 sevimli, genel-amaçlı "düşünen çocuk" maskotundan biri,
-     soru id'sine göre sabit (aynı soru hep aynı maskotu gösterir). */
-  var MASKOT_SAYISI = 24;
-  function maskotYolu(soruId){
+  /* Her soru resimli: 8 dikey 3D karakter sahnesinden biri kartın tamamını kaplar,
+     soru id'sine göre sabit (aynı soru hep aynı sahneyi gösterir). Metin, görselin
+     altındaki koyu gradyan (scrim) üzerine bindirilir — okunabilirlik görsel
+     içeriğinden bağımsız garanti edilir. */
+  var KART_GORSEL_SAYISI = 8;
+  function kartGorseli(soruId){
     var h = 0;
     for (var i = 0; i < soruId.length; i++) { h = (h * 31 + soruId.charCodeAt(i)) >>> 0; }
-    var idx = (h % MASKOT_SAYISI) + 1;
-    return "assets/maskot/maskot-" + (idx < 10 ? "0" + idx : idx) + ".jpg";
+    var idx = (h % KART_GORSEL_SAYISI) + 1;
+    return "assets/kartlar/kart-" + (idx < 10 ? "0" + idx : idx) + ".jpg";
   }
 
   function kartCiz(){
@@ -902,6 +909,19 @@ html.sinif-modu .secim{font-size:1.1rem}
     kartAlan.innerHTML = "";
     kartEl = document.createElement("div");
     kartEl.className = "kart";
+
+    var bgEl = document.createElement("img");
+    bgEl.className = "kart-bg";
+    bgEl.alt = "";
+    bgEl.draggable = false;
+    bgEl.loading = "lazy";
+    bgEl.onerror = function(){ this.remove(); };
+    bgEl.src = kartGorseli(soru.id);
+    kartEl.appendChild(bgEl);
+
+    var scrimEl = document.createElement("div");
+    scrimEl.className = "kart-scrim";
+    kartEl.appendChild(scrimEl);
 
     var ustEtiket = document.createElement("div");
     ustEtiket.className = "kart-etiket-ust";
@@ -919,15 +939,6 @@ html.sinif-modu .secim{font-size:1.1rem}
 
     var govde = document.createElement("div");
     govde.className = "kart-govde";
-
-    var maskotEl = document.createElement("img");
-    maskotEl.className = "kart-maskot";
-    maskotEl.alt = "";
-    maskotEl.draggable = false;
-    maskotEl.loading = "lazy";
-    maskotEl.onerror = function(){ this.remove(); };
-    maskotEl.src = maskotYolu(soru.id);
-    govde.appendChild(maskotEl);
 
     var cumleEl = document.createElement("p");
     cumleEl.className = "kart-cumle";
@@ -1203,7 +1214,7 @@ html.sinif-modu .secim{font-size:1.1rem}
 
   /* ---------- Sonuç ekranı ---------- */
   function sonucMaskotEtiketi(kutlaMi){
-    return '<img class="sonuc-maskot maskot-canli" src="./assets/maskot/' + (kutlaMi ? 'hero-kutlama.jpg' : 'hero-tesvik.jpg') + '" alt="" draggable="false" onerror="this.remove()">';
+    return '<img class="sonuc-maskot maskot-canli" src="./assets/maskot3d/' + (kutlaMi ? 'hero-kutlama.jpg' : 'hero-tesvik.jpg') + '" alt="" draggable="false" onerror="this.remove()">';
   }
 
   function sonucGoster(){
