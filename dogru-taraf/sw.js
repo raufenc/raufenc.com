@@ -6,7 +6,7 @@
    ============================================================ */
 "use strict";
 
-var CACHE_ADI = "dogrutaraf-cache-v3";
+var CACHE_ADI = "dogrutaraf-cache-v4";
 var CACHE_DOSYALARI = [
   "./",
   "index.html",
