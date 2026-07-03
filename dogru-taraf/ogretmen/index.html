@@ -70,6 +70,15 @@ section.kart p:last-child{margin-bottom:0}
 .akis-icerik code{
   background:rgba(74,124,89,.12);color:#2B2118;padding:1px 6px;border-radius:6px;font-size:.85em;
 }
+.btn-sinif-modu{
+  display:inline-flex;align-items:center;gap:6px;margin-top:10px;min-height:44px;padding:10px 20px;
+  border-radius:var(--r-md);text-decoration:none;cursor:pointer;
+  background:linear-gradient(180deg,#F0C169 0%,#D9A441 55%,#C4923A 100%);color:#2B2118;
+  font-weight:800;font-size:.88rem;letter-spacing:.01em;
+  box-shadow:0 4px 0 #9C6F26,0 6px 14px rgba(22,35,63,.25);
+  transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
+}
+.btn-sinif-modu:active{transform:translateY(4px);box-shadow:0 0 0 #9C6F26}
 
 /* Kategori-kazanım tablosu */
 .tablo-sarici{overflow-x:auto;margin-top:6px;border-radius:14px;border:1px solid rgba(43,33,24,.12)}
@@ -186,7 +195,8 @@ footer{text-align:center;font-size:.78rem;color:rgba(245,237,224,.55);padding:10
         <div class="akis-sure">0–10 dk</div>
         <div class="akis-icerik">
           <b>Sınıf yarışması</b>
-          <span>Projeksiyondaysanız adres çubuğuna <code>?sinif=1</code> ekleyerek sınıf modunu açın. Öğrencileri iki-üç gruba ayırın; sırayla soruları oylayarak cevaplayın. Sınıf modunda yazı tipi ve düğmeler büyür, uzaktan okumak kolaylaşır.</span>
+          <span>Projeksiyondaysanız aşağıdaki düğmeyle sınıf modunu açın. Öğrencileri iki-üç gruba ayırın; sırayla soruları oylayarak cevaplayın. Sınıf modunda yazı tipi ve düğmeler büyür, uzaktan okumak kolaylaşır.</span>
+          <a class="btn-sinif-modu" href="../?sinif=1">🙋 Sınıf Modunu Aç</a>
         </div>
       </div>
       <div class="akis-adim">
