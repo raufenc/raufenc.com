@@ -10,11 +10,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+:root{
+  --r-sm:14px; --r-md:20px; --r-lg:24px;
+  --golge1:0 2px 4px rgba(22,35,63,.06); --golge2:0 8px 16px rgba(22,35,63,.10); --golge3:0 20px 32px rgba(22,35,63,.14);
+  --ease-yay:cubic-bezier(.34,1.56,.64,1); --ease-hizli:ease-out;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:'Inter',system-ui,-apple-system,sans-serif;
-  background:radial-gradient(1100px 600px at 50% -220px,#1F3054,rgba(31,48,84,0)),#16233F;
+  background:radial-gradient(ellipse 140% 60% at 50% -10%,#233A63,rgba(35,58,99,0)),radial-gradient(ellipse 120% 80% at 50% 100%,#1C2B4A,#16233F 70%);
   color:#F5EDE0;
   min-height:100vh;min-height:100dvh;
   -webkit-tap-highlight-color:transparent;
@@ -25,20 +30,26 @@ a{color:#D9A441}
 .geri{
   position:fixed;top:10px;left:10px;z-index:60;
   font-size:.82rem;font-weight:600;text-decoration:none;color:#D9A441;
-  padding:10px 12px;border-radius:12px;background:rgba(22,35,63,.85);
+  padding:10px 12px;border-radius:var(--r-sm);background:rgba(22,35,63,.85);
   box-shadow:0 2px 8px rgba(0,0,0,.25);
   border:1px solid rgba(217,164,65,.3);
+  transition:transform 120ms var(--ease-yay);
 }
+.geri:active{transform:scale(.95)}
 main{max-width:860px;margin:0 auto;padding:70px 20px 60px;display:flex;flex-direction:column;gap:34px}
 header.baslik{text-align:center;display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
 .ust-baslik{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D9A441}
-h1.ana{font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15;color:#F5EDE0}
+h1.ana{
+  font-size:clamp(2rem,5vw,2.75rem);line-height:1.15;letter-spacing:-.01em;
+  background:linear-gradient(180deg,#F0C169,#D9A441 60%,#C6902F);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 .alt-aciklama{color:rgba(245,237,224,.72);font-size:.95rem;max-width:560px;margin:0 auto}
 
 section.kart{
-  background:#FFFDF8;color:#2B2118;border-radius:20px;padding:26px 24px;
-  box-shadow:0 10px 28px rgba(0,0,0,.28);
-  border:1px solid rgba(217,164,65,.35);
+  background:linear-gradient(165deg,#FFFDF8 0%,#FBF3E7 100%);color:#2B2118;border-radius:var(--r-lg);padding:26px 24px;
+  box-shadow:var(--golge1),var(--golge2),var(--golge3);
+  border:1px solid rgba(217,164,65,.2);
 }
 section.kart h2{font-size:1.4rem;margin-bottom:14px;color:#16233F;display:flex;align-items:center;gap:9px}
 section.kart h2 .ikon{font-size:1.3rem}
@@ -72,17 +83,18 @@ td.kazanim{color:rgba(43,33,24,.7);font-size:.82rem}
 /* Veli mektubu */
 .mektup{
   background:linear-gradient(160deg,rgba(217,164,65,.08),rgba(217,164,65,0) 55%),#FFFDF8;
-  border:2px solid #D9A441;border-radius:18px;padding:24px 22px;position:relative;
+  border:2px solid #D9A441;border-radius:var(--r-lg);padding:24px 22px;position:relative;
 }
 .mektup h3{font-size:1.15rem;color:#8A6414;margin-bottom:12px}
 .mektup p{font-size:.94rem;margin-bottom:10px}
 .mektup .imza{margin-top:14px;font-style:italic;color:rgba(43,33,24,.7)}
 .btn-yazdir{
-  margin-top:16px;min-height:46px;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;
-  background:linear-gradient(180deg,#548863,#4A7C59);color:#FFFDF8;font-weight:700;font-size:.92rem;
-  box-shadow:0 6px 16px rgba(74,124,89,.3);
+  margin-top:16px;min-height:50px;padding:11px 22px;border:none;border-radius:var(--r-md);cursor:pointer;
+  background:linear-gradient(145deg,#6FA97D,#4A7C59 60%,#35603F);color:#FFFDF8;font-weight:800;font-size:.92rem;letter-spacing:.01em;
+  box-shadow:0 4px 0 #234329,0 6px 14px rgba(22,35,63,.25);
+  transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
 }
-.btn-yazdir:active{transform:scale(.97)}
+.btn-yazdir:active{transform:translateY(4px);box-shadow:0 0 0 #234329}
 
 /* Kapı afişi önizleme kartı (ekranda görünür, yazdırmada özel blok basılır) */
 .afis-onizleme{
@@ -101,11 +113,12 @@ td.kazanim{color:rgba(43,33,24,.7);font-size:.82rem}
 .afis-qr .yedek{font-size:52px}
 .afis-adres{font-weight:700;letter-spacing:.03em;color:#D9A441;font-size:1.05rem}
 .btn-afis-yazdir{
-  min-height:46px;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;
-  background:#D9A441;color:#2B2118;font-weight:700;font-size:.92rem;
-  box-shadow:0 6px 16px rgba(217,164,65,.35);
+  min-height:50px;padding:11px 22px;border:none;border-radius:var(--r-md);cursor:pointer;
+  background:linear-gradient(180deg,#F0C169 0%,#D9A441 55%,#C4923A 100%);color:#2B2118;font-weight:800;font-size:.92rem;letter-spacing:.01em;
+  box-shadow:0 4px 0 #9C6F26,0 6px 14px rgba(22,35,63,.3);
+  transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
 }
-.btn-afis-yazdir:active{transform:scale(.97)}
+.btn-afis-yazdir:active{transform:translateY(4px);box-shadow:0 0 0 #9C6F26}
 
 /* Yazdırmada kullanılacak gizli A5 afiş bloğu (ekranda görünmez) */
 #afis-yazdirma-alani{display:none}
@@ -116,11 +129,12 @@ td.kazanim{color:rgba(43,33,24,.7);font-size:.82rem}
   padding:22px 20px;
 }
 .btn-paylas{
-  min-height:48px;padding:12px 26px;border-radius:14px;cursor:pointer;
-  background:#FFFDF8;color:#2B2118;border:2px solid rgba(43,33,24,.22);font-weight:700;font-size:.92rem;
-  box-shadow:0 4px 12px rgba(43,33,24,.08);
+  min-height:50px;padding:12px 26px;border-radius:var(--r-md);cursor:pointer;
+  background:#FFFDF8;color:#2B2118;border:2px solid #16233F;font-weight:800;font-size:.92rem;letter-spacing:.01em;
+  box-shadow:0 4px 0 rgba(22,35,63,.2);
+  transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
 }
-.btn-paylas:active{transform:scale(.97)}
+.btn-paylas:active{transform:translateY(4px);box-shadow:0 0 0 rgba(22,35,63,.2)}
 #kopya-durum{font-size:.82rem;color:#4A7C59;font-weight:600;min-height:1.2em}
 
 footer{text-align:center;font-size:.78rem;color:rgba(245,237,224,.55);padding:10px 0 30px}
