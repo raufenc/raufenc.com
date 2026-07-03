@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16233F">
+<title>Doğru Taraf — Öğretmen Köşesi</title>
+<meta name="description" content="Doğru Taraf oyunu için öğretmenlere ders akışı, kategori-kazanım eşleştirmesi, yazdırılabilir kapı afişi ve veli mektubu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:radial-gradient(1100px 600px at 50% -220px,#1F3054,rgba(31,48,84,0)),#16233F;
+  color:#F5EDE0;
+  min-height:100vh;min-height:100dvh;
+  -webkit-tap-highlight-color:transparent;
+  line-height:1.6;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:700}
+a{color:#D9A441}
+.geri{
+  position:fixed;top:10px;left:10px;z-index:60;
+  font-size:.82rem;font-weight:600;text-decoration:none;color:#D9A441;
+  padding:10px 12px;border-radius:12px;background:rgba(22,35,63,.85);
+  box-shadow:0 2px 8px rgba(0,0,0,.25);
+  border:1px solid rgba(217,164,65,.3);
+}
+main{max-width:860px;margin:0 auto;padding:70px 20px 60px;display:flex;flex-direction:column;gap:34px}
+header.baslik{text-align:center;display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
+.ust-baslik{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#D9A441}
+h1.ana{font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15;color:#F5EDE0}
+.alt-aciklama{color:rgba(245,237,224,.72);font-size:.95rem;max-width:560px;margin:0 auto}
+
+section.kart{
+  background:#FFFDF8;color:#2B2118;border-radius:20px;padding:26px 24px;
+  box-shadow:0 10px 28px rgba(0,0,0,.28);
+  border:1px solid rgba(217,164,65,.35);
+}
+section.kart h2{font-size:1.4rem;margin-bottom:14px;color:#16233F;display:flex;align-items:center;gap:9px}
+section.kart h2 .ikon{font-size:1.3rem}
+section.kart p{margin-bottom:10px;font-size:.96rem}
+section.kart p:last-child{margin-bottom:0}
+
+/* 40 dakikalık ders akışı */
+.akis{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.akis-adim{display:flex;gap:14px;align-items:flex-start}
+.akis-sure{
+  flex:0 0 auto;min-width:72px;text-align:center;font-weight:700;font-size:.82rem;
+  color:#8A6414;background:rgba(217,164,65,.14);border:1px solid rgba(217,164,65,.4);
+  border-radius:10px;padding:6px 8px;
+}
+.akis-icerik{flex:1}
+.akis-icerik b{display:block;font-size:.96rem;margin-bottom:3px}
+.akis-icerik span{font-size:.88rem;color:rgba(43,33,24,.78)}
+.akis-icerik code{
+  background:rgba(74,124,89,.12);color:#2B2118;padding:1px 6px;border-radius:6px;font-size:.85em;
+}
+
+/* Kategori-kazanım tablosu */
+.tablo-sarici{overflow-x:auto;margin-top:6px;border-radius:14px;border:1px solid rgba(43,33,24,.12)}
+table{border-collapse:collapse;width:100%;font-size:.85rem;background:#FFFDF8}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(43,33,24,.09);vertical-align:top}
+th{background:rgba(22,35,63,.08);font-weight:700;color:#2B2118;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+td.kategori{font-weight:600;white-space:nowrap}
+td.kazanim{color:rgba(43,33,24,.7);font-size:.82rem}
+
+/* Veli mektubu */
+.mektup{
+  background:linear-gradient(160deg,rgba(217,164,65,.08),rgba(217,164,65,0) 55%),#FFFDF8;
+  border:2px solid #D9A441;border-radius:18px;padding:24px 22px;position:relative;
+}
+.mektup h3{font-size:1.15rem;color:#8A6414;margin-bottom:12px}
+.mektup p{font-size:.94rem;margin-bottom:10px}
+.mektup .imza{margin-top:14px;font-style:italic;color:rgba(43,33,24,.7)}
+.btn-yazdir{
+  margin-top:16px;min-height:46px;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;
+  background:linear-gradient(180deg,#548863,#4A7C59);color:#FFFDF8;font-weight:700;font-size:.92rem;
+  box-shadow:0 6px 16px rgba(74,124,89,.3);
+}
+.btn-yazdir:active{transform:scale(.97)}
+
+/* Kapı afişi önizleme kartı (ekranda görünür, yazdırmada özel blok basılır) */
+.afis-onizleme{
+  background:linear-gradient(160deg,#1F3054,#16233F);
+  border:2px solid #D9A441;border-radius:20px;padding:30px 22px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;color:#F5EDE0;
+}
+.afis-onizleme .oyun-adi-afis{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:2.1rem;color:#F5EDE0}
+.afis-onizleme .alt-slogan{font-size:.9rem;color:rgba(245,237,224,.75);max-width:320px}
+.afis-qr{
+  width:132px;height:132px;border-radius:14px;background:#FFFDF8;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+}
+.afis-qr img{width:100%;height:100%;object-fit:contain;display:block}
+.afis-qr .yedek{font-size:52px}
+.afis-adres{font-weight:700;letter-spacing:.03em;color:#D9A441;font-size:1.05rem}
+.btn-afis-yazdir{
+  min-height:46px;padding:11px 22px;border:none;border-radius:14px;cursor:pointer;
+  background:#D9A441;color:#2B2118;font-weight:700;font-size:.92rem;
+  box-shadow:0 6px 16px rgba(217,164,65,.35);
+}
+.btn-afis-yazdir:active{transform:scale(.97)}
+
+/* Yazdırmada kullanılacak gizli A5 afiş bloğu (ekranda görünmez) */
+#afis-yazdirma-alani{display:none}
+
+/* Paylaş */
+.paylas-kutu{
+  display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;
+  padding:22px 20px;
+}
+.btn-paylas{
+  min-height:48px;padding:12px 26px;border-radius:14px;cursor:pointer;
+  background:#FFFDF8;color:#2B2118;border:2px solid rgba(43,33,24,.22);font-weight:700;font-size:.92rem;
+  box-shadow:0 4px 12px rgba(43,33,24,.08);
+}
+.btn-paylas:active{transform:scale(.97)}
+#kopya-durum{font-size:.82rem;color:#4A7C59;font-weight:600;min-height:1.2em}
+
+footer{text-align:center;font-size:.78rem;color:rgba(245,237,224,.55);padding:10px 0 30px}
+
+@media (min-width:640px){
+  main{padding-top:80px}
+}
+
+@media print{
+  body *{visibility:hidden}
+
+  /* Yalnız kapı afişi basılıyorsa */
+  body.yazdir-afis #afis-yazdirma-alani,
+  body.yazdir-afis #afis-yazdirma-alani *{visibility:visible}
+  body.yazdir-afis #afis-yazdirma-alani{
+    display:flex!important;position:absolute;top:0;left:0;width:100%;height:100%;
+    flex-direction:column;align-items:center;justify-content:center;gap:22px;
+    background:#16233F!important;color:#F5EDE0;padding:40px;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+  body.yazdir-afis #afis-yazdirma-alani .oyun-adi-afis{font-size:3.4rem}
+  body.yazdir-afis #afis-yazdirma-alani .afis-qr{width:200px;height:200px}
+  body.yazdir-afis #afis-yazdirma-alani .afis-adres{font-size:1.6rem}
+  body.yazdir-afis #afis-yazdirma-alani .alt-slogan{font-size:1.15rem;max-width:420px}
+
+  /* Yalnız veli mektubu basılıyorsa */
+  body.yazdir-mektup .mektup, body.yazdir-mektup .mektup *{visibility:visible}
+  body.yazdir-mektup .mektup{position:absolute;top:0;left:0;width:100%;border:none;box-shadow:none;padding:20px}
+  body.yazdir-mektup .btn-yazdir{display:none}
+
+  .geri{display:none}
+}
+</style>
+</head>
+<body>
+<a class="geri" href="../">← Oyuna Dön</a>
+<main>
+
+  <header class="baslik">
+    <div class="ust-baslik">İHO / DKAB · Doğru Taraf</div>
+    <h1 class="ana">Doğru Taraf — Öğretmen Köşesi</h1>
+    <p class="alt-aciklama">Din Kültürü ve Ahlak Bilgisi yarışma oyununu sınıfta nasıl kullanabileceğinize dair hazır bir ders akışı, kategori-kazanım eşleştirmesi, yazdırılabilir kapı afişi ve veli mektubu.</p>
+  </header>
+
+  <section class="kart">
+    <h2><span class="ikon">🕐</span> 40 Dakikalık Ders Akışı</h2>
+    <div class="akis">
+      <div class="akis-adim">
+        <div class="akis-sure">0–10 dk</div>
+        <div class="akis-icerik">
+          <b>Sınıf yarışması</b>
+          <span>Projeksiyondaysanız adres çubuğuna <code>?sinif=1</code> ekleyerek sınıf modunu açın. Öğrencileri iki-üç gruba ayırın; sırayla soruları oylayarak cevaplayın. Sınıf modunda yazı tipi ve düğmeler büyür, uzaktan okumak kolaylaşır.</span>
+        </div>
+      </div>
+      <div class="akis-adim">
+        <div class="akis-sure">10–30 dk</div>
+        <div class="akis-icerik">
+          <b>Yanlış cevaplar üzerinden sınıfça konuşma</b>
+          <span>Yarışma sırasında sınıfın en çok yanıldığı 4-5 soruyu not edin (ekranda o an görünen doğru cevap ve açıklama yardımcı olur). Bu soruları tahtaya yazıp "Neden bu şıkkı işaretledik, doğrusu neden bu?" diye sınıfça tartışın; açıklama metnini birlikte okuyup örnekle pekiştirin.</span>
+        </div>
+      </div>
+      <div class="akis-adim">
+        <div class="akis-sure">30–40 dk</div>
+        <div class="akis-icerik">
+          <b>Bireysel Tekrar Kutusu / Serbest mod</b>
+          <span>Öğrenciler kendi cihazlarında (ya da sırayla ortak cihazda) Tekrar Kutusu'na düşen soruları veya istedikleri kategoriyi Serbest modda tekrar çözer. Süre kısaysa bu adımı ev ödevi olarak da verebilirsiniz; ilerleme cihazda otomatik saklanır.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kart">
+    <h2><span class="ikon">🎯</span> Kategori — Kazanım Eşleştirmesi</h2>
+    <div class="tablo-sarici">
+      <table>
+        <thead>
+          <tr><th>Kategori</th><th>Genel DKAB / İHO Kazanım Alanı</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kategori">İmanın Esasları</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: iman esasları</td></tr>
+          <tr><td class="kategori">İslam'ın Şartları</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: ibadet bilgisi — İslam'ın şartları</td></tr>
+          <tr><td class="kategori">Temizlik — Abdest</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: temizlik ve abdest</td></tr>
+          <tr><td class="kategori">Namaz</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: namaz ibadeti</td></tr>
+          <tr><td class="kategori">Oruç — Ramazan</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: oruç ibadeti</td></tr>
+          <tr><td class="kategori">Zekât — Sadaka</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: zekât ve sadaka</td></tr>
+          <tr><td class="kategori">Hac — Kurban</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: hac ve kurban ibadeti</td></tr>
+          <tr><td class="kategori">Peygamberimizin Hayatı</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: siyer</td></tr>
+          <tr><td class="kategori">Kur'an Bilgisi</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: Kur'an-ı Kerim bilgisi</td></tr>
+          <tr><td class="kategori">Güzel Ahlak</td><td class="kazanim">İlgili DKAB/İHO kazanım alanı: ahlak</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="kart mektup" id="mektup-alani">
+    <h3>📩 Veli Mektubu</h3>
+    <p><b>Sevgili Veli,</b></p>
+    <p>Çocuğunuz bu hafta okulda <b>"Doğru Taraf"</b> adlı bir bilgi yarışması oyunu oynadı (veya oynayacak). Oyunda öğrenci; iman esasları, İslam'ın şartları, namaz, oruç, zekât, hac, Peygamberimizin hayatı, Kur'an bilgisi ve güzel ahlak gibi konularda kısa sorularla karşılaşıyor, doğru şıkkı seçip açıklamasını okuyarak öğreniyor.</p>
+    <p>Amacımız ezber değil; her sorunun ardından gelen kısa açıklamayla bilgiyi pekiştirmek. Yanlış cevaplanan sorular otomatik olarak bir "Tekrar Kutusu"na düşüyor ve çocuğunuz istediği zaman onları tekrar çözebiliyor.</p>
+    <p>Merak etmeyin: bu oyun hiçbir kişisel veri toplamaz, hiçbir sunucuya bilgi göndermez. Yalnızca çocuğunuzun kendi cihazında, tarayıcının hafızasında (localStorage) kaldığı yerden devam edebilmesi için ilerlemesini saklar. İsterseniz siz de birlikte oynayıp bir soruyu akşam sofrasında konuşabilirsiniz.</p>
+    <p class="imza">Sevgiyle,<br>Sınıf Öğretmeniniz</p>
+    <button class="btn-yazdir" id="btn-mektup-yazdir">🖨 Mektubu Yazdır</button>
+  </section>
+
+  <section class="kart">
+    <h2><span class="ikon">🚪</span> Yazdırılabilir Kapı Afişi</h2>
+    <p>Aşağıdaki afişi A5 boyutunda yazdırıp sınıf kapısına asabilirsiniz. Öğrenciler ve veliler QR kodu okutarak doğrudan oyuna ulaşır.</p>
+    <div class="afis-onizleme">
+      <div class="oyun-adi-afis">Doğru Taraf</div>
+      <div class="alt-slogan">Din Kültürü ve Ahlak Bilgisi Yarışması — Doğru şıkkı bul, açıklamasını öğren!</div>
+      <div class="afis-qr" id="afis-qr-onizleme">
+        <img src="../assets/qr.png" alt="Doğru Taraf oyunu QR kodu" onerror="this.remove(); this.parentElement.innerHTML='<span class=&quot;yedek&quot;>📱</span>';">
+      </div>
+      <div class="afis-adres">raufenc.com/dogru-taraf</div>
+    </div>
+    <button class="btn-afis-yazdir" id="btn-afis-yazdir" style="margin-top:16px">🖨 Kapı Afişini Yazdır</button>
+  </section>
+
+  <!-- Yazdırma sırasında görünecek, ekranda gizli A5 afiş bloğu -->
+  <div id="afis-yazdirma-alani">
+    <div class="oyun-adi-afis">Doğru Taraf</div>
+    <div class="alt-slogan">Din Kültürü ve Ahlak Bilgisi Yarışması — Doğru şıkkı bul, açıklamasını öğren!</div>
+    <div class="afis-qr" id="afis-qr-yazdirma">
+      <img src="../assets/qr.png" alt="Doğru Taraf oyunu QR kodu" onerror="this.remove(); this.parentElement.innerHTML='<span class=&quot;yedek&quot;>📱</span>';">
+    </div>
+    <div class="afis-adres">raufenc.com/dogru-taraf</div>
+  </div>
+
+  <section class="kart paylas-kutu">
+    <div style="font-size:1.6rem">🔗</div>
+    <p style="max-width:380px">Bu sayfayı meslektaşınla paylaş; belki o da sınıfında kullanmak ister.</p>
+    <button class="btn-paylas" id="btn-paylas">Sayfayı Paylaş</button>
+    <div id="kopya-durum"></div>
+  </section>
+
+  <footer>Doğru Taraf — Öğretmen Köşesi · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.tr" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> ile paylaşılmıştır.</footer>
+
+</main>
+
+<script>
+"use strict";
+(function(){
+  var btnMektup = document.getElementById("btn-mektup-yazdir");
+  var btnAfis = document.getElementById("btn-afis-yazdir");
+
+  function yazdir(sinif){
+    document.body.classList.remove("yazdir-mektup", "yazdir-afis");
+    document.body.classList.add(sinif);
+    window.print();
+  }
+
+  btnMektup.addEventListener("click", function(){ yazdir("yazdir-mektup"); });
+  btnAfis.addEventListener("click", function(){ yazdir("yazdir-afis"); });
+
+  window.addEventListener("afterprint", function(){
+    document.body.classList.remove("yazdir-mektup", "yazdir-afis");
+  });
+
+  var btn = document.getElementById("btn-paylas");
+  var durum = document.getElementById("kopya-durum");
+  btn.addEventListener("click", function(){
+    var url = window.location.href;
+    var veri = { title: "Doğru Taraf — Öğretmen Köşesi", text: "Doğru Taraf oyunu için öğretmen kaynakları", url: url };
+    if (navigator.share) {
+      navigator.share(veri).catch(function(){});
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function(){
+        durum.textContent = "Bağlantı panoya kopyalandı ✓";
+        setTimeout(function(){ durum.textContent = ""; }, 3000);
+      }).catch(function(){
+        durum.textContent = "Kopyalanamadı, adres çubuğundan kopyalayabilirsiniz.";
+      });
+    } else {
+      durum.textContent = "Adres çubuğundan bağlantıyı kopyalayabilirsiniz.";
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="dogrutaraf-scorm"
+         version="1.0"
+         xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+         xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                             http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                             http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="dogrutaraf-org">
+    <organization identifier="dogrutaraf-org">
+      <title>Doğru Taraf</title>
+      <item identifier="item-1" identifierref="resource-1">
+        <title>Doğru Taraf</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="resource-1"
+              type="webcontent"
+              adlcp:scormtype="sco"
+              href="index.html">
+      <file href="index.html"/>
+      <file href="content.js"/>
+      <file href="lib/ses.js"/>
+      <file href="manifest.webmanifest"/>
+      <file href="assets/ikon-192.png"/>
+      <file href="assets/ikon-512.png"/>
+      <file href="assets/kapak.jpg"/>
+      <file href="assets/og.jpg"/>
+      <file href="assets/qr.png"/>
+      <file href="assets/kategori/ahlak.jpg"/>
+      <file href="assets/kategori/hac.jpg"/>
+      <file href="assets/kategori/iman.jpg"/>
+      <file href="assets/kategori/islam.jpg"/>
+      <file href="assets/kategori/kuran.jpg"/>
+      <file href="assets/kategori/namaz.jpg"/>
+      <file href="assets/kategori/oruc.jpg"/>
+      <file href="assets/kategori/siyer.jpg"/>
+      <file href="assets/kategori/temizlik.jpg"/>
+      <file href="assets/kategori/zekat.jpg"/>
+    </resource>
+  </resources>
+
+</manifest>
