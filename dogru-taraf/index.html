@@ -314,11 +314,17 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 }
 .secim:active{transform:scale(.96)}
 .secim:hover{background:rgba(255,253,248,.12);border-color:rgba(217,164,65,.4)}
-.secimler.pasif{opacity:.35;pointer-events:none}
 .ipucu{font-size:.72rem;color:rgba(245,237,224,.55)}
+.sinif-ipucu{
+  display:none;width:min(340px,100%);text-align:center;padding:10px 14px;
+  border-radius:var(--r-sm);background:rgba(217,164,65,.14);border:1.5px solid rgba(217,164,65,.4);
+  color:var(--altin-acik);font-weight:700;font-size:.85rem;line-height:1.4;
+}
 
 /* Sınıf modunda büyütme */
 html.sinif-modu .kart-cumle{font-size:1.6rem}
+html.sinif-modu .ipucu{display:none}
+html.sinif-modu .sinif-ipucu{display:block}
 html.sinif-modu .secim{font-size:1.1rem}
 
 /* ---------- Konfeti (mini, doğru cevap) ---------- */
@@ -373,27 +379,6 @@ html.sinif-modu .secim{font-size:1.1rem}
   transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
 }
 .aciklama-devam:active{transform:translateY(4px);box-shadow:0 0 0 #234329,0 2px 6px rgba(22,35,63,.2)}
-
-/* ---------- Oylama katmanı (sınıf modu) ---------- */
-.oylama-katman{
-  position:fixed;inset:0;z-index:140;background:rgba(22,35,63,.85);
-  display:flex;align-items:center;justify-content:center;padding:18px;
-}
-.oylama-katman.gizli{display:none}
-.oylama-kutu{
-  width:min(360px,100%);background:linear-gradient(165deg,#FFFDF8 0%,#FBF3E7 100%);color:var(--murekkep);
-  border-radius:var(--r-lg);
-  padding:24px 20px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.4);
-  animation:kutuYukari .32s var(--ease-akici);
-}
-.oylama-baslik{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:1.2rem;margin-bottom:14px}
-.oylama-devam{
-  margin-top:16px;min-height:52px;padding:10px 20px;border:none;border-radius:var(--r-md);cursor:pointer;
-  background:linear-gradient(145deg,#6FA97D,var(--yesil) 60%,#35603F);color:var(--kagit);
-  font-family:'Inter',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.02em;width:100%;
-  box-shadow:0 4px 0 #234329;transition:transform 120ms var(--ease-yay),box-shadow 120ms var(--ease-hizli);
-}
-.oylama-devam:active{transform:translateY(4px);box-shadow:0 0 0 #234329}
 
 /* ---------- Sonuç ekranı ---------- */
 .sonuc-blok{
@@ -489,6 +474,7 @@ html.sinif-modu .secim{font-size:1.1rem}
       <button id="btn-sag" class="secim"></button>
     </div>
     <div class="ipucu">Kartı sürükle, ok tuşlarını kullan ya da butonlara dokun</div>
+    <div class="sinif-ipucu">🙋 Sınıfa sorun: Sol mu, sağ mı? Çoğunluğa göre kartı o yöne kaydırın ya da butona dokunun.</div>
   </section>
 
   <!-- Sonuç -->
@@ -521,14 +507,6 @@ html.sinif-modu .secim{font-size:1.1rem}
     <p class="aciklama-cumle" id="aciklama-cumle"></p>
     <p class="aciklama-metin" id="aciklama-metin"></p>
     <button id="btn-aciklama-devam" class="aciklama-devam" type="button">Devam →</button>
-  </div>
-</div>
-
-<div id="oylama-katman" class="oylama-katman gizli" role="dialog" aria-modal="true" aria-labelledby="oylama-baslik">
-  <div class="oylama-kutu">
-    <div class="oylama-baslik" id="oylama-baslik">🙋 Sınıf el kaldırsın: Sol mu, sağ mı?</div>
-    <p class="tanitim" style="margin:0 auto">Birkaç öğrenciye söz verin, oylayın.</p>
-    <button id="btn-oylama-bitti" class="oylama-devam" type="button">Oylama bitti →</button>
   </div>
 </div>
 
@@ -566,7 +544,6 @@ html.sinif-modu .secim{font-size:1.1rem}
   function el(id){ return document.getElementById(id); }
   var kartAlan = el("kart-alan"), btnSol = el("btn-sol"), btnSag = el("btn-sag");
   var toastEl = el("toast"), hudEl = el("hud");
-  var secimlerKutu = el("secimler-kutu");
 
   /* ---------- Kategori haritası ---------- */
   var kategoriMap = new Map();
@@ -1062,31 +1039,13 @@ html.sinif-modu .secim{font-size:1.1rem}
     btnSol.textContent = rt.solMetin;
     btnSag.textContent = rt.sagMetin;
 
-    if (SINIF_MODU) {
-      secimlerKutu.classList.add("pasif");
-      oylamaKatmaniGoster();
-    } else {
-      secimlerKutu.classList.remove("pasif");
-    }
-
     kilitli = false;
   }
-
-  /* ---------- Sınıf modu: oylama katmanı ---------- */
-  function oylamaKatmaniGoster(){
-    el("oylama-katman").classList.remove("gizli");
-  }
-  function oylamaKatmaniKapat(){
-    el("oylama-katman").classList.add("gizli");
-    secimlerKutu.classList.remove("pasif");
-  }
-  el("btn-oylama-bitti").addEventListener("click", oylamaKatmaniKapat);
 
   /* ---------- Sürükleme (Vicdan'dan BİREBİR: pointer events dörtlüsü) ---------- */
   var drag = null;
   function dragBasla(e){
     if (kilitli || drag || !e.isPrimary) return;
-    if (SINIF_MODU && !el("oylama-katman").classList.contains("gizli")) return;
     drag = { id:e.pointerId, x:e.clientX, y:e.clientY, dx:0 };
     kartEl.classList.add("tutuluyor");
     try { kartEl.setPointerCapture(e.pointerId); } catch(err){}
@@ -1124,7 +1083,6 @@ html.sinif-modu .secim{font-size:1.1rem}
   /* ---------- Seçim: uçur → çözümle ---------- */
   function ucur(yon){
     if (kilitli || !kartEl) return;
-    if (SINIF_MODU && !el("oylama-katman").classList.contains("gizli")) return;
     kilitli = true;
     drag = null;
     var isaret = yon === "sol" ? -1 : 1;
@@ -1266,7 +1224,6 @@ html.sinif-modu .secim{font-size:1.1rem}
   document.addEventListener("keydown", function(e){
     if (!el("ekran-oyun").classList.contains("aktif") || kilitli) return;
     if (!el("aciklama-katman").classList.contains("gizli")) return;
-    if (SINIF_MODU && !el("oylama-katman").classList.contains("gizli")) return;
     if (e.key === "ArrowLeft")  { e.preventDefault(); ucur("sol"); }
     if (e.key === "ArrowRight") { e.preventDefault(); ucur("sag"); }
   });
@@ -1277,10 +1234,6 @@ html.sinif-modu .secim{font-size:1.1rem}
   /* ---------- Tur bitişi ---------- */
   function turBitir(){
     if (oyun.tickTimer) { clearInterval(oyun.tickTimer); oyun.tickTimer = null; }
-    /* Sınıf modunda oylama katmanı açık kalmış olabilir (süre tam kart geçişiyle çakışırsa) — sonuç ekranına geçerken kapat */
-    var oylamaKatmani = el("oylama-katman");
-    if (oylamaKatmani) oylamaKatmani.classList.add("gizli");
-    secimlerKutu.classList.remove("pasif");
 
     /* Tur/karar anı: mahkeme tokmağı hissiyle turun kapandığını bildir */
     sesTokmak();
