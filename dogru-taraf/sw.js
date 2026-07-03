@@ -6,7 +6,7 @@
    ============================================================ */
 "use strict";
 
-var CACHE_ADI = "dogrutaraf-cache-v1";
+var CACHE_ADI = "dogrutaraf-cache-v2";
 var CACHE_DOSYALARI = [
   "./",
   "index.html",
@@ -23,7 +23,34 @@ var CACHE_DOSYALARI = [
   "assets/kategori/hac.jpg",
   "assets/kategori/siyer.jpg",
   "assets/kategori/kuran.jpg",
-  "assets/kategori/ahlak.jpg"
+  "assets/kategori/ahlak.jpg",
+  "assets/maskot/maskot-01.jpg",
+  "assets/maskot/maskot-02.jpg",
+  "assets/maskot/maskot-03.jpg",
+  "assets/maskot/maskot-04.jpg",
+  "assets/maskot/maskot-05.jpg",
+  "assets/maskot/maskot-06.jpg",
+  "assets/maskot/maskot-07.jpg",
+  "assets/maskot/maskot-08.jpg",
+  "assets/maskot/maskot-09.jpg",
+  "assets/maskot/maskot-10.jpg",
+  "assets/maskot/maskot-11.jpg",
+  "assets/maskot/maskot-12.jpg",
+  "assets/maskot/maskot-13.jpg",
+  "assets/maskot/maskot-14.jpg",
+  "assets/maskot/maskot-15.jpg",
+  "assets/maskot/maskot-16.jpg",
+  "assets/maskot/maskot-17.jpg",
+  "assets/maskot/maskot-18.jpg",
+  "assets/maskot/maskot-19.jpg",
+  "assets/maskot/maskot-20.jpg",
+  "assets/maskot/maskot-21.jpg",
+  "assets/maskot/maskot-22.jpg",
+  "assets/maskot/maskot-23.jpg",
+  "assets/maskot/maskot-24.jpg",
+  "assets/maskot/hero-karsilama.jpg",
+  "assets/maskot/hero-kutlama.jpg",
+  "assets/maskot/hero-tesvik.jpg"
 ];
 
 self.addEventListener("install", function(event){

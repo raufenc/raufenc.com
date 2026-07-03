@@ -38,14 +38,15 @@
     }
   }
 
-  /* kısa (~120ms) beyaz gürültü patlaması + hızlı üstel fade-out — kart kayma hissi */
+  /* kısa (~90ms) yumuşak gürültü + inen bant geçiren süpürme — hafif kart kayma hissi
+     (önceki sürüm sert/tiz bir cızırtıydı, her kartta duyulduğu için rahatsız ediciydi) */
   function kartHisirti(){
     if(!acikMi()) return;
     var c = baglamAl();
     if(!c) return;
     devamEttir(c);
     try{
-      var sure = 0.12;
+      var sure = 0.09;
       var sayi = Math.round(c.sampleRate * sure);
       var buffer = c.createBuffer(1, sayi, c.sampleRate);
       var veri = buffer.getChannelData(0);
@@ -54,18 +55,22 @@
       kaynak.buffer = buffer;
       var kazanc = c.createGain();
       var simdi = c.currentTime;
-      kazanc.gain.setValueAtTime(0.22, simdi);
+      kazanc.gain.setValueAtTime(0.001, simdi);
+      kazanc.gain.linearRampToValueAtTime(0.06, simdi + 0.015);
       kazanc.gain.exponentialRampToValueAtTime(0.001, simdi + sure);
       var filtre = c.createBiquadFilter();
-      filtre.type = 'highpass';
-      filtre.frequency.value = 1200;
+      filtre.type = 'bandpass';
+      filtre.Q.value = 0.6;
+      filtre.frequency.setValueAtTime(2400, simdi);
+      filtre.frequency.exponentialRampToValueAtTime(650, simdi + sure);
       kaynak.connect(filtre); filtre.connect(kazanc); kazanc.connect(c.destination);
       kaynak.start(simdi);
       kaynak.stop(simdi + sure);
     }catch(e){}
   }
 
-  /* kısa (~150ms) düşük frekanslı (80-120Hz) osilatör + hızlı decay — mahkeme tokmağı */
+  /* kısa (~150ms) düşük frekanslı (70-110Hz) yumuşak osilatör + hızlı decay — tur kapanış vuruşu
+     (square yerine triangle: aynı "vuruş" hissi, daha az sert/uğultulu) */
   function tokmak(){
     if(!acikMi()) return;
     var c = baglamAl();
@@ -75,11 +80,11 @@
       var simdi = c.currentTime;
       var sure = 0.15;
       var osc = c.createOscillator();
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(120, simdi);
-      osc.frequency.exponentialRampToValueAtTime(80, simdi + sure);
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(110, simdi);
+      osc.frequency.exponentialRampToValueAtTime(70, simdi + sure);
       var kazanc = c.createGain();
-      kazanc.gain.setValueAtTime(0.5, simdi);
+      kazanc.gain.setValueAtTime(0.4, simdi);
       kazanc.gain.exponentialRampToValueAtTime(0.001, simdi + sure);
       osc.connect(kazanc); kazanc.connect(c.destination);
       osc.start(simdi);
@@ -109,7 +114,7 @@
     }catch(e){}
   }
 
-  /* kısa (~150ms) yükselen iki nota (C5→E5, sine osilatör) — doğru cevap hissi */
+  /* kısa (~270ms) yükselen üç nota (C5→E5→G5, sine osilatör, yumuşak ataklı) — doğru cevap hissi */
   function dogruCini(){
     if(!acikMi()) return;
     var c = baglamAl();
@@ -117,31 +122,27 @@
     devamEttir(c);
     try{
       var simdi = c.currentTime;
-      var notaSure = 0.075;
-      var toplamSure = 0.15;
-      var kazanc = c.createGain();
-      kazanc.gain.setValueAtTime(0.001, simdi);
-      kazanc.gain.exponentialRampToValueAtTime(0.3, simdi + 0.012);
-      kazanc.gain.exponentialRampToValueAtTime(0.001, simdi + toplamSure);
-      kazanc.connect(c.destination);
-
-      var osc1 = c.createOscillator();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(523.25, simdi); /* C5 */
-      osc1.connect(kazanc);
-      osc1.start(simdi);
-      osc1.stop(simdi + notaSure);
-
-      var osc2 = c.createOscillator();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(659.25, simdi + notaSure); /* E5 */
-      osc2.connect(kazanc);
-      osc2.start(simdi + notaSure);
-      osc2.stop(simdi + toplamSure);
+      var notalar = [523.25, 659.25, 783.99]; /* C5, E5, G5 */
+      var notaAraligi = 0.09;
+      for(var i=0;i<notalar.length;i++){
+        var baslangic = simdi + i * notaAraligi;
+        var osc = c.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notalar[i], baslangic);
+        var kazanc = c.createGain();
+        kazanc.gain.setValueAtTime(0.001, baslangic);
+        kazanc.gain.linearRampToValueAtTime(0.26, baslangic + 0.012);
+        kazanc.gain.exponentialRampToValueAtTime(0.001, baslangic + notaAraligi + 0.05);
+        osc.connect(kazanc); kazanc.connect(c.destination);
+        osc.start(baslangic);
+        osc.stop(baslangic + notaAraligi + 0.06);
+      }
     }catch(e){}
   }
 
-  /* kısa (~200ms) alçalan testere dişi (sawtooth) osilatör 220→140Hz, kısık gain — yanlış cevap hissi */
+  /* kısa (~250ms) alçalan iki nota (G4→Eb4, üçgen dalga + lowpass) — yanlış cevap hissi
+     (önceki sürüm sert bir sawtooth vızıltısıydı; şimdi dogruCini ile aynı yumuşak
+     üretim kalitesinde ama inen/minör bir ezgi — "kötü" değil, sadece "değil bu" hissi) */
   function yanlisVinlama(){
     if(!acikMi()) return;
     var c = baglamAl();
@@ -149,17 +150,25 @@
     devamEttir(c);
     try{
       var simdi = c.currentTime;
-      var sure = 0.2;
-      var osc = c.createOscillator();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(220, simdi);
-      osc.frequency.exponentialRampToValueAtTime(140, simdi + sure);
-      var kazanc = c.createGain();
-      kazanc.gain.setValueAtTime(0.18, simdi);
-      kazanc.gain.exponentialRampToValueAtTime(0.001, simdi + sure);
-      osc.connect(kazanc); kazanc.connect(c.destination);
-      osc.start(simdi);
-      osc.stop(simdi + sure);
+      var notalar = [392.00, 311.13]; /* G4, Eb4 — inen küçük üçlü */
+      var notaAraligi = 0.12;
+      var notaSure = 0.14;
+      for(var i=0;i<notalar.length;i++){
+        var baslangic = simdi + i * notaAraligi;
+        var osc = c.createOscillator();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(notalar[i], baslangic);
+        var filtre = c.createBiquadFilter();
+        filtre.type = 'lowpass';
+        filtre.frequency.value = 1200;
+        var kazanc = c.createGain();
+        kazanc.gain.setValueAtTime(0.001, baslangic);
+        kazanc.gain.linearRampToValueAtTime(0.2, baslangic + 0.01);
+        kazanc.gain.exponentialRampToValueAtTime(0.001, baslangic + notaSure);
+        osc.connect(filtre); filtre.connect(kazanc); kazanc.connect(c.destination);
+        osc.start(baslangic);
+        osc.stop(baslangic + notaSure + 0.02);
+      }
     }catch(e){}
   }
 

@@ -71,6 +71,24 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .kapak-yedek{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:52px}
 .kapak img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 
+/* ---------- Maskot: her yer için sevimli çocuk karakteri ---------- */
+@media (prefers-reduced-motion: no-preference){
+  .maskot-canli{animation:maskotSallan 3.6s ease-in-out infinite}
+}
+@keyframes maskotSallan{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-5px) rotate(-2deg)}
+}
+.kapak-sarmal{position:relative;display:inline-block}
+.kapak-maskot{
+  position:absolute;right:-12px;bottom:-12px;width:60px;height:60px;z-index:2;
+  border-radius:50%;object-fit:cover;border:3px solid var(--altin);
+  box-shadow:0 6px 14px rgba(0,0,0,.35);background:var(--gece);
+}
+.baslik-maskot{width:46px;height:46px;border-radius:14px;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.aciklama-maskot{width:52px;height:52px;border-radius:14px;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,.25);display:block;margin:0 auto 10px}
+.sonuc-maskot{width:92px;height:92px;border-radius:22px;object-fit:cover;box-shadow:0 8px 20px rgba(0,0,0,.35);display:block;margin:0 auto 14px}
+
 /* ---------- Mod düğmeleri (açılış) ---------- */
 .mod-izgara{display:flex;flex-direction:column;gap:10px;width:min(320px,100%)}
 .mod-btn{
@@ -186,7 +204,8 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .kart.yanlis-flas{border-color:var(--kiremit)}
 .kart.yanlis-soluk{opacity:.55}
 
-.kart-govde{width:100%;text-align:center}
+.kart-govde{width:100%;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.kart-maskot{width:72px;height:72px;object-fit:cover;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,.28);flex-shrink:0}
 .kart-cumle{font-family:'Fraunces',Georgia,serif;font-size:1.18rem;line-height:1.55;color:var(--murekkep)}
 .slot{
   display:inline-block;min-width:64px;padding:2px 8px;border-bottom:3px solid rgba(43,33,24,.35);
@@ -222,6 +241,7 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 
 /* Sınıf modunda büyütme */
 html.sinif-modu .kart-cumle{font-size:1.6rem}
+html.sinif-modu .kart-maskot{width:54px;height:54px}
 html.sinif-modu .secim{font-size:1.1rem}
 
 /* ---------- Konfeti (mini, doğru cevap) ---------- */
@@ -310,9 +330,12 @@ html.sinif-modu .secim{font-size:1.1rem}
 
   <!-- Açılış -->
   <section id="ekran-acilis" class="ekran orta">
-    <div class="kapak" aria-hidden="true">
-      <span class="kapak-yedek">🕋</span>
-      <img src="./assets/kapak.jpg" alt="" draggable="false" onerror="this.remove()">
+    <div class="kapak-sarmal">
+      <div class="kapak" aria-hidden="true">
+        <span class="kapak-yedek">🕋</span>
+        <img src="./assets/kapak.jpg" alt="" draggable="false" onerror="this.remove()">
+      </div>
+      <img class="kapak-maskot maskot-canli" src="./assets/maskot/hero-karsilama.jpg" alt="" draggable="false" onerror="this.remove()">
     </div>
     <div class="ust-baslik">Din Bilgisi</div>
     <h1 class="oyun-adi">Doğru Taraf</h1>
@@ -342,6 +365,7 @@ html.sinif-modu .secim{font-size:1.1rem}
   <!-- Kategori seçimi (yalnız Serbest mod) -->
   <section id="ekran-kategori" class="ekran">
     <div class="ust-baslik">Serbest Mod</div>
+    <img class="baslik-maskot maskot-canli" src="./assets/maskot/maskot-19.jpg" alt="" draggable="false" onerror="this.remove()">
     <h2 style="font-size:1.6rem">Kategori Seç</h2>
     <div class="kategori-izgara" id="kategori-izgara"></div>
     <button id="btn-kategori-geri" class="btn ikincil" type="button">← Geri</button>
@@ -391,6 +415,7 @@ html.sinif-modu .secim{font-size:1.1rem}
 
 <div id="aciklama-katman" class="aciklama-katman gizli" role="dialog" aria-modal="true" aria-labelledby="aciklama-baslik">
   <div class="aciklama-kutu">
+    <img class="aciklama-maskot maskot-canli" src="./assets/maskot/maskot-05.jpg" alt="" draggable="false" onerror="this.remove()">
     <div class="aciklama-baslik" id="aciklama-baslik"></div>
     <p class="aciklama-cumle" id="aciklama-cumle"></p>
     <p class="aciklama-metin" id="aciklama-metin"></p>
@@ -855,6 +880,16 @@ html.sinif-modu .secim{font-size:1.1rem}
   }
 
   /* ---------- Kart çizimi ---------- */
+  /* Her soru resimli: 24 sevimli, genel-amaçlı "düşünen çocuk" maskotundan biri,
+     soru id'sine göre sabit (aynı soru hep aynı maskotu gösterir). */
+  var MASKOT_SAYISI = 24;
+  function maskotYolu(soruId){
+    var h = 0;
+    for (var i = 0; i < soruId.length; i++) { h = (h * 31 + soruId.charCodeAt(i)) >>> 0; }
+    var idx = (h % MASKOT_SAYISI) + 1;
+    return "assets/maskot/maskot-" + (idx < 10 ? "0" + idx : idx) + ".jpg";
+  }
+
   function kartCiz(){
     if (oyun.mod === "seri" && oyun.indeks >= oyun.deste.length) seriSonrakiKartGetir();
     var rt = oyun.deste[oyun.indeks];
@@ -884,6 +919,16 @@ html.sinif-modu .secim{font-size:1.1rem}
 
     var govde = document.createElement("div");
     govde.className = "kart-govde";
+
+    var maskotEl = document.createElement("img");
+    maskotEl.className = "kart-maskot";
+    maskotEl.alt = "";
+    maskotEl.draggable = false;
+    maskotEl.loading = "lazy";
+    maskotEl.onerror = function(){ this.remove(); };
+    maskotEl.src = maskotYolu(soru.id);
+    govde.appendChild(maskotEl);
+
     var cumleEl = document.createElement("p");
     cumleEl.className = "kart-cumle";
 
@@ -1042,16 +1087,9 @@ html.sinif-modu .secim{font-size:1.1rem}
       }
       if (oyun.mod === "tekrar") {
         var sonucKutu = tekrarKutusuDogruIsle(soru.id);
-        if (sonucKutu.silindi) {
-          toastGoster("Bu soruyu artık biliyorsun! 📤 " + soru.dogru + " — " + soru.aciklama);
-        } else {
-          toastGoster("✓ " + soru.dogru + " — " + soru.aciklama);
-        }
+        if (sonucKutu.silindi) toastGoster("Bu soruyu artık biliyorsun! 📤 " + soru.dogru);
       } else if (oyun.mod === "zaman") {
         oyun.puan += 10;
-        toastGoster("✓ " + soru.dogru + " — " + soru.aciklama);
-      } else {
-        toastGoster("✓ " + soru.dogru + " — " + soru.aciklama);
       }
 
       oyun.deste.splice(oyun.indeks, 1);
@@ -1062,24 +1100,14 @@ html.sinif-modu .secim{font-size:1.1rem}
         kartCiz();
       }
 
-      if (oyun.mod === "zaman") {
-        /* zaman modunda şerit BLOKE ETMEZ, sonraki kart hemen gelir */
-        setTimeout(function(){
-          toastEl.classList.remove("goster");
-          devamEt();
-        }, 700);
-      } else if (SINIF_MODU) {
+      /* Doğru cevapta durup göstermeye gerek yok: kart zaten yeşil parlayıp uçtu,
+         ses çaldı — hemen sıradaki karta geç. Sınıf modu istisna: öğretmen "Devam"a
+         basana kadar bekler (tartışma için kasıtlı duraklama). */
+      if (SINIF_MODU) {
+        toastGoster("✓ " + soru.dogru + " — " + soru.aciklama);
         toastSonrasiDevam(devamEt);
       } else {
-        toastZaman = setTimeout(function(){
-          toastEl.classList.remove("goster");
-          devamEt();
-        }, 2200);
-        toastEl.onclick = function(){
-          toastEl.classList.remove("goster");
-          if (toastZaman) clearTimeout(toastZaman);
-          devamEt();
-        };
+        devamEt();
       }
     } else {
       sesYanlisVinlama();
@@ -1174,6 +1202,10 @@ html.sinif-modu .secim{font-size:1.1rem}
   }
 
   /* ---------- Sonuç ekranı ---------- */
+  function sonucMaskotEtiketi(kutlaMi){
+    return '<img class="sonuc-maskot maskot-canli" src="./assets/maskot/' + (kutlaMi ? 'hero-kutlama.jpg' : 'hero-tesvik.jpg') + '" alt="" draggable="false" onerror="this.remove()">';
+  }
+
   function sonucGoster(){
     var blok = el("sonuc-blok");
     blok.innerHTML = "";
@@ -1184,6 +1216,7 @@ html.sinif-modu .secim{font-size:1.1rem}
       var yuzde = oyun.toplamSayisi ? Math.round((oyun.dogruSayisi / oyun.toplamSayisi) * 100) : 0;
       var acildiMi = yuzde >= SEVIYE_ACMA_ESIGI && oyun.seviye < 3;
       blok.innerHTML =
+        sonucMaskotEtiketi(yuzde >= SEVIYE_ACMA_ESIGI) +
         '<div class="sonuc-buyuk-sayi">' + oyun.dogruSayisi + '/' + oyun.toplamSayisi + '</div>' +
         '<div class="sonuc-alt">%' + yuzde + ' doğru</div>' +
         '<div class="sonuc-yildizlar">' + yuzdeYildiz(yuzde) + '</div>' +
@@ -1193,6 +1226,7 @@ html.sinif-modu .secim{font-size:1.1rem}
       var rekor = rekorOku(SERI_REKOR_ANAHTARI, { enIyiSeri:0, enIyiPuan:0 });
       var yeniRekorMu = oyun.enUzunSeri >= (rekor.enIyiSeri||0) && oyun.enUzunSeri > 0;
       blok.innerHTML =
+        sonucMaskotEtiketi(yeniRekorMu) +
         '<div class="sonuc-buyuk-sayi">' + oyun.enUzunSeri + '</div>' +
         '<div class="sonuc-alt">en uzun seri · ' + oyun.puan + ' puan</div>' +
         '<div class="sonuc-alt">Rekor: ' + (rekor.enIyiSeri||0) + ' seri · ' + (rekor.enIyiPuan||0) + ' puan</div>' +
@@ -1202,16 +1236,19 @@ html.sinif-modu .secim{font-size:1.1rem}
       var zrekor = rekorOku(ZAMAN_REKOR_ANAHTARI, { enIyiDogru:0 });
       var zYeniRekor = oyun.dogruSayisi >= (zrekor.enIyiDogru||0) && oyun.dogruSayisi > 0;
       blok.innerHTML =
+        sonucMaskotEtiketi(zYeniRekor) +
         '<div class="sonuc-buyuk-sayi">' + oyun.dogruSayisi + '</div>' +
         '<div class="sonuc-alt">doğru cevap</div>' +
         '<div class="sonuc-alt">Rekor: ' + (zrekor.enIyiDogru||0) + ' doğru</div>' +
         (zYeniRekor ? '<div class="sonuc-rekor">🏆 Yeni Rekor!</div>' : '');
     } else if (oyun.mod === "tekrar") {
       baslikEl.textContent = "Kutu Tamamlandı";
+      var kutuBosMu = tekrarKutusuBosMu();
       blok.innerHTML =
+        sonucMaskotEtiketi(kutuBosMu) +
         '<div class="sonuc-buyuk-sayi">' + oyun.dogruSayisi + '/' + oyun.toplamSayisi + '</div>' +
         '<div class="sonuc-alt">kutudan çıkanlar sayılıyor</div>' +
-        (tekrarKutusuBosMu()
+        (kutuBosMu
           ? '<div class="sonuc-rozet">📤 Kutun bomboş, helal olsun!</div>'
           : '<div class="sonuc-alt">Kutuda hâlâ sorular var, tekrar dene</div>');
     }
