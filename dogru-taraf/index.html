@@ -138,11 +138,15 @@ main{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align
 .mod-btn-oncelik:hover{background:linear-gradient(180deg,var(--altin-acik) 0%,var(--altin) 55%,#C4923A 100%)}
 
 .ogretmen-linki{
-  font-size:.78rem;font-weight:600;color:rgba(245,237,224,.72);text-decoration:none;
-  padding:8px 10px;min-height:44px;display:inline-flex;align-items:center;
-  transition:color 140ms var(--ease-hizli);
+  font-size:.85rem;font-weight:700;color:var(--fildisi);text-decoration:none;
+  padding:12px 20px;min-height:48px;display:inline-flex;align-items:center;gap:8px;
+  border-radius:var(--r-md);background:rgba(255,253,248,.06);border:1.5px solid rgba(217,164,65,.32);
+  box-shadow:var(--golge1);
+  transition:transform 120ms var(--ease-yay),background 140ms var(--ease-hizli),border-color 140ms var(--ease-hizli);
 }
-.ogretmen-linki:active{color:var(--altin)}
+.ogretmen-linki:hover{background:rgba(255,253,248,.1);border-color:rgba(217,164,65,.55)}
+.ogretmen-linki:active{transform:scale(.96)}
+.ogretmen-linki .ok{color:var(--altin);font-weight:700}
 .lisans-notu{font-size:.68rem;color:rgba(245,237,224,.45);text-align:center;max-width:300px;line-height:1.5}
 
 /* ---------- Butonlar ---------- */
@@ -455,7 +459,7 @@ html.sinif-modu .secim{font-size:1.1rem}
         <span class="mod-metin">Tekrar Kutusu<span class="alt-etiket" id="tekrar-alt-etiket">Yanlış bildiklerin burada birikir</span></span>
       </button>
     </div>
-    <a class="ogretmen-linki" href="./ogretmen/">📚 Öğretmenler İçin</a>
+    <a class="ogretmen-linki" href="./ogretmen/">📚 Öğretmenler İçin <span class="ok">→</span></a>
     <p class="lisans-notu">Bu içerik CC BY-NC-SA lisansı ile paylaşılmıştır — ticari olmayan amaçlarla, atıf vererek ve aynı lisansla paylaşabilirsiniz.</p>
   </section>
 
