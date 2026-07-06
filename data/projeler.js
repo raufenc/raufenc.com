@@ -25,8 +25,8 @@ var PROJELER = [
   { emoji: '\u{1F3F9}', title: 'Kayı I — Ertuğrul\'un Ocağı', desc: 'Bir uç beyliğinden cihan devletine — Osmanlı\'nın kuruluş destanını kişiler, olaylar ve haritalarla keşfet.', tag: 'Ansiklopedi', href: '/kayi/', kategori: 'tarih' },
   { emoji: '\u{1F331}', title: 'İyilik Akademi', desc: 'Çocuklara güzel ahlakı nasıl öğretirsin? 40 derslik interaktif bir yolculukla — oyunlaştırılmış, quizlerle dolu.', tag: 'Uygulama', href: '/iyilikakademi/', kategori: 'peygamberim' },
   { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', kategori: 'sinif', featured: true },
-  { emoji: '\u{1F3F0}', title: 'Beylikten Cihana', desc: 'Zar yok, tarih var. Söğüt\'ten İstanbul\'a şehir fethet, imar et, rakiplerini alt et. 85 sefer kartı, dijital + evde basılabilir fiziksel set.', tag: 'Oyun', href: '/beylikten-cihana/', kategori: 'tarih', featured: true },
-  { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'sinif', featured: true },
+  { emoji: '\u{1F3F0}', title: 'Beylikten Cihana', desc: 'Zar yok, tarih var. Söğüt\'ten İstanbul\'a şehir fethet, imar et, rakiplerini alt et. 85 sefer kartı, dijital + evde basılabilir fiziksel set.', tag: 'Oyun', href: '/beylikten-cihana/', kategori: 'cihan-serisi', featured: true },
+  { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'cihan-serisi', featured: true },
   { emoji: '\u{2696}\u{FE0F}', title: 'Değer Oyunları', desc: 'Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.', tag: 'Oyun', href: '/oyunlar/', kategori: 'sinif', featured: true },
   { emoji: '\u{1F54B}', title: 'Doğru Taraf', desc: 'Kurban kesmek farz mı, vacip mi? Kartı doğru cevaba kaydır: 10 kategori, yüzlerce soru, seviye atla, rekor kır.', tag: 'Oyun', href: '/dogru-taraf/', kategori: 'peygamberim', featured: true }
 ];
@@ -40,13 +40,14 @@ var PROJE_SAYISI = PROJELER.length;
  * Her kategori /vitrin/[slug]/ adresinde acilir.
  */
 var KATEGORILER = [
-  { slug: 'noroterbiye', name: 'NöroTerbiye',         desc: 'İçindeki düşmanı dosta çevir.',                          renk: 'noroterbiye', boyut: 'tall' },
-  { slug: 'dil',         name: 'Dil & Söz',           desc: 'İngilizce, Arapça ve Osmanlıca için kart setleri.',     renk: 'dil',         boyut: 'wide' },
-  { slug: 'peygamberim', name: 'Peygamberim & Ahlâk', desc: 'Siyer atlası ve çocuk ahlâk müfredatı.',                renk: 'peygamberim', boyut: 'med'  },
-  { slug: 'tarih',       name: 'Tarih & Medeniyet',   desc: 'Padişahlar, evliyalar, âlimler ve kuruluş destanları.', renk: 'tarih',       boyut: 'wide' },
-  { slug: 'dusunce',     name: 'Düşünce Pusulası',    desc: 'Test, mantık, bilim felsefesi ve davet mektupları.',    renk: 'dusunce',     boyut: 'tall' },
-  { slug: 'ai',          name: 'Yapay Zekâ',          desc: 'Araç atlası ve beyin–YZ paralelleri.',                  renk: 'ai',          boyut: 'wide' },
-  { slug: 'sinif',       name: 'Sınıf Atölyesi',      desc: 'İHO Arapça oyunları ve Maarif rehberi.',                renk: 'sinif',       boyut: 'wide' }
+  { slug: 'noroterbiye',   name: 'NöroTerbiye',         desc: 'İçindeki düşmanı dosta çevir.',                          renk: 'noroterbiye',   boyut: 'tall' },
+  { slug: 'dil',           name: 'Dil & Söz',           desc: 'İngilizce, Arapça ve Osmanlıca için kart setleri.',     renk: 'dil',           boyut: 'wide' },
+  { slug: 'peygamberim',   name: 'Peygamberim & Ahlâk', desc: 'Siyer atlası ve çocuk ahlâk müfredatı.',                renk: 'peygamberim',   boyut: 'med'  },
+  { slug: 'tarih',         name: 'Tarih & Medeniyet',   desc: 'Padişahlar, evliyalar, âlimler ve kuruluş destanları.', renk: 'tarih',         boyut: 'wide' },
+  { slug: 'dusunce',       name: 'Düşünce Pusulası',    desc: 'Test, mantık, bilim felsefesi ve davet mektupları.',    renk: 'dusunce',       boyut: 'med'  },
+  { slug: 'ai',            name: 'Yapay Zekâ',          desc: 'Araç atlası ve beyin–YZ paralelleri.',                  renk: 'ai',            boyut: 'wide' },
+  { slug: 'sinif',         name: 'Sınıf Atölyesi',      desc: 'İHO Arapça oyunları, Değer Oyunları ve Maarif rehberi.',renk: 'sinif',         boyut: 'wide' },
+  { slug: 'cihan-serisi',  name: 'Cihan Serisi',        desc: 'Zar yok, tarih var — iki tarihî strateji kutu oyunu.',  renk: 'cihan-serisi',  boyut: 'wide' }
 ];
 
 /** Kategori slug'ından projeleri döndürür. */

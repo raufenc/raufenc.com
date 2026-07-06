@@ -1019,14 +1019,15 @@
     }
     .bento-card:hover .bento-index::after { width: 30px; background: var(--warm); }
 
-    /* Pozisyonlar: 3 sütun × 4 satır asimetrik = 7 kart */
+    /* Pozisyonlar: 3 sütun × 4 satır asimetrik = 8 kart */
     .b-noroterbiye  { grid-column: 1; grid-row: 1 / span 3; }
     .b-sinif        { grid-column: 1; grid-row: 4; }
     .b-dil          { grid-column: 2; grid-row: 1; }
     .b-peygamberim  { grid-column: 2; grid-row: 2 / span 2; }
     .b-ai           { grid-column: 2; grid-row: 4; }
     .b-tarih        { grid-column: 3; grid-row: 1; }
-    .b-dusunce      { grid-column: 3; grid-row: 2 / span 3; }
+    .b-dusunce      { grid-column: 3; grid-row: 2 / span 2; }
+    .b-cihan-serisi { grid-column: 3; grid-row: 4; }
 
     /* Medya katmanı */
     .bento-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
@@ -1560,9 +1561,10 @@
       .b-dil         { grid-column: 2; grid-row: 1; }
       .b-tarih       { grid-column: 2; grid-row: 2; }
       .b-peygamberim { grid-column: 2; grid-row: 3 / span 2; }
-      .b-dusunce     { grid-column: 1; grid-row: 4 / span 3; }
+      .b-dusunce     { grid-column: 1; grid-row: 4 / span 2; }
       .b-sinif       { grid-column: 2; grid-row: 5; }
       .b-ai          { grid-column: 2; grid-row: 6; }
+      .b-cihan-serisi{ grid-column: 1; grid-row: 6; }
     }
     /* Mobil: mini-bento mozaik — asimetri telefonda da sürer */
     @media (max-width: 560px) {
@@ -1575,8 +1577,9 @@
       .b-dil         { grid-column: 2; grid-row: 1; }
       .b-tarih       { grid-column: 2; grid-row: 2; }
       .b-peygamberim { grid-column: 2; grid-row: 3 / span 3; }
-      .b-dusunce     { grid-column: 1; grid-row: 4 / span 3; }
+      .b-dusunce     { grid-column: 1; grid-row: 4 / span 2; }
       .b-sinif       { grid-column: 2; grid-row: 6; }
+      .b-cihan-serisi{ grid-column: 1; grid-row: 6; }
       .b-ai          { grid-column: 1 / span 2; grid-row: 7; }
       .bento-card { border-radius: 16px; }
       .bento-content { padding: 12px 13px; gap: 3px; }
@@ -1911,9 +1914,9 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">2 proje</span>
+          <span class="bento-tag">3 proje</span>
           <h3 class="bento-title">Peygamberim &amp; Ahlâk</h3>
-          <p class="bento-desc">Siyer atlası ve çocuk ahlâk müfredatı.</p>
+          <p class="bento-desc">Siyer atlası, çocuk ahlâk müfredatı ve Doğru Taraf.</p>
         </div>
       </a>
 
@@ -1931,14 +1934,14 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">5 proje</span>
+          <span class="bento-tag">4 proje</span>
           <h3 class="bento-title">Tarih &amp; Medeniyet</h3>
           <p class="bento-desc">Padişahlar, âlimler, evliyalar, kuruluş.</p>
         </div>
       </a>
 
       <!-- 5. DÜŞÜNCE PUSULASI (TALL, video) -->
-      <a class="bento-card tilt b-dusunce" href="/vitrin/dusunce/" aria-label="Düşünce Pusulası kategorisi">
+      <a class="bento-card tilt bento-med b-dusunce" href="/vitrin/dusunce/" aria-label="Düşünce Pusulası kategorisi">
         <div class="bento-media">
           <img class="video-fallback" src="/images/vitrin/video/dusunce-poster.jpg" alt="" loading="eager" decoding="async">
           <video loop muted playsinline preload="none" poster="/images/vitrin/video/dusunce-poster.jpg">
@@ -1951,9 +1954,26 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">4 proje</span>
+          <span class="bento-tag">6 proje</span>
           <h3 class="bento-title">Düşünce Pusulası</h3>
-          <p class="bento-desc">Kalbinin Haritası, Safsata Dedektifi, Bilim Nedir? ve Davet Mektubu.</p>
+          <p class="bento-desc">Test, mantık, bilim felsefesi ve davet mektupları.</p>
+        </div>
+      </a>
+
+      <!-- 8. CİHAN SERİSİ (WIDE, image) -->
+      <a class="bento-card tilt bento-wide b-cihan-serisi" href="/vitrin/cihan-serisi/" aria-label="Cihan Serisi kategorisi">
+        <div class="bento-media">
+          <img class="video-fallback" src="/images/vitrin/cihan-serisi.webp" alt="" loading="eager" decoding="async">
+        </div>
+        <span class="bento-index" aria-hidden="true">08</span>
+        <div class="spotlight" aria-hidden="true"></div>
+        <div class="bento-arrow" aria-hidden="true">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+        <div class="bento-content">
+          <span class="bento-tag">2 proje</span>
+          <h3 class="bento-title">Cihan Serisi</h3>
+          <p class="bento-desc">Zar yok, tarih var — iki tarihî strateji kutu oyunu.</p>
         </div>
       </a>
 
@@ -1991,9 +2011,9 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">4 proje</span>
+          <span class="bento-tag">3 proje</span>
           <h3 class="bento-title">Sınıf Atölyesi</h3>
-          <p class="bento-desc">İHO Arapça oyunları, Çıraktan Pîre, Değer Oyunları ve Maarif rehberi.</p>
+          <p class="bento-desc">İHO Arapça oyunları, Değer Oyunları ve Maarif rehberi.</p>
         </div>
       </a>
     </div>
