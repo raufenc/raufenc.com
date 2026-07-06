@@ -327,6 +327,29 @@ html.sinif-modu .ipucu{display:none}
 html.sinif-modu .sinif-ipucu{display:block}
 html.sinif-modu .secim{font-size:1.1rem}
 
+/* Sınıf modu: geniş ekran (projeksiyon/TV) — dikey mobil sütun yerine yatay doldurma */
+@media (min-width:900px){
+  html.sinif-modu .ekran{width:min(1100px,94%)}
+  html.sinif-modu .mod-izgara{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(680px,100%)}
+  html.sinif-modu .kategori-izgara{grid-template-columns:repeat(3,1fr)}
+
+  html.sinif-modu #ekran-oyun.aktif{
+    display:grid;width:min(1100px,94%);column-gap:40px;row-gap:18px;
+    grid-template-columns:1.15fr 1fr;
+    grid-template-areas:
+      "hud hud"
+      "kart secim"
+      "kart ipucu";
+  }
+  html.sinif-modu #ekran-oyun .hud{grid-area:hud}
+  html.sinif-modu #ekran-oyun .kart-alan{grid-area:kart;min-height:560px}
+  html.sinif-modu #ekran-oyun .kart{width:min(480px,92%);height:clamp(460px,68vh,620px)}
+  html.sinif-modu #ekran-oyun .kart-alan::before{width:min(480px,88%)}
+  html.sinif-modu #ekran-oyun .secimler{grid-area:secim;width:100%;align-self:end}
+  html.sinif-modu #ekran-oyun .ipucu{grid-area:ipucu}
+  html.sinif-modu #ekran-oyun .sinif-ipucu{grid-area:ipucu;width:100%;align-self:start;margin-top:16px}
+}
+
 /* ---------- Konfeti (mini, doğru cevap) ---------- */
 .mini-konfeti{position:absolute;top:40%;left:50%;pointer-events:none;z-index:6}
 .mini-konfeti i{
