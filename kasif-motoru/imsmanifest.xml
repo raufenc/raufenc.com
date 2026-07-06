@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="KASIF_MOTORU_ARAPCA_CARSI_V1"
+          version="1.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="ORG_KASIF">
+    <organization identifier="ORG_KASIF">
+      <title>Hikmet Diyarı — Çarşı Diyarı (İHO 7 Arapça · Ünite 3)</title>
+      <item identifier="item-carsi" identifierref="res-carsi">
+        <title>Çarşı Diyarı — Eğitsel Platformer</title>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="res-carsi"
+              type="webcontent"
+              adlcp:scormtype="sco"
+              href="index.html">
+      <file href="index.html"/>
+      <file href="lib/scorm.js"/>
+      <file href="lib/tokens.css"/>
+      <file href="motor/loop.js"/>
+      <file href="motor/physics.js"/>
+      <file href="motor/input.js"/>
+      <file href="motor/audio.js"/>
+      <file href="motor/oyuncu.js"/>
+      <file href="motor/kayit.js"/>
+      <file href="motor/sahne.js"/>
+      <file href="motor/mekanikler/dogru-gecit.js"/>
+      <file href="motor/mekanikler/kelime-kopru.js"/>
+      <file href="motor/mekanikler/isik-kapisi.js"/>
+      <file href="icerik/arapca-carsi.js"/>
+      <file href="manifest.webmanifest"/>
+    </resource>
+  </resources>
+
+</manifest>
