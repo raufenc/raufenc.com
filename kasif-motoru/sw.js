@@ -5,7 +5,7 @@
    ============================================================ */
 "use strict";
 
-var CACHE_ADI = "kasif-motoru-v1";
+var CACHE_ADI = "kasif-motoru-v2";
 var CACHE_DOSYALARI = [
   "./",
   "index.html",

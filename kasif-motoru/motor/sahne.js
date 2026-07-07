@@ -222,6 +222,7 @@ KM.Sahne = function (paket, bolumIndex) {
   this.aktifSoru = null; this.aktifIpucu = null;
   this.hatirlatmaMetin = ''; this.hatirlatmaT = 0;
   this.mesajMetin = ''; this.mesajT = 0;
+  this.sarsinti = 0;          // ekran sarsıntısı (yanlış cevapta)
   this.durum = 'oyun';        // 'oyun' | 'bolumBitti'
   this.sonSkor = 0; this.sonStatus = '';
   this.onBolumBitti = null;
@@ -237,7 +238,7 @@ KM.Sahne = function (paket, bolumIndex) {
   this.dunya = {
     oyuncu: this.oyuncu,
     part: function (x, y, renk, n) { self.part(x, y, renk, n); },
-    hatirlatma: function (m) { self.hatirlatmaMetin = m; self.hatirlatmaT = 1.4; },
+    hatirlatma: function (m) { self.hatirlatmaMetin = m; self.hatirlatmaT = 1.4; self.sarsinti = 0.3; },
     mesaj: function (m, s) { self.mesajMetin = m; self.mesajT = s || 1.1; },
     checkpoint: function (x, y) { self.checkpoint = { x: x, y: y }; },
     respawn: function (x, y) { self.oyuncu.x = x; self.oyuncu.y = y; self.oyuncu.vx = 0; self.oyuncu.vy = 0; }
@@ -300,6 +301,14 @@ KM.Sahne.prototype.guncelle = function (dt) {
   KM.Girdi.ilerle(dt);
   o.guncelle(dt, KM.Girdi, this.platformlar);
 
+  // sert iniş tozu
+  if (o.kondu) {
+    for (var d = 0; d < 5; d++) {
+      var yon = (d - 2) * 34;
+      this.parcaciklar.push({ x: o.x + o.w / 2, y: o.y + o.h, vx: yon, vy: -30 - Math.random() * 30, omur: 0.35, renk: '#b9a67e' });
+    }
+  }
+
   // mekanikler (yakındakiler)
   for (var i = 0; i < this.mekanikler.length; i++) {
     var m = this.mekanikler[i];
@@ -353,6 +362,7 @@ KM.Sahne.prototype.guncelle = function (dt) {
   // HUD zamanlayıcıları
   if (this.hatirlatmaT > 0) this.hatirlatmaT -= dt;
   if (this.mesajT > 0) this.mesajT -= dt;
+  if (this.sarsinti > 0) this.sarsinti -= dt;
 
   // bölüm bitişi (son ışık kapısı çözüldü + kapıdan geçildi)
   for (var b = 0; b < this.mekanikler.length; b++) {
@@ -400,7 +410,13 @@ KM.Sahne.prototype.ciz = function (ctx) {
   KM.Ciz.arkaPlan(ctx, this.kamera, S);
 
   ctx.save();
-  ctx.translate(-Math.round(this.kamera.x), -Math.round(this.kamera.y));
+  var sarsX = 0, sarsY = 0;
+  if (this.sarsinti > 0) {
+    var mag = this.sarsinti * 9;
+    sarsX = (Math.random() - 0.5) * mag;
+    sarsY = (Math.random() - 0.5) * mag;
+  }
+  ctx.translate(-Math.round(this.kamera.x) + sarsX, -Math.round(this.kamera.y) + sarsY);
 
   // zemin + kutular
   for (var i = 0; i < this.platformlar.length; i++) {

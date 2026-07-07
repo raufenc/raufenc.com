@@ -30,10 +30,10 @@ KM.Mekanikler.dogruGecit = function (veri, x0, S) {
   // sürekli zemin
   inst.platformlar.push({ x: x0, y: zy, w: W, h: S.ZEMIN_KAL, tur: 'zemin' });
 
-  // cevap levhaları (üstten basılır)
+  // cevap levhaları (üstten basılır) — alçak + geniş = kolay ulaşılır
   var n = secenekler.length;
-  var pw = 118, py = zy - 100;
-  var basla = x0 + 96, aralik = 150;
+  var pw = 132, py = zy - 82;
+  var basla = x0 + 92, aralik = 162;
   for (i = 0; i < n; i++) {
     var p = { x: basla + i * aralik, y: py, w: pw, h: 16, tur: 'ustten',
               _sec: secenekler[i], _titre: 0, _kirmizi: 0, _yesil: 0 };
@@ -48,7 +48,7 @@ KM.Mekanikler.dogruGecit = function (veri, x0, S) {
   function ustundeMi(o, p) {
     return o.yerde &&
       o.x < p.x + p.w && o.x + o.w > p.x &&
-      Math.abs((o.y + o.h) - p.y) < 7;
+      Math.abs((o.y + o.h) - p.y) < 11;
   }
 
   inst.guncelle = function (dt, o, dunya) {

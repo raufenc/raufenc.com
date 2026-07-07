@@ -30,10 +30,10 @@ KM.Mekanikler.isikKapisi = function (veri, x0, S) {
 
   for (var i = 0; i < n; i++) {
     var cx = x0 + 170 + i * 152;
-    var cy = zy - 152;
+    var cy = zy - 128;                         // alçak = normal zıplamayla kolay ulaşılır
     inst._fen.push({
       cx: cx, cy: cy, _sec: fenerler[i], _yanik: false, _puf: 0, _dokunuyor: false,
-      hit: { x: cx - 36, y: cy - 40, w: 72, h: 84 }
+      hit: { x: cx - 44, y: cy - 46, w: 88, h: 104 }   // geniş isabet kutusu
     });
   }
 

@@ -17,7 +17,7 @@ KM.Girdi = (function () {
     ziplaKuyruk: 0     // son ~140ms içinde zıpla basıldıysa > 0
   };
 
-  var KUYRUK = 0.14;   // jump buffer süresi
+  var KUYRUK = 0.16;   // jump buffer süresi (erken basılan zıplama yere değince tetiklenir)
 
   function ziplaBas() {
     if (!st.ziplaBasili) st.ziplaKuyruk = KUYRUK;

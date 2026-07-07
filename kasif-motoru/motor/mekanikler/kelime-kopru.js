@@ -14,7 +14,7 @@ KM.Mekanikler.kelimeKopru = function (veri, x0, S) {
   var taslar = veri.taslar || [];
   var celel = veri.celeldirici || [];
   var K = taslar.length;
-  var APPR = 190, KOLON = 132, FAR = 150;
+  var APPR = 190, KOLON = 118, FAR = 150;   // sütunlar birbirine daha yakın = kolay hoplama
   var W = APPR + K * KOLON + FAR;
 
   var hedefKelime = (veri.hedef && veri.hedef.kelime) || '';
@@ -33,18 +33,18 @@ KM.Mekanikler.kelimeKopru = function (veri, x0, S) {
   inst.platformlar.push({ x: x0, y: zy, w: APPR, h: S.ZEMIN_KAL, tur: 'zemin' });
   inst.platformlar.push({ x: x0 + APPR + K * KOLON, y: zy, w: FAR, h: S.ZEMIN_KAL, tur: 'zemin' });
 
-  // sütunlar: her sütunda doğru taş + çeldirici (yükseklikleri değişir → okumaya zorlar)
-  var yAlt = zy - 66, yUst = zy - 138;
+  // sütunlar: her sütunda doğru taş + çeldirici (yükseklikleri az değişir → kolay hoplama)
+  var yAlt = zy - 58, yUst = zy - 112;
   for (var j = 0; j < K; j++) {
-    var cx = x0 + APPR + 66 + j * KOLON;
+    var cx = x0 + APPR + 60 + j * KOLON;
     var dogruUstte = (j % 2 === 1);
     var yD = dogruUstte ? yUst : yAlt;
     var yC = dogruUstte ? yAlt : yUst;
-    var dogruTas = { x: cx - 34, y: yD, w: 68, h: 15, tur: 'ustten',
+    var dogruTas = { x: cx - 38, y: yD, w: 76, h: 15, tur: 'ustten',
                      _harf: taslar[j], _dogru: true, _kolon: j, _yanik: false, _dus: 0, pasif: false };
     inst._tas.push(dogruTas); inst.platformlar.push(dogruTas);
     if (celel.length) {
-      var cTas = { x: cx - 34, y: yC, w: 68, h: 15, tur: 'ustten',
+      var cTas = { x: cx - 38, y: yC, w: 76, h: 15, tur: 'ustten',
                    _harf: celel[j % celel.length], _dogru: false, _kolon: j, _yanik: false, _dus: 0, pasif: false };
       inst._tas.push(cTas); inst.platformlar.push(cTas);
     }
@@ -53,7 +53,7 @@ KM.Mekanikler.kelimeKopru = function (veri, x0, S) {
   function ustundeMi(o, p) {
     return o.yerde && !p.pasif &&
       o.x < p.x + p.w && o.x + o.w > p.x &&
-      Math.abs((o.y + o.h) - p.y) < 8;
+      Math.abs((o.y + o.h) - p.y) < 11;
   }
 
   function sifirla() {

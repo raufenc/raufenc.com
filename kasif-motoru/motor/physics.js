@@ -37,7 +37,7 @@ KM.Fizik = (function () {
     }
 
     // ---- Y ekseni (alt-adımlı: hızlı düşüşte tünellemeyi önler) ----
-    o.vy += YERCEKIMI * dt;
+    // Yerçekimi artık çağıran tarafta (oyuncu.js) uygulanıyor (asimetrik çıkış/iniş).
     if (o.vy > MAX_DUSME) o.vy = MAX_DUSME;
     var dy = o.vy * dt;
     var adim = Math.max(1, Math.ceil(Math.abs(dy) / 8));
@@ -53,7 +53,7 @@ KM.Fizik = (function () {
 
         if (par > 0) {
           // Düşüyor → üstüne kon. Tek yönlü platformda: ayak önceden üstteyse kon.
-          if (s.tur === 'ustten' && oncekiAlt > s.y + 2) continue;
+          if (s.tur === 'ustten' && oncekiAlt > s.y + 8) continue;
           o.y = s.y - o.h;
           o.vy = 0;
           o.yerde = true;
