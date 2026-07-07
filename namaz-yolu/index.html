@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Namaz Yolu — Namazı Öğreten Din Dersi Oyunu</title>
+<meta name="description" content="Zar yok, yol var. Îmândan namazın rükünlerine 40 durak: öğren, kıl, öğret. Namazı oyunla öğreten eğitsel strateji oyunu; 5-8. sınıf, kaynak: Namâz Kitâbı.">
+<link rel="canonical" href="https://raufenc.com/namaz-yolu/">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://raufenc.com/namaz-yolu/">
+<meta property="og:title" content="Namaz Yolu — Namazı Öğreten Din Dersi Oyunu">
+<meta property="og:description" content="Zar yok, yol var. Îmândan namazın rükünlerine 40 durak: öğren, kıl, öğret. 5-8. sınıf için eğitsel strateji oyunu.">
+<meta property="og:image" content="https://raufenc.com/namaz-yolu/img/kapak.webp">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="Rauf Enç">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Namaz Yolu — Namazı Öğreten Din Dersi Oyunu">
+<meta name="twitter:description" content="Zar yok, yol var. Öğren, kıl, öğret — huzura giden yolda 40 durak.">
+<meta name="twitter:image" content="https://raufenc.com/namaz-yolu/img/kapak.webp">
+<script>
+  // Eski service worker / önbelleği temizle (çok projeli sitede bayat içerik sorununu çözer)
+  try {
+    if ('serviceWorker' in navigator && navigator.serviceWorker.getRegistrations)
+      navigator.serviceWorker.getRegistrations().then(function (rs) { rs.forEach(function (r) { r.unregister(); }); }).catch(function () {});
+    if (window.caches && caches.keys)
+      caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); }).catch(function () {});
+  } catch (e) {}
+  // Görünür hata yakalayıcı (özellikle mobil tarayıcılarda sorunu tespit için)
+  window.addEventListener('error', function (e) {
+    try {
+      var d = document.getElementById('hata-kutu');
+      if (!d) { d = document.createElement('div'); d.id = 'hata-kutu';
+        d.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#7d2b2b;color:#fff;font:12px/1.45 ui-monospace,monospace;padding:10px 12px;white-space:pre-wrap;max-height:45vh;overflow:auto;box-shadow:0 -4px 16px rgba(0,0,0,.5)';
+        (document.body || document.documentElement).appendChild(d); }
+      d.textContent = '⚠️ Bir hata oluştu (lütfen ekran görüntüsü al):\n' + (e.message || e) + '\n' + (e.filename || '') + ' satır ' + (e.lineno || '?') + ':' + (e.colno || '?');
+    } catch (x) {}
+  });
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --koyu:#0c3b33; --koyu2:#082420; --altin:#c9a227; --altin2:#edc75a; --altin3:#f5e2a3;
+    --parsomen:#f6edd6; --parsomen2:#ece0c2; --metin:#2c2417; --kirmizi:#8a2b2b; --yesil:#1e6b4f;
+    --golge:rgba(0,0,0,.30);
+    --imp:'Cinzel', Georgia, 'Times New Roman', serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,sans-serif; color:#eadfc6; min-height:100vh;
+    background:
+      radial-gradient(1300px 820px at 50% -8%, #18675a 0%, var(--koyu) 46%, var(--koyu2) 100%);
+  }
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;z-index:0;
+    background-image:radial-gradient(circle at 25% 25%, #fff 1.5px, transparent 1.6px);background-size:34px 34px}
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif}
+  .gizli{display:none !important}
+
+  header{text-align:center; padding:16px 10px 8px; position:relative; z-index:1}
+  header .marka{font-family:Georgia,serif; letter-spacing:.2em; font-size:13px; color:var(--altin2)}
+  header h1{margin:.08em 0; font-size:clamp(26px,5vw,46px); color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.55); letter-spacing:.01em}
+  header h1 .ana{color:var(--altin); text-shadow:0 2px 14px rgba(201,162,39,.5)}
+  header .alt{font-size:13.5px; color:#cdbb8f; letter-spacing:.04em}
+
+  /* ---------- kurulum ---------- */
+  #kurulum{max-width:560px; margin:22px auto; background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+    border:1.5px solid rgba(201,162,39,.45); border-radius:18px; padding:24px; box-shadow:0 14px 50px var(--golge); position:relative; z-index:1}
+  #kurulum h2{margin:.1em 0 .5em; color:var(--altin2); text-align:center; font-size:24px}
+  .kur-row-ust{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px}
+  #kurulum select{padding:9px 12px; border-radius:10px; background:#0c2c27; color:#fff; border:1px solid #2b4f47; font-size:16px}
+  .kur-row{display:flex; gap:10px; align-items:center; margin:9px 0; background:rgba(0,0,0,.18); padding:8px 10px; border-radius:12px}
+  .kur-sw{width:26px;height:26px;border-radius:50%; flex:0 0 auto; box-shadow:inset 0 0 0 2px rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.4)}
+  #kurulum input[type=text]{flex:1; min-width:90px; padding:10px 12px; border-radius:10px; border:1px solid #2b4f47; background:#0c2c27; color:#fff; font-size:16px}
+  .tip-toggle{display:flex; border:1px solid #2b4f47; border-radius:10px; overflow:hidden; flex:0 0 auto}
+  .tip-toggle button{padding:9px 12px; background:#0c2c27; color:#9fb3ac; border:none; cursor:pointer; font-size:14px; font-weight:600}
+  .tip-toggle button.sec{background:linear-gradient(180deg,var(--altin2),var(--altin)); color:#22180a}
+  .btn-buyuk{display:block; width:100%; margin-top:18px; padding:15px; font-size:19px; font-weight:800;
+    border:none; border-radius:13px; cursor:pointer; color:#22180a; background:linear-gradient(180deg,var(--altin3),var(--altin)); box-shadow:0 5px 0 #8a6f17, 0 8px 22px rgba(0,0,0,.35); letter-spacing:.02em}
+  .btn-buyuk:active{transform:translateY(3px); box-shadow:0 2px 0 #8a6f17}
+  .kurallar-ozet{margin-top:16px; font-size:13.5px; line-height:1.6; color:#d3c5a0}
+  .kurallar-ozet b{color:var(--altin2)}
+
+  /* ---------- oyun yerleşimi ---------- */
+  #oyun{display:flex; gap:20px; align-items:flex-start; justify-content:center; padding:6px 16px 34px; flex-wrap:wrap; position:relative; z-index:1}
+  .tahta-saran{flex:0 0 auto}
+  #tahta{
+    width:min(96vmin, 880px); aspect-ratio:1/1; display:grid;
+    grid-template-columns:repeat(11,1fr); grid-template-rows:repeat(11,1fr);
+    background:var(--parsomen); border:7px solid #6e4f17; border-radius:12px; padding:6px; gap:2.5px;
+    box-shadow:0 20px 56px var(--golge), inset 0 0 0 2.5px var(--altin), inset 0 0 0 6px var(--parsomen);
+  }
+  .kare{position:relative; background:linear-gradient(180deg,#fffdf6,#f6efdd); border:1px solid #d6c49b; border-radius:5px; overflow:hidden;
+    display:flex; flex-direction:column; cursor:pointer; min-width:0; transition:transform .12s}
+  .kare:hover{outline:2px solid var(--altin); z-index:5; transform:scale(1.04)}
+  .kare-ic{flex:1; display:flex; flex-direction:column; position:relative; overflow:hidden; min-width:0}
+  .kband{color:#fff; font-family:var(--imp); font-weight:700; font-size:clamp(6px,1.28vmin,12px); text-align:center; padding:2px 1px 2.5px;
+    line-height:1; text-transform:uppercase; letter-spacing:.004em; text-shadow:0 1px 1px rgba(0,0,0,.45); z-index:2; overflow:hidden;
+    white-space:nowrap; text-overflow:ellipsis; box-shadow:inset 0 -2px 3px rgba(0,0,0,.22)}
+  .kgor{flex:1; width:100%; object-fit:cover; min-height:0; display:block}
+  .kfoot{font-family:var(--imp); font-size:clamp(6px,1.08vmin,10px); font-weight:700; text-align:center; color:#5a3d10;
+    background:linear-gradient(rgba(251,244,222,.96),rgba(242,230,194,.96)); padding:1px 1px 1.5px; z-index:2; border-top:1px solid rgba(214,196,143,.7)}
+  .kperde{position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(6,26,22,.24),transparent 38%,rgba(6,26,22,.66))}
+  .kose-ad{position:absolute; left:1px; right:1px; bottom:2px; z-index:2; color:#f6ead0; font-family:var(--imp); font-weight:700;
+    font-size:clamp(7px,1.5vmin,13px); text-align:center; line-height:1.04; text-shadow:0 1px 3px rgba(0,0,0,.9)}
+  .kose-rozet{position:absolute; top:2px; left:0; right:0; z-index:2; text-align:center; font-size:clamp(11px,2.4vmin,20px); filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-rozet{position:absolute; left:0; right:0; top:36%; transform:translateY(-30%); z-index:3; display:flex; align-items:center; justify-content:center; gap:1px; pointer-events:none}
+  .imar-bina{font-size:clamp(10px,2.1vmin,18px); line-height:1; filter:drop-shadow(0 1px 2px rgba(0,0,0,.6))}
+  .imar-bina.kulliye{filter:drop-shadow(0 0 4px var(--altin))}
+  .imar-yeni{animation:buildPop .4s cubic-bezier(.2,1.6,.4,1)}
+  .kare-baslangic{background:linear-gradient(135deg,#fdf3d6,#f7e7bd)} .kare-esaret{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
+  .kare-kervansaray{background:linear-gradient(135deg,#e7f1e6,#d9ead7)} .kare-surgun{background:linear-gradient(135deg,#f2e0e0,#ecd2d2)}
+  .kare-ferman{background:linear-gradient(135deg,#f8e9e2,#f1d9cf)} .kare-vakca{background:linear-gradient(135deg,#e4f0ea,#d6e8df)}
+  .kare-vergi{background:linear-gradient(135deg,#f5eeda,#efe4c6)} .kare-liman{background:linear-gradient(135deg,#e9eff5,#dbe6f1)} .kare-utility{background:linear-gradient(135deg,#f2edf6,#e8dff1)}
+  .kare.sahipli .kfoot{font-weight:800; color:#3a2d12}
+  .kare.ipotekli{filter:grayscale(.55) opacity(.78)}
+  .kare.vurgu{animation:karePulse 1.1s ease-out}
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  }
+
+  .merkez{grid-row:2 / 11; grid-column:2 / 11; border-radius:9px; border:2.5px solid var(--altin);
+    background:radial-gradient(circle at 50% 32%, #1c6353, #0e3f35 72%); position:relative;
+    display:flex; align-items:center; justify-content:center; box-shadow:inset 0 0 50px rgba(0,0,0,.5)}
+  .merkez::before{content:"";position:absolute;inset:8px;border:1px solid rgba(201,162,39,.35);border-radius:6px;pointer-events:none}
+  .merkez-ic{text-align:center; color:#f0e3c2; padding:8px; position:relative}
+  .logo-ust{font-family:Georgia,serif; letter-spacing:.34em; font-size:clamp(11px,2.1vmin,20px); color:var(--altin2)}
+  .logo-orta{font-family:Georgia,serif; font-weight:800; font-size:clamp(26px,6.6vmin,58px); color:#fff; line-height:1; text-shadow:0 3px 14px rgba(0,0,0,.6)}
+  .logo-alt{font-size:clamp(8px,1.5vmin,13px); color:#c2ad77; margin-top:5px; letter-spacing:.05em}
+  .deste-kutu{display:flex; gap:11px; justify-content:center; align-items:center; margin:14px 0 4px}
+  .deste{font-family:Georgia,serif; font-size:clamp(8px,1.5vmin,13px); letter-spacing:.12em; color:#fff; padding:9px 13px; border-radius:7px;
+    box-shadow:0 4px 0 rgba(0,0,0,.35), 0 7px 16px rgba(0,0,0,.4)}
+  .deste-ferman{background:linear-gradient(180deg,#a64141,#732424); transform:rotate(-4deg)} .deste-vakca{background:linear-gradient(180deg,#2f8870,#175040); transform:rotate(4deg)}
+  .sefer-mini{width:clamp(46px,8.8vmin,82px); min-height:clamp(56px,11vmin,100px); background:linear-gradient(180deg,#f8ecc8,#e6cf94);
+    color:#5a3d10; border:2.5px solid #b7950b; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(0,0,0,.45); transform:rotate(-3deg)}
+  .sm-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(22px,5vmin,46px); line-height:1}
+  .sm-et{font-size:clamp(6.5px,1.15vmin,9.5px); letter-spacing:.08em; color:#7a5b1a; margin-top:3px; text-align:center; line-height:1.1}
+
+  .pawnlar{position:absolute; bottom:2px; right:2px; left:2px; display:flex; flex-wrap:wrap; gap:2px; justify-content:center; pointer-events:none}
+  .pawn{width:clamp(28px,4.4vmin,38px); height:clamp(28px,4.4vmin,38px); border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(14px,2.4vmin,22px); border:1.5px solid rgba(255,255,255,.6);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 0 0 2.5px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.5)}
+  .pawn-hareket{animation:zipla .24s ease-out; z-index:9; box-shadow:0 0 0 1.5px #fff, 0 0 13px 3px var(--altin2), 0 3px 8px rgba(0,0,0,.55)}
+
+  /* ---------- yan panel ---------- */
+  .panel{flex:1 1 320px; max-width:420px; min-width:288px; display:flex; flex-direction:column; gap:14px}
+  .panel-kart{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04)); border:1.5px solid rgba(201,162,39,.4); border-radius:16px; padding:14px}
+  #sira-bilgi{font-size:18px; color:#fff} #sira-bilgi .sw{display:inline-block; width:16px;height:16px;border-radius:50%;vertical-align:-3px;margin-right:5px}
+  .bot-rozet{display:inline-block;font-size:11px;background:#2471a3;color:#fff;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:2px;font-weight:700}
+  #aksiyon-bar{display:flex; flex-wrap:wrap; gap:9px; margin-top:12px; min-height:44px}
+  .akbtn{padding:11px 14px; border-radius:11px; border:1px solid rgba(201,162,39,.55); background:rgba(255,255,255,.09);
+    color:#f3ead2; font-size:15.5px; cursor:pointer; font-weight:700; transition:transform .1s, background .15s}
+  .akbtn:hover{background:rgba(255,255,255,.18)}
+  .akbtn:active{transform:translateY(2px)}
+  .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none; box-shadow:0 4px 0 #8a6f17}
+  .akbtn.btn-ana:active{box-shadow:0 1px 0 #8a6f17}
+  .akbtn.btn-pasif,.akbtn:disabled{opacity:.45; cursor:not-allowed}
+  .bot-oynuyor{font-size:16px;color:var(--altin2);font-weight:700;display:flex;align-items:center;gap:9px}
+  .bot-spinner{width:16px;height:16px;border:2.5px solid rgba(201,162,39,.3);border-top-color:var(--altin2);border-radius:50%;animation:donme .8s linear infinite}
+  #oyuncular{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .oyuncu-kart{background:rgba(0,0,0,.24); border:2.5px solid; border-radius:13px; padding:10px 30px 10px 11px; transition:box-shadow .2s; position:relative}
+  .koltuk-btn{position:absolute; top:6px; right:6px; width:32px; height:32px; border-radius:8px; border:1px solid rgba(201,162,39,.5);
+    background:rgba(255,255,255,.09); color:#fff; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1}
+  .koltuk-btn:hover{background:rgba(255,255,255,.2)}
+  .akbtn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
+  .oyuncu-kart.aktif{box-shadow:0 0 0 2.5px var(--altin2), 0 0 22px rgba(237,199,90,.45)}
+  .oyuncu-kart.iflas{opacity:.42; filter:grayscale(1)}
+  .ok-bas{display:flex; align-items:center; gap:6px; font-size:15px; font-weight:800; color:#fff}
+  .ok-sw{width:21px;height:21px;border-radius:50%; flex:0 0 auto; display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 0 1.5px rgba(255,255,255,.45), 0 1px 3px rgba(0,0,0,.4)}
+  .seref-bereket{text-align:center;font-size:18px;color:#1c6b41;background:#e3f6ea;border:1.5px solid #9bd3b0;border-radius:11px;padding:12px;margin:4px 0;font-weight:600}
+  .ok-para{font-size:18px; color:var(--altin2); font-weight:800; margin:3px 0; transition:color .2s}
+  .ok-para.arti{animation:flashIyi .9s} .ok-para.eksi{animation:flashKotu .9s}
+  .ok-alt{font-size:12.5px; color:#c9ba93}
+  #log{height:184px; overflow-y:auto; font-size:14px; line-height:1.55}
+  .log-satir{padding:4px 0; border-bottom:1px dashed rgba(255,255,255,.09); color:#ddd0ad; animation:logGir .3s}
+  .log-satir.iyi{color:#85e4b6} .log-satir.kotu{color:#f2a8a8} .log-satir.vurgu{color:var(--altin2); font-weight:700}
+  .panel-alt{display:flex; gap:8px; flex-wrap:wrap}
+  .panel-alt .akbtn{flex:1; text-align:center; font-size:14.5px}
+
+  /* ---------- modal ---------- */
+  #modal,#kurallar-modal{position:fixed; inset:0; background:rgba(6,18,15,.74); display:none; align-items:center; justify-content:center; z-index:50; padding:16px; backdrop-filter:blur(2px)}
+  .modal-kutu{background:var(--parsomen); color:var(--metin); width:min(480px,95vw); max-height:92vh; overflow-y:auto;
+    border-radius:16px; padding:20px; border:3px solid var(--altin); box-shadow:0 22px 64px rgba(0,0,0,.6); animation:popIn .28s cubic-bezier(.2,1.3,.4,1)}
+  .modal-kutu.genis{width:min(580px,96vw)}
+  .modal-kutu h2{margin:.15em 0; color:#3a2d12; font-size:23px}
+  .m-serit{height:10px; border-radius:5px; margin:-8px -8px 10px}
+  .m-bolge{font-size:13px; letter-spacing:.13em; text-transform:uppercase; color:#8a6f2a; font-weight:800}
+  .m-tarih{font-size:14px; color:#6b5a33; margin:3px 0 9px; font-weight:600}
+  .m-bilgi{font-size:16px; line-height:1.6; color:#33291a}
+  .m-eko{margin-top:12px; font-size:14px; background:rgba(0,0,0,.05); border-radius:10px; padding:11px; line-height:1.7}
+  .m-eko .bina-satir{display:flex;align-items:center;gap:6px;justify-content:space-between;padding:1px 0}
+  .m-ikon{font-size:42px; text-align:center}
+  .m-gorsel{width:100%; max-width:340px; display:block; margin:-2px auto 12px; border-radius:11px; box-shadow:0 5px 16px rgba(0,0,0,.28)}
+  /* ===== Premium kart modalları (illüstrasyonlu başlıklar) ===== */
+  .yk-head{position:relative; height:150px; overflow:hidden; border-radius:13px 13px 0 0; margin:-20px -20px 36px}
+  .yk-img,.ok-img{width:100%; height:100%; object-fit:cover; display:block}
+  .yk-perde{position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,26,22,.55),rgba(6,26,22,.06) 45%,rgba(6,26,22,.62))}
+  .yk-ust{position:absolute; top:9px; left:0; right:0; text-align:center; font-family:var(--imp); font-size:12px; letter-spacing:.22em; color:#ffe9b8; text-shadow:0 1px 4px rgba(0,0,0,.85)}
+  .yk-tema{position:absolute; top:27px; left:0; right:0; text-align:center; font-family:var(--imp); font-weight:700; font-size:13.5px; letter-spacing:.08em; text-transform:uppercase; color:#ffe9b8; text-shadow:0 1px 4px rgba(0,0,0,.9)}
+  .yk-no{position:absolute; left:50%; bottom:-27px; transform:translateX(-50%); width:66px; height:66px; border-radius:50%; z-index:3;
+    background:radial-gradient(#fff9ec,#f2e2ba); border:3px solid var(--yk,#c9a227); box-shadow:0 4px 14px rgba(0,0,0,.4), inset 0 0 0 2px #fff;
+    display:flex; align-items:center; justify-content:center; font-family:var(--imp); font-weight:800; font-size:30px; color:var(--yk,#7a5b1a); line-height:1}
+  .yk-no.sym{font-size:24px}
+  .yk-altyazi{text-align:center; font-family:var(--imp); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:#8a6f2a; margin:0 0 4px}
+  .yk-baslik{text-align:center; font-family:var(--imp); margin:.15em 0 .35em}
+  .ok-head{position:relative; height:118px; overflow:hidden; border-radius:13px 13px 0 0; margin:-20px -20px 14px}
+  .ok-etiket{position:absolute; bottom:9px; left:0; right:0; text-align:center; font-family:var(--imp); font-weight:700; font-size:16px; letter-spacing:.16em; color:#ffe9b8; text-shadow:0 1px 5px rgba(0,0,0,.9)}
+  .ok-etki{text-align:center; font-family:var(--imp); font-weight:700; color:#fff; background:var(--ok,#7d2b2b); border-radius:9px; padding:9px 12px; margin-top:10px; font-size:14px; box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.25)}
+  .bs-head{display:flex; align-items:center; gap:11px; border-radius:13px 13px 0 0; margin:-20px -20px 14px; padding:12px 16px; min-height:64px;
+    background:linear-gradient(135deg,var(--bs,#5b3a8a),rgba(0,0,0,.3)); color:#fff}
+  .bs-badge{flex:0 0 46px; width:46px; height:46px; border-radius:50%; overflow:hidden; box-shadow:0 0 0 2.5px #f2e2b0, 0 0 0 5px rgba(0,0,0,.22)}
+  .bs-badge img{width:100%; height:100%; object-fit:cover; display:block}
+  .bs-tx b{display:block; font-family:var(--imp); font-size:16px; letter-spacing:.02em; text-shadow:0 1px 2px rgba(0,0,0,.5)}
+  .bs-tx small{font-family:var(--imp); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; opacity:.92}
+  @media (max-width:520px){ .yk-head,.ok-head,.bs-head{margin-left:-15px;margin-right:-15px} .yk-head{margin-top:-15px} .ok-head,.bs-head{margin-top:-15px} }
+  .merkez{overflow:hidden}
+  .merkez-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .merkez-perde{position:absolute; inset:0; background:linear-gradient(180deg,rgba(6,26,22,.74),rgba(6,26,22,.42) 46%,rgba(6,26,22,.8))}
+  .merkez-ic{z-index:2}
+  /* Yatay ekran: mekan kartı yatay düzen — resim solda (yatay 3:2 kırpım), metin sağda */
+  @media (orientation:landscape) and (min-width:640px){
+    .modal-kutu.resimli{width:min(860px,96vw); max-height:90vh}
+    .modal-kutu.resimli::after{content:""; display:block; clear:both}
+    .modal-kutu.resimli .m-gorsel{float:left; width:46%; max-width:400px; aspect-ratio:3/2; height:auto;
+      object-fit:cover; margin:0 18px 12px 0}
+    .modal-kutu.resimli .m-serit{margin:2px 0 8px; float:none}
+    .modal-kutu.resimli .m-btnlar,.modal-kutu.resimli .m-eko{clear:both}
+  }
+  #kapak{display:block; width:100%; margin:0 auto 16px; border-radius:14px; box-shadow:0 12px 34px rgba(0,0,0,.45); border:1.5px solid rgba(201,162,39,.5)}
+  .m-btnlar{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; justify-content:flex-end}
+  .kart-ust{color:#fff; padding:9px 14px; border-radius:9px; font-family:Georgia,serif; letter-spacing:.1em; margin:-8px -8px 12px; text-align:center; font-size:17px}
+  .kart-ogren{margin-top:12px; font-size:14.5px; background:#fff7e3; border-left:5px solid var(--altin); padding:10px 12px; border-radius:0 9px 9px 0; color:#5a4a22; line-height:1.55}
+  .sefer-buyuk{text-align:center; margin:10px 0 4px}
+  .sb-no{font-family:Georgia,serif; font-weight:800; font-size:clamp(56px,13vw,84px); line-height:1; color:#7a5b1a; text-shadow:0 2px 0 #e6cf94; display:inline-block; animation:popIn .3s ease-out}
+  .sb-alt{font-size:15px; color:#8a6f2a; letter-spacing:.06em}
+  .soru-metin{font-size:18px; line-height:1.5; font-weight:700; color:#33291a; margin:8px 0 14px}
+  .siklar{display:flex; flex-direction:column; gap:10px}
+  .sik{text-align:left; padding:12px 14px; border-radius:11px; border:1.5px solid #cdb98a; background:#fff; cursor:pointer; font-size:16px; color:#33291a; transition:background .12s, transform .1s}
+  .sik:hover{background:#fff6df; transform:translateX(3px)} .sik.dogru{background:#d6f3df; border-color:#3fae6e; font-weight:700} .sik.yanlis{background:#f7d9d9; border-color:#c0504d}
+  .soru-acik{margin-top:14px; font-size:15px; padding:12px; border-radius:10px; line-height:1.55}
+  .soru-acik.iyi{background:#e3f6ea; color:#1c6b41} .soru-acik.kotu{background:#f7e4e4; color:#9a3b3b}
+  .sev{font-size:12px; padding:2px 9px; border-radius:11px; margin-left:8px; vertical-align:2px; font-weight:700}
+  .sev-kolay{background:#cdeccd; color:#2c6b2c} .sev-orta{background:#fce6c0; color:#8a5a13} .sev-zor{background:#f4cccc; color:#a02d2d}
+  .imar-liste{display:flex; flex-direction:column; gap:8px; margin:11px 0}
+  .imar-row{display:flex; align-items:center; justify-content:space-between; gap:9px; font-size:15px; background:rgba(0,0,0,.045); padding:9px 11px; border-radius:10px}
+  .imar-row .imbtn{font-size:13.5px; padding:8px 11px}
+  .msw{width:14px;height:14px;border-radius:4px;display:inline-block;margin-right:5px;vertical-align:-2px}
+  .ipt{color:#a33; font-size:12px} .bitti-rozet{font-size:13px;color:#1e6b4f;font-weight:700}
+  /* sonuç / sıralama */
+  .sira-liste{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+  .sira-row{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.05);border-radius:11px;padding:9px 11px;font-size:15px}
+  .sira-row.kazanan{background:linear-gradient(180deg,#fff7e0,#f5e6bd);box-shadow:0 0 0 2px var(--altin);font-weight:700}
+  .sira-row.iflas{opacity:.5}
+  .sr-rank{font-size:18px;width:26px;text-align:center;flex:0 0 auto}
+  .sr-amblem{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex:0 0 auto;box-shadow:0 0 0 1.5px rgba(255,255,255,.55),0 1px 3px rgba(0,0,0,.35)}
+  .sr-ad{flex:1;font-weight:700;color:#33291a}
+  .sr-servet{font-weight:800;color:#7a5b1a;white-space:nowrap}
+  .zafer{position:relative;border-radius:13px;overflow:hidden;margin:-8px -8px 12px;height:210px}
+  .zafer-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;margin:0;border-radius:0;box-shadow:none;display:block}
+  .zafer-perde{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,26,.42),rgba(8,30,26,.8))}
+  .zafer-ic{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:10px}
+  .zafer-amblem{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 0 0 3px #fff,0 0 20px rgba(237,199,90,.75);margin-bottom:7px;animation:popIn .5s cubic-bezier(.2,1.4,.4,1)}
+  .zafer-ust{font-family:Georgia,serif;letter-spacing:.16em;color:var(--altin2);font-size:14px;text-shadow:0 2px 9px rgba(0,0,0,.7)}
+  .zafer-ad{font-family:Georgia,serif;font-weight:800;font-size:32px;line-height:1.1;text-shadow:0 3px 13px rgba(0,0,0,.75)}
+  .zafer-alt{font-size:13px;color:#ecdfbb;margin-top:4px;text-shadow:0 1px 7px rgba(0,0,0,.75)}
+  .ozet-kutu{background:rgba(0,0,0,.05);border-radius:10px;padding:10px 12px;font-size:13.5px;color:#5a4a22;line-height:1.55;margin-top:6px}
+  .modal-kutu .akbtn{border:1px solid #b89a4e; background:#eaddbf; color:#3a2d12}
+  .modal-kutu .akbtn.btn-ana{background:linear-gradient(180deg,var(--altin3),var(--altin)); color:#22180a; border:none}
+  .modal-kutu .akbtn.btn-pasif{background:#e2d6ba}
+
+  .kurallar-icerik{font-size:15px; line-height:1.65; color:#3a3120}
+  .kurallar-icerik h3{color:#7a5b1a; margin:16px 0 5px; font-size:18px} .kurallar-icerik ul,.kurallar-icerik ol{margin:5px 0; padding-left:20px}
+  .kurallar-icerik li{margin:4px 0}
+
+  /* ---------- takas + şeref ---------- */
+  .kare-seref{background:linear-gradient(135deg,#f8efce,#efe0b3)}
+  .takas-grid{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin:10px 0}
+  .takas-col{background:rgba(0,0,0,.045); border-radius:11px; padding:10px}
+  .takas-bas{font-weight:800; font-size:14.5px; margin-bottom:7px; text-align:center; color:#3a2d12}
+  .takas-bas select{font-size:13.5px; padding:4px 7px; border-radius:8px; border:1px solid #b89a4e; background:#fff}
+  .takas-mulk{display:flex; align-items:center; gap:6px; font-size:14px; padding:5px 3px; cursor:pointer; border-radius:6px}
+  .takas-mulk:hover{background:rgba(201,162,39,.12)}
+  .takas-mulk input{width:17px; height:17px; cursor:pointer}
+  .takas-fy{color:#8a6f2a; font-size:12px; margin-left:auto}
+  .takas-para{font-size:13.5px; margin-top:7px; color:#3a2d12}
+  .takas-para input{width:84px; padding:5px 7px; border-radius:7px; border:1px solid #cdb98a; font-size:13.5px}
+  .takas-bos{font-size:13px; color:#9a8a60; font-style:italic; padding:7px 0}
+  .takas-ozet{background:rgba(0,0,0,.05); border-radius:10px; padding:11px 13px; font-size:15px; line-height:1.65}
+
+  /* ---------- kart çevirme + desen ---------- */
+  .flip{perspective:1000px;margin:8px auto 4px;width:150px;height:158px}
+  .flip-ic{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,1.1,.35,1)}
+  .flip.acik .flip-ic{transform:rotateY(180deg)}
+  .flip-yuz{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2.5px solid #b7950b;box-shadow:0 7px 18px rgba(0,0,0,.32)}
+  .flip-arka{background:#5e4216}.flip-arka svg{width:100%;height:100%}
+  .flip-on{transform:rotateY(180deg);background:linear-gradient(180deg,#f8ecc8,#e6cf94);flex-direction:column;color:#7a5b1a}
+  .flip-on .fn{font-family:Georgia,serif;font-weight:800;font-size:66px;line-height:1;text-shadow:0 2px 0 #f6e2a8}
+  .flip-on .fa{font-size:12.5px;color:#8a6f2a;letter-spacing:.05em;margin-top:2px}
+  .desenli{position:relative}.desenli > *{position:relative;z-index:1}
+  .desen-bg{position:absolute;inset:0;z-index:0;opacity:.5;border-radius:inherit;overflow:hidden}
+
+  /* ---------- animasyonlar ---------- */
+  @keyframes popIn{from{transform:scale(.86);opacity:0}to{transform:scale(1);opacity:1}}
+  @keyframes flipNo{from{transform:rotateX(85deg) scale(.7);opacity:0}to{transform:rotateX(0) scale(1);opacity:1}}
+  @keyframes zipla{0%{transform:translateY(0) scale(1)}40%{transform:translateY(-10px) scale(1.22)}72%{transform:translateY(-2px) scale(1.08)}100%{transform:translateY(0) scale(1)}}
+  @keyframes buildPop{0%{transform:scale(0) rotate(-20deg)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+  @keyframes karePulse{0%{box-shadow:inset 0 0 0 0 var(--altin)}40%{box-shadow:inset 0 0 0 4px var(--altin2)}100%{box-shadow:inset 0 0 0 0 rgba(201,162,39,0)}}
+  @keyframes flashIyi{0%{color:#fff;text-shadow:0 0 12px #7fe0b0}45%{color:#7fe0b0}100%{color:var(--altin2)}}
+  @keyframes flashKotu{0%{color:#fff;text-shadow:0 0 12px #f2a8a8}45%{color:#f2a8a8}100%{color:var(--altin2)}}
+  @keyframes logGir{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  @keyframes donme{to{transform:rotate(360deg)}}
+
+  /* ---------- PREMIUM + 3D MASA ---------- */
+  .tahta-saran{position:relative;transition:transform .5s ease}
+  #tahta{box-shadow:0 22px 55px var(--golge), inset 0 0 0 2.5px var(--altin), inset 0 0 0 7px var(--parsomen), inset 0 0 26px rgba(110,79,23,.28)}
+  .d3 .tahta-saran{perspective:1650px;perspective-origin:50% 26%;padding:6px 0 34px}
+  .d3 #tahta{transform:rotateX(var(--egim,21deg));transform-style:preserve-3d;border-width:11px;
+    box-shadow:0 54px 70px -18px rgba(0,0,0,.62), 0 26px 36px rgba(0,0,0,.32), inset 0 0 0 2.5px var(--altin), inset 0 0 30px rgba(110,79,23,.3)}
+  .d3 .merkez,.d3 .kare{transform-style:preserve-3d}
+  .d3 .merkez-ic{transform:translateZ(16px)}
+  .d3 .sefer-mini,.d3 .deste{transform:translateZ(10px)}
+  .d3 .pawn{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(13px) translateY(-7px);
+    box-shadow:0 0 0 1.5px #f4ead0, 0 9px 7px -2px rgba(0,0,0,.55)}
+  .d3 .pawn-hareket{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(22px) translateY(-12px) scale(1.16);
+    box-shadow:0 0 0 1.5px #fff, 0 0 14px 3px var(--altin2), 0 12px 9px -2px rgba(0,0,0,.6)}
+  .d3 .imar-bina{display:inline-block;transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(11px);filter:drop-shadow(0 7px 4px rgba(0,0,0,.45))}
+  .d3 .imar-bina.kulliye{transform:rotateX(calc(-1*var(--egim,21deg))) translateZ(16px)}
+  .d3 .kare:hover{transform:translateZ(8px)}
+  #d3-btn.acik{background:linear-gradient(180deg,var(--altin3),var(--altin));color:#22180a;border:none}
+
+  /* ---------- LÜKS DOKUNUŞLAR ---------- */
+  header h1,.logo-ust,.logo-orta,.marka,.zafer-ust,.zafer-ad,.kart-ust,#kurulum h2{font-family:var(--imp);letter-spacing:.02em}
+  header h1{font-weight:900}.logo-orta{font-weight:900}
+  body{background:radial-gradient(1300px 920px at 50% 8%, #1d7161 0%, #0e463c 40%, #072620 100%)}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(130% 92% at 50% 32%, transparent 52%, rgba(0,0,0,.5) 100%)}
+  header,#oyun,#kurulum{position:relative;z-index:1}
+  header h1 .ana{background:linear-gradient(100deg,#a9781a 18%,#ffe9a8 44%,#f5cf5e 52%,#a9781a 74%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    background-size:220% auto;animation:parla 5s linear infinite;text-shadow:0 2px 18px rgba(201,162,39,.3)}
+  @keyframes parla{to{background-position:220% center}}
+  .panel-kart{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+    backdrop-filter:blur(9px) saturate(1.15);-webkit-backdrop-filter:blur(9px) saturate(1.15);
+    border:1.5px solid rgba(201,162,39,.45);box-shadow:0 12px 34px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.10)}
+  #kurulum{backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);box-shadow:0 18px 55px var(--golge), inset 0 1px 0 rgba(255,255,255,.1)}
+  .pawn{background-image:radial-gradient(circle at 34% 28%, rgba(255,255,255,.55), rgba(255,255,255,0) 46%);
+    box-shadow:0 0 0 1.6px #f4ead0, 0 0 0 2.6px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.55), inset 0 -3px 5px rgba(0,0,0,.35)}
+  .d3 #tahta{border-width:13px;box-shadow:0 62px 84px -22px rgba(0,0,0,.72), 0 30px 42px rgba(0,0,0,.36), inset 0 0 0 2.5px var(--altin), inset 0 0 34px rgba(110,79,23,.34)}
+  .d3 .tahta-saran::after{content:"";position:absolute;left:10%;right:10%;bottom:20px;height:46px;z-index:-1;background:radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 72%);filter:blur(10px)}
+  .akbtn.btn-ana,.btn-buyuk{position:relative;overflow:hidden}
+  .akbtn.btn-ana::after,.btn-buyuk::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:kayar 5.5s ease-in-out infinite;pointer-events:none}
+  @keyframes kayar{0%,72%{left:-60%}88%{left:130%}100%{left:130%}}
+  /* konfeti tuvali */
+  #konfeti{position:fixed;inset:0;pointer-events:none;z-index:60}
+
+  /* ---------- MOBİL ---------- */
+  @media(max-width:680px){
+    body::before{opacity:.03}
+    header{padding:10px 8px 4px} header h1{font-size:clamp(26px,8vw,38px)} header .marka{font-size:11px} header .alt{font-size:12px}
+    #oyun{flex-direction:column; align-items:stretch; gap:12px; padding:4px 7px 24px}
+    .tahta-saran{display:flex; justify-content:center}
+    #tahta{width:min(97vw,97vmin)}
+    .d3 #tahta{--egim:15deg}
+    .d3 .tahta-saran{perspective:1100px;padding-bottom:20px}
+    .panel{max-width:100%; min-width:0; width:100%}
+    #oyuncular{grid-template-columns:1fr 1fr; gap:8px}
+    .ok-para{font-size:16px} #log{height:110px}
+    /* aksiyon paneli tahtanın hemen altında, vurgulu (sabit DEĞİL — telefon tarayıcısıyla uyumlu) */
+    #oyun .panel .panel-kart:first-child{border:1.5px solid var(--altin); box-shadow:0 6px 20px rgba(0,0,0,.4)}
+    #sira-bilgi{font-size:16px} #aksiyon-bar{margin-top:9px; gap:8px}
+    .akbtn{font-size:15.5px; padding:13px 14px; flex:1 1 auto; min-height:46px; display:flex; align-items:center; justify-content:center}
+    .panel-alt .akbtn{min-height:42px}
+    /* kurulum */
+    #kurulum{padding:16px; margin:14px 7px}
+    #kapak{margin-bottom:12px}
+    .kur-row-ust{flex-direction:column; align-items:stretch; gap:9px}
+    .kur-row-ust label{display:flex; justify-content:space-between; align-items:center} .kur-row-ust select{flex:0 0 auto}
+    .kur-row{flex-wrap:wrap} .kur-row input[type=text]{min-width:0; flex:1 1 110px} .tip-toggle{flex:0 0 auto}
+    .btn-buyuk{font-size:18px; padding:15px}
+    /* modaller */
+    .modal-kutu{padding:15px; width:96vw} .modal-kutu.genis{width:96vw}
+    .modal-kutu h2{font-size:21px} .m-bilgi{font-size:15px} .m-gorsel{max-width:260px}
+    .takas-grid{grid-template-columns:1fr; gap:9px}
+    .m-btnlar{gap:8px} .m-btnlar .akbtn{flex:1 1 auto}
+    .zafer{height:170px} .zafer-ad{font-size:27px}
+  }
+  @media(max-width:380px){ #oyuncular{grid-template-columns:1fr} .sb-no{font-size:60px} }
+</style>
+</head>
+<body>
+<div id="surum-rozet" style="position:fixed;top:6px;right:6px;z-index:9999;font:11px/1 system-ui,sans-serif;background:rgba(0,0,0,.45);color:#e6c35a;padding:4px 8px;border-radius:9px">v1 · yükleniyor…</div>
+<header>
+  <div class="marka">٭ NAMAZI ÖĞRETEN DİN DERSİ OYUNU ٭</div>
+  <h1>NAMAZ <span class="ana">YOLU</span></h1>
+  <div class="alt">Öğren, kıl, öğret — huzura giden yolda 40 durak</div>
+</header>
+
+<section id="kurulum">
+  <img id="kapak" src="img/kapak.webp" alt="Namaz Yolu" onerror="this.style.display='none'">
+  <h2>Oyuncular</h2>
+  <div class="kur-row-ust">
+    <label style="font-size:16px">Koltuk sayısı:
+      <select id="oyuncu-sayisi">
+        <option value="2">2</option><option value="3">3</option><option value="4" selected>4</option>
+      </select>
+    </label>
+    <label style="font-size:16px">Bot zorluğu:
+      <select id="bot-zorluk">
+        <option value="kolay">Kolay</option><option value="orta" selected>Orta</option><option value="zor">Zor</option>
+      </select>
+    </label>
+    <label style="font-size:16px">Tur limiti:
+      <select id="tur-limiti">
+        <option value="20" selected>20 tur</option><option value="15">15 tur</option><option value="30">30 tur</option><option value="0">Yok (son kalan)</option>
+      </select>
+    </label>
+  </div>
+  <div style="font-size:13px;color:#c2ad77;margin-bottom:6px">Her koltuk: <b>Sen</b> 👤 ya da <b>Bot</b> 🤖 · tek başına botlara karşı oynayabilirsin · tur dolunca <b>en çok puan</b> (en çok öğrenen) kazanır</div>
+  <button id="devam-btn" class="btn-buyuk gizli" style="margin-top:0;margin-bottom:10px;background:linear-gradient(180deg,#7fc9a8,#1e8449)">▶️ Kayıtlı Oyuna Devam Et</button>
+  <div id="kayit-hata" class="gizli" style="text-align:center;font-size:13px;color:#f2a8a8;margin:-4px 0 10px">⚠️ Kayıtlı oyun okunamadı ya da eski bir sürümden kalma — yeniden başlayabilirsin.</div>
+  <div id="kurulum-oyuncular"></div>
+  <button id="basla" class="btn-buyuk">🕌 Yola Çık — Oyunu Başlat</button>
+  <div class="kurallar-ozet">
+    <b>Zar yok:</b> her tur bir <b>Yol Kartı</b> çekersin — üstündeki 1–12 sayısı kadar ilerler, altındaki namaz bilgisini öğrenirsin.
+    <b>Puan</b> ile durakları <b>çalışır</b>, <b>Dinledim→Muallim</b> ustalığını yükseltir, uğrayan arkadaşlarınla o konuyu müzakere edersin.
+    İstersen tek başına <b>botlara</b> karşı oynayabilirsin. Her durak ve kart namazdan bir şey öğretir.
+  </div>
+  <div style="text-align:center;margin-top:12px;font-size:12px;color:#9db3a8">📚 Bilgiler <b>Namâz Kitâbı</b>'ndan alınmıştır. Din dersi için hazırlanmıştır.</div>
+</section>
+
+<section id="oyun" class="gizli">
+  <div class="tahta-saran"><div id="tahta"></div></div>
+  <div class="panel">
+    <div class="panel-kart">
+      <div id="sira-bilgi"></div>
+      <div id="aksiyon-bar"></div>
+    </div>
+    <div class="panel-kart"><div id="oyuncular"></div></div>
+    <div class="panel-kart"><div id="log"></div></div>
+    <div class="panel-alt">
+      <button id="duraklat-btn" class="akbtn">⏸️ Duraklat</button>
+      <button id="hiz-btn" class="akbtn">⚡ Normal</button>
+      <button id="d3-btn" class="akbtn">🧊 3D</button>
+      <button id="skor-btn" class="akbtn">📊 Puan</button>
+      <button id="ses-btn" class="akbtn">🔊 Ses</button>
+      <button id="kurallar-btn" class="akbtn">📖 Kurallar</button>
+    </div>
+  </div>
+</section>
+
+<div id="modal" role="dialog" aria-modal="true"></div>
+
+<div id="kurallar-modal">
+  <div class="modal-kutu genis">
+    <div class="kart-ust" style="background:#1e6b4f">📖 OYUN KURALLARI</div>
+    <div class="kurallar-icerik">
+      <p><b>Namaz Yolu</b>, namazı öğrenmenin duraklarını bir tahta üzerinde yaşatan eğitsel bir din dersi oyunudur: îmândan namazın rükünlerine uzanan yol. Tüm bilgiler <b>Namâz Kitâbı</b>'ndan alınmıştır.</p>
+      <h3>Amaç</h3>
+      <ul><li>Durakları çalışıp ustalığını derinleştirerek <b>en çok puanı</b> topla. Tur dolunca <b>en çok öğrenip öğreten kazanır</b>. Bu bir yarış değil, birlikte öğrenme yolculuğudur.</li></ul>
+      <h3>Tur akışı — ZAR YOK</h3>
+      <ul>
+        <li><b>Yol Kartı çek.</b> Üstündeki 1–12 sayısı kadar ilerlersin; altındaki namaz bilgisi o sayıya bağlıdır (<i>Abdestin farzı → 4</i>, <i>İmânın şartı → 6</i> gibi).</li>
+        <li><b>Başlangıç</b>'tan her geçişte besmeleyle yeni bir güne başlar, <b>günlük puan</b> kazanırsın.</li>
+        <li>Boş bir <b>konu durağına</b> düşersen o konuyu <b>çalış</b> (puanla öğren), <b>soruyla</b> %25 indirimli çalış, ya da vazgeç.</li>
+        <li>Bir arkadaşının öğrendiği durağa uğrarsan o konuda <b>müzakere</b> olur: sorusunu doğru bilirsen bedava; bilemezsen tekrar puanı verirsin.</li>
+      </ul>
+      <h3>Ustalık — Dinledim 👂 → Öğrendim 📖 → Ezberledim 🧠 → Uyguladım 🤲 → Öğrettim 🎓 (Muallim ★)</h3>
+      <ul><li>Bir <b>bölümün (renk grubu) tüm konuları</b> sende ise ustalığını yükseltmeye başlarsın. Ustalık arttıkça o durak daha değerli olur; en üst kademe <b>Muallim</b>'dir — "en hayırlınız, öğrenip öğretendir".</li></ul>
+      <h3>Kartlar & özel duraklar</h3>
+      <ul>
+        <li><b>🌿 Bereket</b> & <b>💡 İbret</b> kartları: güzel örnekler ve nazik hatırlatmalar. Bereket puan kazandırır; İbret dikkatli olmayı öğretir.</li>
+        <li><b>📚 İlim Meclisi:</b> verilen puanlar ortada birikir; buraya uğrayan havuzu toplar (âlimlerin sohbetinden istifade).</li>
+        <li><b>❖ Şeref Durakları (Kâbe / Mescid-i Aksâ):</b> alınıp satılmaz; saygıyla uğrayan öğrenir ve <b>şeref puanı</b> kazanır (oyun sonu puanına katkı).</li>
+        <li><b>🤲 Tefekkür Köşesi:</b> bir tur durup düşünürsün. Çıkmak için tekrar puanı, Muafiyet kartı ya da doğru bir soru cevabı.</li>
+        <li><b>📖 Namazda Okunanlar</b> (Fâtiha, Ettehiyyâtü…) ve <b>🔊 Ezân</b> durakları: ne kadar çoğunu öğrenirsen o kadar değerli.</li>
+      </ul>
+      <h3>Puanın azalınca</h3>
+      <ul><li>Bir ödemeyi karşılayamazsan bir <b>ekran</b> açılır: ustalık kademesi düşür veya bir durağı beklet, puanı topla, devam et.</li></ul>
+      <h3>Kontroller</h3>
+      <ul><li><b>⏸️ Duraklat</b> oyunu durdurur. Her oyuncu kartındaki <b>👤/🤖</b> düğmesiyle o koltuğu <b>oyun ortasında Sen ↔ Bot</b> yapabilirsin. <b>⚡ Hız</b> botların hızını, <b>🧊 3D</b> masa görünümünü ayarlar.</li></ul>
+    </div>
+    <div class="m-btnlar"><button id="kurallar-kapat" class="akbtn btn-ana">Kapat</button></div>
+  </div>
+</div>
+
+<script>
+/* NAMAZ YOLU — oyun verisi (Namâz Kitâbı kaynaklı, çift denetimli) */
+window.OYUN_VERISI = {"ayarlar": {"maas": 2000, "baslangicPara": 15000, "esaretCikisBedeli": 500}, "gruplar": {"kurulus": {"ad": "Îmân Temeli", "renk": "#1f6f43"}, "erkenanadolu": {"ad": "Abdest", "renk": "#2a8fbf"}, "ilkbaskent": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "rumeli": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "anadolu": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "samcezire": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "buyuksehir": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "tac": {"ad": "Zirve", "renk": "#1f3a93"}}, "imarKademeleri": [{"ad": "Dinledim", "aciklama": "Konuyu ilk kez duydun, kulak verdin."}, {"ad": "Öğrendim", "aciklama": "Konuyu anladın ve öğrendin."}, {"ad": "Ezberledim", "aciklama": "Bilgiyi ezberledin, aklında tuttun."}, {"ad": "Uyguladım", "aciklama": "Öğrendiğini namazında uyguladın."}, {"ad": "Öğrettim", "aciklama": "Bir başkasına öğrettin — en hayırlı derece (Muallim)."}], "kareler": [{"pos": 0, "tip": "baslangic", "ad": "Başlangıç: Besmele", "aciklama": "Yolculuğun başladığı yer. Her güzel işe olduğu gibi buraya da Besmele ile başlanır; her turda günlük puanla yeniden yola çıkılır.", "kural": "Her tam turda buradan geçer, besmeleyle yeni bir güne başlar ve günlük puan kazanırsın."}, {"pos": 1, "tip": "sehir", "ad": "Îmânın Şartları", "grupKey": "kurulus", "grup": {"ad": "Îmân Temeli", "renk": "#1f6f43"}, "fiyat": 600, "ipotek": 300, "imarBedeli": 500, "kira": [60, 300, 900, 2700, 3900, 4800], "tarih": "Îmân, kalbimizi huzûrla dolduran en büyük hazînedir.", "bilgi": "Îmânın altı şartı vardır: Allahü teâlânın varlığına ve birliğine, meleklerine, indirdiği kitâblarına, peygamberlerine, âhiret gününe ve kadere (iyilik ile kötülüğün Allahü teâlâdan olduğuna) inanmak. Bunların hepsine kalben inanana mü'min denir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Îmânın altı şartı vardır: Allahü teâlânın varlığına ve birliğine, meleklerine, indirdiği kitâblarına, peygamberlerine, âhiret gününe ve kadere (iyilik ile kötülüğün Allahü teâlâdan olduğuna) inanmak. Bunların hepsine kalben inanana mü'min denir.", "kural": ""}, {"pos": 2, "tip": "vakca", "ad": "Vak'a"}, {"pos": 3, "tip": "sehir", "ad": "İslâm'ın Şartları", "grupKey": "kurulus", "grup": {"ad": "Îmân Temeli", "renk": "#1f6f43"}, "fiyat": 600, "ipotek": 300, "imarBedeli": 500, "kira": [60, 300, 900, 2700, 3900, 4800], "tarih": "Beş şart, güzel bir müslüman hayatının beş sağlam temelidir.", "bilgi": "İslâmın beş şartı: kelime-i şehâdet getirmek, her gün beş vakit namâz kılmak, malın zekâtını vermek, Ramezân ayında oruc tutmak ve gücü yetenin ömründe bir kere hac etmesidir. Namâz, bu şartların ikincisidir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "İslâmın beş şartı: kelime-i şehâdet getirmek, her gün beş vakit namâz kılmak, malın zekâtını vermek, Ramezân ayında oruc tutmak ve gücü yetenin ömründe bir kere hac etmesidir. Namâz, bu şartların ikincisidir.", "kural": ""}, {"pos": 4, "tip": "vergi", "ad": "Kazâ Namâzı", "tutar": 2000, "aciklama": "Vaktinde kılınamayan bir namâzı sonradan kılmaya kazâ denir. Kazâ namâzını bir an önce kılmak gerekir; böylece eksik kalan namâz telâfi edilmiş olur."}, {"pos": 5, "tip": "liman", "ad": "Fâtiha Sûresi", "kisa": "Fâtiha", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Fâtiha, namâzın her rek'atinde okunan sûredir ve okunması vâcibdir. E'ûzü-Besmele'den sonra okunur, ardından bir zamm-ı sûre gelir.", "sahip": null, "ipotekli": false, "aciklama": "Fâtiha, namâzın her rek'atinde okunan sûredir ve okunması vâcibdir. E'ûzü-Besmele'den sonra okunur, ardından bir zamm-ı sûre gelir."}, {"pos": 6, "tip": "sehir", "ad": "Abdest Almak", "grupKey": "erkenanadolu", "grup": {"ad": "Abdest", "renk": "#2a8fbf"}, "fiyat": 1000, "ipotek": 500, "imarBedeli": 500, "kira": [100, 500, 1500, 4500, 6500, 8000], "tarih": "Abdest, hem bedenimizi temizler hem de gönlümüzü namâza hazırlar.", "bilgi": "Abdest sırayla alınır: önce eller bileklere kadar yıkanır, sonra ağıza (mazmaza) ve buruna (istinşak) üçer kere su verilir, sonra yüz, sağ kol ve sol kol dirseklerle yıkanır, ıslak elle baş mesh edilir, kulaklar ile ense mesh edilir, en sonunda ayaklar topuklarla yıkanır. Yıkanan uzuvlar genelde üçer kere yıkanır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Abdest sırayla alınır: önce eller bileklere kadar yıkanır, sonra ağıza (mazmaza) ve buruna (istinşak) üçer kere su verilir, sonra yüz, sağ kol ve sol kol dirseklerle yıkanır, ıslak elle baş mesh edilir, kulaklar ile ense mesh edilir, en sonunda ayaklar topuklarla yıkanır. Yıkanan uzuvlar genelde üçer kere yıkanır.", "kural": ""}, {"pos": 7, "tip": "ferman", "ad": "Ferman"}, {"pos": 8, "tip": "sehir", "ad": "Abdestin Farzları", "grupKey": "erkenanadolu", "grup": {"ad": "Abdest", "renk": "#2a8fbf"}, "fiyat": 1000, "ipotek": 500, "imarBedeli": 500, "kira": [100, 500, 1500, 4500, 6500, 8000], "tarih": "Dört farzı bilmek, abdestimizi sağlam ve doğru kılar.", "bilgi": "Hanefî mezhebinde abdestin farzı dörttür: 1) Yüzü bir kere yıkamak, 2) İki kolu dirseklerle birlikte yıkamak, 3) Başın dörtte birini mesh etmek, 4) İki ayağı topuklarla birlikte yıkamak.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Hanefî mezhebinde abdestin farzı dörttür: 1) Yüzü bir kere yıkamak, 2) İki kolu dirseklerle birlikte yıkamak, 3) Başın dörtte birini mesh etmek, 4) İki ayağı topuklarla birlikte yıkamak.", "kural": ""}, {"pos": 9, "tip": "sehir", "ad": "Abdesti Bozan Şeyler", "grupKey": "erkenanadolu", "grup": {"ad": "Abdest", "renk": "#2a8fbf"}, "fiyat": 1200, "ipotek": 600, "imarBedeli": 1000, "kira": [120, 600, 1800, 5400, 7800, 9600], "tarih": "Abdestimizi tazelemek, namâza tertemiz durmamızı sağlar.", "bilgi": "Kaynağa göre yedi şey abdesti bozar. Başlıcaları: büyük ve küçük abdest bozmak ya da yel kaçırmak, bedenden kan veya yara suyu akması, ağız dolusu kusmak, bir yere yaslanıp uyumak, bayılmak ve namâzda sesli gülmek (kahkaha). Bunlardan biri olursa yeniden abdest alınır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Kaynağa göre yedi şey abdesti bozar. Başlıcaları: büyük ve küçük abdest bozmak ya da yel kaçırmak, bedenden kan veya yara suyu akması, ağız dolusu kusmak, bir yere yaslanıp uyumak, bayılmak ve namâzda sesli gülmek (kahkaha). Bunlardan biri olursa yeniden abdest alınır.", "kural": ""}, {"pos": 10, "tip": "esaret", "ad": "Tefekkür Köşesi", "aciklama": "Bir tur durup öğrendiklerini düşünme ve tekrar etme köşesi. Ceza değil; dinlenip hikmet toplama molasıdır.", "kural": "Buraya düşersen bir tur durup düşünürsün (tefekkür). Çıkmak için tekrar puanı verir, Muafiyet kartı kullanır ya da bir soruyu doğru cevaplarsın."}, {"pos": 11, "tip": "sehir", "ad": "Gusül (Boy Abdesti)", "grupKey": "ilkbaskent", "grup": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "fiyat": 1400, "ipotek": 700, "imarBedeli": 1000, "kira": [140, 700, 2100, 6300, 9100, 11200], "tarih": "Gusül, bedenimizi baştan ayağa tertemiz yapan güzel bir temizliktir.", "bilgi": "Gusül, bütün bedeni yıkayarak temizlenmektir. Hanefî mezhebinde farzı üçtür: 1) Ağzın içini yıkamak (mazmaza), 2) Burnu yıkamak (istinşak), 3) Bütün bedeni kuru yer kalmayacak şekilde yıkamak.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Gusül, bütün bedeni yıkayarak temizlenmektir. Hanefî mezhebinde farzı üçtür: 1) Ağzın içini yıkamak (mazmaza), 2) Burnu yıkamak (istinşak), 3) Bütün bedeni kuru yer kalmayacak şekilde yıkamak.", "kural": ""}, {"pos": 12, "tip": "utility", "ad": "Ezân ve İkâmet", "fiyat": 1500, "ipotek": 750, "carpan": [4, 10], "bilgi": "Ezân, namâz vaktinin geldiğini herkese bildirmek için yüksek sesle, kıbleye karşı okunur; okunurken konuşulmaz. İkâmet ise farza durmadan hemen önce okunur. Erkeklerin okuması sünnet-i müekkededir.", "sahip": null, "ipotekli": false, "aciklama": "Ezân, namâz vaktinin geldiğini herkese bildirmek için yüksek sesle, kıbleye karşı okunur; okunurken konuşulmaz. İkâmet ise farza durmadan hemen önce okunur. Erkeklerin okuması sünnet-i müekkededir."}, {"pos": 13, "tip": "sehir", "ad": "Teyemmüm", "grupKey": "ilkbaskent", "grup": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "fiyat": 1400, "ipotek": 700, "imarBedeli": 1000, "kira": [140, 700, 2100, 6300, 9100, 11200], "tarih": "Teyemmüm, dînimizin bize tanıdığı güzel bir kolaylıktır.", "bilgi": "Su bulunmadığında veya kullanılamadığında; temiz toprak, kum ya da taş gibi toprak cinsinden bir şeyle temizlenmeye teyemmüm denir. Otuziki Farz'da farzı ikidir: 1) Niyet etmek, 2) İki eli temiz toprağa vurup yüzü, tekrar vurup iki kolu mesh etmek. (Üç diyen âlimler de vardır.)", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Su bulunmadığında veya kullanılamadığında; temiz toprak, kum ya da taş gibi toprak cinsinden bir şeyle temizlenmeye teyemmüm denir. Otuziki Farz'da farzı ikidir: 1) Niyet etmek, 2) İki eli temiz toprağa vurup yüzü, tekrar vurup iki kolu mesh etmek. (Üç diyen âlimler de vardır.)", "kural": ""}, {"pos": 14, "tip": "sehir", "ad": "Necâsetten Tahâret", "grupKey": "ilkbaskent", "grup": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "fiyat": 1600, "ipotek": 800, "imarBedeli": 1000, "kira": [160, 800, 2400, 7200, 10400, 12800], "tarih": "Temiz bir bedenle ve temiz bir yerde namâz kılmak gönle huzûr verir.", "bilgi": "Namâzdan önce bedenimizi, elbisemizi ve namâz kılacağımız yeri, dînimizde pis (necs) sayılan şeylerden temizlemeye necâsetten tahâret denir. Bu, namâzın şartlarından biridir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâzdan önce bedenimizi, elbisemizi ve namâz kılacağımız yeri, dînimizde pis (necs) sayılan şeylerden temizlemeye necâsetten tahâret denir. Bu, namâzın şartlarından biridir.", "kural": ""}, {"pos": 15, "tip": "liman", "ad": "Zamm-ı Sûre", "kisa": "Zamm-ı", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Farz namâzların ilk iki rek'atinde, sünnet ve vâcib namâzların her rek'atinde Fâtiha'dan sonra okunan sûre ya da en az üç kısa âyettir. Okunması vâcibdir.", "sahip": null, "ipotekli": false, "aciklama": "Farz namâzların ilk iki rek'atinde, sünnet ve vâcib namâzların her rek'atinde Fâtiha'dan sonra okunan sûre ya da en az üç kısa âyettir. Okunması vâcibdir."}, {"pos": 16, "tip": "sehir", "ad": "Setr-i Avret (Örtünme)", "grupKey": "rumeli", "grup": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "fiyat": 1800, "ipotek": 900, "imarBedeli": 1000, "kira": [180, 900, 2700, 8100, 11700, 14400], "tarih": "Güzelce örtünmek, edebimizin ve hayâmızın süsüdür.", "bilgi": "Namâzda ve başkalarının yanında örtülmesi gereken yerleri örtmeye setr-i avret denir. Erkeğin örtülecek yeri göbeğinden diz altına kadardır; kadınların ise yüz ve elleri dışında bütün bedenidir. Örtünmek Allahü teâlânın emridir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâzda ve başkalarının yanında örtülmesi gereken yerleri örtmeye setr-i avret denir. Erkeğin örtülecek yeri göbeğinden diz altına kadardır; kadınların ise yüz ve elleri dışında bütün bedenidir. Örtünmek Allahü teâlânın emridir.", "kural": ""}, {"pos": 17, "tip": "vakca", "ad": "Vak'a"}, {"pos": 18, "tip": "sehir", "ad": "İstikbâl-i Kıble", "grupKey": "rumeli", "grup": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "fiyat": 1800, "ipotek": 900, "imarBedeli": 1000, "kira": [180, 900, 2700, 8100, 11700, 14400], "tarih": "Bütün müslümanların tek bir kıbleye dönmesi, gönülleri birleştirir.", "bilgi": "Namâzı kıbleye, yani Mekke-i mükerreme'deki Kâbe yönüne dönerek kılmaya istikbâl-i kıble denir. Kıble önce Kudüs idi; sonra Kâbe'ye dönülmesi emrolundu. Yolculukta yön bilinmezse gücün yettiği tarafa dönülür.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâzı kıbleye, yani Mekke-i mükerreme'deki Kâbe yönüne dönerek kılmaya istikbâl-i kıble denir. Kıble önce Kudüs idi; sonra Kâbe'ye dönülmesi emrolundu. Yolculukta yön bilinmezse gücün yettiği tarafa dönülür.", "kural": ""}, {"pos": 19, "tip": "sehir", "ad": "Namaz Vakitleri", "grupKey": "rumeli", "grup": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "fiyat": 2000, "ipotek": 1000, "imarBedeli": 1000, "kira": [200, 1000, 3000, 9000, 13000, 16000], "tarih": "Namâz vakitleri, günümüzü Allahü teâlâyı anmakla bölen bereketli duraklardır.", "bilgi": "Her gün beş vakit namâz kılınır: sabah (fecrin doğmasından güneş doğuncaya kadar), öğle, ikindi, akşam (güneş batınca) ve yatsı. Her namâzın kendi vakti vardır ve namâz kendi vaktinde kılınır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Her gün beş vakit namâz kılınır: sabah (fecrin doğmasından güneş doğuncaya kadar), öğle, ikindi, akşam (güneş batınca) ve yatsı. Her namâzın kendi vakti vardır ve namâz kendi vaktinde kılınır.", "kural": ""}, {"pos": 20, "tip": "kervansaray", "ad": "İlim Meclisi", "aciklama": "Bilgi ve bereketin paylaşıldığı meclis. Buraya uğrayan öğrenci ek puanla (bonus) ödüllendirilir.", "kural": "Bir mola ve ilim durağı; âlimlerin sohbetinden istifade. Verilen puanların biriktiği ortak havuzu buraya uğrayan toplar."}, {"pos": 21, "tip": "sehir", "ad": "Kıyâm & Kırâet", "grupKey": "anadolu", "grup": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "fiyat": 2200, "ipotek": 1100, "imarBedeli": 1500, "kira": [220, 1100, 3300, 9900, 14300, 17600], "tarih": "Ayakta durup Kur'ân okumak, Rabbimizin huzûrunda edeple durmaktır.", "bilgi": "Kıyâm, namâzda ayakta durmaktır; ayakta duramayan hasta oturarak kılar. Kırâet ise namâzda Kur'ân-ı kerîmden sûre veya âyet okumaktır. İkisi de namâzın içindeki farzlardandır (rükn).", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Kıyâm, namâzda ayakta durmaktır; ayakta duramayan hasta oturarak kılar. Kırâet ise namâzda Kur'ân-ı kerîmden sûre veya âyet okumaktır. İkisi de namâzın içindeki farzlardandır (rükn).", "kural": ""}, {"pos": 22, "tip": "ferman", "ad": "Ferman"}, {"pos": 23, "tip": "sehir", "ad": "Rükû' & Secde", "grupKey": "anadolu", "grup": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "fiyat": 2200, "ipotek": 1100, "imarBedeli": 1500, "kira": [220, 1100, 3300, 9900, 14300, 17600], "tarih": "Secde, kulun Rabbine en yakın olduğu en güzel hâlidir.", "bilgi": "Rükû, elleri dize koyup eğilmektir; rükûda en az üç kere 'Sübhâne rabbiyel-azîm' denir. Secde ise alnı, burnu ve elleri yere koyarak kapanmaktır; her secdede en az üç kere 'Sübhâne rabbiyel-a'lâ' denir. Her ikisi de namâzın rüknüdür.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Rükû, elleri dize koyup eğilmektir; rükûda en az üç kere 'Sübhâne rabbiyel-azîm' denir. Secde ise alnı, burnu ve elleri yere koyarak kapanmaktır; her secdede en az üç kere 'Sübhâne rabbiyel-a'lâ' denir. Her ikisi de namâzın rüknüdür.", "kural": ""}, {"pos": 24, "tip": "sehir", "ad": "Ka'de-i Ahîre (Tahiyyât)", "grupKey": "anadolu", "grup": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "fiyat": 2400, "ipotek": 1200, "imarBedeli": 1500, "kira": [240, 1200, 3600, 10800, 15600, 19200], "tarih": "Son oturuşta okunan Ettehiyyâtü, namâzımızı güzelce tamamlar.", "bilgi": "Ka'de-i ahîre, namâzın son rek'atinde 'Ettehiyyâtü' duâsını okuyacak kadar oturmaktır. Buna son oturuş da denir ve namâzın rüknlerindendir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Ka'de-i ahîre, namâzın son rek'atinde 'Ettehiyyâtü' duâsını okuyacak kadar oturmaktır. Buna son oturuş da denir ve namâzın rüknlerindendir.", "kural": ""}, {"pos": 25, "tip": "liman", "ad": "Ettehiyyâtü", "kisa": "Ettehiyyâtü", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Namâzın her oturuşunda (ka'delerde) okunan duâdır. Son oturuşta okunması namâzın vâciblerindendir.", "sahip": null, "ipotekli": false, "aciklama": "Namâzın her oturuşunda (ka'delerde) okunan duâdır. Son oturuşta okunması namâzın vâciblerindendir."}, {"pos": 26, "tip": "sehir", "ad": "Namazın Vâcibleri", "grupKey": "samcezire", "grup": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "fiyat": 2600, "ipotek": 1300, "imarBedeli": 1500, "kira": [260, 1300, 3900, 11700, 16900, 20800], "tarih": "Vâciblere dikkat etmek, namâzımızı daha da güzelleştirir.", "bilgi": "Namâzın vâcibleri, farz gibi önemli olan emirlerdir. Başlıcaları: Fâtiha sûresini okumak, Fâtiha'dan sonra bir sûre (zamm-ı sûre) okumak, Fâtiha'yı sûreden önce okumak, ta'dîl-i erkâna (her hareketi yerince yapmaya) uymak ve namâz sonunda selâm vermektir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâzın vâcibleri, farz gibi önemli olan emirlerdir. Başlıcaları: Fâtiha sûresini okumak, Fâtiha'dan sonra bir sûre (zamm-ı sûre) okumak, Fâtiha'yı sûreden önce okumak, ta'dîl-i erkâna (her hareketi yerince yapmaya) uymak ve namâz sonunda selâm vermektir.", "kural": ""}, {"pos": 27, "tip": "sehir", "ad": "Secde-i Sehv & Sünnetler", "grupKey": "samcezire", "grup": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "fiyat": 2600, "ipotek": 1300, "imarBedeli": 1500, "kira": [260, 1300, 3900, 11700, 16900, 20800], "tarih": "Secde-i sehv, küçük bir unutmayı güzelce telâfi etmenin yoludur.", "bilgi": "Namâzda bir vâcibi unutarak yapmayan kimse, namâzın sonunda iki secde daha yapar; buna secde-i sehv (yanılma secdesi) denir. Namâzın ayrıca elleri kulağa kaldırmak, Sübhâneke okumak gibi birçok sünneti de vardır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâzda bir vâcibi unutarak yapmayan kimse, namâzın sonunda iki secde daha yapar; buna secde-i sehv (yanılma secdesi) denir. Namâzın ayrıca elleri kulağa kaldırmak, Sübhâneke okumak gibi birçok sünneti de vardır.", "kural": ""}, {"pos": 28, "tip": "utility", "ad": "Namazdan Sonra Duâ & Tesbîh", "fiyat": 1500, "ipotek": 750, "carpan": [4, 10], "bilgi": "Namâzdan sonra üç kere istiğfâr, sonra Âyet-el-kürsî okunur; ardından otuz üç kere tesbîh (Sübhânallah), otuz üç kere tahmîd (Elhamdülillah) ve otuz üç kere tekbîr (Allahü ekber) söylenip duâ edilir.", "sahip": null, "ipotekli": false, "aciklama": "Namâzdan sonra üç kere istiğfâr, sonra Âyet-el-kürsî okunur; ardından otuz üç kere tesbîh (Sübhânallah), otuz üç kere tahmîd (Elhamdülillah) ve otuz üç kere tekbîr (Allahü ekber) söylenip duâ edilir."}, {"pos": 29, "tip": "seref", "ad": "Mescid-i Aksâ (İlk Kıble)", "tarih": "", "bilgi": "Kudüs'teki Mescid-i Aksâ, müslümanların ilk kıblesidir. Namâzlar başlangıçta Kudüs'e dönülerek kılınırdı; hicretten on yedi ay sonra kıblenin Kâbe'ye çevrilmesi emrolundu.", "kural": "Şeref durağı — alınıp satılmaz; saygıyla uğrayan öğrenir ve şeref puanı kazanır.", "aciklama": "Kudüs'teki Mescid-i Aksâ, müslümanların ilk kıblesidir. Namâzlar başlangıçta Kudüs'e dönülerek kılınırdı; hicretten on yedi ay sonra kıblenin Kâbe'ye çevrilmesi emrolundu."}, {"pos": 30, "tip": "surgun", "ad": "Gaflet (→Tefekküre)", "aciklama": "Dalgınlık köşesi. Buraya gelen oyuncu, biraz kendine gelip düşünmek için Tefekkür Köşesi'ne yönlendirilir.", "kural": "Dikkatin dağıldı; doğruca Tefekkür Köşesi'ne gider, bir tur durup kendini toplarsın."}, {"pos": 31, "tip": "sehir", "ad": "Cemâat & Cum'a", "grupKey": "buyuksehir", "grup": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "fiyat": 3000, "ipotek": 1500, "imarBedeli": 2000, "kira": [300, 1500, 4500, 13500, 19500, 24000], "tarih": "Cemâatle namâz, müslümanlar arasında sevgiyi ve birliği artırır.", "bilgi": "En az iki kişiden biri imam olunca cemâat olur. Cemâatle kılınan namâza, yalnız kılınandan yirmi yedi kat fazla sevap verilir. Cum'a namâzı ise Cum'a günü öğle vaktinde cemâatle kılınır ve iki rek'ati farzdır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "En az iki kişiden biri imam olunca cemâat olur. Cemâatle kılınan namâza, yalnız kılınandan yirmi yedi kat fazla sevap verilir. Cum'a namâzı ise Cum'a günü öğle vaktinde cemâatle kılınır ve iki rek'ati farzdır.", "kural": ""}, {"pos": 32, "tip": "sehir", "ad": "Bayram & Terâvîh", "grupKey": "buyuksehir", "grup": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "fiyat": 3000, "ipotek": 1500, "imarBedeli": 2000, "kira": [300, 1500, 4500, 13500, 19500, 24000], "tarih": "Bayram ve Terâvîh namâzları bize sevinç ve bereket dolu günler yaşatır.", "bilgi": "Ramezân ve Kurban bayramlarında, güneş doğduktan sonra iki rek'at bayram namâzı cemâatle kılınır; erkeklere vâcibdir. Terâvîh namâzı ise Ramezân ayının her gecesinde kılınan, yirmi rek'atlik sünnet bir namâzdır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Ramezân ve Kurban bayramlarında, güneş doğduktan sonra iki rek'at bayram namâzı cemâatle kılınır; erkeklere vâcibdir. Terâvîh namâzı ise Ramezân ayının her gecesinde kılınan, yirmi rek'atlik sünnet bir namâzdır.", "kural": ""}, {"pos": 33, "tip": "vakca", "ad": "Vak'a"}, {"pos": 34, "tip": "sehir", "ad": "Cenâze Namâzı", "grupKey": "buyuksehir", "grup": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "fiyat": 3200, "ipotek": 1600, "imarBedeli": 2000, "kira": [320, 1600, 4800, 14400, 20800, 25600], "tarih": "Cenâze namâzı, din kardeşimize son bir duâ ve vefâ hediyesidir.", "bilgi": "Vefât eden bir müslüman için kılınan namâza cenâze namâzı denir ve farz-ı kifâyedir (birileri kılınca herkesten borç kalkar). Farzı ikidir: dört kere tekbir getirmek ve ayakta kılmak. İçinde rükû ve secde yoktur; ölen kişiye duâdır.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Vefât eden bir müslüman için kılınan namâza cenâze namâzı denir ve farz-ı kifâyedir (birileri kılınca herkesten borç kalkar). Farzı ikidir: dört kere tekbir getirmek ve ayakta kılmak. İçinde rükû ve secde yoktur; ölen kişiye duâdır.", "kural": ""}, {"pos": 35, "tip": "liman", "ad": "Salli-Bârik & Rabbenâ Duâları", "kisa": "Salli-Bârik", "fiyat": 2000, "ipotek": 1000, "kira": [250, 500, 1000, 2000], "bilgi": "Son oturuşta Ettehiyyâtü'den sonra okunan 'Allahümme salli', 'Allahümme bârik' ve 'Rabbenâ âtinâ' duâlarıdır; ardından önce sağa, sonra sola selâm verilir.", "sahip": null, "ipotekli": false, "aciklama": "Son oturuşta Ettehiyyâtü'den sonra okunan 'Allahümme salli', 'Allahümme bârik' ve 'Rabbenâ âtinâ' duâlarıdır; ardından önce sağa, sonra sola selâm verilir."}, {"pos": 36, "tip": "ferman", "ad": "Ferman"}, {"pos": 37, "tip": "sehir", "ad": "Namazın Fazîleti", "grupKey": "tac", "grup": {"ad": "Zirve", "renk": "#1f3a93"}, "fiyat": 4000, "ipotek": 2000, "imarBedeli": 2000, "kira": [400, 2000, 6000, 18000, 26000, 32000], "tarih": "Namâz, kulu Rabbine yükselten en güzel ve en değerli ibâdettir.", "bilgi": "Namâz, îmândan sonra ibâdetlerin en kıymetlisidir. Hadîs-i şerîfte namâz 'dînin direği' ve 'mü'minin mi'râcı' olarak bildirilmiştir. Beş vakit namâz, günde beş kere yıkanılan bir nehre benzetilmiş; kulu kötülüklerden alıkoyduğu müjdelenmiştir.", "sahip": null, "imar": 0, "ipotekli": false, "aciklama": "Namâz, îmândan sonra ibâdetlerin en kıymetlisidir. Hadîs-i şerîfte namâz 'dînin direği' ve 'mü'minin mi'râcı' olarak bildirilmiştir. Beş vakit namâz, günde beş kere yıkanılan bir nehre benzetilmiş; kulu kötülüklerden alıkoyduğu müjdelenmiştir.", "kural": ""}, {"pos": 38, "tip": "vergi", "ad": "Vaktin Kıymeti", "tutar": 1000, "aciklama": "Her namâzın kendi vakti vardır ve namâzı vaktinde kılmak esastır (namâzın şartı 'vakt'). Vakti geçirmeden kılmak, vaktin kıymetini bilmektir."}, {"pos": 39, "tip": "seref", "ad": "Kâbe-i Muazzama / Kıble", "tarih": "", "bilgi": "Kâbe, Mekke-i mükerreme'dedir ve bütün müslümanların kıblesidir. Kıble, Kâbe'nin binâsı değil arsasıdır; yani yerden göğe kadar o yön kıbledir. Bütün namâzlar bu yöne dönülerek kılınır.", "kural": "Şeref durağı — alınıp satılmaz; saygıyla uğrayan öğrenir ve şeref puanı kazanır.", "aciklama": "Kâbe, Mekke-i mükerreme'dedir ve bütün müslümanların kıblesidir. Kıble, Kâbe'nin binâsı değil arsasıdır; yani yerden göğe kadar o yön kıbledir. Bütün namâzlar bu yöne dönülerek kılınır."}], "ferman": [{"baslik": "Hapisden Kurtaran Namâz", "metin": "Rivâyet edilir: Suçsuz yere hapse atılan bir demirci, zindanda abdest alıp namaz kılmış, gözyaşıyla Allahü teâlâya yalvarmış. O gece vâli gördüğü rüyayla uyanıp adamı çağırtmış, suçsuz olduğunu anlayıp serbest bırakmış, üstüne bin gümüş hediye vermiş.", "etki": {"tur": "para_al", "deger": 1000}, "ogren": "Sıkıntı anında namaz ve duâ, gönle en güzel ferahlığı ve kurtuluşu getirir.", "kaynak": "s.39-40, Menkıbe: Hapisden Kurtaran Namâz"}, {"baslik": "Evi Yanmışdı", "metin": "Rivâyet edilir: Hamîd-i Tavîl hazretleri namaza öyle bir huşû ile durmuş ki, evinde çıkan yangından bile haberi olmamış. Namazını bitirince olanları duyunca çok şaşırmış.", "etki": {"tur": "imar_basina_al", "deger": 300}, "ogren": "Namazı gönülden ve dikkatle kılmak, insanı bambaşka bir huzura kavuşturur.", "kaynak": "s.40, Menkıbe: Evi Yanmışdı"}, {"baslik": "Tenceredeki Su", "metin": "Rivâyet edilir: Sahâbeden Abdüllah bin Şehîr, Peygamberimiz Muhammed aleyhisselâmın yanında namaz kılarken, mübârek göğsünden ocakta kaynayan tencere gibi sesler işitmiş. Namazdaki derin duygusuna hayran kalmış.", "etki": {"tur": "para_al", "deger": 500}, "ogren": "Namaz, kalbi Allahü teâlânın sevgisiyle doldurur.", "kaynak": "s.41, Menkıbe: Tenceredeki Su"}, {"baslik": "Ayağındaki Ok", "metin": "Rivâyet edilir: Hazret-i Alî radıyallahü anhın ayağına savaşta bir ok saplanmış. Ancak namaza durunca, o hiç farkında değilken oku çıkarabilmişler. Namazdan sonra 'hiç farkına varmadım' buyurmuş.", "etki": {"tur": "esaretten_cik_karti"}, "ogren": "Namaza gönülden durmak, insana sabır ve dinginlik kazandırır; bu kartla Tefekkür Köşesinden çıkabilirsin.", "kaynak": "s.41, Menkıbe: Ayağındaki Ok"}, {"baslik": "Bayıltan İlâc", "metin": "Rivâyet edilir: Âmir-i Kays hazretleri hasta ayağı tedâvi edilirken, ilaç yerine güzel sesle Kur'ân-ı kerîm okunmasını istemiş. Okuma başlayınca o kadar dalmış ki, hiç acı duymamış.", "etki": {"tur": "ilerle_kareye", "deger": 5}, "ogren": "Kur'ân-ı kerîmi dinlemek ve okumak gönle huzur verir; Fâtiha durağına ilerle.", "kaynak": "s.41-42, Menkıbe: Bayıltan İlâc"}, {"baslik": "Namâz İçin Fedâkârlık", "metin": "Rivâyet edilir: Esir düşen bir müslüman, kaldığı evde her namaz için sahibine altın verecek kadar namazına düşkünmüş. Bu güzel gayreti gören ev sahibi, sonunda kendi de müslüman olmuş.", "etki": {"tur": "para_al", "deger": 1200}, "ogren": "Namaza gösterilen güzel gayret, başkalarına da örnek ve rehber olur.", "kaynak": "s.42, Menkıbe: Namâz İçin Fedâkârlık"}, {"baslik": "Mü'minin Mi'râcı", "metin": "Peygamberimiz Muhammed aleyhisselâm bir hadîs-i şerîfde namazın mü'minin mi'râcı ve Allahü teâlânın beğendiği bütün amellerin en üstünü olduğunu bildirmiş. Bu güzel müjde seni zirveye taşır.", "etki": {"tur": "ilerle_kareye", "deger": 37}, "ogren": "Namaz, kulu Rabbine en çok yaklaştıran en kıymetli ibadettir.", "kaynak": "s.10, Namâz Büyük Emrdir (hadîs-i şerîf)"}, {"baslik": "Dinin Direği", "metin": "Kitabımızda namazın dinin direği olduğu bildirilmişdir. Direği sağlam olan bina gibi, namazını kılanın gönlü de sapasağlam durur.", "etki": {"tur": "mulk_basina_al", "deger": 250}, "ogren": "Namaz, dinimizi ayakta tutan en güçlü direktir.", "kaynak": "s.9-10, Namâz Büyük Emrdir"}, {"baslik": "Duânın Kabûlüne Vesîle", "metin": "Kitabımızda namazın, duânın kabûlüne vesîle olduğu bildirilmişdir. Namazını kılıp gönülden isteyene, Allahü teâlâ nice güzellikler ihsan eder.", "etki": {"tur": "para_al", "deger": 700}, "ogren": "Namazla açılan eller, en hayırlı karşılığı bulur.", "kaynak": "s.10, Namâz Büyük Emrdir (hadîs-i şerîf)"}, {"baslik": "Rızkların Bereketi", "metin": "Bir hadîs-i şerîfde namazın rızkların bereketi olduğu bildirilmişdir. Namazını kılanın kazancına bereket, ömrüne huzur gelir.", "etki": {"tur": "para_al", "deger": 900}, "ogren": "Namaz, hayata bereket ve gönle zenginlik katar.", "kaynak": "s.10, Namâz Büyük Emrdir (hadîs-i şerîf)"}, {"baslik": "Akan Su Gibi Tertemiz", "metin": "Peygamberimiz Muhammed aleyhisselâm, beş vakit namazı kapının önünden akan berrak suya benzetmiş: O suda her gün beş kere yıkanan nasıl tertemiz olursa, namaz kılanın gönlü de öyle tertemiz olur, buyurmuş. Yeni bir güne pırıl pırıl başla.", "etki": {"tur": "basa_git_maas_al"}, "ogren": "Beş vakit namaz, her gün gönlü yeniler ve tertemiz tutar.", "kaynak": "s.122, Namâz Kılanların Fazîletleri (2)"}, {"baslik": "Kalbi Temizleyen Namâz", "metin": "Kitabımızda namazın kalbi temizlediği ve insanı kötülüklerden koruduğu bildirilmişdir. Namaz, gönlün en güzel ışığıdır.", "etki": {"tur": "mulk_basina_al", "deger": 200}, "ogren": "Namaz, kalbi temiz ve aydınlık tutar.", "kaynak": "s.12, Namâzın Ehemmiyyeti (şiir)"}, {"baslik": "Bedene Kuvvet ve Dinçlik", "metin": "Kitabımızda, namazdaki yavaş hareketlerin kalbi yormadan insanı gün boyu dinç tuttuğu bildirilmişdir. Namaz hem gönle hem bedene güç verir.", "etki": {"tur": "para_al", "deger": 400}, "ogren": "Namaz, bedeni dinç ve canlı tutar.", "kaynak": "s.142, Namâzın Hikmetleri (1)"}, {"baslik": "Secde ve Hâfıza", "metin": "Kitabımızda, günde defalarca secdeye giden kimsenin beynine bol kan ulaştığı ve bunun hâfızayı koruyup zihni beslediği bildirilmişdir. Namaz, aklı ve zihni de destekler.", "etki": {"tur": "imar_basina_al", "deger": 350}, "ogren": "Namaz, zihni açar ve hâfıza sağlığını destekler.", "kaynak": "s.142, Namâzın Hikmetleri (2)"}, {"baslik": "Vaktinde Kılınan Namâz", "metin": "Abdüllah ibni Mes'ûd radıyallahü anh, Allahü teâlânın en çok sevdiği ameli sorunca, Peygamberimiz Muhammed aleyhisselâm 'vaktinde kılınan namaz' buyurmuş. Sen de vakti kollamak için ilerle.", "etki": {"tur": "ilerle_kareye", "deger": 19}, "ogren": "En sevilen amel, namazı tam vaktinde kılmaktır.", "kaynak": "s.122, Namâz Kılanların Fazîletleri (5)"}, {"baslik": "Namâzın Nûru", "metin": "Bir hadîs-i şerîfde namazın yerin ve göklerin nûru olduğu bildirilmişdir. Namaz kılanın yüzü ve gönlü nûrla parlar.", "etki": {"tur": "liman_basina_al", "deger": 250}, "ogren": "Namaz, insanın yüzüne ve gönlüne nûr verir.", "kaynak": "s.10, Namâz Büyük Emrdir (hadîs-i şerîf)"}], "vakca": [{"baslik": "Vaktinde Namaz", "metin": "Namaz vakti gelince beklemeden kılmak ne güzeldir. Peygamberimiz Muhammed aleyhisselâm namazı vaktinde kılmayı öğütlemiştir. Vaktinde kılan kişinin gönlü rahat, yüzü güler.", "etki": {"tur": "ilerle_kareye", "deger": 19}, "ogren": "Namazı vaktinde kılmak gönle huzur ve sevinç verir.", "kaynak": "s.11, Namâzları vaktinde kılmak (korku çerçevesi hariç tutuldu)"}, {"baslik": "Kalbin Huzuru — Huşû", "metin": "Kalbin Allahü teâlâya yöneldiği, huşû ile kılınan namaz pek güzeldir. Böyle namazda kalp sakinleşir, aklımızı namaza veririz.", "etki": {"tur": "ilerle_kareye", "deger": 20}, "ogren": "Namazı kalbimizi vererek, huşû ile kılmak onu daha güzel yapar.", "kaynak": "s.38, Mü'minûn sûresi meâli: namazlarını huşû' ile kılandır"}, {"baslik": "Temiz ve Güzel Elbise", "metin": "Namaza dururken temiz ve güzel elbise giymek yakışır. Büyüklerimizin yanına çıkarken güzel giyindiğimiz gibi, namazda da öyle dururuz.", "etki": {"tur": "para_ver", "deger": 150}, "ogren": "Namaza temiz ve güzel elbiseyle durmak edeptendir.", "kaynak": "s.90, Namâzın Mekrûhları (5): iş elbisesiyle kılmak"}, {"baslik": "Derli Toplu Duruş", "metin": "Namazı başımıza takke veya başlık alarak kılmak güzeldir. Böylece namaza daha derli toplu ve edepli dururuz.", "etki": {"tur": "para_ver", "deger": 100}, "ogren": "Namaza düzenli ve edepli bir görünüşle durmak güzeldir.", "kaynak": "s.91, Namâzın Mekrûhları (7): başı açık kılmak"}, {"baslik": "Gözü Secde Yerine", "metin": "Namazda gözümüz secde edeceğimiz yere bakar, başımızı sağa sola çevirmeyiz. Bir tur durup dikkatimizi toplayalım.", "etki": {"tur": "esarete_git", "deger": 10}, "ogren": "Namazda gözümüzü bir noktaya vererek dikkatimizi toplarız.", "kaynak": "s.89, Müstehablar (1): secde yerine bakmak + s.91, Mekrûhlar (12): başı/gözü etrafa çevirmek"}, {"baslik": "Sakin ve Düzgün Durmak", "metin": "Namazda gereksiz hareketler yapmayız; parmak çıtırdatmak veya oynamak namaza yakışmaz. Sakin ve düzgün durmak namazı güzelleştirir.", "etki": {"tur": "para_ver", "deger": 150}, "ogren": "Namazda sakin durmak, gereksiz hareketlerden kaçınmak edeptir.", "kaynak": "s.90-91, Namâzın Mekrûhları (4,10)"}, {"baslik": "Dinç Gelmek", "metin": "Namazda esneme gelirse ağzımızı tutar, kendimizi toparlarız. Zinde durabilmek için namazdan önce biraz dinlenmek iyi olur.", "etki": {"tur": "para_ver", "deger": 100}, "ogren": "Namaza dinç ve hazır gelmek onu kolaylaştırır.", "kaynak": "s.91, Namâzın Mekrûhları (17): esnemek"}, {"baslik": "Gözü Açık, Dikkat Uyanık", "metin": "Namazda gözlerimizi yummayız; secde yerimize bakarız. Böylece hem uyanık kalır hem de huşû içinde dururuz.", "etki": {"tur": "para_ver", "deger": 100}, "ogren": "Namazda gözü secde yerine bakmak dikkatimizi artırır.", "kaynak": "s.91, Namâzın Mekrûhları (18): gözleri yummak"}, {"baslik": "Sakin Bir Köşe", "metin": "Namazı oyunun, sesin ve dikkat dağıtan şeylerin yanında değil, sakin bir yerde kılmak güzeldir. Bir tur durup namaza uygun sessiz bir köşe düşünelim.", "etki": {"tur": "esarete_git", "deger": 10}, "ogren": "Namazı sakin bir yerde kılmak huşû'u kolaylaştırır.", "kaynak": "s.91-92, Namâzın Mekrûhları (34): huşû'u gideren şeyler yanında kılmak"}, {"baslik": "İmama Uymak", "metin": "Cemaatte imamı takip ederiz; rükûya ve secdeye ondan önce gitmeyiz. Sabırla imama uymak cemaat edebinin güzelliğidir.", "etki": {"tur": "para_ver", "deger": 200}, "ogren": "Cemaatte imamı sabırla takip etmek edeptir.", "kaynak": "s.92, Namâzın Mekrûhları (38): imamdan önce başını koyup kaldırmak"}, {"baslik": "Önceden Hazır Olmak", "metin": "Namaz vakti girmeden önce abdestimizi alıp hazır olmak ne güzel bir hazırlıktır. Böylece vakit girince rahatça namaza dururuz.", "etki": {"tur": "ilerle_kareye", "deger": 6}, "ogren": "Önceden abdestli ve hazır olmak namazı kolaylaştırır.", "kaynak": "s.52, Abdestin Edebleri (1): vakit girmeden abdest almak"}, {"baslik": "Suyu İsraf Etmemek", "metin": "Abdest alırken su bol olsa da israf etmeyiz, ölçülü kullanırız. Su büyük bir nimettir; onu güzelce kullanmak da bir edeptir.", "etki": {"tur": "para_ver", "deger": 150}, "ogren": "Suyu israf etmeden ölçülü kullanmak nimete şükürdür.", "kaynak": "s.52, Abdestin Edebleri (19): su bol ise de isrâf etmemek"}, {"baslik": "Ağız ve Diş Temizliği", "metin": "Abdest alırken ağzımızı ve dişlerimizi misvâk veya fırça ile temizlemek güzel bir sünnettir. Tertemiz bir ağızla namaza durmak insana ferahlık verir.", "etki": {"tur": "ilerle_kareye", "deger": 6}, "ogren": "Ağız ve diş temizliği hem sünnet hem de güzel bir alışkanlıktır.", "kaynak": "s.54, Misvâk Kullanmak (sünnet-i müekkede)"}, {"baslik": "Mukaddes Kitaba Hürmet", "metin": "Kur'ân-ı kerîme ve din kitaplarına hürmet ederiz; onlara doğru ayak uzatmayız, yüksek ve temiz yerde tutarız. Mukaddes kitaba saygı, kalbimizin edebindendir.", "etki": {"tur": "para_ver", "deger": 150}, "ogren": "Kur'ân-ı kerîme ve din kitaplarına hürmet göstermek güzel bir edeptir.", "kaynak": "s.92, Namâz Dışında Mekrûh Olan Şeyler (5): din kitaplarına ayak uzatmak"}, {"baslik": "Cemaate Güzelce Gitmek", "metin": "Güzelce abdest alıp camiye cemaate gitmek büyük bir sevinçtir. Peygamberimiz Muhammed aleyhisselâm iyi bir abdest alıp mescide gitmeyi övmüştür.", "etki": {"tur": "ilerle_kareye", "deger": 20}, "ogren": "Temiz ve hazır bir şekilde cemaate gitmek gönle huzur verir.", "kaynak": "s.94, hadîs-i şerîf: iyi abdest alıp mescide cemâ'ate gitmek"}, {"baslik": "Huzurla Durmak", "metin": "Namaza durmadan önce tuvalet ihtiyacımızı gideririz, rahatça dururuz. Böylece namazımızı huzur içinde, acele etmeden kılarız.", "etki": {"tur": "para_ver", "deger": 100}, "ogren": "İhtiyacımızı önceden giderip huzurla namaza durmak güzeldir.", "kaynak": "s.91, Namâzın Mekrûhları (8): abdesti sıkışıkken namaza durmak"}], "ilerlemeKartlari": [{"sayi": 1, "baslik": "Bir Allah", "bilgi": "Îmânın birinci şartı, Allahü teâlânın var ve bir olduğuna inanmaktır. Namaza dururken 'Allahü ekber' deriz.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#2a8fbf"}, "kaynak": "s.18, Îmânın birinci şartı: Allahü teâlâya inanmak"}, {"sayi": 1, "baslik": "Tek Kıble", "bilgi": "Bütün müslümanlar namazda tek bir yöne, Kâbe tarafına döner; buna istikbâl-i kıble denir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#2a8fbf"}, "kaynak": "s.45, Namâzın şartları, 4. İstikbâl-i kıble"}, {"sayi": 1, "baslik": "İlk Söz Besmele", "bilgi": "Her güzel işe olduğu gibi abdeste de 'Bismillâh' diyerek, besmele okuyarak başlanır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#2a8fbf"}, "kaynak": "s.51, Abdestin sünnetleri (18), 1."}, {"sayi": 1, "baslik": "En Önce Îmân", "bilgi": "İnsana ilk lâzım olan bir olan Allahü teâlâya inanmaktır; îmândan sonra en kıymetli ibâdet namazdır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#2a8fbf"}, "kaynak": "s.37, 'îmândan sonra en kıymetli ibâdet namâzdır'"}, {"sayi": 1, "baslik": "Tek Tekbîrle Başlangıç", "bilgi": "Namaza tek bir 'Allahü ekber' (iftitâh tekbîri) ile başlanır; Fâtiha ise her rek'atte bir kere okunur.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#2a8fbf"}, "kaynak": "s.45-86, İftitâh tekbîri; Namâzın vâcibleri (Fâtiha)"}, {"sayi": 2, "baslik": "Teyemmümün Farzı", "bilgi": "Teyemmümün farzı ikidir: niyet etmek ve iki eli temiz toprağa vurup yüzü, sonra kolları mesh etmek.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#6c4bb0"}, "kaynak": "s.64, Teyemmümün farzları (2)"}, {"sayi": 2, "baslik": "Sabah Sünneti", "bilgi": "Sabah namazının sünneti iki rek'attir ve çok kuvvetli bir sünnettir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#6c4bb0"}, "kaynak": "s.44, Sabâh namâzı (2 sünnet + 2 farz)"}, {"sayi": 2, "baslik": "Her Rek'atte İki Secde", "bilgi": "Namazın her rek'atinde iki kere secdeye gidip alnımızı ve burnumuzu yere koyarız.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#6c4bb0"}, "kaynak": "s.46, Rükünler: Secde (iki secde)"}, {"sayi": 2, "baslik": "Şehâdette İki Şâhitlik", "bilgi": "Kelime-i şehâdet iki cümledir: Allahü teâlâya ve Peygamberi Muhammed aleyhisselâma inandığımıza şâhitlik ederiz.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#6c4bb0"}, "kaynak": "s.35, İslâmın şartları, 1. (kelime-i şehâdet iki cümledir)"}, {"sayi": 2, "baslik": "Öğlenin Son Sünneti", "bilgi": "Öğle namazının farzından sonra iki rek'at son sünnet kılınır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#6c4bb0"}, "kaynak": "s.44, Öğle namâzı (10 rek'at)"}, {"sayi": 3, "baslik": "Guslün Farzı", "bilgi": "Guslün (boy abdesti) farzı üçtür: ağzı yıkamak, burnu yıkamak ve bütün bedeni yıkamak.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#c47a1a"}, "kaynak": "s.60, Guslün farzları (3)"}, {"sayi": 3, "baslik": "Akşamın Farzı", "bilgi": "Akşam namazının farzı üç rek'attir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#c47a1a"}, "kaynak": "s.44, Akşam namâzı (5 rek'at: 3 farz)"}, {"sayi": 3, "baslik": "Vitir Namazı", "bilgi": "Vitir namazı üç rek'attir ve kılınması vâcibtir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#c47a1a"}, "kaynak": "s.43-44, Vitr namâzı (vâcib, 3 rek'at)"}, {"sayi": 3, "baslik": "Üç Kısa Âyet", "bilgi": "Fâtiha'dan sonra bir sûre ya da en az üç kısa âyet okumak namazın vâcibidir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#c47a1a"}, "kaynak": "s.86, Namâzın vâcibleri, 2."}, {"sayi": 3, "baslik": "Üçüncü Şart: Zekât", "bilgi": "İslâm'ın şartlarından üçüncüsü malın zekâtını vermektir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#c47a1a"}, "kaynak": "s.152, İslâmın Şartları (5), 3. (zekât)"}, {"sayi": 4, "baslik": "Abdestin Farzı", "bilgi": "Abdestin farzı dörttür: yüzü yıkamak, kolları dirseklerle yıkamak, başın dörtte birini mesh etmek, ayakları topuklarla yıkamak.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b3402e"}, "kaynak": "s.47, Abdestin farzları (4)"}, {"sayi": 4, "baslik": "Öğlenin Farzı", "bilgi": "Öğle namazının farzı dört rek'attir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b3402e"}, "kaynak": "s.44, Öğle namâzı"}, {"sayi": 4, "baslik": "İkindinin Farzı", "bilgi": "İkindi namazının farzı dört rek'attir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b3402e"}, "kaynak": "s.44, İkindi namâzı (8 rek'at)"}, {"sayi": 4, "baslik": "Yatsının Farzı", "bilgi": "Yatsı namazının farzı dört rek'attir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b3402e"}, "kaynak": "s.44, Yatsı namâzı (13 rek'at)"}, {"sayi": 4, "baslik": "Başın Dörtte Biri", "bilgi": "Abdestte başın en az dörtte biri ıslak elle mesh edilir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b3402e"}, "kaynak": "s.47, Abdestin farzları (4), 3."}, {"sayi": 5, "baslik": "Beş Vakit Namaz", "bilgi": "Allahü teâlâ her gün beş vakit namaz kılmayı farz etti: sabah, öğle, ikindi, akşam, yatsı.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b58a00"}, "kaynak": "s.43, Beş vakt namâz"}, {"sayi": 5, "baslik": "İslâm'ın Şartı Beş", "bilgi": "İslâm'ın şartı beştir; ikincisi her gün beş vakit vakti gelince namaz kılmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b58a00"}, "kaynak": "s.35, İslâmın şartları (5)"}, {"sayi": 5, "baslik": "Akşam Namazı", "bilgi": "Akşam namazı beş rek'attir: üç rek'at farz, iki rek'at sünnet.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b58a00"}, "kaynak": "s.44, Akşam namâzı"}, {"sayi": 5, "baslik": "İçteki Beş Rükün", "bilgi": "Namazın içindeki farzlar (rükünler) beştir: kıyâm, kırâet, rükû', secde ve ka'de-i ahîre.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b58a00"}, "kaynak": "s.46, Namâzın rüknleri (5)"}, {"sayi": 5, "baslik": "Beş Vaktin Müjdesi", "bilgi": "Hadîs-i şerîfte, beş vakit namazı güzelce kılanların Allahü teâlânın affına ve mağfiretine kavuşacağı müjdelenmiştir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b58a00"}, "kaynak": "s.44, Hadîs-i şerîf (beş vakt namâz)"}, {"sayi": 6, "baslik": "Îmânın Şartı Altı", "bilgi": "Îmânın şartı altıdır; ilki Allahü teâlâya, sonuncusu kaderin ondan olduğuna inanmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1e8a5a"}, "kaynak": "s.18, 'Îmânın şartı, altıdır'"}, {"sayi": 6, "baslik": "Meleklere Îmân", "bilgi": "Îmânın şartlarından ikincisi Allahü teâlânın meleklerine inanmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1e8a5a"}, "kaynak": "s.152, Îmânın Şartları (6), 2."}, {"sayi": 6, "baslik": "Kitaplara Îmân", "bilgi": "Îmânın şartlarından üçüncüsü Allahü teâlânın indirdiği kitaplara inanmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1e8a5a"}, "kaynak": "s.152, Îmânın Şartları (6), 3."}, {"sayi": 6, "baslik": "Peygamberlere Îmân", "bilgi": "Îmânın şartlarından biri, Allahü teâlânın gönderdiği bütün peygamberlere inanmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1e8a5a"}, "kaynak": "s.152, Îmânın Şartları (6), 4."}, {"sayi": 6, "baslik": "Âhirete Îmân", "bilgi": "Îmânın şartlarından biri âhiret gününe, yani öldükten sonra dirilmeye inanmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1e8a5a"}, "kaynak": "s.152, Îmânın Şartları (6), 5."}, {"sayi": 7, "baslik": "Namazın Dış Farzı", "bilgi": "Namazın dışındaki farzları yedidir; bunlara 'şart' denir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f3a93"}, "kaynak": "s.45, Namâzın farzları: dışındaki 7 (şartlar)"}, {"sayi": 7, "baslik": "Hadesten Tahâret", "bilgi": "Namazın şartlarından biri hadesten tahârettir; abdestsiz olanın abdest, gerekiyorsa gusül almasıdır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f3a93"}, "kaynak": "s.45, Namâzın şartları, 1. Hadesden tahâret"}, {"sayi": 7, "baslik": "Necâsetten Tahâret", "bilgi": "Namazın şartlarından biri necâsetten tahârettir; bedenin, elbisenin ve namaz yerinin temiz olmasıdır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f3a93"}, "kaynak": "s.45, Namâzın şartları, 2. Necâsetden tahâret"}, {"sayi": 7, "baslik": "Setr-i Avret", "bilgi": "Namazın şartlarından biri setr-i avrettir; namazda örtülmesi gereken yerleri örtmektir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f3a93"}, "kaynak": "s.45, Namâzın şartları, 3. Setr-i avret"}, {"sayi": 7, "baslik": "Vakit Şartı", "bilgi": "Namazın şartlarından biri, her namazı kendi vaktinde kılmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f3a93"}, "kaynak": "s.45, Namâzın şartları, 5. Vakt"}, {"sayi": 8, "baslik": "Ef'âl-i Mükellefîn", "bilgi": "Dinimizde işlerimizin hükmü sekizdir: farz, vâcib, sünnet, müstehab, mubâh, harâm, mekrûh, müfsid.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#7a4a86"}, "kaynak": "s.31-34, Ef'âl-i mükellefîn (8)"}, {"sayi": 8, "baslik": "İkindi Namazı", "bilgi": "İkindi namazı sekiz rek'attir: dört rek'at sünnet, dört rek'at farz.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#7a4a86"}, "kaynak": "s.44, İkindi namâzı"}, {"sayi": 8, "baslik": "Farz Nedir", "bilgi": "Sekiz hükmün birincisi farzdır; Allahü teâlânın yapılmasını kesin istediği emirdir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#7a4a86"}, "kaynak": "s.31, Ef'âl-i mükellefîn, 1. Farz"}, {"sayi": 8, "baslik": "Sünnet Nedir", "bilgi": "Sekiz hükümden biri sünnettir; Peygamberimiz Muhammed aleyhisselâmın yapıp beğendiği işlerdir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#7a4a86"}, "kaynak": "s.32, Ef'âl-i mükellefîn, 3. Sünnet"}, {"sayi": 8, "baslik": "Mekrûh Nedir", "bilgi": "Sekiz hükümden biri mekrûhtur; yapılması hoş görülmeyen, sevabı azaltan işlerdir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#7a4a86"}, "kaynak": "s.34, Ef'âl-i mükellefîn, 7. Mekrûh"}, {"sayi": 9, "baslik": "Cuma'nın Şartları", "bilgi": "Cuma namazının farz olmasının (vücûb) şartları dokuzdur.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#0f6b5c"}, "kaynak": "s.103, Cum'a namâzının vücûb şartları (9)"}, {"sayi": 9, "baslik": "Cuma Kime Farz", "bilgi": "Cuma namazının farz olma şartlarından biri, şehirde veya kasabada oturuyor olmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#0f6b5c"}, "kaynak": "s.103, Cum'a vücûb şartları (9), 1."}, {"sayi": 9, "baslik": "Dokuzuncu Vâcib", "bilgi": "Namazın vâciblerinden biri, son oturuşta 'Ettehıyyâtü' duasını okumaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#0f6b5c"}, "kaynak": "s.86, Namâzın vâcibleri, 9. (Ettehıyyâtü)"}, {"sayi": 9, "baslik": "Cuma ve Mükellef Olmak", "bilgi": "Cuma namazının farz olma şartlarından biri âkıl ve bâliğ, yani mükellef olmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#0f6b5c"}, "kaynak": "s.103, Cum'a vücûb şartları (9), 5."}, {"sayi": 9, "baslik": "Cuma ve Sağlık", "bilgi": "Cuma namazının vücûb şartlarından biri sağlam olmaktır; hasta olan bu namazdan mâzurdur.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#0f6b5c"}, "kaynak": "s.103, Cum'a vücûb şartları (9), 2."}, {"sayi": 10, "baslik": "Öğle Namazı", "bilgi": "Öğle namazı on rek'attir: dört ilk sünnet, dört farz, iki son sünnet.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#8a5a13"}, "kaynak": "s.44, Öğle namâzı (10 rek'at)"}, {"sayi": 10, "baslik": "Ta'dîl-i Erkân", "bilgi": "Namazın vâciblerinden onuncusu ta'dîl-i erkâna riayettir; her hareketi düzgün ve sakin yapmaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#8a5a13"}, "kaynak": "s.86, Namâzın vâcibleri, 10."}, {"sayi": 10, "baslik": "Farz ve Sünnet On", "bilgi": "Öğlenin dört rek'at farzı ve altı rek'at sünneti birlikte on rek'at eder.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#8a5a13"}, "kaynak": "s.44, Öğle namâzı"}, {"sayi": 10, "baslik": "Öğlenin İlk Sünneti", "bilgi": "Öğlenin ilk dört rek'at sünneti müekked (kuvvetli) sünnettir; öğle toplam on rek'attir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#8a5a13"}, "kaynak": "s.44, Öğle namâzının ilk sünneti (müekked)"}, {"sayi": 10, "baslik": "Sünnetlerle Bereket", "bilgi": "Öğle namazını sünnetleriyle birlikte on rek'at olarak kılmak çok sevaptır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#8a5a13"}, "kaynak": "s.44, Öğle namâzı (10 rek'at)"}, {"sayi": 11, "baslik": "On Bir Türlü Gusül", "bilgi": "On bir türlü gusül (boy abdesti) hâli vardır; bunların beşi farzdır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b04a2e"}, "kaynak": "s.62, 'Onbir dürlü gusl abdesti vardır'"}, {"sayi": 11, "baslik": "On Birinci Vâcib", "bilgi": "Namazın vâciblerinden biri, namaz sonunda iki yana 'Esselâmü aleyküm ve rahmetullah' diyerek selâm vermektir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b04a2e"}, "kaynak": "s.86, Namâzın vâcibleri, 11."}, {"sayi": 11, "baslik": "Gusülde Farz Olanlar", "bilgi": "On bir gusül hâlinden beşi farzdır; ikisi hanımların temizlik sonrası gusül almasıdır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b04a2e"}, "kaynak": "s.62, Onbir dürlü gusl abdesti (beşi farz)"}, {"sayi": 11, "baslik": "Selâmla Tamamlanır", "bilgi": "Namaz, on birinci vâcib olan selâm vermekle güzelce tamamlanır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b04a2e"}, "kaynak": "s.86, Namâzın vâcibleri, 11."}, {"sayi": 11, "baslik": "Guslü Öğrenmek", "bilgi": "Her müslümanın gusül bilgilerini öğrenmesi lâzımdır; on bir gusül hâli vardır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#b04a2e"}, "kaynak": "s.62, Onbir dürlü gusl (öğrenmek lâzım)"}, {"sayi": 12, "baslik": "Namazın Farzı On İki", "bilgi": "Namazın farzı on ikidir: yedisi namazın dışında (şartlar), beşi içinde (rükünler).", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f6f43"}, "kaynak": "s.45, Namâzın farzları (12)"}, {"sayi": 12, "baslik": "Yedi Dış, Beş İç", "bilgi": "On iki farzın yedisi namazın dış şartı, beşi ise namazın içindeki rükündür.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f6f43"}, "kaynak": "s.45, Namâzın farzları (12)"}, {"sayi": 12, "baslik": "İçteki Beş Rükün", "bilgi": "On iki farzın içteki beşi: kıyâm, kırâet, rükû', secde ve ka'de-i ahîredir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f6f43"}, "kaynak": "s.46, Namâzın rüknleri (5)"}, {"sayi": 12, "baslik": "Dıştaki Yedi Şart", "bilgi": "On iki farzın dıştaki yedisi: hadesten ve necâsetten tahâret, setr-i avret, istikbâl-i kıble, vakit, niyet ve iftitâh tekbîridir.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f6f43"}, "kaynak": "s.45, Namâzın şartları (7)"}, {"sayi": 12, "baslik": "Niyet ve Tekbîr", "bilgi": "Namazın on iki farzından ikisi, kalben niyet etmek ve 'Allahü ekber' diyerek iftitâh tekbîri almaktır.", "tema": {"ad": "NAMAZ BİLGİSİ", "renk": "#1f6f43"}, "kaynak": "s.45-46, Namâzın şartları (Niyyet, İftitâh tekbîri)"}], "sorular": [{"soru": "İmânın şartı (Âmentü'de bildirilen esaslar) kaçtır?", "secenekler": ["Dört", "Beş", "Yedi", "Altı"], "dogru": 3, "aciklama": "Kitabın Otuziki Farz bölümünde imânın şartı altı olarak sayılır ve bunların Âmentü'de açıklandığı belirtilir.", "konu": "İmânın şartları", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.151-152, Otuziki Farz — Îmânın şartı: Altı (6)"}, {"soru": "İslâm'ın şartı kaçtır?", "secenekler": ["Beş", "Altı", "Dört", "Üç"], "dogru": 0, "aciklama": "Otuziki Farz bölümünde İslâm'ın şartı beş olarak sayılır: kelime-i şehâdet, namaz, zekât, oruç ve hac.", "konu": "İslâm'ın şartları", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.152, Otuziki Farz — İslâmın şartı: Beş (5)"}, {"soru": "Şunlardan hangisi İslâm'ın şartlarından biridir?", "secenekler": ["Meleklere inanmak", "Ramazan ayında oruç tutmak", "Kadere inanmak", "Âhiret gününe inanmak"], "dogru": 1, "aciklama": "Ramazan orucu İslâm'ın beş şartından biridir; diğer seçenekler imânın şartlarındandır.", "konu": "İslâm'ın şartları", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.152, İslâmın Şartları (5) — 10: Ramezân ayında oruc tutmak"}, {"soru": "Şunlardan hangisi imânın şartlarından biridir?", "secenekler": ["Namaz kılmak", "Zekât vermek", "Kadere inanmak", "Hac etmek"], "dogru": 2, "aciklama": "Kadere, yani hayr ve şerrin Allahü teâlâdan olduğuna inanmak imânın altıncı şartıdır; diğerleri İslâm'ın şartlarındandır.", "konu": "İmânın şartları", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.152, Îmânın Şartları (6) — 6: Kadere inanmak"}, {"soru": "Bir kimse kelime-i tevhîdi (Lâ ilâhe illallah Muhammedün resûlullah) söyleyip mânâsına inanınca ne olur?", "secenekler": ["Müslüman olur", "Hiçbir şey değişmez", "Bir yıl beklemesi gerekir", "Sadece isimde Müslüman sayılır"], "dogru": 0, "aciklama": "Kitaba göre kelime-i tevhîdi söyleyip mânâsını bilerek inanan kimse Müslüman olur.", "konu": "İslâm'a giriş", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.151, Otuziki Farz girişi — Kelime-i tevhîd deyip mânâsını bilip inanınca Müslimân olur"}, {"soru": "Kitaba göre namaz ile imân ilişkisinde hangisi doğrudur?", "secenekler": ["Namaz kılmak imânın altıncı şartıdır", "Namazın farz olduğuna inanmak imânın şartıdır", "Namaz imândan önce farz edilmiştir", "Namaz İslâm'ın şartlarından değildir"], "dogru": 1, "aciklama": "Kitap, namaz kılmanın imânın şartı olmadığını, fakat namazın farz olduğuna inanmanın imânın şartı olduğunu bildirir.", "konu": "Namazın yeri", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.9, Namâz Büyük Emrdir — 'Namâz kılmak, îmânın şartı değildir. Fekat, namâzın farz olduğuna inanmak, îmânın şartıdır'"}, {"soru": "İmânın altı şartı hangi metinde açıklanmıştır?", "secenekler": ["Fâtiha", "Âmentü", "Ettehiyyâtü", "Salli-Bârik"], "dogru": 1, "aciklama": "Kitap, imânın altı şartının Âmentü'de açıklandığını belirtir.", "konu": "İmânın şartları", "seviye": "kolay", "kat": {"ad": "Îmân & İslâm", "renk": "#1f6f43"}, "kaynak": "s.8 — 'Îmânın şartı, altıdır. Bunlar, Âmentüde açıklanmışdır'"}, {"soru": "Hanefî mezhebine göre abdestin farzı kaçtır?", "secenekler": ["İki", "Üç", "Dört", "Beş"], "dogru": 2, "aciklama": "Hanefî mezhebinde abdestin farzı dörttür: yüzü yıkamak, kolları dirseklerle yıkamak, başın dörtte birini mesh etmek ve ayakları topuklarla yıkamak.", "konu": "Abdestin farzları", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.47/153, Abdestin Farzları — 'hanefî mezhebinde dörtdür'"}, {"soru": "Şunlardan hangisi abdestin farzlarından biridir?", "secenekler": ["Elleri bileklere kadar yıkamak", "Ayakları topuklarıyla birlikte yıkamak", "Ağzı yıkamak", "Burnu yıkamak"], "dogru": 1, "aciklama": "Ayakları topuk kemikleriyle birlikte yıkamak abdestin dört farzından biridir; diğer seçenekler abdestin sünnetlerindendir.", "konu": "Abdestin farzları", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.47, Abdestin Farzları — 4: Ayakları topuklarıyla birlikde yıkamak"}, {"soru": "Abdest alırken başın ne kadarını mesh etmek farzdır?", "secenekler": ["Tamamı", "Dörtte biri", "Yarısı", "Dörtte üçü"], "dogru": 1, "aciklama": "Abdestin farzlarından biri, başın dörtte birini (yaş eli başa sürerek) mesh etmektir.", "konu": "Abdestin farzları", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.47, Abdestin Farzları — 3: Başın dörtde birini mesh etmek"}, {"soru": "Abdest alırken ağzı ayrı su ile üç kere yıkamaya ne ad verilir?", "secenekler": ["Mazmaza", "İstinşak", "İstincâ", "Delk"], "dogru": 0, "aciklama": "Ağzı ayrı su ile üç kere yıkamaya mazmaza denir ve abdestin sünnetlerindendir; burnu yıkamaya ise istinşak denir.", "konu": "Abdestin sünnetleri", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.51, Abdestin Sünnetleri — 3: Ağzı ayrı su ile üç kerre yıkamak (Mazmaza)"}, {"soru": "Abdeste başlarken Besmele okumak abdestin nesidir?", "secenekler": ["Sünneti", "Farzı", "Vâcibi", "Müfsidi"], "dogru": 0, "aciklama": "Abdeste Besmele ile başlamak, abdestin on sekiz sünnetinin ilkidir.", "konu": "Abdestin sünnetleri", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.51, Abdestin Sünnetleri (18) — 1: Besmele okumak"}, {"soru": "Aşağıdakilerden hangisi abdesti bozar?", "secenekler": ["Terlemek", "Balgam kusmak", "Namazda tebessüm etmek", "Yan yatarak uyumak"], "dogru": 3, "aciklama": "Yan yatarak veya bir şeye dayanarak uyumak abdesti bozar; terlemek, balgam kusmak ve namazda tebessüm ise abdesti bozmaz.", "konu": "Abdesti bozan şeyler", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.56, Abdesti Bozan Şeyler (7) — 4: Uyumak (yan yatarak dayanarak)"}, {"soru": "Şunlardan hangisi abdesti bozmaz?", "secenekler": ["Yel kaçırmak", "Çok terlemek", "Bayılmak", "Ağız dolusu kusmak"], "dogru": 1, "aciklama": "Çok da olsa terlemekle abdest bozulmaz; yel kaçırmak, bayılmak ve ağız dolusu kusmak ise abdesti bozar.", "konu": "Abdesti bozmayan şeyler", "seviye": "kolay", "kat": {"ad": "Abdest", "renk": "#2a8fbf"}, "kaynak": "s.57, Abdesti Bozmayan Şeyler — 12: Çok da olsa terlemekle"}, {"soru": "Hanefî mezhebine göre guslün farzı kaçtır?", "secenekler": ["Üç", "İki", "Dört", "Beş"], "dogru": 0, "aciklama": "Hanefî mezhebinde guslün farzı üçtür: ağzı yıkamak, burnu yıkamak ve bütün bedeni yıkamak.", "konu": "Guslün farzları", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.60/153, Guslün Farzları (3) — üçdür"}, {"soru": "Şunlardan hangisi guslün farzlarından biri DEĞİLDİR?", "secenekler": ["Ağzı yıkamak", "Burnu yıkamak", "Bütün bedeni yıkamak", "Başın dörtte birini mesh etmek"], "dogru": 3, "aciklama": "Guslün üç farzı ağzı, burnu ve bütün bedeni yıkamaktır; başı mesh etmek ise abdestin farzıdır, gusülde bütün beden yıkanır.", "konu": "Guslün farzları", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.153, Guslün Farzları (3)"}, {"soru": "Su bulunmadığında veya kullanılamadığında abdest ve gusül yerine ne yapılır?", "secenekler": ["Teyemmüm yapılır", "Namaz ertelenir", "Namaz hiç kılınmaz", "Sadece eller yıkanır"], "dogru": 0, "aciklama": "Su bulunmaz veya kullanılamazsa temiz toprakla teyemmüm edilir; dinimizde toprakla teyemmüm de su ile temizlenmek gibidir.", "konu": "Teyemmüm", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.64, Teyemmüm — 'toprak ile teyemmüm de, su ile temizlenmek gibidir'"}, {"soru": "Teyemmüm aşağıdakilerin hangisi ile yapılabilir?", "secenekler": ["Cam", "Demir", "Temiz toprak, kum ve taş", "Ağaç"], "dogru": 2, "aciklama": "Teyemmüm; temiz toprak, kum, kireç ve taş gibi toprak cinsinden temiz şeylerle yapılır; cam, demir ve ağaç ile yapılmaz.", "konu": "Teyemmüm", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.64-65, Teyemmüm — toprak cinsinden temiz şey; ağaç/demir/cam ile edilemez"}, {"soru": "Şunlardan hangisi teyemmümün farzlarından biridir?", "secenekler": ["Niyet etmek", "Ayakları yıkamak", "Başı mesh etmek", "Ağzı yıkamak"], "dogru": 0, "aciklama": "Abdestsizlik veya cünüplükten temizlenmek için niyet etmek teyemmümün farzlarındandır.", "konu": "Teyemmümün farzları", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.64, Teyemmümün Farzları — 1: Niyet etmek"}, {"soru": "Otuziki Farz listesine göre teyemmümün farzı kaçtır?", "secenekler": ["Bir", "İki", "Dört", "Beş"], "dogru": 1, "aciklama": "Otuziki Farz listesinde teyemmümün farzı iki olarak sayılır; kitap ayrıca 'üç diyenler de vardır' notunu düşer.", "konu": "Teyemmümün farzları", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.151, Otuziki Farz — Teyemmümün farzı: İki (2)"}, {"soru": "Aşağıdakilerden hangisi teyemmümü gerektiren durumlardan biridir?", "secenekler": ["Az terlemek", "Yorgunluk", "Abdest ve gusül için temiz su bulamamak", "Uykusuzluk"], "dogru": 2, "aciklama": "Abdest ve gusül için temiz su bulamamak, teyemmümü gerektiren başlıca hâllerdendir.", "konu": "Teyemmüm", "seviye": "kolay", "kat": {"ad": "Gusül & Teyemmüm", "renk": "#6c4bb0"}, "kaynak": "s.64, Teyemmümü gerekdiren hâller — 1: Temiz su bulamamak"}, {"soru": "Namazın farzı toplam kaçtır?", "secenekler": ["On iki", "Yedi", "Beş", "On dört"], "dogru": 0, "aciklama": "Namazın farzı toplam on ikidir: yedisi namazın dışında (şartlar), beşi namazın içindedir (rükünler).", "konu": "Namazın farzları", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45/152, Namâzın Farzları — Oniki (12)"}, {"soru": "Namazın DIŞINDAKİ farzlarına ne ad verilir?", "secenekler": ["Rükn", "Şart", "Vâcib", "Sünnet"], "dogru": 1, "aciklama": "Namazın dışındaki yedi farza 'şart' denir; içindeki beş farza ise 'rükn' denir.", "konu": "Namazın şartları", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45, Namâzın Farzları — 'Dışındaki farzlara Şartlar denir'"}, {"soru": "Namazın İÇİNDEKİ farzlarına ne ad verilir?", "secenekler": ["Rükn", "Şart", "Edeb", "Müstehab"], "dogru": 0, "aciklama": "Namazın içindeki beş farza 'rükn' denir: kıyâm, kırâet, rükû', secde ve ka'de-i ahîre.", "konu": "Namazın rükünleri", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45, Namâzın Farzları — 'İçindekilere Rüknler denir'"}, {"soru": "Şunlardan hangisi namazın şartlarından (dışındaki farz) biridir?", "secenekler": ["Rükû'", "Vakt (namazı vaktinde kılmak)", "Secde", "Kıyâm"], "dogru": 1, "aciklama": "Vakt, yani namazı vaktinde kılmak namazın şartlarındandır; rükû', secde ve kıyâm ise namazın içindeki rükünlerdendir.", "konu": "Namazın şartları", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45, Namâzın Dışındaki Farzlar (Şartları) — 5: Vakt"}, {"soru": "Namazın şartlarından 'Setr-i avret' ne demektir?", "secenekler": ["Avret yerini örtmek", "Kıbleye dönmek", "Namazı vaktinde kılmak", "Niyet etmek"], "dogru": 0, "aciklama": "Setr-i avret, namaz kılarken avret yerini örtmek demektir; erkeğin avret yeri göbeğinden diz altına kadardır.", "konu": "Namazın şartları", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45, Setr-i avret — 'Avret yerini örtmek demekdir'"}, {"soru": "Müslümanların kıblesi neresidir?", "secenekler": ["Mescid-i Aksâ", "Kâbe (Mekke-i mükerreme)", "Medîne", "Kudüs"], "dogru": 1, "aciklama": "İstikbâl-i kıble, namazda Mekke-i mükerreme'deki Kâ'be'nin bulunduğu yöne dönmektir.", "konu": "Namazın şartları", "seviye": "kolay", "kat": {"ad": "Namazın Şartları", "renk": "#c47a1a"}, "kaynak": "s.45, İstikbâl-i kıble — 'kıblesi, Mekke-i mükerreme şehrinde bulunan Kâ'benin arsasıdır'"}, {"soru": "Namazın içinde yerine getirilen farzlara ne ad verilir?", "secenekler": ["Şart", "Rükn", "Sünnet", "Vâcib"], "dogru": 1, "aciklama": "Namazın dışındaki farzlara 'şart', içindeki farzlara ise 'rükn' denir.", "konu": "Rükn kavramı", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.45-46, Namâzın İçindeki Farzlar (Rüknler)"}, {"soru": "Namazın kaç rüknü (içindeki farzı) vardır?", "secenekler": ["Üç", "Dört", "Beş", "Yedi"], "dogru": 2, "aciklama": "Namazın rükünleri beştir: kıyâm, kırâet, rükû', secde ve ka'de-i ahîre.", "konu": "Rükünlerin sayısı", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Namâzın Rüknleri"}, {"soru": "Namazda ayakta durmak anlamına gelen rükün hangisidir?", "secenekler": ["Kıyâm", "Kırâet", "Rükû'", "Secde"], "dogru": 0, "aciklama": "Kıyâm, namaza başlarken ve kılarken ayakta durmakdır; ayakta duramayan hasta oturarak kılar.", "konu": "Kıyâm rüknü", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Kıyâm"}, {"soru": "Namazın son rek'atinde Ettehıyyâtü'yü okuyacak kadar oturmaya ne denir?", "secenekler": ["Kıyâm", "Rükû'", "Ka'de-i ahîre", "Kırâet"], "dogru": 2, "aciklama": "Ka'de-i ahîre, son rek'atde Ettehıyyâtü okuyacak kadar oturmakdır; buna son oturuş da denir.", "konu": "Ka'de-i ahîre", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Ka'de-i Ahîre"}, {"soru": "Rükû'da en az kaç kere 'Sübhâne rabbiyel-azîm' denir?", "secenekler": ["Bir", "İki", "Üç", "Beş"], "dogru": 2, "aciklama": "Rükû', kırâetten sonra elleri dize koyup eğilmekdir; rükû'da en az üç kere 'Sübhâne rabbiyel-azîm' denir.", "konu": "Rükû' rüknü", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Rükû'"}, {"soru": "Namazdaki 'kırâet' rüknü ne demektir?", "secenekler": ["Kıbleye dönmek", "Namazda Kur'ân-ı kerîmden sûre veya âyet okumak", "Elleri yıkamak", "Kalb ile niyet etmek"], "dogru": 1, "aciklama": "Kırâet, ağızla okumak ma'nâsına gelir; namazda Kur'ân-ı kerîmden sûre veya âyet okumakdır.", "konu": "Kırâet rüknü", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Kırâet"}, {"soru": "Secde, hangi rükünden sonra yapılır?", "secenekler": ["Ka'de-i ahîreden sonra", "Rükû'dan sonra", "Selâmdan sonra", "Niyetten önce"], "dogru": 1, "aciklama": "Secde, rükû'dan sonra yere kapanmakdır; art arda iki kere yapılır ve her secdede en az üç kere 'Sübhâne rabbiyel-a'lâ' denir.", "konu": "Secde rüknü", "seviye": "kolay", "kat": {"ad": "Namazın Rükünleri", "renk": "#b3402e"}, "kaynak": "s.46, Secde"}, {"soru": "Vitir namazının üçüncü rek'atinde okunması vâcib olan dua hangisidir?", "secenekler": ["Sübhâneke", "Kunût duası", "Ettehıyyâtü", "Salli-Bârik"], "dogru": 1, "aciklama": "Namazın vâciblerinden biri, vitr namazının üçüncü rek'atinin sonunda kunût duasını okumakdır.", "konu": "Vitirde kunût vâcibi", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.86, Namâzın Vâcibleri (12)"}, {"soru": "Namazda bir vâcib unutularak terk edilirse ne yapılması gerekir?", "secenekler": ["Namaz baştan kılınır", "Sehv (yanılma) secdesi yapılır", "Hiçbir şey gerekmez", "Yeniden abdest alınır"], "dogru": 1, "aciklama": "Bir vâcib unutarak terk edilince namaz bozulmaz; fakat sehv (yanılma) secdesi yapmak lâzım olur.", "konu": "Sehv secdesi", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.86, Sehv Secdesi"}, {"soru": "Sünnet kaç çeşittir?", "secenekler": ["İki (müekkede ve gayr-i müekkede)", "Üç", "Dört", "Beş"], "dogru": 0, "aciklama": "Sünnet iki çeşittir: devamlı yapılan sünnet-i müekkede ve arasıra yapılan sünnet-i gayr-i müekkede.", "konu": "Sünnet çeşitleri", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.32, Sünnet"}, {"soru": "Namazın sonunda 'Esselâmü aleyküm ve rahmetullah' demek, namazın hangi hükmündendir?", "secenekler": ["Rüknündendir", "Şartındandır", "Vâcibindendir", "Mubâhtandır"], "dogru": 2, "aciklama": "Namazın sonunda selâm vermek, namazın vâciblerindendir.", "konu": "Selâm vermek vâcibi", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.86, Namâzın Vâcibleri (11)"}, {"soru": "İftitâh (başlama) tekbîrinden hemen sonra okunan sünnet dua hangisidir?", "secenekler": ["Ettehıyyâtü", "Sübhâneke", "Kunût", "Fâtiha"], "dogru": 1, "aciklama": "Namazın sünnetlerinden biri, iftitâh tekbîrinden sonra 'Sübhâneke' okumakdır.", "konu": "Sübhâneke sünneti", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.88, Namâzın Sünnetleri (6)"}, {"soru": "Sünnet-i müekkede ne demektir?", "secenekler": ["Peygamber efendimizin devamlı yapıp pek az terk ettiği kuvvetli sünnetler", "Bir kere yapılan işler", "Yasak edilen işler", "Farz olan ibâdetler"], "dogru": 0, "aciklama": "Sünnet-i müekkede, Peygamber efendimizin devamlı yaptıkları, pek az terk ettikleri kuvvetli sünnetlerdir; sabah namazının sünneti bunlardandır.", "konu": "Sünnet-i müekkede", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.32, Sünnet-i Müekkede"}, {"soru": "Aşağıdakilerden hangisi namazın sünnetlerindendir?", "secenekler": ["Kıbleye dönmek", "Abdest almak", "Namaza başlarken elleri kulağa kaldırmak", "Avret yerini örtmek"], "dogru": 2, "aciklama": "Namaza başlarken elleri kulağa kaldırmak namazın sünnetlerindendir; kıbleye dönmek, abdest ve örtünme ise namazın şartlarındandır.", "konu": "Namazın sünnetleri", "seviye": "kolay", "kat": {"ad": "Vâcib & Sünnetler", "renk": "#b58a00"}, "kaynak": "s.88, Namâzın Sünnetleri (1)"}, {"soru": "Cum'a namazının farzı kaç rek'attir?", "secenekler": ["İki rek'at", "Dört rek'at", "Altı rek'at", "Onaltı rek'at"], "dogru": 0, "aciklama": "Cum'a günü onaltı rek'at namaz kılınır; bunun iki rek'ati Cum'a namazının farzıdır.", "konu": "Cum'a namazının farzı", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.102, Cum'a Namâzının Farzları"}, {"soru": "Cenâze namazı kaç tekbir ile kılınır?", "secenekler": ["İki", "Üç", "Dört", "Beş"], "dogru": 2, "aciklama": "Cenâze namazının farzlarından biri dört kere tekbir getirmekdir; her tekbir bir rek'at gibidir.", "konu": "Cenâze namazının tekbirleri", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.108, Cenâze Namâzının Farzları"}, {"soru": "Cenâze namazı nasıl kılınır?", "secenekler": ["Oturarak, rükû ve secde ile", "Ayakta kılınır; rükû ve secdesi yoktur", "Yatarak îmâ ile", "Yürürken kılınır"], "dogru": 1, "aciklama": "Cenâze namazının farzları dört tekbir ve ayakta durmakdır; kılınışında rükû ve secde yoktur.", "konu": "Cenâze namazının kılınışı", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.108, Cenâze Namâzının Farzları"}, {"soru": "Terâvîh namazı kaç rek'attir?", "secenekler": ["Sekiz", "On", "Yirmi", "Kırk"], "dogru": 2, "aciklama": "Terâvîh namazı yirmi rek'attir; ikişer rek'at olarak on selâmla kılınması müstehabdır.", "konu": "Terâvîh namazının rek'atleri", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.109, Terâvîh Namâzı"}, {"soru": "Terâvîh namazı hangi ayda kılınır?", "secenekler": ["Muharrem", "Ramezân", "Şevvâl", "Zilhicce"], "dogru": 1, "aciklama": "Terâvîh namazı Ramezân-ı şerîfin her gecesinde kılınır ve erkek ile kadınlar için sünnetdir.", "konu": "Terâvîh namazının vakti", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.109, Terâvîh Namâzı"}, {"soru": "Ramazan ve Kurban bayramlarında kılınan bayram namazı erkeklere hangi hükümdedir?", "secenekler": ["Farz", "Vâcib", "Sünnet", "Müstehab"], "dogru": 1, "aciklama": "İki rek'at olan bayram namazı erkeklere vâcibdir; cemaatle kılınır, yalnız kılınmaz.", "konu": "Bayram namazının hükmü", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.104, Bayram Namâzları"}, {"soru": "Vitir namazı kaç rek'attir?", "secenekler": ["İki", "Üç", "Dört", "Beş"], "dogru": 1, "aciklama": "Vitir namazı üç rek'attir ve vâcibdir; yatsı namazından sonra kılınır.", "konu": "Vitir namazının rek'atleri", "seviye": "kolay", "kat": {"ad": "Namaz Çeşitleri", "renk": "#1e8a5a"}, "kaynak": "s.44, Yatsı ve Vitr Namâzı"}, {"soru": "Kaynağımıza göre namaz, dînin nesidir?", "secenekler": ["Kapısı", "Direği", "Süsü", "Gölgesi"], "dogru": 1, "aciklama": "Namaz dînin direğidir ve îmândan sonra en kıymetli ibâdetdir; hadîs-i şerîfte 'mü'minin mi'râcı' olarak da bildirilmişdir.", "konu": "Namazın yüksek değeri", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.41-42, Namâz Kılmak / Namâzın Fazîleti"}, {"soru": "Abdüllah ibni Mes'ûd'un bildirdiğine göre, Allahü teâlânın en çok sevdiği amel hangisidir?", "secenekler": ["Vaktinde kılınan namaz", "Çok mal biriktirmek", "Uzun uyumak", "Çok konuşmak"], "dogru": 0, "aciklama": "Resûlullah'a en sevimli amel sorulduğunda '(Vaktinde kılınan namaz)' buyurulmuşdur.", "konu": "En sevilen amel", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.123, Namâzın Fazîletleri"}, {"soru": "Beş vakt namaz kılan bir kimsenin küçük günahları için kaynakta hangi güzel benzetme yapılır?", "secenekler": ["Kapısı önünden akan bir nehirde her gün beş kere yıkanan kimsede kir kalmaması", "Yüksek bir dağa tırmanmak", "Çölde yürümek", "Ağır bir yük taşımak"], "dogru": 0, "aciklama": "Hadîs-i şerîfte beş vakt namaz, kapının önünden akan bir nehre benzetilmiş; her gün beş kere yıkanan kimsede kir kalmadığı gibi küçük günahların da affolunacağı bildirilmişdir.", "konu": "Namazın günahlara keffâret olması", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.9 ve s.122, Namâzın Fazîleti"}, {"soru": "Cemaatle namaz kılmanın güzel kazançlarından biri nedir?", "secenekler": ["Müslümanların kalblerini birbirine bağlar, sevgiyi artırır", "Alışverişi kolaylaştırır", "Yolu kısaltır", "Uykuyu artırır"], "dogru": 0, "aciklama": "Cemaatle kılınan namaz, müslümanlar arasında birliği ve beraberliği sağlar; sevgi ve bağlılığı artırır.", "konu": "Cemaatin fazileti", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.97, Cemâ'at İle Namâz"}, {"soru": "Beş vakt namaz hangi mübarek gecede farz oldu?", "secenekler": ["Kadir gecesi", "Mi'râc gecesi", "Berat gecesi", "Regâib gecesi"], "dogru": 1, "aciklama": "Beş vakt namaz, mi'râc gecesinde farz olmuşdur.", "konu": "Namazın farz olması", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.41, İslâmın Şartlarının Farz Olması"}, {"soru": "Kaynağımıza göre namaz, insanı nelerden alıkoyar?", "secenekler": ["Çirkin, kötü ve yasak olan şeylerden", "Yemek yemekten", "Çalışmaktan", "Arkadaşlarından"], "dogru": 0, "aciklama": "Namaz; insanları çirkin, kötü ve yasak olan şeylerden alıkoyar ve küçük günahlara keffâret olur.", "konu": "Namazın koruyuculuğu", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.9, Namâzın Fâideleri"}, {"soru": "Her gün beş kere Rabbinin huzûrunda olduğunu düşünerek namaz kılan kimsenin kalbi ne ile dolar?", "secenekler": ["Korku", "İhlâs", "Gaflet", "Yorgunluk"], "dogru": 1, "aciklama": "Hergün beş kere Rabbinin huzûrunda olduğunu niyet eden kimsenin kalbi ihlâs ile dolar; bu kimse hep iyilik yapar.", "konu": "Namazın kalbe faydası", "seviye": "kolay", "kat": {"ad": "Fazîlet & Âdâb", "renk": "#1f3a93"}, "kaynak": "s.9, Namâzın Fâideleri"}], "placeholder": false};
+
+</script>
+<script>
+/* NAMAZ YOLU — oyun motoru (zarsız Yol Kartı, botlar, animasyonlar) · içerik: Namâz Kitâbı */
+(function () {
+  "use strict";
+
+  var V = window.OYUN_VERISI;
+  var K = V.kareler;
+
+  var RENKLER = [
+    { ad: "Yeşil Sancak", renk: "#1e8449", amblem: "🐎" },
+    { ad: "Al Bayrak", renk: "#b8332b", amblem: "🦅" },
+    { ad: "Mavi Tuğra", renk: "#2471a3", amblem: "🌙" },
+    { ad: "Altın Hilal", renk: "#b7950b", amblem: "⚔️" },
+  ];
+  var BINA_IKON = ["👂", "📖", "🧠", "🤲", "🎓"]; // Dinledim, Öğrendim, Ezberledim, Uyguladım, Öğrettim (Muallim)
+
+  var SEFER = (V.ilerlemeKartlari && V.ilerlemeKartlari.length) ? V.ilerlemeKartlari : yedekSefer();
+  function yedekSefer() { var a = [], i; for (i = 1; i <= 12; i++) { a.push({ sayi: i, baslik: "Sefer (" + i + ")", bilgi: i + " kare ilerle." }); a.push({ sayi: i, baslik: "Sefer (" + i + ")", bilgi: i + " kare ilerle." }); } return a; }
+
+  var oyun = null;
+  var BOT_HIZ = 1; // gecikme çarpanı
+
+  // ---------- ses (WebAudio, dosyasız) ----------
+  var Ses = (function () {
+    var ctx = null, kapali = false;
+    function ac() { if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { } } if (ctx && ctx.state === "suspended") ctx.resume(); return ctx; }
+    function ton(f, dur, tip, vol, kayma) {
+      if (kapali) return; var c = ac(); if (!c) return;
+      var o = c.createOscillator(), g = c.createGain(), t = c.currentTime;
+      o.type = tip || "sine"; o.frequency.setValueAtTime(f, t);
+      if (kayma) o.frequency.exponentialRampToValueAtTime(kayma, t + dur);
+      g.gain.setValueAtTime(vol || 0.1, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(c.destination); o.start(t); o.stop(t + dur);
+    }
+    function dizi(ns) { ns.forEach(function (n, i) { setTimeout(function () { ton(n.f, n.d || 0.14, n.t || "triangle", n.v || 0.1, n.k); }, i * (n.gap || 110)); }); }
+    return {
+      init: function () { ac(); }, sustur: function (v) { kapali = v; }, kapaliMi: function () { return kapali; },
+      cek: function () { ton(300, 0.2, "triangle", 0.09, 720); },
+      adim: function () { ton(200, 0.045, "square", 0.03); },
+      kart: function () { ton(520, 0.07, "sine", 0.06, 320); },
+      al: function () { dizi([{ f: 523 }, { f: 784, d: 0.18, gap: 95 }]); },
+      ode: function () { ton(200, 0.24, "sawtooth", 0.08, 110); },
+      imar: function () { dizi([{ f: 440, t: "square", v: 0.07 }, { f: 660, d: 0.13, gap: 75 }]); },
+      esaret: function () { ton(150, 0.32, "sawtooth", 0.1, 80); },
+      kazan: function () { dizi([{ f: 523, gap: 150 }, { f: 659, gap: 150 }, { f: 784, gap: 150 }, { f: 1046, d: 0.34, v: 0.13, gap: 150 }]); },
+    };
+  })();
+
+  // ---------- Osmanlı geometrik deseni (SVG) ----------
+  function desen(bg, stroke, op) {
+    stroke = stroke || "#dcbb63"; op = op || "0.5";
+    var m = "<rect x='12' y='12' width='40' height='40'/><path d='M32 12 L52 32 L32 52 L12 32 Z'/><circle cx='32' cy='32' r='6'/><rect x='-20' y='-20' width='40' height='40'/><path d='M0 -20 L20 0 L0 20 L-20 0 Z'/><rect x='44' y='-20' width='40' height='40'/><path d='M64 -20 L84 0 L64 20 L44 0 Z'/><rect x='-20' y='44' width='40' height='40'/><path d='M0 44 L20 64 L0 84 L-20 64 Z'/><rect x='44' y='44' width='40' height='40'/><path d='M64 44 L84 64 L64 84 L44 64 Z'/>";
+    var id = "om" + bg.replace("#", "");
+    return "<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' preserveAspectRatio='xMidYMid slice' viewBox='0 0 256 270'><defs><pattern id='" + id + "' width='64' height='64' patternUnits='userSpaceOnUse'><g fill='none' stroke='" + stroke + "' stroke-width='1.5' opacity='" + op + "'>" + m + "</g></pattern></defs><rect width='256' height='270' fill='" + bg + "'/><rect width='256' height='270' fill='url(#" + id + ")'/></svg>";
+  }
+
+  function desenKaro(stroke, op) {
+    var m = "<rect x='12' y='12' width='40' height='40'/><path d='M32 12 L52 32 L32 52 L12 32 Z'/><circle cx='32' cy='32' r='6'/><rect x='-20' y='-20' width='40' height='40'/><path d='M0 -20 L20 0 L0 20 L-20 0 Z'/><rect x='44' y='-20' width='40' height='40'/><path d='M64 -20 L84 0 L64 20 L44 0 Z'/><rect x='-20' y='44' width='40' height='40'/><path d='M0 44 L20 64 L0 84 L-20 64 Z'/><rect x='44' y='44' width='40' height='40'/><path d='M64 44 L84 64 L64 84 L44 64 Z'/>";
+    return "<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='" + stroke + "' stroke-width='1.6' opacity='" + op + "'>" + m + "</g></svg>";
+  }
+  function desenUygula() {
+    function setBg(sel, grad, stroke, op) {
+      var e = document.querySelector(sel); if (!e) return;
+      var uri = "data:image/svg+xml;utf8," + encodeURIComponent(desenKaro(stroke, op || "0.5"));
+      e.style.backgroundImage = "url(\"" + uri + "\"), " + grad;
+      e.style.backgroundSize = "30px 30px, cover"; e.style.backgroundRepeat = "repeat, no-repeat";
+    }
+    setBg(".deste-ferman", "linear-gradient(180deg,#2e9c6a,#176c47)", "#cdeede");
+    setBg(".deste-vakca", "linear-gradient(180deg,#b98b28,#7a5a13)", "#f0e0b8");
+    setBg("#sefer-mini", "linear-gradient(180deg,#f8ecc8,#e6cf94)", "#b7950b", "0.42");
+  }
+  function set3D(on) {
+    var o = document.getElementById("oyun"); if (o) o.classList.toggle("d3", !!on);
+    var b = document.getElementById("d3-btn"); if (b) { b.textContent = on ? "🧊 3D ✓" : "🗺️ Düz"; b.classList.toggle("acik", !!on); }
+    try { localStorage.setItem("ny_3d", on ? "1" : "0"); } catch (e) {}
+  }
+  function duraklatDegis() {
+    if (!oyun) return;
+    oyun.duraklat = !oyun.duraklat;
+    var b = document.getElementById("duraklat-btn");
+    if (b) { b.textContent = oyun.duraklat ? "▶️ Devam" : "⏸️ Duraklat"; b.classList.toggle("acik", oyun.duraklat); }
+    logla(oyun.duraklat ? "⏸️ Oyun duraklatıldı." : "▶️ Oyun devam ediyor.", "vurgu");
+    render();
+    if (!oyun.duraklat && !oyun.bitti && aktif().bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function koltukDegis(id) {
+    var o = sahipOyuncu(id); if (!o || o.iflas || oyun.bitti) return;
+    o.bot = !o.bot;
+    logla("🔄 " + o.ad + " artık " + (o.bot ? "🤖 Bot" : "👤 Sen") + ".", "vurgu");
+    render();
+    if (o.id === oyun.sira && !oyun.duraklat && o.bot && !oyun.hareketYapildi) bekle(botTuru, 400);
+  }
+  function hizDegis() {
+    var s = [{ h: 0.5, ad: "Hızlı" }, { h: 1, ad: "Normal" }, { h: 1.8, ad: "Yavaş" }];
+    var i = 1; s.forEach(function (x, j) { if (x.h === BOT_HIZ) i = j; });
+    i = (i + 1) % s.length; BOT_HIZ = s[i].h;
+    var b = document.getElementById("hiz-btn"); if (b) b.textContent = "⚡ " + s[i].ad;
+    try { localStorage.setItem("ny_hiz", "" + BOT_HIZ); } catch (e) {}
+  }
+
+  // ---------- yardımcılar ----------
+  function $(s) { return document.querySelector(s); }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+  function fmt(n) { return n.toLocaleString("tr-TR") + " puan"; }
+  function aktif() { return oyun.oyuncular[oyun.sira]; }
+  function bekle(fn, ms) { return setTimeout(fn, ms * BOT_HIZ); }
+  function gridYeri(pos) {
+    if (pos === 0) return { r: 11, c: 11 };
+    if (pos < 10) return { r: 11, c: 11 - pos };
+    if (pos === 10) return { r: 11, c: 1 };
+    if (pos < 20) return { r: 11 - (pos - 10), c: 1 };
+    if (pos === 20) return { r: 1, c: 1 };
+    if (pos < 30) return { r: 1, c: 1 + (pos - 20) };
+    if (pos === 30) return { r: 1, c: 11 };
+    return { r: 1 + (pos - 30), c: 11 };
+  }
+  function sahipOyuncu(id) { for (var i = 0; i < oyun.oyuncular.length; i++) if (oyun.oyuncular[i].id === id) return oyun.oyuncular[i]; return null; }
+  function karistir(n) { var a = [], i, j, t; for (i = 0; i < n; i++) a.push(i); for (i = a.length - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function slug(s) { var t = { "İ": "i", "I": "i", "ı": "i", "Ş": "s", "ş": "s", "Ç": "c", "ç": "c", "Ğ": "g", "ğ": "g", "Ö": "o", "ö": "o", "Ü": "u", "ü": "u", "Â": "a", "â": "a", "Î": "i", "î": "i", "Û": "u", "û": "u" }; return s.split("").map(function (c) { return t[c] || c; }).join("").toLowerCase().replace(/[^a-z0-9]/g, ""); }
+  function gorselImg(ad, cls) { return '<img class="' + (cls || "m-gorsel") + '" src="img/' + slug(ad) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">'; }
+  function logla(msg, sinif) { var box = $("#log"); box.insertBefore(el("div", "log-satir" + (sinif ? " " + sinif : ""), msg), box.firstChild); box.scrollTop = 0; }
+
+  // ---------- kurulum ----------
+  function kurulumEkrani() {
+    var s = $("#kurulum-oyuncular"); s.innerHTML = "";
+    var n = parseInt($("#oyuncu-sayisi").value, 10);
+    for (var i = 0; i < n; i++) {
+      var row = el("div", "kur-row");
+      var sw = el("span", "kur-sw"); sw.style.background = RENKLER[i].renk;
+      var inp = el("input"); inp.type = "text"; inp.maxLength = 16; inp.value = i === 0 ? "Sen" : "Bot " + i;
+      inp.dataset.i = i;
+      var tog = el("div", "tip-toggle");
+      var bSen = el("button", i === 0 ? "sec" : "", "👤 Sen"); bSen.dataset.tip = "insan";
+      var bBot = el("button", i === 0 ? "" : "sec", "🤖 Bot"); bBot.dataset.tip = "bot";
+      tog.dataset.bot = i === 0 ? "0" : "1";
+      bSen.addEventListener("click", function (e) { var t = e.target.parentNode; t.dataset.bot = "0"; t.children[0].classList.add("sec"); t.children[1].classList.remove("sec"); });
+      bBot.addEventListener("click", function (e) { var t = e.target.parentNode; t.dataset.bot = "1"; t.children[1].classList.add("sec"); t.children[0].classList.remove("sec"); });
+      tog.appendChild(bSen); tog.appendChild(bBot);
+      row.appendChild(sw); row.appendChild(inp); row.appendChild(tog);
+      s.appendChild(row);
+    }
+  }
+
+  function oyunBaslat() {
+    var n = parseInt($("#oyuncu-sayisi").value, 10);
+    var rows = document.querySelectorAll("#kurulum-oyuncular .kur-row");
+    var oyuncular = [];
+    for (var i = 0; i < n; i++) {
+      var bot = rows[i].querySelector(".tip-toggle").dataset.bot === "1";
+      oyuncular.push({
+        id: i, ad: rows[i].querySelector("input").value.trim() || (bot ? "Bot " + i : "Oyuncu " + (i + 1)),
+        renk: RENKLER[i].renk, sancak: RENKLER[i].ad, amblem: RENKLER[i].amblem, bot: bot,
+        para: V.ayarlar.baslangicPara, pos: 0, esaret: false, esaretTur: 0, esaretKarti: 0, iflas: false, mulkler: [],
+      });
+    }
+    K.forEach(function (k) { if (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") { k.sahip = null; k.imar = 0; k.ipotekli = false; } });
+    oyun = {
+      oyuncular: oyuncular, sira: 0, hareketYapildi: false, sonHareket: 0, hareketEden: null, _para: {}, _yeniImar: -1,
+      seferDeste: karistir(SEFER.length), si: 0, fermanDeste: karistir(V.ferman.length), fi: 0,
+      vakcaDeste: karistir(V.vakca.length), vi: 0, bitti: false,
+      botZorluk: ($("#bot-zorluk") ? $("#bot-zorluk").value : "orta"),
+      hazine: 0, tekrarHak: false, tekrarSayac: 0, elGecti: 0, duraklat: false,
+      turLimiti: ($("#tur-limiti") ? parseInt($("#tur-limiti").value, 10) : 0),
+    };
+    Ses.init();
+    $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
+    tahtaKur(); desenUygula(); render();
+    var d3pref = true; try { d3pref = localStorage.getItem("ny_3d") !== "0"; } catch (e) {}
+    set3D(d3pref);
+    logla("<b>Oyun başladı!</b> " + oyuncular.map(function (o) { return o.ad + (o.bot ? " 🤖" : ""); }).join(", ") + ". Hayırlı çalışmalar!", "vurgu");
+    if (aktif().bot) bekle(botTuru, 900);
+  }
+
+  // ---------- kaydet / devam ----------
+  var KAYIT_SURUMU = 2;
+  function kaydet() {
+    try {
+      if (!oyun || oyun.bitti) return;
+      var kareDurum = K.map(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") ? { s: k.sahip, i: k.imar || 0, p: !!k.ipotekli } : null; });
+      localStorage.setItem("ny_kayit", JSON.stringify({ oyun: oyun, kd: kareDurum, t: KAYIT_SURUMU }));
+    } catch (e) { console.warn("Kayıt yazılamadı:", e); }
+  }
+  function kayitVarMi() { try { return !!localStorage.getItem("ny_kayit"); } catch (e) { return false; } }
+  function temizleKayit() { try { localStorage.removeItem("ny_kayit"); } catch (e) {} }
+  function yukle() {
+    try {
+      var snap = JSON.parse(localStorage.getItem("ny_kayit"));
+      if (!snap || !snap.oyun || snap.t !== KAYIT_SURUMU) { temizleKayit(); return false; }
+      oyun = snap.oyun;
+      snap.kd.forEach(function (d, i) { if (d) { K[i].sahip = d.s; K[i].imar = d.i; K[i].ipotekli = d.p; } });
+      oyun.hareketEden = null; oyun._para = {}; oyun._yeniImar = -1;
+      Ses.init();
+      $("#kurulum").classList.add("gizli"); $("#oyun").classList.remove("gizli");
+      tahtaKur(); desenUygula(); render();
+      var d3p = true; try { d3p = localStorage.getItem("ny_3d") !== "0"; } catch (e) {}
+      set3D(d3p);
+      logla("▶️ Kayıtlı oyuna devam ediliyor.", "vurgu");
+      if (!oyun.bitti && aktif().bot) bekle(botTuru, 800);
+      return true;
+    } catch (e) { console.warn("Kayıt yüklenemedi:", e); temizleKayit(); return false; }
+  }
+
+  // ---------- tahta DOM ----------
+  function tahtaKur() {
+    var t = $("#tahta"); t.innerHTML = "";
+    var merkez = el("div", "merkez");
+    merkez.innerHTML =
+      '<img class="merkez-bg" src="img/kapak.webp" alt="" onerror="this.style.display=\'none\'"><div class="merkez-perde"></div>' +
+      '<div class="merkez-ic"><div class="logo-ust">NAMAZ</div><div class="logo-orta">YOLU</div>' +
+      '<div class="logo-alt">Öğren · Kıl · Öğret</div>' +
+      '<div class="deste-kutu"><div class="sefer-mini" id="sefer-mini"><div class="sm-no" id="sefer-no">?</div><div class="sm-et">YOL<br>KARTI</div></div>' +
+      '<div class="deste deste-ferman">BEREKET</div><div class="deste deste-vakca">İBRET</div></div></div>';
+    t.appendChild(merkez);
+    K.forEach(function (k) {
+      var g = gridYeri(k.pos);
+      var c = el("div", "kare kare-" + k.tip);
+      c.style.gridRow = g.r; c.style.gridColumn = g.c; c.dataset.pos = k.pos;
+      if ([0, 10, 20, 30].indexOf(k.pos) >= 0) c.classList.add("kose");
+      c.appendChild(kareIc(k));
+      var pl = el("div", "pawnlar"); pl.dataset.pawn = k.pos; c.appendChild(pl);
+      c.addEventListener("click", function () { kareBilgiModal(k.pos); });
+      t.appendChild(c);
+    });
+  }
+  function kareGorSlug(k) {
+    if (k.tip === "sehir" || k.tip === "seref") return slug(k.ad);
+    if (k.tip === "liman") return slug(k.kisa);
+    if (k.tip === "utility") return k.ad === "Orta Sandığı" ? "ortasandigi" : "bedesten";
+    var m = { baslangic: "besmele", esaret: "tefekkur", kervansaray: "ilimmeclisi", surgun: "gaflet", ferman: "bereket", vakca: "ibret", vergi: "vergi" };
+    return m[k.tip] || "";
+  }
+  function kareIc(k) {
+    var ic = el("div", "kare-ic");
+    var img = '<img class="kgor" src="img/' + kareGorSlug(k) + '.webp" alt="" loading="lazy" onerror="this.style.display=\'none\'">';
+    if ([0, 10, 20, 30].indexOf(k.pos) >= 0) {
+      var koseAd = { baslangic: ["Başlangıç", "🌅"], esaret: ["Tefekkür Köşesi", "🤲"], kervansaray: ["İlim Meclisi", "📚"], surgun: ["Gaflet", "⏳"] }[k.tip] || [k.ad, "❖"];
+      ic.innerHTML = img + '<div class="kperde"></div><div class="kose-rozet">' + koseAd[1] + '</div><div class="kose-ad">' + koseAd[0] + '</div>' +
+        (k.tip === "kervansaray" ? '<div class="kfoot" data-hazine style="color:#1e8449"></div>' : '');
+      return ic;
+    }
+    var band = "", foot = "", extra = "";
+    if (k.tip === "sehir") { band = '<div class="kband" style="background:' + k.grup.renk + '">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; extra = '<div class="imar-rozet" data-imar="' + k.pos + '"></div>'; }
+    else if (k.tip === "liman") { band = '<div class="kband" style="background:#0f6b5c">' + k.kisa + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">📖 ' + k.fiyat + '</div>'; }
+    else if (k.tip === "utility") { band = '<div class="kband" style="background:#5b3f86">' + k.ad + '</div>'; foot = '<div class="kfoot" data-fiyat="' + k.pos + '">' + k.fiyat + '</div>'; }
+    else if (k.tip === "vergi") { band = '<div class="kband" style="background:#9a6314">' + k.ad + '</div>'; foot = '<div class="kfoot">' + k.tutar + '</div>'; }
+    else if (k.tip === "ferman") { band = '<div class="kband" style="background:#1e7a52">Bereket</div>'; foot = '<div class="kfoot" style="color:#1e7a52">☞ Kart</div>'; }
+    else if (k.tip === "vakca") { band = '<div class="kband" style="background:#8a5a13">İbret</div>'; foot = '<div class="kfoot" style="color:#8a5a13">☞ Kart</div>'; }
+    else if (k.tip === "seref") { band = '<div class="kband" style="background:#b0880a">' + k.ad + '</div>'; foot = '<div class="kfoot" style="color:#8a6410;font-weight:800">❖ Şeref</div>'; }
+    ic.innerHTML = band + img + foot + extra;
+    return ic;
+  }
+
+  // ---------- render ----------
+  function render() {
+    var pano = $("#oyuncular"); pano.innerHTML = "";
+    oyun.oyuncular.forEach(function (o) {
+      var d = el("div", "oyuncu-kart" + (o.id === oyun.sira ? " aktif" : "") + (o.iflas ? " iflas" : ""));
+      d.style.borderColor = o.renk;
+      var degisti = oyun._para[o.id] != null && oyun._para[o.id] !== o.para;
+      var yon = degisti ? (o.para > oyun._para[o.id] ? " arti" : " eksi") : "";
+      d.innerHTML =
+        '<div class="ok-bas"><span class="ok-sw" style="background:' + o.renk + '">' + (o.amblem || "") + '</span><span class="ok-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.id === hunkarId() ? " 👑" : "") + (o.iflas ? " (elendi)" : "") + '</span></div>' +
+        '<div class="ok-para' + yon + '">' + fmt(o.para) + '</div>' +
+        '<div class="ok-alt">' + o.mulkler.length + ' konu' + (o.seref ? ' · ❖' + o.seref : '') + (o.esaret ? ' · ⛓️ esaret' : '') + (o.esaretKarti ? ' · 📜×' + o.esaretKarti : '') + '</div>' +
+        (o.iflas ? '' : '<button class="koltuk-btn" data-id="' + o.id + '" title="Sen ↔ Bot">' + (o.bot ? '🤖' : '👤') + '</button>');
+      pano.appendChild(d);
+      oyun._para[o.id] = o.para;
+    });
+    pano.querySelectorAll(".koltuk-btn").forEach(function (b) { b.onclick = function () { koltukDegis(parseInt(b.dataset.id, 10)); }; });
+    K.forEach(function (k) {
+      if (k.tip !== "sehir" && k.tip !== "liman" && k.tip !== "utility") return;
+      var cell = document.querySelector('.kare[data-pos="' + k.pos + '"]'); if (!cell) return;
+      cell.classList.toggle("sahipli", k.sahip != null);
+      cell.classList.toggle("ipotekli", !!k.ipotekli);
+      var sahip = k.sahip != null ? sahipOyuncu(k.sahip) : null;
+      cell.style.boxShadow = sahip ? "inset 0 0 0 3px " + sahip.renk : "";
+      var fiyatEl = cell.querySelector("[data-fiyat]");
+      if (fiyatEl) fiyatEl.textContent = sahip ? (k.ipotekli ? "ipotek" : (sahip.ad.length > 9 ? sahip.ad.slice(0, 9) : sahip.ad)) : k.fiyat;
+      if (k.tip === "sehir") {
+        var rozet = cell.querySelector("[data-imar]");
+        if (rozet) {
+          if (k.imar > 0) rozet.innerHTML = '<span class="imar-bina' + (k.imar >= 5 ? " kulliye" : "") + (k.pos === oyun._yeniImar ? " imar-yeni" : "") + '">' + BINA_IKON[k.imar - 1] + '</span>';
+          else rozet.innerHTML = "";
+        }
+      }
+    });
+    oyun._yeniImar = -1;
+    document.querySelectorAll(".pawnlar").forEach(function (p) { p.innerHTML = ""; });
+    oyun.oyuncular.forEach(function (o) {
+      if (o.iflas) return;
+      var layer = document.querySelector('.pawnlar[data-pawn="' + o.pos + '"]');
+      if (layer) { var pw = el("span", "pawn" + (o.id === oyun.hareketEden ? " pawn-hareket" : ""), o.amblem || ""); pw.style.background = o.renk; pw.title = o.ad; layer.appendChild(pw); }
+    });
+    var sn = $("#sefer-no"); if (sn) sn.textContent = oyun.sonHareket || "?";
+    var hz = document.querySelector("[data-hazine]"); if (hz) hz.textContent = oyun.hazine > 0 ? "💰" + oyun.hazine : "";
+    butonlariGuncelle();
+  }
+  function vurgulaKare(pos) {
+    var c = document.querySelector('.kare[data-pos="' + pos + '"]');
+    if (c) { c.classList.remove("vurgu"); void c.offsetWidth; c.classList.add("vurgu"); setTimeout(function () { c.classList.remove("vurgu"); }, 1200); }
+  }
+
+  function butonlariGuncelle() {
+    var o = aktif(), k = K[o.pos], bar = $("#aksiyon-bar"); bar.innerHTML = "";
+    $("#sira-bilgi").innerHTML = (oyun.duraklat ? '⏸️ <b style="color:#f2a8a8">DURAKLATILDI</b> · ' : '') + '<span class="sw" style="background:' + o.renk + '"></span> Sıra: <b>' + o.ad + '</b>' + (o.bot ? '<span class="bot-rozet">BOT</span>' : '') + (o.id === hunkarId() ? ' 👑' : '') + ' · ' + fmt(o.para) +
+      (oyun.turLimiti ? ' · ⏳ Tur ' + (Math.floor(oyun.elGecti / oyun.oyuncular.length) + 1) + '/' + oyun.turLimiti : '') +
+      (oyun.hazine > 0 ? ' · 📚 ' + fmt(oyun.hazine) : '');
+    if (oyun.bitti) { bar.appendChild(btn("🔄 Yeni Oyun", "btn-ana", function () { location.reload(); })); return; }
+    if (o.bot) { bar.appendChild(el("div", "bot-oynuyor", '<span class="bot-spinner"></span>🤖 ' + o.ad + ' oynuyor…')); return; }
+
+    if (o.esaret) {
+      if (!oyun.hareketYapildi) {
+        if (o.para >= V.ayarlar.esaretCikisBedeli) bar.appendChild(btn("💰 Tekrar Puanı (" + V.ayarlar.esaretCikisBedeli + ")", "btn-ana", function () { fidyeOde(); }));
+        if (o.esaretKarti > 0) bar.appendChild(btn("📜 Muafiyet Kullan", "", fermanCikis));
+        bar.appendChild(btn("📚 Soruyla Çık", "", function () { soruModal("esaret"); }));
+        bar.appendChild(btn("⏭️ Bu Turu Geç", "", function () { esaretGec(); }));
+      } else bar.appendChild(btn("➡️ Turu Bitir", "btn-ana", turuBitir));
+      return;
+    }
+    if (!oyun.hareketYapildi) {
+      bar.appendChild(btn("🧭 Yol Kartı Çek", "btn-ana", function () { seferKartiCek(); }));
+      if (rakipVar(o)) bar.appendChild(btn("🤝 Takas", "", takasModal));
+      bar.appendChild(btn("📚 Öğrendiklerim", "", mulklerModal));
+      return;
+    }
+    var alinabilir = (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip == null && !k.ipotekli;
+    if (alinabilir && o.para >= k.fiyat) {
+      bar.appendChild(btn("📖 Bu Konuyu Çalış (" + fmt(k.fiyat) + ")", "btn-ana", function () { satinAl(k.pos, 1); }));
+      bar.appendChild(btn("📚 Soruyla İndir (-%25)", "", function () { soruModal("fetih"); }));
+    } else if (alinabilir) bar.appendChild(btn("🔒 Puanın yetmiyor", "btn-pasif", null, true));
+    if (imarYapilabilirVarMi(o)) bar.appendChild(btn("⭐ Pekiştir", "", imarModal));
+    if (rakipVar(o)) bar.appendChild(btn("🤝 Takas", "", takasModal));
+    if (o.mulkler.length) bar.appendChild(btn("📚 Öğrendiklerim", "", mulklerModal));
+    bar.appendChild(btn("➡️ Turu Bitir", "btn-ana", turuBitir));
+  }
+  function btn(text, cls, fn, pasif) { var b = el("button", "akbtn " + (cls || ""), text); if (pasif) b.disabled = true; if (fn) b.addEventListener("click", fn); return b; }
+
+  // ---------- Yol Kartı ----------
+  function seferKartiCek(bitince) {
+    if (oyun.si >= oyun.seferDeste.length) { oyun.seferDeste = karistir(SEFER.length); oyun.si = 0; }
+    var kart = SEFER[oyun.seferDeste[oyun.si]]; oyun.si++;
+    seferModal(kart, bitince);
+  }
+  function seferModal(kart, bitince) {
+    var o = aktif();
+    var oz = kart.ozel, bigNo = kart.sayi, altYazi = "kare ilerle", btnLbl = "➡️ " + kart.sayi + " kare ilerle", renk = "#5e4216";
+    if (oz) {
+      if (oz.tur === "tekrar") { altYazi = "ilerle + 🔁 TEKRAR"; btnLbl = "🔁 " + kart.sayi + " ilerle ve tekrar çek"; renk = "#1f6b4f"; }
+      else if (oz.tur === "geri") { bigNo = "−" + kart.sayi; altYazi = "kare GERİ"; btnLbl = "↩️ " + kart.sayi + " kare geri git"; renk = "#7d2b2b"; }
+      else if (oz.tur === "isinla") { bigNo = "➜"; altYazi = "ışınlan"; btnLbl = "✨ Işınlan"; renk = "#5b3a8a"; }
+      else if (oz.tur === "sakaci") { bigNo = "✦"; altYazi = "özel olay"; btnLbl = "✦ Uygula"; renk = "#8a5a13"; }
+    }
+    var trenk = oz ? renk : ((kart.tema && kart.tema.renk) || "#7a5b1a");
+    var tad = (kart.tema && kart.tema.ad) || "Yol Bilgisi";
+    var tgor = kart.gorsel ? '<img class="yk-img" src="img/' + kart.gorsel + '" alt="" onerror="this.style.display=\'none\'">' : '<div class="yk-img" style="background:linear-gradient(135deg,' + trenk + ',#22180a)"></div>';
+    var sym = (oz && (oz.tur === "isinla" || oz.tur === "sakaci")) ? " sym" : "";
+    modalAc('<div class="yk-head" style="--yk:' + trenk + '">' + tgor + '<div class="yk-perde"></div>' +
+      '<div class="yk-ust">🧭 YOL KARTI</div><div class="yk-tema">' + tad + '</div>' +
+      '<div class="yk-no' + sym + '">' + bigNo + '</div></div>' +
+      '<div class="yk-altyazi">' + altYazi + '</div>' +
+      '<h2 class="yk-baslik">' + kart.baslik + '</h2>' +
+      '<div class="kart-ogren" style="border-left-color:' + trenk + '">💡 ' + kart.bilgi + '</div>' +
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-ilerle">' + btnLbl + '</button></div>');
+    Ses.cek();
+    $("#m-ilerle").onclick = function () {
+      modalKapat(); oyun.hareketYapildi = true;
+      logla("🏇 " + o.ad + " — " + kart.baslik, "");
+      if (oz) seferOzel(kart, o, bitince);
+      else { oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); }
+    };
+    if (o.bot) bekle(function () { var b = $("#m-ilerle"); if (b && aktif().bot) b.click(); }, 1800);
+  }
+  function enYakinLiman(pos) { var L = [5, 15, 25, 35], i; for (i = 0; i < L.length; i++) if (L[i] > pos) return L[i]; return L[0]; }
+  function seferOzel(kart, o, bitince) {
+    var e = kart.ozel;
+    if (e.tur === "tekrar") { oyun.tekrarHak = true; oyun.sonHareket = kart.sayi; ilerle(o, kart.sayi, true, bitince); return; }
+    if (e.tur === "geri") { oyun.sonHareket = kart.sayi; ilerle(o, -kart.sayi, false, bitince); return; }
+    if (e.tur === "isinla") {
+      var hedef = (e.hedef === "liman") ? enYakinLiman(o.pos) : e.hedef;
+      var adim = (((hedef - o.pos) % 40) + 40) % 40;
+      if (adim === 0) { render(); kareyeDus(o, bitince); } else { oyun.sonHareket = adim; ilerle(o, adim, true, bitince); }
+      return;
+    }
+    if (e.tur === "sakaci") {
+      if (e.alt === "yer_degis") {
+        var en = null, az = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = (((p.pos - o.pos) % 40) + 40) % 40; if (d > 0 && d < az) { az = d; en = p; } } });
+        if (en) { var t = o.pos; o.pos = en.pos; en.pos = t; logla("🕵️ " + o.ad + " ile " + en.ad + " yer değiştirdi!", "vurgu"); render(); kareyeDus(o, bitince); return; }
+        logla("🕵️ Yer değişecek rakip yok.", "");
+      } else if (e.alt === "yakindan_al") {
+        var en2 = null, az2 = 99;
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var d = Math.min((((p.pos - o.pos) % 40) + 40) % 40, (((o.pos - p.pos) % 40) + 40) % 40); if (d < az2) { az2 = d; en2 = p; } } });
+        if (en2) { var m = Math.min(en2.para, e.deger); en2.para -= m; o.para += m; logla("⚔️ " + o.ad + ", " + en2.ad + "'den " + fmt(m) + " ganimet aldı.", "iyi"); }
+      } else if (e.alt === "herkesten") {
+        oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var m = Math.min(p.para, e.deger); p.para -= m; o.para += m; } });
+        logla("🎉 " + o.ad + " herkesten " + e.deger + " puan ihsan topladı.", "iyi");
+      }
+      render(); if (bitince) bekle(bitince, 700);
+      return;
+    }
+  }
+
+  function ilerle(o, adim, maasVar, bitince) {
+    oyun.hareketEden = o.id;
+    var yon = adim >= 0 ? 1 : -1, kalan = Math.abs(adim);
+    if (kalan === 0) { oyun.hareketEden = null; setTimeout(function () { kareyeDus(o, bitince); }, 120); return; }
+    (function adimAt() {
+      o.pos = (((o.pos + yon) % 40) + 40) % 40; Ses.adim();
+      if (yon > 0 && o.pos === 0 && maasVar) { var ul = V.ayarlar.maas + (isHunkar(o) ? 500 : 0); o.para += ul; logla("💰 " + o.ad + " Başlangıç'tan geçti: +" + fmt(ul) + " günlük puan" + (isHunkar(o) ? " (👑 Sınıf Birincisi +500)" : "") + ".", "iyi"); }
+      render();
+      if (--kalan > 0) setTimeout(adimAt, 135);
+      else { oyun.hareketEden = null; render(); setTimeout(function () { kareyeDus(o, bitince); }, 220); }
+    })();
+  }
+  function hunkarId() {
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (ayakta.length < 2) return null;
+    var en = ayakta[0]; ayakta.forEach(function (p) { if (servet(p) > servet(en)) en = p; });
+    return en.id;
+  }
+  function isHunkar(o) { return o.id === hunkarId(); }
+
+  function kareyeDus(o, bitince) {
+    var k = K[o.pos]; vurgulaKare(o.pos);
+    setTimeout(function () {
+      var bot = !!bitince;
+      if (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") {
+        if (k.sahip == null) {
+          kareBilgiModal(o.pos, true);
+          if (bot) bekle(function () { botAlKarar(o, k, bitince); }, 1300);
+        } else if (k.sahip !== o.id && !k.ipotekli) { kiraOde(o, k); render(); if (bot) bekle(bitince, 600); }
+        else { render(); if (bot) bekle(bitince, 300); }
+      } else if (k.tip === "vergi") {
+        odeVeyaIflas(o, k.tutar, null, "💸 " + o.ad + " " + k.ad + " ödedi: -" + fmt(k.tutar)); oyun.hazine += k.tutar; render(); if (bot) bekle(bitince, 600);
+      } else if (k.tip === "kervansaray") {
+        if (oyun.hazine > 0) { var h = oyun.hazine; o.para += h; oyun.hazine = 0; logla("📚 " + o.ad + " İlim Meclisi bonusunu topladı: +" + fmt(h) + "!", "iyi"); Ses.al(); }
+        else logla("📚 " + o.ad + " İlim Meclisinde dinlendi.", "");
+        render(); if (bot) bekle(bitince, 500);
+      } else if (k.tip === "ferman") { kartCek("ferman", o, bitince); }
+      else if (k.tip === "vakca") { kartCek("vakca", o, bitince); }
+      else if (k.tip === "surgun") { logla("🚷 " + o.ad + " sürgün edildi!", "kotu"); esareteGonder(o); render(); if (bot) bekle(bitince, 600); }
+      else if (k.tip === "seref") { serefKare(o); if (bot) bekle(function () { modalKapat(); bitince(); }, 1200); }
+      else { render(); if (bot) bekle(bitince, 300); }
+    }, 280);
+  }
+
+  function serefKare(o) {
+    var k = K[o.pos];
+    var bereket = (k.ad === "Ahi Evran Ocağı") ? 500 : 200;
+    o.para += bereket; o.seref = (o.seref || 0) + 1;
+    logla("❖ " + o.ad + ", " + k.ad + "'e saygıyla uğradı — bankadan <b>+" + fmt(bereket) + "</b> hizmet bereketi.", "iyi");
+    Ses.al(); render();
+    modalAc(gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF DURAĞI</div><h2>' + k.ad + '</h2>' +
+      '<div class="seref-bereket">🏦 Bankadan <b>+' + fmt(bereket) + '</b> hizmet bereketi aldın</div>' +
+      '<p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
+      '<div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Eyvallah 🙏</button></div>');
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function esareteGonder(o) { o.pos = 10; o.esaret = true; o.esaretTur = 0; Ses.esaret(); render(); }
+
+  // ---------- kira & para ----------
+  function kiraOde(o, k) { var sahip = sahipOyuncu(k.sahip), m = kiraHesap(k, sahip); odeVeyaIflas(o, m, sahip, "📚 " + o.ad + ", " + sahip.ad + "'in " + k.ad + " durağında müzakereye uğradı: -" + fmt(m)); render(); }
+  function kiraHesap(k, sahip) {
+    if (k.tip === "sehir") { if (k.imar > 0) return k.kira[k.imar]; return grupTamMi(k.grupKey, sahip.id) ? k.kira[0] * 2 : k.kira[0]; }
+    if (k.tip === "liman") return k.kira[Math.max(0, sahipLimanSayisi(sahip.id) - 1)];
+    if (k.tip === "utility") return (oyun.sonHareket || 6) * k.carpan[Math.min(1, sahipUtilSayisi(sahip.id) - 1)];
+    return 0;
+  }
+  function odeVeyaIflas(o, miktar, alacakli, mesaj) {
+    if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj, alacakli ? "" : "kotu"); if (miktar > 0) Ses.ode(); return; }
+    if (o.bot) {
+      botLikidite(o, miktar);
+      if (o.para >= miktar) { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla(mesaj + " (konu satarak ödedi)", ""); Ses.ode(); }
+      else { logla(mesaj + " — puanı yetmedi, yarıştan çekildi!", "kotu"); iflasEt(o, alacakli); }
+      return;
+    }
+    logla(mesaj + " — nakit yetersiz, konu satıp ödeyebilirsin.", "kotu");
+    borcModal(o, miktar, alacakli);
+  }
+  function iflasEt(o, alacakli) {
+    o.iflas = true;
+    o.mulkler.forEach(function (pos) { var k = K[pos]; k.sahip = alacakli ? alacakli.id : null; k.imar = 0; k.ipotekli = false; if (alacakli) alacakli.mulkler.push(pos); });
+    if (alacakli) alacakli.para += Math.max(0, o.para);
+    o.mulkler = []; o.para = 0;
+    logla("🏳️ <b>" + o.ad + " elendi!</b> Öğrendiği konular " + (alacakli ? alacakli.ad + "'e geçti." : "hazineye döndü."), "kotu");
+    galibiyetKontrol();
+  }
+  function satinAl(pos, oran) {
+    var o = aktif(), k = K[pos], fiyat = Math.round(k.fiyat * oran);
+    if (o.para < fiyat) { logla("Yetersiz puan.", "kotu"); return; }
+    o.para -= fiyat; k.sahip = o.id; o.mulkler.push(pos); o.mulkler.sort(function (a, b) { return a - b; });
+    logla("📖 " + o.ad + ", <b>" + k.ad + "</b> konusunu çalıştı: -" + fmt(fiyat) + (oran < 1 ? " (bilgi indirimi!)" : ""), "iyi");
+    Ses.al(); modalKapat(); render();
+  }
+
+  // ---------- açık artırma (mezat) ----------
+  function grupTamamlarMi(k, p) {
+    if (k.tip === "sehir") return grupKareler(k.grupKey).every(function (g) { return g.pos === k.pos || g.sahip === p.id; });
+    if (k.tip === "liman") return sahipLimanSayisi(p.id) >= 1;
+    return false;
+  }
+  function mezat(pos, bitince) {
+    var k = K[pos];
+    var ayakta = oyun.oyuncular.filter(function (p) { return !p.iflas; });
+    if (!ayakta.length) { if (bitince) bekle(bitince, 300); return; }
+    var d = { pos: pos, yuksek: 0, yuksekId: null, aktif: ayakta.map(function (p) { return p.id; }), step: Math.max(50, Math.round(k.fiyat * 0.1)), sira: 0, bitince: bitince };
+    logla("🔨 <b>" + k.ad + "</b> açık artırmaya çıktı!", "vurgu");
+    mezatTur(d);
+  }
+  function mezatTur(d) {
+    if (d.aktif.length <= 1) { mezatBitir(d); return; }
+    if (d.sira >= d.aktif.length) d.sira = 0;
+    var id = d.aktif[d.sira];
+    if (id === d.yuksekId) { d.sira++; mezatTur(d); return; }
+    var p = sahipOyuncu(id), k = K[d.pos], yeni = d.yuksek + d.step;
+    if (p.bot) {
+      var maks = Math.round(k.fiyat * (grupTamamlarMi(k, p) ? 1.4 : 0.85));
+      if (yeni <= maks && yeni <= p.para) { d.yuksek = yeni; d.yuksekId = id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); d.sira++; bekle(function () { mezatTur(d); }, 650); }
+      else { d.aktif.splice(d.sira, 1); logla("🔨 " + p.ad + " çekildi.", ""); bekle(function () { mezatTur(d); }, 450); }
+    } else mezatModal(d, p, yeni);
+  }
+  function mezatModal(d, p, yeni) {
+    var k = K[d.pos], verebilir = yeni <= p.para;
+    modalAc('<div class="kart-ust" style="background:#6b4d1f">🔨 AÇIK ARTIRMA — ' + k.ad + '</div>' +
+      (k.tip === "sehir" ? gorselImg(k.ad) : '') +
+      '<p class="m-bilgi">Liste fiyatı <b>' + fmt(k.fiyat) + '</b>. En yüksek teklif: <b>' + (d.yuksek ? fmt(d.yuksek) + " (" + sahipOyuncu(d.yuksekId).ad + ")" : "yok") + '</b><br>Sıra sende — nakdin: <b>' + fmt(p.para) + '</b></p>' +
+      '<div class="m-btnlar">' +
+      (verebilir ? '<button class="akbtn btn-ana" id="mz-teklif">🔨 Teklif Ver (' + fmt(yeni) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetmez</button>') +
+      '<button class="akbtn" id="mz-cekil">🚪 Çekil</button></div>', true);
+    var b;
+    if ((b = $("#mz-teklif"))) b.onclick = function () { d.yuksek = yeni; d.yuksekId = p.id; logla("🔨 " + p.ad + " teklif: " + fmt(yeni)); modalKapat(); d.sira++; mezatTur(d); };
+    $("#mz-cekil").onclick = function () { var i = d.aktif.indexOf(p.id); if (i >= 0) d.aktif.splice(i, 1); logla("🔨 " + p.ad + " çekildi.", ""); modalKapat(); mezatTur(d); };
+  }
+  function mezatBitir(d) {
+    var k = K[d.pos];
+    if (d.yuksekId != null && d.yuksek > 0) {
+      var p = sahipOyuncu(d.yuksekId);
+      p.para -= d.yuksek; k.sahip = p.id; p.mulkler.push(d.pos); p.mulkler.sort(function (a, b) { return a - b; });
+      logla("🔨 <b>" + k.ad + "</b>, " + fmt(d.yuksek) + " ile " + p.ad + "'e satıldı!", "iyi"); Ses.al();
+    } else logla("🔨 " + k.ad + " alıcı bulamadı, boş kaldı.", "");
+    modalKapat(); render(); if (d.bitince) bekle(d.bitince, 400);
+  }
+
+  // ---------- imar ----------
+  function grupKareler(key) { return K.filter(function (k) { return k.tip === "sehir" && k.grupKey === key; }); }
+  function grupTamMi(key, id) { return grupKareler(key).every(function (k) { return k.sahip === id && !k.ipotekli; }); }
+  function sahipLimanSayisi(id) { return K.filter(function (k) { return k.tip === "liman" && k.sahip === id; }).length; }
+  function sahipUtilSayisi(id) { return K.filter(function (k) { return k.tip === "utility" && k.sahip === id; }).length; }
+  function imarYapilabilirVarMi(o) { return K.some(function (k) { return k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id) && k.imar < 5 && o.para >= k.imarBedeli && imarDengeli(k, 1); }); }
+  function imarDengeli(k, art) { var g = grupKareler(k.grupKey), min = Math.min.apply(null, g.map(function (x) { return x.imar; })); return (k.imar + art) - min <= 1; }
+  function imarYap(pos) {
+    var o = aktif(), k = K[pos];
+    if (!grupTamMi(k.grupKey, o.id) || k.imar >= 5 || !imarDengeli(k, 1) || o.para < k.imarBedeli) { logla("İmar koşulu sağlanmadı.", "kotu"); return; }
+    o.para -= k.imarBedeli; k.imar++; oyun._yeniImar = pos;
+    logla("🏗️ " + o.ad + ", " + k.ad + "'e <b>" + V.imarKademeleri[k.imar - 1].ad + "</b> yaptırdı: -" + fmt(k.imarBedeli), "iyi");
+    Ses.imar(); render(); imarModal();
+  }
+
+  // ---------- olay kartları ----------
+  function kartCek(tur, o, bitince) {
+    var deste = tur === "ferman" ? V.ferman : V.vakca, sira = tur === "ferman" ? oyun.fermanDeste : oyun.vakcaDeste, ref = tur === "ferman" ? "fi" : "vi";
+    if (oyun[ref] >= sira.length) oyun[ref] = 0;
+    var kart = deste[sira[oyun[ref]]]; oyun[ref]++;
+    kartModal(tur, kart, o, bitince);
+  }
+  function imarToplam(id) { return K.filter(function (k) { return k.tip === "sehir" && k.sahip === id; }).reduce(function (s, k) { return s + k.imar; }, 0); }
+  function kartUygula(kart, o, bitince) {
+    var e = kart.etki, n;
+    switch (e.tur) {
+      case "para_al": o.para += e.deger; logla("📜 " + o.ad + ": +" + fmt(e.deger), "iyi"); break;
+      case "para_ver": odeVeyaIflas(o, e.deger, null, "📜 " + o.ad + ": -" + fmt(e.deger)); oyun.hazine += e.deger; break;
+      case "mulk_basina_al": n = o.mulkler.length * e.deger; o.para += n; logla("📜 " + o.ad + " " + o.mulkler.length + " öğrendiği konudan +" + fmt(n), "iyi"); break;
+      case "mulk_basina_ver": n = o.mulkler.length * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " " + o.mulkler.length + " konusu için: -" + fmt(n)); break;
+      case "imar_basina_al": n = imarToplam(o.id) * e.deger; o.para += n; logla("📜 " + o.ad + " " + imarToplam(o.id) + " kademeden +" + fmt(n), "iyi"); break;
+      case "imar_basina_ver": n = imarToplam(o.id) * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " " + imarToplam(o.id) + " kademe için: -" + fmt(n)); break;
+      case "liman_basina_al": n = sahipLimanSayisi(o.id) * e.deger; o.para += n; logla("📜 " + o.ad + " " + sahipLimanSayisi(o.id) + " sûreden +" + fmt(n), "iyi"); break;
+      case "liman_basina_ver": n = sahipLimanSayisi(o.id) * e.deger; odeVeyaIflas(o, n, null, "📜 " + o.ad + " sûreleri için: -" + fmt(n)); break;
+      case "en_degerli_imar_yik":
+        var h = null; K.forEach(function (k) { if (k.tip === "sehir" && k.sahip === o.id && k.imar > 0 && (!h || k.imar > h.imar || (k.imar === h.imar && k.fiyat > h.fiyat))) h = k; });
+        if (h) { h.imar--; oyun._yeniImar = -1; logla("📜 " + o.ad + " — " + h.ad + " konusunda bir kademe düştü.", "kotu"); } else logla("📜 " + o.ad + " — yıkılacak imar yok, etkisiz.", ""); break;
+      case "herkesten_al": oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) { var m = Math.min(p.para, e.deger); p.para -= m; o.para += m; } }); logla("📜 " + o.ad + " herkesten " + e.deger + " puan topladı.", "iyi"); break;
+      case "herkese_ver": oyun.oyuncular.forEach(function (p) { if (p.id !== o.id && !p.iflas) odeVeyaIflas(o, e.deger, p, "📜 " + o.ad + " → " + p.ad + ": " + e.deger); }); break;
+      case "basa_git_maas_al": o.pos = 0; o.para += V.ayarlar.maas; logla("📜 " + o.ad + " Başlangıç'a döndü: +" + fmt(V.ayarlar.maas), "iyi"); break;
+      case "esarete_git": esareteGonder(o); logla("📜 " + o.ad + " Tefekkür Köşesi'ne gitti.", "kotu"); break;
+      case "esaretten_cik_karti": o.esaretKarti++; logla("📜 " + o.ad + " bir 'Muafiyet' kartı aldı — Tefekkür Köşesi'nden kurtarır.", "iyi"); break;
+      case "ilerle_kareye": o.pos = ((e.deger % 40) + 40) % 40; modalKapat(); render(); kareyeDus(o, bitince); return;
+    }
+    modalKapat(); render(); if (bitince) bekle(bitince, 600);
+  }
+  function kartModal(tur, kart, o, bitince) {
+    var renk = tur === "ferman" ? "#1e7a52" : "#8a5a13", etiket = tur === "ferman" ? "BEREKET" : "İBRET";
+    var etki = etkiOzet(kart.etki);
+    var ogor = kart.gorsel ? '<img class="ok-img" src="img/' + kart.gorsel + '" alt="" onerror="this.style.display=\'none\'">' : '<div class="ok-img" style="background:linear-gradient(135deg,' + renk + ',#1a0d0d)"></div>';
+    modalAc('<div class="ok-head" style="--ok:' + renk + '">' + ogor + '<div class="yk-perde"></div>' +
+      '<div class="ok-etiket">' + (tur === "ferman" ? "📜 " : "✴️ ") + etiket + '</div></div>' +
+      '<h2 class="yk-baslik">' + kart.baslik + '</h2><p class="m-bilgi">' + kart.metin + '</p>' +
+      (etki ? '<div class="ok-etki" style="--ok:' + renk + ';background:' + renk + '">⚜ ' + etki + '</div>' : '') +
+      '<div class="kart-ogren">💡 ' + kart.ogren + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-uygula">Uygula</button></div>');
+    $("#m-uygula").onclick = function () { kartUygula(kart, o, bitince); };
+    if (o.bot) bekle(function () { var b = $("#m-uygula"); if (b && aktif().bot) b.click(); }, 1600);
+  }
+  function etkiOzet(e) {
+    var t = { mulk_basina_al: "Her konun için al", mulk_basina_ver: "Her konun için öde", imar_basina_al: "Her kademen için al", imar_basina_ver: "Her kademen için öde", liman_basina_al: "Her sûren için al", liman_basina_ver: "Her sûren için öde", en_degerli_imar_yik: "En yüksek kademen düşer", para_al: "Havuzdan al", para_ver: "Havuza öde", herkesten_al: "Herkesten al", herkese_ver: "Herkese ver" }[e.tur];
+    if (!t) return "";
+    return e.deger ? t + " · " + fmt(e.deger) : t;
+  }
+
+  // ---------- esaret ----------
+  function fidyeOde(zorunlu) { var o = aktif(); odeVeyaIflas(o, V.ayarlar.esaretCikisBedeli, null, "💰 " + o.ad + " tekrar puanı verdi (" + fmt(V.ayarlar.esaretCikisBedeli) + "), devam."); o.esaret = false; render(); }
+  function fermanCikis() { var o = aktif(); o.esaretKarti--; o.esaret = false; logla("📜 " + o.ad + " muafiyetle tefekkürden çıktı.", "iyi"); render(); }
+  function esaretGec() {
+    var o = aktif(); o.esaretTur++;
+    if (o.esaretTur >= 3 && o.para >= V.ayarlar.esaretCikisBedeli) { logla(o.ad + " 3. turda tekrar puanı vermek zorunda kaldı.", "kotu"); fidyeOde(true); o.esaret = false; }
+    else logla("⛓️ " + o.ad + " tefekkürde bekliyor (" + o.esaretTur + "/3).", "");
+    oyun.hareketYapildi = true; render();
+  }
+
+  // ---------- BOTLAR ----------
+  function botRezerv() { return { kolay: 4500, orta: 2500, zor: 1200 }[oyun.botZorluk] || 2500; }
+  function botTuru() {
+    var o = aktif(); if (!o || !o.bot || oyun.bitti || oyun.duraklat) return;
+    if (o.esaret) { bekle(botEsaret, 900); return; }
+    bekle(function () { seferKartiCek(botCozum); }, 700);
+  }
+  function botEsaret() {
+    var o = aktif();
+    if (o.esaretKarti > 0) { fermanCikis(); bekle(function () { seferKartiCek(botCozum); }, 800); }
+    else if (o.para >= V.ayarlar.esaretCikisBedeli + 1500) { fidyeOde(); bekle(function () { seferKartiCek(botCozum); }, 800); }
+    else { esaretGec(); bekle(turuBitir, 800); }
+  }
+  function botAlKarar(o, k, bitince) {
+    var iste = o.para - k.fiyat >= botRezerv();
+    if (iste && oyun.botZorluk === "kolay" && Math.random() < 0.3) iste = false;
+    if (iste) { satinAl(o.pos, 1); if (bitince) bekle(bitince, 700); }
+    else { modalKapat(); render(); logla("🤖 " + o.ad + ", " + k.ad + "'i almadı — açık artırmaya!", ""); mezat(o.pos, bitince); }
+  }
+  function botCozum() {
+    bekle(function () {
+      var o = aktif();
+      var limit = { kolay: 1, orta: 3, zor: 6 }[oyun.botZorluk] || 3, sayac = 0;
+      while (sayac < limit) {
+        var aday = null;
+        K.forEach(function (k) { if (k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id) && k.imar < 5 && imarDengeli(k, 1) && o.para - k.imarBedeli >= botRezerv()) { if (!aday || k.imarBedeli < aday.imarBedeli) aday = k; } });
+        if (!aday) break;
+        o.para -= aday.imarBedeli; aday.imar++; oyun._yeniImar = aday.pos;
+        logla("🏗️ " + o.ad + ", " + aday.ad + "'e " + V.imarKademeleri[aday.imar - 1].ad + " yaptırdı.", "iyi");
+        sayac++;
+      }
+      if (sayac > 0) Ses.imar();
+      render();
+      var devam = function () { render(); bekle(turuBitir, 650); };
+      if (!botTakasDene(o, devam)) devam();
+    }, 500);
+  }
+
+  // ---------- tur ----------
+  function turuBitir() {
+    if (oyun.tekrarHak && !aktif().iflas) {
+      oyun.tekrarHak = false; oyun.tekrarSayac = (oyun.tekrarSayac || 0) + 1;
+      if (oyun.tekrarSayac >= 3) { oyun.tekrarSayac = 0; logla("🔁 " + aktif().ad + " üst üste 3 tekrar — dikkati dağılıp Tefekkür Köşesi'ne uğradı.", "kotu"); esareteGonder(aktif()); }
+      else { oyun.hareketYapildi = false; oyun.sonHareket = 0; logla("🔁 " + aktif().ad + " yeniden yola çıkıyor!", "vurgu"); kaydet(); render(); if (aktif().bot && !oyun.duraklat) bekle(botTuru, 650); return; }
+    } else oyun.tekrarSayac = 0;
+    oyun.elGecti = (oyun.elGecti || 0) + 1;
+    if (oyun.turLimiti && Math.floor(oyun.elGecti / oyun.oyuncular.length) >= oyun.turLimiti) {
+      oyun.bitti = true; temizleKayit(); logla("⏳ Tur limiti doldu! En zengin medeniyet kazanır.", "vurgu"); sonucModal(null); return;
+    }
+    var n = oyun.oyuncular.length, sayac = 0;
+    do { oyun.sira = (oyun.sira + 1) % n; sayac++; } while (oyun.oyuncular[oyun.sira].iflas && sayac <= n);
+    oyun.hareketYapildi = false; oyun.sonHareket = 0; kaydet(); render();
+    if (!oyun.bitti && aktif().bot && !oyun.duraklat) bekle(botTuru, 650);
+  }
+  function galibiyetKontrol() {
+    var ayakta = oyun.oyuncular.filter(function (o) { return !o.iflas; });
+    if (ayakta.length <= 1 && oyun.oyuncular.length > 1) { oyun.bitti = true; temizleKayit(); sonucModal(ayakta[0]); }
+  }
+  function servet(o) { var s = o.para; o.mulkler.forEach(function (pos) { var k = K[pos]; s += k.ipotekli ? k.ipotek : k.fiyat; if (k.tip === "sehir") s += k.imar * k.imarBedeli; }); return s; }
+
+  // ---------- TAKAS ----------
+  function rakipVar(o) { return oyun.oyuncular.some(function (p) { return p.id !== o.id && !p.iflas; }); }
+  function arrCikar(a, x) { var i = a.indexOf(x); if (i >= 0) a.splice(i, 1); }
+  function takasEdilebilir(k) {
+    if (k.sahip == null || k.ipotekli) return false;
+    if (k.tip === "sehir") { if (k.imar > 0) return false; return grupKareler(k.grupKey).every(function (g) { return g.imar === 0; }); }
+    return k.tip === "liman" || k.tip === "utility";
+  }
+  function oyuncuMulkleri(id) { return K.filter(function (k) { return (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip === id && takasEdilebilir(k); }); }
+  function takasDeger(poslar) { return poslar.reduce(function (s, pos) { return s + (K[pos].ipotekli ? K[pos].ipotek : K[pos].fiyat); }, 0); }
+
+  function takasModal() {
+    var o = aktif();
+    var rakipler = oyun.oyuncular.filter(function (p) { return p.id !== o.id && !p.iflas; });
+    if (!rakipler.length) return;
+    takasCiz(o, rakipler, rakipler[0].id);
+  }
+  function takasCiz(o, rakipler, hedefId) {
+    var T = sahipOyuncu(hedefId);
+    function mulkListe(p, taraf) {
+      var liste = oyuncuMulkleri(p.id);
+      if (!liste.length) return '<div class="takas-bos">(takasa uygun konu yok)</div>';
+      return liste.map(function (k) {
+        var renk = k.tip === "sehir" ? k.grup.renk : "#888";
+        return '<label class="takas-mulk"><input type="checkbox" data-taraf="' + taraf + '" data-pos="' + k.pos + '"><span class="msw" style="background:' + renk + '"></span>' + k.ad + ' <span class="takas-fy">' + k.fiyat + '</span></label>';
+      }).join("");
+    }
+    var rakipSec = rakipler.length > 1
+      ? '<select id="takas-hedef">' + rakipler.map(function (r) { return '<option value="' + r.id + '"' + (r.id === hedefId ? " selected" : "") + '>' + r.ad + (r.bot ? " 🤖" : "") + '</option>'; }).join("") + '</select>'
+      : '<b>' + T.ad + (T.bot ? " 🤖" : "") + '</b>';
+    var html = '<div class="kart-ust" style="background:#34495e">🤝 TAKAS TEKLİFİ</div>' +
+      '<div class="takas-grid">' +
+        '<div class="takas-col"><div class="takas-bas" style="color:' + o.renk + '">SEN verirsin</div>' + mulkListe(o, "ver") +
+          '<div class="takas-para">💰 <input type="number" id="ver-akce" min="0" max="' + o.para + '" value="0"> puan</div>' +
+          (o.esaretKarti > 0 ? '<div class="takas-para">📜 <input type="number" id="ver-ferman" min="0" max="' + o.esaretKarti + '" value="0"> ferman</div>' : "") +
+        '</div>' +
+        '<div class="takas-col"><div class="takas-bas">' + rakipSec + ' verir</div>' + mulkListe(T, "al") +
+          '<div class="takas-para">💰 <input type="number" id="al-akce" min="0" max="' + T.para + '" value="0"> puan</div>' +
+          (T.esaretKarti > 0 ? '<div class="takas-para">📜 <input type="number" id="al-ferman" min="0" max="' + T.esaretKarti + '" value="0"> ferman</div>' : "") +
+        '</div>' +
+      '</div>' +
+      '<div class="m-btnlar"><button class="akbtn" id="takas-iptal">Vazgeç</button><button class="akbtn btn-ana" id="takas-gonder">Teklifi Gönder</button></div>';
+    modalAc(html, true);
+    if ($("#takas-hedef")) $("#takas-hedef").onchange = function () { takasCiz(o, rakipler, parseInt(this.value, 10)); };
+    $("#takas-iptal").onclick = function () { modalKapat(); render(); };
+    $("#takas-gonder").onclick = function () {
+      var teklif = takasTopla(o, T);
+      if (teklif.ver.mulkler.length + teklif.al.mulkler.length + teklif.ver.akce + teklif.al.akce + teklif.ver.ferman + teklif.al.ferman === 0) { logla("Boş teklif gönderilemez.", "kotu"); return; }
+      takasGonder(teklif);
+    };
+  }
+  function takasTopla(o, T) {
+    function sel(taraf) { return [].slice.call(document.querySelectorAll('input[data-taraf="' + taraf + '"]:checked')).map(function (c) { return parseInt(c.dataset.pos, 10); }); }
+    function num(id) { var e = $("#" + id); return e ? Math.max(0, parseInt(e.value, 10) || 0) : 0; }
+    return { verenId: o.id, alanId: T.id,
+      ver: { mulkler: sel("ver"), akce: Math.min(num("ver-akce"), o.para), ferman: Math.min(num("ver-ferman"), o.esaretKarti) },
+      al: { mulkler: sel("al"), akce: Math.min(num("al-akce"), T.para), ferman: Math.min(num("al-ferman"), T.esaretKarti) } };
+  }
+  function takasOzet(teklif) {
+    var V1 = sahipOyuncu(teklif.verenId), A = sahipOyuncu(teklif.alanId);
+    function liste(t) { var p = []; t.mulkler.forEach(function (pos) { p.push(K[pos].ad); }); if (t.akce) p.push(fmt(t.akce)); if (t.ferman) p.push("📜×" + t.ferman); return p.length ? p.join(", ") : "—"; }
+    return '<div class="takas-ozet"><b style="color:' + V1.renk + '">' + V1.ad + '</b> verir: ' + liste(teklif.ver) + '<br><b style="color:' + A.renk + '">' + A.ad + '</b> verir: ' + liste(teklif.al) + '</div>';
+  }
+  function takasGonder(teklif) {
+    var A = sahipOyuncu(teklif.alanId);
+    if (A.bot) takasSonucModal(teklif, takasDegerlendir(teklif, A));
+    else takasOnayModal(teklif, null);
+  }
+  function takasOnayModal(teklif, devam) {
+    var A = sahipOyuncu(teklif.alanId), V1 = sahipOyuncu(teklif.verenId);
+    modalAc('<div class="kart-ust" style="background:#34495e">🤝 TAKAS TEKLİFİ</div><p class="m-bilgi"><b>' + V1.ad + '</b> takas teklif ediyor:</p>' + takasOzet(teklif) + '<p class="m-bilgi" style="margin-top:10px"><b style="color:' + A.renk + '">' + A.ad + '</b>, kabul ediyor musun?</p><div class="m-btnlar"><button class="akbtn" id="takas-ret">✗ Ret</button><button class="akbtn btn-ana" id="takas-kabul">✓ Kabul</button></div>', true);
+    $("#takas-kabul").onclick = function () { takasUygula(teklif); logla("🤝 " + A.ad + " takası kabul etti.", "iyi"); modalKapat(); if (devam) devam(); else render(); };
+    $("#takas-ret").onclick = function () { logla("🤝 " + A.ad + " takası reddetti.", ""); modalKapat(); if (devam) devam(); else render(); };
+  }
+  function takasSonucModal(teklif, kabul) {
+    var A = sahipOyuncu(teklif.alanId);
+    if (kabul) takasUygula(teklif);
+    modalAc('<div class="kart-ust" style="background:' + (kabul ? "#1f6b4f" : "#7d2b2b") + '">🤝 TAKAS</div>' + takasOzet(teklif) + '<p class="m-bilgi" style="text-align:center;margin-top:12px">' + (kabul ? "✓ <b>" + A.ad + "</b> teklifi kabul etti!" : "✗ <b>" + A.ad + "</b> teklifi reddetti.") + '</p><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Tamam</button></div>');
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function takasUygula(teklif) {
+    var V1 = sahipOyuncu(teklif.verenId), A = sahipOyuncu(teklif.alanId);
+    teklif.ver.mulkler.forEach(function (pos) { K[pos].sahip = A.id; arrCikar(V1.mulkler, pos); A.mulkler.push(pos); });
+    teklif.al.mulkler.forEach(function (pos) { K[pos].sahip = V1.id; arrCikar(A.mulkler, pos); V1.mulkler.push(pos); });
+    V1.para += teklif.al.akce - teklif.ver.akce; A.para += teklif.ver.akce - teklif.al.akce;
+    V1.esaretKarti += teklif.al.ferman - teklif.ver.ferman; A.esaretKarti += teklif.ver.ferman - teklif.al.ferman;
+    V1.mulkler.sort(function (a, b) { return a - b; }); A.mulkler.sort(function (a, b) { return a - b; });
+    Ses.al();
+  }
+  function takasDegerlendir(teklif, bot) {
+    if (teklif.al.akce > bot.para - 300) return false;
+    var alinan = takasDeger(teklif.ver.mulkler) + teklif.ver.akce + teklif.ver.ferman * 500;
+    var verilen = takasDeger(teklif.al.mulkler) + teklif.al.akce + teklif.al.ferman * 500;
+    var bonus = 0, ceza = 0;
+    teklif.ver.mulkler.forEach(function (pos) {
+      var k = K[pos]; if (k.tip !== "sehir") return;
+      var grup = grupKareler(k.grupKey);
+      if (grup.every(function (g) { return g.pos === pos || g.sahip === bot.id; })) bonus += takasDeger(grup.map(function (g) { return g.pos; })) * 0.8;
+    });
+    teklif.al.mulkler.forEach(function (pos) {
+      var k = K[pos]; if (k.tip === "sehir" && grupTamMi(k.grupKey, bot.id)) ceza += takasDeger(grupKareler(k.grupKey).map(function (g) { return g.pos; })) * 0.8;
+    });
+    return (alinan + bonus) - (verilen + ceza) >= 0;
+  }
+  function botTakasDene(o, devam) {
+    var hedef = null;
+    var anahtarlar = Object.keys(V.gruplar);
+    for (var i = 0; i < anahtarlar.length; i++) {
+      var grup = grupKareler(anahtarlar[i]); if (!grup.length) continue;
+      var benim = grup.filter(function (g) { return g.sahip === o.id; }).length;
+      if (benim === grup.length - 1) {
+        var eksik = null; grup.forEach(function (g) { if (g.sahip !== o.id) eksik = g; });
+        if (eksik && eksik.sahip != null && !eksik.ipotekli && eksik.imar === 0) {
+          var fiyat = Math.round(eksik.fiyat * 1.4);
+          if (o.para - fiyat >= 1500) { hedef = { X: eksik, T: sahipOyuncu(eksik.sahip), fiyat: fiyat }; break; }
+        }
+      }
+    }
+    if (!hedef) return false;
+    var teklif = { verenId: o.id, alanId: hedef.T.id, ver: { mulkler: [], akce: hedef.fiyat, ferman: 0 }, al: { mulkler: [hedef.X.pos], akce: 0, ferman: 0 } };
+    if (hedef.T.bot) {
+      if (takasDegerlendir(teklif, hedef.T)) { takasUygula(teklif); logla("🤝 " + o.ad + ", " + hedef.T.ad + " ile takas yaptı: " + hedef.X.ad + " ↔ " + fmt(hedef.fiyat), "iyi"); }
+      else logla("🤝 " + hedef.T.ad + ", " + o.ad + "'in " + hedef.X.ad + " teklifini reddetti.", "");
+      return false;
+    }
+    logla("🤝 " + o.ad + " sana " + hedef.X.ad + " için " + fmt(hedef.fiyat) + " teklif ediyor!", "vurgu");
+    takasOnayModal(teklif, devam);
+    return true;
+  }
+
+  // ---------- modallar ----------
+  function modalAc(html, genis) { var ov = $("#modal"); var resimli = html.indexOf("m-gorsel") >= 0 ? " resimli" : ""; ov.innerHTML = '<div class="modal-kutu' + (genis ? " genis" : "") + resimli + '">' + html + '</div>'; ov.style.display = "flex"; var ilkBtn = ov.querySelector("button"); if (ilkBtn) bekle(function () { ilkBtn.focus(); }, 60); }
+  function modalKapat() { $("#modal").style.display = "none"; $("#modal").innerHTML = ""; }
+
+  function kiraTablosu(k) {
+    var r = "";
+    for (var i = 0; i < 5; i++) r += '<div class="bina-satir"><span>' + BINA_IKON[i] + ' ' + V.imarKademeleri[i].ad + '</span><b>' + k.kira[i + 1] + '</b></div>';
+    return '<div class="bina-satir"><span>Boş arsa</span><b>' + k.kira[0] + '</b></div>' + r;
+  }
+  function kareBilgiModal(pos, dustu) {
+    var k = K[pos], html = "", o = aktif();
+    if (k.tip === "sehir") {
+      html = gorselImg(k.ad) + '<div class="m-serit" style="background:' + k.grup.renk + '"></div><div class="m-bolge">' + k.grup.ad + '</div><h2>' + k.ad + '</h2><div class="m-tarih">💡 ' + (k.tarih || "") + '</div><p class="m-bilgi">' + (k.bilgi || "") + '</p>' +
+        '<div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + ' · Çalışma kademesi: ' + fmt(k.imarBedeli) + '<br><div style="margin-top:6px"><b>Uğrama puanı:</b>' + kiraTablosu(k) + '</div></div>';
+    } else if (k.tip === "liman") {
+      html = '<div class="m-ikon">📖</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Uğrama puanı (öğrenilen sûre sayısına göre): ' + k.kira.join(" / ") + '</div>';
+    } else if (k.tip === "utility") {
+      html = '<div class="m-ikon">' + (k.ad.indexOf("Ezân") >= 0 ? "🔊" : "📿") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + k.bilgi + '</p><div class="m-eko"><b>Fiyat:</b> ' + fmt(k.fiyat) + '<br>Uğrama puanı = son Yol Kartı sayısı × ' + k.carpan[0] + ' (tek) / ×' + k.carpan[1] + ' (iki tesis)</div>';
+    } else if (k.tip === "seref") {
+      html = gorselImg(k.ad) + '<div class="m-bolge" style="color:#b7950b">❖ ŞEREF DURAĞI</div><h2>' + k.ad + '</h2><div class="m-tarih">💡 ' + (k.tarih || "") + '</div><p class="m-bilgi">' + (k.bilgi || "") + '</p><div class="m-eko">' + (k.kural || "") + '</div>';
+    } else html = '<div class="m-ikon">' + ({ baslangic: "🌅", esaret: "🤲", kervansaray: "📚", surgun: "⏳", ferman: "🌿", vakca: "💡", vergi: "⏰" }[k.tip] || "") + '</div><h2>' + k.ad + '</h2><p class="m-bilgi">' + (k.aciklama || "") + '</p>' + (k.kural ? '<div class="m-eko">' + k.kural + '</div>' : '');
+    var alt = '<div class="m-btnlar">';
+    if (dustu && (k.tip === "sehir" || k.tip === "liman" || k.tip === "utility") && k.sahip == null) {
+      if (o.para >= k.fiyat) alt += '<button class="akbtn btn-ana" id="m-al">📖 Bu Konuyu Çalış (' + fmt(k.fiyat) + ')</button>';
+      if (!o.bot) alt += '<button class="akbtn" id="m-bilgi">📚 Soruyla İndir (-%25)</button><button class="akbtn btn-pasif" id="m-vazgec">Vazgeç</button>';
+    } else alt += '<button class="akbtn btn-ana" id="m-kapat">Kapat</button>';
+    alt += '</div>'; modalAc(html + alt);
+    var b;
+    if ((b = $("#m-al"))) b.onclick = function () { satinAl(pos, 1); };
+    if ((b = $("#m-bilgi"))) b.onclick = function () { soruModal("fetih"); };
+    if ((b = $("#m-vazgec"))) b.onclick = function () { modalKapat(); render(); mezat(pos, null); };
+    if ((b = $("#m-kapat"))) b.onclick = function () { modalKapat(); render(); };
+  }
+
+  function soruModal(amac) {
+    var s = V.sorular[Math.floor(Math.random() * V.sorular.length)];
+    var siklar = s.secenekler.map(function (sk, i) { return '<button class="sik" data-i="' + i + '">' + String.fromCharCode(65 + i) + ') ' + sk + '</button>'; }).join("");
+    var kt = s.kat || {};
+    var kbadge = kt.gorsel ? '<span class="bs-badge"><img src="img/' + kt.gorsel + '" alt="" onerror="this.parentNode.style.display=\'none\'"></span>' : '';
+    modalAc('<div class="bs-head" style="--bs:' + (kt.renk || "#5b3a8a") + ';background:linear-gradient(135deg,' + (kt.renk || "#5b3a8a") + ',rgba(0,0,0,.3))">' + kbadge +
+      '<span class="bs-tx"><b>' + (kt.ad || "Bilgi Sorusu") + '</b><small>📚 Bilgi · ' + s.seviye + '</small></span></div>' +
+      '<p class="soru-metin">' + s.soru + '</p><div class="siklar">' + siklar + '</div><div id="soru-sonuc"></div>');
+    document.querySelectorAll(".sik").forEach(function (b) {
+      b.onclick = function () {
+        var i = parseInt(b.dataset.i, 10), dogru = (i === s.dogru);
+        document.querySelectorAll(".sik").forEach(function (x) { x.disabled = true; });
+        document.querySelectorAll(".sik")[s.dogru].classList.add("dogru");
+        if (!dogru) b.classList.add("yanlis");
+        $("#soru-sonuc").innerHTML = '<div class="soru-acik ' + (dogru ? "iyi" : "kotu") + '">' + (dogru ? "✓ Doğru! " : "✗ Yanlış. ") + s.aciklama + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-devam">Devam</button></div>';
+        $("#m-devam").onclick = function () { soruSonuc(amac, dogru); };
+      };
+    });
+  }
+  function soruSonuc(amac, dogru) {
+    var o = aktif();
+    if (amac === "fetih") { var k = K[o.pos]; if (dogru) { logla("📚✓ " + o.ad + " doğru cevapladı, " + k.ad + " %25 indirimli!", "iyi"); satinAl(o.pos, 0.75); } else { logla("📚✗ Yanlış. " + k.ad + " tam fiyattan alınabilir.", "kotu"); modalKapat(); render(); } }
+    else if (amac === "esaret") { if (dogru) { o.esaret = false; logla("📚✓ " + o.ad + " soruyla tefekkürden çıktı!", "iyi"); } else { o.esaretTur++; logla("📚✗ Yanlış, tefekkür sürüyor.", "kotu"); } modalKapat(); render(); }
+  }
+
+  function imarModal() {
+    var o = aktif();
+    var sh = K.filter(function (k) { return k.tip === "sehir" && k.sahip === o.id && grupTamMi(k.grupKey, o.id); });
+    var liste = sh.map(function (k) {
+      var ust = k.imar >= 5, sonraki = ust ? "—" : (BINA_IKON[k.imar] + " " + V.imarKademeleri[k.imar].ad), ok = !ust && imarDengeli(k, 1) && o.para >= k.imarBedeli;
+      var simdi = k.imar > 0 ? BINA_IKON[k.imar - 1] + " " + V.imarKademeleri[k.imar - 1].ad : "boş arsa";
+      return '<div class="imar-row"><span><b>' + k.ad + '</b> · ' + simdi + '</span>' + (ust ? '<span class="bitti-rozet">Muallim ★</span>' : '<button class="akbtn imbtn" data-pos="' + k.pos + '"' + (ok ? "" : " disabled") + '>+ ' + sonraki + ' (' + fmt(k.imarBedeli) + ')</button>') + '</div>';
+    }).join("") || "<p>Pekiştirmek için bir bölümün tüm konularını öğrenmelisin.</p>";
+    modalAc('<div class="kart-ust" style="background:#6b4d1f">⭐ USTALIK</div><p class="m-bilgi">Bir bölümün tüm konuları sendeyse ustalığını derinleştir: Dinledim👂→Öğrendim📖→Ezberledim🧠→Uyguladım🤲→Öğrettim🎓.</p><div class="imar-liste">' + liste + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    document.querySelectorAll(".imbtn").forEach(function (b) { b.onclick = function () { imarYap(parseInt(b.dataset.pos, 10)); }; });
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  // ---------- varlık yönetimi (yapı sat / ipotek) ----------
+  function imarSatBir(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.tip !== "sehir" || k.imar <= 0) return;
+    var maxi = Math.max.apply(null, grupKareler(k.grupKey).map(function (g) { return g.imar; }));
+    if (k.imar < maxi) { logla("Önce daha yüksek rütbeli konudan sat (dengeli).", "kotu"); return; }
+    var geri = Math.round(k.imarBedeli / 2); k.imar--; o.para += geri;
+    logla("🏚️ " + o.ad + ", " + k.ad + "'deki yapıyı sattı: +" + fmt(geri), ""); render();
+  }
+  function ipotekEt(pos) {
+    var o = aktif(), k = K[pos];
+    if (k.ipotekli) return;
+    if (k.tip === "sehir" && grupKareler(k.grupKey).some(function (g) { return g.imar > 0; })) { logla("Önce bu bölgedeki yapıları sat.", "kotu"); return; }
+    k.ipotekli = true; o.para += k.ipotek; logla("🏦 " + k.ad + " ipotek edildi: +" + fmt(k.ipotek), ""); render();
+  }
+  function ipotekKaldir(pos) {
+    var o = aktif(), k = K[pos], bedel = Math.round(k.ipotek * 1.1);
+    if (o.para < bedel) { logla("İpoteği kaldıracak puan yok.", "kotu"); return; }
+    o.para -= bedel; k.ipotekli = false; logla("🏦 " + k.ad + " ipoteği kaldırıldı: -" + fmt(bedel), ""); render();
+  }
+  function nakdeCevrilebilir(o) {
+    var t = 0;
+    K.forEach(function (k) {
+      if (k.sahip !== o.id) return;
+      if (k.tip === "sehir") t += k.imar * Math.round(k.imarBedeli / 2);
+      if (!k.ipotekli) t += k.ipotek;
+    });
+    return t;
+  }
+  function varlikSatir(o) {
+    if (!o.mulkler.length) return "<p>Mülkün yok — satacak bir şeyin yok.</p>";
+    return o.mulkler.map(function (pos) {
+      var k = K[pos];
+      var serit = '<span class="msw" style="background:' + (k.tip === "sehir" ? k.grup.renk : "#888") + '"></span>';
+      var btn;
+      if (k.tip === "sehir" && k.imar > 0) btn = '<button class="akbtn imbtn" data-act="sat" data-pos="' + pos + '">🏚️ Yapı Sat (+' + fmt(Math.round(k.imarBedeli / 2)) + ')</button>';
+      else if (!k.ipotekli) btn = '<button class="akbtn imbtn" data-act="ipotek" data-pos="' + pos + '">🏦 İpotek (+' + fmt(k.ipotek) + ')</button>';
+      else btn = '<button class="akbtn imbtn" data-act="kaldir" data-pos="' + pos + '">İpotek Kaldır (' + fmt(Math.round(k.ipotek * 1.1)) + ')</button>';
+      var durum = k.ipotekli ? ' <span class="ipt">ipotekli</span>' : (k.tip === "sehir" && k.imar ? ' · ' + BINA_IKON[k.imar - 1] : '');
+      return '<div class="imar-row">' + serit + '<span><b>' + k.ad + '</b>' + durum + '</span>' + btn + '</div>';
+    }).join("");
+  }
+  function varlikBind(yenidenCiz) {
+    document.querySelectorAll(".imbtn").forEach(function (b) {
+      b.onclick = function () {
+        var pos = parseInt(b.dataset.pos, 10), act = b.dataset.act;
+        if (act === "sat") imarSatBir(pos); else if (act === "ipotek") ipotekEt(pos); else if (act === "kaldir") ipotekKaldir(pos);
+        yenidenCiz();
+      };
+    });
+  }
+  function mulklerModal() {
+    var o = aktif();
+    modalAc('<div class="kart-ust" style="background:#34495e">🏛️ MÜLKLERİM · ' + fmt(o.para) + '</div><p class="m-bilgi" style="font-size:13.5px">Rütbe satabilir (yarı fiyat) veya konu ipotek edebilirsin. İpotek için önce sektörün rütbeleri satılır.</p><div class="imar-liste">' + varlikSatir(o) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    varlikBind(mulklerModal);
+    $("#m-kapat").onclick = function () { modalKapat(); render(); };
+  }
+  function borcModal(o, miktar, alacakli) {
+    function ciz() {
+      var yeter = o.para >= miktar;
+      modalAc('<div class="kart-ust" style="background:#7d2b2b">⚠️ BORÇ · ' + fmt(miktar) + '</div>' +
+        '<p class="m-bilgi">Ödemen gereken <b>' + fmt(miktar) + '</b>, nakdin <b style="color:' + (yeter ? "#1c6b41" : "#9a3b3b") + '">' + fmt(o.para) + '</b>. Rütbe satıp konularını ipotek ederek nakit topla, sonra <b>borcu öde</b>.</p>' +
+        '<div class="imar-liste">' + varlikSatir(o) + '</div>' +
+        '<div class="m-btnlar">' +
+        (yeter ? '<button class="akbtn btn-ana" id="b-ode">💰 Borcu Öde (' + fmt(miktar) + ')</button>' : '<button class="akbtn btn-pasif" disabled>Nakit yetersiz</button>') +
+        '<button class="akbtn" id="b-teslim">🏳️ Teslim Ol</button></div>', true);
+      varlikBind(ciz);
+      var b;
+      if ((b = $("#b-ode"))) b.onclick = function () { o.para -= miktar; if (alacakli) alacakli.para += miktar; logla("💸 " + o.ad + " borcunu ödedi: -" + fmt(miktar), alacakli ? "" : "kotu"); Ses.ode(); modalKapat(); render(); galibiyetKontrol(); };
+      $("#b-teslim").onclick = function () { logla("🏳️ " + o.ad + " borcu ödeyemedi, teslim oldu.", "kotu"); modalKapat(); iflasEt(o, alacakli); render(); };
+    }
+    ciz();
+  }
+  function botLikidite(o, hedef) {
+    var guard = 0;
+    while (o.para < hedef && guard++ < 80) {
+      var yapi = null;
+      K.forEach(function (x) { if (x.tip === "sehir" && x.sahip === o.id && x.imar > 0) { var maxi = Math.max.apply(null, grupKareler(x.grupKey).map(function (g) { return g.imar; })); if (x.imar >= maxi && (!yapi || x.imar > yapi.imar)) yapi = x; } });
+      if (yapi) { o.para += Math.round(yapi.imarBedeli / 2); yapi.imar--; continue; }
+      var m = null;
+      K.forEach(function (x) { if ((x.tip === "sehir" || x.tip === "liman" || x.tip === "utility") && x.sahip === o.id && !x.ipotekli && (x.tip !== "sehir" || x.imar === 0) && !m) m = x; });
+      if (m) { m.ipotekli = true; o.para += m.ipotek; continue; }
+      break;
+    }
+  }
+  function siralamaSatir(sirali, vurgu) {
+    return sirali.map(function (o, i) {
+      var madalya = ["🥇", "🥈", "🥉"][i] || (i + 1) + ".";
+      return '<div class="sira-row' + (vurgu && i === 0 ? " kazanan" : "") + (o.iflas ? " iflas" : "") + '">' +
+        '<span class="sr-rank">' + madalya + '</span>' +
+        '<span class="sr-amblem" style="background:' + o.renk + '">' + (o.amblem || "") + '</span>' +
+        '<span class="sr-ad">' + o.ad + (o.bot ? " 🤖" : "") + (o.iflas ? " · elendi" : "") + '</span>' +
+        '<span class="sr-servet">' + fmt(servet(o)) + '</span></div>';
+    }).join("");
+  }
+  function konfeti() {
+    var c = document.getElementById("konfeti");
+    if (!c) { c = document.createElement("canvas"); c.id = "konfeti"; document.body.appendChild(c); }
+    var ctx = c.getContext("2d"); c.width = window.innerWidth; c.height = window.innerHeight;
+    var renkler = ["#edc75a", "#c9a227", "#f5e2a3", "#1e8449", "#b8332b", "#f6edd6"], P = [], i;
+    for (i = 0; i < 150; i++) P.push({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * .5, w: 6 + Math.random() * 7, h: 8 + Math.random() * 8, r: Math.random() * 6.28, vr: (Math.random() - .5) * .3, vy: 2 + Math.random() * 3.5, vx: (Math.random() - .5) * 2, renk: renkler[Math.floor(Math.random() * renkler.length)] });
+    var bas = null;
+    function ciz(t) {
+      if (bas == null) bas = t;
+      ctx.clearRect(0, 0, c.width, c.height);
+      P.forEach(function (p) { p.x += p.vx; p.y += p.vy; p.r += p.vr; p.vy += .03; ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.renk; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore(); });
+      if (t - bas < 3900) requestAnimationFrame(ciz); else if (c.parentNode) c.parentNode.removeChild(c);
+    }
+    requestAnimationFrame(ciz);
+  }
+  function sonucModal(g) {
+    Ses.kazan(); temizleKayit(); try { konfeti(); } catch (e) {}
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    var kz = g || sirali[0];
+    var enSehir = oyun.oyuncular.slice().sort(function (a, b) { return b.mulkler.length - a.mulkler.length; })[0];
+    var enSeref = oyun.oyuncular.slice().sort(function (a, b) { return (b.seref || 0) - (a.seref || 0); })[0];
+    var ozet = '<div class="ozet-kutu">📜 ' + (oyun.elGecti ? '<b>' + Math.ceil(oyun.elGecti / oyun.oyuncular.length) + '</b> tur · ' : '') +
+      'en çok konu: <b>' + enSehir.ad + '</b> (' + enSehir.mulkler.length + ')' +
+      (enSeref && enSeref.seref ? ' · en çok şeref ziyareti: <b>' + enSeref.ad + '</b> (❖' + enSeref.seref + ')' : '') + '</div>';
+    modalAc('<div class="zafer">' + gorselImg("kapak", "zafer-bg") + '<div class="zafer-perde"></div>' +
+      '<div class="zafer-ic"><div class="zafer-amblem" style="background:' + (kz ? kz.renk : "#888") + '">' + (kz ? (kz.amblem || "🏆") : "🏆") + '</div>' +
+      '<div class="zafer-ust">🏆 MUALLİM OLAN</div><div class="zafer-ad">' + (kz ? kz.ad : "—") + '</div>' +
+      '<div class="zafer-alt">Öğrenip öğreten kazanır — huzura giden yol senindir!</div></div></div>' +
+      '<div class="sira-liste">' + siralamaSatir(sirali, true) + '</div>' + ozet +
+      '<div class="m-btnlar"><button class="akbtn" id="m-kapat">👁️ Tahtayı Gör</button><button class="akbtn btn-ana" onclick="location.reload()">🔄 Yeni Oyun</button></div>', true);
+    $("#m-kapat").onclick = modalKapat;
+  }
+  function skorGoster() {
+    var sirali = oyun.oyuncular.slice().sort(function (a, b) { if (a.iflas !== b.iflas) return a.iflas ? 1 : -1; return servet(b) - servet(a); });
+    modalAc('<div class="kart-ust" style="background:#34495e">📊 PUAN SIRALAMASI</div><p class="m-bilgi" style="font-size:13.5px">Puan = birikim + öğrenilen konular + ustalık kademeleri.</p><div class="sira-liste">' + siralamaSatir(sirali, false) + '</div><div class="m-btnlar"><button class="akbtn btn-ana" id="m-kapat">Kapat</button></div>');
+    $("#m-kapat").onclick = modalKapat;
+  }
+
+  function arayuzKur() {
+    $("#oyuncu-sayisi").addEventListener("change", kurulumEkrani);
+    $("#basla").addEventListener("click", oyunBaslat);
+    $("#skor-btn").addEventListener("click", skorGoster);
+    $("#ses-btn").addEventListener("click", function () { var k = !Ses.kapaliMi(); Ses.sustur(k); this.textContent = k ? "🔇 Ses" : "🔊 Ses"; if (!k) Ses.init(); });
+    $("#d3-btn").addEventListener("click", function () { set3D(!document.getElementById("oyun").classList.contains("d3")); });
+    $("#duraklat-btn").addEventListener("click", duraklatDegis);
+    $("#hiz-btn").addEventListener("click", hizDegis);
+    try { var h = parseFloat(localStorage.getItem("ny_hiz")); if (h) BOT_HIZ = h; } catch (e) {}
+    var hb = $("#hiz-btn"); if (hb) hb.textContent = "⚡ " + (BOT_HIZ === 0.5 ? "Hızlı" : BOT_HIZ === 1.8 ? "Yavaş" : "Normal");
+    $("#kurallar-btn").addEventListener("click", function () { $("#kurallar-modal").style.display = "flex"; });
+    $("#kurallar-kapat").addEventListener("click", function () { $("#kurallar-modal").style.display = "none"; });
+    var dv = $("#devam-btn");
+    if (dv && kayitVarMi()) { dv.classList.remove("gizli"); dv.addEventListener("click", function () { if (!yukle()) { dv.classList.add("gizli"); var h = $("#kayit-hata"); if (h) h.classList.remove("gizli"); } }); }
+    kurulumEkrani();
+    var sr = $("#surum-rozet"); if (sr) sr.textContent = "v1 ✓ hazır";
+  }
+  // DOM hazırsa hemen kur; değilse olayı bekle (bazı ortamlarda DOMContentLoaded zaten geçmiş oluyor)
+  if (document.readyState === "loading") window.addEventListener("DOMContentLoaded", arayuzKur);
+  else arayuzKur();
+  window.BC = { get oyun() { return oyun; }, botTuru: function () { botTuru(); } };
+})();
+
+</script>
+</body>
+</html>
