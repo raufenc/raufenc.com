@@ -154,10 +154,11 @@
     }
 
     .word-value {
-      font-size: clamp(2.8rem, 5.8vw, 5rem);
-      line-height: 1.08;
+      font-size: clamp(1.9rem, 4vw, 3.2rem);
+      line-height: 1.12;
       color: #b91c1c;
       letter-spacing: 0;
+      white-space: nowrap;
     }
 
     .reset-btn {
@@ -361,7 +362,7 @@
 
       <div class="word-panel">
         <div class="word-label">الكلمة</div>
-        <div class="word-value" id="currentWord">خُبْز</div>
+        <div class="word-value" id="currentWord">أَسْتَيْقِظُ</div>
       </div>
 
       <div class="hud-side right">
@@ -392,29 +393,20 @@
   </div>
 
   <script>
+    // 1. Ünite "ماذا فَعَلْتُ اليَوْم؟" — günlük rutin fiilleri (sabah + akşam)
     const VOCABULARY = [
-      { word: "خُبْز", icon: "🍞" },
-      { word: "جُبْن", icon: "🧀" },
-      { word: "أُرُز", icon: "🍚" },
-      { word: "دَجاج", icon: "🍗" },
-      { word: "زَيْتون", icon: "🫒" },
-      { word: "لَحْم", icon: "🥩" },
-      { word: "عَسَل", icon: "🍯" },
-      { word: "سَمَك", icon: "🐟" },
-      { word: "بَيْض", icon: "🥚" },
-      { word: "كُفْتَة", icon: "🧆" },
-      { word: "حَساء", icon: "🍲" },
-      { word: "زُبْدَة", icon: "🧈" },
-      { word: "شاي", icon: "🍵" },
-      { word: "ماء", icon: "💧" },
-      { word: "حَلِيب", icon: "🥛" },
-      { word: "عَصِير", icon: "🧃" },
-      { word: "قَهْوَة", icon: "☕" },
-      { word: "شَوْكَة", icon: "🍴" },
-      { word: "سِكِّين", icon: "🔪" },
-      { word: "مِلْعَقَة", icon: "🥄" },
-      { word: "كَأْس", icon: "🥤" },
-      { word: "طَبَق", icon: "🍽️" }
+      { word: "أَسْتَيْقِظُ", icon: "⏰" },            // uyanırım
+      { word: "أَتَوَضَّأُ", icon: "🚰" },             // abdest alırım
+      { word: "أُصَلّي", icon: "🕌" },                // namaz kılarım
+      { word: "أَتَناوَلُ الفَطور", icon: "🍳" },      // kahvaltı yaparım
+      { word: "أَلْبَسُ مَلابِسي", icon: "👕" },       // giyinirim
+      { word: "أَذْهَبُ إِلى المَدْرَسَة", icon: "🏫" }, // okula giderim
+      { word: "أَرْجِعُ إِلى البَيْت", icon: "🏠" },    // eve dönerim
+      { word: "أُساعِدُ أُمّي", icon: "🤝" },          // anneme yardım ederim
+      { word: "أَدْرُسُ دُروسي", icon: "📚" },         // derslerime çalışırım
+      { word: "أَقْرَأُ كِتابًا", icon: "📖" },         // kitap okurum
+      { word: "أَشْرَبُ الحَليب", icon: "🥛" },        // süt içerim
+      { word: "أَنامُ", icon: "😴" }                  // uyurum
     ];
 
     const canvas = document.getElementById("gameCanvas");
