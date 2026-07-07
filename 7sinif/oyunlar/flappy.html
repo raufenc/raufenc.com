@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>طائر الكلمات</title>
+  <style>
+    @font-face {
+      font-family: "Arakom";
+      src: url("Arakom-Regular.ttf") format("truetype");
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Arakom";
+      src: url("Arakom-Bold.ttf") format("truetype");
+      font-weight: bold;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-top: #0f172a;
+      --bg-mid: #184e57;
+      --bg-bottom: #e8b15e;
+      --ink: #0f172a;
+      --white: #ffffff;
+      --line: rgba(255, 255, 255, 0.16);
+      --glass: rgba(15, 23, 42, 0.24);
+      --glass-strong: rgba(15, 23, 42, 0.5);
+      --gold: #ffd54f;
+      --orange: #f59e0b;
+      --green: #22c55e;
+      --red: #ef4444;
+      --shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: "Arakom", "Segoe UI", Tahoma, sans-serif;
+      background: #08111e;
+      touch-action: manipulation;
+    }
+
+    .game-shell {
+      position: relative;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(255, 213, 79, 0.14), transparent 18%),
+        radial-gradient(circle at 84% 16%, rgba(255, 255, 255, 0.08), transparent 16%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 60%, var(--bg-bottom) 100%);
+    }
+
+    #gameCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
+
+    .hud {
+      position: absolute;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      padding: max(14px, env(safe-area-inset-top)) 18px 0;
+      display: grid;
+      grid-template-columns: 1fr minmax(340px, 620px) 1fr;
+      align-items: start;
+      gap: 14px;
+      pointer-events: none;
+    }
+
+    .hud-side {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      pointer-events: auto;
+    }
+
+    .hud-side.right {
+      justify-content: flex-end;
+    }
+
+    .mini-pill,
+    .reset-btn {
+      min-height: 58px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--glass);
+      color: var(--white);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-pill {
+      min-width: 118px;
+      padding: 10px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2px;
+      line-height: 1.2;
+    }
+
+    .mini-label {
+      font-size: 0.95rem;
+      opacity: 0.82;
+    }
+
+    .mini-value {
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      color: var(--gold);
+    }
+
+    .word-panel {
+      justify-self: center;
+      width: 100%;
+      max-width: 620px;
+      padding: 12px 24px 16px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--ink);
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      pointer-events: none;
+    }
+
+    .word-label {
+      font-size: 1rem;
+      color: #5b6474;
+      margin-bottom: 4px;
+    }
+
+    .word-value {
+      font-size: clamp(2.8rem, 5.8vw, 5rem);
+      line-height: 1.08;
+      color: #b91c1c;
+      letter-spacing: 0;
+    }
+
+    .reset-btn {
+      padding: 0 22px;
+      font-family: inherit;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .level-pill .mini-value {
+      color: #ffffff;
+    }
+
+    .reset-btn:hover,
+    .reset-btn:focus-visible,
+    .start-btn:hover,
+    .start-btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(8, 17, 30, 0.2), rgba(8, 17, 30, 0.55));
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .overlay-card {
+      width: min(560px, 100%);
+      padding: 30px 26px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.96);
+      text-align: center;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .overlay-card h1 {
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      color: #1d4b56;
+      margin-bottom: 8px;
+    }
+
+    .overlay-card p {
+      color: #465569;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.9;
+      margin-bottom: 18px;
+    }
+
+    .level-picker {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .level-btn {
+      min-width: 120px;
+      min-height: 58px;
+      padding: 0 18px;
+      border-radius: 18px;
+      border: 2px solid rgba(15, 23, 42, 0.08);
+      background: #f8fafc;
+      color: #334155;
+      font-family: inherit;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .level-btn:hover,
+    .level-btn:focus-visible {
+      transform: translateY(-2px);
+    }
+
+    .level-btn.active {
+      background: #fff6dd;
+      border-color: rgba(245, 158, 11, 0.44);
+      color: #9a5800;
+      box-shadow: 0 12px 28px rgba(245, 158, 11, 0.14);
+    }
+
+    .start-btn {
+      min-width: 220px;
+      min-height: 70px;
+      border: none;
+      border-radius: 22px;
+      background: linear-gradient(135deg, var(--orange), var(--gold));
+      color: #422d05;
+      font-family: inherit;
+      font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+      cursor: pointer;
+      box-shadow: 0 18px 44px rgba(245, 158, 11, 0.34);
+    }
+
+    .bottom-note {
+      position: absolute;
+      inset: auto 0 max(12px, env(safe-area-inset-bottom)) 0;
+      z-index: 18;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .bottom-note span {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--glass-strong);
+      color: rgba(255, 255, 255, 0.94);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 920px) {
+      .hud {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 10px;
+      }
+
+      .hud-side,
+      .hud-side.right {
+        justify-content: center;
+      }
+
+      .word-panel {
+        max-width: min(92vw, 620px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hud {
+        padding-inline: 10px;
+      }
+
+      .mini-pill {
+        min-width: 98px;
+        min-height: 52px;
+        padding: 8px 12px;
+      }
+
+      .reset-btn {
+        min-height: 52px;
+        padding-inline: 16px;
+      }
+
+      .word-panel {
+        padding: 10px 16px 14px;
+      }
+
+      .word-value {
+        font-size: clamp(2.2rem, 9vw, 3.4rem);
+      }
+
+      .overlay-card {
+        padding: 24px 18px;
+      }
+
+      .level-picker {
+        gap: 8px;
+      }
+
+      .level-btn {
+        min-width: 92px;
+        min-height: 52px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+<script src="shared/icons.js" defer></script>
+</head>
+<body>
+  <div class="game-shell" id="stageWrap">
+    <canvas id="gameCanvas" width="1280" height="720"></canvas>
+
+    <div class="hud">
+      <div class="hud-side">
+        <div class="mini-pill">
+          <div class="mini-label">النقاط</div>
+          <div class="mini-value" id="scoreValue">0</div>
+        </div>
+        <div class="mini-pill">
+          <div class="mini-label">الأفضل</div>
+          <div class="mini-value" id="bestValue">0</div>
+        </div>
+      </div>
+
+      <div class="word-panel">
+        <div class="word-label">الكلمة</div>
+        <div class="word-value" id="currentWord">خُبْز</div>
+      </div>
+
+      <div class="hud-side right">
+        <div class="mini-pill level-pill">
+          <div class="mini-label">المستوى</div>
+          <div class="mini-value" id="levelValue">صعب</div>
+        </div>
+        <button class="reset-btn" id="resetBtn" type="button">إعادة</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+      <div class="overlay-card">
+        <h1 id="overlayTitle">طائر الكلمات</h1>
+        <p id="overlayBody">اختر المستوى ثم المس الشاشة أو اضغط المسافة واتجه إلى الصورة الصحيحة.</p>
+        <div class="level-picker" id="levelPicker">
+          <button class="level-btn active" data-level="hard" type="button">صعب</button>
+          <button class="level-btn" data-level="normal" type="button">عادي</button>
+          <button class="level-btn" data-level="easy" type="button">سهل</button>
+        </div>
+        <button class="start-btn" id="startBtn" type="button">ابدأ</button>
+      </div>
+    </div>
+
+    <div class="bottom-note">
+      <span id="statusLine">المس الشاشة للرفرفة</span>
+    </div>
+  </div>
+
+  <script>
+    const VOCABULARY = [
+      { word: "خُبْز", icon: "🍞" },
+      { word: "جُبْن", icon: "🧀" },
+      { word: "أُرُز", icon: "🍚" },
+      { word: "دَجاج", icon: "🍗" },
+      { word: "زَيْتون", icon: "🫒" },
+      { word: "لَحْم", icon: "🥩" },
+      { word: "عَسَل", icon: "🍯" },
+      { word: "سَمَك", icon: "🐟" },
+      { word: "بَيْض", icon: "🥚" },
+      { word: "كُفْتَة", icon: "🧆" },
+      { word: "حَساء", icon: "🍲" },
+      { word: "زُبْدَة", icon: "🧈" },
+      { word: "شاي", icon: "🍵" },
+      { word: "ماء", icon: "💧" },
+      { word: "حَلِيب", icon: "🥛" },
+      { word: "عَصِير", icon: "🧃" },
+      { word: "قَهْوَة", icon: "☕" },
+      { word: "شَوْكَة", icon: "🍴" },
+      { word: "سِكِّين", icon: "🔪" },
+      { word: "مِلْعَقَة", icon: "🥄" },
+      { word: "كَأْس", icon: "🥤" },
+      { word: "طَبَق", icon: "🍽️" }
+    ];
+
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const stageWrap = document.getElementById("stageWrap");
+    const currentWordEl = document.getElementById("currentWord");
+    const scoreValueEl = document.getElementById("scoreValue");
+    const bestValueEl = document.getElementById("bestValue");
+    const statusLineEl = document.getElementById("statusLine");
+    const levelValueEl = document.getElementById("levelValue");
+    const overlayEl = document.getElementById("overlay");
+    const overlayTitleEl = document.getElementById("overlayTitle");
+    const overlayBodyEl = document.getElementById("overlayBody");
+    const levelPickerEl = document.getElementById("levelPicker");
+    const startBtn = document.getElementById("startBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const state = {
+      best: Number(localStorage.getItem("flappy-word-ar-best") || 0),
+      level: localStorage.getItem("flappy-word-ar-level") || "hard",
+      running: false,
+      ready: false,
+      gameOver: false,
+      feedbackHold: false,
+      lockedWord: null,
+      spokenWord: null,
+      score: 0,
+      drift: 0,
+      lastFrameTime: performance.now(),
+      nextObstacleId: 1,
+      bird: { x: 180, y: canvas.height / 2, velocity: 0, radius: 28 },
+      obstacles: []
+    };
+
+    const LEVELS = {
+      hard: {
+        label: "صعب",
+        gap: () => 370,
+        firstGap: () => 220,
+        decisionWindow: 92,
+        laneTolerance: 78
+      },
+      normal: {
+        label: "عادي",
+        gap: () => Math.max(620, Math.round(canvas.width * 0.58)),
+        firstGap: () => Math.max(320, Math.round(canvas.width * 0.34)),
+        decisionWindow: 108,
+        laneTolerance: 92
+      },
+      easy: {
+        label: "سهل",
+        gap: () => Math.max(980, Math.round(canvas.width * 0.98)),
+        firstGap: () => Math.max(520, Math.round(canvas.width * 0.56)),
+        decisionWindow: 126,
+        laneTolerance: 108
+      }
+    };
+
+    const GATE_RADIUS = 68;
+    const BIRD_HOME_X = 180;
+    const FEEDBACK_DELAY_MS = 1100;
+
+    let audioContext;
+    let finishTimerId = null;
+    let preferredArabicVoice = null;
+    let speechRetryTimerId = null;
+
+    function getAudioContext() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      return audioContext;
+    }
+
+    function primeSoundSystems() {
+      try {
+        const audio = getAudioContext();
+        if (audio.state === "suspended") {
+          audio.resume();
+        }
+      } catch (error) {
+      }
+
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.getVoices();
+      }
+    }
+
+    function playTone(freq, duration, type = "sine", volume = 0.18, delay = 0) {
+      try {
+        const audio = getAudioContext();
+        if (audio.state === "suspended") {
+          audio.resume();
+        }
+        const oscillator = audio.createOscillator();
+        const gain = audio.createGain();
+        oscillator.connect(gain);
+        gain.connect(audio.destination);
+        oscillator.type = type;
+        oscillator.frequency.value = freq;
+        const startTime = audio.currentTime + delay;
+        gain.gain.setValueAtTime(volume, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+        oscillator.start(startTime);
+        oscillator.stop(startTime + duration);
+      } catch (error) {
+      }
+    }
+
+    function soundTap() {
+      playTone(900, 0.04, "sine", 0.1);
+    }
+
+    function soundOk() {
+      playTone(523, 0.08, "sine", 0.18, 0);
+      playTone(659, 0.08, "sine", 0.18, 0.1);
+      playTone(784, 0.14, "sine", 0.18, 0.2);
+    }
+
+    function soundFail() {
+      playTone(180, 0.12, "sawtooth", 0.16, 0);
+      playTone(150, 0.16, "sawtooth", 0.14, 0.1);
+    }
+
+    function stopSpeaking() {
+      if (!("speechSynthesis" in window)) {
+        return;
+      }
+      if (speechRetryTimerId) {
+        clearTimeout(speechRetryTimerId);
+        speechRetryTimerId = null;
+      }
+      window.speechSynthesis.cancel();
+    }
+
+    function getArabicVoice() {
+      if (!("speechSynthesis" in window)) {
+        return null;
+      }
+
+      if (preferredArabicVoice) {
+        return preferredArabicVoice;
+      }
+
+      const voices = window.speechSynthesis.getVoices();
+      preferredArabicVoice = voices.find((voice) => voice.lang && voice.lang.startsWith("ar")) || null;
+      return preferredArabicVoice;
+    }
+
+    function speakWord(word) {
+      if (!word || !("speechSynthesis" in window)) {
+        return;
+      }
+
+      primeSoundSystems();
+      stopSpeaking();
+      const utterance = new SpeechSynthesisUtterance(word);
+      utterance.lang = "ar";
+      utterance.rate = 0.82;
+      utterance.pitch = 1;
+      const voice = getArabicVoice();
+      if (voice) {
+        utterance.voice = voice;
+      }
+
+      const speakNow = () => {
+        try {
+          window.speechSynthesis.speak(utterance);
+        } catch (error) {
+        }
+      };
+
+      speakNow();
+      speechRetryTimerId = setTimeout(() => {
+        speechRetryTimerId = null;
+        if (!window.speechSynthesis.speaking && state.running) {
+          speakNow();
+        }
+      }, 180);
+    }
+
+    function clearFinishTimer() {
+      if (finishTimerId) {
+        clearTimeout(finishTimerId);
+        finishTimerId = null;
+      }
+    }
+
+    function shuffled(list) {
+      const copy = [...list];
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+      }
+      return copy;
+    }
+
+    function pickItem(excludedWords = []) {
+      const available = VOCABULARY.filter((item) => !excludedWords.includes(item.word));
+      const source = available.length ? available : VOCABULARY;
+      return source[Math.floor(Math.random() * source.length)];
+    }
+
+    function laneCenters() {
+      return [canvas.height * 0.28, canvas.height * 0.5, canvas.height * 0.72];
+    }
+
+    function currentObstacle() {
+      return state.obstacles.find((obstacle) => !obstacle.checked) || null;
+    }
+
+    function getLevelConfig() {
+      return LEVELS[state.level] || LEVELS.hard;
+    }
+
+    function parkBirdForFeedback(obstacle) {
+      const lanes = laneCenters();
+      state.bird.velocity = 0;
+      state.bird.x = Math.max(78, obstacle.x - 18);
+      state.bird.y = lanes[obstacle.correctIndex];
+      obstacle.flash = 1;
+    }
+
+    function createObstacle(x) {
+      const recentWords = state.obstacles.slice(-2).map((obstacle) => obstacle.target.word);
+      const target = pickItem(recentWords);
+      const distractors = shuffled(VOCABULARY.filter((item) => item.word !== target.word)).slice(0, 2);
+      const choices = shuffled([target, ...distractors]);
+
+      return {
+        id: state.nextObstacleId++,
+        x,
+        target,
+        choices,
+        correctIndex: choices.findIndex((item) => item.word === target.word),
+        checked: false,
+        flash: 0,
+        enteredZone: false,
+        laneVotes: [0, 0, 0],
+        laneBestDistances: [Infinity, Infinity, Infinity],
+        bestLane: null,
+        bestLaneDistance: Infinity
+      };
+    }
+
+    function fillQueue() {
+      const config = getLevelConfig();
+      let nextX = state.obstacles.length
+        ? state.obstacles[state.obstacles.length - 1].x + config.gap()
+        : canvas.width + config.firstGap();
+
+      while (state.obstacles.length < 3) {
+        state.obstacles.push(createObstacle(nextX));
+        nextX += config.gap();
+      }
+    }
+
+    function updateHud() {
+      const activeObstacle = currentObstacle();
+      const levelConfig = getLevelConfig();
+      const displayWord = state.gameOver && state.lockedWord
+        ? state.lockedWord
+        : activeObstacle
+          ? activeObstacle.target.word
+          : "—";
+      currentWordEl.textContent = displayWord;
+      scoreValueEl.textContent = String(state.score);
+      bestValueEl.textContent = String(state.best);
+      levelValueEl.textContent = levelConfig.label;
+      statusLineEl.textContent = state.running
+        ? "المس الشاشة للرفرفة"
+        : state.feedbackHold
+          ? "انظر إلى الصحيح"
+          : state.gameOver
+            ? "اضغط ابدأ لجولة جديدة"
+            : "المس الشاشة للبدء";
+
+      if (state.running && activeObstacle && state.spokenWord !== displayWord) {
+        state.spokenWord = displayWord;
+        speakWord(displayWord);
+      }
+    }
+
+    function updateLevelButtons() {
+      levelPickerEl.querySelectorAll(".level-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.level === state.level);
+      });
+    }
+
+    function setLevel(level) {
+      if (!LEVELS[level]) {
+        return;
+      }
+
+      state.level = level;
+      localStorage.setItem("flappy-word-ar-level", level);
+      updateLevelButtons();
+      resetRound(
+        "طائر الكلمات",
+        "اختر المستوى ثم المس الشاشة أو اضغط المسافة واتجه إلى الصورة الصحيحة.",
+        "ابدأ"
+      );
+    }
+
+    function showOverlay(title, body, buttonText = "ابدأ") {
+      overlayTitleEl.textContent = title;
+      overlayBodyEl.textContent = body;
+      startBtn.textContent = buttonText;
+      updateLevelButtons();
+      overlayEl.classList.remove("hidden");
+    }
+
+    function hideOverlay() {
+      overlayEl.classList.add("hidden");
+    }
+
+    function resetRound(
+      title = "طائر الكلمات",
+      body = "اختر المستوى ثم المس الشاشة أو اضغط المسافة واتجه إلى الصورة الصحيحة.",
+      buttonText = "ابدأ"
+    ) {
+      clearFinishTimer();
+      stopSpeaking();
+      state.running = false;
+      state.ready = false;
+      state.gameOver = false;
+      state.feedbackHold = false;
+      state.lockedWord = null;
+      state.spokenWord = null;
+      state.score = 0;
+      state.drift = 0;
+      state.nextObstacleId = 1;
+      state.bird.x = BIRD_HOME_X;
+      state.bird.y = canvas.height / 2;
+      state.bird.velocity = 0;
+      state.obstacles = [];
+      fillQueue();
+      updateHud();
+      showOverlay(title, body, buttonText);
+    }
+
+    function startRound() {
+      primeSoundSystems();
+      clearFinishTimer();
+      if (!state.ready || state.gameOver) {
+        state.score = 0;
+        state.gameOver = false;
+        state.feedbackHold = false;
+        state.lockedWord = null;
+        state.spokenWord = null;
+        state.bird.x = BIRD_HOME_X;
+        state.bird.y = canvas.height / 2;
+        state.bird.velocity = 0;
+        state.obstacles = [];
+        fillQueue();
+      }
+
+      state.running = true;
+      state.ready = true;
+      hideOverlay();
+      updateHud();
+    }
+
+    function finishRound(reason, word = null, delayMs = 0) {
+      clearFinishTimer();
+      stopSpeaking();
+      state.running = false;
+      state.gameOver = true;
+      state.feedbackHold = delayMs > 0;
+      state.lockedWord = word;
+
+      if (state.score > state.best) {
+        state.best = state.score;
+        localStorage.setItem("flappy-word-ar-best", String(state.best));
+      }
+
+      updateHud();
+      if (delayMs > 0) {
+        hideOverlay();
+        finishTimerId = setTimeout(() => {
+          state.feedbackHold = false;
+          showOverlay("انتهت الجولة", `النتيجة: ${state.score} — ${reason}`, "ابدأ من جديد");
+        }, delayMs);
+        return;
+      }
+
+      showOverlay("انتهت الجولة", `النتيجة: ${state.score} — ${reason}`, "ابدأ من جديد");
+    }
+
+    function flap() {
+      if (state.feedbackHold) {
+        return;
+      }
+
+      primeSoundSystems();
+
+      if (!state.ready || state.gameOver) {
+        startRound();
+      }
+
+      if (!state.running) {
+        return;
+      }
+
+      soundTap();
+      state.bird.velocity = -8.6;
+    }
+
+    function resolveObstacle(obstacle, laneIndex = null, laneDistance = null) {
+      const lanes = laneCenters();
+      const obstacleWord = obstacle.target.word;
+      obstacle.checked = true;
+
+      let finalLaneIndex = laneIndex;
+      let finalLaneDistance = laneDistance;
+
+      if (finalLaneIndex === null || finalLaneDistance === null) {
+        finalLaneDistance = Infinity;
+        finalLaneIndex = null;
+        lanes.forEach((center, index) => {
+          const distance = Math.abs(state.bird.y - center);
+          if (distance < finalLaneDistance) {
+            finalLaneDistance = distance;
+            finalLaneIndex = index;
+          }
+        });
+      }
+
+      if (finalLaneIndex === null || finalLaneDistance > getLevelConfig().laneTolerance) {
+        parkBirdForFeedback(obstacle);
+        soundFail();
+        finishRound("لم تدخل أي بوابة", obstacleWord, FEEDBACK_DELAY_MS);
+        return;
+      }
+
+      if (finalLaneIndex !== obstacle.correctIndex) {
+        parkBirdForFeedback(obstacle);
+        soundFail();
+        finishRound("الصورة ليست للكلمة", obstacleWord, FEEDBACK_DELAY_MS);
+        return;
+      }
+
+      obstacle.flash = 1;
+      state.score += 1;
+      if (state.score > state.best) {
+        state.best = state.score;
+        localStorage.setItem("flappy-word-ar-best", String(state.best));
+      }
+      soundOk();
+      updateHud();
+    }
+
+    function trackObstacleDecision(obstacle) {
+      const lanes = laneCenters();
+      const config = getLevelConfig();
+      const horizontalDistance = Math.abs(obstacle.x - state.bird.x);
+
+      if (horizontalDistance <= config.decisionWindow) {
+        obstacle.enteredZone = true;
+
+        let nearestLane = 0;
+        let nearestDistance = Infinity;
+        lanes.forEach((center, index) => {
+          const distance = Math.abs(state.bird.y - center);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestLane = index;
+          }
+        });
+
+        obstacle.laneVotes[nearestLane] += 1;
+        obstacle.laneBestDistances[nearestLane] = Math.min(
+          obstacle.laneBestDistances[nearestLane],
+          nearestDistance
+        );
+        if (nearestDistance < obstacle.bestLaneDistance) {
+          obstacle.bestLaneDistance = nearestDistance;
+          obstacle.bestLane = nearestLane;
+        }
+      }
+
+      if (obstacle.enteredZone && obstacle.x < state.bird.x - config.decisionWindow) {
+        let votedLane = null;
+        let maxVotes = 0;
+        obstacle.laneVotes.forEach((votes, index) => {
+          if (votes > maxVotes) {
+            maxVotes = votes;
+            votedLane = index;
+          }
+        });
+
+        const laneToUse = votedLane !== null ? votedLane : obstacle.bestLane;
+        const distanceToUse = votedLane !== null
+          ? obstacle.laneBestDistances[votedLane]
+          : obstacle.bestLaneDistance;
+
+        resolveObstacle(obstacle, laneToUse, distanceToUse);
+      }
+    }
+
+    function drawCircle(x, y, radius) {
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.closePath();
+    }
+
+    function drawBackground() {
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, "#0f172a");
+      gradient.addColorStop(0.6, "#184e57");
+      gradient.addColorStop(1, "#e8b15e");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "rgba(255, 244, 214, 0.18)";
+      ctx.beginPath();
+      ctx.arc(canvas.width * 0.82, 90, 58, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(255,255,255,0.1)";
+      for (let index = 0; index < 6; index += 1) {
+        const offset = ((state.drift * 0.65) + index * 220) % (canvas.width + 260);
+        drawCircle(canvas.width - offset, 70 + index * 60, 24);
+        ctx.fill();
+        drawCircle(canvas.width - offset + 28, 70 + index * 60, 20);
+        ctx.fill();
+        drawCircle(canvas.width - offset - 24, 74 + index * 60, 16);
+        ctx.fill();
+      }
+
+      laneCenters().forEach((center) => {
+        ctx.strokeStyle = "rgba(255,255,255,0.2)";
+        ctx.lineWidth = 3;
+        ctx.setLineDash([18, 16]);
+        ctx.beginPath();
+        ctx.moveTo(0, center);
+        ctx.lineTo(canvas.width, center);
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = "rgba(9, 18, 32, 0.14)";
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height - 90);
+      ctx.quadraticCurveTo(canvas.width * 0.24, canvas.height - 150, canvas.width * 0.5, canvas.height - 92);
+      ctx.quadraticCurveTo(canvas.width * 0.76, canvas.height - 38, canvas.width, canvas.height - 88);
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.lineTo(0, canvas.height);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function drawBird() {
+      const angle = Math.max(-0.5, Math.min(0.72, state.bird.velocity * 0.05));
+      ctx.save();
+      ctx.translate(state.bird.x, state.bird.y);
+      ctx.rotate(angle);
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0.16)";
+      ctx.beginPath();
+      ctx.ellipse(6, 30, 34, 12, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const birdGradient = ctx.createLinearGradient(-30, -30, 28, 28);
+      birdGradient.addColorStop(0, "#ffe4a3");
+      birdGradient.addColorStop(1, "#f59e0b");
+      ctx.fillStyle = birdGradient;
+      drawCircle(0, 0, state.bird.radius);
+      ctx.fill();
+
+      ctx.fillStyle = "#f97316";
+      ctx.beginPath();
+      ctx.moveTo(18, -3);
+      ctx.lineTo(36, 6);
+      ctx.lineTo(18, 14);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#fff";
+      drawCircle(8, -8, 7);
+      ctx.fill();
+
+      ctx.fillStyle = "#111827";
+      drawCircle(10, -8, 2.7);
+      ctx.fill();
+
+      ctx.fillStyle = "#7c2d12";
+      ctx.font = '700 30px "Arakom", serif';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("ط", -2, 4);
+      ctx.restore();
+    }
+
+    function drawCheeseIcon(x, y) {
+      ctx.save();
+      ctx.translate(x, y);
+
+      ctx.fillStyle = "#facc15";
+      ctx.beginPath();
+      ctx.moveTo(-32, 24);
+      ctx.lineTo(28, 8);
+      ctx.lineTo(28, -18);
+      ctx.lineTo(-32, -2);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#fde68a";
+      ctx.beginPath();
+      ctx.moveTo(-32, -2);
+      ctx.lineTo(28, -18);
+      ctx.lineTo(8, -34);
+      ctx.lineTo(-52, -18);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#eab308";
+      ctx.beginPath();
+      ctx.moveTo(-32, 24);
+      ctx.lineTo(-32, -2);
+      ctx.lineTo(-52, -18);
+      ctx.lineTo(-52, 8);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "rgba(146, 64, 14, 0.22)";
+      [[-24, -6, 7], [-6, 10, 6], [2, -12, 5], [-40, 8, 5], [-16, -20, 4]].forEach(([hx, hy, r]) => {
+        ctx.beginPath();
+        ctx.arc(hx, hy, r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.restore();
+    }
+
+    function drawChoiceIcon(item, x, y) {
+      if (item.word === "جُبْن") {
+        drawCheeseIcon(x + 8, y + 4);
+        return;
+      }
+
+      ctx.font = '66px "Apple Color Emoji", "Segoe UI Emoji", sans-serif';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#111827";
+      ctx.fillText(item.icon, x, y + 2);
+    }
+
+    function drawObstacle(obstacle) {
+      const lanes = laneCenters();
+      const radius = GATE_RADIUS;
+
+      lanes.forEach((center, index) => {
+        ctx.save();
+
+        if (obstacle.flash && index === obstacle.correctIndex) {
+          ctx.shadowColor = "rgba(34, 197, 94, 0.8)";
+          ctx.shadowBlur = 32;
+        }
+
+        ctx.fillStyle = "rgba(255,255,255,0.96)";
+        drawCircle(obstacle.x, center, radius);
+        ctx.fill();
+
+        ctx.lineWidth = 8;
+        ctx.strokeStyle = obstacle.flash && index === obstacle.correctIndex
+          ? "rgba(34,197,94,0.95)"
+          : "rgba(255,255,255,0.72)";
+        ctx.stroke();
+
+        ctx.fillStyle = "rgba(245, 158, 11, 0.12)";
+        drawCircle(obstacle.x, center, radius - 20);
+        ctx.fill();
+
+        drawChoiceIcon(obstacle.choices[index], obstacle.x, center);
+
+        if (obstacle.flash && index === obstacle.correctIndex) {
+          ctx.fillStyle = "rgba(34, 197, 94, 0.96)";
+          ctx.beginPath();
+          ctx.roundRect(obstacle.x - 42, center - radius - 34, 84, 28, 14);
+          ctx.fill();
+          ctx.fillStyle = "#ffffff";
+          ctx.font = '700 18px "Arakom", serif';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("الصحيح", obstacle.x, center - radius - 20);
+        }
+
+        ctx.restore();
+      });
+    }
+
+    function animate(deltaFactor) {
+      state.drift += deltaFactor;
+
+      if (!state.running) {
+        if (state.gameOver) {
+          return;
+        }
+        state.bird.x = BIRD_HOME_X;
+        state.bird.y = canvas.height / 2 + Math.sin(state.drift * 0.04) * 10;
+        return;
+      }
+
+      state.bird.velocity += 0.48 * deltaFactor;
+      state.bird.velocity = Math.min(state.bird.velocity, 11);
+      state.bird.y += state.bird.velocity * deltaFactor;
+
+      if (state.bird.y < 60 || state.bird.y > canvas.height - 60) {
+        const obstacleForFeedback = currentObstacle();
+        if (obstacleForFeedback) {
+          parkBirdForFeedback(obstacleForFeedback);
+        }
+        soundFail();
+        finishRound(
+          "اصطدمت بالحافة",
+          obstacleForFeedback ? obstacleForFeedback.target.word : null,
+          FEEDBACK_DELAY_MS
+        );
+        return;
+      }
+
+      const speed = 4.6 + Math.min(state.score * 0.1, 2.6);
+
+      state.obstacles.forEach((obstacle) => {
+        obstacle.x -= speed * deltaFactor;
+        obstacle.flash = Math.max(0, obstacle.flash - 0.06 * deltaFactor);
+
+        if (!obstacle.checked) {
+          trackObstacleDecision(obstacle);
+        }
+      });
+
+      state.obstacles = state.obstacles.filter((obstacle) => obstacle.x > -180);
+      fillQueue();
+      updateHud();
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawBackground();
+      state.obstacles.forEach(drawObstacle);
+      drawBird();
+    }
+
+    function tick(now) {
+      const delta = Math.min(34, now - state.lastFrameTime);
+      state.lastFrameTime = now;
+      animate(delta / 16.6667);
+      render();
+      requestAnimationFrame(tick);
+    }
+
+    startBtn.addEventListener("click", startRound);
+    levelPickerEl.querySelectorAll(".level-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLevel(button.dataset.level);
+      });
+    });
+    resetBtn.addEventListener("click", () => {
+      resetRound("طائر الكلمات", "اختر المستوى ثم ابدأ جولة جديدة.", "ابدأ");
+    });
+
+    stageWrap.addEventListener("pointerdown", (event) => {
+      if (event.target.closest("button")) {
+        return;
+      }
+      primeSoundSystems();
+      flap();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.code === "Space" || event.code === "ArrowUp") {
+        event.preventDefault();
+        primeSoundSystems();
+        flap();
+      }
+    });
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        preferredArabicVoice = null;
+        getArabicVoice();
+        const activeObstacle = currentObstacle();
+        if (state.running && activeObstacle) {
+          state.spokenWord = null;
+          updateHud();
+        }
+      };
+      getArabicVoice();
+    }
+
+    updateLevelButtons();
+    updateHud();
+    resetRound();
+    requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
