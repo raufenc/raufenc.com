@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hızlı Hafız — Basılabilir Deste</title>
+<style>
+/* ==================================================================
+   HIZLI HAFIZ · BASILABİLİR DESTE
+   Tek dosya. icerik/katalog.json fetch → DOM JS ile kurulur.
+   Cmd+P → "PDF olarak kaydet". @media print ile A4'e optimize.
+   Baskı, sabit sayıda "tabaka"ya (.sheet) bölünür → kesim ızgarası nettir.
+   ------------------------------------------------------------------
+   A4 = 210×297 mm · @page margin 10mm → basılabilir alan 190×277 mm
+   Bölüm 1 : yer kartı 110mm kare · 2 / sayfa · 8 kart → 4 tabaka
+   Bölüm 2 : ipucu kartı 90×50 mm · 2×5=10 / sayfa · 72 kart → 8 tabaka
+   Bölüm 3 : cevap anahtarı tablosu · tekrarlı başlık · ~2 sayfa
+   ================================================================== */
+
+:root{
+  --krem:#f4ead2; --krem2:#efe0c0; --parsomen:#fbf5e6;
+  --lacivert:#16233f; --lacivert2:#24365e;
+  --altin:#c8a24b; --altin2:#e6bf5e; --altin-soft:#e8d6a6;
+  --kirmizi:#b8452f; --metin:#2c2418; --metin2:#5c4d33; --cizgi:#d8c69a;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+
+  /* ---- BASKI ÖLÇÜLERİ (mm) — tek yerden ayarlanır ---- */
+  --yer-kart:104mm;   /* yer kartı kenarı (kare). 4/sayfa istersen: 88mm + Bölüm1 grid 2 sütun */
+  --ipucu-w:90mm;     /* ipucu kartı genişliği (kartvizit ~85–90mm) */
+  --ipucu-h:48mm;     /* ipucu kartı yüksekliği */
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html,body{
+  font-family:var(--serif); color:var(--metin); line-height:1.4;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;   /* arka planlar/altın bassın */
+}
+
+/* ------------------- EKRAN GÖRÜNÜMÜ ------------------- */
+@media screen{
+  body{ background:radial-gradient(120% 90% at 50% -8%, #fbf4e2 0%, var(--krem) 45%, var(--krem2) 100%); padding-bottom:60px; }
+  .sheets{ padding:18px 12px; }
+  .sheet{ background:#fffdf8; box-shadow:0 6px 22px rgba(22,35,63,.18); border-radius:4px; margin:0 auto 22px; }
+  .arac{ position:sticky; top:0; z-index:50; }
+}
+.sheets-scroll{ overflow-x:auto; }
+.sheet{ width:190mm; max-width:100%; position:relative; }
+.sheet-inner{ padding:10mm 0; }   /* ekranda @page kenar boşluğunu taklit eder */
+
+/* ------------------- ARAÇ ÇUBUĞU (baskıda gizli) ------------------- */
+.arac{ background:linear-gradient(180deg,var(--lacivert2),var(--lacivert)); color:#fdf3da;
+  padding:12px 18px; box-shadow:0 3px 14px rgba(22,35,63,.35); }
+.arac-ust{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.arac b.marka{ font-size:18px; color:var(--altin2); letter-spacing:.02em; }
+.arac b.marka small{ display:block; font-size:11px; color:#e9dcc0; font-weight:400; }
+.arac .ipuc{ font-size:12.5px; opacity:.92; flex:1; min-width:220px; line-height:1.5; }
+.arac kbd{ background:#0d1730; color:#ffe9b0; border-radius:5px; padding:1px 7px; font-family:var(--serif); font-weight:700; }
+.yaz-btn{ border:none; cursor:pointer; font-family:var(--serif); font-size:16px; font-weight:700;
+  padding:11px 20px; border-radius:12px; color:var(--lacivert);
+  background:linear-gradient(180deg,var(--altin2),var(--altin));
+  box-shadow:0 3px 0 #9a7a2f,0 5px 12px rgba(0,0,0,.25); transition:transform .08s,box-shadow .08s; }
+.yaz-btn:active{ transform:translateY(2px); box-shadow:0 1px 0 #9a7a2f; }
+.yaz-btn:disabled{ opacity:.5; cursor:progress; filter:grayscale(.4); }
+#durum{ font-size:12.5px; margin-top:9px; color:#ffe9b0; line-height:1.5; }
+#durum.hazir{ color:#cfe9c8; } #durum.hata{ color:#ffc9bd; font-weight:600; } #durum b{ color:#fff; }
+
+/* ------------------- ORTAK BAŞLIKLAR ------------------- */
+.kapak{ text-align:center; margin:0 8mm 3mm; }
+.kapak h1{ font-size:17pt; color:var(--lacivert); margin:0; letter-spacing:.05em; }
+.kapak h1 .om{ color:var(--altin); }
+.kapak .rozet{ display:inline-block; background:var(--lacivert); color:var(--altin2);
+  font-size:7.5pt; letter-spacing:.05em; padding:1mm 3.6mm; border-radius:999px; margin-top:1.6mm; }
+
+.bolum-bas{ text-align:center; margin:0 8mm 4mm; padding-bottom:2mm; border-bottom:0.5mm double var(--altin); }
+.bolum-bas .no{ display:inline-block; background:var(--kirmizi); color:#fff4e6; font-size:7.5pt;
+  letter-spacing:.14em; padding:.9mm 3.2mm; border-radius:999px; text-transform:uppercase; font-weight:700; }
+.bolum-bas h2{ font-size:14pt; color:var(--lacivert); margin:1.6mm 0 1mm; letter-spacing:.01em; }
+.bolum-bas p{ color:var(--metin2); font-style:italic; font-size:9pt; margin:0 auto; max-width:155mm; }
+
+/* ------------------- KESİM İŞARETLERİ (crop marks) ------------------- */
+.cm{ display:none; }                 /* ekranda görünmez */
+@media print{
+  .cm{ display:block; position:absolute; width:4mm; height:4mm; pointer-events:none; }
+  .cm::before,.cm::after{ content:""; position:absolute; background:#333; }
+  .cm::before{ width:4mm; height:0.18mm; }
+  .cm::after { width:0.18mm; height:4mm; }
+  .cm-tl{ top:-4.6mm; left:-4.6mm; } .cm-tl::before{ bottom:0; left:0; } .cm-tl::after{ bottom:0; left:0; }
+  .cm-tr{ top:-4.6mm; right:-4.6mm;} .cm-tr::before{ bottom:0; right:0;} .cm-tr::after{ bottom:0; right:0; }
+  .cm-bl{ bottom:-4.6mm; left:-4.6mm;} .cm-bl::before{ top:0; left:0; } .cm-bl::after{ top:0; left:0; }
+  .cm-br{ bottom:-4.6mm; right:-4.6mm;} .cm-br::before{ top:0; right:0; } .cm-br::after{ top:0; right:0; }
+}
+
+/* ================= BÖLÜM 1 · YERE KONACAK KARTLAR ================= */
+.yer-blok{ display:flex; flex-direction:column; align-items:center; gap:7mm; }
+.yer-kart{ break-inside:avoid; page-break-inside:avoid; text-align:center; }
+.yer-kart .etiket{ font-size:9pt; letter-spacing:.22em; color:var(--altin); font-weight:700;
+  text-transform:uppercase; margin-bottom:1.8mm; }
+.yer-kart .cerceve{ position:relative; width:var(--yer-kart); height:var(--yer-kart);
+  margin:0 auto; padding:2.2mm; background:var(--parsomen);
+  border:0.5mm solid var(--altin); box-shadow:inset 0 0 0 0.3mm var(--altin-soft); }
+.yer-kart img{ display:block; width:100%; height:100%; object-fit:contain; }
+
+/* ================= BÖLÜM 2 · İPUCU KARTLARI ================= */
+.ip-blok{ text-align:center; }
+.ipucu-izgara{ display:inline-grid; position:relative;
+  grid-template-columns:repeat(2,var(--ipucu-w)); grid-auto-rows:var(--ipucu-h); gap:0; }
+.ipucu-kart{ position:relative; width:var(--ipucu-w); height:var(--ipucu-h);
+  border:0.3mm solid var(--altin); background:var(--parsomen); overflow:hidden;
+  padding:8.5mm 5mm 4mm; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; break-inside:avoid; }
+.ipucu-kart .ust{ position:absolute; top:2.6mm; left:4.5mm; right:4.5mm;
+  display:flex; align-items:center; justify-content:space-between; }
+.ipucu-kart .marka{ font-size:6.6pt; letter-spacing:.14em; color:var(--kirmizi); text-transform:uppercase; font-weight:700; }
+.ipucu-kart .no{ font-size:7.6pt; font-weight:700; color:var(--lacivert); background:var(--altin-soft);
+  border:0.2mm solid var(--altin); border-radius:999px; min-width:6mm; height:6mm; line-height:5.6mm; padding:0 1mm; }
+.ipucu-kart .ben{ font-size:9pt; line-height:1.32; color:var(--metin); margin:0; max-height:33mm; overflow:hidden; }
+.ipucu-kart .suslu{ color:var(--altin); font-size:8pt; margin-top:1.4mm; letter-spacing:.3em; }
+
+/* ================= BÖLÜM 3 · CEVAP ANAHTARI ================= */
+.ogr-not{ margin:0 8mm 4mm; font-size:8.4pt; color:var(--metin2); font-style:italic;
+  background:#faf3e0; border-left:1mm solid var(--altin); padding:2mm 3mm; }
+.cevap-sar{ margin:0 8mm; }
+table.cevap{ width:100%; border-collapse:collapse; font-size:8.4pt; }
+table.cevap thead{ display:table-header-group; }        /* başlık her sayfada tekrarlar */
+table.cevap th{ background:var(--lacivert); color:var(--altin2); text-align:left; font-weight:700;
+  padding:2.4mm 2mm; letter-spacing:.02em; border:0.2mm solid var(--lacivert); }
+table.cevap td{ padding:1.9mm 2mm; border:0.2mm solid var(--cizgi); vertical-align:top; }
+table.cevap tbody tr{ break-inside:avoid; page-break-inside:avoid; }
+table.cevap tbody tr:nth-child(even){ background:#faf3e0; }
+.c-no{ width:9mm; text-align:center; color:var(--metin2); font-weight:700; }
+.c-ad{ width:32mm; font-weight:700; color:var(--lacivert); }
+.c-kart{ width:20mm; text-align:center; }
+.c-ayet{ width:18mm; text-align:center; font-variant-numeric:tabular-nums; }
+.c-tema{ width:47mm; color:var(--metin2); }
+.c-link{ font-size:7.6pt; color:var(--lacivert2); word-break:break-all; }
+.c-link a{ color:inherit; text-decoration:none; }
+.rozet-k{ display:inline-block; background:var(--altin-soft); border:0.2mm solid var(--altin);
+  border-radius:4px; padding:.2mm 1.5mm; margin:.3mm; font-weight:700; color:var(--lacivert); font-size:7.6pt; }
+.bos{ color:#b9a97f; }
+
+/* ------------------- DURUM / HATA ------------------- */
+.mesaj{ max-width:640px; margin:60px auto; padding:26px 30px; background:#fffdf8; border:0.4mm solid var(--altin);
+  border-radius:12px; color:var(--metin); box-shadow:0 6px 22px rgba(22,35,63,.16); line-height:1.6; }
+.mesaj h3{ margin:0 0 10px; color:var(--kirmizi); }
+.mesaj code{ background:#14213d; color:#ffe9b0; padding:3px 9px; border-radius:6px; }
+
+/* ------------------- KAPAK EK + NASIL OYNANIR ------------------- */
+.kapak-tanit{ max-width:152mm; margin:3.5mm auto 0; font-size:9.5pt; color:var(--metin2); line-height:1.5; text-align:center; }
+.kapak-ic{ max-width:152mm; margin:3.5mm auto 0; font-size:9pt; color:var(--metin); text-align:center; }
+.kapak-ic b{ color:var(--lacivert); }
+.kapak-baski{ max-width:152mm; margin:3.5mm auto 0; font-size:8pt; font-style:italic; color:var(--metin2); text-align:center; }
+.nasil-blok{ margin:6mm 8mm 0; }
+.nasil-blok > h2{ text-align:center; font-size:13pt; color:var(--lacivert); margin:0 0 4mm; }
+.nasil-kutu{ background:var(--parsomen); border:0.3mm solid var(--altin); border-left:1.1mm solid var(--altin); border-radius:2mm; padding:3mm 4.5mm; margin-bottom:3mm; break-inside:avoid; }
+.nasil-kutu h3{ margin:0 0 1.6mm; font-size:10pt; color:var(--kirmizi); }
+.nasil-kutu p, .nasil-kutu li{ font-size:8.8pt; line-height:1.46; color:var(--metin); margin:.6mm 0; }
+.nasil-kutu ol{ margin:1mm 0 0; padding-left:5.5mm; }
+
+/* ================= @PAGE / BASKI ================= */
+@page{ size:A4; margin:10mm; }
+@media print{
+  .no-print{ display:none !important; }
+  html,body{ background:#fff !important; }
+  .sheets{ padding:0; }
+  .sheets-scroll{ overflow:visible; }
+  .sheet{ width:auto; max-width:none; margin:0; border-radius:0; box-shadow:none; background:#fff;
+    break-before:page; }                    /* her tabaka yeni A4 sayfası */
+  .sheets .sheet:first-child{ break-before:auto; }
+  .sheet-inner{ padding:0; }                /* gerçek boşluğu @page margin verir */
+}
+</style>
+</head>
+<body>
+
+<!-- ARAÇ ÇUBUĞU (yalnız ekran) -->
+<div class="arac no-print">
+  <div class="arac-ust">
+    <b class="marka">Hızlı Hafız · Baskı Destesi
+      <small>Yer kartları · İpucu kartları · Cevap anahtarı</small>
+    </b>
+    <span class="ipuc">
+      <kbd>Cmd</kbd>+<kbd>P</kbd> → Hedef: <b>PDF olarak kaydet</b> · Kâğıt <b>A4</b> · Kenar boşluğu <b>Varsayılan</b>.
+      Chrome “Diğer ayarlar”da <b>Arka plan grafikleri</b> açık olsun (altın kenarlıklar bassın).
+    </span>
+    <button id="yazdirBtn" class="yaz-btn" disabled onclick="window.print()">Yazdır / PDF Kaydet</button>
+  </div>
+  <div id="durum">Deste hazırlanıyor…</div>
+</div>
+
+<div class="sheets-scroll">
+  <div class="sheets" id="sheets">
+    <div class="mesaj" id="ilk">Deste hazırlanıyor…</div>
+  </div>
+</div>
+
+<script>
+const el=(tag,cls,txt)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(txt!=null)n.textContent=txt;return n;};
+const kesim=(kutu)=>["tl","tr","bl","br"].forEach(p=>{const c=document.createElement("span");c.className="cm cm-"+p;kutu.appendChild(c);});
+const linkKisa=u=>u.replace(/^https?:\/\//,"");
+
+async function kur(){
+  const durum=document.getElementById("durum"), btn=document.getElementById("yazdirBtn");
+  let veri;
+  try{
+    const r=await fetch("icerik/katalog.json",{cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    veri=await r.json();
+  }catch(e){
+    document.getElementById("sheets").innerHTML=
+      '<div class="mesaj"><h3>Katalog (icerik/katalog.json) yüklenemedi</h3>'+
+      '<p>Bu sayfa bir <b>sunucu üzerinden</b> açılmalı; dosyaya çift tıklamak <code>file://</code> nedeniyle çalışmaz.</p>'+
+      '<p>Yerelde: <code>python3 -m http.server 8084 --directory raufenc.com</code> çalıştırıp '+
+      '<code>localhost:8084/hizli-hafiz/yazdir.html</code> adresini açın.</p>'+
+      '<p><small>Canlıda (raufenc.com/hizli-hafiz/yazdir.html) sorunsuz çalışır.</small></p></div>';
+    durum.className="hata"; durum.textContent="Katalog yüklenemedi ("+e.message+").";
+    return;
+  }
+
+  const sheets=document.getElementById("sheets");
+  sheets.innerHTML="";
+
+  /* sembol → bulunduğu kart numaraları */
+  const konum={};
+  veri.kartlar.forEach(k=>k.items.forEach(it=>{ (konum[it.sid]||(konum[it.sid]=new Set())).add(k.no); }));
+
+  /* oynanır ipucu listesi: ben-dilli metni olan semboller (katalog=kart sırası) */
+  const ipuclar=Object.entries(veri.semboller)
+    .filter(([sid,s])=> s.ben && s.ben.trim() && konum[sid])
+    .map(([sid,s],i)=>({ n:i+1, sid, ...s, kartlar:[...konum[sid]].sort((a,b)=>a-b) }));
+
+  const tabaka=()=>{ const s=el("div","sheet"); const inner=el("div","sheet-inner"); s.append(inner); sheets.append(s); return inner; };
+  const bolumBas=(no,baslik,aciklama)=>{ const b=el("div","bolum-bas");
+    b.append(el("span","no",no)); b.append(el("h2",null,baslik)); b.append(el("p",null,aciklama)); return b; };
+
+  /* ===================== KAPAK + NASIL OYNANIR (kendi tabakası) ===================== */
+  {
+    const inner=tabaka();
+    const kap=el("div","kapak");
+    const h=el("h1",null,"Hızlı Hafız"); h.append(el("span","om"," ◆")); kap.append(h);
+    kap.append(el("span","rozet","Din Kültürü ve Ahlâk Bilgisi · 3–8. sınıf"));
+    inner.append(kap);
+    inner.append(el("div","kapak-tanit","Kur'ân-ı Kerîm'de adı geçen canlıları, meyveleri, gök olaylarını ve kıssa nesnelerini ben-dilli ipuçlarından tanıyıp tezhipli kartlarda bulma oyunu. Görsel dikkati güçlendirir, her doğru bulguyu kısa bir âyet hatırlatmasına dönüştürür."));
+    const ic=el("div","kapak-ic");
+    ic.innerHTML="<b>İçindekiler:</b> 1) "+veri.kartlar.length+" Sembol Kartı (yere serilir) · 2) "+ipuclar.length+" İpucu Kartı (kesilir, karıştırılır) · 3) Cevap Anahtarı + Kart Haritası (öğretmen).";
+    inner.append(ic);
+    inner.append(el("div","kapak-baski","A4'e, kalın kâğıt/kartona basın; kesik çizgilerden kesin, dilerseniz lamine edin. Sembol kartlarını renkli basın. Chrome yazdırma penceresinde “Arka plan grafikleri” açık olmalı."));
+    const nb=el("div","nasil-blok"); nb.append(el("h2",null,"Nasıl Oynanır (Basılı)"));
+    const kutu=(bas,html)=>{ const k=el("div","nasil-kutu"); k.append(el("h3",null,bas)); const d=el("div"); d.innerHTML=html; k.append(d); return k; };
+    nb.append(kutu("Hazırlık","8 tezhip kartını kalın kâğıda basıp yere/masaya serin. İpucu kartlarını kesip karıştırın, yüzü kapalı bir deste yapın. Cevap anahtarı hakemde (öğretmen) kalır."));
+    nb.append(kutu("Tek kişi / sınıfça — 10 doğru = HIZLI HAFIZ","<ol><li>Desteden bir ipucu kartı çekin, metni <b>cevabı söylemeden</b> yüksek sesle okuyun.</li><li>Çocuk(lar) 8 kart içinde tarif edilen sembolü arasın.</li><li>Bulan, sembolün olduğu <b>karta dokunsun / işaret etsin</b>.</li><li>Hakem, kartın numarasını cevap anahtarından doğrular; sembolün adını ve <b>âyet kaynağını</b> söyler.</li><li>Her doğru, HIZLI HAFIZ'dan bir harf; kelimeyi ilk tamamlayan bitirir.</li></ol>"));
+    nb.append(kutu("Arkadaşlarla (düello) — ilk 7 doğru kazanır","Hakem ipucunu okur. İlk “Buldum!” diyen cevap hakkını alır, birkaç saniyede doğru kartı gösterir; yanlışsa sıra diğerine geçer. 7 doğruya ilk ulaşan kazanır."));
+    inner.append(nb);
+  }
+
+  /* ===================== BÖLÜM 1 · YER KARTLARI (2/sayfa) ===================== */
+  for(let i=0;i<veri.kartlar.length;i+=2){
+    const inner=tabaka();
+    if(i===0){
+      inner.append(bolumBas("Bölüm 1 · Yer Kartları","Yere Konacak "+veri.kartlar.length+" Sembol Kartı",
+        "Kartları altın çerçeveden kesip yere/masaya serin. Her kartta yaklaşık 11 sembol vardır."));
+    }
+    const blok=el("div","yer-blok");
+    veri.kartlar.slice(i,i+2).forEach(k=>{
+      const kart=el("div","yer-kart");
+      kart.append(el("div","etiket","Kart "+k.no));
+      const cer=el("div","cerceve");
+      const img=el("img"); img.src=k.gorsel; img.alt="Hızlı Hafız Kart "+k.no; img.loading="eager";
+      cer.append(img); kesim(cer); kart.append(cer);
+      blok.append(kart);
+    });
+    inner.append(blok);
+  }
+
+  /* ===================== BÖLÜM 2 · İPUCU KARTLARI (10/sayfa) ===================== */
+  const PER=10;
+  for(let i=0;i<ipuclar.length;i+=PER){
+    const inner=tabaka();
+    if(i===0){
+      inner.append(bolumBas("Bölüm 2 · Baskı Ön Yüz","İpucu Kartları — Cevabı Yazmaz",
+        "Her kartta bir sembolün “ben-dilli” tarifi vardır; adı bilerek yazılmaz. Numaralar cevap anahtarıyla eşleşir. Kesip karıştırın."));
+    }
+    const blok=el("div","ip-blok");
+    const grid=el("div","ipucu-izgara");
+    ipuclar.slice(i,i+PER).forEach(s=>{
+      const kart=el("div","ipucu-kart");
+      const ust=el("div","ust");
+      ust.append(el("span","marka","Hızlı Hafız · İpucu"));
+      ust.append(el("span","no",String(s.n)));
+      kart.append(ust);
+      kart.append(el("p","ben",s.ben));
+      kart.append(el("div","suslu","◆"));
+      grid.append(kart);
+    });
+    kesim(grid);
+    blok.append(grid);
+    inner.append(blok);
+  }
+
+  /* ===================== BÖLÜM 3 · CEVAP ANAHTARI ===================== */
+  {
+    const inner=tabaka();
+    inner.append(bolumBas("Bölüm 3 · Öğretmen İçin","Cevap Anahtarı",
+      "İpucu numarasına göre sembol adı, hangi kart(lar)da olduğu, âyet, tema ve Kur'an bağlantısı. Öğrencilere gösterilmez."));
+    inner.append(el("div","ogr-not",
+      "No sütunu ipucu kartlarındaki numaralarla birebir aynıdır. “Kart”, sembolün yerdeki hangi kart(lar)da bulunduğunu gösterir (bir sembol birden çok kartta olabilir). “—”: o sembol için âyet/tema tanımlı değil; yine de ipucu kartı olarak oynanır."));
+    const sar=el("div","cevap-sar");
+    const t=el("table","cevap");
+    const thead=el("thead"); const htr=el("tr");
+    [["No","c-no"],["Sembol","c-ad"],["Kart","c-kart"],["Âyet","c-ayet"],["Tema","c-tema"],["Kur'an Bağlantısı","c-link"]]
+      .forEach(([h,c])=>htr.append(el("th",c,h)));
+    thead.append(htr); t.append(thead);
+    const tb=el("tbody");
+    ipuclar.forEach(s=>{
+      const tr=el("tr");
+      tr.append(el("td","c-no",String(s.n)));
+      tr.append(el("td","c-ad",s.ad));
+      const tk=el("td","c-kart");
+      if(s.kartlar.length) s.kartlar.forEach(no=>tk.append(el("span","rozet-k",String(no))));
+      else tk.append(el("span","bos","—"));
+      tr.append(tk);
+      const ay=el("td","c-ayet"); if(s.ayet&&s.ayet.trim()){ay.textContent=s.ayet;} else {ay.textContent="—";ay.classList.add("bos");} tr.append(ay);
+      const tm=el("td","c-tema"); if(s.tema&&s.tema.trim()){tm.textContent=s.tema;} else {tm.textContent="—";tm.classList.add("bos");} tr.append(tm);
+      const lk=el("td","c-link");
+      if(s.url&&s.url.trim()){ const a=el("a",null,linkKisa(s.url)); a.href=s.url; a.target="_blank"; a.rel="noopener"; lk.append(a); }
+      else lk.append(el("span","bos","—"));
+      tr.append(lk);
+      tb.append(tr);
+    });
+    t.append(tb); sar.append(t); inner.append(sar);
+  }
+
+  /* --- görseller yüklenmeden yazdırma açılmasın (boş PDF riski) --- */
+  await Promise.all([...document.images].map(im=>
+    (im.complete&&im.naturalWidth) ? Promise.resolve() : new Promise(res=>{ im.onload=im.onerror=res; })));
+
+  btn.disabled=false;
+  durum.className="hazir";
+  durum.innerHTML="Hazır ✓ &nbsp;<b>"+veri.kartlar.length+"</b> yer kartı (2/sayfa) · <b>"+ipuclar.length+
+    "</b> ipucu kartı (10/sayfa) · cevap anahtarı. Yazdırırken <b>Arka plan grafikleri</b> açık olsun.";
+}
+kur();
+</script>
+</body>
+</html>
