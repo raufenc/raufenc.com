@@ -495,7 +495,9 @@ const Oyun={
     const p=$('#ipucu-pop'); p.classList.add('acik'); p.classList.remove('mini');
     p.onclick=e=>{ if(e.target===p||e.target.closest('.ip-kutu')) this.ipucuKucult(); };
     clearTimeout(this._ipT);
-    this._ipT=setTimeout(()=>this.ipucuKucult(), this.kip==='cok'?2400:1900);
+    // merkezde kalma süresi cümle uzunluğuna göre (okumaya yetsin); buzz/dokunuş erken küçültür
+    const sure=Math.min(7500, Math.max(2800, Math.round((metin||'').length*52)));
+    this._ipT=setTimeout(()=>this.ipucuKucult(), sure);
   },
   ipucuKucult(){ $('#ipucu-pop').classList.add('mini'); clearTimeout(this._ipT); },
   ipucuTekrar(){ this.ipucuPopGoster(this.veri.semboller[this.hedef].ben); },
