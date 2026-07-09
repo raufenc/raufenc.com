@@ -16,6 +16,7 @@
     /* board yerleşimi */
     --cols:2; --rows:4; --ust:56px; --ipY:0px;
     --serit:clamp(56px,10vmin,110px);
+    --bar-h:clamp(64px,12vh,104px);
     --pt:0px; --pr:0px; --pb:0px; --pl:0px;
   }
   @media(min-width:620px){ :root{ --cols:4; --rows:2; } }
@@ -71,11 +72,12 @@
     width:min(100%, calc((100dvh - var(--ust) - var(--pt) - var(--pb) - var(--ipY) - 24px) * var(--cols) / var(--rows)));
     max-width:1200px;margin:auto}
   .kart{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 3px 8px var(--golge);border:3px solid transparent;background:#e9dab6;transition:transform .1s,box-shadow .1s}
-  .kart img{width:100%;height:100%;object-fit:cover;display:block}
+  .kart-ic{position:absolute;inset:0;transition:none} /* rotasyon KATMANI (transition yok) */
+  .kart-ic img{width:100%;height:100%;object-fit:cover;display:block}
   .kart:active{transform:scale(.98)}
   .kart.yanlis{animation:salla .4s}
   .kart.dogru{border-color:var(--yesil);box-shadow:0 0 0 3px var(--yesil),0 4px 12px var(--golge)}
-  .kart .no{position:absolute;top:5px;left:6px;background:var(--lacivert);color:var(--altin2);font-size:11px;padding:1px 7px;border-radius:999px;opacity:.85}
+  .kart-ic .no{position:absolute;top:5px;left:6px;background:var(--lacivert);color:var(--altin2);font-size:11px;padding:1px 7px;border-radius:999px;opacity:.85;z-index:1}
   @keyframes salla{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
   .tahta.hepsi .nokta{display:block}
   .nokta{display:none;position:absolute;transform:translate(-50%,-50%);border-radius:50%;background:transparent;border:none;cursor:pointer}
@@ -114,6 +116,21 @@
   body.k2{--pt:var(--serit);--pb:var(--serit)}
   body.k3{--pt:52px;--pb:var(--serit);--pl:var(--serit);--pr:var(--serit)}
   body.k4{--pt:var(--serit);--pb:var(--serit);--pl:var(--serit);--pr:var(--serit)}
+  /* KARŞIDAN (bilgisayar/akıllı tahta) modu: hiç döndürme, altta düz buzz bar */
+  body[data-mod="karsi"] .kart-ic{transform:none !important}
+  body[data-mod="karsi"] #kenarlar{display:none}
+  body[data-mod="karsi"] .ip-ters{display:none !important}
+  body[data-mod="karsi"] #geri span{transform:none !important}
+  body[data-mod="karsi"].cok{--pt:48px;--pr:0px;--pl:0px;--pb:var(--bar-h)}
+  #buzzbar{display:none;position:fixed;inset:auto 0 0 0;height:calc(var(--bar-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);z-index:40}
+  body[data-mod="karsi"].cok #buzzbar{display:flex}
+  #buzzbar .bz{flex:1;border:0;color:#fff8ec;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5em;font-size:clamp(14px,3.2vw,20px);box-shadow:inset 0 0 0 2px #ffffff33;touch-action:none;-webkit-user-select:none}
+  #buzzbar .bz .tus{background:#fff;color:#16233f;border-radius:6px;padding:1px 9px;font-size:.8em}
+  #buzzbar .bz .skor{font-variant-numeric:tabular-nums;background:#0004;border-radius:999px;padding:1px 9px;font-size:.85em}
+  #buzzbar .bz.aktif{filter:brightness(1.2);box-shadow:inset 0 0 0 3px #fff}
+  #buzzbar .bz.pasif{opacity:.32;filter:grayscale(.7)}
+  #buzzbar .bz.hazir{animation:nabiz 1.15s infinite}
+  body[data-mod="karsi"].soz #buzzbar .bz:not(.aktif){pointer-events:none}
 
   /* Geri sayım (2sn) */
   #geri{position:fixed;inset:0;z-index:44;display:none;align-items:center;justify-content:center;pointer-events:none}
@@ -131,7 +148,7 @@
   .ip-ters{position:fixed;top:calc(var(--serit) + 8px);left:50%;transform:translateX(-50%) rotate(180deg);z-index:35;
     pointer-events:none;max-width:min(560px,84vw);background:linear-gradient(180deg,#fff7e4,#f3e6c6);border:2px solid var(--altin);
     border-radius:16px;padding:10px 18px;box-shadow:0 6px 20px var(--golge);display:none}
-  body.cok.k2 #ipucu-pop.acik ~ .ip-ters{display:block}
+  body[data-mod="etraf"].cok.k2 #ipucu-pop.acik ~ .ip-ters{display:block}
   .ip-ters p{margin:0;font-size:clamp(15px,3vw,21px);line-height:1.4;color:var(--metin);text-align:center}
 
   /* MODALLAR */
@@ -199,8 +216,9 @@
 <button class="yuzen sol ikon-btn" onclick="Oyun.cik()" title="Ana menü">🏠</button>
 <button class="yuzen sag ikon-btn" onclick="Oyun.ipucuTekrar()" title="İpucu">💡</button>
 
-<!-- Kenar buzz şeritleri -->
+<!-- Kenar buzz şeritleri (tablet) + alt buzz bar (karşıdan) -->
 <div id="kenarlar"></div>
+<div id="buzzbar"></div>
 
 <!-- Geri sayım -->
 <div id="geri"><span></span></div>
@@ -218,6 +236,20 @@ const HEDEF_KELIME="HIZLI HAFIZ";
 const RENKLER=['#1E6FBF','#D6337E','#17A0A8','#7A3FB0'];
 const VAR_TUSLAR=['KeyA','KeyL','KeyG','KeyH'];
 const KENAR_HARITA={2:['alt','tepe'],3:['alt','sol','sag'],4:['alt','tepe','sol','sag']};
+const ROT={alt:0, tepe:180, sol:90, sag:-90};
+const PRIO={alt:0, tepe:1, sol:2, sag:3};
+function edgeDist(e,cx,cy){ return e==='alt'?1-cy : e==='tepe'?cy : e==='sol'?cx : 1-cx; }
+// Her kartı en yakın aktif kenara atar; rotasyon = o kenarın derecesi.
+// 2 kişi→4/4, 3 kişi→3/3/2 (alt=2), 4 kişi→2/2/2/2 (determinist, özel-durum yok).
+function kartAcisi(i, cols, rows, sayi){
+  const r=Math.floor((i-1)/cols), c=(i-1)%cols;
+  const cx=(c+0.5)/cols, cy=(r+0.5)/rows;
+  const kenarlar=KENAR_HARITA[sayi]; let best=kenarlar[0], bestD=Infinity;
+  for(const e of kenarlar){ const d=edgeDist(e,cx,cy);
+    if(d<bestD-1e-9 || (Math.abs(d-bestD)<=1e-9 && PRIO[e]<PRIO[best])){ bestD=d; best=e; } }
+  return ROT[best];
+}
+function izgara(){ return matchMedia('(min-width:620px)').matches ? {cols:4,rows:2} : {cols:2,rows:4}; }
 
 function tusEtiket(code){
   if(!code) return '—';
@@ -242,6 +274,7 @@ const Ekran={
         <li><b>Tek kişi:</b> her doğru buluş HIZLI&nbsp;HAFIZ'dan bir harf. <b>Arkadaşlarla:</b> ipucu çıkınca <b>tuşuna bas / renkli kenarına dokun</b> — söz hakkı sende, 2 saniyede kartı seç! İlk 7 doğruya ulaşan kazanır.</li>
         <li>Doğru bulunca sembolün adı ve <b>âyet kaynağı</b> gösterilir.</li>
       </ol>
+      <p class="not-kucuk">Tablet modunda kartların yönü sadece okuma kolaylığı içindir; kart sahipliği yoktur, herkes her kartı seçebilir.</p>
       <button class="btn" onclick="Ekran.kapat()">Anladım</button>`);
   },
   arkadas(){
@@ -256,7 +289,7 @@ const Ekran={
       <div class="not-kucuk" style="margin-top:10px">Tuşları <b>Ayarlar</b>'dan değiştirebilirsin. Telefonda kenarlara dokunarak da oynanır.</div>`);
   },
   ayar(){
-    const m=Oyun.mod, ip=Oyun.ipucuKip;
+    const m=Oyun.mod, ip=Oyun.ipucuKip, ot=Oyun.oturma;
     const c=(cur,v,l,fn)=>`<button class="chip ${cur===v?'aktif':''}" onclick="${fn}('${v}')">${l}</button>`;
     let tusHtml='';
     Oyun.tuslar.forEach((code,i)=>{
@@ -268,6 +301,14 @@ const Ekran={
     });
     this.perde(`
       <h2>Ayarlar</h2>
+      <div class="ayar-sat">
+        <b>Oturma düzeni (Arkadaşlarla Oyna)</b>
+        <div class="sec">
+          ${c(ot,'etraf','Etrafında (tablet/masa)','Oyun.oturmaAyarla')}
+          ${c(ot,'karsi','Karşıdan (bilgisayar/akıllı tahta)','Oyun.oturmaAyarla')}
+        </div>
+        <div class="not-kucuk">Etrafında: herkes cihazın bir kenarında, kartların yönü adil dağılır. Karşıdan: herkes ekrana yan yana bakar, kartlar düz.</div>
+      </div>
       <div class="ayar-sat">
         <b>İpucu gösterimi</b>
         <div class="sec">
@@ -308,6 +349,7 @@ const Oyun={
   veri:null,
   mod:localStorage.getItem('hh:mod')||'iki',
   ipucuKip:localStorage.getItem('hh:ipucu')||'panel',
+  oturma:localStorage.getItem('hh_oturma')||'etraf',
   tuslar:(()=>{ try{const t=JSON.parse(localStorage.getItem('hh:tuslar'));return Array.isArray(t)&&t.length===4?t:VAR_TUSLAR.slice();}catch(e){return VAR_TUSLAR.slice();} })(),
   havuz:[], sidHaritasi:{}, hedef:null, sonSid:null,
   // solo
@@ -325,6 +367,8 @@ const Oyun={
   },
   modAyarla(v){ this.mod=v; localStorage.setItem('hh:mod',v); Ekran.ayar(); },
   ipucuAyarla(v){ this.ipucuKip=v; localStorage.setItem('hh:ipucu',v); Ekran.ayar(); },
+  oturmaAyarla(v){ this.oturma=v; localStorage.setItem('hh_oturma',v); document.body.dataset.mod=v;
+    if(this.kip==='cok'){ this.cokKur(); this.tahtaCiz(); this.yeniTur(); } Ekran.ayar(); },
   tuslariKaydet(){ localStorage.setItem('hh:tuslar',JSON.stringify(this.tuslar)); },
 
   basla(kip,sayi){
@@ -345,7 +389,7 @@ const Oyun={
     this.yakinKapat(); Ekran.kapat(); $('#geri').style.display='none'; $('#ipucu-pop').classList.remove('acik');
     document.body.classList.remove('cok','k2','k3','k4','soz');
     document.documentElement.style.removeProperty('--aktif'); document.documentElement.style.setProperty('--ipY','0px');
-    $('#kenarlar').innerHTML='';
+    $('#kenarlar').innerHTML=''; $('#buzzbar').innerHTML='';
     $('#oyun').classList.add('gizli'); $('#giris').classList.remove('gizli');
   },
 
@@ -362,19 +406,30 @@ const Oyun={
 
   /* ---------- ÇOK-OYUNCULU kurulum ---------- */
   cokKur(){
+    document.body.classList.remove('k2','k3','k4');
     document.body.classList.add('cok','k'+this.sayi);
+    document.body.dataset.mod=this.oturma;
     const kenarlar=KENAR_HARITA[this.sayi];
     this.oyuncular=[];
     for(let i=0;i<this.sayi;i++) this.oyuncular.push({id:i, renk:RENKLER[i], tus:this.tuslar[i], kenar:kenarlar[i], skor:0, turKilit:false});
-    // kenar DOM
-    const kap=$('#kenarlar'); kap.innerHTML='';
-    this.oyuncular.forEach(o=>{
-      const d=document.createElement('div'); d.className='kenar '+o.kenar; d.style.setProperty('--bar',o.renk); d.dataset.id=o.id;
-      d.innerHTML=`<span class="rot"><b>${o.id+1}. Oyuncu</b> <span class="skor">0/${this.hedefSkor}</span> <span class="tus">${tusEtiket(o.tus)}</span></span>`;
-      d.addEventListener('pointerdown', e=>{ e.preventDefault(); this.buzz(o.id); }, {passive:false});
-      kap.appendChild(d);
-    });
-    // ipucu daima popup, panel gizli
+    const kap=$('#kenarlar'), bb=$('#buzzbar'); kap.innerHTML=''; bb.innerHTML='';
+    if(this.oturma==='karsi'){
+      // Karşıdan: altta yatay buzz bar, soldan sağa P1..Pn, hepsi düz
+      this.oyuncular.forEach(o=>{
+        const b=document.createElement('div'); b.className='bz'; b.dataset.id=o.id; b.style.background=o.renk;
+        b.innerHTML=`<b>${o.id+1}. Oyuncu</b> <span class="skor">0/${this.hedefSkor}</span> <span class="tus">${tusEtiket(o.tus)}</span>`;
+        b.addEventListener('pointerdown', e=>{ e.preventDefault(); this.buzz(o.id); }, {passive:false});
+        bb.appendChild(b);
+      });
+    }else{
+      // Etrafında: kenar şeritleri, oturma yönüne dönük
+      this.oyuncular.forEach(o=>{
+        const d=document.createElement('div'); d.className='kenar '+o.kenar; d.style.setProperty('--bar',o.renk); d.dataset.id=o.id;
+        d.innerHTML=`<span class="rot"><b>${o.id+1}. Oyuncu</b> <span class="skor">0/${this.hedefSkor}</span> <span class="tus">${tusEtiket(o.tus)}</span></span>`;
+        d.addEventListener('pointerdown', e=>{ e.preventDefault(); this.buzz(o.id); }, {passive:false});
+        kap.appendChild(d);
+      });
+    }
     $('#ipucu-panel').classList.add('gizli');
     document.documentElement.style.setProperty('--ipY','0px');
   },
@@ -382,18 +437,29 @@ const Oyun={
     const t=$('#tahta'); t.className='tahta'+(this.kip==='tek'&&this.mod==='sembol'?' hepsi':''); t.innerHTML='';
     this.veri.kartlar.forEach((k,ki)=>{
       const d=document.createElement('div'); d.className='kart'; d.dataset.ki=ki;
-      d.innerHTML=`<span class="no">${k.no}</span><img src="${k.gorsel}" alt="Kart ${k.no}">`;
+      d.innerHTML=`<div class="kart-ic"><span class="no">${k.no}</span><img src="${k.gorsel}" alt="Kart ${k.no}"></div>`;
+      const ic=d.querySelector('.kart-ic');
       if(this.kip==='tek' && this.mod==='sembol'){
         k.items.forEach(it=>{
           const b=document.createElement('button'); b.className='nokta';
           b.style.left=it.x+'%'; b.style.top=it.y+'%'; const boy=(it.boy||20); b.style.width=boy+'%'; b.style.height=boy+'%';
           b.onclick=e=>{ e.stopPropagation(); this.secildi(it.sid,b,d); };
-          d.appendChild(b);
+          ic.appendChild(b);
         });
       }else{
         d.onclick=()=>this.kartTikla(ki,d);
       }
       t.appendChild(d);
+    });
+    this.yonleriUygula();
+  },
+  yonleriUygula(){
+    const donebilir = (this.kip==='cok' && this.oturma==='etraf');
+    const {cols,rows}=izgara();
+    document.querySelectorAll('#tahta .kart').forEach((k,idx)=>{
+      const ic=k.querySelector('.kart-ic'); if(!ic) return;
+      const deg = donebilir ? kartAcisi(idx+1, cols, rows, this.sayi) : 0;
+      ic.style.transform = deg ? `rotate(${deg}deg)` : 'none';
     });
   },
 
@@ -489,7 +555,7 @@ const Oyun={
 
   /* ================= ÇOK OYUNCULU ================= */
   stripGuncelle(){
-    document.querySelectorAll('#kenarlar .kenar').forEach(el=>{
+    document.querySelectorAll('#kenarlar .kenar, #buzzbar .bz').forEach(el=>{
       const o=this.oyuncular[+el.dataset.id];
       el.classList.toggle('pasif', o.turKilit);
       el.classList.toggle('aktif', this.sozHakki===o.id);
@@ -509,6 +575,8 @@ const Oyun={
     this.sozHakki=p; this.durum='cevap';
     document.documentElement.style.setProperty('--aktif',this.oyuncular[p].renk);
     document.body.classList.add('soz');
+    const aci = this.oturma==='etraf' ? ROT[this.oyuncular[p].kenar] : 0;
+    $('#geri').querySelector('span').style.transform = aci ? `rotate(${aci}deg)` : 'none';
     this.ipucuPopKapat();
     this.stripGuncelle();
     this.geriSayimBasla();
@@ -561,6 +629,8 @@ const Oyun={
 };
 
 document.addEventListener('keydown', e=>Oyun.tusYakala(e));
+document.body.dataset.mod=Oyun.oturma;
+matchMedia('(min-width:620px)').addEventListener('change', ()=>Oyun.yonleriUygula());
 window.Oyun=Oyun; window.Ekran=Ekran;
 Oyun.yukle();
 </script>
