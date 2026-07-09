@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bak Bak — Öğretmen Paneli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../lib/tokens.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-sans);background:radial-gradient(ellipse 130% 80% at 50% -10%, #24365f, #10192e 75%);
+       color:var(--kagit);line-height:1.6;padding:32px 18px 60px}
+  .sar{max-width:760px;margin:0 auto}
+  a.geri{color:#a9b4cc;text-decoration:none;font-size:14px}
+  a.geri:hover{color:var(--altin-acik)}
+  h1{font-family:var(--font-serif);color:var(--altin-acik);font-size:clamp(26px,6vw,38px);margin:14px 0 4px}
+  .alt{color:#c3cde3;font-size:15px;margin-bottom:26px}
+  h2{font-family:var(--font-serif);color:var(--kagit);font-size:20px;margin:26px 0 10px;
+     border-bottom:1px solid rgba(200,164,110,.25);padding-bottom:6px}
+  p,li{color:#d7deed;font-size:14.5px}
+  ul,ol{margin:8px 0 8px 20px}
+  li{margin:4px 0}
+  code{background:rgba(255,255,255,.08);border:1px solid rgba(200,164,110,.2);border-radius:6px;
+       padding:1px 6px;font-size:13px;color:var(--altin-acik);font-family:ui-monospace,Menlo,monospace}
+  pre{background:#0e1830;border:1px solid rgba(200,164,110,.25);border-radius:12px;padding:16px;
+      overflow:auto;margin:10px 0;font-size:12.5px;color:#cdd6ea}
+  pre code{background:none;border:none;padding:0;color:inherit}
+  .kutu{background:rgba(255,255,255,.05);border:1px solid rgba(200,164,110,.28);border-radius:14px;padding:16px 18px;margin:12px 0}
+  .rozet{display:inline-block;font-size:12px;color:var(--altin-acik);background:rgba(200,164,110,.14);
+         border:1px solid rgba(200,164,110,.35);padding:4px 12px;border-radius:100px;margin:2px 4px 2px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid rgba(255,255,255,.09)}
+  th{color:var(--altin-acik)}
+  b{color:#fff}
+</style>
+</head>
+<body>
+<div class="sar">
+  <a class="geri" href="../index.html">← Oyuna dön</a>
+  <h1>Bak Bak — Öğretmen Paneli</h1>
+  <p class="alt">Görsel dikkat, konsantrasyon ve kavram–görsel eşleştirme oyunu. Klonlanabilir motor.</p>
+
+  <h2>Amaç ve kazanımlar</h2>
+  <ul>
+    <li><b>Görsel tarama & seçici dikkat:</b> Çok sayıda simge arasından hedefi hızla bulma.</li>
+    <li><b>Konsantrasyon & hız:</b> Süre baskısı altında doğru karar.</li>
+    <li><b>Kavram öğrenimi:</b> “Kelime” turlarında yazılan kavramın doğru görselini bulma (kelime↔resim).</li>
+    <li><b>Rekabet & sosyalleşme:</b> İki kişi modunda karşılıklı, sağlıklı yarış.</li>
+  </ul>
+
+  <h2>Modlar</h2>
+  <div class="kutu">
+    <span class="rozet">🧒 Tek Kişi</span> Süreye karşı; <b>BAK&nbsp;BAK</b> hecelenene kadar tur tur oynanır, süre ve hata sayısı ölçülür (⭐ 1–3).<br>
+    <span class="rozet">🤝 İki Kişi</span> Tablet iki oyuncunun arasına konur; üst yarı 180° döner. İlk heceleyen kazanır.
+  </div>
+
+  <h2>Soru modları</h2>
+  <div class="kutu">
+    <span class="rozet">📖 bilgi</span> Üstte <b>bilgi kartı</b> (ipucu/tanım) gösterilir; öğrenci bilgiden hangi simge olduğunu bulur. <b>Asıl öğrenme modu.</b><br>
+    <span class="rozet">🖼️ resim</span> Hedef resim gösterilir, aynısı bulunur (görsel dikkat).<br>
+    <span class="rozet">🔤 kelime</span> Hedef kelime yazılır, doğru resim bulunur (kavram–görsel).<br>
+    <span class="rozet">🔀 karisik</span> Turlar arası bilgi/resim/kelime döner.
+  </div>
+  <p>Doğru bulunca cevap (ad + görsel + Arapça) <b>kısa süre gösterilir</b> → pekiştirme. Bir öğenin <code>bilgi</code>si yoksa o tur otomatik <code>kelime</code>ye düşer.</p>
+
+  <h2>Zorluk</h2>
+  <p>Her tur ızgara büyür (varsayılan pakette 9 → 30 kutu). Hedef her zaman <b>tek</b>, gerisi çeldiricidir.</p>
+
+  <h2>SCORM / PWA</h2>
+  <p>Paket SCORM 1.2 uyumludur (<code>imsmanifest.xml</code>). LMS’e yüklendiğinde tamamlama <code>passed</code> ve
+     puan (100 − hata×10) olarak raporlanır. LMS yoksa sessizce çevrimdışı çalışır; ana ekranda ayrıca localStorage ile “en iyi süre” tutulur.</p>
+
+  <h2>Yeni klon üretmek (terim + görsel geldiğinde)</h2>
+  <ol>
+    <li><code>icerik/_sablon.js</code> dosyasını kopyala → <code>icerik/&lt;yeni-ad&gt;.js</code></li>
+    <li><code>meta</code> ve <code>ogeler[]</code> alanlarını doldur. <b>Motor dosyalarına dokunma.</b></li>
+    <li>Görselleri koy: <code>varliklar/&lt;yeni-ad&gt;/&lt;id&gt;.png</code> (yoksa emoji yedeği kullanılır)</li>
+    <li>Aç: <code>index.html?paket=&lt;yeni-ad&gt;</code></li>
+  </ol>
+  <pre><code>window.PAKET = {
+  meta: {
+    id: "siyer-simgeleri", ad: "Siyer Simgeleri",
+    kok: "varliklar/siyer-simgeleri/",
+    hedefKelime: "BAK BAK",      // toplanacak harfler = tur sayısı
+    soruModu: "bilgi",            // bilgi | resim | kelime | karisik
+    seviyeler: [ {adet:9},{adet:16},{adet:25} ]
+  },
+  ogeler: [
+    { id:"kabe", ad:"Kâbe", arapca:"اَلْكَعْبَة", gorsel:"kabe.png", emoji:"🕋",
+      bilgi:"Mekke'de bulunan, namazda yöneldiğimiz kutsal küp yapı." }
+    // ...
+  ]
+};</code></pre>
+
+  <h2>Varsayılan paket — simgeler</h2>
+  <table>
+    <tr><th>Simge</th><th>Arapça</th><th>id</th></tr>
+    <tr><td>Cami</td><td>مَسْجِد</td><td>cami</td></tr>
+    <tr><td>Kâbe</td><td>اَلْكَعْبَة</td><td>kabe</td></tr>
+    <tr><td>Kur'ân-ı Kerîm</td><td>اَلْقُرْآن</td><td>kuran</td></tr>
+    <tr><td>Hilâl ve Yıldız</td><td>اَلْهِلَال</td><td>hilal</td></tr>
+    <tr><td>Tesbih</td><td>اَلْمِسْبَحَة</td><td>tesbih</td></tr>
+    <tr><td>Kandil</td><td>اَلْقِنْدِيل</td><td>kandil</td></tr>
+    <tr><td>Seccâde</td><td>اَلسَّجَّادَة</td><td>seccade</td></tr>
+    <tr><td>Minâre</td><td>اَلْمِئْذَنَة</td><td>minare</td></tr>
+    <tr><td>İbrik</td><td>اَلْإِبْرِيق</td><td>ibrik</td></tr>
+  </table>
+</div>
+</body>
+</html>
