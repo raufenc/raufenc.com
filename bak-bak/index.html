@@ -118,26 +118,48 @@
   .bb-hucre.bb-yanlis{background:linear-gradient(180deg,#e88a80,#c4574a);border-color:#a83f33;
             animation:yanlisSars .4s ease}
 
-  /* ---------- Orta modu: 3x3, MERKEZ bilgi kartı, çevrede tek görseller ---------- */
-  .bb-izgara--orta .bb-hucre{padding:0;overflow:hidden}
+  /* ---------- Orta modu: 3x3 KARE ızgara, MERKEZ bilgi kartı, çevrede tek görseller ---------- */
+  /* Her hücre (görsel VE merkez kart) aspect-ratio:1 kare + overflow:hidden → satırlar hep eşit, tahta kare, uzun metin satırı büyütmez (kırpılır). */
+  .bb-izgara--orta .bb-hucre{padding:0;overflow:hidden;
+            animation:ortaGir .34s cubic-bezier(.2,.7,.3,1.2) both}
   .bb-izgara--orta .bb-hucre-gorsel{width:100%;height:100%}
   .bb-izgara--orta .bb-hucre-gorsel img{width:100%;height:100%;object-fit:cover;border-radius:13px}
-  .bb-orta{aspect-ratio:1;border-radius:14px;border:2px solid var(--altin);
+  .bb-orta{aspect-ratio:1;overflow:hidden;border-radius:14px;border:2px solid var(--altin);
            background:linear-gradient(160deg,#1e3057,#101b33);
            display:flex;flex-direction:column;align-items:center;justify-content:center;
-           gap:5px;padding:7%;text-align:center;
-           box-shadow:inset 0 0 0 3px rgba(200,164,110,.16),0 5px 16px rgba(0,0,0,.4)}
+           gap:4px;padding:6%;text-align:center;
+           box-shadow:inset 0 0 0 3px rgba(200,164,110,.16),0 5px 16px rgba(0,0,0,.4);
+           animation:ortaGir .34s cubic-bezier(.2,.7,.3,1.2) both}
   .bb-orta-et{font-size:clamp(9px,1.7vw,12px);font-weight:800;letter-spacing:.03em;
               color:var(--altin-acik);text-transform:uppercase}
-  .bb-orta-metin{font-size:clamp(11px,1.95vw,15px);font-weight:600;line-height:1.28;color:var(--kagit)}
+  .bb-orta-metin{font-size:clamp(10px,1.9vw,15px);font-weight:600;line-height:1.24;color:var(--kagit);
+                 overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6}
   .bb-orta--cevap{border-color:var(--yesil);background:linear-gradient(160deg,#2f5a3c,#1a3524)}
   .bb-orta-et--ok{color:#c7ecd0}
-  .bb-orta-gorsel{width:70%;height:70%;display:flex;align-items:center;justify-content:center}
+  .bb-orta-gorsel{width:66%;height:66%;display:flex;align-items:center;justify-content:center}
   .bb-orta-gorsel img{width:100%;height:100%;object-fit:cover;border-radius:11px}
   .bb-orta-gorsel.bb-emoji{font-size:clamp(30px,7vh,54px)}
+  /* orta modda görsel tile'ı kapladığından renk arka planda kalıyor → görsel ÜSTÜNE (z-index) renkli halka + tint bindiriyoruz */
+  .bb-izgara--orta .bb-hucre{position:relative}
+  .bb-izgara--orta .bb-hucre.bb-dogru::after,
+  .bb-izgara--orta .bb-hucre.bb-yanlis::after{content:"";position:absolute;inset:0;z-index:3;
+            pointer-events:none;border-radius:inherit;border:5px solid transparent;box-sizing:border-box}
+  .bb-izgara--orta .bb-hucre.bb-dogru::after{background:rgba(74,124,89,.30);border-color:var(--yesil)}
+  .bb-izgara--orta .bb-hucre.bb-yanlis::after{background:rgba(196,87,74,.32);border-color:var(--kiremit)}
+  @keyframes ortaGir{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.bb-izgara--orta .bb-hucre,.bb-orta{animation:none}}
+  .bb-izgara--orta>*:nth-child(1){animation-delay:0s}
+  .bb-izgara--orta>*:nth-child(2){animation-delay:.03s}
+  .bb-izgara--orta>*:nth-child(3){animation-delay:.06s}
+  .bb-izgara--orta>*:nth-child(4){animation-delay:.03s}
+  .bb-izgara--orta>*:nth-child(5){animation-delay:.09s}
+  .bb-izgara--orta>*:nth-child(6){animation-delay:.06s}
+  .bb-izgara--orta>*:nth-child(7){animation-delay:.06s}
+  .bb-izgara--orta>*:nth-child(8){animation-delay:.09s}
+  .bb-izgara--orta>*:nth-child(9){animation-delay:.12s}
   .duel-yari .bb-orta{padding:5%;gap:2px}
   .duel-yari .bb-orta-et{font-size:clamp(7px,1.5vh,10px)}
-  .duel-yari .bb-orta-metin{font-size:clamp(9px,1.7vh,13px);line-height:1.2}
+  .duel-yari .bb-orta-metin{font-size:clamp(8px,1.5vh,12px);line-height:1.16;-webkit-line-clamp:6}
 
   /* ---------- Tahta modu: sahne görseli + görünmez hotspot'lar ---------- */
   .bb-sahne{position:relative;width:min(94vw,min(560px,58vh));aspect-ratio:1;border-radius:16px;
@@ -255,7 +277,7 @@
   <div class="duel-yari" id="duel-ust"></div>
   <div class="duel-orta">
     <button class="ikon-btn" id="duel-home" title="Ana ekran">⌂</button>
-    <b>BAK&nbsp;BAK</b><span class="vs">iki kişi · önce heceleyen kazanır</span>
+    <b id="duel-oyunAdi">BAK&nbsp;BAK</b><span class="vs">iki kişi · önce heceleyen kazanır</span>
     <button class="ikon-btn" id="duel-ses" title="Ses">🔊</button>
   </div>
   <div class="duel-yari" id="duel-alt"></div>
@@ -333,7 +355,7 @@
     };
     el("giris-alt-baslik").textContent = m.altBaslik || "Görsel Dikkat Oyunu";
     el("ders-rozet").textContent = (m.ders || "") + " · " + (m.sinif || "");
-    if (m.oyunAdi) el("giris-baslik").textContent = m.oyunAdi;
+    if (m.oyunAdi) { el("giris-baslik").textContent = m.oyunAdi; el("duel-oyunAdi").textContent = m.oyunAdi; }
     if (m.logo) { el("giris-logo").textContent = m.logo; el("nasil-baslik").textContent = m.logo + " Nasıl oynanır?"; }
     if (m.nasil && m.nasil.length) el("nasil-liste").innerHTML = m.nasil.map(function (x) { return "<li>" + x + "</li>"; }).join("");
     document.title = (m.oyunAdi || "Bak Bak") + (m.ad ? " — " + m.ad : "");
