@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hızlı Hafız</title>
+<style>
+  :root{
+    --krem:#f4ead2; --krem2:#efe0c0; --parsomen:#e9dab6;
+    --lacivert:#16233f; --lacivert2:#24365e;
+    --altin:#c8a24b; --altin2:#e6bf5e;
+    --kirmizi:#b8452f; --yesil:#3f7a4d;
+    --metin:#2c2418; --metin2:#5c4d33;
+    --golge:rgba(22,35,63,.18);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    color:var(--metin);
+    background:
+      radial-gradient(120% 90% at 50% -10%, #fbf4e2 0%, var(--krem) 45%, var(--krem2) 100%);
+    min-height:100%;
+    -webkit-user-select:none;user-select:none;
+    overflow-x:hidden;
+  }
+  .gizli{display:none !important}
+
+  /* ---------- GİRİŞ ---------- */
+  #giris{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;gap:6px}
+  .logo{font-size:64px;line-height:1;filter:drop-shadow(0 3px 6px var(--golge))}
+  h1{font-size:clamp(34px,9vw,58px);margin:.15em 0 0;letter-spacing:.02em;color:var(--lacivert);
+     text-shadow:0 1px 0 #fff8, 0 2px 10px var(--golge)}
+  .altbaslik{color:var(--metin2);font-size:clamp(14px,3.6vw,18px);margin:0 0 4px;font-style:italic}
+  .rozet{display:inline-block;background:var(--lacivert);color:var(--altin2);font-size:12px;
+     padding:5px 12px;border-radius:999px;letter-spacing:.04em;margin-top:2px;box-shadow:0 2px 6px var(--golge)}
+  .menu{display:flex;flex-direction:column;gap:12px;margin-top:26px;width:min(340px,86vw)}
+  .btn{
+    border:none;cursor:pointer;font-family:inherit;font-size:19px;font-weight:600;
+    padding:15px 18px;border-radius:14px;color:#fff8ec;
+    background:linear-gradient(180deg,var(--lacivert2),var(--lacivert));
+    box-shadow:0 4px 0 #0d1730, 0 6px 14px var(--golge);
+    transition:transform .08s, box-shadow .08s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #0d1730,0 3px 8px var(--golge)}
+  .btn.ikincil{background:linear-gradient(180deg,#fbf1d8,#eddcb4);color:var(--lacivert);box-shadow:0 4px 0 #c9b585,0 6px 14px var(--golge)}
+  .btn .k{font-size:22px}
+
+  /* ---------- OYUN ÜST BAR ---------- */
+  #oyun{min-height:100vh;display:flex;flex-direction:column;padding:10px 10px 14px}
+  .ust{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .ikon-btn{border:none;background:#fff6df;color:var(--lacivert);width:40px;height:40px;border-radius:11px;
+     font-size:19px;cursor:pointer;box-shadow:0 2px 0 #c9b585, 0 3px 8px var(--golge);flex:0 0 auto}
+  .ikon-btn:active{transform:translateY(2px)}
+  .ilerleme{flex:1;display:flex;flex-wrap:wrap;gap:3px;justify-content:center;align-content:center}
+  .harf{width:22px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+     font-weight:700;font-size:15px;background:#e7d7b0;color:#b6a680;box-shadow:inset 0 0 0 1px #d8c69a}
+  .harf.dolu{background:linear-gradient(180deg,var(--altin2),var(--altin));color:var(--lacivert);
+     box-shadow:0 2px 5px var(--golge)}
+  .harf.bosluk{width:9px;background:transparent;box-shadow:none}
+  @media(max-width:430px){ .ilerleme{gap:2px} .harf{width:18px;height:24px;font-size:13px} .harf.bosluk{width:6px} }
+  .sayac{font-variant-numeric:tabular-nums;font-weight:700;color:var(--lacivert);min-width:52px;text-align:right;font-size:15px}
+
+  /* ---------- İPUCU KARTI ---------- */
+  .ipucu{
+    background:linear-gradient(180deg,#fff7e4,#f3e6c6);
+    border:2px solid var(--altin);border-radius:16px;
+    padding:12px 16px;margin:2px auto 10px;max-width:640px;width:100%;
+    box-shadow:0 3px 10px var(--golge), inset 0 0 0 1px #fff7;
+    position:relative;
+  }
+  .ipucu .et{position:absolute;top:-11px;left:14px;background:var(--lacivert);color:var(--altin2);
+     font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+  .ipucu p{margin:4px 0 0;font-size:clamp(15px,4vw,19px);line-height:1.5;color:var(--metin)}
+
+  /* ---------- 8 KART IZGARASI ---------- */
+  .tahta{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;max-width:640px;width:100%;margin:0 auto;flex:1;align-content:start}
+  @media(min-width:620px){ .tahta{grid-template-columns:repeat(4,1fr)} }
+  .kart{
+    position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;
+    box-shadow:0 3px 8px var(--golge);border:2px solid transparent;background:#e9dab6;
+    transition:transform .1s, box-shadow .1s;
+  }
+  .kart img{width:100%;height:100%;object-fit:cover;display:block}
+  .kart:active{transform:scale(.98)}
+  .kart.yanlis{animation:salla .4s}
+  .kart.dogru{border-color:var(--yesil);box-shadow:0 0 0 3px var(--yesil), 0 4px 12px var(--golge)}
+  .kart .no{position:absolute;top:5px;left:6px;background:var(--lacivert);color:var(--altin2);
+     font-size:11px;padding:1px 7px;border-radius:999px;opacity:.85}
+  @keyframes salla{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
+  /* tüm-hotspot (sembol) modu */
+  .tahta.hepsi .nokta{display:block}
+  .nokta{display:none;position:absolute;transform:translate(-50%,-50%);border-radius:50%;
+     background:transparent;border:2px dashed rgba(22,35,63,.0);cursor:pointer}
+
+  /* ---------- YAKIN KART (iki aşamalı) ---------- */
+  #yakin{position:fixed;inset:0;background:rgba(22,35,63,.72);backdrop-filter:blur(3px);
+     display:flex;align-items:center;justify-content:center;padding:14px;z-index:40}
+  .yakin-kutu{position:relative;width:min(94vw,min(560px,82vh));aspect-ratio:1;border-radius:16px;overflow:hidden;
+     box-shadow:0 12px 40px rgba(0,0,0,.5);animation:ac .18s ease-out}
+  @keyframes ac{from{transform:scale(.9);opacity:.4}to{transform:scale(1);opacity:1}}
+  .yakin-kutu img{width:100%;height:100%;object-fit:cover;display:block}
+  .yakin-kutu .h{position:absolute;transform:translate(-50%,-50%);border-radius:50%;cursor:pointer;
+     background:transparent;border:none}
+  .yakin-kutu .h.dogru{background:radial-gradient(circle,rgba(63,122,77,.28),rgba(63,122,77,.05) 70%);
+     box-shadow:0 0 0 4px var(--yesil), 0 0 22px 6px rgba(63,122,77,.7)}
+  .yakin-kutu .h.yanlis{background:radial-gradient(circle,rgba(184,69,47,.28),transparent 70%);
+     box-shadow:0 0 0 4px var(--kirmizi)}
+  .yakin-kapat{position:absolute;top:calc(50% - min(47vw,min(280px,41vh)) - 46px);left:50%;transform:translateX(-50%);
+     background:#fff6df;color:var(--lacivert);border:none;border-radius:999px;padding:8px 18px;font-family:inherit;
+     font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+
+  /* ---------- CEVAP / MODAL ---------- */
+  .perde{position:fixed;inset:0;background:rgba(22,35,63,.6);display:flex;align-items:center;justify-content:center;
+     padding:20px;z-index:60}
+  .modal{background:linear-gradient(180deg,#fff8e8,#f1e3c2);border:3px solid var(--altin);border-radius:20px;
+     padding:24px;max-width:420px;width:100%;text-align:center;box-shadow:0 16px 50px rgba(0,0,0,.4)}
+  .modal h2{margin:.1em 0 .3em;color:var(--lacivert);font-size:26px}
+  .modal .ad{font-size:30px;font-weight:700;color:var(--kirmizi);margin:.1em 0}
+  .modal .ayet{display:inline-block;margin-top:10px;background:var(--lacivert);color:var(--altin2);
+     text-decoration:none;padding:6px 14px;border-radius:999px;font-size:14px}
+  .modal p{color:var(--metin2);line-height:1.5;font-size:15px}
+  .modal .btn{margin-top:18px}
+
+  .nasil li{margin:.5em 0;line-height:1.5}
+  .nasil{text-align:left;padding-left:20px;color:var(--metin);font-size:15px}
+
+  .ayar-sat{display:flex;flex-direction:column;gap:8px;text-align:left;margin:10px 0}
+  .ayar-sat .sec{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:2px solid var(--altin);background:#fff6df;color:var(--lacivert);border-radius:10px;
+     padding:9px 12px;font-family:inherit;font-size:14px;cursor:pointer;flex:1;min-width:90px}
+  .chip.aktif{background:var(--lacivert);color:var(--altin2);border-color:var(--lacivert)}
+  .not-kucuk{font-size:12px;color:var(--metin2);opacity:.8;margin-top:2px}
+</style>
+</head>
+<body>
+
+<!-- GİRİŞ -->
+<section id="giris">
+  <div class="logo">🧠</div>
+  <h1>Hızlı Hafız</h1>
+  <p class="altbaslik">İpucundan bul — görsel dikkat oyunu</p>
+  <span class="rozet">Din Kültürü ve Ahlâk Bilgisi · 3–8</span>
+  <div class="menu">
+    <button class="btn" onclick="Oyun.basla('tek')"><span class="k">👤</span> Tek Kişi</button>
+    <button class="btn ikincil" onclick="Ekran.goster('nasil')"><span class="k">📖</span> Nasıl Oynanır</button>
+    <button class="btn ikincil" onclick="Ekran.goster('ayar')"><span class="k">⚙️</span> Ayarlar</button>
+  </div>
+  <p class="not-kucuk" id="giris-durum" style="margin-top:18px"></p>
+</section>
+
+<!-- OYUN -->
+<section id="oyun" class="gizli">
+  <div class="ust">
+    <button class="ikon-btn" onclick="Oyun.cik()" title="Ana menü">🏠</button>
+    <div class="ilerleme" id="ilerleme"></div>
+    <div class="sayac" id="sayac">0:00</div>
+  </div>
+  <div class="ipucu">
+    <span class="et">BİLGİ KARTI</span>
+    <p id="ipucu-metin">…</p>
+  </div>
+  <div class="tahta" id="tahta"></div>
+</section>
+
+<!-- YAKIN KART -->
+<div id="yakin" class="gizli"></div>
+
+<!-- MODALLAR -->
+<div id="perde" class="perde gizli"></div>
+
+<script>
+/* ============================================================
+   HIZLI HAFIZ — prototip motoru
+   Veri: icerik/katalog.json (kartlar + koordinatlar + ben-dilli metin)
+   Görsel üretimi YOK; Rauf'un 8 kartı olduğu gibi tahta olur.
+   ============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const HEDEF_KELIME="HIZLI HAFIZ";
+
+const Ekran={
+  goster(ad){
+    if(ad==='nasil') this.modalNasil();
+    else if(ad==='ayar') this.modalAyar();
+  },
+  kapat(){ $('#perde').classList.add('gizli'); $('#perde').innerHTML=''; },
+  perde(html){
+    const p=$('#perde'); p.classList.remove('gizli');
+    p.innerHTML=`<div class="modal">${html}</div>`;
+    p.onclick=e=>{ if(e.target===p) this.kapat(); };
+  },
+  modalNasil(){
+    this.perde(`
+      <h2>Nasıl Oynanır?</h2>
+      <ol class="nasil">
+        <li>Üstteki <b>bilgi kartını</b> oku — bir sembolü adını söylemeden tarif eder.</li>
+        <li>Ekrandaki <b>8 kartın</b> içinde o sembolü bul.</li>
+        <li>Kartı seç, yakınlaş ve <b>doğru sembole dokun</b>.</li>
+        <li>Her doğru buluş <b>HIZLI&nbsp;HAFIZ</b>'dan bir harf kazandırır; kelimeyi tamamlayan bitirir.</li>
+        <li>Doğru bulunca sembolün adı ve <b>âyet kaynağı</b> gösterilir — böylece öğrenirsin.</li>
+      </ol>
+      <button class="btn" onclick="Ekran.kapat()">Anladım</button>`);
+  },
+  modalAyar(){
+    const m=Oyun.mod;
+    const c=(v,l)=>`<button class="chip ${m===v?'aktif':''}" onclick="Oyun.modAyarla('${v}')">${l}</button>`;
+    this.perde(`
+      <h2>Ayarlar</h2>
+      <div class="ayar-sat">
+        <b>Seçim şekli</b>
+        <div class="sec">
+          ${c('iki','Kart → Sembol')}
+          ${c('kart','Sadece kart')}
+          ${c('sembol','Tüm semboller')}
+        </div>
+        <div class="not-kucuk">
+          <b>Kart → Sembol:</b> önce kartı seç, yakınlaş, sembole dokun (varsayılan).<br>
+          <b>Sadece kart:</b> sembolü içeren karta dokunman yeter.<br>
+          <b>Tüm semboller:</b> bütün semboller aynı anda dokunulabilir.
+        </div>
+      </div>
+      <button class="btn" onclick="Ekran.kapat()">Kaydet</button>`);
+  }
+};
+
+const Oyun={
+  veri:null, mod:localStorage.getItem('hh:mod')||'iki',
+  havuz:[], sidHaritasi:{}, hedef:null, sonSid:null,
+  dogru:0, gereken:0, baslangic:0, sayacT:null, kilit:false,
+
+  async yukle(){
+    try{
+      const r=await fetch('icerik/katalog.json'); this.veri=await r.json();
+      // sid -> [{kartIdx, item}]
+      this.veri.kartlar.forEach((k,ki)=>k.items.forEach(it=>{
+        (this.sidHaritasi[it.sid]=this.sidHaritasi[it.sid]||[]).push({ki,it});
+      }));
+      // hedef havuzu: ben-dilli metni olan semboller
+      this.havuz=Object.keys(this.veri.semboller).filter(sid=>{
+        const s=this.veri.semboller[sid]; return s.ben && s.ben.length>4 && this.sidHaritasi[sid];
+      });
+      $('#giris-durum').textContent=`${this.veri.kartlar.length} kart · ${this.havuz.length} oynanır sembol hazır`;
+    }catch(e){ $('#giris-durum').textContent='Katalog yüklenemedi: '+e.message; }
+  },
+  modAyarla(v){ this.mod=v; localStorage.setItem('hh:mod',v); Ekran.modalAyar(); },
+
+  basla(){
+    if(!this.veri){ alert('Katalog henüz yüklenmedi.'); return; }
+    this.dogru=0; this.gereken=HEDEF_KELIME.replace(/\s/g,'').length; this.sonSid=null;
+    $('#giris').classList.add('gizli'); $('#oyun').classList.remove('gizli');
+    this.ilerlemeCiz(); this.baslangic=Date.now();
+    clearInterval(this.sayacT); this.sayacT=setInterval(()=>this.sayacCiz(),250); this.sayacCiz();
+    this.tahtaCiz(); this.yeniTur();
+  },
+  cik(){ clearInterval(this.sayacT); $('#yakin').classList.add('gizli'); Ekran.kapat();
+    $('#oyun').classList.add('gizli'); $('#giris').classList.remove('gizli'); },
+
+  sayacCiz(){ const s=Math.floor((Date.now()-this.baslangic)/1000);
+    $('#sayac').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); },
+  ilerlemeCiz(){
+    const el=$('#ilerleme'); el.innerHTML=''; let d=0;
+    for(const ch of HEDEF_KELIME){
+      if(ch===' '){ el.insertAdjacentHTML('beforeend','<span class="harf bosluk"></span>'); continue; }
+      const dolu = d<this.dogru; d++;
+      el.insertAdjacentHTML('beforeend',`<span class="harf ${dolu?'dolu':''}">${ch}</span>`);
+    }
+  },
+
+  tahtaCiz(){
+    const t=$('#tahta'); t.className='tahta'+(this.mod==='sembol'?' hepsi':''); t.innerHTML='';
+    this.veri.kartlar.forEach((k,ki)=>{
+      const d=document.createElement('div'); d.className='kart'; d.dataset.ki=ki;
+      d.innerHTML=`<span class="no">${k.no}</span><img src="${k.gorsel}" alt="Kart ${k.no}">`;
+      if(this.mod==='sembol'){
+        k.items.forEach(it=>{
+          const b=document.createElement('button'); b.className='nokta';
+          b.style.left=it.x+'%'; b.style.top=it.y+'%';
+          const boy=(it.boy||20); b.style.width=boy+'%'; b.style.height=boy+'%';
+          b.onclick=e=>{ e.stopPropagation(); this.secildi(it.sid, b, d); };
+          d.appendChild(b);
+        });
+      }else{
+        d.onclick=()=>this.kartTikla(ki,d);
+      }
+      t.appendChild(d);
+    });
+  },
+
+  yeniTur(){
+    this.kilit=false;
+    let sid; do{ sid=this.havuz[Math.floor(Math.random()*this.havuz.length)]; }while(sid===this.sonSid && this.havuz.length>1);
+    this.sonSid=sid; this.hedef=sid;
+    $('#ipucu-metin').textContent=this.veri.semboller[sid].ben;
+    document.querySelectorAll('.kart').forEach(k=>k.classList.remove('dogru','yanlis'));
+  },
+
+  kartTikla(ki,el){
+    if(this.kilit) return;
+    const kart=this.veri.kartlar[ki];
+    const varMi=kart.items.some(it=>it.sid===this.hedef);
+    if(this.mod==='kart'){
+      if(varMi) this.dogruCevap(el);
+      else this.yanlisKart(el);
+    }else{ // iki aşamalı
+      this.yakinAc(ki);
+    }
+  },
+
+  yakinAc(ki){
+    const kart=this.veri.kartlar[ki];
+    const y=$('#yakin'); y.classList.remove('gizli');
+    let h=`<button class="yakin-kapat" onclick="Oyun.yakinKapat()">✕ Kapat</button>
+      <div class="yakin-kutu"><img src="${kart.gorsel}" alt="Kart ${kart.no}">`;
+    kart.items.forEach((it,idx)=>{
+      const boy=(it.boy||20);
+      h+=`<button class="h" data-sid="${it.sid}" data-idx="${idx}"
+            style="left:${it.x}%;top:${it.y}%;width:${boy}%;height:${boy}%"></button>`;
+    });
+    h+='</div>'; y.innerHTML=h;
+    y.querySelectorAll('.h').forEach(b=>{
+      b.onclick=()=>this.hotspotTikla(b, kart);
+    });
+    y.onclick=e=>{ if(e.target===y) this.yakinKapat(); };
+  },
+  yakinKapat(){ $('#yakin').classList.add('gizli'); $('#yakin').innerHTML=''; },
+
+  hotspotTikla(b, kart){
+    if(this.kilit) return;
+    if(b.dataset.sid===this.hedef){
+      this.kilit=true; b.classList.add('dogru');
+      setTimeout(()=>{ this.yakinKapat(); this.dogruCevap(); }, 620);
+    }else{
+      b.classList.add('yanlis');
+      setTimeout(()=>b.classList.remove('yanlis'), 500);
+    }
+  },
+
+  yanlisKart(el){ el.classList.add('yanlis'); setTimeout(()=>el.classList.remove('yanlis'),450); },
+
+  secildi(sid,b,el){ // 'sembol' modu
+    if(this.kilit) return;
+    if(sid===this.hedef){ this.kilit=true; el.classList.add('dogru'); setTimeout(()=>this.dogruCevap(),400); }
+    else{ this.yanlisKart(el); }
+  },
+
+  dogruCevap(){
+    this.dogru++; this.ilerlemeCiz();
+    const s=this.veri.semboller[this.hedef];
+    if(this.dogru>=this.gereken){ this.bitti(); return; }
+    // kısa cevap gösterimi
+    const ayetHtml = s.ayet ? `<a class="ayet" href="https://quran.com/${s.ayet.replace(':','/')}" target="_blank" rel="noopener">Kur'an-ı Kerîm ${s.ayet}</a>` : '';
+    Ekran.perde(`
+      <h2>Aferin! ✓</h2>
+      <div class="ad">${s.ad}</div>
+      ${ayetHtml}
+      <button class="btn" onclick="Ekran.kapat();Oyun.yeniTur();">Devam</button>`);
+    // otomatik geç
+    setTimeout(()=>{ if(!$('#perde').classList.contains('gizli')){ Ekran.kapat(); this.yeniTur(); } }, 1600);
+  },
+
+  bitti(){
+    clearInterval(this.sayacT);
+    const sure=$('#sayac').textContent;
+    Ekran.perde(`
+      <h2>🎉 Tamamlandı!</h2>
+      <p>HIZLI HAFIZ kelimesini <b>${sure}</b> sürede tamamladın.</p>
+      <button class="btn" onclick="Ekran.kapat();Oyun.basla();">Tekrar Oyna</button>
+      <button class="btn ikincil" style="margin-top:8px" onclick="Ekran.kapat();Oyun.cik();">Ana Menü</button>`);
+  }
+};
+
+window.Oyun=Oyun; window.Ekran=Ekran;
+Oyun.yukle();
+</script>
+</body>
+</html>
