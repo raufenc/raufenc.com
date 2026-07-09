@@ -258,7 +258,7 @@ window.PAKET = {
       "ad": "Bin",
       "gorsel": "sayi-1000.jpg",
       "emoji": "1000",
-      "bilgi": "On kere yüz eden büyük sayı."
+      "bilgi": "Bin aydan hayırlı Kadir gecesini düşündüren büyük sayı."
     },
     {
       "id": "esek",
