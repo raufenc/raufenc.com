@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ölçü Testi — Hangi Profildesin? | Muallim ve Makine</title>
+<meta name="description" content="10 soruluk profil testi: Eski Not Canavarı ile AI Sörfçüsü arasında neredesiniz? Sonuç kartınızı ve katılım sertifikanızı indirin.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.qbox{max-width:760px;margin:0 auto}
+.qprog{display:flex;gap:6px;margin-bottom:22px}
+.qprog i{flex:1;height:6px;border-radius:4px;background:var(--cream2);transition:.3s}
+.qprog i.on{background:var(--gold)}
+.soru{font-family:var(--serif);font-size:clamp(20px,2.6vw,26px);color:var(--navy);margin-bottom:22px;min-height:70px}
+.opts{display:grid;gap:11px}
+.opt{background:#fff;border:1.5px solid var(--line);border-radius:13px;padding:15px 18px;cursor:pointer;transition:.18s;font-size:15.5px}
+.opt:hover{border-color:var(--teal);transform:translateX(5px)}
+.sonuc{display:none}
+.sonuc.on{display:block}
+.skala{position:relative;height:14px;border-radius:8px;background:linear-gradient(90deg,#8a4a2b,#B98A2E,#1F6E6B);margin:34px 0 10px}
+.skala .imlec{position:absolute;top:-9px;width:32px;height:32px;border-radius:50%;background:#fff;border:4px solid var(--navy);transform:translateX(-50%);transition:left 1s cubic-bezier(.3,1.3,.5,1);box-shadow:var(--sh-md)}
+.skala-cap{display:flex;justify-content:space-between;font-size:12.5px;color:var(--gray);margin-bottom:26px}
+.profil{font-family:var(--serif);font-size:30px;color:var(--navy);margin-bottom:8px}
+.profil small{display:block;font-family:var(--sans);font-size:15px;color:var(--gold);font-weight:700;letter-spacing:.08em;margin-bottom:6px}
+canvas.kart{width:100%;max-width:560px;border-radius:14px;box-shadow:var(--sh-md);margin:22px auto;display:block}
+.sert{display:grid;grid-template-columns:1fr auto;gap:12px;max-width:560px;margin:0 auto}
+@media(max-width:640px){.sert{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+<section style="padding-top:56px">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow reveal">Ölçü Testi</div>
+      <h2 class="h2 reveal">Canavar mı, sörfçü mü?</h2>
+      <p class="lead reveal" style="margin:14px auto 0">10 soru. Sonunda “Eski Not Canavarı ↔ AI Sörfçüsü” skalasındaki yerinizi, sonuç kartınızı ve katılım sertifikanızı alın. Cevaplar cihazınızda kalır.</p>
+    </div>
+
+    <div class="qbox" style="margin-top:44px">
+      <div id="quiz">
+        <div class="qprog" id="qprog"></div>
+        <div class="soru" id="soru"></div>
+        <div class="opts" id="opts"></div>
+      </div>
+
+      <div class="sonuc" id="sonuc">
+        <div class="center">
+          <div class="profil" id="profilAd"><small id="profilPuan"></small></div>
+          <p id="profilTxt" style="color:var(--gray);max-width:560px;margin:0 auto"></p>
+        </div>
+        <div class="skala"><div class="imlec" id="imlec" style="left:0%"></div></div>
+        <div class="skala-cap"><span>🗂 Eski Not Canavarı</span><span>🌊 AI Sörfçüsü</span></div>
+        <canvas class="kart" id="kart" width="1120" height="630"></canvas>
+        <div class="center" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn sm gold" id="kartIndir">↓ Sonuç kartını indir</button>
+          <button class="btn sm ghost" id="tekrar">↺ Testi tekrarla</button>
+        </div>
+
+        <div style="margin-top:54px" class="panel">
+          <span class="tag">Sertifika</span>
+          <h3>Katılım kartınız</h3>
+          <p class="sub">Adınızı yazın; seminer katılım kartınız anında oluşsun.</p>
+          <div class="sert">
+            <input type="text" id="sertAd" placeholder="Adınız Soyadınız">
+            <button class="btn" id="sertBtn">✦ Sertifikayı Üret</button>
+          </div>
+          <canvas class="kart" id="sert" width="1400" height="990" style="display:none"></canvas>
+          <div class="center"><button class="btn sm gold" id="sertIndir" style="display:none">↓ Sertifikayı indir (PNG)</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site"><div class="wrap"><div><b>raufenc.com</b> — Ölçü Testi</div><div>“Anlarsan kalır, konuşursan senindir.”</div></div></footer>
+</main>
+
+<script src="assets/app.js"></script>
+<script>
+const SORULAR=[
+ {q:"Yapay zekâ sınıfınıza girse ilk işi ne olurdu?",o:[["Kapıdan çeviririm — benim notlarım bana yeter.",0],["İzlerim ama dokunmam; belli olmaz bunlar.",1],["Angaryayı devrederim: fotokopi, soru, liste.",2],["Muavin yaparım: ben yön veririm, o koşar.",3]]},
+ {q:"“7. sınıf için ders hazırla” yazan meslektaşınıza ne dersiniz?",o:[["Ne güzel işte, kısa ve öz.",0],["Biraz daha detay ekleyebilir belki.",1],["Bu prompt değil, temenni — MERSİN'i anlatırım.",3],["Yapay zekâya hiç bulaşmasın daha iyi.",0]]},
+ {q:"Model size çok güzel görünen ama emin olmadığınız bir kazanım yazdı. Ne yaparsınız?",o:[["Güzelse doğrudur, alırım.",0],["Müfredattan kontrol ederim; şuur değil istatistik bu.",3],["Kullanmam ama silmem de, dursun.",1],["Modele 'emin misin?' diye sorarım, o bilir.",1]]},
+ {q:"2009'dan kalma ders notlarınız için ne düşünüyorsunuz?",o:[["Altın değerinde; hiç dokunmam.",0],["Kökü sağlam, kalıbı eskidi — güncellerim.",3],["Hepsini çöpe atıp her şeyi YZ'ye yaptırırım.",1],["Notlarım mı vardı?",2]]},
+ {q:"Öğrenciniz eve gidip çeviriyi ChatGPT'ye yaptırıyor. Tepkiniz?",o:[["Yasaklarım, nokta.",0],["Demek ki benim sorum tercüme düzeyinde kalmış; soruyu manaya taşırım.",3],["Görmezden gelirim.",1],["Ben de cevabı YZ'den okurum, berabere kalırız.",1]]},
+ {q:"İnternette harika bir etkinlik gördünüz. İlk hamleniz?",o:[["Aynen kopyalar, yarın uygularım.",1],["Kalıbını çıkarır, kendi sınıfıma sentezlerim.",3],["Beğenirim, kaydederim, bir daha açmam.",1],["Benim sınıfta işlemez, geçerim.",0]]},
+ {q:"“AI hız verir; muallim …” — boşluğu doldurun:",o:[["…yer verir.",1],["…yön verir.",3],["…izin verir.",1],["…pes eder.",0]]},
+ {q:"Model 200 sayfalık ders planı üretti. Sorun nerede?",o:[["Sorun yok, kâğıt bol.",0],["Yazıcıda.",1],["Prompt'ta: sınır ve çıktı formatı yazılmamış.",3],["Modelde: kesin bozuk.",1]]},
+ {q:"Sarf dersi ile yapay zekânın ortak noktası sizce ne?",o:[["Hiçbir şey; biri ilim, öteki oyuncak.",0],["İkisi de ezber ister.",1],["İkisi de kök + kalıp + ilişkiden anlam üretir.",3],["İkisi de sabah dersine gelmez.",2]]},
+ {q:"Seminerden çıkarken cebinizde ne olsun isterdiniz?",o:[["Katılım belgesi, yeter.",1],["Üç ölçü: istatistik, muavin, kalıp.",3],["Birkaç hazır prompt.",2],["Çay ve simit.",1]]}
+];
+const PROFIL=[
+ [0,25,"🗂 Eski Not Canavarı (tehlike bölgesi)","2009 notları güvenli bir mağara gibi görünebilir ama dışarıda hayat hızlandı. Küçük bir adım: bir dersinizi Laboratuvar'daki deneylerle tazeleyin — kimse notlarınıza dokunmayacak, söz."],
+ [26,50,"🔍 Temkinli Gözlemci","Mesafeniz sağlıklı bir şüphecilik içeriyor — bu aslında 'ölçü'nün yarısı. Öbür yarısı deneyimle gelir: MERSİN Oluşturucu'da tek bir prompt yazın, gerisi çorap söküğü."],
+ [51,75,"⚖ Ölçülü Muavin Yöneticisi","Dengeniz güzel: hızı makineden, yönü kendinizden alıyorsunuz. Sıradaki seviye: tersine mühendislik — iyi örneklerin kalıbını çıkarıp kendi imzanızla sentezlemek."],
+ [76,100,"🌊 AI Sörfçüsü (ölçüsü cebinde)","Dalgayı yakalamışsınız ve tahtanız sağlam: şuur değil istatistik, muavin değil muallim, kopya değil kalıp. Şimdi görev: bu ölçüyü zümrenize de sörf dersi olarak verin."]
+];
+let qi=0,puan=0;
+const qprog=document.getElementById("qprog"),soru=document.getElementById("soru"),opts=document.getElementById("opts");
+SORULAR.forEach(()=>{const i=document.createElement("i");qprog.appendChild(i)});
+function qRender(){
+  [...qprog.children].forEach((el,i)=>el.classList.toggle("on",i<qi));
+  const s=SORULAR[qi];
+  soru.textContent=(qi+1)+". "+s.q;
+  opts.innerHTML="";
+  const shuffled=[...s.o].sort(()=>Math.random()-.5);
+  shuffled.forEach(o=>{
+    const d=document.createElement("div");d.className="opt";d.textContent=o[0];
+    d.onclick=()=>{puan+=o[1];qi++;qi<SORULAR.length?qRender():bitir()};
+    opts.appendChild(d);
+  });
+}
+function bitir(){
+  opts.innerHTML="";
+  document.getElementById("quiz").style.display="none";
+  const yuzde=Math.round(puan/30*100);
+  const p=PROFIL.find(x=>yuzde>=x[0]&&yuzde<=x[1]);
+  document.getElementById("sonuc").classList.add("on");
+  document.getElementById("profilPuan").textContent="SKOR: "+yuzde+"/100";
+  document.getElementById("profilAd").append(p[2]);
+  document.getElementById("profilTxt").textContent=p[3];
+  requestAnimationFrame(()=>document.getElementById("imlec").style.left=yuzde+"%");
+  kartCiz(p[2],yuzde);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+/* Sonuç kartı */
+function kartCiz(ad,yuzde){
+  const c=document.getElementById("kart"),x=c.getContext("2d");
+  x.fillStyle="#16404A";x.fillRect(0,0,1120,630);
+  x.fillStyle="rgba(228,201,126,.08)";x.beginPath();x.arc(980,80,190,0,7);x.fill();
+  x.beginPath();x.arc(80,590,150,0,7);x.fillStyle="rgba(31,110,107,.35)";x.fill();
+  x.fillStyle="#E4C97E";x.font="700 26px Georgia";x.fillText("MUALLİM ve MAKİNE · ÖLÇÜ TESTİ",70,90);
+  x.fillStyle="rgba(233,226,210,.7)";x.font="20px Georgia";x.fillText("Yabancı Dil Öğretiminde Yapay Zekâ — Rauf Enç",70,126);
+  x.fillStyle="#fff";x.font="700 58px Georgia";x.fillText(ad,70,290);
+  x.fillStyle="#E4C97E";x.font="700 40px Georgia";x.fillText("Skor: "+yuzde+" / 100",70,360);
+  /* skala */
+  const gx=70,gw=980,gy=440;
+  const gr=x.createLinearGradient(gx,0,gx+gw,0);gr.addColorStop(0,"#8a4a2b");gr.addColorStop(.5,"#B98A2E");gr.addColorStop(1,"#1F6E6B");
+  x.fillStyle=gr;x.beginPath();x.roundRect(gx,gy,gw,18,9);x.fill();
+  x.fillStyle="#fff";x.beginPath();x.arc(gx+gw*yuzde/100,gy+9,20,0,7);x.fill();
+  x.strokeStyle="#16404A";x.lineWidth=6;x.beginPath();x.arc(gx+gw*yuzde/100,gy+9,20,0,7);x.stroke();
+  x.fillStyle="rgba(233,226,210,.75)";x.font="18px Georgia";
+  x.fillText("Eski Not Canavarı",gx,gy+56);x.textAlign="right";x.fillText("AI Sörfçüsü",gx+gw,gy+56);x.textAlign="left";
+  x.fillStyle="#E4C97E";x.font="italic 22px Georgia";x.fillText("“AI hız verir; muallim yön verir.”",70,575);
+  x.fillStyle="rgba(233,226,210,.6)";x.font="18px Georgia";x.textAlign="right";x.fillText("raufenc.com",1050,575);x.textAlign="left";
+}
+document.getElementById("kartIndir").onclick=()=>{
+  const a=document.createElement("a");a.download="olcu-testi-sonuc.png";a.href=document.getElementById("kart").toDataURL("image/png");a.click();
+};
+document.getElementById("tekrar").onclick=()=>{qi=0;puan=0;document.getElementById("sonuc").classList.remove("on");
+  document.getElementById("profilAd").lastChild.remove();document.getElementById("quiz").style.display="";qRender()};
+
+/* Sertifika */
+document.getElementById("sertBtn").onclick=()=>{
+  const ad=(document.getElementById("sertAd").value||"").trim();
+  if(!ad){toast("Önce adınızı yazın");return}
+  const c=document.getElementById("sert"),x=c.getContext("2d");
+  x.fillStyle="#FBF7EF";x.fillRect(0,0,1400,990);
+  x.strokeStyle="#B98A2E";x.lineWidth=6;x.strokeRect(46,46,1308,898);
+  x.strokeStyle="rgba(185,138,46,.45)";x.lineWidth=2;x.strokeRect(62,62,1276,866);
+  x.fillStyle="rgba(31,110,107,.07)";x.font="700 420px Georgia";x.textAlign="center";x.fillText("ض",700,640);
+  x.fillStyle="#B98A2E";x.font="24px Georgia";x.letterSpacing="6px";
+  x.fillText("TÜRKİYE YÜZYILI MAARİF MODELİ • EĞİTİCİ EĞİTİMİ • MERSİN",700,150);x.letterSpacing="0px";
+  x.fillStyle="#16404A";x.font="700 62px Georgia";x.fillText("Katılım Kartı",700,240);
+  x.fillStyle="#5C6B70";x.font="26px Georgia";x.fillText("“Yabancı Dil Öğretiminde Yapay Zekâ Kullanımı” seminerine katılarak",700,330);
+  x.fillText("aleti kabullenmiş, ölçüsünü kuşanmış ve felsefesini kavramıştır.",700,368);
+  x.fillStyle="#1F6E6B";x.font="italic 700 76px Georgia";x.fillText(ad,700,500);
+  x.strokeStyle="#B98A2E";x.lineWidth=2;x.beginPath();x.moveTo(420,530);x.lineTo(980,530);x.stroke();
+  x.fillStyle="#16404A";x.font="700 30px Georgia";
+  x.fillText("١  Şuur değil, istatistik      ٢  Muavin, muallim değil      ٣  Kopya değil, kalıp",700,620);
+  x.fillStyle="#5C6B70";x.font="24px Georgia";
+  const t=new Date();x.fillText(t.toLocaleDateString("tr-TR",{day:"numeric",month:"long",year:"numeric"}),380,800);
+  x.fillText("Rauf Enç — Eğitici",1020,800);
+  x.strokeStyle="rgba(92,107,112,.5)";x.beginPath();x.moveTo(260,764);x.lineTo(500,764);x.stroke();
+  x.beginPath();x.moveTo(900,764);x.lineTo(1140,764);x.stroke();
+  x.fillStyle="#B98A2E";x.font="italic 26px Georgia";x.fillText("“Makine kelimeyi çevirebilir; insanı anlamla ancak insan tanıştırır.”",700,880);
+  x.textAlign="left";
+  c.style.display="block";document.getElementById("sertIndir").style.display="";
+  toast("Sertifika hazır ✓");
+};
+document.getElementById("sertIndir").onclick=()=>{
+  const a=document.createElement("a");a.download="katilim-karti.png";a.href=document.getElementById("sert").toDataURL("image/png");a.click();
+};
+qRender();
+</script>
+</body>
+</html>

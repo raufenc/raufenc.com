@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunucu Modu — Muallim ve Makine</title>
+<link rel="icon" href="assets/icon-192.png">
+<style>
+:root{--cream:#FBF7EF;--navy:#16404A;--teal:#1F6E6B;--gold:#B98A2E;--gold-text:#7B5B1E;--goldl:#E4C97E;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0b1f24;color:#e8e1d2;font-family:'Segoe UI',system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid rgba(228,201,126,.2)}
+header .t{font-family:Georgia,serif;font-size:16px;color:var(--goldl)}
+#clockBox{display:flex;gap:18px;align-items:center}
+#timer{font-size:30px;font-variant-numeric:tabular-nums;font-weight:700;color:#fff}
+#drift{font-size:13px;padding:5px 12px;border-radius:14px;background:rgba(255,255,255,.08)}
+#drift.iyi{color:#8fd6b4}#drift.geri{color:#f2b09a}
+#clockBox button{background:rgba(228,201,126,.14);border:1px solid rgba(228,201,126,.35);color:var(--goldl);border-radius:9px;padding:7px 13px;cursor:pointer;font-size:13.5px}
+main{flex:1;display:grid;grid-template-columns:1.25fr 1fr;gap:16px;padding:16px;min-height:0}
+.col{display:flex;flex-direction:column;gap:12px;min-height:0}
+.shot{position:relative;border-radius:12px;overflow:hidden;background:#000;border:1px solid rgba(228,201,126,.2)}
+.shot img{width:100%;display:block}
+.shot .cap{position:absolute;top:8px;left:8px;background:rgba(13,40,48,.85);color:var(--goldl);font-size:11.5px;letter-spacing:.1em;padding:4px 10px;border-radius:12px}
+#notesP{flex:1;background:var(--cream);color:#22333a;border-radius:12px;padding:16px 18px;font-size:16.5px;line-height:1.6;overflow:auto;min-height:0}
+#notesP b{color:var(--teal)}
+#notesP .nt{font-size:11.5px;letter-spacing:.14em;color:var(--gold-text);font-weight:700;margin-bottom:8px}
+#secNow{font-size:13px;color:#9fb7b3}
+.ctl{display:flex;gap:10px;align-items:center}
+.ctl button{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(228,201,126,.3);color:#fff;font-size:22px;border-radius:12px;padding:14px;cursor:pointer}
+.ctl button:hover{background:rgba(228,201,126,.18)}
+#cnt{font-size:16px;font-variant-numeric:tabular-nums;color:var(--goldl);min-width:74px;text-align:center}
+#plan{background:rgba(255,255,255,.04);border:1px solid rgba(228,201,126,.15);border-radius:12px;padding:10px;overflow:auto}
+#plan div{display:flex;justify-content:space-between;padding:7px 10px;border-radius:8px;font-size:13.5px;color:#b9c9c6}
+#plan div.cur{background:rgba(228,201,126,.16);color:#fff;font-weight:700}
+#plan div span:last-child{font-variant-numeric:tabular-nums;color:var(--goldl)}
+.warn{font-size:12px;color:#7f9a96;text-align:center;padding:4px}
+@media(max-width:860px){main{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="t">👁 Sunucu Modu — perde ile senkron</div>
+  <div id="clockBox">
+    <div id="timer">00:00</div>
+    <div id="drift">plan: —</div>
+    <button id="tStart">▶ Başlat</button>
+    <button id="tReset">↺</button>
+  </div>
+</header>
+<main>
+  <div class="col">
+    <div class="shot"><span class="cap">ŞİMDİ — <span id="secNowCap"></span></span><img id="curImg" alt="Şu anki slayt"></div>
+    <div class="ctl">
+      <button id="pPrev" title="Önceki">‹</button>
+      <div id="cnt">1 / 40</div>
+      <button id="pNext" title="Sonraki">›</button>
+    </div>
+    <div class="shot" style="opacity:.85"><span class="cap">SIRADAKİ</span><img id="nextImg" alt="Sıradaki slayt"></div>
+  </div>
+  <div class="col">
+    <div id="notesP"><div class="nt">KONUŞMACI NOTU</div><div id="noteBody"></div></div>
+    <div id="plan"></div>
+    <div class="warn">Bu pencereyi ikinci ekrana alın; perdedeki sunumla iki yönlü senkrondur. ←/→ burada da çalışır.</div>
+  </div>
+</main>
+
+<script src="assets/deck.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,"0");
+let cur=1;
+
+/* Senkron */
+let bc=null; try{bc=new BroadcastChannel("seminer-sync")}catch(e){}
+if(bc)bc.onmessage=e=>{if(e.data&&e.data.type==="slide")setCur(e.data.n,false)};
+addEventListener("storage",e=>{if(e.key==="seminer-slide"){try{setCur(JSON.parse(e.newValue).n,false)}catch(_){}}});
+function tell(n){ if(bc)bc.postMessage({type:"goto",n}); try{localStorage.setItem("seminer-goto",JSON.stringify({n,t:Date.now()}))}catch(e){} }
+
+const plan=$("plan");
+DECK.SECTIONS.forEach(s=>{
+  const d=document.createElement("div");
+  d.innerHTML=`<span>${s.name}</span><span>${s.min}′</span>`;
+  d.onclick=()=>setCur(s.start,true);
+  d.style.cursor="pointer";
+  plan.appendChild(d);
+});
+
+function setCur(n,announce=true){
+  cur=Math.max(1,Math.min(DECK.N,n));
+  $("curImg").src=`slides/s${pad(cur)}.jpg`;
+  $("nextImg").src= cur<DECK.N ? `slides/s${pad(cur+1)}.jpg` : `slides/s${pad(cur)}.jpg`;
+  $("cnt").textContent=`${cur} / ${DECK.N}`;
+  $("noteBody").innerHTML=DECK.NOTES[cur-1];
+  const s=DECK.secOf(cur);
+  $("secNowCap").textContent=s.name;
+  [...plan.children].forEach((d,i)=>d.classList.toggle("cur",DECK.SECTIONS[i]===s));
+  if(announce)tell(cur);
+  drift();
+}
+$("pPrev").onclick=()=>setCur(cur-1);
+$("pNext").onclick=()=>setCur(cur+1);
+document.addEventListener("keydown",e=>{
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key==="ArrowRight"||e.key===" ")setCur(cur+1);
+  else if(e.key==="ArrowLeft")setCur(cur-1);
+});
+
+/* Kronometre + plan sapması */
+let t0=null,acc=0,tick=null;
+function fmt(ms){const s=Math.floor(ms/1000);return pad(Math.floor(s/60))+":"+pad(s%60)}
+function drift(){
+  const el=$("drift");
+  if(t0===null&&acc===0){el.textContent="plan: hazır";el.className="";return}
+  const gecen=(acc+(t0?Date.now()-t0:0))/60000;
+  const planl=DECK.planMinAt(cur);
+  const d=gecen-planl;
+  el.textContent=`plan: ${planl.toFixed(0)}′ · geçen: ${gecen.toFixed(0)}′ · ${d>=0?"+":""}${d.toFixed(1)}′`;
+  el.className=Math.abs(d)<2?"iyi":(d>0?"geri":"iyi");
+}
+function tstart(){
+  if(t0){acc+=Date.now()-t0;t0=null;$("tStart").textContent="▶ Devam";clearInterval(tick)}
+  else{t0=Date.now();$("tStart").textContent="⏸ Duraklat";tick=setInterval(()=>{$("timer").textContent=fmt(acc+(Date.now()-t0));drift()},1000)}
+}
+$("tStart").onclick=tstart;
+$("tReset").onclick=()=>{t0=null;acc=0;$("timer").textContent="00:00";$("tStart").textContent="▶ Başlat";clearInterval(tick);drift()};
+
+/* İlk durum: perdenin son bildirdiği slayt */
+try{const last=JSON.parse(localStorage.getItem("seminer-slide"));if(last&&last.n)cur=last.n}catch(e){}
+setCur(cur,false);drift();
+</script>
+</body>
+</html>

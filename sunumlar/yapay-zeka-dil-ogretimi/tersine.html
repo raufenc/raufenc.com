@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tersine Mühendislik Odası | Muallim ve Makine</title>
+<meta name="description" content="İyi örneğin gizli kalıbını çıkarın: vaka röntgeni, üç reçete promptu ve kendi dersinizi sentezleme tezgâhı.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* Vaka kartları */
+.vaka{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+.kart{background:var(--cream);border:2px solid var(--line);border-radius:16px;padding:20px;position:relative}
+.kart h5{font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:10px;display:flex;justify-content:space-between}
+.kart table{width:100%;border-collapse:collapse;font-size:14.5px}
+.kart td{padding:7px 4px;border-bottom:1px dashed var(--line)}
+.kart td:last-child{text-align:left;font-weight:700;color:var(--teal);direction:ltr}
+.kart .qq{color:#B0532E;font-weight:700}
+.balon{margin-top:18px;background:var(--navy);color:#fff;border-radius:14px;padding:14px 18px;text-align:center;display:none}
+.balon.on{display:block;animation:pop .4s}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.balon .ar{font-family:var(--serif);font-size:22px}
+.balon small{color:var(--goldl)}
+
+/* Röntgen katmanları */
+.xstage{position:relative;margin-top:10px;border-radius:16px;overflow:hidden;box-shadow:var(--sh-md);cursor:pointer}
+.xstage img{width:100%}
+.xveil{position:absolute;inset:0;background:linear-gradient(160deg,rgba(13,40,48,.92),rgba(31,110,107,.85));display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;transition:opacity .5s}
+.xveil.off{opacity:0;pointer-events:none}
+.ilkeler{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.ilke{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px;text-align:center;font-size:13.5px;color:var(--gray);position:relative;overflow:hidden}
+.ilke .kilit{position:absolute;inset:0;background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:22px;transition:transform .5s;color:var(--gold)}
+.ilke.acik .kilit{transform:translateY(-101%)}
+.ilke b{display:block;color:var(--navy);margin-bottom:4px;font-size:14px}
+.xprog{margin-top:14px;font-size:14px;color:var(--gray)}
+
+/* Reçeteler */
+.recete{border:1.5px solid var(--line);border-radius:14px;margin-top:14px;overflow:hidden;background:#fff}
+.recete summary{cursor:pointer;padding:16px 20px;font-weight:700;color:var(--navy);display:flex;justify-content:space-between;align-items:center;list-style:none}
+.recete summary::-webkit-details-marker{display:none}
+.recete summary .n{color:var(--gold);font-family:var(--serif)}
+.recete pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.6;background:var(--navy2);color:#dfe7e4;padding:18px 20px;margin:0}
+.recete .rbar{display:flex;justify-content:flex-end;padding:10px 14px;background:#f6f1e6}
+
+/* Sentez */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;margin-top:8px}
+#sOut{white-space:pre-wrap;font-size:13.5px;line-height:1.6;background:var(--navy);color:#dfe7e4;border-radius:14px;padding:20px;max-height:480px;overflow:auto;position:sticky;top:80px}
+@media(max-width:900px){.vaka,.sgrid{grid-template-columns:1fr}.ilkeler{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main>
+<section style="padding-top:56px;padding-bottom:26px">
+  <div class="wrap center">
+    <div class="eyebrow reveal">Tersine Mühendislik Odası</div>
+    <h2 class="h2 reveal">Kopya değil, kalıp</h2>
+    <p class="lead reveal" style="margin:14px auto 0">Sarf kelimenin kalıbını çıkarır; biz iyi dersin kalıbını çıkaracağız. Önce vakayı yaşayın, sonra röntgenini çekin, reçeteleri alın ve kendi dersinizi sentezleyin.</p>
+  </div>
+</section>
+
+<!-- 1: VAKA -->
+<section style="padding-top:0;padding-bottom:40px">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="tag">Adım 1 · Vaka</span>
+      <h3>Eksik Bilgi Kartları</h3>
+      <p class="sub">A öğrencisinde ürünler var, fiyatlar yok; B'de tersi. Konuşmak zorundalar — işte “gerçek iletişim ihtiyacı”. Kartlardaki <span style="color:#B0532E;font-weight:700">?</span> işaretlerine tıklayın.</p>
+      <div class="vaka">
+        <div class="kart">
+          <h5>A Kartı <span class="chip">ürün var · fiyat yok</span></h5>
+          <table>
+            <tr><td>🍎 تُفَّاحَة (elma)</td><td class="qq" data-p="3">? TL</td></tr>
+            <tr><td>🥛 حَلِيب (süt)</td><td class="qq" data-p="5">? TL</td></tr>
+            <tr><td>📓 دَفْتَر (defter)</td><td class="qq" data-p="7">? TL</td></tr>
+            <tr><td>🍫 شُوكُولَاتَة (çikolata)</td><td class="qq" data-p="10">? TL</td></tr>
+          </table>
+        </div>
+        <div class="kart">
+          <h5>B Kartı <span class="chip">fiyat var · ürün yok</span></h5>
+          <table>
+            <tr><td class="qq" data-u="تُفَّاحَة">؟</td><td>3 TL</td></tr>
+            <tr><td class="qq" data-u="حَلِيب">؟</td><td>5 TL</td></tr>
+            <tr><td class="qq" data-u="دَفْتَر">؟</td><td>7 TL</td></tr>
+            <tr><td class="qq" data-u="شُوكُولَاتَة">؟</td><td>10 TL</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="balon" id="balon">
+        <div class="ar" id="balonAr">— كَمْ هٰذَا؟ &nbsp;&nbsp; — هٰذَا بِثَلَاثِ لِيرَات. &nbsp;&nbsp; — شُكْرًا!</div>
+        <small id="balonTr">“Bu kaça?” — “Üç lira.” — “Teşekkürler!” · Boşluğu doldurmanın tek yolu: konuşmak.</small>
+      </div>
+      <div class="notekart"><b>Fark ettiniz mi?</b> Kimse “konuşma pratiği yapalım” demedi; kart tasarımı konuşmayı <b>zorunlu</b> kıldı. İyi tasarım budur. <a class="slaytlink" href="sunum.html#32">→ İlgili slayt: 32</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2: RÖNTGEN -->
+<section style="padding-top:0;padding-bottom:40px">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="tag">Adım 2 · Röntgen</span>
+      <h3>Vakayı soyun: neden çalışıyor?</h3>
+      <p class="sub">Görsele tıkladıkça bir tasarım ilkesi açılır. Altı ilkenin tamamı = etkinliğin <b>kalıbı</b>.</p>
+      <div class="xstage" id="xstage">
+        <img src="slides/s32.jpg" alt="Eksik Bilgi Kartları vaka slaydı">
+        <div class="xveil" id="xveil"><div style="font-size:40px">☢</div><div style="font-family:var(--serif);font-size:20px;margin-top:6px">Röntgeni başlatmak için tıklayın</div><div style="font-size:13px;color:#cfd9d6;margin-top:4px">her tıklama bir ilkeyi açar</div></div>
+      </div>
+      <div class="ilkeler" id="ilkeler"></div>
+      <div class="xprog" id="xprog">0/6 ilke açıldı</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3: REÇETELER -->
+<section style="padding-top:0;padding-bottom:40px">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="tag">Adım 3 · Reçeteler</span>
+      <h3>Üç reçete promptu</h3>
+      <p class="sub">İyi örneği yapay zekâya verirken kullanacağınız üç adım: analiz → kalıp → sentez. Kopyalayın, kendi örneğinizle kullanın.</p>
+      <details class="recete" open><summary>1 · Ana Analiz Promptu <span class="n">örneği röntgene sokar</span></summary><pre id="r1">Sana bir ders etkinliği örneği vereceğim. Bunu KOPYALAMA; tasarım mantığını analiz et.
+Şu 9 soruya tek tek, maddeler hâlinde cevap ver:
+1) Ana öğrenme hedefi ne?
+2) Kanca (öğrenciyi yakalayan şey) ne?
+3) Aşamalar nasıl ilerliyor?
+4) Öğrenci ne zaman dinliyor, ne zaman konuşuyor, ne zaman üretiyor?
+5) Öğretmenin kritik hamleleri neler?
+6) Hangi destekler (görsel, kalıp cümle, eş çalışması) var?
+7) Ölçme kanıtı nerede?
+8) Değer ve sosyal-duygusal bağlantı nerede?
+9) Bu etkinlikten yeniden kullanılabilir bir öğretim iskeleti çıkar.
+
+[ÖRNEK ETKİNLİĞİ BURAYA YAPIŞTIR]</pre><div class="rbar"><button class="btn sm gold" data-c="r1">⧉ Kopyala</button></div></details>
+      <details class="recete"><summary>2 · Kalıp Çıkarma Promptu <span class="n">örnekten bağımsız şablon</span></summary><pre id="r2">Az önceki analizden yola çıkarak, bu etkinliğin ÖRNEKTEN BAĞIMSIZ genel ders tasarım kalıbını çıkar.
+Kalıp şu bölümleri içersin, her bölümün altına "neden var?" gerekçesini yaz:
+• Dersin kancası
+• Girdi aşaması (yeni dilin sunulması)
+• Kontrollü uygulama
+• Eşli / gruplu üretim (gerçek iletişim ihtiyacıyla)
+• Değer veya kültür bağlantısı
+• Farklılaştırma (destek + ileri seviye)
+• Ölçme kanıtı
+• Öğretmen yansıması
+Kalıbı, başka konu ve seviyelere uygulanabilir bir şablon formunda ver.</pre><div class="rbar"><button class="btn sm gold" data-c="r2">⧉ Kopyala</button></div></details>
+      <details class="recete"><summary>3 · Sentez Promptu <span class="n">kalıp + senin bağlamın = yeni ders</span></summary><pre id="r3">Şimdi bu kalıbı BENİM bağlamıma uygula ve uygulanabilir bir ders üret:
+• Ders: Arapça  • Sınıf: 7. sınıf (35 öğrenci)  • Seviye: A1–A2  • Süre: 40 dakika
+• Konu: Pazarda alışveriş, fiyat sorma, teşekkür etme
+• Sınıf gerçekliği: bazı öğrenciler konuşurken çekiniyor
+• TYMM bağlantısı: konuşma becerisi + saygı ve sorumluluk değeri
+SINIRLAR: kişisel veri kullanma; kazanım uydurma; etkinlik internetsiz uygulanabilir olsun.
+ÇIKTI: 5 aşamalı ders akışı (süreleriyle), öğretmen yönergeleri, örnek öğrenci cümleleri,
+A/B eşli çalışma kartları, farklılaştırma önerileri, basit rubrik ve 3 soruluk çıkış bileti.
+KONTROL: Emin olmadığın yerde varsayım yazma; bana soru sor.</pre><div class="rbar"><button class="btn sm gold" data-c="r3">⧉ Kopyala</button></div></details>
+      <div class="notekart"><b>Meyvesi:</b> Bu üç adımın çıktısı “Pazar Kartları” dersiydi — aynı kalıp, yeni bağlam. <a class="slaytlink" href="sunum.html#35">→ 35. slayt</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4: SENTEZ TEZGAHI -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="panel reveal">
+      <span class="tag">Adım 4 · Tezgâh</span>
+      <h3>Kendi dersini sentezle</h3>
+      <p class="sub">Bağlamınızı girin; üç reçete tek bir sentez promptuna, sizin sınıfınıza göre yazılsın.</p>
+      <div class="sgrid">
+        <div>
+          <div class="field"><label>Ders / dil</label><input type="text" id="sDers" value="Arapça"></div>
+          <div class="field"><label>Sınıf & mevcut</label><input type="text" id="sSinif" value="7. sınıf, 35 öğrenci"></div>
+          <div class="field"><label>Seviye</label><select id="sSeviye"><option>A1–A2</option><option>A1</option><option>A2</option><option>B1</option></select></div>
+          <div class="field"><label>Süre</label><select id="sSure"><option>40 dakika</option><option>30 dakika</option><option>80 dakika (blok)</option></select></div>
+          <div class="field"><label>Konu</label><input type="text" id="sKonu" placeholder="örn. Ailemi tanıtıyorum" value="Pazarda alışveriş, fiyat sorma, teşekkür etme"></div>
+          <div class="field"><label>Sınıf gerçekliği <span class="hint">— zorluğunuz ne?</span></label><input type="text" id="sGercek" value="bazı öğrenciler konuşurken çekiniyor"></div>
+          <div class="field"><label>Beceri + değer</label><input type="text" id="sBag" value="konuşma becerisi + saygı ve sorumluluk değeri"></div>
+          <button class="btn" id="sBtn">⚗ Sentez Promptunu Üret</button>
+        </div>
+        <div>
+          <div id="sOut"></div>
+          <div style="display:flex;gap:9px;margin-top:12px">
+            <button class="btn sm gold" id="sKopya">⧉ Kopyala</button>
+            <button class="btn sm ghost" id="sIndir">↓ .txt indir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site"><div class="wrap"><div><b>raufenc.com</b> — Tersine Mühendislik</div><div>“Metni değil, tasarım mantığını taşı.”</div></div></footer>
+</main>
+
+<script src="assets/app.js"></script>
+<script>
+/* Vaka: soru işaretleri */
+const balon=document.getElementById("balon");
+document.querySelectorAll(".qq").forEach(q=>q.onclick=()=>{
+  balon.classList.add("on");
+  if(q.dataset.p){q.textContent=q.dataset.p+" TL";q.style.color="var(--teal)"}
+  if(q.dataset.u){q.textContent=q.dataset.u;q.style.color="var(--teal)";q.style.fontFamily="Georgia"}
+  toast("Boşluk doldu — ama önce SORMAK gerekti 😊");
+});
+
+/* Röntgen katmanları */
+const ILKE=[
+ ["Gerçek iletişim ihtiyacı","Bilgi boşluğu konuşmayı zorunlu kılar; yapay 'pratik' değil, gerçek soru."],
+ ["Destekli üretim","Kalıp cümleler (كم هذا؟) tahtada — öğrenci düşmeden yürür."],
+ ["Kalıplar bağlam içinde","Hedef yapı, pazar sahnesinin içinde yaşar; izole cümle ezberi yok."],
+ ["Eş çalışması","Herkes aynı anda konuşur; 35 kişilik sınıfta hava süresi çarpı 17."],
+ ["Doğal ölçme","Kart doğru dolduysa iletişim kuruldu demektir — ölçme etkinliğin içinde."],
+ ["Saygı ve sosyal bağ","شكرا، عفوا ritüelleri değer eğitimini kurgunun içine gömer."]
+];
+const ilkeler=document.getElementById("ilkeler"),xprog=document.getElementById("xprog"),xveil=document.getElementById("xveil");
+ILKE.forEach(x=>{const d=document.createElement("div");d.className="ilke";
+  d.innerHTML=`<div class="kilit">🔒</div><b>${x[0]}</b>${x[1]}`;ilkeler.appendChild(d)});
+let acilan=0;
+document.getElementById("xstage").onclick=()=>{
+  if(acilan===0)xveil.classList.add("off");
+  if(acilan<6){ilkeler.children[acilan].classList.add("acik");acilan++;
+    xprog.textContent=acilan+"/6 ilke açıldı"+(acilan===6?" — kalıp tamam! Bu altı ilke, etkinliğin DNA'sıdır.":"");
+  }
+};
+
+/* Reçete kopyala */
+document.querySelectorAll(".rbar button").forEach(b=>b.onclick=()=>copyText(document.getElementById(b.dataset.c).textContent,"Reçete kopyalandı ✓"));
+
+/* Sentez */
+const g=id=>document.getElementById(id);
+function sentez(){
+  return `Sana bir ders tasarım kalıbı vereceğim (kanca → girdi → kontrollü uygulama → eşli üretim → değer bağı → farklılaştırma → ölçme → yansıma). Bu kalıbı BENİM bağlamıma uygula ve uygulanabilir bir ders üret:
+
+• Ders: ${g("sDers").value}
+• Sınıf: ${g("sSinif").value}
+• Seviye: ${g("sSeviye").value}
+• Süre: ${g("sSure").value}
+• Konu: ${g("sKonu").value}
+• Sınıf gerçekliği: ${g("sGercek").value}
+• TYMM bağlantısı: ${g("sBag").value}
+
+SINIRLAR: Kişisel veri kullanma. Müfredat dışı kazanım uydurma. Etkinlik internetsiz, fotokopiyle uygulanabilir olsun. Seviye üstü dil kullanma.
+
+ÇIKTI: 5 aşamalı ders akışı (süreleriyle), her aşamada öğretmen yönergesi ve örnek öğrenci cümleleri, A/B eşli çalışma kartları, farklılaştırma (destek + ileri), basit rubrik, 3 soruluk çıkış bileti.
+
+KONTROL: Çıktıyı uygulamadan önce ben denetleyeceğim. Emin olmadığın yerde varsayım yazma; bana soru sor.`;
+}
+function sRender(){g("sOut").textContent=sentez()}
+g("sBtn").onclick=()=>{sRender();toast("Sentez promptu hazır ✓")};
+g("sKopya").onclick=()=>copyText(sentez(),"Sentez promptu kopyalandı ✓");
+g("sIndir").onclick=()=>{const b=new Blob([sentez()],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="sentez-promptu.txt";a.click()};
+sRender();
+</script>
+</body>
+</html>

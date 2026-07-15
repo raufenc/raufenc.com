@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muallim ve Makine — Yabancı Dil Öğretiminde Yapay Zekâ | Rauf Enç</title>
+<meta name="description" content="Yapay zekâyı kabullenmek, ölçüsünü bilmek, felsefesini kavramak. Seminer + canlı deneyler + prompt atölyesi + tersine mühendislik. Rauf Enç.">
+<meta property="og:title" content="Muallim ve Makine — Etkileşimli Seminer Evi">
+<meta property="og:description" content="Yapay zekâ hız verir; muallim yön verir. Semineri yaşayarak öğrenin.">
+<meta property="og:image" content="slides/s01.jpg">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* ——— HERO ——— */
+header.hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;padding:110px 0 60px}
+.blob{position:absolute;border-radius:50%;pointer-events:none}
+.hletter{position:absolute;font-family:var(--serif);color:var(--teal);opacity:.14;user-select:none;pointer-events:none;line-height:1}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center}
+h1{font-size:clamp(34px,4.8vw,56px);margin-bottom:16px}
+h1 .t{color:var(--teal)}
+.hero-sub{font-family:var(--serif);font-style:italic;color:var(--gold-text);font-size:clamp(16px,2vw,20px);margin-bottom:20px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-card{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--sh-lg);transform:rotate(1.6deg);transition:.35s;cursor:pointer;border:6px solid #fff}
+.hero-card:hover{transform:rotate(0) scale(1.02)}
+.hero-card .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(22,64,74,.28);opacity:0;transition:.3s}
+.hero-card:hover .play{opacity:1}
+.play i{width:76px;height:76px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;font-style:normal}
+.scrollcue{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:var(--gray);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;animation:bob 2.2s infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* ——— PERDE ortak ——— */
+.perde-label{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.perde-label .no{width:44px;height:44px;border-radius:50%;background:var(--gold);color:#fff;font-family:var(--serif);font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;flex:none}
+.perde-label .t{font-size:12.5px;letter-spacing:.2em;color:var(--gold-text);font-weight:700;text-transform:uppercase}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+
+/* ——— TERAZİ ——— */
+.terazi-box{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--sh-md)}
+.beam-wrap{position:relative;height:190px;margin:6px 0 4px}
+.pillar{position:absolute;left:50%;top:26px;bottom:0;width:10px;transform:translateX(-50%);background:var(--navy);border-radius:6px}
+.beam{position:absolute;left:50%;top:30px;width:86%;height:8px;background:var(--navy);border-radius:6px;transform-origin:center;transform:translateX(-50%) rotate(0deg);transition:transform .5s cubic-bezier(.34,1.4,.5,1)}
+.pan{position:absolute;top:6px;width:118px;text-align:center}
+.pan .cup{background:var(--cream2);border:2px solid var(--gold);border-radius:0 0 60px 60px;padding:12px 6px 16px;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:var(--sh-sm)}
+.pan.l{left:-14px}.pan.r{right:-14px}
+.pan .rope{width:2px;height:26px;background:var(--gray);margin:0 auto}
+.terazi-list{display:flex;justify-content:space-between;gap:18px;margin-top:16px}
+.terazi-list ul{list-style:none;font-size:13.5px;color:var(--gray);flex:1}
+.terazi-list li{padding:4px 0;border-bottom:1px dashed var(--line);transition:.3s}
+.terazi-list li.hot{color:var(--navy);font-weight:700}
+.terazi-list .h{font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase;margin-bottom:6px;display:block}
+.terazi-list .risk .h{color:#B0532E}.terazi-list .firsat .h{color:var(--teal)}
+input[type=range].niyet{width:100%;accent-color:var(--gold);margin-top:20px}
+.niyet-cap{display:flex;justify-content:space-between;font-size:12px;color:var(--gray);letter-spacing:.06em;margin-top:4px}
+.terazi-msg{text-align:center;font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--navy);margin-top:16px;min-height:26px}
+
+/* ——— KATMAN (كيف حالك) ——— */
+.katman-box{background:var(--navy);border-radius:20px;padding:40px 34px;color:#e9e2d2;box-shadow:var(--sh-lg);text-align:center;position:relative;overflow:hidden}
+.katman-box .ar{font-size:clamp(38px,4.6vw,54px);font-family:var(--serif);color:#fff;margin-bottom:6px}
+.katman-box .tr{color:var(--goldl);font-style:italic;margin-bottom:22px}
+.kat-steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.kat-step{border:1.5px solid rgba(228,201,126,.4);color:#cfd9d6;border-radius:20px;padding:6px 15px;font-size:13.5px;transition:.3s;cursor:pointer}
+.kat-step.on{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:700}
+.kat-view{min-height:96px;font-size:16px;line-height:1.65;max-width:560px;margin:0 auto}
+.kat-view b{color:var(--goldl)}
+.kat-btn{margin-top:20px}
+
+/* ——— MODÜL KAPILARI ——— */
+.kapilar{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:50px}
+.kapi{position:relative;border-radius:20px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm);transition:.28s;cursor:pointer;display:grid;grid-template-columns:1fr 200px;min-height:190px}
+.kapi:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+.kapi .txt{padding:28px}
+.kapi h3{font-size:22px;margin:8px 0 8px}
+.kapi p{font-size:14.5px;color:var(--gray)}
+.kapi .go{margin-top:14px;font-weight:700;font-size:14px;color:var(--teal)}
+.kapi .vis{background:var(--cream2);display:flex;align-items:center;justify-content:center;font-size:64px;font-family:var(--serif);color:var(--teal)}
+.kapi.dark{background:var(--navy)} .kapi.dark h3{color:#fff} .kapi.dark p{color:#b9c9c6} .kapi.dark .go{color:var(--goldl)} .kapi.dark .vis{background:rgba(228,201,126,.12);color:var(--goldl)} .kapi.dark .chip{color:var(--goldl)}
+
+/* ——— ÜÇ ÖLÇÜ ——— */
+#olcu{background:linear-gradient(180deg,var(--cream) 0%,var(--cream2) 100%)}
+.ogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
+.flip{perspective:1200px;height:290px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .65s;transform-style:preserve-3d}
+.flip.f .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px}
+.face.front{background:#fff;border:1px solid var(--line);box-shadow:var(--sh-sm)}
+.face .num{width:56px;height:56px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:25px;font-weight:700;margin-bottom:16px}
+.face.front h3{font-size:20.5px}
+.face.front .tap{margin-top:13px;font-size:11.5px;color:var(--gray);letter-spacing:.1em;text-transform:uppercase}
+.face.back{background:var(--navy);color:#e9e2d2;transform:rotateY(180deg)}
+.face.back p{font-size:14.6px;line-height:1.6}
+.face.back .why{margin-top:13px;color:var(--goldl);font-style:italic;font-size:13px}
+
+/* ——— MANİFESTO ——— */
+.manifesto{background:var(--navy2);color:#e9e2d2;text-align:center;padding:110px 0}
+.manifesto p.m{font-family:var(--serif);font-style:italic;font-size:clamp(21px,3vw,32px);max-width:920px;margin:0 auto;line-height:1.55}
+.manifesto p.m b{color:var(--goldl)}
+.manifesto .src{font-size:12.5px;letter-spacing:.18em;color:#7f9a96;margin-top:20px;text-transform:uppercase}
+.manifesto .social{display:flex;gap:12px;margin-top:36px;justify-content:center;flex-wrap:wrap}
+.manifesto .social a{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(228,201,126,.35);border-radius:26px;padding:9px 18px;font-size:14px;font-weight:600;color:#e9e2d2;transition:.2s}
+.manifesto .social a:hover{border-color:var(--goldl);color:var(--goldl)}
+
+@media(max-width:960px){
+  .hero .wrap,.split{grid-template-columns:1fr}
+  .hero-card{max-width:540px;transform:none}
+  .kapilar{grid-template-columns:1fr}
+  .ogrid{grid-template-columns:1fr}
+  .flip{height:240px}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+  <div class="blob" style="width:560px;height:560px;background:rgba(31,110,107,.10);top:-180px;right:-120px"></div>
+  <div class="blob" style="width:340px;height:340px;background:rgba(228,201,126,.22);top:330px;right:130px"></div>
+  <div class="hletter" style="top:110px;right:170px;font-size:150px">ض</div>
+  <div class="hletter" style="top:430px;right:50px;font-size:84px">غ</div>
+  <div class="hletter" style="top:270px;right:520px;font-size:56px">ق</div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow reveal">Türkiye Yüzyılı Maarif Modeli • Eğitici Eğitimi • Mersin</div>
+      <h1 class="reveal">Muallim <span style="color:var(--gold)">ve</span> Makine<br><span class="t" style="font-size:.62em">Yabancı Dil Öğretiminde Yapay Zekâ</span></h1>
+      <div class="hero-sub reveal">Kabullenmek • Ölçüsünü Bilmek • Felsefesini Kavramak</div>
+      <p class="lead reveal">Bu bir sunum sitesi değil; seminerin kendisi. Aşağı kaydırın: terazinin dengesini siz kurun, كيف حالك'in katmanlarını siz açın, yapay zekânın kafasının içine girin, kendi prompt'unuzu üretin.</p>
+      <div class="hero-cta reveal">
+        <a class="btn" href="#perde1">Yolculuğa Başla ↓</a>
+        <a class="btn ghost" href="sunum.html">▶ Sunumu Aç</a>
+      </div>
+    </div>
+    <div class="hero-card reveal" onclick="location.href='sunum.html'">
+      <img src="slides/s01.jpg" alt="Seminer kapağı" fetchpriority="high">
+      <div class="play"><i>▶</i></div>
+    </div>
+  </div>
+  <div class="scrollcue">↓ kaydır</div>
+</header>
+
+<!-- PERDE 1: TERAZİ -->
+<section id="perde1">
+  <div class="wrap split">
+    <div>
+      <div class="perde-label reveal"><span class="no">1</span><span class="t">Haz ve Hız Çağı</span></div>
+      <h2 class="h2 reveal">Aynı alet, iki yüz.<br>Dengeyi kuran: <em>niyet.</em></h2>
+      <p class="lead reveal" style="margin-top:16px">Dikkat kısa, beklenti yüksek, tempo baş döndürücü. Yapay zekâ bu iklimin ürünü ve hızlandırıcısı. Sürgüyü çekin; aynı aracın nasıl risk de fırsat da üretebildiğini görün.</p>
+      <p class="reveal" style="margin-top:14px;font-size:14px;color:var(--gray)">İlgili slaytlar: <a href="sunum.html#3">3</a> · <a href="sunum.html#4">4</a> · <a href="sunum.html#5">5</a></p>
+    </div>
+    <div class="terazi-box reveal">
+      <div class="beam-wrap">
+        <div class="pillar"></div>
+        <div class="beam" id="beam">
+          <div class="pan l"><div class="rope"></div><div class="cup">Riskler</div></div>
+          <div class="pan r"><div class="rope"></div><div class="cup">Fırsatlar</div></div>
+        </div>
+      </div>
+      <input type="range" class="niyet" id="niyet" min="0" max="100" value="50" aria-label="Niyet ve ölçü">
+      <div class="niyet-cap"><span>ölçüsüz kullanım</span><span>NİYET & ÖLÇÜ</span><span>ölçülü kullanım</span></div>
+      <div class="terazi-list">
+        <ul class="risk"><span class="h">Riskler</span><li>Sabırsızlık</li><li>Yüzeysellik</li><li>Kolaycılık</li><li>Dikkat dağınıklığı</li></ul>
+        <ul class="firsat"><span class="h">Fırsatlar</span><li>Motivasyon</li><li>Erişilebilirlik</li><li>Üretkenlik</li><li>Canlı öğrenme</li></ul>
+      </div>
+      <div class="terazi-msg" id="teraziMsg">Fark alette değil; kullanan elin niyetinde.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PERDE 2: KATMANLAR -->
+<section id="perde2" style="background:var(--cream2)">
+  <div class="wrap split">
+    <div class="katman-box reveal">
+      <div class="ar">كَيْفَ حَالُكَ؟</div>
+      <div class="tr">“Nasılsın?” — makinenin cevabı bir saniye sürer. Ya sonrası?</div>
+      <div class="kat-steps" id="katSteps"></div>
+      <div class="kat-view" id="katView"></div>
+      <button class="btn gold kat-btn" id="katBtn">Katmanı Aç →</button>
+    </div>
+    <div>
+      <div class="perde-label reveal"><span class="no">2</span><span class="t">Muallim ve Makine</span></div>
+      <h2 class="h2 reveal">Tercüme memurluğu bitti.<br>Muallimlik <em>kıymetlendi.</em></h2>
+      <p class="lead reveal" style="margin-top:16px">Makine “ne demek?” sorusuna cevap verir; muallim “ne mana taşır?” sorusunu açar. Soldaki kutuda çevirinin bittiği yerde başlayan beş katmanı tek tek açın.</p>
+      <p class="reveal" style="margin-top:18px;font-family:var(--serif);font-style:italic;font-size:19px;color:var(--navy)">“AI hız verir; muallim yön verir.”</p>
+      <p class="reveal" style="margin-top:14px;font-size:14px;color:var(--gray)">İlgili slaytlar: <a href="sunum.html#8">8</a> · <a href="sunum.html#9">9</a> · <a href="sunum.html#12">12</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- PERDE 3-5: KAPILAR -->
+<section id="kapilar">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow reveal">Seminer Evi</div>
+      <h2 class="h2 reveal">Dört oda, dört deneyim</h2>
+      <p class="lead reveal" style="margin:14px auto 0">Seminerin her kavramı burada çalışan bir araca dönüştü. Kapıları açın.</p>
+    </div>
+    <div class="kapilar">
+      <div class="kapi dark reveal" onclick="location.href='laboratuvar.html'">
+        <div class="txt"><span class="chip" style="background:rgba(228,201,126,.15)">4 CANLI DENEY</span><h3>Laboratuvar — YZ Nasıl Düşünür?</h3><p>Cümleyi token'lara parçalayın, kral−erkek+kadın denklemini çalıştırın, dikkat fenerini gezdirin, tahmin motoruyla cümle kurun.</p><div class="go">Laboratuvara gir →</div></div>
+        <div class="vis">🧠</div>
+      </div>
+      <div class="kapi reveal" onclick="location.href='atolye.html'">
+        <div class="txt"><span class="chip">ÜRETİM TEZGÂHI</span><h3>Atölye — MERSİN Oluşturucu</h3><p>Altı adımda profesyonel prompt üretin, kendi prompt'unuzu röntgene sokun, “Temenni'den Prompt'a” oyununda rozet kazanın.</p><div class="go">Atölyeye gir →</div></div>
+        <div class="vis">⚒</div>
+      </div>
+      <div class="kapi reveal" onclick="location.href='tersine.html'">
+        <div class="txt"><span class="chip">KALIP ÇIKARMA</span><h3>Tersine Mühendislik Odası</h3><p>Eksik Bilgi Kartları vakasını katman katman soyun, üç reçeteyi alın, kendi sınıfınız için dersi sentezleyin.</p><div class="go">Odaya gir →</div></div>
+        <div class="vis">◱</div>
+      </div>
+      <div class="kapi dark reveal" onclick="location.href='sunum.html'">
+        <div class="txt"><span class="chip" style="background:rgba(228,201,126,.15)">40 SLAYT • 60 DAKİKA</span><h3>Sunum Merkezi</h3><p>Tam ekran oynatıcı, bölüm menüsü, konuşmacı notları ve kronometreli <b style="color:var(--goldl)">Sunucu Modu</b> — salonda internet olmasa bile çalışır.</p><div class="go">Sunumu aç →</div></div>
+        <div class="vis">▶</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜÇ ÖLÇÜ -->
+<section id="olcu">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow reveal">Seminerin Özü</div>
+      <h2 class="h2 reveal">Üç Ölçü</h2>
+      <p class="lead reveal" style="margin:14px auto 0">Yapay zekâyı hikmetle kullanmanın altın kuralları. Kartlara dokunun.</p>
+    </div>
+    <div class="ogrid">
+      <div class="flip reveal"><div class="flip-in">
+        <div class="face front"><div class="num">١</div><h3>Şuur değil, istatistik</h3><div class="tap">çevirmek için dokun</div></div>
+        <div class="face back"><p>Yapay zekâ bilinçle değil, olasılıkla konuşur. Çıktısı ilham vericidir; hüküm değildir. Hata eder, uydurabilir.</p><div class="why">Bu yüzden: her çıktıyı muallim kontrol eder.</div></div>
+      </div></div>
+      <div class="flip reveal"><div class="flip-in">
+        <div class="face front"><div class="num">٢</div><h3>Muavin, muallim değil</h3><div class="tap">çevirmek için dokun</div></div>
+        <div class="face back"><p>Hızı makine verir; yönü insan. Angarya robota — talim, terbiye, hikmet ve edep muallime.</p><div class="why">Bu yüzden: son söz, sınıfı tanıyandadır.</div></div>
+      </div></div>
+      <div class="flip reveal"><div class="flip-in">
+        <div class="face front"><div class="num">٣</div><h3>Kopya değil, kalıp</h3><div class="tap">çevirmek için dokun</div></div>
+        <div class="face back"><p>İyi örnek taklit için değil, tersine mühendislik içindir. Metni değil, tasarım mantığını taşı.</p><div class="why">Bu yüzden: kalıbı çıkar, kendi bağlamına uyarla.</div></div>
+      </div></div>
+    </div>
+    <p class="center reveal" style="margin-top:38px"><a class="btn ghost" href="test.html">Ölçü Testi'ni çöz — hangi profildesin? →</a></p>
+  </div>
+</section>
+
+<!-- MANİFESTO -->
+<div class="manifesto">
+  <div class="wrap">
+    <p class="m reveal">“Tercüme memurluğu bitti. Arapça muallimliği aslına döndü.<br>Makine kelimeyi çevirebilir; <b>insanı anlamla ancak insan tanıştırır.</b>”</p>
+    <div class="src reveal">Final Manifestosu — Rauf Enç</div>
+    <div class="social reveal">
+      <a href="https://instagram.com/raufenc" target="_blank" rel="noopener">📷 @raufenc</a>
+      <a href="https://x.com/raufenc" target="_blank" rel="noopener">𝕏 @raufenc</a>
+      <a href="https://youtube.com/@raufenc" target="_blank" rel="noopener">▶ YouTube</a>
+      <a href="mailto:halatmedya@gmail.com">✉ E-posta</a>
+      <a href="indir/Yabanci-Dil-Ogretiminde-Yapay-Zeka-Sunum.pptx" download>↓ PPTX</a>
+    </div>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div><b>raufenc.com</b> — Muallim ve Makine</div>
+    <div>“AI hız verir; muallim yön verir.”</div>
+  </div>
+</footer>
+</main>
+
+<script src="assets/app.js"></script>
+<script>
+/* Terazi */
+const beam=document.getElementById("beam"), niyet=document.getElementById("niyet"), tMsg=document.getElementById("teraziMsg");
+const riskLis=[...document.querySelectorAll(".terazi-list .risk li")], firLis=[...document.querySelectorAll(".terazi-list .firsat li")];
+function terazi(v){
+  const ang=(v-50)/50*11; /* + → fırsat tarafı ağır bassın: sağ aşağı */
+  beam.style.transform=`translateX(-50%) rotate(${ang}deg)`;
+  riskLis.forEach(li=>li.classList.toggle("hot",v<40));
+  firLis.forEach(li=>li.classList.toggle("hot",v>60));
+  tMsg.textContent = v<25 ? "Ölçüsüz hız: sabırsızlık ve kolaycılık kazanır." :
+                     v<45 ? "Denge bozuluyor — ölçü kaçarsa alet sizi kullanır." :
+                     v<56 ? "Fark alette değil; kullanan elin niyetinde." :
+                     v<80 ? "Ölçü devrede: hız ve keyif güce dönüşüyor." :
+                            "Hikmetli kullanım: motivasyon, üretkenlik, canlı öğrenme.";
+}
+niyet.addEventListener("input",e=>terazi(+e.target.value));
+terazi(50);
+
+/* Katmanlar */
+const KAT=[
+ ["Lafız","<b>كَيْفَ حَالُكَ</b> = “Nasılsın?” — çeviri tamam. Makinenin işi burada biter. <b>Muallimin işi burada başlar.</b>"],
+ ["Mana","Bu soru gerçekte ne soruyor? Hâl mi hatır mı? Nezaket kalıbı mı, gerçek bir merak mı? <b>Kelimenin altındaki niyeti</b> ancak bağlam söyler."],
+ ["Bağlam","Kim söylüyor, kime, nerede? Arkadaşa mı, hocaya mı, hastaya mı? Aynı cümle <b>üç ortamda üç ayrı ton</b> taşır."],
+ ["Muhatap","Cevap verecek kişi kim? Yaşı, konumu, hâli… Öğrenci <b>muhatabına göre konuşmayı</b> sınıfta yaşayarak öğrenir."],
+ ["Edep","Ve hepsinin üstünde: hitabın edebi. Selamın sırası, sesin tonu, yüzün ifadesi. <b>Bunu makine çeviremez; insan yaşatır.</b>"]
+];
+let ki=0;
+const katSteps=document.getElementById("katSteps"), katView=document.getElementById("katView"), katBtn=document.getElementById("katBtn");
+KAT.forEach((k,i)=>{const b=document.createElement("div");b.className="kat-step";b.textContent=k[0];b.onclick=()=>{ki=i;katGo()};katSteps.appendChild(b)});
+function katGo(){
+  [...katSteps.children].forEach((b,i)=>b.classList.toggle("on",i<=ki));
+  katView.innerHTML=KAT[ki][1];
+  katBtn.textContent = ki<KAT.length-1 ? "Katmanı Aç →" : "↺ Baştan";
+}
+katBtn.onclick=()=>{ki=(ki+1)%KAT.length;katGo()};
+katGo();
+</script>
+</body>
+</html>

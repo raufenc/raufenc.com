@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratuvar — Yapay Zekâ Nasıl Düşünür? | Muallim ve Makine</title>
+<meta name="description" content="4 canlı deney: tokenizer, anlam haritası, dikkat feneri, tahmin motoru. Yapay zekânın kafasının içi — tarayıcınızda.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.labgrid{display:grid;gap:34px;margin-top:44px}
+.deney{scroll-margin-top:80px}
+
+/* tokenizer */
+.tokrow{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.tokrow input{flex:1;min-width:220px}
+#tokOut{min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px;background:var(--cream);border-radius:12px;border:1px dashed var(--line)}
+.tok{padding:7px 12px;border-radius:9px;font-size:15px;font-weight:600;color:#fff;opacity:0;transform:translateY(8px) scale(.9);animation:tokin .35s forwards}
+.tok small{display:block;font-size:9.5px;font-weight:400;opacity:.85;letter-spacing:.06em}
+@keyframes tokin{to{opacity:1;transform:none}}
+#tokInfo{margin-top:12px;font-size:14px;color:var(--gray)}
+.örnekler{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.örnekler button{background:var(--cream2);border:1px solid var(--line);border-radius:16px;padding:5px 13px;font-size:13px;cursor:pointer;color:var(--navy)}
+.örnekler button:hover{border-color:var(--gold)}
+
+/* harita */
+#mapWrap{position:relative}
+#map{width:100%;height:430px;border-radius:14px;background:linear-gradient(160deg,#0d2830,#14424c);display:block;cursor:grab}
+.mapbtns{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+#mapMsg{margin-top:10px;font-size:14.5px;color:var(--navy);min-height:22px;font-weight:600}
+
+/* dikkat */
+.att-sent{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;direction:rtl;padding:22px;background:var(--navy);border-radius:14px}
+.att-w{color:#e9e2d2;font-size:26px;font-family:var(--serif);padding:8px 14px;border-radius:10px;cursor:pointer;transition:.3s;position:relative;border:1.5px solid transparent}
+.att-w small{display:block;font-size:11px;font-family:var(--sans);color:#9fb7b3;text-align:center;margin-top:2px}
+.att-w:hover{border-color:rgba(228,201,126,.5)}
+.att-w.sel{background:var(--gold);color:#fff}
+#attExp{margin-top:14px;font-size:15px;color:var(--ink);background:var(--cream);border-radius:12px;padding:14px 18px;min-height:52px}
+#attExp b{color:var(--teal)}
+
+/* tahmin */
+#predSent{font-size:22px;font-family:var(--serif);color:var(--navy);background:var(--cream);border-radius:12px;padding:18px 20px;min-height:66px;line-height:1.5}
+#predSent .yeni{color:var(--gold);font-weight:700}
+#predOpts{display:grid;gap:9px;margin-top:16px}
+.popt{display:grid;grid-template-columns:150px 1fr 52px;gap:12px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:10px 14px;cursor:pointer;transition:.2s}
+.popt:hover{border-color:var(--teal);transform:translateX(4px)}
+.popt .w{font-weight:700;color:var(--navy)}
+.popt .bar{height:10px;border-radius:6px;background:var(--cream2);overflow:hidden}
+.popt .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:6px;transition:width .6s}
+.popt .p{font-size:13px;color:var(--gray);text-align:right;font-variant-numeric:tabular-nums}
+.pred-btns{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.dil-tab{display:inline-flex;background:var(--cream2);border-radius:22px;padding:4px;margin-bottom:14px}
+.dil-tab button{border:0;background:transparent;padding:7px 18px;border-radius:18px;font-weight:700;font-size:14px;cursor:pointer;color:var(--gray)}
+.dil-tab button.on{background:var(--navy);color:#fff}
+</style>
+</head>
+<body>
+<main>
+<section style="padding-top:56px;padding-bottom:30px">
+  <div class="wrap center">
+    <div class="eyebrow reveal">Laboratuvar</div>
+    <h2 class="h2 reveal">Yapay zekânın kafasının içi</h2>
+    <p class="lead reveal" style="margin:14px auto 0">İnsan gibi hissetmez: örüntü işler, bağlama bakar, tahmin eder. Dört deneyle bunu <em>yaşayın</em> — hepsi cihazınızda çalışır, hiçbir yere veri gitmez. Deneyler temsilîdir; amaç modelin mantığını sınıfta anlatılabilir kılmaktır.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+<div class="wrap labgrid">
+
+  <!-- D1: TOKENIZER -->
+  <div class="panel deney reveal" id="d1">
+    <span class="tag">Deney 1 · Adım 1</span>
+    <h3>Metni Nasıl Görür? — Parçalayıcı</h3>
+    <p class="sub">Model, cümleyi anlamadan önce parçalara böler: kelime, ek, işaret. Bir cümle yazın ya da örneklerden seçin.</p>
+    <div class="tokrow">
+      <input type="text" id="tokIn" placeholder="Bir cümle yazın… (Türkçe veya Arapça)" value="Bugün sınıfta Arapça konuşuyoruz">
+      <button class="btn" id="tokBtn">Parçala</button>
+    </div>
+    <div class="örnekler">
+      <button data-t="Bugün sınıfta Arapça konuşuyoruz">Türkçe örnek</button>
+      <button data-t="الطَّالِبُ يَقْرَأُ الْكِتَابَ">الطالب يقرأ الكتاب</button>
+      <button data-t="Öğrencilerimizle pazarda alışveriş yapacağız">Uzun Türkçe</button>
+      <button data-t="ذَهَبَ الطَّالِبُ إِلَى الْمَكْتَبَةِ صَبَاحًا">ذهب الطالب…</button>
+    </div>
+    <div id="tokOut"></div>
+    <div id="tokInfo"></div>
+    <div class="notekart"><b>Sınıfta böyle anlatın:</b> “Siz bir cümleyi kelime kelime okursunuz; model önce böler, sonra her parçayı sayılara çevirir. Sarf da kelimeyi kök ve eklere böler — tanıdık geldi mi?” <a class="slaytlink" href="sunum.html#17">→ İlgili slayt: 17</a></div>
+  </div>
+
+  <!-- D2: ANLAM HARİTASI -->
+  <div class="panel deney reveal" id="d2">
+    <span class="tag">Deney 2 · Adım 2</span>
+    <h3>Anlam Haritası — kral − erkek + kadın = ?</h3>
+    <p class="sub">Kelimeler modelin içinde bir haritada yaşar: yakın anlamlar yakın durur. Denklemi çalıştırın; okun nereye indiğini izleyin. Haritayı sürükleyebilirsiniz.</p>
+    <div id="mapWrap"><canvas id="map"></canvas></div>
+    <div class="mapbtns">
+      <button class="btn sm" id="eqBtn">⚡ Denklemi çalıştır: kral − erkek + kadın</button>
+      <button class="btn sm ghost" id="arBtn">ك-ت-ب ailesini göster</button>
+      <button class="btn sm ghost" id="resetMap">↺ Sıfırla</button>
+    </div>
+    <div id="mapMsg"></div>
+    <div class="notekart"><b>Sınıfta böyle anlatın:</b> “Model ‘kral' kelimesinin harflerini değil, öteki kelimelerle <b>ilişkisini</b> öğrenir. معلم ile مدرسة'nin yakınlığı da aynı haritada.” <a class="slaytlink" href="sunum.html#18">→ 18</a> · <a class="slaytlink" href="sunum.html#19">19</a></div>
+  </div>
+
+  <!-- D3: DİKKAT FENERİ -->
+  <div class="panel deney reveal" id="d3">
+    <span class="tag">Deney 3 · Adım 3</span>
+    <h3>Dikkat Feneri — model neye bakıyor?</h3>
+    <p class="sub">Model her kelimeye eşit bakmaz; anlamı kurarken bazı kelimeleri daha güçlü tartar. Cümledeki bir kelimeye dokunun; fener, modelin “dikkatini” aydınlatsın.</p>
+    <div class="att-sent" id="attSent"></div>
+    <div id="attExp">Bir kelimeye dokunun…</div>
+    <div class="notekart"><b>Sınıfta böyle anlatın:</b> “ذهب fiiline bakarken model ‘kim gitti?' diye الطالب'a, ‘nereye?' diye المكتبة'ye bakar. Nahiv dersindeki fiil–fail–mef'ul ilişkisi, dikkat mekanizmasının ta kendisi.” <a class="slaytlink" href="sunum.html#20">→ 20</a></div>
+  </div>
+
+  <!-- D4: TAHMİN MOTORU -->
+  <div class="panel deney reveal" id="d4">
+    <span class="tag">Deney 4 · Adım 4</span>
+    <h3>Tahmin Motoru — cümleyi birlikte yazalım</h3>
+    <p class="sub">Model her adımda “sıradaki en olası kelime”yi seçer. Şimdi model sizsiniz: olasılık çubuklarına bakın, kelimeyi seçin, cümle büyüsün.</p>
+    <div class="dil-tab"><button class="on" data-d="tr">Türkçe</button><button data-d="ar">العربية</button></div>
+    <div id="predSent"></div>
+    <div id="predOpts"></div>
+    <div class="pred-btns">
+      <button class="btn sm ghost" id="predReset">↺ Baştan</button>
+      <span style="font-size:13.5px;color:var(--gray);align-self:center">İpucu: hep en yüksek olasılığı seçmek zorunda değilsiniz — model de bazen seçmez (sıcaklık!).</span>
+    </div>
+    <div class="notekart"><b>Ölçünün kaynağı:</b> “Gördüğünüz gibi burada şuur yok; <b>istatistik</b> var. Bu yüzden çıktı her zaman muallim kontrolünden geçer — model hata eder, uydurabilir.” <a class="slaytlink" href="sunum.html#21">→ 21</a> · <a class="slaytlink" href="sunum.html#22">22</a></div>
+  </div>
+
+</div>
+</section>
+
+<section style="padding-top:10px">
+  <div class="wrap center reveal">
+    <p class="lead" style="margin:0 auto 20px">Motoru tanıdınız. Şimdi direksiyona geçin:</p>
+    <a class="btn" href="atolye.html">Atölye: kendi prompt'unuzu üretin →</a>
+  </div>
+</section>
+
+<footer class="site"><div class="wrap"><div><b>raufenc.com</b> — Laboratuvar</div><div>“Bu bir şuur değil; istatistiksel öğrenmedir.”</div></div></footer>
+</main>
+
+<script src="assets/app.js"></script>
+<script>
+/* ---------- D1 TOKENIZER ---------- */
+const TOKCOL=["#1F6E6B","#B98A2E","#2A7F7C","#8C5B2E","#16404A","#4E8F6B","#A0623C"];
+const TR_SUF=["larımızla","lerimizle","acağız","eceğiz","uyoruz","üyoruz","ıyoruz","iyoruz","larla","lerle","ların","lerin","lar","ler","da","de","ta","te","la","le","ız","iz","uz","üz"];
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function tokenize(s){
+  const out=[];
+  const trimmed=s.trim();
+  if(!trimmed)return out;
+  trimmed.split(/\s+/).forEach(w=>{
+    const isAr=/[؀-ۿ]/.test(w);
+    if(isAr){
+      let rest=w, pre=[];
+      const striph=x=>x.replace(/[ً-ْٰ]/g,"");
+      if(striph(rest).startsWith("وال")){pre.push(rest.slice(0,1));rest=rest.slice(1)}
+      if(striph(rest).startsWith("ال")&&striph(rest).length>4){
+        const cut=rest.search(/[^والَُِّْ]/u); // sonra: ال + kök
+        pre.push(rest.slice(0,cut<2?2:cut)); rest=rest.slice(cut<2?2:cut);
+      }
+      pre.forEach(p=>out.push([p,"takı"]));
+      // harekeleri ayrı işaret token'ı olarak say
+      const bare=striph(rest);
+      out.push([bare,"kök/kelime"]);
+      const har=rest.replace(/[^ً-ْ]/g,"");
+      if(har)out.push(["ـ"+har.split("").join("ـ"),"işaret"]);
+    }else{
+      let rest=w, suf=null;
+      for(const s2 of TR_SUF){ if(rest.toLowerCase().endsWith(s2)&&rest.length-s2.length>=3){suf=rest.slice(rest.length-s2.length);rest=rest.slice(0,rest.length-s2.length);break} }
+      out.push([rest,"kök"]);
+      if(suf)out.push(["-"+suf,"ek"]);
+    }
+  });
+  return out;
+}
+const tokOut=document.getElementById("tokOut"),tokIn=document.getElementById("tokIn"),tokInfo=document.getElementById("tokInfo");
+function runTok(){
+  const toks=tokenize(tokIn.value||"");
+  tokOut.innerHTML="";
+  toks.forEach((t,i)=>{
+    const d=document.createElement("div");d.className="tok";
+    d.style.background=TOKCOL[i%TOKCOL.length];d.style.animationDelay=(i*90)+"ms";
+    d.innerHTML=`${esc(t[0])}<small>${esc(t[1])}</small>`;tokOut.appendChild(d);
+  });
+  const kelimeSayisi=tokIn.value.trim()?tokIn.value.trim().split(/\s+/).length:0;
+  tokInfo.textContent=`${kelimeSayisi} kelime → ${toks.length} parça (token). Model bu parçaların her birini bir sayı dizisine çevirir.`;
+}
+document.getElementById("tokBtn").onclick=runTok;
+tokIn.addEventListener("keydown",e=>{if(e.key==="Enter")runTok()});
+document.querySelectorAll(".örnekler button").forEach(b=>b.onclick=()=>{tokIn.value=b.dataset.t;runTok()});
+runTok();
+
+/* ---------- D2 ANLAM HARİTASI ---------- */
+const cv=document.getElementById("map"),ctx=cv.getContext("2d");
+const WORDS=[
+ {w:"kral",x:.20,y:.30,c:"#E4C97E"},{w:"kraliçe",x:.34,y:.16,c:"#E4C97E"},
+ {w:"erkek",x:.16,y:.62,c:"#9fd0cc"},{w:"kadın",x:.30,y:.48,c:"#9fd0cc"},
+ {w:"öğretmen",x:.62,y:.30,c:"#fff"},{w:"öğrenci",x:.72,y:.40,c:"#fff"},{w:"okul",x:.68,y:.22,c:"#fff"},{w:"ders",x:.78,y:.28,c:"#fff"},
+ {w:"معلم",x:.60,y:.62,c:"#E4C97E",ar:1},{w:"طالب",x:.70,y:.72,c:"#E4C97E",ar:1},{w:"مدرسة",x:.66,y:.54,c:"#E4C97E",ar:1},{w:"كتاب",x:.80,y:.62,c:"#E4C97E",ar:1},
+ {w:"deniz",x:.12,y:.86,c:"#7fa8a3"},{w:"portakal",x:.30,y:.88,c:"#7fa8a3"}
+];
+const KTB=[["كَتَبَ","yazdı",.46,.80],["كِتَاب","kitap",.58,.86],["كَاتِب","yazan",.50,.90],["مَكْتَب","yazıhane",.68,.84],["مَكْتَبَة","kütüphane",.78,.90]];
+let cam={x:0,y:0},drag=null,eqPhase=0,showKtb=false,arrow=null;
+function fit(){cv.width=cv.clientWidth*devicePixelRatio;cv.height=430*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);draw()}
+addEventListener("resize",fit);
+function P(nx,ny){return[nx*cv.clientWidth+cam.x, ny*430+cam.y]}
+function draw(){
+  ctx.clearRect(0,0,cv.clientWidth,430);
+  /* grid */
+  ctx.strokeStyle="rgba(255,255,255,.05)";ctx.lineWidth=1;
+  for(let gx=0;gx<cv.clientWidth+400;gx+=46){ctx.beginPath();ctx.moveTo(gx+cam.x%46,0);ctx.lineTo(gx+cam.x%46,430);ctx.stroke()}
+  for(let gy=0;gy<430+400;gy+=46){ctx.beginPath();ctx.moveTo(0,gy+cam.y%46);ctx.lineTo(cv.clientWidth,gy+cam.y%46);ctx.stroke()}
+  /* kümeler arası bağlar */
+  ctx.strokeStyle="rgba(228,201,126,.18)";
+  [["öğretmen","معلم"],["öğrenci","طالب"],["okul","مدرسة"]].forEach(pr=>{
+    const a=WORDS.find(w=>w.w===pr[0]),b=WORDS.find(w=>w.w===pr[1]);
+    const[x1,y1]=P(a.x,a.y),[x2,y2]=P(b.x,b.y);
+    ctx.beginPath();ctx.setLineDash([4,5]);ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();ctx.setLineDash([]);
+  });
+  /* kelimeler */
+  WORDS.forEach(w=>{
+    const[x,y]=P(w.x,w.y);
+    ctx.fillStyle="rgba(255,255,255,.10)";ctx.beginPath();ctx.arc(x,y,5,0,7);ctx.fill();
+    ctx.fillStyle=w.c;ctx.beginPath();ctx.arc(x,y,4,0,7);ctx.fill();
+    ctx.font=(w.ar?"600 17px Georgia":"600 14px 'Source Sans 3',sans-serif");
+    ctx.fillStyle=w.c;ctx.fillText(w.w,x+9,y+5);
+  });
+  if(showKtb){
+    const[cx,cy]=P(.62,.84);
+    ctx.fillStyle="rgba(228,201,126,.14)";ctx.beginPath();ctx.arc(cx,cy,86,0,7);ctx.fill();
+    ctx.fillStyle="#E4C97E";ctx.font="700 15px Georgia";ctx.fillText("ك ت ب ailesi",cx-40,cy-64);
+    KTB.forEach(k=>{const[x,y]=P(k[2],k[3]);
+      ctx.fillStyle="#fff";ctx.font="600 16px Georgia";ctx.fillText(k[0],x,y);
+      ctx.fillStyle="rgba(255,255,255,.55)";ctx.font="11px 'Source Sans 3'";ctx.fillText(k[1],x,y+14);
+    });
+  }
+  if(arrow){
+    ctx.strokeStyle="#E4C97E";ctx.lineWidth=2.5;ctx.setLineDash([7,6]);
+    ctx.beginPath();ctx.moveTo(arrow.x1,arrow.y1);ctx.lineTo(arrow.x,arrow.y);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#E4C97E";ctx.beginPath();ctx.arc(arrow.x,arrow.y,6,0,7);ctx.fill();
+  }
+}
+cv.addEventListener("pointerdown",e=>{drag={x:e.clientX-cam.x,y:e.clientY-cam.y};cv.style.cursor="grabbing"});
+addEventListener("pointermove",e=>{if(drag){cam.x=e.clientX-drag.x;cam.y=e.clientY-drag.y;draw()}});
+addEventListener("pointerup",()=>{drag=null;cv.style.cursor="grab"});
+const mapMsg=document.getElementById("mapMsg");
+document.getElementById("eqBtn").onclick=()=>{
+  const kral=WORDS.find(w=>w.w==="kral"),erkek=WORDS.find(w=>w.w==="erkek"),kadin=WORDS.find(w=>w.w==="kadın"),kr=WORDS.find(w=>w.w==="kraliçe");
+  const[x1,y1]=P(kral.x,kral.y);
+  const tx=kral.x-erkek.x+kadin.x, ty=kral.y-erkek.y+kadin.y;
+  const[x2,y2]=P(tx,ty);
+  let t=0;arrow={x1,y1,x:x1,y:y1};
+  mapMsg.textContent="kral vektöründen ‘erkeklik' çıkarılıyor, ‘kadınlık' ekleniyor…";
+  const anim=()=>{if(!arrow)return;t+=.025;arrow.x=x1+(x2-x1)*Math.min(t,1);arrow.y=y1+(y2-y1)*Math.min(t,1);draw();
+    if(t<1)requestAnimationFrame(anim);
+    else mapMsg.textContent="Ok, ‘kraliçe'nin dibine indi. Model harfleri değil, İLİŞKİYİ öğreniyor. ✨";
+  };anim();
+};
+document.getElementById("arBtn").onclick=()=>{showKtb=!showKtb;mapMsg.textContent=showKtb?"Aynı kökün ailesi haritada bir arada oturur — sarfın yıllardır söylediği şey.":"";draw()};
+document.getElementById("resetMap").onclick=()=>{cam={x:0,y:0};arrow=null;showKtb=false;mapMsg.textContent="";draw()};
+fit();
+
+/* ---------- D3 DİKKAT ---------- */
+const SENT=[
+ {w:"ذَهَبَ",tr:"gitti",exp:"<b>ذَهَبَ</b> (fiil) anlam kurarken en çok <b>الطَّالِبُ</b>'a (kim gitti?) ve <b>الْمَكْتَبَةِ</b>'ye (nereye?) bakar.",att:[0,.95,.35,.85,.45]},
+ {w:"الطَّالِبُ",tr:"öğrenci",exp:"<b>الطَّالِبُ</b> (fail) en güçlü bağını fiile kurar: giden o. Sıfatı <b>الْمُجْتَهِدُ</b> da onu tarif ettiği için parlar.",att:[.9,0,.9,.3,.2]},
+ {w:"الْمُجْتَهِدُ",tr:"çalışkan",exp:"<b>الْمُجْتَهِدُ</b> (sıfat) neredeyse tüm dikkatini nitelediği isme verir: <b>الطَّالِبُ</b>.",att:[.2,.95,0,.15,.1]},
+ {w:"إِلَى الْمَكْتَبَةِ",tr:"kütüphaneye",exp:"<b>الْمَكْتَبَةِ</b> (hedef) fiile bakar: gitmek nereye? İşte harf-i cer + mecrur ilişkisi, dikkat çizgisi olarak.",att:[.9,.25,.1,0,.3]},
+ {w:"صَبَاحًا",tr:"sabahleyin",exp:"<b>صَبَاحًا</b> (zarf) fiile tutunur: ne zaman gitti? Zarfın görevi, dikkat haritasında fiile çizilen çizgidir.",att:[.9,.15,.05,.2,0]}
+];
+const attSent=document.getElementById("attSent"),attExp=document.getElementById("attExp");
+SENT.forEach((s,i)=>{
+  const d=document.createElement("div");d.className="att-w";d.innerHTML=`${s.w}<small>${s.tr}</small>`;
+  d.onclick=()=>{
+    [...attSent.children].forEach((el,j)=>{
+      el.classList.toggle("sel",j===i);
+      const a=SENT[i].att[j];
+      el.style.background=j===i?"":`rgba(228,201,126,${a*.65})`;
+      el.style.opacity=j===i?1:(0.45+a*.55);
+    });
+    attExp.innerHTML=s.exp;
+  };
+  attSent.appendChild(d);
+});
+/* ---------- D4 TAHMİN ---------- */
+const CHAINS={
+ tr:{start:"Bugün derste öğrencilerle",steps:[
+   [["konuşacağız",62],["oyun oynayacağız",21],["şarkı söyleyeceğiz",9],["uyuyacağız",1]],
+   [["Arapça",55],["pazarda",25],["hızlıca",12],["dans ederek",4]],
+   [["diyalog kuracağız.",58],["kart oyunu oynayacağız.",24],["hikâye yazacağız.",13],["uçağa bineceğiz.",2]]
+ ]},
+ ar:{start:"أَنَا أُحِبُّ",steps:[
+   [["الْقِرَاءَةَ",70],["الْمَدْرَسَةَ",15],["الشَّارِعَ",8],["النَّوْمَ",4]],
+   [["فِي",52],["كَثِيرًا.",36],["أَمْسِ",6],["تَحْتَ",3]],
+   [["الْمَكْتَبَةِ.",66],["الصَّبَاحِ.",22],["الْبَحْرِ.",7],["الْقَمَرِ.",2]]
+ ]}
+};
+let dil="tr",step=0,sent="";
+const predSent=document.getElementById("predSent"),predOpts=document.getElementById("predOpts");
+function predRender(){
+  const ch=CHAINS[dil];
+  predSent.innerHTML=sent||ch.start+" <span style='color:var(--gray)'>…</span>";
+  predOpts.innerHTML="";
+  if(step>=ch.steps.length){
+    predOpts.innerHTML=`<div style="font-size:15px;color:var(--teal);font-weight:700;padding:8px 2px">Cümle tamam ✓ — Her adımda yalnızca "en olası devam" hesaplandı. Şuur yok; olasılık var.</div>`;return;
+  }
+  ch.steps[step].forEach(o=>{
+    const d=document.createElement("div");d.className="popt";
+    d.innerHTML=`<span class="w" style="${dil==='ar'?'font-family:Georgia;font-size:18px':''}">${o[0]}</span><span class="bar"><i style="width:0"></i></span><span class="p">%${o[1]}</span>`;
+    d.onclick=()=>{sent=(sent||CHAINS[dil].start)+" <span class='yeni'>"+o[0]+"</span>";step++;predRender()};
+    predOpts.appendChild(d);
+    requestAnimationFrame(()=>requestAnimationFrame(()=>d.querySelector("i").style.width=o[1]+"%"));
+  });
+}
+document.querySelectorAll(".dil-tab button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll(".dil-tab button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");dil=b.dataset.d;step=0;sent="";predRender();
+});
+document.getElementById("predReset").onclick=()=>{step=0;sent="";predRender()};
+predRender();
+</script>
+</body>
+</html>
