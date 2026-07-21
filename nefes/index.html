@@ -468,6 +468,55 @@
       background: color-mix(in srgb, #f59e0b 7%, var(--glass));
     }
 
+    /* ═══════════════ PORTRE KARTI ═══════════════ */
+    .author-card {
+      margin: 30px auto 0;
+      max-width: 460px;
+      display: flex; align-items: center; gap: 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 18px 20px;
+      text-decoration: none; color: inherit;
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.3s;
+    }
+    .author-card:hover {
+      background: var(--glass-hover);
+      border-color: color-mix(in srgb, var(--pc) 45%, var(--glass-border));
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px color-mix(in srgb, var(--pc) 14%, rgba(0, 0, 0, 0.25));
+    }
+    .author-card:focus-visible { outline: 2px solid var(--pc); outline-offset: 3px; }
+    .author-card img {
+      width: 66px; height: 66px; flex: 0 0 auto;
+      border-radius: 50%; object-fit: cover;
+      border: 2px solid color-mix(in srgb, var(--pc) 55%, transparent);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--pc) 26%, transparent);
+      transition: border-color 1.2s ease, box-shadow 1.2s ease;
+    }
+    .author-card .a-info { flex: 1; min-width: 0; }
+    .author-card .a-kicker, .author-card .a-name, .author-card .a-role { display: block; }
+    .author-card .a-kicker {
+      font-size: 0.64rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--text-faint); margin-bottom: 3px;
+    }
+    .author-card .a-name {
+      font-family: var(--font-display); font-size: 1.08rem; font-weight: 600; color: var(--text);
+    }
+    .author-card .a-role { font-size: 0.79rem; color: var(--text-dim); margin-top: 2px; }
+    .author-card .a-site {
+      font-size: 0.76rem; font-weight: 600; color: var(--pc); margin-top: 5px;
+      display: inline-flex; align-items: center; gap: 4px;
+      transition: color 1.2s ease;
+    }
+    .author-card .a-arrow {
+      flex: 0 0 auto; color: var(--text-faint);
+      transition: transform 0.25s, color 0.25s;
+    }
+    .author-card .a-arrow svg { width: 18px; height: 18px; display: block; }
+    .author-card:hover .a-arrow { transform: translateX(4px); color: var(--pc); }
+
     footer {
       position: relative; z-index: 1;
       text-align: center; padding: 26px 20px 40px;
@@ -597,6 +646,19 @@
           </p>
         </article>
       </div>
+
+      <a class="author-card" href="https://raufenc.com/" aria-label="Rauf Enç — raufenc.com ana sayfası">
+        <img src="/images/raufenc.jpeg" alt="Rauf Enç portresi" width="66" height="66" loading="lazy" />
+        <span class="a-info">
+          <span class="a-kicker">Hazırlayan</span>
+          <span class="a-name">Rauf Enç</span>
+          <span class="a-role">Eğitimci · Yazar · Muallim</span>
+          <span class="a-site">raufenc.com</span>
+        </span>
+        <span class="a-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><polyline points="12 5 19 12 12 19" /></svg>
+        </span>
+      </a>
     </section>
   </main>
 
