@@ -1,7 +1,7 @@
 /**
  * Tek kaynak proje manifest'i + kategori meta.
  * Tum sayfalarda proje listesi, sayac ve kart icin bu dosya kullanilir.
- * Son guncelleme: 2026-05-26
+ * Son guncelleme: 2026-07-21
  */
 var PROJELER = [
   { emoji: '\u{1F9E0}', title: 'NöroTerbiye', desc: 'Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.', tag: 'Uygulama', href: '/noroterbiye/', kategori: 'noroterbiye', featured: true },
@@ -12,6 +12,7 @@ var PROJELER = [
   { emoji: '\u{1F9ED}', title: 'Kalbinin Haritası', desc: 'Kibir mi, sabır mı, ihlas mı? 17 farklı testle iç dünyana ayna tut. Yapay zeka destekli nefs muhasebesi.', tag: 'Uygulama', href: '/kalbinin-haritasi/', kategori: 'dusunce', featured: true },
   { emoji: '\u{1F3AD}', title: 'Dokuz Tip Mizaç Testi', desc: 'Dünyaca tanınan Dokuz Tip Mizaç Modeli (DTMM / Enneagram) ile mizaç tipini keşfet. 45 soru, görsel sonuç haritası, güçlü yönler, gölge ve gelişim yolu — üstelik sonucunla sohbet edebilirsin.', tag: 'Uygulama', href: '/mizac/', kategori: 'dusunce', featured: true },
   { emoji: '\u{1F5FA}\u{FE0F}', title: 'Yol Haritan', desc: 'Liselilere özel karakter (Beş Faktör / Big Five) ve meslek ilgisi (Holland / RIASEC) testi. 16 arketip, radar haritası, Türkiye bölüm önerileri ve aile/rehber sohbet kartları — tamamen cihazında, ücretsiz.', tag: 'Uygulama', href: '/yol-haritan/', kategori: 'dusunce', featured: true },
+  { emoji: '\u{1F32C}\u{FE0F}', title: '4-7-8 Nefes Egzersizi', desc: 'Zihnin durulsun, beden gevşesin. 4 saniye al, 7 saniye tut, 8 saniyede ver — animasyonlu nefes küresi, sakinleştirici sesler ve Türkçe sesli rehberle. Uykuya hazırlan, kaygıyı yatıştır.', tag: 'Uygulama', href: '/nefes/', kategori: 'dusunce', featured: true },
   { emoji: '\u{1F54C}', title: 'Özbekistan Evliyaları ve Âlimleri', desc: 'Buhara, Semerkant, Taşkent... 12 asırda yetişen 55 âlimin izini harita üzerinde sür.', tag: 'Ansiklopedi', href: '/evliyalar/', kategori: 'tarih' },
   { emoji: '\u{1F0CF}', title: 'Osmanlı Padişahları Kart Seti', desc: '623 yıllık imparatorluğun 36 padişahını tanı. Quiz, eşleştirme ve ipucuyla tahmin — tarih hiç bu kadar eğlenceli olmamıştı.', tag: 'Oyun', href: '/osmanli-kartlari/', kategori: 'tarih' },
   { emoji: '\u{1F31F}', title: 'İslam Bilim Yıldızları', desc: 'Cebirin babası kim? İlk hastaneyi kim kurdu? 85 âlimin keşiflerini oyunlarla öğren.', tag: 'Oyun', href: '/islam-bilim-yildizlari/', kategori: 'tarih' },
