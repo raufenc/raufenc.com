@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf9f4">
+<title>Atölyeye Davet — raufenc.com</title>
+<meta name="description" content="Rauf Enç seni karşılıyor ve atölyesinin kapısını aralıyor. Kaydırarak içeri gir.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="scroll-story.css">
+<link rel="stylesheet" href="hikaye.css">
+<script>
+  /* Tema: AYDINLIK varsayılan; kullanıcı seçerse karanlık.
+     Boyamadan önce çalışır ki tema atlaması olmasın. */
+  try {
+    if (localStorage.getItem('sv-theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<a class="skiplink" href="#projeler">İçeriğe geç</a>
+
+<button class="theme-toggle" type="button" aria-label="Aydınlık / karanlık mod" data-theme-toggle>
+  <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+
+<section class="story" data-scroll-story data-story-vh="150" data-story-intro-vh="0.95" data-story-outro-vh="120">
+
+  <div class="story-stage">
+
+    <div class="story-visual" aria-hidden="true">
+      <picture>
+        <source media="(max-width: 760px)" srcset="assets/hikaye-dikey.jpg">
+        <img class="story-poster" src="assets/hikaye-yatay.jpg" alt="" width="1280" height="720" fetchpriority="high">
+      </picture>
+      <video class="story-video" data-story-video
+             muted playsinline webkit-playsinline disablepictureinpicture
+             controlslist="nodownload nofullscreen noremoteplayback"
+             preload="metadata" poster="assets/hikaye-yatay.jpg" tabindex="-1" aria-hidden="true">
+        <source media="(max-width: 760px)" src="assets/hikaye-dikey.mp4" type="video/mp4">
+        <source src="assets/hikaye-yatay.mp4" type="video/mp4">
+      </video>
+      <div class="story-wash"></div>
+      <div class="story-scrim"></div>
+      <div class="story-vignette"></div>
+    </div>
+
+    <div class="story-intro" data-story-intro>
+      <span class="story-eyebrow">Hoş geldin</span>
+      <h1>Kapıyı senin için araladım</h1>
+      <p>Öğrenmeyi oyuna, hikâyeye ve keşfe çeviren bir atölye. Buyur, kaydırarak gir.</p>
+      <span class="story-cue" aria-hidden="true"><i></i> Aşağı kaydır</span>
+    </div>
+
+    <div class="story-scenes" aria-label="Anlatı adımları">
+      <article class="story-scene" data-story-scene="1" data-scene-at="0.14">
+        <p class="story-scene-step">Davet</p>
+        <h2>Buyur, içeri gir.</h2>
+        <p>Kapı, öğrenmenin peşinde olan herkese açık. Sen çaldın; şimdi aralanıyor.</p>
+      </article>
+
+      <article class="story-scene story-scene-high" data-story-scene="2" data-scene-at="0.5">
+        <p class="story-scene-step">İçeride</p>
+        <h2>Yılların emeği burada.</h2>
+        <p>Oyunlar, kitaplar, dersler — hepsi öğrenip paylaşmak için bir araya geldi.</p>
+      </article>
+
+      <article class="story-scene story-scene-low" data-story-scene="3" data-scene-at="0.9">
+        <p class="story-scene-step">Niyet</p>
+        <h2>Öğrendikçe paylaşmaya çalışıyorum.</h2>
+        <p>Hâlâ talebeyim; kapı hep açık kalsın. Buyur, birlikte bakalım.</p>
+      </article>
+    </div>
+
+    <div class="story-progress" data-story-progress aria-hidden="true">
+      <span class="story-progress-label">Atölye</span>
+      <span class="story-progress-track"><i></i></span>
+      <span data-story-counter>01 / 03</span>
+    </div>
+
+    <div class="story-outro" data-story-outro>
+      <div class="story-outro-inner">
+        <h2>Atölyeye hoş geldin.</h2>
+        <p>Aşağıdakiler bu kapının ardında bugüne kadar biriken işler. Dilediğinden başla.</p>
+        <div class="story-outro-cta">
+          <a class="btn btn-warm" href="#projeler">Projeleri Keşfet</a>
+          <a class="btn btn-ghost" href="/noroterbiye/">Nöroterbiye</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="projeler">
+  <div class="wrap">
+    <div class="projects-header">
+      <span class="section-label">Atölye</span>
+      <h2 class="section-title">Kapının <em>ardındakiler</em></h2>
+      <p class="projects-sub">Öğrenmeyi oyuna, sanata, hikâyeye ve keşfe çevirme denemeleri.</p>
+    </div>
+
+    <div class="pgrid">
+        <a class="pcard" href="/noroterbiye/">
+          <span class="pcard-emoji" aria-hidden="true">🧠</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>NöroTerbiye</h3>
+          <p>Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.</p>
+        </a>
+        <a class="pcard" href="/muallimo/">
+          <span class="pcard-emoji" aria-hidden="true">📚</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>MUALLİMO — Resim Kartları</h3>
+          <p>Çocuğunuza bir kitap okutun, 2.199 görsel kartla pekiştirsin. 24 kitap, 6 seri — her yaşa göre.</p>
+        </a>
+        <a class="pcard" href="/osmanlica/">
+          <span class="pcard-emoji" aria-hidden="true">📜</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>Osmanlıca Lügat</h3>
+          <p>Dedenin dilini keşfet. 454 Osmanlıca terim, hat görselleriyle hayat buluyor. Arayıp bul, öğrenip sınan.</p>
+        </a>
+        <a class="pcard" href="/kalbinin-haritasi/">
+          <span class="pcard-emoji" aria-hidden="true">🧭</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>Kalbinin Haritası</h3>
+          <p>Kibir mi, sabır mı, ihlas mı? 17 farklı testle iç dünyana ayna tut. Yapay zeka destekli nefs muhasebesi.</p>
+        </a>
+        <a class="pcard" href="/mizac/">
+          <span class="pcard-emoji" aria-hidden="true">🎭</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>Dokuz Tip Mizaç Testi</h3>
+          <p>Dünyaca tanınan Dokuz Tip Mizaç Modeli (DTMM / Enneagram) ile mizaç tipini keşfet. 45 soru, görsel sonuç haritası, güçlü yönler, gölge ve gelişim yolu — üstelik sonucunla sohbet edebilirsin.</p>
+        </a>
+        <a class="pcard" href="/yol-haritan/">
+          <span class="pcard-emoji" aria-hidden="true">🗺️</span>
+          <span class="pcard-tag">Uygulama</span>
+          <h3>Yol Haritan</h3>
+          <p>Liselilere özel karakter (Beş Faktör / Big Five) ve meslek ilgisi (Holland / RIASEC) testi. 16 arketip, radar haritası, Türkiye bölüm önerileri ve aile/rehber sohbet kartları — tamamen cihazında, ücretsiz.</p>
+        </a>
+        <a class="pcard" href="/ai-atlasi/">
+          <span class="pcard-emoji" aria-hidden="true">🤖</span>
+          <span class="pcard-tag">Rehber</span>
+          <h3>Yapay Zekâ Araç Atlası</h3>
+          <p>Hangi YZ aracı ne işe yarar? 32 aracı karşılaştır, ihtiyacına göre seç. Üstelik çoğu ücretsiz.</p>
+        </a>
+        <a class="pcard" href="/sevgili-peygamberim/">
+          <span class="pcard-emoji" aria-hidden="true">☪️</span>
+          <span class="pcard-tag">Ansiklopedi</span>
+          <h3>Sevgili Peygamberim</h3>
+          <p>O'nun hayatını hiç bu kadar yakından okumadınız. 72 bölüm, interaktif harita, kişi kartları ve quizlerle dolu bir yolculuk.</p>
+        </a>
+        <a class="pcard" href="/maarif/#/rehber">
+          <span class="pcard-emoji" aria-hidden="true">📖</span>
+          <span class="pcard-tag">Rehber</span>
+          <h3>Program Rehberim</h3>
+          <p>Öğretmen el kitabı: Haftalık plan, ders akışı, 202 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.</p>
+        </a>
+        <a class="pcard" href="/beylikten-cihana/">
+          <span class="pcard-emoji" aria-hidden="true">🏰</span>
+          <span class="pcard-tag">Oyun</span>
+          <h3>Beylikten Cihana</h3>
+          <p>Zar yok, tarih var. Söğüt'ten İstanbul'a şehir fethet, imar et, rakiplerini alt et. 85 sefer kartı, dijital + evde basılabilir fiziksel set.</p>
+        </a>
+        <a class="pcard" href="/ciraktan-pire/">
+          <span class="pcard-emoji" aria-hidden="true">🔨</span>
+          <span class="pcard-tag">Oyun</span>
+          <h3>Çıraktan Pîre</h3>
+          <p>Yamaklıktan Ahi Baba'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.</p>
+        </a>
+        <a class="pcard" href="/oyunlar/">
+          <span class="pcard-emoji" aria-hidden="true">⚖️</span>
+          <span class="pcard-tag">Oyun</span>
+          <h3>Değer Oyunları</h3>
+          <p>Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.</p>
+        </a>
+        <a class="pcard" href="/dogru-taraf/">
+          <span class="pcard-emoji" aria-hidden="true">🕋</span>
+          <span class="pcard-tag">Oyun</span>
+          <h3>Doğru Taraf</h3>
+          <p>Kurban kesmek farz mı, vacip mi? Kartı doğru cevaba kaydır: 10 kategori, yüzlerce soru, seviye atla, rekor kır.</p>
+        </a>
+        <a class="pcard" href="/hizli-hafiz/">
+          <span class="pcard-emoji" aria-hidden="true">🔎</span>
+          <span class="pcard-tag">Oyun</span>
+          <h3>Hızlı Hafız</h3>
+          <p>Deve neyi hatırlatır, karınca hangi kıssada? İpucundan doğru sembolü bul. 8 tezhip kartı, 72 âyet kaynaklı bilgi kartı — tek başına ya da 2-4 kişi tablet ve akıllı tahtada yarışın.</p>
+        </a>
+    </div>
+
+    <p class="pgrid-more"><a href="/#projeler">Tümünü gör — 26 proje</a></p>
+  </div>
+</section>
+
+<footer class="foot">
+  <p>Bu sayfa bir <strong>deneme</strong>dir: kaydırmaya bağlı anlatı motorunun raufenc.com üzerinde nasıl durduğunu görmek için hazırlandı. Arka plandaki görüntü Higgsfield ile üretildi.</p>
+</footer>
+
+<script>
+  /* Tema düğmesi */
+  (function () {
+    var btn = document.querySelector('[data-theme-toggle]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var dark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('sv-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      var m = document.querySelector('meta[name="theme-color"]');
+      if (m) m.setAttribute('content', dark ? '#0a0a0f' : '#fbf9f4');
+    });
+  })();
+</script>
+<script src="scroll-story.js" defer></script>
+</body>
+</html>

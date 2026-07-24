@@ -1,0 +1,170 @@
+/* ============================================================
+   hikaye.css — anlatı sonrası sayfa (projeler)
+   AYDINLIK varsayılan + karanlık mod (html.dark)
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pg:        #fbf9f4;
+  --pg-card:   #ffffff;
+  --pg-card-h: #fffdf8;
+  --ink:       #22222e;
+  --ink-soft:  #5c5c6a;
+  --line:      rgba(20,20,45,.09);
+  --gold:      #b07d34;
+  --gold-soft: rgba(200,164,110,.16);
+  --accent:    #6366f1;
+}
+html.dark {
+  --pg:        #0a0a0f;
+  --pg-card:   #111118;
+  --pg-card-h: #18181f;
+  --ink:       #e8e8f0;
+  --ink-soft:  #9999b0;
+  --line:      rgba(255,255,255,.07);
+  --gold:      #c8a46e;
+  --gold-soft: rgba(200,164,110,.10);
+  --accent:    #6366f1;
+}
+
+/* scroll-behavior: smooth BİLEREK yok — anlatı ~600vh; çapa
+   bağlantısıyla yumuşak kaydırma video'ya seek yağmuru yağdırır. */
+body {
+  background: var(--pg);
+  color: var(--ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.7;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  transition: background .4s ease, color .4s ease;
+}
+
+.skiplink { position: absolute; left: -9999px; z-index: 60; }
+.skiplink:focus {
+  left: 20px; top: 20px; padding: 12px 20px; border-radius: 10px;
+  background: var(--pg-card); color: var(--ink); border: 1px solid var(--gold);
+}
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 40px); }
+
+/* ── butonlar ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 26px; border-radius: 999px;
+  font-weight: 600; font-size: 15px;
+  text-decoration: none; border: 1px solid transparent;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), background .25s, border-color .25s, filter .25s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-warm  { background: var(--gold); color: #fff; }
+html.dark .btn-warm { color: #0a0a0f; }
+.btn-warm:hover { filter: brightness(1.06); }
+.btn-ghost { border-color: var(--line); color: var(--ink); }
+.btn-ghost:hover { border-color: var(--gold); }
+
+/* ── projeler ── */
+#projeler {
+  position: relative;
+  padding: clamp(64px, 9vw, 120px) 0 clamp(80px, 10vw, 140px);
+  background: var(--pg);
+}
+.projects-header { text-align: center; margin-bottom: clamp(36px, 5vw, 60px); }
+.section-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 52px);
+  line-height: 1.14; letter-spacing: -.02em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.section-title em {
+  font-style: italic;
+  background: linear-gradient(90deg, var(--gold), var(--accent));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.projects-sub {
+  margin: 14px auto 0;
+  color: var(--ink-soft);
+  font-size: clamp(14px, 1.6vw, 16px);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: clamp(14px, 1.8vw, 20px);
+}
+.pcard {
+  display: flex; flex-direction: column;
+  padding: 26px 24px 24px;
+  border-radius: 18px;
+  background: var(--pg-card);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(60,50,30,.04);
+  transition: transform .4s cubic-bezier(.16,1,.3,1), border-color .3s, background .3s, box-shadow .3s;
+}
+.pcard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(176,125,52,.34);
+  background: var(--pg-card-h);
+  box-shadow: 0 18px 40px rgba(60,50,30,.12);
+}
+html.dark .pcard { box-shadow: none; }
+html.dark .pcard:hover { box-shadow: none; }
+
+.pcard-emoji { font-size: 26px; line-height: 1; margin-bottom: 14px; }
+.pcard-tag {
+  align-self: flex-start;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold);
+  padding: 4px 10px; border-radius: 999px;
+  background: var(--gold-soft);
+  margin-bottom: 12px;
+}
+.pcard h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 600; font-size: 19px; line-height: 1.3;
+  color: var(--ink); margin-bottom: 8px;
+}
+.pcard p {
+  font-size: 13.5px; line-height: 1.62;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.pgrid-more { text-align: center; margin-top: clamp(28px, 4vw, 44px); }
+.pgrid-more a {
+  color: var(--ink-soft);
+  font-size: 14px; text-decoration: none;
+  border-bottom: 1px solid rgba(176,125,52,.4);
+  padding-bottom: 3px; transition: color .25s;
+}
+.pgrid-more a:hover { color: var(--gold); }
+
+.foot {
+  padding: 0 clamp(20px, 5vw, 40px) 72px;
+  max-width: 720px; margin: 0 auto; text-align: center;
+}
+.foot p {
+  font-size: 13px; line-height: 1.7;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+.foot strong { color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover, .pcard:hover { transform: none; }
+  body { transition: none; }
+}
