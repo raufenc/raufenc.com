@@ -1,7 +1,7 @@
 "use strict";
 
 const easternDigits = "٠١٢٣٤٥٦٧٨٩";
-const totalLessons = 37;
+const totalLessons = 40;
 const storagePrefix = "karabas-dersi-";
 const textSizeKey = "karabas-harf-boyu";
 
@@ -42,7 +42,10 @@ const curatedExamples = {
   "34": ["ٱلْحَمْدُ لِلَّهِ", "رَبِّ ٱلْعَـٰلَمِينَ", "مَـٰلِكِ يَوْمِ ٱلدِّينِ", "إِيَّاكَ نَعْبُدُ", "إِيَّاكَ نَسْتَعِينُ", "وَلَا ٱلضَّآلِّينَ"],
   "35": ["اَصْل مَطْبُوع نُسْخَه", "قَرَه‌باش تَجْوِيدِ", "مُقَابَلَه", "مَنْبَع قَيْدِى"],
   "36": ["يَازْمَه نُسْخَه", "اَسَر قَيْدِى", "مُؤَلِّف قَيْدِى", "نُسْخَه تَارِيخِى"],
-  "37": ["اِلْمِى مَقَالَه", "نُسْخَه تَحْقِيقِى", "مَتْن مُقَابَلَه‌سِى", "مَنْبَعْچَه"]
+  "37": ["اِلْمِى مَقَالَه", "نُسْخَه تَحْقِيقِى", "مَتْن مُقَابَلَه‌سِى", "مَنْبَعْچَه"],
+  "38": ["ا ب ت ث", "ج ح خ", "د ذ ر ز", "س ش ص ض", "ط ظ ع غ", "ف ق ك ل", "م ن و ه ي"],
+  "39": ["بَ بِ بُ", "بًا بٍ بٌ", "اَبْ اِبْ اُبْ", "رَبِّ", "قَالَ قِيلَ يَقُولُ"],
+  "40": ["وَقْف", "اِبْتِدَا", "۞ ۩", "سُورَةُ الْفَاتِحَةِ"]
 };
 
 const sourceDescriptions = {
@@ -94,6 +97,20 @@ function lessonId(index) {
 
 function lessonUrl(id) {
   return `?d=${id}`;
+}
+
+function pageReference(entry, compact = false) {
+  const oldPage = entry["صحيفه_قديم"] || "";
+  const newVolume = entry["جلد_جديد"] || entry["جلد"] || "";
+  const newPage = entry["صحيفه_جديد"] || entry["صحيفه"] || "";
+  if (oldPage) {
+    return compact
+      ? `${oldPage} • ${newVolume}/${newPage}`
+      : `سَكْسَنْلِك نُسْخَه ${oldPage} • ${newVolume}. جِلْد ${newPage}`;
+  }
+  return compact
+    ? `${newVolume}/${newPage}`
+    : `${newVolume}. جِلْد ${newPage}`;
 }
 
 function completedKey(id) {
@@ -222,7 +239,7 @@ function renderCatalog() {
 
     const page = document.createElement("span");
     page.className = isComplete(id) ? "done-mark" : "list-page";
-    page.textContent = isComplete(id) ? "✓" : entry["صحيفه"];
+    page.textContent = isComplete(id) ? "✓" : pageReference(entry, true);
 
     anchor.append(number, title, page);
     anchor.addEventListener("click", closeCatalog);
@@ -254,7 +271,7 @@ function renderLesson(index) {
   activeId = lessonId(index);
 
   elements.lessonNumber.textContent = `دَرْس ${toEastern(index + 1, 2)}`;
-  elements.pageNumber.textContent = `صَحِيفَه ${entry["صحيفه"]}`;
+  elements.pageNumber.textContent = pageReference(entry);
   elements.lessonTitle.textContent = entry["عنوان"];
   renderSource(entry, activeId);
   renderExamples(activeId);
