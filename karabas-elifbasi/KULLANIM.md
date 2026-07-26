@@ -1,6 +1,8 @@
 # Dijital Karabaş refakat sitesi
 
-Bu klasör, kitabın mevcut üreticisinden bağımsızdır. Ana üretici dosyasında değişiklik yapılmamıştır.
+Bu klasör kitabın 37 karekodunun kalıcı ders hedefidir. Kitap yeniden
+üretildiğinde `dersler.json` ile `karekod-hedefleri.json`, ana üretici
+tarafından karekod manifestosuyla birlikte güncellenir.
 
 Yerel önizleme için proje kökünde:
 
@@ -23,6 +25,12 @@ https://raufenc.com/karabas-elifbasi/?d=01
 ```
 
 `d` değeri sayfa numarası değil, `01` ile `37` arasındaki kalıcı ders kimliğidir. Böylece kitabın sayfa düzeni değişse bile basılı karekodların hedefi değişmez.
+
+Canlı yayın:
+
+```text
+https://raufenc.com/karabas-elifbasi/
+```
 
 Dosyalar:
 
