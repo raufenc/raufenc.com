@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ota" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b5a59">
+  <meta name="description" content="قَرَه‌باش اِلِفْبَاسِى دِجِيتَال دَرْس رَفَاقَتْچِسِى">
+  <title>قَرَه‌باش اِلِفْبَاسِى</title>
+  <link rel="stylesheet" href="./gorunum.css">
+</head>
+<body>
+  <a class="skip-link" href="#ana">دَرْسَه گَچ</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="دَرْسْلَر صَحِيفَه‌سِ">
+        <span class="brand-mark" aria-hidden="true">۞</span>
+        <span>
+          <strong>قَرَه‌باش اِلِفْبَاسِى</strong>
+          <small>دِجِيتَال دَرْس رَفَاقَتْچِسِى</small>
+        </span>
+      </a>
+      <button class="catalog-button" id="catalogButton" type="button" aria-controls="catalog" aria-expanded="false">
+        دَرْسْلَر
+      </button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="catalog" id="catalog" aria-label="دَرْس فِهْرِسْتِى">
+      <div class="catalog-head">
+        <div>
+          <span class="kicker">فِهْرِسْت</span>
+          <h2>اُوتُز يَدِى دَرْس</h2>
+        </div>
+        <button class="catalog-close" id="catalogClose" type="button" aria-label="فِهْرِسْتِ قَپَت">×</button>
+      </div>
+      <div class="progress-card">
+        <span>تَمَامْلَانَن دَرْس</span>
+        <strong id="progressText">٠ / ٣٧</strong>
+        <div class="progress-track" aria-hidden="true"><i id="progressBar"></i></div>
+      </div>
+      <nav class="lesson-list" id="lessonList" aria-label="دَرْسْلَر"></nav>
+    </aside>
+
+    <main id="ana" class="main" tabindex="-1">
+      <div id="loading" class="loading" role="status">
+        <span class="loader" aria-hidden="true">۞</span>
+        <p>دَرْس حَاضِرْلَانِيُور</p>
+      </div>
+
+      <section id="welcome" class="welcome" hidden>
+        <div class="welcome-ornament" aria-hidden="true">✦ ۞ ✦</div>
+        <span class="kicker">قَرَه‌باش تَجْوِيدِ</span>
+        <h1>قَاعِدَه‌يِ اوقُ<br>مِثَالْدَه گُور<br>كِتَابْدَا بُل</h1>
+        <p>بُ صَحِيفَه، كِتَابْدَه‌كِ قَارَه‌قُودْلَر اِيچُون حَاضِرْلَانْمِش دِجِيتَال دَرْس رَفَاقَتْچِسِى‌دِر.</p>
+        <button class="primary-button" id="firstLesson" type="button">اَوَّلْكِ دَرْسَه بَاشْلَه</button>
+      </section>
+
+      <article id="lesson" class="lesson" hidden>
+        <header class="lesson-hero">
+          <div class="lesson-meta">
+            <span id="lessonNumber">دَرْس ٠١</span>
+            <span id="pageNumber">صَحِيفَه ٣٥</span>
+          </div>
+          <h1 id="lessonTitle"></h1>
+          <div class="hero-tools" aria-label="حَرْف بُيُكْلُغِى">
+            <button id="smallerText" type="button" aria-label="حَرْفِ كُچُلْت">−</button>
+            <span>حَرْف</span>
+            <button id="largerText" type="button" aria-label="حَرْفِ بُيُت">+</button>
+          </div>
+        </header>
+
+        <section class="lesson-card source-card">
+          <div class="section-heading">
+            <span class="section-number">١</span>
+            <div><span class="kicker">قَرَه‌باش مَتْنِ</span><h2>اَصْل دَرْس</h2></div>
+          </div>
+          <div class="source-text" id="sourceText"></div>
+          <a class="source-link" id="sourceLink" href="#" target="_blank" rel="noreferrer" hidden>مَنْبَعِ آچ</a>
+        </section>
+
+        <section class="lesson-card drill-card" id="drillCard">
+          <div class="section-heading">
+            <span class="section-number">٢</span>
+            <div><span class="kicker">قِرَاءَت تَكْرَارِى</span><h2>مِثَالْلَر</h2></div>
+          </div>
+          <div class="example-grid" id="examples"></div>
+          <p class="drill-note">هَر مِثَالِ اِكِ كَرَّه يَوَاش، بِر كَرَّه بُتُون اوقُ.</p>
+        </section>
+
+        <section class="lesson-card steps-card">
+          <div class="section-heading">
+            <span class="section-number">٣</span>
+            <div><span class="kicker">تَطْبِيق</span><h2>بُگُونْكِ وَظِيفَه</h2></div>
+          </div>
+          <label class="check-row"><input type="checkbox" data-task="name"><i></i><span>قَاعِدَه نَامِنِ سُوْيْلَدِم.</span></label>
+          <label class="check-row"><input type="checkbox" data-task="read"><i></i><span>مَتْنِ اِكِ كَرَّه اوقُدُم.</span></label>
+          <label class="check-row"><input type="checkbox" data-task="find"><i></i><span>مِثَالْلَرِ كِتَابْدَنْ بُلْدُم.</span></label>
+          <label class="check-row"><input type="checkbox" data-task="teacher"><i></i><span>اوقُيُشِمِ مُعَلِّمَه دِينْلَتْدِم.</span></label>
+          <button class="complete-button" id="completeLesson" type="button">بُ دَرْسِ تَمَامْلَادِم</button>
+        </section>
+
+        <nav class="lesson-nav" aria-label="دَرْس گَچِشِ">
+          <a id="previousLesson" class="nav-link" href="#"><small>اَوَّلْكِ</small><strong>دَرْس</strong></a>
+          <a class="nav-home" href="./" aria-label="فِهْرِسْت">۞</a>
+          <a id="nextLesson" class="nav-link" href="#"><small>صُونْرَه‌كِ</small><strong>دَرْس</strong></a>
+        </nav>
+      </article>
+
+      <section id="error" class="error-card" hidden>
+        <span aria-hidden="true">۞</span>
+        <h1>دَرْس بُلُونَمَادِى</h1>
+        <p>فِهْرِسْتْدَنْ بِر دَرْس سَچِڭِز.</p>
+        <a class="primary-button" href="./">فِهْرِسْتَه دُون</a>
+      </section>
+    </main>
+  </div>
+
+  <div class="overlay" id="overlay" hidden></div>
+
+  <noscript>
+    <div class="noscript">بُ صَحِيفَه‌نِڭ چَالِشْمَسِ اِيچُون تَارَايِجِى اَچِق اُولْمَلِدِر.</div>
+  </noscript>
+
+  <script src="./ders.js" defer></script>
+</body>
+</html>
