@@ -173,8 +173,8 @@ function evCiz() {
   if (kilitliSayi > 0) {
     h += '<div class="kilitnot">' +
       '<b>🔒 ' + kilitliSayi + ' aile hâlâ kutuda</b>' +
-      '<p>Şu an 3 aileyle oynuyorsun. Kutundaki kartlardan ikisinin arkasındaki soruyu ' +
-      'yazarsan 36 ailenin tamamı açılır — bütün oyunlar birden büyür.</p>' +
+      '<p>Şu an 3 aileyle oynuyorsun. Kutundan iki kart çekip her birinin ' +
+      'üç kelimesini yazarsan 36 ailenin tamamı açılır — bütün oyunlar birden büyür.</p>' +
       '<button class="dg" onclick="KAM.kilitAc()">Kutum var, kilidi aç</button>' +
       '</div>';
   }
@@ -268,8 +268,8 @@ function vitrin() {
     if (!kilitAcik()) {
       h += '<div class="kilitnot" style="margin-top:22px">' +
         '<b>Bu 33 aile kutunun içinde</b>' +
-        '<p>Kökleri görüyorsun ama kelimeleri kutuda. Kartlarından ikisinin arkasındaki ' +
-        'soruyu yazarsan hepsi açılır.</p>' +
+        '<p>Kökleri görüyorsun ama kelimeleri kutuda. İki kartın üçer kelimesini ' +
+        'yazarsan hepsi açılır.</p>' +
         '<button class="dg" onclick="KAM.kilitAc()">Kilidi aç</button></div>';
     }
     h += '</div>';
@@ -338,16 +338,16 @@ function kilitCiz(not, notTip) {
   var p = el('div', 'perde');
   var h = '<div class="modal">';
   h += '<h3>🔒 Kutundaki kartlar</h3>';
-  h += '<p class="mac">Kutundan rastgele bir kart çek ve <b>arkasındaki sohbet sorusunu</b> yaz. ' +
-       'İlk üç dört kelime yeterli. İki farklı kart yeter.</p>';
+  h += '<p class="mac">Kutundan bir kart çek ve üstündeki <b>beş kelimeden üçünü</b> yaz — ' +
+       'aralarına boşluk koyman yeterli. Sonra ikinci bir kartla aynısını yap.</p>';
   h += '<div class="adimlar">' +
        '<div class="adim ' + (adim > 0 ? 'tamam' : 'simdi') + '"></div>' +
        '<div class="adim ' + (adim > 1 ? 'tamam' : (adim === 1 ? 'simdi' : '')) + '"></div></div>';
-  /* Yer tutucu asla gerçek bir kart sorusu içermez — yoksa kutusu olmayan
-     biri örneği kopyalayıp kilidi açardı. */
+  /* Yer tutucu asla gerçek bir kartın kelimelerini içermez — yoksa kutusu
+     olmayan biri örneği kopyalayıp kilidi açardı. */
   h += '<input type="text" id="kilitGiris" autocomplete="off" autocapitalize="none" ' +
-       'placeholder="' + (adim === 0 ? 'Kartın arkasındaki soruyu yaz…'
-                                     : 'Şimdi başka bir karttan…') + '">';
+       'placeholder="' + (adim === 0 ? 'Karttaki üç kelime…'
+                                     : 'Şimdi başka bir karttan üç kelime…') + '">';
   if (not) h += '<div class="mnot ' + (notTip || 'bilgi') + '">' + kacir(not) + '</div>';
   if (kilitDurum.kartlar.length) {
     h += '<div class="mnot iyi">✓ Doğrulanan: ' + kilitDurum.kartlar.map(kacir).join(' · ') + '</div>';
@@ -371,20 +371,24 @@ function kilitGonder() {
   if (kilitDurum.mesgul) return;
   var g = $('#kilitGiris'); if (!g) return;
   var cevap = g.value.trim();
-  if (sade(cevap).length < 10) { kilitCiz('Biraz daha yaz — en az üç kelime gerekiyor.', 'kotu'); return; }
+  if (cevap.split(/\s+/).filter(Boolean).length < 3) {
+    kilitCiz('Aynı karttan üç kelime yaz, aralarına boşluk koy.', 'kotu'); return;
+  }
   kilitDurum.mesgul = true;
   $('#kilitGonder').textContent = 'Kontrol ediliyor…';
 
   fetch('/api/kelime-ac', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ seri: KA.kod, cevap: cevap })
+    body: JSON.stringify({ seri: KA.kod, metin: cevap })
   }).then(function (r) { return r.json(); }).then(function (y) {
     kilitDurum.mesgul = false;
     if (!y.ok) {
-      var n = 'Bu soruyu bulamadım. Kartın arkasındaki soruyu olduğu gibi yazmayı dene.';
-      if (y.sebep === 'coklu') n = 'Birden fazla soruya uyuyor — birkaç kelime daha ekle.';
-      if (y.sebep === 'kisa')  n = 'Biraz daha yaz — en az üç kelime gerekiyor.';
+      var n = 'Bu kelimeleri bir kartta bulamadım. Üçünün de aynı kartta olduğundan emin ol.';
+      if (y.sebep === 'acik')
+        n = (y.kart ? y.kart + ' kartı' : 'Bu kart') + ' zaten açık — kilitli kartlardan birini dene.';
+      if (y.sebep === 'coklu') n = 'Birden fazla karta uyuyor — bir kelime daha ekle.';
+      if (y.sebep === 'kisa')  n = 'Aynı karttan üç kelime yaz, aralarına boşluk koy.';
       if (y.hata === 'yavasla') n = 'Çok hızlı denedin. Bir dakika bekle.';
       kilitCiz(n, 'kotu'); return;
     }
@@ -404,7 +408,7 @@ function kilitTamamla() {
   fetch('/api/kelime-ac', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ seri: KA.kod, cevaplar: kilitDurum.cevaplar })
+    body: JSON.stringify({ seri: KA.kod, kanitlar: kilitDurum.cevaplar })
   }).then(function (r) { return r.json(); }).then(function (y) {
     if (!y.ok || !y.kartlar) { kilitCiz('Bir şeyler ters gitti, tekrar dene.', 'kotu'); return; }
     D.kilitliVeri = y.kartlar;
