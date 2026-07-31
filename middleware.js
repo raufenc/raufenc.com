@@ -9,6 +9,7 @@ const API_METHODS = {
   '/api/ilmihal-search': ['POST', 'OPTIONS'],
   '/api/mizac-sohbet': ['POST', 'OPTIONS'],
   '/api/bia-news': ['GET', 'POST', 'OPTIONS'],
+  '/api/kelime-ac': ['POST', 'OPTIONS'],
 };
 const PUBLIC_METHODS = ['GET', 'HEAD', 'OPTIONS'];
 const SCANNER_PATHS = [
