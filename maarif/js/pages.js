@@ -36,7 +36,7 @@ function conceptCard(c) {
     </div>
     ${preview ? `<div class="card-desc">${preview}</div>` : ''}
     <div class="card-footer">
-      <span class="cc-family">${shortFamily(c.family)}</span>
+      <span class="cc-family" title="${(c.family||'').replace(/"/g,'&quot;')}">${shortFamily(c.family)}</span>
       ${refBadge}
       <span class="cc-page">s.${c.p1||'—'}</span>
     </div>
@@ -54,8 +54,12 @@ function shortFamily(f) {
   if (f.includes('Model')) return 'Model';
   if (f.includes('Farklılaştırma')) return 'Farklılaştırma';
   if (f.includes('Öğrenme')) return 'Öğrenme';
-  // Alan becerileri - shorten
-  return f.replace(' Alan Becerileri','').replace(' Becerileri','').replace(' ve Öğretimi','').slice(0,25);
+  // Alan becerileri - kısalt; kelime ortasından kesme
+  const s = f.replace(' Alan Becerileri','').replace(' Becerileri','').replace(' ve Öğretimi','');
+  if (s.length <= 25) return s;
+  const cut = s.slice(0, 25);
+  const sp = cut.lastIndexOf(' ');
+  return (sp > 12 ? cut.slice(0, sp) : cut).replace(/[,;]$/, '');
 }
 
 const VALUE_ICONS = {
@@ -73,15 +77,27 @@ const PROFILE_ICONS = {
 const GAME_ICONS = ['🔗','❓','⚡','🌳','📄','📝','📝','📊','⚡','🃏'];
 
 // ==================== HOME ====================
+const QUICK_LINKS = [
+  { href:'#/kavramlar',      icon:'book',    title:'Kavram Kütüphanesi', count:'269 kavram' },
+  { href:'#/beceriler',      icon:'brain',   title:'Beceri Gezgini',     count:'Kavramsal + alan becerileri' },
+  { href:'#/degerler',       icon:'star',    title:'Değerler Merkezi',   count:'20 değer' },
+  { href:'#/ogrenci-profili',icon:'user',    title:'Öğrenci Profili',    count:'10 özellik' },
+  { href:'#/okuryazarlik',   icon:'bookOpen',title:'Okuryazarlık',       count:'9 tür' },
+  { href:'#/oyunlar',        icon:'gamepad', title:'Oyun Merkezi',       count:'10 oyun' },
+  { href:'#/harita',         icon:'map',     title:'Öğrenme Haritası',   count:'47 bölüm' },
+  { href:'#/arama',          icon:'search',  title:'Akıllı Arama',       count:'Tümünde ara' }
+];
+
 function home(app) {
   app.innerHTML = `
     <div class="hero">
+      <span class="hero-eyebrow">İnteraktif Öğrenme Platformu</span>
       <h1>Türkiye Yüzyılı Maarif Modeli</h1>
-      <p>Eğitim modelinin tüm kavramlarını keşfedin, oyunlarla öğrenin, kendinizi test edin.</p>
+      <p>Eğitim modelinin tüm kavramlarını keşfedin, oyunlarla öğrenin, kendinizi test edin. Öğretmenler için haftalık plan, ders akışı, materyal ve ölçme araçları da burada.</p>
       <div class="hero-actions">
-        <a href="#/kavramlar" class="btn btn-primary">📚 Kavramları Keşfet</a>
-        <a href="#/oyunlar" class="btn btn-secondary">🎮 Oyunlar</a>
-        <a href="#/degerler" class="btn btn-secondary">⭐ Değerler</a>
+        <a href="#/kavramlar" class="btn btn-primary">${ICO('book',16)} Kavramları Keşfet</a>
+        <a href="#/oyunlar" class="btn btn-secondary">${ICO('gamepad',16)} Oyunlar</a>
+        <a href="#/degerler" class="btn btn-secondary">${ICO('star',16)} Değerler</a>
       </div>
     </div>
     <div class="stats-row">
@@ -89,21 +105,19 @@ function home(app) {
       <div class="stat-card"><div class="stat-num">20</div><div class="stat-label">Değer</div></div>
       <div class="stat-card"><div class="stat-num">10</div><div class="stat-label">Oyun</div></div>
       <div class="stat-card"><div class="stat-num">9</div><div class="stat-label">Okuryazarlık</div></div>
-      <div class="stat-card"><div class="stat-num">1802</div><div class="stat-label">Referans</div></div>
+      <div class="stat-card"><div class="stat-num">1.802</div><div class="stat-label">Referans</div></div>
     </div>
-    <h2 class="section-title"><span class="st-icon">🚀</span> Hızlı Erişim</h2>
+    <h2 class="section-title"><span class="st-icon">${ICO('rocket')}</span> Hızlı Erişim</h2>
+    <p class="section-sub">Modelin sekiz ana kapısı — nereden başlayacağınızı seçin.</p>
     <div class="quick-grid">
-      <a href="#/kavramlar" class="quick-card"><span class="qc-icon">📚</span><span class="qc-title">Kavram Kütüphanesi</span><span class="qc-count">269 kavram</span></a>
-      <a href="#/beceriler" class="quick-card"><span class="qc-icon">🧠</span><span class="qc-title">Beceri Gezgini</span><span class="qc-count">Kavramsal + Alan</span></a>
-      <a href="#/degerler" class="quick-card"><span class="qc-icon">⭐</span><span class="qc-title">Değerler Merkezi</span><span class="qc-count">20 değer</span></a>
-      <a href="#/ogrenci-profili" class="quick-card"><span class="qc-icon">👤</span><span class="qc-title">Öğrenci Profili</span><span class="qc-count">10 özellik</span></a>
-      <a href="#/okuryazarlik" class="quick-card"><span class="qc-icon">📖</span><span class="qc-title">Okuryazarlık</span><span class="qc-count">9 tür</span></a>
-      <a href="#/oyunlar" class="quick-card"><span class="qc-icon">🎮</span><span class="qc-title">Oyun Merkezi</span><span class="qc-count">10 oyun</span></a>
-      <a href="#/harita" class="quick-card"><span class="qc-icon">🗺️</span><span class="qc-title">Öğrenme Haritası</span><span class="qc-count">47 bölüm</span></a>
-      <a href="#/arama" class="quick-card"><span class="qc-icon">🔍</span><span class="qc-title">Akıllı Arama</span><span class="qc-count">Tümünü ara</span></a>
+      ${QUICK_LINKS.map(q => `<a href="${q.href}" class="quick-card">
+        <span class="qc-icon">${ICO(q.icon)}</span>
+        <span class="qc-title">${q.title}</span>
+        <span class="qc-count">${q.count}</span>
+      </a>`).join('')}
     </div>
     ${renderLastVisited()}
-    <div class="img-section mt-3"><img src="img/p004_genel_bakis.png" alt="Maarif Modeli Genel Bakış" loading="lazy"></div>
+    <div class="img-section mt-3"><img src="img/p004_genel_bakis.png" alt="Maarif Modeli genel bakış şeması" loading="lazy"></div>
   `;
 }
 
@@ -114,7 +128,7 @@ function renderLastVisited() {
     .map(id => DATA.concepts.find(c => c.id === id))
     .filter(Boolean);
   if (recent.length === 0) return '';
-  return `<h2 class="section-title mt-3"><span class="st-icon">🕐</span> Son Ziyaret Ettikleriniz</h2>
+  return `<h2 class="section-title mt-3"><span class="st-icon">${ICO('clock')}</span> Son Ziyaret Ettikleriniz</h2>
     <div class="related-grid">${recent.map(c =>
       `<a href="#/kavram/${c.id}" class="related-chip">${c.term}</a>`
     ).join('')}</div>`;
@@ -131,7 +145,7 @@ function kavramlar(app) {
       : DATA.concepts;
 
     app.innerHTML = `
-      <h1 class="section-title"><span class="st-icon">📚</span> Kavram Kütüphanesi</h1>
+      <h1 class="section-title"><span class="st-icon">${ICO('book')}</span> Kavram Kütüphanesi</h1>
       <p class="section-sub">${DATA.concepts.length} kavram, tüm aile ve alt aileler</p>
       <div class="search-box"><input type="text" id="kavramSearch" placeholder="Kavram ara... (terim, kod veya açıklama)"></div>
       <div class="tabs" id="familyTabs">
@@ -168,7 +182,7 @@ function kavramlar(app) {
         const results = Search.quickFilter(q, filtered, ['term','code','desc','family']);
         grid.innerHTML = results.length
           ? results.map(conceptCard).join('')
-          : '<div class="empty-state"><span class="es-icon">🔍</span><p class="es-text">Sonuç bulunamadı</p></div>';
+          : `<div class="empty-state"><span class="es-icon">${ICO('search')}</span><p class="es-text">Sonuç bulunamadı</p></div>`;
       }, 200);
     });
     input.focus();
@@ -179,7 +193,7 @@ function kavramlar(app) {
 // ==================== KAVRAM DETAY ====================
 function kavramDetay(app, id) {
   const c = findConcept(decodeURIComponent(id));
-  if (!c) { app.innerHTML = '<div class="empty-state"><span class="es-icon">❌</span><p>Kavram bulunamadı. <a href="#/kavramlar">Geri dön</a></p></div>'; return; }
+  if (!c) { app.innerHTML = `<div class="empty-state"><span class="es-icon">${ICO('alert')}</span><p>Kavram bulunamadı. <a href="#/kavramlar">Geri dön</a></p></div>`; return; }
 
   Store.visitConcept(c.id);
   const refs = getRefsForConcept(c);
@@ -335,14 +349,14 @@ function beceriler(app) {
   const alanFamilies = getAllFamilies().filter(([f]) => f.includes('Alan Becerileri'));
 
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">🧠</span> Beceri Gezgini</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('brain')}</span> Beceri Gezgini</h1>
     <p class="section-sub">Kavramsal beceriler ve 10 alan becerisi</p>
     <div class="img-section"><img src="img/p016_kavramsal_beceriler.png" alt="Kavramsal Beceriler" loading="lazy"></div>
     <div class="detail-section mt-2">
       <h3>📐 Kavramsal Beceriler</h3>
       ${buildSkillTree(kavramsal)}
     </div>
-    <h2 class="section-title mt-3"><span class="st-icon">📚</span> Alan Becerileri</h2>
+    <h2 class="section-title mt-3"><span class="st-icon">${ICO('book')}</span> Alan Becerileri</h2>
     ${alanFamilies.map(([fam, cnt]) => {
       const skills = getConceptsByFamily(fam);
       return `<div class="detail-section">
@@ -402,7 +416,7 @@ function degerler(app) {
 
   function render() {
     app.innerHTML = `
-      <h1 class="section-title"><span class="st-icon">⭐</span> Erdem-Değer-Eylem Merkezi</h1>
+      <h1 class="section-title"><span class="st-icon">${ICO('star')}</span> Erdem-Değer-Eylem Merkezi</h1>
       <p class="section-sub">20 değer, eylemler ve yöntemlerle birlikte</p>
       <div class="img-section"><img src="img/p037_erdem_deger_eylem.png" alt="Erdem-Değer-Eylem" loading="lazy"></div>
       <div class="tabs mt-2">
@@ -441,7 +455,7 @@ function ogrenciProfili(app) {
       : [];
 
     app.innerHTML = `
-      <h1 class="section-title"><span class="st-icon">👤</span> Öğrenci Profili: Yetkin ve Erdemli İnsan</h1>
+      <h1 class="section-title"><span class="st-icon">${ICO('user')}</span> Öğrenci Profili: Yetkin ve Erdemli İnsan</h1>
       <p class="section-sub">10 profil özelliği ve alt nitelikleri</p>
       <div class="img-section"><img src="img/p008_ogrenci_profili.png" alt="Öğrenci Profili" loading="lazy"></div>
       <div class="profile-wheel mt-2">
@@ -487,7 +501,7 @@ function okuryazarlik(app) {
   const literacies = DATA.concepts.filter(c => c.family === 'Okuryazarlık Becerileri' && c.sub === 'Okuryazarlık');
 
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">📖</span> Okuryazarlık Merkezi</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('bookOpen')}</span> Okuryazarlık Merkezi</h1>
     <p class="section-sub">9 okuryazarlık türü</p>
     <div class="img-section"><img src="img/p039_sistem_okuryazarligi.png" alt="Sistem Okuryazarlığı" loading="lazy"></div>
     <div class="card-grid mt-2">
@@ -509,7 +523,7 @@ function okuryazarlik(app) {
 // ==================== HARITA ====================
 function harita(app) {
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">🗺️</span> Öğrenme Haritası</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('map')}</span> Öğrenme Haritası</h1>
     <p class="section-sub">Kitabın bölüm yapısı (${DATA.sections.length} bölüm)</p>
     <div class="detail-section">
       <ul class="tree" id="sectionTree">
@@ -547,7 +561,7 @@ function harita(app) {
 // ==================== ARAMA ====================
 function arama(app, query) {
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">🔍</span> Akıllı Arama</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('search')}</span> Akıllı Arama</h1>
     <div class="search-box"><input type="text" id="searchInput" placeholder="Kavram, kod veya açıklama ara..." value="${query?decodeURIComponent(query):''}"></div>
     <div id="searchResults"></div>
   `;
@@ -558,7 +572,7 @@ function arama(app, query) {
 
   function doSearch(q) {
     if (!q || q.length < 2) {
-      resultsDiv.innerHTML = '<div class="empty-state"><span class="es-icon">🔍</span><p class="es-text">En az 2 karakter yazın</p></div>';
+      resultsDiv.innerHTML = `<div class="empty-state"><span class="es-icon">${ICO('search')}</span><p class="es-text">En az 2 karakter yazın</p></div>`;
       return;
     }
     const results = Search.search(q);
@@ -571,7 +585,7 @@ function arama(app, query) {
         `<li class="ref-item"><span class="ref-code">${r.code}</span><span class="ref-type ${typeClass(r.type)}">${typeLabel(r.type)}</span><span>${r.text.slice(0,200)}</span></li>`
       ).join('')}</ul></div>`;
     }
-    if (!html) html = '<div class="empty-state"><span class="es-icon">😕</span><p class="es-text">Sonuç bulunamadı</p></div>';
+    if (!html) html = `<div class="empty-state"><span class="es-icon">${ICO('alert')}</span><p class="es-text">Sonuç bulunamadı</p></div>`;
     resultsDiv.innerHTML = html;
   }
 
@@ -587,7 +601,7 @@ function arama(app, query) {
 function oyunlar(app) {
   const store = Store.get();
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">🎮</span> Oyun Merkezi</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('gamepad')}</span> Oyun Merkezi</h1>
     <p class="section-sub">10 farklı oyunla öğrenmeyi pekiştirin</p>
     <div class="game-grid">
       ${DATA.games.map((g, i) => {
@@ -612,7 +626,7 @@ function quiz(app, familyParam) {
     : DATA.concepts.filter(c => c.desc);
 
   if (concepts.length < 4) {
-    app.innerHTML = '<div class="empty-state"><span class="es-icon">❌</span><p>Bu aile için yeterli soru yok. <a href="#/kavramlar">Geri dön</a></p></div>';
+    app.innerHTML = `<div class="empty-state"><span class="es-icon">${ICO('alert')}</span><p>Bu aile için yeterli soru yok. <a href="#/kavramlar">Geri dön</a></p></div>`;
     return;
   }
 
@@ -705,7 +719,7 @@ function karsilastir(app, id1, id2) {
   if (!c1 || !c2) {
     // Show comparison picker
     app.innerHTML = `
-      <h1 class="section-title"><span class="st-icon">⚡</span> Kavram Karşılaştır</h1>
+      <h1 class="section-title"><span class="st-icon">${ICO('compare')}</span> Kavram Karşılaştır</h1>
       <p class="section-sub">İki kavramı seçerek farkları görün</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
         <div><label>1. Kavram</label><select id="cmp1" style="width:100%;padding:.5rem;margin-top:.25rem;border-radius:var(--radius-sm);border:2px solid var(--border)">
@@ -723,7 +737,7 @@ function karsilastir(app, id1, id2) {
   const r1 = getRefsForConcept(c1), r2 = getRefsForConcept(c2);
   app.innerHTML = `
     <div class="breadcrumb"><a href="#/">Ana Sayfa</a><span class="bc-sep">›</span><span>Karşılaştır</span></div>
-    <h1 class="section-title"><span class="st-icon">⚡</span> ${c1.term} vs ${c2.term}</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('compare')}</span> ${c1.term} vs ${c2.term}</h1>
     <table class="compare-table">
       <tr><th>Boyut</th><th>${c1.term}</th><th>${c2.term}</th></tr>
       <tr><td><strong>Kod</strong></td><td>${c1.code||'—'}</td><td>${c2.code||'—'}</td></tr>
@@ -749,11 +763,11 @@ function kaynak(app, pageNo) {
 
   app.innerHTML = `
     <div class="breadcrumb"><a href="#/">Ana Sayfa</a><span class="bc-sep">›</span><a href="#/harita">Harita</a><span class="bc-sep">›</span><span>Sayfa ${pg}</span></div>
-    <h1 class="section-title"><span class="st-icon">📄</span> Kaynak: Sayfa ${pg}</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('file')}</span> Kaynak: Sayfa ${pg}</h1>
     ${section ? `<p class="section-sub">${section.code} — ${section.title}</p>` : ''}
     <div class="source-viewer">
       <div class="source-img">
-        ${asset ? `<img src="img/${asset.file}" alt="${asset.alt}" onclick="this.style.transform=this.style.transform==='scale(2)'?'scale(1)':'scale(2)'">` : `<div class="empty-state"><span class="es-icon">📄</span><p>Bu sayfa için görsel yok</p></div>`}
+        ${asset ? `<img src="img/${asset.file}" alt="${asset.alt}" onclick="this.style.transform=this.style.transform==='scale(2)'?'scale(1)':'scale(2)'">` : `<div class="empty-state"><span class="es-icon">${ICO('file')}</span><p>Bu sayfa için görsel yok</p></div>`}
       </div>
       <div class="source-info">
         ${asset ? `<h3>${asset.title}</h3>` : ''}
@@ -774,7 +788,7 @@ function profil(app) {
   const visitedCount = s.visited.filter(v => DATA.concepts.some(c => c.id === v)).length;
 
   app.innerHTML = `
-    <h1 class="section-title"><span class="st-icon">👤</span> Profilim</h1>
+    <h1 class="section-title"><span class="st-icon">${ICO('user')}</span> Profilim</h1>
     <div class="detail-header" style="text-align:center">
       <div style="font-size:3rem">👤</div>
       <div class="xp-bar mt-1">
@@ -821,7 +835,7 @@ function profil(app) {
 
 // ==================== NOT FOUND ====================
 function notFound(app) {
-  app.innerHTML = '<div class="empty-state"><span class="es-icon">🔍</span><p class="es-text">Sayfa bulunamadı. <a href="#/">Ana sayfaya dön</a></p></div>';
+  app.innerHTML = `<div class="empty-state"><span class="es-icon">${ICO('search')}</span><p class="es-text">Sayfa bulunamadı. <a href="#/">Ana sayfaya dön</a></p></div>`;
 }
 
 window.Pages = { home, kavramlar, kavramDetay, beceriler, degerler, ogrenciProfili, okuryazarlik, harita, arama, oyunlar, quiz, karsilastir, kaynak, profil, notFound };

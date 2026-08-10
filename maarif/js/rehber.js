@@ -1,4 +1,4 @@
-/* rehber.js - Program Rehberim: Ogretmen El Kitabi */
+/* rehber.js - Program Rehberim: Öğretmen El Kitabı */
 (function(){
 'use strict';
 
@@ -6,34 +6,37 @@
    COURSE METADATA
    ============================================================ */
 const COURSES = {
-  fkh: { code:'FKH', file:'FKH_10_database.json', name:'Fikih', icon:'📖', sinif:10, color:'#7c3aed' },
+  fkh: { code:'FKH', file:'FKH_10_database.json', name:'Fıkıh', icon:'📖', sinif:10, color:'#7c3aed' },
   hds: { code:'HDS', file:'HDS_10_database.json', name:'Hadis', icon:'📜', sinif:10, color:'#0891b2' },
   syr: { code:'SYR', file:'SYR_10_database.json', name:'Siyer', icon:'🕌', sinif:10, color:'#059669' },
-  tdb: { code:'TDB', file:'TDB_9_database.json',  name:'Temel Dini Bilgiler', icon:'🕋', sinif:9, color:'#dc2626' }
+  tdb: { code:'TDB', file:'TDB_9_database.json',  name:'Temel Dinî Bilgiler', icon:'🕋', sinif:9, color:'#dc2626' }
 };
 
 /* ============================================================
-   OLCME ARACLARI SOZLUGU
+   ÖLÇME ARAÇLARI SÖZLÜĞÜ
+   Anahtarlar bilinçli olarak ASCII: olcmeCard() gelen adı önce
+   sadeleştirip (ö→o, ş→s, ı→i ...) burada arıyor. Anahtarları
+   değiştirmeyin; yalnızca görünen alanlar (ad/aciklama/nasil/sure) Türkçedir.
    ============================================================ */
 const OLCME_ARACLARI = {
-  'acik uclu sorular':        { icon:'✏️', ad:'Acik Uclu Sorular', aciklama:'Ogrencinin serbest yanitladigi, dusunme ve ifade becerisini olcen sorular.', nasil:'Soru kagidi dagitilir, ogrenciler bireysel yanit yazar (5-10 dk).', sure:'5-10 dk' },
-  'bosluk doldurma sorulari': { icon:'📝', ad:'Bosluk Doldurma Sorulari', aciklama:'Kavram bilgisini kisa ve net olcen, cumledeki eksik kismi tamamlatan sorular.', nasil:'Hazirlanan cumlelerdeki bos kisimlar ogrenciye doldurtulur.', sure:'5 dk' },
-  'cikis karti':              { icon:'🎫', ad:'Cikis Karti', aciklama:'Ders sonunda ogrencinin ogrendiklerini ozetledigi kisa kart.', nasil:'Ders bitmeden 3 dk once dagitilir: "Bugun ne ogrendim? Neyi merak ediyorum?"', sure:'3 dk' },
-  'ogrenme gunlugu':          { icon:'📓', ad:'Ogrenme Gunlugu', aciklama:'Ogrencinin ogrenme surecini dusunumsel sekilde kaydettigi defter.', nasil:'Haftada bir kez gunluk yazdirilir; ogretmen yorumla geri bildirim verir.', sure:'10 dk' },
-  'anlam cozumleme tablosu':  { icon:'📊', ad:'Anlam Cozumleme Tablosu', aciklama:'Kavramlarin ozelliklerini evet/hayir biciminde karsilastiran tablo.', nasil:'Kavramlar satira, ozellikler sutuna yazilir; ogrenci isaretler.', sure:'10-15 dk' },
-  'oz degerlendirme formu':   { icon:'📋', ad:'Oz Degerlendirme Formu', aciklama:'Ogrencinin kendi ogrenme duzeyi hakkinda farkindaliginini olcer.', nasil:'Likert olcekli form dagitilir ve ogrenci kendini degerlendirir.', sure:'5 dk' },
-  'cumle tamamlama sorulari': { icon:'💬', ad:'Cumle Tamamlama Sorulari', aciklama:'Verilen cumlerin sonunun tamamlanmasi ile kavrayisi olcme.', nasil:'Yarim birakilan cumleler ogrenciye yazili tamamlatilir.', sure:'5-8 dk' },
-  'frayer diyagrami':         { icon:'🔲', ad:'Frayer Diyagrami', aciklama:'Kavramlari tanim, ozellik, ornek ve ornek-olmayan ile yapilandirma araci.', nasil:'4 bolmeli sema dagitilir; ogrenci her bolmeyi doldurur.', sure:'10-15 dk' },
-  'kavram haritasi':          { icon:'🗺️', ad:'Kavram Haritasi', aciklama:'Kavramlar arasi iliskileri gorsellestiren diyagram.', nasil:'Merkeze ana kavram, dallara alt kavramlar yazdirilir; oklar iliskilendirilir.', sure:'15-20 dk' },
-  'bilgi haritasi':           { icon:'🧭', ad:'Bilgi Haritasi', aciklama:'Kavramlari hiyerarsik olarak siniflandiran sematik gosterim.', nasil:'Ana baslik ve alt basliklar dallandirilir; ogrenci doldurur.', sure:'10 dk' },
-  'eslestirme sorulari':      { icon:'🔗', ad:'Eslestirme Sorulari', aciklama:'Kavram-tanim, terim-aciklama gibi iki kumeyi eslestirme.', nasil:'Iki sutun verilir; ogrenci cizgiyle eslestirir.', sure:'5 dk' },
-  'yapilandirilmis grid':     { icon:'📐', ad:'Yapilandirilmis Grid', aciklama:'Numarali kutucuklardaki bilgileri kategorilere gore secme.', nasil:'9-16 kutucuklu grid dagitilir, ogrenci soruya gore secim yapar.', sure:'10 dk' },
-  'performans gorevi':        { icon:'🏆', ad:'Performans Gorevi', aciklama:'Unite sonunda urun ortaya koyan kapsamli degerlendirme.', nasil:'Konu verilir, olcutler aciklanir; 1-2 haftada teslim edilir.', sure:'1-2 hafta' },
-  'tanilayici dallanmis agac':{ icon:'🌳', ad:'Tanilayici Dallanmis Agac', aciklama:'Evet/hayir sorulariyla bilgi duzeyini belirleyen akis semasi.', nasil:'Yazili veya dijital akis semasi ogrenciye sunulur.', sure:'10 dk' },
-  'kontrol noktasi':          { icon:'✅', ad:'Kontrol Noktasi', aciklama:'Konu ici kisa degerlendirme; anlama duzeyini yoklama.', nasil:'2-3 soru ile aninda yoklama yapilir.', sure:'3-5 dk' },
-  'T tablosu':                { icon:'📏', ad:'T Tablosu', aciklama:'Iki kavram/durum arasindaki benzerlik ve farkliliklari gosteren tablo.', nasil:'T seklinde iki sutunlu tablo cizdirip karstilastirma yaptirilir.', sure:'10 dk' },
-  'gozlem formu':             { icon:'👁️', ad:'Gozlem Formu', aciklama:'Ogretmenin ogrenci performansini surecte gozlemleme araci.', nasil:'Davranis gostergeleri listelenir, ogretmen isaretler.', sure:'Surekli' },
-  'rubrik':                   { icon:'📊', ad:'Rubrik (Dereceli Puanlama)', aciklama:'Performansin duzeylerini gosteren analitik degerlendirme araci.', nasil:'Olcutler ve duzey tanimlari hazirlanir; ogrenciye onceden paylasilir.', sure:'Degisken' }
+  'acik uclu sorular':        { icon:'✏️', ad:'Açık Uçlu Sorular', aciklama:'Öğrencinin serbest yanıtladığı, düşünme ve ifade becerisini ölçen sorular.', nasil:'Soru kâğıdı dağıtılır, öğrenciler bireysel yanıt yazar (5-10 dk).', sure:'5-10 dk' },
+  'bosluk doldurma sorulari': { icon:'📝', ad:'Boşluk Doldurma Soruları', aciklama:'Kavram bilgisini kısa ve net ölçen, cümledeki eksik kısmı tamamlatan sorular.', nasil:'Hazırlanan cümlelerdeki boş kısımlar öğrenciye doldurtulur.', sure:'5 dk' },
+  'cikis karti':              { icon:'🎫', ad:'Çıkış Kartı', aciklama:'Ders sonunda öğrencinin öğrendiklerini özetlediği kısa kart.', nasil:'Ders bitmeden 3 dk önce dağıtılır: "Bugün ne öğrendim? Neyi merak ediyorum?"', sure:'3 dk' },
+  'ogrenme gunlugu':          { icon:'📓', ad:'Öğrenme Günlüğü', aciklama:'Öğrencinin öğrenme sürecini düşünümsel biçimde kaydettiği defter.', nasil:'Haftada bir kez günlük yazdırılır; öğretmen yorumla geri bildirim verir.', sure:'10 dk' },
+  'anlam cozumleme tablosu':  { icon:'📊', ad:'Anlam Çözümleme Tablosu', aciklama:'Kavramların özelliklerini evet/hayır biçiminde karşılaştıran tablo.', nasil:'Kavramlar satıra, özellikler sütuna yazılır; öğrenci işaretler.', sure:'10-15 dk' },
+  'oz degerlendirme formu':   { icon:'📋', ad:'Öz Değerlendirme Formu', aciklama:'Öğrencinin kendi öğrenme düzeyi hakkındaki farkındalığını ölçer.', nasil:'Likert ölçekli form dağıtılır ve öğrenci kendini değerlendirir.', sure:'5 dk' },
+  'cumle tamamlama sorulari': { icon:'💬', ad:'Cümle Tamamlama Soruları', aciklama:'Verilen cümlelerin sonunun tamamlanmasıyla kavrayışı ölçme.', nasil:'Yarım bırakılan cümleler öğrenciye yazılı tamamlatılır.', sure:'5-8 dk' },
+  'frayer diyagrami':         { icon:'🔲', ad:'Frayer Diyagramı', aciklama:'Kavramları tanım, özellik, örnek ve örnek-olmayan ile yapılandırma aracı.', nasil:'4 bölmeli şema dağıtılır; öğrenci her bölmeyi doldurur.', sure:'10-15 dk' },
+  'kavram haritasi':          { icon:'🗺️', ad:'Kavram Haritası', aciklama:'Kavramlar arası ilişkileri görselleştiren diyagram.', nasil:'Merkeze ana kavram, dallara alt kavramlar yazdırılır; oklarla ilişkilendirilir.', sure:'15-20 dk' },
+  'bilgi haritasi':           { icon:'🧭', ad:'Bilgi Haritası', aciklama:'Kavramları hiyerarşik olarak sınıflandıran şematik gösterim.', nasil:'Ana başlık ve alt başlıklar dallandırılır; öğrenci doldurur.', sure:'10 dk' },
+  'eslestirme sorulari':      { icon:'🔗', ad:'Eşleştirme Soruları', aciklama:'Kavram-tanım, terim-açıklama gibi iki kümeyi eşleştirme.', nasil:'İki sütun verilir; öğrenci çizgiyle eşleştirir.', sure:'5 dk' },
+  'yapilandirilmis grid':     { icon:'📐', ad:'Yapılandırılmış Grid', aciklama:'Numaralı kutucuklardaki bilgileri kategorilere göre seçme.', nasil:'9-16 kutucuklu grid dağıtılır, öğrenci soruya göre seçim yapar.', sure:'10 dk' },
+  'performans gorevi':        { icon:'🏆', ad:'Performans Görevi', aciklama:'Ünite sonunda ürün ortaya koyan kapsamlı değerlendirme.', nasil:'Konu verilir, ölçütler açıklanır; 1-2 haftada teslim edilir.', sure:'1-2 hafta' },
+  'tanilayici dallanmis agac':{ icon:'🌳', ad:'Tanılayıcı Dallanmış Ağaç', aciklama:'Evet/hayır sorularıyla bilgi düzeyini belirleyen akış şeması.', nasil:'Yazılı veya dijital akış şeması öğrenciye sunulur.', sure:'10 dk' },
+  'kontrol noktasi':          { icon:'✅', ad:'Kontrol Noktası', aciklama:'Konu içi kısa değerlendirme; anlama düzeyini yoklama.', nasil:'2-3 soru ile anında yoklama yapılır.', sure:'3-5 dk' },
+  'T tablosu':                { icon:'📏', ad:'T Tablosu', aciklama:'İki kavram/durum arasındaki benzerlik ve farklılıkları gösteren tablo.', nasil:'T şeklinde iki sütunlu tablo çizdirilip karşılaştırma yaptırılır.', sure:'10 dk' },
+  'gozlem formu':             { icon:'👁️', ad:'Gözlem Formu', aciklama:'Öğretmenin öğrenci performansını süreçte gözlemleme aracı.', nasil:'Davranış göstergeleri listelenir, öğretmen işaretler.', sure:'Sürekli' },
+  'rubrik':                   { icon:'📊', ad:'Rubrik (Dereceli Puanlama)', aciklama:'Performansın düzeylerini gösteren analitik değerlendirme aracı.', nasil:'Ölçütler ve düzey tanımları hazırlanır; öğrenciye önceden paylaşılır.', sure:'Değişken' }
 };
 
 /* ============================================================
@@ -75,7 +78,7 @@ function getWeekDateRange(teachingWeek) {
     if (week < teachingWeek) d.setDate(d.getDate() + 7);
   }
   const end = new Date(d); end.setDate(end.getDate() + 4);
-  const fmt = dt => dt.getDate() + ' ' + ['Ocak','Subat','Mart','Nisan','Mayis','Haziran','Temmuz','Agustos','Eylul','Ekim','Kasim','Aralik'][dt.getMonth()];
+  const fmt = dt => dt.getDate() + ' ' + ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'][dt.getMonth()];
   return fmt(d) + ' - ' + fmt(end);
 }
 
@@ -153,7 +156,7 @@ const Rehber = {
 
   courseTitle(dersKey) {
     const c = COURSES[dersKey];
-    return c ? `${c.icon} ${c.name} (${c.sinif}. Sinif)` : '';
+    return c ? `${c.icon} ${c.name} (${c.sinif}. sınıf)` : '';
   },
 
   getCourseData(dersKey) {
@@ -202,7 +205,7 @@ const Rehber = {
     let ornekHtml = '';
     if (context) {
       ornekHtml = `<div style="background:var(--accent-light);border-radius:var(--radius-sm);padding:.75rem;margin-top:.75rem">
-        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">💡 Bu Dersteki Uygulamasi</div>
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">💡 Bu Dersteki Uygulaması</div>
         ${context.nerede ? `<div style="font-size:.82rem;margin-bottom:.3rem"><strong>Ne zaman:</strong> ${context.nerede}</div>` : ''}
         ${context.konu ? `<div style="font-size:.82rem"><strong>Konu:</strong> ${context.konu}</div>` : ''}
       </div>`;
@@ -212,7 +215,7 @@ const Rehber = {
     let kullanimHtml = '';
     if (t.kullanildigi_ciktilar && t.kullanildigi_ciktilar.length) {
       kullanimHtml = `<div style="margin-top:.75rem">
-        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">📍 Kullanildigi Ciktilar</div>
+        <div style="font-weight:600;font-size:.85rem;margin-bottom:.4rem">📍 Kullanıldığı Çıktılar</div>
         <div style="display:flex;flex-wrap:wrap;gap:.3rem">${t.kullanildigi_ciktilar.map(k => {
           const parts = k.split('.');
           const uniteNo = parts.length >= 3 ? parts[2] : '1';
@@ -317,9 +320,18 @@ const Rehber = {
         <span style="font-size:1.2rem;flex-shrink:0">${tool.icon}</span>
         <div><strong style="font-size:.85rem">${name}</strong>
         <div style="font-size:.78rem;color:var(--text-secondary);margin-top:.15rem">${tool.aciklama}</div>
-        <div style="font-size:.75rem;color:var(--text-light);margin-top:.2rem">Sure: ${tool.sure}</div></div></div>`;
+        <div style="font-size:.75rem;color:var(--text-light);margin-top:.2rem">Süre: ${tool.sure}</div></div></div>`;
     }
     return `<div class="card" style="padding:.75rem;font-size:.85rem">${name}</div>`;
+  },
+
+  matTypeLabel(tur) {
+    const labels = {
+      etkinlik:'Etkinlik', tablo:'Tablo', okuma_metni:'Okuma Metni', gorsel:'Görsel',
+      degerlendirme_sorusu:'Değerlendirme Sorusu', bilgilendirme:'Bilgilendirme',
+      harita:'Harita', infografik:'İnfografik', video:'Video', kaynak_metin:'Kaynak Metin'
+    };
+    return labels[tur] || String(tur || '').replace(/_/g,' ');
   },
 
   matTypeIcon(tur) {
@@ -336,20 +348,25 @@ const Rehber = {
       const d = this.data[key];
       const units = d ? d.program.uniteler : [];
       const totalHours = d ? d.meta.toplam_ders_saati : '—';
-      cards += `<a href="#/rehber/${key}" class="card" style="text-decoration:none;color:inherit;border-left:4px solid ${c.color};cursor:pointer">
-        <div class="card-header"><span style="font-size:1.5rem">${c.icon}</span> ${c.name}</div>
-        <div class="card-desc">${c.sinif}. Sinif &bull; ${units.length} unite &bull; ${totalHours} saat</div>
-        <div class="card-footer"><span>Anadolu Imam Hatip Lisesi</span><span class="btn btn-sm btn-outline">Ac &rarr;</span></div>
+      cards += `<a href="#/rehber/${key}" class="rehber-ders-card" style="text-decoration:none;color:inherit">
+        <div class="ders-header" style="background:linear-gradient(145deg,${c.color},color-mix(in srgb,${c.color} 62%,#000))">
+          <span>${c.icon}</span> ${c.name}
+        </div>
+        <div class="ders-body">
+          <div class="card-desc">${c.sinif}. sınıf &bull; ${units.length} ünite &bull; ${totalHours} ders saati</div>
+        </div>
+        <div class="ders-footer"><span>Anadolu İmam Hatip Lisesi</span><span style="color:var(--primary);font-weight:700">Aç &rarr;</span></div>
       </a>`;
     }
 
     APP.innerHTML = `
-      <div class="hero" style="background:linear-gradient(135deg,#1e3a8a,#4f46e5,#7c3aed)">
-        <h1>Program Rehberim</h1>
-        <p>Ogretmen El Kitabi &mdash; Haftalik planlar, ders akislari, materyaller ve olcme araclari</p>
+      <div class="rehber-hero">
+        <h2>Program Rehberim</h2>
+        <p>Öğretmen el kitabı — haftalık planlar, ders akışları, materyaller ve ölçme araçları tek yerde.</p>
       </div>
-      <h2 class="section-title"><span class="st-icon">📚</span> Ders Secin</h2>
-      <div class="card-grid">${cards}</div>`;
+      <h2 class="section-title"><span class="st-icon">${ICO('book')}</span> Ders Seçin</h2>
+      <p class="section-sub">Dört meslek dersi; her biri öğretim programı ve ders kitabıyla eşleştirilmiş.</p>
+      <div class="rehber-grid">${cards}</div>`;
   },
 
   /* ============================================================
@@ -379,22 +396,22 @@ const Rehber = {
           <div class="card-desc">${thisWeek.konu_ozeti}</div>
           <div style="margin-top:.5rem;font-size:.82rem;color:var(--text-secondary)">${ciktiTitles}</div>
           <div style="margin-top:.75rem">
-            <a href="#/rehber/${dersKey}/haftalik/${curWeek}" class="btn btn-sm btn-primary">Hafta Detayi &rarr;</a>
+            <a href="#/rehber/${dersKey}/haftalik/${curWeek}" class="btn btn-sm btn-primary">Hafta Detayı &rarr;</a>
           </div>
         </div>`;
     }
 
     // Quick access
     const quickLinks = [
-      { href:`#/rehber/${dersKey}/haftalik`, icon:'📅', title:'Haftalik Plan' },
-      { href:`#/rehber/${dersKey}/kavramlar`, icon:'📝', title:'Kavramlar' },
-      { href:`#/rehber/${dersKey}/teknikler`, icon:'🛠️', title:'Teknikler' },
-      { href:`#/rehber/${dersKey}/materyaller`, icon:'📦', title:'Materyaller' },
-      { href:`#/rehber/${dersKey}/kitap/1`, icon:'📖', title:'Kitap (PDF)' },
-      { href:`#/rehber/${dersKey}/program/1`, icon:'📋', title:'Program (PDF)' }
+      { href:`#/rehber/${dersKey}/haftalik`, icon:'calendar', title:'Haftalık Plan' },
+      { href:`#/rehber/${dersKey}/kavramlar`, icon:'list', title:'Kavramlar' },
+      { href:`#/rehber/${dersKey}/teknikler`, icon:'tool', title:'Teknikler' },
+      { href:`#/rehber/${dersKey}/materyaller`, icon:'package', title:'Materyaller' },
+      { href:`#/rehber/${dersKey}/kitap/1`, icon:'bookOpen', title:'Kitap (PDF)' },
+      { href:`#/rehber/${dersKey}/program/1`, icon:'file', title:'Program (PDF)' }
     ];
     const quickHtml = quickLinks.map(l =>
-      `<a href="${l.href}" class="quick-card"><span class="qc-icon">${l.icon}</span><span class="qc-title">${l.title}</span></a>`
+      `<a href="${l.href}"><span>${ICO(l.icon,20)}</span><span>${l.title}</span></a>`
     ).join('');
 
     // Unit list
@@ -403,27 +420,27 @@ const Rehber = {
       const pct = totalHours ? Math.round((u.ders_saati / totalHours) * 100) : 0;
       const ciktiCount = (u.ogrenme_ciktilari || []).length;
       return `<a href="#/rehber/${dersKey}/unite/${u.unite_no}" class="card" style="text-decoration:none;color:inherit;cursor:pointer">
-        <div class="card-header">${u.unite_no}. Unite: ${u.unite_adi}</div>
-        <div class="card-desc">${u.ders_saati} saat &bull; ${ciktiCount} ogrenme ciktisi &bull; %${u.yuzde_orani || pct}</div>
+        <div class="card-header">${u.unite_no}. Ünite: ${u.unite_adi}</div>
+        <div class="card-desc">${u.ders_saati} saat &bull; ${ciktiCount} öğrenme çıktısı &bull; %${u.yuzde_orani || pct}</div>
         <div class="progress-bar"><div class="progress-fill" style="width:${u.yuzde_orani || pct}%"></div></div>
       </a>`;
     }).join('');
 
     APP.innerHTML = `
-      ${this.back('#/rehber', 'Ders Secimi')}
+      ${this.back('#/rehber', 'Ders Seçimi')}
       <div class="detail-header" style="border-left:4px solid ${c.color}">
         <div class="detail-title">${c.icon} ${c.name}</div>
         <div class="detail-meta">
-          <span>${c.sinif}. Sinif</span>
+          <span>${c.sinif}. sınıf</span>
           <span>${d.meta.toplam_ders_saati} saat</span>
-          <span>${units.length} unite</span>
-          <span>${d.meta.okul_turu || 'Anadolu Imam Hatip Lisesi'}</span>
+          <span>${units.length} ünite</span>
+          <span>${d.meta.okul_turu || 'Anadolu İmam Hatip Lisesi'}</span>
         </div>
       </div>
       ${thisWeekHtml}
-      <h2 class="section-title"><span class="st-icon">🚀</span> Hizli Erisim</h2>
-      <div class="quick-grid">${quickHtml}</div>
-      <h2 class="section-title" style="margin-top:1.5rem"><span class="st-icon">📚</span> Uniteler</h2>
+      <h2 class="section-title"><span class="st-icon">${ICO('rocket')}</span> Hızlı Erişim</h2>
+      <div class="rehber-quick">${quickHtml}</div>
+      <h2 class="section-title" style="margin-top:1.5rem"><span class="st-icon">${ICO('book')}</span> Üniteler</h2>
       <div class="card-grid">${unitsHtml}</div>`;
   },
 
@@ -434,7 +451,7 @@ const Rehber = {
     const weeks = this.getWeeklyPlan(dersKey);
     if (!weeks.length) {
       APP.innerHTML = `${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-        <div class="empty-state"><span class="es-icon">📅</span><p class="es-text">Haftalik plan bulunamadi.</p></div>`;
+        <div class="empty-state"><span class="es-icon">${ICO('calendar')}</span><p class="es-text">Haftalık plan bulunamadı.</p></div>`;
       return;
     }
     const curWeek = getCurrentWeek();
@@ -456,8 +473,8 @@ const Rehber = {
 
     APP.innerHTML = `
       ${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-      <h2 class="section-title"><span class="st-icon">📅</span> Haftalik Plan</h2>
-      <p class="section-sub">Toplam ${weeks.length} ogretim haftasi</p>
+      <h2 class="section-title"><span class="st-icon">${ICO('calendar')}</span> Haftalık Plan</h2>
+      <p class="section-sub">Toplam ${weeks.length} öğretim haftası</p>
       <div style="display:flex;flex-direction:column;gap:.75rem">${rows}</div>`;
   },
 
@@ -468,8 +485,8 @@ const Rehber = {
     const weeks = this.getWeeklyPlan(dersKey);
     const w = weeks.find(wk => wk.hafta === weekNum);
     if (!w) {
-      APP.innerHTML = `${this.back('#/rehber/'+dersKey+'/haftalik','Haftalik Plan')}
-        <div class="empty-state"><span class="es-icon">📅</span><p class="es-text">${weekNum}. hafta bulunamadi.</p></div>`;
+      APP.innerHTML = `${this.back('#/rehber/'+dersKey+'/haftalik','Haftalık Plan')}
+        <div class="empty-state"><span class="es-icon">${ICO('calendar')}</span><p class="es-text">${weekNum}. hafta bulunamadı.</p></div>`;
       return;
     }
 
@@ -484,7 +501,7 @@ const Rehber = {
       return `<a href="#/rehber/${dersKey}/unite/${w.unite_no}/cikti/${kod}" class="card" style="text-decoration:none;color:inherit;cursor:pointer;padding:.75rem;border-left:3px solid var(--accent)">
         <div style="font-family:var(--mono);font-size:.75rem;color:var(--text-secondary)">${kod}</div>
         <div style="font-weight:600;font-size:.9rem">${title}</div>
-        <div style="font-size:.78rem;color:var(--primary);margin-top:.25rem">Ders akisini gor &rarr;</div>
+        <div style="font-size:.78rem;color:var(--primary);margin-top:.25rem">Ders akışını gör &rarr;</div>
       </a>`;
     }).join('');
 
@@ -498,7 +515,7 @@ const Rehber = {
     const hazirlik = w.hazirlik_notu || '';
 
     APP.innerHTML = `
-      ${this.back('#/rehber/'+dersKey+'/haftalik','Haftalik Plan')}
+      ${this.back('#/rehber/'+dersKey+'/haftalik','Haftalık Plan')}
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem">
         ${prev ? `<a href="#/rehber/${dersKey}/haftalik/${prev.hafta}" class="btn btn-sm btn-outline">&larr; ${prev.hafta}. Hafta</a>` : '<span></span>'}
         <span style="font-size:.85rem;color:var(--text-secondary)">${dateRange}</span>
@@ -506,13 +523,13 @@ const Rehber = {
       </div>
 
       <div class="detail-header">
-        <div style="font-size:.85rem;color:var(--text-secondary)">${weekNum}. Ogretim Haftasi</div>
+        <div style="font-size:.85rem;color:var(--text-secondary)">${weekNum}. Öğretim Haftası</div>
         <div class="detail-title">${w.unite_adi}</div>
         <div style="font-size:1.05rem;margin-top:.5rem;line-height:1.6">${w.konu_ozeti}</div>
       </div>
 
       <div class="card" style="margin-bottom:1rem">
-        <div class="card-header"><span>📖</span> Ogrenme Ciktilari</div>
+        <div class="card-header"><span>📖</span> Öğrenme Çıktıları</div>
         <div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem">${ciktiCards}</div>
       </div>
 
@@ -542,7 +559,7 @@ const Rehber = {
     const u = units.find(x => x.unite_no === uniteNo);
     if (!u) {
       APP.innerHTML = `${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-        <div class="empty-state"><span class="es-icon">📚</span><p class="es-text">Unite bulunamadi.</p></div>`;
+        <div class="empty-state"><span class="es-icon">${ICO('book')}</span><p class="es-text">Ünite bulunamadı.</p></div>`;
       return;
     }
 
@@ -550,7 +567,7 @@ const Rehber = {
       `<a href="#/rehber/${dersKey}/unite/${uniteNo}/cikti/${oc.kod}" class="card" style="text-decoration:none;color:inherit;cursor:pointer;padding:.75rem;border-left:3px solid var(--primary)">
         <div style="font-family:var(--mono);font-size:.75rem;color:var(--text-secondary)">${oc.kod}</div>
         <div style="font-weight:600;font-size:.9rem;margin-top:.2rem">${oc.baslik}</div>
-        <div style="font-size:.78rem;color:var(--primary);margin-top:.25rem">Ders akisi &rarr;</div>
+        <div style="font-size:.78rem;color:var(--primary);margin-top:.25rem">Ders akışı &rarr;</div>
       </a>`
     ).join('');
 
@@ -567,22 +584,22 @@ const Rehber = {
     APP.innerHTML = `
       ${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
       <div class="detail-header">
-        <div style="font-size:.85rem;color:var(--text-secondary)">${uniteNo}. Unite</div>
+        <div style="font-size:.85rem;color:var(--text-secondary)">${uniteNo}. Ünite</div>
         <div class="detail-title">${u.unite_adi}</div>
         <div class="detail-desc">${u.unite_aciklamasi || ''}</div>
         <div class="detail-meta" style="margin-top:.75rem">
           <span>${u.ders_saati} ders saati</span>
           <span>%${u.yuzde_orani || '—'}</span>
-          <span>${(u.ogrenme_ciktilari||[]).length} ogrenme ciktisi</span>
+          <span>${(u.ogrenme_ciktilari||[]).length} öğrenme çıktısı</span>
         </div>
       </div>
 
-      <h3 class="section-title"><span class="st-icon">🎯</span> Ogrenme Ciktilari</h3>
+      <h3 class="section-title"><span class="st-icon">${ICO('target')}</span> Öğrenme Çıktıları</h3>
       <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem">${ciktiList}</div>
 
       ${kavramlar ? `<div class="detail-section"><h3>📝 Anahtar Kavramlar</h3><div class="related-grid">${kavramlar}</div></div>` : ''}
 
-      ${beceriler ? `<div class="detail-section"><h3>🧠 Iliskili Beceriler ve Egilimler</h3><div style="display:flex;flex-wrap:wrap;gap:.4rem">${beceriler}</div></div>` : ''}`;
+      ${beceriler ? `<div class="detail-section"><h3>🧠 İlişkili Beceriler ve Eğilimler</h3><div style="display:flex;flex-wrap:wrap;gap:.4rem">${beceriler}</div></div>` : ''}`;
   },
 
   /* ============================================================
@@ -592,8 +609,8 @@ const Rehber = {
     const result = this.findUygulama(dersKey, ciktiKod);
     const ciktiResult = this.findCikti(dersKey, ciktiKod);
     if (!result || !ciktiResult) {
-      APP.innerHTML = `${this.back('#/rehber/'+dersKey+'/unite/'+uniteNo, 'Unite')}
-        <div class="empty-state"><span class="es-icon">📋</span><p class="es-text">Cikti bulunamadi: ${ciktiKod}</p></div>`;
+      APP.innerHTML = `${this.back('#/rehber/'+dersKey+'/unite/'+uniteNo, 'Ünite')}
+        <div class="empty-state"><span class="es-icon">${ICO('list')}</span><p class="es-text">Çıktı bulunamadı: ${ciktiKod}</p></div>`;
       return;
     }
 
@@ -638,9 +655,9 @@ const Rehber = {
     let perfHtml = '';
     if (perfGorevi) {
       perfHtml = `<div class="card" style="padding:.75rem;border-left:3px solid var(--success)">
-        <div style="font-weight:600;font-size:.9rem">🏆 Performans Gorevi</div>
+        <div style="font-weight:600;font-size:.9rem">🏆 Performans Görevi</div>
         <div style="font-size:.85rem;margin-top:.3rem">${perfGorevi.aciklama}</div>
-        ${perfGorevi.degerlendirme_olcutleri ? `<div style="margin-top:.3rem;font-size:.78rem;color:var(--text-secondary)">Olcutler: ${perfGorevi.degerlendirme_olcutleri.join(', ')}</div>` : ''}
+        ${perfGorevi.degerlendirme_olcutleri ? `<div style="margin-top:.3rem;font-size:.78rem;color:var(--text-secondary)">Ölçütler: ${perfGorevi.degerlendirme_olcutleri.join(', ')}</div>` : ''}
       </div>`;
     }
 
@@ -652,7 +669,7 @@ const Rehber = {
         <span style="font-size:1.2rem">${this.matTypeIcon(mat.tur)}</span>
         <div>
           <div style="font-size:.82rem;font-weight:600">${mat.baslik}</div>
-          <div style="font-size:.72rem;color:var(--text-secondary)">s.${mat.sayfa} &bull; ${mat.tur.replace(/_/g,' ')}</div>
+          <div style="font-size:.72rem;color:var(--text-secondary)">s.${mat.sayfa} &bull; ${this.matTypeLabel(mat.tur)}</div>
         </div>
       </a>`;
     }).join('');
@@ -670,7 +687,7 @@ const Rehber = {
 
       <div class="detail-header">
         <div class="detail-badges" style="display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;margin-bottom:.5rem">
-          <span class="detail-badge" style="background:var(--c-beceri-bg);color:var(--c-beceri)">${u.unite_no}. Unite</span>
+          <span class="detail-badge" style="background:var(--c-beceri-bg);color:var(--c-beceri)">${u.unite_no}. Ünite</span>
           <span class="detail-badge badge-code" style="background:var(--surface-alt)">${ciktiKod}</span>
         </div>
         <div class="detail-title" style="font-size:1.3rem">${cikti.baslik}</div>
@@ -678,21 +695,21 @@ const Rehber = {
       </div>
 
       <!-- 1. DERS ONCESI -->
-      ${this._accordion('ders-oncesi', '📋 DERS ONCESI', true, `
+      ${this._accordion('ders-oncesi', '📋 DERS ÖNCESİ', true, `
         ${yasantilar.temel_kabuller ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Temel Kabuller:</strong><div style="font-size:.85rem;line-height:1.6;margin-top:.3rem;color:var(--text-secondary)">${yasantilar.temel_kabuller}</div></div>` : ''}
-        ${(yasantilar.on_degerlendirme||[]).length ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">On Degerlendirme Sorulari:</strong><ul style="margin-top:.3rem;padding-left:1.2rem">${yasantilar.on_degerlendirme.map(q=>`<li style="font-size:.85rem;margin-bottom:.3rem;line-height:1.5">${q}</li>`).join('')}</ul></div>` : ''}
+        ${(yasantilar.on_degerlendirme||[]).length ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Ön Değerlendirme Soruları:</strong><ul style="margin-top:.3rem;padding-left:1.2rem">${yasantilar.on_degerlendirme.map(q=>`<li style="font-size:.85rem;margin-bottom:.3rem;line-height:1.5">${q}</li>`).join('')}</ul></div>` : ''}
         ${w_hazirlikNotu(dersKey, ciktiKod, this)}
         ${bookPages ? `<div style="margin-top:.5rem"><a href="#/rehber/${dersKey}/kitap/${parseInt(bookPages)}" class="btn btn-sm btn-primary">📖 Kitap s.${bookPages} ac</a></div>` : ''}
       `)}
 
       <!-- 2. GIRIS / ISINMA -->
-      ${this._accordion('giris', '🔔 GIRIS / ISINMA', false, `
+      ${this._accordion('giris', '🔔 GİRİŞ / ISINMA', false, `
         ${yasantilar.kopru_kurma ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Kopru Kurma:</strong><div style="font-size:.85rem;line-height:1.6;margin-top:.3rem">${yasantilar.kopru_kurma}</div></div>` : ''}
       `)}
 
       <!-- 3. OGRETIM -->
-      ${this._accordion('ogretim', '📖 OGRETIM', true, `
-        ${surecHtml ? `<div style="margin-bottom:1rem"><strong style="font-size:.85rem">Surec Bilesenleri:</strong><ul class="edu-list" style="margin-top:.5rem">${surecHtml}</ul></div>` : ''}
+      ${this._accordion('ogretim', '📖 ÖĞRETİM', true, `
+        ${surecHtml ? `<div style="margin-bottom:1rem"><strong style="font-size:.85rem">Süreç Bileşenleri:</strong><ul class="edu-list" style="margin-top:.5rem">${surecHtml}</ul></div>` : ''}
         <div style="margin-bottom:1rem"><strong style="font-size:.85rem">Uygulama Metni:</strong><div style="font-size:.85rem;line-height:1.7;margin-top:.3rem;background:var(--surface-alt);padding:.75rem;border-radius:var(--radius-sm)">${uyg.uygulama_metni}</div></div>
         ${techCards ? `<div style="margin-bottom:1rem"><strong style="font-size:.85rem">Kullanilan Teknikler:</strong><div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem">${techCards}</div></div>` : ''}
         ${matCards ? `<div><strong style="font-size:.85rem">Ilgili Materyaller:</strong><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.5rem;margin-top:.5rem">${matCards}</div></div>` : ''}
@@ -704,13 +721,13 @@ const Rehber = {
       `)}
 
       <!-- 5. OLCME -->
-      ${this._accordion('olcme', '📊 OLCME', false, `
-        ${olcmeHtml ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Olcme Araclari:</strong><div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem">${olcmeHtml}</div></div>` : ''}
+      ${this._accordion('olcme', '📊 ÖLÇME', false, `
+        ${olcmeHtml ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Ölçme Araçları:</strong><div style="display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem">${olcmeHtml}</div></div>` : ''}
         ${perfHtml}
       `)}
 
       <!-- 6. KAPANIS -->
-      ${this._accordion('kapanis', '🚀 KAPANIS', false, `
+      ${this._accordion('kapanis', '🚀 KAPANIŞ', false, `
         ${zengin ? `<div style="margin-bottom:.75rem"><strong style="font-size:.85rem">Zenginlestirme:</strong><ul style="padding-left:1.2rem;margin-top:.3rem">${zengin}</ul></div>` : ''}
         ${destek ? `<div><strong style="font-size:.85rem">Destekleme:</strong><ul style="padding-left:1.2rem;margin-top:.3rem">${destek}</ul></div>` : ''}
       `)}
@@ -750,7 +767,7 @@ const Rehber = {
     const mats = this.getMaterials(dersKey);
     if (!mats.length) {
       APP.innerHTML = `${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-        <div class="empty-state"><span class="es-icon">📦</span><p class="es-text">Materyal bulunamadi.</p></div>`;
+        <div class="empty-state"><span class="es-icon">${ICO('package')}</span><p class="es-text">Materyal bulunamadı.</p></div>`;
       return;
     }
 
@@ -759,10 +776,10 @@ const Rehber = {
     const allFilter = 'tumu';
 
     let filterHtml = `<div class="tabs" id="matFilterTabs">
-      <button class="tab active" data-filter="${allFilter}">Tumu (${mats.length})</button>
+      <button class="tab active" data-filter="${allFilter}">Tümü (${mats.length})</button>
       ${types.map(t => {
         const count = mats.filter(m => m.tur === t).length;
-        return `<button class="tab" data-filter="${t}">${this.matTypeIcon(t)} ${t.replace(/_/g,' ')} (${count})</button>`;
+        return `<button class="tab" data-filter="${t}">${this.matTypeIcon(t)} ${this.matTypeLabel(t)} (${count})</button>`;
       }).join('')}
     </div>`;
 
@@ -772,7 +789,7 @@ const Rehber = {
         <div style="flex:1;min-width:0">
           <div style="font-weight:600;font-size:.9rem">${m.baslik}</div>
           <div style="display:flex;gap:.5rem;margin-top:.3rem;flex-wrap:wrap">
-            <span style="font-size:.72rem;padding:.15rem .4rem;background:var(--surface-alt);border-radius:3px">${m.tur.replace(/_/g,' ')}</span>
+            <span style="font-size:.72rem;padding:.15rem .4rem;background:var(--surface-alt);border-radius:3px">${this.matTypeLabel(m.tur)}</span>
             <span style="font-size:.72rem;color:var(--text-secondary)">s.${m.sayfa}</span>
           </div>
           ${m.aciklama ? `<div style="font-size:.8rem;color:var(--text-secondary);margin-top:.25rem;line-height:1.4">${m.aciklama}</div>` : ''}
@@ -782,8 +799,8 @@ const Rehber = {
 
     APP.innerHTML = `
       ${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-      <h2 class="section-title"><span class="st-icon">📦</span> Materyaller</h2>
-      <p class="section-sub">Toplam ${mats.length} materyal. Tiklayin, ilgili kitap sayfasi acilsin.</p>
+      <h2 class="section-title"><span class="st-icon">${ICO('package')}</span> Materyaller</h2>
+      <p class="section-sub">Toplam ${mats.length} materyal. Tıklayın, ilgili kitap sayfası açılsın.</p>
       ${filterHtml}
       <div class="card-grid" id="matGrid">${matCards}</div>`;
 
@@ -814,14 +831,14 @@ const Rehber = {
 
     if (!allKavramlar.length) {
       APP.innerHTML = `${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-        <div class="empty-state"><span class="es-icon">📝</span><p class="es-text">Kavram bulunamadi.</p></div>`;
+        <div class="empty-state"><span class="es-icon">${ICO('list')}</span><p class="es-text">Kavram bulunamadı.</p></div>`;
       return;
     }
 
     const searchHtml = `<div class="search-box"><input type="text" id="kavramSearch" placeholder="Kavram ara..."></div>`;
 
     const uniteTabs = `<div class="tabs" id="kavramTabs">
-      <button class="tab active" data-unite="0">Tumu (${allKavramlar.length})</button>
+      <button class="tab active" data-unite="0">Tümü (${allKavramlar.length})</button>
       ${units.map(u => {
         const count = (u.anahtar_kavramlar||[]).length;
         return `<button class="tab" data-unite="${u.unite_no}">${u.unite_no}. Unite (${count})</button>`;
@@ -834,14 +851,14 @@ const Rehber = {
       const link = concept ? `href="#/kavram/${concept.id}"` : '';
       return `<div class="card kavram-card" data-unite="${k.unite_no}" data-kavram="${k.kavram.toLowerCase()}" style="padding:.75rem;cursor:${concept?'pointer':'default'}">
         <div style="font-weight:600;font-size:.95rem" ${link ? `onclick="location.hash='#/kavram/${concept.id}'"` : ''}>${k.kavram}</div>
-        <div style="font-size:.78rem;color:var(--text-secondary);margin-top:.2rem">${k.unite_no}. Unite: ${k.unite_adi}</div>
+        <div style="font-size:.78rem;color:var(--text-secondary);margin-top:.2rem">${k.unite_no}. Ünite: ${k.unite_adi}</div>
         ${concept ? '<div style="font-size:.72rem;color:var(--primary);margin-top:.15rem">Maarif kavramina git &rarr;</div>' : ''}
       </div>`;
     }).join('');
 
     APP.innerHTML = `
       ${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-      <h2 class="section-title"><span class="st-icon">📝</span> Kavram Sozlugu</h2>
+      <h2 class="section-title"><span class="st-icon">${ICO('list')}</span> Kavram Sözlüğü</h2>
       ${searchHtml}${uniteTabs}
       <div class="card-grid" id="kavramGrid">${kavramCards}</div>`;
 
@@ -895,7 +912,7 @@ const Rehber = {
 
     if (!techs.length) {
       APP.innerHTML = `${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-        <div class="empty-state"><span class="es-icon">🛠️</span><p class="es-text">Teknik bulunamadi.</p></div>`;
+        <div class="empty-state"><span class="es-icon">${ICO('tool')}</span><p class="es-text">Teknik bulunamadı.</p></div>`;
       return;
     }
 
@@ -932,7 +949,7 @@ const Rehber = {
           ${adimlarHtml}
           ${libEntry?.uygun_oldugu_durumlar ? `<div style="margin-top:.5rem;font-size:.82rem"><strong>🎯 Uygun Durumlar:</strong> ${libEntry.uygun_oldugu_durumlar}</div>` : ''}
           ${libEntry?.gerekli_materyal ? `<div style="margin-top:.3rem;font-size:.82rem"><strong>📦 Materyal:</strong> ${libEntry.gerekli_materyal}</div>` : ''}
-          <div style="margin-top:.5rem"><strong style="font-size:.82rem">📍 Kullanildigi Yerler:</strong></div>
+          <div style="margin-top:.5rem"><strong style="font-size:.82rem">📍 Kullanıldığı Yerler:</strong></div>
           ${usages}
         </div>
       </div>`;
@@ -940,8 +957,8 @@ const Rehber = {
 
     APP.innerHTML = `
       ${this.back('#/rehber/'+dersKey, this.courseTitle(dersKey))}
-      <h2 class="section-title"><span class="st-icon">🛠️</span> Teknikler Kutuphanesi</h2>
-      <p class="section-sub">${techs.length} farkli teknik, toplam ${techs.reduce((s,t)=>s+t.kullanim.length,0)} kullanim</p>
+      <h2 class="section-title"><span class="st-icon">${ICO('tool')}</span> Teknikler Kütüphanesi</h2>
+      <p class="section-sub">${techs.length} farklı teknik, toplam ${techs.reduce((s,t)=>s+t.kullanim.length,0)} kullanım</p>
       <div style="display:flex;flex-direction:column;gap:.5rem">${techCards}</div>`;
 
     APP.querySelectorAll('[data-tech-toggle]').forEach(btn => {
@@ -977,7 +994,7 @@ const Rehber = {
   renderPdf(APP, dersKey, type, pageNum) {
     const backHref = dersKey ? `#/rehber/${dersKey}` : '#/rehber';
     const backLabel = dersKey ? this.courseTitle(dersKey) : 'Rehber';
-    const title = type === 'ortak_metin' ? 'Ortak Metin' : type === 'kitap' ? 'Ders Kitabi' : 'Ogretim Programi';
+    const title = type === 'ortak_metin' ? 'Ortak Metin' : type === 'kitap' ? 'Ders Kitabı' : 'Öğretim Programı';
 
     // Dizin adi
     let folderName = '';
@@ -1080,8 +1097,8 @@ const Rehber = {
     APP.innerHTML = `
       ${this.back('#/rehber','Rehber')}
       <div class="empty-state">
-        <span class="es-icon">🔍</span>
-        <p class="es-text">Sayfa bulunamadi. <a href="#/rehber">Rehber ana sayfasina don</a></p>
+        <span class="es-icon">${ICO('search')}</span>
+        <p class="es-text">Sayfa bulunamadı. <a href="#/rehber">Rehber ana sayfasina don</a></p>
       </div>`;
   }
 };

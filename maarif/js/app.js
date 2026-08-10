@@ -80,6 +80,9 @@
 
     // Close mobile nav
     document.getElementById('navLinks').classList.remove('open');
+    const tgl = document.getElementById('navToggle');
+    tgl.setAttribute('aria-expanded', 'false');
+    tgl.setAttribute('aria-label', 'Menüyü aç');
 
     Store.setLastRoute(path);
 
@@ -105,15 +108,35 @@
       }
     } catch(e) {
       console.error('Route error:', e);
-      APP.innerHTML = '<div class="empty-state"><span class="es-icon">⚠️</span><p class="es-text">Bir hata oluştu. <a href="#/">Ana sayfaya dön</a></p></div>';
+      APP.innerHTML = `<div class="empty-state"><span class="es-icon">${ICO('alert')}</span><p class="es-text">Bir hata oluştu. <a href="#/">Ana sayfaya dön</a></p></div>`;
     }
   }
 
   // Init
   window.addEventListener('hashchange', render);
-  document.getElementById('navToggle').addEventListener('click', () => {
-    document.getElementById('navLinks').classList.toggle('open');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
   });
+
+  /* Tema — site genelindeki 'rauf-theme' anahtarını paylaşır.
+     İlk uygulama <head> içindeki önyükleme betiğinde yapılır (yanıp sönmeyi önlemek için). */
+  const themeBtn = document.getElementById('themeToggle');
+  function paintThemeBtn() {
+    const dark = document.documentElement.classList.contains('dark');
+    themeBtn.innerHTML = ICO(dark ? 'sun' : 'moon');
+    themeBtn.setAttribute('aria-label', dark ? 'Gündüz moduna geç' : 'Gece moduna geç');
+    themeBtn.setAttribute('data-label', dark ? 'Gündüz modu' : 'Gece modu');
+  }
+  themeBtn.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    try { localStorage.setItem('rauf-theme', dark ? 'dark' : 'light'); } catch(e) {}
+    paintThemeBtn();
+  });
+  paintThemeBtn();
 
   // Build search index lazily
   setTimeout(() => Search.buildIndex(), 100);
@@ -127,20 +150,22 @@
     if (!statsRow) return;
     const card = document.createElement('a');
     card.href = '#/rehber';
-    card.style.cssText = 'display:block;margin:1.5rem 0;overflow:hidden;text-decoration:none;color:inherit;border:2px solid var(--primary);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);transition:transform .2s,box-shadow .2s';
-    card.onmouseenter = () => { card.style.transform='translateY(-3px)'; card.style.boxShadow='0 8px 30px rgba(30,64,175,.25)'; };
-    card.onmouseleave = () => { card.style.transform=''; card.style.boxShadow='var(--shadow-lg)'; };
+    card.className = 'rehber-promo';
     card.innerHTML = `
-      <div style="background:linear-gradient(135deg,#1e40af 0%,#3b82f6 50%,#0891b2 100%);color:#fff;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem">
-        <span style="font-size:2.5rem">📖</span>
-        <div style="flex:1">
-          <div style="font-size:1.2rem;font-weight:700">Program Rehberim</div>
-          <div style="font-size:.85rem;opacity:.9;margin-top:.2rem">Ogretmen El Kitabi — Haftalik plan, ders akisi, materyaller ve olcme araclari</div>
+      <div class="rehber-promo-top">
+        <span class="rehber-promo-icon">${ICO('bookOpen')}</span>
+        <div style="flex:1;min-width:0">
+          <div class="rehber-promo-title">Program Rehberim</div>
+          <div class="rehber-promo-sub">Öğretmen el kitabı — haftalık plan, ders akışı, materyaller ve ölçme araçları</div>
         </div>
-        <span style="font-size:1.5rem;opacity:.6">&rarr;</span>
+        <span class="rehber-promo-arrow">${ICO('arrowRight')}</span>
       </div>
-      <div style="padding:.6rem 1.5rem;display:flex;gap:1.25rem;flex-wrap:wrap;font-size:.8rem;color:var(--text-secondary);background:var(--surface)">
-        <span>📅 Haftalik Plan</span><span>📋 Ders Akisi</span><span>📦 Materyaller</span><span>🛠️ Teknikler</span><span>📊 Olcme</span>
+      <div class="rehber-promo-bottom">
+        <span>${ICO('calendar')} Haftalık Plan</span>
+        <span>${ICO('list')} Ders Akışı</span>
+        <span>${ICO('package')} Materyaller</span>
+        <span>${ICO('tool')} Teknikler</span>
+        <span>${ICO('chart')} Ölçme</span>
       </div>`;
     statsRow.after(card);
   }
