@@ -17,7 +17,7 @@
     --golge:rgba(22,35,63,.18);
     --aktif:#1E6FBF;
     /* board yerleşimi */
-    --cols:2; --rows:4; --ust:56px; --ipY:0px;
+    --cols:2; --rows:4; --ust:56px;
     --serit:clamp(56px,10vmin,110px);
     --bar-h:clamp(64px,12vh,104px);
     --pt:0px; --pr:0px; --pb:0px; --pl:0px;
@@ -63,16 +63,18 @@
   .sayac{font-variant-numeric:tabular-nums;font-weight:700;color:var(--lacivert);min-width:52px;text-align:right;font-size:15px}
 
   /* İpucu — sabit panel (solo) */
-  .ipucu{background:linear-gradient(180deg,#fff7e4,#f3e6c6);border:2px solid var(--altin);border-radius:16px;
+  .ipucu{flex:0 0 auto;max-height:min(32dvh,190px);overflow:auto;overscroll-behavior:contain;
+    background:linear-gradient(180deg,#fff7e4,#f3e6c6);border:2px solid var(--altin);border-radius:16px;
     padding:12px 16px;margin:6px auto 8px;max-width:680px;width:100%;box-shadow:0 3px 10px var(--golge),inset 0 0 0 1px #fff7;position:relative}
   .ipucu .et{position:absolute;top:-11px;left:14px;background:var(--lacivert);color:var(--altin2);font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
   .ipucu p{margin:4px 0 0;font-size:clamp(15px,3.4vw,19px);line-height:1.45;color:var(--metin)}
 
   /* Tahta — ekranı dolduran büyük board */
-  .tahta-sar{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;padding:2px}
+  .tahta-sar{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-height:0;min-width:0;padding:2px}
   .tahta{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:clamp(6px,1.4vmin,14px);
     aspect-ratio:calc(var(--cols)/var(--rows));
-    width:min(100%, calc((100dvh - var(--ust) - var(--pt) - var(--pb) - var(--ipY) - 24px) * var(--cols) / var(--rows)));
+    /* -6px: .tahta-sar'ın dolgusu + yuvarlama payı (yoksa alt sıra 3px taşıyor) */
+    width:min(100%, calc((var(--sarH, 60vh) - 6px) * var(--cols) / var(--rows)));
     max-width:1200px;margin:auto}
   .kart{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 3px 8px var(--golge);border:3px solid transparent;background:#e9dab6;transition:transform .1s,box-shadow .1s}
   .kart-ic{position:absolute;inset:0;transition:none} /* rotasyon KATMANI (transition yok) */
@@ -151,9 +153,18 @@
   .ip-kutu .et{position:absolute;top:-11px;left:16px;background:var(--lacivert);color:var(--altin2);font-size:11px;letter-spacing:.08em;padding:3px 10px;border-radius:999px;transition:opacity .3s}
   .ip-kutu p{margin:6px 0 0;font-size:clamp(17px,3.6vw,25px);line-height:1.5;color:var(--metin);text-align:center;transition:font-size .45s}
   /* KÜÇÜLÜP YUKARI DOCK — kaybolmaz, tur boyu kalır */
-  #ipucu-pop.mini .ip-kutu{top:calc(var(--pt,0px) + env(safe-area-inset-top) + 6px);transform:translate(-50%,0);
-    max-width:min(720px,95vw);padding:5px 16px 6px;border-radius:0 0 14px 14px}
-  #ipucu-pop.mini .ip-kutu p{font-size:clamp(11.5px,2.8vw,15.5px);line-height:1.3;margin:0}
+  /* Dock: üst barın ALTINA insin ve dokunuşu YUTMASIN (pointer-events:none).
+     Eskiden üst barı tamamen, ilk kart sırasını 28px örtüyordu; elementFromPoint
+     tahta üzerinde .ip-kutu döndürüyordu → çocuğun dokunuşu tepkisiz kalıyordu.
+     11,5px punto da okunmuyordu. */
+  #ipucu-pop.mini{pointer-events:none}
+  #ipucu-pop.mini .ip-kutu{pointer-events:none;
+    top:calc(var(--ust) + var(--pt,0px) + env(safe-area-inset-top) + 6px);transform:translate(-50%,0);
+    max-width:min(760px,95vw);padding:6px 16px 7px;border-radius:0 0 14px 14px;
+    box-shadow:0 6px 14px var(--golge)}
+  #ipucu-pop.mini .ip-kutu p{font-size:clamp(13px,2.7vw,17px);line-height:1.35;margin:0;
+    max-width:60ch;margin-inline:auto;overflow-wrap:break-word;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   #ipucu-pop.mini .ip-kutu .et{opacity:0}
   .ip-ters{position:fixed;top:calc(var(--serit) + 8px);left:50%;transform:translateX(-50%) rotate(180deg);z-index:35;
     pointer-events:none;max-width:min(560px,84vw);background:linear-gradient(180deg,#fff7e4,#f3e6c6);border:2px solid var(--altin);
@@ -231,6 +242,11 @@
   .kisiler button:focus-visible,.yk-kapat:focus-visible,.yk-h:focus-visible,.nokta:focus-visible{
     outline:3px solid var(--aktif);outline-offset:3px;border-radius:12px;
   }
+
+  /* 5c) Modallar (özellikle Ayarlar) alçak ekranda TAŞIYORDU: .perde ortalıyor ve
+         taşan kısım kırpılıyordu → başlık ve "Kaydet" erişilemiyordu. Artık kaydırılır. */
+  .perde{align-items:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .perde>.modal{margin:auto}
 
   /* 5b) Giriş ekranı alçak/yatay ekranda TAŞIYOR ve "Nasıl Oynanır"/"Ayarlar"
          tıklanamıyordu (body overflow:hidden + flex ortalama = üst taraf kırpılır,
@@ -392,7 +408,9 @@ function tusEtiket(code){
 
 const Ekran={
   atama:null,
-  kapat(){ $('#perde').classList.add('gizli'); $('#perde').innerHTML=''; },
+  // atama=null ŞART: "Değiştir"e basıp modalı kapatınca tuş-atama kipi takılı kalıyor,
+  // sonraki TÜM klavye girdileri yutuluyordu (oyun klavyeyle oynanamaz hâle geliyordu).
+  kapat(){ $('#perde').classList.add('gizli'); $('#perde').innerHTML=''; this.atama=null; },
   perde(html, renkli){
     const p=$('#perde'); p.classList.remove('gizli');
     p.innerHTML=`<div class="modal${renkli?' renkli':''}">${html}</div>`;
@@ -487,7 +505,7 @@ const Oyun={
   tuslar:(()=>{ try{const t=JSON.parse(localStorage.getItem('hh:tuslar'));return Array.isArray(t)&&t.length===4?t:VAR_TUSLAR.slice();}catch(e){return VAR_TUSLAR.slice();} })(),
   havuz:[], sidHaritasi:{}, hedef:null, sonSid:null,
   // solo
-  dogru:0, gereken:0, baslangic:0, sayacT:null, kilit:false,
+  dogru:0, gereken:0, baslangic:0, sayacT:null, kilit:false, turBitti:false,
   // çok
   kip:'tek', sayi:2, oyuncular:[], sozHakki:null, durum:'bekle', pencereT:null, geriT:null, hedefSkor:7,
 
@@ -535,16 +553,33 @@ const Oyun={
     else{ this.dogru=0; this.gereken=HEDEF_KELIME.replace(/\s/g,'').length; this.ilerlemeCiz();
       this.baslangic=Date.now(); clearInterval(this.sayacT); this.sayacT=setInterval(()=>this.sayacCiz(),250); this.sayacCiz();
       $('#ipucu-panel').classList.toggle('gizli', this.ipucuKip==='popup');
-      document.documentElement.style.setProperty('--ipY', this.ipucuKip==='popup'?'0px':'86px');
     }
     this.tahtaCiz(); this.yeniTur();
+    this.olcSar();
+  },
+
+  /* Tahta sarmalayıcısının GERÇEK yüksekliğini --sarH'e yaz.
+     ResizeObserver tek başına yetmiyor: gözlem başlarken #oyun display:none
+     olduğu için Chrome ilk bildirimi hiç kuyruğa almıyordu → --sarH boş kalıyor,
+     tahta 60vh yedeğine düşüp gereksiz dar kalıyordu (360px ekranda 192px). */
+  olcSar(){
+    var sar=document.querySelector('.tahta-sar'); if(!sar) return;
+    var uygula=function(){
+      var h=Math.floor(sar.getBoundingClientRect().height);   // yerleşimi senkron zorlar
+      if(h>0) document.documentElement.style.setProperty('--sarH',h+'px');
+    };
+    uygula();                                                  // hemen ölç (rAF kısıtlıysa da çalışır)
+    if(window.requestAnimationFrame) requestAnimationFrame(uygula);  // yerleşim oturunca tazele
   },
   cik(){
     clearInterval(this.sayacT); clearTimeout(this.pencereT); clearTimeout(this.geriT);
     this.yakinKapat(); Ekran.kapat(); $('#geri').style.display='none'; $('#ipucu-pop').classList.remove('acik','mini');
     document.body.classList.remove('cok','k2','k3','k4','soz');
-    document.documentElement.style.removeProperty('--aktif'); document.documentElement.style.setProperty('--ipY','0px');
+    document.documentElement.style.removeProperty('--aktif');
     $('#kenarlar').innerHTML=''; $('#buzzbar').innerHTML='';
+    // kip sıfırlanmalı: yoksa ana menüdeyken Ayarlar'dan oturma düzeni değiştirmek
+    // hâlâ 'cok' sanıp ana menüyü çok-oyunculu arayüzle gömüyordu.
+    this.kip='tek'; this.sozHakki=null; this.durum=null;
     $('#oyun').classList.add('gizli'); $('#giris').classList.remove('gizli');
   },
 
@@ -586,7 +621,6 @@ const Oyun={
       });
     }
     $('#ipucu-panel').classList.add('gizli');
-    document.documentElement.style.setProperty('--ipY','0px');
   },
   tahtaCiz(){
     const t=$('#tahta'); t.className='tahta'+(this.kip==='tek'&&this.mod==='sembol'?' hepsi':''); t.innerHTML='';
@@ -599,9 +633,10 @@ const Oyun={
       d.innerHTML=`<div class="kart-ic"><span class="no">${k.no}</span><img src="${k.gorsel}" alt="" decoding="async"></div>`;
       const ic=d.querySelector('.kart-ic');
       if(this.kip==='tek' && this.mod==='sembol'){
-        k.items.forEach(it=>{
+        // aynı sebeple büyükten küçüğe (küçük hedefler üstte kalsın)
+        [...k.items].sort((a,b)=>(b.boy||20)-(a.boy||20)).forEach(it=>{
           const b=document.createElement('button'); b.className='nokta';
-          b.style.left=it.x+'%'; b.style.top=it.y+'%'; const boy=(it.boy||20); b.style.width=boy+'%'; b.style.height=boy+'%';
+          b.style.left=it.x+'%'; b.style.top=it.y+'%'; const boy=(it.boy||20); b.style.width=boy+'%'; b.style.height=boy+'%'; b.style.zIndex=String(100-Math.round(boy));
           b.onclick=e=>{ e.stopPropagation(); this.secildi(it.sid,b,d); };
           ic.appendChild(b);
         });
@@ -626,7 +661,7 @@ const Oyun={
   },
 
   yeniTur(){
-    this.kilit=false;
+    this.kilit=false; this.turBitti=false;   // yeni tur: cevap kilidi açılır
     let sid; do{ sid=this.havuz[Math.floor(Math.random()*this.havuz.length)]; }while(sid===this.sonSid && this.havuz.length>1);
     this.sonSid=sid; this.hedef=sid;
     const metin=this.veri.semboller[sid].ben;
@@ -658,6 +693,7 @@ const Oyun={
 
   /* ---------- KART tıklama (tek giriş) ---------- */
   kartTikla(ki,el){
+    if(this.turBitti) return;          // tur cevaplandı: ikinci dokunuş sayılmaz
     if(this.kip==='cok'){
       if(this.durum!=='cevap'||this.sozHakki===null) return;
       const varMi=this.veri.kartlar[ki].items.some(it=>it.sid===this.hedef);
@@ -666,7 +702,9 @@ const Oyun={
     if(this.kilit) return;
     if(this.mod==='kart'){
       const varMi=this.veri.kartlar[ki].items.some(it=>it.sid===this.hedef);
-      if(varMi) this.dogruCevap(el); else this.yanlisKart(el);
+      // kilit ŞART: zoom/sembol modları kilitliyordu ama 'kart' modu kilitlemiyordu →
+      // hızlı çift dokunuşta aynı tur birden fazla harf/puan veriyordu.
+      if(varMi){ this.kilit=true; this.turBitti=true; this.dogruCevap(el); } else this.yanlisKart(el);
     }else{ this.yakinAc(ki); }
   },
 
@@ -681,8 +719,11 @@ const Oyun={
     const ipMetin=(this.veri.semboller[this.hedef]||{}).ben||'';
     let h=`<div class="yk-ipucu">${ipMetin}</div>
       <div class="yk-kart"><img src="${kart.gorsel}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">`;
-    kart.items.forEach(it=>{ const boy=(it.boy||20);
-      h+=`<button class="yk-h" data-sid="${it.sid}" style="position:absolute;left:${it.x}%;top:${it.y}%;width:${boy}%;height:${boy}%;transform:translate(-50%,-50%);border-radius:50%;background:transparent;border:none;cursor:pointer"></button>`; });
+    // ÖNEMLİ: hotspot'lar BÜYÜKTEN KÜÇÜĞE çizilir. Katalog sırasıyla çizilince
+    // sonra basılan üstte kalıyordu; büyük daireler küçükleri yutuyor ve
+    // doğru cevap (ör. kart5'te güneş, boy 15) YANLIŞ sayılıyordu. 40 örtüşen çift var.
+    [...kart.items].sort((a,b)=>(b.boy||20)-(a.boy||20)).forEach(it=>{ const boy=(it.boy||20);
+      h+=`<button class="yk-h" data-sid="${it.sid}" aria-label="Sembol" style="position:absolute;left:${it.x}%;top:${it.y}%;width:${boy}%;height:${boy}%;z-index:${100-Math.round(boy)};transform:translate(-50%,-50%);border-radius:50%;background:transparent;border:none;cursor:pointer"></button>`; });
     h+='</div><button id="yk-kapat" class="yk-kapat" aria-label="Kartı kapat">✕ Kapat</button>';
     ov.innerHTML=h;
     $('#yk-kapat').onclick=()=>this.yakinKapat();
@@ -692,7 +733,7 @@ const Oyun={
     document.addEventListener('keydown',this._yakinEsc);
     ov.querySelectorAll('.yk-h').forEach(b=>b.onclick=()=>{
       if(this.kilit) return;
-      if(b.dataset.sid===this.hedef){ this.kilit=true; b.style.boxShadow='0 0 0 4px var(--yesil),0 0 22px 6px rgba(63,122,77,.7)'; b.style.background='radial-gradient(circle,rgba(63,122,77,.28),transparent 70%)'; setTimeout(()=>{ this.yakinKapat(); this.dogruCevap(); },560); }
+      if(b.dataset.sid===this.hedef){ this.kilit=true; this.turBitti=true; b.style.boxShadow='0 0 0 4px var(--yesil),0 0 22px 6px rgba(63,122,77,.7)'; b.style.background='radial-gradient(circle,rgba(63,122,77,.28),transparent 70%)'; setTimeout(()=>{ this.yakinKapat(); this.dogruCevap(); },560); }
       else{ b.style.boxShadow='0 0 0 4px var(--kirmizi)'; setTimeout(()=>b.style.boxShadow='none',450); }
     });
   },
@@ -703,7 +744,7 @@ const Oyun={
 
   secildi(sid,b,el){ // solo 'sembol'
     if(this.kilit) return;
-    if(sid===this.hedef){ this.kilit=true; el.classList.add('dogru'); setTimeout(()=>this.dogruCevap(),400); }
+    if(sid===this.hedef){ this.kilit=true; this.turBitti=true; el.classList.add('dogru'); setTimeout(()=>this.dogruCevap(),400); }
     else{ this.yanlisKart(el); }
   },
   yanlisKart(el){ el.classList.add('yanlis'); setTimeout(()=>el.classList.remove('yanlis'),450); },
@@ -765,6 +806,7 @@ const Oyun={
   geriSayimDur(){ clearTimeout(this.geriT); clearTimeout(this.pencereT); $('#geri').style.display='none'; },
 
   cokDogru(el){
+    if(this.turBitti) return; this.turBitti=true;   // tek turda çoklu puanı engelle
     this.geriSayimDur();
     const o=this.oyuncular[this.sozHakki]; o.skor++;
     if(el){ el.classList.add('dogru'); }
@@ -806,6 +848,18 @@ document.addEventListener('keydown', e=>Oyun.tusYakala(e));
 document.body.dataset.mod=Oyun.oturma;
 matchMedia('(min-width:620px)').addEventListener('change', ()=>Oyun.yonleriUygula());
 window.Oyun=Oyun; window.Ekran=Ekran;
+// Tahta ölçüsü artık TAHMİN değil ÖLÇÜM: .tahta-sar'ın gerçek yüksekliği --sarH'e yazılır.
+// Böylece ipucu panelinin metne göre değişen boyu, üst bar, safe-area ve mobil URL
+// çubuğu otomatik hesaba katılır (eski --ipY:86px sabiti 360x640'ta 48px taşırıyordu).
+(function(){
+  var sar=document.querySelector('.tahta-sar');
+  if(!sar||!window.ResizeObserver) return;            // RO yoksa --sarH:60vh yedeği devrede
+  var son=-1;
+  new ResizeObserver(function(es){
+    var h=Math.floor(es[0].contentRect.height);
+    if(Math.abs(h-son)>0.5){ son=h; document.documentElement.style.setProperty('--sarH',h+'px'); }
+  }).observe(sar);
+})();
 Oyun.yukle();
 </script>
 </body>
