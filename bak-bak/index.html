@@ -2,7 +2,9 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<!-- maximum-scale/user-scalable KALDIRILDI: yakınlaştırmayı engellemek WCAG 1.4.4 ihlali;
+     az gören öğrenciler ipucunu büyütebilmeli. Kaydırma zaten touch-action ile kontrollü. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Bak Bak — Görsel Dikkat Oyunu</title>
 <meta name="description" content="Bak Bak: hedefi ızgarada en hızlı bulan kazanır. İslâmî simgelerle görsel dikkat oyunu. Tek kişi veya karşılıklı iki kişi.">
 <meta name="theme-color" content="#16233F">
@@ -17,7 +19,27 @@
 <link rel="stylesheet" href="lib/tokens.css">
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%;overflow:hidden;-webkit-tap-highlight-color:transparent}
+
+  /* Tahta ölçüsü: "64vh" tahmini yerine GERÇEK dikey bütçeden türetilir
+     (ekran − üst bar − harf şeridi − güvenli alan). Böylece tahta ekranın
+     ana nesnesi olur, masaüstünde/tablette boşluk israfı biter. */
+  :root{
+    --bb-svh:100vh;
+    --bb-kenar:max(10px, env(safe-area-inset-left,0px), env(safe-area-inset-right,0px));
+    --bb-ust-h:64px;          /* üst bar */
+    --bb-hud-h:88px;          /* harf şeridi + boşluklar */
+    --bb-tahta-max:720px;
+    --bb-tahta:min(
+        calc(100vw - 2*var(--bb-kenar)),
+        calc(var(--bb-svh) - var(--bb-ust-h) - var(--bb-hud-h)
+             - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)),
+        var(--bb-tahta-max));
+  }
+  @supports (height:100svh){ :root{--bb-svh:100svh} }
+  @media (min-width:600px) and (orientation:portrait){ :root{--bb-tahta-max:min(640px,86vw)} }
+  @media (min-width:1200px){ :root{--bb-tahta-max:760px;--bb-hud-h:104px} }
+
+  html,body{height:100%;overflow:hidden;overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
   body{
     font-family:var(--font-sans);
     background:radial-gradient(ellipse 130% 80% at 50% -10%, #24365f, #10192e 75%);
@@ -27,7 +49,11 @@
   button{font-family:inherit;cursor:pointer;color:inherit}
 
   /* ---------- Ekran çerçevesi ---------- */
-  .ekran{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  /* inset:0 YERİNE left/right/top + height: inset:0 yükseklik atamasını iptal ederdi. */
+  .ekran{position:fixed;left:0;right:0;top:0;height:var(--bb-svh);
+         display:flex;flex-direction:column;align-items:center;justify-content:center;
+         padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);
+         padding-bottom:env(safe-area-inset-bottom,0px)}
   .ekran.gizli{display:none}
 
   /* ---------- Başlangıç ---------- */
@@ -132,8 +158,11 @@
            animation:ortaGir .34s cubic-bezier(.2,.7,.3,1.2) both}
   .bb-orta-et{font-size:clamp(9px,1.7vw,12px);font-weight:800;letter-spacing:.03em;
               color:var(--altin-acik);text-transform:uppercase}
-  .bb-orta-metin{font-size:clamp(10px,1.9vw,15px);font-weight:600;line-height:1.24;color:var(--kagit);
-                 overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:6}
+  /* İpucu metni: font boyutu JS ile karta SIĞDIRILIR (asla kırpılmaz) — aşağıdaki
+     değer yalnızca JS öncesi ilk boyama içindir. overflow:hidden ŞART: flex içinde
+     küçülebilmesi (min-height:auto → 0) buna bağlı, ölçüm bunun üzerine kurulu. */
+  .bb-orta-metin{font-size:clamp(10px,1.9vw,15px);font-weight:600;line-height:1.26;color:var(--kagit);
+                 overflow:hidden;min-height:0;text-wrap:pretty}
   .bb-orta--cevap{border-color:var(--yesil);background:linear-gradient(160deg,#2f5a3c,#1a3524)}
   .bb-orta-et--ok{color:#c7ecd0}
   .bb-orta-gorsel{width:66%;height:66%;display:flex;align-items:center;justify-content:center}
@@ -237,9 +266,237 @@
   .modal-kutu ol{margin:0 0 6px 18px;color:#d7deed;font-size:14px;line-height:1.7}
   .modal-kutu li b{color:var(--kagit)}
   .modal-kutu .kapat{display:block;margin:18px auto 0}
+
+  /* ============================================================
+     PREMIUM KATMAN — sonda durur ki üsttekileri bilinçli ezsin.
+     Amaç: "şablon" hissini kırmak; tezhip sanatına yakışan derinlik,
+     çerçeve ve altın işçiliği. Tamamı saf CSS (harici varlık yok).
+     ============================================================ */
+
+  /* 1) Zemin: düz degrade yerine katmanlı derinlik + ince geometrik doku + vinyet.
+        Vinyet en ÜST katman (pseudo-element değil) ki içerik kararmasın. */
+  body{
+    background:
+      radial-gradient(ellipse 80% 64% at 50% 42%, transparent 50%, rgba(4,8,18,.55) 100%),
+      radial-gradient(ellipse 92% 56% at 50% -10%, rgba(200,164,110,.15), transparent 62%),
+      repeating-conic-gradient(from 45deg at 50% 50%,
+        rgba(200,164,110,.028) 0deg 15deg, transparent 15deg 30deg),
+      radial-gradient(ellipse 130% 85% at 50% -10%, #24365f, #0d1526 78%);
+    background-size:auto, auto, 44px 44px, auto;
+    background-attachment:fixed;
+  }
+
+  /* 2) Izgara artık boşlukta yüzmüyor: altın hatlı bir "tepsi" içinde oturuyor. */
+  .bb-izgara--orta{
+    padding:clamp(7px,1.5vmin,13px);
+    border-radius:clamp(16px,2.6vmin,24px);
+    background:linear-gradient(160deg, rgba(200,164,110,.17), rgba(200,164,110,.045));
+    box-shadow:
+      0 0 0 1px rgba(200,164,110,.36),
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 28px 64px -20px rgba(0,0,0,.72);
+  }
+
+  /* 3) Kartlar: parşömen minyatürlere ince altın kenar + katmanlı gölge, canlı hover. */
+  .bb-izgara--orta .bb-hucre{
+    border:none;
+    box-shadow:
+      0 0 0 1px rgba(43,33,24,.20),
+      0 2px 4px rgba(0,0,0,.26),
+      0 10px 20px -10px rgba(0,0,0,.55);
+    transition:transform .16s cubic-bezier(.2,.7,.3,1.2), box-shadow .16s ease;
+  }
+  @media (hover:hover){
+    .bb-izgara--orta .bb-hucre:hover{
+      transform:translateY(-2px) scale(1.015);
+      box-shadow:
+        0 0 0 1px rgba(200,164,110,.55),
+        0 14px 26px -10px rgba(0,0,0,.62);
+    }
+  }
+  .bb-izgara--orta .bb-hucre:active{transform:scale(.97)}
+
+  /* 4) İlerleme harfleri: soluk klavye tuşu değil, altın kitâbe. */
+  .bb-harf{
+    font-family:var(--font-serif);
+    background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+    border:1px solid rgba(200,164,110,.30);
+    color:rgba(240,193,105,.40);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+  .bb-harf.dolu{
+    background:linear-gradient(180deg,#f7d78e,var(--altin));
+    color:#16233F;border-color:rgba(247,215,142,.9);
+    text-shadow:0 1px 0 rgba(255,255,255,.4);
+    box-shadow:0 3px 11px rgba(200,164,110,.45), inset 0 1px 0 rgba(255,255,255,.6);
+  }
+
+  /* 5) Merkez ipucu kartı: düz koyu kutu değil, altın kartuş/levha. */
+  .bb-orta{
+    border:1px solid rgba(200,164,110,.55);
+    background:
+      radial-gradient(ellipse 130% 85% at 50% 0%, rgba(200,164,110,.16), transparent 62%),
+      linear-gradient(160deg,#22365f,#0f1a31);
+    box-shadow:
+      inset 0 0 0 1px rgba(200,164,110,.20),
+      inset 0 0 22px rgba(0,0,0,.35),
+      0 12px 28px -10px rgba(0,0,0,.7);
+  }
+  /* etiketin altına ince altın kural çizgisi */
+  .bb-orta-et{
+    padding-bottom:.32em;position:relative;
+    color:var(--altin-acik);letter-spacing:.09em;
+  }
+  .bb-orta-et::after{
+    content:"";position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:2.2em;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(200,164,110,.85),transparent);
+  }
+  .bb-orta-metin{text-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+  /* 6) Klavye erişilebilirliği: görünür odak halkası (WCAG 2.4.7). */
+  .bb-hucre:focus-visible,.bb-nokta:focus-visible,.mod-btn:focus-visible,
+  .ikon-btn:focus-visible,.btn-buyuk:focus-visible,.btn-ince:focus-visible,
+  .link-btn:focus-visible,.giris-alt a:focus-visible{
+    outline:3px solid var(--altin-acik);outline-offset:3px;
+  }
+
+  /* 7) Mod düğmeleri ve üst bar: paletle temas, daha net hiyerarşi. */
+  .mod-btn{
+    background:linear-gradient(170deg, rgba(200,164,110,.12), rgba(255,255,255,.03));
+    border-color:rgba(200,164,110,.34);
+  }
+  .mod-btn:hover{border-color:rgba(240,193,105,.6)}
+  .zaman{font-variant-numeric:tabular-nums lining-nums;letter-spacing:.04em;
+         text-shadow:0 2px 10px rgba(200,164,110,.28)}
+  .ikon-btn{background:linear-gradient(180deg, rgba(35,52,90,.75), rgba(16,25,46,.75));
+            box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 2px 8px rgba(0,0,0,.3)}
+
+  /* 8) Satır içi SVG ikonlar (emoji yerine) — renk paletten, çizgi ağırlığı tutarlı. */
+  .ik{width:1em;height:1em;display:block;fill:none;stroke:currentColor;
+      stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ikon-btn .ik{width:19px;height:19px;color:var(--krem)}
+  .mod-btn .ikon{display:flex;align-items:center;justify-content:center;color:var(--altin-acik)}
+  .mod-btn .ikon .ik{width:31px;height:31px;stroke-width:1.4}
+  .ik-kucuk{width:14px;height:14px;stroke-width:1.9}
+  .link-btn,.giris-alt a{display:inline-flex;align-items:center;gap:6px}
+  /* ses düğmesi: iki ikon üst üste; sınıf hangisinin görüneceğini seçer */
+  .ses-btn .ik-kapali{display:none}
+  .ses-btn.susturuldu .ik-acik{display:none}
+  .ses-btn.susturuldu .ik-kapali{display:block}
+  .ses-btn.susturuldu{color:#8ea0c4}
+
+  /* 9) Giriş logosu: SVG motif kullanıldığında altın, ince çizgili ve nefes alan bir marka. */
+  .logo--svg{display:flex;justify-content:center;filter:none}
+  .logo-ik{width:clamp(58px,13vw,78px);height:clamp(58px,13vw,78px);
+           stroke-width:1.25;color:var(--altin);
+           filter:drop-shadow(0 3px 12px rgba(200,164,110,.35))}
+  .giris h1{text-shadow:0 2px 18px rgba(200,164,110,.22)}
+  .yildizlar .ik{display:inline-block;width:1em;height:1em;vertical-align:-.12em}
+  .yildizlar .ik.dolu{fill:var(--altin-acik);stroke:var(--altin-acik)}
+  .yildizlar .ik.bos{fill:none;stroke:rgba(200,164,110,.45)}
+  .duel-kazanan .em .ik{width:64px;height:64px;color:var(--altin-acik);stroke-width:1.5;margin:0 auto}
+
+  /* 11) Tahta ölçeği: yalnızca "orta" modunda (diğer paketler etkilenmesin). */
+  :root[data-mod="orta"] .bb-izgara--orta{
+    width:var(--bb-tahta);
+    gap:clamp(6px, calc(var(--bb-tahta)*.018), 14px);
+  }
+  :root[data-mod="orta"] #solo-tahta.bb-tahta{
+    gap:calc(var(--bb-tahta)*.042);
+    padding:6px var(--bb-kenar) 12px;
+  }
+  /* Düelloda ekran İKİYE bölünür: --bb-tahta (tam ekran bütçesi) burada geçersiz.
+     Her yarı kendi bütçesini alır; yoksa tahtalar ekranı taşırır. */
+  :root[data-mod="orta"] .duel-yari .bb-izgara--orta{
+    width:min(
+      calc(100vw - 2*var(--bb-kenar)),
+      calc((var(--bb-svh) - 60px)/2 - 52px),
+      460px);
+    gap:clamp(4px, .9vmin, 8px);
+  }
+
+  /* 12) Dar ekranda ipucu kartının iç boşluğunu kıs → metne dikey yer açılır,
+         otomatik sığdırma daha büyük punto seçebilir (çocuk okunabilirliği). */
+  @media (max-width:560px){
+    :root[data-mod="orta"] .bb-orta{padding:4.5%;gap:2px}
+    :root[data-mod="orta"] .bb-orta-et{font-size:8.5px;letter-spacing:.05em;padding-bottom:.2em}
+  }
+
+  /* 10) Hareket duyarlılığı: sarsma/puls dâhil TÜM hareketi kapsa (önceki kural
+         yalnızca orta-modu giriş animasyonunu kapatıyordu). */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms!important;animation-iteration-count:1!important;
+      transition-duration:.01ms!important;scroll-behavior:auto!important;
+    }
+    .bb-izgara--orta .bb-hucre:hover{transform:none}
+  }
 </style>
 </head>
 <body>
+
+<!-- ==================== İKON SETİ (satır içi SVG — emoji yerine) ====================
+     Emoji her platformda farklı ve "ucuz" görünüyordu; bunlar currentColor ile
+     paletten beslenen, çizgi ağırlığı tutarlı ikonlar. Harici dosya yok. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- mihrap kemerli ev -->
+    <symbol id="ik-ev" viewBox="0 0 24 24">
+      <path d="M4 20v-9.2L12 4l8 6.8V20"/>
+      <path d="M9.4 20v-5a2.6 2.6 0 0 1 5.2 0v5"/>
+    </symbol>
+    <symbol id="ik-yenile" viewBox="0 0 24 24">
+      <path d="M20 12a8 8 0 1 1-2.4-5.7"/>
+      <path d="M20 4.5V10h-5.5"/>
+    </symbol>
+    <symbol id="ik-ses" viewBox="0 0 24 24">
+      <path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z"/>
+      <path d="M15.6 9.2a4 4 0 0 1 0 5.6"/>
+      <path d="M18.2 6.6a7.6 7.6 0 0 1 0 10.8"/>
+    </symbol>
+    <symbol id="ik-sessiz" viewBox="0 0 24 24">
+      <path d="M4 9.5h3.2L12 5.4v13.2L7.2 14.5H4z"/>
+      <path d="M16.2 9.8l4.4 4.4M20.6 9.8l-4.4 4.4"/>
+    </symbol>
+    <symbol id="ik-soru" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8.6"/>
+      <path d="M9.6 9.4a2.5 2.5 0 1 1 3.3 2.4c-.6.2-.9.8-.9 1.5v.5"/>
+      <path d="M12 17.1h.01"/>
+    </symbol>
+    <symbol id="ik-tek" viewBox="0 0 24 24">
+      <circle cx="12" cy="8.2" r="3.4"/>
+      <path d="M5.6 19.4a6.4 6.4 0 0 1 12.8 0"/>
+    </symbol>
+    <symbol id="ik-iki" viewBox="0 0 24 24">
+      <circle cx="9" cy="8.6" r="3"/>
+      <path d="M3.4 19a5.6 5.6 0 0 1 11.2 0"/>
+      <path d="M16.2 6.1a3 3 0 0 1 0 5.5"/>
+      <path d="M17.4 14.3a5.6 5.6 0 0 1 3.2 4.7"/>
+    </symbol>
+    <symbol id="ik-ogretmen" viewBox="0 0 24 24">
+      <rect x="3.4" y="4.2" width="17.2" height="11.4" rx="1.6"/>
+      <path d="M8 19.8l4-4.2 4 4.2"/>
+      <path d="M7.6 8.4h6.4M7.6 11.6h4"/>
+    </symbol>
+    <!-- tezhip gülü / rub'ul hizb: iki kare + rozet — figüratif değil, geometrik -->
+    <symbol id="ik-gul" viewBox="0 0 64 64">
+      <rect x="14" y="14" width="36" height="36" rx="3"/>
+      <rect x="14" y="14" width="36" height="36" rx="3" transform="rotate(45 32 32)"/>
+      <circle cx="32" cy="32" r="12.5"/>
+      <circle cx="32" cy="32" r="5.4"/>
+      <path d="M32 6.4v5M32 52.6v5M6.4 32h5M52.6 32h5"/>
+    </symbol>
+    <symbol id="ik-yildiz" viewBox="0 0 24 24">
+      <path d="M12 3.1l2.75 5.57 6.15.9-4.45 4.34 1.05 6.12L12 17.14l-5.5 2.89 1.05-6.12L3.1 9.57l6.15-.9z"/>
+    </symbol>
+    <symbol id="ik-kupa" viewBox="0 0 24 24">
+      <path d="M7.5 4h9v5.2a4.5 4.5 0 0 1-9 0z"/>
+      <path d="M7.5 5.6H5.2a2.6 2.6 0 0 0 2.6 4.2M16.5 5.6h2.3a2.6 2.6 0 0 1-2.6 4.2"/>
+      <path d="M12 13.8V17M8.8 20h6.4M9.8 17h4.4l.6 3H9.2z"/>
+    </symbol>
+  </defs>
+</svg>
 
 <!-- ==================== BAŞLANGIÇ ==================== -->
 <div class="ekran" id="ekran-baslangic">
@@ -249,13 +506,13 @@
     <p class="alt" id="giris-alt-baslik">Görsel Dikkat Oyunu</p>
     <div class="ders-rozet" id="ders-rozet">Din Kültürü · 4-8</div>
     <div class="mod-secim">
-      <button class="mod-btn" data-mod="tek"><span class="ikon">🧒</span>Tek Kişi<small>Süreye karşı</small></button>
-      <button class="mod-btn" data-mod="iki"><span class="ikon">🤝</span>İki Kişi<small>Karşılıklı yarış</small></button>
+      <button class="mod-btn" data-mod="tek"><span class="ikon"><svg class="ik"><use href="#ik-tek"/></svg></span>Tek Kişi<small>Süreye karşı</small></button>
+      <button class="mod-btn" data-mod="iki"><span class="ikon"><svg class="ik"><use href="#ik-iki"/></svg></span>İki Kişi<small>Karşılıklı yarış</small></button>
     </div>
     <div class="giris-alt">
-      <button class="link-btn" id="nasil-ac">❓ Nasıl oynanır?</button>
+      <button class="link-btn" id="nasil-ac"><svg class="ik ik-kucuk"><use href="#ik-soru"/></svg>Nasıl oynanır?</button>
       <span>·</span>
-      <a href="ogretmen/index.html">👩‍🏫 Öğretmen paneli</a>
+      <a href="ogretmen/index.html"><svg class="ik ik-kucuk"><use href="#ik-ogretmen"/></svg>Öğretmen paneli</a>
       <span id="en-iyi-sar" style="display:none">· <span class="en-iyi" id="en-iyi"></span></span>
     </div>
   </div>
@@ -264,10 +521,10 @@
 <!-- ==================== TEK KİŞİ ==================== -->
 <div class="ekran gizli" id="ekran-solo">
   <div class="ust-bar">
-    <button class="ikon-btn" id="solo-home" title="Ana ekran">⌂</button>
+    <button class="ikon-btn" id="solo-home" title="Ana ekran" aria-label="Ana ekran"><svg class="ik"><use href="#ik-ev"/></svg></button>
     <span class="zaman"><span id="zaman">00:00</span></span>
-    <button class="ikon-btn" id="solo-tekrar" title="Baştan">↻</button>
-    <button class="ikon-btn" id="solo-ses" title="Ses">🔊</button>
+    <button class="ikon-btn" id="solo-tekrar" title="Baştan" aria-label="Baştan başla"><svg class="ik"><use href="#ik-yenile"/></svg></button>
+    <button class="ikon-btn ses-btn" id="solo-ses" title="Ses" aria-label="Sesi aç/kapat"><svg class="ik ik-acik"><use href="#ik-ses"/></svg><svg class="ik ik-kapali"><use href="#ik-sessiz"/></svg></button>
   </div>
   <div id="solo-tahta"></div>
 </div>
@@ -276,13 +533,13 @@
 <div class="ekran gizli" id="ekran-duel">
   <div class="duel-yari" id="duel-ust"></div>
   <div class="duel-orta">
-    <button class="ikon-btn" id="duel-home" title="Ana ekran">⌂</button>
+    <button class="ikon-btn" id="duel-home" title="Ana ekran" aria-label="Ana ekran"><svg class="ik"><use href="#ik-ev"/></svg></button>
     <b id="duel-oyunAdi">BAK&nbsp;BAK</b><span class="vs">iki kişi · önce heceleyen kazanır</span>
-    <button class="ikon-btn" id="duel-ses" title="Ses">🔊</button>
+    <button class="ikon-btn ses-btn" id="duel-ses" title="Ses" aria-label="Sesi aç/kapat"><svg class="ik ik-acik"><use href="#ik-ses"/></svg><svg class="ik ik-kapali"><use href="#ik-sessiz"/></svg></button>
   </div>
   <div class="duel-yari" id="duel-alt"></div>
   <div class="duel-kazanan gizli" id="duel-kazanan">
-    <div class="em">🏆</div>
+    <div class="em"><svg class="ik"><use href="#ik-kupa"/></svg></div>
     <div class="kim" id="duel-kim">Oyuncu 1 kazandı!</div>
     <div class="btn-satir">
       <button class="btn-buyuk" id="duel-tekrar">↻ Yeniden</button>
@@ -353,10 +610,18 @@
       mod: m.mod || "izgara",
       tahtalar: m.tahtalar || {}
     };
+    document.documentElement.dataset.mod = ayarTemel.mod;   // CSS kapısı: orta | izgara | tahta
     el("giris-alt-baslik").textContent = m.altBaslik || "Görsel Dikkat Oyunu";
     el("ders-rozet").textContent = (m.ders || "") + " · " + (m.sinif || "");
     if (m.oyunAdi) { el("giris-baslik").textContent = m.oyunAdi; el("duel-oyunAdi").textContent = m.oyunAdi; }
-    if (m.logo) { el("giris-logo").textContent = m.logo; el("nasil-baslik").textContent = m.logo + " Nasıl oynanır?"; }
+    // logo: paket bir SVG motif belirtmişse onu kullan (premium), yoksa emoji'ye düş
+    if (m.logoIkon) {
+      el("giris-logo").innerHTML = '<svg class="ik logo-ik"><use href="#' + m.logoIkon + '"/></svg>';
+      el("giris-logo").classList.add("logo--svg");
+    } else if (m.logo) {
+      el("giris-logo").textContent = m.logo;
+    }
+    el("nasil-baslik").textContent = "Nasıl oynanır?";
     if (m.nasil && m.nasil.length) el("nasil-liste").innerHTML = m.nasil.map(function (x) { return "<li>" + x + "</li>"; }).join("");
     document.title = (m.oyunAdi || "Bak Bak") + (m.ad ? " — " + m.ad : "");
 
@@ -375,20 +640,68 @@
     // solo kontrolleri
     el("solo-home").addEventListener("click", anaEkran);
     el("solo-tekrar").addEventListener("click", soloBaslat);
-    el("solo-ses").addEventListener("click", function () { sesDegis(el("solo-ses")); });
+    el("solo-ses").addEventListener("click", sesDegis);
+    // ses tercihi oturumlar arası hatırlansın
+    try { if (localStorage.getItem("bakbak:ses") === "kapali") BB.Ses.sustur(true); } catch (e) {}
+    sesIkonGuncelle();
     el("bitti-cik").addEventListener("click", anaEkran);
     el("bitti-tekrar").addEventListener("click", soloBaslat);
 
     // duel kontrolleri
     el("duel-home").addEventListener("click", anaEkran);
-    el("duel-ses").addEventListener("click", function () { sesDegis(el("duel-ses")); });
+    el("duel-ses").addEventListener("click", sesDegis);
     el("duel-tekrar").addEventListener("click", duelBaslat);
     el("duel-cik").addEventListener("click", anaEkran);
+
+    gorselleriIsit();
+
+    // ekran döndürme / yeniden boyutlanmada ipucunu karta yeniden sığdır
+    var boyutT = null;
+    window.addEventListener("resize", function () {
+      clearTimeout(boyutT);
+      boyutT = setTimeout(function () { ipucuYenidenSigdir(); }, 150);
+    });
+    // web fontları geç yüklenirse ilk ölçüm yanılır → font hazır olunca yeniden ölç
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { ipucuYenidenSigdir(); }).catch(function () {});
+    }
   }
 
-  function sesDegis(btn) {
-    var yeni = !BB.Ses.kapali; BB.Ses.sustur(yeni);
-    document.querySelectorAll("#solo-ses,#duel-ses").forEach(function (b) { b.textContent = yeni ? "🔇" : "🔊"; });
+  /* Görselleri arka planda, SIRAYLA ısıt: turlar arası "geç yükleme" flaşı kalmasın.
+     Sıralı yükleme bilinçli — 70 görseli aynı anda istemek ilk turu yavaşlatırdı. */
+  function gorselleriIsit() {
+    var kok = PAKET.meta.kok || "", i = 0, liste = PAKET.ogeler || [];
+    function sonraki() {
+      while (i < liste.length && !liste[i].gorsel) i++;
+      if (i >= liste.length) return;
+      var im = new Image();
+      im.onload = im.onerror = function () {
+        if (window.requestIdleCallback) requestIdleCallback(function () { sonraki(); }, { timeout: 500 });
+        else setTimeout(sonraki, 50);
+      };
+      im.decoding = "async";
+      im.src = kok + liste[i++].gorsel;
+    }
+    sonraki();
+  }
+
+  function ipucuYenidenSigdir() {
+    [soloTahta, duelUst, duelAlt].forEach(function (t) {
+      if (t && t._ipucuSigdir) { t._puntoEn = null; t._ipucuSigdir(); }
+    });
+  }
+
+  function sesDegis() {
+    BB.Ses.sustur(!BB.Ses.kapali);
+    sesIkonGuncelle();
+    try { localStorage.setItem("bakbak:ses", BB.Ses.kapali ? "kapali" : "acik"); } catch (e) {}
+  }
+
+  function sesIkonGuncelle() {
+    document.querySelectorAll(".ses-btn").forEach(function (b) {
+      b.classList.toggle("susturuldu", BB.Ses.kapali);
+      b.setAttribute("aria-pressed", BB.Ses.kapali ? "true" : "false");
+    });
   }
 
   function ekranGoster(id) {
@@ -404,12 +717,14 @@
 
   /* ---------------- TEK KİŞİ ---------------- */
   function soloBaslat() {
+    if (soloTahta) soloTahta.durdur();       // eski tahtanın bekleyen zamanlayıcılarını kes
     BB.Ses.init();
     ekranGoster("ekran-solo");
     el("modal-nasil").classList.add("gizli");
     soloTahta = new BB.Tahta(el("solo-tahta"), Object.assign({}, ayarTemel, {
       onTamam: soloBitti
     }));
+    window.__tahta = soloTahta;              // hata ayıklama kancası
     soloTahta.basla();
     soloBaslangic = performance.now();
     if (zamanlayici) clearInterval(zamanlayici);
@@ -422,8 +737,12 @@
     var yildiz = sonuc.yanlis === 0 ? 3 : (sonuc.yanlis <= 2 ? 2 : 1);
     var kayit = BB.Kayit.enIyiKaydet(PAKET.meta.id, sonuc.sureMs, yildiz);
 
-    el("bitti-yildiz").textContent = "⭐".repeat(yildiz) + "☆".repeat(3 - yildiz);
-    el("bitti-baslik").textContent = yildiz === 3 ? "Kusursuz! 🌟" : "Tebrikler!";
+    var yildizHtml = "";
+    for (var y = 0; y < 3; y++) {
+      yildizHtml += '<svg class="ik ' + (y < yildiz ? "dolu" : "bos") + '"><use href="#ik-yildiz"/></svg>';
+    }
+    el("bitti-yildiz").innerHTML = yildizHtml;
+    el("bitti-baslik").textContent = yildiz === 3 ? "Kusursuz!" : "Tebrikler!";
     el("bitti-sure").innerHTML = "Süre <b>" + zamanBiçim(sonuc.sureMs) + "</b> · Hata <b>" + sonuc.yanlis + "</b>" +
       (kayit.enIyiSure != null ? " · En iyi <b>" + zamanBiçim(kayit.enIyiSure) + "</b>" : "");
     el("bitti-not").textContent = sonuc.yanlis === 0
@@ -468,6 +787,8 @@
 
   /* ---------------- İKİ KİŞİ ---------------- */
   function duelBaslat() {
+    if (duelUst) duelUst.durdur();
+    if (duelAlt) duelAlt.durdur();
     BB.Ses.init();
     duelBitmis = false;
     ekranGoster("ekran-duel");

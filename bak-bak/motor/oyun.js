@@ -58,7 +58,7 @@ window.BB = window.BB || {};
   };
 
   Tahta.prototype.basla = function () {
-    this.dogru = 0; this.yanlis = 0; this.turIndex = 0; this.bitti = false;
+    this.dogru = 0; this.yanlis = 0; this.turIndex = 0; this.bitti = false; this._iptal = false;
     this.gorulen = [];                                  // bu oyunda karşılaşılan hedefler (bitiş özeti)
     this.baslangicT = performance.now();
     this._ilerlemeCiz();
@@ -156,7 +156,9 @@ window.BB = window.BB || {};
       if (pos === 4) {
         var c = document.createElement("div");
         c.className = "bb-orta";
-        c.innerHTML = '<span class="bb-orta-et">📖 İpucu</span>' +
+        c.setAttribute("role", "status");        // ipucu ekran okuyucuya duyurulsun
+        c.setAttribute("aria-live", "polite");
+        c.innerHTML = '<span class="bb-orta-et">İpucu</span>' +
                       '<span class="bb-orta-metin">' + (this.hedef.bilgi || this.hedef.ad) + "</span>";
         this.elMerkez = c;
         this.elIzgara.appendChild(c);
@@ -171,6 +173,51 @@ window.BB = window.BB || {};
         })(gorseller[gi++]);
       }
     }
+    this._ipucuSigdir();
+  };
+
+  /* İpucu metnini merkez karta TAM SIĞDIR — asla kırpma.
+     Oyunun kalbi ipucu; kırpılırsa soru çözülemez. Kart kare (aspect-ratio:1) kalsın diye
+     kutuyu büyütmüyoruz, fontu düşürüyoruz. Ölçüm hilesi: .bb-orta-metin overflow:hidden
+     olduğu için flex içindeki otomatik alt sınırı 0'a düşer → taşınca clientHeight kısılır,
+     scrollHeight > clientHeight olur. Font, sığana kadar 0.5px adımlarla azaltılır.
+     Üst sınır kart genişliğine bağlı (küçük ekranda küçük, büyük ekranda büyük font). */
+  Tahta.prototype._ipucuSigdir = function () {
+    var kutu = this.elMerkez;
+    if (!kutu) return;
+    var m = kutu.querySelector(".bb-orta-metin");
+    if (!m) return;
+    var en = kutu.clientWidth || 0;
+    if (!en) return;
+
+    // Punto oyun boyunca SABİT kalmalı: her tur değişen punto amatör durur.
+    // Bu yüzden ölçüyü EN UZUN ipucuna göre bir kez hesaplayıp önbelleğe alıyoruz;
+    // en uzun metin sığıyorsa hepsi sığar. Kart genişliği değişirse (döndürme) yeniden hesaplanır.
+    if (this._puntoEn !== en) {
+      var asil = m.textContent;
+      m.textContent = this._enUzunBilgi();
+      var fs = Math.max(10, Math.min(18, en * 0.115)), guard = 0;
+      m.style.fontSize = fs.toFixed(1) + "px";
+      while (fs > 8 && m.scrollHeight > m.clientHeight + 0.5 && guard++ < 48) {
+        fs -= 0.5;
+        m.style.fontSize = fs.toFixed(1) + "px";
+      }
+      this._punto = fs;
+      this._puntoEn = en;
+      m.textContent = asil;
+    }
+    m.style.fontSize = this._punto.toFixed(1) + "px";
+  };
+
+  Tahta.prototype._enUzunBilgi = function () {
+    if (this._enUzun == null) {
+      this._enUzun = "";
+      for (var i = 0; i < this.ogeler.length; i++) {
+        var b = this.ogeler[i].bilgi || this.ogeler[i].ad || "";
+        if (b.length > this._enUzun.length) this._enUzun = b;
+      }
+    }
+    return this._enUzun;
   };
 
   /* Görsel öğe: <img> + emoji yedeği (PNG yüklenmezse emoji gösterir) */
@@ -178,7 +225,7 @@ window.BB = window.BB || {};
     var emoji = oge.emoji || "❓";
     if (oge.gorsel) {
       var src = this.kok + oge.gorsel;
-      return '<span class="' + cls + '"><img src="' + src + '" alt="' + oge.ad + '" draggable="false" ' +
+      return '<span class="' + cls + '"><img src="' + src + '" alt="' + oge.ad + '" draggable="false" decoding="async" ' +
         "onerror=\"this.parentNode.classList.add('bb-emoji');this.parentNode.textContent='" + emoji + "';\"></span>";
     }
     return '<span class="' + cls + ' bb-emoji">' + emoji + "</span>";
@@ -189,7 +236,7 @@ window.BB = window.BB || {};
     if (mod === "bilgi") {
       this.elHedef.className = "bb-hedef bb-hedef--bilgi";
       this.elHedef.innerHTML =
-        '<span class="bb-hedef-etiket">📖 Bilgi kartı</span>' +
+        '<span class="bb-hedef-etiket">Bilgi kartı</span>' +
         '<span class="bb-hedef-bilgi">' + (h.bilgi || h.ad) + "</span>";
     } else if (mod === "kelime") {
       this.elHedef.className = "bb-hedef bb-hedef--kelime";
@@ -250,10 +297,10 @@ window.BB = window.BB || {};
         this.bitti = true;
         var sonuc = { dogru: this.dogru, yanlis: this.yanlis, sureMs: performance.now() - this.baslangicT, kelime: this.hedefKelime, gorulenler: this.gorulen };
         BB.Ses.kazandi();
-        setTimeout(function () { self.onTamam(sonuc); }, 450);
+        this._zaman(function () { self.onTamam(sonuc); }, 450);
       } else {
         this._cevabiGoster();                              // cevabı kısa süre göster (öğrenme pekiştirme)
-        setTimeout(function () { self.yeniTur(); }, this.mod === "tahta" ? 1000 : 720);
+        this._zaman(function () { self.yeniTur(); }, this.mod === "tahta" ? 1000 : 720);
       }
     } else {
       this.yanlis++;
@@ -261,7 +308,7 @@ window.BB = window.BB || {};
       BB.Ses.yanlis();
       this.onYanlis({ oge: oge, dogru: this.dogru, yanlis: this.yanlis });
       this.kilit = true;
-      setTimeout(function () { el.classList.remove("bb-yanlis"); if (!self.bitti) self.kilit = false; }, 420);
+      this._zaman(function () { el.classList.remove("bb-yanlis"); if (!self.bitti) self.kilit = false; }, 420);
     }
   };
 
@@ -275,13 +322,32 @@ window.BB = window.BB || {};
   };
 
   Tahta.prototype._ilerlemeArtir = function () {
+    var self = this;
     var harfEl = this.elIlerleme.querySelectorAll(".bb-harf");
     for (var i = 0; i < harfEl.length; i++) if (i < this.dogru) harfEl[i].classList.add("dolu");
     var yeni = harfEl[this.dogru - 1];
-    if (yeni) { yeni.classList.add("yeni"); setTimeout(function () { yeni.classList.remove("yeni"); }, 400); }
+    if (yeni) { yeni.classList.add("yeni"); self._zaman(function () { yeni.classList.remove("yeni"); }, 400); }
   };
 
-  Tahta.prototype.durdur = function () { this.kilit = true; this.bitti = true; };
+  /* Zamanlayıcı kaydı: durdur() bekleyen TÜM setTimeout'ları iptal eder.
+     Yoksa "↻ Baştan"a basınca eski tahtanın bekleyen onTamam'ı yeni oyunu bitiriyordu. */
+  Tahta.prototype._zaman = function (fn, ms) {
+    var self = this;
+    if (!this._timers) this._timers = [];
+    var id = setTimeout(function () {
+      self._timers = self._timers.filter(function (t) { return t !== id; });
+      if (self._iptal) return;
+      fn();
+    }, ms);
+    this._timers.push(id);
+    return id;
+  };
+
+  Tahta.prototype.durdur = function () {
+    this.kilit = true; this.bitti = true; this._iptal = true;
+    (this._timers || []).forEach(clearTimeout);
+    this._timers = [];
+  };
 
   BB.Tahta = Tahta;
   BB.util = { karistir: karistir, harfSay: harfSay };

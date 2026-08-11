@@ -4,7 +4,7 @@
    Hata verse bile oyunun online çalışması etkilenmez.
    ============================================================ */
 "use strict";
-var CACHE_ADI = "bak-bak-v2";
+var CACHE_ADI = "bak-bak-v3";
 var CACHE_DOSYALARI = [
   "./", "index.html",
   "lib/tokens.css", "lib/scorm.js",
@@ -38,7 +38,18 @@ self.addEventListener("fetch", function (event) {
     }).catch(function () { return caches.match(event.request); }));
     return;
   }
+  // Görsel/font vb.: önbellek-önce. ÖNEMLİ: ıskalayınca ağdan alıp ÖNBELLEĞE DE YAZ,
+  // yoksa çevrimdışında hiçbir görsel gelmez (kartlar boş kalır).
   event.respondWith(caches.match(event.request).then(function (r) {
-    return r || fetch(event.request).catch(function () { return r; });
+    if (r) return r;
+    return fetch(event.request).then(function (yanit) {
+      try {
+        if (yanit && yanit.ok && yanit.type !== "opaque") {
+          var kopya = yanit.clone();
+          caches.open(CACHE_ADI).then(function (c) { c.put(event.request, kopya); }).catch(function () {});
+        }
+      } catch (e) {}
+      return yanit;
+    }).catch(function () { return r; });
   }));
 });

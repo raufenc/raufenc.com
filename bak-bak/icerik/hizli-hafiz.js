@@ -11,6 +11,7 @@ window.PAKET = {
     "id": "hizli-hafiz",
     "oyunAdi": "Hızlı Hafız",
     "logo": "🧠",
+    "logoIkon": "ik-gul",
     "ad": "",
     "altBaslik": "İpucundan Bul — Görsel Dikkat",
     "ders": "Din Kültürü ve Ahlâk Bilgisi",
