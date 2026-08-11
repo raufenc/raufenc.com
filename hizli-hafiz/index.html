@@ -2,7 +2,9 @@
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<!-- maximum-scale/user-scalable KALDIRILDI: yakınlaştırma engeli WCAG 1.4.4 ihlali;
+     az gören öğrenci ipucunu ve kart üzerindeki minik sembolleri büyütebilmeli. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <base href="/hizli-hafiz/">
 <title>Hızlı Hafız</title>
 <style>
@@ -185,21 +187,145 @@
   .tus-sat .rozet{margin-left:auto;background:#0d1730;color:#ffe9b0;border-radius:8px;padding:4px 12px;font-weight:800;min-width:44px;text-align:center}
   .tus-sat .deg{border:2px solid var(--altin);background:#fff6df;color:var(--lacivert);border-radius:8px;padding:5px 10px;font-family:inherit;font-size:13px;cursor:pointer}
   .tus-sat.bekliyor .rozet{background:var(--kirmizi);animation:nabiz 1s infinite}
+
+  /* ============================================================
+     PREMIUM + ERİŞİLEBİLİRLİK KATMANI (sonda: bilinçli ezer)
+     ============================================================ */
+
+  /* 1) Yakınlaşma ekranı: sütun düzeni → ipucu üstte OKUNUR, kapat altta (çakışma yok). */
+  #yakin{flex-direction:column;gap:clamp(8px,1.6vh,14px)}
+  .yk-ipucu{max-width:min(680px,92vw);background:linear-gradient(180deg,#fff7e4,#f3e6c6);
+    border:2px solid var(--altin);border-radius:14px;padding:9px 16px;flex:0 0 auto;
+    font-size:clamp(13px,2.5vw,17px);line-height:1.35;color:var(--metin);text-align:center;
+    box-shadow:0 6px 20px rgba(0,0,0,.4)}
+  .yk-kart{position:relative;flex:0 1 auto;width:min(94vw,min(560px,68vh));aspect-ratio:1;
+    border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .yk-kapat{flex:0 0 auto;background:#fff6df;color:var(--lacivert);border:none;border-radius:999px;
+    padding:11px 22px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;
+    min-height:44px;box-shadow:0 3px 10px rgba(0,0,0,.35)}
+
+  /* 2) Zemin: düz krem yerine ince tezhip dokusu + sıcak vinyet (kartların diliyle uyumlu). */
+  body{
+    background:
+      radial-gradient(ellipse 78% 62% at 50% 45%, transparent 55%, rgba(120,95,45,.13) 100%),
+      repeating-conic-gradient(from 45deg at 50% 50%,
+        rgba(160,125,60,.030) 0deg 15deg, transparent 15deg 30deg),
+      radial-gradient(120% 90% at 50% -10%, #fbf4e2 0%, var(--krem) 45%, var(--krem2) 100%);
+    background-size:auto, 46px 46px, auto;
+    background-attachment:fixed;
+  }
+
+  /* 3) İlerleme harfleri: 22x28 minik ve soluktu (kontrast ~1.4:1) → daha büyük, altın kitâbe. */
+  .harf{width:clamp(24px,3.4vw,32px);height:clamp(30px,4.2vw,40px);font-size:clamp(15px,2.2vw,20px);
+        color:#8a7647;background:#ece0c0;box-shadow:inset 0 0 0 1px #cbb888}
+  .harf.dolu{color:var(--lacivert);text-shadow:0 1px 0 rgba(255,255,255,.55);
+             box-shadow:0 2px 6px var(--golge),inset 0 1px 0 rgba(255,255,255,.6)}
+  @media(max-width:430px){ .harf{width:21px;height:27px;font-size:14px} }
+  .sayac{font-size:clamp(15px,2vw,19px)}
+
+  /* 4) Dokunma hedefi 40px < 44px (WCAG 2.5.5) → 44px. */
+  .ikon-btn{width:44px;height:44px;font-size:20px}
+
+  /* 5) Görünür odak halkası — klavyeyle oynanabilirlik. */
+  .kart:focus-visible,.btn:focus-visible,.ikon-btn:focus-visible,.chip:focus-visible,
+  .kisiler button:focus-visible,.yk-kapat:focus-visible,.yk-h:focus-visible,.nokta:focus-visible{
+    outline:3px solid var(--aktif);outline-offset:3px;border-radius:12px;
+  }
+
+  /* 5b) Giriş ekranı alçak/yatay ekranda TAŞIYOR ve "Nasıl Oynanır"/"Ayarlar"
+         tıklanamıyordu (body overflow:hidden + flex ortalama = üst taraf kırpılır,
+         kaydırılamaz). ::before/::after + margin:auto ortalamayı korur AMA taşınca
+         düzgün kaydırılır. */
+  #giris{max-height:100dvh;overflow-y:auto;justify-content:flex-start;
+         -webkit-overflow-scrolling:touch}
+  #giris::before,#giris::after{content:"";margin:auto;flex:0 0 0}
+  #giris>*{flex-shrink:0}
+  @media (max-height:560px){
+    .logo-ik{width:46px;height:46px}
+    #giris h1{font-size:clamp(26px,6vw,36px)}
+    .altbaslik{font-size:13px;margin-bottom:2px}
+    .menu{margin-top:12px;gap:8px}
+    .btn{font-size:16px;padding:11px 16px}
+    #giris-durum{margin-top:8px}
+  }
+  /* Yatay telefon (geniş ama alçak): menü iki sütun → 4 düğme de ekrana sığar. */
+  @media (max-height:520px) and (min-width:600px){
+    .menu{display:grid;grid-template-columns:1fr 1fr;width:min(620px,92vw)}
+  }
+
+  /* 6b) Satır içi SVG ikonlar — emoji yerine, currentColor ile paletten beslenir. */
+  .ik{width:1em;height:1em;display:block;fill:none;stroke:currentColor;
+      stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .logo{font-size:0;display:flex;justify-content:center;filter:none}
+  .logo-ik{width:clamp(58px,13vw,76px);height:clamp(58px,13vw,76px);
+           stroke-width:1.25;color:var(--altin);filter:drop-shadow(0 3px 9px var(--golge))}
+  .btn .k{display:flex;align-items:center;font-size:0}
+  .btn .k .ik{width:23px;height:23px}
+  .ikon-btn .ik{width:21px;height:21px;margin:0 auto}
+  .ik-h2{display:inline-block;width:1.05em;height:1.05em;vertical-align:-.14em;stroke-width:1.6}
+
+  /* 6) Hareket duyarlılığı: 'salla'/'nabiz'/'gpop' dâhil tüm hareket kısılsın. */
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+      animation-duration:.01ms!important;animation-iteration-count:1!important;
+      transition-duration:.01ms!important;scroll-behavior:auto!important;
+    }
+  }
 </style>
 </head>
 <body>
 
+<!-- ===== İKON SETİ (satır içi SVG — emoji yerine) =====
+     Emoji her cihazda farklı çiziliyor ve ürünü ucuzlatıyordu; bunlar
+     currentColor ile paletten beslenen, tutarlı çizgi ağırlıklı ikonlar. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="ik-gul" viewBox="0 0 64 64"><!-- tezhip gülü / rub'ul hizb -->
+      <rect x="14" y="14" width="36" height="36" rx="3"/>
+      <rect x="14" y="14" width="36" height="36" rx="3" transform="rotate(45 32 32)"/>
+      <circle cx="32" cy="32" r="12.5"/><circle cx="32" cy="32" r="5.4"/>
+      <path d="M32 6.4v5M32 52.6v5M6.4 32h5M52.6 32h5"/>
+    </symbol>
+    <symbol id="ik-tek" viewBox="0 0 24 24">
+      <circle cx="12" cy="8.2" r="3.4"/><path d="M5.6 19.4a6.4 6.4 0 0 1 12.8 0"/>
+    </symbol>
+    <symbol id="ik-iki" viewBox="0 0 24 24">
+      <circle cx="9" cy="8.6" r="3"/><path d="M3.4 19a5.6 5.6 0 0 1 11.2 0"/>
+      <path d="M16.2 6.1a3 3 0 0 1 0 5.5"/><path d="M17.4 14.3a5.6 5.6 0 0 1 3.2 4.7"/>
+    </symbol>
+    <symbol id="ik-kitap" viewBox="0 0 24 24">
+      <path d="M3.6 5.2h5.2a3.2 3.2 0 0 1 3.2 3.2v10a2.6 2.6 0 0 0-2.6-2.6H3.6z"/>
+      <path d="M20.4 5.2h-5.2a3.2 3.2 0 0 0-3.2 3.2v10a2.6 2.6 0 0 1 2.6-2.6h5.8z"/>
+    </symbol>
+    <symbol id="ik-ayar" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="3.2"/>
+      <path d="M12 2.6v2.8M12 18.6v2.8M21.4 12h-2.8M5.4 12H2.6M18.6 5.4l-2 2M7.4 16.6l-2 2M18.6 18.6l-2-2M7.4 7.4l-2-2"/>
+    </symbol>
+    <symbol id="ik-ev" viewBox="0 0 24 24">
+      <path d="M4 20v-9.2L12 4l8 6.8V20"/><path d="M9.4 20v-5a2.6 2.6 0 0 1 5.2 0v5"/>
+    </symbol>
+    <symbol id="ik-ampul" viewBox="0 0 24 24">
+      <path d="M9.2 16.4a6 6 0 1 1 5.6 0"/><path d="M9.6 18.6h4.8M10.4 21h3.2"/>
+    </symbol>
+    <symbol id="ik-kupa" viewBox="0 0 24 24">
+      <path d="M7.5 4h9v5.2a4.5 4.5 0 0 1-9 0z"/>
+      <path d="M7.5 5.6H5.2a2.6 2.6 0 0 0 2.6 4.2M16.5 5.6h2.3a2.6 2.6 0 0 1-2.6 4.2"/>
+      <path d="M12 13.8V17M8.8 20h6.4M9.8 17h4.4l.6 3H9.2z"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- GİRİŞ -->
 <section id="giris">
-  <div class="logo">🧠</div>
+  <div class="logo"><svg class="ik logo-ik"><use href="#ik-gul"/></svg></div>
   <h1>Hızlı Hafız</h1>
   <p class="altbaslik">İpucundan bul — görsel dikkat oyunu</p>
   <span class="rozet">Din Kültürü ve Ahlâk Bilgisi · 3–8</span>
   <div class="menu">
-    <button class="btn" onclick="Oyun.basla('tek')"><span class="k">👤</span> Tek Kişi</button>
-    <button class="btn" onclick="Ekran.arkadas()"><span class="k">👥</span> Arkadaşlarla Oyna</button>
-    <button class="btn ikincil" onclick="Ekran.nasil()"><span class="k">📖</span> Nasıl Oynanır</button>
-    <button class="btn ikincil" onclick="Ekran.ayar()"><span class="k">⚙️</span> Ayarlar</button>
+    <button class="btn" onclick="Oyun.basla('tek')"><span class="k"><svg class="ik"><use href="#ik-tek"/></svg></span> Tek Kişi</button>
+    <button class="btn" onclick="Ekran.arkadas()"><span class="k"><svg class="ik"><use href="#ik-iki"/></svg></span> Arkadaşlarla Oyna</button>
+    <button class="btn ikincil" onclick="Ekran.nasil()"><span class="k"><svg class="ik"><use href="#ik-kitap"/></svg></span> Nasıl Oynanır</button>
+    <button class="btn ikincil" onclick="Ekran.ayar()"><span class="k"><svg class="ik"><use href="#ik-ayar"/></svg></span> Ayarlar</button>
   </div>
   <p id="giris-durum"></p>
 </section>
@@ -207,7 +333,7 @@
 <!-- OYUN -->
 <section id="oyun" class="gizli">
   <div class="ust">
-    <button class="ikon-btn" onclick="Oyun.cik()" title="Ana menü">🏠</button>
+    <button class="ikon-btn" onclick="Oyun.cik()" title="Ana menü" aria-label="Ana menü"><svg class="ik"><use href="#ik-ev"/></svg></button>
     <div class="ilerleme" id="ilerleme"></div>
     <div class="sayac" id="sayac">0:00</div>
   </div>
@@ -221,8 +347,8 @@
 </section>
 
 <!-- Çok-oyunculu yüzen düğmeler -->
-<button class="yuzen sol ikon-btn" onclick="Oyun.cik()" title="Ana menü">🏠</button>
-<button class="yuzen sag ikon-btn" onclick="Oyun.ipucuTekrar()" title="İpucu">💡</button>
+<button class="yuzen sol ikon-btn" onclick="Oyun.cik()" title="Ana menü" aria-label="Ana menü"><svg class="ik"><use href="#ik-ev"/></svg></button>
+<button class="yuzen sag ikon-btn" onclick="Oyun.ipucuTekrar()" title="İpucu" aria-label="İpucunu tekrar göster"><svg class="ik"><use href="#ik-ampul"/></svg></button>
 
 <!-- Kenar buzz şeritleri (tablet) + alt buzz bar (karşıdan) -->
 <div id="kenarlar"></div>
@@ -287,7 +413,7 @@ const Ekran={
   },
   arkadas(){
     this.perde(`
-      <h2>👥 Arkadaşlarla Oyna</h2>
+      <h2><svg class="ik ik-h2"><use href="#ik-iki"/></svg> Arkadaşlarla Oyna</h2>
       <p class="not-kucuk">Aynı ekranda yarışın. Herkesin bir rengi ve bir tuşu / kenarı var.</p>
       <div class="kisiler">
         <button onclick="Ekran.kapat();Oyun.basla('cok',2)">2<small>kişi</small></button>
@@ -367,11 +493,32 @@ const Oyun={
 
   async yukle(){
     try{
-      const r=await fetch('icerik/katalog.json'); this.veri=await r.json();
+      const r=await fetch('icerik/katalog.json');
+      // r.ok kontrolü ŞART: 404 HTML dönerse json() "Unexpected token '<'" diye
+      // anlaşılmaz patlıyordu (slash'sız URL vakası). Net mesaj ver.
+      if(!r.ok) throw new Error('katalog bulunamadı ('+r.status+')');
+      this.veri=await r.json();
       this.veri.kartlar.forEach((k,ki)=>k.items.forEach(it=>{ (this.sidHaritasi[it.sid]=this.sidHaritasi[it.sid]||[]).push({ki,it}); }));
       this.havuz=Object.keys(this.veri.semboller).filter(sid=>{ const s=this.veri.semboller[sid]; return s.ben && s.ben.length>4 && this.sidHaritasi[sid]; });
       $('#giris-durum').textContent=`${this.veri.kartlar.length} kart · ${this.havuz.length} oynanır sembol hazır`;
+      this.kartlariIsit();
     }catch(e){ $('#giris-durum').textContent='Katalog yüklenemedi: '+e.message; }
+  },
+  /* 8 kart görseli ~5 MB: menüdeyken SIRAYLA arka planda ısıt. Sıralı olması bilinçli —
+     hepsini aynı anda istemek ilk tahta çizimini ve yakınlaşmayı geciktiriyordu. */
+  kartlariIsit(){
+    const liste=(this.veri&&this.veri.kartlar||[]).map(k=>k.gorsel).filter(Boolean);
+    let i=0;
+    const sonraki=()=>{
+      if(i>=liste.length) return;
+      const im=new Image(); im.decoding='async';
+      im.onload=im.onerror=()=>{
+        if(window.requestIdleCallback) requestIdleCallback(()=>sonraki(),{timeout:500});
+        else setTimeout(sonraki,50);
+      };
+      im.src=liste[i++];
+    };
+    sonraki();
   },
   modAyarla(v){ this.mod=v; localStorage.setItem('hh:mod',v); Ekran.ayar(); },
   ipucuAyarla(v){ this.ipucuKip=v; localStorage.setItem('hh:ipucu',v); Ekran.ayar(); },
@@ -445,7 +592,11 @@ const Oyun={
     const t=$('#tahta'); t.className='tahta'+(this.kip==='tek'&&this.mod==='sembol'?' hepsi':''); t.innerHTML='';
     this.veri.kartlar.forEach((k,ki)=>{
       const d=document.createElement('div'); d.className='kart'; d.dataset.ki=ki;
-      d.innerHTML=`<div class="kart-ic"><span class="no">${k.no}</span><img src="${k.gorsel}" alt="Kart ${k.no}"></div>`;
+      // klavye erişimi: <div> kalıyor (rotasyon .kart-ic katmanı ve CSS buna bağlı),
+      // ama düğme semantiği + Enter/Space ekleniyor.
+      d.setAttribute('role','button'); d.tabIndex=0;
+      d.setAttribute('aria-label',`Kart ${k.no}`);
+      d.innerHTML=`<div class="kart-ic"><span class="no">${k.no}</span><img src="${k.gorsel}" alt="" decoding="async"></div>`;
       const ic=d.querySelector('.kart-ic');
       if(this.kip==='tek' && this.mod==='sembol'){
         k.items.forEach(it=>{
@@ -457,6 +608,9 @@ const Oyun={
       }else{
         d.onclick=()=>this.kartTikla(ki,d);
       }
+      d.onkeydown=e=>{
+        if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){ e.preventDefault(); d.click(); }
+      };
       t.appendChild(d);
     });
     this.yonleriUygula();
@@ -522,20 +676,30 @@ const Oyun={
     let ov=$('#yakin'); if(!ov){ ov=document.createElement('div'); ov.id='yakin'; document.body.appendChild(ov);
       Object.assign(ov.style,{position:'fixed',inset:0,background:'rgba(22,35,63,.72)',backdropFilter:'blur(3px)',display:'flex',alignItems:'center',justifyContent:'center',padding:'14px',zIndex:50}); }
     ov.style.display='flex';
-    let h=`<button id="yk-kapat" style="position:absolute;top:14px;left:50%;transform:translateX(-50%);background:#fff6df;color:#16233f;border:none;border-radius:999px;padding:8px 18px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.35)">✕ Kapat</button>
-      <div style="position:relative;width:min(94vw,min(560px,82vh));aspect-ratio:1;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.5)"><img src="${kart.gorsel}" style="width:100%;height:100%;object-fit:cover;display:block">`;
+    // İPUCU yakınlaşmada da OKUNABİLİR olmalı: panel/pop arkada kalıyordu (z-index 35 < 50),
+    // çocuk kartı incelerken ipucunu ezberlemek zorunda kalıyordu. Şerit overlay'in İÇİNDE.
+    const ipMetin=(this.veri.semboller[this.hedef]||{}).ben||'';
+    let h=`<div class="yk-ipucu">${ipMetin}</div>
+      <div class="yk-kart"><img src="${kart.gorsel}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">`;
     kart.items.forEach(it=>{ const boy=(it.boy||20);
       h+=`<button class="yk-h" data-sid="${it.sid}" style="position:absolute;left:${it.x}%;top:${it.y}%;width:${boy}%;height:${boy}%;transform:translate(-50%,-50%);border-radius:50%;background:transparent;border:none;cursor:pointer"></button>`; });
-    h+='</div>'; ov.innerHTML=h;
+    h+='</div><button id="yk-kapat" class="yk-kapat" aria-label="Kartı kapat">✕ Kapat</button>';
+    ov.innerHTML=h;
     $('#yk-kapat').onclick=()=>this.yakinKapat();
     ov.onclick=e=>{ if(e.target===ov) this.yakinKapat(); };
+    // Esc ile kapat (klavye kullanıcısı overlay'de kilitli kalmasın)
+    this._yakinEsc=e=>{ if(e.key==='Escape'){ e.preventDefault(); this.yakinKapat(); } };
+    document.addEventListener('keydown',this._yakinEsc);
     ov.querySelectorAll('.yk-h').forEach(b=>b.onclick=()=>{
       if(this.kilit) return;
       if(b.dataset.sid===this.hedef){ this.kilit=true; b.style.boxShadow='0 0 0 4px var(--yesil),0 0 22px 6px rgba(63,122,77,.7)'; b.style.background='radial-gradient(circle,rgba(63,122,77,.28),transparent 70%)'; setTimeout(()=>{ this.yakinKapat(); this.dogruCevap(); },560); }
       else{ b.style.boxShadow='0 0 0 4px var(--kirmizi)'; setTimeout(()=>b.style.boxShadow='none',450); }
     });
   },
-  yakinKapat(){ const ov=$('#yakin'); if(ov){ ov.style.display='none'; ov.innerHTML=''; } },
+  yakinKapat(){
+    const ov=$('#yakin'); if(ov){ ov.style.display='none'; ov.innerHTML=''; }
+    if(this._yakinEsc){ document.removeEventListener('keydown',this._yakinEsc); this._yakinEsc=null; }
+  },
 
   secildi(sid,b,el){ // solo 'sembol'
     if(this.kilit) return;
@@ -558,7 +722,7 @@ const Oyun={
   },
   bitti(){
     clearInterval(this.sayacT);
-    Ekran.perde(`<h2>🎉 Tamamlandı!</h2><p>HIZLI HAFIZ kelimesini <b>${$('#sayac').textContent}</b> sürede tamamladın.</p>
+    Ekran.perde(`<h2><svg class="ik ik-h2"><use href="#ik-gul"/></svg> Tamamlandı!</h2><p>HIZLI HAFIZ kelimesini <b>${$('#sayac').textContent}</b> sürede tamamladın.</p>
       <button class="btn" onclick="Ekran.kapat();Oyun.basla('tek');">Tekrar Oyna</button>
       <button class="btn ikincil" style="margin-top:8px" onclick="Ekran.kapat();Oyun.cik();">Ana Menü</button>`);
   },
@@ -630,7 +794,7 @@ const Oyun={
   },
   cokBitti(o){
     this.geriSayimDur(); this.durum='bitti';
-    Ekran.perde(`<h2 style="color:${o.renk}">🏆 ${o.id+1}. Oyuncu kazandı!</h2>
+    Ekran.perde(`<h2 style="color:${o.renk}"><svg class="ik ik-h2"><use href="#ik-kupa"/></svg> ${o.id+1}. Oyuncu kazandı!</h2>
       <p>${this.hedefSkor} doğruya ilk ulaşan oldu.</p>
       <div style="margin:8px 0">${this.oyuncular.map(x=>`<div style="color:${x.renk};font-weight:700">${x.id+1}. Oyuncu — ${x.skor}</div>`).join('')}</div>
       <button class="btn" onclick="Ekran.kapat();Oyun.basla('cok',${this.sayi});">Tekrar Oyna</button>
