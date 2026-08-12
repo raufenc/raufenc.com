@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bulgu Masası — TYMM Felsefe Uyum Denetimi</title>
+  <meta name="description" content="Felsefe 10. sınıf 1. tema için yedi uyum bulgusunu beklenti, kanıt, sorun ve doğrudan kullanılabilir düzeltme düzeninde gösteren kompakt karar masası.">
+  <meta name="theme-color" content="#0b2d3b">
+  <link rel="canonical" href="https://raufenc.com/bulgu-masasi/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Rauf Enç">
+  <meta property="og:url" content="https://raufenc.com/bulgu-masasi/">
+  <meta property="og:title" content="Bulgu Masası — 7 bulgu, tek karar ekranı">
+  <meta property="og:description" content="TYMM Ortak Metni ile Felsefe Programı arasındaki uyum sorunlarını tek bakışta görün.">
+  <meta property="og:image" content="https://raufenc.com/bulgu-masasi/og-bulgu-masasi.png">
+  <meta property="og:image:width" content="1536">
+  <meta property="og:image:height" content="864">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bulgu Masası — 7 bulgu, tek karar ekranı">
+  <meta name="twitter:description" content="Beklenti → kanıt → sorun → düzeltme akışında TYMM uyum denetimi.">
+  <meta name="twitter:image" content="https://raufenc.com/bulgu-masasi/og-bulgu-masasi.png">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Bulgu Masası",
+    "url": "https://raufenc.com/bulgu-masasi/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Web",
+    "inLanguage": "tr",
+    "description": "TYMM Ortak Metni ile Felsefe Dersi Öğretim Programı arasındaki uyum bulgularını kompakt karar ekranında gösterir."
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#workbench">İçeriğe geç</a>
+  <main id="app">
+    <header class="app-header">
+      <a class="brand" href="#top" aria-label="Bulgu Masası ana sayfa">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>BULGU MASASI</strong><small>TYMM Uyum Denetimi</small></span>
+      </a>
+      <div class="scope" aria-label="İnceleme kapsamı"><b>FELSEFE 10</b><span>1. Tema / Ünite</span><span>FEL.10.1.1</span></div>
+      <div class="header-actions">
+        <button id="presentation-button" type="button"><span aria-hidden="true">▣</span><b>Sunum modu</b></button>
+        <button id="print-button" type="button"><span aria-hidden="true">▤</span><b>Yazdır</b></button>
+        <button id="csv-button" class="primary" type="button"><span aria-hidden="true">↓</span><b>CSV indir</b></button>
+      </div>
+    </header>
+
+    <section class="summary" id="top" aria-labelledby="summary-title">
+      <div class="summary-title"><span>TEK BAKIŞTA SONUÇ</span><strong id="summary-title">Uyum yüksek; <em>7 nokta açıklaştırılmalı.</em></strong></div>
+      <div class="summary-metric danger"><small>Düzeltme gereken</small><strong>7</strong><span>6 anlamsal · 1 yapısal</span></div>
+      <div class="summary-metric success"><small>Doğrudan karşılık</small><strong>15</strong><span>aynen korunabilir</span></div>
+      <div class="summary-progress">
+        <div><span>Komisyon incelemesi</span><b id="review-count">0 / 7</b></div>
+        <i aria-hidden="true"><b id="review-progress"></b></i>
+      </div>
+    </section>
+
+    <nav class="view-tabs" aria-label="Görünüm seçimi">
+      <button class="view-tab active" data-view="desk" type="button"><span aria-hidden="true">◉</span> Tek tek incele <b>7</b></button>
+      <button class="view-tab" data-view="table" type="button"><span aria-hidden="true">▦</span> Toplu hata tablosu</button>
+      <button class="view-tab" data-view="matched" type="button"><span aria-hidden="true">✓</span> Uyumlu olanlar <b>15</b></button>
+      <span class="method-note">Her bulgu: <b>beklenti → kanıt → sorun → düzeltme</b></span>
+    </nav>
+
+    <section id="desk-view" class="view-panel active">
+      <div class="workbench" id="workbench">
+        <aside class="finding-sidebar" aria-label="Bulgu listesi">
+          <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Kod veya sorun ara…" autocomplete="off"><span class="sr-only">Bulgu ara</span></label>
+          <div class="kind-filters" id="kind-filters" aria-label="Hata türüne göre süz">
+            <button class="active" data-kind="Tümü" type="button">Tümü</button>
+            <button data-kind="Anlam daralması" type="button">Anlam daralması</button>
+            <button data-kind="Eylem zayıflaması" type="button">Eylem zayıflaması</button>
+            <button data-kind="Yapısal belirsizlik" type="button">Yapısal belirsizlik</button>
+          </div>
+          <div class="result-count"><span aria-hidden="true">☷</span><span id="result-count">7 bulgu gösteriliyor</span></div>
+          <div class="finding-list" id="finding-list"></div>
+        </aside>
+
+        <article class="finding-detail" id="finding-detail" aria-live="polite">
+          <header class="detail-header">
+            <div>
+              <div class="detail-meta"><span id="detail-code"></span><i></i><span id="detail-process"></span></div>
+              <h1 id="detail-title"></h1>
+            </div>
+            <span id="kind-badge" class="kind-badge"></span>
+          </header>
+
+          <section class="verb-shift" aria-label="Programdaki ifade ile beklenen ifade arasındaki fark">
+            <div class="before"><small>PROGRAMDAKİ EYLEM</small><strong id="current-short"></strong></div>
+            <div class="shift-arrow"><b aria-hidden="true">→</b><span>ANLAM / EYLEM<br>GÜÇLENDİRİLMELİ</span></div>
+            <div class="after"><small>GEREKEN EYLEM</small><strong id="required-short"></strong></div>
+          </section>
+
+          <section class="evidence-grid">
+            <div class="evidence-card requirement"><span><b aria-hidden="true">1</b> ORTAK METİN NE İSTİYOR?</span><p id="common-requirement"></p></div>
+            <div class="evidence-card existing"><span><b aria-hidden="true">2</b> PROGRAMDA NE VAR?</span><p id="program-evidence"></p></div>
+            <div class="evidence-card problem"><span><b aria-hidden="true">3</b> NEDEN SORUN?</span><p id="diagnosis"></p></div>
+          </section>
+
+          <section class="fix-card">
+            <div class="fix-number" aria-hidden="true">4</div>
+            <div><span>DOĞRUDAN KULLANILABİLECEK DÜZELTME</span><p>“<span id="recommendation"></span>”</p><small id="source"></small></div>
+            <button id="copy-button" type="button"><span aria-hidden="true">▣</span> Metni kopyala</button>
+          </section>
+
+          <footer class="detail-actions">
+            <div><button id="previous-button" type="button"><span aria-hidden="true">←</span> Önceki</button><button id="next-button" type="button">Sonraki <span aria-hidden="true">→</span></button></div>
+            <button id="review-button" class="review-button" type="button"><span aria-hidden="true">○</span> Komisyonca incelendi</button>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <section id="table-view" class="view-panel table-view" aria-labelledby="table-title">
+      <div class="view-heading"><div><small>TOPLU GÖRÜNÜM</small><h1 id="table-title">Yedi bulgu, tek karar tablosu</h1></div><p>Toplantıda bütün meseleleri aynı anda görmek için. Bir satıra dokununca ayrıntılı inceleme ekranı açılır.</p></div>
+      <div class="compact-table" id="compact-table"></div>
+    </section>
+
+    <section id="matched-view" class="view-panel matched-view" aria-labelledby="matched-title">
+      <div class="view-heading"><div><small>GEREKSİZ YÜK YOK</small><h1 id="matched-title">Sorun bulunmayan 15 karşılık</h1></div><p>Komisyonun zamanı hatalara ayrılır. Doğrudan karşılanan süreçler burada kısa bir doğrulama listesi olarak tutulur.</p></div>
+      <div class="matched-grid" id="matched-grid"></div>
+    </section>
+
+    <footer class="app-footer">
+      <span>ÖN BULGU · UZMAN DOĞRULAMASIYLA KESİNLEŞİR</span>
+      <p>Kaynaklar: TYMM Ortak Metin s.80–81 · Felsefe Dersi Öğretim Programı s.13–16</p>
+      <a href="https://tymm.meb.gov.tr/" target="_blank" rel="noopener">TYMM resmî sitesi <span aria-hidden="true">→</span></a>
+    </footer>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
