@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#102a3d">
+  <meta name="description" content="7. sınıf Arapça, Ünite 2 için ses odaklı etkileşimli alışveriş macerası.">
+  <title>Sepette Ne Eksik? — Şenlik Görevleri</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">İçeriğe geç</a>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-block" aria-label="Şenlik Görevleri">
+        <span class="brand-mark" aria-hidden="true">٢</span>
+        <div>
+          <p class="eyebrow">مَهَمّاتُ المِهْرَجان</p>
+          <p class="brand-name">Şenlik Görevleri</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <a class="icon-button" href="/7sinif/" aria-label="7. sınıf ana sayfasına dön">
+          <span aria-hidden="true">⌂</span>
+        </a>
+        <span class="mode-badge" id="modeBadge">Hazırlanıyor</span>
+        <button class="icon-button" id="soundSpeedButton" type="button" aria-label="Dinleme hızını değiştir">
+          <span aria-hidden="true">1×</span>
+        </button>
+        <button class="icon-button" id="saveExitButton" type="button" aria-label="İlerlemeyi kaydet">
+          <span aria-hidden="true">⇩</span>
+        </button>
+      </div>
+    </header>
+
+    <nav class="mission-progress" id="progressNav" aria-label="Görev ilerlemesi"></nav>
+
+    <main id="mainContent">
+      <section class="screen intro-screen" id="introScreen" aria-labelledby="introTitle">
+        <div class="intro-image" role="img" aria-label="Fatih ve annesi alışveriş listesi hazırlıyor"></div>
+        <div class="intro-card">
+          <p class="kicker">Ünite II · وَقْتُ التَّسَوُّق</p>
+          <h1 id="introTitle">Sepette Ne Eksik?</h1>
+          <p class="intro-arabic" lang="ar" dir="rtl">ماذا يَنْقُصُ في السَّلَّة؟</p>
+          <p class="intro-copy">
+            Şenliğin alışverişi tamamlanmalı. Fatih, Meryem, Anne ve Manav’ın
+            seslerini dikkatle dinle; listeyi kur, pazarı dolaş ve eksik ürünü bul.
+          </p>
+
+          <ul class="mission-facts" aria-label="Görev bilgileri">
+            <li><strong>27</strong><span>gerçek ses</span></li>
+            <li><strong>5</strong><span>etkileşimli sahne</span></li>
+            <li><strong>10–12</strong><span>dakika</span></li>
+          </ul>
+
+          <div class="intro-actions">
+            <button class="primary-button" id="startButton" type="button">
+              Göreve başla <span aria-hidden="true">←</span>
+            </button>
+            <button class="text-button" id="resumeButton" type="button" hidden>
+              Kaldığım yerden devam et
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen mission-screen" id="missionScreen" hidden aria-labelledby="sceneTitle">
+        <div class="scene-stage">
+          <img id="sceneImage" class="scene-image" src="images/B02_K004.jpg" alt="">
+          <div class="scene-gradient" aria-hidden="true"></div>
+          <div class="scene-heading">
+            <p class="scene-index" id="sceneIndex">Görev 1 / 5</p>
+            <h1 id="sceneTitle">Evde Liste</h1>
+            <p id="sceneSubtitle">Annenin istediği ürünleri dikkatle dinle.</p>
+          </div>
+        </div>
+
+        <div class="mission-grid">
+          <section class="dialogue-panel" aria-labelledby="listenHeading">
+            <div class="panel-heading-row">
+              <div>
+                <p class="panel-kicker">Önce dinle</p>
+                <h2 id="listenHeading">Sesli sahne</h2>
+              </div>
+              <button class="secondary-button compact" id="playAllButton" type="button">
+                <span aria-hidden="true">▶</span> Tümünü dinle
+              </button>
+            </div>
+
+            <div class="now-playing" id="nowPlaying" aria-live="polite">
+              <div class="wave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div>
+                <span class="now-playing-label">Hazır</span>
+                <strong id="nowPlayingText">Bir ses kartına dokun</strong>
+              </div>
+              <button class="mini-control" id="stopAudioButton" type="button" aria-label="Sesi durdur">■</button>
+            </div>
+
+            <div class="clip-list" id="clipList"></div>
+
+            <button class="transcript-toggle" id="transcriptToggle" type="button" aria-expanded="false" aria-controls="clipList">
+              Arapça metinleri göster
+            </button>
+          </section>
+
+          <section class="task-panel locked" id="taskPanel" aria-labelledby="taskHeading">
+            <div class="panel-heading-row">
+              <div>
+                <p class="panel-kicker">Sonra yap</p>
+                <h2 id="taskHeading">Görev</h2>
+              </div>
+              <span class="task-lock" id="taskLock"><span aria-hidden="true">◉</span> Sesleri dinle</span>
+            </div>
+            <div id="taskContent"></div>
+            <div class="feedback" id="taskFeedback" role="status" aria-live="polite" tabindex="-1"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="screen result-screen" id="resultScreen" hidden aria-labelledby="resultTitle">
+        <div class="result-visual" role="img" aria-label="Fatih ve Meryem alışverişi tamamlayıp pazardan ayrılıyor"></div>
+        <div class="result-card">
+          <span class="stamp" aria-hidden="true">✓</span>
+          <p class="kicker">Pazar mührü kazanıldı</p>
+          <h1 id="resultTitle">Sepeti tamamladın!</h1>
+          <p class="result-arabic" lang="ar" dir="rtl">أَحْسَنْتَ! أَكْمَلْتَ المُهِمَّةَ.</p>
+
+          <div class="score-ring" aria-label="Toplam puan">
+            <strong id="finalScore">100</strong>
+            <span>/ 100</span>
+          </div>
+
+          <div class="result-summary">
+            <div><span>Dinlenen ses</span><strong id="heardCount">27 / 27</strong></div>
+            <div><span>Tamamlanan görev</span><strong>5 / 5</strong></div>
+            <div><span>Durum</span><strong id="passStatus">Başarılı</strong></div>
+          </div>
+
+          <div class="evidence-card">
+            <p class="evidence-label">Final kanıtı</p>
+            <p><strong>028:</strong> İki kutu çay istendi.</p>
+            <p><strong>052:</strong> Ekmek, şeker ve tuz var; çay söylenmedi.</p>
+            <p class="evidence-answer" lang="ar" dir="rtl">النّاقِصُ: عُلْبَتانِ مِن الشّاي</p>
+          </div>
+
+          <p class="result-retry" id="retryNote" hidden>
+            Yeni puanlı denemeyi EBA ders ekranından yeniden başlat. “Sahneleri gözden geçir” inceleme içindir ve mevcut puanı değiştirmez.
+          </p>
+
+          <div class="result-actions">
+            <button class="primary-button" id="finishButton" type="button">Puanı kaydet ve bitir</button>
+            <button class="secondary-button" id="reviewButton" type="button">Sahneleri gözden geçir</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>7. Sınıf Arapça · Ünite II</span>
+      <span id="saveStateLabel">İlerleme hazırlanıyor…</span>
+    </footer>
+  </div>
+
+  <audio id="audioPlayer" preload="none"></audio>
+  <div class="sr-only" id="liveRegion" aria-live="assertive"></div>
+
+  <script src="scorm12.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
