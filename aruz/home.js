@@ -13,7 +13,7 @@
             <span class="eyebrow">BİR ŞİİRİN İÇİNE GİR.</span>
             <h1 id="brandHeadline">Bir beyit,<br>duyduğundan<br><em>çok daha fazlası.</em></h1>
             <p>Bir kelimeyi bul. Bir beyti yakala. Bir ritmi geri çal. Üç küçük oyunla şiirin içine gir; sonunda elinde bir beyit, aklında bir sır kalsın.</p>
-            <div class="hero-actions"><a class="primary brand-primary" href="#oyna" id="heroPlay">Bir el oyna <span aria-hidden="true">↗</span></a><a class="brand-text-link hero-rhythm-link" href="#ritimler" id="heroRhythms">▶ Ritimleri dinle</a></div><div class="hero-game-note">Üç kısa oyun · Aruz bilmen gerekmiyor.</div>
+            <div class="hero-actions"><a class="primary brand-primary" href="#oyna" id="heroPlay">Beytin sırrını çöz <span aria-hidden="true">↗</span></a><a class="brand-text-link hero-rhythm-link" href="#ritimler" id="heroRhythms">▶ Ritimleri dinle</a></div><div class="hero-game-note">Üç kısa oyun · Aruz bilmen gerekmiyor.</div>
             <div class="hero-note"><span aria-hidden="true">◖</span> Hayâtî İnanç’ın kendi sesinden.<br>Beytin manasından şiirin ahengine.</div>
           </div>
           <span class="art-caption" aria-hidden="true">SÖZÜN BİR AHENGİ VAR.</span>
