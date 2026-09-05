@@ -1,0 +1,2485 @@
+{
+  "version": "2026-09-04.3",
+  "status": "12 original lines + 2 recording-matched Fuzûlî lines + 2 extra meter examples",
+  "editorialPolicy": [
+    "Metin ve kalıp kaynakla kontrol edildi; hece hece çözüm editoryal çalışmadır, kaynakların tamamında hazır taktî‘ bulunduğu iddia edilmez.",
+    "natural, seçilen vasl tatbik edildikten sonraki kısa/uzun değerdir. metrical kalıpta gerçekleşen değerdir.",
+    "Bir syllables öğesi bir söylenen hecedir. Medli eşk tek öğe, metrical=LS olmalıdır; bu öğe iki vezin konumunu kaplar.",
+    "Uzun sesli ve sessiz harfle kapanan hece ayrımı izahta korunur; bir uzun yer tutmak için mutlaka sessiz harfle kapanma gerekmez.",
+    "Mısra sonundaki açık hece line_end olarak işaretlenir; buna otomatik imâle etiketi verilmez.",
+    "İzinli ilk/son tef‘ile varyantları gerçek metne göre gösterilir. Kalıp hecelerine metin uydurulmaz.",
+    "Tef‘ile sınırı kelime sınırı veya mecburî susma yeri değildir.",
+    "Yahyâ’nın ey kelimesi tam PDF’nin basılı s.126 görüntüsünden kontrol edildi. Akademik kaynağın tef‘ile ailesi tahkiki ile burada çıkarılan tafsilâtlı hece çözümü farklı hususlara delil teşkil eder."
+  ],
+  "sources": {
+    "muhibbi_meter": {
+      "title": "Ayşe Akdoğan (2019), Karagöz Metinlerinin Halk Bilimi Açısından İncelenmesi, İstanbul Üniversitesi, s.409 dipnot 4",
+      "url": "https://nek.istanbul.edu.tr/ekos/TEZ/ET000976.pdf#page=422",
+      "type": "academic",
+      "supports": [
+        "text",
+        "attribution",
+        "meter"
+      ],
+      "note": "Kanunî Sultan Süleyman atfı ve Fâilâtün×3/Fâilün açıkça verilmiş; Kudret, Karagöz C.I s.228’e dayanıyor."
+    },
+    "muhibbi_divan": {
+      "title": "Türkiye Yazma Eserler Kurumu: Muhibbî Dîvânı, cilt 2, gazel 3406",
+      "url": "https://ekitap.yek.gov.tr/Uploads/ProductsFiles/_69.%20MUHiBBi%20DiVANI%202.%20CiLT.pdf",
+      "type": "official_edition",
+      "supports": [
+        "attribution",
+        "incipit"
+      ],
+      "note": "Arama dizininde matla ve gazel numarası görüldü; bu oturumda PDF bütünü açılamadı. Vezin tahkiki ayrı akademik kaynaktan."
+    },
+    "fuzuli_text": {
+      "title": "Ahmet Yesevi Üniversitesi TEİS: Fuzûlî — Prof. Dr. Muhsin Macit",
+      "url": "https://teis.yesevi.edu.tr/madde-detay/fuzuli-mdbir",
+      "type": "academic",
+      "supports": [
+        "text",
+        "attribution"
+      ],
+      "note": "Kasîde Der-Na‘t-i Hazret-i Nebevî. TEİS denli, OMÜ metni denlü yazıyor; aşağıda OMÜ varyantı kullanıldı."
+    },
+    "fuzuli_omu": {
+      "title": "Ondokuz Mayıs Üniversitesi: Adem Çalışkan, TDE 243 işlenecek metinler, Su Kasidesi",
+      "url": "https://avys.omu.edu.tr/storage/app/public/adem.caliskan/139188/1-TDE%20243-%C4%B0%C5%9ELENECEK%20MET%C4%B0NLER-A.%C3%87-2021.pdf",
+      "type": "academic_course_material",
+      "supports": [
+        "text",
+        "attribution"
+      ]
+    },
+    "fuzuli_meter": {
+      "title": "Marmara Üniversitesi açık erişim tezi, öğrenci etkinliği basılı s.81",
+      "url": "https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/1A/670c2326c14d9.pdf",
+      "type": "academic",
+      "supports": [
+        "meter",
+        "text"
+      ],
+      "note": "Su Kasidesi ilk beş beyit için fâ‘ilâtün×3/fâ‘ilün yazılı."
+    },
+    "fuzuli_med": {
+      "title": "ÖSYM 2013 ÖABT Türk Dili ve Edebiyatı, soru 23 ve cevap anahtarı",
+      "url": "https://dokuman.osym.gov.tr/web/eskidosyalar/1645.pdf",
+      "type": "official_exam",
+      "supports": [
+        "med"
+      ],
+      "note": "Bir kapalı bir açık değer sorusunda Su Kasidesi matlaı C şıkkında. Yalnız med olgusuna kaynak; bu dosyada hazırlanan bütün hece notlarının ÖSYM’den alındığı iddia edilmez."
+    },
+    "galib": {
+      "title": "Osman Ünlü (2011), Nazire Geleneği İçinde Şeyh Gâlib’in Meşhur Şiiri, CBÜ Sosyal Bilimler 9/2",
+      "url": "https://turkoloji.cu.edu.tr/ESKI%20TURK%20%20EDEBIYATI/ou_seyh_galip/ou_seyh_galip.htm",
+      "type": "peer_reviewed",
+      "supports": [
+        "text",
+        "attribution",
+        "meter"
+      ],
+      "note": "Şiirin remel bahrinde feilâtün/feilâtün/feilâtün/feilün ile yazıldığını belirtir. İlk alıntısında zâtına, tam metninde zâtuna vardır; modern zâtına seçildi."
+    },
+    "nabi": {
+      "title": "Zeynep Kaymak (2019), Nâbî’nin Bestelenmiş Şiirlerinin Derlenmesi, Tasnifi ve Tahlili, s.150–151",
+      "url": "https://acikerisim.erbakan.edu.tr/server/api/core/bitstreams/ffa8a327-2fa4-4a20-8566-65f9d0092ce7/content",
+      "type": "academic_thesis",
+      "supports": [
+        "text",
+        "attribution",
+        "meter"
+      ],
+      "note": "Tez, güfteleri bestelerdeki değişmiş şekilleriyle değil Ali Fuat Bilkan’ın Nâbî Divanı neşrinden aldığını izah eder. Mefâîlün×4 verilmiş. Aşağıda dur/dür ekleri metne sadık tutuldu."
+    },
+    "hayali": {
+      "title": "İsmail Güleç (2022), Ârâyı Bilmek mi Arayabilmek mi?, TÜRKDED 5, s.25–40; taktî‘ s.32",
+      "url": "https://dergipark.org.tr/tr/download/issue-file/63918#page=41",
+      "type": "peer_reviewed",
+      "supports": [
+        "text",
+        "attribution",
+        "meter",
+        "feet",
+        "reading_ambiguity"
+      ],
+      "note": "Dört mefâîlün ve Cihân-ârâ/cihân için/dedir ârâ/yı bilmezler bölümlemesini açıkça verir; ârâyı / arayabilmek yorumlarının yalnız vezinden karara bağlanamayacağını tartışır."
+    },
+    "yahya": {
+      "title": "Andreas Tietze ve Joseph Yahalom (1995), Ottoman Melodies, Hebrew Hymns, Akadémiai Kiadó, basılı s.126, kayıt 179",
+      "url": "https://real-eod.mtak.hu/15845/1/AkademiaiKiado_000903.pdf#page=129",
+      "pdf": "https://real-eod.mtak.hu/15845/1/AkademiaiKiado_000903.pdf",
+      "type": "academic_book",
+      "supports": [
+        "text",
+        "attribution",
+        "meter_family"
+      ],
+      "note": "Tam PDF indirildi, basılı s.126 (PDF sayfa 129) Poppler ile render edilerek sayfa üzerinden kontrol edildi. Ey kelimesi açıkça mevcut. Sayfanın çevriyazısında Xandân, göŋül, Fürqat, irdi, kemâlüŋ var; tatbikatta Handân, gönül, Firkat, irdi, kemâlüñ biçimleri kullanıldı. Nicelikler değişmiyor. Yahyâ Beg; 1977 neşri s.316 vd., gazel 57; meter mudâri‘. Kitabın kaynakçası bu neşri Mehmed Çavuşoğlu, Yahyâ Bey Dîvanı, Tenkidli Basım, İstanbul 1977 diye açıyor; dizin Taşlıcalı Yahyâ Beg adını Yahyâ Beg’e yönlendiriyor.",
+      "pdfPage": 129,
+      "printedPage": 126,
+      "entry": 179,
+      "localEvidenceImage": "/tmp/aruz-corpus/yahya-page126.png",
+      "localEvidenceText": "/tmp/aruz-corpus/yahya-page126.txt",
+      "evidenceMethod": "complete PDF downloaded; text extracted with pdftotext; printed page visually inspected after pdftoppm rendering",
+      "pdfSha256": "69cf3eaaa84f5e7a885067881edea0bd3cb0e0ae6718cf692dc15257c982f13c",
+      "sourceReadingNormalized": [
+        "Handân ol, ey gönül, ki visâl ihtimâli var",
+        "Fürkat kemâle irdi, kemâlüñ zevâli var"
+      ],
+      "normalizationNote": "Kaynağın X, q ve ŋ çevriyazısı H, k ve ñ ile aktarıldı. Sitede Firkat imlâsının kullanılması hece değerini değiştirmez.",
+      "catalogUrl": "https://real-eod.mtak.hu/15845/"
+    },
+    "hasim": {
+      "title": "MEB OGM, Türk Dili ve Edebiyatı 11 Kavram Öğretimi, basılı s.47: Bir Günün Sonunda Arzu",
+      "url": "https://ogmmateryal.eba.gov.tr/panel/upload/etkilesimli/kitap/kavram_calismalari/11/edebiyat/files/basic-html/page49.html",
+      "type": "official_course_material",
+      "supports": [
+        "text",
+        "attribution",
+        "meter"
+      ],
+      "note": "Ahmet Haşim / Piyale ve mefûlü / mefâîlü / feûlün birlikte açıkça verilmiş."
+    },
+    "fuzuli_beyit10": {
+      "title": "Marmara Üniversitesi açık erişim tezi T0086221, basılı s.118, Su Kasidesi beyit 10",
+      "url": "https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/3C/T0086221.pdf",
+      "type": "academic_thesis",
+      "supports": [
+        "text",
+        "attribution"
+      ],
+      "note": "Men lebün müştâkiyam zühhâd kevser tâlibi / Nitekim meste mey içmek hoş gelür hûşyâra su biçimi. Kı/ki farkı niceliği değiştirmez; kayıt altyazısının normalleştirmesiyle müştâkıyam seçildi."
+    },
+    "fuzuli_beyit10_meaning": {
+      "title": "Ondokuz Mayıs Üniversitesi: Yavuz Bayram, Eski Türk Edebiyatı Notları",
+      "url": "https://avys.omu.edu.tr/storage/app/public/ybayram/133742/Eski%20T%C3%BCrk%20Edebiyat%C4%B1%20Notlar%C4%B1%20%28T%C3%BCrk%C3%A7e%20E%C4%9Fitimi-kitap%C3%A7%C4%B1k%29.pdf",
+      "type": "academic_course_material",
+      "supports": [
+        "text",
+        "meaning"
+      ],
+      "note": "Men/mest ile zühhâd/hûşyâr eşleşmelerini ve mey/su, mest/hûşyâr karşıtlıklarını açıkça ele alır."
+    }
+  },
+  "chapterMeters": {
+    "muhibbi": {
+      "name": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "pattern": "LSLLLSLLLSLLLSL"
+    },
+    "fuzuli": {
+      "name": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "pattern": "LSLLLSLLLSLLLSL"
+    },
+    "galib": {
+      "name": "Feilâtün · Feilâtün · Feilâtün · Feilün",
+      "basePattern": "SSLLSSLLSSLLSSL",
+      "lineRealization": "Fâilâtün · Feilâtün · Feilâtün · Fa‘lün",
+      "pattern": "LSLLSSLLSSLLLL",
+      "firstFootAllowed": [
+        "Feilâtün",
+        "Fâilâtün"
+      ],
+      "lastFootAllowed": [
+        "Feilün",
+        "Fa‘lün"
+      ]
+    },
+    "nabi": {
+      "name": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "pattern": "SLLLSLLLSLLLSLLL"
+    },
+    "hayali": {
+      "name": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "pattern": "SLLLSLLLSLLLSLLL"
+    },
+    "yahya": {
+      "name": "Mef‘ûlü · Fâilâtü · Mefâîlü · Fâilün",
+      "pattern": "LLSLSLSSLLSLSL"
+    }
+  },
+  "lines": [
+    {
+      "id": "muhibbi-1",
+      "text": "Halk içinde mu‘teber bir nesne yok devlet gibi",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Hal",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ki",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "çin",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "de",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "note": "İçinde kelimesinin de hecesi açıkken uzun okunur.",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "mu‘",
+              "natural": "L",
+              "metrical": "L",
+              "note": "Arapça ayn işareti burada tarihî hece kapanışını gösterir; mu diye sadeleştirilmemeli.",
+              "mark": "L"
+            },
+            {
+              "text": "te",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ber",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "nes",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ne",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "yok",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dev",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "let",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "gi",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "bi",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "note": "Son açık hece mısra sonu kaidesiyle uzun kabul edilir; bunu imâle saymıyoruz.",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLLSLLLSLLLSL",
+      "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "syllableCount": 15,
+      "metricalSlotCount": 15,
+      "notes": [
+        "Bir seçilmiş okuyuşta Halk_içinde → hal-ki-çin-de biçiminde vasl yapılır. İlk hece yine kapalıdır.",
+        "Kalıbı karşılayan uzunluk ile lügatteki tabiî uzunluk aynı şey değildir: de imâle, son bi mısra sonu kaidesidir."
+      ],
+      "sourceIds": [
+        "muhibbi_meter",
+        "muhibbi_divan"
+      ],
+      "junctions": [
+        {
+          "at": "Halk_içinde",
+          "reading": "hal-ki-çin-de",
+          "type": "vasl"
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "muhibbi-2",
+      "text": "Olmaya devlet cihânda bir nefes sıhhat gibi",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Ol",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ma",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ya",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "dev",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "let",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ci",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "hân",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "da",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "bir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ne",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "fes",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "sıh",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "hat",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "gi",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "bi",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLLSLLLSLLLSL",
+      "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "syllableCount": 15,
+      "metricalSlotCount": 15,
+      "notes": [
+        "Olmaya içindeki ya ve cihânda içindeki da hecelerinde imâle vardır.",
+        "Cihân kelimesinin hâ sesi aslî uzundur; bu imâle değildir. Son bi mısra sonu kaidesiyle uzundur."
+      ],
+      "sourceIds": [
+        "muhibbi_meter"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "fuzuli-1",
+      "text": "Saçma ey göz eşkden gönlümdeki odlara su",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Saç",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ma",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ey",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "göz",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "eşk",
+              "natural": "L",
+              "metrical": "LS",
+              "operation": "med",
+              "note": "Tek hece, med ile bir uzun ve bir kısa konumu karşılar. Araya sesli harf eklenmez.",
+              "mark": "LS"
+            },
+            {
+              "text": "den",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "gön",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "lüm",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "de",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ki",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "od",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "la",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "ra",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "su",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLLSLLLSLLLSL",
+      "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "syllableCount": 14,
+      "metricalSlotCount": 15,
+      "notes": [
+        "Eşk iki sessiz harfle kapanır; ikinci tef‘ilede - ⏑ değerinde medlidir.",
+        "14 söylenen hece vardır, fakat med sebebiyle 15 vezin konumu doldurulur. Eşk kelimesini eş-ki veya eş-k diye iki heceye bölmeyin.",
+        "Göz | eşkden bağlantısında vasl tatbik edilmeyen okuyuş gösterilmiştir. Ki ve la hecelerinde imâle, son su üzerinde mısra sonu kaidesi vardır."
+      ],
+      "sourceIds": [
+        "fuzuli_text",
+        "fuzuli_omu",
+        "fuzuli_meter",
+        "fuzuli_med"
+      ],
+      "junctions": [
+        {
+          "at": "göz | eşkden",
+          "type": "no_vasl",
+          "note": "Bu seçilmiş taktî‘ okuyuşunda sınır korunur."
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "fuzuli-2",
+      "text": "Kim bu denlü dutuşan odlara kılmaz çâre su",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Kim",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bu",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "den",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "lü",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "du",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "tu",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "şan",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "od",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "la",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "ra",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "kıl",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "maz",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "çâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "re",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "su",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLLSLLLSLLLSL",
+      "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+      "syllableCount": 15,
+      "metricalSlotCount": 15,
+      "notes": [
+        "Denlü kelimesinde lü, dutuşan kelimesinde du, odlara kelimesinde la açık heceleri uzun okunur.",
+        "Çâre kelimesinin çâ hecesi aslî uzundur. Dutuşan | odlara arasında vasl tatbik edilmeyen çözüm seçilmiştir."
+      ],
+      "sourceIds": [
+        "fuzuli_omu",
+        "fuzuli_meter"
+      ],
+      "junctions": [
+        {
+          "at": "dutuşan | odlara",
+          "type": "no_vasl"
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "galib-1",
+      "text": "Hoşça bak zâtına kim zübde-i âlemsin sen",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Hoş",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ça",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "bak",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "zâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Feilâtün",
+          "pattern": "SSLL",
+          "syllables": [
+            {
+              "text": "tı",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "na",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "kim",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "züb",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Feilâtün",
+          "pattern": "SSLL",
+          "syllables": [
+            {
+              "text": "de",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "i",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "â",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "lem",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fa‘lün",
+          "pattern": "LL",
+          "syllables": [
+            {
+              "text": "sin",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "sen",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLSSLLSSLLLL",
+      "meterRealization": "Fâilâtün · Feilâtün · Feilâtün · Fa‘lün",
+      "syllableCount": 14,
+      "metricalSlotCount": 14,
+      "notes": [
+        "Şiirin kalıp ailesi Feilâtün/Feilâtün/Feilâtün/Feilün’dür. Burada ilk tef‘ile Fâilâtün, son tef‘ile Fa‘lün gerçekleşir.",
+        "Bu başlangıç ve bitiş izinleri zihâf veya hata gibi gösterilmemeli. 14 heceli mısraya 15. hece uydurulmaz.",
+        "Zübde-i: züb-de-i biçiminde üç hecedir; izafet i’si bağımsız kısa hece olarak kalır."
+      ],
+      "sourceIds": [
+        "galib"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "galib-2",
+      "text": "Merdüm-i dîde-i ekvân olan âdemsin sen",
+      "feet": [
+        {
+          "name": "Fâilâtün",
+          "pattern": "LSLL",
+          "syllables": [
+            {
+              "text": "Mer",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dü",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "mi",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "note": "Merdüm-i tamlamasının izafet i’si, mi okuyuşunda uzatılır.",
+              "mark": "L"
+            },
+            {
+              "text": "dî",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Feilâtün",
+          "pattern": "SSLL",
+          "syllables": [
+            {
+              "text": "de",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "i",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ek",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "vâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Feilâtün",
+          "pattern": "SSLL",
+          "syllables": [
+            {
+              "text": "no",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "la",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "nâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dem",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Fa‘lün",
+          "pattern": "LL",
+          "syllables": [
+            {
+              "text": "sin",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "sen",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LSLLSSLLSSLLLL",
+      "meterRealization": "Fâilâtün · Feilâtün · Feilâtün · Fa‘lün",
+      "syllableCount": 14,
+      "metricalSlotCount": 14,
+      "notes": [
+        "Ekvân_olan_âdem sınırları ulanarak ek-vâ-no-la-nâ-dem okunur; vâ ve nâ hecelerinin â’ları aslî uzundur.",
+        "Merdüm-i içindeki izafet i’sinde imâle vardır. Dîde kelimesinin dî hecesi aslî uzundur.",
+        "İlk Fâilâtün ve son Fa‘lün aynı remel ailesinin izinli biçimleridir."
+      ],
+      "sourceIds": [
+        "galib"
+      ],
+      "junctions": [
+        {
+          "at": "ekvân_olan",
+          "type": "vasl",
+          "reading": "ek-vâ-no-lan"
+        },
+        {
+          "at": "olan_âdem",
+          "type": "vasl",
+          "reading": "o-la-nâ-dem"
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "nabi-1",
+      "text": "Sakın terk-i edebden kûy-ı mahbûb-ı Hudâ’dur bu",
+      "feet": [
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "Sa",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "kın",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ter",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ki",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "e",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "deb",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "den",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "kû",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "yı",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "mah",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bû",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bı",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "Hu",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "dâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dur",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bu",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "SLLLSLLLSLLLSLLL",
+      "meterRealization": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "syllableCount": 16,
+      "metricalSlotCount": 16,
+      "notes": [
+        "Terk-i → ter-ki, kûy-ı → kû-yı, mahbûb-ı → mah-bû-bı biçiminde hecelenir.",
+        "İzafet ekleri olan ki ve bı içinde i/ı sesleri imâle ile uzatılır. Kû, bû, dâ aslî uzundur. Son bu mısra sonu kaidesiyle uzundur.",
+        "Kaynak dur ekini kullanır. Güncel dır biçimi veznin niceliğini değiştirmez."
+      ],
+      "sourceIds": [
+        "nabi"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "nabi-2",
+      "text": "Nazargâh-ı ilâhîdür makâm-ı Mustafâ’dur bu",
+      "feet": [
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "Na",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "zar",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "gâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "hı",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "i",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "lâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "hî",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dür",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "ma",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "kâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "mı",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "mark": "L"
+            },
+            {
+              "text": "Mus",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "ta",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "fâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dur",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "bu",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "line_end",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "SLLLSLLLSLLLSLLL",
+      "meterRealization": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "syllableCount": 16,
+      "metricalSlotCount": 16,
+      "notes": [
+        "Nazargâh-ı → na-zar-gâ-hı ve makâm-ı → ma-kâ-mı; izafet ı’larında imâle vardır.",
+        "Gâ, lâ, hî, kâ ve fâ aslî uzun sesli taşır. Son bu uzun kabul edilir."
+      ],
+      "sourceIds": [
+        "nabi"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "hayali-1",
+      "text": "Cihân-ârâ cihân içindedir ârâyı bilmezler",
+      "feet": [
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "Ci",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "hâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "nâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "râ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "ci",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "hâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ni",
+              "natural": "S",
+              "metrical": "L",
+              "operation": "imale",
+              "note": "Cihân_içindedir ulanınca ni biçimini alan açık hece uzun okunur.",
+              "mark": "L"
+            },
+            {
+              "text": "çin",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "de",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "dir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "â",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "râ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "yı",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "bil",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "mez",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ler",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "SLLLSLLLSLLLSLLL",
+      "meterRealization": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "syllableCount": 16,
+      "metricalSlotCount": 16,
+      "notes": [
+        "Bu taktîde ârâyı okuyuşu esas alınmıştır; arayı bilmek/arayabilmek yorumları akademik kaynakta tartışmalıdır. Vezin tek başına manayı kesinleştirmez.",
+        "Cihân_ârâ → ci-hâ-nâ-râ ve cihân_içindedir → ci-hâ-ni-çin-de-dir bağlantıları gösterildi; ni hecesi imâlelidir.",
+        "İçindedir | ârâyı sınırında vasl tatbik edilmez. Her mümkün ulama mecburî değildir."
+      ],
+      "sourceIds": [
+        "hayali"
+      ],
+      "junctions": [
+        {
+          "at": "cihân_ârâ",
+          "type": "vasl",
+          "reading": "ci-hâ-nâ-râ"
+        },
+        {
+          "at": "cihân_içindedir",
+          "type": "vasl",
+          "reading": "ci-hâ-ni-çin-de-dir"
+        },
+        {
+          "at": "içindedir | ârâyı",
+          "type": "no_vasl"
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "hayali-2",
+      "text": "O mâhîler ki deryâ içredir deryâyı bilmezler",
+      "feet": [
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "O",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "mâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "hî",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ler",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "ki",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "der",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "yâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "iç",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "re",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "dir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "der",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "yâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlün",
+          "pattern": "SLLL",
+          "syllables": [
+            {
+              "text": "yı",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "bil",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "mez",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ler",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "SLLLSLLLSLLLSLLL",
+      "meterRealization": "Mefâîlün · Mefâîlün · Mefâîlün · Mefâîlün",
+      "syllableCount": 16,
+      "metricalSlotCount": 16,
+      "notes": [
+        "Seçilen kaynak O mâhîler biçimini verir. Ol/Şol gibi kapalı başlangıçlı varyantlar bu taktîye uydurmak için habersizce değiştirilmemeli.",
+        "Mâhî ve deryâ kelimelerindeki uzunluklar aslîdir; bu mısrada imâleye veya mede gerek yoktur."
+      ],
+      "sourceIds": [
+        "hayali"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "yahya-1",
+      "text": "Handân ol ey gönül ki visâl ihtimâli var",
+      "feet": [
+        {
+          "name": "Mef‘ûlü",
+          "pattern": "LLS",
+          "syllables": [
+            {
+              "text": "Han",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "dâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "no",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtü",
+          "pattern": "LSLS",
+          "syllables": [
+            {
+              "text": "ley",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "gö",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "nül",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ki",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlü",
+          "pattern": "SLLS",
+          "syllables": [
+            {
+              "text": "vi",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "sâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "lih",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ti",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "mâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "li",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "var",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LLSLSLSSLLSLSL",
+      "meterRealization": "Mef‘ûlü · Fâilâtü · Mefâîlü · Fâilün",
+      "syllableCount": 14,
+      "metricalSlotCount": 14,
+      "notes": [
+        "Metin tashihi: Sitedeki mısrada eksik olan ey kelimesi, akademik neşre bakılarak eklendi. Ey çıkarılırsa bu taktî kalıba uymaz.",
+        "Handân_ol_ey → han-dâ-no-ley; visâl_ihtimâli → vi-sâ-lih-ti-mâ-li. İlk bağlantı birinci ve ikinci tef‘ile arasında da sürer.",
+        "Ulama sonrasında dâ ve sâ aslî uzun kaldığı için zihâf yoktur; bu çözümde med ve imâle yoktur.",
+        "Akademik kaynak doğrudan muzâri‘ ailesini belirtir. Tafsilâtlı dört tef‘ile ve hece çözümü bu çalışma tarafından metinden çıkarılmıştır."
+      ],
+      "sourceIds": [
+        "yahya"
+      ],
+      "junctions": [
+        {
+          "at": "Handân_ol_ey",
+          "type": "vasl",
+          "reading": "han-dâ-no-ley"
+        },
+        {
+          "at": "visâl_ihtimâli",
+          "type": "vasl",
+          "reading": "vi-sâ-lih-ti-mâ-li"
+        }
+      ],
+      "verification": "source_backed_editorial_scansion"
+    },
+    {
+      "id": "yahya-2",
+      "text": "Firkat kemâle irdi kemâlüñ zevâli var",
+      "feet": [
+        {
+          "name": "Mef‘ûlü",
+          "pattern": "LLS",
+          "syllables": [
+            {
+              "text": "Fir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "kat",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ke",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Fâilâtü",
+          "pattern": "LSLS",
+          "syllables": [
+            {
+              "text": "mâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "le",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "ir",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "di",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Mefâîlü",
+          "pattern": "SLLS",
+          "syllables": [
+            {
+              "text": "ke",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "mâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "lüñ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "ze",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            }
+          ]
+        },
+        {
+          "name": "Fâilün",
+          "pattern": "LSL",
+          "syllables": [
+            {
+              "text": "vâ",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            },
+            {
+              "text": "li",
+              "natural": "S",
+              "metrical": "S",
+              "mark": "S"
+            },
+            {
+              "text": "var",
+              "natural": "L",
+              "metrical": "L",
+              "mark": "L"
+            }
+          ]
+        }
+      ],
+      "pattern": "LLSLSLSSLLSLSL",
+      "meterRealization": "Mef‘ûlü · Fâilâtü · Mefâîlü · Fâilün",
+      "syllableCount": 14,
+      "metricalSlotCount": 14,
+      "notes": [
+        "Kitabın s.126 görüntüsünde Fürqat kemâle irdi, kemâlüŋ zevâli var yazılı. Tatbikat metninde Fürqat → Firkat, ŋ → ñ normalleştirildi. Güncel erdi/kemâlin de aynı nicelik dizisine sahiptir.",
+        "Bu mısrada imâle, med veya mecburî ulama yoktur; mâ ve vâ aslî uzunluklardır."
+      ],
+      "sourceIds": [
+        "yahya"
+      ],
+      "junctions": [],
+      "verification": "source_backed_editorial_scansion"
+    }
+  ],
+  "meterAddition": {
+    "name": "Mef‘ûlü · Mefâîlü · Feûlün",
+    "short": "Kısa hezec (Mef‘ûlü)",
+    "pattern": "LLSSLLSSLL",
+    "feet": [
+      {
+        "name": "Mef‘ûlü",
+        "pattern": "LLS"
+      },
+      {
+        "name": "Mefâîlü",
+        "pattern": "SLLS"
+      },
+      {
+        "name": "Feûlün",
+        "pattern": "SLL"
+      }
+    ],
+    "sourceIds": [
+      "hasim"
+    ],
+    "warning": "Mef‘ûlü / Mefâilün / Feûlün (LLSSLSLSLL) ve Mefâîlün / Mefâîlün / Feûlün (SLLLSLLLSLL) farklı kalıplardır. Mefâîlü ve Mefâilün birbirine dönüştürülmemelidir.",
+    "poet": "Ahmet Hâşim",
+    "poem": "Bir Günün Sonunda Arzu",
+    "examples": [
+      {
+        "id": "hasim-1",
+        "text": "Yorgun gözümün halkalarında",
+        "feet": [
+          {
+            "name": "Mef‘ûlü",
+            "pattern": "LLS",
+            "syllables": [
+              {
+                "text": "Yor",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "gun",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "gö",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              }
+            ]
+          },
+          {
+            "name": "Mefâîlü",
+            "pattern": "SLLS",
+            "syllables": [
+              {
+                "text": "zü",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              },
+              {
+                "text": "mün",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "hal",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "ka",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              }
+            ]
+          },
+          {
+            "name": "Feûlün",
+            "pattern": "SLL",
+            "syllables": [
+              {
+                "text": "la",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              },
+              {
+                "text": "rın",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "da",
+                "natural": "S",
+                "metrical": "L",
+                "operation": "line_end",
+                "mark": "L"
+              }
+            ]
+          }
+        ],
+        "pattern": "LLSSLLSSLL",
+        "meterRealization": "Mef‘ûlü · Mefâîlü · Feûlün",
+        "syllableCount": 10,
+        "metricalSlotCount": 10,
+        "notes": [
+          "Mef‘ûlü / Mefâîlü / Feûlün: 10 hece ve 10 konum. Son da, mısra sonu kaidesiyle uzun kabul edilir."
+        ],
+        "sourceIds": [
+          "hasim"
+        ],
+        "junctions": [],
+        "verification": "source_backed_editorial_scansion"
+      },
+      {
+        "id": "hasim-2",
+        "text": "Altın kulelerden yine kuşlar",
+        "feet": [
+          {
+            "name": "Mef‘ûlü",
+            "pattern": "LLS",
+            "syllables": [
+              {
+                "text": "Al",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "tın",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "ku",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              }
+            ]
+          },
+          {
+            "name": "Mefâîlü",
+            "pattern": "SLLS",
+            "syllables": [
+              {
+                "text": "le",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              },
+              {
+                "text": "ler",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "den",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "yi",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              }
+            ]
+          },
+          {
+            "name": "Feûlün",
+            "pattern": "SLL",
+            "syllables": [
+              {
+                "text": "ne",
+                "natural": "S",
+                "metrical": "S",
+                "mark": "S"
+              },
+              {
+                "text": "kuş",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              },
+              {
+                "text": "lar",
+                "natural": "L",
+                "metrical": "L",
+                "mark": "L"
+              }
+            ]
+          }
+        ],
+        "pattern": "LLSSLLSSLL",
+        "meterRealization": "Mef‘ûlü · Mefâîlü · Feûlün",
+        "syllableCount": 10,
+        "metricalSlotCount": 10,
+        "notes": [
+          "Tabiî kısa/uzun heceler kalıbı doğrudan karşılar; imâle, med ve vasla ihtiyaç yoktur. Başlangıç için sade bir misal."
+        ],
+        "sourceIds": [
+          "hasim"
+        ],
+        "junctions": [],
+        "verification": "source_backed_editorial_scansion"
+      }
+    ]
+  },
+  "recordingAlternatives": {
+    "fuzuli": {
+      "id": "fuzuli-recording",
+      "poet": "Fuzûlî",
+      "poem": "Su Kasidesi, 10. beyit",
+      "meter": {
+        "name": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+        "pattern": "LSLLLSLLLSLLLSL"
+      },
+      "lines": [
+        {
+          "id": "fuzuli-recording-1",
+          "text": "Men lebün müştâkıyam zühhâd Kevser tâlibi",
+          "feet": [
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "Men",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "le",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "bün",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "müş",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "tâ",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "kı",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "yam",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "züh",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "hâd",
+                  "natural": "L",
+                  "metrical": "LS",
+                  "operation": "med",
+                  "note": "Uzun â ve kapanış d’si taşıyan hâd hecesi med ile bir uzun ve bir kısa konumu karşılar; tek hece kalır.",
+                  "mark": "LS"
+                },
+                {
+                  "text": "Kev",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "ser",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilün",
+              "pattern": "LSL",
+              "syllables": [
+                {
+                  "text": "tâ",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "li",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "bi",
+                  "natural": "S",
+                  "metrical": "L",
+                  "operation": "line_end",
+                  "mark": "L"
+                }
+              ]
+            }
+          ],
+          "pattern": "LSLLLSLLLSLLLSL",
+          "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+          "syllableCount": 14,
+          "metricalSlotCount": 15,
+          "notes": [
+            "Zühhâd kelimesindeki hâd uzun sesliyle birlikte sessiz harfle kapanır; üçüncü tef‘ilede medlidir.",
+            "14 söylenen hece, med sebebiyle 15 vezin konumu vardır. Hâd hecesi tek kartta − ⏑ işaretlenmeli; hâ-dı gibi ek sesli harf üretilmemeli.",
+            "Bu okuyuşta imâle yoktur; tâ heceleri aslî uzun, son bi mısra sonu kaidesiyle uzundur."
+          ],
+          "sourceIds": [
+            "fuzuli_beyit10",
+            "fuzuli_omu",
+            "fuzuli_meter"
+          ],
+          "junctions": [],
+          "verification": "source_backed_editorial_scansion"
+        },
+        {
+          "id": "fuzuli-recording-2",
+          "text": "Nitekim meste mey içmek hoş gelür hûşyâra su",
+          "feet": [
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "Ni",
+                  "natural": "S",
+                  "metrical": "L",
+                  "operation": "imale",
+                  "note": "Nitekim kelimesinin ilk ni hecesi uzatılır.",
+                  "mark": "L"
+                },
+                {
+                  "text": "te",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "kim",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "mes",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "te",
+                  "natural": "S",
+                  "metrical": "L",
+                  "operation": "imale",
+                  "note": "Meste kelimesinin son te hecesi uzatılır.",
+                  "mark": "L"
+                },
+                {
+                  "text": "me",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "yiç",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "mek",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilâtün",
+              "pattern": "LSLL",
+              "syllables": [
+                {
+                  "text": "hoş",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "ge",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "lür",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "hûş",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                }
+              ]
+            },
+            {
+              "name": "Fâilün",
+              "pattern": "LSL",
+              "syllables": [
+                {
+                  "text": "yâ",
+                  "natural": "L",
+                  "metrical": "L",
+                  "mark": "L"
+                },
+                {
+                  "text": "ra",
+                  "natural": "S",
+                  "metrical": "S",
+                  "mark": "S"
+                },
+                {
+                  "text": "su",
+                  "natural": "S",
+                  "metrical": "L",
+                  "operation": "line_end",
+                  "mark": "L"
+                }
+              ]
+            }
+          ],
+          "pattern": "LSLLLSLLLSLLLSL",
+          "meterRealization": "Fâilâtün · Fâilâtün · Fâilâtün · Fâilün",
+          "syllableCount": 15,
+          "metricalSlotCount": 15,
+          "notes": [
+            "Mey_içmek ulanarak me-yiç-mek okunur: y sonraki hecenin başına geçtiği için me açık ve kısa, yiç kapalı ve uzundur.",
+            "Nitekim içindeki ni ve meste içindeki te açık heceleri imâleyle uzatılır.",
+            "Hûş-yâr Farsça birleşiğinde hûş ve yâ uzun sesli hecelerdir. Bu konumda hûş için med tatbik edilmez.",
+            "Son su mısra sonu kaidesiyle uzundur."
+          ],
+          "sourceIds": [
+            "fuzuli_beyit10",
+            "fuzuli_omu",
+            "fuzuli_meter"
+          ],
+          "junctions": [
+            {
+              "at": "mey_içmek",
+              "type": "vasl",
+              "reading": "me-yiç-mek"
+            }
+          ],
+          "verification": "source_backed_editorial_scansion"
+        }
+      ],
+      "short": "Âşık sevgiliyi ister; zâhid Kevser’i.",
+      "meaning": "Şair, sevgilinin dudağına özlem duyarken zâhidlerin Kevser’i arzuladığını söyler. Sarhoşun şaraptan, ayık kişinin sudan hoşlanması gibi, herkes meyline uygun olanı ister.",
+      "deep": "Leb–mey–mest ile Kevser–su–hûşyâr arasında iki mana silsilesi kurulur. Naatta sevgilinin dudağı, onun sözü ve hitabı olarak da yorumlanabilir.",
+      "prompts": [
+        "Âşık ile zâhidin farklı arzuları",
+        "Mest–hûşyâr ve mey–su karşıtlıkları",
+        "Hâd hecesinin bir uzun bir kısa değeri"
+      ],
+      "sourceIds": [
+        "fuzuli_beyit10",
+        "fuzuli_beyit10_meaning",
+        "fuzuli_omu",
+        "fuzuli_meter"
+      ],
+      "recordingMetadata": {
+        "manifest": "/tmp/aruz-recordings/clip-manifest.json",
+        "videoId": "N6y3vfHNW3U",
+        "textMatchedBy": "caption-derived metadata, not audio-verified",
+        "note": "Hece/tef‘ile çözümü metne aittir; kayıt üzerindeki hece zamanları ölçülmemiştir."
+      },
+      "sources": {
+        "fuzuli_beyit10": {
+          "title": "Marmara Üniversitesi açık erişim tezi T0086221, basılı s.118, Su Kasidesi beyit 10",
+          "url": "https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/3C/T0086221.pdf",
+          "type": "academic_thesis",
+          "supports": [
+            "text",
+            "attribution"
+          ],
+          "note": "Men lebün müştâkiyam zühhâd kevser tâlibi / Nitekim meste mey içmek hoş gelür hûşyâra su biçimi. Kı/ki farkı niceliği değiştirmez; kayıt altyazısının normalleştirmesiyle müştâkıyam seçildi."
+        },
+        "fuzuli_beyit10_meaning": {
+          "title": "Ondokuz Mayıs Üniversitesi: Yavuz Bayram, Eski Türk Edebiyatı Notları",
+          "url": "https://avys.omu.edu.tr/storage/app/public/ybayram/133742/Eski%20T%C3%BCrk%20Edebiyat%C4%B1%20Notlar%C4%B1%20%28T%C3%BCrk%C3%A7e%20E%C4%9Fitimi-kitap%C3%A7%C4%B1k%29.pdf",
+          "type": "academic_course_material",
+          "supports": [
+            "text",
+            "meaning"
+          ],
+          "note": "Men/mest ile zühhâd/hûşyâr eşleşmelerini ve mey/su, mest/hûşyâr karşıtlıklarını açıkça ele alır."
+        },
+        "fuzuli_omu": {
+          "title": "Ondokuz Mayıs Üniversitesi: Adem Çalışkan, TDE 243 işlenecek metinler, Su Kasidesi",
+          "url": "https://avys.omu.edu.tr/storage/app/public/adem.caliskan/139188/1-TDE%20243-%C4%B0%C5%9ELENECEK%20MET%C4%B0NLER-A.%C3%87-2021.pdf",
+          "type": "academic_course_material",
+          "supports": [
+            "text",
+            "attribution"
+          ]
+        },
+        "fuzuli_meter": {
+          "title": "Marmara Üniversitesi açık erişim tezi, öğrenci etkinliği basılı s.81",
+          "url": "https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/1A/670c2326c14d9.pdf",
+          "type": "academic",
+          "supports": [
+            "meter",
+            "text"
+          ],
+          "note": "Su Kasidesi ilk beş beyit için fâ‘ilâtün×3/fâ‘ilün yazılı."
+        }
+      }
+    }
+  },
+  "qualityReview": {
+    "status": "passed_structural_and_editorial_review",
+    "lineCount": 16,
+    "reportFile": "/tmp/aruz-corpus/qa-report.json",
+    "checks": [
+      "Full normalized text reconstructs exactly from all spoken syllables in order.",
+      "Each spoken syllable contains exactly one vowel.",
+      "Original-text vowel count equals spoken-syllable count.",
+      "Natural quantities independently checked from vowel length / coda, retaining ayn closure.",
+      "All short→long and long→LS modifications explicitly named and legal for that syllable.",
+      "Final-syllable license only occurs on final syllable.",
+      "Foot labels checked against separate dictionary; all line patterns reassembled."
+    ],
+    "importantDecisions": [
+      "İmâlelerin hiçbiri sessizce eklenmedi; bütün kısa→uzun dönüşümler etiketli.",
+      "Eşk ve hâd medleri fonolojik olarak elverişli tek hecelerdir; ikisinde 14 sesli harf 15 vezin konumunu karşılar.",
+      "Şeyh Gâlib’in 14 konumlu biçimi aile izinleriyle izah edilir, sahte kısa hece eklenmez.",
+      "Fuzûlî ve Hayâlî’de belirtilen bazı kelime sınırları vaslsız okunur; bu seçilmiş çözüm olup her mümkün ulama mecburî değildir.",
+      "Yahyâ ey düzeltmesi doğrudan sayfadan kontrol edildi. Ey’siz kayıt altyazısına aynı çözüm tatbik edilmemelidir.",
+      "Hayâlî’nin ârâyı/arayabilmek yorumu vezin tarafından tek başına kesinleştirilmez."
+    ],
+    "limitation": "Yapısal denetim ve editoryal ses incelemesi, ayrı bir aruz uzmanının onayı değildir; hece tafsilâtının tamamı kaynaklarda hazır bulunmaz. Kayıt üstünde hece süreleri ölçülmedi."
+  }
+}

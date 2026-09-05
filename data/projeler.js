@@ -4,6 +4,7 @@
  * Son guncelleme: 2026-07-21
  */
 var PROJELER = [
+  {"emoji": "🎼", "title": "Fâilâtün — Aruz Atölyesi", "desc": "Kayıp kelimeyi bul, bir hâle uygun beyti seç, ritmi parmaklarınla kur. Hayâtî İnanç’ın asıl kayıtları eşliğinde şiirin manasına ve ahengine yaklaş.", "tag": "Uygulama", "href": "/aruz/", "kategori": "dil", "featured": true},
   { emoji: '\u{1F9E0}', title: 'NöroTerbiye', desc: 'Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.', tag: 'Uygulama', href: '/noroterbiye/', kategori: 'noroterbiye', featured: true },
   { emoji: '\u{1F4DA}', title: 'MUALLİMO — Resim Kartları', desc: 'Çocuğunuza bir kitap okutun, 2.199 görsel kartla pekiştirsin. 24 kitap, 6 seri — her yaşa göre.', tag: 'Uygulama', href: '/muallimo/', kategori: 'dil', featured: true },
   { emoji: '\u{1F1EC}\u{1F1E7}', title: 'İngilizce Kelime Kartları', desc: 'Görselle öğren, sesle pekiştir. Günlük hayattan 238 kelime, 9 kategoride. Küçükler için biçilmiş kaftan.', tag: 'Uygulama', href: '/ingilizce-kelime/', kategori: 'dil' },

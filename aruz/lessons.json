@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "language": "tr",
+  "notation": {"short": "⏑", "long": "–", "footBoundary": "/", "note": "İşaretler kalıptaki kısa ve uzun değerleri gösterir; ses kaydındaki kesin saniyeleri göstermez."},
+  "levels": [
+    {"id": "baslangic", "title": "Başlangıç", "description": "Heceyi duy, değerini tanı, ilk ritmini kur."},
+    {"id": "orta", "title": "Orta", "description": "Tef‘ileleri birleştir; ulama ve imâleyi ayırt et."},
+    {"id": "ileri", "title": "İleri", "description": "Med ve zihafı çöz; şüpheli bir okuyuşu delilleriyle araştır."}
+  ],
+  "lessons": [
+    {
+      "id": "heceyi-duy", "level": "baslangic", "title": "Önce heceyi duy",
+      "summary": "Sayıdan önce sesin nasıl bölündüğünü fark et.",
+      "objective": "Basit bir sözü hecelerine ayırmak ve hece sayısıyla aruz düzenini ayırmak.",
+      "body": ["Bir sözü yavaşça söyle: ka-pı, de-niz. Her hecenin merkezinde bir sesli harf vardır. İlk işimiz kelimeleri doğru hecelemektir.", "Aruzda yalnız kaç hece bulunduğu yetmez; hecelerin kısa ve uzun değerlerle hangi sırada geldiği de mühimdir."],
+      "example": "ka-pı → 2 hece; de-niz → 2 hece. İkisi de iki hecelidir, fakat ilkinde iki kısa değer, ikincisinde kısa + uzun değer vardır. Bu misaller mısra içinde ve ek bir aruz işlemi olmadan düşünülmüştür.",
+      "questions": [
+        {"prompt": "“Kalem” kelimesinin heceleri hangi şıkta doğru?", "choices": ["kal-em", "ka-lem", "k-a-lem"], "answer": 1, "explanation": "Kalem, ka-lem diye söylenir. Bu kelimedeki a ve e seslileri, iki ayrı hecenin merkezindedir."},
+        {"prompt": "İki sözün hece sayısı aynı. Aynı aruz düzeninde olduklarını söylemek için neyi daha incelemelisin?", "choices": ["Yalnız son harflerini", "Kelimelerin lügat sırasını", "Kısa ve uzun değerlerin sırasını"], "answer": 2, "explanation": "Eşit hece sayısı tek başına aruz eşitliği sağlamaz. Dizilişin de kalıba uyması gerekir."}
+      ],
+      "sourceIds": ["tdv-aruz", "tubitak-vezin"]
+    },
+    {
+      "id": "acik-kapali", "level": "baslangic", "title": "Kısa mı, uzun mu?",
+      "summary": "Açık ve kapalı hecelerle ilk işaretlerini yerleştir.",
+      "objective": "Basit Türkçe heceleri ⏑ ve – ile işaretlemek.",
+      "body": ["Kısa sesli harfle biten açık heceyi ⏑ ile gösteriyoruz: de, ka, su. Sessiz harfle biten kapalı hece uzun değer taşır: den, kal, gül → –.", "Bu ilk temrinlerde mısra sonunu, ulamayı ve aslî uzun seslileri henüz devreye sokmuyoruz. Önce sade hecenin değerini bul."],
+      "example": "de-niz → ⏑ –; kal-dı → – ⏑. Son sesleri dinle: “de” sesli harfle, “niz” sessiz harfle biter.",
+      "questions": [
+        {"prompt": "Mısra içinde, başka bir işlem yokken “kalem” hangi dizilişi verir?", "choices": ["⏑ –", "– ⏑", "– –"], "answer": 0, "explanation": "Ka kısa sesli harfle biter: ⏑. Lem sessiz harfle biter: –. Netice ⏑ – olur."},
+        {"prompt": "Aşağıdaki tek hecelerden hangisi kapalıdır?", "choices": ["bu", "ne", "gül"], "answer": 2, "explanation": "Gül, l sessiz harfiyle biter. Bu ve ne kısa sesli harfle biten açık hecelerdir."}
+      ],
+      "sourceIds": ["meb-siir"]
+    },
+    {
+      "id": "uzun-unlu", "level": "baslangic", "title": "Sesli harfle bitse de uzun",
+      "summary": "Yazıdaki son harf, tek başına karar verdirmez.",
+      "objective": "Aslî uzun sesliyi kısa açık heceden ayırmak.",
+      "body": ["Klasik şiirde bazı Arapça ve Farsça kelimelerin seslileri aslî olarak uzundur. Meselâ dî-dâr sözünün ilk hecesindeki î, uzun değer taşır.", "Bu yüzden “sesli harfle biten her hece kısadır” demeyiz. Tarihî söyleyişi ve güvenilir metindeki uzunluk işaretlerini de inceleriz. Bir kelimenin her günkü imlâsında şapka bulunmaması, tarihî söyleyişinin kısa olduğunu ispat etmez."],
+      "example": "dî-dâr: dî → –. Buna karşılık di-li sözündeki di → ⏑. Burada yalnız ilk heceleri karşılaştırıyoruz; dâr hecesinin med ihtimali ileri derste ele alınacak.",
+      "questions": [
+        {"prompt": "“Dîdâr” kelimesindeki dî hecesinin uzun olmasının sebebi ne?", "choices": ["Kelimenin başında olması", "Î seslisinin aslî uzunluğu", "İki harfle yazılması"], "answer": 1, "explanation": "Dî, sesli harfle biter; fakat bu î aslî uzundur. Uzunluğu kelime içindeki sırasından veya harf sayısından doğmaz."},
+        {"prompt": "Bir eski şiirin sadeleştirilmiş imlâsında uzunluk işaretleri yok. Nasıl ilerlersin?", "choices": ["Bütün seslileri kısa sayarım", "Her sesliyi uzatırım", "Güvenilir metin ve lügatten söyleyişi kontrol ederim"], "answer": 2, "explanation": "Yazı sadeleştirilmiş olabilir. Söyleyiş tahkik edilmeden verilen kısa/uzun kararları kalıbı yanlış gösterebilir."}
+      ],
+      "sourceIds": ["meb-siir", "tdv-aruz"]
+    },
+    {
+      "id": "misra-sonu", "level": "baslangic", "title": "Mısranın son adımı",
+      "summary": "Son hecenin hususî kaidesiyle ilk taktîni tamamla.",
+      "objective": "Mısra sonundaki açık heceye uzun değer vermek.",
+      "body": ["Türk aruzu tatbikatında mısranın son hecesi açık olsa da uzun değerle kabul edilir. Bu, her kelimenin sonuna tatbik edilen bir kaide değildir.", "Temrinde önce hecelerin sade değerlerini bul; sonra gerçekten mısranın sonunda olan heceyi kontrol et. Tef‘ile sınırı ile mısra sonunu birbirine karıştırma."],
+      "example": "Bir mısra “… su” ile bitiyorsa son “su” → –. Aynı “su” mısra içinde, ek bir işlem yokken → ⏑.",
+      "questions": [
+        {"prompt": "Mısranın son kelimesi “gibi”. Son “bi” hecesi taktîde nasıl kabul edilir?", "choices": ["Uzun: –", "Daima kısa: ⏑", "Hiç sayılmaz"], "answer": 0, "explanation": "Bi açık bir hecedir; fakat mısranın sonundaki konumu sebebiyle uzun değer alır."},
+        {"prompt": "Mısranın ortasında bir kelimenin sonuna geldin. Son hecesi açık. Yalnız kelime bittiği için onu uzun sayabilir misin?", "choices": ["Evet, bütün kelime sonları uzundur", "Hayır; mısra sonu kaidesi burada işlemez", "Yalnız kelime iki heceliyse"], "answer": 1, "explanation": "Hususî kaide mısranın son hecesi içindir. Kelime veya tef‘ile bitmesi tek başına aynı neticeyi doğurmaz."}
+      ],
+      "sourceIds": ["meb-siir"]
+    },
+    {
+      "id": "tefileyi-kur", "level": "orta", "title": "Ritmin küçük parçası",
+      "summary": "Tef‘ile adını, işaret dizisiyle birlikte öğren.",
+      "objective": "Fâilâtün ve mefâîlün dizilerini ayırt etmek.",
+      "body": ["Tef‘ile, aruz kalıbını oluşturan vezin cüzüdür. Adı, kısa ve uzun değerlerin sırasını hatırlatır: fâilâtün = – ⏑ – –; mefâîlün = ⏑ – – –.", "Adları ezberlerken işaretleri de izle. Bu iki parça dört değer taşır; fark, ilk iki değerin yeridir. Tef‘ile sınırı, kelimenin ortasına denk gelebilir."],
+      "example": "Ritim çalışması: düm · de · düm · düm → – ⏑ – – → fâilâtün. Buradaki sesler şiir mısrası değil, yalnızca ritim temrinidir.",
+      "questions": [
+        {"prompt": "⏑ – – – dizisinin adı hangisidir?", "choices": ["Fâilâtün", "Fâilün", "Mefâîlün"], "answer": 2, "explanation": "Mefâîlün bir kısa ve üç uzun değerden oluşur. Fâilâtün ise uzun-kısa-uzun-uzundur."},
+        {"prompt": "– ⏑ – – dizisinde kısa değer kaçıncı sırada?", "choices": ["Birinci", "İkinci", "Dördüncü"], "answer": 1, "explanation": "İkinci işaret ⏑ olduğu için kısa değer ikinci sıradadır. Bu, fâilâtün dizisini mefâîlünden ayırır."}
+      ],
+      "sourceIds": ["tdv-tefile", "tdv-takti"]
+    },
+    {
+      "id": "kaliba-gec", "level": "orta", "title": "Parçadan kalıba",
+      "summary": "Bir mısralık düzeni, tef‘ileleri birleştirerek gör.",
+      "objective": "Tam diziyi tef‘ile sınırlarıyla karşılaştırmak.",
+      "body": ["Bir kalıp, tef‘ilelerin belirli sırada birleşmesiyle oluşur. Meselâ fâilâtün / fâilâtün / fâilün, üç parçalık bir düzendir.", "Taktî yaparken her parçayı sırayla karşılaştır. Başın uyması tek başına yeterli olmaz; son parçanın değerleri ve mısra sonu da uyumlu olmalıdır."],
+      "example": "Fâilâtün / fâilâtün / fâilün = – ⏑ – – / – ⏑ – – / – ⏑ –. Son tef‘ile üç değer taşır; ilk ikisi dörder değer taşır.",
+      "questions": [
+        {"prompt": "Bu dersteki kalıbın son parçası hangisi?", "choices": ["– ⏑ –", "⏑ – – –", "– ⏑ – –"], "answer": 0, "explanation": "Fâilün, – ⏑ – dizisidir. Son parça, önceki fâilâtünlerden bir değer daha kısadır."},
+        {"prompt": "Bir mısranın ilk dört değeri fâilâtünle uyuşuyor. Bu tespit neyi gösterir?", "choices": ["Şiirin tamamının kalıbını kesinleştirir", "Yalnız bu ilk parça için uyum vardır", "Mısranın son hecesi kısa olmalıdır"], "answer": 1, "explanation": "İlk parça bir ipucudur. Kalan tef‘ileleri ve şiirin diğer mısralarını da karşılaştırmak gerekir."}
+      ],
+      "sourceIds": ["tdv-tefile", "tdv-takti"]
+    },
+    {
+      "id": "vasl", "level": "orta", "title": "Sözleri birbirine bağla",
+      "summary": "Vasl, okunuştaki hece sınırlarını değiştirebilir.",
+      "objective": "Sessiz harften sesli harfe ulama yaparak yeni hece dizisini bulmak.",
+      "body": ["Sessiz harfle biten bir kelimeyi, ardından gelen sesli harfle başlayan kelimeye bağlayarak okumaya vasl veya ulama denir. Son sessiz harf, sonraki hecenin başına geçebilir.", "Önce ulama imkânını bul, sonra kalıba uyup uymadığını kontrol et. Sırf iki kelime yan yana diye her sınırda ulama yapılmaz."],
+      "example": "gül a-çar → gü-la-çar. İlk okunuş – ⏑ –, ulanan okunuş ⏑ ⏑ – olur. Üç hece yine üç hecedir; hece sınırı ve ilk hecenin değeri değişir.",
+      "questions": [
+        {"prompt": "“Gül açar” ulama ile okunduğunda hangi heceleme oluşur?", "choices": ["gül-a-çar", "gü-la-çar", "gü-laç-ar"], "answer": 1, "explanation": "Gülün sonundaki l, ardından gelen a ile birleşir: gü-la-çar. Gü artık kısa sesli harfle biter."},
+        {"prompt": "Hangi kelime sınırında bu derste anlatılan ulama imkânı vardır?", "choices": ["kara taş", "gül dalı", "bir ağaç"], "answer": 2, "explanation": "“Bir”, sessiz harfle biter; “ağaç”, sesli harfle başlar; birlikte bi-ra-ğaç okunabilir. Öteki iki sınırda bu şart yoktur."}
+      ],
+      "sourceIds": ["marmara-vasl", "tdv-takti"]
+    },
+    {
+      "id": "imale", "level": "orta", "title": "Kısa değeri uzatmak",
+      "summary": "İmâleyi, aslî uzunluktan ve mısra sonundan ayır.",
+      "objective": "Kısa hecenin kalıp gereği uzun kabul edilmesini tanımak.",
+      "body": ["Normalde kısa olan bir hecenin vezin gereği uzun okunmasına imâle denir. Klasik Türk şiirinde karşılaşılır; taktîde nerede yapıldığını açıkça belirtmek gerekir.", "Aslî uzun bir sesli harf zaten uzundur. Mısra sonunun uzun kabul edilmesi de ayrı kaidedir. Bir uyumsuzluk gördüğünde önce hecelemeyi, metni ve kalıbı kontrol et; imâleyi sınırsız bir düzeltme yolu sayma."],
+      "example": "Mısra içindeki “bu” sade hâliyle ⏑. Tahkik edilmiş bir taktîde uzun yerde okunuyorsa bu işlem ⏑ → – olarak gösterilir: imâle.",
+      "questions": [
+        {"prompt": "Mısra içindeki kısa “de” hecesi kalıp gereği uzun okunmuş. İşlemin adı ne?", "choices": ["Vasl", "İmâle", "Mısra sonu kaidesi"], "answer": 1, "explanation": "Kısa hecenin uzun okunması imâledir. Ulama için bir kelime sınırında seslerin bağlanması gerekir."},
+        {"prompt": "Hangi durumda imâle aramaya gerek yoktur?", "choices": ["Dî hecesi aslî uzun î ile uzun değer taşıyorsa", "Kısa “bu” uzun bir konumda okunmuşsa", "Mısra içindeki kısa “de” uzatılmışsa"], "answer": 0, "explanation": "Dî hecesindeki uzunluk kelimenin tarihî söyleyişinde vardır. Kısa bir hece sonradan uzatılmadığı için bunu imâle diye işaretlemeyiz."}
+      ],
+      "sourceIds": ["tdv-imale"]
+    },
+    {
+      "id": "med", "level": "ileri", "title": "Bir hece, iki ölçü değeri",
+      "summary": "Medde uzun ve kısa değerin birlikte karşılandığını gör.",
+      "objective": "Med tatbikatının – ⏑ karşılığını tanımak.",
+      "body": ["Uzun sesliden sonra sessiz harf gelen yâr gibi heceler ile sonu iki sessiz harfli bazı heceler, uygun yerde medli okunabilir. Med tatbik edilen hece kalıpta bir uzun ve bir kısa değer karşılar: – ⏑.", "Bu işaret, kelimenin imlâsına yeni bir sesli harf ekleneceği demek değildir. Her uygun görünümlü hecede otomatik med yapılmaz; kalıp, ardından gelen sesler ve tarihî kullanım birlikte ele alınır."],
+      "example": "Şematik gösterim: yâr → – ⏑, yalnız med tatbik edildiği kabul edilen yerde. Burada kelimeyi “yâ-rı” diye değiştirmiyoruz; okunuştaki ölçü değerini gösteriyoruz.",
+      "questions": [
+        {"prompt": "Bir hecede med tatbik edildiği belirtilmiş. Kalıpta hangi değer dizisini karşılar?", "choices": ["⏑ ⏑", "– –", "– ⏑"], "answer": 2, "explanation": "Medli hece, bir uzun ile ardından gelen bir kısa değeri karşılar. İki uzun değerle aynı şey değildir."},
+        {"prompt": "“Yâr” için – ⏑ gösterimini gördün. Bundan hangi neticeyi çıkarabilirsin?", "choices": ["Kelimeye mutlaka yeni bir sesli harf yazmalıyım", "Bu noktada medli bir okuma gösteriliyor", "Her yâr kelimesinde med mecburidir"], "answer": 1, "explanation": "Gösterim o okumanın ölçü değerini izah eder. Kelimenin imlâsını değiştirmez ve kelimenin bütün kullanımlarına otomatik tatbik edilmez."}
+      ],
+      "sourceIds": ["tdv-takti", "kaplan-med"]
+    },
+    {
+      "id": "zihaf", "level": "ileri", "title": "Uzunu kısa okumak",
+      "summary": "Zihafı imâlenin yönünden ayırt et.",
+      "objective": "Türk aruzu derslerindeki zihafı tanıyıp acele hüküm vermemek.",
+      "body": ["Türk aruzu derslerinde zihaf, aslî uzun bir seslinin vezin gereği kısa okunması için kullanılır. İmâlede yön kısa → uzun iken burada uzun → kısadır.", "Zihaf geleneksel olarak kusur sayılır. Ancak bir tarihî metne bu etiketi koymadan önce dönemin söyleyişini ve güvenilir metni kontrol et. Arap aruz nazariyesindeki “zihaf” daha geniş bir teknik tabirdir; burada Türk şiirindeki aruz derslerinde verilen manasını kullanıyoruz."],
+      "example": "Şematik karşılaştırma: aslî î → i, uzun değerden kısa değere geçiş. Bu bir zihaf şemasıdır; kendi başına bütün bir mısranın taktîsi değildir.",
+      "questions": [
+        {"prompt": "Aslî uzun bir sesli harf kalıba uymak için kısa okunmuşsa bu dersteki tabir hangisi?", "choices": ["Zihaf", "Med", "İmâle"], "answer": 0, "explanation": "Yön uzun → kısa olduğu için zihaf denir. İmâle bunun ters yönündeki kısa → uzun tatbikatıdır."},
+        {"prompt": "Bir taktî uzun sandığın heceyi kısa gösteriyor. İlk uygun adım hangisi?", "choices": ["Şairin kesin hata yaptığını ilan etmek", "Söyleyişi ve metin okumasını kontrol etmek", "Kalıbın bütün uzunlarını kısa yapmak"], "answer": 1, "explanation": "Tarihî söyleyiş veya metin okuması farklı olabilir. Zihaf hükmü bu bilgiler incelendikten sonra yapılmalıdır."}
+      ],
+      "sourceIds": ["tdv-takti", "tdv-zihaf", "tdv-aruz"]
+    },
+    {
+      "id": "belirsiz-okuma", "level": "ileri", "title": "Vezin bir ipucudur",
+      "summary": "Şüpheli yeri göster, metne ve vezne bakarak karar ver.",
+      "objective": "Kalıp adayı ile tahkik edilmiş taktîyi ayırmak.",
+      "body": ["Eski bir metinde imlâ, heceleme ve tarihî telaffuz birlikte düşünülür. Aynı görünen yazı farklı bir söyleyişi gizleyebilir; eksik veya yanlış aktarım da mümkündür.", "Önce okunuştan emin olduğun yerleri işaretle. Belirsiz yere soru işareti koy, aday kalıpları karşılaştır ve şiirin başka mısralarına bak. Veznin sağladığı ipucunu metnin yerine geçirme."],
+      "example": "Okuma A: – ⏑ – – / … ; okuma B: ⏑ ⏑ – – / … . İlk işaret tartışmalıysa “kalıp kesin” demek yerine bu konumu ve iki okumanın dayanağını belirt.",
+      "questions": [
+        {"prompt": "Yalnız bir mısra iki farklı okumayla iki kalıba da uyuyor. Hangisi daha sağlam ilerleme sağlar?", "choices": ["İlk çıkan neticeyi seçmek", "Daha uzun adlı kalıbı seçmek", "Başka mısraları ve güvenilir metni karşılaştırmak"], "answer": 2, "explanation": "Şiirin diğer mısraları ve metin tanıkları iki adaydan birini destekleyebilir. Tek satırlık uyum kesinlik sağlamaz."},
+        {"prompt": "Bir hecenin tarihî uzunluğunu kesin olarak tespit edemedin. Çalışmanda nasıl gösterirsin?", "choices": ["Belirsiz konumu ve denediğim okumaları açıkça yazarım", "Rastgele uzun sayıp kesin diye sunarım", "O heceyi tamamen silerim"], "answer": 0, "explanation": "Belirsizliği görünür bırakmak taktîyi denetlenebilir kılar. Böylece tahmin, delil yerine geçmez."}
+      ],
+      "sourceIds": ["tdv-takti", "tdv-aruz"]
+    },
+    {
+      "id": "butun-tarama", "level": "ileri", "title": "Kendi taktîni denetle",
+      "summary": "Hecele, işaretle, karşılaştır ve her işlemi izah et.",
+      "objective": "Bir taktîde hem işaretleri hem de bunların sebeplerini kontrol etmek.",
+      "body": ["Tam bir taktî dört şeyi gösterir: esas alınan okuma, hece değerleri, tef‘ile sınırları ve varsa aruz tercihlerinin sebepleri. Netice yalnız bir kalıp adı değildir.", "Son kontrolde mısra sonunu, aslî uzunları ve ulama noktalarını yeniden gözden geçir. Bir işlem kullandıysan hangi hecede neyi değiştirdiğini söyle. Çözemediğin noktayı da açık bırak."],
+      "example": "Şematik hedef: – ⏑ – – / – ⏑ –. Verilen dizi: – ⏑ – – / – ⏑ ⏑. Son ⏑ gerçekten mısranın son hecesiyse mısra sonu kaidesiyle – kabul edilir; bu yer için imâle izahı gerekmez.",
+      "questions": [
+        {"prompt": "Misaldeki son kısa hece mısranın sonunda. Uyum için hangi izah doğru?", "choices": ["Son kelimeyi çıkarmak gerekir", "Burada mecburî olarak med vardır", "Mısra sonu hecesi uzun kabul edilir"], "answer": 2, "explanation": "Son hecenin konumu yeterlidir: ⏑, mısra sonunda – değerindedir. Med ise – ⏑ karşılar ve başka bir tatbikattır."},
+        {"prompt": "Hangisi daha denetlenebilir bir taktî sunar?", "choices": ["Yalnız kalıp adını yazmak", "Okunuşu, işaretleri, sınırları ve işlemlerin yerlerini göstermek", "Sadece toplam kelime sayısını vermek"], "answer": 1, "explanation": "Okur, hece değerlerini kalıpla karşılaştırabilmeli ve her değişikliğin sebebini görebilmelidir. Böylece doğru netice kadar tahlil yolu da anlaşılır."}
+      ],
+      "sourceIds": ["tdv-takti", "meb-siir"]
+    }
+  ],
+  "sources": [
+    {"id": "tdv-aruz", "title": "TDV İslâm Ansiklopedisi — Arûz, Nihad M. Çetin", "url": "https://islamansiklopedisi.org.tr/aruz", "usedFor": "Uzun/kısa değer sistemi; Türk aruzunun tarihî dil ve tatbikatı."},
+    {"id": "tdv-tefile", "title": "TDV İslâm Ansiklopedisi — Tef‘ile, İsmail Durmuş", "url": "https://islamansiklopedisi.org.tr/tefile", "usedFor": "Tef‘ile ve kalıp münasebeti. Bu sayfadaki müstef‘ilün işaret dizisi imlâ hatası içerdiğinden kullanılmadı."},
+    {"id": "tdv-imale", "title": "TDV İslâm Ansiklopedisi — İmâle, Orhan Şaik Gökyay", "url": "https://islamansiklopedisi.org.tr/imale--aruz", "usedFor": "Kısa hecenin vezin gereği uzatılması."},
+    {"id": "tdv-takti", "title": "TDV İslâm Ansiklopedisi — Taktî‘, Kenan Demirayak ve Mustafa İsmet Uzun", "url": "https://islamansiklopedisi.org.tr/takti--siir", "usedFor": "Taktî‘, med ve zihaf; birden çok mısrayla tahkik. Vasl tanımındaki sesli harf/sessiz harf tersliği aynen aktarılmadı."},
+    {"id": "tdv-zihaf", "title": "TDV İslâm Ansiklopedisi — Zihaf ve İllet, İsmail Durmuş", "url": "https://islamansiklopedisi.org.tr/zihaf-ve-illet", "usedFor": "Arap aruz nazariyesindeki zihafın, Türk aruzu derslerindeki kullanımından kapsamça farklı olması."},
+    {"id": "tubitak-vezin", "title": "TÜBİTAK Ansiklopediler — Vezin", "url": "https://ansiklopedi.tubitak.gov.tr/ansiklopedi/vezin", "usedFor": "Hece ölçüsü ve aruzun temel ayrımı."},
+    {"id": "meb-siir", "title": "MEB / EBA ders kitabı — Şiir, s. 76", "url": "https://kitap.eba.gov.tr/panel/dosyalar/upload/3058/0/U_0_20_02_2023_11_32_49_794.pdf", "usedFor": "Açık/kapalı heceler, uzun sesliler ve mısra sonu kaidesi."},
+    {"id": "marmara-vasl", "title": "Marmara Üniversitesi açık tez arşivi — Vasl açıklaması, s. 38", "url": "https://katalog.marmara.edu.tr/veriler/yordambt/cokluortam/3F/63f52864ce7c4.pdf", "usedFor": "Sessiz harfle biten kelimenin sesli harfle başlayan kelimeye bağlanması."},
+    {"id": "kaplan-med", "title": "Hasan Kaplan (2018) — Fuzûlî’nin Gazellerinde Aruz Uygulamaları: Med", "url": "https://dergipark.org.tr/tr/download/article-file/503660", "usedFor": "Med tatbikatının beyitteki yerine ve şairin kullanımına bağlı oluşu."}
+  ],
+  "editorialNotes": [
+    "Bütün kısa misaller bu dersler için oluşturulmuş bağımsız kelime veya ritim dizileridir; şairlere atfedilmez. Bunları tamamlanmış aruz mısraları diye sunmayın.",
+    "⏑ = kısa, – = uzun ölçü değeri. Açık/kapalı ile kısa/uzun başlangıçta pedagojik olarak birlikte anlatılır; sesli harfle biten aslî uzun hecelerin uzun değer taşıması ayrıca öğretilir.",
+    "Ders ve soru misallerinde mısra sonu açıkça yazılı değilse kelimeler mısra içindedir ve ek aruz işlemi yoktur. Tek başına verilen her kelimeye mısra sonu kaidesi tatbik etmeyin.",
+    "Vasl hece sayısını otomatik azaltmaz. Gül açar → gü-la-çar misali üç hece olarak kalır. Bir ağaç → bi-ra-ğaç için de aynı durum geçerlidir.",
+    "Medde – ⏑ gösterimi, hecenin kalıptaki karşılığıdır. Metne yeni bir sesli harf eklenmesi veya her uygun kelimede mecburî med manasına gelmez. Medli heceleri her zaman iki ayrı konuşma hecesi olarak etiketlemeyin.",
+    "Zihaf burada Türk aruzu derslerindeki uzun sesliyi kısa okuma manasıyla öğretilir. Arap aruz nazariyesindeki zihaf ve illet sınıflaması ayrı düzlemdir.",
+    "Sesli ritim üretilecekse uzunluklar ders için temsilî olmalı; tabiî şiir icrasının kesin milisaniye ölçüsü gibi sunulmamalıdır.",
+    "Kaynaklardaki hataları aktarmayın: TDV Taktî‘ maddesinin Türk edebiyatı bölümündeki vasl tanımı ilk cümlede sesli ve sessiz harfi ters verir; sonraki izah ve misal doğru yöndedir. TDV Tef‘ile maddesinde müstef‘ilün için verilen – ⏑ – – dizisi metin hatasıdır; doğrusu – – ⏑ – olup bu derslerde bu tef‘ile kullanılmamıştır.",
+    "İncelenen mevcut academy.js, Muhibbî ilk mısrası için de hecesini – gösteriyor: bu imâle izahı ister. Mısra sonu bi ise son-hece kaidesiyle izah edilmeli. Halk içinde sınırında ulama mecburî değildir; mevcut verilen kalıp bu noktada vaslsız okumayı kullanıyor.",
+    "Mevcut academy.js içindeki verifiedMeter:false alanları gerçek bir çözüm gibi puanlanmamalı. Bunların pattern alanları yalnız kısa ritim parçaları taşıyor; bütün mısraya ait tahkik edilmiş taktî değildir."
+  ]
+}
