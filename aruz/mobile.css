@@ -1,0 +1,165 @@
+/* The same navigation stays within reach on phones; the reading area can scroll. */
+.nav-icon{display:none}
+.share-page{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;white-space:nowrap;font-size:13px;color:var(--gold)}
+.share-icon{width:19px;height:19px;flex:none}
+.mobile-lesson-picker{display:none}
+#lessonContent,#journeyBody,#playTitle{scroll-margin-top:18px;scroll-margin-bottom:90px}
+
+@media screen and (max-width:900px){
+  html{scroll-padding-top:82px;scroll-padding-bottom:90px;-webkit-text-size-adjust:100%}
+  body{--dock-height:70px;padding-bottom:calc(var(--dock-height) + env(safe-area-inset-bottom,0px))}
+  .masthead,.brand-route .masthead{position:sticky;top:0;min-height:68px;flex-wrap:nowrap;padding:10px max(18px,env(safe-area-inset-right,0px)) 10px max(18px,env(safe-area-inset-left,0px));gap:12px;backdrop-filter:none;background:#11151d;z-index:40}
+  .brand-route .masthead{background:#0b1019}
+  .masthead .brand{font-size:23px;gap:10px}
+  .masthead .brand-mark{width:35px;height:35px;font-size:22px}
+  .masthead .brand small{font-size:9px;letter-spacing:1.7px;margin-top:3px}
+  .masthead .progress-link{display:none}
+  .masthead .share-page{margin-left:auto;min-height:44px;padding:8px 12px;font-size:13px;border-color:#b69b654f;background:#dfc08608}
+  .masthead nav{position:fixed;inset:auto 0 0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;margin:0;gap:0;padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));border-top:1px solid #d5be8a35;background:#121922;box-shadow:0 -8px 30px #0002;overflow:visible;z-index:41}
+  .masthead nav>a,.masthead .nav-tools>summary{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;width:100%;min-height:56px;padding:5px 2px;font-size:11px;font-weight:600;line-height:1.4;border-radius:8px;color:#aab3c2;text-align:center}
+  .masthead .nav-icon{display:block;width:21px;height:21px;flex:none}
+  .masthead .nav-tools{align-self:stretch;min-width:0}
+  .masthead .nav-tools>summary:after{display:none}
+  .masthead nav>a.active,.masthead .nav-tools>summary.active,.masthead .nav-tools[open]>summary{background:#ddbd7914;color:#f0cd88;box-shadow:none}
+  .masthead .tools-menu{top:auto;bottom:calc(100% + 14px);right:0;min-width:235px;max-width:calc(100vw - 32px);padding:8px}
+  .masthead .tools-menu a{display:flex;align-items:center;min-height:48px;padding:12px 16px;font-size:15px}
+  body>footer{padding-bottom:25px}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom,0px));max-width:calc(100vw - 32px)}
+  .projector .masthead{display:none}
+  .projector{padding-bottom:0}
+}
+
+@media screen and (max-width:780px){
+  main{padding:24px 18px 36px}
+  main>*{min-width:0;max-width:100%}
+  h1{font-size:clamp(29px,8vw,38px);line-height:1.25;letter-spacing:-1px;overflow-wrap:break-word}
+  .page-intro{margin-bottom:22px}
+  .intro-copy{font-size:14px;line-height:1.8;margin-top:12px}
+  button,summary{min-height:44px}
+  button{touch-action:manipulation}
+  summary{cursor:pointer;align-content:center}
+  input:not([type=checkbox]):not([type=radio]),textarea,select{font-size:16px!important;max-width:100%}
+  input[type=range],.player-timeline input[type=range],.rhythm-player input[type=range]{min-height:44px;height:44px;cursor:pointer}
+  input[type=checkbox]{width:20px;height:20px;flex:none}
+  label:has(input[type=checkbox]){display:inline-flex;align-items:center;gap:8px;min-height:44px}
+  a.primary,a.secondary,a.text-button,a.brand-text-link,.listen-links a,.source-line a,.source-list a,.journey-sources a{display:inline-flex;align-items:center;min-height:44px}
+  .text-button{font-size:13px}
+  .action-row{gap:12px}
+  .action-row>.primary,.action-row>.secondary{white-space:normal}
+  .brand-home{--brand-pad:20px}
+  .brand-hero{min-height:0;padding:28px var(--brand-pad) 215px;align-items:flex-start}
+  .hero-copy{width:100%;max-width:none}
+  .hero-copy .eyebrow{font-size:10px;letter-spacing:1.8px;margin-bottom:18px}
+  .hero-copy h1{font-size:clamp(33px,9.4vw,55px);line-height:1.17;letter-spacing:-1.5px}
+  .hero-copy h1 em{white-space:normal}
+  .hero-copy>p{font-size:14px;line-height:1.8;max-width:38em;margin-top:20px}
+  .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:22px}
+  .hero-actions .brand-primary{min-height:50px;padding:12px 16px;font-size:13px;gap:16px}
+  .hero-actions .hero-rhythm-link{min-height:48px;font-size:13px;padding:8px 0;white-space:nowrap}
+  .hero-game-note{font-size:12px;line-height:1.8;margin-top:12px}
+  .hero-note{font-size:11px;line-height:1.8;margin-top:18px;max-width:100%}
+  .hero-note>span{flex:none}
+  .hero-art{width:100%;max-width:620px;right:-6%;bottom:-10px;top:auto;transform:none}
+  .brand-hero:after{background:linear-gradient(180deg,#0b1019 0%,#0b1019 57%,#0b101999 69%,transparent 89%,#0b1019 100%)}
+  .art-caption{bottom:12px;font-size:8px;letter-spacing:1.6px}
+  .brand-home .brand-demo{margin-top:0;padding-top:38px}
+  .demo-couplet{font-size:clamp(19px,5.1vw,25px);line-height:2}
+  .demo-couplet .word-reveal{min-height:44px;line-height:1.8}
+  .brand-demo .player-controls{margin-top:0}
+  .brand-demo .record-name-button{font-size:13px}
+  .play-intro{display:block;margin:0 0 20px}
+  .play-intro h1{font-size:clamp(29px,8.6vw,40px);line-height:1.2;letter-spacing:-1px}
+  .play-intro p{font-size:13px;line-height:1.8;margin-top:10px;max-width:none}
+  .play-intro .play-exit{display:none}
+  .play-top{padding:12px 16px}
+  .play-trail{padding:12px 14px}
+  .play-trail li{font-size:10px}
+  .play-stage{padding:22px 16px;min-height:0}
+  .play-stage h2{font-size:clamp(24px,6.7vw,30px);line-height:1.35}
+  .play-kicker{font-size:10px;margin-bottom:12px}
+  .play-caption{font-size:13px}
+  .play-verse{font-size:clamp(19px,5.4vw,25px);line-height:1.9;padding:16px 12px;margin:19px 0}
+  .play-word-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+  .play-word-choices button{min-width:0;min-height:48px;font-size:clamp(17px,4.7vw,22px);padding:10px 4px;overflow-wrap:anywhere}
+  .play-table-foot{padding:10px 16px;gap:10px;font-size:11px}
+  .play-table-foot .text-button{font-size:12px}
+  .play-stage .text-button{font-size:13px}
+  .play-collection summary{font-size:13px}
+  .play-feedback p,.play-keepsakes{font-size:13px}
+  .play-drum small{font-size:11px}
+  .rhythm-player{padding:23px 20px}
+  .rhythm-player .rhythm-status{font-size:13px}
+  .rhythm-player .rhythm-explanation{font-size:13px;line-height:1.8}
+  .rhythm-choices button{min-height:86px}
+  .player-head{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px 12px}
+  .play-button{width:44px;height:44px;min-height:44px;flex-basis:44px}
+  .player-title{min-width:0}
+  .record-name-button{font-size:14px;line-height:1.55;width:100%;min-height:44px}
+  .player-controls{grid-column:2;display:flex;gap:8px;margin:0}
+  .player-controls button{min-width:50px;min-height:44px;padding:8px 12px;font-size:13px}
+  .bookmark{width:44px;min-width:44px;min-height:44px}
+  .syllable{min-width:44px;min-height:60px;padding:8px 5px}
+  .foot-syllables{padding:5px}
+  .foot{min-width:0;max-width:100%}
+  .meter-title{flex-wrap:wrap}
+  .meter-title h3,.scan-line-label{overflow-wrap:break-word}
+  .chapter-list{scroll-snap-type:x proximity;scroll-padding:2px}
+  .chapter-button{scroll-snap-align:start;min-height:46px}
+  .chapter-button strong{font-size:14px}
+  .reading-tools{gap:0;justify-content:space-between;padding:0 16px}
+  .reading-tools button{min-height:48px;font-size:13px;padding:12px 4px}
+  .journey-steps button{min-height:65px;font-size:12px}
+  .journey-top,.journey-poem,.journey-body{padding-left:18px;padding-right:18px}
+  .journey-heces>button{min-width:0;flex:1}
+  .journey-actions{flex-wrap:wrap;gap:12px}
+  .journey-actions .primary{flex:1;min-width:160px}
+  .lessons-layout{gap:20px}
+  .lesson-list{display:none}
+  .mobile-lesson-picker{display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--muted)}
+  .mobile-lesson-picker select{width:100%;min-height:50px;padding:12px;background:#1c2634;color:var(--ink);border:1px solid var(--line);border-radius:9px}
+  #lessonSummary{font-size:12px;line-height:1.6}
+  .level-tabs{gap:7px;display:flex;flex-wrap:wrap}
+  .level-tabs button{font-size:13px;padding:9px 12px}
+  .lesson-content{padding:24px 20px}
+  .lesson-content .meaning-detail,.lesson-body p{font-size:15px;line-height:1.9}
+  .quiz-options{grid-template-columns:1fr}
+  .quiz-options button{font-size:15px;line-height:1.7;padding:12px 15px}
+  .archive-controls select{min-width:0;min-height:48px}
+  .search{min-height:48px}
+  .record-card .text-button{min-height:44px;font-size:13px}
+  .teacher-form>*{min-height:48px;max-width:100%}
+  dialog{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);padding:20px;overflow:auto;overscroll-behavior:contain}
+  .dialog-top{position:sticky;top:-20px;background:#1b2330;padding-top:8px;padding-bottom:8px;z-index:1}
+  .dialog-top button{width:44px;min-height:44px}
+  dialog h2{font-size:27px;line-height:1.35}
+  dialog a{overflow-wrap:anywhere}
+  dialog input[type=file]{width:100%;white-space:normal}
+  body>footer{gap:8px 16px;padding-top:22px}
+  body>footer .text-button{font-size:13px;text-align:left;min-height:44px;margin:0}
+  body>footer>span{flex-basis:100%}
+}
+
+@media screen and (max-width:360px){
+  .masthead,.brand-route .masthead{padding-left:14px;padding-right:14px}
+  main{padding-left:14px;padding-right:14px}
+  .brand-home{--brand-pad:16px}
+  .hero-actions{gap:8px 12px}
+  .hero-actions .brand-primary{gap:10px;padding:12px;font-size:12px}
+  .hero-actions .hero-rhythm-link{font-size:12px}
+  .hero-copy h1{font-size:33px}
+  .play-stage{padding-left:14px;padding-right:14px}
+  .play-drums{gap:12px}
+  .play-drum{width:118px;min-height:118px}
+  .play-drum.short{width:101px;min-height:105px}
+  .level-tabs button{font-size:12px;padding:8px 10px}
+  .reading-panel,.record-player{padding-left:16px;padding-right:16px}
+}
+
+@media screen and (max-height:500px) and (orientation:landscape) and (max-width:900px){
+  .masthead,.brand-route .masthead{position:relative}
+  .masthead nav{padding-top:3px;padding-bottom:calc(3px + env(safe-area-inset-bottom,0px))}
+  .masthead nav>a,.masthead .nav-tools>summary{min-height:44px;flex-direction:row;gap:7px}
+  .masthead nav .nav-icon{width:18px;height:18px}
+}
+
+@media print{.share-page,.mobile-lesson-picker{display:none!important}}

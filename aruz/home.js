@@ -8,7 +8,7 @@
     main.innerHTML = `
       <div class="brand-home">
         <section class="brand-hero" aria-labelledby="brandHeadline">
-          <img class="hero-art" src="assets/siirin-icinde.png" width="1536" height="1024" fetchpriority="high" alt="Gece mavisi zeminde, sayfaları bir ritim dalgası gibi yükselen açık bir şiir kitabı.">
+          <picture><source srcset="assets/siirin-icinde.webp" type="image/webp"><img class="hero-art" src="assets/siirin-icinde.png" width="1536" height="1024" fetchpriority="high" alt="Gece mavisi zeminde, sayfaları bir ritim dalgası gibi yükselen açık bir şiir kitabı."></picture>
           <div class="hero-copy">
             <span class="eyebrow">BİR ŞİİRİN İÇİNE GİR.</span>
             <h1 id="brandHeadline">Bir beyit,<br>duyduğundan<br><em>çok daha fazlası.</em></h1>

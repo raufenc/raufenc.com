@@ -1,8 +1,11 @@
 (() => {
   'use strict';
   const feet=[['Fâilâtün','LSLL'],['Mefâîlün','SLLL'],['Feûlün','SLL'],['Mef‘ûlü','LLS'],['Mefâîlü','SLLS'],['Feilâtün','SSLL'],['Müstef‘ilün','LLSL'],['Fâilün','LSL']];
+  const ids=['failatun','mefailun','feulun','mefulu','mefailu','feilatun','mustefilun','failun'];
   let selected=0,tempo=80;
+  window.getFailatunRhythm=()=>({id:ids[selected],name:feet[selected][0]});
   window.renderFailatunRhythms=({esc,marks,playPattern,stopTones,newEar,resetBuilder})=>{
+    const requested=ids.indexOf(new URLSearchParams(location.search).get('ritim'));if(requested>=0)selected=requested;
     const main=document.querySelector('#main'),$=s=>main.querySelector(s),$$=s=>[...main.querySelectorAll(s)];
     main.innerHTML=`<div class="page-intro"><div><span class="eyebrow">DİNLE</span><h1>Ritimleri dinle.</h1></div><p class="intro-copy">Oynat düğmesine bas. Başka bir ritim duymak için adına dokun.</p></div>
       <div class="rhythm-layout">
@@ -15,7 +18,7 @@
     const paint=()=>{$('#rhythmName').textContent=feet[selected][0];$('#pulsePattern').innerHTML=[...feet[selected][1]].map(mark=>`<span class="pulse-mark"><b>${marks(mark)}</b><small>${mark==='L'?'uzun':'kısa'}</small></span>`).join('');$$('[data-rhythm]').forEach(b=>b.setAttribute('aria-pressed',Number(b.dataset.rhythm)===selected))};
     const start=async()=>{stopTones();const ticket=++attempt;paintState(true);const ok=await playPattern(feet[selected][1],tempo,()=>paintState(false));if(ticket===attempt&&!ok)paintState(false)};
     $('#pulsePlay').onclick=()=>{if(playing){attempt++;stopTones();paintState(false)}else start()};
-    $$('[data-rhythm]').forEach(button=>button.onclick=()=>{stopTones();selected=Number(button.dataset.rhythm);paint();start()});
+    $$('[data-rhythm]').forEach(button=>button.onclick=()=>{stopTones();selected=Number(button.dataset.rhythm);const url=new URL(location.href);url.search='';url.searchParams.set('ritim',ids[selected]);url.hash='ritimler';history.replaceState(null,'',url);paint();start()});
     $('#tempo').oninput=e=>{tempo=Number(e.target.value);$('#tempoValue').value=tempo;if(playing)start()};
     paint();newEar();$('#newEar').onclick=()=>{stopTones();newEar()};resetBuilder();$('#resetBuilder').onclick=()=>{stopTones();resetBuilder()};
   };
