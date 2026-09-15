@@ -4,6 +4,7 @@ const NT = {
   // Sayfa navigasyon linkleri
   navLinks: [
     { href: '/noroterbiye/', label: 'Ana Sayfa' },
+    { href: '/noroterbiye/duvar-kagitlari/', label: 'Duvar Kâğıtları' },
     { href: '/noroterbiye/sozluk/', label: 'Sözlük' },
     { href: '/noroterbiye/kisa-bilgiler/', label: 'Kısa Bilgiler' },
     { href: '/noroterbiye/testler/', label: 'Testler' },

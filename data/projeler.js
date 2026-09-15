@@ -4,6 +4,7 @@
  * Son guncelleme: 2026-07-21
  */
 var PROJELER = [
+  {"emoji": "🖼️", "title": "Nöroterbiye — Duvar Kâğıtları", "desc": "50 yazısız resim. Kaydır, seç; telefonuna veya bilgisayarına indir, paylaş.", "tag": "Koleksiyon", "href": "/noroterbiye/duvar-kagitlari/", "kategori": "noroterbiye"},
   {"emoji": "📖", "title": "Beyit Defteri", "desc": "Rauf Enç’in şiirleri, gazelleri ve ilk denemeleri. Mektûbât’tan elli gazel; beyitler, kelimeler ve aruzun ahengi.", "tag": "Şiir", "href": "/beyitdefteri/", "kategori": "dil", "featured": true},
   {"emoji": "🎼", "title": "Fâilâtün — Aruz Atölyesi", "desc": "Kayıp kelimeyi bul, bir hâle uygun beyti seç, ritmi parmaklarınla kur. Hayâtî İnanç’ın asıl kayıtları eşliğinde şiirin manasına ve ahengine yaklaş.", "tag": "Uygulama", "href": "/aruz/", "kategori": "dil", "featured": true},
   { emoji: '\u{1F9E0}', title: 'NöroTerbiye', desc: 'Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.', tag: 'Uygulama', href: '/noroterbiye/', kategori: 'noroterbiye', featured: true },
