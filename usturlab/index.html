@@ -553,7 +553,15 @@ table.vakit tr.simdi td.ad::before{ content:"◂ "; color:var(--kirmizi-yazi); }
         <input type="range" id="saat" min="0" max="1439.9" step="0.1" value="720"
                aria-label="Günün saati">
       </div>
+      <div class="alan" style="flex:1 1 210px; min-width:168px">
+        <label for="gun" class="sr">Yılın günü</label>
+        <span class="saat-degeri" id="gun-degeri" style="font-size:15px;min-width:7.2ch">—</span>
+        <input type="range" id="gun" min="1" max="366" step="1" value="1"
+               aria-label="Yılın günü — saat sabit kalır">
+      </div>
       <div class="alan">
+        <button id="iz" type="button" aria-pressed="false"
+                title="Aynı saatte, yıl boyunca güneşin levhadaki izi">Yıl izi</button>
         <button id="simdi" type="button">Şimdi</button>
         <button id="canli" type="button" aria-pressed="false">Canlı</button>
         <button id="yuz" type="button">Arka yüz</button>
@@ -5504,7 +5512,8 @@ var VAKIT_ADLARI=[
 var YON_ADLARI=[{az:0,ad:'Şimâl'},{az:90,ad:'Şark'},{az:180,ad:'Cenûb'},{az:270,ad:'Garb'}];
 
 /* ============================ durum ============================ */
-var st={ jd:0, belde:0, yuz:'on', canli:true, yildiz:null, tema:null };
+var st={ jd:0, belde:0, yuz:'on', canli:true, yildiz:null, tema:null, iz:false };
+var izNoktalar=null, izAnahtar='';   /* analemma önbelleği */
 var P={};                       /* jetonlardan okunan renk paleti */
 var el={};                      /* DOM önbelleği */
 var yildizEkran=[];             /* son çizimdeki yıldız konumları (vuruş testi) */
@@ -5515,7 +5524,7 @@ function $(id){ return document.getElementById(id); }
 ['tk-miladi','tk-hicri','tk-rumi','govde','tuval','sehir','tarih','saat','saat-degeri',
  'simdi','canli','yuz','tema','vakit-govde','vakit-usul','sems-govde','kamer-tuval',
  'kamer-govde','kible-govde','yildiz-liste','yildiz-not','yildiz-kart','imlec',
- 'temkin-dokum','temkin-toplam','dip-metin','denetim-ac'].forEach(function(id){ el[id]=$(id); });
+ 'temkin-dokum','temkin-toplam','dip-metin','denetim-ac','gun','gun-degeri','iz'].forEach(function(id){ el[id]=$(id); });
 
 /* ===================== renk jetonlarını oku =====================
    Tuval CSS değişkeni kullanamaz; her tema değişiminde yeniden okunur. */
@@ -5543,6 +5552,34 @@ function yerelParca(jd,tz){
 }
 function jdYap(y,m,d,saat,tz){ return V.julianDayFromCalendar(y,m,d)+(saat-tz)/24; }
 function jd0Al(jd,tz){ var p=yerelParca(jd,tz); return V.julianDayFromCalendar(p.y,p.m,p.d); }
+function yilGunSayisi(y){ return V.julianDayFromCalendar(y+1,1,1)-V.julianDayFromCalendar(y,1,1); }
+function yilinGunu(y,m,d){ return V.julianDayFromCalendar(y,m,d)-V.julianDayFromCalendar(y,1,1)+1; }
+function gunTarihi(y,n){                     /* n = 1..365/366  ->  {y,m,d} */
+  var c=S.calendarDate(V.julianDayFromCalendar(y,1,1)+(n-1)+0.5);
+  return { y:c.year, m:c.month, d:c.day };
+}
+
+/* ----------------------------- YIL İZİ (analemma) -----------------------------
+   Saat SABİT tutulup gün yıl boyunca kaydırılınca güneşin levhadaki yeri kapalı
+   bir sekiz çizer. Sebebi: sabit medenî saatte fadl-ı dâir yalnız ta'dîl-i zemân
+   kadar (±16 dk) oynar, meyl ise ±23,4° gider. Yani bu eğri, cetveldeki
+   "ta'dîl-i zemân" sayısının gözle görülür hâlidir.
+   Konumlar R biriminde; çizerken k ile çarpılır. Enlemden bağımsızdır.        */
+function yilIzi(){
+  var b=beldeAl(), p=son.p;
+  var anahtar=[p.y,Math.round(p.saat*60),b.lon,b.tz].join('|');
+  if(izAnahtar===anahtar && izNoktalar) return izNoktalar;
+  var N=yilGunSayisi(p.y), pts=[];
+  for(var n=1;n<=N;n+=2){
+    var t=gunTarihi(p.y,n);
+    var jd=jdYap(t.y,t.m,t.d,p.saat,b.tz);
+    var eps=G.meanObliquityDeg(K.jdUtToJde(jd));
+    var q=G.eclipticPoint(S.sunPosition(jd).lambdaDeg,eps);
+    var r=G.rotatePoint(q.x,q.y,G.reteRotationDeg(S.lastDeg(jd,b.lon)));
+    pts.push({ x:r.x, y:r.y, ay:t.m, gun:t.d });
+  }
+  izNoktalar=pts; izAnahtar=anahtar; return pts;
+}
 function ss(saat){ return V.formatHm(saat); }
 function sss(saat){ return V.formatHms(saat); }
 function der(x,basamak){
@@ -5900,6 +5937,28 @@ function onYuzCiz(){
     hilalCiz(ctx,mo.x,mo.y,Math.max(3.4,boy*0.0096),son.evre,hat,P.madeniKoyu);
   }
 
+  /* --- yıl izi: aynı saatte 365 günün güneşi --- */
+  if(st.iz){
+    var iz=yilIzi();
+    ctx.beginPath();
+    for(var ii=0;ii<iz.length;ii++){
+      var IX=iz[ii].x*k, IY=iz[ii].y*k;
+      if(ii===0) ctx.moveTo(IX,IY); else ctx.lineTo(IX,IY);
+    }
+    ctx.closePath();
+    ctx.strokeStyle=P.altinB; ctx.lineWidth=hat*1.3; ctx.globalAlpha=0.9; ctx.stroke();
+    ctx.globalAlpha=1;
+    /* ay başları işaretlensin ki hangi ucun hangi mevsim olduğu okunsun */
+    kazima(ctx,Math.max(8,boy*0.0138));
+    var AY_K=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+    iz.forEach(function(q){
+      if(q.gun>2) return;                       /* ayın ilk örneklenen günü */
+      ctx.beginPath(); ctx.arc(q.x*k,q.y*k,Math.max(1.3,boy*0.0032),0,TAU);
+      ctx.fillStyle=P.altinA; ctx.fill();
+      if(q.ay%3===1) etiket(ctx,AY_K[q.ay-1],q.x*k,q.y*k-boy*0.016,P.altinYazi,P.oyuk);
+    });
+  }
+
   /* --- mistara (kural): şemsin üzerinden geçen altın çap --- */
   var ang=G.ruleAngleThroughPointDeg(sun.x,sun.y);
   var ends=G.ruleEndpoints(ang,rimPx);
@@ -6187,8 +6246,9 @@ function rayYaz(){
     satir('Evre',evreAd,(e.illuminated*100).toFixed(1).replace('.',',')+'%')+
     satir('Kamer yaşı','son içtimâdan beri',e.ageDays.toFixed(2).replace('.',',')+' gün')+
     satir('Bu’d','güneşten açısal uzaklık',der(e.elongationDeg,1))+
-    satir('İrtifâ','ufuktan',dereceDakika(au.altDeg))+
-    satir('Semt','',der(au.azDeg,1))+
+    satir('İrtifâ','ufuktan, ihtilâf-ı manzar düzeltilmiş',dereceDakika(au.altTopoDeg))+
+    satir('Semt','',der(au.azTopoDeg,1))+
+    satir('İhtilâf-ı manzar','ayın paralaksı',dereceDakika(au.parallaxInAltitudeRigorousDeg))+
     satir('Meyl','',dereceDakika(ay.decDeg))+
     satir('Uzaklık','merkezden merkeze',Math.round(ay.distanceKm).toLocaleString('tr-TR')+' km');
   /* panel hilâli */
@@ -6284,6 +6344,11 @@ function guncelle(hepsi){
   el.saat.value=String(Math.max(0,Math.min(1439.9,p.saat*60)));
   var ay=(p.m<10?'0':'')+p.m, gn=(p.d<10?'0':'')+p.d;
   el.tarih.value=p.y+'-'+ay+'-'+gn;
+  var AY_TR3=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos',
+              'Eylül','Ekim','Kasım','Aralık'];
+  el.gun.max=String(yilGunSayisi(p.y));
+  el.gun.value=String(yilinGunu(p.y,p.m,p.d));
+  el['gun-degeri'].textContent=p.d+' '+AY_TR3[p.m-1].slice(0,3);
 }
 
 /* --- ankebût sürükleme: dönüş DOĞRUDAN yıldız zamanıdır --- */
@@ -6367,6 +6432,15 @@ el.saat.addEventListener('input',function(){
   var p=son.p;
   st.jd=jdYap(p.y,p.m,p.d,(+el.saat.value)/60,son.tz);
   canliDur(); guncelle();
+});
+/* Gün kaydıracı: SAATİ SABİT tutup günü değiştirir — aynı saatte farklı günler. */
+el.gun.addEventListener('input',function(){
+  var p=son.p, t=gunTarihi(p.y,+el.gun.value);
+  st.jd=jdYap(t.y,t.m,t.d,p.saat,son.tz);
+  canliDur(); plakaAnahtar=''; guncelle();
+});
+el.iz.addEventListener('click',function(){
+  st.iz=!st.iz; el.iz.setAttribute('aria-pressed',st.iz?'true':'false'); ciz();
 });
 el.simdi.addEventListener('click',function(){ st.jd=jdSimdi(); plakaAnahtar=''; guncelle(); });
 el.canli.addEventListener('click',function(){ st.canli?canliDur():canliBasla(); });
@@ -6499,6 +6573,10 @@ function denetim(){
   var ev=K.moonPhase(K.jdUtToJde(jdX));
   ok('aydınlanma kesri geçerli',ev.illuminated>=0&&ev.illuminated<=1,
      (ev.illuminated*100).toFixed(2)+'%  yaş '+ev.ageDays.toFixed(2)+' gün');
+  var mau=K.moonAltAz(jdX,41.0082,28.9784,267);
+  ok('kamer irtifâ/semt alanları dolu',
+     isFinite(mau.altTopoDeg)&&isFinite(mau.azTopoDeg),
+     'irtifâ '+mau.altTopoDeg.toFixed(3)+'° semt '+mau.azTopoDeg.toFixed(2)+'°');
 
   /* 11. hicrî gidiş-dönüş */
   var hj=K.gregorianToHijri(2026,9,24,'civil');
