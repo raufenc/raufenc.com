@@ -6124,7 +6124,12 @@ function arkaYuzCiz(){
   ctx.strokeStyle=P.madeniGolge; ctx.lineWidth=hat*1.2; ctx.stroke();
 }
 
-function ciz(){ if(st.yuz==='on') onYuzCiz(); else arkaYuzCiz(); }
+function ciz(){
+  /* ResizeObserver ilk cagrisini yazi tipleri yuklenirken, yani basla()'dan
+     ONCE yapabilir; o an `son` henuz bos olur. Ilk hesaptan once cizme. */
+  if(!son.b) return;
+  if(st.yuz==='on') onYuzCiz(); else arkaYuzCiz();
+}
 
 /* ==================================================================
    RAY: muvakkit cetveli
