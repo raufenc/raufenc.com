@@ -605,6 +605,29 @@ button.tt:hover{ color:var(--kirmizi-yazi); border-bottom-style:solid; }
 .vakit-not b,.olcum-aciklama b{ color:var(--kirmizi-yazi); font-weight:400; }
 .olcum-aciklama{ color:var(--metin-3); font-style:normal; }
 
+
+/* --------------------------------------- terim balonu (âlet üstü) --- */
+.terim-balon{
+  position:absolute; z-index:5; width:min(266px,72%);
+  background:var(--yuzey); border:1px solid var(--hat-guclu); border-radius:3px;
+  padding:9px 11px 10px; box-shadow:0 6px 18px -8px var(--koyu-hat);
+}
+.terim-balon:focus{ outline:2px solid var(--odak); outline-offset:2px; }
+.balon-kapat{
+  position:absolute; top:2px; right:3px; border:0; background:none; padding:2px 6px;
+  font-size:17px; line-height:1; color:var(--metin-4); cursor:pointer; border-radius:0;
+}
+.balon-kapat:hover{ color:var(--metin); }
+.balon-ad{
+  font-family:"Alegreya Sans SC",Optima,"Gill Sans MT",system-ui,sans-serif;
+  font-size:16px; font-weight:500; letter-spacing:.03em; color:var(--metin);
+  padding-right:18px;
+}
+.balon-kisa{ margin:4px 0 0; font-size:14px; line-height:19.5px; color:var(--metin-2); }
+.balon-alt{ display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+.balon-detay{ font-size:12.5px; padding:3px 9px; }
+.balon-modern{ font-size:11.5px; color:var(--metin-4); font-style:italic; }
+
 /* dipnot */
 .dip{
   padding:12px 16px 20px; font-size:12.5px; line-height:18px; color:var(--metin-4);
@@ -671,6 +694,8 @@ button.tt:hover{ color:var(--kirmizi-yazi); border-bottom-style:solid; }
       <canvas id="tuval" aria-label="Usturlâb: safîha ve ankebût. Döndürmek için sürükleyin."
               role="img" tabindex="0"></canvas>
       <div class="sev"></div>
+      <div class="terim-balon" id="terim-balon" hidden role="dialog"
+           aria-label="Terim açıklaması" tabindex="-1"></div>
     </div>
 
     <div class="zaman-cubugu panel">
@@ -5659,6 +5684,8 @@ var BELDELER=[
  {ad:'Kāhire',             lat:30.0444, lon:31.2357, elev:23,   zon:'Africa/Cairo'},
  {ad:'Semerkant',          lat:39.6270, lon:66.9750, elev:705,  zon:'Asia/Samarkand'}
 ];
+var BURC_ANAHTAR=['hamel','sevr','cevza','seretan','esed','sunbule',
+                  'mizan','akreb','kavs','cedi','delv','hut'];
 var VAKIT_ADLARI=[
  {k:'imsak', ad:'İmsak',  alt:'fecr-i sâdık'},
  {k:'gunes', ad:'Güneş',  alt:'şürûk'},
@@ -5667,7 +5694,8 @@ var VAKIT_ADLARI=[
  {k:'aksam', ad:'Akşam',  alt:'gurûb'},
  {k:'yatsi', ad:'Yatsı',  alt:'şefak-ı ahmer'}
 ];
-var YON_ADLARI=[{az:0,ad:'Şimâl'},{az:90,ad:'Şark'},{az:180,ad:'Cenûb'},{az:270,ad:'Garb'}];
+var YON_ADLARI=[{az:0,ad:'Şimâl',anahtar:'simal'},{az:90,ad:'Şark',anahtar:'sark'},
+                {az:180,ad:'Cenûb',anahtar:'cenub'},{az:270,ad:'Garb',anahtar:'garb'}];
 var AY_TR=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos',
            'Eylül','Ekim','Kasım','Aralık'];
 
@@ -5687,7 +5715,7 @@ function $(id){ return document.getElementById(id); }
  'simdi','canli','yuz','tema','vakit-govde','vakit-usul','sems-govde','kamer-tuval',
  'kamer-govde','kible-govde','yildiz-liste','yildiz-not','yildiz-kart','imlec',
  'temkin-dokum','temkin-toplam','dip-metin','vakit-not','denetim-ac','gun','gun-degeri','iz',
- 'kip-cubugu','ray-alet','ray-ders','ray-sozluk','ray-vazife','ray-tarih','kolofon'
+ 'terim-balon','kip-cubugu','ray-alet','ray-ders','ray-sozluk','ray-vazife','ray-tarih','kolofon'
 ].forEach(function(id){ el[id]=$(id); });
 
 function paletOku(){
@@ -5848,11 +5876,43 @@ function tuvalHazir(cnv,boy){
 function kazima(ctx,px,ag){ ctx.font=(ag||500)+' '+px+'px "Alegreya Sans SC", Optima, "Gill Sans MT", system-ui, sans-serif'; }
 function govdeYazi(ctx,px,it){ ctx.font=(it?'italic ':'')+'400 '+px+'px "EB Garamond", Palatino, Georgia, serif'; }
 function dogu(ctx,px){ ctx.font='400 '+px+'px "Noto Naskh Arabic", "Geeza Pro", serif'; }
-function etiket(ctx,s,x,y,renk,zemin,hiza,taban){
+/* ---------------------------------------------------------------------
+   TIKLANABİLİR ETİKETLER
+   Levhaya yazılan her ad, çizilirken bir vuruş dikdörtgeni olarak kaydedilir;
+   böylece âletin ÜZERİNDEKİ yazıya tıklanınca anlamı çıkar. Anahtar verilmezse
+   yazının kendisi sözlükte aranır (SOZ_ARA).
+   Safîha etiketleri önbelleğe alınan katmanda çizildiği için ayrı dizide
+   tutulur ve yalnız levha yeniden çizilince tazelenir.
+   --------------------------------------------------------------------- */
+var plakaEtiket=[], canliEtiket=[];
+var ETIKET_KAYIT=null;      /* etkin kayıt dizisi (null = kaydetme) */
+var ETIKET_KONUM=null;      /* döndürülmüş çerçevede gerçek ekran konumu */
+function etiketKaydet(ctx,s,x,y,hiza,anahtar){
+  if(!ETIKET_KAYIT) return;
+  var k=anahtar||SOZ_ARA[normal(s)];
+  if(!k||!SOZ[k]) return;
+  var g=10; try{ g=ctx.measureText(s).width; }catch(e){}
+  var yuk=parseFloat(ctx.font)||12;
+  var p=ETIKET_KONUM||{x:x,y:y};
+  var cx=p.x;
+  if(hiza==='right') cx=p.x-g/2; else if(hiza==='left') cx=p.x+g/2;
+  ETIKET_KAYIT.push({x:cx, y:p.y, w:Math.max(g,12)+8, h:yuk+8, k:k, s:s});
+}
+function etiket(ctx,s,x,y,renk,zemin,hiza,taban,anahtar){
   ctx.textAlign=hiza||'center'; ctx.textBaseline=taban||'middle';
   ctx.lineJoin='round'; ctx.miterLimit=2;
   ctx.strokeStyle=zemin; ctx.lineWidth=3.2; ctx.strokeText(s,x,y);
   ctx.fillStyle=renk; ctx.fillText(s,x,y);
+  etiketKaydet(ctx,s,x,y,hiza,anahtar);
+}
+/* tıklanan noktanın altındaki etiket */
+function etiketBul(x,y){
+  var hepsi=canliEtiket.concat(plakaEtiket);
+  for(var i=0;i<hepsi.length;i++){
+    var e=hepsi[i];
+    if(Math.abs(x-e.x)<=e.w/2 && Math.abs(y-e.y)<=e.h/2) return e;
+  }
+  return null;
 }
 function daire(ctx,c,k){
   ctx.beginPath();
@@ -5887,7 +5947,7 @@ var CIZ_LIMB={
     dogu(ctx,Math.max(9,o.boy*0.0175));
     for(var d2=0;d2<360;d2+=30){
       var pt=G.limbPoint(d2,(R['limb-derece-dis']+R['limb-derece-ic'])/2);
-      etiket(ctx,TZ.doguJeton(d2),pt.x,pt.y,P.madeniGolge,P.madeniIsik);
+      etiket(ctx,TZ.doguJeton(d2),pt.x,pt.y,P.madeniGolge,P.madeniIsik,null,null,'limb');
     }
  },
  'limb-saat': function(o){
@@ -5902,7 +5962,7 @@ var CIZ_LIMB={
       ctx.beginPath(); ctx.moveTo(q1.x,q1.y); ctx.lineTo(q2.x,q2.y);
       ctx.strokeStyle=P.madeniKoyu; ctx.lineWidth=hat; ctx.stroke();
       var qm=G.limbPoint(ang-7.5,(R['limb-isim-dis']+R['limb-isim-ic'])/2);
-      etiket(ctx,String(s),qm.x,qm.y,P.madeniGolge,P.madeniIsik);
+      etiket(ctx,String(s),qm.x,qm.y,P.madeniGolge,P.madeniIsik,null,null,'fadl-i-dair');
     }
  }
 };
@@ -5925,7 +5985,7 @@ var CIZ_PLAKA={
       var c=G.almucantar(h2,o.phi);
       var yG=(c.cy-c.r)*o.k, yK=(c.cy+c.r)*o.k;
       var yy=(Math.abs(yG)<o.rimPx-6)?yG:((Math.abs(yK)<o.rimPx-6)?yK:null);
-      if(yy!==null) etiket(ctx,String(h2),0,yy,P.metin3,o.zemin);
+      if(yy!==null) etiket(ctx,String(h2),0,yy,P.metin3,o.zemin,null,null,'mukantarat');
     }
  },
  'semt-yaylari': function(o){
@@ -5956,7 +6016,7 @@ var CIZ_PLAKA={
     for(var kn=1;kn<=11;kn++){
       var pp=G.platePoint(G.temporalHourHourAngleDeg(kn,-o.eps*0.35,o.phi),-o.eps*0.35);
       if(Math.hypot(pp.x*o.k,pp.y*o.k)<o.rimPx-7)
-        etiket(ctx,TZ.doguSayi(kn),pp.x*o.k,pp.y*o.k,P.altinYazi,o.zemin);
+        etiket(ctx,TZ.doguSayi(kn),pp.x*o.k,pp.y*o.k,P.altinYazi,o.zemin,null,null,'saat-zamaniye');
     }
  },
  'alacakaranlik': function(o){
@@ -5978,7 +6038,7 @@ var CIZ_PLAKA={
       if(Math.hypot(X,Yy)>o.rimPx-4) return;
       var dx=(y.az===90?-1:y.az===270?1:0)*o.boy*0.028;
       var dy=(y.az===0?1:y.az===180?-1:0)*o.boy*0.026;
-      etiket(ctx,y.ad,X+dx,Yy+dy,P.metin2,o.zemin);
+      etiket(ctx,y.ad,X+dx,Yy+dy,P.metin2,o.zemin,null,null,y.anahtar);
     });
  },
  'muaddil': function(o){
@@ -6033,13 +6093,13 @@ var PLAKA_SIRA=['safiha','mukantarat','semt-yaylari','saat-zamaniye','alacakaran
    --------------------------------------------------------------------- */
 function vakitYaylari(){
   var a=son.vak.altitudeDeg, t=son.vak.temkin;
-  var y=[{h:a.imsak, ad:'imsâk',          tur:'hakiki'},
-         {h:0,       ad:'şürûk · gurûb',  tur:'hakiki'},
-         {h:a.ikindi,ad:'asr',            tur:'hakiki'},
-         {h:a.yatsi, ad:'yatsı',          tur:'hakiki'},
-         {h:a.ogle,  ad:'zevâl',          tur:'hakiki'}];
+  var y=[{h:a.imsak, ad:'imsâk',          tur:'hakiki', terim:'imsak'},
+         {h:0,       ad:'şürûk · gurûb',  tur:'hakiki', terim:'suruk'},
+         {h:a.ikindi,ad:'asr',            tur:'hakiki', terim:'asr'},
+         {h:a.yatsi, ad:'yatsı',          tur:'hakiki', terim:'yatsi'},
+         {h:a.ogle,  ad:'zevâl',          tur:'hakiki', terim:'zeval'}];
   if(t && isFinite(t.horizonAltDeg))
-    y.push({h:t.horizonAltDeg, ad:'görünür ufuk · şer’î', tur:'seri'});
+    y.push({h:t.horizonAltDeg, ad:'görünür ufuk · şer’î', tur:'seri', terim:'seri-vakit'});
   return y;
 }
 
@@ -6047,10 +6107,12 @@ function vakitYaylari(){
 function plakaCiz(boy){
   var cnv=plaka||(plaka=document.createElement('canvas'));
   var o=ortam(tuvalHazir(cnv,boy),boy), ctx=o.ctx;
+  plakaEtiket=[]; ETIKET_KAYIT=plakaEtiket;       /* vuruş bölgeleri tazelenir */
   LIMB_SIRA.forEach(function(a){ if(gor(a)) CIZ_LIMB[a](o); });
   ctx.save(); ctx.beginPath(); ctx.arc(0,0,o.rimPx,0,TAU); ctx.clip();
   PLAKA_SIRA.forEach(function(a){ if(gor(a)) CIZ_PLAKA[a](o); });
   ctx.restore();
+  ETIKET_KAYIT=null;
   return cnv;
 }
 
@@ -6093,8 +6155,9 @@ function reteCiz(o,suzgec){
         var mx=orta.x*k, my=orta.y*k;
         if(Math.hypot(mx,my)>o.rimPx-8) continue;
         ctx.save(); ctx.translate(mx,my); ctx.rotate(-don*D2R);
-        etiket(ctx,A.SIGNS_OTTOMAN[sg],0,0,P.altinYazi,P.oyuk);
-        ctx.restore();
+        ETIKET_KONUM=G.rotatePoint(mx,my,don);
+        etiket(ctx,A.SIGNS_OTTOMAN[sg],0,0,P.altinYazi,P.oyuk,null,null,BURC_ANAHTAR[sg]);
+        ETIKET_KONUM=null; ctx.restore();
       }
     }
     if(ister('yildizlar')){
@@ -6185,7 +6248,7 @@ function reteCiz(o,suzgec){
         if(!(Math.abs(yy)<o.rimPx-5)) return;
         yer={x:0,y:yy};
       }
-      etiket(ctx,v.ad,yer.x,yer.y,P.kirmiziYazi,P.oyuk);
+      etiket(ctx,v.ad,yer.x,yer.y,P.kirmiziYazi,P.oyuk,null,null,v.terim);
     });
   }
   ctx.restore();
@@ -6239,9 +6302,10 @@ function onYuzCiz(){
 
   var o=ortam(tuvalHazir(el.tuval,boy),boy), ctx=o.ctx;
   ctx.drawImage(plaka,0,0,plaka.width,plaka.height,-boy/2,-boy/2,boy,boy);
+  canliEtiket=[]; ETIKET_KAYIT=canliEtiket;
   reteCiz(o,null);
-
-  if(VURGU) vurguCiz(o);
+  ETIKET_KAYIT=null;
+  if(VURGU) vurguCiz(o);                 /* vurgu yeniden çizerken KAYIT KAPALI */
 }
 
 /* söndür ve yalnız vurgulanan ögeyi yeniden çiz */
@@ -6290,6 +6354,7 @@ function terimAnahtarIcin(hedef){ return HEDEF_TERIM[hedef]||null; }
 function arkaYuzCiz(){
   var boy=el.govde.clientWidth; if(!boy) return;
   var o=ortam(tuvalHazir(el.tuval,boy),boy), ctx=o.ctx;
+  plakaEtiket=[]; canliEtiket=[]; ETIKET_KAYIT=canliEtiket;
   var R=o.R, rimPx=o.rimPx, hat=o.hat, zemin=P.oyuk;
   var ister=function(a){ return gor(a); };
 
@@ -6309,7 +6374,7 @@ function arkaYuzCiz(){
       dogu(ctx,Math.max(8.5,boy*0.0158));
       for(var h2=10;h2<=80;h2+=10){
         var pm=A.rimPointForAltitude(h2,q,R['limb-derece-dis']-boy*0.032);
-        etiket(ctx,TZ.doguSayi(h2),pm.x,pm.y,P.madeniGolge,P.madeniIsik);
+        etiket(ctx,TZ.doguSayi(h2),pm.x,pm.y,P.madeniGolge,P.madeniIsik,null,null,'irtifa-kadrani');
       }
     }
   }
@@ -6330,7 +6395,7 @@ function arkaYuzCiz(){
       ctx.beginPath(); ctx.moveTo(e1.x,e1.y); ctx.lineTo(e2.x,e2.y);
       ctx.strokeStyle=P.altinB; ctx.lineWidth=hat*1.3; ctx.stroke();
       var mid=G.limbPoint(a0+15,(rBD+rBI)/2);
-      etiket(ctx,A.SIGNS_OTTOMAN[sg],mid.x,mid.y,P.altinYazi,zemin);
+      etiket(ctx,A.SIGNS_OTTOMAN[sg],mid.x,mid.y,P.altinYazi,zemin,null,null,BURC_ANAHTAR[sg]);
     }
   }
   if(ister('takvim-halkasi')){
@@ -6346,7 +6411,7 @@ function arkaYuzCiz(){
       ctx.strokeStyle=P.hatGuclu; ctx.lineWidth=hat*1.2; ctx.stroke();
       var lam2=A.sunApparent(V.julianDayFromCalendar(m===12?yil+1:yil,m===12?1:m+1,1)+69.184/86400).lambdaDeg;
       var tm=G.limbPoint(aa+(((lam2-lamAy)+360)%360)/2,(rTD+rTI)/2);
-      etiket(ctx,AYK[m-1].slice(0,9),tm.x,tm.y,P.metin3,zemin);
+      etiket(ctx,AYK[m-1].slice(0,9),tm.x,tm.y,P.metin3,zemin,null,null,'takvim-halkasi-ay');
     }
     var bA=A.zodiacRingAngleDeg(son.gunes.lambdaDeg,0,1);
     var g1=G.limbPoint(bA,rBD+boy*0.013), g2=G.limbPoint(bA,rTI);
@@ -6390,8 +6455,8 @@ function arkaYuzCiz(){
       etiket(ctx,TZ.doguSayi(n),sd.right.x-S12*0.075,sd.right.y,P.metin3,P.yuzey);
     });
     kazima(ctx,Math.max(8,boy*0.0138));
-    etiket(ctx,'zıll-ı müstakîm',0,S12*1.07,P.metin4,zemin);
-    etiket(ctx,'zıll-ı ma’kûs',S12*1.055,S12*0.5,P.metin4,zemin,'left');
+    etiket(ctx,'zıll-ı müstakîm',0,S12*1.07,P.metin4,zemin,null,null,'zill-i-mustakim');
+    etiket(ctx,'zıll-ı ma’kûs',S12*1.055,S12*0.5,P.metin4,zemin,'left',null,'zill-i-makus');
     ctx.restore();
   }
 
@@ -6404,7 +6469,7 @@ function arkaYuzCiz(){
     ctx.fillStyle=P.kirmizi; ctx.fill();
     kazima(ctx,Math.max(9,boy*0.0168));
     var kl=G.limbPoint(kibAng,R['limb-derece-ic']-boy*0.048);
-    etiket(ctx,'kıble',kl.x,kl.y,P.kirmiziYazi,zemin);
+    etiket(ctx,'kıble',kl.x,kl.y,P.kirmiziYazi,zemin,null,null,'kible');
   }
 
   if(ister('nime')){
@@ -6433,6 +6498,7 @@ function arkaYuzCiz(){
   ctx.beginPath(); ctx.arc(0,0,R['semse-dis']*0.62,0,TAU);
   ctx.fillStyle=P.madeni; ctx.fill();
   ctx.strokeStyle=P.madeniGolge; ctx.lineWidth=hat*1.2; ctx.stroke();
+  ETIKET_KAYIT=null;
 }
 
 function ciz(){
@@ -6874,6 +6940,32 @@ function yuzDugmeGuncelle(){
   el.tuval.style.cursor=(st.yuz==='on')?'grab':'default';
 }
 
+/* =====================================================================
+   TERİM BALONU — âletin üzerindeki yazıya tıklayınca çıkan kısa açıklama.
+   "Ayrıntı" düğmesi tam sözlük maddesine götürür ve ögeyi alette yakar.
+   ===================================================================== */
+function balonKapat(){
+  var b=el['terim-balon'];
+  if(b){ b.hidden=true; b.innerHTML=''; }
+}
+function balonAc(e){
+  var b=el['terim-balon'], t=SOZ[e.k]; if(!b||!t) return;
+  var boy=el.govde.clientWidth;
+  b.hidden=false;
+  b.innerHTML='<button type="button" class="balon-kapat" aria-label="Kapat">×</button>'+
+    '<div class="balon-ad">'+kacir(t.terim)+'</div>'+
+    '<p class="balon-kisa">'+kacir(t.kisa)+'</p>'+
+    '<div class="balon-alt"><button type="button" class="balon-detay" data-t="'+e.k+'">'+
+    'Ayrıntı →</button><span class="balon-modern">'+kacir(t.modern)+'</span></div>';
+  /* önce ölç, sonra levhanın içinde kalacak şekilde yerleştir */
+  var bw=b.offsetWidth, bh=b.offsetHeight;
+  var x=boy/2+e.x-bw/2, y=boy/2+e.y+e.h/2+8;
+  if(y+bh>boy-4) y=boy/2+e.y-e.h/2-bh-8;      /* aşağı sığmazsa yukarı al */
+  b.style.left=Math.max(4,Math.min(boy-bw-4,x))+'px';
+  b.style.top=Math.max(4,Math.min(boy-bh-4,y))+'px';
+  b.focus && b.focus();
+}
+
 /* ============================== ETKİLEŞİM ============================== */
 var surukle=null;
 function tuvalNokta(ev){
@@ -6881,8 +6973,12 @@ function tuvalNokta(ev){
   return { x:ev.clientX-r.left-r.width/2, y:ev.clientY-r.top-r.height/2, boy:r.width };
 }
 el.tuval.addEventListener('pointerdown',function(ev){
+  var pe=tuvalNokta(ev);
+  var et=etiketBul(pe.x,pe.y);          /* ÖNCE üzerine yazı var mı? */
+  if(et){ balonAc(et); return; }
+  balonKapat();
   if(st.yuz!=='on') return;
-  var p=tuvalNokta(ev), enY=null, mes=1e9;
+  var p=pe, enY=null, mes=1e9;
   yildizEkran.forEach(function(e){
     if(e.disarida) return;
     var d=Math.hypot(e.x-p.x,e.y-p.y);
@@ -6899,6 +6995,9 @@ el.tuval.addEventListener('pointerdown',function(ev){
 });
 el.tuval.addEventListener('pointermove',function(ev){
   var p=tuvalNokta(ev);
+  if(!surukle){
+    el.tuval.style.cursor=etiketBul(p.x,p.y)?'pointer':(st.yuz==='on'?'grab':'default');
+  }
   if(surukle){
     var yeni=Math.atan2(p.y,p.x)/D2R;
     var fark=((yeni-surukle.aci+540)%360)-180;
@@ -6978,6 +7077,8 @@ document.addEventListener('change',function(ev){
 document.addEventListener('click',function(ev){
   var b=ev.target.closest ? ev.target.closest('button') : null;
   if(!b) return;
+  if(b.classList.contains('balon-kapat')){ balonKapat(); return; }
+  if(b.classList.contains('balon-detay')){ balonKapat(); st.terim=b.dataset.t; kipGec('sozluk'); return; }
   if(b.classList.contains('kip')){ kipGec(b.dataset.k); return; }
   if(b.classList.contains('tt')){ terimSec(b.dataset.t); return; }
   if(b.classList.contains('ders-git')){ st.dersNo=+b.dataset.n; kipGec('ders'); return; }
