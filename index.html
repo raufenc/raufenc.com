@@ -2171,6 +2171,11 @@
     });
   }
 
+  // ── ANA SAYFA PROJELERİ ──
+  var anaSayfaProjeleri = PROJELER.filter(function(p) {
+    return p.href !== '/beyitdefteri/';
+  });
+
   // ── DURUM ──
   var aktifTag = 'Tümü';
   var aramaMetni = '';
@@ -2179,7 +2184,7 @@
   function baslat() {
     var tagSet = ['Tümü'];
     var seen = {};
-    PROJELER.forEach(function(p) {
+    anaSayfaProjeleri.forEach(function(p) {
       if (!seen[p.tag]) { seen[p.tag] = true; tagSet.push(p.tag); }
     });
 
@@ -2203,7 +2208,7 @@
   }
 
   function filtrele() {
-    return PROJELER.filter(function(p) {
+    return anaSayfaProjeleri.filter(function(p) {
       var tagOK = aktifTag === 'Tümü' || p.tag === aktifTag;
       var aramaOK = !aramaMetni ||
         p.title.toLowerCase().indexOf(aramaMetni.toLowerCase()) !== -1 ||
@@ -2289,7 +2294,7 @@
 
     grid.querySelectorAll('.card').forEach(function(c) { c.remove(); });
 
-    var total = PROJELER.length;
+    var total = anaSayfaProjeleri.length;
     var shown = sonuclar.length;
     countEl.textContent = aktifTag === 'Tümü' && !aramaMetni
       ? total + ' proje'
