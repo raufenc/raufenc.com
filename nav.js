@@ -109,6 +109,45 @@
     btn.setAttribute('aria-label', isLight ? 'Gece moduna geç' : 'Gündüz moduna geç');
   }
 
+  /* ── Tanıtım videosu düğmesi (videosu olan proje sayfalarında) ── */
+  var playSvg = '<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>';
+  function videoDugmesi() {
+    if (isHome || PATH.indexOf('/videolar/') === 0 || !window.fetch) return;
+    fetch('/videolar/index.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j || !j.videolar) return;
+      var enIyi = null;
+      j.videolar.forEach(function (v) {
+        var kok = (v.href || '').split('#')[0];
+        if (kok.charAt(0) !== '/' || kok === '/') return;
+        if (PATH.indexOf(kok) === 0 && (!enIyi || kok.length > enIyi.kok.length)) enIyi = { v: v, kok: kok };
+      });
+      var navEl = document.getElementById('rauf-nav');
+      if (!enIyi || !navEl || document.getElementById('rn-video')) return;
+      var v = enIyi.v;
+      var b = document.createElement('button');
+      b.id = 'rn-video';
+      b.type = 'button';
+      b.className = 'rn-btn rn-video';
+      b.title = 'Tanıtım videosunu izle';
+      b.setAttribute('aria-label', v.title + ' — tanıtım videosunu izle');
+      b.innerHTML = playSvg + ' <span>Tanıtım</span>';
+      b.addEventListener('click', function () {
+        var ac = function () { window.VideoTanitim.ac({ video: v.slug, title: v.title, href: v.href, kategori: v.kategori, desc: '' }, null, { gitGizle: true }); };
+        if (window.VideoTanitim) { ac(); return; }
+        var s = document.getElementById('vt-js');
+        if (s) s.addEventListener('load', ac);
+      });
+      navEl.appendChild(b);
+      if (!window.VideoTanitim && !document.getElementById('vt-js')) {
+        var sj = document.createElement('script');
+        sj.id = 'vt-js'; sj.src = '/lib/video-tanitim.js'; sj.defer = true;
+        document.head.appendChild(sj);
+      }
+    }).catch(function () {});
+  }
+  if (document.readyState === 'complete') setTimeout(videoDugmesi, 600);
+  else window.addEventListener('load', function () { setTimeout(videoDugmesi, 600); });
+
   // Tema değişikliğini dinle
   window.addEventListener('theme-changed', function () {
     updateThemeIcon();

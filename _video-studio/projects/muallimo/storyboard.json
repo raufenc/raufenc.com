@@ -1,0 +1,201 @@
+{
+  "slug": "muallimo",
+  "title": "MUALLİMO — Resim Kartları",
+  "url": "raufenc.com/muallimo",
+  "category": "Dil & Söz",
+  "emoji": "📚",
+  "tag": "Uygulama",
+  "accent": "#7c6fff",
+  "accent2": "#e8a94a",
+  "hook": {
+    "kicker": "Kaydırmayı seven çocuklara",
+    "lines": [
+      "Her kaydırış",
+      "bir *ders* olsa?"
+    ],
+    "backdrop": {
+      "h": "shots/d-grid.jpg",
+      "v": "shots/m-grid-kirp.jpg"
+    }
+  },
+  "intro": {
+    "title": "MUALLİMO\nResim Kartları",
+    "tag2": "Ücretsiz",
+    "tagline": "Mantıktan kimyaya, atasözlerinden sağlığa **resimli bilgi kartları**.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "6 seri",
+      "title": "Seriyi seç, kitabı aç",
+      "text": "Okuryazarlıktan sağlığa, kültürden fen bilimlerine 6 seri; her seride ayrı kitaplar.",
+      "dur": 3.0,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-seriler.jpg",
+            "taps": [
+              {
+                "mark": "seri",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-seri.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.38,
+              "s": 1.32,
+              "s0": 1.18
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-seriler.jpg",
+            "taps": [
+              {
+                "mark": "seri",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-seri.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.45,
+              "s": 1.12,
+              "s0": 1.02
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Tam ekran",
+      "title": "Kaydır, kart kart öğren",
+      "text": "Kartlar tam ekran açılır; her kaydırışta yeni bir resim, yeni bir bilgi.",
+      "dur": 4.0,
+      "shot": [
+        {
+          "src": "shots/m-fen.jpg",
+          "taps": [
+            {
+              "mark": "kimya_img",
+              "t": 0.6
+            }
+          ]
+        },
+        {
+          "src": "shots/m-kimya-1.jpg"
+        },
+        {
+          "src": "shots/m-kimya-2.jpg"
+        },
+        {
+          "src": "shots/m-kimya-3.jpg"
+        }
+      ]
+    },
+    {
+      "kicker": "Küçük görünüm",
+      "title": "Tüm kartlar tek bakışta",
+      "text": "Kitabın bütün kartlarını ızgarada gör; birine dokun, büyüsün.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-grid.jpg",
+            "taps": [
+              {
+                "mark": "k5",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-lb.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.3,
+              "s0": 1.15
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/d-grid-kirp.jpg",
+            "frame": "card",
+            "taps": [
+              {
+                "mark": "k5",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-lb-kirp.jpg",
+            "frame": "card",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.08,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 6,
+        "label": "Seri"
+      },
+      {
+        "value": 24,
+        "label": "Kitap"
+      },
+      {
+        "value": 2000,
+        "suffix": "+",
+        "label": "Resim kartı"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Kaydırarak öğren,",
+      "*keşfederek büyü*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "6 seri · 24 kitap"
+    ]
+  },
+  "_kaynak": {
+    "6 seri": "muallimo/index.html → const VERİ: 6 anahtar (okuryazarlik, saglik, teknoloji, kultur, csuite, fen-bilimleri); sayfadaki .hero-stats \"6 SERİ\"",
+    "24 kitap": "VERİ[*].ciltler toplamı: 8 + 5 + 3 + 4 + 1 + 3 = 24; sayfadaki .hero-stats \"24 KİTAP\"",
+    "2.000+ resim kartı": "VERİ[*].ciltler[*].kartlar dizilerinin toplam uzunluğu 2.197; 2.197 görselin hepsi raw.githubusercontent.com/raufenc/muallimo-images/main/WEBP_Final/ altında HTTP 200 döndü (HEAD denetimi). Sayfa ve meta '2,199' diyor (kart_sayisi alanlarının toplamı); Beslenme Kartları (99→98) ve Karikatürler – 1 (100→99) listeleri birer eksik. Çelişkiyi önlemek için doğru ve güvenli alt sınır '2.000+' kullanıldı",
+    "Mantıktan kimyaya, atasözlerinden sağlığa": "VERİ cilt adları: 'Mantık Kartları' (okuryazarlik), 'Kimya Elementleri' (fen-bilimleri), 'Atasözleri' (kultur), seri 'Sağlık'",
+    "Okuryazarlıktan sağlığa, kültürden fen bilimlerine 6 seri": "VERİ seri başlıkları: Okuryazarlık, Sağlık, Teknoloji, Kültür & Dil, C-Suite, Fen Bilimleri; seriAc() her seri için cilt (kitap) ızgarasını açar (çekim: d-seri.jpg Okuryazarlık 8 kitap, m-seri.jpg Sağlık 5 kitap)",
+    "Kartlar tam ekran açılır, kaydırarak geçilir": "ciltAc() → renderScroll() + acScrollView(): #scroll-container position:fixed; inset:0; scroll-snap-type: y mandatory; her .scroll-slide 100dvh, sayaç 'i / N'; ilk kartta '↓ Kaydır' ipucu (çekimler: kimya-1..3 → 1/100, 2/100, 3/100)",
+    "Kimya Elementleri 100 kart": "VERİ['fen-bilimleri'].ciltler[0]: ad 'Kimya Elementleri', kart_sayisi 100, kartlar.length 100",
+    "Küçük görünüm, dokun büyüsün": "'⊞ Küçük' / #sc-grid-btn → renderGrid() (.mini-grid); .mini-kart onclick → lbAc(i) lightbox, sayaç '5 / 98' (çekim d-lb.jpg)",
+    "Ücretsiz, kayıt gerekmez": "muallimo/index.html içinde oturum açma, firebase, ödeme kodu yok; kartlar doğrudan jsDelivr'den yüklenir",
+    "Kaydırarak öğren, keşfederek büyü": "muallimo/index.html #hero p: 'Kaydırarak öğren, keşfederek büyü.'",
+    "Çocuklara": "muallimo/index.html #hero p: 'Çocuklar için hazırlanmış görsel eğitim kartları.'"
+  }
+}

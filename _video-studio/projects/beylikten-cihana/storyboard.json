@@ -1,0 +1,273 @@
+{
+  "slug": "beylikten-cihana",
+  "title": "Beylikten Cihana",
+  "url": "raufenc.com/beylikten-cihana",
+  "category": "Cihan Serisi",
+  "emoji": "🏰",
+  "icon": "shots/logo.svg",
+  "tag": "Oyun",
+  "accent": "#C9A55A",
+  "accent2": "#5FBF93",
+  "hook": {
+    "kicker": "Zar yok, tarih var",
+    "lines": [
+      "Fatih kaçıncı",
+      "*padişahtı?*"
+    ]
+  },
+  "intro": {
+    "title": "Beylikten Cihana",
+    "tag2": "Ücretsiz",
+    "tagline": "Söğüt'ten Haremeyn'e **26 şehir**: fethet, imar et, Cihan Puanıyla kazan.",
+    "shot": {
+      "h": "shots/d-kapak.jpg",
+      "v": "shots/m-kapak.jpg"
+    },
+    "phone": {
+      "h": "shots/m-sira.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "Sefer Kartı",
+      "title": "Zar yerine tarih çek",
+      "text": "Kartın sayısı tarihten gelir: Fatih yedinci padişah, 7 kare ilerle.",
+      "dur": 3.0,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-sira.jpg",
+            "taps": [
+              {
+                "mark": "cek",
+                "t": 0.62,
+                "dx": 0.06
+              }
+            ]
+          },
+          {
+            "src": "shots/d-sefer.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.4
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-sira.jpg",
+            "taps": [
+              {
+                "mark": "cek",
+                "t": 0.62,
+                "dx": -0.15
+              }
+            ]
+          },
+          {
+            "src": "shots/m-sefer.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.12
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Bilgi ile Fetih",
+      "title": "Soruyu bil, şehri fethet",
+      "text": "Bursa'yı 1.300 akçeye satın al ya da soruyu doğru cevapla, 1.000 akçeye fethet.",
+      "dur": 3.6,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-satin.jpg",
+            "taps": [
+              {
+                "mark": "fetih",
+                "t": 0.62,
+                "dx": 0.12
+              }
+            ]
+          },
+          {
+            "src": "shots/d-soru.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.6,
+                "dx": 0.13
+              }
+            ]
+          },
+          {
+            "src": "shots/d-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.35,
+              "s0": 1.15
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-satin.jpg",
+            "taps": [
+              {
+                "mark": "fetih",
+                "t": 0.62,
+                "dx": 0.3
+              }
+            ]
+          },
+          {
+            "src": "shots/m-soru.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.6,
+                "dx": -0.3
+              }
+            ]
+          },
+          {
+            "src": "shots/m-dogru.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "İmar",
+      "title": "Han'dan Külliye'ye imar",
+      "text": "Padişahın setini tamamla, kademe kademe yükselt; Medrese ve üstü Cihan Puanı getirir.",
+      "dur": 3.0,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-imar.jpg",
+            "taps": [
+              {
+                "mark": "medrese",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-imar2.jpg",
+            "zoom": {
+              "mark": "set",
+              "s": 1.35
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-imar.jpg",
+            "taps": [
+              {
+                "mark": "medrese",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-imar-ani.jpg",
+            "zoom": {
+              "x": 0.8,
+              "y": 0.42,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Cihan!",
+      "title": "Cihan Puanıyla zafer",
+      "text": "Hedefe ulaşan “Cihan!” der; tur biter, gizli fermanlar açılır, en yüksek puan kazanır.",
+      "dur": 3.6,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-tahta2.jpg",
+            "taps": [
+              {
+                "mark": "bitti",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-cihan.jpg",
+            "zoom": {
+              "mark": "afis",
+              "s": 1.3
+            }
+          },
+          {
+            "src": "shots/d-zafer.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.52,
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-tahta2.jpg",
+            "taps": [
+              {
+                "mark": "bitti",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-cihan.jpg",
+            "zoom": {
+              "mark": "afis",
+              "s": 1.25,
+              "s0": 1.05
+            }
+          },
+          {
+            "src": "shots/m-zafer.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "cta": {
+    "lines": [
+      "Söğüt'ten cihana",
+      "*sefere çık*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "142 soru · 85 Sefer kartı",
+      "Basılı set PDF"
+    ]
+  },
+  "_kaynak": {
+    "26 şehir": "beylikten-cihana/index.html → CihanVeri.kareler: tur === 'sehir' olan 26 kare (46 karelik tahta)",
+    "142 soru": "CihanVeri.desteler.bilgi.length = 142 (tahtadaki Bilgi destesi sayacı: 142; baski/dosyalar.json: '142 soru')",
+    "85 Sefer kartı": "CihanVeri.desteler.sefer.length = 85 (72 sayı + 13 özel kart; tahtadaki Sefer destesi sayacı: 85)",
+    "Fatih yedinci padişah, 7 kare ilerle": "Sefer kartı S40 'Yedinci Padişah Fatih' (sayi 7) — çekimde tohum 94, 1. tur, gerçekten çekildi",
+    "Bursa 1.300 / Bilgi ile 1.000 akçe": "Bursa tapusu (kare 7): satın alma kararı fiyat 1300, bilgiFiyati 1000; arayüzde 'Satın al 1.300 akçe' ve 'Bilgi ile Fethet 1.000 akçe'",
+    "Bursa sorusu": "Bilgi sorusu KS07 'Orhan Bey 1326'da Bursa'yı hangi yolla aldı?' doğru: 'Uzun süren abluka sonunda şehir teslim oldu' (kaynak TDV «Bursa»)",
+    "Han'dan Külliye'ye": "CihanVeri.imar_kademeleri: Han, Hamam, Medrese, Cami, Külliye",
+    "Padişahın setini tamamla": "imar paneli: 'Bir padişah setinin bütün şehirleri senin olunca ve hiçbiri ipotekli değilken imar edebilirsin'",
+    "Medrese ve üstü Cihan Puanı": "kurallar.cp.medrese_kademe = 3, medrese = 1; panel notu 'Medrese ve üstü Cihan Puanı verir'",
+    "Cihan! / en yüksek puan kazanır": "İlk oyun rehberi: '6 CP hedefine ilk ulaşan “Cihan!” der, o tur tamamlanır ve en yüksek puan kazanır'; motor elBitir() sonTur; 'Gizli fermanlar oyun sonunda puan ekler'",
+    "Cihan çekimi": "tohum 76, 14. tur: İzmir, Selanik, Yanya'ya Medrese → 'Oyuncu 1 “Cihan!” dedi: 8 Cihan Puanı' → fermanlar açılınca 11 CP ile zafer",
+    "Söğüt'ten Haremeyn'e": "kapak alt yazısı: 'Dokuz padişahın izinde, Söğüt’ten Haremeyn’e'",
+    "Ücretsiz": "oyun ve basılı set PDF'leri sitede ücretsiz, kayıt istemez (baski/index.html: kişisel ve sınıf içi kullanım)",
+    "Basılı set PDF": "baski/index.html: 'Basılı Set — evde bas, masada oyna'; renkli ve mürekkep dostu PDF setleri",
+    "kurulum": "Hızlı başla ile aynı: sen + 3 orta bot (Evrenos, Mihaloğlu, Turahan), Aile modu, ilk sıra sende"
+  }
+}

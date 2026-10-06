@@ -1,0 +1,218 @@
+{
+  "slug": "kayi",
+  "title": "Kayı I — Ertuğrul'un Ocağı",
+  "url": "raufenc.com/kayi",
+  "category": "Tarih & Medeniyet",
+  "emoji": "🏹",
+  "tag": "Ansiklopedi",
+  "accent": "#c9a84c",
+  "accent2": "#a8475a",
+  "hook": {
+    "kicker": "Osmanlı'nın kuruluşu",
+    "lines": [
+      "Bir aşiret nasıl",
+      "*cihan devleti* oldu?"
+    ]
+  },
+  "intro": {
+    "title": "Kayı I\nErtuğrul'un Ocağı",
+    "tag2": "Kitap rehberi",
+    "tagline": "Prof. Dr. Ahmet Şimşirgil'in eserinden **5 padişah**, 48 olay, 191 yıllık destan.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "5 bölüm",
+      "title": "Beş padişah, bir destan",
+      "text": {
+        "h": "Padişahın kartına dokun; doğumu, tahta geçişi ve bölüm başlıkları tek pencerede.",
+        "v": "Osman Gazi'den Çelebi Mehmed'e: her padişah, kitabın bir bölümü ve kendi hikâyesi."
+      },
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-rulers.jpg",
+            "taps": [
+              {
+                "mark": "osman",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/d-ruler-modal.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.2,
+              "s": 1.35,
+              "s0": 1.2
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-rulers-tall.jpg",
+            "scroll": [
+              0,
+              0.62
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Sefer Modu",
+      "title": "Seferleri haritada izle",
+      "text": "Tek dokunuşla 23 savaş, kuşatma ve fetih, tarih sırasıyla haritada canlanır.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-map.jpg",
+            "taps": [
+              {
+                "mark": "sefer",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/d-sefer.jpg",
+            "zoom": {
+              "x": 0.3,
+              "y": 0.7,
+              "s": 1.3,
+              "s0": 1.05
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-map.jpg",
+            "taps": [
+              {
+                "mark": "sefer",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/m-sefer.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.2,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "1389 · I. Kosova zaferi",
+          "emoji": "⚔️",
+          "x": 0.64,
+          "y": 0.66,
+          "at": 1.9
+        }
+      }
+    },
+    {
+      "kicker": "1230–1421",
+      "title": "48 olay, tek zaman çizgisi",
+      "text": "Padişaha göre süz; savaşları, fetihleri ve dönüm noktalarını sırayla takip et.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-timeline.jpg",
+            "taps": [
+              {
+                "mark": "bayezid",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/d-timeline-f.jpg",
+            "zoom": {
+              "x": 0.55,
+              "y": 0.3,
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-timeline.jpg",
+            "taps": [
+              {
+                "mark": "bayezid",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/m-timeline-f.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 48,
+        "label": "Tarihî olay"
+      },
+      {
+        "value": 44,
+        "label": "Şahsiyet"
+      },
+      {
+        "value": 34,
+        "label": "Mekân"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Kuruluş destanını",
+      "*keşfet*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "Harita · Zaman çizelgesi"
+    ]
+  },
+  "_kaynak": {
+    "5 padişah": "kayi/index.html RULERS.length = 5 (Osman Gazi … Çelebi Mehmed); sayfadaki #statRulers = 5",
+    "48 olay": "kayi/index.html TIMELINE_EVENTS.length = 48; #statEvents = 48",
+    "44 şahsiyet": "kayi/index.html PERSONS.length = 44; #statPersons = 44",
+    "34 mekân": "kayi/index.html PLACES.length = 34; #statPlaces = 34",
+    "191 yıllık": "TIMELINE_EVENTS yılları 1230–1421 (1421-1230 = 191); #statYears = 191",
+    "1230–1421": "TIMELINE_EVENTS min/max year; zaman çizelgesi başlığı \"1230'dan 1421'e\"",
+    "I. Kosova zaferi 1389": "TIMELINE_EVENTS E028 (date 1389, location Kosova) — Sefer Modu 17. adım",
+    "Ahmet Şimşirgil'in eseri": "kayi/index.html künye: Prof. Dr. Ahmet Şimşirgil, Kayı I: Ertuğrul'un Ocağı, Timaş Yayınları",
+    "Padişah penceresi içeriği": "showRulerDetail(): doğum, tahta geçiş, hüküm, vefat, soy + 'Bölüm Alt Başlıkları' (Osman Gazi için 17)",
+    "Padişaha göre süzme": "renderTimeline(): .timeline-filter[data-ruler] düğmeleri",
+    "Ücretsiz / Kayıt gerekmez": "statik sayfa, giriş/üyelik yok",
+    "23 savaş, kuşatma ve fetih": "Sefer Modu getCampaignBattles(): battle/siege/conquest/naval türündeki ve koordinatı bulunan olaylar; çekimde #campaignProgressLabel = \"17 / 23\""
+  }
+}

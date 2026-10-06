@@ -1,0 +1,216 @@
+{
+  "slug": "kalbinin-haritasi",
+  "title": "Kalbinin Haritası",
+  "url": "raufenc.com/kalbinin-haritasi",
+  "category": "Düşünce Pusulası",
+  "emoji": "🧭",
+  "tag": "Uygulama",
+  "accent": "#d4af37",
+  "accent2": "#34d399",
+  "hook": {
+    "kicker": "Hiç düşündün mü?",
+    "lines": [
+      "Cesaretin fazlası",
+      "da bir *kusur mu?*"
+    ]
+  },
+  "intro": {
+    "title": "Kalbinin Haritası",
+    "tag2": "Ücretsiz",
+    "tagline": "**17 küçük ayna**, 185 senaryo: her erdemi eksiklik ile aşırılık arasında tart.",
+    "shot": {
+      "h": {
+        "src": "shots/d-hero.jpg",
+        "zoom": {
+          "x": 0.95,
+          "y": 0.25,
+          "s": 1.18,
+          "s0": 1.12
+        }
+      },
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-sonuc.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "17 test",
+      "title": "Her erdemin iki ucu var",
+      "text": "Cesaret korkaklık ile tehevvürün (saldırganlık), tevazu tezellül ile kibrin ortasında durur.",
+      "dur": 3.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-start.jpg",
+            "zoom": {
+              "mark": "kutuplar",
+              "s": 2.0,
+              "s0": 1.0,
+              "from": 0.12,
+              "to": 0.78
+            },
+            "taps": [
+              {
+                "mark": "kutuplar",
+                "t": 0.86
+              }
+            ]
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-start.jpg",
+            "zoom": {
+              "mark": "tevazu",
+              "s": 1.06,
+              "s0": 1.0,
+              "from": 0.12,
+              "to": 0.78
+            },
+            "taps": [
+              {
+                "mark": "kutuplar",
+                "t": 0.86
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "185 senaryo",
+      "title": "Cevabını seç, dengeni gör",
+      "text": "Gerçek hayattan sahneler, beş seçenek; cevapların anında tefrit, fazilet ve ifrat yüzdesine dönüşür.",
+      "dur": 3.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-soru-son.jpg",
+            "taps": [
+              {
+                "mark": "dengeli",
+                "t": 0.62
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.25,
+              "s": 1.3,
+              "s0": 1.2
+            }
+          },
+          {
+            "src": "shots/d-sonuc.jpg",
+            "zoom": {
+              "mark": "barlar",
+              "s": 1.3,
+              "s0": 1.08
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-soru-son.jpg",
+            "taps": [
+              {
+                "mark": "dengeli",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-sonuc.jpg",
+            "zoom": {
+              "mark": "barlar",
+              "s": 1.14,
+              "s0": 1.0
+            }
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "Kibir: %47 → %11",
+          "emoji": "📉",
+          "x": 0.775,
+          "y": 0.19,
+          "at": 2.0
+        },
+        "v": {
+          "text": "Kibir: %47 → %11",
+          "emoji": "📉",
+          "x": 0.5,
+          "y": 0.78,
+          "at": 2.0
+        }
+      }
+    },
+    {
+      "kicker": "Ahlak Haritam",
+      "title": "Kalbinin haritasını çıkar",
+      "text": "Çözdüğün her test haritana işlenir; aynı testi yeniden çöz, gelişimini önceki sonuçla kıyasla.",
+      "shot": {
+        "h": "shots/d-harita-uzun.jpg",
+        "v": "shots/m-harita-uzun.jpg"
+      },
+      "scroll": {
+        "h": [
+          0,
+          0.8
+        ],
+        "v": [
+          0,
+          0.53
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 17,
+        "label": "Erdem testi"
+      },
+      {
+        "value": 185,
+        "label": "Senaryo"
+      },
+      {
+        "value": 3,
+        "label": "Eksen"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "17 aynada",
+      "kendini *tanı*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "WhatsApp'ta paylaş"
+    ]
+  },
+  "_kaynak": {
+    "17 test / 17 küçük ayna / 17 erdem testi": "kalbinin-haritasi/index.html satır içi TESTS_PART1..3 → Object.keys(TESTS).length = 17 (sayfada da: \"0/17 test tamamlandı\", \"Sadece 17 küçük ayna var\")",
+    "185 senaryo": "kalbinin-haritasi/index.html TESTS → toplam questions.length = 185 (15 test × 11, ihlas ve kanaat 10'ar soru); tarayıcıda da doğrulandı",
+    "beş seçenek": "her sorunun options dizisi 5 öğe (puan 5→1); index.html screenQuiz()",
+    "3 eksen: tefrit · fazilet · ifrat": "index.html calcAndShow() + pct(): 1–2 → tefrit, 3 → fazilet, 4–5 → ifrat; sonuç kartında üç LED gösterge",
+    "Cesaret; korkaklık ile tehevvürün ortasında": "TESTS.cesaret.concepts = {tefrit: 'Cübn', fazilet: 'Cesaret', ifrat: 'Tehevvür'}; screenAbout(): \"Cesaretin eksikliği korkaklık, aşırısı ise saldırganlıktır\"",
+    "Tevazu; tezellül ile kibrin ortasında": "TESTS.kibir.concepts = {tefrit: 'Tezellül', fazilet: 'Tevazu', ifrat: 'Kibir'}",
+    "Kibir: %47 → %11": "capture.mjs: Kibir testi gerçekten iki kez çözüldü; 1. deneme [4,5,3,4,2,3,4,3,5,3,4] → pct 6/47/47, 2. deneme [3,4,3,3,2,3,4,3,3,3,3] → pct 5/84/11; sonuç kartında 'Önceki: ↓ %47'",
+    "Harita yüzdeleri (6/17 test)": "capture.mjs SEED: Tevazu, Cesaret, Sabır, Cömertlik, Hilm, Şükür testleri tıklanarak çözüldü; yüzdeler sitenin kendi pct() koduyla hesaplandı",
+    "aynı testi yeniden çöz, önceki sonuçla kıyasla": "index.html calcAndShow(): S.previousScores = S.history[testKey]; screenResult() → compArrow() 'Önceki: ↑/↓ %x'",
+    "Kayıt gerekmez": "screenAbout(): \"Giriş yapmadan tüm testler çalışır; bulut özellikleri giriş gerektiren opsiyonel bir katmandır\"",
+    "WhatsApp'ta paylaş": "index.html shareWhatsapp → wa.me + buildShareText() (yapay zekâdan bağımsız)",
+    "Ücretsiz": "sitede ödeme/abonelik akışı yok",
+    "accent": "index.html :root --gold #d4af37, --emerald-light #34d399",
+    "CTA: 17 aynada kendini tanı": "index.html og:description \"17 farklı ahlâk testinde kendini tanı\" + sayfadaki \"Sadece 17 küçük ayna var\"",
+    "Tezellül ↔ Kibir (iki uç)": "index.html screenStart(): kart satırı test.concepts.tefrit ⟷ test.concepts.ifrat; TESTS.kibir.concepts",
+    "tehevvür (saldırganlık)": "index.html screenAbout(): \"Cesaretin eksikliği korkaklık, aşırısı ise saldırganlıktır\"; TESTS.cesaret.concepts.ifrat = 'Tehevvür'"
+  }
+}

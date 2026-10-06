@@ -1,0 +1,328 @@
+{
+  "slug": "kelime-aileleri",
+  "title": "Kelime Aileleri",
+  "url": "raufenc.com/kelime-aileleri",
+  "category": "Dil & Söz",
+  "emoji": "🌳",
+  "tag": "Oyun",
+  "accent": "#dc4c6e",
+  "accent2": "#E07B2A",
+  "hook": {
+    "kicker": "Biliyor muydun?",
+    "lines": [
+      "Konuk, komşu",
+      "ve konuşmak",
+      "*akraba mı?*"
+    ]
+  },
+  "intro": {
+    "title": "Kelime Aileleri",
+    "tag2": "Etimoloji",
+    "tagline": "Dört kutu, **144 kelime ailesi**, 720 kelime — her kutunun kendi oyun alanı.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": {
+        "src": "shots/m-hero-uzun.jpg",
+        "scroll": [
+          0,
+          0.42
+        ]
+      }
+    },
+    "phone": {
+      "h": {
+        "src": "shots/m-hero-uzun.jpg",
+        "scroll": [
+          0.2,
+          0.5
+        ]
+      }
+    }
+  },
+  "features": [
+    {
+      "kicker": "Gizli Aileler",
+      "title": "Gizli akrabayı yakala",
+      "text": "«Komşu» hangi ailenin çocuğu? Doğru kökü seç; konuk ve konuşmak da aynı aileden.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-gizli-soru.jpg",
+            "taps": [
+              {
+                "mark": "kon",
+                "t": 0.62
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.44,
+              "s": 1.52,
+              "s0": 1.05
+            }
+          },
+          {
+            "src": "shots/d-gizli-cevap.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.44,
+              "s": 1.58,
+              "s0": 1.52
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-gizli-soru.jpg",
+            "taps": [
+              {
+                "mark": "kon",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-gizli-cevap.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.0,
+              "s": 1.08,
+              "s0": 1.0
+            }
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "Eski Türkçe **kon-** · yerleşmek",
+          "emoji": "🔍",
+          "x": 0.5,
+          "y": 0.9,
+          "at": 2.0
+        },
+        "v": {
+          "text": "Eski Türkçe **kon-** · yerleşmek",
+          "emoji": "🔍",
+          "x": 0.5,
+          "y": 0.9,
+          "at": 2.0
+        }
+      }
+    },
+    {
+      "kicker": "Kelime Fabrikası",
+      "title": "Parçaları birleştir",
+      "text": "Tele ile fon birleşince telefon, hasta ile hâne birleşince hastane olur.",
+      "dur": 3.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-fabrika-1.jpg",
+            "taps": [
+              {
+                "mark": "tele",
+                "t": 0.6
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.3,
+              "s0": 1.2
+            }
+          },
+          {
+            "src": "shots/d-fabrika-2.jpg",
+            "taps": [
+              {
+                "mark": "fon",
+                "t": 0.55
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.36,
+              "s0": 1.3
+            }
+          },
+          {
+            "src": "shots/d-fabrika-3.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.5,
+              "s0": 1.36
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-fabrika-1.jpg",
+            "taps": [
+              {
+                "mark": "tele",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-fabrika-2.jpg",
+            "taps": [
+              {
+                "mark": "fon",
+                "t": 0.55
+              }
+            ]
+          },
+          {
+            "src": "shots/m-fabrika-3.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.7,
+              "s": 1.14,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Kök Harfleri",
+      "title": "Kartı çevir, aileyi tanı",
+      "text": "Ön yüzde beş kelime ve resim, arkada anlamlar ve sohbet sorusu: dokun, dönsün.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-vitrin.jpg",
+            "taps": [
+              {
+                "mark": "fkr",
+                "t": 0.6
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.33,
+              "s": 1.35,
+              "s0": 1.15
+            }
+          },
+          {
+            "src": "shots/d-vitrin-arka.jpg",
+            "zoom": {
+              "mark": "fkr",
+              "s": 2.2,
+              "s0": 1.7
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-vitrin.jpg",
+            "taps": [
+              {
+                "mark": "fkr",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-vitrin-arka.jpg",
+            "zoom": {
+              "x": 0.9,
+              "y": 0.46,
+              "s": 1.72,
+              "s0": 1.55
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Dilden Dile",
+      "title": "Kelimenin dünya turu",
+      "text": "Fenikece ALEP’ten elife, alfaya, alfabeye: her ailenin yüzyıllara yayılan bir rotası var.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-agac.jpg",
+            "taps": [
+              {
+                "mark": "alep",
+                "t": 0.6
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.3,
+              "s": 1.3,
+              "s0": 1.15
+            }
+          },
+          {
+            "src": "shots/d-rota.jpg",
+            "zoom": {
+              "mark": "rota",
+              "s": 1.6,
+              "s0": 1.35
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-agac.jpg",
+            "taps": [
+              {
+                "mark": "alep",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-rota.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.26,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "cta": {
+    "lines": [
+      "Bir kökten",
+      "*bir dünya*"
+    ],
+    "chips": [
+      "Her kutuda 3 aile ücretsiz",
+      "28 oyun",
+      "Tek kişi ya da 2–6 kişi"
+    ]
+  },
+  "_kaynak": {
+    "Konuk, komşu ve konuşmak akraba (kanca)": "kelime-aileleri/gizli-aileler/data.js → acik[0] KON-: w = konmak, konak, konuk, komşu, konuşmak; e: \"Eski Türkçe kon-, “bir yere yerleşmek, gecelemek” demekti. Konuk, komşu ve konuşmak bu eski yerleşme ve birlikte bulunma düşüncesinden gelişti.\"",
+    "4 kutu": "kelime-aileleri/ kokler, ekler, gizli-aileler, dilden-dile (KA01–KA04); index.html sayaç \"4 Kutu\"",
+    "144 kelime ailesi": "her data.js → KA.toplam = 36 (acik 3 + kilitliBasliklar 33); api/kelime-ac.js ACIK 4×3 + KILITLI 4×33 = 144; index.html sayaç \"144 Aile\"",
+    "720 kelime": "her ailede 5 kelime (api/kelime-ac.js ACIK+KILITLI: kutu başına 15+165 = 180, 4 kutu = 720 kelime yeri); kutu ana ekranı \"180 Kelime\" = KA.toplam*5 (motor.js evCiz); index.html \"720 Kelime\". Not: bazı kelimeler iki ailede geçer (telefon TELE+FON, kütüphane K-T-B+-HÂNE)",
+    "her kutunun kendi oyun alanı": "index.html \"Dört oyun alanı\"; her kutu klasöründe ayrı index.html + data.js, ortak motor.js",
+    "28 oyun": "motor.js OYUNLAR: 6 ortak oyun (Aileyi Topla, Yabancı Kim?, Akraba mı?, Cümledeki Boşluk, Anlam Eşle, Günün Ailesi) + imzaEkle() ile kutuya özgü 1 imza oyunu = kutu başına 7, 4 kutu = 28; index.html \"28 Oyun\"",
+    "Gizli Bağ: komşu → KON-": "motor.js oyunGizliBag(): ipucu \"Bu kelime hangi ailenin çocuğu?\", 12 soru; çekimde gerçek soru \"komşu — yakında oturan kimse\", KON- seçildi → \"✓ Doğru. komşu → KON-. Eski Türkçe kon-, …\" (shots/d-gizli-cevap.jpg)",
+    "Eski Türkçe kon- · yerleşmek": "gizli-aileler/data.js KON-.e: \"Eski Türkçe kon-, “bir yere yerleşmek, gecelemek” demekti.\"",
+    "Tele + fon = telefon, hasta + hâne = hastane": "ekler/data.js aciklama: \"Tele ile fon birleşince telefon, hasta ile hâne birleşince hastane olur.\"; KA.fabrika.yunan [TELE, FON, telefon], fabrika.fars [hasta, -HÂNE, hastane]; motor.js oyunFabrika() çekimde iki birleşim gerçekten üretildi (2/5 Üretildi, 50 puan)",
+    "Kart iki yüzü: ön yüzde beş kelime ve resim, arkada anlamlar ve sohbet sorusu": "motor.js vitrin(): kartkutu onclick → classList.toggle('donuk') (rotateY 180°); kokler/gorsel/fikir-on.webp (F-K-R + 5 kelime + resim + cümle), fikir-arka.webp (kök açıklaması, 5 kelimenin anlamı, soru) gözle okundu; sayfa metni \"Açık kartların iki yüzünü de görebilirsin — dokun, dönsün.\"",
+    "ALEP → elif, alfa, alfabe; rota": "dilden-dile/data.js acik[0] ALEP: k \"Fenikece ALEP • öküz; ilk harfin adı\", w = elif, alfa, alfabe, alfabetik, alfanümerik, r \"Fenikece ALEP → Yunanca ALFA / Aramice ALAF → Türkçe\"; motor.js agac() → KAM.kart(i) → kartDetay() .krota (shots/d-rota.jpg)",
+    "her ailenin yüzyıllara yayılan bir rotası var": "api/kelime-ac.js KILITLI.KA04: 33/33 kartta r alanı; açık 3 kartta da r var → 36/36; index.html Kutu 4: \"Her kartta yüzyıllara yayılan bir rota.\"",
+    "Her kutuda 3 aile ücretsiz": "index.html \"Üç aile ücretsiz — Her oyun alanında üç kelime ailesi tamamen açık\"; data.js acik.length = 3 (her kutu); kalan 33 aile fiziksel kutudaki kartlarla açılır (api/kelime-ac.js)",
+    "Tek kişi ya da 2–6 kişi": "motor.js modSec(): \"👤 Tek kişi\" / \"👥 Çok kişi — sıra sende\"; oyuncuKur(): sayı seçimi 2..6; index.html \"aynı oyunlar 2–6 kişiyle sıra sende modunda\"",
+    "Bir kökten bir dünya": "index.html slogan \"Bir kökten bir dünya.\"",
+    "accent #dc4c6e / accent2 #E07B2A": "index.html theme-color ve --k1 #A8213E (koyu; L %39) → aynı ton L %58 = #dc4c6e; accent2 = --k4 #E07B2A (Kutu 4 rengi, kahraman alanı süsleri)",
+    "Etimoloji (tag2)": "index.html meta keywords \"etimoloji\"; altbilgi \"Etimoloji ve sohbet kartları\""
+  }
+}

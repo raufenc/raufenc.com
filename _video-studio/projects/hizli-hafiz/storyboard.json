@@ -1,0 +1,273 @@
+{
+  "slug": "hizli-hafiz",
+  "title": "Hızlı Hafız",
+  "url": "raufenc.com/hizli-hafiz",
+  "category": "Sınıf Atölyesi",
+  "emoji": "🔎",
+  "tag": "Oyun",
+  "accent": "#c8a24b",
+  "accent2": "#1E6FBF",
+  "hook": {
+    "kicker": "Bul bakalım",
+    "lines": [
+      "Hüdhüd kuşu",
+      "hangi kartta *saklı?*"
+    ]
+  },
+  "intro": {
+    "title": "Hızlı Hafız",
+    "tag2": "Ücretsiz",
+    "tagline": "Bilgi kartını oku, **8 tezhip kartında** doğru sembolü bul — tek başına ya da 2–4 kişi.",
+    "shot": {
+      "h": "shots/d-giris.jpg",
+      "v": "shots/m-giris.jpg"
+    },
+    "phone": {
+      "h": "shots/m-tahta.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "Tek kişi",
+      "title": "İpucunu oku, kartı bul",
+      "text": "Bilgi kartı sembolü adını söylemeden anlatır; 8 kartın içinden doğrusuna dokun.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-tahta.jpg",
+            "taps": [
+              {
+                "mark": "kart2",
+                "dx": 0.056,
+                "dy": -0.09,
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/d-yakin.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.18,
+              "s0": 1.04
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-tahta.jpg",
+            "taps": [
+              {
+                "mark": "kart2",
+                "dx": 0.117,
+                "dy": -0.054,
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/m-yakin.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.1,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Sembolü bul, âyeti öğren",
+      "text": "Doğru sembolde adı ve Kur'an-ı Kerîm'deki âyet kaynağı çıkar; her buluş bir harf.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-yakin-dogru.jpg",
+            "taps": [
+              {
+                "mark": "hudhud",
+                "t": 0.25
+              }
+            ],
+            "zoom": {
+              "mark": "hudhud",
+              "s": 1.55,
+              "s0": 1.2
+            }
+          },
+          {
+            "src": "shots/d-aferin.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.5,
+              "s0": 1.3
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-yakin-dogru.jpg",
+            "taps": [
+              {
+                "mark": "hudhud",
+                "t": 0.25
+              }
+            ],
+            "zoom": {
+              "mark": "hudhud",
+              "s": 1.4,
+              "s0": 1.15
+            }
+          },
+          {
+            "src": "shots/m-aferin.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.22,
+              "s0": 1.08
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Tablet",
+      "title": "Masada 2–4 kişi yarışın",
+      "text": "Herkes kendi kenarına dokunur; söz hakkını alan 2 saniyede kartı seçer.",
+      "shot": [
+        {
+          "src": "shots/t-cok.jpg",
+          "frame": "card",
+          "taps": [
+            {
+              "mark": "alt",
+              "t": 0.78
+            }
+          ]
+        },
+        {
+          "src": "shots/t-soz.jpg",
+          "frame": "card",
+          "taps": [
+            {
+              "mark": "kart1",
+              "t": 0.72
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kicker": "Akıllı tahta",
+      "title": "Sınıfça, karşıdan oyna",
+      "text": "Her öğrencinin bir rengi ve tuşu var; 7 doğruya ilk ulaşan kazanır.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-karsi.jpg",
+            "taps": [
+              {
+                "mark": "bz3",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/d-karsi-soz.jpg",
+            "taps": [
+              {
+                "mark": "kart3",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/d-karsi-dogru.jpg",
+            "zoom": {
+              "mark": "modal",
+              "s": 1.35,
+              "s0": 1.15
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/d-karsi.jpg",
+            "taps": [
+              {
+                "mark": "bz3",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/d-karsi-soz.jpg",
+            "taps": [
+              {
+                "mark": "kart3",
+                "t": 0.65
+              }
+            ],
+            "zoom": {
+              "x": 0.6,
+              "y": 0.42,
+              "s": 1.4,
+              "s0": 1.25
+            }
+          },
+          {
+            "src": "shots/d-karsi-dogru.jpg",
+            "zoom": {
+              "mark": "modal",
+              "s": 1.75,
+              "s0": 1.5
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 8,
+        "label": "Tezhip kartı"
+      },
+      {
+        "value": 72,
+        "label": "Bilgi kartı"
+      },
+      {
+        "value": "2–4",
+        "label": "Oyuncu"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "İpucunu oku,",
+      "*sembolü bul*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "Tablet ve akıllı tahta"
+    ]
+  },
+  "_kaynak": {
+    "8 tezhip kartı": "hizli-hafiz/icerik/katalog.json → kartlar.length = 8 (kartlar/kart1–8.jpg); giriş ekranı: '8 kart · 72 oynanır sembol hazır'",
+    "72 bilgi kartı": "hizli-hafiz/index.html Oyun.yukle(): havuz = semboller içinde ben metni olan ve bir kartta geçenler = 72 (katalog.json semboller 73 kayıt); yazdir.html: '72 kart → 8 tabaka'",
+    "2–4 kişi": "index.html Ekran.arkadas(): 2/3/4 kişi düğmeleri; KENAR_HARITA {2,3,4}",
+    "2 saniye söz hakkı": "index.html geriSayimBasla(): pencereT 2000 ms; Nasıl Oynanır: 'söz hakkı sende, 2 saniyede kartı seç!'",
+    "7 doğruya ilk ulaşan kazanır": "index.html Oyun.hedefSkor = 7; cokBitti()",
+    "her buluş bir harf": "index.html HEDEF_KELIME 'HIZLI HAFIZ' — dogruCevap() her doğruda ilerleme harfi doldurur",
+    "âyet kaynağı": "index.html cevapHtml(): 'Kur'an-ı Kerîm <ayet>' bağlantısı; Hüdhüd 27:20, Karınca 27:18, Fil 105:1 (katalog.json semboller.*.ayet); 72 oynanır sembolün 59'unda ayet alanı var",
+    "Etrafında / Karşıdan kipleri": "index.html Ekran.ayar(): 'Etrafında (tablet/masa)', 'Karşıdan (bilgisayar/akıllı tahta)'",
+    "Kayıt gerekmez": "index.html — giriş/oturum yok, veri yerel katalog.json, ayarlar localStorage",
+    "Hüdhüd ipucu metni": "katalog.json semboller.hudhud.ben (kart 2)"
+  }
+}

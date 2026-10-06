@@ -1,0 +1,248 @@
+{
+  "slug": "islam-bilim-yildizlari",
+  "title": "İslam Bilim Yıldızları",
+  "url": "raufenc.com/islam-bilim-yildizlari",
+  "category": "Tarih & Medeniyet",
+  "emoji": "🌟",
+  "tag": "Oyun",
+  "accent": "#7c6cf0",
+  "hook": {
+    "kicker": "Biliyor muydun?",
+    "lines": [
+      "Krank-biyeli",
+      "ilk kim *kullandı?*"
+    ]
+  },
+  "intro": {
+    "title": "İslam Bilim Yıldızları",
+    "tag2": "Ücretsiz",
+    "tagline": "Endülüs'ten Orta Asya'ya **126 âlim**, 306 eser ve 13 yüzyıllık ilim mirası.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "title": "126 âlimi keşfet",
+      "text": "Alana, döneme ve bölgeye göre filtrele; her âlimin eserlerini ve katkılarını incele.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-alimler.jpg",
+            "frame": "browser"
+          }
+        ],
+        "v": "shots/m-alimler.jpg"
+      },
+      "scroll": {
+        "h": [
+          0.04,
+          0.62
+        ],
+        "v": [
+          0,
+          0.385
+        ]
+      }
+    },
+    {
+      "title": "Haritada ilmin izini sür",
+      "text": "Bağdat'tan Endülüs'e âlimlerin çalıştığı şehirler tek haritada; dokun, yakınlaş.",
+      "dur": 3.8,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-harita.jpg",
+            "taps": [
+              {
+                "mark": "endulus",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/d-harita2.jpg",
+            "zoom": {
+              "mark": "kurtuba",
+              "s": 1.12
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-harita.jpg",
+            "taps": [
+              {
+                "mark": "endulus",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/m-harita2.jpg"
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "Kurtuba: İbn Rüşd, Zehrâvî",
+          "emoji": "📍",
+          "x": 0.6,
+          "y": 0.36,
+          "at": 2.2
+        },
+        "v": {
+          "text": "Kurtuba: İbn Rüşd, Zehrâvî",
+          "emoji": "📍",
+          "x": 0.5,
+          "y": 0.52,
+          "at": 2.2
+        }
+      }
+    },
+    {
+      "kicker": "3 oyun",
+      "title": "Bu Kim? Âlimi tahmin et",
+      "text": "İpuçlarından âlimi bul, katkıları eşleştir, zaman tünelinde sırala.",
+      "dur": 4.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-sinav.jpg",
+            "taps": [
+              {
+                "mark": "bukim",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/d-bukim.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.36,
+              "s": 1.25,
+              "s0": 1.12
+            },
+            "taps": [
+              {
+                "mark": "cezeri",
+                "t": 0.78
+              }
+            ]
+          },
+          {
+            "src": "shots/d-bukim2.jpg",
+            "zoom": {
+              "x": 0.42,
+              "y": 0.44,
+              "s": 2.1,
+              "s0": 1.98
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-sinav.jpg",
+            "taps": [
+              {
+                "mark": "bukim",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/m-bukim.jpg",
+            "taps": [
+              {
+                "mark": "cezeri",
+                "t": 0.78
+              }
+            ],
+            "zoom": {
+              "x": 0.06,
+              "y": 0.62,
+              "s": 1.17,
+              "s0": 1,
+              "from": 0.25,
+              "to": 0.85
+            }
+          },
+          {
+            "src": "shots/m-bukim2.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.6,
+              "s": 1.05,
+              "s0": 1
+            }
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "Cevap: **Cezerî** (ö. 1206)",
+          "emoji": "✅",
+          "x": 0.5,
+          "y": 0.84,
+          "at": 3.2
+        },
+        "v": {
+          "text": "Cevap: **Cezerî** (ö. 1206)",
+          "emoji": "✅",
+          "x": 0.5,
+          "y": 0.66,
+          "at": 3.2
+        }
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 126,
+        "label": "Âlim"
+      },
+      {
+        "value": 306,
+        "label": "Eser"
+      },
+      {
+        "value": 246,
+        "label": "Katkı"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "İlmin yıldızlarını",
+      "*keşfet*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "3 oyun · 6 öğrenme yolu"
+    ]
+  },
+  "_kaynak": {
+    "Kanca: Krank-biyeli ilk kim kullandı?": "islam-bilim-yildizlari/data/bilginler.js id 26 Cezerî: ozet 'Krank-biyel mekanizmasını ilk kullanan mühendis olarak bilinir', hook ve ipuclari[2] 'Krank-biyel mekanizmasını ilk kullanan' (katkilar[0]'daki 'icat etti' ifadesi tartışmalı olduğu için kullanılmadı); seslendirme vo/00.mp3 aynı cümle",
+    "Cevap: Cezerî (ö. 1206)": "bilginler.js id 26 vefat 1206 (donem '13. yy' ipucuyla çelişmesin diye doğum yılı callout'ta verilmedi)",
+    "126 âlim": "islam-bilim-yildizlari/data/bilginler.js → BILGINLER.length = 126; alimler.html '126 bilgin bulundu'",
+    "306 eser": "BILGINLER.reduce(eserler.length) = 306 (index.html hero sayacı)",
+    "246 katkı": "BILGINLER.reduce(katkilar.length) = 246 (index.html hero sayacı)",
+    "13 yüzyıllık": "index.html hero alt başlığı '13 yüzyıl'; sayaç data-count '7-19' (7.–19. yy)",
+    "Endülüs'ten Orta Asya'ya": "harita.html alt başlığı 'Endülüs'ten Orta Asya'ya'",
+    "Kurtuba: İbn Rüşd, Zehrâvî": "bilginler.js id 83 İbn Rüşd yer 'Kurtuba; Marakeş / Endülüs-Mağrib', id 126 Zehrâvî yer 'Kurtuba / Endülüs'; harita2'deki '6' kümesi = koordinatlar.js [37.88,-4.77] olan 6 âlim (69, 74, 83, 108, 126, 127)",
+    "Endülüs kümesi (22)": "koordinatlar.js: enlem>35, boylam<0 olan 22 âlim; bolgeler.js 'Endülüs' 29 âlim (bölge listesi, harita koordinatından farklı) — videoda sayı olarak kullanılmadı",
+    "3 oyun": "sinav.html / js/sinav.js: Bu Kim?, Eşleştir, Zaman Tüneli",
+    "6 öğrenme yolu": "data/ogrenme-yollari.js → OGRENME_YOLLARI.length = 6",
+    "Alana, döneme ve bölgeye göre filtrele": "alimler.html filtre satırları ALAN / DÖNEM / BÖLGE",
+    "Bu Kim? turu": "js/sinav.js startBuKim: ilk tur capture.mjs'te Cezerî'ye sabitlendi (oyunda doğal olarak çıkabilen bir tur; 3 ipucu açıldı, doğru cevap seçildi, puan 100)"
+  }
+}

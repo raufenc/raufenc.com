@@ -1,0 +1,229 @@
+{
+  "slug": "mizac",
+  "title": "Dokuz Tip Mizaç Testi",
+  "url": "raufenc.com/mizac",
+  "category": "Düşünce Pusulası",
+  "icon": "shots/logo.png",
+  "emoji": "🎭",
+  "tag": "Uygulama",
+  "accent": "#3fa9b8",
+  "accent2": "#9b6dd6",
+  "hook": {
+    "kicker": "Hiç merak ettin mi?",
+    "lines": [
+      "Dokuz mizaçtan",
+      "hangisi *sensin?*"
+    ]
+  },
+  "intro": {
+    "title": "Dokuz Tip Mizaç Testi",
+    "tag2": "Ücretsiz",
+    "tagline": "**9 mizaç tipi**, 3 merkez: baskın eğilimini, kanadını ve gelişim yönünü gör.",
+    "shot": {
+      "h": "shots/d-giris.jpg",
+      "v": "shots/m-giris.jpg"
+    },
+    "phone": {
+      "h": "shots/m-sonuc.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "45 soru",
+      "title": "Kaydırarak cevapla",
+      "text": "Hızlı 27, Dengeli 45, Derin 72 soru; her ifadeye ne kadar katıldığını yüzdeyle işaretle.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-giris.jpg",
+            "taps": [
+              {
+                "mark": "baslat",
+                "t": 0.62
+              }
+            ],
+            "zoom": {
+              "x": 0.53,
+              "y": 0.78,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          },
+          {
+            "src": "shots/d-soru.jpg",
+            "taps": [
+              {
+                "mark": "thumb",
+                "t": 0.3
+              }
+            ],
+            "zoom": {
+              "mark": "kaydirici",
+              "dy": -0.08,
+              "s": 1.6,
+              "s0": 1.4
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-giris.jpg",
+            "taps": [
+              {
+                "mark": "baslat",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-soru.jpg",
+            "taps": [
+              {
+                "mark": "thumb",
+                "t": 0.3
+              }
+            ],
+            "zoom": {
+              "mark": "kaydirici",
+              "dy": -0.06,
+              "s": 1.2,
+              "s0": 1.05
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Sonuç",
+      "title": "Baskın mizacın belirir",
+      "text": "Son cevapla birlikte baskın tipin, kanadın ve sonucun ne kadar net olduğu hesaplanır.",
+      "dur": 3.5,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-son.jpg",
+            "taps": [
+              {
+                "mark": "thumb",
+                "t": 0.6
+              }
+            ],
+            "zoom": {
+              "mark": "kaydirici",
+              "dy": -0.12,
+              "s": 1.5,
+              "s0": 1.4
+            }
+          },
+          {
+            "src": "shots/d-sonuc.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.36,
+              "s": 1.45,
+              "s0": 1.2
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-son.jpg",
+            "taps": [
+              {
+                "mark": "thumb",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-sonuc.jpg"
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "4w5 · Okuma güveni 100/100",
+          "emoji": "✨",
+          "x": 0.15,
+          "y": 0.3,
+          "at": 2.2
+        }
+      }
+    },
+    {
+      "kicker": "Enneagram",
+      "title": "Haritanı ve dağılımını gör",
+      "text": "Kanatların, gelişim ve stres okların ile dokuz tipteki yüzdelerin tek sayfada.",
+      "dur": 3.5,
+      "shot": {
+        "h": {
+          "src": "shots/d-harita-uzun.jpg",
+          "frame": "browser",
+          "zoom": {
+            "x": 0.5,
+            "y": 0,
+            "s": 1.45,
+            "s0": 1.45
+          },
+          "scroll": [
+            0,
+            0.42
+          ]
+        },
+        "v": {
+          "src": "shots/m-harita-uzun.jpg",
+          "scroll": [
+            0,
+            0.43
+          ]
+        }
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 9,
+        "label": "Mizaç tipi"
+      },
+      {
+        "value": 3,
+        "label": "Merkez"
+      },
+      {
+        "value": 90,
+        "label": "Soruluk havuz"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Mizaç haritanı",
+      "*berrak* gör"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt yok",
+      "Kendin ya da çocuğun için"
+    ]
+  },
+  "_kaynak": {
+    "9 mizaç tipi / Dokuz mizaçtan": "mizac/data.js TIPLER → Object.keys(TIPLER).length = 9 (capture.mjs → shots/log.json veri.tip)",
+    "3 merkez": "mizac/data.js MERKEZLER = { beden, kalp, zihin } → 3 (log.json veri.merkez)",
+    "90 soruluk havuz": "mizac/data.js SORULAR.length = 90 (her tip için 10 madde, 18'i ters puanlı); log.json veri.soru",
+    "Hızlı 27, Dengeli 45, Derin 72 soru": "mizac/index.html #len-pick düğmeleri; app.js LEN = {hizli:3, dengeli:5, derin:8} × 9 tip",
+    "yüzdeyle işaretle (kaydırıcı)": "app.js buildLikert(): input[type=range] 0–100, okuma 'Tamamen katılıyorum · %92' (d-soru.jpg ve m-soru.jpg, gerçek sürükleme)",
+    "baskın tip, kanat, sonucun ne kadar net olduğu": "app.js computeScores() + responseQuality() + renderResult(): 'Belirginlik', 'İkincil eğilim', 'Okuma güveni'",
+    "4w5 · Okuma güveni 100/100": "capture.mjs: 45 soru kaydırıcı sürüklenerek çözüldü (PLAN); sitenin kendi puanlaması → primary 4 (Özgün), wing 5, quality.score 100, label 'Yüksek', bayrak yok (log.json d/m.sonuc)",
+    "Kanatlar, gelişim ve stres okları": "app.js emblemSVG({arrows:true}) + data.js OKLAR/KANATLAR; çekimde lejant 'Gelişim → 1 · Stres → 2 · Kanatlar 3 & 5'",
+    "dokuz tipteki yüzdeler": "app.js renderScores(): dokuz satır; masaüstü ve mobil aynı cevap planıyla birebir aynı: %94/%73/%52/%45/%38/%36/%31/%26/%16 (log.json d/m.sonuc.scores.pct)",
+    "Ücretsiz": "sitede ödeme/abonelik akışı yok",
+    "Kayıt yok": "mizac/index.html .intro-meta: 'Yaklaşık 7 dakika · Kayıt yok · Sonuç cihazında saklanır'",
+    "Kendin ya da çocuğun için": "mizac/index.html #audience-pick: 'Kendim için / Öz değerlendirme', 'Çocuğum için / Ebeveyn gözlemi'; app.js AUDIENCE.child + data.js COCUK_METINLER",
+    "CTA 'Mizaç haritanı berrak gör'": "mizac/index.html #intro-title",
+    "accent": "mizac/style.css :root --c #2f8e9e (açık tona çekildi: #3fa9b8); accent2 = data.js TIPLER[4].renk #9b6dd6 (sonuç ekranı rengi)",
+    "simge": "mizac/icon-512.png koyu zemini ayıklanarak shots/logo.png"
+  }
+}

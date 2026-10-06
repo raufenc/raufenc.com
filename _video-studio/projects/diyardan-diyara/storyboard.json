@@ -1,0 +1,264 @@
+{
+  "slug": "diyardan-diyara",
+  "title": "Diyardan Diyara",
+  "url": "raufenc.com/diyardan-diyara",
+  "category": "Cihan Serisi",
+  "emoji": "🗺️",
+  "icon": "shots/logo.png",
+  "tag": "Oyun",
+  "accent": "#C9A55A",
+  "accent2": "#5E9FD0",
+  "hook": {
+    "kicker": "Bil bakalım",
+    "lines": [
+      "Belgrad hangi",
+      "padişahın devrinde",
+      "*katıldı?*"
+    ],
+    "backdrop": {
+      "h": "shots/d-tahta.jpg",
+      "v": "shots/m-tahta.jpg"
+    }
+  },
+  "intro": {
+    "title": "Diyardan Diyara",
+    "tag2": "2–6 oyuncu",
+    "tagline": "Takvim padişah padişah ilerler; sen **menzil kollarında** şehirden şehre yol alırsın.",
+    "shot": {
+      "h": "shots/d-acilis.jpg",
+      "v": "shots/m-acilis.jpg"
+    },
+    "phone": {
+      "h": "shots/m-acilis.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "Gizli seçim",
+      "title": "Yol kartını gizlice seç",
+      "text": "1–5 menzil ya da Kışlak: kartlar birlikte açılır, küçük sayı önce oynar.",
+      "dur": 3.1,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-kart.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.62,
+              "s": 1.1,
+              "s0": 1.0
+            },
+            "taps": [
+              {
+                "mark": "onay",
+                "t": 0.66
+              }
+            ]
+          },
+          {
+            "src": "shots/d-acilan.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.47,
+              "s": 1.55,
+              "s0": 1.3
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-kart.jpg",
+            "taps": [
+              {
+                "mark": "onay",
+                "t": 0.66
+              }
+            ]
+          },
+          {
+            "src": "shots/m-acilan.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Berat · Mühür",
+      "title": "Berat’ı çevir, yılı bil",
+      "text": "Şehre yürü, katılış yılını yaz; ±10 yıl isabet Mühür’le +1 Cihan Puanı.",
+      "dur": 3.9,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-hedef.jpg",
+            "zoom": {
+              "mark": "hedef",
+              "s": 1.72,
+              "s0": 1.55
+            },
+            "taps": [
+              {
+                "mark": "hedef",
+                "t": 0.55
+              }
+            ]
+          },
+          {
+            "src": "shots/d-berat.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.22,
+              "s0": 1.1
+            },
+            "taps": [
+              {
+                "mark": "muhurle",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-arka.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.45,
+              "s": 1.7,
+              "s0": 1.45
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-hedef.jpg",
+            "taps": [
+              {
+                "mark": "hedef",
+                "t": 0.55
+              }
+            ]
+          },
+          {
+            "src": "shots/m-berat.jpg",
+            "taps": [
+              {
+                "mark": "muhurle",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-arka.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "12 devir",
+      "title": "On iki devir, tek harita",
+      "text": "Her devir yeni şehirleri fethe açar: Kanûnî devrinde Belgrad, Budin, Bağdat.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-devir10.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.6,
+              "s0": 1.3
+            },
+            "taps": [
+              {
+                "mark": "sefere",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/d-tahta.jpg",
+            "zoom": {
+              "x": 0.33,
+              "y": 0.42,
+              "s": 1.6,
+              "s0": 1.25
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-devir10.jpg",
+            "zoom": {
+              "mark": "kart",
+              "s": 1.12,
+              "s0": 1.0
+            },
+            "taps": [
+              {
+                "mark": "sefere",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/m-tahta.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 59,
+        "label": "Şehir"
+      },
+      {
+        "value": 12,
+        "label": "Devir"
+      },
+      {
+        "value": 32,
+        "label": "Eser"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Diyardan diyara",
+      "*sefere çık*"
+    ],
+    "chips": [
+      "2–6 oyuncu",
+      "Zar yok, para yok",
+      "Evde basılabilir set"
+    ]
+  },
+  "_kaynak": {
+    "Belgrad · Kanûnî (kanca)": "diyardan-diyara/index.html → DiyarVeri.dugumler[belgrad].katilis = [{devir:10, yil:'1521', bicim:'kusatma'}]; DiyarVeri.devirler[9].ad = 'I. Süleyman (Kanûnî)'",
+    "Takvim padişah padişah ilerler… (intro)": "diyardan-diyara/index.html açılış ekranı .acilis-vaat metni",
+    "2–6 oyuncu": "DiyarVeri.kurallar.oyuncu = {enAz:2, enCok:6}; açılış künyesi '2–6 oyuncu ya da takım'",
+    "1–5 menzil ya da Kışlak": "DiyarVeri.kurallar.yolKartlari = [1,2,3,4,5]; oyun içi metin 'Kışlak yürümez, kartları ele döndürür'",
+    "kartlar birlikte açılır, küçük sayı önce oynar": "oyun içi Eylem paneli: 'Kartlar gizli seçilir, birlikte açılır. Küçük sayı önce oynar'; 'Kartlar açılıyor' sahnesi (kartAcilisGoster)",
+    "±10 yıl, Mühür +1 Cihan Puanı": "DiyarVeri.kurallar.muhur = {tolerans:10, cp:1, tekDeneme:true}; Berat penceresi '±10 yıl içindeyse +1 CP. Tek deneme.'",
+    "Yenişehir 1299 (çekimdeki Berat)": "DiyarVeri.dugumler[yenisehir].katilis[0] = {devir:1, yil:'1299 civarı', muhurAralik:[1295,1302]}",
+    "Kanûnî devrinde Belgrad, Budin, Bağdat": "DiyarVeri.dugumler: belgrad(10, 1521), budin(10, 1541), bagdat(10, 1534); 10. Devir kartında 'Bu devirde katılan şehirler' listesi",
+    "12 devir": "DiyarVeri.devirler.length = 12 (1299–1683); sayilar.kart.devir = 12",
+    "59 şehir": "DiyarVeri.sayilar.sehir = 59 (dugumler tip 'sehir' = 59; Berat kartı 59)",
+    "32 eser": "DiyarVeri.eserler.length = 32; sayilar.kart.eser = 32",
+    "Zar yok, para yok": "açılış künyesi: 'Zar yok, para yok, şans havuzu yok.'",
+    "Evde basılabilir set": "diyardan-diyara/baski/ (renkli ve mürekkep dostu PDF setleri, baski/dosyalar.json)",
+    "Geç oyun tahtası": "sitenin kendi otomatik kipi ?otomatik=1&n=4&tohum=1&dur=9 → botlar 9. devre kadar oynar, Elif (insan) 9. devri oynar, 10. devir kartı gerçek akışta açılır"
+  }
+}

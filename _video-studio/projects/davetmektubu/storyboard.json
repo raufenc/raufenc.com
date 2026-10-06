@@ -1,0 +1,222 @@
+{
+  "slug": "davetmektubu",
+  "title": "Davet Mektubu",
+  "url": "davetmektubu.com",
+  "category": "Düşünce Pusulası",
+  "emoji": "✉️",
+  "tag": "Uygulama",
+  "accent": "#d9a24a",
+  "accent2": "#5ba88a",
+  "hook": {
+    "kicker": "Bir düşün",
+    "lines": [
+      "Ateist bir fizikçiye",
+      "ne *yazardın?*"
+    ]
+  },
+  "intro": {
+    "title": "Davet Mektubu",
+    "tag2": "Ücretsiz",
+    "tagline": "Ateist, deist ve agnostik dostlara **82 mektup**: her biri muhatabının mesleğinin diliyle.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "title": "Pozisyonu seç, mesleği bul",
+      "text": "Ateist, deist ya da agnostik; fizikçiden hemşireye her mesleğe ayrı bir mektup.",
+      "dur": 3.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-poz.jpg",
+            "taps": [
+              {
+                "mark": "ateist",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-liste.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.22,
+              "s0": 1.05
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-poz.jpg",
+            "taps": [
+              {
+                "mark": "ateist",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-liste.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      },
+      "callout": {
+        "h": {
+          "text": "Ateist · 27 mektup",
+          "emoji": "✉️",
+          "x": 0.64,
+          "y": 0.25,
+          "at": 1.95
+        },
+        "v": {
+          "text": "Ateist · 27 mektup",
+          "emoji": "✉️",
+          "x": 0.64,
+          "y": 0.1,
+          "at": 1.95
+        }
+      }
+    },
+    {
+      "kicker": "Ateist · Fizikçi",
+      "title": "Onun diliyle bir mektup",
+      "text": "Fizikçiye ince ayar ve sabitler: argümanlı, itirazı dürüstçe ele alan bir mektup.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-mektup-uzun.jpg",
+            "frame": "browser",
+            "scroll": [
+              0,
+              0.42
+            ]
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-mektup-uzun.jpg",
+            "scroll": [
+              0,
+              0.4
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "81 soru",
+      "title": "Soruyu kart yap, gönder",
+      "text": "16 başlıktaki sorulardan birini seç; görsel kart olarak WhatsApp'a gönder.",
+      "dur": 3.4,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-soru-kat.jpg",
+            "taps": [
+              {
+                "mark": "paylas",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/d-paylas.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s0": 1.04,
+              "s": 1.22
+            },
+            "taps": [
+              {
+                "mark": "wa",
+                "t": 0.8
+              }
+            ]
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-soru-kat.jpg",
+            "taps": [
+              {
+                "mark": "paylas",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-paylas.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.7,
+              "s0": 1.0,
+              "s": 1.1
+            },
+            "taps": [
+              {
+                "mark": "wa",
+                "t": 0.8
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 82,
+        "label": "Mektup"
+      },
+      {
+        "value": 81,
+        "label": "Soru"
+      },
+      {
+        "value": 3,
+        "label": "Bakış açısı"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Arkadaşına",
+      "*onun diliyle* yaz"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "WhatsApp'a tek dokunuş"
+    ]
+  },
+  "_kaynak": {
+    "82 mektup": "davetmektubu/index.html → Object.keys(MEKTUPLAR).length = 82 (hepsi tam:true); ana sayfa sayacı da 82",
+    "Ateist · 27 mektup": "MEKTUPLAR içinde poz==='ateist' olanlar = 27 (deist 27, agnostik 28)",
+    "81 soru": "SORULAR[ateist|deist|agnostik].kategoriler[].sorular toplamı = 39 + 24 + 18 = 81",
+    "16 başlık": "SORULAR kategori sayısı: ateist 7 + deist 5 + agnostik 4 = 16",
+    "3 bakış açısı": "SORULAR anahtarları: ateist, deist, agnostik; ana sayfa '3 perspektif'",
+    "Fizikçi mektubu: ince ayar ve sabitler": "MEKTUPLAR['ateist-fizikci'] ozet 'İnce ayar, bilinç problemi ve matematiğin etkinliği üzerine.'; 471 kelime",
+    "fizikçiden hemşireye": "MEKTUPLAR meslek alanları: Fizikçi … Hemşire (her pozisyonda)",
+    "itirazı dürüstçe": "ana sayfa 'Nasıl çalışıyor': 'Mesleğine özel, argümanlı, itirazları dürüstçe işleyen.'",
+    "WhatsApp'a gönder": "acPaylas() → 'Soruyu Paylaş' penceresi (önizleme generateCanvas() çıktısı), 'WhatsApp'a Gönder' düğmesi → shareWithAPI(); çekim: shots/*-paylas.jpg",
+    "Ücretsiz / Kayıt gerekmez": "index.html'de giriş/kayıt ya da ödeme akışı yok; tüm içerik istemci tarafında",
+    "hook": "projeler.json desc: 'Ateist bir mühendise ne yazarsın?…' — örnek meslek videodaki fizikçi mektubuyla eşleştirildi"
+  }
+}

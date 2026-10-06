@@ -1,0 +1,313 @@
+{
+  "slug": "osmanli-kartlari",
+  "title": "Osmanlı Padişahları Kart Seti",
+  "url": "raufenc.com/osmanli-kartlari",
+  "category": "Tarih & Medeniyet",
+  "emoji": "🃏",
+  "tag": "Oyun",
+  "accent": "#d4a24e",
+  "accent2": "#d9584a",
+  "hook": {
+    "kicker": "Tarih testi",
+    "lines": [
+      "36 padişahın",
+      "kaçını *tanıyorsun?*"
+    ]
+  },
+  "intro": {
+    "title": "Osmanlı Padişahları\nKart Seti",
+    "tag2": "Ücretsiz",
+    "tagline": "Osman Gazi'den Vahdeddin'e **resimli kartlar**, zaman çizgisi ve oyunlar.",
+    "shot": {
+      "h": "shots/d-home.jpg",
+      "v": "shots/m-home.jpg"
+    },
+    "phone": {
+      "h": "shots/m-galeri.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "Kart Galerisi",
+      "title": "Kartı çevir, hikâyeyi oku",
+      "text": "36 resimli kartın önünde portre ve özlü söz, arkasında padişahın hikâyesi; döneme göre süz.",
+      "dur": 3.2,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-galeri.jpg",
+            "taps": [
+              {
+                "mark": "yukselis",
+                "t": 0.6
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.18,
+              "s0": 1.08
+            }
+          },
+          {
+            "src": "shots/d-yukselis.jpg",
+            "taps": [
+              {
+                "mark": "kart",
+                "t": 0.6,
+                "dy": 0.05
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.47,
+              "s": 1.3,
+              "s0": 1.18
+            }
+          },
+          {
+            "src": "shots/d-arka.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.47,
+              "s": 1.5,
+              "s0": 1.3
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-galeri.jpg",
+            "taps": [
+              {
+                "mark": "yukselis",
+                "t": 0.6
+              }
+            ]
+          },
+          {
+            "src": "shots/m-yukselis.jpg",
+            "taps": [
+              {
+                "mark": "kart",
+                "t": 0.6,
+                "dy": 0.04
+              }
+            ]
+          },
+          {
+            "src": "shots/m-arka.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.45,
+              "s": 1.15,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Zaman Çizgisi",
+      "title": "1299'dan 1922'ye yolculuk",
+      "text": "Zaman çizgisinde bir padişaha dokun; biyografi, önemli olaylar, eserler ve ilkler açılsın.",
+      "dur": 2.9,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-timeline.jpg",
+            "taps": [
+              {
+                "mark": "fatih",
+                "t": 0.62,
+                "dx": 0.2
+              }
+            ]
+          },
+          {
+            "src": "shots/d-profil.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.34,
+              "s": 1.55,
+              "s0": 1.4
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-timeline.jpg",
+            "taps": [
+              {
+                "mark": "fatih",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-profil-uzun.jpg",
+            "scroll": [
+              0,
+              0.32
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Sultan Arenası",
+      "title": "Sultanları kapıştır",
+      "text": "İki kart karşı karşıya: kimin saltanatı daha uzun, kim önce tahta çıktı, kimin fethi daha çok?",
+      "dur": 2.6,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-arena.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.66
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.3,
+              "s": 1.6,
+              "s0": 1.5
+            }
+          },
+          {
+            "src": "shots/d-arena-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.26,
+              "s": 1.62,
+              "s0": 1.7
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-arena.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.66
+              }
+            ]
+          },
+          {
+            "src": "shots/m-arena-dogru.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Quiz · Rozet",
+      "title": "Bil, XP topla, rütbe atla",
+      "text": "Her doğru cevap XP ve yeni kart getirir; Yeniçeri'den Sultan'a 6 rütbe, 19 rozet.",
+      "dur": 3.1,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.62
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.33,
+              "s": 1.75,
+              "s0": 1.65
+            }
+          },
+          {
+            "src": "shots/d-quiz-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.33,
+              "s": 1.75,
+              "s0": 1.75
+            }
+          },
+          {
+            "src": "shots/d-rozet.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.36,
+              "s": 1.55,
+              "s0": 1.7
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-quiz-dogru.jpg"
+          },
+          {
+            "src": "shots/m-rozet.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 36,
+        "label": "Padişah"
+      },
+      {
+        "value": 623,
+        "label": "Yıllık tarih"
+      },
+      {
+        "value": 7,
+        "label": "Oyun"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Tarihi kart kart",
+      "*keşfet*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "Basılı kart seti de var"
+    ]
+  },
+  "_kaynak": {
+    "36 padişah": "osmanli-kartlari/data.js → SULTANLAR.length = 36 (Osman Gazi sira 1 … Mehmed Vahdeddin sira 36); ana sayfa sayacı '36 Padişah'",
+    "623 yıllık tarih": "SULTANLAR[0].saltanat '1299–1326' … SULTANLAR[35].saltanat '1918–1922' → 1922−1299 = 623; ana sayfa sayacı '623 Yıl'",
+    "1299'dan 1922'ye": "ana sayfa 'Zaman Çizgisi — 1299'dan 1922'ye'; DONEMLER kurulus 1299–1453 … dagilma 1828–1922",
+    "7 oyun": "index.html 'Oyna & Öğren' ızgarası: Quiz, Sıralama, Eşleştirme, Kim Bu Sultan?, Jeopardy, Hızlı Tur, Sultan Arenası",
+    "döneme göre süz": "initGaleri(): Tümü + 5 dönem süzgeci (DONEMLER); çekimde 'Yükseliş Dönemi' seçildi",
+    "biyografi, olaylar, eserler, ilkler": "showSultanProfil(): Biyografi, Önemli Olaylar, Eserleri, İlkler & Özellikler, İstatistikler bölümleri; zaman çizgisi öğesi onclick=showSultanProfil",
+    "Arena soruları": "initArena(): 'Hangisinin saltanatı daha uzun?', 'Hangisi daha önce tahta çıktı?', 'Hangisinin daha fazla fethi var?' (metinde 'kimin fethi daha çok?') — çekimde I. Murad (27 yıl) vs Kanuni (46 yıl), Kanuni doğru",
+    "doğru cevap XP ve yeni kart": "answerQuiz(): doğruysa addXP(10) + toplanmamış rastgele bir kart collectCard(); çekimde 3. soru 'İstanbul'u fetheden padişah kimdir?' → Fatih Sultan Mehmed doğru, XP 45'e çıktı ve rastgele toplanan kart için 'Sultan II. Mustafa kartı toplandı!' bildirimi (d ve m)",
+    "6 rütbe, Yeniçeri'den Sultan'a": "data.js SEVIYELER: Yeniçeri, Sipahi, Paşa, Vezir, Sadrazam, Sultan (6)",
+    "19 rozet": "data.js ROZETLER.length = 19; profil ekranı '2/19 Rozetler'",
+    "rozet çekimi": "Kolay quiz 10/10 gerçekten oynandı: +100 XP, İlk Adım ve Tam İsabet rozetleri; arena +15 → 365 XP, Sipahi",
+    "Ücretsiz / Kayıt gerekmez": "web sürümü giriş istemez, ilerleme localStorage 'osmanli-kartlari-v1' içinde",
+    "Basılı kart seti": "ana sayfa 'Kart Setini Satın Al — Osmanlı Padişahları fiziksel kart seti — hediyekitap.com'",
+    "tohum": "capture.mjs Math.random sabit tohum (20260) — quiz ve arena karıştırması yeniden üretilebilir",
+    "Osman Gazi'den Vahdeddin'e": "SULTANLAR[0].ad 'Osman Gazi' (sira 1), SULTANLAR[35].ad 'Sultan Mehmed Vahdeddin' (sira 36)",
+    "36 resimli kart, önde portre ve özlü söz, arkada hikâye": "osmanli-kartlari/images: 72 webp = 36 ön + 36 '-arka'; ön yüzde portre + özlü söz (ör. Fatih: 'İstanbul'un kapılarını İslam'a açan koca sultan', I. Murad: 'Düşmana fırsat vermeyen şehid padişah'); galeride .kart-wrap tıklanınca 'flipped' ile rotateY(180deg) — çekimde Fatih kartı gerçekten çevrildi",
+    "zaman çizgisi çekimi": "capture.mjs: Fatih satırı scrollIntoView({block:'center'}) ile çerçevenin ortasına alınır; satırda lakap 'Çağ Açıp Çağ Kapatan Fatih' (data.js)"
+  }
+}

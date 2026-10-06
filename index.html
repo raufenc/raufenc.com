@@ -1152,6 +1152,13 @@
     .b-dusunce     { --card-grad: linear-gradient(135deg, #1e3a8a 0%, #5b21b6 50%, #312e81 100%); }
     .b-ai          { --card-grad: linear-gradient(135deg, #1e3a8a 0%, #0891b2 55%, #0c4a6e 100%); }
 
+    /* ── TANITIM VİDEOLARI ── */
+    .vt-section { padding-top: 0; }
+    .vt-section[hidden] { display: none; }
+    .vt-all { color: var(--warm); font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .vt-all:hover { text-decoration: underline; text-underline-offset: 3px; }
+    #vt-raf { margin-top: 30px; }
+
     /* ── PROJELER ── */
     .projects-header { text-align: center; margin-bottom: 8px; position: relative; z-index: 1; }
     .projects-header .section-label { justify-content: center; }
@@ -1224,6 +1231,8 @@
       grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
       gap: 14px;
     }
+    .card-cell { display: flex; flex-direction: column; min-width: 0; position: relative; }
+    .card-cell > .card { flex: 1; }
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -1635,6 +1644,7 @@
   <a href="#hakkinda" onclick="closeMobileMenu()">Hakkında</a>
   <a href="#kitap" onclick="closeMobileMenu()">Kitap</a>
   <a href="#projeler" onclick="closeMobileMenu()">Projeler</a>
+  <a href="/videolar/" onclick="closeMobileMenu()">Videolar</a>
   <a href="#iletisim" onclick="closeMobileMenu()">İletişim</a>
   <div class="mm-divider">Öne Çıkanlar</div>
   <a href="/noroterbiye/" class="mm-small" onclick="closeMobileMenu()">NöroTerbiye</a>
@@ -1658,6 +1668,7 @@
         <a href="#hakkinda">Hakkında</a>
         <a href="#kitap">Kitap</a>
         <a href="#projeler">Projeler</a>
+        <a href="/videolar/">Videolar</a>
         <a href="#iletisim">İletişim</a>
       </div>
       <button class="hamburger" id="hamburger" type="button" aria-label="Gezinme menüsünü aç" aria-expanded="false">
@@ -2021,6 +2032,23 @@
 </section>
 
 
+<!-- TANITIM VİDEOLARI -->
+<section id="videolar" class="vt-section reveal" hidden>
+  <div class="wrap">
+    <div class="bento-header">
+      <div class="bento-header-left section-head" style="margin-bottom:0">
+        <span class="section-label">Tanıtım Videoları</span>
+        <h2 class="section-title" style="margin-bottom:0">Yarım dakikada <em>keşfet</em></h2>
+      </div>
+      <div class="bento-header-right">
+        Her projenin kısa tanıtımı — üzerine gel, önizle; tıkla, sesli izle. <a href="/videolar/" class="vt-all">Tümünü izle →</a>
+      </div>
+    </div>
+    <div id="vt-raf"></div>
+  </div>
+</section>
+
+
 <!-- PROJELER -->
 <section id="projeler" class="reveal">
   <div class="section-ghost" aria-hidden="true"><span class="ghost-word" data-speed="0.4" style="top:auto;bottom:0;">ATÖLYE</span></div>
@@ -2142,6 +2170,7 @@
     <a href="#hakkinda">Hakkında</a>
     <a href="#kitap">Kitap</a>
     <a href="#projeler">Projeler</a>
+    <a href="/videolar/">Videolar</a>
     <a href="#iletisim">İletişim</a>
     <a href="/gizlilik/">Gizlilik</a>
   </div>
@@ -2149,7 +2178,8 @@
 </footer>
 
 <script src="/lib/error-logger.js"></script>
-<script src="/data/projeler.js?v=cihan-20260930"></script>
+<script src="/data/projeler.js?v=video-20261006"></script>
+<script src="/lib/video-tanitim.js?v=20261006"></script>
 <script>
 (function() {
   'use strict';
@@ -2266,6 +2296,8 @@
   }
 
   function createCard(p, i) {
+    var cell = document.createElement('div');
+    cell.className = 'card-cell';
     var a = document.createElement('a');
     a.className = 'card spot';
     a.href = p.href;
@@ -2281,7 +2313,8 @@
           '<path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/>' +
         '</svg>' +
       '</div>';
-    return a;
+    cell.appendChild(a);
+    return cell;
   }
 
   function renderCards() {
@@ -2292,7 +2325,7 @@
     var loading = document.getElementById('grid-loading');
     if (loading) loading.remove();
 
-    grid.querySelectorAll('.card').forEach(function(c) { c.remove(); });
+    grid.querySelectorAll('.card-cell').forEach(function(c) { c.remove(); });
 
     var total = anaSayfaProjeleri.length;
     var shown = sonuclar.length;
@@ -2303,12 +2336,27 @@
     if (sonuclar.length === 0) { empty.classList.add('show'); return; }
     empty.classList.remove('show');
 
+    var videolu = sonuclar.filter(function(p) { return p.video; });
     sonuclar.forEach(function(p, i) {
-      grid.appendChild(createCard(p, i));
+      var cell = createCard(p, i);
+      grid.appendChild(cell);
+      if (p.video && window.VideoTanitim) VideoTanitim.kartaEkle(cell, cell.firstChild, p, videolu);
     });
   }
 
   baslat();
+
+  // ── TANITIM VİDEOLARI RAFI ──
+  (function() {
+    var bolum = document.getElementById('videolar');
+    var raf = document.getElementById('vt-raf');
+    if (!bolum || !raf || !window.VideoTanitim) return;
+    var liste = anaSayfaProjeleri.filter(function(p) { return p.video && p.featured; })
+      .concat(anaSayfaProjeleri.filter(function(p) { return p.video && !p.featured; }));
+    if (!liste.length) return;
+    bolum.hidden = false;
+    VideoTanitim.raf(raf, liste);
+  })();
 
   // ── SAYAÇ ANİMASYONU ──
   function formatNum(n) {

@@ -1,0 +1,209 @@
+{
+  "slug": "beyin-ve-yapay-zeka",
+  "title": "Beyin ↔ Yapay Zekâ",
+  "url": "raufenc.com/beyin-ve-yapay-zeka",
+  "category": "Yapay Zekâ",
+  "emoji": "🧬",
+  "tag": "Ansiklopedi",
+  "accent": "#ff6b9d",
+  "accent2": "#4ecdc4",
+  "hook": {
+    "kicker": "Hiç düşündün mü?",
+    "lines": [
+      "Dopamin ile",
+      "yapay zekâ",
+      "aynı dili mi *konuşuyor?*"
+    ]
+  },
+  "intro": {
+    "title": "Beyin ↔\nYapay Zekâ",
+    "tag2": "Ücretsiz",
+    "tagline": "Beyin bilimi ile yapay zekâ arasında **50 paralel keşif**, 1861'den 2022'ye.",
+    "shot": {
+      "h": {
+        "src": "shots/d-hero.jpg",
+        "zoom": {
+          "x": 0.5,
+          "y": 0.52,
+          "s": 1.08,
+          "s0": 1
+        }
+      },
+      "v": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "50 keşif",
+      "title": "Ara, dokun, karşılaştır",
+      "text": "“Dopamin” yaz: ödül tahmin hatası (1998) ile TD öğrenmesi ve RLHF aynı kartta yan yana.",
+      "dur": 3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-kesif.jpg",
+            "taps": [
+              {
+                "mark": "ara",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-kesif-acik.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.42,
+              "s": 1.1,
+              "s0": 1
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-kesif.jpg",
+            "taps": [
+              {
+                "mark": "ara",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-kesif-acik.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "5 diyagram",
+      "title": "Mekanizmalar yan yana",
+      "text": "Biyolojik nöron, Hebb kuralı, dikkat, hafıza ve dopamin: beyin ile yapay zekâ aynı şemada.",
+      "shot": {
+        "h": "shots/d-diyagram.jpg",
+        "v": "shots/m-diyagram-uzun.jpg"
+      },
+      "zoom": {
+        "h": {
+          "x": 0.5,
+          "y": 0.57,
+          "s": 1.12,
+          "s0": 1
+        },
+        "v": null
+      },
+      "scroll": {
+        "v": [
+          0,
+          0.215
+        ]
+      },
+      "dur": 2.7
+    },
+    {
+      "kicker": "100 olay",
+      "title": "1861'den 2022'ye",
+      "text": "Broca'dan zincirleme düşünceye (CoT): beyin ve yapay zekâ keşifleri yıl yıl, renkleriyle tek çizelgede.",
+      "shot": {
+        "h": "shots/m-kronoloji-uzun.jpg",
+        "v": "shots/m-kronoloji-uzun.jpg"
+      },
+      "scroll": {
+        "h": [
+          0,
+          0.5
+        ],
+        "v": [
+          0,
+          0.55
+        ]
+      },
+      "dur": 2.7
+    },
+    {
+      "kicker": "4 oyun",
+      "title": "Quiz ile kendini sına",
+      "text": "10 soruluk quiz, eşleştirme, bilgi kartları ve Jeopardy ile öğrendiklerini pekiştir.",
+      "dur": 3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/d-quiz-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.06,
+              "s0": 1
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.65
+              }
+            ]
+          },
+          {
+            "src": "shots/m-quiz-dogru.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 50,
+        "label": "Paralel keşif"
+      },
+      {
+        "value": 11,
+        "label": "Keşif ailesi"
+      },
+      {
+        "value": 100,
+        "label": "Kronoloji olayı"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Beyni anla,",
+      "*yapay zekâyı* çöz"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "4 oyun · 14 rozet"
+    ]
+  },
+  "_kaynak": {
+    "50 keşif / Paralel keşif": "beyin-ve-yapay-zeka/index.html → DATA.length = 50",
+    "11 keşif ailesi": "index.html → DATA içindeki farklı kat değerleri = 11 (KAT_META, renderFamilies)",
+    "100 kronoloji olayı": "index.html → buildTimelineEvents(): her kayıt için beyin + YZ olayı = 100; düğme 'Tümü (100)'",
+    "5 diyagram": "index.html → #diyagramlar bölümündeki diagram-card sayısı = 5 (Nöron, Hebb↔Backprop, Dikkat↔Transformer, Hipokampus↔Experience Replay, Dopamin↔Pekiştirmeli Öğrenme)",
+    "4 oyun": "index.html → .game-tab: Quiz (10 Soru), Eşleştirme, Bilgi Kartları, Jeopardy",
+    "10 soruluk quiz": "index.html → startQuiz(): QUIZ_POOL ... slice(0,10)",
+    "14 rozet": "index.html → ALL_BADGES.length = 14",
+    "Ücretsiz / Kayıt gerekmez": "statik sayfa; giriş/üyelik kodu yok, ilerleme yalnız sayfa belleğinde",
+    "Quiz çekimi": "startQuiz() yeniden başlatılarak 'Dikkat Işığı' (masaüstü) ve 'Ayna Nöronları' (mobil) sorusu getirildi, doğru şıkka gerçekten tıklandı",
+    "Dopamin 1998 ↔ TD öğrenmesi / RLHF (yan yana, nedensellik iddiası yok)": "index.html → DATA #10: Dopamin Ödül Tahmin Hatası, yil 1998, yzk \"Policy Gradient & TD Learning / RLHF\", yzy 2015; arama kutusuna \"dopamin\" yazıp kart açılarak çekildi. Kanca etki yönü iddia etmiyor, yalnız ortak dili (tahmin hatası → öğrenme sinyali, DATA #10 oi) soruyor. (TD Learning ayrıca DATA #28'in gel alanında geçer: 'Sutton, Barto (TD Learning)'; #28'in yzk'sı 'Classical Conditioning as Loss Minimization', yzy 1989.)",
+    "Kronoloji renkleri": "index.html → kronoloji olay rozetleri: Beyin (pembe) / YZ (turkuaz), filtre düğmeleri Tümü (100) · Beyin · Yapay Zekâ",
+    "50 paralel keşif, 1861'den 2022'ye (intro)": "index.html → DATA.length = 50; en eski olay DATA #15 Broca/Wernicke yil 1861 (kronolojinin ilk olayı), en yeni olay max(yzy) = 2022 (DATA #22 GPT-3 few-shot, #33 Chain-of-Thought, #44 DANN). Sitenin .hero-sub metnindeki '120 yıllık' ifadesi ve '120 Yıllık Tarih' sayacı veriyle (161 yıl) uyuşmadığı için anlatımda kullanılmadı ve d-hero/m-hero çekiminde .hero-sub ile .hero-stats gizlendi (capture.mjs).",
+    "1861'den 2022'ye / Broca'dan CoT'ye (özellik 3)": "DATA #15 Broca/Wernicke yil 1861 = kronolojinin ilk olayı (m-kronoloji-uzun'da en üstte); DATA #33 İkili Süreç Teorisi ↔ Chain-of-Thought (CoT) Prompting, yzy 2022 = verideki en yeni yıl. Kronoloji bölüm açıklaması ('120 yıllık…', index.html:782) çekimde gizlendi; 'Kronoloji' başlığı ve 'Tümü (100)' düğmesi duruyor."
+  }
+}

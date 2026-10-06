@@ -1,0 +1,176 @@
+{
+  "slug": "iyilikakademi",
+  "title": "İyilik Akademi",
+  "url": "raufenc.com/iyilikakademi",
+  "category": "Peygamberim & Ahlâk",
+  "emoji": "🌱",
+  "tag": "Uygulama",
+  "accent": "#f43f6b",
+  "accent2": "#f6b73c",
+  "hook": {
+    "kicker": "Bir soru",
+    "lines": [
+      "Güzel ahlak",
+      "*oyunla* öğrenilir mi?"
+    ]
+  },
+  "intro": {
+    "title": "İyilik Akademi",
+    "tag2": "Ücretsiz",
+    "tagline": "Doğruluk, saygı, sabır… **40 derste** güzel ahlak: quizler, XP ve rozetlerle.",
+    "shot": {
+      "h": "shots/d-ana.jpg",
+      "v": "shots/m-ana.jpg"
+    },
+    "phone": {
+      "h": "shots/m-sayac.jpg"
+    }
+  },
+  "features": [
+    {
+      "title": "40 derste güzel ahlak",
+      "text": "Doğruluktan vatan sevgisine… Her ders ön quiz, video ve son quizle ilerler.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-dersler-uzun.jpg",
+            "frame": "browser",
+            "scroll": [
+              0,
+              0.55
+            ]
+          }
+        ],
+        "v": "shots/m-dersler-uzun.jpg"
+      },
+      "scroll": {
+        "v": [
+          0,
+          0.62
+        ]
+      }
+    },
+    {
+      "kicker": "3 mod",
+      "title": "Meydan oku, XP kazan",
+      "text": "Hız Yarışı'nda 120 saniyede 10 soru; Bilgi Maratonu ve Günün Mücadelesi de seni bekliyor.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-meydan.jpg",
+            "taps": [
+              {
+                "mark": "hiz",
+                "t": 0.68
+              }
+            ]
+          },
+          {
+            "src": "shots/d-hiz.jpg",
+            "zoom": {
+              "x": 0.58,
+              "y": 0.4,
+              "s": 1.45,
+              "s0": 1.3
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-meydan.jpg",
+            "taps": [
+              {
+                "mark": "hiz",
+                "t": 0.68
+              }
+            ]
+          },
+          {
+            "src": "shots/m-hiz.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Anında geri bildirim",
+      "text": "Cevabını seç, doğru mu yanlış mı hemen gör; sorular 240 soruluk havuzdan gelir.",
+      "dur": 3.3,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-soru.jpg",
+            "taps": [
+              {
+                "mark": "cevap",
+                "t": 0.66
+              }
+            ]
+          },
+          {
+            "src": "shots/d-cevap.jpg",
+            "zoom": {
+              "x": 0.58,
+              "y": 0.33,
+              "s": 1.6,
+              "s0": 1.4
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-soru.jpg",
+            "taps": [
+              {
+                "mark": "cevap",
+                "t": 0.66
+              }
+            ]
+          },
+          {
+            "src": "shots/m-cevap.jpg"
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 40,
+        "label": "Ders"
+      },
+      {
+        "value": 240,
+        "label": "Quiz sorusu"
+      },
+      {
+        "value": 3,
+        "label": "Oyun modu"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "İyilikle dolu",
+      "yolculuğa *başla*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "40 ders · 240 soru",
+      "Çocuklar için"
+    ]
+  },
+  "_kaynak": {
+    "240 quiz sorusu": "aynı dizide her dersin preQuiz (3) + postQuiz (3) sorusu: 120 + 120 = 240; ana sayfa sayacı \"240+ Quiz Sorusu\"; Meydan Okuma havuzu b3() tüm preQuiz+postQuiz sorularını toplar",
+    "ön quiz, video ve son quiz": "bundle ders adımları: Giriş, Ön Quiz, Video, Pekiştir, Son Quiz, Tamamla (ders sayfası giriş ister); her derste preQuiz (3) + postQuiz (3)",
+    "3 mod / Hız Yarışı 120 sn 10 soru": "bundle _3: speed (questionCount 10, timeLimit 12e4), marathon (20 soru, süresiz), daily (5 tematik soru)",
+    "XP": "Meydan Okuma alt başlığı \"Kendini test et, XP kazan!\"; her ders xp:100 (ders 1)",
+    "rozetler": "ana sayfa: \"rozetlerle ödüllendirin\"; ders içeriklerinde kazanilanRozet alanı",
+    "Ücretsiz": "ana sayfa: \"Tamamen Ücretsiz\", sayaç kartı \"Fiyat: Ücretsiz\"",
+    "40 ders": "iyilikakademi/assets/index-89OofQM9.js — ders dizisi [{id:1,order:1,title:\"Doğruluk ve Dürüstlük\"…}] uzunluğu 40 (id 1–40); /dersler: \"40 ders ile güzel ahlak yolculuğu\". 40 ayrı değer DEĞİL: ders 9 ve 10 ikisi de \"Tevekkül\" (10: \"Devamı\"), ders 40 \"Kapanış – Bu Yolculukta Neler Öğrendik?\", ders 34 \"İktisât ve Kanaatkârlık\" ile 38 \"Kanaat\" örtüşür → metinde \"40 ders, 40 değer\" denmez",
+    "Doğruluk, saygı, sabır / Doğruluktan vatan sevgisine": "ders başlıkları: 1 Doğruluk ve Dürüstlük, 2 Saygı, 7 Sabır, 32 Vatan Sevgisi (sıra iması yok: \"…\" ile yalnız örnek aralık)",
+    "Rozet / sayaç kartı (intro telefonu)": "ana sayfa sayaç kartı: 40+ Ders · 240+ Quiz Sorusu · 8 Rozet · Ücretsiz Fiyat (shots/m-sayac.jpg)"
+  }
+}

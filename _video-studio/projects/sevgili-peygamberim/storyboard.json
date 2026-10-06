@@ -1,0 +1,234 @@
+{
+  "slug": "sevgili-peygamberim",
+  "title": "Sevgili Peygamberim",
+  "url": "raufenc.com/sevgili-peygamberim",
+  "category": "Peygamberim & Ahlâk",
+  "icon": "shots/logo.png",
+  "tag": "Ansiklopedi",
+  "accent": "#C9A84C",
+  "accent2": "#3f9a7c",
+  "hook": {
+    "kicker": "705 sayfalık eser",
+    "lines": [
+      "O'nun hayatını",
+      "hiç bu kadar",
+      "*yakından* okudun mu?"
+    ]
+  },
+  "intro": {
+    "title": "Sevgili Peygamberim",
+    "tag2": "Ücretsiz",
+    "tagline": "Prof. Dr. Ramazan Ayvallı'nın eseri **72 bölümde**; her konu kitaptaki sayfasına bağlı.",
+    "shot": {
+      "h": "shots/d-hero.jpg",
+      "v": "shots/m-hero.jpg"
+    },
+    "phone": {
+      "h": "shots/m-hero.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "26 olay",
+      "title": "Tarih sırasıyla bir ömür",
+      "text": "Fil Vak'asından Vedâ Haccı'na kronolojik zaman çizelgesi; her olay kendi bölümüne götürür.",
+      "dur": 2.9,
+      "shot": {
+        "h": {
+          "src": "shots/d-zaman-uzun.jpg",
+          "frame": "browser"
+        },
+        "v": "shots/m-zaman-uzun.jpg"
+      },
+      "scroll": {
+        "h": [
+          0,
+          0.62
+        ],
+        "v": [
+          0.02,
+          0.55
+        ]
+      }
+    },
+    {
+      "kicker": "30 nokta",
+      "title": "Haritada mekânlar, gazâlar",
+      "text": "Mekke'den Tebük'e mekânlar ve güzergâhlar; bir işarete dokun, ilgili bölüme geç.",
+      "dur": 3.1,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-harita.jpg",
+            "taps": [
+              {
+                "mark": "medine",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/d-harita-medine.jpg",
+            "zoom": {
+              "x": 0.517,
+              "y": 0.3,
+              "s": 1.34,
+              "s0": 1.15
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-harita-gaza.jpg",
+            "taps": [
+              {
+                "mark": "tebuk",
+                "t": 0.62
+              }
+            ]
+          },
+          {
+            "src": "shots/m-harita-tebuk.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.12,
+              "s": 1.08,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "336 alt başlık",
+      "title": "Kitabı bölüm bölüm oku",
+      "text": "Alt başlığa dokun, metin açılsın; her konu kitaptaki sayfa numarasıyla.",
+      "dur": 3.1,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-kitap.jpg",
+            "taps": [
+              {
+                "mark": "alt",
+                "t": 0.62,
+                "dx": -0.185
+              }
+            ]
+          },
+          {
+            "src": "shots/d-kitap-acik.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.8,
+              "s": 1.35,
+              "s0": 1.1
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-kitap.jpg",
+            "taps": [
+              {
+                "mark": "alt",
+                "t": 0.62,
+                "dx": -0.09
+              }
+            ]
+          },
+          {
+            "src": "shots/m-kitap-acik.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.25,
+              "s": 1.1,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "20 soru",
+      "title": "Kendini dene",
+      "text": "Cevabını ver; açıklamayı ve kitaptaki kaynak sayfasını hemen gör.",
+      "dur": 2.9,
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.6,
+                "dx": -0.155
+              }
+            ]
+          },
+          {
+            "src": "shots/d-quiz-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.6,
+              "s": 1.35,
+              "s0": 1.12
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-quiz.jpg",
+            "taps": [
+              {
+                "mark": "dogru",
+                "t": 0.6,
+                "dx": -0.2
+              }
+            ]
+          },
+          {
+            "src": "shots/m-quiz-dogru.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.7,
+              "s": 1.18,
+              "s0": 1.04
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "cta": {
+    "lines": [
+      "O'nun izinde",
+      "bir *yolculuk*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "Yer imi · not · okuma ilerlemesi"
+    ]
+  },
+  "_kaynak": {
+    "72 bölüm": "sevgili-peygamberim/book-data.js → BOOK.length = 72 (hero sayacı 'Ana Bölüm' 72). Bu, kitabın tamamıdır (siyer + şemâil/mûcizeler + ilmihal + mehazlar); bu yüzden 'eseri 72 bölümde' denir, 'hayatı 72 bölümde' denmez",
+    "336 alt başlık": "book-data.js → BOOK'taki subs toplamı = 336; hepsinde full_text var (hero sayacı 336)",
+    "705 sayfa": "index.html hero sayacı '705 Sayfa', og:description '705 sayfalık eser' ve JSON-LD numberOfPages: 705; kitabın son kısmı ilmihal olduğundan kanca 'siyer' değil 'eser' der",
+    "20 soru": "index.html → QZ dizisi 20 öğe; bölüm başlığı '20 soru — her cevap kaynak sayfasına bağlı'",
+    "26 olay": "index.html → TIMELINE_EVENTS 26 öğe (M.Ö. 571 Fil Vak'ası … 632 Vefât); her öğe onclick=scrollToChapter",
+    "Vedâ Haccı": "TIMELINE_EVENTS: {year:'632', title:'Vedâ Haccı'} (sondan bir önceki olay; en son 'Vefât')",
+    "30 nokta": "index.html → PLACES 17 + BATTLES 13 = 30 harita işareti",
+    "Mekke'den Tebük'e": "PLACES 'mekke' ve 'tebuk', BATTLES 'tebuk-g'",
+    "bir işarete dokun, ilgili bölüme geç": "PLACES açılır kartında bölüm düğmeleri (scrollToChapter), BATTLES kartında '📖 Bölüme Git'",
+    "her konu kitaptaki sayfa numarasıyla": "her alt başlıkta '📖 Sayfa N' (sub.page)",
+    "açıklama ve kaynak sayfası": "aQ(): doğru cevapta q.x açıklaması + 📖 s.<q.s>; ör. ilk soru: s.29",
+    "Ücretsiz, kayıt gerekmez": "sayfada giriş/üyelik yok; tamamen istemci tarafı",
+    "Yer imi · not · okuma ilerlemesi": "index.html → toggleBookmark (sp-bm), saveNote (sp-notes), markChapterRead/updateReadingProgress (sp-read)",
+    "accent": "styles.css --gold:#C9A84C; accent2 --g4:#2A7A62'nin açık tonu",
+    "simge": "capture.mjs: sitenin 'Kim Kimdir?' kartındaki ﷺ rozeti (.pc .pa) aynı renk/çerçeve ile 400×400 saydam PNG olarak yeniden çizildi; projeler.json emojisi ☪️ motor içinde mor kare olarak görünüyordu",
+    "Prof. Dr. Ramazan Ayvallı": "index.html hero: 'Kaynak: Prof. Dr. Ramazan Ayvallı — Sevgili Peygamberim, 3. Baskı, 2021'",
+    "hitap": "Sitede 'Peygamber Efendimiz sallallahü aleyhi ve sellem'; videoda Hz. Peygamber adı geçmiyor (kanca 'O'nun hayatını')",
+    "harita çekimleri": "Yatay: d-harita.jpg'de Medîne-i Münevvere yıldızına dokunulur → gerçek mekân kartı (PLACES 'medine', chapters [13,14,15,16] → HİCRET | MEDÎNE-İ MÜNEVVERE DEVRİ | ESHÂB-I KİRÂMIN EĞİTİMİ | GAZÂLAR VE SERİYYELER; hepsi sitenin substring(0,30) kesmesinin altında). Mekke kartı kullanılmaz: site bölüm adını 30 karakterde kestiği için 'KÂİNATIN SULTÂNI PEYGAMBER EFE…' diye yarım görünüyor. Dikey: haritada 'Gazâlar' süzgeci (filterMapEra('gaza')) seçili, Tebük Gazâsı işaretine (BATTLES 'tebuk-g', diğer işaretlerden ayrı) dokunulur → gerçek gazâ kartı 'Tebük Gazâsı · H.9 / M.630 · Son büyük sefer. 30.000 kişilik ordu. · 📖 Bölüme Git'. Dar ekranda tüm mekânlar açıkken Medîne/Mekke etiketleri harita kenarından kesiliyordu; süzgeç bunu önler"
+  }
+}

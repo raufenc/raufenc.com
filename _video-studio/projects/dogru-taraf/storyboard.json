@@ -1,0 +1,292 @@
+{
+  "slug": "dogru-taraf",
+  "title": "Doğru Taraf",
+  "url": "raufenc.com/dogru-taraf",
+  "category": "Peygamberim & Ahlâk",
+  "emoji": "🕋",
+  "tag": "Oyun",
+  "accent": "#D9A441",
+  "accent2": "#6FA97D",
+  "hook": {
+    "kicker": "Bil bakalım",
+    "lines": [
+      "Kurban kesmek",
+      "farz mı, *vacip mi?*"
+    ]
+  },
+  "intro": {
+    "title": "Doğru Taraf",
+    "tag2": "Ücretsiz",
+    "tagline": "Din bilgisi kartını **doğru tarafa** kaydır; yanlıştan öğren, seviye seviye ilerle.",
+    "shot": {
+      "h": "shots/d-acilis.jpg",
+      "v": "shots/m-acilis.jpg"
+    },
+    "phone": {
+      "h": "shots/m-kart.jpg"
+    }
+  },
+  "features": [
+    {
+      "kicker": "Kaydır",
+      "title": "Kartı doğru tarafa kaydır",
+      "text": "Sürükledikçe şık boşluğa yerleşir; şıkların yeri her kartta değişir, ezber işlemez.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-kart.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.05,
+              "s0": 1.0
+            },
+            "taps": [
+              {
+                "mark": "kart",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/d-surukle.jpg",
+            "zoom": {
+              "x": 0.53,
+              "y": 0.58,
+              "s": 1.1,
+              "s0": 1.03
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-kart.jpg",
+            "taps": [
+              {
+                "mark": "kart",
+                "t": 0.72
+              }
+            ]
+          },
+          {
+            "src": "shots/m-surukle.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.5,
+              "s": 1.06,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Yanlışta öğren",
+      "title": "Yanlışta anında açıklama",
+      "text": "Doğru cevap kısa açıklamasıyla gelir; bilemediğin soru Tekrar Kutusu'na düşer.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-kart2.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.05,
+              "s0": 1.0
+            },
+            "taps": [
+              {
+                "mark": "yanlisBtn",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/d-aciklama.jpg",
+            "alignY": 1,
+            "zoom": {
+              "x": 0.5,
+              "y": 1.0,
+              "s": 1.45,
+              "s0": 1.2
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-kart2.jpg",
+            "taps": [
+              {
+                "mark": "yanlisBtn",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/m-aciklama.jpg",
+            "zoom": {
+              "mark": "kutu",
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "3 seviye",
+      "title": "%80'e ulaş, seviye atla",
+      "text": "Kolay, Orta, Zor: her kategoride yıldız topla, bir sonraki seviyenin kilidini aç.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-sonuc.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.3,
+              "s0": 1.15
+            }
+          },
+          {
+            "src": "shots/d-seviye.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.17,
+              "s": 1.4,
+              "s0": 1.25
+            },
+            "taps": [
+              {
+                "mark": "orta",
+                "t": 0.62
+              }
+            ]
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-sonuc.jpg",
+            "zoom": {
+              "mark": "blok",
+              "s": 1.12,
+              "s0": 1.0
+            }
+          },
+          {
+            "src": "shots/m-seviye.jpg",
+            "taps": [
+              {
+                "mark": "orta",
+                "t": 0.62
+              }
+            ],
+            "zoom": {
+              "x": 0.5,
+              "y": 0.15,
+              "s": 1.06,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kicker": "Seri / Rekor",
+      "title": "3 can, kaçıncıya kadar gidersin?",
+      "text": "Her 5 doğruda puan çarpanı artar; son can da gidince en uzun serin rekor olarak kalır.",
+      "shot": {
+        "h": [
+          {
+            "src": "shots/d-seri.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.04,
+              "s0": 1.0
+            },
+            "taps": [
+              {
+                "mark": "yanlisBtn",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/d-rekor.jpg",
+            "zoom": {
+              "x": 0.5,
+              "y": 0.55,
+              "s": 1.3,
+              "s0": 1.15
+            }
+          }
+        ],
+        "v": [
+          {
+            "src": "shots/m-seri.jpg",
+            "taps": [
+              {
+                "mark": "yanlisBtn",
+                "t": 0.7
+              }
+            ]
+          },
+          {
+            "src": "shots/m-rekor.jpg",
+            "zoom": {
+              "mark": "blok",
+              "s": 1.12,
+              "s0": 1.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "stats": {
+    "kicker": "Rakamlarla",
+    "items": [
+      {
+        "value": 364,
+        "label": "Soru"
+      },
+      {
+        "value": 10,
+        "label": "Kategori"
+      },
+      {
+        "value": 4,
+        "label": "Oyun modu"
+      }
+    ]
+  },
+  "cta": {
+    "lines": [
+      "Doğru tarafı",
+      "*sen bul*"
+    ],
+    "chips": [
+      "Ücretsiz",
+      "Kayıt gerekmez",
+      "Sınıf modu"
+    ]
+  },
+  "_kaynak": {
+    "Kanca: kurban farz mı vacip mi": "content.js HAC-2-018: 'Hanefi mezhebine göre kurban kesmek … vaciptir' (yanlış şık: farzdır); çekimde bu kart doğru şık (vaciptir) sağdayken sağa sürüklendi",
+    "şıkların yeri her kartta değişir": "index.html runtimeKartUret(): doğru şık Math.random() ile sola/sağa atanır; açılış metni 'Şıklar her seferinde farklı yerde'",
+    "Sürükledikçe şık boşluğa yerleşir": "index.html dragSur(): hayalet dolum (.slot .hayalet) sürüklenen yönün şıkkını gösterir",
+    "Tekrar Kutusu'na düşer": "index.html cozumle(): yanlışta tekrarKutusunaEkle(soru.id); açıklama katmanı aciklamaKatmaniGoster()",
+    "3 can, her 5 doğruda çarpan": "index.html MODLAR.seri.can = 3; cozumle(): yanlışta oyun.can--, doğruda can düşmez; oyun.carpan = min(1 + floor(seri/5), 4); çekimde 2 yanlış (❤️💔💔) + 14 doğru → ×3, son canda yanlış şık → 'Can Bitti' (14 seri · 290 puan, Yeni Rekor)",
+    "Sınıf modu": "index.html ?sinif=1 (SINIF_MODU), sınıf ipucu ve projeksiyon düzeni",
+    "Ücretsiz / Kayıt gerekmez": "index.html: giriş/üyelik yok, ilerleme yalnız localStorage'da",
+    "%80'e ulaş / seviye atla / 3 seviye": "index.html SEVIYE_ACMA_ESIGI = 80 (koşul ≥ 80; seviye ekranında 'Önce bir önceki seviyede ≥%80 al'), SEVIYE_ADLARI {1:Kolay,2:Orta,3:Zor}; çekimde Hac ve Kurban Kolay 10/10 oynandı → 'Sonraki seviye açıldı'",
+    "Yanlışta açıklama (çekim)": "content.js HAC-2-038: 'Safa ile Merve arasında su arayışı, ______ kıssasını hatırlatır' (doğru: Hz. Hacer'in, yanlış: Hz. Hatice'nin); çekimde yanlış şık tıklandı → açıklama katmanı 'Doğru cevap: Hz. Hacer'in'",
+    "Seri kartı (çekim)": "content.js IMA-2-016 (doğru: sırat, yanlış: mizan); dokunma halkası yanlış şık 'mizan' üzerinde (marks yanlisBtn); capture.mjs sabit Math.random tohumu → masaüstü ve mobil aynı kart ve rekor",
+    "3 can, kaçıncıya kadar gidersin? (başlık)": "index.html açılış mod düğmesi: 'Seri / Rekor' alt etiketi '3 can, kaçıncıya kadar gidersin?'",
+    "364 soru": "dogru-taraf/content.js (ICERIK.sorular.length = 364; dosya başlığı: 'v1.0.0: 364 soru, 10 kategori')",
+    "10 kategori": "dogru-taraf/content.js (ICERIK.kategoriler.length = 10)",
+    "4 oyun modu": "dogru-taraf/index.html (MODLAR: serbest, seri, zaman, tekrar; açılıştaki 4 mod düğmesi)",
+    "Tagline: yanlıştan öğren, seviye seviye ilerle": "index.html aciklamaKatmaniGoster() (yanlışta açıklama) ve SEVIYE_ADLARI Kolay/Orta/Zor, SEVIYE_ACMA_ESIGI = 80"
+  }
+}
