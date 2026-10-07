@@ -1,7 +1,7 @@
 /**
  * Tek kaynak proje manifest'i + kategori meta.
  * Tum sayfalarda proje listesi, sayac ve kart icin bu dosya kullanilir.
- * Son guncelleme: 2026-10-06
+ * Son guncelleme: 2026-10-07
  */
 var PROJELER = [
   {"emoji": "🖼️", "title": "Nöroterbiye — Duvar Kâğıtları", "desc": "50 yazısız resim. Kaydır, seç; telefonuna veya bilgisayarına indir, paylaş.", "tag": "Koleksiyon", "href": "/noroterbiye/duvar-kagitlari/", "kategori": "noroterbiye", "video": "noroterbiye-duvar-kagitlari"},
@@ -32,7 +32,7 @@ var PROJELER = [
   { emoji: '\u{1F4D6}', title: 'Program Rehberim', desc: 'Öğretmen el kitabı: Haftalık plan, ders akışı, 627 materyal, teknikler ve ölçme araçları. Maarif Modeli entegre.', tag: 'Rehber', href: '/maarif/#/rehber', kategori: 'sinif', featured: true, video: 'maarif-rehber' },
   { emoji: '\u{1F3F0}', title: 'Beylikten Cihana', desc: 'Zar yok, tarih var. Söğüt\'ten İstanbul\'a dokuz padişahın fethettiği şehirleri al, imar et, Cihan Puanıyla kazan. Aile ve Ders modu; dijital oyun + evde basılabilir premium set.', tag: 'Oyun', href: '/beylikten-cihana/', kategori: 'cihan-serisi', featured: true, video: 'beylikten-cihana' },
   { emoji: '\u{1F528}', title: 'Çıraktan Pîre', desc: 'Yamaklıktan Ahi Baba\'ya — çarşıda dükkân aç, ahlakla kazan. Ahiliği ezberletmeden oynatarak öğretir, 7. sınıf müfredatına uygun.', tag: 'Oyun', href: '/ciraktan-pire/', kategori: 'cihan-serisi', featured: true, video: 'ciraktan-pire' },
-  { emoji: '\u{1F5FA}\u{FE0F}', title: 'Diyardan Diyara', desc: 'Üç Kolda On İki Devir. Osmanlı yol kolları haritasında gizli yol kartlarıyla sefere çık; hangi şehir hangi padişahın devrinde katıldı, oynayarak öğren. Dijital + evde basılabilir set.', tag: 'Oyun', href: '/diyardan-diyara/', kategori: 'cihan-serisi', featured: true, video: 'diyardan-diyara' },
+  { emoji: '\u{1F5FA}\u{FE0F}', title: 'Diyardan Diyara', desc: 'Üç Kolda On İki Devir. Osmanlı yol kolları haritasında gizli yol kartlarıyla sefere çık; her şehrin hangi padişahımızın devrinde katıldığını oynayarak öğren. Dijital + evde basılabilir set.', tag: 'Oyun', href: '/diyardan-diyara/', kategori: 'cihan-serisi', featured: true, video: 'diyardan-diyara' },
   { emoji: '\u{2696}\u{FE0F}', title: 'Değer Oyunları', desc: 'Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.', tag: 'Oyun', href: '/oyunlar/', kategori: 'sinif', featured: true, video: 'oyunlar' },
   { emoji: '\u{1F54B}', title: 'Doğru Taraf', desc: 'Kurban kesmek farz mı, vacip mi? Kartı doğru cevaba kaydır: 10 kategori, yüzlerce soru, seviye atla, rekor kır.', tag: 'Oyun', href: '/dogru-taraf/', kategori: 'peygamberim', featured: true, video: 'dogru-taraf' },
   { emoji: '\u{1F50E}', title: 'Hızlı Hafız', desc: 'Deve neyi hatırlatır, karınca hangi kıssada? İpucundan doğru sembolü bul. 8 tezhip kartı, 72 âyet kaynaklı bilgi kartı — tek başına ya da 2-4 kişi tablet ve akıllı tahtada yarışın.', tag: 'Oyun', href: '/hizli-hafiz/', kategori: 'sinif', featured: true, video: 'hizli-hafiz' }
