@@ -70,7 +70,7 @@ Arapça Kelime Kartları: Selamlaşmadan sınıf kurallarına 18 kategoride 224 
 ```
 Bir beytin sırrını üç adımda çöz
 
-Fâilâtün — Aruz Atölyesi: Kayıp kelimeyi bul, beyti yakala, ritmi kur; Hayâtî İnanç’ın kayıtları eşliğinde.
+Fâilâtün — Aruz Atölyesi: Kayıp kelimeyi bul, beyti yakala, ritmi kur; Hayâtî İnanç Hocamızın kayıtları eşliğinde.
 
 ▸ Kayıp kelimeyi bul — Mısradaki boşluğa doğru kelimeyi bırak, sonra hâline uyan beyti seç.
 ▸ Ritmi parmaklarınla kur — Düm uzun, De kısa: Fâilâtün’ün ritmini dokunarak çal.
@@ -129,11 +129,11 @@ Beyit Defteri: Rauf Enç’in 90 şiiri ve sürümü: Mektûbât’tan elli gaze
 ## Beylikten Cihana
 
 ```
-Fatih kaçıncı padişahtı?
+Zarın yerini tarih alsa?
 
 Beylikten Cihana: Söğüt'ten Haremeyn'e 26 şehir: fethet, imar et, Cihan Puanıyla kazan.
 
-▸ Zar yerine tarih çek — Kartın sayısı tarihten gelir: Fatih yedinci padişah, 7 kare ilerle.
+▸ Zar yerine tarih çek — Kartın sayısı tarihten gelir: Fatih Sultan Mehmed Han yedinci padişah, 7 kare ilerle.
 ▸ Soruyu bil, şehri fethet — Bursa'yı 1.300 akçeye satın al ya da soruyu doğru cevapla, 1.000 akçeye fethet.
 ▸ Han'dan Külliye'ye imar — Padişahın setini tamamla, kademe kademe yükselt; Medrese ve üstü Cihan Puanı getirir.
 ▸ Cihan Puanıyla zafer — Hedefe ulaşan “Cihan!” der; tur biter, gizli fermanlar açılır, en yüksek puan kazanır.
@@ -190,13 +190,13 @@ Davet Mektubu: Ateist, deist ve agnostik dostlara 82 mektup: her biri muhatabın
 ## Diyardan Diyara
 
 ```
-Belgrad hangi padişahın devrinde katıldı?
+Menzil menzil fetih yollarında
 
-Diyardan Diyara: Takvim padişah padişah ilerler; sen menzil kollarında şehirden şehre yol alırsın.
+Diyardan Diyara: Takvim padişahlarımızın devirleriyle ilerler; sen menzil kollarında şehirden şehre yol alırsın.
 
 ▸ Yol kartını gizlice seç — 1–5 menzil ya da Kışlak: kartlar birlikte açılır, küçük sayı önce oynar.
 ▸ Berat’ı çevir, yılı bil — Şehre yürü, katılış yılını yaz; ±10 yıl isabet Mühür’le +1 Cihan Puanı.
-▸ On iki devir, tek harita — Her devir yeni şehirleri fethe açar: Kanûnî devrinde Belgrad, Budin, Bağdat.
+▸ On iki devir, tek harita — Her devir yeni şehirleri fethe açar: Kanûnî Sultan Süleyman Han devrinde Belgrad, Budin, Bağdat.
 
 ✓ 2–6 oyuncu · Zar yok, para yok · Evde basılabilir set
 
@@ -210,7 +210,7 @@ Diyardan Diyara: Takvim padişah padişah ilerler; sen menzil kollarında şehir
 ## Doğru Taraf
 
 ```
-Kurban kesmek farz mı, vacip mi?
+Kurban kesmek farz mı, vâcip mi?
 
 Doğru Taraf: Din bilgisi kartını doğru tarafa kaydır; yanlıştan öğren, seviye seviye ilerle.
 
@@ -231,13 +231,13 @@ Doğru Taraf: Din bilgisi kartını doğru tarafa kaydır; yanlıştan öğren, 
 ## Özbekistan Evliyaları ve Âlimleri
 
 ```
-Şâh-ı Nakşibend ile Goncdüvânî hangi şehirde yetişti?
+Şâh-ı Nakşibend ve Abdülhâlık Goncdüvânî hazretlerinin diyarı
 
 Özbekistan Evliyaları ve Âlimleri: Buhara, Semerkant, Taşkent ve çevresinden 55 âlim ve evliya tek haritada.
 
-▸ Şehre dokun, âlimleri gör — Cevap Buhara: haritada dokun, orada yetişen 25 âlim ve evliya tek listede açılsın.
-▸ Hayatı ve kerâmetleri — İsmini ara; Şâh-ı Nakşibend’in hayatını ve kerâmetlerini bir dokunuşla oku.
-▸ Nakşibendî silsilesi — Şâh-ı Nakşibend’in de içinde yer aldığı manevî zincir, halka halka.
+▸ Şehre dokun, âlimleri gör — Buhara’ya dokun; orada yetişen 25 âlim ve evliyâ tek listede açılsın.
+▸ Hayatı ve kerâmetleri — Mübarek isimlerini ara; Şâh-ı Nakşibend hazretlerinin hayatını ve kerâmetlerini oku.
+▸ Nakşibendî silsilesi — Şâh-ı Nakşibend hazretlerinin de yer aldığı Silsile-i aliyye, halka halka.
 
 ✓ Ücretsiz · Türkçe · Özbekçe · Kayıt gerekmez
 
@@ -251,12 +251,12 @@ Doğru Taraf: Din bilgisi kartını doğru tarafa kaydır; yanlıştan öğren, 
 ## Hızlı Hafız
 
 ```
-Hüdhüd kuşu hangi kartta saklı?
+Hüdhüd kuşu hangi kartta?
 
 Hızlı Hafız: Bilgi kartını oku, 8 tezhip kartında doğru sembolü bul — tek başına ya da 2–4 kişi.
 
 ▸ İpucunu oku, kartı bul — Bilgi kartı sembolü adını söylemeden anlatır; 8 kartın içinden doğrusuna dokun.
-▸ Sembolü bul, âyeti öğren — Doğru sembolde adı ve Kur'an-ı Kerîm'deki âyet kaynağı çıkar; her buluş bir harf.
+▸ Sembolü bul, âyeti öğren — Doğru sembolde adı ve Kur’ân-ı Kerîm’de geçtiği âyet-i kerîme çıkar; her buluş bir harf.
 ▸ Masada 2–4 kişi yarışın — Herkes kendi kenarına dokunur; söz hakkını alan 2 saniyede kartı seçer.
 ▸ Sınıfça, karşıdan oyna — Her öğrencinin bir rengi ve tuşu var; 7 doğruya ilk ulaşan kazanır.
 
@@ -292,13 +292,13 @@ Zürafa İngilizcede ne demek?
 ## İslam Bilim Yıldızları
 
 ```
-Krank-biyeli ilk kim kullandı?
+Krank-biyeli ilk Cezerî kullandı
 
 İslam Bilim Yıldızları: Endülüs'ten Orta Asya'ya 126 âlim, 306 eser ve 13 yüzyıllık ilim mirası.
 
 ▸ 126 âlimi keşfet — Alana, döneme ve bölgeye göre filtrele; her âlimin eserlerini ve katkılarını incele.
 ▸ Haritada ilmin izini sür — Bağdat'tan Endülüs'e âlimlerin çalıştığı şehirler tek haritada; dokun, yakınlaş.
-▸ Bu Kim? Âlimi tahmin et — İpuçlarından âlimi bul, katkıları eşleştir, zaman tünelinde sırala.
+▸ Bu Kim? Âlimlerimizi tanı — İpuçlarıyla âlimlerimizi tanı, katkıları eşleştir, zaman tünelinde sırala.
 
 ✓ Ücretsiz · Kayıt gerekmez · 3 oyun · 6 öğrenme yolu
 
@@ -354,9 +354,9 @@ Kalbinin Haritası: 17 küçük ayna, 185 senaryo: her erdemi eksiklik ile aşı
 ```
 Bir aşiret nasıl cihan devleti oldu?
 
-Kayı I — Ertuğrul'un Ocağı: Prof. Dr. Ahmet Şimşirgil'in eserinden 5 padişah, 48 olay, 191 yıllık destan.
+Kayı I — Ertuğrul'un Ocağı: Prof. Dr. Ahmet Şimşirgil Hocamızın eserinden 5 padişah, 48 olay, 191 yıllık destan.
 
-▸ Beş padişah, bir destan — Osman Gazi'den Çelebi Mehmed'e: her padişah, kitabın bir bölümü ve kendi hikâyesi.
+▸ Beş padişah, bir destan — Osman Gazi’den Çelebi Sultan Mehmed Han’a: her padişah, kitabın bir bölümü ve kendi hikâyesi.
 ▸ Seferleri haritada izle — Tek dokunuşla 23 savaş, kuşatma ve fetih, tarih sırasıyla haritada canlanır.
 ▸ 48 olay, tek zaman çizgisi — Padişaha göre süz; savaşları, fetihleri ve dönüm noktalarını sırayla takip et.
 
@@ -515,13 +515,13 @@ NöroTerbiye — Duvar Kâğıtları: Kitabın 50 ayrı bölümünden 50 yazıs�
 ## Osmanlı Padişahları Kart Seti
 
 ```
-36 padişahın kaçını tanıyorsun?
+36 padişahımızı yakından tanı
 
-Osmanlı Padişahları Kart Seti: Osman Gazi'den Vahdeddin'e resimli kartlar, zaman çizgisi ve oyunlar.
+Osmanlı Padişahları Kart Seti: Osman Gazi’den Sultan Vahdeddin Han’a resimli kartlar, zaman çizgisi ve oyunlar.
 
-▸ Kartı çevir, hikâyeyi oku — 36 resimli kartın önünde portre ve özlü söz, arkasında padişahın hikâyesi; döneme göre süz.
+▸ Kartı çevir, hikâyeyi oku — 36 resimli kartın önünde portre ve özlü söz, arkasında hayatı; döneme göre süz.
 ▸ 1299'dan 1922'ye yolculuk — Zaman çizgisinde bir padişaha dokun; biyografi, önemli olaylar, eserler ve ilkler açılsın.
-▸ Sultanları kapıştır — İki kart karşı karşıya: kimin saltanatı daha uzun, kim önce tahta çıktı, kimin fethi daha çok?
+▸ Saltanatları karşılaştır — İki kart yan yana: saltanat süresini, cülûs yılını ve fetihleri karşılaştırarak öğren.
 ▸ Bil, XP topla, rütbe atla — Her doğru cevap XP ve yeni kart getirir; Yeniçeri'den Sultan'a 6 rütbe, 19 rozet.
 
 ✓ Ücretsiz · Kayıt gerekmez · Basılı kart seti de var
@@ -576,11 +576,11 @@ Değer Oyunları: Hayal Ortaokulu'nda dürüstlüğü, adaleti ve vicdanı oynay
 ## Sevgili Peygamberim
 
 ```
-O'nun hayatını hiç bu kadar yakından okudun mu?
+Peygamber Efendimizin mübarek hayatı sayfa sayfa
 
-Sevgili Peygamberim: Prof. Dr. Ramazan Ayvallı'nın eseri 72 bölümde; her konu kitaptaki sayfasına bağlı.
+Sevgili Peygamberim: Prof. Dr. Ramazan Ayvallı Hocamızın eseri 72 bölümde; her konu kitaptaki sayfasına bağlı.
 
-▸ Tarih sırasıyla bir ömür — Fil Vak'asından Vedâ Haccı'na kronolojik zaman çizelgesi; her olay kendi bölümüne götürür.
+▸ Siyer-i Nebî, tarih sırasıyla — Fil Vak'asından Vedâ Haccı'na kronolojik zaman çizelgesi; her olay kendi bölümüne götürür.
 ▸ Haritada mekânlar, gazâlar — Mekke'den Tebük'e mekânlar ve güzergâhlar; bir işarete dokun, ilgili bölüme geç.
 ▸ Kitabı bölüm bölüm oku — Alt başlığa dokun, metin açılsın; her konu kitaptaki sayfa numarasıyla.
 ▸ Kendini dene — Cevabını ver; açıklamayı ve kitaptaki kaynak sayfasını hemen gör.
