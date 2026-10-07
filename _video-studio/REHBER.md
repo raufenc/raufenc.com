@@ -146,6 +146,15 @@ await withStudio(import.meta.url, async ({ desktop, mobile, tablet, shot, tallSh
 - Sahne başına en az bir "canlı" an: dokunma → yeni ekran, yakınlaştırma ya da kaydırma.
 - `accent` projenin kendi arayüz rengi olmalı; çok koyu renkleri açık tonuna çek.
 
+## Üslup ve edep (zorunlu)
+
+Bütün ekran metinleri ve seslendirmeler deponun kökündeki `CLAUDE.md` → "Üslup ve edep"
+kurallarına uyar: Peygamber Efendimiz (sallallahü aleyhi ve sellem) — seslendirmede
+"sallallahu aleyhi ve sellem"; Allahü teâlâ, Kur'ân-ı Kerîm, Hadîs-i şerîf; evliyâ ve âlimler
+"… hazretleri"; padişahlar "Fatih Sultan Mehmed Han" vb.; hocalar "… Hocamız".
+Büyükler hakkında bilmece/yarışma kancası ("Bil bakalım … nereli?", "kaçıncı padişahtı?")
+kurulmaz; kanca merak uyandırır ama hürmetle konuşur.
+
 ## Yapma
 - Proje dosyalarını (site kodu) değiştirme. Yalnız `_video-studio/projects/<slug>/` altında çalış.
 - Motoru/kitaplığı değiştirme; ihtiyaç varsa raporla.
