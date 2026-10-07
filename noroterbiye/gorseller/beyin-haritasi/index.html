@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/lib/error-logger.js"></script>
   <title>Beynin Haritası — NöroTerbiye</title>
-  <meta name="description" content="İnteraktif beyin haritası. Prefrontal korteksten amigdalaya, tıklanabilir bölgelerle beynin işlevlerini görsel olarak keşfedin.">
+  <meta name="description" content="İnteraktif beyin haritası. Prefrontal korteksten amigdalaya, tıklanabilir bölgeler ve sinyal yollarıyla beynin işlevlerini görsel olarak keşfedin.">
+  <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/beyin-haritasi/">
   <meta property="og:title" content="Beyin Haritası — NöroTerbiye">
   <meta property="og:description" content="İnteraktif beyin haritası. Prefrontal korteksten amigdalaya, her bölge bir hikâye anlatır.">
   <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
@@ -12,759 +14,561 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
   <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <link rel="stylesheet" href="/noroterbiye/css/gorseller.css">
   <script src="/lib/design-system/theme.js"></script>
   <style>
-    /* ── Page Layout ── */
-    .brain-page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: var(--space-8) var(--space-4);
-      padding-top: 100px;
-    }
+    .gv-page { --gv-accent: #22d3ee; --gv-grad: linear-gradient(120deg,#a78bfa 0%,#22d3ee 55%,#34d399 100%); }
 
-    .brain-header {
-      text-align: center;
-      margin-bottom: var(--space-8);
-    }
+    .bm-stage { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .bm-canvas { padding: 18px 18px 10px; overflow: hidden; }
+    .bm-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; position: relative; z-index: 2; }
+    .bm-toolbar .gv-chips { gap: 6px; }
+    .bm-toolbar .gv-chip { padding: 7px 12px 7px 10px; font-size: .76rem; }
+    .bm-sep { width: 1px; height: 22px; background: var(--gv-line-2); margin: 0 4px; }
+    .bm-hint { margin: 2px 4px 0; font-size: .78rem; color: var(--gv-ink-3); display: flex; align-items: center; gap: 8px; }
+    .bm-hint i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 0 0 rgba(34,211,238,.6); animation: bmPing 2s infinite; }
+    @keyframes bmPing { 70% { box-shadow: 0 0 0 9px rgba(34,211,238,0); } 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0); } }
 
-    .brain-title {
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      font-weight: 800;
-      background: var(--nt-grad-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: var(--space-2);
-      line-height: 1.3;
-    }
+    .bm-svg { display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; }
 
-    .brain-subtitle {
-      color: var(--text-secondary);
-      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-      font-style: italic;
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.6;
+    /* ── Tema renkleri (SVG içi) ── */
+    .bm-svg {
+      --b-hi: #cba5da; --b-mid: #9669b0; --b-lo: #58397f;
+      --b-stem-hi: #8b62a8; --b-stem-lo: #4a3070;
+      --b-groove: #351d57; --b-groove-op: .8; --b-hl: #ffffff; --b-hl-op: .32;
+      --b-edge: #e2c4f0; --b-glow: rgba(167,139,250,.35);
+      --b-ghost: #e8d6f4; --b-ghost-op: .26;
+      --b-label-bg: rgba(14,14,28,.78); --b-label-ink: #ecebf8; --b-label-line: rgba(255,255,255,.14);
+      --b-marker-bg: #12121f;
     }
-
-    /* ── Brain Container ── */
-    .brain-container {
-      position: relative;
-      width: 100%;
-      max-width: 820px;
-      margin: 0 auto var(--space-8);
+    html.light .bm-svg {
+      --b-hi: #f8e0ee; --b-mid: #e5bddb; --b-lo: #bd90c9;
+      --b-stem-hi: #d9aed2; --b-stem-lo: #b283bd;
+      --b-groove: #84529a; --b-groove-op: .68; --b-hl: #ffffff; --b-hl-op: .85;
+      --b-edge: #8d5aa3; --b-glow: rgba(139,92,246,.18);
+      --b-ghost: #6a3d82; --b-ghost-op: .22;
+      --b-label-bg: rgba(255,255,255,.92); --b-label-ink: #1f1f36; --b-label-line: rgba(60,40,120,.16);
+      --b-marker-bg: #ffffff;
     }
+    .st-hi { stop-color: var(--b-hi); } .st-mid { stop-color: var(--b-mid); } .st-lo { stop-color: var(--b-lo); }
+    .st-shi { stop-color: var(--b-stem-hi); } .st-slo { stop-color: var(--b-stem-lo); }
 
-    .brain-svg {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 0 60px rgba(99,102,241,0.1));
+    .b-stem-line { fill: none; stroke: var(--b-groove); stroke-opacity: .35; stroke-width: 1.4; stroke-linecap: round; }
+    .b-folds-shadow { fill: none; stroke: var(--b-groove); stroke-opacity: .22; stroke-width: 5.5; stroke-linejoin: round; }
+    .b-folds { fill: var(--b-groove); fill-opacity: var(--b-groove-op); fill-rule: evenodd; }
+    .b-folds-hl { fill: var(--b-hl); fill-opacity: var(--b-hl-op); fill-rule: evenodd; }
+    .b-fissure { fill: none; stroke: var(--b-groove); stroke-opacity: .92; stroke-linecap: round; stroke-linejoin: round; }
+    .b-fissure-lip { fill: none; stroke: var(--b-hl); stroke-opacity: .5; stroke-linecap: round; stroke-linejoin: round; }
+    .b-edge { fill: none; stroke: var(--b-edge); stroke-width: 1.6; stroke-linejoin: round; stroke-opacity: .9; }
+    .b-folia { fill: none; stroke: var(--b-groove); stroke-opacity: .5; stroke-width: 1.2; }
+    .b-ghost { fill: none; stroke: var(--b-ghost); stroke-opacity: var(--b-ghost-op); stroke-width: 1.6; stroke-dasharray: 3 5; stroke-linecap: round; }
+    .b-ghost-fill { fill: var(--b-ghost); fill-opacity: calc(var(--b-ghost-op) * .35); stroke: var(--b-ghost); stroke-opacity: var(--b-ghost-op); stroke-width: 1.2; stroke-dasharray: 3 5; }
+
+    /* loblar */
+    .b-lobe { opacity: 0; transition: opacity .5s ease; mix-blend-mode: normal; }
+    .bm-svg.show-lobes .b-lobe { opacity: .34; }
+    html.light .bm-svg.show-lobes .b-lobe { opacity: .3; }
+    .b-lobe-label { font: 800 13px var(--font-sans); letter-spacing: .22em; text-anchor: middle; fill: #fff; opacity: 0; transition: opacity .5s; pointer-events: none; paint-order: stroke; stroke: rgba(30,20,60,.55); stroke-width: 3px; }
+    html.light .b-lobe-label { fill: #3a2160; stroke: rgba(255,255,255,.7); }
+    .bm-svg.show-lobes .b-lobe-label { opacity: .95; }
+
+    /* bölge şekilleri */
+    .r-shape { transition: filter .35s ease, opacity .35s ease, transform .35s ease; transform-box: fill-box; transform-origin: center; }
+    .r-zone { fill-opacity: .1; stroke-width: 1.5; stroke-dasharray: 5 5; stroke-opacity: .55; fill: var(--c); stroke: var(--c); transition: fill-opacity .35s, stroke-opacity .35s; }
+    .bm-svg [data-r].is-active .r-zone { fill-opacity: .24; stroke-opacity: 1; }
+    .bm-svg [data-r].is-active .r-shape { filter: drop-shadow(0 0 9px var(--c)) drop-shadow(0 0 18px var(--c)); transform: scale(1.12); }
+    .bm-svg [data-r].is-hover .r-shape { filter: drop-shadow(0 0 8px var(--c)); }
+    .bm-svg.dim [data-r]:not(.is-in-path) { opacity: .35; }
+
+    /* işaretçiler */
+    .mk { cursor: pointer; outline: none; }
+    .mk-halo { fill: var(--c); opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .mk.is-active .mk-halo { animation: mkHalo 2.2s ease-out infinite; }
+    @keyframes mkHalo { 0% { opacity: .5; transform: scale(.55); } 100% { opacity: 0; transform: scale(1.5); } }
+    .mk-ring { fill: var(--b-marker-bg); stroke: var(--c); stroke-width: 2.4; transition: all .25s; }
+    .mk-num { font: 800 12px var(--font-sans); fill: var(--c); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+    .mk:hover .mk-ring, .mk:focus-visible .mk-ring { stroke-width: 3.4; }
+    .mk.is-active .mk-ring { fill: var(--c); }
+    .mk.is-active .mk-num { fill: #fff; }
+    .mk:focus-visible .mk-ring { stroke: var(--gv-ink); }
+
+    /* etiketler */
+    .lb { cursor: pointer; }
+    .lb-bg { fill: var(--b-label-bg); stroke: var(--b-label-line); stroke-width: 1; transition: all .25s; }
+    .lb-tx { font: 700 12.5px var(--font-sans); fill: var(--b-label-ink); dominant-baseline: central; pointer-events: none; }
+    .lb-dot { fill: var(--c); }
+    .lb-line { fill: none; stroke: var(--c); stroke-opacity: .5; stroke-width: 1.2; stroke-dasharray: 3 4; transition: stroke-opacity .25s; }
+    .lb.is-active .lb-bg { stroke: var(--c); stroke-width: 1.6; }
+    .lb.is-active .lb-line, .lb:hover .lb-line { stroke-opacity: 1; }
+    .bm-svg.dim .lb:not(.is-in-path), .bm-svg.dim .mk:not(.is-in-path) { opacity: .4; }
+
+    /* yollar */
+    .pw { fill: none; stroke-linecap: round; opacity: 0; transition: opacity .4s; pointer-events: none; }
+    .pw-glow { stroke-width: 9; stroke-opacity: .18; }
+    .pw-line { stroke-width: 2.2; stroke-dasharray: 2 9; animation: pwFlow 1.1s linear infinite; }
+    .pw-base { stroke-width: 1.2; stroke-opacity: .35; }
+    .pw.is-on { opacity: 1; }
+    @keyframes pwFlow { to { stroke-dashoffset: -11; } }
+
+    /* ── Panel ── */
+    .bm-panel { position: sticky; top: 84px; padding: 28px 26px 24px; min-height: 420px; --c: #22d3ee; overflow: hidden; }
+    .bm-panel::after { content: ''; position: absolute; inset: auto -20% -40% -20%; height: 70%; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 22%, transparent), transparent); pointer-events: none; opacity: var(--gv-glow); }
+    .bm-p { position: relative; z-index: 1; animation: bmIn .45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes bmIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .bm-p-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .bm-p-ic { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); box-shadow: 0 10px 30px -12px var(--c); flex-shrink: 0; }
+    .bm-p h2 { font-size: 1.32rem; font-weight: 800; letter-spacing: -.015em; line-height: 1.2; margin: 0; color: var(--gv-ink); }
+    .bm-p-sub { font-size: .78rem; color: var(--gv-ink-3); font-style: italic; margin-top: 3px; }
+    .bm-p-func { font-size: .95rem; line-height: 1.7; color: var(--gv-ink-2); margin: 16px 0; }
+    .bm-p-ctx { position: relative; margin: 0 0 16px; padding: 14px 16px 14px 18px; border-radius: 14px; font-size: .94rem; line-height: 1.6; font-style: italic; color: var(--gv-ink); background: color-mix(in srgb, var(--c) 9%, transparent); border: 1px solid color-mix(in srgb, var(--c) 22%, transparent); }
+    .bm-p-ctx::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px; border-radius: 3px; background: var(--c); }
+    .bm-p-fact { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; line-height: 1.6; color: var(--gv-ink-2); padding: 12px 0; border-top: 1px solid var(--gv-line); }
+    .bm-p-fact .gv-ic { color: var(--c); margin-top: 2px; }
+    .bm-p-fact b { color: var(--gv-ink); }
+    .bm-p-row { margin-top: 12px; }
+    .bm-p-row .gv-kicker { margin-bottom: 8px; }
+    .bm-p-row .gv-chip { padding: 7px 12px 7px 10px; font-size: .76rem; }
+    .bm-p-link { display: inline-flex; align-items: center; gap: 8px; font-size: .84rem; font-weight: 700; color: var(--c); text-decoration: none; padding: 9px 14px; border-radius: 12px; background: color-mix(in srgb, var(--c) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c) 28%, transparent); transition: all .2s; }
+    .bm-p-link:hover { background: color-mix(in srgb, var(--c) 20%, transparent); transform: translateX(3px); }
+    .bm-steps { display: flex; flex-direction: column; gap: 8px; margin: 14px 0 4px; }
+    .bm-step { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; background: var(--gv-card-2); border: 1px solid var(--gv-line); cursor: pointer; text-align: left; font: inherit; color: var(--gv-ink); transition: all .2s; }
+    .bm-step:hover { border-color: color-mix(in srgb, var(--sc) 55%, transparent); transform: translateX(3px); }
+    .bm-step-n { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: .74rem; font-weight: 800; color: #fff; background: var(--sc); flex-shrink: 0; }
+    .bm-step b { font-size: .88rem; display: block; }
+    .bm-step small { font-size: .74rem; color: var(--gv-ink-3); }
+
+    /* ── Alt: bölge kartları ── */
+    .bm-regions { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 24px; }
+    .bm-rc { --c: #22d3ee; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 16px; text-align: left; font: inherit; color: var(--gv-ink); background: var(--gv-card); border: 1px solid var(--gv-line); border-radius: 18px; cursor: pointer; transition: all .25s; }
+    .bm-rc:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 55%, transparent); }
+    .bm-rc.is-active { background: color-mix(in srgb, var(--c) 12%, var(--gv-card)); border-color: color-mix(in srgb, var(--c) 75%, transparent); box-shadow: 0 14px 34px -16px var(--c); }
+    .bm-rc-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .bm-rc-ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); }
+    .bm-rc-n { font-size: .72rem; font-weight: 800; color: var(--gv-ink-3); }
+    .bm-rc b { font-size: .9rem; line-height: 1.25; }
+    .bm-rc small { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+
+    @media (max-width: 960px) {
+      .bm-stage { grid-template-columns: 1fr; }
+      .bm-panel { position: static; min-height: 0; }
+      .bm-regions { grid-template-columns: repeat(3, 1fr); }
     }
-
-    /* ── Brain Outline ── */
-    .brain-outline-main {
-      fill: url(#brainFill);
-      stroke: url(#brainStroke);
-      stroke-width: 2;
-      stroke-linejoin: round;
-    }
-
-    .brain-outline-cerebellum {
-      fill: url(#cerebellumFill);
-      stroke: url(#brainStroke);
-      stroke-width: 1.8;
-      stroke-linejoin: round;
-    }
-
-    .brain-outline-stem {
-      fill: url(#stemFill);
-      stroke: url(#brainStroke);
-      stroke-width: 1.5;
-      stroke-linejoin: round;
-    }
-
-    .sulcus {
-      fill: none;
-      stroke: rgba(99,102,241,0.1);
-      stroke-width: 1;
-      stroke-linecap: round;
-    }
-
-    .sulcus-deep {
-      stroke: rgba(99,102,241,0.16);
-      stroke-width: 1.2;
-    }
-
-    .cerebellum-line {
-      fill: none;
-      stroke: rgba(99,102,241,0.12);
-      stroke-width: 0.8;
-      stroke-linecap: round;
-    }
-
-    .lobe-divider {
-      fill: none;
-      stroke: rgba(99,102,241,0.2);
-      stroke-width: 1.2;
-      stroke-dasharray: 6 4;
-      stroke-linecap: round;
-    }
-
-    /* ── Region Markers ── */
-    .region-group {
-      cursor: pointer;
-    }
-
-    .region-dot-outer {
-      opacity: 0;
-      transition: opacity 0.4s ease;
-    }
-
-    .region-dot-core {
-      transition: all 0.3s ease;
-    }
-
-    .region-dot-center {
-      transition: all 0.3s ease;
-    }
-
-    .region-group:hover .region-dot-outer,
-    .region-group.active .region-dot-outer {
-      opacity: 0.35;
-      animation: pulseGlow 2.5s ease-in-out infinite;
-    }
-
-    .region-group:hover .region-dot-core,
-    .region-group.active .region-dot-core {
-      filter: url(#markerGlow);
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 0.5; }
-    }
-
-    /* ── Leader Lines ── */
-    .leader-line {
-      fill: none;
-      stroke-width: 1;
-      stroke-dasharray: 4 3;
-      opacity: 0.35;
-      transition: opacity 0.3s ease;
-    }
-
-    .region-group:hover .leader-line,
-    .region-group.active .leader-line {
-      opacity: 0.7;
-      stroke-dasharray: none;
-    }
-
-    /* ── Region Labels ── */
-    .region-label-bg {
-      fill: rgba(0,0,0,0.6);
-      rx: 4;
-      ry: 4;
-      transition: all 0.3s ease;
-    }
-
-    html.light .region-label-bg {
-      fill: rgba(255,255,255,0.8);
-    }
-
-    .region-label-text {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 600;
-      fill: var(--text);
-      pointer-events: none;
-    }
-
-    .region-group:hover .region-label-bg,
-    .region-group.active .region-label-bg {
-      fill: rgba(0,0,0,0.8);
-    }
-
-    html.light .region-group:hover .region-label-bg,
-    html.light .region-group.active .region-label-bg {
-      fill: rgba(255,255,255,0.95);
-    }
-
-    /* ── Info Panel ── */
-    .info-panel {
-      position: fixed;
-      bottom: -400px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(520px, 92vw);
-      background: rgba(15,15,25,0.94);
-      backdrop-filter: blur(28px) saturate(1.5);
-      -webkit-backdrop-filter: blur(28px) saturate(1.5);
-      border: 1px solid var(--nt-glass-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6) var(--space-8);
-      z-index: 100;
-      transition: bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0 -10px 50px rgba(0,0,0,0.5), 0 0 80px rgba(99,102,241,0.06);
-    }
-
-    html.light .info-panel {
-      background: rgba(255,255,255,0.94);
-      box-shadow: 0 -10px 50px rgba(0,0,0,0.1), 0 0 60px rgba(99,102,241,0.05);
-    }
-
-    .info-panel.visible {
-      bottom: 24px;
-    }
-
-    .info-panel-close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      background: none;
-      border: none;
-      color: var(--text-secondary);
-      font-size: 1.4rem;
-      cursor: pointer;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      transition: all var(--transition-fast);
-      line-height: 1;
-    }
-
-    .info-panel-close:hover {
-      background: var(--surface-hover);
-      color: var(--text);
-    }
-
-    .info-panel-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-
-    .info-panel-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      box-shadow: 0 0 12px currentColor;
-    }
-
-    .info-panel-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .info-panel-func {
-      color: var(--text-secondary);
-      font-size: 0.92rem;
-      margin-bottom: var(--space-4);
-      line-height: 1.6;
-      padding-left: var(--space-2);
-      border-left: 2px solid var(--border);
-    }
-
-    .info-panel-context {
-      position: relative;
-      padding: var(--space-4);
-      background: var(--nt-glass);
-      border: 1px solid var(--nt-glass-border);
-      border-radius: var(--radius-md);
-      font-size: 0.92rem;
-      line-height: 1.65;
-      color: var(--text);
-      font-style: italic;
-    }
-
-    .info-panel-context::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 3px;
-      height: 100%;
-      border-radius: 3px;
-    }
-
-    .info-panel-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      margin-top: var(--space-3);
-    }
-
-    /* ── Legend ── */
-    .brain-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-3);
-      justify-content: center;
-      max-width: 800px;
-      margin: 0 auto var(--space-8);
-    }
-
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
-      background: var(--nt-glass);
-      border: 1px solid var(--nt-glass-border);
-      border-radius: var(--radius-full);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-      user-select: none;
-    }
-
-    .legend-item:hover {
-      background: var(--nt-glass-hover);
-      color: var(--text);
-    }
-
-    .legend-item.active {
-      border-color: var(--legend-color);
-      color: var(--text);
-    }
-
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* ── Hint ── */
-    .brain-hint {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      margin-bottom: var(--space-6);
-      opacity: 0;
-      animation: fadeInUp 0.8s ease 0.6s forwards;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 0.7; transform: translateY(0); }
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 640px) {
-      .brain-page { padding-top: 80px; }
-      .info-panel { padding: var(--space-4) var(--space-5); }
-      .brain-legend { gap: var(--space-2); }
-      .legend-item { font-size: 0.72rem; padding: var(--space-1) var(--space-2); }
-      .region-label-text { font-size: 8px; }
+    @media (max-width: 700px) {
+      .lb { display: none; }
+      .bm-regions { grid-template-columns: repeat(2, 1fr); }
+      .bm-canvas { padding: 12px 8px 6px; }
+      .bm-toolbar { padding: 0 4px; }
+      .bm-sep { display: none; }
     }
   </style>
-  <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
   <script src="/nav.js"></script>
 
-  <main class="brain-page">
-    <header class="brain-header">
-      <h1 class="brain-title">Beynin Haritası</h1>
-      <p class="brain-subtitle">Nefsin biyolojik temelleri — her bölge bir hikâye anlatır.</p>
+  <main class="gv-page" id="main-content">
+    <header class="gv-hero">
+      <span class="gv-eyebrow"><span data-gv-icon="brain" data-size="16"></span> Görsel Keşif · Nefsin biyolojisi</span>
+      <h1 class="gv-title">Beynin Haritası</h1>
+      <p class="gv-lead">Nefsin biyolojik temelleri — her bölge bir hikâye anlatır. Bir noktaya dokun, devreleri izle.</p>
     </header>
 
-    <p class="brain-hint">Bir bölgeye tıkla veya dokun</p>
+    <section class="bm-stage" aria-label="Etkileşimli beyin haritası">
+      <div class="gv-card bm-canvas">
+        <div class="bm-toolbar">
+          <div class="gv-chips" id="bmPaths" role="group" aria-label="Sinyal yolları"></div>
+          <button class="gv-chip" id="bmLobes" type="button" aria-pressed="false" style="--c:#a78bfa"><span data-gv-icon="layers" data-size="16"></span> Lobları göster</button>
+        </div>
 
-    <div class="brain-container">
-      <svg class="brain-svg" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="İnteraktif beyin haritası: Prefrontal Korteks, Amigdala, Nucleus Accumbens, Hipokampus ve Ventral Tegmental Alan bölgelerini gösteren tıklanabilir diyagram">
-        <defs>
-          <!-- Brain fill gradient (very subtle dark) -->
-          <radialGradient id="brainFill" cx="40%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="rgba(99,102,241,0.1)"/>
-            <stop offset="50%" stop-color="rgba(59,62,141,0.07)"/>
-            <stop offset="100%" stop-color="rgba(30,30,60,0.05)"/>
-          </radialGradient>
+        <svg class="bm-svg" id="bmSvg" viewBox="14 50 780 505" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Beynin yan görünümü: Prefrontal Korteks, Amigdala, Nucleus Accumbens, Hipokampüs ve Ventral Tegmental Alan bölgelerini gösteren tıklanabilir diyagram">
+          <defs>
+            <linearGradient id="gCortex" x1="12%" y1="0%" x2="88%" y2="100%">
+              <stop offset="0" class="st-hi"/><stop offset=".5" class="st-mid"/><stop offset="1" class="st-lo"/>
+            </linearGradient>
+            <linearGradient id="gStem" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" class="st-shi"/><stop offset="1" class="st-slo"/>
+            </linearGradient>
+            <radialGradient id="gVignette" cx="42%" cy="34%" r="75%">
+              <stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#1a0b33" stop-opacity=".28"/>
+            </radialGradient>
+            <radialGradient id="gAmy" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ff9aa2"/><stop offset=".55" stop-color="#ef4444"/><stop offset="1" stop-color="#9f1239"/></radialGradient>
+            <radialGradient id="gNac" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fde68a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></radialGradient>
+            <radialGradient id="gVta" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fed7aa"/><stop offset=".55" stop-color="#f97316"/><stop offset="1" stop-color="#9a3412"/></radialGradient>
+            <linearGradient id="gHip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8b4fe"/><stop offset=".6" stop-color="#a855f7"/><stop offset="1" stop-color="#6b21a8"/></linearGradient>
+            <radialGradient id="gPfc" cx="30%" cy="40%" r="80%"><stop offset="0" stop-color="#67e8f9" stop-opacity=".85"/><stop offset="1" stop-color="#0891b2" stop-opacity=".25"/></radialGradient>
+            <radialGradient id="gBgGlow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#a78bfa" stop-opacity=".22"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+            <clipPath id="bmClip"><path id="bmClipPath"/></clipPath>
+            <clipPath id="bmCbClip"><path id="bmCbClipPath"/></clipPath>
+            
+          </defs>
 
-          <radialGradient id="cerebellumFill" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="rgba(99,102,241,0.08)"/>
-            <stop offset="100%" stop-color="rgba(30,30,60,0.04)"/>
-          </radialGradient>
+          <ellipse cx="420" cy="270" rx="400" ry="250" fill="url(#gBgGlow)"/>
 
-          <radialGradient id="stemFill" cx="50%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="rgba(99,102,241,0.06)"/>
-            <stop offset="100%" stop-color="rgba(30,30,60,0.03)"/>
-          </radialGradient>
+          <g id="bmBrain" transform="translate(55 5)">
+            <!-- beyin sapı -->
+            <path id="bmStem" fill="url(#gStem)" stroke="var(--b-edge)" stroke-width="1.5" stroke-opacity=".8"/>
+            <path class="b-stem-line" d="M446 408c18 8 44 8 62 0M441 448c18 6 34 6 50 0M439 488c14 4 28 4 40 0"/>
+            <!-- serebellum -->
+            <path id="bmCb" fill="url(#gStem)" stroke="var(--b-edge)" stroke-width="1.5" stroke-opacity=".9"/>
+            <g clip-path="url(#bmCbClip)"><path id="bmFolia" class="b-folia"/></g>
+            <text x="620" y="426" class="b-lobe-label" style="font-size:10px;letter-spacing:.2em">SEREBELLUM</text>
 
-          <!-- Stroke gradient (indigo to cyan) -->
-          <linearGradient id="brainStroke" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#6366f1"/>
-            <stop offset="50%" stop-color="#06b6d4"/>
-            <stop offset="100%" stop-color="#818cf8"/>
-          </linearGradient>
+            <!-- serebrum -->
+            <path id="bmCortex" fill="url(#gCortex)"/>
+            <g clip-path="url(#bmClip)">
+              <!-- lob renkleri -->
+              <g id="bmLobeG"></g>
+              <!-- kıvrımlar -->
+              <path id="bmFoldsShadow" class="b-folds-shadow"/>
+              <path id="bmFoldsHl" class="b-folds-hl" transform="translate(.9 1)"/>
+              <path id="bmFolds" class="b-folds"/>
+              <rect x="60" y="40" width="700" height="380" fill="url(#gVignette)" pointer-events="none"/>
+              <!-- PFC bölgesi -->
+              <g data-r="prefrontal" style="--c:#06b6d4"><path class="r-zone" d="M100 270C98 215 125 160 175 122 205 100 240 92 262 96 285 140 290 200 272 262 240 292 150 302 100 270Z"/></g>
+              <!-- derin (saydam) yapılar -->
+              <g aria-hidden="true">
+                <path class="b-ghost" d="M232 238C246 178 330 150 418 154 502 158 562 190 574 232"/>
+                <path class="b-ghost" d="M232 244C250 190 328 164 414 168 494 172 548 200 560 236"/>
+                <ellipse class="b-ghost-fill" cx="442" cy="288" rx="32" ry="23"/>
+                <path class="b-ghost" d="M300 230C338 200 410 200 440 240 452 256 450 276 442 292"/>
+              </g>
+            </g>
+            <!-- ana yarıklar -->
+            <g id="bmFissures"></g>
+            <path id="bmEdge" class="b-edge"/>
 
-          <!-- Marker glow -->
-          <filter id="markerGlow" x="-80%" y="-80%" width="260%" height="260%">
-            <feGaussianBlur stdDeviation="5" result="blur"/>
-            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-          </filter>
+            <!-- bölge şekilleri -->
+            <g data-r="vta" style="--c:#f97316"><g class="r-shape"><circle cx="478" cy="388" r="13" fill="url(#gVta)"/><circle cx="478" cy="388" r="19" fill="none" stroke="#f97316" stroke-opacity=".5" stroke-dasharray="2 4"/></g></g>
+            <g data-r="hipokampus" style="--c:#a855f7"><g class="r-shape">
+              <path id="bmHipBody" d="M358 338C386 356 430 360 462 342 490 326 498 294 486 264 482 254 476 248 470 245" fill="none" stroke="url(#gHip)" stroke-width="11" stroke-linecap="round" stroke-opacity=".95"/>
+              <path d="M358 338C386 356 430 360 462 342 490 326 498 294 486 264 482 254 476 248 470 245" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 4.4"/>
+              <path d="M358 336C386 353 430 357 461 339 488 324 495 294 483 266" fill="none" stroke="#fff" stroke-opacity=".25" stroke-width="2.4" stroke-linecap="round"/>
+            </g></g>
+            <g data-r="amigdala" style="--c:#ef4444"><g class="r-shape"><path d="M-19 2C-19-10-4-15 9-12 20-9 23 2 15 10 6 18-15 15-19 2Z" transform="translate(338 318) rotate(-22)" fill="url(#gAmy)"/><ellipse cx="333" cy="311" rx="8" ry="4" fill="#fff" fill-opacity=".35" transform="rotate(-22 333 311)"/></g></g>
+            <g data-r="nac" style="--c:#f59e0b"><g class="r-shape"><path d="M-16 0C-16-9-2-13 8-9 17-5 18 5 9 10-1 14-16 10-16 0Z" transform="translate(300 268) rotate(-8)" fill="url(#gNac)"/><ellipse cx="296" cy="262" rx="6" ry="3.4" fill="#fff" fill-opacity=".38"/></g></g>
 
-          <!-- Outer glow for brain -->
-          <filter id="brainAmbient" x="-10%" y="-10%" width="120%" height="120%">
-            <feGaussianBlur stdDeviation="12" result="blur"/>
-            <feFlood flood-color="#6366f1" flood-opacity="0.08"/>
-            <feComposite in2="blur" operator="in" result="glow"/>
-            <feComposite in="SourceGraphic" in2="glow" operator="over"/>
-          </filter>
-        </defs>
+            <!-- lob etiketleri -->
+            <g aria-hidden="true">
+              <text x="215" y="132" class="b-lobe-label">FRONTAL</text>
+              <text x="520" y="150" class="b-lobe-label">PARİETAL</text>
+              <text x="672" y="262" class="b-lobe-label" style="font-size:11px" transform="rotate(78 672 262)">OKSİPİTAL</text>
+              <text x="410" y="378" class="b-lobe-label">TEMPORAL</text>
+            </g>
+          </g>
 
-        <!-- ═══════════════════════════════════════ -->
-        <!-- BRAIN SILHOUETTE — Sagittal (side) view -->
-        <!-- ═══════════════════════════════════════ -->
-
-        <!-- Main cerebrum (realistic sagittal profile) -->
-        <!-- Front (forehead) is on the LEFT, back (occipital) is on the RIGHT -->
-        <path class="brain-outline-main" d="
-          M 155,290
-          C 140,275 120,258 108,235
-          C 95,210 88,185 86,162
-          C 84,140 86,118 95,98
-          C 105,78 120,62 142,50
-          C 158,42 178,36 200,32
-          C 222,28 248,27 275,28
-          C 302,29 328,32 352,37
-          C 375,42 396,50 415,62
-          C 432,73 448,88 460,106
-          C 472,124 480,144 484,166
-          C 488,188 486,208 480,226
-          C 474,244 464,258 450,268
-          C 438,278 428,284 420,290
-          C 412,296 406,300 400,305
-          C 392,312 382,316 370,318
-          C 358,320 348,318 340,314
-          C 332,310 326,304 320,298
-          C 314,292 306,288 296,286
-          C 286,284 274,284 262,286
-          C 248,288 234,292 222,296
-          C 208,300 194,300 180,296
-          C 168,292 160,290 155,290
-          Z
-        " filter="url(#brainAmbient)"/>
-
-        <!-- Cerebellum (back-bottom, smaller rounded structure) -->
-        <path class="brain-outline-cerebellum" d="
-          M 400,305
-          C 408,312 418,320 430,328
-          C 442,336 454,342 462,350
-          C 470,358 474,368 472,378
-          C 470,388 462,396 450,400
-          C 438,404 424,404 410,400
-          C 396,396 384,388 374,378
-          C 366,368 360,356 356,344
-          C 352,332 350,322 350,318
-        "/>
-
-        <!-- Brain stem (descending from mid-bottom) -->
-        <path class="brain-outline-stem" d="
-          M 350,318
-          C 346,328 340,342 336,358
-          C 332,374 330,390 332,404
-          C 334,418 338,430 344,438
-          C 350,446 358,448 366,444
-          C 374,440 378,432 380,420
-          C 382,408 382,394 384,380
-          C 386,366 390,352 396,340
-          C 398,336 400,330 400,326
-        "/>
-
-        <!-- ═══════════════════════ -->
-        <!-- SULCI (brain folds)    -->
-        <!-- ═══════════════════════ -->
-
-        <!-- Central sulcus (major divider between frontal & parietal) -->
-        <path class="sulcus sulcus-deep" d="M 310,50 C 305,80 298,120 295,160 C 292,190 290,220 288,248"/>
-
-        <!-- Lateral (Sylvian) fissure -->
-        <path class="sulcus sulcus-deep" d="M 200,230 C 230,222 260,218 290,220 C 320,222 345,228 365,240"/>
-
-        <!-- Precentral sulcus -->
-        <path class="sulcus" d="M 270,55 C 268,85 264,115 260,148 C 258,170 256,195 255,215"/>
-
-        <!-- Postcentral sulcus -->
-        <path class="sulcus" d="M 345,52 C 342,82 338,115 335,150 C 333,175 332,200 334,222"/>
-
-        <!-- Superior frontal sulcus -->
-        <path class="sulcus" d="M 135,125 C 160,115 188,108 215,105 C 238,103 258,104 270,108"/>
-
-        <!-- Inferior frontal sulcus -->
-        <path class="sulcus" d="M 128,180 C 155,172 182,167 210,165 C 232,164 252,166 268,172"/>
-
-        <!-- Frontal orbital folds -->
-        <path class="sulcus" d="M 115,220 C 138,212 162,208 186,210 C 205,212 220,216 232,224"/>
-
-        <!-- Intraparietal sulcus -->
-        <path class="sulcus" d="M 345,100 C 370,108 395,122 415,140 C 430,155 440,172 445,190"/>
-
-        <!-- Parieto-occipital sulcus -->
-        <path class="sulcus sulcus-deep" d="M 420,70 C 425,100 430,135 435,170 C 438,195 438,218 435,238"/>
-
-        <!-- Superior temporal sulcus -->
-        <path class="sulcus" d="M 218,260 C 248,255 278,253 308,256 C 335,258 358,264 375,272"/>
-
-        <!-- Calcarine sulcus (in occipital) -->
-        <path class="sulcus" d="M 450,200 C 460,210 468,222 472,238 C 474,250 472,260 466,268"/>
-
-        <!-- Minor cortical folds -->
-        <path class="sulcus" d="M 150,150 C 172,144 195,140 218,140"/>
-        <path class="sulcus" d="M 380,85 C 398,95 412,108 422,124"/>
-        <path class="sulcus" d="M 160,250 C 178,244 196,240 214,240"/>
-        <path class="sulcus" d="M 442,150 C 458,162 468,178 474,196"/>
-        <path class="sulcus" d="M 192,80 C 212,72 234,68 256,68"/>
-        <path class="sulcus" d="M 350,260 C 368,255 384,254 398,258"/>
-
-        <!-- Cerebellum folia (horizontal lines) -->
-        <path class="cerebellum-line" d="M 370,340 C 390,336 410,335 430,338 C 445,340 458,345 465,352"/>
-        <path class="cerebellum-line" d="M 365,355 C 385,350 408,348 430,352 C 448,355 460,362 466,370"/>
-        <path class="cerebellum-line" d="M 368,370 C 388,365 410,363 432,367 C 448,370 458,376 462,384"/>
-        <path class="cerebellum-line" d="M 378,384 C 398,380 418,380 435,384 C 448,387 456,392 458,396"/>
-
-        <!-- ═══════════════════════════ -->
-        <!-- LOBE DIVIDERS (dashed)     -->
-        <!-- ═══════════════════════════ -->
-
-        <!-- Frontal / Parietal divide (central sulcus region) -->
-        <path class="lobe-divider" d="M 305,42 C 302,75 298,120 295,165 C 292,200 290,230 288,255"/>
-
-        <!-- Parietal / Occipital divide -->
-        <path class="lobe-divider" d="M 425,65 C 428,100 432,145 436,190 C 438,220 436,248 432,268"/>
-
-        <!-- Temporal divide (Sylvian fissure) -->
-        <path class="lobe-divider" d="M 195,238 C 225,228 260,222 295,224 C 330,226 355,234 375,248"/>
-
-
-        <!-- ═══════════════════════════════════ -->
-        <!-- REGION MARKERS                     -->
-        <!-- ═══════════════════════════════════ -->
-
-        <!-- 1. Prefrontal Korteks — front-top of the brain -->
-        <g class="region-group" data-region="prefrontal" tabindex="0" role="button" aria-label="Prefrontal Korteks">
-          <!-- Leader line from dot to label -->
-          <path class="leader-line" stroke="#06b6d4" d="M 185,115 L 95,80"/>
-          <!-- Outer glow ring -->
-          <circle class="region-dot-outer" cx="185" cy="115" r="24" fill="#06b6d4"/>
-          <!-- Core dot -->
-          <circle class="region-dot-core" cx="185" cy="115" r="9" fill="#06b6d4" opacity="0.9"/>
-          <!-- Center highlight -->
-          <circle class="region-dot-center" cx="185" cy="115" r="3.5" fill="#fff" opacity="0.8"/>
-          <!-- Label -->
-          <rect class="region-label-bg" x="28" y="67" width="98" height="22"/>
-          <text class="region-label-text" x="77" y="82" text-anchor="middle">Prefrontal Korteks</text>
-        </g>
-
-        <!-- 2. Amigdala — deep center, toward front-bottom -->
-        <g class="region-group" data-region="amigdala" tabindex="0" role="button" aria-label="Amigdala">
-          <path class="leader-line" stroke="#ef4444" d="M 268,240 L 200,280"/>
-          <circle class="region-dot-outer" cx="268" cy="240" r="20" fill="#ef4444"/>
-          <circle class="region-dot-core" cx="268" cy="240" r="8" fill="#ef4444" opacity="0.9"/>
-          <circle class="region-dot-center" cx="268" cy="240" r="3" fill="#fff" opacity="0.8"/>
-          <rect class="region-label-bg" x="158" y="272" width="62" height="20"/>
-          <text class="region-label-text" x="189" y="286" text-anchor="middle">Amigdala</text>
-        </g>
-
-        <!-- 3. Nucleus Accumbens — deep center, below prefrontal -->
-        <g class="region-group" data-region="nac" tabindex="0" role="button" aria-label="Nucleus Accumbens">
-          <path class="leader-line" stroke="#f59e0b" d="M 230,195 L 120,210"/>
-          <circle class="region-dot-outer" cx="230" cy="195" r="18" fill="#f59e0b"/>
-          <circle class="region-dot-core" cx="230" cy="195" r="7.5" fill="#f59e0b" opacity="0.9"/>
-          <circle class="region-dot-center" cx="230" cy="195" r="3" fill="#fff" opacity="0.8"/>
-          <rect class="region-label-bg" x="32" y="202" width="108" height="20"/>
-          <text class="region-label-text" x="86" y="216" text-anchor="middle">Nucleus Accumbens</text>
-        </g>
-
-        <!-- 4. Hipokampus — center, near amigdala but more toward back -->
-        <g class="region-group" data-region="hipokampus" tabindex="0" role="button" aria-label="Hipokampus">
-          <path class="leader-line" stroke="#a855f7" d="M 330,250 L 410,300"/>
-          <circle class="region-dot-outer" cx="330" cy="250" r="20" fill="#a855f7"/>
-          <circle class="region-dot-core" cx="330" cy="250" r="8" fill="#a855f7" opacity="0.9"/>
-          <circle class="region-dot-center" cx="330" cy="250" r="3" fill="#fff" opacity="0.8"/>
-          <rect class="region-label-bg" x="370" y="292" width="82" height="20"/>
-          <text class="region-label-text" x="411" y="306" text-anchor="middle">Hipokampus</text>
-        </g>
-
-        <!-- 5. VTA — brain stem area, low center -->
-        <g class="region-group" data-region="vta" tabindex="0" role="button" aria-label="Ventral Tegmental Alan">
-          <path class="leader-line" stroke="#f97316" d="M 356,380 L 290,420"/>
-          <circle class="region-dot-outer" cx="356" cy="380" r="17" fill="#f97316"/>
-          <circle class="region-dot-core" cx="356" cy="380" r="7" fill="#f97316" opacity="0.9"/>
-          <circle class="region-dot-center" cx="356" cy="380" r="2.8" fill="#fff" opacity="0.8"/>
-          <rect class="region-label-bg" x="244" y="412" width="72" height="20"/>
-          <text class="region-label-text" x="280" y="426" text-anchor="middle">VTA</text>
-        </g>
-
-        <!-- Lobe labels (very subtle, for orientation) -->
-        <text x="185" y="165" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Frontal</text>
-        <text x="370" y="140" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Parietal</text>
-        <text x="462" y="200" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Oksipital</text>
-        <text x="290" y="275" font-family="var(--font-sans)" font-size="11" fill="rgba(99,102,241,0.2)" font-weight="600" text-anchor="middle" font-style="italic">Temporal</text>
-        <text x="445" y="370" font-family="var(--font-sans)" font-size="9" fill="rgba(99,102,241,0.18)" font-weight="600" text-anchor="middle" font-style="italic">Serebellum</text>
-        <text x="355" y="450" font-family="var(--font-sans)" font-size="9" fill="rgba(99,102,241,0.18)" font-weight="600" text-anchor="middle" font-style="italic">Beyin Sapi</text>
-
-      </svg>
-    </div>
-
-    <noscript>
-      <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif beyin haritası JavaScript gerektirir. Harita; Prefrontal Korteks (karar verme, dürtü kontrolü), Amigdala (korku ve duygusal tepkiler), Nucleus Accumbens (ödül ve haz merkezi), Hipokampus (hafıza ve öğrenme) ve Ventral Tegmental Alan (dopamin üretim merkezi) bölgelerini göstermektedir.</p>
-    </noscript>
-
-    <!-- Legend -->
-    <div class="brain-legend" id="brainLegend"></div>
-
-    <!-- Info Panel -->
-    <div class="info-panel" id="infoPanel">
-      <button class="info-panel-close" id="infoPanelClose" aria-label="Kapat">&times;</button>
-      <div class="info-panel-header">
-        <div class="info-panel-dot" id="infoPanelDot"></div>
-        <div class="info-panel-name" id="infoPanelName"></div>
+          <!-- yollar -->
+          <g id="bmPathG"></g>
+          <!-- etiketler + işaretçiler (JS) -->
+          <g id="bmLabelG"></g>
+          <g id="bmMarkG"></g>
+        </svg>
+        <p class="bm-hint"><i></i> Numaralı noktalara dokun ya da aşağıdaki kartlardan bir bölge seç.</p>
+        <noscript>
+          <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif beyin haritası JavaScript gerektirir. Harita; Prefrontal Korteks (karar verme, dürtü kontrolü), Amigdala (korku ve duygusal tepkiler), Nucleus Accumbens (ödül ve haz merkezi), Hipokampüs (hafıza ve öğrenme) ve Ventral Tegmental Alan (dopamin üretim merkezi) bölgelerini göstermektedir.</p>
+        </noscript>
       </div>
-      <div class="info-panel-func" id="infoPanelFunc"></div>
-      <div class="info-panel-context" id="infoPanelContext"></div>
-      <div class="info-panel-tag" id="infoPanelTag"></div>
-    </div>
+
+      <aside class="gv-card bm-panel" id="bmPanel" aria-live="polite" aria-label="Bölge ayrıntısı"></aside>
+    </section>
+
+    <section class="bm-regions gv-reveal" id="bmRegions" aria-label="Bölgeler"></section>
+
+    <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
 
   <script src="/noroterbiye/js/common.js"></script>
+  <script src="/noroterbiye/js/gorseller.js"></script>
+  <script src="brain-geo.js"></script>
   <script>
     NT.renderNav();
     NT.renderFooter();
+    GV.hydrate();
+    GV.reveal();
+    GV.moreNav('beyin-haritasi');
 
-    // ── Region Data ──
-    const regions = {
-      prefrontal: {
-        name: 'Prefrontal Korteks',
-        func: 'Karar verme, planlama, d\u00FCrt\u00FC kontrol\u00FC. Beynin \u201CCEO\u201Dsu \u2014 t\u00FCm \u00FCst d\u00FCzey bili\u015Fsel s\u00FCrecleri y\u00F6netir.',
-        context: 'Akl\u0131n merkezi \u2014 nefse kar\u015F\u0131 en g\u00FC\u00E7l\u00FC silah\u0131n.',
-        color: '#06b6d4',
-        tag: 'Kontrol Merkezi'
-      },
-      amigdala: {
-        name: 'Amigdala',
-        func: 'Korku, tehdit alg\u0131lama, duygusal tepki. \u201CSava\u015F ya da ka\u00E7\u201D yan\u0131t\u0131n\u0131 tetikler.',
-        context: 'Gadab\u2019\u0131n tetikleyicisi. Stres an\u0131nda devreye girer.',
-        color: '#ef4444',
-        tag: 'Alarm Sistemi'
-      },
-      nac: {
-        name: 'Nucleus Accumbens',
-        func: '\u00D6d\u00FCl sistemi, haz merkezi. Motivasyonu ve ba\u011F\u0131ml\u0131l\u0131k d\u00F6ng\u00FCs\u00FCn\u00FC y\u00F6netir.',
-        context: '\u015Eehvet\u2019in kararg\u00E2h\u0131. Dopamin burada patlar.',
-        color: '#f59e0b',
-        tag: '\u00D6d\u00FCl Merkezi'
-      },
-      hipokampus: {
-        name: 'Hipokamp\u00FCs',
-        func: 'Haf\u0131za ve \u00F6\u011Frenme. Yeni an\u0131lar\u0131n uzun s\u00FCreli haf\u0131zaya aktar\u0131lmas\u0131n\u0131 sa\u011Flar.',
-        context: 'Al\u0131\u015Fkanl\u0131k kal\u0131plar\u0131n\u0131 burada saklar.',
-        color: '#a855f7',
-        tag: 'Haf\u0131za Deposu'
-      },
-      vta: {
-        name: 'Ventral Tegmental Alan (VTA)',
-        func: 'Dopamin \u00FCretim merkezi. \u00D6d\u00FCllenme yolunun ba\u015Flang\u0131\u00E7 noktas\u0131.',
-        context: 'Dopaminin fabrikas\u0131. Her \u00F6d\u00FCl sinyali buradan ba\u015Flar.',
-        color: '#f97316',
-        tag: 'Dopamin Fabrikas\u0131'
+    (function () {
+      var G = window.BRAIN_GEO, $ = function (id) { return document.getElementById(id); };
+      var NS = 'http://www.w3.org/2000/svg';
+      var svg = $('bmSvg');
+
+      /* ── geometri ── */
+      $('bmCortex').setAttribute('d', G.outline);
+      $('bmClipPath').setAttribute('d', G.outline);
+      $('bmEdge').setAttribute('d', G.outline);
+      $('bmFolds').setAttribute('d', G.folds);
+      $('bmFoldsHl').setAttribute('d', G.folds);
+      $('bmFoldsShadow').setAttribute('d', G.folds);
+      $('bmStem').setAttribute('d', G.stem);
+      $('bmCb').setAttribute('d', G.cerebellum);
+      $('bmCbClipPath').setAttribute('d', G.cerebellum);
+      $('bmFolia').setAttribute('d', G.folia);
+
+      function el(name, attrs, parent) {
+        var e = document.createElementNS(NS, name);
+        for (var k in attrs) e.setAttribute(k, attrs[k]);
+        if (parent) parent.appendChild(e);
+        return e;
       }
-    };
 
-    // ── Build Legend ──
-    const legend = document.getElementById('brainLegend');
-    Object.entries(regions).forEach(([key, r]) => {
-      const item = document.createElement('div');
-      item.className = 'legend-item';
-      item.style.setProperty('--legend-color', r.color);
-      item.innerHTML = '<span class="legend-dot" style="background:' + r.color + '"></span>' + r.name;
-      item.addEventListener('click', () => activateRegion(key));
-      item.dataset.region = key;
-      legend.appendChild(item);
-    });
-
-    // ── Info Panel Logic ──
-    const panel = document.getElementById('infoPanel');
-    const panelClose = document.getElementById('infoPanelClose');
-    let activeRegion = null;
-
-    function activateRegion(key) {
-      const r = regions[key];
-      if (!r) return;
-
-      document.querySelectorAll('.region-group.active').forEach(g => g.classList.remove('active'));
-      document.querySelectorAll('.legend-item.active').forEach(l => l.classList.remove('active'));
-
-      const group = document.querySelector('.region-group[data-region="' + key + '"]');
-      if (group) group.classList.add('active');
-
-      const legendItem = document.querySelector('.legend-item[data-region="' + key + '"]');
-      if (legendItem) legendItem.classList.add('active');
-
-      document.getElementById('infoPanelDot').style.background = r.color;
-      document.getElementById('infoPanelDot').style.color = r.color;
-      document.getElementById('infoPanelName').textContent = r.name;
-      document.getElementById('infoPanelFunc').textContent = r.func;
-      document.getElementById('infoPanelFunc').style.borderLeftColor = r.color;
-
-      const ctx = document.getElementById('infoPanelContext');
-      ctx.textContent = r.context;
-      ctx.style.borderLeftColor = r.color;
-      ctx.querySelector && (ctx.style.setProperty('--region-color', r.color));
-
-      const tag = document.getElementById('infoPanelTag');
-      tag.textContent = r.tag;
-      tag.style.background = r.color + '20';
-      tag.style.color = r.color;
-
-      panel.classList.add('visible');
-      activeRegion = key;
-    }
-
-    function closePanel() {
-      panel.classList.remove('visible');
-      document.querySelectorAll('.region-group.active').forEach(g => g.classList.remove('active'));
-      document.querySelectorAll('.legend-item.active').forEach(l => l.classList.remove('active'));
-      activeRegion = null;
-    }
-
-    panelClose.addEventListener('click', closePanel);
-
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.region-group') &&
-          !e.target.closest('.legend-item') &&
-          !e.target.closest('.info-panel')) {
-        closePanel();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePanel();
-    });
-
-    document.querySelectorAll('.region-group').forEach(group => {
-      group.addEventListener('click', (e) => {
-        e.stopPropagation();
-        activateRegion(group.dataset.region);
+      /* ana yarıklar (kenarlarında açık renk dudak çizgisi) */
+      var fis = $('bmFissures');
+      var W = { sylvian: 3.6, sylvianPost: 2.6, central: 3, pos: 2.4, preocc: 2.2 };
+      Object.keys(W).forEach(function (k) {
+        el('path', { d: G.major[k], class: 'b-fissure-lip', 'stroke-width': W[k] + 1.6, transform: 'translate(.8 1.1)' }, fis);
+        el('path', { d: G.major[k], class: 'b-fissure', 'stroke-width': W[k] }, fis);
       });
-      group.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          activateRegion(group.dataset.region);
+
+      /* loblar */
+      var lobes = [
+        { c: '#06b6d4', d: 'M60 40L440 40 420 130 400 190 385 252 330 300 268 336 60 340Z' },
+        { c: '#6366f1', d: 'M440 40L620 40 630 150 612 232 560 240 500 256 444 266 388 276 385 252 400 190 420 130Z' },
+        { c: '#f43f5e', d: 'M620 40L780 40 780 380 652 380 650 336 632 266 624 212 626 172 620 132Z' },
+        { c: '#f59e0b', d: 'M268 336L300 312 340 292 388 276 444 266 500 256 548 244 576 232 612 232 632 266 650 336 650 430 250 430 250 340Z' }
+      ];
+      lobes.forEach(function (l) { el('path', { d: l.d, fill: l.c, class: 'b-lobe' }, $('bmLobeG')); });
+
+      /* ── Veri ── */
+      var OFF = { x: 55, y: 5 };
+      var R = {
+        prefrontal: {
+          n: 1, name: 'Prefrontal Korteks', sub: 'Prefrontal cortex', tag: 'Kontrol Merkezi', color: '#06b6d4', icon: 'compass',
+          pos: [185, 178], lab: { x: 18, y: 66, side: 'l' },
+          func: 'Karar verme, planlama, dürtü kontrolü. Beynin “CEO”su — tüm üst düzey bilişsel süreçleri yönetir.',
+          ctx: 'Aklın merkezi — nefse karşı en güçlü silahın.',
+          fact: '<b>Biliyor muydun?</b> Prefrontal korteks, beynin en geç olgunlaşan bölgesidir; gelişimi yirmili yaşların ortasına kadar sürer.',
+          link: { href: '/noroterbiye/gorseller/ssg-ucgeni/', label: 'Dürtüleri ŞŞG Üçgeni’nde gör' },
+          conn: ['amigdala', 'nac']
+        },
+        amigdala: {
+          n: 2, name: 'Amigdala', sub: 'Amygdala', tag: 'Alarm Sistemi', color: '#ef4444', icon: 'siren',
+          pos: [338, 318], lab: { x: 150, y: 430, side: 'l' },
+          func: 'Korku, tehdit algılama, duygusal tepki. “Savaş ya da kaç” yanıtını tetikler.',
+          ctx: 'Gadab’ın tetikleyicisi. Stres anında devreye girer.',
+          fact: '<b>Biliyor muydun?</b> Adı, Yunanca “badem” (amygdalē) sözcüğünden gelir; şekli bademe benzer.',
+          link: { href: '/noroterbiye/gorseller/ssg-ucgeni/', label: 'Gadab’ı ŞŞG Üçgeni’nde gör' },
+          conn: ['prefrontal', 'hipokampus']
+        },
+        nac: {
+          n: 3, name: 'Nucleus Accumbens', sub: 'Nucleus accumbens', tag: 'Ödül Merkezi', color: '#f59e0b', icon: 'sparkle',
+          pos: [300, 268], lab: { x: 18, y: 336, side: 'l' },
+          func: 'Ödül sistemi, haz merkezi. Motivasyonu ve bağımlılık döngüsünü yönetir.',
+          ctx: 'Şehvet’in karargâhı. Dopamin burada patlar.',
+          fact: '<b>Biliyor muydun?</b> Dopamin yalnızca ödül alınırken değil, ödül <i>beklenirken</i> de yükselir — arzu, hazdan önce başlar.',
+          link: { href: '/noroterbiye/gorseller/dopamin-yolu/', label: 'Dopamin Yolu’nu incele' },
+          conn: ['vta', 'prefrontal']
+        },
+        hipokampus: {
+          n: 4, name: 'Hipokampüs', sub: 'Hippocampus', tag: 'Hafıza Deposu', color: '#a855f7', icon: 'bookmark',
+          pos: [425, 352], lab: { x: 300, y: 478, side: 'l' },
+          func: 'Hafıza ve öğrenme. Yeni anıların uzun süreli hafızaya aktarılmasını sağlar.',
+          ctx: 'Alışkanlık kalıplarını burada saklar.',
+          fact: '<b>Biliyor muydun?</b> Adı Yunanca “denizatı” (hippokampos) sözcüğünden gelir; kıvrımlı şekli denizatına benzer.',
+          link: { href: '/noroterbiye/gorseller/aliskanlik-dongusu/', label: 'Alışkanlık Döngüsü’nü incele' },
+          conn: ['amigdala', 'prefrontal']
+        },
+        vta: {
+          n: 5, name: 'Ventral Tegmental Alan (VTA)', short: 'VTA', sub: 'Ventral tegmental area', tag: 'Dopamin Fabrikası', color: '#f97316', icon: 'droplet',
+          pos: [478, 388], lab: { x: 590, y: 498, side: 'r' },
+          func: 'Dopamin üretim merkezi. Ödüllenme yolunun başlangıç noktası.',
+          ctx: 'Dopaminin fabrikası. Her ödül sinyali buradan başlar.',
+          fact: '<b>Biliyor muydun?</b> VTA orta beyinde, beyin sapının hemen üstünde yer alır ve dopaminini ön beyine uzanan uzun liflerle taşır.',
+          link: { href: '/noroterbiye/gorseller/dopamin-yolu/', label: 'Dopamin Yolu’nu incele' },
+          conn: ['nac', 'prefrontal']
+        }
+      };
+      var ORDER = ['prefrontal', 'amigdala', 'nac', 'hipokampus', 'vta'];
+      var P = {
+        odul: { name: 'Ödül Yolu', short: 'Ödül yolu', sub: 'Mezolimbik–mezokortikal dopamin yolu', color: '#f59e0b', seq: ['vta', 'nac', 'prefrontal'], icon: 'sparkle',
+          desc: 'Dopamin VTA’da üretilir, Nucleus Accumbens’e taşınır (haz ve motivasyon) ve prefrontal korteks’e ulaşır (karar). Alışkanlıkların ve bağımlılıkların ana yolu budur.',
+          steps: ['Üretim: dopamin salgılanır', 'Haz ve istek: “bunu tekrar istiyorum”', 'Karar: yap mı, bekle mi?'] },
+        fren: { name: 'Fren Yolu', short: 'Fren yolu', sub: 'Prefrontal → amigdala denetimi', color: '#06b6d4', seq: ['prefrontal', 'amigdala'], icon: 'compass',
+          desc: 'Prefrontal korteks amigdalanın alarmını yatıştırabilir: “Bu gerçek bir tehdit değil.” Stres ve uykusuzlukta bu fren zayıflar, öfke ve korku ağır basar.',
+          steps: ['Akıl: durumu değerlendirir', 'Alarm: tepkisini bastırır ya da serbest bırakır'] },
+        hafiza: { name: 'Duygusal Hafıza', short: 'Duygusal hafıza', sub: 'Amigdala ↔ hipokampüs', color: '#a855f7', seq: ['amigdala', 'hipokampus'], icon: 'bookmark',
+          desc: 'Güçlü bir duygu, o anın hipokampüs tarafından daha kalıcı kaydedilmesini sağlar. Tetikleyici bir yer ya da koku, aynı duyguyu yeniden uyandırabilir.',
+          steps: ['Duygu: amigdala işaretler', 'Kayıt: hipokampüs saklar'] }
+      };
+      var PORDER = ['odul', 'fren', 'hafiza'];
+
+      function vp(k) { return [R[k].pos[0] + OFF.x, R[k].pos[1] + OFF.y]; }
+
+      /* ── işaretçi + etiket üretimi ── */
+      var markG = $('bmMarkG'), labG = $('bmLabelG'), pathG = $('bmPathG');
+      var nodes = {};
+      ORDER.forEach(function (k) {
+        var r = R[k], p = vp(k), c = r.color;
+        /* etiket (masaüstü) */
+        var lb = el('g', { class: 'lb', 'data-lb': k, style: '--c:' + c }, labG);
+        var tx = el('text', { class: 'lb-tx' }, lb); tx.textContent = r.short || r.name;
+        var w = (r.short || r.name).length * 7.1 + 38, h = 28;
+        var x = r.lab.x, y = r.lab.y;
+        var bg = el('rect', { class: 'lb-bg', x: x, y: y, width: w, height: h, rx: 14 }, lb);
+        lb.insertBefore(bg, tx);
+        el('circle', { class: 'lb-dot', cx: x + 15, cy: y + h / 2, r: 4 }, lb);
+        tx.setAttribute('x', x + 26); tx.setAttribute('y', y + h / 2 + 0.5);
+        var sx = r.lab.side === 'l' ? x + w : x, sy = y + h / 2;
+        var line = el('path', { class: 'lb-line', d: 'M' + sx + ' ' + sy + ' L' + p[0] + ' ' + p[1] }, lb);
+        lb.insertBefore(line, bg);
+        /* işaretçi */
+        var mk = el('g', { class: 'mk', 'data-mk': k, tabindex: 0, role: 'button', 'aria-label': r.n + '. ' + r.name, style: '--c:' + c }, markG);
+        el('circle', { class: 'mk-halo', cx: p[0], cy: p[1], r: 30 }, mk);
+        el('circle', { cx: p[0], cy: p[1], r: 34, fill: 'transparent' }, mk);
+        el('circle', { class: 'mk-ring', cx: p[0], cy: p[1], r: 13 }, mk);
+        var nt = el('text', { class: 'mk-num', x: p[0], y: p[1] + 0.5 }, mk); nt.textContent = r.n;
+        nodes[k] = { lb: lb, mk: mk, shape: document.querySelector('#bmSvg [data-r="' + k + '"]') };
+      });
+
+      /* yollar */
+      var pathEls = {};
+      PORDER.forEach(function (pk) {
+        var pw = P[pk], g = el('g', { class: 'pw', style: 'color:' + pw.color }, pathG);
+        var mkr = el('marker', { id: 'arr-' + pk, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto' }, $('bmSvg').querySelector('defs'));
+        el('path', { d: 'M1 1.5L8.5 5 1 8.5z', fill: pw.color }, mkr);
+        for (var i = 0; i < pw.seq.length - 1; i++) {
+          var a = vp(pw.seq[i]), b = vp(pw.seq[i + 1]);
+          var mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1];
+          var len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len, bend = len * 0.22 * (i % 2 ? -1 : 1);
+          var d = 'M' + a[0] + ' ' + a[1] + ' Q' + (mx + nx * bend) + ' ' + (my + ny * bend) + ' ' + b[0] + ' ' + b[1];
+          el('path', { d: d, stroke: pw.color, class: 'pw-glow' }, g).setAttribute('fill', 'none');
+          el('path', { d: d, stroke: pw.color, class: 'pw-base' }, g).setAttribute('fill', 'none');
+          var ln = el('path', { d: d, stroke: pw.color, class: 'pw-line', 'marker-end': 'url(#arr-' + pk + ')' }, g);
+          ln.setAttribute('fill', 'none');
+        }
+        pathEls[pk] = g;
+      });
+
+      /* ── Araç çubuğu + kartlar ── */
+      var pathsBar = $('bmPaths');
+      var allBtn = document.createElement('button');
+      allBtn.className = 'gv-chip'; allBtn.type = 'button'; allBtn.dataset.path = ''; allBtn.style.setProperty('--c', '#22d3ee');
+      allBtn.innerHTML = GV.icon('brain', 16) + ' Bölgeler';
+      pathsBar.appendChild(allBtn);
+      PORDER.forEach(function (pk) {
+        var b = document.createElement('button');
+        b.className = 'gv-chip'; b.type = 'button'; b.dataset.path = pk; b.style.setProperty('--c', P[pk].color);
+        b.innerHTML = GV.icon('route', 16) + ' ' + P[pk].short;
+        pathsBar.appendChild(b);
+      });
+
+      var regWrap = $('bmRegions');
+      ORDER.forEach(function (k) {
+        var r = R[k], b = document.createElement('button');
+        b.type = 'button'; b.className = 'bm-rc'; b.dataset.rc = k; b.style.setProperty('--c', r.color);
+        b.innerHTML = '<span class="bm-rc-top"><span class="bm-rc-ic">' + GV.icon(r.icon, 20) + '</span><span class="bm-rc-n">0' + r.n + '</span></span><b>' + r.name + '</b><small>' + r.tag + '</small>';
+        regWrap.appendChild(b);
+      });
+
+      /* ── Panel ── */
+      var panel = $('bmPanel');
+      var state = { mode: 'region', key: 'prefrontal' };
+
+      function chipFor(k) {
+        var r = R[k];
+        return '<button type="button" class="gv-chip" data-go="' + k + '" style="--c:' + r.color + '"><span class="gv-dot"></span>' + (r.short || r.name) + '</button>';
+      }
+      function renderRegion(k) {
+        var r = R[k];
+        panel.style.setProperty('--c', r.color);
+        panel.innerHTML =
+          '<div class="bm-p">' +
+          '<div class="bm-p-head"><span class="bm-p-ic">' + GV.icon(r.icon, 28) + '</span><div><h2>' + r.name + '</h2><div class="bm-p-sub">' + r.sub + '</div></div></div>' +
+          '<span class="gv-tag" style="--c:' + r.color + '">' + r.tag + '</span>' +
+          '<p class="bm-p-func">' + r.func + '</p>' +
+          '<blockquote class="bm-p-ctx">' + r.ctx + '</blockquote>' +
+          '<div class="bm-p-fact">' + GV.icon('info', 18) + '<p>' + r.fact + '</p></div>' +
+          '<div class="bm-p-row"><p class="gv-kicker">Bağlantılı bölgeler</p><div class="gv-chips">' + r.conn.map(chipFor).join('') + '</div></div>' +
+          '<div class="bm-p-row"><a class="bm-p-link" href="' + r.link.href + '">' + r.link.label + ' ' + GV.icon('arrow-right', 16) + '</a></div>' +
+          '</div>';
+      }
+      function renderPath(pk) {
+        var p = P[pk];
+        panel.style.setProperty('--c', p.color);
+        panel.innerHTML =
+          '<div class="bm-p">' +
+          '<div class="bm-p-head"><span class="bm-p-ic">' + GV.icon('route', 28) + '</span><div><h2>' + p.name + '</h2><div class="bm-p-sub">' + p.sub + '</div></div></div>' +
+          '<span class="gv-tag" style="--c:' + p.color + '">Sinyal yolu</span>' +
+          '<p class="bm-p-func">' + p.desc + '</p>' +
+          '<div class="bm-steps">' + p.seq.map(function (k, i) {
+            return '<button type="button" class="bm-step" data-go="' + k + '" style="--sc:' + R[k].color + '"><span class="bm-step-n">' + (i + 1) + '</span><span><b>' + (R[k].short || R[k].name) + '</b><small>' + p.steps[i] + '</small></span></button>';
+          }).join('') + '</div>' +
+          '</div>';
+      }
+
+      function setPathUI(pk) {
+        Object.keys(pathEls).forEach(function (k) { pathEls[k].classList.toggle('is-on', k === pk); });
+        pathsBar.querySelectorAll('.gv-chip').forEach(function (b) { b.setAttribute('aria-pressed', String((b.dataset.path || '') === (pk || ''))); });
+        svg.classList.toggle('dim', !!pk);
+        ORDER.forEach(function (k) {
+          var on = pk && P[pk].seq.indexOf(k) > -1;
+          [nodes[k].lb, nodes[k].mk, nodes[k].shape].forEach(function (e) { e && e.classList.toggle('is-in-path', !!on); });
+        });
+      }
+
+      function select(k, scroll) {
+        state = { mode: 'region', key: k };
+        ORDER.forEach(function (x) {
+          var on = x === k;
+          nodes[x].mk.classList.toggle('is-active', on);
+          nodes[x].lb.classList.toggle('is-active', on);
+          nodes[x].shape && nodes[x].shape.classList.toggle('is-active', on);
+        });
+        document.querySelectorAll('.bm-rc').forEach(function (b) { b.classList.toggle('is-active', b.dataset.rc === k); });
+        setPathUI(null);
+        renderRegion(k);
+        if (history.replaceState) history.replaceState(null, '', '#' + k);
+        if (scroll && window.innerWidth <= 960) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      function selectPath(pk, scroll) {
+        if (!pk) { select(state.key || 'prefrontal'); return; }
+        state = { mode: 'path', key: pk };
+        ORDER.forEach(function (x) {
+          nodes[x].mk.classList.remove('is-active'); nodes[x].lb.classList.remove('is-active');
+          nodes[x].shape && nodes[x].shape.classList.toggle('is-active', P[pk].seq.indexOf(x) > -1);
+        });
+        document.querySelectorAll('.bm-rc').forEach(function (b) { b.classList.remove('is-active'); });
+        setPathUI(pk);
+        renderPath(pk);
+        if (history.replaceState) history.replaceState(null, '', '#' + pk);
+        if (scroll && window.innerWidth <= 960) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      /* olaylar */
+      ORDER.forEach(function (k) {
+        var n = nodes[k];
+        [n.mk, n.lb].forEach(function (e) {
+          e.addEventListener('click', function () { select(k, true); });
+          e.addEventListener('mouseenter', function () { n.shape && n.shape.classList.add('is-hover'); });
+          e.addEventListener('mouseleave', function () { n.shape && n.shape.classList.remove('is-hover'); });
+        });
+        n.mk.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(k, true); }
+        });
+        if (n.shape) {
+          n.shape.style.cursor = 'pointer';
+          n.shape.addEventListener('click', function () { select(k, true); });
         }
       });
-    });
+      regWrap.addEventListener('click', function (e) { var b = e.target.closest('[data-rc]'); if (b) select(b.dataset.rc, true); });
+      panel.addEventListener('click', function (e) { var b = e.target.closest('[data-go]'); if (b) select(b.dataset.go, false); });
+      pathsBar.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-path]'); if (!b) return;
+        selectPath(b.dataset.path, true);
+      });
+      var lobeBtn = $('bmLobes');
+      lobeBtn.addEventListener('click', function () {
+        var on = lobeBtn.getAttribute('aria-pressed') !== 'true';
+        lobeBtn.setAttribute('aria-pressed', String(on));
+        svg.classList.toggle('show-lobes', on);
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.mode === 'path') select('prefrontal'); });
+
+      /* başlangıç (#hash desteği) */
+      var h = (location.hash || '').slice(1);
+      if (P[h]) selectPath(h); else select(R[h] ? h : 'prefrontal');
+    })();
   </script>
 </body>
 </html>
