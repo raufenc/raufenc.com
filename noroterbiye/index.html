@@ -261,30 +261,129 @@
   </section>
 
   <!-- Görsel Keşif -->
-  <section class="nt-section nt-reveal">
+  <section class="nt-section nt-reveal" id="gorsel-kesif">
     <div class="nt-wrap">
       <h2 class="nt-section-title"><span class="nt-icon">🔬</span> Görsel Keşif</h2>
       <p style="color:var(--text-secondary);margin-bottom:24px;margin-top:-16px;font-size:0.9rem">Kitabın ana kavramlarını interaktif görseller ve infografiklerle keşfet.</p>
-      <div class="nt-grid nt-grid-3 nt-stagger">
-        <a href="/noroterbiye/gorseller/beyin-haritasi/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center;padding:32px 20px">
-          <div style="font-size:2.8rem;margin-bottom:12px">🧠</div>
-          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:6px">Beyin Haritası</h3>
-          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5">Tıkla, keşfet — her bölge bir hikâye anlatır.</p>
+      <div class="gvc-grid nt-stagger">
+        <a href="/noroterbiye/gorseller/beyin-haritasi/" class="gvc-card gvc-brain">
+          <div class="gvc-thumb">
+            <svg viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="gcB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--gvc-b1)"/><stop offset="1" stop-color="var(--gvc-b2)"/></linearGradient>
+                <radialGradient id="gcBg" cx="50%" cy="45%" r="46%"><stop offset="0" stop-color="#a78bfa" stop-opacity=".35"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect width="240" height="150" fill="url(#gcBg)"/>
+              <path d="M134.8 89.0L133.1 92.8L133.2 97.3L131.5 101.4L129.7 105.5L129.4 109.9L129.9 114.4L130.2 118.9L130.4 123.4L130.7 127.9L130.6 132.4L130.3 136.9L130.2 141.4L130.6 145.8L133.4 149.1L137.8 149.7L142.1 148.5L144.0 144.7L143.9 140.2L143.4 135.7L143.2 131.2L143.8 126.8L144.8 122.4L146.2 118.1L148.3 114.1L150.4 110.1L152.0 105.9L153.3 101.6L154.0 97.2L153.3 92.9L149.4 90.8L145.0 89.7L140.6 89.0L136.1 88.8Z" fill="var(--gvc-b2)" opacity=".85"/>
+              <path d="M149.3 95.6L152.2 93.0L155.7 91.1L159.4 89.8L163.2 88.8L167.1 88.1L171.1 87.6L175.0 87.3L179.0 87.2L182.9 87.2L186.9 87.4L190.8 87.8L194.7 88.4L198.6 89.4L202.3 90.8L205.5 93.0L207.7 96.3L208.3 100.2L207.4 104.1L205.5 107.5L202.8 110.4L199.6 112.7L196.1 114.5L192.4 115.8L188.5 116.8L184.7 117.5L180.7 118.0L176.8 118.1L172.8 117.8L168.9 117.2L165.1 116.2L161.4 114.6L158.3 112.3L155.4 109.5L152.6 106.7L150.2 103.5L148.7 99.9L149.0 96.0Z" fill="var(--gvc-b2)" opacity=".9"/>
+              <path d="M29.8 62.5L29.2 57.2L29.2 51.8L31.2 46.7L32.9 41.7L34.2 36.4L37.3 31.9L40.9 27.9L45.0 24.4L49.1 21.0L53.6 18.1L58.0 15.0L63.1 13.3L68.0 10.8L72.9 8.5L78.4 8.0L83.6 6.8L88.8 5.2L94.1 4.0L99.6 4.6L104.9 4.0L110.3 3.8L115.7 3.7L121.1 3.7L126.5 3.7L131.9 3.0L137.3 3.6L142.5 5.5L147.9 5.8L153.0 7.6L158.3 8.9L163.4 10.5L168.8 11.5L173.5 14.2L178.0 17.0L182.6 19.8L186.9 23.1L190.7 26.8L194.5 30.6L198.0 34.7L201.2 39.0L204.8 43.0L207.5 47.8L209.2 52.9L210.0 58.3L210.6 63.5L210.1 68.8L209.3 74.1L205.5 77.7L201.6 81.5L196.2 82.4L191.0 83.6L185.7 84.2L180.3 84.7L174.9 85.6L169.5 85.1L164.1 86.0L159.0 88.0L153.6 88.5L148.5 90.8L144.4 94.2L140.1 97.5L134.7 98.5L129.8 100.9L124.2 100.5L119.0 102.2L113.5 102.0L108.3 101.0L102.8 100.9L97.7 99.0L92.8 96.8L89.1 92.9L84.6 89.8L81.2 85.5L76.1 83.8L71.3 81.1L66.0 80.0L60.6 79.4L55.5 77.6L50.0 77.0L45.1 74.7L40.2 72.3L35.7 69.4L31.3 66.5Z" fill="url(#gcB)"/>
+              <path d="M79.6 83.9L81.9 82.4L84.1 80.8L86.4 79.4L88.6 77.9L91.0 76.6L93.4 75.3L95.8 74.1L98.2 72.9L100.7 71.8L103.2 70.8L105.7 69.9L108.3 69.0L110.8 68.1L113.4 67.4L116.0 66.7L118.7 66.1L121.3 65.6L124.0 65.2L126.7 64.8L129.3 64.3L132.0 63.9L134.6 63.4L137.3 63.0L140.0 62.5L142.6 62.1L145.3 61.6L147.9 61.1L150.6 60.5L153.2 59.9L155.8 59.3L158.5 58.7L161.1 58.0L163.7 57.2L166.2 56.3L168.7 55.2L171.1 54.0M130.7 3.2L130.0 5.8L129.4 8.5L128.8 11.1L128.2 13.7L127.4 16.3L126.7 18.9L125.9 21.5L125.2 24.1L124.5 26.7L123.9 29.3L123.3 32.0L122.7 34.6L122.1 37.3L121.5 39.9L120.8 42.5L120.0 45.0L119.2 47.6L118.4 50.2L117.5 52.8L116.6 55.3L115.7 57.8" fill="none" stroke="var(--gvc-groove)" stroke-width="1.6" stroke-linecap="round"/>
+              <g fill="none" stroke="var(--gvc-groove)" stroke-width="1.5" stroke-linecap="round" opacity=".7">
+                <path d="M40 40q10-6 20 0t20 0 20 0 20 0M44 54q12-6 24 0t24 0 24 0 24 0M56 72q10-5 20 0t20 0 20 0"/>
+                <path d="M130 28q8 8 0 16t0 16M158 34q8 8 0 16t0 14M178 52q6 6 0 12"/>
+              </g>
+              <circle cx="58" cy="52" r="5" fill="#22d3ee"/><circle cx="58" cy="52" r="10" fill="#22d3ee" opacity=".25"/>
+              <circle cx="96" cy="86" r="5" fill="#ef4444"/><circle cx="96" cy="86" r="10" fill="#ef4444" opacity=".25"/>
+              <circle cx="132" cy="96" r="5" fill="#a855f7"/><circle cx="132" cy="96" r="10" fill="#a855f7" opacity=".25"/>
+              <circle cx="146" cy="104" r="4.5" fill="#f97316"/><circle cx="146" cy="104" r="9" fill="#f97316" opacity=".25"/>
+              <path d="M146 104Q112 78 82 72Q70 64 58 52" fill="none" stroke="#f59e0b" stroke-width="1.6" stroke-dasharray="2 4" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="gvc-body">
+            <h3>Beyin Haritası</h3>
+            <p>Tıkla, keşfet — her bölge bir hikâye anlatır.</p>
+            <span class="gvc-go">Keşfet <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
-        <a href="/noroterbiye/gorseller/ssg-ucgeni/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center;padding:32px 20px">
-          <div style="font-size:2.8rem;margin-bottom:12px">🔺</div>
-          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:6px">ŞŞG Üçgeni</h3>
-          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5">Şehvet, Şöhret, Gadab — 3 dürtünün haritası.</p>
+        <a href="/noroterbiye/gorseller/ssg-ucgeni/" class="gvc-card gvc-ssg">
+          <div class="gvc-thumb">
+            <svg viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+              <defs>
+                <clipPath id="gcT"><path d="M120 26L186 124H54z"/></clipPath>
+                <radialGradient id="gcS" cx="120" cy="26" r="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f59e0b" stop-opacity=".9"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+                <radialGradient id="gcP" cx="54" cy="124" r="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a855f7" stop-opacity=".9"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+                <radialGradient id="gcG" cx="186" cy="124" r="110" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ef4444" stop-opacity=".9"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient>
+              </defs>
+              <g clip-path="url(#gcT)"><rect width="240" height="150" fill="url(#gcS)"/><rect width="240" height="150" fill="url(#gcP)"/><rect width="240" height="150" fill="url(#gcG)"/></g>
+              <path d="M120 26L54 124" stroke="#d97706" stroke-width="1.8" fill="none"/><path d="M54 124H186" stroke="#c026d3" stroke-width="1.8" fill="none"/><path d="M186 124L120 26" stroke="#e11d48" stroke-width="1.8" fill="none"/>
+              <circle cx="120" cy="92" r="7" fill="var(--gvc-node)" stroke="var(--gvc-line)" opacity=".85"/>
+              <g stroke-width="2" fill="var(--gvc-node)">
+                <circle cx="120" cy="26" r="15" stroke="#f59e0b"/><circle cx="54" cy="124" r="15" stroke="#a855f7"/><circle cx="186" cy="124" r="15" stroke="#ef4444"/>
+              </g>
+              <g fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M120 17c.5 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2 1-3.4 2.2-4.6.2 1.4.9 2.2 1.7 2.5.6-2.3.7-5.6 1.1-8.9z" stroke="#f59e0b" transform="translate(0 0)"/>
+                <path d="M47 120l3.6 3.4 3.4-5.6 3.4 5.6 3.6-3.4-1.2 8.2h-11.6z" stroke="#a855f7"/>
+                <path d="M188 116l-7 9.5h5.2l-.8 6.5 7-9.5h-5.2z" stroke="#ef4444"/>
+              </g>
+            </svg>
+          </div>
+          <div class="gvc-body">
+            <h3>ŞŞG Üçgeni</h3>
+            <p>Şehvet, Şöhret, Gadab — 3 dürtünün haritası.</p>
+            <span class="gvc-go">Keşfet <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
-        <a href="/noroterbiye/gorseller/aliskanlik-dongusu/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center;padding:32px 20px">
-          <div style="font-size:2.8rem;margin-bottom:12px">🔄</div>
-          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:6px">Alışkanlık Döngüsü</h3>
-          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5">Tetik → İstek → Davranış → Ödül döngüsü.</p>
+        <a href="/noroterbiye/gorseller/aliskanlik-dongusu/" class="gvc-card gvc-loop">
+          <div class="gvc-thumb">
+            <svg viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="gcL1" x1="120" y1="32" x2="186" y2="75" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+                <linearGradient id="gcL2" x1="186" y1="75" x2="120" y2="118" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+                <linearGradient id="gcL3" x1="120" y1="118" x2="54" y2="75" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ef4444"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+                <linearGradient id="gcL4" x1="54" y1="75" x2="120" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+              </defs>
+              <circle cx="120" cy="75" r="43" fill="none" stroke="var(--gvc-line)" stroke-width="9" opacity=".6"/>
+              <g fill="none" stroke-width="3" stroke-linecap="round">
+                <path d="M133 33.5A43 43 0 0 1 162 62" stroke="url(#gcL1)"/><path d="M162 88A43 43 0 0 1 133 116.5" stroke="url(#gcL2)"/>
+                <path d="M107 116.5A43 43 0 0 1 78 88" stroke="url(#gcL3)"/><path d="M78 62A43 43 0 0 1 107 33.5" stroke="url(#gcL4)"/>
+              </g>
+              <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M166 66l-2.5 5.5-5.5-2.5" stroke="#a855f7"/><path d="M138 122l-5.5-1.5 2.5-5.5" stroke="#ef4444"/><path d="M74 84l2.5-5.5 5.5 2.5" stroke="#10b981"/><path d="M102 28l5.5 1.5-2.5 5.5" stroke="#f59e0b"/>
+              </g>
+              <g stroke-width="2.2" fill="var(--gvc-node)">
+                <circle cx="120" cy="32" r="14" stroke="#f59e0b"/><circle cx="163" cy="75" r="14" stroke="#a855f7"/><circle cx="120" cy="118" r="14" stroke="#ef4444"/><circle cx="77" cy="75" r="14" stroke="#10b981"/>
+              </g>
+              <g fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M114.5 36v-4.5a5.5 5.5 0 0 1 11 0V36l1.2 1.6h-13.4zM118 39.5a2 2 0 0 0 4 0" stroke="#f59e0b"/>
+                <path d="M157 68h4v7a2 2 0 0 0 4 0v-7h4v7a6 6 0 0 1-12 0z" stroke="#a855f7"/>
+                <circle cx="120" cy="118" r="6.5" stroke="#ef4444"/><path d="M118.2 115l4.6 3-4.6 3z" stroke="#ef4444"/>
+                <path d="M71 76h12v7H71zM70 72h14v4H70zM77 72v11" stroke="#10b981"/>
+              </g>
+            </svg>
+          </div>
+          <div class="gvc-body">
+            <h3>Alışkanlık Döngüsü</h3>
+            <p>Tetik → İstek → Davranış → Ödül döngüsü.</p>
+            <span class="gvc-go">Keşfet <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
-        <a href="/noroterbiye/gorseller/dopamin-yolu/" class="nt-card nt-card-clickable" style="text-decoration:none;color:var(--text);text-align:center;padding:32px 20px">
-          <div style="font-size:2.8rem;margin-bottom:12px">🧪</div>
-          <h3 style="font-size:1.05rem;font-weight:700;margin-bottom:6px">Dopamin Yolu</h3>
-          <p style="font-size:0.8rem;color:var(--text-secondary);line-height:1.5">Doğal vs Yapay — beynin kimyasal dengesini gör.</p>
+        <a href="/noroterbiye/gorseller/dopamin-yolu/" class="gvc-card gvc-dop">
+          <div class="gvc-thumb">
+            <svg viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="gcD1" x1="0" x2="1"><stop offset="0" stop-color="#10b981" stop-opacity=".7"/><stop offset="1" stop-color="#10b981"/></linearGradient>
+                <linearGradient id="gcD2" x1="0" x2="1"><stop offset="0" stop-color="#f59e0b" stop-opacity=".8"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+              </defs>
+              <g stroke="var(--gvc-line)" stroke-width="1" stroke-dasharray="2 4"><path d="M44 22V132M88 22V132M132 22V132M176 22V132M220 22V132"/></g>
+              <g>
+                <rect x="44" y="30" width="22" height="11" rx="5.5" fill="url(#gcD1)"/>
+                <rect x="44" y="48" width="22" height="11" rx="5.5" fill="url(#gcD1)"/>
+                <rect x="44" y="66" width="40" height="11" rx="5.5" fill="url(#gcD1)"/>
+                <rect x="44" y="88" width="52" height="11" rx="5.5" fill="url(#gcD2)"/>
+                <rect x="44" y="106" width="150" height="11" rx="5.5" fill="url(#gcD2)"/>
+                <rect x="44" y="124" width="176" height="8" rx="4" fill="url(#gcD2)"/>
+              </g>
+              <g fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="22" cy="35.5" r="7.5" stroke="#10b981"/><circle cx="22" cy="53.5" r="7.5" stroke="#10b981"/><circle cx="22" cy="71.5" r="7.5" stroke="#10b981"/>
+                <circle cx="22" cy="93.5" r="7.5" stroke="#f59e0b"/><circle cx="22" cy="111.5" r="7.5" stroke="#ef4444"/>
+              </g>
+            </svg>
+          </div>
+          <div class="gvc-body">
+            <h3>Dopamin Yolu</h3>
+            <p>Doğal vs Yapay — beynin kimyasal dengesini gör.</p>
+            <span class="gvc-go">Keşfet <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></span>
+          </div>
         </a>
       </div>
     </div>

@@ -3,631 +3,440 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/lib/error-logger.js"></script>
   <title>Dopamin Yolu — NöroTerbiye</title>
-  <meta name="description" content="Doğal ve yapay dopamin kaynakları arasındaki farkı bilimsel referanslarla öğrenin. Beynin ödül sistemini interaktif görsellerle keşfedin.">
+  <meta name="description" content="Doğal ve yapay dopamin kaynaklarının karşılaştırması, tolerans mekanizması ve toparlanma yolu. Araştırma verileriyle interaktif grafikler.">
+  <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/dopamin-yolu/">
   <meta property="og:title" content="Dopamin Yolu — NöroTerbiye">
-  <meta property="og:description" content="Doğal vs Yapay dopamin. Bilimsel araştırmalarla beynin ödül sistemini anla.">
+  <meta property="og:description" content="Doğal vs Yapay dopamin — beynin kimyasal dengesini gör.">
   <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
   <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <link rel="stylesheet" href="/noroterbiye/css/gorseller.css">
   <script src="/lib/design-system/theme.js"></script>
   <style>
-    /* ── Page Layout ── */
-    .dopamin-page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: var(--space-8, 2rem) var(--space-4, 1rem);
-      padding-top: 100px;
+    .gv-page { --gv-accent: #10b981; --gv-grad: linear-gradient(120deg,#34d399 0%,#fbbf24 50%,#f87171 100%); }
+    .dp-green { --c: #10b981; --ct: #34d399; }
+    .dp-amber { --c: #f59e0b; --ct: #fbbf24; }
+    .dp-red   { --c: #ef4444; --ct: #f87171; }
+    .dp-slate { --c: #64748b; --ct: #94a3b8; }
+    html.light .dp-green { --ct: #047857; } html.light .dp-amber { --ct: #b45309; }
+    html.light .dp-red { --ct: #b91c1c; } html.light .dp-slate { --ct: #475569; }
+
+    .dp-card { padding: 28px 28px 26px; }
+    .dp-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 26px; }
+    .dp-seg { display: inline-flex; padding: 4px; border-radius: 100px; background: var(--gv-card-2); border: 1px solid var(--gv-line); }
+    .dp-seg button { font: 700 .8rem var(--font-sans); color: var(--gv-ink-2); padding: 8px 16px; border-radius: 100px; border: 0; background: transparent; cursor: pointer; transition: all .25s; }
+    .dp-seg button[aria-pressed="true"] { color: #fff; background: linear-gradient(135deg,#10b981,#0ea5e9); box-shadow: 0 6px 18px -8px #10b981; }
+    .dp-note { font-size: .8rem; color: var(--gv-ink-3); display: flex; align-items: center; gap: 8px; }
+
+    .dp-group + .dp-group { margin-top: 30px; }
+    .dp-ghead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .dp-scale { font-size: .74rem; color: var(--gv-ink-3); font-variant-numeric: tabular-nums; }
+    .dp-row { display: grid; grid-template-columns: 188px minmax(0, 1fr); gap: 16px; align-items: center; padding: 7px 0; }
+    .dp-lab { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .dp-ic { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); border: 1px solid color-mix(in srgb, var(--c) 28%, transparent); flex-shrink: 0; }
+    .dp-lab b { display: block; font-size: .92rem; line-height: 1.2; color: var(--gv-ink); }
+    .dp-lab small { display: block; font-size: .68rem; color: var(--gv-ink-3); line-height: 1.3; margin-top: 2px; }
+    .dp-track { position: relative; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--gv-ink) 4%, transparent); background-image: repeating-linear-gradient(90deg, var(--gv-line) 0 1px, transparent 1px calc(100% / var(--n))); border-right: 1px solid var(--gv-line); }
+    .dp-ghost, .dp-bar { position: absolute; top: 5px; bottom: 5px; left: 0; width: 0; border-radius: 7px; transition: width 1.1s cubic-bezier(.2,.8,.2,1), left 1.1s cubic-bezier(.2,.8,.2,1); }
+    .dp-bar { background: linear-gradient(90deg, color-mix(in srgb, var(--c) 70%, transparent), var(--c)); box-shadow: 0 4px 16px -4px var(--c); min-width: 6px; }
+    .dp-ghost { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--c) 45%, transparent) 0 5px, color-mix(in srgb, var(--c) 14%, transparent) 5px 10px); border: 1px dashed color-mix(in srgb, var(--c) 70%, transparent); border-left: 0; border-radius: 0 7px 7px 0; }
+    .dp-val { position: absolute; top: 50%; transform: translateY(-50%); font: 800 .84rem var(--font-sans); color: var(--ct); white-space: nowrap; font-variant-numeric: tabular-nums; transition: left 1.1s cubic-bezier(.2,.8,.2,1); }
+    .dp-val.in-bar { transform: translate(-100%, -50%); color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,.55); }
+    .dp-axis { display: grid; grid-template-columns: 188px minmax(0, 1fr); gap: 16px; margin-top: 4px; }
+    .dp-ticks { display: flex; justify-content: space-between; font-size: .68rem; color: var(--gv-ink-3); font-variant-numeric: tabular-nums; }
+    .dp-ticks span:first-child { transform: translateX(-2px); }
+    .dp-ticks span:last-child { transform: translateX(6px); }
+    .dp-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--gv-line); font-size: .78rem; color: var(--gv-ink-2); }
+    .dp-legend i { display: inline-block; width: 22px; height: 10px; border-radius: 4px; margin-right: 8px; vertical-align: -1px; }
+    .dp-legend .l1 { background: var(--gv-accent); }
+    .dp-legend .l2 { background: repeating-linear-gradient(135deg, rgba(16,185,129,.55) 0 4px, rgba(16,185,129,.15) 4px 8px); border: 1px dashed rgba(16,185,129,.7); }
+
+    .dp-stat { margin-top: 16px; display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: center; padding: 22px 26px; border-radius: 22px; background: linear-gradient(135deg, color-mix(in srgb, #f59e0b 12%, transparent), color-mix(in srgb, #ef4444 10%, transparent)); border: 1px solid color-mix(in srgb, #f59e0b 28%, transparent); }
+    .dp-stat-n { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -.04em; line-height: 1; background: linear-gradient(135deg,#fbbf24,#ef4444); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    html.light .dp-stat-n { filter: brightness(.85) saturate(1.2); }
+    .dp-stat p { margin: 0; font-size: .96rem; line-height: 1.65; color: var(--gv-ink); }
+    .dp-stat p b { color: var(--gv-ink); }
+    .dp-stat small { display: block; margin-top: 4px; color: var(--gv-ink-3); font-size: .78rem; }
+
+    /* eğri grafikleri */
+    .cv-wrap { position: relative; }
+    .cv-svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .cv-svg { --axis: rgba(255,255,255,.16); --txt: #9a9ab4; --band: rgba(255,255,255,.035); --bandon: rgba(255,255,255,.09); --ttl: #ececf6; }
+    html.light .cv-svg { --axis: rgba(60,50,120,.22); --txt: #6a6a88; --band: rgba(60,50,120,.035); --bandon: rgba(60,50,120,.1); --ttl: #1a1a2e; }
+    .cv-band { fill: var(--band); transition: fill .3s; }
+    .cv-band.on { fill: var(--bandon); }
+    .cv-grid { stroke: var(--axis); stroke-width: 1; stroke-dasharray: 2 6; }
+    .cv-base { stroke: var(--txt); stroke-width: 1.4; stroke-dasharray: 6 6; opacity: .7; }
+    .cv-base2 { fill: none; stroke: #ef4444; stroke-width: 1.6; stroke-dasharray: 2 5; opacity: .85; stroke-linecap: round; }
+    .cv-txt { font: 600 12px var(--font-sans); fill: var(--txt); }
+    .cv-ttl { font: 800 12px var(--font-sans); letter-spacing: .1em; text-transform: uppercase; }
+    .cv-line { fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .cv-wrap.in .cv-line { animation: cvDraw 3s cubic-bezier(.4,.1,.2,1) forwards; }
+    @keyframes cvDraw { to { stroke-dashoffset: 0; } }
+    .cv-area { opacity: 0; transition: opacity 1.4s ease 1.6s; }
+    .cv-wrap.in .cv-area { opacity: 1; }
+    .cv-axis-lab { font: 700 10.5px var(--font-sans); fill: var(--txt); letter-spacing: .1em; text-transform: uppercase; }
+    .cv-tag { position: absolute; top: 4px; right: 4px; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gv-ink-3); padding: 4px 10px; border-radius: 100px; border: 1px dashed var(--gv-line-2); }
+
+    .dp-phases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+    .dp-phase { position: relative; padding: 20px 18px 18px; border-radius: 20px; background: var(--gv-card); border: 1px solid var(--gv-line); transition: all .3s; cursor: default; outline: none; }
+    .dp-phase:hover, .dp-phase:focus-visible, .dp-phase.on { transform: translateY(-4px); border-color: color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 16px 34px -18px var(--c); }
+    .dp-phase-n { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 10px; font-weight: 800; font-size: .85rem; color: #fff; background: var(--c); box-shadow: 0 6px 16px -6px var(--c); margin-bottom: 12px; }
+    .dp-phase h3 { margin: 0 0 6px; font-size: 1.02rem; font-weight: 800; color: var(--ct); }
+    .dp-phase p { margin: 0; font-size: .84rem; line-height: 1.6; color: var(--gv-ink-2); }
+
+    .dp-rec { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 28px; align-items: center; padding: 26px 28px; }
+    .dp-rec h3 { margin: 0 0 8px; font-size: 1.12rem; font-weight: 800; color: var(--gv-ink); }
+    .dp-rec p { margin: 0; font-size: .88rem; line-height: 1.7; color: var(--gv-ink-2); }
+    .dp-rec p + p { margin-top: 10px; }
+    .dp-rrow { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .dp-rrow:last-child { margin-bottom: 0; }
+    .dp-rrow > span { width: 118px; font-size: .74rem; font-weight: 700; color: var(--gv-ink-2); line-height: 1.3; flex-shrink: 0; }
+    .dp-rcp { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; flex: 1; }
+    .dp-rcp i { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: #10b981; background: color-mix(in srgb, #10b981 14%, transparent); border: 1px solid color-mix(in srgb, #10b981 38%, transparent); }
+    .dp-rcp i svg { width: 62%; height: 62%; }
+    .dp-rcp i.off { color: var(--gv-ink-3); background: transparent; border: 1px dashed color-mix(in srgb, #ef4444 65%, transparent); opacity: .7; }
+    .dp-rcp i.off svg { opacity: .35; }
+    .dp-rcp.pop i { opacity: 0; transform: scale(.4); }
+    .dp-rcp.pop.in i { opacity: 1; transform: none; transition: opacity .4s ease, transform .5s cubic-bezier(.3,1.6,.5,1); transition-delay: calc(var(--i) * 28ms); }
+    .dp-rcp.pop.in i.off { opacity: .7; }
+
+    .dp-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 8px; position: relative; }
+    .dp-step { position: relative; text-align: center; padding: 0 14px; }
+    .dp-step-ic { width: 64px; height: 64px; margin: 0 auto 14px; border-radius: 20px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 14%, var(--gv-card-2)); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent); box-shadow: 0 12px 28px -14px var(--c); position: relative; z-index: 1; }
+    .dp-step:not(:last-child)::after { content: ''; position: absolute; top: 31px; left: calc(50% + 44px); right: calc(-50% + 44px); height: 2px; background: repeating-linear-gradient(90deg, var(--gv-line-2) 0 6px, transparent 6px 12px); }
+    .dp-step h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 800; color: var(--ct); }
+    .dp-step p { margin: 0 auto; max-width: 300px; font-size: .86rem; line-height: 1.65; color: var(--gv-ink-2); }
+    .dp-step-card { padding: 22px 18px 20px; border-radius: 22px; background: var(--gv-card); border: 1px solid var(--gv-line); height: 100%; }
+    .dp-steps { gap: 18px; }
+    .dp-step:not(:last-child)::after { display: none; }
+    .dp-step-arrow { position: absolute; right: -16px; top: 52px; width: 14px; height: 14px; color: var(--gv-ink-3); z-index: 2; }
+
+    .dp-refs { margin-top: 56px; padding: 22px 26px; }
+    .dp-refs ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+    .dp-refs li { font-size: .8rem; line-height: 1.6; color: var(--gv-ink-2); padding-left: 16px; position: relative; }
+    .dp-refs li::before { content: ''; position: absolute; left: 0; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--gv-accent); opacity: .7; }
+    .dp-cite { font-size: .76rem; color: var(--gv-ink-3); margin: 14px 4px 0; line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .dp-phases { grid-template-columns: repeat(2, 1fr); }
+      .dp-rec { grid-template-columns: 1fr; }
+      .dp-steps { grid-template-columns: 1fr; }
+      .dp-step-arrow { display: none; }
     }
-
-    .section-block {
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto var(--space-16, 4rem);
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: var(--space-8, 2rem);
-    }
-
-    .section-title {
-      font-size: clamp(1.5rem, 4.5vw, 2.3rem);
-      font-weight: 800;
-      background: var(--nt-grad-text, linear-gradient(135deg, #818cf8, #c084fc));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: var(--space-2, 0.5rem);
-      line-height: 1.3;
-    }
-
-    .section-subtitle {
-      color: var(--text-secondary, #94a3b8);
-      font-size: clamp(0.88rem, 2.5vw, 1.05rem);
-      font-style: italic;
-      max-width: 620px;
-      margin: 0 auto;
-      line-height: 1.5;
-    }
-
-    /* ── Shared glass card ── */
-    .glass-card {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(148, 163, 184, 0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-    }
-
-    /* ── References block ── */
-    .references {
-      margin-top: var(--space-6, 1.5rem);
-      padding: var(--space-4, 1rem) var(--space-5, 1.25rem);
-      background: rgba(15, 23, 42, 0.4);
-      border: 1px solid rgba(148, 163, 184, 0.06);
-      border-radius: 12px;
-    }
-
-    .references-title {
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-secondary, #94a3b8);
-      margin-bottom: var(--space-2, 0.5rem);
-    }
-
-    .references ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .references li {
-      font-size: 0.72rem;
-      color: rgba(148, 163, 184, 0.7);
-      line-height: 1.6;
-      margin-bottom: 4px;
-      padding-left: 12px;
-      position: relative;
-    }
-
-    .references li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: rgba(148, 163, 184, 0.4);
-    }
-
-    /* ═══════════════════════════════════════════
-       Section 1: Dual Bar Charts
-       ═══════════════════════════════════════════ */
-    .chart-group-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: var(--space-3, 0.75rem);
-      padding-bottom: var(--space-2, 0.5rem);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
-    }
-
-    .chart-group-label.natural-label { color: #10b981; }
-    .chart-group-label.artificial-label { color: #ef4444; }
-
-    .chart-container {
-      padding: var(--space-6, 1.5rem) var(--space-5, 1.25rem);
-      margin-bottom: var(--space-4, 1rem);
-    }
-
-    .chart-scale-note {
-      text-align: right;
-      font-size: 0.7rem;
-      color: rgba(148, 163, 184, 0.5);
-      margin-bottom: var(--space-3, 0.75rem);
-      font-style: italic;
-    }
-
-    .bar-row {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3, 0.75rem);
-      margin-bottom: var(--space-3, 0.75rem);
-      position: relative;
-    }
-
-    .bar-label {
-      min-width: 120px;
-      text-align: right;
-      font-size: 0.88rem;
-      color: var(--text-primary, #e2e8f0);
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: var(--space-2, 0.5rem);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .bar-label .emoji { font-size: 1.15rem; flex-shrink: 0; }
-
-    .bar-track {
-      flex: 1;
-      height: 32px;
-      background: rgba(30, 41, 59, 0.5);
-      border-radius: 6px;
-      position: relative;
-      overflow: visible;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 6px;
-      width: 0;
-      transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      min-width: 0;
-    }
-
-    .bar-fill.natural {
-      background: linear-gradient(90deg, #065f46, #10b981);
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
-    }
-
-    .bar-fill.yapay-low {
-      background: linear-gradient(90deg, #92400e, #f59e0b);
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
-    }
-
-    .bar-fill.yapay-mid {
-      background: linear-gradient(90deg, #b45309, #ef4444);
-      box-shadow: 0 0 12px rgba(239, 68, 68, 0.25);
-    }
-
-    .bar-fill.yapay-high {
-      background: linear-gradient(90deg, #991b1b, #dc2626);
-      box-shadow: 0 0 14px rgba(220, 38, 38, 0.35);
-    }
-
-    .bar-value {
-      position: absolute;
-      right: -52px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--text-primary, #e2e8f0);
-      white-space: nowrap;
-    }
-
-    .bar-row .bar-tooltip {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 0.68rem;
-      color: rgba(148, 163, 184, 0.8);
-      white-space: nowrap;
-      z-index: 10;
-      pointer-events: none;
-    }
-
-    .bar-row:hover .bar-tooltip { display: block; }
-
-    /* Comparison callout between the two charts */
-    .scale-callout {
-      text-align: center;
-      padding: var(--space-4, 1rem) var(--space-3, 0.75rem);
-      margin: var(--space-2, 0.5rem) 0;
-    }
-
-    .scale-callout-inner {
-      display: inline-block;
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px solid rgba(239, 68, 68, 0.15);
-      border-radius: 10px;
-      padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
-      font-size: 0.88rem;
-      color: var(--text-secondary, #94a3b8);
-      line-height: 1.5;
-    }
-
-    .scale-callout-inner strong {
-      color: #ef4444;
-      font-weight: 700;
-    }
-
-    /* ═══════════════════════════════════════════
-       Section 2: Tolerance Cards
-       ═══════════════════════════════════════════ */
-    .tolerance-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-4, 1rem);
-    }
-
-    .tolerance-card {
-      padding: var(--space-5, 1.25rem);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-2, 0.5rem);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      border-top: 3px solid transparent;
-    }
-
-    .tolerance-card.visible { opacity: 1; transform: translateY(0); }
-
-    .tolerance-card:nth-child(1) { border-top-color: #10b981; transition-delay: 0s; }
-    .tolerance-card:nth-child(2) { border-top-color: #f59e0b; transition-delay: 0.15s; }
-    .tolerance-card:nth-child(3) { border-top-color: #ef4444; transition-delay: 0.3s; }
-    .tolerance-card:nth-child(4) { border-top-color: #7f1d1d; transition-delay: 0.45s; }
-
-    .tol-emoji { font-size: 2.2rem; margin: var(--space-1, 0.25rem) 0; }
-
-    .tol-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-primary, #e2e8f0);
-    }
-
-    .tol-desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary, #94a3b8);
-      line-height: 1.55;
-    }
-
-    .tolerance-note {
-      text-align: center;
-      font-size: 0.82rem;
-      font-style: italic;
-      color: rgba(148, 163, 184, 0.7);
-      max-width: 700px;
-      margin: var(--space-6, 1.5rem) auto 0;
-      line-height: 1.6;
-    }
-
-    /* ═══════════════════════════════════════════
-       Section 3: Detox Cards with Arrows
-       ═══════════════════════════════════════════ */
-    .detox-path {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    .detox-card {
-      padding: var(--space-6, 1.5rem);
-      width: 100%;
-      max-width: 540px;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s;
-      border-top: 3px solid transparent;
-    }
-
-    .detox-card.visible { opacity: 1; transform: translateY(0); }
-
-    .detox-card:nth-child(1) { border-top-color: #ef4444; transition-delay: 0.1s; }
-    .detox-card:nth-child(3) { border-top-color: #f59e0b; transition-delay: 0.3s; }
-    .detox-card:nth-child(5) { border-top-color: #10b981; transition-delay: 0.5s; }
-
-    .detox-icon { font-size: 2.4rem; margin-bottom: var(--space-3, 0.75rem); display: block; }
-
-    .detox-card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-primary, #e2e8f0);
-      margin-bottom: var(--space-2, 0.5rem);
-    }
-
-    .detox-card p {
-      font-size: 0.92rem;
-      color: var(--text-secondary, #94a3b8);
-      line-height: 1.6;
-    }
-
-    .detox-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 48px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .detox-arrow.visible { opacity: 1; transform: translateY(0); }
-
-    .detox-arrow svg {
-      width: 24px;
-      height: 48px;
-      color: rgba(129, 140, 248, 0.5);
-    }
-
-    .detox-ref {
-      text-align: center;
-      margin-top: var(--space-5, 1.25rem);
-      font-size: 0.72rem;
-      color: rgba(148, 163, 184, 0.6);
-      font-style: italic;
-    }
-
-    /* ═══════════════════════════════════════════
-       Responsive
-       ═══════════════════════════════════════════ */
-    @media (max-width: 768px) {
-      .tolerance-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
     @media (max-width: 640px) {
-      .bar-label {
-        min-width: 95px;
-        font-size: 0.78rem;
-      }
-      .bar-track { height: 26px; }
-      .bar-value { font-size: 0.65rem; right: -44px; }
-      .section-block { margin-bottom: var(--space-10, 2.5rem); }
-      .chart-container { padding: var(--space-4, 1rem) var(--space-3, 0.75rem); }
-      .tolerance-grid { gap: var(--space-3, 0.75rem); }
-      .detox-card { padding: var(--space-4, 1rem); }
-    }
-
-    @media (max-width: 420px) {
-      .bar-label {
-        min-width: 80px;
-        font-size: 0.72rem;
-      }
-      .bar-label .emoji { display: none; }
-      .bar-value { right: -38px; }
+      .dp-card { padding: 20px 16px 18px; }
+      .dp-row, .dp-axis { grid-template-columns: 1fr; gap: 8px; }
+      .dp-axis > :first-child { display: none; }
+      .dp-stat { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+      .dp-phases { grid-template-columns: 1fr; }
+      .dp-rrow { flex-direction: column; align-items: stretch; gap: 8px; }
+      .dp-rrow > span { width: auto; }
+      .cv-tag { position: static; display: inline-block; margin-bottom: 8px; }
     }
   </style>
-  <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
   <script src="/nav.js"></script>
 
-  <main class="dopamin-page">
+  <main class="gv-page" id="main-content">
+    <header class="gv-hero">
+      <span class="gv-eyebrow"><span data-gv-icon="bars" data-size="16"></span> Görsel Keşif · Dopamin</span>
+      <h1 class="gv-title">Dopamin Yolu</h1>
+      <p class="gv-lead">Aynı kimyasal, farklı dozaj. Doğal ödüller ile yapay uyaranlar arasındaki farkı, beynin buna nasıl uyum sağladığını ve dengeyi nasıl geri kuracağını araştırma verileriyle gör.</p>
+    </header>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- Bölüm 1: Doğal vs Yapay Karşılaştırması    -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section-block" id="karsilastirma">
-      <div class="section-header">
-        <h1 class="section-title">🧪 Dopamin: Doğal vs Yapay</h1>
-        <p class="section-subtitle">Aynı kimyasal, farklı dozaj. Araştırmalar ne diyor?</p>
+    <!-- 1 · Doğal vs Yapay -->
+    <section class="gv-sec gv-reveal" id="karsilastirma" style="margin-top:0" aria-labelledby="t1">
+      <div class="gv-sec-head">
+        <span class="gv-num" style="--c:#10b981">1</span>
+        <h2 id="t1">Doğal vs Yapay</h2>
+        <p>Bazal dopamin seviyesine göre artış oranı — araştırmalar ne diyor?</p>
       </div>
-
-      <noscript>
-        <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu sayfa interaktif grafikler içermektedir ve JavaScript gerektirir. Doğal ödüller (yürüyüş, çikolata, yemek) bazal dopamin seviyesini %50-150 artırırken, yapay uyaranlar (nikotin, alkol, kokain, amfetamin) %150-1000 artış sağlar.</p>
-      </noscript>
-
-      <!-- Chart A: Doğal Ödüller (0–200%) -->
-      <div class="chart-container glass-card" id="chartNatural" role="img" aria-label="Doğal ödüllerin dopamin artış oranlarını gösteren çubuk grafik: Yürüyüş %50, Çikolata %50, Yemek %50-150">
-        <div class="chart-group-label natural-label">Doğal Ödüller</div>
-        <div class="chart-scale-note">Ölçek: %0 – %200 (bazal dopamin seviyesine göre artış)</div>
-        <div class="bars-wrapper" id="barsNatural">
-          <!-- JS renders -->
+      <div class="gv-card dp-card" id="dpChart" role="group" aria-label="Doğal ve yapay uyaranların dopamin artış oranlarını gösteren çubuk grafik">
+        <div class="dp-toolbar">
+          <div class="dp-seg" role="group" aria-label="Ölçek">
+            <button type="button" data-mode="shared" aria-pressed="true">Aynı ölçek</button>
+            <button type="button" data-mode="split" aria-pressed="false">Ayrı ölçek</button>
+          </div>
+          <span class="dp-note" id="dpNote"></span>
         </div>
+        <noscript><p style="color:var(--text-secondary);padding:1rem 0;">Bu sayfa interaktif grafikler içermektedir ve JavaScript gerektirir. Doğal ödüller (yürüyüş, çikolata, yemek) bazal dopamin seviyesini %50-150 artırırken, yapay uyaranlar (nikotin, alkol, kokain, amfetamin) %150-1000 artış sağlar.</noscript>
+        <div class="dp-group" id="gNat"></div>
+        <div class="dp-group" id="gArt"></div>
+        <div class="dp-legend"><span><i class="l1"></i>Ortalama / alt sınır</span><span><i class="l2"></i>Bildirilen üst aralık</span></div>
       </div>
-
-      <!-- Callout -->
-      <div class="scale-callout">
-        <div class="scale-callout-inner">
-          ⚠️ Dikkat: Aşağıdaki grafik <strong>5 kat daha büyük</strong> bir ölçek kullanıyor.<br>
-          Yapay uyaranlar, doğal ödüllerin <strong>10-20 katı</strong> dopamin salgılatabilir.
-        </div>
-      </div>
-
-      <!-- Chart B: Yapay Uyaranlar (0–1200%) -->
-      <div class="chart-container glass-card" id="chartArtificial" role="img" aria-label="Yapay uyaranların dopamin artış oranlarını gösteren çubuk grafik: Nikotin %150, Alkol %150, Kokain %400-1000, Amfetamin %1000">
-        <div class="chart-group-label artificial-label">Yapay Uyaranlar</div>
-        <div class="chart-scale-note">Ölçek: %0 – %1200 (bazal dopamin seviyesine göre artış)</div>
-        <div class="bars-wrapper" id="barsArtificial">
-          <!-- JS renders -->
-        </div>
-      </div>
-
-      <!-- References -->
-      <div class="references">
-        <div class="references-title">Kaynaklar</div>
-        <ul>
-          <li>Di Chiara, G., &amp; Imperato, A. (1988). Drugs abused by humans preferentially increase synaptic dopamine concentrations. <em>PNAS</em>, 85(14), 5274–5278.</li>
-          <li>Chaouloff, F. (1989). Physical exercise and brain monoamines: a review. <em>Acta Physiologica Scandinavica</em>, 137(1), 1–13.</li>
-          <li>Volkow, N. D., et al. (1997). Relationship between subjective effects of cocaine and dopamine transporter occupancy. <em>Nature</em>, 386, 827–830.</li>
-          <li>Hernandez, L., &amp; Hoebel, B. G. (1988). Food reward and cocaine increase extracellular dopamine in the nucleus accumbens. <em>Life Sciences</em>, 42(18), 1705–1712.</li>
-        </ul>
+      <div class="dp-stat">
+        <div class="dp-stat-n">10–20×</div>
+        <p>Yapay uyaranlar, doğal ödüllerin <b>10-20 katı</b> dopamin salgılatabilir.<small>“Aynı ölçek” görünümünde doğal ödüllerin neden bu kadar küçük kaldığını görürsün.</small></p>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- Bölüm 2: Tolerans Mekanizması               -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section-block" id="tolerans">
-      <div class="section-header">
-        <h2 class="section-title">📉 Tolerans: Beyin Neden Alışıyor?</h2>
-        <p class="section-subtitle">Tekrarlanan yapay uyaranlar, reseptör sayısını düşürür.</p>
+    <!-- 2 · Tolerans -->
+    <section class="gv-sec gv-reveal" id="tolerans" aria-labelledby="t2">
+      <div class="gv-sec-head">
+        <span class="gv-num" style="--c:#f59e0b">2</span>
+        <h2 id="t2">Tolerans: Beyin Neden Alışıyor?</h2>
+        <p>Tekrarlanan yapay uyaranlar, reseptör sayısını düşürür.</p>
       </div>
-
-      <div class="tolerance-grid" id="toleranceGrid">
-        <div class="tolerance-card glass-card">
-          <span class="tol-emoji">🟢</span>
-          <div class="tol-title">İlk Maruz Kalma</div>
-          <div class="tol-desc">Yapay uyaran güçlü dopamin salgılatır. Beyin aşırı uyarılır.</div>
+      <div class="gv-card dp-card cv-wrap" id="cvTol">
+        <span class="cv-tag">Şematik gösterim</span>
+        <svg class="cv-svg" id="tolSvg" viewBox="0 0 880 320" role="img" aria-label="Dopamin seviyesinin dört evrede nasıl değiştiğini gösteren şematik eğri: ilk maruz kalmada yüksek tepe, adaptasyon ve tolerans evresinde giderek sönükleşen tepeler, çekilmede bazalin altına düşüş"></svg>
+      </div>
+      <div class="dp-phases" id="dpPhases"></div>
+      <div class="gv-card dp-rec gv-reveal">
+        <div>
+          <h3>D2 reseptör yoğunluğu</h3>
+          <p>Volkow ve ark. (2001) PET taramaları, kronik kokain kullanıcılarında striatal D2 reseptör yoğunluğunun <b>%15-20 azaldığını</b> göstermiştir.</p>
+          <p style="color:var(--gv-ink-3);font-size:.78rem">Her nokta, aynı sayıdaki reseptörün yaklaşık beşte birlik kaybını göstermek için çizilmiş şematik bir temsildir.</p>
         </div>
-
-        <div class="tolerance-card glass-card">
-          <span class="tol-emoji">🟡</span>
-          <div class="tol-title">Adaptasyon</div>
-          <div class="tol-desc">Beyin D2 reseptör sayısını azaltır. Aynı uyaran daha az etki eder.</div>
-        </div>
-
-        <div class="tolerance-card glass-card">
-          <span class="tol-emoji">🔴</span>
-          <div class="tol-title">Tolerans</div>
-          <div class="tol-desc">Daha fazla doz veya süre gerekir. Doğal ödüller artık tatmin etmez.</div>
-        </div>
-
-        <div class="tolerance-card glass-card">
-          <span class="tol-emoji">⚫</span>
-          <div class="tol-title">Çekilme</div>
-          <div class="tol-desc">Uyaran olmadan dopamin bazal seviyenin altına düşer. Mutsuzluk, huzursuzluk.</div>
+        <div>
+          <div class="dp-rrow"><span>Sağlıklı beyin</span><div class="dp-rcp pop" id="rcpA"></div></div>
+          <div class="dp-rrow"><span>Kronik kullanıcı<br><small style="color:var(--gv-ink-3);font-weight:600">≈ %15-20 azalma</small></span><div class="dp-rcp pop" id="rcpB"></div></div>
         </div>
       </div>
-
-      <p class="tolerance-note">
-        Volkow ve ark. (2001) PET taramaları, kronik kokain kullanıcılarında striatal D2 reseptör yoğunluğunun %15-20 azaldığını göstermiştir.
-      </p>
     </section>
 
-    <!-- ═══════════════════════════════════════════ -->
-    <!-- Bölüm 3: Dopamin Detoksu                    -->
-    <!-- ═══════════════════════════════════════════ -->
-    <section class="section-block" id="detoks">
-      <div class="section-header">
-        <h2 class="section-title">🌱 Toparlanma: Dopamin Dengesini Yeniden Kur</h2>
-        <p class="section-subtitle">Araştırmalar 30 günlük detoksun reseptör dengesini başlattığını gösteriyor.</p>
+    <!-- 3 · Toparlanma -->
+    <section class="gv-sec gv-reveal" id="detoks" aria-labelledby="t3">
+      <div class="gv-sec-head">
+        <span class="gv-num" style="--c:#34d399">3</span>
+        <h2 id="t3">Toparlanma: Dopamin Dengesini Yeniden Kur</h2>
+        <p>Araştırmalar 30 günlük detoksun reseptör dengesini başlattığını gösteriyor.</p>
       </div>
-
-      <div class="detox-path" id="detoxPath">
-        <div class="detox-card glass-card">
-          <span class="detox-icon">🔍</span>
-          <h3>Fark Et</h3>
-          <p>Yapay dopamin kaynaklarını belirle: ekran süresi, şekerli yiyecekler, sosyal medya.</p>
-        </div>
-
-        <div class="detox-arrow">
-          <svg viewBox="0 0 24 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2 L12 38 M6 32 L12 42 L18 32"/>
-          </svg>
-        </div>
-
-        <div class="detox-card glass-card">
-          <span class="detox-icon">📉</span>
-          <h3>30 Gün Kuralı</h3>
-          <p>Dr. Anna Lembke'nin (Stanford) önerisi: en az 30 gün yapay uyarandan uzak dur. Bu süre reseptör dengelemesi için minimum.</p>
-        </div>
-
-        <div class="detox-arrow">
-          <svg viewBox="0 0 24 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2 L12 38 M6 32 L12 42 L18 32"/>
-          </svg>
-        </div>
-
-        <div class="detox-card glass-card">
-          <span class="detox-icon">🌿</span>
-          <h3>Doğal Kaynaklara Dön</h3>
-          <p>Egzersiz (%50-75 dopamin artışı), doğa yürüyüşü, sosyal bağ, ibadet — sürdürülebilir ödül kaynakları.</p>
-        </div>
+      <div class="gv-card dp-card cv-wrap" id="cvRec">
+        <span class="cv-tag">Şematik gösterim</span>
+        <svg class="cv-svg" id="recSvg" viewBox="0 0 880 250" role="img" aria-label="Yapay uyaranlardan uzak durmanın ardından dopamin dengesinin otuz gün içinde yeniden bazal seviyeye yükselişini gösteren şematik eğri"></svg>
       </div>
-
-      <p class="detox-ref">
-        Lembke, A. (2021). <em>Dopamine Nation: Finding Balance in the Age of Indulgence.</em> Dutton.
-      </p>
+      <div class="dp-steps" id="dpSteps"></div>
+      <p class="dp-cite">Lembke, A. (2021). <em>Dopamine Nation: Finding Balance in the Age of Indulgence.</em> Dutton.</p>
     </section>
 
+    <section class="gv-card dp-refs gv-reveal" aria-labelledby="refT">
+      <p class="gv-kicker" id="refT" style="margin:0">Kaynaklar</p>
+      <ul>
+        <li>Di Chiara, G., &amp; Imperato, A. (1988). Drugs abused by humans preferentially increase synaptic dopamine concentrations. <em>PNAS</em>, 85(14), 5274–5278.</li>
+        <li>Chaouloff, F. (1989). Physical exercise and brain monoamines: a review. <em>Acta Physiologica Scandinavica</em>, 137(1), 1–13.</li>
+        <li>Volkow, N. D., et al. (1997). Relationship between subjective effects of cocaine and dopamine transporter occupancy. <em>Nature</em>, 386, 827–830.</li>
+        <li>Hernandez, L., &amp; Hoebel, B. G. (1988). Food reward and cocaine increase extracellular dopamine in the nucleus accumbens. <em>Life Sciences</em>, 42(18), 1705–1712.</li>
+      </ul>
+    </section>
+
+    <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
 
   <script src="/noroterbiye/js/common.js"></script>
+  <script src="/noroterbiye/js/gorseller.js"></script>
   <script>
     NT.renderNav();
     NT.renderFooter();
+    GV.hydrate();
+    GV.reveal();
+    GV.moreNav('dopamin-yolu');
 
-    /* ═══════════════════════════════════════════
-       Section 1: Dual Bar Charts
-       ═══════════════════════════════════════════ */
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var NSV = 'http://www.w3.org/2000/svg';
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var naturalData = [
-      { label: 'Yürüyüş',   emoji: '🚶', value: 50,  display: '~%50',     ref: 'Chaouloff, 1989' },
-      { label: 'Çikolata',  emoji: '🍫', value: 50,  display: '~%50',     ref: 'Di Chiara & Imperato, 1988' },
-      { label: 'Yemek',     emoji: '🍽️', value: 100, display: '%50–150',  ref: 'Hernandez & Hoebel, 1988' }
-    ];
+      /* ── 1 · Çubuk grafik ── */
+      var NAT = [
+        { l: 'Yürüyüş', ic: 'walk', lo: 50, hi: 50, d: '~%50', ref: 'Chaouloff, 1989' },
+        { l: 'Çikolata', ic: 'snack', lo: 50, hi: 50, d: '~%50', ref: 'Di Chiara & Imperato, 1988' },
+        { l: 'Yemek', ic: 'meal', lo: 50, hi: 150, d: '%50–150', ref: 'Hernandez & Hoebel, 1988' }
+      ];
+      var ART = [
+        { l: 'Nikotin', ic: 'cigarette', lo: 150, hi: 150, d: '~%150', ref: 'Di Chiara & Imperato, 1988', cls: 'dp-amber' },
+        { l: 'Alkol', ic: 'beer', lo: 150, hi: 150, d: '~%150', ref: 'Di Chiara & Imperato, 1988', cls: 'dp-amber' },
+        { l: 'Kokain', ic: 'flask', lo: 400, hi: 1000, d: '%400–1000', ref: 'Volkow et al., 1997 (Nature)', cls: 'dp-red' },
+        { l: 'Amfetamin', ic: 'pill', lo: 1000, hi: 1000, d: '~%1000', ref: 'Di Chiara & Imperato, 1988', cls: 'dp-red' }
+      ];
+      var groups = [
+        { el: $('gNat'), data: NAT, title: 'Doğal Ödüller', cls: 'dp-green', max: { shared: 1200, split: 200 }, ticks: { shared: [0, 300, 600, 900, 1200], split: [0, 50, 100, 150, 200] } },
+        { el: $('gArt'), data: ART, title: 'Yapay Uyaranlar', cls: 'dp-red', max: { shared: 1200, split: 1200 }, ticks: { shared: [0, 300, 600, 900, 1200], split: [0, 300, 600, 900, 1200] } }
+      ];
+      var mode = 'shared', shown = false;
 
-    var artificialData = [
-      { label: 'Nikotin',    emoji: '🚬', value: 150,  display: '~%150',      cls: 'yapay-low',  ref: 'Di Chiara & Imperato, 1988' },
-      { label: 'Alkol',      emoji: '🍺', value: 150,  display: '~%150',      cls: 'yapay-low',  ref: 'Di Chiara & Imperato, 1988' },
-      { label: 'Kokain',     emoji: '💊', value: 700,  display: '%400–1000',  cls: 'yapay-mid',  ref: 'Volkow et al., 1997 (Nature)' },
-      { label: 'Amfetamin',  emoji: '⚡', value: 1000, display: '~%1000',     cls: 'yapay-high', ref: 'Di Chiara & Imperato, 1988' }
-    ];
-
-    function renderBars(data, containerId, maxScale) {
-      var container = document.getElementById(containerId);
-      data.forEach(function(d, i) {
-        var row = document.createElement('div');
-        row.className = 'bar-row';
-        var widthPct = Math.max((d.value / maxScale) * 100, 2);
-        var barClass = d.cls || 'natural';
-
-        row.innerHTML =
-          '<div class="bar-label">' +
-            '<span class="emoji">' + d.emoji + '</span>' +
-            '<span>' + d.label + '</span>' +
-          '</div>' +
-          '<div class="bar-track">' +
-            '<div class="bar-fill ' + barClass + '" data-width="' + widthPct + '" style="transition-delay: ' + (i * 0.12) + 's">' +
-              '<span class="bar-value">' + d.display + '</span>' +
-            '</div>' +
-          '</div>' +
-          '<div class="bar-tooltip">' + d.ref + '</div>';
-
-        container.appendChild(row);
+      function build(g) {
+        g.el.innerHTML =
+          '<div class="dp-ghead"><span class="gv-tag ' + g.cls + '">' + g.title + '</span><span class="dp-scale"></span></div>' +
+          g.data.map(function (r) {
+            return '<div class="dp-row ' + (r.cls || g.cls) + '"><div class="dp-lab"><span class="dp-ic">' + GV.icon(r.ic, 20) + '</span><span><b>' + r.l + '</b><small>' + r.ref + '</small></span></div>' +
+              '<div class="dp-track"><div class="dp-ghost"></div><div class="dp-bar"></div><span class="dp-val">' + r.d + '</span></div></div>';
+          }).join('') +
+          '<div class="dp-axis"><span></span><div class="dp-ticks"></div></div>';
+      }
+      function paint(g) {
+        var m = g.max[mode], t = g.ticks[mode];
+        g.el.querySelector('.dp-scale').textContent = 'Ölçek: %0 – %' + m;
+        g.el.querySelector('.dp-ticks').innerHTML = t.map(function (v) { return '<span>%' + v + '</span>'; }).join('');
+        g.el.querySelectorAll('.dp-track').forEach(function (tr, i) {
+          var r = g.data[i];
+          tr.style.setProperty('--n', t.length - 1);
+          var lo = shown ? r.lo / m * 100 : 0, hi = shown ? r.hi / m * 100 : 0;
+          var bar = tr.querySelector('.dp-bar'), gh = tr.querySelector('.dp-ghost'), val = tr.querySelector('.dp-val');
+          bar.style.width = lo + '%';
+          gh.style.left = lo + '%'; gh.style.width = Math.max(hi - lo, 0) + '%';
+          gh.style.display = r.hi > r.lo ? '' : 'none';
+          var inside = Math.max(hi, lo) > 78;
+          val.classList.toggle('in-bar', inside);
+          val.style.left = inside ? 'calc(' + Math.max(hi, lo) + '% - 10px)' : 'calc(' + Math.max(hi, lo) + '% + 10px)';
+          tr.style.transitionDelay = '';
+          bar.style.transitionDelay = gh.style.transitionDelay = val.style.transitionDelay = (shown ? i * 90 : 0) + 'ms';
+        });
+      }
+      groups.forEach(build);
+      function paintAll() {
+        groups.forEach(paint);
+        $('dpNote').innerHTML = mode === 'shared'
+          ? GV.icon('info', 16) + ' Tüm çubuklar aynı ölçekte — doğal ödüller küçük kalır.'
+          : GV.icon('info', 16) + ' Dikkat: doğal ödüller 5 kat daha büyük bir ölçekte çiziliyor.';
+      }
+      paintAll();
+      document.querySelectorAll('.dp-seg button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          mode = b.dataset.mode;
+          document.querySelectorAll('.dp-seg button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+          paintAll();
+        });
       });
-    }
 
-    renderBars(naturalData, 'barsNatural', 200);
-    renderBars(artificialData, 'barsArtificial', 1200);
+      /* ── eğri yardımcıları ── */
+      function el(n, a, p) { var e = document.createElementNS(NSV, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+      function smooth(x, c, w) { return 1 / (1 + Math.exp(-(x - c) / w)); }
+      function gauss(x, c, w) { var u = (x - c) / w; return Math.exp(-u * u); }
+      function path(fn, x0, x1, step) {
+        var d = '';
+        for (var x = x0; x <= x1; x += step) d += (d ? 'L' : 'M') + x.toFixed(1) + ' ' + fn(x).toFixed(1);
+        return d;
+      }
 
-    /* ═══════════════════════════════════════════
-       IntersectionObserver — Scroll Animations
-       ═══════════════════════════════════════════ */
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (!entry.isIntersecting) return;
-        var id = entry.target.id;
+      /* ── 2 · Tolerans eğrisi ── */
+      var PH = [
+        { n: 1, t: 'İlk Maruz Kalma', d: 'Yapay uyaran güçlü dopamin salgılatır. Beyin aşırı uyarılır.', cls: 'dp-green', c: '#10b981' },
+        { n: 2, t: 'Adaptasyon', d: 'Beyin D2 reseptör sayısını azaltır. Aynı uyaran daha az etki eder.', cls: 'dp-amber', c: '#f59e0b' },
+        { n: 3, t: 'Tolerans', d: 'Daha fazla doz veya süre gerekir. Doğal ödüller artık tatmin etmez.', cls: 'dp-red', c: '#ef4444' },
+        { n: 4, t: 'Çekilme', d: 'Uyaran olmadan dopamin bazal seviyenin altına düşer. Mutsuzluk, huzursuzluk.', cls: 'dp-slate', c: '#64748b' }
+      ];
+      (function () {
+        var svg = $('tolSvg'), W = 880, H = 320, top = 38, bot = 292, pw = W / 4;
+        var defs = el('defs', {}, svg);
+        var lg = el('linearGradient', { id: 'tlg', gradientUnits: 'userSpaceOnUse', x1: 0, y1: 0, x2: W, y2: 0 }, defs);
+        [[0, '#10b981'], [.28, '#f59e0b'], [.62, '#ef4444'], [.86, '#8b5cf6'], [1, '#64748b']].forEach(function (s) { el('stop', { offset: s[0], 'stop-color': s[1] }, lg); });
+        var ag = el('linearGradient', { id: 'tag', x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+        el('stop', { offset: 0, 'stop-color': '#f59e0b', 'stop-opacity': .22 }, ag); el('stop', { offset: 1, 'stop-color': '#f59e0b', 'stop-opacity': 0 }, ag);
 
-        if (id === 'chartNatural' || id === 'chartArtificial') {
-          entry.target.querySelectorAll('.bar-fill').forEach(function(bar) {
-            bar.style.width = bar.dataset.width + '%';
-          });
-          observer.unobserve(entry.target);
-        }
+        var bands = PH.map(function (p, i) {
+          var b = el('rect', { class: 'cv-band', x: i * pw + 2, y: 0, width: pw - 4, height: H, rx: 16 }, svg);
+          var t = el('text', { class: 'cv-ttl', x: i * pw + pw / 2, y: 24, 'text-anchor': 'middle', fill: p.c }, svg);
+          t.textContent = p.n + ' · ' + p.t;
+          return b;
+        });
+        /* bazal çizgisi + yeni (düşen) baz */
+        var BASE = 170;
+        el('line', { class: 'cv-base', x1: 0, x2: W, y1: BASE, y2: BASE }, svg);
+        var bl = el('text', { class: 'cv-txt', x: W - 8, y: BASE - 8, 'text-anchor': 'end' }, svg); bl.textContent = 'Bazal seviye';
+        var baseFn = function (x) { return 170 + 15 * smooth(x, pw, 6) + 27 * smooth(x, 2 * pw, 6) + 32 * smooth(x, 3 * pw, 6); };
+        el('path', { class: 'cv-base2', d: path(baseFn, 0, W, 4) }, svg);
+        var bn = el('text', { class: 'cv-txt', x: W - 8, y: 276, 'text-anchor': 'end', fill: '#ef4444' }, svg); bn.textContent = 'Yeni (düşük) denge'; bn.style.fill = '#ef4444';
+        var spikes = [[70, 125, 15], [292, 108, 14], [384, 88, 13], [500, 72, 12], [570, 62, 12], [632, 50, 11]];
+        var fn = function (x) {
+          var y = baseFn(x);
+          spikes.forEach(function (s) { y -= s[1] * gauss(x, s[0], s[2]); y += s[1] * .22 * gauss(x, s[0] + s[2] * 2.6, s[2] * 1.9); });
+          return y;
+        };
+        var d = path(fn, 0, W, 2);
+        el('path', { d: d + 'L' + W + ' ' + bot + 'L0 ' + bot + 'Z', fill: 'url(#tag)', class: 'cv-area' }, svg);
+        el('path', { d: d, class: 'cv-line', stroke: 'url(#tlg)', pathLength: 1 }, svg);
+        /* eksen etiketleri */
+        var yh = el('text', { class: 'cv-axis-lab', x: 8, y: H - 6 }, svg); yh.textContent = '↑ Dopamin seviyesi';
+        var xt = el('text', { class: 'cv-axis-lab', x: W - 8, y: H - 6, 'text-anchor': 'end' }, svg); xt.textContent = 'Tekrar eden maruz kalma →';
 
-        if (id === 'toleranceGrid') {
-          entry.target.querySelectorAll('.tolerance-card').forEach(function(card) {
-            card.classList.add('visible');
-          });
-          observer.unobserve(entry.target);
-        }
+        /* kartlar */
+        var wrap = $('dpPhases');
+        PH.forEach(function (p, i) {
+          var c = document.createElement('div');
+          c.className = 'dp-phase ' + p.cls; c.tabIndex = 0;
+          c.innerHTML = '<span class="dp-phase-n">' + p.n + '</span><h3>' + p.t + '</h3><p>' + p.d + '</p>';
+          function on(v) { return function () { bands[i].classList.toggle('on', v); c.classList.toggle('on', v); }; }
+          c.addEventListener('mouseenter', on(true)); c.addEventListener('mouseleave', on(false));
+          c.addEventListener('focus', on(true)); c.addEventListener('blur', on(false));
+          wrap.appendChild(c);
+        });
+      })();
 
-        if (id === 'detoxPath') {
-          entry.target.querySelectorAll('.detox-card, .detox-arrow').forEach(function(el) {
-            el.classList.add('visible');
-          });
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
+      /* D2 reseptör noktaları */
+      function receptors(id, off) {
+        var box = $(id), h = '';
+        for (var i = 0; i < 20; i++) h += '<i style="--i:' + i + '" class="' + (off.indexOf(i) > -1 ? 'off' : '') + '">' + GV.icon('receptor', 16) + '</i>';
+        box.innerHTML = h;
+      }
+      receptors('rcpA', []);
+      receptors('rcpB', [4, 11, 16]);
 
-    observer.observe(document.getElementById('chartNatural'));
-    observer.observe(document.getElementById('chartArtificial'));
-    observer.observe(document.getElementById('toleranceGrid'));
-    observer.observe(document.getElementById('detoxPath'));
+      /* ── 3 · Toparlanma eğrisi ── */
+      (function () {
+        var svg = $('recSvg'), W = 880, H = 250, pw = W / 3;
+        var defs = el('defs', {}, svg);
+        var lg = el('linearGradient', { id: 'rlg', gradientUnits: 'userSpaceOnUse', x1: 0, y1: 0, x2: W, y2: 0 }, defs);
+        [[0, '#64748b'], [.3, '#f59e0b'], [.62, '#10b981'], [1, '#34d399']].forEach(function (s) { el('stop', { offset: s[0], 'stop-color': s[1] }, lg); });
+        var ag = el('linearGradient', { id: 'rag', x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+        el('stop', { offset: 0, 'stop-color': '#10b981', 'stop-opacity': .22 }, ag); el('stop', { offset: 1, 'stop-color': '#10b981', 'stop-opacity': 0 }, ag);
+        ['Fark Et', '30 Gün Kuralı', 'Doğal Kaynaklara Dön'].forEach(function (t, i) {
+          el('rect', { class: 'cv-band', x: i * pw + 2, y: 0, width: pw - 4, height: H, rx: 16 }, svg);
+          var tx = el('text', { class: 'cv-ttl', x: i * pw + pw / 2, y: 24, 'text-anchor': 'middle', fill: ['#f59e0b', '#10b981', '#34d399'][i] }, svg); tx.textContent = (i + 1) + ' · ' + t;
+        });
+        var BASE = 110;
+        el('line', { class: 'cv-base', x1: 0, x2: W, y1: BASE, y2: BASE }, svg);
+        var bl = el('text', { class: 'cv-txt', x: W - 8, y: BASE - 8, 'text-anchor': 'end' }, svg); bl.textContent = 'Bazal seviye';
+        var fn = function (x) {
+          var y = 208 - 98 * smooth(x, 520, 70);
+          y += 9 * Math.sin(x / 26) * smooth(x, 640, 60) * 0.0; /* düz */
+          y -= 8 * gauss(x, 700, 14) + 6 * gauss(x, 790, 12) + 5 * gauss(x, 850, 10);
+          return y + 5 * Math.sin(x / 40) * (1 - smooth(x, 400, 80));
+        };
+        var d = path(fn, 0, W, 2);
+        el('path', { d: d + 'L' + W + ' ' + (H - 20) + 'L0 ' + (H - 20) + 'Z', fill: 'url(#rag)', class: 'cv-area' }, svg);
+        el('path', { d: d, class: 'cv-line', stroke: 'url(#rlg)', pathLength: 1 }, svg);
+        var x0 = el('text', { class: 'cv-axis-lab', x: 8, y: H - 4 }, svg); x0.textContent = 'Gün 0';
+        var x1 = el('text', { class: 'cv-axis-lab', x: 2 * pw - 6, y: H - 4, 'text-anchor': 'end' }, svg); x1.textContent = 'Gün 30';
+        var xm = el('line', { class: 'cv-grid', x1: 2 * pw, x2: 2 * pw, y1: 34, y2: H - 18 }, svg);
+        var yl = el('text', { class: 'cv-axis-lab', x: 8, y: 52 }, svg); yl.textContent = '↑ Dopamin dengesi';
+
+        var steps = [
+          { ic: 'search', t: 'Fark Et', cls: 'dp-amber', d: 'Yapay dopamin kaynaklarını belirle: ekran süresi, şekerli yiyecekler, sosyal medya.' },
+          { ic: 'timer', t: '30 Gün Kuralı', cls: 'dp-green', d: 'Dr. Anna Lembke’nin (Stanford) önerisi: en az 30 gün yapay uyarandan uzak dur. Bu süre reseptör dengelemesi için minimum.' },
+          { ic: 'leaf', t: 'Doğal Kaynaklara Dön', cls: 'dp-green', d: 'Egzersiz (%50-75 dopamin artışı), doğa yürüyüşü, sosyal bağ, ibadet — sürdürülebilir ödül kaynakları.' }
+        ];
+        var wrap = $('dpSteps');
+        steps.forEach(function (s, i) {
+          var c = document.createElement('div');
+          c.className = 'dp-step ' + s.cls + ' gv-reveal';
+          c.innerHTML = '<div class="dp-step-card"><div class="dp-step-ic">' + GV.icon(s.ic, 30) + '</div><h3>' + s.t + '</h3><p>' + s.d + '</p></div>' +
+            (i < steps.length - 1 ? '<span class="dp-step-arrow">' + GV.icon('arrow-right', 14) + '</span>' : '');
+          wrap.appendChild(c);
+        });
+        GV.reveal();
+      })();
+
+      /* ── görünür olunca canlandır ── */
+      function onView(node, fn) {
+        if (reduce || !('IntersectionObserver' in window)) { fn(); return; }
+        var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { fn(); io.disconnect(); } }); }, { threshold: .25 });
+        io.observe(node);
+      }
+      onView($('dpChart'), function () { shown = true; paintAll(); });
+      onView($('cvTol'), function () { $('cvTol').classList.add('in'); });
+      onView($('cvRec'), function () { $('cvRec').classList.add('in'); });
+      onView($('rcpA'), function () { $('rcpA').classList.add('in'); $('rcpB').classList.add('in'); });
+      if (reduce) { $('cvTol').classList.add('in'); $('cvRec').classList.add('in'); $('rcpA').classList.add('in'); $('rcpB').classList.add('in'); }
+    })();
   </script>
 </body>
 </html>

@@ -1,741 +1,328 @@
 <!DOCTYPE html>
-<html lang="tr" class="dark">
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ŞŞG Üçgeni — NöroTerbiye</title>
-<meta name="description" content="Şehvet, Şöhret, Gadab — üç temel nefs tuzağının interaktif modeli. Karakter gelişiminde dikkat edilmesi gereken dürtüleri keşfedin.">
-<meta property="og:title" content="ŞŞG Üçgeni — NöroTerbiye">
-<meta property="og:description" content="Şehvet, Şöhret, Gadab — 3 temel dürtünün interaktif haritası.">
-<meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/lib/design-system/tokens.css">
-<link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
-<script src="/lib/design-system/theme.js"></script>
-<style>
-/* ══════════════════════════════════════════
-   ŞŞG Üçgeni — Premium Rewrite
-   ══════════════════════════════════════════ */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/lib/error-logger.js"></script>
+  <title>ŞŞG Üçgeni — NöroTerbiye</title>
+  <meta name="description" content="Şehvet, Şöhret, Gadab — üç temel nefs tuzağının interaktif modeli. Karakter gelişiminde dikkat edilmesi gereken dürtüleri keşfedin.">
+  <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/ssg-ucgeni/">
+  <meta property="og:title" content="ŞŞG Üçgeni — NöroTerbiye">
+  <meta property="og:description" content="Şehvet, Şöhret, Gadab — 3 temel dürtünün interaktif haritası.">
+  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <link rel="stylesheet" href="/noroterbiye/css/gorseller.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .gv-page { --gv-accent: #a855f7; --gv-grad: linear-gradient(120deg,#fbbf24 0%,#c084fc 50%,#f87171 100%); }
 
-*,*::before,*::after{box-sizing:border-box}
+    .d-sehvet { --c: #f59e0b; --ct: #f59e0b; }
+    .d-sohret { --c: #a855f7; --ct: #c084fc; }
+    .d-gadab  { --c: #ef4444; --ct: #f87171; }
+    html.light .d-sehvet { --ct: #b45309; }
+    html.light .d-sohret { --ct: #7e22ce; }
+    html.light .d-gadab  { --ct: #b91c1c; }
 
-.ssg-page{
-  min-height:100vh;
-  padding:60px 20px 0;
-  background:
-    radial-gradient(ellipse at 30% 15%, rgba(245,158,11,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 15%, rgba(239,68,68,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 85%, rgba(168,85,247,0.06) 0%, transparent 50%);
-}
+    .ss-main { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .ss-canvas { padding: 22px 18px 16px; }
+    .ss-svg { display: block; width: 100%; max-width: 560px; height: auto; margin: 0 auto; overflow: visible; }
 
-/* ── Hero Header ── */
-.ssg-hero{
-  text-align:center;
-  max-width:680px;
-  margin:0 auto 48px;
-}
-.ssg-hero h1{
-  font-size:clamp(2rem,5vw,3rem);
-  font-weight:800;
-  margin:0 0 6px;
-  background:linear-gradient(135deg,#f59e0b 0%,#a855f7 50%,#ef4444 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  letter-spacing:-0.5px;
-}
-.ssg-hero .tag{
-  display:inline-block;
-  font-size:0.7rem;
-  font-weight:600;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.35);
-  margin-bottom:14px;
-  border:1px solid rgba(255,255,255,0.08);
-  padding:4px 14px;
-  border-radius:20px;
-  background:rgba(255,255,255,0.03);
-}
-.ssg-hero p{
-  font-size:1rem;
-  color:rgba(255,255,255,0.5);
-  line-height:1.65;
-  margin:0;
-}
+    /* SVG içi */
+    .ss-svg { --tri-line: rgba(255,255,255,.14); --node-bg: #14141f; --node-ink: #ececf6; --neuro-ink: #8d8da8; --nefs-ink: rgba(255,255,255,.88); --orb-a: rgba(255,255,255,.12); --orb-b: rgba(255,255,255,.02); }
+    html.light .ss-svg { --tri-line: rgba(60,50,120,.18); --node-bg: #ffffff; --node-ink: #1a1a2e; --neuro-ink: #6a6a88; --nefs-ink: #2a2150; --orb-a: rgba(120,90,200,.14); --orb-b: rgba(120,90,200,.03); }
+    .tri-fill { opacity: .5; } html.light .tri-fill { opacity: .55; }
+    .tri-edge { fill: none; stroke-width: 2; stroke-linecap: round; opacity: .55; transition: opacity .4s, stroke-width .4s; }
+    .tri-edge.on { opacity: 1; stroke-width: 3; }
+    .tri-flow { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1.5 12; opacity: .85; animation: ssFlow 1.6s linear infinite; }
+    @keyframes ssFlow { to { stroke-dashoffset: -13.5; } }
+    .spoke { fill: none; stroke: var(--tri-line); stroke-width: 1.2; stroke-dasharray: 3 6; }
+    .nefs-ring { fill: none; stroke: var(--tri-line); stroke-width: 1.2; stroke-dasharray: 2 7; transform-origin: 280px 328px; animation: ssSpin 40s linear infinite; }
+    .nefs-ring.r2 { animation-duration: 60s; animation-direction: reverse; stroke-dasharray: 1 11; }
+    @keyframes ssSpin { to { transform: rotate(360deg); } }
+    .nefs-txt { font: 800 15px var(--font-sans); letter-spacing: .32em; text-anchor: middle; fill: var(--nefs-ink); }
+    .nefs-sub { font: 600 9px var(--font-sans); letter-spacing: .18em; text-anchor: middle; fill: var(--neuro-ink); text-transform: uppercase; }
 
-/* ── Main Layout ── */
-.ssg-main{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:40px;
-  max-width:1100px;
-  margin:0 auto 64px;
-  align-items:start;
-}
+    .vx { cursor: pointer; outline: none; }
+    .vx-halo { fill: var(--c); opacity: .0; transform-box: fill-box; transform-origin: center; }
+    .vx.on .vx-halo { animation: vxHalo 2.4s ease-out infinite; }
+    @keyframes vxHalo { 0% { opacity: .38; transform: scale(.7); } 100% { opacity: 0; transform: scale(1.7); } }
+    .vx-ring { fill: var(--node-bg); stroke: var(--c); stroke-width: 2.2; transition: all .35s; }
+    .vx-ring2 { fill: none; stroke: var(--c); stroke-width: 1; stroke-opacity: .35; transition: all .35s; }
+    .vx-g { transition: transform .35s cubic-bezier(.3,1.5,.5,1); transform-box: fill-box; transform-origin: center; }
+    .vx:hover .vx-g, .vx.on .vx-g { transform: scale(1.12); }
+    .vx.on .vx-ring { fill: color-mix(in srgb, var(--c) 18%, var(--node-bg)); stroke-width: 3; filter: drop-shadow(0 0 14px var(--c)); }
+    .vx.on .vx-ring2 { stroke-opacity: .7; }
+    .vx-ic { color: var(--c); }
+    .vx-name { font: 800 15px var(--font-sans); letter-spacing: .16em; text-anchor: middle; fill: var(--ct); }
+    .vx-neuro { font: 600 11.5px var(--font-sans); text-anchor: middle; fill: var(--neuro-ink); }
+    .vx:focus-visible .vx-ring { stroke: var(--gv-ink); }
 
-/* ── Left: Triangle Canvas ── */
-.tri-canvas{
-  position:relative;
-  width:100%;
-  aspect-ratio:1/1;
-  max-width:540px;
-  margin:0 auto;
-}
-.tri-canvas svg{
-  width:100%;
-  height:100%;
-  overflow:visible;
-}
+    /* ── Panel ── */
+    .ss-panel { position: sticky; top: 84px; padding: 28px 26px 26px; min-height: 480px; overflow: hidden; --c: #f59e0b; --ct: #f59e0b; }
+    .ss-panel::after { content: ''; position: absolute; inset: auto -20% -45% -20%; height: 75%; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 24%, transparent), transparent); pointer-events: none; opacity: var(--gv-glow); transition: background .5s; }
+    .ss-p { position: relative; z-index: 1; animation: ssIn .5s cubic-bezier(.2,.7,.2,1); }
+    @keyframes ssIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .ss-p-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .ss-p-ic { width: 58px; height: 58px; border-radius: 18px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 15%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); box-shadow: 0 10px 30px -12px var(--c); flex-shrink: 0; }
+    .ss-p h2 { margin: 0; font-size: 1.55rem; font-weight: 800; letter-spacing: -.02em; color: var(--ct); line-height: 1.1; }
+    .ss-p-sub { font-size: .82rem; color: var(--gv-ink-3); margin-top: 3px; }
+    .ss-neuro { display: inline-flex; align-items: center; gap: 8px; padding: 6px 13px; border-radius: 100px; font-size: .78rem; font-weight: 700; color: var(--gv-ink); background: var(--gv-card-2); border: 1px solid var(--gv-line); }
+    .ss-neuro i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+    .ss-neuro small { color: var(--gv-ink-3); font-weight: 600; }
+    .ss-desc { margin: 16px 0 20px; font-size: .94rem; line-height: 1.75; color: var(--gv-ink-2); }
+    .ss-traps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .ss-trap { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 6px 10px; border-radius: 14px; background: var(--gv-card-2); border: 1px solid var(--gv-line); text-align: center; transition: all .25s; }
+    .ss-trap:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 55%, transparent); }
+    .ss-trap .gv-ic { color: var(--c); }
+    .ss-trap span { font-size: .76rem; font-weight: 600; color: var(--gv-ink-2); line-height: 1.2; }
+    .ss-virtue { margin-top: 20px; padding: 16px 18px; border-radius: 16px; background: color-mix(in srgb, var(--c) 9%, transparent); border: 1px solid color-mix(in srgb, var(--c) 24%, transparent); }
+    .ss-virtue-row { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1rem; color: var(--gv-ink); margin-bottom: 6px; }
+    .ss-virtue-row .gv-ic { color: var(--c); }
+    .ss-virtue-row s { text-decoration: none; color: var(--gv-ink-3); font-weight: 700; }
+    .ss-virtue-row em { font-style: normal; color: var(--ct); }
+    .ss-virtue p { margin: 0; font-size: .86rem; line-height: 1.65; color: var(--gv-ink-2); }
+    .ss-switch { display: flex; gap: 6px; margin-bottom: 18px; }
+    .ss-switch .gv-chip { flex: 1; justify-content: center; }
 
-/* Breathing */
-@keyframes breathe{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.018)}
-}
-.tri-canvas svg{
-  animation:breathe 7s ease-in-out infinite;
-}
+    /* ── Tuzak haritası ── */
+    .ss-filters { display: flex; justify-content: center; margin-bottom: 22px; }
+    .ss-map { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .ss-tile { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 22px 8px 16px; font: inherit; color: var(--gv-ink); text-align: center; cursor: pointer; background: var(--gv-card); border: 1px solid var(--gv-line); border-radius: 20px; transition: all .3s; }
+    .ss-tile::before { content: ''; position: absolute; top: 10px; right: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); opacity: .85; }
+    .ss-tile:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--c) 60%, transparent); box-shadow: 0 16px 34px -16px var(--c); }
+    .ss-tile.flash { animation: ssFlash 1s ease; }
+    @keyframes ssFlash { 0%,100% { box-shadow: none; } 30% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 60%, transparent); } }
+    .ss-tile-ic { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: var(--c); background: color-mix(in srgb, var(--c) 13%, transparent); border: 1px solid color-mix(in srgb, var(--c) 26%, transparent); }
+    .ss-tile b { font-size: .82rem; font-weight: 700; line-height: 1.25; }
+    .ss-tile.hide { display: none; }
 
-/* Vertex interactivity */
-.vtx{cursor:pointer}
-.vtx:hover .vtx-outer{opacity:1;r:48}
-.vtx:hover .vtx-inner{r:34}
-.vtx .vtx-outer,.vtx .vtx-inner{transition:all 0.35s ease}
-.vtx.active .vtx-outer{opacity:1;r:52}
-.vtx.active .vtx-inner{r:36}
-
-/* Particle glow */
-@keyframes particlePulse{
-  0%,100%{opacity:0.4;r:3}
-  50%{opacity:1;r:5}
-}
-.edge-particle{animation:particlePulse 2s ease-in-out infinite}
-
-/* Edge glow line */
-.edge-glow{
-  stroke-width:3;
-  opacity:0.12;
-  filter:blur(4px);
-}
-
-/* Vertex label outside triangle */
-.vtx-label{
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  text-anchor:middle;
-  text-transform:uppercase;
-}
-.vtx-neuro{
-  font-size:10px;
-  text-anchor:middle;
-  fill:rgba(255,255,255,0.35);
-  font-style:italic;
-}
-.nefs-txt{
-  font-size:22px;
-  font-weight:800;
-  fill:rgba(255,255,255,0.08);
-  text-anchor:middle;
-  letter-spacing:8px;
-  text-transform:uppercase;
-}
-
-/* Radial glows behind vertices */
-.vtx-bg-glow{
-  opacity:0.35;
-  transition:opacity 0.5s;
-}
-.vtx.active .vtx-bg-glow{opacity:0.7}
-
-/* ── Right: Info Panel ── */
-.info-side{
-  position:sticky;
-  top:80px;
-}
-
-.info-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:20px;
-  padding:36px 32px 32px;
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  min-height:380px;
-  transition:border-color 0.5s;
-  position:relative;
-  overflow:hidden;
-}
-.info-card::before{
-  content:'';
-  position:absolute;
-  top:0;left:0;right:0;
-  height:3px;
-  background:linear-gradient(90deg,transparent,var(--card-accent,rgba(255,255,255,0.1)),transparent);
-  transition:background 0.5s;
-}
-
-/* Default state */
-.info-default{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100%;
-  min-height:340px;
-  text-align:center;
-  gap:16px;
-}
-.info-default .prompt-icon{
-  font-size:2.8rem;
-  opacity:0.25;
-}
-.info-default .prompt-text{
-  font-size:1.05rem;
-  color:rgba(255,255,255,0.3);
-  font-weight:500;
-}
-.info-default .prompt-sub{
-  font-size:0.8rem;
-  color:rgba(255,255,255,0.15);
-}
-
-/* Active info content */
-.info-content{
-  display:none;
-  opacity:0;
-  transform:translateY(12px);
-  transition:opacity 0.4s, transform 0.4s;
-}
-.info-content.visible{
-  display:block;
-  opacity:1;
-  transform:translateY(0);
-}
-
-.info-head{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-bottom:20px;
-}
-.info-icon-wrap{
-  width:56px;height:56px;
-  border-radius:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:1.8rem;
-  flex-shrink:0;
-}
-.info-title{
-  font-size:1.5rem;
-  font-weight:700;
-  margin:0 0 2px;
-}
-.info-subtitle{
-  font-size:0.78rem;
-  font-weight:500;
-  opacity:0.5;
-}
-.neuro-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:5px 14px;
-  border-radius:20px;
-  font-size:0.75rem;
-  font-weight:600;
-  margin-bottom:18px;
-  border:1px solid rgba(255,255,255,0.08);
-  background:rgba(255,255,255,0.04);
-}
-.neuro-badge .dot{
-  width:7px;height:7px;
-  border-radius:50%;
-}
-.info-desc{
-  font-size:0.9rem;
-  line-height:1.7;
-  color:rgba(255,255,255,0.6);
-  margin-bottom:24px;
-}
-.trap-section-title{
-  font-size:0.7rem;
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  color:rgba(255,255,255,0.3);
-  margin-bottom:12px;
-}
-.trap-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
-.trap-card{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 14px;
-  border-radius:12px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
-  transition:all 0.25s;
-  cursor:default;
-}
-.trap-card:hover{
-  background:rgba(255,255,255,0.06);
-  transform:translateX(4px);
-}
-.trap-card .tc-icon{font-size:1.2rem;flex-shrink:0}
-.trap-card .tc-label{font-size:0.82rem;color:rgba(255,255,255,0.65);font-weight:500}
-
-/* ── Bottom: Tuzak Haritası ── */
-.traps-map{
-  max-width:1100px;
-  margin:0 auto 80px;
-  padding:0 20px;
-}
-.traps-map-header{
-  text-align:center;
-  margin-bottom:28px;
-}
-.traps-map-header h2{
-  font-size:1.15rem;
-  font-weight:700;
-  color:rgba(255,255,255,0.55);
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  margin:0 0 6px;
-}
-.traps-map-header p{
-  font-size:0.82rem;
-  color:rgba(255,255,255,0.25);
-  margin:0;
-}
-
-.trap-map-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-
-.trap-map-item{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  padding:18px 12px 14px;
-  border-radius:16px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.06);
-  cursor:pointer;
-  transition:all 0.3s;
-  position:relative;
-  text-align:center;
-}
-.trap-map-item:hover{
-  transform:translateY(-4px);
-  border-color:var(--item-color,rgba(255,255,255,0.12));
-  box-shadow:0 8px 32px var(--item-glow,rgba(255,255,255,0.05));
-}
-.trap-map-item .tmi-emoji{font-size:1.8rem}
-.trap-map-item .tmi-label{
-  font-size:0.78rem;
-  color:rgba(255,255,255,0.6);
-  font-weight:500;
-}
-.trap-map-item .tmi-dot{
-  width:8px;height:8px;
-  border-radius:50%;
-  position:absolute;
-  top:10px;right:10px;
-  opacity:0.6;
-}
-
-/* ── Responsive ── */
-@media(max-width:840px){
-  .ssg-main{
-    grid-template-columns:1fr;
-    gap:32px;
-  }
-  .tri-canvas{max-width:420px}
-  .info-side{position:static}
-  .info-card{min-height:auto}
-}
-@media(max-width:600px){
-  .ssg-page{padding:50px 12px 0}
-  .ssg-hero{margin-bottom:32px}
-  .ssg-hero h1{font-size:1.8rem}
-  .trap-map-grid{grid-template-columns:repeat(3,1fr);gap:8px}
-  .trap-map-item{padding:14px 8px 10px}
-  .trap-map-item .tmi-emoji{font-size:1.4rem}
-  .info-card{padding:24px 20px 20px}
-  .trap-grid{grid-template-columns:1fr}
-  .vtx-label{font-size:11px}
-  .vtx-neuro{font-size:8.5px}
-}
-@media(max-width:400px){
-  .trap-map-grid{grid-template-columns:repeat(2,1fr)}
-}
-</style>
-  <!-- Vercel Analytics + Speed Insights -->
+    @media (max-width: 960px) {
+      .ss-main { grid-template-columns: 1fr; }
+      .ss-panel { position: static; min-height: 0; }
+      .ss-map { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .ss-traps { grid-template-columns: repeat(2, 1fr); }
+      .ss-map { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .ss-canvas { padding: 14px 6px 8px; }
+    }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-<script src="/nav.js"></script>
+  <script src="/nav.js"></script>
 
-<div class="ssg-page">
+  <main class="gv-page" id="main-content">
+    <header class="gv-hero">
+      <span class="gv-eyebrow"><span data-gv-icon="triangle" data-size="16"></span> Görsel Keşif · Nöroterbiye Modeli</span>
+      <h1 class="gv-title">ŞŞG Üçgeni</h1>
+      <p class="gv-lead">İnsan davranışını şekillendiren üç temel dürtü — <b>Şehvet</b>, <b>Şöhret</b> ve <b>Gadab</b>. Her biri farklı bir nörotransmitter tarafından yönetilir ve modern dünyada sürekli tetiklenir.</p>
+    </header>
 
-  <!-- ── Hero ── -->
-  <header class="ssg-hero">
-    <div class="tag">Nöroterbiye Modeli</div>
-    <h1>ŞŞG Üçgeni</h1>
-    <p>İnsan davranışını şekillendiren üç temel dürtü &mdash; Şehvet, Şöhret ve Gadab. Her biri farklı bir nörotransmitter tarafından yönetilir ve modern dünyada sürekli tetiklenir.</p>
-  </header>
+    <section class="ss-main" aria-label="ŞŞG Üçgeni">
+      <div class="gv-card ss-canvas">
+        <svg class="ss-svg" id="ssSvg" viewBox="0 0 560 548" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="ŞŞG Üçgeni: Şehvet (dopamin), Şöhret (serotonin) ve Gadab (kortizol) dürtülerini üçgen modelle gösteren interaktif diyagram">
+          <defs>
+            <radialGradient id="gS" gradientUnits="userSpaceOnUse" cx="280" cy="120" r="270"><stop offset="0" stop-color="#f59e0b" stop-opacity=".9"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+            <radialGradient id="gP" gradientUnits="userSpaceOnUse" cx="96" cy="440" r="270"><stop offset="0" stop-color="#a855f7" stop-opacity=".9"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+            <radialGradient id="gG" gradientUnits="userSpaceOnUse" cx="464" cy="440" r="270"><stop offset="0" stop-color="#ef4444" stop-opacity=".9"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient>
+            <linearGradient id="eSP" gradientUnits="userSpaceOnUse" x1="280" y1="120" x2="96" y2="440"><stop offset="0" stop-color="#f59e0b"/><stop offset="1" stop-color="#a855f7"/></linearGradient>
+            <linearGradient id="ePG" gradientUnits="userSpaceOnUse" x1="96" y1="440" x2="464" y2="440"><stop offset="0" stop-color="#a855f7"/><stop offset="1" stop-color="#ef4444"/></linearGradient>
+            <linearGradient id="eGS" gradientUnits="userSpaceOnUse" x1="464" y1="440" x2="280" y2="120"><stop offset="0" stop-color="#ef4444"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+            <radialGradient id="gOrb" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="var(--orb-a)"/><stop offset="1" stop-color="var(--orb-b)"/></radialGradient>
+            <clipPath id="triClip"><path d="M280 120L464 440H96z"/></clipPath>
+          </defs>
 
-  <!-- ── Main: Triangle + Info ── -->
-  <section class="ssg-main">
+          <!-- üçgen yüzeyi: üç rengin karışımı -->
+          <g clip-path="url(#triClip)" class="tri-fill">
+            <rect x="0" y="0" width="560" height="548" fill="url(#gS)"/>
+            <rect x="0" y="0" width="560" height="548" fill="url(#gP)"/>
+            <rect x="0" y="0" width="560" height="548" fill="url(#gG)"/>
+          </g>
 
-    <!-- LEFT: Triangle -->
-    <div class="tri-canvas">
-      <svg viewBox="0 0 500 500" id="triSvg" role="img" aria-label="ŞŞG Üçgeni: Şehvet (dopamin), Şöhret (serotonin) ve Gadab (kortizol) dürtülerini üçgen modelle gösteren interaktif diyagram">
-        <defs>
-          <!-- Radial glows -->
-          <radialGradient id="rgAmber" cx="50%" cy="10%" r="35%">
-            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="rgPurple" cx="15%" cy="90%" r="35%">
-            <stop offset="0%" stop-color="#a855f7" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="rgRed" cx="85%" cy="90%" r="35%">
-            <stop offset="0%" stop-color="#ef4444" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#ef4444" stop-opacity="0"/>
-          </radialGradient>
+          <!-- kenarlar -->
+          <path class="tri-edge" data-e="sohret,sehvet" stroke="url(#eSP)" d="M280 120L96 440"/>
+          <path class="tri-edge" data-e="sohret,gadab" stroke="url(#ePG)" d="M96 440L464 440"/>
+          <path class="tri-edge" data-e="gadab,sehvet" stroke="url(#eGS)" d="M464 440L280 120"/>
+          <path class="tri-flow" stroke="url(#eSP)" d="M280 120L96 440"/>
+          <path class="tri-flow" stroke="url(#ePG)" d="M96 440L464 440" style="animation-delay:-.5s"/>
+          <path class="tri-flow" stroke="url(#eGS)" d="M464 440L280 120" style="animation-delay:-1s"/>
 
-          <!-- Edge gradients -->
-          <linearGradient id="egAP" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f59e0b"/>
-            <stop offset="100%" stop-color="#a855f7"/>
-          </linearGradient>
-          <linearGradient id="egPR" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#a855f7"/>
-            <stop offset="100%" stop-color="#ef4444"/>
-          </linearGradient>
-          <linearGradient id="egRA" x1="100%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stop-color="#ef4444"/>
-            <stop offset="100%" stop-color="#f59e0b"/>
-          </linearGradient>
+          <!-- merkeze çekim -->
+          <path class="spoke" d="M280 120L280 292M96 440L252 346M464 440L308 346"/>
 
-          <!-- Glow filter for active vertex -->
-          <filter id="fGlowA" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="10" result="b"/>
-            <feFlood flood-color="#f59e0b" flood-opacity="0.7"/>
-            <feComposite in2="b" operator="in"/>
-            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="fGlowP" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="10" result="b"/>
-            <feFlood flood-color="#a855f7" flood-opacity="0.7"/>
-            <feComposite in2="b" operator="in"/>
-            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <filter id="fGlowR" x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="10" result="b"/>
-            <feFlood flood-color="#ef4444" flood-opacity="0.7"/>
-            <feComposite in2="b" operator="in"/>
-            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
+          <!-- NEFS çekirdeği -->
+          <g>
+            <circle cx="280" cy="328" r="58" class="nefs-ring"/>
+            <circle cx="280" cy="328" r="46" class="nefs-ring r2"/>
+            <circle cx="280" cy="328" r="34" fill="url(#gOrb)" stroke="var(--tri-line)" stroke-width="1.2"/>
+            <text x="280" y="329" class="nefs-txt">NEFS</text>
+            <text x="280" y="344" class="nefs-sub">merkez</text>
+          </g>
 
-        <!-- Background radial glows -->
-        <circle cx="250" cy="72" r="120" fill="url(#rgAmber)" class="vtx-bg-glow" data-for="sehvet"/>
-        <circle cx="80" cy="430" r="120" fill="url(#rgPurple)" class="vtx-bg-glow" data-for="sohret"/>
-        <circle cx="420" cy="430" r="120" fill="url(#rgRed)" class="vtx-bg-glow" data-for="gadab"/>
-
-        <!-- Triangle fill -->
-        <polygon points="250,72 80,430 420,430" fill="rgba(255,255,255,0.015)" stroke="none"/>
-
-        <!-- Edge glow (blurred thick line) -->
-        <line x1="250" y1="72" x2="80" y2="430" stroke="url(#egAP)" class="edge-glow"/>
-        <line x1="80" y1="430" x2="420" y2="430" stroke="url(#egPR)" class="edge-glow"/>
-        <line x1="420" y1="430" x2="250" y2="72" stroke="url(#egRA)" class="edge-glow"/>
-
-        <!-- Edge solid lines -->
-        <line x1="250" y1="72" x2="80" y2="430" stroke="url(#egAP)" stroke-width="1.2" opacity="0.5"/>
-        <line x1="80" y1="430" x2="420" y2="430" stroke="url(#egPR)" stroke-width="1.2" opacity="0.5"/>
-        <line x1="420" y1="430" x2="250" y2="72" stroke="url(#egRA)" stroke-width="1.2" opacity="0.5"/>
-
-        <!-- Traveling particles on edges -->
-        <circle r="3.5" fill="#f59e0b" class="edge-particle">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M250,72 L80,430" calcMode="linear"/>
-        </circle>
-        <circle r="3.5" fill="#f59e0b" opacity="0.4">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M250,72 L80,430" calcMode="linear" begin="2.5s"/>
-        </circle>
-
-        <circle r="3.5" fill="#a855f7" class="edge-particle">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M80,430 L420,430" calcMode="linear"/>
-        </circle>
-        <circle r="3.5" fill="#a855f7" opacity="0.4">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M80,430 L420,430" calcMode="linear" begin="2.5s"/>
-        </circle>
-
-        <circle r="3.5" fill="#ef4444" class="edge-particle">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M420,430 L250,72" calcMode="linear"/>
-        </circle>
-        <circle r="3.5" fill="#ef4444" opacity="0.4">
-          <animateMotion dur="5s" repeatCount="indefinite" path="M420,430 L250,72" calcMode="linear" begin="2.5s"/>
-        </circle>
-
-        <!-- NEFS center label -->
-        <text x="250" y="320" class="nefs-txt">NEFS</text>
-
-        <!-- ── Vertex: Şehvet (top) ── -->
-        <g class="vtx" data-key="sehvet" id="vSehvet" tabindex="0" role="button" aria-label="Şehvet — Dopamin">
-          <circle cx="250" cy="72" r="44" fill="rgba(245,158,11,0.06)" stroke="#f59e0b" stroke-width="1" opacity="0.4" class="vtx-outer"/>
-          <circle cx="250" cy="72" r="30" fill="rgba(245,158,11,0.12)" stroke="#f59e0b" stroke-width="2" class="vtx-inner"/>
-          <text x="250" y="80" text-anchor="middle" font-size="28" fill="#f59e0b">🔥</text>
-          <text x="250" y="24" class="vtx-label" fill="#f59e0b">ŞEHVET</text>
-          <text x="250" y="38" class="vtx-neuro">Dopamin</text>
-        </g>
-
-        <!-- ── Vertex: Şöhret (bottom-left) ── -->
-        <g class="vtx" data-key="sohret" id="vSohret" tabindex="0" role="button" aria-label="Şöhret — Serotonin">
-          <circle cx="80" cy="430" r="44" fill="rgba(168,85,247,0.06)" stroke="#a855f7" stroke-width="1" opacity="0.4" class="vtx-outer"/>
-          <circle cx="80" cy="430" r="30" fill="rgba(168,85,247,0.12)" stroke="#a855f7" stroke-width="2" class="vtx-inner"/>
-          <text x="80" y="438" text-anchor="middle" font-size="28" fill="#a855f7">👑</text>
-          <text x="80" y="488" class="vtx-label" fill="#a855f7">ŞÖHRET</text>
-          <text x="80" y="500" class="vtx-neuro">Serotonin</text>
-        </g>
-
-        <!-- ── Vertex: Gadab (bottom-right) ── -->
-        <g class="vtx" data-key="gadab" id="vGadab" tabindex="0" role="button" aria-label="Gadab — Kortizol">
-          <circle cx="420" cy="430" r="44" fill="rgba(239,68,68,0.06)" stroke="#ef4444" stroke-width="1" opacity="0.4" class="vtx-outer"/>
-          <circle cx="420" cy="430" r="30" fill="rgba(239,68,68,0.12)" stroke="#ef4444" stroke-width="2" class="vtx-inner"/>
-          <text x="420" y="438" text-anchor="middle" font-size="28" fill="#ef4444">⚡</text>
-          <text x="420" y="488" class="vtx-label" fill="#ef4444">GADAB</text>
-          <text x="420" y="500" class="vtx-neuro">Kortizol</text>
-        </g>
-      </svg>
-      <noscript>
-        <p style="text-align:center;color:rgba(255,255,255,0.5);padding:1rem;">Bu interaktif ŞŞG Üçgeni JavaScript gerektirir. Üçgen modeli; Şehvet (dopamin — haz dürtüsü), Şöhret (serotonin — statü dürtüsü) ve Gadab (kortizol — öfke dürtüsü) olmak üzere üç temel nefs tuzağını göstermektedir.</p>
-      </noscript>
-    </div>
-
-    <!-- RIGHT: Info Panel -->
-    <div class="info-side">
-      <div class="info-card" id="infoCard">
-        <!-- Default prompt -->
-        <div class="info-default" id="infoDefault">
-          <div class="prompt-icon">△</div>
-          <div class="prompt-text">Bir köşeye tıkla</div>
-          <div class="prompt-sub">Üçgenin köşelerine tıklayarak her dürtünün detaylarını keşfet</div>
-        </div>
-
-        <!-- Dynamic content -->
-        <div class="info-content" id="infoContent">
-          <div class="info-head">
-            <div class="info-icon-wrap" id="icIcon"></div>
-            <div>
-              <h3 class="info-title" id="icTitle"></h3>
-              <div class="info-subtitle" id="icSubtitle"></div>
-            </div>
-          </div>
-          <div class="neuro-badge" id="icBadge">
-            <span class="dot" id="icDot"></span>
-            <span id="icNeuro"></span>
-          </div>
-          <p class="info-desc" id="icDesc"></p>
-          <div class="trap-section-title">Modern Tuzaklar</div>
-          <div class="trap-grid" id="icTraps"></div>
-        </div>
+          <!-- köşeler -->
+          <g class="vx d-sehvet" id="vx-sehvet" data-k="sehvet" tabindex="0" role="button" aria-label="Şehvet — Dopamin">
+            <circle class="vx-halo" cx="280" cy="120" r="46"/>
+            <circle cx="280" cy="120" r="56" fill="transparent"/>
+            <g class="vx-g"><circle class="vx-ring2" cx="280" cy="120" r="50"/><circle class="vx-ring" cx="280" cy="120" r="40"/>
+            <svg class="vx-ic" data-gv-icon="flame" x="257" y="97" width="46" height="46"></svg></g>
+            <text class="vx-name" x="280" y="48">ŞEHVET</text><text class="vx-neuro" x="280" y="66">Dopamin</text>
+          </g>
+          <g class="vx d-sohret" id="vx-sohret" data-k="sohret" tabindex="0" role="button" aria-label="Şöhret — Serotonin">
+            <circle class="vx-halo" cx="96" cy="440" r="46"/>
+            <circle cx="96" cy="440" r="56" fill="transparent"/>
+            <g class="vx-g"><circle class="vx-ring2" cx="96" cy="440" r="50"/><circle class="vx-ring" cx="96" cy="440" r="40"/>
+            <svg class="vx-ic" data-gv-icon="crown" x="73" y="417" width="46" height="46"></svg></g>
+            <text class="vx-name" x="96" y="512">ŞÖHRET</text><text class="vx-neuro" x="96" y="530">Serotonin</text>
+          </g>
+          <g class="vx d-gadab" id="vx-gadab" data-k="gadab" tabindex="0" role="button" aria-label="Gadab — Kortizol">
+            <circle class="vx-halo" cx="464" cy="440" r="46"/>
+            <circle cx="464" cy="440" r="56" fill="transparent"/>
+            <g class="vx-g"><circle class="vx-ring2" cx="464" cy="440" r="50"/><circle class="vx-ring" cx="464" cy="440" r="40"/>
+            <svg class="vx-ic" data-gv-icon="bolt" x="441" y="417" width="46" height="46"></svg></g>
+            <text class="vx-name" x="464" y="512">GADAB</text><text class="vx-neuro" x="464" y="530">Kortizol / Adrenalin</text>
+          </g>
+        </svg>
+        <noscript>
+          <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif ŞŞG Üçgeni JavaScript gerektirir. Üçgen modeli; Şehvet (dopamin — haz dürtüsü), Şöhret (serotonin — statü dürtüsü) ve Gadab (kortizol — öfke dürtüsü) olmak üzere üç temel nefs tuzağını göstermektedir.</p>
+        </noscript>
       </div>
-    </div>
-  </section>
 
-  <!-- ── Bottom: Tuzak Haritası ── -->
-  <section class="traps-map">
-    <div class="traps-map-header">
-      <h2>Modern Tuzaklar Haritası</h2>
-      <p>Her tuzağa tıklayarak hangi dürtüyü tetiklediğini gör</p>
-    </div>
-    <div class="trap-map-grid" id="trapMapGrid"></div>
-  </section>
+      <aside class="gv-card ss-panel" id="ssPanel" aria-live="polite" aria-label="Dürtü ayrıntısı"></aside>
+    </section>
 
-</div>
+    <section class="gv-sec gv-reveal" aria-labelledby="mapT">
+      <div class="gv-sec-head">
+        <span class="gv-eyebrow"><span data-gv-icon="layers" data-size="16"></span> Tuzak haritası</span>
+        <h2 id="mapT">Modern Tuzaklar Haritası</h2>
+        <p>Her tuzağa dokunarak hangi dürtüyü tetiklediğini gör.</p>
+      </div>
+      <div class="ss-filters"><div class="gv-chips" id="ssFilters" role="group" aria-label="Dürtüye göre süz"></div></div>
+      <div class="ss-map" id="ssMap"></div>
+    </section>
 
-<script src="/noroterbiye/js/common.js"></script>
-<script>
-NT.renderNav();
-NT.renderFooter();
+    <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
+  </main>
 
-/* ══════════════════════════════════
-   Data
-   ══════════════════════════════════ */
-const V = {
-  sehvet: {
-    icon:'🔥', title:'Şehvet', subtitle:'Haz ve Arzu Dürtüsü',
-    neuro:'Dopamin', color:'#f59e0b', filterId:'fGlowA',
-    desc:'Haz peşinde koşma dürtüsü. Yeme, içme, cinsellik, maddi istek ve her türlü bedensel zevk bu dürtünün kontrolündedir. Beyin bu davranışları dopamin salgılayarak ödüllendirir ve tekrarını ister. Modern dünyada bu dürtü, sonsuz uyaranla karşılaşarak kontrolden çıkmaya son derece müsaittir.',
-    traps:[
-      {e:'🍔',l:'Fast Food'},{e:'🍬',l:'Şeker'},
-      {e:'🎮',l:'Oyunlar'},{e:'🛒',l:'Alışveriş'},
-      {e:'📺',l:'Binge-watch'},{e:'🎰',l:'Kumar'}
-    ]
-  },
-  sohret: {
-    icon:'👑', title:'Şöhret', subtitle:'Statü ve Ego Dürtüsü',
-    neuro:'Serotonin', color:'#a855f7', filterId:'fGlowP',
-    desc:'Görünür olma, beğenilme ve statü kazanma dürtüsü. İnsanın toplum içinde değerli hissetme ihtiyacı bu dürtüyle karşılanır. Serotonin, sosyal hiyerarşide üst sıralarda hissedildiğinde salgılanır. Sosyal medya çağında bu dürtü, dijital onay mekanizmalarıyla sürekli tetiklenmektedir.',
-    traps:[
-      {e:'📱',l:'Sosyal Medya'},{e:'❤️',l:'Beğeni'},
-      {e:'👗',l:'Moda'},{e:'🤳',l:'Selfie'},
-      {e:'🏆',l:'Takipçi'},{e:'💎',l:'Marka'}
-    ]
-  },
-  gadab: {
-    icon:'⚡', title:'Gadab', subtitle:'Öfke ve Savunma Dürtüsü',
-    neuro:'Kortizol / Adrenalin', color:'#ef4444', filterId:'fGlowR',
-    desc:'Öfke, stres, kavga ve rekabet dürtüsü. Tehdit algılandığında savaş-ya-da-kaç tepkisi olarak devreye girer. Kortizol salgılanır, kan basıncı yükselir, mantık devre dışı kalır. Modern dünyada fiziksel tehdit azalmış olsa da bu dürtü, haberlerdeki kışkırtıcı içerikler ve sosyal medya tartışmalarıyla sürekli aktif tutulmaktadır.',
-    traps:[
-      {e:'😤',l:'Tartışma'},{e:'📰',l:'Haberler'},
-      {e:'🏎️',l:'Agresif Rekabet'},{e:'👊',l:'Trolleme'},
-      {e:'🚗',l:'Trafik Öfke'},{e:'😡',l:'Dedikodu'}
-    ]
-  }
-};
+  <script src="/noroterbiye/js/common.js"></script>
+  <script src="/noroterbiye/js/gorseller.js"></script>
+  <script>
+    NT.renderNav();
+    NT.renderFooter();
+    GV.hydrate();
+    GV.reveal();
+    GV.moreNav('ssg-ucgeni');
 
-/* All traps for the bottom map */
-const allTraps = [
-  {e:'🍔',l:'Fast Food',k:'sehvet'},
-  {e:'🍬',l:'Şeker',k:'sehvet'},
-  {e:'🎮',l:'Oyunlar',k:'sehvet'},
-  {e:'🛒',l:'Alışveriş',k:'sehvet'},
-  {e:'📱',l:'Sosyal Medya',k:'sohret'},
-  {e:'❤️',l:'Beğeni',k:'sohret'},
-  {e:'👗',l:'Moda',k:'sohret'},
-  {e:'🤳',l:'Selfie',k:'sohret'},
-  {e:'😤',l:'Tartışma',k:'gadab'},
-  {e:'📰',l:'Haberler',k:'gadab'},
-  {e:'🏎️',l:'Agresif Rekabet',k:'gadab'},
-  {e:'👊',l:'Trolleme',k:'gadab'}
-];
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var D = {
+        sehvet: {
+          icon: 'flame', title: 'Şehvet', sub: 'Haz ve Arzu Dürtüsü', neuro: 'Dopamin', color: '#f59e0b',
+          desc: 'Haz peşinde koşma dürtüsü. Yeme, içme, cinsellik, maddi istek ve her türlü bedensel zevk bu dürtünün kontrolündedir. Beyin bu davranışları dopamin salgılayarak ödüllendirir ve tekrarını ister. Modern dünyada bu dürtü, sonsuz uyaranla karşılaşarak kontrolden çıkmaya son derece müsaittir.',
+          traps: [['burger', 'Fast Food'], ['candy', 'Şeker'], ['gamepad', 'Oyunlar'], ['cart', 'Alışveriş'], ['tv', 'Binge-watch'], ['dice', 'Kumar']],
+          virtue: 'İffet', vtext: 'Arzuyu yok etmek değil, ölçüye oturtmak: kanaat, öz denetim ve “yeter” diyebilme gücü.'
+        },
+        sohret: {
+          icon: 'crown', title: 'Şöhret', sub: 'Statü ve Ego Dürtüsü', neuro: 'Serotonin', color: '#a855f7',
+          desc: 'Görünür olma, beğenilme ve statü kazanma dürtüsü. İnsanın toplum içinde değerli hissetme ihtiyacı bu dürtüyle karşılanır. Serotonin, sosyal hiyerarşide üst sıralarda hissedildiğinde salgılanır. Sosyal medya çağında bu dürtü, dijital onay mekanizmalarıyla sürekli tetiklenmektedir.',
+          traps: [['phone', 'Sosyal Medya'], ['heart', 'Beğeni'], ['hanger', 'Moda'], ['camera', 'Selfie'], ['trophy', 'Takipçi'], ['gem', 'Marka']],
+          virtue: 'Tevazu', vtext: 'Değerini onayda değil niyette aramak: gösterişsiz iyilik, ilgi beklemeden yapılan hizmet.'
+        },
+        gadab: {
+          icon: 'bolt', title: 'Gadab', sub: 'Öfke ve Savunma Dürtüsü', neuro: 'Kortizol', neuro2: 'Adrenalin', color: '#ef4444',
+          desc: 'Öfke, stres, kavga ve rekabet dürtüsü. Tehdit algılandığında savaş-ya-da-kaç tepkisi olarak devreye girer. Kortizol salgılanır, kan basıncı yükselir, mantık devre dışı kalır. Modern dünyada fiziksel tehdit azalmış olsa da bu dürtü, haberlerdeki kışkırtıcı içerikler ve sosyal medya tartışmalarıyla sürekli aktif tutulmaktadır.',
+          traps: [['chat', 'Tartışma'], ['news', 'Haberler'], ['flag', 'Agresif Rekabet'], ['megaphone', 'Trolleme'], ['car', 'Trafik Öfkesi'], ['chats', 'Dedikodu']],
+          virtue: 'Hilm', vtext: 'Öfke anında beklemek: duyguyu yaşayıp onun yönetimine geçmemek, karşılığı adaletle vermek.'
+        }
+      };
+      var KEYS = ['sehvet', 'sohret', 'gadab'];
+      var panel = $('ssPanel'), cur = null, interacted = false, hovering = false;
 
-/* ══════════════════════════════════
-   Render bottom trap map
-   ══════════════════════════════════ */
-const trapGrid = document.getElementById('trapMapGrid');
-allTraps.forEach(t => {
-  const c = V[t.k].color;
-  const el = document.createElement('div');
-  el.className = 'trap-map-item';
-  el.style.setProperty('--item-color', c + '60');
-  el.style.setProperty('--item-glow', c + '18');
-  el.dataset.key = t.k;
-  el.innerHTML = `
-    <span class="tmi-dot" style="background:${c}"></span>
-    <span class="tmi-emoji">${t.e}</span>
-    <span class="tmi-label">${t.l}</span>
-  `;
-  el.addEventListener('click', () => {
-    activateVertex(t.k);
-    document.getElementById('infoCard').scrollIntoView({behavior:'smooth',block:'center'});
-  });
-  trapGrid.appendChild(el);
-});
+      function render(k) {
+        var d = D[k];
+        panel.className = 'gv-card ss-panel d-' + k;
+        panel.innerHTML =
+          '<div class="ss-p">' +
+          '<div class="ss-switch" role="group" aria-label="Dürtü seç">' + KEYS.map(function (x) {
+            return '<button type="button" class="gv-chip d-' + x + '" data-sw="' + x + '" aria-pressed="' + (x === k) + '"><span class="gv-dot"></span>' + D[x].title + '</button>';
+          }).join('') + '</div>' +
+          '<div class="ss-p-head"><span class="ss-p-ic">' + GV.icon(d.icon, 30) + '</span><div><h2>' + d.title + '</h2><div class="ss-p-sub">' + d.sub + '</div></div></div>' +
+          '<span class="ss-neuro"><i></i>' + d.neuro + (d.neuro2 ? ' <small>/ ' + d.neuro2 + '</small>' : '') + '</span>' +
+          '<p class="ss-desc">' + d.desc + '</p>' +
+          '<p class="gv-kicker">Modern tuzaklar</p>' +
+          '<div class="ss-traps">' + d.traps.map(function (t) { return '<div class="ss-trap">' + GV.icon(t[0], 28) + '<span>' + t[1] + '</span></div>'; }).join('') + '</div>' +
+          '<div class="ss-virtue"><div class="ss-virtue-row">' + GV.icon('leaf', 20) + '<span><s>Terbiye yolu:</s> ' + d.title + ' → <em>' + d.virtue + '</em></span></div><p>' + d.vtext + '</p></div>' +
+          '</div>';
+      }
 
-/* ══════════════════════════════════
-   Vertex interaction
-   ══════════════════════════════════ */
-let activeKey = null;
+      function activate(k, user) {
+        if (user) interacted = true;
+        if (cur === k) return;
+        cur = k;
+        KEYS.forEach(function (x) { $('vx-' + x).classList.toggle('on', x === k); });
+        document.querySelectorAll('.tri-edge').forEach(function (e) {
+          e.classList.toggle('on', e.dataset.e.split(',').indexOf(k) > -1);
+        });
+        render(k);
+      }
 
-function activateVertex(key) {
-  const d = V[key];
-  activeKey = key;
+      /* köşe etkileşimi */
+      KEYS.forEach(function (k) {
+        var v = $('vx-' + k);
+        v.addEventListener('click', function () { activate(k, true); });
+        v.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(k, true); } });
+        v.addEventListener('mouseenter', function () { hovering = true; });
+        v.addEventListener('mouseleave', function () { hovering = false; });
+      });
+      panel.addEventListener('click', function (e) { var b = e.target.closest('[data-sw]'); if (b) activate(b.dataset.sw, true); });
 
-  // Clear all active states
-  document.querySelectorAll('.vtx').forEach(g => {
-    g.classList.remove('active');
-    g.removeAttribute('filter');
-  });
+      /* tuzak haritası */
+      var map = $('ssMap'), filters = $('ssFilters');
+      var tiles = [];
+      KEYS.forEach(function (k) {
+        D[k].traps.forEach(function (t) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'ss-tile d-' + k; b.dataset.k = k;
+          b.innerHTML = '<span class="ss-tile-ic">' + GV.icon(t[0], 26) + '</span><b>' + t[1] + '</b>';
+          b.addEventListener('click', function () {
+            activate(k, true);
+            tiles.forEach(function (x) { x.classList.remove('flash'); });
+            void b.offsetWidth; b.classList.add('flash');
+            if (window.innerWidth <= 960) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          map.appendChild(b); tiles.push(b);
+        });
+      });
+      [['all', 'Tümü', '#818cf8']].concat(KEYS.map(function (k) { return [k, D[k].title, D[k].color]; })).forEach(function (f, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'gv-chip'; b.style.setProperty('--c', f[2]);
+        b.setAttribute('aria-pressed', String(i === 0));
+        b.innerHTML = '<span class="gv-dot"></span>' + f[1];
+        b.addEventListener('click', function () {
+          filters.querySelectorAll('.gv-chip').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          tiles.forEach(function (t) { t.classList.toggle('hide', f[0] !== 'all' && t.dataset.k !== f[0]); });
+        });
+        filters.appendChild(b);
+      });
 
-  // Activate selected
-  const vtxEl = document.getElementById('v' + key.charAt(0).toUpperCase() + key.slice(1));
-  if (vtxEl) {
-    vtxEl.classList.add('active');
-    vtxEl.setAttribute('filter', 'url(#' + d.filterId + ')');
-  }
-
-  // Update info card
-  const card = document.getElementById('infoCard');
-  card.style.setProperty('--card-accent', d.color);
-  card.style.borderColor = d.color + '25';
-
-  document.getElementById('infoDefault').style.display = 'none';
-
-  const ic = document.getElementById('infoContent');
-  // Reset for animation
-  ic.classList.remove('visible');
-  void ic.offsetWidth; // reflow
-
-  document.getElementById('icIcon').style.background = d.color + '18';
-  document.getElementById('icIcon').textContent = d.icon;
-  document.getElementById('icTitle').textContent = d.title;
-  document.getElementById('icTitle').style.color = d.color;
-  document.getElementById('icSubtitle').textContent = d.subtitle;
-  document.getElementById('icDot').style.background = d.color;
-  document.getElementById('icNeuro').textContent = d.neuro;
-  document.getElementById('icDesc').textContent = d.desc;
-
-  const trapsEl = document.getElementById('icTraps');
-  trapsEl.innerHTML = d.traps.map(t =>
-    `<div class="trap-card" style="border-color:${d.color}15">
-      <span class="tc-icon">${t.e}</span>
-      <span class="tc-label">${t.l}</span>
-    </div>`
-  ).join('');
-
-  requestAnimationFrame(() => ic.classList.add('visible'));
-}
-
-// Vertex click & keyboard handlers
-document.querySelectorAll('.vtx').forEach(g => {
-  g.addEventListener('click', () => activateVertex(g.dataset.key));
-  g.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      activateVertex(g.dataset.key);
-    }
-  });
-});
-
-/* ══════════════════════════════════
-   Keyboard nav
-   ══════════════════════════════════ */
-const keys = ['sehvet','sohret','gadab'];
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && activeKey) {
-    activeKey = null;
-    document.querySelectorAll('.vtx').forEach(g => {
-      g.classList.remove('active');
-      g.removeAttribute('filter');
-    });
-    document.getElementById('infoDefault').style.display = '';
-    document.getElementById('infoContent').classList.remove('visible');
-    document.getElementById('infoCard').style.borderColor = '';
-    document.getElementById('infoCard').style.setProperty('--card-accent','rgba(255,255,255,0.1)');
-  }
-  if (['1','2','3'].includes(e.key)) {
-    activateVertex(keys[parseInt(e.key)-1]);
-  }
-});
-</script>
+      /* başlangıç + nazik otomatik tur (kullanıcı dokunana kadar) */
+      var h = (location.hash || '').slice(1);
+      activate(D[h] ? h : 'sehvet');
+      var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduce && !D[h]) {
+        var i = 0, t = setInterval(function () {
+          if (interacted) { clearInterval(t); return; }
+          if (hovering || document.hidden) return;
+          i = (i + 1) % KEYS.length; activate(KEYS[i], false);
+        }, 5200);
+      }
+    })();
+  </script>
 </body>
 </html>

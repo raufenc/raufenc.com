@@ -1,9 +1,11 @@
-const CACHE_NAME = 'noroterbiye-v9';
+const CACHE_NAME = 'noroterbiye-v10';
 const STATIC_ASSETS = [
   '/noroterbiye/',
   '/noroterbiye/js/common.js',
   '/noroterbiye/js/test-engine.js',
   '/noroterbiye/css/noroterbiye.css',
+  '/noroterbiye/css/gorseller.css',
+  '/noroterbiye/js/gorseller.js',
   '/lib/design-system/tokens.css',
   '/lib/design-system/theme.js',
   '/nav.js',
