@@ -1,4 +1,4 @@
-import {BASE, pathFor, renderCollections, renderList, renderPoem} from './render.mjs';
+import {BASE, pathFor, renderCollections, renderList, renderPoem, renderIntroduction} from './render.mjs';
 
 let data, current, collection = 'all', filtered = [], query = '', meter = 'all', requestId = 0;
 const $ = s => document.querySelector(s);
@@ -20,19 +20,21 @@ function applyFilters(){
   $('#collections').innerHTML=renderCollections(data,collection);
   $('#collection-select').value=collection;
 }
+function isIndexRoute(){return location.pathname.replace(/\/?$/,'/')===BASE&&!location.hash;}
 function findFromURL(){const match=location.pathname.match(/\/siir\/([^/]+)/);const hash=decodeURIComponent(location.hash.slice(1));return data.poems.find(p=>p.id===(match?.[1]||hash)||p.legacyId===hash)||data.poems[0];}
 function selectPoem(id,{push=true,focus=true}={}){
   const p=data.poems.find(p=>p.id===id);if(!p)return;
   current=p;const nav=filtered.some(x=>x.id===id)?filtered:data.poems;
-  $('#reader').innerHTML=renderPoem(p,data,nav);$('#reader').dataset.poemId=id;$('#reader').scrollTop=0;
+  const showIntroduction=!push&&isIndexRoute();
+  $('#reader').innerHTML=(showIntroduction?renderIntroduction():'')+renderPoem(p,data,nav);$('#reader').dataset.poemId=id;$('#reader').scrollTop=0;
   if(push)history.pushState({poem:id},'',pathFor(p));
-  document.title=`${p.title} · Rauf Enç | Beyit Defteri`;
-  $('link[rel="canonical"]')?.setAttribute('href',`https://raufenc.com${pathFor(p)}`);
-  const description=p.couplets[0].verses.map(v=>v.text).join(' ');
+  document.title=showIntroduction?'Beyit Defteri · Rauf Enç':`${p.title} · Rauf Enç | Beyit Defteri`;
+  $('link[rel="canonical"]')?.setAttribute('href',`https://raufenc.com${showIntroduction?BASE:pathFor(p)}`);
+  const description=showIntroduction?`Rauf Enç’in şiir defteri. ${data.poems.length} şiir ve sürüm; Mektûbât’tan gazeller, bugünün dertleri ve gönle vuran beyitler.`:p.couplets[0].verses.map(v=>v.text).join(' ');
   $('meta[name="description"]')?.setAttribute('content',description);
-  for(const [key,value] of [['og:title',document.title],['og:description',description],['og:url',`https://raufenc.com${pathFor(p)}`],['og:type','article']])document.querySelector(`meta[property="${key}"]`)?.setAttribute('content',value);
+  for(const [key,value] of [['og:title',document.title],['og:description',description],['og:url',`https://raufenc.com${showIntroduction?BASE:pathFor(p)}`],['og:type',showIntroduction?'website':'article']])document.querySelector(`meta[property="${key}"]`)?.setAttribute('content',value);
   const structured=document.querySelector('script[type="application/ld+json"]');
-  if(structured)structured.textContent=JSON.stringify({'@context':'https://schema.org','@type':'CreativeWork',name:p.title,url:`https://raufenc.com${pathFor(p)}`,author:{'@type':'Person',name:'Rauf Enç'},inLanguage:'tr',text:p.couplets.map(c=>c.verses.map(v=>v.text).join('\n')).join('\n\n')});
+  if(structured)structured.textContent=JSON.stringify(showIntroduction?{'@context':'https://schema.org','@type':'CollectionPage',name:'Beyit Defteri',url:`https://raufenc.com${BASE}`,author:{'@type':'Person',name:'Rauf Enç'},inLanguage:'tr'}:{'@context':'https://schema.org','@type':'CreativeWork',name:p.title,url:`https://raufenc.com${pathFor(p)}`,author:{'@type':'Person',name:'Rauf Enç'},inLanguage:'tr',text:p.couplets.map(c=>c.verses.map(v=>v.text).join('\n')).join('\n\n')});
   applyFilters();toggleIndex(false);syncFocusLabel();
   if(focus)$('#siir').focus({preventScroll:true});
 }
@@ -67,7 +69,7 @@ async function load(){
     const incoming=await response.json();if(id!==requestId)return;data=incoming;
     for(const p of data.poems)p.searchText=normalize([p.title,p.subtitle,p.theme,p.letter?`mektup ${p.letter} ${p.letter}. mektup`:'',...p.couplets.flatMap(c=>c.verses.map(v=>v.text)),...p.glossary.map(g=>`${g.term} ${g.definition}`)].join(' '));
     current=findFromURL();filtered=data.poems;
-    if(current.id!==$('#reader').dataset.poemId)selectPoem(current.id,{push:false,focus:false});else applyFilters();
+    if(current.id!==$('#reader').dataset.poemId||Boolean($('.defter-intro'))!==isIndexRoute())selectPoem(current.id,{push:false,focus:false});else applyFilters();
     document.documentElement.dataset.ready='true';
   }catch{notify('Arama yüklenemedi. Şiir bağlantılarıyla okumaya devam edebilirsin.');document.documentElement.dataset.ready='error';}
 }
