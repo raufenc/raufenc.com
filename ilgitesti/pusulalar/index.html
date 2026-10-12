@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#234be6">
+  <meta name="referrer" content="no-referrer">
+  <title>Yörünge Pusulalar</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">İçeriğe geç</a>
+  <header class="site-header">
+    <a class="brand" href="/ilgitesti/" aria-label="Yörünge test ailesi giriş">
+      <span class="compass-mark" aria-hidden="true"></span>
+      <span>Yörünge <strong>Pusulalar</strong></span>
+    </a>
+    <nav aria-label="Ana menü">
+      <a href="/ilgitesti/" class="nav-button">İlgi Testi</a>
+      <a href="/ilgitesti/pusulalar/?pusula=learning" class="nav-button">Öğrenme</a>
+      <a href="/ilgitesti/pusulalar/?pusula=solution" class="nav-button">Çözüm</a>
+      <button type="button" id="nav-home" class="nav-button">Giriş</button>
+      <button type="button" id="nav-method" class="nav-button">Kaynaklar ve yöntem</button>
+      <button type="button" id="nav-admin" class="nav-button">Kurum</button>
+    </nav>
+  </header>
+  <div class="preview-banner no-print" id="preview-banner">Birleşik önizleme · Örnek veriler bu sekmede kalır; farklı cihazda veli erişimi kurum kurulumunda açılır.</div>
+  <div id="notice" class="live-notice" role="status" aria-live="polite" aria-atomic="true"></div>
+  <main id="main" tabindex="-1">
+    <section class="loading card" aria-label="Uygulama açılıyor">
+      <span class="eyebrow">Yörünge Pusulalar</span>
+      <h1>Kendi adımını bul.</h1>
+      <p>Uygulama açılıyor…</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <span>Yörünge Pusulalar</span>
+    <span>Kendini tanı. Bir adım seç. Birlikte ilerle.</span>
+  </footer>
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog">
+      <h2 id="confirm-title">İşlemi tamamlayalım mı?</h2>
+      <p id="confirm-message"></p>
+      <div class="button-row">
+        <button value="cancel" class="button secondary">Vazgeç</button>
+        <button value="ok" class="button danger" id="confirm-ok">Devam et</button>
+      </div>
+    </form>
+  </dialog>
+  <noscript><p class="card">Uygulamayı açmak için JavaScript gerekli. Kurumunuzdan destek isteyin.</p></noscript>
+</body>
+</html>
