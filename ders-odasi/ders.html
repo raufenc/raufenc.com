@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ders Odası</title>
+<meta name="description" content="Slayt, video ve oyunlarla işlenen, her etkileşimi kaydeden 16:9 ders oynatıcısı.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;700;800;900&family=Amiri&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="motor/stil.css">
+</head>
+<body>
+<script src="motor/cekirdek.js"></script>
+<script src="motor/kayit.js"></script>
+<script src="motor/canli.js"></script>
+<script src="motor/oynatici.js"></script>
+<script src="motor/bloklar-temel.js"></script>
+<script src="motor/bloklar-oyun.js"></script>
+<script>
+(function () {
+  var id = (new URLSearchParams(location.search).get('d') || document.documentElement.dataset.ders || 'fikih-2');
+  if (!/^[a-z0-9-]+$/.test(id)) id = 'fikih-2';
+  var s = document.createElement('script');
+  s.src = 'dersler/' + id + '/ders.js';
+  s.onload = function () {
+    if (DO._ders) DO._ders._kok = 'dersler/' + id + '/';
+    document.title = (DO._ders ? DO._ders.ad + ' · ' : '') + 'Ders Odası';
+    DO.Oynatici.baslat();
+  };
+  s.onerror = function () {
+    document.body.innerHTML = '<p style="font:18px sans-serif;padding:40px;color:#fff">“' + id + '” dersi bulunamadı. <a style="color:#e9b949" href="index.html">Ders listesine dön</a></p>';
+  };
+  document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>
