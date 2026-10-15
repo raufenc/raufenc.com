@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ders Odası</title>
+<meta name="description" content="Slayt, video ve oyunlarla işlenen; bire bir veya bire üç canlı derslerde her etkileşimi kaydeden din eğitimi ders sistemi.">
+<link rel="icon" href="/favicon-32x32.png">
+<link rel="canonical" href="https://raufenc.com/ders-odasi/">
+<meta property="og:title" content="Ders Odası">
+<meta property="og:description" content="Slayt, video ve oyunla işlenen; her etkileşimi kaydeden canlı ders sistemi.">
+<meta property="og:image" content="https://raufenc.com/ders-odasi/dersler/fikih-2/slayt/02.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --krem: #f7f0e1; --krem2: #fffaf0; --cizgi: #e7dcc4; --cizgi2: #d8c9a8;
+    --yesil: #4f7a3a; --yesil-acik: #e4eed6; --turuncu: #e8962e; --kirmizi: #c0392b;
+    --lacivert: #22344f; --murekkep: #2e2a24; --soluk: #6f6656; --altin: #e9b949;
+    --golge: 0 10px 30px rgba(70,50,20,.10), 0 2px 6px rgba(70,50,20,.06);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--krem); color: var(--murekkep); font: 600 16px/1.55 'Nunito', system-ui, sans-serif;
+    background-image: repeating-linear-gradient(0deg, transparent 0 39px, rgba(216,201,168,.3) 39px 40px), repeating-linear-gradient(90deg, transparent 0 39px, rgba(216,201,168,.3) 39px 40px); }
+  a { color: inherit; }
+  .kap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 40px 0 24px; }
+  .ust-bag { font-size: 14px; color: var(--soluk); text-decoration: none; }
+  h1 { font: 800 clamp(40px, 7vw, 68px)/1 'Baloo 2', sans-serif; margin: 14px 0 8px; color: var(--lacivert); }
+  .giris { font-size: clamp(17px, 2.2vw, 21px); max-width: 760px; color: var(--soluk); margin: 0; }
+  .ozellik { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .ozellik li { background: var(--krem2); border: 2px solid var(--cizgi); border-radius: 999px; padding: 6px 14px; font-weight: 800; font-size: 14px; }
+  .serit { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; margin: 26px 0 10px; }
+  .kutu { background: var(--krem2); border: 2px solid var(--cizgi); border-radius: 24px; padding: 22px; box-shadow: var(--golge); }
+  .kutu h2 { font: 800 24px 'Baloo 2', sans-serif; margin: 0 0 6px; color: var(--lacivert); }
+  .kutu p { margin: 0 0 12px; color: var(--soluk); }
+  .one-cikan { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; padding: 0; overflow: hidden; }
+  .one-cikan img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 16/9; display: block; }
+  .one-cikan .ic { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .rozet { display: inline-block; background: var(--yesil); color: #fff; font-weight: 900; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+  .rozet.taslak { background: var(--cizgi2); color: var(--murekkep); }
+  .dug { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 999px; padding: 11px 18px; font: 900 15px 'Nunito', sans-serif; text-decoration: none; cursor: pointer; transition: transform .15s; }
+  .dug:hover { transform: translateY(-2px); }
+  .dug.ana { background: var(--yesil); color: #fff; box-shadow: 0 4px 0 #3a5b2a; }
+  .dug.ikincil { background: #fff; border: 2px solid var(--cizgi2); color: var(--murekkep); }
+  .dug.lacivert { background: var(--lacivert); color: #fff; box-shadow: 0 4px 0 #15233a; }
+  .dugmeler { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+  form.katil { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  form.katil label { font-weight: 800; font-size: 14px; display: grid; gap: 4px; }
+  form.katil input, form.katil select { font: 800 17px 'Nunito', sans-serif; padding: 10px 12px; border: 2px solid var(--cizgi2); border-radius: 12px; background: #fff; color: var(--murekkep); width: 100%; }
+  form.katil input[name=oda] { text-transform: uppercase; letter-spacing: .15em; }
+  form.katil .tam { grid-column: 1 / -1; }
+  section.seri { margin: 34px 0; }
+  section.seri h2 { font: 800 30px 'Baloo 2', sans-serif; margin: 0 0 4px; color: var(--lacivert); }
+  section.seri > p { margin: 0 0 14px; color: var(--soluk); }
+  .izgara { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .ders-kart { background: var(--krem2); border: 2px solid var(--cizgi); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--golge); }
+  .ders-kart img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--cizgi); }
+  .ders-kart .ic { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .ders-kart h3 { margin: 0; font: 800 21px/1.15 'Baloo 2', sans-serif; color: var(--lacivert); }
+  .meta { font-size: 13px; color: var(--soluk); font-weight: 800; }
+  .ders-kart .dug { padding: 8px 12px; font-size: 13px; }
+  .nasil { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .nasil div { background: var(--krem2); border: 2px solid var(--cizgi); border-radius: 18px; padding: 16px; }
+  .nasil b { display: block; font: 800 19px 'Baloo 2', sans-serif; color: var(--yesil); }
+  .nasil p { margin: 4px 0 0; font-size: 15px; color: var(--soluk); }
+  footer { padding: 30px 0 50px; color: var(--soluk); font-size: 14px; }
+  @media (max-width: 820px) { .serit, .one-cikan { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { form.katil { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="kap">
+  <header>
+    <a class="ust-bag" href="/">← raufenc.com</a>
+    <h1>Ders Odası</h1>
+    <p class="giris">Slaytların üzerine kurulu, araya video ve oyun giren 16:9 dersler. Bire bir veya bire üç canlı derste Hocamız yönetir, öğrenciler takip eder; her cevap, her dokunuş kaydedilir ve LMS'e yazılır.</p>
+    <ul class="ozellik">
+      <li>16:9 sahne</li><li>Sesli anlatım + altyazı</li><li>Durak sorulu video</li><li>11 oyun türü</li><li>Canlı ders (1+3)</li><li>SCORM 1.2 / 2004 · xAPI</li><li>Öğrenci raporu</li>
+    </ul>
+  </header>
+
+  <div class="serit">
+    <div class="kutu one-cikan" id="oneCikan"></div>
+    <div class="kutu">
+      <h2>Canlı derse katıl</h2>
+      <p>Hocamızın verdiği oda kodunu ve adını yaz.</p>
+      <form class="katil" id="katil">
+        <label>Oda kodu<input name="oda" required maxlength="8" placeholder="ABC12" autocomplete="off"></label>
+        <label>Adın<input name="ad" required maxlength="30" placeholder="Adın"></label>
+        <label class="tam">Ders<select name="d" id="dersSec"></select></label>
+        <button class="dug ana tam" type="submit">Derse katıl →</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="seriler"></div>
+
+  <section class="seri">
+    <h2>Nasıl çalışır?</h2>
+    <div class="nasil">
+      <div><b>1 · Yükle</b><p>Slayt destesi (pptx ya da görseller), varsa video ve seslendirme içe aktarma aracıyla derse dönüşür; slaytlar, anlatım ve altyazı otomatik eşlenir.</p></div>
+      <div><b>2 · Zenginleştir</b><p>Slaytların arasına oyunlar, durak sorulu video, anket ve niyet kartı eklenir. Her ders tek bir ders.js dosyasıdır.</p></div>
+      <div><b>3 · İşle</b><p>Hocamız “Canlı ders başlat” der; öğrencilerin ekranı onu takip eder, cevapları panelde canlı görünür, lazer işaretçiyle gösterir.</p></div>
+      <div><b>4 · Kaydet</b><p>Her etkileşim xAPI ifadesi olarak tutulur; SCORM ile LMS'e, köprüyle platforma gider. Rapor ekranında öğrenci öğrenci görülür.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <a class="dug ikincil" href="rapor.html">Ders raporları</a>
+    <p>Ders Odası, kayıtları önce bu cihazda tutar. Bir LMS'e SCORM paketi olarak yüklendiğinde puan, ilerleme ve bütün cevaplar LMS'e yazılır.</p>
+  </footer>
+</div>
+<script>
+  var DO = window.DO = {};
+  DO.katalogKaydet = function (l) { DO.katalog = l; };
+</script>
+<script src="dersler/katalog.js"></script>
+<script>
+(function () {
+  var katalog = DO.katalog || [];
+  function kac(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function odaKodu() { var h = 'ABCDEFGHJKLMNPRSTUVYZ23456789', s = ''; for (var i = 0; i < 5; i++) s += h[Math.floor(Math.random() * h.length)]; return s; }
+  function meta(d) {
+    var p = [];
+    if (d.slayt) p.push(d.slayt + ' slayt');
+    if (d.video) p.push('video');
+    if (d.oyun) p.push(d.oyun + ' oyun');
+    if (d.sure) p.push('~' + d.sure + ' dk');
+    if (d.yas) p.push(d.yas);
+    return p.join(' · ');
+  }
+  function dugmeler(d) {
+    return '<div class="dugmeler">' +
+      '<a class="dug ana" href="ders.html?d=' + kac(d.id) + '">Kendi başına</a>' +
+      '<a class="dug lacivert canli" data-id="' + kac(d.id) + '" href="#">Canlı ders başlat</a>' +
+      '</div>';
+  }
+  var tam = katalog.filter(function (d) { return d.durum === 'tam'; })[0];
+  if (tam) {
+    document.getElementById('oneCikan').innerHTML =
+      '<img src="' + kac(tam.kapak) + '" alt="">' +
+      '<div class="ic"><span><span class="rozet">Tam ders · örnek</span></span><h2>' + kac(tam.ad) + '</h2><p>' + kac(tam.ozet) + '</p><span class="meta">' + kac(meta(tam)) + '</span>' + dugmeler(tam) + '</div>';
+  }
+  var sec = document.getElementById('dersSec');
+  katalog.forEach(function (d) { var o = document.createElement('option'); o.value = d.id; o.textContent = d.seri + ' — ' + d.ad; sec.appendChild(o); });
+  var gruplar = {};
+  katalog.forEach(function (d) { (gruplar[d.seri] = gruplar[d.seri] || []).push(d); });
+  var aciklama = {
+    'Fıkıh Dersleri': 'Hüküm kartları, taharet ve namaz hazırlığı. Slayt, seslendirme ve videolarla.',
+    'Âdâb-ı Muâşeret': 'Günlük hayatın edebleri: sofra, kapı, konuşma, cami, aile… Slaytlar içe aktarıldı; oyunlar ders ders eklenecek.'
+  };
+  var html = '';
+  Object.keys(gruplar).forEach(function (seri) {
+    html += '<section class="seri"><h2>' + kac(seri) + '</h2><p>' + kac(aciklama[seri] || '') + '</p><div class="izgara">';
+    gruplar[seri].forEach(function (d) {
+      html += '<article class="ders-kart"><img loading="lazy" src="' + kac(d.kapak) + '" alt=""><div class="ic">' +
+        '<span><span class="rozet' + (d.durum === 'tam' ? '' : ' taslak') + '">' + (d.durum === 'tam' ? 'Tam ders' : d.video ? 'Slayt + anlatım' : 'Slayt') + '</span></span>' +
+        '<h3>' + kac(d.ad) + '</h3><span class="meta">' + kac(meta(d)) + '</span>' + dugmeler(d) + '</div></article>';
+    });
+    html += '</div></section>';
+  });
+  document.getElementById('seriler').innerHTML = html;
+
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('.canli');
+    if (!a) return;
+    e.preventDefault();
+    location.href = 'ders.html?d=' + encodeURIComponent(a.dataset.id) + '&rol=ogretmen&oda=' + odaKodu();
+  });
+  var f = document.getElementById('katil');
+  try { f.ad.value = JSON.parse(localStorage.getItem('do:ad') || '""'); } catch (e) { /* yok */ }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var oda = f.oda.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+    var ad = f.ad.value.trim();
+    if (!oda || !ad) return;
+    try { localStorage.setItem('do:ad', JSON.stringify(ad)); } catch (x) { /* yok */ }
+    location.href = 'ders.html?d=' + encodeURIComponent(f.d.value) + '&rol=ogrenci&oda=' + encodeURIComponent(oda);
+  });
+})();
+</script>
+</body>
+</html>
