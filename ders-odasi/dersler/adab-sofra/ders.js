@@ -1,6 +1,6 @@
 /* ÂDÂB-I MUÂŞERET · Bereketli Sofra — tam etkileşimli ders
    Kaynak: Drive "Yeme ve İçme Âdâbı" (20 slayt) ve "Sofra Edebi" (6 slayt) desteleri.
-   Hikâye, hata bulma ve ikon görselleri bu ders için Codex ile üretildi (gorsel/).
+   Hikâye, hata bulma ve ikon görselleri bu ders için GPT Image (Higgsfield) ile üretildi (gorsel/).
    Hadîs-i şerîfler meâlen verilmiş, kaynakları yanlarında yazılmıştır. */
 (function () {
   var I = function (n) { return 'gorsel/ikon-iyi-' + n + '.webp'; };
@@ -15,7 +15,7 @@
     sure: 40,
     kapakGorseli: 'gorsel/kapak.webp',
     basariEsigi: 0.6,
-    kaynak: 'Drive / Yeme ve İçme Âdâbı (20 slayt) + Sofra Edebi (6 slayt); hikâye ve oyun görselleri Codex ile üretildi',
+    kaynak: 'Drive / Yeme ve İçme Âdâbı (20 slayt) + Sofra Edebi (6 slayt); hikâye ve oyun görselleri GPT Image ile üretildi',
     bolumler: [
 
       /* ------------------------------------------------------------ */
@@ -280,11 +280,11 @@
           {
             id: 'hata-bul', tur: 'hataBul', baslik: 'Bu sofrada neler yanlış?', gorsel: 'gorsel/hata-bul.webp',
             hatalar: [
-              { id: 'sol-el', x: 300, y: 430, r: 150, ad: 'Sol elle yemek', aciklama: 'Yemek sağ elle yenir.' },
-              { id: 'yerde-ekmek', x: 800, y: 790, r: 120, ad: 'Yerde kalan ekmek', aciklama: 'Düşen lokma alınır, temizlenir.' },
-              { id: 'dolu-tabak', x: 780, y: 470, r: 140, ad: 'Taşan tabak', aciklama: 'Yiyeceğimiz kadar alırız; israf etmeyiz.' },
-              { id: 'ayakta', x: 1290, y: 380, r: 160, ad: 'Ayakta su içmek ve açık sürahi', aciklama: 'Oturarak, üç yudumda içeriz; kapların üstünü örteriz.' },
-              { id: 'uzanma', x: 1150, y: 230, r: 140, ad: 'Başkasının önünden almak', aciklama: 'Kendi önümüzden yeriz.' }
+              { id: 'telefon', x: 170, y: 370, r: 130, ad: 'Sofrada telefona bakmak', aciklama: 'Sofrada telefon değil, sohbet olur; nimete ve sofradakilere dikkat ederiz.' },
+              { id: 'yerde-ekmek', x: 700, y: 800, r: 105, ad: 'Yerde kalan ekmek', aciklama: 'Düşen lokma alınır, temizlenir ve yenir.' },
+              { id: 'dolu-tabak', x: 750, y: 440, r: 150, ad: 'Taşan tabak', aciklama: 'Yiyeceğimiz kadar alırız; israf etmeyiz.' },
+              { id: 'ayakta', x: 1440, y: 400, r: 170, ad: 'Ayakta su içmek ve açık sürahi', aciklama: 'Oturarak, üç yudumda içeriz; kapların üstünü örteriz.' },
+              { id: 'uzanma', x: 1170, y: 340, r: 130, ad: 'Başkasının önünden almak', aciklama: 'Kendi önümüzden yeriz; uzanıp başkasının önünden almayız.' }
             ],
             not: 'İpucu düğmesi bir bölgeyi parlatır (o hata 5 puan). Öğrenci bulduğu her hatanın doğrusunu sesli söylesin.'
           },
