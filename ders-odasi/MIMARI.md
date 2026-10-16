@@ -105,8 +105,32 @@ etkileşimler, süre ve "kaldığım yerden devam et" doğru çalışıyor.
 Öğrencilerin bütün kayıtları öğretmenin cihazına da gelir; rapor ekranındaki **oda
 görünümü** öğrencileri karşılaştırır ve en çok zorlanılan soruları sıralar.
 
+**Farklı cihazlar arasında canlı ders: Firebase (hazır, ayar bekliyor).**
+`motor/canli.js` Firebase Realtime Database ile çalışır; `ayarlar.js`'e proje ayarı yapıştırılınca
+öğretmen ve öğrenciler ayrı cihazlardan aynı odaya bağlanır. Firebase emülatörüyle, birbirini
+başka yoldan göremeyen ayrı tarayıcı profillerinde denendi: katılım, öğretmeni takip, canlı
+cevaplar, anket dağılımı, söz isteme, video oynat/durdur eşlemesi, lazer işaretçi, öğrenci
+kayıtlarının öğretmene gelmesi ve öğrenci çıkınca listeden düşmesi çalışıyor.
+
+Kurulum (bir kez, ~10 dakika, ücretsiz Spark planı yeter):
+
+1. https://console.firebase.google.com → **Proje ekle** (Analytics gerekmez).
+2. **Build → Realtime Database → Veritabanı oluştur**; konum olarak `europe-west1` seçin,
+   "kilitli modda başlat" deyin.
+3. Aynı sayfada **Kurallar** sekmesine `ders-odasi/firebase-kurallari.json` içeriğini yapıştırıp **Yayınla**.
+4. **Build → Authentication → Başlayın → Sign-in method → Anonim** girişi etkinleştirin.
+5. **Authentication → Ayarlar → Yetkili alan adları**'na `raufenc.com` ekleyin.
+6. **Proje ayarları → Uygulamalarınız → Web (</>)** ile bir web uygulaması ekleyin; çıkan
+   `firebaseConfig` nesnesini `ders-odasi/ayarlar.js` içindeki `firebase:` alanına yapıştırın.
+
+Bu ayarlar gizli değildir (tarayıcıya zaten gider); erişimi kurallar korur: yalnızca anonim
+giriş yapmış ve oda kodunu bilen okuyabilir, mesajlar sonradan değiştirilemez, 6 saatten eski
+mesajları öğretmen temizler. Görüntü ve ses (görüntülü görüşme) bu sistemin parçası değildir;
+Zoom / Meet / platformun kendi görüşmesi yanında açık tutulur.
+
 **Taşıyıcılar.** Mesajlar şu an üç yoldan gidebilir:
 
+0. **Firebase** — yukarıdaki kurulumla farklı cihazlar arası.
 1. `BroadcastChannel` — aynı tarayıcıdaki sekmeler arasında (deneme için hazır).
 2. **Platform köprüsü** — ders platformun iframe'inde açıkken ana sayfa mesajları alır ve
    kendi gerçek zamanlı kanalıyla (görüntülü görüşme için zaten var olan kanal) diğer
@@ -114,8 +138,7 @@ görünümü** öğrencileri karşılaştırır ve en çok zorlanılan soruları
 3. `WebSocket` — `?ws=wss://…` verilirse doğrudan bir oda sunucusuna. Sunucu, aynı odaya
    gelen mesajı odadaki diğer bağlantılara aynen dağıtan ~30 satırlık bir aktarıcıdır.
 
-Farklı cihazlar arasında gerçek canlı ders için 2. ya da 3. yolun platform tarafında
-bağlanması gerekir; ders tarafı hazırdır.
+Aynı mesaj birden çok taşıyıcıdan gelirse bir kez işlenir; taşıyıcılar birlikte açık olabilir.
 
 ## 5. Platforma gömme
 
@@ -190,7 +213,7 @@ Allahü teâlâ) da burada sabitleniyor. Otomatik altyazılı her slayta "gözde
 
 ## 8. Sıradaki adımlar
 
-1. Platform alan adı → gömme izni; canlı kanalın köprüye bağlanması (ya da WebSocket aktarıcı).
+1. Firebase projesini açıp `ayarlar.js`'e yapıştırmak (farklı cihazlarda canlı ders); platform alan adı belli olunca gömme izni.
 2. Âdâb derslerine oyun eklemek: her deste 5-8 slayt; slayt başına 1 etkileşim + ders sonu
    hız turu ve niyet kartı ile ders başına ~10-15 ekran.
 3. Fıkıh 1, 3, 5, 6'ya FIKIH-2 kalıbında oyunlar (FIKIH-1'in mevcut 5 etkinliği hazır içerik).

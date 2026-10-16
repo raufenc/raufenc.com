@@ -454,9 +454,11 @@
       });
       C.olay.on('isaret', function (m) { lazerGoster(m.veri); });
       C.olay.on('mesaj', function (m) { bildir('Hocamız: ' + m.veri.metin, 'bilgi'); });
+      C.olay.on('baglanti', kilitSerit);
+      C.olay.on('katilim', kilitSerit);
     } else {
       O.kilit = true;
-      ['katilim', 'cevap', 'puan', 'el', 'konum', 'tanit', 'merhaba'].forEach(function (t) { C.olay.on(t, panelYaz); });
+      ['katilim', 'cevap', 'puan', 'el', 'konum', 'tanit', 'merhaba', 'baglanti'].forEach(function (t) { C.olay.on(t, panelYaz); });
       C.olay.on('ifade', function (m) { if (m.veri && m.veri.id) Kayit().disaridanSakla(m.veri); });
       C.olay.on('el', function (m) { if (m.veri.kalkik) { bildir('✋ ' + m.gonderen.ad + ' söz istiyor', 'bilgi'); DO.efekt.tik(); } });
       C.olay.on('cevap', function (m) {
@@ -471,7 +473,9 @@
     var s = O.dom.kilitSerit;
     if (O.rol === 'ogrenci') {
       var ogretmen = DO.Canli.ogretmenVar();
-      s.textContent = !ogretmen ? 'Hocamız bekleniyor… (oda ' + O.oda + ')' : O.kilit ? '🔒 Hocamızı takip ediyorsun' : '🔓 Serbest çalışma';
+      var hata = DO.Canli.baglanti.firebase === 'hata';
+      s.textContent = hata ? '✗ Bağlantı kurulamadı — internetini kontrol et (oda ' + O.oda + ')'
+        : !ogretmen ? 'Hocamız bekleniyor… (oda ' + O.oda + ')' : O.kilit ? '🔒 Hocamızı takip ediyorsun' : '🔓 Serbest çalışma';
       s.className = 'kilit-serit gorunur' + (O.kilit ? ' kilitli' : '');
     } else s.className = 'kilit-serit';
   }
@@ -510,6 +514,14 @@
     p.appendChild(el('div', { class: 'panel-baslik' }, [
       el('span', { text: 'Oda' }), el('b', { class: 'oda-kodu', text: O.oda })
     ]));
+    var b = C.baglanti || {};
+    var bagMetin = b.firebase === 'hazir' ? '● Canlı bağlantı açık — farklı cihazlar katılabilir'
+      : b.firebase === 'baglaniyor' ? '○ Canlı bağlantı kuruluyor…'
+      : b.firebase === 'hata' ? '✗ Firebase bağlantısı kurulamadı — yalnızca bu tarayıcıdaki sekmeler'
+      : b.websocket === 'hazir' ? '● Oda sunucusuna bağlı'
+      : b.platform ? '● Platform köprüsü üzerinden'
+      : '○ Yalnızca bu tarayıcıdaki sekmeler (Firebase ayarı yok)';
+    p.appendChild(el('p', { class: 'panel-baglanti' + (C.uzaktanBagli() ? ' acik' : ''), text: bagMetin }));
     var davetGirdi = el('input', { class: 'davet', readonly: true, value: davet, onclick: function () { this.select(); } });
     p.appendChild(el('div', { class: 'panel-davet' }, [
       davetGirdi,

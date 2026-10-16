@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "do-odalar": {
+      "$oda": {
+        ".read": "auth != null && $oda.length >= 4 && $oda.length <= 12",
+        "mesajlar": {
+          "$m": {
+            ".write": "auth != null && (!data.exists() || (!newData.exists() && data.child('t').val() < now - 21600000))",
+            ".validate": "newData.hasChildren(['m', 't']) && newData.child('m').isString() && newData.child('m').val().length < 30000 && newData.child('t').val() <= now"
+          }
+        },
+        "kisiler": {
+          "$kisi": {
+            ".write": "auth != null",
+            ".validate": "!newData.exists() || (newData.child('m').isString() && newData.child('m').val().length < 2000)"
+          }
+        },
+        "isaret": {
+          ".write": "auth != null",
+          ".validate": "!newData.exists() || (newData.child('m').isString() && newData.child('m').val().length < 2000)"
+        }
+      }
+    }
+  }
+}
