@@ -40,6 +40,7 @@
   .one-cikan .ic { padding: 22px; display: flex; flex-direction: column; gap: 8px; }
   .rozet { display: inline-block; background: var(--yesil); color: #fff; font-weight: 900; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
   .rozet.taslak { background: var(--cizgi2); color: var(--murekkep); }
+  .rozet.oyunlu { background: #e8962e; }
   .dug { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 999px; padding: 11px 18px; font: 900 15px 'Nunito', sans-serif; text-decoration: none; cursor: pointer; transition: transform .15s; }
   .dug:hover { transform: translateY(-2px); }
   .dug.ana { background: var(--yesil); color: #fff; box-shadow: 0 4px 0 #3a5b2a; }
@@ -77,7 +78,7 @@
     <h1>Ders Odası</h1>
     <p class="giris">Slaytların üzerine kurulu, araya video ve oyun giren 16:9 dersler. Bire bir veya bire üç canlı derste Hocamız yönetir, öğrenciler takip eder; her cevap, her dokunuş kaydedilir ve LMS'e yazılır.</p>
     <ul class="ozellik">
-      <li>16:9 sahne</li><li>Sesli anlatım + altyazı</li><li>Durak sorulu video</li><li>11 oyun türü</li><li>Canlı ders (1+3)</li><li>SCORM 1.2 / 2004 · xAPI</li><li>Öğrenci raporu</li>
+      <li>16:9 sahne</li><li>Sesli anlatım + altyazı</li><li>Durak sorulu video</li><li>14 oyun türü</li><li>Canlı ders (1+3)</li><li>SCORM 1.2 / 2004 · xAPI</li><li>Öğrenci raporu</li>
     </ul>
   </header>
 
@@ -137,7 +138,7 @@
       '<a class="dug lacivert canli" data-id="' + kac(d.id) + '" href="#">Canlı ders başlat</a>' +
       '</div>';
   }
-  var tam = katalog.filter(function (d) { return d.durum === 'tam'; })[0];
+  var tam = katalog.filter(function (d) { return d.oneCikan; })[0] || katalog.filter(function (d) { return d.durum === 'tam'; })[0];
   if (tam) {
     document.getElementById('oneCikan').innerHTML =
       '<img src="' + kac(tam.kapak) + '" alt="">' +
@@ -149,14 +150,14 @@
   katalog.forEach(function (d) { (gruplar[d.seri] = gruplar[d.seri] || []).push(d); });
   var aciklama = {
     'Fıkıh Dersleri': 'Hüküm kartları, taharet ve namaz hazırlığı. Slayt, seslendirme ve videolarla.',
-    'Âdâb-ı Muâşeret': 'Günlük hayatın edebleri: sofra, kapı, konuşma, cami, aile… Slaytlar içe aktarıldı; oyunlar ders ders eklenecek.'
+    'Âdâb-ı Muâşeret': 'Günlük hayatın edebleri: sofra, kapı, konuşma, cami, aile… Her derste slaytlar ve konuya göre oyunlar var; “Bereketli Sofra” tam derstir.'
   };
   var html = '';
   Object.keys(gruplar).forEach(function (seri) {
     html += '<section class="seri"><h2>' + kac(seri) + '</h2><p>' + kac(aciklama[seri] || '') + '</p><div class="izgara">';
     gruplar[seri].forEach(function (d) {
       html += '<article class="ders-kart"><img loading="lazy" src="' + kac(d.kapak) + '" alt=""><div class="ic">' +
-        '<span><span class="rozet' + (d.durum === 'tam' ? '' : ' taslak') + '">' + (d.durum === 'tam' ? 'Tam ders' : d.video ? 'Slayt + anlatım' : 'Slayt') + '</span></span>' +
+        '<span><span class="rozet' + (d.durum === 'tam' ? '' : d.durum === 'oyunlu' ? ' oyunlu' : ' taslak') + '">' + (d.durum === 'tam' ? 'Tam ders' : d.durum === 'oyunlu' ? 'Slayt + oyun' : d.video ? 'Slayt + anlatım' : 'Slayt') + '</span></span>' +
         '<h3>' + kac(d.ad) + '</h3><span class="meta">' + kac(meta(d)) + '</span>' + dugmeler(d) + '</div></article>';
     });
     html += '</div></section>';
