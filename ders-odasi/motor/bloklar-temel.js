@@ -131,6 +131,16 @@
         yapraklar += '<path class="kapak-yaprak" style="animation-delay:' + (i * 0.9) + 's" transform="translate(' + (120 + i * 170) + ' ' + (i % 2 ? 120 : 780) + ') rotate(' + (i * 40) + ')" d="M0 0c10-18 30-18 40 0-10 18-30 18-40 0z" fill="#7fb069" opacity=".35"/>';
       }
       kap.innerHTML = '<svg class="kapak-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">' + desen + yapraklar + kartlar + '</svg>';
+      if (b.gorsel) {
+        // Resimli kapak: büyük sahne + üstünde süzülen ışıltılar
+        kap.classList.add('resimli');
+        var isilti = '';
+        for (var j = 0; j < 14; j++) {
+          isilti += '<g class="kapak-isilti" style="animation-delay:' + (j * 0.55).toFixed(2) + 's" transform="translate(' + (80 + (j * 211) % 1440) + ' ' + (90 + (j * 137) % 620) + ')"><path d="M0 -14 L4 -4 14 0 4 4 0 14 -4 4 -14 0 -4 -4z" fill="#fff6c9"/></g>';
+        }
+        kap.innerHTML = '<img class="kapak-resim" src="' + DO.kacis(ctx.yol(b.gorsel)) + '" alt="" draggable="false"><div class="kapak-perde"></div>' +
+          '<svg class="kapak-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">' + isilti + '</svg>';
+      }
       var metin = el('div', { class: 'kapak-metin' }, [
         b.ust ? el('span', { class: 'kapak-ust', text: b.ust }) : null,
         el('h1', { class: 'kapak-baslik', text: b.baslik }),

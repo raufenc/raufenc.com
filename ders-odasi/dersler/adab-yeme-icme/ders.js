@@ -1,12 +1,12 @@
-/* Yeme ve İçme Âdâbı — scripts/ders-odasi/ice-aktar.py ile üretildi (taslak). */
-DO.dersKaydet({
+/* Yeme ve İçme Âdâbı — slaytlar ice-aktar.py ile, oyunlar adab-oyunlar.py ile eklendi. */
+DO.dersKaydet(
+{
  "id": "adab-yeme-icme",
  "ad": "Yeme ve İçme Âdâbı",
  "kisaAd": "Âdâb",
  "seri": "Âdâb-ı Muâşeret",
  "yas": "10-15 yaş",
- "taslak": true,
- "ozet": "20 slayt. Etkinlikler eklenecek.",
+ "ozet": "Yeme ve içme âdâbı, 20 resimli slayt ve resimli doğru-yanlış. Konunun tam dersi: Bereketli Sofra.",
  "kapakGorseli": "slayt/01.webp",
  "basariEsigi": 0.6,
  "bolumler": [
@@ -28,128 +28,200 @@ DO.dersKaydet({
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Sununun amacı: öğrencinin temizlik, mahremiyet ve çevreye saygı ilkelerini hatırlaması."
+     "metin": "Yemeğe besmele ile başlarız."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Dua: Bismillâhi Allahümme innî eûzü bike minel-hubsi vel-habâis."
+     "metin": "Ölçülü yeriz."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta açık alanda kıble, ay ve güneşe karşı olmama anlatılır."
+     "metin": "Ellerimizi yıkar, sağ elimizle yeriz."
     },
     {
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta avret yerini açmamak ve temizlenmek vurgulanır."
+     "metin": "Sofrada güzel otururuz."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta gıda, kömür, gübre, hayvan gıdası, kiremit, kamış-yaprak, bez ve kâğıt sayılır."
+     "metin": "İsraf etmeyiz; artanları hayvanlarla paylaşırız."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta hususi şalvar/pantolon ve başı kapalı girmenin müstehab olduğu belirtilir."
+     "metin": "Ortak tabakta önümüzden yeriz."
     },
     {
      "id": "s07",
      "tur": "slayt",
      "gorsel": "slayt/07.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta Allahü teâlânın ismi ve Kur’an-ı Kerim yazılı şeyleri sarılı veya cepte bulundurma anlatılır."
+     "metin": "Sünnet oturuşu: sağ diz dik, sol ayak altta."
     },
     {
      "id": "s08",
      "tur": "slayt",
      "gorsel": "slayt/08.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta çömelince açmak, bakmamak, tükürmemek ve selâma cevap vermemek geçer."
+     "metin": "Sofrada güzel sohbet ederiz."
     },
     {
      "id": "s09",
      "tur": "slayt",
      "gorsel": "slayt/09.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta konuşma, yeme-içme, şarkı, ıslık, sakız ve sigara sayılır."
+     "metin": "Lokmalarımızı küçük alırız."
     },
     {
      "id": "s10",
      "tur": "slayt",
      "gorsel": "slayt/10.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta su, cami duvarı, kabristan, yol, yemiş/gölge ağacı ve hayvan yuvaları sayılır."
+     "metin": "Sofraya davet edilmeyi bekleriz."
     },
     {
      "id": "s11",
      "tur": "slayt",
      "gorsel": "slayt/11.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta idrar sıçramasından sakınmak; ayakta, rüzgâra karşı ve sert zeminde olmamak anlatılır."
+     "metin": "Büyüklerimize öncelik veririz."
     },
     {
      "id": "s12",
      "tur": "slayt",
      "gorsel": "slayt/12.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta su ile temizlikten sonra bezle veya sol elle kurulama geçer."
+     "metin": "Sofrada hürmetli oluruz."
     },
     {
      "id": "s13",
      "tur": "slayt",
      "gorsel": "slayt/13.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta yıkanma veya abdest alınan yere bevl etmeme ve suyun akıp gitmesi şartı geçer."
+     "metin": "Temizliğe dikkat ederiz; kırıntıları yere dökmeyiz."
     },
     {
      "id": "s14",
      "tur": "slayt",
      "gorsel": "slayt/14.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta istibrâ, kalben kanaat ve aşırı vesveseye kapılmama açıklanır."
+     "metin": "Yemekten sonra dişlerimizi temizleriz."
     },
     {
      "id": "s15",
      "tur": "slayt",
      "gorsel": "slayt/15.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta fazla oturmamak, etrafa bakınmamak, bedeniyle oynamamak ve başı eğmek geçer."
+     "metin": "Yemekten önce ve sonra ellerimizi yıkarız."
     },
     {
      "id": "s16",
      "tur": "slayt",
      "gorsel": "slayt/16.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Çıkış duası: Elhamdülillâhillezî ezhebe annîl-ezâ mâ yü’zînî ve emseke aleyye mâ yenfeunî."
+     "metin": "Yiyecek ve içeceklerin üstünü kapatırız."
     },
     {
      "id": "s17",
      "tur": "slayt",
      "gorsel": "slayt/17.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Menkıbe metni kullanıcı tarafından sağlanan kaynaktan sadeleştirilmiştir."
+     "metin": "Sağ elimizle içeriz."
     },
     {
      "id": "s18",
      "tur": "slayt",
      "gorsel": "slayt/18.webp",
-     "not": "[Sources] - Kullanıcının sağladığı ‘HELÂ ve TEMİZLİK ÂDÂBI’ metni; bu slayttaki bilgi bu kaynaktan çocuklar için sadeleştirilmiştir. - Görsel: Bu sunu için OpenAI görsel üretimiyle hazırlanmış özgün illüstrasyon. Kaynakta bu kişinin Muhammed Şeybânî olduğu; Hanefî bilgisini kitaplara geçirdiği ve 135/752’de Vâsıt’ta doğup 189/805’te Rey’de vefat ettiği belirtilir."
+     "metin": "Yemekten sonra “Elhamdülillah” deriz."
     },
     {
      "id": "s19",
      "tur": "slayt",
-     "gorsel": "slayt/19.webp"
+     "gorsel": "slayt/19.webp",
+     "metin": "Tabağımızdaki son lokmayı da değerlendiririz."
     },
     {
      "id": "s20",
      "tur": "slayt",
-     "gorsel": "slayt/20.webp"
+     "gorsel": "slayt/20.webp",
+     "metin": "Yere düşen lokmayı temizleyip yeriz; nimeti israf etmeyiz."
+    },
+    {
+     "id": "resimli-dy",
+     "tur": "dogruYanlis",
+     "baslik": "Resimli doğru-yanlış",
+     "ifadeler": [
+      {
+       "id": "besmele",
+       "metin": "Yemeğe besmele ile başlarız.",
+       "dogru": true,
+       "aciklama": "Besmele sofraya bereket getirir.",
+       "gorsel": "slayt/01.webp"
+      },
+      {
+       "id": "olcu",
+       "metin": "Doyunca da yemeye devam ederiz.",
+       "dogru": false,
+       "aciklama": "Ölçülü yeriz.",
+       "gorsel": "slayt/02.webp"
+      },
+      {
+       "id": "onunden",
+       "metin": "Ortak tabakta önümüzden yeriz.",
+       "dogru": true,
+       "aciklama": "Başkasının önüne uzanmayız.",
+       "gorsel": "slayt/06.webp"
+      },
+      {
+       "id": "davet",
+       "metin": "Davet edilmeden sofraya otururuz.",
+       "dogru": false,
+       "aciklama": "Davet edilmeyi bekleriz.",
+       "gorsel": "slayt/10.webp"
+      },
+      {
+       "id": "kapat",
+       "metin": "Yiyeceklerin üstünü kapatırız.",
+       "dogru": true,
+       "aciklama": "Kaplar örtülür.",
+       "gorsel": "slayt/16.webp"
+      },
+      {
+       "id": "israf",
+       "metin": "Artan yemeği çöpe atarız.",
+       "dogru": false,
+       "aciklama": "İsraf etmeyiz.",
+       "gorsel": "slayt/05.webp"
+      }
+     ],
+     "not": "Birlikte modunda öğrenciler sırayla oynar; “Herkes kendi” modunda her öğrenci kendi ekranında oynar."
     },
     {
      "id": "son",
      "tur": "kapanis",
      "baslik": "Ders tamamlandı",
-     "maddeler": [],
-     "dua": "Elhamdülillah."
+     "maddeler": [
+      {
+       "baslik": "Besmele",
+       "metin": "ve sağ el",
+       "ikon": "yildiz",
+       "renk": "#e8962e"
+      },
+      {
+       "baslik": "Ölçü",
+       "metin": "israf yok",
+       "ikon": "el",
+       "renk": "#4f7a3a"
+      },
+      {
+       "baslik": "Şükür",
+       "metin": "Elhamdülillah",
+       "ikon": "kalp",
+       "renk": "#c0392b"
+      }
+     ],
+     "dua": "Elhamdülillah. Öğrendiklerimizle amel etmeyi Allahü teâlâ nasip etsin."
     }
    ]
   }
  ]
-});
+}
+);

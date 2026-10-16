@@ -172,7 +172,7 @@ def katalog_guncelle(kayit):
         if m:
             liste = json.loads(m.group(1))
     liste = [k for k in liste if k['id'] != kayit['id']] + [kayit]
-    sira = {'tam': 0, 'taslak': 1}
+    sira = {'tam': 0, 'oyunlu': 1, 'taslak': 2}
     liste.sort(key=lambda k: (sira.get(k.get('durum'), 2), k.get('seri', ''), k.get('id')))
     with open(yol, 'w', encoding='utf-8') as f:
         f.write('/* Ders Odası — ders kataloğu. scripts/ders-odasi/ice-aktar.py günceller. */\n')

@@ -35,6 +35,8 @@ ders-odasi/
     bloklar-temel.js  kapak, bölüm, slayt, video, kartlar, anket, düşün, kapanış
     bloklar-oyun.js   çoktan seçmeli, doğru/yanlış, sınıflandır, eşleştir, hafıza,
                       yol, gösterge, kilit, hız turu
+    bloklar-eglence.js bereket sepeti (yakala), sırala, hikâye, soru çarkı, hata bul,
+                      söz kartı, bereket sofrası
     stil.css
   dersler/
     katalog.js
@@ -42,6 +44,7 @@ ders-odasi/
   paketler/           LMS'e yüklenecek SCORM zip'leri (git'e girmez; scorm-paketle.py üretir)
 scripts/ders-odasi/
   ice-aktar.py        pptx / görsel klasörü + video + ses + transkript → ders
+  adab-oyunlar.py     Âdâb destelerine altyazı, oyun ve kapanış ekler (tekrar çalıştırılabilir)
   scorm-paketle.py    ders → SCORM 1.2 veya 2004 zip
   duzeltmeler.json    otomatik transkript için yazım/hitap düzeltmeleri
 ```
@@ -66,7 +69,17 @@ Harici kütüphane yok; her şey düz HTML/CSS/JS ve SVG. Sunucu gerektirmez.
 | `gosterge` | doğru kararla ibre yükselir (Huşû Göstergesi) |
 | `kilit` | her doğru kararla kilidin bir dişi açılır (Müfsid Kilidi) |
 | `hizTuru` | süreli tekrar, hız bonusu, canlı derste sınıf sıralaması |
+| `yakala` | “Bereket sepeti”: yukarıdan düşen güzel davranışları sepete topla, hatalardan kaç; kombo, 3 can, süre. Canlı derste Hocamız başlatır, sınıf sıralaması canlı görünür |
+| `sirala` | adımları doğru sıraya diz; her doğru adımda Yusuf SVG yolda bir durak ilerler |
+| `hikaye` | resimli, seçimli hikâye; her seçim bir sonuç doğurur, iyi seçim yıldız kazandırır |
+| `cark` | soru çarkı: çevir, gelen dilimin sorusunu cevapla (dilim çeviren cihazda seçilir, eylemle herkese aynı gider) |
+| `hataBul` | resimdeki yanlışları bul; koordinatlar 1600×900 resim düzleminde, ipucu düğmesi |
+| `soz` | hadîs-i şerîf / büyüklerimizin sözü için vakur kart (kaynaklı) |
+| `sofra` | dersteki oyunlar bitirildikçe sofraya bir nimet gelir; üç yıldızlı tabak parıldar |
 | `kapanis` | rozet, puan özeti, LMS içinde "Dersi bitir" |
+
+Oyun kartlarında resim: `dogruYanlis` ifadesine, `siniflandir` kartına `gorsel`; `hafiza` çiftine
+`aGorsel`/`bGorsel`; `kapak` bloğuna `gorsel` (resimli kahraman kapak) verilebilir.
 
 **Öğretmen notu kuralı:** her bloktaki `not` alanı yalnızca öğretmen panelinde görünür; blok
 kodları onu sahneye asla basmaz. Öğrenciye gösterilecek açıklama ayrı alanlarda durur
@@ -253,8 +266,8 @@ Allahü teâlâ) da burada sabitleniyor. Otomatik altyazılı her slayta "gözde
 ## 8. Sıradaki adımlar
 
 1. Firebase projesini açıp `ayarlar.js`'e yapıştırmak (farklı cihazlarda canlı ders); platform alan adı belli olunca gömme izni.
-2. Âdâb derslerine oyun eklemek: her deste 5-8 slayt; slayt başına 1 etkileşim + ders sonu
-   hız turu ve niyet kartı ile ders başına ~10-15 ekran.
+2. Âdâb: “Bereketli Sofra” tam ders; diğer 16 desteye ikişer-üçer oyun eklendi
+   (`adab-oyunlar.py`). Sıradaki: her desteye hikâye görselleri ve seslendirme.
 3. Fıkıh 1, 3, 5, 6'ya FIKIH-2 kalıbında oyunlar (FIKIH-1'in mevcut 5 etkinliği hazır içerik).
 4. Öğretmen için toplu rapor (öğrenci bazında haftalar boyu gelişim) — platform veritabanı ile.
 5. İsteğe bağlı: cmi5 başlatma desteği, çevrimdışı kullanım (service worker).

@@ -146,7 +146,7 @@
         }
         deste.innerHTML = '';
         var s = liste[sira];
-        aktif = el('div', { class: 'dy-kart' }, [el('span', { class: 'dy-no', text: (sira + 1) + ' / ' + liste.length }), el('p', { text: s.metin })]);
+        aktif = el('div', { class: 'dy-kart' + (s.gorsel ? ' resimli' : '') }, [el('span', { class: 'dy-no', text: (sira + 1) + ' / ' + liste.length }), s.gorsel ? el('img', { class: 'dy-resim', src: ctx.yol(s.gorsel), alt: '', draggable: 'false' }) : null, el('p', { text: s.metin })]);
         deste.appendChild(aktif);
         if (sira + 1 < liste.length) deste.insertBefore(el('div', { class: 'dy-kart arka' }), aktif);
         bas = Date.now(); karar = false;
@@ -233,7 +233,8 @@
         alanlar.appendChild(kutu);
       });
       ctx.karistir(b.kartlar, 'kartlar').forEach(function (c, i) {
-        var kart = el('div', { class: 'sinif-kart', tabindex: 0, 'data-id': c.id, style: { animationDelay: (i * 0.05) + 's' }, text: c.metin });
+        var kart = el('div', { class: 'sinif-kart' + (c.gorsel ? ' resimli' : ''), tabindex: 0, 'data-id': c.id, style: { animationDelay: (i * 0.05) + 's' } },
+          [c.gorsel ? el('img', { src: ctx.yol(c.gorsel), alt: '', draggable: 'false' }) : null, el('span', { text: c.metin })]);
         kart._veri = c; kart._bas = Date.now();
         kartEl[c.id] = kart;
         surukleBagla(kart);
@@ -413,7 +414,7 @@
       var b = ctx.blok, k = DO.oyunKabuk(ctx, { rozet: 'Hafıza', sinif: 'oyun-hafiza', yonerge: b.yonerge || 'Kartları çevir, kavramı anlamıyla eşleştir.' });
       var kartlar = [];
       b.ciftler.forEach(function (c) {
-        kartlar.push({ id: c.id, yuz: c.a, tur: 'a', renk: c.renk }); kartlar.push({ id: c.id, yuz: c.b, tur: 'b', renk: c.renk });
+        kartlar.push({ id: c.id, yuz: c.a, gorsel: c.aGorsel, tur: 'a', renk: c.renk }); kartlar.push({ id: c.id, yuz: c.b, gorsel: c.bGorsel, tur: 'b', renk: c.renk });
       });
       kartlar = ctx.karistir(kartlar, 'hafiza');
       var acik = [], bulunan = 0, yanlisHamle = 0, hamle = 0, kapanacak = null, bitti = false;
@@ -425,7 +426,7 @@
         var d = el('button', { class: 'hafiza-kart', style: { '--r': c.renk || '#4f7a3a', animationDelay: (i * 0.04) + 's' }, 'aria-label': 'Kapalı kart' }, [
           el('div', { class: 'hk-ic' }, [
             el('div', { class: 'hk-arka', html: '<svg viewBox="0 0 100 100" width="70" height="70"><path d="M50 8 61 39 92 50 61 61 50 92 39 61 8 50 39 39z" fill="none" stroke="#e9b949" stroke-width="4"/><circle cx="50" cy="50" r="10" fill="#e9b949"/></svg>' }),
-            el('div', { class: 'hk-on ' + c.tur, text: c.yuz })
+            c.gorsel ? el('div', { class: 'hk-on resimli ' + c.tur }, [el('img', { src: ctx.yol(c.gorsel), alt: '', draggable: 'false' }), el('span', { text: c.yuz })]) : el('div', { class: 'hk-on ' + c.tur, text: c.yuz })
           ])
         ]);
         d._c = c;
