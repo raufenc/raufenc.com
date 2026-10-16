@@ -105,7 +105,14 @@ etkileşimler, süre ve "kaldığım yerden devam et" doğru çalışıyor.
 Öğrencilerin bütün kayıtları öğretmenin cihazına da gelir; rapor ekranındaki **oda
 görünümü** öğrencileri karşılaştırır ve en çok zorlanılan soruları sıralar.
 
-**Farklı cihazlar arasında canlı ders: Firebase (hazır, ayar bekliyor).**
+**Farklı cihazlar arasında canlı ders: Firebase (kurulu ve açık).**
+Proje: `ders-odasi-raufenc` (raufenc@gmail.com), Realtime Database `europe-west1`, ücretsiz
+Spark planı, anonim giriş açık. Web anahtarı yalnızca raufenc.com (ve yerel test için localhost)
+kaynaklı istekleri ve yalnızca veritabanı/kimlik servislerini kabul edecek şekilde kısıtlı.
+Kurallar değişirse: Firebase konsolu → Realtime Database → Kurallar'a `firebase-kurallari.json`
+yapıştırılır ya da `firebase deploy --only database` çalıştırılır.
+
+Aşağıdaki adımlar başka bir projeye geçmek gerekirse diye duruyor:
 `motor/canli.js` Firebase Realtime Database ile çalışır; `ayarlar.js`'e proje ayarı yapıştırılınca
 öğretmen ve öğrenciler ayrı cihazlardan aynı odaya bağlanır. Firebase emülatörüyle, birbirini
 başka yoldan göremeyen ayrı tarayıcı profillerinde denendi: katılım, öğretmeni takip, canlı
