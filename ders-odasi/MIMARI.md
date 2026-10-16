@@ -68,6 +68,10 @@ Harici kütüphane yok; her şey düz HTML/CSS/JS ve SVG. Sunucu gerektirmez.
 | `hizTuru` | süreli tekrar, hız bonusu, canlı derste sınıf sıralaması |
 | `kapanis` | rozet, puan özeti, LMS içinde "Dersi bitir" |
 
+**Öğretmen notu kuralı:** her bloktaki `not` alanı yalnızca öğretmen panelinde görünür; blok
+kodları onu sahneye asla basmaz. Öğrenciye gösterilecek açıklama ayrı alanlarda durur
+(`aciklama`, `ogrenciNotu`, kartın `not`'u gibi).
+
 Yeni bir oyun türü: `DO.Bloklar.yeniTur = { ciz(ctx), max(blok), zorunlu }` yazmak yeter.
 `ctx.cevap()` her cevabı kaydeder ve canlı derste öğretmene iletir, `ctx.tamamla()` puanı yazar.
 
@@ -107,8 +111,9 @@ görünümü** öğrencileri karşılaştırır ve en çok zorlanılan soruları
 
 **Farklı cihazlar arasında canlı ders: Firebase (kurulu ve açık).**
 Proje: `ders-odasi-raufenc` (raufenc@gmail.com), Realtime Database `europe-west1`, ücretsiz
-Spark planı, anonim giriş açık. Web anahtarı yalnızca raufenc.com (ve yerel test için localhost)
-kaynaklı istekleri ve yalnızca veritabanı/kimlik servislerini kabul edecek şekilde kısıtlı.
+Spark planı, anonim giriş açık. Web anahtarı yalnızca raufenc.com ve www.raufenc.com kaynaklı
+istekleri ve yalnızca veritabanı/kimlik servislerini kabul edecek şekilde kısıtlı (localhost'tan
+çalışmaz; yerel denemede tarayıcı raufenc.com adresinde tutulup dosyalar yerelden sunulur).
 Kurallar değişirse: Firebase konsolu → Realtime Database → Kurallar'a `firebase-kurallari.json`
 yapıştırılır ya da `firebase deploy --only database` çalıştırılır.
 
@@ -134,6 +139,33 @@ Bu ayarlar gizli değildir (tarayıcıya zaten gider); erişimi kurallar korur: 
 giriş yapmış ve oda kodunu bilen okuyabilir, mesajlar sonradan değiştirilemez, 6 saatten eski
 mesajları öğretmen temizler. Görüntü ve ses (görüntülü görüşme) bu sistemin parçası değildir;
 Zoom / Meet / platformun kendi görüşmesi yanında açık tutulur.
+
+**Eşleme modeli (ekranın içi).** Ekran geçişinin yanında ekranın içindeki her anlamlı hareket
+de eşlenir. Her blok, hareketlerini "eylem" olarak tanımlar (`ctx.eylemTanimla`) ve yapar
+(`ctx.eylem`); aynı işleyici her cihazda aynı şekilde çalışır.
+
+| Ekran | Canlı derste davranış |
+|---|---|
+| Kapak, bölüm, slayt, kartlar, video | **Ortak ekran:** kart çevirme, slayttaki noktalar, "↻ Dinle", besmele herkeste aynı anda olur |
+| Oyunlar (çoktan seçmeli, doğru/yanlış, sınıflandır, eşleştir, hafıza, yol, gösterge, kilit) | Varsayılan **herkes kendi oynar**; sorular ve kartlar herkeste **aynı sırada** karışır. Hocamız panelden **"Birlikte, tek ekran"** seçerse tek oyun tahtası olur: söz sahibinin hamlesi herkeste görünür ("Zeynep cevapladı"), puan hamleyi yapana yazılır |
+| Anket | Herkes kendi oyunu verir; sonuçları **Hocamız açar** (çocuklar birbirinden etkilenmesin) |
+| Hız turu | Herkes kendi cevaplar; **Hocamız herkes için aynı anda başlatır**, sıralama canlı |
+| Niyet kartı | Herkes kendi yazar; Hocamızın panelinde görünür |
+
+Kurallar:
+
+* **Kim dokunabilir:** panelden *Yalnız ben* (varsayılan) / *Herkes* / tek bir öğrenci ("Söz ver").
+  Söz isteyen öğrencinin eli (✋) söz verilince iner. Yetkisiz dokunuş hiçbir cihazda etki etmez.
+* **Herkes dokunabilirken** hamlelerin sırası öğretmen cihazında tutulur, böylece iki çocuk aynı
+  anda dokunsa da bütün ekranlar aynı sonuca varır.
+* **Mutlak durum:** "kartı çevir" değil "1. kart açık" gönderilir; hamleler soru/adım numarası
+  taşır. Bir geçiş animasyonu sürerken gelen hamle düşmez, önce bekleyen geçiş tamamlanır.
+* **Geç katılan / bağlantısı kopup dönen** öğrenci, ekranın o anki hâlini öğretmen cihazından alır
+  (ekrandaki hamlelerin kaydı sessizce yeniden oynatılır).
+* **Ses tek yerde çalar:** panelden *Bende* (Hocamızın cihazı, görüşmeden öğrencilere gider) ya da
+  *Öğrencilerde* (her çocuğun cihazı; Hocamızınki sessiz). Çift ses ve yankı olmaz.
+* Öğrenci canlı derste ekranları kendisi ilerletmez; oyun bitince "Hocamız devam ettirecek" yazar.
+* Öğretmen notu (`not`) yalnızca öğretmen panelinde görünür.
 
 **Taşıyıcılar.** Mesajlar şu an üç yoldan gidebilir:
 

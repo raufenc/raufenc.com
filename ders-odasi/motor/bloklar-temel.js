@@ -81,6 +81,7 @@
     ctx.kap.appendChild(kap);
     return { kap: kap, ust: ust, govde: govde };
   };
+  function O_rol(ctx) { return ctx.rol; }
   /* Bitiş özeti */
   DO.oyunSonu = function (ctx, govde, o) {
     var oran = o.max ? o.puan / o.max : 1;
@@ -92,8 +93,9 @@
       el('h3', { text: o.baslik || (oran >= 0.9 ? 'Mâşallah, harika!' : oran >= 0.6 ? 'Güzel gidiyorsun!' : 'Tekrar edersek daha iyi olacak') }),
       o.metin ? el('p', { text: o.metin }) : null,
       o.max ? el('p', { class: 'sonu-puan', html: '<b>' + o.puan + '</b> / ' + o.max + ' puan' }) : null,
+      ctx.takipte && ctx.takipte() ? el('p', { class: 'bekle-not', text: '✓ Bitti — Hocamız devam ettirecek' }) :
       el('div', { class: 'sonu-dugmeler' }, [
-        o.tekrar ? el('button', { class: 'dug ikincil', text: 'Tekrar oyna', onclick: o.tekrar }) : null,
+        o.tekrar && !(ctx.ortak && ctx.ortak() && O_rol(ctx) !== 'ogretmen') ? el('button', { class: 'dug ikincil', text: 'Tekrar oyna', onclick: o.tekrar }) : null,
         el('button', { class: 'dug ana', text: 'Devam et →', onclick: function () { ctx.ileri(); } })
       ])
     ]);
@@ -138,14 +140,16 @@
         el('div', { class: 'besmele-arapca', lang: 'ar', dir: 'rtl', text: 'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ' }),
         el('div', { class: 'besmele-okunus', text: 'Bismillâhirrahmânirrahîm' })
       ]);
-      var dug = el('button', { class: 'dug ana buyuk kapak-dug', text: b.dugme || 'Besmele ile başlayalım', onclick: function () {
+      var dug = el('button', { class: 'dug ana buyuk kapak-dug', text: b.dugme || 'Besmele ile başlayalım', onclick: function () { ctx.eylem('besmele'); } });
+      ctx.eylemTanimla('besmele', function (v, k) {
+        if (kap.classList.contains('besmeleli')) return;
         dug.disabled = true;
         kap.classList.add('besmeleli');
         DO.efekt.gecis();
-        ctx.etkiles('besmele', 'Derse besmele ile başladı');
+        if (k.yerel) ctx.etkiles('besmele', 'Derse besmele ile başladı');
         ctx.tamamla({ puan: 0, max: 0 });
-        ctx.zaman(function () { ctx.ileri(); }, 2600);
-      } });
+        if (!k.tekrar) ctx.zaman(function () { ctx.otoIleri(); }, 2600);
+      });
       kap.appendChild(metin); kap.appendChild(besmele); kap.appendChild(dug);
       ctx.kap.appendChild(kap);
       return {};
@@ -193,21 +197,30 @@
         var nokta = el('button', {
           class: 'vurgu', style: { left: v.x + 'px', top: v.y + 'px', width: (v.r || 60) * 2 + 'px', height: (v.r || 60) * 2 + 'px', animationDelay: (i * 0.25) + 's' },
           'aria-label': v.etiket,
-          onclick: function () {
-            kap.querySelectorAll('.vurgu').forEach(function (n) { n.classList.remove('acik'); });
-            nokta.classList.add('acik', 'gorulmus');
-            DO.efekt.tik();
-            ctx.etkiles('vurgu-' + (v.id || i), v.etiket);
-          }
+          onclick: function () { ctx.eylem('vurgu', { i: i }); }
         }, balon);
         kap.appendChild(nokta);
+      });
+      ctx.eylemTanimla('vurgu', function (v, k) {
+        var nokta = kap.querySelectorAll('.vurgu')[v.i]; if (!nokta) return;
+        kap.querySelectorAll('.vurgu').forEach(function (n) { n.classList.remove('acik'); });
+        nokta.classList.add('acik', 'gorulmus');
+        DO.efekt.tik();
+        if (k.yerel) ctx.etkiles('vurgu-' + ((b.vurgular[v.i] || {}).id || v.i), (b.vurgular[v.i] || {}).etiket);
       });
       var tekrar = el('button', { class: 'slayt-tekrar', title: 'Anlatımı tekrar dinle', html: '↻ Dinle' });
       if (b.ses) kap.appendChild(tekrar);
       ctx.kap.appendChild(kap);
       if (b.metin) ctx.altyazi(b.metin);
       var a = ctx.anlatim(b.ses);
-      if (a) tekrar.onclick = function () { a.ses.currentTime = 0; a.cal(); ctx.etkiles('anlatim-tekrar', 'Anlatımı tekrar dinledi'); };
+      if (a) {
+        tekrar.onclick = function () { ctx.eylem('dinle'); };
+        ctx.eylemTanimla('dinle', function (v, k) {
+          if (k.tekrar) return;
+          if (ctx.sesBende()) { a.ses.currentTime = 0; a.cal(); }
+          if (k.yerel) ctx.etkiles('anlatim-tekrar', 'Anlatımı tekrar dinletti');
+        });
+      }
       ctx.tamamla({ puan: 0, max: 0 });
       return {
         anlatimDegisti: function (acik) { if (!a) return; if (acik) a.cal(); else a.durdur(); }
@@ -234,6 +247,8 @@
       var basla = el('button', { class: 'video-basla', 'aria-label': 'Videoyu başlat', html: '<svg viewBox="0 0 100 100" width="150" height="150"><circle cx="50" cy="50" r="46" fill="#fffaf0" opacity=".95"/><path d="M40 30l32 20-32 20z" fill="#4f7a3a"/></svg>' });
       kap.appendChild(v); kap.appendChild(baslik); kap.appendChild(basla); kap.appendChild(perde);
       ctx.kap.appendChild(kap);
+      // Canlı derste ses yalnızca bir yerde çalar (görüşmede çift ses olmasın)
+      v.muted = !ctx.sesBende();
 
       var duraklar = (b.duraklar || []).map(function (d, i) { return Object.assign({ i: i, cevaplandi: false }, d); });
       var enUzak = 0, puan = 0, bitti = false, soruAcik = false, canliYonetim = false;
@@ -331,7 +346,7 @@
           duraklar.length ? el('p', { text: 'Durak soruları: ' + puan + ' / ' + duraklar.length * 10 + ' puan' }) : null,
           el('div', { class: 'sonu-dugmeler' }, [
             el('button', { class: 'dug ikincil', text: '↻ Tekrar izle', onclick: function () { perde.classList.remove('acik'); v.currentTime = 0; oynat(); } }),
-            el('button', { class: 'dug ana', text: 'Devam et →', onclick: function () { ctx.ileri(); } })
+            ctx.takipte() ? el('p', { class: 'bekle-not', text: '✓ Hocamız devam ettirecek' }) : el('button', { class: 'dug ana', text: 'Devam et →', onclick: function () { ctx.ileri(); } })
           ])
         ]));
       }
@@ -346,7 +361,10 @@
           setTimeout(function () { canliYonetim = false; }, 400);
         });
       }
-      return { temizle: function () { aktif = false; v.pause(); v.innerHTML = ''; v.load(); } };
+      return {
+        temizle: function () { aktif = false; v.pause(); v.innerHTML = ''; v.load(); },
+        sesDegisti: function (bende) { v.muted = !bende; }
+      };
     }
   };
 
@@ -375,19 +393,22 @@
             ])
           ])
         ]);
-        c.onclick = function () {
-          c.classList.toggle('donuk');
-          DO.efekt.tik();
-          if (!cevrilen[i]) {
-            cevrilen[i] = true;
-            ctx.etkiles('kart-' + i, kart.on + ' kartını çevirdi');
-            if (Object.keys(cevrilen).length === b.kartlar.length) {
-              ctx.tamamla({ puan: 0, max: 0 });
-              ctx.bildir('Bütün kartları tanıdın ✓', 'puan');
-            }
-          }
-        };
+        // Mutlak durum gönderilir ("i. kart açık"), "çevir" değil: iki cihaz aynı anda dokunsa da sonuç aynı kalır
+        c.onclick = function () { ctx.eylem('cevir', { i: i, acik: !c.classList.contains('donuk') }); };
         izgara.appendChild(c);
+      });
+      ctx.eylemTanimla('cevir', function (v, k) {
+        var c = izgara.children[v.i], kart = b.kartlar[v.i]; if (!c) return;
+        c.classList.toggle('donuk', !!v.acik);
+        DO.efekt.tik();
+        if (v.acik && !cevrilen[v.i]) {
+          cevrilen[v.i] = true;
+          if (k.yerel) ctx.etkiles('kart-' + v.i, kart.on + ' kartını çevirdi');
+          if (Object.keys(cevrilen).length === b.kartlar.length) {
+            ctx.tamamla({ puan: 0, max: 0 });
+            if (!k.tekrar) ctx.bildir('Bütün kartlar tanındı ✓', 'puan');
+          }
+        }
       });
       k.govde.appendChild(izgara);
       return {};
@@ -398,7 +419,7 @@
      ANKET — doğru cevabı olmayan, sınıfın düşüncesini gösteren soru
      ===================================================================== */
   B.anket = {
-    zorunlu: true,
+    zorunlu: true, canli: 'bireysel-sabit',
     ciz: function (ctx) {
       var b = ctx.blok;
       var k = DO.oyunKabuk(ctx, { rozet: 'Sence?', sinif: 'oyun-anket', yonerge: b.soru });
@@ -420,11 +441,27 @@
       });
       k.govde.appendChild(liste);
       k.govde.appendChild(grafik);
+      var acildi = false;   // canlı derste sonuçları Hocamız açar (öğrenciler birbirinden etkilenmesin)
       ctx.dinle('cevap', function (m) { if (m.veri.blok === b.id) { oylar[m.gonderen.id] = b.secenekler.indexOf(m.veri.yanit); ciz(); } });
+      ctx.eylemTanimla('goster', function (v) {
+        acildi = true;
+        if (v && v.oylar && ctx.rol !== 'ogretmen') {
+          var benId = DO.Canli.ben && DO.Canli.ben.id, yeni = {};
+          Object.keys(v.oylar).forEach(function (kisi) { if (kisi !== benId) yeni[kisi] = v.oylar[kisi]; });
+          if (benim != null) yeni.ben = benim;
+          oylar = yeni;
+        }
+        ciz();
+      });
       function ciz() {
         var say = b.secenekler.map(function () { return 0; }), top = 0;
         for (var kisi in oylar) if (oylar[kisi] >= 0) { say[oylar[kisi]]++; top++; }
         if (benim == null && ctx.rol !== 'ogretmen') return;
+        if (ctx.rol === 'ogrenci' && ctx.canliMi() && !acildi) {
+          grafik.innerHTML = '';
+          grafik.appendChild(el('p', { class: 'anket-ozet', text: '✓ Cevabın alındı. Sonuçları Hocamız açınca burada göreceksin.' }));
+          return;
+        }
         grafik.innerHTML = '';
         grafik.appendChild(el('p', { class: 'anket-ozet', text: top + ' kişi cevapladı' }));
         b.secenekler.forEach(function (s, i) {
@@ -435,10 +472,20 @@
             el('b', { text: say[i] })
           ]));
         });
-        if (b.not && benim != null) grafik.appendChild(el('p', { class: 'anket-not', text: b.not }));
+        // b.not öğretmen notudur, yalnızca öğretmen panelinde görünür; öğrenciye b.ogrenciNotu gösterilir
+        if (b.ogrenciNotu && benim != null) grafik.appendChild(el('p', { class: 'anket-not', text: b.ogrenciNotu }));
       }
       if (ctx.rol === 'ogretmen') ciz();
-      return {};
+      return {
+        ogretmenAraci: function () {
+          if (!ctx.canliMi()) return null;
+          return el('button', { class: 'dug kucuk tam', text: acildi ? '✓ Sonuçlar öğrencilerde açık' : 'Anket sonuçlarını öğrencilere göster', onclick: function () {
+            var o = {}; Object.keys(oylar).forEach(function (k) { if (k !== 'ben') o[k] = oylar[k]; });
+            ctx.eylem('goster', { oylar: o }, { ogretmen: true });
+            ctx.oynatici.panelYaz();
+          } });
+        }
+      };
     }
   };
 
@@ -446,7 +493,7 @@
      DÜŞÜN — kendi cümlesi / niyet kartı (açık uçlu)
      ===================================================================== */
   B.dusun = {
-    zorunlu: true,
+    zorunlu: true, canli: 'bireysel-sabit',
     ciz: function (ctx) {
       var b = ctx.blok;
       var k = DO.oyunKabuk(ctx, { rozet: 'Kendi cümlen', sinif: 'oyun-dusun' });

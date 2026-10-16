@@ -35,6 +35,7 @@ DO.dersKaydet({
           id: 'isinma', tur: 'anket', baslik: 'Isınma sorusu',
           soru: 'Sence bir ibadeti “zayıflatmak” ile “bozmak” aynı şey mi?',
           secenekler: ['Aynı şey', 'Farklı şeyler', 'Emin değilim'],
+          ogrenciNotu: 'Bu soruya dersin sonunda yeniden döneceğiz.',
           not: 'Doğru cevabı şimdi söylemeyin. Dersin sonunda aynı soruyu tekrar sorun: Mekruh zayıflatır, müfsid bozar.'
         },
         {

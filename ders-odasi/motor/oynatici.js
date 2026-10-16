@@ -27,7 +27,13 @@
     O.oda = DO.param('oda');
     if (O.rol !== 'bireysel' && !O.oda) O.oda = DO.odaKodu();
     O.ayar = DO.depo.oku('do:ayar', O.ayar);
-    if (O.rol === 'ogrenci') O.ayar.anlatim = DO.param('anlatim') === '1';  // canlı derste anlatımı öğretmen yapar
+    /* Canlı ders oda durumu (sahibi öğretmen; 'oda' mesajıyla herkese gider)
+       kilit    : öğrenciler öğretmenin ekranını takip eder
+       yonetici : ortak ekrana kim dokunabilir — 'ogretmen' | 'herkes' | <katılımcı kimliği>
+       ses      : anlatım ve video sesi nerede çalar — 'ogretmen' | 'ogrenci'
+       modlar   : blok kimliği → 'ortak' | 'bireysel' (öğretmenin seçtiği) */
+    O.odaDurum = { kilit: true, yonetici: 'ogretmen', ses: 'ogretmen', modlar: {} };
+    O.gunluk = [];
 
     // Düz sıra
     ders.bolumler.forEach(function (b, bi) {
@@ -277,6 +283,8 @@
     var tanim = DO.Bloklar[blok.tur];
     if (!tanim) { O.dom.icerik.appendChild(el('div', { class: 'eksik', text: 'Bilinmeyen blok türü: ' + blok.tur })); return; }
     O.blokBaslangic = Date.now();
+    O.gunluk = [];
+    O.aktifEylem = null;
     var ctx = baglam(blok);
     try { O.aktif = tanim.ciz(ctx) || {}; } catch (e) { console.error(e); O.aktif = {}; }
     dugmeleriYaz();
@@ -284,8 +292,12 @@
     Kayit().devamYaz({ b: yeni, d: O.durum });
     if (DO.Canli.acik) {
       DO.Canli.benimBlok = yeni;
-      if (O.rol === 'ogretmen') DO.Canli.gonder('git', { blok: yeni, kilit: O.kilit });
-      else DO.Canli.gonder('konum', { blok: yeni });
+      if (O.rol === 'ogretmen') DO.Canli.gonder('git', { blok: yeni, kilit: O.kilit, oda: O.odaDurum });
+      else {
+        DO.Canli.gonder('konum', { blok: yeni });
+        // Ortak ekranın o anki hâlini öğretmenden iste (geç katılma, kopup dönme)
+        if (DO.Canli.ogretmenVar()) DO.Canli.gonder('durumIste', { blok: blok.id });
+      }
     }
     if (O.rol === 'ogretmen') panelYaz();
     // Son blok ders sonudur
@@ -379,6 +391,7 @@
       Kayit().devamYaz({ b: O.i, d: O.durum });
       if (DO.Canli.acik) {
         DO.Canli.gonder('puan', { puan: top, max: O.maxToplam });
+        DO.Canli.gonder('bitti', { blok: blok.id, puan: puan, max: max });
         if (O.rol === 'ogrenci') { DO.Canli.gonder('ifade', ifade); DO.Canli.gonder('ifade', ilerle); }
       }
       puanYaz();
@@ -394,6 +407,68 @@
     ctx.aralik = function (fn, ms) { var t = setInterval(fn, ms); O.temizlikler.push(function () { clearInterval(t); }); return t; };
     ctx.dinle = function (tur, fn) { DO.Canli.olay.on(tur, fn); O.temizlikler.push(function () { DO.Canli.olay.off(tur, fn); }); };
     ctx.ileri = function () { O.ileri(); };
+
+    /* ---- Canlı eşleme ----
+       Bloktaki her anlamlı hareket bir "eylem"dir: ctx.eylemTanimla('ad', fn) ile tanımlanır,
+       ctx.eylem('ad', veri) ile yapılır. fn(veri, k) her cihazda aynı şekilde çalışır;
+       k.yerel   : bu cihazdaki kişi yaptı (cevap/puan yalnızca o zaman kaydedilir)
+       k.tekrar  : geç katılan için geçmiş yeniden oynatılıyor (ses/kayıt yok)
+       k.kim     : yapan kişi {id, ad, rol} */
+    var eylemler = {};
+    ctx.canliMi = canliMi;
+    ctx.ortak = function () { return canliMi() && O.blokModu(blok) === 'ortak'; };
+    ctx.takipte = function () { return O.rol === 'ogrenci' && canliMi() && O.kilit; };
+    ctx.sesBende = sesBende;
+    // Kendiliğinden ilerleme: canlı derste ekranları yalnızca öğretmen ilerletir
+    ctx.otoIleri = function () { if (O.rol === 'ogrenci' && canliMi()) return; O.ileri(); };
+    ctx.eylemTanimla = function (ad, fn) { eylemler[ad] = fn; };
+    ctx.eylem = function (ad, veri, sec) {
+      sec = sec || {};
+      veri = veri || {};
+      var ben = DO.Canli.ben || { id: O.ogrenci.id, ad: O.ogrenci.ad, rol: O.rol };
+      if (!canliMi()) return uygula(ad, veri, { yerel: true, kim: ben });
+      if (sec.ogretmen) {                       // yalnızca öğretmenin yapabileceği yönetim hareketleri
+        if (O.rol !== 'ogretmen') return false;
+        return yay(ad, veri, ben);
+      }
+      if (O.blokModu(blok) !== 'ortak') return uygula(ad, veri, { yerel: true, kim: ben });
+      if (!O.yetkili(ben)) { bildir(yetkiMetni(), 'bilgi'); return false; }
+      // Birden çok kişi aynı anda dokunabiliyorsa sıra öğretmende tutulur (herkeste aynı sıra)
+      if (O.rol !== 'ogretmen' && O.odaDurum.yonetici === 'herkes' && DO.Canli.ogretmenVar()) {
+        DO.Canli.gonder('eylemIste', { blok: blok.id, ad: ad, veri: veri });
+        return true;
+      }
+      return yay(ad, veri, ben);
+    };
+    function yay(ad, veri, kim) {
+      DO.Canli.gonder('eylem', { blok: blok.id, ad: ad, veri: veri, kim: kim });
+      return uygula(ad, veri, { yerel: kim.id === (DO.Canli.ben && DO.Canli.ben.id), kim: kim });
+    }
+    function uygula(ad, veri, k) {
+      var fn = eylemler[ad];
+      if (!fn) return false;
+      if (O.rol === 'ogretmen' && canliMi() && !k.tekrar) O.gunluk.push({ ad: ad, veri: veri, kim: k.kim });
+      try { fn(veri, k); } catch (e) { console.error('eylem', ad, e); }
+      return true;
+    }
+    O.aktifEylem = {
+      blokId: blok.id,
+      uygula: uygula,
+      yay: yay,
+      yeniden: function (gunluk) {
+        var eski = DO.sesAcik; DO.sesAcik = false;
+        (gunluk || []).forEach(function (g) { uygula(g.ad, g.veri, { yerel: false, tekrar: true, kim: g.kim }); });
+        DO.sesAcik = eski;
+      }
+    };
+    /* Karıştırma: canlı derste herkes aynı sırayı görür (Hocamız "ilk soru" deyince aynı soru).
+       anahtar her karıştırma için sabit olmalı (ör. 'soru3'); tur, "tekrar oyna" ile artar. */
+    var tur = 0;
+    ctx.karistir = function (dizi, anahtar) {
+      if (!canliMi()) return DO.karistir(dizi);
+      return DO.tohumluKaristir(dizi, O.oda + '|' + blok.id + '|' + (anahtar || '') + '|' + tur);
+    };
+    ctx.yeniTur = function () { tur++; };
     /* Sesli anlatım: blok açılınca (ayar açıksa) çalar */
     ctx.anlatim = function (dosya, metin) {
       if (!dosya) return null;
@@ -402,12 +477,39 @@
       var cal = function () {
         var p = ses.play(); if (p && p.catch) p.catch(function () { /* izin yok */ });
       };
-      if (O.ayar.anlatim) ctx.zaman(cal, 450);
+      if (O.ayar.anlatim && sesBende()) ctx.zaman(cal, 450);
       O.temizlikler.push(function () { ses.pause(); ses.src = ''; });
       ses.addEventListener('ended', function () { ctx.kaydet('deneyimledi', { id: 'anlatim', ad: 'Sesli anlatım dinlendi' }); });
       return { ses: ses, cal: cal, durdur: function () { ses.pause(); } };
     };
     return ctx;
+  }
+
+  /* ---------------- Canlı ders yardımcıları ---------------- */
+  function canliMi() { return DO.Canli.acik && (O.rol === 'ogretmen' || DO.Canli.ogretmenVar()); }
+  O.canliMi = canliMi;
+  /* Anlatım ve video sesi bu cihazda mı çalsın? Görüşmede çift ses ve yankı olmasın diye tek yerde çalar. */
+  function sesBende() {
+    if (!canliMi()) return true;
+    return O.odaDurum.ses === (O.rol === 'ogretmen' ? 'ogretmen' : 'ogrenci');
+  }
+  O.sesBende = sesBende;
+  O.yetkili = function (kim) {
+    if (!kim) return false;
+    if (kim.rol === 'ogretmen') return true;
+    var y = O.odaDurum.yonetici;
+    return y === 'herkes' || y === kim.id;
+  };
+  O.blokModu = function (blok) {
+    var t = DO.Bloklar[blok.tur] || {};
+    if (t.canli === 'bireysel-sabit') return 'bireysel';
+    return O.odaDurum.modlar[blok.id] || blok.canli || t.canli || 'ortak';
+  };
+  function yetkiMetni() {
+    var y = O.odaDurum.yonetici;
+    if (y === 'ogretmen') return 'Şu an ekranı Hocamız yönetiyor. Söz istemek için ✋';
+    var k = DO.Canli.katilimcilar[y];
+    return (k ? k.ad : 'Bir arkadaşın') + ' şu an söz sahibi.';
   }
 
   /* ---------------- Bildirim ---------------- */
@@ -437,20 +539,64 @@
     var sekme = null;
     try { sekme = sessionStorage.getItem('do:sekme'); if (!sekme) { sekme = DO.uuid().slice(0, 6); sessionStorage.setItem('do:sekme', sekme); } } catch (e) { sekme = DO.uuid().slice(0, 6); }
     C.baslat({ oda: O.oda, id: O.ogrenci.id + '#' + sekme, ad: O.ogrenci.ad, rol: O.rol, blok: 0 });
+    C.odaDurumu = function () { if (O.rol !== 'ogretmen') return null; O.odaDurum.kilit = O.kilit; return O.odaDurum; };
+
+    /* Ortak ekran eylemleri (iki rol için de) */
+    C.olay.on('eylem', function (m) {
+      var v = m.veri, ae = O.aktifEylem, blok = O.sira[O.i];
+      if (!ae || !blok || v.blok !== ae.blokId) return;
+      var kim = v.kim || m.gonderen;
+      // Gönderen öğretmen değilse yalnızca kendi adına ve yetkisi varsa
+      if (m.gonderen.rol !== 'ogretmen') {
+        if (!kim || kim.id !== m.gonderen.id || O.blokModu(blok) !== 'ortak' || !O.yetkili(kim)) return;
+      }
+      ae.uygula(v.ad, v.veri, { yerel: !!(C.ben && kim && kim.id === C.ben.id), kim: kim });
+    });
+
     if (O.rol === 'ogrenci') {
       O.kilit = false;
+      function odaUygula(d, blokSira) {
+        if (!d) return;
+        var blok = O.sira[O.i];
+        var eskiMod = blok ? O.blokModu(blok) : null, eskiSes = sesBende();
+        O.odaDurum = d;
+        O.kilit = !!d.kilit;
+        if (C.ben && d.yonetici === C.ben.id && O.elKalkik) { O.elKalkik = false; O.dom.elDug.classList.remove('aktif'); C.gonder('el', { kalkik: false }); bildir('✋ Söz sende — ekrana dokunabilirsin', 'puan'); }
+        if (O.kilit && blokSira != null && blokSira !== O.i) { O.git(blokSira); }
+        else if (blok && O.blokModu(blok) !== eskiMod) { O.git(O.i); }       // mod değişti: ekran baştan
+        else if (eskiSes !== sesBende() && O.aktif) {
+          if (O.aktif.anlatimDegisti) O.aktif.anlatimDegisti(sesBende() && O.ayar.anlatim);
+          if (O.aktif.sesDegisti) O.aktif.sesDegisti(sesBende());
+        }
+        kilitSerit(); dugmeleriYaz();
+      }
       C.olay.on('git', function (m) {
+        if (m.veri.oda) { var d = m.veri.oda; d.kilit = !!m.veri.kilit; O.odaDurum = d; }
         O.kilit = !!m.veri.kilit;
         kilitSerit();
         if (O.kilit && m.veri.blok !== O.i) O.git(m.veri.blok);
         dugmeleriYaz();
       });
+      C.olay.on('oda', function (m) { odaUygula(m.veri.durum, m.veri.blok); });
       C.olay.on('kilit', function (m) {
-        O.kilit = !!m.veri.acik; kilitSerit(); dugmeleriYaz();
+        O.kilit = !!m.veri.acik; O.odaDurum.kilit = O.kilit; kilitSerit(); dugmeleriYaz();
         if (O.kilit && m.veri.blok != null && m.veri.blok !== O.i) O.git(m.veri.blok);
       });
       C.olay.on('tanit', function (m) {
-        if (m.gonderen.rol === 'ogretmen') { O.kilit = true; kilitSerit(); if (m.veri.blok !== O.i) O.git(m.veri.blok); dugmeleriYaz(); }
+        if (m.gonderen.rol !== 'ogretmen') return;
+        if (m.veri.oda) O.odaDurum = m.veri.oda;
+        O.kilit = O.odaDurum.kilit !== false;
+        kilitSerit();
+        if (O.kilit && m.veri.blok !== O.i) O.git(m.veri.blok);
+        else C.gonder('durumIste', { blok: O.sira[O.i].id });
+        dugmeleriYaz();
+      });
+      // Ekranın o anki hâli (geç katılma / kopup dönme)
+      C.olay.on('blokDurum', function (m) {
+        var v = m.veri, blok = O.sira[O.i];
+        if (m.gonderen.rol !== 'ogretmen' || !blok || v.blok !== blok.id) return;
+        if (v.mod && O.blokModu(blok) !== v.mod) { O.odaDurum.modlar[blok.id] = v.mod; O.git(O.i); return; }
+        if (O.aktifEylem && v.gunluk && v.gunluk.length) O.aktifEylem.yeniden(v.gunluk);
       });
       C.olay.on('isaret', function (m) { lazerGoster(m.veri); });
       C.olay.on('mesaj', function (m) { bildir('Hocamız: ' + m.veri.metin, 'bilgi'); });
@@ -458,7 +604,7 @@
       C.olay.on('katilim', kilitSerit);
     } else {
       O.kilit = true;
-      ['katilim', 'cevap', 'puan', 'el', 'konum', 'tanit', 'merhaba', 'baglanti'].forEach(function (t) { C.olay.on(t, panelYaz); });
+      ['katilim', 'cevap', 'puan', 'el', 'konum', 'tanit', 'merhaba', 'baglanti', 'bitti'].forEach(function (t) { C.olay.on(t, panelYaz); });
       C.olay.on('ifade', function (m) { if (m.veri && m.veri.id) Kayit().disaridanSakla(m.veri); });
       C.olay.on('el', function (m) { if (m.veri.kalkik) { bildir('✋ ' + m.gonderen.ad + ' söz istiyor', 'bilgi'); DO.efekt.tik(); } });
       C.olay.on('cevap', function (m) {
@@ -466,16 +612,48 @@
         (O.canliCevaplar = O.canliCevaplar || []).push({ id: m.gonderen.id, ad: m.gonderen.ad, blok: c.blok, oge: c.oge, soru: c.ad, yanit: c.yanit, dogru: c.dogru, t: Date.now() });
         panelYaz();
       });
+      C.olay.on('bitti', function (m) { (O.bitirenler = O.bitirenler || {})[m.veri.blok + '|' + m.gonderen.id] = true; });
+      // Öğrenci ortak ekranda hareket istiyor (herkes dokunabilirken sıra burada tutulur)
+      C.olay.on('eylemIste', function (m) {
+        var v = m.veri, ae = O.aktifEylem, blok = O.sira[O.i];
+        if (!ae || !blok || v.blok !== ae.blokId || O.blokModu(blok) !== 'ortak' || !O.yetkili(m.gonderen)) return;
+        ae.yay(v.ad, v.veri, { id: m.gonderen.id, ad: m.gonderen.ad, rol: m.gonderen.rol });
+      });
+      C.olay.on('durumIste', function (m) {
+        var blok = O.sira[O.i];
+        if (!blok || m.veri.blok !== blok.id) return;
+        C.gonder('blokDurum', { blok: blok.id, mod: O.blokModu(blok), gunluk: O.gunluk }, m.gonderen.id);
+      });
+      C.olay.on('merhaba', function () { odaGonder(); });
     }
     kilitSerit();
   }
+  /* Öğretmen: oda durumunu herkese duyur */
+  function odaGonder() {
+    O.odaDurum.kilit = O.kilit;
+    DO.Canli.gonder('oda', { durum: O.odaDurum, blok: O.i });
+  }
+  O.odaDegistir = function (degisiklik) {
+    var blok = O.sira[O.i], eskiMod = blok ? O.blokModu(blok) : null, eskiSes = sesBende();
+    Object.keys(degisiklik).forEach(function (k) { O.odaDurum[k] = degisiklik[k]; });
+    odaGonder();
+    if (blok && O.blokModu(blok) !== eskiMod) O.git(O.i);
+    else if (eskiSes !== sesBende() && O.aktif) {
+      if (O.aktif.anlatimDegisti) O.aktif.anlatimDegisti(sesBende() && O.ayar.anlatim);
+      if (O.aktif.sesDegisti) O.aktif.sesDegisti(sesBende());
+    }
+    panelYaz();
+  };
   function kilitSerit() {
     var s = O.dom.kilitSerit;
     if (O.rol === 'ogrenci') {
       var ogretmen = DO.Canli.ogretmenVar();
       var hata = DO.Canli.baglanti.firebase === 'hata';
       s.textContent = hata ? '✗ Bağlantı kurulamadı — internetini kontrol et (oda ' + O.oda + ')'
-        : !ogretmen ? 'Hocamız bekleniyor… (oda ' + O.oda + ')' : O.kilit ? '🔒 Hocamızı takip ediyorsun' : '🔓 Serbest çalışma';
+        : !ogretmen ? 'Hocamız bekleniyor… (oda ' + O.oda + ')'
+        : (DO.Canli.ben && O.odaDurum.yonetici === DO.Canli.ben.id) ? '✋ Söz sende — ekrana sen dokunabilirsin'
+        : O.odaDurum.yonetici === 'herkes' ? '👥 Herkes ekrana dokunabilir'
+        : O.kilit ? '🔒 Hocamızı takip ediyorsun' : '🔓 Serbest çalışma';
       s.className = 'kilit-serit gorunur' + (O.kilit ? ' kilitli' : '');
     } else s.className = 'kilit-serit';
   }
@@ -529,7 +707,7 @@
     ]));
     p.appendChild(el('div', { class: 'panel-satir' }, [
       el('label', { class: 'anahtar' }, [
-        el('input', { type: 'checkbox', checked: O.kilit, onchange: function () { O.kilit = this.checked; C.gonder('kilit', { acik: O.kilit, blok: O.i }); } }),
+        el('input', { type: 'checkbox', checked: O.kilit, onchange: function () { O.kilit = this.checked; O.odaDegistir({ kilit: O.kilit }); } }),
         el('span', { text: 'Öğrenciler beni takip etsin' })
       ]),
       el('label', { class: 'anahtar' }, [
@@ -537,6 +715,32 @@
         el('span', { text: 'Lazer işaretçi' })
       ])
     ]));
+    function secim(baslik, secenekler, deger, degistir) {
+      return el('div', { class: 'panel-secim' }, [
+        el('span', { class: 'secim-baslik', text: baslik }),
+        el('div', { class: 'secim' }, secenekler.map(function (o) {
+          return el('button', { class: o.d === deger ? 'secili' : '', text: o.ad, title: o.ipucu || '', onclick: function () { if (o.d !== deger) degistir(o.d); } });
+        }))
+      ]);
+    }
+    var yon = [{ d: 'ogretmen', ad: 'Yalnız ben' }, { d: 'herkes', ad: 'Herkes' }];
+    ogrenciler.forEach(function (o) { yon.push({ d: o.id, ad: (o.el ? '✋ ' : '') + o.ad }); });
+    if (O.odaDurum.yonetici !== 'ogretmen' && O.odaDurum.yonetici !== 'herkes' && !ogrenciler.some(function (o) { return o.id === O.odaDurum.yonetici; })) O.odaDurum.yonetici = 'ogretmen';
+    p.appendChild(secim('Ortak ekrana kim dokunsun', yon, O.odaDurum.yonetici, function (d) {
+      if (d !== 'ogretmen' && d !== 'herkes' && C.katilimcilar[d]) C.katilimcilar[d].el = false;
+      O.odaDegistir({ yonetici: d });
+    }));
+    p.appendChild(secim('Anlatım ve video sesi', [
+      { d: 'ogretmen', ad: 'Bende', ipucu: 'Ses sizin cihazınızda çalar, görüşmeden öğrencilere gider' },
+      { d: 'ogrenci', ad: 'Öğrencilerde', ipucu: 'Ses her öğrencinin cihazında çalar; sizinki sessiz kalır' }
+    ], O.odaDurum.ses, function (d) { O.odaDegistir({ ses: d }); }));
+    var tanimB = DO.Bloklar[blok.tur] || {};
+    if (tanimB.ortakDestek) {
+      p.appendChild(secim('Bu etkinlik', [
+        { d: 'bireysel', ad: 'Herkes kendi oynasın', ipucu: 'Her öğrenci kendi cevabını verir; sıralar herkeste aynı' },
+        { d: 'ortak', ad: 'Birlikte, tek ekran', ipucu: 'Tek oyun tahtası; söz sahibi oynar, herkes izler' }
+      ], O.blokModu(blok), function (d) { var m = {}; Object.keys(O.odaDurum.modlar).forEach(function (k) { m[k] = O.odaDurum.modlar[k]; }); m[blok.id] = d; O.odaDegistir({ modlar: m }); }));
+    }
 
     p.appendChild(el('h3', { text: 'Öğrenciler (' + ogrenciler.length + ')' }));
     if (!ogrenciler.length) p.appendChild(el('p', { class: 'panel-bos', html: 'Henüz kimse katılmadı. Davet bağlantısını öğrenciye gönderin.<br><small>Deneme için bağlantıyı bu tarayıcıda yeni bir sekmede açabilirsiniz.</small>' }));
@@ -546,14 +750,21 @@
       var dogru = buBlok.filter(function (c) { return c.dogru === true; }).length;
       var yanlis = buBlok.filter(function (c) { return c.dogru === false; }).length;
       var ayni = o.blok === O.i;
-      p.appendChild(el('div', { class: 'ogr-kart' + (o.el ? ' el' : '') }, [
+      var bitirdi = O.bitirenler && O.bitirenler[blok.id + '|' + o.id];
+      var sozde = O.odaDurum.yonetici === o.id;
+      p.appendChild(el('div', { class: 'ogr-kart' + (o.el ? ' el' : '') + (sozde ? ' sozde' : '') }, [
         el('div', { class: 'ogr-ust' }, [
           el('b', { text: (o.el ? '✋ ' : '') + o.ad }),
           el('span', { class: 'ogr-puan', text: '★ ' + (o.puan || 0) })
         ]),
         el('div', { class: 'ogr-alt' }, [
           el('span', { class: 'ogr-konum' + (ayni ? ' ayni' : ''), text: ayni ? 'Bu ekranda' : 'Ekran ' + ((o.blok || 0) + 1) }),
-          buBlok.length ? el('span', { class: 'ogr-cevap', html: '<i class="d">✓ ' + dogru + '</i> <i class="y">✗ ' + yanlis + '</i>' }) : null
+          buBlok.length ? el('span', { class: 'ogr-cevap', html: '<i class="d">✓ ' + dogru + '</i> <i class="y">✗ ' + yanlis + '</i>' }) : null,
+          bitirdi ? el('span', { class: 'ogr-bitti', text: '✓ bitirdi' }) : null,
+          el('button', { class: 'soz-dug', text: sozde ? 'Sözü al' : 'Söz ver', onclick: function () {
+            if (!sozde) o.el = false;
+            O.odaDegistir({ yonetici: sozde ? 'ogretmen' : o.id });
+          } })
         ])
       ]));
     });
@@ -574,9 +785,9 @@
     }
     if (O.aktif && O.aktif.ogretmenAraci) p.appendChild(O.aktif.ogretmenAraci());
     var hizli = el('div', { class: 'panel-mesaj' });
-    var mg = el('input', { type: 'text', placeholder: 'Öğrencilere kısa mesaj…', maxlength: 80 });
+    var mg = el('input', { type: 'text', placeholder: 'Öğrencilere kısa mesaj…', maxlength: 80, value: O.panelMesaj || '', oninput: function () { O.panelMesaj = this.value; } });
     hizli.appendChild(mg);
-    hizli.appendChild(el('button', { class: 'dug kucuk', text: 'Gönder', onclick: function () { if (mg.value.trim()) { C.gonder('mesaj', { metin: mg.value.trim() }); bildir('Mesaj gönderildi', 'bilgi'); mg.value = ''; } } }));
+    hizli.appendChild(el('button', { class: 'dug kucuk', text: 'Gönder', onclick: function () { if (mg.value.trim()) { C.gonder('mesaj', { metin: mg.value.trim() }); bildir('Mesaj gönderildi', 'bilgi'); mg.value = ''; O.panelMesaj = ''; } } }));
     p.appendChild(hizli);
     p.appendChild(el('a', { class: 'dug kucuk ikincil tam', href: 'rapor.html?ders=' + encodeURIComponent(O.ders.id) + '&oda=' + encodeURIComponent(O.oda), target: '_blank', text: 'Ders raporunu aç ↗' }));
   }

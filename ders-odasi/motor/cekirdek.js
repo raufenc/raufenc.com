@@ -58,6 +58,23 @@
     }
     return a;
   };
+  /* Tohumlu karıştırma: canlı derste herkes aynı sırayı görsün */
+  DO.tohum = function (metin) {
+    var h = 1779033703 ^ metin.length;
+    for (var i = 0; i < metin.length; i++) { h = Math.imul(h ^ metin.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+    return function () {
+      h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909);
+      return ((h ^= h >>> 16) >>> 0) / 4294967296;
+    };
+  };
+  DO.tohumluKaristir = function (dizi, tohumMetni) {
+    var r = DO.tohum(tohumMetni), a = dizi.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(r() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  };
   DO.uuid = function () {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
