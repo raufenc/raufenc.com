@@ -93,7 +93,7 @@
     if (m.tur === 'merhaba') {
       kat.blok = m.veri.blok;
       // Yeni gelen herkese kendimizi tanıtalım
-      Canli.gonder('tanit', { blok: Canli.benimBlok || 0 }, g.id);
+      Canli.gonder('tanit', { blok: Canli.benimBlok || 0, oda: Canli.odaDurumu ? Canli.odaDurumu() : null }, g.id);
       Canli.olay.emit('katilim', kat);
     }
     if (m.tur === 'tanit') { kat.blok = m.veri.blok; Canli.olay.emit('katilim', kat); }
