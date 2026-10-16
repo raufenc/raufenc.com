@@ -50,7 +50,7 @@
     if (!ctx.ortak() || !k || !k.kim || k.yerel) return null;
     return el('span', { class: 'kim-etiket', text: (k.kim.rol === 'ogretmen' ? 'Hocamız' : k.kim.ad) + ' cevapladı' });
   }
-  var ORTAK = { canli: 'bireysel', ortakDestek: true };
+  var ORTAK = { canli: 'ortak', ortakDestek: true };   // varsayılan: tek ortak ekran
   function tanim(o) { return Object.assign({}, ORTAK, o); }
 
   /* =====================================================================
@@ -778,7 +778,12 @@
         });
       }
       // Canlı derste başlatma Hocamızdadır: herkes aynı anda başlar
-      ctx.eylemTanimla('basla', function (v, kk) { if (!kk.tekrar && !basladi) geriSayim(); });
+      var ekran = null;
+      ctx.eylemTanimla('basla', function (v, kk) { if (!basladi) { if (kk.tekrar) { basladi = true; soru(); } else geriSayim(); } });
+      ctx.eylemTanimla('cevap', function (v, kk) {
+        if (!basladi) { basladi = true; soru(); }          // yansıtma geç kurulduysa
+        if (ekran && v.sira === ekran.sira) ekran.cevap(v, kk);
+      });
       function baslatIste() {
         if (ctx.canliMi()) {
           if (ctx.rol !== 'ogretmen') return;
@@ -811,19 +816,20 @@
       function soru() {
         clearInterval(zaman);
         if (sira >= liste.length) {
-          ctx.tamamla({ puan: puan });
+          if (!ctx.izliyor()) ctx.tamamla({ puan: puan });
           tabloYaz();
           DO.oyunSonu(ctx, sahne, { puan: puan, max: liste.length * 10, metin: 'Hız turunu bitirdin.', tekrar: ctx.canliMi() ? null : function () { sira = 0; puan = 0; basladi = false; ctx.yeniTur(); liste = ctx.karistir(b.sorular, 'hiz'); giris(); } });
           return;
         }
         var s = liste[sira], bas = Date.now(), bitti = false;
         sahne.innerHTML = '';
+        var buSira = sira;
         var halka = DO.svg('svg', { class: 'hiz-halka', viewBox: '0 0 120 120' });
         halka.innerHTML = '<circle cx="60" cy="60" r="52" fill="#fffaf0" stroke="#eadfc8" stroke-width="10"/><circle class="hiz-iz" cx="60" cy="60" r="52" fill="none" stroke="#4f7a3a" stroke-width="10" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="0" transform="rotate(-90 60 60)"/><text x="60" y="72" text-anchor="middle" class="hiz-kalan">' + sure + '</text>';
         var kart = el('div', { class: 'hiz-kart' }, [el('div', { class: 'hiz-ust' }, [el('span', { class: 'soru-no', text: (sira + 1) + ' / ' + liste.length }), halka]), el('h3', { text: s.metin })]);
         var dug = el('div', { class: 'hiz-dug' });
         s.secenekler.forEach(function (o, i) {
-          dug.appendChild(el('button', { class: 'secenek hiz-sec s' + i, text: o, onclick: function () { cevap(i, this); } }));
+          dug.appendChild(el('button', { class: 'secenek hiz-sec s' + i, text: o, onclick: function () { iste(i); } }));
         });
         kart.appendChild(dug);
         sahne.appendChild(kart);
@@ -833,22 +839,24 @@
           iz.style.strokeDashoffset = (327 * (1 - kalan / sure)).toFixed(1);
           iz.style.stroke = kalan < sure * 0.3 ? '#c0392b' : kalan < sure * 0.6 ? '#e8962e' : '#4f7a3a';
           yazi.textContent = Math.ceil(kalan);
-          if (kalan <= 0) cevap(-1, null);
+          if (kalan <= 0 && !ctx.izliyor()) iste(-1);     // yansıtan ekran öğrencinin cevabını bekler
         }, 100);
-        function cevap(i, dugme) {
+        function iste(i) { if (!bitti) ctx.eylem('cevap', { sira: buSira, i: i, gecen: Math.round((Date.now() - bas) / 100) / 10 }); }
+        ekran = { sira: buSira, cevap: function (v, kk) {
           if (bitti) return; bitti = true; clearInterval(zaman);
-          var dogru = i === s.dogru, gecen = (Date.now() - bas) / 1000;
+          var i = v.i, dogru = i === s.dogru, gecen = v.gecen;
           var p = dogru ? Math.round(5 + 5 * Math.max(0, sure - gecen) / sure) : 0;
-          puan += p;
-          (dogru ? DO.efekt.dogru : DO.efekt.yanlis)();
+          if (kk.yerel) puan += p;
+          efekt(dogru, kk);
           dug.querySelectorAll('button').forEach(function (x) { x.disabled = true; });
-          if (dugme) dugme.classList.add(dogru ? 'dogru' : 'yanlis');
+          if (i >= 0 && dug.children[i]) dug.children[i].classList.add(dogru ? 'dogru' : 'yanlis');
           dug.children[s.dogru].classList.add('dogru');
-          ctx.cevap({ oge: s.id || ('h' + sira), ad: s.metin, yanit: i < 0 ? '(süre doldu)' : s.secenekler[i], dogru: dogru, dogruYanit: s.secenekler[s.dogru], puan: p, max: 10, sureMs: Date.now() - bas });
+          if (kk.yerel) ctx.cevap({ oge: s.id || ('h' + buSira), ad: s.metin, yanit: i < 0 ? '(süre doldu)' : s.secenekler[i], dogru: dogru, dogruYanit: s.secenekler[s.dogru], puan: p, max: 10, sureMs: Math.round(gecen * 1000) });
           tabloYaz();
           kart.appendChild(el('p', { class: 'hiz-sonuc ' + (dogru ? 'd' : 'y'), text: dogru ? '+' + p + ' puan' : (i < 0 ? 'Süre doldu' : 'Yanlış') + ' — doğrusu: ' + s.secenekler[s.dogru] }));
-          ctx.zaman(function () { sira++; soru(); }, dogru ? 1100 : 2000);
-        }
+          var sonra = function () { sira = buSira + 1; soru(); };
+          if (kk.tekrar) sonra(); else ctx.zaman(sonra, dogru ? 1100 : 2000);
+        } };
       }
       giris();
       return {

@@ -31,9 +31,20 @@
        kilit    : öğrenciler öğretmenin ekranını takip eder
        yonetici : ortak ekrana kim dokunabilir — 'ogretmen' | 'herkes' | <katılımcı kimliği>
        ses      : anlatım ve video sesi nerede çalar — 'ogretmen' | 'ogrenci'
-       modlar   : blok kimliği → 'ortak' | 'bireysel' (öğretmenin seçtiği) */
-    O.odaDurum = { kilit: true, yonetici: 'ogretmen', ses: 'ogretmen', modlar: {} };
+       modlar   : blok kimliği → 'ortak' | 'bireysel' (öğretmenin seçtiği)
+       Varsayılan: herkes dokunur, etkinlikler tek ortak ekranda — öğrenci ne yaparsa Hocamızın
+       ekranında da aynısı görünür. "Herkes kendi" etkinliklerde Hocamızın ekranı seçtiği
+       öğrencinin ekranını yansıtır (yansıtma). */
+    O.odaDurum = { kilit: true, yonetici: 'herkes', ses: 'ogretmen', modlar: {} };
     O.gunluk = [];
+    O.yansi = {};        // öğretmen: blok → öğrenci → o öğrencinin kendi ekranındaki hamleler
+    O.yerelGunluk = {};  // öğrenci: blok → kendi ekranındaki hamleler ("herkes kendi" modunda)
+    O.ogrDurum = {};     // öğretmen: öğrenci → blok → {tamam, puan, max}
+    O.izlenenSecim = null;
+    // Hocamız sayfayı yenilerse odanın ayarları (kim dokunur, etkinlik modları) korunur
+    if (O.rol === 'ogretmen') {
+      try { var kayitli = JSON.parse(sessionStorage.getItem('do:oda:' + O.oda) || 'null'); if (kayitli) Object.assign(O.odaDurum, kayitli); } catch (e) { /* yok */ }
+    }
 
     // Düz sıra
     ders.bolumler.forEach(function (b, bi) {
@@ -292,9 +303,12 @@
     Kayit().devamYaz({ b: yeni, d: O.durum });
     if (DO.Canli.acik) {
       DO.Canli.benimBlok = yeni;
-      if (O.rol === 'ogretmen') DO.Canli.gonder('git', { blok: yeni, kilit: O.kilit, oda: O.odaDurum });
+      if (O.rol === 'ogretmen') { DO.Canli.gonder('git', { blok: yeni, kilit: O.kilit, oda: O.odaDurum }); yansiKur(); kilitSerit(); puanYaz(); }
       else {
         DO.Canli.gonder('konum', { blok: yeni });
+        // Kendi ekranımız yeniden kuruldu: Hocamızdaki yansıma da baştan başlasın
+        O.yerelGunluk[blok.id] = [];
+        if (O.blokModu(blok) !== 'ortak') DO.Canli.gonder('yansi', { blok: blok.id, ad: '__bas' });
         // Ortak ekranın o anki hâlini öğretmenden iste (geç katılma, kopup dönme)
         if (DO.Canli.ogretmenVar()) DO.Canli.gonder('durumIste', { blok: blok.id });
       }
@@ -334,6 +348,11 @@
   O.toplamPuan = toplamPuan;
   function puanYaz() {
     var p = toplamPuan();
+    // Canlı derste Hocamızın ekranında izlenen öğrencinin puanı görünür (iki ekran aynı olsun)
+    if (O.rol === 'ogretmen' && canliMi()) {
+      var iz = O.izlenenId && O.izlenenId(), kat = iz && DO.Canli.katilimcilar[iz];
+      if (kat && kat.puan != null) p = kat.puan;
+    }
     O.dom.puan.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="#e9b949" stroke="#b9852b" stroke-width="1.2"/></svg><b>' + p + '</b>';
     O.dom.puan.classList.remove('zipla'); void O.dom.puan.offsetWidth; O.dom.puan.classList.add('zipla');
   }
@@ -417,6 +436,8 @@
     var eylemler = {};
     ctx.canliMi = canliMi;
     ctx.ortak = function () { return canliMi() && O.blokModu(blok) === 'ortak'; };
+    // Hocamız bir öğrencinin ekranını yansıtıyor (kendi kendine hamle üretmez, sayaç bitirmez)
+    ctx.izliyor = function () { return O.rol === 'ogretmen' && canliMi() && O.blokModu(blok) !== 'ortak' && !!O.izlenenId(); };
     ctx.takipte = function () { return O.rol === 'ogrenci' && canliMi() && O.kilit; };
     ctx.sesBende = sesBende;
     // Kendiliğinden ilerleme: canlı derste ekranları yalnızca öğretmen ilerletir
@@ -431,7 +452,16 @@
         if (O.rol !== 'ogretmen') return false;
         return yay(ad, veri, ben);
       }
-      if (O.blokModu(blok) !== 'ortak') return uygula(ad, veri, { yerel: true, kim: ben });
+      if (O.blokModu(blok) !== 'ortak') {
+        if (O.rol === 'ogretmen') {
+          if (O.izlenenId()) { bildir('Şu an ' + izlenenAd() + ' adlı öğrencinin ekranını görüyorsunuz.', 'bilgi'); return false; }
+          return uygula(ad, veri, { yerel: true, kim: ben });
+        }
+        // Öğrenci kendi ekranında oynar; hamlesi Hocamızın ekranına da yansır
+        (O.yerelGunluk[blok.id] = O.yerelGunluk[blok.id] || []).push({ ad: ad, veri: veri });
+        DO.Canli.gonder('yansi', { blok: blok.id, ad: ad, veri: veri });
+        return uygula(ad, veri, { yerel: true, kim: ben });
+      }
       if (!O.yetkili(ben)) { bildir(yetkiMetni(), 'bilgi'); return false; }
       // Birden çok kişi aynı anda dokunabiliyorsa sıra öğretmende tutulur (herkeste aynı sıra)
       if (O.rol !== 'ogretmen' && O.odaDurum.yonetici === 'herkes' && DO.Canli.ogretmenVar()) {
@@ -447,7 +477,7 @@
     function uygula(ad, veri, k) {
       var fn = eylemler[ad];
       if (!fn) return false;
-      if (O.rol === 'ogretmen' && canliMi() && !k.tekrar) O.gunluk.push({ ad: ad, veri: veri, kim: k.kim });
+      if (O.rol === 'ogretmen' && canliMi() && !k.tekrar && !k.yansi && O.blokModu(blok) === 'ortak') O.gunluk.push({ ad: ad, veri: veri, kim: k.kim });
       try { fn(veri, k); } catch (e) { console.error('eylem', ad, e); }
       return true;
     }
@@ -505,6 +535,24 @@
     if (t.canli === 'bireysel-sabit') return 'bireysel';
     return O.odaDurum.modlar[blok.id] || blok.canli || t.canli || 'ortak';
   };
+  /* Yansıtma: Hocamızın ekranında kimin ekranı görünür? (seçilen, yoksa ilk öğrenci) */
+  O.izlenenId = function () {
+    if (O.rol !== 'ogretmen' || !DO.Canli.acik) return null;
+    var ogr = DO.Canli.ogrenciler();
+    if (O.izlenenSecim && ogr.some(function (o) { return o.id === O.izlenenSecim; })) return O.izlenenSecim;
+    var burada = ogr.filter(function (o) { return o.blok === O.i; });
+    return (burada[0] || ogr[0] || {}).id || null;
+  };
+  function izlenenAd() { var k = DO.Canli.katilimcilar[O.izlenenId()]; return k ? k.ad : 'öğrenci'; }
+  /* Yansıtılan ekranı baştan kur ve izlenen öğrencinin hamlelerini uygula */
+  function yansiKur() {
+    var blok = O.sira[O.i], iz = O.izlenenId();
+    O.sonIzlenen = iz;
+    if (!blok || !iz || O.blokModu(blok) === 'ortak' || !O.aktifEylem) return;
+    var g = (O.yansi[blok.id] || {})[iz] || [];
+    if (g.length) O.aktifEylem.yeniden(g);
+    DO.Canli.gonder('yansiIste', { blok: blok.id }, iz);
+  }
   function yetkiMetni() {
     var y = O.odaDurum.yonetici;
     if (y === 'ogretmen') return 'Şu an ekranı Hocamız yönetiyor. Söz istemek için ✋';
@@ -596,7 +644,13 @@
         var v = m.veri, blok = O.sira[O.i];
         if (m.gonderen.rol !== 'ogretmen' || !blok || v.blok !== blok.id) return;
         if (v.mod && O.blokModu(blok) !== v.mod) { O.odaDurum.modlar[blok.id] = v.mod; O.git(O.i); return; }
-        if (O.aktifEylem && v.gunluk && v.gunluk.length) O.aktifEylem.yeniden(v.gunluk);
+        if (O.blokModu(blok) === 'ortak' && O.aktifEylem && v.gunluk && v.gunluk.length) O.aktifEylem.yeniden(v.gunluk);
+      });
+      C.olay.on('yansiIste', function (m) {
+        if (m.gonderen.rol !== 'ogretmen') return;
+        var blok = O.sira[O.i];
+        if (!blok || blok.id !== m.veri.blok) return;
+        C.gonder('yansiGunluk', { blok: blok.id, gunluk: O.yerelGunluk[blok.id] || [] }, m.gonderen.id);
       });
       C.olay.on('isaret', function (m) { lazerGoster(m.veri); });
       C.olay.on('mesaj', function (m) { bildir('Hocamız: ' + m.veri.metin, 'bilgi'); });
@@ -612,7 +666,38 @@
         (O.canliCevaplar = O.canliCevaplar || []).push({ id: m.gonderen.id, ad: m.gonderen.ad, blok: c.blok, oge: c.oge, soru: c.ad, yanit: c.yanit, dogru: c.dogru, t: Date.now() });
         panelYaz();
       });
-      C.olay.on('bitti', function (m) { (O.bitirenler = O.bitirenler || {})[m.veri.blok + '|' + m.gonderen.id] = true; });
+      C.olay.on('bitti', function (m) {
+        (O.bitirenler = O.bitirenler || {})[m.veri.blok + '|' + m.gonderen.id] = true;
+        if (m.gonderen.rol === 'ogretmen') return;
+        var d = (O.ogrDurum[m.gonderen.id] = O.ogrDurum[m.gonderen.id] || {}), e = d[m.veri.blok];
+        if (!e || m.veri.puan >= (e.puan || 0)) d[m.veri.blok] = { tamam: true, puan: m.veri.puan || 0, max: m.veri.max || 0 };
+        if (O.aktif && O.aktif.ogrenciBitirdi) O.aktif.ogrenciBitirdi(m.gonderen.id);
+      });
+      C.olay.on('puan', function () { puanYaz(); });
+      // Öğrencinin kendi ekranındaki hamle: izlenen öğrenciyse Hocamızın ekranında da oynar
+      C.olay.on('yansi', function (m) {
+        var v = m.veri, id = m.gonderen.id, blok = O.sira[O.i];
+        var b = (O.yansi[v.blok] = O.yansi[v.blok] || {});
+        var buEkran = blok && blok.id === v.blok && O.blokModu(blok) !== 'ortak' && O.izlenenId() === id;
+        if (v.ad === '__bas') { b[id] = []; if (buEkran && O.aktifEylem && O.aktifEylem.blokId === v.blok) O.git(O.i); return; }
+        (b[id] = b[id] || []).push({ ad: v.ad, veri: v.veri });
+        if (buEkran && O.aktifEylem && O.aktifEylem.blokId === v.blok) O.aktifEylem.uygula(v.ad, v.veri, { yerel: false, yansi: true, kim: { id: id, ad: m.gonderen.ad, rol: 'ogrenci' } });
+      });
+      // Geç gelen Hocamız (ya da sayfayı yenileyen): öğrencinin tam hamle listesi
+      C.olay.on('yansiGunluk', function (m) {
+        var v = m.veri, id = m.gonderen.id, b = (O.yansi[v.blok] = O.yansi[v.blok] || {});
+        var eski = (b[id] || []).length;
+        if (!v.gunluk || v.gunluk.length <= eski) return;
+        b[id] = v.gunluk.slice();
+        var blok = O.sira[O.i];
+        if (blok && blok.id === v.blok && O.blokModu(blok) !== 'ortak' && O.izlenenId() === id) O.git(O.i);
+      });
+      // İzlenen öğrenci değişti (ilk öğrenci geldi, ayrıldı): yansıtılan ekranı yenile
+      C.olay.on('katilim', function () {
+        var blok = O.sira[O.i];
+        if (blok && O.blokModu(blok) !== 'ortak' && O.izlenenId() !== O.sonIzlenen) O.git(O.i);
+        puanYaz(); kilitSerit();
+      });
       // Öğrenci ortak ekranda hareket istiyor (herkes dokunabilirken sıra burada tutulur)
       C.olay.on('eylemIste', function (m) {
         var v = m.veri, ae = O.aktifEylem, blok = O.sira[O.i];
@@ -631,6 +716,7 @@
   /* Öğretmen: oda durumunu herkese duyur */
   function odaGonder() {
     O.odaDurum.kilit = O.kilit;
+    try { sessionStorage.setItem('do:oda:' + O.oda, JSON.stringify(O.odaDurum)); } catch (e) { /* yok */ }
     DO.Canli.gonder('oda', { durum: O.odaDurum, blok: O.i });
   }
   O.odaDegistir = function (degisiklik) {
@@ -655,6 +741,17 @@
         : O.odaDurum.yonetici === 'herkes' ? '👥 Herkes ekrana dokunabilir'
         : O.kilit ? '🔒 Hocamızı takip ediyorsun' : '🔓 Serbest çalışma';
       s.className = 'kilit-serit gorunur' + (O.kilit ? ' kilitli' : '');
+    } else if (O.rol === 'ogretmen') {
+      var blok = O.sira[O.i], iz = O.izlenenId && O.izlenenId();
+      if (blok && iz && O.blokModu(blok) !== 'ortak') {
+        s.innerHTML = '';
+        s.appendChild(el('span', { text: '👁 ' + izlenenAd() + ' adlı öğrencinin ekranı' }));
+        DO.Canli.ogrenciler().forEach(function (o) {
+          if (o.id === iz) return;
+          s.appendChild(el('button', { class: 'izle-dug', text: o.ad, onclick: function () { O.izlenenSecim = o.id; O.git(O.i); } }));
+        });
+        s.className = 'kilit-serit gorunur izleme';
+      } else s.className = 'kilit-serit';
     } else s.className = 'kilit-serit';
   }
   function elKaldir() {
@@ -737,11 +834,14 @@
     var tanimB = DO.Bloklar[blok.tur] || {};
     if (tanimB.ortakDestek) {
       p.appendChild(secim('Bu etkinlik', [
-        { d: 'bireysel', ad: 'Herkes kendi oynasın', ipucu: 'Her öğrenci kendi cevabını verir; sıralar herkeste aynı' },
-        { d: 'ortak', ad: 'Birlikte, tek ekran', ipucu: 'Tek oyun tahtası; söz sahibi oynar, herkes izler' }
+        { d: 'ortak', ad: 'Birlikte, tek ekran', ipucu: 'Tek oyun tahtası; kim dokunursa herkesin ekranında aynısı olur' },
+        { d: 'bireysel', ad: 'Herkes kendi oynasın', ipucu: 'Her öğrenci kendi ekranında oynar; sizin ekranınızda seçtiğiniz öğrencinin ekranı görünür' }
       ], O.blokModu(blok), function (d) { var m = {}; Object.keys(O.odaDurum.modlar).forEach(function (k) { m[k] = O.odaDurum.modlar[k]; }); m[blok.id] = d; O.odaDegistir({ modlar: m }); }));
     }
 
+    if (O.blokModu(blok) !== 'ortak' && ogrenciler.length) {
+      p.appendChild(secim('Ekranımda kimin ekranı görünsün', ogrenciler.map(function (o) { return { d: o.id, ad: o.ad }; }), O.izlenenId(), function (d) { O.izlenenSecim = d; O.git(O.i); }));
+    }
     p.appendChild(el('h3', { text: 'Öğrenciler (' + ogrenciler.length + ')' }));
     if (!ogrenciler.length) p.appendChild(el('p', { class: 'panel-bos', html: 'Henüz kimse katılmadı. Davet bağlantısını öğrenciye gönderin.<br><small>Deneme için bağlantıyı bu tarayıcıda yeni bir sekmede açabilirsiniz.</small>' }));
     var cevaplar = (O.canliCevaplar || []).filter(function (c) { return c.blok === blok.id; });

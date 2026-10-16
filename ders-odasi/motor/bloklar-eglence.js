@@ -26,7 +26,7 @@
       bosalt: function () { if (!bekleyen) return; clearTimeout(zaman); var f = bekleyen; bekleyen = null; f(); }
     };
   }
-  var ORTAK = { canli: 'bireysel', ortakDestek: true };
+  var ORTAK = { canli: 'ortak', ortakDestek: true };   // varsayılan: tek ortak ekran
   function tanim(o) { return Object.assign({}, ORTAK, o); }
   /* Bir ögenin resmi: gorsel (dosya) → emoji → ikon */
   function resim(ctx, o, boy) {
@@ -127,10 +127,11 @@
 
       /* Sepet kontrolü */
       function sahneX(e) { var r = sahne.getBoundingClientRect(); return (e.clientX - r.left) / ctx.oynatici.olcek; }
-      sahne.addEventListener('pointermove', function (e) { if (oyunda) hedefX = sahneX(e); });
-      sahne.addEventListener('pointerdown', function (e) { if (oyunda) hedefX = sahneX(e); });
-      var tuslar = {};
-      function tusBas(e) { if (!oyunda) return; if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { tuslar[e.key] = true; e.preventDefault(); } }
+      // Yansıtan ekranda (Hocamız) sepeti öğrencinin hamleleri yönetir
+      sahne.addEventListener('pointermove', function (e) { if (oyunda && !ctx.izliyor()) hedefX = sahneX(e); });
+      sahne.addEventListener('pointerdown', function (e) { if (oyunda && !ctx.izliyor()) hedefX = sahneX(e); });
+      var tuslar = {}, sonSepet = -1, sonSepetT = 0;
+      function tusBas(e) { if (!oyunda || ctx.izliyor()) return; if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { tuslar[e.key] = true; e.preventDefault(); } }
       function tusBirak(e) { tuslar[e.key] = false; }
       document.addEventListener('keydown', tusBas); document.addEventListener('keyup', tusBirak);
 
@@ -142,7 +143,7 @@
         kart.style.transform = 'translate(' + (x - 75) + 'px,-170px)';
         dusen.appendChild(kart);
         var ilerleme = (t - basT) / (SURE * 1000);
-        ogeler.push({ el: kart, x: x, y: -170, v: 150 + ilerleme * 190 + rx() * 40, iyi: d.iyi, o: d.o, don: (rx() - 0.5) * 30 });
+        ogeler.push({ n: uretilen - 1, el: kart, x: x, y: -170, v: 150 + ilerleme * 190 + rx() * 40, iyi: d.iyi, o: d.o, don: (rx() - 0.5) * 30 });
       }
       function dongu(t) {
         if (!oyunda) return;
@@ -160,19 +161,29 @@
         // üretim
         var aralik = 1150 - Math.min(1, gecen / SURE) * 550;
         if (t - sonDog > aralik) { sonDog = t; uret(t); }
-        // düşüş ve yakalama
+        // düşüş ve yakalama (yakalamaya öğrencinin kendi ekranı karar verir; Hocamızın ekranı yansıtır)
+        var izle = ctx.izliyor(), tutulan = [];
         for (var i = ogeler.length - 1; i >= 0; i--) {
           var o = ogeler[i];
           o.y += o.v * dt;
           o.el.style.transform = 'translate(' + (o.x - 75) + 'px,' + o.y + 'px) rotate(' + (Math.sin(o.y / 60) * o.don * 0.3) + 'deg)';
-          if (o.y > Y - 260 && o.y < Y - 150 && Math.abs(o.x - sepetX) < 112) { yakala(o); ogeler.splice(i, 1); continue; }
+          if (!izle && o.y > Y - 260 && o.y < Y - 150 && Math.abs(o.x - sepetX) < 112) { tutulan.push(o.n); continue; }
           if (o.y > Y + 10) { if (o.iyi) kacan++; o.el.remove(); ogeler.splice(i, 1); }
         }
+        tutulan.forEach(function (n) { ctx.eylem('yakala', { n: n }); });
+        if (!izle && ctx.canliMi() && Math.abs(hedefX - sonSepet) > 6 && t - sonSepetT > 140) { sonSepet = hedefX; sonSepetT = t; ctx.eylem('sepet', { x: Math.round(hedefX) }); }
         if (kalan <= 0 || can <= 0) { bitir(); return; }
         cerceve = requestAnimationFrame(dongu);
       }
-      function yakala(o) {
-        o.el.remove();
+      ctx.eylemTanimla('sepet', function (v, kk) { if (!kk.yerel) hedefX = v.x; });
+      ctx.eylemTanimla('yakala', function (v, kk) {
+        if (bitti) return;
+        var j = -1; for (var m = 0; m < ogeler.length; m++) if (ogeler[m].n === v.n) { j = m; break; }
+        var o = j >= 0 ? ogeler.splice(j, 1)[0] : (function () { var d = dizi[v.n % dizi.length]; return { n: v.n, el: null, iyi: d.iyi, o: d.o }; })();
+        yakala(o, kk);
+      });
+      function yakala(o, kk) {
+        if (o.el) o.el.remove();
         var x = sepetX, y = Y - 190;
         if (o.iyi) {
           seri++; enSeri = Math.max(enSeri, seri); iyiSay++;
@@ -195,7 +206,7 @@
           sahne.classList.remove('kirmizi'); void sahne.offsetWidth; sahne.classList.add('kirmizi');
           ctx.bildir(o.o.aciklama || ('“' + o.o.metin + '” sofra edebine uymaz.'), 'uyari');
         }
-        skorYolla(false);
+        if (kk && kk.yerel) skorYolla(false);
       }
       function baslat() {
         if (oyunda || bitti) return;
@@ -218,11 +229,10 @@
         cancelAnimationFrame(cerceve);
         ogeler.forEach(function (o) { o.el.remove(); }); ogeler = [];
         var puan = Math.min(MAX, Math.round(ham * MAX / HEDEF));
-        var kotuListe = Object.keys(yakalananKotu);
-        ctx.cevap({ oge: 'sepet', ad: b.baslik || 'Bereket sepeti', yanit: iyiSay + ' ' + OGE + ', ' + kotuSay + ' hata' + (kotuListe.length ? ' (' + kotuListe.join(', ') + ')' : ''),
+        var kotuListe = Object.keys(yakalananKotu), izle = ctx.izliyor();
+        if (!izle) ctx.cevap({ oge: 'sepet', ad: b.baslik || 'Bereket sepeti', yanit: iyiSay + ' ' + OGE + ', ' + kotuSay + ' hata' + (kotuListe.length ? ' (' + kotuListe.join(', ') + ')' : ''),
           dogru: puan >= MAX * 0.6, puan: puan, max: MAX, sureMs: Date.now() - ctx.basla, etkilesim: 'performance' });
-        skorYolla(true);
-        ctx.tamamla({ puan: puan });
+        if (!izle) { skorYolla(true); ctx.tamamla({ puan: puan }); }
         var bilgi = el('div', {}, [
           el('p', { text: can <= 0 ? 'Canların bitti, ama ' + iyiSay + ' ' + OGE + ' sepetine topladın.' : iyiSay + ' ' + OGE + ' topladın · en uzun seri: ' + enSeri }),
           kotuListe.length ? el('p', { class: 'yk-ozet-kotu', text: 'Dikkat: ' + kotuListe.join(' · ') }) : null
@@ -720,11 +730,14 @@
       var b = ctx.blok, O = ctx.oynatici;
       var oyunlar = O.sira.filter(function (x) { var t = DO.Bloklar[x.tur]; return t && t.max && t.max(x) > 0; });
       var kazanilan = [];
+      // Canlı derste Hocamızın sofrası izlenen öğrencinin sofrasıdır (iki ekran aynı)
+      var durum = O.durum, iz = ctx.rol === 'ogretmen' && ctx.canliMi() ? O.izlenenId() : null;
+      if (iz) durum = O.ogrDurum[iz] || {};
       oyunlar.forEach(function (x) {
-        var d = O.durum[x.id];
+        var d = durum[x.id];
         if (d && d.tamam) kazanilan.push({ id: x.id, yildiz: yildizSay(d.max ? d.puan / d.max : 1) });
       });
-      var sonGoruldu = DO.depo.oku('do:sofra:' + O.ders.id, 0);
+      var sonGoruldu = iz ? 0 : DO.depo.oku('do:sofra:' + O.ders.id, 0);
       var yer = [[0, -100], [-260, -80], [260, -80], [-400, 20], [400, 20], [-250, 105], [250, 105], [0, 130], [-130, 15], [130, 15], [-430, -60], [430, -60]];
       var tabaklar = '';
       for (var i = 0; i < Math.min(oyunlar.length, TABAK_SIRA.length); i++) {
@@ -737,7 +750,7 @@
           tabaklar += '<g transform="translate(' + p[0] + ' ' + p[1] + ') scale(1.45)" class="sofra-bos"><ellipse rx="58" ry="22" fill="none" stroke="#b9854a" stroke-width="4" stroke-dasharray="10 10"/><text y="10" text-anchor="middle">?</text></g>';
         }
       }
-      DO.depo.yaz('do:sofra:' + O.ders.id, Math.max(sonGoruldu, kazanilan.length));
+      if (!iz) DO.depo.yaz('do:sofra:' + O.ders.id, Math.max(sonGoruldu, kazanilan.length));
       var kap = el('div', { class: 'sofra' });
       kap.innerHTML = '<svg class="sofra-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">' +
         '<defs><radialGradient id="sofraIsik" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="#fff3d6"/><stop offset="1" stop-color="#f1dfbd"/></radialGradient>' +
@@ -757,7 +770,8 @@
       ctx.kap.appendChild(kap);
       if (kazanilan.length > sonGoruldu) ctx.zaman(function () { DO.efekt.zafer(); }, 600);
       ctx.tamamla({ puan: 0, max: 0 });
-      return {};
+      // Öğrenci bir oyunu sonradan bitirirse Hocamızın sofrası da güncellenir
+      return { ogrenciBitirdi: function (id) { if (id === O.izlenenId()) ctx.zaman(function () { O.git(O.i); }, 300); } };
     }
   };
 })();
