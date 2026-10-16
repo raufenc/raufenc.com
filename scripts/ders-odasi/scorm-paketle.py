@@ -50,7 +50,7 @@ def dosyalar(ders_id, tam_video):
 def manifest(ders_id, bilgi, surum, liste):
     kimlik = 'DERS_ODASI_' + re.sub(r'[^A-Za-z0-9]', '_', ders_id).upper()
     baslik = escape(bilgi['ad'])
-    dosya_xml = '\n'.join(f'      <file href="{escape(f)}"/>' for f in ['index.html'] + liste)
+    dosya_xml = '\n'.join(f'      <file href="{escape(f)}"/>' for f in ['index.html', 'ayarlar.js'] + liste)
     if surum == '1.2':
         return f'''<?xml version="1.0" encoding="UTF-8"?>
 <manifest identifier="{kimlik}" version="1.0"
@@ -132,6 +132,7 @@ def paketle(ders_id, surum, tam_video):
     with zipfile.ZipFile(cikti, 'w', zipfile.ZIP_DEFLATED) as z:
         z.writestr('imsmanifest.xml', manifest(ders_id, bilgi, surum, liste))
         z.writestr('index.html', giris)
+        z.write(os.path.join(KOK, 'ayarlar.js'), 'ayarlar.js')
         for f in liste:
             yol = os.path.join(KOK, f)
             sik = zipfile.ZIP_STORED if f.endswith(('.mp4', '.webm', '.mp3', '.webp', '.png', '.jpg')) else zipfile.ZIP_DEFLATED

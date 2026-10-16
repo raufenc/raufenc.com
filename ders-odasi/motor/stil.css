@@ -462,6 +462,8 @@ button:disabled { cursor: default; }
 .panel-baslik { display: flex; justify-content: space-between; align-items: center; }
 .oda-kodu { font: 900 28px var(--baslik); letter-spacing: .12em; color: var(--yesil); }
 .panel-davet { display: flex; gap: 6px; margin: 8px 0; }
+.panel-baglanti { margin: 6px 0; font-size: 13px; font-weight: 800; color: var(--turuncu); }
+.panel-baglanti.acik { color: var(--yesil); }
 .davet { flex: 1; min-width: 0; font: 12px monospace; padding: 8px; border: 1px solid #d8c9a8; border-radius: 8px; background: #fff; }
 .panel-satir { display: grid; gap: 6px; margin: 8px 0; }
 .anahtar { display: flex; gap: 8px; align-items: center; font-weight: 700; cursor: pointer; }
