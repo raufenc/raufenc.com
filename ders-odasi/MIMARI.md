@@ -157,17 +157,27 @@ Zoom / Meet / platformun kendi görüşmesi yanında açık tutulur.
 de eşlenir. Her blok, hareketlerini "eylem" olarak tanımlar (`ctx.eylemTanimla`) ve yapar
 (`ctx.eylem`); aynı işleyici her cihazda aynı şekilde çalışır.
 
+**Temel kural: Hocamızın ekranı ile öğrencinin ekranı her an aynıdır.** Öğrenci ne yaparsa
+(cevap, kart, sıralama, çark, hata bulma, video oynat/durdur, durak sorusu, niyet kartına yazı)
+Hocamızın ekranında da aynı anda olur; sağdaki panel bunun yanında ek bilgidir.
+
 | Ekran | Canlı derste davranış |
 |---|---|
-| Kapak, bölüm, slayt, kartlar, video | **Ortak ekran:** kart çevirme, slayttaki noktalar, "↻ Dinle", besmele herkeste aynı anda olur |
-| Oyunlar (çoktan seçmeli, doğru/yanlış, sınıflandır, eşleştir, hafıza, yol, gösterge, kilit) | Varsayılan **herkes kendi oynar**; sorular ve kartlar herkeste **aynı sırada** karışır. Hocamız panelden **"Birlikte, tek ekran"** seçerse tek oyun tahtası olur: söz sahibinin hamlesi herkeste görünür ("Zeynep cevapladı"), puan hamleyi yapana yazılır |
-| Anket | Herkes kendi oyunu verir; sonuçları **Hocamız açar** (çocuklar birbirinden etkilenmesin) |
-| Hız turu | Herkes kendi cevaplar; **Hocamız herkes için aynı anda başlatır**, sıralama canlı |
-| Niyet kartı | Herkes kendi yazar; Hocamızın panelinde görünür |
+| Kapak, bölüm, slayt, kartlar, video ve durak soruları | **Ortak ekran:** kim dokunursa (Hocamız ya da öğrenci) herkeste aynı anda olur |
+| Bütün oyunlar (çoktan seçmeli, doğru/yanlış, sınıflandır, eşleştir, hafıza, yol, gösterge, kilit, sırala, hikâye, çark, hata bul) | Varsayılan **"Birlikte, tek ekran"**: tek oyun tahtası; hamle herkeste görünür ("Zeynep cevapladı"), puan hamleyi yapana yazılır. Hocamız panelden **"Herkes kendi oynasın"** derse her öğrenci kendi ekranında oynar ve Hocamızın ekranı **seçtiği öğrencinin ekranını yansıtır** |
+| Hız turu, bereket sepeti | Herkes kendi oynar; **Hocamız herkes için aynı anda başlatır**; Hocamızın ekranı izlenen öğrencinin ekranını yansıtır (sorular, cevaplar, sepet ve düşen nimetler), sıralama canlı |
+| Anket, niyet kartı | Herkes kendi cevaplar; öğrencinin seçimi ve yazdığı Hocamızın ekranında da görünür. Anket sonuçlarını öğrencilere **Hocamız açar** |
+| Bereket sofrası, puan | Hocamızın ekranında izlenen öğrencinin sofrası ve puanı görünür |
+
+**Yansıtma ("herkes kendi" ekranlarda).** Öğrencinin kendi ekranındaki her hamle `yansi`
+mesajıyla Hocamıza da gider; Hocamızın cihazı aynı işleyiciyi çalıştırır (sıralar tohumlu
+karıştığı için aynı ekran oluşur). 1+1 derste izlenen tek öğrencidir; 1+3'te Hocamız panelden ya
+da ekranın üstündeki şeritten kimin ekranını göreceğini seçer. Hocamız sonradan katılırsa ya da
+sayfayı yenilerse öğrenci kendi hamle listesini gönderir, ekran sessizce yeniden kurulur.
 
 Kurallar:
 
-* **Kim dokunabilir:** panelden *Yalnız ben* (varsayılan) / *Herkes* / tek bir öğrenci ("Söz ver").
+* **Kim dokunabilir:** panelden *Herkes* (varsayılan) / *Yalnız ben* / tek bir öğrenci ("Söz ver").
   Söz isteyen öğrencinin eli (✋) söz verilince iner. Yetkisiz dokunuş hiçbir cihazda etki etmez.
 * **Herkes dokunabilirken** hamlelerin sırası öğretmen cihazında tutulur, böylece iki çocuk aynı
   anda dokunsa da bütün ekranlar aynı sonuca varır.
