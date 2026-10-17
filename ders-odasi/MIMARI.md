@@ -109,7 +109,14 @@ etkileşimler, süre ve "kaldığım yerden devam et" doğru çalışıyor.
 
 ## 4. Canlı ders (1 öğretmen + 1-3 öğrenci)
 
-Öğretmen "Canlı ders başlat" der; oda kodu ve davet bağlantısı çıkar. Öğretmen panelinde:
+Öğretmen "Canlı ders başlat" der; sesle söylenebilir bir oda kodu ("lale 47") ve davet bağlantısı
+çıkar. Panel yaşlı Hocalarımız da zorlanmasın diye sadedir: en üstte büyük **Önceki / Sonraki ▶**
+düğmeleri ve sıradaki ekranın adı, **WhatsApp'tan davet gönder** düğmesi, öğrencinin telefonla
+okutacağı **karekod** (ekranda büyük gösterilir), öğrenciler, öğretmen notu. İnce ayarlar
+"⚙ Diğer ayarlar" altındadır; panelin yazısı üç kademe büyütülebilir. **Sunum kumandası** ve klavye
+(Page Down/Up, ok tuşları) ekranları ilerletir. Ana sayfadaki **"Önce deneyin"** bağlantısı bir
+deneme dersi açar: köşedeki küçük pencerede hayalî bir öğrenci katılır ve oyunlarda kendi cevap verir
+(`motor/deneme-ogrenci.js`), Hocamız gerçek ders öncesi prova eder. Panelde ayrıca:
 
 * öğrencilerin hangi ekranda olduğu, puanı, bu ekrandaki doğru/yanlış sayısı
 * gelen cevapların canlı akışı, söz isteyen öğrenci (✋)

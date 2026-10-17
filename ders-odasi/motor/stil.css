@@ -733,6 +733,63 @@ button:disabled { cursor: default; }
 .soz-aciklama { font: 700 23px/1.45 var(--yazi); color: var(--murekkep); margin: 18px auto 0; max-width: 950px; background: var(--krem); border-radius: 20px; padding: 12px 22px; }
 
 /* Hocamızın ekranı bir öğrencinin ekranını yansıtıyor */
-.kilit-serit.izleme { display: flex; align-items: center; gap: 10px; background: #7a4fa3; top: 76px; bottom: auto; }
+.kilit-serit.izleme { display: flex; align-items: center; gap: 10px; background: #7a4fa3; }
 .izle-dug { border: 0; background: rgba(255,255,255,.2); color: #fff; font: 800 15px var(--yazi); border-radius: 999px; padding: 4px 12px; }
 .izle-dug:hover { background: rgba(255,255,255,.35); }
+
+/* =====================================================================
+   Sade Hoca paneli: büyük gezinme, kolay davet, yazı büyüklüğü
+   ===================================================================== */
+.ogretmen-panel { width: 360px; }
+.ogretmen-panel.yazi-2 { font-size: 15px; }
+.ogretmen-panel.yazi-3 { font-size: 18px; width: 420px; }
+.ogretmen-panel.yazi-3 h3 { font-size: 17px; }
+.ogretmen-panel.yazi-3 .ogr-ust b { font-size: 20px; }
+.panel-oda-etiket { display: block; font-size: .78em; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; color: var(--soluk); }
+.oda-kodu { letter-spacing: .04em; }
+.yazi-boyu { display: flex; gap: 4px; align-items: flex-end; }
+.yazi-boyu button { border: 1px solid #d8c9a8; background: #fff; border-radius: 8px; font-weight: 900; color: var(--lacivert); width: 34px; height: 34px; padding: 0; }
+.yazi-boyu .yb1 { font-size: 13px; } .yazi-boyu .yb2 { font-size: 17px; } .yazi-boyu .yb3 { font-size: 22px; }
+.yazi-boyu button.secili { background: var(--lacivert); color: #fff; border-color: var(--lacivert); }
+.panel-gezinme { display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; margin: 14px 0 6px; }
+.panel-gezinme button { border: 0; border-radius: 16px; padding: 14px 8px; font: 900 1.25em var(--yazi); display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 0 rgba(0,0,0,.15); }
+.pg-geri { background: #fff; color: var(--lacivert); border: 2px solid #d8c9a8 !important; }
+.pg-ileri { background: var(--yesil); color: #fff; font-size: 1.45em !important; }
+.panel-gezinme button:disabled { opacity: .35; box-shadow: none; }
+.panel-gezinme button:not(:disabled):active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.15); }
+.panel-konum { margin: 4px 0 10px; line-height: 1.45; }
+.panel-konum span { color: var(--soluk); }
+.panel-davet-dugmeler { display: grid; gap: 6px; margin: 8px 0 4px; }
+.dug.wa { background: #25d366; color: #fff; justify-content: center; font-size: 1.05em; padding: 12px 14px; box-shadow: 0 4px 0 #1a9e4b; }
+.dug.wa b { font-weight: 900; }
+.davet-alt { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.davet-alt .dug { padding: 8px 6px; font-size: .85em; }
+.soz-dug { font-size: .85em; padding: 5px 12px; background: var(--altin); border-color: #b9852b; }
+.buyuk-arac { font-size: 1.05em !important; padding: 14px !important; margin: 12px 0 4px; background: var(--turuncu) !important; color: #fff !important; box-shadow: 0 4px 0 #b06d17 !important; }
+.ogretmen-not { font-size: 1.05em; }
+.panel-detay { margin-top: 18px; border-top: 1px solid #e5dac2; padding-top: 8px; }
+.panel-detay summary { cursor: pointer; font-weight: 900; color: var(--lacivert); padding: 8px 0; list-style: none; }
+.panel-detay summary::-webkit-details-marker { display: none; }
+.panel-detay[open] summary { color: var(--yesil); }
+.panel-ipucu { color: var(--soluk); font-size: .9em; line-height: 1.45; }
+
+/* Karekod: Hocamız ekranını paylaşınca öğrenci telefonla okutur */
+.karekod-perde { position: absolute; inset: 0; z-index: 60; background: rgba(34,52,79,.6); display: grid; place-items: center; cursor: pointer; }
+.karekod-kart { background: #fff; border-radius: 36px; padding: 34px 54px; text-align: center; box-shadow: var(--golge); animation: belir .3s; }
+.karekod-kart h2 { font: 800 40px var(--baslik); color: var(--lacivert); margin: 0 0 10px; }
+.karekod-buyuk svg { width: 420px; height: 420px; }
+.karekod-kart p { font: 700 24px var(--yazi); color: var(--soluk); margin: 8px 0; }
+.karekod-oda { color: var(--yesil); font-size: 30px; }
+.karekod-kart small { font: 700 18px var(--yazi); color: var(--soluk); }
+
+/* Deneme dersi: köşede hayalî öğrencinin ekranı ve ilk rehber */
+.deneme-pencere { position: absolute; left: 16px; bottom: 16px; width: 384px; z-index: 50; background: #22344f; border-radius: 14px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,.45); }
+.deneme-ust { display: flex; justify-content: space-between; align-items: center; color: #fff; font: 800 14px var(--yazi); padding: 6px 10px; }
+.deneme-ust button { border: 0; background: rgba(255,255,255,.2); color: #fff; border-radius: 6px; width: 28px; height: 24px; font-weight: 900; }
+.deneme-cerceve { display: block; width: 384px; height: 216px; border: 0; background: #26241f; }
+.deneme-pencere.kucuk .deneme-cerceve { display: none; }
+.deneme-rehber { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 55; width: 1000px; background: #fffaf0; border: 4px solid var(--yesil); border-radius: 36px; padding: 40px 56px; box-shadow: var(--golge); animation: belir .4s; }
+.deneme-rehber h2 { font: 800 50px var(--baslik); color: var(--lacivert); margin: 0 0 14px; }
+.deneme-rehber ol { font: 700 28px/1.5 var(--yazi); color: var(--murekkep); margin: 0 0 24px; padding-left: 36px; }
+.deneme-rehber li { margin-bottom: 10px; }
+@media (max-width: 900px) { .ogretmen-panel, .ogretmen-panel.yazi-3 { width: 280px; } }

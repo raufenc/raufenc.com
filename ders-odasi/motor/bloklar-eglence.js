@@ -275,6 +275,7 @@
       perde();
       return {
         temizle: function () { oyunda = false; cancelAnimationFrame(cerceve); document.removeEventListener('keydown', tusBas); document.removeEventListener('keyup', tusBirak); },
+        tusAl: function () { return oyunda; },     // oyun sürerken ok tuşları sepeti yönetir, ekranı değiştirmez
         ogretmenAraci: function () {
           if (!ctx.canliMi() || oyunda || bitti) return null;
           return el('button', { class: 'dug kucuk tam', text: '🧺 Bereket sepetini herkes için başlat', onclick: function () { baslatIste(); ctx.oynatici.panelYaz(); } });
