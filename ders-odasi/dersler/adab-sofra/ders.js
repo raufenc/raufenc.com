@@ -40,7 +40,7 @@
             id: 'hikaye-1', tur: 'hikaye', baslik: 'Yusuf eve geliyor', rozet: '📖 Hikâye · 1. bölüm',
             sahneler: [
               {
-                id: 'eve-gelis', gorsel: 'gorsel/hikaye-1.webp',
+                id: 'eve-gelis', gorsel: 'gorsel/hikaye-1.webp', ses: 'ses/hk-eve-gelis.mp3',
                 metin: 'Akşam ezanına az kalmıştı. Yusuf okuldan eve geldi. Mutfaktan mis gibi çorba kokusu geliyordu; karnı zil çalıyordu!',
                 soru: 'Yusuf çok acıkmış. Sence ilk ne yapmalı?',
                 secenekler: [
@@ -50,7 +50,7 @@
                 ]
               },
               {
-                id: 'dede-bekliyor', gorsel: 'gorsel/hikaye-2.webp',
+                id: 'dede-bekliyor', gorsel: 'gorsel/hikaye-2.webp', ses: 'ses/hk-dede-bekliyor.mp3',
                 metin: 'Sofra kuruldu. Dedesi, annesi ve Zeynep yerlerini aldı. Yusuf’un eli hemen çorbaya uzandı… ama dedesi henüz başlamamıştı.',
                 soru: 'Yusuf şimdi ne yapmalı?',
                 secenekler: [
@@ -79,22 +79,22 @@
         bloklar: [
           { id: 'b-once', tur: 'bolum', numara: '1. durak', baslik: 'Sofradan önce', alt: 'Temizlik, davet ve sabır', ikon: 'el', renk: '#4f7a3a' },
           {
-            id: 's-el', tur: 'slayt', gorsel: 'slayt/y15.webp',
+            id: 's-el', tur: 'slayt', gorsel: 'slayt/y15.webp', ses: 'ses/s-el.mp3',
             metin: 'Sofraya oturmadan önce ellerimizi sabunla yıkarız. Hadîs-i şerîfte “Yemeğin bereketi, ondan önce ve sonra elleri yıkamaktır” buyruldu. (Ebû Dâvûd, Tirmizî)',
             not: 'Öğrenciye kendi el yıkama sırasını anlattırın: su, sabun, avuç içi, parmak araları, durulama.'
           },
           {
-            id: 's-davet', tur: 'slayt', gorsel: 'slayt/y10.webp',
+            id: 's-davet', tur: 'slayt', gorsel: 'slayt/y10.webp', ses: 'ses/s-davet.mp3',
             metin: 'Sofra hazırlanınca ev sahibi ya da büyüklerimiz davet edene kadar bekleriz. Misafirlikte de davet edilmeden sofraya oturmayız.',
             not: 'Sorun: “Misafirliğe gittin, sofra kuruluyor. Ne yaparsın?”'
           },
           {
-            id: 's-buyuk', tur: 'slayt', gorsel: 'slayt/y11.webp',
+            id: 's-buyuk', tur: 'slayt', gorsel: 'slayt/y11.webp', ses: 'ses/s-buyuk.mp3',
             metin: 'Yemeğe önce büyüklerimiz başlar. Onlar başlamadan elimizi uzatmayız; en güzel lokmayı önce onlara ikram ederiz.',
             not: 'Hikâyedeki dede sahnesini hatırlatın.'
           },
           {
-            id: 's-oturus', tur: 'slayt', gorsel: 'slayt/y07.webp',
+            id: 's-oturus', tur: 'slayt', gorsel: 'slayt/y07.webp', ses: 'ses/s-oturus.mp3',
             metin: 'Sofrada güzel oturmanın bir yolu sünnet oturuşudur: sağ diz dikilir, sol ayak altta kalır. Yayılarak, ayak uzatarak oturmayız.',
             vurgular: [
               { id: 'sag', x: 610, y: 320, r: 90, etiket: 'Sağ diz dik' },
@@ -103,7 +103,7 @@
             not: 'Öğrenciyle birlikte oturuşu deneyin. Dizlerde sıkıntısı varsa iki diz üstü ya da bağdaş da olur; önemli olan edepli ve toplu oturmaktır.'
           },
           {
-            id: 's-otur', tur: 'slayt', gorsel: 'slayt/y04.webp',
+            id: 's-otur', tur: 'slayt', gorsel: 'slayt/y04.webp', ses: 'ses/s-otur.mp3',
             metin: 'Sofrada dik ve toplu otururuz; gözümüz başkalarının tabağında olmaz, elimiz kendi önümüzde durur.',
             not: 'Slayttaki küçük daireleri gösterin: dik sırt, kendi tabağına bakan göz, önünde duran el, toplu diz.'
           },
@@ -133,12 +133,12 @@
         bloklar: [
           { id: 'b-yerken', tur: 'bolum', numara: '2. durak', baslik: 'Sofrada', alt: 'Besmele, sağ el, önünden ye', ikon: 'yildiz', renk: '#e8962e' },
           {
-            id: 's-besmele', tur: 'slayt', gorsel: 'slayt/a08-02.webp',
+            id: 's-besmele', tur: 'slayt', gorsel: 'slayt/a08-02.webp', ses: 'ses/s-besmele.mp3',
             metin: 'Yemeğe “Bismillâhirrahmânirrahîm” diyerek başlarız. Besmele ile başlanan sofraya bereket gelir.',
             not: 'Besmeleyi öğrenciyle birlikte okuyun. Unutursa hatırlayınca “Bismillâhi evvelehû ve âhirehû” denir; çarktaki soruda geçecek.'
           },
           {
-            id: 'soz-evladim', tur: 'soz', ust: 'Hadîs-i şerîf', renk: '#e8962e',
+            id: 'soz-evladim', tur: 'soz', ses: 'ses/soz-evladim.mp3', ust: 'Hadîs-i şerîf', renk: '#e8962e',
             giris: 'Hazret-i Ömer bin Ebû Seleme küçük bir çocukken Peygamber Efendimizin (sallallahü aleyhi ve sellem) yanında yemek yiyordu; eli tabağın her yanında dolaşıyordu. Peygamber Efendimiz (sallallahü aleyhi ve sellem) ona şefkatle şöyle buyurdu:',
             metin: '“Evlâdım! Besmele çek, sağ elinle ye ve önünden ye.”',
             kaynak: 'Buhârî, Et‘ime 2 · Müslim, Eşribe 108',
@@ -146,30 +146,30 @@
             not: 'Peygamber Efendimizin (sallallahü aleyhi ve sellem) çocuğu azarlamadan, “Evlâdım” diye şefkatle öğrettiğine dikkat çekin.'
           },
           {
-            id: 's-sag', tur: 'slayt', gorsel: 'slayt/y03.webp',
+            id: 's-sag', tur: 'slayt', gorsel: 'slayt/y03.webp', ses: 'ses/s-sag.mp3',
             metin: 'Sağ elimizle yer, sağ elimizle içeriz. Peygamber Efendimiz (sallallahü aleyhi ve sellem) yemeyi ve içmeyi sağ elle yapmayı emretti. (Müslim)',
             not: 'Solak öğrenci varsa nazikçe konuşun: yazıyı sol elle yazabilir; yemekte sağ eli kullanmaya alışmak edebdir.'
           },
           {
-            id: 's-onunden', tur: 'slayt', gorsel: 'slayt/y06.webp',
+            id: 's-onunden', tur: 'slayt', gorsel: 'slayt/y06.webp', ses: 'ses/s-onunden.mp3',
             metin: 'Ortak tabaktan yerken kendi önümüzden yeriz. Başkasının önüne, tabağın ortasına uzanmayız.',
             not: 'Sorun: “Tepsinin ortasında en güzel et var. Ne yaparsın?”'
           },
           {
-            id: 's-lokma', tur: 'slayt', gorsel: 'slayt/y09.webp',
+            id: 's-lokma', tur: 'slayt', gorsel: 'slayt/y09.webp', ses: 'ses/s-lokma.mp3',
             metin: 'Lokmalarımızı küçük alır, iyice çiğneriz. Ağzımızdaki lokmayı yutmadan yenisini almayız.'
           },
           {
-            id: 's-olcu', tur: 'slayt', gorsel: 'slayt/y02.webp',
+            id: 's-olcu', tur: 'slayt', gorsel: 'slayt/y02.webp', ses: 'ses/s-olcu.mp3',
             metin: 'Ölçülü yeriz. Hadîs-i şerîfte midenin üçte birinin yemeğe, üçte birinin suya, üçte birinin de nefese ayrılması tavsiye edildi. (Tirmizî, Zühd 47)',
             not: 'Terazi resmini gösterin: “Doyunca dururuz; tıka basa yemeyiz.”'
           },
           {
-            id: 's-sohbet', tur: 'slayt', gorsel: 'slayt/y08.webp',
+            id: 's-sohbet', tur: 'slayt', gorsel: 'slayt/y08.webp', ses: 'ses/s-sohbet.mp3',
             metin: 'Sofrada güzel ve tatlı sohbet ederiz. Ağzımız doluyken konuşmayız; kimseyi kırmayız, yemeği ayıplamayız.'
           },
           {
-            id: 's-hurmet', tur: 'slayt', gorsel: 'slayt/y12.webp',
+            id: 's-hurmet', tur: 'slayt', gorsel: 'slayt/y12.webp', ses: 'ses/s-hurmet.mp3',
             metin: 'Sofrada hürmetli oluruz: ağzımızı şapırdatmayız, yüksek sesle gülüp bağırmayız, başkalarını rahatsız edecek davranışlardan uzak dururuz.'
           },
           {
@@ -193,7 +193,7 @@
             id: 'hikaye-2', tur: 'hikaye', baslik: 'Sofrada bir an', rozet: '📖 Hikâye · 2. bölüm',
             sahneler: [
               {
-                id: 'dusen-ekmek', gorsel: 'gorsel/hikaye-3.webp',
+                id: 'dusen-ekmek', gorsel: 'gorsel/hikaye-3.webp', ses: 'ses/hk-dusen-ekmek.mp3',
                 metin: 'Yemek çok güzeldi! Yusuf ekmeğini çorbaya banarken bir parçası elinden kayıp sofra bezinin kenarına düştü.',
                 soru: 'Yusuf ne yapmalı?',
                 secenekler: [
@@ -203,7 +203,7 @@
                 ]
               },
               {
-                id: 'artan-pilav', gorsel: 'gorsel/hikaye-4.webp',
+                id: 'artan-pilav', gorsel: 'gorsel/hikaye-4.webp', ses: 'ses/hk-artan-pilav.mp3',
                 metin: 'Yusuf tabağına pilavı tepeleme koymuştu. Biraz sonra karnı doydu ama tabakta hâlâ pilav vardı.',
                 soru: 'Şimdi ne yapsın?',
                 secenekler: [
@@ -253,25 +253,25 @@
         bloklar: [
           { id: 'b-icerken', tur: 'bolum', numara: '3. durak', baslik: 'İçerken ve sofradan kalkarken', alt: 'Üç yudum, örtülü kap, şükür', ikon: 'kalp', renk: '#2a9d8f' },
           {
-            id: 's-ic', tur: 'slayt', gorsel: 'slayt/y17.webp',
+            id: 's-ic', tur: 'slayt', gorsel: 'slayt/y17.webp', ses: 'ses/s-ic.mp3',
             metin: 'Suyu sağ elimizle, oturarak ve üç yudumda içeriz. Peygamber Efendimiz (sallallahü aleyhi ve sellem) içerken üç kere nefes alırdı; bardağın içine nefes vermezdi. (Buhârî, Müslim)',
             not: 'Bir bardak suyla birlikte deneyin: besmele, üç yudum, her yudumda bardağı ağızdan uzaklaştırmak, sonunda “Elhamdülillah”.'
           },
           {
-            id: 's-kapat', tur: 'slayt', gorsel: 'slayt/y16.webp',
+            id: 's-kapat', tur: 'slayt', gorsel: 'slayt/y16.webp', ses: 'ses/s-kapat.mp3',
             metin: 'Yiyecek ve içeceklerin üstünü örteriz. Hadîs-i şerîfte geceleyin kapların örtülmesi emredildi. (Buhârî, Müslim)'
           },
           {
-            id: 's-israf', tur: 'slayt', gorsel: 'slayt/y05.webp',
+            id: 's-israf', tur: 'slayt', gorsel: 'slayt/y05.webp', ses: 'ses/s-israf.mp3',
             metin: 'İsraf etmeyiz. Tabağımıza yiyebileceğimiz kadar alırız; kırıntıları çöpe değil kuşlara, hayvanlara veririz.',
             not: 'Slayttaki kediyi gösterin: artanlar hayvanlarla paylaşılabilir.'
           },
           {
-            id: 's-son-lokma', tur: 'slayt', gorsel: 'slayt/y19.webp',
+            id: 's-son-lokma', tur: 'slayt', gorsel: 'slayt/y19.webp', ses: 'ses/s-son-lokma.mp3',
             metin: 'Tabağımızı temiz bırakırız. Peygamber Efendimiz (sallallahü aleyhi ve sellem) “Bereketin yemeğin hangi kısmında olduğunu bilemezsiniz” buyurdu. (Müslim)'
           },
           {
-            id: 'soz-lokma', tur: 'soz', ust: 'Hadîs-i şerîf', renk: '#2a9d8f',
+            id: 'soz-lokma', tur: 'soz', ses: 'ses/soz-lokma.mp3', ust: 'Hadîs-i şerîf', renk: '#2a9d8f',
             giris: 'Peygamber Efendimiz (sallallahü aleyhi ve sellem) şöyle buyurdu:',
             metin: '“Sizden birinizin lokması düşerse ona bulaşanı gidersin ve onu yesin; şeytana bırakmasın.”',
             kaynak: 'Müslim, Eşribe',
@@ -289,20 +289,20 @@
             not: 'İpucu düğmesi bir bölgeyi parlatır (o hata 5 puan). Öğrenci bulduğu her hatanın doğrusunu sesli söylesin.'
           },
           {
-            id: 's-hamd', tur: 'slayt', gorsel: 'slayt/y18.webp',
+            id: 's-hamd', tur: 'slayt', gorsel: 'slayt/y18.webp', ses: 'ses/s-hamd.mp3',
             metin: 'Yemekten sonra “Elhamdülillah” der, dua ederiz. Allahü teâlâ, kulunun bir lokma yiyip bir yudum içip kendisine hamd etmesinden razı olur. (Müslim)',
             not: 'Yemek duasını birlikte okuyun; öğrencinin evde okuduğu duayı sorun.'
           },
           {
-            id: 's-dis', tur: 'slayt', gorsel: 'slayt/y14.webp',
+            id: 's-dis', tur: 'slayt', gorsel: 'slayt/y14.webp', ses: 'ses/s-dis.mp3',
             metin: 'Yemekten sonra ellerimizi yıkar, ağzımızı çalkalar, dişlerimizi misvak ya da fırçayla temizleriz.'
           },
           {
-            id: 's-dis-yer', tur: 'slayt', gorsel: 'slayt/a08-04.webp',
+            id: 's-dis-yer', tur: 'slayt', gorsel: 'slayt/a08-04.webp', ses: 'ses/s-dis-yer.mp3',
             metin: 'Diş temizliğini sofrada değil, kimseyi rahatsız etmeden uygun bir yerde yaparız.'
           },
           {
-            id: 's-tesekkur', tur: 'slayt', gorsel: 'slayt/a08-05.webp',
+            id: 's-tesekkur', tur: 'slayt', gorsel: 'slayt/a08-05.webp', ses: 'ses/s-tesekkur.mp3',
             metin: 'Misafirlikte yemekten sonra ev sahibine teşekkür eder, “Allahü teâlâ bereket versin” diye dua ederiz.'
           },
           {
@@ -342,7 +342,7 @@
             id: 'hikaye-3', tur: 'hikaye', baslik: 'Sofradan kalkarken', rozet: '📖 Hikâye · son bölüm',
             sahneler: [
               {
-                id: 'dua', gorsel: 'gorsel/hikaye-5.webp',
+                id: 'dua', gorsel: 'gorsel/hikaye-5.webp', ses: 'ses/hk-dua.mp3',
                 metin: 'Herkes doymuştu. Dedesi ellerini açtı; Zeynep de, Yusuf da ellerini açtı.',
                 soru: 'Sofradan kalkmadan önce ne yapılır?',
                 secenekler: [
@@ -352,7 +352,7 @@
                 ]
               },
               {
-                id: 'kuslar', gorsel: 'gorsel/bitis.webp',
+                id: 'kuslar', gorsel: 'gorsel/bitis.webp', ses: 'ses/hk-kuslar.mp3',
                 metin: 'Yusuf ile Zeynep sofrayı topladı. Kırıntıları da pencerenin önündeki serçelere ayırdılar. Dedesi gülümsedi: “İşte bereketli sofra böyle olur.”',
                 soru: 'Sofra toplanırken sen ne yaparsın?',
                 secenekler: [
