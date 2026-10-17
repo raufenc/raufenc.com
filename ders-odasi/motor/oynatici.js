@@ -541,15 +541,19 @@
     /* Sesli anlatım: blok açılınca (ayar açıksa) çalar */
     ctx.anlatim = function (dosya, metin) {
       if (!dosya) return null;
-      var ses = new Audio(O.yol(dosya));
+      var ses = new Audio(O.yol(dosya)), kapandi = false;
       ses.preload = 'auto';
       var cal = function () {
+        if (kapandi) return;
         var p = ses.play(); if (p && p.catch) p.catch(function () { /* izin yok */ });
       };
       if (O.ayar.anlatim && sesBende()) ctx.zaman(cal, 450);
       O.temizlikler.push(function () { ses.pause(); ses.src = ''; });
       ses.addEventListener('ended', function () { ctx.kaydet('deneyimledi', { id: 'anlatim', ad: 'Sesli anlatım dinlendi' }); });
-      return { ses: ses, cal: cal, durdur: function () { ses.pause(); } };
+      return {
+        ses: ses, cal: cal, durdur: function () { ses.pause(); },
+        kapat: function () { kapandi = true; ses.pause(); }     // bir daha çalmaz (sahne değişti)
+      };
     };
     return ctx;
   }

@@ -71,10 +71,10 @@ Harici kütüphane yok; her şey düz HTML/CSS/JS ve SVG. Sunucu gerektirmez.
 | `hizTuru` | süreli tekrar, hız bonusu, canlı derste sınıf sıralaması |
 | `yakala` | “Bereket sepeti”: yukarıdan düşen güzel davranışları sepete topla, hatalardan kaç; kombo, 3 can, süre. Canlı derste Hocamız başlatır, sınıf sıralaması canlı görünür |
 | `sirala` | adımları doğru sıraya diz; her doğru adımda Yusuf SVG yolda bir durak ilerler |
-| `hikaye` | resimli, seçimli hikâye; her seçim bir sonuç doğurur, iyi seçim yıldız kazandırır |
+| `hikaye` | resimli, seçimli hikâye; her seçim bir sonuç doğurur, iyi seçim yıldız kazandırır; sahnede `ses` varsa sahne açılınca okunur |
 | `cark` | soru çarkı: çevir, gelen dilimin sorusunu cevapla (dilim çeviren cihazda seçilir, eylemle herkese aynı gider) |
 | `hataBul` | resimdeki yanlışları bul; koordinatlar 1600×900 resim düzleminde, ipucu düğmesi |
-| `soz` | hadîs-i şerîf / büyüklerimizin sözü için vakur kart (kaynaklı) |
+| `soz` | hadîs-i şerîf / büyüklerimizin sözü için vakur kart (kaynaklı); `ses` ile sesli okunur |
 | `sofra` | dersteki oyunlar bitirildikçe sofraya bir nimet gelir; üç yıldızlı tabak parıldar |
 | `kapanis` | rozet, puan özeti, LMS içinde "Dersi bitir" |
 

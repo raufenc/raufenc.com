@@ -376,7 +376,7 @@
     ciz: function (ctx) {
       var b = ctx.blok, sahneler = b.sahneler, n = sahneler.length;
       var k = DO.oyunKabuk(ctx, { rozet: b.rozet || '📖 Hikâye', sinif: 'oyun-hikaye' });
-      var sira = 0, puan = 0, yildiz = 0, hata = {}, ekran = null, maxYildiz = sahneler.filter(function (s) { return s.secenekler; }).length;
+      var sira = 0, puan = 0, yildiz = 0, hata = {}, ekran = null, anlatim = null, maxYildiz = sahneler.filter(function (s) { return s.secenekler; }).length;
       var cerceve = el('div', { class: 'hy-cerceve' });
       var panel = el('div', { class: 'hy-panel' });
       var sayac = el('div', { class: 'hy-yildizlar' });
@@ -392,8 +392,11 @@
         }, 22);
         p.onclick = function () { clearInterval(t); p.textContent = metin; p.classList.remove('yaziyor'); };
       }
+      function sesKapat() { if (anlatim) anlatim.kapat(); anlatim = null; }
       function goster(kk) {
         var s = sahneler[sira], buSira = sira;
+        sesKapat();
+        if (s.ses && !(kk && kk.tekrar) && !ctx.izliyor()) anlatim = ctx.anlatim(s.ses);   // her sahnenin kendi anlatımı (öğrenci izlenirken okunmaz)
         cerceve.innerHTML = '';
         var img = el('img', { class: 'hy-resim', src: ctx.yol(s.gorsel), alt: '', draggable: 'false' });
         cerceve.appendChild(img);
@@ -452,7 +455,7 @@
       ctx.eylemTanimla('devam', function (v, kk) {
         if (!ekran || v.s !== ekran.sira || !ekran.cozuldu) return;
         if (v.s >= n - 1) {
-          ekran = null;
+          ekran = null; sesKapat();
           ctx.tamamla({ puan: puan });
           DO.oyunSonu(ctx, panel, { puan: puan, max: maxYildiz * 10, baslik: b.sonBaslik || 'Hikâye bitti!', metin: b.sonMetin });
           return;
@@ -460,7 +463,9 @@
         sira = v.s + 1; goster(kk);
       });
       goster();
-      return {};
+      return {
+        anlatimDegisti: function (acik) { if (!anlatim) return; if (acik) anlatim.cal(); else anlatim.durdur(); }
+      };
     }
   });
 
@@ -701,8 +706,11 @@
       kap.appendChild(kart);
       ctx.kap.appendChild(kap);
       DO.efekt.gecis();
+      var a = ctx.anlatim(b.ses);
       ctx.tamamla({ puan: 0, max: 0 });
-      return {};
+      return {
+        anlatimDegisti: function (acik) { if (!a) return; if (acik) a.cal(); else a.durdur(); }
+      };
     }
   };
 
