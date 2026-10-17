@@ -82,11 +82,18 @@
       return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
   };
+  /* Oda kodu sesle söylenebilir olsun ("lale 47"): Türkçe harfsiz kelime + iki rakam */
+  var ODA_KELIME = 'elma armut kalem bulut nar hurma fidan kubbe bahar yaprak lale papatya zambak sabah akasya kavak ceylan kumru kartal kelebek portakal muz dut ayva yonca mercan yakut sedef orman yayla ova tepe pamuk'.split(' ');
   DO.odaKodu = function () {
-    var h = 'ABCDEFGHJKLMNPRSTUVYZ23456789', s = '';
-    for (var i = 0; i < 5; i++) s += h[Math.floor(Math.random() * h.length)];
-    return s;
+    return ODA_KELIME[Math.floor(Math.random() * ODA_KELIME.length)] + (10 + Math.floor(Math.random() * 90));
   };
+  /* Yazılan kodu tek biçime getir: "LALE 47", "lale-47" → "lale47" */
+  DO.odaDuzelt = function (s) {
+    var tr = { 'â': 'a', 'Â': 'a', 'ı': 'i', 'İ': 'i', 'î': 'i', 'û': 'u', 'ü': 'u', 'Ü': 'u', 'ö': 'o', 'Ö': 'o', 'ş': 's', 'Ş': 's', 'ç': 'c', 'Ç': 'c', 'ğ': 'g', 'Ğ': 'g' };
+    return String(s || '').replace(/[âÂıİîûüÜöÖşŞçÇğĞ]/g, function (c) { return tr[c]; }).toLowerCase().replace(/[^a-z0-9]/g, '');
+  };
+  /* Okunuşu kolay gösterim: "lale47" → "lale 47" */
+  DO.odaOkunus = function (s) { return String(s || '').replace(/^([a-z]+)(\d+)$/, '$1 $2'); };
   DO.bekle = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
   DO.param = function (ad, vars) {
     var v = new URLSearchParams(location.search).get(ad);

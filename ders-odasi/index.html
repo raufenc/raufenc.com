@@ -41,6 +41,8 @@
   .rozet { display: inline-block; background: var(--yesil); color: #fff; font-weight: 900; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
   .rozet.taslak { background: var(--cizgi2); color: var(--murekkep); }
   .rozet.oyunlu { background: #e8962e; }
+  .deneme-bag { flex-basis: 100%; font-size: 14px; font-weight: 800; color: var(--yesil); text-decoration: none; margin-top: 2px; }
+  .deneme-bag:hover { text-decoration: underline; }
   .dug { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 999px; padding: 11px 18px; font: 900 15px 'Nunito', sans-serif; text-decoration: none; cursor: pointer; transition: transform .15s; }
   .dug:hover { transform: translateY(-2px); }
   .dug.ana { background: var(--yesil); color: #fff; box-shadow: 0 4px 0 #3a5b2a; }
@@ -50,7 +52,7 @@
   form.katil { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   form.katil label { font-weight: 800; font-size: 14px; display: grid; gap: 4px; }
   form.katil input, form.katil select { font: 800 17px 'Nunito', sans-serif; padding: 10px 12px; border: 2px solid var(--cizgi2); border-radius: 12px; background: #fff; color: var(--murekkep); width: 100%; }
-  form.katil input[name=oda] { text-transform: uppercase; letter-spacing: .15em; }
+  form.katil input[name=oda] { text-transform: lowercase; letter-spacing: .08em; }
   form.katil .tam { grid-column: 1 / -1; }
   section.seri { margin: 34px 0; }
   section.seri h2 { font: 800 30px 'Baloo 2', sans-serif; margin: 0 0 4px; color: var(--lacivert); }
@@ -88,7 +90,7 @@
       <h2>Canlı derse katıl</h2>
       <p>Hocamızın verdiği oda kodunu ve adını yaz.</p>
       <form class="katil" id="katil">
-        <label>Oda kodu<input name="oda" required maxlength="8" placeholder="ABC12" autocomplete="off"></label>
+        <label>Oda kodu<input name="oda" required maxlength="14" placeholder="lale 47" autocomplete="off" autocapitalize="none"></label>
         <label>Adın<input name="ad" required maxlength="30" placeholder="Adın"></label>
         <label class="tam">Ders<select name="d" id="dersSec"></select></label>
         <button class="dug ana tam" type="submit">Derse katıl →</button>
@@ -122,7 +124,8 @@
 (function () {
   var katalog = DO.katalog || [];
   function kac(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-  function odaKodu() { var h = 'ABCDEFGHJKLMNPRSTUVYZ23456789', s = ''; for (var i = 0; i < 5; i++) s += h[Math.floor(Math.random() * h.length)]; return s; }
+  var ODA_KELIME = 'elma armut kalem bulut nar hurma fidan kubbe bahar yaprak lale papatya zambak sabah akasya kavak ceylan kumru kartal kelebek portakal muz dut ayva yonca mercan yakut sedef orman yayla ova tepe pamuk'.split(' ');
+  function odaKodu() { return ODA_KELIME[Math.floor(Math.random() * ODA_KELIME.length)] + (10 + Math.floor(Math.random() * 90)); }
   function meta(d) {
     var p = [];
     if (d.slayt) p.push(d.slayt + ' slayt');
@@ -136,6 +139,7 @@
     return '<div class="dugmeler">' +
       '<a class="dug ana" href="ders.html?d=' + kac(d.id) + '">Kendi başına</a>' +
       '<a class="dug lacivert canli" data-id="' + kac(d.id) + '" href="#">Canlı ders başlat</a>' +
+      '<a class="deneme-bag" data-id="' + kac(d.id) + '" href="#" title="Gerçek öğrenci olmadan, hayalî bir öğrenciyle prova">Önce deneyin (hayalî öğrenciyle) →</a>' +
       '</div>';
   }
   var tam = katalog.filter(function (d) { return d.oneCikan; })[0] || katalog.filter(function (d) { return d.durum === 'tam'; })[0];
@@ -165,6 +169,8 @@
   document.getElementById('seriler').innerHTML = html;
 
   document.addEventListener('click', function (e) {
+    var dn = e.target.closest('.deneme-bag');
+    if (dn) { e.preventDefault(); location.href = 'ders.html?d=' + encodeURIComponent(dn.dataset.id) + '&rol=ogretmen&deneme=1&oda=deneme' + (10 + Math.floor(Math.random() * 90)) + Math.floor(Math.random() * 1000); return; }
     var a = e.target.closest('.canli');
     if (!a) return;
     e.preventDefault();
@@ -174,7 +180,8 @@
   try { f.ad.value = JSON.parse(localStorage.getItem('do:ad') || '""'); } catch (e) { /* yok */ }
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    var oda = f.oda.value.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+    var tr = { 'â': 'a', 'Â': 'a', 'ı': 'i', 'İ': 'i', 'î': 'i', 'û': 'u', 'ü': 'u', 'Ü': 'u', 'ö': 'o', 'Ö': 'o', 'ş': 's', 'Ş': 's', 'ç': 'c', 'Ç': 'c', 'ğ': 'g', 'Ğ': 'g' };
+    var oda = f.oda.value.trim().replace(/[âÂıİîûüÜöÖşŞçÇğĞ]/g, function (c) { return tr[c]; }).toLowerCase().replace(/[^a-z0-9]/g, '');
     var ad = f.ad.value.trim();
     if (!oda || !ad) return;
     try { localStorage.setItem('do:ad', JSON.stringify(ad)); } catch (x) { /* yok */ }
