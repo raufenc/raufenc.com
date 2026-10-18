@@ -1,0 +1,54 @@
+{
+  "_aciklama": "Kaynak–kazanım–kanıt matrisi: her kazanım için bu alanların tamamı dolu olmalı. Boş alan = kazanım yayına çıkamaz.",
+  "kod": "YOL-ALAN-NN[.k]",
+  "yol": "kuran | ilmihal",
+  "modul": 1,
+  "sira": 0,
+  "baslik": "",
+  "ubd": {
+    "anlama": "Öğrenci şunu anlar: …",
+    "bilgi_beceri": ["…"],
+    "transfer": "Yeni bir durumda şunu yapabilir: …",
+    "temel_soru": "…"
+  },
+  "kaynak": {
+    "dini_icerik": ["R:… (Hakikat Kitabevi eseri, sayfa)"],
+    "kuran_ogretimi": ["S:KRB:cilt:sayfa | S:ELF:…"],
+    "yontem_referansi": ["MEB … programı, yalnız yöntem için"],
+    "karekod": "Q:KOD"
+  },
+  "onkosul": ["KOD", "KOD"],
+  "kanitlar": [
+    {
+      "kod": "Kn:KOD:1",
+      "gorev": "Öğrencinin yapacağı şey (çoktan seçmeli dışında da olmalı)",
+      "olcut": "Hocanın bakacağı ölçüt",
+      "canli_gerekir": true,
+      "seviye_aciklamasi": {
+        "henuz_degil": "",
+        "yardimla": "",
+        "ipucuyla": "",
+        "bagimsiz": ""
+      }
+    }
+  ],
+  "etkinlikler": [
+    {
+      "kod": "E:KOD:tip:1",
+      "tip": "eslestir | surukle | sirala | ayirt | sec | dinle-sec | acikla | uygula | goster",
+      "mod": ["kendi_calisma", "canli", "yuz_yuze"],
+      "aciklama": "",
+      "hassasiyet_notu": "Kur'ân metni ve dinî kavram oyun unsuru yapılmaz."
+    }
+  ],
+  "canli_ders_akisi": {
+    "hatirlama_dk": 2,
+    "gosterim_dk": 3,
+    "ogrenci_uygulama_dk": 6,
+    "duzeltme_ve_yeni_ornek_dk": 4
+  },
+  "hoca_aciklamasi": "H:KOD — hocanın ders öncesi 1 dakikada okuyacağı not",
+  "ogretmen_degerlendirme_olcutu": "Bu kazanım ne zaman 'kazanıldı' sayılır",
+  "durum": "taslak | inceleme | onayli | yayinda",
+  "onay": { "icerik_uzmani": null, "pedagoji": null, "tarih": null }
+}

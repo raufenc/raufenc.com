@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Mekteb Ders Odası</title>
+<meta name="description" content="Hocanın birebir çevrim içi ders ekranı: 15 dakika Kur'ân-ı Kerîm, 10 dakika ilmihal; kanıt işaretleme, kaldığı yerden devam.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Amiri:wght@400;700&family=Amiri+Quran&family=Scheherazade+New:wght@400;700&display=swap">
+<style>
+/* Düzen: 16:9 ders odası — sol görüntü sütunu, ortada kitap sayfası, sağda yalnız hocanın gördüğü ray. Dar ekranda tek sütuna iner. */
+:root{
+  --bg:#e9edf0; --surface:#ffffff; --surface-2:#f4f6f8; --ink:#1a232c; --muted:#5d6b7a; --line:#d3dae0;
+  --accent:#0f6e5c; --accent-ink:#ffffff; --accent-soft:#dcefe9;
+  --gold:#a8873a; --gold-soft:#f3ead3;
+  --warn:#9a5a12; --warn-soft:#f6e9d6;
+  --ok:#2d6a4f;
+  --ui:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ar:"Amiri","Scheherazade New","Noto Naskh Arabic",serif;
+  --quran:"Amiri Quran","Amiri","Scheherazade New",serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a20; --surface:#1a232b; --surface-2:#212c35; --ink:#e7ecef; --muted:#9aa8b5; --line:#2f3c47;
+    --accent:#4fb59c; --accent-ink:#0d1a16; --accent-soft:#17382f;
+    --gold:#cfae5a; --gold-soft:#2d2816; --warn:#e0a35a; --warn-soft:#3a2b14; --ok:#7fc8a3; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a20; --surface:#1a232b; --surface-2:#212c35; --ink:#e7ecef; --muted:#9aa8b5; --line:#2f3c47;
+  --accent:#4fb59c; --accent-ink:#0d1a16; --accent-soft:#17382f;
+  --gold:#cfae5a; --gold-soft:#2d2816; --warn:#e0a35a; --warn-soft:#3a2b14; --ok:#7fc8a3; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.45;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.2}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+/* Üst şerit */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.top h1{font-size:17px;font-weight:700}
+.top .who{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.top .who b{color:var(--ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:var(--surface-2)}
+.pill.kuran{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.pill.ilmihal{background:var(--gold-soft);border-color:transparent;color:var(--gold)}
+.pill.draft{background:var(--warn-soft);border-color:transparent;color:var(--warn)}
+.clock{margin-left:auto;display:flex;align-items:center;gap:10px}
+.clock .t{font-size:26px;font-weight:700;letter-spacing:.02em}
+.clock .cap{font-size:12px;color:var(--muted);line-height:1.2}
+.ghost{background:transparent;border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-weight:600}
+.ghost[aria-pressed="true"]{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+
+/* Oda */
+.room{display:grid;grid-template-columns:260px minmax(0,1fr) 330px;gap:12px;margin-top:12px;align-items:start}
+@media (max-width:1060px){.room{grid-template-columns:minmax(0,1fr) 330px}.video{grid-column:1/-1;display:flex;gap:10px}.video .tile{flex:1}}
+@media (max-width:720px){.room{grid-template-columns:minmax(0,1fr)}.video{flex-direction:column}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+
+/* Görüntü sütunu */
+.video{display:grid;gap:10px}
+.tile{position:relative;aspect-ratio:4/3;max-width:100%;border-radius:var(--r);background:
+  radial-gradient(120% 90% at 50% 100%,color-mix(in srgb,var(--accent) 22%,var(--surface-2)),var(--surface-2) 70%);
+  border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);overflow:hidden}
+.tile small{position:absolute;left:10px;bottom:8px;font-size:12px;font-weight:600;color:var(--ink)}
+.tile .dot{position:absolute;right:10px;top:10px;width:9px;height:9px;border-radius:50%;background:var(--ok)}
+.tile.me{aspect-ratio:16/10}
+.video .note{font-size:12.5px;color:var(--muted);padding:0 2px}
+
+/* Sayfa */
+.page{padding:16px 18px 18px;min-width:0}
+.page-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px}
+.page-head .tools{margin-left:auto;display:flex;gap:6px}
+.tools button{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:5px 10px;font-weight:600}
+.leaf{border:1px solid var(--gold);border-radius:6px;padding:18px 22px 16px;background:var(--surface);position:relative;min-width:0}
+.leaf::before{content:"";position:absolute;inset:6px;border:1px solid color-mix(in srgb,var(--gold) 45%,transparent);border-radius:3px;pointer-events:none}
+.leaf .folio{position:absolute;top:-10px;right:18px;background:var(--surface);padding:0 8px;font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.04em}
+.ar{direction:rtl;font-family:var(--ar);text-align:right}
+.leaf h2.ar{font-size:calc(26px * var(--z,1));font-weight:700;margin-bottom:8px;color:var(--ink)}
+.leaf p.ar{font-size:calc(20px * var(--z,1));line-height:2;margin:0 0 10px}
+.examples{display:flex;flex-wrap:wrap;gap:10px;direction:rtl;margin-top:6px}
+.ex{font-family:var(--quran);font-size:calc(34px * var(--z,1));line-height:1.6;padding:4px 16px;border-radius:12px;border:2px solid transparent;background:var(--surface-2)}
+.ex[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 18%,transparent)}
+.under{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:12px;font-size:13px;color:var(--muted)}
+.under .pill{font-size:12px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{border:1px solid var(--line);background:var(--surface-2);border-radius:999px;padding:5px 12px;font-weight:600;font-size:13px}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+
+/* İlmihal sayfası */
+.ilm h2{font-size:22px;margin-bottom:6px}
+.ilm .kaz{font-size:17px;font-weight:600;margin-bottom:12px}
+.ilm .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}
+.card{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;min-width:0}
+.card h3{font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+.card p{margin:0 0 6px}
+.card ol{margin:0;padding-left:20px}
+.placeholder{border-style:dashed;color:var(--muted)}
+.scene{aspect-ratio:16/7;max-width:100%;border-radius:8px;background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 18%,var(--surface)),var(--surface-2));display:grid;place-items:center;color:var(--muted);font-size:13px;margin-bottom:10px}
+
+/* Hoca rayı */
+.rail{padding:14px 14px 16px;display:grid;gap:14px;align-content:start}
+.rail section{display:grid;gap:8px}
+.rail h2{font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:14px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;font-weight:600}
+.obs{font-size:14px;background:var(--surface-2);border-left:3px solid var(--gold);padding:8px 10px;border-radius:0 8px 8px 0;color:var(--ink)}
+.goal{border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;display:grid;gap:8px}
+.goal .g-head{display:flex;gap:8px;align-items:baseline}
+.goal .code{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+.goal .task{font-size:13.5px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.seg button{border:1px solid var(--line);background:var(--surface-2);border-radius:7px;padding:6px 2px;font-size:11.5px;font-weight:600;line-height:1.15}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.seg button[data-s="0"][aria-pressed="true"]{background:var(--muted);border-color:var(--muted);color:var(--bg)}
+.goal .ok{font-size:12px;color:var(--ok);font-weight:600}
+textarea{width:100%;min-height:62px;resize:vertical;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--ink);padding:8px 10px;font:inherit;font-size:14px}
+.primary{background:var(--accent);color:var(--accent-ink);border:0;border-radius:9px;padding:11px 14px;font-weight:700;font-size:15px}
+.primary.gold{background:var(--gold);color:#fff}
+.reminder{display:flex;gap:10px;align-items:flex-start;background:var(--warn-soft);color:var(--ink);border-radius:var(--r);padding:10px 12px;font-size:14px}
+.reminder b{color:var(--warn)}
+.reminder button{margin-left:auto;background:transparent;border:0;color:var(--muted);font-size:18px;line-height:1;padding:0 2px}
+.rail .foot{font-size:12px;color:var(--muted)}
+
+/* Özet */
+.summary{padding:18px;display:grid;gap:14px}
+.summary .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.summary ul{margin:6px 0 0;padding-left:18px}
+.summary .acts{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Öğrenci görünümü */
+body.student .rail,body.student .hoca-only{display:none}
+body.student .room{grid-template-columns:260px minmax(0,1fr)}
+@media (max-width:1060px){body.student .room{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:no-preference){.ex{transition:box-shadow .2s,border-color .2s}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>Mekteb · Ders Odası</h1>
+  <span class="who">Öğrenci <b id="ogrenciAd">Yûsuf (9)</b> <span class="pill">örnek kayıt</span></span>
+  <span class="pill" id="gorusmeNo">Modül 2 · Görüşme 17 / 96</span>
+  <span class="pill kuran" id="fazPill">Kur'ân-ı Kerîm · 15 dk</span>
+  <div class="clock">
+    <div><div class="t num" id="saat">00:00</div><div class="cap" id="saatCap">hedef 15:00 · otomatik kesilmez</div></div>
+    <button class="ghost" id="gorunumBtn" aria-pressed="false" title="Öğrencinin gördüğü ekranı göster">Öğrenci görünümü</button>
+    <button class="ghost" id="kesintiBtn" title="Sayfayı yeniden yükler; oturum kaldığı yerden döner">Bağlantı kesildi (dene)</button>
+  </div>
+</header>
+
+<main class="room" id="oda">
+  <aside class="video">
+    <div class="tile"><span class="dot" aria-hidden="true"></span><span>Öğrencinin görüntüsü</span><small>Yûsuf · kayıt yok</small></div>
+    <div class="tile me"><span>Hoca</span><small>Siz</small></div>
+    <p class="note">Görüntü ve ses LiveKit üzerinden, kendi sunucuda; kayıt kapalı. Prototipte yer tutucu.</p>
+  </aside>
+
+  <section class="panel page" id="sayfa" aria-live="polite"></section>
+
+  <aside class="panel rail" id="ray"></aside>
+</main>
+
+<script src="veri.js"></script>
+<script>
+(function(){
+"use strict";
+const V = window.MEKTEB_VERI;
+const KEY = "mekteb-oda-v1";
+const SEV = ["Henüz değil","Yardımla","İpucuyla","Bağımsız"];
+const KANIT = {
+  kuran: [
+    {kod:"Kn:K-TCV-03:1", gorev:"Altı örnekten birinde harf-i meddi gösterir, neden tabîî olduğunu söyler."},
+    {kod:"Kn:K-TCV-03:2", gorev:"Çalışmadığı Mushaf satırında medd-i tabîî yerlerini gösterir ve bir elif miktarıyla okur."},
+    {kod:"Kn:K-TCV-03:3", gorev:"Tabîî ile muttasılı ayırt eder (hemzeyi bulur)."}
+  ],
+  ilmihal: [
+    {kod:"Kn:I-AKD-003:1", gorev:"“Allahü teâlâ birdir” derken ne dediğimizi kendi cümlesiyle açıklar."},
+    {kod:"Kn:I-AKD-003:2", gorev:"Kısa durumda Yaratan ile yaratılanı ayırır."}
+  ]
+};
+
+/* ---- durum ---- */
+const def = () => ({ faz:"kuran", gecen:{kuran:0, ilmihal:0}, sonTik:null, calisiyor:true,
+  kanit:{}, not:{kuran:"", ilmihal:""}, isaret:null, sekme:"ders", z:1, hatirlatma:{}, kapali:{},
+  konum:{kuran:"Karabaş c.2 s.9 · ders 03 başı", ilmihal:"I-AKD-003 (sıradaki)"}, kayit:{kuran:null, ilmihal:null} });
+let S = def();
+try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(def(), JSON.parse(raw)); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+/* ---- sayaç: kesinti sonrası geçen süre korunur ---- */
+function tik(){
+  const now = Date.now();
+  if(S.calisiyor && S.sonTik && (S.faz==="kuran"||S.faz==="ilmihal")) S.gecen[S.faz] += Math.min(now - S.sonTik, 5000);
+  S.sonTik = now; save(); renderSaat(); hatirlat();
+}
+setInterval(tik, 1000);
+const mmss = ms => { const s=Math.floor(ms/1000); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0"); };
+function renderSaat(){
+  const el = document.getElementById("saat"), cap = document.getElementById("saatCap"), pill = document.getElementById("fazPill");
+  if(S.faz==="ozet"){ el.textContent = mmss(S.gecen.kuran+S.gecen.ilmihal); cap.textContent="toplam · oturum kaydedildi"; pill.textContent="Oturum tamamlandı"; pill.className="pill"; return; }
+  el.textContent = mmss(S.gecen[S.faz]);
+  if(S.faz==="kuran"){ cap.textContent="hedef 15:00 · otomatik kesilmez"; pill.textContent="Kur'ân-ı Kerîm · 15 dk"; pill.className="pill kuran"; }
+  else { cap.textContent="hedef 10:00 · otomatik kesilmez"; pill.textContent="İlmihal · 10 dk"; pill.className="pill ilmihal"; }
+}
+
+/* ---- yalnız hocaya görünen nazik hatırlatmalar ---- */
+const HATIR = {
+  kuran:[ {dk:13, id:"k13", m:"<b>13. dakika.</b> İki dakika içinde toparlamak için uygun bir yer arayın; yeni örnek açmadan mevcut örneği bitirin."},
+          {dk:15, id:"k15", m:"<b>15. dakika.</b> Kur'ân bölümü hedef süresine ulaştı. Uygun yerde <b>Kaydet ve ilmihale geç</b>. Ders kesilmez."} ],
+  ilmihal:[ {dk:10, id:"i10", m:"<b>10. dakika.</b> İlmihal hedef süresi doldu. Uygun yerde <b>Oturumu bitir ve kaydet</b>."} ]
+};
+function hatirlat(){
+  if(!(S.faz in HATIR)) return;
+  for(const h of HATIR[S.faz]){ if(S.gecen[S.faz] >= h.dk*60000 && !S.hatirlatma[h.id]){ S.hatirlatma[h.id]=true; save(); renderRay(); } }
+}
+
+/* ---- orta sayfa ---- */
+const sayfa = document.getElementById("sayfa");
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function renderSayfa(){
+  if(S.faz==="kuran") return renderKuran();
+  if(S.faz==="ilmihal") return renderIlmihal();
+  return renderOzet();
+}
+function renderKuran(){
+  const d = S.sekme==="onkosul" ? V.kuran.onkosul : V.kuran.ders;
+  const paras = d.metin_ar.split("\n").filter(Boolean);
+  // Karabaş metninde başlık ve örnek satırı ayrı satırdır; başlık tekrarı ve örnek satırı paragraf olarak basılmaz.
+  const body = paras.filter(p => p!==d.baslik_ar && !p.includes(" • "));
+  sayfa.innerHTML = `
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="${S.sekme==="ders"}" data-sekme="ders">Bugünkü ders · ${esc(V.kuran.ders.kod)}</button>
+      <button role="tab" aria-selected="${S.sekme==="onkosul"}" data-sekme="onkosul">Hatırlama · ${esc(V.kuran.onkosul.kod)}</button>
+      <button role="tab" aria-selected="${S.sekme==="yeni"}" data-sekme="yeni">Yeni satır (Mushaf)</button>
+    </div>
+    ${S.sekme==="yeni" ? `
+      <div class="leaf" style="--z:${S.z}">
+        <span class="folio">MUSHAF · YENİ SATIR</span>
+        <div class="card placeholder" style="margin-top:8px">
+          <h3>Kaynak bekleniyor</h3>
+          <p>Burada öğrencinin daha önce çalışmadığı, medd-i tabîî içeren kısa bir Mushaf satırı açılır (Kn:K-TCV-03:2). Mushaf görüntüsü ve onaylı hafız kaydı vakfın sağlayacağı kaynaktan gelir; prototipte yer tutucudur.</p>
+          <p>Öğrenci okur, hoca canlı dinler ve sağda işaretler. Kayıt alınmaz, otomatik puan yoktur.</p>
+        </div>
+      </div>` : `
+      <div class="page-head">
+        <span class="pill">Karabaş · cilt ${esc(d.cilt)} · sayfa ${esc(d.sayfa)}</span>
+        <span class="pill">${esc(d.kod)}</span>
+        <a class="pill" href="${esc(d.karekod)}" target="_blank" rel="noopener">Karekod hedefi ↗</a>
+        <div class="tools" aria-label="Yazı boyu">
+          <button data-z="-1" aria-label="Küçült">A−</button><button data-z="1" aria-label="Büyüt">A+</button>
+        </div>
+      </div>
+      <div class="leaf" style="--z:${S.z}">
+        <span class="folio">KARABAŞ · ${esc(d.cilt)} / ${esc(d.sayfa)}</span>
+        <h2 class="ar" lang="ota">${esc(d.baslik_ar)}</h2>
+        ${body.map(p=>`<p class="ar" lang="ota">${esc(p)}</p>`).join("")}
+        <div class="examples" role="group" aria-label="Örnekler — işaretçi">
+          ${d.ornekler.map((o,i)=>`<button class="ex" lang="ar" data-i="${i}" aria-pressed="${S.isaret===S.sekme+":"+i}">${esc(o)}</button>`).join("")}
+        </div>
+      </div>
+      <div class="under">
+        <span>Bir örneğe dokunun: işaretçi öğrencinin ekranında da aynı yeri gösterir.</span>
+        <span class="pill" title="Onaylı hafız kaydı vakıf tarafından sağlanacak">Hafız kaydı: bağlanacak</span>
+        ${S.sekme==="ders" ? `<span class="hoca-only">Hoca notu: “bir parmak kaldıracak kadar” — elinizle gösterin; muttasılla karışırsa hemzeyi aratın.</span>` : `<span class="hoca-only">Hatırlama (2 dk): “Harf-i med kaç tanedir? Sebeb-i med nelerdir?” — öğrenci söyler.</span>`}
+      </div>`}
+  `;
+}
+function renderIlmihal(){
+  const d = V.ilmihal;
+  sayfa.innerHTML = `
+    <div class="page-head">
+      <span class="pill ilmihal">${esc(d.kod)} · ${esc(d.alt_alan)}</span>
+      <span class="pill">${esc(d.profil)}</span>
+      <span class="pill draft hoca-only">Taslak · vakıf onayı bekliyor · öğrenciye gösterilmez</span>
+    </div>
+    <div class="ilm">
+      <h2>Allahü teâlâ birdir; eşi ve ortağı yoktur</h2>
+      <p class="kaz">Kazanım: ${esc(d.kazanim)}</p>
+      <div class="scene">Öğrencinin ekranı: gökyüzü, ağaç, kuş — resimli sahne (vakıf onaylı görsel gelecek)</div>
+      <div class="two">
+        <div class="card hoca-only">
+          <h3>Hatırlama (1 dk)</h3>
+          <p>I-AKD-001'den: “Ağacı, kuşu, bulutu kim yarattı?”</p>
+        </div>
+        <div class="card hoca-only placeholder">
+          <h3>Anlatım metni (3 dk)</h3>
+          <p>Tam İlmihâl Seâdet-i Ebediyye'nin îmân bahsinden vakfın yazacağı kısa anlatım burada görünür. Onaysız metin yayına çıkmaz.</p>
+        </div>
+        <div class="card hoca-only">
+          <h3>Öğrenci uygulaması (4 dk)</h3>
+          <ol>
+            <li>“Allahü teâlâ birdir derken ne demek istiyoruz?” — öğrenci kendi cümlesiyle söyler.</li>
+            <li>Kısa durum: “Bu oyuncağı yapan usta her şeyi yapabilir” diyen bir çocuk — neyi doğru, neyi yanlış söylüyor?</li>
+          </ol>
+        </div>
+        <div class="card hoca-only">
+          <h3>Hoca notu</h3>
+          <p>“Bir” sayı gibi anlaşılabilir; “benzeri yok, ortağı yok” tarafını örnekle kuvvetlendirin. Yanlış ifadeyi düzeltirken utandırmayın; doğru cümleyi siz söyleyip tekrar ettirin.</p>
+        </div>
+      </div>
+      <p class="hint hoca-only">Eve: iki sütunlu sürükle-bırak (E:I-AKD-003:surukle:1) — yalnız günlük ifadeler sürüklenir; puan, süre, yarış yok.</p>
+    </div>`;
+}
+function renderOzet(){
+  const li = (yol) => KANIT[yol].map(k => `<li>${esc(k.kod)} — <b>${S.kanit[k.kod]!=null ? SEV[S.kanit[k.kod]] : "işaretlenmedi"}</b></li>`).join("");
+  sayfa.innerHTML = `
+    <div class="summary">
+      <div><span class="eyebrow">Oturum kaydedildi</span><h2 style="font-size:22px;margin-top:4px">İki yol, iki ayrı kayıt</h2></div>
+      <div class="two">
+        <div class="card"><h3>Kur'ân-ı Kerîm · ${mmss(S.gecen.kuran)}</h3>
+          <p>Kaldığı yer: <b>${esc(S.kayit.kuran || S.konum.kuran)}</b></p><ul>${li("kuran")}</ul>
+          ${S.not.kuran ? `<p style="margin-top:8px">Gözlem: ${esc(S.not.kuran)}</p>`:""}</div>
+        <div class="card"><h3>İlmihal · ${mmss(S.gecen.ilmihal)}</h3>
+          <p>Kaldığı yer: <b>${esc(S.kayit.ilmihal || S.konum.ilmihal)}</b></p><ul>${li("ilmihal")}</ul>
+          ${S.not.ilmihal ? `<p style="margin-top:8px">Gözlem: ${esc(S.not.ilmihal)}</p>`:""}</div>
+      </div>
+      <p class="hint">Görüşme sayısı (17/96), içerik sırası ve kazanılmış beceri ayrı tutulur. “Bağımsız” tek görüşmede yeterli değildir; kazanım iki ayrı görüşmede bağımsız işaretlenince kazanılmış sayılır. Bu kayıt bir sonraki görüşmede hocanın açılış ekranında görünür.</p>
+      <div class="acts">
+        <button class="primary" id="yeniOturum">Yeni oturum başlat (demo)</button>
+        <button class="ghost" id="sifirla">Kaydı sil</button>
+      </div>
+    </div>`;
+}
+
+/* ---- hoca rayı ---- */
+const ray = document.getElementById("ray");
+function renderRay(){
+  if(S.faz==="ozet"){ ray.innerHTML = `<section><h2>Sonraki görüşme</h2><dl class="kv"><dt>Kur'ân</dt><dd>${esc(S.kayit.kuran||S.konum.kuran)}</dd><dt>İlmihal</dt><dd>${esc(S.kayit.ilmihal||S.konum.ilmihal)}</dd></dl></section>`; return; }
+  const yol = S.faz;
+  const hat = (HATIR[yol]||[]).filter(h => S.hatirlatma[h.id] && !S.kapali[h.id]);
+  ray.innerHTML = `
+    ${hat.map(h=>`<div class="reminder" role="status"><span>${h.m}</span><button data-kapat="${h.id}" aria-label="Kapat">×</button></div>`).join("")}
+    <section>
+      <h2>Kaldığı yer</h2>
+      <dl class="kv">
+        <dt>Kur'ân</dt><dd>${esc(S.konum.kuran)}</dd>
+        <dt>İlmihal</dt><dd>${esc(S.konum.ilmihal)}</dd>
+        <dt>Önceki hoca</dt><dd>Fâtıma Hoca · 3 gün önce</dd>
+      </dl>
+    </section>
+    <section>
+      <h2>Önceki gözlem</h2>
+      <p class="obs">${yol==="kuran" ? "Harf-i meddi buluyor, uzatmayı abartıyor (muttasıl gibi). Hemze aramayı tekrar ettirin." : "Yaratılmışlardan Yaratan'a örnek veriyor; “bir” kelimesini sayı gibi anladı."}</p>
+    </section>
+    <section>
+      <h2>Açık hedefler · tek dokunuş</h2>
+      ${KANIT[yol].map(k => `
+        <div class="goal">
+          <div class="g-head"><span class="code">${esc(k.kod)}</span></div>
+          <div class="task">${esc(k.gorev)}</div>
+          <div class="seg" role="group" aria-label="Kanıt seviyesi">
+            ${SEV.map((s,i)=>`<button data-k="${esc(k.kod)}" data-s="${i}" aria-pressed="${S.kanit[k.kod]===i}">${s}</button>`).join("")}
+          </div>
+          ${S.kanit[k.kod]===3 ? `<div class="ok">Bağımsız · bir sonraki görüşmede yeniden kontrol edilir</div>`:""}
+        </div>`).join("")}
+    </section>
+    <section>
+      <h2>Gözlem notu (isteğe bağlı)</h2>
+      <textarea id="not" placeholder="Bir satır yeter; boş da kalabilir.">${esc(S.not[yol])}</textarea>
+    </section>
+    <section>
+      ${yol==="kuran"
+        ? `<button class="primary" id="gec">Kaydet ve ilmihale geç</button><p class="foot">Kur'ân ilerlemesi yazılır (konum + kanıtlar); sıradaki ilmihal içeriği açılır. Zamanlayıcı ilmihal için yeniden başlar.</p>`
+        : `<button class="primary gold" id="bitir">Oturumu bitir ve kaydet</button><p class="foot">İlmihal ilerlemesi ayrı yazılır. Görüşme 17/96 tamamlandı olarak işlenir.</p>`}
+    </section>`;
+}
+
+/* ---- olaylar ---- */
+document.addEventListener("click", e => {
+  const t = e.target.closest("button,[data-sekme]"); if(!t) return;
+  if(t.dataset.sekme){ S.sekme = t.dataset.sekme; save(); renderSayfa(); return; }
+  if(t.dataset.z){ S.z = Math.min(1.6, Math.max(0.8, +(S.z + 0.15*+t.dataset.z).toFixed(2))); save(); renderSayfa(); return; }
+  if(t.classList.contains("ex")){ const id = S.sekme+":"+t.dataset.i; S.isaret = S.isaret===id ? null : id;
+    if(S.faz==="kuran" && S.sekme==="ders") S.konum.kuran = `Karabaş c.2 s.9 · örnek ${+t.dataset.i+1} (${V.kuran.ders.ornekler[t.dataset.i]})`;
+    save(); renderSayfa(); renderRay(); return; }
+  if(t.dataset.k){ const i=+t.dataset.s; S.kanit[t.dataset.k] = S.kanit[t.dataset.k]===i ? undefined : i; save(); renderRay(); return; }
+  if(t.dataset.kapat){ S.kapali[t.dataset.kapat]=true; save(); renderRay(); return; }
+  if(t.id==="gec"){ S.kayit.kuran = S.konum.kuran; S.faz="ilmihal"; S.isaret=null; save(); renderAll(); return; }
+  if(t.id==="bitir"){ S.kayit.ilmihal = "I-AKD-003 işlendi · sıradaki I-AKD-005"; S.calisiyor=false; S.faz="ozet"; save(); renderAll(); return; }
+  if(t.id==="yeniOturum"){ const k=S.kayit; S = def(); S.konum.kuran = k.kuran || S.konum.kuran; S.konum.ilmihal = k.ilmihal || S.konum.ilmihal; save(); renderAll(); return; }
+  if(t.id==="sifirla"){ try{localStorage.removeItem(KEY);}catch(e){} S = def(); renderAll(); return; }
+  if(t.id==="kesintiBtn"){ location.reload(); return; }
+  if(t.id==="gorunumBtn"){ const on = document.body.classList.toggle("student"); t.setAttribute("aria-pressed", on); t.textContent = on ? "Hoca görünümüne dön" : "Öğrenci görünümü"; return; }
+});
+document.addEventListener("input", e => { if(e.target.id==="not" && (S.faz in S.not)){ S.not[S.faz]=e.target.value; save(); } });
+
+function renderAll(){ renderSaat(); renderSayfa(); renderRay(); }
+renderAll();
+})();
+</script>
+</body>
+</html>

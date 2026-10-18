@@ -1,0 +1,103 @@
+{
+  "kod": "K-TCV-03",
+  "yol": "kuran",
+  "modul": 2,
+  "sira": 3,
+  "baslik": "Medd-i tabîî (بَابُ مَدِّ طَبِيعِى)",
+  "ubd": {
+    "anlama": "Harf-i medden sonra sebeb-i med (hemze veya sükûn) gelmezse med tabîîdir ve bir elif miktarı uzatılır.",
+    "bilgi_beceri": [
+      "Kelimede harf-i meddi (و، ي، ا) bulur.",
+      "Harf-i medden sonra hemze veya sükûn olup olmadığına bakar.",
+      "Bir elif miktarını (bir parmak kaldıracak kadar) okuyuşunda tutar."
+    ],
+    "transfer": "Daha önce çalışmadığı bir Mushaf satırında medd-i tabîî olan kelimeleri gösterir ve bir elif miktarıyla okur.",
+    "temel_soru": "Bu kelimede uzatma var; neden 'tabîî'? Daha uzun okusam ne değişir?"
+  },
+  "kaynak": {
+    "dini_icerik": [],
+    "kuran_ogretimi": [
+      "S:KRB:2:9 — Karabaş Tecvidi, cilt 2, sayfa 9 (eski nüsha s. 37)",
+      "Karabaş metni ve örnekleri: /karabas-elifbasi/dersler.json ders 03 (harfi harfine)"
+    ],
+    "yontem_referansi": [
+      "İmam hatip 9. sınıf Kur'ân-ı Kerîm programı — tecvid konularının 'kural → örnek → uygulama → yeni örnekte deneme' sırası (yalnız yöntem)"
+    ],
+    "karekod": "Q:K-TCV-03 → https://raufenc.com/karabas-elifbasi/?d=03"
+  },
+  "onkosul": ["K-TCV-02 (hurûf-ı med ve sebeb-i med)", "K-ELF-39 (hareke ve okuma)"],
+  "kanitlar": [
+    {
+      "kod": "Kn:K-TCV-03:1",
+      "gorev": "Karabaş'taki altı örnekten (طه، أَبَدًا، تَوَّابًا، الر، حم، قَالَ) hoca birini gösterir; öğrenci harf-i meddi işaret eder ve neden tabîî olduğunu bir cümleyle söyler.",
+      "olcut": "Harf-i med doğru gösterildi ve 'sonrasında hemze/sükûn yok' gerekçesi söylendi.",
+      "canli_gerekir": true,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Harf-i meddi bulamıyor veya başka harfi gösteriyor.",
+        "yardimla": "Hoca harf-i meddi gösterdikten sonra gerekçeyi tekrar edebiliyor.",
+        "ipucuyla": "'Sonrasına bak' ipucuyla doğru buluyor ve gerekçeyi söylüyor.",
+        "bagimsiz": "Kendisi buluyor, gerekçeyi kendi cümlesiyle söylüyor."
+      }
+    },
+    {
+      "kod": "Kn:K-TCV-03:2",
+      "gorev": "Hoca, öğrencinin daha önce çalışmadığı kısa bir Mushaf satırı açar; öğrenci medd-i tabîî olan kelimeleri gösterir ve satırı okur.",
+      "olcut": "Medd-i tabîî yerleri doğru; uzatma bir elif miktarında (ne kısa ne medd-i muttasıl gibi uzun). Hoca canlı dinler; kayıt alınmaz, otomatik puan yoktur.",
+      "canli_gerekir": true,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Yerleri bulamıyor veya uzatmıyor.",
+        "yardimla": "Hoca okuduktan sonra tekrar edebiliyor.",
+        "ipucuyla": "Hocanın işaret ettiği yerde doğru uzatıyor.",
+        "bagimsiz": "Yeni satırda yerleri kendi buluyor ve doğru miktarla okuyor."
+      }
+    },
+    {
+      "kod": "Kn:K-TCV-03:3",
+      "gorev": "Ayırt etme: ekranda biri medd-i tabîî, diğeri medd-i muttasıl (sonrasında hemze) olan iki kelime; öğrenci tabîî olanı seçer ve farkı söyler.",
+      "olcut": "Doğru seçim + 'bunda hemze var' farkı. Kendi çalışmada yapılırsa 'hoca onayı bekler' olarak kaydedilir.",
+      "canli_gerekir": false,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Rastgele seçiyor.",
+        "yardimla": "Hoca farkı söyledikten sonra seçiyor.",
+        "ipucuyla": "'Hemzeyi ara' ipucuyla seçiyor.",
+        "bagimsiz": "Üç ayrı çiftte ipucu almadan doğru seçiyor ve farkı söylüyor."
+      }
+    }
+  ],
+  "etkinlikler": [
+    {
+      "kod": "E:K-TCV-03:goster:1",
+      "tip": "goster",
+      "mod": ["canli", "yuz_yuze"],
+      "aciklama": "Karabaş sayfası ekranda; hoca işaretçiyle harf-i meddi daire içine alır, öğrenci kendi ekranında aynı yeri görür. Örnek sesini onaylı hafız kaydından dinletir.",
+      "hassasiyet_notu": "Örnekler Karabaş'ın kendi örnekleridir; metin yeniden yazılmaz."
+    },
+    {
+      "kod": "E:K-TCV-03:ayirt:1",
+      "tip": "ayirt",
+      "mod": ["kendi_calisma", "canli"],
+      "aciklama": "İki kelime yan yana; 'Hangisi medd-i tabîî?' seçimi; yanlışta ceza yok, doğru cevabın gerekçesi gösterilir. Süre sayacı yok.",
+      "hassasiyet_notu": "Kelimeler patlatılmaz, düşürülmez, yarıştırılmaz."
+    },
+    {
+      "kod": "E:K-TCV-03:uygula:1",
+      "tip": "uygula",
+      "mod": ["canli"],
+      "aciklama": "Hoca 'yeni satır' düğmesine basar; sistem öğrencinin çalışmadığı, medd-i tabîî içeren kısa bir satır getirir (Mushaf görüntüsü vakfın onaylı kaynağından). Öğrenci okur, hoca Kn:2'yi işaretler."
+    }
+  ],
+  "canli_ders_akisi": {
+    "hatirlama_dk": 2,
+    "hatirlama": "K-TCV-02'den: 'Harf-i med kaç tanedir? Sebeb-i med nelerdir?' — öğrenci söyler.",
+    "gosterim_dk": 3,
+    "gosterim": "Karabaş metni; طه ve قَالَ üzerinde harf-i med ve 'sonrasında hemze/sükûn yok' gösterimi.",
+    "ogrenci_uygulama_dk": 6,
+    "ogrenci_uygulama": "Altı örneği öğrenci okur; her birinde harf-i meddi gösterir (Kn:1).",
+    "duzeltme_ve_yeni_ornek_dk": 4,
+    "duzeltme_ve_yeni_ornek": "Uzatma miktarı düzeltilir; yeni Mushaf satırı (Kn:2). 13. dk'da hocaya hatırlatma, 15. dk'da 'Kaydet ve ilmihale geç' önerisi."
+  },
+  "hoca_aciklamasi": "Çocuk uzatmayı çoğu kez ya hiç yapmaz ya da abartır. 'Bir parmak kaldıracak kadar' ifadesini Karabaş'ın kendi diliyle verin; elinizi kaldırarak gösterin. Medd-i muttasıl ile karışıyorsa hemzeyi aramayı öğretin, kuralı tekrar ettirmeyin.",
+  "ogretmen_degerlendirme_olcutu": "Kn:2 iki ayrı görüşmede 'bağımsız' işaretlenince kazanıldı sayılır; tek görüşmedeki bağımsız işaret bir sonraki derste yeniden kontrol edilir.",
+  "durum": "taslak",
+  "onay": { "icerik_uzmani": null, "pedagoji": null, "tarih": null }
+}

@@ -1,0 +1,108 @@
+{
+  "kod": "K-ELF-39",
+  "yol": "kuran",
+  "modul": 1,
+  "sira": 39,
+  "baslik": "Hareke ve okuma (حَرَكَه وَ اوقُمَه)",
+  "ubd": {
+    "anlama": "Harfin sesi harekeyle tamamlanır; aynı harf üstün, esre, ötre, tenvin, cezm ve şedde ile farklı okunur.",
+    "bilgi_beceri": [
+      "Fetha, kesre, damme, tenvin, cezm ve şeddeyi adıyla tanır.",
+      "Harekeli tek harfi ve iki-üç harfli heceyi sesli okur.",
+      "Harf-i medle uzayan basit kelimeyi okur."
+    ],
+    "transfer": "Daha önce görmediği harekeli bir kelimeyi (Elif cüzü düzeyinde) heceleyerek okur.",
+    "temel_soru": "Aynı harf neden farklı okunuyor? Üstteki/alttaki işaret bana ne söylüyor?"
+  },
+  "kaynak": {
+    "dini_icerik": [],
+    "kuran_ogretimi": [
+      "S:KRB:1:37 — Karabaş Elifbası, cilt 1, sayfa 37",
+      "Elif cüzü (vakfın onaylı nüshası) — hareke tabloları ve hece sayfaları; sayfa numaraları vakıf tarafından girilecek",
+      "Örnekler: /karabas-elifbasi/ders.js ders 39 (بَ بِ بُ · بًا بٍ بٌ · اَبْ اِبْ اُبْ · رَبِّ · قَالَ قِيلَ يَقُولُ)"
+    ],
+    "yontem_referansi": [
+      "DKAB 4. sınıf programı — 'tanı → ayırt et → uygula' etkinlik sırası ve aşamalılık (yalnız yöntem)"
+    ],
+    "karekod": "Q:K-ELF-39 → https://raufenc.com/karabas-elifbasi/?d=39"
+  },
+  "onkosul": ["K-ELF-38 (hurûf-ı hecâ: harfin adı, sesi, baş-orta-son şekli)"],
+  "kanitlar": [
+    {
+      "kod": "Kn:K-ELF-39:1",
+      "gorev": "Hoca bir harekeyi söyler ('esre'), öğrenci ekrandaki harekeli harfler arasından onu gösterir; sonra tersi: hoca gösterir, öğrenci adını söyler.",
+      "olcut": "Altı hareke/işaretin (fetha, kesre, damme, tenvin, cezm, şedde) tamamı iki yönde doğru.",
+      "canli_gerekir": false,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Üstün-esre karıştırıyor.",
+        "yardimla": "Hoca adını söyleyip gösterdikten sonra tekrar ediyor.",
+        "ipucuyla": "'Harfin altında mı üstünde mi?' ipucuyla buluyor.",
+        "bagimsiz": "İki yönde, ipucusuz, altı işaretin tamamı doğru."
+      }
+    },
+    {
+      "kod": "Kn:K-ELF-39:2",
+      "gorev": "Öğrenci بَ بِ بُ ve اَبْ اِبْ اُبْ dizilerini sesli okur; sonra hoca harfi değiştirir (ت، ن، ر) ve aynı harekelerle okutur.",
+      "olcut": "Hareke sesi doğru; cezimli hecede sesi kesiyor. Hoca canlı dinler; kayıt yok.",
+      "canli_gerekir": true,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Harf sesini çıkarıyor, harekeyi eklemiyor.",
+        "yardimla": "Hoca okuduktan sonra tekrar ediyor.",
+        "ipucuyla": "Hoca harekeyi işaret edince doğru okuyor.",
+        "bagimsiz": "Yeni harfle de ipucusuz doğru okuyor."
+      }
+    },
+    {
+      "kod": "Kn:K-ELF-39:3",
+      "gorev": "Yeni kelime: hoca قَالَ قِيلَ يَقُولُ dışında, Elif cüzünden daha önce okunmamış iki-üç harfli harekeli kelime açar; öğrenci heceleyerek okur.",
+      "olcut": "Heceleme sırası ve hareke sesleri doğru; harf-i medde uzatıyor.",
+      "canli_gerekir": true,
+      "seviye_aciklamasi": {
+        "henuz_degil": "Kelimeyi okumaya başlayamıyor.",
+        "yardimla": "Hoca heceleri bölüp okuduktan sonra tekrar ediyor.",
+        "ipucuyla": "Hoca heceleri bölünce kendisi okuyor.",
+        "bagimsiz": "Kendisi böler ve okur."
+      }
+    }
+  ],
+  "etkinlikler": [
+    {
+      "kod": "E:K-ELF-39:eslestir:1",
+      "tip": "eslestir",
+      "mod": ["kendi_calisma", "canli"],
+      "aciklama": "Hareke adı kartı ↔ harekeli harf kartı eşleştirme. Yanlış eşleşmede kart yerine döner, açıklama çıkar; ceza ve süre yok."
+    },
+    {
+      "kod": "E:K-ELF-39:ayirt:1",
+      "tip": "ayirt",
+      "mod": ["kendi_calisma"],
+      "aciklama": "Üç kart: ikisi aynı hareke, biri farklı; farklı olanı seç. Harf değişir, hareke sabit kalır."
+    },
+    {
+      "kod": "E:K-ELF-39:dinle-sec:1",
+      "tip": "dinle-sec",
+      "mod": ["kendi_calisma"],
+      "aciklama": "Onaylı hafız kaydından hece dinlenir (بَ / بِ / بُ), üç yazılı heceden doğrusu seçilir. Öğrenciden ses alınmaz."
+    },
+    {
+      "kod": "E:K-ELF-39:uygula:1",
+      "tip": "uygula",
+      "mod": ["canli", "yuz_yuze"],
+      "aciklama": "Elif cüzü sayfası ekranda, çift sayfa/tek sayfa, yakınlaştırma; hoca işaretçiyle kelimeyi gösterir, öğrenci okur (Kn:2, Kn:3)."
+    }
+  ],
+  "canli_ders_akisi": {
+    "hatirlama_dk": 2,
+    "hatirlama": "K-ELF-38'den beş harfin adı ve sesi.",
+    "gosterim_dk": 3,
+    "gosterim": "بَ بِ بُ üzerinde üç hareke; sonra tenvin ve cezm.",
+    "ogrenci_uygulama_dk": 6,
+    "ogrenci_uygulama": "Beş örnek dizi okunur; harf değiştirilerek tekrar (Kn:2).",
+    "duzeltme_ve_yeni_ornek_dk": 4,
+    "duzeltme_ve_yeni_ornek": "Elif cüzünden yeni kelime (Kn:3)."
+  },
+  "hoca_aciklamasi": "Bu yaşta en sık hata üstün-esre karışması ve cezimde sesi kesmemektir. Hareke adını değil sesini öne alın; adı kendiliğinden yerleşir. Çocuk takılınca 'bir daha' yerine heceyi siz okuyup tekrar ettirin, sonra yeni harfle deneyin.",
+  "ogretmen_degerlendirme_olcutu": "Kn:1 bağımsız + Kn:3 iki görüşmede bağımsız → kazanıldı. Kn:3'te ipucuyla kalırsa K-ELF-40'a geçilmez; bir sonraki derste yalnız Kn:3 tekrar edilir.",
+  "durum": "taslak",
+  "onay": { "icerik_uzmani": null, "pedagoji": null, "tarih": null }
+}
