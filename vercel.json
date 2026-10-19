@@ -118,6 +118,28 @@
           "value": "public, max-age=604800, stale-while-revalidate=2592000"
         }
       ]
+    },
+    {
+      "source": "/kuran-ogretmenim/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/kuran-ogretmenim/"
+        }
+      ]
+    },
+    {
+      "source": "/kuran-ogretmenim/(app/index.html|app/|index.html|sinif/|sinif/index.html)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -365,6 +387,11 @@
     {
       "source": "/kuran-ogretmenim/app",
       "destination": "/kuran-ogretmenim/app/",
+      "permanent": true
+    },
+    {
+      "source": "/kuran-ogretmenim/sinif",
+      "destination": "/kuran-ogretmenim/sinif/",
       "permanent": true
     }
   ],
