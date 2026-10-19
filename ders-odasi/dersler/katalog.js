@@ -1,6 +1,66 @@
 /* Ders Odası — ders kataloğu. scripts/ders-odasi/ice-aktar.py ve adab-oyunlar.py günceller. */
 DO.katalogKaydet([
  {
+  "id": "ibre-azim",
+  "ad": "Azim: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-azim/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "İşe girişme biçimini (erteleme ↔ acele) ölçen ibre: sesli açılış, tahmin, üç kapı ve “Sen olsan?” senaryolarıyla etkileşimli ders.",
+  "yas": "10-15 yaş"
+ },
+ {
+  "id": "ibre-ilim",
+  "ad": "İlim: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-ilim/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "Bilgiye yaklaşımı ölçen ibre: sesli açılış, tahmin, üç kapı ve “Sen olsan?” senaryolarıyla etkileşimli ders.",
+  "yas": "10-15 yaş"
+ },
+ {
+  "id": "ibre-muzakere",
+  "ad": "Müzâkere: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-muzakere/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "Kendi fikrini savunma payını ölçen ibre: sesli açılış, tahmin, üç kapı ve “Sen olsan?” senaryolarıyla etkileşimli ders.",
+  "yas": "10-15 yaş"
+ },
+ {
+  "id": "ibre-secaat",
+  "ad": "Şecâat: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-secaat/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "Korku karşısındaki davranışı ölçen ibre: sesli açılış, tahmin, üç kapı ve “Sen olsan?” senaryolarıyla etkileşimli ders.",
+  "yas": "10-15 yaş"
+ },
+ {
+  "id": "ibre-ulfet",
+  "ad": "Ülfet: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-ulfet/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "Yakınlık kurma biçimini ölçen ibre: sesli açılış, tahmin, üç kapı ve “Sen olsan?” senaryolarıyla etkileşimli ders.",
+  "yas": "10-15 yaş"
+ },
+ {
   "id": "ibre-tevazu",
   "ad": "Tevâzu: İbren Nerede?",
   "seri": "İbremetre",

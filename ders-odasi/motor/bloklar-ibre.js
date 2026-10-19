@@ -720,7 +720,7 @@
           el('button', { class: 'dug ana', text: 'Kapıları aç →', onclick: function () { ctx.ileri(); } })
         ]));
         yonerge.style.display = 'none'; etiketBtn.style.display = 'none'; kart.style.display = 'none';
-        var pb = panel.querySelector('button'); if (pb) pb.focus();
+        var pb = panel.querySelector('button'); if (pb) pb.focus({ preventScroll: true });
         if (!k.tekrar) ctx.zaman(function () { var d = A.cal('t2'); ctx.zaman(function () { A.cal('t3'); }, d * 1000 + 450); }, 900);
         if (k.yerel) {
           ctx.cevap({ oge: 'tahmin', ad: b.cumle, yanit: 'ibre=' + z + ' (' + Math.round(t * 100) / 100 + ') · eminlik=' + durum.emin, dogru: null, dogruYanit: b.hedefZon, etkilesim: 'performance', puan: 0, max: 0 });
@@ -843,7 +843,7 @@
           if (!F.l3 && t >= P.bas[l3]) { F.l3 = 1; A.cal(l3); if (asama < 2) { asamaYaz(2); Sfx.yuk(); } }
           beats.forEach(function (bt) { if (t >= bt.at && !bt.li.classList.contains('goster')) { bt.li.classList.add('goster'); Sfx.pop(); } });
         });
-        setTimeout(function () { try { atla.focus(); } catch (e) { } }, 60);
+        setTimeout(function () { try { atla.focus({ preventScroll: true }); } catch (e) { } }, 60);
       }
 
       function ickoy(zn, i, sessiz) {
@@ -861,7 +861,7 @@
       function sahneKapat() {
         A.sustur(); if (sahne) { if (sahne.S.kap.parentNode) sahne.S.kap.parentNode.removeChild(sahne.S.kap); sahne.saat.kapat(); sahne = null; }
         aktif = null; hub.style.display = ''; hubCiz();
-        var d0 = hub.querySelector('.ib-kapi'); if (d0) d0.focus();
+        var d0 = hub.querySelector('.ib-kapi'); if (d0) d0.focus({ preventScroll: true });
         if (!k9 && bitenSay() === 1 && bitenSay() < kapilar.length) { k9 = true; ctx.zaman(function () { A.cal('k9'); }, 600); }
       }
 
@@ -993,7 +993,7 @@
         ]);
         if (!tamam) { tamam = true; ctx.tamamla({ puan: 0, max: 0 }); }
         if (!kk.tekrar && b.sonSes) ctx.zaman(function () { A.cal(b.sonSes); }, 500);
-        var pb = panel.querySelector('button'); if (pb) pb.focus();
+        var pb = panel.querySelector('button'); if (pb) pb.focus({ preventScroll: true });
       });
       baslangic(); secenekler();
       return { anlatimDegisti: function (a) { A.degisti(a); } };
