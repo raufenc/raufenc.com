@@ -1,11 +1,13 @@
 /* İbremetre · Akîde — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Lakayt İnanç · Sahih Akîde · Bidat İnancı). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Lakayt İnanç · Sahih Akîde · Kaynaksız). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-akide",
  "ad": "Akîde: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "inanc",
+ "muzik": "inanc",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -26,7 +28,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Lakayt İnanç",
       "orta": "Sahih Akîde",
-      "fazla": "Bidat İnancı"
+      "fazla": "Kaynaksız"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -39,13 +41,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Lakayt İnanç",
       "orta": "Sahih Akîde",
-      "fazla": "Bidat İnancı"
+      "fazla": "Kaynaksız"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi duyduğu bir sözü kaynağına bakmadan dinin bir parçası sanıyor: sağ uca (Bidat İnancı) yakın. Başka okumada kişi duyduğunu açıkça söylüyor ve doğruluğunu güvenilir bir hocaya sormaya hazır: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an inancımızı nasıl öğrendiğimize bakar. Sahih Akîde; Kur’an ve sünnete uygun iman etmek ve dinini güvenilir yerden öğrenmektir. Bu ibre ölçekten çok yönü gösterir: ders doğru ile yanlış inancı ayırmaz, yalnızca kaynağa sorma alışkanlığına bakar.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi duyduğu bir sözü kaynağına bakmadan dinin bir parçası sanıyor: sağ uca (Kaynaksız) yakın. Başka okumada kişi duyduğunu açıkça söylüyor ve doğruluğunu güvenilir bir kaynakta kontrol etmeye hazır: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an inancımızı nasıl öğrendiğimize bakar. Sahih Akîde; Kur’an ve sünnete uygun iman etmek ve duyduğumuzu güvenilir kaynakla karşılaştırmaktır. Sağ uca çocuk diliyle “Kaynaksız” dedik; Excel’deki adı Bid‘at Îtikâdı, yani dinde aslı olmayan, sonradan eklenmiş inanışlardır. Bu ibre ölçekten çok yönü gösterir: ders doğru ile yanlış inancı ayırmaz, yalnızca duyduğunu kaynağında kontrol etme alışkanlığına bakar.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -59,7 +61,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Lakayt İnanç",
       "orta": "Sahih Akîde",
-      "fazla": "Bidat İnancı"
+      "fazla": "Kaynaksız"
      },
      "yesil": 0.26,
      "kapilar": [
@@ -70,8 +72,8 @@ DO.dersKaydet(
        "soz": "Dinle ilgili şeyler beni pek ilgilendirmiyor.",
        "eylem": "yaslan",
        "zincir": [
-        "Merak ettiği sorular cevapsız kalır.",
-        "Öğrenebileceği güzel şeyler yanından geçip gider."
+        "Dinle ilgili merak edeceği şeyler hiç sorulmaz.",
+        "Doğru bilgiyi öğrenme fırsatları birer birer geçer."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -82,14 +84,14 @@ DO.dersKaydet(
           "not": "Lakayt, inancını önemsemeyip ilgisiz kalmaktır. Merak kapanınca öğrenme de durur."
          },
          {
-          "m": "Bunu merak ediyorum; güvendiğim bir hocama sorayım.",
+          "m": "Bunu duydum; güvenilir kaynakta var mı, bakayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: sahih akîdenin sesi."
          },
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; sormama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: bidat inancının sesi."
+          "not": "Bu sağ ucun sesi: kaynaksızlığın sesi."
          }
         ]
        },
@@ -98,27 +100,27 @@ DO.dersKaydet(
         "soz": "Dinle"
        },
        "zincirAnahtar": [
-        "Merak",
-        "Öğrenebileceği"
+        "Dinle",
+        "Doğru"
        ]
       },
       {
        "zon": "fazla",
        "soru": "Duyduğu her sözü dinden sayan kişi neyi kaçırır?",
-       "ad": "Bidat",
+       "ad": "Kaynaksız",
        "soz": "Herkes söylüyor, bu da dinin bir parçasıdır.",
        "eylem": "isaret",
        "zincir": [
         "Yanlış bir bilgi doğru gibi yerleşebilir.",
-        "Güvenilir bir kaynağa sormak aklına bile gelmez."
+        "Kaynağa bakmak aklına bile gelmez."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; sormama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
           "dogru": true,
-          "not": "Bu uçta, duyulan her söz kaynağına bakılmadan dinin bir parçası sanılır. Kaynağa sormak bunu önler."
+          "not": "Bu uçta duyulan her söz kaynağına bakılmadan dinin bir parçası sanılır. Kaynağa bakmak bunu önler."
          },
          {
           "m": "Dinle ilgili şeyleri öğrenmesem de olur.",
@@ -126,38 +128,38 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: lakayt inancın sesi."
          },
          {
-          "m": "Bunu merak ediyorum; güvendiğim bir hocama sorayım.",
+          "m": "Bunu duydum; güvenilir kaynakta var mı, bakayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: sahih akîdenin sesi."
          }
         ]
        },
        "anahtar": {
-        "ad": "Bidat",
+        "ad": "Kaynaksız",
         "soz": "Herkes"
        },
        "zincirAnahtar": [
         "Yanlış",
-        "Güvenilir"
+        "Kaynağa"
        ]
       },
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Akîde",
-       "soz": "Bunu hocama sorup doğrusunu öğreneyim.",
-       "eylem": "konus",
+       "soz": "Duyduğumu güvenilir kaynakta kontrol edeyim.",
+       "eylem": "dusun",
        "zincir": [
-        "Doğru bilgiyi güvenilir yerden öğrenir.",
+        "Doğru olanla sonradan eklenen söz birbirinden ayrılır.",
         "İçi rahatlar ve öğrendiğini arkadaşlarına da anlatır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bunu merak ediyorum; güvendiğim bir hocama sorayım.",
+          "m": "Bunu duydum; güvenilir kaynakta var mı, bakayım.",
           "dogru": true,
-          "not": "Akîde, Kur’an ve sünnete uygun iman etmek ve öğrenirken güvenilir bir hocaya sormaktır."
+          "not": "Akîde, Kur’an ve sünnete uygun iman etmektir; duyduğunu güvenilir kaynakta kontrol etmek bunu korur."
          },
          {
           "m": "Dinle ilgili şeyleri öğrenmesem de olur.",
@@ -165,15 +167,15 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: lakayt inancın sesi."
          },
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; sormama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: bidat inancının sesi."
+          "not": "Bu sağ ucun sesi: kaynaksızlığın sesi."
          }
         ]
        },
        "anahtar": {
         "ad": "Akîde",
-        "soz": "Bunu"
+        "soz": "Duyduğumu"
        },
        "zincirAnahtar": [
         "Doğru",
@@ -190,7 +192,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Lakayt İnanç",
       "orta": "Sahih Akîde",
-      "fazla": "Bidat İnancı"
+      "fazla": "Kaynaksız"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
@@ -216,10 +218,10 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Güvendiğim bir hocama sorup öğrenirim.",
+         "m": "Duyduğumu güvenilir bir kaynakta kontrol ederim.",
          "zon": "orta",
-         "sonuc": "Hocan sakin sakin anlatıyor; doğrusunu öğrenmiş oluyorsun.",
-         "not": "İbre ortada: duyduğunu güvenilir kaynağa sormak, sağlam öğrenmenin yolu.",
+         "sonuc": "Kaynağa bakınca neyin doğru olduğunu görüyorsun.",
+         "not": "İbre ortada: duyduğunu güvenilir kaynakta kontrol etmek, sağlam öğrenmenin yolu.",
          "ses": "s1or"
         }
        ],
@@ -228,13 +230,13 @@ DO.dersKaydet(
       {
        "id": "video",
        "baslik": "Videoda söylenen",
-       "tetik": "Bir videoda dinle ilgili bir söz duydun ve doğru olup olmadığını merak ediyorsun.",
+       "tetik": "Bir videoda dinle ilgili bir söz duydun ama kaynağını bilmiyorsun.",
        "secenekler": [
         {
-         "m": "Videoyu geçerim; hiç merak etmiyorum.",
+         "m": "Videoyu geçerim; üzerinde durmaya değmez.",
          "zon": "az",
-         "sonuc": "Merak ettiğin şey cevapsız kalıyor.",
-         "not": "İbre sola kaydı: merak etmemek, öğrenmeyi baştan durduruyor.",
+         "sonuc": "Videodaki söz hakkında hiçbir şey öğrenmiyorsun; konu geçip gidiyor.",
+         "not": "İbre sola kaydı: ilgisiz kalmak, öğrenmeyi baştan durduruyor.",
          "ses": "s2az"
         },
         {
@@ -245,10 +247,10 @@ DO.dersKaydet(
          "ses": "s2fa"
         },
         {
-         "m": "Anne babama ya da hocama gösterip sorarım.",
+         "m": "Güvenilir kitaptan kontrol edip büyüğüme de gösteririm.",
          "zon": "orta",
-         "sonuc": "Büyüğün videoya birlikte bakıyor ve doğrusunu anlatıyor.",
-         "not": "İbre ortada: güvendiğin bir büyükle birlikte bakmak, güvenli yol.",
+         "sonuc": "Büyüğünle birlikte videoya bakıp doğrusunu öğreniyorsun.",
+         "not": "İbre ortada: kaynağa bakıp güvendiğin bir büyükle birlikte bakmak, güvenli yol.",
          "ses": "s2or"
         }
        ],
@@ -274,13 +276,13 @@ DO.dersKaydet(
       {
        "id": "orta",
        "ad": "Kararında · Sahih Akîde",
-       "aciklama": "Güvenilir yerden öğrenmek",
+       "aciklama": "Kaynağıyla karşılaştırmak",
        "ikon": "muhur",
        "renk": "#17998A"
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Bidat İnancı",
+       "ad": "Fazla · Kaynaksız",
        "aciklama": "Her sözü dinden saymak",
        "ikon": "uyari",
        "renk": "#E0674F"
@@ -289,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Dinle ilgili bir konu açılınca “bana ne” der.",
+       "metin": "Dinle ilgili bir konu açılınca konuyu hemen değiştirir.",
        "alan": "az",
        "ipucu": "İlgisiz kalıyor."
       },
@@ -301,9 +303,9 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Dinle ilgili bir şey duyunca güvenilir bir hocaya sorar.",
+       "metin": "Dinle ilgili bir şey duyunca güvenilir bir kaynakta kontrol eder.",
        "alan": "orta",
-       "ipucu": "Kaynağa soruyor."
+       "ipucu": "Kaynağıyla karşılaştırıyor."
       },
       {
        "id": "k4",
@@ -319,7 +321,7 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Merak ettiği konuları güvenilir kitaplardan ve büyüklerinden öğrenir.",
+       "metin": "Duyduğu sözün doğruluğunu güvenilir kitaplarda ve büyüklerinde araştırır.",
        "alan": "orta",
        "ipucu": "Güvenilir yerden öğreniyor."
       }
@@ -342,9 +344,9 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Merak ettiğimi güvendiğim bir hocama soracağım",
+        "Duyduğumu güvenilir bir kaynakta kontrol edeceğim",
         "Duyduğum bir şeyi hemen dinden saymayıp kaynağına bakacağım",
-        "Dinimi öğrenmek için bu hafta güvenilir bir kitaptan okuyacağım"
+        "Emin olamazsam güvendiğim bir hocama ya da büyüğüme soracağım"
        ]
       }
      ],
@@ -364,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Akîde",
-       "metin": "güvenilir yerden öğrenmek",
+       "metin": "duyduğunu kaynağında kontrol etmek",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -792,78 +794,93 @@ DO.dersKaydet(
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.405,
-   "m": "Sonra ne olur? Merak ettiği sorular cevapsız kalır. Öğrenebileceği güzel şeyler yanından geçip gider.",
+   "sure": 6.403,
+   "m": "Sonra ne olur? Dinle ilgili merak edeceği şeyler hiç sorulmaz. Doğru bilgiyi öğrenme fırsatları birer birer geçer.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.288
+     0.258
     ],
     [
      "ne",
-     0.288,
-     0.417
+     0.258,
+     0.372
     ],
     [
      "olur?",
-     0.417,
-     0.675
+     0.372,
+     0.6
     ],
     [
-     "Merak",
-     1.34,
-     1.632
+     "Dinle",
+     0.865,
+     1.16
     ],
     [
-     "ettiği",
-     1.632,
-     2.071
+     "ilgili",
+     1.16,
+     1.602
     ],
     [
-     "sorular",
-     2.071,
-     2.509
+     "merak",
+     1.602,
+     1.896
     ],
     [
-     "cevapsız",
-     2.509,
-     2.948
-    ],
-    [
-     "kalır.",
-     2.948,
-     3.24
-    ],
-    [
-     "Öğrenebileceği",
-     3.57,
-     4.645
-    ],
-    [
-     "güzel",
-     4.645,
-     4.952
+     "edeceği",
+     1.896,
+     2.486
     ],
     [
      "şeyler",
-     4.952,
-     5.26
+     2.486,
+     2.781
     ],
     [
-     "yanından",
-     5.26,
-     5.72
+     "hiç",
+     2.781,
+     2.928
     ],
     [
-     "geçip",
-     5.72,
-     6.027
+     "sorulmaz.",
+     2.928,
+     3.37
     ],
     [
-     "gider.",
-     6.027,
-     6.335
+     "Doğru",
+     3.68,
+     3.975
+    ],
+    [
+     "bilgiyi",
+     3.975,
+     4.417
+    ],
+    [
+     "öğrenme",
+     4.417,
+     4.859
+    ],
+    [
+     "fırsatları",
+     4.859,
+     5.449
+    ],
+    [
+     "birer",
+     5.449,
+     5.744
+    ],
+    [
+     "birer",
+     5.744,
+     6.039
+    ],
+    [
+     "geçer.",
+     6.039,
+     6.333
     ]
    ]
   },
@@ -906,180 +923,170 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 6.86,
-   "m": "Sağ uçta Bidat. Herkes söylüyor, bu da dinin bir parçasıdır. Duyduğu sözün kaynağına bakmadan hemen kabul eder.",
+   "sure": 7.433,
+   "m": "Sağ uçta Kaynaksız. Herkes söylüyor, bu da dinin bir parçasıdır. Duyduğu sözün kaynağına bakmadan hemen kabul eder.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.234
+     0.233
     ],
     [
      "uçta",
-     0.234,
-     0.642
+     0.233,
+     0.64
     ],
     [
-     "Bidat.",
-     0.642,
-     1.05
+     "Kaynaksız.",
+     0.64,
+     1.25
     ],
     [
      "Herkes",
-     1.14,
-     1.548
+     1.65,
+     1.96
     ],
     [
      "söylüyor,",
-     1.548,
-     2.16
+     1.96,
+     2.425
     ],
     [
      "bu",
-     2.275,
-     2.438
+     2.64,
+     2.811
     ],
     [
      "da",
-     2.438,
-     2.601
+     2.811,
+     2.981
     ],
     [
      "dinin",
-     2.601,
-     2.926
+     2.981,
+     3.322
     ],
     [
      "bir",
-     2.926,
-     3.089
+     3.322,
+     3.493
     ],
     [
      "parçasıdır.",
-     3.089,
-     3.74
+     3.493,
+     4.175
     ],
     [
      "Duyduğu",
-     3.955,
-     4.427
+     4.46,
+     4.944
     ],
     [
      "sözün",
-     4.427,
-     4.742
+     4.944,
+     5.267
     ],
     [
      "kaynağına",
-     4.742,
-     5.372
+     5.267,
+     5.912
     ],
     [
      "bakmadan",
-     5.372,
-     5.845
+     5.912,
+     6.396
     ],
     [
      "hemen",
-     5.845,
-     6.16
+     6.396,
+     6.718
     ],
     [
      "kabul",
-     6.16,
-     6.475
+     6.718,
+     7.041
     ],
     [
      "eder.",
-     6.475,
-     6.79
+     7.041,
+     7.363
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.922,
-   "m": "Sonra ne olur? Yanlış bir bilgi doğru gibi yerleşebilir. Güvenilir bir kaynağa sormak aklına bile gelmez.",
+   "sure": 5.757,
+   "m": "Sonra ne olur? Yanlış bir bilgi doğru gibi yerleşebilir. Kaynağa bakmak aklına bile gelmez.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.274
+     0.276
     ],
     [
      "ne",
-     0.274,
-     0.396
+     0.276,
+     0.399
     ],
     [
      "olur?",
-     0.396,
-     0.64
+     0.399,
+     0.645
     ],
     [
      "Yanlış",
-     1.035,
-     1.364
+     1.1,
+     1.423
     ],
     [
      "bir",
-     1.364,
-     1.529
+     1.423,
+     1.584
     ],
     [
      "bilgi",
-     1.529,
-     1.858
+     1.584,
+     1.907
     ],
     [
      "doğru",
-     1.858,
-     2.187
+     1.907,
+     2.23
     ],
     [
      "gibi",
-     2.187,
-     2.517
+     2.23,
+     2.553
     ],
     [
      "yerleşebilir.",
-     2.517,
-     3.34
+     2.553,
+     3.36
     ],
     [
-     "Güvenilir",
-     3.775,
-     4.499
+     "Kaynağa",
+     3.68,
+     4.182
     ],
     [
-     "bir",
-     4.499,
-     4.68
-    ],
-    [
-     "kaynağa",
-     4.68,
-     5.223
-    ],
-    [
-     "sormak",
-     5.223,
-     5.585
+     "bakmak",
+     4.182,
+     4.516
     ],
     [
      "aklına",
-     5.585,
-     6.128
+     4.516,
+     5.018
     ],
     [
      "bile",
-     6.128,
-     6.49
+     5.018,
+     5.352
     ],
     [
      "gelmez.",
-     6.49,
-     6.852
+     5.352,
+     5.687
     ]
    ]
   },
@@ -1122,175 +1129,190 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 7.412,
-   "m": "Tam kararında Akîde. Bunu hocama sorup doğrusunu öğreneyim. Duyduğu sözü güvendiği bir hocaya ya da büyüğüne sorar.",
+   "sure": 7.777,
+   "m": "Tam kararında Akîde. Duyduğumu güvenilir kaynakta kontrol edeyim. Duyduğu sözü güvendiği bir kitaptan ya da büyüğünden kontrol eder.",
    "k": [
     [
      "Tam",
      0.03,
-     0.141
+     0.196
     ],
     [
      "kararında",
-     0.141,
-     0.583
+     0.196,
+     0.861
     ],
     [
      "Akîde.",
-     0.583,
-     0.915
+     0.861,
+     1.36
     ],
     [
-     "Bunu",
-     1.08,
-     1.488
+     "Duyduğumu",
+     1.885,
+     2.379
     ],
     [
-     "hocama",
-     1.488,
-     2.1
+     "güvenilir",
+     2.379,
+     2.873
     ],
     [
-     "sorup",
-     2.1,
-     2.508
+     "kaynakta",
+     2.873,
+     3.243
     ],
     [
-     "doğrusunu",
-     2.508,
-     3.324
+     "kontrol",
+     3.243,
+     3.49
     ],
     [
-     "öğreneyim.",
-     3.324,
-     4.14
+     "edeyim.",
+     3.49,
+     3.86
     ],
     [
      "Duyduğu",
-     4.375,
-     4.799
+     4.655,
+     5.053
     ],
     [
      "sözü",
-     4.799,
-     5.081
+     5.053,
+     5.318
     ],
     [
      "güvendiği",
-     5.081,
-     5.647
+     5.318,
+     5.849
     ],
     [
      "bir",
-     5.647,
-     5.788
+     5.849,
+     5.982
     ],
     [
-     "hocaya",
-     5.788,
-     6.212
+     "kitaptan",
+     5.982,
+     6.38
     ],
     [
      "ya",
-     6.212,
-     6.353
+     6.38,
+     6.512
     ],
     [
      "da",
-     6.353,
-     6.494
+     6.512,
+     6.645
     ],
     [
-     "büyüğüne",
-     6.494,
-     7.059
+     "büyüğünden",
+     6.645,
+     7.176
     ],
     [
-     "sorar.",
-     7.059,
-     7.342
+     "kontrol",
+     7.176,
+     7.441
+    ],
+    [
+     "eder.",
+     7.441,
+     7.707
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 6.325,
-   "m": "Sonra ne olur? Doğru bilgiyi güvenilir yerden öğrenir. İçi rahatlar ve öğrendiğini arkadaşlarına da anlatır.",
+   "sure": 8.662,
+   "m": "Sonra ne olur? Doğru olanla sonradan eklenen söz birbirinden ayrılır. İçi rahatlar ve öğrendiğini arkadaşlarına da anlatır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.28
+     0.418
     ],
     [
      "ne",
-     0.28,
-     0.405
+     0.418,
+     0.612
     ],
     [
      "olur?",
-     0.405,
-     0.655
+     0.612,
+     1.0
     ],
     [
      "Doğru",
-     0.995,
-     1.296
+     1.19,
+     1.586
     ],
     [
-     "bilgiyi",
-     1.296,
-     1.749
+     "olanla",
+     1.586,
+     2.181
     ],
     [
-     "güvenilir",
-     1.749,
-     2.351
+     "sonradan",
+     2.181,
+     2.775
     ],
     [
-     "yerden",
-     2.351,
-     2.653
+     "eklenen",
+     2.775,
+     3.37
     ],
     [
-     "öğrenir.",
-     2.653,
-     3.105
+     "söz",
+     3.37,
+     3.568
+    ],
+    [
+     "birbirinden",
+     3.568,
+     4.361
+    ],
+    [
+     "ayrılır.",
+     4.361,
+     4.955
     ],
     [
      "İçi",
-     3.405,
-     3.676
+     5.26,
+     5.577
     ],
     [
      "rahatlar",
-     3.676,
-     4.084
+     5.577,
+     6.053
     ],
     [
      "ve",
-     4.084,
-     4.219
+     6.053,
+     6.212
     ],
     [
      "öğrendiğini",
-     4.219,
-     4.898
+     6.212,
+     7.005
     ],
     [
      "arkadaşlarına",
-     4.898,
-     5.712
+     7.005,
+     7.957
     ],
     [
      "da",
-     5.712,
-     5.848
+     7.957,
+     8.116
     ],
     [
      "anlatır.",
-     5.848,
-     6.255
+     8.116,
+     8.592
     ]
    ]
   },
@@ -1519,157 +1541,157 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.373,
-   "m": "Hocan sakin sakin anlatıyor; doğrusunu öğrenmiş oluyorsun.",
+   "sure": 2.65,
+   "m": "Kaynağa bakınca neyin doğru olduğunu görüyorsun.",
    "k": [
     [
-     "Hocan",
+     "Kaynağa",
      0.03,
-     0.361
+     0.455
     ],
     [
-     "sakin",
-     0.361,
-     0.692
+     "bakınca",
+     0.455,
+     0.88
     ],
     [
-     "sakin",
-     0.692,
-     1.023
+     "neyin",
+     0.88,
+     1.163
     ],
     [
-     "anlatıyor;",
-     1.023,
-     1.685
+     "doğru",
+     1.163,
+     1.446
     ],
     [
-     "doğrusunu",
-     1.975,
-     2.458
+     "olduğunu",
+     1.446,
+     2.013
     ],
     [
-     "öğrenmiş",
-     2.458,
-     2.82
-    ],
-    [
-     "oluyorsun.",
-     2.82,
-     3.303
+     "görüyorsun.",
+     2.013,
+     2.58
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.581,
-   "m": "Bir videoda dinle ilgili bir söz duydun ve doğru olup olmadığını merak ediyorsun. Ne yaparsın?",
+   "sure": 4.457,
+   "m": "Bir videoda dinle ilgili bir söz duydun ama kaynağını bilmiyorsun. Ne yaparsın?",
    "k": [
     [
      "Bir",
      0.03,
-     0.177
+     0.176
     ],
     [
      "videoda",
-     0.177,
-     0.767
+     0.176,
+     0.762
     ],
     [
      "dinle",
-     0.767,
-     1.062
+     0.762,
+     1.055
     ],
     [
      "ilgili",
-     1.062,
-     1.505
+     1.055,
+     1.495
     ],
     [
      "bir",
-     1.505,
-     1.652
+     1.495,
+     1.641
     ],
     [
      "söz",
-     1.652,
-     1.8
+     1.641,
+     1.788
     ],
     [
      "duydun",
-     1.8,
-     2.095
+     1.788,
+     2.08
     ],
     [
-     "ve",
-     2.095,
-     2.242
+     "ama",
+     2.08,
+     2.373
     ],
     [
-     "doğru",
-     2.242,
-     2.537
+     "kaynağını",
+     2.373,
+     2.959
     ],
     [
-     "olup",
-     2.537,
-     2.832
-    ],
-    [
-     "olmadığını",
-     2.832,
-     3.57
-    ],
-    [
-     "merak",
-     3.57,
-     3.865
-    ],
-    [
-     "ediyorsun.",
-     3.865,
-     4.455
+     "bilmiyorsun.",
+     2.959,
+     3.545
     ],
     [
      "Ne",
-     4.92,
-     5.068
+     3.785,
+     3.936
     ],
     [
      "yaparsın?",
-     5.068,
-     5.511
+     3.936,
+     4.387
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 1.938,
-   "m": "Merak ettiğin şey cevapsız kalıyor.",
+   "sure": 3.674,
+   "m": "Videodaki söz hakkında hiçbir şey öğrenmiyorsun; konu geçip gidiyor.",
    "k": [
     [
-     "Merak",
+     "Videodaki",
      0.03,
-     0.336
+     0.717
     ],
     [
-     "ettiğin",
-     0.336,
-     0.796
+     "söz",
+     0.717,
+     0.854
+    ],
+    [
+     "hakkında",
+     0.854,
+     1.266
+    ],
+    [
+     "hiçbir",
+     1.266,
+     1.541
     ],
     [
      "şey",
-     0.796,
-     0.949
+     1.541,
+     1.678
     ],
     [
-     "cevapsız",
-     0.949,
-     1.408
+     "öğrenmiyorsun;",
+     1.678,
+     2.365
     ],
     [
-     "kalıyor.",
-     1.408,
-     1.868
+     "konu",
+     2.7,
+     2.958
+    ],
+    [
+     "geçip",
+     2.958,
+     3.217
+    ],
+    [
+     "gidiyor.",
+     3.217,
+     3.604
     ]
    ]
   },
@@ -1717,43 +1739,38 @@ DO.dersKaydet(
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.475,
-   "m": "Büyüğün videoya birlikte bakıyor ve doğrusunu anlatıyor.",
+   "sure": 2.989,
+   "m": "Büyüğünle birlikte videoya bakıp doğrusunu öğreniyorsun.",
    "k": [
     [
-     "Büyüğün",
+     "Büyüğünle",
      0.03,
-     0.49
-    ],
-    [
-     "videoya",
-     0.49,
-     1.104
+     0.555
     ],
     [
      "birlikte",
-     1.104,
-     1.564
+     0.555,
+     0.949
     ],
     [
-     "bakıyor",
-     1.564,
-     2.024
+     "videoya",
+     0.949,
+     1.475
     ],
     [
-     "ve",
-     2.024,
-     2.178
+     "bakıp",
+     1.475,
+     1.737
     ],
     [
      "doğrusunu",
-     2.178,
-     2.791
+     1.737,
+     2.262
     ],
     [
-     "anlatıyor.",
-     2.791,
-     3.405
+     "öğreniyorsun.",
+     2.262,
+     2.919
     ]
    ]
   },
@@ -1945,148 +1962,153 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 10.968,
-   "m": "Bu cümle bilerek çift anlamlı. Duyduğunu kaynağına bakmadan dinden sayan biri söylüyorsa sağ uca yakın. Duyduğunu açıkça söyleyip güvenilir bir hocaya sormaya hazır biri söylüyorsa orta uca yakın.",
+   "sure": 11.887,
+   "m": "Bu cümle bilerek çift anlamlı. Duyduğunu kaynağına bakmadan dinden sayan biri söylüyorsa sağ uca yakın. Duyduğunu açıkça söyleyip güvenilir bir kaynakta kontrol etmeye hazır biri söylüyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.184
+     0.186
     ],
     [
      "cümle",
-     0.184,
-     0.492
+     0.186,
+     0.498
     ],
     [
      "bilerek",
-     0.492,
-     0.954
+     0.498,
+     0.966
     ],
     [
      "çift",
-     0.954,
-     1.108
+     0.966,
+     1.122
     ],
     [
      "anlamlı.",
-     1.108,
-     1.57
+     1.122,
+     1.59
     ],
     [
      "Duyduğunu",
-     1.96,
-     2.42
+     1.975,
+     2.6
     ],
     [
      "kaynağına",
-     2.42,
-     2.88
+     2.6,
+     3.226
     ],
     [
      "bakmadan",
-     2.88,
-     3.225
+     3.226,
+     3.695
     ],
     [
      "dinden",
-     3.225,
-     3.455
+     3.695,
+     4.007
     ],
     [
      "sayan",
-     3.455,
-     3.685
+     4.007,
+     4.32
     ],
     [
      "biri",
-     3.685,
-     3.915
+     4.32,
+     4.633
     ],
     [
      "söylüyorsa",
-     3.915,
-     4.375
+     4.633,
+     5.258
     ],
     [
      "sağ",
-     4.375,
-     4.49
+     5.258,
+     5.415
     ],
     [
      "uca",
-     4.49,
-     4.72
+     5.415,
+     5.727
     ],
     [
      "yakın.",
-     4.72,
-     4.95
+     5.727,
+     6.04
     ],
     [
      "Duyduğunu",
-     5.095,
-     5.758
+     6.515,
+     7.088
     ],
     [
      "açıkça",
-     5.758,
-     6.256
+     7.088,
+     7.518
     ],
     [
      "söyleyip",
-     6.256,
-     6.753
+     7.518,
+     7.948
     ],
     [
      "güvenilir",
-     6.753,
-     7.416
+     7.948,
+     8.521
     ],
     [
      "bir",
-     7.416,
-     7.582
+     8.521,
+     8.664
     ],
     [
-     "hocaya",
-     7.582,
-     8.079
+     "kaynakta",
+     8.664,
+     9.094
     ],
     [
-     "sormaya",
-     8.079,
-     8.577
+     "kontrol",
+     9.094,
+     9.381
+    ],
+    [
+     "etmeye",
+     9.381,
+     9.811
     ],
     [
      "hazır",
-     8.577,
-     8.908
+     9.811,
+     10.097
     ],
     [
      "biri",
-     8.908,
-     9.24
+     10.097,
+     10.384
     ],
     [
      "söylüyorsa",
-     9.24,
-     9.903
+     10.384,
+     10.957
     ],
     [
      "orta",
-     9.903,
-     10.234
+     10.957,
+     11.244
     ],
     [
      "uca",
-     10.234,
-     10.566
+     11.244,
+     11.53
     ],
     [
      "yakın.",
-     10.566,
-     10.898
+     11.53,
+     11.817
     ]
    ]
   },

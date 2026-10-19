@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Dua: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "az",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi öfkeyle arkadaşına kötülük diliyor: sol uca (Beddua) yakın. Başka okumada ona içtenlikle iyilik diliyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, niyete ve ses tonuna bakar. Dua; Allahü teâlâ’ya yalvararak iyilik istemektir. Bu ibre ölçekten çok yönü gösterir: sol uçta kötülük dilemek, sağ uçta yüze karşı abartılı övmek var. Üç sahnemiz var: kötü dileme, dua etme, abartılı övme.",
+      "İbre cümleye değil, niyete ve ses tonuna bakar. Dua; Allahü teâlâ’ya yalvararak iyilik istemektir. Bu ibre ölçekten çok yönü gösterir: sol uçta öfkeyle kötülük dilemek (Excel’deki adı Beddua), sağ uçta sevilmek için yüze karşı ölçüsüz, abartılı güzel söz söylemek var; ikisi de dilek ve sözün ölçüsünü kaçırır. Üç sahnemiz var: kötü dileme, dua etme, abartılı övme.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -67,7 +69,7 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Kızınca kötü dilemek neye benziyor?",
        "ad": "Beddua",
-       "soz": "Başına kötü bir şey gelsin!",
+       "soz": "Keşke sen de bir kaybetsen, anlarsın!",
        "eylem": "hayir",
        "zincir": [
         "Arkadaşı üzülür ve kırılır.",
@@ -77,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Çok kızdım; ona kötü bir şey olsun.",
+          "m": "Çok kızdım; keşke o da benim gibi üzülse.",
           "dogru": true,
           "not": "Beddua, birine kötülük dilemektir. Öfke gelince önce nefes alıp sakinleşmek iyi gelir."
          },
@@ -95,7 +97,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Beddua",
-        "soz": "Başına"
+        "soz": "Keşke"
        },
        "zincirAnahtar": [
         "Arkadaşı",
@@ -121,7 +123,7 @@ DO.dersKaydet(
           "not": "Abartılı övgü, birini gereğinden fazla övmektir. İçten ve ölçülü güzel söz daha değerlidir."
          },
          {
-          "m": "Çok kızdım; ona kötü bir şey olsun.",
+          "m": "Çok kızdım; keşke o da benim gibi üzülse.",
           "dogru": false,
           "not": "Bu sol ucun sesi: bedduanın sesi."
          },
@@ -160,7 +162,7 @@ DO.dersKaydet(
           "not": "Dua, Allahü teâlâ’ya yalvararak iyilik istemektir. Kendimiz ve başkaları için güzel şey dilemek içimizi yumuşatır."
          },
          {
-          "m": "Çok kızdım; ona kötü bir şey olsun.",
+          "m": "Çok kızdım; keşke o da benim gibi üzülse.",
           "dogru": false,
           "not": "Bu sol ucun sesi: bedduanın sesi."
          },
@@ -199,10 +201,10 @@ DO.dersKaydet(
       {
        "id": "oyun",
        "baslik": "Oyunu kaybedince",
-       "tetik": "Oyunda arkadaşın seni yendi ve sen çok kızdın.",
+       "tetik": "Oyunda arkadaşın seni yendi ve herkes onu alkışlıyor.",
        "secenekler": [
         {
-         "m": "Başına kötü bir şey gelsin!",
+         "m": "Keşke sen de bir kaybetsen, anlarsın!",
          "zon": "az",
          "sonuc": "Söz çıkıyor ama sonra içinde bir sıkıntı kalıyor; arkadaşın da kırılıyor.",
          "not": "İbre sola kaydı: kızgınlıkla kötü dilemek, kırgınlığı büyütüyor.",
@@ -212,14 +214,14 @@ DO.dersKaydet(
          "m": "Sen kusursuzsun, dünyanın en iyisisin; hep sen kazan!",
          "zon": "fazla",
          "sonuc": "Arkadaşın şaşırıyor; sözlerin içten gelmiyor gibi duruyor.",
-         "not": "İbre sağa kaydı: abartılı övgü, sözün değerini azaltıyor.",
+         "not": "İbre sağa kaydı: herkesin içinde abartılı övgü, sözün değerini azaltıyor.",
          "ses": "s1fa"
         },
         {
-         "m": "Tebrik ederim; sakinleşince ona da iyilik dilerim.",
+         "m": "Tebrik ederim, güzel oynadın; hepimize iyilik dilerim.",
          "zon": "orta",
          "sonuc": "Arkadaşın gülümsüyor; sen de rahatlıyorsun.",
-         "not": "İbre ortada: kızgınlığı sakinleştirip iyilik dilemek hem sana hem arkadaşına iyi geliyor.",
+         "not": "İbre ortada: içten ve ölçülü güzel söz hem sana hem arkadaşına iyi geliyor.",
          "ses": "s1or"
         }
        ],
@@ -231,9 +233,9 @@ DO.dersKaydet(
        "tetik": "Arkadaşının yarın önemli bir sınavı var ve ona iyi bir şey söylemek istiyorsun.",
        "secenekler": [
         {
-         "m": "Umarım sınavı kötü geçer, bana ne.",
+         "m": "Keşke sınavda zorlansa, bana ne.",
          "zon": "az",
-         "sonuc": "İçinde kıskançlık büyüyor; arkadaşın da bunu hissedebilir.",
+         "sonuc": "Arkadaşın bunu hissedip kırılıyor; sen de içinde bir sıkıntı taşıyorsun.",
          "not": "İbre sola kaydı: birine kötülük dilemek içimizi de ağırlaştırıyor.",
          "ses": "s2az"
         },
@@ -289,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Kızınca arkadaşına “başına kötü bir şey gelsin” der.",
+       "metin": "Kızınca arkadaşına “keşke sen de bir kaybetsen” der.",
        "alan": "az",
        "ipucu": "Kötülük diliyor."
       },
@@ -319,9 +321,9 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Kızsa da sakinleşip arkadaşına da kendine de iyilik diler.",
+       "metin": "Arkadaşının başarısına içten ve ölçülü güzel bir söz söyler.",
        "alan": "orta",
-       "ipucu": "Sakin ve iyi niyetli."
+       "ipucu": "İçten ve ölçülü."
       }
      ]
     },
@@ -705,73 +707,83 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.051,
-   "m": "Sol uçta Beddua. Başına kötü bir şey gelsin! Öfkelenince arkadaşına kötü dilekte bulunur.",
+   "sure": 7.581,
+   "m": "Sol uçta Beddua. Keşke sen de bir kaybetsen, anlarsın! Öfkelenince arkadaşına kötü bir şey diler.",
    "k": [
     [
      "Sol",
      0.03,
-     0.156
+     0.233
     ],
     [
      "uçta",
-     0.156,
-     0.407
+     0.233,
+     0.64
     ],
     [
      "Beddua.",
-     0.407,
-     0.785
+     0.64,
+     1.25
     ],
     [
-     "Başına",
-     0.87,
-     1.608
+     "Keşke",
+     1.335,
+     1.921
     ],
     [
-     "kötü",
-     1.608,
-     2.101
+     "sen",
+     1.921,
+     2.214
+    ],
+    [
+     "de",
+     2.214,
+     2.507
     ],
     [
      "bir",
-     2.101,
-     2.347
+     2.507,
+     2.801
     ],
     [
-     "şey",
-     2.347,
-     2.593
+     "kaybetsen,",
+     2.801,
+     3.68
     ],
     [
-     "gelsin!",
-     2.593,
-     3.085
+     "anlarsın!",
+     3.9,
+     4.425
     ],
     [
      "Öfkelenince",
-     3.38,
-     4.102
+     5.065,
+     5.829
     ],
     [
      "arkadaşına",
-     4.102,
-     4.825
+     5.829,
+     6.594
     ],
     [
      "kötü",
-     4.825,
-     5.114
+     6.594,
+     6.899
     ],
     [
-     "dilekte",
-     5.114,
-     5.547
+     "bir",
+     6.899,
+     7.052
     ],
     [
-     "bulunur.",
-     5.547,
-     5.981
+     "şey",
+     7.052,
+     7.205
+    ],
+    [
+     "diler.",
+     7.205,
+     7.511
     ]
    ]
   },
@@ -1283,58 +1295,58 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 3.983,
-   "m": "Oyunda arkadaşın seni yendi ve sen çok kızdın. Ne yaparsın?",
+   "sure": 5.574,
+   "m": "Oyunda arkadaşın seni yendi ve herkes onu alkışlıyor. Ne yaparsın?",
    "k": [
     [
      "Oyunda",
      0.03,
-     0.56
+     0.696
     ],
     [
      "arkadaşın",
-     0.56,
-     1.266
+     0.696,
+     1.584
     ],
     [
      "seni",
-     1.266,
-     1.619
+     1.584,
+     2.028
     ],
     [
      "yendi",
-     1.619,
-     1.972
+     2.028,
+     2.472
     ],
     [
      "ve",
-     1.972,
-     2.149
+     2.472,
+     2.694
     ],
     [
-     "sen",
-     2.149,
-     2.325
+     "herkes",
+     2.694,
+     3.138
     ],
     [
-     "çok",
-     2.325,
-     2.502
+     "onu",
+     3.138,
+     3.582
     ],
     [
-     "kızdın.",
-     2.502,
-     2.855
+     "alkışlıyor.",
+     3.582,
+     4.47
     ],
     [
      "Ne",
-     3.3,
-     3.453
+     5.565,
+     5.59
     ],
     [
      "yaparsın?",
-     3.453,
-     3.913
+     5.59,
+     5.665
     ]
    ]
   },
@@ -1558,43 +1570,58 @@ DO.dersKaydet(
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.043,
-   "m": "İçinde kıskançlık büyüyor; arkadaşın da bunu hissedebilir.",
+   "sure": 3.644,
+   "m": "Arkadaşın bunu hissedip kırılıyor; sen de içinde bir sıkıntı taşıyorsun.",
    "k": [
     [
-     "İçinde",
+     "Arkadaşın",
      0.03,
-     0.483
-    ],
-    [
-     "kıskançlık",
-     0.483,
-     0.937
-    ],
-    [
-     "büyüyor;",
-     0.937,
-     1.39
-    ],
-    [
-     "arkadaşın",
-     1.64,
-     2.084
-    ],
-    [
-     "da",
-     2.084,
-     2.196
+     0.575
     ],
     [
      "bunu",
-     2.196,
-     2.418
+     0.575,
+     0.847
     ],
     [
-     "hissedebilir.",
-     2.418,
-     2.973
+     "hissedip",
+     0.847,
+     1.255
+    ],
+    [
+     "kırılıyor;",
+     1.255,
+     1.8
+    ],
+    [
+     "sen",
+     1.94,
+     2.066
+    ],
+    [
+     "de",
+     2.066,
+     2.191
+    ],
+    [
+     "içinde",
+     2.191,
+     2.569
+    ],
+    [
+     "bir",
+     2.569,
+     2.694
+    ],
+    [
+     "sıkıntı",
+     2.694,
+     3.071
+    ],
+    [
+     "taşıyorsun.",
+     3.071,
+     3.574
     ]
    ]
   },

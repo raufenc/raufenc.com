@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Cesaret: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,7 +23,7 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Cesaret",
      "huyAnahtar": "Cesaret",
-     "olculen": "Doğruyu yapma cesaretim",
+     "olculen": "Arkadaş ortamında doğruyu yapma gücüm",
      "kanca": "Ne derlerse desinler, yaparım.",
      "uclar": {
       "az": "Çekingenlik",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "orta",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi başkaları ne derse desin doğru olanı yapıyor: orta uca yakın. Başka okumada kimseyi dinlemeden, sonunu düşünmeden atılıyor: sağ uca (Pervasızlık) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an doğruyu yapmak için ne yaptığımıza bakar. Cesaret; çekinsen de doğru olanı seçip yapabilmektir. Sol uç, “başkaları ayıplar” diye doğruyu yapamamaktır; sağ uç, düşünmeden tehlikeye atılmaktır.",
+      "İbre cümleye değil, o an doğruyu yapmak için ne yaptığımıza bakar. Cesaret; çekinsen de doğru olanı seçip yapabilmektir. Sol uç, “başkaları ayıplar” diye doğruyu yapamamaktır; sağ uç, ne olacağına bakmadan herkesin önünde atılmaktır. Excel’de bu uç “tehlikeye atılmak” diye geçer; yükseklik, trafik gibi gerçek tehlikeler Şecâat dersinin konusu, bu derste arkadaş ortamındaki cesarete bakıyoruz.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -70,8 +72,8 @@ DO.dersKaydet(
        "soz": "Ya arkadaşlar gülerse? Söylemesem daha iyi.",
        "eylem": "yaslan",
        "zincir": [
-        "Haksızlığa uğrayan arkadaşı yalnız kalır.",
-        "Kendisi de içinde rahat edemez."
+        "Dışlanan arkadaş kendini daha yalnız hisseder.",
+        "Kendisi de içinde huzursuz kalır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -87,7 +89,7 @@ DO.dersKaydet(
           "not": "Bu orta ucun sesi: cesaretin sesi."
          },
          {
-          "m": "Yapamazsın dediler; düşünmeden yapayım.",
+          "m": "Cesur olduğumu göstereyim; sonunu düşünmeyeyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: pervasızlığın sesi."
          }
@@ -98,7 +100,7 @@ DO.dersKaydet(
         "soz": "Ya"
        },
        "zincirAnahtar": [
-        "Haksızlığa",
+        "Dışlanan",
         "Kendisi"
        ]
       },
@@ -106,17 +108,17 @@ DO.dersKaydet(
        "zon": "fazla",
        "soru": "Kışkırtılınca atılan kişi neyi kaçırır?",
        "ad": "Pervasızlık",
-       "soz": "Yapamazsın mı dediniz? Hemen atlıyorum!",
+       "soz": "Cesur musun? Hemen hepsinin önünde bağırırım!",
        "eylem": "isaret",
        "zincir": [
-        "Koridorda kayarak koşunca arkadaşına çarpabilir.",
-        "Cesur görünmek isterken kendine de zarar verebilir."
+        "Sınıfta tartışma büyür, asıl konu kaybolur.",
+        "Cesur görünmek isterken arkadaşlarının güveni azalabilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Yapamazsın dediler; düşünmeden yapayım.",
+          "m": "Cesur olduğumu göstereyim; sonunu düşünmeyeyim.",
           "dogru": true,
           "not": "Pervasızlık, düşünmeden kendini öne atmaktır. Cesarete benzer ama sonunu hesaplamaz."
          },
@@ -134,10 +136,10 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Pervasızlık",
-        "soz": "Yapamazsın"
+        "soz": "Cesur"
        },
        "zincirAnahtar": [
-        "Koridorda",
+        "Sınıfta",
         "Cesur"
        ]
       },
@@ -148,8 +150,8 @@ DO.dersKaydet(
        "soz": "Gülseler de doğrusunu söyleyeceğim.",
        "eylem": "konus",
        "zincir": [
-        "Doğru söz yerine ulaşır.",
-        "Arkadaşları da onun duruşundan güç alır."
+        "Sakin söylenen doğru söz duyulur.",
+        "Arkadaşları da onun duruşundan cesaret alır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -165,7 +167,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: çekingenliğin sesi."
          },
          {
-          "m": "Yapamazsın dediler; düşünmeden yapayım.",
+          "m": "Cesur olduğumu göstereyim; sonunu düşünmeyeyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: pervasızlığın sesi."
          }
@@ -176,7 +178,7 @@ DO.dersKaydet(
         "soz": "Gülseler"
        },
        "zincirAnahtar": [
-        "Doğru",
+        "Sakin",
         "Arkadaşları"
        ]
       }
@@ -226,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "kopya",
-       "baslik": "Sınıfta kopya",
-       "tetik": "Sınavda bir arkadaşının kopya çektiğini görüyorsun. Doğrusunun söylenmesi gerektiğini biliyorsun.",
+       "id": "dislama",
+       "baslik": "Oyundan dışlama",
+       "tetik": "Sınıfta herkes bir arkadaşını oyuna almıyor ve “herkes böyle yapıyor” diyor. Sen bunun doğru olmadığını düşünüyorsun.",
        "secenekler": [
         {
-         "m": "Hiç sesimi çıkarmam; sonra bana kızarlar.",
+         "m": "Herkes yapıyorsa ben de karışmam, sessiz dururum.",
          "zon": "az",
-         "sonuc": "Kopya sürüyor; sen ise sınav boyunca huzursuz kalıyorsun.",
-         "not": "İbre sola kaydı: “ne derler” düşüncesi doğruyu susturuyor.",
+         "sonuc": "Dışlama sürüyor; arkadaşın daha yalnız hissediyor, sen de içinde huzursuzsun.",
+         "not": "İbre sola kaydı: “herkes yapıyor” düşüncesi doğruyu susturuyor.",
          "ses": "s2az"
         },
         {
-         "m": "Hemen herkesin önünde ilan edip ortaya atılırım!",
+         "m": "Hepinize yüksek sesle haksızsınız diye bağırırım!",
          "zon": "fazla",
-         "sonuc": "Arkadaşın utanıyor, sınıf karışıyor; konuşmak için daha uygun bir yol vardı.",
-         "not": "İbre sağa kaydı: sonucunu düşünmeden atılmak işi çözmüyor.",
+         "sonuc": "Herkes savunmaya geçiyor; konuşma kavgaya dönüyor ve arkadaşın yine dışarıda kalıyor.",
+         "not": "İbre sağa kaydı: ne olacağına bakmadan atılmak doğruyu savunmak değil, tartışmayı büyütmek.",
          "ses": "s2fa"
         },
         {
-         "m": "Önce arkadaşıma söylerim; olmazsa güvendiğim öğretmene anlatırım.",
+         "m": "Arkadaşımızı da oyuna alalım, hep birlikte eğleniriz.",
          "zon": "orta",
-         "sonuc": "Arkadaşın durumu fark ediyor; sorun doğru kişiye ulaşıyor.",
-         "not": "İbre ortada: korksan da düşünerek doğru yolu seçtin.",
+         "sonuc": "Bazıları düşünüp kabul ediyor; arkadaşın oyuna katılabiliyor.",
+         "not": "İbre ortada: çekinsen de sakin ve kapsayıcı bir söz söyledin.",
          "ses": "s2or"
         }
        ],
@@ -295,7 +297,7 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "“Cesaretin yok mu?” denince hiç düşünmeden yüksek bir yerden atlar.",
+       "metin": "“Cesaretin yok mu?” denince hiç düşünmeden sınıfın ortasında bağırıp tartışmaya girer.",
        "alan": "fazla",
        "ipucu": "Sonunu düşünmüyor."
       },
@@ -307,13 +309,13 @@ DO.dersKaydet(
       },
       {
        "id": "k4",
-       "metin": "Arkadaşı haksızlığa uğrarken “bana da gülerler” deyip yanına gitmez.",
+       "metin": "Arkadaşı dışlanırken “bana da gülerler” deyip yanına gitmez.",
        "alan": "az",
        "ipucu": "Çekinmek onu durduruyor."
       },
       {
        "id": "k5",
-       "metin": "Arkadaşları bağırınca ne olacağına bakmadan korkuluktan kaymaya kalkar.",
+       "metin": "Arkadaşları “yapsana!” diye bağırınca ne olacağına bakmadan birine kaba bir söz söyler.",
        "alan": "fazla",
        "ipucu": "Kışkırtmaya kapılıyor."
       },
@@ -767,73 +769,78 @@ DO.dersKaydet(
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 5.539,
-   "m": "Sonra ne olur? Haksızlığa uğrayan arkadaşı yalnız kalır. Kendisi de içinde rahat edemez.",
+   "sure": 5.831,
+   "m": "Sonra ne olur? Dışlanan arkadaş kendini daha yalnız hisseder. Kendisi de içinde huzursuz kalır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.296
+     0.26
     ],
     [
      "ne",
-     0.296,
-     0.429
+     0.26,
+     0.375
     ],
     [
      "olur?",
-     0.429,
-     0.695
+     0.375,
+     0.605
     ],
     [
-     "Haksızlığa",
-     0.99,
-     1.57
+     "Dışlanan",
+     1.215,
+     1.672
     ],
     [
-     "uğrayan",
-     1.57,
-     2.005
+     "arkadaş",
+     1.672,
+     2.13
     ],
     [
-     "arkadaşı",
-     2.005,
-     2.585
+     "kendini",
+     2.13,
+     2.587
+    ],
+    [
+     "daha",
+     2.587,
+     2.893
     ],
     [
      "yalnız",
-     2.585,
-     2.875
+     2.893,
+     3.197
     ],
     [
-     "kalır.",
-     2.875,
-     3.165
+     "hisseder.",
+     3.197,
+     3.655
     ],
     [
      "Kendisi",
-     3.625,
-     4.086
+     3.77,
+     4.268
     ],
     [
      "de",
-     4.086,
-     4.24
+     4.268,
+     4.434
     ],
     [
      "içinde",
-     4.24,
-     4.701
+     4.434,
+     4.932
     ],
     [
-     "rahat",
-     4.701,
-     5.008
+     "huzursuz",
+     4.932,
+     5.429
     ],
     [
-     "edemez.",
-     5.008,
-     5.469
+     "kalır.",
+     5.429,
+     5.761
     ]
    ]
   },
@@ -876,155 +883,165 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.582,
-   "m": "Sağ uçta Pervasızlık. Yapamazsın mı dediniz? Hemen atlıyorum! Kışkırtılınca sonunu düşünmeden öne atılır.",
+   "sure": 8.294,
+   "m": "Sağ uçta Pervasızlık. Cesur musun? Hemen hepsinin önünde bağırırım! Kışkırtılınca sonunu düşünmeden herkesin önünde atılır.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.241
+     0.238
     ],
     [
      "uçta",
-     0.241,
-     0.662
+     0.238,
+     0.654
     ],
     [
      "Pervasızlık.",
-     0.662,
-     1.505
+     0.654,
+     1.485
     ],
     [
-     "Yapamazsın",
-     1.595,
-     2.357
+     "Cesur",
+     1.575,
+     1.603
     ],
     [
-     "mı",
-     2.357,
-     2.548
-    ],
-    [
-     "dediniz?",
-     2.548,
-     3.12
+     "musun?",
+     1.603,
+     1.63
     ],
     [
      "Hemen",
-     3.435,
-     3.66
+     1.995,
+     2.435
     ],
     [
-     "atlıyorum!",
-     3.66,
-     4.11
+     "hepsinin",
+     2.435,
+     3.095
+    ],
+    [
+     "önünde",
+     3.095,
+     3.755
+    ],
+    [
+     "bağırırım!",
+     3.755,
+     4.635
     ],
     [
      "Kışkırtılınca",
-     4.685,
-     5.516
+     5.025,
+     5.787
     ],
     [
      "sonunu",
-     5.516,
-     6.015
+     5.787,
+     6.244
     ],
     [
      "düşünmeden",
-     6.015,
-     6.68
+     6.244,
+     6.853
     ],
     [
-     "öne",
-     6.68,
-     7.013
+     "herkesin",
+     6.853,
+     7.31
+    ],
+    [
+     "önünde",
+     7.31,
+     7.767
     ],
     [
      "atılır.",
-     7.013,
-     7.512
+     7.767,
+     8.224
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 7.279,
-   "m": "Sonra ne olur? Koridorda kayarak koşunca arkadaşına çarpabilir. Cesur görünmek isterken kendine de zarar verebilir.",
+   "sure": 6.997,
+   "m": "Sonra ne olur? Sınıfta tartışma büyür, asıl konu kaybolur. Cesur görünmek isterken arkadaşlarının güveni azalabilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.278
+     0.26
     ],
     [
      "ne",
-     0.278,
-     0.402
+     0.26,
+     0.375
     ],
     [
      "olur?",
-     0.402,
-     0.65
+     0.375,
+     0.605
     ],
     [
-     "Koridorda",
-     1.225,
-     1.788
+     "Sınıfta",
+     0.94,
+     1.442
     ],
     [
-     "kayarak",
-     1.788,
-     2.211
+     "tartışma",
+     1.442,
+     1.945
     ],
     [
-     "koşunca",
-     2.211,
-     2.633
+     "büyür,",
+     1.945,
+     2.28
     ],
     [
-     "arkadaşına",
-     2.633,
-     3.337
+     "asıl",
+     2.515,
+     2.791
     ],
     [
-     "çarpabilir.",
-     3.337,
-     3.9
+     "konu",
+     2.791,
+     3.066
+    ],
+    [
+     "kaybolur.",
+     3.066,
+     3.48
     ],
     [
      "Cesur",
-     4.285,
-     4.61
+     3.795,
+     4.08
     ],
     [
      "görünmek",
-     4.61,
-     5.097
+     4.08,
+     4.507
     ],
     [
      "isterken",
-     5.097,
-     5.585
+     4.507,
+     4.934
     ],
     [
-     "kendine",
-     5.585,
-     6.072
+     "arkadaşlarının",
+     4.934,
+     5.788
     ],
     [
-     "de",
-     6.072,
-     6.234
+     "güveni",
+     5.788,
+     6.215
     ],
     [
-     "zarar",
-     6.234,
-     6.559
-    ],
-    [
-     "verebilir.",
-     6.559,
-     7.209
+     "azalabilir.",
+     6.215,
+     6.927
     ]
    ]
   },
@@ -1144,73 +1161,78 @@ DO.dersKaydet(
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 5.102,
-   "m": "Sonra ne olur? Doğru söz yerine ulaşır. Arkadaşları da onun duruşundan güç alır.",
+   "sure": 5.828,
+   "m": "Sonra ne olur? Sakin söylenen doğru söz duyulur. Arkadaşları da onun duruşundan cesaret alır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.294
+     0.266
     ],
     [
      "ne",
-     0.294,
-     0.426
+     0.266,
+     0.384
     ],
     [
      "olur?",
-     0.426,
-     0.69
+     0.384,
+     0.62
     ],
     [
-     "Doğru",
-     1.165,
-     1.483
+     "Sakin",
+     0.995,
+     1.378
+    ],
+    [
+     "söylenen",
+     1.378,
+     1.952
+    ],
+    [
+     "doğru",
+     1.952,
+     2.335
     ],
     [
      "söz",
-     1.483,
-     1.642
+     2.335,
+     2.526
     ],
     [
-     "yerine",
-     1.642,
-     2.118
-    ],
-    [
-     "ulaşır.",
-     2.118,
-     2.595
+     "duyulur.",
+     2.526,
+     3.1
     ],
     [
      "Arkadaşları",
-     2.895,
-     3.607
+     3.28,
+     4.009
     ],
     [
      "da",
-     3.607,
-     3.75
+     4.009,
+     4.155
     ],
     [
      "onun",
-     3.75,
-     4.034
+     4.155,
+     4.446
     ],
     [
      "duruşundan",
-     4.034,
-     4.604
+     4.446,
+     5.029
     ],
     [
-     "güç",
-     4.604,
-     4.747
+     "cesaret",
+     5.029,
+     5.466
     ],
     [
      "alır.",
-     4.747,
-     5.032
+     5.466,
+     5.758
     ]
    ]
   },
@@ -1486,224 +1508,259 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.418,
-   "m": "Sınavda bir arkadaşının kopya çektiğini görüyorsun. Doğrusunun söylenmesi gerektiğini biliyorsun. Ne yaparsın?",
+   "sure": 7.338,
+   "m": "Sınıfta herkes bir arkadaşını oyuna almıyor ve herkes böyle yapıyor diyor. Sen bunun doğru olmadığını düşünüyorsun. Ne yaparsın?",
    "k": [
     [
-     "Sınavda",
+     "Sınıfta",
      0.03,
-     0.393
+     0.457
+    ],
+    [
+     "herkes",
+     0.457,
+     0.742
     ],
     [
      "bir",
-     0.393,
-     0.514
+     0.742,
+     0.884
     ],
     [
-     "arkadaşının",
-     0.514,
-     1.119
+     "arkadaşını",
+     0.884,
+     1.596
     ],
     [
-     "kopya",
-     1.119,
-     1.362
+     "oyuna",
+     1.596,
+     2.024
     ],
     [
-     "çektiğini",
-     1.362,
-     1.846
+     "almıyor",
+     2.024,
+     2.451
     ],
     [
-     "görüyorsun.",
-     1.846,
-     2.33
+     "ve",
+     2.451,
+     2.593
     ],
     [
-     "Doğrusunun",
-     2.56,
-     3.008
+     "herkes",
+     2.593,
+     2.878
     ],
     [
-     "söylenmesi",
-     3.008,
-     3.456
+     "böyle",
+     2.878,
+     3.163
     ],
     [
-     "gerektiğini",
-     3.456,
-     4.017
+     "yapıyor",
+     3.163,
+     3.59
     ],
     [
-     "biliyorsun.",
-     4.017,
-     4.465
+     "diyor.",
+     3.59,
+     3.875
+    ],
+    [
+     "Sen",
+     4.48,
+     4.597
+    ],
+    [
+     "bunun",
+     4.597,
+     4.832
+    ],
+    [
+     "doğru",
+     4.832,
+     5.067
+    ],
+    [
+     "olmadığını",
+     5.067,
+     5.653
+    ],
+    [
+     "düşünüyorsun.",
+     5.653,
+     6.24
     ],
     [
      "Ne",
-     4.79,
-     4.93
+     6.54,
+     6.722
     ],
     [
      "yaparsın?",
-     4.93,
-     5.348
+     6.722,
+     7.268
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 4.006,
-   "m": "Kopya sürüyor; sen ise sınav boyunca huzursuz kalıyorsun.",
+   "sure": 5.691,
+   "m": "Dışlama sürüyor; arkadaşın daha yalnız hissediyor, sen de içinde huzursuzsun.",
    "k": [
     [
-     "Kopya",
+     "Dışlama",
      0.03,
-     0.352
+     0.525
     ],
     [
      "sürüyor;",
-     0.352,
-     0.835
+     0.525,
+     1.02
+    ],
+    [
+     "arkadaşın",
+     1.165,
+     2.092
+    ],
+    [
+     "daha",
+     2.092,
+     2.555
+    ],
+    [
+     "yalnız",
+     2.555,
+     3.018
+    ],
+    [
+     "hissediyor,",
+     3.018,
+     3.945
     ],
     [
      "sen",
-     1.18,
-     1.364
+     4.025,
+     4.202
     ],
     [
-     "ise",
-     1.364,
-     1.731
+     "de",
+     4.202,
+     4.38
     ],
     [
-     "sınav",
-     1.731,
-     2.099
+     "içinde",
+     4.38,
+     4.912
     ],
     [
-     "boyunca",
-     2.099,
-     2.65
-    ],
-    [
-     "huzursuz",
-     2.65,
-     3.201
-    ],
-    [
-     "kalıyorsun.",
-     3.201,
-     3.936
+     "huzursuzsun.",
+     4.912,
+     5.621
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 4.36,
-   "m": "Arkadaşın utanıyor, sınıf karışıyor; konuşmak için daha uygun bir yol vardı.",
+   "sure": 4.952,
+   "m": "Herkes savunmaya geçiyor; konuşma kavgaya dönüyor ve arkadaşın yine dışarıda kalıyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Herkes",
      0.03,
-     0.562
+     0.29
     ],
     [
-     "utanıyor,",
-     0.562,
-     1.095
+     "savunmaya",
+     0.29,
+     0.81
     ],
     [
-     "sınıf",
-     1.21,
-     1.582
+     "geçiyor;",
+     0.81,
+     1.2
     ],
     [
-     "karışıyor;",
-     1.582,
-     2.325
+     "konuşma",
+     1.595,
+     2.024
     ],
     [
-     "konuşmak",
-     2.405,
-     2.84
+     "kavgaya",
+     2.024,
+     2.452
     ],
     [
-     "için",
-     2.84,
-     3.13
+     "dönüyor",
+     2.452,
+     2.881
     ],
     [
-     "daha",
-     3.13,
-     3.42
+     "ve",
+     2.881,
+     3.024
     ],
     [
-     "uygun",
-     3.42,
-     3.71
+     "arkadaşın",
+     3.024,
+     3.596
     ],
     [
-     "bir",
-     3.71,
-     3.855
+     "yine",
+     3.596,
+     3.881
     ],
     [
-     "yol",
-     3.855,
-     4.0
+     "dışarıda",
+     3.881,
+     4.453
     ],
     [
-     "vardı.",
-     4.0,
-     4.29
+     "kalıyor.",
+     4.453,
+     4.882
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.615,
-   "m": "Arkadaşın durumu fark ediyor; sorun doğru kişiye ulaşıyor.",
+   "sure": 3.044,
+   "m": "Bazıları düşünüp kabul ediyor; arkadaşın oyuna katılabiliyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Bazıları",
      0.03,
-     0.541
+     0.505
     ],
     [
-     "durumu",
-     0.541,
-     0.924
+     "düşünüp",
+     0.505,
+     0.861
     ],
     [
-     "fark",
-     0.924,
-     1.052
+     "kabul",
+     0.861,
+     1.099
     ],
     [
      "ediyor;",
-     1.052,
-     1.435
+     1.099,
+     1.455
     ],
     [
-     "sorun",
-     1.705,
-     2.04
+     "arkadaşın",
+     1.59,
+     2.016
     ],
     [
-     "doğru",
-     2.04,
-     2.374
+     "oyuna",
+     2.016,
+     2.335
     ],
     [
-     "kişiye",
-     2.374,
-     2.876
-    ],
-    [
-     "ulaşıyor.",
-     2.876,
-     3.545
+     "katılabiliyor.",
+     2.335,
+     2.974
     ]
    ]
   },

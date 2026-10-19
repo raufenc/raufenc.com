@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Hikmetli Beyân (Suskunluk · Lakap): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,7 +23,7 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Hikmetli Beyân",
      "huyAnahtar": "Hikmetli",
-     "olculen": "Birine seslenme ve gerçeği söyleme biçimim",
+     "olculen": "Ad takma ve şakada sınırım",
      "kanca": "Sadece şaka yaptım, o kadar.",
      "uclar": {
       "az": "Suskunluk",
@@ -44,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi birinin özelliğiyle alay eden bir ad ya da şaka yapıyor: sağ uca (Lakap) yakın. Başka okumada kimseyi küçük düşürmeyen, herkesin güldüğü iyi niyetli bir espri yapıyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, sözün karşımızdakini nasıl etkilediğine bakar. Hikmetli Beyân; doğruyu yerinde, zamanında ve faydalı söylemektir. Bu ibre ölçekten çok yönü gösterir: bir uçta gerekeni söylemeye çekinmek, öbür uçta küçük düşürücü bir ad takmak vardır.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi birinin adı ya da özelliğiyle alay edip buna şaka diyor: sağ uca (Lakap) yakın. Başka okumada kimseyi küçük düşürmeden hafif bir espri yapıyor ve doğruyu dalga geçmeden söylemiş oluyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, sözün karşımızdakini nasıl etkilediğine bakar. Hikmetli Beyân; sözü yerinde, zamanında ve faydalı söylemektir. Bu ibre yalnız ad ve şaka konusuna bakar ve ölçekten çok yönü gösterir: bir uçta kırıldığı hâlde sessiz kalıp sınır koyamamak, öbür uçta küçük düşürücü bir ad takmak vardır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -65,24 +67,24 @@ DO.dersKaydet(
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Hakkı söylemekten çekinmek neye benziyor?",
+       "soru": "Kırıldığında sessiz kalmak neye benziyor?",
        "ad": "Suskunluk",
-       "soz": "Yanlış olduğunu biliyorum ama söyleyemem.",
+       "soz": "Canım sıkıldı ama bir şey diyemem, gülüp geçeyim.",
        "eylem": "yaslan",
        "zincir": [
-        "Yanlış bilgi ödevde kalır.",
-        "Grup bunu sonradan fark edince herkes bozulur."
+        "Ad yerleşir ve sınır çizilmediği için sürer.",
+        "Kırgınlığı içinde büyür; arkadaşları ne hissettiğini bilmez."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Söylersem bana gülerler; susayım.",
+          "m": "Söylersem şakadan anlamaz derler; susayım.",
           "dogru": true,
-          "not": "Suskunluk, hakkı söylemesi gereken yerde çekinmektir. Çekinmek doğaldır; küçük bir cümleyle ya da bir büyüğe danışarak başlayabilirsin."
+          "not": "Suskunluk, kırıldığın yerde sessiz kalıp sınır koyamamaktır. Çekinmek doğaldır; küçük bir cümleyle ya da güvendiğin bir yetişkine anlatarak başlayabilirsin."
          },
          {
-          "m": "Çekinsem de adını söyleyip nazikçe konuşayım.",
+          "m": "Doğruyu dalga geçmeden söyleyeyim; şakayı kimse üzülmeden yapayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: hikmetli sözün sesi."
          },
@@ -95,18 +97,18 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Suskunluk",
-        "soz": "Yanlış"
+        "soz": "Canım"
        },
        "zincirAnahtar": [
-        "Yanlış",
-        "Grup"
+        "Ad",
+        "Kırgınlığı"
        ]
       },
       {
        "zon": "fazla",
        "soru": "Kırıcı bir ad takmak neye benziyor?",
        "ad": "Lakap",
-       "soz": "Bundan sonra sana “kaplumbağa” diyeceğiz, olur mu?",
+       "soz": "Bundan sonra sana “Mırmır” diyeceğiz, olur mu?",
        "eylem": "isaret",
        "zincir": [
         "Herkes o adla seslenmeye başlar.",
@@ -121,12 +123,12 @@ DO.dersKaydet(
           "not": "Kötü lakap takmak, birini küçük düşürücü adlarla anmaktır. Şaka gibi görünse de karşındaki incinirse şaka değildir."
          },
          {
-          "m": "Söylersem bana gülerler; susayım.",
+          "m": "Söylersem şakadan anlamaz derler; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: suskunluğun sesi."
          },
          {
-          "m": "Çekinsem de adını söyleyip nazikçe konuşayım.",
+          "m": "Doğruyu dalga geçmeden söyleyeyim; şakayı kimse üzülmeden yapayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: hikmetli sözün sesi."
          }
@@ -144,23 +146,23 @@ DO.dersKaydet(
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
-       "ad": "Hikmetli",
-       "soz": "Bence şurayı birlikte düzeltelim; ne dersin?",
+       "ad": "Hikmetli söz",
+       "soz": "Söz de şaka da yerinde olsun; adıyla seslenelim.",
        "eylem": "konus",
        "zincir": [
-        "Arkadaşları fikri dinler.",
-        "Hata düzelir ve kimse küçük düşmeden ilerler."
+        "Arkadaşları rahatça güler.",
+        "Kimse küçük düşmez; şaka da sohbet de tatlı kalır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Çekinsem de adını söyleyip nazikçe konuşayım.",
+          "m": "Doğruyu dalga geçmeden söyleyeyim; şakayı kimse üzülmeden yapayım.",
           "dogru": true,
-          "not": "Hikmetli Beyân, yerinde ve faydalı söz söylemektir; kimseyi küçük düşürmeden doğruyu söylemektir."
+          "not": "Hikmetli Beyân, yerinde ve faydalı söz söylemektir; şaka da, ad da kimseyi küçük düşürmeden olur."
          },
          {
-          "m": "Söylersem bana gülerler; susayım.",
+          "m": "Söylersem şakadan anlamaz derler; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: suskunluğun sesi."
          },
@@ -173,11 +175,11 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hikmetli",
-        "soz": "Bence"
+        "soz": "Söz"
        },
        "zincirAnahtar": [
         "Arkadaşları",
-        "Hata"
+        "Kimse"
        ]
       }
      ]
@@ -197,58 +199,58 @@ DO.dersKaydet(
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "bilgi",
-       "baslik": "Yanlış bilgi",
-       "tetik": "Arkadaşların bir konuda yanlış bilgi söylüyor. Sen doğrusunu biliyorsun ama konuşmaya çekiniyorsun.",
+       "id": "lakap",
+       "baslik": "Takılan lakap",
+       "tetik": "Arkadaşların sana bir lakap taktı ve her gün o adla seslenip gülüyor. Bu hoşuna gitmiyor.",
        "secenekler": [
         {
-         "m": "Ben bir şey demeyeyim, yanlış kalsın.",
+         "m": "Gülüp geçerim, bir şey demem; belki sıkılırlar.",
          "zon": "az",
-         "sonuc": "Yanlış bilgi sürüyor; ödevde de aynı hata çıkıyor.",
-         "not": "İbre sola kaydı: bildiğini söylememek yanlışın yerinde kalmasına izin veriyor.",
+         "sonuc": "Lakap yerleşiyor; her seferinde için biraz daha kırılıyor.",
+         "not": "İbre sola kaydı: kırıldığın hâlde sessiz kalmak sınırı çizmiyor.",
          "ses": "s1az"
         },
         {
-         "m": "Doğrusunu bilmeyene “bilgisiz” derim, belki öğrenir.",
+         "m": "Ben de onlara daha kötü bir lakap takarım.",
          "zon": "fazla",
-         "sonuc": "Arkadaşların alınıyor ve doğrusunu dinlemek de istemiyorlar.",
-         "not": "İbre sağa kaydı: küçük düşüren söz, doğrunun duyulmasını engelliyor.",
+         "sonuc": "Karşılıklı lakaplar çoğalıyor; ortam gerginleşiyor.",
+         "not": "İbre sağa kaydı: kötü ada kötü adla karşılık vermek kırgınlığı büyütüyor.",
          "ses": "s1fa"
         },
         {
-         "m": "Ben şöyle okumuştum; birlikte kontrol edelim mi?",
+         "m": "Adımla seslenin, bu lakap hoşuma gitmiyor, derim.",
          "zon": "orta",
-         "sonuc": "Birlikte kaynağa bakıyorsunuz ve doğrusu anlaşılıyor.",
-         "not": "İbre ortada: doğruyu nazikçe ve birlikte bakmayı önererek söyledin.",
+         "sonuc": "Arkadaşların durup dinliyor; bir kısmı adınla seslenmeye başlıyor.",
+         "not": "İbre ortada: sınırını nazik ama açık bir cümleyle söyledin.",
          "ses": "s1or"
         }
        ],
        "ses": "s1"
       },
       {
-       "id": "ad",
-       "baslik": "Yeni arkadaşın adı",
-       "tetik": "Sınıfa yeni gelen arkadaşın adı zor söyleniyor. Birkaç kişi ona komik bir ad takmayı konuşuyor.",
+       "id": "saka",
+       "baslik": "Şakanın sınırı",
+       "tetik": "Sınıfta bir arkadaşın kıyafetiyle şaka yapılıyor ve herkes gülüyor. O arkadaş gülmüyor.",
        "secenekler": [
         {
-         "m": "Buna itiraz edemem; susar geçerim.",
+         "m": "Gülmüyorum ama bir şey de demem; şaka sürsün.",
          "zon": "az",
-         "sonuc": "Takma ad yerleşiyor; arkadaşın bu duruma üzülüyor.",
-         "not": "İbre sola kaydı: gerektiğinde itiraz etmemek, kırıcı adın yayılmasına izin veriyor.",
+         "sonuc": "Şaka sürüyor; arkadaşın daha da suskunlaşıyor.",
+         "not": "İbre sola kaydı: şakanın kırdığını görüp sessiz kalmak sınır koymuyor.",
          "ses": "s2az"
         },
         {
-         "m": "Ben de ona çok komik bir ad buluyorum.",
+         "m": "Ben de kıyafetiyle ilgili daha komik bir şaka yaparım.",
          "zon": "fazla",
-         "sonuc": "Ad herkesçe kullanılıyor; yeni arkadaş sınıfa ısınamıyor.",
-         "not": "İbre sağa kaydı: komik gibi görünen kırıcı ad, karşındakinin kalbini kırıyor.",
+         "sonuc": "Şaka büyüyor; arkadaşın gülmeyi bırakıp uzaklaşıyor.",
+         "not": "İbre sağa kaydı: komik gibi görünen şaka karşındakinin kalbini kırıyor.",
          "ses": "s2fa"
         },
         {
-         "m": "Adını doğru söylemeyi öğrenelim; gerçek adıyla seslenelim.",
+         "m": "Şakayı durdurup konuyu değiştiririm; sonra arkadaşıma da sorarım.",
          "zon": "orta",
-         "sonuc": "Arkadaşın adını doğru duyuyor ve kendini daha rahat hissediyor.",
-         "not": "İbre ortada: nazikçe itiraz edip güzel bir çözüm önerdin.",
+         "sonuc": "Şaka duruyor; arkadaşın rahatlıyor.",
+         "not": "İbre ortada: nazikçe araya girip şakanın sınırını gösterdin.",
          "ses": "s2or"
         }
        ],
@@ -267,14 +269,14 @@ DO.dersKaydet(
       {
        "id": "az",
        "ad": "Az · Suskunluk",
-       "aciklama": "Hakkı söylemekten çekinmek",
+       "aciklama": "Kırılıp da susmak",
        "ikon": "kilit",
        "renk": "#4262B0"
       },
       {
        "id": "orta",
        "ad": "Kararında · Hikmetli söz",
-       "aciklama": "Doğruyu nazikçe söylemek",
+       "aciklama": "Alaysız doğru, kırmayan şaka",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -289,9 +291,9 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Ödevde yanlış gördüğü yeri biliyor ama grup arkadaşına söylemiyor.",
+       "metin": "Kendisine takılan kırıcı adı sevmez ama hiçbir şey demeden susar.",
        "alan": "az",
-       "ipucu": "Doğruyu söylemekten çekiniyor."
+       "ipucu": "Kırıldığı hâlde sınır koymuyor."
       },
       {
        "id": "k2",
@@ -301,27 +303,27 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Yanlışı fark edince “şunu bir daha kontrol edelim mi?” der.",
+       "metin": "Arkadaşına doğruyu dalga geçmeden, ciddi ve nazik bir dille söyler.",
        "alan": "orta",
-       "ipucu": "Doğruyu nazikçe söylüyor."
+       "ipucu": "Doğruyu alay etmeden söylüyor."
       },
       {
        "id": "k4",
-       "metin": "Arkadaşı yanlış kuralı söylerken doğrusunu bilir ama konuşmaz.",
+       "metin": "Şaka ona dokunsa da gülüyormuş gibi yapar, hiçbir şey söylemez.",
        "alan": "az",
-       "ipucu": "Gerektiğinde konuşmuyor."
+       "ipucu": "Kırılmasına rağmen susuyor."
       },
       {
        "id": "k5",
-       "metin": "Alay etmek için bir arkadaşına “yavaş kaplumbağa” diye seslenir.",
+       "metin": "Alay etmek için bir arkadaşına kırıcı bir lakapla seslenir.",
        "alan": "fazla",
        "ipucu": "Küçük düşürücü ad takıyor."
       },
       {
        "id": "k6",
-       "metin": "Arkadaşını gerçek adıyla çağırır; doğruyu söylerken sesini yumuşak tutar.",
+       "metin": "Arkadaşını gerçek adıyla çağırır; şakayı kimse kırılmadan yapar.",
        "alan": "orta",
-       "ipucu": "Hem saygılı hem açık."
+       "ipucu": "Hem saygılı hem neşeli."
       }
      ]
     },
@@ -333,17 +335,17 @@ DO.dersKaydet(
       {
        "soru": "Hangi durumda ibrem sağa ya da sola kayıyor?",
        "secenekler": [
-        "Yanlış bir bilgi duyunca",
+        "Biri bana kırıcı bir lakap takınca",
         "Arkadaşımla şakalaşırken",
-        "Grup çalışmasında bir hata görünce",
-        "Birine seslenirken"
+        "Birine seslenirken",
+        "Bir şaka hoşuma gitmeyince"
        ]
       },
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Bildiğimi nazikçe, “şöyle bakalım mı?” diye söyleyeceğim",
         "Kimseye alay eden bir ad takmayacağım",
+        "Hoşuma gitmeyene nazikçe “bu hoşuma gitmedi” diyeceğim",
         "Çekinirsem önce güvendiğim bir yetişkinle konuşacağım"
        ]
       }
@@ -364,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Hikmetli Beyân",
-       "metin": "doğruyu nazikçe söylemek",
+       "metin": "alaysız söz, kırmayan şaka",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -415,123 +417,118 @@ DO.dersKaydet(
   },
   "a2": {
    "d": "ses/a2.m4a",
-   "sure": 12.944,
-   "m": "Birçok güzel huy bir ibre gibidir. Hikmetli Beyân, birine nasıl seslendiğimi ve doğruyu nasıl söylediğimi ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
+   "sure": 13.174,
+   "m": "Birçok güzel huy bir ibre gibidir. Hikmetli Beyân, birine nasıl seslendiğimi ve şakanın sınırını ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
    "k": [
     [
      "Birçok",
      0.03,
-     0.517
+     0.515
     ],
     [
      "güzel",
-     0.517,
-     1.005
+     0.515,
+     0.999
     ],
     [
      "huy",
-     1.005,
-     1.248
+     0.999,
+     1.241
     ],
     [
      "bir",
-     1.248,
-     1.492
+     1.241,
+     1.484
     ],
     [
      "ibre",
-     1.492,
-     1.979
+     1.484,
+     1.968
     ],
     [
      "gibidir.",
-     1.979,
-     2.71
+     1.968,
+     2.695
     ],
     [
      "Hikmetli",
-     3.23,
-     3.749
+     3.27,
+     3.744
     ],
     [
      "Beyân,",
-     3.749,
-     4.095
+     3.744,
+     4.06
     ],
     [
      "birine",
-     4.28,
-     4.939
+     4.66,
+     5.333
     ],
     [
      "nasıl",
-     4.939,
-     5.378
+     5.333,
+     5.782
     ],
     [
      "seslendiğimi",
-     5.378,
-     6.476
+     5.782,
+     6.905
     ],
     [
      "ve",
-     6.476,
-     6.695
+     6.905,
+     7.129
     ],
     [
-     "doğruyu",
-     6.695,
-     7.354
+     "şakanın",
+     7.129,
+     7.803
     ],
     [
-     "nasıl",
-     7.354,
-     7.793
-    ],
-    [
-     "söylediğimi",
-     7.793,
-     8.891
+     "sınırını",
+     7.803,
+     8.701
     ],
     [
      "ölçer.",
-     8.891,
-     9.33
+     8.701,
+     9.15
     ],
     [
      "İbre",
-     9.53,
-     9.917
+     9.295,
+     9.755
     ],
     [
      "üç",
-     9.917,
-     10.11
+     9.755,
+     9.985
     ],
     [
      "yerde",
-     10.11,
-     10.497
+     9.985,
+     10.445
     ],
     [
      "durabilir:",
-     10.497,
-     11.27
+     10.445,
+     11.365
     ],
     [
      "az,",
-     11.58,
-     11.722
+     11.645,
+     11.8
     ],
     [
      "kararında,",
-     11.722,
-     12.29
+     11.8,
+     12.42
     ],
     [
      "fazla.",
-     12.55,
-     12.874
+     12.725,
+     13.104
     ]
    ]
   },
@@ -720,170 +717,195 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 7.335,
-   "m": "Sol uçta Suskunluk. Yanlış olduğunu biliyorum ama söyleyemem. Grup ödevinde yanlış bir bilgi görür ama söylemeye çekinir.",
+   "sure": 9.107,
+   "m": "Sol uçta Suskunluk. Canım sıkıldı ama bir şey diyemem, gülüp geçeyim. Kendisine takılan adı sevmez ama itiraz edemeyip susar.",
    "k": [
     [
      "Sol",
      0.03,
-     0.218
+     0.256
     ],
     [
      "uçta",
-     0.218,
-     0.595
+     0.256,
+     0.708
     ],
     [
      "Suskunluk.",
-     0.595,
-     1.16
+     0.708,
+     1.385
     ],
     [
-     "Yanlış",
-     1.23,
-     1.541
+     "Canım",
+     1.47,
+     1.861
     ],
     [
-     "olduğunu",
-     1.541,
-     2.162
-    ],
-    [
-     "biliyorum",
-     2.162,
-     2.783
+     "sıkıldı",
+     1.861,
+     2.446
     ],
     [
      "ama",
-     2.783,
-     3.094
-    ],
-    [
-     "söyleyemem.",
-     3.094,
-     3.715
-    ],
-    [
-     "Grup",
-     4.325,
-     4.465
-    ],
-    [
-     "ödevinde",
-     4.465,
-     5.025
-    ],
-    [
-     "yanlış",
-     5.025,
-     5.305
+     2.446,
+     2.837
     ],
     [
      "bir",
-     5.305,
-     5.445
+     2.837,
+     3.032
     ],
     [
-     "bilgi",
-     5.445,
-     5.725
+     "şey",
+     3.032,
+     3.228
     ],
     [
-     "görür",
-     5.725,
-     6.005
+     "diyemem,",
+     3.228,
+     3.814
+    ],
+    [
+     "gülüp",
+     3.814,
+     4.204
+    ],
+    [
+     "geçeyim.",
+     4.204,
+     4.79
+    ],
+    [
+     "Kendisine",
+     5.435,
+     6.09
+    ],
+    [
+     "takılan",
+     6.09,
+     6.581
+    ],
+    [
+     "adı",
+     6.581,
+     6.909
+    ],
+    [
+     "sevmez",
+     6.909,
+     7.236
     ],
     [
      "ama",
-     6.005,
-     6.285
+     7.236,
+     7.563
     ],
     [
-     "söylemeye",
-     6.285,
-     6.845
+     "itiraz",
+     7.563,
+     8.055
     ],
     [
-     "çekinir.",
-     6.845,
-     7.265
+     "edemeyip",
+     8.055,
+     8.709
+    ],
+    [
+     "susar.",
+     8.709,
+     9.037
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 5.686,
-   "m": "Sonra ne olur? Yanlış bilgi ödevde kalır. Grup bunu sonradan fark edince herkes bozulur.",
+   "sure": 8.658,
+   "m": "Sonra ne olur? Ad yerleşir ve sınır çizilmediği için sürer. Kırgınlığı içinde büyür; arkadaşları ne hissettiğini bilmez.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.322
+     0.308
     ],
     [
      "ne",
-     0.322,
-     0.468
+     0.308,
+     0.447
     ],
     [
      "olur?",
-     0.468,
-     0.76
+     0.447,
+     0.725
     ],
     [
-     "Yanlış",
-     1.14,
-     1.476
+     "Ad",
+     1.255,
+     1.418
     ],
     [
-     "bilgi",
-     1.476,
-     1.811
+     "yerleşir",
+     1.418,
+     1.907
     ],
     [
-     "ödevde",
-     1.811,
-     2.314
+     "ve",
+     1.907,
+     2.071
     ],
     [
-     "kalır.",
-     2.314,
-     2.65
+     "sınır",
+     2.071,
+     2.397
     ],
     [
-     "Grup",
-     3.025,
-     3.198
+     "çizilmediği",
+     2.397,
+     3.213
     ],
     [
-     "bunu",
-     3.198,
-     3.543
+     "için",
+     3.213,
+     3.539
     ],
     [
-     "sonradan",
-     3.543,
-     4.061
+     "sürer.",
+     3.539,
+     3.865
     ],
     [
-     "fark",
-     4.061,
-     4.234
+     "Kırgınlığı",
+     4.04,
+     5.084
     ],
     [
-     "edince",
-     4.234,
-     4.752
+     "içinde",
+     5.084,
+     5.868
     ],
     [
-     "herkes",
-     4.752,
-     5.097
+     "büyür;",
+     5.868,
+     6.39
     ],
     [
-     "bozulur.",
-     5.097,
-     5.615
+     "arkadaşları",
+     6.665,
+     7.404
+    ],
+    [
+     "ne",
+     7.404,
+     7.552
+    ],
+    [
+     "hissettiğini",
+     7.552,
+     8.292
+    ],
+    [
+     "bilmez.",
+     8.292,
+     8.588
     ]
    ]
   },
@@ -926,103 +948,103 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.791,
-   "m": "Sağ uçta Lakap. Bundan sonra sana “kaplumbağa” diyeceğiz, olur mu? Arkadaşının yavaş yazmasıyla dalga geçip ona bir ad takar.",
+   "sure": 6.993,
+   "m": "Sağ uçta Lakap. Bundan sonra sana “Mırmır” diyeceğiz, olur mu? Arkadaşının bir özelliğiyle dalga geçip ona bir ad takar.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.242
+     0.258
     ],
     [
      "uçta",
-     0.242,
-     0.666
+     0.258,
+     0.714
     ],
     [
      "Lakap.",
-     0.666,
-     1.09
+     0.714,
+     1.17
     ],
     [
      "Bundan",
-     1.185,
-     1.526
+     1.265,
+     1.582
     ],
     [
      "sonra",
-     1.526,
-     1.868
+     1.582,
+     1.898
     ],
     [
      "sana",
-     1.868,
-     2.209
+     1.898,
+     2.215
     ],
     [
-     "“kaplumbağa”",
-     2.209,
-     2.892
+     "“Mırmır”",
+     2.215,
+     2.532
     ],
     [
      "diyeceğiz,",
-     2.892,
-     3.575
+     2.532,
+     3.165
     ],
     [
      "olur",
-     4.26,
-     4.548
+     3.165,
+     3.482
     ],
     [
      "mu?",
-     4.548,
-     4.693
+     3.482,
+     3.64
     ],
     [
      "Arkadaşının",
-     4.693,
-     5.414
-    ],
-    [
-     "yavaş",
-     5.414,
-     5.702
-    ],
-    [
-     "yazmasıyla",
-     5.702,
-     6.279
-    ],
-    [
-     "dalga",
-     6.279,
-     6.567
-    ],
-    [
-     "geçip",
-     6.567,
-     6.856
-    ],
-    [
-     "ona",
-     6.856,
-     7.144
+     4.13,
+     4.795
     ],
     [
      "bir",
-     7.144,
-     7.289
+     4.795,
+     4.928
+    ],
+    [
+     "özelliğiyle",
+     4.928,
+     5.593
+    ],
+    [
+     "dalga",
+     5.593,
+     5.859
+    ],
+    [
+     "geçip",
+     5.859,
+     6.125
+    ],
+    [
+     "ona",
+     6.125,
+     6.391
+    ],
+    [
+     "bir",
+     6.391,
+     6.524
     ],
     [
      "ad",
-     7.289,
-     7.433
+     6.524,
+     6.657
     ],
     [
      "takar.",
-     7.433,
-     7.721
+     6.657,
+     6.923
     ]
    ]
   },
@@ -1142,175 +1164,195 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 9.588,
-   "m": "Tam kararında Hikmetli. Bence şurayı birlikte düzeltelim; ne dersin? Çekinse de doğruyu nazik bir cümleyle söyler, arkadaşına adıyla seslenir.",
+   "sure": 10.856,
+   "m": "Tam kararında Hikmetli söz. Söz de şaka da yerinde olsun; adıyla seslenelim. Doğruyu dalga geçmeden söyler, şakayı kimseyi üzmeyecek yerde bırakır.",
    "k": [
     [
      "Tam",
      0.03,
-     0.217
+     0.238
     ],
     [
      "kararında",
-     0.217,
-     0.964
+     0.238,
+     1.072
     ],
     [
-     "Hikmetli.",
-     0.964,
-     1.525
+     "Hikmetli",
+     1.072,
+     1.697
     ],
     [
-     "Bence",
-     1.83,
-     2.138
+     "söz.",
+     1.697,
+     1.905
     ],
     [
-     "şurayı",
-     2.138,
-     2.599
-    ],
-    [
-     "birlikte",
-     2.599,
-     3.06
-    ],
-    [
-     "düzeltelim;",
-     3.06,
-     3.675
-    ],
-    [
-     "ne",
-     3.81,
-     3.98
-    ],
-    [
-     "dersin?",
-     3.98,
-     4.32
-    ],
-    [
-     "Çekinse",
-     4.64,
-     5.213
+     "Söz",
+     2.23,
+     2.355
     ],
     [
      "de",
-     5.213,
-     5.404
+     2.355,
+     2.48
     ],
     [
-     "doğruyu",
-     5.404,
-     5.977
+     "şaka",
+     2.48,
+     2.73
     ],
     [
-     "nazik",
-     5.977,
-     6.359
+     "da",
+     2.73,
+     2.855
     ],
     [
-     "bir",
-     6.359,
-     6.55
+     "yerinde",
+     2.855,
+     3.23
     ],
     [
-     "cümleyle",
-     6.55,
-     7.123
-    ],
-    [
-     "söyler,",
-     7.123,
-     7.505
-    ],
-    [
-     "arkadaşına",
-     7.825,
-     8.594
+     "olsun;",
+     3.23,
+     3.48
     ],
     [
      "adıyla",
-     8.594,
-     9.056
+     3.615,
+     4.594
     ],
     [
-     "seslenir.",
-     9.056,
-     9.518
+     "seslenelim.",
+     4.594,
+     5.9
+    ],
+    [
+     "Doğruyu",
+     6.235,
+     6.817
+    ],
+    [
+     "dalga",
+     6.817,
+     7.205
+    ],
+    [
+     "geçmeden",
+     7.205,
+     7.787
+    ],
+    [
+     "söyler,",
+     7.787,
+     8.175
+    ],
+    [
+     "şakayı",
+     8.435,
+     8.905
+    ],
+    [
+     "kimseyi",
+     8.905,
+     9.376
+    ],
+    [
+     "üzmeyecek",
+     9.376,
+     10.003
+    ],
+    [
+     "yerde",
+     10.003,
+     10.316
+    ],
+    [
+     "bırakır.",
+     10.316,
+     10.786
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 6.295,
-   "m": "Sonra ne olur? Arkadaşları fikri dinler. Hata düzelir ve kimse küçük düşmeden ilerler.",
+   "sure": 6.099,
+   "m": "Sonra ne olur? Arkadaşları rahatça güler. Kimse küçük düşmez; şaka da sohbet de tatlı kalır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.324
+     0.284
     ],
     [
      "ne",
-     0.324,
-     0.471
+     0.284,
+     0.411
     ],
     [
      "olur?",
-     0.471,
-     0.765
+     0.411,
+     0.665
     ],
     [
      "Arkadaşları",
-     1.095,
-     1.959
+     1.17,
+     1.88
     ],
     [
-     "fikri",
-     1.959,
-     2.304
+     "rahatça",
+     1.88,
+     2.306
     ],
     [
-     "dinler.",
-     2.304,
-     2.65
+     "güler.",
+     2.306,
+     2.59
     ],
     [
-     "Hata",
-     2.925,
-     3.338
-    ],
-    [
-     "düzelir",
-     3.338,
-     3.956
-    ],
-    [
-     "ve",
-     3.956,
-     4.163
-    ],
-    [
-     "kimse",
-     4.163,
-     4.575
+     "Kimse",
+     2.955,
+     3.327
     ],
     [
      "küçük",
-     4.575,
-     4.988
+     3.327,
+     3.698
     ],
     [
-     "düşmeden",
-     4.988,
-     5.606
+     "düşmez;",
+     3.698,
+     4.07
     ],
     [
-     "ilerler.",
-     5.606,
-     6.225
+     "şaka",
+     4.325,
+     4.666
+    ],
+    [
+     "da",
+     4.666,
+     4.836
+    ],
+    [
+     "sohbet",
+     4.836,
+     5.177
+    ],
+    [
+     "de",
+     5.177,
+     5.347
+    ],
+    [
+     "tatlı",
+     5.347,
+     5.688
+    ],
+    [
+     "kalır.",
+     5.688,
+     6.029
     ]
    ]
   },
@@ -1353,432 +1395,397 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 7.088,
-   "m": "Arkadaşların bir konuda yanlış bilgi söylüyor. Sen doğrusunu biliyorsun ama konuşmaya çekiniyorsun. Ne yaparsın?",
+   "sure": 7.106,
+   "m": "Arkadaşların sana bir lakap taktı ve her gün o adla seslenip gülüyor. Bu hoşuna gitmiyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşların",
      0.03,
-     0.75
+     0.941
+    ],
+    [
+     "sana",
+     0.941,
+     1.306
     ],
     [
      "bir",
-     0.75,
-     0.894
+     1.306,
+     1.488
     ],
     [
-     "konuda",
-     0.894,
-     1.327
+     "lakap",
+     1.488,
+     1.853
     ],
     [
-     "yanlış",
-     1.327,
-     1.615
+     "taktı",
+     1.853,
+     2.218
     ],
     [
-     "bilgi",
-     1.615,
-     1.903
+     "ve",
+     2.218,
+     2.4
     ],
     [
-     "söylüyor.",
-     1.903,
-     2.335
+     "her",
+     2.4,
+     2.582
     ],
     [
-     "Sen",
-     2.8,
-     2.946
+     "gün",
+     2.582,
+     2.764
     ],
     [
-     "doğrusunu",
-     2.946,
-     3.527
+     "o",
+     2.764,
+     2.947
     ],
     [
-     "biliyorsun",
-     3.527,
-     4.109
+     "adla",
+     2.947,
+     3.311
     ],
     [
-     "ama",
-     4.109,
-     4.401
+     "seslenip",
+     3.311,
+     3.858
     ],
     [
-     "konuşmaya",
-     4.401,
-     4.982
+     "gülüyor.",
+     3.858,
+     4.405
     ],
     [
-     "çekiniyorsun.",
-     4.982,
-     5.71
+     "Bu",
+     4.835,
+     4.992
+    ],
+    [
+     "hoşuna",
+     4.992,
+     5.464
+    ],
+    [
+     "gitmiyor.",
+     5.464,
+     5.935
     ],
     [
      "Ne",
-     6.5,
-     6.63
+     6.31,
+     6.492
     ],
     [
      "yaparsın?",
-     6.63,
-     7.018
+     6.492,
+     7.036
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 2.847,
-   "m": "Yanlış bilgi sürüyor; ödevde de aynı hata çıkıyor.",
+   "sure": 3.432,
+   "m": "Lakap yerleşiyor; her seferinde için biraz daha kırılıyor.",
    "k": [
     [
-     "Yanlış",
+     "Lakap",
      0.03,
-     0.344
+     0.335
     ],
     [
-     "bilgi",
-     0.344,
-     0.659
+     "yerleşiyor;",
+     0.335,
+     0.945
     ],
     [
-     "sürüyor;",
-     0.659,
-     1.13
+     "her",
+     1.15,
+     1.297
     ],
     [
-     "ödevde",
-     1.3,
-     1.703
+     "seferinde",
+     1.297,
+     1.887
     ],
     [
-     "de",
-     1.703,
-     1.837
+     "için",
+     1.887,
+     2.182
     ],
     [
-     "aynı",
-     1.837,
-     2.106
+     "biraz",
+     2.182,
+     2.477
     ],
     [
-     "hata",
-     2.106,
-     2.374
+     "daha",
+     2.477,
+     2.772
     ],
     [
-     "çıkıyor.",
-     2.374,
-     2.777
+     "kırılıyor.",
+     2.772,
+     3.362
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.691,
-   "m": "Arkadaşların alınıyor ve doğrusunu dinlemek de istemiyorlar.",
+   "sure": 2.875,
+   "m": "Karşılıklı lakaplar çoğalıyor; ortam gerginleşiyor.",
    "k": [
     [
-     "Arkadaşların",
+     "Karşılıklı",
      0.03,
-     0.811
+     0.606
     ],
     [
-     "alınıyor",
-     0.811,
-     1.435
+     "lakaplar",
+     0.606,
+     1.039
     ],
     [
-     "ve",
-     1.435,
-     1.591
+     "çoğalıyor;",
+     1.039,
+     1.615
     ],
     [
-     "doğrusunu",
-     1.591,
-     2.216
+     "ortam",
+     1.8,
+     2.087
     ],
     [
-     "dinlemek",
-     2.216,
-     2.684
-    ],
-    [
-     "de",
-     2.684,
-     2.84
-    ],
-    [
-     "istemiyorlar.",
-     2.84,
-     3.621
+     "gerginleşiyor.",
+     2.087,
+     2.805
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 2.687,
-   "m": "Birlikte kaynağa bakıyorsunuz ve doğrusu anlaşılıyor.",
+   "sure": 3.315,
+   "m": "Arkadaşların durup dinliyor; bir kısmı adınla seslenmeye başlıyor.",
    "k": [
     [
-     "Birlikte",
+     "Arkadaşların",
      0.03,
-     0.418
+     0.685
     ],
     [
-     "kaynağa",
-     0.418,
-     0.806
+     "durup",
+     0.685,
+     0.947
     ],
     [
-     "bakıyorsunuz",
-     0.806,
-     1.453
+     "dinliyor;",
+     0.947,
+     1.34
     ],
     [
-     "ve",
-     1.453,
-     1.582
+     "bir",
+     1.545,
+     1.676
     ],
     [
-     "doğrusu",
-     1.582,
-     1.97
+     "kısmı",
+     1.676,
+     1.937
     ],
     [
-     "anlaşılıyor.",
-     1.97,
-     2.617
+     "adınla",
+     1.937,
+     2.33
+    ],
+    [
+     "seslenmeye",
+     2.33,
+     2.853
+    ],
+    [
+     "başlıyor.",
+     2.853,
+     3.245
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 6.717,
-   "m": "Sınıfa yeni gelen arkadaşın adı zor söyleniyor. Birkaç kişi ona komik bir ad takmayı konuşuyor. Ne yaparsın?",
+   "sure": 6.024,
+   "m": "Sınıfta bir arkadaşın kıyafetiyle şaka yapılıyor ve herkes gülüyor. O arkadaş gülmüyor. Ne yaparsın?",
    "k": [
     [
-     "Sınıfa",
+     "Sınıfta",
      0.03,
-     0.453
-    ],
-    [
-     "yeni",
-     0.453,
-     0.736
-    ],
-    [
-     "gelen",
-     0.736,
-     1.018
-    ],
-    [
-     "arkadaşın",
-     1.018,
-     1.582
-    ],
-    [
-     "adı",
-     1.582,
-     1.864
-    ],
-    [
-     "zor",
-     1.864,
-     2.006
-    ],
-    [
-     "söyleniyor.",
-     2.006,
-     2.57
-    ],
-    [
-     "Birkaç",
-     3.085,
-     3.381
-    ],
-    [
-     "kişi",
-     3.381,
-     3.677
-    ],
-    [
-     "ona",
-     3.677,
-     3.973
-    ],
-    [
-     "komik",
-     3.973,
-     4.269
+     0.559
     ],
     [
      "bir",
-     4.269,
-     4.416
+     0.559,
+     0.736
     ],
     [
-     "ad",
-     4.416,
-     4.564
+     "arkadaşın",
+     0.736,
+     1.441
     ],
     [
-     "takmayı",
-     4.564,
-     5.008
+     "kıyafetiyle",
+     1.441,
+     2.323
     ],
     [
-     "konuşuyor.",
-     5.008,
-     5.6
+     "şaka",
+     2.323,
+     2.676
+    ],
+    [
+     "yapılıyor",
+     2.676,
+     3.382
+    ],
+    [
+     "ve",
+     3.382,
+     3.558
+    ],
+    [
+     "herkes",
+     3.558,
+     3.911
+    ],
+    [
+     "gülüyor.",
+     3.911,
+     4.44
+    ],
+    [
+     "O",
+     4.515,
+     4.591
+    ],
+    [
+     "arkadaş",
+     4.591,
+     4.818
+    ],
+    [
+     "gülmüyor.",
+     4.818,
+     5.045
     ],
     [
      "Ne",
-     5.985,
-     6.151
+     5.395,
+     5.535
     ],
     [
      "yaparsın?",
-     6.151,
-     6.647
+     5.535,
+     5.954
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.049,
-   "m": "Takma ad yerleşiyor; arkadaşın bu duruma üzülüyor.",
+   "sure": 2.998,
+   "m": "Şaka sürüyor; arkadaşın daha da suskunlaşıyor.",
    "k": [
     [
-     "Takma",
+     "Şaka",
      0.03,
-     0.383
+     0.334
     ],
     [
-     "ad",
-     0.383,
-     0.559
-    ],
-    [
-     "yerleşiyor;",
-     0.559,
-     1.265
+     "sürüyor;",
+     0.334,
+     0.79
     ],
     [
      "arkadaşın",
-     1.58,
-     2.046
+     1.145,
+     1.739
     ],
     [
-     "bu",
-     2.046,
-     2.163
+     "daha",
+     1.739,
+     2.036
     ],
     [
-     "duruma",
-     2.163,
-     2.513
+     "da",
+     2.036,
+     2.185
     ],
     [
-     "üzülüyor.",
-     2.513,
-     2.979
+     "suskunlaşıyor.",
+     2.185,
+     2.928
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.39,
-   "m": "Ad herkesçe kullanılıyor; yeni arkadaş sınıfa ısınamıyor.",
+   "sure": 3.212,
+   "m": "Şaka büyüyor; arkadaşın gülmeyi bırakıp uzaklaşıyor.",
    "k": [
     [
-     "Ad",
+     "Şaka",
      0.03,
-     0.189
+     0.306
     ],
     [
-     "herkesçe",
-     0.189,
-     0.666
+     "büyüyor;",
+     0.306,
+     0.72
     ],
     [
-     "kullanılıyor;",
-     0.666,
-     1.46
+     "arkadaşın",
+     1.105,
+     1.648
     ],
     [
-     "yeni",
-     1.83,
-     2.059
+     "gülmeyi",
+     1.648,
+     2.056
     ],
     [
-     "arkadaş",
-     2.059,
-     2.403
+     "bırakıp",
+     2.056,
+     2.463
     ],
     [
-     "sınıfa",
-     2.403,
-     2.747
-    ],
-    [
-     "ısınamıyor.",
-     2.747,
-     3.32
+     "uzaklaşıyor.",
+     2.463,
+     3.142
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.714,
-   "m": "Arkadaşın adını doğru duyuyor ve kendini daha rahat hissediyor.",
+   "sure": 2.338,
+   "m": "Şaka duruyor; arkadaşın rahatlıyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Şaka",
      0.03,
-     0.632
+     0.296
     ],
     [
-     "adını",
-     0.632,
-     1.084
+     "duruyor;",
+     0.296,
+     0.695
     ],
     [
-     "doğru",
-     1.084,
-     1.385
+     "arkadaşın",
+     0.905,
+     1.587
     ],
     [
-     "duyuyor",
-     1.385,
-     1.837
-    ],
-    [
-     "ve",
-     1.837,
-     1.988
-    ],
-    [
-     "kendini",
-     1.988,
-     2.439
-    ],
-    [
-     "daha",
-     2.439,
-     2.74
-    ],
-    [
-     "rahat",
-     2.74,
-     3.042
-    ],
-    [
-     "hissediyor.",
-     3.042,
-     3.644
+     "rahatlıyor.",
+     1.587,
+     2.268
     ]
    ]
   },
@@ -1970,138 +1977,168 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.23,
-   "m": "Bu cümle bilerek çift anlamlı. Alay eden bir şaka yapan biri diyorsa sağ uca yakın. Kimseyi küçük düşürmeyen bir espri yapan biri diyorsa orta uca yakın.",
+   "sure": 11.34,
+   "m": "Bu cümle bilerek çift anlamlı. Alay eden bir şaka yapan biri diyorsa sağ uca yakın. Kimseyi küçük düşürmeden hafif bir espri yapan ve doğruyu dalga geçmeden söyleyen biri diyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.185
+     0.173
     ],
     [
      "cümle",
-     0.185,
-     0.495
+     0.173,
+     0.458
     ],
     [
      "bilerek",
-     0.495,
-     0.96
+     0.458,
+     0.885
     ],
     [
      "çift",
-     0.96,
-     1.115
+     0.885,
+     1.028
     ],
     [
      "anlamlı.",
-     1.115,
-     1.58
+     1.028,
+     1.455
     ],
     [
      "Alay",
-     2.125,
-     2.421
+     1.85,
+     2.134
     ],
     [
      "eden",
-     2.421,
-     2.718
+     2.134,
+     2.417
     ],
     [
      "bir",
-     2.718,
-     2.866
+     2.417,
+     2.559
     ],
     [
      "şaka",
-     2.866,
-     3.162
+     2.559,
+     2.843
     ],
     [
      "yapan",
-     3.162,
-     3.458
+     2.843,
+     3.127
     ],
     [
      "biri",
-     3.458,
-     3.755
+     3.127,
+     3.41
     ],
     [
      "diyorsa",
-     3.755,
-     4.199
+     3.41,
+     3.836
     ],
     [
      "sağ",
-     4.199,
-     4.347
+     3.836,
+     3.978
     ],
     [
      "uca",
-     4.347,
-     4.644
+     3.978,
+     4.261
     ],
     [
      "yakın.",
-     4.644,
-     4.94
+     4.261,
+     4.545
     ],
     [
      "Kimseyi",
-     5.345,
-     5.803
+     5.01,
+     5.492
     ],
     [
      "küçük",
-     5.803,
-     6.108
+     5.492,
+     5.813
     ],
     [
-     "düşürmeyen",
-     6.108,
-     6.719
+     "düşürmeden",
+     5.813,
+     6.455
+    ],
+    [
+     "hafif",
+     6.455,
+     6.776
     ],
     [
      "bir",
-     6.719,
-     6.871
+     6.776,
+     6.936
     ],
     [
      "espri",
-     6.871,
-     7.176
+     6.936,
+     7.257
     ],
     [
      "yapan",
-     7.176,
-     7.482
+     7.257,
+     7.578
+    ],
+    [
+     "ve",
+     7.578,
+     7.739
+    ],
+    [
+     "doğruyu",
+     7.739,
+     8.22
+    ],
+    [
+     "dalga",
+     8.22,
+     8.541
+    ],
+    [
+     "geçmeden",
+     8.541,
+     9.023
+    ],
+    [
+     "söyleyen",
+     9.023,
+     9.504
     ],
     [
      "biri",
-     7.482,
-     7.787
+     9.504,
+     9.825
     ],
     [
      "diyorsa",
-     7.787,
-     8.245
+     9.825,
+     10.307
     ],
     [
      "orta",
-     8.245,
-     8.55
+     10.307,
+     10.628
     ],
     [
      "uca",
-     8.55,
-     8.855
+     10.628,
+     10.949
     ],
     [
      "yakın.",
-     8.855,
-     9.16
+     10.949,
+     11.27
     ]
    ]
   },

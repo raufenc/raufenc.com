@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Hürmet: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi hocasını hatasız sanıp hiç soru sormuyor: sağ uca (Takdis) yakın. Başka okumada kişi hocasının sözünü kesmeden saygıyla dinliyor, sonra nazikçe sorusunu soruyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an bilgili büyüklere nasıl davrandığımıza bakar. Hürmet; bilgili büyükleri saygıyla dinlemek ve onlara değer vermektir. Nazikçe soru sormak saygısızlık değildir.",
+      "İbre cümleye değil, o an bilgili büyüklere nasıl davrandığımıza bakar. Hürmet; bilgili büyükleri saygıyla dinlemek ve onlara değer vermektir. Takdis, bilgili büyüğü aşırı yüceltmektir: hatasız sanıp hiç soru sormamak. Nazikçe soru sormak saygısızlık değildir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -77,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Dinlememe gerek yok; beni ilgilendirmez.",
+          "m": "Ne anlatırsa anlatsın, dinlemek zorunda değilim.",
           "dogru": true,
           "not": "Saygısızlık, bilgili büyüğü dinlememek ya da küçümsemektir. Saygı gösterince öğrenme kapısı da açılır."
          },
@@ -121,7 +123,7 @@ DO.dersKaydet(
           "not": "Takdis, bilgili büyüğü aşırı yüceltmektir. Bu uçta büyük hatasız sanılır ve soru sorulmaz; oysa saygı, nazikçe sormayı engellemez."
          },
          {
-          "m": "Dinlememe gerek yok; beni ilgilendirmez.",
+          "m": "Ne anlatırsa anlatsın, dinlemek zorunda değilim.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saygısızlığın sesi."
          },
@@ -148,7 +150,7 @@ DO.dersKaydet(
        "soz": "Sizi dinliyorum; anlamadığımı sonra sorarım.",
        "eylem": "konus",
        "zincir": [
-        "Anlattıkları kafasında yerleşir.",
+        "Anlattıkları aklında kalır.",
         "Büyüğü de anlatmaktan memnun olur."
        ],
        "ic": {
@@ -160,7 +162,7 @@ DO.dersKaydet(
           "not": "Hürmet, bilgili büyükleri saygıyla dinlemek ve onlara değer vermektir."
          },
          {
-          "m": "Dinlememe gerek yok; beni ilgilendirmez.",
+          "m": "Ne anlatırsa anlatsın, dinlemek zorunda değilim.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saygısızlığın sesi."
          },
@@ -218,7 +220,7 @@ DO.dersKaydet(
         {
          "m": "Sözü bitince elimi kaldırıp nazikçe sorarım.",
          "zon": "orta",
-         "sonuc": "Öğretmenin sakin sakin anlatıyor; anlamadığın yer netleşiyor.",
+         "sonuc": "Öğretmen yeniden açıklıyor; anlamadığın yer netleşiyor.",
          "not": "İbre ortada: dinlemek ve nazikçe sormak birlikte yürüyebilir.",
          "ses": "s1or"
         }
@@ -247,7 +249,7 @@ DO.dersKaydet(
         {
          "m": "Önce dinler, sonra aklımdaki soruyu sakin bir sesle sorarım.",
          "zon": "orta",
-         "sonuc": "Büyüğün memnun oluyor ve sorunu sevgiyle cevaplıyor.",
+         "sonuc": "Büyüğün memnun oluyor ve sorduğunu sevgiyle cevaplıyor.",
          "not": "İbre ortada: saygıyla dinlemek ve sormak birlikte güzel.",
          "ses": "s2or"
         }
@@ -1144,63 +1146,63 @@ DO.dersKaydet(
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 4.962,
-   "m": "Sonra ne olur? Anlattıkları kafasında yerleşir. Büyüğü de anlatmaktan memnun olur.",
+   "sure": 4.88,
+   "m": "Sonra ne olur? Anlattıkları aklında kalır. Büyüğü de anlatmaktan memnun olur.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.266
+     0.278
     ],
     [
      "ne",
-     0.266,
-     0.384
+     0.278,
+     0.402
     ],
     [
      "olur?",
-     0.384,
-     0.62
+     0.402,
+     0.65
     ],
     [
      "Anlattıkları",
-     1.08,
-     1.784
+     1.135,
+     1.797
     ],
     [
-     "kafasında",
-     1.784,
-     2.348
+     "aklında",
+     1.797,
+     2.195
     ],
     [
-     "yerleşir.",
-     2.348,
-     2.77
+     "kalır.",
+     2.195,
+     2.46
     ],
     [
      "Büyüğü",
-     3.06,
-     3.518
+     2.79,
+     3.295
     ],
     [
      "de",
-     3.518,
-     3.671
+     3.295,
+     3.463
     ],
     [
      "anlatmaktan",
-     3.671,
-     4.281
+     3.463,
+     4.137
     ],
     [
      "memnun",
-     4.281,
-     4.587
+     4.137,
+     4.474
     ],
     [
      "olur.",
-     4.587,
-     4.892
+     4.474,
+     4.81
     ]
    ]
   },
@@ -1379,43 +1381,38 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.903,
-   "m": "Öğretmenin sakin sakin anlatıyor; anlamadığın yer netleşiyor.",
+   "sure": 3.202,
+   "m": "Öğretmen yeniden açıklıyor; anlamadığın yer netleşiyor.",
    "k": [
     [
-     "Öğretmenin",
+     "Öğretmen",
      0.03,
-     0.675
+     0.511
     ],
     [
-     "sakin",
-     0.675,
-     0.998
+     "yeniden",
+     0.511,
+     0.993
     ],
     [
-     "sakin",
-     0.998,
-     1.32
-    ],
-    [
-     "anlatıyor;",
-     1.32,
-     1.965
+     "açıklıyor;",
+     0.993,
+     1.635
     ],
     [
      "anlamadığın",
-     2.22,
-     3.027
+     1.72,
+     2.426
     ],
     [
      "yer",
-     3.027,
-     3.188
+     2.426,
+     2.567
     ],
     [
      "netleşiyor.",
-     3.188,
-     3.833
+     2.567,
+     3.132
     ]
    ]
   },
@@ -1562,43 +1559,43 @@ DO.dersKaydet(
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.924,
-   "m": "Büyüğün memnun oluyor ve sorunu sevgiyle cevaplıyor.",
+   "sure": 3.434,
+   "m": "Büyüğün memnun oluyor ve sorduğunu sevgiyle cevaplıyor.",
    "k": [
     [
      "Büyüğün",
      0.03,
-     0.634
+     0.53
     ],
     [
      "memnun",
-     0.634,
-     1.036
+     0.53,
+     0.864
     ],
     [
      "oluyor",
-     1.036,
-     1.64
+     0.864,
+     1.364
     ],
     [
      "ve",
-     1.64,
-     1.841
+     1.364,
+     1.531
     ],
     [
-     "sorunu",
-     1.841,
-     2.445
+     "sorduğunu",
+     1.531,
+     2.197
     ],
     [
      "sevgiyle",
-     2.445,
-     3.049
+     2.197,
+     2.698
     ],
     [
      "cevaplıyor.",
-     3.049,
-     3.854
+     2.698,
+     3.365
     ]
    ]
   },

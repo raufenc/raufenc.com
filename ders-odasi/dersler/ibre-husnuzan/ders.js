@@ -1,11 +1,13 @@
-/* İbremetre · Hüsn-ü Zan — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Saflık · Hüsn-ü Zan · Sû-i Zan). Taslak: hoca onayı bekliyor. */
+/* İbremetre · Hüsnüzan — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Saflık · Hüsnüzan · Suizan). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-husnuzan",
- "ad": "Hüsn-ü Zan: İbren Nerede?",
+ "ad": "Hüsnüzan: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -19,14 +21,14 @@ DO.dersKaydet(
     {
      "id": "acilis",
      "tur": "ibreAcilis",
-     "huy": "Hüsn-ü Zan",
-     "huyAnahtar": "Hüsn-ü",
+     "huy": "Hüsnüzan",
+     "huyAnahtar": "Hüsnüzan",
      "olculen": "Kanıt yokken başkası hakkında düşünüşüm",
      "kanca": "Selam vermedi; bir şey olmuştur.",
      "uclar": {
       "az": "Saflık",
-      "orta": "Hüsn-ü Zan",
-      "fazla": "Sû-i Zan"
+      "orta": "Hüsnüzan",
+      "fazla": "Suizan"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -34,18 +36,18 @@ DO.dersKaydet(
     {
      "id": "tahmin",
      "tur": "ibreTahmin",
-     "huy": "Hüsn-ü Zan",
+     "huy": "Hüsnüzan",
      "cumle": "Selam vermedi; bir şey olmuştur.",
      "uclar": {
       "az": "Saflık",
-      "orta": "Hüsn-ü Zan",
-      "fazla": "Sû-i Zan"
+      "orta": "Hüsnüzan",
+      "fazla": "Suizan"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi “belki bir derdi vardır” diye düşünüp sonra nazikçe soracak: orta uca yakın. Başka okumada “bana karşı bir şey olmuştur” diye kanıtsız kötü sonuç çıkarıyor: sağ uca (Sû-i Zan) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an kanıt yokken kişiyi nasıl düşündüğümüze bakar. Hüsn-ü zan; delil yokken kötü düşünmemektir, ama gözü kapatmak değildir: iyi zan ile saflık farklıdır. Güvenlik gerektiren bir durumda kimseyi suçlamadan akıllıca davranıp güvendiğin bir yetişkine danışırız.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi “belki bir derdi vardır” diye düşünüp sonra nazikçe soracak: orta uca yakın. Başka okumada “bana karşı bir şey olmuştur” diye kanıtsız kötü sonuç çıkarıyor: sağ uca (Suizan) yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an kanıt yokken kişiyi nasıl düşündüğümüze bakar. Hüsnüzan (Excel’deki adıyla Hüsn-ü Zan); delil yokken kötü düşünmemektir, ama gözü kapatmak değildir: iyi zan ile saflık farklıdır. Sol uçta kanıt aramadan herkese inanılır, sağ uç (Suizan; Excel’de Sû-i Zan) kanıt yokken kötü sanmaktır. Güvenlik gerektiren bir durumda kimseyi suçlamadan akıllıca davranıp güvendiğin bir yetişkine danışırız.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -53,13 +55,13 @@ DO.dersKaydet(
     {
      "id": "kapilar",
      "tur": "ibreKapilar",
-     "huy": "Hüsn-ü Zan",
+     "huy": "Hüsnüzan",
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
       "az": "Saflık",
-      "orta": "Hüsn-ü Zan",
-      "fazla": "Sû-i Zan"
+      "orta": "Hüsnüzan",
+      "fazla": "Suizan"
      },
      "yesil": 0.26,
      "kapilar": [
@@ -84,12 +86,12 @@ DO.dersKaydet(
          {
           "m": "Kanıt yok; önce iyi düşüneyim, sonra sorayım.",
           "dogru": false,
-          "not": "Bu orta ucun sesi: hüsn-ü zanın sesi."
+          "not": "Bu orta ucun sesi: hüsnüzanın sesi."
          },
          {
           "m": "Cevap vermedi; kesin bana kızgın.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: sû-i zanın sesi."
+          "not": "Bu sağ ucun sesi: suizanın sesi."
          }
         ]
        },
@@ -118,7 +120,7 @@ DO.dersKaydet(
          {
           "m": "Cevap vermedi; kesin bana kızgın.",
           "dogru": true,
-          "not": "Sû-i zan, kanıt yokken kötü zannetmektir. Önce sormadan kötü sonuç çıkarmak dostluğu boşuna yorar."
+          "not": "Suizan, kanıt yokken kötü zannetmektir. Önce sormadan kötü sonuç çıkarmak dostluğu boşuna yorar."
          },
          {
           "m": "Herkes doğru söyler; sormama gerek yok.",
@@ -128,7 +130,7 @@ DO.dersKaydet(
          {
           "m": "Kanıt yok; önce iyi düşüneyim, sonra sorayım.",
           "dogru": false,
-          "not": "Bu orta ucun sesi: hüsn-ü zanın sesi."
+          "not": "Bu orta ucun sesi: hüsnüzanın sesi."
          }
         ]
        },
@@ -157,7 +159,7 @@ DO.dersKaydet(
          {
           "m": "Kanıt yok; önce iyi düşüneyim, sonra sorayım.",
           "dogru": true,
-          "not": "Hüsn-ü zan, kanıt yokken kötü düşünmemektir. Gözü kapatmak değil; kanıt çıkarsa dikkatli davranmaktır."
+          "not": "Hüsnüzan, kanıt yokken kötü düşünmemektir. Gözü kapatmak değil; kanıt çıkarsa dikkatli davranmaktır."
          },
          {
           "m": "Herkes doğru söyler; sormama gerek yok.",
@@ -167,7 +169,7 @@ DO.dersKaydet(
          {
           "m": "Cevap vermedi; kesin bana kızgın.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: sû-i zanın sesi."
+          "not": "Bu sağ ucun sesi: suizanın sesi."
          }
         ]
        },
@@ -185,12 +187,12 @@ DO.dersKaydet(
     {
      "id": "senaryo",
      "tur": "ibreSenaryo",
-     "huy": "Hüsn-ü Zan",
+     "huy": "Hüsnüzan",
      "baslik": "Sen olsan?",
      "uclar": {
       "az": "Saflık",
-      "orta": "Hüsn-ü Zan",
-      "fazla": "Sû-i Zan"
+      "orta": "Hüsnüzan",
+      "fazla": "Suizan"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
@@ -216,9 +218,9 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Bilgi vermem; kimseyi suçlamadan bir yetişkine söylerim.",
+         "m": "Bilgi vermem; durumu hemen güvendiğim bir yetişkine söylerim.",
          "zon": "orta",
-         "sonuc": "Kişisel bilgin güvende; yetişkin durumu birlikte değerlendiriyor.",
+         "sonuc": "Kişisel bilgin güvende; güvendiğin yetişkin durumu birlikte değerlendiriyor.",
          "not": "İbre ortada: kimseyi suçlamadan kendini koruyan akıllı davranış.",
          "ses": "s1or"
         }
@@ -228,7 +230,7 @@ DO.dersKaydet(
       {
        "id": "kavga",
        "baslik": "Kim başlattı?",
-       "tetik": "Dün küçük bir tartışma çıktı. Bir arkadaşın ben başlatmadım, diyor; başkaları o başlattı, diyor.",
+       "tetik": "Dün küçük bir tartışma çıktı. Bir arkadaşın “ben başlatmadım,” diyor; başkaları “o başlattı,” diyor.",
        "secenekler": [
         {
          "m": "O söylüyorsa doğrudur; kimseye sormam.",
@@ -273,14 +275,14 @@ DO.dersKaydet(
       },
       {
        "id": "orta",
-       "ad": "Kararında · Hüsn-ü Zan",
+       "ad": "Kararında · Hüsnüzan",
        "aciklama": "Kanıt yokken iyi düşünmek",
        "ikon": "muhur",
        "renk": "#17998A"
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Sû-i Zan",
+       "ad": "Fazla · Suizan",
        "aciklama": "Kanıt yokken kötü sanmak",
        "ikon": "uyari",
        "renk": "#E0674F"
@@ -363,7 +365,7 @@ DO.dersKaydet(
        "renk": "#4262B0"
       },
       {
-       "baslik": "Hüsn-ü Zan",
+       "baslik": "Hüsnüzan",
        "metin": "kanıt yokken iyi düşünmek",
        "ikon": "muhur",
        "renk": "#17998A"
@@ -415,113 +417,108 @@ DO.dersKaydet(
   },
   "a2": {
    "d": "ses/a2.m4a",
-   "sure": 11.109,
-   "m": "Birçok güzel huy bir ibre gibidir. Hüsn-ü Zan, kanıt yokken başkasını nasıl düşündüğümü ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
+   "sure": 12.146,
+   "m": "Birçok güzel huy bir ibre gibidir. Hüsnüzan, kanıt yokken başkasını nasıl düşündüğümü ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
    "k": [
     [
      "Birçok",
      0.03,
-     0.466
+     0.488
     ],
     [
      "güzel",
-     0.466,
-     0.903
+     0.488,
+     0.946
     ],
     [
      "huy",
-     0.903,
-     1.121
+     0.946,
+     1.175
     ],
     [
      "bir",
-     1.121,
-     1.339
+     1.175,
+     1.405
     ],
     [
      "ibre",
-     1.339,
-     1.775
+     1.405,
+     1.863
     ],
     [
      "gibidir.",
-     1.775,
-     2.43
+     1.863,
+     2.55
     ],
     [
-     "Hüsn-ü",
-     3.035,
-     3.432
-    ],
-    [
-     "Zan,",
-     3.432,
-     3.63
+     "Hüsnüzan,",
+     3.125,
+     3.825
     ],
     [
      "kanıt",
-     3.815,
-     4.25
+     4.15,
+     4.602
     ],
     [
      "yokken",
-     4.25,
-     4.686
+     4.602,
+     5.054
     ],
     [
      "başkasını",
-     4.686,
-     5.556
+     5.054,
+     5.957
     ],
     [
      "nasıl",
-     5.556,
-     5.991
+     5.957,
+     6.409
     ],
     [
      "düşündüğümü",
-     5.991,
-     7.08
+     6.409,
+     7.538
     ],
     [
      "ölçer.",
-     7.08,
-     7.515
+     7.538,
+     7.99
     ],
     [
      "İbre",
-     7.61,
-     8.009
+     8.1,
+     8.561
     ],
     [
      "üç",
-     8.009,
-     8.208
+     8.561,
+     8.792
     ],
     [
      "yerde",
-     8.208,
-     8.607
+     8.792,
+     9.253
     ],
     [
      "durabilir:",
-     8.607,
-     9.405
+     9.253,
+     10.175
     ],
     [
      "az,",
-     9.66,
-     9.796
+     10.535,
+     10.689
     ],
     [
      "kararında,",
-     9.796,
-     10.34
+     10.689,
+     11.305
     ],
     [
      "fazla.",
-     10.7,
-     11.039
+     11.695,
+     12.076
     ]
    ]
   },
@@ -1429,130 +1426,135 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.334,
-   "m": "Kişisel bilgin güvende; yetişkin durumu birlikte değerlendiriyor.",
+   "sure": 5.336,
+   "m": "Kişisel bilgin güvende; güvendiğin yetişkin durumu birlikte değerlendiriyor.",
    "k": [
     [
      "Kişisel",
      0.03,
-     0.476
+     0.527
     ],
     [
      "bilgin",
-     0.476,
-     0.774
+     0.527,
+     0.858
     ],
     [
      "güvende;",
-     0.774,
-     1.22
+     0.858,
+     1.355
+    ],
+    [
+     "güvendiğin",
+     1.78,
+     2.514
     ],
     [
      "yetişkin",
-     1.47,
-     1.829
+     2.514,
+     3.064
     ],
     [
      "durumu",
-     1.829,
-     2.187
+     3.064,
+     3.615
     ],
     [
      "birlikte",
-     2.187,
-     2.546
+     3.615,
+     4.165
     ],
     [
      "değerlendiriyor.",
-     2.546,
-     3.264
+     4.165,
+     5.266
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 6.403,
+   "sure": 6.065,
    "m": "Dün küçük bir tartışma çıktı. Bir arkadaşın ben başlatmadım, diyor; başkaları o başlattı, diyor. Ne yaparsın?",
    "k": [
     [
      "Dün",
      0.03,
-     0.187
+     0.173
     ],
     [
      "küçük",
-     0.187,
-     0.5
+     0.173,
+     0.46
     ],
     [
      "bir",
-     0.5,
-     0.657
+     0.46,
+     0.603
     ],
     [
      "tartışma",
-     0.657,
-     1.127
+     0.603,
+     1.033
     ],
     [
      "çıktı.",
-     1.127,
-     1.44
+     1.033,
+     1.32
     ],
     [
      "Bir",
-     1.715,
-     1.885
+     1.8,
+     1.97
     ],
     [
      "arkadaşın",
-     1.885,
-     2.562
+     1.97,
+     2.65
     ],
     [
      "ben",
-     2.562,
-     2.732
+     2.65,
+     2.82
     ],
     [
      "başlatmadım,",
-     2.732,
-     3.41
+     2.82,
+     3.5
     ],
     [
      "diyor;",
-     3.7,
-     4.555
+     3.71,
+     3.973
     ],
     [
      "başkaları",
-     4.625,
-     4.817
+     3.973,
+     4.499
     ],
     [
      "o",
-     4.817,
-     4.866
+     4.499,
+     4.63
     ],
     [
      "başlattı,",
-     4.866,
-     5.01
+     4.63,
+     5.025
     ],
     [
      "diyor.",
-     5.42,
-     5.724
+     5.46,
+     5.638
     ],
     [
      "Ne",
-     5.724,
-     5.876
+     5.638,
+     5.727
     ],
     [
      "yaparsın?",
-     5.876,
-     6.333
+     5.727,
+     5.995
     ]
    ]
   },

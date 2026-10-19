@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Gıpta: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi arkadaşının başarısını görüp onun gibi çalışmaya özeniyor: orta uca yakın. Başka okumada o başarının arkadaşından gidip kendisine gelmesini istiyor: sağ uca (Hased) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an başkasının iyiliğine nasıl baktığımıza bakar. Gıpta; güzel bir örneği görüp ona benzemeye çalışmak ve onun sevincine sevinebilmektir. Dürüst olalım: Hased, “daha fazla gıpta” değildir. Gıptada yön örneğe doğru çalışmaktır; hasedde niyetin yönü değişir ve o iyiliğin karşındakinden gitmesini istemeye döner. Bu ibre ölçekten çok yönü gösterir.",
+      "İbre cümleye değil, o an başkasının iyiliğine nasıl baktığımıza bakar. Gıpta; güzel bir örneği görüp ona benzemeye çalışmak ve onun sevincine sevinebilmektir. Hased ise “daha fazla gıpta” değildir: gıptada yön örneğe doğru çalışmaktır, hasedde yön değişir ve o iyiliğin karşındakinden gitmesini istemeye döner. Bu ibre ölçekten çok yönü gösterir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -104,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "İyiliğe imrenirken niyeti kaydıran kişi neyi kaçırır?",
+       "soru": "Başkasının iyiliğini çekemeyen kişi neyi kaçırır?",
        "ad": "Hased",
        "soz": "Hak etmedi, o başarı bende olmalıydı!",
        "eylem": "isaret",
@@ -202,9 +204,9 @@ DO.dersKaydet(
        "tetik": "Sınıf arkadaşın yarışmada madalya aldı ve herkes onu alkışlıyor.",
        "secenekler": [
         {
-         "m": "Bana ne, ben alkışlamam bile.",
+         "m": "Alkışlamam; başarısı ilgimi çekmiyor.",
          "zon": "az",
-         "sonuc": "Arkadaşın sevincini paylaşacak kimseyi göremiyor; sen de sınıfın sevincinden uzak kalıyorsun.",
+         "sonuc": "Arkadaşın senden de bir tebrik bekliyordu; sen sınıfın ortak sevincinden uzakta kalıyorsun.",
          "not": "İbre sola kaydı: ilgisiz kalmak hem sevinmeyi hem özenmeyi kapatıyor.",
          "ses": "s1az"
         },
@@ -238,9 +240,9 @@ DO.dersKaydet(
          "ses": "s2az"
         },
         {
-         "m": "Onun notu düşse de benimki yükselse.",
+         "m": "Onun notu düşse, benimki yükselse.",
          "zon": "fazla",
-         "sonuc": "Arkadaşının çabasını görmüyorsun; için sıkıldığı için kendi çalışman da yerinde sayıyor.",
+         "sonuc": "İçin sıkıntıyla doluyor; arkadaşının çabasını göremiyorsun, kendi çalışmana da odaklanamıyorsun.",
          "not": "İbre sağa kaydı: örnek almak yerine onun eksilmesini istemeye döndü.",
          "ses": "s2fa"
         },
@@ -295,9 +297,9 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Arkadaşının yeni bisikletine bakıp “keşke bozulsa” diye içinden geçirir.",
+       "metin": "Arkadaşı takım kaptanı seçilince ona bu görevi çok görüp suratını asar.",
        "alan": "fazla",
-       "ipucu": "Onun iyiliğinin gitmesini istiyor."
+       "ipucu": "Onun iyiliğini çok görüyor."
       },
       {
        "id": "k3",
@@ -1360,63 +1362,68 @@ DO.dersKaydet(
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 5.06,
-   "m": "Arkadaşın sevincini paylaşacak kimseyi göremiyor; sen de sınıfın sevincinden uzak kalıyorsun.",
+   "sure": 4.495,
+   "m": "Arkadaşın senden de bir tebrik bekliyordu; sen sınıfın ortak sevincinden uzakta kalıyorsun.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.532
+     0.56
     ],
     [
-     "sevincini",
-     0.532,
-     1.034
-    ],
-    [
-     "paylaşacak",
-     1.034,
-     1.536
-    ],
-    [
-     "kimseyi",
-     1.536,
-     1.913
-    ],
-    [
-     "göremiyor;",
-     1.913,
-     2.415
-    ],
-    [
-     "sen",
-     2.855,
-     2.997
+     "senden",
+     0.56,
+     0.825
     ],
     [
      "de",
-     2.997,
-     3.14
+     0.825,
+     0.958
+    ],
+    [
+     "bir",
+     0.958,
+     1.09
+    ],
+    [
+     "tebrik",
+     1.09,
+     1.355
+    ],
+    [
+     "bekliyordu;",
+     1.355,
+     1.885
+    ],
+    [
+     "sen",
+     2.065,
+     2.204
     ],
     [
      "sınıfın",
-     3.14,
-     3.567
+     2.204,
+     2.62
+    ],
+    [
+     "ortak",
+     2.62,
+     2.898
     ],
     [
      "sevincinden",
-     3.567,
-     4.136
+     2.898,
+     3.453
     ],
     [
-     "uzak",
-     4.136,
-     4.421
+     "uzakta",
+     3.453,
+     3.869
     ],
     [
      "kalıyorsun.",
-     4.421,
-     4.99
+     3.869,
+     4.425
     ]
    ]
   },
@@ -1645,63 +1652,58 @@ DO.dersKaydet(
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 5.065,
-   "m": "Arkadaşının çabasını görmüyorsun; için sıkıldığı için kendi çalışman da yerinde sayıyor.",
+   "sure": 5.401,
+   "m": "İçin sıkıntıyla doluyor; arkadaşının çabasını göremiyorsun, kendi çalışmana da odaklanamıyorsun.",
    "k": [
     [
-     "Arkadaşının",
+     "İçin",
      0.03,
-     0.695
+     0.306
+    ],
+    [
+     "sıkıntıyla",
+     0.306,
+     0.857
+    ],
+    [
+     "doluyor;",
+     0.857,
+     1.27
+    ],
+    [
+     "arkadaşının",
+     1.59,
+     2.204
     ],
     [
      "çabasını",
-     0.695,
-     1.228
+     2.204,
+     2.696
     ],
     [
-     "görmüyorsun;",
-     1.228,
-     1.76
-    ],
-    [
-     "için",
-     1.925,
-     2.232
-    ],
-    [
-     "sıkıldığı",
-     2.232,
-     2.846
-    ],
-    [
-     "için",
-     2.846,
-     3.153
+     "göremiyorsun,",
+     2.696,
+     3.31
     ],
     [
      "kendi",
-     3.153,
-     3.46
+     3.645,
+     3.886
     ],
     [
-     "çalışman",
-     3.46,
-     3.921
+     "çalışmana",
+     3.886,
+     4.367
     ],
     [
      "da",
-     3.921,
-     4.074
+     4.367,
+     4.488
     ],
     [
-     "yerinde",
-     4.074,
-     4.535
-    ],
-    [
-     "sayıyor.",
-     4.535,
-     4.995
+     "odaklanamıyorsun.",
+     4.488,
+     5.331
     ]
    ]
   },

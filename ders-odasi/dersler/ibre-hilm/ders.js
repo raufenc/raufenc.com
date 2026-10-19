@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Hilm: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi öfkeyle karşılık vermedi, olanı aklında tutuyor ve uygun bir zamanda sakince konuşacak: orta uca yakın. Başka okumada olanı kalbinde saklıyor ve içinde büyütüyor: sağ uca (Hıkd) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an öfkeyi ve haksızlığı nasıl karşıladığımıza bakar. Hilm; öfkelensen de yumuşak davranmak, kırgınlığı sakin bir sözle söylemektir.",
+      "İbre cümleye değil, o an öfkeyi ve haksızlığı nasıl karşıladığımıza bakar. Hilm; öfkelensen de yumuşak davranmak, kırgınlığı sakin bir sözle söylemektir. Sol uç, haksızlığa bile aldırmamaktır; sağ uç ise öfkeyi içinde büyütüp küs durmak ve sessizce karşılık beklemektir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -67,19 +69,19 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Haksızlığa bile aldırmamak neye benziyor?",
        "ad": "Kayıtsızlık",
-       "soz": "Bana ne, kime ne yapılırsa yapılsın.",
+       "soz": "Olsun, aldırmam; ne yaparlarsa yapsınlar.",
        "eylem": "yaslan",
        "zincir": [
-        "Haksızlığa uğrayan arkadaşı yalnız kalır.",
+        "Yapılanın yanlış olduğu kimseye söylenmez.",
         "Sorun çözülmeden büyümeye devam eder."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bana ne, ben karışmam.",
+          "m": "Aldırmazsam bir şey olmaz; sesimi çıkarmayayım.",
           "dogru": true,
-          "not": "Kayıtsızlık, haksızlığa karşı bile duyarsız kalmaktır. Sakin olmak ile umursamamak aynı şey değildir."
+          "not": "Kayıtsızlık, haksızlığa karşı bile duyarsız kalmaktır. Sakin olmak ile aldırmamak aynı şey değildir."
          },
          {
           "m": "Kızdım ama sakin kalıp konuşacağım.",
@@ -87,7 +89,7 @@ DO.dersKaydet(
           "not": "Bu orta ucun sesi: hilmin sesi."
          },
          {
-          "m": "Affetmeyeceğim; bu içimde duracak.",
+          "m": "Küstüm; konuşmam, sırası gelince karşılığını veririm.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: hıkdın sesi."
          }
@@ -95,33 +97,33 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Kayıtsızlık",
-        "soz": "Bana"
+        "soz": "Olsun,"
        },
        "zincirAnahtar": [
-        "Haksızlığa",
+        "Yapılanın",
         "Sorun"
        ]
       },
       {
        "zon": "fazla",
-       "soru": "Kırgınlığı kalpte saklamak neye benziyor?",
+       "soru": "Öfkeyi içinde büyütmek neye benziyor?",
        "ad": "Hıkd",
-       "soz": "Affetmem, o günü hiç unutmayacağım.",
+       "soz": "Küstüm, konuşmam; sırası gelince görürsün.",
        "eylem": "dusun",
        "zincir": [
-        "Eski olay her yeni buluşmada yeniden aklına gelir.",
+        "Küskünlük içinde her gün biraz daha büyür.",
         "Arkadaşı neden soğuk davrandığını anlayamaz."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Affetmeyeceğim; bu içimde duracak.",
+          "m": "Küstüm; konuşmam, sırası gelince karşılığını veririm.",
           "dogru": true,
-          "not": "Hıkd, öfkeyi kalpte saklayıp büyütmektir. Küçük bir kırgınlık, saklandıkça yük olur."
+          "not": "Hıkd, öfkeyi kalpte saklayıp büyütmektir. Küçük bir kırgınlık, içinde büyüdükçe yük olur."
          },
          {
-          "m": "Bana ne, ben karışmam.",
+          "m": "Aldırmazsam bir şey olmaz; sesimi çıkarmayayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: kayıtsızlığın sesi."
          },
@@ -134,10 +136,10 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hıkd",
-        "soz": "Affetmem,"
+        "soz": "Küstüm,"
        },
        "zincirAnahtar": [
-        "Eski",
+        "Küskünlük",
         "Arkadaşı"
        ]
       },
@@ -160,12 +162,12 @@ DO.dersKaydet(
           "not": "Hilm, öfkelensen de yumuşak davranmaktır. Öfkeyi hissetmek kusur değil; onu nasıl taşıdığın önemli."
          },
          {
-          "m": "Bana ne, ben karışmam.",
+          "m": "Aldırmazsam bir şey olmaz; sesimi çıkarmayayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: kayıtsızlığın sesi."
          },
          {
-          "m": "Affetmeyeceğim; bu içimde duracak.",
+          "m": "Küstüm; konuşmam, sırası gelince karşılığını veririm.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: hıkdın sesi."
          }
@@ -202,23 +204,23 @@ DO.dersKaydet(
        "tetik": "Teneffüste bir arkadaşın seni itip kitaplarını yere düşürdü. Bunu bilerek yaptı.",
        "secenekler": [
         {
-         "m": "Bana ne, istediği gibi itsin.",
+         "m": "Olsun, aldırmam; istediği gibi itsin.",
          "zon": "az",
          "sonuc": "Aynı şey yine olabilir; sen de kendi sınırını söylememiş oluyorsun.",
          "not": "İbre sola kaydı: haksızlığa bile aldırmamak sorunu çözmüyor.",
          "ses": "s1az"
         },
         {
-         "m": "Affetmem; bundan sonra onunla konuşmam.",
+         "m": "Bir şey demem ama içimde tutarım; sırası gelir.",
          "zon": "fazla",
          "sonuc": "Öfke içinde duruyor; onu her gördüğünde yeniden kızıyorsun.",
          "not": "İbre sağa kaydı: öfkeyi saklamak onu büyütüyor.",
          "ses": "s1fa"
         },
         {
-         "m": "Canım yandı; bir daha yapma, diye sakince söylerim.",
+         "m": "“Canım yandı; bir daha yapma” diye sakince söylerim.",
          "zon": "orta",
-         "sonuc": "Arkadaşın özür diliyor ve mesele orada kapanıyor.",
+         "sonuc": "Arkadaşın durup düşünüyor; tekrar ederse öğretmene söyleyeceksin.",
          "not": "İbre ortada: kızgınlığı sakin bir sözle söyledin.",
          "ses": "s1or"
         }
@@ -238,7 +240,7 @@ DO.dersKaydet(
          "ses": "s2az"
         },
         {
-         "m": "Bir daha oyunuma dokunmasın; bunu hep hatırlayacağım.",
+         "m": "Bir şey demem ama aklımda tutarım; o da bir gün görsün.",
          "zon": "fazla",
          "sonuc": "Küçük olay kalbinde büyüyor; sonraki oyunlarda da kızgın oturuyorsun.",
          "not": "İbre sağa kaydı: kırgınlığı saklamak, küçük olayı büyütüyor.",
@@ -257,6 +259,43 @@ DO.dersKaydet(
      ],
      "karsiSes": "skarsi",
      "sonSes": "sson"
+    },
+    {
+     "tur": "ibreNefes",
+     "id": "nefes",
+     "baslik": "Oyun parçan bozuldu",
+     "tetik": "Arkadaşın, çok sevdiğin oyun parçanı bozdu. İbreye bak: o ne yapıyor?",
+     "uclar": {
+      "az": "Kayıtsızlık",
+      "orta": "Hilm",
+      "fazla": "Hiddet"
+     },
+     "ses": {
+      "acilis": "v1",
+      "yonerge": "v2",
+      "ipucu": "v3",
+      "yatisti": "v4",
+      "soru": "v5"
+     },
+     "secenekler": [
+      {
+       "m": "Önemli değil, boşver.",
+       "zon": "az",
+       "ses": "v6"
+      },
+      {
+       "m": "Bu parça benim için önemliydi. Bir dahaki sefere önce bana sor, lütfen.",
+       "zon": "orta",
+       "ses": "v7"
+      },
+      {
+       "m": "Hep yapıyorsun bunu! Hiç dikkat etmiyorsun, hep senin yüzünden!",
+       "zon": "fazla",
+       "ses": "v8"
+      }
+     ],
+     "huy": "Hilm",
+     "yesil": 0.26
     },
     {
      "id": "uc-bul",
@@ -281,7 +320,7 @@ DO.dersKaydet(
       {
        "id": "fazla",
        "ad": "Fazla · Hıkd",
-       "aciklama": "Kırgınlığı saklamak",
+       "aciklama": "Küsüp içinde büyütmek",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -289,9 +328,9 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Arkadaşı haksız yere azarlanırken bakıp geçer.",
+       "metin": "Haksız yere azarlanınca “olsun” der, hiçbir şey söylemez.",
        "alan": "az",
-       "ipucu": "Haksızlığa bakıp geçiyor."
+       "ipucu": "Haksızlığa aldırmıyor."
       },
       {
        "id": "k2",
@@ -307,15 +346,15 @@ DO.dersKaydet(
       },
       {
        "id": "k4",
-       "metin": "Oyunda haksızlık yapılınca “bana ne” deyip uzaklaşır.",
+       "metin": "Oyunda hakkı yenince sesini çıkarmaz, olmamış gibi davranır.",
        "alan": "az",
-       "ipucu": "Haksızlığı umursamıyor."
+       "ipucu": "Kendi hakkına bile aldırmıyor."
       },
       {
        "id": "k5",
-       "metin": "Eski bir kırgınlığı her fırsatta yüzüne vurur.",
+       "metin": "Kırıldığı arkadaşına belli etmeden kendince karşılık vermeyi bekler.",
        "alan": "fazla",
-       "ipucu": "Kırgınlığı canlı tutuyor."
+       "ipucu": "Kırgınlığı içinde büyütüyor."
       },
       {
        "id": "k6",
@@ -705,150 +744,150 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 7.346,
-   "m": "Sol uçta Kayıtsızlık. Bana ne, kime ne yapılırsa yapılsın. Arkadaşı itilirken bile yerinden kıpırdamaz.",
+   "sure": 7.366,
+   "m": "Sol uçta Kayıtsızlık. Olsun, aldırmam; ne yaparlarsa yapsınlar. İtilip incinse de yüzünü bile buruşturmaz.",
    "k": [
     [
      "Sol",
      0.03,
-     0.237
+     0.221
     ],
     [
      "uçta",
-     0.237,
-     0.651
+     0.221,
+     0.604
     ],
     [
      "Kayıtsızlık.",
-     0.651,
-     1.48
+     0.604,
+     1.37
     ],
     [
-     "Bana",
-     1.595,
-     1.602
+     "Olsun,",
+     1.47,
+     1.475
     ],
     [
-     "ne,",
-     1.602,
-     1.605
-    ],
-    [
-     "kime",
-     2.12,
-     2.537
+     "aldırmam;",
+     2.04,
+     2.395
     ],
     [
      "ne",
-     2.537,
-     2.745
+     2.68,
+     2.91
     ],
     [
-     "yapılırsa",
-     2.745,
-     3.579
+     "yaparlarsa",
+     2.91,
+     3.83
     ],
     [
-     "yapılsın.",
-     3.579,
-     4.205
+     "yapsınlar.",
+     3.83,
+     4.52
     ],
     [
-     "Arkadaşı",
-     4.62,
-     5.245
+     "İtilip",
+     4.6,
+     5.106
     ],
     [
-     "itilirken",
-     5.245,
-     5.87
+     "incinse",
+     5.106,
+     5.611
+    ],
+    [
+     "de",
+     5.611,
+     5.78
+    ],
+    [
+     "yüzünü",
+     5.78,
+     6.285
     ],
     [
      "bile",
-     5.87,
-     6.182
+     6.285,
+     6.622
     ],
     [
-     "yerinden",
-     6.182,
-     6.651
-    ],
-    [
-     "kıpırdamaz.",
-     6.651,
-     7.276
+     "buruşturmaz.",
+     6.622,
+     7.296
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 5.749,
-   "m": "Sonra ne olur? Haksızlığa uğrayan arkadaşı yalnız kalır. Sorun çözülmeden büyümeye devam eder.",
+   "sure": 6.265,
+   "m": "Sonra ne olur? Yapılanın yanlış olduğu kimseye söylenmez. Sorun çözülmeden büyümeye devam eder.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.266
+     0.262
     ],
     [
      "ne",
-     0.266,
-     0.384
+     0.262,
+     0.378
     ],
     [
      "olur?",
-     0.384,
-     0.62
+     0.378,
+     0.61
     ],
     [
-     "Haksızlığa",
-     0.885,
-     1.517
+     "Yapılanın",
+     1.01,
+     1.655
     ],
     [
-     "uğrayan",
-     1.517,
-     1.991
+     "yanlış",
+     1.655,
+     1.978
     ],
     [
-     "arkadaşı",
-     1.991,
-     2.623
+     "olduğu",
+     1.978,
+     2.462
     ],
     [
-     "yalnız",
-     2.623,
-     2.939
+     "kimseye",
+     2.462,
+     2.946
     ],
     [
-     "kalır.",
-     2.939,
-     3.255
+     "söylenmez.",
+     2.946,
+     3.43
     ],
     [
      "Sorun",
-     3.405,
-     3.73
+     3.73,
+     4.082
     ],
     [
      "çözülmeden",
-     3.73,
-     4.38
+     4.082,
+     4.786
     ],
     [
      "büyümeye",
-     4.38,
-     5.029
+     4.786,
+     5.49
     ],
     [
      "devam",
-     5.029,
-     5.354
+     5.49,
+     5.843
     ],
     [
      "eder.",
-     5.354,
-     5.679
+     5.843,
+     6.195
     ]
    ]
   },
@@ -891,165 +930,165 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.171,
-   "m": "Sağ uçta Hıkd. Affetmem, o günü hiç unutmayacağım. Eski bir kırgınlığı kalbinde taşıyıp durur.",
+   "sure": 7.798,
+   "m": "Sağ uçta Hıkd. Küstüm, konuşmam; sırası gelince görürsün. Sessizce küser ve içinden bir karşılık düşünür.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.261
+     0.202
     ],
     [
      "uçta",
-     0.261,
-     0.724
+     0.202,
+     0.547
     ],
     [
      "Hıkd.",
-     0.724,
-     0.955
+     0.547,
+     0.72
     ],
     [
-     "Affetmem,",
-     1.035,
-     1.225
+     "Küstüm,",
+     0.865,
+     1.14
     ],
     [
-     "o",
-     1.74,
-     2.003
+     "konuşmam;",
+     1.83,
+     2.22
     ],
     [
-     "günü",
-     2.003,
-     2.53
+     "sırası",
+     2.47,
+     3.165
     ],
     [
-     "hiç",
-     2.53,
-     2.794
+     "gelince",
+     3.165,
+     3.86
     ],
     [
-     "unutmayacağım.",
-     2.794,
-     4.375
+     "görürsün.",
+     3.86,
+     4.555
     ],
     [
-     "Eski",
-     4.945,
-     5.233
+     "Sessizce",
+     5.03,
+     5.536
+    ],
+    [
+     "küser",
+     5.536,
+     5.873
+    ],
+    [
+     "ve",
+     5.873,
+     6.042
+    ],
+    [
+     "içinden",
+     6.042,
+     6.548
     ],
     [
      "bir",
-     5.233,
-     5.376
+     6.548,
+     6.716
     ],
     [
-     "kırgınlığı",
-     5.376,
-     5.951
+     "karşılık",
+     6.716,
+     7.222
     ],
     [
-     "kalbinde",
-     5.951,
-     6.383
-    ],
-    [
-     "taşıyıp",
-     6.383,
-     6.814
-    ],
-    [
-     "durur.",
-     6.814,
-     7.101
+     "düşünür.",
+     7.222,
+     7.728
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.737,
-   "m": "Sonra ne olur? Eski olay her yeni buluşmada yeniden aklına gelir. Arkadaşı neden soğuk davrandığını anlayamaz.",
+   "sure": 6.484,
+   "m": "Sonra ne olur? Küskünlük içinde her gün biraz daha büyür. Arkadaşı neden soğuk davrandığını anlayamaz.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.28
+     0.308
     ],
     [
      "ne",
-     0.28,
-     0.405
+     0.308,
+     0.447
     ],
     [
      "olur?",
-     0.405,
-     0.655
+     0.447,
+     0.725
     ],
     [
-     "Eski",
-     1.255,
-     1.549
+     "Küskünlük",
+     1.105,
+     1.71
     ],
     [
-     "olay",
-     1.549,
-     1.843
+     "içinde",
+     1.71,
+     2.316
     ],
     [
      "her",
-     1.843,
-     1.991
+     2.316,
+     2.518
     ],
     [
-     "yeni",
-     1.991,
-     2.285
+     "gün",
+     2.518,
+     2.719
     ],
     [
-     "buluşmada",
-     2.285,
-     2.873
+     "biraz",
+     2.719,
+     3.123
     ],
     [
-     "yeniden",
-     2.873,
-     3.314
+     "daha",
+     3.123,
+     3.526
     ],
     [
-     "aklına",
-     3.314,
-     3.756
-    ],
-    [
-     "gelir.",
-     3.756,
-     4.05
+     "büyür.",
+     3.526,
+     3.93
     ],
     [
      "Arkadaşı",
-     4.495,
-     5.006
+     4.14,
+     4.675
     ],
     [
      "neden",
-     5.006,
-     5.262
+     4.675,
+     4.942
     ],
     [
      "soğuk",
-     5.262,
-     5.517
+     4.942,
+     5.21
     ],
     [
      "davrandığını",
-     5.517,
-     6.156
+     5.21,
+     5.879
     ],
     [
      "anlayamaz.",
-     6.156,
-     6.667
+     5.879,
+     6.414
     ]
    ]
   },
@@ -1449,43 +1488,43 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 2.557,
-   "m": "Arkadaşın özür diliyor ve mesele orada kapanıyor.",
+   "sure": 3.562,
+   "m": "Arkadaşın durup düşünüyor; tekrar ederse öğretmene söyleyeceksin.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.521
+     0.468
     ],
     [
-     "özür",
-     0.521,
-     0.767
+     "durup",
+     0.468,
+     0.687
     ],
     [
-     "diliyor",
-     0.767,
-     1.136
+     "düşünüyor;",
+     0.687,
+     1.125
     ],
     [
-     "ve",
-     1.136,
-     1.258
+     "tekrar",
+     1.495,
+     1.78
     ],
     [
-     "mesele",
-     1.258,
-     1.627
+     "ederse",
+     1.78,
+     2.208
     ],
     [
-     "orada",
-     1.627,
-     1.996
+     "öğretmene",
+     2.208,
+     2.779
     ],
     [
-     "kapanıyor.",
-     1.996,
-     2.487
+     "söyleyeceksin.",
+     2.779,
+     3.492
     ]
    ]
   },
@@ -2044,6 +2083,517 @@ DO.dersKaydet(
      "seç.",
      4.054,
      4.255
+    ]
+   ]
+  },
+  "v1": {
+   "d": "ses/v1.m4a",
+   "sure": 5.993,
+   "m": "Arkadaşın, çok sevdiğin oyun parçanı bozdu. Bak, ibre kendiliğinden sağa kayıyor.",
+   "k": [
+    [
+     "Arkadaşın,",
+     0.03,
+     0.66
+    ],
+    [
+     "çok",
+     0.785,
+     0.965
+    ],
+    [
+     "sevdiğin",
+     0.965,
+     1.507
+    ],
+    [
+     "oyun",
+     1.507,
+     1.868
+    ],
+    [
+     "parçanı",
+     1.868,
+     2.409
+    ],
+    [
+     "bozdu.",
+     2.409,
+     2.77
+    ],
+    [
+     "Bak,",
+     3.255,
+     3.49
+    ],
+    [
+     "ibre",
+     3.995,
+     4.316
+    ],
+    [
+     "kendiliğinden",
+     4.316,
+     5.12
+    ],
+    [
+     "sağa",
+     5.12,
+     5.441
+    ],
+    [
+     "kayıyor.",
+     5.441,
+     5.923
+    ]
+   ]
+  },
+  "v2": {
+   "d": "ses/v2.m4a",
+   "sure": 7.597,
+   "m": "Kızmak herkesin yaşadığı bir duygu; sorun değil. “Nefes al” düğmesine basılı tut; istersen yalnızca halkayı izle.",
+   "k": [
+    [
+     "Kızmak",
+     0.03,
+     0.374
+    ],
+    [
+     "herkesin",
+     0.374,
+     0.89
+    ],
+    [
+     "yaşadığı",
+     0.89,
+     1.579
+    ],
+    [
+     "bir",
+     1.579,
+     1.751
+    ],
+    [
+     "duygu;",
+     1.751,
+     2.095
+    ],
+    [
+     "sorun",
+     2.51,
+     2.839
+    ],
+    [
+     "değil.",
+     2.839,
+     3.169
+    ],
+    [
+     "“Nefes",
+     3.169,
+     3.498
+    ],
+    [
+     "al”",
+     3.498,
+     3.663
+    ],
+    [
+     "düğmesine",
+     3.663,
+     4.321
+    ],
+    [
+     "basılı",
+     4.321,
+     4.815
+    ],
+    [
+     "tut;",
+     4.815,
+     4.98
+    ],
+    [
+     "istersen",
+     5.23,
+     5.857
+    ],
+    [
+     "yalnızca",
+     5.857,
+     6.483
+    ],
+    [
+     "halkayı",
+     6.483,
+     7.11
+    ],
+    [
+     "izle.",
+     7.11,
+     7.527
+    ]
+   ]
+  },
+  "v3": {
+   "d": "ses/v3.m4a",
+   "sure": 3.661,
+   "m": "Yavaşça nefes al. Sonra yavaşça ver.",
+   "k": [
+    [
+     "Yavaşça",
+     0.03,
+     0.633
+    ],
+    [
+     "nefes",
+     0.633,
+     1.034
+    ],
+    [
+     "al.",
+     1.034,
+     1.235
+    ],
+    [
+     "Sonra",
+     1.625,
+     2.28
+    ],
+    [
+     "yavaşça",
+     2.28,
+     3.264
+    ],
+    [
+     "ver.",
+     3.264,
+     3.591
+    ]
+   ]
+  },
+  "v4": {
+   "d": "ses/v4.m4a",
+   "sure": 5.582,
+   "m": "Bak, ibre ortaya geldi. Buna hilm diyoruz: kızgınlıkta bile sakin kalabilmek.",
+   "k": [
+    [
+     "Bak,",
+     0.03,
+     0.305
+    ],
+    [
+     "ibre",
+     0.5,
+     0.773
+    ],
+    [
+     "ortaya",
+     0.773,
+     1.182
+    ],
+    [
+     "geldi.",
+     1.182,
+     1.455
+    ],
+    [
+     "Buna",
+     1.785,
+     2.222
+    ],
+    [
+     "hilm",
+     2.222,
+     2.44
+    ],
+    [
+     "diyoruz:",
+     2.44,
+     3.095
+    ],
+    [
+     "kızgınlıkta",
+     3.535,
+     4.194
+    ],
+    [
+     "bile",
+     4.194,
+     4.523
+    ],
+    [
+     "sakin",
+     4.523,
+     4.853
+    ],
+    [
+     "kalabilmek.",
+     4.853,
+     5.512
+    ]
+   ]
+  },
+  "v5": {
+   "d": "ses/v5.m4a",
+   "sure": 3.556,
+   "m": "Şimdi arkadaşına ne söylersin? Üç yoldan birini seç.",
+   "k": [
+    [
+     "Şimdi",
+     0.03,
+     0.316
+    ],
+    [
+     "arkadaşına",
+     0.316,
+     1.032
+    ],
+    [
+     "ne",
+     1.032,
+     1.175
+    ],
+    [
+     "söylersin?",
+     1.175,
+     1.605
+    ],
+    [
+     "Üç",
+     2.1,
+     2.298
+    ],
+    [
+     "yoldan",
+     2.298,
+     2.694
+    ],
+    [
+     "birini",
+     2.694,
+     3.288
+    ],
+    [
+     "seç.",
+     3.288,
+     3.486
+    ]
+   ]
+  },
+  "v6": {
+   "d": "ses/v6.m4a",
+   "sure": 5.022,
+   "m": "Umursamıyormuş gibi yapınca ibre sola kaydı. Seni neyin üzdüğünü arkadaşın bilemedi.",
+   "k": [
+    [
+     "Umursamıyormuş",
+     0.03,
+     0.844
+    ],
+    [
+     "gibi",
+     0.844,
+     1.115
+    ],
+    [
+     "yapınca",
+     1.115,
+     1.521
+    ],
+    [
+     "ibre",
+     1.521,
+     1.793
+    ],
+    [
+     "sola",
+     1.793,
+     2.064
+    ],
+    [
+     "kaydı.",
+     2.064,
+     2.335
+    ],
+    [
+     "Seni",
+     2.645,
+     2.933
+    ],
+    [
+     "neyin",
+     2.933,
+     3.222
+    ],
+    [
+     "üzdüğünü",
+     3.222,
+     3.798
+    ],
+    [
+     "arkadaşın",
+     3.798,
+     4.375
+    ],
+    [
+     "bilemedi.",
+     4.375,
+     4.952
+    ]
+   ]
+  },
+  "v7": {
+   "d": "ses/v7.m4a",
+   "sure": 6.492,
+   "m": "Sakin ve net konuşunca ibre ortada kaldı. Arkadaşın seni dinledi; ikiniz de çözüm düşünebildiniz.",
+   "k": [
+    [
+     "Sakin",
+     0.03,
+     0.411
+    ],
+    [
+     "ve",
+     0.411,
+     0.601
+    ],
+    [
+     "net",
+     0.601,
+     0.791
+    ],
+    [
+     "konuşunca",
+     0.791,
+     1.553
+    ],
+    [
+     "ibre",
+     1.553,
+     1.933
+    ],
+    [
+     "ortada",
+     1.933,
+     2.504
+    ],
+    [
+     "kaldı.",
+     2.504,
+     2.885
+    ],
+    [
+     "Arkadaşın",
+     3.125,
+     3.674
+    ],
+    [
+     "seni",
+     3.674,
+     3.948
+    ],
+    [
+     "dinledi;",
+     3.948,
+     4.36
+    ],
+    [
+     "ikiniz",
+     4.76,
+     5.175
+    ],
+    [
+     "de",
+     5.175,
+     5.314
+    ],
+    [
+     "çözüm",
+     5.314,
+     5.591
+    ],
+    [
+     "düşünebildiniz.",
+     5.591,
+     6.422
+    ]
+   ]
+  },
+  "v8": {
+   "d": "ses/v8.m4a",
+   "sure": 6.475,
+   "m": "Bağırıp suçlayınca ibre yine sağa kaydı. Arkadaşın savunmaya geçti ve söylemek istediğin şey duyulmadı.",
+   "k": [
+    [
+     "Bağırıp",
+     0.03,
+     0.514
+    ],
+    [
+     "suçlayınca",
+     0.514,
+     1.159
+    ],
+    [
+     "ibre",
+     1.159,
+     1.482
+    ],
+    [
+     "yine",
+     1.482,
+     1.805
+    ],
+    [
+     "sağa",
+     1.805,
+     2.127
+    ],
+    [
+     "kaydı.",
+     2.127,
+     2.45
+    ],
+    [
+     "Arkadaşın",
+     2.85,
+     3.468
+    ],
+    [
+     "savunmaya",
+     3.468,
+     4.087
+    ],
+    [
+     "geçti",
+     4.087,
+     4.396
+    ],
+    [
+     "ve",
+     4.396,
+     4.55
+    ],
+    [
+     "söylemek",
+     4.55,
+     5.014
+    ],
+    [
+     "istediğin",
+     5.014,
+     5.632
+    ],
+    [
+     "şey",
+     5.632,
+     5.787
+    ],
+    [
+     "duyulmadı.",
+     5.787,
+     6.405
     ]
    ]
   }

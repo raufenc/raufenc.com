@@ -1,11 +1,13 @@
 /* İbremetre · Hubbu Fillah — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Tecrid · Hubb-Buğz · Menfaat). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Tecrid · Dostluk · Menfaat). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-hubb",
  "ad": "Hubbu Fillah: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "inanc",
+ "muzik": "inanc",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -25,7 +27,7 @@ DO.dersKaydet(
      "kanca": "Ben herkesin yanındayım.",
      "uclar": {
       "az": "Tecrid",
-      "orta": "Hubb-Buğz",
+      "orta": "Dostluk",
       "fazla": "Menfaat"
      },
      "soru": "Bu cümle ibrenin neresinde?",
@@ -38,14 +40,14 @@ DO.dersKaydet(
      "cumle": "Ben herkesin yanındayım.",
      "uclar": {
       "az": "Tecrid",
-      "orta": "Hubb-Buğz",
+      "orta": "Dostluk",
       "fazla": "Menfaat"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi popüler olmak için herkesin her davranışına “tamam” diyor: sağ uca (Menfaat) yakın. Başka okumada kişi kimseyi dışlamıyor, arkadaşını seviyor ama yanlış bir davranışı onaylamıyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, dostluğu neye göre kurduğumuza bakar. Hubbu Fillah; Allahü teâlâ için sevmek ve sevmemek ölçüsüne göre dostluk kurmaktır. Çocuk diliyle: arkadaşını sev, yanlış davranışı sevme. Kimseyi sevmemek hedef değildir. Bu ibre ölçekten çok yönü gösterir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi popüler gruba girmek için doğru bildiğini bırakıp herkese uyuyor: sağ uca (Menfaat) yakın. Başka okumada kişi kimseyi dışlamıyor, arkadaşını seviyor ama yanlış bir davranışı onaylamıyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, dostluğu neye göre kurduğumuza bakar. Hubbu Fillah; Allahü teâlâ için sevmek ve sevmemek ölçüsüne göre dostluk kurmaktır (Excel’deki orta adı Hubb-Buğz; biz kısaca “Dostluk” dedik). Çocuk diliyle: arkadaşını sev, yanlış davranışı sevme. Sol uç Tecrid, herkesten uzak durup içe çekilmektir; kimseyi sevmemek hedef değildir. Sağ uç Menfaat, popüler gruba girmek için kendi ilkesini bırakmaktır. Bu ibre ölçekten çok yönü gösterir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -58,7 +60,7 @@ DO.dersKaydet(
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
       "az": "Tecrid",
-      "orta": "Hubb-Buğz",
+      "orta": "Dostluk",
       "fazla": "Menfaat"
      },
      "yesil": 0.26,
@@ -67,7 +69,7 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Herkesten uzak durmak neye benziyor?",
        "ad": "Tecrid",
-       "soz": "Kimseyle arkadaş olmak istemiyorum.",
+       "soz": "Bugün kimseyle olmak istemiyorum; köşemde kalayım.",
        "eylem": "otur",
        "zincir": [
         "Yalnızlık hissi büyür.",
@@ -79,15 +81,15 @@ DO.dersKaydet(
          {
           "m": "Herkesten uzak durayım; yalnız kalmak daha rahat.",
           "dogru": true,
-          "not": "Tecrid, herkesi dışlayıp yalnız kalmaktır. Arkadaşı sevmek ile yanlış davranışı sevmemek aynı şey değildir."
+          "not": "Tecrid, herkesten uzak durup yalnız kalmaktır. Böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
           "m": "Arkadaşımı severim; yanlış davranışa katılmam, nazikçe söylerim.",
           "dogru": false,
-          "not": "Bu orta ucun sesi: hubb-buğzun sesi."
+          "not": "Bu orta ucun sesi: dostluğun sesi."
          },
          {
-          "m": "Ne yaparsa onaylayayım; beni çok sevsinler.",
+          "m": "Gruba girmek için doğru bildiğimi bırakayım; ne derlerse evet.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: menfaatin sesi."
          }
@@ -95,7 +97,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Tecrid",
-        "soz": "Kimseyle"
+        "soz": "Bugün"
        },
        "zincirAnahtar": [
         "Yalnızlık",
@@ -104,21 +106,21 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Çıkar için onaylamak neye benziyor?",
+       "soru": "Popüler olmak için ilkeyi bırakmak neye benziyor?",
        "ad": "Menfaat",
-       "soz": "Ne yaparsan yap, bravo; ben seninleyim!",
+       "soz": "Gruptakiler ne derse evet, ben de sizdenim!",
        "eylem": "sevinc",
        "zincir": [
-        "Yanlış davranış fark edilmeden sürüp gider.",
+        "Kendi doğrusundan yavaş yavaş uzaklaşır.",
         "Dostluk, çıkar yüzünden gölgelenir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Ne yaparsa onaylayayım; beni çok sevsinler.",
+          "m": "Gruba girmek için doğru bildiğimi bırakayım; ne derlerse evet.",
           "dogru": true,
-          "not": "Menfaat, dostluğu çıkar ve popülerlik için kurmaktır. Arkadaşını sev, ama yanlış davranışı sevme."
+          "not": "Menfaat, dostluğu çıkar ve popülerlik için kurmaktır: gruba girmek için doğru bildiğini bırakmak. Arkadaşını sev, ama yanlış davranışı sevme."
          },
          {
           "m": "Herkesten uzak durayım; yalnız kalmak daha rahat.",
@@ -128,16 +130,16 @@ DO.dersKaydet(
          {
           "m": "Arkadaşımı severim; yanlış davranışa katılmam, nazikçe söylerim.",
           "dogru": false,
-          "not": "Bu orta ucun sesi: hubb-buğzun sesi."
+          "not": "Bu orta ucun sesi: dostluğun sesi."
          }
         ]
        },
        "anahtar": {
         "ad": "Menfaat",
-        "soz": "Ne"
+        "soz": "Gruptakiler"
        },
        "zincirAnahtar": [
-        "Yanlış",
+        "Kendi",
         "Dostluk,"
        ]
       },
@@ -165,7 +167,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: tecridin sesi."
          },
          {
-          "m": "Ne yaparsa onaylayayım; beni çok sevsinler.",
+          "m": "Gruba girmek için doğru bildiğimi bırakayım; ne derlerse evet.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: menfaatin sesi."
          }
@@ -189,7 +191,7 @@ DO.dersKaydet(
      "baslik": "Sen olsan?",
      "uclar": {
       "az": "Tecrid",
-      "orta": "Hubb-Buğz",
+      "orta": "Dostluk",
       "fazla": "Menfaat"
      },
      "yesil": 0.26,
@@ -202,10 +204,10 @@ DO.dersKaydet(
        "tetik": "Arkadaş grubunda biri, sınıftaki bir arkadaşıyla alay etmeye başladı. Herkes gülüyor.",
        "secenekler": [
         {
-         "m": "Hepsinden uzak dururum; hiçbir grupla oturmam.",
+         "m": "Bugün kimseyle olmak istemem; bir köşeye çekilirim.",
          "zon": "az",
          "sonuc": "Yalnız kalıyorsun; alay edilen arkadaş da yalnız kalıyor.",
-         "not": "İbre sola kaydı: herkesi dışlamak, kimseye yardım etmeyi de engelliyor.",
+         "not": "İbre sola kaydı: içe çekilmek rahat gelebilir ama yardım etmeyi zorlaştırır; güvendiğin biriyle konuşmak iyi gelir.",
          "ses": "s1az"
         },
         {
@@ -228,20 +230,20 @@ DO.dersKaydet(
       {
        "id": "odev",
        "baslik": "Yapılmamış ödev",
-       "tetik": "Sevdiğin bir arkadaşın ödevini yapmadı ve öğretmene yaptım demeni istiyor.",
+       "tetik": "Sevdiğin bir arkadaşın ödevini yapmadı ve öğretmene “yaptı” demeni istiyor.",
        "secenekler": [
         {
-         "m": "Kimseyle uğraşmam, uzak dururum.",
+         "m": "Konuşmak istemiyorum; sessizce çekilirim.",
          "zon": "az",
          "sonuc": "Konu açık kalıyor; arkadaşınla bağın da zayıflıyor.",
-         "not": "İbre sola kaydı: uzak durmak, arkadaşa yardım etme fırsatını kaçırıyor.",
+         "not": "İbre sola kaydı: içe çekilmek, arkadaşa yardım etme fırsatını kaçırıyor.",
          "ses": "s2az"
         },
         {
-         "m": "Tamam, söylerim; bana kızmasın, beni sevsin.",
+         "m": "Tamam, “yaptı” derim; gruptan kopmak istemiyorum.",
          "zon": "fazla",
          "sonuc": "Arkadaşın memnun oluyor ama doğru olmayan bir şeye ortak oluyorsun.",
-         "not": "İbre sağa kaydı: sevilmek için yanlışı onaylamak, dostluğu zayıflatır.",
+         "not": "İbre sağa kaydı: gruba uymak için ilkeyi bırakmak, dostluğu zayıflatır.",
          "ses": "s2fa"
         },
         {
@@ -273,7 +275,7 @@ DO.dersKaydet(
       },
       {
        "id": "orta",
-       "ad": "Kararında · Hubb-Buğz",
+       "ad": "Kararında · Dostluk",
        "aciklama": "Arkadaşı sev, yanlışı sevme",
        "ikon": "muhur",
        "renk": "#17998A"
@@ -281,7 +283,7 @@ DO.dersKaydet(
       {
        "id": "fazla",
        "ad": "Fazla · Menfaat",
-       "aciklama": "Popüler olmak için onaylamak",
+       "aciklama": "Gruba girmek için ilkeyi bırakmak",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -289,15 +291,15 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Oyun davetlerini hep geri çevirir, kimseyle konuşmaz.",
+       "metin": "Oyun davetlerini hep geri çevirir, kimseye açılmaz.",
        "alan": "az",
-       "ipucu": "Herkesi dışlıyor."
+       "ipucu": "İçine kapanıyor."
       },
       {
        "id": "k2",
-       "metin": "Arkadaşı yanlış bir şey yapınca popüler kalmak için “aferin” der.",
+       "metin": "Popüler gruba girmek için doğru bilmediği bir işe de “ben de varım” der.",
        "alan": "fazla",
-       "ipucu": "Yanlışa onay veriyor."
+       "ipucu": "İlkesini bırakıyor."
       },
       {
        "id": "k3",
@@ -313,9 +315,9 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Beğenilmek için herkesin her davranışına “haklısın” der.",
+       "metin": "Gruba kabul edilsin diye grubun yanlış bir sözüne güler, doğru bildiğini saklar.",
        "alan": "fazla",
-       "ipucu": "Çıkar için onaylıyor."
+       "ipucu": "İlkesini saklıyor."
       },
       {
        "id": "k6",
@@ -695,78 +697,83 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.339,
-   "m": "Sol uçta Tecrid. Kimseyle arkadaş olmak istemiyorum. Oyun davetlerini hep geri çevirip köşede oturur.",
+   "sure": 7.88,
+   "m": "Sol uçta Tecrid. Bugün kimseyle olmak istemiyorum; köşemde kalayım. Oyun davetlerini geri çevirip köşeye çekilir.",
    "k": [
     [
      "Sol",
      0.03,
-     0.18
+     0.167
     ],
     [
      "uçta",
-     0.18,
-     0.48
+     0.167,
+     0.441
     ],
     [
      "Tecrid.",
-     0.48,
-     0.78
+     0.441,
+     0.715
     ],
     [
-     "Kimseyle",
-     0.865,
-     1.482
+     "Bugün",
+     0.805,
+     1.276
     ],
     [
-     "arkadaş",
-     1.482,
-     2.1
+     "kimseyle",
+     1.276,
+     1.982
     ],
     [
      "olmak",
-     2.1,
-     2.511
+     1.982,
+     2.453
     ],
     [
-     "istemiyorum.",
-     2.511,
-     3.54
+     "istemiyorum;",
+     2.453,
+     3.63
+    ],
+    [
+     "köşemde",
+     4.025,
+     4.41
+    ],
+    [
+     "kalayım.",
+     4.41,
+     4.795
     ],
     [
      "Oyun",
-     3.9,
-     4.149
+     5.12,
+     5.419
     ],
     [
      "davetlerini",
-     4.149,
-     4.773
-    ],
-    [
-     "hep",
-     4.773,
-     4.898
+     5.419,
+     6.166
     ],
     [
      "geri",
-     4.898,
-     5.147
+     6.166,
+     6.465
     ],
     [
      "çevirip",
-     5.147,
-     5.521
+     6.465,
+     6.913
     ],
     [
-     "köşede",
-     5.521,
-     5.895
+     "köşeye",
+     6.913,
+     7.362
     ],
     [
-     "oturur.",
-     5.895,
-     6.269
+     "çekilir.",
+     7.362,
+     7.81
     ]
    ]
   },
@@ -866,180 +873,165 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 8.815,
-   "m": "Sağ uçta Menfaat. Ne yaparsan yap, bravo; ben seninleyim! Popüler olmak için arkadaşının yanlış bir davranışına da güler ve onaylar.",
+   "sure": 7.708,
+   "m": "Sağ uçta Menfaat. Gruptakiler ne derse evet, ben de sizdenim! Popüler gruba girmek için doğru bildiği ilkeyi bırakır.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.24
+     0.223
     ],
     [
      "uçta",
-     0.24,
-     0.66
+     0.223,
+     0.608
     ],
     [
      "Menfaat.",
-     0.66,
-     1.29
+     0.608,
+     1.185
     ],
     [
-     "Ne",
-     1.38,
-     1.404
+     "Gruptakiler",
+     1.3,
+     2.104
     ],
     [
-     "yaparsan",
-     1.404,
-     1.476
+     "ne",
+     2.104,
+     2.306
     ],
     [
-     "yap,",
-     1.476,
-     1.5
+     "derse",
+     2.306,
+     2.708
     ],
     [
-     "bravo;",
-     2.06,
-     2.865
+     "evet,",
+     2.708,
+     3.11
     ],
     [
      "ben",
-     3.04,
-     3.129
+     3.18,
+     3.188
     ],
     [
-     "seninleyim!",
-     3.129,
-     3.485
+     "de",
+     3.188,
+     3.196
+    ],
+    [
+     "sizdenim!",
+     3.196,
+     3.22
     ],
     [
      "Popüler",
-     3.79,
-     4.341
+     3.385,
+     4.023
     ],
     [
-     "olmak",
-     4.341,
-     4.708
+     "gruba",
+     4.023,
+     4.448
+    ],
+    [
+     "girmek",
+     4.448,
+     4.874
     ],
     [
      "için",
-     4.708,
-     5.075
+     4.874,
+     5.299
     ],
     [
-     "arkadaşının",
-     5.075,
-     5.992
+     "doğru",
+     5.299,
+     5.724
     ],
     [
-     "yanlış",
-     5.992,
-     6.359
+     "bildiği",
+     5.724,
+     6.362
     ],
     [
-     "bir",
-     6.359,
-     6.543
+     "ilkeyi",
+     6.362,
+     7.0
     ],
     [
-     "davranışına",
-     6.543,
-     7.46
-    ],
-    [
-     "da",
-     7.46,
-     7.644
-    ],
-    [
-     "güler",
-     7.644,
-     8.011
-    ],
-    [
-     "ve",
-     8.011,
-     8.194
-    ],
-    [
-     "onaylar.",
-     8.194,
-     8.745
+     "bırakır.",
+     7.0,
+     7.638
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 5.93,
-   "m": "Sonra ne olur? Yanlış davranış fark edilmeden sürüp gider. Dostluk, çıkar yüzünden gölgelenir.",
+   "sure": 6.417,
+   "m": "Sonra ne olur? Kendi doğrusundan yavaş yavaş uzaklaşır. Dostluk, çıkar yüzünden gölgelenir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.268
+     0.414
     ],
     [
      "ne",
-     0.268,
-     0.387
+     0.414,
+     0.606
     ],
     [
      "olur?",
-     0.387,
-     0.625
+     0.606,
+     0.99
     ],
     [
-     "Yanlış",
-     1.185,
-     1.497
+     "Kendi",
+     1.15,
+     1.539
     ],
     [
-     "davranış",
-     1.497,
-     1.965
+     "doğrusundan",
+     1.539,
+     2.316
     ],
     [
-     "fark",
-     1.965,
-     2.121
+     "yavaş",
+     2.316,
+     2.704
     ],
     [
-     "edilmeden",
-     2.121,
-     2.746
+     "yavaş",
+     2.704,
+     3.093
     ],
     [
-     "sürüp",
-     2.746,
-     3.058
-    ],
-    [
-     "gider.",
-     3.058,
-     3.37
+     "uzaklaşır.",
+     3.093,
+     3.87
     ],
     [
      "Dostluk,",
-     3.715,
-     4.17
+     4.005,
+     4.395
     ],
     [
      "çıkar",
-     4.41,
-     4.732
+     4.515,
+     4.922
     ],
     [
      "yüzünden",
-     4.732,
-     5.215
+     4.922,
+     5.533
     ],
     [
      "gölgelenir.",
-     5.215,
-     5.86
+     5.533,
+     6.347
     ]
    ]
   },
@@ -1486,68 +1478,68 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.167,
-   "m": "Sevdiğin bir arkadaşın ödevini yapmadı ve öğretmene yaptım demeni istiyor. Ne yaparsın?",
+   "sure": 5.054,
+   "m": "Sevdiğin bir arkadaşın ödevini yapmadı ve öğretmene yaptı demeni istiyor. Ne yaparsın?",
    "k": [
     [
      "Sevdiğin",
      0.03,
-     0.471
+     0.468
     ],
     [
      "bir",
-     0.471,
-     0.618
+     0.468,
+     0.614
     ],
     [
      "arkadaşın",
-     0.618,
-     1.206
+     0.614,
+     1.197
     ],
     [
      "ödevini",
-     1.206,
-     1.794
+     1.197,
+     1.781
     ],
     [
      "yapmadı",
-     1.794,
-     2.234
+     1.781,
+     2.218
     ],
     [
      "ve",
-     2.234,
-     2.381
+     2.218,
+     2.364
     ],
     [
      "öğretmene",
-     2.381,
-     2.969
+     2.364,
+     2.948
     ],
     [
-     "yaptım",
-     2.969,
-     3.263
+     "yaptı",
+     2.948,
+     3.24
     ],
     [
      "demeni",
-     3.263,
-     3.704
+     3.24,
+     3.677
     ],
     [
      "istiyor.",
-     3.704,
-     4.145
+     3.677,
+     4.115
     ],
     [
      "Ne",
-     4.515,
-     4.661
+     4.46,
+     4.591
     ],
     [
      "yaparsın?",
-     4.661,
-     5.097
+     4.591,
+     4.984
     ]
    ]
   },
@@ -1885,153 +1877,158 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 12.368,
-   "m": "Bu cümle bilerek çift anlamlı. Popüler olmak için herkesin her davranışına evet diyen biri söylüyorsa sağ uca yakın. Arkadaşını seven ama yanlış davranışı onaylamayan biri söylüyorsa orta uca yakın.",
+   "sure": 12.096,
+   "m": "Bu cümle bilerek çift anlamlı. Popüler gruba girmek için doğru bildiğini bırakıp herkese uyan biri söylüyorsa sağ uca yakın. Arkadaşını seven ama yanlış davranışı onaylamayan biri söylüyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.18
+     0.177
     ],
     [
      "cümle",
-     0.18,
-     0.48
+     0.177,
+     0.472
     ],
     [
      "bilerek",
-     0.48,
-     0.93
+     0.472,
+     0.915
     ],
     [
      "çift",
-     0.93,
-     1.08
+     0.915,
+     1.062
     ],
     [
      "anlamlı.",
-     1.08,
-     1.53
+     1.062,
+     1.505
     ],
     [
      "Popüler",
-     2.255,
-     2.711
+     1.96,
+     2.409
     ],
     [
-     "olmak",
-     2.711,
-     3.015
+     "gruba",
+     2.409,
+     2.709
+    ],
+    [
+     "girmek",
+     2.709,
+     3.008
     ],
     [
      "için",
-     3.015,
-     3.32
+     3.008,
+     3.307
     ],
     [
-     "herkesin",
-     3.32,
-     3.776
+     "doğru",
+     3.307,
+     3.607
     ],
     [
-     "her",
-     3.776,
-     3.928
+     "bildiğini",
+     3.607,
+     4.206
     ],
     [
-     "davranışına",
-     3.928,
-     4.689
+     "bırakıp",
+     4.206,
+     4.655
     ],
     [
-     "evet",
-     4.689,
-     4.993
+     "herkese",
+     4.655,
+     5.104
     ],
     [
-     "diyen",
-     4.993,
-     5.297
+     "uyan",
+     5.104,
+     5.403
     ],
     [
      "biri",
-     5.297,
-     5.601
+     5.403,
+     5.703
     ],
     [
      "söylüyorsa",
-     5.601,
-     6.21
+     5.703,
+     6.301
     ],
     [
      "sağ",
-     6.21,
-     6.362
+     6.301,
+     6.451
     ],
     [
      "uca",
-     6.362,
-     6.666
+     6.451,
+     6.751
     ],
     [
      "yakın.",
-     6.666,
-     6.97
+     6.751,
+     7.05
     ],
     [
      "Arkadaşını",
-     7.575,
-     8.313
+     7.65,
+     8.334
     ],
     [
      "seven",
-     8.313,
-     8.608
+     8.334,
+     8.607
     ],
     [
      "ama",
-     8.608,
-     8.903
+     8.607,
+     8.881
     ],
     [
      "yanlış",
-     8.903,
-     9.198
+     8.881,
+     9.154
     ],
     [
      "davranışı",
-     9.198,
-     9.789
+     9.154,
+     9.701
     ],
     [
      "onaylamayan",
-     9.789,
-     10.527
+     9.701,
+     10.385
     ],
     [
      "biri",
-     10.527,
-     10.822
+     10.385,
+     10.659
     ],
     [
      "söylüyorsa",
-     10.822,
-     11.412
+     10.659,
+     11.206
     ],
     [
      "orta",
-     11.412,
-     11.707
+     11.206,
+     11.479
     ],
     [
      "uca",
-     11.707,
-     12.002
+     11.479,
+     11.753
     ],
     [
      "yakın.",
-     12.002,
-     12.298
+     11.753,
+     12.026
     ]
    ]
   },

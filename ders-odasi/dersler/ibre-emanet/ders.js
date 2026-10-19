@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Emanet: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi bırakılan şeyin kendisine güvenildiği için verildiğini biliyor ve onu korumayı üstleniyor: orta uca yakın. Başka okumada bırakılanı kendi malı sayıp istediği gibi kullanıyor: sağ uca (Hıyânet) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an bırakılana nasıl davrandığımıza bakar. Emanet; bırakılanı özenle korumak, sahibine zamanında geri vermek ve sözünde durmaktır. Hata yapmak ile ihanet aynı şey değildir: kazayla zarar vermek hatadır; bilerek gizlemek ya da izinsiz kullanmak güveni yıkar. Bu yüzden hata olduğunda hemen söylemek emanete sadakattir.",
+      "İbre cümleye değil, o an bırakılana nasıl davrandığımıza bakar. Emanet; bırakılanı özenle korumak, sahibine zamanında geri vermek ve sözünde durmaktır. Hata yapmak ile ihanet aynı şey değildir: kazayla zarar vermek hatadır; bilerek gizlemek ya da izinsiz kullanmak güveni yıkar. Bu yüzden hata olduğunda hemen söylemek emanete sadakattir. Bu ibrede sol uç (Safdillik), bırakılanı kimin istediğine bakmadan vermektir; sağ uç bırakılanı kendi malı gibi kullanmaktır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -65,9 +67,9 @@ DO.dersKaydet(
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Her söze hemen kanmak neye benziyor?",
+       "soru": "Emaneti isteyen herkese vermek neye benziyor?",
        "ad": "Safdillik",
-       "soz": "Kim isterse versin, kim bilir iyi niyetlidir.",
+       "soz": "Kim isterse veririm, belki iyi niyetlidir.",
        "eylem": "saskin",
        "zincir": [
         "Sahibi emanetini geri bulamaz.",
@@ -82,12 +84,12 @@ DO.dersKaydet(
           "not": "Safdillik, her söze hemen inanıp kolay aldanmaktır. Emanet, kime verileceğini düşünmeyi de ister."
          },
          {
-          "m": "Bu bana emanet; sahibine vereceğim.",
+          "m": "Bu benim değil; özenle saklayıp zamanında geri veririm.",
           "dogru": false,
           "not": "Bu orta ucun sesi: emanetin sesi."
          },
          {
-          "m": "Bende duruyor; ben kullanırım, kimse bilmez.",
+          "m": "Sahibi görmüyor; ben kullanırsam kimse anlamaz.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: hıyânetin sesi."
          }
@@ -109,14 +111,14 @@ DO.dersKaydet(
        "soz": "Bende duruyor, kullanırım, kimse bilmez.",
        "eylem": "isaret",
        "zincir": [
-        "Sahibi güvenini boşa çıkmış bulur.",
-        "Bir daha ona hiçbir şey emanet edilmez."
+        "Sahibi güveninin boşa çıktığını görür.",
+        "Güveni yeniden kazanmak zaman alır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bende duruyor; ben kullanırım, kimse bilmez.",
+          "m": "Sahibi görmüyor; ben kullanırsam kimse anlamaz.",
           "dogru": true,
           "not": "Hıyânet, emanete ihanet edip güveni yıkmaktır. Kazayla zarar vermek başkadır; bilerek gizlemek ihanettir."
          },
@@ -126,7 +128,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: safdilliğin sesi."
          },
          {
-          "m": "Bu bana emanet; sahibine vereceğim.",
+          "m": "Bu benim değil; özenle saklayıp zamanında geri veririm.",
           "dogru": false,
           "not": "Bu orta ucun sesi: emanetin sesi."
          }
@@ -138,7 +140,7 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Sahibi",
-        "Bir"
+        "Güveni"
        ]
       },
       {
@@ -155,7 +157,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bu bana emanet; sahibine vereceğim.",
+          "m": "Bu benim değil; özenle saklayıp zamanında geri veririm.",
           "dogru": true,
           "not": "Emanet, bırakılanı özenle korumak ve sözünde durmaktır. Kime vereceğini düşünmek de buna dahildir."
          },
@@ -165,7 +167,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: safdilliğin sesi."
          },
          {
-          "m": "Bende duruyor; ben kullanırım, kimse bilmez.",
+          "m": "Sahibi görmüyor; ben kullanırsam kimse anlamaz.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: hıyânetin sesi."
          }
@@ -199,7 +201,7 @@ DO.dersKaydet(
       {
        "id": "defter",
        "baslik": "Ödünç defter",
-       "tetik": "Arkadaşın sana defterini bıraktı ve yarın isterim, dedi. Teneffüste biri gelip bu defteri bana ver, diyor.",
+       "tetik": "Arkadaşın sana defterini bıraktı ve “yarın isterim,” dedi. Teneffüste biri gelip “bu defteri bana ver,” diyor.",
        "secenekler": [
         {
          "m": "Tamam, al; belki doğru söylüyordur.",
@@ -227,27 +229,27 @@ DO.dersKaydet(
       },
       {
        "id": "kirik",
-       "baslik": "Kırılan kalem",
-       "tetik": "Ödünç aldığın kalem kazayla kırıldı. Yanındaki arkadaşın önemli değil, söyleme, diyor.",
+       "baslik": "Kırılan şemsiye",
+       "tetik": "Ödünç aldığın şemsiye rüzgârda kazayla kırıldı. Yanındaki arkadaşın “önemli değil, söyleme,” diyor.",
        "secenekler": [
         {
-         "m": "Önemli değilmiş, ona inanıp söylemem.",
+         "m": "Madem önemli değil, ben de unuturum.",
          "zon": "az",
-         "sonuc": "Kalem sorulunca ne diyeceğini bilemiyorsun; güven zedeleniyor.",
+         "sonuc": "Şemsiye sorulunca ne diyeceğini bilemiyorsun; güven zedeleniyor.",
          "not": "İbre sola kaydı: her söze inanmak, sorumluluğu unutturuyor.",
          "ses": "s2az"
         },
         {
-         "m": "Kırık kalemi saklarım; kimse bilmeyecek.",
+         "m": "Kırık şemsiyeyi saklarım; kimse bilmeyecek.",
          "zon": "fazla",
-         "sonuc": "Sakladığın her gün içinde yük oluyor; sonunda güveni yıkıyor.",
+         "sonuc": "Sakladıkça içinde yük oluyor; sahibi öğrendiğinde güven azalıyor.",
          "not": "İbre sağa kaydı: kazayı gizlemek hatayı ihanete çeviriyor.",
          "ses": "s2fa"
         },
         {
          "m": "Kazayla kırıldı; hemen söyleyip yenisini almayı öneririm.",
          "zon": "orta",
-         "sonuc": "Arkadaşın üzülüyor ama dürüstlüğünü görüp teşekkür ediyor.",
+         "sonuc": "Arkadaşın biraz üzülüyor ama dürüstlüğünü görüyor; güven korunuyor.",
          "not": "İbre ortada: kaza ile ihanet farklıdır; hemen söylemek güveni korur.",
          "ses": "s2or"
         }
@@ -700,88 +702,83 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.369,
-   "m": "Sol uçta Safdillik. Kim isterse versin, kim bilir iyi niyetlidir. Arkadaşının bıraktığı defteri isteyen birine uzatır.",
+   "sure": 6.993,
+   "m": "Sol uçta Safdillik. Kim isterse veririm, belki iyi niyetlidir. Arkadaşının bıraktığı defteri isteyen birine uzatır.",
    "k": [
     [
      "Sol",
      0.03,
-     0.177
+     0.233
     ],
     [
      "uçta",
-     0.177,
-     0.47
+     0.233,
+     0.638
     ],
     [
      "Safdillik.",
-     0.47,
-     0.91
+     0.638,
+     1.245
     ],
     [
      "Kim",
-     1.145,
-     1.302
+     1.32,
+     1.323
     ],
     [
      "isterse",
-     1.302,
-     1.772
+     1.323,
+     1.331
     ],
     [
-     "versin,",
-     1.772,
-     2.085
+     "veririm,",
+     1.331,
+     1.34
     ],
     [
-     "kim",
-     2.64,
-     2.76
-    ],
-    [
-     "bilir",
-     2.76,
-     3.0
+     "belki",
+     1.81,
+     2.039
     ],
     [
      "iyi",
-     3.0,
-     3.24
+     2.039,
+     2.268
     ],
     [
      "niyetlidir.",
-     3.24,
-     3.72
+     2.268,
+     2.725
     ],
     [
      "Arkadaşının",
-     3.94,
-     4.978
+     2.875,
+     3.839
     ],
     [
      "bıraktığı",
-     4.978,
-     5.808
+     3.839,
+     4.61
     ],
     [
      "defteri",
-     5.808,
-     6.431
+     4.61,
+     5.188
     ],
     [
      "isteyen",
-     6.431,
-     7.054
+     5.188,
+     5.766
     ],
     [
      "birine",
-     7.054,
-     7.677
+     5.766,
+     6.344
     ],
     [
      "uzatır.",
-     7.677,
-     8.299
+     6.344,
+     6.923
     ]
    ]
   },
@@ -973,83 +970,73 @@ DO.dersKaydet(
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.559,
-   "m": "Sonra ne olur? Sahibi güvenini boşa çıkmış bulur. Bir daha ona hiçbir şey emanet edilmez.",
+   "sure": 6.158,
+   "m": "Sonra ne olur? Sahibi güveninin boşa çıktığını görür. Güveni yeniden kazanmak zaman alır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.436
+     0.29
     ],
     [
      "ne",
-     0.436,
-     0.639
+     0.29,
+     0.42
     ],
     [
      "olur?",
-     0.639,
-     1.045
+     0.42,
+     0.68
     ],
     [
      "Sahibi",
-     1.14,
-     1.588
+     1.04,
+     1.514
     ],
     [
-     "güvenini",
-     1.588,
-     2.185
+     "güveninin",
+     1.514,
+     2.146
     ],
     [
      "boşa",
-     2.185,
-     2.483
+     2.146,
+     2.462
     ],
     [
-     "çıkmış",
-     2.483,
-     2.782
+     "çıktığını",
+     2.462,
+     3.094
     ],
     [
-     "bulur.",
-     2.782,
-     3.08
+     "görür.",
+     3.094,
+     3.41
     ],
     [
-     "Bir",
-     3.55,
-     3.76
+     "Güveni",
+     3.835,
+     4.355
     ],
     [
-     "daha",
-     3.76,
-     4.18
+     "yeniden",
+     4.355,
+     4.875
     ],
     [
-     "ona",
-     4.18,
-     4.6
+     "kazanmak",
+     4.875,
+     5.395
     ],
     [
-     "hiçbir",
-     4.6,
-     5.02
+     "zaman",
+     5.395,
+     5.742
     ],
     [
-     "şey",
-     5.02,
-     5.23
-    ],
-    [
-     "emanet",
-     5.23,
-     5.86
-    ],
-    [
-     "edilmez.",
-     5.86,
-     6.489
+     "alır.",
+     5.742,
+     6.088
     ]
    ]
   },
@@ -1268,98 +1255,98 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 6.553,
+   "sure": 6.865,
    "m": "Arkadaşın sana defterini bıraktı ve yarın isterim, dedi. Teneffüste biri gelip bu defteri bana ver, diyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.588
+     0.578
     ],
     [
      "sana",
-     0.588,
-     0.867
+     0.578,
+     0.853
     ],
     [
      "defterini",
-     0.867,
-     1.425
+     0.853,
+     1.401
     ],
     [
      "bıraktı",
-     1.425,
-     1.843
+     1.401,
+     1.812
     ],
     [
      "ve",
-     1.843,
-     1.983
+     1.812,
+     1.949
     ],
     [
      "yarın",
-     1.983,
-     2.262
+     1.949,
+     2.224
     ],
     [
      "isterim,",
-     2.262,
-     2.68
+     2.224,
+     2.635
     ],
     [
      "dedi.",
-     2.98,
-     3.205
+     3.025,
+     3.235
     ],
     [
      "Teneffüste",
-     3.445,
-     4.057
+     3.92,
+     4.464
     ],
     [
      "biri",
-     4.057,
-     4.363
+     4.464,
+     4.736
     ],
     [
      "gelip",
-     4.363,
-     4.669
+     4.736,
+     5.008
     ],
     [
      "bu",
-     4.669,
-     4.822
+     5.008,
+     5.144
     ],
     [
      "defteri",
-     4.822,
-     5.281
+     5.144,
+     5.552
     ],
     [
      "bana",
-     5.281,
-     5.587
+     5.552,
+     5.824
     ],
     [
      "ver,",
-     5.587,
-     5.74
+     5.824,
+     5.96
     ],
     [
      "diyor.",
-     5.945,
-     6.124
+     6.225,
+     6.415
     ],
     [
      "Ne",
-     6.124,
-     6.214
+     6.415,
+     6.51
     ],
     [
      "yaparsın?",
-     6.214,
-     6.483
+     6.51,
+     6.795
     ]
    ]
   },
@@ -1501,209 +1488,214 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 7.195,
-   "m": "Ödünç aldığın kalem kazayla kırıldı. Yanındaki arkadaşın önemli değil, söyleme, diyor. Ne yaparsın?",
+   "sure": 6.074,
+   "m": "Ödünç aldığın şemsiye rüzgârda kazayla kırıldı. Yanındaki arkadaşın önemli değil, söyleme, diyor. Ne yaparsın?",
    "k": [
     [
      "Ödünç",
      0.03,
-     0.302
+     0.309
     ],
     [
      "aldığın",
-     0.302,
-     0.711
+     0.309,
+     0.727
     ],
     [
-     "kalem",
-     0.711,
-     0.983
+     "şemsiye",
+     0.727,
+     1.145
+    ],
+    [
+     "rüzgârda",
+     1.145,
+     1.564
     ],
     [
      "kazayla",
-     0.983,
-     1.392
+     1.564,
+     1.982
     ],
     [
      "kırıldı.",
-     1.392,
-     1.8
+     1.982,
+     2.4
     ],
     [
      "Yanındaki",
-     2.4,
-     3.168
+     2.76,
+     3.475
     ],
     [
      "arkadaşın",
-     3.168,
-     3.935
+     3.475,
+     4.191
     ],
     [
      "önemli",
-     3.935,
-     4.511
+     4.191,
+     4.727
     ],
     [
      "değil,",
-     4.511,
-     4.895
+     4.727,
+     5.085
     ],
     [
      "söyleme,",
-     5.685,
-     6.18
+     5.55,
+     5.701
     ],
     [
      "diyor.",
-     7.165,
-     7.198
+     5.701,
+     5.802
     ],
     [
      "Ne",
-     7.198,
-     7.215
+     5.802,
+     5.853
     ],
     [
      "yaparsın?",
-     7.215,
-     7.265
+     5.853,
+     6.004
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.199,
-   "m": "Kalem sorulunca ne diyeceğini bilemiyorsun; güven zedeleniyor.",
+   "sure": 3.498,
+   "m": "Şemsiye sorulunca ne diyeceğini bilemiyorsun; güven zedeleniyor.",
    "k": [
     [
-     "Kalem",
+     "Şemsiye",
      0.03,
-     0.251
+     0.365
     ],
     [
      "sorulunca",
-     0.251,
-     0.694
+     0.365,
+     0.812
     ],
     [
      "ne",
-     0.694,
-     0.804
+     0.812,
+     0.923
     ],
     [
      "diyeceğini",
-     0.804,
-     1.357
+     0.923,
+     1.482
     ],
     [
      "bilemiyorsun;",
-     1.357,
-     1.91
+     1.482,
+     2.04
     ],
     [
      "güven",
-     2.235,
-     2.49
+     2.425,
+     2.711
     ],
     [
      "zedeleniyor.",
-     2.49,
-     3.129
+     2.711,
+     3.428
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 6.683,
-   "m": "Sakladığın her gün içinde yük oluyor; sonunda güveni yıkıyor.",
+   "sure": 4.259,
+   "m": "Sakladıkça içinde yük oluyor; sahibi öğrendiğinde güven azalıyor.",
    "k": [
     [
-     "Sakladığın",
+     "Sakladıkça",
      0.03,
-     1.032
-    ],
-    [
-     "her",
-     1.032,
-     1.282
-    ],
-    [
-     "gün",
-     1.282,
-     1.532
+     0.661
     ],
     [
      "içinde",
-     1.532,
-     2.283
+     0.661,
+     1.134
     ],
     [
      "yük",
-     2.283,
-     2.534
+     1.134,
+     1.292
     ],
     [
      "oluyor;",
-     2.534,
-     3.285
+     1.292,
+     1.765
     ],
     [
-     "sonunda",
-     3.785,
-     4.728
+     "sahibi",
+     2.075,
+     2.528
     ],
     [
-     "güveni",
-     4.728,
-     5.67
+     "öğrendiğinde",
+     2.528,
+     3.283
     ],
     [
-     "yıkıyor.",
-     5.67,
-     6.613
+     "güven",
+     3.283,
+     3.585
+    ],
+    [
+     "azalıyor.",
+     3.585,
+     4.189
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.63,
-   "m": "Arkadaşın üzülüyor ama dürüstlüğünü görüp teşekkür ediyor.",
+   "sure": 4.272,
+   "m": "Arkadaşın biraz üzülüyor ama dürüstlüğünü görüyor; güven korunuyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.644
+     0.533
+    ],
+    [
+     "biraz",
+     0.533,
+     0.784
     ],
     [
      "üzülüyor",
-     0.644,
-     1.258
+     0.784,
+     1.288
     ],
     [
      "ama",
-     1.258,
-     1.565
+     1.288,
+     1.539
     ],
     [
      "dürüstlüğünü",
-     1.565,
-     2.332
+     1.539,
+     2.168
     ],
     [
-     "görüp",
-     2.332,
-     2.639
+     "görüyor;",
+     2.168,
+     2.545
     ],
     [
-     "teşekkür",
-     2.639,
-     3.1
+     "güven",
+     2.905,
+     3.337
     ],
     [
-     "ediyor.",
-     3.1,
-     3.56
+     "korunuyor.",
+     3.337,
+     4.202
     ]
    ]
   },

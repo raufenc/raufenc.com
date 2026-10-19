@@ -1,11 +1,13 @@
 /* İbremetre · Af — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Saflık · Af · Özrü Reddi). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Saflık · Af · Cezalandırma). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-af",
  "ad": "Af: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -26,7 +28,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Saflık",
       "orta": "Af",
-      "fazla": "Özrü Reddi"
+      "fazla": "Cezalandırma"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -39,13 +41,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Saflık",
       "orta": "Af",
-      "fazla": "Özrü Reddi"
+      "fazla": "Cezalandırma"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi “affettim” dese de içinde kin saklıyor: sağ uca (Özrü Reddi) yakın. Başka okumada affediyor ama aynı şeyin tekrar olmaması için dikkatli davranacağını söylüyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, özür dileyene nasıl karşılık verdiğimize bakar. Af; özür dileyeni adaletli biçimde bağışlamaktır. Bu ibre ölçekten çok yönü gösterir: bir uçta herkese hemen inanıp sınır koymamak (Saflık), öbür uçta pişman olana bile kin tutmak vardır. Sınır koymak, affetmemek demek değildir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi “affettim” dese de özrü gerçekten kabul etmiyor, bunu özür dileyene sürekli hatırlatıp ona yük bindiriyor: sağ uca (Cezalandırma) yakın. Başka okumada affediyor ama aynı şeyin tekrar olmaması için dikkatli davranacağını söylüyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, özür dileyene nasıl karşılık verdiğimize bakar. Af; özür dileyeni adaletli biçimde bağışlamaktır. Bu ibre ölçekten çok yönü gösterir: bir uçta herkese hemen inanıp sınır koymamak (Saflık), öbür uçta özrü kabul etmeyip özür dileyene ceza vermek (kaynak listede Özrü Reddi) vardır. Sınır koymak, affetmemek demek değildir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -59,7 +61,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Saflık",
       "orta": "Af",
-      "fazla": "Özrü Reddi"
+      "fazla": "Cezalandırma"
      },
      "yesil": 0.26,
      "kapilar": [
@@ -82,14 +84,14 @@ DO.dersKaydet(
           "not": "Saflık, sınır koymadan hemen inanmaktır. Affetmek güzeldir; ama aynı hata tekrar ederse nazik bir sınır koymak da gerekir."
          },
          {
-          "m": "Seni affediyorum; ama bir daha olmasın diye bir kural koyalım.",
+          "m": "Özrünü kabul ediyorum; bir daha olmasın diye bir kural koyalım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: affın sesi."
          },
          {
-          "m": "Pişman olsa da affetmem, unutmam.",
+          "m": "Özür yetmez; bir de ceza çekmeli ki bir daha yapmasın.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: özrü reddetmenin sesi."
+          "not": "Bu sağ ucun sesi: cezalandırmanın sesi."
          }
         ]
        },
@@ -104,21 +106,21 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Özrü kabul etmemek neye benziyor?",
-       "ad": "Kin",
-       "soz": "Pişman olsan da seni asla affetmem!",
+       "soru": "Özür dileyene ceza vermek neye benziyor?",
+       "ad": "Cezalandırma",
+       "soz": "Özür yetmez, önce bunun bedelini ödeyeceksin!",
        "eylem": "hayir",
        "zincir": [
-        "Arkadaşı üzülür ve barışma isteğini kaybeder.",
-        "Kin büyür ve onu taşıyanı da yorar."
+        "Arkadaşı özrünün işe yaramadığını düşünür.",
+        "Dostluk bir hesaplaşmaya döner ve ikisi de yorulur."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Pişman olsa da affetmem, unutmam.",
+          "m": "Özür yetmez; bir de ceza çekmeli ki bir daha yapmasın.",
           "dogru": true,
-          "not": "Özrü reddetmek, pişman olana bile kin tutmaktır. Kin taşıyan kişi en çok kendini yorar."
+          "not": "Cezalandırma, özrü kabul etmeyip özür dileyene ceza vermektir. Ceza barışı uzaklaştırır; fırsat vermek ikinizi de rahatlatır."
          },
          {
           "m": "Bir daha yapmaz dedi; yine inanırım.",
@@ -126,36 +128,36 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
          {
-          "m": "Seni affediyorum; ama bir daha olmasın diye bir kural koyalım.",
+          "m": "Özrünü kabul ediyorum; bir daha olmasın diye bir kural koyalım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: affın sesi."
          }
         ]
        },
        "anahtar": {
-        "ad": "Kin",
-        "soz": "Pişman"
+        "ad": "Cezalandırma",
+        "soz": "Özür"
        },
        "zincirAnahtar": [
         "Arkadaşı",
-        "Kin"
+        "Dostluk"
        ]
       },
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Af",
-       "soz": "Özrünü kabul ediyorum; ama bir kural koyalım.",
+       "soz": "Özrünü kabul ediyorum. Ayrıca bir kural koyalım.",
        "eylem": "konus",
        "zincir": [
         "Arkadaşı rahatlar ve sözünü tutmaya çalışır.",
-        "Dostlukları kırılmadan güçlenir."
+        "Dostluk kırılmadan güçlenebilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Seni affediyorum; ama bir daha olmasın diye bir kural koyalım.",
+          "m": "Özrünü kabul ediyorum; bir daha olmasın diye bir kural koyalım.",
           "dogru": true,
           "not": "Af, özür dileyeni adaletli biçimde bağışlamaktır. Sınır koymak affetmemek değildir."
          },
@@ -165,9 +167,9 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
          {
-          "m": "Pişman olsa da affetmem, unutmam.",
+          "m": "Özür yetmez; bir de ceza çekmeli ki bir daha yapmasın.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: özrü reddetmenin sesi."
+          "not": "Bu sağ ucun sesi: cezalandırmanın sesi."
          }
         ]
        },
@@ -177,7 +179,7 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Arkadaşı",
-        "Dostlukları"
+        "Dostluk"
        ]
       }
      ]
@@ -190,16 +192,16 @@ DO.dersKaydet(
      "uclar": {
       "az": "Saflık",
       "orta": "Af",
-      "fazla": "Özrü Reddi"
+      "fazla": "Cezalandırma"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "kalem",
-       "baslik": "Kırılan kalem",
-       "tetik": "Arkadaşın kalemini izinsiz alıp kırdı ve özür diledi. Bu, geçen ay da olmuştu.",
+       "id": "defter",
+       "baslik": "Lekelenen defter",
+       "tetik": "Arkadaşın defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu.",
        "secenekler": [
         {
          "m": "Bir daha yapmam diyor ya, hiç düşünmeden inanırım.",
@@ -209,14 +211,14 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Özür dilesen de affetmem; hep hatırlarım.",
+         "m": "Özür yetmez; bunun bedelini ödemeden barışmam.",
          "zon": "fazla",
-         "sonuc": "Arkadaşın seninle konuşmaktan çekiniyor; dostluk soğuyor.",
-         "not": "İbre sağa kaydı: pişman olanı bile bağışlamamak dostluğu soğutur.",
+         "sonuc": "Arkadaşın özrünün işe yaramadığını düşünüyor; aranız gerginleşiyor.",
+         "not": "İbre sağa kaydı: özrü kabul etmeyip ceza vermek dostluğu hesaplaşmaya çevirir.",
          "ses": "s1fa"
         },
         {
-         "m": "Özrünü kabul ediyorum; bundan sonra sorup alalım.",
+         "m": "Özrünü kabul ediyorum; bundan sonra önce sorup alırız.",
          "zon": "orta",
          "sonuc": "Arkadaşın rahatlıyor; ikiniz de yeni kuralı kabul ediyorsunuz.",
          "not": "İbre ortada: bağışladın ve nazik bir sınır koydun.",
@@ -238,10 +240,10 @@ DO.dersKaydet(
          "ses": "s2az"
         },
         {
-         "m": "Özür işe yaramaz; seninle bir daha oynamam.",
+         "m": "Özür yetmez; bir hafta seni oyuna almayacağım.",
          "zon": "fazla",
-         "sonuc": "Özür dileyen kişi mahcup kalıyor; dostluk bitiyor.",
-         "not": "İbre sağa kaydı: içten özrü kabul etmemek barışmanın yolunu kapatıyor.",
+         "sonuc": "Özür dileyen kişi mahcup kalıyor; barışmak yerine hesaplaşma başlıyor.",
+         "not": "İbre sağa kaydı: içten özrü cezayla karşılamak barışmanın yolunu uzatıyor.",
          "ses": "s2fa"
         },
         {
@@ -280,8 +282,8 @@ DO.dersKaydet(
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Özrü Reddi",
-       "aciklama": "Özrü kabul etmemek",
+       "ad": "Fazla · Cezalandırma",
+       "aciklama": "Özür dileyene ceza vermek",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -295,9 +297,9 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Arkadaşı içtenlikle özür diler; “asla affetmem” der.",
+       "metin": "Arkadaşı içtenlikle özür diler; o, tekrar tekrar özür dilemesini ister.",
        "alan": "fazla",
-       "ipucu": "Pişman olanı bile bağışlamıyor."
+       "ipucu": "Özrü yeterli bulmuyor."
       },
       {
        "id": "k3",
@@ -313,13 +315,13 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Özür kabul edildikten sonra bile eski hatayı sürekli hatırlatır.",
+       "metin": "Özür dileyen arkadaşına “bedelini ödemeden barışmam” der.",
        "alan": "fazla",
-       "ipucu": "Kinini sürdürüyor."
+       "ipucu": "Özrü cezaya bağlıyor."
       },
       {
        "id": "k6",
-       "metin": "“Seni affettim, ama bir dahaki sefere önce bana sor” der.",
+       "metin": "“Seni affettim; bir dahaki sefere önce bana sor” der.",
        "alan": "orta",
        "ipucu": "Bağışlıyor ve sınır koyuyor."
       }
@@ -336,13 +338,13 @@ DO.dersKaydet(
         "Biri bana özür dileyince",
         "Aynı hata tekrar edilince",
         "Bir arkadaşım beni kırınca",
-        "İçimde kin büyürken"
+        "Özür dileyene kızgınken"
        ]
       },
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Özür dileyene bir fırsat vereceğim",
+        "Özür dileyene ceza vermek yerine fırsat vereceğim",
         "Gerekirse nazikçe “bir daha olmasın” diyeceğim",
         "Çok üzüldüysem güvendiğim bir yetişkinle konuşacağım"
        ]
@@ -901,8 +903,8 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 8.149,
-   "m": "Sağ uçta Kin. Pişman olsan da seni asla affetmem! Arkadaşı içtenlikle özür dilese de yüzüne bile bakmaz.",
+   "sure": 9.973,
+   "m": "Sağ uçta Cezalandırma. Özür yetmez, önce bunun bedelini ödeyeceksin! Arkadaşı içtenlikle özür dilese de ona ceza verip tekrar özür dilettirir.",
    "k": [
     [
      "Sağ",
@@ -915,166 +917,181 @@ DO.dersKaydet(
      0.551
     ],
     [
-     "Kin.",
+     "Cezalandırma.",
      0.551,
-     0.725
+     1.42
     ],
     [
-     "Pişman",
-     0.825,
-     1.162
+     "Özür",
+     1.855,
+     2.23
     ],
     [
-     "olsan",
-     1.162,
-     1.498
+     "yetmez,",
+     2.23,
+     2.605
     ],
     [
-     "da",
-     1.498,
-     1.667
+     "önce",
+     2.845,
+     3.109
     ],
     [
-     "seni",
-     1.667,
-     2.003
+     "bunun",
+     3.109,
+     3.373
     ],
     [
-     "asla",
-     2.003,
-     2.34
+     "bedelini",
+     3.373,
+     3.9
     ],
     [
-     "affetmem!",
-     2.34,
-     2.845
+     "ödeyeceksin!",
+     3.9,
+     4.56
     ],
     [
      "Arkadaşı",
-     2.96,
-     3.935
+     5.345,
+     5.996
     ],
     [
      "içtenlikle",
-     3.935,
-     4.91
+     5.996,
+     6.647
     ],
     [
      "özür",
-     4.91,
-     5.398
+     6.647,
+     6.973
     ],
     [
      "dilese",
-     5.398,
-     6.129
+     6.973,
+     7.461
     ],
     [
      "de",
-     6.129,
-     6.373
+     7.461,
+     7.624
     ],
     [
-     "yüzüne",
-     6.373,
-     7.104
+     "ona",
+     7.624,
+     7.949
     ],
     [
-     "bile",
-     7.104,
-     7.592
+     "ceza",
+     7.949,
+     8.275
     ],
     [
-     "bakmaz.",
-     7.592,
-     8.079
+     "verip",
+     8.275,
+     8.6
+    ],
+    [
+     "tekrar",
+     8.6,
+     8.926
+    ],
+    [
+     "özür",
+     8.926,
+     9.251
+    ],
+    [
+     "dilettirir.",
+     9.251,
+     9.902
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.701,
-   "m": "Sonra ne olur? Arkadaşı üzülür ve barışma isteğini kaybeder. Kin büyür ve onu taşıyanı da yorar.",
+   "sure": 6.99,
+   "m": "Sonra ne olur? Arkadaşı özrünün işe yaramadığını düşünür. Dostluk bir hesaplaşmaya döner ve ikisi de yorulur.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.268
+     0.324
     ],
     [
      "ne",
-     0.268,
-     0.387
+     0.324,
+     0.471
     ],
     [
      "olur?",
-     0.387,
-     0.625
+     0.471,
+     0.765
     ],
     [
      "Arkadaşı",
-     1.115,
-     1.702
+     1.13,
+     1.722
     ],
     [
-     "üzülür",
-     1.702,
-     2.142
+     "özrünün",
+     1.722,
+     2.166
+    ],
+    [
+     "işe",
+     2.166,
+     2.462
+    ],
+    [
+     "yaramadığını",
+     2.462,
+     3.351
+    ],
+    [
+     "düşünür.",
+     3.351,
+     3.795
+    ],
+    [
+     "Dostluk",
+     3.9,
+     4.236
+    ],
+    [
+     "bir",
+     4.236,
+     4.403
+    ],
+    [
+     "hesaplaşmaya",
+     4.403,
+     5.242
+    ],
+    [
+     "döner",
+     5.242,
+     5.578
     ],
     [
      "ve",
-     2.142,
-     2.288
+     5.578,
+     5.745
     ],
     [
-     "barışma",
-     2.288,
-     2.728
+     "ikisi",
+     5.745,
+     6.249
     ],
     [
-     "isteğini",
-     2.728,
-     3.315
+     "de",
+     6.249,
+     6.417
     ],
     [
-     "kaybeder.",
-     3.315,
-     3.755
-    ],
-    [
-     "Kin",
-     4.155,
-     4.345
-    ],
-    [
-     "büyür",
-     4.345,
-     4.726
-    ],
-    [
-     "ve",
-     4.726,
-     4.917
-    ],
-    [
-     "onu",
-     4.917,
-     5.298
-    ],
-    [
-     "taşıyanı",
-     5.298,
-     6.06
-    ],
-    [
-     "da",
-     6.06,
-     6.25
-    ],
-    [
-     "yorar.",
-     6.25,
-     6.631
+     "yorulur.",
+     6.417,
+     6.92
     ]
    ]
   },
@@ -1117,185 +1134,185 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 9.492,
-   "m": "Tam kararında Af. Özrünü kabul ediyorum; ama bir kural koyalım. Pişman olanı bağışlar; bir daha olmaması için nazik bir sınır da koyar.",
+   "sure": 10.509,
+   "m": "Tam kararında Af. Özrünü kabul ediyorum. Ayrıca bir kural koyalım. Pişman olanı bağışlar; bir daha olmaması için nazik bir sınır da koyar.",
    "k": [
     [
      "Tam",
      0.03,
-     0.199
+     0.21
     ],
     [
      "kararında",
-     0.199,
-     0.876
+     0.21,
+     0.93
     ],
     [
      "Af.",
-     0.876,
-     1.045
+     0.93,
+     1.11
     ],
     [
      "Özrünü",
-     1.475,
-     1.857
+     1.21,
+     1.91
     ],
     [
      "kabul",
-     1.857,
-     2.111
+     1.91,
+     2.377
     ],
     [
-     "ediyorum;",
-     2.111,
-     2.62
+     "ediyorum.",
+     2.377,
+     3.31
     ],
     [
-     "ama",
-     3.1,
-     3.408
+     "Ayrıca",
+     3.575,
+     4.148
     ],
     [
      "bir",
-     3.408,
-     3.561
+     4.148,
+     4.339
     ],
     [
      "kural",
-     3.561,
-     3.869
+     4.339,
+     4.722
     ],
     [
      "koyalım.",
-     3.869,
-     4.33
+     4.722,
+     5.295
     ],
     [
      "Pişman",
-     4.92,
-     5.248
+     5.8,
+     6.145
     ],
     [
      "olanı",
-     5.248,
-     5.739
+     6.145,
+     6.662
     ],
     [
      "bağışlar;",
-     5.739,
-     6.23
+     6.662,
+     7.18
     ],
     [
      "bir",
-     6.53,
-     6.7
+     7.285,
+     7.471
     ],
     [
      "daha",
-     6.7,
-     7.04
+     7.471,
+     7.842
     ],
     [
      "olmaması",
-     7.04,
-     7.721
+     7.842,
+     8.584
     ],
     [
      "için",
-     7.721,
-     8.061
+     8.584,
+     8.955
     ],
     [
      "nazik",
-     8.061,
-     8.401
+     8.955,
+     9.326
     ],
     [
      "bir",
-     8.401,
-     8.571
+     9.326,
+     9.512
     ],
     [
      "sınır",
-     8.571,
-     8.911
+     9.512,
+     9.883
     ],
     [
      "da",
-     8.911,
-     9.081
+     9.883,
+     10.068
     ],
     [
      "koyar.",
-     9.081,
-     9.422
+     10.068,
+     10.439
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 5.772,
-   "m": "Sonra ne olur? Arkadaşı rahatlar ve sözünü tutmaya çalışır. Dostlukları kırılmadan güçlenir.",
+   "sure": 5.973,
+   "m": "Sonra ne olur? Arkadaşı rahatlar ve sözünü tutmaya çalışır. Dostluk kırılmadan güçlenebilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.24
+     0.278
     ],
     [
      "ne",
-     0.24,
-     0.345
+     0.278,
+     0.402
     ],
     [
      "olur?",
-     0.345,
-     0.555
+     0.402,
+     0.65
     ],
     [
      "Arkadaşı",
-     1.125,
-     1.704
+     1.215,
+     1.789
     ],
     [
      "rahatlar",
-     1.704,
-     2.138
+     1.789,
+     2.22
     ],
     [
      "ve",
-     2.138,
-     2.283
+     2.22,
+     2.363
     ],
     [
      "sözünü",
-     2.283,
-     2.717
+     2.363,
+     2.794
     ],
     [
      "tutmaya",
-     2.717,
-     3.151
+     2.794,
+     3.224
     ],
     [
      "çalışır.",
-     3.151,
-     3.585
+     3.224,
+     3.655
     ],
     [
-     "Dostlukları",
-     3.935,
-     4.577
+     "Dostluk",
+     4.005,
+     4.35
     ],
     [
      "kırılmadan",
-     4.577,
-     5.22
+     4.35,
+     5.04
     ],
     [
-     "güçlenir.",
-     5.22,
-     5.702
+     "güçlenebilir.",
+     5.04,
+     5.903
     ]
    ]
   },
@@ -1338,83 +1355,93 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.692,
-   "m": "Arkadaşın kalemini izinsiz alıp kırdı ve özür diledi. Bu, geçen ay da olmuştu. Ne yaparsın?",
+   "sure": 6.972,
+   "m": "Arkadaşın defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu. Ne yaparsın?",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.703
+     0.73
     ],
     [
-     "kalemini",
-     0.703,
-     1.377
+     "defterini",
+     0.73,
+     1.43
     ],
     [
      "izinsiz",
-     1.377,
-     1.882
+     1.43,
+     1.955
     ],
     [
      "alıp",
-     1.882,
-     2.218
+     1.955,
+     2.305
     ],
     [
-     "kırdı",
-     2.218,
-     2.555
+     "üzerine",
+     2.305,
+     3.005
+    ],
+    [
+     "boya",
+     3.005,
+     3.355
+    ],
+    [
+     "döktü",
+     3.355,
+     3.705
     ],
     [
      "ve",
-     2.555,
-     2.723
+     3.705,
+     3.88
     ],
     [
      "özür",
-     2.723,
-     3.06
+     3.88,
+     4.23
     ],
     [
      "diledi.",
-     3.06,
-     3.565
+     4.23,
+     4.755
     ],
     [
      "Bu,",
-     3.64,
-     3.763
+     4.945,
+     5.061
     ],
     [
      "geçen",
-     3.763,
-     4.009
+     5.061,
+     5.294
     ],
     [
      "ay",
-     4.009,
-     4.133
+     5.294,
+     5.41
     ],
     [
      "da",
-     4.133,
-     4.256
+     5.41,
+     5.526
     ],
     [
      "olmuştu.",
-     4.256,
-     4.625
+     5.526,
+     5.875
     ],
     [
      "Ne",
-     5.03,
-     5.178
+     6.355,
+     6.492
     ],
     [
      "yaparsın?",
-     5.178,
-     5.622
+     6.492,
+     6.902
     ]
    ]
   },
@@ -1462,38 +1489,43 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.791,
-   "m": "Arkadaşın seninle konuşmaktan çekiniyor; dostluk soğuyor.",
+   "sure": 3.718,
+   "m": "Arkadaşın özrünün işe yaramadığını düşünüyor; aranız gerginleşiyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.803
+     0.506
     ],
     [
-     "seninle",
-     0.803,
-     1.383
+     "özrünün",
+     0.506,
+     0.863
     ],
     [
-     "konuşmaktan",
-     1.383,
-     2.157
+     "işe",
+     0.863,
+     1.101
     ],
     [
-     "çekiniyor;",
-     2.157,
-     2.93
+     "yaramadığını",
+     1.101,
+     1.814
     ],
     [
-     "dostluk",
-     3.005,
-     3.291
+     "düşünüyor;",
+     1.814,
+     2.29
     ],
     [
-     "soğuyor.",
-     3.291,
-     3.721
+     "aranız",
+     2.63,
+     3.012
+    ],
+    [
+     "gerginleşiyor.",
+     3.012,
+     3.648
     ]
    ]
   },
@@ -1655,43 +1687,53 @@ DO.dersKaydet(
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 2.983,
-   "m": "Özür dileyen kişi mahcup kalıyor; dostluk bitiyor.",
+   "sure": 4.083,
+   "m": "Özür dileyen kişi mahcup kalıyor; barışmak yerine hesaplaşma başlıyor.",
    "k": [
     [
      "Özür",
      0.03,
-     0.314
+     0.293
     ],
     [
      "dileyen",
-     0.314,
-     0.74
+     0.293,
+     0.688
     ],
     [
      "kişi",
-     0.74,
-     1.025
+     0.688,
+     0.952
     ],
     [
      "mahcup",
-     1.025,
-     1.309
+     0.952,
+     1.215
     ],
     [
      "kalıyor;",
-     1.309,
-     1.735
+     1.215,
+     1.61
     ],
     [
-     "dostluk",
-     2.0,
-     2.365
+     "barışmak",
+     1.895,
+     2.384
     ],
     [
-     "bitiyor.",
-     2.365,
-     2.913
+     "yerine",
+     2.384,
+     2.873
+    ],
+    [
+     "hesaplaşma",
+     2.873,
+     3.524
+    ],
+    [
+     "başlıyor.",
+     3.524,
+     4.013
     ]
    ]
   },
@@ -1925,138 +1967,163 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 10.761,
-   "m": "Bu cümle bilerek çift anlamlı. İçinde kin saklayan biri diyorsa sağ uca yakın. Affedip bir daha olmaması için dikkat edeceğini söyleyen biri diyorsa orta uca yakın.",
+   "sure": 12.444,
+   "m": "Bu cümle bilerek çift anlamlı. Özrü gerçekten kabul etmeyip özür dileyene yük bindiren biri diyorsa sağ uca yakın. Affedip bir daha olmaması için dikkat edeceğini söyleyen biri diyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.204
+     0.206
     ],
     [
      "cümle",
-     0.204,
-     0.553
+     0.206,
+     0.559
     ],
     [
      "bilerek",
-     0.553,
-     1.077
+     0.559,
+     1.089
     ],
     [
      "çift",
-     1.077,
-     1.252
+     1.089,
+     1.265
     ],
     [
      "anlamlı.",
-     1.252,
-     1.775
+     1.265,
+     1.795
     ],
     [
-     "İçinde",
-     2.125,
-     2.504
+     "Özrü",
+     1.895,
+     2.237
     ],
     [
-     "kin",
-     2.504,
-     2.631
+     "gerçekten",
+     2.237,
+     2.749
     ],
     [
-     "saklayan",
-     2.631,
-     3.01
+     "kabul",
+     2.749,
+     3.091
+    ],
+    [
+     "etmeyip",
+     3.091,
+     3.603
+    ],
+    [
+     "özür",
+     3.603,
+     3.945
+    ],
+    [
+     "dileyene",
+     3.945,
+     4.628
+    ],
+    [
+     "yük",
+     4.628,
+     4.799
+    ],
+    [
+     "bindiren",
+     4.799,
+     5.312
     ],
     [
      "biri",
-     3.01,
-     3.263
+     5.312,
+     5.653
     ],
     [
      "diyorsa",
-     3.263,
-     3.643
+     5.653,
+     6.166
     ],
     [
      "sağ",
-     3.643,
-     3.769
+     6.166,
+     6.337
     ],
     [
      "uca",
-     3.769,
-     4.022
+     6.337,
+     6.678
     ],
     [
      "yakın.",
-     4.022,
-     4.275
+     6.678,
+     7.02
     ],
     [
      "Affedip",
-     4.46,
-     5.026
+     7.74,
+     8.161
     ],
     [
      "bir",
-     5.026,
-     5.215
+     8.161,
+     8.302
     ],
     [
      "daha",
-     5.215,
-     5.593
+     8.302,
+     8.583
     ],
     [
      "olmaması",
-     5.593,
-     6.348
+     8.583,
+     9.144
     ],
     [
      "için",
-     6.348,
-     6.726
+     9.144,
+     9.425
     ],
     [
      "dikkat",
-     6.726,
-     7.103
+     9.425,
+     9.706
     ],
     [
      "edeceğini",
-     7.103,
-     8.047
+     9.706,
+     10.408
     ],
     [
      "söyleyen",
-     8.047,
-     8.614
+     10.408,
+     10.829
     ],
     [
      "biri",
-     8.614,
-     8.992
+     10.829,
+     11.11
     ],
     [
      "diyorsa",
-     8.992,
-     9.558
+     11.11,
+     11.532
     ],
     [
      "orta",
-     9.558,
-     9.936
+     11.532,
+     11.812
     ],
     [
      "uca",
-     9.936,
-     10.313
+     11.812,
+     12.093
     ],
     [
      "yakın.",
-     10.313,
-     10.691
+     12.093,
+     12.374
     ]
    ]
   },

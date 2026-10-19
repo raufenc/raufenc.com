@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Azim: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "caba",
+ "muzik": "caba",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -20,6 +22,7 @@ DO.dersKaydet(
      "id": "acilis",
      "tur": "ibreAcilis",
      "huy": "Azim",
+     "huyAnahtar": "Azim",
      "olculen": "İşe girişme biçimim",
      "kanca": "Bugün değil, yarın başlarım.",
      "uclar": {
@@ -81,7 +84,7 @@ DO.dersKaydet(
           "not": "Tesvîf, hayırlı işleri sürekli ertelemektir. Küçük erteleme, büyük bir yığına dönüşür."
          },
          {
-          "m": "Bugün yalnız on beş dakika başlayayım.",
+          "m": "Bugün on beş dakikayla başlayayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: azmin sesi."
          },
@@ -125,7 +128,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: tesvîfin sesi."
          },
          {
-          "m": "Bugün yalnız on beş dakika başlayayım.",
+          "m": "Bugün on beş dakikayla başlayayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: azmin sesi."
          }
@@ -258,6 +261,160 @@ DO.dersKaydet(
      "sonSes": "sson"
     },
     {
+     "tur": "ibreGun",
+     "id": "gun",
+     "baslik": "Bir günün ibresi",
+     "ozetBaslik": "Bugünün ibre yolu",
+     "ses": {
+      "acilis": "v1",
+      "son": "v7"
+     },
+     "duraklar": [
+      {
+       "id": "okul",
+       "ad": "Okul çıkışı",
+       "baslik": "Okul çıkışı",
+       "ses": "v2",
+       "durum": "Çantan omzunda. Arkadaşların seni oyuna çağırıyor, ama yarına teslim edilecek bir ödev var.",
+       "secenekler": [
+        {
+         "m": "Akşama kadar oynarım; ödev sonra.",
+         "zon": "az",
+         "t": -0.78,
+         "not": "İbre sola: ertelemek kolay, ama iş küçülmüyor."
+        },
+        {
+         "m": "Biraz oynarım, eve gidince ödeve küçük bir plan yaparım.",
+         "zon": "orta",
+         "t": 0.02,
+         "not": "İbre ortada: hem oyuna hem başlamaya yer var."
+        },
+        {
+         "m": "Oyuna katılmam; koşup eve gider, hepsini hemen bitirmeye çalışırım.",
+         "zon": "fazla",
+         "t": 0.7,
+         "not": "İbre sağa: acele edince dinlenmek ve plan yapmak atlanıyor."
+        }
+       ]
+      },
+      {
+       "id": "ikindi",
+       "ad": "İkindi",
+       "baslik": "İkindi",
+       "ses": "v3",
+       "durum": "Evdesin. Masanda yarım kalmış bir proje duruyor.",
+       "secenekler": [
+        {
+         "m": "Yarın bakarım; şimdi biraz uzanayım.",
+         "zon": "az",
+         "t": -0.6,
+         "not": "İbre sola: “yarın” çoğu zaman yine yarına kalıyor."
+        },
+        {
+         "m": "On beş dakika süre koyup projeye başlarım.",
+         "zon": "orta",
+         "t": -0.04,
+         "not": "İbre ortada: küçük bir başlangıç yolu açıyor."
+        },
+        {
+         "m": "Üç işe birden başlarım; hepsini bu akşam bitireceğim!",
+         "zon": "fazla",
+         "t": 0.85,
+         "not": "İbre sağa: aynı anda çok iş, hiçbirini bitirmeyi zorlaştırıyor."
+        }
+       ]
+      },
+      {
+       "id": "aksam",
+       "ad": "Akşam yemeği",
+       "baslik": "Akşam yemeği",
+       "ses": "v4",
+       "durum": "Sofra hazır, ama aklında bitmemiş bir iş var.",
+       "secenekler": [
+        {
+         "m": "Yemekten sonra uykum gelir; bu iş zaten yarına kalır.",
+         "zon": "az",
+         "t": -0.7,
+         "not": "İbre sola: yorgunluk gerçek, ama iş yine bekliyor."
+        },
+        {
+         "m": "Sofrada rahatça yer, sonra işe yirmi dakika ayırırım.",
+         "zon": "orta",
+         "t": 0.06,
+         "not": "İbre ortada: dinlenme ve çaba aynı akşama sığdı."
+        },
+        {
+         "m": "İki lokma yer, hemen masaya koşarım.",
+         "zon": "fazla",
+         "t": 0.62,
+         "not": "İbre sağa: telaş, sofradaki güzel vakti de götürdü."
+        }
+       ]
+      },
+      {
+       "id": "ders",
+       "ad": "Ders saati",
+       "baslik": "Ders saati",
+       "ses": "v5",
+       "durum": "Ders çalışma saati geldi. Konu biraz zor görünüyor.",
+       "secenekler": [
+        {
+         "m": "Zor görünüyor; bugün olmaz, bırakayım.",
+         "zon": "az",
+         "t": -0.85,
+         "not": "İbre sola: zor kısım bırakılınca daha da büyük görünür."
+        },
+        {
+         "m": "Konuyu küçük parçalara bölüp ilk parçayla başlarım.",
+         "zon": "orta",
+         "t": -0.02,
+         "not": "İbre ortada: zor iş, parçalara bölününce yürünebilir oluyor."
+        },
+        {
+         "m": "Hepsini tek oturuşta, mola vermeden bitirmeye çalışırım.",
+         "zon": "fazla",
+         "t": 0.74,
+         "not": "İbre sağa: mola vermeyince dikkat çabuk dağılıyor."
+        }
+       ]
+      },
+      {
+       "id": "yatis",
+       "ad": "Yatmadan önce",
+       "baslik": "Yatmadan önce",
+       "ses": "v6",
+       "durum": "Yatma vakti yaklaşıyor. Yarının çantası ve yapılacaklar seni bekliyor.",
+       "secenekler": [
+        {
+         "m": "Yarın sabah bakarım; şimdi yatayım.",
+         "zon": "az",
+         "t": -0.66,
+         "not": "İbre sola: hazırlığı sabaha bırakmak sabahı sıkıştırıyor."
+        },
+        {
+         "m": "Kısa bir liste yapıp çantayı hazırlar, sonra yatarım.",
+         "zon": "orta",
+         "t": 0.04,
+         "not": "İbre ortada: küçük bir hazırlık yarını rahatlatıyor."
+        },
+        {
+         "m": "Gece geç saate kadar her şeyi yeniden kontrol ederim.",
+         "zon": "fazla",
+         "t": 0.88,
+         "not": "İbre sağa: fazla uğraşmak uykuyu ve yarını yoruyor."
+        }
+       ]
+      }
+     ],
+     "huy": "Azim",
+     "uclar": {
+      "az": "Tesvîf",
+      "orta": "Azim",
+      "fazla": "Telaş"
+     },
+     "yesil": 0.26
+    },
+    {
      "id": "uc-bul",
      "tur": "siniflandir",
      "baslik": "Hangi uca yakın?",
@@ -318,7 +475,7 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Başlamak zor gelince yalnız on beş dakika çalışır.",
+       "metin": "Başlamak zor gelince önce on beş dakikayla başlar, sonra devam eder.",
        "alan": "orta",
        "ipucu": "Küçük bir başlangıç yapıyor."
       }
@@ -341,7 +498,7 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Bir işe bugün yalnız on beş dakika ayıracağım",
+        "Bir işe bugün on beş dakikayla başlayacağım",
         "Büyük işi küçük parçalara bölüp günlere yayacağım",
         "Yapılacakları sıraya koyup bir tanesiyle başlayacağım"
        ]
@@ -2103,6 +2260,465 @@ DO.dersKaydet(
      "seç.",
      4.054,
      4.255
+    ]
+   ]
+  },
+  "v1": {
+   "d": "ses/v1.m4a",
+   "sure": 5.077,
+   "m": "Okul çıkışından yatma vaktine kadar beş durağımız var. Her durakta ibre biraz oynar.",
+   "k": [
+    [
+     "Okul",
+     0.03,
+     0.364
+    ],
+    [
+     "çıkışından",
+     0.364,
+     1.031
+    ],
+    [
+     "yatma",
+     1.031,
+     1.365
+    ],
+    [
+     "vaktine",
+     1.365,
+     1.865
+    ],
+    [
+     "kadar",
+     1.865,
+     2.199
+    ],
+    [
+     "beş",
+     2.199,
+     2.366
+    ],
+    [
+     "durağımız",
+     2.366,
+     3.033
+    ],
+    [
+     "var.",
+     3.033,
+     3.2
+    ],
+    [
+     "Her",
+     3.31,
+     3.48
+    ],
+    [
+     "durakta",
+     3.48,
+     3.989
+    ],
+    [
+     "ibre",
+     3.989,
+     4.328
+    ],
+    [
+     "biraz",
+     4.328,
+     4.668
+    ],
+    [
+     "oynar.",
+     4.668,
+     5.007
+    ]
+   ]
+  },
+  "v2": {
+   "d": "ses/v2.m4a",
+   "sure": 5.833,
+   "m": "Birinci durak, okul çıkışı. Çantan omzunda; arkadaşların oyuna çağırıyor ama yarına ödev var.",
+   "k": [
+    [
+     "Birinci",
+     0.03,
+     0.468
+    ],
+    [
+     "durak,",
+     0.468,
+     0.76
+    ],
+    [
+     "okul",
+     0.885,
+     1.143
+    ],
+    [
+     "çıkışı.",
+     1.143,
+     1.53
+    ],
+    [
+     "Çantan",
+     2.12,
+     2.458
+    ],
+    [
+     "omzunda;",
+     2.458,
+     2.965
+    ],
+    [
+     "arkadaşların",
+     3.09,
+     3.758
+    ],
+    [
+     "oyuna",
+     3.758,
+     4.159
+    ],
+    [
+     "çağırıyor",
+     4.159,
+     4.694
+    ],
+    [
+     "ama",
+     4.694,
+     4.961
+    ],
+    [
+     "yarına",
+     4.961,
+     5.362
+    ],
+    [
+     "ödev",
+     5.362,
+     5.63
+    ],
+    [
+     "var.",
+     5.63,
+     5.763
+    ]
+   ]
+  },
+  "v3": {
+   "d": "ses/v3.m4a",
+   "sure": 4.782,
+   "m": "İkinci durak, ikindi vakti. Evdesin ve masanda yarım kalmış bir proje duruyor.",
+   "k": [
+    [
+     "İkinci",
+     0.03,
+     0.414
+    ],
+    [
+     "durak,",
+     0.414,
+     0.67
+    ],
+    [
+     "ikindi",
+     0.97,
+     1.387
+    ],
+    [
+     "vakti.",
+     1.387,
+     1.665
+    ],
+    [
+     "Evdesin",
+     2.19,
+     2.635
+    ],
+    [
+     "ve",
+     2.635,
+     2.783
+    ],
+    [
+     "masanda",
+     2.783,
+     3.229
+    ],
+    [
+     "yarım",
+     3.229,
+     3.525
+    ],
+    [
+     "kalmış",
+     3.525,
+     3.822
+    ],
+    [
+     "bir",
+     3.822,
+     3.97
+    ],
+    [
+     "proje",
+     3.97,
+     4.267
+    ],
+    [
+     "duruyor.",
+     4.267,
+     4.712
+    ]
+   ]
+  },
+  "v4": {
+   "d": "ses/v4.m4a",
+   "sure": 5.033,
+   "m": "Üçüncü durak, akşam yemeği. Sofra hazır, ama aklında bitmemiş bir iş var.",
+   "k": [
+    [
+     "Üçüncü",
+     0.03,
+     0.48
+    ],
+    [
+     "durak,",
+     0.48,
+     0.78
+    ],
+    [
+     "akşam",
+     0.96,
+     1.224
+    ],
+    [
+     "yemeği.",
+     1.224,
+     1.62
+    ],
+    [
+     "Sofra",
+     2.105,
+     2.452
+    ],
+    [
+     "hazır,",
+     2.452,
+     2.8
+    ],
+    [
+     "ama",
+     3.175,
+     3.5
+    ],
+    [
+     "aklında",
+     3.5,
+     3.988
+    ],
+    [
+     "bitmemiş",
+     3.988,
+     4.475
+    ],
+    [
+     "bir",
+     4.475,
+     4.638
+    ],
+    [
+     "iş",
+     4.638,
+     4.8
+    ],
+    [
+     "var.",
+     4.8,
+     4.963
+    ]
+   ]
+  },
+  "v5": {
+   "d": "ses/v5.m4a",
+   "sure": 4.014,
+   "m": "Dördüncü durak, ders çalışma saati. Konu biraz zor görünüyor.",
+   "k": [
+    [
+     "Dördüncü",
+     0.03,
+     0.522
+    ],
+    [
+     "durak,",
+     0.522,
+     0.85
+    ],
+    [
+     "ders",
+     0.975,
+     1.133
+    ],
+    [
+     "çalışma",
+     1.133,
+     1.606
+    ],
+    [
+     "saati.",
+     1.606,
+     2.08
+    ],
+    [
+     "Konu",
+     2.505,
+     2.825
+    ],
+    [
+     "biraz",
+     2.825,
+     3.145
+    ],
+    [
+     "zor",
+     3.145,
+     3.305
+    ],
+    [
+     "görünüyor.",
+     3.305,
+     3.944
+    ]
+   ]
+  },
+  "v6": {
+   "d": "ses/v6.m4a",
+   "sure": 5.32,
+   "m": "Son durak, yatmadan önce. Yarının çantası ve yapılacaklar seni bekliyor.",
+   "k": [
+    [
+     "Son",
+     0.03,
+     0.232
+    ],
+    [
+     "durak,",
+     0.232,
+     0.635
+    ],
+    [
+     "yatmadan",
+     0.85,
+     1.324
+    ],
+    [
+     "önce.",
+     1.324,
+     1.64
+    ],
+    [
+     "Yarının",
+     2.22,
+     2.755
+    ],
+    [
+     "çantası",
+     2.755,
+     3.29
+    ],
+    [
+     "ve",
+     3.29,
+     3.468
+    ],
+    [
+     "yapılacaklar",
+     3.468,
+     4.359
+    ],
+    [
+     "seni",
+     4.359,
+     4.716
+    ],
+    [
+     "bekliyor.",
+     4.716,
+     5.25
+    ]
+   ]
+  },
+  "v7": {
+   "d": "ses/v7.m4a",
+   "sure": 6.236,
+   "m": "İşte bugünün ibre yolu. İbre gün içinde oynar; bu normaldir, yarın yine ayarlanır.",
+   "k": [
+    [
+     "İşte",
+     0.03,
+     0.359
+    ],
+    [
+     "bugünün",
+     0.359,
+     0.852
+    ],
+    [
+     "ibre",
+     0.852,
+     1.181
+    ],
+    [
+     "yolu.",
+     1.181,
+     1.51
+    ],
+    [
+     "İbre",
+     2.125,
+     2.459
+    ],
+    [
+     "gün",
+     2.459,
+     2.626
+    ],
+    [
+     "içinde",
+     2.626,
+     3.126
+    ],
+    [
+     "oynar;",
+     3.126,
+     3.46
+    ],
+    [
+     "bu",
+     3.745,
+     3.934
+    ],
+    [
+     "normaldir,",
+     3.934,
+     4.5
+    ],
+    [
+     "yarın",
+     4.85,
+     5.179
+    ],
+    [
+     "yine",
+     5.179,
+     5.508
+    ],
+    [
+     "ayarlanır.",
+     5.508,
+     6.166
     ]
    ]
   }

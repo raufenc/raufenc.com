@@ -3,9 +3,11 @@
 DO.dersKaydet(
 {
  "id": "ibre-beyan-giybet",
- "ad": "Hikmetli Beyân (Sükût · Gıybet): İbren Nerede?",
+ "ad": "Hikmetli Beyân (Susmak · Gıybet): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -66,7 +68,7 @@ DO.dersKaydet(
       {
        "zon": "az",
        "soru": "Söylenmesi gerekeni söylememek neye benziyor?",
-       "ad": "Sükût",
+       "ad": "Sükût-u-Hakk",
        "soz": "Söylersem başıma iş açılır, susayım.",
        "eylem": "yaslan",
        "zincir": [
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Söylersem başıma iş açılır, susayım.",
           "dogru": true,
-          "not": "Sükût-u Hakk, doğruyu söyleyeceği yerde susmaktır. Zor olursa güvendiğin bir büyüğe söylemek de yardım ister."
+          "not": "Sükût-u Hakk, söylenmesi gereken yerde susmaktır. Zor geliyorsa güvendiğin bir büyüğe söylemek de bir yoldur."
          },
          {
           "m": "Gerekeni doğru kişiye ve nazikçe söyleyeyim.",
@@ -94,7 +96,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Sükût",
+        "ad": "Sükût-u-Hakk",
         "soz": "Söylersem"
        },
        "zincirAnahtar": [
@@ -118,7 +120,7 @@ DO.dersKaydet(
          {
           "m": "Bunu arkadaşlara anlatayım, o yokken konuşalım.",
           "dogru": true,
-          "not": "Gıybet, birinin kusurunu o yokken konuşmaktır. O duysa üzüleceği söz, arkasından da söylenmez."
+          "not": "Gıybet, birinin kusurunu o yokken konuşmaktır. Biri zarar görüyorsa, yardım için güvendiğin bir büyüğe anlatmak başka şeydir."
          },
          {
           "m": "Söylersem başıma iş açılır, susayım.",
@@ -144,8 +146,8 @@ DO.dersKaydet(
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
-       "ad": "Hikmetli",
-       "soz": "Önce ona, yalnızken ve nazikçe söyleyeyim.",
+       "ad": "Hikmetli söz",
+       "soz": "Söz yerinde olsun: ona söyleyeyim, arkasından değil.",
        "eylem": "konus",
        "zincir": [
         "Arkadaşı hatasını öğrenir.",
@@ -173,7 +175,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hikmetli",
-        "soz": "Önce"
+        "soz": "Söz"
        },
        "zincirAnahtar": [
         "Arkadaşı",
@@ -197,28 +199,28 @@ DO.dersKaydet(
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "kopya",
-       "baslik": "Kopya",
-       "tetik": "Bir arkadaşının ödevde kopya çektiğini gördün. Başka bir arkadaşın da bunu fark etti.",
+       "id": "sir",
+       "baslik": "Anlatılan sır",
+       "tetik": "Bir arkadaşının, ona anlatılan bir sırrı başkasına anlattığını duydun.",
        "secenekler": [
         {
-         "m": "Görmemiş gibi yapar, hiçbir şey demem.",
+         "m": "Duymamış gibi yaparım; ona hiçbir şey demem.",
          "zon": "az",
-         "sonuc": "Kopya sürüyor; arkadaşın yanlışını fark etmiyor.",
-         "not": "İbre sola kaydı: söylenmesi gereken söz saklanınca yanlış devam ediyor.",
+         "sonuc": "Sır anlatılmaya devam ediyor; sahibi sonradan öğrenip üzülüyor.",
+         "not": "İbre sola kaydı: söylenmesi gereken söz saklanınca yanlış sürüyor.",
          "ses": "s1az"
         },
         {
-         "m": "Hemen bütün sınıfa onu anlatırım.",
+         "m": "Onu herkese şikâyet ederim, arkasından konuşurum.",
          "zon": "fazla",
-         "sonuc": "Arkadaşın herkesin dilinde kalıyor; küsüyor ve sana güvenmiyor.",
+         "sonuc": "Konuşma dallanıp büyüyor; arkadaşın duyunca yara alıyor.",
          "not": "İbre sağa kaydı: arkasından konuşmak sorunu çözmez, arkadaşı yaralar.",
          "ses": "s1fa"
         },
         {
-         "m": "Ona yalnızken nazikçe söylerim; gerekirse öğretmene danışırım.",
+         "m": "Ona yalnızken, sırrı korumanın önemli olduğunu söylerim.",
          "zon": "orta",
-         "sonuc": "Arkadaşın uyarılıyor ve kendini düzeltme fırsatı buluyor.",
+         "sonuc": "Arkadaşın durup düşünüyor; sır sahibine karşı daha dikkatli oluyor.",
          "not": "İbre ortada: doğru kişiye, doğru zamanda ve güzel söyledin.",
          "ses": "s1or"
         }
@@ -226,21 +228,21 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "grup",
-       "baslik": "Mola sohbeti",
-       "tetik": "Mola sırasında grupta biri, orada olmayan bir arkadaşın hakkında konuşmaya başlıyor.",
+       "id": "servis",
+       "baslik": "Servis sohbeti",
+       "tetik": "Serviste arkadaşların, orada olmayan bir sınıf arkadaşının hatalarını anlatıp gülüyor.",
        "secenekler": [
         {
          "m": "Bir şey söylemem; sessizce dinlerim.",
          "zon": "az",
-         "sonuc": "Konuşma uzuyor; arkadaşın savunacak kimse bulamıyor.",
+         "sonuc": "Konuşma uzuyor; orada olmayan arkadaşın savunacak kimsesi olmuyor.",
          "not": "İbre sola kaydı: itiraz edilmeyince konuşma devam ediyor.",
          "ses": "s2az"
         },
         {
          "m": "Ben de onun hakkında bildiklerimi eklerim.",
          "zon": "fazla",
-         "sonuc": "Söz büyüyor; arkadaşın duyunca çok üzülüyor.",
+         "sonuc": "Söz büyüyor; arkadaşın duyunca çok üzülebilir.",
          "not": "İbre sağa kaydı: söze söz katmak arkasından konuşmayı büyütüyor.",
          "ses": "s2fa"
         },
@@ -705,83 +707,83 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.594,
-   "m": "Sol uçta Sükût. Söylersem başıma iş açılır, susayım. Haksızlığa tanık olur ama korkudan ses çıkarmaz.",
+   "sure": 8.957,
+   "m": "Sol uçta Sükût-u-Hakk. Söylersem başıma iş açılır, susayım. Haksızlığa tanık olur ama korkudan ses çıkarmaz.",
    "k": [
     [
      "Sol",
      0.03,
-     0.306
+     0.284
     ],
     [
      "uçta",
-     0.306,
-     0.858
+     0.284,
+     0.793
     ],
     [
-     "Sükût.",
-     0.858,
-     1.41
+     "Sükût-u-Hakk.",
+     0.793,
+     1.81
     ],
     [
      "Söylersem",
-     1.485,
-     2.196
+     1.96,
+     2.679
     ],
     [
      "başıma",
-     2.196,
-     2.907
+     2.679,
+     3.397
     ],
     [
      "iş",
-     2.907,
-     3.144
+     3.397,
+     3.637
     ],
     [
      "açılır,",
-     3.144,
-     3.855
+     3.637,
+     4.355
     ],
     [
      "susayım.",
-     4.09,
-     4.54
+     4.54,
+     5.02
     ],
     [
      "Haksızlığa",
-     5.14,
-     5.936
+     5.72,
+     6.465
     ],
     [
      "tanık",
-     5.936,
-     6.334
+     6.465,
+     6.838
     ],
     [
      "olur",
-     6.334,
-     6.732
+     6.838,
+     7.21
     ],
     [
      "ama",
-     6.732,
-     7.13
+     7.21,
+     7.583
     ],
     [
      "korkudan",
-     7.13,
-     7.727
+     7.583,
+     8.142
     ],
     [
      "ses",
-     7.727,
-     7.926
+     8.142,
+     8.328
     ],
     [
      "çıkarmaz.",
-     7.926,
-     8.524
+     8.328,
+     8.887
     ]
    ]
   },
@@ -1087,93 +1089,103 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 10.193,
-   "m": "Tam kararında Hikmetli. Önce ona, yalnızken ve nazikçe söyleyeyim. Kusuru arkasından konuşmaz; gerekince doğru kişiye güzelce söyler.",
+   "sure": 10.898,
+   "m": "Tam kararında Hikmetli söz. Söz yerinde olsun: ona söyleyeyim, arkasından değil. Kusuru arkasından konuşmaz; gerekince doğru kişiye güzelce söyler.",
    "k": [
     [
      "Tam",
      0.03,
-     0.232
+     0.248
     ],
     [
      "kararında",
-     0.232,
-     1.039
+     0.248,
+     1.122
     ],
     [
-     "Hikmetli.",
-     1.039,
-     1.645
+     "Hikmetli",
+     1.122,
+     1.777
     ],
     [
-     "Önce",
-     2.12,
-     2.445
+     "söz.",
+     1.777,
+     1.995
     ],
     [
-     "ona,",
-     2.445,
-     2.77
+     "Söz",
+     2.535,
+     2.708
     ],
     [
-     "yalnızken",
-     3.025,
-     3.539
+     "yerinde",
+     2.708,
+     3.225
     ],
     [
-     "ve",
-     3.539,
-     3.71
+     "olsun:",
+     3.225,
+     3.57
     ],
     [
-     "nazikçe",
-     3.71,
-     4.225
+     "ona",
+     3.96,
+     4.175
     ],
     [
-     "söyleyeyim.",
-     4.225,
-     4.91
-    ],
-    [
-     "Kusuru",
-     5.205,
-     5.795
+     "söyleyeyim,",
+     4.175,
+     4.605
     ],
     [
      "arkasından",
-     5.795,
-     6.58
+     4.875,
+     5.465
+    ],
+    [
+     "değil.",
+     5.465,
+     5.76
+    ],
+    [
+     "Kusuru",
+     6.375,
+     6.861
+    ],
+    [
+     "arkasından",
+     6.861,
+     7.509
     ],
     [
      "konuşmaz;",
-     6.58,
-     7.17
+     7.509,
+     7.995
     ],
     [
      "gerekince",
-     7.44,
-     8.207
+     8.185,
+     8.94
     ],
     [
      "doğru",
-     8.207,
-     8.59
+     8.94,
+     9.318
     ],
     [
      "kişiye",
-     8.59,
-     9.165
+     9.318,
+     9.884
     ],
     [
      "güzelce",
-     9.165,
-     9.74
+     9.884,
+     10.451
     ],
     [
      "söyler.",
-     9.74,
-     10.123
+     10.451,
+     10.828
     ]
    ]
   },
@@ -1288,355 +1300,355 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.203,
-   "m": "Bir arkadaşının ödevde kopya çektiğini gördün. Başka bir arkadaşın da bunu fark etti. Ne yaparsın?",
+   "sure": 4.368,
+   "m": "Bir arkadaşının, ona anlatılan bir sırrı başkasına anlattığını duydun. Ne yaparsın?",
    "k": [
     [
      "Bir",
      0.03,
-     0.162
+     0.17
     ],
     [
-     "arkadaşının",
-     0.162,
-     0.824
+     "arkadaşının,",
+     0.17,
+     0.87
     ],
     [
-     "ödevde",
-     0.824,
-     1.221
+     "ona",
+     0.945,
+     1.187
     ],
     [
-     "kopya",
-     1.221,
-     1.486
-    ],
-    [
-     "çektiğini",
-     1.486,
-     2.015
-    ],
-    [
-     "gördün.",
-     2.015,
-     2.28
-    ],
-    [
-     "Başka",
-     2.505,
-     2.787
+     "anlatılan",
+     1.187,
+     1.671
     ],
     [
      "bir",
-     2.787,
-     2.927
+     1.671,
+     1.792
     ],
     [
-     "arkadaşın",
-     2.927,
-     3.49
+     "sırrı",
+     1.792,
+     2.034
     ],
     [
-     "da",
-     3.49,
-     3.631
+     "başkasına",
+     2.034,
+     2.518
     ],
     [
-     "bunu",
-     3.631,
-     3.913
+     "anlattığını",
+     2.518,
+     3.123
     ],
     [
-     "fark",
-     3.913,
-     4.053
-    ],
-    [
-     "etti.",
-     4.053,
-     4.335
+     "duydun.",
+     3.123,
+     3.365
     ],
     [
      "Ne",
-     4.58,
-     4.718
+     3.77,
+     3.902
     ],
     [
      "yaparsın?",
-     4.718,
-     5.133
+     3.902,
+     4.298
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 3.014,
-   "m": "Kopya sürüyor; arkadaşın yanlışını fark etmiyor.",
+   "sure": 4.122,
+   "m": "Sır anlatılmaya devam ediyor; sahibi sonradan öğrenip üzülüyor.",
    "k": [
     [
-     "Kopya",
+     "Sır",
      0.03,
-     0.33
+     0.191
     ],
     [
-     "sürüyor;",
-     0.33,
-     0.78
+     "anlatılmaya",
+     0.191,
+     0.998
     ],
     [
-     "arkadaşın",
-     1.0,
-     1.648
+     "devam",
+     0.998,
+     1.321
     ],
     [
-     "yanlışını",
-     1.648,
-     2.296
+     "ediyor;",
+     1.321,
+     1.805
     ],
     [
-     "fark",
-     2.296,
-     2.458
+     "sahibi",
+     1.9,
+     2.397
     ],
     [
-     "etmiyor.",
-     2.458,
-     2.944
+     "sonradan",
+     2.397,
+     2.893
+    ],
+    [
+     "öğrenip",
+     2.893,
+     3.39
+    ],
+    [
+     "üzülüyor.",
+     3.39,
+     4.052
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.352,
-   "m": "Arkadaşın herkesin dilinde kalıyor; küsüyor ve sana güvenmiyor.",
+   "sure": 3.576,
+   "m": "Konuşma dallanıp büyüyor; arkadaşın duyunca yara alıyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Konuşma",
      0.03,
-     0.513
+     0.465
     ],
     [
-     "herkesin",
-     0.513,
-     0.875
+     "dallanıp",
+     0.465,
+     0.9
     ],
     [
-     "dilinde",
-     0.875,
-     1.238
+     "büyüyor;",
+     0.9,
+     1.335
     ],
     [
-     "kalıyor;",
-     1.238,
-     1.6
+     "arkadaşın",
+     1.7,
+     2.302
     ],
     [
-     "küsüyor",
-     1.87,
-     2.294
+     "duyunca",
+     2.302,
+     2.754
     ],
     [
-     "ve",
-     2.294,
-     2.435
+     "yara",
+     2.754,
+     3.055
     ],
     [
-     "sana",
-     2.435,
-     2.717
-    ],
-    [
-     "güvenmiyor.",
-     2.717,
-     3.282
+     "alıyor.",
+     3.055,
+     3.506
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.248,
-   "m": "Arkadaşın uyarılıyor ve kendini düzeltme fırsatı buluyor.",
+   "sure": 3.996,
+   "m": "Arkadaşın durup düşünüyor; sır sahibine karşı daha dikkatli oluyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.602
+     0.48
     ],
     [
-     "uyarılıyor",
-     0.602,
-     1.318
+     "durup",
+     0.48,
+     0.705
     ],
     [
-     "ve",
-     1.318,
-     1.461
+     "düşünüyor;",
+     0.705,
+     1.155
     ],
     [
-     "kendini",
-     1.461,
-     1.89
+     "sır",
+     1.495,
+     1.657
     ],
     [
-     "düzeltme",
-     1.89,
-     2.32
+     "sahibine",
+     1.657,
+     2.305
     ],
     [
-     "fırsatı",
-     2.32,
-     2.749
+     "karşı",
+     2.305,
+     2.629
     ],
     [
-     "buluyor.",
-     2.749,
-     3.179
+     "daha",
+     2.629,
+     2.953
+    ],
+    [
+     "dikkatli",
+     2.953,
+     3.439
+    ],
+    [
+     "oluyor.",
+     3.439,
+     3.926
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.914,
-   "m": "Mola sırasında grupta biri, orada olmayan bir arkadaşın hakkında konuşmaya başlıyor. Ne yaparsın?",
+   "sure": 5.461,
+   "m": "Serviste arkadaşların, orada olmayan bir sınıf arkadaşının hatalarını anlatıp gülüyor. Ne yaparsın?",
    "k": [
     [
-     "Mola",
+     "Serviste",
      0.03,
-     0.29
+     0.427
     ],
     [
-     "sırasında",
-     0.29,
-     0.81
-    ],
-    [
-     "grupta",
-     0.81,
-     1.07
-    ],
-    [
-     "biri,",
-     1.07,
-     1.33
+     "arkadaşların,",
+     0.427,
+     1.09
     ],
     [
      "orada",
-     1.485,
-     1.843
+     1.29,
+     1.649
     ],
     [
      "olmayan",
-     1.843,
-     2.201
+     1.649,
+     2.009
     ],
     [
      "bir",
-     2.201,
-     2.32
+     2.009,
+     2.129
     ],
     [
-     "arkadaşın",
-     2.32,
-     2.797
+     "sınıf",
+     2.129,
+     2.368
     ],
     [
-     "hakkında",
-     2.797,
-     3.155
+     "arkadaşının",
+     2.368,
+     2.967
     ],
     [
-     "konuşmaya",
-     3.155,
-     3.632
+     "hatalarını",
+     2.967,
+     3.566
     ],
     [
-     "başlıyor.",
-     3.632,
-     3.99
+     "anlatıp",
+     3.566,
+     3.926
+    ],
+    [
+     "gülüyor.",
+     3.926,
+     4.285
     ],
     [
      "Ne",
-     4.31,
-     4.444
+     4.94,
+     5.053
     ],
     [
      "yaparsın?",
-     4.444,
-     4.844
+     5.053,
+     5.391
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.114,
-   "m": "Konuşma uzuyor; arkadaşın savunacak kimse bulamıyor.",
+   "sure": 3.598,
+   "m": "Konuşma uzuyor; orada olmayan arkadaşın savunacak kimsesi olmuyor.",
    "k": [
     [
      "Konuşma",
      0.03,
-     0.367
+     0.355
     ],
     [
      "uzuyor;",
-     0.367,
-     0.705
+     0.355,
+     0.68
+    ],
+    [
+     "orada",
+     0.92,
+     1.311
+    ],
+    [
+     "olmayan",
+     1.311,
+     1.702
     ],
     [
      "arkadaşın",
-     0.995,
-     1.58
+     1.702,
+     2.224
     ],
     [
      "savunacak",
-     1.58,
-     2.166
+     2.224,
+     2.746
     ],
     [
-     "kimse",
-     2.166,
-     2.459
+     "kimsesi",
+     2.746,
+     3.137
     ],
     [
-     "bulamıyor.",
-     2.459,
-     3.044
+     "olmuyor.",
+     3.137,
+     3.528
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.632,
-   "m": "Söz büyüyor; arkadaşın duyunca çok üzülüyor.",
+   "sure": 3.506,
+   "m": "Söz büyüyor; arkadaşın duyunca çok üzülebilir.",
    "k": [
     [
      "Söz",
      0.03,
-     0.256
+     0.24
     ],
     [
      "büyüyor;",
-     0.256,
-     0.935
+     0.24,
+     0.87
     ],
     [
      "arkadaşın",
-     1.375,
-     2.104
+     0.98,
+     1.736
     ],
     [
      "duyunca",
-     2.104,
-     2.651
+     1.736,
+     2.302
     ],
     [
      "çok",
-     2.651,
-     2.833
+     2.302,
+     2.491
     ],
     [
-     "üzülüyor.",
-     2.833,
-     3.562
+     "üzülebilir.",
+     2.491,
+     3.436
     ]
    ]
   },
