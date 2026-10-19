@@ -50,6 +50,33 @@
       ]
     },
     {
+      "source": "/(.*\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|m4a|wav|woff|woff2|ttf|otf))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(lib|data)/(.*\\.(?:js|css))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/lib/fonts/(.*\\.woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/api/(.*)",
       "headers": [
         {
@@ -191,6 +218,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/noroterbiye/tanitim/noroterbiye-30s(.*)10.mp4",
+      "destination": "/noroterbiye/tanitim/noroterbiye-30s.mp4",
+      "permanent": true
+    },
     {
       "source": "/ilgitesti",
       "destination": "/ilgitesti/",
