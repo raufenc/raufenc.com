@@ -1,5 +1,5 @@
 // Ana sayfa, haberler, duyurular, bildirimler, favoriler, arama
-import { icons, h, raw, el, esc, fmtDate, fmtRel, kalanGun, toast, skeletons, empty, share } from '../ui.js';
+import { icons, h, raw, el, esc, fmtDate, fmtRel, kalanGun, ymd, toast, skeletons, empty, share } from '../ui.js';
 import { store, bildirim, social } from '../backend.js';
 import { feeds } from '../feeds.js';
 import { newsCard, videoCard, socialBar, commentsSection } from '../components.js';
@@ -33,28 +33,40 @@ export async function home(ctx) {
   const c = store.content;
   const gunun = (c.duyurular || []).find(d => d.id === c.gununDuyurusu) || (c.duyurular || [])[0];
   const u = store.user;
+  const now = new Date(), hr = now.getHours();
+  const selam = hr < 6 ? 'Hayırlı geceler' : hr < 12 ? 'Hayırlı sabahlar' : hr < 18 ? 'Hayırlı günler' : 'Hayırlı akşamlar';
+  const bugun = (c.etkinlikler || []).filter(e => e.tarih.slice(0, 10) === ymd(now)).length;
+  const yakin = (c.duyurular || []).filter(d => d.sonTarih && kalanGun(d.sonTarih) >= 0 && kalanGun(d.sonTarih) <= 14).length;
+  const okunmamis = bildirim.unread();
+  const adSoyad = u?.ad || 'Değerli Öğretmenimiz';
   ctx.root.innerHTML = `
-    <section class="section">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div><div style="font-size:12.5px;color:var(--text-2)">Hoş geldiniz${u ? ',' : ''}</div><div style="font-size:19px;font-weight:800;letter-spacing:-.3px">${esc(u?.ad || 'Değerli Öğretmenimiz')}</div></div>
-        <span class="chip navy">${fmtDate(new Date())}</span>
-      </div>
-      <div class="banner-wrap" id="banners">${(c.bannerlar || []).map(b => h`<a class="banner" href="${b.rota}" style="background:${b.renk}"><span class="chip light">Duyuru</span><h3>${b.baslik}</h3><p>${b.alt}</p></a>`).join('')}</div>
-      <div class="dots">${(c.bannerlar || []).map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div>
-    </section>
-    ${gunun ? h`<section class="section"><div class="section-head"><h2>Günün duyurusu</h2><a href="#/duyurular">Tümü</a></div>
-      <a class="card ann tap ${gunun.onemli ? 'onemli' : ''} ${gunun.acil ? 'acil' : ''}" href="#/duyurular/${gunun.id}"><div class="tags">${gunun.resmi ? raw('<span class="chip navy">Resmî</span>') : ''}${gunun.onemli ? raw('<span class="chip meb">Önemli</span>') : ''}${gunun.acil ? raw('<span class="chip meb">Acil</span>') : ''}</div><h3>${gunun.baslik}</h3><p>${gunun.ozet}</p>${gunun.sonTarih ? raw(deadlineHtml(gunun.sonTarih)) : ''}</a></section>` : ''}
+    <div class="greet"><div><div class="hi">${selam},</div><div class="name">${esc(adSoyad.split(' ').slice(0, 2).join(' '))}</div></div>
+      <div class="date"><b>${now.getDate()}</b>${fmtDate(now).split(' ').slice(1).join(' ')}<br>${['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'][now.getDay()]}</div></div>
+    <div class="today">
+      <a href="#/takvim" style="background:var(--g-teal)">${icons.calendar}<b>${bugun}</b><span>Bugünkü etkinlik</span></a>
+      <a href="#/duyurular" style="background:var(--g-gold)">${icons.clock}<b>${yakin}</b><span>Yaklaşan son tarih</span></a>
+      <a href="#/bildirimler" style="background:var(--g-navy)">${icons.bell}<b>${okunmamis}</b><span>Yeni bildirim</span></a>
+    </div>
     <div id="live-slot"></div>
+    <section class="section"><div class="section-head"><h2>Manşet</h2><a href="#/haberler">Tüm haberler ${icons.chevron}</a></div><div id="manset"><div class="manset skeleton" style="box-shadow:none"></div></div></section>
     <section class="section"><div class="section-head"><h2>Hızlı erişim</h2></div>
-      <div class="quick">${(c.hizliErisim || []).map(q => h`<a href="${q.rota}"><span class="ic">${raw(icons[q.ikon] || icons.grid)}</span>${q.ad}</a>`).join('')}</div></section>
-    <section class="section"><div class="section-head"><h2>Son haberler</h2><a href="#/haberler">Tümü</a></div><div class="card-list" id="home-news">${skeletons(3)}</div></section>
-    <section class="section"><div class="section-head"><h2>Kocaeli MEM TV</h2><a href="#/tv">Tümü</a></div><div class="card-list" id="home-video"><div class="card video"><div class="thumb skeleton"></div></div></div></section>
-    <section class="section"><div class="section-head"><h2>Yaklaşan etkinlikler</h2><a href="#/takvim">Takvim</a></div><div class="card">${upcoming(c).map(e => h`<a class="event tap" href="#/takvim?g=${e.tarih.slice(0, 10)}"><div class="when"><b>${new Date(e.tarih).getDate()}</b><span>${fmtDate(e.tarih).split(' ')[1].slice(0, 3)}</span><small>${e.tarih.slice(11, 16)}</small></div><div><h3>${e.baslik}</h3><p>${e.yer} · ${e.tur}</p></div></a>`).join('') || empty('Yaklaşan etkinlik yok', 'calendar')}</div></section>`;
-  // banner dots
+      <div class="quick">${(c.hizliErisim || []).map(q => h`<a href="${q.rota}" data-c="${q.renk || 'slate'}"><span class="ic">${raw(icons[q.ikon] || icons.grid)}</span>${q.ad}</a>`).join('')}</div></section>
+    <section class="section"><div class="section-head"><h2>Öne çıkanlar</h2></div>
+      <div class="banner-wrap" id="banners">${(c.bannerlar || []).map(b => h`<a class="banner" href="${b.rota}" style="background:${b.renk}"><span class="chip light">Duyuru</span><h3>${b.baslik}</h3><p>${b.alt}</p></a>`).join('')}</div>
+      <div class="dots">${(c.bannerlar || []).map((_, i) => `<i class="${i === 0 ? 'on' : ''}"></i>`).join('')}</div></section>
+    ${gunun ? h`<section class="section"><div class="section-head"><h2>Günün duyurusu</h2><a href="#/duyurular">Tümü ${raw(icons.chevron)}</a></div>
+      <a class="card ann tap ${gunun.onemli ? 'onemli' : ''} ${gunun.acil ? 'acil' : ''}" href="#/duyurular/${gunun.id}"><div class="tags">${gunun.resmi ? raw('<span class="chip navy">Resmî</span>') : ''}${gunun.onemli ? raw('<span class="chip meb">Önemli</span>') : ''}${gunun.acil ? raw('<span class="chip meb">Acil</span>') : ''}</div><h3>${gunun.baslik}</h3><p>${gunun.ozet}</p>${gunun.sonTarih ? raw(deadlineHtml(gunun.sonTarih)) : ''}</a></section>` : ''}
+    <section class="section"><div class="section-head"><h2>Son haberler</h2><a href="#/haberler">Tümü ${icons.chevron}</a></div><div class="card-list" id="home-news">${skeletons(3)}</div></section>
+    <section class="section"><div class="section-head"><h2>Kocaeli MEM TV</h2><a href="#/tv">Tümü ${icons.chevron}</a></div><div class="card-list" id="home-video"><div class="card video"><div class="thumb skeleton"></div></div></div></section>
+    <section class="section"><div class="section-head"><h2>Yaklaşan etkinlikler</h2><a href="#/takvim">Takvim ${icons.chevron}</a></div><div class="card">${upcoming(c).map(e => h`<a class="event tap" href="#/takvim?g=${e.tarih.slice(0, 10)}"><div class="when"><b>${new Date(e.tarih).getDate()}</b><span>${fmtDate(e.tarih).split(' ')[1].slice(0, 3)}</span><small>${e.tarih.slice(11, 16)}</small></div><div><h3>${e.baslik}</h3><p>${e.yer} · ${e.tur}</p></div></a>`).join('') || empty('Yaklaşan etkinlik yok', 'calendar')}</div></section>`;
   const bw = ctx.root.querySelector('#banners'), dots = ctx.root.querySelectorAll('.dots i');
   bw?.addEventListener('scroll', () => { const i = Math.round(bw.scrollLeft / (bw.firstElementChild?.offsetWidth + 12 || 1)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); }, { passive: true });
   let auto = setInterval(() => { if (!document.contains(bw)) return clearInterval(auto); const w = (bw.firstElementChild?.offsetWidth || 0) + 12; const next = (Math.round(bw.scrollLeft / w) + 1) % (c.bannerlar?.length || 1); bw.scrollTo({ left: next * w, behavior: 'smooth' }); }, 5000);
-  allNews(c).then(items => { const n = ctx.root.querySelector('#home-news'); if (n) n.innerHTML = items.length ? items.slice(0, 1).map(i => newsCard(i, { big: true })).join('') + items.slice(1, 5).map(i => newsCard(i)).join('') : empty('Haber yüklenemedi'); });
+  allNews(c).then(items => {
+    const m = ctx.root.querySelector('#manset'); const hero = items.find(i => i.image) || items[0];
+    if (m) m.innerHTML = hero ? h`<a class="manset tap" href="#/haberler/${encodeURIComponent(hero.id)}">${hero.image ? raw(`<img src="${esc(hero.image)}" alt="" referrerpolicy="no-referrer">`) : ''}<div class="tx"><span class="chip light">${hero.kaynak}${hero.date ? ' · ' + fmtRel(hero.date) : ''}</span><h3>${hero.title}</h3><p>${hero.summary || ''}</p></div></a>` : '';
+    const n = ctx.root.querySelector('#home-news'); if (n) n.innerHTML = items.length ? items.filter(i => i !== hero).slice(0, 5).map(i => newsCard(i)).join('') : empty('Haber yüklenemedi');
+  });
   feeds.live(YT_CHANNELS.map(k => k.id)).then(d => { const l = (d.items || []).find(x => x.live); const slot = ctx.root.querySelector('#live-slot'); if (!l || !slot) return; const ch = YT_CHANNELS.find(k => k.id === l.channelId); slot.innerHTML = `<a class="card live-card tap" href="#/tv/${esc(l.videoId)}" style="margin-bottom:22px"><span class="live-badge"><i></i>CANLI</span><b>${esc(ch?.ad || '')}</b><span>${esc(l.title || 'Canlı yayın sürüyor')}</span>${icons.chevron}</a>`; }).catch(() => {});
   feeds.channel(YT_CHANNELS[0].id).then(d => { const n = ctx.root.querySelector('#home-video'); if (n) n.innerHTML = (d.items || []).slice(0, 2).map(videoCard).join(''); }).catch(() => { const n = ctx.root.querySelector('#home-video'); if (n) n.innerHTML = empty('Video yüklenemedi', 'play'); });
 }

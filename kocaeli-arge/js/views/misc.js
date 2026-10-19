@@ -203,13 +203,13 @@ export async function hakkinda(ctx) {
 export async function menu(ctx) {
   ctx.title('Tüm Modüller');
   const items = [
-    ['Akış', 'feed', '#/akis', 'Paylaşımlar, haber ve videolar tek akışta'], ['Ara', 'search', '#/ara', 'Tüm içerikte arama'],
-    ['Haberler', 'news', '#/haberler', 'Kocaeli MEM, AR-GE ve MEB haberleri'], ['Duyurular', 'megaphone', '#/duyurular', 'Resmî ve acil duyurular, son tarihler'], ['Bildirimler', 'bell', '#/bildirimler', 'Bildirim merkezi'],
-    ['Kocaeli MEM TV', 'play', '#/tv', 'YouTube, canlı yayın, oynatma listeleri'], ['AR-GE Çalışmaları', 'flask', '#/arge', 'Projeler, başvuru, sonuç raporları'], ['eTwinning Merkezi', 'globe', '#/etwinning', 'Çağrılar, örnekler, kılavuzlar'],
-    ['TÜBİTAK Merkezi', 'atom', '#/tubitak', '4004 · 4005 · 4006 · 2204'], ['Öğretmen Akademileri', 'graduation', '#/akademiler', 'Takvim, videolar, başvuru'], ['Dijital Kütüphane', 'book', '#/kutuphane', 'PDF, kılavuz, MEB yayınları, e-kitap'],
-    ['Etkinlik Takvimi', 'calendar', '#/takvim', 'Günlük, haftalık, aylık'], ['İlçe AR-GE Birimleri', 'building', '#/ilceler', '12 ilçe, iletişim ve faaliyetler'], ['Anket Sistemi', 'chart', '#/anketler', 'Online anket ve sonuçlar'],
-    ['Yapay Zekâ Asistanı', 'sparkles', '#/asistan', 'Proje, yazı ve etkinlik desteği'], ['Doküman Merkezi', 'file', '#/dokumanlar', 'Formlar ve dilekçe örnekleri'], ['Kurumsal İletişim', 'phone', '#/iletisim', 'Telefon, e-posta, harita'],
-    ['Hesabım', 'user', '#/hesap', 'Profil, favoriler, bildirim, tema'],
+    ['Akış', 'feed', '#/akis', 'Paylaşımlar, haber ve videolar tek akışta', 'rose'], ['Ara', 'search', '#/ara', 'Tüm içerikte arama', 'slate'],
+    ['Haberler', 'news', '#/haberler', 'Kocaeli MEM, AR-GE ve MEB haberleri', 'red'], ['Duyurular', 'megaphone', '#/duyurular', 'Resmî ve acil duyurular, son tarihler', 'navy'], ['Bildirimler', 'bell', '#/bildirimler', 'Bildirim merkezi', 'gold'],
+    ['Kocaeli MEM TV', 'play', '#/tv', 'YouTube, canlı yayın, oynatma listeleri', 'red'], ['AR-GE Çalışmaları', 'flask', '#/arge', 'Projeler, başvuru, sonuç raporları', 'teal'], ['eTwinning Merkezi', 'globe', '#/etwinning', 'Çağrılar, örnekler, kılavuzlar', 'sky'],
+    ['TÜBİTAK Merkezi', 'atom', '#/tubitak', '4004 · 4005 · 4006 · 2204', 'violet'], ['Öğretmen Akademileri', 'graduation', '#/akademiler', 'Takvim, videolar, başvuru', 'navy'], ['Dijital Kütüphane', 'book', '#/kutuphane', 'PDF, kılavuz, MEB yayınları, e-kitap', 'gold'],
+    ['Etkinlik Takvimi', 'calendar', '#/takvim', 'Günlük, haftalık, aylık', 'teal'], ['İlçe AR-GE Birimleri', 'building', '#/ilceler', '12 ilçe, iletişim ve faaliyetler', 'sky'], ['Anket Sistemi', 'chart', '#/anketler', 'Online anket ve sonuçlar', 'violet'],
+    ['Yapay Zekâ Asistanı', 'sparkles', '#/asistan', 'Proje, yazı ve etkinlik desteği', 'rose'], ['Doküman Merkezi', 'file', '#/dokumanlar', 'Formlar ve dilekçe örnekleri', 'slate'], ['Kurumsal İletişim', 'phone', '#/iletisim', 'Telefon, e-posta, harita', 'navy'],
+    ['Hesabım', 'user', '#/hesap', 'Profil, favoriler, bildirim, tema', 'slate'],
   ];
-  ctx.root.innerHTML = `<div class="card">${items.map(([t, i, href, s]) => listRow({ icon: i, title: t, sub: s, href })).join('')}${store.isAdmin ? listRow({ icon: 'settings', title: 'Yönetici Paneli', sub: 'İçerik ve bildirim yönetimi', href: '/kocaeli-arge/yonetim/' }) : ''}</div>`;
+  ctx.root.innerHTML = `<div class="card">${items.map(([t, i, href, s, c]) => listRow({ icon: i, title: t, sub: s, href, c })).join('')}${store.isAdmin ? listRow({ icon: 'settings', title: 'Yönetici Paneli', sub: 'İçerik ve bildirim yönetimi', href: '/kocaeli-arge/yonetim/', c: 'red' }) : ''}</div>`;
 }

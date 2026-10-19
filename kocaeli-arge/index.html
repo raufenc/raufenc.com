@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/kocaeli-arge/assets/icon-192.png">
 <link rel="apple-touch-icon" href="/kocaeli-arge/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/kocaeli-arge/css/app.css">
 <script>try{var t=localStorage.getItem('arge.theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;var f=localStorage.getItem('arge.font');if(f&&f!=='normal')document.documentElement.dataset.font=f;}catch(e){}</script>
 </head>
@@ -27,6 +27,15 @@
   <div class="intro-text"><h1>Kocaeli MEM AR-GE Portalı</h1><p>Haber · Duyuru · Video · Proje · Yapay Zekâ · Dijital İçerik</p><span class="chip light">Dokunarak devam edin</span></div>
 </div>
 <div id="device"><div class="screen"><div class="empty" style="padding-top:40vh">Yükleniyor…</div></div></div>
+<aside id="stage" aria-label="Tanıtım">
+  <div class="k">Kocaeli İl Millî Eğitim Müdürlüğü · AR-GE Birimi</div>
+  <h1>Haber, duyuru, video ve projeler<br>tek uygulamada.</h1>
+  <p>Öğretmenlerimiz için Kocaeli MEM, MEB ve EBA kaynaklarını, Öğretmen Akademileri'ni, TÜBİTAK ve eTwinning çağrılarını, etkinlik takvimini ve yapay zekâ asistanını bir araya getiren mobil portal.</p>
+  <div class="feat"><span>Anlık haber</span><span>Kocaeli MEM TV</span><span>Canlı yayın</span><span>Sosyal akış</span><span>Push bildirim</span><span>Etkinlik takvimi</span><span>Yapay zekâ asistanı</span><span>Çevrim dışı çalışır</span></div>
+  <div class="qrbox"><div id="stage-qr"></div><div><b>Telefonunuzla okutun</b><small>raufenc.com/kocaeli-arge/<br>"Ana ekrana ekle" ile uygulama olarak kurulur.</small></div></div>
+</aside>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script>window.addEventListener('load',function(){var q=document.getElementById('stage-qr');if(q&&window.QRCode&&q.offsetParent!==null){try{new QRCode(q,{text:location.origin+'/kocaeli-arge/',width:112,height:112,correctLevel:QRCode.CorrectLevel.M});}catch(e){}}});</script>
 <script type="module" src="/kocaeli-arge/js/app.js"></script>
 <noscript><p style="padding:20px;color:#fff">Bu uygulama için JavaScript gereklidir.</p></noscript>
 </body>

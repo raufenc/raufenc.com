@@ -20,6 +20,8 @@ const TABS = [['#/', 'Ana Sayfa', 'home'], ['#/akis', 'Akış', 'feed'], ['#/tv'
 const $ = (s) => document.querySelector(s);
 let installPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installPrompt = e; });
+// Yüklenemeyen görseller (kaynak sitesi erişilemezse) boş kutu olarak kalsın, kırık simge görünmesin
+document.addEventListener('error', (e) => { if (e.target?.tagName === 'IMG') e.target.classList.add('broken'); }, true);
 
 function applyTheme(t) {
   if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme;
@@ -86,7 +88,7 @@ function versionCheck() {
 // ── Giriş ekranı ──
 function showLogin() {
   document.getElementById('login')?.remove();
-  const l = el(`<div id="login"><div class="wrap"><div class="hero"><div class="logo">AR-GE</div><h1>Kocaeli MEM AR-GE Portalı</h1><p>Haber, duyuru, video, proje ve dijital içerikler tek merkezde.</p></div>
+  const l = el(`<div id="login"><div class="wrap"><div class="hero"><div class="kurum">T.C. Kocaeli Valiliği · İl Millî Eğitim Müdürlüğü</div><div class="logo">AR-GE</div><h1>Kocaeli MEM AR-GE Portalı</h1><p>Haber, duyuru, video, proje ve dijital içerikler tek merkezde.</p></div>
     ${isLive ? '' : '<div class="notice demo">Tanıtım sürümü: Firebase bağlanmadığı için demo hesapla giriş yapılır; veriler bu cihazda saklanır.</div>'}
     <button class="login-btn soon" id="l-edevlet"><span class="lg edevlet">e-D</span><span>e-Devlet ile giriş<small>Kamu kimlik doğrulama</small></span><span class="chip amber soon-tag">Protokol sonrası</span></button>
     <button class="login-btn soon" id="l-mebbis"><span class="lg mebbis">MEB</span><span>MEBBİS ile giriş<small>Öğretmen kurumsal hesabı</small></span><span class="chip amber soon-tag">Protokol sonrası</span></button>

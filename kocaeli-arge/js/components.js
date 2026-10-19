@@ -72,4 +72,4 @@ export function ytEmbed(videoId, { autoplay = 1 } = {}) {
 export function ytLive(channelId) {
   return `<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/live_stream?channel=${esc(channelId)}&autoplay=0&playsinline=1&hl=tr" title="Canlı yayın" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe></div>`;
 }
-export const listRow = ({ icon = 'file', title, sub, href, right = '' }) => h`<a class="row tap" href="${href || '#'}"><span class="ic">${raw(icons[icon] || icons.file)}</span><span class="tx"><b>${title}</b>${sub ? raw(`<span>${esc(sub)}</span>`) : ''}</span>${raw(right)}<span class="arrow">${raw(icons.chevron)}</span></a>`;
+export const listRow = ({ icon = 'file', title, sub, href, right = '', c = '' }) => h`<a class="row tap" href="${href || '#'}" data-c="${c}"><span class="ic">${raw(icons[icon] || icons.file)}</span><span class="tx"><b>${title}</b>${sub ? raw(`<span>${esc(sub)}</span>`) : ''}</span>${raw(right)}<span class="arrow">${raw(icons.chevron)}</span></a>`;

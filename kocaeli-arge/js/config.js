@@ -11,7 +11,7 @@
 //   7. ADMIN_EMAILS listesine yönetici Google hesaplarını yaz (Firestore'da admins/{email} de oluşturulur)
 //  Config girilmezse uygulama DEMO modunda çalışır (tarayıcı belleği + örnek içerik).
 // ============================================================
-export const APP_VERSION = '1.1.0';
+export const APP_VERSION = '1.2.0';
 export const APP_NAME = 'Kocaeli MEM AR-GE Portalı';
 export const BASE_PATH = '/kocaeli-arge/';
 

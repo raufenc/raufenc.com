@@ -1,5 +1,5 @@
 /* Kocaeli MEM AR-GE Portalı — service worker: çevrim dışı kabuk + FCM arka plan bildirimleri */
-const VERSION = 'arge-v1.1.0';
+const VERSION = 'arge-v1.2.0';
 const BASE = '/kocaeli-arge/';
 const SHELL = [BASE, BASE + 'index.html', BASE + 'css/app.css', BASE + 'manifest.webmanifest', BASE + 'data/seed.json',
   ...['app', 'backend', 'components', 'config', 'feeds', 'intro', 'router', 'ui', 'views/home', 'views/tv', 'views/arge', 'views/misc', 'views/akis'].map(f => `${BASE}js/${f}.js`)];
