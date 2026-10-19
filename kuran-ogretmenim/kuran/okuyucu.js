@@ -93,9 +93,10 @@
     calanAyet.textContent = etiket(n);
   }
 
+  var onYukleyici = null;
   function onYukle(n) {
     if (n < 1 || n > ADET) return;
-    try { fetch(sesUrl(SURE, n), { mode: 'no-cors' }).catch(function () {}); } catch (e) {}
+    try { onYukleyici = new Audio(); onYukleyici.preload = 'auto'; onYukleyici.src = sesUrl(SURE, n); } catch (e) {}
   }
 
   function cal(n, tekrarSifirla) {
