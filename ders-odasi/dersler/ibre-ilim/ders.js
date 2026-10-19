@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Her şeyi bildiğini sanan kişi neyi kaçırır?",
+       "soru": "Her şeyi bildiğini sanan kişinin kaybı ne olur?",
        "ad": "Ukalâlık",
        "soz": "Her şeyi ben bilirim; dinlemeye gerek yok.",
        "eylem": "isaret",
@@ -211,7 +211,7 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Ben hepsini biliyorum, anlatmaya gerek yok!",
+         "m": "Ben hepsini biliyorum, anlatma bana!",
          "zon": "fazla",
          "sonuc": "Takıldığın yer kapanmıyor; arkadaşların da yanında soru sormaya çekinebilir.",
          "not": "İbre sağa kaydı: her şeyi bildiğini sanmak, yeni bilgiyi kapıda bekletiyor.",
@@ -291,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Merak ettiği bir şey olsa bile sormaz; “ne gerek var” der.",
+       "metin": "Merak ettiği bir şey olsa bile sormaz; “boş ver” der.",
        "alan": "az",
        "ipucu": "Öğrenmeye hiç yönelmiyor."
       },

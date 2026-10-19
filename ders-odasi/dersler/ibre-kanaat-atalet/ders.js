@@ -291,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Ödevi varken bütün gün koltukta oturur: “Ne gerek var?”",
+       "metin": "Ödevi varken bütün gün koltukta oturur: “Sonra bakarım.”",
        "alan": "az",
        "ipucu": "Hiç gayret göstermiyor."
       },

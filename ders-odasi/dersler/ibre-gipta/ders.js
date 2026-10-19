@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Başkasının iyiliğini çekemeyen kişi neyi kaçırır?",
+       "soru": "Başkasının iyiliğini çekemeyen kişi neyi kaybeder?",
        "ad": "Hased",
        "soz": "Hak etmedi, o başarı bende olmalıydı!",
        "eylem": "isaret",

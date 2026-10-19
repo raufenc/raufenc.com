@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Aynı soruya takılıp kalan kişi neyi kaçırır?",
+       "soru": "Aynı soruya takılıp kalan kişi neden rahat edemez?",
        "ad": "Vesvese",
        "soz": "Ya bir şey kaçırırsam? Aynı soruyu yine düşüneyim!",
        "eylem": "dusun",

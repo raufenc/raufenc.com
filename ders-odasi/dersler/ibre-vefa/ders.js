@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
+          "m": "Herkes dostumsa kimseyi sınamam.",
           "dogru": true,
           "not": "Saflık, herkesi hemen dost sanıp kolay aldanmaktır. Dostluk, zamanla tanıyarak güvenmeyi de ister."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Gadr, dostu yarı yolda bırakmaktır. İş bitince dostluğu da bitirmek güveni sarsar."
          },
          {
-          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
+          "m": "Herkes dostumsa kimseyi sınamam.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Vefâ, sözünde durup dostluğu korumaktır. Zor gün, dostluğun en çok anlaşıldığı gündür."
          },
          {
-          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
+          "m": "Herkes dostumsa kimseyi sınamam.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },

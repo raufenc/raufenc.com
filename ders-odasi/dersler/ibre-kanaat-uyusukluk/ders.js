@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Eşyasına çok bağlanan kişi neyi kaçırır?",
+       "soru": "Eşyasına çok bağlanan kişi ne yaşar?",
        "ad": "Kıyamama",
        "soz": "Çizilmesin diye hiç kullanmam, durmadan sayarım!",
        "eylem": "isaret",

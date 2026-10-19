@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Canının istediğini hemen yapan kişi neyi kaçırır?",
+       "soru": "Canının istediğini hemen yapan kişi neye zarar verir?",
        "ad": "Hevâ",
        "soz": "Canım çekti, yaparım; doğru mu yanlış mı düşünmem!",
        "eylem": "isaret",
