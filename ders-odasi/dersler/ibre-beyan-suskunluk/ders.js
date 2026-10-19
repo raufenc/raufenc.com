@@ -46,7 +46,7 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi birinin adı ya da özelliğiyle alay edip buna şaka diyor: sağ uca (Lakap) yakın. Başka okumada kimseyi küçük düşürmeden hafif bir espri yapıyor ve doğruyu dalga geçmeden söylemiş oluyor: orta uca yakın. İki okuma da savunulabilir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi birinin adı ya da özelliğiyle alay edip buna şaka diyor: sağ uca (Lakap) yakın. Başka okumada kimseyi küçük düşürmeden hafif bir espri yapıyor ve karşısındaki de gülüyor: orta uca yakın. İki okuma da savunulabilir.",
       "İbre cümleye değil, sözün karşımızdakini nasıl etkilediğine bakar. Hikmetli Beyân; sözü yerinde, zamanında ve faydalı söylemektir. Bu ibre yalnız ad ve şaka konusuna bakar ve ölçekten çok yönü gösterir: bir uçta kırıldığı hâlde sessiz kalıp sınır koyamamak, öbür uçta küçük düşürücü bir ad takmak vardır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
@@ -1977,168 +1977,163 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 11.34,
-   "m": "Bu cümle bilerek çift anlamlı. Alay eden bir şaka yapan biri diyorsa sağ uca yakın. Kimseyi küçük düşürmeden hafif bir espri yapan ve doğruyu dalga geçmeden söyleyen biri diyorsa orta uca yakın.",
+   "sure": 10.394,
+   "m": "Bu cümle bilerek çift anlamlı. Alay eden bir şaka yapan biri diyorsa sağ uca yakın. Kimseyi küçük düşürmeden hafif bir espri yapan ve karşısındakiyle birlikte gülen biri diyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.173
+     0.177
     ],
     [
      "cümle",
-     0.173,
-     0.458
+     0.177,
+     0.47
     ],
     [
      "bilerek",
-     0.458,
-     0.885
+     0.47,
+     0.909
     ],
     [
      "çift",
-     0.885,
-     1.028
+     0.909,
+     1.056
     ],
     [
      "anlamlı.",
-     1.028,
-     1.455
+     1.056,
+     1.495
     ],
     [
      "Alay",
-     1.85,
-     2.134
+     1.73,
+     2.003
     ],
     [
      "eden",
-     2.134,
-     2.417
+     2.003,
+     2.276
     ],
     [
      "bir",
-     2.417,
-     2.559
+     2.276,
+     2.413
     ],
     [
      "şaka",
-     2.559,
-     2.843
+     2.413,
+     2.686
     ],
     [
      "yapan",
-     2.843,
-     3.127
+     2.686,
+     2.959
     ],
     [
      "biri",
-     3.127,
-     3.41
+     2.959,
+     3.232
     ],
     [
      "diyorsa",
-     3.41,
-     3.836
+     3.232,
+     3.642
     ],
     [
      "sağ",
-     3.836,
-     3.978
+     3.642,
+     3.779
     ],
     [
      "uca",
-     3.978,
-     4.261
+     3.779,
+     4.052
     ],
     [
      "yakın.",
-     4.261,
-     4.545
+     4.052,
+     4.325
     ],
     [
      "Kimseyi",
-     5.01,
-     5.492
+     4.69,
+     5.123
     ],
     [
      "küçük",
-     5.492,
-     5.813
+     5.123,
+     5.412
     ],
     [
      "düşürmeden",
-     5.813,
-     6.455
+     5.412,
+     5.99
     ],
     [
      "hafif",
-     6.455,
-     6.776
+     5.99,
+     6.279
     ],
     [
      "bir",
-     6.776,
-     6.936
+     6.279,
+     6.424
     ],
     [
      "espri",
-     6.936,
-     7.257
+     6.424,
+     6.713
     ],
     [
      "yapan",
-     7.257,
-     7.578
+     6.713,
+     7.002
     ],
     [
      "ve",
-     7.578,
-     7.739
+     7.002,
+     7.146
     ],
     [
-     "doğruyu",
-     7.739,
-     8.22
+     "karşısındakiyle",
+     7.146,
+     8.013
     ],
     [
-     "dalga",
-     8.22,
-     8.541
+     "birlikte",
+     8.013,
+     8.446
     ],
     [
-     "geçmeden",
-     8.541,
-     9.023
-    ],
-    [
-     "söyleyen",
-     9.023,
-     9.504
+     "gülen",
+     8.446,
+     8.735
     ],
     [
      "biri",
-     9.504,
-     9.825
+     8.735,
+     9.024
     ],
     [
      "diyorsa",
-     9.825,
-     10.307
+     9.024,
+     9.458
     ],
     [
      "orta",
-     10.307,
-     10.628
+     9.458,
+     9.746
     ],
     [
      "uca",
-     10.628,
-     10.949
+     9.746,
+     10.035
     ],
     [
      "yakın.",
-     10.949,
-     11.27
+     10.035,
+     10.324
     ]
    ]
   },
