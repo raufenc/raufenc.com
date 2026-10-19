@@ -321,9 +321,9 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Aklına takılan soruyu not alıp güvendiği bir büyüğe götürür.",
+       "metin": "Bir şeyin nedenini kendi cümleleriyle anlatmaya çalışır, takıldığı yeri sorar.",
        "alan": "orta",
-       "ipucu": "Soruyu doğru yere taşıyor."
+       "ipucu": "Nedenini anlamaya çalışıyor."
       }
      ]
     },

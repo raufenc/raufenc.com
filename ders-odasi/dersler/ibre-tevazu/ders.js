@@ -111,7 +111,7 @@ DO.dersKaydet(
        "eylem": "isaret",
        "zincir": [
         "Teşekkür sırası kimseye gelmez.",
-        "Bir sonraki işte arkadaşların gönülden katılmayabilir."
+        "Bir sonraki işte arkadaşların seninle çalışmaktan çekinebilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -977,73 +977,78 @@ DO.dersKaydet(
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.196,
-   "m": "Sonra ne olur? Teşekkür sırası kimseye gelmez. Bir sonraki işte arkadaşların gönülden katılmayabilir.",
+   "sure": 6.878,
+   "m": "Sonra ne olur? Teşekkür sırası kimseye gelmez. Bir sonraki işte arkadaşların seninle çalışmaktan çekinebilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.278
+     0.294
     ],
     [
      "ne",
-     0.278,
-     0.402
+     0.294,
+     0.426
     ],
     [
      "olur?",
-     0.402,
-     0.65
+     0.426,
+     0.69
     ],
     [
      "Teşekkür",
-     1.045,
-     1.563
+     1.21,
+     1.72
     ],
     [
      "sırası",
-     1.563,
-     2.081
+     1.72,
+     2.23
     ],
     [
      "kimseye",
-     2.081,
-     2.6
+     2.23,
+     2.74
     ],
     [
      "gelmez.",
-     2.6,
-     2.945
+     2.74,
+     3.08
     ],
     [
      "Bir",
-     3.225,
-     3.37
+     3.45,
+     3.596
     ],
     [
      "sonraki",
-     3.37,
-     3.805
+     3.596,
+     4.034
     ],
     [
      "işte",
-     3.805,
-     4.095
+     4.034,
+     4.326
     ],
     [
      "arkadaşların",
-     4.095,
-     4.821
+     4.326,
+     5.056
     ],
     [
-     "gönülden",
-     4.821,
-     5.256
+     "seninle",
+     5.056,
+     5.494
     ],
     [
-     "katılmayabilir.",
-     5.256,
-     6.126
+     "çalışmaktan",
+     5.494,
+     6.078
+    ],
+    [
+     "çekinebilir.",
+     6.078,
+     6.808
     ]
    ]
   },

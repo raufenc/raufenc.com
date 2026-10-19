@@ -366,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Kanaat",
-       "metin": "razı olup harekete geçmek",
+       "metin": "razı olup şükretmek; hareket etmek",
        "ikon": "muhur",
        "renk": "#17998A"
       },

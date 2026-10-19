@@ -1,9 +1,9 @@
-/* İbremetre · Tevazu — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Küçümseme · Tevazu · Ucb). Taslak: hoca onayı bekliyor. */
+/* İbremetre · Tevâzu — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Küçümseme · Tevâzu · Ucb). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-tevazu-ucb",
- "ad": "Tevazu (Küçümseme · Ucb): İbren Nerede?",
+ "ad": "Tevâzu (Küçümseme · Ucb): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
  "aile": "benlik",
@@ -21,13 +21,13 @@ DO.dersKaydet(
     {
      "id": "acilis",
      "tur": "ibreAcilis",
-     "huy": "Tevazu",
-     "huyAnahtar": "Tevazu",
+     "huy": "Tevâzu",
+     "huyAnahtar": "Tevâzu",
      "olculen": "Güzel yanlarıma bakışım",
      "kanca": "Bende özel bir şey yok.",
      "uclar": {
       "az": "Küçümseme",
-      "orta": "Tevazu",
+      "orta": "Tevâzu",
       "fazla": "Ucb"
      },
      "soru": "Bu cümle ibrenin neresinde?",
@@ -36,18 +36,18 @@ DO.dersKaydet(
     {
      "id": "tahmin",
      "tur": "ibreTahmin",
-     "huy": "Tevazu",
+     "huy": "Tevâzu",
      "cumle": "Bende özel bir şey yok.",
      "uclar": {
       "az": "Küçümseme",
-      "orta": "Tevazu",
+      "orta": "Tevâzu",
       "fazla": "Ucb"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi kendi yeteneğini küçümsüyor, önemsiz sayıyor: sol uca (Küçümseme) yakın. Başka okumada güzel bir yeteneğin kendi marifeti olmadığını, Allahü teâlâ’nın verdiği bir nimet olduğunu biliyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an güzel yanlarımıza nasıl baktığımıza bakar. Tevazu; nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır: ne yeteneğini küçümsemek ne de kendine hayran olmak.",
+      "İbre cümleye değil, o an güzel yanlarımıza nasıl baktığımıza bakar. Tevâzu; nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır: ne yeteneğini küçümsemek ne de kendine hayran olmak.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -55,12 +55,12 @@ DO.dersKaydet(
     {
      "id": "kapilar",
      "tur": "ibreKapilar",
-     "huy": "Tevazu",
+     "huy": "Tevâzu",
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
       "az": "Küçümseme",
-      "orta": "Tevazu",
+      "orta": "Tevâzu",
       "fazla": "Ucb"
      },
      "yesil": 0.26,
@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Kendine hayran olan kişi neyi kaçırır?",
+       "soru": "Kendine hayran olan kişi neyi göremez?",
        "ad": "Ucb",
        "soz": "Bu resmi ben çizdim, benden iyisi yok!",
        "eylem": "isaret",
@@ -146,7 +146,7 @@ DO.dersKaydet(
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
-       "ad": "Tevazu",
+       "ad": "Tevâzu",
        "soz": "Güzel yanım var; Allahü teâlâ verdi, şükrederim.",
        "eylem": "konus",
        "zincir": [
@@ -159,7 +159,7 @@ DO.dersKaydet(
          {
           "m": "Bu yeteneği bana Allahü teâlâ verdi; şükrederim.",
           "dogru": true,
-          "not": "Tevazu, nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır."
+          "not": "Tevâzu, nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır."
          },
          {
           "m": "Bu yeteneğim önemsiz; kimseye göstermeye değmez.",
@@ -174,7 +174,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Tevazu",
+        "ad": "Tevâzu",
         "soz": "Güzel"
        },
        "zincirAnahtar": [
@@ -187,11 +187,11 @@ DO.dersKaydet(
     {
      "id": "senaryo",
      "tur": "ibreSenaryo",
-     "huy": "Tevazu",
+     "huy": "Tevâzu",
      "baslik": "Sen olsan?",
      "uclar": {
       "az": "Küçümseme",
-      "orta": "Tevazu",
+      "orta": "Tevâzu",
       "fazla": "Ucb"
      },
      "yesil": 0.26,
@@ -275,7 +275,7 @@ DO.dersKaydet(
       },
       {
        "id": "orta",
-       "ad": "Kararında · Tevazu",
+       "ad": "Kararında · Tevâzu",
        "aciklama": "Nimeti bilip alçakgönüllü olmak",
        "ikon": "muhur",
        "renk": "#17998A"
@@ -365,7 +365,7 @@ DO.dersKaydet(
        "renk": "#4262B0"
       },
       {
-       "baslik": "Tevazu",
+       "baslik": "Tevâzu",
        "metin": "şükredip alçakgönüllü olmak",
        "ikon": "muhur",
        "renk": "#17998A"
@@ -418,7 +418,7 @@ DO.dersKaydet(
   "a2": {
    "d": "ses/a2.m4a",
    "sure": 11.767,
-   "m": "Birçok güzel huy bir ibre gibidir. Tevazu, güzel yanlarıma nasıl baktığımı ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
+   "m": "Birçok güzel huy bir ibre gibidir. Tevâzu, güzel yanlarıma nasıl baktığımı ölçer. İbre üç yerde durabilir: az, kararında, fazla.",
    "k": [
     [
      "Birçok",
@@ -451,7 +451,7 @@ DO.dersKaydet(
      2.355
     ],
     [
-     "Tevazu,",
+     "Tevâzu,",
      2.895,
      3.605
     ],
@@ -1090,7 +1090,7 @@ DO.dersKaydet(
   "kor1": {
    "d": "ses/kor1.m4a",
    "sure": 10.088,
-   "m": "Tam kararında Tevazu. Güzel yanım var; Allahü teâlâ verdi, şükrederim. Güzel yanını bilir, şükreder ve öğrenmeye devam eder.",
+   "m": "Tam kararında Tevâzu. Güzel yanım var; Allahü teâlâ verdi, şükrederim. Güzel yanını bilir, şükreder ve öğrenmeye devam eder.",
    "k": [
     [
      "Tam",
@@ -1103,7 +1103,7 @@ DO.dersKaydet(
      1.111
     ],
     [
-     "Tevazu.",
+     "Tevâzu.",
      1.111,
      1.76
     ],

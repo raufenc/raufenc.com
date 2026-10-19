@@ -201,7 +201,7 @@ DO.dersKaydet(
       {
        "id": "defter",
        "baslik": "Lekelenen defter",
-       "tetik": "Arkadaşın defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu.",
+       "tetik": "Arkadaşın, defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu.",
        "secenekler": [
         {
          "m": "Bir daha yapmam diyor ya, hiç düşünmeden inanırım.",
@@ -1356,10 +1356,10 @@ DO.dersKaydet(
   "s1": {
    "d": "ses/s1.m4a",
    "sure": 6.972,
-   "m": "Arkadaşın defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu. Ne yaparsın?",
+   "m": "Arkadaşın, defterini izinsiz alıp üzerine boya döktü ve özür diledi. Bu, geçen ay da olmuştu. Ne yaparsın?",
    "k": [
     [
-     "Arkadaşın",
+     "Arkadaşın,",
      0.03,
      0.73
     ],
