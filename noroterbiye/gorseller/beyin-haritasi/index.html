@@ -9,7 +9,10 @@
   <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/beyin-haritasi/">
   <meta property="og:title" content="Beyin Haritası — NöroTerbiye">
   <meta property="og:description" content="İnteraktif beyin haritası. Prefrontal korteksten amigdalaya, her bölge bir hikâye anlatır.">
-  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <meta property="og:image" content="https://raufenc.com/noroterbiye/gorseller/og/beyin-haritasi.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://raufenc.com/noroterbiye/gorseller/og/beyin-haritasi.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
@@ -71,6 +74,15 @@
     .b-lobe-label { font: 800 13px var(--font-sans); letter-spacing: .22em; text-anchor: middle; fill: #fff; opacity: 0; transition: opacity .5s; pointer-events: none; paint-order: stroke; stroke: rgba(30,20,60,.55); stroke-width: 3px; }
     html.light .b-lobe-label { fill: #3a2160; stroke: rgba(255,255,255,.7); }
     .bm-svg.show-lobes .b-lobe-label { opacity: .95; }
+
+    /* iç yapılar (saydam görünüm) */
+    #bmCortex, .b-folds, .b-folds-hl, .b-folds-shadow, .b-lobe { transition: opacity .6s ease; }
+    .bm-svg.xray #bmCortex { opacity: .32; }
+    .bm-svg.xray .b-folds, .bm-svg.xray .b-folds-hl, .bm-svg.xray .b-folds-shadow { opacity: .18; }
+    .bm-svg.xray .b-ghost { stroke-opacity: .85; stroke-width: 2; }
+    .bm-svg.xray .b-ghost-fill { fill-opacity: .3; stroke-opacity: .9; }
+    .b-inner-label { font: 700 11px var(--font-sans); letter-spacing: .12em; text-transform: uppercase; text-anchor: middle; fill: var(--b-label-ink); opacity: 0; transition: opacity .5s; pointer-events: none; paint-order: stroke; stroke: var(--b-label-bg); stroke-width: 4px; }
+    .bm-svg.xray .b-inner-label { opacity: .95; }
 
     /* bölge şekilleri */
     .r-shape { transition: filter .35s ease, opacity .35s ease, transform .35s ease; transform-box: fill-box; transform-origin: center; }
@@ -153,7 +165,11 @@
       .bm-panel { position: static; min-height: 0; }
       .bm-regions { grid-template-columns: repeat(3, 1fr); }
     }
+    .bm-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 4px 4px 2px; }
+    .bm-foot .bm-hint { margin: 0; }
+    .bm-quiz { margin-top: 72px; }
     @media (max-width: 700px) {
+      .mk-ring { r: 17px; } .mk-num { font-size: 15px; } .mk-halo { r: 36px; }
       .lb { display: none; }
       .bm-regions { grid-template-columns: repeat(2, 1fr); }
       .bm-canvas { padding: 12px 8px 6px; }
@@ -178,7 +194,10 @@
       <div class="gv-card bm-canvas">
         <div class="bm-toolbar">
           <div class="gv-chips" id="bmPaths" role="group" aria-label="Sinyal yolları"></div>
-          <button class="gv-chip" id="bmLobes" type="button" aria-pressed="false" style="--c:#a78bfa"><span data-gv-icon="layers" data-size="16"></span> Lobları göster</button>
+          <div class="gv-chips">
+            <button class="gv-chip" id="bmLobes" type="button" aria-pressed="false" style="--c:#a78bfa"><span data-gv-icon="layers" data-size="16"></span> Lobları göster</button>
+            <button class="gv-chip" id="bmXray" type="button" aria-pressed="false" title="Şematik gösterim: iç yapıların yerleri kabaca belirtilmiştir" style="--c:#38bdf8"><span data-gv-icon="xray" data-size="16"></span> İç yapılar</button>
+          </div>
         </div>
 
         <svg class="bm-svg" id="bmSvg" viewBox="14 50 780 505" xmlns="http://www.w3.org/2000/svg" role="img"
@@ -205,7 +224,7 @@
             
           </defs>
 
-          <ellipse cx="420" cy="270" rx="400" ry="250" fill="url(#gBgGlow)"/>
+          <ellipse cx="404" cy="290" rx="376" ry="226" fill="url(#gBgGlow)"/>
 
           <g id="bmBrain" transform="translate(55 5)">
             <!-- beyin sapı -->
@@ -250,6 +269,12 @@
             <g data-r="amigdala" style="--c:#ef4444"><g class="r-shape"><path d="M-19 2C-19-10-4-15 9-12 20-9 23 2 15 10 6 18-15 15-19 2Z" transform="translate(338 318) rotate(-22)" fill="url(#gAmy)"/><ellipse cx="333" cy="311" rx="8" ry="4" fill="#fff" fill-opacity=".35" transform="rotate(-22 333 311)"/></g></g>
             <g data-r="nac" style="--c:#f59e0b"><g class="r-shape"><path d="M-16 0C-16-9-2-13 8-9 17-5 18 5 9 10-1 14-16 10-16 0Z" transform="translate(300 268) rotate(-8)" fill="url(#gNac)"/><ellipse cx="296" cy="262" rx="6" ry="3.4" fill="#fff" fill-opacity=".38"/></g></g>
 
+            <!-- iç yapı etiketleri (şematik) -->
+            <g aria-hidden="true">
+              <text x="402" y="150" class="b-inner-label">Kallozum</text>
+              <text x="442" y="291" class="b-inner-label">Talamus</text>
+              <text x="338" y="215" class="b-inner-label">Bazal ganglionlar</text>
+            </g>
             <!-- lob etiketleri -->
             <g aria-hidden="true">
               <text x="215" y="132" class="b-lobe-label">FRONTAL</text>
@@ -265,7 +290,10 @@
           <g id="bmLabelG"></g>
           <g id="bmMarkG"></g>
         </svg>
-        <p class="bm-hint"><i></i> Numaralı noktalara dokun ya da aşağıdaki kartlardan bir bölge seç.</p>
+        <div class="bm-foot">
+          <p class="bm-hint"><i></i> Numaralı noktalara dokun ya da aşağıdaki kartlardan bir bölge seç. Çizim şematiktir.</p>
+          <div id="bmExport"></div>
+        </div>
         <noscript>
           <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif beyin haritası JavaScript gerektirir. Harita; Prefrontal Korteks (karar verme, dürtü kontrolü), Amigdala (korku ve duygusal tepkiler), Nucleus Accumbens (ödül ve haz merkezi), Hipokampüs (hafıza ve öğrenme) ve Ventral Tegmental Alan (dopamin üretim merkezi) bölgelerini göstermektedir.</p>
         </noscript>
@@ -275,6 +303,8 @@
     </section>
 
     <section class="bm-regions gv-reveal" id="bmRegions" aria-label="Bölgeler"></section>
+
+    <section class="bm-quiz gv-reveal" id="bmQuiz" aria-label="Mini test"></section>
 
     <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
@@ -338,7 +368,7 @@
           pos: [185, 178], lab: { x: 18, y: 66, side: 'l' },
           func: 'Karar verme, planlama, dürtü kontrolü. Beynin “CEO”su — tüm üst düzey bilişsel süreçleri yönetir.',
           ctx: 'Aklın merkezi — nefse karşı en güçlü silahın.',
-          fact: '<b>Biliyor muydun?</b> Prefrontal korteks, beynin en geç olgunlaşan bölgesidir; gelişimi yirmili yaşların ortasına kadar sürer.',
+          fact: '<b>Biliyor muydun?</b> Prefrontal korteks, beynin en geç olgunlaşan bölgesidir; gelişimi genellikle yirmili yaşların ortasına kadar sürer.',
           link: { href: '/noroterbiye/gorseller/ssg-ucgeni/', label: 'Dürtüleri ŞŞG Üçgeni’nde gör' },
           conn: ['amigdala', 'nac']
         },
@@ -519,6 +549,7 @@
         setPathUI(null);
         renderRegion(k);
         if (history.replaceState) history.replaceState(null, '', '#' + k);
+        if (scroll) GV.track('bolge_sec', k);
         if (scroll && window.innerWidth <= 960) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
       function selectPath(pk, scroll) {
@@ -532,6 +563,7 @@
         setPathUI(pk);
         renderPath(pk);
         if (history.replaceState) history.replaceState(null, '', '#' + pk);
+        if (scroll) GV.track('yol_sec', pk);
         if (scroll && window.innerWidth <= 960) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
 
@@ -562,7 +594,24 @@
         var on = lobeBtn.getAttribute('aria-pressed') !== 'true';
         lobeBtn.setAttribute('aria-pressed', String(on));
         svg.classList.toggle('show-lobes', on);
+        GV.track('lob_goster', String(on));
       });
+      var xrBtn = $('bmXray');
+      xrBtn.addEventListener('click', function () {
+        var on = xrBtn.getAttribute('aria-pressed') !== 'true';
+        xrBtn.setAttribute('aria-pressed', String(on));
+        svg.classList.toggle('xray', on);
+        GV.track('ic_yapilar', String(on));
+      });
+
+      GV.addExport($('bmExport'), function () { return svg; }, { title: 'Beynin Haritası', sub: 'Nefsin biyolojik temelleri', file: 'noroterbiye-beyin-haritasi' });
+
+      GV.quiz($('bmQuiz'), { id: 'beyin', title: 'Mini test · Beyin haritası', items: [
+        { q: 'Dopamin üretiminin başladığı merkez hangisidir?', opts: ['Hipokampüs', 'Ventral tegmental alan (VTA)', 'Amigdala'], a: 1, why: 'VTA dopaminin fabrikasıdır; ödül sinyali buradan başlar.' },
+        { q: '“Savaş ya da kaç” yanıtını tetikleyen alarm sistemi hangisidir?', opts: ['Amigdala', 'Prefrontal korteks', 'Nucleus accumbens'], a: 0, why: 'Amigdala tehdidi algılar ve stres anında devreye girer.' },
+        { q: 'Karar verme ve dürtü kontrolünden sorumlu bölge hangisidir?', opts: ['Serebellum', 'Prefrontal korteks', 'VTA'], a: 1, why: 'Prefrontal korteks beynin “CEO”sudur; amigdalanın alarmını da yatıştırabilir.' },
+        { q: 'Alışkanlık kalıpları ve yeni anılar hangi bölgede saklanır?', opts: ['Hipokampüs', 'Nucleus accumbens', 'Amigdala'], a: 0, why: 'Hipokampüs hafıza ve öğrenmeyi yönetir; anıları uzun süreli hafızaya aktarır.' }
+      ] });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && state.mode === 'path') select('prefrontal'); });
 
       /* başlangıç (#hash desteği) */
