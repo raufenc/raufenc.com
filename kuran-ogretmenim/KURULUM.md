@@ -12,9 +12,17 @@ kök dizinidir.
 ## Paket içeriği
 
 - `index.html`, `stil.css`, `site.js`, `assets/` — giriş sitesi (3,7 MB)
+- `sinif/` — akıllı tahta için Sınıf Modu: 16 dersin harf ve hece kartları,
+  dokun-dinle, sırayla okutma. Veri `sinif/dersler.json` (uygulamanın ders
+  listelerinden çıkarıldı; sesler `app/` altındaki dosyalardır).
+- `sw.js`, `site.webmanifest` — çevrimdışı çalışma ve "ana ekrana ekle".
+  Giriş sitesi, sınıf modu ve uygulama çekirdeği ilk açılışta cihazda
+  saklanır; sesler ilk dinlendiğinde kalır. Sürüm değişince `sw.js`
+  içindeki `SURUM` değeri artırılır.
 - `app/` — kuranogretmenim.com'daki Flutter web derlemesinin birebir
-  kopyası (52 MB). Yalnız `app/index.html` içindeki `<base href>` ve
-  `app/manifest.json` içindeki `start_url` bu yola göre değiştirildi.
+  kopyası (52 MB). `app/index.html` içinde `<base href>`, logolu açılış
+  ekranı ve service worker kaydı; `app/manifest.json` içinde `start_url`
+  bu yola göre değiştirildi. `app/logo.png` 1,1 MB'tan 86 KB'a indirildi.
 - Vercel için gerekli başlıklar (içerik güvenlik politikası, önbellek) ve
   yönlendirmeler depo kökündeki `vercel.json` dosyasında
   `/kuran-ogretmenim/...` kurallarıdır.
