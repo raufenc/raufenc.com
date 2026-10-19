@@ -117,6 +117,26 @@ function fetchMetadataBlocked(req, pathname) {
   return Boolean(site && !['same-origin', 'same-site', 'none'].includes(site));
 }
 
+// Ziyaretçi adresi büyük harfle ya da Türkçe karakterle yazsa da sayfaya ulaşsın:
+// /Noroterbiye, /NÖROTERBİYE, /nöroterbiye → /noroterbiye/
+// Yalnız uzantısız (sayfa) adreslerde çalışır; sitedeki bütün sayfa klasörleri
+// küçük harfli ASCII'dir. Uzantılı dosyalara (FKH_10_kitap/1.jpg gibi) dokunmaz.
+const TR_HARF = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u', 'Ç': 'c', 'Ğ': 'g', 'İ': 'i', 'Ö': 'o', 'Ş': 's', 'Ü': 'u' };
+
+function sadeSayfaYolu(pathname) {
+  const path = safeDecode(pathname);
+  // Flutter uygulamasının uzantısız büyük harfli dosyası var (assets/NOTICES)
+  if (path.startsWith('/kuran-ogretmenim/app/')) return null;
+  const son = path.replace(/\/+$/, '').slice(path.replace(/\/+$/, '').lastIndexOf('/') + 1);
+  if (son.includes('.') || !/[A-Z\u00c0-\u024f]/.test(path)) return null;
+  const sade = path
+    .replace(/[çğıöşüÇĞİÖŞÜ]/g, c => TR_HARF[c])
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (sade === path) return null;
+  return sade.endsWith('/') ? sade : sade + '/';
+}
+
 async function verifyJWT(token, secret) {
   try {
     const parts = token.split('.');
@@ -156,6 +176,13 @@ export default async function middleware(req) {
     if (fetchMetadataBlocked(req, pathname)) return jsonError('forbidden', 403);
   } else if (!PUBLIC_METHODS.includes(req.method)) {
     return methodNotAllowed(false);
+  } else if (req.method !== 'OPTIONS') {
+    const sade = sadeSayfaYolu(pathname);
+    if (sade) {
+      const hedef = new URL(req.url);
+      hedef.pathname = sade;
+      return Response.redirect(hedef, 308);
+    }
   }
 
   if (pathname !== PANEL_PATH) {
