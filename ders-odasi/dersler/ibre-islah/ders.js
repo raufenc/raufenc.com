@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Islâh: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -67,7 +69,7 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Sorunu görüp kıpırdamamak neye benziyor?",
        "ad": "Pasiflik",
-       "soz": "Bana ne, ben karışmam.",
+       "soz": "Onların işi, kendileri çözsün.",
        "eylem": "yaslan",
        "zincir": [
         "Tartışma büyür ve arkadaşlar küser.",
@@ -77,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bana ne, kendileri halleder.",
+          "m": "Onların meselesi, kendileri halleder.",
           "dogru": true,
           "not": "Pasiflik, sorunu görüp harekete geçmemektir. Küçük bir adım bile durumu değiştirebilir."
          },
@@ -95,7 +97,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Pasiflik",
-        "soz": "Bana"
+        "soz": "Onların"
        },
        "zincirAnahtar": [
         "Tartışma",
@@ -121,7 +123,7 @@ DO.dersKaydet(
           "not": "Fitne, dedikodu ve kışkırtmayla ortamı bozmaktır. Ortam bozulunca herkes üzülür."
          },
          {
-          "m": "Bana ne, kendileri halleder.",
+          "m": "Onların meselesi, kendileri halleder.",
           "dogru": false,
           "not": "Bu sol ucun sesi: pasifliğin sesi."
          },
@@ -160,7 +162,7 @@ DO.dersKaydet(
           "not": "Islâh, bozulan bir durumu düzeltip iyiye çevirmeye çalışmaktır."
          },
          {
-          "m": "Bana ne, kendileri halleder.",
+          "m": "Onların meselesi, kendileri halleder.",
           "dogru": false,
           "not": "Bu sol ucun sesi: pasifliğin sesi."
          },
@@ -202,23 +204,23 @@ DO.dersKaydet(
        "tetik": "İki arkadaşın teneffüste tartıştı ve birbirine küstü. İkisiyle de arkadaşsın.",
        "secenekler": [
         {
-         "m": "Bana ne, ben karışmam.",
+         "m": "Onların meselesi, kendileri halletsin; ben bakmam.",
          "zon": "az",
-         "sonuc": "Küslük günlerce sürüyor; ikisi de yalnız kalıyor.",
+         "sonuc": "Küslük uzayabiliyor; ikisi de yalnız hissediyor.",
          "not": "İbre sola kaydı: görüp geçmek, küslüğün büyümesine izin veriyor.",
          "ses": "s1az"
         },
         {
-         "m": "Birinin ötekine ne dediğini diğerine anlatırım.",
+         "m": "Duyduklarımı abartıp ikisine de anlatırım.",
          "zon": "fazla",
-         "sonuc": "İkisi de birbirine daha çok kızıyor; sen de güvenini kaybediyorsun.",
+         "sonuc": "İkisi de birbirine daha çok kızıyor; sana güvenleri azalıyor.",
          "not": "İbre sağa kaydı: laf taşımak ortamı daha da bozuyor.",
          "ses": "s1fa"
         },
         {
-         "m": "İkisiyle de konuşur, barışmaları için yardım ederim.",
+         "m": "İkisiyle de konuşup barışmaları için yardım ederim.",
          "zon": "orta",
-         "sonuc": "İkisi de dinleniyor ve barışmak için konuşmaya hazırlanıyor.",
+         "sonuc": "İkisi de dinleniyor; barışmak için konuşmaya hazır olabilirler.",
          "not": "İbre ortada: iki tarafı dinleyip barışa yardım ettin.",
          "ses": "s1or"
         }
@@ -226,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "soz",
-       "baslik": "Dolaşan söz",
-       "tetik": "Sınıfta bir arkadaşın hakkında yanlış bir söz dolaşıyor ve bazıları buna inanıyor.",
+       "id": "gerginlik",
+       "baslik": "Gergin sınıf",
+       "tetik": "Sınıfta iki grup, bir oyun yüzünden birbirine kızgın ve ortam gerginleşiyor.",
        "secenekler": [
         {
-         "m": "Ben bir şey demeyeyim; belki kendiliğinden geçer.",
+         "m": "Bu gerginlik beni ilgilendirmez; hiç bakmam bile.",
          "zon": "az",
-         "sonuc": "Söz yayılmaya devam ediyor; arkadaşın kendini savunamıyor.",
-         "not": "İbre sola kaydı: yanlışı görüp sessiz kalmak, yanlışın büyümesine izin veriyor.",
+         "sonuc": "Gerginlik sürüyor; iki grup da birbirinden uzaklaşıyor.",
+         "not": "İbre sola kaydı: görüp geçmek, gerginliğin büyümesine izin veriyor.",
          "ses": "s2az"
         },
         {
-         "m": "Ben de duyduklarımı herkese anlatayım, eğlenceli olur.",
+         "m": "Bir gruba “seninle dalga geçtiler” derim, işi büyütürüm.",
          "zon": "fazla",
-         "sonuc": "Söz büyüyor; arkadaşın duyunca incinip sınıftan uzaklaşıyor.",
-         "not": "İbre sağa kaydı: söze söz eklemek ortamı daha da bozuyor.",
+         "sonuc": "İki grup daha çok kızıyor; ortamı herkes huzursuz hissediyor.",
+         "not": "İbre sağa kaydı: kışkırtmak ortamı daha da bozuyor.",
          "ses": "s2fa"
         },
         {
-         "m": "Yanlış sözü yaymam; durumu öğretmene anlatırım.",
+         "m": "İki tarafı dinlerim, konuşmayı öneririm; gerekirse öğretmene söylerim.",
          "zon": "orta",
-         "sonuc": "Yanlış anlaşılma düzeliyor; arkadaşın yalnız olmadığını hissediyor.",
-         "not": "İbre ortada: doğru kişiye başvurup durumu düzeltmeye çalıştın.",
+         "sonuc": "Gerginlik azalıyor; iki grup da konuşmaya yaklaşıyor.",
+         "not": "İbre ortada: doğru kişilere başvurup durumu düzeltmeye çalıştın.",
          "ses": "s2or"
         }
        ],
@@ -289,13 +291,13 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Arkadaşlarının kavga ettiğini görür, “bana ne” diyerek uzaklaşır.",
+       "metin": "Arkadaşlarının kavga ettiğini görür, omuz silkip başka yere bakar.",
        "alan": "az",
        "ipucu": "Düzeltmek için bir adım atmıyor."
       },
       {
        "id": "k2",
-       "metin": "Duyduğu sözü abartarak başka bir arkadaşına taşır.",
+       "metin": "Olanı olduğundan büyük gösterip iki tarafı birbirine kızdırır.",
        "alan": "fazla",
        "ipucu": "Ortamı bozuyor."
       },
@@ -334,7 +336,7 @@ DO.dersKaydet(
        "soru": "Hangi durumda ibrem sağa ya da sola kayıyor?",
        "secenekler": [
         "İki arkadaşım tartışınca",
-        "Sınıfta dedikodu başlayınca",
+        "Sınıfta gerginlik başlayınca",
         "Bozulan bir şey görünce",
         "Biri bana kötü bir söz taşıyınca"
        ]
@@ -700,73 +702,73 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.995,
-   "m": "Sol uçta Pasiflik. Bana ne, ben karışmam. Arkadaşlarının tartıştığını görür ama yerinden kalkmaz.",
+   "sure": 7.652,
+   "m": "Sol uçta Pasiflik. Onların işi, kendileri çözsün. Arkadaşlarının tartıştığını görür ama yerinden kalkmaz.",
    "k": [
     [
      "Sol",
      0.03,
-     0.249
+     0.237
     ],
     [
      "uçta",
-     0.249,
-     0.688
+     0.237,
+     0.65
     ],
     [
      "Pasiflik.",
-     0.688,
-     1.345
+     0.65,
+     1.27
     ],
     [
-     "Bana",
-     1.445,
-     1.488
-    ],
-    [
-     "ne,",
-     1.488,
-     1.51
-    ],
-    [
-     "ben",
-     2.055,
+     "Onların",
+     1.36,
      2.146
     ],
     [
-     "karışmam.",
+     "işi,",
      2.146,
-     2.42
+     2.67
+    ],
+    [
+     "kendileri",
+     2.975,
+     3.538
+    ],
+    [
+     "çözsün.",
+     3.538,
+     3.82
     ],
     [
      "Arkadaşlarının",
-     2.605,
-     3.901
+     4.465,
+     5.4
     ],
     [
      "tartıştığını",
-     3.901,
-     4.981
+     5.4,
+     6.179
     ],
     [
      "görür",
-     4.981,
-     5.413
+     6.179,
+     6.491
     ],
     [
      "ama",
-     5.413,
-     5.845
+     6.491,
+     6.803
     ],
     [
      "yerinden",
-     5.845,
-     6.493
+     6.803,
+     7.27
     ],
     [
      "kalkmaz.",
-     6.493,
-     6.925
+     7.27,
+     7.582
     ]
    ]
   },
@@ -1345,350 +1347,345 @@ DO.dersKaydet(
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 2.882,
-   "m": "Küslük günlerce sürüyor; ikisi de yalnız kalıyor.",
+   "sure": 3.331,
+   "m": "Küslük uzayabiliyor; ikisi de yalnız hissediyor.",
    "k": [
     [
      "Küslük",
      0.03,
-     0.376
+     0.365
     ],
     [
-     "günlerce",
-     0.376,
-     0.896
-    ],
-    [
-     "sürüyor;",
-     0.896,
-     1.415
+     "uzayabiliyor;",
+     0.365,
+     1.37
     ],
     [
      "ikisi",
-     1.815,
-     2.147
+     1.49,
+     2.021
     ],
     [
      "de",
-     2.147,
-     2.258
+     2.021,
+     2.198
     ],
     [
      "yalnız",
-     2.258,
-     2.48
+     2.198,
+     2.553
     ],
     [
-     "kalıyor.",
-     2.48,
-     2.812
+     "hissediyor.",
+     2.553,
+     3.261
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.775,
-   "m": "İkisi de birbirine daha çok kızıyor; sen de güvenini kaybediyorsun.",
+   "sure": 3.622,
+   "m": "İkisi de birbirine daha çok kızıyor; sana güvenleri azalıyor.",
    "k": [
     [
      "İkisi",
      0.03,
-     0.421
+     0.432
     ],
     [
      "de",
-     0.421,
-     0.551
+     0.432,
+     0.566
     ],
     [
      "birbirine",
-     0.551,
-     1.073
+     0.566,
+     1.101
     ],
     [
      "daha",
-     1.073,
-     1.334
+     1.101,
+     1.369
     ],
     [
      "çok",
-     1.334,
-     1.464
+     1.369,
+     1.503
     ],
     [
      "kızıyor;",
-     1.464,
-     1.855
+     1.503,
+     1.905
     ],
     [
-     "sen",
-     2.065,
-     2.214
+     "sana",
+     2.215,
+     2.482
     ],
     [
-     "de",
-     2.214,
-     2.363
+     "güvenleri",
+     2.482,
+     3.017
     ],
     [
-     "güvenini",
-     2.363,
-     2.96
-    ],
-    [
-     "kaybediyorsun.",
-     2.96,
-     3.705
+     "azalıyor.",
+     3.017,
+     3.552
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 4.054,
-   "m": "İkisi de dinleniyor ve barışmak için konuşmaya hazırlanıyor.",
+   "sure": 3.74,
+   "m": "İkisi de dinleniyor; barışmak için konuşmaya hazır olabilirler.",
    "k": [
     [
      "İkisi",
      0.03,
-     0.546
+     0.427
     ],
     [
      "de",
-     0.546,
-     0.718
+     0.427,
+     0.56
     ],
     [
-     "dinleniyor",
-     0.718,
-     1.405
-    ],
-    [
-     "ve",
-     1.405,
-     1.577
+     "dinleniyor;",
+     0.56,
+     1.09
     ],
     [
      "barışmak",
-     1.577,
-     2.093
+     1.475,
+     1.887
     ],
     [
      "için",
-     2.093,
-     2.437
+     1.887,
+     2.161
     ],
     [
      "konuşmaya",
-     2.437,
-     3.125
+     2.161,
+     2.71
     ],
     [
-     "hazırlanıyor.",
-     3.125,
-     3.984
+     "hazır",
+     2.71,
+     2.984
+    ],
+    [
+     "olabilirler.",
+     2.984,
+     3.67
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.771,
-   "m": "Sınıfta bir arkadaşın hakkında yanlış bir söz dolaşıyor ve bazıları buna inanıyor. Ne yaparsın?",
+   "sure": 5.823,
+   "m": "Sınıfta iki grup, bir oyun yüzünden birbirine kızgın ve ortam gerginleşiyor. Ne yaparsın?",
    "k": [
     [
      "Sınıfta",
      0.03,
-     0.421
+     0.527
+    ],
+    [
+     "iki",
+     0.527,
+     0.859
+    ],
+    [
+     "grup,",
+     0.859,
+     1.025
     ],
     [
      "bir",
-     0.421,
-     0.551
+     1.145,
+     1.33
     ],
     [
-     "arkadaşın",
-     0.551,
-     1.073
+     "oyun",
+     1.33,
+     1.701
     ],
     [
-     "hakkında",
-     1.073,
-     1.464
+     "yüzünden",
+     1.701,
+     2.256
     ],
     [
-     "yanlış",
-     1.464,
-     1.724
+     "birbirine",
+     2.256,
+     2.997
     ],
     [
-     "bir",
-     1.724,
-     1.855
-    ],
-    [
-     "söz",
-     1.855,
-     1.985
-    ],
-    [
-     "dolaşıyor",
-     1.985,
-     2.506
+     "kızgın",
+     2.997,
+     3.368
     ],
     [
      "ve",
-     2.506,
-     2.637
+     3.368,
+     3.553
     ],
     [
-     "bazıları",
-     2.637,
-     3.158
+     "ortam",
+     3.553,
+     3.924
     ],
     [
-     "buna",
-     3.158,
-     3.419
-    ],
-    [
-     "inanıyor.",
-     3.419,
-     3.94
+     "gerginleşiyor.",
+     3.924,
+     4.85
     ],
     [
      "Ne",
-     4.135,
-     4.277
+     5.2,
+     5.338
     ],
     [
      "yaparsın?",
-     4.277,
-     4.701
+     5.338,
+     5.753
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.199,
-   "m": "Söz yayılmaya devam ediyor; arkadaşın kendini savunamıyor.",
+   "sure": 2.988,
+   "m": "Gerginlik sürüyor; iki grup da birbirinden uzaklaşıyor.",
    "k": [
     [
-     "Söz",
+     "Gerginlik",
      0.03,
-     0.167
+     0.417
     ],
     [
-     "yayılmaya",
-     0.167,
-     0.715
+     "sürüyor;",
+     0.417,
+     0.805
     ],
     [
-     "devam",
-     0.715,
-     0.989
+     "iki",
+     1.085,
+     1.367
     ],
     [
-     "ediyor;",
-     0.989,
-     1.4
+     "grup",
+     1.367,
+     1.508
     ],
     [
-     "arkadaşın",
-     1.675,
-     2.16
+     "da",
+     1.508,
+     1.649
     ],
     [
-     "kendini",
-     2.16,
-     2.523
+     "birbirinden",
+     1.649,
+     2.213
     ],
     [
-     "savunamıyor.",
-     2.523,
-     3.129
+     "uzaklaşıyor.",
+     2.213,
+     2.918
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.577,
-   "m": "Söz büyüyor; arkadaşın duyunca incinip sınıftan uzaklaşıyor.",
+   "sure": 3.614,
+   "m": "İki grup daha çok kızıyor; ortamı herkes huzursuz hissediyor.",
    "k": [
     [
-     "Söz",
+     "İki",
      0.03,
-     0.211
+     0.361
     ],
     [
-     "büyüyor;",
-     0.211,
-     0.755
+     "grup",
+     0.361,
+     0.527
     ],
     [
-     "arkadaşın",
-     1.085,
-     1.623
+     "daha",
+     0.527,
+     0.858
     ],
     [
-     "duyunca",
-     1.623,
-     2.027
+     "çok",
+     0.858,
+     1.023
     ],
     [
-     "incinip",
-     2.027,
-     2.43
+     "kızıyor;",
+     1.023,
+     1.52
     ],
     [
-     "sınıftan",
-     2.43,
-     2.834
+     "ortamı",
+     1.615,
+     2.097
     ],
     [
-     "uzaklaşıyor.",
-     2.834,
-     3.507
+     "herkes",
+     2.097,
+     2.419
+    ],
+    [
+     "huzursuz",
+     2.419,
+     2.901
+    ],
+    [
+     "hissediyor.",
+     2.901,
+     3.544
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.613,
-   "m": "Yanlış anlaşılma düzeliyor; arkadaşın yalnız olmadığını hissediyor.",
+   "sure": 2.721,
+   "m": "Gerginlik azalıyor; iki grup da konuşmaya yaklaşıyor.",
    "k": [
     [
-     "Yanlış",
+     "Gerginlik",
      0.03,
-     0.256
+     0.379
     ],
     [
-     "anlaşılma",
-     0.256,
-     0.708
+     "azalıyor;",
+     0.379,
+     0.845
     ],
     [
-     "düzeliyor;",
-     0.708,
-     1.16
+     "iki",
+     1.145,
+     1.396
     ],
     [
-     "arkadaşın",
-     1.625,
-     2.136
+     "grup",
+     1.396,
+     1.521
     ],
     [
-     "yalnız",
-     2.136,
-     2.392
+     "da",
+     1.521,
+     1.647
     ],
     [
-     "olmadığını",
-     2.392,
-     3.031
+     "konuşmaya",
+     1.647,
+     2.149
     ],
     [
-     "hissediyor.",
-     3.031,
-     3.543
+     "yaklaşıyor.",
+     2.149,
+     2.651
     ]
    ]
   },

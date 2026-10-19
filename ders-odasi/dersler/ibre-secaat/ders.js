@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Şecâat: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -20,8 +22,9 @@ DO.dersKaydet(
      "id": "acilis",
      "tur": "ibreAcilis",
      "huy": "Şecâat",
-     "olculen": "Korku karşısında hareket biçimim",
-     "kanca": "Ben hiçbir şeyden korkmam!",
+     "huyAnahtar": "Şecâat",
+     "olculen": "Tehlike karşısında hareket biçimim",
+     "kanca": "Korkmuyorum, bakalım ne olacak.",
      "uclar": {
       "az": "Cübn",
       "orta": "Şecâat",
@@ -34,7 +37,7 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Şecâat",
-     "cumle": "Ben hiçbir şeyden korkmam!",
+     "cumle": "Korkmuyorum, bakalım ne olacak.",
      "uclar": {
       "az": "Cübn",
       "orta": "Şecâat",
@@ -43,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi tehlikeyi tartmadan atılıyor: sağ uca (Tehevvür) yakın. Başka okumada kendini cesaretlendiriyor ve yine de akıllıca davranıyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an korkuya karşı ne yaptığımıza bakar. Şecâat korkmamak değildir; korksan da akıllıca ve doğru olanı yapabilmektir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi tehlikeye bakmadan “bakalım ne olacak” diyerek atılıyor: sağ uca (Tehevvür) yakın. Başka okumada korkusunu kabul edip kendini yatıştırıyor, sonra güvenli bir yerden bakıp karar veriyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an korkuya karşı ne yaptığımıza bakar. Bu derste yabancı, yol, karanlık gibi bedensel tehlikeler karşısındaki korkuya bakıyoruz. Şecâat korkmamak değildir; korksan da akıllıca ve doğru olanı yapabilmektir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -66,7 +69,7 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Korkunca donup kalmak neye benziyor?",
        "ad": "Cübn",
-       "soz": "Ben yapamam, hiçbir şey yapamam.",
+       "soz": "Çok korkuyorum, kıpırdayamıyorum.",
        "eylem": "yaslan",
        "zincir": [
         "Yardım isteyebileceği kişiye durumu anlatamaz.",
@@ -78,10 +81,10 @@ DO.dersKaydet(
          {
           "m": "Ben yapamam; bir şey yapmasam daha iyi.",
           "dogru": true,
-          "not": "Cübn, tehlike karşısında hiç cesaret gösterememektir. Korkmak doğal; donup kalmak ise yardımı da engeller."
+          "not": "Cübn, tehlike karşısında korkudan kıpırdayamamaktır. Korkmak doğaldır; donup kalmak ise yardım istemeyi de zorlaştırır."
          },
          {
-          "m": "Korkuyorum ama bir büyüğüme söyleyeceğim.",
+          "m": "Korkuyorum ama durup düşüneceğim, yardım isteyeceğim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: şecâatin sesi."
          },
@@ -94,7 +97,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Cübn",
-        "soz": "Ben"
+        "soz": "Çok"
        },
        "zincirAnahtar": [
         "Yardım",
@@ -125,7 +128,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: cübnün sesi."
          },
          {
-          "m": "Korkuyorum ama bir büyüğüme söyleyeceğim.",
+          "m": "Korkuyorum ama durup düşüneceğim, yardım isteyeceğim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: şecâatin sesi."
          }
@@ -144,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Şecâat",
-       "soz": "Korkuyorum ama bir büyüğüme söyleyeceğim.",
+       "soz": "Korkuyorum ama güvendiğim bir yetişkine söyleyeceğim.",
        "eylem": "konus",
        "zincir": [
         "Tehlikeden uzaklaşıp yardım ister.",
@@ -154,7 +157,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Korkuyorum ama durup düşünür, yardım isterim.",
+          "m": "Korkuyorum ama durup düşüneceğim, yardım isteyeceğim.",
           "dogru": true,
           "not": "Şecâat, korkmamak değil; korksa da akıllıca ve doğru olanı yapmaktır."
          },
@@ -198,7 +201,7 @@ DO.dersKaydet(
       {
        "id": "yol",
        "baslik": "Yoldaki yabancı",
-       "tetik": "Okuldan dönerken tanımadığın biri seni durdurup, gel seni götüreyim, diyor.",
+       "tetik": "Okuldan dönerken tanımadığın biri yanına gelip “Gel, seni götüreyim!” diyor.",
        "secenekler": [
         {
          "m": "Korkudan hiçbir şey yapamam; olduğum yerde kalırım.",
@@ -208,16 +211,16 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Ben hallederim; yanına gidip bakayım.",
+         "m": "Ben hallederim; kimseye söylemeden konuşayım.",
          "zon": "fazla",
          "sonuc": "Yaklaşıyorsun ve tehlikeyi tartmadan kendini işin içine atmış oluyorsun.",
          "not": "İbre sağa kaydı: tehlikeyi tartmadan atılmak, cesaret değil.",
          "ses": "s1fa"
         },
         {
-         "m": "Hayır, gelmiyorum! Kalabalığa ya da bir yetişkine giderim.",
+         "m": "Hayır, gelmiyorum! Kalabalığa ya da güvendiğim bir yetişkine giderim.",
          "zon": "orta",
-         "sonuc": "Güvenli bir yere gidip olanı bir yetişkine anlatıyorsun. Korksan da doğru olanı yaptın.",
+         "sonuc": "Güvenli bir yere gidip olanı güvendiğin bir yetişkine anlatıyorsun. Korksan da doğru olanı yaptın.",
          "not": "İbre ortada: korkuya rağmen akıllıca ve doğru davrandın.",
          "ses": "s1or"
         }
@@ -225,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "haksiz",
-       "baslik": "Haksızlık",
-       "tetik": "Sınıfta bir arkadaşına haksızlık yapılıyor ve sen bunu görüyorsun.",
+       "id": "karanlik",
+       "baslik": "Elektrik kesintisi",
+       "tetik": "Akşam evde elektrikler kesiliyor. Karanlık odada tek başınasın ve korkuyorsun; evde güvendiğin bir yetişkin başka odada.",
        "secenekler": [
         {
-         "m": "Ben karışmam, bana bir şey olmasın.",
+         "m": "Korkudan sesim çıkmıyor; kıpırdamadan beklerim.",
          "zon": "az",
-         "sonuc": "Arkadaşın yalnız kalıyor; sen de içinde rahat edemiyorsun.",
-         "not": "İbre sola kaydı: korku, doğruya el uzatmayı engelliyor.",
+         "sonuc": "Karanlıkta yalnız bekliyorsun; yardım isteyebileceğin kişi seni duymuyor.",
+         "not": "İbre sola kaydı: korkudan susmak, yardım çağırmayı da zorlaştırıyor.",
          "ses": "s2az"
         },
         {
-         "m": "Hemen bağırıp haksızlık yapana yüklenirim!",
+         "m": "Korkmuyorum! Karanlıkta tek başıma bir şeyler aramaya giderim.",
          "zon": "fazla",
-         "sonuc": "Tartışma büyüyor; asıl sorun çözülmeden iş kavgaya dönebilir.",
-         "not": "İbre sağa kaydı: düşünmeden atılmak işi çözmüyor, büyütüyor.",
+         "sonuc": "Önünü göremiyorsun; bir yere çarpabilirsin ve evdekiler nerede olduğunu bilmiyor.",
+         "not": "İbre sağa kaydı: karanlıkta tartmadan atılmak cesaret değil, risk.",
          "ses": "s2fa"
         },
         {
-         "m": "Arkadaşımın yanında dururum; olanı öğretmene anlatırım.",
+         "m": "Derin nefes alıp yerimde dururum, yetişkini sesle çağırırım.",
          "zon": "orta",
-         "sonuc": "Arkadaşın yalnız olmadığını hissediyor; sorun doğru kişiye ulaşıyor.",
-         "not": "İbre ortada: korksan da doğrunun yanında akıllıca durdun.",
+         "sonuc": "Yetişkin gelip yanına oturuyor; ışık gelene dek birlikte bekliyorsunuz.",
+         "not": "İbre ortada: korksan da durup nefes aldın ve yardım istedin.",
          "ses": "s2or"
         }
        ],
@@ -288,39 +291,39 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Korkunca olduğu yerde donar; kimseye söyleyemez.",
+       "metin": "Yolda yabancı biri yaklaşınca korkudan donar; sesini çıkaramaz.",
        "alan": "az",
        "ipucu": "Korku onu hareketsiz bırakıyor."
       },
       {
        "id": "k2",
-       "metin": "Kırmızı ışıkta karşıya koşar: “Bana bir şey olmaz.”",
+       "metin": "Uyarıları dinlemeden tehlikeli bir işe girişir: “Bana bir şey olmaz.”",
        "alan": "fazla",
        "ipucu": "Tehlikeyi tartmıyor."
       },
       {
        "id": "k3",
-       "metin": "Korksa da önce durup düşünür, sonra bir yetişkine söyler.",
+       "metin": "Korksa da önce durup düşünür, sonra güvendiği bir yetişkine söyler.",
        "alan": "orta",
        "ipucu": "Korkuya rağmen akıllıca davranıyor."
       },
       {
        "id": "k4",
-       "metin": "Korktuğu için doğruyu söylemekten kaçınır.",
+       "metin": "Karanlıkta korktuğu için yardım çağırmaya bile cesaret edemez.",
        "alan": "az",
        "ipucu": "Korku onu susturuyor."
       },
       {
        "id": "k5",
-       "metin": "Yüksek bir yerden atlamaya kalkar: “Ben hallederim.”",
+       "metin": "Tehlikeli bir yere kimseye söylemeden gider: “Ben hallederim.”",
        "alan": "fazla",
        "ipucu": "Sonunu düşünmüyor."
       },
       {
        "id": "k6",
-       "metin": "Yardım isteyeceği kişiyi bulur ve durumu anlatır.",
+       "metin": "Tanımadığı biri ısrar edince “hayır” der ve kalabalık bir yere gider.",
        "alan": "orta",
-       "ipucu": "Doğru kişiye başvuruyor."
+       "ipucu": "Doğru kişiye ve yere yöneliyor."
       }
      ]
     },
@@ -334,8 +337,8 @@ DO.dersKaydet(
        "secenekler": [
         "Korktuğum bir durumda",
         "Bir tehlike görünce",
-        "Arkadaşım zor durumdayken",
-        "Yeni bir şey denerken"
+        "Karanlıkta ya da yalnız kalınca",
+        "Yolda bir yabancı yaklaşınca"
        ]
       },
       {
@@ -343,7 +346,7 @@ DO.dersKaydet(
        "secenekler": [
         "Korktuğumda önce durup nefes alacağım",
         "Güvendiğim bir yetişkine durumu anlatacağım",
-        "Haksızlık görünce doğru kişiye haber vereceğim"
+        "Tanımadığım biri ısrar ederse “hayır” deyip kalabalığa gideceğim"
        ]
       }
      ],
@@ -382,28 +385,28 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 2.222,
-   "m": "Ben hiçbir şeyden korkmam!",
+   "sure": 2.389,
+   "m": "Korkmuyorum, bakalım ne olacak.",
    "k": [
     [
-     "Ben",
+     "Korkmuyorum,",
      0.03,
-     0.333
+     0.85
     ],
     [
-     "hiçbir",
-     0.333,
-     0.94
+     "bakalım",
+     1.06,
+     1.6
     ],
     [
-     "şeyden",
-     0.94,
-     1.546
+     "ne",
+     1.6,
+     1.78
     ],
     [
-     "korkmam!",
-     1.546,
-     2.152
+     "olacak.",
+     1.78,
+     2.319
     ]
    ]
   },
@@ -694,73 +697,68 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.909,
-   "m": "Sol uçta Cübn. Ben yapamam, hiçbir şey yapamam. Korkunca olduğu yerde donup kalır.",
+   "sure": 7.363,
+   "m": "Sol uçta Cübn. Çok korkuyorum, kıpırdayamıyorum. Tehlike görünce olduğu yerde donup kalır.",
    "k": [
     [
      "Sol",
      0.03,
-     0.214
+     0.312
     ],
     [
      "uçta",
-     0.214,
-     0.581
+     0.312,
+     0.877
     ],
     [
      "Cübn.",
-     0.581,
-     0.765
+     0.877,
+     1.16
     ],
     [
-     "Ben",
-     0.995,
-     1.085
+     "Çok",
+     1.875,
+     2.017
     ],
     [
-     "yapamam,",
-     1.085,
-     1.355
+     "korkuyorum,",
+     2.017,
+     2.585
     ],
     [
-     "hiçbir",
-     2.145,
-     2.353
+     "kıpırdayamıyorum.",
+     2.94,
+     3.71
     ],
     [
-     "şey",
-     2.353,
-     2.458
+     "Tehlike",
+     4.305,
+     4.903
     ],
     [
-     "yapamam.",
-     2.458,
-     2.77
-    ],
-    [
-     "Korkunca",
-     3.21,
-     4.117
+     "görünce",
+     4.903,
+     5.5
     ],
     [
      "olduğu",
-     4.117,
-     5.025
+     5.5,
+     6.098
     ],
     [
      "yerde",
-     5.025,
-     5.63
+     6.098,
+     6.496
     ],
     [
      "donup",
-     5.63,
-     6.235
+     6.496,
+     6.895
     ],
     [
      "kalır.",
-     6.235,
-     6.839
+     6.895,
+     7.293
     ]
    ]
   },
@@ -885,68 +883,78 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 5.589,
-   "m": "Sağ uçta Tehevvür. Ben hallederim, hiçbir şey olmaz! Tehlikeyi tartmadan öne atılır.",
+   "sure": 6.484,
+   "m": "Sağ uçta Tehevvür. Ben hallederim, hiçbir şey olmaz! Tehlikeli bir yere bakmadan, tartmadan dalar.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.229
+     0.238
     ],
     [
      "uçta",
-     0.229,
-     0.628
+     0.238,
+     0.655
     ],
     [
      "Tehevvür.",
-     0.628,
-     1.225
+     0.655,
+     1.28
     ],
     [
      "Ben",
-     1.89,
-     1.998
+     1.58,
+     1.748
     ],
     [
      "hallederim,",
-     1.998,
-     2.43
+     1.748,
+     2.417
     ],
     [
      "hiçbir",
-     2.59,
-     2.892
+     2.417,
+     2.752
     ],
     [
      "şey",
-     2.892,
-     3.043
+     2.752,
+     2.92
     ],
     [
      "olmaz!",
-     3.043,
-     3.345
+     2.92,
+     3.255
     ],
     [
-     "Tehlikeyi",
-     3.83,
-     4.393
+     "Tehlikeli",
+     3.815,
+     4.351
+    ],
+    [
+     "bir",
+     4.351,
+     4.485
+    ],
+    [
+     "yere",
+     4.485,
+     4.753
+    ],
+    [
+     "bakmadan,",
+     4.753,
+     5.155
     ],
     [
      "tartmadan",
-     4.393,
-     4.815
+     5.26,
+     5.953
     ],
     [
-     "öne",
-     4.815,
-     5.096
-    ],
-    [
-     "atılır.",
-     5.096,
-     5.519
+     "dalar.",
+     5.953,
+     6.414
     ]
    ]
   },
@@ -1066,73 +1074,83 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 7.196,
-   "m": "Tam kararında Şecâat. Korkuyorum ama bir büyüğüme söyleyeceğim. Korksa da ne yapacağını düşünür.",
+   "sure": 8.484,
+   "m": "Tam kararında Şecâat. Korkuyorum ama güvendiğim bir yetişkine söyleyeceğim. Korksa da durur, ne yapacağını düşünür.",
    "k": [
     [
      "Tam",
      0.03,
-     0.226
+     0.222
     ],
     [
      "kararında",
-     0.226,
-     1.008
+     0.222,
+     0.989
     ],
     [
      "Şecâat.",
-     1.008,
-     1.595
+     0.989,
+     1.565
     ],
     [
      "Korkuyorum",
-     1.705,
-     2.482
+     1.65,
+     2.426
     ],
     [
      "ama",
-     2.482,
-     2.871
+     2.426,
+     2.814
+    ],
+    [
+     "güvendiğim",
+     2.814,
+     3.59
     ],
     [
      "bir",
-     2.871,
-     3.066
+     3.59,
+     3.784
     ],
     [
-     "büyüğüme",
-     3.066,
-     3.843
+     "yetişkine",
+     3.784,
+     4.56
     ],
     [
      "söyleyeceğim.",
-     3.843,
-     4.815
+     4.56,
+     5.53
     ],
     [
      "Korksa",
-     5.41,
-     5.696
+     5.775,
+     6.265
     ],
     [
      "da",
-     5.696,
-     5.839
+     6.265,
+     6.51
+    ],
+    [
+     "durur,",
+     6.51,
+     7.0
     ],
     [
      "ne",
-     5.839,
-     5.982
+     7.35,
+     7.468
     ],
     [
      "yapacağını",
-     5.982,
-     6.697
+     7.468,
+     8.059
     ],
     [
      "düşünür.",
-     6.697,
-     7.126
+     8.059,
+     8.414
     ]
    ]
   },
@@ -1247,68 +1265,68 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.17,
-   "m": "Okuldan dönerken tanımadığın biri seni durdurup, gel seni götüreyim, diyor. Ne yaparsın?",
+   "sure": 5.567,
+   "m": "Okuldan dönerken tanımadığın biri yanına gelip Gel, seni götüreyim! diyor. Ne yaparsın?",
    "k": [
     [
      "Okuldan",
      0.03,
-     0.426
+     0.492
     ],
     [
      "dönerken",
-     0.426,
-     0.822
+     0.492,
+     0.954
     ],
     [
      "tanımadığın",
-     0.822,
-     1.481
+     0.954,
+     1.723
     ],
     [
      "biri",
-     1.481,
-     1.745
+     1.723,
+     2.031
+    ],
+    [
+     "yanına",
+     2.031,
+     2.493
+    ],
+    [
+     "gelip",
+     2.493,
+     2.801
+    ],
+    [
+     "Gel,",
+     2.801,
+     2.955
     ],
     [
      "seni",
-     1.745,
-     2.009
+     3.115,
+     3.493
     ],
     [
-     "durdurup,",
-     2.009,
-     2.405
-    ],
-    [
-     "gel",
-     2.64,
-     2.837
-    ],
-    [
-     "seni",
-     2.837,
-     3.231
-    ],
-    [
-     "götüreyim,",
-     3.231,
-     4.02
+     "götüreyim!",
+     3.493,
+     4.25
     ],
     [
      "diyor.",
-     4.515,
-     4.71
+     4.945,
+     5.129
     ],
     [
      "Ne",
-     4.71,
-     4.808
+     5.129,
+     5.221
     ],
     [
      "yaparsın?",
-     4.808,
-     5.1
+     5.221,
+     5.497
     ]
    ]
   },
@@ -1413,276 +1431,331 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 4.462,
-   "m": "Güvenli bir yere gidip olanı bir yetişkine anlatıyorsun. Korksan da doğru olanı yaptın.",
+   "sure": 5.526,
+   "m": "Güvenli bir yere gidip olanı güvendiğin bir yetişkine anlatıyorsun. Korksan da doğru olanı yaptın.",
    "k": [
     [
      "Güvenli",
      0.03,
-     0.359
+     0.413
     ],
     [
      "bir",
-     0.359,
-     0.468
+     0.413,
+     0.54
     ],
     [
      "yere",
-     0.468,
-     0.687
+     0.54,
+     0.796
     ],
     [
      "gidip",
-     0.687,
-     0.906
+     0.796,
+     1.051
     ],
     [
      "olanı",
-     0.906,
-     1.235
+     1.051,
+     1.434
+    ],
+    [
+     "güvendiğin",
+     1.434,
+     1.944
     ],
     [
      "bir",
-     1.235,
-     1.344
+     1.944,
+     2.072
     ],
     [
      "yetişkine",
-     1.344,
-     1.782
+     2.072,
+     2.582
     ],
     [
      "anlatıyorsun.",
-     1.782,
-     2.33
+     2.582,
+     3.22
     ],
     [
      "Korksan",
-     2.785,
-     3.106
+     3.71,
+     4.059
     ],
     [
      "da",
-     3.106,
-     3.267
+     4.059,
+     4.234
     ],
     [
      "doğru",
-     3.267,
-     3.589
+     4.234,
+     4.583
     ],
     [
      "olanı",
-     3.589,
-     4.071
+     4.583,
+     5.106
     ],
     [
      "yaptın.",
-     4.071,
-     4.392
+     5.106,
+     5.456
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.084,
-   "m": "Sınıfta bir arkadaşına haksızlık yapılıyor ve sen bunu görüyorsun. Ne yaparsın?",
+   "sure": 8.349,
+   "m": "Akşam evde elektrikler kesiliyor. Karanlık odada tek başınasın ve korkuyorsun; evde güvendiğin bir yetişkin başka odada. Ne yaparsın?",
    "k": [
     [
-     "Sınıfta",
+     "Akşam",
      0.03,
-     0.429
+     0.293
     ],
     [
-     "bir",
-     0.429,
-     0.562
+     "evde",
+     0.293,
+     0.557
     ],
     [
-     "arkadaşına",
-     0.562,
-     1.226
+     "elektrikler",
+     0.557,
+     1.083
     ],
     [
-     "haksızlık",
-     1.226,
-     1.625
+     "kesiliyor.",
+     1.083,
+     1.61
     ],
     [
-     "yapılıyor",
-     1.625,
-     2.157
+     "Karanlık",
+     2.085,
+     2.529
+    ],
+    [
+     "odada",
+     2.529,
+     2.974
+    ],
+    [
+     "tek",
+     2.974,
+     3.122
+    ],
+    [
+     "başınasın",
+     3.122,
+     3.714
     ],
     [
      "ve",
-     2.157,
-     2.29
+     3.714,
+     3.862
     ],
     [
-     "sen",
-     2.29,
-     2.422
+     "korkuyorsun;",
+     3.862,
+     4.455
     ],
     [
-     "bunu",
-     2.422,
-     2.688
+     "evde",
+     5.15,
+     5.431
     ],
     [
-     "görüyorsun.",
-     2.688,
-     3.22
+     "güvendiğin",
+     5.431,
+     5.994
+    ],
+    [
+     "bir",
+     5.994,
+     6.135
+    ],
+    [
+     "yetişkin",
+     6.135,
+     6.557
+    ],
+    [
+     "başka",
+     6.557,
+     6.838
+    ],
+    [
+     "odada.",
+     6.838,
+     7.26
     ],
     [
      "Ne",
-     3.495,
-     3.625
+     7.715,
+     7.856
     ],
     [
      "yaparsın?",
-     3.625,
-     4.014
+     7.856,
+     8.279
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.067,
-   "m": "Arkadaşın yalnız kalıyor; sen de içinde rahat edemiyorsun.",
+   "sure": 5.485,
+   "m": "Karanlıkta yalnız bekliyorsun; yardım isteyebileceğin kişi seni duymuyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Karanlıkta",
      0.03,
-     0.581
+     0.634
     ],
     [
      "yalnız",
-     0.581,
-     0.857
+     0.634,
+     0.936
     ],
     [
-     "kalıyor;",
-     0.857,
-     1.27
+     "bekliyorsun;",
+     0.936,
+     1.54
     ],
     [
-     "sen",
-     1.56,
-     1.68
+     "yardım",
+     1.89,
+     2.331
     ],
     [
-     "de",
-     1.68,
-     1.8
+     "isteyebileceğin",
+     2.331,
+     3.873
     ],
     [
-     "içinde",
-     1.8,
-     2.159
+     "kişi",
+     3.873,
+     4.313
     ],
     [
-     "rahat",
-     2.159,
-     2.399
+     "seni",
+     4.313,
+     4.754
     ],
     [
-     "edemiyorsun.",
-     2.399,
-     2.997
+     "duymuyor.",
+     4.754,
+     5.415
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.974,
-   "m": "Tartışma büyüyor; asıl sorun çözülmeden iş kavgaya dönebilir.",
+   "sure": 4.869,
+   "m": "Önünü göremiyorsun; bir yere çarpabilirsin ve evdekiler nerede olduğunu bilmiyor.",
    "k": [
     [
-     "Tartışma",
+     "Önünü",
      0.03,
-     0.49
+     0.412
     ],
     [
-     "büyüyor;",
-     0.49,
-     0.95
+     "göremiyorsun;",
+     0.412,
+     1.05
     ],
     [
-     "asıl",
-     1.205,
-     1.542
+     "bir",
+     1.44,
+     1.586
     ],
     [
-     "sorun",
-     1.542,
-     1.88
+     "yere",
+     1.586,
+     1.878
     ],
     [
-     "çözülmeden",
-     1.88,
-     2.554
+     "çarpabilirsin",
+     1.878,
+     2.608
     ],
     [
-     "iş",
-     2.554,
-     2.723
+     "ve",
+     2.608,
+     2.754
     ],
     [
-     "kavgaya",
-     2.723,
-     3.229
+     "evdekiler",
+     2.754,
+     3.339
     ],
     [
-     "dönebilir.",
-     3.229,
-     3.904
+     "nerede",
+     3.339,
+     3.777
+    ],
+    [
+     "olduğunu",
+     3.777,
+     4.361
+    ],
+    [
+     "bilmiyor.",
+     4.361,
+     4.799
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.738,
-   "m": "Arkadaşın yalnız olmadığını hissediyor; sorun doğru kişiye ulaşıyor.",
+   "sure": 3.991,
+   "m": "Yetişkin gelip yanına oturuyor; ışık gelene dek birlikte bekliyorsunuz.",
    "k": [
     [
-     "Arkadaşın",
+     "Yetişkin",
      0.03,
-     0.657
+     0.387
     ],
     [
-     "yalnız",
-     0.657,
-     0.97
+     "gelip",
+     0.387,
+     0.626
     ],
     [
-     "olmadığını",
-     0.97,
-     1.753
+     "yanına",
+     0.626,
+     0.983
     ],
     [
-     "hissediyor;",
-     1.753,
-     2.38
+     "oturuyor;",
+     0.983,
+     1.46
     ],
     [
-     "sorun",
-     2.52,
-     2.729
+     "ışık",
+     1.81,
+     2.112
     ],
     [
-     "doğru",
-     2.729,
-     2.937
+     "gelene",
+     2.112,
+     2.564
     ],
     [
-     "kişiye",
-     2.937,
-     3.251
+     "dek",
+     2.564,
+     2.715
     ],
     [
-     "ulaşıyor.",
-     3.251,
-     3.668
+     "birlikte",
+     2.715,
+     3.167
+    ],
+    [
+     "bekliyorsunuz.",
+     3.167,
+     3.921
     ]
    ]
   },
@@ -1874,118 +1947,133 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.002,
-   "m": "Bu cümle bilerek çift anlamlı. Tehlikeyi tartmadan atılan biri söylüyorsa sağ uca yakın. Kendini cesaretlendirip akıllıca davranan biri söylüyorsa orta uca yakın.",
+   "sure": 9.728,
+   "m": "Bu cümle bilerek çift anlamlı. Tehlikeye bakmadan atılan biri söylüyorsa sağ uca yakın. Korkusunu kabul edip önce güvenli yerden bakan biri söylüyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.162
+     0.188
     ],
     [
      "cümle",
-     0.162,
-     0.426
+     0.188,
+     0.504
     ],
     [
      "bilerek",
-     0.426,
-     0.822
+     0.504,
+     0.978
     ],
     [
      "çift",
-     0.822,
-     0.954
+     0.978,
+     1.136
     ],
     [
      "anlamlı.",
-     0.954,
-     1.35
+     1.136,
+     1.61
     ],
     [
-     "Tehlikeyi",
-     1.715,
-     2.305
+     "Tehlikeye",
+     2.06,
+     2.614
     ],
     [
-     "tartmadan",
-     2.305,
-     2.747
+     "bakmadan",
+     2.614,
+     3.03
     ],
     [
      "atılan",
-     2.747,
-     3.189
+     3.03,
+     3.446
     ],
     [
      "biri",
-     3.189,
-     3.484
+     3.446,
+     3.723
     ],
     [
      "söylüyorsa",
-     3.484,
-     4.073
+     3.723,
+     4.277
     ],
     [
      "sağ",
-     4.073,
-     4.22
+     4.277,
+     4.416
     ],
     [
      "uca",
-     4.22,
-     4.515
+     4.416,
+     4.693
     ],
     [
      "yakın.",
-     4.515,
-     4.81
+     4.693,
+     4.97
     ],
     [
-     "Kendini",
-     5.37,
-     5.752
+     "Korkusunu",
+     5.305,
+     5.905
     ],
     [
-     "cesaretlendirip",
-     5.752,
-     6.515
+     "kabul",
+     5.905,
+     6.206
     ],
     [
-     "akıllıca",
-     6.515,
-     7.024
+     "edip",
+     6.206,
+     6.506
     ],
     [
-     "davranan",
-     7.024,
-     7.405
+     "önce",
+     6.506,
+     6.806
+    ],
+    [
+     "güvenli",
+     6.806,
+     7.256
+    ],
+    [
+     "yerden",
+     7.256,
+     7.557
+    ],
+    [
+     "bakan",
+     7.557,
+     7.857
     ],
     [
      "biri",
-     7.405,
-     7.66
+     7.857,
+     8.157
     ],
     [
      "söylüyorsa",
-     7.66,
-     8.169
+     8.157,
+     8.757
     ],
     [
      "orta",
-     8.169,
-     8.423
+     8.757,
+     9.058
     ],
     [
      "uca",
-     8.423,
-     8.677
+     9.058,
+     9.358
     ],
     [
      "yakın.",
-     8.677,
-     8.932
+     9.358,
+     9.658
     ]
    ]
   },

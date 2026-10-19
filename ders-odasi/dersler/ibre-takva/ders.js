@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Takvâ: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "benlik",
+ "muzik": "benlik",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "orta",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi canının her isteğini hemen yapmıyor ve yanlış olandan kendini alıkoyuyor: orta uca yakın. Başka okumada hiçbir isteğine, güzel ve helâl olanlara bile izin vermiyor: sol uca (Ruhbâniyet) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, isteklerimize nasıl yön verdiğimize bakar. Takvâ; Allahü teâlâya saygıyla yasaklardan sakınmaktır, güzel şeylerden yararlanmayı bırakmak değildir. Neyin serbest, neyin yasak olduğunu güvendiğin bir büyüğe ya da hocana sormak en doğrusudur.",
+      "İbre cümleye değil, isteklerimize nasıl yön verdiğimize bakar. Takvâ; Allahü teâlâ’ya saygıyla yasaklardan sakınmaktır, güzel şeylerden yararlanmayı bırakmak değildir. Neyin serbest, neyin yasak olduğunu güvendiğin bir büyüğe ya da hocana sormak en doğrusudur.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Her güzel şey tehlikeli; hepsini kendime yasaklayayım.",
           "dogru": true,
-          "not": "Ruhbâniyet, verilen güzel şeylerin tamamından uzak durmaktır. Takvâ ise yalnız yasaklardan sakınmaktır."
+          "not": "Ruhbâniyet, verilen güzel şeylerin tamamından uzak durmaktır. Takvâ ise yasaklardan sakınıp helâl olanın tadını çıkarmaktır."
          },
          {
           "m": "Yanlış olandan sakınırım; helâl olanın tadını çıkarırım.",
@@ -157,7 +159,7 @@ DO.dersKaydet(
          {
           "m": "Yanlış olandan sakınırım; helâl olanın tadını çıkarırım.",
           "dogru": true,
-          "not": "Takvâ, Allahü teâlâya saygıyla yasaklardan sakınmaktır. Serbest ve güzel olan şeylerden de yararlanılır."
+          "not": "Takvâ, Allahü teâlâ’ya saygıyla yasaklardan sakınmaktır. Serbest ve güzel olan şeylerden de yararlanılır."
          },
          {
           "m": "Her güzel şey tehlikeli; hepsini kendime yasaklayayım.",
@@ -197,29 +199,29 @@ DO.dersKaydet(
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "sinav",
-       "baslik": "Sınav fırsatı",
-       "tetik": "Sınavda yanındaki arkadaşının kâğıdı açıkta. Cevapları görebiliyorsun ve kimse bakmıyor.",
+       "id": "sira",
+       "baslik": "Teneffüste sıra",
+       "tetik": "Teneffüste arkadaşların oyun oynuyor ve ikram paylaşıyor. Sırada bekleyen arkadaşının önüne geçip oyuna hemen girebilirsin; kimse bakmıyor.",
        "secenekler": [
         {
-         "m": "Her şey tehlikeli; sınıftan bile uzak durup köşeye çekilirim.",
+         "m": "Her şey tehlikeli; teneffüste bir şey yemem, hiçbir oyuna katılmam.",
          "zon": "az",
-         "sonuc": "Yanlıştan kaçarken öğrenmeyi ve arkadaşlığı da kaçırıyorsun.",
-         "not": "İbre sola kaydı: her şeyden kaçmak sakınmak değildir, güzel imkânları da kapatır.",
+         "sonuc": "Arkadaşlarından ve güzel ikramlardan uzak kalıyorsun; teneffüsün tadı kaçıyor.",
+         "not": "İbre sola kaydı: her güzel şeyden kaçmak sakınmak değildir, helâl olanı da kendine yasaklamaktır.",
          "ses": "s1az"
         },
         {
-         "m": "Kimse bakmıyor; cevapları yazarım, canım böyle istedi.",
+         "m": "Canım istedi; sırayı bozup ilk ben girerim, kim ne diyecek!",
          "zon": "fazla",
-         "sonuc": "Cevabı başkasından alıyorsun; öğrenmen eksik kalıyor ve içinde bir huzursuzluk kalıyor.",
-         "not": "İbre sağa kaydı: canının istediğine hemen uymak, doğruyu görmeyi geciktiriyor.",
+         "sonuc": "Sırada bekleyen arkadaşın üzülüyor; sen de içinde bir huzursuzluk taşıyorsun.",
+         "not": "İbre sağa kaydı: canının istediğine hemen uymak, başkasının hakkını görmeyi unutturur.",
          "ses": "s1fa"
         },
         {
-         "m": "Bakmam; bildiğimi yazarım, bilmediğimi boş bırakırım.",
+         "m": "Sırayı beklerim; sıram gelince ikramın da oyunun da tadını çıkarırım.",
          "zon": "orta",
-         "sonuc": "İçin rahat; Allahü teâlâya saygıyla doğru olanı seçtin.",
-         "not": "İbre ortada: istek gelse de doğru olanı seçtin.",
+         "sonuc": "Sıranı bekledin; Allahü teâlâ’ya saygıyla hakka dikkat ettin, oyunun da keyfini çıkarıyorsun.",
+         "not": "İbre ortada: istek gelse de doğru olanı seçtin, serbest olanın tadını da kaçırmadın.",
          "ses": "s1or"
         }
        ],
@@ -228,10 +230,10 @@ DO.dersKaydet(
       {
        "id": "soz",
        "baslik": "Arkadaş sohbeti",
-       "tetik": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da ne dersin, diye soruyorlar.",
+       "tetik": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da “Sen ne dersin?” diye soruyor.",
        "secenekler": [
         {
-         "m": "Konuşmak tehlikeli; kimseyle konuşmam, hep yalnız dururum.",
+         "m": "Güzel sohbetler bile tehlikeli; hiçbirine katılmam.",
          "zon": "az",
          "sonuc": "Arkadaşlarından uzaklaşıyorsun; sohbetlerin güzel yanları da kaçıyor.",
          "not": "İbre sola kaydı: konuşmaktan büsbütün kaçmak, güzel konuşmayı da engeller.",
@@ -245,7 +247,7 @@ DO.dersKaydet(
          "ses": "s2fa"
         },
         {
-         "m": "Katılmam; nazikçe konuyu değiştirir, kimseyi üzmem.",
+         "m": "Katılmam; nazikçe konuyu değiştiririm, kimseyi üzmem.",
          "zon": "orta",
          "sonuc": "Konu değişiyor; sen de arkadaşların da rahatlıyorsunuz.",
          "not": "İbre ortada: yasak olan sözden sakındın, sohbetin tadını bozmadın.",
@@ -1278,296 +1280,361 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.756,
-   "m": "Sınavda yanındaki arkadaşının kâğıdı açıkta. Cevapları görebiliyorsun ve kimse bakmıyor. Ne yaparsın?",
+   "sure": 8.503,
+   "m": "Teneffüste arkadaşların oyun oynuyor ve ikram paylaşıyor. Sırada bekleyen arkadaşının önüne geçip oyuna hemen girebilirsin; kimse bakmıyor. Ne yaparsın?",
    "k": [
     [
-     "Sınavda",
+     "Teneffüste",
      0.03,
-     0.374
+     0.585
     ],
     [
-     "yanındaki",
-     0.374,
-     0.833
+     "arkadaşların",
+     0.585,
+     1.279
     ],
     [
-     "arkadaşının",
-     0.833,
-     1.407
+     "oyun",
+     1.279,
+     1.557
     ],
     [
-     "kâğıdı",
-     1.407,
-     1.751
-    ],
-    [
-     "açıkta.",
-     1.751,
-     2.095
-    ],
-    [
-     "Cevapları",
-     2.405,
-     3.02
-    ],
-    [
-     "görebiliyorsun",
-     3.02,
-     3.942
+     "oynuyor",
+     1.557,
+     1.973
     ],
     [
      "ve",
-     3.942,
-     4.096
+     1.973,
+     2.112
+    ],
+    [
+     "ikram",
+     2.112,
+     2.39
+    ],
+    [
+     "paylaşıyor.",
+     2.39,
+     2.945
+    ],
+    [
+     "Sırada",
+     3.195,
+     3.664
+    ],
+    [
+     "bekleyen",
+     3.664,
+     4.133
+    ],
+    [
+     "arkadaşının",
+     4.133,
+     4.915
+    ],
+    [
+     "önüne",
+     4.915,
+     5.384
+    ],
+    [
+     "geçip",
+     5.384,
+     5.697
+    ],
+    [
+     "oyuna",
+     5.697,
+     6.166
+    ],
+    [
+     "hemen",
+     6.166,
+     6.478
+    ],
+    [
+     "girebilirsin;",
+     6.478,
+     7.26
     ],
     [
      "kimse",
-     4.096,
-     4.404
+     7.335,
+     7.437
     ],
     [
      "bakmıyor.",
-     4.404,
-     4.865
+     7.437,
+     7.59
     ],
     [
      "Ne",
-     5.175,
-     5.303
+     7.915,
+     8.044
     ],
     [
      "yaparsın?",
-     5.303,
-     5.686
+     8.044,
+     8.433
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 3.87,
-   "m": "Yanlıştan kaçarken öğrenmeyi ve arkadaşlığı da kaçırıyorsun.",
+   "sure": 4.715,
+   "m": "Arkadaşlarından ve güzel ikramlardan uzak kalıyorsun; teneffüsün tadı kaçıyor.",
    "k": [
     [
-     "Yanlıştan",
+     "Arkadaşlarından",
      0.03,
-     0.544
-    ],
-    [
-     "kaçarken",
-     0.544,
-     1.058
-    ],
-    [
-     "öğrenmeyi",
-     1.058,
-     1.744
+     0.838
     ],
     [
      "ve",
-     1.744,
-     1.915
+     0.838,
+     0.973
     ],
     [
-     "arkadaşlığı",
-     1.915,
-     2.772
+     "güzel",
+     0.973,
+     1.243
     ],
     [
-     "da",
-     2.772,
-     2.943
+     "ikramlardan",
+     1.243,
+     1.782
     ],
     [
-     "kaçırıyorsun.",
-     2.943,
-     3.8
+     "uzak",
+     1.782,
+     2.051
+    ],
+    [
+     "kalıyorsun;",
+     2.051,
+     2.59
+    ],
+    [
+     "teneffüsün",
+     3.0,
+     3.731
+    ],
+    [
+     "tadı",
+     3.731,
+     4.097
+    ],
+    [
+     "kaçıyor.",
+     4.097,
+     4.645
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 5.175,
-   "m": "Cevabı başkasından alıyorsun; öğrenmen eksik kalıyor ve içinde bir huzursuzluk kalıyor.",
+   "sure": 4.29,
+   "m": "Sırada bekleyen arkadaşın üzülüyor; sen de içinde bir huzursuzluk taşıyorsun.",
    "k": [
     [
-     "Cevabı",
+     "Sırada",
      0.03,
-     0.42
+     0.373
     ],
     [
-     "başkasından",
-     0.42,
-     0.94
+     "bekleyen",
+     0.373,
+     0.716
     ],
     [
-     "alıyorsun;",
-     0.94,
-     1.46
+     "arkadaşın",
+     0.716,
+     1.173
     ],
     [
-     "öğrenmen",
-     1.8,
-     2.296
+     "üzülüyor;",
+     1.173,
+     1.63
     ],
     [
-     "eksik",
-     2.296,
-     2.626
+     "sen",
+     2.005,
+     2.163
     ],
     [
-     "kalıyor",
-     2.626,
-     3.122
-    ],
-    [
-     "ve",
-     3.122,
-     3.287
+     "de",
+     2.163,
+     2.321
     ],
     [
      "içinde",
-     3.287,
-     3.783
+     2.321,
+     2.796
     ],
     [
      "bir",
-     3.783,
-     3.948
+     2.796,
+     2.954
     ],
     [
      "huzursuzluk",
-     3.948,
-     4.609
+     2.954,
+     3.587
     ],
     [
-     "kalıyor.",
-     4.609,
-     5.105
+     "taşıyorsun.",
+     3.587,
+     4.22
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 4.57,
-   "m": "İçin rahat; Allahü teâlâya saygıyla doğru olanı seçtin.",
+   "sure": 6.266,
+   "m": "Sıranı bekledin; Allahü teâlâ’ya saygıyla hakka dikkat ettin, oyunun da keyfini çıkarıyorsun.",
    "k": [
     [
-     "İçin",
+     "Sıranı",
      0.03,
-     0.382
+     0.405
     ],
     [
-     "rahat;",
-     0.382,
-     0.735
+     "bekledin;",
+     0.405,
+     0.78
     ],
     [
      "Allahü",
-     0.805,
-     1.457
+     1.31,
+     1.811
     ],
     [
-     "teâlâya",
-     1.457,
-     2.327
+     "teâlâ’ya",
+     1.811,
+     2.478
     ],
     [
      "saygıyla",
-     2.327,
+     2.478,
      2.979
     ],
     [
-     "doğru",
+     "hakka",
      2.979,
-     3.413
+     3.312
     ],
     [
-     "olanı",
-     3.413,
-     4.065
+     "dikkat",
+     3.312,
+     3.646
     ],
     [
-     "seçtin.",
-     4.065,
-     4.5
+     "ettin,",
+     3.646,
+     3.98
+    ],
+    [
+     "oyunun",
+     4.07,
+     4.601
+    ],
+    [
+     "da",
+     4.601,
+     4.779
+    ],
+    [
+     "keyfini",
+     4.779,
+     5.31
+    ],
+    [
+     "çıkarıyorsun.",
+     5.31,
+     6.196
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 6.934,
-   "m": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da ne dersin, diye soruyorlar. Ne yaparsın?",
+   "sure": 6.692,
+   "m": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da Sen ne dersin? diye soruyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşların",
      0.03,
-     0.899
+     0.948
     ],
     [
      "birinin",
-     0.899,
-     1.42
+     0.948,
+     1.499
     ],
     [
      "arkasından",
-     1.42,
-     2.116
+     1.499,
+     2.234
     ],
     [
      "kötü",
-     2.116,
-     2.463
+     2.234,
+     2.601
     ],
     [
      "konuşuyor",
-     2.463,
-     3.158
+     2.601,
+     3.336
     ],
     [
      "ve",
-     3.158,
-     3.332
+     3.336,
+     3.519
     ],
     [
      "sana",
-     3.332,
-     3.68
+     3.519,
+     3.887
     ],
     [
      "da",
-     3.68,
-     3.854
+     3.887,
+     4.07
+    ],
+    [
+     "Sen",
+     4.07,
+     4.254
     ],
     [
      "ne",
-     3.854,
-     4.027
+     4.254,
+     4.438
     ],
     [
-     "dersin,",
-     4.027,
-     4.375
+     "dersin?",
+     4.438,
+     4.805
     ],
     [
      "diye",
-     4.54,
-     4.823
+     5.135,
+     5.363
     ],
     [
-     "soruyorlar.",
-     4.823,
-     5.39
+     "soruyor.",
+     5.363,
+     5.705
     ],
     [
      "Ne",
-     5.775,
-     6.047
+     6.075,
+     6.212
     ],
     [
      "yaparsın?",
-     6.047,
-     6.864
+     6.212,
+     6.622
     ]
    ]
   },

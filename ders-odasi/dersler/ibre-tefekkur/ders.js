@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Tefekkür: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "inanc",
+ "muzik": "inanc",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "az",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi gökyüzüne bakıp hiçbir şey düşünmeden geçiyor: sol uca (Düşünmemek) yakın. Başka okumada hayranlıkla bakıp içinden “ne güzel bir düzen” diyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, bakarken ne yaptığımıza bakar. Tefekkür; gökyüzü, mevsimler, bitkiler gibi çevremizdeki düzene ve eserlere bakıp Allahü teâlâ’nın izini aramak ve şükretmektir. Sağ uç ise aynı şeyi bitmeyen kuruntu ve saplantıyla sorgulamaktır; bu ibre ölçekten çok yönü gösterir. Aklına takılan sorular rahatsız ederse güvendiğin bir yetişkinle konuşabilirsin.",
+      "İbre cümleye değil, bakarken ne yaptığımıza bakar. Tefekkür; gökyüzü, mevsimler, bitkiler gibi çevremizdeki düzene ve eserlere bakıp Allahü teâlâ’nın izini aramak ve şükretmektir. Merak etmek ve soru sormak güzeldir; sağ uç merakı değil, aynı soruyu tekrar tekrar düşünüp rahat edememeyi gösterir. Bu ibre ölçekten çok yönü gösterir. Aklına takılan sorular rahatsız ederse güvendiğin bir yetişkinle konuşabilirsin.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -87,7 +89,7 @@ DO.dersKaydet(
           "not": "Bu orta ucun sesi: tefekkürün sesi."
          },
          {
-          "m": "Neden böyle? Hepsini çözmem lazım!",
+          "m": "Ya bir şey kaçırırsam? Aynı soruyu tekrar düşüneyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: vesvesenin sesi."
          }
@@ -104,21 +106,21 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Her şeyi sorgulayıp takılan kişi neyi kaçırır?",
+       "soru": "Aynı soruya takılıp kalan kişi neyi kaçırır?",
        "ad": "Vesvese",
-       "soz": "Neden böyle? Ya yanlış anladıysam? Bir daha bakayım!",
+       "soz": "Ya bir şey kaçırırsam? Aynı soruyu yine düşüneyim!",
        "eylem": "dusun",
        "zincir": [
-        "Sorular bitmez, huzuru kaçar.",
-        "Güzel manzaranın tadını çıkaramadan eve döner."
+        "Soru bitmez, bakmanın tadı kaçar.",
+        "Güzel manzaranın keyfini çıkaramadan eve döner."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Neden böyle? Hepsini çözmem lazım!",
+          "m": "Ya bir şey kaçırırsam? Aynı soruyu tekrar düşüneyim.",
           "dogru": true,
-          "not": "Vesvese, merakı bırakıp aynı soruya saplanıp kalmaktır. Soru takılıp kalırsa güvendiğin bir yetişkinle konuşmak iyi gelir."
+          "not": "Vesvese, merakı bırakıp aynı soruya takılıp kalmak ve cevap bulsan da rahat edememektir. Merak etmek güzeldir; soru durmuyorsa güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
           "m": "Bulut işte, bulut; üstüne düşünmem.",
@@ -134,10 +136,10 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Vesvese",
-        "soz": "Neden"
+        "soz": "Ya"
        },
        "zincirAnahtar": [
-        "Sorular",
+        "Soru",
         "Güzel"
        ]
       },
@@ -165,7 +167,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: düşünmemenin sesi."
          },
          {
-          "m": "Neden böyle? Hepsini çözmem lazım!",
+          "m": "Ya bir şey kaçırırsam? Aynı soruyu tekrar düşüneyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: vesvesenin sesi."
          }
@@ -209,10 +211,10 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Kaç yıldız var? Neden böyle? Hepsini hemen çözeyim!",
+         "m": "Ya bir şey kaçırırsam? Aynı soruyu tekrar tekrar düşünüyorum!",
          "zon": "fazla",
-         "sonuc": "Sorular birbirine giriyor; manzaradan keyif alamıyorsun.",
-         "not": "İbre sağa kaydı: aynı sorulara saplanmak merakı yoruyor.",
+         "sonuc": "Aynı soru zihninde dönüp duruyor; cevap bulsan da manzaradan keyif alamıyorsun.",
+         "not": "İbre sağa kaydı: aynı soruyu tekrar tekrar düşünmek insanı yoruyor. Rahat edemiyorsan güvendiğin bir yetişkinle konuş.",
          "ses": "s1fa"
         },
         {
@@ -238,16 +240,16 @@ DO.dersKaydet(
          "ses": "s2az"
         },
         {
-         "m": "Neden bu yöne büyüdü? Ya bozulursa? Ya yanlış yaptıysam?",
+         "m": "Filiz iyi mi büyüyor? Aynı soruyu durmadan düşünüp rahat edemiyorum.",
          "zon": "fazla",
-         "sonuc": "Sorular çoğalıyor; filizi izlemek yorucu hâle geliyor.",
-         "not": "İbre sağa kaydı: sorular saplantıya dönünce rahatsız ediyor. Çoğalırsa güvendiğin bir yetişkine söyle.",
+         "sonuc": "Her bakışta aynı soru dönüyor; cevap bulsan da içinde bir rahatsızlık kalıyor.",
+         "not": "İbre sağa kaydı: aynı soru dönüp durunca merak, huzursuzluğa dönüşüyor. Rahat edemiyorsan güvendiğin bir yetişkinle konuş.",
          "ses": "s2fa"
         },
         {
          "m": "Toprağın, suyun ve ışığın düzenine bakarım.",
          "zon": "orta",
-         "sonuc": "Filizin nasıl büyüdüğünü merakla izliyor, kitaptan da bakıyorsun.",
+         "sonuc": "Filizin nasıl büyüdüğünü merakla izliyorsun, kitaptan da bakıyorsun.",
          "not": "İbre ortada: merakla bakıp düzeni fark ettin.",
          "ses": "s2or"
         }
@@ -281,7 +283,7 @@ DO.dersKaydet(
       {
        "id": "fazla",
        "ad": "Fazla · Vesvese",
-       "aciklama": "Saplantıyla sorgulamak",
+       "aciklama": "Aynı soruya takılıp kalmak",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -295,9 +297,9 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Bir çiçeğe bakınca “ya bir şey varsa?” diye sorular sorup durur.",
+       "metin": "Aynı soruyu tekrar tekrar sorar, cevap aldıktan sonra da rahat edemez.",
        "alan": "fazla",
-       "ipucu": "Sorular saplantıya dönüyor."
+       "ipucu": "Cevaptan sonra da rahat edemiyor."
       },
       {
        "id": "k3",
@@ -313,7 +315,7 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Bulutlar neden böyle diye aynı soruyu tekrar tekrar sorar, rahat edemez.",
+       "metin": "Yıldızlara bakarken “ya bir şey kaçırırsam?” diye aynı soruyu kafasında döndürüp durur.",
        "alan": "fazla",
        "ipucu": "Aynı soruya takılıyor."
       },
@@ -886,185 +888,190 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 9.032,
-   "m": "Sağ uçta Vesvese. Neden böyle? Ya yanlış anladıysam? Bir daha bakayım! Tek bir yaprağa uzun uzun bakar, soruları bitmez, rahat edemez.",
+   "sure": 8.875,
+   "m": "Sağ uçta Vesvese. Ya bir şey kaçırırsam? Aynı soruyu yine düşüneyim! Aynı soruyu tekrar tekrar düşünür, cevap bulsa da rahat edemez.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.197
+     0.22
     ],
     [
      "uçta",
-     0.197,
-     0.53
+     0.22,
+     0.6
     ],
     [
      "Vesvese.",
-     0.53,
-     1.03
-    ],
-    [
-     "Neden",
-     1.58,
-     1.873
-    ],
-    [
-     "böyle?",
-     1.873,
-     2.165
+     0.6,
+     1.17
     ],
     [
      "Ya",
-     2.45,
-     2.611
-    ],
-    [
-     "yanlış",
-     2.611,
-     2.934
-    ],
-    [
-     "anladıysam?",
-     2.934,
-     3.58
-    ],
-    [
-     "Bir",
-     4.09,
-     4.179
-    ],
-    [
-     "daha",
-     4.179,
-     4.357
-    ],
-    [
-     "bakayım!",
-     4.357,
-     4.625
-    ],
-    [
-     "Tek",
-     5.35,
-     5.5
+     1.85,
+     1.989
     ],
     [
      "bir",
-     5.5,
-     5.65
+     1.989,
+     2.129
     ],
     [
-     "yaprağa",
-     5.65,
-     6.1
+     "şey",
+     2.129,
+     2.268
     ],
     [
-     "uzun",
-     6.1,
-     6.4
+     "kaçırırsam?",
+     2.268,
+     2.825
     ],
     [
-     "uzun",
-     6.4,
-     6.7
+     "Aynı",
+     3.325,
+     3.549
     ],
     [
-     "bakar,",
-     6.7,
-     7.0
+     "soruyu",
+     3.549,
+     3.884
     ],
     [
-     "soruları",
-     7.12,
-     7.823
+     "yine",
+     3.884,
+     4.108
     ],
     [
-     "bitmez,",
-     7.823,
-     8.175
+     "düşüneyim!",
+     4.108,
+     4.555
+    ],
+    [
+     "Aynı",
+     5.22,
+     5.535
+    ],
+    [
+     "soruyu",
+     5.535,
+     6.008
+    ],
+    [
+     "tekrar",
+     6.008,
+     6.323
+    ],
+    [
+     "tekrar",
+     6.323,
+     6.638
+    ],
+    [
+     "düşünür,",
+     6.638,
+     7.11
+    ],
+    [
+     "cevap",
+     7.355,
+     7.645
+    ],
+    [
+     "bulsa",
+     7.645,
+     7.935
+    ],
+    [
+     "da",
+     7.935,
+     8.08
     ],
     [
      "rahat",
-     8.275,
-     8.55
+     8.08,
+     8.37
     ],
     [
      "edemez.",
-     8.55,
-     8.962
+     8.37,
+     8.805
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.67,
-   "m": "Sonra ne olur? Sorular bitmez, huzuru kaçar. Güzel manzaranın tadını çıkaramadan eve döner.",
+   "sure": 6.915,
+   "m": "Sonra ne olur? Soru bitmez, bakmanın tadı kaçar. Güzel manzaranın keyfini çıkaramadan eve döner.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.292
+     0.286
     ],
     [
      "ne",
-     0.292,
-     0.423
+     0.286,
+     0.414
     ],
     [
      "olur?",
-     0.423,
-     0.685
+     0.414,
+     0.67
     ],
     [
-     "Sorular",
-     1.425,
-     2.049
+     "Soru",
+     1.1,
+     1.51
     ],
     [
      "bitmez,",
-     2.049,
-     2.465
+     1.51,
+     1.92
     ],
     [
-     "huzuru",
-     2.65,
-     3.133
+     "bakmanın",
+     2.25,
+     2.743
+    ],
+    [
+     "tadı",
+     2.743,
+     3.071
     ],
     [
      "kaçar.",
-     3.133,
-     3.455
+     3.071,
+     3.4
     ],
     [
      "Güzel",
-     3.58,
-     3.916
+     3.69,
+     4.041
     ],
     [
      "manzaranın",
-     3.916,
-     4.587
+     4.041,
+     4.742
     ],
     [
-     "tadını",
-     4.587,
-     5.09
+     "keyfini",
+     4.742,
+     5.267
     ],
     [
      "çıkaramadan",
-     5.09,
-     5.929
+     5.267,
+     6.144
     ],
     [
      "eve",
-     5.929,
-     6.264
+     6.144,
+     6.494
     ],
     [
      "döner.",
-     6.264,
-     6.6
+     6.494,
+     6.845
     ]
    ]
   },
@@ -1427,38 +1434,63 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.039,
-   "m": "Sorular birbirine giriyor; manzaradan keyif alamıyorsun.",
+   "sure": 4.224,
+   "m": "Aynı soru zihninde dönüp duruyor; cevap bulsan da manzaradan keyif alamıyorsun.",
    "k": [
     [
-     "Sorular",
+     "Aynı",
      0.03,
-     0.42
+     0.282
     ],
     [
-     "birbirine",
-     0.42,
-     0.94
+     "soru",
+     0.282,
+     0.535
     ],
     [
-     "giriyor;",
-     0.94,
-     1.33
+     "zihninde",
+     0.535,
+     0.914
+    ],
+    [
+     "dönüp",
+     0.914,
+     1.166
+    ],
+    [
+     "duruyor;",
+     1.166,
+     1.545
+    ],
+    [
+     "cevap",
+     2.01,
+     2.278
+    ],
+    [
+     "bulsan",
+     2.278,
+     2.546
+    ],
+    [
+     "da",
+     2.546,
+     2.68
     ],
     [
      "manzaradan",
-     1.48,
-     2.021
+     2.68,
+     3.216
     ],
     [
      "keyif",
-     2.021,
-     2.292
+     3.216,
+     3.484
     ],
     [
      "alamıyorsun.",
-     2.292,
-     2.969
+     3.484,
+     4.154
     ]
    ]
   },
@@ -1630,90 +1662,115 @@ DO.dersKaydet(
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.707,
-   "m": "Sorular çoğalıyor; filizi izlemek yorucu hâle geliyor.",
+   "sure": 4.052,
+   "m": "Her bakışta aynı soru dönüyor; cevap bulsan da içinde bir rahatsızlık kalıyor.",
    "k": [
     [
-     "Sorular",
+     "Her",
      0.03,
-     0.561
+     0.175
     ],
     [
-     "çoğalıyor;",
-     0.561,
-     1.27
+     "bakışta",
+     0.175,
+     0.61
     ],
     [
-     "filizi",
-     1.54,
-     1.989
+     "aynı",
+     0.61,
+     0.9
     ],
     [
-     "izlemek",
-     1.989,
-     2.439
+     "soru",
+     0.9,
+     1.19
     ],
     [
-     "yorucu",
-     2.439,
-     2.888
+     "dönüyor;",
+     1.19,
+     1.625
     ],
     [
-     "hâle",
-     2.888,
-     3.188
+     "cevap",
+     1.755,
+     2.033
     ],
     [
-     "geliyor.",
-     3.188,
-     3.637
+     "bulsan",
+     2.033,
+     2.312
+    ],
+    [
+     "da",
+     2.312,
+     2.451
+    ],
+    [
+     "içinde",
+     2.451,
+     2.869
+    ],
+    [
+     "bir",
+     2.869,
+     3.008
+    ],
+    [
+     "rahatsızlık",
+     3.008,
+     3.565
+    ],
+    [
+     "kalıyor.",
+     3.565,
+     3.982
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.7,
-   "m": "Filizin nasıl büyüdüğünü merakla izliyor, kitaptan da bakıyorsun.",
+   "sure": 3.786,
+   "m": "Filizin nasıl büyüdüğünü merakla izliyorsun, kitaptan da bakıyorsun.",
    "k": [
     [
      "Filizin",
      0.03,
-     0.499
+     0.444
     ],
     [
      "nasıl",
-     0.499,
-     0.811
+     0.444,
+     0.72
     ],
     [
      "büyüdüğünü",
-     0.811,
-     1.593
+     0.72,
+     1.409
     ],
     [
      "merakla",
-     1.593,
-     2.061
+     1.409,
+     1.823
     ],
     [
-     "izliyor,",
-     2.061,
-     2.53
+     "izliyorsun,",
+     1.823,
+     2.375
     ],
     [
      "kitaptan",
-     2.615,
-     2.996
+     2.66,
+     3.056
     ],
     [
      "da",
-     2.996,
-     3.123
+     3.056,
+     3.188
     ],
     [
      "bakıyorsun.",
-     3.123,
-     3.63
+     3.188,
+     3.716
     ]
    ]
   },

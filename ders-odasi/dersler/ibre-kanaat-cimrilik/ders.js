@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Kanaat (Cimrilik · Tamâ‘): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "caba",
+ "muzik": "caba",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,8 +23,8 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Kanaat",
      "huyAnahtar": "Kanaat",
-     "olculen": "Elimdekini paylaşma ve isteme payım",
-     "kanca": "Payıma düşen bu kadar.",
+     "olculen": "Elimdekini paylaşma ve isteme dengem",
+     "kanca": "Bu bende kalsın, bana yeter.",
      "uclar": {
       "az": "Cimrilik",
       "orta": "Kanaat",
@@ -35,7 +37,7 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Kanaat",
-     "cumle": "Payıma düşen bu kadar.",
+     "cumle": "Bu bende kalsın, bana yeter.",
      "uclar": {
       "az": "Cimrilik",
       "orta": "Kanaat",
@@ -44,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "orta",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi adil payına razı oluyor ve fazlasını istemiyor: orta uca yakın. Başka okumada payını sıkı sıkı tutup başkasına hiç uzatmıyor: sol uca (Cimrilik) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an elimizdekine nasıl baktığımıza bakar. Kanaat; elindekine razı olup şükretmek ve bunu paylaşmaktan korkmamaktır. Bu ibre ölçekten çok yönü gösterir: bir uçta hiç paylaşmamak, öbür uçta gözü doymayıp hep daha istemek var.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi elindekiyle yetiniyor ve fazlasını istemiyor: orta uca yakın. Başka okumada elindekini sıkı sıkı kendinde tutup kimseye uzatmıyor: sol uca (Cimrilik) yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an elimizdekine nasıl baktığımıza bakar. Kanaat; elindekine razı olup şükretmektir. Razı olan gönül, çoğu zaman paylaşmaya da açıktır. Bu ibre ölçekten çok yönü gösterir: bir uçta elindekini hiç paylaşmamak (cimrilik), öbür uçta gözü doymayıp hep daha istemek (tamâ‘) var.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -211,7 +213,7 @@ DO.dersKaydet(
         {
          "m": "Onların yiyeceğine de göz dikerim; hepsi bende olsun!",
          "zon": "fazla",
-         "sonuc": "Yiyecek olsa da gözün doymuyor; sofradaki neşeyi kaçırıyorsun.",
+         "sonuc": "Yiyecek olsa da gözün doymuyor; teneffüsün neşesini kaçırıyorsun.",
          "not": "İbre sağa kaydı: doymamak, elindekinin tadını almayı engelliyor.",
          "ses": "s1fa"
         },
@@ -319,7 +321,7 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Tek bir topu olsa da keyifle oynar, arkadaşı gelince birlikte oynar.",
+       "metin": "Payına razı olur, fazlasını istemez; arkadaşı isteyince elindekinden verir.",
        "alan": "orta",
        "ipucu": "Az olana razı, paylaşmaya açık."
       }
@@ -383,28 +385,33 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 1.783,
-   "m": "Payıma düşen bu kadar.",
+   "sure": 1.941,
+   "m": "Bu bende kalsın, bana yeter.",
    "k": [
     [
-     "Payıma",
+     "Bu",
      0.03,
-     0.661
+     0.199
     ],
     [
-     "düşen",
-     0.661,
-     1.082
+     "bende",
+     0.199,
+     0.537
     ],
     [
-     "bu",
-     1.082,
-     1.292
+     "kalsın,",
+     0.537,
+     0.875
     ],
     [
-     "kadar.",
-     1.292,
-     1.713
+     "bana",
+     1.065,
+     1.468
+    ],
+    [
+     "yeter.",
+     1.468,
+     1.871
     ]
    ]
   },
@@ -1377,48 +1384,48 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 4.115,
-   "m": "Yiyecek olsa da gözün doymuyor; sofradaki neşeyi kaçırıyorsun.",
+   "sure": 3.508,
+   "m": "Yiyecek olsa da gözün doymuyor; teneffüsün neşesini kaçırıyorsun.",
    "k": [
     [
      "Yiyecek",
      0.03,
-     0.513
+     0.483
     ],
     [
      "olsa",
-     0.513,
-     0.835
+     0.483,
+     0.785
     ],
     [
      "da",
-     0.835,
-     0.995
+     0.785,
+     0.935
     ],
     [
      "gözün",
-     0.995,
-     1.317
+     0.935,
+     1.237
     ],
     [
      "doymuyor;",
-     1.317,
-     1.8
+     1.237,
+     1.69
     ],
     [
-     "sofradaki",
-     1.995,
-     2.679
+     "teneffüsün",
+     1.765,
+     2.28
     ],
     [
-     "neşeyi",
-     2.679,
-     3.191
+     "neşesini",
+     2.28,
+     2.795
     ],
     [
      "kaçırıyorsun.",
-     3.191,
-     4.045
+     2.795,
+     3.438
     ]
    ]
   },
@@ -1855,113 +1862,123 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 8.794,
-   "m": "Bu cümle bilerek çift anlamlı. Payına razı olan biri söylüyorsa orta uca yakın. Payını kimseyle paylaşmayan biri söylüyorsa sol uca yakın.",
+   "sure": 10.375,
+   "m": "Bu cümle bilerek çift anlamlı. Elindekiyle yetinen ve fazlasını istemeyen biri söylüyorsa orta uca yakın. Elindekini kimseyle paylaşmayan biri söylüyorsa sol uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.181
+     0.183
     ],
     [
      "cümle",
-     0.181,
-     0.484
+     0.183,
+     0.49
     ],
     [
      "bilerek",
-     0.484,
-     0.939
+     0.49,
+     0.951
     ],
     [
      "çift",
-     0.939,
-     1.091
+     0.951,
+     1.105
     ],
     [
      "anlamlı.",
-     1.091,
-     1.545
+     1.105,
+     1.565
     ],
     [
-     "Payına",
-     1.8,
-     2.314
+     "Elindekiyle",
+     2.11,
+     2.817
     ],
     [
-     "razı",
-     2.314,
-     2.657
+     "yetinen",
+     2.817,
+     3.241
     ],
     [
-     "olan",
-     2.657,
-     2.999
+     "ve",
+     3.241,
+     3.382
+    ],
+    [
+     "fazlasını",
+     3.382,
+     3.948
+    ],
+    [
+     "istemeyen",
+     3.948,
+     4.513
     ],
     [
      "biri",
-     2.999,
-     3.342
+     4.513,
+     4.796
     ],
     [
      "söylüyorsa",
-     3.342,
-     4.027
+     4.796,
+     5.362
     ],
     [
      "orta",
-     4.027,
-     4.37
+     5.362,
+     5.644
     ],
     [
      "uca",
-     4.37,
-     4.712
+     5.644,
+     5.927
     ],
     [
      "yakın.",
-     4.712,
-     5.055
+     5.927,
+     6.21
     ],
     [
-     "Payını",
-     5.22,
-     5.721
+     "Elindekini",
+     6.865,
+     7.613
     ],
     [
      "kimseyle",
-     5.721,
-     6.221
+     7.613,
+     8.062
     ],
     [
      "paylaşmayan",
-     6.221,
-     6.888
+     8.062,
+     8.66
     ],
     [
      "biri",
-     6.888,
-     7.222
+     8.66,
+     8.959
     ],
     [
      "söylüyorsa",
-     7.222,
-     7.89
+     8.959,
+     9.557
     ],
     [
      "sol",
-     7.89,
-     8.056
+     9.557,
+     9.707
     ],
     [
      "uca",
-     8.056,
-     8.39
+     9.707,
+     10.006
     ],
     [
      "yakın.",
-     8.39,
-     8.724
+     10.006,
+     10.305
     ]
    ]
   },

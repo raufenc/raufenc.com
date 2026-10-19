@@ -1,11 +1,13 @@
 /* İbremetre · Tefsir — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Uzaklık · Doğru Tefsir · Yanlış Tefsir). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Uzaklık · Doğru Tefsir · Kendince). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-tefsir",
  "ad": "Tefsir: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "inanc",
+ "muzik": "inanc",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -26,7 +28,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uzaklık",
       "orta": "Doğru Tefsir",
-      "fazla": "Yanlış Tefsir"
+      "fazla": "Kendince"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -39,13 +41,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uzaklık",
       "orta": "Doğru Tefsir",
-      "fazla": "Yanlış Tefsir"
+      "fazla": "Kendince"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi okuduğunu kendi görüşüne göre yorumlayıp kimseye sormuyor: sağ uca (Yanlış Tefsir) yakın. Başka okumada kişi okuyup anlamaya çalışmış ve anladığını güvendiği bir hocayla konuşmaya hazır: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an Kur’ân-ı Kerîm’i nasıl anlamaya çalıştığımıza bakar. Doğru tefsir; Kur’ân-ı Kerîm’i güvenilir ilim sahiplerinin öğrettiği şekilde anlamaktır. Çocuk düzeyinde bu, okumak, meale bakmak ve güvendiğin bir hocaya sormak alışkanlığıdır.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi okuduğunu kendi görüşüne göre yorumlayıp kimseye sormuyor: sağ uca (Kendince) yakın. Başka okumada kişi okuyup meale bakarak anlamaya çalışmış ve anladığını güvendiği bir hocayla konuşmaya hazır: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an Kur’ân-ı Kerîm’i nasıl anlamaya çalıştığımıza bakar. Doğru tefsir; Kur’ân-ı Kerîm’i güvenilir ilim sahiplerinin öğrettiği şekilde anlamaktır. Çocuk düzeyinde bu, düzenli okumak, meale bakmak ve anlamadığını not alıp hocaya götürmek alışkanlığıdır. Sağ uca “Kendince” dedik; Excel’deki adı Kur’ân-ı Kerîm’i Yanlış Tefsir Etmek, yani âyetleri kendi görüşüne göre yorumlamaktır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -59,7 +61,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uzaklık",
       "orta": "Doğru Tefsir",
-      "fazla": "Yanlış Tefsir"
+      "fazla": "Kendince"
      },
      "yesil": 0.26,
      "kapilar": [
@@ -70,7 +72,7 @@ DO.dersKaydet(
        "soz": "Kur’ân-ı Kerîm’i açıp okumaya hiç vaktim yok.",
        "eylem": "yaslan",
        "zincir": [
-        "Okumadığı için öğreneceği güzel şeyler yanından geçer.",
+        "Okumayı erteledikçe başlamak daha da zorlaşır.",
         "Merak ettiği konular öylece kalır."
        ],
        "ic": {
@@ -82,14 +84,14 @@ DO.dersKaydet(
           "not": "Uzaklık, Kur’ân-ı Kerîm’i okumamak ve anlamaya çalışmamaktır. Her gün küçük bir okuma bu mesafeyi kısaltır."
          },
          {
-          "m": "Okuyayım, anlamadığım yeri güvendiğim hocama sorayım.",
+          "m": "Her gün biraz okuyayım, meale bakayım; anlamadığımı not alırım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: doğru tefsirin sesi."
          },
          {
-          "m": "Ben nasıl anlıyorsam öyledir; sormama gerek yok.",
+          "m": "Ben nasıl anlıyorsam öyledir; meale bakmama gerek yok.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: yanlış tefsirin sesi."
+          "not": "Bu sağ ucun sesi: kendince yorumun sesi."
          }
         ]
        },
@@ -98,7 +100,7 @@ DO.dersKaydet(
         "soz": "Kur’ân-ı"
        },
        "zincirAnahtar": [
-        "Okumadığı",
+        "Okumayı",
         "Merak"
        ]
       },
@@ -110,15 +112,15 @@ DO.dersKaydet(
        "eylem": "isaret",
        "zincir": [
         "Yanlış anlaşılan bir şey yerleşebilir.",
-        "Güvenilir bir hocaya sorsa farkı görebilirdi."
+        "Güvenilir bir hocaya sorunca farkı görür."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Ben nasıl anlıyorsam öyledir; sormama gerek yok.",
+          "m": "Ben nasıl anlıyorsam öyledir; meale bakmama gerek yok.",
           "dogru": true,
-          "not": "Bu uçta okunan söz, kendi isteğine göre anlaşılır. Okumak, meale bakmak ve güvendiğin bir hocaya sormak daha sağlam bir yoldur."
+          "not": "Bu uçta okunan söz, kendi isteğine göre anlaşılır. Düzenli okumak, meale bakmak ve anlamadığını güvendiğin bir hocaya götürmek daha sağlam bir yoldur."
          },
          {
           "m": "Şimdi vaktim yok; sonra bakarım.",
@@ -126,7 +128,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: uzaklığın sesi."
          },
          {
-          "m": "Okuyayım, anlamadığım yeri güvendiğim hocama sorayım.",
+          "m": "Her gün biraz okuyayım, meale bakayım; anlamadığımı not alırım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: doğru tefsirin sesi."
          }
@@ -145,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Tefsir",
-       "soz": "Okuyayım, anlamadığım yeri hocama sorayım.",
+       "soz": "Her gün biraz okuyayım, meale de bakayım.",
        "eylem": "konus",
        "zincir": [
         "Anlayışı her gün biraz derinleşir.",
@@ -155,9 +157,9 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Okuyayım, anlamadığım yeri güvendiğim hocama sorayım.",
+          "m": "Her gün biraz okuyayım, meale bakayım; anlamadığımı not alırım.",
           "dogru": true,
-          "not": "Doğru tefsir, Kur’ân-ı Kerîm’i güvenilir kaynaklardan ve hocalardan öğrenerek anlamaya çalışmaktır."
+          "not": "Doğru tefsir, Kur’ân-ı Kerîm’i güvenilir kaynaklardan ve hocalardan öğrenerek anlamaya çalışmaktır. Düzenli okuma ve meal buna yardım eder."
          },
          {
           "m": "Şimdi vaktim yok; sonra bakarım.",
@@ -165,15 +167,15 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: uzaklığın sesi."
          },
          {
-          "m": "Ben nasıl anlıyorsam öyledir; sormama gerek yok.",
+          "m": "Ben nasıl anlıyorsam öyledir; meale bakmama gerek yok.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: yanlış tefsirin sesi."
+          "not": "Bu sağ ucun sesi: kendince yorumun sesi."
          }
         ]
        },
        "anahtar": {
         "ad": "Tefsir",
-        "soz": "Okuyayım,"
+        "soz": "Her"
        },
        "zincirAnahtar": [
         "Anlayışı",
@@ -190,7 +192,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uzaklık",
       "orta": "Doğru Tefsir",
-      "fazla": "Yanlış Tefsir"
+      "fazla": "Kendince"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
@@ -216,10 +218,10 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Kısaca okurum; anlamadığımı not alıp hocama sorarım.",
+         "m": "Kısaca okurum, meale de bakarım; anlamadığımı not alırım.",
          "zon": "orta",
-         "sonuc": "Küçük bir okuma yapıyorsun ve sorunu hocana götürüyorsun.",
-         "not": "İbre ortada: okumak ve anlamak için sormak birlikte yürüyor.",
+         "sonuc": "Küçük bir okuma yapıp meale bakıyorsun; anlamadığın yer de not defterinde duruyor.",
+         "not": "İbre ortada: düzenli okumak ve meale bakmak birlikte yürüyor.",
          "ses": "s1or"
         }
        ],
@@ -241,7 +243,7 @@ DO.dersKaydet(
          "m": "Bana göre bu şu demek; öyle kabul ettim.",
          "zon": "fazla",
          "sonuc": "Anlamı kendi isteğinle belirledin; doğru olup olmadığına bakılmıyor.",
-         "not": "İbre sağa kaydı: kendi görüşüne göre anlamak, doğrusunu öğrenmeden karar vermektir.",
+         "not": "İbre sağa kaydı: kendi görüşüne göre anlamak, doğrusunu öğrenmeden karar vermeye yol açıyor.",
          "ses": "s2fa"
         },
         {
@@ -274,13 +276,13 @@ DO.dersKaydet(
       {
        "id": "orta",
        "ad": "Kararında · Doğru Tefsir",
-       "aciklama": "Okumak, bakmak, hocaya sormak",
+       "aciklama": "Düzenli okumak, meale bakmak",
        "ikon": "muhur",
        "renk": "#17998A"
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Yanlış Tefsir",
+       "ad": "Fazla · Kendince",
        "aciklama": "Kendi isteğine göre anlamak",
        "ikon": "uyari",
        "renk": "#E0674F"
@@ -301,9 +303,9 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Okur, meale bakar, anlamadığını güvendiği hocaya sorar.",
+       "metin": "Okur, meale bakar, anlamadığını not alıp güvendiği hocaya götürür.",
        "alan": "orta",
-       "ipucu": "Okuma ve sorma birlikte."
+       "ipucu": "Okuma ve meal birlikte."
       },
       {
        "id": "k4",
@@ -364,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Tefsir",
-       "metin": "okumak, bakmak, hocaya sormak",
+       "metin": "düzenli okumak, meale bakmak",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -792,83 +794,78 @@ DO.dersKaydet(
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 7.045,
-   "m": "Sonra ne olur? Okumadığı için öğreneceği güzel şeyler yanından geçer. Merak ettiği konular öylece kalır.",
+   "sure": 6.564,
+   "m": "Sonra ne olur? Okumayı erteledikçe başlamak daha da zorlaşır. Merak ettiği konular öylece kalır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.282
+     0.294
     ],
     [
      "ne",
-     0.282,
-     0.408
+     0.294,
+     0.426
     ],
     [
      "olur?",
-     0.408,
-     0.66
+     0.426,
+     0.69
     ],
     [
-     "Okumadığı",
-     1.275,
-     1.965
+     "Okumayı",
+     1.105,
+     1.762
     ],
     [
-     "için",
-     1.965,
-     2.242
+     "erteledikçe",
+     1.762,
+     2.583
     ],
     [
-     "öğreneceği",
-     2.242,
-     2.932
+     "başlamak",
+     2.583,
+     3.075
     ],
     [
-     "güzel",
-     2.932,
-     3.208
+     "daha",
+     3.075,
+     3.403
     ],
     [
-     "şeyler",
-     3.208,
-     3.485
+     "da",
+     3.403,
+     3.567
     ],
     [
-     "yanından",
-     3.485,
-     3.899
-    ],
-    [
-     "geçer.",
-     3.899,
-     4.175
+     "zorlaşır.",
+     3.567,
+     4.06
     ],
     [
      "Merak",
-     4.685,
-     5.037
+     4.195,
+     4.549
     ],
     [
      "ettiği",
-     5.037,
-     5.566
+     4.549,
+     5.079
     ],
     [
      "konular",
-     5.566,
-     6.094
+     5.079,
+     5.609
     ],
     [
      "öylece",
-     6.094,
-     6.622
+     5.609,
+     6.14
     ],
     [
      "kalır.",
-     6.622,
-     6.975
+     6.14,
+     6.493
     ]
    ]
   },
@@ -1008,78 +1005,78 @@ DO.dersKaydet(
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 5.805,
-   "m": "Sonra ne olur? Yanlış anlaşılan bir şey yerleşebilir. Güvenilir bir hocaya sorsa farkı görebilirdi.",
+   "sure": 5.492,
+   "m": "Sonra ne olur? Yanlış anlaşılan bir şey yerleşebilir. Güvenilir bir hocaya sorunca farkı görür.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.278
+     0.274
     ],
     [
      "ne",
-     0.278,
-     0.402
+     0.274,
+     0.396
     ],
     [
      "olur?",
-     0.402,
-     0.65
+     0.396,
+     0.64
     ],
     [
      "Yanlış",
-     1.21,
-     1.46
+     0.99,
+     1.274
     ],
     [
      "anlaşılan",
-     1.46,
-     1.96
+     1.274,
+     1.842
     ],
     [
      "bir",
-     1.96,
-     2.085
+     1.842,
+     1.983
     ],
     [
      "şey",
-     2.085,
-     2.21
+     1.983,
+     2.125
     ],
     [
      "yerleşebilir.",
-     2.21,
+     2.125,
      2.835
     ],
     [
      "Güvenilir",
-     3.3,
-     3.873
+     3.185,
+     3.782
     ],
     [
      "bir",
-     3.873,
-     4.016
+     3.782,
+     3.931
     ],
     [
      "hocaya",
-     4.016,
-     4.446
+     3.931,
+     4.378
     ],
     [
-     "sorsa",
-     4.446,
-     4.732
+     "sorunca",
+     4.378,
+     4.825
     ],
     [
      "farkı",
-     4.732,
-     5.019
+     4.825,
+     5.124
     ],
     [
-     "görebilirdi.",
-     5.019,
-     5.735
+     "görür.",
+     5.124,
+     5.422
     ]
    ]
   },
@@ -1122,88 +1119,93 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 8.557,
-   "m": "Tam kararında Tefsir. Okuyayım, anlamadığım yeri hocama sorayım. Okur, meale bakar ve güvendiği bir hocaya sorar.",
+   "sure": 8.036,
+   "m": "Tam kararında Tefsir. Her gün biraz okuyayım, meale de bakayım. Düzenli okur, meale bakar, anlamadığını not alır.",
    "k": [
     [
      "Tam",
      0.03,
-     0.237
+     0.159
     ],
     [
      "kararında",
-     0.237,
-     1.066
+     0.159,
+     0.676
     ],
     [
      "Tefsir.",
-     1.066,
-     1.48
+     0.676,
+     0.935
     ],
     [
-     "Okuyayım,",
-     1.85,
-     2.295
+     "Her",
+     1.18,
+     1.397
     ],
     [
-     "anlamadığım",
-     2.515,
-     3.546
+     "gün",
+     1.397,
+     1.613
     ],
     [
-     "yeri",
-     3.546,
-     3.958
+     "biraz",
+     1.613,
+     2.047
     ],
     [
-     "hocama",
-     3.958,
-     4.577
-    ],
-    [
-     "sorayım.",
-     4.577,
-     5.195
-    ],
-    [
-     "Okur,",
-     5.315,
-     5.667
+     "okuyayım,",
+     2.047,
+     2.913
     ],
     [
      "meale",
-     5.667,
-     6.196
+     2.913,
+     3.563
     ],
     [
-     "bakar",
-     6.196,
-     6.548
+     "de",
+     3.563,
+     3.78
     ],
     [
-     "ve",
-     6.548,
-     6.725
+     "bakayım.",
+     3.78,
+     4.43
     ],
     [
-     "güvendiği",
-     6.725,
-     7.429
+     "Düzenli",
+     4.875,
+     5.375
     ],
     [
-     "bir",
-     7.429,
-     7.606
+     "okur,",
+     5.375,
+     5.708
     ],
     [
-     "hocaya",
-     7.606,
-     8.134
+     "meale",
+     5.708,
+     6.207
     ],
     [
-     "sorar.",
-     8.134,
-     8.487
+     "bakar,",
+     6.207,
+     6.54
+    ],
+    [
+     "anlamadığını",
+     6.715,
+     7.549
+    ],
+    [
+     "not",
+     7.549,
+     7.688
+    ],
+    [
+     "alır.",
+     7.688,
+     7.966
     ]
    ]
   },
@@ -1479,48 +1481,68 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.311,
-   "m": "Küçük bir okuma yapıyorsun ve sorunu hocana götürüyorsun.",
+   "sure": 4.474,
+   "m": "Küçük bir okuma yapıp meale bakıyorsun; anlamadığın yer de not defterinde duruyor.",
    "k": [
     [
      "Küçük",
      0.03,
-     0.322
+     0.261
     ],
     [
      "bir",
-     0.322,
-     0.468
+     0.261,
+     0.377
     ],
     [
      "okuma",
-     0.468,
-     0.906
+     0.377,
+     0.724
     ],
     [
-     "yapıyorsun",
-     0.906,
-     1.489
+     "yapıp",
+     0.724,
+     0.955
     ],
     [
-     "ve",
-     1.489,
-     1.635
+     "meale",
+     0.955,
+     1.302
     ],
     [
-     "sorunu",
-     1.635,
-     2.073
+     "bakıyorsun;",
+     1.302,
+     1.765
     ],
     [
-     "hocana",
-     2.073,
-     2.511
+     "anlamadığın",
+     2.13,
+     2.888
     ],
     [
-     "götürüyorsun.",
-     2.511,
-     3.241
+     "yer",
+     2.888,
+     3.039
+    ],
+    [
+     "de",
+     3.039,
+     3.191
+    ],
+    [
+     "not",
+     3.191,
+     3.343
+    ],
+    [
+     "defterinde",
+     3.343,
+     3.949
+    ],
+    [
+     "duruyor.",
+     3.949,
+     4.404
     ]
    ]
   },

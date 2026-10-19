@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "İlim: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "benlik",
+ "muzik": "benlik",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -70,8 +72,8 @@ DO.dersKaydet(
        "soz": "Ne gerek var, bilmesem de olur.",
        "eylem": "hayir",
        "zincir": [
-        "Aklındaki soru cevapsız kalır.",
-        "Öğrenebileceği güzel şeyler yanından geçip gider."
+        "Merak edeceği şeyler hiç sorulmaz.",
+        "Bilgisi olduğu yerde kalır, yeni bir şey eklenmez."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -82,7 +84,7 @@ DO.dersKaydet(
           "not": "Cehâlet, öğrenmek istememektir. Merak kapanınca bilgi de yanından geçer."
          },
          {
-          "m": "Bilmiyorum ama öğrenmek istiyorum; kime sorsam?",
+          "m": "Bunu bilmiyorum ama öğrenmek istiyorum; bir bakayım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: ilmin sesi."
          },
@@ -98,8 +100,8 @@ DO.dersKaydet(
         "soz": "Ne"
        },
        "zincirAnahtar": [
-        "Aklındaki",
-        "Öğrenebileceği"
+        "Merak",
+        "Bilgisi"
        ]
       },
       {
@@ -199,7 +201,7 @@ DO.dersKaydet(
       {
        "id": "anlatim",
        "baslik": "Anlaşılmayan yer",
-       "tetik": "Sınıfta bir konu anlatılıyor ve bir kısmını anlayamadın. Öğretmen, anlaşılmayan yer var mı, diye soruyor.",
+       "tetik": "Sınıfta bir konu anlatılıyor ve bir kısmını anlayamadın. Öğretmen “Anlaşılmayan yer var mı?” diye soruyor.",
        "secenekler": [
         {
          "m": "Sorsam ne olacak, boş ver.",
@@ -757,73 +759,88 @@ DO.dersKaydet(
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.557,
-   "m": "Sonra ne olur? Aklındaki soru cevapsız kalır. Öğrenebileceği güzel şeyler yanından geçip gider.",
+   "sure": 6.503,
+   "m": "Sonra ne olur? Merak edeceği şeyler hiç sorulmaz. Bilgisi olduğu yerde kalır, yeni bir şey eklenmez.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.304
+     0.294
     ],
     [
      "ne",
-     0.304,
-     0.441
+     0.294,
+     0.426
     ],
     [
      "olur?",
-     0.441,
-     0.715
+     0.426,
+     0.69
     ],
     [
-     "Aklındaki",
-     1.37,
-     1.946
+     "Merak",
+     1.25,
+     1.597
     ],
     [
-     "soru",
-     1.946,
-     2.235
-    ],
-    [
-     "cevapsız",
-     2.235,
-     2.667
-    ],
-    [
-     "kalır.",
-     2.667,
-     2.955
-    ],
-    [
-     "Öğrenebileceği",
-     3.485,
-     4.652
-    ],
-    [
-     "güzel",
-     4.652,
-     4.986
+     "edeceği",
+     1.597,
+     2.29
     ],
     [
      "şeyler",
-     4.986,
-     5.319
+     2.29,
+     2.637
     ],
     [
-     "yanından",
-     5.319,
-     5.82
+     "hiç",
+     2.637,
+     2.81
     ],
     [
-     "geçip",
-     5.82,
-     6.153
+     "sorulmaz.",
+     2.81,
+     3.33
     ],
     [
-     "gider.",
-     6.153,
-     6.487
+     "Bilgisi",
+     3.83,
+     4.231
+    ],
+    [
+     "olduğu",
+     4.231,
+     4.631
+    ],
+    [
+     "yerde",
+     4.631,
+     4.898
+    ],
+    [
+     "kalır,",
+     4.898,
+     5.165
+    ],
+    [
+     "yeni",
+     5.395,
+     5.692
+    ],
+    [
+     "bir",
+     5.692,
+     5.84
+    ],
+    [
+     "şey",
+     5.84,
+     5.988
+    ],
+    [
+     "eklenmez.",
+     5.988,
+     6.433
     ]
    ]
   },
@@ -1258,93 +1275,93 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 6.055,
-   "m": "Sınıfta bir konu anlatılıyor ve bir kısmını anlayamadın. Öğretmen, anlaşılmayan yer var mı, diye soruyor. Ne yaparsın?",
+   "sure": 6.86,
+   "m": "Sınıfta bir konu anlatılıyor ve bir kısmını anlayamadın. Öğretmen Anlaşılmayan yer var mı? diye soruyor. Ne yaparsın?",
    "k": [
     [
      "Sınıfta",
      0.03,
-     0.389
+     0.537
     ],
     [
      "bir",
-     0.389,
-     0.509
+     0.537,
+     0.706
     ],
     [
      "konu",
-     0.509,
-     0.749
+     0.706,
+     1.044
     ],
     [
      "anlatılıyor",
-     0.749,
-     1.347
+     1.044,
+     1.89
     ],
     [
      "ve",
-     1.347,
-     1.467
+     1.89,
+     2.059
     ],
     [
      "bir",
-     1.467,
-     1.587
+     2.059,
+     2.228
     ],
     [
      "kısmını",
-     1.587,
-     1.946
+     2.228,
+     2.735
     ],
     [
      "anlayamadın.",
-     1.946,
-     2.545
+     2.735,
+     3.58
     ],
     [
-     "Öğretmen,",
-     2.96,
-     3.435
+     "Öğretmen",
+     3.91,
+     4.245
     ],
     [
-     "anlaşılmayan",
-     3.595,
-     4.551
+     "Anlaşılmayan",
+     4.245,
+     4.805
     ],
     [
      "yer",
-     4.551,
-     4.742
+     4.805,
+     4.916
     ],
     [
      "var",
-     4.742,
-     4.934
+     4.916,
+     5.028
     ],
     [
-     "mı,",
-     4.934,
-     5.125
+     "mı?",
+     5.028,
+     5.14
     ],
     [
      "diye",
-     5.45,
-     5.569
+     5.355,
+     5.613
     ],
     [
      "soruyor.",
-     5.569,
-     5.747
+     5.613,
+     6.0
     ],
     [
      "Ne",
-     5.747,
-     5.807
+     6.22,
+     6.363
     ],
     [
      "yaparsın?",
-     5.807,
-     5.985
+     6.363,
+     6.79
     ]
    ]
   },

@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Müdârâ: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -67,7 +69,7 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Sert ve anlayışsız olmak neye benziyor?",
        "ad": "Katılık",
-       "soz": "Yine yanlış yaptın, hiç düzelmezsin!",
+       "soz": "Yine mi yanlış yaptın? Ne zaman öğreneceksin?",
        "eylem": "isaret",
        "zincir": [
         "Arkadaşı utanır ve savunmaya geçer.",
@@ -197,12 +199,12 @@ DO.dersKaydet(
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "oyun",
-       "baslik": "Oyun kuralı",
-       "tetik": "Arkadaşın oyunda bir kuralı yanlış uyguluyor ve bunun farkında değil.",
+       "id": "hamle",
+       "baslik": "Yanlış hamle",
+       "tetik": "Arkadaşın masa oyununda bir hamleyi yanlış oynuyor ve bunun farkında değil.",
        "secenekler": [
         {
-         "m": "Kuralı bilmiyor musun? Hep yanlış yapıyorsun!",
+         "m": "Yine yanlış oynadın! Biraz dikkat etsene!",
          "zon": "az",
          "sonuc": "Arkadaşın mahcup oluyor ve oyundan soğuyor.",
          "not": "İbre sola kaydı: sert söylenen doğru dinlenmiyor, kırgınlık bırakıyor.",
@@ -211,14 +213,14 @@ DO.dersKaydet(
         {
          "m": "Sorun değil, sen nasıl istersen öyle oynayalım.",
          "zon": "fazla",
-         "sonuc": "Kural yanlış kalıyor; diğer oyuncular da neden böyle olduğunu anlamıyor.",
+         "sonuc": "Hamle yanlış kalıyor; diğer oyuncular da neden böyle olduğunu anlamıyor.",
          "not": "İbre sağa kaydı: yaranmak için doğruyu saklamak sorunu çözmüyor.",
          "ses": "s1fa"
         },
         {
-         "m": "Bence kural şöyleydi; birlikte bir bakalım mı?",
+         "m": "Bence hamle şöyleydi; birlikte bir bakalım mı?",
          "zon": "orta",
-         "sonuc": "Kurala birlikte bakıyorsunuz ve arkadaşın hatasını kendisi düzeltiyor.",
+         "sonuc": "Birlikte bakıyorsunuz ve arkadaşın yanlışını kendisi düzeltiyor.",
          "not": "İbre ortada: doğruyu kırmadan, birlikte bakarak gösterdin.",
          "ses": "s1or"
         }
@@ -233,7 +235,7 @@ DO.dersKaydet(
         {
          "m": "Bu çok kötü olmuş; baştan yap!",
          "zon": "az",
-         "sonuc": "Arkadaşının morali bozuluyor ve ödevi düzeltmek içinden gelmiyor.",
+         "sonuc": "Arkadaşının morali bozuluyor ve ödevi düzeltmek istemiyor.",
          "not": "İbre sola kaydı: sert eleştiri, düzeltme isteğini de söndürüyor.",
          "ses": "s2az"
         },
@@ -289,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Arkadaşının hatasını sınıfta yüksek sesle söyler: “Yine yanlış yaptın!”",
+       "metin": "Arkadaşı hata yapınca sesini yükseltip azarlar: “Yine mi aynısı!”",
        "alan": "az",
        "ipucu": "Doğru olsa da sert ve kırıcı."
       },
@@ -335,7 +337,7 @@ DO.dersKaydet(
        "secenekler": [
         "Bir arkadaşım hata yapınca",
         "Ödevini bana gösterince",
-        "Bir kuralın yanlış uygulandığını görünce",
+        "Oyunda bir hamlenin yanlış olduğunu görünce",
         "Biri bana hatamı söylerken"
        ]
       },
@@ -710,88 +712,88 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.509,
-   "m": "Sol uçta Katılık. Yine yanlış yaptın, hiç düzelmezsin! Arkadaşının küçük hatasını herkesin yanında yüksek sesle söyler.",
+   "sure": 7.421,
+   "m": "Sol uçta Katılık. Yine mi yanlış yaptın? Ne zaman öğreneceksin? Arkadaşı hata yapınca sesini yükseltip azarlar.",
    "k": [
     [
      "Sol",
      0.03,
-     0.218
+     0.194
     ],
     [
      "uçta",
-     0.218,
-     0.595
+     0.194,
+     0.522
     ],
     [
      "Katılık.",
-     0.595,
-     1.16
+     0.522,
+     1.015
     ],
     [
      "Yine",
-     1.275,
-     1.758
+     1.105,
+     1.502
+    ],
+    [
+     "mi",
+     1.502,
+     1.701
     ],
     [
      "yanlış",
-     1.758,
-     2.242
+     1.701,
+     2.098
     ],
     [
-     "yaptın,",
-     2.242,
-     2.725
+     "yaptın?",
+     2.098,
+     2.495
     ],
     [
-     "hiç",
-     2.83,
-     2.869
+     "Ne",
+     2.575,
+     2.764
     ],
     [
-     "düzelmezsin!",
-     2.869,
-     3.025
+     "zaman",
+     2.764,
+     3.141
     ],
     [
-     "Arkadaşının",
-     3.265,
-     4.39
+     "öğreneceksin?",
+     3.141,
+     4.085
     ],
     [
-     "küçük",
-     4.39,
-     4.84
+     "Arkadaşı",
+     4.605,
+     5.215
     ],
     [
-     "hatasını",
-     4.84,
-     5.739
+     "hata",
+     5.215,
+     5.52
     ],
     [
-     "herkesin",
-     5.739,
-     6.414
+     "yapınca",
+     5.52,
+     5.978
     ],
     [
-     "yanında",
-     6.414,
-     7.089
+     "sesini",
+     5.978,
+     6.436
     ],
     [
-     "yüksek",
-     7.089,
-     7.539
+     "yükseltip",
+     6.436,
+     6.893
     ],
     [
-     "sesle",
-     7.539,
-     7.989
-    ],
-    [
-     "söyler.",
-     7.989,
-     8.439
+     "azarlar.",
+     6.893,
+     7.351
     ]
    ]
   },
@@ -1338,68 +1340,73 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 3.989,
-   "m": "Arkadaşın oyunda bir kuralı yanlış uyguluyor ve bunun farkında değil. Ne yaparsın?",
+   "sure": 4.552,
+   "m": "Arkadaşın masa oyununda bir hamleyi yanlış oynuyor ve bunun farkında değil. Ne yaparsın?",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.528
+     0.573
     ],
     [
-     "oyunda",
-     0.528,
-     0.902
+     "masa",
+     0.573,
+     0.844
+    ],
+    [
+     "oyununda",
+     0.844,
+     1.387
     ],
     [
      "bir",
-     0.902,
-     1.027
+     1.387,
+     1.523
     ],
     [
-     "kuralı",
-     1.027,
-     1.401
+     "hamleyi",
+     1.523,
+     1.93
     ],
     [
      "yanlış",
-     1.401,
-     1.65
+     1.93,
+     2.202
     ],
     [
-     "uyguluyor",
-     1.65,
-     2.148
+     "oynuyor",
+     2.202,
+     2.609
     ],
     [
      "ve",
-     2.148,
-     2.273
+     2.609,
+     2.745
     ],
     [
      "bunun",
-     2.273,
-     2.522
+     2.745,
+     3.016
     ],
     [
      "farkında",
-     2.522,
-     2.896
+     3.016,
+     3.424
     ],
     [
      "değil.",
-     2.896,
-     3.145
+     3.424,
+     3.695
     ],
     [
      "Ne",
-     3.405,
-     3.533
+     3.96,
+     4.09
     ],
     [
      "yaparsın?",
-     3.533,
-     3.919
+     4.09,
+     4.482
     ]
    ]
   },
@@ -1442,105 +1449,100 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.69,
-   "m": "Kural yanlış kalıyor; diğer oyuncular da neden böyle olduğunu anlamıyor.",
+   "sure": 4.143,
+   "m": "Hamle yanlış kalıyor; diğer oyuncular da neden böyle olduğunu anlamıyor.",
    "k": [
     [
-     "Kural",
+     "Hamle",
      0.03,
-     0.354
+     0.329
     ],
     [
      "yanlış",
-     0.354,
-     0.679
+     0.329,
+     0.627
     ],
     [
      "kalıyor;",
-     0.679,
-     1.165
+     0.627,
+     1.075
     ],
     [
      "diğer",
-     1.445,
-     1.674
+     1.295,
+     1.587
     ],
     [
      "oyuncular",
-     1.674,
-     2.132
+     1.587,
+     2.172
     ],
     [
      "da",
-     2.132,
-     2.246
+     2.172,
+     2.319
     ],
     [
      "neden",
-     2.246,
-     2.475
+     2.319,
+     2.611
     ],
     [
      "böyle",
-     2.475,
-     2.704
+     2.611,
+     2.903
     ],
     [
      "olduğunu",
-     2.704,
-     3.162
+     2.903,
+     3.488
     ],
     [
      "anlamıyor.",
-     3.162,
-     3.62
+     3.488,
+     4.073
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.471,
-   "m": "Kurala birlikte bakıyorsunuz ve arkadaşın hatasını kendisi düzeltiyor.",
+   "sure": 3.276,
+   "m": "Birlikte bakıyorsunuz ve arkadaşın yanlışını kendisi düzeltiyor.",
    "k": [
     [
-     "Kurala",
+     "Birlikte",
      0.03,
-     0.405
-    ],
-    [
-     "birlikte",
-     0.405,
-     0.779
+     0.427
     ],
     [
      "bakıyorsunuz",
-     0.779,
-     1.404
+     0.427,
+     1.089
     ],
     [
      "ve",
-     1.404,
-     1.528
+     1.089,
+     1.221
     ],
     [
      "arkadaşın",
-     1.528,
-     2.028
+     1.221,
+     1.75
     ],
     [
-     "hatasını",
-     2.028,
-     2.527
+     "yanlışını",
+     1.75,
+     2.279
     ],
     [
      "kendisi",
-     2.527,
-     2.902
+     2.279,
+     2.676
     ],
     [
      "düzeltiyor.",
-     2.902,
-     3.402
+     2.676,
+     3.206
     ]
    ]
   },
@@ -1628,48 +1630,43 @@ DO.dersKaydet(
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 4.369,
-   "m": "Arkadaşının morali bozuluyor ve ödevi düzeltmek içinden gelmiyor.",
+   "sure": 3.152,
+   "m": "Arkadaşının morali bozuluyor ve ödevi düzeltmek istemiyor.",
    "k": [
     [
      "Arkadaşının",
      0.03,
-     0.884
+     0.694
     ],
     [
      "morali",
-     0.884,
-     1.396
+     0.694,
+     1.092
     ],
     [
      "bozuluyor",
-     1.396,
-     2.079
+     1.092,
+     1.622
     ],
     [
      "ve",
-     2.079,
-     2.25
+     1.622,
+     1.755
     ],
     [
      "ödevi",
-     2.25,
-     2.762
+     1.755,
+     2.153
     ],
     [
      "düzeltmek",
-     2.762,
-     3.275
+     2.153,
+     2.551
     ],
     [
-     "içinden",
-     3.275,
-     3.787
-    ],
-    [
-     "gelmiyor.",
-     3.787,
-     4.299
+     "istemiyor.",
+     2.551,
+     3.082
     ]
    ]
   },

@@ -1,11 +1,13 @@
 /* İbremetre · Müzâkere — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Uysallık · Müzâkere · İnat). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Çekimserlik · Müzâkere · İnat). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-muzakere",
  "ad": "Müzâkere: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -24,7 +26,7 @@ DO.dersKaydet(
      "olculen": "Kendi fikrimi savunma payım",
      "kanca": "Tamam, siz nasıl isterseniz.",
      "uclar": {
-      "az": "Uysallık",
+      "az": "Çekimserlik",
       "orta": "Müzâkere",
       "fazla": "İnat"
      },
@@ -37,15 +39,15 @@ DO.dersKaydet(
      "huy": "Müzâkere",
      "cumle": "Tamam, siz nasıl isterseniz.",
      "uclar": {
-      "az": "Uysallık",
+      "az": "Çekimserlik",
       "orta": "Müzâkere",
       "fazla": "İnat"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi kendi fikri olduğu hâlde hiç söylemiyor: sol uca (Uysallık) yakın. Başka okumada fikrini zaten söylemiş, dinlemiş ve ortak karara gönülden uyuyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o ana kadar ne yaptığımıza bakar. Müzâkere; karşılıklı saygıyla fikrini paylaşmak, karşındakini dinlemek ve birlikte çözüm aramaktır.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi kendi fikri olduğu hâlde hiç söylemiyor: sol uca (Çekimserlik) yakın. Başka okumada fikrini zaten söylemiş, dinlemiş ve ortak karara gönülden uyuyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o ana kadar ne yaptığımıza bakar. Müzâkere; karşılıklı saygıyla fikrini paylaşmak, karşındakini dinlemek ve birlikte çözüm aramaktır. Sol uç (Uysallık diye de anılır), kendi fikrini hiç söylememektir; sağ uç (İnat), haksız olsa da diretmektir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -57,7 +59,7 @@ DO.dersKaydet(
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
-      "az": "Uysallık",
+      "az": "Çekimserlik",
       "orta": "Müzâkere",
       "fazla": "İnat"
      },
@@ -66,7 +68,7 @@ DO.dersKaydet(
       {
        "zon": "az",
        "soru": "Fikrini hiç söylememek neye benziyor?",
-       "ad": "Uysallık",
+       "ad": "Çekimserlik",
        "soz": "Ben bir şey demeyeyim, peki.",
        "eylem": "yaslan",
        "zincir": [
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Ben söylemesem de olur; nasılsa fark etmez.",
           "dogru": true,
-          "not": "Uysallık, kendi fikrini hiç savunmamaktır. Fikir söylenmeyince grup da ondan yararlanamaz."
+          "not": "Çekimserlik, kendi fikrini hiç söylememektir. Fikir söylenmeyince grup da ondan yararlanamaz."
          },
          {
           "m": "Ben şöyle düşünüyorum; sizin fikriniz ne?",
@@ -94,7 +96,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Uysallık",
+        "ad": "Çekimserlik",
         "soz": "Ben"
        },
        "zincirAnahtar": [
@@ -123,7 +125,7 @@ DO.dersKaydet(
          {
           "m": "Ben söylemesem de olur; nasılsa fark etmez.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: uysallığın sesi."
+          "not": "Bu sol ucun sesi: çekimserliğin sesi."
          },
          {
           "m": "Ben şöyle düşünüyorum; sizin fikriniz ne?",
@@ -162,7 +164,7 @@ DO.dersKaydet(
          {
           "m": "Ben söylemesem de olur; nasılsa fark etmez.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: uysallığın sesi."
+          "not": "Bu sol ucun sesi: çekimserliğin sesi."
          },
          {
           "m": "Benim dediğim olacak, başka yol yok!",
@@ -188,7 +190,7 @@ DO.dersKaydet(
      "huy": "Müzâkere",
      "baslik": "Sen olsan?",
      "uclar": {
-      "az": "Uysallık",
+      "az": "Çekimserlik",
       "orta": "Müzâkere",
       "fazla": "İnat"
      },
@@ -209,9 +211,9 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Benim seçtiğim konu olacak; başkasını kabul etmem!",
+         "m": "Konuyu ben seçtim; başka öneri dinlemem!",
          "zon": "fazla",
-         "sonuc": "Grup huzursuzlaşıyor; kimse seninle çalışmak istemiyor.",
+         "sonuc": "Grup huzursuzlaşıyor; arkadaşların yoruluyor ve ortak çalışma zorlaşıyor.",
          "not": "İbre sağa kaydı: dinlemeyen kişi ortak çözümü kaybediyor.",
          "ses": "s1fa"
         },
@@ -226,8 +228,8 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "oyun",
-       "baslik": "Oyun kuralı",
+       "id": "kural",
+       "baslik": "Kural tartışması",
        "tetik": "Teneffüste oynayacağınız oyunun kuralı konusunda arkadaşlarınla fikir ayrılığı var.",
        "secenekler": [
         {
@@ -266,7 +268,7 @@ DO.dersKaydet(
      "alanlar": [
       {
        "id": "az",
-       "ad": "Az · Uysallık",
+       "ad": "Az · Çekimserlik",
        "aciklama": "Fikrini hiç söylememek",
        "ikon": "kilit",
        "renk": "#4262B0"
@@ -690,83 +692,83 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.267,
-   "m": "Sol uçta Uysallık. Ben bir şey demeyeyim, peki. Herkes bir şey seçerken istediğini söylemeden geçer.",
+   "sure": 6.847,
+   "m": "Sol uçta Çekimserlik. Ben bir şey demeyeyim, peki. Herkes bir şey seçerken istediğini söylemeden geçer.",
    "k": [
     [
      "Sol",
      0.03,
-     0.25
+     0.252
     ],
     [
      "uçta",
-     0.25,
-     0.69
+     0.252,
+     0.696
     ],
     [
-     "Uysallık.",
-     0.69,
-     1.35
+     "Çekimserlik.",
+     0.696,
+     1.585
     ],
     [
      "Ben",
-     1.44,
-     1.444
+     1.66,
+     1.675
     ],
     [
      "bir",
-     1.444,
-     1.447
+     1.675,
+     1.69
     ],
     [
      "şey",
-     1.447,
-     1.451
+     1.69,
+     1.705
     ],
     [
      "demeyeyim,",
-     1.451,
-     1.465
+     1.705,
+     1.765
     ],
     [
      "peki.",
-     2.085,
-     3.08
+     2.4,
+     3.52
     ],
     [
      "Herkes",
-     3.545,
-     3.84
+     4.065,
+     4.366
     ],
     [
      "bir",
-     3.84,
-     3.987
+     4.366,
+     4.517
     ],
     [
      "şey",
-     3.987,
-     4.134
+     4.517,
+     4.668
     ],
     [
      "seçerken",
-     4.134,
-     4.576
+     4.668,
+     5.12
     ],
     [
      "istediğini",
-     4.576,
-     5.313
+     5.12,
+     5.873
     ],
     [
      "söylemeden",
-     5.313,
-     5.903
+     5.873,
+     6.475
     ],
     [
      "geçer.",
-     5.903,
-     6.197
+     6.475,
+     6.777
     ]
    ]
   },
@@ -1422,38 +1424,48 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.287,
-   "m": "Grup huzursuzlaşıyor; kimse seninle çalışmak istemiyor.",
+   "sure": 4.742,
+   "m": "Grup huzursuzlaşıyor; arkadaşların yoruluyor ve ortak çalışma zorlaşıyor.",
    "k": [
     [
      "Grup",
      0.03,
-     0.187
+     0.177
     ],
     [
      "huzursuzlaşıyor;",
-     0.187,
-     1.13
+     0.177,
+     1.06
     ],
     [
-     "kimse",
-     1.505,
-     1.79
+     "arkadaşların",
+     1.36,
+     2.232
     ],
     [
-     "seninle",
-     1.79,
-     2.218
+     "yoruluyor",
+     2.232,
+     2.929
     ],
     [
-     "çalışmak",
-     2.218,
-     2.646
+     "ve",
+     2.929,
+     3.103
     ],
     [
-     "istemiyor.",
-     2.646,
-     3.217
+     "ortak",
+     3.103,
+     3.452
+    ],
+    [
+     "çalışma",
+     3.452,
+     3.975
+    ],
+    [
+     "zorlaşıyor.",
+     3.975,
+     4.672
     ]
    ]
   },

@@ -1,11 +1,13 @@
 /* İbremetre · Kanaat — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Uyuşukluk · Kanaat · Mal sevgisi). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Uyuşukluk · Kanaat · Kıyamama). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-kanaat-uyusukluk",
- "ad": "Kanaat (Uyuşukluk · Mal sevgisi): İbren Nerede?",
+ "ad": "Kanaat (Uyuşukluk · Kıyamama): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "caba",
+ "muzik": "caba",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,12 +23,12 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Kanaat",
      "huyAnahtar": "Kanaat",
-     "olculen": "Harekete geçişim ve eşyaya bağlılığım",
+     "olculen": "Harekete geçişim ve eşyaya bağlanışım",
      "kanca": "Kalkıp bir şey almama gerek yok.",
      "uclar": {
       "az": "Uyuşukluk",
       "orta": "Kanaat",
-      "fazla": "Mal sevgisi"
+      "fazla": "Kıyamama"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -39,13 +41,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uyuşukluk",
       "orta": "Kanaat",
-      "fazla": "Mal sevgisi"
+      "fazla": "Kıyamama"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi üşendiği için yerinden kalkmıyor: sol uca (Uyuşukluk) yakın. Başka okumada elindekiler ona yetiyor ve yeni bir şeye ihtiyaç duymuyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an harekete ve eşyaya nasıl yaklaştığımıza bakar. Kanaat; elindekine razı olup şükretmektir. Faydalı işe kalkmak da eşyaya gönlünü bağlamamak da bu huyun parçasıdır. Bu ibre ölçekten çok yönü gösterir: bir uçta hareketsizlik, öbür uçta paraya ve eşyaya aşırı bağlılık var.",
+      "İbre cümleye değil, o an harekete ve eşyaya nasıl yaklaştığımıza bakar. Kanaat; elindekine razı olup şükretmektir. Faydalı işe kalkmak da eşyaya gönlünü fazla bağlamamak da bu huyun parçasıdır. Bu ibre ölçekten çok yönü gösterir: bir uçta üşengeçlik ve hareketsizlik, öbür uçta eşyaya aşırı bağlanıp kaybetme korkusuyla ona kıyamamak var (kaynaklarda mal sevgisi denir).",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -59,7 +61,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uyuşukluk",
       "orta": "Kanaat",
-      "fazla": "Mal sevgisi"
+      "fazla": "Kıyamama"
      },
      "yesil": 0.26,
      "kapilar": [
@@ -87,9 +89,9 @@ DO.dersKaydet(
           "not": "Bu orta ucun sesi: kanaatin sesi."
          },
          {
-          "m": "Eşyalarım yerinde mi? Hiç kimse dokunmasın!",
+          "m": "Çizilirse çok üzülürüm; hiç kullanmayayım, saklayayım.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: mal sevgisinin sesi."
+          "not": "Bu sağ ucun sesi: kıyamamanın sesi."
          }
         ]
        },
@@ -105,8 +107,8 @@ DO.dersKaydet(
       {
        "zon": "fazla",
        "soru": "Eşyasına çok bağlanan kişi neyi kaçırır?",
-       "ad": "Mal-sevgisi",
-       "soz": "Eşyalarıma kimse dokunmasın, hepsi benim!",
+       "ad": "Kıyamama",
+       "soz": "Çizilmesin diye hiç kullanmam, durmadan sayarım!",
        "eylem": "isaret",
        "zincir": [
         "Eşyası kadar gönlü de sıkışır.",
@@ -116,9 +118,9 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Kaybolursa üzülürüm; hepsini sıkı saklayayım.",
+          "m": "Kaybolursa yıkılırım; en iyisi hiç kullanmayayım.",
           "dogru": true,
-          "not": "Mal sevgisi, paraya ve eşyaya aşırı bağlanmaktır. Fazla bağlanan, kaybetme endişesiyle rahat edemez."
+          "not": "Kıyamama, eşyaya aşırı bağlanıp kaybetmekten korkmaktır (kaynaklarda mal sevgisi denir). Fazla bağlanan, kaybetme endişesiyle rahat edemez. Bu his çok yoğunsa güvendiğin bir yetişkinle konuşabilirsin."
          },
          {
           "m": "Kıpırdamasam daha iyi; nasılsa idare ederim.",
@@ -133,8 +135,8 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Mal-sevgisi",
-        "soz": "Eşyalarıma"
+        "ad": "Kıyamama",
+        "soz": "Çizilmesin"
        },
        "zincirAnahtar": [
         "Eşyası",
@@ -149,15 +151,15 @@ DO.dersKaydet(
        "eylem": "yuru",
        "zincir": [
         "Zamanını işe ve dostlara ayırır.",
-        "Eşyası kaybolsa bile gönlü rahat kalır."
+        "Eşyası bozulsa üzülür ama çabuk toparlanır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Elimdekine şükrederim; kalkıp işime bakayım.",
+          "m": "Elimdekine şükrederim; kalkıp işime bakarım.",
           "dogru": true,
-          "not": "Kanaat, elindekine razı olup şükretmektir. Hem üşengeçliğe hem eşyaya bağlanmaya mesafe koyar."
+          "not": "Kanaat, elindekine razı olup şükretmektir. Hem üşengeçliğe hem eşyaya aşırı bağlanmaya mesafe koyar."
          },
          {
           "m": "Kıpırdamasam daha iyi; nasılsa idare ederim.",
@@ -165,9 +167,9 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: uyuşukluğun sesi."
          },
          {
-          "m": "Eşyalarım yerinde mi? Hiç kimse dokunmasın!",
+          "m": "Çizilirse çok üzülürüm; hiç kullanmayayım, saklayayım.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: mal sevgisinin sesi."
+          "not": "Bu sağ ucun sesi: kıyamamanın sesi."
          }
         ]
        },
@@ -190,7 +192,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Uyuşukluk",
       "orta": "Kanaat",
-      "fazla": "Mal sevgisi"
+      "fazla": "Kıyamama"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
@@ -209,10 +211,10 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Hiçbirini ayırmam; hepsi benim, kimseye de vermem!",
+         "m": "Hiçbirini ayırmam; ya lazım olursa, ya kaybolursa!",
          "zon": "fazla",
          "sonuc": "Oda doluyor; kullanmadığın şeyler yük oluyor.",
-         "not": "İbre sağa kaydı: her eşyaya bağlanmak, gönlü de odayı da daraltıyor.",
+         "not": "İbre sağa kaydı: kaybetme korkusu, gönlü de odayı da daraltıyor.",
          "ses": "s1fa"
         },
         {
@@ -226,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "fuar",
-       "baslik": "Kırtasiye fuarı",
-       "tetik": "Okulda kırtasiye fuarı var. Arkadaşların gidiyor; sen odanda oyalanmak istiyorsun.",
+       "id": "defter",
+       "baslik": "Kaybolan defter",
+       "tetik": "Okuldan çıkarken çantandaki defterlerden birinin kaybolduğunu fark ettin.",
        "secenekler": [
         {
-         "m": "Gelmem, yerimden kalkmak istemiyorum.",
+         "m": "Aramaya üşenirim; yoksa yok, kalsın.",
          "zon": "az",
-         "sonuc": "Arkadaşlarınla geçireceğin güzel vakit kaçıyor.",
-         "not": "İbre sola kaydı: üşenmek, güzel fırsatları da geçirir.",
+         "sonuc": "Defter bulunmuyor; ödevin de yarım kalıyor.",
+         "not": "İbre sola kaydı: üşenmek, küçük bir sorunu büyütür.",
          "ses": "s2az"
         },
         {
-         "m": "Gelirim; ne varsa hepsini alırım, hepsi benim olsun!",
+         "m": "Defterim kayboldu, her şey bitti! Hiçbir şey yapamam.",
          "zon": "fazla",
-         "sonuc": "Cebin boşalıyor ama gönlün doymuyor; yük artıyor.",
-         "not": "İbre sağa kaydı: ne görsem benim olsun demek, eşyayı gönle bağlar.",
+         "sonuc": "Bütün günün üzüntüyle geçiyor; başka işler yarım kalıyor.",
+         "not": "İbre sağa kaydı: eşyaya fazla bağlanmak, onu kaybedince yıkılmaya yol açar.",
          "ses": "s2fa"
         },
         {
-         "m": "Gelirim, bakarım; yalnız ihtiyacım olanı alırım.",
+         "m": "Önce çantaya ve sınıfa bakarım; bulamazsam üzülsem de toparlanırım.",
          "zon": "orta",
-         "sonuc": "Hem arkadaşlarınla vakit geçiriyorsun hem cebin rahat.",
-         "not": "İbre ortada: kalktın, gezdin ve elindekine yetinerek karar verdin.",
+         "sonuc": "Birkaç yere bakınca defteri buluyorsun ya da yenisine alışıyorsun.",
+         "not": "İbre ortada: eşyayı sevdin ama gönlünü ona bağlamadın, harekete geçtin.",
          "ses": "s2or"
         }
        ],
@@ -280,8 +282,8 @@ DO.dersKaydet(
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Mal sevgisi",
-       "aciklama": "Eşyaya aşırı bağlanmak",
+       "ad": "Fazla · Kıyamama",
+       "aciklama": "Eşyayı kaybetmekten korkmak",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -295,15 +297,15 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Kumbarasına kimseyi yaklaştırmaz, eşyalarını bir an gözünden ayırmaz.",
+       "metin": "Eşyalarını gün boyu tek tek sayar; biri kaybolunca bütün günü bozulur.",
        "alan": "fazla",
-       "ipucu": "Eşyaya aşırı bağlı."
+       "ipucu": "Eşyasını kaybetmekten korkuyor."
       },
       {
        "id": "k3",
-       "metin": "Bir topu olsa bile keyifle oynar, arkadaşlarıyla paylaşır.",
+       "metin": "Eşyasını özenle kullanır, bozulsa üzülür ama hemen toparlanır.",
        "alan": "orta",
-       "ipucu": "Elindekiyle mutlu ve hareketli."
+       "ipucu": "Eşyasını sever ama bağlanmaz."
       },
       {
        "id": "k4",
@@ -315,13 +317,13 @@ DO.dersKaydet(
        "id": "k5",
        "metin": "Yeni eşyasına çizik düşmesin diye oynamaya bile kıyamaz.",
        "alan": "fazla",
-       "ipucu": "Eşyası onu esir almış."
+       "ipucu": "Çizilmesin diye kullanamıyor."
       },
       {
        "id": "k6",
-       "metin": "Eşyasını özenle kullanır; arkadaşlarıyla oynamak için de yerinden kalkar.",
+       "metin": "Önce işini yapar, sonra elindekilerle keyifle oyalanır.",
        "alan": "orta",
-       "ipucu": "Eşyasını sever ama bağlanmaz."
+       "ipucu": "Hem harekete geçiyor hem yetiniyor."
       }
      ]
     },
@@ -901,63 +903,93 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.142,
-   "m": "Sağ uçta Mal-sevgisi. Eşyalarıma kimse dokunmasın, hepsi benim! Kumbarasına kimseyi yaklaştırmaz.",
+   "sure": 8.884,
+   "m": "Sağ uçta Kıyamama. Çizilmesin diye hiç kullanmam, durmadan sayarım! Eşyalarını kutusunda saklar, bir an bile gözünden ayırmaz.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.264
+     0.133
     ],
     [
      "uçta",
-     0.264,
-     0.733
+     0.133,
+     0.339
     ],
     [
-     "Mal-sevgisi.",
-     0.733,
-     1.67
+     "Kıyamama.",
+     0.339,
+     0.75
     ],
     [
-     "Eşyalarıma",
-     2.145,
-     2.861
+     "Çizilmesin",
+     1.125,
+     2.269
     ],
     [
-     "kimse",
-     2.861,
-     3.147
+     "diye",
+     2.269,
+     2.841
     ],
     [
-     "dokunmasın,",
-     3.147,
-     3.72
+     "hiç",
+     2.841,
+     3.127
     ],
     [
-     "hepsi",
-     3.905,
-     4.21
+     "kullanmam,",
+     3.127,
+     3.985
     ],
     [
-     "benim!",
-     4.21,
-     4.515
+     "durmadan",
+     4.1,
+     4.557
     ],
     [
-     "Kumbarasına",
-     5.125,
-     5.936
+     "sayarım!",
+     4.557,
+     5.015
     ],
     [
-     "kimseyi",
-     5.936,
-     6.423
+     "Eşyalarını",
+     5.32,
+     5.981
     ],
     [
-     "yaklaştırmaz.",
-     6.423,
-     7.072
+     "kutusunda",
+     5.981,
+     6.51
+    ],
+    [
+     "saklar,",
+     6.51,
+     6.775
+    ],
+    [
+     "bir",
+     6.86,
+     7.055
+    ],
+    [
+     "an",
+     7.055,
+     7.251
+    ],
+    [
+     "bile",
+     7.251,
+     7.642
+    ],
+    [
+     "gözünden",
+     7.642,
+     8.228
+    ],
+    [
+     "ayırmaz.",
+     8.228,
+     8.814
     ]
    ]
   },
@@ -1164,78 +1196,78 @@ DO.dersKaydet(
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 5.604,
-   "m": "Sonra ne olur? Zamanını işe ve dostlara ayırır. Eşyası kaybolsa bile gönlü rahat kalır.",
+   "sure": 6.412,
+   "m": "Sonra ne olur? Zamanını işe ve dostlara ayırır. Eşyası bozulsa üzülür ama çabuk toparlanır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.27
+     0.288
     ],
     [
      "ne",
-     0.27,
-     0.39
+     0.288,
+     0.417
     ],
     [
      "olur?",
-     0.39,
-     0.63
+     0.417,
+     0.675
     ],
     [
      "Zamanını",
-     1.08,
-     1.635
+     1.205,
+     1.768
     ],
     [
      "işe",
-     1.635,
-     1.913
+     1.768,
+     2.05
     ],
     [
      "ve",
-     1.913,
-     2.052
+     2.05,
+     2.19
     ],
     [
      "dostlara",
-     2.052,
-     2.468
+     2.19,
+     2.613
     ],
     [
      "ayırır.",
-     2.468,
-     2.885
+     2.613,
+     3.035
     ],
     [
      "Eşyası",
-     3.195,
-     3.696
+     3.39,
+     3.911
     ],
     [
-     "kaybolsa",
-     3.696,
-     4.197
+     "bozulsa",
+     3.911,
+     4.432
     ],
     [
-     "bile",
-     4.197,
-     4.532
+     "üzülür",
+     4.432,
+     4.953
     ],
     [
-     "gönlü",
-     4.532,
-     4.866
+     "ama",
+     4.953,
+     5.3
     ],
     [
-     "rahat",
-     4.866,
-     5.2
+     "çabuk",
+     5.3,
+     5.648
     ],
     [
-     "kalır.",
-     5.2,
-     5.534
+     "toparlanır.",
+     5.648,
+     6.342
     ]
    ]
   },
@@ -1461,184 +1493,194 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.273,
-   "m": "Okulda kırtasiye fuarı var. Arkadaşların gidiyor; sen odanda oyalanmak istiyorsun. Ne yaparsın?",
+   "sure": 4.546,
+   "m": "Okuldan çıkarken çantandaki defterlerden birinin kaybolduğunu fark ettin. Ne yaparsın?",
    "k": [
     [
-     "Okulda",
+     "Okuldan",
      0.03,
-     0.424
+     0.446
     ],
     [
-     "kırtasiye",
-     0.424,
-     0.95
+     "çıkarken",
+     0.446,
+     0.863
     ],
     [
-     "fuarı",
-     0.95,
-     1.344
+     "çantandaki",
+     0.863,
+     1.418
     ],
     [
-     "var.",
-     1.344,
-     1.475
+     "defterlerden",
+     1.418,
+     1.973
     ],
     [
-     "Arkadaşların",
-     1.675,
-     2.322
+     "birinin",
+     1.973,
+     2.39
     ],
     [
-     "gidiyor;",
-     2.322,
-     2.71
+     "kaybolduğunu",
+     2.39,
+     3.084
     ],
     [
-     "sen",
-     2.875,
-     2.993
+     "fark",
+     3.084,
+     3.222
     ],
     [
-     "odanda",
-     2.993,
-     3.347
-    ],
-    [
-     "oyalanmak",
-     3.347,
-     3.818
-    ],
-    [
-     "istiyorsun.",
-     3.818,
-     4.29
+     "ettin.",
+     3.222,
+     3.5
     ],
     [
      "Ne",
-     4.62,
-     4.766
+     3.86,
+     4.014
     ],
     [
      "yaparsın?",
-     4.766,
-     5.203
+     4.014,
+     4.476
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 2.921,
-   "m": "Arkadaşlarınla geçireceğin güzel vakit kaçıyor.",
+   "sure": 2.25,
+   "m": "Defter bulunmuyor; ödevin de yarım kalıyor.",
    "k": [
     [
-     "Arkadaşlarınla",
+     "Defter",
      0.03,
-     0.97
+     0.322
     ],
     [
-     "geçireceğin",
-     0.97,
-     1.754
+     "bulunmuyor;",
+     0.322,
+     0.905
     ],
     [
-     "güzel",
-     1.754,
-     2.067
+     "ödevin",
+     1.23,
+     1.547
     ],
     [
-     "vakit",
-     2.067,
-     2.381
+     "de",
+     1.547,
+     1.652
     ],
     [
-     "kaçıyor.",
-     2.381,
-     2.851
+     "yarım",
+     1.652,
+     1.863
+    ],
+    [
+     "kalıyor.",
+     1.863,
+     2.18
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 4.599,
-   "m": "Cebin boşalıyor ama gönlün doymuyor; yük artıyor.",
+   "sure": 3.628,
+   "m": "Bütün günün üzüntüyle geçiyor; başka işler yarım kalıyor.",
    "k": [
     [
-     "Cebin",
+     "Bütün",
      0.03,
-     0.465
+     0.377
     ],
     [
-     "boşalıyor",
-     0.465,
-     1.336
+     "günün",
+     0.377,
+     0.725
     ],
     [
-     "ama",
-     1.336,
-     1.772
+     "üzüntüyle",
+     0.725,
+     1.419
     ],
     [
-     "gönlün",
-     1.772,
-     2.207
+     "geçiyor;",
+     1.419,
+     1.94
     ],
     [
-     "doymuyor;",
-     2.207,
-     2.86
+     "başka",
+     2.04,
+     2.377
     ],
     [
-     "yük",
-     3.42,
-     3.697
+     "işler",
+     2.377,
+     2.714
     ],
     [
-     "artıyor.",
-     3.697,
-     4.529
+     "yarım",
+     2.714,
+     3.052
+    ],
+    [
+     "kalıyor.",
+     3.052,
+     3.558
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.071,
-   "m": "Hem arkadaşlarınla vakit geçiriyorsun hem cebin rahat.",
+   "sure": 3.651,
+   "m": "Birkaç yere bakınca defteri buluyorsun ya da yenisine alışıyorsun.",
    "k": [
     [
-     "Hem",
+     "Birkaç",
      0.03,
-     0.186
+     0.314
     ],
     [
-     "arkadaşlarınla",
-     0.186,
-     1.125
+     "yere",
+     0.314,
+     0.598
     ],
     [
-     "vakit",
-     1.125,
-     1.437
+     "bakınca",
+     0.598,
+     1.024
     ],
     [
-     "geçiriyorsun",
-     1.437,
-     2.219
+     "defteri",
+     1.024,
+     1.451
     ],
     [
-     "hem",
-     2.219,
-     2.376
+     "buluyorsun",
+     1.451,
+     2.019
     ],
     [
-     "cebin",
-     2.376,
-     2.689
+     "ya",
+     2.019,
+     2.161
     ],
     [
-     "rahat.",
-     2.689,
-     3.001
+     "da",
+     2.161,
+     2.303
+    ],
+    [
+     "yenisine",
+     2.303,
+     2.871
+    ],
+    [
+     "alışıyorsun.",
+     2.871,
+     3.581
     ]
    ]
   },

@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Şefkat: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi üzülen arkadaşına gülümseyerek moral veriyor: orta uca yakın. Başka okumada onun üzüntüsüne içten içe seviniyor: sağ uca (Şemâtet) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an başkasının üzüntüsüne nasıl yaklaştığımıza bakar. Şefkat; merhamet ve sevgi göstermek, üzülene yanında olduğunu hissettirmektir. Dürüst olalım: Şemâtet, “daha fazla şefkat” değildir. Şefkatte yön karşındakinin iyiliğidir; şemâtette niyetin yönü değişir ve onun kötü durumuna sevinmeye döner. Bu ibre ölçekten çok yönü gösterir.",
+      "İbre cümleye değil, o an başkasının üzüntüsüne nasıl yaklaştığımıza bakar. Şefkat; merhamet ve sevgi göstermek, üzülene yanında olduğunu hissettirmektir. Şemâtet ise “daha fazla şefkat” değildir: şefkatte yön karşındakinin iyiliğidir, şemâtette yön değişir ve onun kötü durumuna sevinmeye döner. Bu ibre ölçekten çok yönü gösterir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -77,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Beni ilgilendirmez; bana ne.",
+          "m": "Beni ilgilendirmez.",
           "dogru": true,
           "not": "Duyarsızlık, kimsenin duygusunu umursamamaktır. Yanına gitmek bile bir teselli olabilir."
          },
@@ -121,7 +123,7 @@ DO.dersKaydet(
           "not": "Şemâtet, başkasının acısına gizlice sevinmektir. Rekabet olabilir; ama biri üzülürken sevinmek kalbi ağırlaştırır."
          },
          {
-          "m": "Beni ilgilendirmez; bana ne.",
+          "m": "Beni ilgilendirmez.",
           "dogru": false,
           "not": "Bu sol ucun sesi: duyarsızlığın sesi."
          },
@@ -160,7 +162,7 @@ DO.dersKaydet(
           "not": "Şefkat, merhamet ve sevgi göstermektir. Çözümün olmasa bile yanında olmak iyi gelir."
          },
          {
-          "m": "Beni ilgilendirmez; bana ne.",
+          "m": "Beni ilgilendirmez.",
           "dogru": false,
           "not": "Bu sol ucun sesi: duyarsızlığın sesi."
          },
@@ -216,9 +218,9 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "İyi misin? Yürüyebiliyor musun, yardım edeyim mi?",
+         "m": "İyi misin? Kımıldama, hemen öğretmeni çağırıyorum.",
          "zon": "orta",
-         "sonuc": "Rakibin ayağa kalkıyor ve öğretmeni birlikte çağırıyorsunuz.",
+         "sonuc": "Öğretmen geliyor; rakibin yalnız kalmıyor.",
          "not": "İbre ortada: yarışın ortasında bile merhamet gösterdin.",
          "ses": "s1or"
         }
@@ -307,7 +309,7 @@ DO.dersKaydet(
       },
       {
        "id": "k4",
-       "metin": "Üzgün birini fark etse bile “bana ne” der.",
+       "metin": "Üzgün birini fark etse bile hiçbir şey demeden yoluna bakar.",
        "alan": "az",
        "ipucu": "Duyguyu umursamıyor."
       },
@@ -1384,43 +1386,33 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.259,
-   "m": "Rakibin ayağa kalkıyor ve öğretmeni birlikte çağırıyorsunuz.",
+   "sure": 2.906,
+   "m": "Öğretmen geliyor; rakibin yalnız kalmıyor.",
    "k": [
     [
-     "Rakibin",
+     "Öğretmen",
      0.03,
-     0.442
+     0.478
     ],
     [
-     "ayağa",
-     0.442,
-     0.854
+     "geliyor;",
+     0.478,
+     0.925
     ],
     [
-     "kalkıyor",
-     0.854,
-     1.266
+     "rakibin",
+     1.27,
+     1.857
     ],
     [
-     "ve",
-     1.266,
-     1.404
+     "yalnız",
+     1.857,
+     2.249
     ],
     [
-     "öğretmeni",
-     1.404,
-     1.953
-    ],
-    [
-     "birlikte",
-     1.953,
-     2.365
-    ],
-    [
-     "çağırıyorsunuz.",
-     2.365,
-     3.189
+     "kalmıyor.",
+     2.249,
+     2.836
     ]
    ]
   },

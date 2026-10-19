@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Kanaat (Atâlet · Hırs): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "caba",
+ "muzik": "caba",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -209,16 +211,16 @@ DO.dersKaydet(
          "ses": "s1az"
         },
         {
-         "m": "Bütün notlar en yüksek olmalı; olmadıysa memnun değilim!",
+         "m": "Sınıfta tek ben birinci olmalıyım; başkası geçerse çok bozulurum!",
          "zon": "fazla",
          "sonuc": "Aldığın güzel notların tadı çıkmıyor; sürekli gerginsin.",
-         "not": "İbre sağa kaydı: hep daha yükseğini istemek elindekinin tadını bozuyor.",
+         "not": "İbre sağa kaydı: hep birinci olma hırsı elindekinin tadını bozuyor.",
          "ses": "s1fa"
         },
         {
          "m": "Notlarıma şükrederim; eksik dersime biraz daha çalışırım.",
          "zon": "orta",
-         "sonuc": "Hem içi rahat hem yolu açık bir şekilde ilerliyorsun.",
+         "sonuc": "İçin rahat, yolun açık; ilerlemeye devam ediyorsun.",
          "not": "İbre ortada: elindekine şükredip çalışmaya devam ettin.",
          "ses": "s1or"
         }
@@ -313,9 +315,9 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Arkadaşında daha güzel bir şey görünce kendi elindekinden hoşnut olmaz.",
+       "metin": "Arkadaşını geçmek için her şeyi göze alır; geçince de yetinmez.",
        "alan": "fazla",
-       "ipucu": "Kıyaslayıp doymuyor."
+       "ipucu": "Üstünlük hırsı doymuyor."
       },
       {
        "id": "k6",
@@ -1424,53 +1426,43 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.191,
-   "m": "Hem içi rahat hem yolu açık bir şekilde ilerliyorsun.",
+   "sure": 3.556,
+   "m": "İçin rahat, yolun açık; ilerlemeye devam ediyorsun.",
    "k": [
     [
-     "Hem",
+     "İçin",
      0.03,
-     0.193
+     0.367
     ],
     [
-     "içi",
-     0.193,
-     0.518
+     "rahat,",
+     0.367,
+     0.705
     ],
     [
-     "rahat",
-     0.518,
-     0.844
+     "yolun",
+     0.845,
+     1.183
     ],
     [
-     "hem",
-     0.844,
-     1.006
+     "açık;",
+     1.183,
+     1.52
     ],
     [
-     "yolu",
-     1.006,
-     1.332
+     "ilerlemeye",
+     2.005,
+     2.678
     ],
     [
-     "açık",
-     1.332,
-     1.657
+     "devam",
+     2.678,
+     2.948
     ],
     [
-     "bir",
-     1.657,
-     1.82
-    ],
-    [
-     "şekilde",
-     1.82,
-     2.308
-    ],
-    [
-     "ilerliyorsun.",
-     2.308,
-     3.121
+     "ediyorsun.",
+     2.948,
+     3.486
     ]
    ]
   },

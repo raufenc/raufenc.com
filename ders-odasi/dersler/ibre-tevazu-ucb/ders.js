@@ -1,11 +1,13 @@
 /* İbremetre · Tevazu — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Aşağılık · Tevazu · Ucb). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Küçümseme · Tevazu · Ucb). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-tevazu-ucb",
- "ad": "Tevazu (Aşağılık · Ucb): İbren Nerede?",
+ "ad": "Tevazu (Küçümseme · Ucb): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "benlik",
+ "muzik": "benlik",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -24,7 +26,7 @@ DO.dersKaydet(
      "olculen": "Güzel yanlarıma bakışım",
      "kanca": "Bende özel bir şey yok.",
      "uclar": {
-      "az": "Aşağılık",
+      "az": "Küçümseme",
       "orta": "Tevazu",
       "fazla": "Ucb"
      },
@@ -37,15 +39,15 @@ DO.dersKaydet(
      "huy": "Tevazu",
      "cumle": "Bende özel bir şey yok.",
      "uclar": {
-      "az": "Aşağılık",
+      "az": "Küçümseme",
       "orta": "Tevazu",
       "fazla": "Ucb"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi kendini değersiz görüyor: sol uca (Aşağılık) yakın. Başka okumada güzel bir yeteneğin kendi marifeti olmadığını, Allahü teâlânın verdiği bir nimet olduğunu biliyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an güzel yanlarımıza nasıl baktığımıza bakar. Tevazu; nimetin Allahü teâlâdan olduğunu bilerek alçakgönüllü olmaktır: ne kendini küçültmek ne de kendine hayran olmak.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi kendi yeteneğini küçümsüyor, önemsiz sayıyor: sol uca (Küçümseme) yakın. Başka okumada güzel bir yeteneğin kendi marifeti olmadığını, Allahü teâlâ’nın verdiği bir nimet olduğunu biliyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an güzel yanlarımıza nasıl baktığımıza bakar. Tevazu; nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır: ne yeteneğini küçümsemek ne de kendine hayran olmak.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -57,7 +59,7 @@ DO.dersKaydet(
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
-      "az": "Aşağılık",
+      "az": "Küçümseme",
       "orta": "Tevazu",
       "fazla": "Ucb"
      },
@@ -65,24 +67,24 @@ DO.dersKaydet(
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Kendini değersiz görmek neye benziyor?",
-       "ad": "Aşağılık",
-       "soz": "Ben hiçbir şeye yaramam, çizimim de kötü.",
+       "soru": "Kendi yeteneğini küçümsemek neye benziyor?",
+       "ad": "Küçümseme",
+       "soz": "Bende özel bir şey yok, herkes benden iyi.",
        "eylem": "egil",
        "zincir": [
-        "Sahip olduğu güzel yeteneği göremez.",
+        "Yeteneği kullanılmadığı için gelişmez.",
         "Denemekten ve paylaşmaktan çekinir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Bende güzel bir şey yok; herkes benden iyi.",
+          "m": "Benim yaptığım sıradan; göstermeye değmez.",
           "dogru": true,
-          "not": "Aşağılık, kendini değersiz ve yetersiz görmektir. Güzel yanı görmemek, nimeti görmemek demektir. Böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
+          "not": "Küçümseme, kendi yeteneğini ve güzel yanlarını önemsiz saymaktır; kendini değersiz sanmaya kadar gidebilir. Güzel yanı görmemek, nimeti görmemek demektir. Böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
-          "m": "Bu güzel yeteneği bana Allahü teâlâ verdi; şükrederim.",
+          "m": "Bu yeteneği bana Allahü teâlâ verdi; şükrederim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevazunun sesi."
          },
@@ -94,11 +96,11 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Aşağılık",
-        "soz": "Ben"
+        "ad": "Küçümseme",
+        "soz": "Bende"
        },
        "zincirAnahtar": [
-        "Sahip",
+        "Yeteneği",
         "Denemekten"
        ]
       },
@@ -121,12 +123,12 @@ DO.dersKaydet(
           "not": "Ucb, kendi bilgisine ve meziyetine hayran olmaktır. Güzel yanın bir nimet olduğunu unutturur."
          },
          {
-          "m": "Bende güzel bir şey yok; herkes benden iyi.",
+          "m": "Benim yaptığım sıradan; göstermeye değmez.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: aşağılığın sesi."
+          "not": "Bu sol ucun sesi: küçümsemenin sesi."
          },
          {
-          "m": "Bu güzel yeteneği bana Allahü teâlâ verdi; şükrederim.",
+          "m": "Bu yeteneği bana Allahü teâlâ verdi; şükrederim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevazunun sesi."
          }
@@ -145,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Tevazu",
-       "soz": "Teşekkür ederim; bu yeteneği Allahü teâlâ verdi.",
+       "soz": "Güzel yanım var; Allahü teâlâ verdi, şükrederim.",
        "eylem": "konus",
        "zincir": [
         "Güzel yanını şükürle taşır.",
@@ -157,12 +159,12 @@ DO.dersKaydet(
          {
           "m": "Bu yeteneği bana Allahü teâlâ verdi; şükrederim.",
           "dogru": true,
-          "not": "Tevazu, nimetin Allahü teâlâdan olduğunu bilerek alçakgönüllü olmaktır."
+          "not": "Tevazu, nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır."
          },
          {
-          "m": "Bende güzel bir şey yok; herkes benden iyi.",
+          "m": "Benim yaptığım sıradan; göstermeye değmez.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: aşağılığın sesi."
+          "not": "Bu sol ucun sesi: küçümsemenin sesi."
          },
          {
           "m": "Bu güzellik bende; benim kadar iyisi yok!",
@@ -173,7 +175,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Tevazu",
-        "soz": "Teşekkür"
+        "soz": "Güzel"
        },
        "zincirAnahtar": [
         "Güzel",
@@ -188,7 +190,7 @@ DO.dersKaydet(
      "huy": "Tevazu",
      "baslik": "Sen olsan?",
      "uclar": {
-      "az": "Aşağılık",
+      "az": "Küçümseme",
       "orta": "Tevazu",
       "fazla": "Ucb"
      },
@@ -197,58 +199,58 @@ DO.dersKaydet(
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "sergi",
-       "baslik": "Resim sergisi",
-       "tetik": "Okul resim sergisinde çizimin çok beğenildi. Öğretmenin, çok güzel olmuş, diyor.",
+       "id": "siir",
+       "baslik": "Şiir okuma",
+       "tetik": "Sınıf müsameresi için öğretmen, şiir okuyacak birini arıyor. Sesinin güzel olduğunu biliyorsun.",
        "secenekler": [
         {
-         "m": "Hayır, çok kötü; benim çizdiğim şeyin değeri yok.",
+         "m": "Bende özel bir şey yok; bu işi başkası okusun.",
          "zon": "az",
-         "sonuc": "Öğretmenin güzel sözü havada kalıyor; kendini çizmekten soğutuyorsun.",
-         "not": "İbre sola kaydı: güzel yanını görmemek, nimeti de görmemektir.",
+         "sonuc": "Güzel sesin sahnede duyulmuyor; deneme fırsatı da kaçıyor.",
+         "not": "İbre sola kaydı: yeteneğini küçümsemek, nimeti kullanmamaktır.",
          "ses": "s1az"
         },
         {
-         "m": "Evet, biliyorum; benden iyi çizen yok zaten.",
+         "m": "Elbette ben okurum; benden güzel okuyan yok, kimse denemesin!",
          "zon": "fazla",
-         "sonuc": "Arkadaşlarının çizimlerine hiç bakmıyorsun; gelişmen duruyor.",
-         "not": "İbre sağa kaydı: kendine hayran olmak, öğrenmenin yolunu kapatır.",
+         "sonuc": "Arkadaşların denemekten vazgeçiyor; sınıfın neşesi azalıyor.",
+         "not": "İbre sağa kaydı: kendine hayranlık, başkalarının yolunu kapatır.",
          "ses": "s1fa"
         },
         {
-         "m": "Teşekkür ederim; Allahü teâlâ bu yeteneği verdi, çalışıyorum.",
+         "m": "Okurum; sesimi Allahü teâlâ verdi, arkadaşlarım da denesin.",
          "zon": "orta",
-         "sonuc": "Öğretmenin gülümsüyor; arkadaşlarının resimlerine de bakıyorsun.",
-         "not": "İbre ortada: teşekkür ettin, nimeti bilip şükrettin ve gelişmeye devam ettin.",
+         "sonuc": "Güzel bir okuma oluyor; başka arkadaşlar da sıra alıyor.",
+         "not": "İbre ortada: yeteneği bilip kullandın ve başkalarına da yer açtın.",
          "ses": "s1or"
         }
        ],
        "ses": "s1"
       },
       {
-       "id": "okuma",
-       "baslik": "Okuma yarışı",
-       "tetik": "Hızlı okuma yarışmasında birinci oldun. Arkadaşların seni tebrik ediyor.",
+       "id": "proje",
+       "baslik": "Grup projesi",
+       "tetik": "Grup projesinde resim çizmek senin iyi olduğun bir iş. Grup, bu kısmı kimin yapacağını soruyor.",
        "secenekler": [
         {
-         "m": "Bir şey yapmadım; ben birinci olacak biri değilim.",
+         "m": "Ben bir şey bilmiyorum; siz yapın, benden bir şey olmaz.",
          "zon": "az",
-         "sonuc": "Arkadaşların tebriklerinin karşısında mahcup kalıyorsun; sevinç kaçıyor.",
-         "not": "İbre sola kaydı: kendini küçültmek, güzel bir günü de küçültür.",
+         "sonuc": "Ekip senin güçlü yanından yoksun kalıyor; sen de kendini denemekten uzaklaşıyorsun.",
+         "not": "İbre sola kaydı: yeteneğini küçümsemek, ekibi de seni de eksik bırakır.",
          "ses": "s2az"
         },
         {
-         "m": "Tabii, ben herkesten zekiyim; bu benim marifetim!",
+         "m": "Hepsini ben yaparım; sizin elinizden bu iş gelmez!",
          "zon": "fazla",
-         "sonuc": "Arkadaşların sessizleşiyor; tebrik edenlerin sevinci azalıyor.",
-         "not": "İbre sağa kaydı: kendine hayranlık, arkadaşların gönlünü uzaklaştırır.",
+         "sonuc": "Arkadaşların kenara çekiliyor; proje tek başına senin yükün oluyor.",
+         "not": "İbre sağa kaydı: kendine hayranlık, başkasının katkısını görünmez kılar.",
          "ses": "s2fa"
         },
         {
-         "m": "Sağ olun; çok çalıştım ve bu nimet için şükrediyorum.",
+         "m": "Çizimi ben yaparım; siz de iyi olduğunuz kısımları alın.",
          "zon": "orta",
-         "sonuc": "Arkadaşlarınla birlikte seviniyorsunuz.",
-         "not": "İbre ortada: emeğini ve nimeti birlikte bilmek, alçakgönüllülüktür.",
+         "sonuc": "Herkes payını alıyor; proje birlikte güzelleşiyor.",
+         "not": "İbre ortada: kendi yeteneğini bildin, başkalarınınkini de kıymetli saydın.",
          "ses": "s2or"
         }
        ],
@@ -266,8 +268,8 @@ DO.dersKaydet(
      "alanlar": [
       {
        "id": "az",
-       "ad": "Az · Aşağılık",
-       "aciklama": "Kendini değersiz görmek",
+       "ad": "Az · Küçümseme",
+       "aciklama": "Yeteneğini küçümsemek",
        "ikon": "kilit",
        "renk": "#4262B0"
       },
@@ -289,9 +291,9 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Güzel bir iş yapınca “aslında kötü oldu” diyerek kendini ezer.",
+       "metin": "Yeteneği olduğu hâlde “bu işi benden iyi yapan çok” deyip yarışmaya katılmaz.",
        "alan": "az",
-       "ipucu": "Kendini değersiz görüyor."
+       "ipucu": "Yeteneğini küçümsüyor."
       },
       {
        "id": "k2",
@@ -301,13 +303,13 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Güzel sözü duyunca teşekkür eder ve bu nimet için şükreder.",
+       "metin": "Güzel bir yanı olduğunu bilir, şükreder; başkalarının yeteneğine de yer açar.",
        "alan": "orta",
        "ipucu": "Nimeti biliyor, alçakgönüllü."
       },
       {
        "id": "k4",
-       "metin": "Kompliman alınca “bende bir şey yok” der, çizimini saklar.",
+       "metin": "“Bende özel bir şey yok” der, çizimini çekmeceye saklar.",
        "alan": "az",
        "ipucu": "Güzel yanını görmüyor."
       },
@@ -333,7 +335,7 @@ DO.dersKaydet(
       {
        "soru": "Hangi durumda ibrem sağa ya da sola kayıyor?",
        "secenekler": [
-        "Biri beni takdir edince",
+        "Bir işte iyi olduğumu bilirken",
         "Bir yarışmada ya da sınavda başarılı olunca",
         "Kendimi başkalarından kötü görünce",
         "Yaptığım işi çok beğenince"
@@ -342,9 +344,9 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Takdir edilince “teşekkür ederim” deyip şükredeceğim",
+        "Güzel yanımı küçümsemeden de büyütmeden de kullanacağım",
         "Başkasının güzel yanını da fark edip söyleyeceğim",
-        "Kendimi küçültmeden de büyütmeden anlatacağım"
+        "Kendimi küçük hissedersem güvendiğim bir yetişkinle konuşacağım"
        ]
       }
      ],
@@ -700,110 +702,110 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 7.895,
-   "m": "Sol uçta Aşağılık. Ben hiçbir şeye yaramam, çizimim de kötü. Güzel bir resim çizmiş ama övgüyü duyunca başını eğer.",
+   "sure": 8.37,
+   "m": "Sol uçta Küçümseme. Bende özel bir şey yok, herkes benden iyi. Güzel resim çizer ama kimseye göstermeden çekmecesine koyar.",
    "k": [
     [
      "Sol",
      0.03,
-     0.211
+     0.214
     ],
     [
      "uçta",
-     0.211,
-     0.572
+     0.214,
+     0.583
     ],
     [
-     "Aşağılık.",
-     0.572,
-     1.295
+     "Küçümseme.",
+     0.583,
+     1.32
     ],
     [
-     "Ben",
-     1.38,
-     1.597
+     "Bende",
+     1.83,
+     2.126
     ],
     [
-     "hiçbir",
-     1.597,
-     2.032
-    ],
-    [
-     "şeye",
-     2.032,
-     2.467
-    ],
-    [
-     "yaramam,",
-     2.467,
-     3.12
-    ],
-    [
-     "çizimim",
-     3.455,
-     3.868
-    ],
-    [
-     "de",
-     3.868,
-     4.005
-    ],
-    [
-     "kötü.",
-     4.005,
-     4.28
-    ],
-    [
-     "Güzel",
-     4.635,
-     4.954
+     "özel",
+     2.126,
+     2.421
     ],
     [
      "bir",
-     4.954,
-     5.113
+     2.421,
+     2.569
+    ],
+    [
+     "şey",
+     2.569,
+     2.717
+    ],
+    [
+     "yok,",
+     2.717,
+     2.865
+    ],
+    [
+     "herkes",
+     3.13,
+     3.418
+    ],
+    [
+     "benden",
+     3.418,
+     3.707
+    ],
+    [
+     "iyi.",
+     3.707,
+     3.995
+    ],
+    [
+     "Güzel",
+     4.665,
+     4.995
     ],
     [
      "resim",
-     5.113,
-     5.432
+     4.995,
+     5.326
     ],
     [
-     "çizmiş",
-     5.432,
-     5.751
+     "çizer",
+     5.326,
+     5.656
     ],
     [
      "ama",
-     5.751,
-     6.07
+     5.656,
+     5.987
     ],
     [
-     "övgüyü",
-     6.07,
-     6.549
+     "kimseye",
+     5.987,
+     6.482
     ],
     [
-     "duyunca",
-     6.549,
-     7.027
+     "göstermeden",
+     6.482,
+     7.143
     ],
     [
-     "başını",
-     7.027,
-     7.506
+     "çekmecesine",
+     7.143,
+     7.969
     ],
     [
-     "eğer.",
-     7.506,
-     7.825
+     "koyar.",
+     7.969,
+     8.3
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 5.537,
-   "m": "Sonra ne olur? Sahip olduğu güzel yeteneği göremez. Denemekten ve paylaşmaktan çekinir.",
+   "sure": 5.543,
+   "m": "Sonra ne olur? Yeteneği kullanılmadığı için gelişmez. Denemekten ve paylaşmaktan çekinir.",
    "k": [
     [
      "Sonra",
@@ -821,49 +823,44 @@ DO.dersKaydet(
      0.655
     ],
     [
-     "Sahip",
-     1.135,
-     1.402
+     "Yeteneği",
+     1.08,
+     1.632
     ],
     [
-     "olduğu",
-     1.402,
-     1.803
+     "kullanılmadığı",
+     1.632,
+     2.46
     ],
     [
-     "güzel",
-     1.803,
-     2.07
+     "için",
+     2.46,
+     2.736
     ],
     [
-     "yeteneği",
-     2.07,
-     2.604
-    ],
-    [
-     "göremez.",
-     2.604,
-     3.005
+     "gelişmez.",
+     2.736,
+     3.15
     ],
     [
      "Denemekten",
-     3.405,
-     4.092
+     3.6,
+     4.224
     ],
     [
      "ve",
-     4.092,
-     4.264
+     4.224,
+     4.381
     ],
     [
      "paylaşmaktan",
-     4.264,
-     4.952
+     4.381,
+     5.005
     ],
     [
      "çekinir.",
-     4.952,
-     5.467
+     5.005,
+     5.473
     ]
    ]
   },
@@ -1092,98 +1089,98 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 9.647,
-   "m": "Tam kararında Tevazu. Teşekkür ederim; bu yeteneği Allahü teâlâ verdi. Övgüyü sakin karşılar, şükreder ve gelişmeye devam eder.",
+   "sure": 10.088,
+   "m": "Tam kararında Tevazu. Güzel yanım var; Allahü teâlâ verdi, şükrederim. Güzel yanını bilir, şükreder ve öğrenmeye devam eder.",
    "k": [
     [
      "Tam",
      0.03,
-     0.229
+     0.246
     ],
     [
      "kararında",
-     0.229,
-     1.024
+     0.246,
+     1.111
     ],
     [
      "Tevazu.",
-     1.024,
-     1.62
+     1.111,
+     1.76
     ],
     [
-     "Teşekkür",
-     2.275,
-     2.615
+     "Güzel",
+     2.32,
+     2.646
     ],
     [
-     "ederim;",
-     2.615,
-     2.955
+     "yanım",
+     2.646,
+     2.972
     ],
     [
-     "bu",
-     3.465,
-     3.587
-    ],
-    [
-     "yeteneği",
-     3.587,
-     4.073
+     "var;",
+     2.972,
+     3.135
     ],
     [
      "Allahü",
-     4.073,
-     4.437
+     3.61,
+     4.058
     ],
     [
      "teâlâ",
-     4.437,
-     4.802
+     4.058,
+     4.506
     ],
     [
-     "verdi.",
-     4.802,
-     5.045
+     "verdi,",
+     4.506,
+     4.805
     ],
     [
-     "Övgüyü",
-     5.71,
-     6.241
+     "şükrederim.",
+     5.105,
+     5.735
     ],
     [
-     "sakin",
-     6.241,
-     6.594
+     "Güzel",
+     6.16,
+     6.477
     ],
     [
-     "karşılar,",
-     6.594,
-     7.125
+     "yanını",
+     6.477,
+     6.953
+    ],
+    [
+     "bilir,",
+     6.953,
+     7.27
     ],
     [
      "şükreder",
-     7.4,
-     7.944
+     7.425,
+     8.073
     ],
     [
      "ve",
-     7.944,
-     8.126
+     8.073,
+     8.289
     ],
     [
-     "gelişmeye",
-     8.126,
-     8.851
+     "öğrenmeye",
+     8.289,
+     9.154
     ],
     [
      "devam",
-     8.851,
-     9.214
+     9.154,
+     9.586
     ],
     [
      "eder.",
-     9.214,
-     9.577
+     9.586,
+     10.018
     ]
    ]
   },
@@ -1298,357 +1295,457 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 6.111,
-   "m": "Okul resim sergisinde çizimin çok beğenildi. Öğretmenin, çok güzel olmuş, diyor. Ne yaparsın?",
+   "sure": 5.674,
+   "m": "Sınıf müsameresi için öğretmen, şiir okuyacak birini arıyor. Sesinin güzel olduğunu biliyorsun. Ne yaparsın?",
    "k": [
     [
-     "Okul",
+     "Sınıf",
      0.03,
-     0.364
+     0.263
     ],
     [
-     "resim",
-     0.364,
-     0.699
+     "müsameresi",
+     0.263,
+     0.844
     ],
     [
-     "sergisinde",
-     0.699,
-     1.368
+     "için",
+     0.844,
+     1.076
     ],
     [
-     "çizimin",
-     1.368,
-     1.869
+     "öğretmen,",
+     1.076,
+     1.425
     ],
     [
-     "çok",
-     1.869,
-     2.036
+     "şiir",
+     1.425,
+     1.657
     ],
     [
-     "beğenildi.",
-     2.036,
-     2.705
+     "okuyacak",
+     1.657,
+     2.123
     ],
     [
-     "Öğretmenin,",
-     2.985,
-     3.825
+     "birini",
+     2.123,
+     2.471
     ],
     [
-     "çok",
-     4.09,
-     4.297
+     "arıyor.",
+     2.471,
+     2.82
+    ],
+    [
+     "Sesinin",
+     3.245,
+     3.61
     ],
     [
      "güzel",
-     4.297,
-     4.711
+     3.61,
+     3.853
     ],
     [
-     "olmuş,",
-     4.711,
-     5.125
+     "olduğunu",
+     3.853,
+     4.339
     ],
     [
-     "diyor.",
-     5.665,
-     5.79
+     "biliyorsun.",
+     4.339,
+     4.825
     ],
     [
      "Ne",
-     5.79,
-     5.853
+     5.09,
+     5.218
     ],
     [
      "yaparsın?",
-     5.853,
-     6.041
+     5.218,
+     5.604
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 4.006,
-   "m": "Öğretmenin güzel sözü havada kalıyor; kendini çizmekten soğutuyorsun.",
+   "sure": 3.037,
+   "m": "Güzel sesin sahnede duyulmuyor; deneme fırsatı da kaçıyor.",
    "k": [
     [
-     "Öğretmenin",
+     "Güzel",
      0.03,
-     0.609
+     0.301
     ],
     [
-     "güzel",
-     0.609,
-     0.898
+     "sesin",
+     0.301,
+     0.572
     ],
     [
-     "sözü",
-     0.898,
-     1.187
+     "sahnede",
+     0.572,
+     0.978
     ],
     [
-     "havada",
-     1.187,
-     1.621
+     "duyulmuyor;",
+     0.978,
+     1.52
     ],
     [
-     "kalıyor;",
-     1.621,
-     2.055
+     "deneme",
+     1.87,
+     2.199
     ],
     [
-     "kendini",
-     2.32,
-     2.761
+     "fırsatı",
+     2.199,
+     2.528
     ],
     [
-     "çizmekten",
-     2.761,
-     3.201
+     "da",
+     2.528,
+     2.638
     ],
     [
-     "soğutuyorsun.",
-     3.201,
-     3.936
+     "kaçıyor.",
+     2.638,
+     2.967
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.616,
-   "m": "Arkadaşlarının çizimlerine hiç bakmıyorsun; gelişmen duruyor.",
+   "sure": 3.358,
+   "m": "Arkadaşların denemekten vazgeçiyor; sınıfın neşesi azalıyor.",
    "k": [
     [
-     "Arkadaşlarının",
+     "Arkadaşların",
      0.03,
-     0.876
+     0.724
     ],
     [
-     "çizimlerine",
-     0.876,
-     1.58
+     "denemekten",
+     0.724,
+     1.28
     ],
     [
-     "hiç",
-     1.58,
-     1.721
+     "vazgeçiyor;",
+     1.28,
+     1.835
     ],
     [
-     "bakmıyorsun;",
-     1.721,
-     2.285
+     "sınıfın",
+     2.14,
+     2.485
     ],
     [
-     "gelişmen",
-     2.64,
-     3.093
+     "neşesi",
+     2.485,
+     2.829
     ],
     [
-     "duruyor.",
-     3.093,
-     3.546
+     "azalıyor.",
+     2.829,
+     3.288
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.647,
-   "m": "Öğretmenin gülümsüyor; arkadaşlarının resimlerine de bakıyorsun.",
+   "sure": 3.137,
+   "m": "Güzel bir okuma oluyor; başka arkadaşlar da sıra alıyor.",
    "k": [
     [
-     "Öğretmenin",
+     "Güzel",
      0.03,
-     0.54
+     0.287
     ],
     [
-     "gülümsüyor;",
-     0.54,
-     1.05
+     "bir",
+     0.287,
+     0.415
     ],
     [
-     "arkadaşlarının",
-     1.24,
-     2.116
+     "okuma",
+     0.415,
+     0.8
     ],
     [
-     "resimlerine",
-     2.116,
-     2.847
+     "oluyor;",
+     0.8,
+     1.185
     ],
     [
-     "de",
-     2.847,
-     2.993
+     "başka",
+     1.615,
+     1.857
     ],
     [
-     "bakıyorsun.",
-     2.993,
-     3.577
+     "arkadaşlar",
+     1.857,
+     2.341
+    ],
+    [
+     "da",
+     2.341,
+     2.462
+    ],
+    [
+     "sıra",
+     2.462,
+     2.704
+    ],
+    [
+     "alıyor.",
+     2.704,
+     3.067
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.164,
-   "m": "Hızlı okuma yarışmasında birinci oldun. Arkadaşların seni tebrik ediyor. Ne yaparsın?",
+   "sure": 6.067,
+   "m": "Grup projesinde resim çizmek senin iyi olduğun bir iş. Grup, bu kısmı kimin yapacağını soruyor. Ne yaparsın?",
    "k": [
     [
-     "Hızlı",
+     "Grup",
      0.03,
-     0.283
+     0.178
     ],
     [
-     "okuma",
-     0.283,
-     0.662
+     "projesinde",
+     0.178,
+     0.77
     ],
     [
-     "yarışmasında",
-     0.662,
-     1.293
+     "resim",
+     0.77,
+     1.066
     ],
     [
-     "birinci",
-     1.293,
-     1.672
+     "çizmek",
+     1.066,
+     1.362
     ],
     [
-     "oldun.",
-     1.672,
-     1.925
+     "senin",
+     1.362,
+     1.659
     ],
     [
-     "Arkadaşların",
-     2.265,
-     3.005
+     "iyi",
+     1.659,
+     1.955
     ],
     [
-     "seni",
-     3.005,
-     3.3
+     "olduğun",
+     1.955,
+     2.399
     ],
     [
-     "tebrik",
-     3.3,
-     3.596
+     "bir",
+     2.399,
+     2.547
     ],
     [
-     "ediyor.",
-     3.596,
-     4.04
+     "iş.",
+     2.547,
+     2.695
+    ],
+    [
+     "Grup,",
+     2.98,
+     3.295
+    ],
+    [
+     "bu",
+     3.495,
+     3.627
+    ],
+    [
+     "kısmı",
+     3.627,
+     3.89
+    ],
+    [
+     "kimin",
+     3.89,
+     4.153
+    ],
+    [
+     "yapacağını",
+     4.153,
+     4.81
+    ],
+    [
+     "soruyor.",
+     4.81,
+     5.205
     ],
     [
      "Ne",
-     4.495,
-     4.645
+     5.45,
+     5.587
     ],
     [
      "yaparsın?",
-     4.645,
-     5.094
+     5.587,
+     5.997
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.868,
-   "m": "Arkadaşların tebriklerinin karşısında mahcup kalıyorsun; sevinç kaçıyor.",
+   "sure": 5.387,
+   "m": "Ekip senin güçlü yanından yoksun kalıyor; sen de kendini denemekten uzaklaşıyorsun.",
    "k": [
     [
-     "Arkadaşların",
+     "Ekip",
      0.03,
-     0.678
+     0.379
     ],
     [
-     "tebriklerinin",
-     0.678,
-     1.325
+     "senin",
+     0.379,
+     0.729
     ],
     [
-     "karşısında",
-     1.325,
-     1.843
+     "güçlü",
+     0.729,
+     1.078
     ],
     [
-     "mahcup",
-     1.843,
-     2.102
+     "yanından",
+     1.078,
+     1.602
     ],
     [
-     "kalıyorsun;",
-     2.102,
-     2.62
+     "yoksun",
+     1.602,
+     1.951
     ],
     [
-     "sevinç",
-     3.0,
-     3.319
+     "kalıyor;",
+     1.951,
+     2.475
     ],
     [
-     "kaçıyor.",
-     3.319,
-     3.798
+     "sen",
+     2.78,
+     2.949
+    ],
+    [
+     "de",
+     2.949,
+     3.118
+    ],
+    [
+     "kendini",
+     3.118,
+     3.626
+    ],
+    [
+     "denemekten",
+     3.626,
+     4.302
+    ],
+    [
+     "uzaklaşıyorsun.",
+     4.302,
+     5.317
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.354,
-   "m": "Arkadaşların sessizleşiyor; tebrik edenlerin sevinci azalıyor.",
+   "sure": 4.234,
+   "m": "Arkadaşların kenara çekiliyor; proje tek başına senin yükün oluyor.",
    "k": [
     [
      "Arkadaşların",
      0.03,
-     0.688
+     0.776
     ],
     [
-     "sessizleşiyor;",
-     0.688,
-     1.345
+     "kenara",
+     0.776,
+     1.223
     ],
     [
-     "tebrik",
-     1.47,
-     1.749
+     "çekiliyor;",
+     1.223,
+     1.82
     ],
     [
-     "edenlerin",
-     1.749,
-     2.307
+     "proje",
+     1.97,
+     2.308
     ],
     [
-     "sevinci",
-     2.307,
-     2.726
+     "tek",
+     2.308,
+     2.476
     ],
     [
-     "azalıyor.",
-     2.726,
-     3.284
+     "başına",
+     2.476,
+     2.983
+    ],
+    [
+     "senin",
+     2.983,
+     3.32
+    ],
+    [
+     "yükün",
+     3.32,
+     3.658
+    ],
+    [
+     "oluyor.",
+     3.658,
+     4.164
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 2.118,
-   "m": "Arkadaşlarınla birlikte seviniyorsunuz.",
+   "sure": 3.177,
+   "m": "Herkes payını alıyor; proje birlikte güzelleşiyor.",
    "k": [
     [
-     "Arkadaşlarınla",
+     "Herkes",
      0.03,
-     0.837
+     0.299
+    ],
+    [
+     "payını",
+     0.299,
+     0.702
+    ],
+    [
+     "alıyor;",
+     0.702,
+     1.105
+    ],
+    [
+     "proje",
+     1.44,
+     1.773
     ],
     [
      "birlikte",
-     0.837,
-     1.241
+     1.773,
+     2.274
     ],
     [
-     "seviniyorsunuz.",
-     1.241,
-     2.048
+     "güzelleşiyor.",
+     2.274,
+     3.107
     ]
    ]
   },
@@ -1840,123 +1937,123 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.158,
-   "m": "Bu cümle bilerek çift anlamlı. Kendini değersiz gören biri söylüyorsa sol uca yakın. Yeteneğin bir nimet olduğunu bilen biri söylüyorsa orta uca yakın.",
+   "sure": 8.218,
+   "m": "Bu cümle bilerek çift anlamlı. Kendi yeteneğini küçümseyen biri söylüyorsa sol uca yakın. Yeteneğin bir nimet olduğunu bilen biri söylüyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.172
+     0.176
     ],
     [
      "cümle",
-     0.172,
-     0.456
+     0.176,
+     0.467
     ],
     [
      "bilerek",
-     0.456,
-     0.882
+     0.467,
+     0.903
     ],
     [
      "çift",
-     0.882,
-     1.024
+     0.903,
+     1.048
     ],
     [
      "anlamlı.",
-     1.024,
-     1.45
+     1.048,
+     1.485
     ],
     [
-     "Kendini",
-     1.96,
-     2.369
+     "Kendi",
+     1.89,
+     2.137
     ],
     [
-     "değersiz",
-     2.369,
-     2.778
+     "yeteneğini",
+     2.137,
+     2.754
     ],
     [
-     "gören",
-     2.778,
-     3.051
+     "küçümseyen",
+     2.754,
+     3.248
     ],
     [
      "biri",
-     3.051,
-     3.323
+     3.248,
+     3.494
     ],
     [
      "söylüyorsa",
-     3.323,
-     3.868
+     3.494,
+     3.988
     ],
     [
      "sol",
-     3.868,
-     4.005
+     3.988,
+     4.111
     ],
     [
      "uca",
-     4.005,
-     4.277
+     4.111,
+     4.358
     ],
     [
      "yakın.",
-     4.277,
-     4.55
+     4.358,
+     4.605
     ],
     [
      "Yeteneğin",
-     5.07,
-     5.713
+     4.81,
+     5.344
     ],
     [
      "bir",
-     5.713,
-     5.874
+     5.344,
+     5.478
     ],
     [
      "nimet",
-     5.874,
-     6.195
+     5.478,
+     5.745
     ],
     [
      "olduğunu",
-     6.195,
-     6.838
+     5.745,
+     6.279
     ],
     [
      "bilen",
-     6.838,
-     7.159
+     6.279,
+     6.546
     ],
     [
      "biri",
-     7.159,
-     7.481
+     6.546,
+     6.813
     ],
     [
      "söylüyorsa",
-     7.481,
-     8.124
+     6.813,
+     7.347
     ],
     [
      "orta",
-     8.124,
-     8.445
+     7.347,
+     7.614
     ],
     [
      "uca",
-     8.445,
-     8.766
+     7.614,
+     7.881
     ],
     [
      "yakın.",
-     8.766,
-     9.088
+     7.881,
+     8.148
     ]
    ]
   },

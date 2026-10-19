@@ -1,11 +1,13 @@
 /* İbremetre · Sadakat — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Suskunluk · Sadakat · Va‘d Bozmak). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Suskunluk · Sadakat · Sözbozma). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-sadakat",
  "ad": "Sadakat: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -26,7 +28,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Suskunluk",
       "orta": "Sadakat",
-      "fazla": "Va‘d Bozmak"
+      "fazla": "Sözbozma"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -39,13 +41,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Suskunluk",
       "orta": "Sadakat",
-      "fazla": "Va‘d Bozmak"
+      "fazla": "Sözbozma"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi söz verdiği hâlde gelemeyeceğini söylemiyor, sessizce kaybolacak: sol uca (Suskunluk) yakın. Başka okumada sözünü tutmaya kararlı ve zamanında orada olacak: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an verdiğimiz söze nasıl bağlı kaldığımıza bakar. Sadakat; verdiği sözde durmak, tutamayacağını anlarsa bunu önceden söylemektir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi arkadaşının mesajına cevap yazmıyor; sessiz kalıyor ve arkadaşı gelip gelmeyeceğini bilemiyor: sol uca (Suskunluk) yakın. Başka okumada cevap yazmamış olsa da söz verdiği yerde zamanında olacak: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an verdiğimiz söze nasıl bağlı kaldığımıza bakar. Sadakat; verdiği sözde durmak, tutamayacağını anlarsa bunu önceden söylemektir. Sağ uç (Excel’deki adıyla Va‘dini Bozmak) söz verip tutmamaktır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -59,13 +61,13 @@ DO.dersKaydet(
      "uclar": {
       "az": "Suskunluk",
       "orta": "Sadakat",
-      "fazla": "Va‘d Bozmak"
+      "fazla": "Sözbozma"
      },
      "yesil": 0.26,
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Gereken yerde susmak neye benziyor?",
+       "soru": "Söylemesi gerekeni söylemeden kaybolmak neye benziyor?",
        "ad": "Suskunluk",
        "soz": "Gelemeyeceğim ama kimseye bir şey demem.",
        "eylem": "yaslan",
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Gelemeyeceğim desem sorun çıkar; susayım.",
           "dogru": true,
-          "not": "Suskunluk, gereken yerde sessiz kalmaktır. “Tutamayacağım” demek, sessizce kaybolmaktan daha güvenli bir yoldur."
+          "not": "Suskunluk, konuşması gereken yerde sessiz kalmaktır. “Tutamayacağım” demek, sessizce kaybolmaktan daha güvenli bir yoldur."
          },
          {
           "m": "Söz verdim; tutarım, tutamazsam önceden söylerim.",
@@ -89,7 +91,7 @@ DO.dersKaydet(
          {
           "m": "Söz verdim ama canım istemiyor; gitmem.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: va‘d bozmanın sesi."
+          "not": "Bu sağ ucun sesi: sözbozmanın sesi."
          }
         ]
        },
@@ -167,7 +169,7 @@ DO.dersKaydet(
          {
           "m": "Söz verdim ama canım istemiyor; gitmem.",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: va‘d bozmanın sesi."
+          "not": "Bu sağ ucun sesi: sözbozmanın sesi."
          }
         ]
        },
@@ -190,7 +192,7 @@ DO.dersKaydet(
      "uclar": {
       "az": "Suskunluk",
       "orta": "Sadakat",
-      "fazla": "Va‘d Bozmak"
+      "fazla": "Sözbozma"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
@@ -202,7 +204,7 @@ DO.dersKaydet(
        "tetik": "Arkadaşınla cumartesi parkta buluşmaya söz verdin. Sonra başka bir arkadaşın seni eğlenceli bir yere çağırdı.",
        "secenekler": [
         {
-         "m": "Bir şey demem; sessizce gitmem, anlarlar.",
+         "m": "Bir şey demem, parka gitmem; anlarlar.",
          "zon": "az",
          "sonuc": "Arkadaşın parkta bekliyor; neden gelmediğini bilemiyor.",
          "not": "İbre sola kaydı: söylememek, sözü tutamamanın sorumluluğunu kaçırıyor.",
@@ -216,7 +218,7 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Önce sözüme giderim; olmazsa önceden haber veririm.",
+         "m": "Önce sözümü tutarım; olmazsa önceden haber veririm.",
          "zon": "orta",
          "sonuc": "Arkadaşın planını biliyor; ikiniz de güvenle devam ediyorsunuz.",
          "not": "İbre ortada: sözünde durdun ya da açıkça haber verdin.",
@@ -280,7 +282,7 @@ DO.dersKaydet(
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Va‘d Bozmak",
+       "ad": "Fazla · Sözbozma",
        "aciklama": "Söz verip tutmamak",
        "ikon": "uyari",
        "renk": "#E0674F"
@@ -291,7 +293,7 @@ DO.dersKaydet(
        "id": "k1",
        "metin": "Oyuna gelmeyecekse bile haber vermez, sessizce kaybolur.",
        "alan": "az",
-       "ipucu": "Haber vermeden çekiliyor."
+       "ipucu": "Haber vermiyor."
       },
       {
        "id": "k2",
@@ -1910,123 +1912,148 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.694,
-   "m": "Bu cümle bilerek çift anlamlı. Söz verip gelemeyeceğini söylemeden kaybolacak biri söylüyorsa sol uca yakın. Sözünü tutmaya kararlı biri söylüyorsa orta uca yakın.",
+   "sure": 11.727,
+   "m": "Bu cümle bilerek çift anlamlı. Mesaja cevap yazmayıp arkadaşını bilgisiz bırakan biri söylüyorsa sol uca yakın. Cevap yazmasa da söz verdiği yerde olacak biri söylüyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.176
+     0.181
     ],
     [
      "cümle",
-     0.176,
-     0.468
+     0.181,
+     0.483
     ],
     [
      "bilerek",
-     0.468,
-     0.906
+     0.483,
+     0.936
     ],
     [
      "çift",
-     0.906,
-     1.052
+     0.936,
+     1.087
     ],
     [
      "anlamlı.",
-     1.052,
-     1.49
+     1.087,
+     1.54
     ],
     [
-     "Söz",
-     2.0,
-     2.143
+     "Mesaja",
+     2.04,
+     2.498
     ],
     [
-     "verip",
-     2.143,
-     2.429
+     "cevap",
+     2.498,
+     2.803
     ],
     [
-     "gelemeyeceğini",
-     2.429,
-     3.429
+     "yazmayıp",
+     2.803,
+     3.26
     ],
     [
-     "söylemeden",
-     3.429,
-     4.001
+     "arkadaşını",
+     3.26,
+     4.022
     ],
     [
-     "kaybolacak",
-     4.001,
-     4.573
+     "bilgisiz",
+     4.022,
+     4.48
+    ],
+    [
+     "bırakan",
+     4.48,
+     4.938
     ],
     [
      "biri",
-     4.573,
-     4.859
+     4.938,
+     5.243
     ],
     [
      "söylüyorsa",
-     4.859,
-     5.43
+     5.243,
+     5.853
     ],
     [
      "sol",
-     5.43,
-     5.573
+     5.853,
+     6.005
     ],
     [
      "uca",
-     5.573,
-     5.859
+     6.005,
+     6.31
     ],
     [
      "yakın.",
-     5.859,
-     6.145
+     6.31,
+     6.615
     ],
     [
-     "Sözünü",
-     6.7,
-     7.118
+     "Cevap",
+     7.265,
+     7.59
     ],
     [
-     "tutmaya",
-     7.118,
-     7.536
+     "yazmasa",
+     7.59,
+     8.078
     ],
     [
-     "kararlı",
-     7.536,
-     7.953
+     "da",
+     8.078,
+     8.241
+    ],
+    [
+     "söz",
+     8.241,
+     8.404
+    ],
+    [
+     "verdiği",
+     8.404,
+     8.892
+    ],
+    [
+     "yerde",
+     8.892,
+     9.217
+    ],
+    [
+     "olacak",
+     9.217,
+     9.705
     ],
     [
      "biri",
-     7.953,
-     8.232
+     9.705,
+     10.03
     ],
     [
      "söylüyorsa",
-     8.232,
-     8.789
+     10.03,
+     10.681
     ],
     [
      "orta",
-     8.789,
-     9.067
+     10.681,
+     11.006
     ],
     [
      "uca",
-     9.067,
-     9.346
+     11.006,
+     11.332
     ],
     [
      "yakın.",
-     9.346,
-     9.624
+     11.332,
+     11.657
     ]
    ]
   },

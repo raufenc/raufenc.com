@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Tahkik: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "inanc",
+ "muzik": "inanc",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -44,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "orta",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi doğru kaynaktan öğrenmek için soru soruyor: orta uca yakın. Başka okumada cevap aldıktan sonra da aynı soruyu tekrar tekrar soruyor ve bir türlü rahatlayamıyor: sağ uca (Şekk) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an inancı nasıl sağlamlaştırdığımıza bakar. Tahkik; bilerek ve anlayarak inanmaktır. Sorular sormak güzeldir; doğru kaynağa sormak önemlidir. Aklını çok meşgul eden sorular olursa güvendiğin bir yetişkinle konuş. Bu ibre ölçekten çok yönü gösterir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi nedenini anlamak için rahatça soru soruyor: orta uca yakın. Başka okumada cevap aldıktan sonra da aynı soruyu tekrar tekrar soruyor ve bir türlü rahatlayamıyor: sağ uca (Şekk) yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an inancı nasıl sağlamlaştırdığımıza bakar. Tahkik; bilerek ve anlayarak inanmaktır. Soru sormak güzeldir; nedenini anlamak bilgiyi sağlamlaştırır. Aklını çok meşgul eden sorular olursa bu bir kusur değildir; güvendiğin bir yetişkinle konuş. Bu ibre ölçekten çok yönü gösterir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
           "dogru": true,
-          "not": "Taklîd, anlamadan öylece kabul etmektir. Büyüklerden öğrenmek güzeldir; sorup anlamak bilgiyi daha sağlam yapar."
+          "not": "Taklîd, anlamadan öylece kabul etmektir. Büyüklerden öğrenmek güzeldir; sorup anlamak bilgiyi daha sağlam yapar. Sorular imana zarar vermez; anlamak onu güçlendirir."
          },
          {
           "m": "Bunu merak ediyorum; sorup anlayarak öğreneyim.",
@@ -104,13 +106,13 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Cevaba yerleşememek neye benziyor?",
+       "soru": "Cevaba güvenememek neye benziyor?",
        "ad": "Şekk",
        "soz": "Cevabı duydum ama bir daha sorayım.",
        "eylem": "dusun",
        "zincir": [
-        "Aynı soru tekrar tekrar sorulur.",
-        "Güvendiği bir yetişkinle konuşunca rahatlayabilir."
+        "Aynı soru her seferinde yeniden sorulur.",
+        "Böyle zamanlarda güvendiği bir yetişkinle konuşmak iyi gelir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -118,7 +120,7 @@ DO.dersKaydet(
          {
           "m": "Cevabı duydum ama bir daha sorayım, emin olamadım.",
           "dogru": true,
-          "not": "Şekk, cevap alsa da karar verememektir. Sorular sormak güzeldir; aklına takılan olursa güvendiğin bir yetişkinle konuş."
+          "not": "Şekk, cevap alsa da karar verememektir. Soru sormak güzeldir; aklına takılanlar durmuyorsa bu bir kusur değildir: güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
           "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
@@ -138,18 +140,18 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Aynı",
-        "Güvendiği"
+        "Böyle"
        ]
       },
       {
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Tahkik",
-       "soz": "Bunu anlamak istiyorum; kime sorsam?",
+       "soz": "Bunu anlamak istiyorum; neden böyle?",
        "eylem": "konus",
        "zincir": [
         "Cevabı anlayınca bilgisi sağlamlaşır.",
-        "Yeni sorular geldikçe yine doğru kaynağa gider."
+        "Yeni sorular geldikçe sormaktan çekinmez."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -157,7 +159,7 @@ DO.dersKaydet(
          {
           "m": "Bunu merak ediyorum; sorup anlayarak öğreneyim.",
           "dogru": true,
-          "not": "Tahkik, bilerek ve anlayarak inanmaktır. Sorular sormak güzeldir; doğru kaynağa sormak önemlidir."
+          "not": "Tahkik, bilerek ve anlayarak inanmaktır. Soru sormak güzeldir; nedenini anlamak bilgiyi sağlamlaştırır."
          },
          {
           "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
@@ -212,13 +214,13 @@ DO.dersKaydet(
          "m": "Cevap aldım ama yine de herkese tekrar tekrar sorayım.",
          "zon": "fazla",
          "sonuc": "Cevaplar birikiyor ama içinde bir karar oluşmuyor.",
-         "not": "İbre sağa kaydı: aynı soruyu durmadan sormak, cevabı yerleştirmeyi geciktiriyor.",
+         "not": "İbre sağa kaydı: aynı soruyu durmadan sormak, cevaba güvenmeyi geciktiriyor.",
          "ses": "s1fa"
         },
         {
-         "m": "Nedenini hocama sorarım; anlatınca defterime yazarım.",
+         "m": "Nedenini sorarım; anlatılanı kendi cümlemle defterime yazarım.",
          "zon": "orta",
-         "sonuc": "Hocan sakin sakin anlatıyor; hem anlıyorsun hem aklında kalıyor.",
+         "sonuc": "Nedenini anlıyorsun; anlattıkların hem açık hem aklında kalıyor.",
          "not": "İbre ortada: sorup anlamak, bilgiyi sağlamlaştırıyor.",
          "ses": "s1or"
         }
@@ -245,10 +247,10 @@ DO.dersKaydet(
          "ses": "s2fa"
         },
         {
-         "m": "Tam bilmiyorum; birlikte güvendiğimiz bir hocaya soralım.",
+         "m": "Tam bilmiyorum ama güzel soru; nedenini birlikte araştıralım.",
          "zon": "orta",
-         "sonuc": "İkiniz de merakla hocaya gidiyor ve cevabı birlikte öğreniyorsunuz.",
-         "not": "İbre ortada: bilmediğini söylemek ve doğru kaynağa gitmek tahkikin yolu.",
+         "sonuc": "İkiniz de merakla araştırıyor ve cevabı birlikte öğreniyorsunuz.",
+         "not": "İbre ortada: bilmediğini söylemek ve birlikte anlamaya çalışmak tahkikin yolu.",
          "ses": "s2or"
         }
        ],
@@ -281,7 +283,7 @@ DO.dersKaydet(
       {
        "id": "fazla",
        "ad": "Fazla · Şekk",
-       "aciklama": "Cevaba yerleşememek",
+       "aciklama": "Cevaba güvenememek",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -297,11 +299,11 @@ DO.dersKaydet(
        "id": "k2",
        "metin": "Bir soruya cevap aldıktan sonra yine aynı soruyu tekrar tekrar sorar.",
        "alan": "fazla",
-       "ipucu": "Cevaba yerleşemiyor."
+       "ipucu": "Cevaba güvenemiyor."
       },
       {
        "id": "k3",
-       "metin": "Merak ettiğini güvendiği bir hocaya sorar ve cevabı anlamaya çalışır.",
+       "metin": "Nedenini merak eder, rahatça sorar ve cevabı anlamaya çalışır.",
        "alan": "orta",
        "ipucu": "Sorup anlıyor."
       },
@@ -313,9 +315,9 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Cevabı duyduğu hâlde karar veremez; sorular bir türlü bitmez.",
+       "metin": "Bir yetişkine sorsa da içi rahat etmez, soruyu yeniden sormak ister.",
        "alan": "fazla",
-       "ipucu": "Kararsız kalıyor."
+       "ipucu": "Rahat edemiyor."
       },
       {
        "id": "k6",
@@ -891,160 +893,190 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 6.618,
-   "m": "Sağ uçta Şekk. Cevabı duydum ama bir daha sorayım. Cevap alsa da aynı soruyu yeniden sorar.",
+   "sure": 7.937,
+   "m": "Sağ uçta Şekk. Cevabı duydum ama bir daha sorayım. Yetişkine sorunca da içi rahat etmez, soruyu yeniden sorar.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.264
+     0.284
     ],
     [
      "uçta",
-     0.264,
-     0.731
+     0.284,
+     0.791
     ],
     [
      "Şekk.",
-     0.731,
-     0.965
+     0.791,
+     1.045
     ],
     [
      "Cevabı",
-     1.065,
-     1.69
+     1.17,
+     1.495
     ],
     [
      "duydum",
-     1.69,
-     2.107
+     1.495,
+     1.712
     ],
     [
      "ama",
-     2.107,
-     2.524
+     1.712,
+     1.929
     ],
     [
      "bir",
-     2.524,
-     2.733
+     1.929,
+     2.038
     ],
     [
      "daha",
-     2.733,
-     3.15
+     2.038,
+     2.255
     ],
     [
      "sorayım.",
-     3.15,
-     3.775
+     2.255,
+     2.58
     ],
     [
-     "Cevap",
-     4.17,
-     4.487
+     "Yetişkine",
+     2.96,
+     3.967
     ],
     [
-     "alsa",
-     4.487,
-     4.804
+     "sorunca",
+     3.967,
+     4.723
     ],
     [
      "da",
-     4.804,
-     4.963
+     4.723,
+     4.974
     ],
     [
-     "aynı",
-     4.963,
-     5.28
+     "içi",
+     4.974,
+     5.478
+    ],
+    [
+     "rahat",
+     5.478,
+     5.981
+    ],
+    [
+     "etmez,",
+     5.981,
+     6.485
     ],
     [
      "soruyu",
-     5.28,
-     5.755
+     6.61,
+     7.081
     ],
     [
      "yeniden",
-     5.755,
-     6.231
+     7.081,
+     7.553
     ],
     [
      "sorar.",
-     6.231,
-     6.548
+     7.553,
+     7.867
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.127,
-   "m": "Sonra ne olur? Aynı soru tekrar tekrar sorulur. Güvendiği bir yetişkinle konuşunca rahatlayabilir.",
+   "sure": 6.769,
+   "m": "Sonra ne olur? Aynı soru her seferinde yeniden sorulur. Böyle zamanlarda güvendiği bir yetişkinle konuşmak iyi gelir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.286
+     0.274
     ],
     [
      "ne",
-     0.286,
-     0.414
+     0.274,
+     0.396
     ],
     [
      "olur?",
-     0.414,
-     0.67
+     0.396,
+     0.64
     ],
     [
      "Aynı",
-     1.34,
-     1.648
+     1.035,
+     1.344
     ],
     [
      "soru",
-     1.648,
-     1.956
+     1.344,
+     1.652
     ],
     [
-     "tekrar",
-     1.956,
-     2.265
+     "her",
+     1.652,
+     1.807
     ],
     [
-     "tekrar",
-     2.265,
-     2.573
+     "seferinde",
+     1.807,
+     2.424
+    ],
+    [
+     "yeniden",
+     2.424,
+     2.887
     ],
     [
      "sorulur.",
-     2.573,
-     3.035
+     2.887,
+     3.35
     ],
     [
-     "Güvendiği",
-     3.475,
-     4.019
+     "Böyle",
+     3.625,
+     3.904
+    ],
+    [
+     "zamanlarda",
+     3.904,
+     4.463
+    ],
+    [
+     "güvendiği",
+     4.463,
+     5.022
     ],
     [
      "bir",
-     4.019,
-     4.154
+     5.022,
+     5.162
     ],
     [
      "yetişkinle",
-     4.154,
-     4.698
+     5.162,
+     5.721
     ],
     [
-     "konuşunca",
-     4.698,
-     5.242
+     "konuşmak",
+     5.721,
+     6.14
     ],
     [
-     "rahatlayabilir.",
-     5.242,
-     6.057
+     "iyi",
+     6.14,
+     6.419
+    ],
+    [
+     "gelir.",
+     6.419,
+     6.699
     ]
    ]
   },
@@ -1087,165 +1119,155 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 8.173,
-   "m": "Tam kararında Tahkik. Bunu anlamak istiyorum; kime sorsam? Güvendiği bir hocaya sorar ve cevabı anlamaya çalışır.",
+   "sure": 7.793,
+   "m": "Tam kararında Tahkik. Bunu anlamak istiyorum; neden böyle? Aklına takılanı rahatça sorar ve nedenini anlamaya çalışır.",
    "k": [
     [
      "Tam",
      0.03,
-     0.217
+     0.201
     ],
     [
      "kararında",
-     0.217,
-     0.966
+     0.201,
+     0.887
     ],
     [
      "Tahkik.",
-     0.966,
-     1.34
+     0.887,
+     1.23
     ],
     [
      "Bunu",
-     1.445,
-     1.793
+     1.315,
+     1.629
     ],
     [
      "anlamak",
-     1.793,
-     2.314
+     1.629,
+     2.101
     ],
     [
      "istiyorum;",
-     2.314,
-     3.01
+     2.101,
+     2.73
     ],
     [
-     "kime",
-     3.6,
-     4.013
+     "neden",
+     3.2,
+     3.558
     ],
     [
-     "sorsam?",
-     4.013,
-     4.425
+     "böyle?",
+     3.558,
+     3.915
     ],
     [
-     "Güvendiği",
-     5.21,
-     5.761
+     "Aklına",
+     4.24,
+     4.675
     ],
     [
-     "bir",
-     5.761,
-     5.899
+     "takılanı",
+     4.675,
+     5.256
     ],
     [
-     "hocaya",
-     5.899,
-     6.312
+     "rahatça",
+     5.256,
+     5.691
     ],
     [
      "sorar",
-     6.312,
-     6.588
+     5.691,
+     5.981
     ],
     [
      "ve",
-     6.588,
-     6.725
+     5.981,
+     6.126
     ],
     [
-     "cevabı",
-     6.725,
-     7.139
+     "nedenini",
+     6.126,
+     6.707
     ],
     [
      "anlamaya",
-     7.139,
-     7.69
+     6.707,
+     7.287
     ],
     [
      "çalışır.",
-     7.69,
-     8.103
+     7.287,
+     7.723
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 6.272,
-   "m": "Sonra ne olur? Cevabı anlayınca bilgisi sağlamlaşır. Yeni sorular geldikçe yine doğru kaynağa gider.",
+   "sure": 6.112,
+   "m": "Sonra ne olur? Cevabı anlayınca bilgisi sağlamlaşır. Yeni sorular geldikçe sormaktan çekinmez.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.288
+     0.294
     ],
     [
      "ne",
-     0.288,
-     0.417
+     0.294,
+     0.426
     ],
     [
      "olur?",
-     0.417,
-     0.675
+     0.426,
+     0.69
     ],
     [
      "Cevabı",
-     1.005,
-     1.495
+     1.165,
+     1.638
     ],
     [
      "anlayınca",
-     1.495,
-     2.147
+     1.638,
+     2.268
     ],
     [
      "bilgisi",
-     2.147,
-     2.637
+     2.268,
+     2.74
     ],
     [
      "sağlamlaşır.",
-     2.637,
-     3.29
+     2.74,
+     3.37
     ],
     [
      "Yeni",
-     3.785,
-     4.069
+     3.635,
+     3.979
     ],
     [
      "sorular",
-     4.069,
-     4.496
+     3.979,
+     4.495
     ],
     [
      "geldikçe",
-     4.496,
-     4.922
+     4.495,
+     5.011
     ],
     [
-     "yine",
-     4.922,
-     5.207
+     "sormaktan",
+     5.011,
+     5.526
     ],
     [
-     "doğru",
-     5.207,
-     5.491
-    ],
-    [
-     "kaynağa",
-     5.491,
-     5.917
-    ],
-    [
-     "gider.",
-     5.917,
-     6.202
+     "çekinmez.",
+     5.526,
+     6.042
     ]
    ]
   },
@@ -1459,53 +1481,48 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 4.312,
-   "m": "Hocan sakin sakin anlatıyor; hem anlıyorsun hem aklında kalıyor.",
+   "sure": 4.358,
+   "m": "Nedenini anlıyorsun; anlattıkların hem açık hem aklında kalıyor.",
    "k": [
     [
-     "Hocan",
+     "Nedenini",
      0.03,
-     0.373
+     0.675
     ],
     [
-     "sakin",
-     0.373,
-     0.716
+     "anlıyorsun;",
+     0.675,
+     1.32
     ],
     [
-     "sakin",
-     0.716,
-     1.059
-    ],
-    [
-     "anlatıyor;",
-     1.059,
-     1.745
+     "anlattıkların",
+     1.405,
+     2.366
     ],
     [
      "hem",
-     2.035,
-     2.219
+     2.366,
+     2.558
     ],
     [
-     "anlıyorsun",
-     2.219,
-     2.954
+     "açık",
+     2.558,
+     2.943
     ],
     [
      "hem",
-     2.954,
-     3.138
+     2.943,
+     3.135
     ],
     [
      "aklında",
-     3.138,
-     3.69
+     3.135,
+     3.711
     ],
     [
      "kalıyor.",
-     3.69,
-     4.242
+     3.711,
+     4.288
     ]
    ]
   },
@@ -1677,53 +1694,48 @@ DO.dersKaydet(
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 4.127,
-   "m": "İkiniz de merakla hocaya gidiyor ve cevabı birlikte öğreniyorsunuz.",
+   "sure": 4.31,
+   "m": "İkiniz de merakla araştırıyor ve cevabı birlikte öğreniyorsunuz.",
    "k": [
     [
      "İkiniz",
      0.03,
-     0.495
+     0.535
     ],
     [
      "de",
-     0.495,
-     0.65
+     0.535,
+     0.704
     ],
     [
      "merakla",
-     0.65,
-     1.114
+     0.704,
+     1.209
     ],
     [
-     "hocaya",
-     1.114,
-     1.579
-    ],
-    [
-     "gidiyor",
-     1.579,
-     2.044
+     "araştırıyor",
+     1.209,
+     2.051
     ],
     [
      "ve",
-     2.044,
-     2.198
+     2.051,
+     2.219
     ],
     [
      "cevabı",
-     2.198,
-     2.663
+     2.219,
+     2.724
     ],
     [
      "birlikte",
-     2.663,
-     3.128
+     2.724,
+     3.229
     ],
     [
      "öğreniyorsunuz.",
-     3.128,
-     4.057
+     3.229,
+     4.24
     ]
    ]
   },
@@ -1915,128 +1927,128 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 8.164,
-   "m": "Bu cümle bilerek çift anlamlı. Doğru kaynaktan öğrenmek için soruyorsa orta uca yakın. Cevap aldıktan sonra da hep aynı soruyu soruyorsa sağ uca yakın.",
+   "sure": 10.028,
+   "m": "Bu cümle bilerek çift anlamlı. Nedenini anlamak için rahatça soruyorsa orta uca yakın. Cevap aldıktan sonra da hep aynı soruyu soruyorsa sağ uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.162
+     0.179
     ],
     [
      "cümle",
-     0.162,
-     0.424
+     0.179,
+     0.478
     ],
     [
      "bilerek",
-     0.424,
-     0.819
+     0.478,
+     0.927
     ],
     [
      "çift",
-     0.819,
-     0.95
+     0.927,
+     1.077
     ],
     [
      "anlamlı.",
-     0.95,
-     1.345
+     1.077,
+     1.525
     ],
     [
-     "Doğru",
-     1.5,
-     1.77
+     "Nedenini",
+     2.02,
+     2.545
     ],
     [
-     "kaynaktan",
-     1.77,
-     2.174
-    ],
-    [
-     "öğrenmek",
-     2.174,
-     2.578
+     "anlamak",
+     2.545,
+     2.94
     ],
     [
      "için",
-     2.578,
-     2.848
+     2.94,
+     3.202
+    ],
+    [
+     "rahatça",
+     3.202,
+     3.596
     ],
     [
      "soruyorsa",
-     2.848,
-     3.387
+     3.596,
+     4.122
     ],
     [
      "orta",
-     3.387,
-     3.656
+     4.122,
+     4.385
     ],
     [
      "uca",
-     3.656,
-     3.925
+     4.385,
+     4.647
     ],
     [
      "yakın.",
-     3.925,
-     4.195
+     4.647,
+     4.91
     ],
     [
      "Cevap",
-     4.375,
-     4.698
+     5.645,
+     6.02
     ],
     [
      "aldıktan",
-     4.698,
-     5.183
+     6.02,
+     6.583
     ],
     [
      "sonra",
-     5.183,
-     5.507
+     6.583,
+     6.958
     ],
     [
      "da",
-     5.507,
-     5.669
+     6.958,
+     7.145
     ],
     [
      "hep",
-     5.669,
-     5.83
+     7.145,
+     7.333
     ],
     [
      "aynı",
-     5.83,
-     6.154
+     7.333,
+     7.708
     ],
     [
      "soruyu",
-     6.154,
-     6.639
+     7.708,
+     8.27
     ],
     [
      "soruyorsa",
-     6.639,
-     7.285
+     8.27,
+     9.02
     ],
     [
      "sağ",
-     7.285,
-     7.447
+     9.02,
+     9.208
     ],
     [
      "uca",
-     7.447,
-     7.77
+     9.208,
+     9.583
     ],
     [
      "yakın.",
-     7.77,
-     8.094
+     9.583,
+     9.958
     ]
    ]
   },

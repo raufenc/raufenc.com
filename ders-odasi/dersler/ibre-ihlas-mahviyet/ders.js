@@ -1,11 +1,13 @@
 /* İbremetre · İhlâs — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Mahviyet · İhlâs · Övgü sevgisi). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Hevessizlik · İhlâs · Gösteriş). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-ihlas-mahviyet",
- "ad": "İhlâs (Mahviyet · Övgü sevgisi): İbren Nerede?",
+ "ad": "İhlâs (Hevessizlik · Gösteriş): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "benlik",
+ "muzik": "benlik",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -24,9 +26,9 @@ DO.dersKaydet(
      "olculen": "İyiliği kimin için yaptığım",
      "kanca": "Ben yaptım ama söylemeyin.",
      "uclar": {
-      "az": "Mahviyet",
+      "az": "Hevessizlik",
       "orta": "İhlâs",
-      "fazla": "Övgü sevgisi"
+      "fazla": "Gösteriş"
      },
      "soru": "Bu cümle ibrenin neresinde?",
      "yesil": 0.26
@@ -37,15 +39,15 @@ DO.dersKaydet(
      "huy": "İhlâs",
      "cumle": "Ben yaptım ama söylemeyin.",
      "uclar": {
-      "az": "Mahviyet",
+      "az": "Hevessizlik",
       "orta": "İhlâs",
-      "fazla": "Övgü sevgisi"
+      "fazla": "Gösteriş"
      },
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi iyiliğin duyulmasını istemiyor, gizli kalsın diyor: orta uca yakın. Başka okumada söylemeyin derken aslında merak edilip övülmeyi umuyor: sağ uca (Övgü sevgisi) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o iyiliği hangi niyetle yaptığımıza bakar. İhlâs, iyiliği yalnız Allahü teâlâ için yapmaktır. Bu ibre ölçekten çok yönü gösterir: bir uçta kendini değersiz sayıp iyilikten çekilmek, öbür uçta alkış beklemek var.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi iyiliğin duyulmasını istemiyor, gizli kalsın diyor: orta uca yakın. Başka okumada söylemeyin derken aslında merak edilip övülmeyi umuyor: sağ uca (Gösteriş) yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o iyiliği hangi niyetle yaptığımıza bakar. İhlâs, iyiliği yalnız Allahü teâlâ için yapmaktır. Bu ibre ölçekten çok yönü gösterir: bir uçta iyilik yapmaya hevesini kaybedip geri çekilmek (kaynaklarda mahviyet), öbür uçta alkış ve övgü beklemek (kaynaklarda övgü sevgisi) var.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -57,55 +59,55 @@ DO.dersKaydet(
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
-      "az": "Mahviyet",
+      "az": "Hevessizlik",
       "orta": "İhlâs",
-      "fazla": "Övgü sevgisi"
+      "fazla": "Gösteriş"
      },
      "yesil": 0.26,
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Kendini değersiz görmek neye benziyor?",
-       "ad": "Mahviyet",
-       "soz": "Ben hiçbir işe yaramam, bırakın yapmayayım.",
+       "soru": "İyilikten geri çekilmek neye benziyor?",
+       "ad": "Hevessizlik",
+       "soz": "Ne yapsam boş, hiç iyilik yapasım yok.",
        "eylem": "egil",
        "zincir": [
-        "İyilik yapma isteği sessizce söner.",
-        "Ona teşekkür etmek isteyenler ne diyeceğini bilemez."
+        "İyilik yapma isteği iyice söner.",
+        "Yardıma ihtiyacı olan arkadaşı yalnız kalır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Ne yapsam boş; zaten kimse fark etmez.",
+          "m": "Yapsam da yapmasam da değişmez; hiç havam yok.",
           "dogru": true,
-          "not": "Mahviyet, kendini hep değersiz görmektir. Kendini böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
+          "not": "Hevessizlik, iyilik yapmaya isteğin kalmayıp geri çekilmektir. Kendini böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
-          "m": "Allahü teâlâ için yapıyorum; görenin önemi yok.",
+          "m": "Karşılık beklemeden yaparım; Allahü teâlâ için olsun.",
           "dogru": false,
           "not": "Bu orta ucun sesi: ihlâsın sesi."
          },
          {
           "m": "Yaptığımı herkes görsün, alkışlasın!",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: övgü sevgisinin sesi."
+          "not": "Bu sağ ucun sesi: gösterişin sesi."
          }
         ]
        },
        "anahtar": {
-        "ad": "Mahviyet",
-        "soz": "Ben"
+        "ad": "Hevessizlik",
+        "soz": "Ne"
        },
        "zincirAnahtar": [
         "İyilik",
-        "Ona"
+        "Yardıma"
        ]
       },
       {
        "zon": "fazla",
        "soru": "Alkış bekleyen kişi neyi kaçırır?",
-       "ad": "Övgü-sevgisi",
+       "ad": "Gösteriş",
        "soz": "Alkış olmadan ben bir şey yapmam; hepiniz görün!",
        "eylem": "isaret",
        "zincir": [
@@ -118,22 +120,22 @@ DO.dersKaydet(
          {
           "m": "Biri görmezse boşa gitmiş olur; herkes bilsin!",
           "dogru": true,
-          "not": "Övgü sevgisi, iyiliği alkış için yapmaktır. İş güzel olsa da niyet insanlara yönelmiş olur."
+          "not": "Gösteriş, iyiliği alkış ve övgü için yapmaktır (kaynaklarda övgü sevgisi). İş güzel olsa da niyet insanlara yönelmiş olur."
          },
          {
-          "m": "Ne yapsam boş; zaten kimse fark etmez.",
+          "m": "Yapsam da yapmasam da değişmez; hiç havam yok.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: mahviyetin sesi."
+          "not": "Bu sol ucun sesi: hevessizliğin sesi."
          },
          {
-          "m": "Allahü teâlâ için yapıyorum; görenin önemi yok.",
+          "m": "Karşılık beklemeden yaparım; Allahü teâlâ için olsun.",
           "dogru": false,
           "not": "Bu orta ucun sesi: ihlâsın sesi."
          }
         ]
        },
        "anahtar": {
-        "ad": "Övgü-sevgisi",
+        "ad": "Gösteriş",
         "soz": "Alkış"
        },
        "zincirAnahtar": [
@@ -145,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "İhlâs",
-       "soz": "Allahü teâlâ için yaptım; kimse bilmese de olur.",
+       "soz": "Karşılık beklemeden yaptım; kimse bilmese de olur.",
        "eylem": "yuru",
        "zincir": [
         "Gönlü hafifler, işi huzurla bırakır.",
@@ -155,25 +157,25 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Allahü teâlâ için yapıyorum; görenin önemi yok.",
+          "m": "Karşılık beklemeden yaparım; Allahü teâlâ için olsun.",
           "dogru": true,
           "not": "İhlâs, iyiliği yalnız Allahü teâlâ için yapmaktır. Gören olsa da olmasa da aynı kalır."
          },
          {
-          "m": "Ne yapsam boş; zaten kimse fark etmez.",
+          "m": "Yapsam da yapmasam da değişmez; hiç havam yok.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: mahviyetin sesi."
+          "not": "Bu sol ucun sesi: hevessizliğin sesi."
          },
          {
           "m": "Yaptığımı herkes görsün, alkışlasın!",
           "dogru": false,
-          "not": "Bu sağ ucun sesi: övgü sevgisinin sesi."
+          "not": "Bu sağ ucun sesi: gösterişin sesi."
          }
         ]
        },
        "anahtar": {
         "ad": "İhlâs",
-        "soz": "Allahü"
+        "soz": "Karşılık"
        },
        "zincirAnahtar": [
         "Gönlü",
@@ -188,37 +190,37 @@ DO.dersKaydet(
      "huy": "İhlâs",
      "baslik": "Sen olsan?",
      "uclar": {
-      "az": "Mahviyet",
+      "az": "Hevessizlik",
       "orta": "İhlâs",
-      "fazla": "Övgü sevgisi"
+      "fazla": "Gösteriş"
      },
      "yesil": 0.26,
      "sonBaslik": "Aynı durum, farklı ibre.",
      "sonMetin": "İki durumda da sahne aynıydı. Fark, hangi iç sesi dinlediğimizdedir. İbre bir karne değil; gün içinde oynar, bu normaldir.",
      "senaryolar": [
       {
-       "id": "bahce",
-       "baslik": "Bahçedeki çöpler",
-       "tetik": "Teneffüste bahçede çöpler var. Etrafta kimse yok ve sen toplayabilirsin.",
+       "id": "odev",
+       "baslik": "Ödev yardımı",
+       "tetik": "Teneffüste arkadaşın ödevde takıldı ve senden yardım istiyor. Sen o konuyu iyi biliyorsun; sınıfta birkaç kişi de var.",
        "secenekler": [
         {
-         "m": "Ben toplasam ne olur, değeri yok; boş veririm.",
+         "m": "Şimdi hiç havamda değilim; yardım etmem, kendisi çözsün.",
          "zon": "az",
-         "sonuc": "Çöpler yerinde kalıyor; küçük bir iyilik yapılmamış oluyor.",
-         "not": "İbre sola kaydı: kendini küçük görmek iyiliğin önüne geçiyor.",
+         "sonuc": "Arkadaşın çaresiz kalıyor; sen de yardım etmenin sevincini kaçırıyorsun.",
+         "not": "İbre sola kaydı: iyiliğe hevessiz kalmak, güzel işin önünü kapatır.",
          "ses": "s1az"
         },
         {
-         "m": "Toplarım ama herkes görsün, öğretmen de bilsin!",
+         "m": "Yardım ederim ama önce herkes bakıp beni alkışlasın!",
          "zon": "fazla",
-         "sonuc": "Çöp toplanıyor ama gönlün bakışlarda kalıyor.",
+         "sonuc": "Yardım ediliyor ama gönlün alkışlarda kalıyor; yardımın tadı kaçıyor.",
          "not": "İbre sağa kaydı: iyilik güzel, fakat niyet alkışa dönmüş.",
          "ses": "s1fa"
         },
         {
-         "m": "Sessizce toplarım; Allahü teâlâ için yapıyorum.",
+         "m": "Yardım ederim; karşılık beklemem, kimse bilmese de olur.",
          "zon": "orta",
-         "sonuc": "Bahçe temizleniyor; kimse görmese de içi rahat.",
+         "sonuc": "Arkadaşın konuyu çözüyor; ikiniz de rahat bir nefes alıyorsunuz.",
          "not": "İbre ortada: iyiliği yalnız Allahü teâlâ için yaptın.",
          "ses": "s1or"
         }
@@ -228,24 +230,24 @@ DO.dersKaydet(
       {
        "id": "tesekkur",
        "baslik": "Sınıfta teşekkür",
-       "tetik": "Sınıf önünde öğretmen, bu güzel işi sen yaptın, teşekkürler, diyor.",
+       "tetik": "Birlikte hazırladığınız sunum bitti. Öğretmen sunumu çok beğendi ve sınıf önünde teşekkür ediyor.",
        "secenekler": [
         {
-         "m": "Önemi yok, ben hiçbir işe yaramam; teşekkür etmeyin.",
+         "m": "Teşekkür kimin umurunda; bir daha böyle işlere katılmam.",
          "zon": "az",
-         "sonuc": "Güzel bir söz karşılığını bulamıyor; kendine de iyi gelmiyor.",
-         "not": "İbre sola kaydı: iyi sözü geri çevirmek, kendini değersiz sanmaktan gelir.",
+         "sonuc": "Arkadaşların bir sonraki işte sensiz kalıyor; sen de katkı vermenin keyfini kaçırıyorsun.",
+         "not": "İbre sola kaydı: iyiliğe hevesi kaybetmek, yeni güzel işlerin kapısını kapatır.",
          "ses": "s2az"
         },
         {
-         "m": "Evet ben yaptım! Herkes beni alkışlasın!",
+         "m": "Bunu en çok ben hazırladım; herkes bilsin, beni alkışlasın!",
          "zon": "fazla",
-         "sonuc": "Alkış geliyor ama arkadaşlarının payı gölgede kalıyor.",
-         "not": "İbre sağa kaydı: alkış beklemek, niyeti dünyaya çevirir.",
+         "sonuc": "Alkış geliyor ama arkadaşlarının emeği gölgede kalıyor.",
+         "not": "İbre sağa kaydı: alkış beklemek, niyeti insanlara çevirir.",
          "ses": "s2fa"
         },
         {
-         "m": "Rica ederim; Allahü teâlâ için yaptım, hepimize hayırlı olsun.",
+         "m": "Rica ederim; hepimize hayırlı olsun.",
          "zon": "orta",
          "sonuc": "Teşekkürü sakince alıyorsun; iş de dostluk da güzel kalıyor.",
          "not": "İbre ortada: övgüyü ne aradın ne de reddettin, niyetin Allahü teâlâ içindi.",
@@ -266,8 +268,8 @@ DO.dersKaydet(
      "alanlar": [
       {
        "id": "az",
-       "ad": "Az · Mahviyet",
-       "aciklama": "Kendini değersiz görmek",
+       "ad": "Az · Hevessizlik",
+       "aciklama": "Hevesini kaybedip geri çekilmek",
        "ikon": "kilit",
        "renk": "#4262B0"
       },
@@ -280,8 +282,8 @@ DO.dersKaydet(
       },
       {
        "id": "fazla",
-       "ad": "Fazla · Övgü sevgisi",
-       "aciklama": "Övülmek için yapmak",
+       "ad": "Fazla · Gösteriş",
+       "aciklama": "Alkış ve övgü için yapmak",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -289,9 +291,9 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Güzel bir iş yapınca “zaten bir işe yaramam” der ve bir daha yardım etmez.",
+       "metin": "Sınıf etkinliğine yardım teklif edilince “canım istemiyor” der ve geri çekilir.",
        "alan": "az",
-       "ipucu": "Kendini değersiz görüyor."
+       "ipucu": "İyilikten hevesini kaybetmiş."
       },
       {
        "id": "k2",
@@ -301,25 +303,25 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Yardımını sessizce yapar, kimse bilmese de aynı güzellikle sürdürür.",
+       "metin": "Elinden geleni yapar; teşekkür gelirse sevinir, gelmese de aynı güzellikle sürdürür.",
        "alan": "orta",
        "ipucu": "Allahü teâlâ için yapıyor."
       },
       {
        "id": "k4",
-       "metin": "Herkes teşekkür ettiği hâlde “benim yaptığımın değeri yok” der.",
+       "metin": "Yardım istenince “hiç havamda değilim” der ve sonraki sefer de uzak durur.",
        "alan": "az",
-       "ipucu": "Kendini küçümsüyor."
+       "ipucu": "İyilik yapmaya hevesi yok."
       },
       {
        "id": "k5",
-       "metin": "Her yardımdan sonra “öğretmene söyleyin, herkes duysun” der.",
+       "metin": "Her yardımdan sonra “bak ne yaptım” diye sınıfa duyurur.",
        "alan": "fazla",
        "ipucu": "Alkış istiyor."
       },
       {
        "id": "k6",
-       "metin": "Bağış kutusuna sessizce harçlık bırakır, kimseye söylemez.",
+       "metin": "Arkadaşının eksik defterini sessizce tamamlar, kimseye söylemez.",
        "alan": "orta",
        "ipucu": "Gizli ve samimi iyilik yapıyor."
       }
@@ -344,7 +346,7 @@ DO.dersKaydet(
        "secenekler": [
         "Bir iyiliği Allahü teâlâ için sessizce yapacağım",
         "Övgü gelince teşekkür edip yoluma devam edeceğim",
-        "Kendimi değersiz hissedersem güvendiğim bir yetişkinle konuşacağım"
+        "Hevesim kaçınca küçük bir iyilikle yeniden başlayacağım"
        ]
       }
      ],
@@ -695,185 +697,175 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.798,
-   "m": "Sol uçta Mahviyet. Ben hiçbir işe yaramam, bırakın yapmayayım. Herkes teşekkür etse de “önemi yok” der ve geri çekilir.",
+   "sure": 9.253,
+   "m": "Sol uçta Hevessizlik. Ne yapsam boş, hiç iyilik yapasım yok. Ödevinde takılan arkadaşı yardım isteyince “şimdi istemiyorum” der.",
    "k": [
     [
      "Sol",
      0.03,
-     0.24
+     0.226
     ],
     [
      "uçta",
-     0.24,
-     0.66
+     0.226,
+     0.617
     ],
     [
-     "Mahviyet.",
-     0.66,
-     1.29
+     "Hevessizlik.",
+     0.617,
+     1.4
     ],
     [
-     "Ben",
-     1.4,
-     1.647
+     "Ne",
+     1.49,
+     1.506
     ],
     [
-     "hiçbir",
-     1.647,
-     2.141
+     "yapsam",
+     1.506,
+     1.539
     ],
     [
-     "işe",
-     2.141,
-     2.634
+     "boş,",
+     1.539,
+     1.555
     ],
     [
-     "yaramam,",
-     2.634,
-     3.375
+     "hiç",
+     2.23,
+     2.499
     ],
     [
-     "bırakın",
-     3.66,
-     4.044
+     "iyilik",
+     2.499,
+     3.308
     ],
     [
-     "yapmayayım.",
-     4.044,
-     4.555
+     "yapasım",
+     3.308,
+     4.116
     ],
     [
-     "Herkes",
-     5.08,
-     5.464
+     "yok.",
+     4.116,
+     4.385
     ],
     [
-     "teşekkür",
-     5.464,
-     6.04
+     "Ödevinde",
+     4.455,
+     5.211
     ],
     [
-     "etse",
-     6.04,
-     6.424
+     "takılan",
+     5.211,
+     5.779
     ],
     [
-     "de",
-     6.424,
-     6.616
+     "arkadaşı",
+     5.779,
+     6.535
     ],
     [
-     "“önemi",
-     6.616,
-     7.192
+     "yardım",
+     6.535,
+     6.913
     ],
     [
-     "yok”",
-     7.192,
-     7.384
+     "isteyince",
+     6.913,
+     7.67
     ],
     [
-     "der",
-     7.384,
-     7.576
+     "“şimdi",
+     7.67,
+     8.048
     ],
     [
-     "ve",
-     7.576,
-     7.768
+     "istemiyorum”",
+     8.048,
+     8.993
     ],
     [
-     "geri",
-     7.768,
-     8.152
-    ],
-    [
-     "çekilir.",
-     8.152,
-     8.728
+     "der.",
+     8.993,
+     9.183
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.705,
-   "m": "Sonra ne olur? İyilik yapma isteği sessizce söner. Ona teşekkür etmek isteyenler ne diyeceğini bilemez.",
+   "sure": 5.824,
+   "m": "Sonra ne olur? İyilik yapma isteği iyice söner. Yardıma ihtiyacı olan arkadaşı yalnız kalır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.268
+     0.29
     ],
     [
      "ne",
-     0.268,
-     0.387
+     0.29,
+     0.42
     ],
     [
      "olur?",
-     0.387,
-     0.625
+     0.42,
+     0.68
     ],
     [
      "İyilik",
-     1.0,
-     1.546
+     1.285,
+     1.715
     ],
     [
      "yapma",
-     1.546,
-     1.91
+     1.715,
+     2.002
     ],
     [
      "isteği",
-     1.91,
-     2.455
+     2.002,
+     2.433
     ],
     [
-     "sessizce",
-     2.455,
-     3.001
+     "iyice",
+     2.433,
+     2.863
     ],
     [
      "söner.",
-     3.001,
-     3.365
+     2.863,
+     3.15
     ],
     [
-     "Ona",
-     3.62,
-     3.922
+     "Yardıma",
+     3.64,
+     4.013
     ],
     [
-     "teşekkür",
-     3.922,
-     4.374
+     "ihtiyacı",
+     4.013,
+     4.511
     ],
     [
-     "etmek",
-     4.374,
-     4.675
+     "olan",
+     4.511,
+     4.759
     ],
     [
-     "isteyenler",
-     4.675,
-     5.278
+     "arkadaşı",
+     4.759,
+     5.257
     ],
     [
-     "ne",
-     5.278,
-     5.429
+     "yalnız",
+     5.257,
+     5.505
     ],
     [
-     "diyeceğini",
-     5.429,
-     6.183
-    ],
-    [
-     "bilemez.",
-     6.183,
-     6.635
+     "kalır.",
+     5.505,
+     5.754
     ]
    ]
   },
@@ -916,108 +908,103 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 9.542,
-   "m": "Sağ uçta Övgü-sevgisi. Alkış olmadan ben bir şey yapmam; hepiniz görün! İyilik yaparken etrafına bakar, gören var mı diye bakınır.",
+   "sure": 8.235,
+   "m": "Sağ uçta Gösteriş. Alkış olmadan ben bir şey yapmam; hepiniz görün! Arkadaşına yardım ettikten sonra herkesin bakıp bakmadığına bakar.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.204
+     0.227
     ],
     [
      "uçta",
-     0.204,
-     0.553
+     0.227,
+     0.62
     ],
     [
-     "Övgü-sevgisi.",
-     0.553,
-     1.425
+     "Gösteriş.",
+     0.62,
+     1.21
     ],
     [
      "Alkış",
-     1.665,
-     2.071
+     1.745,
+     2.038
     ],
     [
      "olmadan",
-     2.071,
-     2.68
+     2.038,
+     2.478
     ],
     [
      "ben",
-     2.68,
-     2.883
+     2.478,
+     2.624
     ],
     [
      "bir",
-     2.883,
-     3.086
+     2.624,
+     2.771
     ],
     [
      "şey",
-     3.086,
-     3.289
+     2.771,
+     2.917
     ],
     [
      "yapmam;",
-     3.289,
-     3.695
+     2.917,
+     3.21
     ],
     [
      "hepiniz",
-     3.695,
-     4.304
+     3.45,
+     3.885
     ],
     [
      "görün!",
-     4.304,
-     4.71
+     3.885,
+     4.175
     ],
     [
-     "İyilik",
-     5.03,
-     5.76
+     "Arkadaşına",
+     4.75,
+     5.461
     ],
     [
-     "yaparken",
-     5.76,
-     6.49
+     "yardım",
+     5.461,
+     5.746
     ],
     [
-     "etrafına",
-     6.49,
-     7.463
+     "ettikten",
+     5.746,
+     6.173
     ],
     [
-     "bakar,",
-     7.463,
-     7.95
+     "sonra",
+     6.173,
+     6.457
     ],
     [
-     "gören",
-     8.21,
-     8.49
+     "herkesin",
+     6.457,
+     6.884
     ],
     [
-     "var",
-     8.49,
-     8.631
+     "bakıp",
+     6.884,
+     7.169
     ],
     [
-     "mı",
-     8.631,
-     8.771
+     "bakmadığına",
+     7.169,
+     7.88
     ],
     [
-     "diye",
-     8.771,
-     9.051
-    ],
-    [
-     "bakınır.",
-     9.051,
-     9.472
+     "bakar.",
+     7.88,
+     8.165
     ]
    ]
   },
@@ -1137,88 +1124,103 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 9.37,
-   "m": "Tam kararında İhlâs. Allahü teâlâ için yaptım; kimse bilmese de olur. Çöpü sessizce toplar, ardına bakmaz.",
+   "sure": 8.14,
+   "m": "Tam kararında İhlâs. Karşılık beklemeden yaptım; kimse bilmese de olur. Arkadaşına ödevde yardım eder, sonra sessizce kendi işine döner.",
    "k": [
     [
      "Tam",
      0.03,
-     0.261
+     0.198
     ],
     [
      "kararında",
-     0.261,
-     1.184
+     0.198,
+     0.869
     ],
     [
      "İhlâs.",
-     1.184,
-     1.645
+     0.869,
+     1.205
     ],
     [
-     "Allahü",
-     2.385,
-     2.933
+     "Karşılık",
+     1.595,
+     1.943
     ],
     [
-     "teâlâ",
-     2.933,
-     3.48
-    ],
-    [
-     "için",
-     3.48,
-     3.845
+     "beklemeden",
+     1.943,
+     2.408
     ],
     [
      "yaptım;",
-     3.845,
-     4.21
+     2.408,
+     2.64
     ],
     [
      "kimse",
-     4.35,
-     4.719
+     2.725,
+     3.071
     ],
     [
      "bilmese",
-     4.719,
-     5.272
+     3.071,
+     3.591
     ],
     [
      "de",
-     5.272,
-     5.456
+     3.591,
+     3.764
     ],
     [
      "olur.",
-     5.456,
-     5.825
+     3.764,
+     4.11
     ],
     [
-     "Çöpü",
-     6.34,
-     6.774
+     "Arkadaşına",
+     4.685,
+     5.283
+    ],
+    [
+     "ödevde",
+     5.283,
+     5.642
+    ],
+    [
+     "yardım",
+     5.642,
+     5.881
+    ],
+    [
+     "eder,",
+     5.881,
+     6.12
+    ],
+    [
+     "sonra",
+     6.3,
+     6.595
     ],
     [
      "sessizce",
-     6.774,
-     7.426
+     6.595,
+     7.037
     ],
     [
-     "toplar,",
-     7.426,
-     7.86
+     "kendi",
+     7.037,
+     7.332
     ],
     [
-     "ardına",
-     8.025,
-     8.79
+     "işine",
+     7.332,
+     7.775
     ],
     [
-     "bakmaz.",
-     8.79,
-     9.3
+     "döner.",
+     7.775,
+     8.07
     ]
    ]
   },
@@ -1338,355 +1340,455 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.827,
-   "m": "Teneffüste bahçede çöpler var. Etrafta kimse yok ve sen toplayabilirsin. Ne yaparsın?",
+   "sure": 6.684,
+   "m": "Teneffüste arkadaşın ödevde takıldı ve senden yardım istiyor. Sen o konuyu iyi biliyorsun; sınıfta birkaç kişi de var. Ne yaparsın?",
    "k": [
     [
      "Teneffüste",
      0.03,
-     0.746
+     0.538
     ],
     [
-     "bahçede",
-     0.746,
-     1.283
+     "arkadaşın",
+     0.538,
+     1.046
     ],
     [
-     "çöpler",
-     1.283,
-     1.641
+     "ödevde",
+     1.046,
+     1.428
     ],
     [
-     "var.",
-     1.641,
-     1.82
-    ],
-    [
-     "Etrafta",
-     2.26,
-     2.771
-    ],
-    [
-     "kimse",
-     2.771,
-     3.112
-    ],
-    [
-     "yok",
-     3.112,
-     3.282
+     "takıldı",
+     1.428,
+     1.809
     ],
     [
      "ve",
-     3.282,
-     3.452
+     1.809,
+     1.936
     ],
     [
-     "sen",
-     3.452,
-     3.623
+     "senden",
+     1.936,
+     2.19
     ],
     [
-     "toplayabilirsin.",
-     3.623,
-     4.645
+     "yardım",
+     2.19,
+     2.444
+    ],
+    [
+     "istiyor.",
+     2.444,
+     2.825
+    ],
+    [
+     "Sen",
+     3.09,
+     3.201
+    ],
+    [
+     "o",
+     3.201,
+     3.313
+    ],
+    [
+     "konuyu",
+     3.313,
+     3.647
+    ],
+    [
+     "iyi",
+     3.647,
+     3.87
+    ],
+    [
+     "biliyorsun;",
+     3.87,
+     4.315
+    ],
+    [
+     "sınıfta",
+     4.615,
+     5.005
+    ],
+    [
+     "birkaç",
+     5.005,
+     5.265
+    ],
+    [
+     "kişi",
+     5.265,
+     5.525
+    ],
+    [
+     "de",
+     5.525,
+     5.655
+    ],
+    [
+     "var.",
+     5.655,
+     5.785
     ],
     [
      "Ne",
-     5.11,
-     5.272
+     6.095,
+     6.225
     ],
     [
      "yaparsın?",
-     5.272,
-     5.757
+     6.225,
+     6.614
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 3.339,
-   "m": "Çöpler yerinde kalıyor; küçük bir iyilik yapılmamış oluyor.",
+   "sure": 3.656,
+   "m": "Arkadaşın çaresiz kalıyor; sen de yardım etmenin sevincini kaçırıyorsun.",
    "k": [
     [
-     "Çöpler",
+     "Arkadaşın",
      0.03,
-     0.321
+     0.532
     ],
     [
-     "yerinde",
-     0.321,
-     0.758
+     "çaresiz",
+     0.532,
+     0.908
     ],
     [
      "kalıyor;",
-     0.758,
-     1.195
+     0.908,
+     1.285
     ],
     [
-     "küçük",
-     1.535,
-     1.802
+     "sen",
+     1.615,
+     1.738
     ],
     [
-     "bir",
-     1.802,
-     1.935
+     "de",
+     1.738,
+     1.861
     ],
     [
-     "iyilik",
-     1.935,
-     2.335
+     "yardım",
+     1.861,
+     2.108
     ],
     [
-     "yapılmamış",
-     2.335,
-     2.869
+     "etmenin",
+     2.108,
+     2.477
     ],
     [
-     "oluyor.",
-     2.869,
-     3.269
+     "sevincini",
+     2.477,
+     2.97
+    ],
+    [
+     "kaçırıyorsun.",
+     2.97,
+     3.586
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.489,
-   "m": "Çöp toplanıyor ama gönlün bakışlarda kalıyor.",
+   "sure": 5.21,
+   "m": "Yardım ediliyor ama gönlün alkışlarda kalıyor; yardımın tadı kaçıyor.",
    "k": [
     [
-     "Çöp",
+     "Yardım",
      0.03,
-     0.242
+     0.398
     ],
     [
-     "toplanıyor",
-     0.242,
-     1.089
+     "ediliyor",
+     0.398,
+     1.135
     ],
     [
      "ama",
-     1.089,
-     1.513
+     1.135,
+     1.503
     ],
     [
      "gönlün",
-     1.513,
-     1.936
+     1.503,
+     1.871
     ],
     [
-     "bakışlarda",
-     1.936,
-     2.783
+     "alkışlarda",
+     1.871,
+     2.608
     ],
     [
-     "kalıyor.",
-     2.783,
-     3.419
+     "kalıyor;",
+     2.608,
+     3.16
+    ],
+    [
+     "yardımın",
+     3.57,
+     4.159
+    ],
+    [
+     "tadı",
+     4.159,
+     4.552
+    ],
+    [
+     "kaçıyor.",
+     4.552,
+     5.14
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 2.955,
-   "m": "Bahçe temizleniyor; kimse görmese de içi rahat.",
+   "sure": 3.204,
+   "m": "Arkadaşın konuyu çözüyor; ikiniz de rahat bir nefes alıyorsunuz.",
    "k": [
     [
-     "Bahçe",
+     "Arkadaşın",
      0.03,
-     0.297
+     0.488
     ],
     [
-     "temizleniyor;",
-     0.297,
-     0.965
+     "konuyu",
+     0.488,
+     0.832
     ],
     [
-     "kimse",
-     1.25,
-     1.577
+     "çözüyor;",
+     0.832,
+     1.175
     ],
     [
-     "görmese",
-     1.577,
-     2.068
+     "ikiniz",
+     1.46,
+     1.819
     ],
     [
      "de",
-     2.068,
-     2.231
+     1.819,
+     1.938
     ],
     [
-     "içi",
-     2.231,
-     2.558
+     "rahat",
+     1.938,
+     2.178
     ],
     [
-     "rahat.",
-     2.558,
-     2.885
+     "bir",
+     2.178,
+     2.297
+    ],
+    [
+     "nefes",
+     2.297,
+     2.536
+    ],
+    [
+     "alıyorsunuz.",
+     2.536,
+     3.134
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.936,
-   "m": "Sınıf önünde öğretmen, bu güzel işi sen yaptın, teşekkürler, diyor. Ne yaparsın?",
+   "sure": 6.231,
+   "m": "Birlikte hazırladığınız sunum bitti. Öğretmen sunumu çok beğendi ve sınıf önünde teşekkür ediyor. Ne yaparsın?",
    "k": [
     [
-     "Sınıf",
+     "Birlikte",
      0.03,
-     0.309
+     0.368
+    ],
+    [
+     "hazırladığınız",
+     0.368,
+     1.044
+    ],
+    [
+     "sunum",
+     1.044,
+     1.27
+    ],
+    [
+     "bitti.",
+     1.27,
+     1.495
+    ],
+    [
+     "Öğretmen",
+     1.89,
+     2.343
+    ],
+    [
+     "sunumu",
+     2.343,
+     2.797
+    ],
+    [
+     "çok",
+     2.797,
+     2.948
+    ],
+    [
+     "beğendi",
+     2.948,
+     3.401
+    ],
+    [
+     "ve",
+     3.401,
+     3.553
+    ],
+    [
+     "sınıf",
+     3.553,
+     3.855
     ],
     [
      "önünde",
-     0.309,
-     0.727
+     3.855,
+     4.308
     ],
     [
-     "öğretmen,",
-     0.727,
-     1.145
+     "teşekkür",
+     4.308,
+     4.762
     ],
     [
-     "bu",
-     1.355,
-     1.52
-    ],
-    [
-     "güzel",
-     1.52,
-     1.85
-    ],
-    [
-     "işi",
-     1.85,
-     2.18
-    ],
-    [
-     "sen",
-     2.18,
-     2.345
-    ],
-    [
-     "yaptın,",
-     2.345,
-     2.675
-    ],
-    [
-     "teşekkürler,",
-     2.87,
-     3.795
-    ],
-    [
-     "diyor.",
-     4.265,
-     4.465
+     "ediyor.",
+     4.762,
+     5.215
     ],
     [
      "Ne",
-     4.465,
-     4.565
+     5.6,
+     5.74
     ],
     [
      "yaparsın?",
-     4.565,
-     4.866
+     5.74,
+     6.161
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.708,
-   "m": "Güzel bir söz karşılığını bulamıyor; kendine de iyi gelmiyor.",
+   "sure": 5.075,
+   "m": "Arkadaşların bir sonraki işte sensiz kalıyor; sen de katkı vermenin keyfini kaçırıyorsun.",
    "k": [
     [
-     "Güzel",
+     "Arkadaşların",
      0.03,
-     0.328
+     0.805
     ],
     [
      "bir",
-     0.328,
-     0.478
+     0.805,
+     0.96
     ],
     [
-     "söz",
-     0.478,
-     0.627
+     "sonraki",
+     0.96,
+     1.425
     ],
     [
-     "karşılığını",
-     0.627,
-     1.373
+     "işte",
+     1.425,
+     1.735
     ],
     [
-     "bulamıyor;",
-     1.373,
-     1.97
+     "sensiz",
+     1.735,
+     2.045
     ],
     [
-     "kendine",
-     2.405,
-     2.816
+     "kalıyor;",
+     2.045,
+     2.51
+    ],
+    [
+     "sen",
+     2.75,
+     2.9
     ],
     [
      "de",
-     2.816,
-     2.953
+     2.9,
+     3.051
     ],
     [
-     "iyi",
-     2.953,
-     3.227
+     "katkı",
+     3.051,
+     3.351
     ],
     [
-     "gelmiyor.",
-     3.227,
-     3.638
+     "vermenin",
+     3.351,
+     3.802
+    ],
+    [
+     "keyfini",
+     3.802,
+     4.253
+    ],
+    [
+     "kaçırıyorsun.",
+     4.253,
+     5.005
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.061,
-   "m": "Alkış geliyor ama arkadaşlarının payı gölgede kalıyor.",
+   "sure": 3.27,
+   "m": "Alkış geliyor ama arkadaşlarının emeği gölgede kalıyor.",
    "k": [
     [
      "Alkış",
      0.03,
-     0.312
+     0.318
     ],
     [
      "geliyor",
-     0.312,
-     0.735
+     0.318,
+     0.75
     ],
     [
      "ama",
-     0.735,
-     1.017
+     0.75,
+     1.039
     ],
     [
      "arkadaşlarının",
-     1.017,
-     1.863
+     1.039,
+     1.903
     ],
     [
-     "payı",
-     1.863,
-     2.145
+     "emeği",
+     1.903,
+     2.335
     ],
     [
      "gölgede",
-     2.145,
-     2.568
+     2.335,
+     2.768
     ],
     [
      "kalıyor.",
-     2.568,
-     2.991
+     2.768,
+     3.2
     ]
    ]
   },

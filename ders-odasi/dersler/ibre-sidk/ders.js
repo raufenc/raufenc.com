@@ -1,11 +1,13 @@
 /* İbremetre · Sıdk — az, kararında, fazla. Video yok: açılış, tahmin, kapılar, senaryo kodla çizilir; anlatım ses/ klasöründeki kısa kayıtlarla (Emmett) kelimeye kilitli oynar.
-   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (Nifâk · Sıdk · Patavatsızlık). Taslak: hoca onayı bekliyor. */
+   İçerik: TACEV Ahlak Müfredatı, "İslam ahlakı kutuplar 2.0" (İkiyüzlülük · Sıdk · Patavatsızlık). Taslak: hoca onayı bekliyor. */
 DO.dersKaydet(
 {
  "id": "ibre-sidk",
  "ad": "Sıdk: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "soz",
+ "muzik": "soz",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -22,9 +24,9 @@ DO.dersKaydet(
      "huy": "Sıdk",
      "huyAnahtar": "Sıdk",
      "olculen": "Sözümle davranışım arasındaki uyum",
-     "kanca": "Herkese istediğini söyledim.",
+     "kanca": "Kime ne sorduysa, istediğini söyledim.",
      "uclar": {
-      "az": "Nifâk",
+      "az": "İkiyüzlülük",
       "orta": "Sıdk",
       "fazla": "Patavatsızlık"
      },
@@ -35,17 +37,17 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Sıdk",
-     "cumle": "Herkese istediğini söyledim.",
+     "cumle": "Kime ne sorduysa, istediğini söyledim.",
      "uclar": {
-      "az": "Nifâk",
+      "az": "İkiyüzlülük",
       "orta": "Sıdk",
       "fazla": "Patavatsızlık"
      },
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi herkese hoşuna gidecek farklı şeyler söylüyor: sol uca (Nifâk) yakın. Başka okumada sorulan herkese aynı doğruyu söylüyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, sözümüzle içimizin uyumuna bakar. Sıdk; dürüst olmak, yalan söylememek ve göründüğümüz gibi olmaktır. Doğruyu söylemek için kırıcı olmak gerekmez; patavatsızlık, sözü hiç tartmadan söylemektir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi herkese hoşuna gidecek farklı şeyler söylüyor: sol uca (İkiyüzlülük) yakın. Başka okumada kişi kime ne sorulduysa gerçek düşüncesini söylüyor: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, sözümüzle içimizin uyumuna bakar. Sıdk; dürüst olmak, yalan söylememek ve göründüğümüz gibi olmaktır. İkiyüzlülük, kaynak listede Nifâk diye geçer; yüzüne başka, arkasından başka konuşmaktır. Doğruyu söylemek için kırıcı olmak gerekmez; patavatsızlık, sözü hiç tartmadan söylemektir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -57,7 +59,7 @@ DO.dersKaydet(
      "baslik": "Üç kapı",
      "yonerge": "Merak ettiğin kapıyı aç. Her kapıda kısa bir sahne var; bir kapıdan sonra devam edebilirsin.",
      "uclar": {
-      "az": "Nifâk",
+      "az": "İkiyüzlülük",
       "orta": "Sıdk",
       "fazla": "Patavatsızlık"
      },
@@ -66,12 +68,12 @@ DO.dersKaydet(
       {
        "zon": "az",
        "soru": "İki yüzlü davranmak neye benziyor?",
-       "ad": "Nifâk",
+       "ad": "İkiyüzlülük",
        "soz": "Yüzüne başka, arkasından başka söylerim.",
        "eylem": "el-salla",
        "zincir": [
         "Arkadaşları kimin neyi düşündüğünü anlayamaz.",
-        "Sözlerine güven azalır ve kimse ona inanmaz."
+        "Sözlerine olan güven yavaş yavaş azalır."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -79,10 +81,10 @@ DO.dersKaydet(
          {
           "m": "Herkes bana kızmasın; ne istiyorsa onu söyleyeyim.",
           "dogru": true,
-          "not": "Nifâk, iki yüzlü olmak ve göründüğü gibi olmamaktır. Söz özle uyuşmayınca güven kaybolur."
+          "not": "İkiyüzlülük, iki yüzlü olmak ve göründüğü gibi olmamaktır. Söz özle uyuşmayınca güven azalır."
          },
          {
-          "m": "Doğruyu söyleyeyim; nazik olmak da benim elimde.",
+          "m": "Ne düşünüyorsam her yerde aynısını söyleyeyim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: sıdkın sesi."
          },
@@ -94,7 +96,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Nifâk",
+        "ad": "İkiyüzlülük",
         "soz": "Yüzüne"
        },
        "zincirAnahtar": [
@@ -123,10 +125,10 @@ DO.dersKaydet(
          {
           "m": "Herkes bana kızmasın; ne istiyorsa onu söyleyeyim.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: nifâkın sesi."
+          "not": "Bu sol ucun sesi: ikiyüzlülüğün sesi."
          },
          {
-          "m": "Doğruyu söyleyeyim; nazik olmak da benim elimde.",
+          "m": "Ne düşünüyorsam her yerde aynısını söyleyeyim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: sıdkın sesi."
          }
@@ -145,24 +147,24 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Sıdk",
-       "soz": "Doğrusunu söyleyeyim, ama nazikçe.",
+       "soz": "Sana ne diyorsam, arkandan da aynısını derim.",
        "eylem": "konus",
        "zincir": [
         "Arkadaşları ona güvenir.",
-        "Söylediği söz her yerde aynı olduğu için kimse şüphe etmez."
+        "Söylediği söz her yerde aynı olduğu için sözüne güvenilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Doğruyu söyleyeyim; nazik olmak da benim elimde.",
+          "m": "Ne düşünüyorsam her yerde aynısını söyleyeyim.",
           "dogru": true,
-          "not": "Sıdk, dürüst olmak ve yalan söylememektir. Doğruyu güzel bir dille söylemektir."
+          "not": "Sıdk, dürüst olmak, yalan söylememek ve göründüğü gibi olmaktır."
          },
          {
           "m": "Herkes bana kızmasın; ne istiyorsa onu söyleyeyim.",
           "dogru": false,
-          "not": "Bu sol ucun sesi: nifâkın sesi."
+          "not": "Bu sol ucun sesi: ikiyüzlülüğün sesi."
          },
          {
           "m": "Aklıma geleni hemen söyleyeyim, ne olacak?",
@@ -173,7 +175,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Sıdk",
-        "soz": "Doğrusunu"
+        "soz": "Sana"
        },
        "zincirAnahtar": [
         "Arkadaşları",
@@ -188,7 +190,7 @@ DO.dersKaydet(
      "huy": "Sıdk",
      "baslik": "Sen olsan?",
      "uclar": {
-      "az": "Nifâk",
+      "az": "İkiyüzlülük",
       "orta": "Sıdk",
       "fazla": "Patavatsızlık"
      },
@@ -199,12 +201,12 @@ DO.dersKaydet(
       {
        "id": "resim",
        "baslik": "Arkadaşın resmi",
-       "tetik": "Arkadaşın yaptığı resmi gösterip, beğendin mi, diye soruyor. Sen resmi pek beğenmedin.",
+       "tetik": "Arkadaşın yaptığı resmi gösterip “beğendin mi?” diye soruyor. Sen resmi pek beğenmedin.",
        "secenekler": [
         {
          "m": "“Güzel olmuş” derim, sonra başkalarına “berbattı” derim.",
          "zon": "az",
-         "sonuc": "Arkadaşın bunu duyuyor ve sana güvenmeyi bırakıyor.",
+         "sonuc": "Arkadaşın bunu duyuyor ve sana güvenmekte zorlanıyor.",
          "not": "İbre sola kaydı: yüzüne başka, arkasından başka söylemek güveni kırar.",
          "ses": "s1az"
         },
@@ -216,9 +218,9 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Şurası güzel olmuş; şurasını değiştirsen daha iyi olur.",
+         "m": "Dürüst olayım: şurayı pek sevmedim ama renkleri güzel.",
          "zon": "orta",
-         "sonuc": "Arkadaşın seni dinliyor; hem iyi yanını hem geliştireceği yeri öğreniyor.",
+         "sonuc": "Arkadaşın bunun gerçek düşüncen olduğunu biliyor ve sözüne güveniyor.",
          "not": "İbre ortada: yalansız ve kırıcı olmayan bir söz seçtin.",
          "ses": "s1or"
         }
@@ -233,19 +235,19 @@ DO.dersKaydet(
         {
          "m": "“Bilmiyorum” derim, sonra arkadaşlara başka anlatırım.",
          "zon": "az",
-         "sonuc": "Gerçek öğrenilince hem sana hem anlattıklarına güven kalmıyor.",
+         "sonuc": "Gerçek öğrenilince hem sana hem anlattıklarına güven azalıyor.",
          "not": "İbre sola kaydı: göründüğü gibi olmamak, güveni kaybettiriyor.",
          "ses": "s2az"
         },
         {
-         "m": "Kim ne yaptıysa hepsini yüksek sesle sayarım.",
+         "m": "Aklıma gelen her şeyi, kimi üzeceğine bakmadan söylerim.",
          "zon": "fazla",
-         "sonuc": "Sınıf gerginleşiyor; kimse seni dinlemek istemiyor.",
+         "sonuc": "Sınıf gerginleşiyor; sözlerin dinlenmiyor.",
          "not": "İbre sağa kaydı: sözü tartmadan söylemek sınıfı gerginleştiriyor.",
          "ses": "s2fa"
         },
         {
-         "m": "Ben de oradaydım; olanı olduğu gibi anlatırım.",
+         "m": "Ben de sebep oldum; olanı olduğu gibi anlatırım.",
          "zon": "orta",
          "sonuc": "Gerçek anlaşılıyor; öğretmen dürüstlüğüne güveniyor.",
          "not": "İbre ortada: doğruyu açıkça ve kimseyi suçlamadan söyledin.",
@@ -266,7 +268,7 @@ DO.dersKaydet(
      "alanlar": [
       {
        "id": "az",
-       "ad": "Az · Nifâk",
+       "ad": "Az · İkiyüzlülük",
        "aciklama": "Göründüğü gibi olmamak",
        "ikon": "kilit",
        "renk": "#4262B0"
@@ -274,7 +276,7 @@ DO.dersKaydet(
       {
        "id": "orta",
        "ad": "Kararında · Sıdk",
-       "aciklama": "Dürüst ve nazik olmak",
+       "aciklama": "Sözle içi aynı olmak",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -301,9 +303,9 @@ DO.dersKaydet(
       },
       {
        "id": "k3",
-       "metin": "Sorulunca gerçeği söyler, ama kırmadan söyler.",
+       "metin": "Ne düşünüyorsa yüzüne de arkasından da aynısını söyler.",
        "alan": "orta",
-       "ipucu": "Hem doğru hem nazik."
+       "ipucu": "Sözü ve içi aynı."
       },
       {
        "id": "k4",
@@ -313,7 +315,7 @@ DO.dersKaydet(
       },
       {
        "id": "k5",
-       "metin": "Arkadaşının hatasını herkesin içinde yüksek sesle söyler.",
+       "metin": "Arkadaşının resmine bakıp aklına geleni olduğu gibi söyler.",
        "alan": "fazla",
        "ipucu": "Sözü tartmadan söylüyor."
       },
@@ -344,7 +346,7 @@ DO.dersKaydet(
        "secenekler": [
         "Yüzüne söylemeyeceğimi arkasından da söylemeyeceğim",
         "Söylemeden önce bir saniye düşüneceğim",
-        "Doğruyu söylerken nazik bir cümle seçeceğim"
+        "Doğruyu söylerken kırıcı olmayan bir cümle seçeceğim"
        ]
       }
      ],
@@ -364,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Sıdk",
-       "metin": "dürüst ve nazik olmak",
+       "metin": "sözle içinin uyumu",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -383,23 +385,33 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 1.685,
-   "m": "Herkese istediğini söyledim.",
+   "sure": 2.729,
+   "m": "Kime ne sorduysa, istediğini söyledim.",
    "k": [
     [
-     "Herkese",
+     "Kime",
      0.03,
-     0.462
+     0.442
+    ],
+    [
+     "ne",
+     0.442,
+     0.647
+    ],
+    [
+     "sorduysa,",
+     0.647,
+     1.265
     ],
     [
      "istediğini",
-     0.462,
-     1.182
+     1.46,
+     2.209
     ],
     [
      "söyledim.",
-     1.182,
-     1.615
+     2.209,
+     2.659
     ]
    ]
   },
@@ -695,165 +707,160 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.38,
-   "m": "Sol uçta Nifâk. Yüzüne başka, arkasından başka söylerim. Karşısındaki kişiye göre, içinden geçmeyen şeyler söyler.",
+   "sure": 9.103,
+   "m": "Sol uçta İkiyüzlülük. Yüzüne başka, arkasından başka söylerim. Karşısındaki kişiye göre, içinden geçmeyen şeyler söyler.",
    "k": [
     [
      "Sol",
      0.03,
-     0.179
+     0.224
     ],
     [
      "uçta",
-     0.179,
-     0.477
+     0.224,
+     0.611
     ],
     [
-     "Nifâk.",
-     0.477,
-     0.775
+     "İkiyüzlülük.",
+     0.611,
+     1.58
     ],
     [
      "Yüzüne",
-     0.99,
-     1.335
+     1.66,
+     2.659
     ],
     [
      "başka,",
-     1.335,
-     1.565
+     2.659,
+     3.325
     ],
     [
      "arkasından",
-     2.15,
-     3.246
+     3.445,
+     4.069
     ],
     [
      "başka",
-     3.246,
-     3.793
+     4.069,
+     4.382
     ],
     [
      "söylerim.",
-     3.793,
-     4.615
+     4.382,
+     4.85
     ],
     [
      "Karşısındaki",
-     5.17,
-     5.838
+     5.33,
+     6.082
     ],
     [
      "kişiye",
-     5.838,
-     6.238
+     6.082,
+     6.534
     ],
     [
      "göre,",
-     6.238,
-     6.505
+     6.534,
+     6.835
     ],
     [
      "içinden",
-     6.71,
-     7.19
+     7.1,
+     7.68
     ],
     [
      "geçmeyen",
-     7.19,
-     7.67
+     7.68,
+     8.26
     ],
     [
      "şeyler",
-     7.67,
-     7.99
+     8.26,
+     8.647
     ],
     [
      "söyler.",
-     7.99,
-     8.31
+     8.647,
+     9.033
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.929,
-   "m": "Sonra ne olur? Arkadaşları kimin neyi düşündüğünü anlayamaz. Sözlerine güven azalır ve kimse ona inanmaz.",
+   "sure": 6.173,
+   "m": "Sonra ne olur? Arkadaşları kimin neyi düşündüğünü anlayamaz. Sözlerine olan güven yavaş yavaş azalır.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.324
+     0.274
     ],
     [
      "ne",
-     0.324,
-     0.471
+     0.274,
+     0.396
     ],
     [
      "olur?",
-     0.471,
-     0.765
+     0.396,
+     0.64
     ],
     [
      "Arkadaşları",
-     1.18,
-     1.884
+     1.01,
+     1.632
     ],
     [
      "kimin",
-     1.884,
-     2.166
+     1.632,
+     1.881
     ],
     [
      "neyi",
-     2.166,
-     2.448
+     1.881,
+     2.13
     ],
     [
      "düşündüğünü",
-     2.448,
-     3.152
+     2.13,
+     2.752
     ],
     [
      "anlayamaz.",
-     3.152,
-     3.715
+     2.752,
+     3.25
     ],
     [
      "Sözlerine",
-     4.125,
-     4.768
+     3.54,
+     4.223
+    ],
+    [
+     "olan",
+     4.223,
+     4.565
     ],
     [
      "güven",
-     4.768,
-     5.09
+     4.565,
+     4.907
     ],
     [
-     "azalır",
-     5.09,
-     5.572
+     "yavaş",
+     4.907,
+     5.249
     ],
     [
-     "ve",
-     5.572,
-     5.733
+     "yavaş",
+     5.249,
+     5.59
     ],
     [
-     "kimse",
-     5.733,
-     6.055
-    ],
-    [
-     "ona",
-     6.055,
-     6.376
-    ],
-    [
-     "inanmaz.",
-     6.376,
-     6.859
+     "azalır.",
+     5.59,
+     6.103
     ]
    ]
   },
@@ -1087,175 +1094,180 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 8.303,
-   "m": "Tam kararında Sıdk. Doğrusunu söyleyeyim, ama nazikçe. Yalan söylemez; doğruyu uygun zamanda ve güzel sözle söyler.",
+   "sure": 7.853,
+   "m": "Tam kararında Sıdk. Sana ne diyorsam, arkandan da aynısını derim. Yalan söylemez; yüzüne ve arkasından aynı sözü söyler.",
    "k": [
     [
      "Tam",
      0.03,
-     0.19
+     0.2
     ],
     [
      "kararında",
-     0.19,
-     0.83
+     0.2,
+     0.88
     ],
     [
      "Sıdk.",
-     0.83,
-     0.99
+     0.88,
+     1.05
     ],
     [
-     "Doğrusunu",
-     1.06,
-     2.002
+     "Sana",
+     1.43,
+     1.752
     ],
     [
-     "söyleyeyim,",
-     2.002,
-     2.945
+     "ne",
+     1.752,
+     1.913
     ],
     [
-     "ama",
-     3.085,
-     3.399
+     "diyorsam,",
+     1.913,
+     2.395
     ],
     [
-     "nazikçe.",
-     3.399,
-     3.87
+     "arkandan",
+     2.61,
+     3.024
+    ],
+    [
+     "da",
+     3.024,
+     3.162
+    ],
+    [
+     "aynısını",
+     3.162,
+     3.714
+    ],
+    [
+     "derim.",
+     3.714,
+     3.99
     ],
     [
      "Yalan",
-     4.32,
-     4.676
+     4.465,
+     4.789
     ],
     [
      "söylemez;",
-     4.676,
-     5.21
+     4.789,
+     5.275
     ],
     [
-     "doğruyu",
-     5.345,
-     5.923
-    ],
-    [
-     "uygun",
-     5.923,
-     6.308
-    ],
-    [
-     "zamanda",
-     6.308,
-     6.885
+     "yüzüne",
+     5.515,
+     6.001
     ],
     [
      "ve",
-     6.885,
-     7.078
+     6.001,
+     6.163
     ],
     [
-     "güzel",
-     7.078,
-     7.463
+     "arkasından",
+     6.163,
+     6.811
     ],
     [
-     "sözle",
-     7.463,
-     7.848
+     "aynı",
+     6.811,
+     7.135
+    ],
+    [
+     "sözü",
+     7.135,
+     7.459
     ],
     [
      "söyler.",
-     7.848,
-     8.233
+     7.459,
+     7.783
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 6.201,
-   "m": "Sonra ne olur? Arkadaşları ona güvenir. Söylediği söz her yerde aynı olduğu için kimse şüphe etmez.",
+   "sure": 6.506,
+   "m": "Sonra ne olur? Arkadaşları ona güvenir. Söylediği söz her yerde aynı olduğu için sözüne güvenilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.292
+     0.274
     ],
     [
      "ne",
-     0.292,
-     0.423
+     0.274,
+     0.396
     ],
     [
      "olur?",
-     0.423,
-     0.685
+     0.396,
+     0.64
     ],
     [
      "Arkadaşları",
-     1.145,
-     1.735
+     1.29,
+     1.897
     ],
     [
      "ona",
-     1.735,
-     1.971
+     1.897,
+     2.14
     ],
     [
      "güvenir.",
-     1.971,
-     2.325
+     2.14,
+     2.505
     ],
     [
      "Söylediği",
-     2.665,
-     3.325
+     2.875,
+     3.522
     ],
     [
      "söz",
-     3.325,
-     3.49
+     3.522,
+     3.684
     ],
     [
      "her",
-     3.49,
-     3.655
+     3.684,
+     3.846
     ],
     [
      "yerde",
-     3.655,
-     3.985
+     3.846,
+     4.17
     ],
     [
      "aynı",
-     3.985,
-     4.315
+     4.17,
+     4.493
     ],
     [
      "olduğu",
-     4.315,
-     4.81
+     4.493,
+     4.979
     ],
     [
      "için",
-     4.81,
-     5.14
+     4.979,
+     5.303
     ],
     [
-     "kimse",
-     5.14,
-     5.47
+     "sözüne",
+     5.303,
+     5.788
     ],
     [
-     "şüphe",
-     5.47,
-     5.801
-    ],
-    [
-     "etmez.",
-     5.801,
-     6.131
+     "güvenilir.",
+     5.788,
+     6.436
     ]
    ]
   },
@@ -1298,120 +1310,120 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.977,
-   "m": "Arkadaşın yaptığı resmi gösterip, beğendin mi, diye soruyor. Sen resmi pek beğenmedin. Ne yaparsın?",
+   "sure": 6.1,
+   "m": "Arkadaşın yaptığı resmi gösterip beğendin mi? diye soruyor. Sen resmi pek beğenmedin. Ne yaparsın?",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.543
+     0.754
     ],
     [
      "yaptığı",
-     0.543,
-     0.928
+     0.754,
+     1.297
     ],
     [
      "resmi",
-     0.928,
-     1.185
+     1.297,
+     1.658
     ],
     [
-     "gösterip,",
-     1.185,
-     1.57
+     "gösterip",
+     1.658,
+     2.201
     ],
     [
      "beğendin",
-     1.89,
-     2.76
+     2.201,
+     2.744
     ],
     [
-     "mi,",
-     2.76,
-     3.05
+     "mi?",
+     2.744,
+     2.925
     ],
     [
      "diye",
-     3.595,
-     3.893
+     3.145,
+     3.181
     ],
     [
      "soruyor.",
-     3.893,
-     4.34
+     3.181,
+     3.235
     ],
     [
      "Sen",
-     4.41,
-     4.476
+     3.425,
+     3.636
     ],
     [
      "resmi",
-     4.476,
-     4.609
+     3.636,
+     4.057
     ],
     [
      "pek",
-     4.609,
-     4.675
+     4.057,
+     4.268
     ],
     [
      "beğenmedin.",
-     4.675,
-     4.94
+     4.268,
+     5.11
     ],
     [
      "Ne",
-     5.34,
-     5.482
+     5.465,
+     5.606
     ],
     [
      "yaparsın?",
-     5.482,
-     5.907
+     5.606,
+     6.03
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 3.194,
-   "m": "Arkadaşın bunu duyuyor ve sana güvenmeyi bırakıyor.",
+   "sure": 3.019,
+   "m": "Arkadaşın bunu duyuyor ve sana güvenmekte zorlanıyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.649
+     0.614
     ],
     [
      "bunu",
-     0.649,
-     0.958
+     0.614,
+     0.906
     ],
     [
      "duyuyor",
-     0.958,
-     1.422
+     0.906,
+     1.343
     ],
     [
      "ve",
-     1.422,
-     1.577
+     1.343,
+     1.489
     ],
     [
      "sana",
-     1.577,
-     1.886
+     1.489,
+     1.781
     ],
     [
-     "güvenmeyi",
-     1.886,
-     2.505
+     "güvenmekte",
+     1.781,
+     2.365
     ],
     [
-     "bırakıyor.",
-     2.505,
-     3.124
+     "zorlanıyor.",
+     2.365,
+     2.949
     ]
    ]
   },
@@ -1454,58 +1466,53 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 5.015,
-   "m": "Arkadaşın seni dinliyor; hem iyi yanını hem geliştireceği yeri öğreniyor.",
+   "sure": 3.65,
+   "m": "Arkadaşın bunun gerçek düşüncen olduğunu biliyor ve sözüne güveniyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.579
+     0.576
     ],
     [
-     "seni",
-     0.579,
-     0.853
+     "bunun",
+     0.576,
+     0.849
     ],
     [
-     "dinliyor;",
-     0.853,
-     1.265
+     "gerçek",
+     0.849,
+     1.122
     ],
     [
-     "hem",
-     1.575,
-     1.752
+     "düşüncen",
+     1.122,
+     1.532
     ],
     [
-     "iyi",
-     1.752,
-     2.107
+     "olduğunu",
+     1.532,
+     2.078
     ],
     [
-     "yanını",
-     2.107,
-     2.639
+     "biliyor",
+     2.078,
+     2.488
     ],
     [
-     "hem",
-     2.639,
-     2.817
+     "ve",
+     2.488,
+     2.624
     ],
     [
-     "geliştireceği",
-     2.817,
-     3.881
+     "sözüne",
+     2.624,
+     3.034
     ],
     [
-     "yeri",
-     3.881,
-     4.236
-    ],
-    [
-     "öğreniyor.",
-     4.236,
-     4.945
+     "güveniyor.",
+     3.034,
+     3.58
     ]
    ]
   },
@@ -1583,85 +1590,75 @@ DO.dersKaydet(
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 4.309,
-   "m": "Gerçek öğrenilince hem sana hem anlattıklarına güven kalmıyor.",
+   "sure": 3.846,
+   "m": "Gerçek öğrenilince hem sana hem anlattıklarına güven azalıyor.",
    "k": [
     [
      "Gerçek",
      0.03,
-     0.413
+     0.356
     ],
     [
      "öğrenilince",
-     0.413,
-     1.369
+     0.356,
+     1.17
     ],
     [
      "hem",
-     1.369,
-     1.56
+     1.17,
+     1.333
     ],
     [
      "sana",
-     1.56,
-     1.943
+     1.333,
+     1.659
     ],
     [
      "hem",
-     1.943,
-     2.134
+     1.659,
+     1.822
     ],
     [
      "anlattıklarına",
-     2.134,
-     3.282
+     1.822,
+     2.799
     ],
     [
      "güven",
-     3.282,
-     3.665
+     2.799,
+     3.125
     ],
     [
-     "kalmıyor.",
-     3.665,
-     4.239
+     "azalıyor.",
+     3.125,
+     3.776
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.104,
-   "m": "Sınıf gerginleşiyor; kimse seni dinlemek istemiyor.",
+   "sure": 2.462,
+   "m": "Sınıf gerginleşiyor; sözlerin dinlenmiyor.",
    "k": [
     [
      "Sınıf",
      0.03,
-     0.323
+     0.319
     ],
     [
      "gerginleşiyor;",
-     0.323,
-     1.055
+     0.319,
+     1.04
     ],
     [
-     "kimse",
-     1.425,
-     1.717
+     "sözlerin",
+     1.36,
+     1.802
     ],
     [
-     "seni",
-     1.717,
-     2.01
-    ],
-    [
-     "dinlemek",
-     2.01,
-     2.449
-    ],
-    [
-     "istemiyor.",
-     2.449,
-     3.034
+     "dinlenmiyor.",
+     1.802,
+     2.392
     ]
    ]
   },
@@ -1885,128 +1882,133 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 10.067,
-   "m": "Bu cümle bilerek çift anlamlı. Herkese hoşuna gideni söyleyen biri diyorsa sol uca yakın. Sorulan herkese aynı doğruyu söyleyen biri diyorsa orta uca yakın.",
+   "sure": 9.299,
+   "m": "Bu cümle bilerek çift anlamlı. Herkese hoşuna gideni söyleyen biri diyorsa sol uca yakın. Sorulan her şeye gerçek düşüncesini söyleyen biri diyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.177
+     0.171
     ],
     [
      "cümle",
-     0.177,
-     0.472
+     0.171,
+     0.452
     ],
     [
      "bilerek",
-     0.472,
-     0.915
+     0.452,
+     0.873
     ],
     [
      "çift",
-     0.915,
-     1.062
+     0.873,
+     1.014
     ],
     [
      "anlamlı.",
-     1.062,
-     1.505
+     1.014,
+     1.435
     ],
     [
      "Herkese",
-     1.895,
-     2.356
+     1.845,
+     2.234
     ],
     [
      "hoşuna",
-     2.356,
-     2.817
+     2.234,
+     2.624
     ],
     [
      "gideni",
-     2.817,
-     3.278
+     2.624,
+     3.013
     ],
     [
      "söyleyen",
-     3.278,
-     3.739
+     3.013,
+     3.402
     ],
     [
      "biri",
-     3.739,
-     4.046
+     3.402,
+     3.662
     ],
     [
      "diyorsa",
-     4.046,
-     4.507
+     3.662,
+     4.051
     ],
     [
      "sol",
-     4.507,
-     4.66
+     4.051,
+     4.181
     ],
     [
      "uca",
-     4.66,
-     4.968
+     4.181,
+     4.44
     ],
     [
      "yakın.",
-     4.968,
-     5.275
+     4.44,
+     4.7
     ],
     [
      "Sorulan",
-     5.72,
-     6.233
+     5.045,
+     5.51
     ],
     [
-     "herkese",
-     6.233,
-     6.746
+     "her",
+     5.51,
+     5.665
     ],
     [
-     "aynı",
-     6.746,
-     7.089
+     "şeye",
+     5.665,
+     5.975
     ],
     [
-     "doğruyu",
-     7.089,
-     7.602
+     "gerçek",
+     5.975,
+     6.285
+    ],
+    [
+     "düşüncesini",
+     6.285,
+     7.06
     ],
     [
      "söyleyen",
-     7.602,
-     8.115
+     7.06,
+     7.525
     ],
     [
      "biri",
-     8.115,
-     8.457
+     7.525,
+     7.835
     ],
     [
      "diyorsa",
-     8.457,
-     8.97
+     7.835,
+     8.3
     ],
     [
      "orta",
-     8.97,
-     9.313
+     8.3,
+     8.61
     ],
     [
      "uca",
-     9.313,
-     9.655
+     8.61,
+     8.919
     ],
     [
      "yakın.",
-     9.655,
-     9.997
+     8.919,
+     9.229
     ]
    ]
   },

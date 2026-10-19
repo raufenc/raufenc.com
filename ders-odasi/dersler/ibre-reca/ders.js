@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Recâ: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "fazla",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi hiçbir şey yapmadan hayal kuruyor: sağ uca (Hayalcilik) yakın. Başka okumada çalışmış, hazırlanmış ve güvenle iyisini bekliyor: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, umudun yanında çabaya da bakar. Recâ; elinden geleni yapıp sonucu Allahü teâlâ’ya güvenerek umutla beklemektir. Sol uç (Ye’s) umudu tamamen kaybetmek, sağ uç (Tûl-i Emel) çalışmadan uzun hayaller kurmaktır.",
+      "İbre cümleye değil, umudun yanında çabaya da bakar. Recâ; elinden geleni yapıp sonucu Allahü teâlâ’ya güvenerek umutla beklemektir. Sol uç (Karamsarlık; Excel’de Ye’s) umudu tamamen kaybetmektir, sağ uç (Hayalcilik; Excel’de Tûl-i Emel) çalışmadan uzun hayaller kurmaktır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -70,8 +72,8 @@ DO.dersKaydet(
        "soz": "Çalışsam da olmaz ki; hiç uğraşmayayım.",
        "eylem": "yaslan",
        "zincir": [
-        "Denemeyi bıraktığı için olabilecek işler de olmaz.",
-        "İçindeki karamsarlık her gün biraz daha büyür."
+        "Denemeyi bıraktığı için bazı işler hiç başlamaz.",
+        "Vazgeçtikçe umut daha da küçülür."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -79,7 +81,7 @@ DO.dersKaydet(
          {
           "m": "Denesem de olmaz; boşuna uğraşmayayım.",
           "dogru": true,
-          "not": "Karamsarlık, umudun hiç kalmamasıdır. Bir kez olmayınca vazgeçmek, sonraki denemeyi de kapatır."
+          "not": "Karamsarlık, umudun hiç kalmamasıdır. Bir kez olmayınca vazgeçmek, sonraki denemeyi de kapatır. Umutsuz hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
           "m": "Elimden geleni yaptım; güvenle bekliyorum.",
@@ -99,7 +101,7 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Denemeyi",
-        "İçindeki"
+        "Vazgeçtikçe"
        ]
       },
       {
@@ -216,7 +218,7 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Bugün elimden geleni çalışır, sonra güvenle beklerim.",
+         "m": "Bugün elimden geleni yaparım, sonra güvenle beklerim.",
          "zon": "orta",
          "sonuc": "Hazırlıklı gidiyorsun; sonuç ne olursa olsun için rahat.",
          "not": "İbre ortada: umut ve çaba bir arada.",
@@ -245,7 +247,7 @@ DO.dersKaydet(
          "ses": "s2fa"
         },
         {
-         "m": "Her hafta çalışır, bir ay sonra yeniden denerim.",
+         "m": "Her hafta çalışırım, bir ay sonra yeniden denerim.",
          "zon": "orta",
          "sonuc": "Düzenli çalışıyorsun; deneme günü kendine güvenle gidiyorsun.",
          "not": "İbre ortada: çalış, güven, yeniden dene.",
@@ -772,93 +774,83 @@ DO.dersKaydet(
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 7.414,
-   "m": "Sonra ne olur? Denemeyi bıraktığı için olabilecek işler de olmaz. İçindeki karamsarlık her gün biraz daha büyür.",
+   "sure": 6.836,
+   "m": "Sonra ne olur? Denemeyi bıraktığı için bazı işler hiç başlamaz. Vazgeçtikçe umut daha da küçülür.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.284
+     0.282
     ],
     [
      "ne",
-     0.284,
-     0.411
+     0.282,
+     0.408
     ],
     [
      "olur?",
-     0.411,
-     0.665
+     0.408,
+     0.66
     ],
     [
      "Denemeyi",
-     1.1,
-     1.626
+     1.105,
+     1.752
     ],
     [
      "bıraktığı",
-     1.626,
-     2.152
+     1.752,
+     2.398
     ],
     [
      "için",
-     2.152,
-     2.415
+     2.398,
+     2.722
     ],
     [
-     "olabilecek",
-     2.415,
-     3.072
+     "bazı",
+     2.722,
+     3.045
     ],
     [
      "işler",
-     3.072,
-     3.335
+     3.045,
+     3.368
     ],
     [
-     "de",
-     3.335,
-     3.467
+     "hiç",
+     3.368,
+     3.53
     ],
     [
-     "olmaz.",
-     3.467,
-     3.73
+     "başlamaz.",
+     3.53,
+     4.015
     ],
     [
-     "İçindeki",
-     4.435,
-     5.162
+     "Vazgeçtikçe",
+     4.625,
+     5.339
     ],
     [
-     "karamsarlık",
-     5.162,
-     5.889
-    ],
-    [
-     "her",
-     5.889,
-     6.071
-    ],
-    [
-     "gün",
-     6.071,
-     6.253
-    ],
-    [
-     "biraz",
-     6.253,
-     6.617
+     "umut",
+     5.339,
+     5.695
     ],
     [
      "daha",
-     6.617,
-     6.98
+     5.695,
+     6.052
     ],
     [
-     "büyür.",
-     6.98,
-     7.344
+     "da",
+     6.052,
+     6.23
+    ],
+    [
+     "küçülür.",
+     6.23,
+     6.766
     ]
    ]
   },

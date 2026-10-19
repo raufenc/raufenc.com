@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Tevâzu: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "benlik",
+ "muzik": "benlik",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -109,7 +111,7 @@ DO.dersKaydet(
        "eylem": "isaret",
        "zincir": [
         "Teşekkür sırası kimseye gelmez.",
-        "Bir sonraki işte arkadaşların gönülden gelmeyebilir."
+        "Bir sonraki işte arkadaşların gönülden katılmayabilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -203,7 +205,7 @@ DO.dersKaydet(
         {
          "m": "Ben bir şey yapmadım ki, ben çıkmayayım.",
          "zon": "az",
-         "sonuc": "Öğretmen seni çağırdı ama arkadaşlarının emeği sahnede anılmadı; belki onlar da bunu fark etti.",
+         "sonuc": "Sahneye çıkmıyorsun; ne senin ne arkadaşlarının emeği anılıyor.",
          "not": "İbre sola kaydı: kendini küçülttükçe hem senin hem arkadaşlarının emeği görünmez oluyor.",
          "ses": "s1az"
         },
@@ -232,7 +234,7 @@ DO.dersKaydet(
         {
          "m": "Bende bir şey yok ki, anlatmaya değmez; sen öğretmene sor.",
          "zon": "az",
-         "sonuc": "Arkadaşın bir daha sormaya çekinebilir; öğrendiğin yolu paylaşma fırsatı kaçıyor.",
+         "sonuc": "Öğrendiğin yol sende kalıyor; arkadaşın sorusunun cevabını bulamıyor.",
          "not": "İbre sola kaydı: bilgin saklı kalınca kimse ondan yararlanamıyor.",
          "ses": "s2az"
         },
@@ -256,6 +258,34 @@ DO.dersKaydet(
      ],
      "karsiSes": "skarsi",
      "sonSes": "sson"
+    },
+    {
+     "tur": "ibrePay",
+     "id": "pay",
+     "baslik": "Payı kime yazıyorsun?",
+     "tetik": "Takımınız turnuvayı kazandı! Alkış tam 100 parça. Sen ve üç arkadaşın arasında paylaştır; kaydırıcıları ya da + − düğmelerini kullan.",
+     "kisiler": [
+      "Sen",
+      "Arkadaş 1",
+      "Arkadaş 2",
+      "Arkadaş 3"
+     ],
+     "ses": {
+      "acilis": "v1",
+      "yonerge": "v2",
+      "az": "v3",
+      "orta": "v4",
+      "fazla": "v5",
+      "arkadas": "v6",
+      "yeniden": "v7"
+     },
+     "huy": "Tevâzu",
+     "uclar": {
+      "az": "Tezellül",
+      "orta": "Tevâzu",
+      "fazla": "Kibr"
+     },
+     "yesil": 0.24
     },
     {
      "id": "uc-bul",
@@ -541,242 +571,6 @@ DO.dersKaydet(
     ]
    ]
   },
-  "t1": {
-   "d": "ses/t1.m4a",
-   "sure": 3.962,
-   "m": "Karar senin. İbreyi sürükle, sonra ne kadar emin olduğunu söyle.",
-   "k": [
-    [
-     "Karar",
-     0.03,
-     0.325
-    ],
-    [
-     "senin.",
-     0.325,
-     0.62
-    ],
-    [
-     "İbreyi",
-     0.91,
-     1.325
-    ],
-    [
-     "sürükle,",
-     1.325,
-     1.74
-    ],
-    [
-     "sonra",
-     1.995,
-     2.287
-    ],
-    [
-     "ne",
-     2.287,
-     2.433
-    ],
-    [
-     "kadar",
-     2.433,
-     2.725
-    ],
-    [
-     "emin",
-     2.725,
-     3.016
-    ],
-    [
-     "olduğunu",
-     3.016,
-     3.6
-    ],
-    [
-     "söyle.",
-     3.6,
-     3.892
-    ]
-   ]
-  },
-  "t2": {
-   "d": "ses/t2.m4a",
-   "sure": 9.221,
-   "m": "Bu cümle bilerek çift anlamlı. Bir okumada kişi payı kendine yazıyor: sağ uca yakın. Başka okumada kendine bakıp espri yapıyor: orta uca yakın.",
-   "k": [
-    [
-     "Bu",
-     0.03,
-     0.177
-    ],
-    [
-     "cümle",
-     0.177,
-     0.47
-    ],
-    [
-     "bilerek",
-     0.47,
-     0.909
-    ],
-    [
-     "çift",
-     0.909,
-     1.056
-    ],
-    [
-     "anlamlı.",
-     1.056,
-     1.495
-    ],
-    [
-     "Bir",
-     1.9,
-     2.04
-    ],
-    [
-     "okumada",
-     2.04,
-     2.6
-    ],
-    [
-     "kişi",
-     2.6,
-     2.88
-    ],
-    [
-     "payı",
-     2.88,
-     3.16
-    ],
-    [
-     "kendine",
-     3.16,
-     3.58
-    ],
-    [
-     "yazıyor:",
-     3.58,
-     4.0
-    ],
-    [
-     "sağ",
-     4.3,
-     4.455
-    ],
-    [
-     "uca",
-     4.455,
-     4.765
-    ],
-    [
-     "yakın.",
-     4.765,
-     5.075
-    ],
-    [
-     "Başka",
-     5.375,
-     5.693
-    ],
-    [
-     "okumada",
-     5.693,
-     6.329
-    ],
-    [
-     "kendine",
-     6.329,
-     6.807
-    ],
-    [
-     "bakıp",
-     6.807,
-     7.125
-    ],
-    [
-     "espri",
-     7.125,
-     7.443
-    ],
-    [
-     "yapıyor:",
-     7.443,
-     7.92
-    ],
-    [
-     "orta",
-     8.385,
-     8.64
-    ],
-    [
-     "uca",
-     8.64,
-     8.896
-    ],
-    [
-     "yakın.",
-     8.896,
-     9.151
-    ]
-   ]
-  },
-  "t3": {
-   "d": "ses/t3.m4a",
-   "sure": 4.325,
-   "m": "Peki ibrenin uçlarında duran kişiler ne yapar? Bir kapı seç.",
-   "k": [
-    [
-     "Peki",
-     0.03,
-     0.361
-    ],
-    [
-     "ibrenin",
-     0.361,
-     0.858
-    ],
-    [
-     "uçlarında",
-     0.858,
-     1.52
-    ],
-    [
-     "duran",
-     1.52,
-     1.851
-    ],
-    [
-     "kişiler",
-     1.851,
-     2.348
-    ],
-    [
-     "ne",
-     2.348,
-     2.514
-    ],
-    [
-     "yapar?",
-     2.514,
-     2.845
-    ],
-    [
-     "Bir",
-     3.45,
-     3.651
-    ],
-    [
-     "kapı",
-     3.651,
-     4.054
-    ],
-    [
-     "seç.",
-     4.054,
-     4.255
-    ]
-   ]
-  },
   "k0": {
    "d": "ses/k0.m4a",
    "sure": 3.505,
@@ -826,6 +620,105 @@ DO.dersKaydet(
      "ettiriyor?",
      2.786,
      3.435
+    ]
+   ]
+  },
+  "k9": {
+   "d": "ses/k9.m4a",
+   "sure": 6.69,
+   "m": "Başka kapılarda başka sesler var. Merak ediyorsan aç; yoksa devam edebilirsin.",
+   "k": [
+    [
+     "Başka",
+     0.03,
+     0.458
+    ],
+    [
+     "kapılarda",
+     0.458,
+     1.315
+    ],
+    [
+     "başka",
+     1.315,
+     1.743
+    ],
+    [
+     "sesler",
+     1.743,
+     2.171
+    ],
+    [
+     "var.",
+     2.171,
+     2.385
+    ],
+    [
+     "Merak",
+     3.0,
+     3.389
+    ],
+    [
+     "ediyorsan",
+     3.389,
+     4.166
+    ],
+    [
+     "aç;",
+     4.166,
+     4.36
+    ],
+    [
+     "yoksa",
+     4.905,
+     5.286
+    ],
+    [
+     "devam",
+     5.286,
+     5.667
+    ],
+    [
+     "edebilirsin.",
+     5.667,
+     6.62
+    ]
+   ]
+  },
+  "kap": {
+   "d": "ses/kap.m4a",
+   "sure": 3.032,
+   "m": "Küçük bir ayar, her gün yeniden.",
+   "k": [
+    [
+     "Küçük",
+     0.03,
+     0.482
+    ],
+    [
+     "bir",
+     0.482,
+     0.708
+    ],
+    [
+     "ayar,",
+     0.708,
+     1.16
+    ],
+    [
+     "her",
+     1.54,
+     1.824
+    ],
+    [
+     "gün",
+     1.824,
+     2.109
+    ],
+    [
+     "yeniden.",
+     2.109,
+     2.962
     ]
    ]
   },
@@ -1084,73 +977,73 @@ DO.dersKaydet(
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.561,
-   "m": "Sonra ne olur? Teşekkür sırası kimseye gelmez. Bir sonraki işte arkadaşların gönülden gelmeyebilir.",
+   "sure": 6.196,
+   "m": "Sonra ne olur? Teşekkür sırası kimseye gelmez. Bir sonraki işte arkadaşların gönülden katılmayabilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.432
+     0.278
     ],
     [
      "ne",
-     0.432,
-     0.633
+     0.278,
+     0.402
     ],
     [
      "olur?",
-     0.633,
-     1.035
+     0.402,
+     0.65
     ],
     [
      "Teşekkür",
-     1.17,
-     1.744
+     1.045,
+     1.563
     ],
     [
      "sırası",
-     1.744,
-     2.318
+     1.563,
+     2.081
     ],
     [
      "kimseye",
-     2.318,
-     2.892
+     2.081,
+     2.6
     ],
     [
      "gelmez.",
-     2.892,
-     3.275
+     2.6,
+     2.945
     ],
     [
      "Bir",
-     3.465,
-     3.624
+     3.225,
+     3.37
     ],
     [
      "sonraki",
-     3.624,
-     4.102
+     3.37,
+     3.805
     ],
     [
      "işte",
-     4.102,
-     4.421
+     3.805,
+     4.095
     ],
     [
      "arkadaşların",
-     4.421,
-     5.217
+     4.095,
+     4.821
     ],
     [
      "gönülden",
-     5.217,
-     5.695
+     4.821,
+     5.256
     ],
     [
-     "gelmeyebilir.",
-     5.695,
-     6.491
+     "katılmayabilir.",
+     5.256,
+     6.126
     ]
    ]
   },
@@ -1362,68 +1255,6 @@ DO.dersKaydet(
     ]
    ]
   },
-  "k9": {
-   "d": "ses/k9.m4a",
-   "sure": 6.69,
-   "m": "Başka kapılarda başka sesler var. Merak ediyorsan aç; yoksa devam edebilirsin.",
-   "k": [
-    [
-     "Başka",
-     0.03,
-     0.458
-    ],
-    [
-     "kapılarda",
-     0.458,
-     1.315
-    ],
-    [
-     "başka",
-     1.315,
-     1.743
-    ],
-    [
-     "sesler",
-     1.743,
-     2.171
-    ],
-    [
-     "var.",
-     2.171,
-     2.385
-    ],
-    [
-     "Merak",
-     3.0,
-     3.389
-    ],
-    [
-     "ediyorsan",
-     3.389,
-     4.166
-    ],
-    [
-     "aç;",
-     4.166,
-     4.36
-    ],
-    [
-     "yoksa",
-     4.905,
-     5.286
-    ],
-    [
-     "devam",
-     5.286,
-     5.667
-    ],
-    [
-     "edebilirsin.",
-     5.667,
-     6.62
-    ]
-   ]
-  },
   "s1": {
    "d": "ses/s1.m4a",
    "sure": 6.66,
@@ -1498,78 +1329,48 @@ DO.dersKaydet(
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 5.829,
-   "m": "Öğretmen seni çağırdı ama arkadaşlarının emeği sahnede anılmadı. Belki onlar da bunu fark etti.",
+   "sure": 4.453,
+   "m": "Sahneye çıkmıyorsun; ne senin ne arkadaşlarının emeği anılıyor.",
    "k": [
     [
-     "Öğretmen",
+     "Sahneye",
      0.03,
-     0.441
+     0.439
     ],
     [
-     "seni",
-     0.441,
-     0.716
+     "çıkmıyorsun;",
+     0.439,
+     0.985
     ],
     [
-     "çağırdı",
-     0.716,
-     1.127
+     "ne",
+     1.335,
+     1.514
     ],
     [
-     "ama",
-     1.127,
-     1.401
+     "senin",
+     1.514,
+     1.873
+    ],
+    [
+     "ne",
+     1.873,
+     2.052
     ],
     [
      "arkadaşlarının",
-     1.401,
-     2.224
+     2.052,
+     3.128
     ],
     [
      "emeği",
-     2.224,
-     2.635
+     3.128,
+     3.666
     ],
     [
-     "sahnede",
-     2.635,
-     3.047
-    ],
-    [
-     "anılmadı.",
-     3.047,
-     3.595
-    ],
-    [
-     "Belki",
-     4.17,
-     4.488
-    ],
-    [
-     "onlar",
-     4.488,
-     4.805
-    ],
-    [
-     "da",
-     4.805,
-     4.964
-    ],
-    [
-     "bunu",
-     4.964,
-     5.282
-    ],
-    [
-     "fark",
-     5.282,
-     5.441
-    ],
-    [
-     "etti.",
-     5.441,
-     5.759
+     "anılıyor.",
+     3.666,
+     4.383
     ]
    ]
   },
@@ -1756,58 +1557,48 @@ DO.dersKaydet(
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 4.495,
-   "m": "Arkadaşın bir daha sormaya çekinebilir. Öğrendiğin yolu paylaşma fırsatı kaçıyor.",
+   "sure": 4.813,
+   "m": "Öğrendiğin yol sende kalıyor; arkadaşın sorusunun cevabını bulamıyor.",
    "k": [
     [
-     "Arkadaşın",
-     0.03,
-     0.526
-    ],
-    [
-     "bir",
-     0.526,
-     0.65
-    ],
-    [
-     "daha",
-     0.65,
-     0.898
-    ],
-    [
-     "sormaya",
-     0.898,
-     1.27
-    ],
-    [
-     "çekinebilir.",
-     1.27,
-     1.89
-    ],
-    [
      "Öğrendiğin",
-     2.155,
-     2.76
+     0.03,
+     0.694
     ],
     [
-     "yolu",
-     2.76,
-     3.063
+     "yol",
+     0.694,
+     0.86
     ],
     [
-     "paylaşma",
-     3.063,
-     3.517
+     "sende",
+     0.86,
+     1.192
     ],
     [
-     "fırsatı",
-     3.517,
-     3.971
+     "kalıyor;",
+     1.192,
+     1.69
     ],
     [
-     "kaçıyor.",
-     3.971,
-     4.425
+     "arkadaşın",
+     1.97,
+     2.663
+    ],
+    [
+     "sorusunun",
+     2.663,
+     3.357
+    ],
+    [
+     "cevabını",
+     3.357,
+     4.05
+    ],
+    [
+     "bulamıyor.",
+     4.05,
+     4.743
     ]
    ]
   },
@@ -2024,40 +1815,763 @@ DO.dersKaydet(
     ]
    ]
   },
-  "kap": {
-   "d": "ses/kap.m4a",
-   "sure": 3.032,
-   "m": "Küçük bir ayar, her gün yeniden.",
+  "t1": {
+   "d": "ses/t1.m4a",
+   "sure": 3.962,
+   "m": "Karar senin. İbreyi sürükle, sonra ne kadar emin olduğunu söyle.",
    "k": [
     [
-     "Küçük",
+     "Karar",
      0.03,
-     0.482
+     0.325
+    ],
+    [
+     "senin.",
+     0.325,
+     0.62
+    ],
+    [
+     "İbreyi",
+     0.91,
+     1.325
+    ],
+    [
+     "sürükle,",
+     1.325,
+     1.74
+    ],
+    [
+     "sonra",
+     1.995,
+     2.287
+    ],
+    [
+     "ne",
+     2.287,
+     2.433
+    ],
+    [
+     "kadar",
+     2.433,
+     2.725
+    ],
+    [
+     "emin",
+     2.725,
+     3.016
+    ],
+    [
+     "olduğunu",
+     3.016,
+     3.6
+    ],
+    [
+     "söyle.",
+     3.6,
+     3.892
+    ]
+   ]
+  },
+  "t2": {
+   "d": "ses/t2.m4a",
+   "sure": 9.221,
+   "m": "Bu cümle bilerek çift anlamlı. Bir okumada kişi payı kendine yazıyor: sağ uca yakın. Başka okumada kendine bakıp espri yapıyor: orta uca yakın.",
+   "k": [
+    [
+     "Bu",
+     0.03,
+     0.177
+    ],
+    [
+     "cümle",
+     0.177,
+     0.47
+    ],
+    [
+     "bilerek",
+     0.47,
+     0.909
+    ],
+    [
+     "çift",
+     0.909,
+     1.056
+    ],
+    [
+     "anlamlı.",
+     1.056,
+     1.495
+    ],
+    [
+     "Bir",
+     1.9,
+     2.04
+    ],
+    [
+     "okumada",
+     2.04,
+     2.6
+    ],
+    [
+     "kişi",
+     2.6,
+     2.88
+    ],
+    [
+     "payı",
+     2.88,
+     3.16
+    ],
+    [
+     "kendine",
+     3.16,
+     3.58
+    ],
+    [
+     "yazıyor:",
+     3.58,
+     4.0
+    ],
+    [
+     "sağ",
+     4.3,
+     4.455
+    ],
+    [
+     "uca",
+     4.455,
+     4.765
+    ],
+    [
+     "yakın.",
+     4.765,
+     5.075
+    ],
+    [
+     "Başka",
+     5.375,
+     5.693
+    ],
+    [
+     "okumada",
+     5.693,
+     6.329
+    ],
+    [
+     "kendine",
+     6.329,
+     6.807
+    ],
+    [
+     "bakıp",
+     6.807,
+     7.125
+    ],
+    [
+     "espri",
+     7.125,
+     7.443
+    ],
+    [
+     "yapıyor:",
+     7.443,
+     7.92
+    ],
+    [
+     "orta",
+     8.385,
+     8.64
+    ],
+    [
+     "uca",
+     8.64,
+     8.896
+    ],
+    [
+     "yakın.",
+     8.896,
+     9.151
+    ]
+   ]
+  },
+  "t3": {
+   "d": "ses/t3.m4a",
+   "sure": 4.325,
+   "m": "Peki ibrenin uçlarında duran kişiler ne yapar? Bir kapı seç.",
+   "k": [
+    [
+     "Peki",
+     0.03,
+     0.361
+    ],
+    [
+     "ibrenin",
+     0.361,
+     0.858
+    ],
+    [
+     "uçlarında",
+     0.858,
+     1.52
+    ],
+    [
+     "duran",
+     1.52,
+     1.851
+    ],
+    [
+     "kişiler",
+     1.851,
+     2.348
+    ],
+    [
+     "ne",
+     2.348,
+     2.514
+    ],
+    [
+     "yapar?",
+     2.514,
+     2.845
+    ],
+    [
+     "Bir",
+     3.45,
+     3.651
+    ],
+    [
+     "kapı",
+     3.651,
+     4.054
+    ],
+    [
+     "seç.",
+     4.054,
+     4.255
+    ]
+   ]
+  },
+  "v1": {
+   "d": "ses/v1.m4a",
+   "sure": 6.496,
+   "m": "Takımınız turnuvayı kazandı! Salondaki alkış tam yüz parça; bu alkışı kimlere yazarsın?",
+   "k": [
+    [
+     "Takımınız",
+     0.03,
+     0.714
+    ],
+    [
+     "turnuvayı",
+     0.714,
+     1.397
+    ],
+    [
+     "kazandı!",
+     1.397,
+     1.91
+    ],
+    [
+     "Salondaki",
+     2.65,
+     3.46
+    ],
+    [
+     "alkış",
+     3.46,
+     3.865
+    ],
+    [
+     "tam",
+     3.865,
+     4.067
+    ],
+    [
+     "yüz",
+     4.067,
+     4.27
+    ],
+    [
+     "parça;",
+     4.27,
+     4.675
+    ],
+    [
+     "bu",
+     5.135,
+     5.264
+    ],
+    [
+     "alkışı",
+     5.264,
+     5.651
+    ],
+    [
+     "kimlere",
+     5.651,
+     6.039
+    ],
+    [
+     "yazarsın?",
+     6.039,
+     6.426
+    ]
+   ]
+  },
+  "v2": {
+   "d": "ses/v2.m4a",
+   "sure": 6.171,
+   "m": "Dört kişi var: sen ve üç arkadaşın. Kaydırıcılarla payları dağıt; toplam hep yüz kalır.",
+   "k": [
+    [
+     "Dört",
+     0.03,
+     0.194
+    ],
+    [
+     "kişi",
+     0.194,
+     0.521
+    ],
+    [
+     "var:",
+     0.521,
+     0.685
+    ],
+    [
+     "sen",
+     1.095,
+     1.291
+    ],
+    [
+     "ve",
+     1.291,
+     1.486
+    ],
+    [
+     "üç",
+     1.486,
+     1.682
+    ],
+    [
+     "arkadaşın.",
+     1.682,
+     2.465
+    ],
+    [
+     "Kaydırıcılarla",
+     2.8,
+     3.662
+    ],
+    [
+     "payları",
+     3.662,
+     4.093
+    ],
+    [
+     "dağıt;",
+     4.093,
+     4.38
+    ],
+    [
+     "toplam",
+     4.575,
+     5.084
+    ],
+    [
+     "hep",
+     5.084,
+     5.338
+    ],
+    [
+     "yüz",
+     5.338,
+     5.593
+    ],
+    [
+     "kalır.",
+     5.593,
+     6.101
+    ]
+   ]
+  },
+  "v3": {
+   "d": "ses/v3.m4a",
+   "sure": 6.999,
+   "m": "Kendine çok az pay yazdın; ibre sola, tezellüle kaydı. Senin emeğin de bu kazanmanın içinde.",
+   "k": [
+    [
+     "Kendine",
+     0.03,
+     0.534
+    ],
+    [
+     "çok",
+     0.534,
+     0.703
+    ],
+    [
+     "az",
+     0.703,
+     0.871
+    ],
+    [
+     "pay",
+     0.871,
+     1.039
+    ],
+    [
+     "yazdın;",
+     1.039,
+     1.375
+    ],
+    [
+     "ibre",
+     1.91,
+     2.305
+    ],
+    [
+     "sola,",
+     2.305,
+     2.7
+    ],
+    [
+     "tezellüle",
+     3.0,
+     3.623
+    ],
+    [
+     "kaydı.",
+     3.623,
+     3.935
+    ],
+    [
+     "Senin",
+     4.52,
+     4.864
+    ],
+    [
+     "emeğin",
+     4.864,
+     5.38
+    ],
+    [
+     "de",
+     5.38,
+     5.553
+    ],
+    [
+     "bu",
+     5.553,
+     5.725
+    ],
+    [
+     "kazanmanın",
+     5.725,
+     6.413
+    ],
+    [
+     "içinde.",
+     6.413,
+     6.929
+    ]
+   ]
+  },
+  "v4": {
+   "d": "ses/v4.m4a",
+   "sure": 6.811,
+   "m": "Payların dengeli; ibre ortada, tevâzuda. Kendi emeğini de, arkadaşlarının emeğini de görüyorsun.",
+   "k": [
+    [
+     "Payların",
+     0.03,
+     0.442
+    ],
+    [
+     "dengeli;",
+     0.442,
+     0.855
+    ],
+    [
+     "ibre",
+     1.295,
+     1.613
+    ],
+    [
+     "ortada,",
+     1.613,
+     2.09
+    ],
+    [
+     "tevâzuda.",
+     2.365,
+     2.935
+    ],
+    [
+     "Kendi",
+     3.26,
+     3.591
+    ],
+    [
+     "emeğini",
+     3.591,
+     4.254
+    ],
+    [
+     "de,",
+     4.254,
+     4.42
+    ],
+    [
+     "arkadaşlarının",
+     4.64,
+     5.48
+    ],
+    [
+     "emeğini",
+     5.48,
+     6.04
+    ],
+    [
+     "de",
+     6.04,
+     6.18
+    ],
+    [
+     "görüyorsun.",
+     6.18,
+     6.741
+    ]
+   ]
+  },
+  "v5": {
+   "d": "ses/v5.m4a",
+   "sure": 7.065,
+   "m": "Alkışın çoğunu kendine yazdın; ibre sağa, kibre kaydı. Arkadaşların da bu kazanmak için çok uğraştı.",
+   "k": [
+    [
+     "Alkışın",
+     0.03,
+     0.506
+    ],
+    [
+     "çoğunu",
+     0.506,
+     0.982
+    ],
+    [
+     "kendine",
+     0.982,
+     1.458
+    ],
+    [
+     "yazdın;",
+     1.458,
+     1.775
+    ],
+    [
+     "ibre",
+     2.125,
+     2.505
+    ],
+    [
+     "sağa,",
+     2.505,
+     2.885
+    ],
+    [
+     "kibre",
+     3.175,
+     3.56
+    ],
+    [
+     "kaydı.",
+     3.56,
+     3.945
+    ],
+    [
+     "Arkadaşların",
+     4.315,
+     5.152
+    ],
+    [
+     "da",
+     5.152,
+     5.32
+    ],
+    [
+     "bu",
+     5.32,
+     5.487
+    ],
+    [
+     "kazanmak",
+     5.487,
+     5.99
+    ],
+    [
+     "için",
+     5.99,
+     6.325
+    ],
+    [
+     "çok",
+     6.325,
+     6.492
+    ],
+    [
+     "uğraştı.",
+     6.492,
+     6.995
+    ]
+   ]
+  },
+  "v6": {
+   "d": "ses/v6.m4a",
+   "sure": 4.728,
+   "m": "Bir arkadaşının payı çok küçük kaldı. Onun emeği de görünüyor mu, bir bak.",
+   "k": [
+    [
+     "Bir",
+     0.03,
+     0.195
+    ],
+    [
+     "arkadaşının",
+     0.195,
+     1.018
+    ],
+    [
+     "payı",
+     1.018,
+     1.347
+    ],
+    [
+     "çok",
+     1.347,
+     1.512
+    ],
+    [
+     "küçük",
+     1.512,
+     1.841
+    ],
+    [
+     "kaldı.",
+     1.841,
+     2.17
+    ],
+    [
+     "Onun",
+     2.745,
+     2.996
+    ],
+    [
+     "emeği",
+     2.996,
+     3.372
+    ],
+    [
+     "de",
+     3.372,
+     3.498
+    ],
+    [
+     "görünüyor",
+     3.498,
+     4.0
+    ],
+    [
+     "mu,",
+     4.0,
+     4.125
     ],
     [
      "bir",
-     0.482,
-     0.708
+     4.235,
+     4.446
     ],
     [
-     "ayar,",
-     0.708,
-     1.16
+     "bak.",
+     4.446,
+     4.658
+    ]
+   ]
+  },
+  "v7": {
+   "d": "ses/v7.m4a",
+   "sure": 6.521,
+   "m": "İstersen payları yeniden dağıt. İbre bir karne değil; alkışı paylaşırken kendimize baktığımız bir aynadır.",
+   "k": [
+    [
+     "İstersen",
+     0.03,
+     0.451
     ],
     [
-     "her",
-     1.54,
-     1.824
+     "payları",
+     0.451,
+     0.873
     ],
     [
-     "gün",
-     1.824,
-     2.109
+     "yeniden",
+     0.873,
+     1.294
     ],
     [
-     "yeniden.",
-     2.109,
-     2.962
+     "dağıt.",
+     1.294,
+     1.575
+    ],
+    [
+     "İbre",
+     1.95,
+     2.246
+    ],
+    [
+     "bir",
+     2.246,
+     2.394
+    ],
+    [
+     "karne",
+     2.394,
+     2.689
+    ],
+    [
+     "değil;",
+     2.689,
+     2.985
+    ],
+    [
+     "alkışı",
+     3.265,
+     3.768
+    ],
+    [
+     "paylaşırken",
+     3.768,
+     4.439
+    ],
+    [
+     "kendimize",
+     4.439,
+     5.11
+    ],
+    [
+     "baktığımız",
+     5.11,
+     5.78
+    ],
+    [
+     "bir",
+     5.78,
+     5.948
+    ],
+    [
+     "aynadır.",
+     5.948,
+     6.451
     ]
    ]
   }
