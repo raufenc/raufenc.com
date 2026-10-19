@@ -105,16 +105,17 @@ export default async function handler(req) {
   if (!anthropicKey && !openaiKey) {
     return json({ error: 'no_provider', reply: 'Yapay zekâ servisi henüz yapılandırılmadı. Sunucuda ANTHROPIC_API_KEY veya OPENAI_API_KEY tanımlanmalıdır.' }, 503, origin);
   }
-  try {
-    if (anthropicKey) {
-      try {
-        return json({ reply: await callAnthropic(anthropicKey, model || 'claude-haiku-5-5', system, messages), provider: 'anthropic' }, 200, origin);
-      } catch (e) {
-        if (!openaiKey) throw e;
-      }
+  const errors = [];
+  if (anthropicKey) {
+    const models = [...new Set([model && !model.startsWith('gpt') ? model : '', 'claude-haiku-5-5', 'claude-haiku-4-5'].filter(Boolean))];
+    for (const m of models) {
+      try { return json({ reply: await callAnthropic(anthropicKey, m, system, messages), provider: 'anthropic', model: m }, 200, origin); }
+      catch (e) { errors.push(`${m}: ${e.message}`); if (!/_(400|404)$/.test(e.message)) break; } // model bulunamadı ise sıradakini dene
     }
-    return json({ reply: await callOpenAI(openaiKey, model.startsWith('gpt') ? model : 'gpt-4o-mini', system, messages), provider: 'openai' }, 200, origin);
-  } catch (e) {
-    return json({ error: 'upstream_failed', reply: 'Asistan şu anda yanıt veremiyor. Lütfen biraz sonra tekrar deneyin.' }, 502, origin);
   }
+  if (openaiKey) {
+    try { return json({ reply: await callOpenAI(openaiKey, model.startsWith('gpt') ? model : 'gpt-4o-mini', system, messages), provider: 'openai' }, 200, origin); }
+    catch (e) { errors.push('openai: ' + e.message); }
+  }
+  return json({ error: 'upstream_failed', detail: errors, reply: 'Asistan şu anda yanıt veremiyor. Sunucu anahtarı (ANTHROPIC_API_KEY / OPENAI_API_KEY) doğrulanmalı.' }, 502, origin);
 }

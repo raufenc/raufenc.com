@@ -234,7 +234,11 @@ export default async function handler(req) {
 
   try {
     if (src === 'detail') {
-      const data = await cached('detail:' + searchParams.get('url'), () => getDetail(searchParams.get('url') || ''));
+      // Adres base64url ile gelir (u=); kodlanmış "/" içeren ham URL'ler site middleware'ince engellenir.
+      let target = searchParams.get('url') || '';
+      const u = searchParams.get('u') || '';
+      if (u) { try { target = new TextDecoder().decode(Uint8Array.from(atob(u.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0))); } catch (_) { return json({ error: 'bad_url' }, 400); } }
+      const data = await cached('detail:' + target, () => getDetail(target));
       return json({ ok: true, ...data });
     }
     if (src === 'live') {
