@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Umudunu kesen kişi neyi kaçırır?",
+       "soru": "Umudunu kesen kişi neden vazgeçer?",
        "ad": "Umutsuzluk",
        "soz": "Nasıl olsa affedilmem; düzeltmeyi denemeyeyim.",
        "eylem": "otur",

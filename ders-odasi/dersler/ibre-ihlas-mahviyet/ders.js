@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Alkış bekleyen kişi neyi kaçırır?",
+       "soru": "Alkış bekleyen kişi neyi kaybeder?",
        "ad": "Gösteriş",
        "soz": "Alkış olmadan ben bir şey yapmam; hepiniz görün!",
        "eylem": "isaret",

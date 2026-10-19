@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Peşini bırakmayan kişi neyi kaçırır?",
+       "soru": "Peşini bırakmayan kişiye ne olur?",
        "ad": "Yapışkanlık",
        "soz": "Neden yalnız kalmak istiyorsun, ben de geliyorum!",
        "eylem": "isaret",

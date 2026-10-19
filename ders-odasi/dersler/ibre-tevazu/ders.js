@@ -105,7 +105,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Başarıyı kendine yazan kişi neyi kaçırır?",
+       "soru": "Başarıyı kendine yazan kişi neyi kaybeder?",
        "ad": "Kibr",
        "soz": "Bu işi bir ben yapabilirdim!",
        "eylem": "isaret",
