@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>İbremetre · Kısa klipler</title>
+<meta name="description" content="37 huyun 40 saniyelik dikey klipleri: kanca, ibre ve üç uç. Her klipten derse geçilir.">
+<meta name="theme-color" content="#14264A">
+<link rel="icon" href="/favicon-32x32.png">
+<link rel="canonical" href="https://raufenc.com/ders-odasi/klipler.html">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root { --krem:#f7f0e1; --krem2:#fffaf0; --cizgi:#e7dcc4; --cizgi2:#d8c9a8; --yesil:#4f7a3a; --lacivert:#14264a; --murekkep:#2e2a24; --soluk:#6f6656; --altin:#f4c95d;
+    --golge:0 10px 30px rgba(70,50,20,.10),0 2px 6px rgba(70,50,20,.06); }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--krem); color:var(--murekkep); font:600 16px/1.55 'Nunito',system-ui,sans-serif; }
+  a { color:inherit; }
+  .kap { max-width:1180px; margin:0 auto; padding:0 16px 60px; }
+  header { padding:28px 0 8px; }
+  .ust { font-size:14px; color:var(--soluk); text-decoration:none; font-weight:800; }
+  h1 { font:800 clamp(34px,6vw,56px)/1.05 'Baloo 2',sans-serif; color:var(--lacivert); margin:10px 0 6px; }
+  .giris { color:var(--soluk); max-width:720px; margin:0 0 14px; }
+  .araclar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:14px 0 18px; }
+  .araclar input { font:800 16px 'Nunito',sans-serif; padding:10px 14px; border:2px solid var(--cizgi2); border-radius:999px; background:#fff; min-width:min(100%,280px); }
+  .chip { border:2px solid var(--cizgi2); background:#fff; border-radius:999px; padding:7px 14px; font:800 14px 'Nunito',sans-serif; cursor:pointer; color:var(--murekkep); }
+  .chip[aria-pressed=true] { background:var(--lacivert); color:#fff; border-color:var(--lacivert); }
+  .izgara { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:16px; }
+  .k { background:var(--krem2); border:2px solid var(--cizgi); border-radius:20px; overflow:hidden; box-shadow:var(--golge); display:flex; flex-direction:column; }
+  .k video { width:100%; aspect-ratio:9/16; display:block; background:#14264a; object-fit:cover; }
+  .k .ic { padding:10px 14px 14px; display:flex; flex-direction:column; gap:4px; }
+  .k h2 { font:800 18px/1.2 'Baloo 2',sans-serif; margin:0; color:var(--lacivert); }
+  .k small { color:var(--soluk); font-weight:700; }
+  .k a.dugme { margin-top:6px; align-self:flex-start; background:var(--yesil); color:#fff; text-decoration:none; font:900 14px 'Nunito',sans-serif; padding:8px 14px; border-radius:999px; box-shadow:0 3px 0 #3a5b2a; }
+  .k a.dugme:focus-visible, .chip:focus-visible, .araclar input:focus-visible { outline:3px solid var(--altin); outline-offset:2px; }
+  .bos { grid-column:1/-1; text-align:center; color:var(--soluk); padding:30px 0; }
+  footer { margin-top:30px; color:var(--soluk); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="kap">
+  <header>
+    <a class="ust" href="./">← Ders Odası</a>
+    <h1>İbremetre kısa klipleri</h1>
+    <p class="giris">Her huy için kırk saniyelik dikey klip: bir kanca cümlesi, ibre ve üç uç. Klibi izle, sonra dersi aç ve ibreyi kendin yerleştir.</p>
+  </header>
+  <div class="araclar">
+    <input id="ara" type="search" placeholder="Huy ara (ör. tevâzu)" aria-label="Klip ara">
+    <span id="aileler" role="group" aria-label="Aile süzgeci"></span>
+  </div>
+  <div class="izgara" id="izgara" aria-live="polite"></div>
+  <footer>Tüm klipler taslaktır; metinler hoca onayı bekliyor. Yüksek çözünürlüklü sürümler paylaşım için ayrıca hazır.</footer>
+</div>
+<script>
+  var DO = window.DO = {}; DO.katalogKaydet = function (l) { DO.katalog = l; };
+</script>
+<script src="dersler/katalog.js"></script>
+<script>
+(function () {
+  var AILE = { benlik: 'Benlik', soz: 'Söz', iliski: 'İlişki ve dostluk', caba: 'Çaba ve mal', cesaret: 'Cesaret ve umut', inanc: 'İnanç' };
+  var L = (DO.katalog || []).filter(function (d) { return d.seri === 'İbremetre'; }).sort(function (a, b) { return (a.sira || 99) - (b.sira || 99); });
+  var secili = '', izgara = document.getElementById('izgara'), ara = document.getElementById('ara');
+  function sade(s) { return String(s || '').replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase().replace(/[âà]/g, 'a').replace(/[îì]/g, 'i').replace(/[ûù]/g, 'u').replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/[‘’'`]/g, ''); }
+  function kac(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var cip = document.getElementById('aileler');
+  Object.keys(AILE).forEach(function (k) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.textContent = AILE[k]; b.setAttribute('aria-pressed', 'false');
+    b.onclick = function () { secili = secili === k ? '' : k; Array.prototype.forEach.call(cip.children, function (x) { x.setAttribute('aria-pressed', 'false'); }); if (secili) b.setAttribute('aria-pressed', 'true'); ciz(); };
+    cip.appendChild(b);
+  });
+  function ciz() {
+    var q = sade(ara.value), cikti = L.filter(function (d) { return (!secili || d.aile === secili) && (!q || sade(d.huy + ' ' + d.ad + ' ' + (d.uclar || []).join(' ') + ' ' + d.kanca).indexOf(q) >= 0); });
+    izgara.innerHTML = cikti.length ? cikti.map(function (d) {
+      var id = d.id;
+      return '<article class="k"><video controls preload="none" playsinline poster="klipler/' + kac(id) + '.jpg" src="klipler/' + kac(id) + '.mp4" aria-label="' + kac(d.huy) + ' klibi"></video>' +
+        '<div class="ic"><h2>' + kac(d.huy) + '</h2><small>▼ ' + kac(d.uclar[0]) + ' · ◆ ' + kac(d.uclar[1]) + ' · ▲ ' + kac(d.uclar[2]) + '</small>' +
+        '<a class="dugme" href="ders.html?d=' + kac(id) + '">Dersi aç →</a></div></article>';
+    }).join('') : '<p class="bos">Bu aramaya uyan klip yok.</p>';
+  }
+  ara.addEventListener('input', ciz); ciz();
+  document.addEventListener('play', function (e) { Array.prototype.forEach.call(document.querySelectorAll('video'), function (v) { if (v !== e.target) v.pause(); }); }, true);
+})();
+</script>
+</body>
+</html>
