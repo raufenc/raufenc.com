@@ -1,6 +1,18 @@
 /* Ders Odası — ders kataloğu. scripts/ders-odasi/ice-aktar.py ve adab-oyunlar.py günceller. */
 DO.katalogKaydet([
  {
+  "id": "ibre-tevazu",
+  "ad": "Tevâzu: İbren Nerede?",
+  "seri": "İbremetre",
+  "kisaAd": "İbremetre",
+  "durum": "oyunlu",
+  "kapak": "dersler/ibre-tevazu/kapak.svg",
+  "oyun": 5,
+  "sure": 8,
+  "ozet": "Merak sorusuyla başlayan, ibreyi sürükleyerek tahmin edilen, üç kapının açıldığı ve “Sen olsan?” senaryolarıyla devam eden etkileşimli ders. Video yok; her şey kodla çiziliyor.",
+  "yas": "10-15 yaş"
+ },
+ {
   "id": "fikih-2",
   "ad": "Sünnet, Mekruh, Müfsid",
   "seri": "Fıkıh Dersleri",
