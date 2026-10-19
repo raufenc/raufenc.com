@@ -10,7 +10,7 @@ Kaynak malzeme buna çok uygun:
 
 | Klasör | İçerik | Sistemdeki hâli |
 |---|---|---|
-| Âdâb-ı Muâşeret / Slaytlar | 17 pptx deste, ~140 slayt; her slayt tek bir 16:9 görsel (1672×941), metin görselin içinde | 17 ders, slaytlar içe aktarıldı; oyunlar eklenecek |
+| Âdâb-ı Muâşeret / Slaytlar | 17 pptx deste, ~140 slayt; her slayt tek bir 16:9 görsel (1672×941), metin görselin içinde | 17 ders: slaytlar, slayt başı sesli anlatım, konuya göre oyunlar; “Bereketli Sofra” tam ders |
 | FIKIH-1 | 38 görsel, ders videosu, seslendirme, 5 HTML etkinlik | Slayt + slayt başı anlatım + altyazı + tam video |
 | FIKIH-2 | 22 görsel, 3:51 anlatım, ders videosu, 5 LMS etkinliği | **Tam ders (örnek):** 36 ekran, 2 durak sorulu video, 11 oyun |
 | FIKIH-3, 5, 6 | 22-25 görsel, video, seslendirme | Slayt + slayt başı anlatım + altyazı + tam video |
@@ -45,6 +45,7 @@ ders-odasi/
 scripts/ders-odasi/
   ice-aktar.py        pptx / görsel klasörü + video + ses + transkript → ders
   adab-oyunlar.py     Âdâb destelerine altyazı, oyun ve kapanış ekler (tekrar çalıştırılabilir)
+  adab-ses.py         Âdâb slaytlarına sesli anlatım bağlar (metinler adab-ses.json'da; Higgsfield · ElevenLabs)
   scorm-paketle.py    ders → SCORM 1.2 veya 2004 zip
   duzeltmeler.json    otomatik transkript için yazım/hitap düzeltmeleri
 ```

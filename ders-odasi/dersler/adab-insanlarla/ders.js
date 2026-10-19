@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "İnsanlarla beraberken otururken, konuşurken, dinlerken çevremize saygı gösteririz."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Oturuşumuz da edepli olsun: ayak uzatıp yayılmayız, mecliste ölçülü otururuz."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Gereksiz hareketlerden kaçınırız: saçla, elbiseyle, parmaklarla oynamak dikkat dağıtır."
     },
     {
@@ -103,24 +106,28 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Temizlikte başkalarını düşünürüz: esnemek ya da burnu temizlemek gerekirse uygun bir yere gideriz."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Bir meclise girince büyüklerin yerine oturmayız; yanlışlıkla oturduysak fark edince uygun yere geçeriz."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Mecliste uyumamaya çalışırız; uykumuz gelirse mümkünse uygun bir yere geçeriz."
     },
     {
      "id": "s07",
      "tur": "slayt",
      "gorsel": "slayt/07.webp",
+     "ses": "ses/s07.mp3",
      "metin": "Öyle davranırız ki insanlar yanımızda huzur bulsun ve bizi saygıyla hatırlasın."
     },
     {

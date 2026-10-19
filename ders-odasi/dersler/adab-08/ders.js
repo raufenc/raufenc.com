@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Sofra edebi temizlikle başlar."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Yemeğe besmeleyle başlar, sağ elle yeriz."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Yemekten sonra şükrederiz."
     },
     {
@@ -84,18 +87,21 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Diş temizliğini kimseyi rahatsız etmeden yaparız."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Misafirlikte ev sahibine teşekkür ederiz."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Sofrada edep, temizlik ve nezakettir."
     },
     {
