@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Vefâ: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,8 +23,8 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Vefâ",
      "huyAnahtar": "Vefâ",
-     "olculen": "Dostluğu zor günde koruma biçimim",
-     "kanca": "Ben bitirdim, gerisi senin işin.",
+     "olculen": "Dostluğu tanıma ve koruma biçimim",
+     "kanca": "Ben payımı yaptım, sıra sende mi?",
      "uclar": {
       "az": "Saflık",
       "orta": "Vefâ",
@@ -35,7 +37,7 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Vefâ",
-     "cumle": "Ben bitirdim, gerisi senin işin.",
+     "cumle": "Ben payımı yaptım, sıra sende mi?",
      "uclar": {
       "az": "Saflık",
       "orta": "Vefâ",
@@ -44,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "fazla",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi payını bitirmiş, arkadaşına “gerisi senin” derken yine de yanında kalıp yardım etmeye hazır: orta uca yakın. Başka okumada payını bitirince arkadaşı zor durumdayken çekip gidiyor: sağ uca (Gadr) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, o an dostluğu nasıl koruduğumuza bakar. Vefâ; sözünde durmak ve dostluğu zor günde de korumaktır. Bu ibrede sol uç, duyduğu söze hemen inanıp dostuna sormadan uzaklaşmak ya da kolayca kandırılmaktır; sağ uç ise dostu yarı yolda bırakmaktır.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi payını yapmış, arkadaşına “sıra sende mi?” diye nazikçe soruyor ve gerekirse yardım edecek: orta uca yakın. Başka okumada payını yapınca işi karşısındakine bırakıp çekiliyor: sağ uca (Gadr) yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, o an dostluğu nasıl koruduğumuza bakar. Vefâ; sözünde durmak ve dostluğu zor günde de korumaktır. Bu ibrede sol uç (Saflık), herkesi hemen dost sanıp kolayca kandırılmaktır; sağ uç ise dostu yarı yolda bırakmaktır.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -65,24 +67,24 @@ DO.dersKaydet(
      "kapilar": [
       {
        "zon": "az",
-       "soru": "Duyduğuna hemen inanmak neye benziyor?",
+       "soru": "Herkese hemen dost gözüyle bakmak neye benziyor?",
        "ad": "Saflık",
-       "soz": "Dediklerine inandım; arkadaşıma sormam bile.",
+       "soz": "Herkes dostum; kim ne isterse yaparım.",
        "eylem": "saskin",
        "zincir": [
-        "Dostu neden uzaklaştığını anlayamaz.",
-        "Söylentinin doğrusunu da kimse araştırmaz."
+        "Dostluğunu kullanan biri çıkınca kırılır.",
+        "Gerçek dostu tanıdıklardan ayırmak zor olur."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Herkes doğru söylüyordur; hemen inanırım.",
+          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
           "dogru": true,
-          "not": "Saflık, herkesi masum sanıp çabucak inanmaktır. Dostluk, duyduğunu önce dostuna sormayı da ister."
+          "not": "Saflık, herkesi hemen dost sanıp kolay aldanmaktır. Dostluk, zamanla tanıyarak güvenmeyi de ister."
          },
          {
-          "m": "Yanındayım; önce konuşup birlikte bakalım.",
+          "m": "Zor günde yanında dururum; yeni tanıdığıma zamanla güvenirim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: vefânın sesi."
          },
@@ -95,11 +97,11 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Saflık",
-        "soz": "Dediklerine"
+        "soz": "Herkes"
        },
        "zincirAnahtar": [
-        "Dostu",
-        "Söylentinin"
+        "Dostluğunu",
+        "Gerçek"
        ]
       },
       {
@@ -121,12 +123,12 @@ DO.dersKaydet(
           "not": "Gadr, dostu yarı yolda bırakmaktır. İş bitince dostluğu da bitirmek güveni sarsar."
          },
          {
-          "m": "Herkes doğru söylüyordur; hemen inanırım.",
+          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
          {
-          "m": "Yanındayım; önce konuşup birlikte bakalım.",
+          "m": "Zor günde yanında dururum; yeni tanıdığıma zamanla güvenirim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: vefânın sesi."
          }
@@ -155,12 +157,12 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Yanındayım; önce konuşup birlikte bakalım.",
+          "m": "Zor günde yanında dururum; yeni tanıdığıma zamanla güvenirim.",
           "dogru": true,
           "not": "Vefâ, sözünde durup dostluğu korumaktır. Zor gün, dostluğun en çok anlaşıldığı gündür."
          },
          {
-          "m": "Herkes doğru söylüyordur; hemen inanırım.",
+          "m": "Herkes dostumsa kimseyi sınamama gerek yok.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
@@ -199,13 +201,13 @@ DO.dersKaydet(
       {
        "id": "proje",
        "baslik": "Ortak proje",
-       "tetik": "Arkadaşınla ortak proje yapıyorsunuz. Sen bölümünü bitirdin, arkadaşın hâlâ yetişmeye çalışıyor.",
+       "tetik": "Arkadaşınla ortak proje yapıyorsunuz. Sen kendi bölümünü bitirdin, arkadaşın hâlâ yetişmeye çalışıyor. Yeni tanıştığın biri de “dostuz artık, benim bölümümü de sen yap,” diyor.",
        "secenekler": [
         {
-         "m": "Biri “o yapamaz” demiş; ona inanıp projeden çekilirim.",
+         "m": "Herkes dostum; yeni arkadaşımın bölümünü de yaparım.",
          "zon": "az",
-         "sonuc": "Arkadaşın nedenini bilmiyor; söylentinin doğru olup olmadığı hiç sorulmuyor.",
-         "not": "İbre sola kaydı: duyduğuna hemen inanmak, dostluğu sınamadan bırakmaya götürüyor.",
+         "sonuc": "Yeni tanıdığının işi sana kalıyor; asıl arkadaşının yanına gidecek vaktin kalmıyor.",
+         "not": "İbre sola kaydı: herkesi hemen dost sanmak, asıl dostluğa zaman bırakmıyor.",
          "ses": "s1az"
         },
         {
@@ -216,9 +218,9 @@ DO.dersKaydet(
          "ses": "s1fa"
         },
         {
-         "m": "Payım bitti; senin bölümüne de yardım edeyim.",
+         "m": "Arkadaşıma yardım ederim; yeni tanıdığa sonra bakarız derim.",
          "zon": "orta",
-         "sonuc": "Proje birlikte tamamlanıyor; ikiniz de rahatlıyorsunuz.",
+         "sonuc": "Proje birlikte tamamlanıyor; yeni tanıdığınla dostluğu zamanla görüyorsun.",
          "not": "İbre ortada: dostunun yanında durmak, işin ötesinde bir güven kuruyor.",
          "ses": "s1or"
         }
@@ -228,13 +230,13 @@ DO.dersKaydet(
       {
        "id": "hata",
        "baslik": "Zor gün",
-       "tetik": "Arkadaşın bir hata yaptı ve herkes ona kızıyor. Bazıları onunla görüşmemeni söylüyor.",
+       "tetik": "Arkadaşın bir hata yaptı ve herkes ona kızıyor. Yeni tanıştığın biri de “onu bırak, benimle ol; gerçek dostun benim,” diyor.",
        "secenekler": [
         {
-         "m": "Herkes öyle diyorsa doğrudur, görüşmem.",
+         "m": "Madem benim dostummuş, ona uyup arkadaşımı bırakırım.",
          "zon": "az",
-         "sonuc": "Dostun yalnız kalıyor; sen de olanın gerçeğini hiç öğrenmiyorsun.",
-         "not": "İbre sola kaydı: kalabalığın sözüne hemen inanmak, dostluğu kolayca bırakıyor.",
+         "sonuc": "Dostun yalnız kalıyor; yeni tanıdığın da ilgisini kaybedebilir.",
+         "not": "İbre sola kaydı: yeni gelene hemen güvenmek, eski dostluğu kolayca bırakıyor.",
          "ses": "s2az"
         },
         {
@@ -245,7 +247,7 @@ DO.dersKaydet(
          "ses": "s2fa"
         },
         {
-         "m": "Önce onunla konuşurum; hatayı birlikte düzeltiriz.",
+         "m": "Arkadaşımla konuşurum; yeni tanıdığı da zamanla tanırım.",
          "zon": "orta",
          "sonuc": "Arkadaşın hatasını anlıyor ve düzeltiyor; dostluk zor günü atlatıyor.",
          "not": "İbre ortada: hatayı görüp dostunun yanında durdun.",
@@ -267,7 +269,7 @@ DO.dersKaydet(
       {
        "id": "az",
        "ad": "Az · Saflık",
-       "aciklama": "Söylentiye çabucak inanmak",
+       "aciklama": "Herkesi hemen dost sanmak",
        "ikon": "kilit",
        "renk": "#4262B0"
       },
@@ -289,9 +291,9 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Biri “arkadaşın seni sevmiyor” deyince sormadan ona inanır.",
+       "metin": "Yeni tanıştığı birine hemen “en yakın dostum” der, her istediğini yapar.",
        "alan": "az",
-       "ipucu": "Söylentiye hemen kapılıyor."
+       "ipucu": "Herkesi hemen dost sanıyor."
       },
       {
        "id": "k2",
@@ -307,21 +309,21 @@ DO.dersKaydet(
       },
       {
        "id": "k4",
-       "metin": "Tanımadığı birinin dedikodusuna hemen inanıp dostundan uzaklaşır.",
+       "metin": "Yeni tanıdığı biri her gün ödevini yaptırsa da “o benim dostum” der.",
        "alan": "az",
-       "ipucu": "Çabucak inanıyor."
+       "ipucu": "Kolayca kullanılıyor."
       },
       {
        "id": "k5",
-       "metin": "Arkadaşı üzülünce “benim işim değil” der.",
+       "metin": "Arkadaşı zor durumdayken “ben işimi bitirdim” deyip ayrılır.",
        "alan": "fazla",
        "ipucu": "Dostunu yalnız bırakıyor."
       },
       {
        "id": "k6",
-       "metin": "Duyduğunu önce dostuna sorar, sonra karar verir.",
+       "metin": "Yeni biriyle de arkadaş olur ama eski dostunu bırakmaz.",
        "alan": "orta",
-       "ipucu": "Önce konuşup dostluğu koruyor."
+       "ipucu": "Dostluğu aceleye getirmiyor."
       }
      ]
     },
@@ -333,7 +335,7 @@ DO.dersKaydet(
       {
        "soru": "Hangi durumda ibrem sağa ya da sola kayıyor?",
        "secenekler": [
-        "Bir söylenti duyunca",
+        "Yeni biri bana “dostum” deyince",
         "Ortak bir işi bitirince",
         "Arkadaşım zor durumdayken",
         "Biri arkadaşımı kötülerken"
@@ -342,7 +344,7 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Duyduğumu önce arkadaşıma soracağım",
+        "Yeni tanıdığıma zamanla güvenmeyi deneyeceğim",
         "Ortak işi bitirene kadar yanında kalacağım",
         "Zor bir durumda güvendiğim bir yetişkinle de konuşacağım"
        ]
@@ -383,33 +385,38 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 2.039,
-   "m": "Ben bitirdim, gerisi senin işin.",
+   "sure": 2.053,
+   "m": "Ben payımı yaptım, sıra sende mi?",
    "k": [
     [
      "Ben",
      0.03,
-     0.193
+     0.184
     ],
     [
-     "bitirdim,",
-     0.193,
-     0.68
+     "payımı",
+     0.184,
+     0.647
     ],
     [
-     "gerisi",
-     1.0,
-     1.415
+     "yaptım,",
+     0.647,
+     0.955
     ],
     [
-     "senin",
-     1.415,
-     1.692
+     "sıra",
+     1.24,
+     1.537
     ],
     [
-     "işin.",
-     1.692,
-     1.969
+     "sende",
+     1.537,
+     1.834
+    ],
+    [
+     "mi?",
+     1.834,
+     1.983
     ]
    ]
   },
@@ -705,145 +712,175 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.591,
-   "m": "Sol uçta Saflık. Dediklerine inandım; arkadaşıma sormam bile. Duyduğu söylentiye hemen kapılıp dostundan uzaklaşır.",
+   "sure": 7.576,
+   "m": "Sol uçta Saflık. Herkes dostum; kim ne isterse yaparım. Yeni tanıdığı birine hemen güvenip her isteğini yerine getirir.",
    "k": [
     [
      "Sol",
      0.03,
-     0.252
+     0.168
     ],
     [
      "uçta",
-     0.252,
-     0.696
+     0.168,
+     0.444
     ],
     [
      "Saflık.",
-     0.696,
-     1.14
+     0.444,
+     0.72
     ],
     [
-     "Dediklerine",
-     1.235,
-     2.301
+     "Herkes",
+     0.91,
+     1.167
     ],
     [
-     "inandım;",
-     2.301,
-     2.94
+     "dostum;",
+     1.167,
+     1.425
     ],
     [
-     "arkadaşıma",
-     3.415,
-     4.076
+     "kim",
+     1.89,
+     1.981
     ],
     [
-     "sormam",
-     4.076,
-     4.341
+     "ne",
+     1.981,
+     2.072
     ],
     [
-     "bile.",
-     4.341,
-     4.605
+     "isterse",
+     2.072,
+     2.346
     ],
     [
-     "Duyduğu",
-     5.285,
-     5.796
+     "yaparım.",
+     2.346,
+     2.62
     ],
     [
-     "söylentiye",
-     5.796,
-     6.477
+     "Yeni",
+     2.98,
+     3.342
+    ],
+    [
+     "tanıdığı",
+     3.342,
+     4.066
+    ],
+    [
+     "birine",
+     4.066,
+     4.609
     ],
     [
      "hemen",
-     6.477,
-     6.818
+     4.609,
+     4.971
     ],
     [
-     "kapılıp",
-     6.818,
-     7.329
+     "güvenip",
+     4.971,
+     5.514
     ],
     [
-     "dostundan",
-     7.329,
-     7.84
+     "her",
+     5.514,
+     5.695
     ],
     [
-     "uzaklaşır.",
-     7.84,
-     8.521
+     "isteğini",
+     5.695,
+     6.42
+    ],
+    [
+     "yerine",
+     6.42,
+     6.963
+    ],
+    [
+     "getirir.",
+     6.963,
+     7.506
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.564,
-   "m": "Sonra ne olur? Dostu neden uzaklaştığını anlayamaz. Söylentinin doğrusunu da kimse araştırmaz.",
+   "sure": 5.976,
+   "m": "Sonra ne olur? Dostluğunu kullanan biri çıkınca kırılır. Gerçek dostu tanıdıklardan ayırmak zor olur.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.428
+     0.26
     ],
     [
      "ne",
-     0.428,
-     0.627
+     0.26,
+     0.375
     ],
     [
      "olur?",
-     0.627,
-     1.025
+     0.375,
+     0.605
     ],
     [
-     "Dostu",
-     1.14,
-     1.494
+     "Dostluğunu",
+     0.92,
+     1.497
     ],
     [
-     "neden",
-     1.494,
-     1.849
+     "kullanan",
+     1.497,
+     1.93
     ],
     [
-     "uzaklaştığını",
-     1.849,
-     2.911
+     "biri",
+     1.93,
+     2.219
     ],
     [
-     "anlayamaz.",
-     2.911,
-     3.62
+     "çıkınca",
+     2.219,
+     2.652
     ],
     [
-     "Söylentinin",
-     3.73,
-     4.467
+     "kırılır.",
+     2.652,
+     3.085
     ],
     [
-     "doğrusunu",
-     4.467,
-     5.204
+     "Gerçek",
+     3.505,
+     3.825
     ],
     [
-     "da",
-     5.204,
-     5.388
+     "dostu",
+     3.825,
+     4.145
     ],
     [
-     "kimse",
-     5.388,
-     5.757
+     "tanıdıklardan",
+     4.145,
+     4.946
     ],
     [
-     "araştırmaz.",
-     5.757,
-     6.494
+     "ayırmak",
+     4.946,
+     5.426
+    ],
+    [
+     "zor",
+     5.426,
+     5.586
+    ],
+    [
+     "olur.",
+     5.586,
+     5.906
     ]
    ]
   },
@@ -1243,125 +1280,200 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 6.363,
-   "m": "Arkadaşınla ortak proje yapıyorsunuz. Sen bölümünü bitirdin, arkadaşın hâlâ yetişmeye çalışıyor. Ne yaparsın?",
+   "sure": 9.958,
+   "m": "Arkadaşınla ortak proje yapıyorsunuz. Sen kendi bölümünü bitirdin, arkadaşın hâlâ yetişmeye çalışıyor. Yeni tanıştığın biri de dostuz artık, benim bölümümü de sen yap, diyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşınla",
      0.03,
-     0.682
+     0.667
     ],
     [
      "ortak",
-     0.682,
-     0.943
+     0.667,
+     0.922
     ],
     [
      "proje",
-     0.943,
-     1.203
+     0.922,
+     1.177
     ],
     [
      "yapıyorsunuz.",
-     1.203,
-     1.855
+     1.177,
+     1.815
     ],
     [
      "Sen",
-     2.15,
-     2.289
+     2.09,
+     2.217
+    ],
+    [
+     "kendi",
+     2.217,
+     2.472
     ],
     [
      "bölümünü",
-     2.289,
-     2.844
+     2.472,
+     2.982
     ],
     [
      "bitirdin,",
-     2.844,
-     3.26
+     2.982,
+     3.365
     ],
     [
      "arkadaşın",
-     3.41,
-     3.971
+     3.515,
+     4.102
     ],
     [
      "hâlâ",
-     3.971,
-     4.252
+     4.102,
+     4.396
     ],
     [
      "yetişmeye",
-     4.252,
-     4.814
+     4.396,
+     4.983
     ],
     [
      "çalışıyor.",
-     4.814,
-     5.375
+     4.983,
+     5.57
+    ],
+    [
+     "Yeni",
+     5.67,
+     5.957
+    ],
+    [
+     "tanıştığın",
+     5.957,
+     6.531
+    ],
+    [
+     "biri",
+     6.531,
+     6.818
+    ],
+    [
+     "de",
+     6.818,
+     6.961
+    ],
+    [
+     "dostuz",
+     6.961,
+     7.248
+    ],
+    [
+     "artık,",
+     7.248,
+     7.535
+    ],
+    [
+     "benim",
+     7.75,
+     7.987
+    ],
+    [
+     "bölümümü",
+     7.987,
+     8.46
+    ],
+    [
+     "de",
+     8.46,
+     8.578
+    ],
+    [
+     "sen",
+     8.578,
+     8.697
+    ],
+    [
+     "yap,",
+     8.697,
+     8.815
+    ],
+    [
+     "diyor.",
+     8.915,
+     9.115
     ],
     [
      "Ne",
-     5.74,
-     5.878
+     9.445,
+     9.556
     ],
     [
      "yaparsın?",
-     5.878,
-     6.293
+     9.556,
+     9.888
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 4.301,
-   "m": "Arkadaşın nedenini bilmiyor; söylentinin doğru olup olmadığı hiç sorulmuyor.",
+   "sure": 4.948,
+   "m": "Yeni tanıdığının işi sana kalıyor; asıl arkadaşının yanına gidecek vaktin kalmıyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Yeni",
      0.03,
-     0.499
+     0.327
     ],
     [
-     "nedenini",
-     0.499,
-     0.968
+     "tanıdığının",
+     0.327,
+     1.07
     ],
     [
-     "bilmiyor;",
-     0.968,
-     1.32
+     "işi",
+     1.07,
+     1.367
     ],
     [
-     "söylentinin",
-     1.595,
-     2.215
+     "sana",
+     1.367,
+     1.664
     ],
     [
-     "doğru",
-     2.215,
-     2.525
+     "kalıyor;",
+     1.664,
+     2.11
     ],
     [
-     "olup",
-     2.525,
-     2.836
+     "asıl",
+     2.235,
+     2.529
     ],
     [
-     "olmadığı",
-     2.836,
-     3.456
+     "arkadaşının",
+     2.529,
+     3.263
     ],
     [
-     "hiç",
-     3.456,
-     3.611
+     "yanına",
+     3.263,
+     3.703
     ],
     [
-     "sorulmuyor.",
-     3.611,
-     4.231
+     "gidecek",
+     3.703,
+     4.144
+    ],
+    [
+     "vaktin",
+     4.144,
+     4.437
+    ],
+    [
+     "kalmıyor.",
+     4.437,
+     4.878
     ]
    ]
   },
@@ -1414,167 +1526,212 @@ DO.dersKaydet(
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 2.889,
-   "m": "Proje birlikte tamamlanıyor; ikiniz de rahatlıyorsunuz.",
+   "sure": 3.917,
+   "m": "Proje birlikte tamamlanıyor; yeni tanıdığınla dostluğu zamanla görüyorsun.",
    "k": [
     [
      "Proje",
      0.03,
-     0.271
+     0.265
     ],
     [
      "birlikte",
-     0.271,
-     0.633
+     0.265,
+     0.618
     ],
     [
      "tamamlanıyor;",
-     0.633,
-     1.235
+     0.618,
+     1.205
     ],
     [
-     "ikiniz",
-     1.67,
-     2.015
+     "yeni",
+     1.635,
+     1.895
     ],
     [
-     "de",
-     2.015,
-     2.13
+     "tanıdığınla",
+     1.895,
+     2.546
     ],
     [
-     "rahatlıyorsunuz.",
-     2.13,
-     2.819
+     "dostluğu",
+     2.546,
+     2.936
+    ],
+    [
+     "zamanla",
+     2.936,
+     3.326
+    ],
+    [
+     "görüyorsun.",
+     3.326,
+     3.847
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.538,
-   "m": "Arkadaşın bir hata yaptı ve herkes ona kızıyor. Bazıları onunla görüşmemeni söylüyor. Ne yaparsın?",
+   "sure": 7.932,
+   "m": "Arkadaşın bir hata yaptı ve herkes ona kızıyor. Yeni tanıştığın biri de onu bırak, benimle ol; gerçek dostun benim, diyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.614
+     0.603
     ],
     [
      "bir",
-     0.614,
-     0.759
+     0.603,
+     0.746
     ],
     [
      "hata",
-     0.759,
-     1.051
+     0.746,
+     1.033
     ],
     [
      "yaptı",
-     1.051,
-     1.343
+     1.033,
+     1.319
     ],
     [
      "ve",
-     1.343,
-     1.489
+     1.319,
+     1.462
     ],
     [
      "herkes",
-     1.489,
-     1.781
+     1.462,
+     1.749
     ],
     [
      "ona",
-     1.781,
-     2.072
+     1.749,
+     2.035
     ],
     [
      "kızıyor.",
-     2.072,
-     2.51
+     2.035,
+     2.465
     ],
     [
-     "Bazıları",
-     2.765,
-     3.254
+     "Yeni",
+     2.785,
+     3.157
     ],
     [
-     "onunla",
-     3.254,
-     3.621
+     "tanıştığın",
+     3.157,
+     3.9
     ],
     [
-     "görüşmemeni",
-     3.621,
-     4.233
+     "biri",
+     3.9,
+     4.271
     ],
     [
-     "söylüyor.",
-     4.233,
-     4.6
+     "de",
+     4.271,
+     4.457
+    ],
+    [
+     "onu",
+     4.457,
+     4.828
+    ],
+    [
+     "bırak,",
+     4.828,
+     5.2
+    ],
+    [
+     "benimle",
+     5.435,
+     6.237
+    ],
+    [
+     "ol;",
+     6.237,
+     6.505
+    ],
+    [
+     "gerçek",
+     6.63,
+     6.738
+    ],
+    [
+     "dostun",
+     6.738,
+     6.847
+    ],
+    [
+     "benim,",
+     6.847,
+     6.955
+    ],
+    [
+     "diyor.",
+     7.33,
+     7.507
     ],
     [
      "Ne",
-     4.9,
-     5.042
+     7.507,
+     7.596
     ],
     [
      "yaparsın?",
-     5.042,
-     5.468
+     7.596,
+     7.862
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 5.55,
-   "m": "Dostun yalnız kalıyor; sen de olanın gerçeğini hiç öğrenmiyorsun.",
+   "sure": 4.199,
+   "m": "Dostun yalnız kalıyor; yeni tanıdığın da ilgisini kaybedebilir.",
    "k": [
     [
      "Dostun",
      0.03,
-     0.46
+     0.37
     ],
     [
      "yalnız",
-     0.46,
-     0.89
+     0.37,
+     0.71
     ],
     [
      "kalıyor;",
-     0.89,
-     1.535
+     0.71,
+     1.22
     ],
     [
-     "sen",
-     1.93,
-     2.167
+     "yeni",
+     1.595,
+     1.912
     ],
     [
-     "de",
-     2.167,
-     2.403
+     "tanıdığın",
+     1.912,
+     2.545
     ],
     [
-     "olanın",
-     2.403,
-     3.113
+     "da",
+     2.545,
+     2.704
     ],
     [
-     "gerçeğini",
-     3.113,
-     4.06
+     "ilgisini",
+     2.704,
+     3.337
     ],
     [
-     "hiç",
-     4.06,
-     4.297
-    ],
-    [
-     "öğrenmiyorsun.",
-     4.297,
-     5.48
+     "kaybedebilir.",
+     3.337,
+     4.129
     ]
    ]
   },
@@ -1865,138 +2022,138 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.873,
-   "m": "Bu cümle bilerek çift anlamlı. Payını bitirip yine de yardıma hazır biri söylüyorsa orta uca yakın. Payını bitirince dostunu bırakıp giden biri söylüyorsa sağ uca yakın.",
+   "sure": 11.994,
+   "m": "Bu cümle bilerek çift anlamlı. Payını yapıp nazikçe yardıma hazır biri söylüyorsa orta uca yakın. Payını yapınca işi karşısındakine bırakıp çekilen biri söylüyorsa sağ uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.172
+     0.181
     ],
     [
      "cümle",
-     0.172,
-     0.455
+     0.181,
+     0.484
     ],
     [
      "bilerek",
-     0.455,
-     0.879
+     0.484,
+     0.939
     ],
     [
      "çift",
-     0.879,
-     1.02
+     0.939,
+     1.091
     ],
     [
      "anlamlı.",
-     1.02,
-     1.445
+     1.091,
+     1.545
     ],
     [
      "Payını",
-     1.915,
-     2.327
+     1.92,
+     2.387
     ],
     [
-     "bitirip",
-     2.327,
-     2.739
+     "yapıp",
+     2.387,
+     2.698
     ],
     [
-     "yine",
-     2.739,
-     3.013
-    ],
-    [
-     "de",
-     3.013,
-     3.151
+     "nazikçe",
+     2.698,
+     3.165
     ],
     [
      "yardıma",
-     3.151,
-     3.563
+     3.165,
+     3.632
     ],
     [
      "hazır",
-     3.563,
-     3.837
+     3.632,
+     3.943
     ],
     [
      "biri",
-     3.837,
-     4.112
+     3.943,
+     4.254
     ],
     [
      "söylüyorsa",
-     4.112,
-     4.661
+     4.254,
+     4.876
     ],
     [
      "orta",
-     4.661,
-     4.936
+     4.876,
+     5.188
     ],
     [
      "uca",
-     4.936,
-     5.21
+     5.188,
+     5.499
     ],
     [
      "yakın.",
-     5.21,
-     5.485
+     5.499,
+     5.81
     ],
     [
      "Payını",
-     6.13,
-     6.554
+     6.455,
+     6.984
     ],
     [
-     "bitirince",
-     6.554,
-     7.119
+     "yapınca",
+     6.984,
+     7.514
     ],
     [
-     "dostunu",
-     7.119,
-     7.543
+     "işi",
+     7.514,
+     7.866
+    ],
+    [
+     "karşısındakine",
+     7.866,
+     8.925
     ],
     [
      "bırakıp",
-     7.543,
-     7.967
+     8.925,
+     9.454
     ],
     [
-     "giden",
-     7.967,
-     8.249
+     "çekilen",
+     9.454,
+     9.983
     ],
     [
      "biri",
-     8.249,
-     8.532
+     9.983,
+     10.336
     ],
     [
      "söylüyorsa",
-     8.532,
-     9.097
+     10.336,
+     11.042
     ],
     [
      "sağ",
-     9.097,
-     9.238
+     11.042,
+     11.218
     ],
     [
      "uca",
-     9.238,
-     9.521
+     11.218,
+     11.571
     ],
     [
      "yakın.",
-     9.521,
-     9.803
+     11.571,
+     11.924
     ]
    ]
   },

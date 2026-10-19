@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Ülfet: İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "iliski",
+ "muzik": "iliski",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -20,6 +22,7 @@ DO.dersKaydet(
      "id": "acilis",
      "tur": "ibreAcilis",
      "huy": "Ülfet",
+     "huyAnahtar": "Ülfet",
      "olculen": "Yakınlık kurma biçimim",
      "kanca": "Küsmedim, sadece konuşmuyorum.",
      "uclar": {
@@ -225,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "yeni",
-       "baslik": "Yeni arkadaş",
-       "tetik": "Sınıfa yeni bir öğrenci geldi. Sessiz duruyor ve kimseyle konuşmuyor.",
+       "id": "oyun",
+       "baslik": "Çağrılmayan oyun",
+       "tetik": "Teneffüste yakın arkadaşın başka arkadaşlarla bir oyuna katılmış. Seni çağırmadı.",
        "secenekler": [
         {
-         "m": "Beni ilgilendirmez; ben kendi arkadaşlarımla kalırım.",
+         "m": "Beni çağırmadı; bir daha onunla konuşmam.",
          "zon": "az",
-         "sonuc": "Yeni arkadaş kendini yalnız hissediyor; tanışma fırsatı kaçıyor.",
-         "not": "İbre sola kaydı: uzak durmak yeni dostlukları engelliyor.",
+         "sonuc": "Arkadaşın neden kırıldığını bilemiyor; aranızdaki mesafe büyüyor.",
+         "not": "İbre sola kaydı: kırılınca konuşmayı kesmek dostluğu soğutuyor.",
          "ses": "s2az"
         },
         {
-         "m": "Hemen en yakın arkadaşı olurum; her yere birlikte gideriz!",
+         "m": "Hemen aralarına girerim; o benimle oynasın, başkasıyla değil!",
          "zon": "fazla",
-         "sonuc": "Yeni arkadaş bunalıyor; başkalarıyla tanışmaya fırsat bulamıyor.",
-         "not": "İbre sağa kaydı: aşırı yakınlık, karşındakine alan bırakmıyor.",
+         "sonuc": "Arkadaşın bunalıyor; oyunun keyfi kaçıyor.",
+         "not": "İbre sağa kaydı: arkadaşını kendine saklamak yakınlığı daraltıyor.",
          "ses": "s2fa"
         },
         {
-         "m": "Merhaba derim; istersen birlikte oturalım diye sorarım.",
+         "m": "Üzüldüm; sonra ona söylerim: “Bir dahaki oyuna beni de çağır.”",
          "zon": "orta",
-         "sonuc": "Yeni arkadaş gülümsüyor ve kendi hızında yaklaşıyor.",
-         "not": "İbre ortada: yakınlığı davet ettin, zorlamadın.",
+         "sonuc": "Arkadaşın durumu fark ediyor; bir dahaki oyunda seni de çağırıyor.",
+         "not": "İbre ortada: kırgınlığını konuştun, onun alanına da saygı gösterdin.",
          "ses": "s2or"
         }
        ],
@@ -306,13 +309,13 @@ DO.dersKaydet(
       },
       {
        "id": "k4",
-       "metin": "Oyuna çağrıldığında “ben gelmem” deyip köşesinde oturur.",
+       "metin": "Barışma teklifini her seferinde reddedip kendi köşesine çekilir.",
        "alan": "az",
        "ipucu": "Yaklaşmak yerine uzaklaşıyor."
       },
       {
        "id": "k5",
-       "metin": "Arkadaşı başkalarıyla oynayınca üzülüp araya girer.",
+       "metin": "Arkadaşına her teneffüsü kendisiyle geçirmesini söyler, başkasıyla oynatmaz.",
        "alan": "fazla",
        "ipucu": "Arkadaşına alan bırakmıyor."
       },
@@ -334,7 +337,7 @@ DO.dersKaydet(
        "secenekler": [
         "Bir arkadaşımla tartışınca",
         "Arkadaşım yalnız kalmak isteyince",
-        "Yeni biriyle tanışırken",
+        "Arkadaşım beni oyuna çağırmayınca",
         "Arkadaşım başkalarıyla oynarken"
        ]
       },
@@ -343,7 +346,7 @@ DO.dersKaydet(
        "secenekler": [
         "Küsmek yerine “barışalım mı?” diyeceğim",
         "Arkadaşım “yalnız kalayım” derse ona alan bırakacağım",
-        "Yeni bir arkadaşa merhaba diyeceğim"
+        "Üzüldüysem bunu ona sakince söyleyeceğim"
        ]
       }
      ],
@@ -684,78 +687,78 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.684,
-   "m": "Sol uçta Hicr. Seninle konuşmam, bir daha da çağırma. Oyuna çağrılsa bile köşesinden çıkmaz.",
+   "sure": 6.156,
+   "m": "Sol uçta Hicr. Seninle konuşmam, bir daha da çağırma. Barışma teklifini bile geri çevirir.",
    "k": [
     [
      "Sol",
      0.03,
-     0.309
+     0.296
     ],
     [
      "uçta",
-     0.309,
-     0.866
+     0.296,
+     0.829
     ],
     [
      "Hicr.",
-     0.866,
-     1.145
+     0.829,
+     1.095
     ],
     [
      "Seninle",
-     1.45,
-     1.902
+     1.6,
+     2.045
     ],
     [
      "konuşmam,",
-     1.902,
-     2.355
+     2.045,
+     2.49
     ],
     [
      "bir",
-     2.625,
-     2.752
+     2.81,
+     2.941
     ],
     [
      "daha",
-     2.752,
-     3.006
+     2.941,
+     3.204
     ],
     [
      "da",
-     3.006,
-     3.134
+     3.204,
+     3.336
     ],
     [
      "çağırma.",
-     3.134,
-     3.515
+     3.336,
+     3.73
     ],
     [
-     "Oyuna",
-     3.94,
-     4.513
+     "Barışma",
+     3.91,
+     4.376
     ],
     [
-     "çağrılsa",
-     4.513,
-     5.086
+     "teklifini",
+     4.376,
+     4.998
     ],
     [
      "bile",
-     5.086,
-     5.468
+     4.998,
+     5.309
     ],
     [
-     "köşesinden",
-     5.468,
-     6.232
+     "geri",
+     5.309,
+     5.62
     ],
     [
-     "çıkmaz.",
-     6.232,
-     6.614
+     "çevirir.",
+     5.62,
+     6.086
     ]
    ]
   },
@@ -1480,199 +1483,199 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 5.754,
-   "m": "Sınıfa yeni bir öğrenci geldi. Sessiz duruyor ve kimseyle konuşmuyor. Ne yaparsın?",
+   "sure": 6.201,
+   "m": "Teneffüste yakın arkadaşın başka arkadaşlarla bir oyuna katılmış. Seni çağırmadı. Ne yaparsın?",
    "k": [
     [
-     "Sınıfa",
+     "Teneffüste",
      0.03,
-     0.446
+     0.644
     ],
     [
-     "yeni",
-     0.446,
-     0.723
+     "yakın",
+     0.644,
+     0.951
+    ],
+    [
+     "arkadaşın",
+     0.951,
+     1.565
+    ],
+    [
+     "başka",
+     1.565,
+     1.873
+    ],
+    [
+     "arkadaşlarla",
+     1.873,
+     2.64
     ],
     [
      "bir",
-     0.723,
-     0.862
+     2.64,
+     2.794
     ],
     [
-     "öğrenci",
-     0.862,
-     1.278
+     "oyuna",
+     2.794,
+     3.254
     ],
     [
-     "geldi.",
-     1.278,
-     1.555
+     "katılmış.",
+     3.254,
+     3.715
     ],
     [
-     "Sessiz",
-     1.86,
-     2.171
+     "Seni",
+     4.12,
+     4.423
     ],
     [
-     "duruyor",
-     2.171,
-     2.637
-    ],
-    [
-     "ve",
-     2.637,
-     2.792
-    ],
-    [
-     "kimseyle",
-     2.792,
-     3.258
-    ],
-    [
-     "konuşmuyor.",
-     3.258,
-     3.88
+     "çağırmadı.",
+     4.423,
+     5.03
     ],
     [
      "Ne",
-     4.2,
-     4.571
+     5.5,
+     5.658
     ],
     [
      "yaparsın?",
-     4.571,
-     5.684
+     5.658,
+     6.131
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.462,
-   "m": "Yeni arkadaş kendini yalnız hissediyor; tanışma fırsatı kaçıyor.",
+   "sure": 4.572,
+   "m": "Arkadaşın neden kırıldığını bilemiyor; aranızdaki mesafe büyüyor.",
    "k": [
     [
-     "Yeni",
+     "Arkadaşın",
      0.03,
-     0.298
+     0.542
     ],
     [
-     "arkadaş",
-     0.298,
-     0.7
+     "neden",
+     0.542,
+     0.798
     ],
     [
-     "kendini",
-     0.7,
-     1.101
+     "kırıldığını",
+     0.798,
+     1.438
     ],
     [
-     "yalnız",
-     1.101,
-     1.369
+     "bilemiyor;",
+     1.438,
+     1.95
     ],
     [
-     "hissediyor;",
-     1.369,
-     1.905
+     "aranızdaki",
+     2.385,
+     3.347
     ],
     [
-     "tanışma",
-     2.15,
-     2.564
+     "mesafe",
+     3.347,
+     3.925
     ],
     [
-     "fırsatı",
-     2.564,
-     2.978
-    ],
-    [
-     "kaçıyor.",
-     2.978,
-     3.392
+     "büyüyor.",
+     3.925,
+     4.502
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.197,
-   "m": "Yeni arkadaş bunalıyor; başkalarıyla tanışmaya fırsat bulamıyor.",
+   "sure": 2.892,
+   "m": "Arkadaşın bunalıyor; oyunun keyfi kaçıyor.",
    "k": [
     [
-     "Yeni",
+     "Arkadaşın",
      0.03,
-     0.254
-    ],
-    [
-     "arkadaş",
-     0.254,
-     0.591
+     0.568
     ],
     [
      "bunalıyor;",
-     0.591,
-     1.04
+     0.568,
+     1.105
     ],
     [
-     "başkalarıyla",
-     1.255,
-     1.879
+     "oyunun",
+     1.465,
+     1.974
     ],
     [
-     "tanışmaya",
-     1.879,
-     2.378
+     "keyfi",
+     1.974,
+     2.313
     ],
     [
-     "fırsat",
-     2.378,
-     2.628
-    ],
-    [
-     "bulamıyor.",
-     2.628,
-     3.127
+     "kaçıyor.",
+     2.313,
+     2.822
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.041,
-   "m": "Yeni arkadaş gülümsüyor ve kendi hızında yaklaşıyor.",
+   "sure": 3.412,
+   "m": "Arkadaşın durumu fark ediyor; bir dahaki oyunda seni de çağırıyor.",
    "k": [
     [
-     "Yeni",
+     "Arkadaşın",
      0.03,
-     0.34
+     0.534
     ],
     [
-     "arkadaş",
-     0.34,
-     0.804
+     "durumu",
+     0.534,
+     0.911
     ],
     [
-     "gülümsüyor",
-     0.804,
-     1.423
+     "fark",
+     0.911,
+     1.037
     ],
     [
-     "ve",
-     1.423,
-     1.578
+     "ediyor;",
+     1.037,
+     1.415
     ],
     [
-     "kendi",
-     1.578,
-     1.888
+     "bir",
+     1.7,
+     1.817
     ],
     [
-     "hızında",
-     1.888,
-     2.352
+     "dahaki",
+     1.817,
+     2.169
     ],
     [
-     "yaklaşıyor.",
-     2.352,
-     2.971
+     "oyunda",
+     2.169,
+     2.521
+    ],
+    [
+     "seni",
+     2.521,
+     2.755
+    ],
+    [
+     "de",
+     2.755,
+     2.873
+    ],
+    [
+     "çağırıyor.",
+     2.873,
+     3.342
     ]
    ]
   },

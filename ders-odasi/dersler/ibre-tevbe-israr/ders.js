@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Tevbe (Hatada Israr · Vesvese): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,7 +23,7 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Tevbe",
      "huyAnahtar": "Tevbe",
-     "olculen": "Hatadan dönme biçimim",
+     "olculen": "Tekrarlanan hatadan dönme biçimim",
      "kanca": "Bir daha yapmayacağım, söz veriyorum.",
      "uclar": {
       "az": "Hatada Israr",
@@ -45,7 +47,7 @@ DO.dersKaydet(
      "hedefZon": "orta",
      "aciklama": [
       "Bu cümle bilerek çift anlamlı. Bir okumada kişi hatasını gerçekten anlamış ve değişmeye karar vermiş: orta uca yakın. Başka okumada aynı sözü her seferinde söyleyip yine aynı hatayı yapıyor: sol uca (Hatada Israr) yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, hatadan sonra ne yaptığımıza bakar. Tevbe; hatayı fark edip pişman olmak, özür dilemek ve Allahü teâlâ’ya yönelerek doğruya dönmektir. Sağ uç olan vesvese ise her konuda asılsız kuruntu yapmaktır; bu ibre ölçekten çok yönü gösterir. Kuruntular çoğalırsa güvendiğin bir yetişkinle konuşmak iyi gelir.",
+      "İbre cümleye değil, hatadan sonra ne yaptığımıza bakar. Tevbe; hatayı fark edip pişman olmak, özür dilemek ve Allahü teâlâ’ya yönelerek doğruya dönmektir. Tekrar düşsen de yeniden denemek ve tevbe etmek hep mümkündür. Sol uç, yanlış olduğunu bile bile aynı şeyi sürdürmektir. Sağ uç olan vesvese ise her konuda durmayan kuruntu yapmaktır; bu ibre ölçekten çok yönü gösterir. Bu bir kusur değil; güvendiğin bir yetişkinle konuşunca hafifler.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -67,27 +69,27 @@ DO.dersKaydet(
        "zon": "az",
        "soru": "Aynı hatayı sürdürmek neye benziyor?",
        "ad": "Israr",
-       "soz": "Yanlış biliyorum ama böyle iyiyim, devam.",
+       "soz": "Yanlış olduğunu biliyorum ama devam ediyorum.",
        "eylem": "hayir",
        "zincir": [
         "Küçük yalan büyüyüp yenisini çağırır.",
-        "Güven azaldıkça arkadaşları ondan uzaklaşır."
+        "Güven azaldıkça dostluklar yorulur."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Yanlış ama bırakmak istemiyorum.",
+          "m": "Yanlış ama bırakmak zor geliyor; devam edeyim.",
           "dogru": true,
-          "not": "Hatada ısrar, bildiği yanlışı bırakmamaktır. Fark etmek güzeldir; bırakmak ise yolu açar."
+          "not": "Hatada ısrar, bile bile yanlışı sürdürmektir. Fark etmek güzeldir; bırakmak ise yolu açar. Tekrar düşsen de yeniden denemek ve tevbe etmek hep mümkündür."
          },
          {
-          "m": "Hata yaptım; özür dileyip bırakıyorum.",
+          "m": "Hata yaptım; özür dilerim, Allahü teâlâ’dan da af dilerim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevbenin sesi."
          },
          {
-          "m": "Acaba yanlış yaptım? Bir daha bakayım.",
+          "m": "Ya hata yaptıysam? Bir daha düşüneyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: vesvesenin sesi."
          }
@@ -104,29 +106,29 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Boş yere kuruntu eden kişi neyi kaçırır?",
+       "soru": "Kuruntuya takılan kişi neyi kaçırır?",
        "ad": "Vesvese",
-       "soz": "Acaba yanlış mı yaptım? Bir daha, bir daha bakayım.",
+       "soz": "Ya hata yaptıysam? Bir daha düşüneyim, bir daha!",
        "eylem": "dusun",
        "zincir": [
-        "Kontrol ettikçe huzuru kaçar.",
-        "Zaman geçer, kuruntu azalmak yerine çoğalır."
+        "Düşündükçe huzuru kaçar.",
+        "Zaman geçer, kuruntu azalmak yerine çoğalabilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Acaba yanlış yaptım? Bir daha bakayım.",
+          "m": "Ya hata yaptıysam? Bir daha düşüneyim.",
           "dogru": true,
-          "not": "Vesvese, aslında olmayan bir şey için tekrar tekrar kuruntu etmektir. Böyle olunca güvendiğin bir yetişkinle konuşmak iyi gelir."
+          "not": "Vesvese, durmayan kuruntudur. Bu bir kusur değil; güvendiğin bir yetişkinle konuşunca hafifler."
          },
          {
-          "m": "Yanlış ama bırakmak istemiyorum.",
+          "m": "Yanlış ama bırakmak zor geliyor; devam edeyim.",
           "dogru": false,
           "not": "Bu sol ucun sesi: ısrarın sesi."
          },
          {
-          "m": "Hata yaptım; özür dileyip bırakıyorum.",
+          "m": "Hata yaptım; özür dilerim, Allahü teâlâ’dan da af dilerim.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevbenin sesi."
          }
@@ -134,10 +136,10 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Vesvese",
-        "soz": "Acaba"
+        "soz": "Ya"
        },
        "zincirAnahtar": [
-        "Kontrol",
+        "Düşündükçe",
         "Zaman"
        ]
       },
@@ -148,24 +150,24 @@ DO.dersKaydet(
        "soz": "Hata yaptım; özür dileyip düzelteceğim.",
        "eylem": "egil",
        "zincir": [
-        "Özür dilenince kalbi rahatlar.",
-        "Yeni bir sayfa açıp doğrusunu yapmaya başlar."
+        "Özür dileyince kalbi hafifler.",
+        "Allahü teâlâ’ya yönelmek ona yeni bir başlangıç verir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Hata yaptım; özür dileyip bırakıyorum.",
+          "m": "Hata yaptım; özür dilerim, Allahü teâlâ’dan da af dilerim.",
           "dogru": true,
-          "not": "Tevbe, hatayı fark edip pişman olmak, özür dilemek ve doğruya dönmektir."
+          "not": "Tevbe, hatayı fark edip pişman olmak, özür dilemek, Allahü teâlâ’ya yönelmek ve doğruya dönmektir."
          },
          {
-          "m": "Yanlış ama bırakmak istemiyorum.",
+          "m": "Yanlış ama bırakmak zor geliyor; devam edeyim.",
           "dogru": false,
           "not": "Bu sol ucun sesi: ısrarın sesi."
          },
          {
-          "m": "Acaba yanlış yaptım? Bir daha bakayım.",
+          "m": "Ya hata yaptıysam? Bir daha düşüneyim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: vesvesenin sesi."
          }
@@ -177,7 +179,7 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Özür",
-        "Yeni"
+        "Allahü"
        ]
       }
      ]
@@ -198,57 +200,57 @@ DO.dersKaydet(
      "senaryolar": [
       {
        "id": "yalan",
-       "baslik": "Küçük yalan",
-       "tetik": "Arkadaşına küçük bir yalan söyledin ve yalan olduğunu biliyorsun. O ise sana güvenmeye devam ediyor.",
+       "baslik": "Aynı yalan",
+       "tetik": "Bu hafta arkadaşına aynı küçük yalanı birkaç kez söyledin. Yalan olduğunu biliyorsun; o ise sana güvenmeye devam ediyor.",
        "secenekler": [
         {
-         "m": "Biliyorum yanlış ama böyle devam ederim.",
+         "m": "Biliyorum yanlış ama alıştım; böyle devam ederim.",
          "zon": "az",
          "sonuc": "Yalan büyüyor, yeni yalanlar gerekiyor ve güven azalıyor.",
          "not": "İbre sola kaydı: bildiği yanlışı sürdürmek hatayı büyütüyor.",
          "ses": "s1az"
         },
         {
-         "m": "Acaba bir şey mi oldu? Yüz kere düşünüp durayım.",
+         "m": "Ya yalanım çok ağırsa? Aklımda döndüreyim, bir şey yapmam.",
          "zon": "fazla",
-         "sonuc": "Kafan karışıyor; düzeltme adımı yerine kuruntu çoğalıyor.",
-         "not": "İbre sağa kaydı: kuruntu, düzeltmenin yerini alıyor. Çoğalırsa güvendiğin bir yetişkine anlat.",
+         "sonuc": "Kuruntu çoğalıyor ama düzeltme adımı atılmıyor; arkadaşın yalanı hâlâ bilmiyor.",
+         "not": "İbre sağa kaydı: durmayan kuruntu, düzeltmenin yerini alıyor. Çoğalırsa güvendiğin bir yetişkine anlat.",
          "ses": "s1fa"
         },
         {
-         "m": "Doğrusunu söyleyip özür dilerim.",
+         "m": "Doğrusunu söyleyip özür dilerim, Allahü teâlâ’dan da af dilerim.",
          "zon": "orta",
-         "sonuc": "Arkadaşın önce şaşırıyor, sonra doğruyu söylediğin için sana güveniyor.",
-         "not": "İbre ortada: hatayı fark edip düzelttin.",
+         "sonuc": "Arkadaşın önce şaşırıyor, sonra doğruyu söylediğin için sana yeniden güvenmeye başlıyor.",
+         "not": "İbre ortada: hatayı fark edip düzelttin ve Allahü teâlâ’ya yöneldin.",
          "ses": "s1or"
         }
        ],
        "ses": "s1"
       },
       {
-       "id": "kitap",
-       "baslik": "Kirlenen kitap",
-       "tetik": "Arkadaşının kitabına yanlışlıkla mürekkep damlattın. Kitap şimdi lekeli.",
+       "id": "gec",
+       "baslik": "Geç kalma",
+       "tetik": "Her sabah derse geç kalıyorsun. Bunun arkadaşlarını beklettiğini biliyorsun.",
        "secenekler": [
         {
-         "m": "Söylemem; nasıl olsa fark etmez.",
+         "m": "Biliyorum ama böyle alıştım; yarın da geç kalırım.",
          "zon": "az",
-         "sonuc": "Leke duruyor; arkadaşın kitabı bulunca sana güvenmesi sarsılıyor.",
-         "not": "İbre sola kaydı: hatayı gizlemek onu çözmüyor.",
+         "sonuc": "Geç kalma sürüyor; arkadaşların yoruluyor ve güven azalıyor.",
+         "not": "İbre sola kaydı: bildiği yanlışı sürdürmek alışkanlığı büyütüyor.",
          "ses": "s2az"
         },
         {
-         "m": "Ya başka kitapları da bozduysam? Hepsine tekrar bakarım.",
+         "m": "Ya herkes bana kızmıştır? Aynı şeyi sürekli düşünürüm!",
          "zon": "fazla",
-         "sonuc": "Kontrol bitmiyor; asıl yapman gereken özür bekliyor.",
-         "not": "İbre sağa kaydı: asılsız kuruntu, gerçek adımı geciktiriyor.",
+         "sonuc": "Kuruntu aklında dönüp duruyor; erken hazırlanma adımı bir türlü atılmıyor.",
+         "not": "İbre sağa kaydı: durmayan kuruntu, küçük bir düzeltmenin yerini alıyor. Çoğalırsa güvendiğin bir yetişkine anlat.",
          "ses": "s2fa"
         },
         {
-         "m": "Arkadaşıma söyler, özür diler, temizlemeye yardım ederim.",
+         "m": "Özür dilerim, Allahü teâlâ’dan da af dilerim; yarın erken çıkarım.",
          "zon": "orta",
-         "sonuc": "Birlikte temizliyorsunuz; arkadaşın seni anlıyor.",
-         "not": "İbre ortada: hatayı kabul edip düzeltmeye yöneldin.",
+         "sonuc": "Arkadaşların özrünü anlıyor; ertesi sabah zamanında çıkıyorsun.",
+         "not": "İbre ortada: hatayı fark edip özür diledin, Allahü teâlâ’ya yöneldin ve düzeltmeyi seçtin.",
          "ses": "s2or"
         }
        ],
@@ -267,7 +269,7 @@ DO.dersKaydet(
       {
        "id": "az",
        "ad": "Az · Hatada Israr",
-       "aciklama": "Hatayı sürdürmek",
+       "aciklama": "Hatayı bile bile sürdürmek",
        "ikon": "kilit",
        "renk": "#4262B0"
       },
@@ -281,7 +283,7 @@ DO.dersKaydet(
       {
        "id": "fazla",
        "ad": "Fazla · Vesvese",
-       "aciklama": "Boş kuruntuya takılmak",
+       "aciklama": "Durmayan kuruntuya takılmak",
        "ikon": "uyari",
        "renk": "#E0674F"
       }
@@ -295,31 +297,31 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Ödevi çantaya koyduğunu bildiği hâlde on kere açıp bakar.",
+       "metin": "Özür dilediği hâlde “yeterli oldu mu?” diye gün boyu aynı şeyi düşünür.",
        "alan": "fazla",
-       "ipucu": "Boş kuruntuya takılıyor."
+       "ipucu": "Durmayan kuruntu."
       },
       {
        "id": "k3",
-       "metin": "Hatasını söyler, özür diler ve aynı hatayı yapmamaya çalışır.",
+       "metin": "Hatasını söyler, özür diler, Allahü teâlâ’dan da af diler ve aynı hatayı yapmamaya çalışır.",
        "alan": "orta",
        "ipucu": "Pişman olup dönüyor."
       },
       {
        "id": "k4",
-       "metin": "“Bir daha yapmam” der ama her gün aynısını yapar.",
+       "metin": "Her sabah geç kaldığını bilir, “yarın erken kalkarım” der ama yine geç kalır.",
        "alan": "az",
-       "ipucu": "Sözü tutmuyor."
+       "ipucu": "Aynı şeyi tekrarlıyor."
       },
       {
        "id": "k5",
-       "metin": "Küçük bir hatadan sonra “ya bir şey daha bozduysam?” diye durmadan düşünür.",
+       "metin": "Küçük bir hatadan sonra “ya kötü bir şey olursa?” diye aynı şeyi tekrar tekrar düşünür.",
        "alan": "fazla",
-       "ipucu": "Kuruntu çoğalıyor."
+       "ipucu": "Kuruntu durmuyor."
       },
       {
        "id": "k6",
-       "metin": "Hata yapınca bir yetişkine anlatır, düzeltmenin yolunu birlikte bulur.",
+       "metin": "Hata yapınca özür diler, Allahü teâlâ’dan af diler ve düzeltmenin yolunu arar.",
        "alan": "orta",
        "ipucu": "Doğruya dönüyor."
       }
@@ -335,14 +337,14 @@ DO.dersKaydet(
        "secenekler": [
         "Bir hata yapınca",
         "Aynı yanlışı tekrar edince",
-        "Aklıma boş kuruntular gelince",
+        "Aklıma durmayan kuruntular gelince",
         "Özür dilemem gerekince"
        ]
       },
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Hatamı fark edince bugün özür dileyeceğim",
+        "Hatamı fark edince bugün özür dileyip Allahü teâlâ’dan af dileyeceğim",
         "Aynı hatayı bırakmak için küçük bir adım seçeceğim",
         "Kuruntular artarsa güvendiğim bir yetişkinle konuşacağım"
        ]
@@ -700,165 +702,165 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 6.537,
-   "m": "Sol uçta Israr. Yanlış biliyorum ama böyle iyiyim, devam. Hatasını bildiği hâlde aynı şeyi yapmaya devam eder.",
+   "sure": 7.423,
+   "m": "Sol uçta Israr. Yanlış olduğunu biliyorum ama devam ediyorum. Yanlış olduğunu bildiği hâlde aynı şeyi yapmaya devam eder.",
    "k": [
     [
      "Sol",
      0.03,
-     0.244
+     0.196
     ],
     [
      "uçta",
-     0.244,
-     0.672
+     0.196,
+     0.528
     ],
     [
      "Israr.",
-     0.672,
-     1.1
+     0.528,
+     0.86
     ],
     [
      "Yanlış",
-     1.445,
-     1.672
+     0.995,
+     1.32
+    ],
+    [
+     "olduğunu",
+     1.32,
+     1.97
     ],
     [
      "biliyorum",
-     1.672,
-     2.126
+     1.97,
+     2.62
     ],
     [
      "ama",
-     2.126,
-     2.353
-    ],
-    [
-     "böyle",
-     2.353,
-     2.58
-    ],
-    [
-     "iyiyim,",
-     2.58,
-     2.92
-    ],
-    [
-     "devam.",
-     3.11,
-     3.365
-    ],
-    [
-     "Hatasını",
-     3.765,
-     4.305
-    ],
-    [
-     "bildiği",
-     4.305,
-     4.711
-    ],
-    [
-     "hâlde",
-     4.711,
-     4.981
-    ],
-    [
-     "aynı",
-     4.981,
-     5.251
-    ],
-    [
-     "şeyi",
-     5.251,
-     5.522
-    ],
-    [
-     "yapmaya",
-     5.522,
-     5.927
+     2.62,
+     2.945
     ],
     [
      "devam",
-     5.927,
-     6.197
+     2.945,
+     3.27
+    ],
+    [
+     "ediyorum.",
+     3.27,
+     3.92
+    ],
+    [
+     "Yanlış",
+     4.235,
+     4.518
+    ],
+    [
+     "olduğunu",
+     4.518,
+     5.085
+    ],
+    [
+     "bildiği",
+     5.085,
+     5.51
+    ],
+    [
+     "hâlde",
+     5.51,
+     5.794
+    ],
+    [
+     "aynı",
+     5.794,
+     6.077
+    ],
+    [
+     "şeyi",
+     6.077,
+     6.361
+    ],
+    [
+     "yapmaya",
+     6.361,
+     6.786
+    ],
+    [
+     "devam",
+     6.786,
+     7.069
     ],
     [
      "eder.",
-     6.197,
-     6.467
+     7.069,
+     7.353
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 6.477,
-   "m": "Sonra ne olur? Küçük yalan büyüyüp yenisini çağırır. Güven azaldıkça arkadaşları ondan uzaklaşır.",
+   "sure": 6.216,
+   "m": "Sonra ne olur? Küçük yalan büyüyüp yenisini çağırır. Güven azaldıkça dostluklar yorulur.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.286
+     0.328
     ],
     [
      "ne",
-     0.286,
-     0.414
+     0.328,
+     0.477
     ],
     [
      "olur?",
-     0.414,
-     0.67
+     0.477,
+     0.775
     ],
     [
      "Küçük",
-     1.31,
-     1.626
+     1.4,
+     1.685
     ],
     [
      "yalan",
-     1.626,
-     1.943
+     1.685,
+     1.97
     ],
     [
      "büyüyüp",
-     1.943,
-     2.417
+     1.97,
+     2.398
     ],
     [
      "yenisini",
-     2.417,
-     3.05
+     2.398,
+     2.968
     ],
     [
      "çağırır.",
-     3.05,
-     3.525
+     2.968,
+     3.395
     ],
     [
      "Güven",
-     4.065,
-     4.341
+     3.96,
+     4.324
     ],
     [
      "azaldıkça",
-     4.341,
-     4.892
+     4.324,
+     5.053
     ],
     [
-     "arkadaşları",
-     4.892,
-     5.58
+     "dostluklar",
+     5.053,
+     5.599
     ],
     [
-     "ondan",
-     5.58,
-     5.856
-    ],
-    [
-     "uzaklaşır.",
-     5.856,
-     6.407
+     "yorulur.",
+     5.599,
+     6.146
     ]
    ]
   },
@@ -901,190 +903,180 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 8.373,
-   "m": "Sağ uçta Vesvese. Acaba yanlış mı yaptım? Bir daha, bir daha bakayım. Çantayı tekrar tekrar açıp kontrol eder, yine de rahat edemez.",
+   "sure": 8.864,
+   "m": "Sağ uçta Vesvese. Ya hata yaptıysam? Bir daha düşüneyim, bir daha! Hata yapıp yapmadığını tekrar tekrar düşünür, yine de rahat edemez.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.205
+     0.224
     ],
     [
      "uçta",
-     0.205,
-     0.555
+     0.224,
+     0.613
     ],
     [
      "Vesvese.",
-     0.555,
-     1.08
+     0.613,
+     1.195
     ],
     [
-     "Acaba",
-     1.64,
-     1.946
+     "Ya",
+     1.97,
+     2.056
     ],
     [
-     "yanlış",
-     1.946,
-     2.149
+     "hata",
+     2.056,
+     2.228
     ],
     [
-     "mı",
-     2.149,
-     2.251
-    ],
-    [
-     "yaptım?",
-     2.251,
-     2.455
+     "yaptıysam?",
+     2.228,
+     2.485
     ],
     [
      "Bir",
-     2.535,
-     2.563
-    ],
-    [
-     "daha,",
-     2.563,
-     2.62
-    ],
-    [
-     "bir",
-     3.26,
-     3.5
+     2.565,
+     2.615
     ],
     [
      "daha",
+     2.615,
+     2.715
+    ],
+    [
+     "düşüneyim,",
+     2.715,
+     2.915
+    ],
+    [
+     "bir",
      3.5,
-     3.98
+     3.72
     ],
     [
-     "bakayım.",
-     3.98,
-     4.7
+     "daha!",
+     3.72,
+     4.16
     ],
     [
-     "Çantayı",
-     4.95,
-     5.447
+     "Hata",
+     4.34,
+     4.729
+    ],
+    [
+     "yapıp",
+     4.729,
+     5.119
+    ],
+    [
+     "yapmadığını",
+     5.119,
+     6.092
     ],
     [
      "tekrar",
-     5.447,
-     5.779
+     6.092,
+     6.482
     ],
     [
      "tekrar",
-     5.779,
-     6.11
+     6.482,
+     6.871
     ],
     [
-     "açıp",
-     6.11,
-     6.442
-    ],
-    [
-     "kontrol",
-     6.442,
-     6.773
-    ],
-    [
-     "eder,",
-     6.773,
-     7.105
+     "düşünür,",
+     6.871,
+     7.455
     ],
     [
      "yine",
-     7.33,
-     7.573
+     7.75,
+     8.011
     ],
     [
      "de",
-     7.573,
-     7.695
+     8.011,
+     8.141
     ],
     [
      "rahat",
-     7.695,
-     7.938
+     8.141,
+     8.402
     ],
     [
      "edemez.",
-     7.938,
-     8.303
+     8.402,
+     8.794
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.695,
-   "m": "Sonra ne olur? Kontrol ettikçe huzuru kaçar. Zaman geçer, kuruntu azalmak yerine çoğalır.",
+   "sure": 5.756,
+   "m": "Sonra ne olur? Düşündükçe huzuru kaçar. Zaman geçer, kuruntu azalmak yerine çoğalabilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.406
+     0.288
     ],
     [
      "ne",
-     0.406,
-     0.594
+     0.288,
+     0.417
     ],
     [
      "olur?",
-     0.594,
-     0.97
+     0.417,
+     0.675
     ],
     [
-     "Kontrol",
-     1.105,
-     1.486
-    ],
-    [
-     "ettikçe",
-     1.486,
-     2.058
+     "Düşündükçe",
+     1.065,
+     1.627
     ],
     [
      "huzuru",
-     2.058,
-     2.629
+     1.627,
+     2.049
     ],
     [
      "kaçar.",
-     2.629,
-     3.01
+     2.049,
+     2.33
     ],
     [
      "Zaman",
-     3.315,
-     3.827
+     2.545,
+     3.042
     ],
     [
      "geçer,",
-     3.827,
-     4.34
+     3.042,
+     3.54
     ],
     [
      "kuruntu",
-     4.58,
-     5.091
+     3.705,
+     4.13
     ],
     [
      "azalmak",
-     5.091,
-     5.603
+     4.13,
+     4.554
     ],
     [
      "yerine",
-     5.603,
-     6.114
+     4.554,
+     4.979
     ],
     [
-     "çoğalır.",
-     6.114,
-     6.625
+     "çoğalabilir.",
+     4.979,
+     5.686
     ]
    ]
   },
@@ -1127,95 +1119,120 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 7.843,
-   "m": "Tam kararında Tevbe. Hata yaptım; özür dileyip düzelteceğim. Hatasını fark eder, pişman olur ve doğruya döner.",
+   "sure": 11.841,
+   "m": "Tam kararında Tevbe. Hata yaptım; özür dileyip düzelteceğim. Hatasını fark eder, pişman olur, özür diler ve Allahü teâlâ’ya yönelerek doğruya döner.",
    "k": [
     [
      "Tam",
      0.03,
-     0.234
+     0.17
     ],
     [
      "kararında",
-     0.234,
-     1.051
+     0.17,
+     0.73
     ],
     [
      "Tevbe.",
-     1.051,
-     1.46
+     0.73,
+     1.01
     ],
     [
      "Hata",
-     2.12,
-     2.315
+     1.245,
+     1.43
     ],
     [
      "yaptım;",
-     2.315,
-     2.51
+     1.43,
+     1.615
     ],
     [
      "özür",
-     2.59,
-     2.934
+     2.65,
+     3.018
     ],
     [
      "dileyip",
-     2.934,
-     3.45
+     3.018,
+     3.57
     ],
     [
      "düzelteceğim.",
-     3.45,
-     4.31
+     3.57,
+     4.49
     ],
     [
      "Hatasını",
-     4.94,
-     5.514
+     4.635,
+     5.315
     ],
     [
      "fark",
-     5.514,
-     5.658
+     5.315,
+     5.485
     ],
     [
      "eder,",
-     5.658,
-     5.945
+     5.485,
+     5.825
     ],
     [
      "pişman",
-     6.105,
-     6.439
+     5.935,
+     6.463
     ],
     [
-     "olur",
-     6.439,
-     6.772
+     "olur,",
+     6.463,
+     6.99
+    ],
+    [
+     "özür",
+     7.14,
+     7.581
+    ],
+    [
+     "diler",
+     7.581,
+     8.022
     ],
     [
      "ve",
-     6.772,
-     6.939
+     8.022,
+     8.243
+    ],
+    [
+     "Allahü",
+     8.243,
+     8.904
+    ],
+    [
+     "teâlâ’ya",
+     8.904,
+     9.786
+    ],
+    [
+     "yönelerek",
+     9.786,
+     10.669
     ],
     [
      "doğruya",
-     6.939,
-     7.439
+     10.669,
+     11.33
     ],
     [
      "döner.",
-     7.439,
-     7.773
+     11.33,
+     11.771
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 5.666,
-   "m": "Sonra ne olur? Özür dilenince kalbi rahatlar. Yeni bir sayfa açıp doğrusunu yapmaya başlar.",
+   "sure": 7.64,
+   "m": "Sonra ne olur? Özür dileyince kalbi hafifler. Allahü teâlâ’ya yönelmek ona yeni bir başlangıç verir.",
    "k": [
     [
      "Sonra",
@@ -1234,58 +1251,63 @@ DO.dersKaydet(
     ],
     [
      "Özür",
-     1.325,
-     1.561
+     1.34,
+     1.672
     ],
     [
-     "dilenince",
-     1.561,
-     2.034
+     "dileyince",
+     1.672,
+     2.335
     ],
     [
      "kalbi",
-     2.034,
-     2.27
+     2.335,
+     2.667
     ],
     [
-     "rahatlar.",
-     2.27,
-     2.625
+     "hafifler.",
+     2.667,
+     3.165
     ],
     [
-     "Yeni",
-     2.73,
-     3.088
+     "Allahü",
+     3.46,
+     4.076
+    ],
+    [
+     "teâlâ’ya",
+     4.076,
+     4.898
+    ],
+    [
+     "yönelmek",
+     4.898,
+     5.515
+    ],
+    [
+     "ona",
+     5.515,
+     5.926
+    ],
+    [
+     "yeni",
+     5.926,
+     6.337
     ],
     [
      "bir",
-     3.088,
-     3.267
+     6.337,
+     6.542
     ],
     [
-     "sayfa",
-     3.267,
-     3.626
+     "başlangıç",
+     6.542,
+     7.159
     ],
     [
-     "açıp",
-     3.626,
-     3.984
-    ],
-    [
-     "doğrusunu",
-     3.984,
-     4.7
-    ],
-    [
-     "yapmaya",
-     4.7,
-     5.238
-    ],
-    [
-     "başlar.",
-     5.238,
-     5.596
+     "verir.",
+     7.159,
+     7.57
     ]
    ]
   },
@@ -1328,93 +1350,108 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 6.767,
-   "m": "Arkadaşına küçük bir yalan söyledin ve yalan olduğunu biliyorsun. O ise sana güvenmeye devam ediyor. Ne yaparsın?",
+   "sure": 8.293,
+   "m": "Bu hafta arkadaşına aynı küçük yalanı birkaç kez söyledin. Yalan olduğunu biliyorsun; o ise sana güvenmeye devam ediyor. Ne yaparsın?",
    "k": [
     [
-     "Arkadaşına",
+     "Bu",
      0.03,
-     0.775
+     0.172
+    ],
+    [
+     "hafta",
+     0.172,
+     0.456
+    ],
+    [
+     "arkadaşına",
+     0.456,
+     1.165
+    ],
+    [
+     "aynı",
+     1.165,
+     1.449
     ],
     [
      "küçük",
-     0.775,
-     1.073
+     1.449,
+     1.733
     ],
     [
-     "bir",
-     1.073,
-     1.222
+     "yalanı",
+     1.733,
+     2.159
     ],
     [
-     "yalan",
-     1.222,
-     1.52
+     "birkaç",
+     2.159,
+     2.442
     ],
     [
-     "söyledin",
-     1.52,
-     1.966
+     "kez",
+     2.442,
+     2.584
     ],
     [
-     "ve",
-     1.966,
-     2.115
+     "söyledin.",
+     2.584,
+     3.01
     ],
     [
-     "yalan",
-     2.115,
-     2.413
+     "Yalan",
+     3.64,
+     3.882
     ],
     [
      "olduğunu",
-     2.413,
-     3.009
+     3.882,
+     4.366
     ],
     [
-     "biliyorsun.",
-     3.009,
-     3.605
+     "biliyorsun;",
+     4.366,
+     4.85
     ],
     [
-     "O",
-     3.905,
-     4.053
+     "o",
+     5.24,
+     5.379
     ],
     [
      "ise",
-     4.053,
-     4.349
+     5.379,
+     5.656
     ],
     [
      "sana",
-     4.349,
-     4.644
+     5.656,
+     5.933
     ],
     [
      "güvenmeye",
-     4.644,
-     5.236
+     5.933,
+     6.487
     ],
     [
      "devam",
-     5.236,
-     5.531
+     6.487,
+     6.764
     ],
     [
      "ediyor.",
-     5.531,
-     5.975
+     6.764,
+     7.18
     ],
     [
      "Ne",
-     6.225,
-     6.343
+     7.675,
+     7.812
     ],
     [
      "yaparsın?",
-     6.343,
-     6.697
+     7.812,
+     8.223
     ]
    ]
   },
@@ -1467,273 +1504,328 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.583,
-   "m": "Kafan karışıyor; düzeltme adımı yerine kuruntu çoğalıyor.",
+   "sure": 4.963,
+   "m": "Kuruntu çoğalıyor ama düzeltme adımı atılmıyor; arkadaşın yalanı hâlâ bilmiyor.",
    "k": [
     [
-     "Kafan",
+     "Kuruntu",
      0.03,
-     0.28
+     0.399
     ],
     [
-     "karışıyor;",
-     0.28,
-     0.78
+     "çoğalıyor",
+     0.399,
+     0.892
+    ],
+    [
+     "ama",
+     0.892,
+     1.138
     ],
     [
      "düzeltme",
-     0.975,
-     1.451
+     1.138,
+     1.508
     ],
     [
      "adımı",
-     1.451,
-     1.927
+     1.508,
+     1.877
     ],
     [
-     "yerine",
-     1.927,
-     2.403
+     "atılmıyor;",
+     1.877,
+     2.37
     ],
     [
-     "kuruntu",
-     2.403,
-     2.879
+     "arkadaşın",
+     2.745,
+     3.461
     ],
     [
-     "çoğalıyor.",
-     2.879,
-     3.513
+     "yalanı",
+     3.461,
+     3.998
+    ],
+    [
+     "hâlâ",
+     3.998,
+     4.356
+    ],
+    [
+     "bilmiyor.",
+     4.356,
+     4.893
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.793,
-   "m": "Arkadaşın önce şaşırıyor, sonra doğruyu söylediğin için sana güveniyor.",
+   "sure": 4.989,
+   "m": "Arkadaşın önce şaşırıyor, sonra doğruyu söylediğin için sana yeniden güvenmeye başlıyor.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.582
+     0.598
     ],
     [
      "önce",
-     0.582,
-     0.858
+     0.598,
+     0.882
     ],
     [
      "şaşırıyor,",
-     0.858,
-     1.41
+     0.882,
+     1.45
     ],
     [
      "sonra",
-     1.55,
-     1.806
+     1.535,
+     1.829
     ],
     [
      "doğruyu",
-     1.806,
-     2.189
+     1.829,
+     2.271
     ],
     [
      "söylediğin",
-     2.189,
-     2.7
+     2.271,
+     2.859
     ],
     [
      "için",
-     2.7,
-     2.956
+     2.859,
+     3.153
     ],
     [
      "sana",
-     2.956,
-     3.212
+     3.153,
+     3.447
     ],
     [
-     "güveniyor.",
-     3.212,
-     3.723
+     "yeniden",
+     3.447,
+     3.889
+    ],
+    [
+     "güvenmeye",
+     3.889,
+     4.477
+    ],
+    [
+     "başlıyor.",
+     4.477,
+     4.919
     ]
    ]
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.646,
-   "m": "Arkadaşının kitabına yanlışlıkla mürekkep damlattın. Kitap şimdi lekeli. Ne yaparsın?",
+   "sure": 5.244,
+   "m": "Her sabah derse geç kalıyorsun. Bunun arkadaşlarını beklettiğini biliyorsun. Ne yaparsın?",
    "k": [
     [
-     "Arkadaşının",
+     "Her",
      0.03,
-     0.713
+     0.197
     ],
     [
-     "kitabına",
-     0.713,
-     1.259
+     "sabah",
+     0.197,
+     0.53
     ],
     [
-     "yanlışlıkla",
-     1.259,
-     1.806
+     "derse",
+     0.53,
+     0.863
     ],
     [
-     "mürekkep",
-     1.806,
-     2.215
+     "geç",
+     0.863,
+     1.029
     ],
     [
-     "damlattın.",
-     2.215,
-     2.625
+     "kalıyorsun.",
+     1.029,
+     1.695
     ],
     [
-     "Kitap",
-     2.93,
-     3.167
+     "Bunun",
+     2.01,
+     2.268
     ],
     [
-     "şimdi",
-     3.167,
-     3.404
+     "arkadaşlarını",
+     2.268,
+     3.041
     ],
     [
-     "lekeli.",
-     3.404,
-     3.76
+     "beklettiğini",
+     3.041,
+     3.685
+    ],
+    [
+     "biliyorsun.",
+     3.685,
+     4.2
     ],
     [
      "Ne",
-     4.045,
-     4.178
+     4.595,
+     4.74
     ],
     [
      "yaparsın?",
-     4.178,
-     4.576
+     4.74,
+     5.174
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 4.08,
-   "m": "Leke duruyor; arkadaşın kitabı bulunca sana güvenmesi sarsılıyor.",
+   "sure": 4.668,
+   "m": "Geç kalma sürüyor; arkadaşların yoruluyor ve güven azalıyor.",
    "k": [
     [
-     "Leke",
+     "Geç",
      0.03,
-     0.278
+     0.213
     ],
     [
-     "duruyor;",
-     0.278,
-     0.65
+     "kalma",
+     0.213,
+     0.58
     ],
     [
-     "arkadaşın",
-     0.915,
-     1.534
+     "sürüyor;",
+     0.58,
+     1.13
     ],
     [
-     "kitabı",
-     1.534,
-     1.998
+     "arkadaşların",
+     1.71,
+     2.612
     ],
     [
-     "bulunca",
-     1.998,
-     2.462
+     "yoruluyor",
+     2.612,
+     3.334
     ],
     [
-     "sana",
-     2.462,
-     2.772
+     "ve",
+     3.334,
+     3.515
     ],
     [
-     "güvenmesi",
-     2.772,
-     3.391
+     "güven",
+     3.515,
+     3.876
     ],
     [
-     "sarsılıyor.",
-     3.391,
-     4.01
+     "azalıyor.",
+     3.876,
+     4.598
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.583,
-   "m": "Kontrol bitmiyor; asıl yapman gereken özür bekliyor.",
+   "sure": 4.193,
+   "m": "Kuruntu aklında dönüp duruyor; erken hazırlanma adımı bir türlü atılmıyor.",
    "k": [
     [
-     "Kontrol",
+     "Kuruntu",
      0.03,
-     0.392
+     0.402
     ],
     [
-     "bitmiyor;",
-     0.392,
-     0.935
+     "aklında",
+     0.402,
+     0.775
     ],
     [
-     "asıl",
-     1.335,
-     1.698
+     "dönüp",
+     0.775,
+     1.023
     ],
     [
-     "yapman",
-     1.698,
-     2.061
+     "duruyor;",
+     1.023,
+     1.395
     ],
     [
-     "gereken",
-     2.061,
-     2.606
+     "erken",
+     1.7,
+     2.003
     ],
     [
-     "özür",
-     2.606,
-     2.969
+     "hazırlanma",
+     2.003,
+     2.609
     ],
     [
-     "bekliyor.",
-     2.969,
-     3.513
+     "adımı",
+     2.609,
+     3.063
+    ],
+    [
+     "bir",
+     3.063,
+     3.215
+    ],
+    [
+     "türlü",
+     3.215,
+     3.517
+    ],
+    [
+     "atılmıyor.",
+     3.517,
+     4.123
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 2.696,
-   "m": "Birlikte temizliyorsunuz; arkadaşın seni anlıyor.",
+   "sure": 3.573,
+   "m": "Arkadaşların özrünü anlıyor; ertesi sabah zamanında çıkıyorsun.",
    "k": [
     [
-     "Birlikte",
+     "Arkadaşların",
      0.03,
-     0.392
+     0.737
     ],
     [
-     "temizliyorsunuz;",
-     0.392,
-     1.115
+     "özrünü",
+     0.737,
+     1.161
     ],
     [
-     "arkadaşın",
-     1.425,
-     1.959
+     "anlıyor;",
+     1.161,
+     1.585
     ],
     [
-     "seni",
-     1.959,
-     2.226
+     "ertesi",
+     1.87,
+     2.247
     ],
     [
-     "anlıyor.",
-     2.226,
-     2.626
+     "sabah",
+     2.247,
+     2.498
+    ],
+    [
+     "zamanında",
+     2.498,
+     3.0
+    ],
+    [
+     "çıkıyorsun.",
+     3.0,
+     3.503
     ]
    ]
   },

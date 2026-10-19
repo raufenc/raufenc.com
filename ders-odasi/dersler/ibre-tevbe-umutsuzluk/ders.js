@@ -6,6 +6,8 @@ DO.dersKaydet(
  "ad": "Tevbe (Aldırmazlık · Umutsuzluk): İbren Nerede?",
  "kisaAd": "İbremetre",
  "seri": "İbremetre",
+ "aile": "cesaret",
+ "muzik": "cesaret",
  "yas": "10-15 yaş",
  "ozet": "Birçok güzel huy bir ibre gibidir: çok az olunca eksiklik, çok fazla olunca taşkınlık. Sesli, animasyonlu açılış; ibreyi sürükleyerek tahmin; merak ettiğin kapıyı aç; “Sen olsan?” senaryolarıyla 8 dakikalık ders.",
  "kapakGorseli": "kapak.svg",
@@ -21,7 +23,7 @@ DO.dersKaydet(
      "tur": "ibreAcilis",
      "huy": "Tevbe",
      "huyAnahtar": "Tevbe",
-     "olculen": "Hatama bakış biçimim",
+     "olculen": "Bozduğum şeye ve hatama bakış biçimim",
      "kanca": "Olan oldu, geçti gitti.",
      "uclar": {
       "az": "Aldırmazlık",
@@ -44,8 +46,8 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi hatayı önemsemeden geçiyor: sol uca (Aldırmazlık) yakın. Başka okumada hatayı kabul etmiş, özür dilemiş ve sayfayı çevirmiş: orta uca yakın. İki okuma da savunulabilir.",
-      "İbre cümleye değil, hataya nasıl baktığımıza bakar. Tevbe; hatayı fark edip pişman olmak ve Allahü teâlâ’ya yönelerek düzeltmeye çalışmaktır. Sağ uçta ise “zaten düzeltemem” diye umudu kaybetmek vardır; oysa Allahü teâlâ’nın rahmetinden ümit kesilmez. Bu ibre ölçekten çok yönü gösterir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi bozduğu şeyi ve hatayı önemsemeden geçiyor: sol uca (Aldırmazlık) yakın. Başka okumada hatayı kabul etmiş, özür dilemiş ve sayfayı çevirmiş: orta uca yakın. İki okuma da savunulabilir.",
+      "İbre cümleye değil, hataya nasıl baktığımıza bakar. Tevbe; hatayı fark edip pişman olmak ve Allahü teâlâ’ya yönelerek düzeltmeye çalışmaktır. Sağ uçta ise bir şeyi kırınca ya da bozunca “zaten düzeltemem, affedilmem” diye umudu kaybetmek vardır; oysa Allahü teâlâ’nın rahmetinden ümit kesilmez. Bu umutsuzluk, hatadan sonra affedilme umuduyla ilgilidir; çalışma ve başarıdaki umut Recâ dersindedir. Bu ibre ölçekten çok yönü gösterir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
      "merak": "Peki ibrenin iki ucundaki kişiler tam olarak ne yapar, içlerinden ne geçer? Üç kapıyı açıp bakalım."
@@ -70,8 +72,8 @@ DO.dersKaydet(
        "soz": "Kırıldıysa kırılsın, umurumda değil.",
        "eylem": "el-salla",
        "zincir": [
-        "Arkadaşı kırgın kalır ve yanına yaklaşmak istemez.",
-        "Hata düzelmez, kalbinde bir ağırlık olarak büyür."
+        "Arkadaşı kırgın kalır, dostluk soğuyabilir.",
+        "Düzelmeyen hata, içte bir ağırlık olarak kalabilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -82,7 +84,7 @@ DO.dersKaydet(
           "not": "Aldırmazlık, hata yapınca hiç pişman olmamaktır. Üzülmemek, düzeltme fırsatını da kaçırır."
          },
          {
-          "m": "Üzüldüm ama düzeltebilirim; özür dileyeceğim.",
+          "m": "Üzüldüm; özür dilerim, Allahü teâlâ’dan da af dilerim, düzeltmeye çalışırım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevbenin sesi."
          },
@@ -99,18 +101,18 @@ DO.dersKaydet(
        },
        "zincirAnahtar": [
         "Arkadaşı",
-        "Hata"
+        "Düzelmeyen"
        ]
       },
       {
        "zon": "fazla",
        "soru": "Umudunu kesen kişi neyi kaçırır?",
        "ad": "Umutsuzluk",
-       "soz": "Ben zaten düzeltemem; kimse beni affetmez.",
+       "soz": "Nasıl olsa affedilmem; düzeltmeyi denemeyeyim.",
        "eylem": "otur",
        "zincir": [
-        "Özür dilemeye bile yaklaşamaz.",
-        "Düzeltebileceği bir hata büyük bir yük gibi kalır."
+        "Özür dilemeye yaklaşmak zorlaşır.",
+        "Düzeltilebilecek bir hata, büyük bir yük gibi görünür."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
@@ -118,7 +120,7 @@ DO.dersKaydet(
          {
           "m": "Ben zaten düzeltemem; denemenin anlamı yok.",
           "dogru": true,
-          "not": "Umutsuzluk, “düzeltemem” deyip affedilmeye bile umudu kesmektir. Allahü teâlâ’nın rahmetinden ümit kesilmez; küçük bir özür bile yeni bir başlangıçtır."
+          "not": "Umutsuzluk, “düzeltemem” deyip affedilmeye bile umudu kesmektir. Allahü teâlâ’nın rahmetinden ümit kesilmez; küçük bir özür bile yeni bir başlangıçtır. Umutsuz hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
           "m": "Ne olmuş yani? Önemli değil.",
@@ -126,7 +128,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: aldırmazlığın sesi."
          },
          {
-          "m": "Üzüldüm ama düzeltebilirim; özür dileyeceğim.",
+          "m": "Üzüldüm; özür dilerim, Allahü teâlâ’dan da af dilerim, düzeltmeye çalışırım.",
           "dogru": false,
           "not": "Bu orta ucun sesi: tevbenin sesi."
          }
@@ -134,11 +136,11 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Umutsuzluk",
-        "soz": "Ben"
+        "soz": "Nasıl"
        },
        "zincirAnahtar": [
         "Özür",
-        "Düzeltebileceği"
+        "Düzeltilebilecek"
        ]
       },
       {
@@ -149,15 +151,15 @@ DO.dersKaydet(
        "eylem": "egil",
        "zincir": [
         "Arkadaşı özrünü duyunca yumuşar.",
-        "Birlikte tamir ederler ve dostluk eskisinden sağlam olur."
+        "Birlikte tamir ederler; dostluk güçlenebilir."
        ],
        "ic": {
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Üzüldüm ama düzeltebilirim; özür dileyeceğim.",
+          "m": "Üzüldüm; özür dilerim, Allahü teâlâ’dan da af dilerim, düzeltmeye çalışırım.",
           "dogru": true,
-          "not": "Tevbe, hatayı fark edip pişman olmak, özür dilemek ve düzeltmeye yönelmektir. Umut hep açıktır."
+          "not": "Tevbe, hatayı fark edip pişman olmak, özür dilemek, Allahü teâlâ’ya yönelmek ve düzeltmeye çalışmaktır. Umut hep açıktır."
          },
          {
           "m": "Ne olmuş yani? Önemli değil.",
@@ -205,7 +207,7 @@ DO.dersKaydet(
          "m": "Bir resim işte, önemli değil.",
          "zon": "az",
          "sonuc": "Arkadaşın üzülüyor ama sen konuyu kapatıyorsun; kırgınlık duruyor.",
-         "not": "İbre sola kaydı: hatayı önemsememek kırgınlığı bırakıyor.",
+         "not": "İbre sola kaydı: bozulan şeyi önemsememek kırgınlığı bırakıyor.",
          "ses": "s1az"
         },
         {
@@ -226,29 +228,29 @@ DO.dersKaydet(
        "ses": "s1"
       },
       {
-       "id": "soz",
-       "baslik": "Kırıcı söz",
-       "tetik": "Arkadaşına sert bir söz söyledin ve gözlerinin dolduğunu gördün.",
+       "id": "saksi",
+       "baslik": "Komşunun saksısı",
+       "tetik": "Bahçede top oynarken komşunun saksısını düşürüp kırdın.",
        "secenekler": [
         {
-         "m": "Ne var yani, doğruyu söyledim.",
+         "m": "Saksı eski zaten, kırıldıysa kırıldı; oynamaya devam ederim.",
          "zon": "az",
-         "sonuc": "Arkadaşın uzaklaşıyor; aranızdaki mesafe büyüyor.",
-         "not": "İbre sola kaydı: üzdüğünü görüp aldırmamak, dostluğu zedeliyor.",
+         "sonuc": "Kırık parçalar yerde kalıyor; komşu üzülüyor ve aranızda bir soğukluk oluyor.",
+         "not": "İbre sola kaydı: bozulan şeye aldırmamak kırgınlığı bırakıyor.",
          "ses": "s2az"
         },
         {
-         "m": "Ben hep böyle yaparım; ne yapsam düzelmez.",
+         "m": "Nasıl olsa affedilmem; komşunun yüzüne bile bakamam.",
          "zon": "fazla",
-         "sonuc": "Umudunu kesince özür dilemek de imkânsız görünüyor.",
-         "not": "İbre sağa kaydı: kendini bırakmak, düzeltmenin yolunu kapatıyor.",
+         "sonuc": "Saklanıp duruyorsun; komşu ne olduğunu bilmiyor ve içindeki yük büyüyor.",
+         "not": "İbre sağa kaydı: “affedilmem” demek, küçük özür adımını bile durduruyor. Zor gelirse güvendiğin bir yetişkine danışabilirsin.",
          "ses": "s2fa"
         },
         {
-         "m": "Özür dilerim; seni üzmek istemedim.",
+         "m": "Özür dilerim; Allahü teâlâ’dan af dileyip saksıyı yenilerim.",
          "zon": "orta",
-         "sonuc": "Arkadaşın seni dinliyor; gönlü yavaş yavaş yumuşuyor.",
-         "not": "İbre ortada: pişman olup umutla yaklaştın. Zor gelirse güvendiğin bir yetişkine de danışabilirsin.",
+         "sonuc": "Komşu üzülüyor ama özrünü duyunca yumuşuyor; yenisini birlikte seçiyorsunuz.",
+         "not": "İbre ortada: pişman olup Allahü teâlâ’ya yönelerek umutla düzeltmeye çalıştın.",
          "ses": "s2or"
         }
        ],
@@ -289,37 +291,37 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Arkadaşını üzdükten sonra “umrumda mı?” deyip oyuna döner.",
+       "metin": "Arkadaşının oyuncağını kırınca “umrumda mı?” deyip oyuna döner.",
        "alan": "az",
        "ipucu": "Hataya aldırmıyor."
       },
       {
        "id": "k2",
-       "metin": "Bir hata yapınca “ben zaten düzeltemem” deyip kendini bırakır.",
+       "metin": "Bir şeyi bozunca “ben zaten düzeltemem” deyip kendini bırakır.",
        "alan": "fazla",
        "ipucu": "Umudunu yitirmiş."
       },
       {
        "id": "k3",
-       "metin": "Üzdüğü arkadaşına gidip özür diler ve düzeltmeye çalışır.",
+       "metin": "Bozduğu şey için özür diler, Allahü teâlâ’dan af diler ve onarmaya çalışır.",
        "alan": "orta",
        "ipucu": "Pişman olup yöneliyor."
       },
       {
        "id": "k4",
-       "metin": "Eşyayı bozduktan sonra “bana ne” deyip uzaklaşır.",
+       "metin": "Arkadaşının çantasının fermuarını bozunca hiçbir şey olmamış gibi yürüyüp gider.",
        "alan": "az",
        "ipucu": "Pişmanlık yok."
       },
       {
        "id": "k5",
-       "metin": "Bir kez yanlış yapınca “bana artık kimse güvenmez” deyip denemeyi bırakır.",
+       "metin": "Bir şeyi düşürüp kırınca “nasıl olsa affedilmem” deyip özür dilemeye gitmez.",
        "alan": "fazla",
-       "ipucu": "Düzelmeye umudu kalmamış."
+       "ipucu": "Affedilmeyeceğini sanıyor."
       },
       {
        "id": "k6",
-       "metin": "Hatasını söyler, “bir daha dikkat edeceğim” der ve yeniden dener.",
+       "metin": "Hatasını söyler, “bir daha dikkat edeceğim” der ve umutla yeniden dener.",
        "alan": "orta",
        "ipucu": "Umudunu kaybetmeden düzeltiyor."
       }
@@ -333,8 +335,8 @@ DO.dersKaydet(
       {
        "soru": "Hangi durumda ibrem sağa ya da sola kayıyor?",
        "secenekler": [
-        "Birini üzdüğümü fark edince",
-        "Bir şeyi bozunca",
+        "Bir şeyi kırınca ya da bozunca",
+        "Birine zarar verdiğimi fark edince",
         "“Ben düzeltemem” diye düşününce",
         "Özür dilemek zor gelince"
        ]
@@ -342,7 +344,7 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Üzdüğüm biriyle bugün konuşacağım",
+        "Bozduğum şey için bugün özür dileyip Allahü teâlâ’dan af dileyeceğim",
         "“Düzeltemem” demek yerine küçük bir adım atacağım",
         "İçim ağırlaşırsa güvendiğim bir yetişkine anlatacağım"
        ]
@@ -690,160 +692,165 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 7.362,
-   "m": "Sol uçta Aldırmazlık. Kırıldıysa kırılsın, umurumda değil. Arkadaşının oyuncağını kırınca omuz silker.",
+   "sure": 8.073,
+   "m": "Sol uçta Aldırmazlık. Kırıldıysa kırılsın, umurumda değil. Arkadaşının ödünç verdiği bir şeyi kırınca omuz silker.",
    "k": [
     [
      "Sol",
      0.03,
-     0.254
+     0.259
     ],
     [
      "uçta",
-     0.254,
-     0.703
+     0.259,
+     0.718
     ],
     [
      "Aldırmazlık.",
-     0.703,
-     1.6
+     0.718,
+     1.635
     ],
     [
      "Kırıldıysa",
-     2.295,
-     2.829
+     1.72,
+     1.751
     ],
     [
      "kırılsın,",
-     2.829,
-     3.23
+     1.751,
+     1.775
     ],
     [
      "umurumda",
-     3.435,
-     3.885
+     2.575,
+     3.192
     ],
     [
      "değil.",
-     3.885,
-     4.11
+     3.192,
+     3.5
     ],
     [
      "Arkadaşının",
-     4.98,
-     5.66
+     3.705,
+     4.78
     ],
     [
-     "oyuncağını",
-     5.66,
-     6.34
+     "ödünç",
+     4.78,
+     5.209
+    ],
+    [
+     "verdiği",
+     5.209,
+     5.854
+    ],
+    [
+     "bir",
+     5.854,
+     6.069
+    ],
+    [
+     "şeyi",
+     6.069,
+     6.499
     ],
     [
      "kırınca",
-     6.34,
-     6.748
+     6.499,
+     7.144
     ],
     [
      "omuz",
-     6.748,
-     7.02
+     7.144,
+     7.573
     ],
     [
      "silker.",
-     7.02,
-     7.292
+     7.573,
+     8.003
     ]
    ]
   },
   "kaz2": {
    "d": "ses/kaz2.m4a",
-   "sure": 7.866,
-   "m": "Sonra ne olur? Arkadaşı kırgın kalır ve yanına yaklaşmak istemez. Hata düzelmez, kalbinde bir ağırlık olarak büyür.",
+   "sure": 7.392,
+   "m": "Sonra ne olur? Arkadaşı kırgın kalır, dostluk soğuyabilir. Düzelmeyen hata, içte bir ağırlık olarak kalabilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.294
+     0.278
     ],
     [
      "ne",
-     0.294,
-     0.426
+     0.278,
+     0.402
     ],
     [
      "olur?",
-     0.426,
-     0.69
+     0.402,
+     0.65
     ],
     [
      "Arkadaşı",
-     1.24,
-     1.922
+     1.245,
+     1.772
     ],
     [
      "kırgın",
-     1.922,
-     2.263
+     1.772,
+     2.036
     ],
     [
-     "kalır",
-     2.263,
-     2.604
+     "kalır,",
+     2.036,
+     2.3
     ],
     [
-     "ve",
-     2.604,
-     2.775
+     "dostluk",
+     2.62,
+     2.896
     ],
     [
-     "yanına",
-     2.775,
-     3.287
+     "soğuyabilir.",
+     2.896,
+     3.585
     ],
     [
-     "yaklaşmak",
-     3.287,
-     3.798
+     "Düzelmeyen",
+     3.875,
+     4.668
     ],
     [
-     "istemez.",
-     3.798,
-     4.31
+     "hata,",
+     4.668,
+     5.065
     ],
     [
-     "Hata",
-     4.69,
-     5.114
-    ],
-    [
-     "düzelmez,",
-     5.114,
-     5.75
-    ],
-    [
-     "kalbinde",
-     6.095,
-     6.52
+     "içte",
+     5.315,
+     5.624
     ],
     [
      "bir",
-     6.52,
-     6.662
+     5.624,
+     5.778
     ],
     [
      "ağırlık",
-     6.662,
-     7.087
+     5.778,
+     6.241
     ],
     [
      "olarak",
-     7.087,
-     7.512
+     6.241,
+     6.704
     ],
     [
-     "büyür.",
-     7.512,
-     7.796
+     "kalabilir.",
+     6.704,
+     7.322
     ]
    ]
   },
@@ -886,175 +893,170 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 8.431,
-   "m": "Sağ uçta Umutsuzluk. Ben zaten düzeltemem; kimse beni affetmez. Küçük bir hatadan sonra köşesine çekilip umudunu keser.",
+   "sure": 8.514,
+   "m": "Sağ uçta Umutsuzluk. Nasıl olsa affedilmem; düzeltmeyi denemeyeyim. Küçük bir hatadan sonra köşesine çekilip umudunu keser.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.226
+     0.195
     ],
     [
      "uçta",
-     0.226,
-     0.617
+     0.195,
+     0.525
     ],
     [
      "Umutsuzluk.",
-     0.617,
-     1.4
+     0.525,
+     1.185
     ],
     [
-     "Ben",
-     1.505,
-     1.743
+     "Nasıl",
+     1.275,
+     1.706
     ],
     [
-     "zaten",
-     1.743,
-     2.219
+     "olsa",
+     1.706,
+     2.137
     ],
     [
-     "düzeltemem;",
-     2.219,
-     3.17
+     "affedilmem;",
+     2.137,
+     3.0
     ],
     [
-     "kimse",
-     3.43,
-     3.761
+     "düzeltmeyi",
+     3.325,
+     3.801
     ],
     [
-     "beni",
-     3.761,
-     4.093
-    ],
-    [
-     "affetmez.",
-     4.093,
-     4.59
+     "denemeyeyim.",
+     3.801,
+     4.395
     ],
     [
      "Küçük",
-     5.075,
-     5.388
+     4.995,
+     5.324
     ],
     [
      "bir",
-     5.388,
-     5.544
+     5.324,
+     5.488
     ],
     [
      "hatadan",
-     5.544,
-     6.014
+     5.488,
+     5.981
     ],
     [
      "sonra",
-     6.014,
-     6.327
+     5.981,
+     6.309
     ],
     [
      "köşesine",
-     6.327,
-     6.953
+     6.309,
+     6.966
     ],
     [
      "çekilip",
-     6.953,
-     7.422
+     6.966,
+     7.459
     ],
     [
      "umudunu",
-     7.422,
-     8.048
+     7.459,
+     8.116
     ],
     [
      "keser.",
-     8.048,
-     8.361
+     8.116,
+     8.444
     ]
    ]
   },
   "kfa2": {
    "d": "ses/kfa2.m4a",
-   "sure": 6.267,
-   "m": "Sonra ne olur? Özür dilemeye bile yaklaşamaz. Düzeltebileceği bir hata büyük bir yük gibi kalır.",
+   "sure": 6.627,
+   "m": "Sonra ne olur? Özür dilemeye yaklaşmak zorlaşır. Düzeltilebilecek bir hata, büyük bir yük gibi görünür.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.366
+     0.264
     ],
     [
      "ne",
-     0.366,
-     0.534
+     0.264,
+     0.381
     ],
     [
      "olur?",
-     0.534,
-     0.87
+     0.381,
+     0.615
     ],
     [
      "Özür",
-     1.08,
-     1.375
+     1.105,
+     1.379
     ],
     [
      "dilemeye",
-     1.375,
-     1.965
+     1.379,
+     1.927
     ],
     [
-     "bile",
-     1.965,
-     2.26
+     "yaklaşmak",
+     1.927,
+     2.339
     ],
     [
-     "yaklaşamaz.",
-     2.26,
-     2.85
+     "zorlaşır.",
+     2.339,
+     2.75
     ],
     [
-     "Düzeltebileceği",
-     2.995,
-     4.24
+     "Düzeltilebilecek",
+     3.185,
+     4.47
     ],
     [
      "bir",
-     4.24,
-     4.418
+     4.47,
+     4.653
     ],
     [
-     "hata",
-     4.418,
-     4.774
+     "hata,",
+     4.653,
+     5.02
     ],
     [
      "büyük",
-     4.774,
-     5.13
+     5.095,
+     5.42
     ],
     [
      "bir",
-     5.13,
-     5.308
+     5.42,
+     5.582
     ],
     [
      "yük",
-     5.308,
-     5.486
+     5.582,
+     5.745
     ],
     [
      "gibi",
-     5.486,
-     5.841
+     5.745,
+     6.07
     ],
     [
-     "kalır.",
-     5.841,
-     6.197
+     "görünür.",
+     6.07,
+     6.557
     ]
    ]
   },
@@ -1097,175 +1099,175 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 9.024,
-   "m": "Tam kararında Tevbe. Üzüldüm; özür dileyip kırdığımı toplayayım. Kırdığını fark eder, özür diler ve düzeltmeye yardım eder.",
+   "sure": 10.546,
+   "m": "Tam kararında Tevbe. Üzüldüm; özür dileyip kırdığımı toplayayım. Kırdığını fark eder, özür diler, Allahü teâlâ’ya yönelir ve düzeltmeye yardım eder.",
    "k": [
     [
      "Tam",
      0.03,
-     0.155
+     0.144
     ],
     [
      "kararında",
-     0.155,
-     0.655
+     0.144,
+     0.601
     ],
     [
      "Tevbe.",
-     0.655,
-     0.905
+     0.601,
+     0.83
     ],
     [
      "Üzüldüm;",
-     1.29,
-     1.63
+     1.19,
+     1.585
     ],
     [
      "özür",
-     2.395,
-     2.777
+     2.475,
+     2.723
     ],
     [
      "dileyip",
-     2.777,
-     3.349
+     2.723,
+     3.094
     ],
     [
      "kırdığımı",
-     3.349,
-     4.112
+     3.094,
+     3.59
     ],
     [
      "toplayayım.",
-     4.112,
-     4.875
+     3.59,
+     4.085
     ],
     [
      "Kırdığını",
-     5.585,
-     6.182
+     4.19,
+     4.65
     ],
     [
      "fark",
-     6.182,
-     6.331
+     4.65,
+     4.765
     ],
     [
      "eder,",
-     6.331,
-     6.63
+     4.765,
+     4.995
     ],
     [
      "özür",
-     6.75,
-     7.089
+     5.775,
+     6.253
     ],
     [
-     "diler",
-     7.089,
-     7.428
+     "diler,",
+     6.253,
+     6.73
+    ],
+    [
+     "Allahü",
+     6.85,
+     7.423
+    ],
+    [
+     "teâlâ’ya",
+     7.423,
+     8.186
+    ],
+    [
+     "yönelir",
+     8.186,
+     8.758
     ],
     [
      "ve",
-     7.428,
-     7.598
+     8.758,
+     8.949
     ],
     [
      "düzeltmeye",
-     7.598,
-     8.276
+     8.949,
+     9.713
     ],
     [
      "yardım",
-     8.276,
-     8.615
+     9.713,
+     10.094
     ],
     [
      "eder.",
-     8.615,
-     8.954
+     10.094,
+     10.476
     ]
    ]
   },
   "kor2": {
    "d": "ses/kor2.m4a",
-   "sure": 6.961,
-   "m": "Sonra ne olur? Arkadaşı özrünü duyunca yumuşar. Birlikte tamir ederler ve dostluk eskisinden sağlam olur.",
+   "sure": 6.846,
+   "m": "Sonra ne olur? Arkadaşı özrünü duyunca yumuşar. Birlikte tamir ederler; dostluk güçlenebilir.",
    "k": [
     [
      "Sonra",
      0.03,
-     0.302
+     0.298
     ],
     [
      "ne",
-     0.302,
-     0.438
+     0.298,
+     0.432
     ],
     [
      "olur?",
-     0.438,
-     0.71
+     0.432,
+     0.7
     ],
     [
      "Arkadaşı",
-     1.17,
-     1.775
+     1.255,
+     1.975
     ],
     [
      "özrünü",
-     1.775,
-     2.228
+     1.975,
+     2.515
     ],
     [
      "duyunca",
-     2.228,
-     2.682
+     2.515,
+     3.055
     ],
     [
      "yumuşar.",
-     2.682,
-     3.135
+     3.055,
+     3.595
     ],
     [
      "Birlikte",
-     3.395,
-     3.947
+     3.83,
+     4.31
     ],
     [
      "tamir",
-     3.947,
-     4.315
+     4.31,
+     4.63
     ],
     [
-     "ederler",
-     4.315,
-     4.867
-    ],
-    [
-     "ve",
-     4.867,
-     5.051
+     "ederler;",
+     4.63,
+     5.11
     ],
     [
      "dostluk",
-     5.051,
-     5.419
+     5.39,
+     5.786
     ],
     [
-     "eskisinden",
-     5.419,
-     6.155
-    ],
-    [
-     "sağlam",
-     6.155,
-     6.523
-    ],
-    [
-     "olur.",
-     6.523,
-     6.891
+     "güçlenebilir.",
+     5.786,
+     6.776
     ]
    ]
   },
@@ -1506,179 +1508,224 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.207,
-   "m": "Arkadaşına sert bir söz söyledin ve gözlerinin dolduğunu gördün. Ne yaparsın?",
+   "sure": 4.029,
+   "m": "Bahçede top oynarken komşunun saksısını düşürüp kırdın. Ne yaparsın?",
    "k": [
     [
-     "Arkadaşına",
+     "Bahçede",
      0.03,
-     0.745
+     0.507
     ],
     [
-     "sert",
-     0.745,
-     0.888
+     "top",
+     0.507,
+     0.666
     ],
     [
-     "bir",
-     0.888,
-     1.031
+     "oynarken",
+     0.666,
+     1.143
     ],
     [
-     "söz",
-     1.031,
-     1.174
+     "komşunun",
+     1.143,
+     1.619
     ],
     [
-     "söyledin",
-     1.174,
-     1.603
+     "saksısını",
+     1.619,
+     2.255
     ],
     [
-     "ve",
-     1.603,
-     1.745
+     "düşürüp",
+     2.255,
+     2.732
     ],
     [
-     "gözlerinin",
-     1.745,
-     2.317
-    ],
-    [
-     "dolduğunu",
-     2.317,
-     2.889
-    ],
-    [
-     "gördün.",
-     2.889,
-     3.175
+     "kırdın.",
+     2.732,
+     3.05
     ],
     [
      "Ne",
-     3.6,
-     3.734
+     3.385,
+     3.528
     ],
     [
      "yaparsın?",
-     3.734,
-     4.137
+     3.528,
+     3.959
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.552,
-   "m": "Arkadaşın uzaklaşıyor; aranızdaki mesafe büyüyor.",
+   "sure": 4.871,
+   "m": "Kırık parçalar yerde kalıyor; komşu üzülüyor ve aranızda bir soğukluk oluyor.",
    "k": [
     [
-     "Arkadaşın",
+     "Kırık",
      0.03,
-     0.552
+     0.301
     ],
     [
-     "uzaklaşıyor;",
-     0.552,
-     1.205
+     "parçalar",
+     0.301,
+     0.708
     ],
     [
-     "aranızdaki",
-     1.615,
-     2.464
+     "yerde",
+     0.708,
+     0.979
     ],
     [
-     "mesafe",
-     2.464,
-     2.973
+     "kalıyor;",
+     0.979,
+     1.385
     ],
     [
-     "büyüyor.",
-     2.973,
-     3.482
+     "komşu",
+     1.74,
+     2.08
+    ],
+    [
+     "üzülüyor",
+     2.08,
+     2.76
+    ],
+    [
+     "ve",
+     2.76,
+     2.93
+    ],
+    [
+     "aranızda",
+     2.93,
+     3.611
+    ],
+    [
+     "bir",
+     3.611,
+     3.781
+    ],
+    [
+     "soğukluk",
+     3.781,
+     4.291
+    ],
+    [
+     "oluyor.",
+     4.291,
+     4.801
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.147,
-   "m": "Umudunu kesince özür dilemek de imkânsız görünüyor.",
+   "sure": 4.723,
+   "m": "Saklanıp duruyorsun; komşu ne olduğunu bilmiyor ve içindeki yük büyüyor.",
    "k": [
     [
-     "Umudunu",
+     "Saklanıp",
      0.03,
-     0.639
+     0.405
     ],
     [
-     "kesince",
-     0.639,
-     1.096
+     "duruyorsun;",
+     0.405,
+     0.905
     ],
     [
-     "özür",
-     1.096,
-     1.401
+     "komşu",
+     1.36,
+     1.707
     ],
     [
-     "dilemek",
-     1.401,
-     1.858
+     "ne",
+     1.707,
+     1.88
     ],
     [
-     "de",
-     1.858,
-     2.011
+     "olduğunu",
+     1.88,
+     2.573
     ],
     [
-     "imkânsız",
-     2.011,
-     2.468
+     "bilmiyor",
+     2.573,
+     3.093
     ],
     [
-     "görünüyor.",
-     2.468,
-     3.077
+     "ve",
+     3.093,
+     3.267
+    ],
+    [
+     "içindeki",
+     3.267,
+     3.96
+    ],
+    [
+     "yük",
+     3.96,
+     4.133
+    ],
+    [
+     "büyüyor.",
+     4.133,
+     4.653
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.631,
-   "m": "Arkadaşın seni dinliyor; gönlü yavaş yavaş yumuşuyor.",
+   "sure": 4.288,
+   "m": "Komşu üzülüyor ama özrünü duyunca yumuşuyor; yenisini birlikte seçiyorsunuz.",
    "k": [
     [
-     "Arkadaşın",
+     "Komşu",
      0.03,
-     0.652
+     0.299
     ],
     [
-     "seni",
-     0.652,
-     0.963
+     "üzülüyor",
+     0.299,
+     0.837
     ],
     [
-     "dinliyor;",
-     0.963,
-     1.43
+     "ama",
+     0.837,
+     1.106
     ],
     [
-     "gönlü",
-     1.615,
-     2.004
+     "özrünü",
+     1.106,
+     1.509
     ],
     [
-     "yavaş",
-     2.004,
-     2.393
+     "duyunca",
+     1.509,
+     1.912
     ],
     [
-     "yavaş",
-     2.393,
-     2.783
+     "yumuşuyor;",
+     1.912,
+     2.45
     ],
     [
-     "yumuşuyor.",
-     2.783,
-     3.561
+     "yenisini",
+     2.895,
+     3.336
+    ],
+    [
+     "birlikte",
+     3.336,
+     3.667
+    ],
+    [
+     "seçiyorsunuz.",
+     3.667,
+     4.218
     ]
    ]
   },
