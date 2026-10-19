@@ -3368,7 +3368,7 @@ function getBattleCoords(location) {
 function renderMap() {
   if (map) return;
 
-  const tileUrl = 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png';
+  const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
   map = L.map('mapContainer', {
     center: [40.0, 30.0],
@@ -3379,7 +3379,7 @@ function renderMap() {
   });
 
   L.control.attribution({ position: 'bottomright', prefix: false })
-    .addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>')
+    .addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" style="color:#8b6914">OpenStreetMap contributors</a>')
     .addTo(map);
 
   map.tileLayer = L.tileLayer(tileUrl, { maxZoom: 15 }).addTo(map);

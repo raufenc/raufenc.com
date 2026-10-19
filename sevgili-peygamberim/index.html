@@ -643,9 +643,9 @@ function initMap(){
   if(mapObj)return;
   mapObj=L.map('map-c',{scrollWheelZoom:false,zoomControl:false,attributionControl:false}).setView([22.5,38.5],5);
   L.control.zoom({position:'topleft'}).addTo(mapObj);
-  L.control.attribution({position:'bottomright',prefix:false}).addAttribution('&copy; <a href="https://www.openstreetmap.org/" style="color:#8b6914">OSM</a>').addTo(mapObj);
-  baseTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',{maxZoom:16}).addTo(mapObj);
-  labelTileLayer=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',{maxZoom:16,opacity:.35}).addTo(mapObj);
+  L.control.attribution({position:'bottomright',prefix:false}).addAttribution('&copy; <a href="https://www.openstreetmap.org/copyright" style="color:#8b6914">OpenStreetMap contributors</a>').addTo(mapObj);
+  baseTileLayer=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:16}).addTo(mapObj);
+  labelTileLayer=L.layerGroup().addTo(mapObj);
   satTileLayer=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:16});
 
   mapObj.on('popupclose',()=>setTimeout(_execPendingScroll,100));
