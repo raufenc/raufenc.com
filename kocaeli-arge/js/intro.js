@@ -4,7 +4,12 @@ const DURATION = 4200;
 
 function loadThree() {
   if (window.THREE) return Promise.resolve(window.THREE);
-  return new Promise((res, rej) => { const s = document.createElement('script'); s.src = THREE_URL; s.onload = () => res(window.THREE); s.onerror = rej; document.head.appendChild(s); });
+  return new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = THREE_URL;
+    const t = setTimeout(() => rej(new Error('three_timeout')), 3500); // CDN gecikirse SVG çizime düş
+    s.onload = () => { clearTimeout(t); res(window.THREE); }; s.onerror = () => { clearTimeout(t); rej(new Error('three_failed')); };
+    document.head.appendChild(s);
+  });
 }
 function webglOk() { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl') || c.getContext('experimental-webgl')); } catch (_) { return false; } }
 
