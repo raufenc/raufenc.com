@@ -52,7 +52,7 @@ Sitemap: https://kuranogretmenim.com/sitemap.xml
 
 ## Uygulamada düzeltilmesi gereken, bu paket hazırlanırken fark edilen eksik
 
-Uygulamanın varlık listesinde 992 dosya var; bunların 152'si canlı
+Uygulamanın varlık listesinde 992 dosya var; bunların 150'si canlı
 sunucuda yok (hepsi adında Türkçe karakter ya da boşluk olan dosyalar:
 ör. `ğayn.mp3`, `şin.mp3`, `tıy.mp3`, `zıy.mp3`, `üstün aciklamasi.mp3`,
 `asar aciklama.mp3`, `kırmızı ayakkabı.png`). Bu yüzden canlı uygulamada
