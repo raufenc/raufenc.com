@@ -28,12 +28,14 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Büyüklerimiz: Edep, bilgiden önce gelir."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Çirkin gördüğümüz davranışı kendimiz yapmayız."
     },
     {
@@ -108,18 +110,21 @@ DO.dersKaydet(
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Yanlış örnek de bize ders olabilir."
     },
     {
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Edep, insanı güzelleştiren davranış dilidir: söz, bakış, oturuş, yardım ve teşekkür."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Bugün kendi davranışımızı kontrol edeceğiz: saygı, söz, ses, izin ve temizlik."
     },
     {

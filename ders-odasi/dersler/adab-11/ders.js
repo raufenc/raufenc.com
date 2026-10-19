@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Kıble, ibadette yöneldiğimiz özel bir yöndür."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Kıbleye karşı saygısız davranışlardan kaçınırız."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Cami ve evde oturuşumuza dikkat ederiz."
     },
     {
@@ -82,12 +85,14 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Bu edeb, kalpteki saygıyı davranışa taşır."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Cüneyd-i Bağdâdî hazretlerinin kıssası bize hassasiyet öğretir.",
      "not": "Cüneyd-i Bağdâdî hazretlerinin kıssasını kendi kaynağınızdan kısaca anlatın; slaytta yalnızca başlığı var."
     },
@@ -95,6 +100,7 @@ DO.dersKaydet(
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Görünmeyen yerde bile edebimizi koruruz."
     },
     {

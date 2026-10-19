@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Sokakta kimseyi rahatsız etmemek esastır."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Alay, kavga, yalan ve aldatma edebe uymaz."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Alışverişte dürüstlük ve helal kazanç önemlidir."
     },
     {
@@ -114,24 +117,28 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Yiyeceği temiz ve örtülü taşırız."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Arkadaşla yürürken onu bekletmeyiz."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Ayrılırken helalleşmek güzel bir edeptir."
     },
     {
      "id": "s07",
      "tur": "slayt",
      "gorsel": "slayt/07.webp",
+     "ses": "ses/s07.mp3",
      "metin": "Mahremiyetimizi korumak da edebin parçasıdır."
     },
     {

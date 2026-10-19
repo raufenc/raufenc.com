@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Evden çıkarken edeb: besmele, aileye veda, güzel niyet ve dua."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Çıkmadan önce ailemizle vedalaşırız. Besmele ile önce sağ ayakkabımızı giyer, evden sol ayakla çıkarız."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Evden çıkarken şu duayı okuruz: “Bismillâhi ve tevekkeltü alellâhi ve lâ havle ve lâ kuvvete illâ billâh.”"
     },
     {
@@ -90,24 +93,28 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Bu dua bize Allahü teâlâya güvenmeyi, doğru yolda kalmayı ve korunmayı Allahü teâlâdan istemeyi hatırlatır."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Okula ya da işe giderken güzel niyet ederiz: helal rızık, aileye destek, ibadet ve insanlara fayda."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Evden çıkarken Âyete’l-Kürsî okumayı alışkanlık hâline getiririz; gösteriş için değil, Allahü teâlânın korumasını dilemek için."
     },
     {
      "id": "s07",
      "tur": "slayt",
      "gorsel": "slayt/07.webp",
+     "ses": "ses/s07.mp3",
      "metin": "Eve girerken de İhlâs-ı şerîf okumayı hatırlarız. Evden çıkış ve eve dönüş dua ile güzelleşsin."
     },
     {

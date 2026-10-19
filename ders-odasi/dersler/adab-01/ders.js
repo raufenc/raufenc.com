@@ -28,6 +28,7 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Edeb, güzel huy ve saygılı davranıştır.",
      "not": "Öğrenciye sorun: “Sence edebli bir insan nasıl konuşur, nasıl dinler?”"
     },
@@ -35,12 +36,14 @@ DO.dersKaydet(
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Edeb; söz dinlemek, haddini bilmek ve kırmadan davranmaktır."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Bilgi, edep ile değer kazanır."
     },
     {
@@ -97,18 +100,21 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "En güzel miras: edep."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "“Peki efendim” demek, önce saygıyla dinlemektir."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Düşüncemizi sonra, uygun bir dille sorabiliriz."
     },
     {

@@ -28,12 +28,14 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Edep, günlük hayatın her yerindedir."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Aynı saygı dili her ortamda gerekir."
     },
     {
@@ -126,18 +128,21 @@ DO.dersKaydet(
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Kuralı bilmek yetmez; davranışa dönüştürmek gerekir."
     },
     {
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Sözümüzü, sesimizi ve çevremizi kontrol ederiz."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Küçük davranışlar, büyük saygı gösterir."
     },
     {
