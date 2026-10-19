@@ -51,8 +51,8 @@ dizisinde `null` olan dört girdiye yeni dosya adları yazılır.
 ## Varlıklar
 
 - `assets/video/tanitim.mp4|webm` — uygulamanın gerçek ekranından
-  kaydedilmiş 44 saniyelik tur (720×1558). Yeniden üretmek için
-  Playwright ile kayıt alınıp donuk kareler kısaltılmıştır.
+  kaydedilmiş 50 saniyelik tur (720×1558). Yeniden üretmek için
+  Playwright üzerinden 2× ekran görüntüsü dizisi olarak alınıp donuk kareler kısaltılmıştır.
 - `assets/ekran/*.webp` — uygulamadan 2× ekran görüntüleri.
 - `assets/img/hero-*.webp`, `mushaf`, `cami`, `cocuklar`, `aile`, `desen` —
   üretilmiş görseller (gerçek kişi veya yer değildir).
