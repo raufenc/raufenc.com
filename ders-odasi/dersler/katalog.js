@@ -303,7 +303,7 @@ DO.katalogKaydet([
   "sira": 17,
   "huy": "Şecâat",
   "uclar": ["Cübn", "Şecâat", "Tehevvür"],
-  "kanca": "Korkmuyorum, bakalım ne olacak.",
+  "kanca": "Korkuyorum ama bakalım ne olacak.",
   "inceleme": "taslak"
  },
  {
@@ -542,7 +542,7 @@ DO.katalogKaydet([
  },
  {
   "id": "ibre-tevazu-ucb",
-  "ad": "Tevazu (Küçümseme · Ucb): İbren Nerede?",
+  "ad": "Tevâzu (Küçümseme · Ucb): İbren Nerede?",
   "seri": "İbremetre",
   "kisaAd": "İbremetre",
   "durum": "oyunlu",
@@ -553,8 +553,8 @@ DO.katalogKaydet([
   "yas": "10-15 yaş",
   "aile": "benlik",
   "sira": 31,
-  "huy": "Tevazu",
-  "uclar": ["Küçümseme", "Tevazu", "Ucb"],
+  "huy": "Tevâzu",
+  "uclar": ["Küçümseme", "Tevâzu", "Ucb"],
   "kanca": "Bende özel bir şey yok.",
   "inceleme": "taslak"
  },
