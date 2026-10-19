@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Sınıf başkanlığı seçimi var. Arkadaşların seni aday göstermek istiyor.",
        "secenekler": [
         {
-         "m": "Hiç uğraşmam; seçilsem de seçilmesem de bana ne.",
+         "m": "Hiç uğraşmam; seçilsem de seçilmesem de aynı.",
          "zon": "az",
          "sonuc": "Arkadaşlarına faydalı olma fırsatı kaçıyor.",
          "not": "İbre sola kaydı: hiç gayret etmemek, güzel işlerin önünü kapatıyor.",

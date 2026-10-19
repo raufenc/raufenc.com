@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Arkadaşın sınavdan senden yüksek not aldı ve nasıl çalıştığını anlatıyor.",
        "secenekler": [
         {
-         "m": "Anlatsın, beni ilgilendirmez.",
+         "m": "Anlatsın, ben zaten notumu biliyorum.",
          "zon": "az",
          "sonuc": "Çalışma yöntemini dinlemiyorsun; öğrenebileceğin güzel bir yol yanından geçiyor.",
          "not": "İbre sola kaydı: ilgisiz kalmak, güzel örnekten öğrenmeyi engelliyor.",

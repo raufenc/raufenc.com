@@ -232,7 +232,7 @@ DO.dersKaydet(
        "tetik": "Sınıfta bir arkadaşının çözemediği soruyu sen çözdün. Arkadaşın “Nasıl yaptın?” diye soruyor.",
        "secenekler": [
         {
-         "m": "Bende bir şey yok ki, anlatmaya değmez; sen öğretmene sor.",
+         "m": "Bunu ben çözmedim sayılır, anlatacak bir şey yok; sen öğretmene sor.",
          "zon": "az",
          "sonuc": "Öğrendiğin yol sende kalıyor; arkadaşın sorusunun cevabını bulamıyor.",
          "not": "İbre sola kaydı: bilgin saklı kalınca kimse ondan yararlanamıyor.",
@@ -318,7 +318,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Başarısı olsa bile “ben bir işe yaramam” deyip her teşekkürü geri çevirir.",
+       "metin": "Başarısına rağmen “bu benim payım sayılmaz” deyip her teşekkürü geri çevirir.",
        "alan": "az",
        "ipucu": "Kendi emeğini hiç saymıyor."
       },

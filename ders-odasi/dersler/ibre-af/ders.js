@@ -229,27 +229,27 @@ DO.dersKaydet(
       },
       {
        "id": "oyun",
-       "baslik": "Oyundan dışlanmak",
-       "tetik": "Bir arkadaşın seni oyuna almayıp kırdı. Sonra gelip içtenlikle özür diledi.",
+       "baslik": "Ders arası",
+       "tetik": "Bir arkadaşın ders arasında sana bağırıp seni kırdı. Sonra gelip içtenlikle özür diledi.",
        "secenekler": [
         {
          "m": "Sorun değil, yine istediği gibi davransın.",
          "zon": "az",
-         "sonuc": "Davranış değişmiyor; sen yine dışarıda kalıyorsun.",
+         "sonuc": "Davranış değişmiyor; yine kırılıyorsun.",
          "not": "İbre sola kaydı: hiç sınır koymamak, kırılmanın tekrarına kapı açıyor.",
          "ses": "s2az"
         },
         {
-         "m": "Özür yetmez; bir hafta seni oyuna almayacağım.",
+         "m": "Özür yetmez; bir hafta yanıma oturmayacaksın.",
          "zon": "fazla",
          "sonuc": "Özür dileyen kişi mahcup kalıyor; barışmak yerine hesaplaşma başlıyor.",
          "not": "İbre sağa kaydı: içten özrü cezayla karşılamak barışmanın yolunu uzatıyor.",
          "ses": "s2fa"
         },
         {
-         "m": "Özrünü kabul ettim; bir dahaki oyuna beni de al.",
+         "m": "Özrünü kabul ettim; bir dahaki sefer sakin konuşalım.",
          "zon": "orta",
-         "sonuc": "Arkadaşın söz veriyor; ikiniz yeniden birlikte oynuyorsunuz.",
+         "sonuc": "Arkadaşın söz veriyor; ikiniz yeniden rahatça konuşuyorsunuz.",
          "not": "İbre ortada: barıştın ve ne beklediğini nazikçe söyledin.",
          "ses": "s2or"
         }
@@ -1578,110 +1578,110 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 4.685,
-   "m": "Bir arkadaşın seni oyuna almayıp kırdı. Sonra gelip içtenlikle özür diledi. Ne yaparsın?",
+   "sure": 5.461,
+   "m": "Bir arkadaşın ders arasında sana bağırıp seni kırdı. Sonra gelip içtenlikle özür diledi. Ne yaparsın?",
    "k": [
     [
      "Bir",
      0.03,
-     0.146
+     0.157
     ],
     [
      "arkadaşın",
-     0.146,
-     0.608
+     0.157,
+     0.666
+    ],
+    [
+     "ders",
+     0.666,
+     0.793
+    ],
+    [
+     "arasında",
+     0.793,
+     1.301
+    ],
+    [
+     "sana",
+     1.301,
+     1.555
+    ],
+    [
+     "bağırıp",
+     1.555,
+     1.937
     ],
     [
      "seni",
-     0.608,
-     0.84
-    ],
-    [
-     "oyuna",
-     0.84,
-     1.187
-    ],
-    [
-     "almayıp",
-     1.187,
-     1.534
+     1.937,
+     2.191
     ],
     [
      "kırdı.",
-     1.534,
-     1.765
+     2.191,
+     2.445
     ],
     [
      "Sonra",
-     2.045,
-     2.314
+     2.65,
+     2.935
     ],
     [
      "gelip",
-     2.314,
-     2.583
+     2.935,
+     3.219
     ],
     [
      "içtenlikle",
-     2.583,
-     3.122
+     3.219,
+     3.788
     ],
     [
      "özür",
-     3.122,
-     3.391
+     3.788,
+     4.073
     ],
     [
      "diledi.",
-     3.391,
-     3.795
+     4.073,
+     4.5
     ],
     [
      "Ne",
-     4.135,
-     4.255
+     4.775,
+     4.929
     ],
     [
      "yaparsın?",
-     4.255,
-     4.615
+     4.929,
+     5.391
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 2.9,
-   "m": "Davranış değişmiyor; sen yine dışarıda kalıyorsun.",
+   "sure": 2.422,
+   "m": "Davranış değişmiyor; yine kırılıyorsun.",
    "k": [
     [
      "Davranış",
      0.03,
-     0.484
+     0.521
     ],
     [
      "değişmiyor;",
-     0.484,
-     1.09
-    ],
-    [
-     "sen",
-     1.355,
-     1.489
+     0.521,
+     1.175
     ],
     [
      "yine",
-     1.489,
-     1.757
+     1.53,
+     1.765
     ],
     [
-     "dışarıda",
-     1.757,
-     2.293
-    ],
-    [
-     "kalıyorsun.",
-     2.293,
-     2.83
+     "kırılıyorsun.",
+     1.765,
+     2.352
     ]
    ]
   },
@@ -1739,43 +1739,43 @@ DO.dersKaydet(
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.715,
-   "m": "Arkadaşın söz veriyor; ikiniz yeniden birlikte oynuyorsunuz.",
+   "sure": 3.737,
+   "m": "Arkadaşın söz veriyor; ikiniz yeniden rahatça konuşuyorsunuz.",
    "k": [
     [
      "Arkadaşın",
      0.03,
-     0.635
+     0.633
     ],
     [
      "söz",
-     0.635,
-     0.786
+     0.633,
+     0.783
     ],
     [
      "veriyor;",
-     0.786,
-     1.24
+     0.783,
+     1.235
     ],
     [
      "ikiniz",
-     1.555,
-     2.003
+     1.56,
+     1.981
     ],
     [
      "yeniden",
-     2.003,
-     2.451
+     1.981,
+     2.403
     ],
     [
-     "birlikte",
-     2.451,
-     2.899
+     "rahatça",
+     2.403,
+     2.824
     ],
     [
-     "oynuyorsunuz.",
-     2.899,
-     3.645
+     "konuşuyorsunuz.",
+     2.824,
+     3.667
     ]
    ]
   },

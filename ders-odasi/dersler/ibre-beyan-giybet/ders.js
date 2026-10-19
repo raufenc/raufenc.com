@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": true,
           "not": "Sükût-u Hakk, söylenmesi gereken yerde susmaktır. Zor geliyorsa güvendiğin bir büyüğe söylemek de bir yoldur."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Gıybet, birinin kusurunu o yokken konuşmaktır. Biri zarar görüyorsa, yardım için güvendiğin bir büyüğe anlatmak başka şeydir."
          },
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: sükût-u hakkın sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Hikmetli Beyân, yerinde ve faydalı söz söylemektir. Gerektiğinde doğruyu söyler, gerekmediğinde arkadan konuşmaz."
          },
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: sükût-u hakkın sesi."
          },

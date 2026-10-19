@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Beni ilgilendirmez.",
+          "m": "Üzüntüsü onun işi; ben karışmayayım.",
           "dogru": true,
           "not": "Duyarsızlık, kimsenin duygusunu umursamamaktır. Yanına gitmek bile bir teselli olabilir."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Şemâtet, başkasının acısına gizlice sevinmektir. Rekabet olabilir; ama biri üzülürken sevinmek kalbi ağırlaştırır."
          },
          {
-          "m": "Beni ilgilendirmez.",
+          "m": "Üzüntüsü onun işi; ben karışmayayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: duyarsızlığın sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Şefkat, merhamet ve sevgi göstermektir. Çözümün olmasa bile yanında olmak iyi gelir."
          },
          {
-          "m": "Beni ilgilendirmez.",
+          "m": "Üzüntüsü onun işi; ben karışmayayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: duyarsızlığın sesi."
          },
@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Arkadaşın sınavdan çok düşük not aldı ve sessizce başını önüne eğdi.",
        "secenekler": [
         {
-         "m": "Notu onun, beni ilgilendirmez.",
+         "m": "Notu kendi sorunu; yanına gitmem.",
          "zon": "az",
          "sonuc": "Arkadaşın üzüntüsüyle baş başa kalıyor.",
          "not": "İbre sola kaydı: duyguyu görmemek onu yalnız bırakıyor.",

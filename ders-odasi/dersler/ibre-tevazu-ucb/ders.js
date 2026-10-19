@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Benim yaptığım sıradan; göstermeye değmez.",
+          "m": "Bu yeteneğim önemsiz; kimseye göstermeye değmez.",
           "dogru": true,
           "not": "Küçümseme, kendi yeteneğini ve güzel yanlarını önemsiz saymaktır; kendini değersiz sanmaya kadar gidebilir. Güzel yanı görmemek, nimeti görmemek demektir. Böyle hissedince güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Ucb, kendi bilgisine ve meziyetine hayran olmaktır. Güzel yanın bir nimet olduğunu unutturur."
          },
          {
-          "m": "Benim yaptığım sıradan; göstermeye değmez.",
+          "m": "Bu yeteneğim önemsiz; kimseye göstermeye değmez.",
           "dogru": false,
           "not": "Bu sol ucun sesi: küçümsemenin sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Tevazu, nimetin Allahü teâlâ’dan olduğunu bilerek alçakgönüllü olmaktır."
          },
          {
-          "m": "Benim yaptığım sıradan; göstermeye değmez.",
+          "m": "Bu yeteneğim önemsiz; kimseye göstermeye değmez.",
           "dogru": false,
           "not": "Bu sol ucun sesi: küçümsemenin sesi."
          },

@@ -204,7 +204,7 @@ DO.dersKaydet(
        "tetik": "Oyunda arkadaşın seni yendi ve herkes onu alkışlıyor.",
        "secenekler": [
         {
-         "m": "Keşke sen de bir kaybetsen, anlarsın!",
+         "m": "Keşke bir de sen yenilsen, görürsün!",
          "zon": "az",
          "sonuc": "Söz çıkıyor ama sonra içinde bir sıkıntı kalıyor; arkadaşın da kırılıyor.",
          "not": "İbre sola kaydı: kızgınlıkla kötü dilemek, kırgınlığı büyütüyor.",
@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Arkadaşının yarın önemli bir sınavı var ve ona iyi bir şey söylemek istiyorsun.",
        "secenekler": [
         {
-         "m": "Keşke sınavda zorlansa, bana ne.",
+         "m": "Keşke sınavda zorlansa, umurumda değil.",
          "zon": "az",
          "sonuc": "Arkadaşın bunu hissedip kırılıyor; sen de içinde bir sıkıntı taşıyorsun.",
          "not": "İbre sola kaydı: birine kötülük dilemek içimizi de ağırlaştırıyor.",
