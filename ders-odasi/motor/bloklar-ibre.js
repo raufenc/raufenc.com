@@ -563,7 +563,7 @@
 
       /* — B: ibre fikri — */
       var yaziB1 = metinKutu(gB, 110, 250, 560, 'Birçok güzel huy bir ibre gibidir.', { boyut: 60, agirlik: 700 });
-      var tHuy = L2 + A.kelime('a2', b.huy) * 1000 - 60, tOlc = L2 + A.kelime('a2', 'ölçer') * 1000 - 400, tUc = L2 + A.kelime('a2', 'üç') * 1000 - 100;
+      var tHuy = L2 + A.kelime('a2', b.huyAnahtar || b.huy) * 1000 - 60, tOlc = L2 + A.kelime('a2', 'ölçer') * 1000 - 400, tUc = L2 + A.kelime('a2', 'üç') * 1000 - 100;
       var pb = new Patla(gB, saat, [{ k: b.huy, at: tHuy, renk: '#F4C95D', boyut: 128 }], { x: 390, y: 440, boyut: 128, maxW: 620 });
       var chip = sv('g', { opacity: 0 }); gB.appendChild(chip);
       chip.appendChild(sv('rect', { x: 100, y: 485, width: 600, height: 170, rx: 30, fill: 'rgba(255,255,255,0.14)', stroke: '#fff', 'stroke-opacity': 0.55, 'stroke-width': 3 }));
