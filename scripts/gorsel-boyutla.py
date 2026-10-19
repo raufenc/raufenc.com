@@ -31,6 +31,11 @@ JPEGLER = {
     'images/raufenc.jpeg': ('images/raufenc-512.jpg', 512),
 }
 
+# Paylaşım önizlemesi için 1200x630'a ortadan kırpılan görseller (vitrin OG)
+OG_KIRP = {
+    'images/vitrin/cihan-serisi.webp': 'images/vitrin/cihan-serisi-og.jpg',
+}
+
 WEBP_KALITE = 78
 AVIF_KALITE = 55
 
@@ -74,5 +79,24 @@ def main():
         yaz(cikis, once)
 
 
+def og_kirp():
+    for kaynak, hedef in OG_KIRP.items():
+        yol = os.path.join(KOK, kaynak)
+        im = Image.open(yol).convert('RGB')
+        oran = 1200 / 630
+        if im.width / im.height > oran:
+            g = round(im.height * oran)
+            im = im.crop(((im.width - g) // 2, 0, (im.width - g) // 2 + g, im.height))
+        else:
+            y = round(im.width / oran)
+            im = im.crop((0, (im.height - y) // 2, im.width, (im.height - y) // 2 + y))
+        im = im.resize((1200, 630), Image.LANCZOS)
+        cikis = os.path.join(KOK, hedef)
+        im.save(cikis, 'JPEG', quality=84, optimize=True, progressive=True)
+        print(kaynak, '→', hedef)
+        yaz(cikis, os.path.getsize(yol))
+
+
 if __name__ == '__main__':
     main()
+    og_kirp()

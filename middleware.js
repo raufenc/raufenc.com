@@ -98,13 +98,19 @@ function isScannerPath(pathname) {
   return false;
 }
 
+// vercel.json'daki trailingSlash:true, /api/x isteğini /api/x/ adresine yönlendirir;
+// izin tablosu iki yazımda da aynı uca baksın.
+function apiYolu(pathname) {
+  return pathname.length > 5 ? pathname.replace(/\/+$/, '') : pathname;
+}
+
 function apiPolicy(pathname) {
   if (!pathname.startsWith('/api/')) return null;
-  return API_METHODS[pathname] || [];
+  return API_METHODS[apiYolu(pathname)] || [];
 }
 
 function fetchMetadataBlocked(req, pathname) {
-  if (pathname === '/api/bia-news') return false;
+  if (apiYolu(pathname) === '/api/bia-news') return false;
   if (req.method !== 'POST' && req.method !== 'OPTIONS') return false;
   const site = req.headers.get('sec-fetch-site');
   return Boolean(site && !['same-origin', 'same-site', 'none'].includes(site));
