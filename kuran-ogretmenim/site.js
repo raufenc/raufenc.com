@@ -41,8 +41,8 @@
     ['ا', 'Elif', 'elif'], ['ب', 'Be', 'be'], ['ت', 'Te', 'te'], ['ث', 'Se', 'se'],
     ['ج', 'Cim', 'cim'], ['ح', 'Ha', 'ha'], ['خ', 'Hı', 'haaa'], ['د', 'Dal', 'dal'],
     ['ذ', 'Zel', 'zalp'], ['ر', 'Ra', 'ra'], ['ز', 'Ze', 'ze'], ['س', 'Sin', 'sin'],
-    ['ش', 'Şın', null], ['ص', 'Sad', 'sadd'], ['ض', 'Dad', 'dadd'], ['ط', 'Tı', null],
-    ['ظ', 'Zı', null], ['ع', 'Ayn', 'ayn'], ['غ', 'Gayn', null], ['ف', 'Fe', 'fe'],
+    ['ش', 'Şın', 'shin'], ['ص', 'Sad', 'sadd'], ['ض', 'Dad', 'dadd'], ['ط', 'Tı', 'tiiy'],
+    ['ظ', 'Zı', 'ziiy'], ['ع', 'Ayn', 'ayn'], ['غ', 'Gayn', 'ghayn'], ['ف', 'Fe', 'fe'],
     ['ق', 'Kaf', 'kaf'], ['ك', 'Kef', 'kef'], ['ل', 'Lam', 'lam'], ['م', 'Mim', 'mim'],
     ['ن', 'Nun', 'nun'], ['هـ', 'He', 'he'], ['و', 'Vav', 'vav'], ['ي', 'Ye', 'ye'],
     ['لا', 'Lamelif', 'lamelif']
