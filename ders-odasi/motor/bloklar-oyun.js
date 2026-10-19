@@ -252,7 +252,7 @@
         });
         kart.addEventListener('pointermove', function (e) {
           if (!bas) return;
-          var dx = (e.clientX - bas.x) / ctx.oynatici.olcek, dy = (e.clientY - bas.y) / ctx.oynatici.olcek;
+          var dd = ctx.oynatici.delta(e.clientX - bas.x, e.clientY - bas.y), dx = dd.x, dy = dd.y;
           if (!tasindi && Math.abs(dx) + Math.abs(dy) < 8) return;
           tasindi = true;
           kart.classList.add('tasiniyor');

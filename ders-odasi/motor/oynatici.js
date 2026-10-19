@@ -157,15 +157,20 @@
   }
 
   function olcekle() {
-    var a = O.dom.alan.getBoundingClientRect();
-    var s = Math.min(a.width / GEN, a.height / YUK);
+    var a = O.dom.alan;   /* yerleşim boyutu: dikey telefondaki CSS dönüşünden etkilenmez */
+    var s = Math.min(a.clientWidth / GEN, a.clientHeight / YUK);
     O.olcek = s;
     O.dom.sahne.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
   }
   /* Ekran koordinatını sahne koordinatına çevir (sürükle-bırak için) */
   O.sahneNokta = function (x, y) {
     var r = O.dom.sahne.getBoundingClientRect();
+    if (O.rot === 90) return { x: (y - r.top) / O.olcek, y: (r.right - x) / O.olcek };   /* dikey telefonda sahne 90° döner */
     return { x: (x - r.left) / O.olcek, y: (y - r.top) / O.olcek };
+  };
+  /* ekran farkını (px) sahne birimine çevir; dönüşlüyse eksenler değişir */
+  O.delta = function (dx, dy) {
+    return O.rot === 90 ? { x: dy / O.olcek, y: -dx / O.olcek } : { x: dx / O.olcek, y: dy / O.olcek };
   };
 
   function ikon(ad) {
