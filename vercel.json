@@ -239,13 +239,13 @@
       "permanent": true
     },
     {
-      "source": "/iho-oyunlar-2/:path*",
-      "destination": "/7sinif/oyunlar2/:path*",
+      "source": "/iho-oyunlar-2/:path(.*)",
+      "destination": "/7sinif/oyunlar2/:path",
       "permanent": false
     },
     {
-      "source": "/iho-oyunlar/:path*",
-      "destination": "/7sinif/oyunlar/:path*",
+      "source": "/iho-oyunlar/:path(.*)",
+      "destination": "/7sinif/oyunlar/:path",
       "permanent": false
     },
     {
@@ -319,7 +319,7 @@
       "permanent": false
     },
     {
-      "source": "/meslek-pusulasi/:path*",
+      "source": "/meslek-pusulasi/:path(.*)",
       "destination": "/yol-haritan/",
       "permanent": false
     },
@@ -395,8 +395,8 @@
       "permanent": true
     },
     {
-      "source": "/davetmektubu/:path*",
-      "destination": "https://davetmektubu.com/:path*",
+      "source": "/davetmektubu/:path(.*)",
+      "destination": "https://davetmektubu.com/:path",
       "permanent": true
     },
     {
@@ -410,8 +410,8 @@
       "permanent": true
     },
     {
-      "source": "/7sinif1unite/:path*",
-      "destination": "/7sinif/1/:path*",
+      "source": "/7sinif1unite/:path(.*)",
+      "destination": "/7sinif/1/:path",
       "permanent": true
     },
     {
@@ -425,8 +425,8 @@
       "permanent": true
     },
     {
-      "source": "/7sinif2unite/:path*",
-      "destination": "/7sinif/2/:path*",
+      "source": "/7sinif2unite/:path(.*)",
+      "destination": "/7sinif/2/:path",
       "permanent": true
     },
     {
@@ -440,8 +440,8 @@
       "permanent": true
     },
     {
-      "source": "/7sinif3unite/:path*",
-      "destination": "/7sinif/3/:path*",
+      "source": "/7sinif3unite/:path(.*)",
+      "destination": "/7sinif/3/:path",
       "permanent": true
     }
   ],
