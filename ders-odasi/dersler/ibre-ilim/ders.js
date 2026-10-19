@@ -20,6 +20,7 @@ DO.dersKaydet(
      "id": "acilis",
      "tur": "ibreAcilis",
      "huy": "İlim",
+     "huyAnahtar": "İlim",
      "olculen": "Bilgiye yaklaşımım",
      "kanca": "Bunu zaten biliyorum!",
      "uclar": {
