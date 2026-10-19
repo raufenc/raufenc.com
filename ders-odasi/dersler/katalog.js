@@ -483,7 +483,7 @@ DO.katalogKaydet([
   "sira": 27,
   "huy": "Sıdk",
   "uclar": ["İkiyüzlülük", "Sıdk", "Patavatsızlık"],
-  "kanca": "Kime ne sorduysa, istediğini söyledim.",
+  "kanca": "Herkesle konuştum, kimseyi kırmadım.",
   "inceleme": "taslak"
  },
  {
