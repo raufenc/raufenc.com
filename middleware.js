@@ -14,6 +14,7 @@ const API_METHODS = {
   '/api/arge-asistan': ['POST', 'OPTIONS'],
   '/api/arge-bildirim': ['POST', 'OPTIONS'],
   '/api/iletisim': ['POST', 'OPTIONS'],
+  '/api/surum': ['GET', 'HEAD'],
 };
 const PUBLIC_METHODS = ['GET', 'HEAD', 'OPTIONS'];
 const SCANNER_PATHS = [

@@ -179,6 +179,15 @@
       ]
     },
     {
+      "source": "/api/surum{/}?",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
       "source": "/kocaeli-arge/(.*)",
       "headers": [
         {
