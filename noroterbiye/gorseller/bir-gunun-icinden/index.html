@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/lib/error-logger.js"></script>
+  <title>Bir Günün İçinden — NöroTerbiye</title>
+  <meta name="description" content="Bir bildirim, bir atıştırma, bir oyun, bir tartışma: beyin bölgeleri, alışkanlık döngüsü ve ŞŞG dürtüleri tek hikâyede, adım adım.">
+  <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/bir-gunun-icinden/">
+  <meta property="og:title" content="Bir Günün İçinden — NöroTerbiye">
+  <meta property="og:description" content="Beyin, alışkanlık döngüsü ve üç dürtü: gündelik bir anı adım adım izle.">
+  <meta property="og:image" content="https://raufenc.com/noroterbiye/gorseller/og/bir-gunun-icinden.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://raufenc.com/noroterbiye/gorseller/og/bir-gunun-icinden.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+  <link rel="stylesheet" href="/noroterbiye/css/noroterbiye.css">
+  <link rel="stylesheet" href="/noroterbiye/css/gorseller.css">
+  <link rel="stylesheet" href="/noroterbiye/css/gorseller-brain.css">
+  <script src="/lib/design-system/theme.js"></script>
+  <style>
+    .gv-page { --gv-accent: #f472b6; --gv-grad: linear-gradient(120deg,#f472b6 0%,#a78bfa 45%,#22d3ee 100%); }
+
+    .st-stage { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    .st-canvas { padding: 18px 18px 12px; overflow: hidden; }
+    .st-pick { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+    .st-pick .gv-chip { padding: 8px 14px 8px 11px; }
+    .st-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 4px 4px 2px; }
+
+    /* hikâye çubuğu */
+    .st-bar { display: flex; align-items: center; gap: 10px; margin: 10px 4px 4px; }
+    .st-ctrl { width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: var(--gv-ink); background: var(--gv-card-2); border: 1px solid var(--gv-line-2); transition: all .2s; }
+    .st-ctrl:hover { border-color: var(--gv-accent); transform: scale(1.06); }
+    .st-ctrl.main { background: linear-gradient(135deg, #f472b6, #a78bfa); color: #fff; border: 0; box-shadow: 0 8px 22px -8px #a78bfa; width: 46px; height: 46px; }
+    .st-ctrl .gv-ic { fill: none; }
+    .st-ctrl .fillic { fill: currentColor; stroke: none; }
+    .st-track { flex: 1; display: flex; align-items: center; gap: 0; min-width: 0; }
+    .st-dot { --c: #888; flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 4px 0; cursor: pointer; background: none; border: 0; font: inherit; color: var(--gv-ink-3); min-width: 0; }
+    .st-dot::before { content: ''; position: absolute; top: 15px; left: -50%; right: 50%; height: 2px; background: var(--gv-line-2); z-index: 0; }
+    .st-dot:first-child::before { display: none; }
+    .st-dot.done::before { background: linear-gradient(90deg, var(--pc, var(--c)), var(--c)); }
+    .st-dot i { position: relative; z-index: 1; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: .66rem; font-weight: 800; color: var(--gv-ink-3); background: var(--gv-card-2); border: 2px solid var(--gv-line-2); transition: all .3s; }
+    .st-dot span { font-size: .66rem; font-weight: 700; letter-spacing: .04em; white-space: nowrap; }
+    .st-dot.done i { background: var(--c); border-color: var(--c); color: #fff; }
+    .st-dot.on i { transform: scale(1.3); background: var(--c); border-color: var(--c); color: #fff; box-shadow: 0 0 0 5px color-mix(in srgb, var(--c) 25%, transparent); }
+    .st-dot.on span { color: var(--gv-ink); }
+
+    /* bölge etiketi (sadece aktifse görünür) */
+    .lb { opacity: 0; pointer-events: none; transition: opacity .5s; }
+    .lb.is-in-path, .lb.show { opacity: 1; }
+    .mk { opacity: .55; transition: opacity .4s; }
+    .mk.show { opacity: 1; }
+    .bm-svg [data-r] .r-shape { opacity: .55; }
+    .bm-svg [data-r].is-active .r-shape { opacity: 1; }
+    .hl-strip-note { font-size: .74rem; color: var(--gv-ink-3); }
+    .extra-hl { fill: none; opacity: 0; transition: opacity .5s; pointer-events: none; }
+    .extra-hl.on { opacity: 1; }
+    .extra-hl.pulse { animation: stPulse 2s ease-in-out infinite; }
+    @keyframes stPulse { 50% { opacity: .55; } }
+    .st-xlab { font: 800 11px var(--font-sans); letter-spacing: .1em; text-transform: uppercase; text-anchor: middle; paint-order: stroke; stroke: var(--b-label-bg); stroke-width: 4px; opacity: 0; transition: opacity .5s; pointer-events: none; }
+    .st-xlab.on { opacity: 1; }
+
+    /* panel */
+    .st-panel { position: sticky; top: 84px; padding: 26px 26px 24px; min-height: 480px; overflow: hidden; --c: #f472b6; }
+    .st-panel::after { content: ''; position: absolute; inset: auto -20% -45% -20%; height: 75%; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 24%, transparent), transparent); pointer-events: none; opacity: var(--gv-glow); transition: background .5s; }
+    .st-p { position: relative; z-index: 1; animation: stIn .45s cubic-bezier(.2,.7,.2,1); }
+    @keyframes stIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .st-p-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+    .st-time { display: inline-flex; align-items: center; gap: 8px; font: 800 .86rem var(--font-sans); color: var(--gv-ink); padding: 6px 12px; border-radius: 100px; background: var(--gv-card-2); border: 1px solid var(--gv-line); font-variant-numeric: tabular-nums; }
+    .st-time i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+    .st-mini { display: flex; gap: 8px; }
+    .st-mini svg { width: 44px; height: 44px; display: block; }
+    .st-mini .mini-bg { fill: var(--gv-card-2); stroke: var(--gv-line); }
+    .st-mini .mini-ln { fill: none; stroke: var(--gv-line-2); stroke-width: 1.4; }
+    .st-mini .mini-d { fill: var(--gv-line-2); transition: all .4s; }
+    .st-mini .mini-d.on { filter: drop-shadow(0 0 4px currentColor); }
+    .st-p h2 { margin: 0 0 8px; font-size: 1.45rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; color: var(--gv-ink); }
+    .st-p-tx { margin: 0 0 16px; font-size: .96rem; line-height: 1.7; color: var(--gv-ink-2); }
+    .st-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .st-box { padding: 14px 16px; border-radius: 16px; background: color-mix(in srgb, var(--c) 9%, transparent); border: 1px solid color-mix(in srgb, var(--c) 24%, transparent); }
+    .st-box .gv-kicker { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .st-box p { margin: 0; font-size: .9rem; line-height: 1.6; color: var(--gv-ink); }
+    .st-regs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .st-regs .gv-chip { padding: 5px 10px 5px 8px; font-size: .72rem; cursor: default; }
+    .st-regs .gv-chip:hover { transform: none; }
+    .st-stop { margin-top: 12px; padding: 14px 16px; border-radius: 16px; border: 1px dashed color-mix(in srgb, #22d3ee 55%, transparent); background: color-mix(in srgb, #22d3ee 8%, transparent); }
+    .st-stop b { display: flex; align-items: center; gap: 8px; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: #22d3ee; margin-bottom: 6px; }
+    html.light .st-stop b { color: #0e7490; }
+    .st-stop p { margin: 0; font-size: .88rem; line-height: 1.6; color: var(--gv-ink); }
+    .st-quiz { margin-top: 72px; }
+    .stg-ssg { --c: #a855f7; }
+
+    @media (max-width: 960px) {
+      .st-stage { grid-template-columns: 1fr; }
+      .st-panel { position: static; min-height: 0; }
+    }
+    @media (max-width: 700px) {
+      .lb { display: none; }
+      .mk-ring { r: 17px; } .mk-num { font-size: 15px; } .mk-halo { r: 36px; }
+      .st-canvas { padding: 12px 8px 8px; }
+      .st-dot span { display: none; }
+    }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+  <script src="/nav.js"></script>
+
+  <main class="gv-page" id="main-content">
+    <header class="gv-hero">
+      <span class="gv-eyebrow"><span data-gv-icon="sun" data-size="16"></span> Görsel Keşif · Hepsi bir arada</span>
+      <h1 class="gv-title">Bir Günün İçinden</h1>
+      <p class="gv-lead">Gündelik bir an seçin: beynin hangi bölgeleri devreye girer, alışkanlık döngüsünün hangi adımındayız ve hangi dürtü konuşuyor? Hikâyeyi adım adım izleyin.</p>
+    </header>
+
+    <section class="st-stage" aria-label="Bir günün içinden">
+      <div class="gv-card st-canvas">
+        <div class="st-pick" id="stPick" role="group" aria-label="Senaryo seç"></div>
+
+        <svg class="bm-svg" id="stSvg" viewBox="14 50 780 505" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Beynin yan görünümü: seçilen senaryonun her adımında devreye giren bölgeleri ve sinyal yollarını gösterir">
+          <defs>
+            <linearGradient id="gCortex" x1="12%" y1="0%" x2="88%" y2="100%"><stop offset="0" class="st-hi"/><stop offset=".5" class="st-mid"/><stop offset="1" class="st-lo"/></linearGradient>
+            <linearGradient id="gStem" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="st-shi"/><stop offset="1" class="st-slo"/></linearGradient>
+            <radialGradient id="gAmy" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#ff9aa2"/><stop offset=".55" stop-color="#ef4444"/><stop offset="1" stop-color="#9f1239"/></radialGradient>
+            <radialGradient id="gNac" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fde68a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#b45309"/></radialGradient>
+            <radialGradient id="gVta" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#fed7aa"/><stop offset=".55" stop-color="#f97316"/><stop offset="1" stop-color="#9a3412"/></radialGradient>
+            <linearGradient id="gHip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8b4fe"/><stop offset=".6" stop-color="#a855f7"/><stop offset="1" stop-color="#6b21a8"/></linearGradient>
+            <radialGradient id="gBgGlow" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#a78bfa" stop-opacity=".22"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+            <clipPath id="bmClip"><path id="bmClipPath"/></clipPath>
+            <clipPath id="bmCbClip"><path id="bmCbClipPath"/></clipPath>
+          </defs>
+          <ellipse cx="404" cy="290" rx="376" ry="226" fill="url(#gBgGlow)"/>
+          <g transform="translate(55 5)">
+            <path id="bmStem" fill="url(#gStem)" stroke="var(--b-edge)" stroke-width="1.5" stroke-opacity=".8"/>
+            <path id="bmCb" fill="url(#gStem)" stroke="var(--b-edge)" stroke-width="1.5" stroke-opacity=".9"/>
+            <g clip-path="url(#bmCbClip)"><path id="bmFolia" class="b-folia"/></g>
+            <path id="bmCortex" fill="url(#gCortex)" style="opacity:.42"/>
+            <g clip-path="url(#bmClip)">
+              <path id="bmFoldsShadow" class="b-folds-shadow" style="opacity:.2"/>
+              <path id="bmFolds" class="b-folds" style="opacity:.22"/>
+              <!-- PFC bölgesi -->
+              <g data-r="prefrontal" style="--c:#06b6d4"><path class="r-zone" d="M100 270C98 215 125 160 175 122 205 100 240 92 262 96 285 140 290 200 272 262 240 292 150 302 100 270Z"/></g>
+              <!-- motor korteks şeridi -->
+              <path id="stMotor" class="extra-hl" stroke="#ef4444" stroke-width="26" stroke-linecap="round" stroke-opacity=".5" transform="translate(-16 0)"/>
+              <!-- derin yapılar -->
+              <g aria-hidden="true">
+                <path class="b-ghost" d="M232 238C246 178 330 150 418 154 502 158 562 190 574 232"/>
+                <ellipse class="b-ghost-fill" cx="442" cy="288" rx="32" ry="23"/>
+                <path id="stBasal" class="b-ghost" d="M300 230C338 200 410 200 440 240 452 256 450 276 442 292" style="stroke-opacity:.5;stroke-width:3"/>
+              </g>
+              <path id="stBasalHl" class="extra-hl" stroke="#f59e0b" stroke-width="9" stroke-linecap="round" d="M300 230C338 200 410 200 440 240 452 256 450 276 442 292"/>
+            </g>
+            <g id="bmFissures"></g>
+            <path id="bmEdge" class="b-edge"/>
+
+            <g data-r="vta" style="--c:#f97316"><g class="r-shape"><circle cx="478" cy="388" r="13" fill="url(#gVta)"/><circle cx="478" cy="388" r="19" fill="none" stroke="#f97316" stroke-opacity=".5" stroke-dasharray="2 4"/></g></g>
+            <g data-r="hipokampus" style="--c:#a855f7"><g class="r-shape">
+              <path d="M358 338C386 356 430 360 462 342 490 326 498 294 486 264 482 254 476 248 470 245" fill="none" stroke="url(#gHip)" stroke-width="11" stroke-linecap="round" stroke-opacity=".95"/>
+              <path d="M358 338C386 356 430 360 462 342 490 326 498 294 486 264 482 254 476 248 470 245" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="11" stroke-linecap="round" stroke-dasharray="1 4.4"/>
+            </g></g>
+            <g data-r="amigdala" style="--c:#ef4444"><g class="r-shape"><path d="M-19 2C-19-10-4-15 9-12 20-9 23 2 15 10 6 18-15 15-19 2Z" transform="translate(338 318) rotate(-22)" fill="url(#gAmy)"/></g></g>
+            <g data-r="nac" style="--c:#f59e0b"><g class="r-shape"><path d="M-16 0C-16-9-2-13 8-9 17-5 18 5 9 10-1 14-16 10-16 0Z" transform="translate(300 268) rotate(-8)" fill="url(#gNac)"/></g></g>
+          </g>
+
+          <g id="stPathG"></g>
+          <g id="stLabelG"></g>
+          <g id="stMarkG"></g>
+        </svg>
+
+        <div class="st-bar">
+          <button class="st-ctrl" id="stPrev" type="button" aria-label="Önceki adım"><span data-gv-icon="arrow-left" data-size="18"></span></button>
+          <button class="st-ctrl main" id="stPlay" type="button" aria-label="Oynat"></button>
+          <button class="st-ctrl" id="stNext" type="button" aria-label="Sonraki adım"><span data-gv-icon="arrow-right" data-size="18"></span></button>
+          <div class="st-track" id="stTrack" role="group" aria-label="Adımlar"></div>
+        </div>
+        <div class="st-foot"><span class="hl-strip-note">Beyin çizimi şematiktir; bölgelerin yerleri kabaca gösterilmiştir.</span><div id="stExport"></div></div>
+        <noscript><p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu etkileşimli hikâye JavaScript gerektirir. Bir bildirim geldiğinde: tetik (bildirim sesi), istek (dopamin yükselir), davranış (telefonu açmak) ve ödül (beğeni dopamini) adımları sırayla yaşanır; prefrontal korteks bu zincirde durup düşünme fırsatı verir.</p></noscript>
+      </div>
+
+      <aside class="gv-card st-panel" id="stPanel" aria-live="polite" aria-label="Adım ayrıntısı"></aside>
+    </section>
+
+    <section class="st-quiz gv-reveal" id="stQuiz" aria-label="Mini test"></section>
+    <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
+  </main>
+
+  <script src="/noroterbiye/js/common.js"></script>
+  <script src="/noroterbiye/js/gorseller.js"></script>
+  <script src="../beyin-haritasi/brain-geo.js"></script>
+  <script>
+    NT.renderNav();
+    NT.renderFooter();
+    GV.hydrate();
+    GV.reveal();
+    GV.moreNav('bir-gunun-icinden');
+
+    (function () {
+      var G = window.BRAIN_GEO, $ = function (id) { return document.getElementById(id); };
+      var NS = 'http://www.w3.org/2000/svg', svg = $('stSvg');
+      function el(n, a, p) { var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+
+      /* geometri */
+      ['bmCortex', 'bmClipPath', 'bmEdge'].forEach(function (id) { $(id).setAttribute('d', G.outline); });
+      ['bmFolds', 'bmFoldsShadow'].forEach(function (id) { $(id).setAttribute('d', G.folds); });
+      $('bmStem').setAttribute('d', G.stem);
+      $('bmCb').setAttribute('d', G.cerebellum); $('bmCbClipPath').setAttribute('d', G.cerebellum); $('bmFolia').setAttribute('d', G.folia);
+      $('stMotor').setAttribute('d', G.major.central);
+      var fis = $('bmFissures');
+      var FW = { sylvian: 3.6, central: 3, pos: 2.4 };
+      Object.keys(FW).forEach(function (k) { el('path', { d: G.major[k], class: 'b-fissure', 'stroke-width': FW[k] }, fis); });
+
+      /* bölgeler */
+      var OFF = [55, 5];
+      var R = {
+        prefrontal: { n: 'Prefrontal Korteks', c: '#06b6d4', pos: [185, 178], lab: [18, 66, 'l'] },
+        amigdala: { n: 'Amigdala', c: '#ef4444', pos: [338, 318], lab: [150, 430, 'l'] },
+        nac: { n: 'Nucleus Accumbens', c: '#f59e0b', pos: [300, 268], lab: [18, 336, 'l'] },
+        hipokampus: { n: 'Hipokampüs', c: '#a855f7', pos: [425, 352], lab: [300, 478, 'l'] },
+        vta: { n: 'VTA', c: '#f97316', pos: [478, 388], lab: [590, 498, 'r'] },
+        motor: { n: 'Motor Korteks', c: '#ef4444', pos: [396, 160], lab: [600, 58, 'r'], noShape: true },
+        bazal: { n: 'Bazal Ganglionlar', c: '#f59e0b', pos: [372, 214], lab: [18, 200, 'l'], noShape: true }
+      };
+      var KEYS = Object.keys(R);
+      var PW = {
+        odul: { c: '#f59e0b', seq: ['vta', 'nac', 'prefrontal'] },
+        fren: { c: '#06b6d4', seq: ['prefrontal', 'amigdala'] },
+        hafiza: { c: '#a855f7', seq: ['amigdala', 'hipokampus'] },
+        kayit: { c: '#10b981', seq: ['nac', 'hipokampus'] }
+      };
+      function vp(k) { return [R[k].pos[0] + OFF[0], R[k].pos[1] + OFF[1]]; }
+
+      var labG = $('stLabelG'), markG = $('stMarkG'), pathG = $('stPathG'), nodes = {};
+      KEYS.forEach(function (k, idx) {
+        var r = R[k], p = vp(k);
+        var lb = el('g', { class: 'lb', style: '--c:' + r.c }, labG);
+        var w = r.n.length * 7.1 + 38, h = 28, x = r.lab[0], y = r.lab[1];
+        el('path', { class: 'lb-line', d: 'M' + (r.lab[2] === 'l' ? x + w : x) + ' ' + (y + h / 2) + ' L' + p[0] + ' ' + p[1] }, lb);
+        el('rect', { class: 'lb-bg', x: x, y: y, width: w, height: h, rx: 14 }, lb);
+        el('circle', { class: 'lb-dot', cx: x + 15, cy: y + h / 2, r: 4 }, lb);
+        var tx = el('text', { class: 'lb-tx', x: x + 26, y: y + h / 2 + .5 }, lb); tx.textContent = r.n;
+        var mk = el('g', { class: 'mk', style: '--c:' + r.c }, markG);
+        el('circle', { class: 'mk-halo', cx: p[0], cy: p[1], r: 30 }, mk);
+        el('circle', { class: 'mk-ring', cx: p[0], cy: p[1], r: 11 }, mk);
+        var nt = el('text', { class: 'mk-num', x: p[0], y: p[1] + .5, style: 'font-size:10px' }, mk); nt.textContent = idx + 1;
+        nodes[k] = { lb: lb, mk: mk, shape: document.querySelector('#stSvg [data-r="' + k + '"]') };
+      });
+      var pathEls = {};
+      Object.keys(PW).forEach(function (pk) {
+        var pw = PW[pk], g = el('g', { class: 'pw', style: 'color:' + pw.c }, pathG);
+        var mkr = el('marker', { id: 'sa-' + pk, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto' }, svg.querySelector('defs'));
+        el('path', { d: 'M1 1.5L8.5 5 1 8.5z', fill: pw.c }, mkr);
+        for (var i = 0; i < pw.seq.length - 1; i++) {
+          var a = vp(pw.seq[i]), b = vp(pw.seq[i + 1]), mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1];
+          var len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len, bend = len * .22 * (i % 2 ? -1 : 1);
+          var d = 'M' + a[0] + ' ' + a[1] + ' Q' + (mx + nx * bend) + ' ' + (my + ny * bend) + ' ' + b[0] + ' ' + b[1];
+          el('path', { d: d, stroke: pw.c, class: 'pw-glow', fill: 'none' }, g);
+          el('path', { d: d, stroke: pw.c, class: 'pw-base', fill: 'none' }, g);
+          el('path', { d: d, stroke: pw.c, class: 'pw-line', fill: 'none', 'marker-end': 'url(#sa-' + pk + ')' }, g);
+        }
+        pathEls[pk] = g;
+      });
+
+      /* ── Senaryolar ── */
+      var STAGE = {
+        tetik: { n: 'Tetik', c: '#f59e0b' }, istek: { n: 'İstek', c: '#a855f7' },
+        davranis: { n: 'Davranış', c: '#ef4444' }, odul: { n: 'Ödül', c: '#10b981' }, dur: { n: 'Terbiye anı', c: '#22d3ee' }
+      };
+      var DRIVE = { sehvet: { n: 'Şehvet', c: '#f59e0b', i: 'flame' }, sohret: { n: 'Şöhret', c: '#a855f7', i: 'crown' }, gadab: { n: 'Gadab', c: '#ef4444', i: 'bolt' } };
+      var SC = [
+        { k: 'sosyal', n: 'Bildirim geldi', ic: 'phone', drive: 'sohret', steps: [
+          { t: '07:42', st: 'tetik', h: 'Telefon titredi', tx: 'Bildirim sesi bir tetiktir. Beyin daha ne olduğunu bilmeden “kim yazmış?” sorusuna hazırlanır.', br: 'Bazal ganglionlar tetiği algılar.', rg: ['bazal'], pw: null },
+          { t: '07:42', st: 'istek', h: '“Kim yazmış?”', tx: 'Merak, dopamini yükseltir. “Şunu yapmalıyım” hissi başlar; henüz hiçbir şey yapmadın ama istek doğdu.', br: 'Nucleus accumbens dopamin sinyali verir; VTA dopamini üretir.', rg: ['vta', 'nac'], pw: 'odul' },
+          { t: '07:43', st: 'davranis', h: 'Telefonu açtın', tx: 'Eylem gerçekleşir: elin telefona gider, ekran açılır. Karar anı kısa ama gerçektir.', br: 'Motor korteks devreye girer; prefrontal korteks “yap mı, bekle mi?” sorusunu sorar.', rg: ['motor', 'prefrontal'], pw: null },
+          { t: '07:43', st: 'odul', h: 'Beğeni dopamini', tx: 'Kısa süreli haz gelir ve beyin bunu kaydeder. Döngü bir sonraki bildirimde daha kolay çalışır.', br: 'Opioid sistemi haz verir, hipokampüs kaydeder.', rg: ['nac', 'hipokampus'], pw: 'kayit' },
+          { t: '07:44', st: 'dur', h: 'Durup düşünme fırsatı', tx: 'Tetiği görünmez kılmak döngüyü en başta keser. Bildirimleri kapat, telefonu başka odaya bırak.', br: 'Prefrontal korteks, aklın merkezi: dürtüye karşı en güçlü silahın.', rg: ['prefrontal'], pw: 'fren', virtue: 'Tevazu', vtx: 'Değerini onayda değil niyette aramak.' }
+        ] },
+        { k: 'atistirma', n: 'Stresli bir an', ic: 'snack', drive: 'sehvet', steps: [
+          { t: '15:10', st: 'tetik', h: 'Stres', tx: 'Yoğun bir toplantı sonrası gerginlik yükselir. Stres, atıştırma döngüsünü başlatan tetiktir.', br: 'Amigdala stresi algılar; bazal ganglionlar tetiği yakalar.', rg: ['amigdala', 'bazal'], pw: null },
+          { t: '15:11', st: 'istek', h: '“Tatlı bir şey yesem”', tx: 'Beyin ödül bekler. Dopamin yükselir ve aklına tatlı bir şey gelir.', br: 'VTA dopamin üretir; nucleus accumbens isteği güçlendirir.', rg: ['vta', 'nac'], pw: 'odul' },
+          { t: '15:12', st: 'davranis', h: 'Çikolata yedin', tx: 'Eylem gerçekleşir. Bu noktada prefrontal korteks hâlâ söz sahibidir ama stres altında sesi kısılır.', br: 'Motor korteks devreye girer; prefrontal korteks karar verir.', rg: ['motor', 'prefrontal'], pw: null },
+          { t: '15:13', st: 'odul', h: 'Şeker dopamini', tx: 'Kısa süreli haz gelir. Gerginlik bir an hafifler ve beyin “işe yaradı” diye kaydeder.', br: 'Opioid sistemi haz verir, hipokampüs kaydeder.', rg: ['nac', 'hipokampus'], pw: 'kayit' },
+          { t: '15:14', st: 'dur', h: 'Ödülü değiştir', tx: 'Aynı ihtiyacı daha sağlıklı biçimde karşıla: kısa bir yürüyüş, bir bardak su, bir arkadaşını ara.', br: 'Prefrontal korteks, amigdalanın alarmını yatıştırabilir.', rg: ['prefrontal', 'amigdala'], pw: 'fren', virtue: 'İffet', vtx: 'Arzuyu yok etmek değil, ölçüye oturtmak.' }
+        ] },
+        { k: 'oyun', n: 'Can sıkıntısı', ic: 'gamepad', drive: 'sehvet', steps: [
+          { t: '21:30', st: 'tetik', h: 'Can sıkıntısı', tx: 'Akşam boşluğu bir tetiktir. Beyin boş zamanı hızlıca dolduracak bir şey arar.', br: 'Bazal ganglionlar tetiği algılar.', rg: ['bazal'], pw: null },
+          { t: '21:30', st: 'istek', h: '“Bir el oynasam”', tx: 'Dopamin yükselir; “bir el” cümlesi aslında beynin ödül beklentisidir.', br: 'VTA dopamin üretir, nucleus accumbens isteği yükseltir.', rg: ['vta', 'nac'], pw: 'odul' },
+          { t: '21:31', st: 'davranis', h: 'Oyunu açtın', tx: 'Eylem gerçekleşir. Tek bir dokunuş, bütün zinciri hareket ettirir.', br: 'Motor korteks devreye girer; prefrontal korteks karar verir.', rg: ['motor', 'prefrontal'], pw: null },
+          { t: '21:33', st: 'odul', h: 'Başarı hissi', tx: 'Kısa aralıklı başarılar haz verir ve döngüyü pekiştirir; “bir el” kolayca uzar.', br: 'Opioid sistemi haz verir, hipokampüs kaydeder.', rg: ['nac', 'hipokampus'], pw: 'kayit' },
+          { t: '21:34', st: 'dur', h: 'Davranışı zorlaştır', tx: 'Araya sürtünme koy: uygulamayı sil, oyunu başka bir cihazda tut ya da oturduğun yeri değiştir.', br: 'Prefrontal korteks, planlama ve dürtü kontrolünü üstlenir.', rg: ['prefrontal'], pw: 'fren', virtue: 'İffet', vtx: 'Ölçüye oturtmak: “yeter” diyebilmek.' }
+        ] },
+        { k: 'haber', n: 'Kışkırtıcı haber', ic: 'news', drive: 'gadab', steps: [
+          { t: '23:05', st: 'tetik', h: 'Öfkelendiren bir başlık', tx: 'Kışkırtıcı bir haber ya da yorum, tehdit algısını harekete geçirir. Bedenin bunu fiziksel tehdit gibi karşılar.', br: 'Amigdala tehdidi algılar; bazal ganglionlar tetiği yakalar.', rg: ['amigdala', 'bazal'], pw: null },
+          { t: '23:05', st: 'istek', h: '“Cevap vermem lazım”', tx: 'Kortizol ve adrenalin yükselir. Beyin, savunma ve karşılık verme isteğiyle dolar.', br: 'Amigdalanın alarmı güçlenir; prefrontal korteksin freni zayıflar.', rg: ['amigdala', 'prefrontal'], pw: 'fren' },
+          { t: '23:06', st: 'davranis', h: 'Sert bir yorum yazdın', tx: 'Mantık geri çekilir, eylem gerçekleşir. Yorum yazmak bir saniye, sonuçları çok daha uzun sürer.', br: 'Motor korteks devreye girer.', rg: ['motor'], pw: null },
+          { t: '23:07', st: 'odul', h: 'Geçici üstünlük hissi', tx: 'Kısa süreli bir rahatlama olur ve beyin bunu kaydeder; ertesi gün aynı konuya daha hızlı kapılırsın.', br: 'Amigdala ile hipokampüs birlikte çalışır; güçlü duygu daha kalıcı kaydedilir.', rg: ['amigdala', 'hipokampus'], pw: 'hafiza' },
+          { t: '23:08', st: 'dur', h: 'Önce bekle', tx: 'Öfke anında beklemek, döngüyü kırar. Duyguyu yaşa ama onun yönetimine geçme; yazmadan önce bir gece bekle.', br: 'Prefrontal korteks amigdalanın alarmını yatıştırabilir.', rg: ['prefrontal', 'amigdala'], pw: 'fren', virtue: 'Hilm', vtx: 'Öfke anında beklemek, karşılığı adaletle vermek.' }
+        ] }
+      ];
+
+      var cur = 0, step = 0, timer = null, playing = false;
+      var panel = $('stPanel'), track = $('stTrack'), pick = $('stPick'), playBtn = $('stPlay');
+      var iPlay = GV.icon('play', 20).replace('class="gv-ic', 'class="gv-ic fillic');
+      var iPause = '<svg class="gv-ic fillic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>';
+      playBtn.innerHTML = iPlay;
+
+      SC.forEach(function (s, i) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'gv-chip'; b.dataset.i = i; b.style.setProperty('--c', DRIVE[s.drive].c);
+        b.setAttribute('aria-pressed', String(i === 0));
+        b.innerHTML = GV.icon(s.ic, 16) + ' ' + s.n;
+        pick.appendChild(b);
+      });
+
+      function mini(stage, drive) {
+        var order = ['tetik', 'istek', 'davranis', 'odul'];
+        var loop = '<svg viewBox="0 0 44 44" aria-label="Döngü adımı"><circle class="mini-bg" cx="22" cy="22" r="21"/><circle class="mini-ln" cx="22" cy="22" r="12"/>' +
+          order.map(function (o, i) {
+            var a = (-90 + i * 90) * Math.PI / 180, on = o === stage;
+            return '<circle class="mini-d' + (on ? ' on' : '') + '" style="' + (on ? 'fill:' + STAGE[o].c + ';color:' + STAGE[o].c : '') + '" cx="' + (22 + 12 * Math.cos(a)).toFixed(1) + '" cy="' + (22 + 12 * Math.sin(a)).toFixed(1) + '" r="' + (on ? 4.6 : 3) + '"/>';
+          }).join('') + '</svg>';
+        var vs = { sehvet: [22, 9], sohret: [10, 33], gadab: [34, 33] };
+        var tri = '<svg viewBox="0 0 44 44" aria-label="Dürtü"><circle class="mini-bg" cx="22" cy="22" r="21"/><path class="mini-ln" d="M22 9L10 33H34z"/>' +
+          Object.keys(vs).map(function (v) {
+            var on = v === drive;
+            return '<circle class="mini-d' + (on ? ' on' : '') + '" style="' + (on ? 'fill:' + DRIVE[v].c + ';color:' + DRIVE[v].c : '') + '" cx="' + vs[v][0] + '" cy="' + vs[v][1] + '" r="' + (on ? 4.6 : 3) + '"/>';
+          }).join('') + '</svg>';
+        return '<div class="st-mini">' + loop + tri + '</div>';
+      }
+
+      function renderTrack() {
+        var s = SC[cur];
+        track.innerHTML = s.steps.map(function (x, i) {
+          var c = STAGE[x.st].c, pc = i ? STAGE[s.steps[i - 1].st].c : c;
+          return '<button type="button" class="st-dot' + (i < step ? ' done' : '') + (i === step ? ' on' : '') + '" data-s="' + i + '" style="--c:' + c + ';--pc:' + pc + '" aria-label="' + (i + 1) + '. adım: ' + STAGE[x.st].n + '"><i>' + (i + 1) + '</i><span>' + STAGE[x.st].n + '</span></button>';
+        }).join('');
+      }
+
+      function showStep() {
+        var sc = SC[cur], s = sc.steps[step], st = STAGE[s.st], dr = DRIVE[sc.drive];
+        panel.style.setProperty('--c', st.c);
+        panel.innerHTML = '<div class="st-p">' +
+          '<div class="st-p-top"><span class="st-time"><i></i>' + s.t + ' · ' + (step + 1) + '/' + sc.steps.length + '</span>' + mini(s.st === 'dur' ? null : s.st, sc.drive) + '</div>' +
+          '<div class="st-tags"><span class="gv-tag" style="--c:' + st.c + '">' + (s.st === 'dur' ? '' : (step + 1) + '. ') + st.n + '</span>' +
+          '<span class="gv-tag" style="--c:' + dr.c + '">' + GV.icon(dr.i, 14) + ' ' + dr.n + ' dürtüsü</span></div>' +
+          '<h2>' + s.h + '</h2><p class="st-p-tx">' + s.tx + '</p>' +
+          '<div class="st-box"><p class="gv-kicker">' + GV.icon('brain', 16) + ' Beyinde</p><p>' + s.br + '</p>' +
+          '<div class="st-regs">' + s.rg.map(function (k) { return '<span class="gv-chip" style="--c:' + R[k].c + '"><span class="gv-dot"></span>' + R[k].n + '</span>'; }).join('') + '</div></div>' +
+          (s.virtue ? '<div class="st-stop"><b>' + GV.icon('leaf', 16) + ' Terbiye yolu: ' + dr.n + ' → ' + s.virtue + '</b><p>' + s.vtx + '</p></div>' : '') +
+          '</div>';
+
+        /* beyin */
+        KEYS.forEach(function (k) {
+          var on = s.rg.indexOf(k) > -1, n = nodes[k];
+          n.mk.classList.toggle('show', on); n.mk.classList.toggle('is-active', on);
+          n.lb.classList.toggle('is-in-path', on);
+          if (n.shape) n.shape.classList.toggle('is-active', on);
+        });
+        $('stMotor').classList.toggle('on', s.rg.indexOf('motor') > -1);
+        $('stMotor').classList.toggle('pulse', s.rg.indexOf('motor') > -1);
+        $('stBasalHl').classList.toggle('on', s.rg.indexOf('bazal') > -1);
+        $('stBasalHl').classList.toggle('pulse', s.rg.indexOf('bazal') > -1);
+        Object.keys(pathEls).forEach(function (k) { pathEls[k].classList.toggle('is-on', k === s.pw); });
+        svg.classList.toggle('xray', s.rg.indexOf('bazal') > -1);
+        renderTrack();
+      }
+
+      function go(i, user) {
+        var n = SC[cur].steps.length;
+        step = (i + n) % n; showStep();
+        if (user) GV.track('adim_git', SC[cur].k + ':' + step);
+      }
+      function stop() { clearInterval(timer); timer = null; playing = false; playBtn.innerHTML = iPlay; playBtn.setAttribute('aria-label', 'Oynat'); }
+      function play() {
+        playing = true; playBtn.innerHTML = iPause; playBtn.setAttribute('aria-label', 'Duraklat');
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (document.hidden) return;
+          if (step >= SC[cur].steps.length - 1) { stop(); return; }
+          go(step + 1);
+        }, 4800);
+      }
+      function setScenario(i, auto) {
+        stop(); cur = i; step = 0;
+        pick.querySelectorAll('.gv-chip').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.i === i)); });
+        showStep();
+        GV.track('senaryo_sec', SC[i].k);
+        if (auto) play();
+      }
+
+      pick.addEventListener('click', function (e) { var b = e.target.closest('[data-i]'); if (b) setScenario(+b.dataset.i, true); });
+      track.addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (b) { stop(); go(+b.dataset.s, true); } });
+      $('stPrev').addEventListener('click', function () { stop(); go(step - 1, true); });
+      $('stNext').addEventListener('click', function () { stop(); go(step + 1, true); });
+      playBtn.addEventListener('click', function () {
+        if (playing) { stop(); return; }
+        if (step >= SC[cur].steps.length - 1) go(0);
+        play(); GV.track('oynat', SC[cur].k);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.target.closest && e.target.closest('input,textarea')) return;
+        if (e.key === 'ArrowRight') { stop(); go(step + 1, true); }
+        if (e.key === 'ArrowLeft') { stop(); go(step - 1, true); }
+      });
+
+      GV.addExport($('stExport'), function () { return svg; }, { title: 'Bir Günün İçinden', sub: 'Beyin · Alışkanlık döngüsü · ŞŞG', file: 'noroterbiye-bir-gunun-icinden' });
+      GV.quiz($('stQuiz'), { id: 'hikaye', title: 'Mini test · Bir günün içinden', items: [
+        { q: 'Bir bildirimin duyulması alışkanlık döngüsünün hangi adımıdır?', opts: ['Tetik', 'İstek', 'Ödül'], a: 0, why: 'Bildirim sesi bir tetiktir; beyin “kim yazmış?” sorusuna hazırlanır.' },
+        { q: 'Döngüde dopaminin yükselip “şunu yapmalıyım” hissinin başladığı adım hangisidir?', opts: ['Davranış', 'Ödül', 'İstek'], a: 2, why: 'İstek adımında VTA dopamin üretir, nucleus accumbens isteği güçlendirir.' },
+        { q: 'Stres ve öfke anında amigdalanın alarmını yatıştırabilecek bölge hangisidir?', opts: ['Prefrontal korteks', 'Serebellum', 'Hipokampüs'], a: 0, why: 'Prefrontal korteks amigdalayı yatıştırabilir; stres ve uykusuzlukta bu fren zayıflar.' }
+      ] });
+
+      /* başlangıç: URL'de #senaryo desteği */
+      var h = (location.hash || '').slice(1), ix = SC.map(function (s) { return s.k; }).indexOf(h);
+      setScenario(ix > -1 ? ix : 0, false);
+    })();
+  </script>
+</body>
+</html>

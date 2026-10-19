@@ -9,7 +9,10 @@
   <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/aliskanlik-dongusu/">
   <meta property="og:title" content="Alışkanlık Döngüsü — NöroTerbiye">
   <meta property="og:description" content="Tetik → İstek → Davranış → Ödül. Her alışkanlık dört adımda oluşur.">
-  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <meta property="og:image" content="https://raufenc.com/noroterbiye/gorseller/og/aliskanlik-dongusu.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://raufenc.com/noroterbiye/gorseller/og/aliskanlik-dongusu.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
@@ -143,6 +146,7 @@
         <svg class="hl-svg" id="hlSvg" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg" role="img"
              aria-label="Alışkanlık Döngüsü: Tetik, İstek, Davranış ve Ödül adımlarını dairesel döngü olarak gösteren interaktif diyagram"></svg>
         <div class="hl-strip" id="hlStrip"></div>
+        <div class="gv-actions-row" id="hlExport"></div>
         <noscript>
           <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif alışkanlık döngüsü JavaScript gerektirir. Döngü dört adımdan oluşur: 1) Tetik — bir uyaran beyni harekete geçirir, 2) İstek — beyin ödül bekler, 3) Davranış — eylem gerçekleşir, 4) Ödül — beyin tatmin olur ve döngü pekişir.</p>
         </noscript>
@@ -158,6 +162,8 @@
       </div>
       <div class="hl-exgrid" id="hlExGrid"></div>
     </section>
+
+    <section class="gv-quizsec gv-reveal" id="hlQuiz" aria-label="Mini test"></section>
 
     <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
@@ -327,6 +333,7 @@
         ORDER.forEach(function (x) { nodes[x].classList.toggle('on', x === k); arcs[x].classList.toggle('on', x === k); });
       }
       function select(k) {
+        GV.track('adim_sec', k);
         stop();
         mark(k); renderPanel(k);
         setCenter(S[k].n + ' / 4', S[k].title, S[k].en);
@@ -334,6 +341,7 @@
       }
       function stop() { timers.forEach(clearTimeout); timers = []; playing = false; }
       function play(i) {
+        GV.track('ornek_oynat', EX[i].name);
         stop(); curEx = i; markEx(); fillStrip(); playing = true;
         var ex = EX[i];
         ORDER.forEach(function (x, j) { strip.children[j].classList.remove('on'); strip.children[j].classList.add('dim'); });
@@ -364,6 +372,14 @@
         if (top < 0 || top > innerHeight * .5) svg.scrollIntoView({ behavior: 'smooth', block: 'center' });
         play(+b.dataset.ex);
       });
+
+      GV.addExport($('hlExport'), function () { return svg; }, { title: 'Alışkanlık Döngüsü', sub: 'Tetik → İstek → Davranış → Ödül', file: 'noroterbiye-aliskanlik-dongusu' });
+      GV.quiz($('hlQuiz'), { id: 'dongu', title: 'Mini test · Alışkanlık döngüsü', items: [
+        { q: 'Alışkanlık döngüsünün dört adımı hangi sıradadır?', opts: ['İstek → Tetik → Ödül → Davranış', 'Tetik → İstek → Davranış → Ödül', 'Davranış → Tetik → İstek → Ödül'], a: 1, why: 'Önce bir tetik gelir, istek doğar, davranış gerçekleşir ve ödül döngüyü pekiştirir.' },
+        { q: '“Şunu yapmalıyım” hissi ve dopamin yükselişi hangi adımda başlar?', opts: ['Tetik', 'İstek', 'Ödül'], a: 1, why: 'İstek adımında beyin ödül bekler ve dopamin yükselir.' },
+        { q: 'Bildirimleri kapatmak döngüyü hangi adımda keser?', opts: ['Tetik', 'Davranış', 'Ödül'], a: 0, why: 'Tetiği görünmez kılmak, döngünün başlamasını engeller.' },
+        { q: 'Ödül adımı döngü için ne yapar?', opts: ['Döngüyü bitirir', 'Döngüyü pekiştirir', 'Tetiği siler'], a: 1, why: 'Kısa süreli haz, davranışın tekrarlanma ihtimalini artırır.' }
+      ] });
 
       fillStrip(); markEx();
       select('tetik');

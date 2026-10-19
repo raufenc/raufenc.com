@@ -9,7 +9,10 @@
   <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/dopamin-yolu/">
   <meta property="og:title" content="Dopamin Yolu — NöroTerbiye">
   <meta property="og:description" content="Doğal vs Yapay dopamin — beynin kimyasal dengesini gör.">
-  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <meta property="og:image" content="https://raufenc.com/noroterbiye/gorseller/og/dopamin-yolu.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://raufenc.com/noroterbiye/gorseller/og/dopamin-yolu.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
@@ -229,6 +232,8 @@
       </ul>
     </section>
 
+    <section class="gv-quizsec gv-reveal" id="dpQuiz" aria-label="Mini test"></section>
+
     <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
 
@@ -302,7 +307,7 @@
       paintAll();
       document.querySelectorAll('.dp-seg button').forEach(function (b) {
         b.addEventListener('click', function () {
-          mode = b.dataset.mode;
+          mode = b.dataset.mode; GV.track('olcek', mode);
           document.querySelectorAll('.dp-seg button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
           paintAll();
         });
@@ -353,8 +358,8 @@
           return y;
         };
         var d = path(fn, 0, W, 2);
-        el('path', { d: d + 'L' + W + ' ' + bot + 'L0 ' + bot + 'Z', fill: 'url(#tag)', class: 'cv-area' }, svg);
-        el('path', { d: d, class: 'cv-line', stroke: 'url(#tlg)', pathLength: 1 }, svg);
+        el('path', { d: d + 'L' + W + ' ' + bot + 'L0 ' + bot + 'Z', fill: 'url(#tag)', class: 'cv-area', 'data-gv-final': 'opacity:1;' }, svg);
+        el('path', { d: d, class: 'cv-line', stroke: 'url(#tlg)', pathLength: 1, 'data-gv-final': 'stroke-dasharray:none;stroke-dashoffset:0;' }, svg);
         /* eksen etiketleri */
         var yh = el('text', { class: 'cv-axis-lab', x: 8, y: H - 6 }, svg); yh.textContent = '↑ Dopamin seviyesi';
         var xt = el('text', { class: 'cv-axis-lab', x: W - 8, y: H - 6, 'text-anchor': 'end' }, svg); xt.textContent = 'Tekrar eden maruz kalma →';
@@ -403,8 +408,8 @@
           return y + 5 * Math.sin(x / 40) * (1 - smooth(x, 400, 80));
         };
         var d = path(fn, 0, W, 2);
-        el('path', { d: d + 'L' + W + ' ' + (H - 20) + 'L0 ' + (H - 20) + 'Z', fill: 'url(#rag)', class: 'cv-area' }, svg);
-        el('path', { d: d, class: 'cv-line', stroke: 'url(#rlg)', pathLength: 1 }, svg);
+        el('path', { d: d + 'L' + W + ' ' + (H - 20) + 'L0 ' + (H - 20) + 'Z', fill: 'url(#rag)', class: 'cv-area', 'data-gv-final': 'opacity:1;' }, svg);
+        el('path', { d: d, class: 'cv-line', stroke: 'url(#rlg)', pathLength: 1, 'data-gv-final': 'stroke-dasharray:none;stroke-dashoffset:0;' }, svg);
         var x0 = el('text', { class: 'cv-axis-lab', x: 8, y: H - 4 }, svg); x0.textContent = 'Gün 0';
         var x1 = el('text', { class: 'cv-axis-lab', x: 2 * pw - 6, y: H - 4, 'text-anchor': 'end' }, svg); x1.textContent = 'Gün 30';
         var xm = el('line', { class: 'cv-grid', x1: 2 * pw, x2: 2 * pw, y1: 34, y2: H - 18 }, svg);
@@ -425,6 +430,15 @@
         });
         GV.reveal();
       })();
+
+      GV.addExport(document.querySelector('#cvTol .cv-tag').parentNode.appendChild(Object.assign(document.createElement('div'), { className: 'gv-actions-row', id: 'tolExport' })), function () { return $('tolSvg'); }, { title: 'Tolerans: Beyin Neden Alışıyor?', sub: 'Dopamin seviyesi (şematik)', file: 'noroterbiye-tolerans' });
+      GV.addExport(document.querySelector('#cvRec .cv-tag').parentNode.appendChild(Object.assign(document.createElement('div'), { className: 'gv-actions-row', id: 'recExport' })), function () { return $('recSvg'); }, { title: 'Toparlanma: Dengeyi Yeniden Kur', sub: 'Dopamin dengesi (şematik)', file: 'noroterbiye-toparlanma' });
+      GV.quiz($('dpQuiz'), { id: 'dopamin', title: 'Mini test · Dopamin yolu', items: [
+        { q: 'Aynı ölçekte çizildiğinde doğal ödüller yapay uyaranlara göre nasıl görünür?', opts: ['Çok daha küçük', 'Aşağı yukarı aynı', 'Daha büyük'], a: 0, why: 'Yapay uyaranlar doğal ödüllerin 10-20 katı dopamin salgılatabilir.' },
+        { q: 'Tolerans evresinde ne olur?', opts: ['Aynı uyaran daha güçlü etki eder', 'Aynı etki için daha fazla doz veya süre gerekir', 'Reseptör sayısı artar'], a: 1, why: 'Beyin D2 reseptörlerini azaltır; doğal ödüller de artık tatmin etmez.' },
+        { q: 'Çekilme evresinde dopamin seviyesi nasıldır?', opts: ['Bazal seviyenin üstünde', 'Tam bazal seviyede', 'Bazal seviyenin altında'], a: 2, why: 'Uyaran olmadan dopamin bazal seviyenin altına düşer; mutsuzluk ve huzursuzluk görülür.' },
+        { q: 'Toparlanma için önerilen en az yapay uyarandan uzak durma süresi nedir?', opts: ['3 gün', '30 gün', '1 yıl'], a: 1, why: 'Dr. Anna Lembke 30 günlük bir ara önerir; sonra doğal ödül kaynaklarına dönülür.' }
+      ] });
 
       /* ── görünür olunca canlandır ── */
       function onView(node, fn) {
