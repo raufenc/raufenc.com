@@ -12,9 +12,24 @@ kök dizinidir.
 ## Paket içeriği
 
 - `index.html`, `stil.css`, `site.js`, `assets/` — giriş sitesi (3,7 MB)
-- `sinif/` — akıllı tahta için Sınıf Modu: 16 dersin harf ve hece kartları,
-  dokun-dinle, sırayla okutma. Veri `sinif/dersler.json` (uygulamanın ders
+- `dersler/` — 16 elifba dersinin kendi sayfası (sesli anlatım, dokun-dinle
+  kartları). `sinif/` — akıllı tahta için Sınıf Modu: aynı kartlar büyük,
+  sırayla okutma, tam ekran. Veri `sinif/dersler.json` (uygulamanın ders
   listelerinden çıkarıldı; sesler `app/` altındaki dosyalardır).
+- `kuran/` — sesli Kur'ân-ı Kerîm okuyucusu: dizin + 114 sûre sayfası.
+  Metin ve üç meâl `kuran/veri/*.json` içindedir (4,4 MB, uygulamanın
+  kendi verisinden). Sesli okuma everyayah.com'dan âyet âyet çekilir
+  (çevrimiçi gerekir); `okuyucu.js` içindeki `SES_KOK` değiştirilerek
+  kendi sunucunuza alınabilir (dosya adı düzeni `SSSAAA.mp3`).
+- `dualar/` — 13 namaz duası; metin, okunuş, meâl ve satır zamanlamaları
+  `dualar/veri.json` içinde. Sesler `app/.../sounds/dualar/`.
+- `tecvid/` — 4 bölüm, 17 kural sayfası; örnek sesleri `app/.../sounds/tecvidler/`.
+  Üreten betikteki metinler uygulamadan çıkarılıp sadeleştirildi.
+- `oyunlar/` — üç tarayıcı oyunu; `sinif/dersler.json` verisini kullanır.
+- Sayfalar statik üretilmiştir (Python betikleri bu pakette değildir;
+  içerik değişikliği doğrudan HTML'de yapılır). Tüm sayfalar aynı
+  `stil.css` ve üst menüyü kullanır; tasarım değişkenleri `stil.css`
+  başındaki `:root` bloğundadır.
 - `sw.js`, `site.webmanifest` — çevrimdışı çalışma ve "ana ekrana ekle".
   Giriş sitesi, sınıf modu ve uygulama çekirdeği ilk açılışta cihazda
   saklanır; sesler ilk dinlendiğinde kalır. Sürüm değişince `sw.js`
@@ -35,13 +50,17 @@ kök dizinidir.
    adresinde çalışır.
 2. **Bu klasörün içeriğini deponun köküne kopyalayın** (`index.html`,
    `stil.css`, `site.js`, `assets/`).
-3. **Adresleri güncelleyin.** Üç dosyada arama-değiştirme yeterlidir:
-   - `index.html`: `https://raufenc.com/kuran-ogretmenim/` → `https://kuranogretmenim.com/`
-     (canonical, og:url, og:image, twitter:image, JSON-LD image)
-   - `index.html` ve `site.js` içindeki `./app/` bağlantıları zaten
-     göreli olduğundan değişmez.
+3. **Adresleri güncelleyin.** Bütün sayfalarda arama-değiştirme yeterlidir:
+   - `https://raufenc.com/kuran-ogretmenim/` → `https://kuranogretmenim.com/`
+     (canonical, og:url, og:image, JSON-LD; `index.html`, `kuran/`, `dualar/`,
+     `tecvid/`, `oyunlar/`, `dersler/`, `sinif/` altındaki HTML dosyaları)
+   - `sw.js` içindeki `KOK = '/kuran-ogretmenim/'` → `'/'`;
+     `site.webmanifest` içindeki `start_url` ve `scope` da `/` olur.
+   - Sayfa içi `./app/`, `../app/` bağlantıları göreli olduğundan değişmez.
 
-Ardından köke şu iki dosyayı ekleyin:
+Ardından köke `robots.txt` ekleyin ve bu depodaki `sitemap.xml` içinden
+`/kuran-ogretmenim/` ile başlayan adresleri (toplam 154) yeni alan adıyla
+kendi `sitemap.xml` dosyanıza taşıyın:
 
 ```
 # robots.txt

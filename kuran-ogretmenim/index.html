@@ -69,14 +69,12 @@
         <img src="./assets/img/logo-64.png" width="38" height="38" alt="">
         <span>Kur'an Öğretmenim</span>
       </a>
-      <nav class="nav" id="nav" aria-label="Sayfa içi bağlantılar">
-        <a href="#harfler">Harfler</a>
+      <nav class="nav" id="nav" aria-label="Sayfa bağlantıları">
         <a href="./dersler/">Dersler</a>
-        <a href="#video">Tanıtım</a>
-        <a href="#oyunlar">Oyunlar</a>
-        <a href="#sureler">Sûreler</a>
-        <a href="#tecvid">Tecvid</a>
-        <a href="#sss">Sorular</a>
+        <a href="./kuran/">Kur'ân-ı Kerîm</a>
+        <a href="./dualar/">Dualar</a>
+        <a href="./tecvid/">Tecvid</a>
+        <a href="./oyunlar/">Oyunlar</a>
         <a href="./sinif/">Sınıf modu</a>
         <a class="nav-app" href="./app/">Uygulamayı Aç</a>
       </nav>
@@ -98,16 +96,16 @@
       <img class="hero-bg" src="./assets/img/hero-1200.webp" srcset="./assets/img/hero-720.webp 720w, ./assets/img/hero-1200.webp 1200w, ./assets/img/hero-1920.webp 1920w" sizes="100vw" alt="" fetchpriority="high" decoding="async">
       <div class="wrap">
         <div>
-          <p class="eyebrow">Ücretsiz · Web, telefon ve tablette</p>
+          <p class="eyebrow">Ücretsiz · Tarayıcıda, telefonda, tablette ve akıllı tahtada</p>
           <h1 id="baslik">Kur'ân-ı Kerîm'i okumayı <em>harf harf, sesini duyarak</em> öğren.</h1>
-          <p class="lead">Kur'an Öğretmenim; elifbadan tecvide uzanan sesli dersleri, 604 sayfalık Kur'ân-ı Kerîm metnini, namaz sûreleri ile duaları ve on iki öğretici oyunu tek uygulamada toplar. Çocuklar, yeni başlayanlar ve yıllar sonra yeniden başlamak isteyenler için.</p>
+          <p class="lead">Kur'an Öğretmenim; elifbadan tecvide uzanan sesli dersleri, 114 sûrelik sesli Kur'ân-ı Kerîm okuyucusunu, namaz dualarını, tecvid kurallarını ve öğretici oyunları bir araya getirir. Hiçbir şey kurmadan tarayıcıda açılır; uygulama da aynı içeriği telefona taşır.</p>
           <div class="hero-cta">
-            <a class="btn btn--gold" href="./app/">
+            <a class="btn btn--gold" href="./dersler/">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
-              Hemen Başla
+              Derslere Başla
             </a>
+            <a class="btn btn--ghost" href="./kuran/">Kur'ân-ı Kerîm'i Aç</a>
             <a class="btn btn--ghost" href="#video">Tanıtımı İzle</a>
-            <a class="btn btn--ghost" href="./sinif/">Sınıf Modu</a>
           </div>
           <ul class="hero-note">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Kayıt gerektirmez</li>
@@ -127,11 +125,34 @@
     <section class="stats" aria-label="Uygulama içeriği rakamlarla">
       <div class="wrap">
         <div class="stat"><b>29</b><span>Harf</span></div>
+        <div class="stat"><b>16</b><span>Ders</span></div>
         <div class="stat"><b>114</b><span>Sûre</span></div>
-        <div class="stat"><b>604</b><span>Sayfa</span></div>
-        <div class="stat"><b>12</b><span>Oyun</span></div>
-        <div class="stat"><b>4</b><span>Tecvid bölümü</span></div>
+        <div class="stat"><b>13</b><span>Dua</span></div>
+        <div class="stat"><b>17</b><span>Tecvid kuralı</span></div>
         <div class="stat"><b>3</b><span>Meâl</span></div>
+      </div>
+    </section>
+
+    <!-- ── Tarayıcıda ── -->
+    <section class="band" id="web" aria-labelledby="web-baslik">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="eyebrow">Kurulum yok</p>
+          <h2 id="web-baslik">Tarayıcıda hemen açın</h2>
+          <p class="lead">Bütün içerik ayrı sayfalar hâlinde tarayıcıda çalışır; sesler ilk dinlendiğinde cihazda kalır, kaldığınız yer ve sonuçlarınız saklanır.</p>
+        </div>
+        <div class="ilerleme reveal" id="ilerleme" hidden>
+          <strong>Kaldığınız yer</strong>
+          <ul id="ilerlemeListe"></ul>
+        </div>
+        <ul class="web-grid">
+          <li><a class="web-kart reveal" href="./dersler/"><span class="web-ar" lang="ar" aria-hidden="true">ا ب ت</span><strong>Dersler</strong><span>Harflerden şeddeye 16 sesli ders; dokun, dinle, tekrar et.</span></a></li>
+          <li><a class="web-kart reveal" href="./kuran/"><span class="web-ar" lang="ar" aria-hidden="true">۞</span><strong>Kur'ân-ı Kerîm</strong><span>114 sûre, üç meâl, beş kârî ile âyet âyet sesli okuma ve ezber tekrarı.</span></a></li>
+          <li><a class="web-kart reveal" href="./dualar/"><span class="web-ar" lang="ar" aria-hidden="true">دعاء</span><strong>Namaz duaları</strong><span>13 dua Arapça, okunuş ve meâl ile; satır satır vurgulu sesli okuma.</span></a></li>
+          <li><a class="web-kart reveal" href="./tecvid/"><span class="web-ar" lang="ar" aria-hidden="true">مّ</span><strong>Tecvid</strong><span>17 kural; tanım, altın kural, Kur'ân-ı Kerîm'den sesli örnekler ve alıştırma.</span></a></li>
+          <li><a class="web-kart reveal" href="./oyunlar/"><span class="web-ar" aria-hidden="true">🎈</span><strong>Oyunlar</strong><span>Duyduğunu Seç, Harf Eşleştirme ve Balon Patlat; her ders için ayrı.</span></a></li>
+          <li><a class="web-kart reveal" href="./sinif/"><span class="web-ar" lang="ar" aria-hidden="true">بَ</span><strong>Sınıf modu</strong><span>Akıllı tahta için büyük kartlar, sırayla okutma ve tam ekran.</span></a></li>
+        </ul>
       </div>
     </section>
 
@@ -197,11 +218,11 @@
       <div class="wrap">
         <div class="section-head reveal">
           <p class="eyebrow">Uygulamanın içinde</p>
-          <h2 id="ozellikler-baslik">Altı bölüm, tek uygulama</h2>
+          <h2 id="ozellikler-baslik">Altı bölüm, uygulamada ve tarayıcıda</h2>
           <p class="lead">Ana ekrandaki her kart ayrı bir çalışma alanı açar. Aşağıdaki görüntüler uygulamanın kendisinden alınmıştır.</p>
         </div>
         <div class="modules">
-          <a class="module reveal" href="./app/">
+          <a class="module reveal" href="./dersler/">
             <figure><img src="./assets/ekran/dersler.webp" width="600" height="1298" alt="Dersler listesi: Harfler, Harflerin Yazılış Şekilleri, Üstün, Esre, Ötre" loading="lazy" decoding="async"></figure>
             <div class="body"><h3>Dersler</h3><p>Harflerden cezm ve şeddeye sıralı dersler; her birinde sesli anlatım ve dokun-dinle kartları.</p></div>
             <span class="tag">13 ders</span>
@@ -211,22 +232,22 @@
             <div class="body"><h3>Alıştırmalar</h3><p>Hareke, tenvin, cezm-şedde, med harfleri, lafzatullah ve elif çeşitleri için sesli kelime kartları.</p></div>
             <span class="tag">7 kategori</span>
           </a>
-          <a class="module reveal" href="./app/">
+          <a class="module reveal" href="./kuran/">
             <figure><img src="./assets/ekran/sure-menu.webp" width="600" height="1298" alt="Sûre ve dua kütüphanesi: arama kutusu ve sûre listesi" loading="lazy" decoding="async"></figure>
             <div class="body"><h3>Sûre ve Dualar</h3><p>114 sûre, 604 sayfa, üç meâl; namaz sûreleri ve duaları sesli, hız ayarlı ve ezber tekrar modlu.</p></div>
             <span class="tag">114 sûre</span>
           </a>
-          <a class="module reveal" href="./app/">
+          <a class="module reveal" href="./tecvid/">
             <figure><img src="./assets/ekran/tecvid-ders.webp" width="600" height="1298" alt="Tecvid dersi: Medd-i Tabiî kuralı ve Kur'ân-ı Kerîm'den sesli örnekler" loading="lazy" decoding="async"></figure>
             <div class="body"><h3>Tecvid Bilgisi</h3><p>Dört bölümde kural, altın kural, Kur'ân-ı Kerîm'den sesli örnek ve sürükle-bırak alıştırması; puanla ilerle.</p></div>
             <span class="tag">4 bölüm</span>
           </a>
-          <a class="module reveal" href="./app/">
+          <a class="module reveal" href="./oyunlar/">
             <figure><img src="./assets/ekran/yilan.webp" width="600" height="1298" alt="Yılan oyunu: sesi dinle, doğru harfi yut" loading="lazy" decoding="async"></figure>
             <div class="body"><h3>Oyunlar</h3><p>Balon patlatmadan Arapça Tetris'e on iki oyun; hepsi sesle çalışır, hepsi harf ve kelime bilgisini pekiştirir.</p></div>
             <span class="tag">12 oyun</span>
           </a>
-          <a class="module reveal" href="./app/">
+          <a class="module reveal" href="./kuran/">
             <figure><img src="./assets/ekran/meal.webp" width="600" height="1298" alt="Meâl seçimi: Diyanet İşleri, Diyanet Vakfı, Elmalılı Hamdi Yazır" loading="lazy" decoding="async"></figure>
             <div class="body"><h3>Meâl ve sesli okuma</h3><p>Her âyet-i kerîmenin altında seçtiğiniz meâl; dinlerken okunan âyet vurgulanır, yavaş çalma ve tekrar seçeneği.</p></div>
             <span class="tag">3 meâl</span>
@@ -270,6 +291,7 @@
               <p class="lead">Her oyun sesle başlar. Çocuk duyduğu harfi balonda, köstebekte, yılanın yolunda arar; puan toplar, yıldız kazanır, aynı harfi fark etmeden on kez tekrar eder.</p>
             </div>
             <img class="photo reveal" src="./assets/img/aile.webp" width="1000" height="753" alt="Bir büyükanne ile torunu kanepede, telefondaki öğrenme uygulamasına birlikte bakıyor" loading="lazy" decoding="async">
+            <div class="cta-row reveal"><a class="btn btn--emerald" href="./oyunlar/">Tarayıcıda oyna: üç oyun</a><a class="btn btn--line" href="./app/">On iki oyun uygulamada</a></div>
           </div>
           <ul class="games reveal">
             <li class="game"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3a6 6 0 0 1 6 6c0 4-3 7-6 7s-6-3-6-7a6 6 0 0 1 6-6zM12 16v2l-1 3h2"/></svg></span><b>Balon Patlatma</b><span>Sesi dinle, doğru harfin balonunu patlat.</span></li>
@@ -313,6 +335,7 @@
               <li><b>Kelime-i Tevhîd ve Kelime-i Şehâdet</b><span>sesli ve meâlli.</span></li>
               <li><b>Âyete'l-Kürsî</b><span>Bakara Sûresi 255. âyet-i kerîme, kısa açıklamasıyla.</span></li>
             </ul>
+            <div class="cta-row reveal"><a class="btn btn--emerald" href="./kuran/">Kur\'ân-ı Kerîm\'i aç</a><a class="btn btn--line" href="./dualar/">Namaz duaları</a></div>
           </div>
           <div class="reveal">
             <div class="ayet-card">
@@ -341,6 +364,7 @@
           <article class="rule reveal"><span class="num">3</span><h3>Sâkin Mîm ve İdgamlar</h3><p>Kalkale, sâkin mîm, ikiz harfler (idgam-ı misleyn).</p><span class="ar" aria-hidden="true">مْ</span></article>
           <article class="rule reveal"><span class="num">4</span><h3>Lafzatullah, Zamir ve Râ</h3><p>Râ harfinin kalın-ince okunuşu, Allah lafzı, uzatılan zamir.</p><span class="ar" aria-hidden="true">ر اللّٰه هُ</span></article>
         </div>
+        <div class="cta-row reveal"><a class="btn btn--gold" href="./tecvid/">Tecvid derslerini aç</a></div>
       </div>
     </section>
 
@@ -403,7 +427,12 @@
         <a href="./app/">Uygulama</a>
         <a href="https://www.instagram.com/kuranogretmeniim/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://enesserdar92-bit.github.io/elifba-policy/" target="_blank" rel="noopener">Gizlilik politikası</a>
-        <a href="#harfler">Harfler</a>
+        <a href="./dersler/">Dersler</a>
+        <a href="./kuran/">Kur'ân-ı Kerîm</a>
+        <a href="./dualar/">Dualar</a>
+        <a href="./tecvid/">Tecvid</a>
+        <a href="./oyunlar/">Oyunlar</a>
+        <a href="./sinif/">Sınıf modu</a>
         <a href="#sss">Sık sorulanlar</a>
       </div>
       <p class="small">Kur'ân-ı Kerîm metni Tanzil projesinden; meâller Diyanet İşleri Başkanlığı, Türkiye Diyanet Vakfı ve Elmalılı Hamdi Yazır'a aittir. Sayfadaki uygulama görüntüleri uygulamanın kendisinden alınmıştır.</p>
