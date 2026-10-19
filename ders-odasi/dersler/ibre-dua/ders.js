@@ -107,7 +107,7 @@ DO.dersKaydet(
       {
        "zon": "fazla",
        "soru": "Abartıyla övmek neye benziyor?",
-       "ad": "Abartı",
+       "ad": "Aşırı Övgü",
        "soz": "Sen dünyanın en harika insanısın, kusursuzsun!",
        "eylem": "el-salla",
        "zincir": [
@@ -135,7 +135,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Abartı",
+        "ad": "Aşırı",
         "soz": "Sen"
        },
        "zincirAnahtar": [
@@ -893,88 +893,93 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.65,
-   "m": "Sağ uçta Abartı. Sen dünyanın en harika insanısın, kusursuzsun! Sevsin diye yüzüne karşı gereğinden fazla över.",
+   "sure": 9.242,
+   "m": "Sağ uçta Aşırı Övgü. Sen dünyanın en harika insanısın, kusursuzsun! Sevsin diye yüzüne karşı gereğinden fazla över.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.155
+     0.252
     ],
     [
      "uçta",
-     0.155,
-     0.405
+     0.252,
+     0.696
     ],
     [
-     "Abartı.",
-     0.405,
-     0.78
+     "Aşırı",
+     0.696,
+     1.361
+    ],
+    [
+     "Övgü.",
+     1.361,
+     1.805
     ],
     [
      "Sen",
-     0.89,
-     1.124
+     2.31,
+     2.507
     ],
     [
      "dünyanın",
-     1.124,
-     1.827
+     2.507,
+     3.1
     ],
     [
      "en",
-     1.827,
-     2.061
+     3.1,
+     3.297
     ],
     [
      "harika",
-     2.061,
-     2.763
+     3.297,
+     3.89
     ],
     [
      "insanısın,",
-     2.763,
-     3.7
+     3.89,
+     4.68
     ],
     [
      "kusursuzsun!",
-     3.94,
-     4.615
+     4.945,
+     5.81
     ],
     [
      "Sevsin",
-     4.825,
-     5.149
+     6.39,
+     6.717
     ],
     [
      "diye",
-     5.149,
-     5.473
+     6.717,
+     7.045
     ],
     [
      "yüzüne",
-     5.473,
-     5.959
+     7.045,
+     7.536
     ],
     [
      "karşı",
-     5.959,
-     6.284
+     7.536,
+     7.863
     ],
     [
      "gereğinden",
-     6.284,
-     6.932
+     7.863,
+     8.517
     ],
     [
      "fazla",
-     6.932,
-     7.256
+     8.517,
+     8.845
     ],
     [
      "över.",
-     7.256,
-     7.58
+     8.845,
+     9.172
     ]
    ]
   },

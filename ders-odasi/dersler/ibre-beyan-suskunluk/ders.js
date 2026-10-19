@@ -147,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Hikmetli söz",
-       "soz": "Söz de şaka da yerinde olsun; adıyla seslenelim.",
+       "soz": "Şaka da söz de yerinde olsun; adıyla seslenelim.",
        "eylem": "konus",
        "zincir": [
         "Arkadaşları rahatça güler.",
@@ -175,7 +175,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hikmetli",
-        "soz": "Söz"
+        "soz": "Şaka"
        },
        "zincirAnahtar": [
         "Arkadaşları",
@@ -1164,113 +1164,113 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 10.856,
-   "m": "Tam kararında Hikmetli söz. Söz de şaka da yerinde olsun; adıyla seslenelim. Doğruyu dalga geçmeden söyler, şakayı kimseyi üzmeyecek yerde bırakır.",
+   "sure": 10.686,
+   "m": "Tam kararında Hikmetli söz. Şaka da söz de yerinde olsun; adıyla seslenelim. Doğruyu dalga geçmeden söyler, şakayı kimseyi üzmeyecek yerde bırakır.",
    "k": [
     [
      "Tam",
      0.03,
-     0.238
+     0.198
     ],
     [
      "kararında",
-     0.238,
-     1.072
+     0.198,
+     0.872
     ],
     [
      "Hikmetli",
-     1.072,
-     1.697
+     0.872,
+     1.377
     ],
     [
      "söz.",
-     1.697,
-     1.905
+     1.377,
+     1.545
     ],
     [
-     "Söz",
-     2.23,
-     2.355
-    ],
-    [
-     "de",
-     2.355,
-     2.48
-    ],
-    [
-     "şaka",
-     2.48,
-     2.73
+     "Şaka",
+     1.65,
+     2.242
     ],
     [
      "da",
-     2.73,
-     2.855
+     2.242,
+     2.538
+    ],
+    [
+     "söz",
+     2.538,
+     2.834
+    ],
+    [
+     "de",
+     2.834,
+     3.13
     ],
     [
      "yerinde",
-     2.855,
-     3.23
+     3.13,
+     4.018
     ],
     [
      "olsun;",
-     3.23,
-     3.48
+     4.018,
+     4.61
     ],
     [
      "adıyla",
-     3.615,
-     4.594
+     5.005,
+     5.425
     ],
     [
      "seslenelim.",
-     4.594,
-     5.9
+     5.425,
+     5.985
     ],
     [
      "Doğruyu",
-     6.235,
-     6.817
+     6.28,
+     6.811
     ],
     [
      "dalga",
-     6.817,
-     7.205
+     6.811,
+     7.165
     ],
     [
      "geçmeden",
-     7.205,
-     7.787
+     7.165,
+     7.696
     ],
     [
      "söyler,",
-     7.787,
-     8.175
+     7.696,
+     8.05
     ],
     [
      "şakayı",
-     8.435,
-     8.905
+     8.32,
+     8.779
     ],
     [
      "kimseyi",
-     8.905,
-     9.376
+     8.779,
+     9.238
     ],
     [
      "üzmeyecek",
-     9.376,
-     10.003
+     9.238,
+     9.851
     ],
     [
      "yerde",
-     10.003,
-     10.316
+     9.851,
+     10.157
     ],
     [
      "bırakır.",
-     10.316,
-     10.786
+     10.157,
+     10.616
     ]
    ]
   },
