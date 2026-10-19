@@ -13,6 +13,7 @@ var ON_YUKLE = [
   KOK + 'assets/video/tanitim-poster.webp',
   KOK + 'kuran/', KOK + 'kuran/okuyucu.css', KOK + 'kuran/okuyucu.js',
   KOK + 'dualar/', KOK + 'dualar/dualar.css', KOK + 'dualar/dualar.js',
+  KOK + 'tecvid/', KOK + 'tecvid/tecvid.css', KOK + 'tecvid/tecvid.js',
   KOK + 'app/', KOK + 'app/index.html', KOK + 'app/flutter_bootstrap.js', KOK + 'app/main.dart.js',
   KOK + 'app/assets/FontManifest.json', KOK + 'app/assets/AssetManifest.bin.json', KOK + 'app/assets/AssetManifest.bin',
   KOK + 'app/assets/fonts/MaterialIcons-Regular.otf', KOK + 'app/icons/logo-192.png'
