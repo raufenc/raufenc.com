@@ -1414,8 +1414,22 @@
     textarea.field { resize: vertical; min-height: 110px; }
     .hp-field {
       position: absolute; left: -9999px;
-      opacity: 0; height: 0; width: 0;
+      opacity: 0; height: 0; width: 0; overflow: hidden;
     }
+    .field-label {
+      font-size: 12px; font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      margin: 4px 0 -6px;
+    }
+    .contact-form .btn[disabled] { opacity: 0.6; cursor: progress; transform: none; }
+    .form-status { font-size: 13.5px; line-height: 1.6; min-height: 1.6em; color: var(--text-secondary); }
+    .form-status:empty { display: none; }
+    .form-status.tamam { color: #34d399; }
+    .form-status.hata  { color: #f87171; }
+    html.light .form-status.tamam { color: #047857; }
+    html.light .form-status.hata  { color: #b91c1c; }
+    .form-status a { color: var(--warm); font-weight: 600; }
 
     .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .social-link {
@@ -2171,11 +2185,16 @@
         <p>Projelerle ilgili görüşleriniz, önerileriniz veya iş birliği teklifleriniz için yazabilirsiniz.</p>
 
         <!-- İletişim Formu -->
-        <form class="contact-form" id="contact-form" method="POST" enctype="text/plain">
+        <form class="contact-form" id="contact-form" action="/api/iletisim/" method="POST">
           <!-- Honeypot: bot tuzağı, görünmez alan -->
-          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
-          <input type="text" name="name" class="field" placeholder="Adınız" required />
-          <input type="email" name="email" class="field" placeholder="E-posta adresiniz" required />
+          <div class="hp-field" aria-hidden="true">
+            <label for="cf-website">Web siteniz</label>
+            <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <label class="field-label" for="cf-name">Adınız</label>
+          <input type="text" id="cf-name" name="name" class="field" autocomplete="name" minlength="2" maxlength="100" required />
+          <label class="field-label" for="cf-email">E-posta adresiniz</label>
+          <input type="email" id="cf-email" name="email" class="field" autocomplete="email" maxlength="200" required />
           <select name="subject" class="field">
             <option value="">Konu seçin...</option>
             <option value="genel">Genel mesaj</option>
@@ -2183,11 +2202,13 @@
             <option value="geri-bildirim">Geri bildirim</option>
             <option value="hata">Hata bildirimi</option>
           </select>
-          <textarea name="message" class="field" placeholder="Mesajınız..." rows="4" required></textarea>
+          <label class="field-label" for="cf-message">Mesajınız</label>
+          <textarea id="cf-message" name="message" class="field" rows="4" minlength="10" maxlength="5000" required></textarea>
           <button type="submit" class="btn btn-warm magnetic" style="align-self:flex-start;">
             <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            Gönder
+            <span class="btn-yazi">Gönder</span>
           </button>
+          <p class="form-status" id="form-durum" role="status" aria-live="polite"></p>
         </form>
       </div>
       <div class="contact-social">
@@ -2248,15 +2269,81 @@
   // ── E-POSTA OBFUSCATION ──
   var _u = 'raufenc', _d = 'gmail.com', _e = _u + '@' + _d;
   var cForm = document.getElementById('contact-form');
-  if (cForm) cForm.action = 'mailto:' + _e;
   var fEmail = document.getElementById('footer-email');
   if (fEmail) { fEmail.href = 'mailto:' + _e; fEmail.textContent = _e; }
 
-  // ── HONEYPOT + FORM KORUMASI ──
+  // ── İLETİŞİM FORMU ──
+  // /api/iletisim (Resend) ile gönderir; uç kurulu değilse (503/404) e-posta uygulamasına düşer.
   if (cForm) {
+    var formDurum = document.getElementById('form-durum');
+    var formBtn = cForm.querySelector('button[type="submit"]');
+    var formBtnYazi = formBtn.querySelector('.btn-yazi');
+    var formAcilis = Date.now();
+    var KONU_ADI = { genel: 'Genel mesaj', isbirligi: 'İş birliği teklifi', 'geri-bildirim': 'Geri bildirim', hata: 'Hata bildirimi' };
+    var epostaBag = '<a href="mailto:' + _e + '">' + _e + '</a>';
+
+    function durumYaz(tur, html) {
+      formDurum.className = 'form-status' + (tur ? ' ' + tur : '');
+      formDurum.innerHTML = html;
+    }
+    function mailtoAdresi(v) {
+      var konu = 'raufenc.com — ' + (KONU_ADI[v.subject] || 'Mesaj');
+      var govde = v.message + '\n\n— ' + v.name + ' (' + v.email + ')';
+      return 'mailto:' + _e + '?subject=' + encodeURIComponent(konu) + '&body=' + encodeURIComponent(govde);
+    }
+    function epostayaDus(v) {
+      durumYaz('', 'Mesajınız e-posta uygulamanızda hazırlandı; açılan pencerede «Gönder»e basmanız yeterli.');
+      window.location.href = mailtoAdresi(v);
+    }
+
     cForm.addEventListener('submit', function(ev) {
-      if (cForm.querySelector('[name="website"]').value) { ev.preventDefault(); return; }
+      ev.preventDefault();
+      if (!cForm.checkValidity()) { cForm.reportValidity(); return; }
+      var v = {
+        name: cForm.elements.name.value.trim(),
+        email: cForm.elements.email.value.trim(),
+        subject: cForm.elements.subject.value,
+        message: cForm.elements.message.value.trim(),
+        website: cForm.elements.website.value,
+        t: Date.now() - formAcilis
+      };
+      if (v.website) return;
+      formBtn.disabled = true;
+      formBtnYazi.textContent = 'Gönderiliyor…';
+      durumYaz('', '');
+      fetch('/api/iletisim/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(v)
+      }).then(function(r) {
+        return r.json().catch(function() { return {}; }).then(function(j) { return { durum: r.status, j: j }; });
+      }).then(function(s) {
+        if (s.durum === 200 && s.j.ok) {
+          cForm.reset();
+          formAcilis = Date.now();
+          durumYaz('tamam', 'Mesajınız ulaştı, teşekkür ederim. En kısa zamanda dönüş yapmaya gayret edeceğim.');
+        } else if (s.durum === 503 || s.durum === 404) {
+          epostayaDus(v);
+        } else if (s.durum === 429) {
+          durumYaz('hata', 'Kısa sürede birden fazla mesaj gönderildi. Birkaç dakika sonra yeniden deneyebilirsiniz.');
+        } else if (s.durum === 400 && s.j.alan && cForm.elements[s.j.alan]) {
+          durumYaz('hata', 'Lütfen işaretli alanı kontrol edin.');
+          cForm.elements[s.j.alan].focus();
+        } else {
+          durumYaz('hata', 'Mesaj şu an gönderilemedi. Dilerseniz doğrudan e-posta ile yazabilirsiniz: ' + epostaBag);
+        }
+      }).catch(function() {
+        durumYaz('hata', 'Bağlantı kurulamadı. Dilerseniz doğrudan e-posta ile yazabilirsiniz: ' + epostaBag);
+      }).then(function() {
+        formBtn.disabled = false;
+        formBtnYazi.textContent = 'Gönder';
+      });
     });
+
+    // JS kapalıyken yapılan form gönderiminin sonucu (?iletisim=tamam|eposta|hata)
+    var iletisimSonuc = new URLSearchParams(location.search).get('iletisim');
+    if (iletisimSonuc === 'tamam') durumYaz('tamam', 'Mesajınız ulaştı, teşekkür ederim. En kısa zamanda dönüş yapmaya gayret edeceğim.');
+    else if (iletisimSonuc) durumYaz('hata', 'Mesaj gönderilemedi. Dilerseniz doğrudan e-posta ile yazabilirsiniz: ' + epostaBag);
   }
 
   // ── ANA SAYFA PROJELERİ ──

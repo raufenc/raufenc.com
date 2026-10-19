@@ -13,6 +13,7 @@ const API_METHODS = {
   '/api/arge-feed': ['GET', 'OPTIONS'],
   '/api/arge-asistan': ['POST', 'OPTIONS'],
   '/api/arge-bildirim': ['POST', 'OPTIONS'],
+  '/api/iletisim': ['POST', 'OPTIONS'],
 };
 const PUBLIC_METHODS = ['GET', 'HEAD', 'OPTIONS'];
 const SCANNER_PATHS = [
