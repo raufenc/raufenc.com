@@ -211,7 +211,7 @@
       else if (e.key === 'Escape') { durdur(); }
     });
 
-    function slug(t) { return t.toLowerCase().replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+    function slug(t) { if (t.indexOf('ى') >= 0) return 'vav-ya-elif'; return t.replace(/İ/g, 'i').toLowerCase().replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 
     fetch('./dersler.json').then(function (r) { return r.json(); }).then(function (data) {
       dersler = data.filter(function (d) { return d.items.length; }).sort(function (a, b) { return a.n - b.n; });
