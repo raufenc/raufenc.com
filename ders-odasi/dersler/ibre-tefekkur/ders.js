@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Aynı soruya takılıp kalan kişi neyi kaçırır?",
+       "soru": "Aynı soruya takılıp kalan kişi neden rahat edemez?",
        "ad": "Vesvese",
        "soz": "Ya bir şey kaçırırsam? Aynı soruyu yine düşüneyim!",
        "eylem": "dusun",
@@ -297,7 +297,7 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Aynı soruyu tekrar tekrar sorar, cevap aldıktan sonra da rahat edemez.",
+       "metin": "Bir bulutu izlerken bile “ya yanlış düşünüyorsam?” diye aynı soruyu kafasında döndürür.",
        "alan": "fazla",
        "ipucu": "Cevaptan sonra da rahat edemiyor."
       },

@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Kuruntuya takılan kişi neyi kaçırır?",
+       "soru": "Kuruntuya takılan kişi neyi yaşayamaz?",
        "ad": "Vesvese",
        "soz": "Ya hata yaptıysam? Bir daha düşüneyim, bir daha!",
        "eylem": "dusun",

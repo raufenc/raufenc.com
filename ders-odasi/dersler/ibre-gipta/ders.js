@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Başkasının iyiliğini çekemeyen kişi neyi kaçırır?",
+       "soru": "Başkasının iyiliğini çekemeyen kişi neyi kaybeder?",
        "ad": "Hased",
        "soz": "Hak etmedi, o başarı bende olmalıydı!",
        "eylem": "isaret",
@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Arkadaşın sınavdan senden yüksek not aldı ve nasıl çalıştığını anlatıyor.",
        "secenekler": [
         {
-         "m": "Anlatsın, beni ilgilendirmez.",
+         "m": "Anlatsın, ben zaten notumu biliyorum.",
          "zon": "az",
          "sonuc": "Çalışma yöntemini dinlemiyorsun; öğrenebileceğin güzel bir yol yanından geçiyor.",
          "not": "İbre sola kaydı: ilgisiz kalmak, güzel örnekten öğrenmeyi engelliyor.",

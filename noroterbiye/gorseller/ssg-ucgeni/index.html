@@ -9,7 +9,10 @@
   <link rel="canonical" href="https://raufenc.com/noroterbiye/gorseller/ssg-ucgeni/">
   <meta property="og:title" content="ŞŞG Üçgeni — NöroTerbiye">
   <meta property="og:description" content="Şehvet, Şöhret, Gadab — 3 temel dürtünün interaktif haritası.">
-  <meta property="og:image" content="https://raufenc.com/images/noroterbiye.webp">
+  <meta property="og:image" content="https://raufenc.com/noroterbiye/gorseller/og/ssg-ucgeni.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://raufenc.com/noroterbiye/gorseller/og/ssg-ucgeni.jpg">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/lib/design-system/tokens.css">
@@ -188,6 +191,7 @@
             <text class="vx-name" x="464" y="512">GADAB</text><text class="vx-neuro" x="464" y="530">Kortizol / Adrenalin</text>
           </g>
         </svg>
+        <div class="gv-actions-row" id="ssExport"></div>
         <noscript>
           <p style="text-align:center;color:var(--text-secondary);padding:1rem;">Bu interaktif ŞŞG Üçgeni JavaScript gerektirir. Üçgen modeli; Şehvet (dopamin — haz dürtüsü), Şöhret (serotonin — statü dürtüsü) ve Gadab (kortizol — öfke dürtüsü) olmak üzere üç temel nefs tuzağını göstermektedir.</p>
         </noscript>
@@ -205,6 +209,8 @@
       <div class="ss-filters"><div class="gv-chips" id="ssFilters" role="group" aria-label="Dürtüye göre süz"></div></div>
       <div class="ss-map" id="ssMap"></div>
     </section>
+
+    <section class="gv-quizsec gv-reveal" id="ssQuiz" aria-label="Mini test"></section>
 
     <nav class="gv-more gv-reveal" id="gvMore" aria-label="Diğer görseller"></nav>
   </main>
@@ -261,7 +267,7 @@
       }
 
       function activate(k, user) {
-        if (user) interacted = true;
+        if (user) { interacted = true; GV.track('durtu_sec', k); }
         if (cur === k) return;
         cur = k;
         KEYS.forEach(function (x) { $('vx-' + x).classList.toggle('on', x === k); });
@@ -310,6 +316,14 @@
         });
         filters.appendChild(b);
       });
+
+      GV.addExport($('ssExport'), function () { return $('ssSvg'); }, { title: 'ŞŞG Üçgeni', sub: 'Şehvet · Şöhret · Gadab', file: 'noroterbiye-ssg-ucgeni' });
+      GV.quiz($('ssQuiz'), { id: 'ssg', title: 'Mini test · ŞŞG Üçgeni', items: [
+        { q: 'Dopamin hangi dürtüyle ilişkilendirilir?', opts: ['Şehvet', 'Şöhret', 'Gadab'], a: 0, why: 'Şehvet haz ve arzu dürtüsüdür; beyin bu davranışları dopaminle ödüllendirir.' },
+        { q: 'Statü ve beğenilme dürtüsü olan Şöhret hangi nörotransmitterle anılır?', opts: ['Kortizol', 'Serotonin', 'Dopamin'], a: 1, why: 'Serotonin, sosyal hiyerarşide değerli hissedildiğinde salgılanır.' },
+        { q: '“Savaş ya da kaç” tepkisiyle devreye giren dürtü hangisidir?', opts: ['Şehvet', 'Şöhret', 'Gadab'], a: 2, why: 'Gadab öfke ve savunma dürtüsüdür; kortizol ve adrenalinle ilişkilidir.' },
+        { q: 'Bu sayfada Gadab için önerilen terbiye yolu hangisidir?', opts: ['İffet', 'Tevazu', 'Hilm'], a: 2, why: 'Hilm, öfke anında beklemek ve karşılığı adaletle vermektir.' }
+      ] });
 
       /* başlangıç + nazik otomatik tur (kullanıcı dokunana kadar) */
       var h = (location.hash || '').slice(1);

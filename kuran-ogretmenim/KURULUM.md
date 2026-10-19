@@ -12,9 +12,17 @@ kök dizinidir.
 ## Paket içeriği
 
 - `index.html`, `stil.css`, `site.js`, `assets/` — giriş sitesi (3,7 MB)
+- `sinif/` — akıllı tahta için Sınıf Modu: 16 dersin harf ve hece kartları,
+  dokun-dinle, sırayla okutma. Veri `sinif/dersler.json` (uygulamanın ders
+  listelerinden çıkarıldı; sesler `app/` altındaki dosyalardır).
+- `sw.js`, `site.webmanifest` — çevrimdışı çalışma ve "ana ekrana ekle".
+  Giriş sitesi, sınıf modu ve uygulama çekirdeği ilk açılışta cihazda
+  saklanır; sesler ilk dinlendiğinde kalır. Sürüm değişince `sw.js`
+  içindeki `SURUM` değeri artırılır.
 - `app/` — kuranogretmenim.com'daki Flutter web derlemesinin birebir
-  kopyası (52 MB). Yalnız `app/index.html` içindeki `<base href>` ve
-  `app/manifest.json` içindeki `start_url` bu yola göre değiştirildi.
+  kopyası (52 MB). `app/index.html` içinde `<base href>`, logolu açılış
+  ekranı ve service worker kaydı; `app/manifest.json` içinde `start_url`
+  bu yola göre değiştirildi. `app/logo.png` 1,1 MB'tan 86 KB'a indirildi.
 - Vercel için gerekli başlıklar (içerik güvenlik politikası, önbellek) ve
   yönlendirmeler depo kökündeki `vercel.json` dosyasında
   `/kuran-ogretmenim/...` kurallarıdır.
@@ -50,18 +58,25 @@ Sitemap: https://kuranogretmenim.com/sitemap.xml
 </urlset>
 ```
 
-## Uygulamada düzeltilmesi gereken, bu paket hazırlanırken fark edilen eksik
+## Eksik sesler bu pakette tamamlandı
 
-Uygulamanın varlık listesinde 992 dosya var; bunların 150'si canlı
-sunucuda yok (hepsi adında Türkçe karakter ya da boşluk olan dosyalar:
-ör. `ğayn.mp3`, `şin.mp3`, `tıy.mp3`, `zıy.mp3`, `üstün aciklamasi.mp3`,
-`asar aciklama.mp3`, `kırmızı ayakkabı.png`). Bu yüzden canlı uygulamada
-dört harfin sesi, ders anlatımlarının tamamı ve bazı alıştırma sesleri
-çalmaz. Çözüm: dosya adlarını ASCII yapıp (`gayn`, `ustun_aciklamasi`
-gibi) Dart tarafındaki yolları güncellemek ve yeniden derlemek. Eksik
-dosyaların tam listesi: `eksik-dosyalar.txt`. Düzelince `site.js`
-içindeki `HARFLER` dizisinde `null` olan dört girdiye yeni dosya adları
-yazılır.
+Orijinal sunucuda adında Türkçe karakter ya da boşluk olan 150 dosya yoktu
+(liste: `eksik-dosyalar.txt`). Bunların uygulama kodunda gerçekten
+çağrılan 102'si bu pakette yeniden üretildi ve `app/main.dart.js`
+içindeki yollar ASCII adlara çevrildi (ör. `üstün aciklamasi.mp3` →
+`uestuen_aciklamasi.mp3`). Kaynaklar:
+
+- 15 ders anlatımı: Türkçe metinler yeniden yazılıp seslendirildi
+  (`app/assets/assets/sounds/aciklamalar/`).
+- 77 harf, hece, kelime ve alıştırma okunuşu: Arapça metinden
+  seslendirildi.
+- 10 tecvid örneği: Mahmud Halil el-Husarî kıraatinden ilgili âyet-i
+  kerîme kesitleri (everyayah.com). Bakara 8, 11, 173 ve 225'te kesit,
+  âyetin tamamına yakın.
+
+Kodda hiç çağrılmayan 45 dosya üretilmedi; uygulama bunları
+kullanmıyor. Kaynak kod gelirse `ses-eslestirme.json` dosyasındaki
+eski→yeni ad tablosu ile Dart tarafı güncellenir.
 
 ## Varlıklar
 

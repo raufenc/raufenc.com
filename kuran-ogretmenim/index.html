@@ -9,6 +9,7 @@
   <link rel="canonical" href="https://raufenc.com/kuran-ogretmenim/">
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="./assets/img/logo-192.png">
+  <link rel="manifest" href="./site.webmanifest">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="tr_TR">
@@ -70,12 +71,13 @@
       </a>
       <nav class="nav" id="nav" aria-label="Sayfa içi bağlantılar">
         <a href="#harfler">Harfler</a>
-        <a href="#yol">Dersler</a>
+        <a href="./dersler/">Dersler</a>
         <a href="#video">Tanıtım</a>
         <a href="#oyunlar">Oyunlar</a>
         <a href="#sureler">Sûreler</a>
         <a href="#tecvid">Tecvid</a>
         <a href="#sss">Sorular</a>
+        <a href="./sinif/">Sınıf modu</a>
         <a class="nav-app" href="./app/">Uygulamayı Aç</a>
       </nav>
       <button class="theme-btn" id="themeBtn" type="button" aria-label="Açık ve koyu görünüm arasında geçiş yap">
@@ -105,6 +107,7 @@
               Hemen Başla
             </a>
             <a class="btn btn--ghost" href="#video">Tanıtımı İzle</a>
+            <a class="btn btn--ghost" href="./sinif/">Sınıf Modu</a>
           </div>
           <ul class="hero-note">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Kayıt gerektirmez</li>
@@ -154,7 +157,7 @@
         <div class="section-head center reveal">
           <p class="eyebrow">Ders sırası</p>
           <h2 id="yol-baslik">Harften sûreye dört adım</h2>
-          <p class="lead">Dersler, Kur'ân kurslarında uygulanan elifba sırasını izler. Her adım bir öncekinin üzerine kurulur; hiçbir konu sessiz geçilmez.</p>
+          <p class="lead">Dersler, Kur'ân kurslarında uygulanan elifba sırasını izler. Her adım bir öncekinin üzerine kurulur; hiçbir konu sessiz geçilmez. <a href="./dersler/">On altı dersin tamamını sesli kartlarıyla görün.</a></p>
         </div>
         <div class="steps">
           <article class="step reveal">
@@ -355,7 +358,7 @@
             <div class="audience">
               <div class="aud reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><h3>Çocuklar</h3><p>Büyük harfler, kısa dersler, her dokunuşta ses. Oyunlar ders bitince ödül gibi açılır.</p></div>
               <div class="aud reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM17 3a4 4 0 0 1 0 8M21 21v-2a4 4 0 0 0-3-3.9"/></svg></span><h3>Veliler</h3><p>Çocuğunuzla birlikte dinleyin; harf sırası ve kurallar sizi de yıllar sonra yeniden başlatır.</p></div>
-              <div class="aud reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M4 19a2 2 0 0 0 2 2h14M8 7h8M8 11h8M8 15h5"/></svg></span><h3>Hocalar</h3><p>Derste tahtaya yansıtın, ödev olarak sûre sayfası ve alıştırma kategorisi verin.</p></div>
+              <div class="aud reveal"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14M4 19a2 2 0 0 0 2 2h14M8 7h8M8 11h8M8 15h5"/></svg></span><h3>Hocalar</h3><p>Akıllı tahta için <a href="./sinif/">Sınıf Modu</a>: dev harf kartları, dokun-dinle, sırayla okutma. Ödev olarak sûre sayfası ve alıştırma kategorisi verin.</p></div>
             </div>
           </div>
         </div>
@@ -409,5 +412,6 @@
   </footer>
 
   <script src="./site.js" defer></script>
+  <script>if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("/kuran-ogretmenim/sw.js", { scope: "/kuran-ogretmenim/" }).catch(function () {}); }); }</script>
 </body>
 </html>

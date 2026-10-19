@@ -120,6 +120,28 @@
       ]
     },
     {
+      "source": "/kuran-ogretmenim/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/kuran-ogretmenim/"
+        }
+      ]
+    },
+    {
+      "source": "/kuran-ogretmenim/(app/index.html|app/|index.html|sinif/|sinif/index.html)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/api/arge-feed",
       "headers": [
         {
@@ -413,6 +435,11 @@
     {
       "source": "/kuran-ogretmenim/app",
       "destination": "/kuran-ogretmenim/app/",
+      "permanent": true
+    },
+    {
+      "source": "/kuran-ogretmenim/sinif",
+      "destination": "/kuran-ogretmenim/sinif/",
       "permanent": true
     }
   ],

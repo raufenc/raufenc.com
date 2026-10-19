@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Eşyasına çok bağlanan kişi neyi kaçırır?",
+       "soru": "Eşyasına çok bağlanan kişi ne yaşar?",
        "ad": "Kıyamama",
        "soz": "Çizilmesin diye hiç kullanmam, durmadan sayarım!",
        "eylem": "isaret",
@@ -366,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Kanaat",
-       "metin": "razı olup harekete geçmek",
+       "metin": "razı olup şükretmek; hareket etmek",
        "ikon": "muhur",
        "renk": "#17998A"
       },

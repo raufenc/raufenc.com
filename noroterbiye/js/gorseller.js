@@ -17,6 +17,12 @@
     triangle: '<path d="M12 3.5L21.5 20h-19L12 3.5z"/><circle cx="12" cy="8.2" r="1.1" fill="currentColor" stroke="none"/><circle cx="6.6" cy="17.2" r="1.1" fill="currentColor" stroke="none"/><circle cx="17.4" cy="17.2" r="1.1" fill="currentColor" stroke="none"/>',
     loop: '<path d="M20 12a8 8 0 0 1-13.6 5.7M4 12a8 8 0 0 1 13.6-5.7"/><path d="M17.6 2.5v4h-4M6.4 21.5v-4h4"/>',
     bars: '<path d="M4 20v-7M10 20V5M16 20v-10M21 20H3"/>',
+    download: '<path d="M12 3v12M7 10.5l5 5 5-5M4 20h16"/>',
+    share: '<circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8.1 10.9l7.8-3.8M8.1 13.1l7.8 3.8"/>',
+    xray: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>',
+    quiz: '<circle cx="12" cy="12" r="9"/><path d="M9.2 9.4a2.9 2.9 0 1 1 4.4 2.5c-.9.6-1.6 1.2-1.6 2.3M12 17.2h.01"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>',
+    stairs: '<path d="M3 20h5v-5h5v-5h5V5h3"/>',
     microscope: '<path d="M8 21h10M10.5 17.5h5M9 3.5l4 1.5-2.2 6-4-1.5z"/><path d="M13 12.5a5 5 0 1 1-4.6 7"/>',
 
     /* ── ŞŞG ── */
@@ -114,16 +120,17 @@
     { key: 'beyin-haritasi', icon: 'brain', title: 'Beyin Haritası', desc: 'Her bölge bir hikâye anlatır.', c: '#06b6d4' },
     { key: 'ssg-ucgeni', icon: 'triangle', title: 'ŞŞG Üçgeni', desc: 'Şehvet, Şöhret, Gadab.', c: '#a855f7' },
     { key: 'aliskanlik-dongusu', icon: 'loop', title: 'Alışkanlık Döngüsü', desc: 'Tetik → İstek → Davranış → Ödül.', c: '#f59e0b' },
-    { key: 'dopamin-yolu', icon: 'bars', title: 'Dopamin Yolu', desc: 'Doğal ve yapay ödül dengesi.', c: '#10b981' }
+    { key: 'dopamin-yolu', icon: 'bars', title: 'Dopamin Yolu', desc: 'Doğal ve yapay ödül dengesi.', c: '#10b981' },
+    { key: 'bir-gunun-icinden', icon: 'sun', title: 'Bir Günün İçinden', desc: 'Dört görseli tek hikâyede izle.', c: '#f472b6' }
   ];
 
   function moreNav(current, mount) {
     var el = mount || document.getElementById('gvMore');
     if (!el) return;
-    var items = PAGES.filter(function (p) { return p.key !== current; });
+    var items = PAGES.filter(function (p) { return p.key !== current; }).slice(0, 4);
     el.innerHTML =
       '<div class="gv-more-head"><span class="gv-eyebrow">Keşfetmeye devam et</span></div>' +
-      '<div class="gv-more-grid">' + items.map(function (p) {
+      '<div class="gv-more-grid' + (items.length > 3 ? ' four' : '') + '">' + items.map(function (p) {
         return '<a class="gv-more-card" style="--c:' + p.c + '" href="/noroterbiye/gorseller/' + p.key + '/">' +
           '<span class="gv-more-ic">' + icon(p.icon, 24) + '</span>' +
           '<span class="gv-more-tx"><b>' + p.title + '</b><small>' + p.desc + '</small></span>' +
@@ -132,5 +139,135 @@
       '<a class="gv-more-back" href="/noroterbiye/#gorsel-kesif">' + icon('arrow-left', 16) + ' Tüm görseller</a>';
   }
 
-  window.GV = { icon: icon, glyphs: I, hydrate: hydrate, reveal: reveal, moreNav: moreNav, pages: PAGES };
+
+  /* ── Analitik (GA4 zaten theme.js ile yüklü) ── */
+  function track(action, label) {
+    try { if (window.gtag) window.gtag('event', action, { event_category: 'gorsel_kesif', event_label: label || '' }); } catch (e) {}
+  }
+
+  /* ── SVG → PNG (indir / paylaş) ──
+     Sayfa stillerini hesaplanmış değerlerle SVG'ye gömer, tema arka planı + başlık + imza ekler. */
+  var COPY = ['fill', 'fill-opacity', 'fill-rule', 'stroke', 'stroke-width', 'stroke-opacity', 'stroke-dasharray', 'stroke-dashoffset',
+    'stroke-linecap', 'stroke-linejoin', 'opacity', 'font-family', 'font-size', 'font-weight', 'font-style', 'letter-spacing',
+    'text-anchor', 'dominant-baseline', 'paint-order', 'stop-color', 'stop-opacity', 'display', 'visibility', 'color'];
+
+  function inlineStyles(src, dst) {
+    var cs = getComputedStyle(src), st = '';
+    COPY.forEach(function (p) { var v = cs.getPropertyValue(p); if (v) st += p + ':' + v + ';'; });
+    var fin = src.getAttribute && src.getAttribute('data-gv-final');
+    dst.setAttribute('style', st + (fin || ''));
+    dst.removeAttribute('class');
+    for (var i = 0; i < src.children.length; i++) if (dst.children[i]) inlineStyles(src.children[i], dst.children[i]);
+  }
+
+  function svgToBlob(svg, opt) {
+    return new Promise(function (resolve, reject) {
+      var vb = svg.viewBox && svg.viewBox.baseVal && svg.viewBox.baseVal.width ? svg.viewBox.baseVal : { x: 0, y: 0, width: svg.clientWidth, height: svg.clientHeight };
+      var clone = svg.cloneNode(true);
+      inlineStyles(svg, clone);
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      clone.setAttribute('width', vb.width); clone.setAttribute('height', vb.height);
+      clone.removeAttribute('role'); clone.removeAttribute('aria-label');
+      var xml = new XMLSerializer().serializeToString(clone);
+      var url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
+      var img = new Image();
+      img.onload = function () {
+        var light = document.documentElement.classList.contains('light');
+        var W = 1600, pad = 90, headH = 150, footH = 90;
+        var sc = (W - pad * 2) / vb.width, dh = vb.height * sc;
+        var H = Math.round(headH + dh + footH + 30);
+        var c = document.createElement('canvas'); c.width = W; c.height = H;
+        var g = c.getContext('2d');
+        var bg = g.createLinearGradient(0, 0, W, H);
+        if (light) { bg.addColorStop(0, '#f5f5fb'); bg.addColorStop(1, '#e9e6fa'); } else { bg.addColorStop(0, '#0b0b16'); bg.addColorStop(1, '#17132b'); }
+        g.fillStyle = bg; g.fillRect(0, 0, W, H);
+        var glow = g.createRadialGradient(W / 2, headH + dh / 2, 50, W / 2, headH + dh / 2, W * 0.55);
+        glow.addColorStop(0, light ? 'rgba(139,92,246,.10)' : 'rgba(139,92,246,.20)'); glow.addColorStop(1, 'rgba(139,92,246,0)');
+        g.fillStyle = glow; g.fillRect(0, 0, W, H);
+        g.fillStyle = light ? '#1a1a2e' : '#ececf6';
+        g.font = '800 58px Inter, system-ui, sans-serif'; g.textBaseline = 'alphabetic';
+        g.fillText(opt.title || document.title, pad, 96);
+        g.fillStyle = light ? '#6a6a88' : '#9a9ab4'; g.font = '500 28px Inter, system-ui, sans-serif';
+        if (opt.sub) g.fillText(opt.sub, pad, 138);
+        g.drawImage(img, pad, headH, vb.width * sc, dh);
+        g.fillStyle = light ? '#6a6a88' : '#8d8da8'; g.font = '600 26px Inter, system-ui, sans-serif';
+        g.fillText('NöroTerbiye · raufenc.com/noroterbiye', pad, H - 40);
+        URL.revokeObjectURL(url);
+        c.toBlob(function (b) { b ? resolve(b) : reject(new Error('blob')); }, 'image/png');
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('img')); };
+      img.src = url;
+    });
+  }
+
+  function saveBlob(blob, name) {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+  }
+
+  /* container içine "Görseli indir / Paylaş" düğmeleri ekler */
+  function addExport(container, getSvg, opt) {
+    var wrap = document.createElement('div');
+    wrap.className = 'gv-actions';
+    var canShare = !!(navigator.canShare && navigator.share);
+    wrap.innerHTML =
+      '<button type="button" class="gv-act" data-a="dl">' + icon('download', 16) + ' PNG indir</button>' +
+      (canShare ? '<button type="button" class="gv-act" data-a="sh">' + icon('share', 16) + ' Paylaş</button>' : '');
+    wrap.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-a]'); if (!b) return;
+      var svg = getSvg(); if (!svg) return;
+      b.disabled = true;
+      svgToBlob(svg, opt).then(function (blob) {
+        var file = (opt.file || 'noroterbiye') + '.png';
+        if (b.dataset.a === 'sh') {
+          var f = new File([blob], file, { type: 'image/png' });
+          if (navigator.canShare({ files: [f] })) {
+            track('paylas', opt.file);
+            return navigator.share({ files: [f], title: opt.title, text: (opt.title || '') + ' — NöroTerbiye', url: location.href.split('#')[0] }).catch(function () {});
+          }
+        }
+        track('indir', opt.file); saveBlob(blob, file);
+      }).catch(function () {}).then(function () { b.disabled = false; });
+    });
+    container.appendChild(wrap);
+    return wrap;
+  }
+
+  /* ── Mini test ── */
+  function quiz(mount, cfg) {
+    if (!mount) return;
+    var i = 0, score = 0, locked = false;
+    function frame(inner) {
+      mount.innerHTML = '<div class="gv-quiz gv-card"><div class="gv-quiz-head"><span class="gv-eyebrow">' + icon('quiz', 16) + ' ' + (cfg.title || 'Mini test') + '</span><span class="gv-quiz-step"></span></div>' + inner + '</div>';
+    }
+    function show() {
+      var it = cfg.items[i]; locked = false;
+      frame('<h3 class="gv-quiz-q">' + it.q + '</h3><div class="gv-quiz-opts">' + it.opts.map(function (o, k) {
+        return '<button type="button" class="gv-quiz-opt" data-k="' + k + '"><span>' + String.fromCharCode(65 + k) + '</span>' + o + '</button>';
+      }).join('') + '</div><div class="gv-quiz-fb" aria-live="polite"></div>');
+      mount.querySelector('.gv-quiz-step').textContent = (i + 1) + ' / ' + cfg.items.length;
+    }
+    function done() {
+      var pct = score / cfg.items.length;
+      var msg = pct === 1 ? 'Harika — hepsini bildin.' : pct >= 0.5 ? 'Güzel gidiyorsun; sayfayı bir daha gezip kaçırdıklarına bakabilirsin.' : 'Sorun değil; sayfayı bir kez daha gezip yeniden dene.';
+      frame('<div class="gv-quiz-done"><b>' + score + ' / ' + cfg.items.length + '</b><p>' + msg + '</p><button type="button" class="gv-act" data-r="1">' + icon('replay', 16) + ' Yeniden dene</button></div>');
+      track('test_bitti', (cfg.id || '') + ':' + score);
+    }
+    mount.addEventListener('click', function (e) {
+      if (e.target.closest('[data-r]')) { i = 0; score = 0; show(); return; }
+      var b = e.target.closest('.gv-quiz-opt'); if (!b || locked) return;
+      locked = true;
+      var it = cfg.items[i], k = +b.dataset.k, ok = k === it.a;
+      if (ok) score++;
+      mount.querySelectorAll('.gv-quiz-opt').forEach(function (x, j) { x.classList.toggle('ok', j === it.a); x.classList.toggle('bad', j === k && !ok); x.disabled = true; });
+      var fb = mount.querySelector('.gv-quiz-fb');
+      fb.innerHTML = '<p><b>' + (ok ? 'Doğru.' : 'Tam değil.') + '</b> ' + it.why + '</p><button type="button" class="gv-act" data-n="1">' + (i + 1 < cfg.items.length ? 'Sonraki' : 'Sonucu gör') + ' ' + icon('arrow-right', 16) + '</button>';
+      fb.querySelector('[data-n]').addEventListener('click', function () { i++; i < cfg.items.length ? show() : done(); });
+    });
+    show();
+  }
+
+  window.GV = { icon: icon, glyphs: I, hydrate: hydrate, reveal: reveal, moreNav: moreNav, pages: PAGES, track: track, addExport: addExport, quiz: quiz };
 })();

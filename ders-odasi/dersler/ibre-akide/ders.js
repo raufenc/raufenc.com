@@ -89,7 +89,7 @@ DO.dersKaydet(
           "not": "Bu orta ucun sesi: sahih akîdenin sesi."
          },
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; kaynağa bakmadan kabul ederim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: kaynaksızlığın sesi."
          }
@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Duyduğu her sözü dinden sayan kişi neyi kaçırır?",
+       "soru": "Duyduğu her sözü dinden sayan kişi neye bakmaz?",
        "ad": "Kaynaksız",
        "soz": "Herkes söylüyor, bu da dinin bir parçasıdır.",
        "eylem": "isaret",
@@ -118,7 +118,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; kaynağa bakmadan kabul ederim.",
           "dogru": true,
           "not": "Bu uçta duyulan her söz kaynağına bakılmadan dinin bir parçası sanılır. Kaynağa bakmak bunu önler."
          },
@@ -167,7 +167,7 @@ DO.dersKaydet(
           "not": "Bu sol ucun sesi: lakayt inancın sesi."
          },
          {
-          "m": "Herkes söylüyor, demek ki dinde böyle; bakmama gerek yok.",
+          "m": "Herkes söylüyor, demek ki dinde böyle; kaynağa bakmadan kabul ederim.",
           "dogru": false,
           "not": "Bu sağ ucun sesi: kaynaksızlığın sesi."
          }

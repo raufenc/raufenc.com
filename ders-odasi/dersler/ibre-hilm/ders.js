@@ -108,7 +108,7 @@ DO.dersKaydet(
        "zon": "fazla",
        "soru": "Öfkeyi içinde büyütmek neye benziyor?",
        "ad": "Hıkd",
-       "soz": "Küstüm, konuşmam; sırası gelince görürsün.",
+       "soz": "Bir şey demem; içimde dursun, sırası gelir.",
        "eylem": "dusun",
        "zincir": [
         "Küskünlük içinde her gün biraz daha büyür.",
@@ -136,7 +136,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hıkd",
-        "soz": "Küstüm,"
+        "soz": "Bir"
        },
        "zincirAnahtar": [
         "Küskünlük",
@@ -334,7 +334,7 @@ DO.dersKaydet(
       },
       {
        "id": "k2",
-       "metin": "Kırıldığı arkadaşıyla haftalar sonra bile konuşmaz: “Unutmadım.”",
+       "metin": "Kırıldığını söylemez, “unutmadım” diyerek haftalarca içinde taşır.",
        "alan": "fazla",
        "ipucu": "Kırgınlığı saklıyor."
       },
@@ -930,83 +930,93 @@ DO.dersKaydet(
   },
   "kfa1": {
    "d": "ses/kfa1.m4a",
-   "sure": 7.798,
-   "m": "Sağ uçta Hıkd. Küstüm, konuşmam; sırası gelince görürsün. Sessizce küser ve içinden bir karşılık düşünür.",
+   "sure": 8.041,
+   "m": "Sağ uçta Hıkd. Bir şey demem; içimde dursun, sırası gelir. Sessizce küser ve içinden bir karşılık düşünür.",
    "k": [
     [
      "Sağ",
      0.03,
-     0.202
+     0.264
     ],
     [
      "uçta",
-     0.202,
-     0.547
+     0.264,
+     0.731
     ],
     [
      "Hıkd.",
-     0.547,
-     0.72
+     0.731,
+     0.965
     ],
     [
-     "Küstüm,",
-     0.865,
-     1.14
+     "Bir",
+     1.04,
+     1.075
     ],
     [
-     "konuşmam;",
-     1.83,
-     2.22
+     "şey",
+     1.075,
+     1.11
+    ],
+    [
+     "demem;",
+     1.11,
+     1.18
+    ],
+    [
+     "içimde",
+     1.805,
+     2.705
+    ],
+    [
+     "dursun,",
+     2.705,
+     3.305
     ],
     [
      "sırası",
-     2.47,
-     3.165
+     3.6,
+     3.996
     ],
     [
-     "gelince",
-     3.165,
-     3.86
-    ],
-    [
-     "görürsün.",
-     3.86,
-     4.555
+     "gelir.",
+     3.996,
+     4.26
     ],
     [
      "Sessizce",
-     5.03,
-     5.536
+     4.88,
+     5.46
     ],
     [
      "küser",
-     5.536,
-     5.873
+     5.46,
+     5.846
     ],
     [
      "ve",
-     5.873,
-     6.042
+     5.846,
+     6.039
     ],
     [
      "içinden",
-     6.042,
-     6.548
+     6.039,
+     6.619
     ],
     [
      "bir",
-     6.548,
-     6.716
+     6.619,
+     6.812
     ],
     [
      "karşılık",
-     6.716,
-     7.222
+     6.812,
+     7.392
     ],
     [
      "düşünür.",
-     7.222,
-     7.728
+     7.392,
+     7.971
     ]
    ]
   },

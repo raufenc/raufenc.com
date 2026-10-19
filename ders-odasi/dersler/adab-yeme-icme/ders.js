@@ -28,120 +28,140 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Yemeğe besmele ile başlarız."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Ölçülü yeriz."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Ellerimizi yıkar, sağ elimizle yeriz."
     },
     {
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Sofrada güzel otururuz."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "İsraf etmeyiz; artanları hayvanlarla paylaşırız."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Ortak tabakta önümüzden yeriz."
     },
     {
      "id": "s07",
      "tur": "slayt",
      "gorsel": "slayt/07.webp",
+     "ses": "ses/s07.mp3",
      "metin": "Sünnet oturuşu: sağ diz dik, sol ayak altta."
     },
     {
      "id": "s08",
      "tur": "slayt",
      "gorsel": "slayt/08.webp",
+     "ses": "ses/s08.mp3",
      "metin": "Sofrada güzel sohbet ederiz."
     },
     {
      "id": "s09",
      "tur": "slayt",
      "gorsel": "slayt/09.webp",
+     "ses": "ses/s09.mp3",
      "metin": "Lokmalarımızı küçük alırız."
     },
     {
      "id": "s10",
      "tur": "slayt",
      "gorsel": "slayt/10.webp",
+     "ses": "ses/s10.mp3",
      "metin": "Sofraya davet edilmeyi bekleriz."
     },
     {
      "id": "s11",
      "tur": "slayt",
      "gorsel": "slayt/11.webp",
+     "ses": "ses/s11.mp3",
      "metin": "Büyüklerimize öncelik veririz."
     },
     {
      "id": "s12",
      "tur": "slayt",
      "gorsel": "slayt/12.webp",
+     "ses": "ses/s12.mp3",
      "metin": "Sofrada hürmetli oluruz."
     },
     {
      "id": "s13",
      "tur": "slayt",
      "gorsel": "slayt/13.webp",
+     "ses": "ses/s13.mp3",
      "metin": "Temizliğe dikkat ederiz; kırıntıları yere dökmeyiz."
     },
     {
      "id": "s14",
      "tur": "slayt",
      "gorsel": "slayt/14.webp",
+     "ses": "ses/s14.mp3",
      "metin": "Yemekten sonra dişlerimizi temizleriz."
     },
     {
      "id": "s15",
      "tur": "slayt",
      "gorsel": "slayt/15.webp",
+     "ses": "ses/s15.mp3",
      "metin": "Yemekten önce ve sonra ellerimizi yıkarız."
     },
     {
      "id": "s16",
      "tur": "slayt",
      "gorsel": "slayt/16.webp",
+     "ses": "ses/s16.mp3",
      "metin": "Yiyecek ve içeceklerin üstünü kapatırız."
     },
     {
      "id": "s17",
      "tur": "slayt",
      "gorsel": "slayt/17.webp",
+     "ses": "ses/s17.mp3",
      "metin": "Sağ elimizle içeriz."
     },
     {
      "id": "s18",
      "tur": "slayt",
      "gorsel": "slayt/18.webp",
+     "ses": "ses/s18.mp3",
      "metin": "Yemekten sonra “Elhamdülillah” deriz."
     },
     {
      "id": "s19",
      "tur": "slayt",
      "gorsel": "slayt/19.webp",
+     "ses": "ses/s19.mp3",
      "metin": "Tabağımızdaki son lokmayı da değerlendiririz."
     },
     {
      "id": "s20",
      "tur": "slayt",
      "gorsel": "slayt/20.webp",
+     "ses": "ses/s20.mp3",
      "metin": "Yere düşen lokmayı temizleyip yeriz; nimeti israf etmeyiz."
     },
     {

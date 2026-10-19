@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Kışkırtılınca atılan kişi neyi kaçırır?",
+       "soru": "Kışkırtılınca atılan kişi neyi bozar?",
        "ad": "Pervasızlık",
        "soz": "Cesur musun? Hemen hepsinin önünde bağırırım!",
        "eylem": "isaret",
@@ -213,7 +213,7 @@ DO.dersKaydet(
         {
          "m": "Düşünmeden ortaya dalıp hepsine bağırırım!",
          "zon": "fazla",
-         "sonuc": "Tartışma büyüyor; asıl konu unutuluyor ve arkadaşın yine yalnız kalıyor.",
+         "sonuc": "Tartışma büyüyor; asıl konu unutuluyor; dışlanan arkadaş yine görünmüyor.",
          "not": "İbre sağa kaydı: düşünmeden atılmak doğruyu savunmak değil, ortalığı karıştırmak.",
          "ses": "s1fa"
         },
@@ -1404,58 +1404,53 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 4.997,
-   "m": "Tartışma büyüyor; asıl konu unutuluyor ve arkadaşın yine yalnız kalıyor.",
+   "sure": 4.732,
+   "m": "Tartışma büyüyor; asıl konu unutuluyor; dışlanan arkadaş yine görünmüyor.",
    "k": [
     [
      "Tartışma",
      0.03,
-     0.438
+     0.468
     ],
     [
      "büyüyor;",
-     0.438,
-     0.845
+     0.468,
+     0.905
     ],
     [
      "asıl",
-     1.185,
-     1.541
+     1.06,
+     1.354
     ],
     [
      "konu",
-     1.541,
-     1.898
+     1.354,
+     1.649
     ],
     [
-     "unutuluyor",
-     1.898,
-     2.789
+     "unutuluyor;",
+     1.649,
+     2.385
     ],
     [
-     "ve",
-     2.789,
-     2.967
+     "dışlanan",
+     2.825,
+     3.284
     ],
     [
-     "arkadaşın",
-     2.967,
-     3.68
+     "arkadaş",
+     3.284,
+     3.744
     ],
     [
      "yine",
-     3.68,
-     4.036
+     3.744,
+     4.05
     ],
     [
-     "yalnız",
-     4.036,
-     4.393
-    ],
-    [
-     "kalıyor.",
-     4.393,
-     4.927
+     "görünmüyor.",
+     4.05,
+     4.662
     ]
    ]
   },

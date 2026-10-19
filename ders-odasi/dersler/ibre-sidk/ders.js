@@ -24,7 +24,7 @@ DO.dersKaydet(
      "huy": "Sıdk",
      "huyAnahtar": "Sıdk",
      "olculen": "Sözümle davranışım arasındaki uyum",
-     "kanca": "Kime ne sorduysa, istediğini söyledim.",
+     "kanca": "Herkesle konuştum, kimseyi kırmadım.",
      "uclar": {
       "az": "İkiyüzlülük",
       "orta": "Sıdk",
@@ -37,7 +37,7 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Sıdk",
-     "cumle": "Kime ne sorduysa, istediğini söyledim.",
+     "cumle": "Herkesle konuştum, kimseyi kırmadım.",
      "uclar": {
       "az": "İkiyüzlülük",
       "orta": "Sıdk",
@@ -46,7 +46,7 @@ DO.dersKaydet(
      "yesil": 0.26,
      "hedefZon": "az",
      "aciklama": [
-      "Bu cümle bilerek çift anlamlı. Bir okumada kişi herkese hoşuna gidecek farklı şeyler söylüyor: sol uca (İkiyüzlülük) yakın. Başka okumada kişi kime ne sorulduysa gerçek düşüncesini söylüyor: orta uca yakın. İki okuma da savunulabilir.",
+      "Bu cümle bilerek çift anlamlı. Bir okumada kişi herkese hoşuna gidecek şeyler söylediği için kimseyi kırmamış: sol uca (İkiyüzlülük) yakın. Başka okumada kişi doğruyu nazikçe söylediği için kimseyi kırmamış: orta uca yakın. İki okuma da savunulabilir.",
       "İbre cümleye değil, sözümüzle içimizin uyumuna bakar. Sıdk; dürüst olmak, yalan söylememek ve göründüğümüz gibi olmaktır. İkiyüzlülük, kaynak listede Nifâk diye geçer; yüzüne başka, arkasından başka konuşmaktır. Doğruyu söylemek için kırıcı olmak gerekmez; patavatsızlık, sözü hiç tartmadan söylemektir.",
       "Küçük not: tefrit = eksik uç, fazilet = ortadaki güzel huy, ifrat = taşkın uç."
      ],
@@ -385,33 +385,28 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 2.729,
-   "m": "Kime ne sorduysa, istediğini söyledim.",
+   "sure": 2.125,
+   "m": "Herkesle konuştum, kimseyi kırmadım.",
    "k": [
     [
-     "Kime",
+     "Herkesle",
      0.03,
-     0.442
+     0.468
     ],
     [
-     "ne",
-     0.442,
-     0.647
+     "konuştum,",
+     0.468,
+     0.905
     ],
     [
-     "sorduysa,",
-     0.647,
-     1.265
+     "kimseyi",
+     1.105,
+     1.58
     ],
     [
-     "istediğini",
-     1.46,
-     2.209
-    ],
-    [
-     "söyledim.",
-     2.209,
-     2.659
+     "kırmadım.",
+     1.58,
+     2.055
     ]
    ]
   },
@@ -1882,133 +1877,118 @@ DO.dersKaydet(
   },
   "t2": {
    "d": "ses/t2.m4a",
-   "sure": 9.299,
-   "m": "Bu cümle bilerek çift anlamlı. Herkese hoşuna gideni söyleyen biri diyorsa sol uca yakın. Sorulan her şeye gerçek düşüncesini söyleyen biri diyorsa orta uca yakın.",
+   "sure": 8.636,
+   "m": "Bu cümle bilerek çift anlamlı. Herkese hoşuna gideni söyleyen biri diyorsa sol uca yakın. Doğruyu nazikçe söyleyen biri diyorsa orta uca yakın.",
    "k": [
     [
      "Bu",
      0.03,
-     0.171
+     0.175
     ],
     [
      "cümle",
-     0.171,
-     0.452
+     0.175,
+     0.465
     ],
     [
      "bilerek",
-     0.452,
-     0.873
+     0.465,
+     0.9
     ],
     [
      "çift",
-     0.873,
-     1.014
+     0.9,
+     1.045
     ],
     [
      "anlamlı.",
-     1.014,
-     1.435
+     1.045,
+     1.48
     ],
     [
      "Herkese",
-     1.845,
-     2.234
+     1.85,
+     2.257
     ],
     [
      "hoşuna",
-     2.234,
-     2.624
+     2.257,
+     2.664
     ],
     [
      "gideni",
-     2.624,
-     3.013
+     2.664,
+     3.071
     ],
     [
      "söyleyen",
-     3.013,
-     3.402
+     3.071,
+     3.478
     ],
     [
      "biri",
-     3.402,
-     3.662
+     3.478,
+     3.75
     ],
     [
      "diyorsa",
-     3.662,
-     4.051
+     3.75,
+     4.157
     ],
     [
      "sol",
-     4.051,
-     4.181
+     4.157,
+     4.292
     ],
     [
      "uca",
-     4.181,
-     4.44
+     4.292,
+     4.564
     ],
     [
      "yakın.",
-     4.44,
-     4.7
+     4.564,
+     4.835
     ],
     [
-     "Sorulan",
-     5.045,
-     5.51
+     "Doğruyu",
+     5.305,
+     5.794
     ],
     [
-     "her",
-     5.51,
-     5.665
-    ],
-    [
-     "şeye",
-     5.665,
-     5.975
-    ],
-    [
-     "gerçek",
-     5.975,
-     6.285
-    ],
-    [
-     "düşüncesini",
-     6.285,
-     7.06
+     "nazikçe",
+     5.794,
+     6.283
     ],
     [
      "söyleyen",
-     7.06,
-     7.525
+     6.283,
+     6.772
     ],
     [
      "biri",
-     7.525,
-     7.835
+     6.772,
+     7.099
     ],
     [
      "diyorsa",
-     7.835,
-     8.3
+     7.099,
+     7.588
     ],
     [
      "orta",
-     8.3,
-     8.61
+     7.588,
+     7.914
     ],
     [
      "uca",
-     8.61,
-     8.919
+     7.914,
+     8.24
     ],
     [
      "yakın.",
-     8.919,
-     9.229
+     8.24,
+     8.566
     ]
    ]
   },

@@ -1310,3 +1310,14 @@ html.light .gvc-go { color: #4f46e5; }
 .gvc-card:hover .gvc-go svg { transform: translateX(4px); }
 @media (max-width: 1000px) { .gvc-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .gvc-grid { grid-template-columns: 1fr; } }
+
+.gvc-story { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 28px; text-decoration: none; color: var(--text); border-radius: 22px; background: linear-gradient(135deg, rgba(244,114,182,.14), rgba(167,139,250,.12) 50%, rgba(34,211,238,.1)); border: 1px solid var(--nt-glass-border); transition: transform .3s, box-shadow .3s, border-color .3s; }
+.gvc-story:hover { transform: translateY(-4px); border-color: rgba(167,139,250,.45); box-shadow: 0 22px 44px -22px rgba(167,139,250,.6); }
+.gvc-story-tx { max-width: 480px; }
+.gvc-story-tag { display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; color: #f472b6; background: rgba(244,114,182,.14); border: 1px solid rgba(244,114,182,.3); margin-bottom: 10px; }
+.gvc-story h3 { font-size: 1.3rem; font-weight: 800; letter-spacing: -.02em; margin: 0 0 6px; }
+.gvc-story p { font-size: .88rem; line-height: 1.6; color: var(--text-secondary); margin: 0 0 10px; }
+.gvc-story-vis { display: flex; align-items: center; gap: 0; flex-wrap: wrap; justify-content: flex-end; }
+.gvc-story-vis span { --c: #888; display: inline-flex; align-items: center; gap: 8px; font-size: .76rem; font-weight: 700; color: var(--text-secondary); padding: 8px 12px 8px 8px; border-radius: 100px; background: var(--nt-glass); border: 1px solid var(--nt-glass-border); margin: 4px; }
+.gvc-story-vis i { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-size: .66rem; font-weight: 800; color: #fff; background: var(--c); box-shadow: 0 0 10px var(--c); }
+@media (max-width: 800px) { .gvc-story { flex-direction: column; align-items: flex-start; } .gvc-story-vis { justify-content: flex-start; } }

@@ -28,36 +28,42 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Ailede edeb, tatlı dil ve güzel nasihatle başlar."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "İhtiyaçları helal yoldan karşılamak sorumluluktur."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Kızınca kırıcı söz ve şiddetten uzak durulur."
     },
     {
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Aile sırrı dışarıda anlatılmaz."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Evde güler yüz huzuru artırır."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "En yakınlarımızı incitmemek de edeptir."
     },
     {

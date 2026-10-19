@@ -68,7 +68,7 @@ DO.dersKaydet(
       {
        "zon": "az",
        "soru": "Söylenmesi gerekeni söylememek neye benziyor?",
-       "ad": "Sükût-u-Hakk",
+       "ad": "Sükût-u Hakk",
        "soz": "Söylersem başıma iş açılır, susayım.",
        "eylem": "yaslan",
        "zincir": [
@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": true,
           "not": "Sükût-u Hakk, söylenmesi gereken yerde susmaktır. Zor geliyorsa güvendiğin bir büyüğe söylemek de bir yoldur."
          },
@@ -96,7 +96,7 @@ DO.dersKaydet(
         ]
        },
        "anahtar": {
-        "ad": "Sükût-u-Hakk",
+        "ad": "Sükût-u",
         "soz": "Söylersem"
        },
        "zincirAnahtar": [
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Gıybet, birinin kusurunu o yokken konuşmaktır. Biri zarar görüyorsa, yardım için güvendiğin bir büyüğe anlatmak başka şeydir."
          },
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: sükût-u hakkın sesi."
          },
@@ -147,7 +147,7 @@ DO.dersKaydet(
        "zon": "orta",
        "soru": "Doğru ayar neye benziyor?",
        "ad": "Hikmetli söz",
-       "soz": "Söz yerinde olsun: ona söyleyeyim, arkasından değil.",
+       "soz": "Ona söyleyeyim, arkasından değil; sözüm yerinde olsun.",
        "eylem": "konus",
        "zincir": [
         "Arkadaşı hatasını öğrenir.",
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Hikmetli Beyân, yerinde ve faydalı söz söylemektir. Gerektiğinde doğruyu söyler, gerekmediğinde arkadan konuşmaz."
          },
          {
-          "m": "Söylersem başıma iş açılır, susayım.",
+          "m": "Söylersem sorun çıkar, belki bana kızarlar; susayım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: sükût-u hakkın sesi."
          },
@@ -175,7 +175,7 @@ DO.dersKaydet(
        },
        "anahtar": {
         "ad": "Hikmetli",
-        "soz": "Söz"
+        "soz": "Ona"
        },
        "zincirAnahtar": [
         "Arkadaşı",
@@ -707,83 +707,88 @@ DO.dersKaydet(
   },
   "kaz1": {
    "d": "ses/kaz1.m4a",
-   "sure": 8.957,
-   "m": "Sol uçta Sükût-u-Hakk. Söylersem başıma iş açılır, susayım. Haksızlığa tanık olur ama korkudan ses çıkarmaz.",
+   "sure": 9.091,
+   "m": "Sol uçta Sükût-u Hakk. Söylersem başıma iş açılır, susayım. Haksızlığa tanık olur ama korkudan ses çıkarmaz.",
    "k": [
     [
      "Sol",
      0.03,
-     0.284
+     0.244
     ],
     [
      "uçta",
-     0.284,
-     0.793
+     0.244,
+     0.671
     ],
     [
-     "Sükût-u-Hakk.",
-     0.793,
-     1.81
+     "Sükût-u",
+     0.671,
+     1.311
+    ],
+    [
+     "Hakk.",
+     1.311,
+     1.525
     ],
     [
      "Söylersem",
-     1.96,
-     2.679
+     1.64,
+     2.318
     ],
     [
      "başıma",
-     2.679,
-     3.397
+     2.318,
+     2.996
     ],
     [
      "iş",
-     3.397,
-     3.637
+     2.996,
+     3.222
     ],
     [
      "açılır,",
-     3.637,
-     4.355
+     3.222,
+     3.9
     ],
     [
      "susayım.",
-     4.54,
-     5.02
+     4.205,
+     4.67
     ],
     [
      "Haksızlığa",
-     5.72,
-     6.465
+     5.49,
+     6.321
     ],
     [
      "tanık",
-     6.465,
-     6.838
+     6.321,
+     6.736
     ],
     [
      "olur",
-     6.838,
-     7.21
+     6.736,
+     7.151
     ],
     [
      "ama",
-     7.21,
-     7.583
+     7.151,
+     7.567
     ],
     [
      "korkudan",
-     7.583,
-     8.142
+     7.567,
+     8.19
     ],
     [
      "ses",
-     8.142,
-     8.328
+     8.19,
+     8.398
     ],
     [
      "çıkarmaz.",
-     8.328,
-     8.887
+     8.398,
+     9.021
     ]
    ]
   },
@@ -1089,103 +1094,103 @@ DO.dersKaydet(
   },
   "kor1": {
    "d": "ses/kor1.m4a",
-   "sure": 10.898,
-   "m": "Tam kararında Hikmetli söz. Söz yerinde olsun: ona söyleyeyim, arkasından değil. Kusuru arkasından konuşmaz; gerekince doğru kişiye güzelce söyler.",
+   "sure": 10.001,
+   "m": "Tam kararında Hikmetli söz. Ona söyleyeyim, arkasından değil; sözüm yerinde olsun. Kusuru arkasından konuşmaz; gerekince doğru kişiye güzelce söyler.",
    "k": [
     [
      "Tam",
      0.03,
-     0.248
+     0.212
     ],
     [
      "kararında",
-     0.248,
-     1.122
+     0.212,
+     0.938
     ],
     [
      "Hikmetli",
-     1.122,
-     1.777
+     0.938,
+     1.483
     ],
     [
      "söz.",
-     1.777,
-     1.995
+     1.483,
+     1.665
     ],
     [
-     "Söz",
-     2.535,
-     2.708
-    ],
-    [
-     "yerinde",
-     2.708,
-     3.225
-    ],
-    [
-     "olsun:",
-     3.225,
-     3.57
-    ],
-    [
-     "ona",
-     3.96,
-     4.175
+     "Ona",
+     1.835,
+     2.15
     ],
     [
      "söyleyeyim,",
-     4.175,
-     4.605
+     2.15,
+     2.78
     ],
     [
      "arkasından",
-     4.875,
-     5.465
+     2.965,
+     3.542
     ],
     [
-     "değil.",
-     5.465,
-     5.76
+     "değil;",
+     3.542,
+     3.83
+    ],
+    [
+     "sözüm",
+     4.03,
+     4.409
+    ],
+    [
+     "yerinde",
+     4.409,
+     4.976
+    ],
+    [
+     "olsun.",
+     4.976,
+     5.355
     ],
     [
      "Kusuru",
-     6.375,
-     6.861
+     5.67,
+     6.18
     ],
     [
      "arkasından",
-     6.861,
-     7.509
+     6.18,
+     6.86
     ],
     [
      "konuşmaz;",
-     7.509,
-     7.995
+     6.86,
+     7.37
     ],
     [
      "gerekince",
-     8.185,
-     8.94
+     7.74,
+     8.366
     ],
     [
      "doğru",
-     8.94,
-     9.318
+     8.366,
+     8.679
     ],
     [
      "kişiye",
-     9.318,
-     9.884
+     8.679,
+     9.149
     ],
     [
      "güzelce",
-     9.884,
-     10.451
+     9.149,
+     9.618
     ],
     [
      "söyler.",
-     10.451,
-     10.828
+     9.618,
+     9.931
     ]
    ]
   },

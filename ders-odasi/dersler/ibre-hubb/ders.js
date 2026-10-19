@@ -200,27 +200,27 @@ DO.dersKaydet(
      "senaryolar": [
       {
        "id": "alay",
-       "baslik": "Alaycı gülüşme",
-       "tetik": "Arkadaş grubunda biri, sınıftaki bir arkadaşıyla alay etmeye başladı. Herkes gülüyor.",
+       "baslik": "Hileli oyun",
+       "tetik": "Arkadaş grubunda biri, oyunda hile yapmayı öneriyor ve herkes “olur” diyor.",
        "secenekler": [
         {
          "m": "Bugün kimseyle olmak istemem; bir köşeye çekilirim.",
          "zon": "az",
-         "sonuc": "Yalnız kalıyorsun; alay edilen arkadaş da yalnız kalıyor.",
+         "sonuc": "Yalnız kalıyorsun; oyun da sensiz sürüyor.",
          "not": "İbre sola kaydı: içe çekilmek rahat gelebilir ama yardım etmeyi zorlaştırır; güvendiğin biriyle konuşmak iyi gelir.",
          "ses": "s1az"
         },
         {
-         "m": "Ben de gülerim, popüler kalırım.",
+         "m": "Ben de “olur” derim, popüler kalırım.",
          "zon": "fazla",
-         "sonuc": "Alay büyüyor; kırılan arkadaş daha yalnız kalıyor.",
+         "sonuc": "Hile başlıyor; oyun adil olmaktan çıkıyor.",
          "not": "İbre sağa kaydı: popüler kalmak için yanlışa katılmak, dostluğu değil çıkarı korur.",
          "ses": "s1fa"
         },
         {
-         "m": "Gülmem; arkadaşımı severim ama bu davranış doğru değil derim.",
+         "m": "Katılmam; arkadaşımı severim ama bu davranış doğru değil derim.",
          "zon": "orta",
-         "sonuc": "Grup sessizleşiyor; kırılan arkadaş yalnız olmadığını görüyor.",
+         "sonuc": "Grup sessizleşiyor; oyun adil kalıyor ve kimse dışlanmıyor.",
          "not": "İbre ortada: arkadaşı sevip yanlış davranışı sevmemek.",
          "ses": "s1or"
         }
@@ -1275,204 +1275,194 @@ DO.dersKaydet(
   },
   "s1": {
    "d": "ses/s1.m4a",
-   "sure": 5.354,
-   "m": "Arkadaş grubunda biri, sınıftaki bir arkadaşıyla alay etmeye başladı. Herkes gülüyor. Ne yaparsın?",
+   "sure": 5.317,
+   "m": "Arkadaş grubunda biri, oyunda hile yapmayı öneriyor ve herkes olur diyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaş",
      0.03,
-     0.418
+     0.816
     ],
     [
      "grubunda",
-     0.418,
-     0.805
+     0.816,
+     1.601
     ],
     [
      "biri,",
-     0.805,
-     1.064
+     1.601,
+     2.125
     ],
     [
-     "sınıftaki",
-     1.064,
-     1.581
+     "oyunda",
+     2.205,
+     2.557
     ],
     [
-     "bir",
-     1.581,
-     1.71
+     "hile",
+     2.557,
+     2.792
     ],
     [
-     "arkadaşıyla",
-     1.71,
-     2.356
+     "yapmayı",
+     2.792,
+     3.144
     ],
     [
-     "alay",
-     2.356,
-     2.615
+     "öneriyor",
+     3.144,
+     3.613
     ],
     [
-     "etmeye",
-     2.615,
-     3.002
+     "ve",
+     3.613,
+     3.731
     ],
     [
-     "başladı.",
-     3.002,
-     3.39
+     "herkes",
+     3.731,
+     3.966
     ],
     [
-     "Herkes",
-     3.775,
-     4.115
+     "olur",
+     3.966,
+     4.2
     ],
     [
-     "gülüyor.",
-     4.115,
-     4.625
+     "diyor.",
+     4.2,
+     4.435
     ],
     [
      "Ne",
-     4.77,
-     4.898
+     4.66,
+     4.807
     ],
     [
      "yaparsın?",
-     4.898,
-     5.284
+     4.807,
+     5.247
     ]
    ]
   },
   "s1az": {
    "d": "ses/s1az.m4a",
-   "sure": 3.659,
-   "m": "Yalnız kalıyorsun; alay edilen arkadaş da yalnız kalıyor.",
+   "sure": 3.032,
+   "m": "Yalnız kalıyorsun; oyun da sensiz sürüyor.",
    "k": [
     [
      "Yalnız",
      0.03,
-     0.322
+     0.437
     ],
     [
      "kalıyorsun;",
-     0.322,
-     0.905
+     0.437,
+     1.25
     ],
     [
-     "alay",
-     1.405,
-     1.717
-    ],
-    [
-     "edilen",
-     1.717,
-     2.185
-    ],
-    [
-     "arkadaş",
-     2.185,
-     2.653
+     "oyun",
+     1.46,
+     1.836
     ],
     [
      "da",
-     2.653,
-     2.809
+     1.836,
+     2.023
     ],
     [
-     "yalnız",
-     2.809,
-     3.121
+     "sensiz",
+     2.023,
+     2.399
     ],
     [
-     "kalıyor.",
-     3.121,
-     3.589
+     "sürüyor.",
+     2.399,
+     2.962
     ]
    ]
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 3.766,
-   "m": "Alay büyüyor; kırılan arkadaş daha yalnız kalıyor.",
+   "sure": 3.363,
+   "m": "Hile başlıyor; oyun adil olmaktan çıkıyor.",
    "k": [
     [
-     "Alay",
+     "Hile",
      0.03,
-     0.432
+     0.448
     ],
     [
-     "büyüyor;",
-     0.432,
-     1.035
+     "başlıyor;",
+     0.448,
+     1.075
     ],
     [
-     "kırılan",
-     1.36,
-     1.899
+     "oyun",
+     1.375,
+     1.759
     ],
     [
-     "arkadaş",
-     1.899,
-     2.438
+     "adil",
+     1.759,
+     2.142
     ],
     [
-     "daha",
-     2.438,
-     2.797
+     "olmaktan",
+     2.142,
+     2.718
     ],
     [
-     "yalnız",
-     2.797,
-     3.157
-    ],
-    [
-     "kalıyor.",
-     3.157,
-     3.696
+     "çıkıyor.",
+     2.718,
+     3.293
     ]
    ]
   },
   "s1or": {
    "d": "ses/s1or.m4a",
-   "sure": 3.458,
-   "m": "Grup sessizleşiyor; kırılan arkadaş yalnız olmadığını görüyor.",
+   "sure": 3.895,
+   "m": "Grup sessizleşiyor; oyun adil kalıyor ve kimse dışlanmıyor.",
    "k": [
     [
      "Grup",
      0.03,
-     0.189
+     0.197
     ],
     [
      "sessizleşiyor;",
-     0.189,
-     0.985
+     0.197,
+     1.035
     ],
     [
-     "kırılan",
-     1.27,
-     1.667
+     "oyun",
+     1.325,
+     1.682
     ],
     [
-     "arkadaş",
-     1.667,
-     2.064
+     "adil",
+     1.682,
+     2.039
     ],
     [
-     "yalnız",
-     2.064,
-     2.329
+     "kalıyor",
+     2.039,
+     2.575
     ],
     [
-     "olmadığını",
-     2.329,
-     2.991
+     "ve",
+     2.575,
+     2.753
     ],
     [
-     "görüyor.",
-     2.991,
-     3.388
+     "kimse",
+     2.753,
+     3.111
+    ],
+    [
+     "dışlanmıyor.",
+     3.111,
+     3.825
     ]
    ]
   },

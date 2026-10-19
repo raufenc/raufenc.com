@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Panikle koşturan kişi neyi kaçırır?",
+       "soru": "Panikle koşturan kişi işi nasıl bozar?",
        "ad": "Telaş",
        "soz": "Hepsini şimdi, hemen bitirmeliyim!",
        "eylem": "isaret",
@@ -475,7 +475,7 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Başlamak zor gelince önce on beş dakikayla başlar, sonra devam eder.",
+       "metin": "Başlamak zor gelince önce küçük bir adımla başlar, sonra devam eder.",
        "alan": "orta",
        "ipucu": "Küçük bir başlangıç yapıyor."
       }
@@ -498,7 +498,7 @@ DO.dersKaydet(
       {
        "soru": "Bu hafta şunu deneyeceğim:",
        "secenekler": [
-        "Bir işe bugün on beş dakikayla başlayacağım",
+        "Bir işe bugün küçük bir adımla başlayacağım",
         "Büyük işi küçük parçalara bölüp günlere yayacağım",
         "Yapılacakları sıraya koyup bir tanesiyle başlayacağım"
        ]

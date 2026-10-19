@@ -24,7 +24,7 @@ DO.dersKaydet(
      "huy": "Şecâat",
      "huyAnahtar": "Şecâat",
      "olculen": "Tehlike karşısında hareket biçimim",
-     "kanca": "Korkmuyorum, bakalım ne olacak.",
+     "kanca": "Korkuyorum ama bakalım ne olacak.",
      "uclar": {
       "az": "Cübn",
       "orta": "Şecâat",
@@ -37,7 +37,7 @@ DO.dersKaydet(
      "id": "tahmin",
      "tur": "ibreTahmin",
      "huy": "Şecâat",
-     "cumle": "Korkmuyorum, bakalım ne olacak.",
+     "cumle": "Korkuyorum ama bakalım ne olacak.",
      "uclar": {
       "az": "Cübn",
       "orta": "Şecâat",
@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Düşünmeden atılan kişi neyi kaçırır?",
+       "soru": "Düşünmeden atılan kişi neyi riske atar?",
        "ad": "Tehevvür",
        "soz": "Ben hallederim, hiçbir şey olmaz!",
        "eylem": "isaret",
@@ -385,28 +385,33 @@ DO.dersKaydet(
  "sesler": {
   "a1": {
    "d": "ses/a1.m4a",
-   "sure": 2.389,
-   "m": "Korkmuyorum, bakalım ne olacak.",
+   "sure": 3.916,
+   "m": "Korkuyorum ama bakalım ne olacak.",
    "k": [
     [
-     "Korkmuyorum,",
+     "Korkuyorum",
      0.03,
-     0.85
+     1.204
+    ],
+    [
+     "ama",
+     1.204,
+     1.791
     ],
     [
      "bakalım",
-     1.06,
-     1.6
+     1.791,
+     2.672
     ],
     [
      "ne",
-     1.6,
-     1.78
+     2.672,
+     2.965
     ],
     [
      "olacak.",
-     1.78,
-     2.319
+     2.965,
+     3.846
     ]
    ]
   },

@@ -28,18 +28,21 @@ DO.dersKaydet(
      "id": "s01",
      "tur": "slayt",
      "gorsel": "slayt/01.webp",
+     "ses": "ses/s01.mp3",
      "metin": "Düzenli gün, düzenli geceden başlar."
     },
     {
      "id": "s02",
      "tur": "slayt",
      "gorsel": "slayt/02.webp",
+     "ses": "ses/s02.mp3",
      "metin": "Yatmadan önce dua ve tevbe kalbi toparlar."
     },
     {
      "id": "s03",
      "tur": "slayt",
      "gorsel": "slayt/03.webp",
+     "ses": "ses/s03.mp3",
      "metin": "Geç yatmak, sabahı zorlaştırır."
     },
     {
@@ -89,18 +92,21 @@ DO.dersKaydet(
      "id": "s04",
      "tur": "slayt",
      "gorsel": "slayt/04.webp",
+     "ses": "ses/s04.mp3",
      "metin": "Sabah için alarm kurmak sorumluluktur."
     },
     {
      "id": "s05",
      "tur": "slayt",
      "gorsel": "slayt/05.webp",
+     "ses": "ses/s05.mp3",
      "metin": "Abdestli ve huzurlu uyumaya çalışırız."
     },
     {
      "id": "s06",
      "tur": "slayt",
      "gorsel": "slayt/06.webp",
+     "ses": "ses/s06.mp3",
      "metin": "Uyku, ertesi güne hazırlıktır."
     },
     {

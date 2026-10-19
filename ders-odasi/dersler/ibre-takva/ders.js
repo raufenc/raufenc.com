@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Canının istediğini hemen yapan kişi neyi kaçırır?",
+       "soru": "Canının istediğini hemen yapan kişi neye zarar verir?",
        "ad": "Hevâ",
        "soz": "Canım çekti, yaparım; doğru mu yanlış mı düşünmem!",
        "eylem": "isaret",
@@ -229,28 +229,28 @@ DO.dersKaydet(
       },
       {
        "id": "soz",
-       "baslik": "Arkadaş sohbeti",
-       "tetik": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da “Sen ne dersin?” diye soruyor.",
+       "baslik": "İzinsiz almak",
+       "tetik": "Arkadaşların bir şeyi izinsiz almaya çağırıyor ve sana da “Sen ne dersin?” diye soruyor.",
        "secenekler": [
         {
-         "m": "Güzel sohbetler bile tehlikeli; hiçbirine katılmam.",
+         "m": "Arkadaşlarım bile tehlikeli; hiçbirinin yanında durmam.",
          "zon": "az",
-         "sonuc": "Arkadaşlarından uzaklaşıyorsun; sohbetlerin güzel yanları da kaçıyor.",
-         "not": "İbre sola kaydı: konuşmaktan büsbütün kaçmak, güzel konuşmayı da engeller.",
+         "sonuc": "Arkadaşlarından uzaklaşıyorsun; güzel anlar da kaçıyor.",
+         "not": "İbre sola kaydı: her şeyden kaçmak, güzel arkadaşlığı da engeller.",
          "ses": "s2az"
         },
         {
-         "m": "Ben de canım ne isterse söylerim, ne çıkar ki!",
+         "m": "Canım isterse alırım, ne çıkar ki!",
          "zon": "fazla",
-         "sonuc": "Söz ağızdan çıkınca arkadaşın üzülüyor; sen de pişman oluyorsun.",
-         "not": "İbre sağa kaydı: aklına gelen her şeyi söylemek, birini kırabilir.",
+         "sonuc": "Başkasının şeyini izinsiz alınca sahibi üzülüyor; sen de pişman oluyorsun.",
+         "not": "İbre sağa kaydı: canı isteyeni hemen yapmak, birini üzebilir.",
          "ses": "s2fa"
         },
         {
-         "m": "Katılmam; nazikçe konuyu değiştiririm, kimseyi üzmem.",
+         "m": "Katılmam; izin istemenin doğru olduğunu söylerim.",
          "zon": "orta",
-         "sonuc": "Konu değişiyor; sen de arkadaşların da rahatlıyorsunuz.",
-         "not": "İbre ortada: yasak olan sözden sakındın, sohbetin tadını bozmadın.",
+         "sonuc": "Arkadaşların düşünüyor; sen de içinde rahatlıyorsun.",
+         "not": "İbre ortada: yasak olandan sakındın, arkadaşlığı da bozmadın.",
          "ses": "s2or"
         }
        ],
@@ -1558,219 +1558,219 @@ DO.dersKaydet(
   },
   "s2": {
    "d": "ses/s2.m4a",
-   "sure": 6.692,
-   "m": "Arkadaşların birinin arkasından kötü konuşuyor ve sana da Sen ne dersin? diye soruyor. Ne yaparsın?",
+   "sure": 6.354,
+   "m": "Arkadaşların bir şeyi izinsiz almaya çağırıyor ve sana da Sen ne dersin? diye soruyor. Ne yaparsın?",
    "k": [
     [
      "Arkadaşların",
      0.03,
-     0.948
+     0.873
     ],
     [
-     "birinin",
-     0.948,
-     1.499
+     "bir",
+     0.873,
+     1.042
     ],
     [
-     "arkasından",
-     1.499,
-     2.234
+     "şeyi",
+     1.042,
+     1.379
     ],
     [
-     "kötü",
-     2.234,
-     2.601
+     "izinsiz",
+     1.379,
+     1.885
     ],
     [
-     "konuşuyor",
-     2.601,
-     3.336
+     "almaya",
+     1.885,
+     2.391
+    ],
+    [
+     "çağırıyor",
+     2.391,
+     3.066
     ],
     [
      "ve",
-     3.336,
-     3.519
+     3.066,
+     3.234
     ],
     [
      "sana",
-     3.519,
-     3.887
+     3.234,
+     3.572
     ],
     [
      "da",
-     3.887,
-     4.07
+     3.572,
+     3.74
     ],
     [
      "Sen",
-     4.07,
-     4.254
+     3.74,
+     3.909
     ],
     [
      "ne",
-     4.254,
-     4.438
+     3.909,
+     4.078
     ],
     [
      "dersin?",
-     4.438,
-     4.805
+     4.078,
+     4.415
     ],
     [
      "diye",
-     5.135,
-     5.363
+     4.77,
+     4.994
     ],
     [
      "soruyor.",
-     5.363,
-     5.705
+     4.994,
+     5.33
     ],
     [
      "Ne",
-     6.075,
-     6.212
+     5.79,
+     5.913
     ],
     [
      "yaparsın?",
-     6.212,
-     6.622
+     5.913,
+     6.284
     ]
    ]
   },
   "s2az": {
    "d": "ses/s2az.m4a",
-   "sure": 3.431,
-   "m": "Arkadaşlarından uzaklaşıyorsun; sohbetlerin güzel yanları da kaçıyor.",
+   "sure": 2.921,
+   "m": "Arkadaşlarından uzaklaşıyorsun; güzel anlar da kaçıyor.",
    "k": [
     [
      "Arkadaşlarından",
      0.03,
-     0.66
+     0.763
     ],
     [
      "uzaklaşıyorsun;",
-     0.66,
-     1.29
-    ],
-    [
-     "sohbetlerin",
-     1.715,
-     2.222
+     0.763,
+     1.495
     ],
     [
      "güzel",
-     2.222,
-     2.475
+     1.9,
+     2.138
     ],
     [
-     "yanları",
-     2.475,
-     2.855
+     "anlar",
+     2.138,
+     2.376
     ],
     [
      "da",
-     2.855,
-     2.981
+     2.376,
+     2.495
     ],
     [
      "kaçıyor.",
-     2.981,
-     3.361
+     2.495,
+     2.851
     ]
    ]
   },
   "s2fa": {
    "d": "ses/s2fa.m4a",
-   "sure": 3.281,
-   "m": "Söz ağızdan çıkınca arkadaşın üzülüyor; sen de pişman oluyorsun.",
+   "sure": 4.171,
+   "m": "Başkasının şeyini izinsiz alınca sahibi üzülüyor; sen de pişman oluyorsun.",
    "k": [
     [
-     "Söz",
+     "Başkasının",
      0.03,
-     0.155
+     0.576
     ],
     [
-     "ağızdan",
-     0.155,
-     0.531
+     "şeyini",
+     0.576,
+     0.986
     ],
     [
-     "çıkınca",
-     0.531,
-     0.907
+     "izinsiz",
+     0.986,
+     1.395
     ],
     [
-     "arkadaşın",
-     0.907,
-     1.409
+     "alınca",
+     1.395,
+     1.804
+    ],
+    [
+     "sahibi",
+     1.804,
+     2.214
     ],
     [
      "üzülüyor;",
-     1.409,
-     1.91
+     2.214,
+     2.76
     ],
     [
      "sen",
-     2.125,
-     2.261
+     3.005,
+     3.142
     ],
     [
      "de",
-     2.261,
-     2.396
+     3.142,
+     3.279
     ],
     [
      "pişman",
-     2.396,
-     2.668
+     3.279,
+     3.553
     ],
     [
      "oluyorsun.",
-     2.668,
-     3.211
+     3.553,
+     4.101
     ]
    ]
   },
   "s2or": {
    "d": "ses/s2or.m4a",
-   "sure": 3.198,
-   "m": "Konu değişiyor; sen de arkadaşların da rahatlıyorsunuz.",
+   "sure": 2.899,
+   "m": "Arkadaşların düşünüyor; sen de içinde rahatlıyorsun.",
    "k": [
     [
-     "Konu",
+     "Arkadaşların",
      0.03,
-     0.237
+     0.73
     ],
     [
-     "değişiyor;",
-     0.237,
-     0.65
+     "düşünüyor;",
+     0.73,
+     1.29
     ],
     [
      "sen",
-     1.02,
-     1.171
+     1.62,
+     1.741
     ],
     [
      "de",
-     1.171,
-     1.321
+     1.741,
+     1.862
     ],
     [
-     "arkadaşların",
-     1.321,
-     2.074
+     "içinde",
+     1.862,
+     2.225
     ],
     [
-     "da",
-     2.074,
-     2.224
-    ],
-    [
-     "rahatlıyorsunuz.",
-     2.224,
-     3.128
+     "rahatlıyorsun.",
+     2.225,
+     2.829
     ]
    ]
   },

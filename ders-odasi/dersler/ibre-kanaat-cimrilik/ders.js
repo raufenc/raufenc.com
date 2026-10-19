@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Gözü doymayan kişi neyi kaçırır?",
+       "soru": "Gözü doymayan kişi neden mutlu olamaz?",
        "ad": "Tamâ‘",
        "soz": "Dolabım oyuncak dolu ama yenisini de isterim!",
        "eylem": "isaret",
@@ -366,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Kanaat",
-       "metin": "razı olup paylaşmak",
+       "metin": "razı olup şükretmek; paylaşmak",
        "ikon": "muhur",
        "renk": "#17998A"
       },

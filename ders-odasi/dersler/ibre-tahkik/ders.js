@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
+          "m": "Ailem öyle dediyse doğrudur; sormam.",
           "dogru": true,
           "not": "Taklîd, anlamadan öylece kabul etmektir. Büyüklerden öğrenmek güzeldir; sorup anlamak bilgiyi daha sağlam yapar. Sorular imana zarar vermez; anlamak onu güçlendirir."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Şekk, cevap alsa da karar verememektir. Soru sormak güzeldir; aklına takılanlar durmuyorsa bu bir kusur değildir: güvendiğin bir yetişkinle konuşmak iyi gelir."
          },
          {
-          "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
+          "m": "Ailem öyle dediyse doğrudur; sormam.",
           "dogru": false,
           "not": "Bu sol ucun sesi: taklîdin sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Tahkik, bilerek ve anlayarak inanmaktır. Soru sormak güzeldir; nedenini anlamak bilgiyi sağlamlaştırır."
          },
          {
-          "m": "Ailem öyle dediyse doğrudur; sormama gerek yok.",
+          "m": "Ailem öyle dediyse doğrudur; sormam.",
           "dogru": false,
           "not": "Bu sol ucun sesi: taklîdin sesi."
          },
@@ -321,9 +321,9 @@ DO.dersKaydet(
       },
       {
        "id": "k6",
-       "metin": "Aklına takılan soruyu not alıp güvendiği bir büyüğe götürür.",
+       "metin": "Bir şeyin nedenini kendi cümleleriyle anlatmaya çalışır, takıldığı yeri sorar.",
        "alan": "orta",
-       "ipucu": "Soruyu doğru yere taşıyor."
+       "ipucu": "Nedenini anlamaya çalışıyor."
       }
      ]
     },

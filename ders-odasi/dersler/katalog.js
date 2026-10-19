@@ -303,7 +303,7 @@ DO.katalogKaydet([
   "sira": 17,
   "huy": "Şecâat",
   "uclar": ["Cübn", "Şecâat", "Tehevvür"],
-  "kanca": "Korkmuyorum, bakalım ne olacak.",
+  "kanca": "Korkuyorum ama bakalım ne olacak.",
   "inceleme": "taslak"
  },
  {
@@ -483,7 +483,7 @@ DO.katalogKaydet([
   "sira": 27,
   "huy": "Sıdk",
   "uclar": ["İkiyüzlülük", "Sıdk", "Patavatsızlık"],
-  "kanca": "Kime ne sorduysa, istediğini söyledim.",
+  "kanca": "Herkesle konuştum, kimseyi kırmadım.",
   "inceleme": "taslak"
  },
  {
@@ -542,7 +542,7 @@ DO.katalogKaydet([
  },
  {
   "id": "ibre-tevazu-ucb",
-  "ad": "Tevazu (Küçümseme · Ucb): İbren Nerede?",
+  "ad": "Tevâzu (Küçümseme · Ucb): İbren Nerede?",
   "seri": "İbremetre",
   "kisaAd": "İbremetre",
   "durum": "oyunlu",
@@ -553,8 +553,8 @@ DO.katalogKaydet([
   "yas": "10-15 yaş",
   "aile": "benlik",
   "sira": 31,
-  "huy": "Tevazu",
-  "uclar": ["Küçümseme", "Tevazu", "Ucb"],
+  "huy": "Tevâzu",
+  "uclar": ["Küçümseme", "Tevâzu", "Ucb"],
   "kanca": "Bende özel bir şey yok.",
   "inceleme": "taslak"
  },
@@ -682,6 +682,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-sofra",
+  "sesli": true,
   "ad": "Bereketli Sofra",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -696,6 +697,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-01",
+  "sesli": true,
   "ad": "Edeb Nedir?",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -709,6 +711,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-02",
+  "sesli": true,
   "ad": "Edeb Sözleri",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -722,6 +725,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-03",
+  "sesli": true,
   "ad": "Günlük Edebler",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -735,6 +739,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-04",
+  "sesli": true,
   "ad": "Yaşlılara Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -748,6 +753,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-05",
+  "sesli": true,
   "ad": "Kapı Edebi",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -761,6 +767,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-06",
+  "sesli": true,
   "ad": "Konuşma ve Telefon Edebi",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -774,6 +781,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-07",
+  "sesli": true,
   "ad": "Yatarken ve Kalkarken Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -787,6 +795,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-08",
+  "sesli": true,
   "ad": "Sofra Edebi",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -800,6 +809,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-09",
+  "sesli": true,
   "ad": "Camide Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -813,6 +823,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-10",
+  "sesli": true,
   "ad": "Yolda, Evde ve İşte Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -826,6 +837,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-11",
+  "sesli": true,
   "ad": "Kıbleye Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -839,6 +851,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-12",
+  "sesli": true,
   "ad": "Aile Edebi",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -852,6 +865,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-evden-cikarken",
+  "sesli": true,
   "ad": "Evden Çıkarken Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -865,6 +879,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-insanlarla",
+  "sesli": true,
   "ad": "İnsanlarla Beraberken Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -878,6 +893,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-sosyal-medya",
+  "sesli": true,
   "ad": "Sosyal Medya Âdâbı",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -891,6 +907,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-yeme-icme",
+  "sesli": true,
   "ad": "Yeme ve İçme Âdâbı",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",
@@ -904,6 +921,7 @@ DO.katalogKaydet([
  },
  {
   "id": "adab-yolda",
+  "sesli": true,
   "ad": "Yolda Yürürken Edeb",
   "seri": "Âdâb-ı Muâşeret",
   "kisaAd": "Âdâb",

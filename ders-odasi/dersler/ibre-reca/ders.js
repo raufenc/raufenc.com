@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Sadece hayal kuran kişi neyi kaçırır?",
+       "soru": "Sadece hayal kuran kişi neden hedefe varamaz?",
        "ad": "Hayalcilik",
        "soz": "Yarın çok başarılı olacağım; çalışmama gerek yok.",
        "eylem": "dusun",
@@ -240,7 +240,7 @@ DO.dersKaydet(
          "ses": "s2az"
         },
         {
-         "m": "Nasıl olsa seçilirim; antrenman yapmama gerek yok.",
+         "m": "Nasıl olsa seçilirim; antrenman yapmam.",
          "zon": "fazla",
          "sonuc": "Ay dolunca hazırlıksızsın; yine seçilmiyorsun.",
          "not": "İbre sağa kaydı: çalışmadan beklemek umut değil.",

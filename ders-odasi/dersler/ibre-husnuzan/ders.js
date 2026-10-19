@@ -79,7 +79,7 @@ DO.dersKaydet(
         "soru": "Bu kişi içinden ne diyor olabilir?",
         "secenekler": [
          {
-          "m": "Herkes doğru söyler; sormama gerek yok.",
+          "m": "Herkes doğru söyler; sormadan inanırım.",
           "dogru": true,
           "not": "Saflık, iyi kötü demeden herkese inanmaktır. İyi düşünmek, kanıta bakmayı bırakmak demek değildir."
          },
@@ -123,7 +123,7 @@ DO.dersKaydet(
           "not": "Suizan, kanıt yokken kötü zannetmektir. Önce sormadan kötü sonuç çıkarmak dostluğu boşuna yorar."
          },
          {
-          "m": "Herkes doğru söyler; sormama gerek yok.",
+          "m": "Herkes doğru söyler; sormadan inanırım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },
@@ -162,7 +162,7 @@ DO.dersKaydet(
           "not": "Hüsnüzan, kanıt yokken kötü düşünmemektir. Gözü kapatmak değil; kanıt çıkarsa dikkatli davranmaktır."
          },
          {
-          "m": "Herkes doğru söyler; sormama gerek yok.",
+          "m": "Herkes doğru söyler; sormadan inanırım.",
           "dogru": false,
           "not": "Bu sol ucun sesi: saflığın sesi."
          },

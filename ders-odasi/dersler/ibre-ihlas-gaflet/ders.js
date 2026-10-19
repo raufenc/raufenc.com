@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Herkese duyurmak isteyen kişi neyi kaçırır?",
+       "soru": "Herkese duyurmak isteyen kişinin niyeti nereye kayar?",
        "ad": "Riyâ",
        "soz": "Herkes duysun, yaptığım iyiliği anlatacağım!",
        "eylem": "isaret",

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sınıf Modu — Kur'an Öğretmenim</title>
+  <meta name="description" content="Akıllı tahta ve sınıf için büyük harf kartları: 29 harf, harekeler, tenvin, cezim, şedde ve med harfleri; dokun ve dinle, sırayla okut.">
+  <meta name="theme-color" content="#0a4536">
+  <link rel="canonical" href="https://raufenc.com/kuran-ogretmenim/sinif/">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/img/logo-192.png">
+  <link rel="manifest" href="../site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:title" content="Sınıf Modu — Kur'an Öğretmenim">
+  <meta property="og:description" content="Tahtada büyük harf kartları: dokun, dinle, sırayla okut.">
+  <meta property="og:image" content="https://raufenc.com/kuran-ogretmenim/assets/img/og.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Mulish:wght@400;700;800&family=Amiri:wght@400;700&display=swap">
+  <link rel="stylesheet" href="../stil.css">
+  <style>
+    /* Sınıf modu: tek ekran, büyük kartlar, uzaktan okunur. */
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    .sinif-bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: var(--emerald-2); color: #f6f1e7; }
+    .sinif-bar .wrap { display: flex; align-items: center; gap: 12px; min-height: 64px; flex-wrap: wrap; padding-block: 8px; }
+    .sinif-bar .brand { color: #fff; }
+    .sinif-bar .brand img { width: 34px; height: 34px; }
+    .dersler { display: flex; gap: 6px; overflow-x: auto; flex: 1; min-width: 0; padding: 4px 2px; scrollbar-width: thin; }
+    .dersler button { flex: none; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.08); color: #f6f1e7; border-radius: 999px; padding: 8px 14px; font: 700 .92rem var(--font-body); cursor: pointer; white-space: nowrap; }
+    .dersler button[aria-selected="true"] { background: var(--gold-2); color: #1c2a25; border-color: var(--gold-2); }
+    .araclar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .araclar .btn { padding: 10px 16px; font-size: .92rem; }
+    .araclar .btn--ghost { color: #f6f1e7; }
+    .araclar select { border-radius: 999px; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); color: #f6f1e7; padding: 9px 12px; font: 700 .9rem var(--font-body); }
+    .araclar select option { color: #1c2a25; }
+    .sahne { flex: 1; display: flex; flex-direction: column; }
+    .sahne .wrap { width: min(1700px, 100%); padding-block: 18px 28px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+    .ders-basi { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .ders-basi h1 { font-size: clamp(1.4rem, 2.4vw, 2.1rem); }
+    .ders-basi p { color: var(--ink-2); max-width: 70ch; }
+    .ders-basi .anlat { margin-left: auto; }
+    .kartlar { --kart: 150px; display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--kart), 1fr)); gap: 12px; direction: rtl; align-content: start; }
+    .kart { direction: rtl; display: grid; place-items: center; gap: 4px; aspect-ratio: 1 / 1.05; border-radius: 22px; background: var(--card); border: 2px solid var(--line); color: var(--emerald); cursor: pointer; font-family: var(--font-arabic); font-size: clamp(2.6rem, calc(var(--kart) * .46), 7rem); line-height: 1.1; transition: transform .12s ease, border-color .12s ease, background .12s ease; -webkit-tap-highlight-color: transparent; user-select: none; }
+    .kart:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .kart.playing, .kart:active { background: var(--emerald); color: #fff; border-color: var(--emerald); }
+    .kart small { font: 800 .8rem var(--font-body); color: var(--ink-3); direction: ltr; }
+    .kart.playing small { color: rgba(255,255,255,.8); }
+    .kart.sessiz { opacity: .55; cursor: default; }
+    .kart.genis { grid-column: span 2; aspect-ratio: 2.1 / 1.05; font-size: clamp(2.2rem, calc(var(--kart) * .36), 5rem); }
+    .alt { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); font-size: .92rem; }
+    .alt .legend { display: flex; gap: 8px 16px; flex-wrap: wrap; }
+    .alt kbd { font: 700 .8rem var(--font-body); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; color: var(--ink); }
+    .boyut { display: inline-flex; align-items: center; gap: 6px; }
+    .boyut input { width: 120px; accent-color: var(--emerald); }
+    .anlatici { position: fixed; left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 12px 16px; display: none; align-items: center; gap: 12px; max-width: 760px; margin-inline: auto; }
+    .anlatici.open { display: flex; }
+    .anlatici audio { flex: 1; min-width: 0; height: 40px; }
+    @media (max-width: 760px) { .ders-basi .anlat { margin-left: 0; } .kartlar { --kart: 110px; } }
+    @media (min-width: 1600px) { .kartlar { gap: 16px; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#kartlar">Kartlara geç</a>
+  <header class="sinif-bar">
+    <div class="wrap">
+      <a class="brand" href="../" aria-label="Kur'an Öğretmenim giriş sayfası"><img src="../assets/img/logo-64.png" width="34" height="34" alt=""><span>Sınıf Modu</span></a>
+      <nav class="dersler" id="dersler" role="tablist" aria-label="Dersler"></nav>
+      <div class="araclar">
+        <select id="hiz" aria-label="Sırayla okuma hızı">
+          <option value="2600">Yavaş</option>
+          <option value="1800" selected>Normal</option>
+          <option value="1200">Hızlı</option>
+        </select>
+        <button class="btn btn--gold" id="sirayla" type="button">Sırayla oku</button>
+        <button class="btn btn--ghost" id="tamEkran" type="button">Tam ekran</button>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Açık ve koyu görünüm arasında geçiş yap">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="sahne" id="ana">
+    <div class="wrap">
+      <div class="ders-basi">
+        <div>
+          <h1 id="dersAdi">Harfler</h1>
+          <p id="dersAciklama">Harfe dokun, sesini duy. Elifba sağdan sola okunur.</p>
+        </div>
+        <button class="btn btn--line anlat" id="anlatBtn" type="button" hidden>Dersi dinle</button>
+      </div>
+      <div class="kartlar" id="kartlar" aria-live="off"></div>
+      <div class="alt">
+        <span class="boyut"><label for="kartBoyut">Kart boyutu</label><input type="range" id="kartBoyut" min="90" max="260" value="150" step="10"></span>
+        <span class="legend"><span><kbd>←</kbd> <kbd>→</kbd> harf değiştir</span><span><kbd>Boşluk</kbd> oku</span><span><kbd>Esc</kbd> durdur</span></span>
+      </div>
+    </div>
+  </main>
+
+  <div class="anlatici" id="anlatici">
+    <strong>Ders anlatımı</strong>
+    <audio id="anlatSes" controls preload="none"></audio>
+    <button class="btn btn--line" id="anlatKapat" type="button">Kapat</button>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    var SES = '../app/assets/assets/sounds/';
+    var root = document.documentElement;
+    try { var t = localStorage.getItem('ko-theme'); if (t === 'dark' || t === 'light') root.setAttribute('data-theme', t); } catch (e) {}
+    document.getElementById('themeBtn').addEventListener('click', function () {
+      var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+      root.setAttribute('data-theme', dark ? 'light' : 'dark');
+      try { localStorage.setItem('ko-theme', dark ? 'light' : 'dark'); } catch (e) {}
+    });
+
+    var ACIKLAMA = {
+      'Harfler': 'Harfe dokun, sesini duy. Elifba sağdan sola okunur; kalın harfler kalın, ince harfler ince okunur.',
+      'Üstün': 'Üstün, harfin üstündeki eğik çizgi: ince harfler e, kalın harfler a sesi verir.',
+      'Esre': 'Esre, harfin altındaki eğik çizgi: harfi i sesiyle okutur.',
+      'Ötre': 'Ötre, harfin üstündeki küçük vav: harfi u sesiyle okutur.',
+      'İki Üstün': 'İki üstün (üstün tenvin): en ve an sesi; yalnız kelime sonunda.',
+      'İki Esre': 'İki esre (esre tenvin): in ve ın sesi.',
+      'İki Ötre': 'İki ötre (ötre tenvin): ün ve un sesi.',
+      'Cezim': 'Cezimli harf harekesiz okunur, önceki harfe katılır: eb, et, es.',
+      'Şedde': 'Şeddeli harf iki kez okunur; önce cezimli, sonra harekeli: ebbe, ette.',
+      'Asar': 'Dik üstün: üstün gibi okunur, ses bir elif miktarı uzar.',
+      'Çeker': 'Dik esre: esre gibi okunur, ses bir elif miktarı uzar.',
+      'Med Harfleri': 'Elif, vav ve ya sesi uzatır: bâ, bî, bû.',
+      'Zamir': 'Kelime sonundaki he, önceki harf harekeli ise uzatılır: lehû, bihî.',
+      'Lafzatullah': 'Allah lafzı, önceki harfin harekesine göre kalın veya ince okunur.',
+      'و ve ى şeklinde yazılan elif': 'Vav ve ya şeklinde yazılan elif okunmaz, yalnız uzatır: salât, zekât.',
+      'Huruf-u Mukattaa': 'Bazı sûrelerin başındaki bu harfler isimleriyle, uzatılarak okunur.'
+    };
+
+    var dersler = [], aktif = 0, kartlar = [], siraIdx = -1, siraZaman = null, calan = null;
+    var player = new Audio(); player.preload = 'auto';
+    var kartlarEl = document.getElementById('kartlar'), tabsEl = document.getElementById('dersler');
+
+    function cal(i) {
+      var k = kartlar[i]; if (!k || !k.ses) return;
+      if (calan) calan.el.classList.remove('playing');
+      calan = k; k.el.classList.add('playing');
+      player.pause(); player.src = SES + k.dir + '/' + encodeURIComponent(k.ses) + '.mp3';
+      var p = player.play(); if (p && p.catch) p.catch(function () {});
+    }
+    player.addEventListener('ended', function () {
+      if (calan) calan.el.classList.remove('playing');
+      if (siraIdx >= 0) {
+        var bekle = parseInt(document.getElementById('hiz').value, 10) - 1000;
+        siraZaman = setTimeout(function () { ileri(); }, Math.max(300, bekle));
+      }
+    });
+    player.addEventListener('error', function () { if (calan) calan.el.classList.remove('playing'); if (siraIdx >= 0) ileri(); });
+
+    function ileri() {
+      var n = kartlar.length; if (!n) return;
+      var j = siraIdx; var tur = 0;
+      do { j = (j + 1) % n; tur++; } while (!kartlar[j].ses && tur <= n);
+      siraIdx = j; cal(j); kartlar[j].el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      if (siraIdx === sonSesli()) { /* son karttan sonra durur */ setTimeout(function () { if (siraIdx === j) durdur(); }, parseInt(document.getElementById('hiz').value, 10)); }
+    }
+    function sonSesli() { for (var i = kartlar.length - 1; i >= 0; i--) if (kartlar[i].ses) return i; return -1; }
+    function sirayla() {
+      if (siraIdx >= 0) { durdur(); return; }
+      siraIdx = -1; document.getElementById('sirayla').textContent = 'Durdur'; ileri();
+    }
+    function durdur() {
+      siraIdx = -1; clearTimeout(siraZaman); player.pause();
+      if (calan) calan.el.classList.remove('playing');
+      document.getElementById('sirayla').textContent = 'Sırayla oku';
+    }
+    document.getElementById('sirayla').addEventListener('click', sirayla);
+
+    function goster(idx) {
+      durdur(); aktif = idx; var d = dersler[idx];
+      document.getElementById('dersAdi').textContent = d.title;
+      document.getElementById('dersAciklama').textContent = ACIKLAMA[d.title] || d.desc || '';
+      Array.prototype.forEach.call(tabsEl.children, function (b, i) { b.setAttribute('aria-selected', i === idx ? 'true' : 'false'); });
+      var anlat = document.getElementById('anlatBtn');
+      if (d.audio) { anlat.hidden = false; anlat.onclick = function () { var a = document.getElementById('anlatSes'); a.src = SES + 'aciklamalar/' + encodeURIComponent(d.audio) + '.mp3'; document.getElementById('anlatici').classList.add('open'); a.play().catch(function () {}); }; }
+      else anlat.hidden = true;
+      kartlarEl.innerHTML = ''; kartlar = [];
+      d.items.forEach(function (it, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'kart' + (it.ses ? '' : ' sessiz') + (it.ar.length > 4 ? ' genis' : '');
+        b.setAttribute('aria-label', (it.ses ? 'Dinle: ' : 'Ses yok: ') + it.ar);
+        b.innerHTML = '<span>' + it.ar + '</span>' + (it.ses ? '' : '<small>ses yok</small>');
+        b.addEventListener('click', function () { durdur(); cal(i); });
+        kartlarEl.appendChild(b); kartlar.push({ el: b, ar: it.ar, ses: it.ses, dir: it.dir });
+      });
+      try { localStorage.setItem('ko-sinif-ders', String(idx)); } catch (e) {}
+      if (location.hash !== '#' + d.slug) history.replaceState(null, '', '#' + d.slug);
+    }
+
+    document.getElementById('anlatKapat').addEventListener('click', function () { var a = document.getElementById('anlatSes'); a.pause(); document.getElementById('anlatici').classList.remove('open'); });
+    document.getElementById('kartBoyut').addEventListener('input', function (e) { kartlarEl.style.setProperty('--kart', e.target.value + 'px'); try { localStorage.setItem('ko-sinif-boyut', e.target.value); } catch (x) {} });
+    try { var b0 = localStorage.getItem('ko-sinif-boyut'); if (b0) { document.getElementById('kartBoyut').value = b0; kartlarEl.style.setProperty('--kart', b0 + 'px'); } } catch (e) {}
+    document.getElementById('tamEkran').addEventListener('click', function () {
+      var el = document.documentElement;
+      if (document.fullscreenElement) { document.exitFullscreen && document.exitFullscreen(); }
+      else if (el.requestFullscreen) { el.requestFullscreen().catch(function () {}); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); var n = kartlar.length; if (!n) return; var cur = calan ? kartlar.indexOf(calan) : -1; var j = e.key === 'ArrowRight' ? (cur + 1) % n : (cur - 1 + n) % n; durdur(); cal(j); }
+      else if (e.key === ' ') { e.preventDefault(); sirayla(); }
+      else if (e.key === 'Escape') { durdur(); }
+    });
+
+    function slug(t) { if (t.indexOf('ى') >= 0) return 'vav-ya-elif'; return t.replace(/İ/g, 'i').toLowerCase().replace(/ı/g, 'i').replace(/ş/g, 's').replace(/ç/g, 'c').replace(/ğ/g, 'g').replace(/ü/g, 'u').replace(/ö/g, 'o').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+
+    fetch('./dersler.json').then(function (r) { return r.json(); }).then(function (data) {
+      dersler = data.filter(function (d) { return d.items.length; }).sort(function (a, b) { return a.n - b.n; });
+      dersler.forEach(function (d, i) {
+        d.slug = slug(d.title) || ('ders-' + d.n);
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.textContent = d.title === 'و ve ى şeklinde yazılan elif' ? 'Vav–Ya Elif' : d.title;
+        b.addEventListener('click', function () { goster(i); }); tabsEl.appendChild(b);
+      });
+      var start = 0, h = location.hash.replace('#', '');
+      dersler.forEach(function (d, i) { if (d.slug === h) start = i; });
+      if (!h) { try { var s = parseInt(localStorage.getItem('ko-sinif-ders'), 10); if (s >= 0 && s < dersler.length) start = s; } catch (e) {} }
+      goster(start);
+    }).catch(function () { document.getElementById('dersAciklama').textContent = 'Ders verisi yüklenemedi. Lütfen sayfayı yenileyin.'; });
+
+    if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('/kuran-ogretmenim/sw.js', { scope: '/kuran-ogretmenim/' }).catch(function () {}); }); }
+  })();
+  </script>
+</body>
+</html>

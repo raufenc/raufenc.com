@@ -106,7 +106,7 @@ DO.dersKaydet(
       },
       {
        "zon": "fazla",
-       "soru": "Hep daha çoğunu isteyen kişi neyi kaçırır?",
+       "soru": "Hep daha çoğunu isteyen kişi neye doymaz?",
        "ad": "Hırs",
        "soz": "En yüksek not da, en büyük makam da benim olsun!",
        "eylem": "isaret",
@@ -213,7 +213,7 @@ DO.dersKaydet(
         {
          "m": "Sınıfta tek ben birinci olmalıyım; başkası geçerse çok bozulurum!",
          "zon": "fazla",
-         "sonuc": "Aldığın güzel notların tadı çıkmıyor; sürekli gerginsin.",
+         "sonuc": "Aldığın güzel notların tadı çıkmıyor; çoğu zaman gerginsin.",
          "not": "İbre sağa kaydı: hep birinci olma hırsı elindekinin tadını bozuyor.",
          "ses": "s1fa"
         },
@@ -233,7 +233,7 @@ DO.dersKaydet(
        "tetik": "Sınıf başkanlığı seçimi var. Arkadaşların seni aday göstermek istiyor.",
        "secenekler": [
         {
-         "m": "Hiç uğraşmam; seçilsem de seçilmesem de bana ne.",
+         "m": "Hiç uğraşmam; seçilsem de seçilmesem de aynı.",
          "zon": "az",
          "sonuc": "Arkadaşlarına faydalı olma fırsatı kaçıyor.",
          "not": "İbre sola kaydı: hiç gayret etmemek, güzel işlerin önünü kapatıyor.",
@@ -291,7 +291,7 @@ DO.dersKaydet(
      "kartlar": [
       {
        "id": "k1",
-       "metin": "Ödevi varken bütün gün koltukta oturur: “Ne gerek var?”",
+       "metin": "Ödevi varken bütün gün koltukta oturur: “Sonra bakarım.”",
        "alan": "az",
        "ipucu": "Hiç gayret göstermiyor."
       },
@@ -366,7 +366,7 @@ DO.dersKaydet(
       },
       {
        "baslik": "Kanaat",
-       "metin": "çalışıp şükretmek",
+       "metin": "razı olup şükretmek; çalışmaya devam",
        "ikon": "muhur",
        "renk": "#17998A"
       },
@@ -1384,43 +1384,48 @@ DO.dersKaydet(
   },
   "s1fa": {
    "d": "ses/s1fa.m4a",
-   "sure": 2.913,
-   "m": "Aldığın güzel notların tadı çıkmıyor; sürekli gerginsin.",
+   "sure": 3.275,
+   "m": "Aldığın güzel notların tadı çıkmıyor; çoğu zaman gerginsin.",
    "k": [
     [
      "Aldığın",
      0.03,
-     0.45
+     0.455
     ],
     [
      "güzel",
-     0.45,
-     0.73
+     0.455,
+     0.738
     ],
     [
      "notların",
-     0.73,
-     1.15
+     0.738,
+     1.162
     ],
     [
      "tadı",
-     1.15,
-     1.43
+     1.162,
+     1.445
     ],
     [
      "çıkmıyor;",
-     1.43,
-     1.85
+     1.445,
+     1.87
     ],
     [
-     "sürekli",
-     1.935,
-     2.389
+     "çoğu",
+     2.0,
+     2.344
+    ],
+    [
+     "zaman",
+     2.344,
+     2.689
     ],
     [
      "gerginsin.",
-     2.389,
-     2.843
+     2.689,
+     3.205
     ]
    ]
   },
