@@ -1315,6 +1315,18 @@
     }
     .card:hover .card-arrow { color: var(--accent); transform: translate(3px,-3px); }
 
+    /* Yalnız telefonda görünür (bkz. 560px kuralı) */
+    .daha-fazla-wrap { display: none; justify-content: center; margin-top: 18px; }
+    .daha-fazla {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); color: var(--text);
+      border: 1px solid var(--border); border-radius: var(--radius-full);
+      padding: 11px 22px; font: 600 13px/1 var(--font-sans); cursor: pointer;
+    }
+    .daha-fazla:hover, .daha-fazla:focus-visible { border-color: var(--warm); color: var(--warm); }
+    .daha-fazla[hidden] { display: none; }
+    .daha-fazla svg { width: 14px; height: 14px; }
+
     #empty {
       display: none; grid-column: 1/-1;
       text-align: center; padding: 60px 24px; color: var(--muted2);
@@ -1551,7 +1563,8 @@
       section { padding: 64px 0; }
       .hero { min-height: auto; padding: 120px 0 70px; }
       .hero-inner { grid-template-columns: 1fr; gap: 18px; text-align: center; }
-      .hero-visual { order: -1; height: 320px; }
+      /* Tek sütunda sıra: etiket → isim → slogan → CTA → fotoğraf */
+      .hero-visual { height: 320px; margin-top: 8px; }
       .hero-photo-stack { width: 280px; height: 280px; transform: translate(-50%, -50%); }
       .hero-photo-frame { inset: 46px; }
       .hero-ring { inset: 35px; }
@@ -1588,14 +1601,15 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(6, 130px);
       }
+      /* Satır satır okununca 01 → 08 sırası korunur */
       .b-noroterbiye { grid-column: 1; grid-row: 1 / span 3; }
       .b-dil         { grid-column: 2; grid-row: 1; }
       .b-tarih       { grid-column: 2; grid-row: 2; }
       .b-peygamberim { grid-column: 2; grid-row: 3 / span 2; }
       .b-dusunce     { grid-column: 1; grid-row: 4 / span 2; }
       .b-sinif       { grid-column: 2; grid-row: 5; }
-      .b-ai          { grid-column: 2; grid-row: 6; }
-      .b-cihan-serisi{ grid-column: 1; grid-row: 6; }
+      .b-ai          { grid-column: 1; grid-row: 6; }
+      .b-cihan-serisi{ grid-column: 2; grid-row: 6; }
     }
     /* Mobil: mini-bento mozaik — asimetri telefonda da sürer */
     @media (max-width: 560px) {
@@ -1609,9 +1623,9 @@
       .b-tarih       { grid-column: 2; grid-row: 2; }
       .b-peygamberim { grid-column: 2; grid-row: 3 / span 3; }
       .b-dusunce     { grid-column: 1; grid-row: 4 / span 2; }
-      .b-sinif       { grid-column: 2; grid-row: 6; }
-      .b-cihan-serisi{ grid-column: 1; grid-row: 6; }
-      .b-ai          { grid-column: 1 / span 2; grid-row: 7; }
+      .b-sinif       { grid-column: 1; grid-row: 6; }
+      .b-ai          { grid-column: 2; grid-row: 6; }
+      .b-cihan-serisi{ grid-column: 1 / span 2; grid-row: 7; }
       .bento-card { border-radius: 16px; }
       .bento-content { padding: 12px 13px; gap: 3px; }
       .bento-title { font-size: 16px; }
@@ -1622,10 +1636,34 @@
       .bento-index::after { width: 14px; }
       .bento-card .bento-arrow { width: 28px; height: 28px; top: 9px; right: 9px; }
       .bento-card .bento-arrow svg { width: 12px; height: 12px; }
-      #grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
       .social-row { grid-template-columns: 1fr; }
       .hero h1 { font-size: 48px; }
+      /* Telefonda açıklama paragrafı yerine doğrudan çağrı düğmeleri */
+      .hero-desc { display: none; }
+      .hero-cta { margin-top: 26px; }
+
+      /* Dekoratif dev kelimeler telefonda gizli (yatay taşma ve kaydırma maliyeti) */
+      .section-ghost, .footer-mega { display: none; }
+      footer { padding-top: 44px; }
+
+      /* Dijital Atölye: kompakt iki sütun, ilk 8 kart + "Daha fazla göster" */
+      #grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      #grid .card { padding: 12px; gap: 7px; border-radius: 14px; }
+      #grid .card-icon-wrap { width: 30px; height: 30px; font-size: 15px; border-radius: 8px; }
+      #grid .card-title { font-size: 13.5px; line-height: 1.3; }
+      #grid .card-desc {
+        font-size: 12px; line-height: 1.45;
+        display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      #grid .card-tag { font-size: 9px; padding: 2px 7px; letter-spacing: 0.04em; }
+      #grid .card-arrow { display: none; }
+      #grid .vt-media { border-radius: 9px; margin-bottom: 0; }
+      #grid .vt-play { padding: 6px; }
+      #grid .vt-play span { display: none; }
+      #grid .card-cell.fazla { display: none; }
+      .daha-fazla-wrap { display: flex; }
     }
 
     /* ── REDUCED MOTION ── */
@@ -1914,7 +1952,7 @@
         <h2 class="section-title" style="margin-bottom:0">Vitrin</h2>
       </div>
       <div class="bento-header-right">
-        Kitap ve altı tematik kapı — her kapı bir atölyeye açılıyor: dil, peygamberim, tarih, düşünce, yapay zekâ, sınıf.
+        Kitap ve yedi tematik kapı — her kapı bir atölyeye açılıyor: dil, tarih, peygamberim, düşünce, sınıf, yapay zekâ ve Cihan Serisi.
       </div>
     </div>
 
@@ -1965,30 +2003,7 @@
         </div>
       </a>
 
-      <!-- 3. PEYGAMBERİM & AHLÂK (MED, video) -->
-      <a class="bento-card tilt bento-med b-peygamberim" href="/vitrin/peygamberim/" aria-label="Peygamberim ve Ahlâk kategorisi">
-        <div class="bento-media">
-          <picture>
-            <source type="image/avif" srcset="/images/vitrin/video/peygamberim-poster-360.avif 360w, /images/vitrin/video/peygamberim-poster-720.avif 720w" sizes="(min-width: 901px) 360px, 50vw">
-            <img class="video-fallback" src="/images/vitrin/video/peygamberim-poster-720.webp" srcset="/images/vitrin/video/peygamberim-poster-360.webp 360w, /images/vitrin/video/peygamberim-poster-720.webp 720w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="720" height="1280" loading="lazy" decoding="async">
-          </picture>
-          <video loop muted playsinline preload="none">
-            <source src="/images/vitrin/video/peygamberim.mp4" type="video/mp4">
-          </video>
-        </div>
-        <span class="bento-index" aria-hidden="true">04</span>
-        <div class="spotlight" aria-hidden="true"></div>
-        <div class="bento-arrow" aria-hidden="true">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </div>
-        <div class="bento-content">
-          <span class="bento-tag">3 proje</span>
-          <h3 class="bento-title">Peygamberim &amp; Ahlâk</h3>
-          <p class="bento-desc">Siyer atlası, çocuk ahlâk müfredatı ve Doğru Taraf.</p>
-        </div>
-      </a>
-
-      <!-- 4. TARİH & MEDENİYET (WIDE, video) -->
+      <!-- 3. TARİH & MEDENİYET (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-tarih" href="/vitrin/tarih/" aria-label="Tarih ve Medeniyet kategorisi">
         <div class="bento-media">
           <picture>
@@ -2008,6 +2023,29 @@
           <span class="bento-tag">4 proje</span>
           <h3 class="bento-title">Tarih &amp; Medeniyet</h3>
           <p class="bento-desc">Padişahlar, âlimler, evliyalar, kuruluş.</p>
+        </div>
+      </a>
+
+      <!-- 4. PEYGAMBERİM & AHLÂK (MED, video) -->
+      <a class="bento-card tilt bento-med b-peygamberim" href="/vitrin/peygamberim/" aria-label="Peygamberim ve Ahlâk kategorisi">
+        <div class="bento-media">
+          <picture>
+            <source type="image/avif" srcset="/images/vitrin/video/peygamberim-poster-360.avif 360w, /images/vitrin/video/peygamberim-poster-720.avif 720w" sizes="(min-width: 901px) 360px, 50vw">
+            <img class="video-fallback" src="/images/vitrin/video/peygamberim-poster-720.webp" srcset="/images/vitrin/video/peygamberim-poster-360.webp 360w, /images/vitrin/video/peygamberim-poster-720.webp 720w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="720" height="1280" loading="lazy" decoding="async">
+          </picture>
+          <video loop muted playsinline preload="none">
+            <source src="/images/vitrin/video/peygamberim.mp4" type="video/mp4">
+          </video>
+        </div>
+        <span class="bento-index" aria-hidden="true">04</span>
+        <div class="spotlight" aria-hidden="true"></div>
+        <div class="bento-arrow" aria-hidden="true">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+        <div class="bento-content">
+          <span class="bento-tag">3 proje</span>
+          <h3 class="bento-title">Peygamberim &amp; Ahlâk</h3>
+          <p class="bento-desc">Siyer atlası, çocuk ahlâk müfredatı ve Doğru Taraf.</p>
         </div>
       </a>
 
@@ -2034,27 +2072,30 @@
         </div>
       </a>
 
-      <!-- 8. CİHAN SERİSİ (WIDE, image) -->
-      <a class="bento-card tilt bento-wide b-cihan-serisi" href="/vitrin/cihan-serisi/" aria-label="Cihan Serisi kategorisi">
+      <!-- 6. SINIF ATÖLYESİ (WIDE, video) -->
+      <a class="bento-card tilt bento-wide b-sinif" href="/vitrin/sinif/" aria-label="Sınıf Atölyesi kategorisi">
         <div class="bento-media">
           <picture>
-            <source type="image/avif" srcset="/images/vitrin/cihan-serisi-480.avif 480w, /images/vitrin/cihan-serisi-960.avif 960w" sizes="(min-width: 901px) 360px, 50vw">
-            <img class="video-fallback" src="/images/vitrin/cihan-serisi-960.webp" srcset="/images/vitrin/cihan-serisi-480.webp 480w, /images/vitrin/cihan-serisi-960.webp 960w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="1376" height="768" loading="lazy" decoding="async">
+            <source type="image/avif" srcset="/images/vitrin/video/sinif-poster-480.avif 480w, /images/vitrin/video/sinif-poster-960.avif 960w" sizes="(min-width: 901px) 360px, 50vw">
+            <img class="video-fallback" src="/images/vitrin/video/sinif-poster-960.webp" srcset="/images/vitrin/video/sinif-poster-480.webp 480w, /images/vitrin/video/sinif-poster-960.webp 960w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="960" height="540" loading="lazy" decoding="async">
           </picture>
+          <video loop muted playsinline preload="none">
+            <source src="/images/vitrin/video/sinif.mp4" type="video/mp4">
+          </video>
         </div>
-        <span class="bento-index" aria-hidden="true">08</span>
+        <span class="bento-index" aria-hidden="true">06</span>
         <div class="spotlight" aria-hidden="true"></div>
         <div class="bento-arrow" aria-hidden="true">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
           <span class="bento-tag">3 proje</span>
-          <h3 class="bento-title">Cihan Serisi</h3>
-          <p class="bento-desc">Zar yok, tarih var — üç tarihî strateji oyunu.</p>
+          <h3 class="bento-title">Sınıf Atölyesi</h3>
+          <p class="bento-desc">İHO Arapça oyunları, Değer Oyunları ve Maarif rehberi.</p>
         </div>
       </a>
 
-      <!-- 6. YAPAY ZEKÂ (WIDE, video) -->
+      <!-- 7. YAPAY ZEKÂ (WIDE, video) -->
       <a class="bento-card tilt bento-wide b-ai" href="/vitrin/ai/" aria-label="Yapay Zekâ kategorisi">
         <div class="bento-media">
           <picture>
@@ -2077,26 +2118,23 @@
         </div>
       </a>
 
-      <!-- 7. SINIF ATÖLYESİ (WIDE, video) -->
-      <a class="bento-card tilt bento-wide b-sinif" href="/vitrin/sinif/" aria-label="Sınıf Atölyesi kategorisi">
+      <!-- 8. CİHAN SERİSİ (WIDE, image) -->
+      <a class="bento-card tilt bento-wide b-cihan-serisi" href="/vitrin/cihan-serisi/" aria-label="Cihan Serisi kategorisi">
         <div class="bento-media">
           <picture>
-            <source type="image/avif" srcset="/images/vitrin/video/sinif-poster-480.avif 480w, /images/vitrin/video/sinif-poster-960.avif 960w" sizes="(min-width: 901px) 360px, 50vw">
-            <img class="video-fallback" src="/images/vitrin/video/sinif-poster-960.webp" srcset="/images/vitrin/video/sinif-poster-480.webp 480w, /images/vitrin/video/sinif-poster-960.webp 960w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="960" height="540" loading="lazy" decoding="async">
+            <source type="image/avif" srcset="/images/vitrin/cihan-serisi-480.avif 480w, /images/vitrin/cihan-serisi-960.avif 960w" sizes="(min-width: 901px) 360px, 50vw">
+            <img class="video-fallback" src="/images/vitrin/cihan-serisi-960.webp" srcset="/images/vitrin/cihan-serisi-480.webp 480w, /images/vitrin/cihan-serisi-960.webp 960w" sizes="(min-width: 901px) 360px, 50vw" alt="" width="1376" height="768" loading="lazy" decoding="async">
           </picture>
-          <video loop muted playsinline preload="none">
-            <source src="/images/vitrin/video/sinif.mp4" type="video/mp4">
-          </video>
         </div>
-        <span class="bento-index" aria-hidden="true">06</span>
+        <span class="bento-index" aria-hidden="true">08</span>
         <div class="spotlight" aria-hidden="true"></div>
         <div class="bento-arrow" aria-hidden="true">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
           <span class="bento-tag">3 proje</span>
-          <h3 class="bento-title">Sınıf Atölyesi</h3>
-          <p class="bento-desc">İHO Arapça oyunları, Değer Oyunları ve Maarif rehberi.</p>
+          <h3 class="bento-title">Cihan Serisi</h3>
+          <p class="bento-desc">Zar yok, tarih var — üç tarihî strateji oyunu.</p>
         </div>
       </a>
     </div>
@@ -2156,6 +2194,12 @@
           <p>Aramanla eslesen proje bulunamadi.</p>
           <button onclick="clearFilters()" style="margin-top:12px;padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:0.85rem;cursor:pointer;transition:all 0.2s">Filtreleri temizle</button>
         </div>
+      </div>
+      <div class="daha-fazla-wrap">
+        <button type="button" class="daha-fazla" id="daha-fazla" aria-controls="grid" hidden>
+          <span>Daha fazla göster</span>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+        </button>
       </div>
     </div>
 
@@ -2354,6 +2398,9 @@
   // ── DURUM ──
   var aktifTag = 'Tümü';
   var aramaMetni = '';
+  var MOBIL_ILK = 8;
+  var hepsiAcik = false;
+  var dahaFazlaBtn = document.getElementById('daha-fazla');
 
   // ── BASLAT ──
   function baslat() {
@@ -2478,16 +2525,30 @@
       ? total + ' proje'
       : shown + ' / ' + total + ' proje';
 
+    var gizli = hepsiAcik ? 0 : Math.max(0, sonuclar.length - MOBIL_ILK);
+    dahaFazlaBtn.hidden = gizli === 0;
+    dahaFazlaBtn.querySelector('span').textContent = 'Daha fazla göster (' + gizli + ' proje)';
+
     if (sonuclar.length === 0) { empty.classList.add('show'); return; }
     empty.classList.remove('show');
 
     var videolu = sonuclar.filter(function(p) { return p.video; });
     sonuclar.forEach(function(p, i) {
       var cell = createCard(p, i);
+      // Telefonda ilk MOBIL_ILK kart görünür; gerisi CSS ile (yalnız ≤560px) gizlenir
+      if (!hepsiAcik && i >= MOBIL_ILK) cell.classList.add('fazla');
       grid.appendChild(cell);
       if (p.video && window.VideoTanitim) VideoTanitim.kartaEkle(cell, cell.firstChild, p, videolu);
     });
   }
+
+  dahaFazlaBtn.addEventListener('click', function() {
+    var ilkGizli = document.querySelector('#grid .card-cell.fazla .card');
+    hepsiAcik = true;
+    document.querySelectorAll('#grid .card-cell.fazla').forEach(function(c) { c.classList.remove('fazla'); });
+    dahaFazlaBtn.hidden = true;
+    if (ilkGizli) ilkGizli.focus({ preventScroll: true });
+  });
 
   baslat();
 
@@ -2820,6 +2881,8 @@
     ghosts.push({ el: g, sec: g.closest('section, .motto-section') || g.parentElement, speed: parseFloat(g.dataset.speed || '0.3') });
   });
 
+  // Telefonda dev kelimeler gizli; konumlarını her kaydırmada ölçmeye gerek yok
+  var ghostGizli = window.matchMedia('(max-width: 560px)');
   var ticking = false;
   function onScroll() {
     if (ticking) return;
@@ -2834,7 +2897,7 @@
       if (b2tRing) b2tRing.style.strokeDashoffset = (145 - 145 * pct).toFixed(1);
       if (progressBar) progressBar.style.width = (pct * 100).toFixed(2) + '%';
 
-      if (!prefersReduced) {
+      if (!prefersReduced && !ghostGizli.matches) {
         var vh = window.innerHeight;
         ghosts.forEach(function(g) {
           var r = g.sec.getBoundingClientRect();
