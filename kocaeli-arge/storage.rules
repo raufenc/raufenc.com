@@ -1,0 +1,12 @@
+rules_version = '2';
+// Dosyalar (PDF, görsel, rapor): herkes okur; yalnız yöneticiler yükler (e-posta ile)
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{klasor}/{dosya} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.token.email in ['halatmedya@gmail.com']
+        && request.resource.size < 20 * 1024 * 1024;
+    }
+  }
+}

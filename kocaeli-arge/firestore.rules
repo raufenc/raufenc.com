@@ -1,0 +1,45 @@
+rules_version = '2';
+// Kocaeli MEM AR-GE Portalı — Firestore güvenlik kuralları
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function girisli() { return request.auth != null; }
+    function yonetici() { return girisli() && exists(/databases/$(db)/documents/yoneticiler/$(request.auth.token.email)); }
+
+    // Yönetici listesi: yalnız konsoldan düzenlenir (belge kimliği = e-posta)
+    match /yoneticiler/{email} { allow read: if girisli() && request.auth.token.email == email; allow write: if false; }
+
+    // İçerik koleksiyonları (haberler, duyurular, projeler, … her biri tek belge)
+    match /icerik/{belge} {
+      allow read: if true;
+      allow write: if yonetici();
+    }
+    // Proje başvuruları: giriş yapan kullanıcı ekleyebilir (dizi güncellemesi), yönetici düzenler
+    match /icerik/basvurular { allow write: if girisli(); }
+    // Hatırlatma / uygulama içi bildirim: giriş yapan kullanıcı kendi kişisel kaydını ekleyebilir
+    match /icerik/bildirimler { allow write: if girisli(); }
+
+    // Kullanıcı profili: yalnız sahibi
+    match /kullanicilar/{uid} {
+      allow read, write: if girisli() && request.auth.uid == uid;
+      allow read: if yonetici();
+    }
+
+    // Sosyal sayaçlar: herkes okur; giriş yapan artırır (beğeni/görüntülenme/yorum sayısı)
+    match /sosyal/{itemId} {
+      allow read: if true;
+      allow create, update: if girisli() || (request.resource.data.keys().hasOnly(['goruntulenme']));
+      match /yorumlar/{yid} {
+        allow read: if true;
+        allow create: if girisli() && request.resource.data.uid == request.auth.uid && request.resource.data.metin.size() <= 600;
+        allow delete: if girisli() && (resource.data.uid == request.auth.uid || yonetici());
+      }
+    }
+
+    // Anket cevapları: kullanıcı kendi cevabını yazar; sonuç sayaçları artırılabilir
+    match /anketCevaplari/{id} { allow create, update: if girisli() && request.resource.data.uid == request.auth.uid; allow read: if yonetici(); }
+    match /anketSonuc/{anketId} { allow read: if true; allow create, update: if girisli(); }
+
+    // Push token kayıtları: belge kimliği = token
+    match /pushTokens/{token} { allow create, update, delete: if true; allow read: if yonetici(); }
+  }
+}

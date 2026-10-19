@@ -118,6 +118,54 @@
           "value": "public, max-age=604800, stale-while-revalidate=2592000"
         }
       ]
+    },
+    {
+      "source": "/api/arge-feed",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=600, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/kocaeli-arge/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com https://www.youtube.com https://www.youtube-nocookie.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://www.google.com https://*.firebaseapp.com https://accounts.google.com; connect-src 'self' https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com https://*.firebaseio.com https://fcmregistrations.googleapis.com https://fcm.googleapis.com https://www.google.com https://cdnjs.cloudflare.com https://www.gstatic.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), fullscreen=(self \"https://www.youtube-nocookie.com\" \"https://www.youtube.com\")"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        }
+      ]
+    },
+    {
+      "source": "/kocaeli-arge/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/kocaeli-arge/"
+        }
+      ]
+    },
+    {
+      "source": "/kocaeli-arge/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
     }
   ],
   "redirects": [
