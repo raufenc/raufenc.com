@@ -3,7 +3,7 @@
    - Giriş sitesi kabuğu ve uygulama çekirdeği: önce ağ, olmazsa önbellek
    - Sesler, görseller, veri dosyaları: önce önbellek, arkada tazele
 */
-var SURUM = 'ko-v4';
+var SURUM = 'ko-v5';
 var KABUK = 'ko-kabuk-' + SURUM;
 var VARLIK = 'ko-varlik-' + SURUM;
 var KOK = '/kuran-ogretmenim/';
