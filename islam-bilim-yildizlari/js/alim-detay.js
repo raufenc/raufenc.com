@@ -205,11 +205,11 @@ if (!b) {
   // Mini map
   if (coord) {
     const isDark = !document.documentElement.classList.contains('light');
-    const tileUrl = isDark
-      ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-      : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+    const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
     const map = L.map('mini-map', { zoomControl: false, scrollWheelZoom: false, dragging: false }).setView(coord, 6);
-    L.tileLayer(tileUrl, { attribution: '', maxZoom: 18, subdomains: 'abcd' }).addTo(map);
+    L.tileLayer(tileUrl, { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxZoom: 18 }).on('tileload', function(event) {
+      if (isDark) event.tile.style.filter = 'invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6)';
+    }).addTo(map);
     const icon = L.divIcon({
       className: '',
       html: `<div style="width:14px;height:14px;border-radius:50%;background:${renk};border:2px solid rgba(255,255,255,.4);box-shadow:0 0 10px ${renk}80"></div>`,

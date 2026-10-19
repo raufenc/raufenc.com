@@ -1,12 +1,12 @@
 initPage('harita');
 
 const isDark = !document.documentElement.classList.contains('light');
-const tileUrl = isDark
-  ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-  : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+const tileUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
 const map = L.map('map-container', { zoomControl: true, scrollWheelZoom: true }).setView([33, 40], 4);
-L.tileLayer(tileUrl, { attribution: '© OpenStreetMap, © CARTO', maxZoom: 18, subdomains: 'abcd' }).addTo(map);
+L.tileLayer(tileUrl, { attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', maxZoom: 18 }).on('tileload', function(event) {
+  if (isDark) event.tile.style.filter = 'invert(1) hue-rotate(180deg) brightness(0.85) saturate(0.6)';
+}).addTo(map);
 
 // Region stats
 const bk = [...BOLGELER].sort((a,b) => b.bilginIds.length - a.bilginIds.length);
