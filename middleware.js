@@ -13,6 +13,8 @@ const API_METHODS = {
   '/api/arge-feed': ['GET', 'OPTIONS'],
   '/api/arge-asistan': ['POST', 'OPTIONS'],
   '/api/arge-bildirim': ['POST', 'OPTIONS'],
+  '/api/iletisim': ['POST', 'OPTIONS'],
+  '/api/surum': ['GET', 'HEAD'],
 };
 const PUBLIC_METHODS = ['GET', 'HEAD', 'OPTIONS'];
 const SCANNER_PATHS = [
@@ -97,16 +99,42 @@ function isScannerPath(pathname) {
   return false;
 }
 
+// vercel.json'daki trailingSlash:true, /api/x isteğini /api/x/ adresine yönlendirir;
+// izin tablosu iki yazımda da aynı uca baksın.
+function apiYolu(pathname) {
+  return pathname.length > 5 ? pathname.replace(/\/+$/, '') : pathname;
+}
+
 function apiPolicy(pathname) {
   if (!pathname.startsWith('/api/')) return null;
-  return API_METHODS[pathname] || [];
+  return API_METHODS[apiYolu(pathname)] || [];
 }
 
 function fetchMetadataBlocked(req, pathname) {
-  if (pathname === '/api/bia-news') return false;
+  if (apiYolu(pathname) === '/api/bia-news') return false;
   if (req.method !== 'POST' && req.method !== 'OPTIONS') return false;
   const site = req.headers.get('sec-fetch-site');
   return Boolean(site && !['same-origin', 'same-site', 'none'].includes(site));
+}
+
+// Ziyaretçi adresi büyük harfle ya da Türkçe karakterle yazsa da sayfaya ulaşsın:
+// /Noroterbiye, /NÖROTERBİYE, /nöroterbiye → /noroterbiye/
+// Yalnız uzantısız (sayfa) adreslerde çalışır; sitedeki bütün sayfa klasörleri
+// küçük harfli ASCII'dir. Uzantılı dosyalara (FKH_10_kitap/1.jpg gibi) dokunmaz.
+const TR_HARF = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u', 'Ç': 'c', 'Ğ': 'g', 'İ': 'i', 'Ö': 'o', 'Ş': 's', 'Ü': 'u' };
+
+function sadeSayfaYolu(pathname) {
+  const path = safeDecode(pathname);
+  // Flutter uygulamasının uzantısız büyük harfli dosyası var (assets/NOTICES)
+  if (path.startsWith('/kuran-ogretmenim/app/')) return null;
+  const son = path.replace(/\/+$/, '').slice(path.replace(/\/+$/, '').lastIndexOf('/') + 1);
+  if (son.includes('.') || !/[A-Z\u00c0-\u024f]/.test(path)) return null;
+  const sade = path
+    .replace(/[çğıöşüÇĞİÖŞÜ]/g, c => TR_HARF[c])
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (sade === path) return null;
+  return sade.endsWith('/') ? sade : sade + '/';
 }
 
 async function verifyJWT(token, secret) {
@@ -148,6 +176,13 @@ export default async function middleware(req) {
     if (fetchMetadataBlocked(req, pathname)) return jsonError('forbidden', 403);
   } else if (!PUBLIC_METHODS.includes(req.method)) {
     return methodNotAllowed(false);
+  } else if (req.method !== 'OPTIONS') {
+    const sade = sadeSayfaYolu(pathname);
+    if (sade) {
+      const hedef = new URL(req.url);
+      hedef.pathname = sade;
+      return Response.redirect(hedef, 308);
+    }
   }
 
   if (pathname !== PANEL_PATH) {
