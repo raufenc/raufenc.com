@@ -4,6 +4,22 @@ import { store, bildirim, social } from '../backend.js';
 import { feeds } from '../feeds.js';
 import { newsCard, videoCard, socialBar, commentsSection } from '../components.js';
 import { YT_CHANNELS, FEED_SOURCES } from '../config.js';
+
+// Web Speech API ile sesli okuma (tr-TR)
+let speaking = null;
+export function ttsButton(getText) {
+  if (!('speechSynthesis' in window)) return '';
+  const b = el(`<button class="btn sm ghost tts">${icons.volume} Sesli oku</button>`);
+  b.onclick = () => {
+    if (speaking) { speechSynthesis.cancel(); speaking = null; b.innerHTML = icons.volume + ' Sesli oku'; return; }
+    const u = new SpeechSynthesisUtterance(getText().slice(0, 4000)); u.lang = 'tr-TR'; u.rate = 0.95;
+    const v = speechSynthesis.getVoices().find(v => /^tr/i.test(v.lang)); if (v) u.voice = v;
+    u.onend = u.onerror = () => { speaking = null; b.innerHTML = icons.volume + ' Sesli oku'; };
+    speechSynthesis.cancel(); speechSynthesis.speak(u); speaking = u; b.innerHTML = icons.stop + ' Durdur';
+  };
+  window.addEventListener('hashchange', () => { if (speaking) { speechSynthesis.cancel(); speaking = null; } }, { once: true });
+  return b;
+}
 import { go } from '../router.js';
 
 function manualNews(c) { return (c.haberler || []).map(x => ({ id: x.id, title: x.baslik, summary: x.ozet, icerik: x.icerik, date: x.tarih, kaynak: x.kategori || 'Kurumsal', tur: 'haber', image: x.resim || '', manual: true })); }
@@ -28,6 +44,7 @@ export async function home(ctx) {
     </section>
     ${gunun ? h`<section class="section"><div class="section-head"><h2>Günün duyurusu</h2><a href="#/duyurular">Tümü</a></div>
       <a class="card ann tap ${gunun.onemli ? 'onemli' : ''} ${gunun.acil ? 'acil' : ''}" href="#/duyurular/${gunun.id}"><div class="tags">${gunun.resmi ? raw('<span class="chip navy">Resmî</span>') : ''}${gunun.onemli ? raw('<span class="chip meb">Önemli</span>') : ''}${gunun.acil ? raw('<span class="chip meb">Acil</span>') : ''}</div><h3>${gunun.baslik}</h3><p>${gunun.ozet}</p>${gunun.sonTarih ? raw(deadlineHtml(gunun.sonTarih)) : ''}</a></section>` : ''}
+    <div id="live-slot"></div>
     <section class="section"><div class="section-head"><h2>Hızlı erişim</h2></div>
       <div class="quick">${(c.hizliErisim || []).map(q => h`<a href="${q.rota}"><span class="ic">${raw(icons[q.ikon] || icons.grid)}</span>${q.ad}</a>`).join('')}</div></section>
     <section class="section"><div class="section-head"><h2>Son haberler</h2><a href="#/haberler">Tümü</a></div><div class="card-list" id="home-news">${skeletons(3)}</div></section>
@@ -38,6 +55,7 @@ export async function home(ctx) {
   bw?.addEventListener('scroll', () => { const i = Math.round(bw.scrollLeft / (bw.firstElementChild?.offsetWidth + 12 || 1)); dots.forEach((d, k) => d.classList.toggle('on', k === i)); }, { passive: true });
   let auto = setInterval(() => { if (!document.contains(bw)) return clearInterval(auto); const w = (bw.firstElementChild?.offsetWidth || 0) + 12; const next = (Math.round(bw.scrollLeft / w) + 1) % (c.bannerlar?.length || 1); bw.scrollTo({ left: next * w, behavior: 'smooth' }); }, 5000);
   allNews(c).then(items => { const n = ctx.root.querySelector('#home-news'); if (n) n.innerHTML = items.length ? items.slice(0, 1).map(i => newsCard(i, { big: true })).join('') + items.slice(1, 5).map(i => newsCard(i)).join('') : empty('Haber yüklenemedi'); });
+  feeds.live(YT_CHANNELS.map(k => k.id)).then(d => { const l = (d.items || []).find(x => x.live); const slot = ctx.root.querySelector('#live-slot'); if (!l || !slot) return; const ch = YT_CHANNELS.find(k => k.id === l.channelId); slot.innerHTML = `<a class="card live-card tap" href="#/tv/${esc(l.videoId)}" style="margin-bottom:22px"><span class="live-badge"><i></i>CANLI</span><b>${esc(ch?.ad || '')}</b><span>${esc(l.title || 'Canlı yayın sürüyor')}</span>${icons.chevron}</a>`; }).catch(() => {});
   feeds.channel(YT_CHANNELS[0].id).then(d => { const n = ctx.root.querySelector('#home-video'); if (n) n.innerHTML = (d.items || []).slice(0, 2).map(videoCard).join(''); }).catch(() => { const n = ctx.root.querySelector('#home-video'); if (n) n.innerHTML = empty('Video yüklenemedi', 'play'); });
 }
 function upcoming(c) { const now = Date.now(); return (c.etkinlikler || []).filter(e => new Date(e.bitis || e.tarih).getTime() >= now - 3600e3).sort((a, b) => a.tarih.localeCompare(b.tarih)).slice(0, 3); }
@@ -88,6 +106,7 @@ export async function haberDetay(ctx) {
     ${detail?.sub ? `<p class="lead">${esc(detail.sub)}</p>` : ''}<div class="content"><p>${body}</p></div>
     ${item.link ? `<p><a class="btn sm ghost" href="${esc(item.link)}" target="_blank" rel="noopener">${icons.external} Kaynakta aç</a></p>` : ''}</div></div>`);
   const url = item.link || location.href;
+  const tts = ttsButton(() => title + '. ' + card.querySelector('.content').textContent); if (tts) card.querySelector('.body').appendChild(tts);
   card.appendChild(socialBar(item.id, { title, url }));
   card.appendChild(commentsSection(item.id));
   ctx.root.innerHTML = ''; ctx.root.appendChild(card);
@@ -118,6 +137,7 @@ export async function duyuruDetay(ctx) {
   const card = el(`<div class="card article ann ${d.onemli ? 'onemli' : ''} ${d.acil ? 'acil' : ''}" style="padding:0"><div class="body"><div class="tags" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">${d.resmi ? '<span class="chip navy">Resmî duyuru</span>' : ''}${d.acil ? '<span class="chip meb">Acil</span>' : ''}${d.onemli ? '<span class="chip meb">Önemli</span>' : ''}</div>
     <h1>${esc(d.baslik)}</h1><div class="meta"><span>${fmtDate(d.tarih, { gun: true })}</span></div><div class="content"><p>${esc(d.icerik || d.ozet).replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p></div>${d.sonTarih ? deadlineHtml(d.sonTarih) : ''}
     ${d.sonTarih ? `<div class="btn-row" style="margin-top:12px"><button class="btn sm" id="remind">${icons.bell} Son tarihi hatırlat</button><a class="btn sm" id="ics" href="#">${icons.calendar} Takvime ekle</a></div>` : ''}${d.link ? `<p><a class="btn sm ghost" href="${esc(d.link)}" target="_blank" rel="noopener">${icons.external} Bağlantı</a></p>` : ''}</div></div>`);
+  const tts = ttsButton(() => d.baslik + '. ' + (d.icerik || d.ozet)); if (tts) card.querySelector('.body').appendChild(tts);
   card.appendChild(socialBar(d.id, { title: d.baslik }));
   card.appendChild(commentsSection(d.id));
   ctx.root.innerHTML = ''; ctx.root.appendChild(card);

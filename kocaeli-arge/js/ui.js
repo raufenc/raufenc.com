@@ -51,6 +51,14 @@ export const icons = {
   tv: P('<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>'),
   copy: P('<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>'),
   live: P('<circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M7.5 7.5a6.5 6.5 0 0 0 0 9M16.5 7.5a6.5 6.5 0 0 1 0 9M4.5 4.5a10.5 10.5 0 0 0 0 15M19.5 4.5a10.5 10.5 0 0 1 0 15"/>'),
+  feed: P('<rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><path d="m4 17 5-5 4 4 2-2 5 5"/>'),
+  flag: P('<path d="M5 21V4h11l-1 4 1 4H5"/>'),
+  camera: P('<path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="3.5"/>'),
+  image: P('<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5" fill="currentColor"/><path d="m3 17 6-5 4 4 3-3 5 4"/>'),
+  volume: P('<path d="M4 10v4h4l5 4V6L8 10z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/>'),
+  stop: P('<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>'),
+  text: P('<path d="M4 6h16M4 12h10M4 18h14"/>'),
+  refresh: P('<path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/>'),
   youtube: P('<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.7 19 12 19 12 19s6.3 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8z"/><path d="m10 9 5 3-5 3z" fill="currentColor"/>'),
 };
 
@@ -95,6 +103,14 @@ export function toast(msg, ms = 2400) {
   document.body.appendChild(t);
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.remove(), ms);
+}
+
+export function actionToast(msg, label, onClick, ms = 12000) {
+  document.querySelectorAll('.toast').forEach(t => t.remove());
+  const t = el(h`<div class="toast" role="status">${msg} <button class="toast-act">${label}</button></div>`);
+  t.querySelector('button').addEventListener('click', () => { t.remove(); onClick(); });
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), ms);
 }
 
 export function sheet(innerHtml, { onClose } = {}) {

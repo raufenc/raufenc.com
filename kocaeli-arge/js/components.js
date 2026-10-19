@@ -51,9 +51,10 @@ export function commentsSection(id) {
   const list = node.querySelector('.list');
   async function load() {
     const items = await social.comments(id);
-    list.innerHTML = items.length ? items.map(y => h`<div class="comment">${raw(avatar(y))}<div class="tx"><b>${y.ad}</b><small>${fmtRel(y.tarih)}</small><p>${y.metin}</p></div>${(store.user && (store.user.uid === y.uid || store.isAdmin)) ? raw(`<button class="icon-btn" data-del="${esc(y.id)}" aria-label="Sil">${icons.trash}</button>`) : ''}</div>`).join('')
+    list.innerHTML = items.length ? items.map(y => h`<div class="comment">${raw(avatar(y))}<div class="tx"><b>${y.ad}</b><small>${fmtRel(y.tarih)}</small><p>${y.metin}</p></div>${(store.user && (store.user.uid === y.uid || store.isAdmin)) ? raw(`<button class="icon-btn" data-del="${esc(y.id)}" aria-label="Sil">${icons.trash}</button>`) : (store.user ? raw(`<button class="icon-btn" data-rep="${esc(y.id)}" data-txt="${esc(y.metin.slice(0, 80))}" aria-label="Şikâyet et" style="color:var(--muted)">${icons.flag}</button>`) : '')}</div>`).join('')
       : '<p style="color:var(--muted);font-size:13px;margin:0">Henüz yorum yok. İlk yorumu siz yazın.</p>';
     list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', async () => { await social.deleteComment(id, b.dataset.del); load(); document.querySelector('.social')?.refresh?.(); }));
+    list.querySelectorAll('[data-rep]').forEach(b => b.addEventListener('click', () => import('./views/akis.js').then(m => m.reportSheet('yorum', `${id}/${b.dataset.rep}`, b.dataset.txt))));
   }
   node.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();

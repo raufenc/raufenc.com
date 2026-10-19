@@ -64,6 +64,7 @@ async function initLive() {
   const auth = authM.getAuth(app);
   const db = fsM.getFirestore(app);
   fb = { app, auth, db, authM, fns: fsM };
+  if (FIREBASE_CONFIG.measurementId) { import('https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js').then(a => { try { a.getAnalytics(app); } catch (_) {} }).catch(() => {}); }
   try { await authM.setPersistence(auth, authM.browserLocalPersistence); } catch (_) {}
   // İçerik: icerik/{koleksiyon} belgeleri; items alanı dizi ise koleksiyon, değilse nesne.
   fsM.onSnapshot(fsM.collection(db, 'icerik'), (snap) => {
@@ -127,6 +128,27 @@ export const admin = {
       LS('content', overrides);
       emit(listeners.content, mergeContent());
     }
+  },
+  // Eşzamanlı yazımlarda güvenli ekleme (canlı modda arrayUnion)
+  async append(collection, item) {
+    if (isLive) { await fb.fns.setDoc(fb.fns.doc(fb.db, 'icerik', collection), { items: fb.fns.arrayUnion(item) }, { merge: true }); return; }
+    overrides = { ...overrides, [collection]: [item, ...(mergeContent()[collection] || [])] };
+    LS('content', overrides); emit(listeners.content, mergeContent());
+  },
+  async updateItem(collection, id, patch) {
+    const list = (mergeContent()[collection] || []).map(x => x.id === id ? { ...x, ...patch } : x);
+    await admin.save(collection, list);
+  },
+  // Canlı modda ilk kurulum: örnek içeriği Firestore'a aktar (boş koleksiyonları doldurur)
+  async seedToFirestore({ overwrite = false } = {}) {
+    if (!isLive) throw new Error('demo');
+    const skip = new Set(['meta']);
+    let n = 0;
+    for (const [k, v] of Object.entries(seed || {})) {
+      if (skip.has(k) || (!overwrite && overrides[k] !== undefined)) continue;
+      await admin.save(k, v); n++;
+    }
+    return n;
   },
   async reset() {
     if (isLive) return;
@@ -202,6 +224,72 @@ export const social = {
   },
 };
 
+// ───────────────────────── PAYLAŞIMLAR (sosyal akış) ─────────────────────────
+// Canlı modda ayrı koleksiyon: paylasimlar/{id}. Demo modda tarayıcı belleği + seed örnekleri.
+export const posts = {
+  async list({ mine = false, all = false } = {}) {
+    const seedPosts = (mergeContent().paylasimlar || []).map(p => ({ ...p, durum: p.durum || 'onayli' }));
+    if (isLive) {
+      const F = fb.fns; const col = F.collection(fb.db, 'paylasimlar');
+      const q = all ? F.query(col, F.orderBy('tarih', 'desc'), F.limit(200))
+        : mine ? F.query(col, F.where('uid', '==', user?.uid || '-'), F.orderBy('tarih', 'desc'), F.limit(50))
+        : F.query(col, F.where('durum', '==', 'onayli'), F.orderBy('tarih', 'desc'), F.limit(100));
+      const snap = await F.getDocs(q).catch(() => null);
+      const live = snap ? snap.docs.map(d => ({ id: d.id, ...d.data(), tarih: d.data().tarih?.toDate?.()?.toISOString?.() || d.data().tarih })) : [];
+      return [...live, ...(all || mine ? [] : seedPosts)];
+    }
+    const local = LS('posts') || [];
+    const list = [...local, ...seedPosts];
+    if (all) return list;
+    if (mine) return list.filter(p => p.uid === user?.uid);
+    return list.filter(p => p.durum === 'onayli' || p.uid === user?.uid);
+  },
+  async create({ metin, foto = '', link = '', baslik = '' }) {
+    if (!user) throw new Error('login');
+    const p = { id: 'p' + newId(), uid: user.uid, ad: user.ad, avatar: user.foto || '', rol: store.isAdmin ? 'kurum' : 'ogretmen', ilce: user.ilce || '', metin: String(metin).trim().slice(0, 1500), baslik: String(baslik || '').slice(0, 120), foto, link: /^https?:\/\//.test(link) ? link : '', tarih: new Date().toISOString(), durum: store.isAdmin ? 'onayli' : 'bekliyor' };
+    if (!p.metin && !p.foto) throw new Error('empty');
+    if (isLive) { const F = fb.fns; await F.setDoc(F.doc(fb.db, 'paylasimlar', p.id), { ...p, tarih: F.serverTimestamp() }); }
+    else { LS('posts', [p, ...(LS('posts') || [])].slice(0, 300)); }
+    return p;
+  },
+  async setDurum(id, durum) {
+    if (isLive) { await fb.fns.updateDoc(fb.fns.doc(fb.db, 'paylasimlar', id), { durum }); return; }
+    LS('posts', (LS('posts') || []).map(p => p.id === id ? { ...p, durum } : p));
+  },
+  async remove(id) {
+    if (isLive) { await fb.fns.deleteDoc(fb.fns.doc(fb.db, 'paylasimlar', id)); return; }
+    LS('posts', (LS('posts') || []).filter(p => p.id !== id));
+  },
+};
+
+export const sikayet = {
+  async send({ tur, hedefId, metin, ozet = '' }) {
+    if (!user) throw new Error('login');
+    const s = { id: 's' + newId(), tur, hedefId, ozet: String(ozet).slice(0, 200), metin: String(metin).slice(0, 500), uid: user.uid, ad: user.ad, tarih: new Date().toISOString(), durum: 'acik' };
+    if (isLive) { const F = fb.fns; await F.setDoc(F.doc(fb.db, 'sikayetler', s.id), { ...s, tarih: F.serverTimestamp() }); }
+    else LS('sikayetler', [s, ...(LS('sikayetler') || [])]);
+  },
+  async list() {
+    if (isLive) { const F = fb.fns; const snap = await F.getDocs(F.query(F.collection(fb.db, 'sikayetler'), F.orderBy('tarih', 'desc'), F.limit(200))).catch(() => null); return snap ? snap.docs.map(d => ({ id: d.id, ...d.data(), tarih: d.data().tarih?.toDate?.()?.toISOString?.() || '' })) : []; }
+    return LS('sikayetler') || [];
+  },
+  async close(id) {
+    if (isLive) { await fb.fns.updateDoc(fb.fns.doc(fb.db, 'sikayetler', id), { durum: 'kapandi' }); return; }
+    LS('sikayetler', (LS('sikayetler') || []).map(s => s.id === id ? { ...s, durum: 'kapandi' } : s));
+  },
+};
+
+export const stats = {
+  // En çok görüntülenen / beğenilen içerikler ve toplamlar
+  async top(limit = 10) {
+    let rows = [];
+    if (isLive) { const F = fb.fns; const snap = await F.getDocs(F.query(F.collection(fb.db, 'sosyal'), F.orderBy('goruntulenme', 'desc'), F.limit(200))).catch(() => null); rows = snap ? snap.docs.map(d => ({ id: d.id, ...d.data() })) : []; }
+    else rows = Object.entries(demoSocial()).map(([id, s]) => ({ id, begeni: s.begeni || 0, goruntulenme: s.goruntulenme || 0, yorum: (s.yorumlar || []).length }));
+    const total = rows.reduce((a, r) => ({ goruntulenme: a.goruntulenme + (r.goruntulenme || 0), begeni: a.begeni + (r.begeni || 0), yorum: a.yorum + (r.yorum || 0) }), { goruntulenme: 0, begeni: 0, yorum: 0 });
+    return { total, byViews: rows.slice().sort((a, b) => (b.goruntulenme || 0) - (a.goruntulenme || 0)).slice(0, limit), byLikes: rows.slice().sort((a, b) => (b.begeni || 0) - (a.begeni || 0)).slice(0, limit), count: rows.length };
+  },
+};
+
 // ───────────────────────── ANKET ─────────────────────────
 export const anket = {
   cevapladi(id) { return !!me.anket[id]; },
@@ -251,9 +339,9 @@ export const bildirim = {
   readAll() { me.okunan = bildirim.list().map(n => n.id); saveMe(); },
   setPref(key, on) { me.bildirim = { ...me.bildirim, [key]: on }; saveMe(); push.syncTopics().catch(() => {}); },
   setTheme(t) { me.tema = t; saveMe(); },
-  async send(n) { // yönetici: uygulama içi bildirim kaydı
-    const list = mergeContent().bildirimler || [];
-    await admin.save('bildirimler', [{ id: newId(), tarih: new Date().toISOString(), ...n }, ...list].slice(0, 200));
+  setFont(f) { me.yazi = f; saveMe(); },
+  async send(n) { // uygulama içi bildirim kaydı (yönetici duyurusu ya da kişisel hatırlatma)
+    await admin.append('bildirimler', { id: newId(), tarih: new Date().toISOString(), ...n });
   },
 };
 

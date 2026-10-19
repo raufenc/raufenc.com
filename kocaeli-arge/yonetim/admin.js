@@ -1,5 +1,5 @@
 // Yönetici paneli: haber, duyuru, video, dosya, bildirim, sürüm, proje, etkinlik, anket, ilçe, banner ve JSON düzenleme
-import { init, store, auth, admin, bildirim, isLive } from '../js/backend.js';
+import { init, store, auth, admin, bildirim, posts, sikayet, stats, isLive } from '../js/backend.js';
 import { icons, h, raw, el, esc, fmtDate, fmtRel, toast, sheet, uid } from '../js/ui.js';
 import { DEMO_PIN, NOTIFICATION_TOPICS, API, APP_VERSION } from '../js/config.js';
 
@@ -17,7 +17,7 @@ const SCHEMAS = {
   basvurular: { ad: 'Proje başvuruları', icon: 'file', fields: [F('ad', 'Proje'), F('alan', 'Alan'), F('okul', 'Okul'), F('ilce', 'İlçe'), F('kisi', 'Başvuran'), F('eposta', 'E-posta'), F('durum', 'Durum', 'select', { opts: ['inceleniyor', 'onaylandi', 'reddedildi'] }), F('ozet', 'Özet', 'textarea', { wide: 1 })], cols: ['ad', 'okul', 'kisi', 'durum'], readonlyAdd: true },
 };
 const JSON_DOCS = { anketler: 'Anketler', etwinning: 'eTwinning', tubitak: 'TÜBİTAK', akademiler: 'Akademiler', dokumanlar: 'Dokümanlar', iletisim: 'İletişim', hizliErisim: 'Hızlı erişim' };
-const NAV = [['pano', 'Pano', 'chart'], ...Object.entries(SCHEMAS).map(([k, s]) => [k, s.ad, s.icon]), ['bildirim', 'Bildirim gönder', 'bell'], ['surum', 'Sürüm yönetimi', 'settings'], ['json', 'Gelişmiş (JSON)', 'edit']];
+const NAV = [['pano', 'Pano', 'chart'], ['istatistik', 'İstatistikler', 'eye'], ['paylasimlar', 'Paylaşım onayı', 'feed'], ['sikayetler', 'Şikâyetler', 'flag'], ...Object.entries(SCHEMAS).map(([k, s]) => [k, s.ad, s.icon]), ['bildirim', 'Bildirim gönder', 'bell'], ['surum', 'Sürüm yönetimi', 'settings'], ['json', 'Gelişmiş (JSON)', 'edit']];
 const $ = (s) => document.querySelector(s);
 let section = location.hash.replace('#', '') || 'pano';
 
@@ -47,10 +47,14 @@ function renderSection() {
     const cnt = (k) => (c[k] || []).length;
     m.innerHTML = `<h1 class="page-title">Pano</h1><div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">${[['haberler', 'Haber'], ['duyurular', 'Duyuru'], ['projeler', 'Proje'], ['etkinlikler', 'Etkinlik'], ['videolar', 'Video seçkisi'], ['kutuphane', 'Kütüphane'], ['basvurular', 'Başvuru'], ['bildirimler', 'Bildirim']].map(([k, t]) => `<a class="stat" href="#${k}"><b>${cnt(k)}</b><span>${t}</span></a>`).join('')}</div>
       <div class="card pad" style="margin-top:16px"><h2 style="font-size:15px;margin:0 0 8px">Son başvurular</h2><table class="tbl"><tr><th>Proje</th><th>Okul</th><th>Başvuran</th><th>Durum</th></tr>${(c.basvurular || []).slice(0, 8).map(b => h`<tr><td>${b.ad}</td><td>${b.okul}</td><td>${b.kisi}</td><td><span class="chip ${b.durum === 'onaylandi' ? 'teal' : b.durum === 'reddedildi' ? 'meb' : 'amber'}">${b.durum}</span></td></tr>`).join('') || '<tr><td colspan="4" style="color:var(--muted)">Başvuru yok</td></tr>'}</table></div>
-      ${isLive ? '' : `<div class="notice" style="margin-top:16px">Demo modunda değişiklikler bu tarayıcıda saklanır. <button class="btn sm" id="reset">Örnek içeriğe dön</button></div>`}`;
+      ${isLive ? `<div class="notice" style="margin-top:16px">Canlı mod. Firestore'daki boş koleksiyonları örnek içerikle doldurmak için: <button class="btn sm" id="seed">Örnek içeriği Firestore'a aktar</button></div>` : `<div class="notice" style="margin-top:16px">Demo modunda değişiklikler bu tarayıcıda saklanır. <button class="btn sm" id="reset">Örnek içeriğe dön</button></div>`}`;
     m.querySelector('#reset')?.addEventListener('click', async () => { if (confirm('Tüm yerel değişiklikler silinsin mi?')) { await admin.reset(); toast('Örnek içerik geri yüklendi'); renderSection(); } });
+    m.querySelector('#seed')?.addEventListener('click', async () => { if (!confirm('Boş koleksiyonlar örnek içerikle doldurulsun mu? (Dolu olanlar korunur)')) return; try { const n = await admin.seedToFirestore(); toast(`${n} koleksiyon aktarıldı`); } catch (e) { toast('Aktarılamadı: ' + e.message); } });
     return;
   }
+  if (section === 'istatistik') return renderStats();
+  if (section === 'paylasimlar') return renderPosts();
+  if (section === 'sikayetler') return renderReports();
   if (SCHEMAS[section]) return renderCrud(section);
   if (section === 'bildirim') return renderBildirim();
   if (section === 'surum') return renderSurum();
@@ -92,6 +96,36 @@ function editForm(key, item) {
     if (i >= 0) list[i] = out; else list.unshift(out);
     await admin.save(key, list); sh.close(); toast('Kaydedildi'); renderCrud(key);
   };
+}
+
+async function renderStats() {
+  const m = $('#main'); m.innerHTML = '<h1 class="page-title">İstatistikler</h1><div class="empty">Hesaplanıyor…</div>';
+  const st = await stats.top(10); const c = store.content;
+  const anketKatilim = (c.anketler || []).reduce((a, x) => a + (x.katilim || 0), 0);
+  const label = (id) => id.startsWith('v') ? 'Video · ' + id.slice(1) : ((c.duyurular || []).find(d => d.id === id)?.baslik || (c.haberler || []).find(h => h.id === id)?.baslik || (c.paylasimlar || []).find(x => x.id === id)?.baslik || (id.startsWith('p') ? 'Paylaşım · ' + id.slice(1, 9) : id.startsWith('k') || id.startsWith('m') ? 'Haber (kaynak) · ' + id : id));
+  const rows = (list, key) => list.length ? list.map(r => h`<tr><td>${label(r.id)}</td><td style="text-align:right"><b>${r[key] || 0}</b></td></tr>`).join('') : '<tr><td colspan="2" style="color:var(--muted)">Henüz veri yok</td></tr>';
+  m.innerHTML = `<h1 class="page-title">İstatistikler</h1>
+    <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)"><div class="stat"><b>${st.total.goruntulenme}</b><span>Toplam görüntülenme</span></div><div class="stat"><b>${st.total.begeni}</b><span>Toplam beğeni</span></div><div class="stat"><b>${st.total.yorum}</b><span>Toplam yorum</span></div><div class="stat"><b>${anketKatilim}</b><span>Anket katılımı</span></div></div>
+    <div class="grid2" style="margin-top:16px"><div class="card pad"><h2 style="font-size:15px;margin:0 0 8px">En çok görüntülenen</h2><table class="tbl">${rows(st.byViews, 'goruntulenme')}</table></div><div class="card pad"><h2 style="font-size:15px;margin:0 0 8px">En çok beğenilen</h2><table class="tbl">${rows(st.byLikes, 'begeni')}</table></div></div>
+    <div class="notice" style="margin-top:16px">${isLive ? 'Veriler Firestore "sosyal" koleksiyonundan; Firebase Analytics ile kullanıcı sayıları konsolda izlenir.' : 'Demo modunda yalnız bu tarayıcıdaki etkileşimler sayılır.'}</div>`;
+}
+
+async function renderPosts() {
+  const m = $('#main'); m.innerHTML = '<h1 class="page-title">Paylaşım onayı</h1><div class="empty">Yükleniyor…</div>';
+  const list = await posts.list({ all: true });
+  const pend = list.filter(p => p.durum === 'bekliyor'), rest = list.filter(p => p.durum !== 'bekliyor');
+  const row = (p) => h`<div class="row" style="align-items:flex-start">${p.foto ? raw(`<img src="${esc(p.foto)}" alt="" style="width:72px;height:72px;object-fit:cover;border-radius:10px">`) : raw('<span class="ic">' + icons.feed + '</span>')}<span class="tx"><b>${p.baslik || p.metin.slice(0, 60)}</b><span>${p.ad}${p.ilce ? ' · ' + p.ilce : ''} · ${fmtRel(p.tarih)}</span><span style="white-space:pre-wrap">${p.metin.slice(0, 300)}</span>${p.link ? raw(`<a href="${esc(p.link)}" target="_blank" rel="noopener" style="color:var(--navy-2);font-size:12px">${esc(p.link)}</a>`) : ''}</span><span class="btn-row" style="flex:none;flex-direction:column">${p.durum !== 'onayli' ? raw(`<button class="btn sm primary" data-ok="${esc(p.id)}">${icons.check} Onayla</button>`) : raw('<span class="chip teal">Yayında</span>')}${p.durum !== 'red' ? raw(`<button class="btn sm" data-red="${esc(p.id)}">Reddet</button>`) : ''}<button class="btn sm ghost" data-del="${p.id}" style="color:var(--meb)">${raw(icons.trash)}</button></span></div>`;
+  m.innerHTML = `<h1 class="page-title">Paylaşım onayı</h1><h2 style="font-size:15px">Onay bekleyen (${pend.length})</h2><div class="card">${pend.map(row).join('') || '<div class="empty">Bekleyen paylaşım yok</div>'}</div><h2 style="font-size:15px;margin-top:20px">Diğer (${rest.length})</h2><div class="card">${rest.map(row).join('') || '<div class="empty">Kayıt yok</div>'}</div>`;
+  m.querySelectorAll('[data-ok]').forEach(b => b.onclick = async () => { await posts.setDurum(b.dataset.ok, 'onayli'); toast('Onaylandı'); renderPosts(); });
+  m.querySelectorAll('[data-red]').forEach(b => b.onclick = async () => { await posts.setDurum(b.dataset.red, 'red'); toast('Reddedildi'); renderPosts(); });
+  m.querySelectorAll('[data-del]').forEach(b => b.onclick = async () => { if (confirm('Silinsin mi?')) { await posts.remove(b.dataset.del); renderPosts(); } });
+}
+
+async function renderReports() {
+  const m = $('#main'); m.innerHTML = '<h1 class="page-title">Şikâyetler</h1><div class="empty">Yükleniyor…</div>';
+  const list = await sikayet.list();
+  m.innerHTML = `<h1 class="page-title">Şikâyetler</h1><div class="card"><table class="tbl"><tr><th>Tür</th><th>İçerik</th><th>Sebep</th><th>Bildiren</th><th>Durum</th><th></th></tr>${list.map(s => h`<tr><td>${s.tur}</td><td>${s.ozet}<br><small style="color:var(--muted)">${s.hedefId}</small></td><td>${s.metin}</td><td>${s.ad}<br><small style="color:var(--muted)">${fmtRel(s.tarih)}</small></td><td><span class="chip ${s.durum === 'acik' ? 'amber' : ''}">${s.durum === 'acik' ? 'Açık' : 'Kapandı'}</span></td><td>${s.durum === 'acik' ? raw(`<button class="btn sm" data-close="${esc(s.id)}">Kapat</button>`) : ''}</td></tr>`).join('') || '<tr><td colspan="6" style="color:var(--muted)">Şikâyet yok</td></tr>'}</table></div><div class="notice" style="margin-top:12px">Şikâyet edilen paylaşımı "Paylaşım onayı" bölümünden, yorumu ilgili içerik sayfasından silebilirsiniz.</div>`;
+  m.querySelectorAll('[data-close]').forEach(b => b.onclick = async () => { await sikayet.close(b.dataset.close); renderReports(); });
 }
 
 function renderBildirim() {

@@ -25,4 +25,5 @@ export const feeds = {
   detail: (url) => cachedFetch('d:' + url, `${API.feed}?src=detail&url=${encodeURIComponent(url)}`, 60 * 60 * 1000),
   channel: (id) => cachedFetch('yt:' + id, `${API.feed}?src=yt&channel=${encodeURIComponent(id)}`),
   playlist: (id) => cachedFetch('pl:' + id, `${API.feed}?src=yt&playlist=${encodeURIComponent(id)}`),
+  live: (ids) => cachedFetch('live:' + ids.join(','), `${API.feed}?src=live&channel=${encodeURIComponent(ids.join(','))}`, 2 * 60 * 1000),
 };

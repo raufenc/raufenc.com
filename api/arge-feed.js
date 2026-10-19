@@ -191,9 +191,27 @@ async function getDetail(url) {
   return { title: titleCase(title), sub, date, sourceViews, image: image ? absolutize(image, u.href) : '', html: body, link: u.href };
 }
 
-async function cached(key, fn) {
+// Kanal canlı yayında mı? /live sayfası canlı videoya yönlenir; değilse kanal sayfasına döner.
+async function liveStatus(channelId) {
+  const html = await fetchText(`https://www.youtube.com/channel/${channelId}/live`);
+  // Canlı yayın varsa /live adresi izleme sayfasına döner (videoPrimaryInfoRenderer); yoksa kanal sayfası gelir.
+  const isWatch = /"videoPrimaryInfoRenderer"|"currentVideoEndpoint"/.test(html);
+  let vid = (html.match(/"currentVideoEndpoint":\{[^}]*?"watchEndpoint":\{"videoId":"([A-Za-z0-9_-]{11})"/) || [])[1]
+    || (((html.match(/<link rel="canonical" href="([^"]+)"/i) || [])[1] || '').match(/[?&]v=([A-Za-z0-9_-]{11})/) || [])[1] || '';
+  if (!vid && isWatch) { // en sık geçen videoId izlenen videodur
+    const freq = {}; for (const m of html.matchAll(/"videoId":"([A-Za-z0-9_-]{11})"/g)) freq[m[1]] = (freq[m[1]] || 0) + 1;
+    vid = Object.entries(freq).sort((a, b) => b[1] - a[1])[0]?.[0] || '';
+  }
+  const isLive = isWatch && !!vid && /"isLive":true|"isLiveNow":true/.test(html);
+  const upcoming = isWatch && !!vid && !isLive && /"isUpcoming":true/.test(html);
+  const rawTitle = (html.match(/"videoPrimaryInfoRenderer":\{"title":\{"runs":\[\{"text":"((?:[^"\\]|\\.)*)"/) || [])[1] || (html.match(/<meta name="title" content="([^"]*)"/i) || [])[1] || '';
+  let title = ''; try { title = JSON.parse('"' + rawTitle + '"'); } catch (_) { title = rawTitle; }
+  return { channelId, live: isLive, upcoming, videoId: isLive || upcoming ? vid : '', title: isLive || upcoming ? decodeEntities(title) : '' };
+}
+
+async function cached(key, fn, ttl = TTL_MS) {
   const hit = CACHE.get(key);
-  if (hit && Date.now() - hit.t < TTL_MS) return hit.v;
+  if (hit && Date.now() - hit.t < ttl) return hit.v;
   const v = await fn();
   CACHE.set(key, { t: Date.now(), v });
   if (CACHE.size > 200) CACHE.clear();
@@ -218,6 +236,12 @@ export default async function handler(req) {
     if (src === 'detail') {
       const data = await cached('detail:' + searchParams.get('url'), () => getDetail(searchParams.get('url') || ''));
       return json({ ok: true, ...data });
+    }
+    if (src === 'live') {
+      const ids = (searchParams.get('channel') || '').split(',').filter(id => YT_ID.test(id)).slice(0, 5);
+      if (!ids.length) return json({ error: 'bad_id' }, 400);
+      const results = await Promise.all(ids.map(id => cached('live:' + id, () => liveStatus(id), 2 * 60 * 1000).catch(() => ({ channelId: id, live: false, error: true }))));
+      return json({ ok: true, items: results, fetchedAt: new Date().toISOString() }, 200, { 'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=300' });
     }
     if (src === 'yt') {
       const channel = searchParams.get('channel') || '';

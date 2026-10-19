@@ -2,8 +2,9 @@
 import { icons, h, raw, el, esc, fmtDate, fmtAy, fmtRel, fmtSayi, ymd, GUNLER_K, toast, empty, md, sheet, share } from '../ui.js';
 import { store, auth, anket as anketApi, bildirim, push, isLive } from '../backend.js';
 import { listRow } from '../components.js';
+import { feeds } from '../feeds.js';
 import { downloadIcs } from './home.js';
-import { API, APP_VERSION, NOTIFICATION_TOPICS } from '../config.js';
+import { API, APP_VERSION, NOTIFICATION_TOPICS, YT_CHANNELS } from '../config.js';
 import { go } from '../router.js';
 
 export async function takvim(ctx) {
@@ -150,13 +151,46 @@ export async function hesap(ctx) {
     <section class="section"><div class="section-head"><h2>Favoriler</h2><a href="#/favoriler">Aç</a></div><div class="card">${listRow({ icon: 'star', title: `${me.favoriler.length} favori`, sub: 'Haber, duyuru ve videolar', href: '#/favoriler' })}</div></section>
     <section class="section"><div class="section-head"><h2>Bildirim tercihleri</h2></div><div class="card">${NOTIFICATION_TOPICS.map(t => `<label class="switch"><span>${t.ad}</span><input type="checkbox" data-topic="${t.key}" ${me.bildirim[t.key] !== false ? 'checked' : ''}></label>`).join('')}
       <div class="switch"><span>Push bildirimleri<small style="display:block;color:var(--muted);font-weight:500">${push.supported() ? (push.enabled() ? 'Bu cihaz için açık' : 'Cihaz izni gerekir') : (isLive ? 'Bu tarayıcıda desteklenmiyor' : 'Demo modunda uygulama içi bildirimler çalışır')}</small></span><button class="btn sm ${push.enabled() ? '' : 'primary'}" id="push" ${push.supported() && !push.enabled() ? '' : 'disabled'}>${push.enabled() ? 'Açık' : 'Etkinleştir'}</button></div></div></section>
+    <section class="section"><div class="section-head"><h2>Yazı boyutu</h2></div><div class="seg" id="font">${[['kucuk', 'Küçük'], ['normal', 'Normal'], ['buyuk', 'Büyük']].map(([k, v]) => `<button data-f="${k}" class="${(document.documentElement.dataset.font || 'normal') === k ? 'on' : ''}">${v}</button>`).join('')}</div></section>
     <section class="section"><div class="section-head"><h2>Tema</h2></div><div class="seg" id="theme">${[['auto', 'Sistem'], ['light', 'Açık'], ['dark', 'Koyu']].map(([k, v]) => `<button data-t="${k}" class="${k === theme ? 'on' : ''}">${v}</button>`).join('')}</div></section>
     <section class="section"><div class="card">${store.isAdmin ? listRow({ icon: 'settings', title: 'Yönetici paneli', sub: 'Haber, duyuru, video, bildirim, sürüm', href: '/kocaeli-arge/yonetim/' }) : ''}${listRow({ icon: 'info', title: 'Uygulama hakkında', sub: 'Sürüm ' + APP_VERSION + (isLive ? ' · Canlı' : ' · Demo modu'), href: '#/hakkinda' })}<button class="row tap" style="width:100%;text-align:left" id="out"><span class="ic" style="color:var(--meb)">${icons.logout}</span><span class="tx"><b>Çıkış yap</b></span></button></div></section>`;
   ctx.root.querySelector('#pf').addEventListener('submit', async (e) => { e.preventDefault(); await auth.updateProfile(Object.fromEntries(new FormData(e.target).entries())); toast('Profil kaydedildi'); });
   ctx.root.querySelectorAll('[data-topic]').forEach(i => i.addEventListener('change', () => { bildirim.setPref(i.dataset.topic, i.checked); toast(i.checked ? 'Bildirim açıldı' : 'Bildirim kapatıldı'); }));
   ctx.root.querySelector('#push').addEventListener('click', async (e) => { try { await push.enable(); toast('Push bildirimleri etkin'); hesap(ctx); } catch (err) { toast(err.message === 'denied' ? 'Bildirim izni verilmedi' : 'Bu cihazda etkinleştirilemedi'); } });
+  ctx.root.querySelectorAll('#font button').forEach(b => b.addEventListener('click', () => { document.dispatchEvent(new CustomEvent('arge:font', { detail: b.dataset.f })); ctx.root.querySelectorAll('#font button').forEach(x => x.classList.toggle('on', x === b)); }));
   ctx.root.querySelectorAll('#theme button').forEach(b => b.addEventListener('click', () => { document.dispatchEvent(new CustomEvent('arge:theme', { detail: b.dataset.t })); ctx.root.querySelectorAll('#theme button').forEach(x => x.classList.toggle('on', x === b)); }));
   ctx.root.querySelector('#out').addEventListener('click', async () => { await auth.signOut(); toast('Çıkış yapıldı'); go('#/'); });
+}
+
+export async function ara(ctx) {
+  ctx.title('Ara');
+  let q = ctx.query.q || '';
+  ctx.root.innerHTML = `<div class="search">${icons.search}<input type="search" placeholder="Haber, duyuru, proje, doküman, ilçe…" value="${esc(q)}" autofocus></div><div id="res"></div>`;
+  const inp = ctx.root.querySelector('input'), res = ctx.root.querySelector('#res');
+  let news = [], vids = [];
+  feeds.all().then(d => { news = d.items || []; run(); }).catch(() => {});
+  Promise.all(YT_CHANNELS.map(k => feeds.channel(k.id).then(d => d.items || []).catch(() => []))).then(v => { vids = v.flat(); run(); });
+  const norm = (t) => String(t || '').toLocaleLowerCase('tr-TR');
+  function run() {
+    q = inp.value.trim(); history.replaceState(null, '', '#/ara?q=' + encodeURIComponent(q));
+    if (q.length < 2) { res.innerHTML = `<div class="empty">${icons.search}<div>En az iki harf yazın.</div></div>`; return; }
+    const c = store.content, n = norm(q), hit = (...f) => f.some(x => norm(x).includes(n));
+    const groups = [
+      ['Duyurular', (c.duyurular || []).filter(d => hit(d.baslik, d.ozet, d.icerik)).map(d => listRow({ icon: 'megaphone', title: d.baslik, sub: fmtDate(d.tarih), href: '#/duyurular/' + d.id }))],
+      ['Haberler', news.filter(x => hit(x.title, x.summary)).slice(0, 15).map(x => listRow({ icon: 'news', title: x.title, sub: x.kaynak, href: '#/haberler/' + encodeURIComponent(x.id) }))],
+      ['Videolar', vids.filter(v => hit(v.title, v.summary)).slice(0, 10).map(v => listRow({ icon: 'play', title: v.title, sub: v.channel, href: '#/tv/' + v.videoId }))],
+      ['Projeler', (c.projeler || []).filter(p => hit(p.ad, p.ozet, p.alan)).map(p => listRow({ icon: 'flask', title: p.ad, sub: p.alan, href: '#/arge/' + p.id }))],
+      ['Etkinlikler', (c.etkinlikler || []).filter(e => hit(e.baslik, e.yer, e.aciklama)).map(e => listRow({ icon: 'calendar', title: e.baslik, sub: fmtDate(e.tarih, { saat: true }), href: '#/takvim?g=' + e.tarih.slice(0, 10) }))],
+      ['Kütüphane ve dokümanlar', [...(c.kutuphane || []).filter(k => hit(k.baslik, k.aciklama)).map(k => listRow({ icon: 'book', title: k.baslik, sub: k.aciklama, href: k.link || '#/kutuphane' })), ...((c.dokumanlar?.formlar || []).filter(f => hit(f.baslik, f.aciklama)).map(f => listRow({ icon: 'file', title: f.baslik, sub: f.aciklama, href: '#/dokumanlar' })))]],
+      ['İlçeler', (c.ilceler || []).filter(i => hit(i.ad, (i.faaliyetler || []).join(' '))).map(i => listRow({ icon: 'building', title: i.ad, sub: i.telefon, href: '#/ilceler/' + i.id }))],
+      ['Anketler', (c.anketler || []).filter(a => hit(a.baslik, a.aciklama)).map(a => listRow({ icon: 'chart', title: a.baslik, sub: a.aciklama, href: '#/anketler/' + a.id }))],
+      ['TÜBİTAK / eTwinning', [...((c.tubitak?.programlar || []).filter(p => hit(p.kod, p.ad, p.ozet)).map(p => listRow({ icon: 'atom', title: 'TÜBİTAK ' + p.kod + ' · ' + p.ad, sub: p.ozet, href: '#/tubitak' }))), ...((c.etwinning?.cagrilar || []).filter(e => hit(e.baslik, e.ozet)).map(e => listRow({ icon: 'globe', title: e.baslik, sub: e.ozet, href: '#/etwinning' })))]],
+    ].filter(([, rows]) => rows.length);
+    res.innerHTML = groups.map(([t, rows]) => `<section class="section"><div class="section-head"><h2>${t} <span class="chip">${rows.length}</span></h2></div><div class="card">${rows.join('')}</div></section>`).join('') || `<div class="empty">${icons.search}<div>"${esc(q)}" için sonuç bulunamadı.</div></div>`;
+    res.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_blank'; a.rel = 'noopener'; });
+  }
+  let t; inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 200); });
+  run(); inp.focus();
 }
 
 export async function hakkinda(ctx) {
@@ -169,6 +203,7 @@ export async function hakkinda(ctx) {
 export async function menu(ctx) {
   ctx.title('Tüm Modüller');
   const items = [
+    ['Akış', 'feed', '#/akis', 'Paylaşımlar, haber ve videolar tek akışta'], ['Ara', 'search', '#/ara', 'Tüm içerikte arama'],
     ['Haberler', 'news', '#/haberler', 'Kocaeli MEM, AR-GE ve MEB haberleri'], ['Duyurular', 'megaphone', '#/duyurular', 'Resmî ve acil duyurular, son tarihler'], ['Bildirimler', 'bell', '#/bildirimler', 'Bildirim merkezi'],
     ['Kocaeli MEM TV', 'play', '#/tv', 'YouTube, canlı yayın, oynatma listeleri'], ['AR-GE Çalışmaları', 'flask', '#/arge', 'Projeler, başvuru, sonuç raporları'], ['eTwinning Merkezi', 'globe', '#/etwinning', 'Çağrılar, örnekler, kılavuzlar'],
     ['TÜBİTAK Merkezi', 'atom', '#/tubitak', '4004 · 4005 · 4006 · 2204'], ['Öğretmen Akademileri', 'graduation', '#/akademiler', 'Takvim, videolar, başvuru'], ['Dijital Kütüphane', 'book', '#/kutuphane', 'PDF, kılavuz, MEB yayınları, e-kitap'],

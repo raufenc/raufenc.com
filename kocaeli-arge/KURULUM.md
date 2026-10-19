@@ -28,7 +28,8 @@ Demo modda Firebase gerekmez; tüm ekranlar ve yönetici paneli çalışır.
    - `ARGE_FCM_SERVICE_ACCOUNT` = JSON'un tamamı (ya da base64'ü)
    - `ARGE_ADMIN_TOKEN` = uzun rastgele bir gizli anahtar (yönetici paneli "Bildirim gönder" bunu ister)
 9. Yapay zekâ asistanı için Vercel'de `ANTHROPIC_API_KEY` (tercihen) veya `OPENAI_API_KEY`; isteğe bağlı `ARGE_MODEL`.
-10. Deploy. İlk girişte yönetici panelinden içerikleri doldur; Firestore `icerik` koleksiyonu boşken uygulama `seed.json` örneklerini gösterir.
+10. Deploy. Yönetici paneli → Pano → **"Örnek içeriği Firestore'a aktar"** ile başlangıç içeriği tek tıkla yüklenir; sonra panelden düzenlenir.
+11. Firestore → Indexes: `firestore.indexes.json` içindeki iki bileşik dizini oluştur (ya da Akış ilk açıldığında konsolun verdiği bağlantıya tıkla).
 
 ## Veri modeli (Firestore)
 - `icerik/{koleksiyon}` → `{ items: [...] }` (haberler, duyurular, projeler, etkinlikler, ilceler, kutuphane, videolar, oynatmaListeleri, bannerlar, basvurular, bildirimler) veya nesne (surum, etwinning, tubitak, akademiler, dokumanlar, iletisim, anketler)
@@ -36,6 +37,9 @@ Demo modda Firebase gerekmez; tüm ekranlar ve yönetici paneli çalışır.
 - `sosyal/{itemId}` `{ begeni, goruntulenme, yorum }` + `yorumlar/{id}`
 - `anketCevaplari/{anketId_uid}`, `anketSonuc/{anketId}` `{ sayim, katilim }`
 - `pushTokens/{token}` `{ token, uid, topics[] }`
+- `paylasimlar/{id}` öğretmen paylaşımları `{ uid, ad, metin, foto, link, durum: bekliyor|onayli|red, tarih }` (Akış sekmesi; yönetici onayı)
+- `sikayetler/{id}` içerik şikâyetleri `{ tur, hedefId, metin, uid, durum }`
+- Akış sorguları için bileşik dizinler gerekir: `firestore.indexes.json` (Firestore konsolu ilk sorguda da dizin bağlantısı verir)
 
 `itemId` kuralı: haberler `k<hash>` / `m<hash>` (RSS bağlantısından), videolar `v<YouTubeId>`, duyurular kendi `id`'si.
 
@@ -46,6 +50,12 @@ Demo modda Firebase gerekmez; tüm ekranlar ve yönetici paneli çalışır.
 - YouTube: kanal RSS'leri (API anahtarı gerekmez); kanal kimlikleri `js/config.js` → `YT_CHANNELS`
   - Kocaeli MEM `UCL15RFYGVnpVVoSeTeZXWTA`, MEB `UC5pivY9xQEn-vWwCW4Okhzw`, EBA `UCCTccDv6cXvwl1-SzfF83Vg`
 - Haber detayı uygulama içinde okunur (`/api/arge-feed?src=detail&url=…`; yalnız meb.gov.tr alan adları).
+
+## Akış (sosyal ağ) ve moderasyon
+- Akış sekmesi: öğretmen paylaşımları + haber + video + duyuru tek zaman çizgisinde; her kartta beğeni, yorum, paylaş, favori ve izlenme sayısı (kart ekranda görününce sayılır).
+- Öğretmen paylaşımı "onay bekliyor" durumunda açılır; yönetici paneli → Paylaşım onayı ile yayınlanır/reddedilir. Kurum hesabı (yönetici) paylaşımları doğrudan yayınlanır.
+- Yorum ve paylaşımlarda şikâyet düğmesi vardır; yönetici paneli → Şikâyetler'de izlenir (mağaza kuralları için gerekli UGC moderasyonu).
+- Canlı yayın: `/api/arge-feed?src=live` kanalların canlı durumunu 2 dakikalık önbellekle izler; yayın varsa ana sayfa ve akışta "CANLI" şeridi çıkar.
 
 ## Sürüm yönetimi
 `js/config.js` → `APP_VERSION` uygulama sürümüdür. Yönetici paneli → Sürüm yönetimi ile "son sürüm" ve "en düşük sürüm" ayarlanır; kullanıcıya güncelleme çubuğu çıkar. Yeni dağıtımda `sw.js` → `VERSION` sabitini de artırın.

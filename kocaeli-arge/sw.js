@@ -1,8 +1,8 @@
 /* Kocaeli MEM AR-GE Portalı — service worker: çevrim dışı kabuk + FCM arka plan bildirimleri */
-const VERSION = 'arge-v1.0.0';
+const VERSION = 'arge-v1.1.0';
 const BASE = '/kocaeli-arge/';
 const SHELL = [BASE, BASE + 'index.html', BASE + 'css/app.css', BASE + 'manifest.webmanifest', BASE + 'data/seed.json',
-  ...['app', 'backend', 'components', 'config', 'feeds', 'intro', 'router', 'ui', 'views/home', 'views/tv', 'views/arge', 'views/misc'].map(f => `${BASE}js/${f}.js`)];
+  ...['app', 'backend', 'components', 'config', 'feeds', 'intro', 'router', 'ui', 'views/home', 'views/tv', 'views/arge', 'views/misc', 'views/akis'].map(f => `${BASE}js/${f}.js`)];
 
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(VERSION).then(c => c.addAll(SHELL).catch(() => {})).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== VERSION && k.startsWith('arge-')).map(k => caches.delete(k)))).then(() => self.clients.claim())); });

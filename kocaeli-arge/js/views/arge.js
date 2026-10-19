@@ -30,7 +30,7 @@ export async function arge(ctx) {
       body.querySelector('#bf')?.addEventListener('submit', async (e) => {
         e.preventDefault(); if (!store.user) return toast('Başvuru için giriş yapın');
         const f = Object.fromEntries(new FormData(e.target).entries());
-        await admin.save('basvurular', [{ id: 'bv' + Date.now(), uid: store.user.uid, tarih: new Date().toISOString(), durum: 'inceleniyor', ...f }, ...(c.basvurular || [])]);
+        await admin.append('basvurular', { id: 'bv' + Date.now(), uid: store.user.uid, tarih: new Date().toISOString(), durum: 'inceleniyor', ...f });
         toast('Başvurunuz alındı'); c.basvurular = store.content.basvurular; render();
       });
       return;

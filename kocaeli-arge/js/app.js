@@ -1,6 +1,6 @@
 // Uygulama kabuğu: açılış hologramı → giriş → sekmeli arayüz; yönlendirme, tema, sürüm kontrolü, bildirim rozeti
 import { APP_VERSION, APP_NAME, BASE_PATH, FIREBASE_CONFIG } from './config.js';
-import { icons, h, raw, el, esc, toast, sheet } from './ui.js';
+import { icons, h, raw, el, esc, toast, actionToast, sheet } from './ui.js';
 import { init, store, auth, bildirim, isLive } from './backend.js';
 import { route, match, go, back } from './router.js';
 import { playIntro } from './intro.js';
@@ -8,14 +8,15 @@ import * as H from './views/home.js';
 import * as TV from './views/tv.js';
 import * as A from './views/arge.js';
 import * as M from './views/misc.js';
+import * as K from './views/akis.js';
 
 route('/', H.home); route('/haberler', H.haberler); route('/haberler/:id', H.haberDetay); route('/duyurular', H.duyurular); route('/duyurular/:id', H.duyuruDetay);
-route('/bildirimler', H.bildirimler); route('/favoriler', H.favoriler);
+route('/bildirimler', H.bildirimler); route('/favoriler', H.favoriler); route('/akis', K.akis); route('/akis/:id', K.paylasimDetay); route('/ara', M.ara);
 route('/tv', TV.tv); route('/tv/:id', TV.video);
 route('/arge', A.arge); route('/arge/:id', A.projeDetay); route('/etwinning', A.etwinning); route('/tubitak', A.tubitak); route('/akademiler', A.akademiler); route('/kutuphane', A.kutuphane); route('/dokumanlar', A.dokumanlar);
 route('/takvim', M.takvim); route('/ilceler', M.ilceler); route('/ilceler/:id', M.ilceDetay); route('/anketler', M.anketler); route('/anketler/:id', M.anketDetay); route('/asistan', M.asistan); route('/iletisim', M.iletisim); route('/hesap', M.hesap); route('/hakkinda', M.hakkinda); route('/menu', M.menu);
 
-const TABS = [['#/', 'Ana Sayfa', 'home'], ['#/haberler', 'Haberler', 'news'], ['#/tv', 'MEM TV', 'play'], ['#/takvim', 'Takvim', 'calendar'], ['#/menu', 'Menü', 'grid']];
+const TABS = [['#/', 'Ana Sayfa', 'home'], ['#/akis', 'Akış', 'feed'], ['#/tv', 'MEM TV', 'play'], ['#/takvim', 'Takvim', 'calendar'], ['#/menu', 'Menü', 'grid']];
 const $ = (s) => document.querySelector(s);
 let installPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); installPrompt = e; });
@@ -27,12 +28,15 @@ function applyTheme(t) {
   $('meta[name=theme-color]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0B1120' : '#E72737');
 }
 document.addEventListener('arge:theme', (e) => applyTheme(e.detail));
+function applyFont(f) { if (f && f !== 'normal') document.documentElement.dataset.font = f; else delete document.documentElement.dataset.font; try { localStorage.setItem('arge.font', f); } catch (_) {} bildirim.setFont(f); }
+document.addEventListener('arge:font', (e) => applyFont(e.detail));
 
 function renderShell() {
   $('#device').innerHTML = `<div class="screen">
     <header class="topbar"><button class="icon-btn" id="tb-back" aria-label="Geri" hidden>${icons.back}</button>
       <div class="brand" id="tb-brand"><span class="logo">AR-GE</span><div><div class="t1">Kocaeli MEM</div><div class="t2">AR-GE Portalı</div></div></div>
       <div class="title" id="tb-title" hidden></div>
+      <a class="icon-btn" href="#/ara" aria-label="Ara">${icons.search}</a>
       <a class="icon-btn" href="#/bildirimler" aria-label="Bildirimler" id="tb-bell">${icons.bell}<span class="dot" hidden></span></a>
       <a class="icon-btn" href="#/hesap" aria-label="Hesabım" id="tb-user">${icons.user}</a></header>
     <main id="view" tabindex="-1"></main>
@@ -107,7 +111,7 @@ function showLogin() {
 document.addEventListener('arge:login', showLogin);
 
 async function boot() {
-  try { applyTheme(localStorage.getItem('arge.theme') || 'auto'); } catch (_) {}
+  try { applyTheme(localStorage.getItem('arge.theme') || 'auto'); applyFont(localStorage.getItem('arge.font') || 'normal'); } catch (_) {}
   renderShell();
   const ready = init();
   await playIntro(document.getElementById('intro'));
@@ -121,7 +125,10 @@ async function boot() {
   render();
   if ('serviceWorker' in navigator) {
     const cfg = isLive ? '?cfg=' + encodeURIComponent(JSON.stringify(FIREBASE_CONFIG)) : '';
-    navigator.serviceWorker.register(BASE_PATH + 'sw.js' + cfg, { scope: BASE_PATH }).catch(() => {});
+    navigator.serviceWorker.register(BASE_PATH + 'sw.js' + cfg, { scope: BASE_PATH }).then((reg) => {
+      // Yeni sürüm yüklendiğinde kullanıcıya haber ver
+      reg.addEventListener('updatefound', () => { const w = reg.installing; w?.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) actionToast('Yeni sürüm hazır', 'Yenile', () => location.reload()); }); });
+    }).catch(() => {});
   }
   window.addEventListener('online', () => toast('Bağlantı yeniden kuruldu'));
   window.addEventListener('offline', () => toast('Çevrim dışısınız; kayıtlı içerik gösteriliyor', 3000));
