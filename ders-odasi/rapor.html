@@ -62,6 +62,15 @@
   .eylem { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
   .etiket { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 900; background: var(--krem2); border: 1px solid var(--cizgi); }
   details summary { cursor: pointer; font-weight: 900; color: var(--lacivert); }
+  details.ibre-ozet { margin: 26px 0 0; background: var(--krem2); border: 2px solid var(--cizgi); border-radius: 16px; padding: 4px 16px 14px; }
+  details.ibre-ozet > summary { padding: 10px 0; font: 800 21px 'Baloo 2', sans-serif; }
+  details.ibre-ozet h4 { margin: 16px 0 6px; font: 800 18px 'Baloo 2', sans-serif; color: var(--lacivert); }
+  details.ibre-ozet table td:first-child { font-weight: 800; }
+  details.ibre-ozet .iz { display: inline-block; height: 6px; border-radius: 3px; vertical-align: middle; margin-left: 6px; }
+  .iz.az { background: #3b58a6; } .iz.orta { background: #0b7a6c; } .iz.fazla { background: #b8432d; }
+  th.z-az { color: #3b58a6; } th.z-orta { color: #0b7a6c; } th.z-fazla { color: #b8432d; }
+  #ibreOzetDug { width: 100%; margin-top: 10px; justify-content: center; }
+  #ibreOzetDug[aria-pressed="true"] { background: var(--lacivert); border-color: var(--lacivert); color: #fff; }
   @media (max-width: 860px) { .yerlesim { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 2px solid var(--cizgi); } }
 </style>
 </head>
@@ -76,6 +85,7 @@
   <aside>
     <select id="dersFiltre"><option value="">Bütün dersler</option></select>
     <label style="display:flex;gap:6px;align-items:center;font-size:13px;font-weight:800"><input type="checkbox" id="ogretmenGoster"> Öğretmen oturumlarını da göster</label>
+    <button type="button" class="dug" id="ibreOzetDug" aria-pressed="false" hidden>İbre özeti (listedeki oturumlar)</button>
     <div class="liste" id="liste"></div>
   </aside>
   <main id="ana"></main>
@@ -105,7 +115,7 @@
   function param(a) { return new URLSearchParams(location.search).get(a); }
   function cubuk(oran) { return '<div class="cubuk ' + (oran >= .8 ? '' : oran >= .5 ? 'orta' : 'dusuk') + '"><i style="width:' + Math.round(oran * 100) + '%"></i></div>'; }
 
-  var secili = param('oturum'), odaSec = param('oda');
+  var secili = param('oturum'), odaSec = param('oda'), ozetMod = param('ibre') === '1';
   var filtre = document.getElementById('dersFiltre');
   (DO.katalog || []).forEach(function (d) { var o = document.createElement('option'); o.value = d.id; o.textContent = d.ad; filtre.appendChild(o); });
   if (param('ders')) filtre.value = param('ders');
@@ -120,22 +130,23 @@
   }
   function liste() {
     var l = document.getElementById('liste'), os = oturumlar();
+    ibreDugGuncelle(os);
     if (!os.length) { l.innerHTML = '<p class="alt">Bu cihazda kayıtlı oturum yok. Bir ders oynatıldığında burada görünür.</p>'; ana(); return; }
     var odalar = {};
     os.forEach(function (s) { if (s.oda) odalar[s.oda] = (odalar[s.oda] || 0) + 1; });
     l.innerHTML = Object.keys(odalar).map(function (o) { return '<button class="dug oda-dug" data-oda="' + kac(o) + '">Oda ' + kac(o) + ' · ' + odalar[o] + ' oturum</button>'; }).join(' ') +
       os.map(function (s) {
-        return '<button class="oturum' + (s.oturum === secili && !odaSec ? ' secili' : '') + '" data-id="' + kac(s.oturum) + '">' +
+        return '<button class="oturum' + (s.oturum === secili && !odaSec && !ozetMod ? ' secili' : '') + '" data-id="' + kac(s.oturum) + '">' +
           (s.max ? '<span class="p">%' + Math.round((s.puan || 0) / s.max * 100) + '</span>' : '') +
           '<b>' + kac(s.ad) + (s.rol === 'ogretmen' ? ' <span class="etiket">öğretmen</span>' : '') + '</b><small>' + kac(dersAd(s.ders)) + '</small><small>' + tarih(s.baslangic) + (s.oda ? ' · oda ' + kac(s.oda) : '') + (s.durum ? ' · ' + kac(s.durum) : '') + '</small></button>';
       }).join('');
-    if (!secili && !odaSec && os[0]) secili = os[0].oturum;
+    if (!secili && !odaSec && !ozetMod && os[0]) secili = os[0].oturum;
     ana();
   }
   document.getElementById('liste').addEventListener('click', function (e) {
     var b = e.target.closest('.oturum'), o = e.target.closest('.oda-dug');
-    if (b) { secili = b.dataset.id; odaSec = null; history.replaceState(null, '', '?oturum=' + encodeURIComponent(secili)); liste(); }
-    if (o) { odaSec = o.dataset.oda; history.replaceState(null, '', '?oda=' + encodeURIComponent(odaSec)); liste(); }
+    if (b) { ozetMod = false; secili = b.dataset.id; odaSec = null; history.replaceState(null, '', '?oturum=' + encodeURIComponent(secili)); liste(); }
+    if (o) { ozetMod = false; odaSec = o.dataset.oda; history.replaceState(null, '', '?oda=' + encodeURIComponent(odaSec)); liste(); }
   });
 
   /* Oturum ifadelerini analiz et */
@@ -167,6 +178,7 @@
 
   function ana() {
     var m = document.getElementById('ana');
+    if (ozetMod) return ibreModu(m);
     if (odaSec) return odaRaporu(m);
     var os = oku('do:oturumlar', []), s = os.find(function (x) { return x.oturum === secili; });
     if (!s) { m.innerHTML = '<div class="bos"><b>Rapor yok</b>Soldan bir oturum seçin.</div>'; return; }
@@ -230,8 +242,75 @@
         return '<tr><td><b>' + kac(x.s.ad) + '</b></td><td>' + (x.s.puan || 0) + ' / ' + (x.s.max || 0) + '</td><td style="width:25%">' + cubuk(o) + '</td><td>' + x.a.dogru + ' / ' + x.a.ilkler.length + '</td><td>' + sure(x.a.sure || 0) + '</td><td><a href="?oturum=' + encodeURIComponent(x.s.oturum) + '">ayrıntı</a></td></tr>';
       }).join('') + '</table></div>' +
       '<h3>En çok zorlanılan sorular</h3><div class="tablo-kap"><table><tr><th>Soru / öge</th><th>Doğru</th><th></th><th>Yanlış cevaplar</th></tr>' +
-      zor.slice(0, 15).map(function (z) { return '<tr><td>' + kac(z.soru) + '</td><td>' + z.dogru + ' / ' + z.top + '</td><td style="width:20%">' + cubuk(z.dogru / z.top) + '</td><td>' + kac(z.yanlislar.join(' · ')) + '</td></tr>'; }).join('') + '</table></div>';
+      zor.slice(0, 15).map(function (z) { return '<tr><td>' + kac(z.soru) + '</td><td>' + z.dogru + ' / ' + z.top + '</td><td style="width:20%">' + cubuk(z.dogru / z.top) + '</td><td>' + kac(z.yanlislar.join(' · ')) + '</td></tr>'; }).join('') + '</table></div>' +
+      ibreOzetHtml(os, false);
   }
+
+  /* ---------- İbre özeti (toplu; yalnız İbremetre dersleri) ---------- */
+  var ZONLAR = ['az', 'orta', 'fazla'], ZON_AD = { az: '▼ az', orta: '◆ kararında', fazla: '▲ fazla' };
+  function ibreDersi(id) { var d = (DO.katalog || []).find(function (k) { return k.id === id; }); return d && d.seri === 'İbremetre' ? d : null; }
+  function ibreVeri(os) {
+    var dersler = {};
+    try {
+      os.forEach(function (s) {
+        var d = ibreDersi(s.ders); if (!d) return;
+        var g = dersler[s.ders] || (dersler[s.ders] = { d: d, ogr: {}, tahmin: {}, kapi: {}, sen: {} });
+        var ogr = s.ogrenciId || s.ad; g.ogr[ogr] = 1;
+        (oku('do:ifade:' + s.oturum, []) || []).forEach(function (x) {
+          var _ = x._ || {}, n = _.nesne || '', t = _.t || 0, r = x.result || {}, m;
+          if (_.fiil === 'cevapladi' && n === 'tahmin/tahmin') {
+            m = /ibre=(az|orta|fazla)/.exec(r.response || '');
+            if (m) { var e = g.tahmin[ogr]; if (!e || t >= e.t) g.tahmin[ogr] = { t: t, z: m[1] }; }
+          } else if (_.fiil === 'etkilesti' && n.indexOf('kapilar/kapi-') === 0) {
+            var kz = n.slice(13); if (ZONLAR.indexOf(kz) !== -1) (g.kapi[ogr] = g.kapi[ogr] || {})[kz] = 1;
+          } else if (_.fiil === 'cevapladi' && n.indexOf('senaryo/senaryo-') === 0) {
+            m = /\((az|orta|fazla)\)\s*$/.exec(r.response || '');
+            if (m) { var sid = n.slice(16), q = g.sen[sid] || (g.sen[sid] = { ad: String(_.nesneAd || sid).split(' — ')[0], p: {} }); q.p[ogr + '|' + m[1]] = 1; }
+          }
+        });
+      });
+    } catch (e) { return []; }
+    return Object.keys(dersler).map(function (k) { return dersler[k]; }).filter(function (g) {
+      return Object.keys(g.tahmin).length || Object.keys(g.kapi).length || Object.keys(g.sen).length;
+    }).sort(function (a, b) { return (a.d.sira || 0) - (b.d.sira || 0); });
+  }
+  function ibreDugGuncelle(os) {
+    var b = document.getElementById('ibreOzetDug'); if (!b) return;
+    var var_ = false; try { var_ = ibreVeri(os).length > 0; } catch (e) { /* sessizce gizle */ }
+    b.hidden = !var_;
+    b.setAttribute('aria-pressed', ozetMod ? 'true' : 'false');
+    if (!var_ && ozetMod) ozetMod = false;
+  }
+  function ibreOzetHtml(os, acik) {
+    var veri = ibreVeri(os.filter(function (s) { return s.rol !== 'ogretmen'; }));
+    if (!veri.length) return '';
+    var h = '<details class="ibre-ozet"' + (acik ? ' open' : '') + '><summary>İbre özeti <span class="etiket">toplu sayılar</span></summary>' +
+      '<p class="alt">Öğrenciler ibreye nereden baktı: tahminler, açılan kapılar ve senaryolarda seçilen uçlar. Yalnız toplu sayılar; bu bir karne değildir, ibre gün içinde oynar.</p>';
+    veri.forEach(function (g) {
+      var N = Object.keys(g.ogr).length, u = g.d.uclar || [];
+      function hucre(say) { return '<td><b>' + say + '</b>' + (N ? ' / ' + N : '') + '</td>'; }
+      function cubukHucre(say, z) { return '<td><b>' + say + '</b> <span class="iz ' + z + '" style="width:' + (say ? Math.max(4, Math.round(say / Math.max(N, 1) * 60)) : 0) + 'px"></span></td>'; }
+      var th = ZONLAR.map(function (z, i) { return '<th class="z-' + z + '">' + ZON_AD[z] + (u[i] ? ' · ' + kac(u[i]) : '') + '</th>'; }).join('');
+      var tah = ZONLAR.map(function (z) { return Object.keys(g.tahmin).filter(function (o) { return g.tahmin[o].z === z; }).length; });
+      var kap = ZONLAR.map(function (z) { return Object.keys(g.kapi).filter(function (o) { return g.kapi[o][z]; }).length; });
+      var satir = '<tr><td>İbreye koydukları yer (tahmin)</td>' + tah.map(function (n, i) { return cubukHucre(n, ZONLAR[i]); }).join('') + '</tr>' +
+        '<tr><td>Kapıyı açan öğrenci</td>' + kap.map(function (n) { return hucre(n); }).join('') + '</tr>';
+      Object.keys(g.sen).forEach(function (sid) {
+        var q = g.sen[sid], say = ZONLAR.map(function (z) { return Object.keys(q.p).filter(function (k) { return k.slice(-(z.length + 1)) === '|' + z; }).length; });
+        satir += '<tr><td>Senaryo: ' + kac(q.ad) + '</td>' + say.map(function (n, i) { return cubukHucre(n, ZONLAR[i]); }).join('') + '</tr>';
+      });
+      h += '<h4>' + kac(String(g.d.ad || g.d.id).replace(/:\s*İbren Nerede\?\s*$/, '')) + ' · ' + N + ' öğrenci</h4>' +
+        (N === 1 ? '<p class="alt">Tek öğrenci olduğu için bu sayılar o öğrencinin kendi seçimlerini gösterir.</p>' : '') +
+        '<div class="tablo-kap"><table><tr><th></th>' + th + '</tr>' + satir + '</table></div>';
+    });
+    return h + '</details>';
+  }
+  function ibreModu(m) {
+    var os = oturumlar();
+    var h = ibreOzetHtml(os, true);
+    m.innerHTML = '<h2>İbre özeti</h2><p class="alt">Listedeki oturumlar: ' + os.filter(function (s) { return ibreDersi(s.ders) && s.rol !== 'ogretmen'; }).length + ' İbremetre oturumu' + (filtre.value ? ' · ' + kac(dersAd(filtre.value)) : '') + '</p>' + (h || '<div class="bos"><b>Gösterilecek İbre verisi yok</b>Bir İbremetre dersi oynandığında burada toplu sayılar görünür.</div>');
+  }
+  document.getElementById('ibreOzetDug').onclick = function () { ozetMod = !ozetMod; if (ozetMod) { odaSec = null; history.replaceState(null, '', '?ibre=1'); } liste(); };
 
   function csvIndir(s, a) {
     var satirlar = [['ogrenci', 'ders', 'saat', 'etkinlik', 'soru', 'verilen', 'dogru_mu', 'dogru_cevap', 'sure_sn', 'deneme']];

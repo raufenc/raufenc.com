@@ -455,40 +455,86 @@
     };
   })();
 
-  /* müzik yatağı: yumuşak pad + seyrek arpej; anlatım varken kısılır; ♫ düğmesi (DO.sesAcik) kapatır */
+  /* müzik yatağı: yumuşak pad + seyrek arpej; anlatım varken kısılır; ♫ düğmesi (DO.sesAcik) kapatır.
+     Altı ön ayar (ders JSON'undaki "muzik" ailesi): benlik · soz · iliski · caba · cesaret · inanc.
+     ritim: 8 sekizlik adım; sayı = akordaki nota sırası (0-3), -1 = sus. vur/hat: yumuşak vuruş/fısıltı adımları. Tümü kısık; anlatımda zaten 0.2'ye iner. */
+  var MUZIK_ONAYAR = {
+    benlik:  { bpm: 84,  akor: [[57, 60, 64, 67], [53, 57, 60, 64], [48, 55, 60, 64], [55, 59, 62, 67]], ritim: [0, -1, 2, -1, 1, 3, 2, -1], pad: 'triangle', padSes: 0.018, padAtak: 0.5, arp: 'sine', arpSes: 0.03, arpSure: 0.5, arpOkt: 12, bas: 0.05, basTip: 'sine' },
+    soz:     { bpm: 100, akor: [[50, 53, 57, 60], [55, 59, 62, 65], [48, 52, 55, 59], [57, 60, 64, 67]], ritim: [0, -1, 2, 1, -1, 3, 2, -1], pad: 'triangle', padSes: 0.014, padAtak: 0.25, arp: 'triangle', arpSes: 0.03, arpSure: 0.28, arpOkt: 12, bas: 0.045, basTip: 'sine', vur: [0, 4], hat: [1, 3, 5, 7] },
+    iliski:  { bpm: 88,  akor: [[55, 59, 62, 67], [52, 55, 59, 64], [48, 55, 60, 64], [50, 57, 62, 66]], ritim: [0, -1, 1, -1, 2, -1, 1, 3], pad: 'sine', padSes: 0.024, padAtak: 0.7, arp: 'sine', arpSes: 0.03, arpSure: 0.8, arpOkt: 12, bas: 0.05, basTip: 'sine', pad2: 'triangle' },
+    caba:    { bpm: 104, akor: [[52, 55, 59, 64], [48, 52, 55, 60], [55, 59, 62, 67], [50, 54, 57, 62]], ritim: [0, 1, 2, 3, 2, 1, 2, 3], pad: 'triangle', padSes: 0.014, padAtak: 0.3, arp: 'triangle', arpSes: 0.026, arpSure: 0.3, arpOkt: 12, bas: 0.04, basTip: 'triangle', basNabiz: true, vur: [0, 4] },
+    cesaret: { bpm: 96,  akor: [[50, 57, 62, 69], [45, 52, 57, 64], [47, 54, 59, 66], [43, 50, 55, 62]], ritim: [0, -1, 2, -1, 1, -1, 3, 2], pad: 'triangle', padSes: 0.02, padAtak: 0.35, arp: 'triangle', arpSes: 0.034, arpSure: 0.55, arpOkt: 12, bas: 0.055, basTip: 'sine', davul: [0, 3, 4] },
+    inanc:   { bpm: 72,  akor: [[50, 57, 60, 64], [55, 59, 62, 64], [48, 55, 59, 64], [50, 57, 59, 62]], ritim: [0, -1, -1, -1, 2, -1, -1, -1], pad: 'sine', padSes: 0.026, padAtak: 1.4, arp: 'sine', arpSes: 0.03, arpSure: 1.5, arpOkt: 12, bas: 0.055, basTip: 'sine', drone: true }
+  };
   var Muzik = (function () {
-    var c = null, master = null, tim = null, sonrakiT = 0, adim = 0, aktif = false, kapat = null, kisik = false;
-    var AKOR = [[57, 60, 64, 67], [53, 57, 60, 64], [48, 55, 60, 64], [55, 59, 62, 67]];
-    var ARP = [0, 2, 1, 3, 2, 1, 3, 2], BEAT = 60 / 92 / 2;
+    var c = null, master = null, tim = null, sonrakiT = 0, adim = 0, aktif = false, kapat = null, kisik = false, P = MUZIK_ONAYAR.benlik, ad = 'benlik', gurBuf = null;
     function hz(m) { return 440 * Math.pow(2, (m - 69) / 12); }
-    function not(f, t, sure, tip, ses, atak) {
-      var o = c.createOscillator(), g = c.createGain(); o.type = tip; o.frequency.value = f;
-      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(ses, t + (atak || 0.01)); g.gain.exponentialRampToValueAtTime(0.0001, t + sure);
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + sure + 0.05);
+    function aile() {
+      var O = DO.Oynatici, d = (O && O.ders) || DO._ders || {};
+      return MUZIK_ONAYAR[d.muzik] ? d.muzik : 'benlik';
+    }
+    function not(x, hedef, f, t, sure, tip, ses, atak) {
+      var o = x.createOscillator(), g = x.createGain(); o.type = tip; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(ses, t + (atak || 0.01)); g.gain.exponentialRampToValueAtTime(0.0001, t + Math.max(sure, (atak || 0.01) + 0.05));
+      o.connect(g); g.connect(hedef); o.start(t); o.stop(t + sure + 0.05);
+    }
+    function vurus(x, hedef, t, tip, ses) {   /* yumuşak vuruş: 'tok' = alçak davul, 'hat' = kısa fısıltı */
+      if (tip === 'hat') {
+        if (!gurBuf || gurBuf.sampleRate !== x.sampleRate) { var n = Math.floor(x.sampleRate * 0.05), b = x.createBuffer(1, n, x.sampleRate), d = b.getChannelData(0); for (var i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n); gurBuf = b; }
+        var s = x.createBufferSource(); s.buffer = gurBuf; var f = x.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 6500; var g = x.createGain(); g.gain.value = ses;
+        s.connect(f); f.connect(g); g.connect(hedef); s.start(t);
+      } else {
+        var o = x.createOscillator(), g2 = x.createGain(); o.type = 'sine'; o.frequency.setValueAtTime(tip === 'davul' ? 96 : 120, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.16);
+        g2.gain.setValueAtTime(0.0001, t); g2.gain.exponentialRampToValueAtTime(ses, t + 0.008); g2.gain.exponentialRampToValueAtTime(0.0001, t + (tip === 'davul' ? 0.34 : 0.2));
+        o.connect(g2); g2.connect(hedef); o.start(t); o.stop(t + 0.4);
+      }
+    }
+    /* tek bir adımı planla (x: bağlam, hedef: çıkış düğümü, p: ön ayar, a: adım sayacı, t: zaman) */
+    function adimPlanla(x, hedef, p, a, t) {
+      var beat = 60 / p.bpm / 2, bar = Math.floor(a / 8) % p.akor.length, ak = p.akor[bar], k = a % 8;
+      if (k === 0) {
+        ak.forEach(function (m) { not(x, hedef, hz(m - 12), t, beat * 8.4, p.pad, p.padSes, p.padAtak); });
+        if (p.pad2) ak.forEach(function (m) { not(x, hedef, hz(m), t, beat * 8.2, p.pad2, p.padSes * 0.5, p.padAtak + 0.2); });
+        not(x, hedef, hz(ak[0] - 24), t, beat * 8, p.basTip, p.bas, 0.1);
+        if (p.drone && bar % 2 === 0) not(x, hedef, hz(26), t, beat * 16, 'sine', 0.03, 1.6);
+      }
+      if (p.basNabiz && k % 2 === 0 && k > 0) not(x, hedef, hz(ak[0] - 24), t, beat * 1.6, p.basTip, p.bas * 0.8, 0.01);
+      var r = p.ritim[k]; if (r >= 0) not(x, hedef, hz(ak[r] + p.arpOkt), t, p.arpSure, p.arp, p.arpSes, 0.005);
+      if (p.vur && p.vur.indexOf(k) >= 0) vurus(x, hedef, t, 'tok', 0.045);
+      if (p.davul && p.davul.indexOf(k) >= 0) vurus(x, hedef, t, 'davul', k === 0 ? 0.06 : 0.04);
+      if (p.hat && p.hat.indexOf(k) >= 0) vurus(x, hedef, t, 'hat', 0.012);
     }
     function planla() {
       if (!aktif || !c) return;
-      while (sonrakiT < c.currentTime + 0.7) {
-        var bar = Math.floor(adim / 8) % AKOR.length, ak = AKOR[bar], k = adim % 8;
-        if (k === 0) { ak.forEach(function (m) { not(hz(m - 12), sonrakiT, BEAT * 8.4, 'triangle', 0.018, 0.5); }); not(hz(ak[0] - 24), sonrakiT, BEAT * 8, 'sine', 0.05, 0.1); }
-        if (k % 2 === 0 || k === 5) not(hz(ak[ARP[k]] + 12), sonrakiT, 0.5, 'sine', 0.03, 0.005);
-        sonrakiT += BEAT; adim++;
-      }
+      var hedefSes = !DO.sesAcik ? 0.0001 : (kisik ? 0.2 : 0.55);
+      if (hedefSes !== sonSes) ses(hedefSes);
+      if (!DO.sesAcik) { sonrakiT = Math.max(sonrakiT, c.currentTime + 0.1); return; }
+      while (sonrakiT < c.currentTime + 0.7) { adimPlanla(c, master, P, adim, sonrakiT); sonrakiT += 60 / P.bpm / 2; adim++; }
     }
-    function ses(v) { if (master && c) master.gain.setTargetAtTime(v, c.currentTime, 0.3); }
+    var sonSes = -1;
+    function ses(v) { sonSes = v; if (master && c) master.gain.setTargetAtTime(v, c.currentTime, 0.3); }
     return {
       baslat: function () {
         var x = Sfx.ac(); if (!x || REDUCED) return; c = x;
         if (kapat) { clearTimeout(kapat); kapat = null; }
         if (aktif) { ses(kisik ? 0.2 : 0.55); return; }
-        master = c.createGain(); master.gain.value = 0.0001; master.connect(c.destination); ses(kisik ? 0.2 : 0.55);
+        ad = aile(); P = MUZIK_ONAYAR[ad];
+        master = c.createGain(); master.gain.value = 0.0001; master.connect(c.destination); sonSes = -1; ses(kisik ? 0.2 : 0.55);
         aktif = true; sonrakiT = c.currentTime + 0.15; adim = 0; tim = setInterval(planla, 200); planla();
       },
       birak: function (sn) {
         if (!aktif) return; if (kapat) clearTimeout(kapat);
         kapat = setTimeout(function () { if (!aktif) return; ses(0.0001); aktif = false; clearInterval(tim); setTimeout(function () { try { master.disconnect(); } catch (e) { } }, 1500); }, (sn || 1.2) * 1000);
       },
-      kis: function (k) { kisik = !!k; if (aktif) ses(k ? 0.2 : 0.55); }
+      kis: function (k) { kisik = !!k; if (aktif) ses(!DO.sesAcik ? 0.0001 : (k ? 0.2 : 0.55)); },
+      /* test/ölçüm: ön ayarı çevrimdışı çal (OfflineAudioContext), AudioBuffer döndür */
+      render: function (aileAd, sn, oc) {
+        var p = MUZIK_ONAYAR[aileAd]; if (!p) return null; var m = oc.createGain(); m.gain.value = 1; m.connect(oc.destination);
+        var t = 0.05, a = 0, beat = 60 / p.bpm / 2; while (t < sn) { adimPlanla(oc, m, p, a, t); t += beat; a++; }
+        return oc.startRendering();
+      },
+      aile: function () { return aktif ? ad : aile(); },
+      onayarlar: MUZIK_ONAYAR
     };
   })();
 
