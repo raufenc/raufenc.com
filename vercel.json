@@ -3,67 +3,242 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
-        { "key": "X-DNS-Prefetch-Control", "value": "off" },
-        { "key": "X-Permitted-Cross-Domain-Policies", "value": "none" },
-        { "key": "X-XSS-Protection", "value": "0" },
-        { "key": "Origin-Agent-Cluster", "value": "?1" },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "off"
+        },
+        {
+          "key": "X-Permitted-Cross-Domain-Policies",
+          "value": "none"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "0"
+        },
+        {
+          "key": "Origin-Agent-Cluster",
+          "value": "?1"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin-allow-popups"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        }
       ]
     },
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store" },
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" },
-        { "key": "Cross-Origin-Resource-Policy", "value": "same-origin" },
-        { "key": "Content-Security-Policy", "value": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cross-Origin-Resource-Policy",
+          "value": "same-origin"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+        }
       ]
     },
     {
       "source": "/tarih/data/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
       ]
     },
     {
       "source": "/tarih/(.*\\.js|.*\\.css)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/kuran-ogretmenim/app/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: blob: https:; media-src 'self' blob: data: https:; font-src 'self' data: https:; connect-src 'self' https: blob: data:; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/kuran-ogretmenim/app/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/kuran-ogretmenim/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800, stale-while-revalidate=2592000"
+        }
       ]
     }
   ],
   "redirects": [
-    {"source": "/ilgitesti", "destination": "/ilgitesti/", "permanent": true},
-    {"source": "/ilgitesti/kaynaklar", "destination": "/ilgitesti/kaynaklar/", "permanent": true},
-    {"source": "/noroterbiye/duvar-kagitlari", "destination": "/noroterbiye/duvar-kagitlari/", "permanent": true},
-    {"source": "/beyitdefteri", "destination": "/beyitdefteri/", "permanent": true},
-    {"source": "/aruz", "destination": "/aruz/", "permanent": true},
-    { "source": "/iho-oyunlar-2/:path*", "destination": "/7sinif/oyunlar2/:path*", "permanent": false },
-    { "source": "/iho-oyunlar/:path*", "destination": "/7sinif/oyunlar/:path*", "permanent": false },
-    { "source": "/7sinif/1/ka.html", "destination": "/7sinif/oyunlar/unit1/ka.html", "permanent": false },
-    { "source": "/7sinif/1/hf.html", "destination": "/7sinif/oyunlar/unit1/hf.html", "permanent": false },
-    { "source": "/7sinif/1/su1.html", "destination": "/7sinif/oyunlar/unit1/su1.html", "permanent": false },
-    { "source": "/7sinif/1/su2.html", "destination": "/7sinif/oyunlar/unit1/su2.html", "permanent": false },
-    { "source": "/7sinif/1/su3.html", "destination": "/7sinif/oyunlar/unit1/su3.html", "permanent": false },
-    { "source": "/7sinif/2/su1.html", "destination": "/7sinif/oyunlar2/su1.html", "permanent": false },
-    { "source": "/7sinif/2/su2.html", "destination": "/7sinif/oyunlar2/su2.html", "permanent": false },
-    { "source": "/7sinif/3/adres-sor.html", "destination": "/7sinif/oyunlar/unit3/adres-sor.html", "permanent": false },
-    { "source": "/7sinif/3/cumle-kur-edit.html", "destination": "/7sinif/oyunlar/unit3/cumle-kur-edit.html", "permanent": false },
-    { "source": "/7sinif/3/hata-bul-edit.html", "destination": "/7sinif/oyunlar/unit3/hata-bul-edit.html", "permanent": false },
-    { "source": "/7sinif/3/vasita-sinif.html", "destination": "/7sinif/oyunlar/unit3/vasita-sinif.html", "permanent": false },
-    { "source": "/7sinif/4/saat.html", "destination": "/7sinif/oyunlar/unit4/saat.html", "permanent": false },
-    { "source": "/meslek-pusulasi", "destination": "/yol-haritan/", "permanent": false },
-    { "source": "/meslek-pusulasi/", "destination": "/yol-haritan/", "permanent": false },
-    { "source": "/meslek-pusulasi/:path*", "destination": "/yol-haritan/", "permanent": false },
+    {
+      "source": "/ilgitesti",
+      "destination": "/ilgitesti/",
+      "permanent": true
+    },
+    {
+      "source": "/ilgitesti/kaynaklar",
+      "destination": "/ilgitesti/kaynaklar/",
+      "permanent": true
+    },
+    {
+      "source": "/noroterbiye/duvar-kagitlari",
+      "destination": "/noroterbiye/duvar-kagitlari/",
+      "permanent": true
+    },
+    {
+      "source": "/beyitdefteri",
+      "destination": "/beyitdefteri/",
+      "permanent": true
+    },
+    {
+      "source": "/aruz",
+      "destination": "/aruz/",
+      "permanent": true
+    },
+    {
+      "source": "/iho-oyunlar-2/:path*",
+      "destination": "/7sinif/oyunlar2/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/iho-oyunlar/:path*",
+      "destination": "/7sinif/oyunlar/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/1/ka.html",
+      "destination": "/7sinif/oyunlar/unit1/ka.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/1/hf.html",
+      "destination": "/7sinif/oyunlar/unit1/hf.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/1/su1.html",
+      "destination": "/7sinif/oyunlar/unit1/su1.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/1/su2.html",
+      "destination": "/7sinif/oyunlar/unit1/su2.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/1/su3.html",
+      "destination": "/7sinif/oyunlar/unit1/su3.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/2/su1.html",
+      "destination": "/7sinif/oyunlar2/su1.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/2/su2.html",
+      "destination": "/7sinif/oyunlar2/su2.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/3/adres-sor.html",
+      "destination": "/7sinif/oyunlar/unit3/adres-sor.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/3/cumle-kur-edit.html",
+      "destination": "/7sinif/oyunlar/unit3/cumle-kur-edit.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/3/hata-bul-edit.html",
+      "destination": "/7sinif/oyunlar/unit3/hata-bul-edit.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/3/vasita-sinif.html",
+      "destination": "/7sinif/oyunlar/unit3/vasita-sinif.html",
+      "permanent": false
+    },
+    {
+      "source": "/7sinif/4/saat.html",
+      "destination": "/7sinif/oyunlar/unit4/saat.html",
+      "permanent": false
+    },
+    {
+      "source": "/meslek-pusulasi",
+      "destination": "/yol-haritan/",
+      "permanent": false
+    },
+    {
+      "source": "/meslek-pusulasi/",
+      "destination": "/yol-haritan/",
+      "permanent": false
+    },
+    {
+      "source": "/meslek-pusulasi/:path*",
+      "destination": "/yol-haritan/",
+      "permanent": false
+    },
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "lab.raufenc.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "lab.raufenc.com"
+        }
+      ],
       "destination": "/deneme/",
       "permanent": false
     },
@@ -180,6 +355,16 @@
     {
       "source": "/7sinif3unite/:path*",
       "destination": "/7sinif/3/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/kuran-ogretmenim",
+      "destination": "/kuran-ogretmenim/",
+      "permanent": true
+    },
+    {
+      "source": "/kuran-ogretmenim/app",
+      "destination": "/kuran-ogretmenim/app/",
       "permanent": true
     }
   ],

@@ -4,8 +4,20 @@ Bu klasör, kuranogretmenim.com'daki Flutter uygulamasının önüne konacak
 giriş (tanıtım) sitesidir. Tamamen statiktir: `index.html`, `stil.css`,
 `site.js` ve `assets/`. Hiçbir derleme adımı yoktur.
 
-Şu an `raufenc.com/kuran-ogretmenim/` adresinde yayınlanır. Nihai yeri
-`kuranogretmenim.com` kök dizinidir.
+Şu an `raufenc.com/kuran-ogretmenim/` adresinde yayınlanır; uygulamanın
+derlenmiş kopyası da `app/` altında aynı pakette gelir
+(`raufenc.com/kuran-ogretmenim/app/`). Nihai yeri `kuranogretmenim.com`
+kök dizinidir.
+
+## Paket içeriği
+
+- `index.html`, `stil.css`, `site.js`, `assets/` — giriş sitesi (3,7 MB)
+- `app/` — kuranogretmenim.com'daki Flutter web derlemesinin birebir
+  kopyası (52 MB). Yalnız `app/index.html` içindeki `<base href>` ve
+  `app/manifest.json` içindeki `start_url` bu yola göre değiştirildi.
+- Vercel için gerekli başlıklar (içerik güvenlik politikası, önbellek) ve
+  yönlendirmeler depo kökündeki `vercel.json` dosyasında
+  `/kuran-ogretmenim/...` kurallarıdır.
 
 ## kuranogretmenim.com'a taşıma (3 adım)
 
@@ -18,9 +30,8 @@ giriş (tanıtım) sitesidir. Tamamen statiktir: `index.html`, `stil.css`,
 3. **Adresleri güncelleyin.** Üç dosyada arama-değiştirme yeterlidir:
    - `index.html`: `https://raufenc.com/kuran-ogretmenim/` → `https://kuranogretmenim.com/`
      (canonical, og:url, og:image, twitter:image, JSON-LD image)
-   - `index.html`: `https://kuranogretmenim.com/` olan uygulama bağlantıları
-     (`Uygulamayı Aç`, `Hemen Başla`, modül kartları) → `/app/`
-   - `site.js`: `SES_KOKU` → `/app/assets/assets/sounds/harfler/`
+   - `index.html` ve `site.js` içindeki `./app/` bağlantıları zaten
+     göreli olduğundan değişmez.
 
 Ardından köke şu iki dosyayı ekleyin:
 
@@ -39,14 +50,18 @@ Sitemap: https://kuranogretmenim.com/sitemap.xml
 </urlset>
 ```
 
-## Uygulamada düzeltilmesi gereken, bu sitede fark edilen eksik
+## Uygulamada düzeltilmesi gereken, bu paket hazırlanırken fark edilen eksik
 
-Sunucuda Türkçe karakterli dört ses dosyası yok (muhtemelen derleme
-sırasında dosya adları bozuldu): `ğayn.mp3`, `şin.mp3`, `tıy.mp3`,
-`zıy.mp3`. Uygulamada da bu dört harfin sesi çalmaz. Dosyaları ASCII
-adla (`gayn`, `sin2`, `tiy`, `ziy`) yeniden ekleyip Dart tarafındaki
-yolları güncellemek yeterli. Düzelince `site.js` içindeki `HARFLER`
-dizisinde `null` olan dört girdiye yeni dosya adları yazılır.
+Uygulamanın varlık listesinde 992 dosya var; bunların 152'si canlı
+sunucuda yok (hepsi adında Türkçe karakter ya da boşluk olan dosyalar:
+ör. `ğayn.mp3`, `şin.mp3`, `tıy.mp3`, `zıy.mp3`, `üstün aciklamasi.mp3`,
+`asar aciklama.mp3`, `kırmızı ayakkabı.png`). Bu yüzden canlı uygulamada
+dört harfin sesi, ders anlatımlarının tamamı ve bazı alıştırma sesleri
+çalmaz. Çözüm: dosya adlarını ASCII yapıp (`gayn`, `ustun_aciklamasi`
+gibi) Dart tarafındaki yolları güncellemek ve yeniden derlemek. Eksik
+dosyaların tam listesi: `eksik-dosyalar.txt`. Düzelince `site.js`
+içindeki `HARFLER` dizisinde `null` olan dört girdiye yeni dosya adları
+yazılır.
 
 ## Varlıklar
 

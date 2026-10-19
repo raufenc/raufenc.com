@@ -36,7 +36,7 @@
   /* ── Elifba: dokun ve dinle ──
      Sesler uygulamanın kendi kayıtlarıdır. Uygulama ile aynı alan adına
      taşındığında SES_KOKU değeri "/assets/assets/sounds/harfler/" olur. */
-  var SES_KOKU = 'https://kuranogretmenim.com/assets/assets/sounds/harfler/';
+  var SES_KOKU = './app/assets/assets/sounds/harfler/';
   var HARFLER = [
     ['ا', 'Elif', 'elif'], ['ب', 'Be', 'be'], ['ت', 'Te', 'te'], ['ث', 'Se', 'se'],
     ['ج', 'Cim', 'cim'], ['ح', 'Ha', 'ha'], ['خ', 'Hı', 'haaa'], ['د', 'Dal', 'dal'],
