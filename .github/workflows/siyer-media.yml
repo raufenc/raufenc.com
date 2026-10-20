@@ -1,0 +1,40 @@
+name: Siyer media and validation
+on:
+  push:
+    branches: [codex/siyer-tam-ders-v2]
+    paths:
+      - 'ders-odasi/siyer/content-v2.json'
+      - 'scripts/ders-odasi/siyer-media.py'
+      - '.github/workflows/siyer-media.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: siyer-media
+  cancel-in-progress: false
+jobs:
+  media:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install narration dependency
+        run: python -m pip install edge-tts==7.3.1
+      - name: Generate Turkish narration
+        run: python scripts/ders-odasi/siyer-media.py
+      - name: Save generated narration to the same working branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ders-odasi/siyer/assets ders-odasi/dersler/siyer-*/ses
+          if ! git diff --cached --quiet; then
+            git commit -m "Generate Turkish narration for siyer lessons"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
