@@ -15,9 +15,11 @@ svg{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-l
 .masthead{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(18px,3vw,44px);border-bottom:1px solid var(--line);flex:none;background:var(--white)}
 .book-title{font-family:Baskerville,"Iowan Old Style",Palatino,Georgia,serif;font-size:26px;letter-spacing:-.035em;text-decoration:none;line-height:1.2}
 .book-title em{font-weight:400}
+.header-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px 20px}
 .listen-link{display:flex;align-items:center;gap:9px;text-decoration:none;font-size:12px;min-height:38px}
 .listen-link:hover{text-decoration:underline}
 .listen-link svg{width:18px;height:18px}
+.tashih-link{font-weight:500;white-space:nowrap}
 .reader{flex:1;min-height:0;display:flex;flex-direction:column;outline:none}
 .reader:fullscreen{height:100dvh;width:100vw;background:var(--paper)}
 .reading-bar{width:100%;padding:14px clamp(18px,3vw,44px) 12px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex:none}
@@ -61,8 +63,9 @@ input[type=range]{flex:1;min-width:0;height:20px;margin:0;accent-color:var(--gol
 @keyframes turn-forward{from{opacity:.72;transform:perspective(1800px) rotateY(-3deg) translateX(8px)}to{opacity:1;transform:none}}
 @keyframes turn-backward{from{opacity:.72;transform:perspective(1800px) rotateY(3deg) translateX(-8px)}to{opacity:1;transform:none}}
 @media(max-width:640px){
- .masthead{padding:12px 16px;gap:10px}
+ .masthead{padding:12px 16px;gap:4px 10px;flex-wrap:wrap}
  .book-title{font-size:22px}
+ .header-links{gap:4px 16px;min-width:0}
  .listen-link{font-size:10px;gap:6px}
  .listen-link svg{width:16px;height:16px}
  .reading-bar{padding:10px 14px;gap:8px;align-items:center}

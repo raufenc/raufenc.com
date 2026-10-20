@@ -8,7 +8,7 @@
     zoomIn: $("zoom-in"), zoomOut: $("zoom-out"), fit: $("fit"),
     fullscreen: $("fullscreen"), loading: $("loading"), error: $("error"),
     errorText: $("error-text"), retry: $("retry"), announcement: $("announcement"),
-    tip: $("reading-tip"),
+    tip: $("reading-tip"), tashih: $("tashih-link"),
   };
   const state = {
     book: null, index: 0, zoom: 1, request: 0, loadedIndex: null,
@@ -118,6 +118,8 @@
     ui.progress.setAttribute("aria-valuetext", labelFor(page));
     ui.previous.disabled = state.index === 0;
     ui.next.disabled = state.index === state.book.spreads.length - 1;
+    ui.tashih.href = `https://bir-beyit-bir-alem-tashih.someonebkr.chatgpt.site/${routeFor(page)}`;
+    ui.tashih.setAttribute("aria-label", `${labelFor(page)} için tashih bırak — yeni sekmede açılır`);
     document.title = `${labelFor(page)} · Bir Beyit, Bir Âlem`;
   }
 
