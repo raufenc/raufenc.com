@@ -5,6 +5,7 @@ export const config = {
 
 const PANEL_PATH = '/birlikteiyilik-v2/yonetim/panel.html';
 const API_METHODS = {
+  '/api/sunumlar': ['GET', 'HEAD', 'POST', 'OPTIONS'],
   '/api/gemini': ['POST', 'OPTIONS'],
   '/api/ilmihal-search': ['POST', 'OPTIONS'],
   '/api/mizac-sohbet': ['POST', 'OPTIONS'],
