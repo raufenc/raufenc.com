@@ -3,8 +3,9 @@ on:
   push:
     branches: [codex/siyer-tam-ders-v2]
     paths:
-      - 'ders-odasi/siyer/content-v2.json'
-      - 'scripts/ders-odasi/siyer-media.py'
+      - 'ders-odasi/siyer/**'
+      - 'ders-odasi/dersler/siyer-*/**'
+      - 'scripts/ders-odasi/*siyer*'
       - '.github/workflows/siyer-media.yml'
   workflow_dispatch:
 permissions:
@@ -21,20 +22,40 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          sparse-checkout: |
+            ders-odasi
+            scripts/ders-odasi
+            .github/workflows
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install narration dependency
-        run: python -m pip install edge-tts==7.3.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install media and DOM validation dependencies
+        run: |
+          python -m pip install edge-tts==7.3.1 cairosvg==2.8.2
+          npm install --prefix /tmp/siyer-dom --no-package-lock --no-save jsdom@26
+          test -x "$(command -v ffmpeg)" || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Verify curriculum and regenerate native lessons
+        run: node ders-odasi/siyer/sync.mjs --check
       - name: Generate Turkish narration
         run: python scripts/ders-odasi/siyer-media.py
-      - name: Save generated narration to the same working branch
+      - name: Render optional narrated recap films and illustration previews
+        run: python scripts/ders-odasi/siyer-video.py
+      - name: Exercise every native lesson in the DOM
+        env:
+          SIYER_NODE_MODULES: /tmp/siyer-dom
+        run: node scripts/ders-odasi/validate-siyer-v2.mjs
+      - name: Build independently embeddable lesson package
+        run: python scripts/ders-odasi/siyer-package.py
+      - name: Save verified generated assets to the working branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ders-odasi/siyer/assets ders-odasi/dersler/siyer-*/ses
+          git add -A -- ders-odasi/siyer ders-odasi/dersler
           if ! git diff --cached --quiet; then
-            git commit -m "Generate Turkish narration for siyer lessons"
+            git commit -m "Generate and verify full Siyer lesson media and package"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi

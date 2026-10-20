@@ -1,64 +1,38 @@
-# Siyer Yolculuğu — 60 × 10 dakika
+# Siyer Yolculuğu — tam ders paketi, sürüm 2
 
-Ortaokul 5–8. sınıflar için, siyerin ana kronolojisini çocukluk ve gençlikten vefata kadar ele alan 60 bölümlük öğretim paketi. Son altı bölüm ahlâk ve genel tekrar içindir. Toplam rehberli süre 600 dakika; haftada üç bölümle 20 hafta.
+Ortaokul için Peygamber Efendimiz (sallallahü aleyhi ve sellem) hayatını çocukluk, gençlik, Mekke, hicret, Medine, son yıllar ve hayatımıza taşıyacağımız örneklerle ele alan 60 ders. Her dersin temel akışı yaklaşık 10 dakikadır; sınıfın cevaplarına göre süre değişebilir. Ünite sonlarındaki 10 kısa tekrar filmi isteğe bağlı ek içeriktir ve bu 10 dakikaya dahil değildir.
 
 ## Kullanım
 
-- Bağımsız alan: `/ders-odasi/siyer/`
-- Öğretmen: `/ders-odasi/siyer/?mod=ogretmen#teacher`
-- Belirli bölüm: `/ders-odasi/siyer/#ders-27`
-- Gömülü görünüm: `/ders-odasi/siyer/?embed=1`
-- Yerel motor: `/ders-odasi/ders.html?d=siyer-01` (01–60)
-- Yerel motor öğretmen modu: `?d=siyer-01&rol=ogretmen&oda=SECILENKOD`; öğrenci aynı ders/oda ile `rol=ogrenci`.
+- Katalog: https://raufenc.com/ders-odasi/siyer/
+- İlk tam ders: https://raufenc.com/ders-odasi/ders.html?d=siyer-01
+- Son tam ders: https://raufenc.com/ders-odasi/ders.html?d=siyer-60
+- Paket: https://raufenc.com/ders-odasi/siyer/indir/siyer-ders-paketi.zip
 
-`index.html` bütün CSS, JavaScript ve ders verisini kendi içinde taşır. Haricî kütüphane, görsel veya ağ isteği gerektirmez. Öğretmen alanındaki “Bağımsız HTML paketini indir” düğmesi kişisel notları içermeyen, yerel dosya olarak açılabilen HTML verir. Kaynak bağlantıları, Türkçe ses hizmeti ve Ders Odası canlı motoru internet/kurulum gerektirebilir. Sesli okuma tarayıcı sesidir; kaydedilmiş profesyonel ses/video içermez.
+Her ders sitenin mevcut Ders Odası motorunda açılır. Başlangıç anketi, dört sesli görsel, sıralama/sınıflandırma/eşleştirme oyunu, gerekçeli karar etkinliği, üç soruluk değerlendirme ve çıkış cümlesi bulunur. Eşleştirmelerin açıklamaları çevrilen kartlarla sunulur. Öğretmen notları, kaynaklar ve sınıf düzeyine göre uyarlamalar dersle birlikte gelir.
 
-## İçerik ve pedagojik akış
+Öğretmen görünümünden canlı oda açılır. Sitenin mevcut Firebase ve Ders Odası canlı bağlantı ayarları kullanılır; görüntülü görüşme ayrıca kullanılan toplantı uygulamasında yürütülür. Bağımsız yerel pakette bireysel çalışma kullanılabilir; canlı bağlantı için sunucu ve kendi Firebase ayarları gerekir. Öğrenci cevapları ve tamamlamalar mevcut motorun yerel kayıt/SCORM/xAPI özelliklerini kullanır. Katalogdaki ilerleme bu tarayıcıya aittir; bulut hesabı veya cihazlar arası eşitleme vaadi verilmez.
 
-Her bölüm: kazanım, yaklaşık tarih, üç özgün bilgi/sunum ekranı, özgün uygulama, üç seçenekli değerlendirme ve çıkış bileti. 180 SVG sunum, 60 soru, 60 uygulama; ayrıca zaman sıralama, kavram eşleştirme, 10 ünite için altışar soruluk tekrar.
+## Gömme
 
-- 0–1 dakika: ön bilgi ve kazanım
-- 1–4 dakika: üç bilgi; öğretmen açıklaması ve öğrencinin kendi cümlesi
-- 4–7 dakika: uygulama
-- 7–9 dakika: değerlendirme ve gerekçe
-- 9–10 dakika: çıkış cümlesi ve davranış bağlantısı
-
-Süre bir öğretim planıdır; otomatik 10 dakikalık ses kaydı veya zorunlu bekleme yoktur. Kâğıt/harita/kart gerektiren açık uçlu etkinlikler öğretmenle veya kâğıt üzerinde yapılır; uygulamadaki deftere sonuç yazılır. Her açık uçlu görevin otomatik puanlandığı iddia edilmez.
-
-Peygamber Efendimiz (sallallahü aleyhi ve sellem) ve sahâbe tasvirleri, rol yaptırma ve tarihî kişilere uydurma konuşma yoktur. Tarihî olayların savaş oyunu yapılmasına yer verilmez. Kaynak farklılıkları kesin tarih ezberine çevrilmez. Hitaplar kök CLAUDE.md ile uyumludur.
-
-## Entegrasyon
-
-Aynı kökende:
 ```html
-<iframe src="/ders-odasi/siyer/?embed=1"
-        title="Siyer Yolculuğu"
-        style="width:100%;height:850px;border:0"
-        allow="fullscreen"></iframe>
+<iframe src="https://raufenc.com/ders-odasi/siyer/" title="Siyer Yolculuğu"
+  width="100%" height="900" allow="fullscreen; autoplay" allowfullscreen
+  style="border:0;border-radius:16px"></iframe>
 ```
 
-Mevcut `vercel.json`, `frame-ancestors 'self'` ve `X-Frame-Options: SAMEORIGIN` kullanır. Başka LMS alan adına gömme için bağımsız HTML'yi o sistemde barındırın; mevcut siteye dış köken izni ayrıca tanımlanmalıdır. Bu değişiklik güvenlik başlıklarını değiştirmez.
+Tek ders için iframe kaynağını `https://raufenc.com/ders-odasi/ders.html?d=siyer-01` yapın. İlerleme mesajları mevcut motorun `kaynak: "ders-odasi"` sözleşmesini kullanır; mesaj kaynağı ve origin denetlenmeden işlenmemelidir. Bağımsız LMS puan aktarımı için yalnız iframe gömmek yeterli değildir; LMS'nin SCORM/xAPI destek ve ayarları kullanılmalıdır.
 
-`dersler/siyer-01/ders.js` … `siyer-60/ders.js` mevcut DO.dersKaydet şemasındadır. Ders kataloğuna 60 kayıt eklenmiştir. Mevcut motorun kayıt/canlı/SCORM/xAPI özelliklerini kullanır. Motor değiştirilmemiştir; yeni içerikle gerçek LMS ve çok cihazlı canlı test yapılmamıştır. Firebase köken kısıtı nedeniyle Vercel önizlemesindeki canlı oturum, üretim raufenc.com oturumu ile eşdeğer değildir. Görüntülü görüşme haricî Zoom/Meet üzerinden yürütülür.
+## İçerik ve yöntem
 
-Bağımsız HTML tarayıcı yerel deposunu kullanır; merkezi kullanıcı hesabı/veritabanı sağlamaz. JSON yedek dışa/içe aktarılır. Bağımsız alan ve DO motoru kayıtları birbirinden ayrıdır. Bağımsız HTML doğrudan SCORM paketi değildir. Yerel motor için depodaki `scripts/ders-odasi/scorm-paketle.py` kullanılabilir; bu çalışmada SCORM ZIP üretilmemiştir.
+240 özgün anlatım karesi; 60 ısınma, 60 konu oyunu, 60 karar etkinliği ve 180 açıklamalı değerlendirme sorusu. İnsan ve tarihî şahıs tasviri kullanılmaz. Harita ve mimari çizimler şematiktir. Tarihî bilgi ile bugünkü sınıf örnekleri ayrılır; tarihî şahıslara söz uydurulmaz. Vefat dersinde coşkulu ödül sesi ve konfeti kapalıdır.
 
-## Kaynak ve inceleme
+Her dersin kaynak bağlantıları `content-v2.json` ve öğretmen görünümündedir. TDV İslâm Ansiklopedisi ve Diyanet'in ilgili maddeleri esas alınmıştır. Rivayet ve tarihlendirme farklarında kesin olmayan ayrıntı kesin bilgi gibi verilmez. Alan uzmanı ve öğretmen incelemesi için ders metni, yanlış seçenek gerekçeleri ve kaynaklar açık tutulmuştur.
 
-Her bölümün kaynakları `curriculum.json` içinde ve öğrenci ekranında bağlantılıdır. TDV İslâm Ansiklopedisi ve Diyanet Hadislerle İslâm temel başvuru kaynaklarıdır. Etkinlikler özgün pedagojik örneklerdir. Bu sürüm hoca/alan uzmanı incelemesine açık taslaktır. İçerik, kullanıcı tarafından verilen tam uygulama ve yayın yetkisiyle Ders Odası'na eklenmiştir; bu yayın alan uzmanı onayı alındığı anlamına gelmez. Kaynak ve dil incelemesi için ders başına bağlantılar korunur.
+Türkçe kayıtlar genel amaçlı bir yapay anlatım sesiyle üretilmiştir; belirli bir kişinin sesini taklit etmez. Aynı metin ekranda okunabilir. Tekrar filmlerinin altyazı zamanları sözcük ağırlığıyla yaklaşık hesaplanır.
 
-## Doğrulama sınırları
+## Bakım ve doğrulama
 
-JavaScript sözdizimi, ders sayısı/kimliği, soru cevap indeksleri, kaynak eşlemeleri, DO şeması, SVG XML içeriği ve dosya referansları programatik olarak kontrol edilir. Bağımsız durum ve render fonksiyonları bellek içi DOM dublörüyle sınanır. Yerel çalışma ortamı açılamadığı ve bağlı tarayıcı aracı bulunmadığı için gerçek tarayıcı/mobil ekran, ses, dosya indirme, yazdırma ve çok cihazlı canlı oturum uçtan uca denenememiştir. Önizleme HTTP yanıtları ayrıca kontrol edilir.
+Tek içerik kaynağı `content-v2.json`; `content-v2.js` yerel dosya kullanımını sağlar. `sync.mjs`, `compile-lesson.mjs` ve `render-frames.mjs` 60 native ders ve 240 SVG'yi üretir. Kontrol: `node ders-odasi/siyer/sync.mjs --check`.
 
-## Dosya yapısı
-
-- `siyer/index.html`: tam bağımsız arayüz, içerik ve oyunlar
-- `siyer/curriculum.json`: 60 ders ve kaynaklar
-- `siyer/README.md`: kurulum ve doğrulama açıklaması
-- `dersler/siyer-NN/ders.js`: mevcut motor için ders
-- `dersler/siyer-NN/slayt/01.svg` … `03.svg`: 16:9 sunum ekranları
-
-## İçeriği güncelleme
-
-Ders metinleri ve kaynakları curriculum.json üzerinden düzenlenir. Ardından `node ders-odasi/siyer/sync.mjs` ile bağımsız HTML içindeki veri, 60 yerel ders dosyası, 180 SVG ve katalog birlikte yenilenir. `node ders-odasi/siyer/verify.mjs` veri ve dosya tutarlılığını kontrol eder. Betikler yalnızca Node.js standart kitaplığını kullanır.
+GitHub Actions `siyer-media.yml` kayıtlı MP3'leri ve filmleri üretir, 60 dersin bütün bloklarını gerçek motorla JSDOM içinde çalıştırır, temel etkileşim/puan/kayıt testlerini yapar ve ZIP paketini hazırlar. Bu testler tarayıcı görseli, insan tarafından dinleme veya iki gerçek cihazla canlı sınıf testi değildir. Görsellerin PNG önizlemeleri `qa/` dizinindedir. Media ve paket doğrulama sonuçları ilgili manifestlere yazılır.

@@ -1,5 +1,5 @@
 """Generate only authored public educational narration; no credentials are sent to TTS."""
-import asyncio, hashlib, json, pathlib, sys
+import asyncio, hashlib, json, pathlib, sys, subprocess
 import edge_tts
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 CONTENT=ROOT/'ders-odasi/siyer/content-v2.json'
@@ -39,6 +39,15 @@ async def main():
             path=ROOT/f"ders-odasi/dersler/siyer-{lesson['id']:02d}/ses/s{i:02d}.mp3"
             tasks.append(make(path,frame['title']+'. '+frame['narration']))
     await asyncio.gather(*tasks)
-    print('PASS',len(tasks),'authored Turkish narration files.')
+    clips=[]
+    for lesson in lessons:
+        for i,frame in enumerate(lesson['frames'],1):
+            path=ROOT/f"ders-odasi/dersler/siyer-{lesson['id']:02d}/ses/s{i:02d}.mp3"
+            info=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-show_streams','-of','json',str(path)],text=True))
+            duration=float(info['format']['duration'])
+            if duration<3 or not any(x.get('codec_type')=='audio' for x in info['streams']): raise RuntimeError('Invalid narration: '+str(path))
+            clips.append({'lessonId':lesson['id'],'frame':i,'path':str(path.relative_to(ROOT)),'duration':round(duration,3),'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    (ASSETS/'audio-manifest.json').write_text(json.dumps({'version':2,'voice':VOICE,'generatedVoice':True,'clipCount':len(clips),'totalSeconds':round(sum(x['duration'] for x in clips),3),'clips':clips},ensure_ascii=False,indent=2)+'\n')
+    print('PASS',len(clips),'authored and decoded Turkish narration files.')
 if __name__=='__main__':
     asyncio.run(main())
