@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#284c41">
+  <title>Bir Beyit, Bir Âlem · Dinleme Rehberi</title>
+  <meta name="description" content="Bir Beyit, Bir Âlem kitabındaki beyitleri Hayâtî İnanç Hocamızın okuyuşu ve izahıyla dinleyin.">
+  <link rel="canonical" href="https://raufenc.com/bir-beyit-bir-alem/">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#beyitler">Beyitlere geç</a>
+  <header class="masthead">
+    <a href="https://raufenc.com/" class="home" aria-label="Rauf Enç ana sayfa">raufenc.com</a>
+    <span>Kitabın dinleme rehberi</span>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="book-title">
+      <div class="intro-copy">
+        <p class="eyebrow">Sözden manaya</p>
+        <h1 id="book-title">Bir Beyit,<br><em>Bir Âlem</em></h1>
+        <p class="lead">Okuduğunuz beyti bir de<br>Hayâtî İnanç Hocamızdan dinleyin.</p>
+        <p class="intro-note">Beyitler kitaptaki sıralarıyla burada. Bir beyit seçin; okuyuşuna ve izahına kulak verin. İlgili yazılı izahlara da beyitlerin altındaki bağlantılardan ulaşabilirsiniz.</p>
+        <div class="intro-actions">
+          <a class="read-book" href="oku/">Kitabı sayfa sayfa aç <span aria-hidden="true">↗</span></a>
+          <a class="browse" href="#beyitler">Beyitleri dinle <span aria-hidden="true">↓</span></a>
+          <a class="browse" href="https://bir-beyit-bir-alem-tashih.someonebkr.chatgpt.site/#kapak=on" target="_blank" rel="noopener noreferrer">Tashih bırak <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="cover-wrap">
+        <img src="kapak.webp" width="600" height="839" alt="Bir Beyit, Bir Âlem kitabının Hayâtî İnanç Hocamızın renkli fotoğrafını taşıyan kapağı" class="cover" fetchpriority="high">
+      </figure>
+    </section>
+    <section id="beyitler" aria-labelledby="list-title">
+      <div class="section-head">
+        <div><p class="eyebrow">Kitap sırasıyla</p><h2 id="list-title">52 beyit</h2></div>
+        <p id="result-count" aria-live="polite"></p>
+      </div>
+      <div class="tools">
+        <label class="search-wrap">
+          <span class="sr-only">Beyit numarası, şair veya kelime ara</span>
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="search" type="search" placeholder="Beyit numarası, şair veya kelime…" autocomplete="off">
+        </label>
+        <button class="filter" type="button" id="available-only" aria-pressed="false">Dinlenebilenler</button>
+      </div>
+      <div id="list" class="poem-list"></div>
+      <p id="empty" hidden>Bu aramada beyit bulunamadı. Başka bir kelime deneyebilirsiniz.</p>
+      <noscript><p>Beyit listesini görmek için tarayıcınızda JavaScript’i açın. <a href="beyitler.json">Beyit ve bağlantı listesi</a> ayrıca buradadır.</p></noscript>
+    </section>
+  </main>
+  <footer>
+    <p class="footer-title">Bir Beyit, Bir Âlem</p>
+    <p>Hayâtî İnanç Hocamızın izahlarından hareketle.</p>
+    <p class="small">Dinleme düğmeleri ilgili beytin bulunduğu bölümü açar. Bir bağlantı değişirse bu sayfadaki adres yenilenir; kitaptaki karekod aynı kalır.</p>
+    <a href="https://raufenc.com/">raufenc.com</a>
+  </footer>
+  <dialog id="player" aria-labelledby="player-title">
+    <div class="player-head"><h2 id="player-title">Beyti dinle</h2><button type="button" id="close-player" aria-label="Dinleme penceresini kapat">Kapat <span aria-hidden="true">×</span></button></div>
+    <div id="video-frame" class="video-frame"></div>
+    <p id="player-note" class="player-note"></p>
+    <a id="youtube-link" target="_blank" rel="noopener noreferrer">YouTube’da aç ↗</a>
+  </dialog>
+</body>
+</html>

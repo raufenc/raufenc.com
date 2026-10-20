@@ -1,0 +1,71 @@
+name: Publish Siyer lesson package
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/siyer-package.yml'
+      - 'scripts/ders-odasi/siyer-package.py'
+      - 'ders-odasi/**'
+      - '.gitignore'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: siyer-package-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  package:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.ref_name }}
+          sparse-checkout: |
+            ders-odasi
+            scripts/ders-odasi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and verify all package files, media, CRC and hashes
+        run: python scripts/ders-odasi/siyer-package.py
+      - name: Publish exactly the validated ZIP and its manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f -- ders-odasi/siyer/indir/siyer-ders-paketi.zip ders-odasi/siyer/indir/siyer-ders-paketi-manifest.json
+          git ls-files --error-unmatch ders-odasi/siyer/indir/siyer-ders-paketi.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish validated Siyer lesson archive"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      - name: Verify the public archive is downloadable
+        run: |
+          python - <<'PY'
+          import json, time, urllib.request
+          from pathlib import Path
+          manifest = json.loads(Path("ders-odasi/siyer/indir/siyer-ders-paketi-manifest.json").read_text())
+          expected = manifest["archive"]["bytes"]
+          url = "https://raufenc.com/ders-odasi/siyer/indir/siyer-ders-paketi.zip"
+          for attempt in range(24):
+              try:
+                  request = urllib.request.Request(url, method="HEAD", headers={"Cache-Control": "no-cache"})
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      assert response.status == 200, response.status
+                      size = response.headers.get("Content-Length")
+                      assert size is None or int(size) == expected, size
+                  request = urllib.request.Request(url, headers={"Range": "bytes=0-3", "Cache-Control": "no-cache"})
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      assert response.status in (200, 206), response.status
+                      assert response.read(4) == b"PK\x03\x04", "Missing ZIP signature"
+                      print("PUBLIC DOWNLOAD VERIFIED", response.status, expected, "bytes")
+                  break
+              except Exception as error:
+                  if attempt == 23:
+                      raise
+                  print("Waiting for deployment:", type(error).__name__, str(error), flush=True)
+                  time.sleep(15)
+          PY

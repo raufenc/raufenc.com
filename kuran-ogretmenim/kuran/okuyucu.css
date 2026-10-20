@@ -1,0 +1,98 @@
+/* Kur'ân-ı Kerîm okuyucu — sûre sayfaları ve sûre dizini */
+.okuyucu-bar {
+  position: sticky; top: calc(68px + env(safe-area-inset-top, 0px)); z-index: 40;
+  background: var(--paper); background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.okuyucu-bar .wrap { display: flex; align-items: center; gap: 8px; padding-block: 10px; overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; }
+.okuyucu-bar select, .boyut-grp button {
+  font: inherit; font-size: .92rem; font-weight: 700; color: var(--ink);
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+  padding: 9px 14px; min-height: 42px; cursor: pointer; flex: 0 0 auto; max-width: 46vw;
+}
+.okuyucu-bar select:hover, .boyut-grp button:hover { border-color: var(--gold); }
+#sureSec { max-width: 220px; }
+.boyut-grp { display: inline-flex; flex: 0 0 auto; }
+.boyut-grp button { border-radius: 999px 0 0 999px; padding-inline: 14px 12px; }
+.boyut-grp button + button { border-radius: 0 999px 999px 0; border-left: 0; padding-inline: 12px 14px; }
+.okuyucu-bar .btn { flex: 0 0 auto; padding: 10px 18px; font-size: .92rem; margin-left: auto; white-space: nowrap; }
+@media (min-width: 900px) { .okuyucu-bar .wrap { flex-wrap: wrap; overflow: visible; } }
+
+.okuyucu { padding-top: clamp(28px, 4vw, 48px); }
+.okuyucu .wrap { width: min(900px, 100%); }
+.crumbs { font-size: .9rem; color: var(--ink-2); display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.crumbs a { color: var(--ink-2); }
+.sure-bas { display: grid; gap: 10px; margin-bottom: 26px; }
+.sure-bas h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+.devam { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--emerald-soft); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin-bottom: 20px; font-size: .95rem; }
+.devam .btn { padding: 8px 14px; font-size: .88rem; margin-left: auto; }
+
+.besmele { font-family: "Amiri Quran", var(--font-arabic); font-size: calc(var(--ar-boyut, 2.1rem) * 1.05); line-height: 2; text-align: center; color: var(--emerald); margin: 6px 0 22px; padding: 12px; border-radius: 14px; transition: background .25s; }
+.besmele.calan { background: var(--gold-soft); }
+
+.ayetler { --ar-boyut: 2.1rem; display: grid; gap: 14px; }
+.ayet {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px 18px; box-shadow: 0 10px 30px -24px rgba(28,42,37,.35);
+  border-left: 4px solid transparent; transition: background .25s, border-color .25s;
+}
+.ayet.calan { background: var(--gold-soft); border-color: var(--gold); border-left-color: var(--emerald); }
+.ayet-ust { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; color: var(--ink-3); font-size: .85rem; }
+.ayet-cal { all: unset; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--emerald); color: #fff; cursor: pointer; box-sizing: border-box; }
+.ayet-cal:hover { background: var(--emerald-2); }
+.ayet-cal:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.ayet-cal svg { width: 20px; height: 20px; }
+.ayet.calan .ayet-cal { background: var(--gold); color: #1c2a25; }
+.ayet-no { display: inline-grid; place-items: center; min-width: 32px; height: 32px; padding-inline: 8px; border-radius: 999px; border: 1px solid var(--gold); color: var(--ink); font-weight: 800; font-size: .85rem; }
+.ayet-sayfa { margin-left: auto; }
+.ayet .ar { font-family: "Amiri Quran", var(--font-arabic); font-size: var(--ar-boyut); line-height: 2.05; text-align: right; color: var(--ink); margin: 2px 0 6px; word-spacing: .08em; }
+.ayet .meal { color: var(--ink-2); font-size: 1rem; line-height: 1.65; border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 6px; }
+.ayetler.mealsiz .meal { display: none; }
+.ders-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+
+/* alt çalıcı */
+.calar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; background: var(--card); background: color-mix(in srgb, var(--card) 94%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--line); box-shadow: 0 -12px 40px -24px rgba(28,42,37,.5); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.calar .wrap { display: flex; align-items: center; gap: 10px; min-height: 72px; }
+.calar button { all: unset; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; color: var(--ink); cursor: pointer; box-sizing: border-box; }
+.calar button:hover { background: var(--paper-2); }
+.calar button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.calar button svg { width: 24px; height: 24px; }
+.calar #oynat { width: 56px; height: 56px; background: var(--emerald); color: #fff; }
+.calar #oynat:hover { background: var(--emerald-2); }
+.calar #oynat .ic-pause, .calar.oynuyor #oynat .ic-play { display: none; }
+.calar.oynuyor #oynat .ic-pause { display: block; }
+.calar-bilgi { display: grid; gap: 1px; min-width: 0; flex: 1; }
+.calar-bilgi strong { font-family: var(--font-display); font-weight: 400; font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.calar-bilgi span { font-size: .82rem; color: var(--ink-3); }
+.calar #kapat { font-size: 1.1rem; color: var(--ink-3); }
+body.calar-acik .okuyucu { padding-bottom: 120px; }
+
+/* sûre dizini */
+.ara { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 18px; max-width: 520px; margin-bottom: 36px; }
+.ara svg { width: 22px; height: 22px; color: var(--ink-3); flex: 0 0 auto; }
+.ara input { all: unset; flex: 1; min-width: 0; padding: 10px 0; font: inherit; color: var(--ink); }
+.ara:focus-within { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-soft); }
+.sure-bolum { margin-bottom: 44px; }
+.sure-bolum h2 { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin-bottom: 16px; }
+.sure-liste { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.sure-kart { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px 16px; transition: transform .15s, border-color .15s; }
+.sure-kart:hover { transform: translateY(-2px); border-color: var(--gold); color: var(--ink); }
+.sure-no { grid-row: 1 / 3; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--emerald-soft); color: var(--emerald); font-weight: 800; font-family: var(--font-display); }
+.sure-ad { font-weight: 700; }
+.sure-meta { font-size: .82rem; color: var(--ink-3); }
+.sure-devam { margin-bottom: 28px; }
+
+@media (max-width: 640px) {
+  .ayet { padding: 12px 12px 14px; border-radius: 14px; }
+  .ayetler { --ar-boyut: 1.8rem; }
+  .calar .wrap { gap: 6px; }
+  .calar #onceki, .calar #sonraki { width: 40px; height: 40px; }
+}
+@media (min-width: 1600px) {
+  .okuyucu .wrap { width: min(1100px, 100%); }
+  .ayetler { --ar-boyut: 2.6rem; }
+  .ayet .meal { font-size: 1.12rem; }
+  .okuyucu-bar select, .boyut-grp button, .okuyucu-bar .btn { font-size: 1.02rem; }
+}
+@media (prefers-reduced-motion: reduce) { .ayet, .besmele, .sure-kart { transition: none; } }

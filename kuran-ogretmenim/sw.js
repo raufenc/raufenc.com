@@ -3,7 +3,7 @@
    - Giriş sitesi kabuğu ve uygulama çekirdeği: önce ağ, olmazsa önbellek
    - Sesler, görseller, veri dosyaları: önce önbellek, arkada tazele
 */
-var SURUM = 'ko-v3';
+var SURUM = 'ko-v5';
 var KABUK = 'ko-kabuk-' + SURUM;
 var VARLIK = 'ko-varlik-' + SURUM;
 var KOK = '/kuran-ogretmenim/';
@@ -11,6 +11,10 @@ var ON_YUKLE = [
   KOK, KOK + 'index.html', KOK + 'stil.css', KOK + 'site.js',
   KOK + 'assets/img/logo-64.png', KOK + 'assets/img/logo-192.png',
   KOK + 'assets/video/tanitim-poster.webp',
+  KOK + 'kuran/', KOK + 'kuran/okuyucu.css', KOK + 'kuran/okuyucu.js',
+  KOK + 'dualar/', KOK + 'dualar/dualar.css', KOK + 'dualar/dualar.js',
+  KOK + 'tecvid/', KOK + 'tecvid/tecvid.css', KOK + 'tecvid/tecvid.js',
+  KOK + 'oyunlar/', KOK + 'oyunlar/oyunlar.css', KOK + 'oyunlar/oyunlar.js', KOK + 'sinif/dersler.json',
   KOK + 'app/', KOK + 'app/index.html', KOK + 'app/flutter_bootstrap.js', KOK + 'app/main.dart.js',
   KOK + 'app/assets/FontManifest.json', KOK + 'app/assets/AssetManifest.bin.json', KOK + 'app/assets/AssetManifest.bin',
   KOK + 'app/assets/fonts/MaterialIcons-Regular.otf', KOK + 'app/icons/logo-192.png'
@@ -36,6 +40,7 @@ function varlikMi(url) {
   return url.pathname.indexOf(KOK + 'app/assets/') === 0 ||
          url.pathname.indexOf(KOK + 'assets/') === 0 ||
          url.pathname.indexOf(KOK + 'app/icons/') === 0 ||
+         url.pathname.indexOf(KOK + 'kuran/veri/') === 0 ||
          url.pathname.indexOf(KOK + 'app/canvaskit/') === 0;
 }
 

@@ -1,0 +1,22 @@
+/* Dualar sayfası — okuyucu.css üzerine */
+.dualar .wrap { width: min(960px, 100%); }
+.dua-icindekiler ul { list-style: none; padding: 0; margin: 0 0 36px; display: flex; flex-wrap: wrap; gap: 8px; }
+.dua-icindekiler a { display: inline-block; text-decoration: none; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: .9rem; font-weight: 700; color: var(--ink); }
+.dua-icindekiler a:hover { border-color: var(--gold); }
+.dua { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(18px, 3vw, 30px); box-shadow: 0 10px 30px -24px rgba(28,42,37,.35); }
+.dua + .dua { margin-top: 22px; }
+.dua-bas { display: flex; gap: 18px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; margin-bottom: 16px; }
+.dua-bas h2 { font-size: clamp(1.5rem, 2.8vw, 2.1rem); margin: 4px 0 8px; }
+.dua-bas .lead { font-size: 1rem; }
+.dua-bas .btn { flex: 0 0 auto; }
+.dua.calan-dua .dua-cal { background: var(--gold); color: #1c2a25; }
+.satirlar { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.satir { display: grid; gap: 4px; padding: 12px 14px; border-radius: 14px; border-left: 4px solid transparent; cursor: pointer; transition: background .2s, border-color .2s; }
+.satir[data-bas]:hover { background: var(--paper-2); }
+.satir.calan { background: var(--gold-soft); border-left-color: var(--emerald); }
+.satir .ar { font-family: "Amiri Quran", var(--font-arabic); font-size: var(--ar-boyut, 2.1rem); line-height: 1.95; text-align: right; color: var(--ink); }
+.satir .oku { font-weight: 700; color: var(--emerald); }
+.satir .tr { color: var(--ink-2); font-size: .98rem; }
+.ayetler.yalniz-ar .oku, .ayetler.yalniz-ar .tr, .ayetler.ar-oku .tr { display: none; }
+.dua-not { margin-top: 14px; font-size: .9rem; color: var(--ink-3); border-top: 1px dashed var(--line); padding-top: 10px; }
+@media (max-width: 640px) { .dua { padding: 14px; } .satir { padding: 10px; } }

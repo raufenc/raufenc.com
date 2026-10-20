@@ -134,6 +134,21 @@
     setTimeout(function () { revealEls.forEach(function (el) { el.classList.remove('pending'); }); }, 2500);
   }
 
+  /* ── Kaldığınız yer (cihazda saklanan ilerleme) ── */
+  var ilerleme = document.getElementById('ilerleme');
+  if (ilerleme) {
+    try {
+      var satirlar = [];
+      var sonSure = localStorage.getItem('ko.sonSure');
+      if (sonSure) { var ps = sonSure.split('|'); satirlar.push('<li><a href="./kuran/' + encodeURIComponent(ps[0]) + '/#a' + parseInt(ps[1], 10) + '">' + ps[2].replace(/</g, '') + ', ' + parseInt(ps[1], 10) + '. âyet</a> okumaya devam edin</li>'); }
+      var tamam = 0; for (var i = 0; i < localStorage.length; i++) if (localStorage.key(i).indexOf('ko.tecvid.') === 0 && localStorage.getItem(localStorage.key(i)) === '1') tamam++;
+      if (tamam) satirlar.push('<li><a href="./tecvid/">Tecvid</a>: 17 kuralın ' + tamam + '\'i tamamlandı</li>');
+      var enIyi = 0; for (var k = 0; k < localStorage.length; k++) if (localStorage.key(k).indexOf('ko.oyun.duy.') === 0) enIyi = Math.max(enIyi, parseInt(localStorage.getItem(localStorage.key(k)), 10) || 0);
+      if (enIyi) satirlar.push('<li><a href="./oyunlar/">Duyduğunu Seç</a>: en iyi sonuç ' + enIyi + ' / 10</li>');
+      if (satirlar.length) { document.getElementById('ilerlemeListe').innerHTML = satirlar.join(''); ilerleme.hidden = false; }
+    } catch (e) {}
+  }
+
   /* ── Yıl ── */
   var yil = document.getElementById('yil');
   if (yil) yil.textContent = String(new Date().getFullYear());

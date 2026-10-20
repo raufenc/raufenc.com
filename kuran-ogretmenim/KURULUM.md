@@ -12,9 +12,24 @@ kök dizinidir.
 ## Paket içeriği
 
 - `index.html`, `stil.css`, `site.js`, `assets/` — giriş sitesi (3,7 MB)
-- `sinif/` — akıllı tahta için Sınıf Modu: 16 dersin harf ve hece kartları,
-  dokun-dinle, sırayla okutma. Veri `sinif/dersler.json` (uygulamanın ders
+- `dersler/` — 16 elifba dersinin kendi sayfası (sesli anlatım, dokun-dinle
+  kartları). `sinif/` — akıllı tahta için Sınıf Modu: aynı kartlar büyük,
+  sırayla okutma, tam ekran. Veri `sinif/dersler.json` (uygulamanın ders
   listelerinden çıkarıldı; sesler `app/` altındaki dosyalardır).
+- `kuran/` — sesli Kur'ân-ı Kerîm okuyucusu: dizin + 114 sûre sayfası.
+  Metin ve üç meâl `kuran/veri/*.json` içindedir (4,4 MB, uygulamanın
+  kendi verisinden). Sesli okuma everyayah.com'dan âyet âyet çekilir
+  (çevrimiçi gerekir); `okuyucu.js` içindeki `SES_KOK` değiştirilerek
+  kendi sunucunuza alınabilir (dosya adı düzeni `SSSAAA.mp3`).
+- `dualar/` — 14 dua (Âyete'l-Kürsî dâhil; okuyuş Husarî, everyayah.com); metin, okunuş, meâl ve satır zamanlamaları
+  `dualar/veri.json` içinde. Sesler `app/.../sounds/dualar/`.
+- `tecvid/` — 4 bölüm, 17 kural sayfası; örnek sesleri `app/.../sounds/tecvidler/`.
+  Üreten betikteki metinler uygulamadan çıkarılıp sadeleştirildi.
+- `oyunlar/` — üç tarayıcı oyunu; `sinif/dersler.json` verisini kullanır.
+- Sayfalar statik üretilmiştir (Python betikleri bu pakette değildir;
+  içerik değişikliği doğrudan HTML'de yapılır). Tüm sayfalar aynı
+  `stil.css` ve üst menüyü kullanır; tasarım değişkenleri `stil.css`
+  başındaki `:root` bloğundadır.
 - `sw.js`, `site.webmanifest` — çevrimdışı çalışma ve "ana ekrana ekle".
   Giriş sitesi, sınıf modu ve uygulama çekirdeği ilk açılışta cihazda
   saklanır; sesler ilk dinlendiğinde kalır. Sürüm değişince `sw.js`
@@ -35,13 +50,17 @@ kök dizinidir.
    adresinde çalışır.
 2. **Bu klasörün içeriğini deponun köküne kopyalayın** (`index.html`,
    `stil.css`, `site.js`, `assets/`).
-3. **Adresleri güncelleyin.** Üç dosyada arama-değiştirme yeterlidir:
-   - `index.html`: `https://raufenc.com/kuran-ogretmenim/` → `https://kuranogretmenim.com/`
-     (canonical, og:url, og:image, twitter:image, JSON-LD image)
-   - `index.html` ve `site.js` içindeki `./app/` bağlantıları zaten
-     göreli olduğundan değişmez.
+3. **Adresleri güncelleyin.** Bütün sayfalarda arama-değiştirme yeterlidir:
+   - `https://raufenc.com/kuran-ogretmenim/` → `https://kuranogretmenim.com/`
+     (canonical, og:url, og:image, JSON-LD; `index.html`, `kuran/`, `dualar/`,
+     `tecvid/`, `oyunlar/`, `dersler/`, `sinif/` altındaki HTML dosyaları)
+   - `sw.js` içindeki `KOK = '/kuran-ogretmenim/'` → `'/'`;
+     `site.webmanifest` içindeki `start_url` ve `scope` da `/` olur.
+   - Sayfa içi `./app/`, `../app/` bağlantıları göreli olduğundan değişmez.
 
-Ardından köke şu iki dosyayı ekleyin:
+Ardından köke `robots.txt` ekleyin ve bu depodaki `sitemap.xml` içinden
+`/kuran-ogretmenim/` ile başlayan adresleri (toplam 154) yeni alan adıyla
+kendi `sitemap.xml` dosyanıza taşıyın:
 
 ```
 # robots.txt
@@ -62,17 +81,24 @@ Sitemap: https://kuranogretmenim.com/sitemap.xml
 
 Orijinal sunucuda adında Türkçe karakter ya da boşluk olan 150 dosya yoktu
 (liste: `eksik-dosyalar.txt`). Bunların uygulama kodunda gerçekten
-çağrılan 102'si bu pakette yeniden üretildi ve `app/main.dart.js`
-içindeki yollar ASCII adlara çevrildi (ör. `üstün aciklamasi.mp3` →
-`uestuen_aciklamasi.mp3`). Kaynaklar:
+çağrılan 102'si bu pakette tamamlandı ve `app/main.dart.js` içindeki
+yollar ASCII adlara çevrildi (ör. `üstün aciklamasi.mp3` →
+`uestuen_aciklamasi.mp3`). Kaynaklar, öncelik sırasıyla:
 
-- 15 ders anlatımı: Türkçe metinler yeniden yazılıp seslendirildi
-  (`app/assets/assets/sounds/aciklamalar/`).
-- 77 harf, hece, kelime ve alıştırma okunuşu: Arapça metinden
-  seslendirildi.
-- 10 tecvid örneği: Mahmud Halil el-Husarî kıraatinden ilgili âyet-i
-  kerîme kesitleri (everyayah.com). Bakara 8, 11, 173 ve 225'te kesit,
-  âyetin tamamına yakın.
+1. **Hocanın kendi kaydı** (1): aynı okunuşun başka adla bulunan kaydı
+   (`şeyin` → `seyin.mp3`).
+2. **quran.com kelime kelime okuyuşu** (14): Kur'ân-ı Kerîm'de geçen
+   kelimeler, audio.qurancdn.com'daki insan okuyuşundan alındı; âyet ve
+   kelime numarası `ses-kaynak.json` içindedir.
+3. **Husarî kıraati** (10): tecvid örnekleri, Mahmud Halil el-Husarî'nin
+   kıraatinden âyet kesitleri (everyayah.com).
+4. **Yapay seslendirme** (77): 15 Türkçe ders anlatımı (metinler yeniden
+   yazıldı) ve 62 tek harf/hece (غ, ش ve ı-ü'lü heceler). Bu hecelerin
+   hiçbir açık kaynakta karşılığı yoktur; **hocanın kaydetmesi en
+   doğrusudur.** `ses-kontrol/` sayfası (arama motorlarına kapalı) bütün
+   listeyi dinletir, karar toplar ve kayıt listesini verir. Yeni kayıt
+   aynı dosya adıyla `app/assets/assets/sounds/<klasör>/` içine
+   konulduğunda başka değişiklik gerekmez.
 
 Kodda hiç çağrılmayan 45 dosya üretilmedi; uygulama bunları
 kullanmıyor. Kaynak kod gelirse `ses-eslestirme.json` dosyasındaki

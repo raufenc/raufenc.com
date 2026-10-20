@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17384a">
+<meta name="description" content="Ortaokul için Siyer Yolculuğu: 60 kısa ders, görsel anlatımlar, etkileşimli uygulamalar ve öğretmen rehberi.">
+<title>Siyer Yolculuğu · Ders Odası</title>
+<link rel="stylesheet" href="styles-v2.css">
+</head>
+<body>
+<a class="skip" href="#main">İçeriğe geç</a>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#dersler" aria-label="Siyer Yolculuğu ana sayfası">
+      <svg viewBox="0 0 48 48" width="42" height="42" aria-hidden="true"><rect width="48" height="48" rx="14" fill="#17384a"/><path d="M12 15q7-4 12 1 5-5 12-1v20q-7-4-12 0-5-4-12 0z" fill="none" stroke="#f1d69a" stroke-width="2.5"/><path d="M24 16v19" stroke="#f1d69a" stroke-width="2"/><circle cx="24" cy="9" r="2" fill="#f1d69a"/></svg>
+      <span>Siyer Yolculuğu<small>DERS ODASI · ORTAOKUL</small></span>
+    </a>
+    <nav class="header-links" aria-label="Site bağlantıları">
+      <a href="../index.html">Ders Odası</a>
+      <a href="../defterim.html">Defterim</a>
+      <a class="button quiet compact" href="#teacher">Öğretmen alanı <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<div class="page">
+  <section class="hero" id="hero" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <span class="eyebrow">BİR HAYATI ÖĞRENME YOLCULUĞU</span>
+      <h1 id="hero-title">Öğrenelim.<br>Düşünelim.<br><em>Hayatımıza taşıyalım.</em></h1>
+      <p>Peygamber Efendimiz (sallallahü aleyhi ve sellem)'in mübarek hayatını; mekânlar, olaylar ve güzel ahlâk örnekleriyle birlikte öğrenelim.</p>
+      <div class="hero-actions"><button class="button primary" data-action="first">İlk derse başla <span aria-hidden="true">→</span></button><a class="button light" href="#teacher">Birlikte ders işleyelim</a></div>
+      <div class="hero-meta"><span>5–8. sınıflar</span><span>Her bölüm 10 dakika</span><span>Kendi başına veya öğretmeninle</span></div>
+    </div>
+    <div class="hero-image">
+      <img src="assets/atlas-cover.png" alt="Siyer yolculuğunu anlatan harita, mimari ve kitaplardan oluşan temsili öğretim görseli" fetchpriority="high">
+      <div class="image-caption"><span class="caption-line"></span>Mekke’den Medine’ye<br><strong>Bilgiden güzel davranışa</strong></div>
+    </div>
+  </section>
+  <div class="overview" aria-label="Öğrenme programı">
+    <div><strong id="lesson-count">60</strong><span>kısa ders</span></div>
+    <div><strong id="module-count">10</strong><span>öğrenme ünitesi</span></div>
+    <div><strong id="guided-hours">10</strong><span>saatlik rehberli akış</span></div>
+    <p>Her derste <b>görsel anlatım, uygulama ve düşünme.</b><br>Öğrendiklerini kendi cümlelerinle anlamlandır.</p>
+  </div>
+  <nav class="view-nav" aria-label="Siyer alanları">
+    <a href="#dersler" data-view="catalog">Dersleri keşfet</a>
+    <a href="#katil" data-view="join">Canlı derse katıl</a>
+    <a href="#teacher" data-view="teacher">Öğretmen rehberi</a>
+    <a href="#kaynaklar" data-view="sources">Kaynaklar ve kullanım</a>
+  </nav>
+  <main id="main" tabindex="-1"></main>
+  <footer class="site-footer">
+    <div><strong>Siyer Yolculuğu</strong><p>Sevgiyle öğrenmek, güzel ahlâkla yaşamak için.</p></div>
+    <div><a href="../defterim.html">Ders defterim</a><a href="../rapor.html">Ders raporları</a><a href="indir/siyer-ders-paketi.zip" download>Entegrasyon paketini indir</a></div>
+  </footer>
+</div>
+<dialog class="lesson-dialog" id="lesson-dialog" aria-labelledby="dialog-title">
+  <div class="dialog-bar">
+    <div class="dialog-heading"><span id="dialog-kicker">SİYER YOLCULUĞU</span><h2 id="dialog-title">Ders</h2></div>
+    <div class="dialog-actions"><button class="icon-button" id="fullscreen-button" title="Tam ekran" aria-label="Dersi tam ekranda göster">⛶</button><a class="button quiet compact" id="direct-lesson" target="_blank" rel="noopener">Yeni sekmede aç ↗</a><button class="icon-button close-button" id="close-lesson" aria-label="Dersi kapat">×</button></div>
+  </div>
+  <div class="session-strip" id="session-strip" hidden><span id="session-status"></span><progress id="session-progress" max="100" value="0" aria-label="Açık dersteki ilerleme"></progress></div>
+  <div class="frame-host" id="frame-host"></div>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="print-area" class="print-area"></div>
+<script src="content-v2.js"></script>
+<script src="hub-v2.js"></script>
+</body>
+</html>

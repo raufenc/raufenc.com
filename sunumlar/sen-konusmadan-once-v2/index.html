@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Sen konuşmadan önce — Rauf Enç</title>
+  <meta name="description" content="Beden dilini gözlem, bağlam ve iletişim üzerinden ele alan; kısa filmler ve uygulama sorularıyla ilerleyen sunum.">
+  <link rel="stylesheet" href="/sunumlar/room.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/sunumlar/">← Sunum Odası</a>
+    <span>Rauf Enç</span>
+  </header>
+  <main style="max-width:1100px;margin:8vh auto;padding:24px">
+    <p class="eyebrow">VİDEOLU SUNUM · 30 SLAYT · 6 VİDEO</p>
+    <h1 style="font-size:clamp(36px,6vw,72px);line-height:1.1;margin:24px 0">Sen konuşmadan önce</h1>
+    <p>Beden dilini gözlem, bağlam ve iletişim üzerinden ele alan; kısa filmler ve uygulama sorularıyla ilerleyen sunum.</p>
+    <p>Kumandanın ileri düğmesiyle ilerleyin; video slaytları sesli olarak kendiliğinden başlar. İleri düğmesine yeniden basınca video durur ve sonraki slayda geçilir. Video bitince slayt yerinde kalır.</p>
+    <p>İleri: →, PageDown, Boşluk veya Enter · Geri: ← veya PageUp · L: lazer · F: tam ekran · N: konuşmacı notları.</p>
+    <div class="hero-actions">
+      <button class="primary" id="start">▷ Sunumu başlat</button>
+      <a class="secondary" href="/sunumlar/">Sunumlara dön</a>
+    </div>
+    <p id="message" role="status"></p>
+    <img src="/sunumlar/sen-konusmadan-once-v2/media/slide-001.jpg" alt="Sen konuşmadan önce sunumu kapağı" style="width:100%;margin-top:32px;border-radius:16px">
+  </main>
+  <script type="module">
+    import { openPlayer } from "/sunumlar/player.js";
+    const button = document.querySelector("#start");
+    let project;
+    button.onclick = async () => {
+      button.disabled = true;
+      document.querySelector("#message").textContent = "";
+      try {
+        if (!project) {
+          const response = await fetch("/sunumlar/sen-konusmadan-once-v2/project.json");
+          if (!response.ok) throw new Error("Sunum dosyası açılamadı.");
+          project = await response.json();
+        }
+        await openPlayer(project);
+      } catch (error) {
+        document.querySelector("#message").textContent = error.message;
+      } finally { button.disabled = false; }
+    };
+  </script>
+</body>
+</html>

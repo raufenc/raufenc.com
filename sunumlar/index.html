@@ -1,199 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunumlar — Rauf Enç</title>
-  <meta name="description" content="İnteraktif sunumlar: bilim felsefesi, mantık hataları ve daha fazlası." />
-  <link rel="stylesheet" href="/lib/design-system/tokens.css" />
-  <link rel="stylesheet" href="/lib/design-system/animations.css" />
-  <script src="/lib/design-system/theme.js"></script>
-  <script src="/nav.js"></script>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(236,72,153,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 90% 80%, rgba(99,102,241,0.04) 0%, transparent 50%);
-      pointer-events: none; z-index: 0;
-    }
-
-    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-    header {
-      padding: 80px 0 48px;
-      text-align: center;
-    }
-    .badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--muted2); font-size: 11px; padding: 5px 14px;
-      border-radius: var(--radius-full); margin-bottom: 24px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      animation: fadeUp 0.5s ease both;
-    }
-    .badge-dot {
-      width: 6px; height: 6px; background: #f472b6;
-      border-radius: 50%; animation: pulse 2s infinite;
-    }
-    h1 {
-      font-size: clamp(28px, 5vw, 44px);
-      font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
-      margin-bottom: 16px;
-      animation: fadeUp 0.5s 0.05s ease both;
-    }
-    .subtitle {
-      color: var(--muted2); font-size: 15px; max-width: 480px;
-      margin: 0 auto; line-height: 1.7;
-      animation: fadeUp 0.5s 0.1s ease both;
-    }
-
-    .sunum-list {
-      display: flex; flex-direction: column; gap: 20px;
-      padding-bottom: 60px;
-    }
-
-    .sunum-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 24px;
-      align-items: center;
-      transition: border-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
-      animation: fadeUp 0.5s ease both;
-    }
-    .sunum-card:nth-child(2) { animation-delay: 0.1s; }
-    .sunum-card:nth-child(3) { animation-delay: 0.2s; }
-
-    .sunum-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px var(--accent-glow);
-    }
-
-    .sunum-icon {
-      width: 80px; height: 80px;
-      border-radius: var(--radius-md);
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
-    }
-
-    .sunum-info h2 {
-      font-size: 20px; font-weight: 800; letter-spacing: -0.01em;
-      margin-bottom: 6px;
-    }
-    .sunum-info p {
-      font-size: 14px; color: var(--muted2); line-height: 1.6;
-      margin-bottom: 10px;
-    }
-    .sunum-meta {
-      display: flex; gap: 12px; flex-wrap: wrap;
-    }
-    .sunum-tag {
-      font-size: 11px; font-weight: 700;
-      padding: 3px 10px; border-radius: var(--radius-full);
-      letter-spacing: 0.06em; text-transform: uppercase;
-      background: rgba(236,72,153,0.12); color: #f472b6;
-    }
-    .sunum-stat {
-      font-size: 11px; color: var(--muted);
-      display: flex; align-items: center; gap: 4px;
-    }
-
-    footer {
-      text-align: center; padding: 32px 24px;
-      color: var(--muted); font-size: 12px;
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 520px) {
-      .sunum-card {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .sunum-icon { margin: 0 auto; }
-      .sunum-meta { justify-content: center; }
-    }
-  </style>
-  <!-- Vercel Analytics + Speed Insights -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Sunum Odası — Rauf Enç</title><meta name="description" content="Rauf Enç'in sunum projeleri. Tam ekran sunum, video, lazer işaretçi ve konuşmacı notları.">
+<link rel="canonical" href="https://raufenc.com/sunumlar/"><link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="./room.css"><link rel="stylesheet" href="./player.css">
+<script type="module" src="./room.js"></script>
 </head>
 <body>
-
-<div class="wrap">
-  <header>
-    <div class="badge"><span class="badge-dot"></span> Sunumlar</div>
-    <h1>İnteraktif Sunumlar</h1>
-    <p class="subtitle">Keşfet, öğren, test et. Her sunum interaktif öğeler ve bilgi testleri içerir.</p>
-  </header>
-
-  <div class="sunum-list">
-    <a href="/sunumlar/yapay-zeka-dil-ogretimi/" class="sunum-card">
-      <div class="sunum-icon">🧭</div>
-      <div class="sunum-info">
-        <h2>Yabancı Dil Öğretiminde Yapay Zekâ</h2>
-        <p>Yapay zekâyı anlamak, çıktıyı sınamak ve öğrenciyi üreten özne olarak tutmak için etkileşimli seminer.</p>
-        <div class="sunum-meta">
-          <span class="sunum-tag">Sunum + Atölye</span>
-          <span class="sunum-stat">60 dakika</span>
-          <span class="sunum-stat">40 slayt</span>
-          <span class="sunum-stat">6 etkileşim</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="/sunumlar/bilim/" class="sunum-card">
-      <div class="sunum-icon">🔬</div>
-      <div class="sunum-info">
-        <h2>Bilim Nedir, Ne Değildir?</h2>
-        <p>Bilimin türleri, yöntemleri ve sınırları üzerine felsefi bir yolculuk. Popper, Kuhn, Heisenberg ve daha fazlası.</p>
-        <div class="sunum-meta">
-          <span class="sunum-tag">Sunum</span>
-          <span class="sunum-stat">64 slayt</span>
-          <span class="sunum-stat">6 bölüm</span>
-          <span class="sunum-stat">15 soruluk quiz</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="/sunumlar/safsatalar/" class="sunum-card">
-      <div class="sunum-icon">🕵️</div>
-      <div class="sunum-info">
-        <h2>Safsata Dedektifi</h2>
-        <p>13 mantıksal hatayı öğren ve gerçek diyaloglarda tespit et. İnteraktif dedektif oyunu ile bilgini test et.</p>
-        <div class="sunum-meta">
-          <span class="sunum-tag">Sunum + Oyun</span>
-          <span class="sunum-stat">13 safsata</span>
-          <span class="sunum-stat">5 senaryo</span>
-          <span class="sunum-stat">Dedektif modu</span>
-        </div>
-      </div>
-    </a>
-  </div>
-</div>
-
-<footer>
-  Rauf Enç &copy; 2026
-</footer>
-
-</body>
-</html>
+<header class="topbar"><a class="brand" href="/sunumlar/" aria-label="Sunum Odası"><span class="brand-mark">re.</span><span>Rauf Enç<span class="brand-sub">SUNUM ODASI</span></span></a><div class="top-actions"><span class="quiet-label">Hazır olduğunuzda, sahne sizin.</span><button id="login-button" class="text-button">Yönetici girişi</button></div></header>
+<main class="room">
+<section class="intro"><div><p class="eyebrow"><span></span> FİKİRDEN SAHNEYE</p><h1>Bir fikir.<br><em>Bir sunum.</em></h1><p class="intro-copy">Her çalışma kendi alanında.<br>Sunumlarınızı bir arada tutun, kaldığınız yerden anlatın.</p><div class="hero-actions"><button id="new-project" class="primary">＋ Yeni sunum</button><button id="try-player" class="secondary">▷ Sahneyi dene</button></div></div><div class="stage-preview" aria-label="Sunum sahnesi önizlemesi"><div class="preview-top"><span>SAHNE / 01</span><span class="live-dot">SUNUMA HAZIR</span></div><div class="preview-content"><span class="preview-index">01 — 03</span><p>İyi bir fikir,<br><i>iyi anlatılmayı</i><br>hak eder.</p><span class="preview-pointer" aria-hidden="true"></span></div><div class="preview-bottom"><span>← &nbsp; → &nbsp; Slayt geçişi</span><span>L &nbsp; Lazer &nbsp;&nbsp; F &nbsp; Tam ekran</span></div></div></section>
+<section aria-labelledby="library-title" class="library"><div class="section-top"><div><p class="eyebrow">ÇALIŞMA ALANI</p><h2 id="library-title">Sunumlarım <span id="project-count"></span></h2></div><label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Sunum ara…" aria-label="Sunum ara"></label></div><div class="filter-row"><div role="group" aria-label="Sunum türü"><button data-filter="all" class="filter active" aria-pressed="true">Tümü</button><button data-filter="web" class="filter" aria-pressed="false">Web sunumları</button><button data-filter="media" class="filter" aria-pressed="false">Video ve slaytlar</button></div><span id="storage-status" class="status-pill">Bağlantı kontrol ediliyor</span></div>
+<p id="service-message" class="notice" hidden></p><div id="projects" class="project-grid" aria-live="polite"></div><button id="load-more" class="secondary more" hidden>Daha fazla göster</button><p id="empty" class="empty" hidden>Bu aramayla eşleşen bir sunum yok.</p>
+</section>
+<section class="desk-note"><div class="note-symbol">✳</div><div><h2>Sunumun akışı sizde.</h2><p>Ok tuşlarıyla ilerleyin, <kbd>L</kbd> ile lazeri açın, <kbd>P</kbd> ile çizin. Video, ses ve animasyonları sahnede oynatın.</p></div><button id="guide-button" class="text-button">Dosya rehberi ↗</button></section>
+</main><footer class="room-footer"><span>Rauf Enç · Sunum Odası</span><span>Bağlantıyı bilenler erişebilir. Ana sayfada listelenmez.</span></footer>
+<div id="toast" role="status" class="toast" hidden></div>
+<dialog id="login-dialog" class="small-dialog"><form id="login-form"><div class="dialog-head"><h2>Yönetici girişi</h2><button type="button" data-close class="icon-button" aria-label="Kapat">×</button></div><p class="muted">Sunum eklemek ve dosya yüklemek için yönetici şifrenizle giriş yapın.</p><label>Şifre<input id="password" type="password" autocomplete="current-password" required></label><p id="login-error" class="error" role="alert"></p><button class="primary" type="submit">Giriş yap</button></form></dialog>
+<dialog id="editor" class="editor"><div class="dialog-head"><div><p class="eyebrow">SUNUM PROJESİ</p><h2 id="editor-title">Yeni sunum</h2></div><button type="button" id="close-editor" class="icon-button" aria-label="Düzenleyiciyi kapat">×</button></div><div class="editor-body"><div class="editor-meta"><label>Sunum adı<input id="project-title" maxlength="200" placeholder="Sunumunuza bir ad verin"></label><label>Kısa açıklama<textarea id="project-description" maxlength="2000" rows="2" placeholder="Bu sunum ne anlatıyor?"></textarea></label></div><div id="editor-notice" class="notice"></div><div class="add-toolbar"><button class="secondary" id="add-files">＋ Görsel / video</button><button class="secondary" id="add-url">↗ Bağlantı ekle</button><button class="secondary" id="add-text">T Metin slaytı</button><button class="text-button" id="import-json">Proje içe aktar</button><button class="text-button" id="attach-source">PPTX kaynağı ekle</button></div><input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/gif,video/mp4,video/webm,video/quicktime" multiple hidden><input id="json-input" type="file" accept="application/json,.json" hidden><input id="source-input" type="file" accept=".pptx,.ppt,.pdf" hidden><p class="muted small">Görseller ve videolar seçtiğiniz sırayla eklenir. Video içindeki başlangıç/bitiş noktalarını ayarlayarak bölüm bölüm sunabilirsiniz.</p><div id="upload-status" class="upload-status" hidden><progress id="upload-progress" max="100" value="0"></progress><span id="upload-label"></span><button id="cancel-upload" class="text-button">İptal</button></div><ol id="slide-list" class="slide-list"></ol><p id="no-slides" class="empty">İlk slaydınızı ekleyin.<br><span>Bir görsel, video ya da mevcut sunum bağlantısıyla başlayabilirsiniz.</span></p><div id="source-info" class="muted small"></div></div><div class="editor-footer"><div><span id="save-state" role="status">Henüz kaydedilmedi</span><button id="export-json" class="text-button">Proje dosyasını indir</button></div><div><button id="preview-project" class="secondary">▷ Önizle</button><button id="save-project" class="primary">Kaydet ve yayımla</button></div></div></dialog>
+<dialog id="url-dialog" class="small-dialog"><form id="url-form"><div class="dialog-head"><h2>Bağlantıdan ekle</h2><button type="button" data-close class="icon-button" aria-label="Kapat">×</button></div><label>İçerik türü<select id="url-type"><option value="video">Video (MP4 / WebM)</option><option value="image">Görsel</option><option value="embed">PowerPoint / Google Slides</option><option value="html">Sitedeki HTML sunumu</option></select></label><label>Başlık<input id="url-title" maxlength="200" placeholder="Slayt veya bölüm adı"></label><label>Bağlantı<input id="url-value" type="text" placeholder="https://…" required></label><p class="muted small">PowerPoint için OneDrive’ın “Ekle / Embed” bağlantısını kullanın. HTML sunumları raufenc.com/sunumlar altında yayımlanmış olmalı. Bağlantıların görüntüleme izni açık olmalıdır.</p><p id="url-error" class="error" role="alert"></p><button type="submit" class="primary">Sunuma ekle</button></form></dialog>
+<dialog id="guide" class="guide"><div class="dialog-head"><h2>Sunum dosyası rehberi</h2><button type="button" data-close class="icon-button" aria-label="Kapat">×</button></div><div class="guide-grid"><article><span>01</span><h3>Animasyonlu web sunumu</h3><p>Mevcut HTML sunumunuzu kendi klasöründe yayımlayın ve bağlantısını ekleyin. Animasyonlar ve etkileşimler kendi oynatıcısında çalışır; lazer ve kalem üst katmandadır.</p></article><article><span>02</span><h3>Görsel ve video slaytları</h3><p>Görselleri ve MP4 / WebM videoları sıralayın. Video bölümlerine başlangıç ve bitiş saniyesi verin. Oynatıcı yalnızca açık slaydın medyasını yükler.</p></article><article><span>03</span><h3>PowerPoint dosyaları</h3><p>PPTX kaynak dosyası saklanabilir; otomatik olarak web sunumuna dönüştürülmez. OneDrive gömme bağlantısı ekleyebilir veya kontrol ettiğiniz video çıktısını kullanabilirsiniz.</p></article><article><span>04</span><h3>Büyük sunumlar</h3><p>Dosyalar parçalara bölünerek doğrudan medya deposuna yüklenir. Tek dosya üst sınırı 5 TB; toplam kapasite, aktarım kotası ve ücret kullanılan Vercel planına bağlıdır. Kesilen yükleme yeniden başlatılabilir.</p></article></div><div class="notice"><strong>PowerPoint ile görünüm eşleşmesi</strong><p>Web sürümünde bazı efekt ve tetikleyiciler farklı çalışabilir. Birebir görüntü gerektiğinde gerçek oynatımın ekran kaydı güvenilir bir seçenektir; bağımsız nesne tıklamaları videoya dönüşür. Mac PowerPoint’in video çıktısında gömülü medya ayrıca kontrol edilmelidir.</p></div><p class="small muted">Dış sunumun içindeyken klavye o sunumu yönetir. Lazer açıkken işaretleme katmanı tıklamaları yakalar; içerikle etkileşmek için lazeri kapatın. Bu alan gizli bir kasa değildir: proje ve dosya bağlantıları paylaşılabilir.</p><p class="small"><a href="https://support.microsoft.com/en-us/powerpoint/compare-powerpoint-features-on-different-platforms" target="_blank" rel="noopener">Microsoft uyumluluk tablosu ↗</a> · <a href="https://vercel.com/docs/vercel-blob/usage-and-pricing" target="_blank" rel="noopener">Depolama sınırları ↗</a></p></dialog>
+</body></html>

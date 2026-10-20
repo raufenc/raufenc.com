@@ -1,4 +1,5 @@
 {
+  "trailingSlash": true,
   "headers": [
     {
       "source": "/(.*)",
@@ -46,6 +47,33 @@
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(?:jpg|jpeg|png|webp|avif|gif|svg|ico|mp4|webm|mp3|m4a|wav|woff|woff2|ttf|otf))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(lib|data)/(.*\\.(?:js|css))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/lib/fonts/(.*\\.woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
@@ -142,11 +170,20 @@
       ]
     },
     {
-      "source": "/api/arge-feed",
+      "source": "/api/arge-feed{/}?",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, s-maxage=600, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/api/surum{/}?",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=600, s-maxage=3600, stale-while-revalidate=86400"
         }
       ]
     },
@@ -190,6 +227,66 @@
       ]
     },
     {
+      "source": "/sunumlar/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://view.officeapps.live.com https://onedrive.live.com https://1drv.ms https://*.officeapps.live.com https://*.sharepoint.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.blob.vercel-storage.com https://blob.vercel-storage.com https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/sunumlar",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://view.officeapps.live.com https://onedrive.live.com https://1drv.ms https://*.officeapps.live.com https://*.sharepoint.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.blob.vercel-storage.com https://blob.vercel-storage.com https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/sunumlar/",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://www.gstatic.com https://*.firebasedatabase.app https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' blob: https:; frame-src 'self' https://view.officeapps.live.com https://onedrive.live.com https://1drv.ms https://*.officeapps.live.com https://*.sharepoint.com https://docs.google.com https://www.youtube.com https://www.youtube-nocookie.com https://*.firebasedatabase.app; connect-src 'self' https://*.blob.vercel-storage.com https://blob.vercel-storage.com https://*.firebaseio.com https://*.firebasedatabase.app https://*.googleapis.com https://firestore.googleapis.com wss://*.firebaseio.com wss://*.firebasedatabase.app https://*.basemaps.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://www.google.com; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/api/arge-feed",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=600, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
       "source": "/kocaeli-arge/(.*)\\.apk",
       "headers": [
         {
@@ -222,38 +319,23 @@
   ],
   "redirects": [
     {
-      "source": "/ilgitesti",
-      "destination": "/ilgitesti/",
+      "source": "/noroterbiye/tanitim/noroterbiye-30s(.*)10.mp4",
+      "destination": "/noroterbiye/tanitim/noroterbiye-30s.mp4",
       "permanent": true
     },
     {
-      "source": "/ilgitesti/kaynaklar",
-      "destination": "/ilgitesti/kaynaklar/",
+      "source": "/iho-oyunlar/",
+      "destination": "/7sinif/",
       "permanent": true
     },
     {
-      "source": "/noroterbiye/duvar-kagitlari",
-      "destination": "/noroterbiye/duvar-kagitlari/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri",
-      "destination": "/beyitdefteri/",
-      "permanent": true
-    },
-    {
-      "source": "/aruz",
-      "destination": "/aruz/",
-      "permanent": true
-    },
-    {
-      "source": "/iho-oyunlar-2/:path*",
-      "destination": "/7sinif/oyunlar2/:path*",
+      "source": "/iho-oyunlar-2/:path(.*)",
+      "destination": "/7sinif/oyunlar2/:path",
       "permanent": false
     },
     {
-      "source": "/iho-oyunlar/:path*",
-      "destination": "/7sinif/oyunlar/:path*",
+      "source": "/iho-oyunlar/:path(.*)",
+      "destination": "/7sinif/oyunlar/:path",
       "permanent": false
     },
     {
@@ -327,7 +409,7 @@
       "permanent": false
     },
     {
-      "source": "/meslek-pusulasi/:path*",
+      "source": "/meslek-pusulasi/:path(.*)",
       "destination": "/yol-haritan/",
       "permanent": false
     },
@@ -340,11 +422,6 @@
         }
       ],
       "destination": "/deneme/",
-      "permanent": false
-    },
-    {
-      "source": "/5sinif",
-      "destination": "/5sinif/",
       "permanent": false
     },
     {
@@ -408,8 +485,8 @@
       "permanent": true
     },
     {
-      "source": "/davetmektubu/:path*",
-      "destination": "https://davetmektubu.com/:path*",
+      "source": "/davetmektubu/:path(.*)",
+      "destination": "https://davetmektubu.com/:path",
       "permanent": true
     },
     {
@@ -423,8 +500,8 @@
       "permanent": true
     },
     {
-      "source": "/7sinif1unite/:path*",
-      "destination": "/7sinif/1/:path*",
+      "source": "/7sinif1unite/:path(.*)",
+      "destination": "/7sinif/1/:path",
       "permanent": true
     },
     {
@@ -438,8 +515,8 @@
       "permanent": true
     },
     {
-      "source": "/7sinif2unite/:path*",
-      "destination": "/7sinif/2/:path*",
+      "source": "/7sinif2unite/:path(.*)",
+      "destination": "/7sinif/2/:path",
       "permanent": true
     },
     {
@@ -453,1367 +530,20 @@
       "permanent": true
     },
     {
-      "source": "/7sinif3unite/:path*",
-      "destination": "/7sinif/3/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim",
-      "destination": "/kuran-ogretmenim/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/app",
-      "destination": "/kuran-ogretmenim/app/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/sinif",
-      "destination": "/kuran-ogretmenim/sinif/",
-      "permanent": true
-    },
-    {
-      "source": "/7-sinif-sesli-macera",
-      "destination": "/7-sinif-sesli-macera/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif",
-      "destination": "/7sinif/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/1",
-      "destination": "/7sinif/1/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/2",
-      "destination": "/7sinif/2/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/3",
-      "destination": "/7sinif/3/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/3/hastaneye-yolculuk",
-      "destination": "/7sinif/3/hastaneye-yolculuk/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/4",
-      "destination": "/7sinif/4/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/oyunlar/arapca-3d",
-      "destination": "/7sinif/oyunlar/arapca-3d/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/oyunlar/eba-etkilesim",
-      "destination": "/7sinif/oyunlar/eba-etkilesim/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/oyunlar/eba-yaris",
-      "destination": "/7sinif/oyunlar/eba-yaris/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/oyunlar/unit3",
-      "destination": "/7sinif/oyunlar/unit3/",
-      "permanent": true
-    },
-    {
-      "source": "/7sinif/oyunlar/unit4",
-      "destination": "/7sinif/oyunlar/unit4/",
-      "permanent": true
-    },
-    {
-      "source": "/_alim-sablonu",
-      "destination": "/_alim-sablonu/",
-      "permanent": true
-    },
-    {
-      "source": "/ai-atlasi",
-      "destination": "/ai-atlasi/",
-      "permanent": true
-    },
-    {
-      "source": "/arapca-kelime",
-      "destination": "/arapca-kelime/",
-      "permanent": true
-    },
-    {
-      "source": "/arapca/unite2",
-      "destination": "/arapca/unite2/",
-      "permanent": true
-    },
-    {
-      "source": "/bak-bak",
-      "destination": "/bak-bak/",
-      "permanent": true
-    },
-    {
-      "source": "/bak-bak/ogretmen",
-      "destination": "/bak-bak/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/beyin-ve-yapay-zeka",
-      "destination": "/beyin-ve-yapay-zeka/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/aklini-uyandir",
-      "destination": "/beyitdefteri/siir/aklini-uyandir/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/bagisla",
-      "destination": "/beyitdefteri/siir/bagisla/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/basla",
-      "destination": "/beyitdefteri/siir/basla/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/bedel-mi",
-      "destination": "/beyitdefteri/siir/bedel-mi/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/beklentinin-kimyasi-taslak",
-      "destination": "/beyitdefteri/siir/beklentinin-kimyasi-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/bendeki-put-yikilsin",
-      "destination": "/beyitdefteri/siir/bendeki-put-yikilsin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/birakma",
-      "destination": "/beyitdefteri/siir/birakma/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/biraz-sus",
-      "destination": "/beyitdefteri/siir/biraz-sus/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/bu-mu-adalet",
-      "destination": "/beyitdefteri/siir/bu-mu-adalet/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/bugun-taslak",
-      "destination": "/beyitdefteri/siir/bugun-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/can-sikintisinin-sesi-taslak",
-      "destination": "/beyitdefteri/siir/can-sikintisinin-sesi-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/cicek-ac",
-      "destination": "/beyitdefteri/siir/cicek-ac/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/degistir",
-      "destination": "/beyitdefteri/siir/degistir/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/dinle",
-      "destination": "/beyitdefteri/siir/dinle/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/dokun-sen",
-      "destination": "/beyitdefteri/siir/dokun-sen/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/donussun",
-      "destination": "/beyitdefteri/siir/donussun/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/dumen-tut",
-      "destination": "/beyitdefteri/siir/dumen-tut/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/dusmani-dosta-taslak",
-      "destination": "/beyitdefteri/siir/dusmani-dosta-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/ferman-sanma",
-      "destination": "/beyitdefteri/siir/ferman-sanma/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/gecikme",
-      "destination": "/beyitdefteri/siir/gecikme/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/icteki-gemi-taslak",
-      "destination": "/beyitdefteri/siir/icteki-gemi-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/inanma",
-      "destination": "/beyitdefteri/siir/inanma/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/insani-unutma",
-      "destination": "/beyitdefteri/siir/insani-unutma/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/kanma",
-      "destination": "/beyitdefteri/siir/kanma/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-21",
-      "destination": "/beyitdefteri/siir/mektup-21/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-22",
-      "destination": "/beyitdefteri/siir/mektup-22/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-23",
-      "destination": "/beyitdefteri/siir/mektup-23/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-24",
-      "destination": "/beyitdefteri/siir/mektup-24/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-25",
-      "destination": "/beyitdefteri/siir/mektup-25/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-26",
-      "destination": "/beyitdefteri/siir/mektup-26/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-27",
-      "destination": "/beyitdefteri/siir/mektup-27/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-28",
-      "destination": "/beyitdefteri/siir/mektup-28/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-29",
-      "destination": "/beyitdefteri/siir/mektup-29/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-30",
-      "destination": "/beyitdefteri/siir/mektup-30/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-31",
-      "destination": "/beyitdefteri/siir/mektup-31/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-32",
-      "destination": "/beyitdefteri/siir/mektup-32/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-33",
-      "destination": "/beyitdefteri/siir/mektup-33/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-34",
-      "destination": "/beyitdefteri/siir/mektup-34/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-35",
-      "destination": "/beyitdefteri/siir/mektup-35/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-36",
-      "destination": "/beyitdefteri/siir/mektup-36/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-37",
-      "destination": "/beyitdefteri/siir/mektup-37/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-38",
-      "destination": "/beyitdefteri/siir/mektup-38/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-39",
-      "destination": "/beyitdefteri/siir/mektup-39/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-40",
-      "destination": "/beyitdefteri/siir/mektup-40/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-41",
-      "destination": "/beyitdefteri/siir/mektup-41/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-42",
-      "destination": "/beyitdefteri/siir/mektup-42/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-43",
-      "destination": "/beyitdefteri/siir/mektup-43/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-44",
-      "destination": "/beyitdefteri/siir/mektup-44/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-45",
-      "destination": "/beyitdefteri/siir/mektup-45/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-46",
-      "destination": "/beyitdefteri/siir/mektup-46/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-47",
-      "destination": "/beyitdefteri/siir/mektup-47/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-48",
-      "destination": "/beyitdefteri/siir/mektup-48/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-49",
-      "destination": "/beyitdefteri/siir/mektup-49/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-50",
-      "destination": "/beyitdefteri/siir/mektup-50/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-51",
-      "destination": "/beyitdefteri/siir/mektup-51/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-52",
-      "destination": "/beyitdefteri/siir/mektup-52/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-53",
-      "destination": "/beyitdefteri/siir/mektup-53/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-54",
-      "destination": "/beyitdefteri/siir/mektup-54/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-55",
-      "destination": "/beyitdefteri/siir/mektup-55/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-56",
-      "destination": "/beyitdefteri/siir/mektup-56/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-57",
-      "destination": "/beyitdefteri/siir/mektup-57/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-58",
-      "destination": "/beyitdefteri/siir/mektup-58/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-59",
-      "destination": "/beyitdefteri/siir/mektup-59/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-60",
-      "destination": "/beyitdefteri/siir/mektup-60/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-61",
-      "destination": "/beyitdefteri/siir/mektup-61/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-62",
-      "destination": "/beyitdefteri/siir/mektup-62/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-63",
-      "destination": "/beyitdefteri/siir/mektup-63/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-64",
-      "destination": "/beyitdefteri/siir/mektup-64/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-65",
-      "destination": "/beyitdefteri/siir/mektup-65/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-66",
-      "destination": "/beyitdefteri/siir/mektup-66/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-67",
-      "destination": "/beyitdefteri/siir/mektup-67/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-68",
-      "destination": "/beyitdefteri/siir/mektup-68/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-69",
-      "destination": "/beyitdefteri/siir/mektup-69/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mektup-70",
-      "destination": "/beyitdefteri/siir/mektup-70/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/mirac-olur-mu",
-      "destination": "/beyitdefteri/siir/mirac-olur-mu/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/ne-ararsin",
-      "destination": "/beyitdefteri/siir/ne-ararsin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/sarilmayi-unuttun",
-      "destination": "/beyitdefteri/siir/sarilmayi-unuttun/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/senindir",
-      "destination": "/beyitdefteri/siir/senindir/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/sinansin",
-      "destination": "/beyitdefteri/siir/sinansin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/sultan-sandin",
-      "destination": "/beyitdefteri/siir/sultan-sandin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/tapulu-bir-kul-degil",
-      "destination": "/beyitdefteri/siir/tapulu-bir-kul-degil/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/urun-sensin-taslak",
-      "destination": "/beyitdefteri/siir/urun-sensin-taslak/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/utansin",
-      "destination": "/beyitdefteri/siir/utansin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/uyan-sen",
-      "destination": "/beyitdefteri/siir/uyan-sen/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/uyan-sen-ilk-bicim",
-      "destination": "/beyitdefteri/siir/uyan-sen-ilk-bicim/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/uyandir",
-      "destination": "/beyitdefteri/siir/uyandir/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/yavasla",
-      "destination": "/beyitdefteri/siir/yavasla/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/yetis-sen",
-      "destination": "/beyitdefteri/siir/yetis-sen/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/yikilsin",
-      "destination": "/beyitdefteri/siir/yikilsin/",
-      "permanent": true
-    },
-    {
-      "source": "/beyitdefteri/siir/yuksel",
-      "destination": "/beyitdefteri/siir/yuksel/",
-      "permanent": true
-    },
-    {
-      "source": "/beylikten-cihana",
-      "destination": "/beylikten-cihana/",
-      "permanent": true
-    },
-    {
-      "source": "/beylikten-cihana/baski",
-      "destination": "/beylikten-cihana/baski/",
-      "permanent": true
-    },
-    {
-      "source": "/bulgu-masasi",
-      "destination": "/bulgu-masasi/",
-      "permanent": true
-    },
-    {
-      "source": "/ciraktan-pire",
-      "destination": "/ciraktan-pire/",
-      "permanent": true
-    },
-    {
-      "source": "/deneme",
-      "destination": "/deneme/",
-      "permanent": true
-    },
-    {
-      "source": "/ders-odasi",
-      "destination": "/ders-odasi/",
-      "permanent": true
-    },
-    {
-      "source": "/diyardan-diyara",
-      "destination": "/diyardan-diyara/",
-      "permanent": true
-    },
-    {
-      "source": "/diyardan-diyara/baski",
-      "destination": "/diyardan-diyara/baski/",
-      "permanent": true
-    },
-    {
-      "source": "/dkab",
-      "destination": "/dkab/",
-      "permanent": true
-    },
-    {
-      "source": "/dogru-taraf",
-      "destination": "/dogru-taraf/",
-      "permanent": true
-    },
-    {
-      "source": "/dogru-taraf/ogretmen",
-      "destination": "/dogru-taraf/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/endulus",
-      "destination": "/endulus/",
-      "permanent": true
-    },
-    {
-      "source": "/erdem360",
-      "destination": "/erdem360/",
-      "permanent": true
-    },
-    {
-      "source": "/evliyalar",
-      "destination": "/evliyalar/",
-      "permanent": true
-    },
-    {
-      "source": "/fatih-sultan-mehmed",
-      "destination": "/fatih-sultan-mehmed/",
-      "permanent": true
-    },
-    {
-      "source": "/gizlilik",
-      "destination": "/gizlilik/",
-      "permanent": true
-    },
-    {
-      "source": "/hikaye",
-      "destination": "/hikaye/",
-      "permanent": true
-    },
-    {
-      "source": "/hilal-scorm",
-      "destination": "/hilal-scorm/",
-      "permanent": true
-    },
-    {
-      "source": "/hizli-hafiz",
-      "destination": "/hizli-hafiz/",
-      "permanent": true
-    },
-    {
-      "source": "/imam-buhari",
-      "destination": "/imam-buhari/",
-      "permanent": true
-    },
-    {
-      "source": "/ingilizce-kelime",
-      "destination": "/ingilizce-kelime/",
-      "permanent": true
-    },
-    {
-      "source": "/islam-ahlaki",
-      "destination": "/islam-ahlaki/",
-      "permanent": true
-    },
-    {
-      "source": "/islam-alimleri",
-      "destination": "/islam-alimleri/",
-      "permanent": true
-    },
-    {
-      "source": "/islam-bilim-yildizlari",
-      "destination": "/islam-bilim-yildizlari/",
-      "permanent": true
-    },
-    {
-      "source": "/islami-egitim",
-      "destination": "/islami-egitim/",
-      "permanent": true
-    },
-    {
-      "source": "/iyilikakademi",
-      "destination": "/iyilikakademi/",
-      "permanent": true
-    },
-    {
-      "source": "/kalbinin-haritasi",
-      "destination": "/kalbinin-haritasi/",
-      "permanent": true
-    },
-    {
-      "source": "/karabas-elifbasi",
-      "destination": "/karabas-elifbasi/",
-      "permanent": true
-    },
-    {
-      "source": "/kasif-motoru",
-      "destination": "/kasif-motoru/",
-      "permanent": true
-    },
-    {
-      "source": "/kasif-motoru/ogretmen",
-      "destination": "/kasif-motoru/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/kayi",
-      "destination": "/kayi/",
-      "permanent": true
-    },
-    {
-      "source": "/kayi-atlasi",
-      "destination": "/kayi-atlasi/",
-      "permanent": true
-    },
-    {
-      "source": "/kayi/atlas",
-      "destination": "/kayi/atlas/",
-      "permanent": true
-    },
-    {
-      "source": "/kelime-aileleri",
-      "destination": "/kelime-aileleri/",
-      "permanent": true
-    },
-    {
-      "source": "/kelime-aileleri/dilden-dile",
-      "destination": "/kelime-aileleri/dilden-dile/",
-      "permanent": true
-    },
-    {
-      "source": "/kelime-aileleri/ekler",
-      "destination": "/kelime-aileleri/ekler/",
-      "permanent": true
-    },
-    {
-      "source": "/kelime-aileleri/gizli-aileler",
-      "destination": "/kelime-aileleri/gizli-aileler/",
-      "permanent": true
-    },
-    {
-      "source": "/kelime-aileleri/kokler",
-      "destination": "/kelime-aileleri/kokler/",
-      "permanent": true
-    },
-    {
-      "source": "/kocaeli-arge",
-      "destination": "/kocaeli-arge/",
-      "permanent": true
-    },
-    {
-      "source": "/kocaeli-arge/sunum",
-      "destination": "/kocaeli-arge/sunum/",
-      "permanent": true
-    },
-    {
-      "source": "/kocaeli-arge/yonetim",
-      "destination": "/kocaeli-arge/yonetim/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler",
-      "destination": "/kuran-ogretmenim/dersler/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/asar",
-      "destination": "/kuran-ogretmenim/dersler/asar/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/ceker",
-      "destination": "/kuran-ogretmenim/dersler/ceker/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/cezim",
-      "destination": "/kuran-ogretmenim/dersler/cezim/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/esre",
-      "destination": "/kuran-ogretmenim/dersler/esre/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/harfler",
-      "destination": "/kuran-ogretmenim/dersler/harfler/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/huruf-u-mukattaa",
-      "destination": "/kuran-ogretmenim/dersler/huruf-u-mukattaa/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/iki-esre",
-      "destination": "/kuran-ogretmenim/dersler/iki-esre/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/iki-otre",
-      "destination": "/kuran-ogretmenim/dersler/iki-otre/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/iki-ustun",
-      "destination": "/kuran-ogretmenim/dersler/iki-ustun/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/lafzatullah",
-      "destination": "/kuran-ogretmenim/dersler/lafzatullah/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/med-harfleri",
-      "destination": "/kuran-ogretmenim/dersler/med-harfleri/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/otre",
-      "destination": "/kuran-ogretmenim/dersler/otre/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/sedde",
-      "destination": "/kuran-ogretmenim/dersler/sedde/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/ustun",
-      "destination": "/kuran-ogretmenim/dersler/ustun/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/vav-ya-elif",
-      "destination": "/kuran-ogretmenim/dersler/vav-ya-elif/",
-      "permanent": true
-    },
-    {
-      "source": "/kuran-ogretmenim/dersler/zamir",
-      "destination": "/kuran-ogretmenim/dersler/zamir/",
-      "permanent": true
-    },
-    {
-      "source": "/lugat",
-      "destination": "/lugat/",
-      "permanent": true
-    },
-    {
-      "source": "/maarif",
-      "destination": "/maarif/",
-      "permanent": true
-    },
-    {
-      "source": "/mizac",
-      "destination": "/mizac/",
-      "permanent": true
-    },
-    {
-      "source": "/muallimo",
-      "destination": "/muallimo/",
-      "permanent": true
-    },
-    {
-      "source": "/muallimo/review",
-      "destination": "/muallimo/review/",
-      "permanent": true
-    },
-    {
-      "source": "/namaz-yolu",
-      "destination": "/namaz-yolu/",
-      "permanent": true
-    },
-    {
-      "source": "/nefes",
-      "destination": "/nefes/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye",
-      "destination": "/noroterbiye/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar",
-      "destination": "/noroterbiye/araclar/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/aliskanlik-kanvasi",
-      "destination": "/noroterbiye/araclar/aliskanlik-kanvasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/beslenme-zihin-checklist",
-      "destination": "/noroterbiye/araclar/beslenme-zihin-checklist/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/bir-yanlis-bir-dogru",
-      "destination": "/noroterbiye/araclar/bir-yanlis-bir-dogru/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/caydirici-anlasma",
-      "destination": "/noroterbiye/araclar/caydirici-anlasma/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/cevre-destek-haritasi",
-      "destination": "/noroterbiye/araclar/cevre-destek-haritasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/dipten-donus",
-      "destination": "/noroterbiye/araclar/dipten-donus/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/ekran-suresi-sozlesmesi",
-      "destination": "/noroterbiye/araclar/ekran-suresi-sozlesmesi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/guclu-zaman-planlayici",
-      "destination": "/noroterbiye/araclar/guclu-zaman-planlayici/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/ilham-gunlugu",
-      "destination": "/noroterbiye/araclar/ilham-gunlugu/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/mikro-tefekkur",
-      "destination": "/noroterbiye/araclar/mikro-tefekkur/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/nefs-gunlugu",
-      "destination": "/noroterbiye/araclar/nefs-gunlugu/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/ssg-haftalik-rapor",
-      "destination": "/noroterbiye/araclar/ssg-haftalik-rapor/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/tetikleyici-kaydi",
-      "destination": "/noroterbiye/araclar/tetikleyici-kaydi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/araclar/yapilacaklar-listesi",
-      "destination": "/noroterbiye/araclar/yapilacaklar-listesi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/bolum-ozetleri",
-      "destination": "/noroterbiye/bolum-ozetleri/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/ebeveyn",
-      "destination": "/noroterbiye/ebeveyn/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/genc",
-      "destination": "/noroterbiye/genc/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/gorseller/aliskanlik-dongusu",
-      "destination": "/noroterbiye/gorseller/aliskanlik-dongusu/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/gorseller/beyin-haritasi",
-      "destination": "/noroterbiye/gorseller/beyin-haritasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/gorseller/bir-gunun-icinden",
-      "destination": "/noroterbiye/gorseller/bir-gunun-icinden/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/gorseller/dopamin-yolu",
-      "destination": "/noroterbiye/gorseller/dopamin-yolu/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/gorseller/ssg-ucgeni",
-      "destination": "/noroterbiye/gorseller/ssg-ucgeni/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/kaynakca",
-      "destination": "/noroterbiye/kaynakca/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/kisa-bilgiler",
-      "destination": "/noroterbiye/kisa-bilgiler/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/kitap",
-      "destination": "/noroterbiye/kitap/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/kitap-haritasi",
-      "destination": "/noroterbiye/kitap-haritasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar",
-      "destination": "/noroterbiye/oyunlar/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/alternatifini-ikame-et",
-      "destination": "/noroterbiye/oyunlar/alternatifini-ikame-et/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/ayna-noron-aynasi",
-      "destination": "/noroterbiye/oyunlar/ayna-noron-aynasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/besli-secimler",
-      "destination": "/noroterbiye/oyunlar/besli-secimler/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/cevre-kalesi",
-      "destination": "/noroterbiye/oyunlar/cevre-kalesi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/dogrudan-mi-dolayli-mi",
-      "destination": "/noroterbiye/oyunlar/dogrudan-mi-dolayli-mi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/dopamin-dedektifi",
-      "destination": "/noroterbiye/oyunlar/dopamin-dedektifi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/hile-avcisi",
-      "destination": "/noroterbiye/oyunlar/hile-avcisi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/nefs-gemisi",
-      "destination": "/noroterbiye/oyunlar/nefs-gemisi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/odul-mu-beklenti-mi",
-      "destination": "/noroterbiye/oyunlar/odul-mu-beklenti-mi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/ramazan-ritmi",
-      "destination": "/noroterbiye/oyunlar/ramazan-ritmi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/rol-model-tahmini",
-      "destination": "/noroterbiye/oyunlar/rol-model-tahmini/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/savsaklama-kacisi",
-      "destination": "/noroterbiye/oyunlar/savsaklama-kacisi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/oyunlar/ssg-dengesi",
-      "destination": "/noroterbiye/oyunlar/ssg-dengesi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/profilim",
-      "destination": "/noroterbiye/profilim/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/satin-al",
-      "destination": "/noroterbiye/satin-al/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/sozluk",
-      "destination": "/noroterbiye/sozluk/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler",
-      "destination": "/noroterbiye/testler/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/bireyci-kolektivist",
-      "destination": "/noroterbiye/testler/bireyci-kolektivist/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/bolum-sonu-quiz",
-      "destination": "/noroterbiye/testler/bolum-sonu-quiz/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/cevre-etkisi",
-      "destination": "/noroterbiye/testler/cevre-etkisi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/dopamin-kaynak-haritasi",
-      "destination": "/noroterbiye/testler/dopamin-kaynak-haritasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/ebeveynlik-tarzi",
-      "destination": "/noroterbiye/testler/ebeveynlik-tarzi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/ekran-baskisi",
-      "destination": "/noroterbiye/testler/ekran-baskisi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/genc-risk-radari",
-      "destination": "/noroterbiye/testler/genc-risk-radari/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/hedonik-aclik",
-      "destination": "/noroterbiye/testler/hedonik-aclik/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/hile-risk-radari",
-      "destination": "/noroterbiye/testler/hile-risk-radari/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/kavram-quiz",
-      "destination": "/noroterbiye/testler/kavram-quiz/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/mizac-kimya",
-      "destination": "/noroterbiye/testler/mizac-kimya/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/okuma-oncesi-sonrasi",
-      "destination": "/noroterbiye/testler/okuma-oncesi-sonrasi/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/ramazan-surdurulebilirlik",
-      "destination": "/noroterbiye/testler/ramazan-surdurulebilirlik/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/rol-model-farkindalik",
-      "destination": "/noroterbiye/testler/rol-model-farkindalik/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/savsaklama-profili",
-      "destination": "/noroterbiye/testler/savsaklama-profili/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/testler/ssg-checkup",
-      "destination": "/noroterbiye/testler/ssg-checkup/",
-      "permanent": true
-    },
-    {
-      "source": "/noroterbiye/yazar",
-      "destination": "/noroterbiye/yazar/",
-      "permanent": true
-    },
-    {
-      "source": "/ogrenim",
-      "destination": "/ogrenim/",
-      "permanent": true
-    },
-    {
-      "source": "/osmanli-kartlari",
-      "destination": "/osmanli-kartlari/",
-      "permanent": true
-    },
-    {
-      "source": "/osmanlica",
-      "destination": "/osmanlica/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar",
-      "destination": "/oyunlar/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/karne",
-      "destination": "/oyunlar/karne/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/vicdan",
-      "destination": "/oyunlar/vicdan/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/vicdan-mahkemesi",
-      "destination": "/oyunlar/vicdan-mahkemesi/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/vicdan-mahkemesi/ogretmen",
-      "destination": "/oyunlar/vicdan-mahkemesi/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/vicdan/ogretmen",
-      "destination": "/oyunlar/vicdan/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/zaman-yolcusu",
-      "destination": "/oyunlar/zaman-yolcusu/",
-      "permanent": true
-    },
-    {
-      "source": "/oyunlar/zaman-yolcusu/ogretmen",
-      "destination": "/oyunlar/zaman-yolcusu/ogretmen/",
-      "permanent": true
-    },
-    {
-      "source": "/scorm-balon",
-      "destination": "/scorm-balon/",
-      "permanent": true
-    },
-    {
-      "source": "/sevgili-peygamberim",
-      "destination": "/sevgili-peygamberim/",
-      "permanent": true
-    },
-    {
-      "source": "/sunumlar",
-      "destination": "/sunumlar/",
-      "permanent": true
-    },
-    {
-      "source": "/sunumlar/bilim",
-      "destination": "/sunumlar/bilim/",
-      "permanent": true
-    },
-    {
-      "source": "/sunumlar/safsatalar",
-      "destination": "/sunumlar/safsatalar/",
-      "permanent": true
-    },
-    {
-      "source": "/sunumlar/yapay-zeka-dil-ogretimi",
-      "destination": "/sunumlar/yapay-zeka-dil-ogretimi/",
-      "permanent": true
-    },
-    {
-      "source": "/tarih",
-      "destination": "/tarih/",
-      "permanent": true
-    },
-    {
-      "source": "/tarih-atlasi",
-      "destination": "/tarih-atlasi/",
-      "permanent": true
-    },
-    {
-      "source": "/turk-sozluk",
-      "destination": "/turk-sozluk/",
-      "permanent": true
-    },
-    {
-      "source": "/usturlab",
-      "destination": "/usturlab/",
-      "permanent": true
-    },
-    {
-      "source": "/videolar",
-      "destination": "/videolar/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/ai",
-      "destination": "/vitrin/ai/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/cihan-serisi",
-      "destination": "/vitrin/cihan-serisi/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/dil",
-      "destination": "/vitrin/dil/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/dusunce",
-      "destination": "/vitrin/dusunce/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/peygamberim",
-      "destination": "/vitrin/peygamberim/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/sinif",
-      "destination": "/vitrin/sinif/",
-      "permanent": true
-    },
-    {
-      "source": "/vitrin/tarih",
-      "destination": "/vitrin/tarih/",
-      "permanent": true
-    },
-    {
-      "source": "/yol-haritan",
-      "destination": "/yol-haritan/",
-      "permanent": true
-    },
-    {
-      "source": "/yz-prompt-rehberi",
-      "destination": "/yz-prompt-rehberi/",
+      "source": "/7sinif3unite/:path(.*)",
+      "destination": "/7sinif/3/:path",
       "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/api/:fn([a-z0-9-]+)/",
+      "destination": "/api/:fn"
+    },
+    {
+      "source": "/kuran-ogretmenim/app/assets/NOTICES/",
+      "destination": "/kuran-ogretmenim/app/assets/NOTICES"
+    },
     {
       "source": "/iyilikakademi",
       "destination": "/iyilikakademi/index.html"
