@@ -42,6 +42,8 @@ jobs:
         run: |
           node ders-odasi/siyer/sync.mjs --check
           python -m py_compile scripts/ders-odasi/siyer-media.py scripts/ders-odasi/siyer-video.py scripts/ders-odasi/siyer-package.py
+      - name: Render illustration previews
+        run: python scripts/ders-odasi/siyer-video.py --qa-only
       - name: Generate Turkish narration
         run: python scripts/ders-odasi/siyer-media.py
       - name: Render optional narrated recap films and illustration previews
