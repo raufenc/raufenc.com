@@ -5,12 +5,19 @@
 // Abone cihaz token'ları Firestore "pushTokens" koleksiyonundan okunur ({ token, topics: [] }).
 export const config = { runtime: 'edge' };
 
-const ALLOWED_ORIGINS = ['https://raufenc.com', 'https://www.raufenc.com', 'http://localhost:3000', 'http://127.0.0.1:3000'];
+// İzinli kökenler: ARGE_ALLOWED_ORIGINS (virgülle) + uygulamanın kendi alan adı + yerel geliştirme
+const ENV_ORIGINS = (process.env.ARGE_ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const ALLOWED_ORIGINS = [...ENV_ORIGINS, 'http://localhost:3000', 'http://127.0.0.1:3000'];
+function originAllowed(req, origin) {
+  if (!origin) return true;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || '';
+  try { return new URL(origin).host === host; } catch (_) { return false; }
+}
 const HITS = new Map();
 
 function cors(origin) {
-  const ok = ALLOWED_ORIGINS.includes(origin);
-  return { 'Access-Control-Allow-Origin': ok ? origin : ALLOWED_ORIGINS[0], 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Vary': 'Origin' };
+  return { 'Access-Control-Allow-Origin': origin || '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Vary': 'Origin' };
 }
 function json(data, status, origin) {
   return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...cors(origin) } });
@@ -79,11 +86,11 @@ async function sendOne(sa, at, t, msg) {
     body: JSON.stringify({ message: {
       token: t.token,
       notification: { title: msg.title, body: msg.body },
-      data: { url: msg.url || '/kocaeli-arge/', konu: msg.topic || 'genel' },
+      data: { url: msg.url, konu: msg.topic || 'genel' },
       webpush: {
         headers: { Urgency: 'high', TTL: '86400' },
         notification: { title: msg.title, body: msg.body, icon: '/kocaeli-arge/assets/icon-192.png', badge: '/kocaeli-arge/assets/badge-72.png', lang: 'tr' },
-        fcm_options: { link: msg.url || 'https://raufenc.com/kocaeli-arge/' },
+        fcm_options: { link: msg.url },
       },
     } }),
   });
@@ -101,6 +108,8 @@ export default async function handler(req) {
   const origin = req.headers.get('origin') || '';
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
   if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, origin);
+  if (!originAllowed(req, origin)) return json({ error: 'forbidden' }, 403, origin);
+  const siteBase = `https://${req.headers.get('x-forwarded-host') || req.headers.get('host')}/kocaeli-arge/`;
 
   const ip = (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
   const now = Date.now();
@@ -120,7 +129,7 @@ export default async function handler(req) {
     title: String(body.title || '').trim().slice(0, 120),
     body: String(body.body || '').trim().slice(0, 400),
     topic: String(body.topic || 'genel').replace(/[^a-z]/g, '').slice(0, 20) || 'genel',
-    url: /^https:\/\/(www\.)?raufenc\.com\//.test(String(body.url || '')) ? body.url : 'https://raufenc.com/kocaeli-arge/',
+    url: String(body.url || '').startsWith(siteBase) ? body.url : siteBase,
   };
   if (!msg.title || !msg.body) return json({ error: 'missing_fields' }, 400, origin);
 

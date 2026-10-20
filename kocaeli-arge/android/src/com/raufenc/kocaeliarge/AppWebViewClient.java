@@ -10,10 +10,11 @@ public class AppWebViewClient extends WebViewClient {
     public AppWebViewClient(MainActivity a) { act = a; }
     @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest req) {
         Uri u = req.getUrl(); String url = u.toString(); String scheme = u.getScheme() == null ? "" : u.getScheme(); String host = u.getHost() == null ? "" : u.getHost();
-        if (url.startsWith(MainActivity.APP_URL) || url.startsWith("https://raufenc.com/kocaeli-arge")) return false;
+        String appHost = Uri.parse(MainActivity.APP_URL).getHost(); if (appHost == null) appHost = "";
+        if (url.startsWith(MainActivity.APP_URL)) return false;
         if (scheme.equals("tel") || scheme.equals("mailto") || scheme.equals("intent") || scheme.equals("geo")
                 || url.contains("youtube.com") || url.contains("youtu.be") || url.contains("google.com/maps")
-                || url.contains("accounts.google.com") || (scheme.startsWith("http") && !host.endsWith("raufenc.com"))) {
+                || url.contains("accounts.google.com") || (scheme.startsWith("http") && !host.equals(appHost) && !host.endsWith("." + appHost))) {
             act.openExternal(url); return true;
         }
         return false;

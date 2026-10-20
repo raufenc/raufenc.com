@@ -3,7 +3,7 @@
 // YouTube kanal/oynatma listesi RSS'leri. Sunucu tarafında 10 dk önbellek.
 export const config = { runtime: 'edge' };
 
-const UA = 'Mozilla/5.0 (compatible; KocaeliArgePortal/1.0; +https://raufenc.com/kocaeli-arge/)';
+const UA = 'Mozilla/5.0 (compatible; KocaeliArgePortal/1.2)';
 const TTL_MS = 10 * 60 * 1000;
 const CACHE = new Map();
 

@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 /** Kocaeli MEM AR-GE Portalı — yerel kabuk (WebView). Web uygulamasını tam ekran, uygulama gibi açar. */
 public class MainActivity extends Activity {
-    public static final String APP_URL = "https://raufenc.com/kocaeli-arge/";
+    public static String APP_URL = "https://raufenc.com/kocaeli-arge/"; // strings.xml → app_url değerinden okunur
     public static final int FILE_CHOOSER = 101;
     WebView web;
     View offline;
@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_main);
+        APP_URL = getString(R.string.app_url);
         web = (WebView) findViewById(R.id.web);
         offline = findViewById(R.id.offline);
         fullscreen = (FrameLayout) findViewById(R.id.fullscreen);

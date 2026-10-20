@@ -2,7 +2,15 @@
 // Anthropic varsa onu, yoksa OpenAI'yi kullanır. Kişisel veri gönderilmez; istemci bunu kullanıcıya bildirir.
 export const config = { runtime: 'edge' };
 
-const ALLOWED_ORIGINS = ['https://raufenc.com', 'https://www.raufenc.com', 'http://localhost:3000', 'http://127.0.0.1:3000'];
+// İzinli kökenler: ARGE_ALLOWED_ORIGINS (virgülle) + uygulamanın kendi alan adı + yerel geliştirme
+const ENV_ORIGINS = (process.env.ARGE_ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+const ALLOWED_ORIGINS = [...ENV_ORIGINS, 'http://localhost:3000', 'http://127.0.0.1:3000'];
+function originAllowed(req, origin) {
+  if (!origin) return true;
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || '';
+  try { return new URL(origin).host === host; } catch (_) { return false; }
+}
 const HITS = new Map();
 const MAX_BODY_BYTES = 12000;
 const MAX_MESSAGES = 14;
@@ -24,9 +32,8 @@ Kurallar:
 - Kaynaklar: TÜBİTAK Bilim ve Toplum programları (4004 Doğa Eğitimi ve Bilim Okulları, 4005 Yenilikçi Eğitim Uygulamaları, 4006 Bilim Fuarları), 2204-A lise ve 2204-B ortaokul araştırma projeleri yarışmaları, eTwinning, MEB Akademi, Öğretmen Akademileri.`;
 
 function cors(origin) {
-  const ok = ALLOWED_ORIGINS.includes(origin);
   return {
-    'Access-Control-Allow-Origin': ok ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Origin': origin || '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Vary': 'Origin',
@@ -79,7 +86,7 @@ export default async function handler(req) {
   const origin = req.headers.get('origin') || '';
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
   if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, origin);
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) return json({ error: 'forbidden' }, 403, origin);
+  if (!originAllowed(req, origin)) return json({ error: 'forbidden' }, 403, origin);
 
   const ip = (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
   if (rateLimited(ip)) return json({ error: 'rate_limited', reply: 'Çok sık istek gönderildi. Lütfen bir dakika sonra tekrar deneyin.' }, 429, origin);

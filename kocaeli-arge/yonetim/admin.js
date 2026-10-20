@@ -141,7 +141,7 @@ function renderBildirim() {
     await bildirim.send(n);
     if (fd.get('push') === 'on' && isLive) {
       const token = fd.get('token'); sessionStorage.setItem('arge.adminToken', token);
-      try { const r = await fetch(API.bildirim, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, body: JSON.stringify({ title: n.baslik, body: n.metin, topic: n.konu, url: 'https://raufenc.com/kocaeli-arge/' + n.rota }) }); const d = await r.json(); toast(d.ok ? `Push: ${d.sent} gönderildi, ${d.failed} başarısız` : 'Push hatası: ' + (d.error || r.status), 5000); }
+      try { const r = await fetch(API.bildirim, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }, body: JSON.stringify({ title: n.baslik, body: n.metin, topic: n.konu, url: location.origin + '/kocaeli-arge/' + n.rota }) }); const d = await r.json(); toast(d.ok ? `Push: ${d.sent} gönderildi, ${d.failed} başarısız` : 'Push hatası: ' + (d.error || r.status), 5000); }
       catch (err) { toast('Push gönderilemedi: ' + err.message); }
     } else toast('Uygulama içi bildirim yayınlandı');
     renderBildirim();
