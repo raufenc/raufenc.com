@@ -71,10 +71,12 @@ function safeDecode(value) {
   try { return decodeURIComponent(value); } catch (_) { return value; }
 }
 
-function isSensitivePath(pathname) {
+function isSensitivePath(pathname, method) {
   const path = safeDecode(pathname);
 
   if (path === '/.well-known/security.txt') return false;
+  // Public Siyer export: allow only this exact archive; backups stay blocked.
+  if (path === '/ders-odasi/siyer/indir/siyer-ders-paketi.zip' && (method === 'GET' || method === 'HEAD')) return false;
   if (/(^|\/)\.(?!well-known\/)/.test(path)) return true;
   if (/\.(?:bak|backup|old|orig|sql|env|log|map|zip|tar|tgz|gz|rar|7z)$/i.test(path)) return true;
   if (/(^|\/)(?:scripts|tests|\.claude)(?:\/|$)/i.test(path)) return true;
@@ -167,7 +169,7 @@ export default async function middleware(req) {
   const apiMethods = apiPolicy(pathname);
   const isApi = pathname.startsWith('/api/');
 
-  if (isSuspiciousPath(pathname, req.url) || isScannerPath(pathname) || isSensitivePath(pathname)) {
+  if (isSuspiciousPath(pathname, req.url) || isScannerPath(pathname) || isSensitivePath(pathname, req.method)) {
     return notFound();
   }
 
