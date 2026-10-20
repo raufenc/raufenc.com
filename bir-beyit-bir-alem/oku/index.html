@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4efe5">
+  <meta name="description" content="Bir Beyit, Bir Âlem: 52 beyitlik resimli kitabı, vezinleriyle birlikte sayfa sayfa okuyun.">
+  <title>Kitabı oku · Bir Beyit, Bir Âlem</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#reader">Kitaba geç</a>
+  <header class="masthead">
+    <a class="book-title" href="./" aria-label="Bir Beyit, Bir Âlem — ön kapak">Bir Beyit, <em>Bir Âlem</em></a>
+    <a class="listen-link" href="../">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-3a8 8 0 0 1 16 0v3M4 12H3v7h4v-7H4Zm16 0h1v7h-4v-7h3Z"/></svg>
+      <span>Dinleme rehberi</span>
+    </a>
+  </header>
+
+  <main id="reader" class="reader" tabindex="-1" aria-label="Resimli kitap">
+    <div class="reading-bar">
+      <div class="location">
+        <span class="eyebrow">RESİMLİ KİTAP</span>
+        <h1 id="current-label">Bir Beyit, Bir Âlem</h1>
+        <p id="current-poet"></p>
+      </div>
+      <div class="view-tools" role="group" aria-label="Görünüm">
+        <button id="zoom-out" class="icon-button" type="button" aria-label="Uzaklaştır" title="Uzaklaştır" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7.5 10.5h6"/></svg>
+        </button>
+        <button id="fit" class="fit-button" type="button" aria-label="Sayfayı ekrana sığdır" title="Sayfayı ekrana sığdır">Sığdır</button>
+        <button id="zoom-in" class="icon-button" type="button" aria-label="Yakınlaştır" title="Yakınlaştır" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7.5 10.5h6M10.5 7.5v6"/></svg>
+        </button>
+        <span class="tool-divider" aria-hidden="true"></span>
+        <button id="fullscreen" class="icon-button" type="button" aria-label="Tam ekran" title="Tam ekran" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="book-stage" id="stage" tabindex="0" aria-label="Kitap sayfası. Ok tuşlarıyla sayfa değiştirebilirsiniz." aria-busy="true">
+      <div class="page-surface" id="surface">
+        <img id="page-image" class="page-image" alt="" draggable="false" hidden>
+      </div>
+      <div class="loading-note" id="loading" role="status">Kitabınız açılıyor…</div>
+      <div class="error-note" id="error" role="alert" hidden>
+        <p id="error-text">Kitap şu anda açılamadı.</p>
+        <button id="retry" type="button">Yeniden dene</button>
+      </div>
+    </div>
+
+    <nav class="navigation" aria-label="Kitapta gezinme">
+      <div class="page-controls">
+        <button id="previous" class="page-button" type="button" aria-label="Önceki açılım" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg>
+          <span>Önceki</span>
+        </button>
+        <label class="jump-label">
+          <span class="sr-only">Bir beyit veya kapak seçin</span>
+          <select id="jump" aria-label="Bir beyit veya kapak seçin" disabled><option>Yükleniyor…</option></select>
+        </label>
+        <button id="next" class="page-button" type="button" aria-label="Sonraki açılım" disabled>
+          <span>Sonraki</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+      <div class="progress-row">
+        <span id="progress-start">Ön kapak</span>
+        <input id="progress" type="range" min="0" max="54" step="1" value="0" aria-label="Kitapta konum" disabled>
+        <span id="progress-end">Arka kapak</span>
+      </div>
+      <p class="reading-tip" id="reading-tip">Sayfa çevirmek için okları kullanın; ayrıntılar için yakınlaştırın.</p>
+    </nav>
+    <p id="announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  </main>
+  <noscript><p class="no-script">Kitabı sayfa sayfa okuyabilmek için tarayıcınızda JavaScript’i etkinleştirin.</p></noscript>
+</body>
+</html>
