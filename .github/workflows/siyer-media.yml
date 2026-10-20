@@ -34,11 +34,13 @@ jobs:
           node-version: '22'
       - name: Install media and DOM validation dependencies
         run: |
-          python -m pip install edge-tts==7.3.1 cairosvg==2.8.2
+          python -m pip install edge-tts==7.3.1 gTTS==2.5.4 cairosvg==2.8.2
           npm install --prefix /tmp/siyer-dom --no-package-lock --no-save jsdom@26
           test -x "$(command -v ffmpeg)" || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - name: Verify curriculum and regenerate native lessons
-        run: node ders-odasi/siyer/sync.mjs --check
+        run: |
+          node ders-odasi/siyer/sync.mjs --check
+          python -m py_compile scripts/ders-odasi/siyer-media.py scripts/ders-odasi/siyer-video.py scripts/ders-odasi/siyer-package.py
       - name: Generate Turkish narration
         run: python scripts/ders-odasi/siyer-media.py
       - name: Render optional narrated recap films and illustration previews
@@ -49,13 +51,14 @@ jobs:
         run: node scripts/ders-odasi/validate-siyer-v2.mjs
       - name: Build independently embeddable lesson package
         run: python scripts/ders-odasi/siyer-package.py
-      - name: Save verified generated assets to the working branch
+      - name: Preserve generated media on the working branch for validation and resume
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A -- ders-odasi/siyer ders-odasi/dersler
           if ! git diff --cached --quiet; then
-            git commit -m "Generate and verify full Siyer lesson media and package"
+            git commit -m "Preserve generated Siyer media for validation and resume"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
