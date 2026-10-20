@@ -163,6 +163,9 @@ export async function duyuruDetay(ctx) {
 }
 
 export function downloadIcs(e) {
+  if (typeof window.AndroidBridge?.addEvent === 'function') { // yerel Android kabuğu: doğrudan takvim uygulamasına ekle
+    try { window.AndroidBridge.addEvent(e.baslik, new Date(e.tarih).getTime(), new Date(e.bitis || e.tarih).getTime(), e.yer || '', e.aciklama || ''); return; } catch (_) {}
+  }
   const f = (s) => s.replace(/[-:]/g, '').replace(/\.\d+/, '');
   const dt = (v) => f(new Date(v).toISOString()).slice(0, 15) + 'Z';
   const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Kocaeli MEM AR-GE//TR', 'BEGIN:VEVENT', `UID:${Date.now()}@kocaeli-arge`, `DTSTAMP:${dt(new Date())}`, `DTSTART:${dt(e.tarih)}`, `DTEND:${dt(e.bitis || e.tarih)}`, `SUMMARY:${e.baslik}`, `LOCATION:${e.yer || ''}`, `DESCRIPTION:${(e.aciklama || '').replace(/\n/g, '\\n')}`, 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');

@@ -124,7 +124,9 @@ export function sheet(innerHtml, { onClose } = {}) {
   return { el: bg, close };
 }
 
+export const isAndroidApp = () => typeof window.AndroidBridge?.share === 'function';
 export async function share({ title, text, url }) {
+  if (isAndroidApp()) { try { window.AndroidBridge.share(String(title || ''), String(text || ''), String(url || '')); return true; } catch (_) {} }
   try {
     if (navigator.share) { await navigator.share({ title, text, url }); return true; }
   } catch (e) { if (e?.name === 'AbortError') return false; }

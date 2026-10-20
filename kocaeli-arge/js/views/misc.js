@@ -197,6 +197,7 @@ export async function hakkinda(ctx) {
   ctx.title('Hakkında');
   ctx.root.innerHTML = `<div class="card pad"><h1 style="font-size:18px;margin:0 0 8px">Kocaeli MEM AR-GE Portalı</h1><p style="font-size:14px;line-height:1.6">Haber, duyuru, video, proje, yapay zekâ desteği ve dijital içerikleri tek merkezden sunan kapsamlı bir eğitim platformu.</p>
     <dl class="kv"><dt>Sürüm</dt><dd>${APP_VERSION}</dd><dt>Çalışma modu</dt><dd>${isLive ? 'Canlı (Firebase)' : 'Demo (örnek içerik)'}</dd><dt>Haber kaynakları</dt><dd>Kocaeli İl MEM, Kocaeli AR-GE, MEB</dd><dt>Video</dt><dd>Kocaeli MEM TV, MEB, EBA (YouTube)</dd></dl>
+    <hr class="sep">${document.documentElement.dataset.app === 'android' ? '' : `<a class="btn navy block" href="/kocaeli-arge/KocaeliArge.apk" download>${icons.download} Android uygulamasını (APK) indir</a>`}
     <hr class="sep"><p style="font-size:12.5px;color:var(--text-2)">Bu uygulama Kocaeli İl Millî Eğitim Müdürlüğü AR-GE Birimi için hazırlanmış bir tanıtım sürümüdür. Haber ve videolar ilgili kurumların herkese açık kaynaklarından alınır; telif hakları sahiplerine aittir.</p></div>`;
 }
 

@@ -63,7 +63,7 @@ async function render() {
   if (isHome) document.title = APP_NAME;
   current = m;
   try { await m.view(ctx); } catch (e) { console.error(e); root.innerHTML = `<div class="empty">${icons.alert}<div>Sayfa yüklenirken hata oluştu.</div><p style="font-size:12px">${esc(e.message)}</p></div>`; }
-  if (isHome && installPrompt && !sessionStorage.getItem('arge.installHidden')) {
+  if (isHome && installPrompt && !sessionStorage.getItem('arge.installHidden') && document.documentElement.dataset.app !== 'android') {
     const card = el(`<div class="card pad" style="margin-bottom:16px;display:flex;gap:12px;align-items:center"><span class="logo" style="width:40px;height:40px;border-radius:12px;background:var(--meb);color:#fff;display:grid;place-items:center;font-weight:800;font-size:11px">AR-GE</span><div style="flex:1"><b style="font-size:14px">Ana ekrana ekle</b><div style="font-size:12.5px;color:var(--text-2)">Uygulama gibi hızlı erişim</div></div><button class="btn sm primary" id="inst">Ekle</button><button class="icon-btn" id="instx" aria-label="Kapat">${icons.close}</button></div>`);
     root.prepend(card);
     card.querySelector('#inst').onclick = async () => { installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; card.remove(); };
@@ -125,6 +125,7 @@ async function boot() {
   window.addEventListener('hashchange', render);
   if (!location.hash) location.hash = '#/';
   render();
+  if (typeof window.AndroidBridge?.platform === 'function') document.documentElement.dataset.app = 'android'; // yerel kabuk: "ana ekrana ekle" kartı gereksiz
   if ('serviceWorker' in navigator) {
     const cfg = isLive ? '?cfg=' + encodeURIComponent(JSON.stringify(FIREBASE_CONFIG)) : '';
     navigator.serviceWorker.register(BASE_PATH + 'sw.js' + cfg, { scope: BASE_PATH }).then((reg) => {
