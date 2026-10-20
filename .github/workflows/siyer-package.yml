@@ -42,3 +42,30 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
+      - name: Verify the public archive is downloadable
+        run: |
+          python - <<'PY'
+          import json, time, urllib.request
+          from pathlib import Path
+          manifest = json.loads(Path("ders-odasi/siyer/indir/siyer-ders-paketi-manifest.json").read_text())
+          expected = manifest["archive"]["bytes"]
+          url = "https://raufenc.com/ders-odasi/siyer/indir/siyer-ders-paketi.zip"
+          for attempt in range(24):
+              try:
+                  request = urllib.request.Request(url, method="HEAD", headers={"Cache-Control": "no-cache"})
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      assert response.status == 200, response.status
+                      size = response.headers.get("Content-Length")
+                      assert size is None or int(size) == expected, size
+                  request = urllib.request.Request(url, headers={"Range": "bytes=0-3", "Cache-Control": "no-cache"})
+                  with urllib.request.urlopen(request, timeout=20) as response:
+                      assert response.status in (200, 206), response.status
+                      assert response.read(4) == b"PK\x03\x04", "Missing ZIP signature"
+                      print("PUBLIC DOWNLOAD VERIFIED", response.status, expected, "bytes")
+                  break
+              except Exception as error:
+                  if attempt == 23:
+                      raise
+                  print("Waiting for deployment:", type(error).__name__, str(error), flush=True)
+                  time.sleep(15)
+          PY
