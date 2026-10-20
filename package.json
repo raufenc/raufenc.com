@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:player": "node --experimental-vm-modules --test tests/player-lifecycle.test.mjs",
     "test:server": "node --test tests/sunumlar-server.test.mjs",
     "build:sunumlar-vendor": "esbuild node_modules/@vercel/blob/dist/client.js --bundle --format=esm --platform=browser --minify --outfile=sunumlar/vendor/blob-client.js",
     "build:sunumlar-hls": "node -e \"const fs=require('node:fs'); fs.copyFileSync('node_modules/hls.js/dist/hls.min.mjs','sunumlar/vendor/hls.js'); fs.copyFileSync('node_modules/hls.js/LICENSE','sunumlar/vendor/hls.LICENSE');\""

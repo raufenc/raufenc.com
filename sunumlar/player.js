@@ -111,6 +111,9 @@ export async function openPlayer(project, { onClose } = {}) {
   let keyboardFocus = false;
   let videoStart = 0;
   let videoEnd = Infinity;
+  let playCurrentVideo = () => {};
+  let pauseCurrentVideo = () => {};
+  let retryBlockedVideo = () => false;
 
   const header = el('header', 'sp-header');
   const projectInfo = el('div', 'sp-project-info');
@@ -147,7 +150,7 @@ export async function openPlayer(project, { onClose } = {}) {
   count.title = 'Slaytları göster (G)';
   count.setAttribute('aria-label', 'Slaytları göster');
   count.addEventListener('click', () => togglePanel('gallery'));
-  const nextButton = iconButton('next', 'Sonraki adım (→ / Boşluk)', next);
+  const nextButton = iconButton('next', 'Sonraki adım (→ / PageDown / Boşluk / Enter)', next);
   navigation.append(prevButton, count, nextButton);
   const tools = el('div', 'sp-tools');
   const laserButton = iconButton('laser', 'Lazer işaretçi (L)', () => setMode(mode === 'laser' ? '' : 'laser'), 'Lazer');
@@ -226,6 +229,7 @@ export async function openPlayer(project, { onClose } = {}) {
 
   function next() {
     if (black) toggleBlack();
+    if (retryBlockedVideo()) { wake(); return; }
     const total = fragmentTotal();
     if (reveal < total) { reveal += 1; applyFragments(); }
     else if (index < slides.length - 1) showSlide(index + 1);
@@ -244,6 +248,9 @@ export async function openPlayer(project, { onClose } = {}) {
     cleanupSlide();
     cleanupSlide = () => {};
     video = null;
+    playCurrentVideo = () => {};
+    pauseCurrentVideo = () => {};
+    retryBlockedVideo = () => false;
     index = Math.max(0, Math.min(slides.length - 1, nextIndex));
     reveal = allFragments ? fragmentTotal(slides[index]) : 0;
     strokes = [];
@@ -295,13 +302,22 @@ export async function openPlayer(project, { onClose } = {}) {
         const mountedVideo = video;
         video.controls = true;
         video.playsInline = true;
-        video.preload = 'metadata';
+        video.autoplay = slide.autoplay === true;
+        video.muted = slide.muted === true;
+        video.defaultMuted = slide.muted === true;
+        video.preload = slide.autoplay === true ? 'auto' : 'metadata';
         const posterURL = sourceURL(slide.poster);
         if (posterURL) video.poster = posterURL.href;
         video.setAttribute('aria-label', slide.title || 'Sunum videosu');
         let disposed = false;
         let hls;
         let sourceFailed = false;
+        let wantsPlayback = slide.autoplay === true;
+        let playPending = false;
+        let playbackStarted = false;
+        let autoplayBlocked = false;
+        let blockedAttempts = 0;
+        let playAttempt = 0;
         const suppliedStart = Number(slide.start);
         let start = Number.isFinite(suppliedStart) ? Math.max(0, suppliedStart) : 0;
         const suppliedEnd = Number(slide.end);
@@ -309,6 +325,51 @@ export async function openPlayer(project, { onClose } = {}) {
         videoStart = start;
         videoEnd = end;
         let finished = false;
+        const isCurrentVideo = () => !disposed && !sourceFailed && video === mountedVideo;
+        const requestPlayback = () => {
+          if (!isCurrentVideo() || !wantsPlayback || finished || autoplayBlocked || playPending || !mountedVideo.paused) return;
+          const attempt = ++playAttempt;
+          playPending = true;
+          // For native MP4/HLS this call runs in the remote's keydown gesture,
+          // before waiting for metadata, so sound can be allowed by Safari.
+          let promise;
+          try { promise = mountedVideo.play(); }
+          catch (error) { promise = Promise.reject(error); }
+          Promise.resolve(promise).then(() => {
+            if (!isCurrentVideo() || !wantsPlayback) mountedVideo.pause();
+          }).catch((error) => {
+            if (!isCurrentVideo() || !wantsPlayback || attempt !== playAttempt) return;
+            if (error?.name === 'NotAllowedError') {
+              autoplayBlocked = true;
+              blockedAttempts += 1;
+              tell(blockedAttempts === 1
+                ? 'Videoyu başlatmak için kumandanın ileri düğmesine bir kez daha basın.'
+                : 'Tarayıcı sesli oynatmayı yine engelledi. Bu site için otomatik oynatma izni gerekebilir; kumandanın ileri düğmesiyle yeniden deneyebilirsiniz.');
+            }
+            // Loading/attachment can interrupt play(). A later readiness event
+            // retries only while this slide is still active and wants playback.
+          }).finally(() => {
+            if (attempt === playAttempt) playPending = false;
+          });
+        };
+        playCurrentVideo = ({ restart = false } = {}) => {
+          if (!isCurrentVideo()) return;
+          wantsPlayback = true;
+          autoplayBlocked = false;
+          if (restart || mountedVideo.ended || mountedVideo.currentTime >= videoEnd) mountedVideo.currentTime = videoStart;
+          finished = false;
+          requestPlayback();
+        };
+        pauseCurrentVideo = () => {
+          wantsPlayback = false;
+          mountedVideo.autoplay = false;
+          mountedVideo.pause();
+        };
+        retryBlockedVideo = () => {
+          if (!isCurrentVideo() || !autoplayBlocked) return false;
+          playCurrentVideo();
+          return true;
+        };
         const chapterReady = () => {
           if (Number.isFinite(mountedVideo.duration)) end = Math.min(end, mountedVideo.duration);
           if (start >= end) {
@@ -318,11 +379,14 @@ export async function openPlayer(project, { onClose } = {}) {
           } else if (start > 0) mountedVideo.currentTime = start;
           videoStart = start;
           videoEnd = end;
+          requestPlayback();
         };
         const enforceChapter = () => {
           if (mountedVideo.currentTime >= end && !finished) {
-            mountedVideo.pause();
             finished = true;
+            wantsPlayback = false;
+            mountedVideo.autoplay = false;
+            mountedVideo.pause();
             tell('Video bölümü tamamlandı. Sonraki slayda geçebilirsiniz.');
           } else if (mountedVideo.currentTime < end - 0.1) finished = false;
         };
@@ -331,14 +395,35 @@ export async function openPlayer(project, { onClose } = {}) {
           else if (mountedVideo.currentTime > end) mountedVideo.currentTime = end;
         };
         const chapterPlay = () => {
+          if (!isCurrentVideo()) { mountedVideo.pause(); return; }
+          if (mountedVideo.paused) return;
+          wantsPlayback = true;
+          autoplayBlocked = false;
           if (mountedVideo.currentTime >= end || mountedVideo.currentTime < start) {
             finished = false;
             mountedVideo.currentTime = start;
           }
         };
+        const videoPlaying = () => {
+          if (!isCurrentVideo() || !wantsPlayback) { mountedVideo.pause(); return; }
+          playbackStarted = true;
+        };
+        const videoPaused = () => {
+          if (playbackStarted && mountedVideo.paused) {
+            wantsPlayback = false;
+            mountedVideo.autoplay = false;
+          }
+        };
+        const videoEnded = () => {
+          finished = true;
+          wantsPlayback = false;
+          mountedVideo.autoplay = false;
+        };
         const failVideo = (message) => {
           if (disposed || sourceFailed) return;
           sourceFailed = true;
+          wantsPlayback = false;
+          mountedVideo.autoplay = false;
           mountedVideo.removeEventListener('error', videoError);
           mountedVideo.pause();
           hls?.destroy();
@@ -352,15 +437,25 @@ export async function openPlayer(project, { onClose } = {}) {
         video.addEventListener('timeupdate', enforceChapter);
         video.addEventListener('seeking', clampSeek);
         video.addEventListener('play', chapterPlay);
+        video.addEventListener('playing', videoPlaying);
+        video.addEventListener('pause', videoPaused);
+        video.addEventListener('ended', videoEnded);
+        video.addEventListener('canplay', requestPlayback);
         video.addEventListener('error', videoError, { once: true });
         media.append(video);
         videoButton.hidden = false;
         cleanupSlide = () => {
           disposed = true;
+          wantsPlayback = false;
+          mountedVideo.autoplay = false;
           mountedVideo.removeEventListener('loadedmetadata', chapterReady);
           mountedVideo.removeEventListener('timeupdate', enforceChapter);
           mountedVideo.removeEventListener('seeking', clampSeek);
           mountedVideo.removeEventListener('play', chapterPlay);
+          mountedVideo.removeEventListener('playing', videoPlaying);
+          mountedVideo.removeEventListener('pause', videoPaused);
+          mountedVideo.removeEventListener('ended', videoEnded);
+          mountedVideo.removeEventListener('canplay', requestPlayback);
           mountedVideo.removeEventListener('error', videoError);
           hls?.destroy();
           hls = undefined;
@@ -373,6 +468,7 @@ export async function openPlayer(project, { onClose } = {}) {
           mountedVideo.canPlayType('application/x-mpegURL');
         if (!isHls || nativeHls) {
           mountedVideo.src = url.href;
+          requestPlayback();
         } else {
           // Load the local HLS runtime only when this active video needs it.
           import('./vendor/hls.js').then(({ default: Hls }) => {
@@ -391,8 +487,11 @@ export async function openPlayer(project, { onClose } = {}) {
             hls.on(Hls.Events.ERROR, (_event, data) => {
               if (data.fatal) failVideo('Video akışı yüklenemedi. Bağlantınızı kontrol edip yeniden başlat düğmesiyle tekrar deneyin.');
             });
+            hls.on(Hls.Events.MEDIA_ATTACHED, requestPlayback);
+            hls.on(Hls.Events.MANIFEST_PARSED, requestPlayback);
             hls.loadSource(url.href);
             hls.attachMedia(mountedVideo);
+            requestPlayback();
           }).catch(() => {
             failVideo('Video oynatıcı bileşeni yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.');
           });
@@ -491,23 +590,20 @@ export async function openPlayer(project, { onClose } = {}) {
     black = !black;
     blackout.hidden = !black;
     blackButton.setAttribute('aria-pressed', String(black));
-    if (black) { video?.pause(); tell('Ekran karartıldı · B ile geri dönün.'); }
+    if (black) { pauseCurrentVideo(); tell('Ekran karartıldı · B ile geri dönün.'); }
     wake();
   }
 
   function toggleVideo() {
     if (!video) return;
-    if (video.paused) {
-      if (video.ended || video.currentTime >= videoEnd) video.currentTime = videoStart;
-      video.play().catch(() => tell('Videoyu başlatmak için video üzerindeki oynat düğmesine basın.'));
-    } else video.pause();
+    if (video.paused) playCurrentVideo();
+    else pauseCurrentVideo();
     wake();
   }
 
   function replay() {
     if (video) {
-      video.currentTime = videoStart;
-      video.play().catch(() => tell('Videoyu başlatmak için oynat düğmesine basın.'));
+      playCurrentVideo({ restart: true });
     } else showSlide(index);
     wake();
   }
@@ -569,7 +665,7 @@ export async function openPlayer(project, { onClose } = {}) {
       sidePanel.append(list);
     } else {
       const shortcuts = [
-        ['→ / Boşluk / PageDown', 'Sonraki adım'], ['← / PageUp', 'Önceki adım'],
+        ['→ / Boşluk / Enter / PageDown', 'Sonraki adım'], ['← / PageUp', 'Önceki adım'],
         ['Home / End', 'İlk / son slayt'], ['L', 'Lazer işaretçi'], ['P', 'Kalem'],
         ['E', 'Çizimleri temizle'], ['Ctrl/⌘ Z', 'Son çizimi geri al'], ['K', 'Videoyu oynat / duraklat'],
         ['R', 'Slaydı / videoyu yeniden başlat'], ['B', 'Ekranı karart'], ['F', 'Tam ekran'],
@@ -676,11 +772,11 @@ export async function openPlayer(project, { onClose } = {}) {
     const key = event.key.toLowerCase();
     if ((event.ctrlKey || event.metaKey) && key === 'z') { event.preventDefault(); undoStroke(); return; }
     if (event.ctrlKey || event.metaKey || event.altKey) return;
-    // Native media controls and focused buttons keep their normal space/arrow behavior.
-    if (event.target.tagName === 'VIDEO' && [' ', 'arrowleft', 'arrowright', 'arrowup', 'arrowdown'].includes(key)) return;
-    if (key === ' ' && event.target.closest('button')) return;
+    // Remote navigation wins even if a video or a pointer-clicked button has focus.
+    // Tab users retain normal Enter/Space activation for toolbar buttons.
+    if ([' ', 'enter'].includes(key) && keyboardFocus && event.target.closest('button')) return;
     const actions = {
-      arrowright: next, pagedown: next, ' ': next,
+      arrowright: next, pagedown: next, ' ': next, enter: next,
       arrowleft: previous, pageup: previous,
       home: () => showSlide(0), end: () => showSlide(slides.length - 1, true),
       l: () => setMode(mode === 'laser' ? '' : 'laser'),
@@ -689,8 +785,18 @@ export async function openPlayer(project, { onClose } = {}) {
       n: () => togglePanel('notes'), g: () => togglePanel('gallery'),
       '?': () => togglePanel('help'), k: toggleVideo,
     };
-    if (actions[key]) { event.preventDefault(); actions[key](); }
-  });
+    if (actions[key]) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!event.repeat) {
+        if (['arrowright', 'pagedown', ' ', 'enter', 'arrowleft', 'pageup', 'home', 'end'].includes(key)) {
+          keyboardFocus = false;
+          root.focus();
+        }
+        actions[key]();
+      }
+    }
+  }, { capture: true });
 
   const resizeObserver = new ResizeObserver(drawStrokes);
   resizeObserver.observe(stage);
