@@ -1,4 +1,5 @@
 import { openPlayer } from "./player.js";
+import { v2Projects } from "./v2-projects.js";
 const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
 const API = "/api/sunumlar/";
 const legacy = [
@@ -15,6 +16,7 @@ legacy.unshift({
   manifestURL: "/sunumlar/para-dedigin-sey/project.json",
   legacy: true, kind: "media"
 });
+legacy.unshift(...v2Projects);
 const demo = { id: "sahne-denemesi", title: "Sahne denemesi", description: "Sunum araçlarını tanıyın.", slides: [
   { id: "d1", type: "html", title: "Sahne sizin.", heading: "Sahne sizin.", body: "Bir fikir, bir hikâye, bir sonraki adım.", bullets: ["Ok tuşu veya boşluk ile bir sonraki adımı gösterin.", "L tuşuyla lazer işaretçiyi açın.", "F tuşuyla tam ekrana geçin."], notes: "Bu bir araç tanıtımıdır. Maddeler birer birer görünür. Sağ okla deneyin." },
   { id: "d2", type: "html", title: "Anlatırken işaretleyin.", heading: "Dikkati istediğiniz yere taşıyın.", body: "İşaretlemek, çizmek ve duraklamak da anlatımın bir parçası.", bullets: ["P: kalem · E: çizimleri temizle", "B: ekranı karart · N: konuşmacı notları", "R: slaydı yeniden başlat"], notes: "Bu slaytta kalemi açıp bir işaret çizin. Karartmayı ve not panelini deneyin." },
