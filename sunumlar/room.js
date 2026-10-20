@@ -2,14 +2,14 @@ import { openPlayer } from "./player.js";
 const $ = (s) => document.querySelector(s), $$ = (s) => [...document.querySelectorAll(s)];
 const API = "/api/sunumlar/";
 const legacy = [
-  { id: "yapay-zeka-dil-ogretimi", title: "Yabanc\u0131 Dil \xD6\u011Fretiminde Yapay Zek\xE2", description: "Yapay zek\xE2y\u0131 anlamak, \xE7\u0131kt\u0131y\u0131 s\u0131namak ve \xF6\u011Frenciyi \xFCreten \xF6zne olarak tutmak i\xE7in etkile\u015Fimli seminer.", cover: "/sunumlar/yapay-zeka-dil-ogretimi/slides/s01.jpg", label: "SUNUM + AT\xD6LYE", meta: "40 slayt \xB7 60 dakika", url: "/sunumlar/yapay-zeka-dil-ogretimi/", src: "/sunumlar/yapay-zeka-dil-ogretimi/sunum.html" },
-  { id: "bilim", title: "Bilim Nedir, Ne De\u011Fildir?", description: "Bilimin t\xFCrleri, y\xF6ntemleri ve s\u0131n\u0131rlar\u0131 \xFCzerine felsefi bir yolculuk.", cover: "/sunumlar/bilim/images/slide-01.jpg", label: "WEB SUNUMU", meta: "64 slayt \xB7 6 b\xF6l\xFCm", url: "/sunumlar/bilim/", src: "/sunumlar/bilim/index.html" },
-  { id: "safsatalar", title: "Safsata Dedektifi", description: "Mant\u0131k hatalar\u0131n\u0131 \xF6\u011Frenin, ger\xE7ek diyaloglarda fark edin. Etkile\u015Fimli sunum ve uygulamalar.", cover: "/sunumlar/safsatalar/images/image-3-1.jpeg", label: "SUNUM + OYUN", meta: "13 safsata \xB7 5 senaryo", url: "/sunumlar/safsatalar/", src: "/sunumlar/safsatalar/index.html" }
-].map((p) => ({ ...p, legacy: true, kind: "web", slides: [{ id: p.id, type: "embed", title: p.title, src: p.src, notes: "Bu sunumun kendi gezinme d\xFC\u011Fmeleri ve klavye k\u0131sayollar\u0131 vard\u0131r. Lazer veya kalem a\xE7\u0131kken i\xE7erikle etkile\u015Fmek i\xE7in \xF6nce arac\u0131 kapat\u0131n." }] }));
-const demo = { id: "sahne-denemesi", title: "Sahne denemesi", description: "Sunum ara\xE7lar\u0131n\u0131 tan\u0131y\u0131n.", slides: [
-  { id: "d1", type: "html", title: "Sahne sizin.", heading: "Sahne sizin.", body: "Bir fikir, bir hik\xE2ye, bir sonraki ad\u0131m.", bullets: ["Ok tu\u015Fu veya bo\u015Fluk ile bir sonraki ad\u0131m\u0131 g\xF6sterin.", "L tu\u015Fuyla lazer i\u015Faret\xE7iyi a\xE7\u0131n.", "F tu\u015Fuyla tam ekrana ge\xE7in."], notes: "Bu bir ara\xE7 tan\u0131t\u0131m\u0131d\u0131r. Maddeler birer birer g\xF6r\xFCn\xFCr. Sa\u011F okla deneyin." },
-  { id: "d2", type: "html", title: "Anlat\u0131rken i\u015Faretleyin.", heading: "Dikkati istedi\u011Finiz yere ta\u015F\u0131y\u0131n.", body: "\u0130\u015Faretlemek, \xE7izmek ve duraklamak da anlat\u0131m\u0131n bir par\xE7as\u0131.", bullets: ["P: kalem \xB7 E: \xE7izimleri temizle", "B: ekran\u0131 karart \xB7 N: konu\u015Fmac\u0131 notlar\u0131", "R: slayd\u0131 yeniden ba\u015Flat"], notes: "Bu slaytta kalemi a\xE7\u0131p bir i\u015Faret \xE7izin. Karartmay\u0131 ve not panelini deneyin." },
-  { id: "d3", type: "html", title: "Her proje kendi alan\u0131nda.", heading: "Haz\u0131r oldu\u011Funuzda ba\u015Flay\u0131n.", body: "G\xF6rselleri, videolar\u0131 veya mevcut web sunumunuzu ekleyin.", bullets: [], notes: "\xC7\u0131k\u0131\u015F i\xE7in Escape veya \xFCstteki kapatma d\xFC\u011Fmesini kullan\u0131n." }
+  { id: "yapay-zeka-dil-ogretimi", title: "Yabancı Dil Öğretiminde Yapay Zekâ", description: "Yapay zekâyı anlamak, çıktıyı sınamak ve öğrenciyi üreten özne olarak tutmak için etkileşimli seminer.", cover: "/sunumlar/yapay-zeka-dil-ogretimi/slides/s01.jpg", label: "SUNUM + ATÖLYE", meta: "40 slayt · 60 dakika", url: "/sunumlar/yapay-zeka-dil-ogretimi/", src: "/sunumlar/yapay-zeka-dil-ogretimi/sunum.html" },
+  { id: "bilim", title: "Bilim Nedir, Ne Değildir?", description: "Bilimin türleri, yöntemleri ve sınırları üzerine felsefi bir yolculuk.", cover: "/sunumlar/bilim/images/slide-01.jpg", label: "WEB SUNUMU", meta: "64 slayt · 6 bölüm", url: "/sunumlar/bilim/", src: "/sunumlar/bilim/index.html" },
+  { id: "safsatalar", title: "Safsata Dedektifi", description: "Mantık hatalarını öğrenin, gerçek diyaloglarda fark edin. Etkileşimli sunum ve uygulamalar.", cover: "/sunumlar/safsatalar/images/image-3-1.jpeg", label: "SUNUM + OYUN", meta: "13 safsata · 5 senaryo", url: "/sunumlar/safsatalar/", src: "/sunumlar/safsatalar/index.html" }
+].map((p) => ({ ...p, legacy: true, kind: "web", slides: [{ id: p.id, type: "embed", title: p.title, src: p.src, notes: "Bu sunumun kendi gezinme düğmeleri ve klavye kısayolları vardır. Lazer veya kalem açıkken içerikle etkileşmek için önce aracı kapatın." }] }));
+const demo = { id: "sahne-denemesi", title: "Sahne denemesi", description: "Sunum araçlarını tanıyın.", slides: [
+  { id: "d1", type: "html", title: "Sahne sizin.", heading: "Sahne sizin.", body: "Bir fikir, bir hikâye, bir sonraki adım.", bullets: ["Ok tuşu veya boşluk ile bir sonraki adımı gösterin.", "L tuşuyla lazer işaretçiyi açın.", "F tuşuyla tam ekrana geçin."], notes: "Bu bir araç tanıtımıdır. Maddeler birer birer görünür. Sağ okla deneyin." },
+  { id: "d2", type: "html", title: "Anlatırken işaretleyin.", heading: "Dikkati istediğiniz yere taşıyın.", body: "İşaretlemek, çizmek ve duraklamak da anlatımın bir parçası.", bullets: ["P: kalem · E: çizimleri temizle", "B: ekranı karart · N: konuşmacı notları", "R: slaydı yeniden başlat"], notes: "Bu slaytta kalemi açıp bir işaret çizin. Karartmayı ve not panelini deneyin." },
+  { id: "d3", type: "html", title: "Her proje kendi alanında.", heading: "Hazır olduğunuzda başlayın.", body: "Görselleri, videoları veya mevcut web sunumunuzu ekleyin.", bullets: [], notes: "Çıkış için Escape veya üstteki kapatma düğmesini kullanın." }
 ] };
 let status = { storageReady: false, authenticated: false, authReady: false }, projects = [...legacy], cursor = null, filter = "all", draft = null, dirty = false, uploading = false, uploadAbort = null, editorFiles = /* @__PURE__ */ new Map(), previewUrls = /* @__PURE__ */ new Set();
 const txt = (tag, text, cls) => {
@@ -33,23 +33,23 @@ async function api(action, body, query = {}) {
   try {
     data = await r.json();
   } catch {
-    throw Error("Sunucuya ula\u015F\u0131lamad\u0131. Ba\u011Flant\u0131n\u0131z\u0131 kontrol edin.");
+    throw Error("Sunucuya ulaşılamadı. Bağlantınızı kontrol edin.");
   }
-  if (!r.ok) throw Error(data.error || "\u0130\u015Flem tamamlanamad\u0131.");
+  if (!r.ok) throw Error(data.error || "İşlem tamamlanamadı.");
   return data;
 }
 async function loadStatus() {
   try {
     status = await api("status");
-    $("#storage-status").textContent = status.storageReady ? "Medya deposu ba\u011Fl\u0131" : "Medya deposu bekleniyor";
-    $("#login-button").textContent = status.authenticated ? "Y\xF6netici \xB7 \xC7\u0131k\u0131\u015F yap" : "Y\xF6netici giri\u015Fi";
+    $("#storage-status").textContent = status.storageReady ? "Medya deposu bağlı" : "Medya deposu bekleniyor";
+    $("#login-button").textContent = status.authenticated ? "Yönetici · Çıkış yap" : "Yönetici girişi";
     $("#service-message").hidden = status.storageReady;
-    if (!status.storageReady) $("#service-message").textContent = "Mevcut sunumlar haz\u0131r. Yeni dosyalar\u0131 kal\u0131c\u0131 olarak yay\u0131mlamak i\xE7in medya deposunun ba\u011Flanmas\u0131 gerekiyor. Bu s\u0131rada proje haz\u0131rlayabilir ve bu oturumda \xF6nizleyebilirsiniz.";
+    if (!status.storageReady) $("#service-message").textContent = "Mevcut sunumlar hazır. Yeni dosyaları kalıcı olarak yayımlamak için medya deposunun bağlanması gerekiyor. Bu sırada proje hazırlayabilir ve bu oturumda önizleyebilirsiniz.";
     if (status.storageReady) await loadProjects();
   } catch (e) {
-    $("#storage-status").textContent = "\xC7evrimd\u0131\u015F\u0131 / sunucuya eri\u015Filemiyor";
+    $("#storage-status").textContent = "Çevrimdışı / sunucuya erişilemiyor";
     $("#service-message").hidden = false;
-    $("#service-message").textContent = "Sunucuya ba\u011Flan\u0131lamad\u0131. Mevcut sunumlara eri\u015Febilir, yeni bir projeyi bu oturumda haz\u0131rlay\u0131p \xF6nizleyebilirsiniz.";
+    $("#service-message").textContent = "Sunucuya bağlanılamadı. Mevcut sunumlara erişebilir, yeni bir projeyi bu oturumda hazırlayıp önizleyebilirsiniz.";
   }
   render();
 }
@@ -80,9 +80,9 @@ function render() {
       im.onerror = () => im.remove();
       art.append(im);
     } else art.append(txt("span", p.title.slice(0, 2).toLocaleUpperCase("tr"), "placeholder"));
-    art.append(txt("span", p.label || "SUNUM PROJES\u0130", "card-tag"));
-    const play = txt("button", "\u25B7", "card-play");
-    play.setAttribute("aria-label", `${p.title} sunumunu ba\u015Flat`);
+    art.append(txt("span", p.label || "SUNUM PROJESİ", "card-tag"));
+    const play = txt("button", "▷", "card-play");
+    play.setAttribute("aria-label", `${p.title} sunumunu başlat`);
     play.onclick = () => launch(p);
     art.append(play);
     const body = txt("div", "", "card-body");
@@ -90,32 +90,32 @@ function render() {
     const footer = txt("div", "", "card-footer");
     footer.append(txt("span", p.meta || `${p.slideCount || p.slides?.length || 0} slayt`));
     const actions = txt("div", "", "card-actions");
-    const share = txt("button", "\u2197", "text-button");
-    share.setAttribute("aria-label", `${p.title} ba\u011Flant\u0131s\u0131n\u0131 kopyala`);
+    const share = txt("button", "↗", "text-button");
+    share.setAttribute("aria-label", `${p.title} bağlantısını kopyala`);
     share.onclick = () => copyLink(p.id);
     actions.append(share);
     if (p.legacy) {
-      const link = txt("a", "Projeyi a\xE7 \u2192", "source-link");
+      const link = txt("a", "Projeyi aç →", "source-link");
       link.href = p.url;
       actions.append(link);
     } else if (status.authenticated) {
-      const edit = txt("button", "D\xFCzenle", "text-button");
+      const edit = txt("button", "Düzenle", "text-button");
       edit.onclick = () => editProject(p.id);
       actions.append(edit);
-      const archive = txt("button", "Ar\u015Fivle", "text-button");
+      const archive = txt("button", "Arşivle", "text-button");
       archive.onclick = async () => {
         if (!await askConfirm("Bu sunum listeden kaldırılsın mı? Dosyaları korunur.", "Arşivle")) return;
         try {
           await api("archive", { id: p.id });
           await loadProjects();
-          toast("Sunum ar\u015Fivlendi.");
+          toast("Sunum arşivlendi.");
         } catch (e) {
           toast(e.message);
         }
       };
       actions.append(archive);
     } else {
-      const start = txt("button", "Sun \u2192", "text-button");
+      const start = txt("button", "Sun →", "text-button");
       start.onclick = () => launch(p);
       actions.append(start);
     }
@@ -142,7 +142,7 @@ async function copyLink(id) {
   u.searchParams.set("proje", id);
   try {
     await navigator.clipboard.writeText(u.href);
-    toast("Sunum ba\u011Flant\u0131s\u0131 kopyaland\u0131.");
+    toast("Sunum bağlantısı kopyalandı.");
   } catch {
     toast("Adres: " + u.href);
   }
@@ -161,17 +161,17 @@ function openEditor(project) {
   dirty = false;
   $("#project-title").value = draft.title;
   $("#project-description").value = draft.description || "";
-  $("#editor-title").textContent = project ? "Sunumu d\xFCzenle" : "Yeni sunum";
-  $("#save-state").textContent = project ? "Son kaydedilen s\xFCr\xFCm" : "Hen\xFCz kaydedilmedi";
+  $("#editor-title").textContent = project ? "Sunumu düzenle" : "Yeni sunum";
+  $("#save-state").textContent = project ? "Son kaydedilen sürüm" : "Henüz kaydedilmedi";
   updateEditorNotice();
   renderSlides();
   $("#editor").showModal();
 }
 function updateEditorNotice() {
   const el = $("#editor-notice");
-  el.textContent = !status.storageReady ? "Medya deposu hen\xFCz ba\u011Fl\u0131 de\u011Fil. Dosyalar bu oturumda \xF6nizlenir; sayfa kapat\u0131l\u0131rsa yerel dosyalar yeniden se\xE7ilmelidir." : !status.authenticated ? "Dosyalar\u0131 kal\u0131c\u0131 y\xFCklemek ve projeyi yay\u0131mlamak i\xE7in y\xF6netici giri\u015Fi yap\u0131n." : "Kaydet ve yay\u0131mla ile proje ba\u011Flant\u0131s\u0131 eri\u015Filebilir olur. Y\xFCklenen dosyalar ba\u011Flant\u0131y\u0131 bilen herkes taraf\u0131ndan g\xF6r\xFCnt\xFClenebilir.";
+  el.textContent = !status.storageReady ? "Medya deposu henüz bağlı değil. Dosyalar bu oturumda önizlenir; sayfa kapatılırsa yerel dosyalar yeniden seçilmelidir." : !status.authenticated ? "Dosyaları kalıcı yüklemek ve projeyi yayımlamak için yönetici girişi yapın." : "Kaydet ve yayımla ile proje bağlantısı erişilebilir olur. Yüklenen dosyalar bağlantıyı bilen herkes tarafından görüntülenebilir.";
   if (!status.authenticated) {
-    const login = txt("button", "Y\xF6netici giri\u015Fi", "text-button");
+    const login = txt("button", "Yönetici girişi", "text-button");
     login.onclick = () => {
       $("#login-error").textContent = "";
       $("#login-dialog").showModal();
@@ -194,7 +194,7 @@ function syncDraft() {
 }
 function changed() {
   dirty = true;
-  $("#save-state").textContent = "Kaydedilmemi\u015F de\u011Fi\u015Fiklikler";
+  $("#save-state").textContent = "Kaydedilmemiş değişiklikler";
 }
 function field(label, value, oninput, opts = {}) {
   const l = txt("label", label), el = document.createElement(opts.multiline ? "textarea" : "input");
@@ -218,7 +218,7 @@ function renderSlides() {
   draft.slides.forEach((s, i) => {
     const li = txt("li", "", "slide-row");
     li.append(txt("span", String(i + 1).padStart(2, "0"), "slide-number"));
-    const thumb = s.type === "image" ? document.createElement("img") : txt("div", { video: "\u25B7", html: "T", embed: "\u2197" }[s.type] || "\u25A4");
+    const thumb = s.type === "image" ? document.createElement("img") : txt("div", { video: "▷", html: "T", embed: "↗" }[s.type] || "▤");
     thumb.className = "slide-thumb";
     if (s.type === "image") {
       thumb.src = s.src;
@@ -227,32 +227,32 @@ function renderSlides() {
     }
     li.append(thumb);
     const fields = txt("div", "", "slide-fields");
-    const title = field("Slayt ba\u015Fl\u0131\u011F\u0131", s.title, (v) => s.title = v, { maxLength: 200 });
+    const title = field("Slayt başlığı", s.title, (v) => s.title = v, { maxLength: 200 });
     title.classList.add("wide");
     fields.append(title);
     if (s.type === "html" && !s.src) {
-      const head = field("Ekrandaki ba\u015Fl\u0131k", s.heading, (v) => s.heading = v, { maxLength: 500 });
+      const head = field("Ekrandaki başlık", s.heading, (v) => s.heading = v, { maxLength: 500 });
       head.classList.add("wide");
-      const body = field("A\xE7\u0131klama", s.body, (v) => s.body = v, { multiline: true, maxLength: 5e3 });
+      const body = field("Açıklama", s.body, (v) => s.body = v, { multiline: true, maxLength: 5e3 });
       body.classList.add("wide");
-      const bullets = field("Ad\u0131m ad\u0131m a\xE7\u0131lan maddeler (her sat\u0131ra bir madde)", (s.bullets || []).join("\n"), (v) => s.bullets = v.split("\n").filter(Boolean), { multiline: true, maxLength: 1e4 });
+      const bullets = field("Adım adım açılan maddeler (her satıra bir madde)", (s.bullets || []).join("\n"), (v) => s.bullets = v.split("\n").filter(Boolean), { multiline: true, maxLength: 1e4 });
       bullets.classList.add("wide");
       fields.append(head, body, bullets);
     }
     if (s.type === "video") {
-      fields.append(field("Ba\u015Flang\u0131\xE7 (saniye)", s.start || 0, (v) => s.start = Number(v), { type: "number" }), field("Biti\u015F (bo\u015Fsa sonuna kadar)", s.end ?? "", (v) => s.end = v === "" ? void 0 : Number(v), { type: "number" }));
+      fields.append(field("Başlangıç (saniye)", s.start || 0, (v) => s.start = Number(v), { type: "number" }), field("Bitiş (boşsa sonuna kadar)", s.end ?? "", (v) => s.end = v === "" ? void 0 : Number(v), { type: "number" }));
     }
-    const notes = field("Konu\u015Fmac\u0131 notu", s.notes || "", (v) => s.notes = v, { multiline: true, maxLength: 1e4 });
+    const notes = field("Konuşmacı notu", s.notes || "", (v) => s.notes = v, { multiline: true, maxLength: 1e4 });
     notes.classList.add("wide");
     fields.append(notes);
     li.append(fields);
     const acts = txt("div", "", "slide-actions");
-    for (const [label, icon, fn, disabled] of [["Yukar\u0131 ta\u015F\u0131", "\u2191", () => move(i, -1), i === 0], ["A\u015Fa\u011F\u0131 ta\u015F\u0131", "\u2193", () => move(i, 1), i === draft.slides.length - 1], ["Slayd\u0131 \xE7o\u011Falt", "\u29C9", () => {
+    for (const [label, icon, fn, disabled] of [["Yukarı taşı", "↑", () => move(i, -1), i === 0], ["Aşağı taşı", "↓", () => move(i, 1), i === draft.slides.length - 1], ["Slaydı çoğalt", "⧉", () => {
       draft.slides.splice(i + 1, 0, { ...structuredClone(s), id: crypto.randomUUID() });
       if (editorFiles.has(s.id)) editorFiles.set(draft.slides[i + 1].id, editorFiles.get(s.id));
       changed();
       renderSlides();
-    }, false], ["Slayd\u0131 kald\u0131r", "\xD7", () => {
+    }, false], ["Slaydı kaldır", "×", () => {
       draft.slides.splice(i, 1);
       editorFiles.delete(s.id);
       changed();
@@ -270,13 +270,13 @@ function renderSlides() {
   });
   $("#source-info").replaceChildren();
   if (draft.sourceUrl) {
-    const a = txt("a", "Kaynak dosyas\u0131 \u2197");
+    const a = txt("a", "Kaynak dosyası ↗");
     a.href = draft.sourceUrl;
     a.target = "_blank";
     a.rel = "noopener";
     $("#source-info").append(a);
   }
-  if (editorFiles.has("source")) $("#source-info").append(txt("span", " Kaynak dosyas\u0131: " + editorFiles.get("source").name + " \xB7 hen\xFCz y\xFCklenmedi"));
+  if (editorFiles.has("source")) $("#source-info").append(txt("span", " Kaynak dosyası: " + editorFiles.get("source").name + " · henüz yüklenmedi"));
   if (uploading) lockEditor(true);
 }
 function move(i, d) {
@@ -293,11 +293,11 @@ async function addFiles(files) {
   for (const f of files) {
     const type = getType(f);
     if (!type) {
-      toast(`${f.name}: bu bi\xE7im slayt olarak desteklenmiyor.`);
+      toast(`${f.name}: bu biçim slayt olarak desteklenmiyor.`);
       continue;
     }
     if (status.maxFileBytes && f.size > status.maxFileBytes) {
-      toast(`${f.name}: tek dosya s\u0131n\u0131r\u0131n\u0131 a\u015F\u0131yor.`);
+      toast(`${f.name}: tek dosya sınırını aşıyor.`);
       continue;
     }
     const id = crypto.randomUUID(), url = URL.createObjectURL(f);
@@ -315,11 +315,11 @@ function safeUrl(value, type) {
     s = doc.querySelector("iframe")?.getAttribute("src") || "";
   }
   const u = new URL(s, location.origin);
-  if (u.username || u.password || !["https:"].includes(u.protocol) && !(u.origin === location.origin && u.pathname.startsWith("/sunumlar/"))) throw Error("HTTPS ba\u011Flant\u0131s\u0131 veya bu sitedeki bir sunum adresi kullan\u0131n.");
+  if (u.username || u.password || !["https:"].includes(u.protocol) && !(u.origin === location.origin && u.pathname.startsWith("/sunumlar/"))) throw Error("HTTPS bağlantısı veya bu sitedeki bir sunum adresi kullanın.");
   if (["embed", "html"].includes(type)) {
     const trusted = u.origin === location.origin && u.pathname.startsWith("/sunumlar/");
     const ms = /^(?:view\.officeapps\.live\.com|onedrive\.live\.com|1drv\.ms|(?:[a-z0-9-]+\.)+officeapps\.live\.com|(?:[a-z0-9-]+\.)+sharepoint\.com|docs\.google\.com)$/.test(u.hostname);
-    if (!trusted && !ms) throw Error("Bu i\xE7erik i\xE7in sitedeki bir HTML sunumu veya Microsoft / Google Slides g\xF6mme ba\u011Flant\u0131s\u0131 kullan\u0131n.");
+    if (!trusted && !ms) throw Error("Bu içerik için sitedeki bir HTML sunumu veya Microsoft / Google Slides gömme bağlantısı kullanın.");
   }
   return u.origin === location.origin ? u.pathname + u.search + u.hash : u.href;
 }
@@ -327,7 +327,7 @@ function validateDraft(p) {
   if (!p.title) throw Error("Sunuma bir ad verin.");
   if (!p.slides.length) throw Error("En az bir slayt ekleyin.");
   for (const s of p.slides) {
-    if (s.type === "video" && s.end !== void 0 && Number(s.end) <= Number(s.start || 0)) throw Error("Video biti\u015Fi ba\u015Flang\u0131\xE7tan sonra olmal\u0131.");
+    if (s.type === "video" && s.end !== void 0 && Number(s.end) <= Number(s.start || 0)) throw Error("Video bitişi başlangıçtan sonra olmalı.");
     if (s.src && !s.src.startsWith("blob:")) safeUrl(s.src, s.type);
   }
   return p;
@@ -339,21 +339,21 @@ async function save() {
       $("#login-dialog").showModal();
       return;
     }
-    if (!status.storageReady) throw Error("\xD6nce medya deposu ba\u011Flanmal\u0131.");
+    if (!status.storageReady) throw Error("Önce medya deposu bağlanmalı.");
     uploading = true;
     lockEditor(true);
     updateEditorNotice();
-    $("#save-state").textContent = "Kaydediliyor\u2026";
+    $("#save-state").textContent = "Kaydediliyor…";
     if (editorFiles.size) await uploadFiles();
     const result = await api("save", { project: draft });
     draft = result.project || draft;
     dirty = false;
-    $("#save-state").textContent = "Yay\u0131mland\u0131 \xB7 de\u011Fi\u015Fiklikler kaydedildi";
-    toast("Sunum yay\u0131mland\u0131. Ba\u011Flant\u0131s\u0131 proje kart\u0131nda.");
+    $("#save-state").textContent = "Yayımlandı · değişiklikler kaydedildi";
+    toast("Sunum yayımlandı. Bağlantısı proje kartında.");
     await loadProjects();
   } catch (e) {
     $("#save-state").textContent = "Kaydedilemedi";
-    toast(e.name === "AbortError" ? "Y\xFCkleme iptal edildi. Dosyalar bu oturumda duruyor." : e.message);
+    toast(e.name === "AbortError" ? "Yükleme iptal edildi. Dosyalar bu oturumda duruyor." : e.message);
   } finally {
     uploading = false;
     lockEditor(false);
@@ -361,10 +361,18 @@ async function save() {
     updateEditorNotice();
   }
 }
+const lockedControls = /* @__PURE__ */ new Map();
 function lockEditor(locked) {
   $$("#editor .editor-body input, #editor .editor-body textarea, #editor .editor-body button, #preview-project, #export-json").forEach((el) => {
-    if (el.id !== "cancel-upload") el.disabled = locked;
+    if (el.id === "cancel-upload") return;
+    if (locked) {
+      if (!lockedControls.has(el)) lockedControls.set(el, el.disabled);
+      el.disabled = true;
+    } else if (lockedControls.has(el)) {
+      el.disabled = lockedControls.get(el);
+    }
   });
+  if (!locked) lockedControls.clear();
 }
 async function uploadFiles() {
   const { upload } = await import("./vendor/blob-client.js");
@@ -374,14 +382,14 @@ async function uploadFiles() {
   const uploaded = /* @__PURE__ */ new Map();
   const total = new Set(editorFiles.values()).size;
   for (const [id, file] of [...editorFiles]) {
-    if (uploadAbort.signal.aborted) throw new DOMException("\u0130ptal", "AbortError");
+    if (uploadAbort.signal.aborted) throw new DOMException("İptal", "AbortError");
     const safe = file.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9._-]/g, "-").slice(-140);
     const path = `sunumlar/media/${draft.id}/${crypto.randomUUID()}-${safe}`;
     let blob = uploaded.get(file);
     if (!blob) {
       blob = await upload(path, file, { access: "public", handleUploadUrl: API + "?action=upload", multipart: true, clientPayload: JSON.stringify({ projectId: draft.id }), abortSignal: uploadAbort.signal, onUploadProgress: ({ percentage }) => {
         $("#upload-progress").value = percentage;
-        $("#upload-label").textContent = `${done + 1} / ${total} \xB7 ${file.name} \xB7 %${Math.round(percentage)}`;
+        $("#upload-label").textContent = `${done + 1} / ${total} · ${file.name} · %${Math.round(percentage)}`;
       } });
       uploaded.set(file, blob);
       done++;
@@ -398,7 +406,7 @@ async function uploadFiles() {
 function downloadJson() {
   try {
     validateDraft(syncDraft());
-    if (editorFiles.size || draft.slides.some((s) => s.src?.startsWith("blob:"))) throw Error("Dosyalar\u0131 i\xE7eren ta\u015F\u0131nabilir proje i\xE7in \xF6nce y\xFCkleyip kaydedin. Yerel dosya ba\u011Flant\u0131lar\u0131 ba\u015Fka oturumda \xE7al\u0131\u015Fmaz.");
+    if (editorFiles.size || draft.slides.some((s) => s.src?.startsWith("blob:"))) throw Error("Dosyaları içeren taşınabilir proje için önce yükleyip kaydedin. Yerel dosya bağlantıları başka oturumda çalışmaz.");
     const a = document.createElement("a"), url = URL.createObjectURL(new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" }));
     a.href = url;
     a.download = (draft.title.replace(/[^\p{L}\p{N} -]/gu, "") || "sunum") + ".json";
@@ -410,13 +418,13 @@ function downloadJson() {
 }
 async function importJson(file) {
   try {
-    if (file.size > 2 * 1024 * 1024) throw Error("Proje tan\u0131m\u0131 en fazla 2 MB olabilir; medya dosyalar\u0131n\u0131 ayr\u0131 ekleyin.");
+    if (file.size > 2 * 1024 * 1024) throw Error("Proje tanımı en fazla 2 MB olabilir; medya dosyalarını ayrı ekleyin.");
     const p = JSON.parse(await file.text());
-    if (typeof p.title !== "string" || !Array.isArray(p.slides) || p.slides.length > 5e3) throw Error("Ge\xE7erli bir proje dosyas\u0131 se\xE7in.");
+    if (typeof p.title !== "string" || !Array.isArray(p.slides) || p.slides.length > 5e3) throw Error("Geçerli bir proje dosyası seçin.");
     for (const s of p.slides) {
-      if (!["image", "video", "html", "embed"].includes(s.type)) throw Error("Desteklenmeyen slayt t\xFCr\xFC.");
+      if (!["image", "video", "html", "embed"].includes(s.type)) throw Error("Desteklenmeyen slayt türü.");
       if (s.src) s.src = safeUrl(s.src, s.type);
-      if (s.bullets && (!Array.isArray(s.bullets) || !s.bullets.every((v) => typeof v === "string"))) throw Error("Maddeler metin olmal\u0131d\u0131r.");
+      if (s.bullets && (!Array.isArray(s.bullets) || !s.bullets.every((v) => typeof v === "string"))) throw Error("Maddeler metin olmalıdır.");
       s.id = crypto.randomUUID();
     }
     p.id = crypto.randomUUID();
@@ -429,7 +437,7 @@ async function importJson(file) {
     changed();
     renderSlides();
   } catch (e) {
-    toast("\u0130\xE7e aktar\u0131lamad\u0131: " + e.message);
+    toast("İçe aktarılamadı: " + e.message);
   }
 }
 $("#search").oninput = render;
@@ -447,7 +455,7 @@ $("#guide-button").onclick = () => $("#guide").showModal();
 $$("[data-close]").forEach((b) => b.onclick = () => b.closest("dialog").close());
 $("#close-editor").onclick = async () => {
   if (uploading) {
-    toast("Y\xFCklemeyi iptal edin veya tamamlanmas\u0131n\u0131 bekleyin.");
+    toast("Yüklemeyi iptal edin veya tamamlanmasını bekleyin.");
     return;
   }
   if (dirty && !await askConfirm("Kaydedilmemiş değişiklikler var. Düzenleyici kapatılsın mı?", "Kaydetmeden kapat")) return;
@@ -467,7 +475,7 @@ $("#file-input").onchange = (e) => {
   e.target.value = "";
 };
 $("#add-text").onclick = () => {
-  draft.slides.push({ id: crypto.randomUUID(), type: "html", title: "Yeni slayt", heading: "Ba\u015Fl\u0131\u011F\u0131n\u0131z", body: "", bullets: [], notes: "" });
+  draft.slides.push({ id: crypto.randomUUID(), type: "html", title: "Yeni slayt", heading: "Başlığınız", body: "", bullets: [], notes: "" });
   changed();
   renderSlides();
 };
@@ -480,7 +488,7 @@ $("#url-form").onsubmit = (e) => {
   e.preventDefault();
   try {
     const type = $("#url-type").value, src = safeUrl($("#url-value").value, type);
-    draft.slides.push({ id: crypto.randomUUID(), type, src, title: $("#url-title").value.trim() || "Ba\u011Flant\u0131dan slayt", notes: "" });
+    draft.slides.push({ id: crypto.randomUUID(), type, src, title: $("#url-title").value.trim() || "Bağlantıdan slayt", notes: "" });
     changed();
     renderSlides();
     $("#url-dialog").close();
@@ -499,7 +507,7 @@ $("#source-input").onchange = (e) => {
     editorFiles.set("source", e.target.files[0]);
     changed();
     renderSlides();
-    toast("Kaynak dosya eklendi. Sunmak i\xE7in g\xF6rsel/video slayt veya web ba\u011Flant\u0131s\u0131 da ekleyin.");
+    toast("Kaynak dosya eklendi. Sunmak için görsel/video slayt veya web bağlantısı da ekleyin.");
   }
   e.target.value = "";
 };
@@ -521,12 +529,12 @@ $("#login-button").onclick = async () => {
       await api("logout", {});
       status.authenticated = false;
       await loadStatus();
-      toast("\xC7\u0131k\u0131\u015F yap\u0131ld\u0131.");
+      toast("Çıkış yapıldı.");
     } catch (e) {
       toast(e.message);
     }
   } else {
-    $("#login-error").textContent = status.authReady ? "" : "Sunucuda y\xF6netici \u015Fifresi yap\u0131land\u0131r\u0131lmam\u0131\u015F olabilir.";
+    $("#login-error").textContent = status.authReady ? "" : "Sunucuda yönetici şifresi yapılandırılmamış olabilir.";
     $("#login-dialog").showModal();
   }
 };
@@ -540,7 +548,7 @@ $("#login-form").onsubmit = async (e) => {
     $("#login-dialog").close();
     await loadStatus();
     if (draft) updateEditorNotice();
-    toast("Y\xF6netici giri\u015Fi yap\u0131ld\u0131.");
+    toast("Yönetici girişi yapıldı.");
   } catch (err) {
     $("#login-error").textContent = err.message;
   } finally {
@@ -568,21 +576,30 @@ if (selected) {
     }
   }
 }
-
 function askConfirm(message, label) {
-  return new Promise(resolve => {
-    const dialog = document.createElement('dialog');
-    dialog.className = 'small-dialog';
-    dialog.setAttribute('aria-label', 'Değişiklikleri onayla');
-    dialog.append(txt('p', message));
-    const actions = txt('div', '', 'hero-actions');
-    const cancel = txt('button', 'Vazgeç', 'secondary');
-    const yes = txt('button', label, 'primary');
-    const finish = result => { dialog.close(); dialog.remove(); resolve(result); };
+  return new Promise((resolve) => {
+    const dialog = document.createElement("dialog");
+    dialog.className = "small-dialog";
+    dialog.setAttribute("aria-label", "Değişiklikleri onayla");
+    dialog.append(txt("p", message));
+    const actions = txt("div", "", "hero-actions");
+    const cancel = txt("button", "Vazgeç", "secondary");
+    const yes = txt("button", label, "primary");
+    const finish = (result) => {
+      dialog.close();
+      dialog.remove();
+      resolve(result);
+    };
     cancel.onclick = () => finish(false);
     yes.onclick = () => finish(true);
-    dialog.addEventListener('cancel', event => { event.preventDefault(); finish(false); });
-    actions.append(cancel, yes); dialog.append(actions);
-    document.body.append(dialog); dialog.showModal(); cancel.focus();
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      finish(false);
+    });
+    actions.append(cancel, yes);
+    dialog.append(actions);
+    document.body.append(dialog);
+    dialog.showModal();
+    cancel.focus();
   });
 }
