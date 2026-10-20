@@ -144,6 +144,37 @@ test('remote entry starts audible MP4 immediately and forward stops it; repeats 
   assert.equal(h.counter(), '1 / 4');
 });
 
+test('new video slides autoplay by default when the field is absent', async t => {
+  const h = await harness();
+  const slide = movie();
+  delete slide.autoplay;
+  const player = await h.open(project(slide));
+  t.after(() => player.close());
+  h.key('PageDown');
+  const video = h.videos()[0];
+  assert.equal(video.autoplay, true);
+  assert.equal(video.preload, 'auto');
+  assert.equal(video.playCalls, 1);
+  assert.equal(video.muted, false);
+});
+
+test('an explicit autoplay false keeps video paused through readiness events', async t => {
+  const h = await harness();
+  const player = await h.open(project({ ...movie(), autoplay: false }));
+  t.after(() => player.close());
+  h.key('PageDown');
+  const video = h.videos()[0];
+  video.dispatchEvent(new Event('loadedmetadata'));
+  video.dispatchEvent(new Event('canplay'));
+  await flush();
+  assert.equal(video.autoplay, false);
+  assert.equal(video.preload, 'metadata');
+  assert.equal(video.playCalls, 0);
+  assert.equal(video.paused, true);
+  h.key('k');
+  assert.equal(video.playCalls, 1);
+});
+
 test('Space and Enter advance even when a pointer-clicked button keeps focus', async t => {
   const h = await harness();
   const player = await h.open(project());

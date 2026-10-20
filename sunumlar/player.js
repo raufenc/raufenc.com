@@ -300,19 +300,20 @@ export async function openPlayer(project, { onClose } = {}) {
       } else if (slide.type === 'video') {
         video = el('video', 'sp-video');
         const mountedVideo = video;
+        const autoplay = slide.autoplay !== false;
         video.controls = true;
         video.playsInline = true;
-        video.autoplay = slide.autoplay === true;
+        video.autoplay = autoplay;
         video.muted = slide.muted === true;
         video.defaultMuted = slide.muted === true;
-        video.preload = slide.autoplay === true ? 'auto' : 'metadata';
+        video.preload = autoplay ? 'auto' : 'metadata';
         const posterURL = sourceURL(slide.poster);
         if (posterURL) video.poster = posterURL.href;
         video.setAttribute('aria-label', slide.title || 'Sunum videosu');
         let disposed = false;
         let hls;
         let sourceFailed = false;
-        let wantsPlayback = slide.autoplay === true;
+        let wantsPlayback = autoplay;
         let playPending = false;
         let playbackStarted = false;
         let autoplayBlocked = false;
