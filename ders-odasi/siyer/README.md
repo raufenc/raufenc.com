@@ -45,7 +45,7 @@ Bağımsız HTML tarayıcı yerel deposunu kullanır; merkezi kullanıcı hesab�
 
 ## Kaynak ve inceleme
 
-Her bölümün kaynakları `curriculum.json` içinde ve öğrenci ekranında bağlantılıdır. TDV İslâm Ansiklopedisi ve Diyanet Hadislerle İslâm temel başvuru kaynaklarıdır. Etkinlikler özgün pedagojik örneklerdir. Bu sürüm hoca/alan uzmanı incelemesine açık taslaktır. Depodaki MIMARI.md, yeni içeriklerin yayından önce Hocalarımız tarafından incelenmesini ister; bu nedenle ayrı dal ve önizleme hazırlanmıştır.
+Her bölümün kaynakları `curriculum.json` içinde ve öğrenci ekranında bağlantılıdır. TDV İslâm Ansiklopedisi ve Diyanet Hadislerle İslâm temel başvuru kaynaklarıdır. Etkinlikler özgün pedagojik örneklerdir. Bu sürüm hoca/alan uzmanı incelemesine açık taslaktır. İçerik, kullanıcı tarafından verilen tam uygulama ve yayın yetkisiyle Ders Odası'na eklenmiştir; bu yayın alan uzmanı onayı alındığı anlamına gelmez. Kaynak ve dil incelemesi için ders başına bağlantılar korunur.
 
 ## Doğrulama sınırları
 
@@ -61,4 +61,4 @@ JavaScript sözdizimi, ders sayısı/kimliği, soru cevap indeksleri, kaynak eş
 
 ## İçeriği güncelleme
 
-Ders metinleri ve kaynakları curriculum.json üzerinden düzenlenir. Ardından `node ders-odasi/siyer/sync-content.mjs` ile bağımsız HTML içindeki veri, 60 yerel ders dosyası, 180 SVG ve katalog birlikte yenilenir. `node ders-odasi/siyer/verify.mjs` veri ve dosya tutarlılığını kontrol eder. Betikler yalnızca Node.js standart kitaplığını kullanır.
+Ders metinleri ve kaynakları curriculum.json üzerinden düzenlenir. Ardından `node ders-odasi/siyer/sync.mjs` ile bağımsız HTML içindeki veri, 60 yerel ders dosyası, 180 SVG ve katalog birlikte yenilenir. `node ders-odasi/siyer/verify.mjs` veri ve dosya tutarlılığını kontrol eder. Betikler yalnızca Node.js standart kitaplığını kullanır.
