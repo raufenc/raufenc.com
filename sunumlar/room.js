@@ -6,6 +6,15 @@ const legacy = [
   { id: "bilim", title: "Bilim Nedir, Ne Değildir?", description: "Bilimin türleri, yöntemleri ve sınırları üzerine felsefi bir yolculuk.", cover: "/sunumlar/bilim/images/slide-01.jpg", label: "WEB SUNUMU", meta: "64 slayt · 6 bölüm", url: "/sunumlar/bilim/", src: "/sunumlar/bilim/index.html" },
   { id: "safsatalar", title: "Safsata Dedektifi", description: "Mantık hatalarını öğrenin, gerçek diyaloglarda fark edin. Etkileşimli sunum ve uygulamalar.", cover: "/sunumlar/safsatalar/images/image-3-1.jpeg", label: "SUNUM + OYUN", meta: "13 safsata · 5 senaryo", url: "/sunumlar/safsatalar/", src: "/sunumlar/safsatalar/index.html" }
 ].map((p) => ({ ...p, legacy: true, kind: "web", slides: [{ id: p.id, type: "embed", title: p.title, src: p.src, notes: "Bu sunumun kendi gezinme düğmeleri ve klavye kısayolları vardır. Lazer veya kalem açıkken içerikle etkileşmek için önce aracı kapatın." }] }));
+legacy.unshift({
+  id: "para-dedigin-sey", title: "Para Dediğin Şey",
+  description: "Paranın doğası, değeri ve hayatımızdaki yeri üzerine videolu sunum.",
+  cover: "/sunumlar/para-dedigin-sey/media/slide-01.jpg",
+  label: "VİDEOLU SUNUM", meta: "55 slayt · 19 video",
+  url: "/sunumlar/para-dedigin-sey/",
+  manifestURL: "/sunumlar/para-dedigin-sey/project.json",
+  legacy: true, kind: "media"
+});
 const demo = { id: "sahne-denemesi", title: "Sahne denemesi", description: "Sunum araçlarını tanıyın.", slides: [
   { id: "d1", type: "html", title: "Sahne sizin.", heading: "Sahne sizin.", body: "Bir fikir, bir hikâye, bir sonraki adım.", bullets: ["Ok tuşu veya boşluk ile bir sonraki adımı gösterin.", "L tuşuyla lazer işaretçiyi açın.", "F tuşuyla tam ekrana geçin."], notes: "Bu bir araç tanıtımıdır. Maddeler birer birer görünür. Sağ okla deneyin." },
   { id: "d2", type: "html", title: "Anlatırken işaretleyin.", heading: "Dikkati istediğiniz yere taşıyın.", body: "İşaretlemek, çizmek ve duraklamak da anlatımın bir parçası.", bullets: ["P: kalem · E: çizimleri temizle", "B: ekranı karart · N: konuşmacı notları", "R: slaydı yeniden başlat"], notes: "Bu slaytta kalemi açıp bir işaret çizin. Karartmayı ve not panelini deneyin." },
@@ -126,6 +135,11 @@ function render() {
   }
 }
 async function fullProject(p) {
+  if (p.manifestURL) {
+    const response = await fetch(p.manifestURL);
+    if (!response.ok) throw Error("Sunum dosyası açılamadı.");
+    return response.json();
+  }
   return p.slides ? p : (await api("get", void 0, { id: p.id })).project;
 }
 async function launch(p) {

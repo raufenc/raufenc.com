@@ -296,8 +296,12 @@ export async function openPlayer(project, { onClose } = {}) {
         video.controls = true;
         video.playsInline = true;
         video.preload = 'metadata';
-        video.src = url.href;
+        const posterURL = sourceURL(slide.poster);
+        if (posterURL) video.poster = posterURL.href;
         video.setAttribute('aria-label', slide.title || 'Sunum videosu');
+        let disposed = false;
+        let hls;
+        let sourceFailed = false;
         const suppliedStart = Number(slide.start);
         let start = Number.isFinite(suppliedStart) ? Math.max(0, suppliedStart) : 0;
         const suppliedEnd = Number(slide.end);
@@ -332,7 +336,18 @@ export async function openPlayer(project, { onClose } = {}) {
             mountedVideo.currentTime = start;
           }
         };
-        const videoError = () => showError('Video oynatılamıyor.', 'Dosyaya erişimi ve tarayıcının video biçimini desteklediğini kontrol edin.');
+        const failVideo = (message) => {
+          if (disposed || sourceFailed) return;
+          sourceFailed = true;
+          mountedVideo.removeEventListener('error', videoError);
+          mountedVideo.pause();
+          hls?.destroy();
+          hls = undefined;
+          if (video === mountedVideo) video = null;
+          videoButton.hidden = true;
+          showError('Video oynatılamıyor.', message);
+        };
+        const videoError = () => failVideo('Dosyaya erişimi ve tarayıcının video biçimini desteklediğini kontrol edin.');
         video.addEventListener('loadedmetadata', chapterReady, { once: true });
         video.addEventListener('timeupdate', enforceChapter);
         video.addEventListener('seeking', clampSeek);
@@ -341,15 +356,47 @@ export async function openPlayer(project, { onClose } = {}) {
         media.append(video);
         videoButton.hidden = false;
         cleanupSlide = () => {
+          disposed = true;
           mountedVideo.removeEventListener('loadedmetadata', chapterReady);
           mountedVideo.removeEventListener('timeupdate', enforceChapter);
           mountedVideo.removeEventListener('seeking', clampSeek);
           mountedVideo.removeEventListener('play', chapterPlay);
           mountedVideo.removeEventListener('error', videoError);
+          hls?.destroy();
+          hls = undefined;
           mountedVideo.pause();
           mountedVideo.removeAttribute('src');
           mountedVideo.load();
         };
+        const isHls = /\.m3u8$/i.test(url.pathname);
+        const nativeHls = mountedVideo.canPlayType('application/vnd.apple.mpegurl') ||
+          mountedVideo.canPlayType('application/x-mpegURL');
+        if (!isHls || nativeHls) {
+          mountedVideo.src = url.href;
+        } else {
+          // Load the local HLS runtime only when this active video needs it.
+          import('./vendor/hls.js').then(({ default: Hls }) => {
+            if (disposed || sourceFailed) return;
+            if (!Hls.isSupported()) {
+              failVideo('Bu tarayıcı akış videosunu desteklemiyor. Güncel Safari, Chrome, Firefox veya Edge kullanın.');
+              return;
+            }
+            hls = new Hls({
+              enableWorker: false,
+              maxBufferLength: 30,
+              maxMaxBufferLength: 60,
+              backBufferLength: 30,
+              startPosition: start,
+            });
+            hls.on(Hls.Events.ERROR, (_event, data) => {
+              if (data.fatal) failVideo('Video akışı yüklenemedi. Bağlantınızı kontrol edip yeniden başlat düğmesiyle tekrar deneyin.');
+            });
+            hls.loadSource(url.href);
+            hls.attachMedia(mountedVideo);
+          }).catch(() => {
+            failVideo('Video oynatıcı bileşeni yüklenemedi. Bağlantınızı kontrol edip yeniden deneyin.');
+          });
+        }
       } else if (isFrame) {
         const frame = el('iframe', 'sp-frame');
         frame.title = slide.title || project.title || 'Gömülü sunum';

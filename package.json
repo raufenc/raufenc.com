@@ -4,10 +4,12 @@
   "type": "module",
   "scripts": {
     "test:server": "node --test tests/sunumlar-server.test.mjs",
-    "build:sunumlar-vendor": "esbuild node_modules/@vercel/blob/dist/client.js --bundle --format=esm --platform=browser --minify --outfile=sunumlar/vendor/blob-client.js"
+    "build:sunumlar-vendor": "esbuild node_modules/@vercel/blob/dist/client.js --bundle --format=esm --platform=browser --minify --outfile=sunumlar/vendor/blob-client.js",
+    "build:sunumlar-hls": "node -e \"const fs=require('node:fs'); fs.copyFileSync('node_modules/hls.js/dist/hls.min.mjs','sunumlar/vendor/hls.js'); fs.copyFileSync('node_modules/hls.js/LICENSE','sunumlar/vendor/hls.LICENSE');\""
   },
   "dependencies": {
-    "@vercel/blob": "2.8.2"
+    "@vercel/blob": "2.8.2",
+    "hls.js": "1.7.3"
   },
   "devDependencies": {
     "esbuild": "0.28.2"
