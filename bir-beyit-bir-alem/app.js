@@ -49,10 +49,10 @@ function card(p){
   if(v.note)body.append(el("p","source",v.note));
  }else {
   body.append(el("p","unavailable","Bu beytin okuma ve izah kaydı henüz eşleştirilmedi."));
-  if(p.written_source&&safeLink(p.written_source)){
-   const a=el("a","written-source","Hocamızın ilgili yazısı ↗");a.href=safeLink(p.written_source);a.target="_blank";a.rel="noopener noreferrer";body.append(a);
-   if(p.written_note)body.append(el("p","source",p.written_note));
-  }
+ }
+ if(p.written_source&&safeLink(p.written_source)){
+  const a=el("a","written-source","Hocamızın ilgili yazısı ↗");a.href=safeLink(p.written_source);a.target="_blank";a.rel="noopener noreferrer";body.append(a);
+  if(p.written_note)body.append(el("p","source",p.written_note));
  }
  return row;
 }
