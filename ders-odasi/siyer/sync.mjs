@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import {fileURLToPath} from 'node:url';
 import {compileLesson} from './compile-lesson.mjs';
 import {renderFrame} from './render-frames.mjs';
-const here=path.dirname(fileURLToPath(import.meta.url)), root=path.resolve(here,'../../..');
+const here=path.dirname(fileURLToPath(import.meta.url)), root=path.resolve(here,'../..');
 const data=JSON.parse(fs.readFileSync(path.join(here,'content-v2.json'),'utf8'));
 const check=process.argv.includes('--check'), errors=[];
 function write(rel,text){const f=path.join(root,rel);if(check){if(!fs.existsSync(f)||fs.readFileSync(f,'utf8')!==text)errors.push('Generated file differs: '+rel);}else{fs.mkdirSync(path.dirname(f),{recursive:true});fs.writeFileSync(f,text);}}
