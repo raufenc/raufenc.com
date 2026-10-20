@@ -72,7 +72,7 @@
     };
   }
 
-  if (grid) {
+  if (grid && !grid.children.length) {   // yalnız giriş sayfasının boş listesi; ders sayfalarında kartlar hazır gelir
     var frag = document.createDocumentFragment();
     HARFLER.forEach(function (h) {
       var b = document.createElement('button');
