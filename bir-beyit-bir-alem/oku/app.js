@@ -15,13 +15,15 @@
     cache: new Map(), touch: null, drag: null, resizing: 0,
   };
   const zoomLevels = [1, 1.5, 2, 3, 4];
-  const coverNames = {front: "Ön kapak", "inside-back": "Arka kapak içi", back: "Arka kapak"};
+  const coverNames = {front: "Ön kapak", intro: "Takdim", outro: "Dinleme rehberi", "inside-back": "Dinleme rehberi", back: "Arka kapak"};
   const spread = () => state.book?.spreads[state.index];
   const labelFor = (page) => page.kind === "body" ? `${page.number}. beyit` : (coverNames[page.kind] || page.label);
   const bound = (value, low, high) => Math.max(low, Math.min(high, value));
 
   function routeFor(page) {
     if (page.kind === "body") return `#beyit=${page.number}`;
+    if (page.kind === "intro") return "#sayfa=ilk";
+    if (page.kind === "outro" || page.kind === "inside-back") return "#sayfa=son";
     return `#kapak=${{front: "on", "inside-back": "arka-ic", back: "arka"}[page.kind] || "on"}`;
   }
 
@@ -32,7 +34,8 @@
       const found = state.book.spreads.findIndex((page) => page.kind === "body" && page.number === number);
       if (found !== -1) return found;
     }
-    const kind = {on: "front", "arka-ic": "inside-back", arka: "back"}[params.get("kapak")];
+    const kind = {ilk: "intro", son: "outro"}[params.get("sayfa")] ||
+      {on: "front", "arka-ic": "outro", arka: "back"}[params.get("kapak")];
     const found = state.book.spreads.findIndex((page) => page.kind === kind);
     return found === -1 ? 0 : found;
   }
@@ -112,7 +115,8 @@
   function updateControls() {
     const page = spread();
     ui.label.textContent = labelFor(page);
-    ui.poet.textContent = page.kind === "body" ? (page.poet || "") : "";
+    ui.poet.textContent = page.kind === "body" ? (page.poet || "") : [page.leftRole,page.rightRole].filter(Boolean).join(" · ");
+    ui.poet.classList.toggle("physical-role", page.kind === "intro" || page.kind === "outro");
     ui.jump.value = String(state.index);
     ui.progress.value = String(state.index);
     ui.progress.setAttribute("aria-valuetext", labelFor(page));
@@ -146,7 +150,7 @@
       ui.image.src = loadedImage.src;
       ui.image.alt = page.kind === "body"
         ? `${labelFor(page)}. ${page.poet || ""}. ${(page.lines || []).join(" / ")}`
-        : `${labelFor(page)} — Bir Beyit, Bir Âlem`;
+        : `${labelFor(page)} — Bir Beyit, Bir Âlem. ${[page.leftRole,page.rightRole].filter(Boolean).join(". ")}`;
       ui.image.width = page.width;
       ui.image.height = page.height;
       ui.image.hidden = false;
@@ -198,7 +202,7 @@
       ui.progress.max = String(book.spreads.length - 1);
       ui.jump.disabled = false;
       ui.progress.disabled = false;
-      await showPage(indexFromRoute(), {writeRoute: false, animate: false});
+      await showPage(indexFromRoute(), {writeRoute: true, animate: false});
     } catch {
       ui.loading.hidden = true;
       ui.stage.setAttribute("aria-busy", "false");
@@ -220,7 +224,7 @@
   ui.retry.addEventListener("click", () => state.book ? showPage(state.index) : loadBook());
   ui.image.addEventListener("dblclick", () => setZoom(state.zoom > 1 ? 1 : 2));
   window.addEventListener("hashchange", () => {
-    if (state.book) showPage(indexFromRoute(), {writeRoute: false});
+    if (state.book) showPage(indexFromRoute(), {writeRoute: true});
   });
 
   document.addEventListener("keydown", (event) => {
