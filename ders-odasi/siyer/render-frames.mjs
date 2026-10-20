@@ -300,7 +300,7 @@ function renderFrame(lesson, frame, index) {
       art+=P('M95 714 Q275 575 445 648 T760 560 T1037 483','none',paper,52)+P('M95 714 Q275 575 445 648 T760 560 T1037 483','none',ochre,5,'stroke-dasharray="9 13"');
       const allStops=[[169,668],[370,619],[571,653],[776,550],[982,510]],ps=Array.from({length:frame.labels.length},(_,i)=>allStops[Math.round(i*4/(frame.labels.length-1))]);
       ps.forEach((p,i)=>{art+=C(p[0],p[1],23,paper,accent,5)+T(p[0],p[1]+7,String(i+1),20,ink,700,'middle');});
-      art+=P('M420 494 L499 367 581 494 Z',accent,ink,4)+P('M471 494 L499 418 526 494 Z',paper,ink,3)+P('M400 494 H601','none',ochre,8);
+      if(Number(lesson.id)===27){art+=mountain(500,502,330,235)+mountain(650,505,260,175)+P('M443 500 Q490 360 540 500 Z',ink,ink,3)+P('M460 500 Q491 410 521 500 Z','#354844','none',0)+T(495,545,'Sevr mağarası',24,ink,700,'middle');}else art+=P('M420 494 L499 367 581 494 Z',accent,ink,4)+P('M471 494 L499 418 526 494 Z',paper,ink,3)+P('M400 494 H601','none',ochre,8);
       art+=palm(853,510,.7)+pot(120,558,.7)+R(625,701,148,34,ochre,8,ink,3)+R(645,685,108,20,sand,5,ink,2);
       anchors=ps;break;}
     case 'values':{
@@ -335,6 +335,6 @@ function renderFrame(lesson, frame, index) {
   const titleNode=E(title),desc=E('Şematik öğretim görseli. '+labels.join('. ')+'. '+String(frame.narration||''));
   const footer=String(lesson.date||'')+' · '+(frame.kind==='map'?'Konumlar yaklaşık, harita ölçekli değildir.':'Tarihî fotoğraf veya birebir mimari çizim değildir; şematik öğretim görselidir.');
   const svg='<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="'+uid+'title '+uid+'desc"><title id="'+uid+'title">'+titleNode+'</title><desc id="'+uid+'desc">'+desc+'</desc><defs><linearGradient id="'+grad+'" x1="0" y1="0" x2="0" y2="1"><stop stop-color="'+pale+'"/><stop offset="1" stop-color="#F8EBCD"/></linearGradient><linearGradient id="'+wood+'"><stop stop-color="#C79560"/><stop offset="1" stop-color="#E2BE80"/></linearGradient><filter id="'+shadow+'" x="-15%" y="-15%" width="130%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#193750" flood-opacity=".12"/></filter></defs>'+R(0,0,1600,900,'#F7F2E7',0)+R(28,27,1544,845,paper,28,'#D8CEBD',2)+R(80,48,9,17,accent,4)+T(104,62,'SİYER YOLCULUĞU · ÜNİTE '+lesson.module+' · BÖLÜM '+String(lesson.id).padStart(2,'0'),18,accent,700)+top+P('M80 194 H1520','none','#D9D0C0',2)+'<g transform="translate(0 50) scale(1 .82)">'+backdrop+art+connectors+cards+'</g>'+P('M80 805 H1520','none','#D9D0C0',2)+lines(80,834,footer,116,17,'#4F5C62',500,22)+T(1510,846,String(Number(index||0)+1).padStart(2,'0'),22,accent,700,'end')+'</svg>';
-  return {svg,hotspots};
+  return {svg:svg.replace(/-?\d+\.\d{4,}/g,m=>String(Math.round(Number(m)*1000)/1000)),hotspots};
 }
 export {renderFrame};

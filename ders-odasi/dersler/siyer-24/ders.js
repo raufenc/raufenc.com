@@ -164,22 +164,22 @@
           "vurgular": [
             {
               "id": "point-1",
-              "x": 160,
-              "y": 460.82,
+              "x": 395,
+              "y": 423.09999999999997,
               "r": 27,
               "etiket": "Hicretten önce"
             },
             {
               "id": "point-2",
-              "x": 550,
-              "y": 460.82,
+              "x": 738,
+              "y": 423.09999999999997,
               "r": 27,
               "etiket": "Tarih farklılıkları"
             },
             {
               "id": "point-3",
-              "x": 940,
-              "y": 460.82,
+              "x": 565,
+              "y": 607.6,
               "r": 27,
               "etiket": "Kavramları ayır"
             }
