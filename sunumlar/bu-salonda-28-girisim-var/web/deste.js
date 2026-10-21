@@ -147,7 +147,7 @@ Yapay zekâ bunu daha tehlikeli yaptı: ihtiyaç olmayan ürün artık bir hafta
 İkinci kelime, Ahmet Hocam'ın konusu: Deney. 2008, Dropbox ürünü açmadan üç dakikalık bir video yayınlıyor: "Böyle bir şey olsa kullanır mıydınız?" [TIKLA]
 Bekleme listesi bir gecede beş binden yetmiş beş bine. [TIKLA]
 Fabrikayı kurmadan tabelayı astılar: pahalı hatadan önce ucuz deney. [TIKLA]
-Peki bugün o tabelayı kim asıyor, kaça? Kendi kartımı açayım. [TIKLA]`,
+Peki bugün o tabelayı kim asıyor, kaça? [TIKLA]`,
     fon: fon("A08_tabela_kuyruk") + `<div class="perde-sol"></div>`,
     html: `${etiket("2 · Deney")}${karikatur("K06_pazar_arastirmasi", "", "PAZAR ARAŞTIRMASI", "Katılımcı: annem. Sonuç: <em>“çok güzel olmuş.”</em> n = 1", 0, 1, 420, 100, -2)}
       <div class="ab adim" data-a="1" style="left:0;top:0;width:1920px;height:1080px">${selam(0, "Ahmet Hocam'ın konusu: <b>Deney</b>")}
@@ -161,32 +161,19 @@ Peki bugün o tabelayı kim asıyor, kaça? Kendi kartımı açayım. [TIKLA]`,
         <span class="cip zum">KONUŞ</span><span class="cip zum">SOR</span><span class="cip zum">ÖN SİPARİŞ AL</span></div>
       <div class="ab adim" data-a="4" style="left:0;top:0;width:1920px;height:1080px;background:rgba(27,34,56,.45)"><div class="soru kart" style="padding:56px 80px;text-align:center;width:1300px"><span class="cip zum">2026</span><div class="baslik" style="font-size:92px;margin-top:28px">Bugün o tabelayı<br>kim asıyor, <em>kaça</em> asıyor?</div></div></div>` },
 
-  // 8 ─ DENEY · BENİM KARTIM (yapay zekâ = deneyin fiyatı)
-  { tur: "normal", bolum: 2, sure: 22, olcut: ["Konuya hâkimiyet (kendi kanıtı)", "Motivasyon ve ilgi çekicilik", "Akıcılık ve tutarlılık"],
-    not: `[kart açılır] Yirmi sekiz kartın biri benim. Dert: yedi dakika, yirmi yedi konu. Deney: bu sunum. [TIKLA]
-Bu ders bir deneydi; faturası ekranda: yirmi sekiz ikon, otuz sahne, iki film, bir ses; hepsi yapay zekâyla, bir gecede. Ben yazılımcı da değilim, grafiker de. [TIKLA]
-Yapay zekâ girişimin giriş ücretini düşürdü. [TIKLA]
-Ama sizin için kolaylaşan herkes için kolaylaştı. Teknoloji kopyalanır; insanı anlamak kopyalanmaz. O zaman insanı anlayalım: sıra sizde. [TIKLA]`,
+  // 8 ─ DENEY · KARTLARIN RESİMLERİ (yapay zekâ = deneyin fiyatı) + AMA
+  { tur: "normal", bolum: 2, sure: 24, olcut: ["Konuya hâkimiyet (kendi vakası)", "Akıcılık ve tutarlılık", "Motivasyon"],
+    not: `Cevabı yine kart setinden vereyim. Otuz altı padişah, otuz altı resim. [TIKLA] Eskiden bunun için bir illüstratör, bir ajans ve aylar gerekirdi; ben çizemem. Bu resimlerin hepsini yapay zekâyla, kendi masamda ürettim. [TIKLA]
+Yapay zekâ bana yetenek vermedi; parası ve çevresi olanların erişebildiği araçları masama getirdi. Girişimin giriş ücretini düşürdü. [TIKLA]
+Ama… sizin için kolaylaşan herkes için kolaylaştı. Teknoloji kopyalanır; insanı anlamak kopyalanmaz. O zaman insanı anlayalım: sıra sizde. [TIKLA]`,
     fon: fon("B07_atolye_masa") + `<div class="perde-sol"></div>`,
     html: `${etiket("2 · Deney · Yapay zekâ")}
-      <div class="ab adim" data-a="0" data-son="1" style="left:110px;top:230px;width:1000px">
-        <div class="kart" style="padding:40px 48px 30px 48px;width:980px;position:relative">
-          <img src="img/ikon/I14_girisim.png" style="position:absolute;right:30px;top:-40px;width:200px;height:200px;object-fit:contain">
-          <div style="display:flex;align-items:baseline;gap:20px"><span class="baslik" style="font-size:96px;color:var(--dom)">Girişim</span><span class="kucuk" style="font-size:26px">Rauf Enç</span></div>
-          ${[["dom","DERT","Yedi dakika ve yirmi yedi farklı konu."],["zum","DENEY","<b>Bu sunum.</b>"],["saf","DEĞER","Sizin aklınızda kalan tek bir fikir."]].map(([r,b,t])=>`<div style="display:grid;grid-template-columns:170px 1fr;gap:22px;align-items:center;padding:16px 0;border-top:2px solid rgba(27,34,56,.1)"><span class="cip ${r}" style="text-align:center;font-size:20px">${b}</span><div style="font:600 34px/1.3 Inter">${t}</div></div>`).join("")}
-        </div></div>
-      <div class="ab adim" data-a="1" style="left:110px;top:220px;width:860px">
-        <div class="baslik" style="font-size:104px;line-height:1">Deneyin<br><em>fiyatı düştü.</em></div>
-        <div style="display:flex;gap:14px;margin-top:30px;flex-wrap:wrap">
-          ${[["28","İKON"],["30+","SAHNE"],["2","FİLM"],["1","SES"],["1","GECE"]].map(([n,t])=>`<div class="kart" style="padding:14px 20px 10px;min-width:132px;text-align:center"><div class="baslik" style="font-size:66px;color:var(--dom)">${n}</div><div class="kucuk" style="font-size:18px;letter-spacing:.14em">${t}</div></div>`).join("")}</div>
-        <div class="adim govde" data-a="3" style="margin-top:28px;font-size:32px;line-height:1.45"><span style="color:rgba(27,34,56,.5)">On yıl önce:</span> bir ajans, bir stüdyo, bir seslendirme sanatçısı, aylar.<br><span style="color:rgba(27,34,56,.5)">Bugün:</span> <b>bir masa, bir gece.</b></div>
+      <div class="ab" style="left:110px;top:220px;width:860px"><div class="baslik" style="font-size:104px;line-height:1">36 padişah,<br>36 <em>resim.</em></div>
+        <div class="adim govde" data-a="1" style="margin-top:30px;font-size:36px;line-height:1.45"><span style="color:rgba(27,34,56,.5)">Eskiden:</span> illüstratör, ajans, aylar.<br><span style="color:rgba(27,34,56,.5)">Bugün:</span> <b>yapay zekâ ve bir masa.</b> Ben çizemem.</div>
         <div class="adim cak" data-a="2" style="margin-top:40px"><div class="vurgu" style="font-size:38px">Yapay zekâ girişimin <em>giriş ücretini</em> düşürdü.</div></div></div>
-      <div class="ab adim" data-a="1" style="left:1040px;top:120px;width:800px;display:grid;grid-template-columns:repeat(7,1fr);gap:12px">
-        ${window.FIKIRLER.map((f,i)=>`<div class="kart" style="aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:8px;animation:karoGel .5s both;animation-delay:${i*30}ms"><img src="${IK(i)}" style="width:86%;height:86%;object-fit:contain"></div>`).join("")}</div>
-      <div class="ab adim" data-a="1" style="left:1040px;top:600px;width:800px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        ${["A01_kapak_carsi","A03_kalem_leke","A07_kepenk","A09_tahtakale_1871","B01_terazi","B04_uc_tabela","D01_ahi_carsi","D09_dunya_dam"].map((g,i)=>`<img src="img/${g}.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:0 10px 26px rgba(27,34,56,.18);animation:karoGel .5s both;animation-delay:${900+i*60}ms">`).join("")}</div>
-      <div class="ab adim" data-a="1" style="left:1040px;top:840px;width:800px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-        ${["F1_22","F1_5","F2_12","F2_26"].map((g,i)=>`<div style="position:relative;animation:karoGel .5s both;animation-delay:${1400+i*60}ms"><img src="img/film/${g}.jpg" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;box-shadow:0 10px 26px rgba(27,34,56,.18)"><span class="cip dom" style="position:absolute;left:10px;bottom:10px;font-size:14px;padding:6px 12px">▶ FİLM</span></div>`).join("")}</div>
+      <div class="ab" style="left:1000px;top:120px;width:860px;height:860px">
+        ${[["osman_on",0,70,-12],["kanuni_on",150,30,-6],["fatih_on",300,10,0],["bayezid2_on",450,30,6],["gencosman_on",600,70,12]].map(([g,x,yy,r])=>`<img src="img/padisah/${g}.jpg" style="position:absolute;left:${x}px;top:${yy}px;width:250px;border-radius:14px;box-shadow:0 30px 70px rgba(27,34,56,.35);transform:rotate(${r}deg);transform-origin:50% 120%">`).join("")}
+        <div class="adim" data-a="1" style="position:absolute;left:0;right:0;top:560px;text-align:center"><span class="cip zum" style="font-size:26px;letter-spacing:.1em">İLLÜSTRATÖR YOK · AJANS YOK</span></div></div>
       <div class="ab adim" data-a="3" style="left:0;top:0;width:1920px;height:1080px;background:rgba(27,34,56,.55)"><div class="soru kart" style="padding:56px 80px;text-align:center;width:1400px"><span class="cip dom">AMA…</span><div class="baslik" style="font-size:84px;margin-top:28px;line-height:1.05">Sizin için kolaylaşan,<br>herkes için kolaylaştı.</div><div class="govde" style="margin-top:24px">Teknoloji kopyalanır. <b>İnsanı anlamak kopyalanmaz.</b></div></div></div>` },
   // 9 ─ SIRA SİZDE
   { tur: "normal", bolum: 0, sure: 24, kunye: false, olcut: ["Dinleyicilerle etkileşim", "Konuya hâkimiyet", "Kritik sorulara yanıt"],
