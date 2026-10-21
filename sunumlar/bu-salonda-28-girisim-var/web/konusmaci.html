@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>Konuşmacı Ekranı — 28 Girişim</title>
+<style>
+@font-face { font-family: "Anton"; src: url("font/Anton-Regular.ttf"); }
+@font-face { font-family: "Poppins"; src: url("font/Poppins-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "Poppins"; src: url("font/Poppins-ExtraBold.ttf"); font-weight: 800; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #12172A; color: #F7F0E1; font-family: "Poppins", sans-serif; font-weight: 600; height: 100vh; display: grid; grid-template-columns: 1.15fr 1fr; grid-template-rows: auto 1fr auto; gap: 14px; padding: 14px; }
+header { grid-column: 1 / 3; display: flex; align-items: center; gap: 24px; }
+#saat { font: 400 64px "Anton"; letter-spacing: 1px; min-width: 190px; }
+#durum { font: 800 24px "Poppins"; padding: 8px 18px; border-radius: 30px; background: #12846E; }
+#durum.geri { background: #E8452C; }
+#hedef { font-size: 20px; opacity: .75; }
+#no { margin-left: auto; font: 400 40px "Anton"; opacity: .8; }
+button { font: 800 18px "Poppins"; padding: 10px 18px; border-radius: 12px; border: 0; background: #F5A623; color: #1C2340; cursor: pointer; }
+button.ikincil { background: #2A3150; color: #F7F0E1; }
+.sol { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.cerceve { position: relative; background: #000; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; }
+.cerceve iframe { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; border: 0; transform-origin: 0 0; pointer-events: none; }
+.etiket { font: 800 14px "Poppins"; letter-spacing: 2px; opacity: .6; }
+#sonraki-k { width: 55%; }
+#not { background: #1C2340; border-radius: 12px; padding: 22px 26px; font-size: 25px; line-height: 1.5; white-space: pre-wrap; overflow: auto; min-height: 0; }
+#olcut { font-size: 15px; color: #F5A623; margin-bottom: 10px; letter-spacing: 1px; }
+footer { grid-column: 1 / 3; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+#konular { display: none; gap: 6px; flex-wrap: wrap; }
+#konular.acik { display: flex; }
+#konular button { background: #2A3150; color: #F7F0E1; font-size: 14px; padding: 6px 10px; }
+</style>
+</head>
+<body>
+<header>
+  <div id="saat">0:00</div><div id="durum">—</div><div id="hedef"></div>
+  <button id="basla">▶ Süreyi başlat</button><button class="ikincil" id="sifir">Sıfırla</button>
+  <div id="no"></div>
+</header>
+<div class="sol">
+  <div class="etiket">ŞU AN</div>
+  <div class="cerceve" id="simdi-k"><iframe id="simdi" src="index.html?yazdir=1&onizleme=1"></iframe></div>
+  <div class="etiket">SONRAKİ</div>
+  <div class="cerceve" id="sonraki-k"><iframe id="sonraki" src="index.html?yazdir=1&onizleme=1"></iframe></div>
+</div>
+<div id="not"></div>
+<footer>
+  <button class="ikincil" id="geri">← Geri</button><button id="ileri">İleri →</button>
+  <div id="konular"></div>
+</footer>
+<script src="fikirler.js"></script>
+<script src="deste.js"></script>
+<script>
+const S = window.SLAYTLAR, kanal = new BroadcastChannel("girisim28");
+const bas = []; let t = 0; S.forEach(s => { bas.push(t); t += s.sure; }); const TOPLAM = t;
+const mm = x => `${Math.floor(x / 60)}:${String(Math.floor(x % 60)).padStart(2, "0")}`;
+let i = 0, a = 0, n = S.length, t0 = null;
+const sim = document.getElementById("simdi"), son = document.getElementById("sonraki");
+function olcekle() { for (const f of [sim, son]) { const k = f.parentElement.clientWidth / 1920; f.style.transform = `scale(${k})`; } }
+addEventListener("resize", olcekle); setTimeout(olcekle, 50);
+function goster(fr, x, y) { try { fr.contentWindow.__deste.goster(x, y, false); } catch (e) {} }
+function ciz() {
+  const s = S[i];
+  document.getElementById("no").textContent = `${i + 1} / ${n} · adım ${a}/${s.adimSay ?? "?"}`;
+  document.getElementById("not").innerHTML = `<div id="olcut">${(s.olcut || []).join(" · ")}</div>` + (s.not || "").replace(/\[([^\]]+)\]/g, '<span style="color:#F5A623">[$1]</span>');
+  document.getElementById("hedef").textContent = `hedef ${mm(bas[i])}–${mm(bas[i] + s.sure)} · toplam ${mm(TOPLAM)}`;
+  goster(sim, i, a);
+  const ad = (sim.contentWindow.__deste && sim.contentWindow.__deste.adimlar()) || [];
+  if (a < (ad[i] || 0)) goster(son, i, a + 1); else goster(son, Math.min(n - 1, i + 1), 0);
+  document.getElementById("konular").classList.toggle("acik", !!s.ozel);
+}
+document.getElementById("konular").innerHTML = window.FIKIRLER.map((f, k) => `<button data-k="${k}">${f.konu}</button>`).join("");
+document.getElementById("konular").onclick = e => { const b = e.target.closest("button"); if (b) kanal.postMessage({ tur: "fikirAc", no: +b.dataset.k }); };
+kanal.onmessage = m => { const d = m.data; if (d.tur === "durum") { i = d.i; a = d.a; n = d.n; ciz(); if (t0 === null && (i > 0 || a > 0)) t0 = Date.now(); } };
+document.getElementById("ileri").onclick = () => kanal.postMessage({ tur: "ileri" });
+document.getElementById("geri").onclick = () => kanal.postMessage({ tur: "geri" });
+document.getElementById("basla").onclick = () => { t0 = Date.now(); };
+document.getElementById("sifir").onclick = () => { t0 = null; };
+addEventListener("keydown", e => { if (["ArrowRight", " ", "PageDown"].includes(e.key)) { e.preventDefault(); kanal.postMessage({ tur: "ileri" }); } if (["ArrowLeft", "PageUp"].includes(e.key)) kanal.postMessage({ tur: "geri" }); });
+setInterval(() => {
+  const g = t0 === null ? 0 : (Date.now() - t0) / 1000;
+  document.getElementById("saat").textContent = mm(g);
+  const d = document.getElementById("durum");
+  if (t0 === null) { d.textContent = "başlamadı"; d.className = ""; return; }
+  const fark = g - bas[i];
+  d.textContent = fark > S[i].sure ? `${Math.round(fark - S[i].sure)} sn GERİDE` : Math.abs(fark) < 3 ? "zamanında" : fark < 0 ? `${Math.round(-fark)} sn ileride` : "zamanında";
+  d.className = fark > S[i].sure ? "geri" : "";
+}, 250);
+sim.onload = () => setTimeout(() => { kanal.postMessage({ tur: "sor" }); olcekle(); }, 400);
+</script>
+</body>
+</html>

@@ -17,6 +17,18 @@ legacy.unshift({
   legacy: true, kind: "media"
 });
 legacy.unshift(...v2Projects);
+legacy.unshift({
+  "id": "bu-salonda-28-girisim-var",
+  "title": "Bu Salonda 28 Girişim Var",
+  "description": "Dert, deney ve değer üzerinden girişimcilik; 28 fikir kartı, iki kısa film ve adım adım ilerleyen etkileşimli sunum.",
+  "cover": "/sunumlar/bu-salonda-28-girisim-var/kapak.jpg",
+  "label": "ETKİLEŞİMLİ SUNUM",
+  "meta": "14 sahne · 28 fikir · 2 film",
+  "url": "/sunumlar/bu-salonda-28-girisim-var/",
+  "kind": "web",
+  "legacy": true,
+  "manifestURL": "/sunumlar/bu-salonda-28-girisim-var/project.json"
+});
 const demo = { id: "sahne-denemesi", title: "Sahne denemesi", description: "Sunum araçlarını tanıyın.", slides: [
   { id: "d1", type: "html", title: "Sahne sizin.", heading: "Sahne sizin.", body: "Bir fikir, bir hikâye, bir sonraki adım.", bullets: ["Ok tuşu veya boşluk ile bir sonraki adımı gösterin.", "L tuşuyla lazer işaretçiyi açın.", "F tuşuyla tam ekrana geçin."], notes: "Bu bir araç tanıtımıdır. Maddeler birer birer görünür. Sağ okla deneyin." },
   { id: "d2", type: "html", title: "Anlatırken işaretleyin.", heading: "Dikkati istediğiniz yere taşıyın.", body: "İşaretlemek, çizmek ve duraklamak da anlatımın bir parçası.", bullets: ["P: kalem · E: çizimleri temizle", "B: ekranı karart · N: konuşmacı notları", "R: slaydı yeniden başlat"], notes: "Bu slaytta kalemi açıp bir işaret çizin. Karartmayı ve not panelini deneyin." },
