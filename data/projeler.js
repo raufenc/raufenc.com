@@ -36,7 +36,7 @@ var PROJELER = [
   { emoji: '\u{2696}\u{FE0F}', title: 'Değer Oyunları', desc: 'Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.', tag: 'Oyun', href: '/oyunlar/', kategori: 'sinif', featured: true, video: 'oyunlar' },
   { emoji: '\u{1F54B}', title: 'Doğru Taraf', desc: 'Kurban kesmek farz mı, vacip mi? Kartı doğru cevaba kaydır: 10 kategori, yüzlerce soru, seviye atla, rekor kır.', tag: 'Oyun', href: '/dogru-taraf/', kategori: 'peygamberim', featured: true, video: 'dogru-taraf' },
   { emoji: '\u{1F50E}', title: 'Hızlı Hafız', desc: 'Deve neyi hatırlatır, karınca hangi kıssada? İpucundan doğru sembolü bul. 8 tezhip kartı, 72 âyet kaynaklı bilgi kartı — tek başına ya da 2-4 kişi tablet ve akıllı tahtada yarışın.', tag: 'Oyun', href: '/hizli-hafiz/', kategori: 'sinif', featured: true, video: 'hizli-hafiz' },
-  { emoji: '\u{1F518}', title: 'Basma!', desc: 'Tek düğme ve tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.', tag: 'Oyun', href: '/basma/', kategori: 'sinif' }
+  { emoji: '\u{1F518}', title: 'Basma!', desc: 'Tek düğme. İçindeki sözü oku; ışık sönmeden doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.', tag: 'Oyun', href: '/basma/', kategori: 'sinif' }
 ];
 
 var SINIF_ARACLARI = [];

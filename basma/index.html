@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Basma! — Rauf Enç</title>
-  <meta name="description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.">
+  <meta name="description" content="Tek düğme. İçindeki sözü oku; ışık sönmeden doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.">
   <link rel="canonical" href="https://raufenc.com/basma/">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -14,10 +14,10 @@
   <meta property="og:site_name" content="Rauf Enç">
   <meta property="og:url" content="https://raufenc.com/basma/">
   <meta property="og:title" content="Basma! — Rauf Enç">
-  <meta property="og:description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma. Kurallar birikir.">
+  <meta property="og:description" content="Tek düğme. İçindeki sözü oku; ışık sönmeden doğru sayıda bas ya da hiç basma. Kurallar birikir.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Basma! — Rauf Enç">
-  <meta name="twitter:description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma.">
+  <meta name="twitter:description" content="Tek düğme. İçindeki sözü oku; ışık sönmeden doğru sayıda bas ya da hiç basma.">
   <link rel="stylesheet" href="oyun.css">
 </head>
 <body>
@@ -27,7 +27,7 @@
         <p class="marka"><a href="/">raufenc.com</a></p>
         <h1 id="baslik">Basma!</h1>
         <p class="slogan">Oku, say, yetiş.</p>
-        <p class="anlat">Ortada tek bir düğme var. İçindeki talimatı oku. Halka tükenmeden doğru sayıda bas; bazı turlarda hiç basmamak gerekir. Fazla basarsan tur biter. Üste biriken kurallar, düğmedeki sözle çelişirse kural geçerlidir.</p>
+        <p class="anlat">Tek bir düğme var; söz onun içinde yazar. Işık sönmeden doğru sayıda bas. Bazı turlarda hiç basmamak gerekir. Fazla basarsan tur biter. Altta duran kural, düğmedeki sözle çelişirse kural geçerlidir.</p>
         <ul class="nasil">
           <li>Telefonda düğmeye dokun; bilgisayarda tıkla veya Boşluk tuşuna bas.</li>
           <li>Süre bitince basış sayın tutuyorsa sonraki seviyeye geçersin.</li>
@@ -50,36 +50,32 @@
     <section id="oyun" hidden aria-labelledby="oyun-baslik">
       <h1 id="oyun-baslik" class="sr">Basma!</h1>
       <header class="ust">
-        <button type="button" class="ust-btn" id="birak">Bırak</button>
-        <div class="ust-orta">
-          <p id="seviye-etiket">Seviye</p>
-          <p id="sure-yazi" aria-hidden="true">0 sn</p>
-        </div>
-        <button type="button" class="ust-btn" id="ses" aria-pressed="true">Ses açık</button>
+        <button type="button" class="hayalet" id="birak">Bırak</button>
+        <p id="seviye-etiket">Seviye</p>
+        <button type="button" class="hayalet" id="ses" aria-pressed="true">Ses açık</button>
       </header>
-      <p id="kural-not" hidden>Üstteki kural, düğmedeki sözle çelişirse kural geçerlidir.</p>
-      <ul id="kural-listesi" aria-label="Biriken kurallar" hidden></ul>
       <div class="sahne">
-        <div class="sarmal" id="sarmal">
-          <svg id="halka" viewBox="0 0 100 100" aria-hidden="true"></svg>
-          <button type="button" id="dugme" aria-describedby="bas-say">
+        <button type="button" id="dugme">
+          <span id="isik" aria-hidden="true"></span>
+          <span class="yuz">
             <span id="ikonlar"></span>
             <span id="metin"></span>
             <span id="sayilan" hidden></span>
-            <span id="bas-say">Basış: 0</span>
-          </button>
-        </div>
+            <span class="alt-yazi">
+              <span id="sure-yazi">0 sn</span>
+              <span id="bas-say">Basış: 0</span>
+            </span>
+          </span>
+        </button>
       </div>
-      <div class="alt">
-        <p id="ipucu">Düğmeye dokun, tıkla veya Boşluk tuşuna bas.</p>
-        <div id="son" hidden>
-          <h2 id="son-baslik"></h2>
-          <p id="son-etiket">Kaldığın seviye</p>
-          <p id="son-sayi"></p>
-          <p id="son-metin"></p>
-          <p id="son-rekor"></p>
-          <button type="button" id="basa-don">Başa dön</button>
-        </div>
+      <p id="kurallar" aria-label="Biriken kurallar" hidden></p>
+      <div id="son" hidden>
+        <h2 id="son-baslik"></h2>
+        <p id="son-etiket">Kaldığın seviye</p>
+        <p id="son-sayi"></p>
+        <p id="son-metin"></p>
+        <p id="son-rekor"></p>
+        <button type="button" id="basa-don">Başa dön</button>
       </div>
       <p id="canli" class="sr" aria-live="polite"></p>
     </section>

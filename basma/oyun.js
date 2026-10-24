@@ -4,7 +4,6 @@
 
   var mantik = window.BASMA_MANTIK;
   var paketler = window.BASMA_PAKETLER || [];
-  var DILIM = 28;
   var REKOR_ANAHTAR = "basma-rekor-v1";
   var SES_ANAHTAR = "basma-ses";
 
@@ -27,17 +26,13 @@
   var basSay = document.getElementById("bas-say");
   var seviyeEtiket = document.getElementById("seviye-etiket");
   var sureYazi = document.getElementById("sure-yazi");
-  var kuralListe = document.getElementById("kural-listesi");
-  var kuralNot = document.getElementById("kural-not");
-  var ipucu = document.getElementById("ipucu");
+  var kurallar = document.getElementById("kurallar");
   var son = document.getElementById("son");
   var sonBaslik = document.getElementById("son-baslik");
   var sonSayi = document.getElementById("son-sayi");
   var sonMetin = document.getElementById("son-metin");
   var sonRekor = document.getElementById("son-rekor");
   var canli = document.getElementById("canli");
-  var halka = document.getElementById("halka");
-  var sarmal = document.getElementById("sarmal");
   var rekorSatir = document.getElementById("rekorlar");
   var sesBtn = document.getElementById("ses");
 
@@ -53,7 +48,6 @@
   var sonZaman = 0;
   var gosterilenSn = -1;
   var bellek = { sonBas: 0, akil: null, kurallar: [], gorulen: {} };
-  var dilimler = [];
   var sesAcik = true;
   var audioCtx = null;
   var sonSayim = -1000;
@@ -146,42 +140,11 @@
     sesBtn.setAttribute("aria-label", sesAcik ? "Sesi kapat" : "Sesi aç");
   }
 
-  function halkaKur() {
-    if (dilimler.length) return;
-    var ns = "http://www.w3.org/2000/svg";
-    var grup = document.createElementNS(ns, "g");
-    grup.setAttribute("transform", "rotate(-90 50 50)");
-    var yaricap = 46;
-    var cevre = 2 * Math.PI * yaricap;
-    var dilim = cevre / DILIM;
-    var boy = dilim * 0.56;
-    for (var i = 0; i < DILIM; i++) {
-      var cember = document.createElementNS(ns, "circle");
-      cember.setAttribute("cx", "50");
-      cember.setAttribute("cy", "50");
-      cember.setAttribute("r", String(yaricap));
-      cember.setAttribute("fill", "none");
-      cember.setAttribute("stroke-width", "2.7");
-      cember.setAttribute("stroke-linecap", "round");
-      cember.setAttribute("stroke-dasharray", boy.toFixed(3) + " " + (cevre - boy).toFixed(3));
-      cember.setAttribute("stroke-dashoffset", (-i * dilim).toFixed(3));
-      cember.setAttribute("class", "dilim dolu");
-      grup.appendChild(cember);
-    }
-    halka.appendChild(grup);
-    dilimler = grup.querySelectorAll(".dilim");
-  }
-
-  function halkaCiz() {
+  function isikCiz() {
     var oran = sureMs <= 0 ? 0 : Math.max(0, kalan) / sureMs;
-    var gorunen = Math.ceil(oran * DILIM - 1e-9);
-    if (gorunen < 0) gorunen = 0;
-    if (gorunen > DILIM) gorunen = DILIM;
-    var gizlenen = DILIM - gorunen;
-    for (var i = 0; i < dilimler.length; i++) {
-      dilimler[i].classList.toggle("dolu", i >= gizlenen);
-    }
-    sarmal.classList.toggle("acil", durum === "oynuyor" && oran > 0 && oran < 0.3);
+    if (oran > 1) oran = 1;
+    dugme.style.setProperty("--oran", oran.toFixed(4));
+    dugme.classList.toggle("acil", durum === "oynuyor" && oran > 0 && oran < 0.3);
   }
 
   function uc(derece, uzun) {
@@ -257,16 +220,12 @@
   }
 
   function kurallariCiz() {
-    kuralListe.replaceChildren();
+    var yazilar = [];
     bellek.kurallar.forEach(function (kural) {
-      if (!kural.yazi) return;
-      var li = document.createElement("li");
-      li.textContent = kural.yazi;
-      kuralListe.appendChild(li);
+      if (kural.yazi) yazilar.push(kural.yazi);
     });
-    var varKural = kuralListe.children.length > 0;
-    kuralNot.hidden = !varKural;
-    kuralListe.hidden = !varKural;
+    kurallar.hidden = yazilar.length === 0;
+    kurallar.textContent = yazilar.join(" · ");
   }
 
   function basYazi() {
@@ -285,8 +244,7 @@
   }
 
   function kareyiTemizle() {
-    sarmal.classList.remove("hata", "tamam", "acil");
-    dugme.classList.remove("hata", "dogru", "uzun");
+    dugme.classList.remove("hata", "dogru", "uzun", "acil", "vurus");
     dugme.disabled = false;
   }
 
@@ -307,7 +265,6 @@
     sonZaman = 0;
     durum = "oynuyor";
     kareyiTemizle();
-    ipucu.hidden = false;
     son.hidden = true;
     oyun.dataset.seviye = String(indeks + 1);
     oyun.dataset.durum = "oynuyor";
@@ -324,7 +281,7 @@
     ikonCiz(seviye);
     kurallariCiz();
     basYazi();
-    halkaCiz();
+    isikCiz();
     sureGuncelle(true);
     duyur("Seviye " + (indeks + 1) + ". " + (seviye.metin || "") + (seviye.sayilan ? " " + seviye.sayilan : ""));
     raf = requestAnimationFrame(dongu);
@@ -352,7 +309,7 @@
     if (gecen < 0) gecen = 0;
     kalan -= gecen;
     if (kalan < 0) kalan = 0;
-    halkaCiz();
+    isikCiz();
     sureGuncelle(false);
     if (kalan <= 0) {
       var oldu = basilan >= hedef.min && basilan <= hedef.max;
@@ -379,7 +336,6 @@
     bellek.sonBas = basilan;
     gorulenIsle(seviyeler[indeks]);
     dugme.classList.add("dogru");
-    sarmal.classList.add("tamam");
     dugme.disabled = true;
     dogruSesi();
     indeks += 1;
@@ -408,15 +364,12 @@
     dugme.disabled = true;
     if (kazandi) {
       dugme.classList.add("dogru");
-      sarmal.classList.add("tamam");
       sonBaslik.textContent = "Tur tamam";
       document.getElementById("son-etiket").textContent = "Tamamlanan seviye";
       sonSayi.textContent = String(seviyeler.length);
       sonMetin.textContent = seviyeler.length + " seviyenin hepsini tamamladın.";
     } else {
       dugme.classList.add("hata");
-      sarmal.classList.add("hata");
-      halkaCiz();
       if (neden === "hata") hataSesi();
       sonBaslik.textContent = neden === "birak" ? "Turu bıraktın" : "Tur bitti";
       document.getElementById("son-etiket").textContent = "Kaldığın seviye";
@@ -425,7 +378,7 @@
       sonMetin.textContent = ulasilan + ". seviyede kaldın. Talimat: " + talimat + " Tamamlanan: " + tamamlanan + ".";
     }
     sonRekor.textContent = "Bu cihazda en iyi: " + enIyi + " / " + seviyeler.length;
-    ipucu.hidden = true;
+    isikCiz();
     son.hidden = false;
     duyur(sonBaslik.textContent + ". " + sonMetin.textContent);
     if (rekorSatir) rekorSatir.textContent = rekorYazi();
@@ -454,7 +407,6 @@
     bellek = { sonBas: 0, akil: null, kurallar: [], gorulen: {} };
     giris.hidden = true;
     oyun.hidden = false;
-    halkaKur();
     seviyeBaslat();
     dugme.focus({ preventScroll: true });
   }
@@ -516,5 +468,4 @@
 
   sesEtiket();
   paketDoldur();
-  halkaKur();
 })();

@@ -31,7 +31,7 @@
                  "asla"  ikon varken hiç basma
                  "cift"  o ikon düğmede çift sayıda ise adet, tek ise 0
                  "tek"   o ikon düğmede tek sayıda ise adet, çift ise 0
-             yazi: oyuncunun üstte gördüğü kısa cümle.
+             yazi: oyuncunun düğmenin altında gördüğü kısa cümle.
 
    Örnek:
    { metin: "Bir kez bas.", tam: 1, sure: 7 }
