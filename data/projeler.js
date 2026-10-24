@@ -1,7 +1,7 @@
 /**
  * Tek kaynak proje manifest'i + kategori meta.
  * Tum sayfalarda proje listesi, sayac ve kart icin bu dosya kullanilir.
- * Son guncelleme: 2026-10-07
+ * Son guncelleme: 2026-10-24
  */
 var PROJELER = [
   {"emoji": "🖼️", "title": "Nöroterbiye — Duvar Kâğıtları", "desc": "50 yazısız resim. Kaydır, seç; telefonuna veya bilgisayarına indir, paylaş.", "tag": "Koleksiyon", "href": "/noroterbiye/duvar-kagitlari/", "kategori": "noroterbiye", "video": "noroterbiye-duvar-kagitlari"},
@@ -35,7 +35,8 @@ var PROJELER = [
   { emoji: '\u{1F5FA}\u{FE0F}', title: 'Diyardan Diyara', desc: 'Üç Kolda On İki Devir. Osmanlı yol kolları haritasında gizli yol kartlarıyla sefere çık; her şehrin hangi padişahımızın devrinde katıldığını oynayarak öğren. Dijital + evde basılabilir set.', tag: 'Oyun', href: '/diyardan-diyara/', kategori: 'cihan-serisi', featured: true, video: 'diyardan-diyara' },
   { emoji: '\u{2696}\u{FE0F}', title: 'Değer Oyunları', desc: 'Ortaokul öğrencileri için oyunla ahlak eğitimi — Vicdan, Zaman Yolcusu, Vicdan Mahkemesi.', tag: 'Oyun', href: '/oyunlar/', kategori: 'sinif', featured: true, video: 'oyunlar' },
   { emoji: '\u{1F54B}', title: 'Doğru Taraf', desc: 'Kurban kesmek farz mı, vacip mi? Kartı doğru cevaba kaydır: 10 kategori, yüzlerce soru, seviye atla, rekor kır.', tag: 'Oyun', href: '/dogru-taraf/', kategori: 'peygamberim', featured: true, video: 'dogru-taraf' },
-  { emoji: '\u{1F50E}', title: 'Hızlı Hafız', desc: 'Deve neyi hatırlatır, karınca hangi kıssada? İpucundan doğru sembolü bul. 8 tezhip kartı, 72 âyet kaynaklı bilgi kartı — tek başına ya da 2-4 kişi tablet ve akıllı tahtada yarışın.', tag: 'Oyun', href: '/hizli-hafiz/', kategori: 'sinif', featured: true, video: 'hizli-hafiz' }
+  { emoji: '\u{1F50E}', title: 'Hızlı Hafız', desc: 'Deve neyi hatırlatır, karınca hangi kıssada? İpucundan doğru sembolü bul. 8 tezhip kartı, 72 âyet kaynaklı bilgi kartı — tek başına ya da 2-4 kişi tablet ve akıllı tahtada yarışın.', tag: 'Oyun', href: '/hizli-hafiz/', kategori: 'sinif', featured: true, video: 'hizli-hafiz' },
+  { emoji: '\u{1F518}', title: 'Basma!', desc: 'Tek düğme. İçindeki sözü oku; ışık sönmeden doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.', tag: 'Oyun', href: '/basma/', kategori: 'sinif' }
 ];
 
 var SINIF_ARACLARI = [];
@@ -53,7 +54,7 @@ var KATEGORILER = [
   { slug: 'tarih',         name: 'Tarih & Medeniyet',   desc: 'Padişahlar, evliyalar, âlimler ve kuruluş destanları.', renk: 'tarih',         boyut: 'wide' },
   { slug: 'dusunce',       name: 'Düşünce Pusulası',    desc: 'Test, mantık, bilim felsefesi ve davet mektupları.',    renk: 'dusunce',       boyut: 'med'  },
   { slug: 'ai',            name: 'Yapay Zekâ',          desc: 'Araç atlası ve beyin–YZ paralelleri.',                  renk: 'ai',            boyut: 'wide' },
-  { slug: 'sinif',         name: 'Sınıf Atölyesi',      desc: 'İHO Arapça oyunları, Değer Oyunları ve Maarif rehberi.',renk: 'sinif',         boyut: 'wide' },
+  { slug: 'sinif',         name: 'Sınıf Atölyesi',      desc: 'İHO Arapça oyunları, Değer Oyunları, Maarif rehberi ve Basma!.',renk: 'sinif',         boyut: 'wide' },
   { slug: 'cihan-serisi',  name: 'Cihan Serisi',        desc: 'Zar yok, tarih var — üç tarihî strateji oyunu.',  renk: 'cihan-serisi',  boyut: 'wide' }
 ];
 
