@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="ETKILESIMLI_VIDEO_S013_E001_GUNYAYI_SCORM"
+          version="1.0"
+          xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+          xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                              http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd
+                              http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+  <organizations default="ORG_S013_E001">
+    <organization identifier="ORG_S013_E001">
+      <title>Etkileşimli Video - S013-E001 - Sayfa 13 - Etkinlik 1 - يَوْم مَرْيَم (Gün Yayı)</title>
+      <item identifier="ITEM_S013_E001" identifierref="RES_S013_E001">
+        <title>Etkileşimli Video - S013-E001 - Sayfa 13 - Etkinlik 1 - يَوْم مَرْيَم (Gün Yayı)</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="RES_S013_E001" type="webcontent" adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+      <file href="style.css"/>
+      <file href="app.js"/>
+      <file href="art.js"/>
+      <file href="data.js"/>
+      <file href="scorm.js"/>
+      <file href="favicon.ico"/>
+      <file href="fonts/Arakom-Regular.ttf"/>
+      <file href="fonts/Arakom-Bold.ttf"/>
+      <file href="posters/p1.jpg"/>
+      <file href="posters/p2.jpg"/>
+      <file href="posters/p3.jpg"/>
+      <file href="posters/p4.jpg"/>
+      <file href="posters/p5.jpg"/>
+      <file href="vid/clips/s013_1w.mp4"/>
+      <file href="vid/clips/s013_2w.mp4"/>
+      <file href="vid/clips/s013_3w.mp4"/>
+      <file href="vid/clips/s013_4w.mp4"/>
+      <file href="vid/clips/s013_5w.mp4"/>
+    </resource>
+  </resources>
+</manifest>

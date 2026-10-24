@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#1b1f5e">
+<title>Etkileşimli Video - S013-E001 - Sayfa 13 - Etkinlik 1 - يَوْم مَرْيَم</title>
+<!-- İHO 7. Sınıf Arapça — "Gün Yayı" sürümü: izle → güneşi/sahneyi kullanarak cevapla → cevabı duy.
+     1 kişi: alıştırma · 2 kişi: hız yarışı. Video, metin, şık ve hareke orijinalle aynı. -->
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="favicon.ico">
+</head>
+<body data-unit="1">
+
+<!-- Yaşayan gökyüzü -->
+<div id="sky" aria-hidden="true">
+  <div id="stars"></div>
+  <div id="orb"><div class="sun"></div><div class="moon"></div></div>
+  <div id="clouds"></div>
+  <svg id="skyline" viewBox="0 0 1600 320" preserveAspectRatio="xMidYMax slice"></svg>
+</div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<a class="back-btn" id="backBtn" href="../" aria-label="رُجوع">←</a>
+<button class="snd-btn" id="sndBtn" aria-label="ses">♪</button>
+
+<div id="hud">
+  <div id="hudSolo"><div class="track" id="track"></div></div>
+  <div id="hudDuo">
+    <span class="pill a" id="pillA">⚡٠ · ✓٠</span>
+    <div class="track small" id="track2"></div>
+    <span class="pill b" id="pillB">⚡٠ · ✓٠</span>
+  </div>
+</div>
+
+<main id="stage" class="watch">
+  <div id="vframe">
+    <canvas id="ambi" width="64" height="36"></canvas>
+    <div class="vbox">
+      <video id="vid" preload="auto" playsinline></video>
+      <div id="cap"><span class="cq"></span><span class="ca"></span></div>
+      <button class="replay" id="replay" aria-label="↻">↻</button>
+      <button class="media-tap" id="tap" aria-label="▶">▶</button>
+    </div>
+  </div>
+
+  <section id="panel">
+    <div class="prompt" id="prompt"></div>
+    <div id="widget"></div>
+    <div class="feedback" id="feedback"></div>
+  </section>
+
+  <section id="duel">
+    <div class="prompt small" id="duelPrompt"></div>
+    <div class="lanes">
+      <div class="lane a"><div class="lane-head">👤 اللّاعِب ١</div><div class="tiles" id="optsA"></div></div>
+      <div class="lane b"><div class="lane-head">👤 اللّاعِب ٢</div><div class="tiles" id="optsB"></div></div>
+    </div>
+  </section>
+</main>
+
+<!-- Başlangıç -->
+<div id="startScreen" class="overlay show">
+  <div class="start-inner">
+    <h1 id="startTitle"></h1>
+    <div class="start-sub" id="startSub"></div>
+    <div class="polaroids" id="polaroids"></div>
+    <div class="mode-row">
+      <button class="mode-btn solo" id="btnSolo"><span class="emo">👤</span> لاعِب واحِد <small>تَدَرَّبْ وَحْدَك</small></button>
+      <button class="mode-btn duo" id="btnDuo"><span class="emo">👥</span> لاعِبان <small>تَسابَقا!</small></button>
+    </div>
+  </div>
+</div>
+
+<!-- Bitiş: 1 kişi -->
+<div id="endScreen" class="overlay">
+  <div class="end-card">
+    <h2 class="end-title">النَّتيجَة</h2>
+    <div class="end-meds" id="endMeds"></div>
+    <p class="end-score" id="finalScore"></p>
+    <p class="end-msg" id="endMsg"></p>
+    <div class="end-btns">
+      <button class="start-btn film" id="filmBtn">▶ <span id="filmLbl"></span></button>
+      <button class="start-btn" id="replayBtn">أَعِدْ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bitiş: 2 kişi -->
+<div id="endScreen2" class="overlay">
+  <div class="end-card">
+    <div class="end2-win" id="end2Win"></div>
+    <div class="end2-grid">
+      <div class="end2-card a" id="end2P1"></div>
+      <div class="end2-card b" id="end2P2"></div>
+    </div>
+    <button class="start-btn" id="replayBtn2">أَعِدْ</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="scorm.js"></script>
+<script src="art.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
