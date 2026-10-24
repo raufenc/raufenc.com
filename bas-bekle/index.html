@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10151a">
+  <meta name="description" content="Tek düğme. 25 tur. Basmak kolay; doğru anda durabilir misin? BAS / BEKLE, NöroTerbiye’nin dikkat ve hafıza oyunu.">
+  <meta property="og:title" content="BAS / BEKLE — Parmağından önce düşün.">
+  <meta property="og:description" content="Tek düğme, 25 küçük meydan okuma. Dikkat, hafıza, biraz da sabır.">
+  <meta property="og:type" content="website">
+  <title>BAS / BEKLE — NöroTerbiye</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="page-shell">
+    <header class="site-header">
+      <a href="./" class="brand" aria-label="Bas Bekle ana sayfa"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span><span>NöroTerbiye<small>OYUN ATÖLYESİ</small></span></a>
+      <div class="header-actions"><span class="edition">NO. 01 / BAS & BEKLE</span><button class="icon-button" id="sound-toggle" aria-label="Sesi aç" aria-pressed="false" title="Sesi aç"><span id="sound-icon">♪</span></button><button class="icon-button" id="help-button" aria-label="Nasıl oynanır?" title="Nasıl oynanır?">?</button></div>
+    </header>
+
+    <main id="home">
+      <div class="hero">
+        <section class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> PARMAĞINDAN ÖNCE DÜŞÜN.</div>
+          <h1>BAS<span class="title-dot">.</span><br><span class="outline-word">BEKLE</span><span class="title-dot">.</span></h1>
+          <p class="intro">Bir düğme. Biraz baskı.<br>Ve seni ters köşeye yatıran 25 talimat.</p>
+          <div class="hero-cta"><button class="primary" id="start-button">Meydan okumayı başlat <span aria-hidden="true">↗</span></button><span class="duration">25 TUR <span>·</span> YAKLAŞIK 4 DK.</span></div>
+          <p class="personal-best" id="home-best">İlk rekorun seni bekliyor.</p>
+        </section>
+        <div class="hero-machine" aria-label="Işıklı oyun düğmesi önizlemesi">
+          <div class="machine-top"><span><i class="live-dot"></i> SİSTEM HAZIR</span><span>● ● ○</span></div>
+          <div class="orbit-label label-top">DÜŞÜN → KARAR VER</div>
+          <div class="button-stage demo-stage">
+            <div class="stage-cross cross-a">+</div><div class="stage-cross cross-b">+</div><div class="stage-cross cross-c">+</div><div class="stage-cross cross-d">+</div>
+            <svg class="timer-svg demo-timer" viewBox="0 0 320 320" aria-hidden="true"><circle class="track" cx="160" cy="160" r="146"/><circle class="ticks" cx="160" cy="160" r="132"/><circle class="time-arc" cx="160" cy="160" r="146"/></svg>
+            <button class="big-button demo-button" id="demo-button" aria-label="Düğmeyi dene"><span class="button-face"><span class="button-symbol">↓</span><span class="button-label">BAS</span></span></button>
+          </div>
+          <div class="orbit-label label-bottom" id="demo-caption">BAZEN EN İYİ HAMLE, BEKLEMEKTİR.</div>
+          <div class="machine-bottom"><span>TEK DÜĞME / TAM DİKKAT</span><span class="waveform" aria-hidden="true">▂▅▃▇▂▅▂</span></div>
+          <div class="floating-note"><span>!</span> Refleksin başka,<br>kararın başka.</div>
+        </div>
+      </div>
+      <section class="setup" aria-label="Oyun ayarları">
+        <div class="setup-group"><span class="setting-label">01 <b>ROTANI SEÇ</b></span><div class="segmented" id="mode-options"><button data-mode="classic" class="selected" aria-pressed="true">Zihin parkuru</button><button data-mode="siyer" aria-pressed="false">Siyer rotası <span>✦</span></button></div></div>
+        <div class="setup-group"><span class="setting-label">02 <b>TEMPONU BUL</b></span><div class="segmented" id="tempo-options"><button data-tempo="calm" aria-pressed="false">Sakin</button><button data-tempo="flow" class="selected" aria-pressed="true">Akış</button><button data-tempo="rush" aria-pressed="false">Baskı</button></div></div>
+        <div class="setup-hint"><span class="tiny-ring" aria-hidden="true"></span><p id="setting-hint">Dengeli bir tempo.<br>Oku, karar ver, dokun.</p></div>
+      </section>
+      <div class="features"><span><i>01</i> Dikkatini topla</span><span><i>02</i> Aklında tut</span><span><i>03</i> Aceleye diren</span><button id="how-link">Nasıl oynanır? <span>↗</span></button></div>
+    </main>
+
+    <main id="game" hidden>
+      <div class="game-toolbar"><button class="text-button" id="pause-button">Ⅱ <span>Duraklat</span></button><span id="route-label">ZİHİN PARKURU</span><span id="lives" aria-label="3 hak">● ● ●</span></div>
+      <div class="progress-path" id="progress-path" aria-label="Tur ilerlemesi"></div>
+      <div class="arena">
+        <aside class="side-panel left-panel"><span class="small-label">PARKUR</span><strong id="round-number">01<span>/25</span></strong><div id="phase-name">Isınma</div><div class="phase-lines" id="phase-lines"></div><div class="rule-chip" id="rule-chip" hidden><span>✦ ÖZEL KURAL AKTİF</span><small>Hilali hatırla.</small></div></aside>
+        <section class="play-center" aria-label="Oyun alanı">
+          <div class="round-heading"><span class="round-type" id="round-type">ISINMA</span><span class="remaining" id="time-label">5.0 <small>SN</small></span></div>
+          <div class="instruction-area"><h2 id="instruction" aria-live="polite">Bir kez bas.</h2><div id="round-visual" class="round-visual"></div></div>
+          <div class="button-stage play-stage" id="play-stage">
+            <svg class="timer-svg" viewBox="0 0 320 320" aria-hidden="true"><circle class="track" cx="160" cy="160" r="146"/><circle class="ticks" cx="160" cy="160" r="132"/><circle class="time-arc" id="timer-arc" cx="160" cy="160" r="146"/></svg>
+            <button class="big-button" id="press-button" aria-label="Oyun düğmesi: bas"><span class="button-face"><span class="button-symbol" id="press-symbol">↓</span><span class="button-label" id="press-label">BAS</span></span></button>
+            <span class="press-count" id="press-count" aria-live="off">0 DOKUNUŞ</span>
+          </div>
+          <div id="round-feedback" class="round-feedback" aria-live="polite"></div>
+          <button class="primary next-button" id="next-button" hidden>Devam et <span>→</span></button>
+          <p class="input-hint" id="input-hint">Düğmeye dokun <span>veya</span> <kbd>BOŞLUK</kbd></p>
+        </section>
+        <aside class="side-panel right-panel"><span class="small-label">PUAN</span><strong id="score">0000</strong><div class="streak"><span class="streak-star">✳</span><b id="streak">0</b><small>DOĞRU SERİSİ</small></div><p class="arena-note">Hızlı olmak yetmez.<br>Ne zaman duracağını bil.</p></aside>
+      </div>
+    </main>
+
+    <main id="results" hidden>
+      <div class="result-layout"><div><div class="eyebrow"><span class="live-dot"></span> PARKUR SONUCU</div><h2 id="result-title">Kontrol<br>sende.</h2><p id="result-message"></p><div class="result-actions"><button id="retry-button" class="primary">Yeniden dene <span>↗</span></button><button id="home-button" class="secondary">Ana sayfa</button></div><button id="share-button" class="text-button">Sonucunu paylaş ↗</button><p id="share-status" role="status"></p></div><div class="result-card"><span class="small-label" id="result-mode"></span><div class="result-score" id="result-score">0</div><span class="small-label">TOPLAM PUAN</span><div class="result-stats"><div><b id="result-correct">0/25</b><span>DOĞRU TUR</span></div><div><b id="result-streak">0</b><span>EN İYİ SERİ</span></div></div><div class="result-map" id="result-map"></div><p id="record-message"></p></div></div>
+      <details class="review"><summary>Turlarına göz at <span>+</span></summary><div id="review-list"></div></details>
+    </main>
+
+    <footer><span>AZ HAREKET. ÇOK DİKKAT.</span><button id="about-button">NöroTerbiye / Oyun hakkında <span>↗</span></button></footer>
+  </div>
+  <dialog id="help-dialog"><button class="dialog-close" aria-label="Kapat">×</button><div class="eyebrow">25 TUR. TEK DÜĞME.</div><h2>Basmak kolay.<br>Durabilir misin?</h2><ol class="help-list"><li><b>Önce talimatı oku.</b><span>Her turda istenen dokunuş sayısı değişir. “Basma” deniyorsa bekle.</span></li><li><b>Halka bitene kadar dikkat.</b><span>Doğru sayıya ulaştığında dur. Fazladan bir dokunuş da hatadır.</span></li><li><b>Hatırla, ama kurala takılma.</b><span>Bazı kurallar birkaç tur sürer. Yeni talimat kuralı kaldırabilir.</span></li></ol><p class="dialog-note">3 hata hakkın var. Dokunmatik ekran, fare, Boşluk veya Enter ile oyna. Sekmeden ayrılırsan oyun duraklar. İlk denemede Sakin temposu iyi bir başlangıç.</p><button class="primary dialog-close-action">Hazırım <span>→</span></button></dialog>
+  <dialog id="pause-dialog"><div class="eyebrow">BİR NEFESLİK ARA</div><h2>Zaman<br>seninle durdu.</h2><p>Hazır olduğunda kaldığın yerden devam et.</p><button id="resume-button" class="primary">Devam et <span>→</span></button><button id="quit-button" class="text-button">Parkuru bırak ve ana sayfaya dön</button></dialog>
+  <dialog id="about-dialog"><button class="dialog-close" aria-label="Kapat">×</button><div class="eyebrow">NÖROTERBİYE / NO. 01</div><h2>Biraz oyun.<br>Biraz farkındalık.</h2><p>BAS / BEKLE; dikkatini, aklında tuttuklarını ve durma kararını oyun içinde sınayan özgün bir Türkçe mini oyundur. Puanlar yalnızca bu oyundaki performansını gösterir.</p><p>Tek düğmeli talimat oyunu fikri, Donitz’in <a href="https://donitz.itch.io/pressing-under-pressure" target="_blank" rel="noopener">Pressing Under Pressure</a> oyunundan ilham alır. Tasarım, yazılım ve Türkçe parkurlar bu oyun için sıfırdan hazırlanmıştır.</p><p>Siyer rotası kaynakları: <a href="https://islamansiklopedisi.org.tr/muhammed" target="_blank" rel="noopener">TDV – Muhammed</a>, <a href="https://islamansiklopedisi.org.tr/hira" target="_blank" rel="noopener">Hira</a> ve <a href="https://islamansiklopedisi.org.tr/hicret" target="_blank" rel="noopener">Hicret</a>.</p><p class="dialog-note">Rekorların yalnızca bu tarayıcıda saklanır. Hesap, reklam veya veri gönderimi yok. Ses isteğe bağlıdır.</p></dialog>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
