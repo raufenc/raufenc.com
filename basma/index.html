@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Basma! — Rauf Enç</title>
+  <meta name="description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma. Kurallar birikir. Dikkat turu ve kısa bir Siyer turu.">
+  <link rel="canonical" href="https://raufenc.com/basma/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:site_name" content="Rauf Enç">
+  <meta property="og:url" content="https://raufenc.com/basma/">
+  <meta property="og:title" content="Basma! — Rauf Enç">
+  <meta property="og:description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma. Kurallar birikir.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Basma! — Rauf Enç">
+  <meta name="twitter:description" content="Tek düğme, tükenen bir süre halkası. Talimatı oku; doğru sayıda bas ya da hiç basma.">
+  <link rel="stylesheet" href="oyun.css">
+</head>
+<body>
+  <main>
+    <section id="giris" aria-labelledby="baslik">
+      <div class="giris-kutu">
+        <p class="marka"><a href="/">raufenc.com</a></p>
+        <h1 id="baslik">Basma!</h1>
+        <p class="slogan">Oku, say, yetiş.</p>
+        <p class="anlat">Ortada tek bir düğme var. İçindeki talimatı oku. Halka tükenmeden doğru sayıda bas; bazı turlarda hiç basmamak gerekir. Fazla basarsan tur biter. Üste biriken kurallar, düğmedeki sözle çelişirse kural geçerlidir.</p>
+        <ul class="nasil">
+          <li>Telefonda düğmeye dokun; bilgisayarda tıkla veya Boşluk tuşuna bas.</li>
+          <li>Süre bitince basış sayın tutuyorsa sonraki seviyeye geçersin.</li>
+          <li>En iyi sonucun bu cihazda saklanır.</li>
+        </ul>
+        <div class="paketler">
+          <button type="button" class="paket asil" id="baslat-dikkat">
+            <strong>Dikkat turu</strong>
+            <span id="adet-dikkat">Talimat, hafıza ve biriken kurallar.</span>
+          </button>
+          <button type="button" class="paket" id="baslat-siyer">
+            <strong>Siyer turu</strong>
+            <span id="adet-siyer">Peygamber Efendimiz (sallallahü aleyhi ve sellem) ve sahih bilgiler.</span>
+          </button>
+        </div>
+        <p class="rekorlar" id="rekorlar"></p>
+      </div>
+    </section>
+
+    <section id="oyun" hidden aria-labelledby="oyun-baslik">
+      <h1 id="oyun-baslik" class="sr">Basma!</h1>
+      <header class="ust">
+        <button type="button" class="ust-btn" id="birak">Bırak</button>
+        <div class="ust-orta">
+          <p id="seviye-etiket">Seviye</p>
+          <p id="sure-yazi" aria-hidden="true">0 sn</p>
+        </div>
+        <button type="button" class="ust-btn" id="ses" aria-pressed="true">Ses açık</button>
+      </header>
+      <p id="kural-not" hidden>Üstteki kural, düğmedeki sözle çelişirse kural geçerlidir.</p>
+      <ul id="kural-listesi" aria-label="Biriken kurallar" hidden></ul>
+      <div class="sahne">
+        <div class="sarmal" id="sarmal">
+          <svg id="halka" viewBox="0 0 100 100" aria-hidden="true"></svg>
+          <button type="button" id="dugme" aria-describedby="bas-say">
+            <span id="ikonlar"></span>
+            <span id="metin"></span>
+            <span id="sayilan" hidden></span>
+            <span id="bas-say">Basış: 0</span>
+          </button>
+        </div>
+      </div>
+      <div class="alt">
+        <p id="ipucu">Düğmeye dokun, tıkla veya Boşluk tuşuna bas.</p>
+        <div id="son" hidden>
+          <h2 id="son-baslik"></h2>
+          <p id="son-etiket">Kaldığın seviye</p>
+          <p id="son-sayi"></p>
+          <p id="son-metin"></p>
+          <p id="son-rekor"></p>
+          <button type="button" id="basa-don">Başa dön</button>
+        </div>
+      </div>
+      <p id="canli" class="sr" aria-live="polite"></p>
+    </section>
+  </main>
+  <noscript><p>Basma! için JavaScript açık olmalıdır.</p></noscript>
+  <script src="mantik.js"></script>
+  <script src="levels.js"></script>
+  <script src="oyun.js"></script>
+</body>
+</html>
