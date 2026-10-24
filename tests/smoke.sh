@@ -14,6 +14,7 @@ urls=(
   "/"
   "/kalbinin-haritasi/"
   "/noroterbiye/"
+  "/noroterbiye/oyunlar/baski-altinda/"
   "/osmanlica/"
   "/muallimo/"
   "/ai-atlasi/"
