@@ -720,12 +720,12 @@
     // ── Oyunlar Önizleme ──
     (function() {
       const container = document.getElementById('oyun-preview');
-      const ikonlar = { 'GM01':'🔍','GM02':'🕵️','GM03':'⚡','GM04':'⚖️','GM05':'🪞','GM06':'🔄','GM07':'🏃','GM08':'🏰','GM09':'🎯','GM10':'🌙','GM12':'⛵','GM13':'🏅','GM14':'🤲' };
+      const ikonlar = { 'GM01':'🔍','GM02':'🕵️','GM03':'⚡','GM04':'⚖️','GM05':'🪞','GM06':'🔄','GM07':'🏃','GM08':'🏰','GM09':'🎯','GM10':'🌙','GM12':'⛵','GM13':'🏅','GM14':'🤲','GM15':'🔴' };
       const slugMap = {
         'GM01':'dopamin-dedektifi','GM02':'hile-avcisi','GM03':'odul-mu-beklenti-mi',
         'GM04':'ssg-dengesi','GM05':'ayna-noron-aynasi','GM06':'alternatifini-ikame-et',
         'GM07':'savsaklama-kacisi','GM08':'cevre-kalesi','GM09':'dogrudan-mi-dolayli-mi',
-        'GM10':'ramazan-ritmi','GM12':'nefs-gemisi','GM13':'rol-model-tahmini','GM14':'besli-secimler'
+        'GM10':'ramazan-ritmi','GM12':'nefs-gemisi','GM13':'rol-model-tahmini','GM14':'besli-secimler', 'GM15':'baski-altinda'
       };
       OYUNLAR_DATA.filter(o => o.id !== 'ID').slice(0, 4).forEach(o => {
         const slug = slugMap[o.id] || o.id.toLowerCase();

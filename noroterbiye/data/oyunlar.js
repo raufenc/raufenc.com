@@ -10,6 +10,16 @@ const OYUNLAR_DATA = [
   "slug": "CTA"
  },
  {
+  "id": "GM15",
+  "ad": "Baskı Altında",
+  "kitle": "Okumayan + Okuyan",
+  "amac": "Tek düğmeyle dikkat, dinleme, çalışan bellek ve dürtü kontrolünü çalıştırmak",
+  "tema": "Dikkat / dürtü kontrolü",
+  "mekanik": "Talimata göre bas ya da basma (28 bölüm)",
+  "sure": "5-8 dk",
+  "slug": "Sabır ve dikkat kartlarına geç"
+ },
+ {
   "id": "GM01",
   "ad": "Dopamin Dedektifi",
   "kitle": "Okumayan + Okuyan",
