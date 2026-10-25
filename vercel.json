@@ -319,6 +319,21 @@
   ],
   "redirects": [
     {
+      "source": "/iho7-gunyayi",
+      "destination": "/iho7-meryem/",
+      "permanent": true
+    },
+    {
+      "source": "/iho7-gunyayi/",
+      "destination": "/iho7-meryem/",
+      "permanent": true
+    },
+    {
+      "source": "/iho7-gunyayi/:path(.*)",
+      "destination": "/iho7-meryem/:path",
+      "permanent": true
+    },
+    {
       "source": "/noroterbiye/tanitim/noroterbiye-30s(.*)10.mp4",
       "destination": "/noroterbiye/tanitim/noroterbiye-30s.mp4",
       "permanent": true

@@ -1,6 +1,8 @@
 # İHO7 · Aynı içerik, üç sunum
 
-Bu klasör üç çalışan sistemi ve tek giriş sayfasını içerir. Ana yayın adresi `https://raufenc.com/iho7-gunyayi/` adresidir. Kullanıcı arayüzleri Arapçadır; bu belge bakım içindir.
+Bu klasör üç çalışan sistemi ve tek giriş sayfasını içerir. Ana yayın adresi `https://raufenc.com/iho7-meryem/` adresidir. Kullanıcı arayüzleri Arapçadır; bu belge bakım içindir.
+
+Eski `/iho7-gunyayi/` adresi ve alt yolları kalıcı olarak `/iho7-meryem/` adresine yönlenir. Ana sayfa üç büyük görsel, tek sözcüklü seçenek adları ve küçük sürüm etiketlerinden oluşur.
 
 ## Dosya düzeni
 
@@ -54,11 +56,11 @@ Akış: özgün videoyu oynat → videoyu küçültüp etkileşimi göster → c
 3. Olayların anlamı veya sırası değişirse Gün Yayı `data.js` üstverisi ve Görsel Keşif `META`/nokta eşlemeleri içerikle birlikte incelenir. Sadece ortak metni değiştirmek farklı bir etkinliğe otomatik uyarlama sağlamaz.
 4. Görsel Keşif sahneleri değiştirilirse masaüstü/dikey resimlerdeki noktalar ayrı kontrol edilir. Mevcut görsel üretim komutları proje kökündeki `qa/v3-image-prompts.json` ve `qa/v3-portrait-prompts.json` dosyalarındadır.
 5. Üç giriş bağlantısı, üç dönüş bağlantısı, videolar ve her motorun soru akışı tarayıcıda kontrol edilir. Telefon dikey/yatay görünümünde taşma olmamalıdır.
-6. Yayın, `raufenc/raufenc.com` deposunun güncel `main` dalı üzerinden Vercel `rauf-lab` projesine yapılır. Sadece `iho7-gunyayi/` kapsamındaki değişiklikler gönderilir. Diğer site bölümlerinin yeni commit'leri korunur; zorla push yapılmaz.
+6. Yayın, `raufenc/raufenc.com` deposunun güncel `main` dalı üzerinden Vercel `rauf-lab` projesine yapılır. Sadece `iho7-meryem/` kapsamındaki değişiklikler gönderilir; adres taşımasında kökteki `vercel.json` yönlendirmeleri de güncellenir. Diğer site bölümlerinin yeni commit'leri korunur; zorla push yapılmaz.
 
 ## Yerel çalıştırma
 
-Bu işin proje kökündeki `serve.mjs` mevcut Node.js ile çalıştırılır. Birleşik önizleme adresi `http://127.0.0.1:4173/komisyon-web/iho7-gunyayi/` olur. Sunucu Control+C ile kapanır.
+Bu işin proje kökündeki `serve.mjs` mevcut Node.js ile çalıştırılır. Birleşik önizleme adresi `http://127.0.0.1:4173/komisyon-web/iho7-meryem/` olur. Sunucu Control+C ile kapanır.
 
 Paket bağımsız taşınacaksa klasörün tamamı bir statik web sunucusuna konur. Giriş dosyası `index.html`'dir. Hesap, API anahtarı, harici veritabanı veya CDN gerekmez.
 
