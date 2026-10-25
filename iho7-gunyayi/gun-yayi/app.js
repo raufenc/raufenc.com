@@ -7,7 +7,7 @@
 'use strict';
 const AD=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
 const toAr=n=>String(n).split('').map(c=>AD[+c]??c).join('');
-const DIR='vid/clips/';
+const DIR='../vid/clips/';
 const $=s=>document.querySelector(s);
 const clamp=ART.clamp, mix=ART.mix;
 const ACT=(window.ACTIVITIES||[]).find(a=>a.id===new URLSearchParams(location.search).get('id'))||window.ACTIVITIES[0];
