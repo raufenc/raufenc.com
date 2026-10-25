@@ -9,6 +9,8 @@
      1 kişi: alıştırma · 2 kişi: hız yarışı. Video, metin, şık ve hareke orijinalle aynı. -->
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="../learning-ui.css">
+<link rel="stylesheet" href="responsive.css">
 </head>
 <body data-unit="1">
 
@@ -22,7 +24,7 @@
 <canvas id="fx" aria-hidden="true"></canvas>
 
 <a class="back-btn" id="backBtn" href="../" aria-label="رُجوع">←</a>
-<button class="snd-btn" id="sndBtn" aria-label="الصَّوْت">♪</button>
+<button class="snd-btn" id="sndBtn" aria-label="أَصْواتُ التَّشْجيع" aria-pressed="false">♪</button>
 
 <div id="hud">
   <div id="hudSolo"><div class="track" id="track"></div></div>
@@ -39,15 +41,15 @@
     <div class="vbox">
       <video id="vid" preload="auto" playsinline></video>
       <div id="cap"><span class="cq"></span><span class="ca"></span></div>
-      <button class="replay" id="replay" aria-label="↻">↻</button>
-      <button class="media-tap" id="tap" aria-label="▶">▶</button>
+      <button class="replay" id="replay" aria-label="إِعادَةُ الاسْتِماع">↻</button>
+      <button class="media-tap" id="tap" aria-label="تَشْغيل الفِيديو">▶</button>
     </div>
   </div>
 
   <section id="panel">
     <div class="prompt" id="prompt"></div>
     <div id="widget"></div>
-    <div class="feedback" id="feedback"></div>
+    <div class="feedback" id="feedback" role="status"></div>
   </section>
 
   <section id="duel">
@@ -67,7 +69,7 @@
     <div class="polaroids" id="polaroids"></div>
     <div class="mode-row">
       <button class="mode-btn solo" id="btnSolo"><span class="emo">👤</span> لاعِب واحِد <small>تَدَرَّبْ وَحْدَك</small></button>
-      <button class="mode-btn duo" id="btnDuo"><span class="emo">👥</span> لاعِبان <small>تَسابَقا!</small></button>
+      <button class="mode-btn duo" id="btnDuo"><span class="emo">👥</span> لاعِبان <small>تَدْريبٌ بِلا دَرَجَةٍ فَرْدِيَّة</small></button>
     </div>
   </div>
 </div>
@@ -94,6 +96,7 @@
       <div class="end2-card a" id="end2P1"></div>
       <div class="end2-card b" id="end2P2"></div>
     </div>
+    <p class="practice-note">تَدْريبٌ جَماعيّ. لا يُغَيِّرُ الدَّرَجَةَ الفَرْدِيَّة.</p>
     <button class="start-btn" id="replayBtn2">أَعِدْ</button>
   </div>
 </div>
@@ -103,5 +106,6 @@
 <script src="../scorm-legacy.js"></script>
 <script src="art.js"></script>
 <script src="app.js"></script>
+<script src="../learning-ui.js"></script>
 </body>
 </html>

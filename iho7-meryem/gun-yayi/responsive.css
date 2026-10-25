@@ -1,0 +1,54 @@
+#vid{object-fit:contain}
+#vframe{height:calc(var(--vh) + 48px);max-width:100%}
+.vbox{height:var(--vh)}
+#vframe>.learning-media{position:relative;z-index:3;margin-top:4px}
+#stage{padding-bottom:max(10px,env(safe-area-inset-bottom))}
+#stage:not(.ask) #panel{visibility:hidden}
+#hud{padding-inline:120px 64px}
+.mode-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:min(100%,650px);gap:16px}
+.mode-btn{min-width:0;padding-inline:12px}
+.mode-btn small{font-size:15px;line-height:1.5}
+.pola{width:min(16vw,calc(16 * var(--dvh)),170px)}
+.polaroids{max-width:90%}
+.lane{min-width:0}.tile{min-width:0;min-height:44px}.chip{min-height:44px}
+.practice-note{max-width:100%;text-align:center}
+#vframe .learning-media{gap:2px;padding-inline:2px}
+#vframe .learning-media button{flex:0 0 34px;min-width:34px}
+#vframe .learning-media input{min-width:24px}
+@media(max-aspect-ratio:1/1){
+ #hud{padding:58px 12px 0;min-height:0}
+ .track{padding:4px 8px}.med{width:clamp(28px,8vw,48px)}.link{width:clamp(8px,3vw,18px)}
+ #hudDuo{gap:8px}.pill{font-size:13px;padding:5px 8px}.track.small .med{width:24px}.track.small .link{width:6px}
+ #stage.ask #vframe{--vh:min(calc(20 * var(--dvh)),48vw)}
+ .start-inner{padding-top:36px}.mode-btn{font-size:26px}.mode-btn small{font-size:13px}
+ .start-sub{font-size:20px}.tile .ico{max-height:clamp(50px,calc(15 * var(--dvh)),180px)}
+ .tile .txt{font-size:20px}.lane{padding:7px;gap:5px}.lane .tiles{gap:6px}.lane .tile{padding:5px;min-height:44px}
+ .lane .tile .ico{max-height:40px}.lane .tile .txt{font-size:17px}.prompt.small{font-size:23px}
+ .end-card{padding:16px;gap:12px}.end2-card{font-size:21px;padding:10px 6px}
+}
+@media(max-height:500px) and (min-aspect-ratio:1/1){
+ #hud{min-height:52px;padding-top:6px}.med{width:32px}.link{width:13px}.track{padding:3px 8px}
+ #stage.ask{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);grid-template-rows:minmax(0,1fr);gap:14px;padding:6px 12px 10px;align-items:center}
+ #stage.ask #vframe{--vh:min(calc(40 * var(--dvh)),20vw);grid-column:1;grid-row:1;justify-self:center;width:100%}
+ #stage.ask #panel,#stage.ask #duel{grid-column:2;grid-row:1;width:100%;height:100%;gap:8px}
+ .prompt{font-size:23px;padding:.15em .5em}.prompt.small{font-size:21px}
+ .tile .ico,.street .tile .ico{max-height:calc(29 * var(--dvh))}.tile .txt{font-size:19px}.tile{padding:6px}
+ .chip{font-size:18px;padding:.3em .6em;min-height:36px}.dial{max-height:100%}
+ .lane .tiles{flex-direction:column;align-items:stretch;gap:4px}.lane .tile{flex-direction:row;justify-content:center;min-height:35px;padding:4px;gap:6px}.lane .tile .ico{max-height:27px;width:32px}.lane .tile .txt{font-size:17px}
+ .lane{padding:6px;gap:5px}.lane-head{font-size:14px}.lanes{gap:8px}
+ .learning-media{gap:2px}.learning-media button{flex-basis:34px;min-width:34px;font-size:15px}
+ .start-inner{gap:8px}.polaroids{margin:4px 0}.start-sub{font-size:19px}.mode-btn{font-size:23px;padding:9px}.mode-btn small{font-size:13px}
+ .end-card{gap:7px;padding:13px 22px}.end-title{font-size:26px}.end-meds .med{width:36px}.end-score{font-size:40px}.end-msg{font-size:20px}.start-btn{font-size:20px;padding:7px 20px}.practice-note{font-size:14px}
+}
+@media(max-height:650px) and (max-aspect-ratio:1/1){
+ #stage.duo.ask #vframe{--vh:calc(12 * var(--dvh));width:100%}
+ #stage.duo.ask .vbox{width:calc(var(--vh) * 1.7778);margin-inline:auto}
+ #stage.duo.ask .lanes{flex-direction:row;gap:8px}
+ #stage.duo.ask .lane .tiles{flex-direction:column;align-items:stretch;gap:5px}
+ #stage.duo.ask .lane .tile{flex-direction:row;justify-content:center;gap:3px;min-height:44px;padding:4px}
+ #stage.duo.ask .lane .tile .ico{width:24px;max-height:26px;flex-shrink:0}
+ #stage.duo.ask .lane .tile .txt{font-size:18px;line-height:1.35}
+ #stage.duo.ask .lane{padding:6px;gap:5px}
+ #stage.duo.ask .lane-head{font-size:14px}
+ #stage.duo.ask .prompt.small{font-size:21px}
+}

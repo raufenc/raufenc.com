@@ -8,8 +8,10 @@
 <!-- İHO 7. Sınıf Arapça — izle → cevapla → cevabı duy. 1 kişi: alıştırma · 2 kişi: hız yarışı -->
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="../learning-ui.css">
+<link rel="stylesheet" href="responsive.css">
 </head>
-<body>
+<body class="is-start">
 
 <a class="back-btn" id="backBtn" href="../" aria-label="رُجوع">←</a>
 
@@ -36,7 +38,7 @@
     <div class="start-sub" id="startSub"></div>
     <div class="mode-row">
       <button class="mode-btn solo" id="btnSolo"><span class="emo">👤</span> لاعِب واحِد <small>تَدَرَّبْ وَحْدَك</small></button>
-      <button class="mode-btn duo" id="btnDuo"><span class="emo">👥</span> لاعِبان <small>تَسابَقا!</small></button>
+      <button class="mode-btn duo" id="btnDuo"><span class="emo">👥</span> لاعِبان <small>تَدْريبٌ بِلا دَرَجَةٍ فَرْدِيَّة</small></button>
     </div>
   </div>
 
@@ -55,6 +57,7 @@
       <div class="end2-card a" id="end2P1"></div>
       <div class="end2-card b" id="end2P2"></div>
     </div>
+    <p class="practice-note">تَدْريبٌ جَماعيّ. لا يُغَيِّرُ الدَّرَجَةَ الفَرْدِيَّة.</p>
     <button class="start-btn" id="replayBtn2">أَعِدْ</button>
   </div>
 </div>
@@ -63,7 +66,7 @@
 <div id="qPanel">
   <div class="q-prompt" id="qPrompt"></div>
   <div class="opts" id="qOpts"></div>
-  <div class="feedback" id="qFeedback"></div>
+  <div class="feedback" id="qFeedback" role="status"></div>
 </div>
 
 <!-- 2 kişi düello paneli — paylaşımlı soru üstte, iki ayrı yarış paneli altta -->
@@ -84,5 +87,6 @@
 <script src="../content.js"></script>
 <script src="../scorm-legacy.js"></script>
 <script src="game.js"></script>
+<script src="../learning-ui.js"></script>
 </body>
 </html>

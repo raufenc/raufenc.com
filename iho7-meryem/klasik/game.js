@@ -32,7 +32,7 @@ const video=$('#vid'),
   dotsEl=$('#dots'), curIdxEl=$('#curIdx'), totEl=$('#totIdx'),
   pillA=$('#pillA'), pillB=$('#pillB'), curIdx2El=$('#curIdx2'), tot2El=$('#totIdx2');
 
-let mode=1, idx=0, busy=false;
+let mode=1, idx=0, busy=false, questionStarted=0;
 let correctCount=0;                              /* 1 kişi skoru */
 let P=[{wins:0,correct:0},{wins:0,correct:0}];   /* 2 kişi skoru */
 let ans=[null,null], firstCorrect=null;          /* tur durumu (2 kişi) */
@@ -94,7 +94,7 @@ function playClip(file){            /* src değiştir → canplay'de baştan son
     hideTapLayer();
     const finish=()=>{ if(done)return; done=true;
       video.removeEventListener('ended',finish);
-      video.removeEventListener('error',finish);
+
       video.removeEventListener('canplay',tryStartVideo);
       video.removeEventListener('loadedmetadata',tryStartVideo);
       hideTapLayer();
@@ -103,25 +103,25 @@ function playClip(file){            /* src değiştir → canplay'de baştan son
     video.setAttribute('playsinline','');
     video.setAttribute('webkit-playsinline','');
     video.addEventListener('ended',finish);
-    video.addEventListener('error',finish);
-    video.addEventListener('canplay',tryStartVideo);
-    video.addEventListener('loadedmetadata',tryStartVideo);
+
+    video.addEventListener('canplay',tryStartVideo,{once:true});
+
     video.src=DIR+file+VER;
     try{ video.load(); }catch(e){}
     tryStartVideo();                /* iPad Safari: kullanıcı dokunuşu içindeyken play isteğini hemen gönder */
-    setTimeout(function(){ if(!isTapLayerVisible()) finish(); },30000); /* güvenlik backstop */
+
   });
 }
 function shuffled(q){
-  const arr=q.options.map((t,i)=>({t,ok:i===q.correct}));
+  const arr=q.options.map((t,i)=>({t,index:i,ok:i===q.correct}));
   for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
   return arr;
 }
 
 /* ======================= BAŞLAT ======================= */
 function start(m){
-  document.body.classList.remove('is-finished');
-  document.body.classList.remove('is-finished');
+  document.body.classList.remove('is-finished','is-start');
+  if(m===1)window.EbaScorm.beginAttempt();
   mode=m; idx=0; correctCount=0;
   P=[{wins:0,correct:0},{wins:0,correct:0}];
   startScreen.classList.add('hide');
@@ -158,19 +158,20 @@ async function runQuestion(){
   showOptionsSolo(q);
 }
 function showOptionsSolo(q){
-  busy=false;
+  busy=false;questionStarted=Date.now();
   qPrompt.textContent=q.prompt||'';
   qOpts.innerHTML='';
   shuffled(q).forEach(o=>{
     const b=document.createElement('button');
     b.className='opt-btn'; b.textContent=o.t; b.dataset.correct=o.ok?'1':'0';
-    b.onclick=()=>chooseSolo(o.ok,b);
+    b.onclick=()=>chooseSolo(o.ok,b,o.index);
     qOpts.appendChild(b);
   });
   qPanel.classList.add('show');
 }
-async function chooseSolo(isCorrect,btn){
+async function chooseSolo(isCorrect,btn,option){
   if(busy)return; busy=true;
+  window.EbaScorm.record(idx,option,Date.now()-questionStarted);
   const q=ACT.questions[idx];
   qOpts.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
   if(isCorrect){
@@ -202,7 +203,7 @@ function finishSolo(){
     : pct>=.5 ?'جَيِّد، حاوِلْ مَرَّةً أُخْرى.'
     : 'تَدَرَّبْ ثُمَّ أَعِدْ.';
   endScreen.classList.add('show');
-  if(window.EbaScorm) window.EbaScorm.complete(Math.round((correctCount/n)*100));
+  window.EbaScorm.complete();
 }
 
 /* ======================= 2 KİŞİ (hız yarışı) ======================= */
@@ -275,7 +276,6 @@ async function maybeResolve2P(){
 }
 function finishDuo(){
   document.body.classList.add('is-finished');
-  document.body.classList.add('is-finished');
   duel.classList.remove('show');
   end2P1.innerHTML='<b>👤 اللّاعِب ١</b><br>⚡ '+toAr(P[0].wins)+' &nbsp; ✓ '+toAr(P[0].correct);
   end2P2.innerHTML='<b>👤 اللّاعِب ٢</b><br>⚡ '+toAr(P[1].wins)+' &nbsp; ✓ '+toAr(P[1].correct);
@@ -290,14 +290,14 @@ function finishDuo(){
   end2P1.classList.toggle('win',p1win);
   end2P2.classList.toggle('win',p2win);
   endScreen2.classList.add('show');
-  if(window.EbaScorm){ const best=Math.max(P[0].correct,P[1].correct); window.EbaScorm.complete(Math.round((best/ACT.questions.length)*100)); }
+  // Two-player practice never overwrites the individual LMS grade.
 }
 
 /* ---------- düğmeler ---------- */
 btnSolo.addEventListener('click',()=>start(1));
 btnDuo .addEventListener('click',()=>start(2));
-replayBtn .addEventListener('click',()=>{ endScreen .classList.remove('show'); startScreen.classList.remove('hide'); });
-replayBtn2.addEventListener('click',()=>{ endScreen2.classList.remove('show'); startScreen.classList.remove('hide'); });
+replayBtn .addEventListener('click',()=>{ endScreen .classList.remove('show'); startScreen.classList.remove('hide'); document.body.classList.add('is-start'); });
+replayBtn2.addEventListener('click',()=>{ endScreen2.classList.remove('show'); startScreen.classList.remove('hide'); document.body.classList.add('is-start'); });
 
 if(ACT) setup();
 })();

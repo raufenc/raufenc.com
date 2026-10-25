@@ -23,7 +23,7 @@ const ease={io:t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,out:t=>1-Math.pow(1-t,3)};
 function anim(ms,f,e=ease.io){return new Promise(res=>{const t0=performance.now();(function step(now){const k=clamp((now-t0)/ms);f(e(k),k);k<1?requestAnimationFrame(step):res();})(t0);});}
 
 /* ================= SES (WebAudio, dosyasız) ================= */
-let AC=null,muted=false;
+let AC=null,muted=true;
 function ac(){ if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}} if(AC&&AC.state==='suspended')AC.resume(); return AC; }
 function tone(f,t0,dur,type,vol,to){
   if(muted)return; const a=ac(); if(!a)return;
@@ -42,7 +42,8 @@ const sfx={
   fan(){[392,523,659,784,1047,1319,1568].forEach((f,i)=>tone(f,i*.11,.55,'triangle',.13));}
 };
 const buzz=ms=>{try{navigator.vibrate&&navigator.vibrate(ms);}catch(e){}};
-$('#sndBtn').addEventListener('click',e=>{muted=!muted;e.currentTarget.classList.toggle('off',muted);if(!muted)sfx.tap();});
+$('#sndBtn').classList.add('off');
+$('#sndBtn').addEventListener('click',e=>{muted=!muted;e.currentTarget.classList.toggle('off',muted);e.currentTarget.setAttribute('aria-pressed',String(!muted));if(!muted)sfx.tap();});
 
 /* ================= PARÇACIKLAR ================= */
 const fxc=$('#fx'),fxx=fxc.getContext('2d');let parts=[],fxRun=false;
@@ -120,11 +121,11 @@ tap.addEventListener('click',e=>{e.stopPropagation();tryStart();});
 function playClip(file){
   return new Promise(resolve=>{
     let done=false;tap.classList.remove('show');
-    const fin=()=>{if(done)return;done=true;['ended','error'].forEach(n=>video.removeEventListener(n,fin));video.removeEventListener('canplay',tryStart);tap.classList.remove('show');resolve();};
+    const fin=()=>{if(done)return;done=true;video.removeEventListener('ended',fin);video.removeEventListener('canplay',tryStart);tap.classList.remove('show');resolve();};
     video.playsInline=true;video.setAttribute('playsinline','');
-    video.addEventListener('ended',fin);video.addEventListener('error',fin);video.addEventListener('canplay',tryStart);
+    video.addEventListener('ended',fin);video.addEventListener('canplay',tryStart,{once:true});
     video.src=DIR+file;try{video.load();}catch(e){}tryStart();
-    setTimeout(()=>{if(!tap.classList.contains('show'))fin();},30000);
+
   });
 }
 function showCap(q){cap.querySelector('.cq').textContent=q.prompt;cap.querySelector('.ca').textContent=q.options[q.correct];cap.classList.add('show');}
@@ -214,7 +215,7 @@ function buildDial(q,sc,onPick){
 }
 
 /* ================= OYUN (1 KİŞİ) ================= */
-let mode=1,idx=0,busy=false,finished=false,correctCount=0;
+let mode=1,idx=0,busy=false,finished=false,correctCount=0,questionStarted=0;
 const widgetBox=$('#widget'),promptEl=$('#prompt'),fb=$('#feedback');
 const setPhase=p=>{stage.className=p+(mode===2?' duo':'');};
 let curWidget=null;
@@ -238,13 +239,14 @@ function showQuestion(q,sc){
   else curWidget=buildTiles(q,sc,(i,b)=>{const r=b.getBoundingClientRect();chooseSolo(i,{x:r.left+r.width/2,y:r.top+r.height/2});},{street:type==='town'});
   curWidget.type=type;
   widgetBox.innerHTML='';widgetBox.appendChild(curWidget.el);
-  setPhase('ask');replayBtn0.classList.add('on');busy=false;
+  setPhase('ask');replayBtn0.classList.add('on');busy=false;questionStarted=Date.now();
 }
 replayBtn0.addEventListener('click',()=>{if(busy||mode!==1)return;sfx.tap();playClip(ACT.questions[idx].watch);});
 
 async function chooseSolo(i,origin){
   if(busy)return;busy=true;
   const q=ACT.questions[idx],ok=i===q.correct;
+  window.EbaScorm.record(idx,i,Date.now()-questionStarted);
   curWidget.lock&&curWidget.lock();
   replayBtn0.classList.remove('on');
   if(curWidget.tiles){
@@ -276,7 +278,7 @@ function finishSolo(){
   $('#filmLbl').textContent=ACT.title;
   $('#endScreen').classList.add('show');
   if(pct===1){sfx.fan();rain(120);setTimeout(()=>rain(80),1400);}else if(pct>=.5){sfx.good();rain(40);}
-  if(window.EbaScorm)window.EbaScorm.complete(Math.round(pct*100));
+  window.EbaScorm.complete();
 }
 
 /* bütün günü film olarak izle */
@@ -340,11 +342,12 @@ function finishDuo(){
   else if(a.correct>b.correct){w1=true;msg='فازَ اللّاعِب ١. 🏆';}else if(b.correct>a.correct){w2=true;msg='فازَ اللّاعِب ٢. 🏆';}else msg='تَعادُل 🤝';
   $('#end2Win').textContent=msg;$('#end2P1').classList.toggle('win',w1);$('#end2P2').classList.toggle('win',w2);
   $('#endScreen2').classList.add('show');sfx.fan();rain(90);
-  if(window.EbaScorm)window.EbaScorm.complete(Math.round(Math.max(a.correct,b.correct)/N*100));
+  // Two-player practice never overwrites the individual LMS grade.
 }
 
 /* ================= BAŞLAT / DÜĞMELER ================= */
 function start(m){
+  if(m===1)window.EbaScorm.beginAttempt();
   ac();sfx.tap();mode=m;idx=0;correctCount=0;finished=false;results.fill(null);P=[{wins:0,correct:0},{wins:0,correct:0}];
   $('#startScreen').classList.remove('show');['#endScreen','#endScreen2'].forEach(s=>$(s).classList.remove('show'));
   stage.style.visibility='';$('#hud').style.visibility='';document.body.classList.remove('is-finished');
@@ -362,6 +365,8 @@ $('#btnDuo').addEventListener('click',()=>start(2));
 $('#replayBtn').addEventListener('click',()=>{ac();sfx.tap();toStart();});
 $('#replayBtn2').addEventListener('click',()=>{ac();sfx.tap();toStart();});
 $('#filmBtn').addEventListener('click',()=>{ac();sfx.tap();playFilm();});
+
+addEventListener('resize',()=>{if(mode===1&&!busy&&stage.classList.contains('ask')){const sc=SC.q[idx]||{};const desired=sc.type==='dial'&&innerWidth/innerHeight>=.95?'dial':sc.type==='town'?'town':'cards';if(curWidget&&curWidget.type!==desired){const started=questionStarted;showQuestion(ACT.questions[idx],sc);questionStarted=started;}}});
 
 /* açılış */
 document.body.dataset.unit=String(ACT.unit||'');document.title=ACT.title||document.title;
