@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1d1b16">
+<meta name="description" content="مشهد واحد: استمع إلى الطلب، ثم قدّم الطبق للصبي.">
+<title>قَدِّمْ طَلَبَهُ · مشهد تجريبي</title>
+<link rel="icon" href="../favicon.ico">
+<link rel="stylesheet" href="scene.css">
+<script src="../activities.js" defer></script><script src="scene.js" defer></script>
+</head>
+<body>
+<main id="scene" data-state="intro">
+  <div id="stage" class="stage">
+    <div id="camera" class="camera">
+      <video id="watch" class="film" playsinline preload="auto" poster="assets/source-w-0.webp" aria-label="الحوار الأصلي"></video>
+      <video id="answer" class="film answer" playsinline preload="auto" poster="assets/source-a-0.webp" aria-label="الإجابة الأصلية" hidden></video>
+      <div id="choices" class="choices" role="group" aria-label="اختر الطبق وقدّمه للصبي" inert>
+        <div id="landing" class="landing" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+  <div class="edge-shade" aria-hidden="true"></div>
+  <header class="scene-header"><a id="back" class="icon-button" href="../" aria-label="العودة إلى المقارنة"><svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a><span class="scene-label">المَطْعَمُ <span>١</span></span><button id="fullscreen" class="icon-button" aria-label="ملء الشاشة"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></header>
+  <button id="start" class="start" aria-label="استمع إلى الحوار"><span class="play-circle"><svg viewBox="0 0 24 24"><path d="m9 5 10 7-10 7Z"/></svg></span><span>اسْتَمِعْ</span></button>
+  <div id="message" class="message"><span id="eyebrow" class="eyebrow">حِوارٌ في المطعم</span><h1 id="question">ماذا يُريدُ؟</h1><p id="hint">استمع إلى الطلب، ثم قدّمه.</p></div>
+  <footer class="scene-controls">
+    <button id="replay" class="icon-button" aria-label="أعد الاستماع" hidden><svg viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 9M4 3v6h6"/></svg></button>
+    <div class="film-progress" aria-hidden="true"><span id="film-progress"></span></div>
+    <button id="play-pause" class="icon-button" aria-label="إيقاف مؤقت" hidden><svg viewBox="0 0 24 24"><path id="play-pause-shape" d="M9 5v14M15 5v14"/></svg></button>
+  </footer>
+  <div id="media-error" class="media-error" role="alert" hidden><p>تعذّر تشغيل الفيديو.</p><button id="retry" class="retry">أعد المحاولة</button></div>
+  <p class="sr-only" id="announce" aria-live="polite"></p>
+</main>
+</body>
+</html>
