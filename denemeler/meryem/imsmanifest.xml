@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest identifier="IHO7_S013_KESIF_GUN_YAYI_KLASIK" version="2.0" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+<metadata><schema>ADL SCORM</schema><schemaversion>1.2</schemaversion></metadata>
+<organizations default="ORG_S013"><organization identifier="ORG_S013"><title>يَوْمُ مَرْيَمَ · ثَلاثَةُ بَدائِل</title>
+<item identifier="ITEM_kesif" identifierref="RES_kesif" isvisible="true"><title>عالَمُ مَرْيَم</title></item>
+<item identifier="ITEM_gun_yayi" identifierref="RES_gun_yayi" isvisible="true"><title>مَسارُ اليَوْم</title></item>
+<item identifier="ITEM_klasik" identifierref="RES_klasik" isvisible="true"><title>يَوْمُ مَرْيَمَ</title></item>
+</organization></organizations><resources>
+<resource identifier="RES_kesif" type="webcontent" adlcp:scormtype="sco" href="kesif/index.html">
+<file href="kesif/app.js"/>
+<file href="kesif/assets/day-journey-portrait.webp"/>
+<file href="kesif/assets/day-journey.webp"/>
+<file href="kesif/assets/frame-1.webp"/>
+<file href="kesif/assets/frame-2.webp"/>
+<file href="kesif/assets/frame-3.webp"/>
+<file href="kesif/assets/frame-4.webp"/>
+<file href="kesif/assets/frame-5.webp"/>
+<file href="kesif/assets/friends-courtyard.webp"/>
+<file href="kesif/assets/match-house-portrait.webp"/>
+<file href="kesif/assets/match-house.webp"/>
+<file href="kesif/assets/morning-world.webp"/>
+<file href="kesif/index.html"/>
+<file href="kesif/integration.css"/>
+<file href="kesif/responsive.css"/>
+<file href="kesif/scenes.css"/>
+<file href="kesif/scorm.js"/>
+<file href="kesif/style.css"/>
+<dependency identifierref="RES_COMMON"/>
+</resource>
+<resource identifier="RES_gun_yayi" type="webcontent" adlcp:scormtype="sco" href="gun-yayi/index.html">
+<file href="gun-yayi/app.js"/>
+<file href="gun-yayi/art.js"/>
+<file href="gun-yayi/data.js"/>
+<file href="gun-yayi/index.html"/>
+<file href="gun-yayi/responsive.css"/>
+<file href="gun-yayi/style.css"/>
+<dependency identifierref="RES_COMMON"/>
+</resource>
+<resource identifier="RES_klasik" type="webcontent" adlcp:scormtype="sco" href="klasik/index.html">
+<file href="klasik/game.js"/>
+<file href="klasik/index.html"/>
+<file href="klasik/responsive.css"/>
+<file href="klasik/style.css"/>
+<dependency identifierref="RES_COMMON"/>
+</resource>
+<resource identifier="RES_COMMON" type="webcontent" adlcp:scormtype="asset">
+<file href="adlcp_rootv1p2.xsd"/>
+<file href="content.js"/>
+<file href="favicon.ico"/>
+<file href="fonts/Arakom-Bold.ttf"/>
+<file href="fonts/Arakom-Regular.ttf"/>
+<file href="ims_xml.xsd"/>
+<file href="imscp_rootv1p1p2.xsd"/>
+<file href="imsmd_rootv1p2p1.xsd"/>
+<file href="index.html"/>
+<file href="learning-ui.css"/>
+<file href="learning-ui.js"/>
+<file href="portal.css"/>
+<file href="posters/p1.jpg"/>
+<file href="posters/p2.jpg"/>
+<file href="posters/p3.jpg"/>
+<file href="posters/p4.jpg"/>
+<file href="posters/p5.jpg"/>
+<file href="preview/gun-yayi.webp"/>
+<file href="preview/kesif.webp"/>
+<file href="preview/klasik.webp"/>
+<file href="scorm-legacy.js"/>
+<file href="vid/clips/s013_1w.mp4"/>
+<file href="vid/clips/s013_2w.mp4"/>
+<file href="vid/clips/s013_3w.mp4"/>
+<file href="vid/clips/s013_4w.mp4"/>
+<file href="vid/clips/s013_5w.mp4"/>
+</resource>
+</resources></manifest>

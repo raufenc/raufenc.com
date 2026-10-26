@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#183f37">
+  <meta name="description" content="حوار واحد، وتجربتان. شاهد النشاط الأصلي أو جرّب المائدة التفاعلية.">
+  <title>مائدة الأصدقاء · الأصلي والجديد</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="comparison.css">
+  <script src="comparison.js" defer></script>
+</head>
+<body>
+  <main id="selection" class="selection">
+    <header class="intro"><span class="brand"><a href="../" aria-label="العودة إلى التجارب" style="margin-left:12px">↩</a><span aria-hidden="true">◎</span> مائدة الأصدقاء</span><h1>ماذا تَتَذَكَّرُ؟</h1><p>حِكايَةٌ واحِدَة · تَجْرِبَتان</p></header>
+    <div class="choices">
+      <a id="choose-new" class="choice new" href="#new">
+        <div class="picture"><img src="yeni/assets/courtyard.webp" alt="أربعة أصدقاء حول المائدة" width="1672" height="941"><span class="picture-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 13V5a2 2 0 0 1 4 0v7-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 5-4 6-7 6-2 0-4-1-6-4l-3-4c-1-2 1-3 2-2l2 1Z"/></svg></span></div>
+        <div class="choice-caption"><div><h2>الجديد</h2><p>أَدِرِ المائِدَة</p></div><span class="arrow" aria-hidden="true">←</span></div>
+      </a>
+      <a id="choose-old" class="choice original" href="#original">
+        <div class="picture"><img src="yeni/assets/s028_1w.webp" alt="مشهد من الفيديو الأصلي" width="854" height="480"><span class="picture-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></svg></span></div>
+        <div class="choice-caption"><div><h2>الأصلي</h2><p>شاهِد واختر</p></div><span class="arrow" aria-hidden="true">←</span></div>
+      </a>
+    </div>
+    <footer class="selection-footer"><span>الفيديو نفسه · الأسئلة نفسها</span><span class="page-number">٢٨</span></footer>
+  </main>
+  <section id="viewer" class="viewer" aria-label="مقارنة التجربتين" hidden>
+    <header class="viewer-bar">
+      <a id="back" class="back" href="#" aria-label="العودة إلى الاختيار"><svg viewBox="0 0 24 24"><path d="M10 4H4v16h6m4-12 4 4-4 4M8 12h12"/></svg><span>الاختيار</span></a>
+      <nav class="switcher" aria-label="اختر التجربة"><a id="switch-new" href="#new">الجديد</a><a id="switch-original" href="#original">الأصلي</a></nav>
+      <span class="viewer-brand" aria-hidden="true">◎</span>
+    </header>
+    <div id="frame-host" class="frame-host"></div>
+  </section>
+  <noscript><p class="no-script">اختر التجربة: <a href="yeni/">الجديد</a> · <a href="klasik/">الأصلي</a></p></noscript>
+</body>
+</html>

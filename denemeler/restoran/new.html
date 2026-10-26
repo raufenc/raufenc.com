@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#153f39">
+  <meta name="description" content="استمع إلى الحوار، وحضّر الطلب على مائدة تفاعلية.">
+  <title>على المائدة · ماذا تريد؟</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23153f39'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23efc378' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='10' fill='none' stroke='%23efc378' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="activities.js"></script><script defer src="scorm.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+ <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M20 12H4m6-6-6 6 6 6"/></symbol>
+ <symbol id="i-replay" viewBox="0 0 24 24"><path d="M4 9a8 8 0 1 1 1 9M4 3v6h6"/></symbol>
+ <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11H3Zm6 11v-8h6v8"/></symbol>
+ <symbol id="i-full" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+ <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 6"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21 3.5 12.5C-2 6 6-1 12 6c6-7 14 0 8.5 6.5Z"/></symbol>
+ <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5a2 2 0 0 1 4 0v7-3a2 2 0 0 1 4 0v3-1a2 2 0 0 1 4 0v5c0 5-4 6-7 6-2 0-4-1-6-4l-3-4c-1-2 1-3 2-2l2 1Z"/></symbol>
+</defs></svg>
+<main id="app">
+ <section id="home" class="home" aria-labelledby="home-title">
+  <div class="home-shade"></div>
+  <div class="home-top"><span class="brand"><span class="brand-mark">◎</span> على المائدة</span><button class="round full" aria-label="ملء الشاشة"><svg><use href="#i-full"/></svg></button></div>
+  <div class="home-copy"><span class="eyebrow">اِسْمَعْ · حَضِّرْ · اِخْتَرْ</span><h1 id="home-title">ماذا<br>تُريدُ؟</h1><p>حِوارٌ صغير… وتجربةٌ على المائدة.</p><button id="start" class="primary">ابدأ التجربة <svg><use href="#i-arrow"/></svg></button><button id="help" class="text-button">كيف ألعب؟</button></div>
+  <div class="hero-meal" aria-hidden="true"><div class="linen"></div><div class="food food-0"></div><span class="tiny-herb">✦</span></div>
+  <span class="home-caption">٤ مواقف · مِنَ الحوار إلى الحياة</span>
+ </section>
+ <section id="play" class="play" hidden aria-labelledby="question">
+  <header class="topbar"><button id="home-btn" class="round" aria-label="الصفحة الرئيسية"><svg><use href="#i-home"/></svg></button><span class="brand">على المائدة</span><div id="progress" class="progress" aria-label="التقدم"></div><button class="round full" aria-label="ملء الشاشة"><svg><use href="#i-full"/></svg></button></header>
+  <div class="question-head"><div><span id="chapter" class="eyebrow"></span><h2 id="question" tabindex="-1"></h2></div><button id="listen" class="listen"><svg><use href="#i-replay"/></svg><span>أعد الاستماع</span></button></div>
+  <div id="stage" class="stage"><div class="stage-wash"></div><div id="interaction" class="interaction"></div></div>
+  <footer class="actionbar"><div class="guidance"><svg><use href="#i-hand"/></svg><span id="hint" role="status" aria-live="polite"></span></div><button id="confirm" class="primary" disabled>تأكيد الطلب <svg><use href="#i-check"/></svg></button></footer>
+ </section>
+ <section id="result" class="result" hidden aria-labelledby="result-title"><div class="receipt"><div class="receipt-seal">✓</div><span class="eyebrow">على المائدة</span><h1 id="result-title" tabindex="-1">اكتمل الطلب!</h1><div id="score" class="score"></div><p class="score-label">نتيجة الإجابات الأولى</p><ol id="receipt-lines"></ol><button id="restart" class="primary">تجربة جديدة <svg><use href="#i-replay"/></svg></button><button id="back-home" class="text-button">الصفحة الرئيسية</button></div></section>
+</main>
+<dialog id="video-dialog" class="video-dialog" aria-labelledby="video-title"><div class="video-card"><header><div><span id="video-kicker" class="eyebrow">استمع إلى الحوار</span><h2 id="video-title"></h2></div><button id="video-close" class="round" aria-label="العودة إلى المائدة"><svg><use href="#i-close"/></svg></button></header><div class="video-frame"><video id="video" playsinline preload="metadata" controls controlslist="nodownload" aria-label="الفيديو الأصلي"></video><div id="video-error" class="video-error" hidden><p>تعذّر تشغيل الفيديو.</p><button id="retry-video" class="primary">حاول مرّة أخرى</button></div></div><footer><span id="video-note">استمع جيدًا، ثم حضّر الطلب.</span><button id="video-next" class="primary" disabled>إلى المائدة <svg><use href="#i-arrow"/></svg></button></footer></div></dialog>
+<dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title"><button id="help-close" class="round close" aria-label="إغلاق"><svg><use href="#i-close"/></svg></button><span class="eyebrow">على المائدة</span><h2 id="help-title">أنتَ تُحضّر الطلب.</h2><ol><li><b>١</b><span>استمع إلى الحوار.</span></li><li><b>٢</b><span>حرّك الطبق أو الإبريق، واضبط درجة المحبّة.</span></li><li><b>٣</b><span>أكّد اختيارك، واستمع إلى الإجابة.</span></li></ol><p>يمكنك السحب، أو الاختيار ثم لمس المكان. تعمل الأزرار بلوحة المفاتيح أيضًا.</p><button id="help-start" class="primary">لنبدأ <svg><use href="#i-arrow"/></svg></button></dialog>
+<div id="save-warning" class="save-warning" role="alert" hidden>لم تُحفظ النتيجة في نظام التعلّم. أعد المحاولة أو أخبر معلّمك.</div>
+<div id="announcement" class="sr-only" aria-live="polite"></div>
+</body></html>

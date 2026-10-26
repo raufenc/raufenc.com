@@ -1,0 +1,13 @@
+.fullscreen-btn{display:grid}
+.app-frame{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right))}
+.header-tools{flex-shrink:0}
+.brand{min-width:0}
+.scene-pin{min-width:32px!important;min-height:32px!important}
+@media(max-width:420px){.brand-symbol{display:none}.brand{font-size:19px}.brand small{font-size:10px}.header-tools{gap:4px}.header-tools .icon-btn{width:34px;height:36px}.app-header{gap:6px}.app-frame{padding-inline:10px}}
+@media(max-height:500px){
+ .duo-lane .answer-list{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:minmax(44px,1fr)}
+ .duo-lane .answer{font-size:19px;min-height:44px;padding:6px 3px;justify-content:center;text-align:center}
+ .duo-lane .answer-letter,.duo-lane .answer-icon{display:none}
+ .duo-lane-status{min-height:18px}.duo-lanes{gap:16px}
+ .duo-prompt .duo-question{font-size:21px}.courtyard-welcome .rule-chips{flex-wrap:wrap;justify-content:center}
+}
