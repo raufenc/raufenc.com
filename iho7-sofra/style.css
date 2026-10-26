@@ -16,3 +16,4 @@ dialog{padding:0;border:0;color:var(--ink);font-family:Arakom;max-width:calc(100
 @media(max-height:500px) and (orientation:landscape){.taste-meal{left:4%;width:32%}}
 .cup-target.filled[data-drink="0"] .glass:after{animation:tea-glint 3s ease-in-out infinite}
 @keyframes tea-glint{50%{opacity:.35}}
+@media(max-height:300px) and (orientation:landscape){.home-copy{top:17%}.home-copy h1{font-size:54px;margin:5px 0}.home-copy .primary{margin-top:10px}.home-copy .text-button{padding:5px 0}.home-caption{bottom:5px}}
