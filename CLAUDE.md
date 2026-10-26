@@ -1,5 +1,9 @@
 # raufenc.com — çalışma notları
 
+## Basılı kitaplardaki kalıcı bağlantılar
+
+`AGENTS.md` içindeki NöroTerbiye QR adresleri ve yayın korumaları bağlayıcıdır. Rauf'un 26 Ekim 2026 talimatıyla bu üç basılı adres silinmez, yeniden adlandırılmaz veya başka hedefe çevrilmez. `scripts/verify-book-qr.mjs` kontrolü ve Vercel yayın bağlantısı korunur.
+
 ## Üslup ve edep (her metinde, her seslendirmede — istisnasız)
 
 Bu sitenin sahibi ve okuyucuları büyüklerimizi hürmetle anar. Ekrana yazılan her metin,

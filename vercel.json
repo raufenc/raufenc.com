@@ -1,4 +1,5 @@
 {
+  "buildCommand": "node scripts/verify-book-qr.mjs",
   "trailingSlash": true,
   "headers": [
     {
@@ -318,6 +319,36 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/neuroterbiye-adalet",
+      "destination": "https://www.youtube.com/watch?v=mZLrfNy2Ia8",
+      "permanent": true
+    },
+    {
+      "source": "/neuroterbiye-adalet/",
+      "destination": "https://www.youtube.com/watch?v=mZLrfNy2Ia8",
+      "permanent": true
+    },
+    {
+      "source": "/neuroterbiye-nasilbuhalegeldik",
+      "destination": "https://www.youtube.com/watch?v=LBsY-GBSQwQ",
+      "permanent": true
+    },
+    {
+      "source": "/neuroterbiye-nasilbuhalegeldik/",
+      "destination": "https://www.youtube.com/watch?v=LBsY-GBSQwQ",
+      "permanent": true
+    },
+    {
+      "source": "/neuroterbiye-mhrs",
+      "destination": "https://www.mhrs.gov.tr/",
+      "permanent": true
+    },
+    {
+      "source": "/neuroterbiye-mhrs/",
+      "destination": "https://www.mhrs.gov.tr/",
+      "permanent": true
+    },
     {
       "source": "/iho7-gunyayi",
       "destination": "/iho7-meryem/",

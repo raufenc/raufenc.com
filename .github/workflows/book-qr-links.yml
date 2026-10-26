@@ -1,0 +1,21 @@
+name: Protect printed book QR links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  book-qr-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Verify permanent book addresses and the build guard
+        run: node scripts/verify-book-qr.mjs
+      - name: Verify protection against removal, changed targets and shadowing
+        run: node --test tests/book-qr-redirects.test.mjs
