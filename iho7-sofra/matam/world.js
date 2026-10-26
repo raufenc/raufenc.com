@@ -32,7 +32,11 @@
   }
   function playClip(kind){
     cleanMotion();setPhase(kind);const q=questions[state.index],file=kind==='watch'?q.watch:q.answer;
-    film.poster='../assets/'+file.replace('.mp4','.webp');film.src='../vid/clips/'+file;film.load();attemptPlay();
+    // The question copy has its cover burned into the video. Answered replays
+    // use the original, so the explanatory picture remains available afterward.
+    film.poster='../assets/'+file.replace('.mp4','.webp');
+    film.src=kind==='watch'&&state.index===0&&state.answers[0]===null?'media/s026_1_question_w.mp4':'../vid/clips/'+file;
+    film.load();attemptPlay();
   }
   function onEnded(){
     if(state.view!=='service')return;
