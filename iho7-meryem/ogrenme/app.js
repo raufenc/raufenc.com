@@ -1,0 +1,81 @@
+(()=>{
+'use strict';
+const D=window.MERYEM_DATA,E=window.MeryemEngine,LMS=window.MeryemLMS;
+const $=s=>document.querySelector(s),stage=$('#stage'),dialog=$('#dialog');
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
+let state=E.fresh(),view='home',index=0,preview=false,session={},resumeIndex=0,returnFocus=null;
+const ar=s=>'<span class="ar">'+s+'</span>';
+const frame=i=>'../kesif/assets/frame-'+D.lessons[i].frame+'.webp';
+const button=(action,label,cls='primary',extra='')=>'<button class="btn '+cls+'" data-action="'+action+'" '+extra+'>'+ar(label)+'</button>';
+function stopMedia(){document.querySelectorAll('video,audio').forEach(x=>x.pause());}
+function render(name,html){stopMedia();view=name;stage.dataset.view=name;stage.innerHTML=html;$('#title')?.focus({preventScroll:true});}
+function announce(t){$('#live').textContent=t;}
+function heading(text){return '<div class="heading"><h1 id="title" tabindex="-1">'+ar(text)+'</h1></div>';}
+function progress(step){return '<div class="lesson-top"><span class="lesson-count">'+num(index+1)+' / ٥</span><ol class="steps" aria-label="خُطُواتُ التَّعَلُّمِ">'+['أَفْهَمُ','أُرَتِّبُ','أَتَكَلَّمُ'].map((label,i)=>'<li class="'+(i===step?'active':i<step?'done':'')+'" '+(i===step?'aria-current="step"':'')+'><b>'+(i<step?'✓':num(i+1))+'</b>'+ar(label)+'</li>').join('')+'</ol></div>';}
+function modelAudio(i){return '<audio class="model-audio" controls preload="metadata" src="audio/model-'+(i+1)+'.mp3" aria-label="اِسْتَمِعْ إِلى المِثالِ"></audio>';}
+function home(){render('home','<section class="hero"><picture class="hero-art"><img src="../kesif/assets/morning-world.webp" alt="بَيْتُ مَرْيَمَ وَمَدْرَسَتُها"></picture><div class="hero-shade"></div><div class="hero-copy">'+heading('يَوْمُ مَرْيَمَ')+button('start','اِبْدَأْ ←')+'</div></section>');}
+function begin(i=0,isPreview=false){preview=isPreview;index=i;session={watched:false,retry:false,order:E.shuffle([0,1,2])};watch();}
+function watch(){render('watch',progress(0)+'<div class="activity watch-layout"><div class="video-wrap"><video id="lesson-video" controls playsinline preload="metadata" poster="'+frame(index)+'" src="../vid/clips/s013_'+(index+1)+'w.mp4" aria-label="حِكايَةُ مَرْيَمَ"></video></div><aside class="watch-side">'+heading('شاهِدْ وَاسْتَمِعْ')+button('question','أَجِبْ ←','primary',session.watched?'':'disabled id="question-button"')+'<button class="text-btn" data-action="transcript">النَّصُّ</button><p id="media-note" class="small-note" role="status"></p></aside></div>');
+const v=$('#lesson-video');v.addEventListener('ended',()=>{session.watched=true;const b=$('#question-button');if(b)b.disabled=false;announce('الآنَ أَجِبْ.');});v.addEventListener('error',()=>{$('#media-note').textContent='تَعَذَّرَ تَشْغيلُ الفِيديو. اِفْتَحِ النَّصَّ.';});}
+function transcript(){state.lessons[index].hints++;session.watched=true;showDialog('النَّصُّ','<p class="ar large">'+D.lessons[index].sentence+'</p>'+button('transcript-close','أَجِبْ ←'));}
+function currentQuestion(){return session.retry?D.lessons[index].retry:{prompt:D.lessons[index].question,options:D.lessons[index].options,correct:D.lessons[index].correct};}
+function choices(q,action,selected=null){return '<div class="choices">'+(session.order||[0,1,2]).map(n=>'<button class="choice '+(selected===n?'selected':'')+'" data-action="'+action+'" data-choice="'+n+'" '+(selected!==null?'disabled':'')+'>'+ar(esc(q.options[n]))+'<span class="choice-circle" aria-hidden="true"></span></button>').join('')+'</div>';}
+function question(){const q=currentQuestion(),x=state.lessons[index];render('understand',progress(0)+'<div class="activity split"><div class="photo-panel"><img src="'+frame(index)+'" alt="'+D.lessons[index].name+'"><button class="photo-listen" data-action="watch-again" aria-label="اِسْتَمِعْ مَرَّةً أُخْرى">↻</button></div><div class="task-panel">'+heading(q.prompt)+choices(q,'answer',x.understood?session.selected:null)+'<div id="feedback" class="feedback '+(x.understood?'good':'')+'" role="status">'+(x.understood?ar('✓ أَحْسَنْتَ!'):'')+'</div><div class="task-actions">'+(x.understood?button('to-build','أُرَتِّبُ ←'):button('hint','تَلْميح','text'))+'</div></div></div>');}
+function answer(choice){const q=currentQuestion(),m=D.lessons[index],correct=choice===q.correct;E.answer(state,index,correct);session.selected=choice;if(correct){question();return;}const f=session.retry?m.hint:m.feedback[choice].ar;showDialog('لاحِظْ','<div class="contrast"><div><p class="ar">'+q.options[choice]+'</p></div><div class="correct-concept"><p class="ar">'+m.options[m.correct]+'</p></div></div><p class="ar feedback-ar">'+f+'</p>'+modelAudio(index)+'<div class="dialog-actions">'+button('retry','جَرِّبْ مَرَّةً أُخْرى')+'</div>');}
+function build(){const m=D.lessons[index],x=state.lessons[index];session.words??=[];session.bank??=E.shuffle(m.words.map((_,i)=>i));render('build',progress(1)+'<div class="activity split"><div class="photo-panel"><img src="'+frame(index)+'" alt="'+m.name+'"></div><div class="task-panel">'+heading('كَوِّنِ الجُمْلَةَ')+'<div class="sentence-slot '+(x.built?'solved':'')+'" aria-label="جُمْلَتُكَ" dir="rtl">'+(session.words.length?session.words.map((n,j)=>'<button class="word placed" data-action="remove-word" data-pos="'+j+'" '+(x.built?'disabled':'')+'>'+m.words[n]+'</button>').join(''):'<span class="slot-placeholder ar">…</span>')+'</div><div class="word-bank" dir="rtl">'+session.bank.map(n=>'<button class="word" data-action="word" data-word="'+n+'" '+(session.words.includes(n)||x.built?'disabled':'')+'>'+m.words[n]+'</button>').join('')+'</div><div id="feedback" class="feedback '+(x.built?'good':'')+'" role="status">'+(x.built?ar('✓ أَحْسَنْتَ!'):session.buildFeedback||ar('اِبْدَأْ بِالفِعْلِ.'))+'</div><div class="task-actions">'+(x.built?button('to-speak','أَتَكَلَّمُ ←'):button('check-build','تَحَقَّقْ','primary',session.words.length===m.words.length?'':'disabled'))+(!x.built?button('build-hint','تَلْميح','text'):'')+'</div></div></div>');}
+function checkBuild(){const m=D.lessons[index],x=state.lessons[index];if(x.built||session.words.length!==m.words.length)return;x.buildAttempts++;if(E.matches(session.words,m.words)){x.built=true;session.buildFeedback='';}else{E.markError(state,index);const pos=session.words.findIndex((n,i)=>n!==i);session.buildFeedback=ar(pos===0?'اِبْدَأْ بِالفِعْلِ.':'اُنْظُرْ إِلى الجُزْءِ '+num(pos+1)+'.');}build();}
+function speak(){const m=D.lessons[index];render('speak',progress(2)+'<div class="activity split"><div class="photo-panel alternate-scene"><img src="../kesif/assets/'+(index===2?'day-journey.webp':index===1||index===4?'match-house.webp':'morning-world.webp')+'" alt="'+m.name+'"></div><div class="task-panel">'+heading('ماذا تَفْعَلُ مَرْيَمُ؟')+(!session.modelOpen?'<div class="speaking-orb" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>'+button('model','قُلْتُها ←'):'<div class="model"><p class="ar">'+m.sentence+'</p>'+modelAudio(index)+'</div><div class="self-check">'+button('self-yes','قُلْتُها ✓')+button('self-again','أَحْتاجُ تَدْريبًا','secondary')+'</div>')+'</div></div>');}
+function finishLesson(self){state.lessons[index].speech=self;state.lessons[index].done=true;state.ticks++;resumeIndex=index+1;continueRoute();}
+function continueRoute(){const r=E.due(state,resumeIndex>=5);if(r){session={review:r,order:E.shuffle([0,1,2])};review();}else if(resumeIndex<5)begin(resumeIndex,preview);else finalIntro();}
+function review(){const r=session.review,q=D.lessons[r.lesson].review;render('review','<div class="review-screen"><div class="review-intro"><span class="review-icon" aria-hidden="true">↶</span>'+heading('هَلْ تَذْكُرُ؟')+'</div><div class="review-card"><h2 class="ar">'+q.prompt+'</h2>'+choices(q,'review-answer',r.done?session.selected:null)+'<div class="feedback '+(r.done?'good':'')+'" role="status">'+(session.reviewFeedback||'')+'</div>'+(r.done?button('review-next','التّالي ←'):'')+'</div></div>');}
+function reviewAnswer(choice){const r=session.review,q=D.lessons[r.lesson].review;if(r.done)return;r.attempts++;if(r.first===null)r.first=choice===q.correct;session.selected=choice;if(choice===q.correct){r.done=true;session.reviewFeedback=ar('✓ أَحْسَنْتَ!');}else session.reviewFeedback=ar(D.lessons[r.lesson].sentence);review();}
+function finalIntro(){session={heard:false};render('final-intro','<section class="new-day"><div class="new-day-visual"><img src="assets/another-day.jpg" alt="يَوْمٌ آخَرُ لِمَرْيَمَ"></div><div class="new-day-copy">'+heading(D.newDay.title)+'<p class="ar">اِسْتَمِعْ جَيِّدًا.</p><audio id="story-audio" controls preload="metadata" src="audio/another-day.mp3" aria-label="حِكايَةٌ جَديدَةٌ"></audio>'+button('final-start','أَنا جاهِزٌ ←','primary','disabled id="final-start"')+'<button class="text-btn" data-action="final-reading">النَّصُّ</button><p id="audio-note" class="small-note" role="status"></p></div></section>');$('#story-audio').addEventListener('ended',()=>{session.heard=true;$('#final-start').disabled=false;});$('#story-audio').addEventListener('error',()=>{$('#audio-note').textContent='تَعَذَّرَ تَشْغيلُ الصَّوْتِ. اِفْتَحِ النَّصَّ.';});}
+function finalQuestion(i){if(i>=5){if(!preview)LMS.complete(state);results();return;}if(session.finalIndex!==i)session.order=E.shuffle([0,1,2]);session.finalIndex=i;session.selected=state.final[i]?.choice??null;const q=D.newDay.questions[i];render('final','<div class="final-top"><span class="chapter-tag ar">يَوْمٌ آخَرُ</span><span class="lesson-count">'+num(i+1)+' / ٥</span><div class="final-progress"><i style="width:'+i*20+'%"></i></div></div><div class="final-layout"><div class="final-illustration"><img src="assets/another-day.jpg" alt="مَرْيَمُ"></div><div class="task-panel">'+heading(q.prompt)+choices(q,'final-answer',session.selected)+(session.selected!==null?button('final-next',i===4?'النَّتيجَةُ ←':'التّالي ←'):'')+'<details class="story-replay"><summary>اِسْتَمِعْ ↻</summary><audio controls src="audio/another-day.mp3" aria-label="اِسْتَمِعْ مَرَّةً أُخْرى"></audio>'+(state.practiceFinal?'<p class="ar">'+D.newDay.story+'</p>':'')+'</details></div></div>');}
+function report(){return '<div class="result-grid">'+D.lessons.map((m,i)=>{const x=state.lessons[i],r=state.reviews.find(r=>r.lesson===i);return '<article class="result-item"><h2 class="ar">'+m.name+'</h2><dl><dt>الفَهْمُ</dt><dd>'+(x.first===null?'—':x.first&&x.hints===0?'دونَ مُساعَدَةٍ':x.understood?'بِمُساعَدَةٍ':'يَحْتاجُ تَدْريبًا')+'</dd><dt>الجُمْلَةُ</dt><dd>'+(x.built?x.buildAttempts===1?'مِنَ المُحاوَلَةِ الأُولى':'بَعْدَ التَّصْحيحِ':'—')+'</dd><dt>التَّحَدُّثُ*</dt><dd>'+(x.speech==='yes'?'«قُلْتُها»':x.speech==='again'?'«أُحاوِلُ مَرَّةً أُخْرى»':'—')+'</dd>'+(r?'<dt>التَّذَكُّرُ</dt><dd>'+(r.first===true?'دونَ مُساعَدَةٍ':r.done?'بِمُساعَدَةٍ':'يَحْتاجُ تَدْريبًا')+'</dd>':'')+'</dl></article>';}).join('')+'</div><p class="small-note">* تَقْييمٌ ذاتِيٌّ لِلتَّحَدُّثِ؛ لا يُسَجَّلُ الصَّوْتُ.</p>';}
+function results(){const score=E.score(state);render('results','<section class="results"><div class="result-heading"><div class="score-ring"><strong>'+num(score)+'</strong><span>/ ١٠٠</span></div>'+heading('أَحْسَنْتَ!')+'</div>'+(preview||state.practiceFinal?'<p class="small-note">'+(preview?'مُعايَنَةٌ لِلْمُعَلِّمِ':'تَدْريبٌ بِالنَّصِّ')+' · لا تُرْسَلُ الدَّرَجَةُ.</p>':'')+'<div class="result-dots" aria-label="إِجاباتُكَ">'+D.newDay.questions.map((q,i)=>'<span class="answer-status '+(state.final[i]?.correct?'ok':'no')+'" aria-label="'+num(i+1)+': '+(state.final[i]?.correct?'صَحيح':'راجِعْ')+'">'+(state.final[i]?.correct?'✓':'↻')+'</span>').join('')+'</div><details class="answer-review"><summary>راجِعِ الإِجاباتِ</summary>'+D.newDay.questions.map((q,i)=>'<div><span class="answer-status '+(state.final[i]?.correct?'ok':'no')+'">'+(state.final[i]?.correct?'✓':'↻')+'</span><p class="ar">'+q.evidence+'</p></div>').join('')+'</details><details class="teacher-report"><summary>لِلْمُعَلِّمِ</summary>'+report()+button('print','طِباعَةٌ','secondary')+'</details><div class="result-actions">'+button('restart','أُحاوِلُ مَرَّةً أُخْرى','secondary')+'</div></section>');}
+function showDialog(title,html){stopMedia();returnFocus=document.activeElement;$('#dialog-body').innerHTML='<h2 id="dialog-title" class="ar">'+title+'</h2>'+html;dialog.showModal();}
+function closeDialog(){dialog.querySelectorAll('audio,video').forEach(x=>x.pause());dialog.close();$('#dialog-body').replaceChildren();returnFocus?.focus?.();}
+function teacher(){showDialog('لِلْمُعَلِّمِ','<div class="teacher-lessons">'+D.lessons.map((m,i)=>'<button class="teacher-jump" data-action="jump" data-index="'+i+'"><img src="'+frame(i)+'" alt=""><span class="ar">'+m.name+'</span></button>').join('')+'</div><div class="teacher-buttons">'+button('jump-build','أُرَتِّبُ','secondary')+button('jump-speak','أَتَكَلَّمُ','secondary')+button('jump-final','يَوْمٌ آخَرُ')+'</div><p class="small-note">مُعايَنَةٌ فَقَطْ؛ لا تُرْسَلُ الدَّرَجاتُ.</p>');}
+function startPreview(i){closeDialog();state=E.fresh();begin(i,true);}
+document.addEventListener('click',async e=>{
+const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const a=b.dataset.action;
+if(a==='close'){closeDialog();return;}if(a==='teacher'){teacher();return;}
+if(a==='fullscreen'){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(_){announce('وَضْعُ الشّاشَةِ الكامِلَةِ غَيْرُ مُتاحٍ.');}return;}
+switch(a){
+case 'home':if(view==='home')return;showDialog('نَبْدَأُ مِنْ جَديدٍ؟',button('confirm-home','نَعَمْ')+button('close','أُكْمِلُ','secondary'));break;
+case 'confirm-home':closeDialog();state=E.fresh();preview=false;home();break;
+case 'start':case 'restart':state=E.fresh();preview=false;LMS.start(false);begin();break;
+case 'question':if(session.watched)question();break;
+case 'watch-again':watch();break;
+case 'transcript':transcript();break;
+case 'transcript-close':closeDialog();question();break;
+case 'answer':answer(Number(b.dataset.choice));break;
+case 'hint':state.lessons[index].hints++;E.markError(state,index);$('#feedback').innerHTML=ar(D.lessons[index].hint);break;
+case 'retry':closeDialog();session.retry=true;session.order=E.shuffle([0,1,2]);question();break;
+case 'to-build':state.ticks++;session.words=[];session.bank=E.shuffle(D.lessons[index].words.map((_,i)=>i));build();break;
+case 'word':session.words.push(Number(b.dataset.word));build();break;
+case 'remove-word':session.words.splice(Number(b.dataset.pos),1);build();break;
+case 'check-build':checkBuild();break;
+case 'build-hint':state.lessons[index].hints++;E.markError(state,index);session.buildFeedback=ar(D.lessons[index].sentence);build();break;
+case 'to-speak':state.ticks++;session.modelOpen=false;speak();break;
+case 'model':session.modelOpen=true;speak();break;
+case 'self-yes':finishLesson('yes');break;
+case 'self-again':E.markError(state,index);finishLesson('again');break;
+case 'review-answer':reviewAnswer(Number(b.dataset.choice));break;
+case 'review-next':state.ticks++;continueRoute();break;
+case 'final-start':if(session.heard){state.final=[];state.practiceFinal=false;finalQuestion(0);}break;
+case 'final-reading':showDialog(D.newDay.title,'<p class="ar story-text">'+D.newDay.story+'</p>'+button('reading-start','أَنا جاهِزٌ ←'));break;
+case 'reading-start':closeDialog();state.final=[];state.practiceFinal=true;finalQuestion(0);break;
+case 'final-answer':{const i=session.finalIndex,n=Number(b.dataset.choice),q=D.newDay.questions[i];if(E.finalAnswer(state,i,n,q.correct)){if(!preview&&!state.practiceFinal)LMS.record(i,n,q.correct);finalQuestion(i);}break;}
+case 'final-next':if(state.final[session.finalIndex])finalQuestion(session.finalIndex+1);break;
+case 'jump':startPreview(Number(b.dataset.index));break;
+case 'jump-build':startPreview(2);state.lessons[2].understood=true;build();break;
+case 'jump-speak':startPreview(2);speak();break;
+case 'jump-final':closeDialog();state=E.fresh();preview=true;finalIntro();break;
+case 'print':window.print();break;
+}
+});
+dialog.addEventListener('close',()=>dialog.querySelectorAll('audio,video').forEach(x=>x.pause()));
+home();
+})();
