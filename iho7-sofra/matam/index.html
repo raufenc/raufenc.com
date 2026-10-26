@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#213d31"><meta name="description" content="افتح مطعم الحيّ. استمع إلى الزبائن، حضّر الطلبات، وتذكّر ما يحبّون.">
+  <title>مَطْعَمُ الحَيّ</title>
+  <link rel="icon" href="../favicon.ico"><link rel="stylesheet" href="world.css">
+  <script src="../activities.js"></script><script src="../scorm.js"></script><script src="world.js" defer></script>
+</head>
+<body>
+<svg class="symbols" aria-hidden="true"><symbol id="i-back" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol><symbol id="i-replay" viewBox="0 0 24 24"><path d="M5 9a8 8 0 1 1-1 7M5 3v6h6"/></symbol><symbol id="i-full" viewBox="0 0 24 24"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 6"/></symbol></svg>
+<main id="app" data-view="intro">
+  <div id="world" class="world" aria-hidden="true"><img id="world-image" src="assets/restaurant.webp" alt=""><div class="world-light"></div></div>
+  <header class="topbar"><a id="exit" class="round" href="../" aria-label="المقارنة"><svg><use href="#i-back"/></svg></a><button id="room" class="wordmark" hidden>مَطْعَمُ الحَيّ</button><span id="day" class="day">يَوْمُكَ الأَوَّل</span><div class="top-end"><span id="count" hidden>٠ / ٤</span><button id="fullscreen" class="round" aria-label="ملء الشاشة"><svg><use href="#i-full"/></svg></button></div></header>
+  <section id="intro" class="intro">
+    <div class="intro-copy"><span class="kicker">أَهْلًا بِكَ في</span><h1>مَطْعَمِ<br>الحَيّ</h1><p>اسْمَعْ. حَضِّرْ. قَدِّمْ.</p><button id="open" class="gold-button">اِفْتَحِ المَطْعَم <span aria-hidden="true">←</span></button></div>
+    <div class="intro-note"><span>٤</span> لِقاءات في يَوْمٍ واحِد</div>
+  </section>
+  <section id="map" class="map" aria-label="طاولات المطعم" hidden>
+    <div id="hotspots" class="hotspots"></div>
+    <div class="map-caption"><span id="map-kicker" class="kicker">الزَّبائِنُ بِانْتِظارِكَ</span><h1 id="map-title">مِنْ أَيِّ طاوِلَةٍ نَبْدَأ؟</h1></div>
+    <nav id="table-nav" class="table-nav" aria-label="اختر طاولة"></nav>
+    <button id="restart" class="gold-button restart" hidden>يَوْمٌ جَديد <svg><use href="#i-replay"/></svg></button>
+  </section>
+  <section id="service" class="service" aria-label="خدمة الزبائن" hidden>
+    <div class="service-top"><span id="chapter" class="kicker"></span><div id="steps" class="steps" aria-label="مراحل اللقاء"><span data-step="watch">اِسْتَمِعْ</span><i></i><span data-step="work">حَضِّرْ</span><i></i><span data-step="answer">اِكْتَشِفْ</span></div></div>
+    <div class="service-grid">
+      <div class="customer"><div class="film-shell"><video id="film" playsinline preload="auto"></video><div id="film-shade" class="film-shade"></div><button id="start-film" class="film-start" aria-label="استمع إلى الزبون"><svg><use href="#i-play"/></svg><span>اِسْتَمِعْ</span></button><div id="media-error" class="media-error" hidden><p>لَمْ يَبْدَأِ الفِيديو</p><button id="retry" class="gold-button">حاوِلْ مَرَّةً أُخْرى</button></div></div><div class="film-footer"><span id="customer-label"></span><div class="film-buttons"><button id="relisten" class="round" aria-label="استمع مرة أخرى"><svg><use href="#i-replay"/></svg></button><button id="pause" class="round" aria-label="إيقاف مؤقت"><svg><use href="#i-pause"/></svg></button></div></div></div>
+      <div class="work-area"><div class="question-heading"><span id="work-kicker" class="kicker">الطَّلَب</span><h1 id="question"></h1></div><div id="workbench" class="workbench" aria-label="طاولة التحضير"></div><div id="instruction" class="instruction" aria-live="polite"></div></div>
+    </div>
+    <footer class="service-bottom"><p id="feedback" aria-live="polite"></p><div id="after" hidden><button id="next" class="gold-button">الطّاوِلَةُ التّالِيَة <span aria-hidden="true">←</span></button><button id="return" class="text-button">إلى المَطْعَم</button></div><span id="listen-note">اِسْتَمِعْ إلى الحِوار أَوَّلًا.</span></footer>
+  </section>
+  <div id="save-warning" class="save-warning" role="alert" hidden>تَعَذَّرَ حِفْظُ النَّتيجَة.</div>
+</main>
+<noscript>يَحْتاجُ هٰذا النَّشاطُ إلى تَشْغيلِ جافاسكريبت.</noscript>
+</body></html>

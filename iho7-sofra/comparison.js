@@ -1,11 +1,12 @@
 (() => {
   'use strict';
   const selection=document.querySelector('#selection'), viewer=document.querySelector('#viewer'), host=document.querySelector('#frame-host');
-  const versions={new:{url:'new.html',title:'التجربة الجديدة'},original:{url:'klasik/',title:'النشاط الأصلي'}};
+  const versions={new:{url:'matam/',title:'مطعم الحيّ'},original:{url:'klasik/',title:'النشاط الأصلي'}};
   const frames=new Map(), playing=new WeakMap();
   let active=null, last='new';
   function pause(frame){
     if(!frame.contentDocument)return;
+    frame.contentWindow.postMessage({type:'comparison:pause'},location.origin);
     const media=[...frame.contentDocument.querySelectorAll('video,audio')];
     playing.set(frame,media.filter(el=>!el.paused&&!el.ended));
     media.forEach(el=>el.pause());
