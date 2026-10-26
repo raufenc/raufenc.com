@@ -107,5 +107,5 @@
   document.addEventListener('visibilitychange',()=>{if(document.hidden){film.pause();stopPour();}});
   window.addEventListener('message',event=>{if(event.origin!==location.origin)return;if(event.data?.type==='comparison:pause'||event.data?.type==='host-pause'){film.pause();stopPour();}});
   window.addEventListener('resize',()=>{positionPins();if(pourActive)showPourArt();});window.addEventListener('learning-save-error',()=>{$('save-warning').hidden=false;});
-  updateMap();
+  updateMap();app.dataset.ready="true";$("open").disabled=false;
 })();
