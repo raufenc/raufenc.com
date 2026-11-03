@@ -81,5 +81,5 @@
 - Bayram namazı (b1-20): yeşil kubbe yerine kurşun kubbeli, kalem minareli cami.
 - Kur'ân kelimeleri (b1-14): Âyet = sayfada üç âyet gülü (rakamsız), Meâl = iki konuşma balonu + kitap, Tefsir = büyüteçli açık kitap. Sûre aynı kaldı (rahle üstünde Kur'ân-ı Kerîm). Hiçbirinde yazı yok.
 - Codex 1 çağrı (tabaka 22, 10 hücre, 6'sı seçildi). Eski 6 ikon silindi.
-- Yönerge sesleri yerel whisper ile yazıya döküldü: "Dinle ve doğru resmi bul.", "Kartları çevir, eşlerini bul.", "Resimleri sırayla yerleştir." ve "Resme bak, eşini seç." doğru. "Resme dokun, sonra eşine." iki modelde de "Resmet okun" diye çözüldü; ses kırpık değil (baş ve son sessiz), "d" zayıf olabilir → Rauf dinleyecek: https://raufenc.com/iyilik/ses/ui/esles2.mp3
+- Yönerge sesleri yerel whisper ile yazıya döküldü: "Dinle ve doğru resmi bul.", "Kartları çevir, eşlerini bul.", "Resimleri sırayla yerleştir." ve "Resme bak, eşini seç." doğru. "Resme dokun, sonra eşine." iki modelde de "Resmet okun" diye çözüldü; ses kırpık değil (baş ve son sessiz), Rauf kulakla dinledi: temiz (3 Kas 2026). Beş yönerge sesi de onaylı.
 - Not: Uygulamayı daha önce açmış telefonlarda yeni resimler ikinci açılışta gelir (ilk açılışta eski kayıt gösterilir).
