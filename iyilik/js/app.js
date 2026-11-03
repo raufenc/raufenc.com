@@ -3,7 +3,9 @@ import { state, save, getPaint, listPaints, clearPaints } from './store.js';
 import { icon } from './icons.js';
 import * as au from './audio.js';
 import { openStudio } from './paint.js';
-import { openCanlan, canlanHazir } from './canlan.js';
+import { openCanlan } from './canlan.js';
+// Canlanan sayfalar Rauf'un kararıyla kaldırıldı (3 Kas 2026); düğmeler hiçbir sayfada görünmez.
+const canlanHazir = async () => new Set();
 import { composeArt, shareOrDownload, idOf, parseId } from './galeri.js';
 
 const { esc, S, SS, splitSentences } = au;
@@ -306,6 +308,8 @@ async function boya(b, p) {
 }
 async function canlan(b, p) {
   b = +b; p = +p;
+  // kaldırıldı: eski #canlan bağlantıları sayfanın kendisine gider
+  if ([1, 2, 3].includes(b) && p >= 1 && p <= 48) return sayfa(b, p);
   if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return kitap(b);
   state.book = b; persist();
   document.body.classList.add('studio-on');

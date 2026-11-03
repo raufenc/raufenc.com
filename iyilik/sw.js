@@ -1,6 +1,6 @@
 // İyiliklerle Büyüyorum — çevrimdışı çalışma (kapsam: /iyilik/).
 // Çekirdek dosyalar kurulumda alınır; sayfa resimleri ve sesler ihtiyaç anında, bir kez indirilip saklanır.
-const V = 'iyilik-v3-4';
+const V = 'iyilik-v3-5';
 const CORE = `${V}-core`, RUN = `${V}-run`;
 const CORE_FILES = ['./', '1/', '2/', '3/', 'css/app.css', 'js/app.js', 'js/audio.js', 'js/icons.js', 'js/paint.js', 'js/canlan.js', 'js/galeri.js', 'js/store.js',
   'font/nunito-latin.woff2', 'font/nunito-latin-ext.woff2', 'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png',
