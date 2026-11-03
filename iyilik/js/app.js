@@ -3,6 +3,8 @@ import { state, save, getPaint, listPaints, clearPaints } from './store.js';
 import { icon } from './icons.js';
 import * as au from './audio.js';
 import { openStudio } from './paint.js';
+import { openCanlan, canlanHazir } from './canlan.js';
+import { composeArt, shareOrDownload, idOf, parseId } from './galeri.js';
 
 const { esc, S, SS, splitSentences } = au;
 const $ = (s, r = document) => r.querySelector(s);
@@ -54,10 +56,10 @@ async function route() {
   }
   name = LEGACY[name] || name || 'home';
   $$('.nav a').forEach(x => x.removeAttribute('aria-current'));
-  const sect = { home: 'home', kitap: 'home', sayfa: 'home', konular: 'konular', konu: 'konular', boya: 'boya', defter: 'defter', buyuk: 'buyuk' }[name];
+  const sect = { home: 'home', kitap: 'home', sayfa: 'home', canlan: 'home', konular: 'konular', konu: 'konular', boya: 'boya', resimler: 'boya', resim: 'boya', defter: 'defter', buyuk: 'buyuk' }[name];
   $(`.nav a[data-nav=${sect}]`)?.setAttribute('aria-current', 'page');
   try {
-    const R = { home, kitap, sayfa, konular, konu, boya, defter, buyuk }[name] || home;
+    const R = { home, kitap, sayfa, canlan, resimler, resim, konular, konu, boya, defter, buyuk }[name] || home;
     await R(a, b, () => my === token);
   } catch (e) {
     console.error(e);
@@ -117,11 +119,11 @@ async function sayfa(b, p) {
   b = +b; p = +p; if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return kitap(b);
   await loadBook(b);
   state.book = b; persist();
-  const L = topicOfPage(b, p);
+  const L = topicOfPage(b, p), hazir = await canlanHazir();
   setMain(`<div class="pageview" data-book="${b}"><small style="color:var(--accent);font-weight:900">${b}. KİTAP</small><h1>Sayfa ${p}</h1>
     <p class="wrap-lead" id="ptitle">${L ? `<span data-unit="title" data-q><span class="s" data-i="0">${esc(L.title)}</span></span>` : 'Bu sayfayı boyayabilirsin.'}</p>
     <img class="thumb" src="sayfa/${pid(b, p)}-t.webp" width="260" height="374" alt="Kitabındaki ${p}. sayfa">
-    <div class="actions"><a class="btn" href="#boya/${b}/${p}">${icon('paint')} Bu sayfayı boya</a>${L ? `<a class="btn ghost" href="#konu/${L.id}">${icon('listen')} Konuyu dinle ve oyna</a>` : ''}</div>
+    <div class="actions">${hazir.has(pid(b, p)) ? `<a class="btn" href="#canlan/${b}/${p}">${icon('play')} Canlandır</a>` : ''}<a class="btn ${hazir.has(pid(b, p)) ? 'ghost' : ''}" href="#boya/${b}/${p}">${icon('paint')} Bu sayfayı boya</a>${L ? `<a class="btn ghost" href="#konu/${L.id}">${icon('listen')} Konuyu dinle ve oyna</a>` : ''}</div>
     <div class="pager"><a class="ibtn" href="#sayfa/${b}/${Math.max(1, p - 1)}" aria-label="Önceki sayfa">${icon('back')}</a><a class="btn ghost small" href="#kitap/${b}">Başka sayfa</a><a class="ibtn" href="#sayfa/${b}/${Math.min(48, p + 1)}" aria-label="Sonraki sayfa">${icon('next')}</a></div></div>`);
   if (state.sound && interacted) {
     const A = L ? await au.lessonAudio(L.id) : null;
@@ -149,7 +151,7 @@ async function konular(n) {
 // ---- ders ----
 const STEPS = [['dinle', 'listen', 'Dinle'], ['hikaye', 'story', 'Hikâye'], ['oyun', 'game', 'Oyun'], ['soru', 'question', 'Soru'], ['gorev', 'heart', 'Görev']];
 async function konu(id, step = 'dinle', alive) {
-  await loadAll();
+  await loadAll(); const hazir = await canlanHazir();
   const l = byId[id]; if (!l) return home();
   if (!STEPS.some(s => s[0] === step)) step = 'dinle';
   state.last = id; state.visits[id] = Date.now(); persist();
@@ -178,6 +180,7 @@ async function konu(id, step = 'dinle', alive) {
     const done = !!state.completed[id], page = l.pages[1];
     body = `<div class="task"><h3>Bugünkü görevin</h3><p class="txt" data-unit="task" data-q>${SS(A, 'task', 0, l.task)}</p>${spk('task')}
       <label class="check"><input type="checkbox" id="taskck" ${state.tasks[id] ? 'checked' : ''}> Görevi yaptım</label></div>
+      ${l.pages.filter(pg => hazir.has(pid(l.book, pg))).map(pg => `<a class="btn ghost" style="width:100%;margin-bottom:12px" href="#canlan/${l.book}/${pg}">${icon('play')} Kitabımın ${pg}. sayfasını canlandır</a>`).join('')}
       <a class="btn" style="width:100%;margin-bottom:12px" href="#boya/${l.book}/${page}">${icon('paint')} Kitabımın ${page}. sayfasını boya</a>
       <div id="finish">${done ? `<div class="cele"><div class="stamp">★</div><h2>Bu konunun damgası sende!</h2></div>` : `<button class="btn" id="fin" style="width:100%">${icon('star')} Konuyu bitirdim, damgamı al</button>`}</div>
       <div class="sec">${nextPrev(l)}</div><p class="note"><a href="#buyuk/${id}" style="text-decoration:underline">${icon('lock', '')} Büyükler için bu konunun rehberi</a></p>`;
@@ -296,9 +299,20 @@ async function boya(b, p) {
   b = +b || state.book || 1;
   const painted = new Set((await listPaints()).map(x => x.id));
   setMain(`<h1>Boyama atölyesi</h1><p class="wrap-lead">Kitabındaki resimleri boya. Sayfayı seç.</p>
+    <p><a class="btn ghost small" href="#resimler">${icon('star')} Resimlerim${painted.size ? ` (${painted.size})` : ''}</a></p>
     <div class="chips">${[1, 2, 3].map(k => `<a class="chip" href="#boya/${k}" ${k === b ? 'aria-current="true"' : ''}>${k}. kitap</a>`).join('')}</div>
     <div class="grid" id="bg" style="grid-template-columns:repeat(3,1fr)">${Array.from({ length: 48 }, (_, k) => k + 1).map(p => `<a class="tcard" data-book="${b}" href="#boya/${b}/${p}" aria-label="Sayfa ${p}${painted.has(pid(b, p)) ? ', boyandı' : ''}"><img loading="lazy" src="sayfa/${pid(b, p)}-t.webp" alt="" width="260" height="374"><span class="badge pg">${p}</span>${painted.has(pid(b, p)) ? '<span class="badge" aria-hidden="true">🎨</span>' : ''}</a>`).join('')}</div>`);
   guide('boyalar');
+}
+async function canlan(b, p) {
+  b = +b; p = +p;
+  if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return kitap(b);
+  state.book = b; persist();
+  document.body.classList.add('studio-on');
+  const mine = token;
+  const s = await openCanlan(main, { b, p, toast });
+  if (mine !== token) { s.destroy(); return; }
+  studio = s;
 }
 async function studioView(b, p) {
   if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return boya(b);
@@ -311,6 +325,28 @@ async function studioView(b, p) {
   if (state.sound && interacted) au.sayUI('boya');
 }
 
+// ---- resimlerim ----
+async function resimler() {
+  const paints = (await listPaints()).sort((x, y) => y.t - x.t), urls = [];
+  setMain(`<h1>Resimlerim</h1><p class="wrap-lead">${paints.length ? 'Boyadığın resimler burada. Dokun, büyüt, boyamaya devam et.' : 'Burası senin resim galerin.'}</p>
+    ${paints.length ? `<div class="gal" id="rg">${paints.map(x => { const u = URL.createObjectURL(x.thumb); urls.push(u); const q = parseId(x.id); return q ? `<a href="#resim/${q.b}/${q.p}" data-book="${q.b}" aria-label="${q.b}. kitap, sayfa ${q.p}"><img src="${u}" alt=""><span class="badge pg">${q.p}</span></a>` : ''; }).join('')}</div>`
+      : `<div class="empty">Henüz boyadığın bir resim yok. Boyama atölyesinde bir sayfa seç, bir yerine dokun; resmin kendiliğinden buraya gelir.<p><a class="btn" href="#boya">${icon('paint')} Boyamaya başla</a></p></div>`}`);
+  onLeave(() => urls.forEach(URL.revokeObjectURL));
+  guide('boyalar');
+}
+async function resim(b, p) {
+  b = +b; p = +p; if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return resimler();
+  const rec = await getPaint(idOf(b, p));
+  if (!rec?.blob) { setMain(`<div class="empty"><h2>Bu resim bulunamadı</h2><p><a class="btn" href="#resimler">Resimlerim</a></p></div>`); return; }
+  const blob = await composeArt(idOf(b, p), rec), url = URL.createObjectURL(blob);
+  onLeave(() => URL.revokeObjectURL(url));
+  const L = topicOfPage(b, p) || (await loadBook(b), topicOfPage(b, p));
+  setMain(`<div class="pageview" data-book="${b}"><a class="mini" href="#resimler" style="margin:0 0 10px">${icon('back')} Resimlerim</a>
+    <small style="color:var(--accent);font-weight:900;display:block">${b}. KİTAP · SAYFA ${p}</small>${L ? `<h1 style="font-size:26px">${esc(L.title)}</h1>` : ''}
+    <img class="bigart" src="${url}" alt="Boyadığın ${b}. kitap ${p}. sayfa resmi">
+    <div class="actions"><a class="btn" href="#boya/${b}/${p}">${icon('paint')} Boyamaya devam et</a></div></div>`);
+}
+
 // ---- keşif defteri ----
 async function defter() {
   await loadAll();
@@ -319,7 +355,7 @@ async function defter() {
   setMain(`<h1>Keşif defterim</h1><p class="wrap-lead">Her konuyu bitirince bir damga kazanırsın.</p>
     <div class="card"><b style="font-size:22px">${done} / 60 damga</b><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="60" aria-valuenow="${done}"><i style="width:${done / 60 * 100}%"></i></div><button class="listen" data-say="defter" style="margin-top:8px">${icon('speaker')} Dinle</button></div>
     ${[1, 2, 3].map(n => `<section data-book="${n}"><h2 style="margin:18px 0 10px">${n}. kitap</h2><div class="stamps">${lessons.filter(l => l.book === n).map(l => `<a class="st ${state.completed[l.id] ? 'on' : ''}" href="#konu/${l.id}" aria-label="${esc(l.title)}${state.completed[l.id] ? ', damga kazanıldı' : ''}">${l.n}</a>`).join('')}</div></section>`).join('')}
-    <h2 style="margin:24px 0 10px">Boyadıklarım</h2>${paints.length ? `<div class="gal">${paints.sort((x, y) => y.t - x.t).map(x => { const u = URL.createObjectURL(x.thumb); urls.push(u); const [, bk, pg] = x.id.match(/b(\d)-(\d+)/); return `<a href="#boya/${bk}/${+pg}" aria-label="${bk}. kitap, sayfa ${+pg}"><img src="${u}" alt=""></a>`; }).join('')}</div>` : '<div class="empty">Henüz boyadığın bir resim yok. Boyama atölyesinde başlayabilirsin.</div>'}`);
+    <h2 style="margin:24px 0 10px">Boyadıklarım ${paints.length ? `<a class="mini" href="#resimler" style="display:inline-flex;margin-left:8px">Hepsi ›</a>` : ''}</h2>${paints.length ? `<div class="gal">${paints.sort((x, y) => y.t - x.t).map(x => { const u = URL.createObjectURL(x.thumb); urls.push(u); const [, bk, pg] = x.id.match(/b(\d)-(\d+)/); return `<a href="#boya/${bk}/${+pg}" aria-label="${bk}. kitap, sayfa ${+pg}"><img src="${u}" alt=""></a>`; }).join('')}</div>` : '<div class="empty">Henüz boyadığın bir resim yok. Boyama atölyesinde başlayabilirsin.</div>'}`);
   onLeave(() => urls.forEach(URL.revokeObjectURL));
   guide('defter');
 }
@@ -331,6 +367,7 @@ const SAYI = { 6: 'altı', 7: 'yedi', 8: 'sekiz', 9: 'dokuz' };
 async function buyuk(id, _b, alive) {
   if (!sessionStorage.getItem(GATE)) return gate();
   await loadAll();
+  if (id === 'resimler') return buyukResimler(_b);
   if (id && byId[id]) return guideView(byId[id]);
   const src = await loadSources();
   const urls = [1, 2, 3].map(n => `https://raufenc.com/iyilik/${n}/`);
@@ -338,10 +375,11 @@ async function buyuk(id, _b, alive) {
   <div class="pcard"><h2>Nasıl kullanılır?</h2><ul><li>Çocuk, kitabındaki sayfa numarasını yazar; o sayfanın konusunu dinler, oyun ve sorularla pekiştirir, resmi boyar.</li><li>Okumayı bilmeyen çocuk için her metin sesli okunur; okunan cümle ve kelime renkle gösterilir.</li><li>Her konunun “Büyükler için” rehberi, ne konuşulacağını, soracağınız iki soruyu ve evde yapılacak küçük bir iyiliği verir.</li></ul></div>
   <div class="pcard"><h2>Konu rehberleri</h2>${[1, 2, 3].map(n => `<h3 style="margin-top:12px">${n}. kitap · ${esc(BOOKS[n].title)}</h3><div class="plist">${lessons.filter(l => l.book === n).map(l => `<a href="#buyuk/${l.id}"><b>${l.n}.</b> ${esc(l.title)}<small>s. ${l.pages.join('–')}</small></a>`).join('')}</div>`).join('')}</div>
   <div class="pcard"><h2>Kitaptaki karekodlar</h2><p>Her cildin ön iç kapağındaki karekod, o kitabı bu sitede doğrudan açar. Adresler basılıdır ve değişmez.</p><div class="qrs">${[1, 2, 3].map(n => `<div><img src="assets/qr-book${n}.png" alt="${n}. cilt karekodu" width="130" height="130"><b>${n}. cilt</b><br>${urls[n - 1].replace('https://', '')}</div>`).join('')}</div></div>
+  <div class="pcard"><h2>Çocuğunuzun resimleri</h2><p>Boyadığı sayfaları görebilir, istediğinizi arkadaşlarınızla paylaşabilirsiniz. Resimler hiçbir sunucuya gitmez; paylaşırken cihazınızın kendi paylaşım penceresi açılır.</p><a class="btn small" href="#buyuk/resimler">Resimleri gör ve paylaş</a></div>
   <div class="pcard"><h2>Çevrimdışı kullanım</h2><p>Site bir kez açıldıktan sonra gördüğünüz sayfalar internetsiz de çalışır. Bir cildin tamamını (resimler ve sesler) şimdiden cihaza indirebilirsiniz.</p><div class="row">${[1, 2, 3].map(n => `<button class="btn small ghost" data-warm="${n}">${n}. cildi indir</button>`).join('')}</div><p id="warmmsg" role="status" style="margin-top:8px"></p></div>
   <div class="pcard"><h2>Kaynakça</h2><p>Dinî açıklamalar çocuklara uygun özgün anlatımlardır; doğrudan âyet veya hadîs-i şerîf alıntısı olarak sunulmaz. İbadet uygulamalarındaki Hanefî çerçeve, diğer mezheplerin uygulamalarını geçersiz saymaz. Kaynakların listelenmesi kurumsal onay anlamına gelmez.</p>
    ${[1, 2, 3].map(n => `<details style="margin-top:8px"><summary style="min-height:48px;display:flex;align-items:center;font-weight:900;cursor:pointer">${n}. kitap kaynakları</summary>${[...new Set(lessons.filter(l => l.book === n).flatMap(l => l.sourceIds))].map(k => src[k]).filter(Boolean).map(s => `<div class="src"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><small>${esc(s.scope || '')}</small></div>`).join('')}</details>`).join('')}</div>
-  <div class="pcard"><h2>Gizlilik</h2><p>Bu sitede üyelik, hesap, reklam, takip veya analiz yoktur. Çocuğunuzun ilerlemesi ve boyadığı resimler yalnızca bu cihazın tarayıcısında saklanır; hiçbir yere gönderilmez. Tarayıcı verilerini silerseniz bu kayıtlar da silinir.</p><button class="btn small danger" id="reset" style="margin-top:10px">Bu cihazdaki ilerlemeyi ve resimleri sil</button></div>`);
+  <div class="pcard"><h2>Gizlilik</h2><p>Bu sitede üyelik, hesap veya reklam yoktur. Siteyi kaç kişinin açtığını görmek için çerez kullanmayan, kişisel veri toplamayan anonim bir sayım yapılır. Çocuğunuzun ilerlemesi ve boyadığı resimler yine yalnız bu cihazda kalır; hiçbir sunucuya gönderilmez. Tarayıcı verilerini silerseniz bu kayıtlar da silinir.</p><button class="btn small danger" id="reset" style="margin-top:10px">Bu cihazdaki ilerlemeyi ve resimleri sil</button></div>`);
   $$('[data-warm]').forEach(b => b.onclick = () => warm(+b.dataset.warm, $('#warmmsg')));
   $('#reset').onclick = async () => {
     if (!confirm('Bu cihazdaki bütün damgalar ve boyanmış resimler silinecek. Emin misiniz?')) return;
@@ -358,6 +396,27 @@ function gate() {
   const go = () => { if ($('#wordin').value.trim() === String(num)) ok(); else $('#gmsg').textContent = 'Sonuç doğru değil, tekrar deneyin.'; };
   $('#wordgo').onclick = go; $('#wordin').onkeydown = e => { if (e.key === 'Enter') go(); };
   guide('buyuk');
+}
+async function buyukResimler(sel) {
+  const paints = (await listPaints()).sort((x, y) => y.t - x.t), urls = [];
+  const back = `<a class="mini" href="#buyuk" style="margin:0 0 10px">${icon('back')} Büyükler için</a>`;
+  if (sel && parseId(sel)) { // seçilen resim: künyeli önizleme + paylaş
+    const q = parseId(sel), rec = await getPaint(sel);
+    if (rec?.blob) {
+      const blob = await composeArt(sel, rec, { kunye: true }), url = URL.createObjectURL(blob); onLeave(() => URL.revokeObjectURL(url));
+      setMain(`${back}<h1 style="font-size:26px">Resmi paylaş</h1><p class="wrap-lead">${q.b}. kitap, sayfa ${q.p}. Resmin altında küçük bir künye şeridi yer alır.</p>
+        <img class="bigart" src="${url}" alt="Paylaşılacak resim, altında künye şeridiyle"><p class="msg" id="shmsg" role="status"></p>
+        <div class="actions"><button class="btn" id="shbtn">${icon('save')} Paylaş</button><a class="btn ghost" href="#buyuk/resimler">Başka resim</a></div>`);
+      $('#shbtn').onclick = async () => {
+        const r = await shareOrDownload(blob, `iyilik-kitap${q.b}-sayfa${q.p}-resim.png`);
+        $('#shmsg').textContent = r === 'indirildi' ? 'Bu cihazda paylaşma desteklenmiyor; resim indirildi.' : r === 'paylasildi' ? 'Paylaşım penceresi açıldı.' : '';
+      };
+      return;
+    }
+  }
+  setMain(`${back}<h1 style="font-size:26px">Çocuğunuzun resimleri</h1><p class="wrap-lead">Paylaşmak istediğiniz resme dokunun.</p>
+    ${paints.length ? `<div class="gal">${paints.map(x => { const u = URL.createObjectURL(x.thumb); urls.push(u); const q = parseId(x.id); return q ? `<a href="#buyuk/resimler/${x.id}" data-book="${q.b}" aria-label="${q.b}. kitap, sayfa ${q.p}"><img src="${u}" alt=""><span class="badge pg">${q.p}</span></a>` : ''; }).join('')}</div>` : '<div class="empty">Henüz boyanmış bir resim yok.</div>'}`);
+  onLeave(() => urls.forEach(URL.revokeObjectURL));
 }
 async function guideView(l) {
   const src = await loadSources(), f = l.family;
@@ -377,6 +436,10 @@ async function warm(n, out) {
   for (const l of lessons.filter(x => x.book === n)) {
     const A = await au.lessonAudio(l.id); urls.push(`ses/${l.id}.json`);
     if (A) Object.values(A).forEach(u => urls.push(`ses/${l.id}/${u.f}`));
+  }
+  for (const id of await canlanHazir()) if (id.startsWith(`b${n}-`)) { // hazır canlanan sayfalar
+    urls.push(`sayfa/${id}-yol.json`, `sayfa/${id}-renk.json`);
+    try { const r = await (await fetch(`sayfa/${id}-renk.json`)).json(); Object.values(r.ses || {}).forEach(u => urls.push(`ses/${u.f}`)); } catch {}
   }
   let done = 0, fail = 0; const q = [...urls];
   const worker = async () => { while (q.length) { const u = q.shift(); try { const r = await fetch(u); if (!r.ok) fail++; await r.arrayBuffer(); } catch { fail++; } out.textContent = `${n}. cilt indiriliyor… ${++done} / ${urls.length}`; } };

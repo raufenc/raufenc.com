@@ -32,6 +32,8 @@ def page(book=None):
   <link rel="preload" as="font" type="font/woff2" href="font/nunito-latin-ext.woff2" crossorigin>
   <link rel="stylesheet" href="css/app.css">
   <script type="module" src="js/app.js"></script>
+  <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}}</script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">İçeriğe geç</a>
