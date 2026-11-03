@@ -228,7 +228,7 @@ GAMES = {
     'b1-04': ('memory', [('kirli-eller', '', 'sabunlu-eller', ''), ('abdest-su', '', 'seccade', ''),
                          ('daginik-kalemler', '', 'kalemlik', ''), ('daginik-oda', '', 'toplu-oda', '')]),
     'b1-05': ('order', [('kalp', 'Niyet'), ('kol-sivama', 'Kollar'), ('musluk-az', 'Su'), ('el-islatma', 'Eller')]),
-    'b1-06': ('order', [('kalp', 'Niyet'), ('el-islatma', 'Eller'), ('agza-su', 'Ağız'), ('burna-su', 'Burun'), ('yuz-yikama', 'Yüz')]),
+    'b1-06': ('order', [('kalp', 'Niyet'), ('el-islatma', 'Eller'), ('agiz-misvak', 'Ağız'), ('burna-su2', 'Burun'), ('yuz-yikama', 'Yüz')]),
     'b1-07': ('order', [('yuz-yikama', 'Yüz'), ('sag-kol', 'Sağ kol'), ('sol-kol', 'Sol kol'), ('bas-mesh', 'Baş')]),
     'b1-08': ('pairs', [('beden-yuz', 'Yüz', 'yuz-yikama', ''), ('beden-kol', 'Kollar', 'kol-dirsek', ''),
                         ('beden-bas', 'Baş', 'bas-mesh', ''), ('beden-ayak', 'Ayaklar', 'ayak-yikama', '')]),
@@ -237,13 +237,13 @@ GAMES = {
     'b1-11': None,  # aşağıda
     'b1-12': ('listen', [('imam', 'İmam'), ('cemaat', 'Cemaat'), ('saf', 'Saf'), ('pusula', 'Kıble')]),
     'b1-13': ('listen', [('mihrap', 'Mihrap'), ('minber', 'Minber'), ('ayakkabilik', 'Ayakkabılık'), ('sadirvan', 'Şadırvan')]),
-    'b1-14': ('listen', [('kuran-rahle', 'Sûre'), ('yer-imi', 'Âyet'), ('dunya-kitap', 'Meâl'), ('buyutec-kitap', 'Tefsir')]),
+    'b1-14': ('listen', [('kuran-rahle', 'Sûre'), ('ayet-gul', 'Âyet'), ('meal-balon', 'Meâl'), ('tefsir-kitap', 'Tefsir')]),
     'b1-15': ('listen', [('nimet-sepeti', 'Şükür'), ('af-eller', 'Bağışlanma'), ('kalp-uzatan-eller', 'Hayır dileği'), ('fidan-diken-eller', 'Gayret')]),
     'b1-16': ('listen', [('sofra-gece', 'Sahur'), ('iftar', 'İftar'), ('cami-gece', 'Teravih'), ('paylasma-tabak', 'Paylaşma')]),
     'b1-17': ('order', [('sofra-gece', 'Sahur'), ('vakit-sabah', 'İmsak'), ('vakit-ogle', 'Gündüz'), ('iftar', 'İftar')]),
     'b1-18': ('listen', [('liste', 'İhtiyaç'), ('soru-balonu', 'İzin'), ('kazak', 'Özen'), ('zarf-muhurlu', 'Mahremiyet')]),
     'b1-19': ('listen', [('mekke', 'Mekke'), ('ihram', 'İhram'), ('tavaf', 'Tavaf'), ('arafat', 'Arafat')]),
-    'b1-20': ('listen', [('hilal-seker', 'Ramazan Bayramı'), ('koc', 'Kurban Bayramı'), ('cami-sabah', 'Bayram namazı'), ('baklava', 'Tatlı')]),
+    'b1-20': ('listen', [('hilal-seker', 'Ramazan Bayramı'), ('koc', 'Kurban Bayramı'), ('cami-kursun', 'Bayram namazı'), ('baklava', 'Tatlı')]),
     'b2-01': ('order', [('oyuncak-birak', 'Ara ver'), ('kulak', 'Dinle'), ('soru-balonu', 'Sor'), ('fikir-balonu', 'Anlat')]),
     'b2-02': ('pick', [('yardim-eller', '', 'kalp-balonu', ''), ('karisik-ip', '', 'soru-balonu', ''),
                        ('pil-zayif', '', 'yastik', ''), ('kirik-kalp', '', 'ozur-balonu', '')]),
@@ -330,6 +330,28 @@ def used_icons():
                 if x and x not in s:
                     s.append(x)
     return s
+
+
+# --- v5.1 düzeltmeleri (3 Kas 2026): ağız/burun ayrışsın, cami kurşun kubbeli, Kur'ân kelimelerine daha iyi ipucu ---
+_KID_SIDE = 'a child in a green shirt and white cap seen in side view, the front of the head is ONE perfectly smooth round curve with no nose, no lips, no chin bump, no eyes'
+ICONS.update({
+    'agiz-misvak-a': 'a clear glass of water with a small round blue swirl of water above it shaped like a circular arrow (rinsing the mouth), and one natural wooden miswak stick (a short brown twig with a light frayed bristle tip) leaning beside the glass, no person',
+    'agiz-misvak-b': 'one cupped hand full of water with a round blue swirl of water above it shaped like a circular arrow (swishing water), and a wooden miswak stick (short brown twig with frayed light tip) lying in front, no person',
+    'burna-su-a': f'{_KID_SIDE}; the cupped right hand with water is raised to the MIDDLE height of the head, two light blue curved air lines and one bold blue upward arrow rise from the hand toward the head (gently sniffing water in), two tiny water drops',
+    'burna-su-b': 'one cupped hand full of water seen from the side, three light blue curved air lines and one bold blue upward arrow rising from the water (gently sniffing water in), no person',
+    'cami-kursun-a': 'a classic Ottoman-style mosque: one large grey-blue lead-covered dome with two small half domes, two slender pencil-shaped minarets with grey-blue pointed caps, cream stone walls with arched windows, a soft morning sun, no writing, NO green dome',
+    'cami-kursun-b': 'a classic Ottoman-style mosque on a small green hill at sunrise: one large silver grey lead dome, four small grey domes, two tall slender white pencil minarets with grey pointed caps, cream stone walls, light orange morning sky behind, no writing, NO green dome',
+    'ayet-gul-a': 'one round gold ornamental rosette medallion like the small decorative circle that marks the end of a verse on a Quran page: eight soft rounded gold petals around a small green center, completely empty inside, no number, no letters',
+    'ayet-gul-b': 'a short strip of plain cream page with three small round gold rosette ornaments in a row, each with a small green center, like verse-end markers, no numbers, no letters, no lines of writing',
+    'meal-balon': 'a closed plain green book at the bottom, above it two EMPTY speech bubbles side by side, one orange and one blue, joined by a curved two-way arrow between them (meaning carried from one language to another), no letters in the bubbles',
+    'tefsir-kitap': 'an open book with completely blank cream pages, a big magnifying glass held above the pages, and above it a large empty speech bubble with three dots (a long explanation), no writing',
+})
+# seçilen tabaka-22 hücreleri; öteki denemeler ve yerine geçilen eski ikonlar listeden çıkar
+for _new, _old in {'agiz-misvak': 'agiz-misvak-a', 'burna-su2': 'burna-su-a', 'cami-kursun': 'cami-kursun-a', 'ayet-gul': 'ayet-gul-b'}.items():
+    ICONS[_new] = ICONS[_old]
+for _x in ('agiz-misvak-a', 'agiz-misvak-b', 'burna-su-a', 'burna-su-b', 'cami-kursun-a', 'cami-kursun-b', 'ayet-gul-a', 'ayet-gul-b',
+           'agza-su', 'burna-su', 'cami-sabah', 'yer-imi', 'dunya-kitap', 'buyutec-kitap'):
+    del ICONS[_x]
 
 
 if __name__ == '__main__':

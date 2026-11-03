@@ -317,14 +317,15 @@ main:focus,main:focus-visible{outline:0}
 .pc.good{border-color:#4f9a62;background:#e9f5e6}
 .pc.fade{opacity:.35;transform:scale(.94)}
 /* hafıza */
-.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;perspective:900px}
-.mc{position:relative;aspect-ratio:3/4;padding:0;border:0;background:none;border-radius:18px}
+.mem{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;perspective:900px}
+.mc{position:relative;flex:0 0 calc((100% - 20px)/3);max-width:170px;aspect-ratio:4/5;padding:0;border:0;background:none;border-radius:18px}
+@media (min-width:640px){.mc{flex-basis:calc((100% - 30px)/4)}}
 .mc .in{position:absolute;inset:0;transition:transform .45s var(--ease);transform-style:preserve-3d}
 .mc.up .in{transform:rotateY(180deg)}
 .mc .bk,.mc .fr{position:absolute;inset:0;border-radius:18px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:var(--sh2)}
 .mc .bk{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),transparent 55%),var(--accent);color:#fff;border:3px solid #fff}
-.mc .bk .ic{width:34px;height:34px;opacity:.9}
-.mc .fr{background:var(--card);transform:rotateY(180deg);border:3px solid transparent;padding:4px}
+.mc .bk .ic{width:40px;height:40px;opacity:.9}
+.mc .fr{background:var(--card);transform:rotateY(180deg);border:3px solid transparent;padding:2px}
 .mc .fr img{width:100%;height:auto;pointer-events:none}
 .mc.done .fr{border-color:#9fcfa9;background:#eef7ea}
 .mc:active .in{scale:.96}
