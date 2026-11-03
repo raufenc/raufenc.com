@@ -109,7 +109,33 @@
     "sourceIds": [
       "b3-niyet",
       "b3-adab"
-    ]
+    ],
+    "kid": {
+      "title": "Güne hazırlanıyorum",
+      "intro": "Yeni gün, küçük iyiliklere ayrılmış boş bir defter gibidir. Bugün öğrenir, oynar, dinlenir ve yardım edersin. Sen de sabahına güzel bir niyet ekle.",
+      "story": {
+        "scene": "Emir sabah arkadaşına göstereceği resmini bulamıyor. Çantasında oyuncaklar ve kâğıtlar birbirine karışmış.",
+        "question": "Emir hangi adımı seçsin?",
+        "options": [
+          {
+            "text": "Her şeyi yere döküp çıksın.",
+            "feedback": "Bu seçim aramayı ve sonraki hazırlığı zorlaştırır."
+          },
+          {
+            "text": "Babasından yardım isteyip çantayı ayırsın.",
+            "feedback": "Bugünkü ihtiyacını çözer, yarına hazırlanmayı öğrenir."
+          },
+          {
+            "text": "Bir daha resim yapmasın.",
+            "feedback": "Bir aksilik, sevdiğin işi bırakman gerektiğini göstermez."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Emir’in örnek sabah planını sıraya koy."
+      },
+      "task": "Yarın için üç resimli hazırlık kartı çiz ve boya. Birine gün içinde yapabileceğin küçük bir iyiliği ekle."
+    }
   },
   {
     "id": "b3-02",
@@ -221,7 +247,33 @@
     "sourceIds": [
       "b3-temizlik",
       "b3-el-hijyeni"
-    ]
+    ],
+    "kid": {
+      "title": "Ellerimi temiz tutuyorum",
+      "intro": "Bazı kirler gözle görünmeyebilir. Ellerimizi özenle yıkamak, birlikte yaşadığımız insanları da düşünmektir.",
+      "story": {
+        "scene": "Zeynep’in ellerinde boya izi var ve kurabiye ikram ediliyor. Arkadaşı yalnız parmak uçlarını suya tutuyor.",
+        "question": "Zeynep nasıl davranabilir?",
+        "options": [
+          {
+            "text": "Arkadaşına herkesin önünde kirli desin.",
+            "feedback": "Hatırlatmak için arkadaşını utandırması gerekmez."
+          },
+          {
+            "text": "Boyayı kıyafetine silip yesin.",
+            "feedback": "Silmek, su ve sabunla yıkamanın yerini tutmaz."
+          },
+          {
+            "text": "Birlikte ellerini sabunla yıkamayı önersin.",
+            "feedback": "Temizliği birlikte öğrenmek güzel bir yardımdır."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "El yıkama adımlarını sıraya koy."
+      },
+      "task": "Kâğıda iki el çiz. Başparmak ve parmak aralarını farklı renklerle işaretleyerek el yıkama hatırlatıcısı hazırla."
+    }
   },
   {
     "id": "b3-03",
@@ -345,7 +397,33 @@
       "b3-temizlik",
       "b3-israf",
       "b3-adab"
-    ]
+    ],
+    "kid": {
+      "title": "Özenle giyiniyorum",
+      "intro": "Kıyafet seçerken havayı ve nereye gideceğimizi düşünürüz. Özen, sahip olduğumuz kıyafete ve kendimize iyi bakmaktır.",
+      "story": {
+        "scene": "Emir’in sevdiği hırkasının düğmesi kopmuş; Zeynep dikilebileceğini söylüyor. Emir, arkadaşları yepyeni kıyafet görmek ister diye düşünüyor.",
+        "question": "Emir neyi hatırlasın?",
+        "options": [
+          {
+            "text": "Arkadaşlık kıyafetin fiyatına bağlı değildir.",
+            "feedback": "Önemli olan saygı ve birbirimize davranışımızdır."
+          },
+          {
+            "text": "Eski giysiler hep çöpe atılmalıdır.",
+            "feedback": "Kullanılabilir giysiye özen gösterip onarabiliriz."
+          },
+          {
+            "text": "İnsanları giysi fiyatıyla sıralamalıyım.",
+            "feedback": "İnsanları fiyatla değerlendirmek incitici olur."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Durumu özenli davranışla eşleştir."
+      },
+      "task": "Bir gardırop çiz ve boya. İçine temizleme, katlama ve onarma için küçük hatırlatma resimleri ekle."
+    }
   },
   {
     "id": "b3-04",
@@ -458,7 +536,33 @@
       "b3-sofra",
       "b3-adab",
       "b3-israf"
-    ]
+    ],
+    "kid": {
+      "title": "Sofrada özenliyim",
+      "intro": "Sofrada emeği fark eder, nimet için şükrederiz. Yemeğe besmeleyle başlar, bitirince Allahü teâlâya şükrederiz.",
+      "story": {
+        "scene": "Emir sebze yemeğini görünce yüzünü buruşturuyor. Annesi hazırlamak için uğraşmış. Emir emeği incitmek istemiyor.",
+        "question": "Hangi cümle daha özenlidir?",
+        "options": [
+          {
+            "text": "Dünyanın en kötü yemeği!",
+            "feedback": "Bu söz yemeği hazırlayanı incitebilir."
+          },
+          {
+            "text": "Eline sağlık, bugün az alabilir miyim?",
+            "feedback": "İhtiyacını nazikçe ifade ettin."
+          },
+          {
+            "text": "Benim tabağımı başkasına zorla yedirin.",
+            "feedback": "Başkasının miktarına onun yerine karar vermeyiz."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Örnek sofra yolculuğunu sıraya koy."
+      },
+      "task": "Hayalî sofranı çiz. Köşelerine temizlik, besmele, ölçü ve teşekkür davranışlarını anlatan resimler ekleyip boya."
+    }
   },
   {
     "id": "b3-05",
@@ -581,7 +685,33 @@
     "sourceIds": [
       "b3-israf",
       "b3-emanet"
-    ]
+    ],
+    "kid": {
+      "title": "Kalan yemeği saklıyoruz",
+      "intro": "Tencerede biraz yemek kaldı. Ailemizin emeği ve nimetler değerlidir. Kalan yemek için kararı büyüklerimizle veririz.",
+      "story": {
+        "scene": "Zeynep kalan yemek için temiz bir kap getiriyor. Emir, dışarıda duran başka yiyeceği de içine koymak istiyor.",
+        "question": "Çocuklar ne yapmalı?",
+        "options": [
+          {
+            "text": "Yiyecekleri gizlice karıştırsın.",
+            "feedback": "Farklı yiyecekler için yetişkinin değerlendirmesi gerekir."
+          },
+          {
+            "text": "Emin olmak için hepsini tatsın.",
+            "feedback": "Tatmak, güvenli olduğunu anlamanın uygun bir yolu değildir."
+          },
+          {
+            "text": "Kap hazırlayıp annelerinin kararını beklesin.",
+            "feedback": "Yardım ederken saklama kararını yetişkine bırakırlar."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "İşleri uygun kişi veya davranışla eşleştir."
+      },
+      "task": "Bir saklama kabı çiz. Etrafına az almak, büyüğe sormak ve güvenle yardım için üç renkli işaret ekle."
+    }
   },
   {
     "id": "b3-06",
@@ -705,7 +835,33 @@
       "b3-adab",
       "b3-adalet",
       "b3-ahlak"
-    ]
+    ],
+    "kid": {
+      "title": "Okulda saygılıyım",
+      "intro": "Sınıfta her arkadaşın söyleyecek bir sözü olabilir. Saygı, birbirimizin öğrenmesine yer açmaktır. Senin sesin de arkadaşının sesi de değerlidir.",
+      "story": {
+        "scene": "Emir cevabı bildiğini düşünüp heyecanlanıyor. Zeynep ise cümlesini henüz bitirmedi; arkada biri onunla alay ediyor.",
+        "question": "Emir hangi yolu seçsin?",
+        "options": [
+          {
+            "text": "Daha yüksek sesle bağırıp sözü alsın.",
+            "feedback": "Bu, arkadaşının konuşmasını daha da zorlaştırır."
+          },
+          {
+            "text": "Sırasını beklesin ve alaya katılmasın.",
+            "feedback": "Kendi fikrine de arkadaşının sözüne de yer açar."
+          },
+          {
+            "text": "Zeynep’in bir daha konuşmamasını istesin.",
+            "feedback": "Her arkadaşın kendini ifade etme hakkı vardır."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Sınıftaki durumu saygılı karşılıkla eşleştir."
+      },
+      "task": "Bir sınıf resmi çiz. Her öğrenci için bir konuşma balonu ekle ve boya."
+    }
   },
   {
     "id": "b3-07",
@@ -817,7 +973,33 @@
     "sourceIds": [
       "b3-sabir",
       "b3-dua"
-    ]
+    ],
+    "kid": {
+      "title": "Gayret ediyorum",
+      "intro": "Emir’in yapbozundaki son parça yerine oturmuyor. Öğrenmek bazen böyle hissettirir. Yeni yol denemek, dinlenmek ve yardım istemek de gayrettir.",
+      "story": {
+        "scene": "Zeynep bağcığını bağlamayı öğreniyor; Emir daha hızlı bağlıyor. Babası ilk düğümü birlikte yapmayı öneriyor.",
+        "question": "Zeynep hangi düşünceyi seçsin?",
+        "options": [
+          {
+            "text": "Henüz öğreniyorum, yeniden deneyebilirim.",
+            "feedback": "Öğrenmenin zaman alabileceğini kabul ettin."
+          },
+          {
+            "text": "Emir hızlıysa ben değersizim.",
+            "feedback": "Hız, insanın değerini ölçmez."
+          },
+          {
+            "text": "Yardım alırsam hiç öğrenemem.",
+            "feedback": "Uygun destek yeni beceriyi öğrenmeyi kolaylaştırabilir."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Zorlanan yapboz ustasının çözüm adımlarını sırala."
+      },
+      "task": "Üç basamaklı bir merdiven çiz ve boya. Öğrenmek istediğin beceriyi adım adım resimle; bugün ilk adımı dene."
+    }
   },
   {
     "id": "b3-08",
@@ -940,7 +1122,33 @@
     "sourceIds": [
       "b3-merhamet",
       "b3-adalet"
-    ]
+    ],
+    "kid": {
+      "title": "Arkadaşımı davet ediyorum",
+      "intro": "Bahçede oyun sürerken bir arkadaş bankta oturuyor. Emir ile Zeynep onun yerine karar vermeden bir davet sunuyor.",
+      "story": {
+        "scene": "Emir arkadaşını top oyununa çağırıyor. Arkadaşı dizinin yorulduğunu, koşmak istemediğini söylüyor.",
+        "question": "Emir nasıl karşılık versin?",
+        "options": [
+          {
+            "text": "Hemen oynamazsan arkadaşım değilsin desin.",
+            "feedback": "Davetin içinde baskı olmamalıdır."
+          },
+          {
+            "text": "Onu kolundan çekerek götürsün.",
+            "feedback": "Bedenine ve kararına saygı gösterelim."
+          },
+          {
+            "text": "İstersen oturarak oynayalım, desin.",
+            "feedback": "Hem seçenek sundu hem arkadaşının kararını korudu."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Arkadaşının sözünü saygılı cevapla eşleştir."
+      },
+      "task": "Bir oyun bahçesi çiz. Koşarak, oturarak veya resim yaparak katılınabilecek üç farklı köşe tasarla ve boya."
+    }
   },
   {
     "id": "b3-09",
@@ -1052,7 +1260,33 @@
     "sourceIds": [
       "b3-adalet",
       "b3-ahlak"
-    ]
+    ],
+    "kid": {
+      "title": "Oyunda nazik davranıyorum",
+      "intro": "Top sırayla el değiştiriyor. Herkes eğlensin diye birbirimize de dikkat ederiz. Kazanınca da kaybedince de arkadaşımızın hakkını koruruz.",
+      "story": {
+        "scene": "Emir topu yanlış sıradaki arkadaşına verdi. Zeynep kendi sırasının atlandığını söylüyor.",
+        "question": "Emir ne söylesin?",
+        "options": [
+          {
+            "text": "Sıranı atlamışım, şimdi topu sana vereyim.",
+            "feedback": "Hatasını kabul edip hakkı yerine koydu."
+          },
+          {
+            "text": "Ben kazanıyorum, sıra önemli değil.",
+            "feedback": "Kazanmak başkasının hakkını silmez."
+          },
+          {
+            "text": "Beni uyaran hiç oynamasın.",
+            "feedback": "Uyarıyı dinlemek oyunu adil sürdürmeye yardımcı olur."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Bu anlaşmazlığı çözme yolunu sıraya koy."
+      },
+      "task": "Bir top çiz ve dilimlerini boya. Her dilime adil oyunu anlatan sıra, dürüstlük, güvenlik veya mola işareti ekle."
+    }
   },
   {
     "id": "b3-10",
@@ -1164,7 +1398,33 @@
     "sourceIds": [
       "b3-emanet",
       "b3-niyet"
-    ]
+    ],
+    "kid": {
+      "title": "İzin istiyorum",
+      "intro": "Emir, Zeynep’in yeşil kalemine ihtiyaç duyuyor. İzin istemek, eşyanın sahibini ve kararını düşünmektir. Bu küçük soru aramızdaki güveni korur.",
+      "story": {
+        "scene": "Emir, Zeynep’in yeşil kalemini istiyor. Zeynep aynı kalemi kullanıyor ve birazdan verebileceğini söylüyor.",
+        "question": "Emir hangi seçimi yapabilir?",
+        "options": [
+          {
+            "text": "Kalemi elinden çeksin.",
+            "feedback": "İhtiyaç, sahibinin kararını yok saymaya izin vermez."
+          },
+          {
+            "text": "Başka bölümü boyayıp kalemi beklesin.",
+            "feedback": "Hem işine devam eder hem arkadaşının hakkını korur."
+          },
+          {
+            "text": "Artık hiç arkadaşı olmasın.",
+            "feedback": "Bir isteğin ertelenmesi arkadaşlığı bitirmez."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Ödünç kalem yolculuğunu sıraya koy."
+      },
+      "task": "İki kalem kutusu çiz. Aralarına bir izin köprüsü yap: Sor, bekle, koru, geri ver işaretlerini boya."
+    }
   },
   {
     "id": "b3-11",
@@ -1276,7 +1536,33 @@
     "sourceIds": [
       "b3-namaz",
       "b3-niyet"
-    ]
+    ],
+    "kid": {
+      "title": "Namaza zaman ayırıyorum",
+      "intro": "Babası namaza hazırlanırken Emir oyuncağını sepete koyuyor. Oyunu bırakmak bazen zor gelebilir. Önceden haberleşmek yardımcı olur.",
+      "story": {
+        "scene": "Emir bloklardan bir ev kuruyor. Babası biraz sonra namaza hazırlanacaklarını söylüyor; Emir evi bozmak istemiyor.",
+        "question": "Emir hangi yolu seçsin?",
+        "options": [
+          {
+            "text": "Oyuncağını öfkeyle fırlatsın.",
+            "feedback": "Duygusunu söyleyip güvenli bir çözüm bulabilir."
+          },
+          {
+            "text": "Saate bakmadan vakti kendisi uydursun.",
+            "feedback": "Vakit bilgisi güvenilir kaynaktan yetişkinle takip edilir."
+          },
+          {
+            "text": "Oyunu güvenle bırakıp babasıyla hazırlansın.",
+            "feedback": "Geçişi planlamak hazırlığa sakin katılmayı kolaylaştırır."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Beş vaktin gün içindeki sırasını kur."
+      },
+      "task": "Beş küçük pencere çiz ve boya. Altlarına vakit isimlerini bir büyüğünle sırayla yaz."
+    }
   },
   {
     "id": "b3-12",
@@ -1399,7 +1685,33 @@
     "sourceIds": [
       "b3-niyet",
       "b3-emanet"
-    ]
+    ],
+    "kid": {
+      "title": "Ev işlerine katılıyorum",
+      "intro": "Evde herkes bir iş yapınca sofra hazırlanıyor. Emir peçeteleri, Zeynep hafif tabakları getiriyor. Küçük katkılar da değerlidir.",
+      "story": {
+        "scene": "Emir peçeteleri yerleştirdi. Ocaktaki tencereyi de taşımak istiyor; ama tencere sıcak ve ağır.",
+        "question": "Emir ne yapmalı?",
+        "options": [
+          {
+            "text": "Daha güçlü görünmek için tencereyi kaldırsın.",
+            "feedback": "Güç göstermek güvenli yardımın ölçüsü değildir."
+          },
+          {
+            "text": "Masada yer açıp tencereyi yetişkine bıraksın.",
+            "feedback": "Kendi yapabileceği işle gerçek bir katkı sağlar."
+          },
+          {
+            "text": "Sıcak kabı arkadaşına versin.",
+            "feedback": "Tehlikeli işi başka çocuğa devretmek çözüm olmaz."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Evdeki işi uygun güvenli seçimle eşleştir."
+      },
+      "task": "Evde yaptığın küçük bir yardımı çiz ve boya. Yanına o işi kolaylaştıran bir aile üyesini ve teşekkür işareti ekle."
+    }
   },
   {
     "id": "b3-13",
@@ -1522,7 +1834,33 @@
     "sourceIds": [
       "b3-komsu",
       "b3-adalet"
-    ]
+    ],
+    "kid": {
+      "title": "Komşumu düşünüyorum",
+      "intro": "Duvarın öbür yanında komşularımız yaşıyor. Biri uyuyor, biri dinleniyor olabilir. Komşuluk, onların hakkını gözetmektir.",
+      "story": {
+        "scene": "Zeynep evde zıplama oyunu kuruyor. Alt komşu gündüz dinleniyor; Emir halıda yapı oyunu öneriyor.",
+        "question": "Zeynep hangi seçimi yapsın?",
+        "options": [
+          {
+            "text": "Evde sakin oynayıp zıplamayı uygun yerde yapsın.",
+            "feedback": "Hem oyun ihtiyacını hem komşunun dinlenmesini düşündü."
+          },
+          {
+            "text": "Komşu duysun diye daha çok zıplasın.",
+            "feedback": "Bilerek rahatsız etmek ilişkiyi zedeler."
+          },
+          {
+            "text": "Bir daha hiç oyun oynamasın.",
+            "feedback": "Çözüm oyunu tamamen bırakmak değildir."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Komşuluğu kolaylaştıran seçimleri eşleştir."
+      },
+      "task": "Bir apartman çiz ve boya. Her pencerede farklı bir günlük iş göster; ortak girişte herkese açık bir yol bırak."
+    }
   },
   {
     "id": "b3-14",
@@ -1635,7 +1973,33 @@
       "b3-misafir",
       "b3-adab",
       "b3-israf"
-    ]
+    ],
+    "kid": {
+      "title": "Misafirime ikram ediyorum",
+      "intro": "Kapı çalınca ailemizle misafirimizi karşılarız. Su teklif etmek veya gülümseyerek selam vermek güzel ikramlardır.",
+      "story": {
+        "scene": "Emir misafir çocuğa meyve teklif ediyor. Çocuk teşekkür edip istemediğini söylüyor; Emir biraz üzülüyor.",
+        "question": "Emir ne söylesin?",
+        "options": [
+          {
+            "text": "Yemezsen bizimle oynayamazsın.",
+            "feedback": "İkramı kabul etmek oyuna katılma şartı değildir."
+          },
+          {
+            "text": "Mutlaka hepsini bitirmelisin.",
+            "feedback": "Israr, misafirin rahatını azaltabilir."
+          },
+          {
+            "text": "Peki, istersen sonra söyleyebilirsin.",
+            "feedback": "Nazik teklifini koruyup seçimine saygı gösterdi."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Bu örnek misafir karşılama yolunu sırala."
+      },
+      "task": "Bir misafir köşesi çiz ve boya. İki rahat yer, sade bir ikram ve birlikte kullanılabilecek bir oyun ekle."
+    }
   },
   {
     "id": "b3-15",
@@ -1759,7 +2123,33 @@
       "b3-israf",
       "b3-emanet",
       "b3-adalet"
-    ]
+    ],
+    "kid": {
+      "title": "Ölçülü alışveriş yapıyorum",
+      "intro": "Dükkândaki renkli paketler gözümüze çarpıyor. Ama bugün listemizde ekmek ve birkaç elma var. Ölçü, imkânlarımızı düşünerek kullanmaktır.",
+      "story": {
+        "scene": "Emir elmaları seçmeye yardım ediyor. Kasada babası para üstünün fazla olduğunu fark edip kasiyere söylüyor.",
+        "question": "Bu davranış bize ne öğretir?",
+        "options": [
+          {
+            "text": "Yanlışlık lehimize olsa da hakkı gözetiriz.",
+            "feedback": "Dürüstlük, yalnız zarar gördüğümüzde önemli değildir."
+          },
+          {
+            "text": "Sıra varsa yanlışlık hiç söylenmez.",
+            "feedback": "Nazikçe haber vererek düzeltmek mümkündür."
+          },
+          {
+            "text": "Fazla para otomatik olarak bizim olur.",
+            "feedback": "Yanlışlık hak sahipliğini değiştirmez."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Alışveriş sorusunu uygun adımla eşleştir."
+      },
+      "task": "Üç bölmeli alışveriş kâğıdı çiz: İhtiyaç, evde var, sonra düşünülebilir. Ailenle örnek resimler ekleyip boya."
+    }
   },
   {
     "id": "b3-16",
@@ -1872,7 +2262,33 @@
       "b3-yaya",
       "b3-yaya-isik",
       "b3-emanet"
-    ]
+    ],
+    "kid": {
+      "title": "Yolda güvenliyim",
+      "intro": "Emir babasının, Zeynep annesinin yanında yürüyor. Güvenli geçiş için bekleyecekler. Canımız kıymetlidir; dikkatli davranışları ailemizle öğreniriz.",
+      "story": {
+        "scene": "Yaya ışığı yeşile döndü. Emir parka acele etmek istiyor, ama bir araç henüz tam durmadı.",
+        "question": "Emir ne yapmalı?",
+        "options": [
+          {
+            "text": "Yeşil yandığı için hemen koşmalı.",
+            "feedback": "Yeşil ışıkta bile araçların durduğunu kontrol ederiz."
+          },
+          {
+            "text": "Babasının yanında bekleyip birlikte geçmeli.",
+            "feedback": "Dikkatli beklemek canımızı korur."
+          },
+          {
+            "text": "Araç dursun diye yolun ortasına çıkmalı.",
+            "feedback": "Araçları durdurmak çocuğun görevi değildir."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Işıklı geçitte güvenli geçiş sırasını kur."
+      },
+      "task": "Kâğıda bir yol ve yaya geçidi çiz. Aileni kaldırımda göster; güvenli bekleme yerini farklı renkle boya."
+    }
   },
   {
     "id": "b3-17",
@@ -1996,7 +2412,33 @@
       "b3-temizlik",
       "b3-israf",
       "b3-adalet"
-    ]
+    ],
+    "kid": {
+      "title": "Çevremi temiz tutuyorum",
+      "intro": "Piknik bitti. Emir kendi peçetesini topluyor; Zeynep örtüyü katlamaya yardım ediyor. Çevreyi temiz tutmak, bizden sonra gelecekleri de düşünmektir.",
+      "story": {
+        "scene": "Emir çalıların arasında kırık bir cam görüyor. Camı almak istiyor ama keskin olduğunu fark ediyor.",
+        "question": "Emir nasıl yardım edebilir?",
+        "options": [
+          {
+            "text": "Camı çıplak elle toplayarak.",
+            "feedback": "Keskin atıklar çocukların toplayacağı nesneler değildir."
+          },
+          {
+            "text": "Camı ayağıyla kenara iterek.",
+            "feedback": "Yaklaşmadan yetişkine haber vermek daha uygundur."
+          },
+          {
+            "text": "Dokunmadan yerini yetişkine söyleyerek.",
+            "feedback": "Tehlikeyi haber vermek de değerli yardımdır."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Çevre durumunu uygun davranışla eşleştir."
+      },
+      "task": "Aynı parkın iki hâlini çiz: Gelirken ve ayrılırken. Ayrılırken eşyaların toplanmış, alan temiz olsun."
+    }
   },
   {
     "id": "b3-18",
@@ -2108,7 +2550,33 @@
     "sourceIds": [
       "b3-hayvan",
       "b3-merhamet"
-    ]
+    ],
+    "kid": {
+      "title": "Hayvanlara güvenle yardım ediyorum",
+      "intro": "Emir çimenlerde hareketsiz duran küçük bir kuş görüyor. Önce biraz uzakta durup babasına haber veriyor. Merhamet, doğru yardım yolunu bulmaya çalışmaktır.",
+      "story": {
+        "scene": "Zeynep ve Emir uçamıyor gibi görünen bir kuş fark ediyor. Emir ekmek vermeyi, Zeynep büyüğe haber vermeyi düşünüyor.",
+        "question": "En uygun ilk adım hangisidir?",
+        "options": [
+          {
+            "text": "Kuşu yakalayıp çantaya koymak.",
+            "feedback": "Yakalamak hem kuşa hem çocuğa zarar verebilir."
+          },
+          {
+            "text": "Uzakta kalıp yetişkine haber vermek.",
+            "feedback": "Doğru yardımın ulaşmasına güvenle katkı sağlanır."
+          },
+          {
+            "text": "Her yiyeceği önüne dökmek.",
+            "feedback": "Hayvana uygun olmayan yiyecekler verilmemelidir."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Hayvana yardım için güvenli yolu sırala."
+      },
+      "task": "Bir kuş ve uzakta duran bir aile çiz. Aralarına geniş bir çimenlik bırakıp boya."
+    }
   },
   {
     "id": "b3-19",
@@ -2233,7 +2701,33 @@
       "b3-mahremiyet",
       "b3-emanet",
       "b3-ahlak"
-    ]
+    ],
+    "kid": {
+      "title": "Ekranda güvendeyim",
+      "intro": "Her mesajı yanıtlamak zorunda değiliz. Yardım istemek, ekranı güvenle kullanmanın parçasıdır.",
+      "story": {
+        "scene": "Emir’in ekranında bedava oyun hediyesi yazan bir mesaj açılıyor. Mesaj ev adresini istiyor ve ailesine söylememesini söylüyor.",
+        "question": "Emir ne yapmalı?",
+        "options": [
+          {
+            "text": "Bilgi vermeden annesine göstermeli.",
+            "feedback": "Rahatsız eden isteği güvenilir yetişkine anlatmak doğru adımdır."
+          },
+          {
+            "text": "Hediye için bütün bilgileri yazmalı.",
+            "feedback": "Ödül vaadi özel bilgileri paylaşmak için gerekçe değildir."
+          },
+          {
+            "text": "Mesajı gizleyip tek başına çözmeli.",
+            "feedback": "Yetişkin desteği alabilir; bu yükü yalnız taşımaz."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Ekran durumunu güvenli adımla eşleştir."
+      },
+      "task": "Bir güvenli ekran kalkanı çiz. Üzerine dur, düşün, paylaşma ve büyüğüne anlat işaretlerini koyup boya."
+    }
   },
   {
     "id": "b3-20",
@@ -2346,6 +2840,32 @@
       "b3-dua",
       "b3-niyet",
       "b3-emanet"
-    ]
+    ],
+    "kid": {
+      "title": "Günü dua ile bitiriyorum",
+      "intro": "Gün biterken ailemizle konuşur, şükreder ve dua ederiz. Her gün kusursuz olmak zorunda değildir.",
+      "story": {
+        "scene": "Zeynep, Emir’in resmini yanlışlıkla buruşturduğunu hatırlıyor. Özür dilemiş ama yarın düzeltmeye yardım etmek istiyor.",
+        "question": "Zeynep hangi yolu seçsin?",
+        "options": [
+          {
+            "text": "Kendisine kötü çocuk desin.",
+            "feedback": "Bir davranışı düzeltmek için kendini değersizleştirmene gerek yok."
+          },
+          {
+            "text": "Dua edince düzeltmeye gerek yok sansın.",
+            "feedback": "Dua ve hakkı düzeltmek için çaba birlikte olabilir."
+          },
+          {
+            "text": "Yarın resmi birlikte düzeltmeyi planlasın.",
+            "feedback": "Sorumluluk alıp dinlenmek için uygun bir adım seçti."
+          }
+        ]
+      },
+      "game": {
+        "instruction": "Bu örnek akşam yolculuğunu sırala."
+      },
+      "task": "Bir gece gökyüzü çiz. Üç yıldız boya: Şükrettiğin bir nimet, öğrendiğin bir şey ve yarınki iyiliğin."
+    }
   }
 ]

@@ -1,6 +1,8 @@
 // Dokun-boya stüdyosu: kitabın gerçek sayfası, önceden hesaplanmış bölge haritasıyla anında doldurma.
 import { getPaint, putPaint, delPaint } from './store.js';
 import { icon } from './icons.js';
+import { sfx } from './sfx.js';
+import { celebrate } from './cele.js';
 
 export const PALETTE = ['#e53935', '#ff7043', '#ffb300', '#fdd835', '#c0ca33', '#7cb342', '#2e9e55', '#00897b',
   '#26c6da', '#42a5f5', '#1e5fd0', '#5c4bc4', '#9c27b0', '#ec407a', '#ffd9bd', '#e2ad80', '#a86b43', '#6d4326',
@@ -10,7 +12,7 @@ const MAXUNDO = 12;
 const names = { bucket: 'Kova', brush: 'Fırça', eraser: 'Silgi', hand: 'Kaydır' };
 const toolAria = { bucket: 'Boya kovası: bir bölgeye dokununca doldurur', brush: 'Fırça', eraser: 'Silgi', hand: 'Kaydır: resmi parmakla taşı' };
 
-export async function openStudio(host, { b, p, toast, say }) {
+export async function openStudio(host, { b, p, toast, say, onDone }) {
   const id = `b${b}-${String(p).padStart(2, '0')}`;
   const base = `sayfa/${id}`;
   host.innerHTML = `
@@ -22,6 +24,7 @@ export async function openStudio(host, { b, p, toast, say }) {
       <button class="ibtn" data-act="redo" aria-label="Yinele" disabled>${icon('redo')}</button>
       <button class="ibtn save" data-act="save" aria-label="Resmimi kaydet">${icon('save')}<span>Kaydet</span></button>
       <button class="ibtn" data-act="clear" aria-label="Baştan başla">${icon('trash')}</button>
+      <button class="ibtn done" data-act="done" aria-label="Bitti, resmimi duvarıma as">${icon('check')}<span>Bitti</span></button>
     </div>
     <div class="st-stage" id="stage" role="application" aria-label="Boyama alanı. Bir renk seçip resme dokun.">
       <div class="paper" id="paper" style="background-image:url(${base}-t.webp)">
@@ -48,7 +51,8 @@ export async function openStudio(host, { b, p, toast, say }) {
   const ctx = cv.getContext('2d', { willReadFrequently: true });
   let W = 0, H = 0, labels, minx, miny, maxx, maxy;
   let tool = 'bucket', color = PALETTE[0], size = 1;
-  let imgData, u32, stale = true, painted = false, dirtyTimer = 0, destroyed = false;
+  let imgData, u32, stale = true, painted = false, dirtyTimer = 0, destroyed = false, stopCele = null;
+  const used = new Set();
   const undo = [], redo = [];
   let z = 1, tx = 0, ty = 0, bs = 1;
 
@@ -105,7 +109,7 @@ export async function openStudio(host, { b, p, toast, say }) {
     const before = ctx.getImageData(bx, by, w, h);
     for (let yy = by; yy < by + h; yy++) { const row = yy * W; for (let xx = bx; xx < bx + w; xx++) if (labels[row + xx] === L) u32[row + xx] = col; }
     ctx.putImageData(imgData, 0, 0, bx, by, w, h);
-    painted = true; pushUndo({ bx, by, w, h, data: before }); navigator.vibrate?.(8);
+    painted = true; used.add(color); pushUndo({ bx, by, w, h, data: before }); navigator.vibrate?.(8); sfx.fill();
   }
   function regionIs(L, col) { for (let yy = miny[L]; yy <= maxy[L]; yy++) for (let xx = minx[L]; xx <= maxx[L]; xx++) if (labels[yy * W + xx] === L && u32[yy * W + xx] !== col) return false; return true; }
 
@@ -131,7 +135,7 @@ export async function openStudio(host, { b, p, toast, say }) {
     const r = SIZES[size] / 2 + 2;
     const bx = Math.max(0, Math.floor(s.x0 - r)), by = Math.max(0, Math.floor(s.y0 - r));
     const w = Math.min(W, Math.ceil(s.x1 + r)) - bx, h = Math.min(H, Math.ceil(s.y1 + r)) - by;
-    painted = true; pushUndo({ bx, by, w, h, data: crop(s.snap.data, W, bx, by, w, h) });
+    painted = true; if (tool === 'brush') used.add(color); pushUndo({ bx, by, w, h, data: crop(s.snap.data, W, bx, by, w, h) });
     updButtons();
   }
   function step(from, to) {
@@ -232,6 +236,16 @@ export async function openStudio(host, { b, p, toast, say }) {
     if (ok === false) toast('Resmin bu cihazda saklanamadı. “Kaydet” ile indirebilirsin.');
   }
   function hasPaint() { sync(); for (let i = 0; i < u32.length; i++) if (u32[i] >>> 24) return true; return false; }
+  function coverage() { sync(); let n = 0, k = 0; for (let i = 0; i < u32.length; i += 7) { k++; if (u32[i] >>> 24) n++; } return n / k; }
+  async function finish() {
+    $('.bravo')?.remove(); stopCele?.();
+    if (coverage() < 0.05) { toast('Biraz daha boyamak ister misin? Sonra yine “Bitti”ye dokun.'); say?.('az'); sfx.soft(); return; }
+    await persist();
+    const said = onDone?.() || {};
+    stopCele = celebrate({ stage, paper, colors: [...used], text: said.text }); sfx.chime();
+    stage.insertAdjacentHTML('beforeend', `<div class="bravo" role="status"><div class="seal">${icon('star')}</div><p>${said.text || 'Mâşallah, ne güzel boyamışsın!'}</p>
+      <div class="row"><a class="btn small" href="#resimler/yeni/${id}">${icon('star')} Duvarıma bak</a><button class="btn small ghost" data-act="keep">Boyamaya devam</button></div></div>`);
+  }
   async function exportPNG() {
     if (!hasPaint()) { toast('Önce biraz boya, sonra kaydedebilirsin.'); return; }
     const c = document.createElement('canvas'); c.width = W; c.height = H;
@@ -240,11 +254,12 @@ export async function openStudio(host, { b, p, toast, say }) {
     const url = URL.createObjectURL(blob), a = document.createElement('a');
     a.href = url; a.download = `iyilik-kitap${b}-sayfa${p}-resmim.png`; document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 15000);
-    toast('Resmin kaydedildi.'); say?.('kaydet');
+    toast('Resmin kaydedildi.');
   }
 
   const onClick = async ev => {
     const t = ev.target.closest('button'); if (!t) return;
+    sfx.tap();
     if (t.dataset.tool) return setTool(t.dataset.tool);
     if (t.dataset.c) { setColor(t.dataset.c); if (tool === 'hand' || tool === 'eraser') setTool('bucket'); return; }
     if (t.dataset.size) return setSize(+t.dataset.size);
@@ -255,7 +270,9 @@ export async function openStudio(host, { b, p, toast, say }) {
     else if (act === 'zout') zoomAt(1 / 1.5, r.width / 2, r.height / 2);
     else if (act === 'fit') { z = 1; clamp(); apply(); }
     else if (act === 'save') exportPNG();
-    else if (act === 'clear') { $('#sheet').hidden = false; say?.('sil'); $('[data-act=clear-no]').focus(); }
+    else if (act === 'done') finish();
+    else if (act === 'keep') { $('.bravo')?.remove(); }
+    else if (act === 'clear') { $('#sheet').hidden = false; $('[data-act=clear-no]').focus(); }
     else if (act === 'clear-no') $('#sheet').hidden = true;
     else if (act === 'clear-yes') {
       $('#sheet').hidden = true;
@@ -269,7 +286,7 @@ export async function openStudio(host, { b, p, toast, say }) {
   document.addEventListener('visibilitychange', onHide);
   return {
     destroy() {
-      destroyed = true; ro.disconnect(); host.removeEventListener('click', onClick); document.removeEventListener('visibilitychange', onHide);
+      destroyed = true; stopCele?.(); ro.disconnect(); host.removeEventListener('click', onClick); document.removeEventListener('visibilitychange', onHide);
       if (dirtyTimer && painted) persist();
     },
   };

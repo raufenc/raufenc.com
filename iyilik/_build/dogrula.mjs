@@ -33,8 +33,9 @@ for (const l of lessons) {
   const jf = path.join(ROOT, `ses/${l.id}.json`);
   if (!fs.existsSync(jf)) { fail('ses dizini eksik ' + l.id); continue; }
   const idx = JSON.parse(fs.readFileSync(jf, 'utf8'));
-  const need = ['title', 'intro', 'story', 'game', 'task', ...l.learn.map((_, i) => `learn${i}`), ...l.deeper.map((_, i) => `deeper${i}`),
-    ...l.quiz.flatMap((_, i) => [`q${i}`, `qx${i}`]), ...l.story.options.flatMap((_, i) => [`sopt${i}`, `sfb${i}`]),
+  // v4: çocuğa yalnız kısa metin (kid) okunur; uzun metin Büyükler bölümünde yazı olarak durur
+  if (!l.kid) fail(`${l.id}: kid (kısa çocuk metni) yok`);
+  const need = ['title', 'intro', 'story', 'game', 'task', ...l.story.options.flatMap((_, i) => [`sopt${i}`, `sfb${i}`]),
     ...(l.game.pairs || []).flatMap((_, i) => [`ga${i}`, `gb${i}`]), ...(l.game.items || []).map((_, i) => `go${i}`)];
   for (const u of need) {
     if (!idx[u]) { fail(`${l.id}: birim yok ${u}`); continue; }
