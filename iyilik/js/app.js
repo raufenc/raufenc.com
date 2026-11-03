@@ -3,9 +3,6 @@ import { state, save, getPaint, listPaints, clearPaints } from './store.js';
 import { icon } from './icons.js';
 import * as au from './audio.js';
 import { openStudio } from './paint.js';
-import { openCanlan } from './canlan.js';
-// Canlanan sayfalar Rauf'un kararıyla kaldırıldı (3 Kas 2026); düğmeler hiçbir sayfada görünmez.
-const canlanHazir = async () => new Set();
 import { composeArt, shareOrDownload, idOf, parseId } from './galeri.js';
 
 const { esc, S, SS, splitSentences } = au;
@@ -121,11 +118,11 @@ async function sayfa(b, p) {
   b = +b; p = +p; if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return kitap(b);
   await loadBook(b);
   state.book = b; persist();
-  const L = topicOfPage(b, p), hazir = await canlanHazir();
+  const L = topicOfPage(b, p);
   setMain(`<div class="pageview" data-book="${b}"><small style="color:var(--accent);font-weight:900">${b}. KİTAP</small><h1>Sayfa ${p}</h1>
     <p class="wrap-lead" id="ptitle">${L ? `<span data-unit="title" data-q><span class="s" data-i="0">${esc(L.title)}</span></span>` : 'Bu sayfayı boyayabilirsin.'}</p>
     <img class="thumb" src="sayfa/${pid(b, p)}-t.webp" width="260" height="374" alt="Kitabındaki ${p}. sayfa">
-    <div class="actions">${hazir.has(pid(b, p)) ? `<a class="btn" href="#canlan/${b}/${p}">${icon('play')} Canlandır</a>` : ''}<a class="btn ${hazir.has(pid(b, p)) ? 'ghost' : ''}" href="#boya/${b}/${p}">${icon('paint')} Bu sayfayı boya</a>${L ? `<a class="btn ghost" href="#konu/${L.id}">${icon('listen')} Konuyu dinle ve oyna</a>` : ''}</div>
+    <div class="actions"><a class="btn" href="#boya/${b}/${p}">${icon('paint')} Bu sayfayı boya</a>${L ? `<a class="btn ghost" href="#konu/${L.id}">${icon('listen')} Konuyu dinle ve oyna</a>` : ''}</div>
     <div class="pager"><a class="ibtn" href="#sayfa/${b}/${Math.max(1, p - 1)}" aria-label="Önceki sayfa">${icon('back')}</a><a class="btn ghost small" href="#kitap/${b}">Başka sayfa</a><a class="ibtn" href="#sayfa/${b}/${Math.min(48, p + 1)}" aria-label="Sonraki sayfa">${icon('next')}</a></div></div>`);
   if (state.sound && interacted) {
     const A = L ? await au.lessonAudio(L.id) : null;
@@ -153,7 +150,7 @@ async function konular(n) {
 // ---- ders ----
 const STEPS = [['dinle', 'listen', 'Dinle'], ['hikaye', 'story', 'Hikâye'], ['oyun', 'game', 'Oyun'], ['soru', 'question', 'Soru'], ['gorev', 'heart', 'Görev']];
 async function konu(id, step = 'dinle', alive) {
-  await loadAll(); const hazir = await canlanHazir();
+  await loadAll();
   const l = byId[id]; if (!l) return home();
   if (!STEPS.some(s => s[0] === step)) step = 'dinle';
   state.last = id; state.visits[id] = Date.now(); persist();
@@ -182,7 +179,6 @@ async function konu(id, step = 'dinle', alive) {
     const done = !!state.completed[id], page = l.pages[1];
     body = `<div class="task"><h3>Bugünkü görevin</h3><p class="txt" data-unit="task" data-q>${SS(A, 'task', 0, l.task)}</p>${spk('task')}
       <label class="check"><input type="checkbox" id="taskck" ${state.tasks[id] ? 'checked' : ''}> Görevi yaptım</label></div>
-      ${l.pages.filter(pg => hazir.has(pid(l.book, pg))).map(pg => `<a class="btn ghost" style="width:100%;margin-bottom:12px" href="#canlan/${l.book}/${pg}">${icon('play')} Kitabımın ${pg}. sayfasını canlandır</a>`).join('')}
       <a class="btn" style="width:100%;margin-bottom:12px" href="#boya/${l.book}/${page}">${icon('paint')} Kitabımın ${page}. sayfasını boya</a>
       <div id="finish">${done ? `<div class="cele"><div class="stamp">★</div><h2>Bu konunun damgası sende!</h2></div>` : `<button class="btn" id="fin" style="width:100%">${icon('star')} Konuyu bitirdim, damgamı al</button>`}</div>
       <div class="sec">${nextPrev(l)}</div><p class="note"><a href="#buyuk/${id}" style="text-decoration:underline">${icon('lock', '')} Büyükler için bu konunun rehberi</a></p>`;
@@ -306,18 +302,8 @@ async function boya(b, p) {
     <div class="grid" id="bg" style="grid-template-columns:repeat(3,1fr)">${Array.from({ length: 48 }, (_, k) => k + 1).map(p => `<a class="tcard" data-book="${b}" href="#boya/${b}/${p}" aria-label="Sayfa ${p}${painted.has(pid(b, p)) ? ', boyandı' : ''}"><img loading="lazy" src="sayfa/${pid(b, p)}-t.webp" alt="" width="260" height="374"><span class="badge pg">${p}</span>${painted.has(pid(b, p)) ? '<span class="badge" aria-hidden="true">🎨</span>' : ''}</a>`).join('')}</div>`);
   guide('boyalar');
 }
-async function canlan(b, p) {
-  b = +b; p = +p;
-  // kaldırıldı: eski #canlan bağlantıları sayfanın kendisine gider
-  if ([1, 2, 3].includes(b) && p >= 1 && p <= 48) return sayfa(b, p);
-  if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return kitap(b);
-  state.book = b; persist();
-  document.body.classList.add('studio-on');
-  const mine = token;
-  const s = await openCanlan(main, { b, p, toast });
-  if (mine !== token) { s.destroy(); return; }
-  studio = s;
-}
+// Canlanan sayfalar kaldırıldı (3 Kas 2026): eski #canlan/B/S bağlantıları sayfanın kendisine gider.
+const canlan = (b, p) => sayfa(b, p);
 async function studioView(b, p) {
   if (![1, 2, 3].includes(b) || !(p >= 1 && p <= 48)) return boya(b);
   state.book = b; persist();
@@ -440,10 +426,6 @@ async function warm(n, out) {
   for (const l of lessons.filter(x => x.book === n)) {
     const A = await au.lessonAudio(l.id); urls.push(`ses/${l.id}.json`);
     if (A) Object.values(A).forEach(u => urls.push(`ses/${l.id}/${u.f}`));
-  }
-  for (const id of await canlanHazir()) if (id.startsWith(`b${n}-`)) { // hazır canlanan sayfalar
-    urls.push(`sayfa/${id}-yol.json`, `sayfa/${id}-renk.json`);
-    try { const r = await (await fetch(`sayfa/${id}-renk.json`)).json(); Object.values(r.ses || {}).forEach(u => urls.push(`ses/${u.f}`)); } catch {}
   }
   let done = 0, fail = 0; const q = [...urls];
   const worker = async () => { while (q.length) { const u = q.shift(); try { const r = await fetch(u); if (!r.ok) fail++; await r.arrayBuffer(); } catch { fail++; } out.textContent = `${n}. cilt indiriliyor… ${++done} / ${urls.length}`; } };

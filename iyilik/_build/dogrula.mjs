@@ -48,22 +48,6 @@ const ui = JSON.parse(fs.readFileSync(path.join(ROOT, 'ses/ui.json'), 'utf8'));
 for (const [k, v] of Object.entries(ui)) if (!fs.existsSync(path.join(ROOT, 'ses', v.f))) fail('ui ses yok ' + k);
 console.log(`diskte: ${count.json} json, ${count.js} js, ${count.webp} webp, ${count.mp3} mp3; ${units} ses birimi, ${cues} cümle, ${Object.keys(ui).length} arayüz sesi`);
 
-// 2b. canlanan sayfalar: yol + renk + ses bütünlüğü
-const hazir = JSON.parse(fs.readFileSync(path.join(ROOT, 'sayfa/canlan.json'), 'utf8'));
-for (const id of hazir) {
-  try {
-    const yol = JSON.parse(fs.readFileSync(path.join(ROOT, `sayfa/${id}-yol.json`), 'utf8'));
-    const renk = JSON.parse(fs.readFileSync(path.join(ROOT, `sayfa/${id}-renk.json`), 'utf8'));
-    if (!(yol.e.length > 50)) fail(`${id}: yol az`);
-    for (const e of yol.e) if ((e.length - 1) % 3 !== 0 || e.some(v => !Number.isInteger(v))) { fail(`${id}: yol biçimi bozuk`); break; }
-    const n = renk.e.length, seen = new Set();
-    for (const g of renk.g) for (const r of g) { if (!(r >= 1 && r <= n)) fail(`${id}: bölge dışı ${r}`); if (seen.has(r)) fail(`${id}: bölge iki kez ${r}`); seen.add(r); if (!renk.e[r - 1][1]) fail(`${id}: renksiz bölge sırada ${r}`); }
-    for (const [k, v] of Object.entries(renk.ses || {})) if (!fs.existsSync(path.join(ROOT, 'ses', v.f))) fail(`${id}: ses yok ${k}`);
-    if (!/^#[0-9a-f]{6}$/.test(renk.e.find(x => x[1])?.[1] || '')) fail(`${id}: renk biçimi`);
-  } catch (e) { fail(`${id}: canlan dosyaları okunamadı (${e.message})`); }
-}
-console.log(`canlanan sayfa: ${hazir.length} (${hazir.join(', ')})`);
-
 // 3. HTTP 200
 const list = [...urls];
 let ok = 0;

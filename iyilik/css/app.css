@@ -132,27 +132,4 @@ body.studio-on .nav,body.studio-on .top,body.studio-on .dock{display:none}body.s
 
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* ---- v3: canlanan sayfa ---- */
-.cn{position:fixed;inset:0;display:flex;flex-direction:column;background:#efe9d6;z-index:30}
-.cn-stage{position:relative;flex:1;min-height:0;display:grid;place-items:center;container-type:size;overflow:hidden}
-.cn-paper{position:relative;aspect-ratio:832/1196;width:min(100cqw,calc(100cqh*832/1196));background:#fffdf6;box-shadow:0 4px 18px rgba(0,0,0,.25);overflow:hidden}
-.cn-zoom{position:absolute;inset:0;transform-origin:50% 45%;will-change:transform}
-.cn-zoom canvas,.cn-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.cn-fx{opacity:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
-.cn-fxa{background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.34) 50%,transparent 62%) 0 0/320% 100%,radial-gradient(ellipse 34% 9% at 22% 30%,rgba(255,255,255,.4),transparent 72%) 0 0/160% 100%,radial-gradient(ellipse 28% 8% at 72% 62%,rgba(255,255,255,.32),transparent 72%) 0 0/160% 100%;animation:cn-shim 9s linear infinite,cn-cloud 26s ease-in-out infinite alternate}
-.cn-fxb{background:radial-gradient(circle at 50% 50%,rgba(255,247,205,.7),rgba(255,247,205,0) 75%);animation:cn-glow 4s ease-in-out infinite alternate}
-@keyframes cn-shim{from{background-position:130% 0,0 0,0 0}to{background-position:-30% 0,0 0,0 0}}
-@keyframes cn-cloud{from{background-position:130% 0,0 0,100% 0}to{background-position:130% 0,100% 0,0 0}}
-@keyframes cn-glow{from{filter:opacity(.25)}to{filter:opacity(.8)}}
-.cn.paused .cn-fx{animation-play-state:paused}
-.cn-load{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-weight:900;color:var(--muted);padding:20px}
-.cn-load[hidden],.cn-unmute[hidden],.cn-ctl[hidden]{display:none}.cn-cta.off{visibility:hidden}
-.cn-unmute{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);min-height:52px;padding:0 20px;border-radius:26px;border:0;background:var(--green,#2e6b4f);color:#fff;font:inherit;font-weight:900;display:flex;gap:8px;align-items:center;box-shadow:0 3px 10px rgba(0,0,0,.3)}
-.cn-cap{height:64px;overflow:hidden;padding:6px 14px;text-align:center;font-weight:900;font-size:18px;line-height:1.25;background:var(--paper);display:grid;place-items:center}
-.cn-dock{background:var(--paper);border-top:2px solid var(--line);padding:8px 10px max(10px,env(safe-area-inset-bottom));display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap}
-.cn-ctl{display:flex;gap:10px}
-.cn-cta{min-height:58px;font-size:22px;padding:0 28px;animation:cn-pop .5s ease-out}
-@keyframes cn-pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion:reduce){.cn-fx,.cn-cta{animation:none}}
-
 .bigart{display:block;width:100%;max-width:520px;margin:10px auto;border-radius:14px;border:2px solid var(--line);background:#fff;box-shadow:var(--sh)}.gal a{position:relative}.gal .badge{left:6px;right:auto;top:6px}

@@ -1,8 +1,8 @@
 // İyiliklerle Büyüyorum — çevrimdışı çalışma (kapsam: /iyilik/).
 // Çekirdek dosyalar kurulumda alınır; sayfa resimleri ve sesler ihtiyaç anında, bir kez indirilip saklanır.
-const V = 'iyilik-v3-5';
+const V = 'iyilik-v4-1';
 const CORE = `${V}-core`, RUN = `${V}-run`;
-const CORE_FILES = ['./', '1/', '2/', '3/', 'css/app.css', 'js/app.js', 'js/audio.js', 'js/icons.js', 'js/paint.js', 'js/canlan.js', 'js/galeri.js', 'js/store.js',
+const CORE_FILES = ['./', '1/', '2/', '3/', 'css/app.css', 'js/app.js', 'js/audio.js', 'js/icons.js', 'js/paint.js', 'js/galeri.js', 'js/store.js',
   'font/nunito-latin.woff2', 'font/nunito-latin-ext.woff2', 'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png',
   'assets/book1.webp', 'assets/book2.webp', 'assets/book3.webp', 'assets/qr-book1.png', 'assets/qr-book2.png', 'assets/qr-book3.png',
   'data/book1.json', 'data/book2.json', 'data/book3.json', 'ses/ui.json'];
@@ -75,6 +75,5 @@ self.addEventListener('fetch', e => {
   if (path.endsWith('.mp3')) return e.respondWith(audio(req));
   if (/^(js|css)\//.test(path) || path === 'manifest.webmanifest') return e.respondWith(networkFirst(req, CORE));
   if (/^data\//.test(path) || /^ses\/[^/]+\.json$/.test(path)) return e.respondWith(swr(req));
-  if (path === 'sayfa/canlan.json') return e.respondWith(swr(req));
   if (/^(sayfa|font|assets)\//.test(path)) return e.respondWith(cacheFirst(req));
 });
