@@ -45,6 +45,21 @@ for (const l of lessons) {
     let t = -1; for (const c of idx[u].s) { if (!(c.a >= t && c.b > c.a)) fail(`${l.id}/${u} zaman sırası bozuk`); t = c.b; }
   }
 }
+// v5: resimli oyun (game2) — tür, öğe sayısı eski oyunla aynı, her ikon diskte
+const MODES = ['pairs', 'pick', 'listen', 'memory', 'order'];
+let icons = new Set();
+for (const l of lessons) {
+  const g = l.game2;
+  if (!g) { fail(`${l.id}: game2 yok`); continue; }
+  if (!MODES.includes(g.mode)) fail(`${l.id}: game2 türü ${g.mode}`);
+  if (g.mode === 'order' ? g.items?.length !== l.game.items?.length : g.pairs?.length !== l.game.pairs?.length) fail(`${l.id}: game2 öğe sayısı eski oyunla farklı`);
+  for (const c of [...(g.items || []), ...(g.pairs || []).flatMap(p => [p.a, p.b].filter(Boolean))]) {
+    icons.add(c.i);
+    if (c.l && c.l.split(/\s+/).length > 2) fail(`${l.id}: etiket uzun "${c.l}"`);
+  }
+}
+for (const i of icons) { if (!fs.existsSync(path.join(ROOT, `ikon/${i}.webp`))) fail('ikon yok ' + i); }
+console.log(`resimli oyun: ${lessons.filter(l => l.game2).length} oyun, ${icons.size} ikon`);
 const ui = JSON.parse(fs.readFileSync(path.join(ROOT, 'ses/ui.json'), 'utf8'));
 for (const [k, v] of Object.entries(ui)) if (!fs.existsSync(path.join(ROOT, 'ses', v.f))) fail('ui ses yok ' + k);
 console.log(`diskte: ${count.json} json, ${count.js} js, ${count.webp} webp, ${count.mp3} mp3; ${units} ses birimi, ${cues} cümle, ${Object.keys(ui).length} arayüz sesi`);

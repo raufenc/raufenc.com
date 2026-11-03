@@ -276,3 +276,67 @@ body.studio-on .nav,body.studio-on .top,body.studio-on .dock{display:none}body.s
 @media print{body>*{display:none!important}body::after{content:'Bu sayfa yazdırılamaz. Boyadığın resmi “Kaydet” ile indirebilirsin.';display:block;padding:40px;font:700 18px sans-serif}}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
 main:focus,main:focus-visible{outline:0}
+
+/* ---------- v5: resimli oyunlar ---------- */
+.g2head{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:10px 10px 10px 12px;border-radius:var(--r2);background:var(--card);box-shadow:var(--sh1);border:1px solid var(--line)}
+.g2head p{flex:1;font-size:19px;font-weight:900;line-height:1.25;color:var(--ink)}
+.g2head .ibtn{flex:none}
+.pglink{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;width:52px;font-size:13px;color:var(--muted);font-weight:900}
+.pglink img{width:44px;height:auto;border-radius:6px;box-shadow:var(--sh1);transform:rotate(3deg)}
+.g2{scroll-margin-top:calc(var(--top) + 14px);position:relative;-webkit-user-select:none;user-select:none}
+.pc{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px;border-radius:22px;border:3px solid transparent;background:var(--card);box-shadow:var(--sh2);touch-action:pan-y;-webkit-touch-callout:none}
+.pc img{width:100%;max-width:150px;aspect-ratio:1;height:auto;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+.pc .lb{font-size:14px;font-weight:900;line-height:1.1;color:var(--muted);text-align:center;padding:0 2px 2px}
+.pc.sel{border-color:var(--accent);background:var(--accent-s);transform:translateY(-3px) scale(1.03)}
+.pc.done{border-color:#9fcfa9;background:#eef7ea;box-shadow:none}
+.pc.done img{opacity:.92}
+.pc.try{animation:nudge .4s;border-color:#e3b467}
+.pc.hint{animation:hint 1.3s ease-in-out infinite;border-color:var(--gold)}
+.pc.lift{opacity:.35}
+.pc.over,.slot.over,.qwrap.over{outline:4px dashed var(--accent);outline-offset:3px}
+.pc.ghost{position:fixed;z-index:90;pointer-events:none;margin:0;box-shadow:var(--sh3);border-color:var(--accent);transition:none}
+.pop{animation:pop2 .45s var(--spring)}
+@keyframes pop2{0%{transform:scale(.85)}60%{transform:scale(1.08)}100%{transform:none}}
+@keyframes hint{50%{box-shadow:0 0 0 7px rgba(240,189,69,.45),var(--sh2);transform:scale(1.04)}}
+/* resim ↔ resim */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pairs .col{display:grid;gap:10px;align-content:start}
+.pairs .pc{min-height:96px;touch-action:none;padding:4px}.pairs .pc img{max-width:86px}.pairs .pc .lb{font-size:13px}
+.pairs .col:first-child .pc{background:#fffaf0}
+/* eşini seç / dinle bul */
+.dots{display:flex;justify-content:center;gap:8px;margin:0 0 10px}.dots i{width:12px;height:12px;border-radius:6px;background:var(--line2);transition:all .3s}.dots i.now{width:28px;background:var(--accent)}.dots i.ok{background:#4f9a62}
+.qwrap{display:flex;justify-content:center;border-radius:28px}
+.qwrap .pc.q{width:min(62vw,230px);padding:10px;border-color:var(--accent-s);background:#fffaf0}.qwrap .pc.q img{max-width:none}
+.qsay{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:180px;padding:16px 26px;border-radius:28px;border:3px solid var(--accent-s);background:#fffaf0;box-shadow:var(--sh2);font:inherit;color:var(--ink)}
+.qsay .spk{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;box-shadow:0 0 0 8px var(--accent-s)}.qsay .spk .ic{width:38px;height:38px}
+.qsay .lb{font-size:26px;font-weight:900;line-height:1.1}
+.qsay.reading .spk{animation:pulse2 1s ease-in-out infinite}
+@keyframes pulse2{50%{box-shadow:0 0 0 14px var(--accent-s)}}
+.arrowd{display:flex;justify-content:center;color:var(--accent);margin:6px 0}.arrowd .ic{transform:rotate(90deg);width:30px;height:30px;opacity:.7}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}.opts.n4{grid-template-columns:1fr 1fr}.opts.n2{grid-template-columns:1fr 1fr}
+.opts .pc{min-height:112px}.opts.n4 .pc img{max-width:120px}
+.pc.good{border-color:#4f9a62;background:#e9f5e6}
+.pc.fade{opacity:.35;transform:scale(.94)}
+/* hafıza */
+.mem{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;perspective:900px}
+.mc{position:relative;aspect-ratio:3/4;padding:0;border:0;background:none;border-radius:18px}
+.mc .in{position:absolute;inset:0;transition:transform .45s var(--ease);transform-style:preserve-3d}
+.mc.up .in{transform:rotateY(180deg)}
+.mc .bk,.mc .fr{position:absolute;inset:0;border-radius:18px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:var(--sh2)}
+.mc .bk{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),transparent 55%),var(--accent);color:#fff;border:3px solid #fff}
+.mc .bk .ic{width:34px;height:34px;opacity:.9}
+.mc .fr{background:var(--card);transform:rotateY(180deg);border:3px solid transparent;padding:4px}
+.mc .fr img{width:100%;height:auto;pointer-events:none}
+.mc.done .fr{border-color:#9fcfa9;background:#eef7ea}
+.mc:active .in{scale:.96}
+/* sırala */
+.slots{display:grid;grid-template-columns:repeat(var(--n,5),1fr);gap:6px;margin:0 0 16px;padding:10px;border-radius:22px;background:var(--accent-s)}
+.slots.n4{--n:4}.slots.n5{--n:5}.slots.n6{--n:6}
+.slot{position:relative;aspect-ratio:1;border-radius:16px;border:3px dashed rgba(32,53,42,.18);display:grid;place-items:center;background:rgba(255,255,255,.55)}
+.slot .num{position:absolute;left:-4px;top:-6px;width:24px;height:24px;border-radius:12px;display:grid;place-items:center;font-size:14px;font-weight:900;background:#fff;color:var(--accent-d);box-shadow:var(--sh1)}
+.slot.next{border-color:var(--accent);background:#fff;animation:hint 1.6s ease-in-out infinite}
+.slot.full{border-style:solid;border-color:#9fcfa9;background:#fff}.slot.full .num{background:#4f9a62;color:#fff}
+.slot img{width:92%;height:auto}
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.deck.n4{grid-template-columns:1fr 1fr}
+.deck .pc,.opts .pc{touch-action:none}.deck .pc{min-height:108px}
+.deck .pc.done{visibility:hidden}
+@media (prefers-reduced-motion:reduce){.pc.hint,.slot.next,.qsay.reading .spk{animation:none}.pop{animation:none}.mc .in{transition:none}}

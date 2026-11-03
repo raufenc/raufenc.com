@@ -1,4 +1,4 @@
-// İyiliklerle Büyüyorum v4 — kısa çocuk metni, Emmett sesi, boyama tebriki, sıcak ve sakin arayüz. Çevrimdışı çalışır.
+// İyiliklerle Büyüyorum v5 — resimli oyunlar; v4: kısa çocuk metni, Emmett sesi, boyama tebriki, sıcak ve sakin arayüz. Çevrimdışı çalışır.
 import { state, save, getPaint, listPaints, clearPaints } from './store.js';
 import { icon } from './icons.js';
 import * as au from './audio.js';
@@ -6,6 +6,7 @@ import { openStudio } from './paint.js';
 import { composeArt, shareOrDownload, idOf, parseId } from './galeri.js';
 import { sfx } from './sfx.js';
 import { TEBRIK } from './cele.js';
+import { playGame, MODES, oldGameHTML, ikonlar } from './oyun.js';
 
 const { esc, S, SS, splitSentences } = au;
 const $ = (s, r = document) => r.querySelector(s);
@@ -224,6 +225,9 @@ async function konu(id, step = 'dinle', alive) {
     const st = k.story, nS = A?.story?.s ? A.story.s.length - splitSentences(st.question).length : splitSentences(st.scene).length;
     body = `<div class="card" data-unit="story" data-q><p class="txt">${SS(A, 'story', 0, st.scene, nS)}</p><h2 style="margin-top:12px;font-size:24px">${SS(A, 'story', nS, st.question)}</h2></div>
       <div id="opts">${st.options.map((o, i) => `<div class="optrow"><button class="choice" data-opt="${i}" data-unit="sopt${i}"><span class="s" data-i="0">${esc(o.text)}</span></button><button class="ibtn sp" data-play="sopt${i}" aria-label="Seçeneği dinle">${icon('speaker')}</button></div>`).join('')}</div><div id="fb"></div><div id="nx" hidden>${nextBtn}</div>`;
+  } else if (step === 'oyun' && l.game2) { // v5: resimli oyun; yazılı hâli Büyükler rehberinde
+    const pg = l.pages[1];
+    body = `<div class="g2head"><button class="ibtn sp" id="g2say" aria-label="Yönergeyi dinle">${icon('speaker')}</button><p>${esc(MODES[l.game2.mode][0])}</p><a class="pglink" href="#sayfa/${l.book}/${pg}" aria-label="Kitabımda ${pg}. sayfa"><img src="sayfa/${pid(l.book, pg)}-t.webp" alt="" width="260" height="374"><span>s. ${pg}</span></a></div><div id="game"></div><div id="nx" hidden style="margin-top:14px">${nextBtn}</div>`;
   } else if (step === 'oyun') {
     body = `<div class="card" data-unit="game"><p class="txt">${SS(A, 'game', 0, k.game.instruction)}</p>${spk('game')}</div><div id="game"></div><div id="nx" hidden style="margin-top:14px">${nextBtn}</div>`;
   } else {
@@ -250,7 +254,12 @@ async function konu(id, step = 'dinle', alive) {
     };
   }
   if (step === 'hikaye') storyStep(k, A, item);
-  if (step === 'oyun') gameStep(k.game, item);
+  if (step === 'oyun' && l.game2) {
+    const box = $('#game');
+    const done = () => { box.insertAdjacentHTML('beforeend', `<div class="cele" style="margin-top:14px"><div class="seal">${icon('star')}</div><h2>Aferin!</h2></div>`); au.sayUI('dogru'); sfx.chime(); revealNext(); $('#nx').scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' }); };
+    onLeave(playGame(box, l.game2, { id, A, old: l.game, voice: state.sound && interacted, done }));
+    $('#g2say').onclick = () => au.sayUI(MODES[l.game2.mode][1]);
+  } else if (step === 'oyun') gameStep(k.game, item);
   if (step === 'gorev') {
     $('#taskck').onchange = e => { state.tasks[id] = e.target.checked; persist(); if (e.target.checked) sfx.good(); };
     const fin = $('#fin');
@@ -261,7 +270,7 @@ async function konu(id, step = 'dinle', alive) {
     };
   }
   if (state.sound && interacted && step === 'dinle') au.sayUI('konu');
-  else if (state.sound && interacted && step === 'oyun') au.sayUI(l.game.type === 'match' ? 'esles' : 'sirala');
+  else if (state.sound && interacted && step === 'oyun' && !l.game2) au.sayUI(l.game.type === 'match' ? 'esles' : 'sirala');
 }
 function nextPrev(l) {
   const same = lessons.filter(x => x.book === l.book), i = same.findIndex(x => x.id === l.id);
@@ -452,6 +461,7 @@ async function guideView(l) {
   <div class="pcard"><h2>Birlikte konuşabileceğiniz sorular</h2>${l.quiz.map((q, k) => `<details ${k ? '' : 'open'}><summary>${esc(q.question)}</summary><ol type="a">${q.options.map((o, j) => `<li>${j === q.answer ? `<span class="ok">✓ ${esc(o)}</span>` : esc(o)}</li>`).join('')}</ol><p style="margin-bottom:8px">${esc(q.explanation)}</p></details>`).join('')}</div>
   <div class="pcard"><h2>Çocuğa sorabilirsiniz</h2><ul>${f.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ul></div>
   <div class="pcard"><h2>Evde küçük bir iyilik</h2><p>${esc(f.activity)}</p></div>
+  <div class="pcard"><h2>Oyunun yazılı hâli</h2>${oldGameHTML(l.game)}${l.game2 ? `<p style="color:var(--muted)"><small>Çocuk bu oyunu resimlerle oynar; kartlara dokununca bu cümleler okunur.</small></p>` : ''}</div>
   <div class="pcard"><h2>Kitaptaki görev</h2><p>${esc(l.task)}</p></div>
   <div class="pcard"><h2>Dayanak kaynaklar</h2>${l.sourceIds.map(k => src[k]).filter(Boolean).map(s => `<div class="src"><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><small>${esc(s.scope || '')}</small></div>`).join('')}</div>
   <div class="sec">${pv ? `<a class="btn ghost small" href="#buyuk/${pv.id}">${icon('back')} Önceki</a>` : '<span></span>'}<a class="btn small" href="#konu/${l.id}">Çocuk sayfası</a>${nx ? `<a class="btn ghost small" href="#buyuk/${nx.id}">Sonraki ${icon('next')}</a>` : '<span></span>'}</div>`);
@@ -463,9 +473,10 @@ async function warm(n, out) {
   for (const l of lessons.filter(x => x.book === n)) {
     const A = await au.lessonAudio(l.id); urls.push(`ses/${l.id}.json`);
     if (A) Object.values(A).forEach(u => urls.push(`ses/${l.id}/${u.f}`));
+    ikonlar(l.game2).forEach(i => urls.push(`ikon/${i}.webp`));
   }
-  let done = 0, fail = 0; const q = [...urls];
-  const worker = async () => { while (q.length) { const u = q.shift(); try { const r = await fetch(u); if (!r.ok) fail++; await r.arrayBuffer(); } catch { fail++; } out.textContent = `${n}. cilt indiriliyor… ${++done} / ${urls.length}`; } };
+  let done = 0, fail = 0; const q = [...new Set(urls)], total = q.length;
+  const worker = async () => { while (q.length) { const u = q.shift(); try { const r = await fetch(u); if (!r.ok) fail++; await r.arrayBuffer(); } catch { fail++; } out.textContent = `${n}. cilt indiriliyor… ${++done} / ${total}`; } };
   await Promise.all(Array.from({ length: 5 }, worker));
   out.textContent = fail ? `${n}. cilt indirildi, ${fail} dosya alınamadı. İnternet bağlantısını kontrol edip tekrar deneyin.` : `${n}. cilt cihaza indirildi.`;
 }

@@ -21,6 +21,12 @@ UI = {
     'sirala': 'Kartlara doğru sırayla dokun.',
     'dogru': 'Harika, doğru buldun!',
     'tekrar': 'Bir daha bakalım. Acele yok.',
+    # v5 resimli oyun yönergeleri (tek çekimde üretildi, sessizliklerden kesildi)
+    'esles2': 'Resme dokun, sonra eşine.',
+    'sec': 'Resme bak, eşini seç.',
+    'dinlesec': 'Dinle ve doğru resmi bul.',
+    'hafiza': 'Kartları çevir, eşlerini bul.',
+    'sirala2': 'Resimleri sırayla yerleştir.',
     'damga': 'Yeni bir damga kazandın! Keşif defterine eklendi.',
     'bitti': 'Aferin! Bu konuyu tamamladın.',
     'az': 'Biraz daha boyamak ister misin? Sonra yine Bitti düğmesine dokun.',

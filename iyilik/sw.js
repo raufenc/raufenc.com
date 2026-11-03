@@ -1,8 +1,8 @@
 // İyiliklerle Büyüyorum — çevrimdışı çalışma (kapsam: /iyilik/).
-// Çekirdek dosyalar kurulumda alınır; sayfa resimleri ve sesler ihtiyaç anında, bir kez indirilip saklanır.
-const V = 'iyilik-v4-3';
+// Çekirdek dosyalar kurulumda alınır; sayfa resimleri, oyun ikonları ve sesler ihtiyaç anında, bir kez indirilip saklanır.
+const V = 'iyilik-v5-1';
 const CORE = `${V}-core`, RUN = `${V}-run`;
-const CORE_FILES = ['./', '1/', '2/', '3/', 'css/app.css', 'js/app.js', 'js/audio.js', 'js/icons.js', 'js/paint.js', 'js/sfx.js', 'js/cele.js', 'js/galeri.js', 'js/store.js',
+const CORE_FILES = ['./', '1/', '2/', '3/', 'css/app.css', 'js/app.js', 'js/audio.js', 'js/icons.js', 'js/paint.js', 'js/sfx.js', 'js/cele.js', 'js/galeri.js', 'js/store.js', 'js/oyun.js',
   'font/nunito-latin.woff2', 'font/nunito-latin-ext.woff2', 'manifest.webmanifest', 'assets/icon.svg', 'assets/icon-192.png',
   'assets/book1.webp', 'assets/book2.webp', 'assets/book3.webp', 'assets/qr-book1.png', 'assets/qr-book2.png', 'assets/qr-book3.png',
   'data/book1.json', 'data/book2.json', 'data/book3.json', 'ses/ui.json'];
@@ -14,7 +14,7 @@ self.addEventListener('install', e => {
     try { // tuş takımı sesleri çevrimdışı da çalışsın (en iyi çaba)
       const ui = await (await fetch('ses/ui.json')).json();
       const run = await caches.open(RUN);
-      const keys = Object.keys(ui).filter(k => /^(r\d|sayfa\d+|hos|tuslar|kitap\d|sayfa-yok|sayfa-konusuz|dogru|tekrar|damga|bitti)$/.test(k));
+      const keys = Object.keys(ui).filter(k => /^(r\d|sayfa\d+|hos|tuslar|kitap\d|sayfa-yok|sayfa-konusuz|dogru|tekrar|damga|bitti|esles2|sec|dinlesec|hafiza|sirala2)$/.test(k));
       await Promise.allSettled(keys.map(k => run.add(`ses/${ui[k].f}`)));
     } catch {}
     self.skipWaiting();
@@ -75,5 +75,5 @@ self.addEventListener('fetch', e => {
   if (path.endsWith('.mp3')) return e.respondWith(audio(req));
   if (/^(js|css)\//.test(path) || path === 'manifest.webmanifest') return e.respondWith(networkFirst(req, CORE));
   if (/^data\//.test(path) || /^ses\/[^/]+\.json$/.test(path)) return e.respondWith(swr(req));
-  if (/^(sayfa|font|assets)\//.test(path)) return e.respondWith(cacheFirst(req));
+  if (/^(sayfa|font|assets|ikon)\//.test(path)) return e.respondWith(cacheFirst(req));
 });
