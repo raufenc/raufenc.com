@@ -129,3 +129,5 @@ body.studio-on .nav,body.studio-on .top,body.studio-on .dock{display:none}body.s
 @media print{body>*{display:none!important}body::after{content:'Bu sayfa yazdırılamaz. Boyadığın resmi “Kaydet” ile indirebilirsin.';display:block;padding:40px;font:700 18px sans-serif}}
 .optrow{display:grid;grid-template-columns:1fr 56px;gap:8px;margin-bottom:10px;align-items:stretch}.optrow .choice{margin:0}.optrow .sp{min-height:64px;width:56px;border-radius:20px}
 [hidden]{display:none!important}
+
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

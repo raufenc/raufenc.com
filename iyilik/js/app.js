@@ -326,7 +326,8 @@ async function defter() {
 
 // ---- büyükler ----
 const GATE = 'iyilik-kapi';
-const WORDS = [['üç', 3], ['beş', 5], ['yedi', 7], ['dokuz', 9]];
+// Kapı: yazıyla verilen çarpma (okul öncesi çocuk çözemez); sesli ipucu çözümü söylemez.
+const SAYI = { 6: 'altı', 7: 'yedi', 8: 'sekiz', 9: 'dokuz' };
 async function buyuk(id, _b, alive) {
   if (!sessionStorage.getItem(GATE)) return gate();
   await loadAll();
@@ -348,23 +349,14 @@ async function buyuk(id, _b, alive) {
   };
 }
 function gate() {
-  const [w, num] = WORDS[Math.random() * WORDS.length | 0];
-  setMain(`<div class="gate"><div style="font-size:44px;color:var(--green)">${icon('lock')}</div><h1 style="font-size:28px">Büyükler bölümü</h1><p>Bu bölüm anne babalar içindir. Devam etmek için düğmeyi <b>3 saniye</b> basılı tutun.</p>
-    <button class="hold" id="hold" aria-describedby="hold-help"><i></i><span>Basılı tut</span></button><p id="hold-help" style="font-size:15px;color:var(--muted)">Klavye ile: düğmeye odaklanıp Boşluk tuşunu 3 saniye basılı tutun.</p>
-    <hr style="border:0;border-top:2px solid var(--line);margin:16px 0"><label for="wordin" style="font-size:16px">Ya da yazıyla verilen sayıyı rakamla yazın: <b>${w}</b></label><input id="wordin" inputmode="numeric" autocomplete="off" maxlength="2" style="margin-top:8px"><button class="btn small" id="wordgo" style="margin-top:10px">Gir</button><p class="msg" id="gmsg" role="alert"></p>
+  const a = 6 + (Math.random() * 4 | 0), b = 6 + (Math.random() * 4 | 0), num = a * b;
+  setMain(`<div class="gate"><div style="font-size:44px;color:var(--green)">${icon('lock')}</div><h1 style="font-size:28px">Büyükler bölümü</h1><p>Bu bölüm anne babalar içindir. Devam etmek için işlemin sonucunu rakamla yazın:</p>
+    <p style="font-size:24px;font-weight:900;margin:6px 0 2px">${SAYI[a]} kere ${SAYI[b]}</p>
+    <label for="wordin" class="sr-only">İşlemin sonucu</label><input id="wordin" inputmode="numeric" autocomplete="off" maxlength="2" style="margin-top:8px"><button class="btn small" id="wordgo" style="margin-top:10px">Gir</button><p class="msg" id="gmsg" role="alert"></p>
     <button class="listen" data-say="buyuk" style="margin-top:6px">${icon('speaker')} Dinle</button></div>`);
   const ok = () => { sessionStorage.setItem(GATE, '1'); route(); };
-  const hold = $('#hold'), bar = $('i', hold); let t0 = 0, raf = 0;
-  const step = () => { const p = Math.min(1, (performance.now() - t0) / 3000); bar.style.width = p * 100 + '%'; if (p >= 1) { cancelAnimationFrame(raf); ok(); } else raf = requestAnimationFrame(step); };
-  const begin = e => { if (t0) return; t0 = performance.now(); raf = requestAnimationFrame(step); };
-  const end = () => { t0 = 0; cancelAnimationFrame(raf); bar.style.width = 0; };
-  hold.addEventListener('pointerdown', e => { e.preventDefault(); begin(); });
-  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => hold.addEventListener(ev, end));
-  hold.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) { e.preventDefault(); begin(); } });
-  hold.addEventListener('keyup', end); hold.addEventListener('contextmenu', e => e.preventDefault());
-  const go = () => { if ($('#wordin').value.trim() === String(num)) ok(); else $('#gmsg').textContent = 'Sayı doğru değil, tekrar deneyin.'; };
+  const go = () => { if ($('#wordin').value.trim() === String(num)) ok(); else $('#gmsg').textContent = 'Sonuç doğru değil, tekrar deneyin.'; };
   $('#wordgo').onclick = go; $('#wordin').onkeydown = e => { if (e.key === 'Enter') go(); };
-  onLeave(end);
   guide('buyuk');
 }
 async function guideView(l) {

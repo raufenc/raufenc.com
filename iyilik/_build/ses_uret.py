@@ -40,7 +40,7 @@ UI = {
     'boya': 'Bir renk seç, sonra resimde bir yere dokun. Boyadığın resim kendiliğinden saklanır.',
     'boyalar': 'Boyamak istediğin sayfayı seç.',
     'defter': 'Burası keşif defterin. Her konuyu bitirince bir damga kazanırsın.',
-    'buyuk': 'Büyükler bölümüne girmek için bir büyüğünle birlikte ol. Düğmeyi üç saniye basılı tut.',
+    'buyuk': 'Bu bölüm büyükler içindir. Bir büyüğünü çağır.',
     'esles': 'Eşleştirmek için önce bir kartın üstüne, sonra karşısındaki karta dokun.',
     'sirala': 'Kartlara doğru sırayla dokun.',
     'dogru': 'Harika, doğru buldun!',
@@ -77,8 +77,14 @@ def split_sentences(text):
     return out
 
 
+# Ekranda hürmet yazımı (CLAUDE.md), seste kuralın istediği okunuş: "sallallahu aleyhi ve sellem".
+OKUNUS = [('sallallahü', 'sallallahu'), ('Kur’ân-ı Kerîm', 'Kur’an-ı Kerim')]
+
+
 def say(text):
     """Seslendirilecek biçim: parantezleri kaldır, tırnak biçimlerini düzelt."""
+    for yazi, ses in OKUNUS:
+        text = text.replace(yazi, ses)
     t = text.replace('(', ', ').replace(')', ',').replace(' ,', ',').replace(',,', ',')
     t = re.sub(r',\s*([.!?])', r'\1', t)
     return re.sub(r'\s+', ' ', t).strip()
