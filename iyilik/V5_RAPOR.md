@@ -74,3 +74,12 @@
   - `veri.py`: `game2` alanını veriye yazma.
   - `oyna.mjs`: otomatik oyun testi.
   - `cagrilar.jsonl`: Codex çağrı defteri.
+
+## v5.1 düzeltmeleri (3 Kasım 2026, sürüm `iyilik-v5-3`, commit 2cd6063)
+- Hafıza kartları telefonda 3'erli diziliyor; kart ~84 px'ten ~115 px'e çıktı (b1-04, b2-16).
+- Ağız: su bardağı + misvak + dönen ok (insan figürü yok). Burun: yüzsüz çocuk, yukarı ok. İkisi artık karışmıyor (b1-06).
+- Bayram namazı (b1-20): yeşil kubbe yerine kurşun kubbeli, kalem minareli cami.
+- Kur'ân kelimeleri (b1-14): Âyet = sayfada üç âyet gülü (rakamsız), Meâl = iki konuşma balonu + kitap, Tefsir = büyüteçli açık kitap. Sûre aynı kaldı (rahle üstünde Kur'ân-ı Kerîm). Hiçbirinde yazı yok.
+- Codex 1 çağrı (tabaka 22, 10 hücre, 6'sı seçildi). Eski 6 ikon silindi.
+- Yönerge sesleri yerel whisper ile yazıya döküldü: "Dinle ve doğru resmi bul.", "Kartları çevir, eşlerini bul.", "Resimleri sırayla yerleştir." ve "Resme bak, eşini seç." doğru. "Resme dokun, sonra eşine." iki modelde de "Resmet okun" diye çözüldü; ses kırpık değil (baş ve son sessiz), "d" zayıf olabilir → Rauf dinleyecek: https://raufenc.com/iyilik/ses/ui/esles2.mp3
+- Not: Uygulamayı daha önce açmış telefonlarda yeni resimler ikinci açılışta gelir (ilk açılışta eski kayıt gösterilir).
