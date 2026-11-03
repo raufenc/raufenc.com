@@ -92,7 +92,7 @@ ICONS = {
     'tekrar-yon': 'an arrow',  # kullanılmıyor
     # --- yerler, nesneler ---
     'buyutec': 'a magnifying glass',
-    'ugur-bocegi': 'a ladybug on a green leaf',
+    'kirmizi-bocek': 'a ladybug on a green leaf',
     'kelebek-cicek': 'a butterfly resting on a yellow flower',
     'gece-gokyuzu': 'a small dark blue night sky patch with a crescent moon and stars',
     'ekmek': 'a round loaf of bread',
@@ -219,7 +219,7 @@ ICONS = {
 
 # (a ikonu, a etiketi, b ikonu, b etiketi)
 GAMES = {
-    'b1-01': ('pairs', [('buyutec', 'Gözlem', 'ugur-bocegi', ''), ('gece-gokyuzu', 'Tefekkür', 'dusunce-balonu', ''),
+    'b1-01': ('pairs', [('buyutec', 'Gözlem', 'kirmizi-bocek', ''), ('gece-gokyuzu', 'Tefekkür', 'dusunce-balonu', ''),
                         ('dua-eller', 'Şükür', 'ekmek', ''), ('nazik-el', 'Özen', 'kelebek-cicek', '')]),
     'b1-02': ('pick', [('su-damlasi', '', 'musluk-kapali', ''), ('ekmek', '', 'kucuk-porsiyon', ''),
                        ('kitaplar', '', 'kalemlik', ''), ('yardim-eller', '', 'kalp-balonu', '')]),
