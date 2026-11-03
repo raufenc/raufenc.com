@@ -9,6 +9,7 @@ const FOTO = process.argv.includes('--foto');
 const OUT = '/tmp/iyilik-v5/oyna'; fs.mkdirSync(OUT, { recursive: true });
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const port = 9345;
+const UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1';
 const ch = spawn(CHROME, ['--headless=new', `--remote-debugging-port=${port}`, '--user-data-dir=/tmp/iyilik-v5/chrome', '--autoplay-policy=no-user-gesture-required', '--mute-audio', 'about:blank'], { stdio: 'ignore' });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 let ws;
@@ -22,6 +23,7 @@ await cdp('Runtime.enable');
 await cdp('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
 await cdp('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
 await cdp('Page.enable');
+await cdp('Emulation.setUserAgentOverride', { userAgent: UA });
 
 const center = async q => ev(`(()=>{const e=document.querySelector(${JSON.stringify(q)}); if(!e) return null; e.scrollIntoView({block:'center'}); const r=e.getBoundingClientRect(); return [r.left+r.width/2, r.top+r.height/2];})()`);
 const touch = (type, x, y) => cdp('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y }] });
@@ -37,7 +39,7 @@ let shot = 0;
 const foto = async name => { if (!FOTO) return; const r = await cdp('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(`${OUT}/${String(++shot).padStart(2, '0')}-${name}.png`, Buffer.from(r.result.data, 'base64')); };
 const waitFor = async (expr, ms = 8000) => { const t = Date.now(); while (Date.now() - t < ms) { if (await ev(expr)) return true; await sleep(120); } return false; };
 
-const lessons = (await Promise.all([1, 2, 3].map(async b => (await fetch(`${BASE}/iyilik/data/book${b}.json`)).json()))).flat();
+const lessons = (await Promise.all([1, 2, 3].map(async b => (await fetch(`${BASE}/iyilik/data/book${b}.json`, { headers: { 'user-agent': UA } })).json()))).flat();
 const todo = sel === 'hepsi' ? lessons : lessons.filter(l => sel.split(',').includes(l.id));
 await cdp('Page.navigate', { url: `${BASE}/iyilik/#home` }); await sleep(1500);
 const res = [];
