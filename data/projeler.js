@@ -1,13 +1,14 @@
 /**
  * Tek kaynak proje manifest'i + kategori meta.
  * Tum sayfalarda proje listesi, sayac ve kart icin bu dosya kullanilir.
- * Son guncelleme: 2026-10-24
+ * Son guncelleme: 2026-11-03
  */
 var PROJELER = [
   {"emoji": "🖼️", "title": "Nöroterbiye — Duvar Kâğıtları", "desc": "50 yazısız resim. Kaydır, seç; telefonuna veya bilgisayarına indir, paylaş.", "tag": "Koleksiyon", "href": "/noroterbiye/duvar-kagitlari/", "kategori": "noroterbiye", "video": "noroterbiye-duvar-kagitlari"},
   {"emoji": "📖", "title": "Beyit Defteri", "desc": "Rauf Enç’in şiirleri, gazelleri ve ilk denemeleri. Mektûbât’tan elli gazel; beyitler, kelimeler ve aruzun ahengi.", "tag": "Şiir", "href": "/beyitdefteri/", "kategori": "dil", "featured": true, "video": "beyitdefteri"},
   {"emoji": "🎼", "title": "Fâilâtün — Aruz Atölyesi", "desc": "Kayıp kelimeyi bul, bir hâle uygun beyti seç, ritmi parmaklarınla kur. Hayâtî İnanç Hocamızın asıl kayıtları eşliğinde şiirin manasına ve ahengine yaklaş.", "tag": "Uygulama", "href": "/aruz/", "kategori": "dil", "featured": true, "video": "aruz"},
   { emoji: '\u{1F9E0}', title: 'NöroTerbiye', desc: 'Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Testler, oyunlar ve araçlarla dolu kitabın dijital dünyası.', tag: 'Uygulama', href: '/noroterbiye/', kategori: 'noroterbiye', featured: true, video: 'noroterbiye' },
+  { emoji: '\u{1F33C}', title: 'İyiliklerle Büyüyorum', desc: 'Üç ciltlik boyama kitabının dijital keşif bahçesi. 60 konu; hikâye, oyun, boyama ve aile rehberleri. Kitaptaki karekodla doğrudan açılır.', tag: 'Uygulama', href: '/iyilik/', kategori: 'peygamberim' },
   { emoji: '\u{1F4DA}', title: 'MUALLİMO — Resim Kartları', desc: 'Çocuğunuza bir kitap okutun, 2.199 görsel kartla pekiştirsin. 24 kitap, 6 seri — her yaşa göre.', tag: 'Uygulama', href: '/muallimo/', kategori: 'dil', featured: true, video: 'muallimo' },
   { emoji: '\u{1F1EC}\u{1F1E7}', title: 'İngilizce Kelime Kartları', desc: 'Görselle öğren, sesle pekiştir. Günlük hayattan 237 kelime, 9 kategoride. Küçükler için biçilmiş kaftan.', tag: 'Uygulama', href: '/ingilizce-kelime/', kategori: 'dil', video: 'ingilizce-kelime' },
   { emoji: '\u{1F1F8}\u{1F1E6}', title: 'Arapça Kelime Kartları', desc: 'Selam vermekten alışveriş yapmaya — günlük Arapça\'nın 224 kelimesi. Görsel, ses ve Türkçe karşılığıyla.', tag: 'Uygulama', href: '/arapca-kelime/', kategori: 'dil', video: 'arapca-kelime' },

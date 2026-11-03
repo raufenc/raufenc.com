@@ -15,3 +15,16 @@ Rauf'un 26 Ekim 2026 talimatı: NöroTerbiye kitabındaki üç QR adresini onar 
 - Yayımdan önce `node scripts/verify-book-qr.mjs` ve `node --test tests/book-qr-redirects.test.mjs` çalıştır. Yayından sonra üç gerçek adresin doğru hedefe yönlendiğini kontrol et.
 - GitHub `main` üzerinden yayımla. Daraltılmış yerel kopyayı Vercel CLI ile tüm site yerine yükleme. Göndermeden önce `git pull --rebase origin main` yap; zorla gönderim kullanma.
 - Metin üslubu için `CLAUDE.md` kurallarını da koru.
+
+## İyiliklerle Büyüyorum (3 ciltlik boyama kitabı)
+
+Rauf'un 3 Kasım 2026 talimatı: kitabın dijital sitesi yönlendirme olarak değil, bütünüyle bu sitede, `/iyilik/` altında yaşar. Her cildin ön iç kapağındaki karekod kendi kitabını doğrudan açar.
+
+| Basılı adres | Açtığı yer |
+| --- | --- |
+| `https://raufenc.com/iyilik/1/` | 1. cilt, Rabbimi ve İbadetlerimi Seviyorum |
+| `https://raufenc.com/iyilik/2/` | 2. cilt, Güzel Ahlaklı Oluyorum |
+| `https://raufenc.com/iyilik/3/` | 3. cilt, Günlük Hayatımda Dinimi Yaşıyorum |
+
+- `iyilik/1/`, `iyilik/2/`, `iyilik/3/` sayfaları silinmez, taşınmaz, yeniden adlandırılmaz. Site yeniden tasarlansa da bu adresler o kitabı açmaya devam eder.
+- `scripts/verify-book-qr.mjs` içindeki `verifyIyilikPages` kontrolünü kaldırma veya atlatma.

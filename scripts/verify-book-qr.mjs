@@ -35,10 +35,36 @@ export function verifyBookQr(config) {
   );
 }
 
+// Printed in İyiliklerle Büyüyorum (3 volumes, inside front cover). Rauf's instruction, 2026-11-03:
+// the site itself lives at /iyilik/, each volume's QR opens /iyilik/<n>/ directly. Never move or delete these pages.
+const iyilikPages = [
+  ['iyilik/index.html', null],
+  ['iyilik/1/index.html', '#kitap/1'],
+  ['iyilik/2/index.html', '#kitap/2'],
+  ['iyilik/3/index.html', '#kitap/3'],
+];
+
+export function verifyIyilikPages(root = new URL('..', import.meta.url)) {
+  for (const [file, route] of iyilikPages) {
+    let html;
+    try {
+      html = readFileSync(new URL(file, root), 'utf8');
+    } catch {
+      throw new Error(`Basılı İyiliklerle Büyüyorum adresi eksik: /${file.replace(/index\.html$/, '')}`);
+    }
+    if (route) {
+      assert.ok(html.includes('<base href="/iyilik/">') && html.includes(route),
+        `/${file.replace(/index\.html$/, '')} doğrudan ${route} kitabını açmalı.`);
+    }
+  }
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     verifyBookQr(JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8')));
     console.log('NöroTerbiye: 3 basılı QR adresi ve son eğik çizgili karşılıkları korundu.');
+    verifyIyilikPages();
+    console.log('İyiliklerle Büyüyorum: /iyilik/ ve 3 basılı kitap adresi yerinde.');
   } catch (error) {
     console.error(`Yayın durduruldu: ${error.message}`);
     process.exitCode = 1;
