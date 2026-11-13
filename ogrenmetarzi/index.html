@@ -12,12 +12,12 @@
 <meta property="og:url" content="https://raufenc.com/ogrenmetarzi/">
 <meta property="og:site_name" content="Yörünge · TACEV">
 <meta property="og:locale" content="tr_TR">
-<meta property="og:image" content="https://raufenc.com/ogrenmetarzi/gorsel/og.jpg">
+<meta property="og:image" content="https://raufenc.com/ogrenmetarzi/gorsel/og.jpg?v=3ce3f8c4">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Öğrenme Tarzı Testi: Nasıl öğreniyorsun? Senin iki yolun hangisi? Altı sevimli robot: Yörünge ekibi.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raufenc.com/ogrenmetarzi/gorsel/og.jpg">
+<meta name="twitter:image" content="https://raufenc.com/ogrenmetarzi/gorsel/og.jpg?v=3ce3f8c4">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='19' fill='%23f4f8f7' stroke='%23123c40' stroke-width='2.6'/%3E%3Cellipse cx='22' cy='22' rx='11.5' ry='5.2' fill='none' stroke='%23123c40' stroke-width='2.2' transform='rotate(-38 22 22)'/%3E%3Ccircle cx='22' cy='22' r='2.6' fill='%23087c76'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#fff8ec">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -414,7 +414,7 @@ const kac = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 function amblemIc(t){ const r = V.tipler[t];
   return `<circle cx="24" cy="24" r="24" fill="${r.acik}"/><g transform="translate(24 24) scale(.68) translate(-24 -24)" fill="none" stroke="${r.renk}" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round">${IKON[t]}</g>`; }
 function amblemSvg(t, boy){ return `<svg xmlns="http://www.w3.org/2000/svg" width="${boy}" height="${boy}" viewBox="0 0 48 48" aria-hidden="true">${amblemIc(t)}</svg>`; }
-const YUZ = t => 'gorsel/yuz-' + t.toLowerCase() + '.jpg';
+const YUZ = t => 'gorsel/yuz-' + t.toLowerCase() + '.jpg?v=3ce3f8c4';
 function amblem(t, boy){
   if (boy < 28) return amblemSvg(t, boy);
   return `<span class="madalyon" style="width:${boy}px;height:${boy}px;--r:${V.tipler[t].renk}" aria-hidden="true">${amblemSvg(t, boy)}<img src="${YUZ(t)}" width="${boy}" height="${boy}" alt="" onerror="this.remove()"></span>`;
@@ -429,7 +429,7 @@ function arkadasBandi(){
   const ad = ts.map(t => V.tipler[t].ad).join('–');
   return `<aside class="arkadas"><div class="ark-yuzler">${ts.map(t => amblem(t, 40)).join('')}</div><p>${kac(Y.arkadas.replace('{ad}', ad))}</p></aside>`;
 }
-const RES = t => 'gorsel/tip-' + t.toLowerCase() + '.jpg';
+const RES = t => 'gorsel/tip-' + t.toLowerCase() + '.jpg?v=3ce3f8c4';
 function tipResim(t, sinif, tembel){ return `<img${sinif ? ` class="${sinif}"` : ''} src="${RES(t)}" width="600" height="600"${tembel ? ' loading="lazy"' : ''} alt="${kac(V.tipler[t].resim_alt)}">`; }
 const SAKIN = () => matchMedia('(prefers-reduced-motion:reduce)').matches;
 const BOS = () => ({form:null, c:[], ad:'', dn:{}, bas:null, sekme:0});
@@ -452,7 +452,7 @@ function giris(odak){
   <p class="kicker">${kac(Y.kicker)}</p>
   <h1 class="dev">${kac(Y.baslik1)}<span>${kac(Y.baslik2)}</span></h1>
   <p class="giris">${kac(Y.giris)}</p>
-  <figure class="resim giris-resim"><img src="gorsel/hero.jpg" width="1200" height="800" alt="Yan yana duran altı sevimli robot: Dedektif, Mimar, Haritacı, Gözcü, Tamirci ve Bilge"><figcaption class="balon">${kac(Y.balon)}</figcaption></figure>
+  <figure class="resim giris-resim"><img src="gorsel/hero.jpg?v=3ce3f8c4" width="1200" height="800" alt="Yan yana duran altı sevimli robot: Dedektif, Mimar, Haritacı, Gözcü, Tamirci ve Bilge"><figcaption class="balon">${kac(Y.balon)}</figcaption></figure>
   <section class="kutu" id="form">
     <h2 id="sinifSoru">${kac(Y.sinif_soru)}</h2>
     <div class="siniflar" role="group" aria-labelledby="sinifSoru">${Y.siniflar.map(([k, a]) => `<button class="sinif" data-f="${k}" aria-pressed="${secili === k}">${kac(a)}</button>`).join('')}</div>
@@ -636,7 +636,7 @@ function pHarita(G, h){
 /* 5 — Ailene notlar */
 function pAile(G, h, o){
   const A = V.aile, iki = h.sirali.slice(0, 2);
-  return `<figure class="resim" style="margin:0 0 18px"><img src="gorsel/aile.jpg" width="1200" height="800" loading="lazy" alt="Masada açık bir deftere birlikte bakan, gülümseyen anne ve oğlu"></figure>
+  return `<figure class="resim" style="margin:0 0 18px"><img src="gorsel/aile.jpg?v=3ce3f8c4" width="1200" height="800" loading="lazy" alt="Masada açık bir deftere birlikte bakan, gülümseyen anne ve oğlu"></figure>
   <p class="p-ust">${kac(B.y_ust)}</p><h2 class="p-baslik">${kac(G.ad ? B.y_baslik_adli.replace('{ad}', G.ad) : B.y_baslik)}</h2>
   <p class="p-giris">${kac(h.cok ? A.giris_cok : A.giris.replace('{A}', V.tipler[iki[0]].ad).replace('{B}', V.tipler[iki[1]].ad))}</p>
   ${iki.map(t => A.ipuclari[t]).concat([A.genel]).map(([b, m]) => `<div class="ic"><h3>${kac(b)}</h3><p style="margin-top:4px">${kac(m)}</p></div>`).join('')}
@@ -659,7 +659,7 @@ function sonuc(){
   ciz(`<div class="sonuc">
     ${ORN ? `<div class="ornekkutu">${kac(B.ornek_kutu)}<button class="buyuk" id="ornekdon">${kac(B.ornek_don)}</button></div>` : ''}
     <section class="kahraman" id="skart">
-      <div class="k-serit${h.cok ? ' k-hepsi' : ''}" style="grid-template-columns:repeat(${h.cok ? 1 : o.tipler.length},1fr)">${h.cok ? `<img src="gorsel/hero.jpg" width="1200" height="800" alt="Yan yana duran altı sevimli robot: Dedektif, Mimar, Haritacı, Gözcü, Tamirci ve Bilge">` : o.tipler.map(t => `<figure style="--r:${V.tipler[t].renk}">${tipResim(t, '', false)}<figcaption>${kac(V.tipler[t].ad)}</figcaption></figure>`).join('')}</div>
+      <div class="k-serit${h.cok ? ' k-hepsi' : ''}" style="grid-template-columns:repeat(${h.cok ? 1 : o.tipler.length},1fr)">${h.cok ? `<img src="gorsel/hero.jpg?v=3ce3f8c4" width="1200" height="800" alt="Yan yana duran altı sevimli robot: Dedektif, Mimar, Haritacı, Gözcü, Tamirci ve Bilge">` : o.tipler.map(t => `<figure style="--r:${V.tipler[t].renk}">${tipResim(t, '', false)}<figcaption>${kac(V.tipler[t].ad)}</figcaption></figure>`).join('')}</div>
       <div class="pariltilar" aria-hidden="true">${Array.from({length: 8}, (_, i) => `<i style="--i:${i}"></i>`).join('')}</div>
       <p class="k-ust">${kac(ORN ? B.kahraman_ust_ornek : B.kahraman_ust)}</p>
       <p class="k-on">${kac(G.ad ? B.kahraman_on_adli.replace('{ad}', G.ad) : B.kahraman_on)}</p>
@@ -728,7 +728,7 @@ async function kartCiz(o, resimsiz){
   if (!resimsiz) {
     try{
       if (cok) {
-        const im = await yukleResim('gorsel/hero.jpg'), gw = 630, gh = gw * im.naturalHeight / im.naturalWidth, gx = (W - gw) / 2, gy = 250;
+        const im = await yukleResim('gorsel/hero.jpg?v=3ce3f8c4'), gw = 630, gh = gw * im.naturalHeight / im.naturalWidth, gx = (W - gw) / 2, gy = 250;
         x.save(); x.beginPath(); x.roundRect ? x.roundRect(gx, gy, gw, gh, 40) : x.rect(gx, gy, gw, gh); x.clip(); x.drawImage(im, gx, gy, gw, gh); x.restore();
       } else {
         const ims = await Promise.all(ts.map(t => yukleResim(RES(t))));
