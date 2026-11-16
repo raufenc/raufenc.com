@@ -40,7 +40,7 @@ function card(p){
  const poem=el("h3","poem");poem.id=`siir-${p.number}`;p.lines.forEach(line=>poem.append(el("span",null,line)));body.append(poem);
  const meta=el("div","meta");meta.append(el("span","poet",p.poet));
  if(p.meter){const meter=el("span","meter",p.meter);meter.title=p.meter_name||"";meter.setAttribute("aria-label",p.meter_name||p.meter);meta.append(meter);}
- meta.append(el("span","page",`Kitapta ${2*p.number-1}–${2*p.number}. sayfalar`));body.append(meta);
+ meta.append(el("span","page",`Kitapta ${2*p.number}–${2*p.number+1}. sayfalar`));body.append(meta);
  if(p.recording&&safeLink(p.recording.url)){
   const v=p.recording;const actions=el("div","watch-row");const a=el("button","watch");a.type="button";a.setAttribute("aria-label",`${p.number}. beyit: okuyuşu ve izahı dinle`);a.addEventListener("click",()=>play(p,a));
   const icon=el("span",null,"▶");icon.setAttribute("aria-hidden","true");a.append(icon,document.createTextNode("Okuyuşu ve izahı dinle"));actions.append(a);
@@ -64,6 +64,6 @@ function render(){
 }
 search.addEventListener("input",render);
 filter.addEventListener("click",()=>{filter.setAttribute("aria-pressed",String(filter.getAttribute("aria-pressed")!=="true"));render();});
-fetch("beyitler.json").then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(data=>{
+fetch("beyitler.json",{cache:"no-cache"}).then(r=>{if(!r.ok)throw Error(r.status);return r.json();}).then(data=>{
  poems=data.poems;render();if(location.hash){const target=document.getElementById(location.hash.slice(1));target?.scrollIntoView();}
 }).catch(()=>{list.textContent="Liste şu anda yüklenemedi. Sayfayı yenileyerek tekrar deneyebilirsiniz.";count.textContent="";});
