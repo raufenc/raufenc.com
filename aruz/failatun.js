@@ -5,6 +5,7 @@ const D = window.BBA, B = D.beyitler, V = D.vezinler, K = D.klipler;
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const iki = n => String(n).padStart(2, "0");
+const misraHTML = m => String(m).split(" ").map(k => `<span class="kl">${esc(k)}</span>`).join(" ");
 const sure = (a, b) => { const s = Math.max(0, Math.round((b || 0) - (a || 0))); return s ? `${Math.floor(s / 60)}:${iki(s % 60)}` : ""; };
 const karistir = a => { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const sade = s => String(s).toLocaleLowerCase("tr").replaceAll("ı", "i").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[’'‘\-]/g, "");
@@ -16,7 +17,7 @@ const TEF = { "— · — —": "Fâ‘ilâtün", "— · —": "Fâ‘ilün", "
 const birimF = f => f.split(" ").reduce((a, x) => a + (x === "—" ? 2 : 1), 0);
 const agizF = f => f.split(" ").map(x => x === "—" ? "dan" : "di").join(" ");
 const VTANIM = {
-  "failatun": "Divan şiirinin en çok kullanılan kalıbı. Uzun heceyle başlar; dengeli, vakur bir yürüyüşü vardır. Hocamız “en meşhur vezin” diye bunu sayar, misalini de Muhibbî’nin sıhhat beytiyle verir.",
+  "failatun": "Divan şiirinin en çok kullanılan kalıbı. Uzun heceyle başlar; dengeli, vakur bir yürüyüşü vardır. Hocamız “en meşhur vezin” diye bunu sayar, misalini de Kanûnî Sultan Süleyman Han’ın (Muhibbî) sıhhat beytiyle verir.",
   "mefailun": "Aynı hücre dört defa tekrar eder: bir kısa, üç uzun. Geniş nefesli, akıcı bir kalıptır. Nâbî’nin “Sakın terk-i edebden” na‘tı bu vezindedir.",
   "mefulu-mefailu": "İki uzunla başlar, ortada salınır, yumuşak iner. Yahya Kemal’in “Akıncılar” ve “Sessiz Gemi” şiirleri de bu vezindedir.",
   "mefulu-failatu": "Dört ayrı hücreden kurulur; her tef’ilede yürüyüş değişir. Hikmetli, düşündüren beyitlerde çok sevilmiştir.",
@@ -92,7 +93,7 @@ function diziKalip(feet, tekrar = 1) {
 const isaret = v => v === "—·" ? '<i class="u"></i><i class="k"></i>' : v === "—" ? '<i class="u"></i>' : v === "·" ? '<i class="k"></i>' : "";
 function heceEl(s, i, ilk) {
   const nt = s.n ? NOT[s.n] : (s.u ? "ulama" : ""); const sinif = s.n ? "nt-" + s.n : "nt-ulama";
-  return `<span class="hece${s.w && !ilk ? " kb" : ""}" data-i="${i}"><span class="is">${isaret(s.v)}</span><span class="yz">${esc(s.t)}</span>${nt ? `<span class="nt ${sinif}">${nt}</span>` : ""}</span>`;
+  return `<span class="hece${s.w && !ilk ? " kb" : ""}" data-i="${i}" style="--i:${i}"><span class="is">${isaret(s.v)}</span><span class="yz">${esc(s.t)}</span>${nt ? `<span class="nt ${sinif}">${nt}</span>` : ""}</span>`;
 }
 function taktiHTML(ln, o = {}) {
   if (!ln.feet) return `<div class="takti${o.kucuk ? " kucuk" : ""}"><div class="misra-t"><div class="tef"><div class="tef-heceler">${ln.syl.map((s, i) => heceEl(s, i, i === 0)).join("")}</div><div class="tef-ad">hece vezni<i>${ln.syl.length} hece</i></div></div></div></div>`;
@@ -147,24 +148,23 @@ document.addEventListener("click", e => {
   const k = e.target.closest("[data-klip]"); if (k) { const c = K[k.dataset.klip]; if (c) videoAc({ v: c.v, s: c.s, e: c.e, baslik: c.baslik, alt: `${c.kanal} · ${c.kaynak}` }); return; }
   const r = e.target.closest("[data-kayit]"); if (r) { const b = beyit(r.dataset.kayit); if (b && b.kayit) videoAc({ v: b.kayit.v, s: b.kayit.s, e: b.kayit.e, baslik: `${b.n}. beyit · ${b.sair}`, alt: b.kayit.not || `${b.kayit.kanal || ""} · ${b.kayit.baslik || ""}` }); }
 });
-const kucukResim = v => `https://i.ytimg.com/vi/${v}/hqdefault.jpg`;
 function klipHTML(key, o = {}) {
   const c = K[key]; if (!c) return "";
-  const kare = `<span class="klip-kare"><img src="${kucukResim(c.v)}" alt="" loading="lazy"><span class="klip-oyna"><i>${OYNA}</i>${sure(c.s, c.e)}</span></span>`;
-  if (o.yatay) return `<button class="klip klip-yatay" data-klip="${key}">${kare}<span><span class="ust-yazi" style="display:block">Hocamızın ağzından</span><h3>${esc(c.baslik)}</h3>${c.soz ? `<p class="soz">“${esc(c.soz)}”</p>` : ""}<p>${esc(c.ozet)}</p></span></button>`;
-  return `<button class="klip" data-klip="${key}">${kare}<h3>${esc(c.baslik)}</h3>${c.soz ? `<p class="soz">“${esc(c.soz)}”</p>` : ""}<p>${esc(c.ozet)}</p></button>`;
+  const soz = c.soz ? `<span class="klip-soz"><i class="tirnak" aria-hidden="true">“</i>${esc(c.soz)}</span>` : `<span class="klip-soz yalin">${esc(c.baslik)}</span>`;
+  return `<button class="klip${o.yatay ? " klip-yatay" : ""}" data-klip="${key}"><span class="klip-yuz">${soz}<span class="klip-oyna"><i>${OYNA}</i><span>Hocamızdan dinleyin${sure(c.s, c.e) ? " · " + sure(c.s, c.e) : ""}</span></span></span><span class="klip-govde">${c.soz ? `<h3>${esc(c.baslik)}</h3>` : ""}<p>${esc(c.ozet)}</p></span></button>`;
 }
 
 /* ——— kartlar ——— */
 function beyitKart(b) {
   const v = VZ[b.vz];
   return `<a class="bk" href="#/beyit/${b.n}"><span class="bk-resim"><img src="img/${iki(b.n)}k.webp" alt="" loading="lazy" width="640" height="342"><span class="bk-no">${iki(b.n)}</span>${b.kayit ? `<span class="bk-ses">${OYNA} Hocamızdan</span>` : ""}</span>
-    <span class="bk-govde"><p class="bk-beyit"><span>${esc(b.m[0])}</span><span>${esc(b.m[1])}</span></p><span class="bk-alt"><span>${esc(b.sair)}</span><span class="vz">${v ? v.tef[0] + "…" : "Hece vezni"}</span></span></span></a>`;
+    <span class="bk-govde"><p class="bk-beyit"><span>${misraHTML(b.m[0])}</span><span>${misraHTML(b.m[1])}</span></p><span class="bk-alt"><span>${esc(b.sair)}</span><span class="vz">${v ? v.ad : "Hece vezni · 5 + 5"}</span></span></span></a>`;
 }
 const kalipHTML = (feet, acik) => feet.map(f => `<span class="kalip-f${acik ? " acik" : ""}">${f.split(" ").map(x => `<i class="${x === "—" ? "u" : "k"}"></i>`).join("")}</span>`).join("");
 function vezinKart(v, acik) {
-  return `<a class="vezin${acik ? " acik" : ""}" href="#/vezin/${v.id}"><h3>${v.ad}</h3><button class="cal-dugme kucuk" data-kalip="${v.id}" aria-label="${v.ad} ritmini dinle">${OYNA}</button>
-    <span class="kal">${kalipHTML(v.feet, acik)}</span><span class="bilgi"><span>${v.bahir} bahri</span><span>${v.b.join(" + ")} = ${v.top} birim</span><span>${v.hece} hece</span><span>${v.beyitler.length} beyit</span></span></a>`;
+  const m = v.beyitler.find(b => b.kayit) || v.beyitler[0];
+  return `<div class="vezin${acik ? " acik" : ""}"><h3><a href="#/vezin/${v.id}">${v.ad}</a></h3><button class="cal-dugme kucuk" data-kalip="${v.id}" aria-label="${v.ad} ritmini dinle">${OYNA}</button>
+    <span class="kal">${kalipHTML(v.feet, acik)}</span>${m ? `<span class="vz-misal">${esc(m.m[0])}<small>${esc(m.sair)} · ${m.n}. beyit</small></span>` : ""}<span class="bilgi"><span>${v.bahir} bahri</span><span>${v.b.join(" + ")} = ${v.top} birim</span><span>${v.hece} hece</span><span>${v.beyitler.length} beyit</span></span></div>`;
 }
 document.addEventListener("click", e => {
   const k = e.target.closest("[data-kalip]"); if (!k) return; e.preventDefault(); e.stopPropagation();
@@ -186,7 +186,7 @@ const Tart = (() => {
     const gr = []; let cur = [...words[0].u]; for (let wi = 1; wi < words.length; wi++) { if (links[wi]) cur = cur.concat(words[wi].u); else { gr.push(cur); cur = [...words[wi].u]; } } gr.push(cur);
     const out = []; for (const g of gr) for (const s of hecele(g)) {
       if (!s.length) continue; let txt = "", prev = null, link = false; for (const u of s) { if (prev !== null && u[2] !== prev) { link = true; if (words[u[2]].sep !== "-") txt += "‿"; } txt += u[0]; prev = u[2]; }
-      const lows = s.map(u => u[1]), n = lows.findIndex(c => VV.includes(c)); let cls = "X"; if (n >= 0) { const coda = lows.slice(n + 1).join(""), lv = VL.includes(lows[n]); cls = !coda ? (lv ? "L" : "S") : lv ? (coda === "n" ? "N" : "O") : coda.length >= 2 ? "O" : "C"; }
+      const lows = s.map(u => u[1]), n = lows.findIndex(c => VV.includes(c)); let cls = "X"; if (n >= 0) { const coda = lows.slice(n + 1).join(""), lv = VL.includes(lows[n]); cls = !coda ? (lv ? "L" : "S") : lv ? (coda === "n" ? "N" : "O") : coda.length >= 2 ? "K" : "C"; }
       out.push({ t: txt, cls, w: s[0] === words[s[0][2]].u[0], u: link });
     } return out;
   }
@@ -201,6 +201,7 @@ const Tart = (() => {
       else if (c === "S") { p === "·" ? tr(0, 1, "·", null) : tr(2, 1, "—", "imale"); }
       else if (c === "L") { p === "—" ? tr(0, 1, "—", null) : tr(3, 1, "·", "zihaf"); }
       else if (c === "C") { p === "—" ? tr(0, 1, "—", null) : tr(8, 1, "·", "kusur"); }
+      else if (c === "K") { if (p === "—") { tr(0, 1, "—", null); if (j + 1 < m && pat[j + 1] === "·") tr(1.2, 2, "—·", "med"); } else tr(9, 1, "·", "kusur"); }
       else if (c === "O" || c === "N") { if (p === "—") { tr(c === "N" ? 0 : .6, 1, "—", null); if (j + 1 < m && pat[j + 1] === "·") tr(c === "O" ? 0 : 1.5, 2, "—·", "med"); } else tr(9, 1, "·", "kusur"); }
       memo.set(key, best); return best;
     }
@@ -214,10 +215,10 @@ const Tart = (() => {
     return vs;
   }
   function coz(line, feet0) {
-    const words = kelimeler(line); if (!words.length) return null;
-    const napo = Math.min(4, words.reduce((a, w) => a + w.o.filter(c => APO.includes(c)).length, 0)); const lk = [];
+    const words = kelimeler(String(line).slice(0, 90)); if (!words.length) return null;
+    const napo = Math.min(3, words.reduce((a, w) => a + w.o.filter(c => APO.includes(c)).length, 0)); const lk = [];
     for (let wi = 1; wi < words.length; wi++) { const a = words[wi - 1].o.filter(c => !APO.includes(c)).map(low), b0 = words[wi].o[0]; if (a.length && !VV.includes(a[a.length - 1]) && !APO.includes(b0) && VV.includes(low(b0)) && words[wi].sep !== ",") lk.push(wi); }
-    const L = Math.min(lk.length, 9); let best = null;
+    const L = Math.min(lk.length, 7); let best = null;
     for (let am = 0; am < (1 << napo); am++) { const apos = Array.from({ length: 8 }, (_, i) => !!(am >> i & 1));
       for (let lm = 0; lm < (1 << L); lm++) { const links = {}; let yok = 0; lk.forEach((wi, i) => { links[wi] = i >= L ? true : !!(lm >> i & 1); if (!links[wi]) yok++; });
         const sy = kur(words, links, apos);
@@ -243,6 +244,7 @@ function havuz(filtre) {
   }[filtre || "hepsi"];
   return hep.filter(f);
 }
+const HUCRE = ["— · — —", "· — — —", "· · — —", "— — ·"];
 function temrinKur(kok) {
   const tip = kok.dataset.temrin, adet = +kok.dataset.adet || 3; let sira = 0, dogru = 0;
   const bitir = () => {
@@ -255,28 +257,73 @@ function temrinKur(kok) {
   let liste = [];
   function kur() {
     if (tip === "isaretle") liste = karistir(havuz(kok.dataset.filtre)).slice(0, adet);
-    else if (tip === "kulak") liste = karistir(V).slice(0, adet);
+    else if (tip === "kulak") liste = kok.dataset.tur === "tefile" ? karistir(HUCRE).slice(0, adet) : karistir(V).slice(0, adet);
     else if (tip === "birim") liste = kok.dataset.tur === "hece" ? karistir(havuz("sade")).slice(0, adet) : karistir(Object.keys(TEF)).slice(0, adet);
     else if (tip === "kelime") liste = karistir(B.filter(b => b.vz !== "hece")).slice(0, adet);
+    else if (tip === "vurus") liste = kok.dataset.tur === "tefile" ? karistir(["— · — —", "· — — —", "· · — —", "— — ·", "· — · —"]).slice(0, adet).map(f => ({ feet: [f, f], ad: `${TEF[f]} · ${TEF[f]}` }))
+      : kok.dataset.tur === "misra" ? karistir(havuz("sade")).slice(0, adet)
+        : [VZ.failatun, ...karistir(V.filter(v => v.id !== "failatun"))].slice(0, adet).map(v => ({ feet: v.feet, ad: v.ad }));
+    else if (tip === "kalip") liste = karistir(havuz("hepsi")).slice(0, adet);
+    else if (tip === "aksak") liste = karistir(havuz("sade").filter(x => x.ln.syl.length > 6)).slice(0, adet);
     soru();
   }
   function ileri(ilkDeneme) { if (ilkDeneme) dogru++; Kayit.d.puan.t++; if (ilkDeneme) Kayit.d.puan.d++; Kayit.yaz(); sira++; if (sira >= adet) bitir(); else soru(); }
-  function soru() { ({ isaretle, kulak, birim, kelime })[tip](liste[sira]); }
-  function isaretle(x) {
-    let deneme = 0;
-    kok.innerHTML = ust("Heceleri tartın") + `<p>Her heceye dokunun: bir dokunuş kısa (nokta), iki dokunuş uzun (çizgi). Ulama yapılan yerler ‿ ile bağlanmıştır.</p>
-      <div class="t-misra">${x.ln.syl.map((s, i) => `<button class="t-hece${s.w && i ? " kb" : ""}" data-i="${i}" data-s=""><span class="is"><i></i></span><span>${esc(s.t)}</span><small></small></button>`).join("")}</div>
+  function soru() { ({ isaretle, kulak, birim, kelime, vurus, kalip, aksak })[tip](liste[sira]); }
+  function vurus(x) {
+    const misra = !!x.ln; let ilk = null;
+    kok.innerHTML = ust(misra ? "Mısrayı elinizle vurun" : "Ritmi elinizle vurun") + `<p>${misra ? `${x.b.n}. beyit · ${esc(x.b.sair)}. ` : `<b class="t-ad">${x.ad}</b>. `}Önce dinleyin; sonra her heceye bir vuruş.</p><div data-valan></div>
+      <div class="t-alt"><button class="dugme dugme-altin gizli" data-ileri>Devam <span class="ok">→</span></button><button class="dugme dugme-cizgi dugme-kucuk" data-gec>Bunu geç</button></div>`;
+    const o = { bitti: tam => { if (ilk === null) ilk = tam; if (!tam) return; const d = $("[data-ileri]", kok); d.classList.remove("gizli"); $("[data-gec]", kok).classList.add("gizli"); d.onclick = () => ileri(ilk); } };
+    if (misra) vurusSatir($("[data-valan]", kok), x.ln, o); else vurusKalip($("[data-valan]", kok), x.feet, o);
+    $("[data-gec]", kok).addEventListener("click", () => ileri(false));
+  }
+  function kalip(x) {
+    const v = VZ[x.b.vz], sik = karistir([v, ...karistir(V.filter(y => y.id !== v.id && y.feet[0] !== v.feet[0])).slice(0, 2), ...karistir(V.filter(y => y.id !== v.id && y.feet[0] === v.feet[0])).slice(0, 1)]).slice(0, 4);
+    secenekli("Bu mısra hangi kalıpta?", `<div class="adsiz">${taktiHTML(x.ln, { kucuk: true })}</div><p class="t-kunye">${x.b.n}. beyit · ${esc(x.b.sair)} · ${x.i + 1}. mısra</p><p>İlk kümeye bakın: uzunla mı başlıyor, kısayla mı? Sonra ikinci kümeyle sağlamasını yapın.</p>`,
+      sik.map(y => `<span>${y.ad}</span>`), sik.indexOf(v), `Doğru: ${v.ad}. İlk tef’ile ${TEF[x.ln.feet[0]] || ""}; mısra ${x.ln.feet.map(birimF).join(" + ")} = ${x.ln.feet.map(birimF).reduce((a, b) => a + b, 0)} birim.`);
+  }
+  function aksak(x) {
+    const ln = x.ln, n = ln.syl.length, aday = ln.syl.map((s, i) => i).filter(i => i > 0 && i < n - 1 && ln.syl[i].v !== "—·"), hedef = aday[Math.floor(Math.random() * aday.length)];
+    const asil = diziSatir(ln), bozuk = asil.map((d, i) => i === hedef ? Object.assign({}, d, { b: d.b === 1 ? 2 : 1 }) : d); let cozuldu = false, deneme = 0;
+    kok.innerHTML = ust("Aksayan heceyi bulun") + `<p>Çizgi ve noktalar mısranın doğru tartısını gösteriyor. Çalınan ritimde bir hece ölçüsünden çıktı: ya uzun iken kısa vuruldu ya kısa iken uzun. Dinleyin, o heceye dokunun.</p>
+      <div class="calar"><button class="cal-dugme" data-acal aria-label="Ritmi dinle">${OYNA}</button><span data-aet>Ritmi dinleyin</span></div>
+      <div class="t-misra">${ln.syl.map((s, i) => `<button class="t-hece${s.w && i ? " kb" : ""}" data-i="${i}" data-s="${s.v === "·" ? "k" : "u"}"><span class="is"><i></i><i></i></span><span>${esc(s.t)}</span><small></small></button>`).join("")}</div>
       <p class="t-kunye">${x.b.n}. beyit · ${esc(x.b.sair)} · ${x.i + 1}. mısra</p><p class="t-sonuc" aria-live="polite"></p>
-      <div class="t-alt"><button class="dugme dugme-altin" data-tart>Tartıya koy</button><button class="dugme dugme-cizgi dugme-kucuk" data-goster>Cevabı göster</button><button class="dugme dugme-cizgi dugme-kucuk gizli" data-ileri>Devam <span class="ok">→</span></button></div>`;
+      <div class="t-alt"><button class="dugme dugme-altin gizli" data-ileri>Devam <span class="ok">→</span></button><button class="dugme dugme-cizgi dugme-kucuk" data-goster>Cevabı göster</button></div>`;
+    const hs = $$(".t-hece", kok), son = $(".t-sonuc", kok), cal = $("[data-acal]", kok);
+    cal.addEventListener("click", () => {
+      if (cal.dataset.durum === "caliyor") { Ses.dur(); return; }
+      cal.innerHTML = DUR; cal.dataset.durum = "caliyor";
+      Ses.cal(cozuldu ? asil : bozuk, { adim: i => { hs.forEach(h => h.classList.remove("calan")); hs[i].classList.add("calan"); }, bitti: () => { cal.innerHTML = OYNA; cal.dataset.durum = ""; hs.forEach(h => h.classList.remove("calan")); } });
+    });
+    const coz = ilk => {
+      cozuldu = true; Ses.dur(); hs.forEach(h => { h.disabled = true; h.classList.remove("y"); }); hs[hedef].classList.add("d");
+      const s = ln.syl[hedef], kisa = s.v === "·"; son.className = "t-sonuc iyi";
+      son.textContent = `${ilk ? "Kulağınız yerinde. " : ""}“${s.t}” hecesi ${kisa ? "kısa iken uzun" : "uzun iken kısa"} vuruldu; mısra bir birim ${kisa ? "fazla" : "eksik"} geldi. Şimdi doğrusunu dinleyin.`;
+      $("[data-aet]", kok).textContent = "Doğrusunu dinleyin"; $("[data-goster]", kok).classList.add("gizli");
+      const d = $("[data-ileri]", kok); d.classList.remove("gizli"); d.onclick = () => ileri(ilk);
+    };
+    hs.forEach((h, i) => h.addEventListener("click", () => { if (cozuldu) return; deneme++; if (i === hedef) coz(deneme === 1); else { h.classList.add("y"); h.disabled = true; son.className = "t-sonuc kotu"; son.textContent = "Orası ölçüsünde. Bir daha dinleyin; ritmin tökezlediği yeri arayın."; } }));
+    $("[data-goster]", kok).addEventListener("click", () => coz(false));
+  }
+  const neden = h => { if (h.n && NOT[h.n]) return NOT[h.n]; const t = h.t.replace(/[^\p{L}]/gu, "").toLocaleLowerCase("tr"), c = t[t.length - 1]; return "âîû".includes(c) ? "uzun sesli" : "aeıioöuü".includes(c) ? "açık hece" : "kapalı hece"; };
+  function isaretle(x) {
+    let deneme = 0; const uclu = ["med", "hepsi"].includes(kok.dataset.filtre), SOZ = { "": "tartılmadı", k: "kısa", u: "uzun", m: "medli" }, sira = uclu ? ["k", "u", "m"] : ["k", "u"];
+    const bek = h => h.v === "·" ? "k" : h.v === "—·" && uclu ? "m" : "u";
+    kok.innerHTML = ust("Heceleri tartın") + `<p>Her heceye dokunun: bir dokunuş kısa (nokta), iki dokunuş uzun (çizgi)${uclu ? ", üç dokunuş medli (çizgi ve nokta)" : ""}. Ulama yapılan yerler ‿ ile bağlanmıştır.</p>
+      <div class="t-misra">${x.ln.syl.map((h, i) => `<button class="t-hece${h.w && i ? " kb" : ""}" data-i="${i}" data-s="" aria-label="${esc(h.t)}: tartılmadı"><span class="is"><i></i><i></i></span><span>${esc(h.t)}</span><small></small></button>`).join("")}</div>
+      <p class="t-kunye">${x.b.n}. beyit · ${esc(x.b.sair)} · ${x.i + 1}. mısra</p><p class="t-sonuc" aria-live="polite"></p>
+      <div class="t-alt"><button class="dugme dugme-altin" data-tart>Tartıya koy</button><button class="dugme dugme-cizgi dugme-kucuk" data-goster>Cevabı göster</button><button class="dugme dugme-altin gizli" data-ileri>Devam <span class="ok">→</span></button></div>`;
     const hs = $$(".t-hece", kok), son = $(".t-sonuc", kok);
-    hs.forEach(h => h.addEventListener("click", () => { if (kok.dataset.kilit) return; h.dataset.s = h.dataset.s === "" ? "k" : h.dataset.s === "k" ? "u" : "k"; h.classList.remove("d", "y"); }));
-    const bitti = ilk => { kok.dataset.kilit = "1"; hs.forEach((h, i) => { const s = x.ln.syl[i]; h.dataset.s = s.v === "·" ? "k" : "u"; h.classList.remove("y"); h.classList.add("d"); $("small", h).textContent = s.n && s.n !== "son" ? NOT[s.n] : ""; }); $("[data-tart]", kok).classList.add("gizli"); $("[data-goster]", kok).classList.add("gizli"); const d = $("[data-ileri]", kok); d.classList.remove("gizli"); d.onclick = () => { delete kok.dataset.kilit; ileri(ilk); }; const v = VZ[x.b.vz]; son.className = "t-sonuc iyi"; son.textContent = (ilk ? "Tam isabet. " : "") + `Kalıp: ${x.ln.feet.map(f => TEF[f]).join(" · ")}`; };
+    hs.forEach(h => h.addEventListener("click", () => { if (kok.dataset.kilit) return; h.dataset.s = sira[(sira.indexOf(h.dataset.s) + 1) % sira.length]; h.classList.remove("d", "y"); $("small", h).textContent = ""; h.setAttribute("aria-label", `${h.children[1].textContent}: ${SOZ[h.dataset.s]}`); }));
+    const bitti = ilk => { kok.dataset.kilit = "1"; hs.forEach((h, i) => { const s = x.ln.syl[i]; h.dataset.s = s.v === "·" ? "k" : s.v === "—·" ? "m" : "u"; h.classList.remove("y"); h.classList.add("d"); $("small", h).textContent = s.n ? NOT[s.n] : ""; }); $("[data-tart]", kok).classList.add("gizli"); $("[data-goster]", kok).classList.add("gizli"); const d = $("[data-ileri]", kok); d.classList.remove("gizli"); d.onclick = () => { delete kok.dataset.kilit; ileri(ilk); }; son.className = "t-sonuc iyi"; son.textContent = (ilk ? "Tam isabet. " : "") + `Kalıp: ${x.ln.feet.map(f => TEF[f]).join(" · ")}`; };
     $("[data-tart]", kok).addEventListener("click", () => {
       deneme++; let yanlis = 0, bos = 0;
-      hs.forEach((h, i) => { const s = x.ln.syl[i], bek = s.v === "·" ? "k" : "u"; h.classList.remove("d", "y"); if (h.dataset.s === "") bos++; else if (h.dataset.s === bek) h.classList.add("d"); else { h.classList.add("y"); yanlis++; } });
-      if (bos) { son.className = "t-sonuc kotu"; son.textContent = `${bos} hece tartılmadı. Hepsine dokunun.`; deneme--; return; }
-      if (!yanlis) bitti(deneme === 1);
-      else { son.className = "t-sonuc kotu"; son.textContent = `${yanlis} hece yerine oturmadı. Kırmızı heceler kapalı mı açık mı, seslisi uzun mu? Bir daha bakın.`; }
+      hs.forEach((h, i) => { const s = x.ln.syl[i]; h.classList.remove("d", "y"); $("small", h).textContent = ""; if (h.dataset.s === "") bos++; else if (h.dataset.s === bek(s)) h.classList.add("d"); else { h.classList.add("y"); yanlis++; if (deneme >= 2) $("small", h).textContent = neden(s); } });
+      if (bos) { son.className = "t-sonuc kotu"; son.textContent = `${bos} hece tartılmadı. Hepsine dokunun.`; hs.forEach(h => h.classList.remove("d", "y")); deneme--; return; }
+      if (!yanlis) return bitti(deneme === 1);
+      const sonHece = hs[hs.length - 1].classList.contains("y"); son.className = "t-sonuc kotu";
+      son.textContent = yanlis === 1 && sonHece ? "Yalnız son hece kaldı: mısranın son hecesi her zaman uzun sayılır." : deneme >= 2 ? `${yanlis} hece yerine oturmadı. Altlarına sebebini yazdık: açık hece kısa, kapalı ve uzun sesli hece uzundur; imâle kısayı uzatır, med bir uzunla bir kısa tutar.` : `${yanlis} hece yerine oturmadı. İşaretli heceler nasıl bitiyor, seslisi uzun mu? Bir daha bakın.`;
     });
     $("[data-goster]", kok).addEventListener("click", () => bitti(false));
   }
@@ -291,8 +338,13 @@ function temrinKur(kok) {
     }));
   }
   function kulak(v) {
+    if (kok.dataset.tur === "tefile") {
+      const f = v, sik = karistir(HUCRE), yer = f.split(" ").indexOf("·");
+      return secenekli("Hangi hücreyi duydunuz?", `<p>Aynı hücre iki defa çalınır. Kısa hecenin yerini dinleyin: başta mı, ortada mı, sonda mı?</p><div class="calar"><button class="cal-dugme" data-kalip="x" data-feet="${f}|${f}" aria-label="Ritmi dinle">${OYNA}</button><span>Ritmi dinleyin</span></div>`,
+        sik.map(y => `<span>${TEF[y]}</span><span class="kalip-f">${y.split(" ").map(c => `<i class="${c === "—" ? "u" : "k"}"></i>`).join("")}</span>`), sik.indexOf(f), `Doğru: ${TEF[f]}, ağızla “${agizF(f)}”. ${f.split(" ").filter(c => c === "·").length > 1 ? "İki kısa heceyle başlar." : `Kısa hece ${["başta", "ikinci sırada", "üçüncü sırada", "sonda"][yer]}.`}`);
+    }
     const sik = karistir([v, ...karistir(V.filter(x => x.id !== v.id && x.feet.join() !== v.feet.join())).slice(0, 3)]);
-    secenekli("Bu ritim hangi kalıp?", `<p>Ritmi dinleyin; uzunları ve kısaları sayın, sonra kalıbını seçin.</p><div class="calar"><button class="cal-dugme" data-kalip="${v.id}" aria-label="Ritmi dinle">${OYNA}</button><span>Ritmi dinle</span></div>`,
+    secenekli("Bu ritim hangi kalıp?", `<p>Ritmi dinleyin; ilk kümede uzunları ve kısaları sayın, sonra kalıbını seçin.</p><div class="calar"><button class="cal-dugme" data-kalip="${v.id}" aria-label="Ritmi dinle">${OYNA}</button><span>Ritmi dinleyin</span></div>`,
       sik.map(x => `<span>${x.ad}</span>`), sik.indexOf(v), `Doğru: ${v.ad}. ${v.b.join(" + ")} = ${v.top} birim.`);
   }
   function birim(x) {
@@ -314,6 +366,70 @@ function temrinKur(kok) {
   }
   kur();
 }
+
+/* ——— vuruş: ritmi elle vurarak tartma ———
+   Her heceye bir vuruş. İki vuruş arasındaki süre, önceki hecenin ağırlığıdır:
+   kısa 1, uzun 2, medli 3 birim. Son hecenin süresi ölçülemez; serbesttir. */
+const TEFH = { "— · — —": ["Fâ", "‘i", "lâ", "tün"], "— · —": ["Fâ", "‘i", "lün"], "· — — —": ["Me", "fâ", "‘î", "lün"], "— — ·": ["Mef", "‘û", "lü"], "· — — ·": ["Me", "fâ", "‘î", "lü"], "· — —": ["Fe", "‘û", "lün"], "— · — ·": ["Fâ", "‘i", "lâ", "tü"], "· · — —": ["Fe", "‘i", "lâ", "tün"], "· · —": ["Fe", "‘i", "lün"], "· — · —": ["Me", "fâ", "‘i", "lün"], "— —": ["Fa‘", "lün"] };
+const hecelerF = feet => feet.flatMap(f => TEFH[f] || f.split(" ").map(x => x === "—" ? "dan" : "di"));
+const Tik = (() => {
+  let c = null;
+  return guc => { try { const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; c = c || new AC(); if (c.state === "suspended") c.resume(); const t = c.currentTime, o = c.createOscillator(), g = c.createGain(); o.type = "triangle"; o.frequency.setValueAtTime(560, t); o.frequency.exponentialRampToValueAtTime(320, t + 0.07); g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.42 * (guc || 1), t + 0.006); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.11); o.connect(g).connect(c.destination); o.start(t); o.stop(t + 0.13); } catch (e) { } };
+})();
+function vurusOlc(zaman, bek) {
+  const ar = zaman.slice(1).map((t, i) => t - zaman[i]), eb = bek.slice(0, -1);
+  const sinif = x => x < 1.5 ? 1 : x < 2.55 ? 2 : 3;
+  const dene = u => { const r = ar.map(x => x / u), ok = r.map((x, i) => sinif(x) === eb[i] || Math.abs(x - eb[i]) < 0.4); return { u, r, ok, say: ok.filter(Boolean).length, hata: r.reduce((a, x, i) => a + (x - eb[i]) ** 2, 0) }; };
+  const aday = [ar.reduce((a, b) => a + b, 0) / eb.reduce((a, b) => a + b, 0), ...ar.map((x, i) => x / eb[i])];
+  return aday.map(dene).sort((a, b) => b.say - a.say || a.hata - b.hata)[0];
+}
+const virgul = (x, n = 1) => x.toFixed(n).replace(".", ",");
+function vurusKur(el, o) {
+  const dz = o.dizi, n = dz.length, bek = dz.map(x => x.b); let vur = [], bitti = false, deneme = 0;
+  const gr = []; dz.forEach((x, i) => (gr[x.ayak] = gr[x.ayak] || []).push(i));
+  const ilkSoz = `${n} hece, ${n} vuruş. Kısa heceden sonra bir, uzun heceden sonra iki birim bekleyin.`;
+  el.innerHTML = `<div class="vurus"><div class="v-heceler">${gr.map(g => `<span class="v-ayak">${g.map(i => `<span class="v-h" data-i="${i}"><span class="is">${isaret(bek[i] === 3 ? "—·" : bek[i] === 2 ? "—" : "·")}</span><span class="yz">${esc(o.yazilar[i])}</span></span>`).join("")}</span>`).join("")}</div>
+    <div class="v-olcu"><span>Kalıbın ölçüsü</span><div class="v-cubuk">${bek.map(b => `<i class="${b === 1 ? "k" : b === 3 ? "m" : ""}" style="--b:${b}"></i>`).join("")}</div></div>
+    <div class="v-olcu"><span>Sizin vuruşunuz</span><div class="v-cubuk v-sizin"><i class="v-bos" style="--b:1"></i></div></div>
+    <div class="v-eylem"><button class="v-pad" data-vpad type="button" aria-label="Vur"><b>Vur</b><small>buraya dokunun</small></button>
+      <div class="v-yan"><div class="calar"><button class="cal-dugme kucuk" data-vdinle type="button" aria-label="Ritmi dinle">${OYNA}</button><span>Önce dinleyin</span></div>
+        <p class="v-sonuc" aria-live="polite">${ilkSoz} <span class="v-klavye">Klavyede boşluk tuşu da olur.</span></p>
+        <button class="dugme dugme-cizgi dugme-kucuk gizli" data-vbastan type="button">Bir daha vurun</button></div></div></div>`;
+  const pad = $("[data-vpad]", el), son = $(".v-sonuc", el), sizin = $(".v-sizin", el), hs = $$(".v-h", el), bastan = $("[data-vbastan]", el), dinle = $("[data-vdinle]", el);
+  const sifir = () => { vur = []; bitti = false; hs.forEach(h => h.classList.remove("vuruldu", "d", "y", "calan")); sizin.innerHTML = `<i class="v-bos" style="--b:1"></i>`; son.className = "v-sonuc"; bastan.classList.add("gizli"); pad.classList.remove("bitti"); };
+  const bitir = () => {
+    bitti = true; deneme++; const s = vurusOlc(vur, bek);
+    sizin.innerHTML = s.r.map((x, i) => `<i class="${s.ok[i] ? "d" : "y"}" style="--b:${Math.min(4, Math.max(0.45, x)).toFixed(2)}"></i>`).join("") + `<i class="son" style="--b:${bek[n - 1]}"></i>`;
+    hs.forEach((h, i) => { h.classList.remove("vuruldu"); h.classList.add(i === n - 1 || s.ok[i] ? "d" : "y"); });
+    const kisa = s.r.filter((x, i) => bek[i] === 1), uzun = s.r.filter((x, i) => bek[i] === 2), ort = a => a.reduce((x, y) => x + y, 0) / a.length;
+    const oran = kisa.length && uzun.length ? ort(uzun) / ort(kisa) : 0, sure = (vur[n - 1] - vur[0]) / 1000;
+    const yanlis = s.ok.map((d, i) => d ? null : i).filter(i => i !== null), tam = !yanlis.length;
+    if (tam) { son.className = "v-sonuc iyi"; son.textContent = `Ölçüsünde. ${oran ? `Uzun heceleriniz kısaların ${virgul(oran)} katı sürdü; ölçü 2 kattır. ` : ""}Mısrayı ${virgul(sure)} saniyede vurdunuz.`; }
+    else { const soz = yanlis.slice(0, 3).map(i => `“${o.yazilar[i]}” ${s.r[i] < bek[i] ? "kısa" : "uzun"} kaldı`).join(", "); son.className = "v-sonuc kotu"; son.textContent = `${n} heceden ${yanlis.length} tanesi ölçüsüne oturmadı: ${soz}${yanlis.length > 3 ? " ve başkaları" : ""}. Alttaki çubuğu üsttekiyle karşılaştırın, bir daha vurun.`; }
+    bastan.classList.remove("gizli"); pad.classList.add("bitti");
+    if (o.bitti) o.bitti(tam, deneme);
+  };
+  const vurus = () => {
+    const t = performance.now(); Ses.dur();
+    if (bitti || (vur.length && t - vur[vur.length - 1] > 3200)) sifir();
+    vur.push(t); Tik(bek[vur.length - 1] >= 2 ? 1 : 0.8);
+    const h = hs[vur.length - 1]; if (h) h.classList.add("vuruldu");
+    pad.classList.remove("nabiz"); void pad.offsetWidth; pad.classList.add("nabiz");
+    if (vur.length === 1) { son.className = "v-sonuc"; son.textContent = "Devam edin; her heceye bir vuruş."; }
+    if (vur.length === n) bitir();
+  };
+  pad.addEventListener("pointerdown", e => { e.preventDefault(); pad.focus({ preventScroll: true }); vurus(); });
+  pad.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !e.repeat) { e.preventDefault(); vurus(); } });
+  pad.addEventListener("contextmenu", e => e.preventDefault());
+  bastan.addEventListener("click", () => { sifir(); son.textContent = ilkSoz; pad.focus({ preventScroll: true }); });
+  dinle.addEventListener("click", () => {
+    if (dinle.dataset.durum === "caliyor") { Ses.dur(); return; }
+    sifir(); dinle.innerHTML = DUR; dinle.dataset.durum = "caliyor";
+    Ses.cal(dz, { adim: i => { hs.forEach(h => h.classList.remove("calan")); if (hs[i]) hs[i].classList.add("calan"); }, bitti: () => { dinle.innerHTML = OYNA; dinle.dataset.durum = ""; hs.forEach(h => h.classList.remove("calan")); } });
+  });
+}
+const vurusSatir = (el, ln, o = {}) => vurusKur(el, Object.assign({ dizi: diziSatir(ln), yazilar: ln.syl.map(s => s.t) }, o));
+const vurusKalip = (el, feet, o = {}) => vurusKur(el, Object.assign({ dizi: diziKalip(feet), yazilar: hecelerF(feet) }, o));
 
 /* ——— derslere yardımcılar ——— */
 const SAY = (() => {
@@ -345,8 +461,8 @@ const DERSLER = window.BBA_DERSLER(F);
 const W = {
   saytart(el) {
     const y = beyit(42), m = beyit(6); const yl = y.t[0], ml = m.t[0]; const top = ml.syl.reduce((a, s) => a + birimS(s), 0);
-    el.innerHTML = `<p class="kutu-bas">Aynı iş, iki ölçü</p><div class="saytart"><div><h4>Hece vezni sayar</h4><p class="mini">Yunus Emre · 42. beyit</p><div class="sayilar">${yl.syl.map((s, i) => `${i === 5 ? '<span class="durak"></span>' : ""}<span class="sh"><b>${i < 5 ? i + 1 : i - 4}</b><span>${esc(s.t)}</span></span>`).join("")}</div><p class="sonuc">5 + 5 = <em>10 hece</em></p></div>
-      <div><h4>Aruz tartar</h4><p class="mini">Muhibbî · 6. beyit</p><div class="sayilar">${ml.syl.map(s => `<span class="sh ${s.v === "·" ? "k" : "u"}"><b>${birimS(s)}</b><span>${esc(s.t)}</span></span>`).join("")}</div><p class="sonuc">${ml.syl.length} hece, <em>${top} birim</em></p></div></div>`;
+    el.innerHTML = `<p class="kutu-bas">Aynı iş, iki ölçü</p><div class="saytart"><div><h4>Hece vezni sayar</h4><p class="mini">${esc(y.sair)} · 42. beyit</p><div class="sayilar">${yl.syl.map((s, i) => `${i === 5 ? '<span class="durak"></span>' : ""}<span class="sh"><b>${i < 5 ? i + 1 : i - 4}</b><span>${esc(s.t)}</span></span>`).join("")}</div><p class="sonuc">5 + 5 = <em>10 hece</em></p></div>
+      <div><h4>Aruz tartar</h4><p class="mini">${esc(m.sair)} · 6. beyit</p><div class="sayilar">${ml.syl.map(s => `<span class="sh ${s.v === "·" ? "k" : "u"}"><b>${birimS(s)}</b><span>${esc(s.t)}</span></span>`).join("")}</div><p class="sonuc">${ml.syl.length} hece, <em>${top} birim</em></p></div></div>`;
   },
   hecetart(el) {
     el.innerHTML = `<p class="kutu-bas">Hece tartısı</p><div class="tarti-giris"><input type="text" value="mu‘teber" maxlength="40" aria-label="Kelime" autocomplete="off" spellcheck="false"></div><div class="tarti-cikti"></div><div class="oneri">${["devlet", "cihânda", "nefes", "sıhhat", "şebnem", "hurşîd", "kitap", "gönül"].map(k => `<button>${k}</button>`).join("")}</div>`;
@@ -367,10 +483,17 @@ const W = {
       ["1 · Hecele", "Mısrayı doğal okuyuşla hecelere ayırın. “Halk içinde” ulamayla Hal-ki-çin-de olur."],
       ["2 · Tart", "Her heceye ağırlığını verin: açık ve kısa sesli hece nokta, kapalı ya da uzun sesli hece çizgi."],
       ["3 · Kümele", "Uzun ve kısaları baştan itibaren kümeleyin. Dörtlü kümeler kendini gösterir: — · — —."],
-      ["4 · Karşılaştır", `Kümelerin adını koyun: ${ln.feet.map(f => TEF[f]).join(" · ")}. Toplam ${ln.feet.map(birimF).join(" + ")} = ${ln.syl.reduce((a, s) => a + birimS(s), 0)} birim. “de” hecesi imâleyle uzar; mısranın son hecesi “bi” ise her zaman uzun sayılır.`]];
-    el.innerHTML = `<p class="kutu-bas">Muhibbî · 6. beyit · adım adım</p><div class="adimci">${A.map((a, i) => `<button data-a="${i + 1}" aria-pressed="${i === 0}">${a[0]}</button>`).join("")}</div><div class="adim-govde ad-1">${taktiHTML(ln, { kucuk: true })}</div><p class="adim-aciklama">${A[0][1]}</p>${calarHTML({ kucuk: true })}`;
+      ["4 · Kalıbını bul", `Kümelerin adını koyun: ${ln.feet.map(f => TEF[f]).join(" · ")}. Toplam ${ln.feet.map(birimF).join(" + ")} = ${ln.syl.reduce((a, s) => a + birimS(s), 0)} birim. “de” hecesi imâleyle uzar; mısranın son hecesi “bi” ise her zaman uzun sayılır.`]];
+    el.innerHTML = `<p class="kutu-bas">6. beyit · ${esc(b.sair)} · adım adım</p><div class="adimci">${A.map((a, i) => `<button data-a="${i + 1}" aria-pressed="${i === 0}">${a[0]}</button>`).join("")}</div><div class="adim-govde ad-1">${taktiHTML(ln, { kucuk: true })}</div><p class="adim-aciklama">${A[0][1]}</p>${calarHTML({ kucuk: true })}`;
     const g = $(".adim-govde", el); $$(".adimci button", el).forEach(bt => bt.addEventListener("click", () => { $$(".adimci button", el).forEach(x => x.setAttribute("aria-pressed", String(x === bt))); g.className = "adim-govde ad-" + bt.dataset.a; $(".adim-aciklama", el).textContent = A[bt.dataset.a - 1][1]; }));
     calarKur(el, () => [ln]);
+  },
+  bulucu(el) {
+    const gr = {}; V.forEach(v => (gr[v.feet[0]] = gr[v.feet[0]] || []).push(v)); const yuk = f => gr[f].reduce((a, v) => a + v.beyitler.length, 0), ks = Object.keys(gr).sort((a, b) => yuk(b) - yuk(a));
+    const NOTLAR = { "— · — —": "Dikkat: fe‘ilâtün kalıbı da çoğu zaman fâ‘ilâtün ile başlar. İkinci kümeye bakın; iki kısa heceyle başlıyorsa kalıp fe‘ilâtündür.", "· · — —": "İki kısa heceyle başlayan tek kalıp budur; ilk tef’ilesi fâ‘ilâtün olarak da gelebilir.", "— — ·": "Ayrım ikinci kümededir: kısayla mı başlıyor, uzunla mı; sonu nasıl bitiyor?" };
+    el.innerHTML = `<p class="kutu-bas">Mısra nasıl başlıyor?</p><div class="adimci">${ks.map((f, i) => `<button data-b="${i}" aria-pressed="${i === 0}"><span class="kalip-f acik">${f.split(" ").map(x => `<i class="${x === "—" ? "u" : "k"}"></i>`).join("")}</span>${TEF[f]}</button>`).join("")}</div><div class="bulucu-govde"></div>`;
+    const g = $(".bulucu-govde", el), ciz = i => { const f = ks[i], l = gr[f]; g.innerHTML = `<p class="adim-aciklama">${l.length === 1 ? "Bu başlangıç kitapta tek bir kalıba çıkar." : `Bu başlangıç ${l.length} kalıba çıkar.`} ${NOTLAR[f] || ""}</p><div class="bulucu-liste">${l.map(v => `<div class="bulucu-satir"><button class="cal-dugme kucuk" data-kalip="${v.id}" aria-label="${v.ad} ritmini dinle">${OYNA}</button><span><a href="#/vezin/${v.id}"><b>${v.ad}</b></a><span class="kal">${kalipHTML(v.feet, true)}</span>${l.length > 1 ? `<small>ikinci küme: ${TEF[v.feet[1]]} · ${agizF(v.feet[1])}</small>` : ""}</span><span class="sayi">${v.beyitler.length} beyit</span></div>`).join("")}</div>`; };
+    $$(".adimci button", el).forEach(bt => bt.addEventListener("click", () => { Ses.dur(); $$(".adimci button", el).forEach(x => x.setAttribute("aria-pressed", String(x === bt))); ciz(+bt.dataset.b); })); ciz(0);
   },
   daire(el) {
     const AD = [["Mefâ‘îlün", "Hezec", "· — — —", "Kısa heceyle başlar. Kitaptaki " + VZ.mefailun.beyitler.length + " beyit bu hücrenin dört defa tekrarıyla yazılmıştır."], ["Mef‘ûlâtü", "bu dâirede bahir kurmaz", "— — — ·", "Üç uzun, bir kısa. Bu başlangıç, bu dâirede müstakil bir bahir sayılmaz; başka kalıpların içinde hücre olarak görülür."], ["Müstef‘ilün", "Recez", "— — · —", "İki uzunla başlar, kısa hece üçüncü sıraya düşer. Recez bahrinin hücresidir."], ["Fâ‘ilâtün", "Remel", "— · — —", "Kısa hece ikinci sıradadır. Kitaptaki " + VZ.failatun.beyitler.length + " beyit bu hücreyle kurulan en meşhur kalıptadır."]];
@@ -397,49 +520,84 @@ function kurIcerik(kok, dersId) {
 /* ——— sayfalar ——— */
 const ana = $("#ana"); let girisMisra = "";
 const bolumBas = (ust, h, p, ek = "") => `<div class="bolum-bas"><div><p class="ust-yazi">${ust}</p><h2>${h}</h2></div>${p ? `<p>${p}</p>` : ""}${ek}</div>`;
+const DRESIM = { "saymak-ve-tartmak": 6, "hecenin-agirligi": 13, "tefile": 9, "kalip": 12, "ulama": 1, "imale-ve-zihaf": 51, "med": 14, "takti": 22, "daire": 25, "ahenk": 26 };
+const OYNA_K = OYNA.replace("<svg", '<svg width="14" height="14" fill="currentColor"');
+const siradakiDers = () => DERSLER.find(d => !Kayit.d.ders[d.id]) || DERSLER[0];
+const SOZLUK = [
+  ["Aruz", "Hecelerin sayısına değil, uzunluk ve kısalığına dayanan şiir ölçüsü. Arap şiirinde ortaya çıkmış, Fars ve Türk şiirine geçmiştir.", "saymak-ve-tartmak"],
+  ["Vezin", "Şiirin ölçüsü. Kelime “tartı” demektir; Hocamızın sözüyle hece vezni sayar, aruz vezni tartar.", "saymak-ve-tartmak"],
+  ["Hece vezni", "Mısralardaki hece sayısının eşitliğine dayanan ölçü. Kitaptaki 42. beyit bu vezinledir.", "saymak-ve-tartmak"],
+  ["Mısra, beyit", "Mısra şiirin bir satırıdır; aynı vezindeki iki mısra bir beyit eder.", null],
+  ["Açık hece", "Sesli harfle biten hece. Seslisi kısaysa kısa (1 birim), uzunsa uzun (2 birim) sayılır.", "hecenin-agirligi"],
+  ["Kapalı hece", "Sessiz harfle biten hece. Uzun sayılır (2 birim).", "hecenin-agirligi"],
+  ["Birim", "Bu sitede hecenin ağırlığını saymak için kullanılan ölçü: kısa hece 1, uzun hece 2, medli hece 3 birim. Eski kitapların terimi değildir; hesabı kolaylaştırmak içindir.", "saymak-ve-tartmak"],
+  ["Tef’ile", "Uzun ve kısa hecelerin belli bir sırayla kümelenmesinden meydana gelen ritim hücresi: fâ‘ilâtün, mefâ‘îlün gibi. Adını söylemek ritmini söylemektir.", "tefile"],
+  ["Kalıp", "Tef’ilelerin art arda dizilmesiyle kurulan mısra ölçüsü. Kitaptaki aruzlu beyitler sekiz kalıpla yazılmıştır.", "kalip"],
+  ["Bahir", "Aynı tef’ileden kurulan kalıpların ailesi: remel, hezec, muzâri, müctes gibi.", "daire"],
+  ["Taktî", "Mısrayı hecelerine ve tef’ilelerine ayırarak veznini bulma işi. Kelime “kesmek, parçalamak” demektir.", "takti"],
+  ["Ulama (vasl)", "Sessizle biten kelimenin, sesliyle başlayan kelimeye bağlanarak okunması: acz olan, ac-zo-lan. Taktîde ‿ ile gösterilir.", "ulama"],
+  ["İmâle", "Kısa (açık) bir hecenin vezin gereği uzun okunması. Hesapta +1 birim.", "imale-ve-zihaf"],
+  ["Zihaf", "Yaygın kullanışta, uzun sesli bir hecenin vezin gereği kısa okunması; kusur sayılır. Eski kitaplarda tef’iledeki değişiklik için de kullanılır.", "imale-ve-zihaf"],
+  ["İzafet kesresi", "Terkiplerde iki kelimeyi bağlayan -i / -ı sesi: kûy-ı mahbûb. Vezne göre kısa ya da uzun okunur.", "imale-ve-zihaf"],
+  ["Med", "Uzun sesliden sonra sessiz gelen ya da iki sessizle biten hecenin, bir uzun ve bir kısa hece yerini tutması (3 birim).", "med"],
+  ["Dâire", "Tef’ilelerin bir halka üzerinde gösterilmesi. Halkayı okumaya başladığınız yer değişince başka bir bahir çıkar.", "daire"],
+  ["Darb, nağme", "Bu sitede ritmi duyuran iki ses. Darb vuruşla, nağme aynı hesabı basit bir ezgiyle verir. İkisi de okuyuş kaydı değildir; beytin asıl sesi Hocamızın okuyuşudur.", null]
+];
 const Sayfa = {
   giris() {
-    const m = beyit(6), kayitli = B.filter(b => b.kayit).length, bitti = DERSLER.filter(d => Kayit.d.ders[d.id]).length;
+    const b6 = beyit(6), ln = b6.t[0], kayitli = B.filter(b => b.kayit).length, bitti = DERSLER.filter(d => Kayit.d.ders[d.id]).length, sd = siradakiDers(), tk = K.tartar;
     ana.innerHTML = `
     <section class="giris"><div class="giris-resim" style="background-image:url(img/06.webp)"></div><div class="kap">
-      <div class="giris-metin"><p class="ust-yazi">Fâilâtün · Bir Beyit, Bir Âlem’in aruz rehberi</p>
+      <div class="giris-metin"><p class="ust-yazi">Bir Beyit, Bir Âlem’in aruz mektebi</p>
         <h1>Hece vezni sayar,<br><em>aruz vezni tartar.</em></h1>
-        <div class="giris-imza">Hayâtî İnanç Hocamız <button class="metin-bag" style="background:none;border:0;border-bottom:1px solid var(--cizgi-koyu);padding:0 0 3px" data-klip="tartar">kendi sesinden dinle ▸</button></div>
-        <p class="giris-lead">Kitaptaki 52 beyti Hocamızdan dinleyin. Sonra aynı beyitlerle aruzun hesabını, ritmini ve ahengini adım adım öğrenin.</p>
-        <div class="giris-dugmeler"><a class="dugme dugme-asil" href="#/beyitler">Beyitleri dinle <span class="ok">→</span></a><a class="dugme dugme-altin" href="#/dersler">Aruza başla</a></div>
-        <form class="bul" id="bul"><label for="bul-no">Elinizdeki kitaptan beyit numarası:</label><input id="bul-no" type="number" min="1" max="52" inputmode="numeric" placeholder="1–52"><button>Aç</button></form>
+        <p class="giris-imza">Hayâtî İnanç Hocamız</p>
+        <p class="giris-lead">Aruzu Hocamızın ağzından, kitaptaki beyitlerle öğrenin. Önce dinleyin, sonra ritmini duyun, sonra kendi elinizle vurun.</p>
+        <div class="giris-dugmeler"><button class="dugme dugme-altin dugme-buyuk" data-klip="tartar">${OYNA_K} Bu sözü Hocamızdan dinleyin${tk ? " · " + sure(tk.s, tk.e) : ""}</button><button class="metin-bag dugme-yalin" data-in="ilk">İlk mısrayla başlayın ↓</button></div>
       </div>
-      <div class="canli" id="canli"><div class="canli-ust"><p class="ust-yazi" style="margin:0">Bir mısra nasıl tartılır?</p><p>Muhibbî · 6. beyit · Hocamızın “en meşhur vezin” misali</p></div>
-        ${taktiHTML(m.t[0])}${calarHTML()}
-        <div class="canli-hesap"><span><b>${m.t[0].syl.length}</b> hece</span><span><b>7 + 7 + 7 + 5 = 26</b> birim</span><span><b>${m.t[0].syl.filter(s => s.n === "imale").length}</b> imâle</span><span><b>${m.t[0].syl.filter(s => s.u).length}</b> ulama</span><a class="metin-bag" href="#/beyit/6">Beytin tamamı <span class="ok">→</span></a></div></div>
+      <div class="canli" id="ilk">
+        <div class="canli-ust"><p class="ust-yazi">İlk mısra · üç adım</p><p>6. beyit · ${esc(b6.sair)}</p></div>
+        <p class="canli-misra">${misraHTML(b6.m[0])}</p>
+        <div class="uc-adim" role="group" aria-label="Adımlar"><button data-adim="1" aria-pressed="true"><b>1</b>Dinleyin</button><button data-adim="2" aria-pressed="false"><b>2</b><span class="uz">Ritmini duyun</span><span class="ks">Duyun</span></button><button data-adim="3" aria-pressed="false"><b>3</b><span class="uz">Siz vurun</span><span class="ks">Vurun</span></button></div>
+        <div class="adim-alan" id="adim-alan"></div>
+      </div>
     </div></section>
     <section class="bolum"><div class="kap">
-      <div class="sayilar-bant"><div><b>52</b><span>beyit</span></div><div><b>${kayitli}</b><span>Hocamızın sesinden kayıt</span></div><div><b>8</b><span>aruz kalıbı</span></div><div><b>10</b><span>ders</span></div></div>
-      <div style="height:54px"></div>
-      ${bolumBas("Üç adım", "Önce zevki, <em>sonra hesabı.</em>", "Hocamızın tavsiyesi bu sitenin usulüdür: şiirin tekniğinden önce lezzeti.")}
-      <div class="adimlar">
-        <a class="adim" href="#/beyitler"><span class="no">1</span><h3>Dinle</h3><p>Kitaptaki beyti bulun; okuyuşunu ve izahını Hocamızdan dinleyin. Lügati ve bugünkü söyleyişi yanında.</p><span class="metin-bag">52 beyit <span class="ok">→</span></span></a>
-        <a class="adim" href="#/beyit/6"><span class="no">2</span><h3>Tart</h3><p>Her beytin hece hece taktîini görün; ritmini darb ya da nağme olarak dinleyin, hesabını okuyun.</p><span class="metin-bag">Bir beyit aç <span class="ok">→</span></span></a>
-        <a class="adim" href="#/dersler"><span class="no">3</span><h3>Öğren</h3><p>On kısa dersle aruzu baştan öğrenin: hece, tef’ile, kalıp, ulama, imâle, med ve dâire.</p><span class="metin-bag">${bitti ? `${bitti} / 10 ders tamam` : "Derslere başla"} <span class="ok">→</span></span></a>
+      ${bolumBas("Yol", "Önce zevki, <em>sonra hesabı.</em>", "Hocamızın tavsiyesi bu sitenin usulüdür: şiirin tekniğinden önce lezzeti.")}
+      <div class="adimlar dort">
+        <a class="adim" href="#/beyitler"><span class="no">1</span><h3>Dinle</h3><p>${kayitli} beytin okuyuşu ve izahı Hocamızın sesinden; lügati ve bugünkü söyleyişi yanında.</p><span class="metin-bag">52 beyit <span class="ok">→</span></span></a>
+        <a class="adim" href="#/beyit/6"><span class="no">2</span><h3>Tart</h3><p>Her beytin hece hece taktîi: uzun 2, kısa 1 birim. Ritmini darb ya da nağme olarak dinleyin.</p><span class="metin-bag">Bir beyit açın <span class="ok">→</span></span></a>
+        <a class="adim" href="#/temrin"><span class="no">3</span><h3>Vur</h3><p>Ritmi elinizle vurun; vuruşunuz kalıbın ölçüsüyle yan yana çizilsin. Kulak böyle yerleşir.</p><span class="metin-bag">Temrine geçin <span class="ok">→</span></span></a>
+        <a class="adim" href="#/ders/${sd.id}"><span class="no">4</span><h3>Öğren</h3><p>On kısa dersle aruz: hece, tef’ile, kalıp, ulama, imâle, med ve taktî.</p><span class="metin-bag">${bitti ? `${bitti} / 10 ders tamam` : "1. dersten başlayın"} <span class="ok">→</span></span></a>
       </div></div></section>
     <section class="bolum koyu"><div class="kap">
       ${bolumBas("Hocamızın ağzından", "“Zor mu? Değil. <em>Kulak meselesi.</em>”", "Hocamız sohbetlerinde vezni tef’ile ezberleterek değil, ritmini ağızla vurarak anlatır. Derslerin hepsi bu kayıtlar üzerine kuruldu.")}
-      <div class="klipler">${["kulak", "ondakika", "vezinahlaki"].map(k => klipHTML(k)).join("")}</div>
+      <div class="klipler">${["kulak", "kundak", "vezinahlaki"].map(k => klipHTML(k)).join("")}</div>
       <div style="margin-top:38px"><a class="dugme dugme-cizgi" href="#/dersler">Bütün dersler <span class="ok">→</span></a></div></div></section>
     <section class="bolum"><div class="kap">
       ${bolumBas("Kalıplar", "Sekiz ritim, <em>sekiz yürüyüş.</em>", "Kitaptaki beyitler sekiz aruz kalıbıyla yazılmıştır. Her birini dinleyin; uzun 2, kısa 1 birim.", `<a class="metin-bag" href="#/vezinler">Bütün vezinler <span class="ok">→</span></a>`)}
       <div class="vezinler acik">${V.slice(0, 4).map(v => vezinKart(v, true)).join("")}</div></div></section>
     <section class="bolum cizgili"><div class="kap">
-      ${bolumBas("Kitaptan", "Her beyit <em>bir âlem.</em>", "", `<a class="metin-bag" href="#/beyitler">52 beytin hepsi <span class="ok">→</span></a>`)}
-      <div class="beyitler">${[1, 6, 9, 12, 22, 26].map(n => beyitKart(beyit(n))).join("")}</div></div></section>
+      ${bolumBas("Kitaptan", "Her beyit <em>bir âlem.</em>", "", `<form class="bul" id="bul"><label for="bul-no">Kitap elinizde mi? Beyit numarası:</label><span class="bul-kutu"><input id="bul-no" type="number" min="1" max="52" inputmode="numeric" placeholder="1–52"><button>Beyti aç</button></span></form>`)}
+      <div class="beyitler">${[1, 6, 9, 12, 22, 26].map(n => beyitKart(beyit(n))).join("")}</div>
+      <div style="margin-top:34px"><a class="dugme dugme-cizgi" href="#/beyitler">52 beytin hepsi <span class="ok">→</span></a></div></div></section>
     <section class="bolum cizgili"><div class="kap kitap"><img src="/bir-beyit-bir-alem/kapak.webp" width="600" height="839" alt="Bir Beyit, Bir Âlem kitabının kapağı" loading="lazy">
       <div><p class="ust-yazi">Kitap</p><h2>Bir Beyit, Bir Âlem</h2><p>Hayâtî İnanç Hocamızın okuyuş ve izahlarından hareketle hazırlanan elli iki beyit, elli iki resim. Fâilâtün, o kitabın aruz mektebidir: beyitleri dinler, veznini burada tartar, aruzu aynı beyitlerle öğrenirsiniz.</p>
       <div class="giris-dugmeler"><a class="dugme dugme-asil" href="/bir-beyit-bir-alem/">Kitabın dinleme rehberi <span class="ok">→</span></a><a class="dugme dugme-cizgi" href="#/hakkinda">Kaynaklar ve usul</a></div></div></div></section>`;
-    calarKur($("#canli"), () => [m.t[0]]);
+    const alan = $("#adim-alan"), top = ln.syl.reduce((a, s) => a + birimS(s), 0);
+    const ac = k => {
+      Ses.dur(); $$(".uc-adim button").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.adim === k)));
+      if (k === 1) alan.innerHTML = `<p class="adim-soz">Önce beyti Hocamızın okuyuşundan dinleyin. Henüz hiçbir şeyi saymayın; yalnız yürüyüşüne kulak verin.</p><div class="giris-dugmeler"><button class="dugme dugme-asil" data-kayit="6">${OYNA_K} Hocamızdan dinleyin${b6.kayit ? " · " + sure(b6.kayit.s, b6.kayit.e) : ""}</button><button class="dugme dugme-cizgi" data-adim-git="2">Dinledim, devam <span class="ok">→</span></button></div>`;
+      else if (k === 2) { alan.innerHTML = `<p class="adim-soz">Şimdi aynı mısranın yalnız ritmini dinleyin. Çizgi uzun hece, nokta kısa hece. Dört hecelik aynı küme tekrar ediyor: uzun, kısa, uzun, uzun. Adı <em>fâ‘ilâtün</em>.</p>${taktiHTML(ln)}${calarHTML()}<div class="canli-hesap"><span><b>${ln.syl.length}</b> hece</span><span><b>${ln.feet.map(birimF).join(" + ")} = ${top}</b> birim</span><button class="dugme dugme-cizgi dugme-kucuk" data-adim-git="3">Şimdi siz vurun <span class="ok">→</span></button></div>`; calarKur(alan, () => [ln]); }
+      else { alan.innerHTML = `<p class="adim-soz">Sıra sizde. Her heceye bir vuruş: kısa heceden sonra hemen, uzun heceden sonra iki kat bekleyerek. Alttaki çubuk, vuruşunuzu kalıbın ölçüsüyle karşılaştırır.</p><div data-valan></div><div class="canli-hesap"><a class="metin-bag" href="#/ders/${sd.id}">${bitti ? "Derslere devam edin" : "1. derse geçin"} <span class="ok">→</span></a><a class="metin-bag" href="#/beyit/6">Beytin sayfası <span class="ok">→</span></a></div>`; vurusSatir($("[data-valan]", alan), ln); }
+    };
+    $("#ilk").addEventListener("click", e => { const g = e.target.closest("[data-adim],[data-adim-git]"); if (g) ac(+(g.dataset.adim || g.dataset.adimGit)); });
+    ac(b6.kayit ? 1 : 2);
+    $("[data-in]", ana).addEventListener("click", () => $("#ilk").scrollIntoView({ behavior: azHareket ? "auto" : "smooth", block: "start" }));
     $("#bul").addEventListener("submit", e => { e.preventDefault(); const n = +$("#bul-no").value; if (n >= 1 && n <= 52) location.hash = "#/beyit/" + n; });
   },
   beyitler() {
-    ana.innerHTML = `<div class="kap"><div class="sayfa-bas"><p class="ust-yazi">Kitap sırasıyla</p><h1>52 beyit, <em>52 âlem</em></h1><p>Elinizdeki kitabın beyitleri. Birini seçin: önce Hocamızdan dinleyin, sonra veznini tartın.</p></div>
+    const kayitli = B.filter(b => b.kayit).length;
+    ana.innerHTML = `<div class="kap"><div class="sayfa-bas"><p class="ust-yazi">Kitap sırasıyla</p><h1>52 beyit, <em>52 âlem</em></h1><p>Elinizdeki kitabın beyitleri. ${kayitli} beytin okuyuşu Hocamızın sesinden; hepsinin taktîi, lügati ve bugünkü söyleyişi hazır.</p></div>
       <div class="suzgec"><input type="search" id="ara" placeholder="Beyit numarası, şair ya da kelime…" autocomplete="off" aria-label="Beyit ara"><button class="cip" id="sesli" aria-pressed="false">Hocamızın sesinden</button><select id="vsec" aria-label="Vezin"><option value="">Bütün vezinler</option>${V.map(v => `<option value="${v.id}">${v.ad}</option>`).join("")}<option value="hece">Hece vezni</option></select><span class="sayac" id="sayac" aria-live="polite"></span></div>
       <div class="beyitler" id="liste"></div><p class="bos gizli" id="bos">Bu aramada beyit bulunamadı.</p></div><div style="height:60px"></div>`;
     const ara = $("#ara"), ses = $("#sesli"), vs = $("#vsec");
@@ -447,14 +605,14 @@ const Sayfa = {
     ara.addEventListener("input", ciz); vs.addEventListener("change", ciz); ses.addEventListener("click", () => { ses.setAttribute("aria-pressed", String(ses.getAttribute("aria-pressed") !== "true")); ciz(); }); ciz();
   },
   beyit(n) {
-    const b = beyit(n); if (!b) return Sayfa.beyitler(); const v = VZ[b.vz], i = B.indexOf(b), once = B[i - 1], sonra = B[i + 1]; const aruz = !!v;
+    const b = beyit(n); if (!b) return Sayfa.beyitler(); const v = VZ[b.vz], i = B.indexOf(b), once = B[i - 1], sonra = B[i + 1], aruz = !!v, sd = siradakiDers();
     const say = k => b.t.reduce((a, ln) => a + ln.syl.filter(k).length, 0); const birim = b.t.map(ln => ln.syl.reduce((a, s) => a + birimS(s), 0));
     ana.innerHTML = `<div class="bs-resim" style="background-image:url(img/${iki(b.n)}.webp)"></div>
     <div class="kap bs-ust"><div class="bs-kart">
       <div class="bs-yol"><a href="#/beyitler">← Bütün beyitler</a><span class="bs-no">${b.n}. beyit · kitapta ${2 * b.n}–${2 * b.n + 1}. sayfalar</span></div>
-      <h1 class="bs-beyit"><span>${esc(b.m[0])}</span><span>${esc(b.m[1])}</span></h1>
+      <h1 class="bs-beyit"><span>${misraHTML(b.m[0])}</span><span>${misraHTML(b.m[1])}</span></h1>
       <div class="bs-kunye"><b>${esc(b.sair)}</b>${aruz ? `<a href="#/vezin/${v.id}">${v.ad}</a><span>${v.bahir} bahri</span>` : `<span>Hece vezni · 5 + 5</span>`}</div>
-      <div class="bs-eylem">${b.kayit ? `<button class="dugme dugme-altin" data-kayit="${b.n}">${OYNA.replace("<svg", '<svg width="14" height="14" fill="currentColor"')} Hocamızdan dinle${sure(b.kayit.s, b.kayit.e) ? " · " + sure(b.kayit.s, b.kayit.e) : ""}</button>` : ""}<a class="dugme dugme-cizgi" href="/bir-beyit-bir-alem/#beyit-${b.n}">Kitabın dinleme rehberinde aç</a>${b.yazi ? `<a class="dugme dugme-cizgi" href="${esc(b.yazi)}" target="_blank" rel="noopener">Hocamızın yazısı ↗</a>` : ""}</div>
+      <div class="bs-eylem">${b.kayit ? `<button class="dugme dugme-altin dugme-buyuk" data-kayit="${b.n}">${OYNA_K} Hocamızdan dinleyin${sure(b.kayit.s, b.kayit.e) ? " · " + sure(b.kayit.s, b.kayit.e) : ""}</button>` : ""}<a class="dugme dugme-cizgi" href="/bir-beyit-bir-alem/#beyit-${b.n}">Kitabın dinleme rehberinde aç</a>${b.yazi ? `<a class="dugme dugme-cizgi" href="${esc(b.yazi)}" target="_blank" rel="noopener">Hocamızın yazısı ↗</a>` : ""}</div>
       ${b.kayit ? (b.kayit.not ? `<p class="bs-not">${esc(b.kayit.not)}</p>` : "") : `<p class="bs-not">Bu beytin okuma kaydı henüz eşleştirilmedi; taktîi ve lügati aşağıdadır.</p>`}
     </div></div>
     <div class="kap bs-takti">
@@ -467,27 +625,33 @@ const Sayfa = {
         </section>
     </div>
     <div class="kap" style="margin-top:22px"><div class="iki">
-      <div style="display:grid;gap:22px">
+      <div class="sol">
         <section class="panel"><p class="ust-yazi">Bugünkü söyleyişle</p><p class="nesir">${esc(b.nesir)}</p><p class="kaynak" style="margin:16px 0 0">Beytin şerhi ve resmi, <em>Bir Beyit, Bir Âlem</em> kitabının ${2 * b.n}–${2 * b.n + 1}. sayfalarındadır.</p></section>
+        ${aruz ? `<section class="panel" id="vuruspanel"><p class="ust-yazi">Sıra sizde</p><h2>Mısrayı elinizle vurun</h2><p class="aciklama">Dinlediğiniz ritmi şimdi siz verin: her heceye bir vuruş. Vuruşunuz kalıbın ölçüsüyle yan yana çizilir.</p><div class="secim" role="group" aria-label="Mısra"><button data-vm="0" aria-pressed="true">1. mısra</button><button data-vm="1" aria-pressed="false">2. mısra</button></div><div data-valan></div></section>` : ""}
       </div>
       <aside class="yan">
         <section class="panel"><p class="ust-yazi">Lügat</p><dl class="lugat">${b.lugat.map(([k, m]) => `<div><dt>${esc(k)}</dt><dd>${esc(m)}</dd></div>`).join("")}</dl></section>
         ${aruz ? `<section class="panel"><p class="ust-yazi">Bu beytin vezni</p><h3>${v.ad}</h3><p style="font-size:16px;color:var(--soluk)">${v.tanim}</p><p style="margin:0"><a class="metin-bag" href="#/vezin/${v.id}">Aynı vezindeki ${v.beyitler.length} beyit <span class="ok">→</span></a></p></section>` : ""}
+        <a class="sonraki" href="#/ders/${sd.id}"><small>Aruzu baştan öğrenmek isterseniz</small><b>${DERSLER.indexOf(sd) + 1}. ders: ${sd.baslik}</b><span>Derse geçin <span class="ok">→</span></span></a>
       </aside></div>
       <nav class="gecis" aria-label="Önceki ve sonraki beyit">${once ? `<a href="#/beyit/${once.n}"><small>← ${once.n}. beyit · ${esc(once.sair)}</small><b>${esc(once.m[0])}</b></a>` : "<span></span>"}${sonra ? `<a href="#/beyit/${sonra.n}"><small>${sonra.n}. beyit · ${esc(sonra.sair)} →</small><b>${esc(sonra.m[0])}</b></a>` : "<span></span>"}</nav>
     </div><div style="height:50px"></div>`;
-    if (aruz) calarKur($("#taktipanel"), () => b.t);
+    if (aruz) {
+      calarKur($("#taktipanel"), () => b.t);
+      const va = $("#vuruspanel [data-valan]"), sec = m => { $$("#vuruspanel [data-vm]").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.vm === m))); vurusSatir(va, b.t[m]); };
+      $$("#vuruspanel [data-vm]").forEach(x => x.addEventListener("click", () => sec(+x.dataset.vm))); sec(0);
+    }
   },
   dersler() {
-    const bitti = DERSLER.filter(d => Kayit.d.ders[d.id]).length;
+    const bitti = DERSLER.filter(d => Kayit.d.ders[d.id]).length, sd = siradakiDers();
     ana.innerHTML = `<div class="kap"><div class="sayfa-bas"><p class="ust-yazi">Fâilâtün · aruz dersleri</p><h1>On derste <em>aruz</em></h1><p>Her ders kısa bir izah, Hocamızın ağzından bir kayıt, kitaptan bir misal ve bir temrinden ibarettir. Hesabı basittir: kısa hece 1, uzun hece 2.</p>
-      <div style="display:flex;gap:16px;align-items:center;margin-top:24px;font-family:var(--arayuz);font-size:13px;font-weight:700;color:var(--soluk)"><div class="ilerleme" style="flex:1"><i style="width:${bitti * 10}%"></i></div><span>${bitti} / 10 ders tamam</span></div></div>
+      <div class="ders-yol"><a class="dugme dugme-asil" href="#/ders/${sd.id}">${bitti ? `${DERSLER.indexOf(sd) + 1}. dersten devam edin` : "1. dersten başlayın"} <span class="ok">→</span></a>${bitti ? `<div class="ilerleme" aria-hidden="true"><i style="width:${bitti * 10}%"></i></div><span>${bitti} / 10 ders tamam</span>` : ""}<a class="metin-bag" href="#/sozluk">Terimler sözlüğü</a></div></div>
       ${klipHTML("zevk", { yatay: true })}
       <div class="dersler" style="margin-top:26px">${DERSLER.map((d, i) => `<a class="dk${Kayit.d.ders[d.id] ? " bitti" : ""}" href="#/ders/${d.id}"><span class="no">${i + 1}</span><span><h3>${d.baslik}</h3><p>${d.ozet}</p></span><span class="durum" aria-label="${Kayit.d.ders[d.id] ? "tamamlandı" : ""}">✓</span></a>`).join("")}</div></div><div style="height:70px"></div>`;
   },
   ders(id) {
     const i = DERSLER.findIndex(d => d.id === id); if (i < 0) return Sayfa.dersler(); const d = DERSLER[i], once = DERSLER[i - 1], sonra = DERSLER[i + 1];
-    ana.innerHTML = `<article class="ders"><header class="ders-bas"><a class="metin-bag" href="#/dersler" style="border:0;color:var(--soluk)">← Dersler</a><div class="no" style="margin-top:18px">${i + 1}. ders</div><h1>${d.baslik}</h1><p>${d.ozet}</p></header>${d.govde()}
+    ana.innerHTML = `<div class="ders-resim" style="background-image:url(img/${iki(DRESIM[d.id] || 6)}.webp)"></div><article class="ders"><header class="ders-bas"><a class="metin-bag" href="#/dersler" style="border:0;color:var(--soluk)">← Dersler</a><div class="no" style="margin-top:18px">${i + 1}. ders</div><h1>${d.baslik}</h1><p>${d.ozet}</p></header>${d.govde()}
       <div class="ders-son">${once ? `<a class="dugme dugme-cizgi" href="#/ders/${once.id}">← ${once.baslik}</a>` : "<span></span>"}${sonra ? `<a class="dugme dugme-asil" href="#/ders/${sonra.id}">${i + 2}. ders: ${sonra.baslik} <span class="ok">→</span></a>` : `<a class="dugme dugme-asil" href="#/beyitler">Beyitlere dön <span class="ok">→</span></a>`}</div></article>`;
     kurIcerik(ana, d.id);
   },
@@ -497,43 +661,58 @@ const Sayfa = {
       <div style="margin-top:40px">${klipHTML("ondakika", { yatay: true })}</div></div><div style="height:60px"></div>`;
   },
   vezin(id) {
-    const v = VZ[id]; if (!v) return Sayfa.vezinler();
-    ana.innerHTML = `<section class="vezin-bas"><div class="kap"><a class="metin-bag" href="#/vezinler" style="border:0;color:#b9c2d6">← Bütün vezinler</a><p class="ust-yazi" style="margin-top:22px;color:var(--altin-2)">${v.bahir} bahri</p><h1>${v.ad}</h1><p class="ar" lang="ar">${v.ar}</p>
+    const v = VZ[id]; if (!v) return Sayfa.vezinler(); const rs = v.beyitler[0];
+    ana.innerHTML = `<section class="vezin-bas">${rs ? `<div class="vb-resim" style="background-image:url(img/${iki(rs.n)}.webp)"></div>` : ""}<div class="kap"><a class="metin-bag" href="#/vezinler" style="border:0;color:#b9c2d6">← Bütün vezinler</a><p class="ust-yazi" style="margin-top:22px;color:var(--altin-2)">${v.bahir} bahri</p><h1>${v.ad}</h1><p class="ar" lang="ar">${v.ar}</p>
       <div class="buyuk-kalip" id="bk">${v.feet.map((f, i) => `<div class="bf"><div class="sr">${f.split(" ").map(x => `<i class="${x === "—" ? "u" : "k"}"></i>`).join("")}</div><b>${v.tef[i]}</b><small>${agizF(f)} · ${v.b[i]}</small></div>`).join("")}</div>
-      <div class="calar" style="margin:20px 0 26px"><button class="cal-dugme" data-kalip="${v.id}" data-hedef="#bk" data-tekrar="2" aria-label="Ritmi dinle" style="background:linear-gradient(180deg,#e2bd72,#c6963f);color:#2a1c06">${OYNA}</button><span>Ritmi iki mısra dinle</span><span class="secim" role="group"><button data-mod="darb" aria-pressed="${Kayit.d.ayar.mod === "darb"}">Darb</button><button data-mod="nagme" aria-pressed="${Kayit.d.ayar.mod === "nagme"}">Nağme</button></span></div>
+      <div class="calar" style="margin:20px 0 26px"><button class="cal-dugme" data-kalip="${v.id}" data-hedef="#bk" data-tekrar="2" aria-label="Ritmi dinle" style="background:linear-gradient(180deg,#e2bd72,#c6963f);color:#2a1c06">${OYNA}</button><span>Ritmi iki mısra dinleyin</span><span class="secim" role="group"><button data-mod="darb" aria-pressed="${Kayit.d.ayar.mod === "darb"}">Darb</button><button data-mod="nagme" aria-pressed="${Kayit.d.ayar.mod === "nagme"}">Nağme</button></span></div>
       <p>${v.tanim}</p>
       <div class="hesap" style="max-width:640px"><div><b>${v.b.join("+")}</b><span>toplama</span></div><div><b>${v.top}</b><span>birim</span></div><div><b>${v.hece}</b><span>hece</span></div><div><b>${v.beyitler.length}</b><span>beyit</span></div></div></div></section>
-      ${v.klip.length ? `<section class="bolum"><div class="kap">${bolumBas("Hocamızın ağzından", "Bu vezni <em>Hocamızdan dinleyin</em>", "")}<div class="klipler">${v.klip.map(k => klipHTML(k)).join("")}</div></div></section>` : ""}
+      <section class="bolum bolum-dar"><div class="kap"><div class="panel vurus-panel"><p class="ust-yazi">Sıra sizde</p><h2>Bu ritmi elinizle vurun</h2><p class="aciklama">Tef’ilelerin adını içinizden heceleyerek vurun: her heceye bir vuruş, uzun heceden sonra iki kat bekleyiş.</p><div data-valan></div></div></div></section>
+      ${v.klip.length ? `<section class="bolum cizgili"><div class="kap">${bolumBas("Hocamızın ağzından", "Bu vezni <em>Hocamızdan dinleyin</em>", "")}<div class="klipler${v.klip.length % 3 === 1 ? " ikili" : ""}">${v.klip.map(k => klipHTML(k)).join("")}</div></div></section>` : ""}
       <section class="bolum cizgili"><div class="kap">${bolumBas("Kitaptan", `Bu vezinde <em>${v.beyitler.length} beyit</em>`, "")}<div class="beyitler">${v.beyitler.map(beyitKart).join("")}</div></div></section>`;
+    vurusKalip($("[data-valan]", ana), v.feet);
   },
-  temrin() {
-    const TIP = [["isaretle", "Taktî temrini", "hepsi"], ["kulak", "Kulak temrini", ""], ["kelime", "Kayıp kelime", ""], ["birim", "Tef’ile hesabı", ""]];
-    ana.innerHTML = `<div class="kap"><div class="sayfa-bas"><p class="ust-yazi">Temrin</p><h1>Tekrarla <em>yerleşir</em></h1><p>Dört kısa temrin, hepsi kitaptaki beyitlerle. Yanlış yapınca bir daha deneyin; maksat puan değil, kulağın alışmasıdır.</p></div>
-      <div class="sekmeler">${TIP.map((t, i) => `<button data-t="${i}" aria-pressed="${i === 0}">${t[1]}</button>`).join("")}<span class="puan" style="color:var(--soluk);align-self:center">İlk denemede doğru: <b style="color:var(--altin)" id="puan">${Kayit.d.puan.d} / ${Kayit.d.puan.t}</b></span></div><div id="talan"></div></div><div style="height:60px"></div>`;
-    const ac = i => { const t = TIP[i]; $("#talan").innerHTML = `<div class="temrin" data-temrin="${t[0]}" data-adet="5"${t[2] ? ` data-filtre="${t[2]}"` : ""}${t[0] === "birim" ? ' data-tur="tefile"' : ""}></div>`; temrinKur($("#talan .temrin")); };
-    $$(".sekmeler button").forEach(b => b.addEventListener("click", () => { Ses.dur(); $$(".sekmeler button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); ac(+b.dataset.t); })); ac(0);
+  temrin(ilkTip) {
+    const TIP = [["vurus", "Ritmi vur", ' data-tur="kalip"'], ["isaretle", "Heceleri tart", ' data-filtre="hepsi"'], ["kalip", "Kalıbı bul", ""], ["kulak", "Kulak", ""], ["aksak", "Aksayan hece", ""], ["birim", "Tef’ile hesabı", ' data-tur="tefile"'], ["kelime", "Kayıp kelime", ""]];
+    const ilk = Math.max(0, TIP.findIndex(t => t[0] === ilkTip));
+    ana.innerHTML = `<div class="kap kap-orta"><div class="sayfa-bas"><p class="ust-yazi">Temrin</p><h1>Tekrarla <em>yerleşir</em></h1><p>Yedi kısa temrin, hepsi kitaptaki beyitlerle. Yanlış yapınca bir daha deneyin; maksat kulağın ve elin alışmasıdır.</p></div>
+      <div class="sekmeler" role="group" aria-label="Temrin türü">${TIP.map((t, i) => `<button data-t="${i}" aria-pressed="${i === ilk}">${t[1]}</button>`).join("")}</div><div id="talan"></div></div><div style="height:60px"></div>`;
+    const ac = i => { const t = TIP[i]; $("#talan").innerHTML = `<div class="temrin" data-temrin="${t[0]}" data-adet="5"${t[2]}></div>`; temrinKur($("#talan .temrin")); };
+    $$(".sekmeler button").forEach(b => b.addEventListener("click", () => { Ses.dur(); $$(".sekmeler button").forEach(x => x.setAttribute("aria-pressed", String(x === b))); ac(+b.dataset.t); })); ac(ilk);
   },
   tart() {
     const ilk = girisMisra || "Korkma sönmez bu şafaklarda yüzen al sancak"; girisMisra = "";
     ana.innerHTML = `<div class="kap" style="max-width:900px"><div class="sayfa-bas"><p class="ust-yazi">Mısra tartısı</p><h1>Kendi mısranızı <em>tartın</em></h1><p>Bir ya da iki mısra yazın; kitaptaki sekiz kalıpla karşılaştıralım. Uzun seslileri şapkayla (â, î, û) yazarsanız tartı daha doğru çalışır.</p></div>
-      <div class="tart-alan"><textarea id="tmisra" rows="2" spellcheck="false" aria-label="Mısra">${esc(ilk)}</textarea><div class="giris-dugmeler" style="margin-top:14px"><button class="dugme dugme-asil" id="tartdugme">Tartıya koy</button><span style="font-family:var(--arayuz);font-size:13px;color:var(--soluk);font-weight:600">Bu bir ön incelemedir; şiirin bütünü hakkında hüküm vermez.</span></div></div>
-      <div class="tart-sonuc" id="tsonuc"></div></div><div style="height:60px"></div>`;
+      <div class="tart-alan"><textarea id="tmisra" rows="2" maxlength="190" spellcheck="false" aria-label="Mısra">${esc(ilk)}</textarea><div class="giris-dugmeler" style="margin-top:14px"><button class="dugme dugme-asil" id="tartdugme">Tartıya koy</button><span class="tart-not">Bu bir ön incelemedir; şiirin bütünü hakkında hüküm vermez.</span></div></div>
+      <div class="tart-sonuc" id="tsonuc" aria-live="polite"></div></div><div style="height:60px"></div>`;
     const yap = () => {
-      const ms = $("#tmisra").value.split("\n").map(x => x.trim()).filter(Boolean).slice(0, 2); if (!ms.length) return;
+      const ms = $("#tmisra").value.split("\n").map(x => x.trim()).filter(Boolean).slice(0, 2); if (!ms.length) { $("#tsonuc").innerHTML = ""; return; }
       const r = V.map(v => { const ss = ms.map(m => Tart.coz(m, v.feet)); return ss.every(Boolean) ? { v, ss, c: ss.reduce((a, s) => a + s.c, 0) } : null; }).filter(Boolean).sort((a, b) => a.c - b.c);
       const say = (x, n) => x.ss.reduce((a, s) => a + s.syl.filter(h => h.n === n).length, 0);
-      $("#tsonuc").innerHTML = r.length ? r.slice(0, 3).map((x, i) => `<div class="tart-kart${i === 0 ? " en-iyi" : ""}" data-tk="${i}"><h3><a href="#/vezin/${x.v.id}" style="text-decoration:none">${x.v.ad}</a><small>${i === 0 ? "en yakın kalıp · " : ""}${say(x, "imale")} imâle${say(x, "zihaf") ? " · zihaf var" : ""}${say(x, "kusur") ? " · zorlama var" : ""}</small></h3>${x.ss.map(s => taktiHTML(s, { kucuk: true })).join("")}${calarHTML({ kucuk: true })}</div>`).join("") : `<p class="bos">Bu mısra kitaptaki sekiz kalıptan hiçbirine oturmadı. Hece sayısına ve uzun seslilere bir daha bakın; başka bir kalıpla ya da hece vezniyle yazılmış olabilir.</p>`;
-      $$("[data-tk]").forEach(el => calarKur(el, () => r[+el.dataset.tk].ss));
+      const guven = x => x.ss.every(s => !s.syl.some(h => h.n === "kusur") && s.syl.filter(h => h.n === "imale").length <= 4 && s.syl.filter(h => h.n === "zihaf").length <= 1);
+      const iyi = r.filter(guven), zor = r.filter(x => !guven(x)), hep = [...iyi, ...zor];
+      const kart = (x, sinif, ust) => `<div class="tart-kart${sinif}" data-tk="${hep.indexOf(x)}"><h3><a href="#/vezin/${x.v.id}" style="text-decoration:none">${x.v.ad}</a><small>${ust}${say(x, "imale")} imâle${say(x, "zihaf") ? " · zihaf var" : ""}${say(x, "kusur") ? " · zorlama var" : ""}</small></h3>${x.ss.map(s => taktiHTML(s, { kucuk: true })).join("")}${calarHTML({ kucuk: true })}</div>`;
+      let h = "";
+      if (iyi.length) { h = kart(iyi[0], " en-iyi", "en yakın kalıp · "); if (iyi.length > 1) h += `<details class="baska"><summary>Başka okuyuşlar (${Math.min(2, iyi.length - 1)})</summary>${iyi.slice(1, 3).map(x => kart(x, "", "")).join("")}</details>`; }
+      else h = `<p class="bos">Bu mısra kitaptaki sekiz kalıptan hiçbirine zorlamasız oturmadı. Hece sayısına ve uzun seslilere bir daha bakın; başka bir kalıpla ya da hece vezniyle yazılmış olabilir.</p>` + (zor.length ? `<details class="baska"><summary>Zorlamayla en yakın kalıbı göster</summary>${kart(zor[0], "", "zorlamayla · ")}</details>` : "");
+      $("#tsonuc").innerHTML = h;
+      $$("[data-tk]").forEach(el => calarKur(el, () => hep[+el.dataset.tk].ss));
     };
-    $("#tartdugme").addEventListener("click", yap); yap();
+    $("#tartdugme").addEventListener("click", yap); $("#tmisra").addEventListener("input", () => { $("#tsonuc").innerHTML = ""; }); yap();
+  },
+  sozluk() {
+    ana.innerHTML = `<article class="ders"><header class="ders-bas"><a class="metin-bag" href="#/dersler" style="border:0;color:var(--soluk)">← Dersler</a><p class="ust-yazi" style="margin-top:18px">Terimler</p><h1>Aruz sözlüğü</h1><p>Derslerde geçen terimlerin kısa karşılıkları. Her biri, anlatıldığı derse bağlıdır.</p></header>
+      <dl class="sozluk">${SOZLUK.map(([t, a, d]) => { const dr = d && DERSLER.find(x => x.id === d); return `<div><dt>${t}</dt><dd>${a}${dr ? ` <a class="metin-bag" href="#/ders/${d}">${DERSLER.indexOf(dr) + 1}. ders <span class="ok">→</span></a>` : ""}</dd></div>`; }).join("")}</dl>
+      <div class="ders-son"><a class="dugme dugme-cizgi" href="#/dersler">← Dersler</a><a class="dugme dugme-asil" href="#/temrin">Temrine geçin <span class="ok">→</span></a></div></article>`;
   },
   hakkinda() {
     ana.innerHTML = `<article class="ders"><header class="ders-bas"><p class="ust-yazi">Kaynaklar ve usul</p><h1>Bu sayfa nasıl hazırlandı?</h1><p>Fâilâtün: Bir Beyit, Bir Âlem kitabındaki beyitlerle aruz.</p></header>
       <h2>Beyitler</h2><p>Elli iki beytin metni, şairi ve vezni <em>Bir Beyit, Bir Âlem</em> kitabından alınmıştır; kitaptaki sıra ve sayfa numaraları korunmuştur. Resimler kitabın resimleridir. Beyitlerin şerhi kitabın kendisindedir.</p>
-      <h2>Kayıtlar</h2><p>“Hocamızdan dinle” düğmeleri, Hayâtî İnanç Hocamızın o beyti okuyup izah ettiği sohbetin ilgili bölümünü açar. Aruz derslerindeki kayıtlar, Hocamızın vezinden bizzat bahsettiği bölümlerdir. Kayıtlar yayınlandıkları kanallarda durur; burada yalnız ilgili aralık gösterilir. Aralıklar yaklaşıktır; birkaç saniye erken ya da geç başlayabilir.</p>
+      <h2>Kayıtlar</h2><p>“Hocamızdan dinleyin” düğmeleri, Hayâtî İnanç Hocamızın o beyti okuyup izah ettiği sohbetin ilgili bölümünü açar. Aruz derslerindeki kayıtlar, Hocamızın vezinden bizzat bahsettiği bölümlerdir. Kayıtlar yayınlandıkları kanallarda durur; burada yalnız ilgili aralık gösterilir. Aralıklar yaklaşıktır; birkaç saniye erken ya da geç başlayabilir.</p>
       <h2>Taktî</h2><p>Her mısra hece hece tartılmış, kalıba oturtulmuş ve tek tek gözden geçirilmiştir. Ulama, imâle, zihaf ve med yerleri işaretlidir. Kitabın verdiği vezin esas alınmıştır. Lügat ve bugünkü söyleyişle verilen karşılıklar, kitaptaki şerhe bağlı kalınarak bu sayfa için hazırlanmıştır.</p>
       <h2>Ritim sesi</h2><p>“Ritmi dinle” düğmesi bir okuyuş kaydı değildir; kalıbın hesabını duyurmak için üretilen bir sestir. Kısa hece bir birim, uzun hece iki birim sürer. “Darb” vuruşla, “nağme” aynı hesabı basit bir ezgiyle verir. Beytin asıl sesi Hocamızın okuyuşudur.</p>
-      <h2>Mısra tartısı</h2><p>Serbest tartı bir ön incelemedir: tek mısraya bakar, tarihî söyleyişi bilemez ve şiirin bütünü hakkında hüküm vermez.</p>
+      <h2>Vuruş</h2><p>“Elinizle vurun” aracı mikrofon kullanmaz; yalnız dokunuşlarınızın arasındaki süreyi ölçer. İki vuruş arasındaki süre önceki hecenin ağırlığı sayılır ve kendi hızınıza göre değerlendirilir: uzun heceniz kısa hecenizin iki katı sürdüyse ölçüdesiniz. Son hecenin süresi ölçülmez. Hiçbir şey kaydedilmez.</p>
+      <h2>Mısra tartısı</h2><p>Serbest tartı bir ön incelemedir: tek mısraya bakar, tarihî söyleyişi bilemez ve şiirin bütünü hakkında hüküm vermez. Ancak çok zorlamayla oturan mısraları “oturdu” diye göstermez.</p>
       <h2>Tashih</h2><p>Bir yanlış görürseniz haber verin: <a class="metin-bag" href="https://bir-beyit-bir-alem-tashih.someonebkr.chatgpt.site/#kapak=on" target="_blank" rel="noopener">tashih bırak ↗</a></p>
       <div class="ders-son"><a class="dugme dugme-cizgi" href="#/">← Giriş</a><a class="dugme dugme-asil" href="/bir-beyit-bir-alem/">Kitabın dinleme rehberi <span class="ok">→</span></a></div></article>`;
   }
@@ -541,19 +720,29 @@ const Sayfa = {
 
 /* ——— yol ——— */
 const ESKI = { kesfet: "#/", oyna: "#/temrin", ritimler: "#/vezinler", meclis: "#/beyitler", dersler: "#/dersler", laboratuvar: "#/tart", arsiv: "#/beyitler", ogretmen: "#/dersler", beyitler: "#/beyitler" };
+const azHareket = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const gozcu = !azHareket && "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("gor"); gozcu.unobserve(e.target); } }), { rootMargin: "0px 0px -6% 0px" }) : null;
+function belirKur() { if (!gozcu) return; const esik = window.innerHeight * 0.94; $$(".bolum-bas,.adim,.klip,.vezin,.bk,.dk,.panel,.kitap>*,.kutu,.temrin,.formul,.kaide li,.sozluk>div", ana).forEach(el => { if (el.getBoundingClientRect().top > esik) { el.classList.add("bekle"); gozcu.observe(el); } }); }
+let sonYol = "", ilkCizim = true;
 function yol() {
   Ses.dur(); if (pencere.open) pencere.close();
   let h = location.hash || "#/";
+  if (h === "#ana") { history.replaceState(null, "", location.pathname + location.search + (sonYol || "#/")); ana.focus(); return; }
   const eski = h.match(/^#beyit-(\d+)$/); if (eski) { location.replace("#/beyit/" + eski[1]); return; }
   if (!h.startsWith("#/")) { location.replace(ESKI[h.slice(1)] || "#/"); return; }
-  const [, s, p] = h.split("/");
-  const ad = s || "giris"; (Sayfa[ad] || Sayfa.giris)(p ? decodeURIComponent(p) : undefined);
-  const grup = { giris: "", beyit: "beyitler", ders: "dersler", vezin: "vezinler" }[ad] ?? ad;
-  $$(".gezin a").forEach(a => a.getAttribute("href") === "#/" + grup ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-  const T = { giris: "Fâilâtün · Hayâtî İnanç Hocamızın beyitleriyle aruz", beyitler: "52 beyit", dersler: "Aruz dersleri", vezinler: "Vezinler", temrin: "Temrin", tart: "Mısra tartısı", hakkinda: "Kaynaklar ve usul" };
-  let t = T[ad]; if (ad === "beyit" && beyit(p)) t = `${p}. beyit · ${beyit(p).sair}`; if (ad === "ders") { const d = DERSLER.find(x => x.id === p); if (d) t = d.baslik; } if (ad === "vezin" && VZ[p]) t = VZ[p].ad;
-  document.title = (t && ad !== "giris" ? t + " · " : "") + (ad === "giris" ? T.giris : "Fâilâtün");
-  window.scrollTo(0, 0);
+  const [, s, p] = h.split("/"), ad = Sayfa[s] ? s : "giris", arg = p ? decodeURIComponent(p) : undefined;
+  const ciz = () => {
+    Sayfa[ad](arg);
+    const grup = { giris: "", beyit: "beyitler", ders: "dersler", vezin: "vezinler", sozluk: "dersler" }[ad] ?? ad;
+    $$(".gezin a").forEach(a => a.getAttribute("href") === "#/" + grup ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    const T = { giris: "Fâilâtün · Hayâtî İnanç Hocamızın beyitleriyle aruz", beyitler: "52 beyit", dersler: "Aruz dersleri", vezinler: "Vezinler", temrin: "Temrin", tart: "Mısra tartısı", hakkinda: "Kaynaklar ve usul", sozluk: "Aruz sözlüğü" };
+    let t = T[ad]; if (ad === "beyit" && beyit(p)) t = `${p}. beyit · ${beyit(p).sair}`; if (ad === "ders") { const d = DERSLER.find(x => x.id === p); if (d) t = d.baslik; } if (ad === "vezin" && VZ[p]) t = VZ[p].ad;
+    document.title = (t && ad !== "giris" ? t + " · " : "") + (ad === "giris" ? T.giris : "Fâilâtün");
+    window.scrollTo(0, 0); belirKur();
+    if (!ilkCizim) ana.focus({ preventScroll: true });
+    ilkCizim = false; sonYol = h;
+  };
+  if (!ilkCizim && !azHareket && document.startViewTransition) { const g = document.startViewTransition(ciz); [g.ready, g.finished, g.updateCallbackDone].forEach(x => x && x.catch(() => { })); } else ciz();
 }
 window.addEventListener("hashchange", yol);
 /* dışarıdan gelen bağlantılar: ?beyit=9 · ?misra=…(&misra2=…) · ?kalip=… (ya da ?ritim=…) */
