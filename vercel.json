@@ -371,6 +371,15 @@
           "value": "noindex, nofollow, noarchive"
         }
       ]
+    },
+    {
+      "source": "/iyilikakademi/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, max-age=0, must-revalidate"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -634,6 +643,21 @@
       "source": "/7sinif3unite/:path(.*)",
       "destination": "/7sinif/3/:path",
       "permanent": true
+    },
+    {
+      "source": "/iyilikakademi",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/iyilikakademi/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/iyilikakademi/:path((?!sw\\.js$).*)",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -644,18 +668,6 @@
     {
       "source": "/kuran-ogretmenim/app/assets/NOTICES/",
       "destination": "/kuran-ogretmenim/app/assets/NOTICES"
-    },
-    {
-      "source": "/iyilikakademi",
-      "destination": "/iyilikakademi/index.html"
-    },
-    {
-      "source": "/iyilikakademi/",
-      "destination": "/iyilikakademi/index.html"
-    },
-    {
-      "source": "/iyilikakademi/:path((?!assets/).*)",
-      "destination": "/iyilikakademi/index.html"
     },
     {
       "source": "/tarih",
