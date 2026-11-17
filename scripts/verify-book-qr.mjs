@@ -59,12 +59,33 @@ export function verifyIyilikPages(root = new URL('..', import.meta.url)) {
   }
 }
 
+// Printed in Bir Beyit, Bir Âlem (Hayâtî İnanç, p. 106 QR → raufenc.com/bir-beyit-bir-alem). Rauf's instruction, 2026-11-17:
+// this page is the book's QR target; never move or delete it, and keep all 52 couplets with their #beyit-<n> rooms.
+export function verifyBirBeyitPage(root = new URL('..', import.meta.url)) {
+  const read = (file) => {
+    try {
+      return readFileSync(new URL(file, root), 'utf8');
+    } catch {
+      throw new Error(`Basılı Bir Beyit, Bir Âlem karekod sayfası eksik: /${file}`);
+    }
+  };
+  const html = read('bir-beyit-bir-alem/index.html');
+  assert.ok(html.includes('app.js'), 'Bir Beyit, Bir Âlem sayfası beyitleri yükleyen app.js dosyasını çağırmalı.');
+  read('bir-beyit-bir-alem/app.js');
+  const data = JSON.parse(read('bir-beyit-bir-alem/beyitler.json'));
+  const numbers = (data.poems || []).map(poem => poem.number).sort((a, b) => a - b);
+  assert.deepEqual(numbers, Array.from({ length: 52 }, (_, i) => i + 1),
+    'Bir Beyit, Bir Âlem: beyitler.json kitaptaki 52 beytin hepsini 1–52 sırasıyla taşımalı.');
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     verifyBookQr(JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8')));
     console.log('NöroTerbiye: 3 basılı QR adresi ve son eğik çizgili karşılıkları korundu.');
     verifyIyilikPages();
     console.log('İyiliklerle Büyüyorum: /iyilik/ ve 3 basılı kitap adresi yerinde.');
+    verifyBirBeyitPage();
+    console.log('Bir Beyit, Bir Âlem: /bir-beyit-bir-alem/ karekod sayfası ve 52 beyit yerinde.');
   } catch (error) {
     console.error(`Yayın durduruldu: ${error.message}`);
     process.exitCode = 1;
