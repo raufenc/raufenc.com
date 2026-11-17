@@ -1,15 +1,13 @@
-// Vercel Edge Middleware - sensitive path, scanner and panel.html JWT checks.
+// Vercel Edge Middleware - sensitive path, scanner and API method checks.
 export const config = {
   matcher: '/:path*',
 };
 
-const PANEL_PATH = '/birlikteiyilik-v2/yonetim/panel.html';
 const API_METHODS = {
   '/api/sunumlar': ['GET', 'HEAD', 'POST', 'OPTIONS'],
   '/api/gemini': ['POST', 'OPTIONS'],
   '/api/ilmihal-search': ['POST', 'OPTIONS'],
   '/api/mizac-sohbet': ['POST', 'OPTIONS'],
-  '/api/bia-news': ['GET', 'POST', 'OPTIONS'],
   '/api/kelime-ac': ['POST', 'OPTIONS'],
   '/api/arge-feed': ['GET', 'OPTIONS'],
   '/api/arge-asistan': ['POST', 'OPTIONS'],
@@ -116,7 +114,6 @@ function apiPolicy(pathname) {
 }
 
 function fetchMetadataBlocked(req, pathname) {
-  if (apiYolu(pathname) === '/api/bia-news') return false;
   if (req.method !== 'POST' && req.method !== 'OPTIONS') return false;
   const site = req.headers.get('sec-fetch-site');
   return Boolean(site && !['same-origin', 'same-site', 'none'].includes(site));
@@ -142,30 +139,6 @@ function sadeSayfaYolu(pathname) {
   return sade.endsWith('/') ? sade : sade + '/';
 }
 
-async function verifyJWT(token, secret) {
-  try {
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
-    const [header, body, sig] = parts;
-    const msg = `${header}.${body}`;
-    const enc = new TextEncoder();
-    const key = await crypto.subtle.importKey(
-      'raw', enc.encode(secret),
-      { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']
-    );
-    const pad = s => {
-      const r = s.length % 4;
-      return s.replace(/-/g, '+').replace(/_/g, '/') + (r === 2 ? '==' : (r === 3 ? '=' : ''));
-    };
-    const sigBytes = Uint8Array.from(atob(pad(sig)), c => c.charCodeAt(0));
-    const valid = await crypto.subtle.verify('HMAC', key, sigBytes, enc.encode(msg));
-    if (!valid) return null;
-    const payload = JSON.parse(atob(pad(body)));
-    if (payload.exp < Math.floor(Date.now() / 1000)) return null;
-    return payload;
-  } catch (e) { return null; }
-}
-
 export default async function middleware(req) {
   const { pathname } = new URL(req.url);
   const apiMethods = apiPolicy(pathname);
@@ -188,30 +161,5 @@ export default async function middleware(req) {
       hedef.pathname = sade;
       return Response.redirect(hedef, 308);
     }
-  }
-
-  if (pathname !== PANEL_PATH) {
-    return;
-  }
-
-  const JWT_SECRET = process.env.BIA_JWT_SECRET || process.env.BIA_ADMIN_PASSWORD || '';
-
-  // Güvenlik: secret yoksa giriş sayfasına yönlendir
-  if (!JWT_SECRET) {
-    const loginUrl = new URL('/birlikteiyilik-v2/yonetim/', req.url);
-    return Response.redirect(loginUrl, 302);
-  }
-
-  // Cookie'den JWT token'ı al
-  const cookieHeader = req.headers.get('cookie') || '';
-  const match = cookieHeader.split(';').find(c => c.trim().startsWith('bia_auth='));
-  const token = match ? match.trim().split('=').slice(1).join('=') : '';
-
-  // JWT imzasını ve süresini doğrula
-  const payload = token ? await verifyJWT(token, JWT_SECRET) : null;
-
-  if (!payload) {
-    const loginUrl = new URL('/birlikteiyilik-v2/yonetim/', req.url);
-    return Response.redirect(loginUrl, 302);
   }
 }
