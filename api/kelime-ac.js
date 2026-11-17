@@ -25,16 +25,14 @@ const KILITLI = {"KA01":[{"t":"A-L-M","k":"Arapça A-L-M • bilmek","e":"Arapç
 
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, istekKokeni, istekHostu } from '../lib/guvenlik.js';
+
 const GEREKEN = 3;   // beş kelimeden kaçı yeterli
 
 const ALLOWED = ['https://raufenc.com', 'https://www.raufenc.com'];
+/* Köken: tam eşleşme + isteğin kendi host'u (önizleme) + yerel geliştirme */
 function originOk(req) {
-  const host = req.headers.get('origin') || req.headers.get('referer') || '';
-  if (!host) return false;
-  if (ALLOWED.some(a => host.indexOf(a) === 0)) return true;
-  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/.test(host)) return true;
-  if (/^https:\/\/[a-z0-9-]+\.vercel\.app/.test(host)) return true;
-  return false;
+  return kokenIzinli(istekKokeni(req), ALLOWED, { sunucu: istekHostu(req) });
 }
 
 /* En iyi-çaba hız sınırı — kaba kuvvetle deneme yapmayı pahalılaştırır */

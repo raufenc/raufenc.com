@@ -11,17 +11,19 @@
    ============================================================ */
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, istekKokeni, istekHostu, govdeOku } from '../lib/guvenlik.js';
+
 const ALLOWED = ['https://raufenc.com', 'https://www.raufenc.com'];
+/* Köken: tam eşleşme + isteğin kendi host'u (önizleme) + yerel geliştirme */
 function originOk(req) {
-  const o = req.headers.get('origin') || '';
-  const ref = req.headers.get('referer') || '';
-  const host = o || ref;
-  if (!host) return false;
-  if (ALLOWED.some(a => host.indexOf(a) === 0)) return true;
-  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/.test(host)) return true;
-  if (/^https:\/\/[a-z0-9-]+\.vercel\.app/.test(host)) return true;
-  return false;
+  return kokenIzinli(istekKokeni(req), ALLOWED, { sunucu: istekHostu(req) });
 }
+
+/* Maliyet sınırları — istemci (mizac/app.js) 8 geçmiş + 500 karakterlik ileti gönderir */
+const MAX_BODY_BYTES = 32000;
+const MAX_MESSAGES = 10;
+const MAX_USER_CHARS = 1000;
+const MAX_ASSISTANT_CHARS = 3000;
 
 /* En iyi-çaba hız sınırı (warm instance içi; kalıcı değil ama sürtünme ekler) */
 const HITS = new Map();
@@ -97,19 +99,21 @@ export default async function handler(req) {
   if (req.method !== 'POST') return json({ fallback: true }, 405);
   if (!originOk(req)) return json({ error: 'forbidden' }, 403);
   if (rateLimited(req)) return new Response(JSON.stringify({ error: 'rate' }), { status: 429, headers: { 'content-type': 'application/json', 'retry-after': '30' } });
-  const contentLength = Number(req.headers.get('content-length') || '0');
-  if (contentLength > 12000) return json({ error: 'payload_too_large' }, 413);
-
   let d;
-  try { d = await req.json(); } catch (e) { return json({ fallback: true }, 400); }
+  try { d = JSON.parse(await govdeOku(req, MAX_BODY_BYTES)); }
+  catch (e) { return json(e && e.message === 'too_large' ? { error: 'payload_too_large' } : { fallback: true }, e && e.message === 'too_large' ? 413 : 400); }
+  if (!d || typeof d !== 'object') return json({ fallback: true }, 400);
 
-  const hist = Array.isArray(d.history) ? d.history : [];
+  const hist = Array.isArray(d.history) ? d.history.slice(-MAX_MESSAGES * 2) : [];
+  const sinir = (rol, metin) => stripTags(metin).slice(0, rol === 'assistant' ? MAX_ASSISTANT_CHARS : MAX_USER_CHARS);
   let messages = hist
     .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim())
-    .map(m => ({ role: m.role, content: stripTags(m.content) }))
-    .slice(-10);
-  if (d.message && (!messages.length || messages[messages.length - 1].role !== 'user' || messages[messages.length - 1].content !== stripTags(d.message))) {
-    messages.push({ role: 'user', content: stripTags(d.message) });
+    .map(m => ({ role: m.role, content: sinir(m.role, m.content) }))
+    .slice(-MAX_MESSAGES);
+  const yeni = typeof d.message === 'string' ? sinir('user', d.message) : '';
+  if (yeni && (!messages.length || messages[messages.length - 1].role !== 'user' || messages[messages.length - 1].content !== yeni)) {
+    messages.push({ role: 'user', content: yeni });
+    if (messages.length > MAX_MESSAGES) messages = messages.slice(-MAX_MESSAGES);
   }
   while (messages.length && messages[0].role !== 'user') messages.shift();
   if (!messages.length) return json({ fallback: true });
@@ -121,6 +125,7 @@ export default async function handler(req) {
     if (process.env.OPENAI_API_KEY) return json({ reply: cleanReply(await callOpenAI(process.env.OPENAI_API_KEY, model || 'gpt-4o-mini', system, messages)) });
     return json({ fallback: true });
   } catch (err) {
+    console.error('mizac-sohbet sağlayıcı hatası:', err && err.message);
     return json({ fallback: true });
   }
 }

@@ -5,22 +5,28 @@
 // Abone cihaz token'ları Firestore "pushTokens" koleksiyonundan okunur ({ token, topics: [] }).
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, istekHostu, corsKokeni, esit } from '../lib/guvenlik.js';
+
 // İzinli kökenler: ARGE_ALLOWED_ORIGINS (virgülle) + uygulamanın kendi alan adı + yerel geliştirme
 const ENV_ORIGINS = (process.env.ARGE_ALLOWED_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
 const ALLOWED_ORIGINS = [...ENV_ORIGINS, 'http://localhost:3000', 'http://127.0.0.1:3000'];
+// Origin varsa tam eşleşmeli. Origin'siz çağrı (sunucudan/curl ile yönetici) kabul edilir:
+// bu uç zaten ARGE_ADMIN_TOKEN Bearer anahtarı ister.
 function originAllowed(req, origin) {
   if (!origin) return true;
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || '';
-  try { return new URL(origin).host === host; } catch (_) { return false; }
+  return kokenIzinli(origin, ALLOWED_ORIGINS, { sunucu: istekHostu(req) });
 }
 const HITS = new Map();
 
-function cors(origin) {
-  return { 'Access-Control-Allow-Origin': origin || '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Vary': 'Origin' };
+// CORS: yalnız izinli kökene yansıt; değilse Allow-Origin başlığı hiç konmaz
+function cors(origin, izinli) {
+  const h = { 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, Authorization', 'Vary': 'Origin' };
+  const k = corsKokeni(origin, izinli);
+  if (k) h['Access-Control-Allow-Origin'] = k;
+  return h;
 }
-function json(data, status, origin) {
-  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...cors(origin) } });
+function json(data, status, origin, izinli) {
+  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...cors(origin, izinli) } });
 }
 function b64url(input) {
   const bytes = typeof input === 'string' ? new TextEncoder().encode(input) : new Uint8Array(input);
@@ -39,13 +45,6 @@ function parseServiceAccount(raw) {
   try { return JSON.parse(raw); } catch (_) {}
   try { return JSON.parse(atob(raw)); } catch (_) { return null; }
 }
-function timingSafeEqual(a, b) {
-  if (a.length !== b.length) return false;
-  let r = 0;
-  for (let i = 0; i < a.length; i++) r |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  return r === 0;
-}
-
 async function accessToken(sa) {
   const now = Math.floor(Date.now() / 1000);
   const header = b64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
@@ -106,32 +105,37 @@ async function sendOne(sa, at, t, msg) {
 
 export default async function handler(req) {
   const origin = req.headers.get('origin') || '';
-  if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, origin);
-  if (!originAllowed(req, origin)) return json({ error: 'forbidden' }, 403, origin);
+  const izinli = originAllowed(req, origin);
+  const ok = Boolean(origin) && izinli; // CORS yalnız gerçek ve izinli kökene
+  if (req.method === 'OPTIONS') return new Response(null, { status: izinli ? 204 : 403, headers: cors(origin, ok) });
+  if (req.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, origin, ok);
+  if (!izinli) return json({ error: 'forbidden' }, 403, origin, ok);
   const siteBase = `https://${req.headers.get('x-forwarded-host') || req.headers.get('host')}/kocaeli-arge/`;
 
   const ip = (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
   const now = Date.now();
   const hits = (HITS.get(ip) || []).filter(t => now - t < 60_000); hits.push(now); HITS.set(ip, hits);
-  if (hits.length > 10) return json({ error: 'rate_limited' }, 429, origin);
+  if (HITS.size > 5000) HITS.clear();
+  if (hits.length > 10) return json({ error: 'rate_limited' }, 429, origin, ok);
 
   const ADMIN = process.env.ARGE_ADMIN_TOKEN || '';
   const auth = req.headers.get('authorization') || '';
-  if (!ADMIN || !auth.startsWith('Bearer ') || !timingSafeEqual(auth.slice(7), ADMIN)) return json({ error: 'unauthorized' }, 401, origin);
+  // Sabit zamanlı karşılaştırma (uzunluk farkı erken dönmez)
+  if (!ADMIN || !auth.startsWith('Bearer ') || !(await esit(auth.slice(7), ADMIN))) return json({ error: 'unauthorized' }, 401, origin, ok);
 
   const sa = parseServiceAccount(process.env.ARGE_FCM_SERVICE_ACCOUNT || '');
-  if (!sa?.private_key || !sa?.project_id) return json({ error: 'fcm_not_configured', message: 'ARGE_FCM_SERVICE_ACCOUNT tanımlı değil.' }, 503, origin);
+  if (!sa?.private_key || !sa?.project_id) return json({ error: 'fcm_not_configured', message: 'ARGE_FCM_SERVICE_ACCOUNT tanımlı değil.' }, 503, origin, ok);
 
   let body;
-  try { body = JSON.parse((await req.text()).slice(0, 4000)); } catch (_) { return json({ error: 'bad_json' }, 400, origin); }
+  try { body = JSON.parse((await req.text()).slice(0, 4000)); } catch (_) { return json({ error: 'bad_json' }, 400, origin, ok); }
+  if (!body || typeof body !== 'object') return json({ error: 'bad_json' }, 400, origin, ok);
   const msg = {
     title: String(body.title || '').trim().slice(0, 120),
     body: String(body.body || '').trim().slice(0, 400),
     topic: String(body.topic || 'genel').replace(/[^a-z]/g, '').slice(0, 20) || 'genel',
     url: String(body.url || '').startsWith(siteBase) ? body.url : siteBase,
   };
-  if (!msg.title || !msg.body) return json({ error: 'missing_fields' }, 400, origin);
+  if (!msg.title || !msg.body) return json({ error: 'missing_fields' }, 400, origin, ok);
 
   try {
     const at = await accessToken(sa);
@@ -142,8 +146,10 @@ export default async function handler(req) {
       const res = await Promise.all(tokens.slice(i, i + CONC).map(t => sendOne(sa, at, t, msg).catch(() => 'failed')));
       res.forEach(r => { stats[r]++; });
     }
-    return json({ ok: true, ...stats }, 200, origin);
+    return json({ ok: true, ...stats }, 200, origin, ok);
   } catch (e) {
-    return json({ error: String(e?.message || 'send_failed') }, 502, origin);
+    // İç ayrıntı istemciye gitmez; günlüğe yazılır
+    console.error('arge-bildirim gönderim hatası:', e?.message || e);
+    return json({ error: 'send_failed' }, 502, origin, ok);
   }
 }

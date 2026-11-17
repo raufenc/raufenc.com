@@ -16,6 +16,8 @@ const SOURCES = {
 };
 
 const DETAIL_HOSTS = ['kocaeli.meb.gov.tr', 'kocaelimeb.gov.tr', 'www.kocaelimeb.gov.tr', 'kocaeliarge.meb.gov.tr', 'www.meb.gov.tr', 'meb.gov.tr'];
+// Akış kaynakları ve YouTube: ilk ve son adres bu listeden geçmeli
+const FEED_HOSTS = [...DETAIL_HOSTS, 'www.youtube.com', 'youtube.com', 'm.youtube.com', 'consent.youtube.com'];
 const YT_ID = /^[A-Za-z0-9_-]{10,40}$/;
 
 function json(data, status = 200, extra = {}) {
@@ -53,8 +55,15 @@ function hashId(s) {
 }
 function absolutize(url, base) { try { return new URL(url, base).href; } catch (_) { return ''; } }
 
-async function fetchText(url) {
-  const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html,application/xml,text/xml,*/*' }, redirect: 'follow' });
+// İlk adres ve yönlendirmeler sonunda varılan adres izin listesinden geçer
+// (yönlendirme her çalışma zamanında aynı davransın diye 'follow' + son adres denetimi).
+async function fetchText(url, hosts = FEED_HOSTS) {
+  const u = new URL(url);
+  if (u.protocol !== 'https:' || !hosts.includes(u.hostname)) throw new Error('host_not_allowed');
+  const r = await fetch(u.href, { headers: { 'User-Agent': UA, 'Accept': 'text/html,application/xml,text/xml,*/*' }, redirect: 'follow' });
+  let son = u;
+  try { if (r.url) son = new URL(r.url); } catch (_) {}
+  if (son.protocol !== 'https:' || !hosts.includes(son.hostname)) throw new Error('host_not_allowed');
   if (!r.ok) throw new Error(`upstream_${r.status}`);
   return r.text();
 }
@@ -69,7 +78,7 @@ function parseRss(xml, meta) {
     const desc = decodeEntities(tag(b, 'description'));
     const img = attr(desc, 'img', 'src');
     const title = stripTags(tag(b, 'title')).replace(/\.$/, '');
-    if (!title || !link) continue;
+    if (!title || !link || !/^https?:\/\//i.test(link)) continue; // javascript: vb. bağlantı istemciye gitmesin
     const cat = stripTags(tag(b, 'category'));
     const image = img && !/mansetresim|logo_/i.test(img) ? absolutize(img, link) : '';
     items.push({
@@ -150,26 +159,63 @@ function parseYoutube(xml) {
   return items;
 }
 
+// HTML temizliği: izin listesi. Metin parçalarındaki < > kaçırılır; etiketler yalnız
+// izinli olanlar, kanonik biçimde yeniden kurulur. Öznitelikler: a → href (http/https),
+// img → src (https) + alt; diğerlerinde öznitelik yok.
+const IZINLI_ETIKET = new Set(['a', 'img', 'p', 'br', 'b', 'strong', 'i', 'em', 'u', 'ul', 'ol', 'li',
+  'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'table', 'thead', 'tbody', 'tr', 'td', 'th']);
+const P_YAP = new Set(['div', 'section', 'span', 'font', 'center']); // eski davranış: <p>'ye çevrilir
+const ICERIKLE_AT = /<(script|style|iframe|object|svg|math|noscript|template|textarea|select|xmp|noembed|noframes|title)\b[\s\S]*?<\/\1\s*>/gi;
+const ETIKET = /<!--[\s\S]*?-->|<(\/?)([a-zA-Z][a-zA-Z0-9:-]*)((?:[^>"']|"[^"]*"|'[^']*')*)>/g;
+const OZNITELIK = /([^\s"'>\/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
+
+function kacir(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function metinKacir(s) { return String(s).replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function ozDecode(s) {
+  return String(s)
+    .replace(/&#x([0-9a-f]+);?/gi, (_, h) => { const n = parseInt(h, 16); return n > 0 && n < 0x110000 ? String.fromCodePoint(n) : ''; })
+    .replace(/&#(\d+);?/g, (_, d) => { const n = Number(d); return n > 0 && n < 0x110000 ? String.fromCodePoint(n) : ''; })
+    .replace(/&colon;/gi, ':').replace(/&tab;/gi, '\t').replace(/&newline;/gi, '\n')
+    .replace(/&quot;/gi, '"').replace(/&apos;/gi, "'").replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&amp;/gi, '&');
+}
+function oznitelikler(s) {
+  const o = {};
+  let m;
+  OZNITELIK.lastIndex = 0;
+  while ((m = OZNITELIK.exec(s))) {
+    const ad = m[1].toLowerCase();
+    if (!(ad in o)) o[ad] = ozDecode(m[2] ?? m[3] ?? m[4] ?? '');
+  }
+  return o;
+}
+function etiketKur(kapanis, ad, ozler, base) {
+  ad = ad.toLowerCase();
+  if (P_YAP.has(ad)) return kapanis ? '</p>' : '<p>';
+  if (!IZINLI_ETIKET.has(ad)) return '';
+  if (kapanis) return ad === 'br' || ad === 'img' ? '' : `</${ad}>`;
+  if (ad === 'a') {
+    const abs = absolutize((oznitelikler(ozler).href || '').trim(), base);
+    return abs && /^https?:$/.test(new URL(abs).protocol) ? `<a href="${kacir(abs)}" target="_blank" rel="noopener noreferrer">` : '<a>';
+  }
+  if (ad === 'img') {
+    const o = oznitelikler(ozler);
+    const abs = absolutize((o.src || '').trim(), base);
+    return abs && new URL(abs).protocol === 'https:' ? `<img src="${kacir(abs)}" alt="${kacir((o.alt || '').slice(0, 200))}" loading="lazy">` : '';
+  }
+  return `<${ad}>`;
+}
+
 function sanitizeArticle(html, base) {
-  let s = html
-    .replace(/<script[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[\s\S]*?<\/style>/gi, '')
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/<(iframe|object|embed|form|input|button|svg|video|audio)[\s\S]*?(<\/\1>|\/?>)/gi, '')
-    .replace(/\son\w+="[^"]*"/gi, '')
-    .replace(/\sstyle="[^"]*"/gi, '')
-    .replace(/\sclass="[^"]*"/gi, '')
-    .replace(/<a\b([^>]*)>/gi, (m, a) => {
-      const href = (a.match(/href=["']([^"']+)["']/i) || [])[1] || '';
-      const abs = absolutize(href, base);
-      return abs && /^https?:/.test(abs) ? `<a href="${abs}" target="_blank" rel="noopener noreferrer">` : '<a>';
-    })
-    .replace(/<img\b([^>]*)>/gi, (m, a) => {
-      const src = (a.match(/src=["']([^"']+)["']/i) || [])[1] || '';
-      const abs = absolutize(src, base);
-      return abs && /^https:/.test(abs) ? `<img src="${abs}" alt="" loading="lazy">` : '';
-    })
-    .replace(/<\/?(div|section|span|font|center)\b[^>]*>/gi, (m) => m.startsWith('</') ? '</p>' : '<p>')
+  const kaynak = String(html || '').replace(ICERIKLE_AT, '');
+  let out = '', son = 0, m;
+  ETIKET.lastIndex = 0;
+  while ((m = ETIKET.exec(kaynak))) {
+    out += metinKacir(kaynak.slice(son, m.index));
+    son = ETIKET.lastIndex;
+    if (m[2]) out += etiketKur(m[1] === '/', m[2], m[3] || '', base);
+  }
+  out += metinKacir(kaynak.slice(son));
+  const s = out
     .replace(/<p>\s*(?:&nbsp;|\s)*<\/p>/gi, '')
     .replace(/(<p>\s*){2,}/gi, '<p>').replace(/(<\/p>\s*){2,}/gi, '</p>');
   return s.trim().slice(0, 60000);
@@ -179,7 +225,7 @@ async function getDetail(url) {
   let u;
   try { u = new URL(url); } catch (_) { throw new Error('bad_url'); }
   if (u.protocol !== 'https:' || !DETAIL_HOSTS.includes(u.hostname)) throw new Error('host_not_allowed');
-  const html = await fetchText(u.href);
+  const html = await fetchText(u.href, DETAIL_HOSTS);
   const block = html.match(/<div class="content article-detay">([\s\S]*?)<div class="social-links">/i)?.[1]
              || html.match(/<div class="content article-detay">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/i)?.[1] || '';
   const date = stripTags((block.match(/bi-clock[^>]*><\/i>\s*(?:<span>)?\s*([^<]+)/i) || [])[1] || '').replace(/^güncelleme\s*:?\s*/i, '');
@@ -188,7 +234,8 @@ async function getDetail(url) {
   const title = stripTags(tag(html.match(/<h2 class="main-title">[\s\S]*?<\/h2>/i)?.[0] || '', 'span')) || stripTags(tag(html, 'title'));
   const sub = stripTags((html.match(/<p class="sub-title">([\s\S]*?)<\/p>/i) || [])[1] || '');
   const body = sanitizeArticle(block.replace(/<div class="content-image">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/i, ''), u.href);
-  return { title: titleCase(title), sub, date, sourceViews, image: image ? absolutize(image, u.href) : '', html: body, link: u.href };
+  const img = image ? absolutize(image, u.href) : '';
+  return { title: titleCase(title), sub, date, sourceViews, image: /^https?:\/\//i.test(img) ? img : '', html: body, link: u.href };
 }
 
 // Kanal canlı yayında mı? /live sayfası canlı videoya yönlenir; değilse kanal sayfasına döner.
@@ -265,7 +312,7 @@ export default async function handler(req) {
     const errors = [];
     results.forEach((r, i) => {
       if (r.status === 'fulfilled') items.push(...r.value);
-      else errors.push({ source: names[i], error: String(r.reason?.message || r.reason) });
+      else { console.error('arge-feed kaynak hatası:', names[i], r.reason?.message || r.reason); errors.push({ source: names[i], error: 'fetch_failed' }); }
     });
     const seen = new Set();
     const unique = items.filter(i => { const k = i.link.replace(/^https?:\/\/(www\.)?/, ''); if (seen.has(k)) return false; seen.add(k); return true; });
@@ -273,6 +320,10 @@ export default async function handler(req) {
     items.length = 0; items.push(...unique);
     return json({ ok: true, items, errors, fetchedAt: new Date().toISOString() });
   } catch (e) {
-    return json({ error: String(e?.message || 'fetch_failed') }, 502);
+    // İç ayrıntı istemciye gitmez; günlüğe yazılır
+    const msg = String(e?.message || '');
+    if (msg === 'bad_url' || msg === 'host_not_allowed') return json({ error: 'bad_url' }, 400);
+    console.error('arge-feed hatası:', msg);
+    return json({ error: 'fetch_failed' }, 502);
   }
 }

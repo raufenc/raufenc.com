@@ -14,6 +14,8 @@
    ============================================================ */
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, istekKokeni, istekHostu } from '../lib/guvenlik.js';
+
 const ALLOWED = ['https://raufenc.com', 'https://www.raufenc.com'];
 const KONULAR = {
   '': 'Genel',
@@ -24,13 +26,9 @@ const KONULAR = {
 };
 const EPOSTA = /^[^\s@<>"']{1,64}@[^\s@<>"']{1,190}\.[a-z]{2,24}$/i;
 
+// Köken: tam eşleşme + isteğin kendi host'u (önizleme) + yerel geliştirme
 function originOk(req) {
-  const o = req.headers.get('origin') || req.headers.get('referer') || '';
-  if (!o) return false;
-  if (ALLOWED.some(a => o.indexOf(a) === 0)) return true;
-  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?/.test(o)) return true;
-  if (/^https:\/\/[a-z0-9-]+\.vercel\.app/.test(o)) return true;
-  return false;
+  return kokenIzinli(istekKokeni(req), ALLOWED, { sunucu: istekHostu(req) });
 }
 
 const HITS = new Map();

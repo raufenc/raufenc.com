@@ -1,5 +1,7 @@
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, govdeOku } from '../lib/guvenlik.js';
+
 const ALLOWED_ORIGINS = [
   'https://ilmihal.org',
   'https://www.ilmihal.org',
@@ -9,8 +11,9 @@ const ALLOWED_ORIGINS = [
 ];
 const HITS = new Map();
 
+// Köken: yalnız listedeki kökenlerle tam eşleşme (yerel portlar listede açıkça yazılı)
 function isAllowedOrigin(origin) {
-  return ALLOWED_ORIGINS.some(allowed => origin === allowed || origin.startsWith(`${allowed}/`));
+  return kokenIzinli(origin, ALLOWED_ORIGINS, { yerel: false }) && ALLOWED_ORIGINS.includes(origin);
 }
 
 function corsHeaders(origin) {
@@ -325,8 +328,10 @@ export default async function handler(req) {
     });
   }
 
-  const contentLength = Number(req.headers.get('content-length') || '0');
-  if (contentLength > 2000) {
+  let ham;
+  try {
+    ham = await govdeOku(req, 2000);
+  } catch (_) {
     return new Response(JSON.stringify({ error: 'Payload too large' }), {
       status: 413,
       headers: { ...headers, 'Content-Type': 'application/json' }
@@ -334,8 +339,9 @@ export default async function handler(req) {
   }
 
   try {
-    const { query } = await req.json();
-    if (!query || query.length < 3 || query.length > 500) {
+    const { query } = JSON.parse(ham) || {};
+    // Yalnız düz metin sorgu (dizi/nesne modele içerik parçası olarak gitmesin)
+    if (typeof query !== 'string' || query.length < 3 || query.length > 500) {
       return new Response(JSON.stringify({ error: 'Invalid query' }), {
         status: 400,
         headers: { ...headers, 'Content-Type': 'application/json' }
@@ -389,6 +395,7 @@ export default async function handler(req) {
     });
 
   } catch (err) {
+    console.error('ilmihal-search hatası:', err && err.message);
     return new Response(JSON.stringify({ error: 'Internal error' }), {
       status: 500,
       headers: { ...headers, 'Content-Type': 'application/json' }

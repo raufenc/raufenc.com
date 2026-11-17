@@ -1,5 +1,7 @@
 export const config = { runtime: 'edge' };
 
+import { esit } from '../lib/guvenlik.js';
+
 const REPO = 'raufenc/raufenc.com';
 const GH_API = 'https://api.github.com';
 const BASE = 'birlikteiyilik-site/content/';
@@ -17,6 +19,17 @@ const LOGIN_HITS = new Map();
 const WRITE_HITS = new Map();
 const MAX_JSON_BYTES = 4_000_000;
 const MAX_IMAGE_BASE64_BYTES = 3_000_000;
+
+// Görsel türü sihirli baytlardan; uzantı buradan türetilir (istemcinin dosya adından değil)
+function gorselTuru(b64) {
+  let bas = '';
+  try { bas = atob(String(b64).replace(/\s+/g, '').slice(0, 24)); } catch (_) { return ''; }
+  if (bas.startsWith('\xFF\xD8\xFF')) return 'jpg';
+  if (bas.startsWith('\x89PNG\r\n\x1A\n')) return 'png';
+  if (bas.startsWith('GIF87a') || bas.startsWith('GIF89a')) return 'gif';
+  if (bas.startsWith('RIFF') && bas.slice(8, 12) === 'WEBP') return 'webp';
+  return '';
+}
 
 function clientIp(req) {
   return (req.headers.get('x-forwarded-for') || 'anon').split(',')[0].trim();
@@ -75,6 +88,8 @@ async function checkAuth(req, body, ADMIN_PW, jwtSecret) {
 export default async function handler(req) {
   const ADMIN_PW   = process.env.BIA_ADMIN_PASSWORD || '';
   const TOKEN      = process.env.BIA_GITHUB_TOKEN || '';
+  // UYARI: BIA_JWT_SECRET tanımlı değilse JWT anahtarı yönetici parolasına düşer.
+  // Ayrı, uzun ve rastgele bir BIA_JWT_SECRET tanımlanmalı (girişi kırmamak için burada değiştirilmedi).
   const JWT_SECRET = process.env.BIA_JWT_SECRET || ADMIN_PW;
   const BIA_USERS  = process.env.BIA_USERS || '';
 
@@ -148,7 +163,8 @@ export default async function handler(req) {
     try {
       const res = await gh(`/repos/${REPO}/contents/${file}`);
       if (res.status !== 200 || !res.data?.content) {
-        return json({ error: res.data?.message || 'Dosya okunamadi' }, res.status === 404 ? 404 : 500);
+        console.error('bia-news okuma hatası:', res.status, res.data?.message);
+        return json({ error: 'Dosya okunamadi' }, res.status === 404 ? 404 : 500);
       }
       const content = decode(res.data.content);
       if (isPublic) {
@@ -157,7 +173,8 @@ export default async function handler(req) {
       }
       return json({ data: content, sha: res.data.sha });
     } catch (e) {
-      return json({ error: e.message }, 500);
+      console.error('bia-news okuma hatası:', e?.message);
+      return json({ error: 'Dosya okunamadi' }, 500);
     }
   }
 
@@ -177,7 +194,9 @@ export default async function handler(req) {
     // ── Giriş endpoint'i ──
     if (body.action === 'login') {
       const { username = 'admin', password } = body;
-      const loginKey = `${clientIp(req)}:${String(username).slice(0, 80)}`;
+      const parola = typeof password === 'string' ? password : '';
+      // Hız sınırı yalnız IP'ye göre (kullanıcı adı değiştirerek aşılmasın)
+      const loginKey = clientIp(req);
       if (rateLimited(LOGIN_HITS, loginKey, 8, 10 * 60 * 1000)) {
         return json({ error: 'Cok fazla deneme. Biraz sonra tekrar deneyin.' }, 429);
       }
@@ -188,13 +207,16 @@ export default async function handler(req) {
         try {
           const users = JSON.parse(BIA_USERS);
           const found = users.find(u => u.id === username || u.name === username);
-          if (found && found.password === password) {
+          // Sabit zamanlı karşılaştırma; boş parola asla eşleşmez
+          if (found && typeof found.password === 'string' && found.password && parola
+              && await esit(parola, found.password)) {
             user = { id: found.id, name: found.name, role: found.role || 'admin' };
           }
         } catch(e) {}
       }
 
-      if (!user && password === ADMIN_PW) {
+      // ADMIN_PW boşsa bu yol hiç açılmaz
+      if (!user && ADMIN_PW && parola && await esit(parola, ADMIN_PW)) {
         user = { id: 'admin', name: 'Admin', role: 'admin' };
       }
 
@@ -224,20 +246,20 @@ export default async function handler(req) {
         return json({ error: 'Gorsel cok buyuk' }, 413);
       }
 
-      // Server-side MIME doğrulaması (magic bytes)
-      const ALLOWED_MAGIC = { '/9j/': 'jpg', 'iVBOR': 'png', 'R0lGO': 'gif', 'UklGR': 'webp' };
-      const prefix = imgBase64.substring(0, 5);
-      if (!Object.keys(ALLOWED_MAGIC).some(m => prefix.startsWith(m))) {
+      // Server-side MIME doğrulaması (magic bytes) — uzantı da buradan gelir
+      if (typeof imgBase64 !== 'string') return json({ error: 'Gecersiz gorsel' }, 400);
+      const ext = gorselTuru(imgBase64);
+      if (!ext) {
         return json({ error: 'Yalnizca JPEG, PNG, GIF ve WebP yuklenebilir' }, 400);
       }
 
-      // Dosya adı güvenliği: çift uzantı ve tehlikeli uzantıları engelle
+      // Dosya adı: istemci adının yalnız gövdesi alınır, noktalar atılır, uzantı sihirli bayttan
       const rawName = String(filename).split(/[\\/]/).pop().slice(0, 120);
-      const safeName = rawName
-        .replace(/^\.+/, '')
-        .replace(/[^a-zA-Z0-9._-]/g, '_')
-        .replace(/\.(html|htm|svg|js|mjs|php|json|txt)$/i, '.blocked');
-      if (!safeName || safeName === 'blocked') return json({ error: 'Gecersiz dosya adi' }, 400);
+      const govde = rawName.replace(/\.[^.]*$/, '')
+        .replace(/[^a-zA-Z0-9_-]/g, '_')
+        .replace(/^[_-]+/, '')
+        .slice(0, 100);
+      const safeName = `${govde || 'gorsel-' + Date.now()}.${ext}`;
       const filePath = IMAGES_PATH + safeName;
       let existingSha = '';
       try {
@@ -250,7 +272,8 @@ export default async function handler(req) {
         ...(existingSha ? { sha: existingSha } : {}),
       });
       if (!upRes.data?.content) {
-        return json({ error: upRes.data?.message || 'Gorsel yuklenemedi' }, 500);
+        console.error('bia-news görsel yükleme hatası:', upRes.status, upRes.data?.message);
+        return json({ error: 'Gorsel yuklenemedi' }, 500);
       }
       const rawUrl = `https://raw.githubusercontent.com/${REPO}/main/${filePath}`;
       return json({ ok: true, url: rawUrl, path: filePath });
@@ -282,11 +305,13 @@ export default async function handler(req) {
       }
 
       if (!putRes.data?.content?.sha) {
-        return json({ error: putRes.data?.message || 'GitHub kayit hatasi' }, 500);
+        console.error('bia-news kayıt hatası:', putRes.status, putRes.data?.message);
+        return json({ error: 'Kayit hatasi' }, 500);
       }
       return json({ ok: true, sha: putRes.data.content.sha });
     } catch (e) {
-      return json({ error: e.message }, 500);
+      console.error('bia-news kayıt hatası:', e?.message);
+      return json({ error: 'Kayit hatasi' }, 500);
     }
   }
 

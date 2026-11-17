@@ -1,5 +1,7 @@
 export const config = { runtime: 'edge' };
 
+import { kokenIzinli, istekKokeni, istekHostu, corsKokeni, govdeOku } from '../lib/guvenlik.js';
+
 const ALLOWED_ORIGINS = [
   'https://raufenc.com',
   'https://www.raufenc.com',
@@ -78,23 +80,15 @@ const VALID_TESTS = {
   },
 };
 
-function requestOrigin(req) {
-  return req.headers.get('origin') || req.headers.get('referer') || '';
-}
-
+// Köken: tam eşleşme + isteğin kendi host'u (önizleme) + yerel geliştirme
 function originOk(req) {
-  const host = requestOrigin(req);
-  if (!host) return false;
-  if (ALLOWED_ORIGINS.some(origin => host.startsWith(origin))) return true;
-  if (/^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?/.test(host)) return true;
-  if (/^https:\/\/[a-z0-9-]+\.vercel\.app/.test(host)) return true;
-  return false;
+  return kokenIzinli(istekKokeni(req), ALLOWED_ORIGINS, { sunucu: istekHostu(req) });
 }
 
 function corsHeaders(req) {
   const origin = req.headers.get('origin') || '';
-  const allowed = ALLOWED_ORIGINS.includes(origin) || /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin) || /^https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/.test(origin);
-  return allowed ? { 'Access-Control-Allow-Origin': origin, 'Vary': 'Origin' } : {};
+  const izinli = corsKokeni(origin, o => kokenIzinli(o, ALLOWED_ORIGINS, { sunucu: istekHostu(req) }));
+  return izinli ? { 'Access-Control-Allow-Origin': izinli, 'Vary': 'Origin' } : { 'Vary': 'Origin' };
 }
 
 function json(data, status, req) {
@@ -210,13 +204,12 @@ export default async function handler(req) {
   if (!originOk(req)) return json({ error: 'forbidden' }, 403, req);
   if (rateLimited(req)) return json({ error: 'rate_limited' }, 429, req);
 
-  const contentLength = Number(req.headers.get('content-length') || '0');
-  if (contentLength > MAX_BODY_BYTES) return json({ error: 'payload_too_large' }, 413, req);
-
+  // Gövde sınırı: Content-Length'e değil okunan bayta bakılır
   let body;
   try {
-    body = await req.json();
-  } catch (_) {
+    body = JSON.parse(await govdeOku(req, MAX_BODY_BYTES));
+  } catch (e) {
+    if (e && e.message === 'too_large') return json({ error: 'payload_too_large' }, 413, req);
     return json({ error: 'invalid_json' }, 400, req);
   }
 

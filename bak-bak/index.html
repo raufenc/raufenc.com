@@ -595,10 +595,17 @@
 
   /* ---- içerik paketini dinamik yükle ---- */
   var paketAdi = new URLSearchParams(location.search).get("paket") || "islami-simgeler";
+  // Adresten gelen paket adı yalnız küçük harf, rakam, tire ve alt çizgi olabilir (betik yolu ve hata iletisine giriyor).
+  if (!/^[a-z0-9_-]{1,60}$/.test(paketAdi)) paketAdi = "islami-simgeler";
   var s = document.createElement("script");
   s.src = "icerik/" + paketAdi + ".js";
   s.onload = kurulum;
-  s.onerror = function () { document.body.innerHTML = '<p style="color:#fff;padding:40px;font-family:sans-serif">İçerik paketi yüklenemedi: ' + paketAdi + "</p>"; };
+  s.onerror = function () {
+    var p = document.createElement("p");
+    p.style.cssText = "color:#fff;padding:40px;font-family:sans-serif";
+    p.textContent = "İçerik paketi yüklenemedi: " + paketAdi;
+    document.body.replaceChildren(p);
+  };
   document.head.appendChild(s);
 
   function kurulum() {

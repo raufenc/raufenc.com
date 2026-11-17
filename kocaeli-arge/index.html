@@ -34,7 +34,7 @@
   <div class="feat"><span>Anlık haber</span><span>Kocaeli MEM TV</span><span>Canlı yayın</span><span>Sosyal akış</span><span>Push bildirim</span><span>Etkinlik takvimi</span><span>Yapay zekâ asistanı</span><span>Çevrim dışı çalışır</span></div>
   <div class="qrbox"><div id="stage-qr"></div><div><b>Telefonunuzla okutun</b><small><span id="stage-url"></span><br>"Ana ekrana ekle" ile uygulama olarak kurulur.</small></div></div>
 </aside>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer integrity="sha384-3zSEDfvllQohrq0PHL1fOXJuC/jSOO34H46t6UQfobFOmxE5BpjjaIJY5F2/bMnU" crossorigin="anonymous"></script>
 <script>window.addEventListener('load',function(){var su=document.getElementById('stage-url');if(su)su.textContent=location.host+'/kocaeli-arge/';var q=document.getElementById('stage-qr');if(q&&window.QRCode&&q.offsetParent!==null){try{new QRCode(q,{text:location.origin+'/kocaeli-arge/',width:112,height:112,correctLevel:QRCode.CorrectLevel.M});}catch(e){}}});</script>
 <script type="module" src="/kocaeli-arge/js/app.js"></script>
 <noscript><p style="padding:20px;color:#fff">Bu uygulama için JavaScript gereklidir.</p></noscript>
