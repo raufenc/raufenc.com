@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Kapak Önerileri</title>
+<style>
+:root{--bg:#efe8da;--ink:#1c3030}
+html,body{margin:0;height:100%;background:var(--bg);font-family:Baskerville,Georgia,serif;color:var(--ink)}
+.wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:16px;box-sizing:border-box}
+#book{box-shadow:0 18px 50px rgba(40,30,10,.25)}
+.page{background:#f6f1e7}
+.page img{width:100%;height:100%;object-fit:cover;display:block}
+.nav{margin-top:18px;display:flex;gap:14px;align-items:center}
+.nav button{font:inherit;font-size:18px;padding:8px 18px;border:1px solid #9a7a44;background:#fbf7ef;color:var(--ink);border-radius:6px;cursor:pointer}
+.nav span{min-width:90px;text-align:center}
+</style></head><body><div class="wrap">
+<div id="book"><div class="page"><img src="sayfa/01.webp" alt="" loading="eager"></div><div class="page"><img src="sayfa/02.webp" alt="" loading="eager"></div><div class="page"><img src="sayfa/03.webp" alt="" loading="eager"></div><div class="page"><img src="sayfa/04.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/05.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/06.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/07.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/08.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/09.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/10.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/11.webp" alt="" loading="lazy"></div><div class="page"><img src="sayfa/12.webp" alt="" loading="lazy"></div></div>
+<div class="nav"><button id="g">‹ Geri</button><span id="n"></span><button id="i">İleri ›</button></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+const vw=innerWidth-32,vh=innerHeight-110,R=1440/1020;
+const tek=vw<vh*1.1;
+let h=vh,w=h/R; if(tek){ if(w>vw){w=vw;h=w*R;} } else { if(2*w>vw){w=vw/2;h=w*R;} }
+w=Math.floor(w);h=Math.floor(h);
+const pf=new St.PageFlip(document.getElementById('book'),{width:w,height:h,size:'fixed',usePortrait:tek,showCover:true,maxShadowOpacity:.4,mobileScrollSupport:false});
+pf.loadFromHTML(document.querySelectorAll('.page'));
+const n=document.getElementById('n'),T=pf.getPageCount();
+const up=()=>n.textContent=(pf.getCurrentPageIndex()+1)+' / '+T;
+pf.on('flip',up);up();
+document.getElementById('g').onclick=()=>pf.flipPrev();
+document.getElementById('i').onclick=()=>pf.flipNext();
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')pf.flipNext();if(e.key==='ArrowLeft')pf.flipPrev();});
+</script></body></html>
