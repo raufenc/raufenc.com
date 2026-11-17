@@ -4,116 +4,144 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sayfa Bulunamadı — Rauf Enç</title>
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Aradığınız sayfa bulunamadı. Ana sayfaya, projelere ya da iletişime buradan geçebilirsiniz." />
+  <meta name="robots" content="noindex" />
+
+  <!-- Favicon (bu sayfa her adresten sunulur: bütün yollar köke göre mutlak) -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+
+  <!-- Sitenin kendi yazı tipleri (Fraunces + Inter), ana sayfayla aynı dosyalar -->
+  <link rel="preload" href="/lib/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/fraunces-normal-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/lib/fonts/fonts.css" />
   <link rel="stylesheet" href="/lib/design-system/tokens.css" />
   <script src="/lib/design-system/theme.js"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --font-display: 'Fraunces', Georgia, serif;
+      /* Ana sayfadaki okunabilirlik ayarı: koyu temada metin tonları aydınlatıldı */
+      --muted2: #9b9bb8;          /* #0a0a0f üzerinde 7,3:1 */
+      --text-secondary: #b4b4cc;  /* #0a0a0f üzerinde 9,7:1 */
+      --warm-ink: #c8a46e;        /* altın metin, koyu zeminde 8,5:1 */
+    }
+    html.light {
+      --warm-ink: #7a5c2c;        /* altın metin, açık zeminde 5,7:1 */
+    }
+    html { -webkit-text-size-adjust: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-sans);
+      line-height: 1.7;
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
-    .container {
-      text-align: center;
-      max-width: 520px;
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background: radial-gradient(ellipse 60% 45% at 50% 0%, var(--warm-soft) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
     }
+
+    /* ── Üst çubuk: ana sayfadaki logo + tema düğmesi ── */
+    .top {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; width: 100%;
+      margin: 0 auto; padding: 0 24px; height: 58px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--warm); }
+    .theme-btn {
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      padding: 6px 10px; cursor: pointer;
+      color: var(--muted2); display: inline-flex; align-items: center;
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .theme-btn:hover { border-color: var(--warm); color: var(--text); }
+
+    /* ── İçerik ── */
+    main {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 32px 24px 72px;
+    }
+    .container { text-align: center; max-width: 560px; }
     .error-code {
-      font-size: clamp(72px, 15vw, 120px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      background: linear-gradient(135deg, var(--text) 30%, var(--warm) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-family: var(--font-display);
+      font-size: clamp(96px, 22vw, 168px);
+      font-weight: 600;
       line-height: 1;
-      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+    .rule {
+      width: 56px; height: 1.5px;
+      margin: 22px auto 24px;
+      background: linear-gradient(90deg, transparent, var(--warm), transparent);
     }
     h1 {
-      font-size: 22px;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4.6vw, 28px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
       margin-bottom: 12px;
     }
-    p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 32px;
+    p.lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 36px;
     }
     .links {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
+      display: flex; gap: 12px;
+      justify-content: center; flex-wrap: wrap;
     }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: inline-flex; align-items: center; gap: 8px;
       padding: 12px 24px;
       border-radius: var(--radius-full);
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 14px; font-weight: 600;
       text-decoration: none;
-      transition: all 0.25s;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      transition: box-shadow 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
     }
-    .btn-warm {
-      background: var(--warm);
-      color: #0a0a0f;
+    .btn-warm { background: var(--warm); color: #0a0a0f; }
+    .btn-warm:hover { box-shadow: 0 4px 20px var(--warm-glow); transform: translateY(-1px); }
+    .btn-ghost { color: var(--text); border: 1px solid var(--border-hover); }
+    .btn-ghost:hover { border-color: var(--warm); }
+
+    footer {
+      position: relative; z-index: 1;
+      text-align: center; padding: 0 24px 28px;
+      font-size: 12px; color: var(--muted2);
     }
-    .btn-warm:hover {
-      box-shadow: 0 4px 20px var(--warm-glow);
-      transform: translateY(-1px);
+    footer a { color: inherit; }
+
+    @media (max-width: 420px) {
+      .links { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: center; }
     }
-    .btn-ghost {
-      background: transparent;
-      color: var(--muted2);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover {
-      border-color: var(--warm);
-      color: var(--text);
-    }
-    .projects {
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    .projects h2 {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--warm);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    .project-links {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .project-links a {
-      font-size: 13px;
-      color: var(--muted2);
-      text-decoration: none;
-      padding: 6px 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-full);
-      transition: all 0.2s;
-    }
-    .project-links a:hover {
-      border-color: var(--warm);
-      color: var(--text);
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .theme-btn { transition: none; }
+      .btn-warm:hover { transform: none; }
     }
   </style>
   <!-- Vercel Analytics + Speed Insights -->
@@ -121,26 +149,44 @@
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="error-code">404</div>
-    <h1>Sayfa Bulunamadı</h1>
-    <p>Aradığınız sayfa taşınmış, kaldırılmış ya da hiç var olmamış olabilir. Aşağıdaki bağlantılardan devam edebilirsiniz.</p>
-    <div class="links">
-      <a href="/" class="btn btn-warm">Ana Sayfa</a>
-      <a href="/#projeler" class="btn btn-ghost">Projeler</a>
-      <a href="/noroterbiye/" class="btn btn-ghost">NöroTerbiye</a>
+  <header class="top">
+    <a href="/" class="nav-logo" aria-label="Rauf Enç — ana sayfa">rauf<span>enç</span></a>
+    <button class="theme-btn" id="theme-toggle" type="button" aria-label="Temayı değiştir"></button>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="error-code" aria-hidden="true">404</div>
+      <div class="rule" aria-hidden="true"></div>
+      <h1>Bu sayfa bulunamadı</h1>
+      <p class="lead">Aradığınız adres taşınmış ya da kaldırılmış olabilir; dilerseniz aşağıdan devam edebilirsiniz.</p>
+      <nav class="links" aria-label="Devam bağlantıları">
+        <a href="/" class="btn btn-warm">Ana Sayfa</a>
+        <a href="/#projeler" class="btn btn-ghost">Projeler</a>
+        <a href="/#iletisim" class="btn btn-ghost">İletişim</a>
+      </nav>
     </div>
-    <div class="projects">
-      <h2>Popüler Projeler</h2>
-      <div class="project-links">
-        <a href="/noroterbiye/">NöroTerbiye</a>
-        <a href="/sevgili-peygamberim/">Sevgili Peygamberim</a>
-        <a href="/osmanlica/">Osmanlıca Lügat</a>
-        <a href="/ai-atlasi/">AI Atlası</a>
-        <a href="/kalbinin-haritasi/">Kalbinin Haritası</a>
-        <a href="/muallimo/">MUALLİMO</a>
-      </div>
-    </div>
-  </div>
+  </main>
+
+  <footer>Rauf Enç &copy; 2026 &nbsp;·&nbsp; <a href="/gizlilik/">Gizlilik</a></footer>
+
+  <script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    var gunes = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    var ay = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    function guncelle() {
+      var acik = document.documentElement.classList.contains('light');
+      btn.innerHTML = acik ? ay : gunes;
+      btn.setAttribute('aria-label', acik ? 'Gece moduna geç' : 'Gündüz moduna geç');
+    }
+    btn.addEventListener('click', function () {
+      if (window.RaufTheme) window.RaufTheme.toggle();
+      guncelle();
+    });
+    window.addEventListener('theme-changed', guncelle);
+    guncelle();
+  })();
+  </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rauf Enç — Eğitimci · Yazar</title>
-  <meta name="description" content="Rauf Enç — Eğitimci yazar. Nöroterbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
+  <meta name="description" content="Rauf Enç — Eğitimci yazar. NöroTerbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -22,7 +22,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://raufenc.com/" />
   <meta property="og:title" content="Rauf Enç — Eğitimci · Yazar" />
-  <meta property="og:description" content="Nöroterbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
+  <meta property="og:description" content="NöroTerbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
   <meta property="og:image" content="https://raufenc.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -32,7 +32,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Rauf Enç — Eğitimci · Yazar" />
-  <meta name="twitter:description" content="Nöroterbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
+  <meta name="twitter:description" content="NöroTerbiye kitabının yazarı. 30+ dijital eğitim projesi, dil öğrenme uygulamaları ve interaktif içerikler." />
   <meta name="twitter:image" content="https://raufenc.com/images/og-image.jpg" />
 
   <!-- Structured Data -->
@@ -43,14 +43,14 @@
     "name": "Rauf Enç",
     "url": "https://raufenc.com",
     "jobTitle": "Eğitimci · Yazar",
-    "description": "Nöroterbiye kitabının yazarı. Dijital eğitim projeleri geliştiren eğitimci yazar.",
+    "description": "NöroTerbiye kitabının yazarı. Dijital eğitim projeleri geliştiren eğitimci yazar.",
     "image": "https://raufenc.com/images/raufenc.jpeg",
     "sameAs": [
       "https://www.youtube.com/@raufenc",
       "https://www.instagram.com/raufenc",
       "https://x.com/raufenc"
     ],
-    "knowsAbout": ["Eğitim", "Nörobilim", "Dijital İçerik", "İslam Bilimleri"],
+    "knowsAbout": ["Eğitim", "Nörobilim", "Dijital İçerik", "İslâmî İlimler"],
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://raufenc.com"
@@ -78,7 +78,7 @@
       "url": "https://raufenc.com"
     },
     "url": "https://raufenc.com/noroterbiye/",
-    "description": "Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Nörobilim ve İslam ahlak geleneğini birleştiren bir rehber.",
+    "description": "Neden hep aynı hataları tekrarlıyoruz? Beynindeki düşmanı tanı, nefsinle yüzleş. Nörobilim ve İslâm ahlâk geleneğini birleştiren bir rehber.",
     "inLanguage": "tr",
     "numberOfPages": 272,
     "bookFormat": "https://schema.org/Hardcover",
@@ -130,6 +130,8 @@
       --muted: #5d5d7e;
       --muted2: #9b9bb8;
       --text-secondary: #b4b4cc;
+      /* Altın ZEMİN (üstünde koyu yazı): iki temada da aynı açık altın */
+      --warm-bg: #c8a46e;
     }
     html.light {
       --ghost-stroke: rgba(26,26,46,0.08);
@@ -137,6 +139,10 @@
       --hair1: rgba(20,20,45,0.16);
       --hair2: rgba(20,20,45,0.05);
       --hair3: rgba(160,120,60,0.3);
+      /* Açık zeminde altın YAZI koyulaştırıldı: #f0f0f5 üstünde 5,2:1, #f5f5fa 5,5:1, #fff 6,0:1 */
+      --warm: #7d5f2a;
+      /* Altın geçişli yazıların açık durağı (koyu temada her kural kendi açık tonunu kullanır) */
+      --warm-hi: #a07a3c;
     }
     html { scroll-behavior: smooth; }
 
@@ -147,7 +153,7 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-    ::selection { background: var(--warm); color: #0a0a0f; }
+    ::selection { background: var(--warm-bg); color: #0a0a0f; }
 
     /* ── Ambient aurora ── */
     body::before {
@@ -292,7 +298,7 @@
       color: var(--text); cursor: pointer;
       padding: 4px; z-index: 52; position: relative;
     }
-    .hamburger svg { width: 22px; height: 22px; }
+    .hamburger svg { width: 22px; height: 22px; display: block; }
 
     /* Tam ekran mobil menü */
     .mobile-menu {
@@ -313,6 +319,8 @@
     }
     .mobile-menu.open { opacity: 1; visibility: visible; }
     body.menu-open { overflow: hidden; }
+    /* Menü açıkken üst çubuk (kapatma düğmesi) menünün üstünde kalır */
+    body.menu-open .site-nav { z-index: 52; }
     .mobile-menu a {
       color: var(--text); font-size: 32px; font-weight: 700;
       font-family: var(--font-display);
@@ -333,7 +341,7 @@
     .mobile-menu a:hover { color: var(--warm); padding-left: 10px; }
     .mobile-menu .mm-divider {
       border: none; padding: 16px 0 6px;
-      font-size: 10px; color: var(--muted);
+      font-size: 10px; color: var(--muted2);
       text-transform: uppercase; letter-spacing: 0.15em; font-weight: 700;
       font-family: var(--font-sans);
     }
@@ -424,7 +432,7 @@
       animation-delay: calc(var(--i) * 45ms + 150ms);
     }
     .hero h1 .lt.gold {
-      background: linear-gradient(135deg, var(--warm) 20%, #e8cfa0 55%, var(--warm) 90%);
+      background: linear-gradient(135deg, var(--warm) 20%, var(--warm-hi, #e8cfa0) 55%, var(--warm) 90%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -458,7 +466,7 @@
     .rot span {
       display: block; height: 1.5em; line-height: 1.5;
       font-style: italic; font-weight: 700;
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi, #e0c08a));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -587,7 +595,7 @@
       animation: chipFloat 5.5s ease-in-out infinite alternate;
       white-space: nowrap;
     }
-    .hero-chip b { font-weight: 400; font-size: 14px; }
+    .hero-chip b { font-weight: 400; font-size: 14px; display: inline-flex; }
     .chip-1 { top: 6%; left: -4%; animation-delay: 0s; }
     .chip-2 { top: 36%; right: -10%; animation-delay: 1.4s; }
     .chip-3 { bottom: 5%; left: 2%; animation-delay: 2.6s; }
@@ -601,7 +609,7 @@
     .scroll-hint {
       position: absolute; left: 24px; bottom: 86px;
       display: flex; align-items: center; gap: 12px;
-      font-size: 10px; font-weight: 700; color: var(--muted);
+      font-size: 10px; font-weight: 700; color: var(--muted2);
       letter-spacing: 0.3em; text-transform: uppercase;
       writing-mode: vertical-rl;
       z-index: 3;
@@ -656,14 +664,14 @@
         0 0 30px var(--warm-glow);
     }
     .stat-item:hover::before { opacity: 1; }
-    .stat-icon { font-size: 19px; margin-bottom: 10px; opacity: 0.85; }
+    .stat-icon { font-size: 19px; margin-bottom: 10px; opacity: 0.85; display: flex; }
     .stat-number {
       font-family: var(--font-display);
       font-size: clamp(30px, 4vw, 44px);
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.05;
-      background: linear-gradient(135deg, var(--warm) 25%, #e3c896 60%, var(--warm) 95%);
+      background: linear-gradient(135deg, var(--warm) 25%, var(--warm-hi, #e3c896) 60%, var(--warm) 95%);
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -716,7 +724,7 @@
     }
     .section-title em {
       font-style: italic;
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi, #e0c08a));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -774,7 +782,7 @@
       transform: translateY(-3px) rotate(-1deg);
       box-shadow: 0 8px 20px var(--warm-glow);
     }
-    .skill-tag .skill-icon { font-size: 14px; }
+    .skill-tag .skill-icon { font-size: 14px; display: inline-flex; }
 
     /* Zaman çizgisi — scroll'da çizilir */
     .journey-timeline { position: relative; padding-left: 30px; }
@@ -1133,7 +1141,7 @@
       transition: background 0.3s, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s;
     }
     .bento-card:hover .bento-arrow {
-      background: var(--warm);
+      background: var(--warm-bg);
       color: #0a0a0f;
       transform: rotate(45deg) scale(1.08);
     }
@@ -1208,7 +1216,7 @@
       transition: border-color 0.25s, box-shadow 0.25s;
       outline: none;
     }
-    #search::placeholder { color: var(--muted); }
+    #search::placeholder { color: var(--muted2); }
     #search:focus {
       border-color: var(--warm);
       box-shadow: 0 0 0 4px var(--warm-soft), 0 4px 20px var(--warm-glow);
@@ -1235,7 +1243,7 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 26px 0 18px;
     }
-    .results-count { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+    .results-count { font-size: 11px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.12em; }
     .clear-btn {
       font-size: 11px; color: var(--muted2); background: none; border: none;
       cursor: pointer; font-family: inherit; padding: 0;
@@ -1314,12 +1322,16 @@
     .tag-yazı       { background: rgba(251,191,36,0.12); color: #fcd34d; }
     .tag-ansiklopedi{ background: rgba(168,85,247,0.12); color: #c084fc; }
     .tag-rehber     { background: rgba(139,92,246,0.12); color: #a78bfa; }
+    .tag-koleksiyon { background: rgba(6,182,212,0.12);  color: #22d3ee; }
+    .tag-şiir       { background: rgba(200,164,110,0.14); color: #e0c08a; }
     .tag-varsayılan { background: var(--accent-soft);    color: var(--accent); }
     html.light .tag-oyun       { color: #047857; }
     html.light .tag-uygulama   { color: #4f46e5; }
     html.light .tag-sunum      { color: #be185d; }
     html.light .tag-ansiklopedi{ color: #7e22ce; }
     html.light .tag-rehber     { color: #6d28d9; }
+    html.light .tag-koleksiyon { color: #0e7490; }
+    html.light .tag-şiir       { color: #7d5f2a; }
 
     .card-arrow {
       color: var(--muted); width: 14px; height: 14px;
@@ -1384,7 +1396,7 @@
     }
     html.js .motto-quote.lit .w { clip-path: inset(-0.2em -0.15em -0.3em -0.15em); transform: none; }
     .motto-quote .w.gold {
-      background: linear-gradient(120deg, var(--warm), #e0c08a);
+      background: linear-gradient(120deg, var(--warm), var(--warm-hi, #e0c08a));
       -webkit-background-clip: text; background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -1430,7 +1442,7 @@
       transition: border-color 0.25s, box-shadow 0.25s;
       width: 100%;
     }
-    .field::placeholder { color: var(--muted); }
+    .field::placeholder { color: var(--muted2); }
     .field:focus {
       border-color: var(--warm);
       box-shadow: 0 0 0 4px var(--warm-soft);
@@ -1494,7 +1506,7 @@
     .social-link:hover svg { color: var(--brand, var(--warm)); transform: scale(1.15); }
     .social-link .sl-meta { display: flex; flex-direction: column; min-width: 0; }
     .social-link .sl-sub {
-      font-size: 10px; color: var(--muted); font-weight: 500;
+      font-size: 10px; color: var(--muted2); font-weight: 500;
       margin-top: 2px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
@@ -1508,14 +1520,14 @@
       text-align: right;
     }
     .last-update span {
-      font-size: 11px; color: var(--muted);
+      font-size: 11px; color: var(--muted2);
       letter-spacing: 0.05em;
     }
 
     /* ── FOOTER ── */
     footer {
       text-align: center; padding: 64px 24px 36px;
-      color: var(--muted); font-size: 12px;
+      color: var(--muted2); font-size: 12px;
       border-top: 1px solid var(--border);
       position: relative; z-index: 1;
       overflow: hidden;
@@ -1543,13 +1555,13 @@
     }
     .footer-tagline {
       font-size: 14px; color: var(--muted2);
-      margin: 18px 0 22px;
+      margin: 18px 0 10px;
       font-style: italic;
       font-family: var(--font-display);
     }
     .footer-links {
-      display: flex; gap: 22px; justify-content: center;
-      margin-bottom: 22px; flex-wrap: wrap;
+      display: flex; gap: 0 10px; justify-content: center;
+      margin-bottom: 10px; flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--muted2); text-decoration: none;
@@ -1557,12 +1569,46 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--warm); }
-    footer .copyright { font-size: 11px; color: var(--muted); }
+    footer .copyright { font-size: 11px; color: var(--muted2); }
     footer .copyright a {
       color: var(--muted2); text-decoration: none;
       transition: color 0.2s;
     }
     footer .copyright a:hover { color: var(--warm); }
+
+    /* ── ÇİZGİ SİMGELER (emoji yerine; <symbol>ler gövde başındaki gizli svg içinde) ── */
+    .ico {
+      width: 1em; height: 1em; flex-shrink: 0;
+      color: var(--warm);
+      fill: none; stroke: currentColor; stroke-width: 1.6;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hero-chip .ico { width: 16px; height: 16px; }
+    .stat-icon .ico { width: 24px; height: 24px; }
+    .skill-tag .ico { width: 16px; height: 16px; }
+
+    /* ── DOKUNMA ALANLARI (≥44×44; görünüm büyümez) ── */
+    .theme-btn, .filter-btn, .daha-fazla { position: relative; }
+    .theme-btn::after { content: ''; position: absolute; inset: -8px -4px; }
+    .filter-btn::after { content: ''; position: absolute; inset: -5px -4px; }
+    .daha-fazla::after { content: ''; position: absolute; inset: -5px -2px; }
+    .vt-play::after { content: ''; position: absolute; inset: -9px; border-radius: inherit; }
+    .footer-links a { display: inline-block; padding: 12px 6px; line-height: 20px; }
+    footer .copyright a { display: inline-block; padding: 13px 4px; margin: -13px -4px; }
+
+    /* Açık temada --warm koyu altındır; altın ZEMİNLİ, koyu yazılı video düğmeleri açık altında kalır */
+    html.light .vt-play:hover, html.light .vt-play:focus-visible,
+    html.light .vt-btn.primary { background: var(--warm-bg); border-color: var(--warm-bg); color: #0a0a0f; }
+
+    /* İletişim yedeği: adres seçilip kopyalanabilsin */
+    .eposta-adres { user-select: all; -webkit-user-select: all; font-weight: 700; color: var(--text); white-space: nowrap; }
+    .eposta-kopyala {
+      margin-left: 6px; padding: 2px 10px; border-radius: var(--radius-full);
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      font: 600 12px/1.6 var(--font-sans); cursor: pointer; position: relative;
+    }
+    .eposta-kopyala::after { content: ''; position: absolute; inset: -11px -4px; }
+    .eposta-kopyala:hover { border-color: var(--warm); color: var(--warm); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 980px) {
@@ -1578,17 +1624,21 @@
       .hero { min-height: auto; padding: 120px 0 70px; }
       .hero-inner { grid-template-columns: 1fr; gap: 18px; text-align: center; }
       /* Tek sütunda sıra: etiket → isim → slogan → CTA → fotoğraf */
-      .hero-visual { height: 320px; margin-top: 8px; }
+      /* Fotoğraf yığınının üstünde ve altında etiketlere yer açılır */
+      .hero-visual { height: 384px; margin-top: 8px; overflow: hidden; } /* dönen yörünge kutusunun köşeleri yatay taşma yapmasın */
       .hero-photo-stack { width: 280px; height: 280px; transform: translate(-50%, -50%); }
       .hero-photo-frame { inset: 46px; }
       .hero-ring { inset: 35px; }
       .hero-label { justify-content: center; }
       .hero-desc { margin: 0 auto; font-size: 14px; }
       .hero-cta { justify-content: center; }
-      .chip-1 { top: 0; left: 0; }
-      .chip-2 { top: 40%; right: -2%; }
-      .chip-3 { bottom: 0; left: 6%; }
-      .chip-4 { bottom: 13%; right: 0; }
+      /* Etiketler halkanın DIŞINDA: ikisi üstte, ikisi altta, ortadan iki yana açılır.
+         Yüzü, gözlüğü ve dönen yazıyı örtmez; dar ekranda da taşmaz. */
+      .hero-chip { padding: 7px 13px; font-size: 11.5px; }
+      .chip-1, .chip-2 { top: -44px; bottom: auto; }
+      .chip-3, .chip-4 { bottom: -44px; top: auto; }
+      .chip-1, .chip-3 { left: auto; right: calc(50% + 5px); }
+      .chip-2, .chip-4 { right: auto; left: calc(50% + 5px); }
       .scroll-hint { display: none; }
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .stat-item { padding: 20px; }
@@ -1607,7 +1657,9 @@
       .ghost-word { font-size: clamp(70px, 18vw, 120px); }
       .motto-section { padding: 72px 24px; }
       .motto-mark { font-size: 130px; }
-      .footer-links { gap: 16px; }
+      .footer-links { gap: 0 4px; }
+      /* Hamburger: görünür simge aynı, dokunma alanı 44×44 */
+      .hamburger { padding: 11px; margin: -11px -7px; }
     }
     /* Bento responsive — tablet: 2 sütunlu asimetri, dikey videolar dikey kalır */
     @media (max-width: 900px) {
@@ -1642,10 +1694,11 @@
       .b-cihan-serisi{ grid-column: 1 / span 2; grid-row: 7; }
       .bento-card { border-radius: 16px; }
       .bento-content { padding: 12px 13px; gap: 3px; }
-      .bento-title { font-size: 16px; }
-      .bento-wide .bento-title { font-size: 16px; }
+      /* Başlık kesilmesin: 14px, gerekirse kelime içinden değil satır sonundan bölünür */
+      .bento-title, .bento-wide .bento-title { font-size: 14px; overflow-wrap: anywhere; hyphens: none; -webkit-hyphens: none; }
       .bento-desc { font-size: 11.5px; line-height: 1.45; max-width: none; }
-      .bento-tag { font-size: 8.5px; padding: 3px 8px; margin-bottom: 4px; letter-spacing: 0.08em; }
+      /* 11px'te uzun etiket ("Kitap · Uygulama") dar karoda iki satıra inebilir: hap yerine yumuşak köşe */
+      .bento-tag { font-size: 11px; line-height: 1.35; padding: 3px 8px; margin-bottom: 4px; letter-spacing: 0.04em; border-radius: 9px; }
       .bento-index { font-size: 11px; top: 10px; left: 12px; }
       .bento-index::after { width: 14px; }
       .bento-card .bento-arrow { width: 28px; height: 28px; top: 9px; right: 9px; }
@@ -1671,7 +1724,9 @@
         display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;
         overflow: hidden;
       }
-      #grid .card-tag { font-size: 9px; padding: 2px 7px; letter-spacing: 0.04em; }
+      #grid .card-tag { font-size: 11px; padding: 2px 7px; letter-spacing: 0.02em; }
+      #vt-raf .vt-reel .vt-cat { font-size: 11px; letter-spacing: 0.08em; }
+      .journey-step-label, .book-highlight-label, .social-link .sl-sub { font-size: 11px; }
       #grid .card-arrow { display: none; }
       #grid .vt-media { border-radius: 9px; margin-bottom: 0; }
       #grid .vt-play { padding: 6px; }
@@ -1705,6 +1760,22 @@
 </head>
 <body data-nav-skip="true">
 <a href="#main" class="skip-link">Ana içeriğe geç</a>
+<!-- Çizgi simgeler (24×24, stroke=currentColor; .ico ile çizilir) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-kubbe" viewBox="0 0 24 24"><path d="M12 2.5v3"/><path d="M10.6 3.4a1.5 1.5 0 0 0 2.8 0"/><path d="M5.5 12.5a6.5 6.5 0 0 1 13 0"/><path d="M4.5 12.5h15"/><path d="M6 12.5V21h12v-8.5"/><path d="M10.2 21v-3.2a1.8 1.8 0 0 1 3.6 0V21"/><path d="M3 21h18"/></symbol>
+  <symbol id="i-beyin" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.6 6.5a3 3 0 0 0 .4-1.375"/><path d="M6 5.125A3 3 0 0 0 6.4 6.5"/><path d="M3.48 10.9a4 4 0 0 1 .58-.4"/><path d="M19.94 10.5a4 4 0 0 1 .58.4"/><path d="M6 18a4 4 0 0 1-1.97-.52"/><path d="M19.97 17.48A4 4 0 0 1 18 18"/></symbol>
+  <symbol id="i-cip" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></symbol>
+  <symbol id="i-disli" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-katman" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m2 12.5 9.17 4.16a2 2 0 0 0 1.66 0L22 12.5"/><path d="m2 17.5 9.17 4.16a2 2 0 0 0 1.66 0L22 17.5"/></symbol>
+  <symbol id="i-kartlar" viewBox="0 0 24 24"><path d="M8 4.5V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-.5"/><rect x="4" y="6" width="12" height="16" rx="2"/><path d="M7.5 11h5M7.5 14.5h5M7.5 18h3"/></symbol>
+  <symbol id="i-oyun" viewBox="0 0 24 24"><path d="M6 11h4M8 9v4"/><path d="M15 12h.01M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59C2.6 9.42 2 14.46 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.41.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.55-.6-6.58-.69-7.26A4 4 0 0 0 17.32 5z"/></symbol>
+  <symbol id="i-sayfa" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8M8 17h8M8 9h2"/></symbol>
+  <symbol id="i-dizustu" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></symbol>
+  <symbol id="i-kalem" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.38 3.62a2.12 2.12 0 0 1 3 3L7.37 18.64a2 2 0 0 1-.86.5l-2.87.84a.5.5 0 0 1-.62-.62l.84-2.87a2 2 0 0 1 .5-.86z"/></symbol>
+  <symbol id="i-kitap" viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+  <symbol id="i-tikla" viewBox="0 0 24 24"><path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.04 9.69a.5.5 0 0 1 .65-.65l11 4.5a.5.5 0 0 1-.07.95l-4.35 1.04a1 1 0 0 0-.74.74l-1.04 4.35a.5.5 0 0 1-.95.07z"/></symbol>
+  <symbol id="i-gonye" viewBox="0 0 24 24"><path d="M3 21V3l18 18Z"/><path d="M7 17v-4.5l4.5 4.5Z"/><path d="M3 7h2M3 11h2M3 15h1.5"/></symbol>
+</svg>
 
 <!-- Scroll progress -->
 <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
@@ -1715,7 +1786,7 @@
 <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
 <!-- Mobil menü (tam ekran) -->
-<div class="mobile-menu" id="mobile-menu">
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Gezinme menüsü">
   <a href="#hakkinda" onclick="closeMobileMenu()">Hakkında</a>
   <a href="#kitap" onclick="closeMobileMenu()">Kitap</a>
   <a href="#projeler" onclick="closeMobileMenu()">Projeler</a>
@@ -1746,7 +1817,7 @@
         <a href="/videolar/">Videolar</a>
         <a href="#iletisim">İletişim</a>
       </div>
-      <button class="hamburger" id="hamburger" type="button" aria-label="Gezinme menüsünü aç" aria-expanded="false">
+      <button class="hamburger" id="hamburger" type="button" aria-label="Gezinme menüsünü aç" aria-expanded="false" aria-controls="mobile-menu">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
       <button class="theme-btn" id="theme-toggle" type="button" aria-label="Temayı değiştir">
@@ -1795,7 +1866,7 @@
         <div class="hero-cta">
           <a href="/noroterbiye/" class="btn btn-warm magnetic">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            Nöroterbiye
+            NöroTerbiye
           </a>
           <a href="#projeler" class="btn btn-ghost magnetic">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -1817,10 +1888,10 @@
               <img src="/images/raufenc-512.jpg" alt="Rauf Enç" width="250" height="250" fetchpriority="high" decoding="async" />
             </picture>
           </div>
-          <span class="hero-chip chip-1"><b>🕌</b> İslamî İlimler</span>
-          <span class="hero-chip chip-2"><b>🧠</b> Nörobilim</span>
-          <span class="hero-chip chip-3"><b>🤖</b> Yapay Zekâ</span>
-          <span class="hero-chip chip-4"><b>⚙️</b> Mühendislik</span>
+          <span class="hero-chip chip-1"><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-kubbe"/></svg></b> İslâmî İlimler</span>
+          <span class="hero-chip chip-2"><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-beyin"/></svg></b> Nörobilim</span>
+          <span class="hero-chip chip-3"><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-cip"/></svg></b> Yapay Zekâ</span>
+          <span class="hero-chip chip-4"><b><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-disli"/></svg></b> Mühendislik</span>
         </div>
       </div>
     </div>
@@ -1832,22 +1903,22 @@
   <div class="wrap">
     <div class="stats-inner">
       <div class="stat-item spot">
-        <div class="stat-icon">📦</div>
+        <div class="stat-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-katman"/></svg></div>
         <div class="stat-number" id="stat-proje" data-target="30">30+</div>
         <div class="stat-label">Dijital Proje</div>
       </div>
       <div class="stat-item spot">
-        <div class="stat-icon">🃏</div>
+        <div class="stat-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-kartlar"/></svg></div>
         <div class="stat-number" data-target="2661">2.661+</div>
         <div class="stat-label">Eğitim Kartı</div>
       </div>
       <div class="stat-item spot">
-        <div class="stat-icon">🎮</div>
+        <div class="stat-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-oyun"/></svg></div>
         <div class="stat-number" data-target="50">50+</div>
         <div class="stat-label">Oyun &amp; Quiz</div>
       </div>
       <div class="stat-item spot">
-        <div class="stat-icon">📄</div>
+        <div class="stat-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-sayfa"/></svg></div>
         <div class="stat-number" data-target="1000">1.000+</div>
         <div class="stat-label">Sayfa İçerik</div>
       </div>
@@ -1871,14 +1942,14 @@
         <div class="about-areas">
           <h3>İlgi Alanları</h3>
           <div class="skill-tags">
-            <span class="skill-tag"><span class="skill-icon">🧠</span> Nörobilim</span>
-            <span class="skill-tag"><span class="skill-icon">🕌</span> İslam Bilimleri</span>
-            <span class="skill-tag"><span class="skill-icon">💻</span> EdTech</span>
-            <span class="skill-tag"><span class="skill-icon">✍️</span> Yazarlık</span>
-            <span class="skill-tag"><span class="skill-icon">🤖</span> Yapay Zeka</span>
-            <span class="skill-tag"><span class="skill-icon">📚</span> Dil Eğitimi</span>
-            <span class="skill-tag"><span class="skill-icon">🎨</span> İnteraktif İçerik</span>
-            <span class="skill-tag"><span class="skill-icon">📐</span> Eğitim Tasarımı</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-beyin"/></svg></span> Nörobilim</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-kubbe"/></svg></span> İslâmî İlimler</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-dizustu"/></svg></span> EdTech</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-kalem"/></svg></span> Yazarlık</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-cip"/></svg></span> Yapay Zekâ</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-kitap"/></svg></span> Dil Eğitimi</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-tikla"/></svg></span> İnteraktif İçerik</span>
+            <span class="skill-tag"><span class="skill-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><use href="#i-gonye"/></svg></span> Eğitim Tasarımı</span>
           </div>
         </div>
       </div>
@@ -1891,12 +1962,12 @@
         <div class="journey-step">
           <div class="journey-step-label">Dönüşüm</div>
           <div class="journey-step-title">İlahiyat Fakültesi</div>
-          <div class="journey-step-desc">Ankara Üniversitesi — İslam bilimleri ve eğitim</div>
+          <div class="journey-step-desc">Ankara Üniversitesi — İslâmî ilimler ve eğitim</div>
         </div>
         <div class="journey-step">
           <div class="journey-step-label">Uygulama</div>
           <div class="journey-step-title">Eğitimci &amp; Yazar</div>
-          <div class="journey-step-desc">30+ dijital proje, interaktif uygulamalar ve Nöroterbiye kitabı</div>
+          <div class="journey-step-desc">30+ dijital proje, interaktif uygulamalar ve NöroTerbiye kitabı</div>
         </div>
         <div class="journey-step">
           <div class="journey-step-label">Misyon</div>
@@ -1920,7 +1991,7 @@
           <div class="bk-front">
             <picture>
               <source type="image/avif" srcset="/images/noroterbiye-240.avif 240w, /images/noroterbiye-480.avif 480w" sizes="(max-width: 860px) 190px, 230px" />
-              <img src="/images/noroterbiye-480.webp" srcset="/images/noroterbiye-240.webp 240w, /images/noroterbiye-480.webp 480w" sizes="(max-width: 860px) 190px, 230px" alt="Nöroterbiye — Rauf Enç" width="230" height="354" loading="lazy" decoding="async" />
+              <img src="/images/noroterbiye-480.webp" srcset="/images/noroterbiye-240.webp 240w, /images/noroterbiye-480.webp 480w" sizes="(max-width: 860px) 190px, 230px" alt="NöroTerbiye — Rauf Enç" width="230" height="354" loading="lazy" decoding="async" />
             </picture>
           </div>
           <div class="bk-pages" aria-hidden="true"></div>
@@ -1928,10 +1999,10 @@
       </div>
       <div class="book-info">
         <span class="section-label">Kitap</span>
-        <h3>İçimizdeki Düşmanı <br/><em style="font-style:italic;background:linear-gradient(120deg,var(--warm),#e0c08a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Dosta Çevirmek</em></h3>
+        <h3>İçimizdeki Düşmanı <br/><em style="font-style:italic;background:linear-gradient(120deg,var(--warm),var(--warm-hi,#e0c08a));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Dosta Çevirmek</em></h3>
         <p class="tagline">Neden hep aynı hataları tekrarlıyoruz?</p>
         <p>
-          "Bunu neden yaptım?" diye pişmanlık duyduğun anlar ne kadar sık? Belki sabah "artık telefonumu azaltacağım" deyip akşamın nasıl geldiğini bile fark etmiyorsun. Nöroterbiye işte tam da bu döngüye ayna tutuyor.
+          "Bunu neden yaptım?" diye pişmanlık duyduğun anlar ne kadar sık? Belki sabah "artık telefonumu azaltacağım" deyip akşamın nasıl geldiğini bile fark etmiyorsun. NöroTerbiye işte tam da bu döngüye ayna tutuyor.
         </p>
         <div class="book-highlights">
           <div class="book-highlight">
@@ -2012,7 +2083,7 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">7 proje</span>
+          <span class="bento-tag">8 proje</span>
           <h3 class="bento-title">Dil &amp; Söz</h3>
           <p class="bento-desc">İngilizce, Arapça, Osmanlıca — kelime ve hat.</p>
         </div>
@@ -2058,7 +2129,7 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </div>
         <div class="bento-content">
-          <span class="bento-tag">3 proje</span>
+          <span class="bento-tag">4 proje</span>
           <h3 class="bento-title">Peygamberim &amp; Ahlâk</h3>
           <p class="bento-desc">Siyer atlası, çocuk ahlâk müfredatı ve Doğru Taraf.</p>
         </div>
@@ -2197,7 +2268,7 @@
 
       <div class="results-bar">
         <span class="results-count" id="results-count"></span>
-        <button class="clear-btn" id="clear-btn" onclick="clearFilters()">Filtreyi temizle</button>
+        <button type="button" class="clear-btn" id="clear-btn" onclick="clearFilters()">Filtreyi temizle</button>
       </div>
 
       <div id="grid">
@@ -2207,7 +2278,7 @@
         <div id="empty">
           <p>&#128270;</p>
           <p>Aramanla eşleşen proje bulunamadı.</p>
-          <button onclick="clearFilters()" style="margin-top:12px;padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:0.85rem;cursor:pointer;transition:all 0.2s">Filtreleri temizle</button>
+          <button type="button" onclick="clearFilters()" style="margin-top:12px;padding:8px 20px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:0.85rem;cursor:pointer;transition:all 0.2s">Filtreleri temizle</button>
         </div>
       </div>
       <div class="daha-fazla-wrap">
@@ -2226,7 +2297,7 @@
 <div class="motto-section">
   <span class="motto-mark" aria-hidden="true">"</span>
   <p class="motto-quote" id="motto">Asıl düşman dışarıda değil, içeridedir. Ve en büyük zafer, o düşmanı <b class="g">dosta</b> çevirmektir.</p>
-  <span class="motto-attr">Nöroterbiye</span>
+  <span class="motto-attr">NöroTerbiye</span>
 </div>
 
 
@@ -2355,7 +2426,16 @@
       return 'mailto:' + _e + '?subject=' + encodeURIComponent(konu) + '&body=' + encodeURIComponent(govde);
     }
     function epostayaDus(v) {
-      durumYaz('', 'Mesajınız e-posta uygulamanızda hazırlandı; açılan pencerede «Gönder»e basmanız yeterli.');
+      durumYaz('', 'Mesajınız e-posta uygulamanızda hazırlandı; açılan pencerede «Gönder»e basmanız yeterli. ' +
+        'E-posta uygulaması açılmadıysa şu adrese yazabilirsiniz: <span class="eposta-adres">' + _e + '</span>' +
+        '<button type="button" class="eposta-kopyala" id="eposta-kopyala">Adresi kopyala</button>');
+      var kopyala = document.getElementById('eposta-kopyala');
+      if (kopyala) {
+        if (!navigator.clipboard) kopyala.remove();
+        else kopyala.addEventListener('click', function() {
+          navigator.clipboard.writeText(_e).then(function() { kopyala.textContent = 'Kopyalandı'; }, function() {});
+        });
+      }
       window.location.href = mailtoAdresi(v);
     }
 
@@ -2423,10 +2503,13 @@
 
   // ── BASLAT ──
   function baslat() {
-    var tagSet = ['Tümü'];
+    // Sabit sıra; veride olmayan etiket gösterilmez, listede olmayanlar sona eklenir
+    var SIRA = ['Uygulama', 'Oyun', 'Ansiklopedi', 'Sunum', 'Rehber'];
     var seen = {};
+    anaSayfaProjeleri.forEach(function(p) { seen[p.tag] = true; });
+    var tagSet = ['Tümü'].concat(SIRA.filter(function(t) { return seen[t]; }));
     anaSayfaProjeleri.forEach(function(p) {
-      if (!seen[p.tag]) { seen[p.tag] = true; tagSet.push(p.tag); }
+      if (tagSet.indexOf(p.tag) === -1) tagSet.push(p.tag);
     });
 
     var filtersEl = document.getElementById('filters');
@@ -2490,7 +2573,8 @@
       'Yarışma': 'tag-yarışma', 'Alıştırma': 'tag-alıştırma',
       'Sunum': 'tag-sunum', 'Yazı': 'tag-yazı',
       'Ansiklopedi': 'tag-ansiklopedi',
-      'Rehber': 'tag-rehber'
+      'Rehber': 'tag-rehber',
+      'Koleksiyon': 'tag-koleksiyon', 'Şiir': 'tag-şiir'
     };
     return map[tag] || 'tag-varsayılan';
   }
@@ -2501,7 +2585,9 @@
       'Ansiklopedi': 'background:rgba(168,85,247,0.1)',
       'Oyun': 'background:rgba(16,185,129,0.1)',
       'Sunum': 'background:rgba(236,72,153,0.1)',
-      'Rehber': 'background:rgba(139,92,246,0.1)'
+      'Rehber': 'background:rgba(139,92,246,0.1)',
+      'Koleksiyon': 'background:rgba(6,182,212,0.1)',
+      'Şiir': 'background:rgba(200,164,110,0.12)'
     };
     return map[tag] || 'background:var(--surface2)';
   }
@@ -2607,7 +2693,8 @@
 
   // Sayılar tek kaynaktan (data/projeler.js): toplam proje ve vitrin kapılarındaki proje adedi
   var statProje = document.getElementById('stat-proje');
-  if (statProje && typeof PROJELER !== 'undefined') statProje.dataset.target = PROJELER.length;
+  // Izgara ile aynı dizi: ana sayfada gösterilen projeler
+  if (statProje) statProje.dataset.target = anaSayfaProjeleri.length;
   if (typeof kategoriProjeleri === 'function') {
     document.querySelectorAll('.bento-card[data-kategori]').forEach(function(kart) {
       var adet = kategoriProjeleri(kart.dataset.kategori).length;
@@ -2881,20 +2968,41 @@
   var mobileMenu = document.getElementById('mobile-menu');
   var ICON_OPEN = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>';
   var ICON_BARS = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>';
-  window.closeMobileMenu = function() {
+  var menuLinkleri = Array.prototype.slice.call(mobileMenu.querySelectorAll('a'));
+  // odakDon: Esc ya da düğmeyle kapanınca odak hamburgere döner; bağlantıya
+  // tıklanınca tarayıcı bağlantının hedefine gider, odak çekilmez.
+  window.closeMobileMenu = function(odakDon) {
+    var acikti = mobileMenu.classList.contains('open');
     mobileMenu.classList.remove('open');
     document.body.classList.remove('menu-open');
     hamburgerBtn.innerHTML = ICON_BARS;
     hamburgerBtn.setAttribute('aria-expanded', 'false');
+    hamburgerBtn.setAttribute('aria-label', 'Gezinme menüsünü aç');
+    if (acikti && odakDon === true) hamburgerBtn.focus({ preventScroll: true });
   };
+  function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    document.body.classList.add('menu-open');
+    hamburgerBtn.innerHTML = ICON_OPEN;
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    hamburgerBtn.setAttribute('aria-label', 'Gezinme menüsünü kapat');
+    // visibility geçişinin ilk anında bağlantılar henüz odaklanamaz; kısa bekleyip odaklan
+    setTimeout(function() { if (menuLinkleri[0]) menuLinkleri[0].focus({ preventScroll: true }); }, 60);
+  }
   hamburgerBtn.addEventListener('click', function() {
-    var isOpen = mobileMenu.classList.toggle('open');
-    document.body.classList.toggle('menu-open', isOpen);
-    hamburgerBtn.innerHTML = isOpen ? ICON_OPEN : ICON_BARS;
-    hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    if (mobileMenu.classList.contains('open')) closeMobileMenu(true);
+    else openMobileMenu();
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMobileMenu();
+    if (!mobileMenu.classList.contains('open')) return;
+    if (e.key === 'Escape') { e.preventDefault(); closeMobileMenu(true); return; }
+    if (e.key !== 'Tab') return;
+    // Odak menü içinde döner (kapatma düğmesi olan hamburger de halkada)
+    var halka = menuLinkleri.concat([hamburgerBtn]);
+    var i = halka.indexOf(document.activeElement);
+    var sonraki = e.shiftKey ? (i <= 0 ? halka.length - 1 : i - 1) : (i === -1 || i === halka.length - 1 ? 0 : i + 1);
+    e.preventDefault();
+    halka[sonraki].focus();
   });
 
   // ── SCROLL: nav + progress + back-to-top + ghost parallax ──
@@ -3039,45 +3147,78 @@
     }
   }
 
-  // ── BENTO VIDEO LAZY-PLAY (autoplay block guard) ──
-  // preload="none": video ancak karta gelince yüklenir (sayfa yükü hafif kalır)
+  // ── BENTO VİDEOLARI ──
+  // preload="none": video ancak oynatılınca yüklenir.
+  // Dokunmatik ya da dar ekranda (≤900px) vitrin videoları hiç yüklenmez, poster kalır.
+  // Masaüstünde NöroTerbiye karosu yalnız üzerine gelince/odaklanınca oynar (ilk kareleri
+  // koyu; görünür olunca oynasa en büyük karo boş görünür); ayrılınca postere döner.
+  // Diğer karolar görünür oldukça oynar.
   var bentoVideos = document.querySelectorAll('.bento-card video');
+  var vitrinVideoKapali = window.matchMedia('(hover: none), (max-width: 900px)');
   if (bentoVideos.length && !prefersReduced) {
     bentoVideos.forEach(function(v) {
       v.addEventListener('playing', function() { v.classList.add('is-playing'); });
       v.addEventListener('pause',   function() { v.classList.remove('is-playing'); });
       v.addEventListener('ended',   function() { v.classList.remove('is-playing'); });
+      if (v.closest('.b-noroterbiye')) v.dataset.uzerinde = '1';
     });
-    var videoObserver = new IntersectionObserver(function(entries) {
+    function oynat(v) {
+      if (vitrinVideoKapali.matches) return;
+      v.muted = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function(){ /* kullanıcı etkileşimi henüz yok */ });
+    }
+    function gorunurdeOynasin(v) { return v.dataset.uzerinde !== '1'; }
+
+    // Görünür olunca oynayan karolar
+    var videoObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var v = entry.target;
         v.dataset.inview = entry.isIntersecting ? '1' : '';
-        if (entry.isIntersecting) {
-          v.muted = true;
-          var p = v.play();
-          if (p && p.catch) p.catch(function(){ /* kullanıcı etkileşimi henüz yok */ });
-        } else {
-          v.pause();
-        }
+        if (entry.isIntersecting) oynat(v); else v.pause();
       });
-    }, { threshold: 0.1 });
-    bentoVideos.forEach(function(v) { videoObserver.observe(v); });
+    }, { threshold: 0.1 }) : null;
+    if (videoObserver) bentoVideos.forEach(function(v) { if (gorunurdeOynasin(v)) videoObserver.observe(v); });
 
-    // İlk kullanıcı etkileşiminde tüm bento videolarını oynat (autoplay bypass)
+    // Üzerine gelince/odaklanınca oynayan karo (NöroTerbiye)
+    bentoVideos.forEach(function(v) {
+      if (gorunurdeOynasin(v)) return;
+      var kart = v.closest('.bento-card');
+      function basla() { oynat(v); }
+      function bitir() { v.pause(); }
+      kart.addEventListener('mouseenter', basla);
+      kart.addEventListener('focus', basla);
+      kart.addEventListener('mouseleave', bitir);
+      kart.addEventListener('blur', bitir);
+    });
+
+    // Ekran dokunmatik/dar moda geçerse hepsi durur; masaüstüne dönünce görünenler sürer
+    function kipDegisti() {
+      bentoVideos.forEach(function(v) {
+        if (vitrinVideoKapali.matches) v.pause();
+        else if (gorunurdeOynasin(v) && v.dataset.inview === '1') oynat(v);
+      });
+    }
+    if (vitrinVideoKapali.addEventListener) vitrinVideoKapali.addEventListener('change', kipDegisti);
+    else if (vitrinVideoKapali.addListener) vitrinVideoKapali.addListener(kipDegisti);
+
+    // İlk kullanıcı etkileşiminde görünen videoları oynat (autoplay engeli)
     var unlocked = false;
     function unlock() {
       if (unlocked) return; unlocked = true;
       bentoVideos.forEach(function(v) {
-        if (v.dataset.inview !== '1') return; // görünmeyen video yüklenmesin
-        v.muted = true; v.play().catch(function(){});
+        if (!gorunurdeOynasin(v) || v.dataset.inview !== '1') return; // görünmeyen video yüklenmesin
+        oynat(v);
       });
       ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev) {
         window.removeEventListener(ev, unlock);
       });
     }
-    ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev) {
-      window.addEventListener(ev, unlock, { once: false, passive: true });
-    });
+    if (!vitrinVideoKapali.matches) {
+      ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev) {
+        window.addEventListener(ev, unlock, { once: false, passive: true });
+      });
+    }
   }
 
   // ── SON GÜNCELLEME (otomatik) ──

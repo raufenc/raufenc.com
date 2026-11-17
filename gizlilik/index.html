@@ -9,34 +9,123 @@
   <meta property="og:description" content="raufenc.com gizlilik bildirimi ve KVKK aydınlatma metni.">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://raufenc.com/gizlilik/" />
-  <link rel="stylesheet" href="/lib/design-system/tokens.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f5fa" media="(prefers-color-scheme: light)" />
+
+  <!-- Sitenin kendi yazı tipleri (Fraunces + Inter), ana sayfayla aynı dosyalar -->
+  <link rel="preload" href="/lib/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/inter-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/fraunces-normal-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/lib/fonts/fraunces-normal-latin-ext.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/lib/fonts/fonts.css" />
+  <link rel="stylesheet" href="/lib/design-system/tokens.css" />
   <script src="/lib/design-system/theme.js"></script>
   <style>
-    body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--text, #e8e8f0); background: var(--bg, #0f0f1a); line-height: 1.8; margin: 0; padding: 0; }
-    .privacy-wrap { max-width: 720px; margin: 0 auto; padding: 80px 20px 60px; }
-    h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
-    h2 { font-size: 1.15rem; font-weight: 700; margin: 32px 0 12px; color: var(--warm, #c8a46e); }
-    h3 { font-size: 1rem; font-weight: 600; margin: 20px 0 8px; }
-    p, li { font-size: 0.92rem; color: var(--text-secondary, #9ca3af); }
-    ul { padding-left: 20px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    :root {
+      --font-display: 'Fraunces', Georgia, serif;
+      /* Ana sayfadaki okunabilirlik ayarı */
+      --muted2: #9b9bb8;          /* #0a0a0f üzerinde 7,3:1 */
+      --text-secondary: #b4b4cc;  /* #0a0a0f üzerinde 9,7:1 */
+      --warm-ink: #c8a46e;        /* altın metin, koyu zeminde 8,5:1 */
+      --danger: #b91c1c;
+    }
+    html.light { --warm-ink: #7a5c2c; /* açık zeminde 5,7:1 */ }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; padding: 0;
+      font-family: var(--font-sans);
+      color: var(--text); background: var(--bg);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    .top {
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 58px;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 800; letter-spacing: -0.02em;
+      color: var(--text); text-decoration: none;
+    }
+    .nav-logo span { color: var(--warm); }
+    .theme-btn {
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-full);
+      padding: 6px 10px; cursor: pointer;
+      color: var(--muted2); display: inline-flex; align-items: center;
+      transition: border-color var(--transition-fast), color var(--transition-fast);
+    }
+    .theme-btn:hover { border-color: var(--warm); color: var(--text); }
+
+    .privacy-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 64px; }
+    .eyebrow {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--warm-ink); margin: 0 0 10px;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 6vw, 42px); font-weight: 600;
+      line-height: 1.15; letter-spacing: -0.015em;
+      margin: 0 0 10px;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 600; letter-spacing: -0.005em;
+      margin: 44px 0 12px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+    }
+    h3 { font-size: 1rem; font-weight: 700; margin: 24px 0 6px; color: var(--text); }
+    p, li { font-size: 0.97rem; color: var(--text-secondary); }
+    p { margin: 0 0 12px; }
+    strong { color: var(--text); font-weight: 600; }
+    ul { padding-left: 20px; margin: 0 0 12px; }
     li { margin-bottom: 6px; }
-    .date { font-size: 0.78rem; color: var(--muted, #6b7280); margin-bottom: 32px; }
-    .info-box { background: var(--surface, #1a1a2e); border: 1px solid var(--border, #2a2a3e); border-radius: 12px; padding: 20px 24px; margin: 20px 0; }
-    .btn-delete { display: inline-block; margin-top: 12px; padding: 10px 24px; background: #ef4444; color: #fff; border: none; border-radius: 8px; font-size: 0.88rem; font-weight: 600; cursor: pointer; font-family: inherit; text-decoration: none; }
-    .btn-delete:hover { background: #dc2626; }
-    a { color: var(--warm, #c8a46e); }
-    .back-link { display: inline-block; margin-top: 32px; font-size: 0.85rem; color: var(--muted, #6b7280); text-decoration: none; padding: 8px 16px; border: 1px solid var(--border, #2a2a3e); border-radius: 20px; }
+    li::marker { color: var(--warm); }
+    .date { font-size: 0.85rem; color: var(--muted2); margin-bottom: 32px; }
+    .info-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 20px 24px; margin: 20px 0;
+    }
+    .info-box p:last-child { margin-bottom: 0; }
+    .btn-delete {
+      display: inline-block; margin-top: 4px; padding: 10px 24px;
+      background: var(--danger); color: #fff; border: none; border-radius: var(--radius-sm);
+      font-size: 0.9rem; font-weight: 600; cursor: pointer; font-family: inherit;
+    }
+    .btn-delete:hover { background: #991b1b; }
+    .note { font-size: 0.85rem; color: var(--muted2); margin-top: 8px; }
+    a { color: var(--warm-ink); text-underline-offset: 2px; }
+    .back-link {
+      display: inline-block; margin-top: 40px;
+      font-size: 0.9rem; font-weight: 600; color: var(--text); text-decoration: none;
+      padding: 9px 18px; border: 1px solid var(--border-hover); border-radius: var(--radius-full);
+      transition: border-color var(--transition-fast);
+    }
+    .back-link:hover { border-color: var(--warm); }
   </style>
   <!-- Vercel Analytics + Speed Insights -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-  <script src="/nav.js"></script>
+  <header class="top">
+    <a href="/" class="nav-logo" aria-label="Rauf Enç — ana sayfa">rauf<span>enç</span></a>
+    <button class="theme-btn" id="theme-toggle" type="button" aria-label="Temayı değiştir"></button>
+  </header>
 
-  <div class="privacy-wrap">
+  <main class="privacy-wrap">
+    <p class="eyebrow">Gizlilik</p>
     <h1>Gizlilik ve Veri İşleme Bildirimi</h1>
-    <p class="date">Son güncelleme: 19 Ekim 2026</p>
+    <p class="date">Son güncelleme: 17 Kasım 2026</p>
 
     <p>Bu sayfa, raufenc.com ve alt uygulamalarında (NöroTerbiye, Osmanlıca Lügat vb.) hangi verilerin toplandığı, nasıl işlendiği ve haklarınız hakkında bilgi verir.</p>
 
@@ -47,17 +136,20 @@
     <h2>2. Toplanan Veriler</h2>
 
     <h3>2.1 Analitik (Google Analytics 4)</h3>
-    <p>Siteyi ziyaret ettiğinizde Google Analytics 4 (GA4) aracılığıyla anonim kullanım verileri toplanır:</p>
+    <p>Siteyi ziyaret ettiğinizde Google Analytics 4 (GA4) aracılığıyla kullanım verileri toplanır. GA4 betiği sayfa yüklendikten sonra ya da ilk etkileşiminizde Google'ın sunucusundan (googletagmanager.com) yüklenir:</p>
     <ul>
       <li>Sayfa görüntülemeleri ve gezinme akışı</li>
       <li>Cihaz türü, tarayıcı ve işletim sistemi (anonimleştirilmiş)</li>
       <li>Yaklaşık konum (şehir düzeyi, IP adresi saklanmaz)</li>
       <li>Oturum süresi ve etkileşim ölçüleri</li>
     </ul>
-    <p>Bu veriler kişiselleştirilemez ve kimlik tespiti için kullanılamaz.</p>
+    <p>Ayrıca hangi bağlantıların ve düğmelerin tıklandığı, iletişim formunun gönderilip gönderilmediği ve proje aramasında yazılan arama kelimeleri ölçülür. Bu veriler yalnızca toplu istatistik olarak incelenir; kimlik tespiti için kullanılmaz.</p>
 
-    <h3>2.2 Yerel Depolama (localStorage)</h3>
-    <p>NöroTerbiye araç ve testleri, verilerinizi <strong>yalnızca sizin cihazınızın tarayıcısında</strong> saklar. Hiçbir kişisel veri sunucumuza gönderilmez.</p>
+    <h3>2.2 Vercel Web Analytics ve Speed Insights</h3>
+    <p>Site barındırıcısı Vercel'in iki ölçüm aracı da kullanılır. Web Analytics, sayfa ziyaretlerini çerez kullanmadan ve ziyaretçiyi günler arasında tanımadan sayar (yönlendiren site, ülke, cihaz ve tarayıcı türü gibi toplu bilgiler). Speed Insights ise sayfaların yüklenme hızını ve görsel kararlılığını ölçen performans değerlerini toplar. Bu araçlar sitenin kendi adresinden (/_vercel/…) çalışır ve kişisel profil oluşturmaz.</p>
+
+    <h3>2.3 Yerel Depolama (localStorage)</h3>
+    <p>Açık/koyu tema tercihiniz bütün sitede tarayıcınızda saklanır. NöroTerbiye araç ve testleri de verilerinizi <strong>yalnızca sizin cihazınızın tarayıcısında</strong> saklar. Hiçbir kişisel veri sunucumuza gönderilmez.</p>
     <div class="info-box">
       <p><strong>Saklanan veri türleri:</strong></p>
       <ul>
@@ -70,25 +162,28 @@
       <p style="margin-top:8px"><strong>Paylaşılan cihaz uyarısı:</strong> Başkasının da kullandığı bir cihazda iseniz, işiniz bittiğinde verilerinizi silmenizi öneririz.</p>
     </div>
 
-    <h3>2.3 İletişim Formu</h3>
+    <h3>2.4 İletişim Formu</h3>
     <p>Ana sayfadaki iletişim formuyla gönderdiğiniz ad, e-posta, konu ve mesaj bilgileri, e-posta iletim hizmeti Resend aracılığıyla Rauf Enç'in e-posta kutusuna iletilir. Bu bilgiler yalnızca size dönüş yapmak için kullanılır, sitede ayrıca saklanmaz ve başka hiçbir amaçla üçüncü taraflarla paylaşılmaz.</p>
     <p>Kötüye kullanımı önlemek için IP adresiniz en fazla on dakika boyunca yalnızca sunucu belleğinde tutulur. Form kullanılamadığında mesajınız kendi e-posta uygulamanızda hazırlanır; bu durumda gönderim sizin e-posta sağlayıcınız üzerinden yapılır.</p>
 
     <h2>3. Verilerinizi Silme</h2>
     <p>NöroTerbiye araçlarında saklanan tüm yerel verileri tek tıkla silebilirsiniz:</p>
     <button class="btn-delete" onclick="clearAllNTData()">Tüm NöroTerbiye Verilerini Sil</button>
-    <p style="font-size:0.8rem;color:var(--muted);margin-top:8px">Bu işlem geri alınamaz. Tüm test sonuçları, araç verileri ve oyun kayıtları silinir.</p>
+    <p class="note">Bu işlem geri alınamaz. Tüm test sonuçları, araç verileri ve oyun kayıtları silinir.</p>
 
     <h2>4. Üçüncü Taraf Hizmetler</h2>
     <ul>
-      <li><strong>Google Analytics 4:</strong> Anonim site kullanım analitiği (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Gizlilik Politikası</a>)</li>
-      <li><strong>Google Fonts:</strong> Bazı sayfalarda yazı tipi yüklemesi (ana sayfa, vitrin ve videolar sayfalarının yazı tipleri sitenin kendi sunucusundan gelir)</li>
+      <li><strong>Google Analytics 4:</strong> Site kullanım analitiği ve olay ölçümü (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Gizlilik Politikası</a>)</li>
+      <li><strong>Vercel Web Analytics:</strong> Çerezsiz, toplu ziyaret istatistiği (<a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener">Vercel Analytics gizlilik açıklaması</a>)</li>
+      <li><strong>Vercel Speed Insights:</strong> Sayfa hızı ve performans ölçümü (<a href="https://vercel.com/docs/speed-insights/privacy-policy" target="_blank" rel="noopener">Speed Insights gizlilik açıklaması</a>)</li>
+      <li><strong>Google Fonts:</strong> Bazı sayfalarda yazı tipi yüklemesi (ana sayfa, vitrin, videolar, gizlilik ve hata sayfalarının yazı tipleri sitenin kendi sunucusundan gelir)</li>
+      <li><strong>Google Firebase:</strong> Hesap açılan ya da kayıt tutulan birkaç uygulamada (İyilik Akademi, 5. Sınıf, Kalbinin Haritası, Ders Odası gibi) giriş ve ilerleme kaydı; bu uygulamalarda verdiğiniz ad ve e-posta ile uygulama içi ilerlemeniz saklanır (<a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase gizlilik açıklaması</a>)</li>
       <li><strong>Resend:</strong> İletişim formu mesajlarının e-posta olarak iletilmesi (<a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Resend Gizlilik Politikası</a>)</li>
       <li><strong>Vercel:</strong> Site barındırma (<a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Vercel Gizlilik Politikası</a>)</li>
     </ul>
 
     <h2>5. Çerezler</h2>
-    <p>Bu site birinci taraf çerez kullanmaz. Google Analytics üçüncü taraf çerezleri kullanabilir. Tarayıcınızın çerez ayarlarından bunları kontrol edebilirsiniz.</p>
+    <p>Sitenin kendisi çerez kullanmaz; tercihler yukarıda anlatıldığı gibi tarayıcınızın yerel deposunda tutulur. Google Analytics 4 ise ziyaretleri ayırt etmek için raufenc.com alan adına <code>_ga</code> ve <code>_ga_…</code> adlı çerezler yazar (en fazla iki yıl). Vercel Web Analytics ve Speed Insights çerez kullanmaz. Tarayıcınızın çerez ayarlarından bu çerezleri silebilir veya engelleyebilirsiniz.</p>
 
     <h2>6. KVKK Kapsamındaki Haklarınız</h2>
     <p>6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında aşağıdaki haklara sahipsiniz:</p>
@@ -107,9 +202,26 @@
     <p>Bir güvenlik açığı tespit ederseniz, lütfen <a href="/.well-known/security.txt">security.txt</a> dosyasındaki iletişim bilgilerini kullanın.</p>
 
     <a href="/" class="back-link">&larr; Ana Sayfa</a>
-  </div>
+  </main>
 
   <script>
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      var gunes = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      var ay = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      function guncelle() {
+        var acik = document.documentElement.classList.contains('light');
+        btn.innerHTML = acik ? ay : gunes;
+        btn.setAttribute('aria-label', acik ? 'Gece moduna geç' : 'Gündüz moduna geç');
+      }
+      btn.addEventListener('click', function () {
+        if (window.RaufTheme) window.RaufTheme.toggle();
+        guncelle();
+      });
+      window.addEventListener('theme-changed', guncelle);
+      guncelle();
+    })();
+
     function clearAllNTData() {
       if (!confirm('Tüm NöroTerbiye verilerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.')) return;
       let count = 0;
