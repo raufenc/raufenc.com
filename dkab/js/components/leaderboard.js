@@ -50,7 +50,7 @@ export async function renderLeaderboard(el, app) {
         el.querySelector('#lb-container').innerHTML = `
             <div class="card text-center" style="padding:2rem;">
                 <p>⚠️ Bağlantı hatası. İnternet bağlantını kontrol et.</p>
-                <p class="text-muted" style="font-size:0.8rem;">${err.message}</p>
+                <p class="text-muted" style="font-size:0.8rem;">${esc(err.message)}</p>
             </div>`;
     }
 }
@@ -107,8 +107,8 @@ function renderRankings(container, data, myUserId) {
                         <div class="text-muted" style="font-size:0.8rem;">${parseInt(e.grade) || '?'}. Sınıf · Sv.${parseInt(e.level) || 1}</div>
                     </div>
                     <div style="text-align:right;flex-shrink:0;">
-                        <div style="font-weight:700;color:var(--primary);">⚡ ${e.xp || 0}</div>
-                        <div class="text-muted" style="font-size:0.75rem;">🔥${e.streak || 0} · 🎯${e.accuracy || 0}%</div>
+                        <div style="font-weight:700;color:var(--primary);">⚡ ${parseInt(e.xp) || 0}</div>
+                        <div class="text-muted" style="font-size:0.75rem;">🔥${parseInt(e.streak) || 0} · 🎯${parseInt(e.accuracy) || 0}%</div>
                     </div>
                 </div>`;
             }).join('')}

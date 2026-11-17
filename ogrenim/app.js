@@ -437,8 +437,8 @@ async function renderAdmin(appEl) {
           return `<tr>
             <td style="font-weight:600">${esc(userName)}</td>
             <td>${esc(lessonName)}</td>
-            <td style="text-align:center"><span class="score-badge score-badge-low">%${r.preTestScore}</span></td>
-            <td style="text-align:center"><span class="score-badge ${r.postTestScore >= 70 ? 'score-badge-high' : 'score-badge-low'}">%${r.postTestScore}</span></td>
+            <td style="text-align:center"><span class="score-badge score-badge-low">%${esc(String(r.preTestScore ?? ""))}</span></td>
+            <td style="text-align:center"><span class="score-badge ${r.postTestScore >= 70 ? 'score-badge-high' : 'score-badge-low'}">%${esc(String(r.postTestScore ?? ""))}</span></td>
             <td style="text-align:right">${date}</td>
           </tr>`;
         }).join('');

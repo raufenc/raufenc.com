@@ -8,6 +8,11 @@ function groupBy(arr, key) { return window.H.groupBy(arr, key); }
 function getConceptsByFamily(f) { return window.H.getConceptsByFamily(f); }
 function getAllFamilies() { return window.H.getAllFamilies(); }
 
+// Adresten (#/arama/…) gelen metin öznitelik değerine kaçışla girer.
+function attrKacis(s) {
+  return String(s).replace(/[&<>"'`]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]));
+}
+
 function el(tag, cls, html) {
   const e = document.createElement(tag);
   if (cls) e.className = cls;
@@ -548,7 +553,7 @@ function harita(app) {
 function arama(app, query) {
   app.innerHTML = `
     <h1 class="section-title"><span class="st-icon">🔍</span> Akıllı Arama</h1>
-    <div class="search-box"><input type="text" id="searchInput" placeholder="Kavram, kod veya açıklama ara..." value="${query?decodeURIComponent(query):''}"></div>
+    <div class="search-box"><input type="text" id="searchInput" placeholder="Kavram, kod veya açıklama ara..." value="${query?attrKacis(decodeURIComponent(query)):''}"></div>
     <div id="searchResults"></div>
   `;
 

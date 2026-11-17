@@ -1,3 +1,10 @@
+// Güvenlik: başka kullanıcıların yazdığı adlar/sınıf adları innerHTML'e kaçışla girer.
+function khKacis(v) {
+  return String(v ?? '').replace(/[&<>"'`]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]));
+}
+// onclick içindeki JS dizgisine giren belge kimliği yalnız güvenli karakterlerden oluşur.
+function khKimlik(v) { return /^[A-Za-z0-9_-]{1,128}$/.test(String(v ?? '')) ? String(v) : ''; }
+
 // firebase-app.js — Firebase Auth + Firestore + Admin Panel
 // ============================================
 // FIREBASE CONFIG — kendi bilgilerini gir
@@ -393,7 +400,7 @@ function updateAuthUI() {
   if (!btn) return;
   if (currentUser) {
     const name = userProfile?.displayName || currentUser.email?.split('@')[0] || '';
-    btn.innerHTML = name.charAt(0).toUpperCase();
+    btn.textContent = name.charAt(0).toUpperCase();
     btn.title = name + (isAdmin() ? ' (Admin)' : isTeacher() ? ' (Eğitimci)' : '');
     btn.style.background = isAdmin() ? 'linear-gradient(135deg, #dc2626, #f87171)' : 'linear-gradient(135deg, var(--gold-dark), var(--gold))';
     btn.style.color = '#fff';
@@ -573,11 +580,11 @@ async function loadClassDetail(classId) {
   container.innerHTML = `
     <div class="card mb-6">
       <div class="flex justify-between items-center mb-2">
-        <h2 class="font-display text-2xl font-bold" style="color:var(--gold)">${cls.name}</h2>
-        <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(212,175,55,0.1);color:var(--gold);border:1px solid var(--border-gold)">Kod: ${cls.joinCode}</span>
+        <h2 class="font-display text-2xl font-bold" style="color:var(--gold)">${khKacis(cls.name)}</h2>
+        <span class="text-xs px-3 py-1 rounded-full" style="background:rgba(212,175,55,0.1);color:var(--gold);border:1px solid var(--border-gold)">Kod: ${khKacis(cls.joinCode)}</span>
       </div>
       <p class="text-sm" style="color:var(--text-muted)">${studentList.length} öğrenci</p>
-      <button class="btn btn-subtle text-xs py-1 px-3 mt-2" onclick="if(confirm('Sınıfı silmek istediğine emin misin?')){deleteClass('${cls.id}').then(()=>{S.screen='profile';render();setTimeout(loadTeacherClasses,100)})}">Sınıfı Sil</button>
+      <button class="btn btn-subtle text-xs py-1 px-3 mt-2" onclick="if(confirm('Sınıfı silmek istediğine emin misin?')){deleteClass('${khKimlik(cls.id)}').then(()=>{S.screen='profile';render();setTimeout(loadTeacherClasses,100)})}">Sınıfı Sil</button>
     </div>
 
     ${Object.keys(avgByTest).length > 0 ? `
@@ -586,7 +593,7 @@ async function loadClassDetail(classId) {
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
         ${testKeys.filter(k => avgByTest[k]).map(k => `
           <div class="p-3 rounded-lg" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
-            <p class="text-xs font-bold mb-1" style="color:var(--gold-light)">${TESTS[k]?.concepts?.fazilet||k}</p>
+            <p class="text-xs font-bold mb-1" style="color:var(--gold-light)">${khKacis(TESTS[k]?.concepts?.fazilet||k)}</p>
             <div class="flex justify-between text-xs">
               <span class="text-tefrit">${avgByTest[k].tefrit}%</span>
               <span class="text-fazilet font-bold">${avgByTest[k].fazilet}%</span>
@@ -598,19 +605,19 @@ async function loadClassDetail(classId) {
 
     <div class="card">
       <h3 class="font-display text-lg font-bold mb-4" style="color:var(--gold)">Öğrenciler</h3>
-      ${studentList.length === 0 ? `<p class="text-sm" style="color:var(--text-muted)">Katılım kodunu paylaşın: <strong style="color:var(--gold)">${cls.joinCode}</strong></p>` :
+      ${studentList.length === 0 ? `<p class="text-sm" style="color:var(--text-muted)">Katılım kodunu paylaşın: <strong style="color:var(--gold)">${khKacis(cls.joinCode)}</strong></p>` :
       studentList.map(([uid, s]) => `
         <div class="p-3 mb-2 rounded-lg" style="background:rgba(0,0,0,0.15);border:1px solid var(--border-gold)">
           <div class="flex justify-between items-center">
-            <p class="text-sm font-semibold" style="color:var(--text-primary)">${s.name}</p>
+            <p class="text-sm font-semibold" style="color:var(--text-primary)">${khKacis(s.name)}</p>
             <span class="text-xs" style="color:var(--text-muted)">${Object.keys(s.tests).length}/17</span>
           </div>
           ${Object.keys(s.tests).length > 0 ? `<div class="flex flex-wrap gap-2 mt-2">${Object.entries(s.tests).map(([k, v]) =>
             `<span class="text-xs px-2 py-1 rounded" style="background:rgba(212,175,55,0.06);border:1px solid var(--border-gold)">
-              <span style="color:var(--gold-light);font-weight:600">${TESTS[k]?.concepts?.fazilet||k}</span>
-              <span class="ml-1 text-tefrit">${v.tefrit}%</span>
-              <span class="ml-1 text-fazilet" style="font-weight:700">${v.fazilet}%</span>
-              <span class="ml-1 text-ifrat">${v.ifrat}%</span>
+              <span style="color:var(--gold-light);font-weight:600">${khKacis(TESTS[k]?.concepts?.fazilet||k)}</span>
+              <span class="ml-1 text-tefrit">${khKacis(v.tefrit)}%</span>
+              <span class="ml-1 text-fazilet" style="font-weight:700">${khKacis(v.fazilet)}%</span>
+              <span class="ml-1 text-ifrat">${khKacis(v.ifrat)}%</span>
             </span>`
           ).join('')}</div>` : ''}
         </div>`).join('')}
@@ -678,8 +685,8 @@ async function loadAdminPanel() {
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
         ${Object.entries(stats.testCounts).sort((a,b) => b[1]-a[1]).map(([k, v]) => `
           <div class="flex justify-between text-xs p-2 rounded" style="background:rgba(212,175,55,0.04);border:1px solid var(--border-gold)">
-            <span style="color:var(--gold-light)">${TESTS[k]?.concepts?.fazilet || k}</span>
-            <span style="color:var(--text-muted)">${v}</span>
+            <span style="color:var(--gold-light)">${khKacis(TESTS[k]?.concepts?.fazilet || k)}</span>
+            <span style="color:var(--text-muted)">${khKacis(v)}</span>
           </div>`).join('')}
       </div>
     </div>` : ''}
@@ -692,10 +699,10 @@ async function loadAdminPanel() {
         <div class="p-3 mb-2 rounded-lg" style="background:rgba(0,0,0,0.15);border:1px solid var(--border-gold)">
           <div class="flex justify-between items-center">
             <div>
-              <p class="text-sm font-semibold" style="color:var(--gold-light)">${c.name}</p>
-              <p class="text-xs" style="color:var(--text-muted)">Eğitimci: ${c.teacherName} \u2022 Kod: ${c.joinCode}</p>
+              <p class="text-sm font-semibold" style="color:var(--gold-light)">${khKacis(c.name)}</p>
+              <p class="text-xs" style="color:var(--text-muted)">Eğitimci: ${khKacis(c.teacherName)} \u2022 Kod: ${khKacis(c.joinCode)}</p>
             </div>
-            <span class="text-xs px-2 py-0.5 rounded" style="background:rgba(52,211,153,0.1);color:var(--emerald-light)">${c.memberCount} öğrenci</span>
+            <span class="text-xs px-2 py-0.5 rounded" style="background:rgba(52,211,153,0.1);color:var(--emerald-light)">${khKacis(c.memberCount)} öğrenci</span>
           </div>
         </div>`).join('')}
     </div>
@@ -707,11 +714,11 @@ async function loadAdminPanel() {
       ${users.map(u => `
         <div class="p-3 mb-2 rounded-lg flex justify-between items-center" style="background:rgba(0,0,0,0.15);border:1px solid var(--border-gold)">
           <div>
-            <p class="text-sm font-semibold" style="color:var(--text-primary)">${u.displayName || 'İsimsiz'}</p>
-            <p class="text-xs" style="color:var(--text-muted)">${u.email || ''}</p>
+            <p class="text-sm font-semibold" style="color:var(--text-primary)">${khKacis(u.displayName || 'İsimsiz')}</p>
+            <p class="text-xs" style="color:var(--text-muted)">${khKacis(u.email || '')}</p>
           </div>
           <div class="flex gap-2 items-center">
-            <select onchange="adminSetUserRole('${u.id}',this.value).then(()=>loadAdminPanel())"
+            <select onchange="adminSetUserRole('${khKimlik(u.id)}',this.value).then(()=>loadAdminPanel())"
               style="font-size:0.7rem;padding:2px 6px;border-radius:4px;border:1px solid var(--border-gold);background:rgba(0,0,0,0.3);color:var(--text-primary);font-family:Inter,sans-serif">
               <option value="student" ${u.role==='student'?'selected':''}>Öğrenci</option>
               <option value="teacher" ${u.role==='teacher'?'selected':''}>Eğitimci</option>
@@ -732,10 +739,10 @@ async function loadTeacherClasses() {
     return;
   }
   container.innerHTML = classes.map(c => `
-    <div class="p-3 mb-2 rounded-lg" style="background:rgba(0,0,0,0.15);border:1px solid var(--border-gold);cursor:pointer" data-action="viewClass" data-id="${c.id}">
+    <div class="p-3 mb-2 rounded-lg" style="background:rgba(0,0,0,0.15);border:1px solid var(--border-gold);cursor:pointer" data-action="viewClass" data-id="${khKacis(c.id)}">
       <div class="flex justify-between items-center">
-        <p class="text-sm font-semibold" style="color:var(--gold-light)">${c.name}</p>
-        <span class="text-xs px-2 py-0.5 rounded" style="background:rgba(212,175,55,0.1);color:var(--gold)">Kod: ${c.joinCode}</span>
+        <p class="text-sm font-semibold" style="color:var(--gold-light)">${khKacis(c.name)}</p>
+        <span class="text-xs px-2 py-0.5 rounded" style="background:rgba(212,175,55,0.1);color:var(--gold)">Kod: ${khKacis(c.joinCode)}</span>
       </div>
     </div>`).join('');
 }
@@ -746,5 +753,5 @@ async function loadStudentClasses() {
   const classes = await getMyClasses();
   if (classes.length === 0) return;
   container.innerHTML = '<h4 class="text-sm font-bold mb-2" style="color:var(--gold-light)">Sınıflarım</h4>' +
-    classes.map(c => `<p class="text-xs mb-1" style="color:var(--text-secondary)">\u2022 ${c?.name || 'Sınıf'}</p>`).join('');
+    classes.map(c => `<p class="text-xs mb-1" style="color:var(--text-secondary)">\u2022 ${khKacis(c?.name || 'Sınıf')}</p>`).join('');
 }

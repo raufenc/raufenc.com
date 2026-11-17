@@ -76,7 +76,7 @@ function isSensitivePath(pathname, method) {
   // Public Siyer export: allow only this exact archive; backups stay blocked.
   if (path === '/ders-odasi/siyer/indir/siyer-ders-paketi.zip' && (method === 'GET' || method === 'HEAD')) return false;
   if (/(^|\/)\.(?!well-known\/)/.test(path)) return true;
-  if (/\.(?:bak|backup|old|orig|sql|env|log|map|zip|tar|tgz|gz|rar|7z)$/i.test(path)) return true;
+  if (/\.(?:bak|backup|old|orig|sql|sqlite3?|env|log|map|zip|tar|tgz|gz|rar|7z)$/i.test(path)) return true;
   if (/(^|\/)(?:scripts|tests|\.claude)(?:\/|$)/i.test(path)) return true;
   // Sunucu tarafı kaynak ve yapılandırma dosyaları statik dosya olarak sunulmaz.
   if (/^\/(?:middleware\.js|vercel\.json|package\.json|lib\/(?:sunumlar-server\.mjs|guvenlik\.js))$/i.test(path)) return true;

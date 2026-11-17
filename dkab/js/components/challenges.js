@@ -150,11 +150,11 @@ function renderChallengeList(container, data, myUserId, code, db) {
                     ${isOwn ? `<span style="font-size:0.7rem;background:#e8f4f0;color:var(--primary);padding:0.15rem 0.5rem;border-radius:10px;">Senin</span>` : ''}
                 </div>
                 <p style="font-weight:600;font-size:1rem;margin:0.4rem 0;">${escapeHtml(item.title)}</p>
-                <p class="text-muted" style="font-size:0.8rem;">— ${item.from} (${item.fromGrade}. Sınıf)</p>
+                <p class="text-muted" style="font-size:0.8rem;">— ${escapeHtml(item.from ?? '')} (${parseInt(item.fromGrade) || '?'}. Sınıf)</p>
 
                 <div class="flex items-center gap-sm mt-md">
                     ${!isOwn ? `
-                    <button class="accept-btn btn ${iAccepted ? 'btn-primary' : ''}" data-id="${item.id}"
+                    <button class="accept-btn btn ${iAccepted ? 'btn-primary' : ''}" data-id="${escapeHtml(item.id)}"
                         style="${iAccepted ? '' : 'background:var(--bg-main);border:1px solid var(--border);'}font-size:0.85rem;padding:0.4rem 1rem;">
                         ${iAccepted ? '✅ Kabul Ettim' : '⚔️ Kabul Et'}
                     </button>
@@ -198,5 +198,7 @@ function escapeHtml(text) {
     return String(text)
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }

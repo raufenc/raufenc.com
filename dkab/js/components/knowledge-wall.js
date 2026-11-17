@@ -110,23 +110,23 @@ function renderPosts(container, data, myUserId, code, db) {
             const isMe = post.userId === myUserId;
             const timeAgo = formatTimeAgo(post.ts);
             return `
-            <div class="wall-post card anim-fade-in-up" data-id="${post.id}">
+            <div class="wall-post card anim-fade-in-up" data-id="${escapeHtml(post.id)}">
                 <div class="flex items-center gap-sm mb-sm">
                     <div style="width:32px;height:32px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.85rem;flex-shrink:0;">
-                        ${(post.author || '?')[0].toUpperCase()}
+                        ${escapeHtml(String(post.author || '?')[0].toUpperCase())}
                     </div>
                     <div>
-                        <span style="font-weight:600;font-size:0.9rem;">${post.author || 'Anonim'}</span>
-                        <span class="text-muted" style="font-size:0.75rem;margin-left:0.4rem;">${post.grade}. Sınıf</span>
+                        <span style="font-weight:600;font-size:0.9rem;">${escapeHtml(String(post.author || 'Anonim'))}</span>
+                        <span class="text-muted" style="font-size:0.75rem;margin-left:0.4rem;">${parseInt(post.grade) || '?'}. Sınıf</span>
                     </div>
                     <span class="text-muted" style="font-size:0.75rem;margin-left:auto;">${timeAgo}</span>
                 </div>
                 <p style="line-height:1.6;color:var(--text-primary);margin:0;">${escapeHtml(post.text)}</p>
                 <div class="flex items-center gap-sm mt-sm">
-                    <button class="like-btn" data-id="${post.id}" style="background:none;border:1px solid var(--border);border-radius:20px;padding:0.2rem 0.6rem;cursor:pointer;font-size:0.8rem;color:var(--text-secondary);">
-                        👍 ${post.likes || 0}
+                    <button class="like-btn" data-id="${escapeHtml(post.id)}" style="background:none;border:1px solid var(--border);border-radius:20px;padding:0.2rem 0.6rem;cursor:pointer;font-size:0.8rem;color:var(--text-secondary);">
+                        👍 ${parseInt(post.likes) || 0}
                     </button>
-                    ${isMe ? `<button class="delete-btn" data-id="${post.id}" style="background:none;border:none;color:var(--text-muted,#aaa);cursor:pointer;font-size:0.75rem;margin-left:auto;">🗑️</button>` : ''}
+                    ${isMe ? `<button class="delete-btn" data-id="${escapeHtml(post.id)}" style="background:none;border:none;color:var(--text-muted,#aaa);cursor:pointer;font-size:0.75rem;margin-left:auto;">🗑️</button>` : ''}
                 </div>
             </div>`;
         }).join('')}

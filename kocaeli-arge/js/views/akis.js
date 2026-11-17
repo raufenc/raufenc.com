@@ -20,7 +20,7 @@ export function feedCard(it) {
   const card = el(h`<article class="card feed-card" data-id="${it.id}">
     <header class="feed-head">${raw(it.avatarHtml)}<div class="tx"><b>${it.yazar}</b><span>${it.sub} · ${fmtRel(it.tarih)}</span></div><span class="chip ${it.cls}">${it.etiket}</span>${it.durum === 'bekliyor' ? raw('<span class="chip amber">Onay bekliyor</span>') : ''}</header>
     ${it.resim ? raw(`<a class="feed-media" href="${esc(it.rota)}"><img src="${esc(it.resim)}" alt="" loading="lazy" referrerpolicy="no-referrer">${it.videoId ? `<span class="play"><i>${icons.play}</i></span>` : ''}</a>`) : ''}
-    <div class="feed-body"><a href="${it.rota}">${it.baslik ? raw(`<h3>${esc(it.baslik)}</h3>`) : ''}${it.metin ? raw(`<p>${esc(it.metin).slice(0, 420)}${it.metin.length > 420 ? '…' : ''}</p>`) : ''}</a>${it.link && it.tur === 'paylasim' ? raw(`<a class="feed-link" href="${esc(it.link)}" target="_blank" rel="noopener">${icons.external} ${esc(it.link.replace(/^https?:\/\//, '').slice(0, 60))}</a>`) : ''}</div>
+    <div class="feed-body"><a href="${it.rota}">${it.baslik ? raw(`<h3>${esc(it.baslik)}</h3>`) : ''}${it.metin ? raw(`<p>${esc(it.metin).slice(0, 420)}${it.metin.length > 420 ? '…' : ''}</p>`) : ''}</a>${it.link && it.tur === 'paylasim' && /^https?:\/\//i.test(it.link) ? raw(`<a class="feed-link" href="${esc(it.link)}" target="_blank" rel="noopener">${icons.external} ${esc(it.link.replace(/^https?:\/\//, '').slice(0, 60))}</a>`) : ''}</div>
     <footer class="social">
       <button class="like" aria-label="Beğen">${raw(icons.heart)}<span>0</span></button>
       <button class="cmt" aria-label="Yorumlar">${raw(icons.comment)}<span>0</span></button>

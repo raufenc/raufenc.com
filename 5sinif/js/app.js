@@ -2,6 +2,27 @@
 // SPA Router + Tum Sayfa Render'lari + YouTube IFrame API + Checkpoint Motoru
 
 const app = document.getElementById('app');
+
+// Güvenlik: başka kullanıcının Firestore'a yazdığı veri (öğrenci adı, not, anahtarlar)
+// innerHTML şablonlarına girmeden önce derinlemesine HTML-kaçışından geçer.
+function htmlKacis(s) {
+  return String(s).replace(/[&<>"'`]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]));
+}
+function htmlKacisDerin(v) {
+  if (typeof v === 'string') return htmlKacis(v);
+  if (Array.isArray(v)) return v.map(htmlKacisDerin);
+  if (v && typeof v === 'object') {
+    const proto = Object.getPrototypeOf(v);
+    if (proto !== Object.prototype && proto !== null) return v;
+    const out = {};
+    for (const [k, x] of Object.entries(v)) out[htmlKacis(k)] = htmlKacisDerin(x);
+    return out;
+  }
+  return v;
+}
+// Firebase uid yalnız harf, rakam, _ ve - içerir; onclick içine giren değerler buna uymalı.
+function gecerliUid(uid) { return typeof uid === 'string' && /^[A-Za-z0-9_-]{1,128}$/.test(uid); }
+
 let _ytPlayer = null;
 let _checkpointTimer = null;
 let _firedCheckpoints = new Set();
@@ -1995,7 +2016,8 @@ function renderAdmin() {
 
   if (!fbReady) return;
 
-  FirebaseService.listStudents().then(students => {
+  FirebaseService.listStudents().then(ham => {
+    const students = (ham || []).filter(st => st && gecerliUid(st.uid)).map(htmlKacisDerin);
     const el = document.getElementById('adminStudentList');
     if (!el) return;
     el.className = ''; // admin-loading display:flex'i kaldır
@@ -2061,7 +2083,7 @@ function renderAdminOgrenci(params) {
   if (requireAdmin()) return;
 
   const uid = params[0];
-  if (!uid) { navigate('#/admin'); return; }
+  if (!gecerliUid(uid)) { navigate('#/admin'); return; }
 
   const fbReady = window.FirebaseService?.isReady();
 
@@ -2079,7 +2101,8 @@ function renderAdminOgrenci(params) {
     return;
   }
 
-  FirebaseService.getStudentFullData(uid).then(data => {
+  FirebaseService.getStudentFullData(uid).then(ham => {
+    const data = ham ? htmlKacisDerin(ham) : ham;
     const el = document.getElementById('adminOgrenciContent');
     if (!el) return;
     el.className = ''; // admin-loading display:flex'i kaldır
@@ -2291,6 +2314,8 @@ function _startVeliPortalView(ogrenciUid, code) {
 }
 
 function _renderVeliPortalView(ogrenciUid, code, data) {
+  if (data) data = htmlKacisDerin(data);
+  code = htmlKacis(code || '');
   if (!data) {
     app.innerHTML = `${topNavHTML(true, 'Veli Portalı')}
       <div class="page-container"><div class="empty-state"><p>Öğrenci verisi bulunamadı.</p>
