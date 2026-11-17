@@ -28,6 +28,8 @@ const VTANIM = {
 const VKLIP = { "failatun": ["kanuni", "kulak", "randiran", "davulcu"], "mefailun": ["nabi"], "mefulu-mefailu": ["akincilar", "sessizgemi", "elmas", "ki"], "feilatun": ["istiklal", "istiklal2", "sabit"], "mefulu-failatun": ["nadir", "natvurgu"] };
 V.forEach(v => { v.b = v.feet.map(birimF); v.top = v.b.reduce((a, b) => a + b, 0); v.hece = v.feet.join(" ").split(" ").length; v.ad = v.tef.join(" "); v.kisa = v.tef.map(t => t.toLocaleLowerCase("tr")).join(" "); v.beyitler = B.filter(b => b.vz === v.id); v.tanim = VTANIM[v.id]; v.klip = VKLIP[v.id] || []; });
 const VZ = Object.fromEntries(V.map(v => [v.id, v]));
+/* izafet ve tireli birleşmeler ulama sayılmaz: ulama yalnız ‿ ile gösterilen bağlanmadır */
+B.forEach(b => b.t.forEach(ln => ln.syl.forEach(s => { if (s.u && !s.t.includes("‿")) delete s.u; })));
 const beyit = n => B.find(b => b.n === +n);
 const birimS = s => s.v === "—·" ? 3 : s.v === "—" ? 2 : 1;
 const satirlar = () => B.filter(b => b.vz !== "hece").flatMap(b => b.t.map((ln, i) => ({ b, i, ln })));
@@ -223,7 +225,7 @@ const Tart = (() => {
       } }
     if (!best) return null;
     const syl = []; let pos = 0, node = best.sol; const fb = []; let acc = 0; best.feet.forEach(f => { acc += f.split(" ").length; fb.push(acc); });
-    best.sy.forEach(s => { const f = fb.findIndex(x => pos < x); const o = { t: s.t, v: node.val, f }; if (s.w) o.w = 1; if (node.note) o.n = node.note; if (s.u) o.u = 1; syl.push(o); pos += node.span; node = node.next; });
+    best.sy.forEach(s => { const f = fb.findIndex(x => pos < x); const o = { t: s.t, v: node.val, f }; if (s.w) o.w = 1; if (node.note) o.n = node.note; if (s.u && s.t.includes("‿")) o.u = 1; syl.push(o); pos += node.span; node = node.next; });
     return { feet: best.feet, syl, c: best.c };
   }
   function tabii(metin) { const words = kelimeler(metin); if (!words.length) return []; const links = {}; for (let wi = 1; wi < words.length; wi++) { const a = words[wi - 1].o.map(low), b0 = low(words[wi].o[0]); links[wi] = !VV.includes(a[a.length - 1]) && VV.includes(b0); } return kur(words, links, Array(8).fill(true)); }
