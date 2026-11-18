@@ -16,6 +16,20 @@ Rauf'un 26 Ekim 2026 talimatı: NöroTerbiye kitabındaki üç QR adresini onar 
 - GitHub `main` üzerinden yayımla. Daraltılmış yerel kopyayı Vercel CLI ile tüm site yerine yükleme. Göndermeden önce `git pull --rebase origin main` yap; zorla gönderim kullanma.
 - Metin üslubu için `CLAUDE.md` kurallarını da koru.
 
+## Pedagojik Masallar (kitaptaki yedi film karekodu)
+
+18 Kasım 2026: Pedagojik Masallar kitabında her masalın sonundaki karekod bu sitedeki sabit bir adrese gider. Adres basılıdır, film değişebilir.
+
+| Basılı adres | Açtığı yer |
+| --- | --- |
+| `https://raufenc.com/masal/1/` … `https://raufenc.com/masal/7/` | O kapının filmi (YouTube); film henüz yayında değilse "film yolda" sayfası |
+| `https://raufenc.com/masal/` | Yedi kapının listesi (künyede anılır) |
+
+- `masal/index.html` ve `masal/1/` … `masal/7/` sayfaları silinmez, taşınmaz, yeniden adlandırılmaz.
+- Yönlendirme sayfanın içindedir (meta refresh + betik). `vercel.json` içine kalıcı (308) kural olarak YAZMA: tarayıcı kalıcı yönlendirmeyi önbelleğe alır, film yenilenince eski videoya gitmeye devam eder.
+- Sayfalar elle düzenlenmez; `pedagojik-masallar/araclar/masal_site.py` içindeki FILM tablosu değiştirilir, betik sayfaları yeniden üretir.
+- `scripts/verify-book-qr.mjs` içindeki `verifyMasalPages` kontrolünü kaldırma veya atlatma.
+
 ## İyiliklerle Büyüyorum (3 ciltlik boyama kitabı)
 
 Rauf'un 3 Kasım 2026 talimatı: kitabın dijital sitesi yönlendirme olarak değil, bütünüyle bu sitede, `/iyilik/` altında yaşar. Her cildin ön iç kapağındaki karekod kendi kitabını doğrudan açar.

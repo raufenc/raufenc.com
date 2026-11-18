@@ -78,6 +78,24 @@ export function verifyBirBeyitPage(root = new URL('..', import.meta.url)) {
     'Bir Beyit, Bir Âlem: beyitler.json kitaptaki 52 beytin hepsini 1–52 sırasıyla taşımalı.');
 }
 
+// Printed in Pedagojik Masallar (seven film QR codes → raufenc.com/masal/1 … /masal/7). 2026-11-18:
+// these pages are the book's QR targets; never move or delete them. The film behind a page may change
+// (the redirect lives inside the page), the address may not.
+export function verifyMasalPages(root = new URL('..', import.meta.url)) {
+  const read = (file) => {
+    try {
+      return readFileSync(new URL(file, root), 'utf8');
+    } catch {
+      throw new Error(`Basılı Pedagojik Masallar karekod sayfası eksik: /${file.replace(/index\.html$/, '')}`);
+    }
+  };
+  read('masal/index.html');
+  for (let n = 1; n <= 7; n += 1) {
+    const html = read(`masal/${n}/index.html`);
+    assert.ok(html.includes(`data-kapi="${n}"`), `/masal/${n}/ sayfası ${n}. kapıyı açmalı.`);
+  }
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     verifyBookQr(JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8')));
@@ -86,6 +104,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.log('İyiliklerle Büyüyorum: /iyilik/ ve 3 basılı kitap adresi yerinde.');
     verifyBirBeyitPage();
     console.log('Bir Beyit, Bir Âlem: /bir-beyit-bir-alem/ karekod sayfası ve 52 beyit yerinde.');
+    verifyMasalPages();
+    console.log('Pedagojik Masallar: /masal/ ve 7 basılı karekod adresi yerinde.');
   } catch (error) {
     console.error(`Yayın durduruldu: ${error.message}`);
     process.exitCode = 1;
