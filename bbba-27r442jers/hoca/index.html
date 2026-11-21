@@ -80,7 +80,7 @@ textarea:focus{outline:none;border-color:var(--yesil)}
   <p>Çoğu beyit birebir aynı çıktı. Burada yalnız farklı çıkan yerler var. Her birinde iki şık göreceksiniz:</p>
   <div class="nasil"><span>1</span><div><b>Üstteki şık</b> kitapta şu an yazan metin; <b>alttaki</b> kaynaktaki ya da önerdiğimiz şekil. Basılmasını istediğinize dokunmanız kâfi.</div></div>
   <div class="nasil"><span>2</span><div>Gerekçeyi görmek isterseniz <b>“Neden?”</b> yazısına dokunun.</div></div>
-  <div class="nasil"><span>3</span><div>En sonda <b>“WhatsApp ile gönder”</b> düğmesi kararlarınızı yazılı olarak bana iletir. Yarıda bırakırsanız seçimleriniz bu telefonda saklı kalır.</div></div>
+  <div class="nasil"><span>3</span><div>En sonda <b>“WhatsApp ile gönder”</b> düğmesi kararlarınızı yazılı olarak bana iletir. Seçimleriniz kendiliğinden de kaydedilir; yarıda bırakırsanız kaldığınız yerden devam edersiniz.</div></div>
   <p style="margin-top:12px">Allah razı olsun.</p>
  </div>
 </section>
@@ -119,6 +119,32 @@ const ANAH = 'snd-karar-v1';
 let durum = {};
 try { durum = JSON.parse(localStorage.getItem(ANAH) || '{}') || {}; } catch (e) { durum = {}; }
 function sakla(){ try { localStorage.setItem(ANAH, JSON.stringify(durum)); } catch (e) {} }
+// sessiz yedek: Ders Odası Firebase'i (do-odalar/<oda>/kisiler/<cihaz>-…), anonim giriş
+const FB = {k: 'AIzaSyCr9eR9eEbLdc-KpTGdObr4wIE86K1eFM0', db: 'https://ders-odasi-raufenc-default-rtdb.europe-west1.firebasedatabase.app', oda: 'snd7hk42qx'};
+if (!durum._cihaz) { durum._cihaz = Math.random().toString(36).slice(2, 8); sakla(); }
+let fbTok = null, fbZaman = 0, yedekSaat;
+async function fbToken(){
+  if (fbTok && Date.now() - fbZaman < 45 * 60e3) return fbTok;
+  const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + FB.k, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{"returnSecureToken":true}'});
+  const d = await r.json(); fbTok = d.idToken; fbZaman = Date.now(); return fbTok;
+}
+async function fbYaz(anah, m, kalsin){
+  const t = await fbToken();
+  return fetch(`${FB.db}/do-odalar/${FB.oda}/kisiler/${durum._cihaz}-${anah}.json?auth=${t}`, {method: 'PUT', body: m === null ? 'null' : JSON.stringify({m}), keepalive: !!kalsin});
+}
+function yedekle(){
+  clearTimeout(yedekSaat);
+  yedekSaat = setTimeout(async () => {
+    try {
+      const sec = {}; for (const k in durum) if (k[0] !== '_') sec[k] = durum[k];
+      await fbYaz('secim', JSON.stringify({t: new Date().toISOString(), sec}));
+      for (const a of ['mukaddime', 'arka', 'ek']) {
+        const v = durum['_' + a] || '', n = Math.ceil(v.length / 1800);
+        for (let i = 0; i <= n && i < 12; i++) await fbYaz(a + i, i < n ? v.slice(i * 1800, (i + 1) * 1800) : null);
+      }
+    } catch (e) {}
+  }, 1500);
+}
 const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const vurgu = s => esc(s).replace(/\[(.+?)\]/g,'<b>$1</b>');
 const govde = document.getElementById('govde');
@@ -160,11 +186,11 @@ function ciz(){
 govde.addEventListener('click', e => {
   const b = e.target.closest('button.sec'); if (!b) return;
   const id = b.dataset.k, i = +b.dataset.i;
-  durum[id] = i; sakla(); ciz();
+  durum[id] = i; sakla(); ciz(); yedekle();
 });
 for (const t of ['mukaddime', 'arka', 'ek']) {
   const el = document.getElementById(t); el.value = durum['_' + t] || '';
-  el.addEventListener('input', () => { durum['_' + t] = el.value; sakla(); });
+  el.addEventListener('input', () => { durum['_' + t] = el.value; sakla(); yedekle(); });
 }
 function metin(){
   const L = ['*Şair Ne Demek İstedi? — Hocamızın kararları*', ''];
@@ -179,6 +205,7 @@ function metin(){
   return L.join('\n');
 }
 function waAc(){
+  try { fbYaz('wa', new Date().toISOString(), true); } catch (e) {}
   let n = ''; try { n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, ''); } catch (e) {}
   location.href = 'https://wa.me/' + (n || '905056750085') + '?text=' + encodeURIComponent(metin());
 }
