@@ -171,7 +171,7 @@ function metin(){
 }
 document.getElementById('wa').addEventListener('click', () => {
   let n = ''; try { n = (new URLSearchParams(location.search).get('n') || '').replace(/\D/g, ''); } catch (e) {}
-  location.href = 'https://wa.me/' + n + '?text=' + encodeURIComponent(metin());
+  location.href = 'https://wa.me/' + (n || '905056750085') + '?text=' + encodeURIComponent(metin());
 });
 document.getElementById('kopya').addEventListener('click', async e => {
   try { await navigator.clipboard.writeText(metin()); e.target.textContent = 'Kopyalandı ✓'; }
