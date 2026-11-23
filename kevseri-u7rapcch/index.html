@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kevserî Külliyatı Kapakları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Zümrüt başlık bandı, sağında öneri kapağı; altında sergi kataloğu gibi üç aşama. Her usulde künye solda, kapak rafı sağda, "Bu olabilir" ve not künyenin altında. */
+:root{
+  --bg:#f1f2ec; --kagit:#fbfbf7; --ink:#1b2823; --muted:#55625b; --rule:#d4d9cf;
+  --accent:#0f4a3a; --accent-2:#156b52; --gold:#a07d2e; --gold-acik:#e9dcb8;
+  --band:#0e3a2e; --band-ink:#f2efe3; --band-muted:#b9c8bd; --band-gold:#cfab5e;
+  --golge:rgba(16,32,25,.32);
+  --display:"Crimson Pro","Minion Pro",Georgia,serif; --sans:"Source Sans 3",system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto}
+.ic{max-width:1200px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;margin:0;text-wrap:balance}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Bant */
+.bant{position:relative;overflow:hidden;color:var(--band-ink);
+  background:radial-gradient(90% 120% at 78% 30%,#1d6a52 0%,rgba(14,58,46,0) 62%),linear-gradient(180deg,#0f3f32,var(--band));
+  padding-top:calc(env(safe-area-inset-top) + 64px);padding-bottom:0}
+.bant::after{content:"";position:absolute;left:0;right:0;bottom:0;height:9px;border-top:1px solid var(--band-gold);border-bottom:1px solid var(--band-gold);background:var(--band)}
+.bant .ic{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:40px;align-items:end}
+.metin{padding-bottom:64px;min-width:0}
+.ust{font:600 12.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--band-gold)}
+.bant h1{font-size:clamp(44px,6.4vw,84px);font-weight:600;margin-top:18px;letter-spacing:-.01em}
+.bant h1 em{font-style:italic;font-weight:400;color:var(--band-gold)}
+.giris{max-width:58ch;color:var(--band-muted);margin:22px 0 0;font-size:18.5px}
+.giris b{color:var(--band-ink);font-weight:600}
+.dizin{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:34px}
+.dizin div{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.dizin span{font:600 11.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--band-muted);margin-right:4px}
+.dizin a{display:inline-grid;place-items:center;min-width:36px;height:36px;padding:0 9px;border:1px solid rgba(207,171,94,.65);border-radius:18px;color:var(--band-ink);text-decoration:none;font:600 15px var(--display);transition:background .15s,color .15s}
+.dizin a:hover{background:rgba(207,171,94,.2)}
+.dizin a.on{background:var(--band-gold);color:var(--band);border-color:var(--band-gold)}
+.vitrin{align-self:end;justify-self:center;position:relative;width:min(100%,360px);margin-bottom:9px}
+.vitrin img{display:block;width:100%;border-radius:1px 3px 3px 1px;box-shadow:0 2px 3px rgba(0,0,0,.35),0 40px 60px -26px rgba(0,0,0,.75)}
+.vitrin::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.28) 0,rgba(255,255,255,.16) 1.3%,rgba(0,0,0,.08) 3%,transparent 7%)}
+.vitrin figcaption{position:absolute;left:0;right:0;bottom:0;text-align:center;font:italic 400 14px var(--display);color:var(--band-muted)}
+
+/* Aşamalar */
+.asama{padding-block:72px 8px}
+.asama+.asama{border-top:1px solid var(--rule)}
+.asama-bas{max-width:760px}
+.asama-no{display:block;font:700 12.5px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.asama-bas h2{font-size:clamp(32px,4vw,46px);margin-top:10px}
+.asama-bas p{color:var(--muted);margin:12px 0 0;max-width:62ch}
+.grup{margin-top:48px;display:flex;align-items:center;gap:18px}
+.grup h4{font-size:23px;font-weight:600;font-style:italic;color:var(--accent);white-space:nowrap}
+.grup::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+/* Usul */
+.usul{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);grid-template-areas:"k r" "t r";align-content:start;column-gap:52px;padding-block:40px;scroll-margin-top:20px}
+.usul+.usul{border-top:1px dashed var(--rule)}
+.kunye{grid-area:k;min-width:0}
+.raf{grid-area:r;min-width:0}
+.tepki{grid-area:t;min-width:0;align-self:start;margin-top:22px}
+.ad{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px}
+.kod{display:inline-grid;place-items:center;flex:none;min-width:48px;height:48px;padding:0 7px;border-radius:24px;border:1px solid var(--gold);background:var(--kagit);
+  box-shadow:inset 0 0 0 3px var(--kagit),inset 0 0 0 4px rgba(160,125,46,.4);color:var(--accent);font:600 17px var(--display);transition:background .2s,color .2s}
+.usul h3{font-size:29px}
+.rozet{display:none;font:700 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--band);background:var(--gold-acik);border:1px solid var(--gold);border-radius:12px;padding:4px 10px}
+.usul.secili .rozet{display:inline-block}
+.usul.secili .kod{background:var(--accent);color:var(--band-ink);box-shadow:inset 0 0 0 3px var(--accent),inset 0 0 0 4px var(--band-gold)}
+.aciklama{color:var(--muted);margin:14px 0 0;font-size:16.5px}
+
+.olabilir{display:inline-flex;align-items:center;gap:10px;font:600 16px var(--sans);padding:11px 20px 11px 14px;border-radius:26px;border:1.5px solid var(--accent);background:var(--kagit);color:var(--accent);cursor:pointer;transition:background .15s,color .15s,transform .1s}
+.olabilir:hover{background:#e6efe9}
+.olabilir:active{transform:scale(.98)}
+.kutucuk{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;flex:none}
+.olabilir[aria-pressed="true"]{background:var(--accent);color:#fff}
+.olabilir[aria-pressed="true"] .kutucuk{background:var(--band-gold);border-color:var(--band-gold)}
+.olabilir[aria-pressed="true"] .kutucuk::after{content:"";width:9px;height:5px;border-left:2px solid var(--band);border-bottom:2px solid var(--band);transform:translateY(-1px) rotate(-45deg)}
+.not-et{display:block;margin-top:18px;font:600 13px var(--sans);letter-spacing:.04em;color:var(--muted)}
+.not-et span{font-weight:400}
+textarea,input[type=text]{width:100%;margin-top:6px;font:16px/1.5 var(--sans);color:var(--ink);background:var(--kagit);border:1px solid var(--rule);border-radius:8px;padding:10px 12px;transition:border-color .15s,box-shadow .15s}
+textarea{resize:vertical;min-height:70px}
+textarea:focus,input[type=text]:focus{outline:none;border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(21,107,82,.15)}
+.kayit{display:block;min-height:18px;margin-top:4px;font-size:12.5px;color:var(--accent-2)}
+
+/* Kapak rafı */
+.raf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:end;padding:26px 26px 18px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.55));border-bottom:6px solid #d9d4c3;box-shadow:0 10px 14px -12px rgba(60,48,20,.45)}
+.raf.pilot{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+figure{margin:0;min-width:0}
+button.kapak{position:relative;display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+button.kapak img{display:block;width:100%;border-radius:1px 3px 3px 1px;box-shadow:0 1px 2px var(--golge),0 22px 30px -18px var(--golge)}
+button.kapak::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(0,0,0,.2) 0,rgba(255,255,255,.14) 1.4%,rgba(0,0,0,.06) 3%,transparent 7%)}
+.kars button.kapak::after{display:none}
+button.kapak:hover{transform:translateY(-6px)}
+figcaption{font:italic 400 15px/1.35 var(--display);color:var(--muted);margin-top:12px;text-align:center}
+.ilk .raf{opacity:.92}
+
+/* Gönder */
+.gonder{background:var(--band);color:var(--band-ink);margin-top:80px;padding-block:72px calc(env(safe-area-inset-bottom) + 80px);border-top:9px double var(--band-gold)}
+.gonder .ic{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+.gonder h2{font-size:clamp(34px,4.2vw,50px)}
+.gonder p{color:var(--band-muted);max-width:52ch}
+.gonder label{display:block;margin-top:20px;font:600 13px var(--sans);letter-spacing:.04em;color:var(--band-muted)}
+.gonder textarea,.gonder input[type=text]{background:#123f33;border-color:#2c5c4e;color:var(--band-ink)}
+.gonder textarea::placeholder,.gonder input::placeholder{color:#86a093}
+.ozet{background:#0b3026;border:1px solid #2c5c4e;border-radius:12px;padding:22px 24px;align-self:start}
+.ozet h3{font-size:22px;color:var(--band-gold)}
+.ozet ul{list-style:none;margin:12px 0 0;padding:0}
+.ozet li{display:flex;gap:12px;padding:10px 0;border-top:1px solid #20493d}
+.ozet li:first-child{border-top:0}
+.ozet .k{flex:none;min-width:34px;height:30px;display:grid;place-items:center;border-radius:15px;background:var(--band-gold);color:var(--band);font:600 14px var(--display);padding:0 6px}
+.ozet .n{display:block;color:var(--band-muted);font-size:14.5px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ozet .bos{color:var(--band-muted);font-style:italic;font-family:var(--display);font-size:17px;margin:10px 0 0}
+.dugmeler{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{font:700 16px var(--sans);padding:14px 24px;border-radius:30px;border:0;cursor:pointer}
+.btn.wa{background:var(--band-gold);color:var(--band)}
+.btn.wa:hover{background:#dcbb72}
+.btn.ikinci{background:transparent;color:var(--band-ink);border:1px solid #4c7769}
+.guvence{font-size:14px;margin-top:14px}
+
+/* Alt şerit */
+.serit{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom) + 16px);transform:translate(-50%,140%);z-index:20;display:flex;align-items:center;gap:14px;
+  background:var(--band);color:var(--band-ink);border:1px solid var(--band-gold);border-radius:30px;padding:8px 8px 8px 20px;box-shadow:0 14px 30px -10px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.2,.7,.3,1);white-space:nowrap;max-width:calc(100vw - 24px)}
+.serit.acik{transform:translate(-50%,0)}
+.serit b{color:var(--band-gold)}
+.serit a{background:var(--band-gold);color:var(--band);text-decoration:none;font-weight:700;border-radius:22px;padding:9px 16px}
+
+/* Büyütme */
+dialog{border:0;padding:0;margin:0;width:100vw;height:100dvh;max-width:none;max-height:none;background:rgba(7,16,12,.94);color:#fff}
+dialog::backdrop{background:rgba(7,16,12,.94)}
+.sahne{position:absolute;inset:0;display:grid;place-items:center;padding:calc(env(safe-area-inset-top) + 56px) 64px calc(env(safe-area-inset-bottom) + 64px)}
+.sahne img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.lb-yazi{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 18px);text-align:center;font:italic 16px var(--display);color:#cfd8d2}
+.lb-btn{position:absolute;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;border-radius:50%;width:48px;height:48px;font:400 26px/1 var(--sans);cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.14)}
+#lb-kapat{top:calc(env(safe-area-inset-top) + 12px);right:max(12px,env(safe-area-inset-right))}
+#lb-geri{left:max(10px,env(safe-area-inset-left));top:50%;transform:translateY(-50%)}
+#lb-ileri{right:max(10px,env(safe-area-inset-right));top:50%;transform:translateY(-50%)}
+
+@media (max-width:900px){
+  .bant .ic{grid-template-columns:minmax(0,1fr);gap:0}
+  .metin{padding-bottom:36px}
+  .vitrin{width:min(62%,300px)}
+  .usul{grid-template-columns:minmax(0,1fr);grid-template-areas:"k" "r" "t";row-gap:22px}
+  .tepki{margin-top:0}
+  .gonder .ic{grid-template-columns:minmax(0,1fr);gap:28px}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .bant{padding-top:calc(env(safe-area-inset-top) + 40px)}
+  .giris{font-size:17px}
+  .raf{gap:10px;padding:14px 10px 10px}
+  figcaption{font-size:12.5px;margin-top:7px}
+  .raf.pilot{grid-template-columns:minmax(0,1fr)}
+  .raf.pilot figure:first-child{width:72%;margin-inline:auto}
+  .usul h3{font-size:26px}
+  .sahne{padding-inline:8px}
+  #lb-geri,#lb-ileri{top:auto;bottom:calc(env(safe-area-inset-bottom) + 6px);transform:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}button.kapak:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="bant"><div class="ic">
+  <div class="metin">
+    <div class="ust">Misvak Neşriyat · Kevserî Külliyatı</div>
+    <h1>Kapak <em>önerileri</em></h1>
+    <p class="giris">Mevcut kapaklar için “yapay zekâyla üretildiği belli oluyor” yorumu gelmişti. Buradaki denemelerde <b>hiçbir yapay zekâ görseli yok</b>: her motif kodla tek tek kuruldu; taş, çini ve altın gerçek bir ışık hesabıyla aydınlatıldı. Size yakın gelenlere <b>“Bu olabilir”</b> deyin; birden fazlasını seçebilir, her birinin altına not bırakabilirsiniz.</p>
+    <nav class="dizin" aria-label="Usuller"><div><span>3. aşama</span><a href="#ik">İK</a></div><div><span>2. aşama</span><a href="#d">D</a><a href="#e">E</a><a href="#f">F</a><a href="#g">G</a><a href="#h">H</a><a href="#i">I</a></div><div><span>1. aşama</span><a href="#a1">A1</a><a href="#a2">A2</a><a href="#b">B</a><a href="#c1">C1</a><a href="#c2">C2</a></div></nav>
+  </div>
+  <figure class="vitrin"><img src="img/ik_01.jpg" width="720" height="1120" alt="İlim Kapısı önerisi, 1. kitap"></figure>
+</div></header>
+
+<main>
+  <section class="asama"><div class="ic">
+    <div class="asama-bas"><span class="asama-no">3. aşama · Önerimiz</span><h2>Kemerli kapı, el işi olarak</h2><p>Beğenilen kemerli kapı düzenini koruyup yapay zekâ izini sildik. Şimdilik yalnız 1. kitap hazır; seri onaylanınca on kitap aynı kapıdan çıkar.</p></div>
+    <section class="usul" id="ik" data-u="ik">
+      <div class="kunye">
+        <div class="ad"><span class="kod">İK</span><h3>İlim Kapısı</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Kapağı dolduran kemer, açık niş, iri başlık. Taş, sırlı çini ve altın tek bir ışıkla aydınlatılmış gerçek kabartma gibi işlendi; her motif kurallı ve simetrik, yakından bakınca hiçbir yer erimez. Kitapları renk, çini deseni ve kilit taşındaki numara ayırır.</p>
+      </div>
+      <div class="raf pilot"><figure class=""><button class="kapak" type="button" data-b="img/ik_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="İlim Kapısı, Te’nîb kapağı, büyük göster"><img src="img/ik_01.jpg" width="720" height="1120" alt="İlim Kapısı, Te’nîb kapağı" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class="kars"><button class="kapak" type="button" data-b="img/ik_kars-b.jpg" data-y="Solda bizimki, sağda mevcut kapak" aria-label="İlim Kapısı ile mevcut kapak yan yana, büyük göster"><img src="img/ik_kars.jpg" width="1100" height="881" alt="İlim Kapısı ile mevcut kapak yan yana" loading="lazy" decoding="async"></button><figcaption>Solda bizimki, sağda mevcut kapak</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="ik"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-ik">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-ik" data-u="ik" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+  </div></section>
+  <section class="asama"><div class="ic">
+    <div class="asama-bas"><span class="asama-no">2. aşama</span><h2>Sanat teknikleriyle altı yol</h2><p>Her yol bir sanat tekniğine dayanıyor ve üç kitapta denendi: 1, 4 ve 8.</p></div>
+    <div class="grup"><h4>Kemerli kapılar</h4></div>
+    <section class="usul" id="d" data-u="d">
+      <div class="kunye">
+        <div class="ad"><span class="kod">D</span><h3>Çini kemer</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">İznik çini panosu: dişli saz yaprakları, katmerli hatâyîler, kabarık mercan kırmızısı. Başlık kobalt kitabede beyaz Sülüs ile. Fildişi niş bütün kitaplarda aynı kalır; kitaplar pano rengiyle ayrılır.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/d_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="D Çini kemer, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/d_01.jpg" width="720" height="1103" alt="D Çini kemer, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/d_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="D Çini kemer, 4 · İmam Tahâvî, büyük göster"><img src="img/d_04.jpg" width="720" height="1103" alt="D Çini kemer, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/d_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="D Çini kemer, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/d_08.jpg" width="720" height="1103" alt="D Çini kemer, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="d"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-d">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-d" data-u="d" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="e" data-u="e">
+      <div class="kunye">
+        <div class="ad"><span class="kod">E</span><h3>Ebrulu mihrap</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Koyu zeminde tezhipli bir mihrap çerçevesi; nişin içi battal ebru. Her kitabın kendi zemin rengi ve kendi ebrusu var. Altın çizgiler baskıda yaldızla basılabilir.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/e_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="E Ebrulu mihrap, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/e_01.jpg" width="720" height="1103" alt="E Ebrulu mihrap, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/e_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="E Ebrulu mihrap, 4 · İmam Tahâvî, büyük göster"><img src="img/e_04.jpg" width="720" height="1103" alt="E Ebrulu mihrap, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/e_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="E Ebrulu mihrap, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/e_08.jpg" width="720" height="1103" alt="E Ebrulu mihrap, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="e"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-e">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-e" data-u="e" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="f" data-u="f">
+      <div class="kunye">
+        <div class="ad"><span class="kod">F</span><h3>Ebru pencere</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Bütün kapak battal ebru. Ortada kâğıt oyma (katı‘) usulüyle açılmış sivri kemerli bir pencere, başlık onun içinde. Ebrunun rengi kitaptan kitaba değişir.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/f_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="F Ebru pencere, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/f_01.jpg" width="720" height="1103" alt="F Ebru pencere, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/f_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="F Ebru pencere, 4 · İmam Tahâvî, büyük göster"><img src="img/f_04.jpg" width="720" height="1103" alt="F Ebru pencere, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/f_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="F Ebru pencere, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/f_08.jpg" width="720" height="1103" alt="F Ebru pencere, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="f"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-f">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-f" data-u="f" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="g" data-u="g">
+      <div class="kunye">
+        <div class="ad"><span class="kod">G</span><h3>Gravür taçkapı</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Eski mimari levhalar gibi ince çizgi ve taramayla çizilmiş mukarnaslı bir taçkapı. Kitabede Kevserî’nin adı, kapının içinde eserin Arapça adı. Çizgiler tek renk yaldız ya da gümüşle basılabilir.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/g_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="G Gravür taçkapı, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/g_01.jpg" width="720" height="1103" alt="G Gravür taçkapı, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/g_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="G Gravür taçkapı, 4 · İmam Tahâvî, büyük göster"><img src="img/g_04.jpg" width="720" height="1103" alt="G Gravür taçkapı, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/g_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="G Gravür taçkapı, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/g_08.jpg" width="720" height="1103" alt="G Gravür taçkapı, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="g"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-g">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-g" data-u="g" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <div class="grup"><h4>İçerikten doğan aile</h4></div>
+    <section class="usul" id="h" data-u="h">
+      <div class="kunye">
+        <div class="ad"><span class="kod">H</span><h3>Amblem</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Her kitabın içeriğinden bir amblem, gravür tekniğiyle: Te’nîb’de kırık isnad zinciri ve terazi, Tahâvî’de iki kaynaktan beslenen çeşme, Seyfü’s-Sakîl’de kılıç.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/h_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="H Amblem, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/h_01.jpg" width="720" height="1103" alt="H Amblem, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/h_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="H Amblem, 4 · İmam Tahâvî, büyük göster"><img src="img/h_04.jpg" width="720" height="1103" alt="H Amblem, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/h_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="H Amblem, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/h_08.jpg" width="720" height="1103" alt="H Amblem, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="h"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-h">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-h" data-u="h" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="i" data-u="i">
+      <div class="kunye">
+        <div class="ad"><span class="kod">I</span><h3>Şehir minyatürü</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Matrakçı Nasuh usulünde şehir minyatürleri; her kitap konusunun geçtiği şehri gösterir: Bağdat ve Dicle, Kahire ve Nil, Şam.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/i_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="I Şehir minyatürü, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/i_01.jpg" width="720" height="1120" alt="I Şehir minyatürü, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/i_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="I Şehir minyatürü, 4 · İmam Tahâvî, büyük göster"><img src="img/i_04.jpg" width="720" height="1120" alt="I Şehir minyatürü, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/i_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="I Şehir minyatürü, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/i_08.jpg" width="720" height="1120" alt="I Şehir minyatürü, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="i"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-i">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-i" data-u="i" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+  </div></section>
+  <section class="asama ilk"><div class="ic">
+    <div class="asama-bas"><span class="asama-no">1. aşama</span><h2>İlk denemeler</h2><p>Yazı ağırlıklı, logosuz ilk tur. Kayıt için burada duruyor.</p></div>
+    <section class="usul" id="a1" data-u="a1">
+      <div class="kunye">
+        <div class="ad"><span class="kod">A1</span><h3>Klasik cilt, koyu</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Osmanlı kitap cildi: şemse, köşebent ve zencirek; kumaş zemin üzerine mat altın.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/a1_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="A1 Klasik cilt, koyu, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/a1_01.jpg" width="720" height="1103" alt="A1 Klasik cilt, koyu, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/a1_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="A1 Klasik cilt, koyu, 4 · İmam Tahâvî, büyük göster"><img src="img/a1_04.jpg" width="720" height="1103" alt="A1 Klasik cilt, koyu, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/a1_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="A1 Klasik cilt, koyu, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/a1_08.jpg" width="720" height="1103" alt="A1 Klasik cilt, koyu, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="a1"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-a1">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-a1" data-u="a1" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="a2" data-u="a2">
+      <div class="kunye">
+        <div class="ad"><span class="kod">A2</span><h3>Klasik cilt, açık</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Aynı cilt düzeni krem bez üzerine tek renk baskıyla.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/a2_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="A2 Klasik cilt, açık, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/a2_01.jpg" width="720" height="1103" alt="A2 Klasik cilt, açık, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/a2_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="A2 Klasik cilt, açık, 4 · İmam Tahâvî, büyük göster"><img src="img/a2_04.jpg" width="720" height="1103" alt="A2 Klasik cilt, açık, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/a2_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="A2 Klasik cilt, açık, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/a2_08.jpg" width="720" height="1103" alt="A2 Klasik cilt, açık, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="a2"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-a2">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-a2" data-u="a2" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="b" data-u="b">
+      <div class="kunye">
+        <div class="ad"><span class="kod">B</span><h3>Ebru ve etiket</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Battal ebru kaplama, üstünde krem kâğıt etiket.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/b_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="B Ebru ve etiket, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/b_01.jpg" width="720" height="1103" alt="B Ebru ve etiket, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/b_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="B Ebru ve etiket, 4 · İmam Tahâvî, büyük göster"><img src="img/b_04.jpg" width="720" height="1103" alt="B Ebru ve etiket, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/b_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="B Ebru ve etiket, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/b_08.jpg" width="720" height="1103" alt="B Ebru ve etiket, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="b"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-b">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-b" data-u="b" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="c1" data-u="c1">
+      <div class="kunye">
+        <div class="ad"><span class="kod">C1</span><h3>Asıl sayfa, açık</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Zemin, eserin kendi Arapça baskısından bir sayfa; üstünde sade ilmî tipografi.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/c1_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="C1 Asıl sayfa, açık, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/c1_01.jpg" width="720" height="1103" alt="C1 Asıl sayfa, açık, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/c1_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="C1 Asıl sayfa, açık, 4 · İmam Tahâvî, büyük göster"><img src="img/c1_04.jpg" width="720" height="1103" alt="C1 Asıl sayfa, açık, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/c1_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="C1 Asıl sayfa, açık, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/c1_08.jpg" width="720" height="1103" alt="C1 Asıl sayfa, açık, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="c1"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-c1">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-c1" data-u="c1" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+    <section class="usul" id="c2" data-u="c2">
+      <div class="kunye">
+        <div class="ad"><span class="kod">C2</span><h3>Asıl sayfa, koyu</h3><span class="rozet">Olabilir</span></div>
+        <p class="aciklama">Aynı düzen koyu zeminde.</p>
+      </div>
+      <div class="raf"><figure class=""><button class="kapak" type="button" data-b="img/c2_01-b.jpg" data-y="1 · Ebû Hanîfe Müdafaası" aria-label="C2 Asıl sayfa, koyu, 1 · Ebû Hanîfe Müdafaası, büyük göster"><img src="img/c2_01.jpg" width="720" height="1103" alt="C2 Asıl sayfa, koyu, 1 · Ebû Hanîfe Müdafaası" loading="lazy" decoding="async"></button><figcaption>1 · Ebû Hanîfe Müdafaası</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/c2_04-b.jpg" data-y="4 · İmam Tahâvî" aria-label="C2 Asıl sayfa, koyu, 4 · İmam Tahâvî, büyük göster"><img src="img/c2_04.jpg" width="720" height="1103" alt="C2 Asıl sayfa, koyu, 4 · İmam Tahâvî" loading="lazy" decoding="async"></button><figcaption>4 · İmam Tahâvî</figcaption></figure><figure class=""><button class="kapak" type="button" data-b="img/c2_08-b.jpg" data-y="8 · Seyfü’s-Sakîl" aria-label="C2 Asıl sayfa, koyu, 8 · Seyfü’s-Sakîl, büyük göster"><img src="img/c2_08.jpg" width="720" height="1103" alt="C2 Asıl sayfa, koyu, 8 · Seyfü’s-Sakîl" loading="lazy" decoding="async"></button><figcaption>8 · Seyfü’s-Sakîl</figcaption></figure></div>
+      <div class="tepki">
+        <button class="olabilir" type="button" aria-pressed="false" data-u="c2"><span class="kutucuk" aria-hidden="true"></span><span class="yazi">Bu olabilir</span></button>
+        <label class="not-et" for="not-c2">Notunuz <span>(isteğe bağlı)</span></label>
+        <textarea id="not-c2" data-u="c2" rows="2" maxlength="1800" placeholder="Beğendiğiniz ya da değişmesini istediğiniz bir şey…"></textarea>
+        <span class="kayit" aria-live="polite"></span>
+      </div>
+    </section>
+  </div></section>
+</main>
+
+<section class="gonder" id="gonder"><div class="ic">
+  <div>
+    <h2>Görüşünüzü iletin</h2>
+    <p>İşaretleriniz ve notlarınız siz yazdıkça kendiliğinden bize ulaşıyor; sayfayı kapatıp sonra dönebilirsiniz, kaldığınız yerden devam eder. İsterseniz özetini bir de WhatsApp’tan gönderebilirsiniz.</p>
+    <label for="ad">Adınız</label>
+    <input type="text" id="ad" maxlength="80" autocomplete="name" placeholder="Kimden geldiğini bilelim">
+    <label for="genel">Genel notunuz <span style="font-weight:400">(isteğe bağlı)</span></label>
+    <textarea id="genel" rows="4" maxlength="1800" placeholder="Seri bütünü, renkler, logo, yazılar…"></textarea>
+    <div class="dugmeler"><button class="btn wa" id="wa" type="button">WhatsApp ile gönder</button><button class="btn ikinci" id="kopya" type="button">Metni kopyala</button></div>
+    <p class="guvence" id="guvence"></p>
+  </div>
+  <aside class="ozet" aria-live="polite"><h3>Seçtikleriniz</h3><div id="ozet"></div></aside>
+</div></section>
+
+<div class="serit" id="serit" aria-hidden="true"><span id="serit-yazi"></span><a href="#gonder" tabindex="-1">Gönder</a></div>
+
+<dialog id="lb" aria-label="Kapak büyütme">
+  <div class="sahne"><img id="lb-img" alt=""></div>
+  <div class="lb-yazi" id="lb-yazi"></div>
+  <button class="lb-btn" id="lb-kapat" type="button" aria-label="Kapat">×</button>
+  <button class="lb-btn" id="lb-geri" type="button" aria-label="Önceki">‹</button>
+  <button class="lb-btn" id="lb-ileri" type="button" aria-label="Sonraki">›</button>
+</dialog>
+
+<script>
+const USUL = [["ik", "İK", "İlim Kapısı"], ["d", "D", "Çini kemer"], ["e", "E", "Ebrulu mihrap"], ["f", "F", "Ebru pencere"], ["g", "G", "Gravür taçkapı"], ["h", "H", "Amblem"], ["i", "I", "Şehir minyatürü"], ["a1", "A1", "Klasik cilt, koyu"], ["a2", "A2", "Klasik cilt, açık"], ["b", "B", "Ebru ve etiket"], ["c1", "C1", "Asıl sayfa, açık"], ["c2", "C2", "Asıl sayfa, koyu"]];
+const AD = Object.fromEntries(USUL.map(u => [u[0], u]));
+const ANAH = 'kvs-teklif-v1';
+let d = {};
+try { d = JSON.parse(localStorage.getItem(ANAH) || '{}') || {}; } catch (e) { d = {}; }
+d.olabilir = d.olabilir || {}; d.not = d.not || {};
+if (!d.cihaz) d.cihaz = Math.random().toString(36).slice(2, 8);
+const sakla = () => { try { localStorage.setItem(ANAH, JSON.stringify(d)); } catch (e) {} };
+sakla();
+
+// Cevaplar: Ders Odası Firebase (do-odalar/<oda>/kisiler/<cihaz>-…), anonim giriş
+const FB = {k: 'AIzaSyCr9eR9eEbLdc-KpTGdObr4wIE86K1eFM0', db: 'https://ders-odasi-raufenc-default-rtdb.europe-west1.firebasedatabase.app', oda: 'kvsu7rapcch'};
+let tok = null, tokZaman = 0;
+async function token() {
+  if (tok && Date.now() - tokZaman < 45 * 60e3) return tok;
+  const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + FB.k, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{"returnSecureToken":true}'});
+  tok = (await r.json()).idToken; tokZaman = Date.now(); return tok;
+}
+async function yaz(anah, m, kalsin) {
+  const t = await token();
+  const r = await fetch(`${FB.db}/do-odalar/${FB.oda}/kisiler/${d.cihaz}-${anah}.json?auth=${t}`, {method: 'PUT', body: m === null ? 'null' : JSON.stringify({m}), keepalive: !!kalsin});
+  if (!r.ok) throw new Error(r.status);
+}
+const bekleyen = {};
+function gonderSirasi(anah, deger, durumEl) {
+  clearTimeout(bekleyen[anah]);
+  if (durumEl) durumEl.textContent = '';
+  bekleyen[anah] = setTimeout(async () => {
+    try { await yaz(anah, deger); if (durumEl) durumEl.textContent = 'Kaydedildi'; }
+    catch (e) { if (durumEl) durumEl.textContent = 'Kaydedilemedi; aşağıdaki WhatsApp düğmesiyle gönderebilirsiniz.'; }
+  }, 1200);
+}
+const ozetVeri = () => JSON.stringify({t: new Date().toISOString(), ad: d.ad || '', olabilir: Object.keys(d.olabilir).filter(k => d.olabilir[k])});
+
+// Usul bölümleri
+document.querySelectorAll('.usul').forEach(s => {
+  const u = s.dataset.u, btn = s.querySelector('.olabilir'), ta = s.querySelector('textarea'), kayit = s.querySelector('.kayit');
+  ta.value = d.not[u] || '';
+  btn.addEventListener('click', () => {
+    d.olabilir[u] = !d.olabilir[u]; sakla(); ciz();
+    gonderSirasi('ozet', ozetVeri(), kayit);
+  });
+  ta.addEventListener('input', () => {
+    d.not[u] = ta.value; sakla(); ciz();
+    gonderSirasi('not-' + u, ta.value.trim() ? ta.value.slice(0, 1800) : null, kayit);
+  });
+});
+const adEl = document.getElementById('ad'), genelEl = document.getElementById('genel'), guv = document.getElementById('guvence');
+adEl.value = d.ad || ''; genelEl.value = d.genel || '';
+adEl.addEventListener('input', () => { d.ad = adEl.value; sakla(); gonderSirasi('ozet', ozetVeri(), guv); });
+genelEl.addEventListener('input', () => { d.genel = genelEl.value; sakla(); ciz(); gonderSirasi('genel', genelEl.value.trim() ? genelEl.value.slice(0, 1800) : null, guv); });
+
+const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+function ciz() {
+  let n = 0;
+  const satir = [];
+  for (const [u, kod, bas] of USUL) {
+    const on = !!d.olabilir[u], not = (d.not[u] || '').trim();
+    const s = document.getElementById(u);
+    s.classList.toggle('secili', on);
+    const b = s.querySelector('.olabilir'); b.setAttribute('aria-pressed', on); b.querySelector('.yazi').textContent = on ? 'Olabilir' : 'Bu olabilir';
+    const a = document.querySelector(`.dizin a[href="#${u}"]`); if (a) a.classList.toggle('on', on);
+    if (on) n++;
+    if (on || not) satir.push(`<li><span class="k">${kod}</span><div><b>${esc(bas)}</b>${on ? '' : ' <i style="opacity:.7">(yalnız not)</i>'}${not ? `<span class="n">${esc(not)}</span>` : ''}</div></li>`);
+  }
+  const g = (d.genel || '').trim();
+  if (g) satir.push(`<li><span class="k">✎</span><div><b>Genel not</b><span class="n">${esc(g)}</span></div></li>`);
+  document.getElementById('ozet').innerHTML = satir.length ? `<ul>${satir.join('')}</ul>` : '<p class="bos">Henüz bir şey işaretlemediniz. Beğendiğiniz usulün altındaki “Bu olabilir” düğmesine dokunun.</p>';
+  document.getElementById('serit-yazi').innerHTML = `<b>${n}</b> usul işaretli`;
+  seritGuncelle(n);
+}
+let gonderGorunur = false;
+function seritGuncelle(n) {
+  const ac = n > 0 && !gonderGorunur;
+  const s = document.getElementById('serit'); s.classList.toggle('acik', ac); s.setAttribute('aria-hidden', !ac);
+  s.querySelector('a').tabIndex = ac ? 0 : -1;
+}
+new IntersectionObserver(es => es.forEach(x => { gonderGorunur = x.isIntersecting; seritGuncelle(Object.values(d.olabilir).filter(Boolean).length); }), {threshold: .05}).observe(document.getElementById('gonder'));
+
+function metin() {
+  const L = ['*Kevserî Külliyatı kapakları*' + (d.ad ? ' · ' + d.ad.trim() : ''), ''];
+  const ol = USUL.filter(u => d.olabilir[u[0]]);
+  L.push('*Olabilir:* ' + (ol.length ? ol.map(u => u[1] + ' ' + u[2]).join(', ') : '—'));
+  const notlu = USUL.filter(u => (d.not[u[0]] || '').trim());
+  if (notlu.length) { L.push('', '*Notlar*'); notlu.forEach(u => L.push(`${u[1]} ${u[2]}: ${d.not[u[0]].trim()}`)); }
+  if ((d.genel || '').trim()) L.push('', '*Genel not:* ' + d.genel.trim());
+  return L.join('\n');
+}
+document.getElementById('wa').addEventListener('click', () => {
+  try { yaz('wa', new Date().toISOString(), true); yaz('ozet', ozetVeri(), true); } catch (e) {}
+  location.href = 'https://wa.me/905056750085?text=' + encodeURIComponent(metin());
+});
+document.getElementById('kopya').addEventListener('click', async e => {
+  const b = e.currentTarget;
+  try { await navigator.clipboard.writeText(metin()); }
+  catch (err) { const t = document.createElement('textarea'); t.value = metin(); document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch (x) {} t.remove(); }
+  b.textContent = 'Kopyalandı'; setTimeout(() => b.textContent = 'Metni kopyala', 2000);
+});
+
+// Büyütme
+const lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img'), lbYazi = document.getElementById('lb-yazi');
+const kapaklar = [...document.querySelectorAll('button.kapak')];
+let sira = 0;
+function goster(i) {
+  sira = (i + kapaklar.length) % kapaklar.length;
+  const b = kapaklar[sira], u = b.closest('.usul'), x = AD[u.dataset.u];
+  lbImg.src = b.querySelector('img').src; lbImg.alt = b.querySelector('img').alt;
+  const buyuk = new Image(); buyuk.onload = () => { if (kapaklar[sira] === b) lbImg.src = buyuk.src; }; buyuk.src = b.dataset.b;
+  lbYazi.textContent = `${x[1]} · ${x[2]} — ${b.dataset.y}`;
+}
+kapaklar.forEach((b, i) => b.addEventListener('click', () => { goster(i); lb.showModal(); }));
+document.getElementById('lb-kapat').onclick = () => lb.close();
+document.getElementById('lb-geri').onclick = () => goster(sira - 1);
+document.getElementById('lb-ileri').onclick = () => goster(sira + 1);
+lb.addEventListener('click', e => { if (e.target.classList.contains('sahne')) lb.close(); });
+lb.addEventListener('keydown', e => { if (e.key === 'ArrowRight') goster(sira + 1); if (e.key === 'ArrowLeft') goster(sira - 1); });
+let x0 = null;
+lb.addEventListener('pointerdown', e => x0 = e.clientX);
+lb.addEventListener('pointerup', e => { if (x0 !== null && Math.abs(e.clientX - x0) > 50) goster(sira + (e.clientX < x0 ? 1 : -1)); x0 = null; });
+
+ciz();
+</script>
+</body>
+</html>
