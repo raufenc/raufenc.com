@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Şair Ne Demek İstedi? · Geri bildirim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--zemin:#2b2a27;--masa:#34322e;--kart:#fffdf7;--krem:#f6f0e2;--yesil:#1f4d3a;--yesil2:#2f6a52;--laci:#1d2340;--altin:#b08a3e;--kiremit:#a3472b;--yazi:#22211d;--soluk:#6c665a;--cizgi:#e3d8bf}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--zemin);color:var(--yazi);font-family:"Source Sans 3",system-ui,sans-serif;display:flex;overflow:hidden}
+button{font:inherit;cursor:pointer}
+/* ---------- kitap alanı ---------- */
+#sahne{flex:1;min-width:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 30% 40%,#3d3a34,#262521 70%)}
+#ust{display:flex;align-items:center;gap:12px;padding:10px 16px;color:#e9e2d2;font-size:14px}
+#ust b{font-family:"EB Garamond",serif;font-weight:500;font-size:19px;color:#fff}
+#ust .yer{margin-left:auto;opacity:.8}
+#kitapAlan{flex:1;min-height:0;display:flex;align-items:center;justify-content:flex-start;padding:8px 16px;position:relative}
+#kitap{position:relative;display:flex;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45));transition:opacity .18s}
+#kitap.gecis{opacity:.15}
+.sayfa{position:relative;background:#fbf7ee;overflow:hidden}
+.sayfa img{display:block;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.sayfa.bos{background:#efe8d8}
+.sayfa.bos::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 12px,rgba(0,0,0,.025) 12px 13px)}
+.sayfa.sol::before,.sayfa.sag::before{content:"";position:absolute;top:0;bottom:0;width:7%;z-index:2;pointer-events:none}
+.sayfa.sol::before{right:0;background:linear-gradient(to left,rgba(0,0,0,.18),transparent)}
+.sayfa.sag::before{left:0;background:linear-gradient(to right,rgba(0,0,0,.16),transparent)}
+.sayfa.kapak::before{display:none}
+.etiket{position:absolute;bottom:-26px;left:0;right:0;text-align:center;color:#cfc6b2;font-size:13px}
+.pin{position:absolute;z-index:3;transform:translate(-50%,-100%);min-width:24px;height:24px;padding:0 6px;border-radius:12px 12px 12px 2px;background:var(--kiremit);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.35);cursor:pointer;border:2px solid #fff}
+.pin.benim{background:var(--yesil2)}
+.pin.secili{outline:3px solid #ffd54a}
+.sayfa.isaretle{cursor:crosshair}
+.ok{flex:0 0 auto;width:44px;height:64px;margin:0 8px;border:0;border-radius:10px;background:rgba(255,255,255,.08);color:#fff;font-size:26px;z-index:5}
+.ok:hover{background:rgba(255,255,255,.18)}
+.ok:disabled{opacity:.2;cursor:default}
+#alt{display:flex;align-items:center;gap:12px;padding:10px 20px 14px;color:#cfc6b2;font-size:13px}
+#alt input[type=range]{flex:1;accent-color:#c9a35a}
+#alt select{background:#3d3a34;color:#fff;border:1px solid #57524a;border-radius:8px;padding:6px 8px;max-width:220px}
+/* ---------- not bölmesi ---------- */
+#panel{width:400px;flex:0 0 400px;background:var(--krem);display:flex;flex-direction:column;border-left:1px solid #000;min-height:0}
+#panel header{padding:16px 18px 10px;border-bottom:1px solid var(--cizgi);background:#fbf6ea}
+#panel h2{font-family:"EB Garamond",serif;font-weight:500;font-size:24px;margin:0;color:var(--yesil)}
+#panel .alt{font-size:13px;color:var(--soluk);margin-top:2px}
+#kim{display:flex;gap:8px;margin-top:10px;align-items:center}
+#kim input{flex:1;border:1.5px solid var(--cizgi);border-radius:9px;padding:8px 10px;font:inherit;background:#fff}
+#kim input:focus{outline:none;border-color:var(--yesil)}
+#sekmeler{display:flex;border-bottom:1px solid var(--cizgi)}
+#sekmeler button{flex:1;border:0;background:none;padding:10px;font-weight:600;color:var(--soluk);border-bottom:3px solid transparent}
+#sekmeler button.on{color:var(--yesil);border-bottom-color:var(--yesil)}
+#govde{flex:1;overflow:auto;padding:14px 18px 20px}
+.kutu{background:var(--kart);border:1px solid var(--cizgi);border-radius:14px;padding:12px}
+.hedefler{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 10px}
+.hedefler button{border:1.5px solid var(--cizgi);background:#fff;border-radius:999px;padding:5px 11px;font-size:13px;color:var(--yazi)}
+.hedefler button.on{border-color:var(--yesil);background:#e6efe2;color:var(--yesil);font-weight:600}
+textarea{width:100%;min-height:120px;resize:vertical;border:1.5px solid var(--cizgi);border-radius:10px;padding:10px;font:inherit;font-size:16px;line-height:1.45;background:#fff}
+textarea:focus{outline:none;border-color:var(--yesil)}
+.satir{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}
+.btn{border:0;border-radius:9px;padding:8px 12px;font-weight:600;font-size:14px}
+.btn.ana{background:var(--yesil);color:#fff}
+.btn.ikinci{background:#ece4d2;color:var(--yazi)}
+.btn.pinbtn.on{background:var(--kiremit);color:#fff}
+#durum{font-size:12.5px;color:var(--soluk);margin-left:auto}
+#durum.ok{color:var(--yesil2)}#durum.hata{color:var(--kiremit)}
+.baslik2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--altin);font-weight:700;margin:18px 0 8px}
+.not{background:#fff;border:1px solid var(--cizgi);border-radius:12px;padding:10px 12px;margin-bottom:9px;cursor:pointer}
+.not:hover{border-color:#cdbf9d}
+.not.benim{border-left:4px solid var(--yesil2)}
+.not .ust{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--soluk);margin-bottom:3px}
+.not .ust b{color:var(--yazi)}
+.not .no{background:var(--kiremit);color:#fff;border-radius:10px;padding:0 7px;font-weight:700;font-size:11.5px}
+.not.benim .no{background:var(--yesil2)}
+.not .yer{margin-left:auto}
+.not p{margin:0;white-space:pre-wrap;font-size:15px;line-height:1.4}
+.not .sil{border:0;background:none;color:var(--kiremit);font-size:12px;padding:0;margin-left:8px}
+.bosnot{color:var(--soluk);font-size:14px;font-style:italic}
+.grup{font-family:"EB Garamond",serif;font-size:18px;color:var(--yesil);margin:14px 0 6px;cursor:pointer}
+.grup small{font-family:"Source Sans 3",sans-serif;font-size:12px;color:var(--soluk);margin-left:6px}
+#ipucu{font-size:12.5px;color:var(--soluk);margin-top:8px;line-height:1.4}
+#ac{display:none}
+/* ---------- telefon ---------- */
+@media (max-width:900px){
+  body{flex-direction:column;overflow:auto;height:auto}
+  #sahne{min-height:72vh}
+  #kitapAlan{justify-content:center;padding:8px 8px}
+  #panel{width:auto;flex:none;border-left:0;border-top:1px solid #000}
+  #govde{overflow:visible}
+  .ok{width:36px}
+}
+</style>
+</head>
+<body>
+<div id="sahne">
+  <div id="ust"><b>Şair Ne Demek İstedi?</b><span>Hayati İnanç · baskıya hazır son hâl</span><span class="yer" id="yerYazi"></span></div>
+  <div id="kitapAlan">
+    <button class="ok" id="geri" aria-label="Önceki">‹</button>
+    <div id="kitap"></div>
+    <button class="ok" id="ileri" aria-label="Sonraki">›</button>
+  </div>
+  <div id="alt">
+    <select id="git" aria-label="Sayfaya git"></select>
+    <input type="range" id="kaydir" min="0" value="0" aria-label="Sayfa">
+    <span id="sayac"></span>
+  </div>
+</div>
+<aside id="panel">
+  <header>
+    <h2>Notlarınız</h2>
+    <div class="alt">Yazdığınız her not birkaç saniye içinde kendiliğinden bize ulaşır; “gönder”e basmanız gerekmez.</div>
+    <div id="kim"><input id="ad" placeholder="Adınız (notların başında görünür)" maxlength="40" autocomplete="name"></div>
+  </header>
+  <div id="sekmeler"><button class="on" data-s="bu">Bu sayfalar</button><button data-s="tum">Bütün notlar <span id="tumSay"></span></button></div>
+  <div id="govde"></div>
+</aside>
+<script>
+/* ================== kitap ================== */
+const ORAN = 165 / 235;
+const P = n => `s/${String(n).padStart(3, '0')}.webp`;
+const ACILIM = [[null, {src: 's/on.webp', ad: 'Ön kapak', k: 'on', kapak: 1}], [{bos: 1, ad: 'İç kapak'}, {src: P(1), ad: 's. 1', k: '1'}]];
+for (let n = 2; n <= 110; n += 2) ACILIM.push([{src: P(n), ad: 's. ' + n, k: String(n)}, {src: P(n + 1), ad: 's. ' + (n + 1), k: String(n + 1)}]);
+ACILIM.push([{src: P(112), ad: 's. 112', k: '112'}, {bos: 1, ad: 'İç kapak'}]);
+ACILIM.push([{src: 's/arka.webp', ad: 'Arka kapak', k: 'arka', kapak: 1}, null]);
+const BOLUM = n => n === 1 ? 'Başlık' : n === 2 ? 'Künye' : n === 3 ? 'Mukaddime' : n >= 4 && n <= 107 ? 'Beyit ' + Math.floor((n - 2) / 2) : n === 108 ? 'Dinleme rehberi' : n === 109 ? 'Hayati İnanç' : n <= 111 ? 'Fihrist' : 'Yeni Kök kitaplığı';
+const sayfaAdi = k => k === 'on' ? 'Ön kapak' : k === 'arka' ? 'Arka kapak' : k === 'genel' ? 'Genel' : `s. ${k} · ${BOLUM(+k)}`;
+const acilimAdi = i => { const [a, b] = ACILIM[i]; const k = [a, b].filter(x => x && x.k).map(x => x.k);
+  if (k[0] === 'on') return 'Ön kapak'; if (k[0] === 'arka') return 'Arka kapak';
+  const n = +k[0]; return k.length > 1 ? `s. ${k[0]}–${k[1]} · ${BOLUM(+k[1])}` : `s. ${n} · ${BOLUM(n)}`; };
+const kitapEl = document.getElementById('kitap'), alanEl = document.getElementById('kitapAlan');
+let ai = 0;
+try { const h = +(location.hash.match(/a(\d+)/) || [])[1]; if (h >= 0 && h < ACILIM.length) ai = h; } catch (e) {}
+function boyut(){
+  const r = alanEl.getBoundingClientRect(); const tek = innerWidth <= 900;
+  const yH = r.height - 44, yW = (r.width - 150) / (tek ? 1 : 2);
+  const h = Math.max(200, Math.min(yH, yW / ORAN)); return {h, w: h * ORAN, tek};
+}
+let tekGoster = 0; // telefonda açılımın hangi yüzü
+function ciz(anim){
+  const {h, w, tek} = boyut();
+  const yuz = ACILIM[ai];
+  let goster = tek ? [yuz[tekGoster] || yuz.find(Boolean)] : yuz;
+  kitapEl.innerHTML = '';
+  goster.forEach((s, j) => {
+    const d = document.createElement('div');
+    const solMu = !tek && j === 0;
+    if (!s) { d.style.cssText = `width:${w}px;height:${h}px;visibility:hidden`; kitapEl.appendChild(d); return; }
+    d.className = 'sayfa ' + (s.bos ? 'bos ' : '') + (tek ? '' : (solMu ? 'sol' : 'sag')) + (s.kapak ? ' kapak' : '');
+    d.style.cssText = `width:${w}px;height:${h}px`;
+    if (s.src) { const im = new Image(); im.src = s.src; im.alt = s.ad; im.decoding = 'async'; d.appendChild(im); d.dataset.k = s.k; }
+    const e = document.createElement('div'); e.className = 'etiket'; e.textContent = s.ad; d.appendChild(e);
+    if (s.k) d.addEventListener('click', ev => sayfaTik(ev, d, s.k));
+    kitapEl.appendChild(d);
+  });
+  pinleriCiz();
+  document.getElementById('yerYazi').textContent = acilimAdi(ai);
+  document.getElementById('sayac').textContent = `${ai + 1} / ${ACILIM.length}`;
+  document.getElementById('kaydir').value = ai; document.getElementById('git').value = ai;
+  document.getElementById('geri').disabled = ai === 0 && (!tek || tekGoster === 0 || !ACILIM[0][0]);
+  document.getElementById('ileri').disabled = ai === ACILIM.length - 1;
+  try { history.replaceState(null, '', '#a' + ai); } catch (e) {}
+  // komşuları önceden yükle
+  [ai - 1, ai + 1, ai + 2].forEach(i => ACILIM[i] && ACILIM[i].forEach(s => s && s.src && (new Image().src = s.src)));
+  hedefleriKur(); panelCiz();
+}
+function git(i){ if (i < 0 || i >= ACILIM.length || i === ai) return; kitapEl.classList.add('gecis');
+  setTimeout(() => { ai = i; tekGoster = 0; if (innerWidth <= 900 && !ACILIM[ai][0]) tekGoster = 1; ciz(); kitapEl.classList.remove('gecis'); }, 140); }
+function ileri(){ const tek = innerWidth <= 900; const y = ACILIM[ai];
+  if (tek && tekGoster === 0 && y[0] && y[1]) { tekGoster = 1; ciz(); return; } git(ai + 1); }
+function geri(){ const tek = innerWidth <= 900; const y = ACILIM[ai];
+  if (tek && tekGoster === 1 && y[0]) { tekGoster = 0; ciz(); return; }
+  if (ai === 0) return; kitapEl.classList.add('gecis');
+  setTimeout(() => { ai -= 1; const y2 = ACILIM[ai]; tekGoster = (tek && y2[1]) ? 1 : 0; ciz(); kitapEl.classList.remove('gecis'); }, 140); }
+document.getElementById('ileri').onclick = ileri; document.getElementById('geri').onclick = geri;
+addEventListener('keydown', e => { if (/TEXTAREA|INPUT|SELECT/.test(document.activeElement.tagName)) return;
+  if (e.key === 'ArrowRight') ileri(); if (e.key === 'ArrowLeft') geri(); });
+let tx = null; alanEl.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive: true});
+alanEl.addEventListener('touchend', e => { if (tx === null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) (dx < 0 ? ileri : geri)(); tx = null; });
+const kay = document.getElementById('kaydir'); kay.max = ACILIM.length - 1; kay.oninput = () => git(+kay.value);
+const sec = document.getElementById('git'); ACILIM.forEach((_, i) => sec.add(new Option(acilimAdi(i), i))); sec.onchange = () => git(+sec.value);
+addEventListener('resize', () => ciz());
+
+/* ================== notlar (Ders Odası Firebase, anonim giriş) ================== */
+const FB = {k: 'AIzaSyCr9eR9eEbLdc-KpTGdObr4wIE86K1eFM0', db: 'https://ders-odasi-raufenc-default-rtdb.europe-west1.firebasedatabase.app', oda: 'bbgbk25x'};
+const LS = 'snd-gb-v1';
+let yerel = {}; try { yerel = JSON.parse(localStorage.getItem(LS) || '{}') || {}; } catch (e) {}
+if (!yerel.kisi) yerel.kisi = Math.random().toString(36).slice(2, 8);
+yerel.notlar = yerel.notlar || {};          // kendi notlarım (yedek)
+const yaz = () => { try { localStorage.setItem(LS, JSON.stringify(yerel)); } catch (e) {} };
+yaz();
+let tok = null, tokZ = 0;
+async function token(){ if (tok && Date.now() - tokZ < 45 * 60e3) return tok;
+  const r = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + FB.k, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{"returnSecureToken":true}'});
+  const d = await r.json(); if (!d.idToken) throw new Error('giriş'); tok = d.idToken; tokZ = Date.now(); return tok; }
+const url = (yol, t) => `${FB.db}/do-odalar/${FB.oda}/kisiler${yol}.json?auth=${t}`;
+let HEPSI = {};   // anahtar → not
+async function cek(){ try { const t = await token(); const r = await fetch(url('', t)); const d = await r.json() || {};
+    HEPSI = {}; for (const [k, v] of Object.entries(d)) { try { const n = JSON.parse(v.m); n.id = k; HEPSI[k] = n; } catch (e) {} }
+    for (const [k, n] of Object.entries(yerel.notlar)) if (!HEPSI[k] && n.bekliyor) HEPSI[k] = {...n, id: k};
+    pinleriCiz(); panelCiz(); } catch (e) {} }
+async function gonder(id){ const n = yerel.notlar[id]; if (!n) return;
+  durum('Kaydediliyor…');
+  try { const t = await token(); const govde = n.silindi ? 'null' : JSON.stringify({m: JSON.stringify({ad: n.ad, sayfa: n.sayfa, x: n.x, y: n.y, metin: n.metin, t: n.t, kisi: yerel.kisi})});
+    const r = await fetch(url('/' + id, t), {method: 'PUT', body: govde}); if (!r.ok) throw new Error(r.status);
+    n.bekliyor = false; if (n.silindi) { delete yerel.notlar[id]; delete HEPSI[id]; } else HEPSI[id] = {...n, kisi: yerel.kisi, id};
+    yaz(); durum('Bize ulaştı ✓', 'ok'); pinleriCiz(); listeCiz(); }
+  catch (e) { n.bekliyor = true; yaz(); durum('Bağlantı yok; not bu cihazda saklı, kendiliğinden tekrar denenecek.', 'hata'); setTimeout(() => gonder(id), 8000); } }
+function durum(t, c){ const d = document.getElementById('durum'); if (d) { d.textContent = t; d.className = c || ''; } }
+
+/* ---------- panel ---------- */
+const adEl = document.getElementById('ad'); adEl.value = yerel.ad || '';
+adEl.oninput = () => { yerel.ad = adEl.value.trim(); yaz(); };
+let sekme = 'bu', aktif = null, hedef = null, pinModu = false, siraNo = {};
+document.querySelectorAll('#sekmeler button').forEach(b => b.onclick = () => { document.querySelectorAll('#sekmeler button').forEach(x => x.classList.toggle('on', x === b)); sekme = b.dataset.s; panelCiz(); });
+function bunlar(){ return ACILIM[ai].filter(s => s && s.k).map(s => s.k); }
+function hedefleriKur(){ const k = bunlar(); if (!hedef || (!k.includes(hedef) && hedef !== 'genel')) hedef = k[k.length - 1] || 'genel'; }
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const zaman = t => { const d = new Date(t); return d.toLocaleDateString('tr-TR', {day: 'numeric', month: 'short'}) + ' ' + d.toLocaleTimeString('tr-TR', {hour: '2-digit', minute: '2-digit'}); };
+function numarala(){ siraNo = {}; const s = Object.values(HEPSI).sort((a, b) => a.t - b.t); s.forEach((n, i) => siraNo[n.id] = i + 1); }
+function notKart(n){ const ben = n.kisi === yerel.kisi;
+  return `<div class="not ${ben ? 'benim' : ''}" data-id="${n.id}"><div class="ust"><span class="no">${siraNo[n.id] || '•'}</span><b>${esc(n.ad || 'İsimsiz')}</b><span>${zaman(n.t)}</span><span class="yer">${esc(sayfaAdi(n.sayfa))}${n.x != null ? ' · 📍' : ''}</span></div><p>${esc(n.metin)}</p>${ben ? '<div class="ust" style="margin:6px 0 0">Dokunup düzenleyebilirsiniz<button class="sil" data-sil="' + n.id + '">Sil</button></div>' : ''}</div>`; }
+function panelCiz(){
+  numarala(); const g = document.getElementById('govde');
+  document.getElementById('tumSay').textContent = Object.keys(HEPSI).length ? `(${Object.keys(HEPSI).length})` : '';
+  if (sekme === 'tum') {
+    const gr = {}; Object.values(HEPSI).forEach(n => (gr[n.sayfa] = gr[n.sayfa] || []).push(n));
+    const sira = k => k === 'on' ? -1 : k === 'genel' ? -2 : k === 'arka' ? 999 : +k;
+    const ks = Object.keys(gr).sort((a, b) => sira(a) - sira(b));
+    g.innerHTML = ks.length ? ks.map(k => `<div class="grup" data-git="${k}">${esc(sayfaAdi(k))}<small>${gr[k].length} not · sayfaya git</small></div>` + gr[k].sort((a, b) => a.t - b.t).map(notKart).join('')).join('') : '<p class="bosnot">Henüz not yok.</p>';
+    baglaListe(g); return; }
+  const k = bunlar();
+  g.innerHTML = `<div class="kutu">
+    <div class="hedefler">${k.map(x => `<button data-h="${x}" class="${hedef === x ? 'on' : ''}">${esc(sayfaAdi(x))}</button>`).join('')}<button data-h="genel" class="${hedef === 'genel' ? 'on' : ''}">Bütün kitap</button></div>
+    <textarea id="metin" maxlength="1500" placeholder="Bu sayfa hakkında notunuzu yazın: yazım hatası, resim, düzen, öneri…"></textarea>
+    <div class="satir"><button class="btn pinbtn ikinci" id="pinBtn" title="Notu sayfada bir noktaya bağla">📍 Sayfada yerini göster</button><button class="btn ana" id="yeniBtn">Yeni not</button><span id="durum"></span></div>
+    <div id="ipucu">Yazmayı bıraktığınızda not kendiliğinden kaydedilir. Başka bir konu için <b>Yeni not</b>'a basın. “Sayfada yerini göster”e basıp sayfaya dokunursanız not o noktaya iğnelenir.</div>
+  </div><div class="baslik2">Bu sayfalardaki notlar</div><div id="liste"></div>`;
+  g.querySelectorAll('[data-h]').forEach(b => b.onclick = () => { hedef = b.dataset.h; if (aktif && yerel.notlar[aktif]) { yerel.notlar[aktif].sayfa = hedef; yerel.notlar[aktif].x = yerel.notlar[aktif].y = null; gonder(aktif); } panelCiz(); });
+  const m = document.getElementById('metin');
+  if (aktif && yerel.notlar[aktif] && k.concat('genel').includes(yerel.notlar[aktif].sayfa)) m.value = yerel.notlar[aktif].metin; else aktif = null;
+  let zmn; m.oninput = () => { if (!yerel.ad) { adEl.focus(); adEl.style.borderColor = '#a3472b'; durum('Önce adınızı yazın, notunuz da kaydedilecek.', 'hata'); }
+    if (!aktif) { aktif = Date.now().toString(36) + yerel.kisi; yerel.notlar[aktif] = {sayfa: hedef, t: Date.now(), x: null, y: null}; }
+    const n = yerel.notlar[aktif]; n.metin = m.value; n.ad = yerel.ad || 'İsimsiz'; yaz(); durum('Yazılıyor…');
+    clearTimeout(zmn); zmn = setTimeout(() => { if (!n.metin.trim()) return; gonder(aktif); }, 1300); };
+  document.getElementById('yeniBtn').onclick = () => { aktif = null; pinModu = false; panelCiz(); document.getElementById('metin').focus(); };
+  const pb = document.getElementById('pinBtn'); pb.classList.toggle('on', pinModu);
+  pb.onclick = () => { pinModu = !pinModu; pb.classList.toggle('on', pinModu); document.querySelectorAll('.sayfa[data-k]').forEach(s => s.classList.toggle('isaretle', pinModu)); if (pinModu) durum('Şimdi sayfada ilgili yere dokunun.'); };
+  listeCiz();
+}
+function listeCiz(){ const l = document.getElementById('liste'); if (!l) { if (sekme === 'tum') panelCiz(); return; } numarala();
+  const k = bunlar().concat(ai === 0 ? ['genel'] : []);
+  const n = Object.values(HEPSI).filter(x => k.includes(x.sayfa)).sort((a, b) => a.t - b.t);
+  l.innerHTML = n.length ? n.map(notKart).join('') : '<p class="bosnot">Bu sayfalarda henüz not yok.</p>'; baglaListe(l); }
+function baglaListe(el){
+  el.querySelectorAll('[data-git]').forEach(g => g.onclick = () => { const k = g.dataset.git; const i = ACILIM.findIndex(a => a.some(s => s && s.k === k)); sekme = 'bu'; document.querySelectorAll('#sekmeler button').forEach(x => x.classList.toggle('on', x.dataset.s === 'bu')); if (i >= 0) git(i); else panelCiz(); });
+  el.querySelectorAll('.not').forEach(d => d.onclick = e => { const id = d.dataset.id, n = HEPSI[id]; if (!n) return;
+    if (e.target.dataset.sil) { if (confirm('Bu not silinsin mi?')) { yerel.notlar[id] = {...(yerel.notlar[id] || n), silindi: true}; gonder(id); if (aktif === id) aktif = null; } return; }
+    const i = ACILIM.findIndex(a => a.some(s => s && s.k === n.sayfa));
+    if (n.kisi === yerel.kisi) { yerel.notlar[id] = yerel.notlar[id] || {sayfa: n.sayfa, t: n.t, x: n.x, y: n.y, metin: n.metin, ad: n.ad}; aktif = id; hedef = n.sayfa; }
+    sekme = 'bu'; document.querySelectorAll('#sekmeler button').forEach(x => x.classList.toggle('on', x.dataset.s === 'bu'));
+    if (i >= 0 && i !== ai) git(i); else panelCiz(); pinleriCiz(id); });
+}
+function sayfaTik(ev, d, k){ if (!pinModu) return; const r = d.getBoundingClientRect();
+  const x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
+  if (!aktif) { aktif = Date.now().toString(36) + yerel.kisi; yerel.notlar[aktif] = {sayfa: k, t: Date.now(), metin: '', ad: yerel.ad || 'İsimsiz'}; }
+  const n = yerel.notlar[aktif]; n.sayfa = k; hedef = k; n.x = +x.toFixed(4); n.y = +y.toFixed(4); yaz();
+  pinModu = false; document.querySelectorAll('.sayfa').forEach(s => s.classList.remove('isaretle'));
+  HEPSI[aktif] = {...n, id: aktif, kisi: yerel.kisi}; panelCiz(); pinleriCiz(aktif);
+  if (n.metin && n.metin.trim()) gonder(aktif); else { durum('Yer işaretlendi; şimdi notunuzu yazın.'); document.getElementById('metin').focus(); } }
+function pinleriCiz(secili){ numarala(); document.querySelectorAll('.pin').forEach(p => p.remove());
+  document.querySelectorAll('.sayfa[data-k]').forEach(s => Object.values(HEPSI).filter(n => n.sayfa === s.dataset.k && n.x != null).forEach(n => {
+    const p = document.createElement('div'); p.className = 'pin' + (n.kisi === yerel.kisi ? ' benim' : '') + (n.id === secili ? ' secili' : '');
+    p.style.left = (n.x * 100) + '%'; p.style.top = (n.y * 100) + '%'; p.textContent = siraNo[n.id] || '•'; p.title = (n.ad || '') + ': ' + (n.metin || '');
+    p.onclick = e => { e.stopPropagation(); const k = document.querySelector(`.not[data-id="${n.id}"]`); if (k) { k.scrollIntoView({block: 'center', behavior: 'smooth'}); k.style.borderColor = '#a3472b'; setTimeout(() => k.style.borderColor = '', 1500); } };
+    s.appendChild(p); })); }
+// bekleyen notları tekrar gönder, düzenli tazele
+Object.entries(yerel.notlar).forEach(([id, n]) => n.bekliyor && gonder(id));
+ciz(); cek(); setInterval(cek, 20000);
+</script>
+<script>
+window.addEventListener('load', () => setTimeout(async () => {
+  const o = document.createElement('pre'); o.id = 'SONUC'; document.body.prepend(o);
+  try {
+    yerel.ad = 'DENEME-SILINECEK'; adEl.value = yerel.ad;
+    git(5); await new Promise(r => setTimeout(r, 600));
+    const m = document.getElementById('metin'); m.value = 'Deneme notu, silinecek.'; m.dispatchEvent(new Event('input'));
+    await new Promise(r => setTimeout(r, 4000));
+    await cek(); o.textContent = 'durum=' + document.getElementById('durum').textContent + ' notSay=' + Object.keys(HEPSI).length;
+  } catch (e) { o.textContent = 'HATA ' + e; }
+}, 500));
+</script></body>
+</html>
