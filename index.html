@@ -2483,7 +2483,7 @@
     <div class="contact-grid">
       <div class="contact-info">
         <h3>Bir mesaj bırakın</h3>
-        <p>Projelerle ilgili görüşleriniz, önerileriniz veya iş birliği teklifleriniz için yazabilirsiniz.</p>
+        <p>Projelerle ilgili görüş ve önerileriniz için yazabilirsiniz.</p>
 
         <!-- İletişim Formu -->
         <form class="contact-form" id="contact-form" action="/api/iletisim/" method="POST">
@@ -2500,7 +2500,6 @@
           <select id="cf-subject" name="subject" class="field">
             <option value="">Seçin…</option>
             <option value="genel">Genel mesaj</option>
-            <option value="isbirligi">İş birliği teklifi</option>
             <option value="geri-bildirim">Geri bildirim</option>
             <option value="hata">Hata bildirimi</option>
           </select>
@@ -2589,7 +2588,7 @@
     var formBtn = cForm.querySelector('button[type="submit"]');
     var formBtnYazi = formBtn.querySelector('.btn-yazi');
     var formAcilis = Date.now();
-    var KONU_ADI = { genel: 'Genel mesaj', isbirligi: 'İş birliği teklifi', 'geri-bildirim': 'Geri bildirim', hata: 'Hata bildirimi' };
+    var KONU_ADI = { genel: 'Genel mesaj', 'geri-bildirim': 'Geri bildirim', hata: 'Hata bildirimi' };
     var epostaBag = '<a href="mailto:' + _e + '">' + _e + '</a>';
 
     function durumYaz(tur, html) {
