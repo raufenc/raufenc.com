@@ -981,9 +981,30 @@
     .eser-olgu b { font-family: var(--font-display); font-size: 16px; color: var(--text); font-weight: 700; }
     .eser-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
     .eser-btns .btn { padding: 12px 20px; font-size: 13px; flex: 1 1 auto; justify-content: center; }
+    .eser-fiyat { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin: -8px 0 18px; }
+    .eser-fiyat b { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--warm); }
+    .eser-fiyat span { font-size: 12.5px; color: var(--muted2); }
+    .eser-not { margin-top: 22px; text-align: center; font-size: 12px; color: var(--muted2); }
     .eser-ciltler { margin-top: 14px; font-size: 12.5px; color: var(--muted2); }
     .eser-ciltler a { color: var(--warm); text-decoration: none; border-bottom: 1px solid transparent; }
     .eser-ciltler a:hover { border-bottom-color: var(--warm); }
+
+    /* ── KURUMLAR İÇİN ── */
+    .kurum-sub { max-width: 680px; margin-top: 14px; font-size: 15px; line-height: 1.75; color: var(--text-secondary); }
+    .kurum-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .kurum-kart { display: flex; flex-direction: column; gap: 10px; padding: 22px 22px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .kurum-kart h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; line-height: 1.3; }
+    .kurum-kart p { font-size: 13.5px; line-height: 1.7; color: var(--text-secondary); }
+    .kurum-ornek { margin-top: auto; padding-top: 6px; font-size: 12.5px; color: var(--muted2); }
+    .kurum-ornek a { color: var(--warm); text-decoration: none; border-bottom: 1px solid transparent; }
+    .kurum-ornek a:hover { border-bottom-color: var(--warm); }
+    .kurum-surec { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; padding: 0; counter-reset: none; }
+    .kurum-surec li { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px dashed var(--border-hover); border-radius: var(--radius-md); font-size: 13.5px; color: var(--text-secondary); }
+    .kurum-surec b { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--warm-soft); color: var(--warm); font-family: var(--font-display); }
+    .kurum-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin-top: 28px; }
+    .kurum-cta span { font-size: 13px; color: var(--muted2); }
+    @media (max-width: 900px) { .kurum-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kurum-surec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .kurum-grid, .kurum-surec { grid-template-columns: 1fr; } }
 
     /* ── BENTO VİTRİN ── */
     .bento-section { padding: 84px 0; }
@@ -1821,9 +1842,12 @@
       .stats-inner { grid-template-columns: 1fr 1fr; gap: 10px; }
       .social-row { grid-template-columns: 1fr; }
       .hero h1 { font-size: 48px; }
-      /* Telefonda açıklama paragrafı yerine doğrudan çağrı düğmeleri */
-      .hero-desc { display: none; }
-      .hero-cta { margin-top: 26px; }
+      /* Telefonda da ne yaptığını söyleyen kısa açıklama görünür (kör test: ilk ekrandan anlaşılmıyordu) */
+      .hero-desc { display: block; font-size: 14.5px; line-height: 1.6; margin-top: 14px; }
+      .hero-cta { margin-top: 22px; }
+      /* Portre telefonda küçülür; eserler daha yukarı gelir */
+      .hero-visual { height: 312px; }
+      .hero-photo-stack { transform: translate(-50%, -50%) scale(0.8); }
 
       /* Dekoratif dev kelimeler telefonda gizli (yatay taşma ve kaydırma maliyeti) */
       .section-ghost, .footer-mega { display: none; }
@@ -1903,6 +1927,7 @@
   <a href="#hakkinda" onclick="closeMobileMenu()">Hakkında</a>
   <a href="#kitap" onclick="closeMobileMenu()">Eserler</a>
   <a href="#projeler" onclick="closeMobileMenu()">Projeler</a>
+  <a href="#kurumlar" onclick="closeMobileMenu()">Kurumlar için</a>
   <a href="/videolar/" onclick="closeMobileMenu()">Videolar</a>
   <a href="#iletisim" onclick="closeMobileMenu()">İletişim</a>
   <div class="mm-divider">Öne Çıkanlar</div>
@@ -1927,6 +1952,7 @@
         <a href="#hakkinda">Hakkında</a>
         <a href="#kitap">Eserler</a>
         <a href="#projeler">Projeler</a>
+        <a href="#kurumlar">Kurumlar için</a>
         <a href="/videolar/">Videolar</a>
         <a href="#iletisim">İletişim</a>
       </div>
@@ -1975,15 +2001,19 @@
           <span class="rot-wrap"><span class="rot" id="rot-words"><span>oyuna</span><span>sanata</span><span>hikâyeye</span><span>keşfe</span></span></span>
           çeviren dijital atölye.
         </p>
-        <p class="hero-desc">Öğrendikçe paylaşmaya, paylaştıkça öğrenmeye çalışan bir talebe. Kendi kusurlarını gözetmeye gayret eden, herkesi önce kendine hocalık etmeye davet eden bir yolcu.</p>
+        <p class="hero-desc">Çocuklar, aileler ve öğretmenler için kitaplar, kart setleri ve ücretsiz öğrenme uygulamaları hazırlıyorum. Okullara, yayınevlerine ve vakıflara kuruma özel eğitim içerikleri geliştiriyorum.</p>
         <div class="hero-cta">
-          <a href="/noroterbiye/" class="btn btn-warm magnetic">
+          <a href="#kitap" class="btn btn-warm magnetic">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            NöroTerbiye
+            Kitaplar ve setler
           </a>
           <a href="#projeler" class="btn btn-ghost magnetic">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-            Projeleri Keşfet
+            Ücretsiz uygulamalar
+          </a>
+          <a href="#kurumlar" class="btn btn-ghost magnetic">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+            Kurumlar için
           </a>
         </div>
       </div>
@@ -2050,6 +2080,7 @@
     <div class="journey-grid">
       <div>
         <p class="journey-story">
+          Öğrendikçe paylaşmaya, paylaştıkça öğrenmeye çalışan bir talebe; kendi kusurlarını gözetmeye gayret eden, herkesi önce kendine hocalık etmeye davet eden bir yolcu.<br><br>
           Elektronik mühendisliğinden İlahiyat'a uzanan bir yolculuk. Modern bilimin keşifleriyle İslam âlimlerinin nasihatlerini <em>birlikte</em> sunmaya gayret eden bir talebe. Öğrendiklerini dijital projeler, interaktif uygulamalar ve kitaplarla paylaşan bir muallim.
         </p>
         <div class="about-areas">
@@ -2100,7 +2131,7 @@
     <div class="eserler-head">
       <span class="section-label">Basılı Eserler</span>
       <h2 class="section-title" id="eserler-baslik">Elde tutulan, <em>ekranda yaşayan</em></h2>
-      <p class="eserler-sub">Üç basılı eser; her birinin bir de dijital versiyonu var. Kitabı ve seti doğrudan satın alabilir, karekodla ya da buradan dijital dünyasına geçebilirsiniz.</p>
+      <p class="eserler-sub">Üç basılı eser; her birinin ücretsiz bir dijital eşliği var. Satın almak için mağaza düğmesine basın; dijital eşliği kitabı almadan da buradan açabilirsiniz.</p>
     </div>
     <div class="eserler-grid">
       <article class="eser eser-noro">
@@ -2121,10 +2152,11 @@
           <h3 class="eser-ad">NöroTerbiye</h3>
           <p class="eser-slogan">İçimizdeki düşmanı dosta çevirmek</p>
           <p class="eser-desc">Neden hep aynı hataları tekrarlıyoruz? Nörobilimin keşifleriyle âlimlerimizin nasihatlerini bir araya getiren, nefsimize ayna tutan bir rehber.</p>
-          <ul class="eser-olgu"><li><b>272</b> sayfa</li><li><b>131</b> kavram</li><li><b>15</b> test</li><li><b>12</b> oyun</li></ul>
+          <ul class="eser-olgu"><li><b>272</b> sayfa</li><li><b>131</b> kavram</li><li><b>16</b> test</li><li><b>13</b> oyun</li></ul>
+          <p class="eser-fiyat"><b>170 TL</b><span>KTB Kitap mağazasında</span></p>
           <div class="eser-btns">
-            <a href="https://www.ktbkitap.com/urun/noroterbiye-rauf-enc" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Satın Al</a>
-            <a href="/noroterbiye/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Dijital Dünyası</a>
+            <a href="https://www.ktbkitap.com/urun/noroterbiye-rauf-enc" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> KTB Kitap’ta Satın Al ↗</a>
+            <a href="/noroterbiye/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Ücretsiz Dijital Dünyası</a>
           </div>
         </div>
       </article>
@@ -2144,11 +2176,12 @@
           <span class="eser-yayin">Kart Seti · Yeni Kök Yayınları</span>
           <h3 class="eser-ad">Osmanlı Padişahları Kart Seti</h3>
           <p class="eser-slogan">Osman Gazi’den Sultan Vahdeddin Han’a</p>
-          <p class="eser-desc">Padişahlarımızın hayatı, devri ve hizmetleri 72 kart yüzünde. Evde ailece, sınıfta öğrencilerle; ecdadımızı oynayarak tanımak için.</p>
-          <ul class="eser-olgu"><li><b>36</b> padişah</li><li><b>72</b> kart yüzü</li><li><b>623</b> yıllık tarih</li></ul>
+          <p class="eser-desc">Padişahlarımızın hayatı, devri ve hizmetleri 36 çift yüzlü kartta. Evde ailece, sınıfta öğrencilerle; ecdadımızı oynayarak tanımak için.</p>
+          <ul class="eser-olgu"><li><b>36</b> padişah</li><li><b>36</b> çift yüzlü kart</li><li><b>623</b> yıllık tarih</li></ul>
+          <p class="eser-fiyat"><b>150 TL</b><span>hediyekitap.com’da</span></p>
           <div class="eser-btns">
-            <a href="https://hediyekitap.com/book.php?slug=osmanli-padisahlari-kart-seti" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Satın Al</a>
-            <a href="/osmanli-kartlari/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Dijital Kartlar</a>
+            <a href="https://hediyekitap.com/book.php?slug=osmanli-padisahlari-kart-seti" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> Satın Al ↗</a>
+            <a href="/osmanli-kartlari/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Ücretsiz Dijital Kartlar</a>
           </div>
         </div>
       </article>
@@ -2172,9 +2205,10 @@
           <p class="eser-slogan">Üç ciltlik boyama kitabı</p>
           <p class="eser-desc">Rabbimi ve ibadetlerimi seviyorum, güzel ahlaklı oluyorum, günlük hayatımda dinimi yaşıyorum. Her cildin karekodu hikâye, oyun ve aile rehberleriyle dolu dijital bahçeyi açar.</p>
           <ul class="eser-olgu"><li><b>3</b> cilt</li><li><b>60</b> konu</li><li><b>144</b> boyama sayfası</li></ul>
+          <p class="eser-fiyat"><b>349 TL</b><span>3 cilt birlikte, hediyekitap.com’da</span></p>
           <div class="eser-btns">
-            <a href="https://hediyekitap.com/book.php?slug=iyiliklerle-buyuyorum-serisi-3-cilt" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> 3’lü Seti Satın Al</a>
-            <a href="/iyilik/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Dijital Bahçe</a>
+            <a href="https://hediyekitap.com/book.php?slug=iyiliklerle-buyuyorum-serisi-3-cilt" class="btn btn-warm eser-al" target="_blank" rel="noopener"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3c-.6.6-.2 1.7.7 1.7H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg> 3’lü Seti Satın Al ↗</a>
+            <a href="/iyilik/" class="btn btn-ghost eser-dijital"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Ücretsiz Dijital Bahçe</a>
           </div>
           <p class="eser-ciltler">Ciltleri tek tek:
             <a href="https://hediyekitap.com/book.php?slug=iyiliklerle-buyuyorum-serisinin-1-cildi" target="_blank" rel="noopener">1. cilt</a> ·
@@ -2184,6 +2218,7 @@
         </div>
       </article>
     </div>
+    <p class="eser-not">Fiyatlar mağazaların 25 Kasım 2026 fiyatıdır, değişebilir. Satın alma ve kargo mağaza üzerinden yapılır.</p>
   </div>
 </section>
 
@@ -2222,7 +2257,7 @@
         <div class="bento-content">
           <span class="bento-tag">Kitap · Uygulama</span>
           <h3 class="bento-title">NöroTerbiye</h3>
-          <p class="bento-desc">İçindeki düşmanı dosta çevir. 131 kavram, 15 test, 12 oyun.</p>
+          <p class="bento-desc">İçindeki düşmanı dosta çevir. 131 kavram, 16 test, 13 oyun.</p>
         </div>
       </a>
 
@@ -2397,7 +2432,7 @@
         <h2 class="section-title" style="margin-bottom:0">Yarım dakikada <em>keşfet</em></h2>
       </div>
       <div class="bento-header-right">
-        Her projenin kısa tanıtımı — üzerine gel, önizle; tıkla, sesli izle. <a href="/videolar/" class="vt-all">Tümünü izle →</a>
+        Her projenin kısa tanıtımı: önizlemek için üzerine gelin, sesli izlemek için dokunun. <a href="/videolar/" class="vt-all">Tümünü izle →</a>
       </div>
     </div>
     <div id="vt-raf"></div>
@@ -2461,6 +2496,60 @@
 
 
 <!-- iLETiSiM -->
+<!-- KURUMLAR İÇİN -->
+<section id="kurumlar" class="kurum-section reveal" aria-labelledby="kurumlar-baslik">
+  <div class="section-ghost" aria-hidden="true"><span class="ghost-word" data-speed="-0.25">KURUMLAR</span></div>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">Kurumlar için</span>
+      <h2 class="section-title" id="kurumlar-baslik">Kurumunuza özel, <em>baştan sona</em> eğitim içeriği</h2>
+      <p class="kurum-sub">Okullar, yayınevleri, vakıflar ve belediyeler için içeriği baştan sona hazırlıyorum: metin, çizim, baskıya hazır dosya ve yanındaki dijital dünya. Bu sitedeki eserler bu işin örnekleridir.</p>
+    </div>
+    <div class="kurum-grid">
+      <article class="kurum-kart">
+        <h3>Kitabınıza karekodlu dijital eşlik</h3>
+        <p>Her sayfaya sesli anlatım, oyun, test ve aile rehberi. Basılı karekod adresi kalıcıdır, kitap yeniden basılmadan içerik güncellenir.</p>
+        <span class="kurum-ornek">Örnek: <a href="/iyilik/">İyiliklerle Büyüyorum</a> · <a href="/osmanli-kartlari/">Osmanlı Padişahları</a> (Yeni Kök Yayınları)</span>
+      </article>
+      <article class="kurum-kart">
+        <h3>Kuruma özel boyama kitabı ve kart seti</h3>
+        <p>Kurumunuzun değerlerini ve dünyasını çocuğun diliyle anlatan, baskıya hazır kitap ya da kutulu kart seti.</p>
+        <span class="kurum-ornek">Örnek: <a href="#kitap">Basılı eserler</a></span>
+      </article>
+      <article class="kurum-kart">
+        <h3>Ölçme ve farkındalık testleri</h3>
+        <p>Öğrenciye, veliye ya da çalışana özel, sonucunu hemen gösteren web testleri. Tanı aracı değil, farkındalık aracıdır.</p>
+        <span class="kurum-ornek">Örnek: <a href="/ogrenmetarzi/">Öğrenme Tarzı Testi</a> (TACEV için geliştirildi)</span>
+      </article>
+      <article class="kurum-kart">
+        <h3>Etkileşimli ders ve oyunlar</h3>
+        <p>Akıllı tahtada ve telefonda çalışan ders etkinlikleri, değer oyunları, gerektiğinde SCORM paketi.</p>
+        <span class="kurum-ornek">Örnek: <a href="#projeler">Ücretsiz uygulamalar</a></span>
+      </article>
+      <article class="kurum-kart">
+        <h3>Eğitim ve tanıtım filmleri</h3>
+        <p>Kısa eğitim filmi, ders ya da kitap tanıtımı, sosyal medya için dikey kurgular.</p>
+        <span class="kurum-ornek">Örnek: <a href="/videolar/">Videolar</a></span>
+      </article>
+      <article class="kurum-kart">
+        <h3>Veli ve öğretmen seminerleri</h3>
+        <p>Okul ve kurumlarda yüz yüze seminer ve sunum; isteğe bağlı olarak toplu kitap ve kart seti paketiyle.</p>
+        <span class="kurum-ornek">Konular: dürtü ve ekran, değer eğitimi, eğitimde yapay zekâ</span>
+      </article>
+    </div>
+    <ol class="kurum-surec" aria-label="Çalışma süreci">
+      <li><b>1</b><span>Tanışma görüşmesi</span></li>
+      <li><b>2</b><span>Örnek sayfa ya da pilot</span></li>
+      <li><b>3</b><span>Üretim</span></li>
+      <li><b>4</b><span>Teslim; kapsam ve bakım baştan yazılı</span></li>
+    </ol>
+    <div class="kurum-cta">
+      <a href="#iletisim" class="btn btn-warm magnetic" data-konu="isbirligi">Teklif isteyin</a>
+      <span>Toplu alım için de yazabilirsiniz.</span>
+    </div>
+  </div>
+</section>
+
 <section id="iletisim" class="social-section reveal">
   <div class="section-ghost" aria-hidden="true"><span class="ghost-word" data-speed="0.25">MERHABA</span></div>
   <div class="wrap">
@@ -3424,5 +3513,14 @@
 })();
 </script>
 
+<script>
+  /* "Teklif isteyin" gibi düğmeler iletişim formunda konuyu önceden seçer. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[data-konu]');
+    if (!a) return;
+    var sel = document.getElementById('cf-subject');
+    if (sel) sel.value = a.getAttribute('data-konu');
+  });
+</script>
 </body>
 </html>

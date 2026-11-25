@@ -209,6 +209,7 @@ details li{margin-bottom:4px;font-size:13.5px}
 .ozel .dugmeler{margin-top:10px}
 .baglar{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margin-top:12px}
 .dip b{display:block;color:var(--ink);font-size:15px}
+.dip-kunye{display:block;margin-top:8px;font-size:12.5px}.dip-kunye a{color:inherit;text-decoration:underline}
 /* canlılık */
 @keyframes yuksel{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes belir{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
@@ -389,6 +390,7 @@ details li{margin-bottom:4px;font-size:13.5px}
 
 @media (prefers-reduced-motion:reduce){.g-kart img,.buyuk:active,.kart:active{transform:none!important}*,*:before,*:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 @media print{.sekmeler,.ozel,.ornekkutu,.geri,.ustbag,.d-lab,.d-sec,.panel .buyuk{display:none!important}.panel{display:block!important;border:0;padding:0;margin-top:26px;break-before:auto}.kahraman{-webkit-print-color-adjust:exact;print-color-adjust:exact}.kodkutu,.ic,.gun,.noktalar i,.madalyon,.dene,.radar{-webkit-print-color-adjust:exact;print-color-adjust:exact}body{background:#fff}main{padding-bottom:0}.dene,.resim,.kodkutu,.tanit,.alinti,.etiket,.satir,.panel svg,.altires,.t-liste{break-inside:avoid}.sonuc .kahraman{animation:none}.altires img{opacity:1}h2,h3,.p-ust,.p-baslik,.p-giris,.p-alt,.an-ad,.ic-bas{break-after:avoid}.dip{margin-top:10px;break-before:avoid}main{zoom:.85}.tipcift{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}.kahraman{padding-top:20px;padding-bottom:18px}.k-serit{height:auto;margin:0 0 14px}.k-serit img{height:auto;max-width:150px}.k-serit.k-hepsi img{max-width:380px}.panel{margin-top:18px}}
+@media (min-width:761px) and (max-height:1000px){.giris-resim>img{width:min(100%,250px)}.giris{margin-top:10px}}
 </style>
 </head>
 <body>
@@ -481,7 +483,7 @@ function giris(odak){
   $('#silbag').onclick = () => { sil(); giris(true); };
   $('#ornek').onclick = () => { ORN = ornekVeri(); sonuc(); };
 }
-function dip(){ return `<p class="dip"><b>${kac(B.alt1)}</b>${kac(B.alt2)}</p>`; }
+function dip(){ return `<p class="dip"><b>${kac(B.alt1)}</b>${kac(B.alt2)}<span class="dip-kunye">Rauf Enç tarafından TACEV için geliştirildi · <a href="/">raufenc.com</a></span></p>`; }
 function yontemAc(){ const d = $('#yontem'); if (!d) return; d.open = true; d.scrollIntoView({behavior: matchMedia('(prefers-reduced-motion:reduce)').matches ? 'auto' : 'smooth', block: 'start'}); const o = d.querySelector('summary'); if (o) o.focus({preventScroll:true}); }
 function ornekVeri(){
   const tercih = ['PLN','YOK','TOP','ANL','BAK','ONR'], sira = [0,0,1,0,2,0,1,0,0,1];
