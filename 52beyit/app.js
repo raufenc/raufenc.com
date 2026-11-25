@@ -91,7 +91,7 @@
     $("room-poet").textContent = p.poet;
     $("room-chips").innerHTML = meterChips(p.meter, true);
     $("room-meter").textContent = /Hece/i.test(p.meter || "") ? "Hece ölçüsü · 5 + 5" : (p.meter_name || "");
-    $("room-aruz").href = `${ARUZ}?beyit=${n}&kaynak=bir-beyit-bir-alem`;
+    $("room-aruz").href = `${ARUZ}?beyit=${n}&kaynak=52beyit`;
     $("room-aruz").textContent = /Hece/i.test(p.meter || "") ? "Hece ölçüsünü Fâilâtün’de keşfedin ↗" : "Bu beytin ritmini Fâilâtün’de dinleyin ↗";
     $("room-page").textContent = "";
     renderListen(p, opts.autoplay);

@@ -1,4 +1,4 @@
-/* Bir Beyit, Bir Âlem · Fâilâtün — uygulama */
+/* Şair Ne Demek İstedi? · Fâilâtün — uygulama */
 (() => {
 "use strict";
 const D = window.BBA, B = D.beyitler, V = D.vezinler, K = D.klipler;
@@ -548,9 +548,9 @@ const Sayfa = {
     const b6 = beyit(6), ln = b6.t[0], kayitli = B.filter(b => b.kayit).length, bitti = DERSLER.filter(d => Kayit.d.ders[d.id]).length, sd = siradakiDers(), tk = K.tartar;
     ana.innerHTML = `
     <section class="giris"><div class="giris-resim" style="background-image:url(img/06.webp)"></div><div class="kap">
-      <div class="giris-metin"><p class="ust-yazi">Bir Beyit, Bir Âlem’in aruz mektebi</p>
+      <div class="giris-metin"><p class="ust-yazi">Şair Ne Demek İstedi? kitabının aruz mektebi</p>
         <h1>Hece vezni sayar,<br><em>aruz vezni tartar.</em></h1>
-        <p class="giris-imza">Hayâtî İnanç Hocamız</p>
+        <p class="giris-imza">Hayati İnanç Hocamız</p>
         <p class="giris-lead">Aruzu Hocamızın ağzından, kitaptaki beyitlerle öğrenin. Önce dinleyin, sonra ritmini duyun, sonra kendi elinizle vurun.</p>
         <div class="giris-dugmeler"><button class="dugme dugme-altin dugme-buyuk" data-klip="tartar">${OYNA_K} Bu sözü Hocamızdan dinleyin${tk ? " · " + sure(tk.s, tk.e) : ""}</button><button class="metin-bag dugme-yalin" data-in="ilk">İlk mısrayla başlayın ↓</button></div>
       </div>
@@ -561,6 +561,12 @@ const Sayfa = {
         <div class="adim-alan" id="adim-alan"></div>
       </div>
     </div></section>
+    ${new URLSearchParams(location.search).has("kitap") ? `<section class="bolum kitaptan"><div class="kap kitaptan-ic">
+      <div><p class="ust-yazi">Kitaptan geldiyseniz</p><h2>Hoş geldiniz.</h2>
+        <p>Kitaptaki vezin işaretlerinin anahtarı: <b>çizgi</b> uzun hece, <b>nokta</b> kısa hece, <b>eğik çizgi</b> kalıbın parçalarını (tef’ileleri) ayırır. Bir beytin numarasını yazın; vezni, taktîi ve Hocamızın okuyuşuyla açılsın.</p>
+        <p class="kitaptan-kardes">Tablolar ve bütün okuyuşlar için arka kapaktaki karekod: <a href="/52beyit/">raufenc.com/52beyit</a></p></div>
+      <form class="bul" id="bul-kitap"><label for="bul-kitap-no">Beyit numarası</label><span class="bul-kutu"><input id="bul-kitap-no" type="number" min="1" max="52" inputmode="numeric" placeholder="1–52"><button>Beyti aç</button></span></form>
+    </div></section>` : ""}
     <section class="bolum"><div class="kap">
       ${bolumBas("Yol", "Önce zevki, <em>sonra hesabı.</em>", "Hocamızın tavsiyesi bu sitenin usulüdür: şiirin tekniğinden önce lezzeti.")}
       <div class="adimlar dort">
@@ -580,9 +586,9 @@ const Sayfa = {
       ${bolumBas("Kitaptan", "Her beyit <em>bir âlem.</em>", "", `<form class="bul" id="bul"><label for="bul-no">Kitap elinizde mi? Beyit numarası:</label><span class="bul-kutu"><input id="bul-no" type="number" min="1" max="52" inputmode="numeric" placeholder="1–52"><button>Beyti aç</button></span></form>`)}
       <div class="beyitler">${[1, 6, 9, 12, 22, 26].map(n => beyitKart(beyit(n))).join("")}</div>
       <div style="margin-top:34px"><a class="dugme dugme-cizgi" href="#/beyitler">52 beytin hepsi <span class="ok">→</span></a></div></div></section>
-    <section class="bolum cizgili"><div class="kap kitap"><img src="/bir-beyit-bir-alem/kapak.webp" width="600" height="839" alt="Bir Beyit, Bir Âlem kitabının kapağı" loading="lazy">
-      <div><p class="ust-yazi">Kitap</p><h2>Bir Beyit, Bir Âlem</h2><p>Hayâtî İnanç Hocamızın okuyuş ve izahlarından hareketle hazırlanan elli iki beyit, elli iki resim. Fâilâtün, o kitabın aruz mektebidir: beyitleri dinler, veznini burada tartar, aruzu aynı beyitlerle öğrenirsiniz.</p>
-      <div class="giris-dugmeler"><a class="dugme dugme-asil" href="/bir-beyit-bir-alem/">Kitabın dinleme rehberi <span class="ok">→</span></a><a class="dugme dugme-cizgi" href="#/hakkinda">Kaynaklar ve usul</a></div></div></div></section>`;
+    <section class="bolum cizgili"><div class="kap kitap"><img src="/52beyit/kapak.webp?v=20261125" width="600" height="854" alt="Şair Ne Demek İstedi? kitabının kapağı" loading="lazy">
+      <div><p class="ust-yazi">Kitap</p><h2>Şair Ne Demek İstedi?</h2><p class="kitap-alt">Resimlerle 52 Beyit</p><p>Hayati İnanç Hocamızın okuyuş ve izahlarından hareketle hazırlanan elli iki beyit, elli iki tablo. Fâilâtün, o kitabın aruz mektebidir: beyitleri dinler, veznini burada tartar, aruzu aynı beyitlerle öğrenirsiniz. Kitabın içindeki karekod buraya, arka kapaktaki karekod tabloların ve okuyuşların sitesine açılır.</p>
+      <div class="giris-dugmeler"><a class="dugme dugme-asil" href="/52beyit/">Tablolar ve okuyuşlar: 52beyit <span class="ok">→</span></a><a class="dugme dugme-cizgi" href="#/hakkinda">Kaynaklar ve usul</a></div></div></div></section>`;
     const alan = $("#adim-alan"), top = ln.syl.reduce((a, s) => a + birimS(s), 0);
     const ac = k => {
       Ses.dur(); $$(".uc-adim button").forEach(x => x.setAttribute("aria-pressed", String(+x.dataset.adim === k)));
@@ -594,6 +600,7 @@ const Sayfa = {
     ac(b6.kayit ? 1 : 2);
     $("[data-in]", ana).addEventListener("click", () => $("#ilk").scrollIntoView({ behavior: azHareket ? "auto" : "smooth", block: "start" }));
     $("#bul").addEventListener("submit", e => { e.preventDefault(); const n = +$("#bul-no").value; if (n >= 1 && n <= 52) location.hash = "#/beyit/" + n; });
+    const bk = $("#bul-kitap"); if (bk) bk.addEventListener("submit", e => { e.preventDefault(); const n = +$("#bul-kitap-no").value; if (n >= 1 && n <= 52) location.hash = "#/beyit/" + n; });
   },
   beyitler() {
     const kayitli = B.filter(b => b.kayit).length;
@@ -609,10 +616,10 @@ const Sayfa = {
     const say = k => b.t.reduce((a, ln) => a + ln.syl.filter(k).length, 0); const birim = b.t.map(ln => ln.syl.reduce((a, s) => a + birimS(s), 0));
     ana.innerHTML = `<div class="bs-resim" style="background-image:url(img/${iki(b.n)}.webp)"></div>
     <div class="kap bs-ust"><div class="bs-kart">
-      <div class="bs-yol"><a href="#/beyitler">← Bütün beyitler</a><span class="bs-no">${b.n}. beyit · kitapta ${2 * b.n}–${2 * b.n + 1}. sayfalar</span></div>
+      <div class="bs-yol"><a href="#/beyitler">← Bütün beyitler</a><span class="bs-no">${b.n}. beyit</span></div>
       <h1 class="bs-beyit"><span>${misraHTML(b.m[0])}</span><span>${misraHTML(b.m[1])}</span></h1>
       <div class="bs-kunye"><b>${esc(b.sair)}</b>${aruz ? `<a href="#/vezin/${v.id}">${v.ad}</a><span>${v.bahir} bahri</span>` : `<span>Hece vezni · 5 + 5</span>`}</div>
-      <div class="bs-eylem">${b.kayit ? `<button class="dugme dugme-altin dugme-buyuk" data-kayit="${b.n}">${OYNA_K} Hocamızdan dinleyin${sure(b.kayit.s, b.kayit.e) ? " · " + sure(b.kayit.s, b.kayit.e) : ""}</button>` : ""}<a class="dugme dugme-cizgi" href="/bir-beyit-bir-alem/#beyit-${b.n}">Kitabın dinleme rehberinde aç</a>${b.yazi ? `<a class="dugme dugme-cizgi" href="${esc(b.yazi)}" target="_blank" rel="noopener">Hocamızın yazısı ↗</a>` : ""}</div>
+      <div class="bs-eylem">${b.kayit ? `<button class="dugme dugme-altin dugme-buyuk" data-kayit="${b.n}">${OYNA_K} Hocamızdan dinleyin${sure(b.kayit.s, b.kayit.e) ? " · " + sure(b.kayit.s, b.kayit.e) : ""}</button>` : ""}<a class="dugme dugme-cizgi" href="/52beyit/#beyit-${b.n}">Tablosuyla 52beyit’te açın</a>${b.yazi ? `<a class="dugme dugme-cizgi" href="${esc(b.yazi)}" target="_blank" rel="noopener">Hocamızın yazısı ↗</a>` : ""}</div>
       ${b.kayit ? (b.kayit.not ? `<p class="bs-not">${esc(b.kayit.not)}</p>` : "") : `<p class="bs-not">Bu beytin okuma kaydı henüz eşleştirilmedi; taktîi ve lügati aşağıdadır.</p>`}
     </div></div>
     <div class="kap bs-takti">
@@ -626,7 +633,7 @@ const Sayfa = {
     </div>
     <div class="kap" style="margin-top:22px"><div class="iki">
       <div class="sol">
-        <section class="panel"><p class="ust-yazi">Bugünkü söyleyişle</p><p class="nesir">${esc(b.nesir)}</p><p class="kaynak" style="margin:16px 0 0">Beytin şerhi ve resmi, <em>Bir Beyit, Bir Âlem</em> kitabının ${2 * b.n}–${2 * b.n + 1}. sayfalarındadır.</p></section>
+        <section class="panel"><p class="ust-yazi">Bugünkü söyleyişle</p><p class="nesir">${esc(b.nesir)}</p><p class="kaynak" style="margin:16px 0 0">Beytin izahı ve tablosu <em>Şair Ne Demek İstedi?</em> kitabında, ${b.n}. beyittedir.</p></section>
         ${aruz ? `<section class="panel" id="vuruspanel"><p class="ust-yazi">Sıra sizde</p><h2>Mısrayı elinizle vurun</h2><p class="aciklama">Dinlediğiniz ritmi şimdi siz verin: her heceye bir vuruş. Vuruşunuz kalıbın ölçüsüyle yan yana çizilir.</p><div class="secim" role="group" aria-label="Mısra"><button data-vm="0" aria-pressed="true">1. mısra</button><button data-vm="1" aria-pressed="false">2. mısra</button></div><div data-valan></div></section>` : ""}
       </div>
       <aside class="yan">
@@ -706,15 +713,15 @@ const Sayfa = {
       <div class="ders-son"><a class="dugme dugme-cizgi" href="#/dersler">← Dersler</a><a class="dugme dugme-asil" href="#/temrin">Temrine geçin <span class="ok">→</span></a></div></article>`;
   },
   hakkinda() {
-    ana.innerHTML = `<article class="ders"><header class="ders-bas"><p class="ust-yazi">Kaynaklar ve usul</p><h1>Bu sayfa nasıl hazırlandı?</h1><p>Fâilâtün: Bir Beyit, Bir Âlem kitabındaki beyitlerle aruz.</p></header>
-      <h2>Beyitler</h2><p>Elli iki beytin metni, şairi ve vezni <em>Bir Beyit, Bir Âlem</em> kitabından alınmıştır; kitaptaki sıra ve sayfa numaraları korunmuştur. Resimler kitabın resimleridir. Beyitlerin şerhi kitabın kendisindedir.</p>
-      <h2>Kayıtlar</h2><p>“Hocamızdan dinleyin” düğmeleri, Hayâtî İnanç Hocamızın o beyti okuyup izah ettiği sohbetin ilgili bölümünü açar. Aruz derslerindeki kayıtlar, Hocamızın vezinden bizzat bahsettiği bölümlerdir. Kayıtlar yayınlandıkları kanallarda durur; burada yalnız ilgili aralık gösterilir. Aralıklar yaklaşıktır; birkaç saniye erken ya da geç başlayabilir.</p>
+    ana.innerHTML = `<article class="ders"><header class="ders-bas"><p class="ust-yazi">Kaynaklar ve usul</p><h1>Bu sayfa nasıl hazırlandı?</h1><p>Fâilâtün: Şair Ne Demek İstedi? kitabındaki beyitlerle aruz.</p></header>
+      <h2>Beyitler</h2><p>Elli iki beytin metni, şairi ve vezni <em>Şair Ne Demek İstedi?</em> kitabından alınmıştır; kitaptaki sıra ve beyit numaraları korunmuştur. Resimler kitabın resimleridir. Beyitlerin şerhi kitabın kendisindedir.</p>
+      <h2>Kayıtlar</h2><p>“Hocamızdan dinleyin” düğmeleri, Hayati İnanç Hocamızın o beyti okuyup izah ettiği sohbetin ilgili bölümünü açar. Aruz derslerindeki kayıtlar, Hocamızın vezinden bizzat bahsettiği bölümlerdir. Kayıtlar yayınlandıkları kanallarda durur; burada yalnız ilgili aralık gösterilir. Aralıklar yaklaşıktır; birkaç saniye erken ya da geç başlayabilir.</p>
       <h2>Taktî</h2><p>Her mısra hece hece tartılmış, kalıba oturtulmuş ve tek tek gözden geçirilmiştir. Ulama, imâle, zihaf ve med yerleri işaretlidir. Kitabın verdiği vezin esas alınmıştır. Lügat ve bugünkü söyleyişle verilen karşılıklar, kitaptaki şerhe bağlı kalınarak bu sayfa için hazırlanmıştır.</p>
       <h2>Ritim sesi</h2><p>“Ritmi dinle” düğmesi bir okuyuş kaydı değildir; kalıbın hesabını duyurmak için üretilen bir sestir. Kısa hece bir birim, uzun hece iki birim sürer. “Darb” vuruşla, “nağme” aynı hesabı basit bir ezgiyle verir. Beytin asıl sesi Hocamızın okuyuşudur.</p>
       <h2>Vuruş</h2><p>“Elinizle vurun” aracı mikrofon kullanmaz; yalnız dokunuşlarınızın arasındaki süreyi ölçer. İki vuruş arasındaki süre önceki hecenin ağırlığı sayılır ve kendi hızınıza göre değerlendirilir: uzun heceniz kısa hecenizin iki katı sürdüyse ölçüdesiniz. Son hecenin süresi ölçülmez. Hiçbir şey kaydedilmez.</p>
       <h2>Mısra tartısı</h2><p>Serbest tartı bir ön incelemedir: tek mısraya bakar, tarihî söyleyişi bilemez ve şiirin bütünü hakkında hüküm vermez. Ancak çok zorlamayla oturan mısraları “oturdu” diye göstermez.</p>
       <h2>Tashih</h2><p>Bir yanlış görürseniz haber verin: <a class="metin-bag" href="https://bir-beyit-bir-alem-tashih.someonebkr.chatgpt.site/#kapak=on" target="_blank" rel="noopener">tashih bırak ↗</a></p>
-      <div class="ders-son"><a class="dugme dugme-cizgi" href="#/">← Giriş</a><a class="dugme dugme-asil" href="/bir-beyit-bir-alem/">Kitabın dinleme rehberi <span class="ok">→</span></a></div></article>`;
+      <div class="ders-son"><a class="dugme dugme-cizgi" href="#/">← Giriş</a><a class="dugme dugme-asil" href="/52beyit/">Tablolar ve okuyuşlar: 52beyit <span class="ok">→</span></a></div></article>`;
   }
 };
 
@@ -735,7 +742,7 @@ function yol() {
     Sayfa[ad](arg);
     const grup = { giris: "", beyit: "beyitler", ders: "dersler", vezin: "vezinler", sozluk: "dersler" }[ad] ?? ad;
     $$(".gezin a").forEach(a => a.getAttribute("href") === "#/" + grup ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
-    const T = { giris: "Fâilâtün · Hayâtî İnanç Hocamızın beyitleriyle aruz", beyitler: "52 beyit", dersler: "Aruz dersleri", vezinler: "Vezinler", temrin: "Temrin", tart: "Mısra tartısı", hakkinda: "Kaynaklar ve usul", sozluk: "Aruz sözlüğü" };
+    const T = { giris: "Fâilâtün · Hayati İnanç Hocamızın beyitleriyle aruz", beyitler: "52 beyit", dersler: "Aruz dersleri", vezinler: "Vezinler", temrin: "Temrin", tart: "Mısra tartısı", hakkinda: "Kaynaklar ve usul", sozluk: "Aruz sözlüğü" };
     let t = T[ad]; if (ad === "beyit" && beyit(p)) t = `${p}. beyit · ${beyit(p).sair}`; if (ad === "ders") { const d = DERSLER.find(x => x.id === p); if (d) t = d.baslik; } if (ad === "vezin" && VZ[p]) t = VZ[p].ad;
     document.title = (t && ad !== "giris" ? t + " · " : "") + (ad === "giris" ? T.giris : "Fâilâtün");
     window.scrollTo(0, 0); belirKur();

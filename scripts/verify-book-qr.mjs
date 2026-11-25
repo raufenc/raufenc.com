@@ -59,23 +59,29 @@ export function verifyIyilikPages(root = new URL('..', import.meta.url)) {
   }
 }
 
-// Printed in Bir Beyit, Bir Âlem (Hayâtî İnanç, p. 106 QR → raufenc.com/bir-beyit-bir-alem). Rauf's instruction, 2026-11-17:
-// this page is the book's QR target; never move or delete it, and keep all 52 couplets with their #beyit-<n> rooms.
+// Printed in "Şair Ne Demek İstedi?" (Hayati İnanç; eski adı Bir Beyit, Bir Âlem).
+// Arka kapak karekodu → raufenc.com/52beyit/ ; s.108 karekodu → raufenc.com/aruz/?kitap (Rauf, 2026-11-25).
+// Deneme baskısı ve 106 sayfalık eski baskı → raufenc.com/bir-beyit-bir-alem → vercel.json ile /52beyit/'e yönlenir.
+// Bu adresler basılı; asla kaldırılmaz.
 export function verifyBirBeyitPage(root = new URL('..', import.meta.url)) {
   const read = (file) => {
     try {
       return readFileSync(new URL(file, root), 'utf8');
     } catch {
-      throw new Error(`Basılı Bir Beyit, Bir Âlem karekod sayfası eksik: /${file}`);
+      throw new Error(`Basılı Şair Ne Demek İstedi? karekod sayfası eksik: /${file}`);
     }
   };
-  const html = read('bir-beyit-bir-alem/index.html');
-  assert.ok(html.includes('app.js'), 'Bir Beyit, Bir Âlem sayfası beyitleri yükleyen app.js dosyasını çağırmalı.');
-  read('bir-beyit-bir-alem/app.js');
-  const data = JSON.parse(read('bir-beyit-bir-alem/beyitler.json'));
+  const html = read('52beyit/index.html');
+  assert.ok(html.includes('app.js'), '52beyit sayfası beyitleri yükleyen app.js dosyasını çağırmalı.');
+  read('52beyit/app.js');
+  const data = JSON.parse(read('52beyit/beyitler.json'));
   const numbers = (data.poems || []).map(poem => poem.number).sort((a, b) => a - b);
   assert.deepEqual(numbers, Array.from({ length: 52 }, (_, i) => i + 1),
-    'Bir Beyit, Bir Âlem: beyitler.json kitaptaki 52 beytin hepsini 1–52 sırasıyla taşımalı.');
+    '52beyit: beyitler.json kitaptaki 52 beytin hepsini 1–52 sırasıyla taşımalı.');
+  const vercel = JSON.parse(read('vercel.json'));
+  const yon = (vercel.redirects || []).find(r => r.source === '/bir-beyit-bir-alem/:yol*');
+  assert.ok(yon && yon.destination === '/52beyit/:yol*', 'Eski basılı adres /bir-beyit-bir-alem/ → /52beyit/ yönlendirmesi vercel.json\'da olmalı.');
+  assert.ok(read('aruz/index.html').includes('failatun.js'), 'Kitabın iç karekodu /aruz/ sayfasına gider; sayfa yerinde olmalı.');
 }
 
 // Printed in Pedagojik Masallar (seven film QR codes → raufenc.com/masal/1 … /masal/7). 2026-11-18:
@@ -103,7 +109,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     verifyIyilikPages();
     console.log('İyiliklerle Büyüyorum: /iyilik/ ve 3 basılı kitap adresi yerinde.');
     verifyBirBeyitPage();
-    console.log('Bir Beyit, Bir Âlem: /bir-beyit-bir-alem/ karekod sayfası ve 52 beyit yerinde.');
+    console.log('Şair Ne Demek İstedi?: /52beyit/ (dış karekod), /aruz/ (iç karekod) ve eski adres yönlendirmesi yerinde.');
     verifyMasalPages();
     console.log('Pedagojik Masallar: /masal/ ve 7 basılı karekod adresi yerinde.');
   } catch (error) {

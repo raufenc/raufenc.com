@@ -800,3 +800,14 @@ dialog.video{max-height:92dvh;overflow:auto}
 }
 @media (prefers-reduced-motion:reduce){.bekle{opacity:1;translate:none}}
 @media print{.vurus,.ders-resim,.sonraki,#vuruspanel{display:none!important}}
+
+/* 25 Kas: kitabın iç karekodundan gelenler (?kitap) */
+.kitaptan{background:var(--kagit-acik);border-top:1px solid var(--cizgi-koyu);border-bottom:1px solid var(--cizgi-koyu)}
+.kitaptan-ic{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,5vw,64px);align-items:center}
+.kitaptan h2{margin:.1em 0 .35em}
+.kitaptan p{max-width:62ch}
+.kitaptan-kardes{font-size:15px;color:var(--soluk)}
+.kitaptan-kardes a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.kitaptan .bul{margin:0;justify-content:flex-start}
+.kitap-alt{margin:-.2em 0 .8em;font-style:italic;color:var(--soluk)}
+@media (max-width:760px){.kitaptan-ic{grid-template-columns:minmax(0,1fr)}}

@@ -1,4 +1,4 @@
-/* Bir Beyit, Bir Âlem · Fâilâtün — on ders. F: failatun.js içindeki yardımcılar. */
+/* Şair Ne Demek İstedi? · Fâilâtün — on ders. F: failatun.js içindeki yardımcılar. */
 window.BBA_DERSLER = F => [
 {
   id: "saymak-ve-tartmak", baslik: "Saymak mı, tartmak mı?",
